@@ -20,6 +20,7 @@ export default class HIDTransport extends Transport {
   }
 
   constructor(id) {
+    super();
     this.id = id;
   }
 
