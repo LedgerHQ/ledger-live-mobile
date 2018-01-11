@@ -1,7 +1,10 @@
 //@flow
 import React, { Component } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Platform } from "react-native";
 import { BleManager } from "react-native-ble-plx";
+import HIDDevice from "../react-native-hid";
+import type Comm from "@ledgerhq/hw-comm";
+import Btc from "@ledgerhq/hw-btc";
 
 const DefaultServiceUuid = "d973f2e0-b19e-11e2-9e96-0800200c9a66";
 const DefaultWriteCharacteristicUuid = "d973f2e2-b19e-11e2-9e96-0800200c9a66";
@@ -21,6 +24,11 @@ export default class App extends Component<{}, *> {
   componentWillMount() {
     const { bleManager } = this;
     this.bleSub = bleManager.onStateChange(this.onBleStateChange, true);
+    if (Platform.OS === "android") {
+      HIDDevice.create().then(this.onComm, e => {
+        console.warn("Failed to connect to USB", e);
+      });
+    }
   }
 
   componentWillUnmount() {
@@ -69,6 +77,14 @@ export default class App extends Component<{}, *> {
       this.setState({ bleError });
     }
   }
+
+  onComm = (comm: Comm) => {
+    console.log("comm!", comm);
+    const btc = new Btc(comm);
+    btc.getWalletPublicKey("44'/0'/0'/0").then(o => {
+      console.log("PUBLIC KEY!!", o);
+    });
+  };
 
   render() {
     const { bleError } = this.state;

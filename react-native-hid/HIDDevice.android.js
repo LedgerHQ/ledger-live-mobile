@@ -1,0 +1,37 @@
+import { Platform, NativeModules } from "react-native";
+import Comm from "@ledgerhq/hw-comm";
+import HIDDevice from "./HIDDevice";
+
+export default class HIDDevice extends Comm {
+  static list() {
+    return NativeModules.HID.getDeviceListAsync();
+  }
+
+  static async create(timeout?: number, debug?: boolean) {
+    const list = await HIDDevice.list();
+    const deviceObj = list.find(
+      d =>
+        (d.vendorId === 0x2581 && d.productId === 0x3b7c) ||
+        d.vendorId === 0x2c97
+    );
+    if (!device) throw "No device found";
+    const nativeObj = await NativeModules.HID.openDevice(deviceObj);
+    return new HIDDevice(nativeObj.id);
+  }
+
+  constructor(id) {
+    this.id = id;
+  }
+
+  async exchange(value = "", statusList: Array<number>) {
+    const resultHex = await NativeModules.HID.exchange(this.id, value);
+    const resultBin = Buffer.from(resultHex, "hex");
+    const status =
+      (resultBin[resultBin.length - 2] << 8) | resultBin[resultBin.length - 1];
+    const statusFound = statusList.some(s => s === status);
+    if (!statusFound) {
+      throw "Invalid status " + status.toString(16);
+    }
+    return resultHex;
+  }
+}
