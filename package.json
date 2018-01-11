@@ -17,6 +17,8 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "@ledgerhq/hw-app-btc": "^1.0.5",
+    "@ledgerhq/hw-transport": "^1.0.5",
     "react": "16.0.0",
     "react-native": "0.50.3",
     "react-native-ble-plx": "^0.8.0",

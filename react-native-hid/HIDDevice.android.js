@@ -1,8 +1,8 @@
 import { Platform, NativeModules } from "react-native";
-import Comm from "@ledgerhq/hw-comm";
+import Transport from "@ledgerhq/hw-transport";
 import HIDDevice from "./HIDDevice";
 
-export default class HIDDevice extends Comm {
+export default class HIDTransport extends Transport {
   static list() {
     return NativeModules.HID.getDeviceListAsync();
   }
