@@ -36,10 +36,10 @@ public class HIDDevice {
         byte[] responseData = null;
         int offset = 0;
         int responseSize;
-        if (debug) {
-            Log.d("HIDDevice", "=> " + dump(command));
-        }
         command = LedgerHelper.wrapCommandAPDU(LEDGER_DEFAULT_CHANNEL, command, HID_BUFFER_SIZE);
+        if (debug) {
+            Log.d("HIDDevice", "=> " + toHex(command));
+        }
 
         UsbRequest request = new UsbRequest();
         if (!request.initialize(connection, out)) {
@@ -62,7 +62,8 @@ public class HIDDevice {
             throw new Exception("I/O error");
         }
 
-        while ((responseData = LedgerHelper.unwrapResponseAPDU(LEDGER_DEFAULT_CHANNEL, response.toByteArray(), HID_BUFFER_SIZE)) == null) {
+        while ((responseData = LedgerHelper.unwrapResponseAPDU(LEDGER_DEFAULT_CHANNEL, response.toByteArray(),
+                HID_BUFFER_SIZE)) == null) {
             responseBuffer.clear();
             if (!request.queue(responseBuffer, HID_BUFFER_SIZE)) {
                 request.close();
@@ -75,14 +76,14 @@ public class HIDDevice {
         }
 
         if (debug) {
-            Log.d("HIDDevice", "<= " + dump(responseData));
+            Log.d("HIDDevice", "<= " + toHex(responseData));
         }
 
         request.close();
-        p.resolve(responseData);
+        p.resolve(toHex(responseData));
     }
 
-    public static String dump(byte[] buffer, int offset, int length) {
+    public static String toHex(byte[] buffer, int offset, int length) {
         String result = "";
         for (int i = 0; i < length; i++) {
             String temp = Integer.toHexString((buffer[offset + i]) & 0xff);
@@ -94,8 +95,8 @@ public class HIDDevice {
         return result;
     }
 
-    public static String dump(byte[] buffer) {
-        return dump(buffer, 0, buffer.length);
+    public static String toHex(byte[] buffer) {
+        return toHex(buffer, 0, buffer.length);
     }
 
     public void close() throws Exception {

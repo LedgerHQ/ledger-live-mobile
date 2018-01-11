@@ -1,4 +1,5 @@
 //@flow
+import "./polyfill";
 import React, { Component } from "react";
 import { StyleSheet, Text, View, Platform } from "react-native";
 import { BleManager } from "react-native-ble-plx";
@@ -23,7 +24,7 @@ export default class App extends Component<{}, *> {
 
   componentWillMount() {
     const { bleManager } = this;
-    this.bleSub = bleManager.onStateChange(this.onBleStateChange, true);
+    // this.bleSub = bleManager.onStateChange(this.onBleStateChange, true);
     if (Platform.OS === "android") {
       HIDDevice.create().then(this.onComm, e => {
         console.warn("Failed to connect to USB", e);

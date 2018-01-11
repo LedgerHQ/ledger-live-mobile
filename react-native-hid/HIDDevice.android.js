@@ -4,7 +4,7 @@ import HIDDevice from "./HIDDevice";
 
 export default class HIDTransport extends Transport {
   static list() {
-    return NativeModules.HID.getDeviceListAsync();
+    return NativeModules.HID.getDeviceList();
   }
 
   static async create(timeout?: number, debug?: boolean) {
@@ -14,7 +14,7 @@ export default class HIDTransport extends Transport {
         (d.vendorId === 0x2581 && d.productId === 0x3b7c) ||
         d.vendorId === 0x2c97
     );
-    if (!device) throw "No device found";
+    if (!deviceObj) throw "No device found";
     const nativeObj = await NativeModules.HID.openDevice(deviceObj);
     return new HIDDevice(nativeObj.id);
   }
@@ -35,4 +35,6 @@ export default class HIDTransport extends Transport {
     }
     return resultHex;
   }
+
+  setScrambleKey() {}
 }

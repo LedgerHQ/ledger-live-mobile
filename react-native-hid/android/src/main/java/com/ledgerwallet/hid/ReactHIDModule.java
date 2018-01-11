@@ -21,6 +21,7 @@ import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableMap;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -36,7 +37,7 @@ public class ReactHIDModule extends ReactContextBaseJavaModule {
 
     @Override
     public String getName() {
-        return "UsbSerial";
+        return "HID";
     }
 
     @ReactMethod
@@ -45,7 +46,7 @@ public class ReactHIDModule extends ReactContextBaseJavaModule {
             UsbManager usbManager = getUsbManager();
             HashMap<String, UsbDevice> usbDevices = usbManager.getDeviceList();
             WritableArray deviceArray = Arguments.createArray();
-            for (String key: usbDevices.keySet()) {
+            for (String key : usbDevices.keySet()) {
                 UsbDevice device = usbDevices.get(key);
                 WritableMap map = Arguments.createMap();
                 map.putString("name", device.getDeviceName());
@@ -57,6 +58,7 @@ public class ReactHIDModule extends ReactContextBaseJavaModule {
             }
             p.resolve(deviceArray);
         } catch (Exception e) {
+            e.printStackTrace();
             p.reject(e);
         }
     }
@@ -85,6 +87,7 @@ public class ReactHIDModule extends ReactContextBaseJavaModule {
             }
 
         } catch (Exception e) {
+            e.printStackTrace();
             p.reject(e);
         }
     }
@@ -96,15 +99,33 @@ public class ReactHIDModule extends ReactContextBaseJavaModule {
             if (hid == null) {
                 throw new Exception(String.format("No device opened for the id '%s'", deviceId));
             }
-            hid.exchange(value.getBytes(), p);
+            hid.exchange(hexToBin(value), p);
         } catch (Exception e) {
+            e.printStackTrace();
             p.reject(e);
         }
     }
 
-    private void requestUsbPermission(UsbManager manager,
-                                      UsbDevice device,
-                                      Promise p) {
+    public static byte[] hexToBin(String src) {
+        ByteArrayOutputStream result = new ByteArrayOutputStream();
+        int i = 0;
+        while (i < src.length()) {
+            char x = src.charAt(i);
+            if (!((x >= '0' && x <= '9') || (x >= 'A' && x <= 'F') || (x >= 'a' && x <= 'f'))) {
+                i++;
+                continue;
+            }
+            try {
+                result.write(Integer.valueOf("" + src.charAt(i) + src.charAt(i + 1), 16));
+                i += 2;
+            } catch (Exception e) {
+                return null;
+            }
+        }
+        return result.toByteArray();
+    }
+
+    private void requestUsbPermission(UsbManager manager, UsbDevice device, Promise p) {
         try {
             ReactApplicationContext rAppContext = getReactApplicationContext();
             PendingIntent permIntent = PendingIntent.getBroadcast(rAppContext, 0, new Intent(ACTION_USB_PERMISSION), 0);
@@ -114,7 +135,6 @@ public class ReactHIDModule extends ReactContextBaseJavaModule {
             p.reject(e);
         }
     }
-
 
     private WritableMap createHIDDevice(UsbManager manager, UsbDevice device) throws IOException {
         UsbInterface dongleInterface = device.getInterface(0);
@@ -131,6 +151,7 @@ public class ReactHIDModule extends ReactContextBaseJavaModule {
         UsbDeviceConnection connection = manager.openDevice(device);
         connection.claimInterface(dongleInterface, true);
         HIDDevice hid = new HIDDevice(connection, dongleInterface, in, out);
+        hid.setDebug(true);
         String id = generateId();
         WritableMap map = Arguments.createMap();
         hidDevices.put(id, hid);
@@ -138,7 +159,7 @@ public class ReactHIDModule extends ReactContextBaseJavaModule {
         return map;
     }
 
-    private static final String ACTION_USB_PERMISSION  = "com.ledgerwallet.hid.USB_PERMISSION";
+    private static final String ACTION_USB_PERMISSION = "com.ledgerwallet.hid.USB_PERMISSION";
 
     private UsbManager getUsbManager() {
         ReactApplicationContext rAppContext = getReactApplicationContext();
@@ -165,8 +186,8 @@ public class ReactHIDModule extends ReactContextBaseJavaModule {
                             }
 
                         } else {
-                            p.resolve(new Exception(String.format("Permission denied by user for device %s", device
-                                    .getDeviceName())));
+                            p.resolve(new Exception(
+                                    String.format("Permission denied by user for device %s", device.getDeviceName())));
                         }
                     }
                 }
