@@ -2,16 +2,30 @@
 # yarn lockfile v1
 
 
-"@ledgerhq/hw-app-btc@^1.0.5":
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-app-btc/-/hw-app-btc-1.0.5.tgz#01689c1bf5baaf744a49183a2a54adee2ae10e1a"
+"@ledgerhq/hw-app-btc@1.1.0-beta.4775db4c":
+  version "1.1.0-beta.4775db4c"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-app-btc/-/hw-app-btc-1.1.0-beta.4775db4c.tgz#c869531e422b886a688b891b786351c83e699464"
   dependencies:
-    "@ledgerhq/hw-transport" "^1.0.5"
+    "@ledgerhq/hw-transport" "^1.1.0-beta.4775db4c"
 
-"@ledgerhq/hw-transport@^1.0.5":
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport/-/hw-transport-1.0.5.tgz#8bc40175eed66f0be6971340126e98d374fa01f4"
+"@ledgerhq/hw-transport-http@1.1.0-beta.4775db4c":
+  version "1.1.0-beta.4775db4c"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport-http/-/hw-transport-http-1.1.0-beta.4775db4c.tgz#78d0eb9c5c5b73b96331ff6f7aadb425341184f3"
   dependencies:
+    "@ledgerhq/hw-transport" "^1.1.0-beta.4775db4c"
+
+"@ledgerhq/hw-transport@1.1.0-beta.4775db4c":
+  version "1.1.0-beta.4775db4c"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport/-/hw-transport-1.1.0-beta.4775db4c.tgz#ad2200c6a59315d72e01b6ead4386f7d22bc839e"
+  dependencies:
+    events "^1.1.1"
+    invariant "^2.2.0"
+
+"@ledgerhq/hw-transport@^1.1.0-beta.4775db4c":
+  version "1.1.0-beta.e6f42082"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport/-/hw-transport-1.1.0-beta.e6f42082.tgz#f5caf1de03189ebd1c1f5df425b877c0323911b6"
+  dependencies:
+    events "^1.1.1"
     invariant "^2.2.0"
 
 abab@^1.0.3:
@@ -1474,8 +1488,8 @@ depd@~1.0.1:
   resolved "https://registry.yarnpkg.com/depd/-/depd-1.0.1.tgz#80aec64c9d6d97e65cc2a9caa93c0aa6abf73aaa"
 
 depd@~1.1.0:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/depd/-/depd-1.1.1.tgz#5783b4e1c459f06fa5ca27f991f3d06e7a310359"
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/depd/-/depd-1.1.2.tgz#9bcd52e14c097763e749b274c4346ed2e560b5a9"
 
 destroy@~1.0.4:
   version "1.0.4"
@@ -1596,6 +1610,10 @@ etag@~1.7.0:
 event-target-shim@^1.0.5:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/event-target-shim/-/event-target-shim-1.1.1.tgz#a86e5ee6bdaa16054475da797ccddf0c55698491"
+
+events@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/events/-/events-1.1.1.tgz#9ebdb7635ad099c70dcc4c2a1f5004288e8bd924"
 
 exec-sh@^0.2.0:
   version "0.2.1"
@@ -3906,6 +3924,12 @@ rx-lite@*, rx-lite@^4.0.8:
   version "4.0.8"
   resolved "https://registry.yarnpkg.com/rx-lite/-/rx-lite-4.0.8.tgz#0b1e11af8bc44836f04a6407e92da42467b79444"
 
+rxjs@^5.5.6:
+  version "5.5.6"
+  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-5.5.6.tgz#e31fb96d6fd2ff1fd84bcea8ae9c02d007179c02"
+  dependencies:
+    symbol-observable "1.0.1"
+
 safe-buffer@^5.0.1, safe-buffer@^5.1.1, safe-buffer@~5.1.0, safe-buffer@~5.1.1:
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.1.1.tgz#893312af69b2123def71f57889001671eeb2c853"
@@ -4212,6 +4236,10 @@ supports-color@^4.0.0:
   resolved "https://registry.yarnpkg.com/supports-color/-/supports-color-4.5.0.tgz#be7a0de484dec5c5cddf8b3d59125044912f635b"
   dependencies:
     has-flag "^2.0.0"
+
+symbol-observable@1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/symbol-observable/-/symbol-observable-1.0.1.tgz#8340fc4702c3122df5d22288f88283f513d3fdd4"
 
 symbol-observable@^1.0.3:
   version "1.1.0"
