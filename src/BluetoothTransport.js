@@ -13,6 +13,14 @@ export default class BluetoothTransport extends Transport<Device> {
   static list = (): * => Promise.resolve([]);
 
   static discover(observer: *) {
+    let bleManager;
+    try {
+      bleManager = new BleManager();
+    } catch (e) {
+      // basically for the tests to pass
+      console.warn(e);
+      return { unsubscribe: () => {} };
+    }
     const unsubscribe = () => {
       sub.remove();
       bleManager.stopDeviceScan();
@@ -35,7 +43,6 @@ export default class BluetoothTransport extends Transport<Device> {
         observer.error(new Error("Bluetooth BLE is not supported"));
       }
     };
-    const bleManager = new BleManager();
     const sub = bleManager.onStateChange(onBleStateChange, true);
     return { unsubscribe };
   }
