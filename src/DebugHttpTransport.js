@@ -1,8 +1,8 @@
 //@flow
 import HttpTransport from "@ledgerhq/hw-transport-http";
 
-//const DEBUG_COMM_HTTP_PROXY = "http://192.168.0.27:8435/";
-const DEBUG_COMM_HTTP_PROXY = null;
+const DEBUG_COMM_HTTP_PROXY = "http://192.168.0.27:8435/";
+//const DEBUG_COMM_HTTP_PROXY = null;
 
 export default class DebugHttpTransport extends HttpTransport {
   static list = (): * =>

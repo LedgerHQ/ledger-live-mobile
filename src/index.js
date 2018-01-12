@@ -1,7 +1,13 @@
 //@flow
 import "./polyfill";
 import React, { Component } from "react";
-import { StyleSheet, Text, View, Platform } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Platform,
+  ActivityIndicator
+} from "react-native";
 import type Transport from "@ledgerhq/hw-transport";
 import AppBtc from "@ledgerhq/hw-app-btc";
 import findFirstTransport from "./findFirstTransport";
@@ -42,11 +48,15 @@ export default class App extends Component<{}, *> {
 
   render() {
     const { error, result } = this.state;
+    const pending = !(error || result);
     return (
       <View style={styles.container}>
         <Text>LEDGER WALLET</Text>
-        <Text>{error ? error.toString() : null}</Text>
-        <Text>{result ? result.bitcoinAddress : null}</Text>
+        <View style={styles.body}>
+          {pending ? <ActivityIndicator /> : null}
+          <Text>{error ? error.toString() : null}</Text>
+          <Text>{result ? result.bitcoinAddress : null}</Text>
+        </View>
       </View>
     );
   }
@@ -58,5 +68,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center"
+  },
+  body: {
+    padding: 20
   }
 });
