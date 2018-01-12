@@ -1,7 +1,8 @@
 //@flow
 import HttpTransport from "@ledgerhq/hw-transport-http";
+import Config from "react-native-config";
 
-const DEBUG_COMM_HTTP_PROXY = "http://192.168.0.27:8435/";
+const DEBUG_COMM_HTTP_PROXY = Config.DEBUG_COMM_HTTP_PROXY;
 //const DEBUG_COMM_HTTP_PROXY = null;
 
 export default class DebugHttpTransport extends HttpTransport {
