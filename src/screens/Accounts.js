@@ -48,7 +48,6 @@ export default class Accounts extends Component<*, *> {
 
   render() {
     const { bitcoinAddress } = this.state;
-    console.log(this.props);
     return (
       <ScreenGeneric renderHeader={this.renderHeader}>
         <View style={styles.carouselCountainer} />

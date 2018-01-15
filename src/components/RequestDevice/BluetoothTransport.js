@@ -33,7 +33,7 @@ export default class BluetoothTransport extends Transport<Device> {
             unsubscribe();
             return;
           }
-          if (device.name.includes("ledger")) {
+          if ((device.name || "").includes("ledger")) {
             observer.next(device);
           }
         });
