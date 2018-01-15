@@ -33,7 +33,9 @@ export default class BluetoothTransport extends Transport<Device> {
             unsubscribe();
             return;
           }
-          if ((device.name || "").includes("ledger")) {
+          if (!device.name) return;
+          console.log("BLE found " + device.name, device);
+          if (device.name.includes("ledger")) {
             observer.next(device);
           }
         });
