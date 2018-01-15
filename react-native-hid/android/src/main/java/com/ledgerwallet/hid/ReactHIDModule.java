@@ -5,7 +5,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.hardware.usb.UsbConstants;
 import android.hardware.usb.UsbDevice;
 import android.hardware.usb.UsbDeviceConnection;
 import android.hardware.usb.UsbEndpoint;
@@ -106,6 +105,20 @@ public class ReactHIDModule extends ReactContextBaseJavaModule {
         }
     }
 
+    @ReactMethod
+    public void closeDevice(String deviceId, Promise p) {
+        try {
+            HIDDevice hid = hidDevices.get(deviceId);
+            if (hid == null) {
+                throw new Exception(String.format("No device opened for the id '%s'", deviceId));
+            }
+            hid.close(p);
+        } catch (Exception e) {
+            e.printStackTrace();
+            p.reject(e);
+        }
+    }
+
     public static byte[] hexToBin(String src) {
         ByteArrayOutputStream result = new ByteArrayOutputStream();
         int i = 0;
@@ -137,20 +150,7 @@ public class ReactHIDModule extends ReactContextBaseJavaModule {
     }
 
     private WritableMap createHIDDevice(UsbManager manager, UsbDevice device) throws IOException {
-        UsbInterface dongleInterface = device.getInterface(0);
-        UsbEndpoint in = null;
-        UsbEndpoint out = null;
-        for (int i = 0; i < dongleInterface.getEndpointCount(); i++) {
-            UsbEndpoint tmpEndpoint = dongleInterface.getEndpoint(i);
-            if (tmpEndpoint.getDirection() == UsbConstants.USB_DIR_IN) {
-                in = tmpEndpoint;
-            } else {
-                out = tmpEndpoint;
-            }
-        }
-        UsbDeviceConnection connection = manager.openDevice(device);
-        connection.claimInterface(dongleInterface, true);
-        HIDDevice hid = new HIDDevice(connection, dongleInterface, in, out);
+        HIDDevice hid = new HIDDevice(manager, device);
         hid.setDebug(true);
         String id = generateId();
         WritableMap map = Arguments.createMap();

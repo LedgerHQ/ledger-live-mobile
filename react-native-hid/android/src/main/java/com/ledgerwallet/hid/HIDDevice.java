@@ -5,6 +5,9 @@ import android.hardware.usb.UsbDeviceConnection;
 import android.hardware.usb.UsbEndpoint;
 import android.hardware.usb.UsbInterface;
 import android.hardware.usb.UsbRequest;
+import android.hardware.usb.UsbConstants;
+import android.hardware.usb.UsbDevice;
+import android.hardware.usb.UsbManager;
 import android.util.Log;
 
 import com.facebook.react.bridge.Promise;
@@ -22,7 +25,21 @@ public class HIDDevice {
     private boolean debug;
     private boolean ledger;
 
-    public HIDDevice(UsbDeviceConnection connection, UsbInterface dongleInterface, UsbEndpoint in, UsbEndpoint out) {
+    public HIDDevice(UsbManager manager, UsbDevice device) {
+        UsbInterface dongleInterface = device.getInterface(0);
+        UsbEndpoint in = null;
+        UsbEndpoint out = null;
+        for (int i = 0; i < dongleInterface.getEndpointCount(); i++) {
+            UsbEndpoint tmpEndpoint = dongleInterface.getEndpoint(i);
+            if (tmpEndpoint.getDirection() == UsbConstants.USB_DIR_IN) {
+                in = tmpEndpoint;
+            } else {
+                out = tmpEndpoint;
+            }
+        }
+        UsbDeviceConnection connection = manager.openDevice(device);
+        connection.claimInterface(dongleInterface, true);
+
         this.connection = connection;
         this.dongleInterface = dongleInterface;
         this.in = in;
@@ -99,9 +116,11 @@ public class HIDDevice {
         return toHex(buffer, 0, buffer.length);
     }
 
-    public void close() throws Exception {
+    public void close(Promise p) throws Exception {
         connection.releaseInterface(dongleInterface);
         connection.close();
+
+        p.resolve(null);
     }
 
     public void setDebug(boolean debugFlag) {

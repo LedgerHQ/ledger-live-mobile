@@ -39,6 +39,7 @@ export default class App extends Component<{}, *> {
     const appBtc = new AppBtc(transport);
     appBtc.getWalletPublicKey("44'/0'/0'/0").then(result => {
       this.setState({ result });
+      transport.close();
     });
   };
 

@@ -59,5 +59,9 @@ export default class HIDTransport extends Transport<DeviceObj> {
     return resultHex;
   }
 
+  close() {
+    return NativeModules.HID.closeDevice(this.id);
+  }
+
   setScrambleKey() {}
 }
