@@ -1,16 +1,9 @@
 //@flow
 import "./polyfill";
 import React, { Component } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Platform,
-  ActivityIndicator
-} from "react-native";
-import type Transport from "@ledgerhq/hw-transport";
+import { StyleSheet, Text, View, Platform } from "react-native";
 import AppBtc from "@ledgerhq/hw-app-btc";
-import findFirstTransport from "./findFirstTransport";
+import RequestDevice from "./components/RequestDevice";
 
 export default class App extends Component<{}, *> {
   state: {
@@ -21,26 +14,11 @@ export default class App extends Component<{}, *> {
     result: null
   };
 
-  sub: *;
-
-  componentWillMount() {
-    this.sub = findFirstTransport().subscribe(
-      this.onTransport,
-      this.onTransportError
-    );
-  }
-
-  componentWillUnmount() {
-    this.sub.unsubscribe();
-  }
-
-  onTransport = (transport: *) => {
+  onTransport = async (transport: *) => {
     console.log("transport:", transport);
     const appBtc = new AppBtc(transport);
-    appBtc.getWalletPublicKey("44'/0'/0'/0").then(result => {
-      this.setState({ result });
-      transport.close();
-    });
+    const result = await appBtc.getWalletPublicKey("44'/0'/0'/0");
+    this.setState({ result });
   };
 
   onTransportError = (error: ?Error) => {
@@ -53,11 +31,11 @@ export default class App extends Component<{}, *> {
     return (
       <View style={styles.container}>
         <Text>LEDGER WALLET</Text>
-        <View style={styles.body}>
-          {pending ? <ActivityIndicator /> : null}
-          <Text>{error ? error.toString() : null}</Text>
-          <Text>{result ? result.bitcoinAddress : null}</Text>
-        </View>
+        <Text>{result ? result.bitcoinAddress : null}</Text>
+        <RequestDevice
+          onTransport={this.onTransport}
+          onTransportError={this.onTransportError}
+        />
       </View>
     );
   }
