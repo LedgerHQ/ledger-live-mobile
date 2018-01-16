@@ -138,6 +138,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-svg')
     compile project(':react-native-config')
     compile project(":react-native-hid")
     compile project(':react-native-ble-plx')

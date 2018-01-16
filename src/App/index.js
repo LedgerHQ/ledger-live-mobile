@@ -1,13 +1,21 @@
 // @flow
 import React, { Component } from "react";
 import { StyleSheet, View, StatusBar } from "react-native";
-import { TabNavigator, TabBarBottom } from "react-navigation";
+import { StackNavigator, TabNavigator, TabBarBottom } from "react-navigation";
 import colors from "../colors";
 import Dashboard from "../screens/Dashboard";
 import Accounts from "../screens/Accounts";
 import Search from "../screens/Search";
 import Settings from "../screens/Settings";
-import Create from "../modals/Create";
+import Create from "../screens/Create";
+import ReceiveFunds from "../screens/ReceiveFunds";
+import SendFundsSelectAccount from "../screens/SendFundsSelectAccount";
+import SendFundsChoseAmount from "../screens/SendFundsChoseAmount";
+import SendFundsScanAddress from "../screens/SendFundsScanAddress";
+import SendFundsChoseFee from "../screens/SendFundsChoseFee";
+import SendFundsReview from "../screens/SendFundsReview";
+import SendFundsPlugDevice from "../screens/SendFundsPlugDevice";
+import SendFundsConfirmation from "../screens/SendFundsConfirmation";
 
 const styles = StyleSheet.create({
   card: {
@@ -18,7 +26,7 @@ const styles = StyleSheet.create({
   }
 });
 
-const RootNavigator = TabNavigator(
+const MainNavigator = TabNavigator(
   {
     Dashboard: { screen: Dashboard },
     Accounts: { screen: Accounts },
@@ -44,6 +52,39 @@ const RootNavigator = TabNavigator(
       }
     },
     cardStyle: styles.card
+  }
+);
+
+class Main extends Component<*> {
+  static navigationOptions = {
+    header: null
+  };
+  render() {
+    return <MainNavigator />;
+  }
+}
+
+const RootNavigator = StackNavigator(
+  {
+    Main: { screen: Main },
+    ReceiveFunds: { screen: ReceiveFunds },
+    SendFundsSelectAccount: { screen: SendFundsSelectAccount },
+    SendFundsScanAddress: { screen: SendFundsScanAddress },
+    SendFundsChoseAmount: { screen: SendFundsChoseAmount },
+    SendFundsChoseFee: { screen: SendFundsChoseFee },
+    SendFundsReview: { screen: SendFundsReview },
+    SendFundsPlugDevice: { screen: SendFundsPlugDevice },
+    SendFundsConfirmation: { screen: SendFundsConfirmation }
+  },
+  {
+    mode: "modal",
+    navigationOptions: {
+      headerStyle: {
+        backgroundColor: colors.blue,
+        borderBottomWidth: 0
+      },
+      headerTintColor: "white"
+    }
   }
 );
 

@@ -7,7 +7,7 @@ import "rxjs/add/operator/first";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/catch";
 import "rxjs/add/operator/concatMap";
-import HIDTransport from "../../../react-native-hid";
+import HIDTransport from "../../react-native-hid";
 import BluetoothTransport from "./BluetoothTransport";
 
 const transports: Array<*> = [HIDTransport, BluetoothTransport];

@@ -2,7 +2,7 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import ScreenGeneric from "../components/ScreenGeneric";
-import RequestDevice from "../components/RequestDevice";
+import RequestDevice from "../modals/RequestDevice";
 import colors from "../colors";
 import AppBtc from "@ledgerhq/hw-app-btc";
 

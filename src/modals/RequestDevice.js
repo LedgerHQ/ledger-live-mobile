@@ -9,7 +9,7 @@ import {
   ActivityIndicator
 } from "react-native";
 import type Transport from "@ledgerhq/hw-transport";
-import findFirstTransport from "./findFirstTransport";
+import findFirstTransport from "../hw/findFirstTransport";
 
 export default class RequestDevice extends Component<
   {

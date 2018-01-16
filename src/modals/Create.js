@@ -1,47 +1,52 @@
 /* @flow */
+
 import React, { Component } from "react";
-import { Image, View, StyleSheet } from "react-native";
-import colors from "../colors";
+import { Modal, View, Text, StyleSheet } from "react-native";
+import { withNavigation } from "react-navigation";
+import Menu from "../components/Menu";
+import MenuTitle from "../components/MenuTitle";
+import MenuChoice from "../components/MenuChoice";
 
-const styles = StyleSheet.create({
-  root: {
-    alignItems: "center",
-    justifyContent: "center",
-    padding: 4
-  },
-  view: {
-    backgroundColor: colors.blue,
-    paddingVertical: 0,
-    paddingHorizontal: 8,
-    borderRadius: 4,
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  image: {
-    tintColor: "#fff",
-    width: 32,
-    height: 32
-  }
-});
-
-export default class Create extends Component<*> {
-  static navigationOptions = {
-    tabBarIcon: ({ tintColor }: *) => (
-      <View style={styles.root}>
-        <View style={styles.view}>
-          <Image
-            source={require("../images/create.png")}
-            style={styles.image}
-          />
-        </View>
-      </View>
-    ),
-    tabBarOnPress: (props: *) => {
-      console.log("TODO: trigger the modal!", props);
-    }
+class CreateModal extends Component<*> {
+  onSendFunds = () => {
+    const { navigation, onRequestClose } = this.props;
+    navigation.navigate("SendFundsSelectAccount", {
+      goBackKey: navigation.state.key
+    });
+    onRequestClose();
   };
-
+  onReceiveFunds = () => {
+    const { navigation, onRequestClose } = this.props;
+    navigation.navigate("ReceiveFunds", { goBackKey: navigation.state.key });
+    onRequestClose();
+  };
   render() {
-    return null;
+    const { onRequestClose } = this.props;
+    console.log(this.props);
+    return (
+      <Modal transparent onRequestClose={onRequestClose}>
+        <Menu
+          onRequestClose={onRequestClose}
+          header={<MenuTitle>Transfer money</MenuTitle>}
+        >
+          <MenuChoice
+            title="Send funds"
+            icon={null}
+            description="Lorem ipsum dolor ledger"
+            onPress={this.onSendFunds}
+          />
+          <MenuChoice
+            title="Receive funds"
+            icon={null}
+            description="Lorem ipsum dolor ledger"
+            onPress={this.onReceiveFunds}
+          />
+        </Menu>
+      </Modal>
+    );
   }
 }
+
+const styles = StyleSheet.create({});
+
+export default withNavigation(CreateModal);
