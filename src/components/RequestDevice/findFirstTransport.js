@@ -8,14 +8,12 @@ import "rxjs/add/operator/map";
 import "rxjs/add/operator/catch";
 import "rxjs/add/operator/concatMap";
 import HIDTransport from "../../../react-native-hid";
-import DebugHttpTransport from "./DebugHttpTransport";
 import BluetoothTransport from "./BluetoothTransport";
 
-const transports: Array<*> = [
-  HIDTransport,
-  BluetoothTransport,
-  DebugHttpTransport
-];
+const transports: Array<*> = [HIDTransport, BluetoothTransport];
+if (__DEV__) {
+  transports.push(require("./DebugHttpTransport").default);
+}
 
 export default () =>
   Observable.merge(
