@@ -1,12 +1,13 @@
 // @flow
 import React, { Component } from "react";
-import { StyleSheet, View, StatusBar } from "react-native";
+import { StyleSheet, View, Image, StatusBar } from "react-native";
 import { StackNavigator, TabNavigator, TabBarBottom } from "react-navigation";
 import colors from "../colors";
 import Dashboard from "../screens/Dashboard";
 import Accounts from "../screens/Accounts";
 import Search from "../screens/Search";
 import Settings from "../screens/Settings";
+import EditPersonalInfo from "../screens/EditPersonalInfo";
 import Create from "../screens/Create";
 import ReceiveFunds from "../screens/ReceiveFunds";
 import SendFundsSelectAccount from "../screens/SendFundsSelectAccount";
@@ -17,6 +18,14 @@ import SendFundsReview from "../screens/SendFundsReview";
 import SendFundsPlugDevice from "../screens/SendFundsPlugDevice";
 import SendFundsConfirmation from "../screens/SendFundsConfirmation";
 
+const stackNavigatiorDefaultNavigationOptions = {
+  headerStyle: {
+    backgroundColor: colors.blue,
+    borderBottomWidth: 0
+  },
+  headerTintColor: "white"
+};
+
 const styles = StyleSheet.create({
   card: {
     backgroundColor: colors.lightBackground
@@ -26,13 +35,33 @@ const styles = StyleSheet.create({
   }
 });
 
+const SettingsStack = StackNavigator(
+  {
+    Settings: { screen: Settings },
+    EditPersonalInfo: { screen: EditPersonalInfo }
+  },
+  {
+    navigationOptions: stackNavigatiorDefaultNavigationOptions,
+    cardStyle: styles.card
+  }
+);
+
+SettingsStack.navigationOptions = {
+  tabBarIcon: ({ tintColor }: *) => (
+    <Image
+      source={require("../images/settings.png")}
+      style={{ tintColor, width: 32, height: 32 }}
+    />
+  )
+};
+
 const MainNavigator = TabNavigator(
   {
     Dashboard: { screen: Dashboard },
     Accounts: { screen: Accounts },
     Create: { screen: Create },
     Search: { screen: Search },
-    Settings: { screen: Settings }
+    Settings: { screen: SettingsStack }
   },
   {
     tabBarComponent: TabBarBottom,
@@ -68,6 +97,7 @@ const RootNavigator = StackNavigator(
   {
     Main: { screen: Main },
     ReceiveFunds: { screen: ReceiveFunds },
+    // TODO SendFunds. maybe should put in a sub level StackNavigator!!
     SendFundsSelectAccount: { screen: SendFundsSelectAccount },
     SendFundsScanAddress: { screen: SendFundsScanAddress },
     SendFundsChoseAmount: { screen: SendFundsChoseAmount },
@@ -78,13 +108,8 @@ const RootNavigator = StackNavigator(
   },
   {
     mode: "modal",
-    navigationOptions: {
-      headerStyle: {
-        backgroundColor: colors.blue,
-        borderBottomWidth: 0
-      },
-      headerTintColor: "white"
-    }
+    navigationOptions: stackNavigatiorDefaultNavigationOptions,
+    cardStyle: styles.card
   }
 );
 
