@@ -13,9 +13,9 @@ import HeaderRightClose from "../components/HeaderRightClose";
 import BlueButton from "../components/BlueButton";
 
 export default class AddAccountSelectCurrency extends Component<*> {
-  static navigationOptions = ({ navigation }: *) => ({
+  static navigationOptions = ({ screenProps }: *) => ({
     title: "Add an account",
-    headerRight: <HeaderRightClose navigation={navigation} />
+    headerRight: <HeaderRightClose navigation={screenProps.parentNavigation} />
   });
   onSelect = () => {
     const { navigation } = this.props;

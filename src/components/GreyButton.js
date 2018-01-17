@@ -1,32 +1,26 @@
 /* @flow */
-
 import React, { Component } from "react";
-import { TouchableOpacity, View, Text, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import colors from "../colors";
-
-export default class FooterButton extends Component<*> {
+import GenericButton from "./GenericButton";
+export default class GreyButton extends Component<*> {
   render() {
-    const { onPress, title } = this.props;
     return (
-      <TouchableOpacity onPress={onPress}>
-        <View style={styles.container}>
-          <Text style={styles.title}>{title}</Text>
-        </View>
-      </TouchableOpacity>
+      <GenericButton
+        {...this.props}
+        titleStyle={styles.title}
+        containerStyle={styles.container}
+      />
     );
   }
 }
-
 const styles = StyleSheet.create({
-  container: {
-    height: 40,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-    borderWidth: 1,
-    borderColor: "#aaa"
-  },
   title: {
     color: "#aaa"
+  },
+  container: {
+    backgroundColor: "#fff",
+    borderWidth: 1,
+    borderColor: "#aaa"
   }
 });

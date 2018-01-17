@@ -5,6 +5,7 @@ import { StackNavigator, TabNavigator, TabBarBottom } from "react-navigation";
 import colors from "../colors";
 import Dashboard from "../screens/Dashboard";
 import Accounts from "../screens/Accounts";
+import AccountSettings from "../screens/AccountSettings";
 import Search from "../screens/Search";
 import Settings from "../screens/Settings";
 import EditPersonalInfo from "../screens/EditPersonalInfo";
@@ -135,7 +136,8 @@ const RootNavigator = StackNavigator(
     SendFundsReview: { screen: SendFundsReview },
     SendFundsPlugDevice: { screen: SendFundsPlugDevice },
     SendFundsConfirmation: { screen: SendFundsConfirmation },
-    AddAccount: { screen: AddAccount }
+    AddAccount: { screen: AddAccount },
+    AccountSettings: { screen: AccountSettings }
   },
   {
     mode: "modal",

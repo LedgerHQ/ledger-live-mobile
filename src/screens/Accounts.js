@@ -52,6 +52,12 @@ export default class Accounts extends Component<*, *> {
     this.props.screenProps.topLevelNavigation.navigate("AddAccount");
   };
 
+  onGoAccountSettings = () => {
+    this.props.screenProps.topLevelNavigation.navigate("AccountSettings", {
+      accountId: "42"
+    });
+  };
+
   onTransport = async (transport: *) => {
     const btc = new AppBtc(transport);
     const { bitcoinAddress } = await btc.getWalletPublicKey("44'/0'/0'/0");
@@ -88,7 +94,25 @@ export default class Accounts extends Component<*, *> {
             </View>
           ) : (
             <View>
-              <View style={styles.carouselCountainer} />
+              <View style={styles.carouselCountainer}>
+                <View
+                  style={{
+                    margin: 20,
+                    width: 280,
+                    height: 220,
+                    padding: 10,
+                    alignItems: "flex-end",
+                    backgroundColor: "white"
+                  }}
+                >
+                  <TouchableOpacity onPress={this.onGoAccountSettings}>
+                    <Image
+                      source={require("../images/accountsettings.png")}
+                      style={{ width: 30, height: 30 }}
+                    />
+                  </TouchableOpacity>
+                </View>
+              </View>
               <View style={{ height: 800 }}>
                 <Text>{bitcoinAddress}</Text>
               </View>
