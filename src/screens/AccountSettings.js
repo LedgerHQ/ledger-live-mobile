@@ -15,6 +15,9 @@ export default class AccountSettings extends Component<*> {
   static navigationOptions = {
     title: "Account settings"
   };
+  onConfirm = () => {
+    this.props.navigation.goBack();
+  };
   render() {
     return (
       <View style={styles.root}>
