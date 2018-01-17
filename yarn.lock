@@ -3637,6 +3637,12 @@ react-native-ble-plx@^0.8.0:
   version "0.8.0"
   resolved "https://registry.yarnpkg.com/react-native-ble-plx/-/react-native-ble-plx-0.8.0.tgz#e3fcf8868cd4fa3677c5f3385933527744dfefce"
 
+react-native-blur@^3.2.2:
+  version "3.2.2"
+  resolved "https://registry.yarnpkg.com/react-native-blur/-/react-native-blur-3.2.2.tgz#5bfb50638d148982c9560436554ed01d77d6d07d"
+  dependencies:
+    prop-types "^15.5.10"
+
 react-native-config@^0.11.5:
   version "0.11.5"
   resolved "https://registry.yarnpkg.com/react-native-config/-/react-native-config-0.11.5.tgz#516cb7b6ec437c7739236ca075971db3aabdcb95"

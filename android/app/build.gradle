@@ -102,6 +102,8 @@ android {
         applicationId "com.ledgerwalletmobile"
         minSdkVersion 18
         targetSdkVersion 25
+        renderscriptTargetApi 20
+        renderscriptSupportModeEnabled true
         versionCode 1
         versionName "1.0"
         ndk {
@@ -138,6 +140,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-blur')
     compile project(':react-native-svg')
     compile project(':react-native-config')
     compile project(":react-native-hid")

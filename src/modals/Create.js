@@ -22,7 +22,6 @@ class CreateModal extends Component<*> {
   };
   render() {
     const { onRequestClose } = this.props;
-    console.log(this.props);
     return (
       <Modal transparent onRequestClose={onRequestClose}>
         <Menu
