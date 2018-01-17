@@ -95,7 +95,68 @@ export default class Dashboard extends Component<*> {
   render() {
     return (
       <ScreenGeneric renderHeader={this.renderHeader}>
-        <View style={styles.carouselCountainer} />
+        <View style={styles.carouselCountainer}>
+          <Text
+            style={{
+              color: "white",
+              fontFamily: "Open Sans",
+              fontWeight: "400",
+              fontSize: 24
+            }}
+          >
+            Open Sans Regular
+          </Text>
+          <Text
+            style={{
+              color: "white",
+              fontFamily: "Open Sans",
+              fontWeight: "600",
+              fontSize: 24
+            }}
+          >
+            Open Sans SemiBold
+          </Text>
+          <Text
+            style={{
+              color: "white",
+              fontFamily: "Open Sans",
+              fontWeight: "700",
+              fontSize: 24
+            }}
+          >
+            Open Sans Bold
+          </Text>
+          <Text
+            style={{
+              color: "white",
+              fontFamily: "Museo Sans",
+              fontWeight: "400",
+              fontSize: 24
+            }}
+          >
+            Museo Sans Regular
+          </Text>
+          <Text
+            style={{
+              color: "white",
+              fontFamily: "Museo Sans",
+              fontWeight: "600",
+              fontSize: 24
+            }}
+          >
+            Museo Sans SemiBold
+          </Text>
+          <Text
+            style={{
+              color: "white",
+              fontFamily: "Museo Sans",
+              fontWeight: "700",
+              fontSize: 24
+            }}
+          >
+            Museo Sans Bold
+          </Text>
+        </View>
         <View style={{ height: 800 }}>
           <DashboardBody />
         </View>
@@ -106,6 +167,7 @@ export default class Dashboard extends Component<*> {
 
 const styles = StyleSheet.create({
   carouselCountainer: {
+    padding: 40,
     height: 300,
     backgroundColor: colors.blue
   },

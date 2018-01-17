@@ -2,6 +2,9 @@
   "name": "ledger-wallet-mobile",
   "version": "0.1.0",
   "private": true,
+  "rnpm": {
+    "assets": ["./assets/fonts/"]
+  },
   "devDependencies": {
     "babel-preset-react-native-stage-0": "^1.0.1",
     "jest-expo": "23.0.0",

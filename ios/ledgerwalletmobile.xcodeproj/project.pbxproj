@@ -30,6 +30,12 @@
 		E346451EC3604977A20BAAB1 /* libRNBlur.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C5890E524DD4BA092CB8080 /* libRNBlur.a */; };
 		5CBC73FFDE494045AA787852 /* libRNSentry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F18419E5A1E34A8BB8840414 /* libRNSentry.a */; };
 		DEF1B1546B36491B9894A599 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 545FD04868AD450083DC4717 /* libz.tbd */; };
+		A854DAD55ED1456696918FDF /* MuseoSans-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = CE7E1D553FBD49E0A85347D3 /* MuseoSans-Bold.otf */; };
+		86DD631BC8AA4C13A80FBD6D /* MuseoSans-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3263CCC7104E4B86AC2ADDB4 /* MuseoSans-Regular.otf */; };
+		D5C1F1874ECE48F4AA5693AF /* MuseoSans-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = CEDB8CDC561E4D4BBA7A64CD /* MuseoSans-SemiBold.otf */; };
+		A6419C7774BD44628FF928DB /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 57675DE3CEFA48B4AEFB711C /* OpenSans-Bold.ttf */; };
+		AA971EB1796D4FD797316C3D /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 44387CB2EE84464C83A75FD7 /* OpenSans-Regular.ttf */; };
+		381DCCBE6BFC414E8DC790E4 /* OpenSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C7C5BB743ED04E53A2323979 /* OpenSans-SemiBold.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -351,6 +357,12 @@
 		649452CE4C894FDDBC6A4A56 /* RNSentry.xcodeproj */ = {isa = PBXFileReference; name = "RNSentry.xcodeproj"; path = "../node_modules/react-native-sentry/ios/RNSentry.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		F18419E5A1E34A8BB8840414 /* libRNSentry.a */ = {isa = PBXFileReference; name = "libRNSentry.a"; path = "libRNSentry.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 		545FD04868AD450083DC4717 /* libz.tbd */ = {isa = PBXFileReference; name = "libz.tbd"; path = "usr/lib/libz.tbd"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = sourcecode.text-based-dylib-definition; explicitFileType = undefined; includeInIndex = 0; };
+		CE7E1D553FBD49E0A85347D3 /* MuseoSans-Bold.otf */ = {isa = PBXFileReference; name = "MuseoSans-Bold.otf"; path = "../assets/fonts/MuseoSans-Bold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		3263CCC7104E4B86AC2ADDB4 /* MuseoSans-Regular.otf */ = {isa = PBXFileReference; name = "MuseoSans-Regular.otf"; path = "../assets/fonts/MuseoSans-Regular.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		CEDB8CDC561E4D4BBA7A64CD /* MuseoSans-SemiBold.otf */ = {isa = PBXFileReference; name = "MuseoSans-SemiBold.otf"; path = "../assets/fonts/MuseoSans-SemiBold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		57675DE3CEFA48B4AEFB711C /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; name = "OpenSans-Bold.ttf"; path = "../assets/fonts/OpenSans-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		44387CB2EE84464C83A75FD7 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; name = "OpenSans-Regular.ttf"; path = "../assets/fonts/OpenSans-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		C7C5BB743ED04E53A2323979 /* OpenSans-SemiBold.ttf */ = {isa = PBXFileReference; name = "OpenSans-SemiBold.ttf"; path = "../assets/fonts/OpenSans-SemiBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -600,6 +612,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				34457EB62003A12400415724 /* Recovered References */,
 				90B115AE643A42D1BF8AA6F4 /* Frameworks */,
+				3F0372EE9483431D91FAB7D5 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -640,6 +653,20 @@
 			name = Frameworks;
 			path = Application;
 			sourceTree = "<group>";
+		};
+		3F0372EE9483431D91FAB7D5 /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				CE7E1D553FBD49E0A85347D3 /* MuseoSans-Bold.otf */,
+				3263CCC7104E4B86AC2ADDB4 /* MuseoSans-Regular.otf */,
+				CEDB8CDC561E4D4BBA7A64CD /* MuseoSans-SemiBold.otf */,
+				57675DE3CEFA48B4AEFB711C /* OpenSans-Bold.ttf */,
+				44387CB2EE84464C83A75FD7 /* OpenSans-Regular.ttf */,
+				C7C5BB743ED04E53A2323979 /* OpenSans-SemiBold.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -1072,6 +1099,12 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				A854DAD55ED1456696918FDF /* MuseoSans-Bold.otf in Resources */,
+				86DD631BC8AA4C13A80FBD6D /* MuseoSans-Regular.otf in Resources */,
+				D5C1F1874ECE48F4AA5693AF /* MuseoSans-SemiBold.otf in Resources */,
+				A6419C7774BD44628FF928DB /* OpenSans-Bold.ttf in Resources */,
+				AA971EB1796D4FD797316C3D /* OpenSans-Regular.ttf in Resources */,
+				381DCCBE6BFC414E8DC790E4 /* OpenSans-SemiBold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
