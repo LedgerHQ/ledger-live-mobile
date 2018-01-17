@@ -15,20 +15,26 @@ export default class Accounts extends Component<*, *> {
       />
     )
   };
-  state: { bitcoinAddress: ?string } = {
-    bitcoinAddress: null
+  state: { bitcoinAddress: ?string, expandedMode: boolean } = {
+    bitcoinAddress: null,
+    expandedMode: false
   };
   renderHeader = () => {
+    const { expandedMode } = this.state;
     return (
       <View style={styles.header}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={this.toggleExpandedMode}>
           <Image
-            source={require("../images/accountsmenu.png")}
+            source={
+              expandedMode
+                ? require("../images/accountsmenutoggled.png")
+                : require("../images/accountsmenu.png")
+            }
             style={{ width: 24, height: 20 }}
           />
         </TouchableOpacity>
         <Text style={styles.headerText}>Accounts</Text>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={this.goToAddAccount}>
           <Image
             source={require("../images/accountsplus.png")}
             style={{ width: 22, height: 21 }}
@@ -36,6 +42,14 @@ export default class Accounts extends Component<*, *> {
         </TouchableOpacity>
       </View>
     );
+  };
+
+  toggleExpandedMode = () => {
+    this.setState(({ expandedMode }) => ({ expandedMode: !expandedMode }));
+  };
+
+  goToAddAccount = () => {
+    this.props.screenProps.topLevelNavigation.navigate("AddAccount");
   };
 
   onTransport = async (transport: *) => {
@@ -47,25 +61,58 @@ export default class Accounts extends Component<*, *> {
   onTransportError = () => {};
 
   render() {
-    const { bitcoinAddress } = this.state;
+    const { bitcoinAddress, expandedMode } = this.state;
+    // FIXME this is not so clean. we might need to use react-navigation for the expanded mode as well...
     return (
-      <ScreenGeneric renderHeader={this.renderHeader}>
-        <View style={styles.carouselCountainer} />
+      <View style={styles.root}>
+        <ScreenGeneric
+          key={String(expandedMode) /* force a redraw */}
+          renderHeader={this.renderHeader}
+        >
+          {expandedMode ? (
+            <View style={styles.expanded}>
+              {Array(20)
+                .fill(null)
+                .map((_, i) => (
+                  <View
+                    key={i}
+                    style={{
+                      marginVertical: 6,
+                      marginHorizontal: 16,
+                      height: 60,
+                      borderRadius: 4,
+                      backgroundColor: "white"
+                    }}
+                  />
+                ))}
+            </View>
+          ) : (
+            <View>
+              <View style={styles.carouselCountainer} />
+              <View style={{ height: 800 }}>
+                <Text>{bitcoinAddress}</Text>
+              </View>
+            </View>
+          )}
+        </ScreenGeneric>
         <RequestDevice
           onTransport={this.onTransport}
           onTransportError={this.onTransportError}
         />
-        <View style={{ height: 800 }}>
-          <Text>{bitcoinAddress}</Text>
-        </View>
-      </ScreenGeneric>
+      </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  root: {
+    flex: 1
+  },
   carouselCountainer: {
     height: 300,
+    backgroundColor: colors.blue
+  },
+  expanded: {
     backgroundColor: colors.blue
   },
   header: {

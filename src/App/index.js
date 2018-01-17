@@ -17,6 +17,8 @@ import SendFundsChoseFee from "../screens/SendFundsChoseFee";
 import SendFundsReview from "../screens/SendFundsReview";
 import SendFundsPlugDevice from "../screens/SendFundsPlugDevice";
 import SendFundsConfirmation from "../screens/SendFundsConfirmation";
+import AddAccountSelectCurrency from "../screens/AddAccountSelectCurrency";
+import AddAccountInfo from "../screens/AddAccountInfo";
 
 const stackNavigatiorDefaultNavigationOptions = {
   headerStyle: {
@@ -55,6 +57,30 @@ SettingsStack.navigationOptions = {
   )
 };
 
+const AddAccountStack = StackNavigator(
+  {
+    AddAccountSelectCurrency: { screen: AddAccountSelectCurrency },
+    AddAccountInfo: { screen: AddAccountInfo }
+  },
+  {
+    navigationOptions: stackNavigatiorDefaultNavigationOptions,
+    cardStyle: styles.card
+  }
+);
+
+class AddAccount extends Component<*> {
+  static navigationOptions = {
+    header: null
+  };
+  render() {
+    return (
+      <AddAccountStack
+        screenProps={{ parentNavigation: this.props.navigation }}
+      />
+    );
+  }
+}
+
 const MainNavigator = TabNavigator(
   {
     Dashboard: { screen: Dashboard },
@@ -89,7 +115,11 @@ class Main extends Component<*> {
     header: null
   };
   render() {
-    return <MainNavigator />;
+    return (
+      <MainNavigator
+        screenProps={{ topLevelNavigation: this.props.navigation }}
+      />
+    );
   }
 }
 
@@ -104,7 +134,8 @@ const RootNavigator = StackNavigator(
     SendFundsChoseFee: { screen: SendFundsChoseFee },
     SendFundsReview: { screen: SendFundsReview },
     SendFundsPlugDevice: { screen: SendFundsPlugDevice },
-    SendFundsConfirmation: { screen: SendFundsConfirmation }
+    SendFundsConfirmation: { screen: SendFundsConfirmation },
+    AddAccount: { screen: AddAccount }
   },
   {
     mode: "modal",

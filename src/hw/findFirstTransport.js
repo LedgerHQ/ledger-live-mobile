@@ -21,7 +21,7 @@ export default () =>
       Observable.create(t.discover)
         .map(descriptor => ({ descriptor, t }))
         .catch(e => {
-          console.warn("discover failed for " + t.name + ": " + e);
+          console.log("discover failed for " + t.name + ": " + e);
           return Observable.empty();
         })
     )
