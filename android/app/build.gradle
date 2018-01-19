@@ -140,7 +140,12 @@ android {
 }
 
 dependencies {
-    compile project(':react-native-camera')
+    compile (project(':react-native-camera')) {
+        exclude group: "com.android.support"
+    }
+    compile ('com.android.support:exifinterface:26.0.1') {
+        force = true;
+    }
     compile project(':react-native-blur')
     compile project(':react-native-svg')
     compile project(':react-native-config')
