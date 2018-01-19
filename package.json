@@ -3,11 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "rnpm": {
-    "assets": ["./assets/fonts/"]
+    "assets": [
+      "./assets/fonts/"
+    ]
   },
   "devDependencies": {
     "babel-preset-react-native-stage-0": "^1.0.1",
     "jest-expo": "23.0.0",
+    "prettier": "^1.10.2",
     "react-test-renderer": "16.0.0"
   },
   "scripts": {
@@ -28,6 +31,7 @@
     "react-native": "0.50.3",
     "react-native-ble-plx": "^0.8.0",
     "react-native-blur": "^3.2.2",
+    "react-native-camera": "^0.13.0",
     "react-native-config": "^0.11.5",
     "react-native-qrcode-svg": "^5.0.6",
     "react-native-sentry": "^0.32.1",
