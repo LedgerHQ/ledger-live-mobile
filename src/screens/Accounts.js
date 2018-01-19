@@ -59,6 +59,8 @@ export default class Accounts extends Component<*, *> {
   };
 
   onTransport = async (transport: *) => {
+    transport.setDebugMode(true);
+    //console.log(await transport.send(0xe0, 0x06, 0x00, 0x00));
     const btc = new AppBtc(transport);
     const { bitcoinAddress } = await btc.getWalletPublicKey("44'/0'/0'/0");
     this.setState({ bitcoinAddress });

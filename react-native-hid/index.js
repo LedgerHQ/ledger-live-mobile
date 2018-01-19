@@ -18,13 +18,13 @@ export default class HIDTransport extends Transport<DeviceObj> {
     );
   }
 
-  static discover(observer: *) {
+  static listen(observer: *) {
     if (!NativeModules.HID) return { unsubscribe: () => {} };
     let unsubscribed = false;
     HIDTransport.list().then(candidates => {
       for (const c of candidates) {
         if (!unsubscribed) {
-          observer.next(c);
+          observer.next({ type: "add", descriptor: c });
         }
       }
     });
@@ -47,16 +47,12 @@ export default class HIDTransport extends Transport<DeviceObj> {
     this.id = id;
   }
 
-  async exchange(value: string, statusList: Array<number>) {
-    const resultHex = await NativeModules.HID.exchange(this.id, value);
-    const resultBin = Buffer.from(resultHex, "hex");
-    const status =
-      (resultBin[resultBin.length - 2] << 8) | resultBin[resultBin.length - 1];
-    const statusFound = statusList.some(s => s === status);
-    if (!statusFound) {
-      throw "Invalid status " + status.toString(16);
-    }
-    return resultHex;
+  async exchange(value: Buffer) {
+    const resultHex = await NativeModules.HID.exchange(
+      this.id,
+      value.toString("hex")
+    );
+    return Buffer.from(resultHex, "hex");
   }
 
   close() {
