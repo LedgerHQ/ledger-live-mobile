@@ -18,8 +18,8 @@ if (__DEV__) {
 export default () =>
   Observable.merge(
     ...transports.map(t =>
-      Observable.create(t.discover)
-        .map(descriptor => ({ descriptor, t }))
+      Observable.create(t.listen)
+        .map(({ descriptor }) => ({ descriptor, t }))
         .catch(e => {
           console.log("discover failed for " + t.name + ": " + e);
           return Observable.empty();
