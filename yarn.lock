@@ -2,30 +2,43 @@
 # yarn lockfile v1
 
 
-"@ledgerhq/hw-app-btc@1.2.0-beta.7172f590":
-  version "1.2.0-beta.7172f590"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-app-btc/-/hw-app-btc-1.2.0-beta.7172f590.tgz#d7ca47c5466897483fb18660c5f5867a2cf29385"
+"@ledgerhq/hw-app-btc@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-app-btc/-/hw-app-btc-2.0.0.tgz#69ff8a5d6d373788de46d93cb0c239e99030d139"
   dependencies:
-    "@ledgerhq/hw-transport" "^1.2.0-beta.7172f590"
+    "@ledgerhq/hw-transport" "^2.0.0"
 
-"@ledgerhq/hw-transport-http@1.2.0-beta.7172f590":
-  version "1.2.0-beta.7172f590"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport-http/-/hw-transport-http-1.2.0-beta.7172f590.tgz#6bd4014e941f7da27e53e65c7a7c7f8a5683651f"
+"@ledgerhq/hw-transport-http@^2.0.2":
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport-http/-/hw-transport-http-2.0.2.tgz#aa0648ced988a66d61293662846af080ffac6912"
   dependencies:
-    "@ledgerhq/hw-transport" "^1.2.0-beta.7172f590"
+    "@ledgerhq/hw-transport" "^2.0.1"
 
-"@ledgerhq/hw-transport@1.2.0-beta.7172f590":
-  version "1.2.0-beta.7172f590"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport/-/hw-transport-1.2.0-beta.7172f590.tgz#38498142e9824288fd5aa02eb8b89ae36cdba281"
+"@ledgerhq/hw-transport@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport/-/hw-transport-2.0.0.tgz#5f655720cb81c4ae0314cc797d7f803717aa44be"
   dependencies:
     events "^1.1.1"
     invariant "^2.2.0"
 
-"@ledgerhq/hw-transport@^1.2.0-beta.7172f590":
-  version "1.2.0-beta.ffc162fd"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport/-/hw-transport-1.2.0-beta.ffc162fd.tgz#3034e2889df595e32f228acc34c4e3db178e9534"
+"@ledgerhq/hw-transport@^2.0.1":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport/-/hw-transport-2.0.1.tgz#86387a4d5563d24b77c167669c31a7d1eb58632f"
   dependencies:
     events "^1.1.1"
+    invariant "^2.2.0"
+
+"@ledgerhq/react-native-hid@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/react-native-hid/-/react-native-hid-2.0.0.tgz#95762609081a1c7114154b1e5d1f25882fcb1a7f"
+  dependencies:
+    "@ledgerhq/hw-transport" "^2.0.0"
+
+"@ledgerhq/react-native-hw-transport-ble@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/react-native-hw-transport-ble/-/react-native-hw-transport-ble-2.0.0.tgz#c188ef104f54c57d1f0d53a80d58bd265b1e5229"
+  dependencies:
+    "@ledgerhq/hw-transport" "^2.0.0"
     invariant "^2.2.0"
 
 abab@^1.0.3:

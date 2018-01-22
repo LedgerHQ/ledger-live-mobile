@@ -28,13 +28,13 @@ public class MainApplication extends Application implements ReactApplication {
     @Override
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
-          new MainReactPackage(),
-            new RCTCameraPackage(),
-            new BlurViewPackage(),
-            new SvgPackage(),
-            new ReactNativeConfigPackage(),
-          new BlePackage(),
-          new ReactHIDPackage()
+              new MainReactPackage(),
+              new RCTCameraPackage(),
+              new ReactHIDPackage(),
+              new BlurViewPackage(),
+              new SvgPackage(),
+              new ReactNativeConfigPackage(),
+              new BlePackage()
       );
     }
 

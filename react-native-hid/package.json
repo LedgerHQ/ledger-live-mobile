@@ -1,8 +1,0 @@
-{
-  "name": "react-native-hid",
-  "version": "0.0.0",
-  "nativePackage": true,
-  "main": "index.js",
-  "dependencies": {},
-  "devDependencies": {}
-}

@@ -7,12 +7,14 @@ import "rxjs/add/operator/first";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/catch";
 import "rxjs/add/operator/concatMap";
-import HIDTransport from "../../react-native-hid";
-import BluetoothTransport from "./BluetoothTransport";
+import HIDTransport from "@ledgerhq/react-native-hid";
+import BluetoothTransport from "@ledgerhq/react-native-hw-transport-ble";
+import { withStaticURL } from "@ledgerhq/hw-transport-http";
+import Config from "react-native-config";
 
 const transports: Array<*> = [HIDTransport, BluetoothTransport];
 if (__DEV__) {
-  transports.push(require("./DebugHttpTransport").default);
+  transports.push(withStaticURL(Config.DEBUG_COMM_HTTP_PROXY));
 }
 
 export default () =>
