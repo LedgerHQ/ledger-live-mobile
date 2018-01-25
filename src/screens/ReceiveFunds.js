@@ -6,6 +6,7 @@ import {
   Text,
   StyleSheet,
   Image,
+  ActivityIndicator,
   TouchableOpacity,
   findNodeHandle
 } from "react-native";
@@ -13,13 +14,18 @@ import QRCode from "react-native-qrcode-svg";
 import colors from "../colors";
 import QRCodePreview from "../components/QRCodePreview";
 import QRCodeModal from "../modals/QRCodeAddress";
+import AppBtc from "@ledgerhq/hw-app-btc";
+import type Transport from "@ledgerhq/hw-transport";
+import findFirstTransport from "../hw/findFirstTransport";
 
 export default class ReceiveFunds extends Component<*, *> {
   static navigationOptions = {
     title: "Receive Funds"
   };
   state = {
-    qrCodeModalOpened: false
+    qrCodeModalOpened: false,
+    address: null,
+    error: null
   };
   viewHandle: ?*;
   onRef = (ref: *) => {
@@ -31,9 +37,41 @@ export default class ReceiveFunds extends Component<*, *> {
   closeQRCodeModal = () => {
     this.setState({ qrCodeModalOpened: false });
   };
+
+  sub: *;
+
+  componentWillMount() {
+    this.sub = findFirstTransport().subscribe(
+      this.onTransport,
+      this.onTransportError
+    );
+  }
+
+  componentWillUnmount() {
+    this.stop();
+  }
+
+  stop = () => {
+    if (this.sub) {
+      this.sub.unsubscribe();
+      this.sub = null;
+    }
+  };
+
+  onTransport = async (transport: *) => {
+    transport.setDebugMode(true);
+    //console.log(await transport.send(0xe0, 0x06, 0x00, 0x00));
+    const btc = new AppBtc(transport);
+    const { bitcoinAddress } = await btc.getWalletPublicKey("44'/0'/0'/0");
+    this.setState({ address: bitcoinAddress });
+  };
+
+  onTransportError = (error: *) => {
+    this.setState({ error });
+  };
+
   render() {
-    const { qrCodeModalOpened } = this.state;
-    const address = "1gre1noAY9HiK2qxoW8FzSdjdFBcoZ5fV";
+    const { qrCodeModalOpened, address } = this.state;
     return (
       <ScrollView
         style={styles.root}
@@ -83,66 +121,72 @@ export default class ReceiveFunds extends Component<*, *> {
           />
         </View>
 
-        <TouchableOpacity onPress={this.openQRCodeModal}>
-          <QRCodePreview address={address} />
-        </TouchableOpacity>
+        {!address ? (
+          <ActivityIndicator />
+        ) : (
+          <View style={styles.content}>
+            <TouchableOpacity onPress={this.openQRCodeModal}>
+              <QRCodePreview address={address} />
+            </TouchableOpacity>
 
-        <View />
+            <View />
 
-        <Text style={{ color: "white", fontWeight: "bold", marginTop: 30 }}>
-          Current address
-        </Text>
-        <View
-          style={{
-            // FIXME this should be a component
-            padding: 10,
-            margin: 10,
-            backgroundColor: "rgba(255,255,255,0.1)",
-            borderWidth: 1,
-            borderColor: "white",
-            borderStyle: "dashed"
-          }}
-        >
-          <Text style={{ color: "white" }}>{address}</Text>
-        </View>
+            <Text style={{ color: "white", fontWeight: "bold", marginTop: 30 }}>
+              Current address
+            </Text>
+            <View
+              style={{
+                // FIXME this should be a component
+                padding: 10,
+                margin: 10,
+                backgroundColor: "rgba(255,255,255,0.1)",
+                borderWidth: 1,
+                borderColor: "white",
+                borderStyle: "dashed"
+              }}
+            >
+              <Text style={{ color: "white" }}>{address}</Text>
+            </View>
 
-        <View style={{ flexDirection: "row" }}>
-          <View
-            style={{
-              width: 40,
-              height: 40,
-              margin: 10,
-              backgroundColor: "white",
-              borderRadius: 8
-            }}
-          />
-          <View
-            style={{
-              width: 40,
-              height: 40,
-              margin: 10,
-              backgroundColor: "white",
-              borderRadius: 8
-            }}
-          />
-          <View
-            style={{
-              width: 40,
-              height: 40,
-              margin: 10,
-              backgroundColor: "white",
-              borderRadius: 8
-            }}
-          />
-        </View>
+            <View style={{ flexDirection: "row" }}>
+              <View
+                style={{
+                  width: 40,
+                  height: 40,
+                  margin: 10,
+                  backgroundColor: "white",
+                  borderRadius: 8
+                }}
+              />
+              <View
+                style={{
+                  width: 40,
+                  height: 40,
+                  margin: 10,
+                  backgroundColor: "white",
+                  borderRadius: 8
+                }}
+              />
+              <View
+                style={{
+                  width: 40,
+                  height: 40,
+                  margin: 10,
+                  backgroundColor: "white",
+                  borderRadius: 8
+                }}
+              />
+            </View>
 
-        {qrCodeModalOpened ? (
-          <QRCodeModal
-            viewRef={this.viewHandle}
-            address={address}
-            onRequestClose={this.closeQRCodeModal}
-          />
-        ) : null}
+            {qrCodeModalOpened ? (
+              <QRCodeModal
+                viewRef={this.viewHandle}
+                address={address}
+                onRequestClose={this.closeQRCodeModal}
+              />
+            ) : null}
+          </View>
+        )}
       </ScrollView>
     );
   }
