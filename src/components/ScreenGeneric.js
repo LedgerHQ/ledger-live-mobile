@@ -1,20 +1,27 @@
 /* @flow */
 import React, { Component } from "react";
-import { View, ScrollView, Text, StyleSheet } from "react-native";
+import {
+  View,
+  ScrollView,
+  Text,
+  StyleSheet,
+  TouchableWithoutFeedback
+} from "react-native";
 import colors from "../colors";
 
 export default class ScreenGeneric extends Component<{
   renderHeader: (props: *) => *,
-  children: *
+  children: *,
+  onPressHeader?: () => void
 }> {
   render() {
-    const { children, renderHeader } = this.props;
+    const { children, renderHeader, onPressHeader } = this.props;
     return (
       <View style={styles.container}>
-        <View style={styles.header}>{renderHeader(this.props)}</View>
-        <ScrollView bounces={false} style={styles.body}>
-          {children}
-        </ScrollView>
+        <TouchableWithoutFeedback onPress={onPressHeader}>
+          <View style={styles.header}>{renderHeader(this.props)}</View>
+        </TouchableWithoutFeedback>
+        <View style={styles.body}>{children}</View>
       </View>
     );
   }
@@ -30,6 +37,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.blue
   },
   body: {
-    flex: 1
+    flex: 1,
+    position: "relative"
   }
 });

@@ -2,6 +2,7 @@
 import React, { Component } from "react";
 import {
   View,
+  ScrollView,
   Text,
   StyleSheet,
   Image,
@@ -42,7 +43,7 @@ export default class Search extends Component<*> {
   render() {
     return (
       <ScreenGeneric renderHeader={this.renderHeader}>
-        <View style={styles.container} />
+        <ScrollView bounces={false} style={styles.container} />
       </ScreenGeneric>
     );
   }

@@ -1,6 +1,13 @@
 /* @flow */
 import React, { Component } from "react";
-import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+import {
+  ScrollView,
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TouchableOpacity
+} from "react-native";
 import ScreenGeneric from "../components/ScreenGeneric";
 import colors from "../colors";
 
@@ -65,49 +72,51 @@ export default class Accounts extends Component<*, *> {
           key={String(expandedMode) /* force a redraw */}
           renderHeader={this.renderHeader}
         >
-          {expandedMode ? (
-            <View style={styles.expanded}>
-              {Array(20)
-                .fill(null)
-                .map((_, i) => (
+          <ScrollView bounces={false} style={styles.body}>
+            {expandedMode ? (
+              <View style={styles.expanded}>
+                {Array(20)
+                  .fill(null)
+                  .map((_, i) => (
+                    <View
+                      key={i}
+                      style={{
+                        marginVertical: 6,
+                        marginHorizontal: 16,
+                        height: 60,
+                        borderRadius: 4,
+                        backgroundColor: "white"
+                      }}
+                    />
+                  ))}
+              </View>
+            ) : (
+              <View>
+                <View style={styles.carouselCountainer}>
                   <View
-                    key={i}
                     style={{
-                      marginVertical: 6,
-                      marginHorizontal: 16,
-                      height: 60,
-                      borderRadius: 4,
+                      margin: 20,
+                      width: 280,
+                      height: 220,
+                      padding: 10,
+                      alignItems: "flex-end",
                       backgroundColor: "white"
                     }}
-                  />
-                ))}
-            </View>
-          ) : (
-            <View>
-              <View style={styles.carouselCountainer}>
-                <View
-                  style={{
-                    margin: 20,
-                    width: 280,
-                    height: 220,
-                    padding: 10,
-                    alignItems: "flex-end",
-                    backgroundColor: "white"
-                  }}
-                >
-                  <TouchableOpacity onPress={this.onGoAccountSettings}>
-                    <Image
-                      source={require("../images/accountsettings.png")}
-                      style={{ width: 30, height: 30 }}
-                    />
-                  </TouchableOpacity>
+                  >
+                    <TouchableOpacity onPress={this.onGoAccountSettings}>
+                      <Image
+                        source={require("../images/accountsettings.png")}
+                        style={{ width: 30, height: 30 }}
+                      />
+                    </TouchableOpacity>
+                  </View>
+                </View>
+                <View style={{ height: 800 }}>
+                  <Text>{bitcoinAddress}</Text>
                 </View>
               </View>
-              <View style={{ height: 800 }}>
-                <Text>{bitcoinAddress}</Text>
-              </View>
-            </View>
-          )}
+            )}
+          </ScrollView>
         </ScreenGeneric>
       </View>
     );
@@ -116,6 +125,9 @@ export default class Accounts extends Component<*, *> {
 
 const styles = StyleSheet.create({
   root: {
+    flex: 1
+  },
+  body: {
     flex: 1
   },
   carouselCountainer: {

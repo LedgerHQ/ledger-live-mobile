@@ -9,7 +9,6 @@ import {
   Image
 } from "react-native";
 import { withNavigation } from "react-navigation";
-import ScreenGeneric from "../components/ScreenGeneric";
 
 class SectionTitle extends Component<*> {
   render() {

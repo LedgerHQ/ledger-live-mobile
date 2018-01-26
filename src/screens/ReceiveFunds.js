@@ -59,11 +59,14 @@ export default class ReceiveFunds extends Component<*, *> {
   };
 
   onTransport = async (transport: *) => {
-    transport.setDebugMode(true);
-    //console.log(await transport.send(0xe0, 0x06, 0x00, 0x00));
-    const btc = new AppBtc(transport);
-    const { bitcoinAddress } = await btc.getWalletPublicKey("44'/0'/0'/0");
-    this.setState({ address: bitcoinAddress });
+    try {
+      transport.setDebugMode(true);
+      const btc = new AppBtc(transport);
+      const { bitcoinAddress } = await btc.getWalletPublicKey("44'/0'/0'/0");
+      this.setState({ address: bitcoinAddress });
+    } catch (error) {
+      this.setState({ error });
+    }
   };
 
   onTransportError = (error: *) => {
@@ -71,7 +74,7 @@ export default class ReceiveFunds extends Component<*, *> {
   };
 
   render() {
-    const { qrCodeModalOpened, address } = this.state;
+    const { qrCodeModalOpened, address, error } = this.state;
     return (
       <ScrollView
         style={styles.root}
@@ -121,7 +124,9 @@ export default class ReceiveFunds extends Component<*, *> {
           />
         </View>
 
-        {!address ? (
+        {error ? (
+          <Text style={{ color: "white" }}>{String(error)}</Text>
+        ) : !address ? (
           <ActivityIndicator />
         ) : (
           <View style={styles.content}>

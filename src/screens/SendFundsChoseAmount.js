@@ -34,12 +34,16 @@ export default class SendFundsChoseAmount extends Component<*, *> {
     const { amount } = this.state;
     return (
       <KeyboardAvoidingView
-        behavior="height"
-        style={{ flex: 1 }}
+        behavior="padding"
+        style={styles.root}
         keyboardVerticalOffset={65}
       >
-        <ScrollView style={{ flex: 1 }}>
-          <TextInput placeholder="1.20" keyboardType="numeric" />
+        <ScrollView style={styles.body}>
+          <TextInput
+            style={styles.textInput}
+            placeholder="1.20"
+            keyboardType="numeric"
+          />
         </ScrollView>
         <BlueButton title="Confirm amount" onPress={this.onConfirm} />
       </KeyboardAvoidingView>
@@ -52,6 +56,10 @@ const styles = StyleSheet.create({
     flex: 1
   },
   body: {
-    flex: 1
+    flex: 1,
+    padding: 10
+  },
+  textInput: {
+    fontSize: 32
   }
 });
