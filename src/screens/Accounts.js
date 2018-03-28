@@ -24,6 +24,7 @@ import CurrencyUnitValue from "../components/CurrencyUnitValue";
 import WhiteButton from "../components/WhiteButton";
 import CurrencyIcon from "../components/CurrencyIcon";
 import CounterValue from "../components/CounterValue";
+import PriceChange from "../components/PriceChange";
 
 const windowDim = Dimensions.get("window");
 
@@ -93,7 +94,9 @@ class AccountCard extends PureComponent<*, *> {
   };
   render() {
     const { account, onPress } = this.props;
-    const data = getBalanceHistory(account, 30);
+    const data = getBalanceHistory(account, 10);
+    const startPrice: number = data[0].value;
+    const endPrice: number = data[data.length - 1].value;
     return (
       <TouchableWithoutFeedback onPress={onPress}>
         <View
@@ -169,6 +172,11 @@ class AccountCard extends PureComponent<*, *> {
                   currency={account.currency}
                 />
               </LText>
+              <PriceChange
+                before={startPrice}
+                after={endPrice}
+                color="western"
+              />
             </View>
             <BalanceChartMiniature
               width={260}
