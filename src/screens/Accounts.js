@@ -3,7 +3,6 @@ import React, { Component, PureComponent } from "react";
 import {
   View,
   FlatList,
-  TouchableOpacity,
   TouchableWithoutFeedback,
   StyleSheet,
   Image,
@@ -13,11 +12,10 @@ import {
 import moment from "moment";
 import Carousel, { Pagination } from "react-native-snap-carousel";
 import { connect } from "react-redux";
-import type { Account, Operation } from "../types/common";
-import {
-  getVisibleAccounts,
-  getBalanceHistoryUntilNow
-} from "../reducers/accounts";
+import type { Account, Operation } from "@ledgerhq/wallet-common/lib/types";
+import { getBalanceHistory } from "@ledgerhq/wallet-common/lib/helpers/account";
+import { getVisibleAccounts } from "../reducers/accounts";
+import Touchable from "../components/Touchable";
 import ScreenGeneric from "../components/ScreenGeneric";
 import colors from "../colors";
 import BalanceChartMiniature from "../components/BalanceChartMiniature";
@@ -25,6 +23,7 @@ import LText from "../components/LText";
 import CurrencyUnitValue from "../components/CurrencyUnitValue";
 import WhiteButton from "../components/WhiteButton";
 import CurrencyIcon from "../components/CurrencyIcon";
+import CounterValue from "../components/CounterValue";
 
 const windowDim = Dimensions.get("window");
 
@@ -35,7 +34,7 @@ const mapStateToProps = state => ({
 class AccountRow extends PureComponent<*, *> {
   render() {
     const { account } = this.props;
-    const data = getBalanceHistoryUntilNow(account, 30);
+    const data = getBalanceHistory(account, 30);
     return (
       <View
         style={{
@@ -68,16 +67,14 @@ class AccountRow extends PureComponent<*, *> {
           color={account.currency.color}
           withGradient={false}
         />
-        <CurrencyUnitValue
-          ltextProps={{
-            semiBold: true,
-            style: {
-              fontSize: 14
-            }
-          }}
-          unit={account.unit}
-          value={account.balance}
-        />
+        <View style={[styles.operationsColumn, { alignItems: "flex-end" }]}>
+          <LText semiBold style={{ fontSize: 14 }}>
+            <CurrencyUnitValue unit={account.unit} value={account.balance} />
+          </LText>
+          <LText style={styles.operationsSubText}>
+            <CounterValue value={account.balance} currency={account.currency} />
+          </LText>
+        </View>
       </View>
     );
   }
@@ -86,13 +83,17 @@ class AccountRow extends PureComponent<*, *> {
 class AccountCard extends PureComponent<*, *> {
   onGoAccountSettings = () => {
     const { account, topLevelNavigation } = this.props;
-    topLevelNavigation.navigate("AccountSettings", {
-      accountId: account.id
+    topLevelNavigation.navigate({
+      routeName: "AccountSettings",
+      params: {
+        accountId: account.id
+      },
+      key: "accountsettings"
     });
   };
   render() {
     const { account, onPress } = this.props;
-    const data = getBalanceHistoryUntilNow(account, 30);
+    const data = getBalanceHistory(account, 30);
     return (
       <TouchableWithoutFeedback onPress={onPress}>
         <View
@@ -147,27 +148,27 @@ class AccountCard extends PureComponent<*, *> {
                 </LText>
               </View>
 
-              <TouchableOpacity onPress={this.onGoAccountSettings}>
+              <Touchable onPress={this.onGoAccountSettings}>
                 <Image
                   source={require("../images/accountsettings.png")}
                   style={{ width: 30, height: 30 }}
                 />
-              </TouchableOpacity>
+              </Touchable>
             </View>
 
-            <View>
-              <CurrencyUnitValue
-                unit={account.unit}
-                value={account.balance}
-                ltextProps={{
-                  semiBold: true,
-                  style: {
-                    alignSelf: "flex-start",
-                    fontSize: 22,
-                    marginVertical: 10
-                  }
-                }}
-              />
+            <View style={styles.operationsColumn}>
+              <LText semiBold style={styles.accountCardUnit}>
+                <CurrencyUnitValue
+                  unit={account.unit}
+                  value={account.balance}
+                />
+              </LText>
+              <LText style={styles.operationsSubText}>
+                <CounterValue
+                  value={account.balance}
+                  currency={account.currency}
+                />
+              </LText>
             </View>
             <BalanceChartMiniature
               width={260}
@@ -185,16 +186,24 @@ class AccountCard extends PureComponent<*, *> {
 class AccountHeadMenu extends Component<{ topLevelNavigation: *, account: * }> {
   onSend = () => {
     const { account, topLevelNavigation } = this.props;
-    topLevelNavigation.navigate("SendFunds", {
-      goBackKey: topLevelNavigation.state.key,
-      accountId: account.id
+    topLevelNavigation.navigate({
+      routeName: "SendFunds",
+      params: {
+        goBackKey: topLevelNavigation.state.key,
+        accountId: account.id
+      },
+      key: "sendfunds"
     });
   };
   onReceive = () => {
     const { account, topLevelNavigation } = this.props;
-    topLevelNavigation.navigate("ReceiveFunds", {
-      goBackKey: topLevelNavigation.state.key,
-      accountId: account.id
+    topLevelNavigation.navigate({
+      routeName: "ReceiveFunds",
+      params: {
+        goBackKey: topLevelNavigation.state.key,
+        accountId: account.id
+      },
+      key: "receivefunds"
     });
   };
   render() {
@@ -222,29 +231,16 @@ class AccountHeadMenu extends Component<{ topLevelNavigation: *, account: * }> {
   }
 }
 
-class OperationRow extends PureComponent<{ operation: Operation }> {
+class OperationRow extends PureComponent<{
+  operation: Operation,
+  account: Account
+}> {
   render() {
-    const { operation } = this.props;
-    const { unit } = operation.account;
+    const { operation, account } = this.props;
+    const { unit } = account;
     return (
-      <View
-        style={{
-          height: 60,
-          padding: 10,
-          borderBottomWidth: 1,
-          borderBottomColor: "#eee",
-          backgroundColor: "white",
-          alignItems: "center",
-          flexDirection: "row"
-        }}
-      >
-        <View
-          style={{
-            flexDirection: "column",
-            flex: 1,
-            marginRight: 10
-          }}
-        >
+      <View style={styles.operationsContainer}>
+        <View style={styles.operationsColumn}>
           <LText
             numberOfLines={1}
             style={{
@@ -253,26 +249,27 @@ class OperationRow extends PureComponent<{ operation: Operation }> {
           >
             {operation.address}
           </LText>
-          <LText
-            numberOfLines={1}
-            style={{
-              fontSize: 14,
-              color: "#999"
-            }}
-          >
-            {moment(operation.receivedAt).calendar()}
+          <LText numberOfLines={1} style={styles.operationsSubText}>
+            {moment(operation.date).calendar()}
           </LText>
         </View>
-        <CurrencyUnitValue
-          ltextProps={{
-            style: {
+        <View style={[styles.operationsColumn, { alignItems: "flex-end" }]}>
+          <LText
+            style={{
               fontSize: 14,
               color: operation.amount > 0 ? colors.green : colors.red
-            }
-          }}
-          unit={unit}
-          value={operation.amount}
-        />
+            }}
+          >
+            <CurrencyUnitValue unit={unit} value={operation.amount} />
+          </LText>
+          <LText style={styles.operationsSubText}>
+            <CounterValue
+              value={operation.amount}
+              date={operation.date}
+              currency={account.currency}
+            />
+          </LText>
+        </View>
       </View>
     );
   }
@@ -332,7 +329,7 @@ class AccountsCarousel extends Component<{
 }
 
 class AccountBody extends Component<
-  { style: *, Header: *, account: ?*, visible?: boolean },
+  { style: *, Header: *, account: Account, visible?: boolean },
   *
 > {
   state = { refreshing: false };
@@ -359,7 +356,9 @@ class AccountBody extends Component<
 
   keyExtractor = (item: *) => item.id;
 
-  renderItem = ({ item }: *) => <OperationRow operation={item} />;
+  renderItem = ({ item }: *) => (
+    <OperationRow operation={item} account={this.props.account} />
+  );
 
   render() {
     const { style, Header, account, visible } = this.props;
@@ -392,9 +391,9 @@ class AccountExpanded extends Component<{
   keyExtractor = (item: *) => item.id;
 
   renderItemExpanded = ({ item, index }: *) => (
-    <TouchableOpacity onPress={() => this.props.onPressExpandedItem(index)}>
+    <Touchable onPress={() => this.props.onPressExpandedItem(index)}>
       <AccountRow account={item} />
-    </TouchableOpacity>
+    </Touchable>
   );
 
   render() {
@@ -440,7 +439,10 @@ class Accounts extends Component<
   };
 
   onAddAccount = () => {
-    this.props.screenProps.topLevelNavigation.navigate("AddAccount");
+    this.props.screenProps.topLevelNavigation.navigate({
+      routeName: "AddAccount",
+      key: "addaccount"
+    });
   };
 
   onPressExpandedItem = (selectedIndex: number) => {
@@ -455,7 +457,7 @@ class Accounts extends Component<
     const { expandedMode } = this.state;
     return (
       <View style={styles.header}>
-        <TouchableOpacity onPress={this.onToggleExpandedMode}>
+        <Touchable onPress={this.onToggleExpandedMode}>
           <Image
             source={
               expandedMode
@@ -464,14 +466,14 @@ class Accounts extends Component<
             }
             style={{ width: 24, height: 20 }}
           />
-        </TouchableOpacity>
+        </Touchable>
         <LText style={styles.headerText}>Accounts</LText>
-        <TouchableOpacity onPress={this.onAddAccount}>
+        <Touchable onPress={this.onAddAccount}>
           <Image
             source={require("../images/accountsplus.png")}
             style={{ width: 22, height: 21 }}
           />
-        </TouchableOpacity>
+        </Touchable>
       </View>
     );
   };
@@ -582,5 +584,28 @@ const styles = StyleSheet.create({
     height: 8,
     borderRadius: 4,
     backgroundColor: "rgba(255, 255, 255, 0.92)"
+  },
+  accountCardUnit: {
+    alignSelf: "flex-start",
+    fontSize: 22,
+    marginTop: 10
+  },
+  operationsContainer: {
+    height: 60,
+    padding: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: "#eee",
+    backgroundColor: "white",
+    alignItems: "center",
+    flexDirection: "row"
+  },
+  operationsColumn: {
+    flexDirection: "column",
+    flex: 1,
+    marginRight: 10
+  },
+  operationsSubText: {
+    fontSize: 12,
+    color: "#999"
   }
 });

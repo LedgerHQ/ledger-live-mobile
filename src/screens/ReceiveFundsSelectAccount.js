@@ -3,9 +3,10 @@ import React, { Component } from "react";
 import { FlatList, StyleSheet } from "react-native";
 import { connect } from "react-redux";
 import type { NavigationScreenProp } from "react-navigation";
+import type { Account } from "@ledgerhq/wallet-common/lib/types";
+
 import { getVisibleAccounts } from "../reducers/accounts";
 import AccountChoice from "../components/AccountChoice";
-import type { Account } from "../types/common";
 
 const styles = StyleSheet.create({
   root: {
@@ -25,7 +26,7 @@ class ReceiveFundsSelectAccount extends Component<{
   navigation: NavigationScreenProp<{
     params: {
       selectedAccountId: string,
-      setSelectedAccount: (string, string) => void
+      setSelectedAccount: string => void
     }
   }>
 }> {
@@ -36,8 +37,7 @@ class ReceiveFundsSelectAccount extends Component<{
   onAccountPress = (account: Account) => {
     const { navigation } = this.props;
     const { selectedAccountId, setSelectedAccount } = navigation.state.params;
-    if (selectedAccountId !== account.id)
-      setSelectedAccount(account.id, account.unit.code);
+    if (selectedAccountId !== account.id) setSelectedAccount(account.id);
     navigation.goBack();
   };
 

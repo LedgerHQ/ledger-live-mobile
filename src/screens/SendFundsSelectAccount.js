@@ -3,10 +3,11 @@ import React, { Component } from "react";
 import { FlatList, StyleSheet } from "react-native";
 import { connect } from "react-redux";
 import type { NavigationScreenProp } from "react-navigation";
+import type { Account } from "@ledgerhq/wallet-common/lib/types";
+
 import { getVisibleAccounts } from "../reducers/accounts";
 import HeaderRightClose from "../components/HeaderRightClose";
 import AccountChoice from "../components/AccountChoice";
-import type { Account } from "../types/common";
 
 const styles = StyleSheet.create({
   root: {
@@ -36,9 +37,14 @@ class SendFundsSelectAccount extends Component<{
 
   onAccountPress = (account: Account) => {
     const { navigation } = this.props;
-    navigation.navigate("SendFundsScanAddress", {
-      ...navigation.state.params,
-      accountId: account.id
+    // $FlowFixMe https://github.com/react-navigation/react-navigation/pull/3843
+    navigation.navigate({
+      routeName: "SendFundsScanAddress",
+      params: {
+        ...navigation.state.params,
+        accountId: account.id
+      },
+      key: "sendfundsscanaddress"
     });
   };
 
