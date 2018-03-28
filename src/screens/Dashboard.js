@@ -31,6 +31,7 @@ import BalanceChartMiniature from "../components/BalanceChartMiniature";
 import CurrencyIcon from "../components/CurrencyIcon";
 import { withLocale } from "../components/LocaleContext";
 import GenerateMockAccountsButton from "../components/GenerateMockAccountsButton";
+import PriceChange from "../components/PriceChange";
 import { getVisibleAccounts } from "../reducers/accounts";
 import { calculateCounterValueSelector } from "../reducers/counterValues";
 
@@ -47,19 +48,31 @@ class ListHeaderComponent extends PureComponent<
     const fiatUnit = getFiatUnit("USD"); // FIXME no more hardcoded
     const data = getBalanceHistorySum(
       accounts,
-      30,
+      15,
       fiatUnit,
       calculateCounterValue
     );
+    const startPrice: number = data ? data[0].value : 0;
+    const endPrice: number = data ? data[data.length - 1].value : 0;
+
     return (
       <View style={styles.carouselCountainer}>
         <View style={{ padding: 10, flexDirection: "row" }}>
-          <LText semiBold style={styles.balanceText}>
-            <CurrencyUnitValue
-              unit={fiatUnit}
-              value={this.props.totalBalance}
-            />
-          </LText>
+          <View>
+            <LText semiBold style={styles.balanceText}>
+              <CurrencyUnitValue
+                unit={fiatUnit}
+                value={this.props.totalBalance}
+              />
+            </LText>
+            {data ? (
+              <PriceChange
+                before={startPrice}
+                after={endPrice}
+                color="western"
+              />
+            ) : null}
+          </View>
         </View>
         {data ? (
           <BalanceChart
@@ -220,10 +233,12 @@ class Dashboard extends Component<
     const fiatUnit = getFiatUnit("USD");
     const data = getBalanceHistorySum(
       accounts,
-      30,
+      15,
       fiatUnit,
       calculateCounterValue
     );
+    const startPrice: number = data ? data[0].value : 0;
+    const endPrice: number = data ? data[data.length - 1].value : 0;
 
     return (
       <View style={styles.header}>
@@ -232,6 +247,11 @@ class Dashboard extends Component<
             <LText semiBold style={styles.balanceTextHeader}>
               <CurrencyUnitValue unit={fiatUnit} value={totalBalance} />
             </LText>
+            <PriceChange
+              before={startPrice}
+              after={endPrice}
+              style={{ color: "white" }}
+            />
             <BalanceChartMiniature
               width={100}
               height={60}
