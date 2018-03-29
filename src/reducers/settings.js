@@ -5,12 +5,14 @@ import type { State } from ".";
 
 export type SettingsState = {
   counterValue: string,
-  orderAccounts: string
+  orderAccounts: string,
+  deltaChangeColorLocale: string
 };
 
 const defaultState: SettingsState = {
   counterValue: "USD",
-  orderAccounts: "balance|desc"
+  orderAccounts: "balance|desc",
+  deltaChangeColorLocale: "eastern"
 };
 
 const state: SettingsState = {

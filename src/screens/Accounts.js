@@ -172,11 +172,7 @@ class AccountCard extends PureComponent<*, *> {
                   currency={account.currency}
                 />
               </LText>
-              <DeltaChange
-                before={startPrice}
-                after={endPrice}
-                color="western"
-              />
+              <DeltaChange before={startPrice} after={endPrice} />
             </View>
             <BalanceChartMiniature
               width={260}

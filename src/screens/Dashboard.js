@@ -65,13 +65,7 @@ class ListHeaderComponent extends PureComponent<
                 value={this.props.totalBalance}
               />
             </LText>
-            {data ? (
-              <DeltaChange
-                before={startPrice}
-                after={endPrice}
-                color="western"
-              />
-            ) : null}
+            {data ? <DeltaChange before={startPrice} after={endPrice} /> : null}
           </View>
         </View>
         {data ? (

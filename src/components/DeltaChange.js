@@ -1,17 +1,26 @@
 // @flow
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import LText from "./LText";
 import colors from "../colors";
+import type { State } from "../reducers";
 
-export default class DeltaChange extends Component<{
+const mapStateToProps = (state: State) => ({
+  colorLocale: state.settings.deltaChangeColorLocale
+});
+
+class DeltaChange extends Component<{
   before: number,
   after: number,
-  color?: "western" | "eastern",
+  colorLocale: "western" | "eastern",
+  color: boolean,
   style?: {}
 }> {
+  static defaultProps = { color: true };
+
   render() {
-    const { before, after, color } = this.props;
-    const style: { color?: * } = {};
+    const { before, after, colorLocale, color } = this.props;
+    const style = {};
 
     if (!before) {
       return <LText />;
@@ -19,16 +28,20 @@ export default class DeltaChange extends Component<{
 
     const percent: number = after / before * 100 - 100;
 
-    if (color === "western") {
-      style.color = percent >= 0 ? colors.green : colors.red;
-    } else if (color === "eastern") {
-      style.color = percent >= 0 ? colors.red : colors.blue;
+    if (color) {
+      if (colorLocale === "western") {
+        style.color = percent >= 0 ? colors.green : colors.red;
+      } else if (colorLocale === "eastern") {
+        style.color = percent >= 0 ? colors.red : colors.blue;
+      }
     }
 
     return (
-      <LText style={[this.props.style, style]}>
+      <LText style={[style, this.props.style]}>
         {`${(percent >= 0 ? "+" : "") + percent.toFixed(2)} %`}
       </LText>
     );
   }
 }
+
+export default connect(mapStateToProps)(DeltaChange);
