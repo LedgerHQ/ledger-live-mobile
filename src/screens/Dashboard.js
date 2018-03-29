@@ -107,7 +107,6 @@ class OperationRow extends PureComponent<{
           <LText
             numberOfLines={1}
             semiBold
-            ellipsizeMode="clip"
             style={styles.operationsAccountName}
           >
             {account.name}
