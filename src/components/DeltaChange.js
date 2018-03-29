@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import LText from "./LText";
 import colors from "../colors";
 
-export default class PriceChange extends Component<{
+export default class DeltaChange extends Component<{
   before: number,
   after: number,
   color?: "western" | "eastern",

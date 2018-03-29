@@ -31,7 +31,7 @@ import BalanceChartMiniature from "../components/BalanceChartMiniature";
 import CurrencyIcon from "../components/CurrencyIcon";
 import { withLocale } from "../components/LocaleContext";
 import GenerateMockAccountsButton from "../components/GenerateMockAccountsButton";
-import PriceChange from "../components/PriceChange";
+import DeltaChange from "../components/DeltaChange";
 import { getVisibleAccounts } from "../reducers/accounts";
 import { calculateCounterValueSelector } from "../reducers/counterValues";
 
@@ -66,7 +66,7 @@ class ListHeaderComponent extends PureComponent<
               />
             </LText>
             {data ? (
-              <PriceChange
+              <DeltaChange
                 before={startPrice}
                 after={endPrice}
                 color="western"
@@ -246,7 +246,7 @@ class Dashboard extends Component<
             <LText semiBold style={styles.balanceTextHeader}>
               <CurrencyUnitValue unit={fiatUnit} value={totalBalance} />
             </LText>
-            <PriceChange
+            <DeltaChange
               before={startPrice}
               after={endPrice}
               style={{ color: "white" }}

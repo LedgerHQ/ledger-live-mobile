@@ -24,7 +24,7 @@ import CurrencyUnitValue from "../components/CurrencyUnitValue";
 import WhiteButton from "../components/WhiteButton";
 import CurrencyIcon from "../components/CurrencyIcon";
 import CounterValue from "../components/CounterValue";
-import PriceChange from "../components/PriceChange";
+import DeltaChange from "../components/DeltaChange";
 
 const windowDim = Dimensions.get("window");
 
@@ -172,7 +172,7 @@ class AccountCard extends PureComponent<*, *> {
                   currency={account.currency}
                 />
               </LText>
-              <PriceChange
+              <DeltaChange
                 before={startPrice}
                 after={endPrice}
                 color="western"
