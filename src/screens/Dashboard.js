@@ -52,8 +52,8 @@ class ListHeaderComponent extends PureComponent<
       fiatUnit,
       calculateCounterValue
     );
-    const startPrice: number = data ? data[0].value : 0;
-    const endPrice: number = data ? data[data.length - 1].value : 0;
+    const startPrice = data ? data[0].value : 0;
+    const endPrice = data ? data[data.length - 1].value : 0;
 
     return (
       <View style={styles.carouselCountainer}>
@@ -230,8 +230,8 @@ class Dashboard extends Component<
       fiatUnit,
       calculateCounterValue
     );
-    const startPrice: number = data ? data[0].value : 0;
-    const endPrice: number = data ? data[data.length - 1].value : 0;
+    const startPrice = data ? data[0].value : 0;
+    const endPrice = data ? data[data.length - 1].value : 0;
 
     return (
       <View style={styles.header}>

@@ -95,8 +95,8 @@ class AccountCard extends PureComponent<*, *> {
   render() {
     const { account, onPress } = this.props;
     const data = getBalanceHistory(account, 10);
-    const startPrice: number = data[0].value;
-    const endPrice: number = data[data.length - 1].value;
+    const startPrice = data[0].value;
+    const endPrice = data[data.length - 1].value;
     return (
       <TouchableWithoutFeedback onPress={onPress}>
         <View
