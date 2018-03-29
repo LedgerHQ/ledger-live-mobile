@@ -12,7 +12,7 @@ export type SettingsState = {
 const defaultState: SettingsState = {
   counterValue: "USD",
   orderAccounts: "balance|desc",
-  deltaChangeColorLocale: "eastern"
+  deltaChangeColorLocale: "western"
 };
 
 const state: SettingsState = {
