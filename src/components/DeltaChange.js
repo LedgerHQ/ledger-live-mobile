@@ -37,8 +37,8 @@ class DeltaChange extends Component<{
     }
 
     return (
-      <LText style={[style, this.props.style]}>
-        {`${(percent >= 0 ? "+" : "") + percent.toFixed(2)} %`}
+      <LText numberOfLines={1} style={[style, this.props.style]}>
+        {`${(percent >= 0 ? "+ " : "- ") + Math.abs(percent).toFixed(2)} %`}
       </LText>
     );
   }
