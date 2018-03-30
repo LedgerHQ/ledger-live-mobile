@@ -6,7 +6,7 @@ import type { State } from ".";
 export type SettingsState = {
   counterValue: string,
   orderAccounts: string,
-  deltaChangeColorLocale: string
+  deltaChangeColorLocale: "western" | "eastern"
 };
 
 const defaultState: SettingsState = {
