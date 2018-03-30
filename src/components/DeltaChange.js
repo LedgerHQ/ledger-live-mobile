@@ -13,13 +13,12 @@ class DeltaChange extends Component<{
   before: number,
   after: number,
   colorLocale: "western" | "eastern",
-  color: boolean,
   style?: {}
 }> {
   static defaultProps = { color: true };
 
   render() {
-    const { before, after, colorLocale, color } = this.props;
+    const { before, after, colorLocale } = this.props;
     const style = {};
 
     if (!before) {
@@ -28,12 +27,10 @@ class DeltaChange extends Component<{
 
     const percent: number = after / before * 100 - 100;
 
-    if (color) {
-      if (colorLocale === "western") {
-        style.color = percent >= 0 ? colors.green : colors.red;
-      } else if (colorLocale === "eastern") {
-        style.color = percent >= 0 ? colors.red : colors.blue;
-      }
+    if (colorLocale === "western") {
+      style.color = percent >= 0 ? colors.green : colors.red;
+    } else if (colorLocale === "eastern") {
+      style.color = percent >= 0 ? colors.red : colors.blue;
     }
 
     return (
