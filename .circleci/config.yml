@@ -4,7 +4,7 @@
 #
 version: 2
 jobs:
-  build-android:
+  build:
     working_directory: ~/ledger-live-mobile
     docker:
       - image: circleci/android:api-28-node8-alpha
@@ -32,6 +32,5 @@ jobs:
       - run: ./node_modules/.bin/prettier -l "src/**/*.js"
       - run: yarn flow
       - run: yarn test
-
       # build app
       - run: cd android && ./gradlew assembleStagingRelease
