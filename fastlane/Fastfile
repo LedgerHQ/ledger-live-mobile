@@ -1,0 +1,71 @@
+desc "Bump the iOS and Android version with a commit and tag."
+lane :bump_version do |options|
+  type = options.fetch(:type)
+
+  case type
+  when "major", "minor", "patch"
+    increment_version_number(bump_type: type)
+    update_android_version_name(version: get_version_number)
+  else
+    raise "Invalid bump type '#{type}'"
+  end
+
+  commit_tag_and_push_version_bump
+end
+
+platform :ios do
+  desc "Build the app with the specified `scheme`. Defaults to `ledgerlivemobile`."
+  lane :build do |options|
+    scheme = options.fetch(:scheme, "ledgerlivemobile")
+
+    gym(scheme: scheme, include_bitcode: true)
+  end
+
+  desc "Submit a new Beta Build to Apple TestFlight"
+  lane :beta do
+    build
+    testflight
+  end
+end
+
+platform :android do
+  desc "Build the app apk for the specified build `type`. Defaults to `Release`"
+  lane :build do |options|
+    type = options.fetch(:type, "Release")
+
+    gradle(task: "clean", project_dir: 'android/')
+    gradle(task: "assemble", build_type: type, project_dir: 'android/')
+  end
+end
+
+def update_android_version_name(version:)
+  build_gradle_path = File.join(
+    "..",
+    ENV.fetch("ANDROID_DIRECTORY"),
+    "app",
+    "build.gradle"
+  )
+
+  File.write(
+    build_gradle_path,
+    File.read(build_gradle_path).gsub(
+      /versionName\s+"(.+)"/,
+      "versionName \"#{version}\"",
+    )
+  )
+end
+
+def commit_tag_and_push_version_bump
+  build_number = get_build_number
+  version_number = get_version_number
+  git_commit(
+    path: [
+      "android/app/build.gradle",
+      "ios/TemplateProject/Info.plist",
+      "ios/TemplateProjectTests/Info.plist",
+    ],
+    message: "Bump version to #{version_number} (#{build_number})",
+  )
+  add_git_tag(tag: "v#{version_number}+#{build_number}")
+  push_to_git_remote
+end
