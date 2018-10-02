@@ -20,7 +20,8 @@
     "lint": "eslint src",
     "flow": "flow",
     "test": "true",
-    "sync-locales": "./scripts/sync-locales.sh"
+    "sync-locales": "./scripts/sync-locales.sh",
+    "fastlane": "bundle exec fastlane"
   },
   "jest": {
     "preset": "react-native",
