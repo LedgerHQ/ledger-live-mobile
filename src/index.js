@@ -9,6 +9,7 @@ import { exportSelector as accountsExportSelector } from "./reducers/accounts";
 import CounterValues from "./countervalues";
 import LocaleProvider from "./context/Locale";
 import RebootProvider from "./context/Reboot";
+import ButtonUseTouchable from "./context/ButtonUseTouchable";
 import AuthPass from "./context/AuthPass";
 import LedgerStoreProvider from "./context/LedgerStore";
 import { RootNavigator } from "./navigators";
@@ -18,6 +19,8 @@ import LoadingApp from "./components/LoadingApp";
 import StyledStatusBar from "./components/StyledStatusBar";
 import { BridgeSyncProvider } from "./bridge/BridgeSyncContext";
 import DBSave from "./components/DBSave";
+import AppStateListener from "./components/AppStateListener";
+import SyncNewAccounts from "./bridge/SyncNewAccounts";
 
 useScreens();
 
@@ -57,6 +60,10 @@ class App extends Component<*> {
           hasChanged={this.hasAccountsChanged}
           lense={accountsExportSelector}
         />
+
+        <AppStateListener />
+
+        <SyncNewAccounts priority={5} />
 
         <RootNavigator />
       </View>
@@ -101,7 +108,9 @@ export default class Root extends Component<{}, {}> {
                     <LocaleProvider>
                       <BridgeSyncProvider>
                         <CounterValues.PollingProvider>
-                          <App />
+                          <ButtonUseTouchable.Provider value={false}>
+                            <App />
+                          </ButtonUseTouchable.Provider>
                         </CounterValues.PollingProvider>
                       </BridgeSyncProvider>
                     </LocaleProvider>
@@ -118,6 +127,6 @@ export default class Root extends Component<{}, {}> {
   }
 }
 
-// if (__DEV__) {
-//   require("./snoopy");
-// }
+if (__DEV__) {
+  require("./snoopy");
+}

@@ -1,13 +1,11 @@
 /* @flow */
 
 import React, { Component } from "react";
-import { View, StyleSheet } from "react-native";
-import Touchable from "./Touchable";
+import { View, StyleSheet, Platform } from "react-native";
 import Card from "./Card";
 import LText from "./LText";
 import colors from "../colors";
 import Circle from "./Circle";
-import { getElevationStyle } from "./ElevatedView";
 
 type Props = {
   title: string,
@@ -19,30 +17,42 @@ export default class SettingsCard extends Component<Props> {
   render() {
     const { title, desc, icon, onClick } = this.props;
     return (
-      <Touchable onPress={onClick}>
-        <Card style={[getElevationStyle(3), styles.cardStyle]}>
-          <Circle bg={colors.lightLive} size={32}>
-            {icon}
-          </Circle>
-          <View style={styles.cardTextBlock}>
-            <LText secondary semiBold style={styles.title}>
-              {title}
-            </LText>
-            <LText style={styles.desc}>{desc}</LText>
-          </View>
-        </Card>
-      </Touchable>
+      <Card onPress={onClick} style={styles.cardStyle}>
+        <Circle bg={colors.lightLive} size={32}>
+          {icon}
+        </Circle>
+        <View style={styles.cardTextBlock}>
+          <LText secondary semiBold style={styles.title}>
+            {title}
+          </LText>
+          <LText style={styles.desc}>{desc}</LText>
+        </View>
+      </Card>
     );
   }
 }
 
 const styles = StyleSheet.create({
   cardStyle: {
+    backgroundColor: colors.white,
+    overflow: "visible",
     flexDirection: "row",
     alignItems: "center",
     paddingHorizontal: 16,
     paddingVertical: 24,
     marginVertical: 4,
+    ...Platform.select({
+      android: {
+        elevation: 1,
+      },
+      ios: {
+        shadowOpacity: 0.03,
+        shadowRadius: 8,
+        shadowOffset: {
+          height: 4,
+        },
+      },
+    }),
   },
   cardTextBlock: {
     flexDirection: "column",

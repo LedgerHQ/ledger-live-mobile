@@ -4,12 +4,12 @@ Mobile application for the Ledger Wallet
 
 ## Pre-requisite
 
-- Yarn
+- Node LTS version
+- Yarn 1.10.1 or above
 
 ### iOS
 
 - XCode
-- Carthage: brew install carthage
 
 ### Android
 
@@ -43,13 +43,13 @@ or open `android/` in Android Studio.
 
 ## Environment variables
 
-You can create a .env with following optional variables
+Optional environment variables you can put in `.env`, `.env.production` or `.env.staging` for debug, release, or staging release builds respectively
 
 ```
 DEBUG_COMM_HTTP_PROXY=http://localhost:8435   # enable a dev mode to use the device over HTTP. use with https://github.com/LedgerHQ/ledgerjs/tree/master/packages/hw-http-proxy-devserver
-DEBUG_MOCK_ACCOUNT=12       # enable a "generate mock accounts" button in Settings that will create this number of accounts.
 BRIDGESTREAM_DATA=...       # come from console.log of the desktop app during the qrcode export. allow to bypass the bridgestream scanning
 READ_ONLY=0                 # re-enable screens which have been disabled for MVP (transfer and manager)
+DEBUG_RNDEBUGGER=1          # enable react native debugger
 ```
 
 ## Troobleshooting
@@ -60,9 +60,7 @@ When trying to build with XCode 10 and React Native v0.57.0, you might have issu
 To solve this issue you must:
 
 ```sh
-cd ledger-live-mobile
 ./node_modules/react-native/scripts/ios-install-third-party.sh
 ```
 
-You can them remove the `third-party` folder created at the root of your project.
 The build on XCode 10 should work then.

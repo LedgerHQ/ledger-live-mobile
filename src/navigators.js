@@ -19,6 +19,7 @@ import RateProviderSettings from "./screens/Settings/General/RateProviderSetting
 import GeneralSettings from "./screens/Settings/General";
 import AboutSettings from "./screens/Settings/About";
 import HelpSettings from "./screens/Settings/Help";
+import DebugSettings from "./screens/Settings/Debug";
 import CurrencySettings from "./screens/Settings/Currencies/CurrencySettings";
 import CurrenciesList from "./screens/Settings/Currencies/CurrenciesList";
 import Manager from "./screens/Manager";
@@ -40,6 +41,8 @@ import EditFees from "./screens/EditFees";
 import VerifyAddress from "./screens/VerifyAddress";
 import ReceiveConfirmation from "./screens/ReceiveComfirmation";
 import FallBackCameraScreen from "./screens/ImportAccounts/FallBackCameraScreen";
+import DebugBLE from "./screens/DebugBLE";
+import BenchmarkQRStream from "./screens/BenchmarkQRStream";
 
 // TODO look into all FlowFixMe
 
@@ -62,6 +65,9 @@ const styles = StyleSheet.create({
     borderTopColor: colors.lightFog,
     backgroundColor: colors.white,
   },
+  transparentHeader: {
+    backgroundColor: "transparent",
+  },
 });
 
 const StackNavigatorConfig = {
@@ -77,6 +83,7 @@ const StackNavigatorConfig = {
 
 const TransparentHeaderNavigationOptions = {
   headerTransparent: true,
+  headerStyle: [styles.header, styles.transparentHeader],
   headerTitle: (props: *) => (
     <HeaderTitle {...props} style={{ color: colors.white }} />
   ),
@@ -95,6 +102,12 @@ const SettingsStack = createStackNavigator(
     HelpSettings,
     CurrenciesList,
     CurrencySettings,
+    // $FlowFixMe
+    DebugSettings,
+    // $FlowFixMe
+    DebugBLE,
+    // $FlowFixMe
+    BenchmarkQRStream,
   },
   StackNavigatorConfig,
 );
@@ -203,6 +216,7 @@ const AccountSettings = createStackNavigator(
     AccountSettingsMain,
     EditAccountUnits,
     EditAccountName,
+    AccountCurrencySettings: CurrencySettings,
   },
   StackNavigatorConfig,
 );

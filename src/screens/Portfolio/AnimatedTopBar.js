@@ -7,59 +7,51 @@ import {
   View,
   TouchableWithoutFeedback,
   SafeAreaView,
+  Platform,
 } from "react-native";
-import { translate } from "react-i18next";
-
 import type AnimatedValue from "react-native/Libraries/Animated/src/nodes/AnimatedValue";
-
-import colors from "../../colors";
-import type { T } from "../../types/common";
-
-import LText from "../../components/LText";
-import Space from "../../components/Space";
-import CurrencyUnitValue from "../../components/CurrencyUnitValue";
-import { getElevationStyle } from "../../components/ElevatedView";
-
 import type { Summary } from "../../components/provideSummary";
 import extraStatusBarPadding from "../../logic/extraStatusBarPadding";
-
 import { scrollToTopIntent } from "./events";
+import BalanceHeader from "./BalanceHeader";
+import HeaderErrorTitle from "../../components/HeaderErrorTitle";
+import HeaderSynchronizing from "../../components/HeaderSynchronizing";
 
 class AnimatedTopBar extends PureComponent<{
   scrollY: AnimatedValue,
   summary: Summary,
-  t: T,
+  pending: boolean,
+  error: ?Error,
 }> {
   onPress = () => {
     scrollToTopIntent.next();
   };
 
   render() {
-    const { scrollY, summary, t } = this.props;
+    const { scrollY, summary, pending, error } = this.props;
 
     const opacity = scrollY.interpolate({
-      inputRange: [140, 240],
+      inputRange: [90, 150],
       outputRange: [0, 1],
       extrapolate: "clamp",
     });
 
     return (
       <TouchableWithoutFeedback onPress={this.onPress}>
-        <Animated.View style={[getElevationStyle(8), styles.root, { opacity }]}>
+        <Animated.View style={[styles.root, { opacity }]}>
           <View style={[styles.outer, { paddingTop: extraStatusBarPadding }]}>
             <SafeAreaView>
-              <View style={styles.content}>
-                <LText secondary style={styles.labelText}>
-                  {t("common:portfolio.totalBalance")}
-                </LText>
-                <Space h={5} />
-                <LText tertiary style={styles.balanceText}>
-                  <CurrencyUnitValue
-                    unit={summary.counterValueCurrency.units[0]}
-                    value={summary.balanceEnd.value}
-                  />
-                </LText>
-              </View>
+              {pending ? (
+                <View style={styles.content}>
+                  <HeaderSynchronizing />
+                </View>
+              ) : error ? (
+                <View style={styles.content}>
+                  <HeaderErrorTitle error={error} />
+                </View>
+              ) : (
+                <BalanceHeader summary={summary} />
+              )}
             </SafeAreaView>
           </View>
         </Animated.View>
@@ -71,30 +63,32 @@ class AnimatedTopBar extends PureComponent<{
 const styles = StyleSheet.create({
   root: {
     backgroundColor: "white",
-    alignItems: "center",
-    justifyContent: "center",
     zIndex: 2,
     position: "absolute",
     top: 0,
     left: 0,
     right: 0,
+    ...Platform.select({
+      android: {
+        elevation: 1,
+      },
+      ios: {
+        shadowOpacity: 0.03,
+        shadowRadius: 8,
+        shadowOffset: {
+          height: 4,
+        },
+      },
+    }),
   },
   outer: {
     overflow: "hidden",
   },
   content: {
-    alignItems: "center",
     justifyContent: "center",
     paddingVertical: 8,
-  },
-  labelText: {
-    fontSize: 14,
-    color: colors.grey,
-  },
-  balanceText: {
-    fontSize: 16,
-    color: colors.darkBlue,
+    height: 56,
   },
 });
 
-export default translate()(AnimatedTopBar);
+export default AnimatedTopBar;

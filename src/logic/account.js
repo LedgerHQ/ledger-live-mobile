@@ -19,8 +19,6 @@ export const importExistingAccount = ({
   id,
   currencyId,
   name,
-  freshAddress,
-  freshAddressPath,
   index,
   balance,
 }: AccountData): Account => {
@@ -33,14 +31,14 @@ export const importExistingAccount = ({
     currency,
     index,
     // these fields will be completed as we will sync
-    freshAddress,
-    freshAddressPath,
+    freshAddress: "",
+    freshAddressPath: "",
     blockHeight: 0,
     balance: BigNumber(balance),
     operations: [],
     pendingOperations: [],
     unit: currency.units[0],
-    lastSyncDate: new Date(),
+    lastSyncDate: new Date(0),
   };
   return account;
 };

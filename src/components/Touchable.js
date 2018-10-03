@@ -3,7 +3,7 @@
 import React, { Component } from "react";
 import { TouchableOpacity } from "react-native";
 
-export default class GenericButton extends Component<
+export default class Touchable extends Component<
   {
     // when on press returns a promise,
     // the button will toggle in a pending state and
