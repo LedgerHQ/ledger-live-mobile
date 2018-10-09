@@ -12,13 +12,35 @@ export default class EditDeviceName extends Component<{
     title: "Edit Device Name",
   };
 
+  state = {
+    name: this.props.navigation.getParam("device").name,
+  };
+
+  onChangeText = name => {
+    this.setState({ name });
+  };
+
+  onSubmit = async () => {
+    const { name } = this.state;
+    const device = this.props.navigation.getParam("device");
+    if (device !== name) {
+      // TODO implement APDU to send this!
+    }
+    this.props.navigation.goBack();
+  };
+
   render() {
+    const { name } = this.state;
     return (
       <View style={{ flex: 1 }}>
         <View style={{ flex: 1 }}>
-          <TextInput value="current_name" style={{ padding: 10 }} />
+          <TextInput
+            value={name}
+            onChangeText={this.onChangeText}
+            style={{ padding: 10 }}
+          />
         </View>
-        <Button type="primary" title="Change name" />
+        <Button type="primary" title="Change name" onClick={this.onSubmit} />
       </View>
     );
   }

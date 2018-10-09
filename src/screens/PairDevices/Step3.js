@@ -1,15 +1,66 @@
 // @flow
 
-import React, { Component } from "react";
-import { TextInput, View } from "react-native";
+import React, { Component, PureComponent } from "react";
+import { View, ActivityIndicator } from "react-native";
 import type { NavigationScreenProp } from "react-navigation";
+import TransportBLE from "../../react-native-hw-transport-ble";
 import LText from "../../components/LText";
 import Button from "../../components/Button";
+import TranslatedError from "../../components/TranslatedError";
 import HeaderRightClose from "../../components/HeaderRightClose";
 
-export default class PairDevicesStep3 extends Component<{
-  navigation: NavigationScreenProp<*>,
-}> {
+class Success extends PureComponent<*> {
+  render() {
+    const { device, onEdit } = this.props;
+    return (
+      <View style={{ flex: 1 }}>
+        <View style={{ flex: 1 }}>
+          <LText semiBold>SUCCESS</LText>
+          <LText bold>{device.name}</LText>
+          <Button type="tertiary" title="Edit" onPress={onEdit} />
+        </View>
+        <Button type="primary" title="Continue" onPress={this.onPress} />
+      </View>
+    );
+  }
+}
+
+class ErrorCase extends PureComponent<*> {
+  render() {
+    const { error } = this.props;
+    return (
+      <View style={{ flex: 1 }}>
+        <View style={{ flex: 1 }}>
+          <LText>
+            <TranslatedError error={error} />
+          </LText>
+        </View>
+      </View>
+    );
+  }
+}
+
+class PendingCase extends PureComponent<*> {
+  render() {
+    return (
+      <View style={{ flex: 1 }}>
+        <View style={{ flex: 1 }}>
+          <ActivityIndicator />
+        </View>
+      </View>
+    );
+  }
+}
+
+export default class PairDevicesStep3 extends Component<
+  {
+    navigation: NavigationScreenProp<*>,
+  },
+  {
+    error: ?Error,
+    pending: boolean,
+  },
+> {
   static navigationOptions = ({ navigation }) => ({
     title: "Pairing success",
     headerRight: (
@@ -17,26 +68,55 @@ export default class PairDevicesStep3 extends Component<{
     ),
   });
 
+  state = {
+    error: null,
+    pending: true,
+  };
+
+  componentDidMount() {
+    this.doEverything();
+  }
+
+  doEverything = async () => {
+    const device = this.props.navigation.getParam("device");
+    try {
+      const transport = await TransportBLE.open(device);
+      transport.setDebugMode(true);
+      try {
+        // FIXME real genuine check!
+        await transport.send(0, 0, 0, 0);
+        this.setState({ pending: false });
+      } finally {
+        transport.close();
+      }
+    } catch (error) {
+      this.setState({ error });
+    }
+  };
+
   onEdit = () => {
+    const device = this.props.navigation.getParam("device");
     this.props.navigation.navigate("EditDeviceName", {
-      // Not yet sure what we would pass here. maybe a uuid
+      device,
     });
   };
 
-  onPress = () => {
+  onDone = () => {
     this.props.navigation.dangerouslyGetParent().goBack();
   };
 
   render() {
+    const { navigation } = this.props;
+    const { error, pending } = this.state;
+    const device = navigation.getParam("device");
+    if (error) {
+      return <ErrorCase error={error} />;
+    }
+    if (pending) {
+      return <PendingCase />;
+    }
     return (
-      <View style={{ flex: 1 }}>
-        <View style={{ flex: 1 }}>
-          <LText bold>SUCCESS</LText>
-          <LText>bla bla bla</LText>
-          <Button type="tertiary" title="Edit" onPress={this.onEdit} />
-        </View>
-        <Button type="primary" title="Continue" onPress={this.onPress} />
-      </View>
+      <Success device={device} onEdit={this.onEdit} onDone={this.onDone} />
     );
   }
 }
