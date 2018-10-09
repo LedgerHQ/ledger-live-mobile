@@ -180,6 +180,8 @@
     }
   },
   "settings": {
+    "configureDevice": "Configure device",
+    "configureDeviceDesc": "Pair new Ledger devices",
     "display": {
       "title": "General",
       "desc": "Change settings that affect Ledger Live in general.",

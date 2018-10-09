@@ -7,6 +7,7 @@ import RateProviderSettingsRow from "./RateProviderSettingsRow";
 import AuthSecurityToggle from "./AuthSecurityToggle";
 import ReportErrorsRow from "./ReportErrorsRow";
 import AnalyticsRow from "./AnalyticsRow";
+import ConfigureDevice from "./ConfigureDevice";
 
 class GeneralSettings extends PureComponent<{
   navigation: NavigationScreenProp<*>,
@@ -19,6 +20,7 @@ class GeneralSettings extends PureComponent<{
     const { navigation } = this.props;
     return (
       <ScrollView contentContainerStyle={styles.root}>
+        <ConfigureDevice navigation={navigation} />
         <CountervalueSettingsRow navigation={navigation} />
         <RateProviderSettingsRow navigation={navigation} />
         <AuthSecurityToggle />
