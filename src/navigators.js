@@ -1,8 +1,10 @@
 // @flow
 import React from "react";
 import { StyleSheet, StatusBar, Platform } from "react-native";
-import { createStackNavigator } from "react-navigation";
-import { createBottomTabNavigator, BottomTabBar } from "react-navigation-tabs";
+import {
+  createStackNavigator,
+  createBottomTabNavigator,
+} from "react-navigation";
 import config from "react-native-config";
 import colors from "./colors";
 import SettingsIcon from "./icons/Settings";
@@ -10,6 +12,7 @@ import ManagerIcon from "./icons/Manager";
 import AccountsIcon from "./icons/Accounts";
 import HeaderTitle from "./components/HeaderTitle";
 import HeaderBackImage from "./components/HeaderBackImage";
+import defaultNavigationOptions from "./screens/defaultNavigationOptions";
 import Portfolio from "./screens/Portfolio";
 import Accounts from "./screens/Accounts";
 import Account from "./screens/Account";
@@ -73,6 +76,7 @@ const styles = StyleSheet.create({
   transparentHeader: {
     backgroundColor: "transparent",
   },
+  labelStyle: { fontSize: 12 },
 });
 
 const StackNavigatorConfig = {
@@ -120,6 +124,7 @@ const SettingsStack = createStackNavigator(
 );
 
 SettingsStack.navigationOptions = {
+  ...defaultNavigationOptions,
   tabBarIcon: ({ tintColor }: *) => (
     <SettingsIcon size={18} color={tintColor} />
   ),
@@ -134,6 +139,7 @@ const ManagerStack = createStackNavigator(
 );
 
 ManagerStack.navigationOptions = {
+  ...defaultNavigationOptions,
   tabBarIcon: ({ tintColor }: *) => <ManagerIcon size={18} color={tintColor} />,
 };
 
@@ -145,25 +151,12 @@ const AccountsStack = createStackNavigator(
   StackNavigatorConfig,
 );
 AccountsStack.navigationOptions = {
+  ...defaultNavigationOptions,
   header: null,
   tabBarIcon: ({ tintColor }: *) => (
     <AccountsIcon size={18} color={tintColor} />
   ),
 };
-
-const labelStyle = {
-  fontFamily: "Museo Sans",
-  fontSize: 12,
-  fontWeight: Platform.OS === "android" ? "SemiBold" : "400",
-};
-
-const CustomTabBar = props => (
-  <BottomTabBar
-    {...props}
-    style={styles.bottomTabBar}
-    labelStyle={labelStyle}
-  />
-);
 
 const getTabItems = () => {
   const items: any = {
@@ -182,7 +175,9 @@ const getTabItems = () => {
 };
 
 const Main = createBottomTabNavigator(getTabItems(), {
-  tabBarComponent: CustomTabBar,
+  tabBarOptions: {
+    style: styles.bottomTabBar,
+  },
 });
 
 Main.navigationOptions = {
