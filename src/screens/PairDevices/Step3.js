@@ -11,7 +11,7 @@ import HeaderRightClose from "../../components/HeaderRightClose";
 
 class Success extends PureComponent<*> {
   render() {
-    const { device, onEdit } = this.props;
+    const { device, onEdit, onDone } = this.props;
     return (
       <View style={{ flex: 1 }}>
         <View style={{ flex: 1 }}>
@@ -19,7 +19,7 @@ class Success extends PureComponent<*> {
           <LText bold>{device.name}</LText>
           <Button type="tertiary" title="Edit" onPress={onEdit} />
         </View>
-        <Button type="primary" title="Continue" onPress={this.onPress} />
+        <Button type="primary" title="Continue" onPress={onDone} />
       </View>
     );
   }
