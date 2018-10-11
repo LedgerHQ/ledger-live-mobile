@@ -5,8 +5,7 @@ import Transport, { TransportError } from "@ledgerhq/hw-transport";
 import { BleManager } from "react-native-ble-plx";
 
 const ServiceUuid = "d973f2e0-b19e-11e2-9e96-0800200c9a66";
-const ConnectionWriteCharacteristicUuid =
-  "d973f2e3-b19e-11e2-9e96-0800200c9a66";
+const RenameCharacteristicUuid = "d973f2e3-b19e-11e2-9e96-0800200c9a66";
 const WriteCharacteristicUuid = "d973f2e2-b19e-11e2-9e96-0800200c9a66";
 const NotifyCharacteristicUuid = "d973f2e1-b19e-11e2-9e96-0800200c9a66";
 const MaxChunkBytes = 20;
@@ -190,19 +189,19 @@ export default class BluetoothTransport extends Transport<Device> {
     }
     let writeC;
     let notifyC;
-    let connectC;
+    let renameC;
     for (const c of characteristics) {
-      if (c.uuid === ConnectionWriteCharacteristicUuid) {
-        connectC = c;
+      if (c.uuid === RenameCharacteristicUuid) {
+        renameC = c;
       } else if (c.uuid === WriteCharacteristicUuid) {
         writeC = c;
       } else if (c.uuid === NotifyCharacteristicUuid) {
         notifyC = c;
       }
     }
-    if (!connectC) {
+    if (!renameC) {
       throw new TransportError(
-        "connect characteristic not found",
+        "rename characteristic not found",
         "BLEChracteristicNotFound",
       );
     }
@@ -218,9 +217,9 @@ export default class BluetoothTransport extends Transport<Device> {
         "BLEChracteristicNotFound",
       );
     }
-    if (!connectC.isWritableWithResponse) {
+    if (!renameC.isWritableWithResponse) {
       throw new TransportError(
-        "write characteristic not writableWithResponse",
+        "rename characteristic not writableWithResponse",
         "BLEChracteristicInvalid",
       );
     }
@@ -239,11 +238,11 @@ export default class BluetoothTransport extends Transport<Device> {
 
     /*
 
-    await connectC.writeWithoutResponse(Buffer.from([0x01]).toString("base64"));
+    await renameC.writeWithoutResponse(Buffer.from([0x01]).toString("base64"));
 
     */
 
-    return new BluetoothTransport(device, writeC, notifyC, connectC);
+    return new BluetoothTransport(device, writeC, notifyC, renameC);
   }
 
   device: Device;
@@ -252,19 +251,19 @@ export default class BluetoothTransport extends Transport<Device> {
 
   notifyCharacteristic: Characteristic;
 
-  connectCharacteristic: Characteristic;
+  renameCharacteristic: Characteristic;
 
   constructor(
     device: Device,
     writeCharacteristic: Characteristic,
     notifyCharacteristic: Characteristic,
-    connectCharacteristic: Characteristic,
+    renameCharacteristic: Characteristic,
   ) {
     super();
     this.device = device;
     this.writeCharacteristic = writeCharacteristic;
     this.notifyCharacteristic = notifyCharacteristic;
-    this.connectCharacteristic = connectCharacteristic;
+    this.renameCharacteristic = renameCharacteristic;
     device.onDisconnected(e => {
       if (this.debug) {
         console.log("BLE disconnect", this.device); // eslint-disable-line

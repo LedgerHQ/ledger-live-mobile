@@ -41,7 +41,7 @@ export default class EditDeviceName extends Component<
         Buffer.from(name),
       ]).toString("base64");
 
-      await transport.connectCharacteristic.writeWithResponse(formattedName);
+      await transport.renameCharacteristic.writeWithResponse(formattedName);
       transport.close();
     }
     this.props.navigation.goBack();
