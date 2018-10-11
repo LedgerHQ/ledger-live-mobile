@@ -150,7 +150,7 @@ AccountsStack.navigationOptions = {
 const labelStyle = {
   fontFamily: "Museo Sans",
   fontSize: 12,
-  fontWeight: Platform.OS === "android" ? "SemiBold" : "400",
+  fontWeight: "400",
 };
 
 const CustomTabBar = props => (
