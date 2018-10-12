@@ -11,8 +11,6 @@ const NotifyCharacteristicUuid = "d973f2e1-b19e-11e2-9e96-0800200c9a66";
 const MaxChunkBytes = 20;
 const TagId = 0x05;
 
-const acceptServiceUUID = uuid => uuid === ServiceUuid;
-
 type Device = *;
 type Characteristic = *;
 
@@ -149,18 +147,13 @@ export default class BluetoothTransport extends Transport<Device> {
 
     const onBleStateChange = (state: string) => {
       if (state === "PoweredOn") {
-        bleManager.startDeviceScan(null, null, (bleError, device) => {
+        bleManager.startDeviceScan([ServiceUuid], null, (bleError, device) => {
           if (bleError) {
             observer.error(bleError);
             unsubscribe();
             return;
           }
-          if (
-            device.serviceUUIDs &&
-            device.serviceUUIDs.some(acceptServiceUUID)
-          ) {
-            observer.next({ type: "add", descriptor: device });
-          }
+          observer.next({ type: "add", descriptor: device });
         });
         if (sub) sub.remove();
       } else if (state === "Unsupported") {
