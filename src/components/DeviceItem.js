@@ -1,19 +1,23 @@
 // @flow
 
 import React, { PureComponent } from "react";
-import { View } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { RectButton } from "react-native-gesture-handler";
 import LText from "./LText";
 import colors from "../colors";
+import IconNanoX from "../icons/NanoX";
+import IconArrowRight from "../icons/ArrowRight";
 
-type Device = *;
+type Device = {
+  id: string,
+  name: string,
+};
 
 type Props = {
   device: Device,
   disabled?: boolean,
-  description?: *,
+  description?: string,
   onSelect?: Device => void,
-  selected?: boolean,
 };
 
 export default class DeviceItem extends PureComponent<Props> {
@@ -23,50 +27,90 @@ export default class DeviceItem extends PureComponent<Props> {
   };
 
   render() {
-    const { device, disabled, selected, onSelect, description } = this.props;
-    // FIXME StyleSheet this properly. split more if necessary
+    const { device, disabled, onSelect, description } = this.props;
+
     let res = (
-      <View
-        style={{
-          margin: 5,
-          padding: 5,
-          opacity: disabled ? 0.4 : 1,
-          borderBottomWidth: disabled ? 0 : 1,
-          borderBottomColor: colors.grey,
-          backgroundColor: !disabled ? colors.white : colors.grey,
-        }}
-      >
-        <View style={{ flexDirection: "row", alignItems: "center" }}>
-          <LText>ICON</LText>
-          <View
-            style={{ flexDirection: "column", alignItems: "center", flex: 1 }}
+      <View style={[styles.root, disabled && styles.rootDisabled]}>
+        <IconNanoX
+          color={colors.darkBlue}
+          height={36}
+          width={8}
+          style={disabled ? styles.deviceIconDisabled : undefined}
+        />
+        <View style={styles.content}>
+          <LText
+            bold
+            numberOfLines={1}
+            style={[
+              styles.deviceNameText,
+              disabled && styles.deviceNameTextDisabled,
+            ]}
           >
-            <LText bold numberOfLines={1} style={{ fontSize: 14 }}>
-              {device.name}
+            {device.name}
+          </LText>
+          {description ? (
+            <LText
+              numberOfLines={1}
+              style={[
+                styles.descriptionText,
+                disabled && styles.descriptionTextDisabled,
+              ]}
+            >
+              {description}
             </LText>
-            {description ? (
-              typeof description === "string" ? (
-                <LText semiBold numberOfLines={1} style={{ fontSize: 14 }}>
-                  {description}
-                </LText>
-              ) : (
-                description
-              )
-            ) : null}
-          </View>
-          {onSelect ? (
-            <View style={{ width: 50 }}>
-              {selected ? <LText>✓</LText> : null}
-            </View>
           ) : null}
         </View>
+        {!disabled && <IconArrowRight size={16} color={colors.grey} />}
       </View>
     );
 
-    if (onSelect) {
+    if (onSelect && !disabled) {
       res = <RectButton onPress={this.onPress}>{res}</RectButton>;
     }
 
-    return res;
+    return <View style={styles.outer}>{res}</View>;
   }
 }
+
+const styles = StyleSheet.create({
+  outer: {
+    marginBottom: 16,
+  },
+  root: {
+    paddingVertical: 14,
+    paddingHorizontal: 24,
+    borderColor: colors.fog,
+    borderWidth: 1,
+    borderRadius: 4,
+    flexDirection: "row",
+    alignItems: "center",
+    overflow: "hidden",
+  },
+  rootDisabled: {
+    borderWidth: 0,
+    backgroundColor: colors.lightGrey,
+  },
+  content: {
+    flexDirection: "column",
+    justifyContent: "center",
+    flexGrow: 1,
+    marginLeft: 24,
+  },
+  deviceIconDisabled: {
+    opacity: 0.4,
+  },
+  deviceNameText: {
+    fontSize: 14,
+    color: colors.darkBlue,
+  },
+  deviceNameTextDisabled: {
+    color: colors.grey,
+  },
+  descriptionText: {
+    fontSize: 14,
+    color: colors.darkBlue,
+  },
+  descriptionTextDisabled: {
+    color: colors.grey,
+  },
+});

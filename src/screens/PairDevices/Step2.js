@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from "react";
-import { View, FlatList } from "react-native";
+import { View, FlatList, StyleSheet } from "react-native";
 import { Observable } from "rxjs";
 import type { NavigationScreenProp } from "react-navigation";
 import TransportBLE from "../../react-native-hw-transport-ble";
@@ -9,6 +9,8 @@ import LText from "../../components/LText";
 import Button from "../../components/Button";
 import HeaderRightClose from "../../components/HeaderRightClose";
 import DeviceItem from "../../components/DeviceItem";
+import BluetoothScanning from "./assets/BluetoothScanning";
+import colors from "../../colors";
 
 // In step 2, we assume the pre-check that BLE is on has been passed.
 // yet we should always display errors properly. if you are on step2 and disable BLE,
@@ -84,11 +86,14 @@ export default class PairDevicesStep2 extends Component<Props, State> {
 
   renderItem = ({ item }: { item: * }) => {
     const { selectedDevice } = this.state;
+
     return (
       <DeviceItem
         device={item}
         onSelect={this.onSelect}
         selected={selectedDevice ? item.id === selectedDevice.id : false}
+        disabled={item.name === "Nano Y"}
+        description="This is the description"
       />
     );
   };
@@ -111,6 +116,12 @@ export default class PairDevicesStep2 extends Component<Props, State> {
     });
   };
 
+  ListHeader = () => (
+    <View style={styles.listHeader}>
+      <BluetoothScanning />
+    </View>
+  );
+
   render() {
     const { items, bleError, selectedDevice } = this.state;
 
@@ -122,12 +133,29 @@ export default class PairDevicesStep2 extends Component<Props, State> {
     // TODO implement pull to refresh to trigger a restart!
 
     return (
-      <View style={{ flex: 1 }}>
+      <View style={styles.root}>
         <FlatList
-          style={{ flex: 1 }}
+          style={styles.list}
           data={items}
           renderItem={this.renderItem}
           keyExtractor={this.keyExtractor}
+          ListHeaderComponent={
+            <View style={styles.listHeader}>
+              <BluetoothScanning />
+              <View style={styles.listHeaderTitleContainer}>
+                <LText secondary bold style={styles.listHeaderTitleText}>
+                  We are searching for Nano X
+                </LText>
+              </View>
+              <View style={styles.listHeaderSubtitleContainer}>
+                <LText style={styles.listHeaderSubtitleText}>
+                  {
+                    "Please be sure power is on, you have enter your PIN and bluetooth is enabled"
+                  }
+                </LText>
+              </View>
+            </View>
+          }
         />
         <Button
           type="primary"
@@ -139,3 +167,34 @@ export default class PairDevicesStep2 extends Component<Props, State> {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  root: {
+    flex: 1,
+    backgroundColor: colors.white,
+  },
+  list: {
+    flex: 1,
+    paddingHorizontal: 16,
+  },
+  listHeader: {
+    paddingVertical: 32,
+    alignItems: "center",
+  },
+  listHeaderTitleContainer: {
+    marginTop: 24,
+  },
+  listHeaderTitleText: {
+    color: colors.darkBlue,
+    fontSize: 18,
+  },
+  listHeaderSubtitleContainer: {
+    maxWidth: 288,
+    marginTop: 8,
+  },
+  listHeaderSubtitleText: {
+    textAlign: "center",
+    fontSize: 14,
+    color: colors.grey,
+  },
+});
