@@ -248,11 +248,14 @@ ImportAccounts.navigationOptions = {
   header: null,
 };
 
-const PairDevices = createStackNavigator({
-  PairDevicesStep1,
-  PairDevicesStep2,
-  PairDevicesStep3,
-});
+const PairDevices = createStackNavigator(
+  {
+    PairDevicesStep1,
+    PairDevicesStep2,
+    PairDevicesStep3,
+  },
+  StackNavigatorConfig,
+);
 
 PairDevices.navigationOptions = {
   header: null,
