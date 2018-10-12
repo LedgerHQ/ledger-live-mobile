@@ -24,11 +24,11 @@ type State = {
   items: *[],
   bleError: ?Error,
   scanning: boolean,
-  selectedDevice: ?string,
+  selectedDevice: ?*,
 };
 
 export default class PairDevicesStep2 extends Component<Props, State> {
-  static navigationOptions = ({ navigation }) => ({
+  static navigationOptions = ({ navigation }: *) => ({
     title: "Choose your device",
     headerRight: (
       <HeaderRightClose navigation={navigation.dangerouslyGetParent()} />
@@ -88,7 +88,7 @@ export default class PairDevicesStep2 extends Component<Props, State> {
       <DeviceItem
         device={item}
         onSelect={this.onSelect}
-        selected={selectedDevice && item.id === selectedDevice.id}
+        selected={selectedDevice ? item.id === selectedDevice.id : false}
       />
     );
   };

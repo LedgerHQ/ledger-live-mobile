@@ -61,7 +61,7 @@ export default class PairDevicesStep3 extends Component<
     pending: boolean,
   },
 > {
-  static navigationOptions = ({ navigation }) => ({
+  static navigationOptions = ({ navigation }: *) => ({
     title: "Pairing success",
     headerRight: (
       <HeaderRightClose navigation={navigation.dangerouslyGetParent()} />

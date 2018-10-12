@@ -22,7 +22,7 @@ export default class EditDeviceName extends Component<
     name: this.props.navigation.getParam("device").name,
   };
 
-  onChangeText = name => {
+  onChangeText = (name: string) => {
     this.setState({ name });
   };
 

@@ -11,7 +11,7 @@ import LText from "../../components/LText";
 export default class PairDevicesStep1 extends Component<{
   navigation: NavigationScreenProp<*>,
 }> {
-  static navigationOptions = ({ navigation }) => ({
+  static navigationOptions = ({ navigation }: *) => ({
     title: "Pair a new device",
     headerRight: (
       <HeaderRightClose navigation={navigation.dangerouslyGetParent()} />

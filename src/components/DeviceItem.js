@@ -6,7 +6,7 @@ import { RectButton } from "react-native-gesture-handler";
 import LText from "./LText";
 import colors from "../colors";
 
-type Device = { name: string };
+type Device = *;
 
 type Props = {
   device: Device,
