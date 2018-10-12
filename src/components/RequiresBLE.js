@@ -3,12 +3,13 @@
 // otherwise render an error
 
 import React, { PureComponent, Component } from "react";
+import { Observable } from "rxjs/Observable";
 import { View, StyleSheet } from "react-native";
-import { BleManager } from "react-native-ble-plx";
+import TransportBLE from "../react-native-hw-transport-ble";
 import LText from "./LText";
 import RequiresLocationOnAndroid from "./RequiresLocationOnAndroid";
 
-class NoBluetooth extends PureComponent<{ state: string }> {
+class NoBluetooth extends PureComponent<{ type: string }> {
   render() {
     // NB based on the state we could have different wording?
     return (
@@ -24,37 +25,35 @@ class RequiresBLE extends Component<
     children: *,
   },
   {
-    state: *,
+    type: *,
   },
 > {
   state = {
-    state: "Unknown",
+    type: "Unknown",
   };
 
-  manager = new BleManager();
+  sub: *;
 
-  async componentDidMount() {
-    this.manager.onStateChange(state => {
-      this.setState({ state });
+  componentDidMount() {
+    this.sub = Observable.create(TransportBLE.observeState).subscribe({
+      next: ({ type }) => type,
     });
-    const state = await this.manager.state();
-    this.setState({ state });
   }
 
   componentWillUnmount() {
-    this.manager.destroy();
+    this.sub.unsubscribe();
   }
 
   render() {
     const { children } = this.props;
-    const { state } = this.state;
-    if (state === "Unknown") return null; // suspense PLZ
-    if (state === "PoweredOn") {
+    const { type } = this.state;
+    if (type === "Unknown") return null; // suspense PLZ
+    if (type === "PoweredOn") {
       return children;
     }
     return (
       <View style={styles.container}>
-        <NoBluetooth state={state} />
+        <NoBluetooth type={type} />
       </View>
     );
   }

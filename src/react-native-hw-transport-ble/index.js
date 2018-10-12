@@ -125,6 +125,23 @@ export default class BluetoothTransport extends Transport<Device> {
   static isSupported = (): Promise<boolean> =>
     Promise.resolve(typeof BleManager === "function");
 
+  /**
+   * TODO could add this concept in all transports
+   * observe event with { available: bool, type: string } // available is generic, type is specific
+   * an event is emit once and then listened
+   */
+  static observeState(observer: *) {
+    const manager = new BleManager();
+    const emitFromState = type => {
+      observer.next({ type, available: type === "PoweredOn" });
+    };
+    manager.onStateChange(emitFromState);
+    manager.state().then(emitFromState);
+    return {
+      unsubscribe: () => manager.destroy(),
+    };
+  }
+
   static list = (): * => Promise.resolve([]);
 
   /**
@@ -228,12 +245,6 @@ export default class BluetoothTransport extends Transport<Device> {
         "BLEChracteristicInvalid",
       );
     }
-
-    /*
-
-    await renameC.writeWithoutResponse(Buffer.from([0x01]).toString("base64"));
-
-    */
 
     return new BluetoothTransport(device, writeC, notifyC, renameC);
   }

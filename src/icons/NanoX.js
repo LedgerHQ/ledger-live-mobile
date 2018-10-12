@@ -4,9 +4,9 @@ import React from "react";
 import Svg, { Path, G } from "react-native-svg";
 
 type Props = {
-  size: number,
-  width: number,
-  height: number,
+  size?: number,
+  width?: number,
+  height?: number,
   color: string,
   style: *,
 };

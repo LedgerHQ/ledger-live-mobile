@@ -4,6 +4,7 @@ import React, { Component } from "react";
 import { TextInput, View } from "react-native";
 import type { NavigationScreenProp } from "react-navigation";
 import TransportBLE from "../react-native-hw-transport-ble";
+import editDeviceName from "../logic/hw/editDeviceName";
 import Button from "../components/Button";
 
 export default class EditDeviceName extends Component<
@@ -29,19 +30,9 @@ export default class EditDeviceName extends Component<
   onSubmit = async () => {
     const { name } = this.state;
     const device = this.props.navigation.getParam("device");
-
     if (device.name !== name) {
       const transport = await TransportBLE.open(device);
-
-      // Temporary BLE thingy for demoing rename,
-      // should use real APDU in final release
-
-      const formattedName = Buffer.concat([
-        Buffer.alloc(1),
-        Buffer.from(name),
-      ]).toString("base64");
-
-      await transport.renameCharacteristic.writeWithResponse(formattedName);
+      await editDeviceName(transport, name);
       transport.close();
     }
     this.props.navigation.goBack();

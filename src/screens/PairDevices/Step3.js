@@ -4,6 +4,7 @@ import React, { Component, PureComponent } from "react";
 import { View, ActivityIndicator } from "react-native";
 import type { NavigationScreenProp } from "react-navigation";
 import TransportBLE from "../../react-native-hw-transport-ble";
+import genuineCheck from "../../logic/hw/genuineCheck";
 import LText from "../../components/LText";
 import Button from "../../components/Button";
 import TranslatedError from "../../components/TranslatedError";
@@ -83,8 +84,7 @@ export default class PairDevicesStep3 extends Component<
       const transport = await TransportBLE.open(device);
       transport.setDebugMode(true);
       try {
-        // FIXME real genuine check!
-        await transport.send(0, 0, 0, 0);
+        await genuineCheck(transport);
         this.setState({ pending: false });
       } finally {
         transport.close();
