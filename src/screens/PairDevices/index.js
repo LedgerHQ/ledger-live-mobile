@@ -4,11 +4,13 @@ import React, { Component } from "react";
 import { View, FlatList, StyleSheet } from "react-native";
 import { Observable } from "rxjs";
 import type { NavigationScreenProp } from "react-navigation";
+import { BleErrorCode } from "react-native-ble-plx";
 
 import TransportBLE from "../../react-native-hw-transport-ble";
 import LText from "../../components/LText";
 import Pairing from "./Pairing";
 import Paired from "./Paired";
+import LocationRequired from "../LocationRequired";
 import HeaderRightClose from "../../components/HeaderRightClose";
 import DeviceItem from "../../components/DeviceItem";
 import BluetoothScanning from "./assets/BluetoothScanning";
@@ -31,7 +33,7 @@ type State = {
   status: Status,
   devices: Device[],
   device: ?Device,
-  error: ?Error,
+  error: ?*,
 };
 
 class PairDevices extends Component<Props, State> {
@@ -145,6 +147,10 @@ class PairDevices extends Component<Props, State> {
     const { devices, error, status, device } = this.state;
 
     if (error) {
+      if (error.errorCode === BleErrorCode.LocationServicesDisabled) {
+        return <LocationRequired />;
+      }
+
       return <LText>{error.message}</LText>;
     }
 

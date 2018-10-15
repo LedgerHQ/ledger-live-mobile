@@ -2,36 +2,9 @@
 // renders children if Location is available
 // otherwise render an error
 
-import React, { PureComponent, Component } from "react";
-import { View, StyleSheet, PermissionsAndroid } from "react-native";
-import NoLocationImage from "./assets/NoLocationImage";
-import LText from "../LText";
-import colors from "../../colors";
-
-class NoLocation extends PureComponent<{}> {
-  render() {
-    return (
-      <View style={styles.container}>
-        <NoLocationImage />
-        <View>
-          <LText bold secondary style={styles.titleFont}>
-            Location required
-          </LText>
-        </View>
-        <View>
-          <LText style={styles.descFont}>
-            It seems location detection is disabled on your mobile. Go to
-            settings and enable location to activate bluetooth.
-          </LText>
-          <LText style={styles.descFont}>
-            Lorem Elsass ipsum Racing. hopla Verdammi purus lotto-owe Huguette
-            sit schnaps porta placerat Pfourtz !
-          </LText>
-        </View>
-      </View>
-    );
-  }
-}
+import React, { Component } from "react";
+import { PermissionsAndroid } from "react-native";
+import LocationRequired from "../../screens/LocationRequired";
 
 const permission = PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION;
 
@@ -70,30 +43,6 @@ export default class RequiresBLE extends Component<
     if (state === PermissionsAndroid.RESULTS.GRANTED) {
       return children;
     }
-    return (
-      <View style={styles.container}>
-        <NoLocation />
-      </View>
-    );
+    return <LocationRequired />;
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  titleFont: {
-    color: colors.darkBlue,
-    fontSize: 18,
-    marginTop: 24,
-  },
-  descFont: {
-    color: colors.grey,
-    fontSize: 14,
-    textAlign: "center",
-    marginTop: 8,
-    maxWidth: 250,
-  },
-});
