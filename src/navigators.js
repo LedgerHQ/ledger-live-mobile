@@ -47,9 +47,7 @@ import DebugBLE from "./screens/DebugBLE";
 import DebugCrash from "./screens/DebugCrash";
 import BenchmarkQRStream from "./screens/BenchmarkQRStream";
 import EditDeviceName from "./screens/EditDeviceName";
-import PairDevicesStep1 from "./screens/PairDevices/Step1";
-import PairDevicesStep2 from "./screens/PairDevices/Step2";
-import PairDevicesStep3 from "./screens/PairDevices/Step3";
+import PairDevices from "./screens/PairDevices";
 
 // TODO look into all FlowFixMe
 
@@ -245,19 +243,6 @@ const ImportAccounts = createStackNavigator(
 );
 
 ImportAccounts.navigationOptions = {
-  header: null,
-};
-
-const PairDevices = createStackNavigator(
-  {
-    PairDevicesStep1,
-    PairDevicesStep2,
-    PairDevicesStep3,
-  },
-  StackNavigatorConfig,
-);
-
-PairDevices.navigationOptions = {
   header: null,
 };
 

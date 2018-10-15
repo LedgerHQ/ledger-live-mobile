@@ -10,6 +10,7 @@ import Button from "../../components/Button";
 import HeaderRightClose from "../../components/HeaderRightClose";
 import DeviceItem from "../../components/DeviceItem";
 import BluetoothScanning from "./assets/BluetoothScanning";
+import RequiresBLE from "../../components/RequiresBLE";
 import colors from "../../colors";
 
 // In step 2, we assume the pre-check that BLE is on has been passed.
@@ -133,37 +134,39 @@ export default class PairDevicesStep2 extends Component<Props, State> {
     // TODO implement pull to refresh to trigger a restart!
 
     return (
-      <View style={styles.root}>
-        <FlatList
-          style={styles.list}
-          data={items}
-          renderItem={this.renderItem}
-          keyExtractor={this.keyExtractor}
-          ListHeaderComponent={
-            <View style={styles.listHeader}>
-              <BluetoothScanning />
-              <View style={styles.listHeaderTitleContainer}>
-                <LText secondary bold style={styles.listHeaderTitleText}>
-                  We are searching for Nano X
-                </LText>
+      <RequiresBLE>
+        <View style={styles.root}>
+          <FlatList
+            style={styles.list}
+            data={items}
+            renderItem={this.renderItem}
+            keyExtractor={this.keyExtractor}
+            ListHeaderComponent={
+              <View style={styles.listHeader}>
+                <BluetoothScanning />
+                <View style={styles.listHeaderTitleContainer}>
+                  <LText secondary bold style={styles.listHeaderTitleText}>
+                    We are searching for Nano X
+                  </LText>
+                </View>
+                <View style={styles.listHeaderSubtitleContainer}>
+                  <LText style={styles.listHeaderSubtitleText}>
+                    {
+                      "Please be sure power is on, you have enter your PIN and bluetooth is enabled"
+                    }
+                  </LText>
+                </View>
               </View>
-              <View style={styles.listHeaderSubtitleContainer}>
-                <LText style={styles.listHeaderSubtitleText}>
-                  {
-                    "Please be sure power is on, you have enter your PIN and bluetooth is enabled"
-                  }
-                </LText>
-              </View>
-            </View>
-          }
-        />
-        <Button
-          type="primary"
-          title="Continue"
-          onPress={this.onPress}
-          disabled={!selectedDevice}
-        />
-      </View>
+            }
+          />
+          <Button
+            type="primary"
+            title="Continue"
+            onPress={this.onPress}
+            disabled={!selectedDevice}
+          />
+        </View>
+      </RequiresBLE>
     );
   }
 }
