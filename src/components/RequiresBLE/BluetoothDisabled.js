@@ -44,5 +44,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     textAlign: "center",
     marginTop: 8,
+    maxWidth: 250,
   },
 });
