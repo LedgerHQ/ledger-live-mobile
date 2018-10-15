@@ -36,7 +36,7 @@ class RequiresBLE extends Component<
 
   componentDidMount() {
     this.sub = Observable.create(TransportBLE.observeState).subscribe({
-      next: ({ type }) => type,
+      next: ({ type }) => this.setState({ type }),
     });
   }
 

@@ -263,7 +263,6 @@ PairDevices.navigationOptions = {
 
 export const RootNavigator = createStackNavigator(
   {
-    PairDevices,
     Main,
     ReceiveFunds,
     SendFunds,
@@ -271,6 +270,7 @@ export const RootNavigator = createStackNavigator(
     AccountSettings,
     ImportAccounts,
     SendFundsSettings,
+    PairDevices,
     EditDeviceName,
   },
   {
