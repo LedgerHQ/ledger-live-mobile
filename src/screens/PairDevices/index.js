@@ -65,7 +65,7 @@ class PairDevices extends Component<Props, State> {
     /*
     @thibaut can you test it?
 
-    const devices = await TransportBLE.connectedDevices();
+    const devices = await TransportBLE.list();
 
     console.log({ devices });
 

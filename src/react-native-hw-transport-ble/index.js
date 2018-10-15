@@ -141,7 +141,10 @@ export default class BluetoothTransport extends Transport<Device> {
     };
   }
 
-  static list = (): * => Promise.resolve([]);
+  static list = (): * => {
+    const bleManager = new BleManager();
+    return bleManager.connectedDevices([ServiceUuid]);
+  };
 
   static listen(observer: *) {
     const bleManager = new BleManager();
@@ -157,12 +160,6 @@ export default class BluetoothTransport extends Transport<Device> {
       observer.next({ type: "add", descriptor: device });
     });
     return { unsubscribe };
-  }
-
-  static async connectedDevices() {
-    const bleManager = new BleManager();
-    const devices = await bleManager.connectedDevices([ServiceUuid]);
-    return devices;
   }
 
   static async open(device: Device) {
