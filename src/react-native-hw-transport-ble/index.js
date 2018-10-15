@@ -135,8 +135,7 @@ export default class BluetoothTransport extends Transport<Device> {
     const emitFromState = type => {
       observer.next({ type, available: type === "PoweredOn" });
     };
-    manager.onStateChange(emitFromState);
-    manager.state().then(emitFromState);
+    manager.onStateChange(emitFromState, true);
     return {
       unsubscribe: () => manager.destroy(),
     };
@@ -144,51 +143,28 @@ export default class BluetoothTransport extends Transport<Device> {
 
   static list = (): * => Promise.resolve([]);
 
-  /**
-   */
   static listen(observer: *) {
-    // TODO: Android: we need to trigger a permission for Location because it does not seem to happen automatically! and it is required for BLE..
-
-    let bleManager;
-    try {
-      bleManager = new BleManager();
-    } catch (e) {
-      // basically for the tests to pass
-      console.warn(e);
-      return { unsubscribe: () => {} };
-    }
+    const bleManager = new BleManager();
     const unsubscribe = () => {
-      sub.remove();
       bleManager.stopDeviceScan();
     };
-
-    const onBleStateChange = (state: string) => {
-      if (state === "PoweredOn") {
-        bleManager.startDeviceScan([ServiceUuid], null, (bleError, device) => {
-          if (bleError) {
-            observer.error(bleError);
-            unsubscribe();
-            return;
-          }
-          observer.next({ type: "add", descriptor: device });
-        });
-        if (sub) sub.remove();
-      } else if (state === "Unsupported") {
+    bleManager.startDeviceScan([ServiceUuid], null, (bleError, device) => {
+      if (bleError) {
+        observer.error(bleError);
         unsubscribe();
-        observer.error(
-          new TransportError(
-            "Bluetooth BLE is not supported",
-            "BLENotSupported",
-          ),
-        );
+        return;
       }
-    };
-    const sub = bleManager.onStateChange(onBleStateChange, true);
+      observer.next({ type: "add", descriptor: device });
+    });
     return { unsubscribe };
   }
 
-  /**
-   */
+  static async connectedDevices() {
+    const bleManager = new BleManager();
+    const devices = await bleManager.connectedDevices([ServiceUuid]);
+    return devices;
+  }
+
   static async open(device: Device) {
     await device.connect();
     await device.discoverAllServicesAndCharacteristics();
@@ -209,12 +185,6 @@ export default class BluetoothTransport extends Transport<Device> {
         notifyC = c;
       }
     }
-    if (!renameC) {
-      throw new TransportError(
-        "rename characteristic not found",
-        "BLEChracteristicNotFound",
-      );
-    }
     if (!writeC) {
       throw new TransportError(
         "write characteristic not found",
@@ -225,12 +195,6 @@ export default class BluetoothTransport extends Transport<Device> {
       throw new TransportError(
         "notify characteristic not found",
         "BLEChracteristicNotFound",
-      );
-    }
-    if (!renameC.isWritableWithResponse) {
-      throw new TransportError(
-        "rename characteristic not writableWithResponse",
-        "BLEChracteristicInvalid",
       );
     }
     if (!writeC.isWritableWithResponse) {

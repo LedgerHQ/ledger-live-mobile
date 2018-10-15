@@ -57,10 +57,20 @@ class PairDevices extends Component<Props, State> {
     this.startScan();
   }
 
-  startScan = () => {
+  startScan = async () => {
     // TODO there need to be a timeout that happen if no device are found in X seconds.
 
     this.setState({ status: "scanning" });
+
+    /*
+    @thibaut can you test it?
+
+    const devices = await TransportBLE.connectedDevices();
+
+    console.log({ devices });
+
+    this.setState({ devices });
+    */
 
     this.sub = Observable.create(TransportBLE.listen).subscribe({
       complete: () => {
