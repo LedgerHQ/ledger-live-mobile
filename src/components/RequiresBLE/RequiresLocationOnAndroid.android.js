@@ -4,7 +4,7 @@
 
 import React, { PureComponent, Component } from "react";
 import { View, StyleSheet, PermissionsAndroid } from "react-native";
-import LText from "./LText";
+import LText from "../LText";
 
 class NoLocation extends PureComponent<{}> {
   render() {

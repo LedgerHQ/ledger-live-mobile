@@ -2,23 +2,11 @@
 // renders children if BLE is available
 // otherwise render an error
 
-import React, { PureComponent, Component } from "react";
+import React, { Component } from "react";
 import { Observable } from "rxjs/Observable";
-import { View, StyleSheet } from "react-native";
-import TransportBLE from "../react-native-hw-transport-ble";
-import LText from "./LText";
+import TransportBLE from "../../react-native-hw-transport-ble";
 import RequiresLocationOnAndroid from "./RequiresLocationOnAndroid";
-
-class NoBluetooth extends PureComponent<{ type: string }> {
-  render() {
-    // NB based on the state we could have different wording?
-    return (
-      <View>
-        <LText>Bluetooth required</LText>
-      </View>
-    );
-  }
-}
+import BluetoothDisabled from "./BluetoothDisabled";
 
 class RequiresBLE extends Component<
   {
@@ -51,11 +39,7 @@ class RequiresBLE extends Component<
     if (type === "PoweredOn") {
       return children;
     }
-    return (
-      <View style={styles.container}>
-        <NoBluetooth type={type} />
-      </View>
-    );
+    return <BluetoothDisabled />;
   }
 }
 
@@ -64,11 +48,3 @@ export default ({ children }: *) => (
     <RequiresBLE>{children}</RequiresBLE>
   </RequiresLocationOnAndroid>
 );
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});

@@ -34,7 +34,7 @@ type State = {
   error: ?Error,
 };
 
-export default class PairDevices extends Component<Props, State> {
+class PairDevices extends Component<Props, State> {
   static navigationOptions = ({ navigation }: *) => ({
     title: "Choose your device",
     headerRight: (
@@ -149,45 +149,49 @@ export default class PairDevices extends Component<Props, State> {
     }
 
     return (
-      <RequiresBLE>
-        <View style={styles.root}>
-          {status === "scanning" || status === "scanned" ? (
-            <FlatList
-              style={styles.list}
-              data={devices}
-              renderItem={this.renderItem}
-              keyExtractor={this.keyExtractor}
-              ListHeaderComponent={() => (
-                <View style={styles.listHeader}>
-                  <BluetoothScanning
-                    isAnimated={status === "scanning"}
-                    isError={status === "scanned" && !devices.length}
-                  />
-                  <View style={styles.listHeaderTitleContainer}>
-                    <LText secondary bold style={styles.listHeaderTitleText}>
-                      We are searching for Nano X
-                    </LText>
-                  </View>
-                  <View style={styles.listHeaderSubtitleContainer}>
-                    <LText style={styles.listHeaderSubtitleText}>
-                      {
-                        "Please be sure power is on, you have enter your PIN and bluetooth is enabled"
-                      }
-                    </LText>
-                  </View>
+      <View style={styles.root}>
+        {status === "scanning" || status === "scanned" ? (
+          <FlatList
+            style={styles.list}
+            data={devices}
+            renderItem={this.renderItem}
+            keyExtractor={this.keyExtractor}
+            ListHeaderComponent={() => (
+              <View style={styles.listHeader}>
+                <BluetoothScanning
+                  isAnimated={status === "scanning"}
+                  isError={status === "scanned" && !devices.length}
+                />
+                <View style={styles.listHeaderTitleContainer}>
+                  <LText secondary bold style={styles.listHeaderTitleText}>
+                    We are searching for Nano X
+                  </LText>
                 </View>
-              )}
-            />
-          ) : status === "pairing" ? (
-            <Pairing />
-          ) : status === "paired" ? (
-            <Paired device={device} />
-          ) : null}
-        </View>
-      </RequiresBLE>
+                <View style={styles.listHeaderSubtitleContainer}>
+                  <LText style={styles.listHeaderSubtitleText}>
+                    {
+                      "Please be sure power is on, you have enter your PIN and bluetooth is enabled"
+                    }
+                  </LText>
+                </View>
+              </View>
+            )}
+          />
+        ) : status === "pairing" ? (
+          <Pairing />
+        ) : status === "paired" ? (
+          <Paired device={device} />
+        ) : null}
+      </View>
     );
   }
 }
+
+export default (props: *) => (
+  <RequiresBLE>
+    <PairDevices {...props} />
+  </RequiresBLE>
+);
 
 const styles = StyleSheet.create({
   root: {
