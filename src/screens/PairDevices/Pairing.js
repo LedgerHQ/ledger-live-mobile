@@ -6,7 +6,7 @@ import React, { PureComponent } from "react";
 import colors from "../../colors";
 import LText from "../../components/LText";
 
-class Pairing extends PureComponent {
+class Pairing extends PureComponent<*> {
   render() {
     return (
       <View style={styles.root}>

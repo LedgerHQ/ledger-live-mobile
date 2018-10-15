@@ -3,7 +3,7 @@
 import React, { PureComponent } from "react";
 import Svg, { G, Path, Ellipse, Rect, Circle } from "react-native-svg";
 
-class PairingSuccess extends PureComponent {
+class PairingSuccess extends PureComponent<*> {
   render() {
     return (
       <Svg width={114} height={114} viewBox="0 0 114 114">

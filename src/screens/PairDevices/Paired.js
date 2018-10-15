@@ -14,6 +14,10 @@ import type { Device } from "../../components/DeviceItem";
 class Paired extends PureComponent<{
   device: Device,
 }> {
+  onContinue = () => {
+    alert("continuing"); // eslint-disable-line
+  };
+
   render() {
     const { device } = this.props;
     return (
@@ -31,13 +35,7 @@ class Paired extends PureComponent<{
           <DeviceItem device={device} />
         </View>
         <View style={[styles.fullContainer, styles.buttonContainer]}>
-          <Button
-            type="primary"
-            title="Continue"
-            onPress={() => {
-              console.log(`ok`);
-            }}
-          />
+          <Button type="primary" title="Continue" onPress={this.onContinue} />
         </View>
       </View>
     );

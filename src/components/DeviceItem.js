@@ -8,7 +8,7 @@ import colors from "../colors";
 import IconNanoX from "../icons/NanoX";
 import IconArrowRight from "../icons/ArrowRight";
 
-type Device = {
+export type Device = {
   id: string,
   name: string,
 };

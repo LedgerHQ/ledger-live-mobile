@@ -25,7 +25,7 @@ type Device = {
   name: string,
 };
 
-type Status = "scanning" | "scanned" | "error";
+type Status = "scanning" | "scanned" | "pairing" | "paired" | "error";
 
 type State = {
   status: Status,
@@ -179,7 +179,7 @@ class PairDevices extends Component<Props, State> {
           />
         ) : status === "pairing" ? (
           <Pairing />
-        ) : status === "paired" ? (
+        ) : status === "paired" && device ? (
           <Paired device={device} />
         ) : null}
       </View>

@@ -8,8 +8,8 @@ import IconClose from "../../../icons/Close";
 import colors from "../../../colors";
 
 type Props = {
-  isError: boolean,
-  isAnimated: boolean,
+  isError?: boolean,
+  isAnimated?: boolean,
 };
 
 export default class BluetoothScanning extends PureComponent<Props> {
@@ -60,17 +60,7 @@ export default class BluetoothScanning extends PureComponent<Props> {
           </G>
         </Svg>
         {isError && (
-          <View
-            style={{
-              position: "absolute",
-              alignItems: "center",
-              justifyContent: "center",
-              top: 30,
-              left: 95,
-              width: 20,
-              height: 20,
-            }}
-          >
+          <View style={styles.errorContainer}>
             <IconClose size={24} color={colors.alert} />
           </View>
         )}
@@ -78,3 +68,15 @@ export default class BluetoothScanning extends PureComponent<Props> {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  errorContainer: {
+    position: "absolute",
+    alignItems: "center",
+    justifyContent: "center",
+    top: 30,
+    left: 95,
+    width: 20,
+    height: 20,
+  },
+});

@@ -256,6 +256,7 @@ export const RootNavigator = createStackNavigator(
     ImportAccounts,
     SendFundsSettings,
     PairDevices,
+    // $FlowFixMe non-sense error
     EditDeviceName,
   },
   {
