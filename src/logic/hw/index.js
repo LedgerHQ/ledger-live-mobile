@@ -90,7 +90,7 @@ export const devicesObservable: Observable<{
 // NB: we don't use ble observable because it will be given on ble redux state side
 openHandlers.push(id =>
   // $FlowFixMe subtyping god help me
-  BluetoothTransport.open(id.slice(4)),
+  BluetoothTransport.open(id),
 );
 
 export const open = (deviceId: string): Promise<Transport<*>> => {
