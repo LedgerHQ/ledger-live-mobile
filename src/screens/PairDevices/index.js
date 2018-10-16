@@ -2,10 +2,14 @@
 
 import React, { Component } from "react";
 import { View, FlatList, StyleSheet } from "react-native";
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
 import { Observable } from "rxjs";
 import type { NavigationScreenProp } from "react-navigation";
 import { BleErrorCode } from "react-native-ble-plx";
 
+import { addKnownDevice } from "../../actions/ble";
+import { knownDeviceIdsSelector } from "../../reducers/ble";
 import TransportBLE from "../../react-native-hw-transport-ble";
 import LText from "../../components/LText";
 import Pairing from "./Pairing";
@@ -20,6 +24,8 @@ import genuineCheck from "../../logic/hw/genuineCheck";
 
 type Props = {
   navigation: NavigationScreenProp<*>,
+  knownDeviceIds: string[],
+  addKnownDevice: string => *,
 };
 
 type Device = {
@@ -62,16 +68,6 @@ class PairDevices extends Component<Props, State> {
 
     this.setState({ status: "scanning" });
 
-    /*
-    @thibaut can you test it?
-
-    const devices = await TransportBLE.list();
-
-    console.log({ devices });
-
-    this.setState({ devices });
-    */
-
     this.sub = Observable.create(TransportBLE.listen).subscribe({
       complete: () => {
         this.setState({ status: "scanned" });
@@ -105,6 +101,7 @@ class PairDevices extends Component<Props, State> {
       transport.setDebugMode(true);
       try {
         await genuineCheck(transport);
+        this.props.addKnownDevice(device.id);
         this.setState({ status: "paired" });
       } finally {
         transport.close();
@@ -124,7 +121,9 @@ class PairDevices extends Component<Props, State> {
       device={item}
       onSelect={this.onSelect}
       disabled={false}
-      description="This is the description"
+      description={
+        this.props.knownDeviceIds.includes(item.id) ? "known device" : ""
+      }
     />
   );
 
@@ -136,6 +135,7 @@ class PairDevices extends Component<Props, State> {
   };
 
   ListHeader = () => (
+    // FIXME this is a component
     <View style={styles.listHeader}>
       <BluetoothScanning />
       <View style={styles.listHeaderTitleContainer}>
@@ -173,6 +173,7 @@ class PairDevices extends Component<Props, State> {
             renderItem={this.renderItem}
             keyExtractor={this.keyExtractor}
             ListHeaderComponent={() => (
+              // FIXME this is a component
               <View style={styles.listHeader}>
                 <BluetoothScanning
                   isAnimated={status === "scanning"}
@@ -203,11 +204,30 @@ class PairDevices extends Component<Props, State> {
   }
 }
 
-export default (props: *) => (
-  <RequiresBLE>
-    <PairDevices {...props} />
-  </RequiresBLE>
-);
+class Screen extends Component<Props, State> {
+  static navigationOptions = ({ navigation }: *) => ({
+    title: "Choose your device",
+    headerLeft: null,
+    headerRight: <HeaderRightClose navigation={navigation} />,
+  });
+
+  render() {
+    return (
+      <RequiresBLE>
+        <PairDevices {...this.props} />
+      </RequiresBLE>
+    );
+  }
+}
+
+export default connect(
+  createStructuredSelector({
+    knownDeviceIds: knownDeviceIdsSelector,
+  }),
+  {
+    addKnownDevice,
+  },
+)(Screen);
 
 const styles = StyleSheet.create({
   root: {

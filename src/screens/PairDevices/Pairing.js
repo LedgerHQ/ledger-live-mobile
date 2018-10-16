@@ -10,7 +10,7 @@ class Pairing extends PureComponent<*> {
   render() {
     return (
       <View style={styles.root}>
-        <ActivityIndicator size={32} />
+        <ActivityIndicator size="large" />
         <LText secondary semiBold style={styles.title}>
           Pairing...
         </LText>

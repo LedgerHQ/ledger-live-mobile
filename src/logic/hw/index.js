@@ -41,6 +41,7 @@ const bleObservable = Observable.create(o => BluetoothTransport.listen(o)).pipe(
 );
 openHandlers.push(id => {
   if (id.startsWith("ble|")) {
+    // $FlowFixMe subtyping god help me
     return BluetoothTransport.open(id.slice(4));
   }
   return null;
