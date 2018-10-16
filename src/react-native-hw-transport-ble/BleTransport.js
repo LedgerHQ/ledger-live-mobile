@@ -167,13 +167,29 @@ export default class BluetoothTransport extends Transport<Device | string> {
     let device;
     if (typeof deviceOrId === "string") {
       const manager = new BleManager();
-      [device] = await manager.devices([deviceOrId]);
-      if (device) {
-        if (!(await manager.isDeviceConnected(deviceOrId))) {
-          device = null;
+      const devices = await manager.devices([deviceOrId]);
+      console.log(`${devices.length} devices`); // eslint-disable-line no-console
+      [device] = devices;
+
+      if (!device) {
+        const connectedDevices = await manager.connectedDevices([ServiceUuid]);
+        console.log(`${connectedDevices.length} connectedDevices`); // eslint-disable-line no-console
+        const connectedDevicesFiltered = connectedDevices.filter(
+          d => d.id === deviceOrId,
+        );
+        console.log(`${connectedDevicesFiltered.length} connectedDevices`); // eslint-disable-line no-console
+        [device] = connectedDevicesFiltered;
+        if (device) {
+          const isDeviceConnected = await manager.isDeviceConnected(deviceOrId);
+          console.log(`isDeviceConnected=${isDeviceConnected}`); // eslint-disable-line no-console
+          if (!isDeviceConnected) {
+            device = null;
+          }
         }
       }
+
       if (!device) {
+        console.log("Last chance, we attempt to connectToDevice"); // eslint-disable-line no-console
         device = await manager.connectToDevice(deviceOrId);
       }
     } else {
