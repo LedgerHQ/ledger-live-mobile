@@ -31,6 +31,8 @@ const handlers: Object = {
     ...state,
     ...ble,
   }),
+
+  CLEAN_CACHE: (): BleState => initialState,
 };
 
 // Selectors
