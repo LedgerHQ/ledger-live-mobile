@@ -166,6 +166,7 @@ export default class BluetoothTransport extends Transport<Device | string> {
   static async open(deviceOrId: Device | string) {
     let device;
     if (typeof deviceOrId === "string") {
+      console.log(`deviceId=${deviceOrId}`); // eslint-disable-line no-console
       const manager = new BleManager();
       const devices = await manager.devices([deviceOrId]);
       console.log(`${devices.length} devices`); // eslint-disable-line no-console
@@ -177,18 +178,21 @@ export default class BluetoothTransport extends Transport<Device | string> {
         const connectedDevicesFiltered = connectedDevices.filter(
           d => d.id === deviceOrId,
         );
-        console.log(`${connectedDevicesFiltered.length} connectedDevices`); // eslint-disable-line no-console
+        console.log(`${connectedDevicesFiltered.length} connectedDFiltered`); // eslint-disable-line no-console
         [device] = connectedDevicesFiltered;
-        if (device) {
-          const isDeviceConnected = await manager.isDeviceConnected(deviceOrId);
-          console.log(`isDeviceConnected=${isDeviceConnected}`); // eslint-disable-line no-console
-          if (!isDeviceConnected) {
-            device = null;
-          }
+      }
+
+      if (device) {
+        const isDeviceConnected = await manager.isDeviceConnected(deviceOrId);
+        console.log(`isDeviceConnected=${isDeviceConnected}`); // eslint-disable-line no-console
+        if (!isDeviceConnected) {
+          device = null;
         }
       }
 
       if (!device) {
+        console.log("cancelDeviceConnection (force device to be redeemed)"); // eslint-disable-line no-console
+        await manager.cancelDeviceConnection(deviceOrId);
         console.log("Last chance, we attempt to connectToDevice"); // eslint-disable-line no-console
         device = await manager.connectToDevice(deviceOrId);
       }
