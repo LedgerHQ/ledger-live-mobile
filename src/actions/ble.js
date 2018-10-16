@@ -1,11 +1,18 @@
 // @flow
 
-export const removeKnownDevice = (deviceId: string) => ({
+import type { DeviceLike } from "../reducers/ble";
+
+export const removeKnownDevice = (device: DeviceLike) => ({
   type: "BLE_REMOVE_DEVICE",
-  deviceId,
+  device,
 });
 
-export const addKnownDevice = (deviceId: string) => ({
+export const addKnownDevice = (device: DeviceLike) => ({
   type: "BLE_ADD_DEVICE",
-  deviceId,
+  device,
+});
+
+export const importBle = (ble: *) => ({
+  type: "BLE_IMPORT",
+  ble,
 });

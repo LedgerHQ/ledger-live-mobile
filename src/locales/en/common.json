@@ -271,7 +271,7 @@
     "error": "Sync Error",
     "loading": "Sync"
   },
-  "scanning": {
-    "loading": "Searching devices..."
+  "SelectDevice": {
+    "deviceNotFoundPairNewDevice": "Device not in the list? Pair a new"
   }
 }

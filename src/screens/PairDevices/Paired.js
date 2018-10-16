@@ -13,13 +13,10 @@ import type { Device } from "../../components/DeviceItem";
 
 class Paired extends PureComponent<{
   device: Device,
+  onContinue: () => *,
 }> {
-  onContinue = () => {
-    alert("continuing"); // eslint-disable-line
-  };
-
   render() {
-    const { device } = this.props;
+    const { device, onContinue } = this.props;
     return (
       <View style={styles.root}>
         <PairingSuccess />
@@ -32,10 +29,11 @@ class Paired extends PureComponent<{
           }
         </LText>
         <View style={styles.fullContainer}>
-          <DeviceItem device={device} />
+          {/* FIXME probably should diverge to a a dedicated DeviceSummary component */}
+          <DeviceItem device={device} name={device.name} />
         </View>
         <View style={[styles.fullContainer, styles.buttonContainer]}>
-          <Button type="primary" title="Continue" onPress={this.onContinue} />
+          <Button type="primary" title="Continue" onPress={onContinue} />
         </View>
       </View>
     );

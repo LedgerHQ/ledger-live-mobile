@@ -2,6 +2,7 @@
 
 import React, { PureComponent } from "react";
 import { View, StyleSheet } from "react-native";
+import Icon from "react-native-vector-icons/dist/Feather";
 import { RectButton } from "react-native-gesture-handler";
 import LText from "./LText";
 import colors from "../colors";
@@ -13,30 +14,42 @@ export type Device = {
   name: string,
 };
 
-type Props = {
-  device: Device,
+type Props<T> = {
+  device: T,
+  name: string,
+  family?: ?string,
   disabled?: boolean,
   description?: string,
-  onSelect?: Device => void,
+  onSelect?: T => any,
 };
 
-export default class DeviceItem extends PureComponent<Props> {
+const iconByFamily = {
+  ble: "bluetooth",
+  usb: "usb",
+  httpdebug: "terminal",
+};
+
+export default class DeviceItem<T> extends PureComponent<Props<T>> {
   onPress = () => {
     const { device, onSelect } = this.props;
     if (onSelect) onSelect(device);
   };
 
   render() {
-    const { device, disabled, onSelect, description } = this.props;
+    const { name, family, disabled, onSelect, description } = this.props;
 
     let res = (
       <View style={[styles.root, disabled && styles.rootDisabled]}>
-        <IconNanoX
-          color={colors.darkBlue}
-          height={36}
-          width={8}
-          style={disabled ? styles.deviceIconDisabled : undefined}
-        />
+        {!family ? (
+          <IconNanoX
+            color={colors.darkBlue}
+            height={36}
+            width={8}
+            style={disabled ? styles.deviceIconDisabled : undefined}
+          />
+        ) : (
+          <Icon name={iconByFamily[family]} size={32} color={colors.darkBlue} />
+        )}
         <View style={styles.content}>
           <LText
             bold
@@ -46,7 +59,7 @@ export default class DeviceItem extends PureComponent<Props> {
               disabled && styles.deviceNameTextDisabled,
             ]}
           >
-            {device.name}
+            {name}
           </LText>
           {description ? (
             <LText

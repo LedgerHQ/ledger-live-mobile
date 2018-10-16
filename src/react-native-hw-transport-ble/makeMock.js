@@ -43,12 +43,15 @@ export default (opts: Opts) => {
       });
       observer.next({
         type: "add",
-        descriptor: createTransportDeviceMock("mock_3"),
+        descriptor: createTransportDeviceMock("mock_3_unreliable"),
       });
       return { unsubscribe };
     }
 
     static async open(device: *) {
+      if (device === "mock_3_unreliable" && Math.random() < 0.5) {
+        throw new Error("mock_3 device fail");
+      }
       return new BluetoothTransportMock(
         typeof device === "string" ? createTransportDeviceMock(device) : device,
       );

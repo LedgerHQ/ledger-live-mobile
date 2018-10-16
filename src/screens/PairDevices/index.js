@@ -9,7 +9,8 @@ import type { NavigationScreenProp } from "react-navigation";
 import { BleErrorCode } from "react-native-ble-plx";
 
 import { addKnownDevice } from "../../actions/ble";
-import { knownDeviceIdsSelector } from "../../reducers/ble";
+import { knownDevicesSelector } from "../../reducers/ble";
+import type { DeviceLike } from "../../reducers/ble";
 import TransportBLE from "../../react-native-hw-transport-ble";
 import LText from "../../components/LText";
 import Pairing from "./Pairing";
@@ -24,8 +25,8 @@ import genuineCheck from "../../logic/hw/genuineCheck";
 
 type Props = {
   navigation: NavigationScreenProp<*>,
-  knownDeviceIds: string[],
-  addKnownDevice: string => *,
+  knownDevices: DeviceLike[],
+  addKnownDevice: DeviceLike => *,
 };
 
 type Device = {
@@ -101,7 +102,7 @@ class PairDevices extends Component<Props, State> {
       transport.setDebugMode(true);
       try {
         await genuineCheck(transport);
-        this.props.addKnownDevice(device.id);
+        this.props.addKnownDevice(device);
         this.setState({ status: "paired" });
       } finally {
         transport.close();
@@ -119,10 +120,13 @@ class PairDevices extends Component<Props, State> {
   renderItem = ({ item }: { item: * }) => (
     <DeviceItem
       device={item}
+      name={item.name}
       onSelect={this.onSelect}
       disabled={false}
       description={
-        this.props.knownDeviceIds.includes(item.id) ? "known device" : ""
+        this.props.knownDevices.some(d => d.id === item.id)
+          ? "known device"
+          : ""
       }
     />
   );
@@ -152,6 +156,10 @@ class PairDevices extends Component<Props, State> {
       </View>
     </View>
   );
+
+  onDone = () => {
+    this.props.navigation.goBack();
+  };
 
   render() {
     const { devices, error, status, device } = this.state;
@@ -197,7 +205,7 @@ class PairDevices extends Component<Props, State> {
         ) : status === "pairing" ? (
           <Pairing />
         ) : status === "paired" && device ? (
-          <Paired device={device} />
+          <Paired device={device} onContinue={this.onDone} />
         ) : null}
       </View>
     );
@@ -222,7 +230,7 @@ class Screen extends Component<Props, State> {
 
 export default connect(
   createStructuredSelector({
-    knownDeviceIds: knownDeviceIdsSelector,
+    knownDevices: knownDevicesSelector,
   }),
   {
     addKnownDevice,

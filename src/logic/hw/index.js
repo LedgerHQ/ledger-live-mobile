@@ -22,7 +22,6 @@ export async function tmpTestEthExchange(deviceId: string) {
 
 const transports: { [_: string]: * } = {
   HIDTransport,
-  BluetoothTransport,
 };
 if (__DEV__) {
   transports.DebugHttpProxy = withStaticURL(Config.DEBUG_COMM_HTTP_PROXY);
@@ -31,27 +30,10 @@ if (__DEV__) {
 const observables = [];
 const openHandlers: Array<(string) => ?Promise<Transport<*>>> = [];
 
-// Add support of BLE
-const bleObservable = Observable.create(o => BluetoothTransport.listen(o)).pipe(
-  map(({ descriptor }) => ({
-    type: "ble",
-    id: `ble|${descriptor.id}`,
-    name: descriptor.name,
-  })),
-);
-openHandlers.push(id => {
-  if (id.startsWith("ble|")) {
-    // $FlowFixMe subtyping god help me
-    return BluetoothTransport.open(id.slice(4));
-  }
-  return null;
-});
-observables.push(bleObservable);
-
 // Add support of HID
-const hidObservable = Observable.create(o => BluetoothTransport.listen(o)).pipe(
+const hidObservable = Observable.create(o => HIDTransport.listen(o)).pipe(
   map(({ descriptor }) => ({
-    type: "usb",
+    family: "usb",
     id: `usb|${JSON.stringify(descriptor)}`,
     name: "USB device",
   })),
@@ -74,7 +56,7 @@ if (__DEV__) {
     DebugHttpProxy.listen(o),
   ).pipe(
     map(({ descriptor }) => ({
-      type: "httpdebug",
+      family: "httpdebug",
       id: `httpdebug|${descriptor}`,
       name: descriptor,
     })),
@@ -89,7 +71,7 @@ if (__DEV__) {
 }
 
 export const devicesObservable: Observable<{
-  type: string,
+  family: string,
   id: string,
   name: string,
 }> = merge(
@@ -101,6 +83,14 @@ export const devicesObservable: Observable<{
       }),
     ),
   ),
+);
+
+// Add support of BLE
+// it is always the fallback choice because we always keep raw id in it.
+// NB: we don't use ble observable because it will be given on ble redux state side
+openHandlers.push(id =>
+  // $FlowFixMe subtyping god help me
+  BluetoothTransport.open(id.slice(4)),
 );
 
 export const open = (deviceId: string): Promise<Transport<*>> => {
