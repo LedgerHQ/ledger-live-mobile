@@ -167,7 +167,15 @@ export default class BluetoothTransport extends Transport<Device | string> {
     let device;
     if (typeof deviceOrId === "string") {
       const manager = new BleManager();
-      device = await manager.connectToDevice(deviceOrId);
+      [device] = await manager.devices([deviceOrId]);
+      if (device) {
+        if (!(await manager.isDeviceConnected(deviceOrId))) {
+          device = null;
+        }
+      }
+      if (!device) {
+        device = await manager.connectToDevice(deviceOrId);
+      }
     } else {
       device = deviceOrId;
     }
