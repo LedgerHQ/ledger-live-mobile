@@ -32,7 +32,8 @@ const openHandlers: Array<(string) => ?Promise<Transport<*>>> = [];
 
 // Add support of HID
 const hidObservable = Observable.create(o => HIDTransport.listen(o)).pipe(
-  map(({ descriptor }) => ({
+  map(({ type, descriptor }) => ({
+    type,
     family: "usb",
     id: `usb|${JSON.stringify(descriptor)}`,
     name: "USB device",
@@ -55,7 +56,8 @@ if (__DEV__) {
   const debugHttpObservable = Observable.create(o =>
     DebugHttpProxy.listen(o),
   ).pipe(
-    map(({ descriptor }) => ({
+    map(({ type, descriptor }) => ({
+      type,
       family: "httpdebug",
       id: `httpdebug|${descriptor}`,
       name: descriptor,
@@ -71,6 +73,7 @@ if (__DEV__) {
 }
 
 export const devicesObservable: Observable<{
+  type: string,
   family: string,
   id: string,
   name: string,
