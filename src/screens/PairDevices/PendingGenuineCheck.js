@@ -1,17 +1,16 @@
 // @flow
 
-import { View, StyleSheet, ActivityIndicator } from "react-native";
-import React, { PureComponent } from "react";
+import React, { PureComponent, Fragment } from "react";
+import { StyleSheet } from "react-native";
 import { translate } from "react-i18next";
 
 import colors from "../../colors";
 import LText from "../../components/LText";
 
-class Pairing extends PureComponent<*> {
+class PendingGenuineCheck extends PureComponent<*> {
   render() {
     return (
-      <View style={styles.root}>
-        <ActivityIndicator size="large" />
+      <Fragment>
         <LText secondary semiBold style={styles.title}>
           Genuine check...
         </LText>
@@ -21,17 +20,12 @@ class Pairing extends PureComponent<*> {
         <LText bold style={styles.bold}>
           Allow Manager
         </LText>
-      </View>
+      </Fragment>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  root: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
   title: {
     marginTop: 16,
     fontSize: 18,
@@ -46,4 +40,4 @@ const styles = StyleSheet.create({
   bold: {},
 });
 
-export default translate()(Pairing);
+export default translate()(PendingGenuineCheck);

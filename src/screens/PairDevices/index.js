@@ -5,7 +5,6 @@ import { View, StyleSheet } from "react-native";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import type { NavigationScreenProp } from "react-navigation";
-import { BleErrorCode } from "react-native-ble-plx";
 import TransportBLE from "../../react-native-hw-transport-ble";
 
 import { addKnownDevice } from "../../actions/ble";
@@ -14,16 +13,15 @@ import type { DeviceLike } from "../../reducers/ble";
 import genuineCheck from "../../logic/hw/genuineCheck";
 import getDeviceName from "../../logic/hw/getDeviceName";
 import colors from "../../colors";
-import LocationRequired from "../LocationRequired";
-import LText from "../../components/LText";
 import HeaderRightClose from "../../components/HeaderRightClose";
 import RequiresBLE from "../../components/RequiresBLE";
-import TranslatedError from "../../components/TranslatedError";
-import Pairing from "./Pairing";
-import GenuineCheck from "./GenuineCheck";
+import PendingContainer from "./PendingContainer";
+import PendingPairing from "./PendingPairing";
+import PendingGenuineCheck from "./PendingGenuineCheck";
 import Paired from "./Paired";
 import Scanning from "./Scanning";
 import ScanningTimeout from "./ScanningTimeout";
+import RenderError from "./RenderError";
 
 type Props = {
   navigation: NavigationScreenProp<*>,
@@ -81,10 +79,10 @@ class PairDevices extends Component<Props, State> {
     try {
       const transport = await TransportBLE.open(device);
       if (this.unmounted) return;
-      transport.setDebugMode(true);
+      if (__DEV__) transport.setDebugMode(true);
       try {
-        // getDeviceName is a dummy apdu to trigger the pairing.
-        // at same time we might want to use its result to make sure the name is in sync!
+        // getDeviceName is a dummy apdu to trigger the pairing before the actual genuine check.
+        // we might still want to use its result to make sure the name is in sync!
         await getDeviceName(transport);
         this.setState({ device, status: "genuinecheck" });
         await genuineCheck(transport);
@@ -97,6 +95,7 @@ class PairDevices extends Component<Props, State> {
       }
     } catch (error) {
       if (this.unmounted) return;
+      console.warn(error);
       this.onError(error);
     }
   };
@@ -109,38 +108,53 @@ class PairDevices extends Component<Props, State> {
     const { error, status, device } = this.state;
 
     if (error) {
-      // $FlowFixMe
-      if (error.errorCode === BleErrorCode.LocationServicesDisabled) {
-        return <LocationRequired />;
-      }
-
       return (
-        // FIXME identify how this is possible & what we should really do
-        <LText>
-          <TranslatedError error={error} />
-        </LText>
+        <RenderError
+          status={status}
+          error={error}
+          onRetry={this.onRetry}
+          onCancel={this.onDone}
+        />
       );
     }
 
-    return (
-      <View style={styles.root}>
-        {status === "scanning" ? (
+    switch (status) {
+      case "scanning":
+        return (
           <Scanning
             onSelect={this.onSelect}
             onError={this.onError}
             onTimeout={this.onTimeout}
           />
-        ) : status === "timedout" ? (
+        );
+
+      case "timedout":
+        return (
           <ScanningTimeout onRetry={this.onRetry} onCancel={this.onDone} />
-        ) : status === "pairing" ? (
-          <Pairing />
-        ) : status === "genuinecheck" ? (
-          <GenuineCheck />
-        ) : status === "paired" && device ? (
+        );
+
+      case "pairing":
+        return (
+          <PendingContainer>
+            <PendingPairing />
+          </PendingContainer>
+        );
+
+      case "genuinecheck":
+        return (
+          <PendingContainer>
+            <PendingGenuineCheck />
+          </PendingContainer>
+        );
+
+      case "paired":
+        return device ? (
           <Paired deviceId={device.id} onContinue={this.onDone} />
-        ) : null}
-      </View>
-    );
+        ) : null;
+
+      default:
+        return null;
+    }
   }
 }
 
@@ -154,7 +168,9 @@ class Screen extends Component<Props, State> {
   render() {
     return (
       <RequiresBLE>
-        <PairDevices {...this.props} />
+        <View style={styles.root}>
+          <PairDevices {...this.props} />
+        </View>
       </RequiresBLE>
     );
   }

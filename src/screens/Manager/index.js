@@ -4,8 +4,6 @@ import { View, StyleSheet } from "react-native";
 import type { NavigationScreenProp } from "react-navigation";
 import SelectDevice from "../../components/SelectDevice";
 
-const Main = () => null;
-
 class Manager extends Component<
   {
     navigation: NavigationScreenProp<*>,
@@ -27,8 +25,8 @@ class Manager extends Component<
   };
 
   render() {
-    const { deviceId } = this.state;
-    if (deviceId) return <Main deviceId={deviceId} />;
+    // const { deviceId } = this.state;
+    // if (deviceId) return <Main deviceId={deviceId} />;
     return (
       <View style={styles.root}>
         <SelectDevice onSelect={this.onSelect} />

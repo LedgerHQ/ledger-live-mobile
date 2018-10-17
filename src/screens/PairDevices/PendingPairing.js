@@ -1,33 +1,27 @@
 // @flow
 
-import { View, StyleSheet, ActivityIndicator } from "react-native";
-import React, { PureComponent } from "react";
+import React, { Fragment, PureComponent } from "react";
+import { StyleSheet } from "react-native";
 
 import colors from "../../colors";
 import LText from "../../components/LText";
 
-class Pairing extends PureComponent<*> {
+class PendingPairing extends PureComponent<*> {
   render() {
     return (
-      <View style={styles.root}>
-        <ActivityIndicator size="large" />
+      <Fragment>
         <LText secondary semiBold style={styles.title}>
           Pairing...
         </LText>
         <LText style={styles.subtitle}>
           Please don’t turn off your Nano X. Follow screen instructions.
         </LText>
-      </View>
+      </Fragment>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  root: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
   title: {
     marginTop: 16,
     fontSize: 18,
@@ -41,4 +35,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Pairing;
+export default PendingPairing;

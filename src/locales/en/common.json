@@ -38,6 +38,14 @@
     },
     "DeviceNameRequired": {
       "title": "A device name is required"
+    },
+    "GenuineCheckFailed": {
+      "title": "Genuine Check Failed",
+      "description": "Request Ledger Support assistance."
+    },
+    "PairingFailed": {
+      "title": "Bluetooth Pairing Failed",
+      "description": "Check your Bluetooth settings, make sure the Nano X device is booted up and test again."
     }
   },
   "auth": {

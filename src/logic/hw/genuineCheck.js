@@ -6,6 +6,5 @@ import { delay } from "../promise";
 
 export default async (transport: Transport<*>): Promise<void> => {
   await delay(2000);
-  // FIXME real genuine check!
   await transport.send(0, 0, 0, 0);
 };

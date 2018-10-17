@@ -53,13 +53,13 @@ class SelectDevice extends Component<
   }
 
   onSelect = async ({ id, family }) => {
-    this.props.removeKnownDevice(id); // TMP HACK UNTIL FEATURE
-
     if (!family) {
       // this is ble case
       try {
         const t = await open(id);
         await t.close();
+
+        this.props.removeKnownDevice(id); // FIXME TMP HACK UNTIL FEATURE
       } catch (e) {
         Alert.alert(
           "Failed to connect to device with Bluetooth",
