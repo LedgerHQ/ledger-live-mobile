@@ -281,5 +281,12 @@
     "charactersRemaining": "{{remainingCount}} characters remaining",
     "inputPlaceholder": "Custom Device Name",
     "action": "Change name"
+  },
+  "PairDevices": {
+    "Paired": {
+      "title": "Nano X paired with success!",
+      "desc": "You can now use your Nano X on your Ledger Live mobile App to send & receive funds. You can also mange your device on the Manager section",
+      "action": "Continue"
+    }
   }
 }

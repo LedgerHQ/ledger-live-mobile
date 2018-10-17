@@ -3,6 +3,7 @@
 import React, { PureComponent } from "react";
 import { View, StyleSheet } from "react-native";
 import { withNavigation } from "react-navigation";
+import { translate } from "react-i18next";
 
 import colors from "../../colors";
 import LText from "../../components/LText";
@@ -14,6 +15,7 @@ class Paired extends PureComponent<{
   deviceId: *,
   onContinue: () => *,
   navigation: *,
+  t: *,
 }> {
   onEdit = () => {
     const { deviceId, navigation } = this.props;
@@ -23,23 +25,23 @@ class Paired extends PureComponent<{
   };
 
   render() {
-    const { deviceId, onContinue } = this.props;
+    const { deviceId, onContinue, t } = this.props;
     return (
       <View style={styles.root}>
         <PairingSuccess />
         <LText secondary semiBold style={styles.title}>
-          {"Nano X paired with success!"}
+          {t("PairDevices.Paired.title")}
         </LText>
-        <LText style={styles.description}>
-          {
-            "You can now use your Nano X on your Ledger Live mobile App to send & receive funds. You can also mange your device on the Manager section"
-          }
-        </LText>
+        <LText style={styles.description}>{t("PairDevices.Paired.desc")}</LText>
         <View style={styles.fullContainer}>
           <DeviceItemSummary deviceId={deviceId} genuine onEdit={this.onEdit} />
         </View>
         <View style={[styles.fullContainer, styles.buttonContainer]}>
-          <Button type="primary" title="Continue" onPress={onContinue} />
+          <Button
+            type="primary"
+            title={t("PairDevices.Paired.action")}
+            onPress={onContinue}
+          />
         </View>
       </View>
     );
@@ -74,4 +76,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withNavigation(Paired);
+export default withNavigation(translate()(Paired));
