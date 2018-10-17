@@ -1,18 +1,33 @@
 // @flow
 
-import { Buffer } from "buffer";
 import Config from "react-native-config";
 import BleTransport from "./BleTransport";
 import makeMock from "./makeMock";
+import createAPDUMock from "../logic/createAPDUMock";
+
+const names = {};
 
 const transport = Config.MOCK_BLE
   ? makeMock({
-      createTransportDeviceMock: id => ({
-        id,
-        name: id,
-        mock_exchange: () => Promise.resolve(Buffer.from([0x90, 0x00])),
-        mock_close: () => Promise.resolve(),
-      }),
+      createTransportDeviceMock: id => {
+        const apduMock = createAPDUMock({
+          setDeviceName: name => {
+            names[id] = name;
+          },
+          getDeviceName: () => names[id] || id,
+          getAddress: () => ({
+            publicKey: "00000000000000000000",
+            address: "11111111111111111111111111111",
+            chainCode:
+              "0000000000000000000000000000000000000000000000000000000000000000",
+          }),
+        });
+        return {
+          id,
+          name: names[id] || id,
+          apduMock,
+        };
+      },
     })
   : BleTransport;
 

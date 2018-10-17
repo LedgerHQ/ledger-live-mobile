@@ -1,18 +1,46 @@
 /* @flow */
 import React, { Component } from "react";
-import { ScrollView } from "react-native";
+import { View, StyleSheet } from "react-native";
 import type { NavigationScreenProp } from "react-navigation";
+import SelectDevice from "../../components/SelectDevice";
 
-class Settings extends Component<{
-  navigation: NavigationScreenProp<*>,
-}> {
+const Main = () => null;
+
+class Manager extends Component<
+  {
+    navigation: NavigationScreenProp<*>,
+  },
+  {
+    deviceId: ?string,
+  },
+> {
   static navigationOptions = {
     title: "Manager",
   };
 
+  state = {
+    deviceId: null,
+  };
+
+  onSelect = (deviceId: string) => {
+    this.setState({ deviceId });
+  };
+
   render() {
-    return <ScrollView contentContainerStyle={{ paddingBottom: 40 }} />;
+    const { deviceId } = this.state;
+    if (deviceId) return <Main deviceId={deviceId} />;
+    return (
+      <View style={styles.root}>
+        <SelectDevice onSelect={this.onSelect} />
+      </View>
+    );
   }
 }
 
-export default Settings;
+const styles = StyleSheet.create({
+  root: {
+    flex: 1,
+  },
+});
+
+export default Manager;

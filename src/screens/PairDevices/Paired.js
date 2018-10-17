@@ -2,19 +2,26 @@
 
 import React, { PureComponent } from "react";
 import { View, StyleSheet } from "react-native";
+import { withNavigation } from "react-navigation";
 
 import colors from "../../colors";
 import LText from "../../components/LText";
 import Button from "../../components/Button";
 import PairingSuccess from "./assets/PairingSuccess";
-import DeviceItem from "../../components/DeviceItem";
-
-import type { Device } from "../../components/DeviceItem";
+import DeviceItemSummary from "../../components/DeviceItemSummary";
 
 class Paired extends PureComponent<{
-  device: Device,
+  device: *,
   onContinue: () => *,
+  navigation: *,
 }> {
+  onEdit = () => {
+    const { device, navigation } = this.props;
+    navigation.navigate("EditDeviceName", {
+      device,
+    });
+  };
+
   render() {
     const { device, onContinue } = this.props;
     return (
@@ -29,8 +36,7 @@ class Paired extends PureComponent<{
           }
         </LText>
         <View style={styles.fullContainer}>
-          {/* FIXME probably should diverge to a a dedicated DeviceSummary component */}
-          <DeviceItem device={device} name={device.name} />
+          <DeviceItemSummary name={device.name} genuine onEdit={this.onEdit} />
         </View>
         <View style={[styles.fullContainer, styles.buttonContainer]}>
           <Button type="primary" title="Continue" onPress={onContinue} />
@@ -68,4 +74,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Paired;
+export default withNavigation(Paired);

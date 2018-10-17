@@ -2,12 +2,13 @@
 
 import Transport from "@ledgerhq/hw-transport";
 import { from } from "rxjs";
+import { delay } from "../logic/promise";
+import type { ApduMock } from "../logic/createAPDUMock";
 
 export type DeviceMock = {
   id: string,
   name: string,
-  mock_exchange: Buffer => Promise<Buffer>,
-  mock_close: () => Promise<void>,
+  apduMock: ApduMock,
 };
 
 type Opts = {
@@ -43,13 +44,14 @@ export default (opts: Opts) => {
       });
       observer.next({
         type: "add",
-        descriptor: createTransportDeviceMock("mock_3_unreliable"),
+        descriptor: createTransportDeviceMock("mock_3_fail_open"),
       });
       return { unsubscribe };
     }
 
     static async open(device: *) {
-      if (device === "mock_3_unreliable" && Math.random() < 0.5) {
+      await delay(1000);
+      if (device === "mock_3_fail_open") {
         throw new Error("mock_3 device fail");
       }
       return new BluetoothTransportMock(
@@ -64,14 +66,14 @@ export default (opts: Opts) => {
       this.device = device;
     }
 
-    async exchange(apdu: Buffer): Promise<Buffer> {
-      return this.device.mock_exchange(apdu);
+    exchange(apdu: Buffer): Promise<Buffer> {
+      return this.device.apduMock.exchange(apdu);
     }
 
     setScrambleKey() {}
 
     close(): Promise<void> {
-      return this.device.mock_close();
+      return this.device.apduMock.close();
     }
   };
 };

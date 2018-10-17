@@ -8,7 +8,7 @@ type Props = {
   width?: number,
   height?: number,
   color: string,
-  style: *,
+  style?: *,
 };
 
 export default function NanoX({ size, width, height, color, style }: Props) {
