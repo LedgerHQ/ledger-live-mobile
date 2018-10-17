@@ -8,19 +8,17 @@ import BluetoothScanning from "./assets/BluetoothScanning";
 import colors from "../../colors";
 
 type Props = {
-  animating: boolean,
-  hasError: boolean,
   t: *,
 };
 
 class ScanningHeader extends PureComponent<Props> {
   render() {
-    const { animating, hasError, t } = this.props;
+    const { t } = this.props;
     return (
       <View style={styles.root}>
-        <BluetoothScanning isAnimated={animating} isError={hasError} />
+        <BluetoothScanning isAnimated />
         <View style={styles.TitleContainer}>
-          <LText secondary bold style={styles.TitleText}>
+          <LText secondary semiBold style={styles.TitleText}>
             {t("PairDevices.ScanningHeader.title")}
           </LText>
         </View>

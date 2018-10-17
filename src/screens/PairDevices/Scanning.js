@@ -5,7 +5,7 @@ import { FlatList, StyleSheet } from "react-native";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { Observable } from "rxjs";
-
+import { BLE_SCANNING_NOTHING_TIMEOUT } from "../../constants";
 import { knownDevicesSelector } from "../../reducers/ble";
 import type { DeviceLike } from "../../reducers/ble";
 import TransportBLE from "../../react-native-hw-transport-ble";
@@ -16,6 +16,7 @@ type Props = {
   knownDevices: DeviceLike[],
   onSelect: Device => *,
   onError: Error => *,
+  onTimeout: () => *,
 };
 
 type Device = {
@@ -25,32 +26,34 @@ type Device = {
 
 type State = {
   devices: Device[],
-  pending: boolean,
 };
 
 class Scanning extends Component<Props, State> {
   state = {
     devices: [],
-    pending: false,
   };
 
   sub: *;
 
+  timeout: *;
+
   componentDidMount() {
     this.startScan();
+    this.timeout = setTimeout(() => {
+      this.props.onTimeout();
+    }, BLE_SCANNING_NOTHING_TIMEOUT);
+  }
+
+  componentWillUnmount() {
+    if (this.sub) this.sub.unsubscribe();
+    clearTimeout(this.timeout);
   }
 
   startScan = async () => {
-    // TODO there need to be a timeout that happen if no device are found in X seconds.
-
-    this.setState({ pending: true });
-
     this.sub = Observable.create(TransportBLE.listen).subscribe({
-      complete: () => {
-        this.setState({ pending: false });
-      },
       next: e => {
         if (e.type === "add") {
+          clearTimeout(this.timeout);
           const device = e.descriptor;
           this.setState(({ devices }) => ({
             // FIXME seems like we have dup. ideally we'll remove them on the listen side!
@@ -65,10 +68,6 @@ class Scanning extends Component<Props, State> {
       },
     });
   };
-
-  componentWillUnmount() {
-    if (this.sub) this.sub.unsubscribe();
-  }
 
   keyExtractor = (item: *) => item.id;
 
@@ -90,16 +89,7 @@ class Scanning extends Component<Props, State> {
     );
   };
 
-  ListHeader = () => {
-    const { pending, devices } = this.state;
-    // FIXME this is a component
-    return (
-      <ScanningHeader
-        animating={pending}
-        hasError={!pending && devices.length === 0}
-      />
-    );
-  };
+  ListHeader = () => <ScanningHeader />;
 
   render() {
     const { devices } = this.state;

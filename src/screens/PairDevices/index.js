@@ -21,6 +21,7 @@ import TranslatedError from "../../components/TranslatedError";
 import Pairing from "./Pairing";
 import Paired from "./Paired";
 import Scanning from "./Scanning";
+import ScanningTimeout from "./ScanningTimeout";
 
 type Props = {
   navigation: NavigationScreenProp<*>,
@@ -33,7 +34,7 @@ type Device = {
   name: string,
 };
 
-type Status = "scanning" | "pairing" | "paired";
+type Status = "scanning" | "pairing" | "paired" | "timedout";
 
 type State = {
   status: Status,
@@ -60,6 +61,14 @@ class PairDevices extends Component<Props, State> {
   componentWillUnmount() {
     this.unmounted = true;
   }
+
+  onTimeout = () => {
+    this.setState({ status: "timedout" });
+  };
+
+  onRetry = () => {
+    this.setState({ status: "scanning", error: null, device: null });
+  };
 
   onError = (error: Error) => {
     this.setState({ error });
@@ -110,7 +119,13 @@ class PairDevices extends Component<Props, State> {
     return (
       <View style={styles.root}>
         {status === "scanning" ? (
-          <Scanning onSelect={this.onSelect} onError={this.onError} />
+          <Scanning
+            onSelect={this.onSelect}
+            onError={this.onError}
+            onTimeout={this.onTimeout}
+          />
+        ) : status === "timedout" ? (
+          <ScanningTimeout onRetry={this.onRetry} onCancel={this.onDone} />
         ) : status === "pairing" ? (
           <Pairing />
         ) : status === "paired" && device ? (

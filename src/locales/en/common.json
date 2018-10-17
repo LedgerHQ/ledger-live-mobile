@@ -4,6 +4,7 @@
     "apply": "Apply",
     "delete": "Delete",
     "continue": "Continue",
+    "retry": "Try again",
     "done": "Done",
     "sortBy": "Sort by",
     "signOut": "Sign Out"
@@ -290,6 +291,10 @@
     },
     "ScanningHeader": {
       "title": "We are searching for Nano X",
+      "desc": "Please be sure power is on, you have enter your PIN and bluetooth is enabled"
+    },
+    "ScanningTimeout": {
+      "title": "We didn't find any devices around",
       "desc": "Please be sure power is on, you have enter your PIN and bluetooth is enabled"
     }
   }
