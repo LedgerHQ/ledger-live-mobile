@@ -248,6 +248,7 @@ ImportAccounts.navigationOptions = {
 
 export const RootNavigator = createStackNavigator(
   {
+    PairDevices,
     Main,
     ReceiveFunds,
     SendFunds,

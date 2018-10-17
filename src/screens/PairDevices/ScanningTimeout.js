@@ -3,7 +3,7 @@
 import React, { Component } from "react";
 import { StyleSheet, View } from "react-native";
 import { translate } from "react-i18next";
-import BluetoothScanning from "./assets/BluetoothScanning";
+import BluetoothScanning from "../../components/BluetoothScanning";
 import colors from "../../colors";
 import Button from "../../components/Button";
 import LText from "../../components/LText";

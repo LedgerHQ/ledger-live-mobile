@@ -4,7 +4,7 @@ import React, { PureComponent } from "react";
 import { View, StyleSheet } from "react-native";
 import { translate } from "react-i18next";
 import LText from "../../components/LText";
-import BluetoothScanning from "./assets/BluetoothScanning";
+import BluetoothScanning from "../../components/BluetoothScanning";
 import colors from "../../colors";
 
 type Props = {

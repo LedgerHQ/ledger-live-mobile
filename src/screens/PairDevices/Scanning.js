@@ -38,10 +38,10 @@ class Scanning extends Component<Props, State> {
   timeout: *;
 
   componentDidMount() {
-    this.startScan();
     this.timeout = setTimeout(() => {
       this.props.onTimeout();
     }, BLE_SCANNING_NOTHING_TIMEOUT);
+    this.startScan();
   }
 
   componentWillUnmount() {
