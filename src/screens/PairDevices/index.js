@@ -117,19 +117,18 @@ class PairDevices extends Component<Props, State> {
     this.setState({ device, status: "pairing" }, this.pairDevice);
   };
 
-  renderItem = ({ item }: { item: * }) => (
-    <DeviceItem
-      device={item}
-      name={item.name}
-      onSelect={this.onSelect}
-      disabled={false}
-      description={
-        this.props.knownDevices.some(d => d.id === item.id)
-          ? "known device"
-          : ""
-      }
-    />
-  );
+  renderItem = ({ item }: { item: * }) => {
+    const knownDevice = this.props.knownDevices.find(d => d.id === item.id);
+    return (
+      <DeviceItem
+        device={item}
+        name={item.name}
+        onSelect={this.onSelect}
+        disabled={!!knownDevice}
+        description={knownDevice ? "Already paired" : ""}
+      />
+    );
+  };
 
   keyExtractor = (item: *) => item.id;
 
@@ -175,6 +174,7 @@ class PairDevices extends Component<Props, State> {
     return (
       <View style={styles.root}>
         {status === "scanning" || status === "scanned" ? (
+          // FIXME this is a component
           <FlatList
             style={styles.list}
             data={devices}
@@ -205,7 +205,7 @@ class PairDevices extends Component<Props, State> {
         ) : status === "pairing" ? (
           <Pairing />
         ) : status === "paired" && device ? (
-          <Paired device={device} onContinue={this.onDone} />
+          <Paired deviceId={device.id} onContinue={this.onDone} />
         ) : null}
       </View>
     );

@@ -11,19 +11,19 @@ import PairingSuccess from "./assets/PairingSuccess";
 import DeviceItemSummary from "../../components/DeviceItemSummary";
 
 class Paired extends PureComponent<{
-  device: *,
+  deviceId: *,
   onContinue: () => *,
   navigation: *,
 }> {
   onEdit = () => {
-    const { device, navigation } = this.props;
+    const { deviceId, navigation } = this.props;
     navigation.navigate("EditDeviceName", {
-      device,
+      deviceId,
     });
   };
 
   render() {
-    const { device, onContinue } = this.props;
+    const { deviceId, onContinue } = this.props;
     return (
       <View style={styles.root}>
         <PairingSuccess />
@@ -36,7 +36,7 @@ class Paired extends PureComponent<{
           }
         </LText>
         <View style={styles.fullContainer}>
-          <DeviceItemSummary name={device.name} genuine onEdit={this.onEdit} />
+          <DeviceItemSummary deviceId={deviceId} genuine onEdit={this.onEdit} />
         </View>
         <View style={[styles.fullContainer, styles.buttonContainer]}>
           <Button type="primary" title="Continue" onPress={onContinue} />

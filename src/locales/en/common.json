@@ -34,6 +34,9 @@
     },
     "FeeNotLoaded": {
       "title": "Couldn’t load fee rates. Please set manual fees"
+    },
+    "DeviceNameRequired": {
+      "title": "A device name is required"
     }
   },
   "auth": {
@@ -273,5 +276,10 @@
   },
   "SelectDevice": {
     "deviceNotFoundPairNewDevice": "Device not in the list? Pair a new"
+  },
+  "EditDeviceName": {
+    "charactersRemaining": "{{remainingCount}} characters remaining",
+    "inputPlaceholder": "Custom Device Name",
+    "action": "Change name"
   }
 }

@@ -1,9 +1,10 @@
 // @flow
 
 import React, { PureComponent } from "react";
+import invariant from "invariant";
 import { View, StyleSheet } from "react-native";
 import Icon from "react-native-vector-icons/dist/Feather";
-import { RectButton } from "react-native-gesture-handler";
+import Touchable from "./Touchable";
 import LText from "./LText";
 import colors from "../colors";
 import IconNanoX from "../icons/NanoX";
@@ -32,7 +33,8 @@ const iconByFamily = {
 export default class DeviceItem<T> extends PureComponent<Props<T>> {
   onPress = () => {
     const { device, onSelect } = this.props;
-    if (onSelect) onSelect(device);
+    invariant(onSelect, "onSelect required");
+    return onSelect(device);
   };
 
   render() {
@@ -78,7 +80,7 @@ export default class DeviceItem<T> extends PureComponent<Props<T>> {
     );
 
     if (onSelect && !disabled) {
-      res = <RectButton onPress={this.onPress}>{res}</RectButton>;
+      res = <Touchable onPress={this.onPress}>{res}</Touchable>;
     }
 
     return <View style={styles.outer}>{res}</View>;

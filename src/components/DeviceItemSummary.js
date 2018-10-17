@@ -2,18 +2,22 @@
 
 import React, { PureComponent } from "react";
 import { View, StyleSheet } from "react-native";
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
+import { deviceNameByDeviceIdSelector } from "../reducers/ble";
 import Touchable from "./Touchable";
 import LText from "./LText";
 import colors from "../colors";
 import IconNanoX from "../icons/NanoX";
 
 type Props = {
+  deviceId: string,
   name: string,
   genuine: boolean,
   onEdit: () => *,
 };
 
-export default class DeviceItemSummary extends PureComponent<Props> {
+class DeviceItemSummary extends PureComponent<Props> {
   render() {
     const { name, genuine, onEdit } = this.props;
     return (
@@ -38,6 +42,12 @@ export default class DeviceItemSummary extends PureComponent<Props> {
     );
   }
 }
+
+export default connect(
+  createStructuredSelector({
+    name: deviceNameByDeviceIdSelector,
+  }),
+)(DeviceItemSummary);
 
 const styles = StyleSheet.create({
   outer: {
