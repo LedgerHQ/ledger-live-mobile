@@ -13,14 +13,16 @@ const transport = Config.MOCK_BLE
         const apduMock = createAPDUMock({
           setDeviceName: name => {
             names[id] = name;
+            return Promise.resolve();
           },
-          getDeviceName: () => names[id] || id,
-          getAddress: () => ({
-            publicKey: "00000000000000000000",
-            address: "11111111111111111111111111111",
-            chainCode:
-              "0000000000000000000000000000000000000000000000000000000000000000",
-          }),
+          getDeviceName: () => Promise.resolve(names[id] || id),
+          getAddress: () =>
+            Promise.resolve({
+              publicKey: "00000000000000000000",
+              address: "11111111111111111111111111111",
+              chainCode:
+                "0000000000000000000000000000000000000000000000000000000000000000",
+            }),
         });
         return {
           id,

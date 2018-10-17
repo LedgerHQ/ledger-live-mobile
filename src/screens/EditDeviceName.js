@@ -1,11 +1,15 @@
 // @flow
 
 import React, { Component } from "react";
-import { TextInput, View } from "react-native";
+import { TextInput, View, StyleSheet } from "react-native";
 import type { NavigationScreenProp } from "react-navigation";
+import Icon from "react-native-vector-icons/dist/Feather";
 import TransportBLE from "../react-native-hw-transport-ble";
 import editDeviceName from "../logic/hw/editDeviceName";
 import Button from "../components/Button";
+import LText from "../components/LText";
+import TranslatedError from "../components/TranslatedError";
+import colors from "../colors";
 
 export default class EditDeviceName extends Component<
   {
@@ -13,6 +17,7 @@ export default class EditDeviceName extends Component<
   },
   {
     name: string,
+    error: ?Error,
   },
 > {
   static navigationOptions = {
@@ -21,6 +26,7 @@ export default class EditDeviceName extends Component<
 
   state = {
     name: this.props.navigation.getParam("device").name,
+    error: null,
   };
 
   onChangeText = (name: string) => {
@@ -31,15 +37,21 @@ export default class EditDeviceName extends Component<
     const { name } = this.state;
     const device = this.props.navigation.getParam("device");
     if (device.name !== name) {
-      const transport = await TransportBLE.open(device);
-      await editDeviceName(transport, name);
-      transport.close();
+      try {
+        const transport = await TransportBLE.open(device);
+        await editDeviceName(transport, name);
+        transport.close();
+      } catch (error) {
+        console.warn(error);
+        this.setState({ error });
+        return;
+      }
     }
     this.props.navigation.goBack();
   };
 
   render() {
-    const { name } = this.state;
+    const { name, error } = this.state;
     return (
       <View style={{ flex: 1 }}>
         <View style={{ flex: 1 }}>
@@ -49,8 +61,33 @@ export default class EditDeviceName extends Component<
             style={{ padding: 10 }}
           />
         </View>
-        <Button type="primary" title="Change name" onPress={this.onSubmit} />
+        <View style={styles.footer}>
+          {error ? (
+            <LText style={styles.error} numberOfLines={2}>
+              <Icon color={colors.alert} size={16} name="alert-triangle" />{" "}
+              <TranslatedError error={error} />
+            </LText>
+          ) : null}
+          <Button type="primary" title="Change name" onPress={this.onSubmit} />
+        </View>
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  root: {
+    flex: 1,
+  },
+  body: {},
+  error: {
+    alignSelf: "center",
+    color: colors.alert,
+    fontSize: 14,
+    marginBottom: 10,
+  },
+  footer: {
+    flexDirection: "column",
+    padding: 20,
+  },
+});

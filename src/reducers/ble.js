@@ -19,7 +19,7 @@ const initialState: BleState = {
 const handlers: Object = {
   BLE_ADD_DEVICE: (state: BleState, { device }: { device: DeviceLike }) => ({
     knownDevices: state.knownDevices
-      .filter(id => id !== device.id)
+      .filter(d => d.id !== device.id)
       .concat({ id: device.id, name: device.name }),
   }),
 
@@ -31,8 +31,6 @@ const handlers: Object = {
     ...state,
     ...ble,
   }),
-
-  CLEAN_CACHE: (): BleState => initialState,
 };
 
 // Selectors

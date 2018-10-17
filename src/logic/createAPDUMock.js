@@ -12,13 +12,13 @@ const genericErrorResponse = Buffer.from([0x6f, 0x42]);
 const successResponse = Buffer.from([0x90, 0x00]);
 
 export default (arg: {
-  getDeviceName: () => string,
-  setDeviceName: string => void,
-  getAddress: () => {
+  getDeviceName: () => Promise<string>,
+  setDeviceName: string => Promise<void>,
+  getAddress: () => Promise<{
     publicKey: string,
     address: string,
     chainCode: string,
-  },
+  }>,
 }): ApduMock => {
   async function exchange(input: Buffer) {
     await delay(100);
@@ -35,17 +35,17 @@ export default (arg: {
     switch (clains) {
       case "e0d2": {
         // get name
-        return Buffer.from(arg.getDeviceName());
+        return Buffer.from(await arg.getDeviceName());
       }
       case "e0d4": {
         // set name
-        arg.setDeviceName(data.toString());
+        arg.setDeviceName(await data.toString());
         return successResponse;
       }
       case "e040": {
         // get address
         try {
-          const addr = arg.getAddress();
+          const addr = await arg.getAddress();
 
           const pubKey = Buffer.from(addr.publicKey, "hex");
           const address = Buffer.from(addr.address, "ascii");
