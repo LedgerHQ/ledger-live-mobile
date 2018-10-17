@@ -2,6 +2,7 @@
 
 import { View, StyleSheet, ActivityIndicator } from "react-native";
 import React, { PureComponent } from "react";
+import { translate } from "react-i18next";
 
 import colors from "../../colors";
 import LText from "../../components/LText";
@@ -12,10 +13,13 @@ class Pairing extends PureComponent<*> {
       <View style={styles.root}>
         <ActivityIndicator size="large" />
         <LText secondary semiBold style={styles.title}>
-          Pairing...
+          Genuine check...
         </LText>
         <LText style={styles.subtitle}>
-          Please don’t turn off your Nano X. Follow screen instructions.
+          Make sure your Nano X is on Dashboard and accept
+        </LText>
+        <LText bold style={styles.bold}>
+          Allow Manager
         </LText>
       </View>
     );
@@ -33,12 +37,13 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: colors.darkBlue,
   },
+  subtitleContainer: {},
   subtitle: {
     fontSize: 14,
     marginTop: 8,
     textAlign: "center",
-    paddingHorizontal: 20,
   },
+  bold: {},
 });
 
-export default Pairing;
+export default translate()(Pairing);

@@ -53,6 +53,8 @@ class SelectDevice extends Component<
   }
 
   onSelect = async ({ id, family }) => {
+    this.props.removeKnownDevice(id); // TMP HACK UNTIL FEATURE
+
     if (!family) {
       // this is ble case
       try {

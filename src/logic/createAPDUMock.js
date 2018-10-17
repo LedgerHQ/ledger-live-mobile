@@ -35,7 +35,10 @@ export default (arg: {
     switch (clains) {
       case "e0d2": {
         // get name
-        return Buffer.from(await arg.getDeviceName());
+        return Buffer.concat([
+          Buffer.from(await arg.getDeviceName()),
+          successResponse,
+        ]);
       }
       case "e0d4": {
         // set name
@@ -57,6 +60,7 @@ export default (arg: {
             Buffer.from([address.length]),
             address,
             chainCode,
+            successResponse,
           ]);
         } catch (e) {
           return genericErrorResponse;

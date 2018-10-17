@@ -47,8 +47,8 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   SubtitleContainer: {
-    maxWidth: 288,
     marginTop: 8,
+    paddingHorizontal: 20,
   },
   SubtitleText: {
     textAlign: "center",

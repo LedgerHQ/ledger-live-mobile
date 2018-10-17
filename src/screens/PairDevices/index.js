@@ -12,6 +12,7 @@ import { addKnownDevice } from "../../actions/ble";
 import { knownDevicesSelector } from "../../reducers/ble";
 import type { DeviceLike } from "../../reducers/ble";
 import genuineCheck from "../../logic/hw/genuineCheck";
+import getDeviceName from "../../logic/hw/getDeviceName";
 import colors from "../../colors";
 import LocationRequired from "../LocationRequired";
 import LText from "../../components/LText";
@@ -19,6 +20,7 @@ import HeaderRightClose from "../../components/HeaderRightClose";
 import RequiresBLE from "../../components/RequiresBLE";
 import TranslatedError from "../../components/TranslatedError";
 import Pairing from "./Pairing";
+import GenuineCheck from "./GenuineCheck";
 import Paired from "./Paired";
 import Scanning from "./Scanning";
 import ScanningTimeout from "./ScanningTimeout";
@@ -34,7 +36,7 @@ type Device = {
   name: string,
 };
 
-type Status = "scanning" | "pairing" | "paired" | "timedout";
+type Status = "scanning" | "pairing" | "genuinecheck" | "paired" | "timedout";
 
 type State = {
   status: Status,
@@ -81,6 +83,10 @@ class PairDevices extends Component<Props, State> {
       if (this.unmounted) return;
       transport.setDebugMode(true);
       try {
+        // getDeviceName is a dummy apdu to trigger the pairing.
+        // at same time we might want to use its result to make sure the name is in sync!
+        await getDeviceName(transport);
+        this.setState({ device, status: "genuinecheck" });
         await genuineCheck(transport);
         if (this.unmounted) return;
         this.props.addKnownDevice(device);
@@ -128,6 +134,8 @@ class PairDevices extends Component<Props, State> {
           <ScanningTimeout onRetry={this.onRetry} onCancel={this.onDone} />
         ) : status === "pairing" ? (
           <Pairing />
+        ) : status === "genuinecheck" ? (
+          <GenuineCheck />
         ) : status === "paired" && device ? (
           <Paired deviceId={device.id} onContinue={this.onDone} />
         ) : null}

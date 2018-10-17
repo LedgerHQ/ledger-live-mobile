@@ -68,11 +68,11 @@ const styles = StyleSheet.create({
     color: colors.darkBlue,
   },
   description: {
-    maxWidth: 250,
     marginTop: 8,
     marginBottom: 40,
     textAlign: "center",
     fontSize: 14,
+    paddingHorizontal: 20,
   },
 });
 
