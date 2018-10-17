@@ -8,7 +8,7 @@ import { translate } from "react-i18next";
 import colors from "../../colors";
 import LText from "../../components/LText";
 import Button from "../../components/Button";
-import PairingSuccess from "./assets/PairingSuccess";
+import PairingSuccess from "../../icons/PairingSuccess";
 import DeviceItemSummary from "../../components/DeviceItemSummary";
 
 class Paired extends PureComponent<{
