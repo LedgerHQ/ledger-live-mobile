@@ -287,6 +287,10 @@
       "title": "Nano X paired with success!",
       "desc": "You can now use your Nano X on your Ledger Live mobile App to send & receive funds. You can also mange your device on the Manager section",
       "action": "Continue"
+    },
+    "ScanningHeader": {
+      "title": "We are searching for Nano X",
+      "desc": "Please be sure power is on, you have enter your PIN and bluetooth is enabled"
     }
   }
 }

@@ -1,27 +1,26 @@
 // @flow
 
 import React, { Component } from "react";
-import { View, FlatList, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
-import { Observable } from "rxjs";
 import type { NavigationScreenProp } from "react-navigation";
 import { BleErrorCode } from "react-native-ble-plx";
+import TransportBLE from "../../react-native-hw-transport-ble";
 
 import { addKnownDevice } from "../../actions/ble";
 import { knownDevicesSelector } from "../../reducers/ble";
 import type { DeviceLike } from "../../reducers/ble";
-import TransportBLE from "../../react-native-hw-transport-ble";
+import genuineCheck from "../../logic/hw/genuineCheck";
+import colors from "../../colors";
+import LocationRequired from "../LocationRequired";
 import LText from "../../components/LText";
+import HeaderRightClose from "../../components/HeaderRightClose";
+import RequiresBLE from "../../components/RequiresBLE";
+import TranslatedError from "../../components/TranslatedError";
 import Pairing from "./Pairing";
 import Paired from "./Paired";
-import LocationRequired from "../LocationRequired";
-import HeaderRightClose from "../../components/HeaderRightClose";
-import DeviceItem from "../../components/DeviceItem";
-import BluetoothScanning from "./assets/BluetoothScanning";
-import RequiresBLE from "../../components/RequiresBLE";
-import colors from "../../colors";
-import genuineCheck from "../../logic/hw/genuineCheck";
+import Scanning from "./Scanning";
 
 type Props = {
   navigation: NavigationScreenProp<*>,
@@ -34,13 +33,12 @@ type Device = {
   name: string,
 };
 
-type Status = "scanning" | "scanned" | "pairing" | "paired" | "error";
+type Status = "scanning" | "pairing" | "paired";
 
 type State = {
   status: Status,
-  devices: Device[],
   device: ?Device,
-  error: ?*,
+  error: ?Error,
 };
 
 class PairDevices extends Component<Props, State> {
@@ -53,155 +51,66 @@ class PairDevices extends Component<Props, State> {
 
   state = {
     status: "scanning",
-    devices: [],
     device: null,
     error: null,
   };
 
-  sub: *;
-
-  componentDidMount() {
-    this.startScan();
-  }
-
-  startScan = async () => {
-    // TODO there need to be a timeout that happen if no device are found in X seconds.
-
-    this.setState({ status: "scanning" });
-
-    this.sub = Observable.create(TransportBLE.listen).subscribe({
-      complete: () => {
-        this.setState({ status: "scanned" });
-      },
-      next: e => {
-        if (e.type === "add") {
-          const device = e.descriptor;
-          this.setState(({ devices }) => ({
-            // FIXME seems like we have dup. ideally we'll remove them on the listen side!
-            devices: devices.some(i => i.id === device.id)
-              ? devices
-              : devices.concat(device),
-          }));
-        }
-      },
-      error: error => {
-        this.setState({ error, status: "error" });
-      },
-    });
-  };
+  unmounted = false;
 
   componentWillUnmount() {
-    if (this.sub) this.sub.unsubscribe();
+    this.unmounted = true;
   }
 
-  pairDevice = async () => {
-    const { device } = this.state;
-    if (!device) return;
+  onError = (error: Error) => {
+    this.setState({ error });
+  };
+
+  onSelect = async (device: Device) => {
+    this.setState({ device, status: "pairing" });
     try {
       const transport = await TransportBLE.open(device);
+      if (this.unmounted) return;
       transport.setDebugMode(true);
       try {
         await genuineCheck(transport);
+        if (this.unmounted) return;
         this.props.addKnownDevice(device);
+        if (this.unmounted) return;
         this.setState({ status: "paired" });
       } finally {
         transport.close();
       }
     } catch (error) {
-      this.setState({ status: "error", error });
+      if (this.unmounted) return;
+      this.onError(error);
     }
   };
-
-  onSelect = (device: Device) => {
-    if (this.sub) this.sub.unsubscribe();
-    this.setState({ device, status: "pairing" }, this.pairDevice);
-  };
-
-  renderItem = ({ item }: { item: * }) => {
-    const knownDevice = this.props.knownDevices.find(d => d.id === item.id);
-    return (
-      <DeviceItem
-        device={item}
-        name={item.name}
-        onSelect={this.onSelect}
-        disabled={!!knownDevice}
-        description={knownDevice ? "Already paired" : ""}
-      />
-    );
-  };
-
-  keyExtractor = (item: *) => item.id;
-
-  reload = async () => {
-    if (this.sub) this.sub.unsubscribe();
-    this.startScan();
-  };
-
-  ListHeader = () => (
-    // FIXME this is a component
-    <View style={styles.listHeader}>
-      <BluetoothScanning />
-      <View style={styles.listHeaderTitleContainer}>
-        <LText secondary bold style={styles.listHeaderTitleText}>
-          We are searching for Nano X
-        </LText>
-      </View>
-      <View style={styles.listHeaderSubtitleContainer}>
-        <LText style={styles.listHeaderSubtitleText}>
-          {
-            "Please be sure power is on, you have enter your PIN and bluetooth is enabled"
-          }
-        </LText>
-      </View>
-    </View>
-  );
 
   onDone = () => {
     this.props.navigation.goBack();
   };
 
   render() {
-    const { devices, error, status, device } = this.state;
+    const { error, status, device } = this.state;
 
     if (error) {
+      // $FlowFixMe
       if (error.errorCode === BleErrorCode.LocationServicesDisabled) {
         return <LocationRequired />;
       }
 
-      return <LText>{error.message}</LText>;
+      return (
+        // FIXME identify how this is possible & what we should really do
+        <LText>
+          <TranslatedError error={error} />
+        </LText>
+      );
     }
 
     return (
       <View style={styles.root}>
-        {status === "scanning" || status === "scanned" ? (
-          // FIXME this is a component
-          <FlatList
-            style={styles.list}
-            data={devices}
-            renderItem={this.renderItem}
-            keyExtractor={this.keyExtractor}
-            ListHeaderComponent={() => (
-              // FIXME this is a component
-              <View style={styles.listHeader}>
-                <BluetoothScanning
-                  isAnimated={status === "scanning"}
-                  isError={status === "scanned" && !devices.length}
-                />
-                <View style={styles.listHeaderTitleContainer}>
-                  <LText secondary bold style={styles.listHeaderTitleText}>
-                    We are searching for Nano X
-                  </LText>
-                </View>
-                <View style={styles.listHeaderSubtitleContainer}>
-                  <LText style={styles.listHeaderSubtitleText}>
-                    {
-                      "Please be sure power is on, you have enter your PIN and bluetooth is enabled"
-                    }
-                  </LText>
-                </View>
-              </View>
-            )}
-          />
+        {status === "scanning" ? (
+          <Scanning onSelect={this.onSelect} onError={this.onError} />
         ) : status === "pairing" ? (
           <Pairing />
         ) : status === "paired" && device ? (
@@ -241,29 +150,5 @@ const styles = StyleSheet.create({
   root: {
     flex: 1,
     backgroundColor: colors.white,
-  },
-  list: {
-    flex: 1,
-    paddingHorizontal: 16,
-  },
-  listHeader: {
-    paddingVertical: 32,
-    alignItems: "center",
-  },
-  listHeaderTitleContainer: {
-    marginTop: 24,
-  },
-  listHeaderTitleText: {
-    color: colors.darkBlue,
-    fontSize: 18,
-  },
-  listHeaderSubtitleContainer: {
-    maxWidth: 288,
-    marginTop: 8,
-  },
-  listHeaderSubtitleText: {
-    textAlign: "center",
-    fontSize: 14,
-    color: colors.grey,
   },
 });
