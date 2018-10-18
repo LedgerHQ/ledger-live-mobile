@@ -100,6 +100,16 @@ class PairDevices extends Component<Props, State> {
     }
   };
 
+  onBypassGenuine = () => {
+    const { device } = this.state;
+    if (device) {
+      this.props.addKnownDevice(device);
+      this.setState({ status: "paired", error: null });
+    } else {
+      this.setState({ status: "scanning", error: null, device: null });
+    }
+  };
+
   onDone = () => {
     this.props.navigation.goBack();
   };
@@ -114,6 +124,7 @@ class PairDevices extends Component<Props, State> {
           error={error}
           onRetry={this.onRetry}
           onCancel={this.onDone}
+          onBypassGenuine={this.onBypassGenuine}
         />
       );
     }

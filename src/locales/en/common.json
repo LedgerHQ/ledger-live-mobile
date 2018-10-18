@@ -320,6 +320,7 @@
     "ScanningTimeout": {
       "title": "We didn't find any devices around",
       "desc": "Please be sure power is on, you have enter your PIN and bluetooth is enabled"
-    }
+    },
+    "bypassGenuine": "Use anyway"
   }
 }

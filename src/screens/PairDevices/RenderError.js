@@ -3,6 +3,7 @@
 import React, { Component } from "react";
 import { StyleSheet, ScrollView, View } from "react-native";
 import { BleErrorCode } from "react-native-ble-plx";
+import Icon from "react-native-vector-icons/dist/Feather";
 import { translate } from "react-i18next";
 import LocationRequired from "../LocationRequired";
 import LText from "../../components/LText";
@@ -17,12 +18,19 @@ type Props = {
   status: string,
   onCancel: () => void,
   onRetry: () => void,
+  onBypassGenuine: () => void,
   t: *,
 };
 
+const GenericErrorHeader = () => (
+  <LText>
+    <Icon name="alert-triangle" size={32} color={colors.alert} />
+  </LText>
+);
+
 class RenderError extends Component<Props> {
   render() {
-    const { t, error, status, onCancel, onRetry } = this.props;
+    const { t, error, status, onCancel, onBypassGenuine, onRetry } = this.props;
 
     // $FlowFixMe
     if (error.errorCode === BleErrorCode.LocationServicesDisabled) {
@@ -36,28 +44,41 @@ class RenderError extends Component<Props> {
           ? new GenuineCheckFailed()
           : error;
 
+    const Header = status === "pairing" ? PairingFailure : GenericErrorHeader;
+
     return (
       <View style={styles.root}>
         <ScrollView
           style={styles.list}
           contentContainerStyle={styles.contentContainer}
         >
-          <PairingFailure />
-          <LText semiBold style={styles.title}>
-            <TranslatedError error={primaryError} />
-          </LText>
-          <LText style={styles.description}>
-            <TranslatedError error={primaryError} field="description" />
-          </LText>
+          <Header />
+          <View style={styles.container}>
+            <LText semiBold style={styles.title}>
+              <TranslatedError error={primaryError} />
+            </LText>
+            <LText style={styles.description}>
+              <TranslatedError error={primaryError} field="description" />
+            </LText>
+          </View>
         </ScrollView>
 
         <View style={styles.footer}>
-          <Button
-            type="secondary"
-            title={t("common.cancel")}
-            onPress={onCancel}
-            containerStyle={styles.button}
-          />
+          {status === "genuinecheck" ? (
+            <Button
+              type="secondary"
+              title={t("PairDevices.bypassGenuine")}
+              onPress={onBypassGenuine}
+              containerStyle={styles.button}
+            />
+          ) : (
+            <Button
+              type="secondary"
+              title={t("common.cancel")}
+              onPress={onCancel}
+              containerStyle={styles.button}
+            />
+          )}
           <Button
             type="primary"
             title={t("common.retry")}
@@ -77,15 +98,21 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
   },
-  list: { flex: 1 },
+  list: {
+    flex: 1,
+  },
   contentContainer: {
     paddingVertical: "20%",
     flexDirection: "column",
     alignItems: "center",
   },
+  container: {
+    flexDirection: "column",
+    alignItems: "center",
+    paddingVertical: 20,
+  },
   title: {
     fontSize: 18,
-    marginTop: 20,
     marginBottom: 10,
     color: colors.darkBlue,
   },
