@@ -3,8 +3,11 @@
 import React, { PureComponent } from "react";
 import { View, StyleSheet } from "react-native";
 import { connect } from "react-redux";
+import { translate } from "react-i18next";
 import { createStructuredSelector } from "reselect";
+import Icon from "react-native-vector-icons/dist/Feather";
 import { deviceNameByDeviceIdSelector } from "../reducers/ble";
+import Circle from "./Circle";
 import Touchable from "./Touchable";
 import LText from "./LText";
 import colors from "../colors";
@@ -15,11 +18,12 @@ type Props = {
   name: string,
   genuine: boolean,
   onEdit: () => *,
+  t: *,
 };
 
 class DeviceItemSummary extends PureComponent<Props> {
   render() {
-    const { name, genuine, onEdit } = this.props;
+    const { name, genuine, onEdit, t } = this.props;
     return (
       <View style={styles.root}>
         <IconNanoX color={colors.darkBlue} height={36} width={8} />
@@ -28,13 +32,19 @@ class DeviceItemSummary extends PureComponent<Props> {
             {name}
           </LText>
           {genuine ? (
-            <LText numberOfLines={1} style={styles.genuineText}>
-              {"Device is genuine"}
-            </LText>
+            <View style={styles.genuine}>
+              <LText numberOfLines={1} style={styles.genuineText}>
+                {t("DeviceItemSummary.genuine")}
+                {"  "}
+              </LText>
+              <Circle bg={colors.live} size={16}>
+                <Icon name="check" size={10} color={colors.white} />
+              </Circle>
+            </View>
           ) : null}
         </View>
         <Touchable onPress={onEdit}>
-          <LText bold numberOfLines={1} style={styles.editText}>
+          <LText numberOfLines={1} style={styles.editText}>
             Edit
           </LText>
         </Touchable>
@@ -47,7 +57,7 @@ export default connect(
   createStructuredSelector({
     name: deviceNameByDeviceIdSelector,
   }),
-)(DeviceItemSummary);
+)(translate()(DeviceItemSummary));
 
 const styles = StyleSheet.create({
   outer: {
@@ -72,6 +82,9 @@ const styles = StyleSheet.create({
   deviceNameText: {
     fontSize: 14,
     color: colors.darkBlue,
+  },
+  genuine: {
+    flexDirection: "row",
   },
   genuineText: {
     fontSize: 12,

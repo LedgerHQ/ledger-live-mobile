@@ -3,7 +3,7 @@
 import React, { PureComponent } from "react";
 import { View, StyleSheet } from "react-native";
 import { withNavigation } from "react-navigation";
-import { translate } from "react-i18next";
+import { translate, Trans } from "react-i18next";
 
 import colors from "../../colors";
 import LText from "../../components/LText";
@@ -32,7 +32,15 @@ class Paired extends PureComponent<{
         <LText secondary semiBold style={styles.title}>
           {t("PairDevices.Paired.title")}
         </LText>
-        <LText style={styles.description}>{t("PairDevices.Paired.desc")}</LText>
+        <LText style={styles.description}>
+          <Trans i18nKey="PairDevices.Paired.desc">
+            {"You can now use your Nano X on you Ledger Live mobile App to "}
+            <LText semiBold>send & receive funds</LText>
+            {". You can also mange your device on the "}
+            <LText semiBold>Manager</LText>
+            {" section"}
+          </Trans>
+        </LText>
         <View style={styles.fullContainer}>
           <DeviceItemSummary deviceId={deviceId} genuine onEdit={this.onEdit} />
         </View>
@@ -72,7 +80,8 @@ const styles = StyleSheet.create({
     marginBottom: 40,
     textAlign: "center",
     fontSize: 14,
-    paddingHorizontal: 20,
+    paddingHorizontal: 40,
+    color: colors.grey,
   },
 });
 

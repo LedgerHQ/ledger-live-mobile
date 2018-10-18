@@ -310,7 +310,7 @@
   "PairDevices": {
     "Paired": {
       "title": "Nano X paired with success!",
-      "desc": "You can now use your Nano X on your Ledger Live mobile App to send & receive funds. You can also mange your device on the Manager section",
+      "desc": "You can now use your Nano X on your Ledger Live mobile App to <1><0>send & receive funds</0></1>. You can also mange your device on the <1><1>Manager</1></1> section",
       "action": "Continue"
     },
     "ScanningHeader": {
@@ -322,5 +322,8 @@
       "desc": "Please be sure power is on, you have enter your PIN and bluetooth is enabled"
     },
     "bypassGenuine": "Use anyway"
+  },
+  "DeviceItemSummary": {
+    "genuine": "Your device is genuine"
   }
 }
