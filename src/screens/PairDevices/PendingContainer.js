@@ -13,7 +13,7 @@ class PendingContainer extends PureComponent<*> {
     return (
       <View style={styles.root}>
         <Spinning>
-          <LiveLogo color={colors.grey} size={32} />
+          <LiveLogo color={colors.fog} size={32} />
         </Spinning>
         {children}
       </View>

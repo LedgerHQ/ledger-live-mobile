@@ -1,8 +1,9 @@
 // @flow
 
 import React, { PureComponent, Fragment } from "react";
-import { StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { translate } from "react-i18next";
+import DeviceNanoAction from "../../components/DeviceNanoAction";
 
 import colors from "../../colors";
 import LText from "../../components/LText";
@@ -20,6 +21,10 @@ class PendingGenuineCheck extends PureComponent<*> {
         <LText bold style={styles.bold}>
           Allow Manager
         </LText>
+
+        <View style={styles.footer}>
+          <DeviceNanoAction powerAction validationOnScreen />
+        </View>
       </Fragment>
     );
   }
@@ -38,6 +43,11 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   bold: {},
+  footer: {
+    position: "relative",
+    right: "-20%",
+    marginTop: 20,
+  },
 });
 
 export default translate()(PendingGenuineCheck);

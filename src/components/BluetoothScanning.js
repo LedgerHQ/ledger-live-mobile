@@ -5,7 +5,7 @@ import { View, StyleSheet, Animated } from "react-native";
 
 import IconClose from "../icons/Close";
 import colors from "../colors";
-import DeviceNano from "./DeviceNano";
+import DeviceNanoMedium from "./DeviceNanoMedium";
 import PhoneBle from "./PhoneBle";
 
 type Props = {
@@ -87,7 +87,7 @@ export default class BluetoothScanning extends PureComponent<Props> {
         <View style={styles.body}>
           <PhoneBle />
           <LeftRightDots isAnimated={isAnimated} />
-          <DeviceNano />
+          <DeviceNanoMedium />
           {isError && (
             <View style={styles.errorContainer}>
               <IconClose size={24} color={colors.alert} />
