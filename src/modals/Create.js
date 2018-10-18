@@ -4,6 +4,7 @@ import React, { Component } from "react";
 import { withNavigation } from "react-navigation";
 import { translate } from "react-i18next";
 import type { NavigationScreenProp } from "react-navigation";
+import config from "react-native-config";
 
 import BottomModal from "../components/BottomModal";
 import BottomModalChoice from "../components/BottomModalChoice";
@@ -48,6 +49,7 @@ class CreateModal extends Component<Props> {
 
   render() {
     const { onClose, isOpened, t } = this.props;
+    if (config.DISABLE_TRANSFER) return null;
     return (
       <BottomModal
         isOpened={isOpened}

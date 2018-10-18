@@ -289,7 +289,16 @@
     "error": "Sync Error",
     "loading": "Sync"
   },
-<<<<<<< HEAD
+  "scanning": {
+    "loading": "Searching devices..."
+  },
+  "send": {
+    "recipient": {
+      "scan": "Scan QR Code",
+      "enterAddress": "Or enter a recipient address",
+      "input": "address"
+    }
+  },
   "SelectDevice": {
     "deviceNotFoundPairNewDevice": "Device not in the list? Pair a new"
   },
@@ -311,16 +320,6 @@
     "ScanningTimeout": {
       "title": "We didn't find any devices around",
       "desc": "Please be sure power is on, you have enter your PIN and bluetooth is enabled"
-=======
-  "scanning": {
-    "loading": "Searching devices..."
-  },
-  "send": {
-    "recipient": {
-      "scan": "Scan QR Code",
-      "enterAddress": "Or enter a recipient address",
-      "input": "address"
->>>>>>> develop
     }
   }
 }
