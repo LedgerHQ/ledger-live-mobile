@@ -5,8 +5,10 @@ import { View, StyleSheet } from "react-native";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import type { NavigationScreenProp } from "react-navigation";
+import { timeout } from "rxjs/operators/timeout";
 import TransportBLE from "../../react-native-hw-transport-ble";
 
+import { GENUINE_CHECK_TIMEOUT } from "../../constants";
 import { addKnownDevice } from "../../actions/ble";
 import { knownDevicesSelector } from "../../reducers/ble";
 import type { DeviceLike } from "../../reducers/ble";
@@ -85,7 +87,11 @@ class PairDevices extends Component<Props, State> {
         // we might still want to use its result to make sure the name is in sync!
         await getDeviceName(transport);
         this.setState({ device, status: "genuinecheck" });
-        await genuineCheck(transport);
+        const observable = genuineCheck(transport).pipe(
+          timeout(GENUINE_CHECK_TIMEOUT),
+        );
+
+        await observable.toPromise();
         if (this.unmounted) return;
         this.props.addKnownDevice(device);
         if (this.unmounted) return;

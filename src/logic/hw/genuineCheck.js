@@ -1,10 +1,21 @@
 // @flow
+// Perform a genuine check. error is fails. complete on success.
+
 import Transport from "@ledgerhq/hw-transport";
-import { delay } from "../promise";
+import { Observable } from "rxjs";
 
-// TODO will returns one of the specific error. errors are in live-common now
-
-export default async (transport: Transport<*>): Promise<void> => {
-  await delay(2000);
-  await transport.send(0, 0, 0, 0);
-};
+export default (transport: Transport<*>): Observable<void> =>
+  Observable.create(o => {
+    transport.send(0, 0, 0, 0).then(
+      () => {
+        // NB potentially we could emit progress events
+        setTimeout(() => {
+          o.complete();
+        }, 2000);
+      },
+      e => o.error(e),
+    );
+    return () => {
+      // cancel things
+    };
+  });
