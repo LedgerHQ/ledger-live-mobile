@@ -5,5 +5,6 @@
 
 ### APDU related functions
 
-- each file exports a function with the shape `(transport, ?...args) => Promise<whatever>`
+- each file exports a function with the shape `(transport, ?...args) => Observable<whatever>` or `(transport, ?...args) => Promise<whatever>`
+- Observable is preferred when something is subject to interruption (e.g. genuine check)
 - these function does not address open/close, nor they address the "queueing" problem. there are just light abstraction on top of APDU.
