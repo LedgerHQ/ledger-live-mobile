@@ -12,7 +12,7 @@ export type DeviceMock = {
 };
 
 type Opts = {
-  createTransportDeviceMock: (id: string) => DeviceMock,
+  createTransportDeviceMock: (id: string, name: string) => DeviceMock,
 };
 
 const defaultOpts = {
@@ -30,30 +30,42 @@ export default (opts: Opts) => {
 
     static observeState = (o: *) => observeState.subscribe(o);
 
-    static list = () => Promise.resolve([createTransportDeviceMock("mock_1")]);
+    static list = () => Promise.resolve([]);
 
     static listen(observer: *) {
-      const unsubscribe = () => {};
-      observer.next({
-        type: "add",
-        descriptor: createTransportDeviceMock("mock_1"),
-      });
-      observer.next({
-        type: "add",
-        descriptor: createTransportDeviceMock("mock_2"),
-      });
-      observer.next({
-        type: "add",
-        descriptor: createTransportDeviceMock("mock_3_fail_open"),
-      });
+      let timeout;
+
+      const unsubscribe = () => {
+        clearTimeout(timeout);
+      };
+
+      timeout = setTimeout(() => {
+        observer.next({
+          type: "add",
+          descriptor: createTransportDeviceMock("mock_1", "Nano X de David"),
+        });
+        timeout = setTimeout(() => {
+          observer.next({
+            type: "add",
+            descriptor: createTransportDeviceMock("mock_2", "Nano X de Arnaud"),
+          });
+          timeout = setTimeout(() => {
+            observer.next({
+              type: "add",
+              descriptor: createTransportDeviceMock(
+                "mock_3",
+                "Nano X de Didier Duchmol",
+              ),
+            });
+          }, 2000);
+        }, 1000);
+      }, 500);
+
       return { unsubscribe };
     }
 
     static async open(device: *) {
       await delay(1000);
-      if (device === "mock_3_fail_open") {
-        throw new Error("mock_3 device fail");
-      }
       return new BluetoothTransportMock(
         typeof device === "string" ? createTransportDeviceMock(device) : device,
       );

@@ -18,6 +18,7 @@ class SelectDevice extends Component<
       name: string,
     }>,
     removeKnownDevice: string => *,
+    editMode?: boolean,
   },
   {
     devices: Array<{
@@ -52,14 +53,16 @@ class SelectDevice extends Component<
     });
   }
 
+  onForget = async ({ id }) => {
+    this.props.removeKnownDevice(id);
+  };
+
   onSelect = async ({ id, family }) => {
     if (!family) {
       // this is ble case
       try {
         const t = await open(id);
         await t.close();
-
-        this.props.removeKnownDevice(id); // FIXME TMP HACK UNTIL FEATURE
       } catch (e) {
         Alert.alert(
           "Failed to connect to device with Bluetooth",
@@ -90,6 +93,7 @@ class SelectDevice extends Component<
       key={item.id}
       device={item}
       onSelect={this.onSelect}
+      onForget={this.props.editMode ? this.onForget : undefined}
       {...item}
     />
   );

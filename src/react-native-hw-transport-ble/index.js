@@ -9,7 +9,8 @@ const names = {};
 
 const transport = Config.MOCK_BLE
   ? makeMock({
-      createTransportDeviceMock: id => {
+      createTransportDeviceMock: (id, name) => {
+        names[id] = name;
         const apduMock = createAPDUMock({
           setDeviceName: name => {
             names[id] = name;

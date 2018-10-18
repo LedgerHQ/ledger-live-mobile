@@ -22,6 +22,7 @@ type Props<T> = {
   disabled?: boolean,
   description?: string,
   onSelect?: T => any,
+  onForget?: T => any,
 };
 
 const iconByFamily = {
@@ -37,8 +38,21 @@ export default class DeviceItem<T> extends PureComponent<Props<T>> {
     return onSelect(device);
   };
 
+  onForget = () => {
+    const { device, onForget } = this.props;
+    invariant(onForget, "onForget required");
+    return onForget(device);
+  };
+
   render() {
-    const { name, family, disabled, onSelect, description } = this.props;
+    const {
+      name,
+      family,
+      disabled,
+      onSelect,
+      description,
+      onForget,
+    } = this.props;
 
     let res = (
       <View style={[styles.root, disabled && styles.rootDisabled]}>
@@ -83,13 +97,38 @@ export default class DeviceItem<T> extends PureComponent<Props<T>> {
       res = <Touchable onPress={this.onPress}>{res}</Touchable>;
     }
 
-    return <View style={styles.outer}>{res}</View>;
+    let prepend = null;
+
+    if (onForget) {
+      prepend = (
+        <Touchable onPress={this.onForget}>
+          <LText style={styles.forget}>
+            <Icon name="crosshair" size={24} color={colors.black} />
+          </LText>
+        </Touchable>
+      );
+    }
+
+    return (
+      <View style={styles.outer}>
+        {prepend}
+        <View style={styles.inner}>{res}</View>
+      </View>
+    );
   }
 }
 
 const styles = StyleSheet.create({
   outer: {
     marginBottom: 16,
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  inner: {
+    flex: 1,
+  },
+  forget: {
+    paddingRight: 16,
   },
   root: {
     paddingVertical: 14,

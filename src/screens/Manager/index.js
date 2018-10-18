@@ -3,33 +3,27 @@ import React, { Component } from "react";
 import { View, StyleSheet } from "react-native";
 import type { NavigationScreenProp } from "react-navigation";
 import SelectDevice from "../../components/SelectDevice";
+import ToggleManagerEdition from "./ToggleManagerEdition";
 
-class Manager extends Component<
-  {
-    navigation: NavigationScreenProp<*>,
-  },
-  {
-    deviceId: ?string,
-  },
-> {
+class Manager extends Component<{
+  navigation: NavigationScreenProp<*>,
+}> {
   static navigationOptions = {
     title: "Manager",
-  };
-
-  state = {
-    deviceId: null,
+    headerRight: <ToggleManagerEdition />,
   };
 
   onSelect = (deviceId: string) => {
-    this.setState({ deviceId });
+    this.props.navigation.navigate("ManagerMain", {
+      deviceId,
+    });
   };
 
   render() {
-    // const { deviceId } = this.state;
-    // if (deviceId) return <Main deviceId={deviceId} />;
+    const editMode = this.props.navigation.getParam("editMode");
     return (
       <View style={styles.root}>
-        <SelectDevice onSelect={this.onSelect} />
+        <SelectDevice onSelect={this.onSelect} editMode={editMode} />
       </View>
     );
   }
