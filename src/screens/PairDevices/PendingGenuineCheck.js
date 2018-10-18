@@ -18,10 +18,10 @@ class PendingGenuineCheck extends PureComponent<*> {
           Genuine check...
         </LText>
         <LText style={styles.subtitle}>
-          Make sure your Nano X is on Dashboard and accept
-        </LText>
-        <LText bold style={styles.bold}>
-          Allow Manager
+          Make sure your Nano X is on Dashboard and accept{" "}
+          <LText bold style={styles.bold}>
+            Allow Manager
+          </LText>
         </LText>
 
         <View style={styles.footer}>
@@ -43,6 +43,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     marginTop: 8,
     textAlign: "center",
+    paddingHorizontal: 20,
   },
   bold: {},
   footer: {
