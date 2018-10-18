@@ -134,7 +134,9 @@ SettingsStack.navigationOptions = {
 
 const ManagerMain = createMaterialTopTabNavigator(
   {
+    // $FlowFixMe
     ManagerAppsList,
+    // $FlowFixMe
     ManagerDevice,
   },
   {
@@ -164,7 +166,9 @@ ManagerMain.navigationOptions = {
 
 const ManagerStack = createStackNavigator(
   {
+    // $FlowFixMe
     Manager,
+    // $FlowFixMe
     ManagerMain,
   },
   StackNavigatorConfig,

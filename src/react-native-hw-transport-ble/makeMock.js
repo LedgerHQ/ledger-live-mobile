@@ -67,7 +67,9 @@ export default (opts: Opts) => {
     static async open(device: *) {
       await delay(1000);
       return new BluetoothTransportMock(
-        typeof device === "string" ? createTransportDeviceMock(device) : device,
+        typeof device === "string"
+          ? createTransportDeviceMock(device, "")
+          : device,
       );
     }
 
