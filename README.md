@@ -6,6 +6,7 @@ Mobile application for the Ledger Wallet
 
 - Node LTS version
 - Yarn 1.10.1 or above
+- Ruby setup with Bundler https://bundler.io/
 
 ### iOS
 
@@ -20,6 +21,10 @@ Mobile application for the Ledger Wallet
 ### `yarn install`
 
 install dependencies.
+
+### `bundle install`
+
+install Gem dependencies.
 
 ### `yarn start`
 
