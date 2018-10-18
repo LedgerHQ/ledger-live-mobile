@@ -12,11 +12,16 @@ class DeviceNanoAction extends PureComponent<{
   powerAction?: boolean,
   action?: boolean,
   validationOnScreen?: boolean,
+  width: number,
 }> {
+  static defaultProps = {
+    width: 318,
+  };
+
   render() {
-    const { powerAction, action, validationOnScreen } = this.props;
+    const { powerAction, action, validationOnScreen, width } = this.props;
     return (
-      <Svg width={318} height={93}>
+      <Svg width={width} height={(width * 93) / 318} viewBox="0 0 318 93">
         <Defs>
           <LinearGradient id="a" x1="50%" x2="50%" y1="0%" y2="63.541%">
             <Stop offset="0%" stopColor="#6490F1" stopOpacity={0} />

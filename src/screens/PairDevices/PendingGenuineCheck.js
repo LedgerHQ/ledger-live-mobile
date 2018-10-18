@@ -1,12 +1,14 @@
 // @flow
 
 import React, { PureComponent, Fragment } from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Dimensions } from "react-native";
 import { translate } from "react-i18next";
 import DeviceNanoAction from "../../components/DeviceNanoAction";
 
 import colors from "../../colors";
 import LText from "../../components/LText";
+
+const { width } = Dimensions.get("window");
 
 class PendingGenuineCheck extends PureComponent<*> {
   render() {
@@ -23,7 +25,7 @@ class PendingGenuineCheck extends PureComponent<*> {
         </LText>
 
         <View style={styles.footer}>
-          <DeviceNanoAction powerAction validationOnScreen />
+          <DeviceNanoAction powerAction validationOnScreen width={width} />
         </View>
       </Fragment>
     );
@@ -44,9 +46,9 @@ const styles = StyleSheet.create({
   },
   bold: {},
   footer: {
-    position: "relative",
-    right: "-20%",
-    marginTop: 20,
+    marginTop: 10,
+    paddingBottom: 80,
+    paddingLeft: "20%",
   },
 });
 
