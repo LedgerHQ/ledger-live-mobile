@@ -16,9 +16,11 @@ end
 platform :ios do
   desc "Build the app with the specified `scheme`. Defaults to `ledgerlivemobile`."
   lane :build do |options|
-    scheme = options.fetch(:scheme, "ledgerlivemobile")
-
-    gym(scheme: scheme, include_bitcode: true)
+    gym(
+      scheme: "ledgerlivemobile",
+      project: "ios/ledgerlivemobile.xcodeproj",
+      include_bitcode: true
+    )
   end
 
   desc "Submit a new Beta Build to Apple TestFlight"
@@ -105,8 +107,8 @@ def commit_tag_and_push_version_bump
   git_commit(
     path: [
       "android/app/build.gradle",
-      "ios/TemplateProject/Info.plist",
-      "ios/TemplateProjectTests/Info.plist",
+      "ios/ledgerlivemobile/Info.plist",
+      "ios/ledgerlivemobileTests/Info.plist",
     ],
     message: "Bump version to #{version_number} (#{build_number})",
   )
