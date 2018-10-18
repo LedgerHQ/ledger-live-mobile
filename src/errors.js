@@ -1,6 +1,5 @@
 // @flow
-
-import { createCustomErrorClass } from "./logic/errors";
+import { createCustomErrorClass } from "@ledgerhq/live-common/lib/errors";
 
 export const GenuineCheckFailed = createCustomErrorClass("GenuineCheckFailed");
 export const PairingFailed = createCustomErrorClass("PairingFailed");
@@ -12,3 +11,5 @@ export const FeeNotLoaded = createCustomErrorClass("FeeNotLoaded");
 export const NotEnoughBalanceBecauseDestinationNotCreated = createCustomErrorClass(
   "NotEnoughBalanceBecauseDestinationNotCreated",
 );
+export const InvalidRecipient = createCustomErrorClass("InvalidRecipient");
+export const NoRecipient = createCustomErrorClass("NoRecipient");

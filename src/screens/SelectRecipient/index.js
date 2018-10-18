@@ -10,11 +10,17 @@ import {
 import type { NavigationScreenProp } from "react-navigation";
 import { createStructuredSelector } from "reselect";
 import { connect } from "react-redux";
+import { compose } from "redux";
+import { translate } from "react-i18next";
 import type { Account } from "@ledgerhq/live-common/lib/types";
 import throttle from "lodash/throttle";
 import Icon from "react-native-vector-icons/dist/FontAwesome";
 
+import type { T } from "../../types/common";
+
 import { accountScreenSelector } from "../../reducers/accounts";
+
+import { getAccountBridge } from "../../bridge/index";
 
 import LText from "../../components/LText";
 import Button from "../../components/Button";
@@ -25,17 +31,22 @@ import KeyboardView from "../../components/KeyboardView";
 import Close from "../../icons/Close";
 
 import colors from "../../colors";
+import TranslatedError from "../../components/TranslatedError";
 
 type Props = {
+  t: T,
   account: Account,
   navigation: NavigationScreenProp<{
     accountId: string,
+    result: string,
   }>,
 };
 
 type State = {
   validAddress: boolean,
   address: string,
+  error: ?Error,
+  shouldUpdate: boolean,
 };
 
 class SelectRecipient extends Component<Props, State> {
@@ -51,9 +62,20 @@ class SelectRecipient extends Component<Props, State> {
     this.validateAddress = throttle(this.validateAddress, 200);
   }
 
+  componentDidUpdate(_, { address: prevAddress }) {
+    const { navigation } = this.props;
+    const { shouldUpdate } = this.state;
+    const qrResult = navigation.getParam("result");
+    if (!shouldUpdate && qrResult && prevAddress !== qrResult) {
+      this.onChangeText(qrResult, false);
+    }
+  }
+
   state = {
     validAddress: false,
     address: "",
+    error: null,
+    shouldUpdate: false,
   };
 
   input = React.createRef();
@@ -65,17 +87,28 @@ class SelectRecipient extends Component<Props, State> {
     this.validateAddress("");
   };
 
-  validateAddress = (text: string): void => {
-    if (text) {
-      this.setState({ address: text, validAddress: text.length > 10 });
-    } else {
-      this.setState({ address: "", validAddress: false });
+  onChangeText = (address: string, shouldUpdate = true) => {
+    this.setState({ address, shouldUpdate });
+    this.validateAddress(address);
+  };
+
+  validateAddress = async (address: string) => {
+    const { account } = this.props;
+    const bridge = getAccountBridge(account);
+
+    try {
+      const res = await bridge.checkValidRecipient(account.currency, address);
+      if (!res) return this.setState({ validAddress: true, error: null });
+
+      return this.setState({ validAddress: false, error: res });
+    } catch (e) {
+      return this.setState({ validAddress: false, error: e });
     }
   };
 
   render() {
-    const { address, validAddress } = this.state;
-    const { account } = this.props;
+    const { address, validAddress, error } = this.state;
+    const { account, t } = this.props;
 
     return (
       <SafeAreaView style={styles.root}>
@@ -84,23 +117,29 @@ class SelectRecipient extends Component<Props, State> {
           <View style={styles.container}>
             <Button
               type="tertiary"
-              title="Scan QR code"
+              title={t("common:send.recipient.scan")}
               IconLeft={IconQRCode}
-              onPress={() => {
-                console.warn("NOT IMPLEMENTED scan qr code");
-              }}
+              onPress={() =>
+                // $FlowFixMe
+                this.props.navigation.replace("ScanRecipient", {
+                  accountId: this.props.navigation.getParam("accountId"),
+                })
+              }
             />
           </View>
           <View style={styles.container}>
             <LText style={styles.addressTitle}>
-              Or enter a recipient address
+              {t("common:send.recipient.enterAddress")}
             </LText>
             <View style={styles.inputWrapper}>
               <TextInput
-                placeholder="Address"
+                placeholder={t("common:send.recipient.input")}
                 placeholderTextColor={colors.fog}
-                style={styles.addressInput}
-                onChangeText={this.validateAddress}
+                style={[
+                  styles.addressInput,
+                  !validAddress ? styles.invalidAddressInput : null,
+                ]}
+                onChangeText={this.onChangeText}
                 value={address}
                 ref={this.input}
                 multiline
@@ -116,7 +155,7 @@ class SelectRecipient extends Component<Props, State> {
             </View>
             {!!address && !validAddress ? (
               <LText style={styles.errorText}>
-                This is not a valid address
+                <TranslatedError error={error} />
               </LText>
             ) : null}
           </View>
@@ -166,6 +205,9 @@ const styles = StyleSheet.create({
     fontSize: 24,
     color: colors.darkBlue,
   },
+  invalidAddressInput: {
+    color: colors.alert,
+  },
   errorText: {
     color: colors.alert,
     fontSize: 12,
@@ -190,4 +232,7 @@ const mapStateToProps = createStructuredSelector({
   account: accountScreenSelector,
 });
 
-export default connect(mapStateToProps)(SelectRecipient);
+export default compose(
+  translate(),
+  connect(mapStateToProps),
+)(SelectRecipient);
