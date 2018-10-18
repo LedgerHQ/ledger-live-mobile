@@ -38,6 +38,11 @@ Submit a new Beta Build to Apple TestFlight
 ----
 
 ## Android
+### android snapshot_build
+```
+fastlane android snapshot_build
+```
+Create a Release build versionned as <current version>-<git branch>-<last commit hash>
 ### android build
 ```
 fastlane android build

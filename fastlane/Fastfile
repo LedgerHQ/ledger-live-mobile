@@ -29,22 +29,66 @@ platform :ios do
 end
 
 platform :android do
+  desc "Create a Release build versionned as <current version>-<git branch>-<last commit hash>"
+  lane :snapshot_build do
+    version_code = get_version_code
+    version_name = get_snapshot_version
+
+    gradle(task: "clean", project_dir: 'android/')
+    gradle(
+      task: "assemble",
+      build_type: "Release",
+      # print_command: false,
+      properties: {
+        "android.injected.signing.store.file" => ENV["ANDROID_KEYSTORE_FILE"],
+        "android.injected.signing.store.password" => ENV["ANDROID_KEYSTORE_PASS"],
+        "android.injected.signing.key.alias" => ENV["ANDROID_KEY_ALIAS"],
+        "android.injected.signing.key.password" => ENV["ANDROID_KEY_PASS"],
+        "versionCode" => version_code,
+        "versionName" => version_name,
+        "archivesBaseName" => "ledgerlive-#{version_name}"
+      },
+      project_dir: 'android/'
+    )
+  end
+
   desc "Build the app apk for the specified build `type`. Defaults to `Release`"
   lane :build do |options|
     type = options.fetch(:type, "Release")
 
     gradle(task: "clean", project_dir: 'android/')
-    gradle(task: "assemble", build_type: type, project_dir: 'android/')
+    gradle(
+      task: "assemble",
+      build_type: type,
+      print_command: false,
+      properties: {
+        "android.injected.signing.store.file" => ENV["ANDROID_KEYSTORE_FILE"],
+        "android.injected.signing.store.password" => ENV["ANDROID_KEYSTORE_PASS"],
+        "android.injected.signing.key.alias" => ENV["ANDROID_KEY_ALIAS"],
+        "android.injected.signing.key.password" => ENV["ANDROID_KEY_PASS"],
+        "versionCode" => get_version_code,
+      },
+      project_dir: 'android/'
+    )
   end
 end
 
+def get_snapshot_version
+  branch = sh("git rev-parse --abbrev-ref HEAD").strip
+  hash = sh("git rev-parse --short HEAD").strip
+
+  return "#{ENV["npm_package_version"]}-#{branch}-#{hash}"
+end
+
+def get_version_code
+  timestamp = sh("git log -1 --pretty=format:%ct").to_i
+  version_code = timestamp / 60
+
+  return version_code
+end
+
 def update_android_version_name(version:)
-  build_gradle_path = File.join(
-    "..",
-    ENV.fetch("ANDROID_DIRECTORY"),
-    "app",
-    "build.gradle"
-  )
+  build_gradle_path = "../android/app/build.gradle"
 
   File.write(
     build_gradle_path,

@@ -114,8 +114,8 @@ android {
         applicationId "com.ledger.live"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0.0"
+        versionCode project.hasProperty('versionCode') ? project.property('versionCode') as int : 1
+        versionName project.hasProperty('versionName') ? project.property('versionName') : "No versionName"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
