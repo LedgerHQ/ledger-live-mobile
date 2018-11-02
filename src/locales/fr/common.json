@@ -54,7 +54,7 @@
     "summary_plural": "Vos {{count}} comptes sont synchronisés.",
     "emptyState": {
       "title": "Ajouter des comptes à votre portefeuille",
-      "desc": "Open the Manager to install apps on your Ledger device before you start adding accounts to your portfolio",
+      "desc": "Ouvrez le Manager pour installer les apps sur votre appareil Ledger avant de commencer à ajouter des comptes à votre portfolio",
       "buttons": {
         "import": "Importer des comptes"
       }
@@ -96,73 +96,73 @@
     "viewOperation": "Afficher dans l’explorateur",
     "seeAll": "Tout voir",
     "seeLess": "Voir moins",
-    "viewInExplorer": "View in explorer"
+    "viewInExplorer": "Afficher dans l’explorateur"
   },
   "operationList": {
-    "noOperations": "No Operations",
-    "noMoreOperations": "No More Operations"
+    "noOperations": "Aucun opérations",
+    "noMoreOperations": "Aucune autre opération"
   },
   "account": {
-    "lastOperations": "Last operations",
+    "lastOperations": "Dernières opérations",
     "emptyState": {
-      "title": "No crypto assets yet?",
-      "desc": "Make sure the <1><0>{{managerAppName}}</0></1> app is installed and start receiving",
+      "title": "Pas encore de cryptomonnaie ?",
+      "desc": "Assurez vous que l'app <1><0>{{managerAppName}}</0></1> est installée et en train de recevoir",
       "buttons": {
-        "receiveFunds": "Receive"
+        "receiveFunds": "Recevoir"
       }
     },
     "settings": {
-      "header": "Account Settings",
-      "title": "Edit account",
-      "advancedLogs": "Advanced logs",
+      "header": "Paramètres du compte",
+      "title": "Modifier le compte",
+      "advancedLogs": "Mode avancé",
       "accountName": {
-        "title": "Account name",
-        "desc": "Describe this account"
+        "title": "Nom du compte",
+        "desc": "Décrire ce compte"
       },
       "unit": {
-        "title": "Unit",
-        "desc": "Choose the unit to display"
+        "title": "Unité",
+        "desc": "Choisir l'unité à afficher"
       },
       "currency": {
-        "title": "Currency"
+        "title": "Monnaie"
       },
       "endpointConfig": {
-        "title": "Node",
-        "desc": "The API node to use"
+        "title": "Noeud",
+        "desc": "Le noeud API à utiliser"
       },
       "delete": {
-        "title": "Delete Account",
-        "desc": "Stored data will be deleted",
-        "confirmationDesc": "Are you sure you want to delete <1><0>{{accountName}}</0></1> account"
+        "title": "Supprimer le compte",
+        "desc": "Les données enregistrés seront supprimés",
+        "confirmationDesc": "Êtes-vous sûr de vouloir supprimer le compte <1><0>{{accountName}}</0></1>"
       },
       "archive": {
-        "title": "Archive Account",
-        "desc": "This account will be archived"
+        "title": "Archiver le compte",
+        "desc": "Ce compte sera archivé"
       }
     },
     "import": {
       "scan": {
-        "title": "Scan QR Code",
+        "title": "Scanner le QR code",
         "descTop": {
-          "line1": "Please open Ledger Live desktop application with EXPERIMENTAL_TOOLS_SETTINGS=1 and go to",
-          "line2": "Settings > Experimental Tools > QRCode Mobile Export"
+          "line1": "Veuillez ouvrir l'application Ledger Live sur bureau avec EXPERIMENTAL_TOOLS_SETTINGS=1 et aller à",
+          "line2": "Paramètres > Outils expérimentaux > Exporter sous QR code"
         },
-        "descBottom": "Please put the QR code within the square"
+        "descBottom": "Veuillez aligner le QR code avec le carré"
       },
       "result": {
-        "title": "Select accounts",
-        "newAccounts": "New accounts",
-        "updatedAccounts": "Updated accounts",
-        "alreadyImported": "Already imported",
-        "noAccounts": "Nothing to import",
-        "unsupported": "Unsupported",
-        "settings": "Settings",
+        "title": "Sélectionnez les comptes",
+        "newAccounts": "Nouveaux comptes",
+        "updatedAccounts": "Comptes mis à jour",
+        "alreadyImported": "Déjà importé",
+        "noAccounts": "Rien à importer",
+        "unsupported": "Non pris en charge",
+        "settings": "Réglages",
         "includeGeneralSettings": "Include general settings"
       },
       "fallback": {
-        "header": "Import account",
-        "title": "Camera access",
-        "descIOS": "To import account, Ledger Live needs to <1><0>access your camera</0></1>. You’ll be taken to iOS settings to activate it",
+        "header": "Importer le compte",
+        "title": "Accès à l’appareil photo",
+        "descIOS": "Pour importer le compte, Ledger Live a besoin <1><0>d'accéder à votre caméra</0></1>. Vous allez être redirigé dans les réglages d'IOS pour l'activer",
         "buttonIOS": "Open iPhone Settings",
         "descAndroid": "To import account, Ledger Live needs to <1><0>access your camera</0></1>. You’ll be taken to Android settings to activate it",
         "buttonAndroid": "Open Android Settings"
