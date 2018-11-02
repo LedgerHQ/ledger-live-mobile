@@ -163,29 +163,29 @@
         "header": "Importer le compte",
         "title": "Accès à l’appareil photo",
         "descIOS": "Pour importer le compte, Ledger Live a besoin <1><0>d'accéder à votre caméra</0></1>. Vous allez être redirigé dans les réglages d'IOS pour l'activer",
-        "buttonIOS": "Open iPhone Settings",
-        "descAndroid": "To import account, Ledger Live needs to <1><0>access your camera</0></1>. You’ll be taken to Android settings to activate it",
-        "buttonAndroid": "Open Android Settings"
+        "buttonIOS": "Ouvrir les réglages de l'Iphone\n",
+        "descAndroid": "Pour importer le compte, Ledger Live a besoin <1><0>d'accéder à votre caméra</0></1>. Vous allez être redirigé dans les réglages d'Android pour l'activer",
+        "buttonAndroid": "Ouvrir les paramètres d'Android"
       }
     }
   },
   "accounts": {
     "importNotification": {
-      "message": "Your accounts have successfully been imported!"
+      "message": "Vos comptes ont bien été importés ! "
     },
     "row": {
-      "syncPending": "Synchronizing...",
-      "upToDate": "Up to date",
-      "error": "Error"
+      "syncPending": "Synchronisation...",
+      "upToDate": "À jour",
+      "error": "Erreur"
     }
   },
   "settings": {
     "display": {
-      "title": "General",
-      "desc": "Change settings that affect Ledger Live in general.",
-      "language": "Display language",
-      "languageDesc": "Set the language displayed in Ledger Live.",
-      "password": "Password lock",
+      "title": "Général",
+      "desc": "Modifier les paramètres qui affectent Ledger Live en général.",
+      "language": "Afficher la langue",
+      "languageDesc": "Sélectionner la langue de Ledger Live.",
+      "password": "Verrouillage par mot de passe",
       "passwordDesc": "Set a password to prevent unauthorized access to Ledger Live data stored on your computer, including account names, balances, transactions and public addresses.",
       "counterValue": "Countervalue",
       "counterValueDesc": "Choose the currency to display next to your balance and operations.",
@@ -251,15 +251,15 @@
       "verifyAddress": "Your receive address has not been confirmed on your Ledger device. Please verify your {{accountType}} address for optimal security."
     },
     "exchange": {
-      "title": "Exchange",
-      "desc": "Try our trading services"
+      "title": "Bourse",
+      "desc": "Essayez nos services de trading"
     }
   },
   "sync": {
-    "error": "Sync Error",
-    "loading": "Sync"
+    "error": "Erreur de synchronisation",
+    "loading": "Synchronisation"
   },
   "scanning": {
-    "loading": "Searching devices..."
+    "loading": "Recherche d'appareils ..."
   }
 }
