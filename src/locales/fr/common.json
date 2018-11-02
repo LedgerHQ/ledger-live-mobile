@@ -67,35 +67,35 @@
     "year": "Année",
     "since": {
       "day": "hier",
-      "week": "past week",
-      "month": "past month",
-      "year": "past year"
+      "week": "semaine dernière",
+      "month": "mois dernier",
+      "year": "année dernière"
     }
   },
   "orderOption": {
     "label": {
       "balance": "Balance",
-      "name": "Name"
+      "name": "Nom"
     },
     "ordering": {
-      "asc": "Ascending",
-      "desc": "Descending"
+      "asc": "Croissant",
+      "desc": "Décroissant"
     }
   },
   "operationDetails": {
-    "title": "Operation details",
-    "account": "Account",
+    "title": "Détails de l'opération",
+    "account": "Compte",
     "date": "Date",
-    "confirmed": "Confirmed",
-    "notConfirmed": "Not confirmed",
-    "fees": "Fees",
-    "noFees": "No fee",
-    "from": "From ({{count}})",
-    "to": "To ({{count}})",
-    "identifier": "Transaction ID",
-    "viewOperation": "View in explorer",
-    "seeAll": "See all",
-    "seeLess": "See less",
+    "confirmed": "Confirmée",
+    "notConfirmed": "Non confirmée",
+    "fees": "Frais",
+    "noFees": "Aucun frais",
+    "from": "De ({{count}})",
+    "to": "À ({{count}})",
+    "identifier": "Numéro de transaction",
+    "viewOperation": "Afficher dans l’explorateur",
+    "seeAll": "Tout voir",
+    "seeLess": "Voir moins",
     "viewInExplorer": "View in explorer"
   },
   "operationList": {
