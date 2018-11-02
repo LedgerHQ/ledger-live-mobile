@@ -1,191 +1,191 @@
 {
   "common": {
-    "cancel": "Annuler",
-    "apply": "Appliquer",
-    "delete": "Supprimer",
-    "continue": "Poursuivre",
-    "done": "Terminé",
-    "sortBy": "Trier par",
-    "signOut": "Se déconnecter"
+    "cancel": "Cancel",
+    "apply": "Apply",
+    "delete": "Delete",
+    "continue": "Continue",
+    "done": "Done",
+    "sortBy": "Sort by",
+    "signOut": "Sign Out"
   },
   "errors": {
     "generic": {
       "title": "{{message}}",
-      "description": "Un problème est survenu. Veuillez réessayer ou nous contacter."
+      "description": "Something went wrong. Please retry or contact us."
     },
     "Error": {
       "title": "{{message}}",
-      "description": "Un problème est survenu. Veuillez réessayer ou nous contacter."
+      "description": "Something went wrong. Please retry or contact us."
     },
     "SyncError": {
-      "title": "Erreur de synchronisation",
-      "description": "Un problème est survenu avec la synchronisation de la blockchain. Veuillez réessayer ou nous contacter."
+      "title": "Synchronization error",
+      "description": "Something went wrong with the blockchains synchronization.  Please retry or contact us."
     },
     "NetworkDown": {
-      "title": "Oups, la connexion internet semble interrompue",
-      "description": "Veuillez vérifier votre connexion Internet."
+      "title": "Oops, internet seems down",
+      "description": "Please check your internet connection."
     }
   },
   "auth": {
     "failed": {
-      "title": "L'authentification a échoué",
+      "title": "Authentication failed",
       "buttons": {
-        "tryAgain": "Réessayer",
-        "reset": "Réinitialiser"
+        "tryAgain": "Try again",
+        "reset": "Reset"
       }
     }
   },
   "reset": {
-    "title": "Êtes-vous sûr ?",
-    "description": "Effacer toutes les donnés Ledger Live enregistrées sur votre appareil, y compris vos comptes, l'historique de vos transactions et vos réglages. Les clés privées pour accéder à vos crypto-monnaies sur la Blockchain demeurent en sécurité sur votre Ledger et sur votre fiche de récupération.",
-    "button": "Réinitialiser"
+    "title": "Are you sure?",
+    "description": "Erase all Ledger Live data stored on your device, including your accounts, transaction history and settings. The private keys to access your crypto assets in the blockchain remain secure on your Ledger device and on your Recovery sheet.",
+    "button": "Reset"
   },
   "portfolio": {
-    "totalBalance": "Solde total",
-    "syncError": "Erreur de synchronisation",
-    "syncFailed": "La synchronisation a échouée",
-    "syncPending": "Synchronisation...",
+    "totalBalance": "Total balance",
+    "syncError": "Sync error",
+    "syncFailed": "Synchronization failed",
+    "syncPending": "Synchronizing...",
     "greeting": {
-      "morning": "Bonjour",
-      "evening": "Bonsoir",
-      "afternoon": "Bonjour"
+      "morning": "Good morning",
+      "evening": "Good evening",
+      "afternoon": "Good afternoon"
     },
-    "summary": "Voici le résumé de votre compte",
-    "summary_plural": "Vos {{count}} comptes sont synchronisés.",
+    "summary": "Here's the summary of your account",
+    "summary_plural": "Your {{count}} accounts are synchronized.",
     "emptyState": {
-      "title": "Ajouter des comptes à votre portefeuille",
-      "desc": "Ouvrez le Manager pour installer les apps sur votre appareil Ledger avant de commencer à ajouter des comptes à votre portfolio",
+      "title": "Add accounts to your portfolio",
+      "desc": "Open the Manager to install apps on your Ledger device before you start adding accounts to your portfolio",
       "buttons": {
-        "import": "Importer des comptes"
+        "import": "Import accounts"
       }
     }
   },
   "time": {
-    "day": "Jour",
-    "week": "Semaine",
-    "month": "Mois",
-    "year": "Année",
+    "day": "Day",
+    "week": "Week",
+    "month": "Month",
+    "year": "Year",
     "since": {
-      "day": "hier",
-      "week": "semaine dernière",
-      "month": "mois dernier",
-      "year": "année dernière"
+      "day": "past day",
+      "week": "past week",
+      "month": "past month",
+      "year": "past year"
     }
   },
   "orderOption": {
     "label": {
       "balance": "Balance",
-      "name": "Nom"
+      "name": "Name"
     },
     "ordering": {
-      "asc": "Croissant",
-      "desc": "Décroissant"
+      "asc": "Ascending",
+      "desc": "Descending"
     }
   },
   "operationDetails": {
-    "title": "Détails de l'opération",
-    "account": "Compte",
+    "title": "Operation details",
+    "account": "Account",
     "date": "Date",
-    "confirmed": "Confirmée",
-    "notConfirmed": "Non confirmée",
-    "fees": "Frais",
-    "noFees": "Aucun frais",
-    "from": "De ({{count}})",
-    "to": "À ({{count}})",
-    "identifier": "Numéro de transaction",
-    "viewOperation": "Afficher dans l’explorateur",
-    "seeAll": "Tout voir",
-    "seeLess": "Voir moins",
-    "viewInExplorer": "Afficher dans l’explorateur"
+    "confirmed": "Confirmed",
+    "notConfirmed": "Not confirmed",
+    "fees": "Fees",
+    "noFees": "No fee",
+    "from": "From ({{count}})",
+    "to": "To ({{count}})",
+    "identifier": "Transaction ID",
+    "viewOperation": "View in explorer",
+    "seeAll": "See all",
+    "seeLess": "See less",
+    "viewInExplorer": "View in explorer"
   },
   "operationList": {
-    "noOperations": "Aucun opérations",
-    "noMoreOperations": "Aucune autre opération"
+    "noOperations": "No Operations",
+    "noMoreOperations": "No More Operations"
   },
   "account": {
-    "lastOperations": "Dernières opérations",
+    "lastOperations": "Last operations",
     "emptyState": {
-      "title": "Pas encore de cryptomonnaie ?",
-      "desc": "Assurez vous que l'app <1><0>{{managerAppName}}</0></1> est installée et en train de recevoir",
+      "title": "No crypto assets yet?",
+      "desc": "Make sure the <1><0>{{managerAppName}}</0></1> app is installed and start receiving",
       "buttons": {
-        "receiveFunds": "Recevoir"
+        "receiveFunds": "Receive"
       }
     },
     "settings": {
-      "header": "Paramètres du compte",
-      "title": "Modifier le compte",
-      "advancedLogs": "Mode avancé",
+      "header": "Account Settings",
+      "title": "Edit account",
+      "advancedLogs": "Advanced logs",
       "accountName": {
-        "title": "Nom du compte",
-        "desc": "Décrire ce compte"
+        "title": "Account name",
+        "desc": "Describe this account"
       },
       "unit": {
-        "title": "Unité",
-        "desc": "Choisir l'unité à afficher"
+        "title": "Unit",
+        "desc": "Choose the unit to display"
       },
       "currency": {
-        "title": "Monnaie"
+        "title": "Currency"
       },
       "endpointConfig": {
-        "title": "Noeud",
-        "desc": "Le noeud API à utiliser"
+        "title": "Node",
+        "desc": "The API node to use"
       },
       "delete": {
-        "title": "Supprimer le compte",
-        "desc": "Les données enregistrés seront supprimés",
-        "confirmationDesc": "Êtes-vous sûr de vouloir supprimer le compte <1><0>{{accountName}}</0></1>"
+        "title": "Delete Account",
+        "desc": "Stored data will be deleted",
+        "confirmationDesc": "Are you sure you want to delete <1><0>{{accountName}}</0></1> account"
       },
       "archive": {
-        "title": "Archiver le compte",
-        "desc": "Ce compte sera archivé"
+        "title": "Archive Account",
+        "desc": "This account will be archived"
       }
     },
     "import": {
       "scan": {
-        "title": "Scanner le QR code",
+        "title": "Scan QR Code",
         "descTop": {
-          "line1": "Veuillez ouvrir l'application Ledger Live sur bureau avec EXPERIMENTAL_TOOLS_SETTINGS=1 et aller à",
-          "line2": "Paramètres > Outils expérimentaux > Exporter sous QR code"
+          "line1": "Please open Ledger Live desktop application with EXPERIMENTAL_TOOLS_SETTINGS=1 and go to",
+          "line2": "Settings > Experimental Tools > QRCode Mobile Export"
         },
-        "descBottom": "Veuillez aligner le QR code avec le carré"
+        "descBottom": "Please put the QR code within the square"
       },
       "result": {
-        "title": "Sélectionnez les comptes",
-        "newAccounts": "Nouveaux comptes",
-        "updatedAccounts": "Comptes mis à jour",
-        "alreadyImported": "Déjà importé",
-        "noAccounts": "Rien à importer",
-        "unsupported": "Non pris en charge",
-        "settings": "Réglages",
+        "title": "Select accounts",
+        "newAccounts": "New accounts",
+        "updatedAccounts": "Updated accounts",
+        "alreadyImported": "Already imported",
+        "noAccounts": "Nothing to import",
+        "unsupported": "Unsupported",
+        "settings": "Settings",
         "includeGeneralSettings": "Include general settings"
       },
       "fallback": {
-        "header": "Importer le compte",
-        "title": "Accès à l’appareil photo",
-        "descIOS": "Pour importer le compte, Ledger Live a besoin <1><0>d'accéder à votre caméra</0></1>. Vous allez être redirigé dans les réglages d'IOS pour l'activer",
-        "buttonIOS": "Ouvrir les réglages de l'Iphone\n",
-        "descAndroid": "Pour importer le compte, Ledger Live a besoin <1><0>d'accéder à votre caméra</0></1>. Vous allez être redirigé dans les réglages d'Android pour l'activer",
-        "buttonAndroid": "Ouvrir les paramètres d'Android"
+        "header": "Import account",
+        "title": "Camera access",
+        "descIOS": "To import account, Ledger Live needs to <1><0>access your camera</0></1>. You’ll be taken to iOS settings to activate it",
+        "buttonIOS": "Open iPhone Settings",
+        "descAndroid": "To import account, Ledger Live needs to <1><0>access your camera</0></1>. You’ll be taken to Android settings to activate it",
+        "buttonAndroid": "Open Android Settings"
       }
     }
   },
   "accounts": {
     "importNotification": {
-      "message": "Vos comptes ont bien été importés ! "
+      "message": "Your accounts have successfully been imported!"
     },
     "row": {
-      "syncPending": "Synchronisation...",
-      "upToDate": "À jour",
-      "error": "Erreur"
+      "syncPending": "Synchronizing...",
+      "upToDate": "Up to date",
+      "error": "Error"
     }
   },
   "settings": {
     "display": {
-      "title": "Général",
-      "desc": "Modifier les paramètres qui affectent Ledger Live en général.",
-      "language": "Afficher la langue",
-      "languageDesc": "Sélectionner la langue de Ledger Live.",
-      "password": "Verrouillage par mot de passe",
+      "title": "General",
+      "desc": "Change settings that affect Ledger Live in general.",
+      "language": "Display language",
+      "languageDesc": "Set the language displayed in Ledger Live.",
+      "password": "Password lock",
       "passwordDesc": "Set a password to prevent unauthorized access to Ledger Live data stored on your computer, including account names, balances, transactions and public addresses.",
       "counterValue": "Countervalue",
       "counterValueDesc": "Choose the currency to display next to your balance and operations.",
@@ -251,15 +251,15 @@
       "verifyAddress": "Your receive address has not been confirmed on your Ledger device. Please verify your {{accountType}} address for optimal security."
     },
     "exchange": {
-      "title": "Bourse",
-      "desc": "Essayez nos services de trading"
+      "title": "Exchange",
+      "desc": "Try our trading services"
     }
   },
   "sync": {
-    "error": "Erreur de synchronisation",
-    "loading": "Synchronisation"
+    "error": "Sync Error",
+    "loading": "Sync"
   },
   "scanning": {
-    "loading": "Recherche d'appareils ..."
+    "loading": "Searching devices..."
   }
 }
