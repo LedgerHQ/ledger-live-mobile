@@ -15,58 +15,58 @@
     },
     "Error": {
       "title": "{{message}}",
-      "description": "Something went wrong. Please retry or contact us."
+      "description": "Un problème est survenu. Veuillez réessayer ou nous contacter."
     },
     "SyncError": {
-      "title": "Synchronization error",
-      "description": "Something went wrong with the blockchains synchronization.  Please retry or contact us."
+      "title": "Erreur de synchronisation",
+      "description": "Un problème est survenu avec la synchronisation de la blockchain. Veuillez réessayer ou nous contacter."
     },
     "NetworkDown": {
-      "title": "Oops, internet seems down",
-      "description": "Please check your internet connection."
+      "title": "Oups, la connexion internet semble interrompue",
+      "description": "Veuillez vérifier votre connexion Internet."
     }
   },
   "auth": {
     "failed": {
-      "title": "Authentication failed",
+      "title": "L'authentification a échoué",
       "buttons": {
-        "tryAgain": "Try again",
-        "reset": "Reset"
+        "tryAgain": "Réessayer",
+        "reset": "Réinitialiser"
       }
     }
   },
   "reset": {
-    "title": "Are you sure?",
-    "description": "Erase all Ledger Live data stored on your device, including your accounts, transaction history and settings. The private keys to access your crypto assets in the blockchain remain secure on your Ledger device and on your Recovery sheet.",
-    "button": "Reset"
+    "title": "Êtes-vous sûr ?",
+    "description": "Effacer toutes les donnés Ledger Live enregistrées sur votre appareil, y compris vos comptes, l'historique de vos transactions et vos réglages. Les clés privées pour accéder à vos crypto-monnaies sur la Blockchain demeurent en sécurité sur votre Ledger et sur votre fiche de récupération.",
+    "button": "Réinitialiser"
   },
   "portfolio": {
-    "totalBalance": "Total balance",
-    "syncError": "Sync error",
-    "syncFailed": "Synchronization failed",
-    "syncPending": "Synchronizing...",
+    "totalBalance": "Solde total",
+    "syncError": "Erreur de synchronisation",
+    "syncFailed": "La synchronisation a échouée",
+    "syncPending": "Synchronisation...",
     "greeting": {
-      "morning": "Good morning",
-      "evening": "Good evening",
-      "afternoon": "Good afternoon"
+      "morning": "Bonjour",
+      "evening": "Bonsoir",
+      "afternoon": "Bonjour"
     },
-    "summary": "Here's the summary of your account",
-    "summary_plural": "Your {{count}} accounts are synchronized.",
+    "summary": "Voici le résumé de votre compte",
+    "summary_plural": "Vos {{count}} comptes sont synchronisés.",
     "emptyState": {
-      "title": "Add accounts to your portfolio",
+      "title": "Ajouter des comptes à votre portefeuille",
       "desc": "Open the Manager to install apps on your Ledger device before you start adding accounts to your portfolio",
       "buttons": {
-        "import": "Import accounts"
+        "import": "Importer des comptes"
       }
     }
   },
   "time": {
-    "day": "Day",
-    "week": "Week",
-    "month": "Month",
-    "year": "Year",
+    "day": "Jour",
+    "week": "Semaine",
+    "month": "Mois",
+    "year": "Année",
     "since": {
-      "day": "past day",
+      "day": "hier",
       "week": "past week",
       "month": "past month",
       "year": "past year"
