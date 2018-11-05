@@ -238,6 +238,32 @@
     "description": "Erase all Ledger Live data stored on your device, including your accounts, transaction history and settings. The private keys to access your crypto assets in the blockchain remain secure on your Ledger device and on your Recovery sheet.",
     "button": "Reset"
   },
+  "onboarding": {
+    "step01Welcome": {},
+    "step02GetStarted": {},
+    "step03ChooseDevice": {
+      "title": "Choose device"
+    },
+    "step04SetupPin": {
+      "title": "Setup PIN Code"
+    },
+    "step05WriteRecovery": {
+      "title": "Write recovery phrase"
+    },
+    "step06SecurityChecklist": {
+      "title": "Security checklist"
+    },
+    "step07PairNew": {
+      "title": "Pair a new device"
+    },
+    "step08Password": {
+      "title": "Password lock"
+    },
+    "step09ShareData": {
+      "title": "Share data"
+    },
+    "step10Finish": {}
+  },
   "portfolio": {
     "totalBalance": "Total balance",
     "syncError": "Sync error",
