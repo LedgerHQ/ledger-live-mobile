@@ -193,9 +193,10 @@ async function signTransaction({
     }
   }
 
-  const outputScriptHex = (await core.coreBitcoinLikeTransaction.serializeOutputs(
+  const rawOutputScriptHex = (await core.coreBitcoinLikeTransaction.serializeOutputs(
     coreTransaction,
-  )).value.replace(/[< >]/g, ""); // FIXME
+  )).value;
+  const outputScriptHex = rawOutputScriptHex.replace(/[< >]/g, ""); // FIXME
   if (isCancelled()) return;
 
   const initialTimestamp = hasTimestamp
@@ -360,11 +361,13 @@ async function doSignAndBroadcast({
 
   const txHash = await core.coreBitcoinLikeAccount.broadcastRawTransaction(
     bitcoinLikeAccount,
-    Array.from(Buffer.from(signedTransaction, "hex")),
+    signedTransaction,
   );
+  console.log({ txHash });
   if (isCancelled()) return;
 
   const sendersInput = await core.coreBitcoinLikeTransaction.getInputs(builded);
+  console.log({ sendersInput });
   if (isCancelled()) return;
 
   const senders = (await Promise.all(
@@ -373,11 +376,13 @@ async function doSignAndBroadcast({
         (await core.coreBitcoinLikeInput.getAddress(senderInput)).value,
     ),
   )).filter(Boolean);
+  console.log({ senders });
   if (isCancelled()) return;
 
   const recipientsOutput = await core.coreBitcoinLikeTransaction.getOutputs(
     builded,
   );
+  console.log({ recipientsOutput });
   if (isCancelled()) return;
 
   const recipients = (await Promise.all(
@@ -386,12 +391,15 @@ async function doSignAndBroadcast({
         (await core.coreBitcoinLikeOutput.getAddress(recipientOutput)).value,
     ),
   )).filter(Boolean);
+  console.log({ recipients });
   if (isCancelled()) return;
 
   const coreAmountFees = await core.coreBitcoinLikeTransaction.getFees(builded);
+  console.log({ coreAmountFees });
   if (isCancelled()) return;
 
   const fee = await await libcoreAmountToBigNumber(core, coreAmountFees);
+  console.log({ fee });
   if (isCancelled()) return;
 
   // NB we don't check isCancelled() because the broadcast is not cancellable now!
@@ -408,6 +416,6 @@ async function doSignAndBroadcast({
     accountId,
     date: new Date(),
   };
-
+  console.log({ op });
   onOperationBroadcasted(op);
 }
