@@ -95,5 +95,23 @@ async function loadCore() {
     console.log({ core }); // eslint-disable-line
   }
 
+  // PoC of a "modern" view of libcore. eventually we should switch over
+  const modern = {};
+  modules.forEach(m => {
+    const native = getNativeModule(m);
+    const decorate = instance => {
+      const proto = {};
+      Object.keys(native).forEach(k => {
+        proto[k] = (...arg) => {
+          const res = native[k].call(native, instance, ...arg);
+          return res;
+        };
+      });
+      return Object.create(proto, instance);
+    };
+    modern[m] = decorate;
+  });
+  core.modern = modern;
+
   return core;
 }
