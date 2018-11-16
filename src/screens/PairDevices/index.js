@@ -1,6 +1,7 @@
 // @flow
 
 import React, { Component } from "react";
+import i18next from "i18next";
 import { View, StyleSheet } from "react-native";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
@@ -17,6 +18,7 @@ import genuineCheck from "../../logic/hw/theRealGenuineCheck";
 import getDeviceInfo from "../../logic/hw/getDeviceInfo";
 import colors from "../../colors";
 import RequiresBLE from "../../components/RequiresBLE";
+import HeaderRightClose from "../../components/HeaderRightClose";
 import PendingContainer from "./PendingContainer";
 import PendingPairing from "./PendingPairing";
 import PendingGenuineCheck from "./PendingGenuineCheck";
@@ -24,6 +26,7 @@ import Paired from "./Paired";
 import Scanning from "./Scanning";
 import ScanningTimeout from "./ScanningTimeout";
 import RenderError from "./RenderError";
+import { navigationOptions } from "../../navigation/navigatorConfig";
 
 type Props = {
   navigation: NavigationScreenProp<*>,
@@ -169,11 +172,21 @@ class PairDevices extends Component<Props, State> {
   }
 }
 
+type NavOptsProps = { navigation: NavigationScreenProp<*> };
+const hackyNavigationOptions = ({ navigation }: NavOptsProps) => ({
+  ...navigationOptions,
+  title: i18next.t("SelectDevice.chooseYourDevice"),
+  headerTitleStyle: {
+    textAlign: "center",
+    marginLeft: 60,
+    flex: 1,
+  },
+  headerLeft: null,
+  headerRight: <HeaderRightClose navigation={navigation} />,
+});
+
 class Screen extends Component<Props, State> {
-  static navigationOptions = {
-    title: "Choose your device",
-    headerLeft: null,
-  };
+  static navigationOptions = hackyNavigationOptions;
 
   render() {
     return (

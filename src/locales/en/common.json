@@ -695,6 +695,7 @@
   },
   "SelectDevice": {
     "deviceNotFoundPairNewDevice": "Pair a new device",
+    "chooseYourDevice": "Choose your device",
     "headerDescription": "Turn on your Nano X and the bluetooth on your phone",
     "steps": {
       "connecting": {

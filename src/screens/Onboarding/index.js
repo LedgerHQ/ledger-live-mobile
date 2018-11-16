@@ -13,6 +13,7 @@ import OnboardingStepShareData from "./steps/share-data";
 import OnboardingStepScanQR from "./steps/scan-qr";
 import OnboardingStepFinish from "./steps/finish";
 import ImportAccounts from "../ImportAccounts/importAccountsNavigator";
+import PairDevices from "../PairDevices";
 
 const OnboardingStack = createStackNavigator({
   OnboardingStepGetStarted,
@@ -25,9 +26,14 @@ const OnboardingStack = createStackNavigator({
   OnboardingStepPassword,
   OnboardingStepShareData,
   OnboardingStepFinish,
+
+  // this screens are dependencies of other screens
   ImportAccounts,
+  PairDevices,
 });
 
-OnboardingStack.navigationOptions = { header: null };
+OnboardingStack.navigationOptions = {
+  header: null,
+};
 
 export default OnboardingStack;
