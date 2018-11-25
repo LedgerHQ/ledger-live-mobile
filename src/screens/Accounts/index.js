@@ -2,6 +2,7 @@
 
 import React, { Component } from "react";
 import { StyleSheet } from "react-native";
+// $FlowFixMe flowtyped not up to date
 import { FlatList } from "react-navigation";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";

@@ -18,6 +18,7 @@ const mapStateToProps = createStructuredSelector({
 });
 class AccountHeaderTitle extends Component<Props> {
   onPress = () => {
+    // $FlowFixMe flowtyped not up to date
     this.props.navigation.emit("refocus");
   };
 

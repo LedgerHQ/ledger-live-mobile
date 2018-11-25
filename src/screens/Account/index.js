@@ -3,6 +3,7 @@
 import React, { PureComponent } from "react";
 import { compose } from "redux";
 import { StyleSheet, View, Animated } from "react-native";
+// $FlowFixMe flowtyped not up to date
 import { SectionList } from "react-navigation";
 import { connect } from "react-redux";
 import type { NavigationScreenProp } from "react-navigation";
@@ -115,6 +116,7 @@ class AccountScreen extends PureComponent<Props, State> {
   };
 
   onPress = () => {
+    // $FlowFixMe flowtyped not up to date
     this.props.navigation.emit("refocus");
   };
 

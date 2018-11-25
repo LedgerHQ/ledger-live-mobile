@@ -4,6 +4,7 @@ import React, { Component } from "react";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import { View, StyleSheet, Animated } from "react-native";
+// $FlowFixMe flowtyped not up to date
 import { SectionList, SafeAreaView } from "react-navigation";
 import { translate } from "react-i18next";
 import Config from "react-native-config";
@@ -74,8 +75,8 @@ class Portfolio extends Component<
   componentDidMount() {
     if (!this.props.hasCompletedOnboarding && !Config.SKIP_ONBOARDING) {
       // TODO: there is probably more elegant way to do that
+      // NOTE: probably since we use a switch navigation, we can pass initialRouteName: https://reactnavigation.org/docs/en/switch-navigator.html#switchnavigatorconfig
       this.props.navigation.navigate("Onboarding");
-      return;
     }
   }
 

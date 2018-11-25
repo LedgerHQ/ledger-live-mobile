@@ -1,9 +1,10 @@
 // @flow
+/* eslint-disable import/first */
 import "../shim";
-import "./polyfill"; /* eslint-disable import/first */
+import "./polyfill";
 import React, { Component } from "react";
 import { StyleSheet, View } from "react-native";
-import { useScreens } from "react-native-screens";
+import { useScreens } from "react-native-screens"; // eslint-disable-line import/no-unresolved
 import SplashScreen from "react-native-splash-screen";
 import { exportSelector as settingsExportSelector } from "./reducers/settings";
 import { exportSelector as accountsExportSelector } from "./reducers/accounts";
