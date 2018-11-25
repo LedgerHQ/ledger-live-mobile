@@ -44,7 +44,6 @@ type Props = {
   isError: boolean,
   cvPoll: *,
   setSyncBehavior: *,
-  forwardedRef?: *,
 };
 
 export default (ScrollListLike: any) => {
@@ -79,14 +78,12 @@ export default (ScrollListLike: any) => {
         isError,
         cvPoll,
         setSyncBehavior,
-        forwardedRef,
         ...props
       } = this.props;
       const { refreshing } = this.state;
       return (
         <ScrollListLike
           {...props}
-          ref={forwardedRef}
           refreshControl={
             <RefreshControl
               refreshing={refreshing}

@@ -3,8 +3,8 @@
 import React, { Component } from "react";
 import { compose } from "redux";
 import { connect } from "react-redux";
-import { View, StyleSheet, SectionList, Animated } from "react-native";
-import { SafeAreaView } from "react-navigation";
+import { View, StyleSheet, Animated } from "react-native";
+import { SectionList, SafeAreaView } from "react-navigation";
 import { translate } from "react-i18next";
 import Config from "react-native-config";
 
@@ -34,7 +34,6 @@ import GraphCardContainer from "./GraphCardContainer";
 import StickyHeader from "./StickyHeader";
 import EmptyStatePortfolio from "./EmptyStatePortfolio";
 import extraStatusBarPadding from "../../logic/extraStatusBarPadding";
-import { scrollToTopIntent } from "./events";
 import SyncBackground from "../../bridge/SyncBackground";
 import TradingDisclaimer from "../../modals/TradingDisclaimer";
 
@@ -72,31 +71,11 @@ class Portfolio extends Component<
     scrollY: new Animated.Value(0),
   };
 
-  ref = React.createRef();
-
-  scrollSub: *;
-
   componentDidMount() {
     if (!this.props.hasCompletedOnboarding && !Config.SKIP_ONBOARDING) {
       // TODO: there is probably more elegant way to do that
       this.props.navigation.navigate("Onboarding");
       return;
-    }
-    this.scrollSub = scrollToTopIntent.subscribe(() => {
-      const sectionList = this.ref.current && this.ref.current.getNode();
-      if (sectionList) {
-        sectionList.getScrollResponder().scrollTo({
-          x: 0,
-          y: 0,
-          animated: true,
-        });
-      }
-    });
-  }
-
-  componentWillUnmount() {
-    if (this.scrollSub) {
-      this.scrollSub.unsubscribe();
     }
   }
 
@@ -162,12 +141,15 @@ class Portfolio extends Component<
 
     return (
       <View style={[styles.root, { paddingTop: extraStatusBarPadding }]}>
-        <StickyHeader scrollY={scrollY} summary={summary} />
+        <StickyHeader
+          navigation={navigation}
+          scrollY={scrollY}
+          summary={summary}
+        />
         <SyncBackground />
 
         <SafeAreaView style={styles.inner}>
           <List
-            forwardedRef={this.ref}
             sections={sections}
             style={styles.list}
             contentContainerStyle={styles.contentContainer}

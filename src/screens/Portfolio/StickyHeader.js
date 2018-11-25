@@ -4,7 +4,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import AnimatedTopBar from "./AnimatedTopBar";
-import { scrollToTopIntent } from "./events";
 import { isUpToDateSelector } from "../../reducers/accounts";
 import { globalSyncStateSelector } from "../../reducers/bridgeSync";
 import { networkErrorSelector } from "../../reducers/appstate";
@@ -16,15 +15,16 @@ const mapStateToProps = createStructuredSelector({
   isUpToDate: isUpToDateSelector,
 });
 
-class Portfolio extends Component<{
+class StickyHeader extends Component<{
   summary: *,
   scrollY: *,
   isUpToDate: boolean,
   globalSyncState: AsyncState,
   networkError: ?Error,
+  navigation: *,
 }> {
   onPress = () => {
-    scrollToTopIntent.next();
+    this.props.navigation.emit("refocus");
   };
 
   render() {
@@ -34,9 +34,11 @@ class Portfolio extends Component<{
       networkError,
       globalSyncState,
       isUpToDate,
+      navigation,
     } = this.props;
     return (
       <AnimatedTopBar
+        navigation={navigation}
         scrollY={scrollY}
         summary={summary}
         pending={globalSyncState.pending && !isUpToDate}
@@ -50,4 +52,4 @@ class Portfolio extends Component<{
   }
 }
 
-export default connect(mapStateToProps)(Portfolio);
+export default connect(mapStateToProps)(StickyHeader);

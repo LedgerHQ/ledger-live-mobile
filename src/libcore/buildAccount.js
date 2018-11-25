@@ -141,7 +141,6 @@ export async function buildAccount({
           // this implement a failsafe in case an op changes (when we fix bugs)
           // tradeoff: in such case, we assume all existingOps are to trash
           console.warn("op mismatch. doing a full clear cache.");
-          if (__DEV__) console.log({ existingOp, newOp });
           existingOps = [];
           operations.push(newOp);
           continue; // eslint-disable-line no-continue

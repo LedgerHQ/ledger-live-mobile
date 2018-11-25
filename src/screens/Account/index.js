@@ -2,7 +2,8 @@
 
 import React, { PureComponent } from "react";
 import { compose } from "redux";
-import { StyleSheet, SectionList, View, Animated } from "react-native";
+import { StyleSheet, View, Animated } from "react-native";
+import { SectionList } from "react-navigation";
 import { connect } from "react-redux";
 import type { NavigationScreenProp } from "react-navigation";
 import { createStructuredSelector } from "reselect";
@@ -28,7 +29,6 @@ import EmptyStateAccount from "./EmptyStateAccount";
 import AccountHeaderRight from "./AccountHeaderRight";
 import AccountHeaderTitle from "./AccountHeaderTitle";
 import AccountActions from "./AccountActions";
-import { scrollToTopIntent } from "./events";
 
 type Props = {
   account: Account,
@@ -114,29 +114,8 @@ class AccountScreen extends PureComponent<Props, State> {
     );
   };
 
-  ref = React.createRef();
-
-  componentDidMount() {
-    this.scrollSub = scrollToTopIntent.subscribe(() => {
-      const sectionList = this.ref.current;
-      if (sectionList) {
-        sectionList.getScrollResponder().scrollTo({
-          x: 0,
-          y: 0,
-          animated: true,
-        });
-      }
-    });
-  }
-
-  componentWillUnmount() {
-    this.scrollSub.unsubscribe();
-  }
-
-  scrollSub: *;
-
   onPress = () => {
-    scrollToTopIntent.next();
+    this.props.navigation.emit("refocus");
   };
 
   renderSectionHeader = ({ section }) => <SectionHeader section={section} />;
@@ -159,7 +138,6 @@ class AccountScreen extends PureComponent<Props, State> {
     return (
       <View style={styles.root}>
         <List
-          ref={this.ref}
           sections={sections}
           style={styles.sectionList}
           contentContainerStyle={styles.contentContainer}

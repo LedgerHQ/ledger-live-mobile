@@ -1,7 +1,8 @@
 // @flow
 
 import React, { Component } from "react";
-import { StyleSheet, FlatList } from "react-native";
+import { StyleSheet } from "react-native";
+import { FlatList } from "react-navigation";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { translate } from "react-i18next";
