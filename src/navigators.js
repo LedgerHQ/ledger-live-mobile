@@ -5,6 +5,7 @@ import {
   createBottomTabNavigator,
   createMaterialTopTabNavigator,
   createSwitchNavigator,
+  createAppContainer,
 } from "react-navigation";
 import type { NavigationScreenProp } from "react-navigation";
 import colors from "./colors";
@@ -78,7 +79,7 @@ import TransparentHeaderNavigationOptions from "./navigation/TransparentHeaderNa
 import {
   stackNavigatorConfig,
   closableStackNavigatorConfig,
-  navigationOptions,
+  defaultNavigationOptions,
 } from "./navigation/navigatorConfig";
 
 // add accounts
@@ -170,8 +171,8 @@ const ManagerStack = createStackNavigator(
   },
   {
     ...stackNavigatorConfig,
-    navigationOptions: {
-      ...stackNavigatorConfig.navigationOptions,
+    defaultNavigationOptions: {
+      ...stackNavigatorConfig.defaultNavigationOptions,
       headerStyle: styles.header,
     },
   },
@@ -243,12 +244,12 @@ ReceiveFunds.navigationOptions = {
 const addAccountsNavigatorConfig = {
   ...closableStackNavigatorConfig,
   headerMode: "float",
-  navigationOptions: ({
+  defaultNavigationOptions: ({
     navigation,
   }: {
     navigation: NavigationScreenProp<*>,
   }) => ({
-    ...navigationOptions,
+    ...defaultNavigationOptions,
     headerRight: <AddAccountsHeaderRightClose navigation={navigation} />,
   }),
 };
@@ -396,9 +397,11 @@ const BaseOnboarding = createStackNavigator(
   },
 );
 
-export const RootNavigator = createSwitchNavigator({
+const RootNavigator = createSwitchNavigator({
   BaseNavigator,
   BaseOnboarding,
 });
 
 RootNavigator.navigationOptions = { header: null };
+
+export const AppContainer = createAppContainer(RootNavigator);

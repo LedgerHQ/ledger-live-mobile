@@ -8,7 +8,7 @@ import HeaderTitle from "../components/HeaderTitle";
 import HeaderBackImage from "../components/HeaderBackImage";
 import styles from "./styles";
 
-export const navigationOptions = {
+export const defaultNavigationOptions = {
   headerStyle: styles.header,
   headerTitle: HeaderTitle,
   headerBackTitle: null,
@@ -16,7 +16,7 @@ export const navigationOptions = {
 };
 
 export const stackNavigatorConfig = {
-  navigationOptions,
+  defaultNavigationOptions,
   cardStyle: styles.card,
   headerLayoutPreset: "center",
 };
@@ -26,11 +26,11 @@ export const closableNavigationOptions = ({
 }: {
   navigation: NavigationScreenProp<*>,
 }) => ({
-  ...navigationOptions,
+  ...defaultNavigationOptions,
   headerRight: <HeaderRightClose navigation={navigation} />,
 });
 
 export const closableStackNavigatorConfig = {
   ...stackNavigatorConfig,
-  navigationOptions: closableNavigationOptions,
+  defaultNavigationOptions: closableNavigationOptions,
 };

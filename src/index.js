@@ -3,7 +3,7 @@ import "../shim";
 import "./polyfill"; /* eslint-disable import/first */
 import React, { Component } from "react";
 import { StyleSheet, View } from "react-native";
-// import { useScreens } from "react-native-screens";
+import { useScreens } from "react-native-screens";
 import SplashScreen from "react-native-splash-screen";
 import { exportSelector as settingsExportSelector } from "./reducers/settings";
 import { exportSelector as accountsExportSelector } from "./reducers/accounts";
@@ -14,7 +14,7 @@ import RebootProvider from "./context/Reboot";
 import ButtonUseTouchable from "./context/ButtonUseTouchable";
 import AuthPass from "./context/AuthPass";
 import LedgerStoreProvider from "./context/LedgerStore";
-import { RootNavigator } from "./navigators";
+import { AppContainer } from "./navigators";
 import LoadingApp from "./components/LoadingApp";
 import StyledStatusBar from "./components/StyledStatusBar";
 import { BridgeSyncProvider } from "./bridge/BridgeSyncContext";
@@ -24,7 +24,7 @@ import AppStateListener from "./components/AppStateListener";
 import SyncNewAccounts from "./bridge/SyncNewAccounts";
 import { OnboardingContextProvider } from "./screens/Onboarding/onboardingContext";
 
-// useScreens(); // FIXME this is not working properly when using react-native-modal inside Send flow
+useScreens(); // FIXME this is not working properly when using react-native-modal inside Send flow
 
 const styles = StyleSheet.create({
   root: {
@@ -75,7 +75,7 @@ class App extends Component<*> {
 
         <SyncNewAccounts priority={5} />
 
-        <RootNavigator />
+        <AppContainer />
 
         <DebugRejectSwitch />
       </View>

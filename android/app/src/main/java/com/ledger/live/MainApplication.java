@@ -8,7 +8,7 @@ import com.oblador.keychain.KeychainPackage;
 import com.showlocationservicesdialogbox.LocationServicesDialogBoxPackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import com.opensettings.OpenSettingsPackage;
-import com.swmansion.rnscreens.RNScreenPackage;
+import com.swmansion.rnscreens.RNScreensPackage;
 import com.lugg.ReactNativeConfig.ReactNativeConfigPackage;
 import com.horcrux.svg.SvgPackage;
 import com.ledgerwallet.hid.ReactHIDPackage;
@@ -53,7 +53,7 @@ public class MainApplication extends Application implements ReactApplication {
             new LocationServicesDialogBoxPackage(),
             new RNGestureHandlerPackage(),
             new OpenSettingsPackage(),
-            new RNScreenPackage(),
+            new RNScreensPackage(),
             new ReactNativeConfigPackage(),
             new SvgPackage(),
             new ReactHIDPackage(),

@@ -6,6 +6,7 @@ import FallBackCameraScreen from "./FallBackCameraScreen";
 import TransparentHeaderNavigationOptions from "../../navigation/TransparentHeaderNavigationOptions";
 import { closableStackNavigatorConfig } from "../../navigation/navigatorConfig";
 
+// FIXME move this back to navigators (we try to have everything sustained there)
 const ImportAccounts = createStackNavigator(
   {
     ScanAccounts: {
