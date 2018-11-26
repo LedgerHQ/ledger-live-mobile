@@ -90,7 +90,7 @@
       "description": "Try setting a custom fee (status: {{status}})"
     },
     "FeeNotLoaded": {
-      "title": "Couldn’t load fee rates. Please set manual fees"
+      "title": "Couldn’t load fee rates"
     },
     "GenuineCheckFailed": {
       "title": "Genuine check failed",
@@ -467,7 +467,9 @@
     "viewOperation": "View in explorer",
     "seeAll": "See all",
     "seeLess": "See less",
-    "viewInExplorer": "View in explorer"
+    "viewInExplorer": "View in explorer",
+    "sending": "Sending...",
+    "receiving": "Receiving..."
   },
   "operationList": {
     "noOperations": "No Operations",
