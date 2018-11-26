@@ -10,6 +10,7 @@ rn-nodeify --hack
 
 # tmp hack to fix a bug https://github.com/react-navigation/react-navigation-stack/pull/62
 cp node_modules_patches/react-navigation-stack_StackViewCard.js ./node_modules/react-navigation-stack/dist/views/StackView/StackViewCard.js
+cp node_modules_patches/react-navigation-stack_StackViewCard.js ./node_modules/react-navigation-stack/src/views/StackView/StackViewCard.js
 
 # Create the dev .env file with APP_NAME if it doesn't exist
 if ! [ -f .env ]; then
