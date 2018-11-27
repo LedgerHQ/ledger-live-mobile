@@ -69,7 +69,6 @@ class PasswordInput extends PureComponent<Props, { isFocused: boolean }> {
           style={[
             styles.input,
             getFontStyle({ semiBold: true }),
-            { color: error ? colors.alert : colors.darkBlue },
             inline && styles.inlineTextInput,
           ]}
           placeholder={placeholder}
@@ -122,7 +121,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   input: {
-    fontSize: 14,
+    fontSize: 16,
     paddingHorizontal: 16,
     height: 48,
     flex: 1,

@@ -2,11 +2,10 @@
 import React, { PureComponent } from "react";
 import { translate, Trans } from "react-i18next";
 import {
-  TouchableWithoutFeedback,
-  Keyboard,
   View,
   StyleSheet,
   Image,
+  TouchableWithoutFeedback,
 } from "react-native";
 import { SafeAreaView } from "react-navigation";
 import * as Keychain from "react-native-keychain";
@@ -25,6 +24,7 @@ import Touchable from "../../components/Touchable";
 import PasswordInput from "../../components/PasswordInput";
 import KeyboardView from "../../components/KeyboardView";
 import FailBiometrics from "./FailBiometrics";
+import KeyboardBackgroundDismiss from "../../components/KeyboardBackgroundDismiss";
 
 type State = {
   passwordError: ?Error,
@@ -71,15 +71,20 @@ class FormFooter extends PureComponent<*> {
       passwordError,
       onPress,
     } = this.props;
+
+    // TODO figure out why without this wrap the button sometimes doesn't handle the press.
     return inputFocused ? (
-      <Button
-        title={<Trans i18nKey="auth.unlock.login" />}
-        type="primary"
-        onPress={onSubmit}
-        containerStyle={styles.buttonContainer}
-        titleStyle={styles.buttonTitle}
-        disabled={passwordError || passwordEmpty}
-      />
+      <TouchableWithoutFeedback>
+        <Button
+          title={<Trans i18nKey="auth.unlock.login" />}
+          type="primary"
+          onPress={onSubmit}
+          z={2}
+          containerStyle={styles.buttonContainer}
+          titleStyle={styles.buttonTitle}
+          disabled={passwordError || passwordEmpty}
+        />
+      </TouchableWithoutFeedback>
     ) : (
       <Touchable style={styles.forgot} onPress={onPress}>
         <LText semiBold style={styles.link}>
@@ -91,8 +96,6 @@ class FormFooter extends PureComponent<*> {
 }
 
 class AuthScreen extends PureComponent<Props, State> {
-  keyboardDidHideListener;
-
   state = {
     passwordError: null,
     password: "",
@@ -100,17 +103,6 @@ class AuthScreen extends PureComponent<Props, State> {
     isModalOpened: false,
     secureTextEntry: true,
   };
-
-  componentWillMount() {
-    this.keyboardDidHideListener = Keyboard.addListener(
-      "keyboardDidHide",
-      Keyboard.dismiss,
-    );
-  }
-
-  componentWillUnmount() {
-    this.keyboardDidHideListener.remove();
-  }
 
   onHardReset = () => {
     this.props.reboot(true);
@@ -189,7 +181,7 @@ class AuthScreen extends PureComponent<Props, State> {
       passwordFocused,
     } = this.state;
     return (
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <KeyboardBackgroundDismiss>
         <SafeAreaView style={styles.root}>
           <KeyboardView>
             <View style={{ flex: 1 }} />
@@ -224,6 +216,7 @@ class AuthScreen extends PureComponent<Props, State> {
               )}
 
               <FormFooter
+                z={2}
                 inputFocused={passwordFocused}
                 onSubmit={this.onSubmit}
                 passwordError={passwordError}
@@ -246,7 +239,7 @@ class AuthScreen extends PureComponent<Props, State> {
             />
           </BottomModal>
         </SafeAreaView>
-      </TouchableWithoutFeedback>
+      </KeyboardBackgroundDismiss>
     );
   }
 }
