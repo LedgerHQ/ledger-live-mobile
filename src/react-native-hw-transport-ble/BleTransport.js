@@ -3,120 +3,28 @@
 
 import Transport, { TransportError } from "@ledgerhq/hw-transport";
 import { BleManager } from "react-native-ble-plx";
-import { logSubject } from "./debug";
+import { Observable, merge } from "rxjs";
+import { share } from "rxjs/operators";
+import { CantOpenDevice } from "@ledgerhq/live-common/lib/errors";
+import { logSubject, verboseLog } from "./debug";
+
+import type { Device, Characteristic } from "./types";
+import { sendAPDU } from "./sendAPDU";
+import { receiveAPDU } from "./receiveAPDU";
+import { monitorCharacteristic } from "./monitorCharacteristic";
+import { awaitsBleOn } from "./awaitsBleOn";
 
 const ServiceUuid = "d973f2e0-b19e-11e2-9e96-0800200c9a66";
-const RenameCharacteristicUuid = "d973f2e3-b19e-11e2-9e96-0800200c9a66";
 const WriteCharacteristicUuid = "d973f2e2-b19e-11e2-9e96-0800200c9a66";
 const NotifyCharacteristicUuid = "d973f2e1-b19e-11e2-9e96-0800200c9a66";
-const MaxChunkBytes = 20;
-const TagId = 0x05;
 
-type Device = *;
-type Characteristic = *;
+const connectOptions = {
+  requestMTU: 156,
+};
 
-function chunkBuffer(
-  buffer: Buffer,
-  sizeForIndex: number => number,
-): Array<Buffer> {
-  const chunks = [];
-  for (
-    let i = 0, size = sizeForIndex(0);
-    i < buffer.length;
-    i += size, size = sizeForIndex(i)
-  ) {
-    chunks.push(buffer.slice(i, i + size));
-  }
-  return chunks;
-}
-
-function receive(characteristic) {
-  let subscription;
-  const promise = new Promise((resolve, reject) => {
-    let notifiedIndex = 0;
-    let notifiedDataLength = 0;
-    let notifiedData = Buffer.alloc(0);
-    subscription = characteristic.monitor((error, c) => {
-      if (error) {
-        reject(error);
-        return;
-      }
-      try {
-        const value = Buffer.from(c.value, "base64");
-        logSubject.next({
-          type: "ble-frame-in",
-          message: value.toString("hex"),
-        });
-
-        const tag = value.readUInt8(0);
-        const index = value.readUInt16BE(1);
-        let data = value.slice(3);
-
-        if (tag !== TagId) {
-          throw new TransportError(
-            "Invalid tag " + tag.toString(16),
-            "InvalidTag",
-          );
-        }
-        if (notifiedIndex !== index) {
-          throw new TransportError(
-            "BLE: Invalid sequence number. discontinued chunk. Received " +
-              index +
-              " but expected " +
-              notifiedIndex,
-            "InvalidSequence",
-          );
-        }
-        if (index === 0) {
-          notifiedDataLength = data.readUInt16BE(0);
-          data = data.slice(2);
-        }
-        notifiedIndex++;
-        notifiedData = Buffer.concat([notifiedData, data]);
-        if (notifiedData.length > notifiedDataLength) {
-          throw new TransportError(
-            "BLE: received too much data. discontinued chunk. Received " +
-              notifiedData.length +
-              " but expected " +
-              notifiedDataLength,
-            "BLETooMuchData",
-          );
-        }
-        if (notifiedData.length === notifiedDataLength) {
-          resolve(notifiedData);
-        }
-      } catch (e) {
-        reject(e);
-      }
-    });
-  });
-  if (!subscription) throw new Error("subscription undefined"); // to satisfy flow
-  return { promise, subscription };
-}
-
-async function send(characteristic, apdu, termination) {
-  const chunks = chunkBuffer(apdu, i => MaxChunkBytes - (i === 0 ? 5 : 3)).map(
-    (buffer, i) => {
-      const head = Buffer.alloc(i === 0 ? 5 : 3);
-      head.writeUInt8(TagId, 0);
-      head.writeUInt16BE(i, 1);
-      if (i === 0) {
-        head.writeUInt16BE(apdu.length, 3);
-      }
-      return Buffer.concat([head, buffer]);
-    },
-  );
-  let terminated = false;
-  termination.then(() => {
-    terminated = true;
-  });
-  for (const chunk of chunks) {
-    if (terminated) return;
-    const message = chunk.toString("base64");
-    logSubject.next({ type: "ble-frame-out", message });
-    await characteristic.writeWithResponse(message);
-  }
-}
+let id = 0;
+const devicesCache = {};
+const bleManager = new BleManager();
 
 /**
  * react-native bluetooth BLE implementation
@@ -133,24 +41,20 @@ export default class BluetoothTransport extends Transport<Device | string> {
    * an event is emit once and then listened
    */
   static observeState(observer: *) {
-    const manager = new BleManager();
     const emitFromState = type => {
       observer.next({ type, available: type === "PoweredOn" });
     };
-    manager.onStateChange(emitFromState, true);
+    bleManager.onStateChange(emitFromState, true);
     return {
-      unsubscribe: () => manager.destroy(),
+      unsubscribe: () => {},
     };
   }
 
   static list = (): * => {
-    const bleManager = new BleManager();
-    return bleManager.connectedDevices([ServiceUuid]);
+    throw new Error("not implemented");
   };
 
   static listen(observer: *) {
-    // TODO protect from race condition. should not allow to call listen() twice before stopDeviceScan is done.
-    const bleManager = new BleManager();
     const stateSub = bleManager.onStateChange(state => {
       if (state === "PoweredOn") {
         stateSub.remove();
@@ -177,63 +81,77 @@ export default class BluetoothTransport extends Transport<Device | string> {
 
     let device;
     if (typeof deviceOrId === "string") {
-      console.log(`deviceId=${deviceOrId}`); // eslint-disable-line no-console
-      const manager = new BleManager();
-      await new Promise(success => {
-        const stateSub = manager.onStateChange(state => {
-          if (state === "PoweredOn") {
-            stateSub.remove();
-            success();
-          }
-        }, true);
-      });
+      if (verboseLog) verboseLog(`deviceId=${deviceOrId}`);
 
-      const devices = await manager.devices([deviceOrId]);
-      console.log(`${devices.length} devices`); // eslint-disable-line no-console
-      [device] = devices;
+      if (devicesCache[deviceOrId]) {
+        if (verboseLog) verboseLog("Device in cache, using that.");
+        device = devicesCache[deviceOrId];
+      } else {
+        if (verboseLog) verboseLog("awaitsBleOn");
+        await awaitsBleOn(bleManager);
 
-      if (!device) {
-        const connectedDevices = await manager.connectedDevices([ServiceUuid]);
-        console.log(`${connectedDevices.length} connectedDevices`); // eslint-disable-line no-console
-        const connectedDevicesFiltered = connectedDevices.filter(
-          d => d.id === deviceOrId,
-        );
-        console.log(`${connectedDevicesFiltered.length} connectedDFiltered`); // eslint-disable-line no-console
-        [device] = connectedDevicesFiltered;
-      }
+        if (!device) {
+          /*
+          const devices = await bleManager.devices([deviceOrId]);
+          if (verboseLog) verboseLog(`${devices.length} devices`);
+          [device] = devices;
+          */
 
-      if (device) {
-        const isDeviceConnected = await manager.isDeviceConnected(deviceOrId);
-        console.log(`isDeviceConnected=${isDeviceConnected}`); // eslint-disable-line no-console
-        if (!isDeviceConnected) {
-          device = null;
+          const connectedDevices = await bleManager.connectedDevices([
+            ServiceUuid,
+          ]);
+          if (verboseLog)
+            verboseLog(`${connectedDevices.length} connectedDevices`);
+          const connectedDevicesFiltered = connectedDevices.filter(
+            d => d.id === deviceOrId,
+          );
+          if (verboseLog)
+            verboseLog(`${connectedDevicesFiltered.length} connectedDFiltered`);
+          [device] = connectedDevicesFiltered;
         }
-      }
 
-      if (!device) {
-        console.log("Last chance, we attempt to connectToDevice"); // eslint-disable-line no-console
-        device = await manager.connectToDevice(deviceOrId);
+        /*
+        if (device) {
+          const isDeviceConnected = await bleManager.isDeviceConnected(deviceOrId);
+          if (verboseLog) verboseLog(`isDeviceConnected=${isDeviceConnected}`); // eslint-disable-line no-console
+          if (!isDeviceConnected) {
+            device = null;
+          }
+        }
+        */
+
+        if (!device) {
+          if (verboseLog)
+            verboseLog("Last chance, we attempt to connectToDevice"); // eslint-disable-line no-console
+          device = await bleManager.connectToDevice(deviceOrId, connectOptions);
+        }
+
+        if (!device) {
+          throw new CantOpenDevice();
+        }
       }
     } else {
       device = deviceOrId;
     }
 
+    if (verboseLog) verboseLog("isConnected?");
     if (!(await device.isConnected())) {
-      await device.connect();
+      if (verboseLog) verboseLog("nope! connecting...");
+      await device.connect(connectOptions);
     }
+
+    if (verboseLog) verboseLog("discoverAllServicesAndCharacteristics");
     await device.discoverAllServicesAndCharacteristics();
 
+    if (verboseLog) verboseLog("characteristicsForService");
     const characteristics = await device.characteristicsForService(ServiceUuid);
     if (!characteristics) {
       throw new TransportError("service not found", "BLEServiceNotFound");
     }
     let writeC;
     let notifyC;
-    let renameC;
     for (const c of characteristics) {
-      if (c.uuid === RenameCharacteristicUuid) {
-        renameC = c;
-      } else if (c.uuid === WriteCharacteristicUuid) {
+      if (c.uuid === WriteCharacteristicUuid) {
         writeC = c;
       } else if (c.uuid === NotifyCharacteristicUuid) {
         notifyC = c;
@@ -264,35 +182,71 @@ export default class BluetoothTransport extends Transport<Device | string> {
       );
     }
 
-    return new BluetoothTransport(device, writeC, notifyC, renameC);
+    const { id } = device;
+    if (!devicesCache[id]) {
+      devicesCache[id] = device;
+      const disconnectedSub = device.onDisconnected(() => {
+        delete devicesCache[id];
+        disconnectedSub.remove();
+      });
+    }
+
+    if (verboseLog) verboseLog("device.mtu=" + device.mtu);
+
+    // Firmware team need to fix things for mtu to work
+    // const mtuSize = device.mtu - 3;
+    const mtuSize = 20;
+
+    return new BluetoothTransport(device, writeC, notifyC, mtuSize);
   }
 
+  id: number;
+
   device: Device;
+
+  mtuSize: number;
 
   writeCharacteristic: Characteristic;
 
   notifyCharacteristic: Characteristic;
 
-  renameCharacteristic: Characteristic;
+  notifyObservable: Observable<Buffer>;
 
   constructor(
     device: Device,
     writeCharacteristic: Characteristic,
     notifyCharacteristic: Characteristic,
-    renameCharacteristic: Characteristic,
+    mtuSize: number,
   ) {
     super();
+    this.id = ++id;
     this.device = device;
+    this.mtuSize = mtuSize;
     this.writeCharacteristic = writeCharacteristic;
     this.notifyCharacteristic = notifyCharacteristic;
-    this.renameCharacteristic = renameCharacteristic;
-    device.onDisconnected(e => {
-      if (this.debug) {
-        console.log("BLE disconnect", this.device); // eslint-disable-line
-      }
+    const notifyObservable = monitorCharacteristic(notifyCharacteristic).pipe(
+      share(),
+    );
+    this.notifyObservable = notifyObservable;
+    this.disconnectedSub = device.onDisconnected(e => {
+      if (verboseLog) verboseLog("BLE disconnect", this.device); // eslint-disable-line
       this.emit("disconnect", e);
+      if (this.disconnectedSub) {
+        this.disconnectedSub.remove();
+        this.disconnectedSub = null;
+      }
     });
+    if (verboseLog) {
+      verboseLog(
+        "BleTransport(" +
+          String(this.id) +
+          ") opened. using mtuSize=" +
+          mtuSize,
+      );
+    }
   }
+
+  disconnectedSub: *;
 
   busy = false;
 
@@ -312,9 +266,10 @@ export default class BluetoothTransport extends Transport<Device | string> {
       if (debug) debug(`=> ${msgIn}`); // eslint-disable-line no-console
       logSubject.next({ type: "ble-apdu-in", message: msgIn });
 
-      receiving = receive(this.notifyCharacteristic);
-      send(this.writeCharacteristic, apdu, receiving.promise);
-      const data = await receiving.promise;
+      const data = await merge(
+        this.notifyObservable.pipe(receiveAPDU),
+        sendAPDU(bleManager, this.writeCharacteristic, apdu, this.mtuSize),
+      ).toPromise();
 
       const msgOut = data.toString("hex");
       logSubject.next({ type: "ble-apdu-out", message: msgOut });
@@ -334,7 +289,15 @@ export default class BluetoothTransport extends Transport<Device | string> {
 
   setScrambleKey() {}
 
+  // TODO when we remove a device globally, we need to disconnect it.
+  // so we need a new api for this.
+
   close(): Promise<void> {
+    if (this.disconnectedSub) {
+      this.disconnectedSub.remove();
+      this.disconnectedSub = null;
+    }
+    if (verboseLog) verboseLog("BleTransport(" + String(this.id) + ") close");
     // we don't want to actually close the device. TODO: we might want to stop all exchanges
     return Promise.resolve();
   }
