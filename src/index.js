@@ -3,8 +3,8 @@
 import "../shim";
 import "./polyfill";
 import React, { Component } from "react";
-import { StyleSheet, View } from "react-native";
-// import { useScreens } from "react-native-screens"; // eslint-disable-line import/no-unresolved
+import { StyleSheet, View, Platform } from "react-native";
+import { useScreens } from "react-native-screens"; // eslint-disable-line import/no-unresolved
 import SplashScreen from "react-native-splash-screen";
 import { exportSelector as settingsExportSelector } from "./reducers/settings";
 import { exportSelector as accountsExportSelector } from "./reducers/accounts";
@@ -25,7 +25,10 @@ import AppStateListener from "./components/AppStateListener";
 import SyncNewAccounts from "./bridge/SyncNewAccounts";
 import { OnboardingContextProvider } from "./screens/Onboarding/onboardingContext";
 
-// useScreens(); // FIXME this is not working properly when using react-native-modal inside Send flow
+if (Platform.OS === "ios") {
+  // FIXME this crashes on Android (release mode) so we'll need to figure it out
+  useScreens();
+}
 
 const styles = StyleSheet.create({
   root: {
