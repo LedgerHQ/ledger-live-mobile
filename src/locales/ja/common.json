@@ -815,7 +815,7 @@
   "PairDevices": {
     "Paired": {
       "title": "Pairing successful",
-      "desc": "Your Ledger Nano X is ready to use with Ledger Live",
+      "desc": "Your {{fullDeviceName}} is ready to use with Ledger Live",
       "action": "Continue"
     },
     "Pairing": {
@@ -828,7 +828,7 @@
     },
     "ScanningHeader": {
       "title": "Looking for devices",
-      "desc": "Please make sure your Ledger Nano X is unlocked with Bluetooth enabled"
+      "desc": "Please make sure your {{fullDeviceName}} is unlocked with Bluetooth enabled"
     },
     "ScanningTimeout": {
       "title": "Oops, no device found",
@@ -837,7 +837,7 @@
     "bypassGenuine": "Use anyway"
   },
   "DeviceItemSummary": {
-    "genuine": "Device is Genuine"
+    "genuine": "Genuine"
   },
   "DeviceNameRow": {
     "title": "Name",
