@@ -17,6 +17,7 @@ import AppsListError from "./AppsListError";
 import AppRow from "./AppRow";
 import AppAction from "./AppAction";
 import { developerModeEnabledSelector } from "../../reducers/settings";
+import KeyboardView from "../../components/KeyboardView";
 
 const actionKey = action => `${action.app.id}_${action.type}`;
 
@@ -141,7 +142,7 @@ class ManagerAppsList extends Component<
     const { deviceInfo } = navigation.getParam("meta");
     const deviceId = navigation.getParam("deviceId");
     return (
-      <View style={styles.root}>
+      <KeyboardView style={styles.root}>
         <TrackScreen category="Manager" name="AppsList" />
         {pending ? (
           <AppsListPending />
@@ -165,14 +166,13 @@ class ManagerAppsList extends Component<
             isOpened={!!action}
           />
         ) : null}
-      </View>
+      </KeyboardView>
     );
   }
 }
 
 const styles = StyleSheet.create({
   root: {
-    flex: 1,
     paddingHorizontal: 16,
   },
   inputWrapper: {
