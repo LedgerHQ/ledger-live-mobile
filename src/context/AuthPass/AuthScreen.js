@@ -25,6 +25,7 @@ import PasswordInput from "../../components/PasswordInput";
 import KeyboardView from "../../components/KeyboardView";
 import FailBiometrics from "./FailBiometrics";
 import KeyboardBackgroundDismiss from "../../components/KeyboardBackgroundDismiss";
+import { PasswordCoolDown } from "../../errors";
 
 type State = {
   passwordError: ?Error,
@@ -102,6 +103,37 @@ class AuthScreen extends PureComponent<Props, State> {
     secureTextEntry: true,
   };
 
+  remainingAttempts = 5;
+  lastFailedSequenceTimestamp = null;
+
+  needsPasswordCoolDown = () => {
+    const currentTime = new Date().getTime();
+    if (this.remainingAttempts === 5) {
+      this.lastFailedSequenceTimestamp = currentTime;
+    }
+
+    if (
+      !this.lastFailedSequenceTimestamp ||
+      currentTime - this.lastFailedSequenceTimestamp < 60000
+    ) {
+
+      this.remainingAttempts--;
+
+      if (this.remainingAttempts === 0) {
+        this.setState({ passwordError: new PasswordCoolDown(), password: "" });
+        setTimeout(() => {
+          this.setState({
+            passwordError: null,
+            password: "",
+          });
+          this.remainingAttempts = 5;
+        }, 60000);
+        return true;
+      }
+    }
+    return false;
+  };
+
   onHardReset = () => {
     this.props.reboot(true);
   };
@@ -120,13 +152,15 @@ class AuthScreen extends PureComponent<Props, State> {
     const id = ++this.submitId;
     const { password } = this.state;
     const { unlock } = this.props;
-    if (!password) return;
+    if (!password || !this.remainingAttempts) return;
     try {
       const credentials = await Keychain.getGenericPassword();
       if (id !== this.submitId) return;
       if (credentials && credentials.password === password) {
         unlock();
       } else {
+        if (this.needsPasswordCoolDown()) return;
+
         credentials
           ? this.setState({
               passwordError: new PasswordIncorrectError(),
@@ -146,7 +180,9 @@ class AuthScreen extends PureComponent<Props, State> {
   };
 
   onChange = (password: string) => {
-    this.setState({ password, passwordError: null });
+    if (this.remainingAttempts) {
+      this.setState({ password, passwordError: null });
+    }
   };
 
   onRequestClose = () => {
