@@ -328,6 +328,7 @@
     "button": "Reset"
   },
   "onboarding": {
+    "stepCount": "{{current}} of {{total}}",
     "stepsTitles": {
       "OnboardingStepChooseDevice": "Choose your device",
       "OnboardingStepSetupPin": "Choose your PIN code",
@@ -429,7 +430,8 @@
     "accounts": "Accounts",
     "transfer": "Transfer",
     "manager": "Manager",
-    "settings": "Settings"
+    "settings": "Settings",
+    "nanoX": "Nano X"
   },
   "portfolio": {
     "totalBalance": "Total balance",
@@ -504,6 +506,10 @@
   "operationList": {
     "noOperations": "No Operations",
     "noMoreOperations": "No More Operations"
+  },
+  "selectableAccountsList": {
+    "deselectAll": "Deselect all",
+    "selectAll": "Select all"
   },
   "account": {
     "send": "Send",
@@ -685,6 +691,7 @@
     },
     "receive": {
       "title": "Receive funds",
+      "titleReadOnly": "Are you completely sure?",
       "desc": "Receive crypto assets",
       "headerTitle": "Select account",
       "titleDevice": "Connect device",
@@ -696,7 +703,13 @@
       "withoutDevice": "Don't have my device",
       "address": "Address for account",
       "copyAddress": "Copy address",
-      "addressCopied": "Address copied!"
+      "addressCopied": "Address copied!",
+      "readOnly": {
+        "title": "Receive",
+        "text": "Please be careful",
+        "desc": "You are about to generate an address which has not been confirmed on your Ledger device. Please verify it for optimal security.",
+        "verify": "Your {{accountType}} address has not been confirmed on your Ledger device. Please verify it for optimal security."
+      }
     },
     "exchange": {
       "title": "Exchange",
@@ -874,6 +887,14 @@
   },
   "manager": {
     "title": "Manager",
+    "readOnly": {
+      "title": "Nano X",
+      "description": "Set up Ledger Live with your Ledger Nano X to install apps, create accounts and manage  secure transactions everywhere you go.",
+      "question": "Got your Ledger Nano X?",
+      "button": "Start Nano X onboarding",
+      "noDevice": "No device?",
+      "buy": "Buy a Ledger Nano X"
+    },
     "appList": {
       "title": "App catalog",
       "loading": "Loading apps..."
