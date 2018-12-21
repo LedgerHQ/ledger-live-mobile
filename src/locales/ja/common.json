@@ -238,6 +238,10 @@
       "title": "Oops, wrong device for ‘{{accountName}}’.",
       "description": "The connected device is not associated with the account you selected. Please connect the right device."
     },
+    "UnexpectedBootloader": {
+      "title": "Opps, your device should not be in Bootloader mode",
+      "description": "Please restart your device or contact us"
+    },
     "generic": {
       "title": "{{message}}",
       "description": "Something went wrong. Please retry or contact us."
@@ -685,7 +689,9 @@
       "exportLogs": "Export logs",
       "exportLogsDesc": "Exporting Ledger Live logs may be necessary for troubleshooting purposes.",
       "hardReset": "Reset Ledger Live",
-      "hardResetDesc": "Erase all Ledger Live data stored on your phone, including accounts and settings."
+      "hardResetDesc": "Erase all Ledger Live data stored on your phone, including accounts and settings.",
+      "repairDevice": "Repair your Ledger device",
+      "repairDeviceDesc": "If you encountered some issue while updating your device and cannot resume the update process, you can try this option to repair your device"
     }
   },
   "transfer": {
@@ -954,8 +960,15 @@
   "FirmwareUpdate": {
     "title": "Update firmware",
     "Installing": {
-      "title": "Firmware updating...",
+      "title": "{{stepName}}...",
       "subtitle": "If asked on device, please enter your pin code to finish the process"
+    },
+    "steps": {
+      "osu": "Installing OSU",
+      "flash-mcu": "MCU updating",
+      "flash-bootloader": "Bootloader updating",
+      "flash": "Flashing your device",
+      "firmware": "Firmware updating"
     }
   },
   "FirmwareUpdateReleaseNotes": {
@@ -976,5 +989,9 @@
   "FirmwareUpdateConfirmation": {
     "title": "Firmware updated",
     "description": "Open the Manager to re-install the apps on your device"
+  },
+  "RepairDevice": {
+    "title": "Repair",
+    "action": "My device is ready"
   }
 }
