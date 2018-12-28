@@ -7,11 +7,17 @@ type Props = {
   size?: number,
   width?: number,
   height?: number,
-  color: string,
+  color?: string,
   style?: *,
 };
 
-export default function TabNanoX({ size, width, height, color, style }: Props) {
+export default function TabNanoX({
+  size = 16,
+  width,
+  height,
+  color = "#000000",
+  style,
+}: Props) {
   return (
     <Svg
       width={width || size}

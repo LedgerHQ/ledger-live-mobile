@@ -3,10 +3,10 @@ import React from "react";
 import Svg, { Path, G } from "react-native-svg";
 
 type Props = {
-  size: number,
+  size?: number,
 };
 
-export default function QRcode({ size }: Props) {
+export default function QRcode({ size = 16 }: Props) {
   return (
     <Svg viewBox="0 0 16 16" width={size} height={size}>
       <G fill="none" fillRule="nonzero">

@@ -9,7 +9,7 @@ import firmwareUpdateMain from "@ledgerhq/live-common/lib/hw/firmwareUpdate-main
 import type { FirmwareUpdateContext } from "@ledgerhq/live-common/lib/types/manager";
 import { TrackScreen } from "../../analytics";
 import colors from "../../colors";
-import DeviceNanoAction from "../../components/DeviceNanoAction";
+import DeviceNanoAction from "../../icons/DeviceNanoAction";
 import StepHeader from "../../components/StepHeader";
 import { BulletItem } from "../../components/BulletList";
 import getWindowDimensions from "../../logic/getWindowDimensions";

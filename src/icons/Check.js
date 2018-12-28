@@ -3,11 +3,15 @@ import React from "react";
 import Svg, { Path } from "react-native-svg";
 
 type Props = {
-  size: number,
-  color: string,
+  size?: number,
+  color?: string,
 };
 
-export default function Check({ size, color, ...props }: Props) {
+export default function Check({
+  size = 16,
+  color = "#000000",
+  ...props
+}: Props) {
   return (
     <Svg viewBox="0 0 16 16" width={size} height={size} {...props}>
       <Path

@@ -5,7 +5,7 @@ import Svg, { Path, G } from "react-native-svg";
 
 export default function Blue() {
   return (
-    <Svg width="52" height="72" viewBox="0 0 52 72">
+    <Svg viewBox="0 0 52 72" width="52" height="72">
       <G fill="none" fillRule="evenodd">
         <Path
           fill="#1D2028"

@@ -3,11 +3,11 @@ import React from "react";
 import Svg, { Path, G } from "react-native-svg";
 
 type Props = {
-  size: number,
-  color: string,
+  size?: number,
+  color?: string,
 };
 
-export default function TransferIcon({ size, color }: Props) {
+export default function TransferIcon({ size = 16, color = "#000000" }: Props) {
   return (
     <Svg viewBox="0 0 16 16" width={size} height={size}>
       <G transform="rotate(90 7.5 8.5)">

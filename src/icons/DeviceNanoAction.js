@@ -72,7 +72,7 @@ class DeviceNanoAction extends PureComponent<{
     const color = error ? "#EA2E49" : "#6490F1";
     const isRefusal = error && error.name.startsWith("UserRefused");
     return (
-      <Svg width={width} height={(width * 88) / 272} viewBox="0 0 272 88">
+      <Svg viewBox="0 0 272 88" width={width} height={(width * 88) / 272}>
         <Defs>
           <LinearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="b">
             <Stop stopColor="#4F87FF" stopOpacity={0} offset="0%" />

@@ -5,7 +5,7 @@ import { StyleSheet, ScrollView } from "react-native";
 import { SafeAreaView } from "react-navigation";
 import { UserRefusedAddress } from "@ledgerhq/live-common/lib/errors";
 import colors from "../colors";
-import DeviceNanoAction from "../components/DeviceNanoAction";
+import DeviceNanoAction from "../icons/DeviceNanoAction";
 
 class DebugIcons extends Component<{}> {
   static navigationOptions = {

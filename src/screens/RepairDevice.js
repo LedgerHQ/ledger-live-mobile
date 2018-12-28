@@ -10,7 +10,7 @@ import firmwareUpdateRepair from "@ledgerhq/live-common/lib/hw/firmwareUpdate-re
 import type { T } from "../types/common";
 import Button from "../components/Button";
 import { BulletItem } from "../components/BulletList";
-import DeviceNanoAction from "../components/DeviceNanoAction";
+import DeviceNanoAction from "../icons/DeviceNanoAction";
 import SelectDevice from "../components/SelectDevice";
 import GenericErrorView from "../components/GenericErrorView";
 import Installing from "../components/Installing";

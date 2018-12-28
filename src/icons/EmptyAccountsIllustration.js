@@ -5,7 +5,7 @@ import Svg, { Path, G, Rect, Circle } from "react-native-svg";
 
 export default function EmptyAccountsIllustration() {
   return (
-    <Svg width="256" height="66" viewBox="0 0 256 66">
+    <Svg viewBox="0 0 256 66" width="256" height="66">
       <G fill="none" fill-rule="evenodd">
         <Path
           fill="#F9F9F9"

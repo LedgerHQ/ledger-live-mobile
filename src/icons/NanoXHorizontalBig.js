@@ -28,7 +28,7 @@ export default function NanoXHorizontalBig() {
           cy="21"
           r="10.5"
           stroke="#142533"
-          strokeLinejoin="square"
+          strokeLinejoin="miter"
         />
         <Circle cx="135" cy="21" r="11.5" stroke="#D8D8D8" />
         <G>
@@ -37,7 +37,7 @@ export default function NanoXHorizontalBig() {
             cy="21"
             r="10.5"
             stroke="#142533"
-            strokeLinejoin="square"
+            strokeLinejoin="miter"
           />
           <Circle
             cx="25"

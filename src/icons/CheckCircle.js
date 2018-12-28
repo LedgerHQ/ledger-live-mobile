@@ -3,11 +3,15 @@ import React from "react";
 import Svg, { Path, G } from "react-native-svg";
 
 type Props = {
-  size: number,
-  color: string,
+  size?: number,
+  color?: string,
 };
 
-export default function CheckCircle({ size, color, ...props }: Props) {
+export default function CheckCircle({
+  size = 37.084,
+  color = "#000000",
+  ...props
+}: Props) {
   return (
     <Svg viewBox="0 0 37.084 37.084" width={size} height={size} {...props}>
       <G transform="translate(-1.458 -1.4491)" fillRule="evenodd">

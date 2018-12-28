@@ -11,7 +11,7 @@ import type {
 } from "@ledgerhq/live-common/lib/types/manager";
 import manager from "@ledgerhq/live-common/lib/manager";
 import { removeKnownDevice } from "../../actions/ble";
-import DeviceNano from "../../components/DeviceNanoAction";
+import DeviceNano from "../../icons/DeviceNanoAction";
 import LText from "../../components/LText";
 import Space from "../../components/Space";
 import Circle from "../../components/Circle";

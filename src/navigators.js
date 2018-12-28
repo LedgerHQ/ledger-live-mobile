@@ -101,6 +101,7 @@ import AddAccountsSuccess from "./screens/AddAccounts/04-Success";
 import sendScreens from "./families/sendScreens";
 import ReadOnlyTab from "./components/ReadOnlyTab";
 import HiddenTabBarIfKeyboardVisible from "./components/HiddenTabBarIfKeyboardVisible";
+import DebugSVG from "./screens/DebugSVG";
 
 // TODO look into all FlowFixMe
 
@@ -122,6 +123,8 @@ const SettingsStack = createStackNavigator(
     DebugSettings,
     // $FlowFixMe
     DebugDevices,
+    // $FlowFixMe
+    DebugSVG,
     // $FlowFixMe
     DebugMocks,
     // $FlowFixMe

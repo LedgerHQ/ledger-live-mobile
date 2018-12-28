@@ -3,12 +3,12 @@ import React, { PureComponent } from "react";
 import Svg, { Path, G, Circle } from "react-native-svg";
 
 type Props = {
-  size: number,
+  size?: number,
 };
 
 export default class QRcodeZoom extends PureComponent<Props> {
   render() {
-    const { size } = this.props;
+    const { size = 72 } = this.props;
 
     return (
       <Svg viewBox="0 0 72 72" width={size} height={size}>

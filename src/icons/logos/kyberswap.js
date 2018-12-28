@@ -7,10 +7,10 @@ import React from "react";
 import { Image } from "react-native";
 
 type Props = {
-  width: number,
+  width?: number,
 };
 
-const KyberSwap = ({ width }: Props) => (
+const KyberSwap = ({ width = 160 }: Props) => (
   <Image
     style={{ width, height: width * 0.41 }}
     source={require("../../images/exchanges/kyber-swap.png")}

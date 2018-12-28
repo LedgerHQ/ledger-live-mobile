@@ -22,7 +22,7 @@ import getDeviceInfo from "@ledgerhq/live-common/lib/hw/getDeviceInfo";
 import getDeviceNameTransport from "@ledgerhq/live-common/lib/hw/getDeviceName";
 import editDeviceNameTransport from "@ledgerhq/live-common/lib/hw/editDeviceName";
 import BluetoothScanning from "../BluetoothScanning";
-import DeviceNanoAction from "../DeviceNanoAction";
+import DeviceNanoAction from "../../icons/DeviceNanoAction";
 import Button from "../Button";
 import RoundedCurrencyIcon from "../RoundedCurrencyIcon";
 import checkDeviceForManager from "../../logic/hw/checkDeviceForManager";

@@ -5,7 +5,7 @@ import Svg, { Path, G, Ellipse } from "react-native-svg";
 
 export default function NanoSVertical() {
   return (
-    <Svg width="13" height="72" viewBox="0 0 13 72">
+    <Svg viewBox="0 0 13 72" width="13" height="72">
       <G fill="none" fillRule="evenodd">
         <Path
           fill="#1D2028"

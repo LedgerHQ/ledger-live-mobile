@@ -6,7 +6,7 @@ import { Trans } from "react-i18next";
 import colors from "../../colors";
 
 import LText from "../../components/LText";
-import DeviceNanoAction from "../../components/DeviceNanoAction";
+import DeviceNanoAction from "../../icons/DeviceNanoAction";
 import VerifyAddressDisclaimer from "../../components/VerifyAddressDisclaimer";
 import { deviceNames } from "../../wording";
 

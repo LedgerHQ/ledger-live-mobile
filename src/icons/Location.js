@@ -3,11 +3,11 @@ import React from "react";
 import Svg, { Path } from "react-native-svg";
 
 type Props = {
-  size: number,
-  color: string,
+  size?: number,
+  color?: string,
 };
 
-export default function Location({ size, color }: Props) {
+export default function Location({ size = 16, color = "#000000" }: Props) {
   return (
     <Svg viewBox="0 0 25 36" width={size} height={size}>
       <Path

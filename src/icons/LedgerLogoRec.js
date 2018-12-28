@@ -3,12 +3,16 @@ import React from "react";
 import Svg, { Path } from "react-native-svg";
 
 type Props = {
-  width: number,
-  height: number,
-  color: string,
+  width?: number,
+  height?: number,
+  color?: string,
 };
 
-export default function Archive({ width, height, color }: Props) {
+export default function Archive({
+  width = 68,
+  height = 17,
+  color = "#000000",
+}: Props) {
   return (
     <Svg width={width} height={height}>
       <Path

@@ -5,8 +5,8 @@ import { View, StyleSheet, Animated } from "react-native";
 
 import IconClose from "../icons/Close";
 import colors from "../colors";
-import DeviceNanoMedium from "./DeviceNanoMedium";
-import PhoneBle from "./PhoneBle";
+import DeviceNanoMedium from "../icons/DeviceNanoMedium";
+import PhoneBle from "../icons/PhoneBle";
 
 type Props = {
   isError?: boolean,

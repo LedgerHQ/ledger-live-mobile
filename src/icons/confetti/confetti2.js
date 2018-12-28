@@ -4,7 +4,7 @@ import Svg, { G, Path } from "react-native-svg";
 import React from "react";
 
 export default () => (
-  <Svg width={24} height={24} viewBox="0 0 24 24">
+  <Svg viewBox="0 0 24 24" width={24} height={24}>
     <G
       id="2"
       stroke="none"

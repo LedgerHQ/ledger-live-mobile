@@ -13,7 +13,7 @@ import { deviceNames } from "../../wording";
 import colors from "../../colors";
 import StepHeader from "../../components/StepHeader";
 import LText from "../../components/LText";
-import DeviceNanoAction from "../../components/DeviceNanoAction";
+import DeviceNanoAction from "../../icons/DeviceNanoAction";
 import LiveLogo from "../../icons/LiveLogoIcon";
 import Spinning from "../../components/Spinning";
 import FirmwareProgress from "../../components/FirmwareProgress";

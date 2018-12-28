@@ -17,6 +17,7 @@ import OpenDebugCrash from "./OpenDebugCrash";
 import OpenDebugHttpTransport from "./OpenDebugHttpTransport";
 import OpenDebugIcons from "./OpenDebugIcons";
 import ReadOnlyModeRow from "../General/ReadOnlyModeRow";
+import OpenDebugSVG from "./OpenDebugSVG";
 
 class DebugMocks_ extends PureComponent<{
   accounts: *,
@@ -42,6 +43,7 @@ class DebugMocks_ extends PureComponent<{
         ) : null}
         <OpenDebugCrash />
         <OpenDebugIcons />
+        <OpenDebugSVG />
         <ReadOnlyModeRow />
       </ScrollView>
     );
