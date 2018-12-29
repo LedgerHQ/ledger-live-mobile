@@ -177,12 +177,14 @@ class DebugSVG extends Component<{}> {
     return (
       <SafeAreaView style={styles.root}>
         <ScrollView>
-          {this.icons().map(iconObj => (
-            <View style={styles.card} key={iconObj.name}>
-              <iconObj.component />
-              <LText style={styles.text}>{iconObj.name}</LText>
-            </View>
-          ))}
+          <View style={styles.wrapper}>
+            {this.icons().map(iconObj => (
+              <View style={styles.card} key={iconObj.name}>
+                <iconObj.component />
+                <LText style={styles.text}>{iconObj.name}</LText>
+              </View>
+            ))}
+          </View>
         </ScrollView>
       </SafeAreaView>
     );
@@ -194,12 +196,19 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.white,
   },
+  wrapper: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+  },
   card: {
     alignItems: "center",
     padding: 16,
+    borderWidth: 0.5,
+    borderColor: colors.lightFog,
+    flexGrow: 1,
+    justifyContent: "flex-end",
   },
   text: {
-    width: "100%",
     padding: 4,
     textAlign: "center",
   },

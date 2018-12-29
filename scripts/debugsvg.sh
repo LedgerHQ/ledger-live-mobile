@@ -1,4 +1,5 @@
 #!/bin/bash
+
 # To anyone reading this Feel free to improve on this if you can
 cat <<EOF
 // @flow
@@ -11,18 +12,18 @@ import colors from "../colors";
 EOF
 
 # Create the imports
-for f in $(find ../src/icons/ -type f -name '*.js');
-   do filename=$(basename -- "$f")
-   u=`echo $filename|cut -c1|tr [a-z] [A-Z]`
+find src/icons/ -type f -name '*.js' | while read f; do
+   filename=$(basename -- "$f")
+   u=`echo $filename|cut -c1|tr "[a-z]" "[A-Z]"`
    l=`echo $filename|cut -c2-`
    filename=$u$l
-   echo "import ${filename%%.*} from \"$f\";" | sed 's,//,/,g;s,../src,..,g;s,.js,,g'
+   echo "import ${filename%%.*} from \"$f\";" | sed 's,//,/,g;s,src,..,g;s,.js,,g'
 done
 
 cat << EOF
 
 class DebugSVG extends Component<{}> {
-  static navigationOptions = {
+      static navigationOptions = {
     title: "Debug Svg Icons",
   };
 
@@ -30,9 +31,9 @@ class DebugSVG extends Component<{}> {
     [
 EOF
 
-for f in $(find ../src/icons/ -type f -name '*.js');
-   do filename=$(basename -- "$f")
-   u=`echo $filename|cut -c1|tr [a-z] [A-Z]`
+find src/icons/ -type f -name '*.js' | while read f; do
+   filename=$(basename -- "$f")
+   u=`echo $filename|cut -c1|tr "[a-z]" "[A-Z]"`
    l=`echo $filename|cut -c2-`
    filename=$u$l
    echo "      {'name':\"${filename%%.*}\", 'component':${filename%%.*}},"
@@ -45,12 +46,14 @@ cat << EOF
     return (
       <SafeAreaView style={styles.root}>
         <ScrollView>
-          {this.icons().map(iconObj => (
-            <View style={styles.card} key={iconObj.name}>
-              <iconObj.component />
-              <LText style={styles.text}>{iconObj.name}</LText>
-            </View>
-          ))}
+          <View style={styles.wrapper}>
+            {this.icons().map(iconObj => (
+              <View style={styles.card} key={iconObj.name}>
+                <iconObj.component />
+                <LText style={styles.text}>{iconObj.name}</LText>
+              </View>
+            ))}
+          </View>
         </ScrollView>
       </SafeAreaView>
     );
@@ -62,15 +65,22 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.white,
   },
+  wrapper:{
+    flexDirection:"row",
+    flexWrap: "wrap"
+  },
   card: {
     alignItems: "center",
-    padding: 16
+    padding: 16,
+    borderWidth:0.5,
+    borderColor:colors.lightFog,
+    flexGrow:1,
+    justifyContent:"flex-end"
   },
   text: {
-    width:"100%",
-    padding:4,
-    textAlign:"center",
-  }
+    padding: 4,
+    textAlign: "center",
+  },
 });
 
 export default DebugSVG;
