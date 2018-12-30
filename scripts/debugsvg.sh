@@ -14,14 +14,15 @@ EOF
 # Create the imports
 find src/icons/ -type f -name '*.js' | while read f; do
    filename=$(basename -- "$f")
-   u=`echo $filename|cut -c1|tr "[a-z]" "[A-Z]"`
-   l=`echo $filename|cut -c2-`
+   u=`printf $filename|cut -c1|tr "[a-z]" "[A-Z]"`
+   l=`printf $filename|cut -c2-`
    filename=$u$l
-   echo "import ${filename%%.*} from \"$f\";" | sed 's,//,/,g;s,src,..,g;s,.js,,g'
+   printf "import ${filename%%.*} from \"$f\";" | sed 's,//,/,g;s,src,..,g;s,.js,,g'
 done
 
 cat << EOF
 
+/* THIS FILE IS GENERATED, DO NOT EDIT */
 class DebugSVG extends Component<{}> {
       static navigationOptions = {
     title: "Debug Svg Icons",
@@ -33,10 +34,14 @@ EOF
 
 find src/icons/ -type f -name '*.js' | while read f; do
    filename=$(basename -- "$f")
-   u=`echo $filename|cut -c1|tr "[a-z]" "[A-Z]"`
-   l=`echo $filename|cut -c2-`
+   u=`printf $filename|cut -c1|tr "[a-z]" "[A-Z]"`
+   l=`printf $filename|cut -c2-`
    filename=$u$l
-   echo "      {'name':\"${filename%%.*}\", 'component':${filename%%.*}},"
+   warn=0
+   if grep --quiet -E 'png|jpg|jpeg' $f; then
+     warn=1
+   fi
+   echo "      {'name':\"${filename%%.*}\", 'bitmap': ${warn}, 'component':${filename%%.*}},"
 done
 
 cat << EOF
@@ -48,7 +53,7 @@ cat << EOF
         <ScrollView>
           <View style={styles.wrapper}>
             {this.icons().map(iconObj => (
-              <View style={styles.card} key={iconObj.name}>
+              <View style={[styles.card, iconObj.bitmap && styles.bitmap]} key={iconObj.name}>
                 <iconObj.component />
                 <LText style={styles.text}>{iconObj.name}</LText>
               </View>
@@ -76,6 +81,9 @@ const styles = StyleSheet.create({
     borderColor:colors.lightFog,
     flexGrow:1,
     justifyContent:"flex-end"
+  },
+  bitmap: {
+    borderColor:colors.alert,
   },
   text: {
     padding: 4,
