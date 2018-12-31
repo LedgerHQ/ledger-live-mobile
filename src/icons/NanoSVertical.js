@@ -3,9 +3,9 @@
 import React from "react";
 import Svg, { Path, G, Ellipse } from "react-native-svg";
 
-export default function NanoSVertical() {
+export default function NanoSVertical({ size = 13 }: { size?: number }) {
   return (
-    <Svg viewBox="0 0 13 72" width="13" height="72">
+    <Svg viewBox="0 0 13 72" width={size} height={(size * 72) / 13}>
       <G fill="none" fillRule="evenodd">
         <Path
           fill="#1D2028"

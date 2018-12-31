@@ -3,9 +3,9 @@
 import React from "react";
 import Svg, { Path, G } from "react-native-svg";
 
-export default function Blue() {
+export default function Blue({ size = 52 }: { size?: number }) {
   return (
-    <Svg viewBox="0 0 52 72" width="52" height="72">
+    <Svg viewBox="0 0 52 72" width={size} height={(size * 72) / 52}>
       <G fill="none" fillRule="evenodd">
         <Path
           fill="#1D2028"

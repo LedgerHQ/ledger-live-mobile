@@ -2,9 +2,9 @@
 import React from "react";
 import Svg, { Path, G, Circle, Rect } from "react-native-svg";
 
-export default function NanoXHorizontalBig() {
+export default function NanoXHorizontalBig({ size = 274 }: { size?: number }) {
   return (
-    <Svg viewBox="0 0 274 42" width="274" height="42">
+    <Svg viewBox="0 0 274 42" width={size} height={(size * 42) / 274}>
       <G fill="none" fillRule="evenodd">
         <Rect
           width="271.606"

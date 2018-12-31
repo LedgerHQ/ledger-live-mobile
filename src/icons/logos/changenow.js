@@ -7,13 +7,13 @@ import { Image } from "react-native";
 // ratio 0.62222
 
 type Props = {
-  width?: number,
+  size?: number,
 };
 
-const ChangeNow = ({ width = 160 }: Props) => (
+const ChangeNow = ({ size = 160 }: Props) => (
   <Image
     resizeMode="contain"
-    style={{ width, height: width * 0.6222 }}
+    style={{ width: size, height: (size * 280) / 450 }}
     source={require("../../images/exchanges/ChangeNOW.png")}
   />
 );

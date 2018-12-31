@@ -3,8 +3,8 @@
 import Svg, { Path, G } from "react-native-svg";
 import React from "react";
 
-export default ({ width = 150 }: { width?: number }) => (
-  <Svg width={width} height={(width * 57) / 150}>
+export default ({ size = 150 }: { size?: number }) => (
+  <Svg width={size} height={(size * 57) / 150}>
     <G fill="none" fillRule="evenodd">
       <Path d="M18.615 13.763h24.359V38.91h-24.36z" />
       <Path

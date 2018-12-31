@@ -2,9 +2,9 @@
 import React from "react";
 import Svg, { G, Path, Rect } from "react-native-svg";
 
-export default function FallbackCamera() {
+export default function FallbackCamera({ size = 116 }: { size?: number }) {
   return (
-    <Svg width="116" height="116">
+    <Svg width={size} height={size}>
       <G stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
         <G transform="translate(-108.000000, -123.000000)">
           <G transform="translate(16.000000, 127.000000)">

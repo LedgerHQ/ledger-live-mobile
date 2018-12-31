@@ -1,8 +1,10 @@
+// @flow
+
 import React from "react";
 import Svg, { G, Path, Rect } from "react-native-svg";
 
-const RecoveryPhrase = props => (
-  <Svg width={145} height={109} {...props}>
+const RecoveryPhrase = ({ size = 145 }: { size?: number }) => (
+  <Svg viewBox="0 0 145 109" width={size} height={(size * 109) / 145}>
     <G fill="none" fillRule="evenodd" transform="translate(-1)">
       <Path
         fill="#6490F1"

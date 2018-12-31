@@ -32,7 +32,7 @@ class ErrorIcon extends PureComponent<Props> {
     ) {
       return (
         <Rounded bg={lighten(colors.alert, 0.75)}>
-          <IconNanoX color={colors.alert} height={36} width={8} />
+          <IconNanoX color={colors.alert} size={8} />
           <ErrorBadge style={styles.badge} />
         </Rounded>
       );

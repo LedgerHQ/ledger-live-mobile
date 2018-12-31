@@ -1,10 +1,20 @@
 import React, { PureComponent } from "react";
 import Svg, { G, Path, Ellipse } from "react-native-svg";
 
-class PhoneBle extends PureComponent<{}> {
+class PhoneBle extends PureComponent<{ size?: number }> {
+  static defaultProps = {
+    size: 43,
+  };
+
   render() {
+    const { size } = this.props;
     return (
-      <Svg width={43} height={74} {...this.props}>
+      <Svg
+        viewBox="0 0 43 74"
+        width={size}
+        height={(size * 74) / 43}
+        {...this.props}
+      >
         <G fillRule="nonzero" stroke="#142533" fill="none">
           <Path
             d="M4.006 1.002a3.005 3.005 0 0 0-3.004 3.004v63.988a3.005 3.005 0 0 0 3.004 3.004h33.05a3.005 3.005 0 0 0 3.004-3.004V4.006a3.005 3.005 0 0 0-3.004-3.004H4.006z"

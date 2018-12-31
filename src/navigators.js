@@ -120,6 +120,7 @@ const SettingsStack = createStackNavigator(
     DebugSettings,
     // $FlowFixMe
     DebugDevices,
+    // $FlowFixMe
     DebugSVG,
     DebugMocks,
     DebugBLE,

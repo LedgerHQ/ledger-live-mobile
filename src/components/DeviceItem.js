@@ -72,8 +72,7 @@ export default class DeviceItem extends PureComponent<Props> {
       <View style={[styles.root, disabled && styles.rootDisabled]}>
         <IconNanoX
           color={colors.darkBlue}
-          height={36}
-          width={8}
+          size={8}
           style={disabled ? styles.deviceIconDisabled : undefined}
         />
         {!iconName ? null : (

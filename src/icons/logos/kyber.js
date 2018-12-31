@@ -3,8 +3,8 @@
 import Svg, { G, Path } from "react-native-svg";
 import React from "react";
 
-export default ({ width = 150 }: { width?: number }) => (
-  <Svg viewBox="0 0 256 82" width={width} height={(width * 82) / 256}>
+export default ({ size = 150 }: { size?: number }) => (
+  <Svg viewBox="0 0 256 82" width={size} height={(size * 82) / 256}>
     <G
       id="Kyber-network"
       stroke="none"

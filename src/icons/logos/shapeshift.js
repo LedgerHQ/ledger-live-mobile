@@ -3,8 +3,8 @@
 import Svg, { G, Defs, LinearGradient, Stop, Path } from "react-native-svg";
 import React from "react";
 
-export default ({ width = 150 }: { width?: number }) => (
-  <Svg viewBox="0 0 154 52" width={width} height={(width * 52) / 154}>
+export default ({ size = 150 }: { size?: number }) => (
+  <Svg viewBox="0 0 154 52" width={size} height={(size * 52) / 154}>
     <Defs>
       <LinearGradient id="a" x1="0%" y1="50%" y2="50%">
         <Stop offset="27%" stopColor="#5C769B" />

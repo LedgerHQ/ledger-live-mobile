@@ -26,7 +26,7 @@ class ScanningTimeout extends Component<Props> {
         <TrackScreen category="PairDevices" name="ScanningTimeout" />
         <View style={styles.body}>
           <Circle bg={colors.lightAlert} size={80}>
-            <NanoX color={colors.alert} width={11} height={48} />
+            <NanoX color={colors.alert} size={11} />
           </Circle>
           <LText secondary semiBold style={styles.titleText}>
             {<Trans i18nKey="PairDevices.ScanningTimeout.title" />}

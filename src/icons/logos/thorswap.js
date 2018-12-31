@@ -7,12 +7,12 @@ import { Image } from "react-native";
 // ratio 0,2535
 
 type Props = {
-  width?: number,
+  size?: number,
 };
 
-const ThorSwap = ({ width = 160 }: Props) => (
+const ThorSwap = ({ size = 160 }: Props) => (
   <Image
-    style={{ width, height: width * 0.2535 }}
+    style={{ width: size, height: (size * 424) / 1672 }}
     source={require("../../images/exchanges/thor-swap.png")}
   />
 );

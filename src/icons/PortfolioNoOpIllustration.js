@@ -3,9 +3,13 @@
 import React from "react";
 import Svg, { Path, G, Rect } from "react-native-svg";
 
-export default function PortfolioNoOpIllustration() {
+export default function PortfolioNoOpIllustration({
+  size = 256,
+}: {
+  size?: number,
+}) {
   return (
-    <Svg viewBox="0 0 256 66" width="256" height="66">
+    <Svg viewBox="0 0 256 66" width={size} height={(size * 66) / 256}>
       <G fill="none" fillRule="evenodd">
         <Path
           fill="#F9F9F9"

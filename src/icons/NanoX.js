@@ -4,20 +4,14 @@ import React from "react";
 import Svg, { Path, G } from "react-native-svg";
 
 type Props = {
-  width?: number,
-  height?: number,
+  size?: number,
   color?: string,
   style?: *,
 };
 
-export default function NanoX({
-  width = 8,
-  height = 36,
-  color = "#000000",
-  style,
-}: Props) {
+export default function NanoX({ size = 8, color = "#000000", style }: Props) {
   return (
-    <Svg viewBox="0 0 8 36" width={width} height={height} style={style}>
+    <Svg viewBox="0 0 8 36" width={size} height={(size * 36) / 8} style={style}>
       <G stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
         <G fill={color}>
           <G>

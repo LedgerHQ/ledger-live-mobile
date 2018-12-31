@@ -25,7 +25,7 @@ class DeviceItemSummary extends PureComponent<Props> {
     const { name, genuine, onEdit } = this.props;
     return (
       <View style={styles.root}>
-        <IconNanoX color={colors.darkBlue} height={36} width={8} />
+        <IconNanoX color={colors.darkBlue} size={8} />
         <View style={styles.content}>
           <LText bold numberOfLines={1} style={styles.deviceNameText}>
             {name}
