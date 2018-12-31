@@ -83,6 +83,7 @@ import BenchmarkQRStream from "./screens/BenchmarkQRStream";
 import EditDeviceName from "./screens/EditDeviceName";
 import PairDevices from "./screens/PairDevices";
 import ImportAccounts from "./screens/ImportAccounts/importAccountsNavigator";
+import DebugSVG from "./screens/DebugSVG";
 import styles from "./navigation/styles";
 import TransparentHeaderNavigationOptions from "./navigation/TransparentHeaderNavigationOptions";
 import {
@@ -101,7 +102,6 @@ import AddAccountsSuccess from "./screens/AddAccounts/04-Success";
 import sendScreens from "./families/sendScreens";
 import ReadOnlyTab from "./components/ReadOnlyTab";
 import HiddenTabBarIfKeyboardVisible from "./components/HiddenTabBarIfKeyboardVisible";
-import DebugSVG from "./screens/DebugSVG";
 
 // TODO look into all FlowFixMe
 
@@ -110,11 +110,8 @@ const SettingsStack = createStackNavigator(
     Settings,
     CountervalueSettings,
     RateProviderSettings,
-    // $FlowFixMe
     GeneralSettings,
-    // $FlowFixMe
     AboutSettings,
-    // $FlowFixMe
     HelpSettings,
     CurrenciesList,
     CurrencySettings,
@@ -123,17 +120,13 @@ const SettingsStack = createStackNavigator(
     DebugSettings,
     // $FlowFixMe
     DebugDevices,
-    // $FlowFixMe
     DebugSVG,
-    // $FlowFixMe
     DebugMocks,
-    // $FlowFixMe
     DebugBLE,
     // $FlowFixMe
     DebugBLEBenchmark,
     // $FlowFixMe
     DebugCrash,
-    // $FlowFixMe
     DebugHttpTransport,
     // $FlowFixMe
     DebugIcons,
@@ -151,9 +144,7 @@ SettingsStack.navigationOptions = {
 
 const ManagerMain = createMaterialTopTabNavigator(
   {
-    // $FlowFixMe
     ManagerAppsList,
-    // $FlowFixMe
     ManagerDevice,
   },
   {
@@ -185,9 +176,7 @@ ManagerMain.navigationOptions = {
 
 const ManagerStack = createStackNavigator(
   {
-    // $FlowFixMe
     Manager,
-    // $FlowFixMe
     ManagerMain,
   },
   {
@@ -237,7 +226,6 @@ const Main = createBottomTabNavigator(
       },
     },
     AccountsStack,
-    // $FlowFixMe
     Transfer,
     ManagerStack,
     SettingsStack,
@@ -384,12 +372,10 @@ const BaseNavigator = createStackNavigator(
     SendFunds,
     AddAccounts,
     FirmwareUpdate,
-    // $FlowFixMe
     OperationDetails,
     AccountSettings,
     ImportAccounts,
     PairDevices,
-    // $FlowFixMe non-sense error
     EditDeviceName,
     PasswordAddFlow,
     PasswordModifyFlow,

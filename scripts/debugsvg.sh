@@ -9,15 +9,16 @@ import { StyleSheet, ScrollView, View } from "react-native";
 import { SafeAreaView } from "react-navigation";
 import LText from "../components/LText";
 import colors from "../colors";
+
 EOF
 
 # Create the imports
 find src/icons/ -type f -name '*.js' | while read f; do
-   filename=$(basename -- "$f")
-   u=`printf $filename|cut -c1|tr "[a-z]" "[A-Z]"`
-   l=`printf $filename|cut -c2-`
-   filename=$u$l
-   printf "import ${filename%%.*} from \"$f\";" | sed 's,//,/,g;s,src,..,g;s,.js,,g'
+  filename=$(basename -- "$f")
+  u=`printf $filename|cut -c1|tr "[a-z]" "[A-Z]"`
+  l=`printf $filename|cut -c2-`
+  filename=$u$l
+  printf "import ${filename%%.*} from \"$f\";" | sed 's,//,/,g;s,src,..,g;s,.js,,g'
 done
 
 cat << EOF
@@ -33,15 +34,20 @@ class DebugSVG extends Component<{}> {
 EOF
 
 find src/icons/ -type f -name '*.js' | while read f; do
-   filename=$(basename -- "$f")
-   u=`printf $filename|cut -c1|tr "[a-z]" "[A-Z]"`
-   l=`printf $filename|cut -c2-`
-   filename=$u$l
-   warn=0
-   if grep --quiet -E 'png|jpg|jpeg' $f; then
-     warn=1
-   fi
-   echo "      {'name':\"${filename%%.*}\", 'bitmap': ${warn}, 'component':${filename%%.*}},"
+  filename=$(basename -- "$f")
+  u=`printf $filename|cut -c1|tr "[a-z]" "[A-Z]"`
+  l=`printf $filename|cut -c2-`
+  filename=$u$l
+  warn=0
+  square=0
+  size=$(grep viewBox= "$f" | sed -E 's/.*viewBox="[0-9]+ [0-9]+ ([0-9]+) [0-9]+".*/\1/g')
+  if grep --quiet -E 'png|jpg|jpeg' $f; then
+    warn=1
+  fi
+  if grep "0 0 $size $size" "$f" &>/dev/null ; then
+    square=1
+  fi
+  echo "      {'name':\"${filename%%.*}\", 'bitmap': ${warn}, 'square': ${square}, 'component':${filename%%.*}},"
 done
 
 cat << EOF
@@ -53,7 +59,7 @@ cat << EOF
         <ScrollView>
           <View style={styles.wrapper}>
             {this.icons().map(iconObj => (
-              <View style={[styles.card, iconObj.bitmap && styles.bitmap]} key={iconObj.name}>
+              <View style={[styles.card, iconObj.bitmap ? styles.bitmap : '', !iconObj.square ? styles.notsquare : '']} key={iconObj.name}>
                 <iconObj.component />
                 <LText style={styles.text}>{iconObj.name}</LText>
               </View>
@@ -77,13 +83,19 @@ const styles = StyleSheet.create({
   card: {
     alignItems: "center",
     padding: 16,
+    margin: 1,
     borderWidth:0.5,
     borderColor:colors.lightFog,
     flexGrow:1,
     justifyContent:"flex-end"
   },
   bitmap: {
-    borderColor:colors.alert,
+    borderTopColor:colors.alert,
+    borderLeftColor:colors.alert,
+  },
+  notsquare: {
+    borderRightColor:colors.live,
+    borderBottomColor:colors.live,
   },
   text: {
     padding: 4,
