@@ -476,8 +476,8 @@
     }
   },
   "addAccountsModal": {
-    "ctaAdd": "Import accounts",
-    "ctaImport": "Import desktop accounts"
+    "ctaAdd": "Add accounts",
+    "ctaImport": "Import accounts"
   },
   "time": {
     "day": "Day",
@@ -846,11 +846,12 @@
         "title": "Navigate to dashboard on your {{fullDeviceName}}"
       },
       "currencyApp": {
-        "title": "Open app {{managerAppName}}...",
-        "description": "On your device, open the app {{managerAppName}}."
+        "title": "Open the {{managerAppName}} app on your {{fullDeviceName}}",
+        "description": ""
       },
       "accountApp": {
-        "title": "Open the {{managerAppName}} app"
+        "title": "Open the {{managerAppName}} app on your {{fullDeviceName}}",
+        "description": ""
       },
       "receiveVerify": {
         "title": "Verify address on device",
