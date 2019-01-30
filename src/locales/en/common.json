@@ -374,7 +374,7 @@
     },
     "stepSetupPin": {
       "step1": "Turn on your {{fullDeviceName}} and follow the instructions.",
-      "step2": "Press both buttons to choose <1><1>Setup as new device.</1></1>",
+      "step2": "Press both buttons to choose <1><1>Set up as new device.</1></1>",
       "step2-restore": "Press both buttons to choose <1><1>Restore from recovery phrase.</1></1>",
       "step3": "Press left or right button to select a digit. Press both to validate.",
       "step4prefix": "Select ",
