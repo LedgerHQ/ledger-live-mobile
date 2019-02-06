@@ -18,6 +18,7 @@ const supported: CryptoCurrencyIds[] = [
   "dogecoin",
   "ethereum_classic",
   "ethereum",
+  'energi',
   "hcash",
   "komodo",
   "litecoin",
