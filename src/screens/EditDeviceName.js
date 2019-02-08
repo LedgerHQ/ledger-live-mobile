@@ -171,6 +171,7 @@ const styles = StyleSheet.create({
   },
   input: {
     fontSize: 24,
+    color: colors.darkBlue,
   },
   remainingText: {
     color: colors.grey,

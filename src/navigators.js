@@ -75,6 +75,7 @@ import EditAccountUnits from "./screens/AccountSettings/EditAccountUnits";
 import EditAccountName from "./screens/AccountSettings/EditAccountName";
 import EditAccountNode from "./screens/AccountSettings/EditAccountNode";
 import RepairDevice from "./screens/RepairDevice";
+import SendReport from './screens/SendReport';
 import DebugBLE from "./screens/DebugBLE";
 import DebugBLEBenchmark from "./screens/DebugBLEBenchmark";
 import DebugCrash from "./screens/DebugCrash";
@@ -122,25 +123,18 @@ const SettingsStack = createStackNavigator(
     CurrenciesList,
     CurrencySettings,
     RepairDevice,
-    // $FlowFixMe
+    SendReport,
     DebugSettings,
-    // $FlowFixMe
     DebugDevices,
     DebugMocks,
     DebugBLE,
-    // $FlowFixMe
     DebugBLEBenchmark,
-    // $FlowFixMe
     DebugCrash,
     DebugStore,
     DebugHttpTransport,
-    // $FlowFixMe
     DebugIcons,
-    // $FlowFixMe
     DebugLottie,
-    // $FlowFixMe
     DebugWSImport,
-    // $FlowFixMe
     BenchmarkQRStream,
   },
   stackNavigatorConfig,

@@ -708,7 +708,9 @@
       "hardReset": "Reset Ledger Live",
       "hardResetDesc": "Erase all Ledger Live data stored on your phone, including accounts and settings.",
       "repairDevice": "Repair your Ledger device",
-      "repairDeviceDesc": "If you encountered some issue while updating your device and cannot resume the update process, you can try this option to repair your device"
+      "repairDeviceDesc": "If you encountered some issue while updating your device and cannot resume the update process, you can try this option to repair your device",
+      "sendReport": "Send report",
+      "sendReportDesc": "Send a report of your app to Ledger"
     }
   },
   "transfer": {
@@ -1013,5 +1015,9 @@
   "RepairDevice": {
     "title": "Repair",
     "action": "My device is ready"
+  },
+  "SendReport": {
+    "title": "Send report",
+    "action": "Send report"
   }
 }

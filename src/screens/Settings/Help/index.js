@@ -2,7 +2,6 @@
 import React, { PureComponent } from "react";
 import type { NavigationScreenProp } from "react-navigation";
 import { View, StyleSheet } from "react-native";
-// $FlowFixMe
 import { ScrollView } from "react-navigation";
 import i18next from "i18next";
 import { translate } from "react-i18next";
@@ -12,6 +11,7 @@ import ClearCacheRow from "./ClearCacheRow";
 import HardResetRow from "./HardResetRow";
 import ConfigureDeviceRow from "./ConfigureDeviceRow";
 import RepairDeviceRow from "./RepairDeviceRow";
+import SendReportRow from "./SendReportRow";
 
 class HelpSettings extends PureComponent<{
   navigation: NavigationScreenProp<*>,
@@ -27,6 +27,7 @@ class HelpSettings extends PureComponent<{
         <LedgerSupportRow />
         <ConfigureDeviceRow navigation={this.props.navigation} />
         <RepairDeviceRow navigation={this.props.navigation} />
+        <SendReportRow navigation={this.props.navigation} />
         <View style={styles.container}>
           <ClearCacheRow />
           <HardResetRow />
