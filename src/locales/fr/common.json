@@ -115,6 +115,9 @@
     "FeeNotLoaded": {
       "title": "Couldn’t load fee rates"
     },
+    "FeeRequired": {
+      "title": "Fees are required"
+    },
     "GenuineCheckFailed": {
       "title": "Genuine check failed",
       "description": "Something went wrong. Please try again or contact Ledger Support when in doubt."
@@ -824,7 +827,8 @@
     },
     "fees": {
       "title": "Network fees",
-      "validate": "Validate fees",
+      "validate": "Confirm",
+      "required": "Fees are required",
       "edit": {
         "title": "Choose Unit"
       }
@@ -963,7 +967,7 @@
     "install": {
       "loading": {
         "title": "Installing {{appName}}",
-        "desc": "The installation of {{appName}} app may take a while, please keep the app open.",
+        "desc": "Please wait while the {{appName}} app is installed",
         "button": "Installing...",
         "button_plural": "Installing... {{progressPercentage}}%"
       },
