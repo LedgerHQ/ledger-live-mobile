@@ -92,7 +92,9 @@ class SelectDevice extends Component<Props, State> {
                   name: e.name,
                   family: e.family,
                 })
-              : devices.filter(d => d.id !== e.id),
+              : e.type === "reset"
+                ? []
+                : devices.filter(d => d.id !== e.id),
         })),
     });
   }
