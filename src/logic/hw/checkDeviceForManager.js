@@ -12,5 +12,5 @@ export default (
   deviceInfo.isOSU
     ? of("0000")
     : deviceInfo.isBootloader
-      ? throwError(new UnexpectedBootloader())
-      : genuineCheck(transport, deviceInfo);
+    ? throwError(new UnexpectedBootloader())
+    : genuineCheck(transport, deviceInfo);

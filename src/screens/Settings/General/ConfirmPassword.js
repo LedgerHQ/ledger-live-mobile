@@ -23,7 +23,7 @@ type State = {
   password: string,
   confirmPassword: string,
   error: ?Error,
-  biometricsType?: string,
+  biometricsType?: *,
 };
 
 const mapDispatchToProps = {

@@ -128,9 +128,8 @@ class DebugBLE extends Component<
 
   componentDidMount() {
     this.sub = logsObservable.pipe(bufferTime(200)).subscribe(buffer => {
-      this.setState(
-        ({ logs }) =>
-          buffer.length === 0 ? null : { logs: logs.concat(buffer) },
+      this.setState(({ logs }) =>
+        buffer.length === 0 ? null : { logs: logs.concat(buffer) },
       );
     });
   }

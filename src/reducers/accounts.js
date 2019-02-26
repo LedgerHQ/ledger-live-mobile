@@ -71,8 +71,9 @@ export const accountsCountSelector = createSelector(
   acc => acc.length,
 );
 
-export const currenciesSelector = createSelector(accountsSelector, acc =>
-  uniq(acc.map(a => a.currency)),
+export const currenciesSelector = createSelector(
+  accountsSelector,
+  acc => uniq(acc.map(a => a.currency)),
 );
 
 export const accountScreenSelector = createSelector(
@@ -101,8 +102,9 @@ export const isUpToDateAccountSelector = createSelector(
   isUpToDateAccount,
 );
 
-export const isUpToDateSelector = createSelector(accountsSelector, accounts =>
-  accounts.every(isUpToDateAccount),
+export const isUpToDateSelector = createSelector(
+  accountsSelector,
+  accounts => accounts.every(isUpToDateAccount),
 );
 
 export default handleActions(handlers, initialState);

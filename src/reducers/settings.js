@@ -258,7 +258,10 @@ export const currencySettingsSelector = (
   ...state.settings.currenciesSettings[currency.id],
 });
 
-export const privacySelector = createSelector(storeSelector, s => s.privacy);
+export const privacySelector = createSelector(
+  storeSelector,
+  s => s.privacy,
+);
 
 export const reportErrorsEnabledSelector = createSelector(
   storeSelector,
