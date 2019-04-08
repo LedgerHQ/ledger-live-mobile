@@ -371,6 +371,7 @@ const ImportAccounts = createStackNavigator(
     },
     DisplayResult,
     FallBackCameraScreen,
+    EditAccountName,
   },
   closableStackNavigatorConfig,
 );

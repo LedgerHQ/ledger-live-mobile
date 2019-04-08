@@ -77,7 +77,8 @@ export const currenciesSelector = createSelector(accountsSelector, acc =>
 
 export const accountScreenSelector = createSelector(
   accountsSelector,
-  (_, { navigation }) => navigation.state.params.accountId,
+  (_, { navigation }) =>
+    (navigation.state.params && navigation.state.params.accountId) || null,
   (accounts, accountId) => accounts.find(a => a.id === accountId),
 );
 

@@ -11,7 +11,7 @@ type Props = {
   isChecked: boolean,
   onChange?: boolean => void,
   disabled?: boolean,
-  style: *,
+  style?: *,
 };
 
 export default class CheckBox extends PureComponent<Props> {
@@ -49,11 +49,11 @@ export default class CheckBox extends PureComponent<Props> {
 
 const styles = StyleSheet.create({
   root: {
-    width: 32,
-    height: 32,
+    width: 24,
+    height: 24,
     alignItems: "center",
     justifyContent: "center",
-    borderWidth: 2,
+    borderWidth: 1,
     borderColor: colors.fog,
     borderRadius: 24,
   },

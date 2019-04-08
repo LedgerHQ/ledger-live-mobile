@@ -1,6 +1,6 @@
 // @flow
 import React, { Component, Fragment } from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, PanResponder } from "react-native";
 
 // $FlowFixMe
 import { HeaderBackButton, SectionList } from "react-navigation";
@@ -58,6 +58,7 @@ type State = {
   items: Item[],
   importing: boolean,
   importSettings: boolean,
+  openIndex: number,
 };
 
 const itemModeDisplaySort = {
@@ -82,6 +83,7 @@ class DisplayResult extends Component<Props, State> {
     items: [],
     importSettings: true,
     importing: false,
+    openIndex: -1,
   };
 
   unmounted = false;
@@ -209,16 +211,37 @@ class DisplayResult extends Component<Props, State> {
     }
   };
 
-  renderItem = ({ item: { account, mode } }) => (
-    <DisplayResultItem
-      key={account.id}
-      account={account}
-      mode={mode}
-      checked={this.state.selectedAccounts.some(s => s === account.id)}
-      onSwitch={this.onSwitchResultItem}
-      importing={this.state.importing}
-    />
-  );
+  onAccountNameChange = (name: string, account: Account) => {
+    this.setState(prevState => ({
+      items: prevState.items.map(
+        item =>
+          item.account.id === account.id
+            ? { ...item, account: { ...account, name } }
+            : item,
+      ),
+    }));
+  };
+
+  signalOtherRows = openIndex => this.setState({ openIndex });
+
+  renderItem = ({ item: { account, mode }, index }) => {
+    const { openIndex } = this.state;
+
+    return (
+      <DisplayResultItem
+        key={account.id}
+        account={account}
+        mode={mode}
+        index={index}
+        openIndex={openIndex}
+        checked={this.state.selectedAccounts.some(s => s === account.id)}
+        onSwitch={this.onSwitchResultItem}
+        onAccountNameChange={this.onAccountNameChange}
+        signalOtherRows={this.signalOtherRows}
+        importing={this.state.importing}
+      />
+    );
+  };
 
   renderSectionHeader = ({ section: { mode } }) => (
     <ResultSection mode={mode} />
@@ -315,7 +338,6 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
   },
   body: {
-    paddingHorizontal: 12,
     flex: 1,
   },
   footer: {
@@ -340,6 +362,7 @@ const styles = StyleSheet.create({
   },
   emptyNotice: {
     marginLeft: 8,
+    paddingHorizontal: 12,
   },
   noAccountText: {
     flex: 1,

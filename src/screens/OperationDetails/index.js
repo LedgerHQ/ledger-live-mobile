@@ -3,7 +3,8 @@ import React, { PureComponent } from "react";
 import i18next from "i18next";
 import { View, StyleSheet } from "react-native";
 // $FlowFixMe
-import { SafeAreaView, ScrollView } from "react-navigation";
+import { SafeAreaView } from "react-navigation";
+import { ScrollView } from "react-native-gesture-handler";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { translate } from "react-i18next";
