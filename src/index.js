@@ -5,7 +5,7 @@ import "./polyfill";
 import "./live-common-setup";
 import "./implement-react-native-libcore";
 import React, { Fragment, Component } from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, TextInput } from "react-native";
 import SplashScreen from "react-native-splash-screen";
 import logger from "./logger";
 import { exportSelector as settingsExportSelector } from "./reducers/settings";
@@ -38,9 +38,14 @@ const styles = StyleSheet.create({
 
 // Fixme until third parties address this themselves
 // $FlowFixMe
-Text.defaultProps = Text.defaultProps || {};
+Text.defaultProps = { ...(Text.defaultProps || {}), allowFontScaling: false };
 // $FlowFixMe
-Text.defaultProps.allowFontScaling = false;
+TextInput.defaultProps = {
+  // $FlowFixMe
+  ...(TextInput.defaultProps || {}),
+  allowFontScaling: false,
+  underlineColorAndroid: "transparent",
+};
 
 class App extends Component<*> {
   hasCountervaluesChanged = (a, b) => a.countervalues !== b.countervalues;

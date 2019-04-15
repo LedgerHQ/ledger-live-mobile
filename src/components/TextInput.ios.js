@@ -6,7 +6,8 @@ import React, { PureComponent } from "react";
 class TextInput extends PureComponent<*> {
   render() {
     const {
-      containerStyle, // Needed to pass flow, since we call the native TextInput
+      containerStyle, // For Android it's two different styles, here we join them
+      style,
       withSuggestions,
       innerRef,
       ...otherProps
@@ -22,6 +23,7 @@ class TextInput extends PureComponent<*> {
       <ReactNativeTextInput
         ref={innerRef}
         allowFontScaling={false}
+        style={[containerStyle, style]}
         {...otherProps}
         {...flags}
       />

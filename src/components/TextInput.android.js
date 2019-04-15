@@ -66,6 +66,7 @@ class TextInput extends PureComponent<*, State> {
       withSuggestions,
       innerRef,
       style,
+      textContentType,
       defaultValue,
       clearButtonMode, // Don't pass this down to use our own impl
       ...otherProps
@@ -75,7 +76,7 @@ class TextInput extends PureComponent<*, State> {
 
     const flags = {};
 
-    if (!withSuggestions) {
+    if (!withSuggestions && !textContentType) {
       flags.autoCorrect = false;
       flags.keyboardType = "visible-password";
     }
@@ -83,20 +84,25 @@ class TextInput extends PureComponent<*, State> {
       !!value &&
       ((focused && clearButtonMode === "while-editing") ||
         clearButtonMode === "always");
-    // {...otherProps} needs to come first to allow an override.
 
-    // Preprocess the font size to override system scaling
-    const overrideFontScaling = { fontSize: 20 / PixelRatio.getFontScale() };
-    if (style && style.fontSize) {
-      overrideFontScaling.fontSize = style.fontSize / PixelRatio.getFontScale();
+    // Preprocess the font size to override system scaling, only if this is not
+    // a password field.
+    let overrideFontScaling = {};
+    if (!textContentType) {
+      overrideFontScaling =
+        style && style.fontSize
+          ? { fontSize: 20 / PixelRatio.getFontScale() }
+          : { fontSize: style.fontSize / PixelRatio.getFontScale() };
     }
 
+    // {...otherProps} needs to come first to allow an override.
     return (
       <View style={[styles.container, containerStyle]}>
         <ReactNativeTextInput
           ref={innerRef}
           style={[{ flex: 1 }, style, overrideFontScaling]}
           {...otherProps}
+          textContentType={textContentType}
           onBlur={this.onBlur}
           onFocus={this.onFocus}
           onChangeText={this.onChangeText}

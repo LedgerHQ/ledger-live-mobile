@@ -6,10 +6,7 @@ import { Image, View, StyleSheet } from "react-native";
 import BottomModal from "../components/BottomModal";
 import Button from "../components/Button";
 import colors from "../colors";
-import BulletList, {
-  BulletChevron,
-  BulletItemText,
-} from "../components/BulletList";
+import BulletList, { BulletChevron } from "../components/BulletList";
 import LText from "../components/LText";
 
 type Props = { onClose: *, isOpened: *, onAccept: () => * };
@@ -43,21 +40,15 @@ class PinModal extends Component<Props> {
             Bullet={BulletChevron}
             itemStyle={styles.item}
             list={[
-              <BulletItemText style={styles.text}>
-                <Trans i18nKey="onboarding.stepSetupPin.modal.step1">
-                  {"text"}
-                  <LText semiBold style={styles.textBlue}>
-                    bold text
-                  </LText>
-                  {"text"}
-                </Trans>
-              </BulletItemText>,
-              <BulletItemText style={styles.text}>
-                <Trans i18nKey="onboarding.stepSetupPin.modal.step2" />
-              </BulletItemText>,
-              <BulletItemText style={styles.text}>
-                <Trans i18nKey="onboarding.stepSetupPin.modal.step3" />
-              </BulletItemText>,
+              <Trans i18nKey="onboarding.stepSetupPin.modal.step1">
+                {"text"}
+                <LText semiBold style={styles.textBlue}>
+                  bold text
+                </LText>
+                {"text"}
+              </Trans>,
+              <Trans i18nKey="onboarding.stepSetupPin.modal.step2" />,
+              <Trans i18nKey="onboarding.stepSetupPin.modal.step3" />,
             ]}
           />
         </View>
@@ -97,11 +88,6 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     paddingTop: 24,
     paddingHorizontal: 8,
-  },
-  text: {
-    fontSize: 14,
-    lineHeight: 21,
-    color: colors.grey,
   },
   textBlue: { color: colors.darkBlue },
 });

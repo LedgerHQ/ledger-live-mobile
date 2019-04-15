@@ -1,7 +1,8 @@
 /* @flow */
 import React, { PureComponent } from "react";
-import { View, StyleSheet, TextInput } from "react-native";
+import { View, StyleSheet } from "react-native";
 import Icon from "react-native-vector-icons/dist/Feather";
+import TextInput from "./TextInput";
 import Touchable from "./Touchable";
 import { getFontStyle } from "./LText";
 import colors from "../colors";
@@ -67,6 +68,7 @@ class PasswordInput extends PureComponent<Props, { isFocused: boolean }> {
         <TextInput
           allowFontScaling={false}
           autoFocus={autoFocus}
+          containerStyle={styles.containerInput}
           style={[
             styles.input,
             getFontStyle({ semiBold: true }),
@@ -133,8 +135,10 @@ const styles = StyleSheet.create({
   input: {
     fontSize: 16,
     paddingHorizontal: 16,
-    height: 48,
+  },
+  containerInput: {
     flex: 1,
+    height: 48,
   },
   iconInput: {
     justifyContent: "center",
