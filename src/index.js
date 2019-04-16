@@ -38,11 +38,11 @@ const styles = StyleSheet.create({
 
 // Fixme until third parties address this themselves
 // $FlowFixMe
-Text.defaultProps = { ...(Text.defaultProps || {}), allowFontScaling: false };
+Text.defaultProps = { ...Text.defaultProps, allowFontScaling: false };
 // $FlowFixMe
 TextInput.defaultProps = {
   // $FlowFixMe
-  ...(TextInput.defaultProps || {}),
+  ...TextInput.defaultProps,
   allowFontScaling: false,
   underlineColorAndroid: "transparent",
 };
