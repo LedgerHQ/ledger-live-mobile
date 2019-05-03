@@ -171,19 +171,17 @@ android {
             }
         }
     }
-}
 
-configurations.all {
-    resolutionStrategy {
-        eachDependency { DependencyResolveDetails details ->
-            if (details.requested.name == 'android-jsc') {
-                details.useTarget group: details.requested.group, name: 'android-jsc-intl', version: 'r236355'
-            }
-        }
+    // As required by https://github.com/react-native-community/jsc-android-buildscripts#for-react-native-version-059
+    packagingOptions {
+        pickFirst '**/libjsc.so'
+        pickFirst '**/libc++_shared.so'
     }
 }
 
 dependencies {
+    // Make sure to keep android-jsc as the first
+    implementation "org.webkit:android-jsc-intl:r241213"
     implementation project(':react-native-vector-icons')
     implementation project(':@react-native-community_netinfo')
     compile project(':lottie-react-native')

@@ -74,7 +74,7 @@
     "https-browserify": "~0.0.0",
     "i18next": "11.5.0",
     "invariant": "2.2.4",
-    "jsc-android": "^236355.1.1",
+    "jsc-android": "^241213.1.0",
     "lodash": "4.17.11",
     "lottie-react-native": "^2.6.1",
     "lru-cache": "^4.1.3",
