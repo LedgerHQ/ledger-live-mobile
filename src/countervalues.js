@@ -6,6 +6,12 @@ import { createSelector } from "reselect";
 import createCounterValues from "@ledgerhq/live-common/lib/countervalues";
 import { listCryptoCurrencies } from "@ledgerhq/live-common/lib/currencies";
 import type { CryptoCurrency } from "@ledgerhq/live-common/lib/types";
+import {
+  fetchExchangesForPairImplementation,
+  fetchTickersByMarketcapImplementation,
+  getDailyRatesImplementation,
+} from "@ledgerhq/live-common/lib/countervalues/mock";
+import Config from "react-native-config";
 import { setExchangePairsAction } from "./actions/settings";
 import { currenciesSelector } from "./reducers/accounts";
 import {
@@ -93,6 +99,13 @@ const CounterValues = createCounterValues({
   setExchangePairsAction,
   addExtraPollingHooks,
   network,
+  ...(Config.MOCK
+    ? {
+        getDailyRatesImplementation,
+        fetchExchangesForPairImplementation,
+        fetchTickersByMarketcapImplementation,
+      }
+    : {}),
 });
 
 type PC = Promise<CryptoCurrency[]>;
