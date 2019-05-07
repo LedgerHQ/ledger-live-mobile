@@ -10,6 +10,7 @@ import getWindowDimensions from "../../logic/getWindowDimensions";
 import DeviceNanoAction from "../../components/DeviceNanoAction";
 import { PendingSpinner } from "./PendingContainer";
 import LText from "../../components/LText";
+import SkipLock from "../../components/behaviour/SkipLock";
 
 const { width } = getWindowDimensions();
 
@@ -20,6 +21,7 @@ class PendingGenuineCheck extends PureComponent<{
     const { genuineAskedOnDevice } = this.props;
     return (
       <View style={styles.root}>
+        <SkipLock />
         <TrackScreen category="PairDevices" name="PendingGenuineCheck" />
         {genuineAskedOnDevice ? (
           <View style={styles.nano}>

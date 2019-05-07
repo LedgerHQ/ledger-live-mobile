@@ -28,6 +28,7 @@ import Spinning from "../../components/Spinning";
 import LText from "../../components/LText";
 import RetryButton from "../../components/RetryButton";
 import CancelButton from "../../components/CancelButton";
+import SkipLock from "../../components/behaviour/SkipLock";
 import GenericErrorBottomModal from "../../components/GenericErrorBottomModal";
 
 type Props = {
@@ -281,6 +282,7 @@ class AddAccountsAccounts extends PureComponent<Props, State> {
 
     return (
       <SafeAreaView style={styles.root}>
+        {scanning ? <SkipLock /> : null}
         <TrackScreen category="AddAccounts" name="Accounts" />
         <PreventNativeBack />
         <ScrollView

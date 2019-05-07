@@ -16,6 +16,7 @@ import TransportBLE from "../../react-native-hw-transport-ble";
 import { TrackScreen } from "../../analytics";
 import DeviceItem from "../../components/DeviceItem";
 import ScanningHeader from "./ScanningHeader";
+import SkipLock from "../../components/behaviour/SkipLock";
 
 type Props = {
   knownDevices: DeviceLike[],
@@ -109,6 +110,7 @@ class Scanning extends Component<Props, State> {
     return (
       <Fragment>
         <TrackScreen category="PairDevices" name="Scanning" />
+        <SkipLock />
         <FlatList
           style={styles.list}
           data={devices}

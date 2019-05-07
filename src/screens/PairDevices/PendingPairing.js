@@ -8,12 +8,14 @@ import { getDeviceModel } from "@ledgerhq/devices";
 import getWindowDimensions from "../../logic/getWindowDimensions";
 import BulletList from "../../components/BulletList";
 import { TrackScreen } from "../../analytics";
+import SkipLock from "../../components/behaviour/SkipLock";
 
 class PendingPairing extends PureComponent<*> {
   render() {
     const deviceWording = getDeviceModel("nanoX");
     return (
       <View style={styles.root}>
+        <SkipLock />
         <TrackScreen category="PairDevices" name="PendingPairing" />
         <LottieView
           style={styles.anim}

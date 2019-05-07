@@ -1,9 +1,19 @@
 // @flow
 import React, { PureComponent } from "react";
 import { withNavigationFocus } from "react-navigation";
+import KeepAwake from "react-native-keep-awake";
 
+let lastKeepAwake = false;
 // $FlowFixMe
-export const SkipLockContext = React.createContext((_: boolean) => {});
+export const SkipLockContext = React.createContext((keepAwake: boolean) => {
+  if (lastKeepAwake === keepAwake) return;
+  lastKeepAwake = keepAwake;
+  if (keepAwake) {
+    KeepAwake.activate();
+  } else {
+    KeepAwake.deactivate();
+  }
+});
 
 class SkipLock extends PureComponent<*> {
   render() {
