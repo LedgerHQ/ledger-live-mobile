@@ -38,11 +38,9 @@ class OperationIcon extends PureComponent<Props> {
     } = this.props;
     const Icon = this.icons[type][hasFailed ? 2 : confirmed ? 1 : 0];
 
-    return (
-      <>
-        <Icon size={size} />
-      </>
-    );
+    if (!Icon) return null;
+
+    return <Icon size={size} />;
   }
 }
 
