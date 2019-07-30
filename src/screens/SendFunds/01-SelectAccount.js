@@ -12,7 +12,7 @@ import type { TokenAccount, Account } from "@ledgerhq/live-common/lib/types";
 
 import { isAccountEmpty } from "@ledgerhq/live-common/lib/account";
 import {
-  flattenAccountsSelector,
+  flattenAccountsEnforceHideEmptyTokenSelector,
   accountsSelector,
 } from "../../reducers/accounts";
 import colors from "../../colors";
@@ -120,7 +120,7 @@ class SendFundsSelectAccount extends Component<Props, State> {
 }
 
 const mapStateToProps = createStructuredSelector({
-  allAccounts: flattenAccountsSelector,
+  allAccounts: flattenAccountsEnforceHideEmptyTokenSelector,
   accounts: accountsSelector,
 });
 

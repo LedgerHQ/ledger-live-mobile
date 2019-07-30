@@ -9,6 +9,8 @@ import {
   importAccountsReduce,
 } from "@ledgerhq/live-common/lib/account";
 import accountModel from "../logic/accountModel";
+// eslint-disable-next-line import/no-cycle
+import { hideEmptyTokenAccountsEnabledSelector } from "./settings";
 import { UP_TO_DATE_THRESHOLD } from "../constants";
 
 export type AccountsState = {
@@ -87,6 +89,14 @@ export const accountsSelector = (s: *): Account[] => s.accounts.active;
 export const flattenAccountsSelector = createSelector(
   accountsSelector,
   flattenAccounts,
+);
+
+// $FlowFixMe
+export const flattenAccountsEnforceHideEmptyTokenSelector = createSelector(
+  accountsSelector,
+  hideEmptyTokenAccountsEnabledSelector,
+  (accounts, _) =>
+    flattenAccounts(accounts, { enforceHideEmptyTokenAccounts: true }),
 );
 
 // $FlowFixMe
