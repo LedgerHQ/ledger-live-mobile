@@ -28,7 +28,7 @@ import { OnboardingContextProvider } from "./screens/Onboarding/onboardingContex
 import HookAnalytics from "./analytics/HookAnalytics";
 import HookSentry from "./components/HookSentry";
 import AppContainer from "./navigators";
-import SetEnvsFromSettings from "./components/SetEnvsFromSettings"
+import SetEnvsFromSettings from "./components/SetEnvsFromSettings";
 
 // useScreens();
 const styles = StyleSheet.create({
