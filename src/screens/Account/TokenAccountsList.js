@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useCallback, useState } from "react";
+import React, { useCallback } from "react";
 import { Trans } from "react-i18next";
 import take from "lodash/take";
 import { FlatList, Platform, StyleSheet, View } from "react-native";
@@ -12,14 +12,11 @@ import { createStructuredSelector } from "reselect";
 import { listTokenAccounts } from "@ledgerhq/live-common/lib/account";
 import { hideEmptyTokenAccountsEnabledSelector } from "../../reducers/settings";
 import TokenRow from "../../components/TokenRow";
+import withEnv from "../../logic/withEnv";
 import colors from "../../colors";
 import LText from "../../components/LText";
 import Button from "../../components/Button";
 import Touchable from "../../components/Touchable";
-
-const mapStateToProps = createStructuredSelector({
-  hideEmptyTokenAccountsEnabled: hideEmptyTokenAccountsEnabledSelector,
-});
 
 const keyExtractor = o => o.id;
 
@@ -201,3 +198,4 @@ const TokenAccountsList = ({
 };
 
 export default withNavigation(TokenAccountsList);
+export default withEnv("HIDE_EMPTY_TOKEN_ACCOUNTS")(TokenAccountsList);

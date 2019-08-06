@@ -1,20 +1,17 @@
 /* @flow */
 import React, { PureComponent } from "react";
 import { Trans } from "react-i18next";
+import { compose } from "redux";
 import { connect } from "react-redux";
 import { Switch } from "react-native";
-import { createStructuredSelector } from "reselect";
 import SettingsRow from "../../../components/SettingsRow";
 import { setHideEmptyTokenAccounts } from "../../../actions/settings";
-import { hideEmptyTokenAccountsEnabledSelector } from "../../../reducers/settings";
+import withEnv from "../../../logic/withEnv";
 
 type Props = {
   hideEmptyTokenAccountsEnabled: boolean,
   setHideEmptyTokenAccounts: boolean => void,
 };
-const mapStateToProps = createStructuredSelector({
-  hideEmptyTokenAccountsEnabled: hideEmptyTokenAccountsEnabledSelector,
-});
 
 const mapDispatchToProps = {
   setHideEmptyTokenAccounts,
@@ -46,7 +43,10 @@ class HideEmptyTokenAccountsRow extends PureComponent<Props> {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
+export default compose(
+  withEnv("HIDE_EMPTY_TOKEN_ACCOUNTS", "hideEmptyTokenAccountsEnabled"),
+  connect(
+    null,
+    mapDispatchToProps,
+  ),
 )(HideEmptyTokenAccountsRow);

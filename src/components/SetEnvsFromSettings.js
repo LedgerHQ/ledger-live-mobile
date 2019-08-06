@@ -22,10 +22,9 @@ class SetEnvsFromSettings extends PureComponent<{
     this.apply();
   }
 
-  // No componentDidUpdate() here.
-  // The env needs to be set in the action itself, before dispatch.
-  // Otherwise components connected to the related setting
-  // would re-render before the env is effectively changed.
+  componentDidUpdate() {
+    this.apply();
+  }
 
   render() {
     return null;

@@ -1,6 +1,5 @@
 // @flow
 
-import { setEnvUnsafe } from "@ledgerhq/live-common/lib/env";
 import type { Currency } from "@ledgerhq/live-common/lib/types";
 
 export type CurrencySettings = {
@@ -108,13 +107,7 @@ export const switchCountervalueFirst = () => ({
   type: "SETTINGS_SWITCH_COUNTERVALUE_FIRST",
 });
 
-export const setHideEmptyTokenAccounts = (hideEmptyTokenAccounts: boolean) => (
-  dispatch: *,
-) => {
-  if (setEnvUnsafe("HIDE_EMPTY_TOKEN_ACCOUNTS", hideEmptyTokenAccounts)) {
-    dispatch({
-      type: "SETTINGS_HIDE_EMPTY_TOKEN_ACCOUNTS",
-      hideEmptyTokenAccounts,
-    });
-  }
-};
+export const setHideEmptyTokenAccounts = (hideEmptyTokenAccounts: boolean) => ({
+  type: "SETTINGS_HIDE_EMPTY_TOKEN_ACCOUNTS",
+  hideEmptyTokenAccounts,
+});

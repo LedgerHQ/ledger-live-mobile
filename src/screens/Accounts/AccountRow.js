@@ -3,6 +3,7 @@ import React, { Fragment, PureComponent } from "react";
 import { View, StyleSheet, Platform } from "react-native";
 import { Trans } from "react-i18next";
 import { RectButton } from "react-native-gesture-handler";
+import { compose } from "redux";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { listTokenAccounts } from "@ledgerhq/live-common/lib/account";
@@ -16,15 +17,14 @@ import colors from "../../colors";
 import { isUpToDateAccountSelector } from "../../reducers/accounts";
 import { accountSyncStateSelector } from "../../reducers/bridgeSync";
 import type { AsyncState } from "../../reducers/bridgeSync";
-import { hideEmptyTokenAccountsEnabledSelector } from "../../reducers/settings";
 import AccountSyncStatus from "./AccountSyncStatus";
 import Button from "../../components/Button";
 import TokenRow from "../../components/TokenRow";
+import withEnv from "../../logic/withEnv";
 
 const mapStateToProps = createStructuredSelector({
   syncState: accountSyncStateSelector,
   isUpToDateAccount: isUpToDateAccountSelector,
-  hideEmptyTokenAccountsEnabled: hideEmptyTokenAccountsEnabledSelector,
 });
 
 type Props = {
@@ -188,7 +188,10 @@ const AccountCv = ({ children }: { children: * }) => (
   </LText>
 );
 
-export default connect(mapStateToProps)(AccountRow);
+export default compose(
+  connect(mapStateToProps),
+  withEnv("HIDE_EMPTY_TOKEN_ACCOUNTS"),
+)(AccountRow);
 
 const styles = StyleSheet.create({
   button: {
