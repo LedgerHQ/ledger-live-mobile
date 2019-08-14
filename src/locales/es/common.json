@@ -472,9 +472,7 @@
         "step3": "Resetting Ledger Live does not affect your crypto assets."
       }
     },
-    "stepShareData": {
-
-    },
+    "stepShareData": {},
     "stepFinish": {
       "title": "Your device is ready!",
       "readOnlyTitle": "All set!",
@@ -591,6 +589,9 @@
     "tokens": {
       "contractAddress": "Contract address",
       "viewInExplorer": "View in explorer",
+      "seeMore": "See more Tokens",
+      "seeLess": "See less Tokens",
+      "addTokens": "Add tokens",
       "howTo": "To add tokens accounts, you need to <0>receive funds</0> through your <1>Ethereum address</1>."
     },
     "send": "Send",
@@ -861,7 +862,7 @@
       "summary": "Summary",
       "connectDevice": "Connect Device",
       "verification": "Verification",
-      "stepRange": "{{currentStep}} of {{totalSteps}}"
+      "stepRange": "Step {{currentStep}} of {{totalSteps}}"
     },
     "recipient": {
       "scan": "Scan QR Code",
