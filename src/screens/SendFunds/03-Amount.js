@@ -20,6 +20,7 @@ import {
   getAccountUnit,
 } from "@ledgerhq/live-common/lib/account";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
+import { getFeesForTransaction } from "@ledgerhq/live-common/lib/libcore/getFeesForTransaction";
 import { accountAndParentScreenSelector } from "../../reducers/accounts";
 import colors from "../../colors";
 import { TrackScreen } from "../../analytics";
@@ -49,6 +50,7 @@ type State = {
   syncNetworkInfoError: ?Error,
   syncTotalSpentError: ?Error,
   syncValidTransactionError: ?Error,
+  syncEnoughGasError: ?Error,
   txValidationWarning: ?Error,
   totalSpent: ?BigNumber,
   leaving: boolean,
@@ -79,6 +81,7 @@ class SendAmount extends Component<Props, State> {
       syncNetworkInfoError: null,
       syncTotalSpentError: null,
       syncValidTransactionError: null,
+      syncEnoughGasError: null,
       txValidationWarning: null,
       totalSpent: null,
       leaving: false,
@@ -251,10 +254,35 @@ class SendAmount extends Component<Props, State> {
     this.setState({ transaction, maxAmount });
   };
 
+  nonceCheckFees = 0;
+  checkFees = async () => {
+    const { account, parentAccount } = this.props;
+    if (!account) return;
+    const { transaction } = this.state;
+    const mainAccount = getMainAccount(account, parentAccount);
+    const nonce = ++this.nonceCheckFees;
+    try {
+      if (nonce !== this.nonceCheckFees) return;
+
+      await getFeesForTransaction({
+        account: mainAccount,
+        transaction,
+      });
+    } catch (syncEnoughGasError) {
+      this.setState(old => {
+        if (similarError(old.syncEnoughGasError, syncEnoughGasError))
+          return null;
+
+        return { syncEnoughGasError };
+      });
+    }
+  };
+
   validate = () => {
     this.syncNetworkInfo();
     this.syncTotalSpent();
     this.syncValidTransaction();
+    this.checkFees();
   };
 
   onNetworkInfoCancel = () => {
@@ -314,6 +342,7 @@ class SendAmount extends Component<Props, State> {
       syncNetworkInfoError,
       syncValidTransactionError,
       syncTotalSpentError,
+      syncEnoughGasError,
       totalSpent,
       leaving,
       maxAmount,
@@ -334,7 +363,7 @@ class SendAmount extends Component<Props, State> {
     const criticalError = syncNetworkInfoError;
     const inlinedError = criticalError
       ? null
-      : syncValidTransactionError || syncTotalSpentError;
+      : syncValidTransactionError || syncTotalSpentError || syncEnoughGasError;
 
     const canNext: boolean =
       !!networkInfo &&
