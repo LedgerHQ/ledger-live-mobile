@@ -1,6 +1,7 @@
 // @flow
 
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
+import { compose } from "redux";
 import { Trans } from "react-i18next";
 import take from "lodash/take";
 import { FlatList, Platform, StyleSheet, View } from "react-native";
@@ -8,9 +9,7 @@ import type { TokenAccount, Account } from "@ledgerhq/live-common/lib/types";
 import Icon from "react-native-vector-icons/dist/FontAwesome";
 import MaterialIcon from "react-native-vector-icons/dist/MaterialIcons";
 import { withNavigation } from "react-navigation";
-import { createStructuredSelector } from "reselect";
 import { listTokenAccounts } from "@ledgerhq/live-common/lib/account";
-import { hideEmptyTokenAccountsEnabledSelector } from "../../reducers/settings";
 import TokenRow from "../../components/TokenRow";
 import withEnv from "../../logic/withEnv";
 import colors from "../../colors";
@@ -87,6 +86,8 @@ const TokenAccountsList = ({
   accountId: string,
 }) => {
   const [isCollapsed, setCollapsed] = useState(true);
+  const tokenAccounts = listTokenAccounts(parentAccount);
+
   const renderHeader = useCallback(
     () => (
       <View style={styles.header}>
@@ -173,8 +174,6 @@ const TokenAccountsList = ({
     );
   }, [isCollapsed, navigation, tokenAccounts, accountId]);
 
-  const tokenAccounts = listTokenAccounts(parentAccount);
-
   const renderItem = useCallback(
     ({ item }) => (
       <Card>
@@ -197,5 +196,7 @@ const TokenAccountsList = ({
   );
 };
 
-export default withNavigation(TokenAccountsList);
-export default withEnv("HIDE_EMPTY_TOKEN_ACCOUNTS")(TokenAccountsList);
+export default compose(
+  withNavigation,
+  withEnv("HIDE_EMPTY_TOKEN_ACCOUNTS"),
+)(TokenAccountsList);
