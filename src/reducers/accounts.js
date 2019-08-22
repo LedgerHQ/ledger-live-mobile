@@ -20,6 +20,8 @@ const initialState: AccountsState = {
 };
 
 const handlers: Object = {
+  MOCK_INJECT_ITEM: (_, { item }) => ({ active: item.accounts || [] }),
+
   ACCOUNTS_IMPORT: (s, { state }) => state,
 
   ACCOUNTS_USER_IMPORT: (s, { items, selectedAccounts }) => ({

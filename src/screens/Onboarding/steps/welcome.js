@@ -16,6 +16,7 @@ import { urls } from "../../../config/urls";
 import { deviceNames } from "../../../wording";
 import PoweredByLedger from "../../Settings/PoweredByLedger";
 import type { OnboardingStepProps } from "../types";
+import { MockEnvsAccessButton } from "../../../components/MockEnvs";
 
 const logo = <Image source={require("../../../images/logo.png")} />;
 
@@ -39,6 +40,7 @@ class OnboardingStepWelcome extends Component<Props> {
     const { onWelcomed } = this.props;
     return (
       <OnboardingLayout isCentered borderedFooter={false} Footer={this.Footer}>
+        <MockEnvsAccessButton />
         <TrackScreen category="Onboarding" name="Welcome" />
         <View style={styles.logo}>{logo}</View>
         <LText style={styles.title} secondary semiBold>

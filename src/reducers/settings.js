@@ -93,6 +93,11 @@ const INITIAL_STATE: SettingsState = {
 const pairHash = (from, to) => `${from.ticker}_${to.ticker}`;
 
 const handlers: Object = {
+  MOCK_INJECT_ITEM: (_, { item }) => ({
+    ...INITIAL_STATE,
+    ...item.settings,
+  }),
+
   SETTINGS_IMPORT: (state: SettingsState, { settings }) => ({
     ...state,
     ...settings,

@@ -17,6 +17,10 @@ const initialState: BleState = {
 };
 
 const handlers: Object = {
+  MOCK_INJECT_ITEM: (_, { item }) => ({
+    knownDevices: item.knownDevices || [],
+  }),
+
   BLE_ADD_DEVICE: (state: BleState, { device }: { device: DeviceLike }) => ({
     knownDevices: state.knownDevices
       .filter(d => d.id !== device.id)

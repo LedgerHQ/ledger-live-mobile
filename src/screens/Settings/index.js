@@ -24,6 +24,7 @@ import Display from "../../icons/Display";
 import colors from "../../colors";
 import TrackScreen from "../../analytics/TrackScreen";
 import timer from "../../timer";
+import { MockEnvsAccessButton } from "../../components/MockEnvs";
 
 type Props = {
   navigation: NavigationScreenProp<*>,
@@ -67,6 +68,7 @@ class Settings extends Component<Props, *> {
     const { debugVisible } = this.state;
     return (
       <ScrollView>
+        <MockEnvsAccessButton />
         <TrackScreen category="Settings" />
         <View style={styles.root}>
           <SettingsCard

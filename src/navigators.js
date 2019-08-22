@@ -113,6 +113,7 @@ import FallBackCameraScreen from "./screens/ImportAccounts/FallBackCameraScreen"
 import OnboardingOrNavigator from "./screens/OnboardingOrNavigator";
 import AdvancedLogs from "./screens/AccountSettings/AdvancedLogs";
 import Distribution from "./screens/Distribution";
+import { MockEnvsScreen as MockEnvs } from "./components/MockEnvs";
 
 // TODO look into all FlowFixMe
 
@@ -488,6 +489,7 @@ const BaseOnboarding = createStackNavigator(
     EditDeviceName,
     PasswordAddFlow,
     PasswordModifyFlow,
+    MockEnvs,
   },
   {
     mode: "modal",

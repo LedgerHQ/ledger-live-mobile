@@ -57,12 +57,10 @@ export default class DebugRejectSwitch extends PureComponent<{}> {
     if (!Config.MOCK) return null;
     return (
       <SafeAreaView>
-        <TouchableOpacity onPress={this.onPress}>
-          <View style={styles.root}>
-            <LText bold style={styles.text}>
-              {[..."STOP"].join("\n")}
-            </LText>
-          </View>
+        <TouchableOpacity onPress={this.onPress} style={styles.root}>
+          <LText bold style={styles.text}>
+            {[..."STOP"].join("\n")}
+          </LText>
         </TouchableOpacity>
       </SafeAreaView>
     );
