@@ -6,7 +6,7 @@ import type { NavigationScreenProp } from "react-navigation";
 import { connect } from "react-redux";
 import i18next from "i18next";
 import type { Account, TokenAccount } from "@ledgerhq/live-common/lib/types";
-import type { Transaction } from "@ledgerhq/live-common/lib/bridge/EthereumJSBridge";
+import type { Transaction } from "@ledgerhq/live-common/lib/families/ethereum/types";
 
 import colors from "../../colors";
 import { accountAndParentScreenSelector } from "../../reducers/accounts";

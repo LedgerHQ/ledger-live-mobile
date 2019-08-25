@@ -13,6 +13,7 @@ import i18next from "i18next";
 import { compose } from "redux";
 import { createStructuredSelector } from "reselect";
 import type { NavigationScreenProp } from "react-navigation";
+import type { Transaction } from "@ledgerhq/live-common/lib/families/bitcoin/types";
 import type { Account } from "@ledgerhq/live-common/lib/types";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 
@@ -25,8 +26,6 @@ import KeyboardView from "../../../components/KeyboardView";
 import FeesRow from "./FeesRow";
 import CustomFeesRow from "./CustomFeesRow";
 import { track } from "../../../analytics";
-
-type Transaction = *;
 
 type Props = {
   account: Account,

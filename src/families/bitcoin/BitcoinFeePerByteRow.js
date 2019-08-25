@@ -1,7 +1,8 @@
 /* @flow */
 import React, { Component } from "react";
 import { View, StyleSheet, Linking } from "react-native";
-import type { Account, Transaction } from "@ledgerhq/live-common/lib/types";
+import type { Account } from "@ledgerhq/live-common/lib/types";
+import type { Transaction } from "@ledgerhq/live-common/lib/families/bitcoin/types";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { Trans, translate } from "react-i18next";
 import SummaryRow from "../../screens/SendFunds/SummaryRow";

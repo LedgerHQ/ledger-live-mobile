@@ -2,7 +2,7 @@
 import React from "react";
 import type { Account, TokenAccount } from "@ledgerhq/live-common/lib/types";
 import type { NavigationScreenProp } from "react-navigation";
-import type { Transaction } from "@ledgerhq/live-common/lib/bridge/EthereumJSBridge";
+import type { Transaction } from "@ledgerhq/live-common/lib/families/ethereum/types";
 
 import EthereumFeeRow from "./EthereumFeeRow";
 

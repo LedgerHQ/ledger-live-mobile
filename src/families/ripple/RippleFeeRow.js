@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { View, StyleSheet, Linking } from "react-native";
 import type { Account } from "@ledgerhq/live-common/lib/types";
 import { Trans, translate } from "react-i18next";
-import type { Transaction } from "@ledgerhq/live-common/lib/bridge/RippleJSBridge";
+import type { Transaction } from "@ledgerhq/live-common/lib/families/ripple/types";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 
 import SummaryRow from "../../screens/SendFunds/SummaryRow";

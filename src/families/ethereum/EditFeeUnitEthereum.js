@@ -5,7 +5,7 @@ import { translate } from "react-i18next";
 import Slider from "react-native-slider";
 import type { NavigationScreenProp } from "react-navigation";
 import type { Account, TokenAccount } from "@ledgerhq/live-common/lib/types";
-import type { Transaction } from "@ledgerhq/live-common/lib/bridge/EthereumJSBridge";
+import type { Transaction } from "@ledgerhq/live-common/lib/families/ethereum/types";
 import {
   inferDynamicRange,
   reverseRangeIndex,
@@ -97,11 +97,9 @@ const EditFeeUnitEthereum = ({
     });
   }, [account, gasPrice, navigation, mainAccount, parentAccount]);
 
-  const fees = bridge.getTransactionNetworkInfo(mainAccount, transaction);
-
-  if (!fees) return null;
-
-  const serverGas = BigNumber(fees.serverFees.gas_price);
+  const { networkInfo } = transaction;
+  if (!networkInfo) return null;
+  const serverGas = BigNumber(networkInfo.gas_price);
 
   return (
     <View style={styles.root}>

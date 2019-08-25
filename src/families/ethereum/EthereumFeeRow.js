@@ -3,7 +3,7 @@ import React, { Fragment, useCallback, useState } from "react";
 import { View, StyleSheet, Linking } from "react-native";
 import { Trans, translate } from "react-i18next";
 import type { Account, TokenAccount } from "@ledgerhq/live-common/lib/types";
-import type { Transaction } from "@ledgerhq/live-common/lib/bridge/EthereumJSBridge";
+import type { Transaction } from "@ledgerhq/live-common/lib/families/ethereum/types";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { getMainAccount } from "@ledgerhq/live-common/lib/account";
 import SummaryRow from "../../screens/SendFunds/SummaryRow";

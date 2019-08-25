@@ -14,7 +14,7 @@ import { BigNumber } from "bignumber.js";
 import { translate } from "react-i18next";
 import i18next from "i18next";
 import type { Account, TokenAccount } from "@ledgerhq/live-common/lib/types";
-import type { Transaction } from "@ledgerhq/live-common/lib/bridge/EthereumJSBridge";
+import type { Transaction } from "@ledgerhq/live-common/lib/families/ethereum/types";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { getMainAccount } from "@ledgerhq/live-common/lib/account";
 
