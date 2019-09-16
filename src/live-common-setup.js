@@ -28,6 +28,7 @@ setSupportedCurrencies([
   "dogecoin",
   "ethereum_classic",
   "ethereum",
+  "hatch",
   "hcash",
   "komodo",
   "litecoin",
