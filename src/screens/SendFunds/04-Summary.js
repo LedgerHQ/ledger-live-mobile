@@ -1,5 +1,6 @@
 /* @flow */
-import React, { Component } from "react";
+import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
+import React, { useState, useCallback, Component, useMemo } from "react";
 import { View, StyleSheet } from "react-native";
 // $FlowFixMe
 import { SafeAreaView, ScrollView } from "react-navigation";
@@ -7,9 +8,7 @@ import { connect } from "react-redux";
 import { translate, Trans } from "react-i18next";
 import i18next from "i18next";
 import type { NavigationScreenProp } from "react-navigation";
-import type { BigNumber } from "bignumber.js";
 import type { Account, TokenAccount } from "@ledgerhq/live-common/lib/types";
-import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { getMainAccount } from "@ledgerhq/live-common/lib/account";
 import { accountAndParentScreenSelector } from "../../reducers/accounts";
 import colors from "../../colors";
@@ -30,10 +29,6 @@ import ConfirmationModal from "../../components/ConfirmationModal";
 
 const forceInset = { bottom: "always" };
 
-// TODO put this somewhere
-const similarError = (a, b) =>
-  a === b || (a && b && a.name === b.name && a.message === b.message);
-
 type Props = {
   account: ?(Account | TokenAccount),
   parentAccount: ?Account,
@@ -45,262 +40,138 @@ type Props = {
   }>,
 };
 
-class SendSummary extends Component<
-  Props,
-  {
-    totalSpent: ?BigNumber,
-    error: ?Error,
-    highFeesOpen: boolean,
-    maxAmount: ?BigNumber,
-  },
-> {
-  static navigationOptions = {
-    headerTitle: (
-      <StepHeader
-        title={i18next.t("send.stepperHeader.summary")}
-        subtitle={i18next.t("send.stepperHeader.stepRange", {
-          currentStep: "4",
-          totalSteps: "6",
-        })}
-      />
-    ),
-  };
+const SendSummary = ({ account, parentAccount, navigation }: Props) => {
+  const {
+    transaction,
+    setAccount,
+    setTransaction,
+    status,
+    bridgePending,
+  } = useBridgeTransaction();
 
-  state = {
-    totalSpent: null,
-    maxAmount: null,
-    error: null, // TODO use error somewhere!
-    highFeesOpen: false,
-  };
+  const [highFeesOpen, setHighFeesOpen] = useState(false);
 
-  componentDidMount() {
-    this.syncTotalSpent();
-    this.syncMaxAmount();
-  }
+  useMemo(() => {
+    setAccount(account, parentAccount);
+    setTransaction(navigation.getParam("transaction"));
+  }, [setAccount, setTransaction, account, parentAccount, navigation]);
 
-  componentDidUpdate() {
-    this.syncTotalSpent();
-    this.syncMaxAmount();
-  }
-
-  componentWillUnmount() {
-    this.nonceTotalSpent++;
-  }
-
-  openFees = () => {
-    const { account, parentAccount, navigation } = this.props;
-    if (!account) return;
-    this.props.navigation.navigate("EditFees", {
-      accountId: account.id,
-      parentAccount: parentAccount && parentAccount.id,
-      transaction: navigation.getParam("transaction"),
-    });
-  };
-
-  onContinue = async () => {
-    const { account, parentAccount, navigation } = this.props;
-    const { maxAmount } = this.state;
-    if (!account) return;
-    const transaction = navigation.getParam("transaction");
-    const bridge = getAccountBridge(account, parentAccount);
-    const mainAccount = getMainAccount(account, parentAccount);
-    await bridge.checkValidTransaction(mainAccount, transaction);
-
-    if (bridge && account && transaction) {
-      const totalSpent = await bridge.getTotalSpent(mainAccount, transaction);
-      if (
-        !parentAccount &&
-        ((transaction.amount.gt(0) &&
-          totalSpent
-            .minus(transaction.amount)
-            .times(10)
-            .gt(transaction.amount)) ||
-          (maxAmount &&
-            maxAmount.gt(0) &&
-            totalSpent
-              .minus(maxAmount)
-              .times(10)
-              .gt(maxAmount)))
-      ) {
-        this.setState({ highFeesOpen: true });
-        return;
-      }
-    }
+  const onAcceptFees = useCallback(async () => {
     navigation.navigate("SendConnectDevice", {
       accountId: account.id,
       parentId: parentAccount && parentAccount.id,
       transaction,
     });
-  };
 
-  setError = (error: Error) => {
-    this.setState(old => {
-      if (similarError(old.error, error)) return null;
-      return { error };
-    });
-  };
+    setHighFeesOpen(false);
+  }, [setHighFeesOpen, account, parentAccount, navigation, transaction]);
 
-  // React Hooks PLZ. same code as step 3.
-  nonceTotalSpent = 0;
-  syncTotalSpent = async () => {
-    const { account, parentAccount, navigation } = this.props;
-    if (!account) return;
-    const transaction = navigation.getParam("transaction");
-    const bridge = getAccountBridge(account, parentAccount);
-    const mainAccount = getMainAccount(account, parentAccount);
-    const nonce = ++this.nonceTotalSpent;
-    try {
-      const totalSpent = await bridge.getTotalSpent(mainAccount, transaction);
-      if (nonce !== this.nonceTotalSpent) return;
+  const onRejectFees = useCallback(() => {
+    setHighFeesOpen(false);
+  }, [setHighFeesOpen]);
 
-      await bridge.checkValidTransaction(mainAccount, transaction);
-      if (nonce !== this.nonceTotalSpent) return;
-
-      this.setState(old => {
-        if (
-          !old.error &&
-          old.totalSpent &&
-          totalSpent &&
-          totalSpent.eq(old.totalSpent)
-        ) {
-          return null;
-        }
-        return { totalSpent, error: null };
-      });
-    } catch (e) {
-      if (nonce !== this.nonceTotalSpent) return;
-
-      this.setError(e);
+  const onContinue = useCallback(async () => {
+    const { warnings } = status;
+    if (Object.keys(warnings).includes("feeTooHigh")) {
+      setHighFeesOpen(true);
+      return;
     }
-  };
-
-  nonceMaxAmount = 0;
-  syncMaxAmount = async () => {
-    const { account, parentAccount, navigation } = this.props;
-    if (!account) return;
-    const bridge = getAccountBridge(account, parentAccount);
-    const mainAccount = getMainAccount(account, parentAccount);
-    const transaction = navigation.getParam("transaction");
-    const nonce = ++this.nonceMaxAmount;
-
-    const useAllAmount = bridge.getTransactionExtra(
-      mainAccount,
-      transaction,
-      "useAllAmount",
-    );
-
-    let maxAmount;
-    if (useAllAmount)
-      maxAmount = await bridge.getMaxAmount(mainAccount, transaction);
-    if (nonce !== this.nonceMaxAmount) return;
-
-    this.setState(old => {
-      if (
-        !maxAmount ||
-        (old.maxAmount && maxAmount && maxAmount.eq(old.maxAmount))
-      ) {
-        return null;
-      }
-      return { maxAmount };
-    });
-  };
-
-  onAcceptFees = async () => {
-    const { account, parentAccount, navigation } = this.props;
-    if (!account) return;
-    const transaction = navigation.getParam("transaction");
-    const bridge = getAccountBridge(account, parentAccount);
-    const mainAccount = getMainAccount(account, parentAccount);
-    await bridge.checkValidTransaction(mainAccount, transaction);
 
     navigation.navigate("SendConnectDevice", {
       accountId: account.id,
       parentId: parentAccount && parentAccount.id,
       transaction,
     });
-    this.setState({ highFeesOpen: false });
-  };
+  }, [
+    setHighFeesOpen,
+    status,
+    account,
+    parentAccount,
+    navigation,
+    transaction,
+  ]);
 
-  onRejectFees = () => {
-    this.setState({ highFeesOpen: false });
-  };
+  if (!account || !transaction || !transaction.recipient) return null; // FIXME why is recipient sometimes empty?
 
-  render() {
-    const { totalSpent, error, highFeesOpen, maxAmount } = this.state;
-    const { account, parentAccount, navigation } = this.props;
-    if (!account) return null;
-    const transaction = navigation.getParam("transaction");
-    const bridge = getAccountBridge(account, parentAccount);
-    const mainAccount = getMainAccount(account, parentAccount);
-    const amount = bridge.getTransactionAmount(mainAccount, transaction);
-    const recipient = bridge.getTransactionRecipient(mainAccount, transaction);
-    const useAllAmount = bridge.getTransactionExtra(
-      mainAccount,
-      transaction,
-      "useAllAmount",
-    );
+  const {
+    amount,
+    errors: { transaction: transactionError },
+  } = status;
+  const mainAccount = getMainAccount(account, parentAccount);
 
-    return (
-      <SafeAreaView style={styles.root} forceInset={forceInset}>
-        <TrackScreen category="SendFunds" name="Summary" />
-        <ScrollView style={styles.body}>
-          <SummaryFromSection account={account} parentAccount={parentAccount} />
-          <VerticalConnector />
-          <SummaryToSection recipient={recipient} />
-          <SendRowsCustom
-            transaction={transaction}
-            account={mainAccount}
-            navigation={navigation}
-          />
-          <SectionSeparator lineColor={colors.lightFog} />
-          <SummaryAmountSection
-            account={account}
-            parentAccount={parentAccount}
-            amount={(useAllAmount && maxAmount) || amount}
-          />
-          <SendRowsFee
-            account={account}
-            parentAccount={parentAccount}
-            transaction={transaction}
-            navigation={navigation}
-          />
-          <SectionSeparator lineColor={colors.lightFog} />
-          <SummaryTotalSection
-            account={account}
-            parentAccount={parentAccount}
-            amount={totalSpent || amount}
-          />
-        </ScrollView>
-        <View style={styles.footer}>
-          <LText style={styles.error}>
-            <TranslatedError error={error} />
-          </LText>
-          <Button
-            event="SummaryContinue"
-            type="primary"
-            title={<Trans i18nKey="common.continue" />}
-            containerStyle={styles.continueButton}
-            onPress={this.onContinue}
-            disabled={!totalSpent || !!error}
-          />
-        </View>
-        <ConfirmationModal
-          isOpened={highFeesOpen}
-          onClose={this.onRejectFees}
-          onConfirm={this.onAcceptFees}
-          Icon={AlertTriangle}
-          confirmationDesc={
-            <Trans i18nKey="send.highFeeModal">
-              {"text"}
-              <LText bold>bold text</LText>
-            </Trans>
-          }
-          confirmButtonText={<Trans i18nKey="common.continue" />}
+  return (
+    <SafeAreaView style={styles.root} forceInset={forceInset}>
+      <TrackScreen category="SendFunds" name="Summary" />
+      <ScrollView style={styles.body}>
+        <SummaryFromSection account={account} parentAccount={parentAccount} />
+        <VerticalConnector />
+        <SummaryToSection recipient={transaction.recipient} />
+        <SendRowsCustom
+          transaction={transaction}
+          account={mainAccount}
+          navigation={navigation}
         />
-      </SafeAreaView>
-    );
-  }
-}
+        <SectionSeparator lineColor={colors.lightFog} />
+        <SummaryAmountSection
+          account={account}
+          parentAccount={parentAccount}
+          amount={amount}
+        />
+        <SendRowsFee
+          account={account}
+          parentAccount={parentAccount}
+          transaction={transaction}
+          navigation={navigation}
+        />
+        <SectionSeparator lineColor={colors.lightFog} />
+        <SummaryTotalSection
+          account={account}
+          parentAccount={parentAccount}
+          amount={amount}
+        />
+      </ScrollView>
+      <View style={styles.footer}>
+        <LText style={styles.error}>
+          <TranslatedError error={transactionError} />
+        </LText>
+        <Button
+          event="SummaryContinue"
+          type="primary"
+          title={<Trans i18nKey="common.continue" />}
+          containerStyle={styles.continueButton}
+          onPress={onContinue}
+          disabled={bridgePending || !!transactionError}
+        />
+      </View>
+      <ConfirmationModal
+        isOpened={highFeesOpen}
+        onClose={onRejectFees}
+        onConfirm={onAcceptFees}
+        Icon={AlertTriangle}
+        confirmationDesc={
+          <Trans i18nKey="send.highFeeModal">
+            {"Be careful, your fees represent more than "}
+            <LText bold>10%</LText>
+            {" of the amount. Do you want to continue?"}
+          </Trans>
+        }
+        confirmButtonText={<Trans i18nKey="common.continue" />}
+      />
+    </SafeAreaView>
+  );
+};
+
+SendSummary.navigationOptions = {
+  headerTitle: (
+    <StepHeader
+      title={i18next.t("send.stepperHeader.summary")}
+      subtitle={i18next.t("send.stepperHeader.stepRange", {
+        currentStep: "4",
+        totalSteps: "6",
+      })}
+    />
+  ),
+};
 
 const styles = StyleSheet.create({
   root: {

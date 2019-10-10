@@ -9,7 +9,7 @@ import type { TokenAccount, Account } from "@ledgerhq/live-common/lib/types";
 import Icon from "react-native-vector-icons/dist/FontAwesome";
 import MaterialIcon from "react-native-vector-icons/dist/MaterialIcons";
 import { withNavigation } from "react-navigation";
-import { listTokenAccounts } from "@ledgerhq/live-common/lib/account";
+import { listSubAccounts } from "@ledgerhq/live-common/lib/account";
 import TokenRow from "../../components/TokenRow";
 import withEnv from "../../logic/withEnv";
 import colors from "../../colors";
@@ -86,7 +86,7 @@ const TokenAccountsList = ({
   accountId: string,
 }) => {
   const [isCollapsed, setCollapsed] = useState(true);
-  const tokenAccounts = listTokenAccounts(parentAccount);
+  const tokenAccounts = listSubAccounts(parentAccount);
 
   const renderHeader = useCallback(
     () => (

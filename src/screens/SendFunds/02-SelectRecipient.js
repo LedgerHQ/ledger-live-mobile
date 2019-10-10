@@ -1,29 +1,28 @@
 /* @flow */
-import React, { Component } from "react";
-import { ScrollView, View, StyleSheet, Platform } from "react-native";
-import { SafeAreaView } from "react-navigation";
+import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
+import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
+import type { Account, TokenAccount } from "@ledgerhq/live-common/lib/types";
+import i18next from "i18next";
+import React, { useCallback, useMemo } from "react";
+import { Trans, translate } from "react-i18next";
+import { Platform, ScrollView, StyleSheet, View } from "react-native";
+import Icon from "react-native-vector-icons/dist/FontAwesome";
 import type { NavigationScreenProp } from "react-navigation";
+import { SafeAreaView } from "react-navigation";
 import { connect } from "react-redux";
 import { compose } from "redux";
-import i18next from "i18next";
-import { translate, Trans } from "react-i18next";
-import type { TokenAccount, Account } from "@ledgerhq/live-common/lib/types";
-import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
-import { getMainAccount } from "@ledgerhq/live-common/lib/account";
-import throttle from "lodash/throttle";
-import Icon from "react-native-vector-icons/dist/FontAwesome";
-import type { T } from "../../types/common";
-import { accountAndParentScreenSelector } from "../../reducers/accounts";
 import { track, TrackScreen } from "../../analytics";
-import colors from "../../colors";
-import LText, { getFontStyle } from "../../components/LText";
-import Button from "../../components/Button";
-import StepHeader from "../../components/StepHeader";
-import KeyboardView from "../../components/KeyboardView";
-import TranslatedError from "../../components/TranslatedError";
-import TextInput from "../../components/TextInput";
-import SyncSkipUnderPriority from "../../bridge/SyncSkipUnderPriority";
 import SyncOneAccountOnMount from "../../bridge/SyncOneAccountOnMount";
+import SyncSkipUnderPriority from "../../bridge/SyncSkipUnderPriority";
+import colors from "../../colors";
+import Button from "../../components/Button";
+import KeyboardView from "../../components/KeyboardView";
+import LText, { getFontStyle } from "../../components/LText";
+import StepHeader from "../../components/StepHeader";
+import TextInput from "../../components/TextInput";
+import TranslatedError from "../../components/TranslatedError";
+import { accountAndParentScreenSelector } from "../../reducers/accounts";
+import type { T } from "../../types/common";
 
 const forceInset = { bottom: "always" };
 
@@ -41,242 +40,154 @@ type Props = {
   t: T,
 };
 
-type State = {
-  addressStatus: string,
-  address: *,
-  error: ?Error,
-};
+const SendSelectRecipient = ({
+  account,
+  parentAccount,
+  navigation,
+  t,
+}: Props) => {
+  const {
+    transaction,
+    setAccount,
+    setTransaction,
+    status,
+    bridgePending,
+    bridgeError,
+  } = useBridgeTransaction();
 
-class SendSelectRecipient extends Component<Props, State> {
-  static navigationOptions = {
-    headerTitle: (
-      <StepHeader
-        title={i18next.t("send.stepperHeader.recipientAddress")}
-        subtitle={i18next.t("send.stepperHeader.stepRange", {
-          currentStep: "2",
-          totalSteps: "6",
-        })}
-      />
-    ),
-  };
+  useMemo(() => setAccount(account, parentAccount), [account, parentAccount]);
 
-  constructor() {
-    super();
-    this.validateAddress = throttle(this.validateAddress, 200);
-  }
+  const onRecipientFieldFocus = useCallback(() => {
+    track("SendRecipientFieldFocused");
+  }, []);
 
-  unmounted = false;
-
-  preloadedNetworkInfo: ?Object;
-
-  componentDidMount() {
-    const { account, parentAccount } = this.props;
-    if (!account) return;
-    const bridge = getAccountBridge(account, parentAccount);
-    const mainAccount = getMainAccount(account, parentAccount);
-    bridge.fetchTransactionNetworkInfo(mainAccount).then(
-      networkInfo => {
-        this.preloadedNetworkInfo = networkInfo;
-      },
-      () => {
-        // error not handled here
-      },
-    );
-  }
-
-  componentWillUnmount() {
-    this.validateAddress.cancel();
-    this.unmounted = true;
-  }
-
-  componentDidUpdate(_, { address: prevAddress }) {
-    const { navigation, account, parentAccount } = this.props;
-    if (!account) return;
-    if (navigation.getParam("justScanned")) {
-      delete navigation.state.params.justScanned;
-      const transaction = navigation.getParam("transaction");
-      if (transaction) {
-        const bridge = getAccountBridge(account, parentAccount);
-        const mainAccount = getMainAccount(account, parentAccount);
-        const address = bridge.getTransactionRecipient(
-          mainAccount,
-          transaction,
-        );
-        if (address && prevAddress !== address) {
-          this.onChangeText(address);
-        }
-      }
-    }
-  }
-
-  state = {
-    addressStatus: "pending",
-    address: "",
-    error: null,
-  };
-
-  input = React.createRef();
-
-  clear = () => {
-    if (this.input.current) {
-      this.input.current.clear();
-    }
-    this.onChangeText("");
-  };
-
-  onChangeText = (address: string) => {
-    this.setState({ address });
-    this.validateAddress(address);
-  };
-
-  nonceValidateAddress = 0;
-  validateAddress = async (address: string) => {
-    const nonce = ++this.nonceValidateAddress;
-    const { account, parentAccount } = this.props;
-    if (!account) return;
-    const bridge = getAccountBridge(account, parentAccount);
-    const mainAccount = getMainAccount(account, parentAccount);
-    try {
-      const res = await bridge.checkValidRecipient(mainAccount, address);
-      if (this.unmounted || nonce !== this.nonceValidateAddress) return;
-      if (!res) this.setState({ addressStatus: "valid", error: null });
-      else this.setState({ addressStatus: "warning", error: res });
-    } catch (e) {
-      if (this.unmounted || nonce !== this.nonceValidateAddress) return;
-      this.setState({
-        addressStatus: "invalid",
-        error: e,
-      });
-    }
-  };
-
-  onPressScan = () => {
-    const { navigation } = this.props;
+  const onPressScan = useCallback(() => {
     navigation.navigate("ScanRecipient", {
       accountId: navigation.getParam("accountId"),
       parentId: navigation.getParam("parentId"),
     });
-  };
+  }, [navigation]);
 
-  onPressContinue = async () => {
-    const { account, parentAccount, navigation } = this.props;
-    const { address } = this.state;
+  const onChangeText = useCallback(
+    recipient => {
+      const bridge = getAccountBridge(account, parentAccount);
+      setTransaction(bridge.updateTransaction(transaction, { recipient }));
+    },
+    [account, parentAccount, setTransaction, transaction],
+  );
+  const clear = () => onChangeText("");
+
+  const onPressContinue = useCallback(async () => {
     if (!account) return;
-    const bridge = getAccountBridge(account, parentAccount);
-    const mainAccount = getMainAccount(account, parentAccount);
-    let transaction =
-      navigation.getParam("transaction") ||
-      bridge.createTransaction(mainAccount);
-    const tokenAccountId = account.type === "TokenAccount" && account.id;
-    if (tokenAccountId && bridge.editTokenAccountId) {
-      transaction = bridge.editTokenAccountId(
-        mainAccount,
-        transaction,
-        tokenAccountId,
-      );
-    }
-
-    transaction = bridge.editTransactionRecipient(
-      mainAccount,
-      transaction,
-      address,
-    );
-
-    if (this.preloadedNetworkInfo) {
-      transaction = bridge.applyTransactionNetworkInfo(
-        mainAccount,
-        transaction,
-        this.preloadedNetworkInfo,
-      );
-    }
-
-    transaction = await bridge.prepareTransaction(mainAccount, transaction);
 
     navigation.navigate("SendAmount", {
       accountId: account.id,
       parentId: parentAccount && parentAccount.id,
       transaction,
     });
-  };
+  }, [account, parentAccount, navigation, transaction]);
 
-  onRecipientFieldFocus = () => track("SendRecipientFieldFocused");
+  const input = React.createRef();
 
-  render() {
-    const { address, error, addressStatus } = this.state;
-    const { account, t } = this.props;
-    if (!account) return null;
-    return (
-      <SafeAreaView style={styles.root} forceInset={forceInset}>
-        <TrackScreen category="SendFunds" name="SelectRecipient" />
-        <SyncSkipUnderPriority priority={100} />
-        <SyncOneAccountOnMount priority={100} accountId={account.id} />
-        <KeyboardView style={{ flex: 1 }}>
-          <ScrollView
-            style={styles.container}
-            keyboardShouldPersistTaps="handled"
-          >
-            <Button
-              event="SendRecipientQR"
-              type="tertiary"
-              title={<Trans i18nKey="send.recipient.scan" />}
-              IconLeft={IconQRCode}
-              onPress={this.onPressScan}
+  if (!account || !transaction) return null;
+
+  if (navigation.getParam("justScanned")) {
+    delete navigation.state.params.justScanned;
+    setTransaction(navigation.getParam("transaction"));
+  }
+
+  const {
+    errors: { recipient: recipientError },
+    warnings: { recipient: recipientWarning },
+  } = status;
+
+  return (
+    <SafeAreaView style={styles.root} forceInset={forceInset}>
+      <TrackScreen category="SendFunds" name="SelectRecipient" />
+      <SyncSkipUnderPriority priority={100} />
+      <SyncOneAccountOnMount priority={100} accountId={account.id} />
+      <KeyboardView style={{ flex: 1 }}>
+        <ScrollView
+          style={styles.container}
+          keyboardShouldPersistTaps="handled"
+        >
+          <Button
+            event="SendRecipientQR"
+            type="tertiary"
+            title={<Trans i18nKey="send.recipient.scan" />}
+            IconLeft={IconQRCode}
+            onPress={onPressScan}
+          />
+          <View style={styles.separatorContainer}>
+            <View style={styles.separatorLine} />
+            <LText style={styles.separatorText}>
+              {<Trans i18nKey="common.or" />}
+            </LText>
+            <View style={styles.separatorLine} />
+          </View>
+          <View style={styles.inputWrapper}>
+            {/* make this a recipient component */}
+            <TextInput
+              placeholder={t("send.recipient.input")}
+              placeholderTextColor={colors.fog}
+              style={[
+                styles.addressInput,
+                recipientError && styles.invalidAddressInput,
+                recipientWarning && styles.warning,
+              ]}
+              onFocus={onRecipientFieldFocus}
+              onChangeText={onChangeText}
+              onInputCleared={clear}
+              value={transaction.recipient}
+              ref={input}
+              multiline
+              blurOnSubmit
+              autoCapitalize="none"
+              clearButtonMode="always"
             />
-            <View style={styles.separatorContainer}>
-              <View style={styles.separatorLine} />
-              <LText style={styles.separatorText}>
-                {<Trans i18nKey="common.or" />}
-              </LText>
-              <View style={styles.separatorLine} />
-            </View>
-            <View style={styles.inputWrapper}>
-              {/* make this a recipient component */}
-              <TextInput
-                placeholder={t("send.recipient.input")}
-                placeholderTextColor={colors.fog}
-                style={[
-                  styles.addressInput,
-                  addressStatus === "invalid" && styles.invalidAddressInput,
-                  addressStatus === "warning" && styles.warning,
-                ]}
-                onFocus={this.onRecipientFieldFocus}
-                onChangeText={this.onChangeText}
-                onInputCleared={this.clear}
-                value={address}
-                ref={this.input}
-                multiline
-                blurOnSubmit
-                autoCapitalize="none"
-                clearButtonMode="always"
-              />
-            </View>
-            {!!address && addressStatus !== "valid" && (
+          </View>
+          {!!transaction.recipient &&
+            (recipientError || recipientWarning || bridgeError) && (
               <LText
                 style={[
                   styles.warningBox,
-                  addressStatus === "invalid" ? styles.error : styles.warning,
+                  recipientError || bridgeError ? styles.error : styles.warning,
                 ]}
               >
-                <TranslatedError error={error} />
+                <TranslatedError
+                  error={recipientError || recipientWarning || bridgeError}
+                />
               </LText>
             )}
-          </ScrollView>
-          <View style={[styles.container, styles.containerFlexEnd]}>
-            <Button
-              event="SendRecipientContinue"
-              type="primary"
-              title={<Trans i18nKey="common.continue" />}
-              onPress={this.onPressContinue}
-              disabled={
-                addressStatus === "invalid" || addressStatus === "pending"
-              }
-            />
-          </View>
-        </KeyboardView>
-      </SafeAreaView>
-    );
-  }
-}
+        </ScrollView>
+        <View style={[styles.container, styles.containerFlexEnd]}>
+          <Button
+            event="SendRecipientContinue"
+            type="primary"
+            title={<Trans i18nKey="common.continue" />}
+            disabled={
+              bridgePending || recipientError || recipientWarning || bridgeError
+            }
+            pending={bridgePending}
+            onPress={onPressContinue}
+          />
+        </View>
+      </KeyboardView>
+    </SafeAreaView>
+  );
+};
+
+SendSelectRecipient.navigationOptions = {
+  headerTitle: (
+    <StepHeader
+      title={i18next.t("send.stepperHeader.recipientAddress")}
+      subtitle={i18next.t("send.stepperHeader.stepRange", {
+        currentStep: "2",
+        totalSteps: "6",
+      })}
+    />
+  ),
+};
 
 const IconQRCode = ({ size, color }: { size: number, color: string }) => (
   <Icon name="qrcode" size={size} color={color} />
@@ -287,6 +198,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.white,
   },
+  a: {},
   container: {
     paddingHorizontal: 16,
     paddingVertical: 16,
@@ -339,9 +251,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const mapStateToProps = accountAndParentScreenSelector;
-
 export default compose(
   translate(),
-  connect(mapStateToProps),
+  connect(accountAndParentScreenSelector),
 )(SendSelectRecipient);
