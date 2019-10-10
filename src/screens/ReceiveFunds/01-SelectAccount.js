@@ -9,7 +9,10 @@ import type { NavigationScreenProp } from "react-navigation";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { translate, Trans } from "react-i18next";
-import type { Account, TokenAccount } from "@ledgerhq/live-common/lib/types";
+import type {
+  Account,
+  AccountLikeArray,
+} from "@ledgerhq/live-common/lib/types";
 import {
   accountsSelector,
   flattenAccountsSelector,
@@ -31,7 +34,7 @@ type Navigation = NavigationScreenProp<{ params: {} }>;
 
 type Props = {
   accounts: Account[],
-  allAccounts: (Account | TokenAccount)[],
+  allAccounts: AccountLikeArray,
   navigation: Navigation,
 };
 

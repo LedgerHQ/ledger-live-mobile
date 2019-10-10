@@ -2,6 +2,7 @@
 
 import {
   flattenAccounts,
+  getAccountCurrency,
   groupAccountsOperationsByDay,
   isAccountEmpty,
 } from "@ledgerhq/live-common/lib/account";
@@ -256,7 +257,7 @@ const mapStateToProps = (state: State, props: *) => {
     range: selectedTimeRangeSelector(state),
     counterValue: counterValueCurrencySelector(state),
     accounts: flattenAccounts(accountsSelector(state))
-      .filter(a => (a.type === "Account" ? a.currency : a.token) === currency)
+      .filter(a => getAccountCurrency(a) === currency)
       .sort((a, b) => b.balance.comparedTo(a.balance)),
     allAccounts: accountsSelector(state),
     counterValueCurrency: counterValueCurrencySelector(state),

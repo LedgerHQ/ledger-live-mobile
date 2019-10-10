@@ -12,6 +12,7 @@ import type {
   BalanceHistoryWithCountervalue,
   Currency,
   PortfolioRange,
+  AccountLike,
 } from "@ledgerhq/live-common/lib/types";
 import {
   getAccountCurrency,
@@ -38,7 +39,7 @@ const mapDispatchToProps = {
 };
 
 type Props = {
-  account: Account | TokenAccount,
+  account: AccountLike,
   range: PortfolioRange,
   history: BalanceHistoryWithCountervalue,
   valueChange: ValueChange,

@@ -6,6 +6,7 @@ import type {
   Account,
   TokenAccount,
   Operation,
+  AccountLike,
 } from "@ledgerhq/live-common/lib/types";
 import { getOperationAmountNumber } from "@ledgerhq/live-common/lib/operation";
 import {
@@ -47,7 +48,7 @@ const HelpLink = ({ title, event, onPress }: HelpLinkProps) => (
 );
 
 type Props = {
-  account: Account | TokenAccount,
+  account: AccountLike,
   parentAccount: ?Account,
   operation: Operation,
   currencySettings: CurrencySettings,
@@ -190,7 +191,7 @@ class Content extends PureComponent<Props, State> {
               </Touchable>
             </View>
             {subOperations.map((op, i) => {
-              const opAccount = (account.tokenAccounts || []).find(
+              const opAccount = (account.subAccounts || []).find(
                 acc => acc.id === op.accountId,
               );
 
@@ -249,7 +250,7 @@ class Content extends PureComponent<Props, State> {
             <Trans i18nKey="operationDetails.account" />
           </LText>
           <LText style={styles.sectionValue} semiBold>
-            {account.type === "Account" ? account.name : currency.name}
+            {getAccountCurrency(account)}
           </LText>
         </RectButton>
         <View style={styles.section}>

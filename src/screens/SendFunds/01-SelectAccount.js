@@ -9,7 +9,11 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 import i18next from "i18next";
 import { translate, Trans } from "react-i18next";
-import type { TokenAccount, Account } from "@ledgerhq/live-common/lib/types";
+import type {
+  TokenAccount,
+  Account,
+  AccountLikeArray,
+} from "@ledgerhq/live-common/lib/types";
 
 import { isAccountEmpty } from "@ledgerhq/live-common/lib/account";
 import {
@@ -32,7 +36,7 @@ const forceInset = { bottom: "always" };
 
 type Props = {
   accounts: Account[],
-  allAccounts: (Account | TokenAccount)[],
+  allAccounts: AccountLikeArray,
   navigation: NavigationScreenProp<{
     params: {},
   }>,

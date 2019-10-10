@@ -6,6 +6,7 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   Switch,
+  Keyboard,
 } from "react-native";
 import { SafeAreaView } from "react-navigation";
 import { connect } from "react-redux";
@@ -13,7 +14,7 @@ import { compose } from "redux";
 import { translate, Trans } from "react-i18next";
 import i18next from "i18next";
 import type { NavigationScreenProp } from "react-navigation";
-import type { TokenAccount, Account } from "@ledgerhq/live-common/lib/types";
+import type { AccountLike, Account } from "@ledgerhq/live-common/lib/types";
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { accountAndParentScreenSelector } from "../../reducers/accounts";
@@ -32,7 +33,7 @@ import AmountInput from "./AmountInput";
 const forceInset = { bottom: "always" };
 
 type Props = {
-  account: ?(Account | TokenAccount),
+  account: AccountLike,
   parentAccount: ?Account,
   navigation: NavigationScreenProp<{
     params: {
@@ -69,6 +70,8 @@ const SendAmount = ({ account, parentAccount, navigation }: Props) => {
 
   const toggleUseAllAmount = useCallback(() => {
     const bridge = getAccountBridge(account, parentAccount);
+    if (!transaction) return;
+
     setTransaction(
       bridge.updateTransaction(transaction, {
         useAllAmount: !transaction.useAllAmount,
@@ -90,8 +93,11 @@ const SendAmount = ({ account, parentAccount, navigation }: Props) => {
   }, [navigation]);
 
   const onNetworkInfoRetry = useCallback(() => {
+    if (!transaction) return;
     setTransaction(transaction); // ¯\_(ツ)_/¯
   }, [setTransaction, transaction]);
+
+  const blur = useCallback(() => Keyboard.dismis(), []);
 
   if (!account || !transaction) return null;
 
@@ -110,7 +116,7 @@ const SendAmount = ({ account, parentAccount, navigation }: Props) => {
       <TrackScreen category="SendFunds" name="Amount" />
       <SafeAreaView style={styles.root} forceInset={forceInset}>
         <KeyboardView style={styles.container}>
-          <TouchableWithoutFeedback onPress={this.blur}>
+          <TouchableWithoutFeedback onPress={blur}>
             <View style={{ flex: 1 }}>
               <AmountInput
                 editable={!useAllAmount}
@@ -162,7 +168,7 @@ const SendAmount = ({ account, parentAccount, navigation }: Props) => {
                       />
                     }
                     onPress={onContinue}
-                    disabled={amountError || amountWarning || bridgePending}
+                    disabled={!!amountError || !!amountWarning || bridgePending}
                     pending={bridgePending}
                   />
                 </View>

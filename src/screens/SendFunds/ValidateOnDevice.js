@@ -7,6 +7,7 @@ import type {
   Unit,
   TokenAccount,
   Account,
+  AccountLike,
 } from "@ledgerhq/live-common/lib/types";
 import {
   getMainAccount,
@@ -27,7 +28,7 @@ type Props = {
   action: () => void,
   modelId: *,
   transaction: *,
-  account: Account | TokenAccount,
+  account: AccountLike,
   parentAccount: ?Account,
   wired: boolean,
 };

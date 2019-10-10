@@ -7,7 +7,7 @@ import type { NavigationScreenProp } from "react-navigation";
 import { translate } from "react-i18next";
 import i18next from "i18next";
 import { UserRefusedOnDevice } from "@ledgerhq/errors";
-import type { TokenAccount, Account } from "@ledgerhq/live-common/lib/types";
+import type { AccountLike, Account } from "@ledgerhq/live-common/lib/types";
 import { getMainAccount } from "@ledgerhq/live-common/lib/account/helpers";
 import { addPendingOperation } from "@ledgerhq/live-common/lib/account";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
@@ -25,7 +25,7 @@ import logger from "../../logger";
 const forceInset = { bottom: "always" };
 
 type Props = {
-  account: ?(Account | TokenAccount),
+  account: AccountLike,
   parentAccount: ?Account,
   updateAccountWithUpdater: (string, (Account) => Account) => void,
   navigation: NavigationScreenProp<{

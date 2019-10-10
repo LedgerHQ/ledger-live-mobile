@@ -7,6 +7,7 @@ import type {
   TokenAccount,
   Operation,
   OperationType,
+  AccountLike,
 } from "@ledgerhq/live-common/lib/types";
 import { getMainAccount } from "@ledgerhq/live-common/lib/account";
 import ReceiveConfirmedIcon from "../icons/ReceiveConfirmed";
@@ -21,7 +22,7 @@ type Props = {
   size: number,
   confirmed: boolean,
   operation: Operation,
-  account: Account | TokenAccount,
+  account: AccountLike,
   parentAccount: ?Account,
 };
 

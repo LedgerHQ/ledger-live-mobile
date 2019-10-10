@@ -5,10 +5,12 @@ import forEach from "lodash/forEach";
 import type {
   Account,
   TokenAccount,
+  AccountLike,
+  AccountLikeArray,
 } from "@ledgerhq/live-common/lib/types/account";
 
 export type SearchResult = {
-  account: Account | TokenAccount,
+  account: AccountLike,
   match?: boolean,
 };
 
@@ -26,7 +28,7 @@ const flattenStructuredSearchResults = structuredResults =>
   );
 
 export const formatSearchResults = (
-  searchResults: (Account | TokenAccount)[],
+  searchResults: AccountLikeArray,
   accounts: Account[],
 ): SearchResult[] => {
   const formated = reduce(

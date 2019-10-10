@@ -8,7 +8,7 @@ import { connect } from "react-redux";
 import { translate, Trans } from "react-i18next";
 import i18next from "i18next";
 import type { NavigationScreenProp } from "react-navigation";
-import type { Account, TokenAccount } from "@ledgerhq/live-common/lib/types";
+import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
 import { getMainAccount } from "@ledgerhq/live-common/lib/account";
 import { accountAndParentScreenSelector } from "../../reducers/accounts";
 import colors from "../../colors";
@@ -30,7 +30,7 @@ import ConfirmationModal from "../../components/ConfirmationModal";
 const forceInset = { bottom: "always" };
 
 type Props = {
-  account: ?(Account | TokenAccount),
+  account: AccountLike,
   parentAccount: ?Account,
   navigation: NavigationScreenProp<{
     params: {

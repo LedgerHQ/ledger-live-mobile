@@ -1,7 +1,7 @@
 /* @flow */
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
-import type { Account, TokenAccount } from "@ledgerhq/live-common/lib/types";
+import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
 import i18next from "i18next";
 import React, { useCallback, useMemo } from "react";
 import { Trans, translate } from "react-i18next";
@@ -27,7 +27,7 @@ import type { T } from "../../types/common";
 const forceInset = { bottom: "always" };
 
 type Props = {
-  account: ?(Account | TokenAccount),
+  account: AccountLike,
   parentAccount: ?Account,
   navigation: NavigationScreenProp<{
     params: {
@@ -55,7 +55,11 @@ const SendSelectRecipient = ({
     bridgeError,
   } = useBridgeTransaction();
 
-  useMemo(() => setAccount(account, parentAccount), [account, parentAccount]);
+  useMemo(() => setAccount(account, parentAccount), [
+    account,
+    parentAccount,
+    setAccount,
+  ]);
 
   const onRecipientFieldFocus = useCallback(() => {
     track("SendRecipientFieldFocused");
@@ -166,7 +170,10 @@ const SendSelectRecipient = ({
             type="primary"
             title={<Trans i18nKey="common.continue" />}
             disabled={
-              bridgePending || recipientError || recipientWarning || bridgeError
+              bridgePending ||
+              !!recipientError ||
+              !!recipientWarning ||
+              !!bridgeError
             }
             pending={bridgePending}
             onPress={onPressContinue}

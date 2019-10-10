@@ -10,6 +10,7 @@ import type {
   TokenAccount,
   Account,
   Operation,
+  AccountLike,
 } from "@ledgerhq/live-common/lib/types";
 import {
   getDefaultExplorerView,
@@ -27,7 +28,7 @@ import HeaderBackImage from "../../components/HeaderBackImage";
 const forceInset = { bottom: "always" };
 
 type Props = {
-  account: ?(Account | TokenAccount),
+  account: AccountLike,
   parentAccount: ?Account,
   navigation: Navigation,
 };

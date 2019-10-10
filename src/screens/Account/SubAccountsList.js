@@ -5,12 +5,12 @@ import { compose } from "redux";
 import { Trans } from "react-i18next";
 import take from "lodash/take";
 import { FlatList, Platform, StyleSheet, View } from "react-native";
-import type { TokenAccount, Account } from "@ledgerhq/live-common/lib/types";
+import type { Account, SubAccount } from "@ledgerhq/live-common/lib/types";
 import Icon from "react-native-vector-icons/dist/FontAwesome";
 import MaterialIcon from "react-native-vector-icons/dist/MaterialIcons";
 import { withNavigation } from "react-navigation";
 import { listSubAccounts } from "@ledgerhq/live-common/lib/account";
-import TokenRow from "../../components/TokenRow";
+import SubAccountRow from "../../components/SubAccountRow";
 import withEnv from "../../logic/withEnv";
 import colors from "../../colors";
 import LText from "../../components/LText";
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
   },
-  tokenList: {
+  subAccountList: {
     paddingTop: 32,
     paddingLeft: 16,
     paddingRight: 16,
@@ -74,19 +74,19 @@ const Card = ({ children }: { children: any }) => (
   <View style={styles.card}>{children}</View>
 );
 
-const TokenAccountsList = ({
+const SubAccountsList = ({
   parentAccount,
   onAccountPress,
   navigation,
   accountId,
 }: {
   parentAccount: Account,
-  onAccountPress: TokenAccount => *,
+  onAccountPress: SubAccount => *,
   navigation: *,
   accountId: string,
 }) => {
   const [isCollapsed, setCollapsed] = useState(true);
-  const tokenAccounts = listSubAccounts(parentAccount);
+  const subAccounts = listSubAccounts(parentAccount);
 
   const renderHeader = useCallback(
     () => (
@@ -95,10 +95,10 @@ const TokenAccountsList = ({
           fontWeight="500"
           style={{ color: colors.darkBlue, fontSize: 16 }}
         >
-          <Trans i18nKey="common.token" count={tokenAccounts.length} />
-          {` (${tokenAccounts.length})`}
+          <Trans i18nKey="common.token" count={subAccounts.length} />
+          {` (${subAccounts.length})`}
         </LText>
-        {tokenAccounts.length > 0 ? (
+        {subAccounts.length > 0 ? (
           <Button
             containerStyle={{ width: 120 }}
             type="lightSecondary"
@@ -115,15 +115,15 @@ const TokenAccountsList = ({
         ) : null}
       </View>
     ),
-    [tokenAccounts, navigation, accountId],
+    [subAccounts, navigation, accountId],
   );
 
   const renderFooter = useCallback(() => {
-    // If there is no token accounts, we render the touchable rect
-    if (tokenAccounts.length === 0) {
+    // If there are no sub accounts, we render the touchable rect
+    if (subAccounts.length === 0) {
       return (
         <Touchable
-          event="AccountReceiveToken"
+          event="AccountReceiveSubAccount"
           onPress={() =>
             navigation.navigate("ReceiveConnectDevice", { accountId })
           }
@@ -143,8 +143,8 @@ const TokenAccountsList = ({
       );
     }
 
-    // If there is 3 or less token accounts, no need for collapse button
-    if (tokenAccounts.length <= 3) {
+    // If there is 3 or less sub accounts, no need for collapse button
+    if (subAccounts.length <= 3) {
       return null;
     }
 
@@ -175,21 +175,21 @@ const TokenAccountsList = ({
         />
       </Card>
     );
-  }, [isCollapsed, navigation, tokenAccounts, accountId]);
+  }, [isCollapsed, navigation, subAccounts, accountId]);
 
   const renderItem = useCallback(
     ({ item }) => (
       <Card>
-        <TokenRow account={item} onTokenAccountPress={onAccountPress} />
+        <SubAccountRow account={item} onSubAccountPress={onAccountPress} />
       </Card>
     ),
     [onAccountPress],
   );
 
   return (
-    <View style={styles.tokenList}>
+    <View style={styles.subAccountList}>
       <FlatList
-        data={isCollapsed ? take(tokenAccounts, 3) : tokenAccounts}
+        data={isCollapsed ? take(subAccounts, 3) : subAccounts}
         renderItem={renderItem}
         keyExtractor={keyExtractor}
         ListHeaderComponent={renderHeader}
@@ -202,4 +202,4 @@ const TokenAccountsList = ({
 export default compose(
   withNavigation,
   withEnv("HIDE_EMPTY_TOKEN_ACCOUNTS"),
-)(TokenAccountsList);
+)(SubAccountsList);

@@ -1,7 +1,12 @@
 // @flow
+import { getAccountName } from "@ledgerhq/live-common/lib/account";
 import React, { PureComponent } from "react";
 import { View, StyleSheet } from "react-native";
-import type { Account, TokenAccount } from "@ledgerhq/live-common/lib/types";
+import type {
+  Account,
+  AccountLike,
+  TokenAccount,
+} from "@ledgerhq/live-common/lib/types";
 import {
   getAccountCurrency,
   getAccountUnit,
@@ -13,7 +18,7 @@ import LText from "./LText";
 import colors from "../colors";
 
 type Props = {
-  account: Account | TokenAccount,
+  account: AccountLike,
   onPress?: () => void,
   style?: any,
   disabled?: boolean,
@@ -44,7 +49,7 @@ class AccountCard extends PureComponent<Props> {
             ]}
             ellipsizeMode="tail"
           >
-            {account.type === "Account" ? account.name : currency.name}
+            {getAccountName(account)}
           </LText>
         </View>
         <View style={styles.balanceContainer}>

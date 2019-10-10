@@ -121,7 +121,7 @@ class AddAccountsAccounts extends PureComponent<Props, State> {
     this.scanSubscription = bridge
       .scanAccountsOnDevice(currency, deviceId)
       .subscribe({
-        next: account =>
+        next: ({ account }) =>
           this.setState(
             ({ scannedAccounts, selectedIds }, { existingAccounts }) => {
               const hasAlreadyBeenScanned = !!scannedAccounts.find(
