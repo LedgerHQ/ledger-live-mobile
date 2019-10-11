@@ -120,7 +120,13 @@ const Progress = ({
     unsub();
     scanSubscription.current = getCurrencyBridge(currency)
       .scanAccountsOnDevice(currency, deviceMeta.deviceId)
-      .pipe(reduce((all, account) => all.concat(account), []))
+      .pipe(
+        reduce(
+          (all: Account[], event: ScanAccountEvent) =>
+            all.concat(event.account),
+          [],
+        ),
+      )
       .subscribe({
         next: scannedAccounts => {
           setAccounts(

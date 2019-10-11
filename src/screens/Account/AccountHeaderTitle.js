@@ -3,11 +3,7 @@ import React, { Component } from "react";
 import { TouchableWithoutFeedback, View, StyleSheet } from "react-native";
 import { connect } from "react-redux";
 import type { NavigationScreenProp } from "react-navigation";
-import type {
-  Account,
-  AccountLike,
-  TokenAccount,
-} from "@ledgerhq/live-common/lib/types";
+import type { AccountLike } from "@ledgerhq/live-common/lib/types";
 import {
   getAccountCurrency,
   getAccountName,

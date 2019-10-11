@@ -4,7 +4,6 @@ import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import type {
   Account,
-  TokenAccount,
   Operation,
   OperationType,
   AccountLike,

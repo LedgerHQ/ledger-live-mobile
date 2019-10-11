@@ -2,11 +2,7 @@
 import { handleActions } from "redux-actions";
 import { createSelector } from "reselect";
 import uniq from "lodash/uniq";
-import type {
-  Account,
-  AccountLike,
-  TokenAccount,
-} from "@ledgerhq/live-common/lib/types";
+import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
 import {
   addAccounts,
   canBeMigrated,

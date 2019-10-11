@@ -6,8 +6,6 @@ import { connect } from "react-redux";
 import { View, StyleSheet, Platform } from "react-native";
 import { Trans } from "react-i18next";
 import type {
-  TokenAccount,
-  Account,
   Unit,
   BalanceHistoryWithCountervalue,
   Currency,

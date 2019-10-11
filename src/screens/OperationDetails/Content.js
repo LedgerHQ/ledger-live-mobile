@@ -4,7 +4,6 @@ import { View, StyleSheet, Linking } from "react-native";
 import { RectButton } from "react-native-gesture-handler";
 import type {
   Account,
-  TokenAccount,
   Operation,
   AccountLike,
 } from "@ledgerhq/live-common/lib/types";

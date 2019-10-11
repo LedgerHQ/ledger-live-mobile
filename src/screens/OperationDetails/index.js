@@ -7,7 +7,6 @@ import { HeaderBackButton, SafeAreaView, ScrollView } from "react-navigation";
 import { connect } from "react-redux";
 import { translate } from "react-i18next";
 import type {
-  TokenAccount,
   Account,
   Operation,
   AccountLike,

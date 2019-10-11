@@ -6,7 +6,6 @@ import type {
   Account,
   AccountLike,
   CryptoCurrency,
-  TokenAccount,
   TokenCurrency,
 } from "@ledgerhq/live-common/lib/types";
 import { BigNumber } from "bignumber.js";

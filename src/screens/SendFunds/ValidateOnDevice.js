@@ -5,7 +5,6 @@ import { Trans } from "react-i18next";
 import { BigNumber } from "bignumber.js";
 import type {
   Unit,
-  TokenAccount,
   Account,
   AccountLike,
 } from "@ledgerhq/live-common/lib/types";

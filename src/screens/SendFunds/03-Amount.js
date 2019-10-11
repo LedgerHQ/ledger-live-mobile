@@ -109,7 +109,7 @@ const SendAmount = ({ account, parentAccount, navigation }: Props) => {
     warnings: { amount: amountWarning },
   } = status;
 
-  console.log({ transaction, status, bridgePending, bridgeError });
+  // console.log({ transaction, status, bridgePending, bridgeError });
 
   return (
     <>

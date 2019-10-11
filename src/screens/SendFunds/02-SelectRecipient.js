@@ -96,6 +96,7 @@ const SendSelectRecipient = ({
   if (!account || !transaction) return null;
 
   if (navigation.getParam("justScanned")) {
+    // eslint-disable-next-line
     delete navigation.state.params.justScanned;
     setTransaction(navigation.getParam("transaction"));
   }

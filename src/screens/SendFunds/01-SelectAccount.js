@@ -10,7 +10,6 @@ import { compose } from "redux";
 import i18next from "i18next";
 import { translate, Trans } from "react-i18next";
 import type {
-  TokenAccount,
   Account,
   AccountLikeArray,
 } from "@ledgerhq/live-common/lib/types";
