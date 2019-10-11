@@ -135,7 +135,7 @@ class PortfolioScreen extends Component<
     const { allAccounts, accounts } = this.props;
     const account = allAccounts.find(a => a.id === item.accountId);
     const parentAccount =
-      account && account.type === "TokenAccount"
+      account && account.type !== "Account"
         ? accounts.find(a => a.id === account.parentId)
         : null;
 
@@ -181,7 +181,7 @@ class PortfolioScreen extends Component<
 
     const { sections, completed } = groupAccountsOperationsByDay(accounts, {
       count: opCount,
-      withTokenAccounts: true,
+      withSubAccounts: true,
     });
 
     return (
