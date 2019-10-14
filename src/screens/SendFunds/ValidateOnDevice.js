@@ -14,6 +14,7 @@ import {
   getMainAccount,
   getAccountUnit,
 } from "@ledgerhq/live-common/lib/account";
+import type { DeviceModelId } from "@ledgerhq/devices";
 import { getDeviceModel } from "@ledgerhq/devices";
 
 import colors from "../../colors";
@@ -25,7 +26,7 @@ import CurrencyUnitValue from "../../components/CurrencyUnitValue";
 import getWindowDimensions from "../../logic/getWindowDimensions";
 
 type Props = {
-  modelId: *,
+  modelId: DeviceModelId,
   wired: boolean,
   transaction: Transaction,
   account: AccountLike,

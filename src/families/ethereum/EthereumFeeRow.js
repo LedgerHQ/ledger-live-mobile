@@ -108,7 +108,9 @@ const EthereumFeeRow = ({
           <LText style={styles.countervalue}>
             <CounterValue
               before="≈ "
-              value={gasPrice && gasPrice.times(gasLimit || estimatedGasLimit || 0)}
+              value={
+                gasPrice && gasPrice.times(gasLimit || estimatedGasLimit || 0)
+              }
               currency={mainAccount.currency}
             />
           </LText>

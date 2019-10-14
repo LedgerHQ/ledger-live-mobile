@@ -88,7 +88,9 @@ const EditFeeUnitEthereum = ({
     });
   }, [account, gasPrice, navigation, parentAccount, bridge, transaction]);
 
-  const { gasPrice: serverGas } = transaction.networkInfo || {};
+  const { networkInfo } = transaction;
+  if (!networkInfo) return null;
+  const { gasPrice: serverGas } = networkInfo;
 
   return (
     <View style={styles.root}>
