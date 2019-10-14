@@ -95,9 +95,12 @@ const SendSummary = ({ account, parentAccount, navigation }: Props) => {
 
   const {
     amount,
+    totalSpent,
     errors: { transaction: transactionError },
   } = status;
   const mainAccount = getMainAccount(account, parentAccount);
+
+  // console.log({ transaction, status, bridgePending });
 
   return (
     <SafeAreaView style={styles.root} forceInset={forceInset}>
@@ -127,7 +130,7 @@ const SendSummary = ({ account, parentAccount, navigation }: Props) => {
         <SummaryTotalSection
           account={account}
           parentAccount={parentAccount}
-          amount={amount}
+          amount={totalSpent}
         />
       </ScrollView>
       <View style={styles.footer}>

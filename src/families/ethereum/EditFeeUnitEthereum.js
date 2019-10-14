@@ -1,4 +1,5 @@
 // @flow
+import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
 import React, { useMemo, useState, useCallback } from "react";
 import { View, StyleSheet } from "react-native";
 import { translate } from "react-i18next";
@@ -13,9 +14,6 @@ import {
 } from "@ledgerhq/live-common/lib/range";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { getMainAccount } from "@ledgerhq/live-common/lib/account";
-import { BigNumber } from "bignumber.js";
-
-import { editTxFeeByFamily } from "../helpers";
 import type { T } from "../../types/common";
 import colors from "../../colors";
 import LText from "../../components/LText";
@@ -59,49 +57,38 @@ const EditFeeUnitEthereum = ({
   t,
   navigation,
 }: Props) => {
+  const { setAccount, setTransaction } = useBridgeTransaction();
+
+  useMemo(() => {
+    setAccount(account, parentAccount);
+    setTransaction(transaction);
+  }, [setAccount, setTransaction, account, parentAccount, transaction]);
+
   const mainAccount = getMainAccount(account, parentAccount);
   const bridge = getAccountBridge(account, parentAccount);
 
-  const [gasPrice, setGasPrice] = useState(() =>
-    bridge.getTransactionExtra(mainAccount, transaction, "gasPrice"),
-  );
-  const feeCustomUnit = bridge.getTransactionExtra(
-    mainAccount,
-    transaction,
-    "feeCustomUnit",
-  );
+  const [gasPrice, setGasPrice] = useState(() => transaction.gasPrice);
+  const feeCustomUnit = transaction.feeCustomUnit;
 
   const onChangeF = useCallback(
     value => {
-      const { gasPrice: gp } = bridge.editTransactionExtra(
-        mainAccount,
-        transaction,
-        "gasPrice",
-        value,
-      );
-      setGasPrice(gp);
+      const { gasPrice } = bridge.updateTransaction(transaction, {
+        gasPrice: value,
+      });
+      setGasPrice(gasPrice);
     },
-    [bridge, mainAccount, transaction],
+    [bridge, transaction],
   );
 
   const onValidateFees = useCallback(() => {
     navigation.navigate("SendSummary", {
       accountId: account.id,
       parentId: parentAccount && parentAccount.id,
-      transaction: editTxFeeByFamily(
-        mainAccount,
-        navigation,
-        "gasPrice",
-        gasPrice,
-      ),
+      transaction: bridge.updateTransaction(transaction, { gasPrice }),
     });
-  }, [account, gasPrice, navigation, mainAccount, parentAccount]);
+  }, [account, gasPrice, navigation, parentAccount, bridge, transaction]);
 
-  const fees = bridge.getTransactionNetworkInfo(mainAccount, transaction);
-
-  if (!fees) return null;
-
-  const serverGas = BigNumber(fees.serverFees.gas_price);
+  const { gasPrice: serverGas } = transaction.networkInfo || {};
 
   return (
     <View style={styles.root}>

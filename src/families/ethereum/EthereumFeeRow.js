@@ -4,7 +4,6 @@ import { View, StyleSheet, Linking } from "react-native";
 import { Trans, translate } from "react-i18next";
 import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
 import type { Transaction } from "@ledgerhq/live-common/lib/families/ethereum/types";
-import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { getMainAccount } from "@ledgerhq/live-common/lib/account";
 import SummaryRow from "../../screens/SendFunds/SummaryRow";
 import LText from "../../components/LText";
@@ -56,22 +55,12 @@ const EthereumFeeRow = ({
   }, [navigation, account, parentAccount, transaction]);
 
   const mainAccount = getMainAccount(account, parentAccount);
-  const bridge = getAccountBridge(account, parentAccount);
-  const gasPrice = bridge.getTransactionExtra(
-    mainAccount,
-    transaction,
-    "gasPrice",
-  );
-  const gasLimit = bridge.getTransactionExtra(
-    mainAccount,
-    transaction,
-    "gasLimit",
-  );
-  const feeCustomUnit = bridge.getTransactionExtra(
-    mainAccount,
-    transaction,
-    "feeCustomUnit",
-  );
+  const {
+    gasPrice,
+    userGasLimit: gasLimit,
+    estimatedGasLimit,
+    feeCustomUnit,
+  } = transaction;
 
   const InfoIcon = account.type === "TokenAccount" ? Info : ExternalLink;
   return (
@@ -119,7 +108,7 @@ const EthereumFeeRow = ({
           <LText style={styles.countervalue}>
             <CounterValue
               before="≈ "
-              value={gasPrice.times(gasLimit)}
+              value={gasPrice && gasPrice.times(gasLimit || estimatedGasLimit || 0)}
               currency={mainAccount.currency}
             />
           </LText>

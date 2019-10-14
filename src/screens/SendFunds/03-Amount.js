@@ -97,7 +97,7 @@ const SendAmount = ({ account, parentAccount, navigation }: Props) => {
     setTransaction(transaction); // ¯\_(ツ)_/¯
   }, [setTransaction, transaction]);
 
-  const blur = useCallback(() => Keyboard.dismis(), []);
+  const blur = useCallback(() => Keyboard.dismiss(), []);
 
   if (!account || !transaction) return null;
 
@@ -168,7 +168,12 @@ const SendAmount = ({ account, parentAccount, navigation }: Props) => {
                       />
                     }
                     onPress={onContinue}
-                    disabled={!!amountError || !!amountWarning || bridgePending}
+                    disabled={
+                      !!amountError ||
+                      !!amountWarning ||
+                      bridgePending ||
+                      amount.isZero()
+                    }
                     pending={bridgePending}
                   />
                 </View>
