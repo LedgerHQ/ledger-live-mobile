@@ -12,6 +12,7 @@ import {
   getMainAccount,
   getAccountCurrency,
   getAccountUnit,
+  getAccountName,
 } from "@ledgerhq/live-common/lib/account";
 import uniq from "lodash/uniq";
 import { connect } from "react-redux";
@@ -249,7 +250,7 @@ class Content extends PureComponent<Props, State> {
             <Trans i18nKey="operationDetails.account" />
           </LText>
           <LText style={styles.sectionValue} semiBold>
-            {getAccountCurrency(account)}
+            {getAccountName(account)}
           </LText>
         </RectButton>
         <View style={styles.section}>

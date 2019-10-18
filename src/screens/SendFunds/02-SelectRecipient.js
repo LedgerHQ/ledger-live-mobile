@@ -1,9 +1,10 @@
 /* @flow */
+import { RecipientRequired } from "@ledgerhq/errors";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
 import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
 import i18next from "i18next";
-import React, { useCallback, useMemo } from "react";
+import React, { useCallback, useRef, useEffect } from "react";
 import { Trans, translate } from "react-i18next";
 import { Platform, ScrollView, StyleSheet, View } from "react-native";
 import Icon from "react-native-vector-icons/dist/FontAwesome";
@@ -23,6 +24,9 @@ import TextInput from "../../components/TextInput";
 import TranslatedError from "../../components/TranslatedError";
 import { accountAndParentScreenSelector } from "../../reducers/accounts";
 import type { T } from "../../types/common";
+
+const withoutHiddenError = error =>
+  error instanceof RecipientRequired ? null : error;
 
 const forceInset = { bottom: "always" };
 
@@ -48,18 +52,23 @@ const SendSelectRecipient = ({
 }: Props) => {
   const {
     transaction,
-    setAccount,
     setTransaction,
     status,
     bridgePending,
     bridgeError,
-  } = useBridgeTransaction();
+  } = useBridgeTransaction(() => ({ account, parentAccount }));
 
-  useMemo(() => setAccount(account, parentAccount), [
-    account,
-    parentAccount,
-    setAccount,
-  ]);
+  // handle changes from camera qr code
+  const initialTransaction = useRef(transaction);
+  const navigationTransaction = navigation.getParam("transaction");
+  useEffect(() => {
+    if (
+      initialTransaction.current !== navigationTransaction &&
+      navigationTransaction
+    ) {
+      setTransaction(navigationTransaction);
+    }
+  }, [setTransaction, navigationTransaction]);
 
   const onRecipientFieldFocus = useCallback(() => {
     track("SendRecipientFieldFocused");
@@ -79,7 +88,7 @@ const SendSelectRecipient = ({
     },
     [account, parentAccount, setTransaction, transaction],
   );
-  const clear = () => onChangeText("");
+  const clear = useCallback(() => onChangeText(""), [onChangeText]);
 
   const onPressContinue = useCallback(async () => {
     if (!account) return;
@@ -95,16 +104,8 @@ const SendSelectRecipient = ({
 
   if (!account || !transaction) return null;
 
-  if (navigation.getParam("justScanned")) {
-    // eslint-disable-next-line
-    delete navigation.state.params.justScanned;
-    setTransaction(navigation.getParam("transaction"));
-  }
-
-  const {
-    errors: { recipient: recipientError },
-    warnings: { recipient: recipientWarning },
-  } = status;
+  const error = bridgeError || withoutHiddenError(status.errors.recipient);
+  const warning = status.warnings.recipient;
 
   return (
     <SafeAreaView style={styles.root} forceInset={forceInset}>
@@ -137,8 +138,8 @@ const SendSelectRecipient = ({
               placeholderTextColor={colors.fog}
               style={[
                 styles.addressInput,
-                recipientError && styles.invalidAddressInput,
-                recipientWarning && styles.warning,
+                error && styles.invalidAddressInput,
+                warning && styles.warning,
               ]}
               onFocus={onRecipientFieldFocus}
               onChangeText={onChangeText}
@@ -151,31 +152,20 @@ const SendSelectRecipient = ({
               clearButtonMode="always"
             />
           </View>
-          {!!transaction.recipient &&
-            (recipientError || recipientWarning || bridgeError) && (
-              <LText
-                style={[
-                  styles.warningBox,
-                  recipientError || bridgeError ? styles.error : styles.warning,
-                ]}
-              >
-                <TranslatedError
-                  error={recipientError || recipientWarning || bridgeError}
-                />
-              </LText>
-            )}
+          {(error || warning) && (
+            <LText
+              style={[styles.warningBox, error ? styles.error : styles.warning]}
+            >
+              <TranslatedError error={error || warning} />
+            </LText>
+          )}
         </ScrollView>
         <View style={[styles.container, styles.containerFlexEnd]}>
           <Button
             event="SendRecipientContinue"
             type="primary"
             title={<Trans i18nKey="common.continue" />}
-            disabled={
-              bridgePending ||
-              !!recipientError ||
-              !!recipientWarning ||
-              !!bridgeError
-            }
+            disabled={bridgePending || !!error}
             pending={bridgePending}
             onPress={onPressContinue}
           />

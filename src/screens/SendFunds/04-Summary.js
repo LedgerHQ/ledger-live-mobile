@@ -1,6 +1,12 @@
 /* @flow */
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
-import React, { useState, useCallback, Component, useMemo } from "react";
+import React, {
+  useState,
+  useRef,
+  useCallback,
+  Component,
+  useEffect,
+} from "react";
 import { View, StyleSheet } from "react-native";
 // $FlowFixMe
 import { SafeAreaView, ScrollView } from "react-navigation";
@@ -43,18 +49,25 @@ type Props = {
 const SendSummary = ({ account, parentAccount, navigation }: Props) => {
   const {
     transaction,
-    setAccount,
     setTransaction,
     status,
     bridgePending,
-  } = useBridgeTransaction();
+  } = useBridgeTransaction(() => ({
+    transaction: navigation.getParam("transaction"),
+    account,
+    parentAccount,
+  }));
+
+  // handle any edit screen changes like fees changes
+  const initialTransaction = useRef(transaction);
+  const navigationTransaction = navigation.getParam("transaction");
+  useEffect(() => {
+    if (initialTransaction.current !== navigationTransaction) {
+      setTransaction(navigationTransaction);
+    }
+  }, [setTransaction, navigationTransaction]);
 
   const [highFeesOpen, setHighFeesOpen] = useState(false);
-
-  useMemo(() => {
-    setAccount(account, parentAccount);
-    setTransaction(navigation.getParam("transaction"));
-  }, [setAccount, setTransaction, account, parentAccount, navigation]);
 
   const onAcceptFees = useCallback(async () => {
     navigation.navigate("SendConnectDevice", {

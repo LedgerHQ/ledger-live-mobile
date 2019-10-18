@@ -1,6 +1,6 @@
 /* @flow */
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
-import React, { useCallback, useMemo } from "react";
+import React, { useCallback } from "react";
 import {
   View,
   StyleSheet,
@@ -46,17 +46,15 @@ type Props = {
 const SendAmount = ({ account, parentAccount, navigation }: Props) => {
   const {
     transaction,
-    setAccount,
     setTransaction,
     status,
     bridgePending,
     bridgeError,
-  } = useBridgeTransaction();
-
-  useMemo(() => {
-    setAccount(account, parentAccount);
-    setTransaction(navigation.getParam("transaction"));
-  }, [setAccount, setTransaction, account, parentAccount, navigation]);
+  } = useBridgeTransaction(() => ({
+    transaction: navigation.getParam("transaction"),
+    account,
+    parentAccount,
+  }));
 
   const onChange = useCallback(
     amount => {
