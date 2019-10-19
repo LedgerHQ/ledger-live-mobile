@@ -806,42 +806,10 @@
     "@ledgerhq/errors" "^4.72.2"
     events "^3.0.0"
 
-"@ledgerhq/live-common@^8.0.0-alpha.11":
-  version "8.0.0-alpha.11"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-8.0.0-alpha.11.tgz#fbfa3a3cedfeb1714276c680c0e4cbc90f3120a4"
-  integrity sha512-3fK/+SegmTpmZCTWtXWzxhxv8GJLcH6XIcuqwp8sEljUeVxR0D6wQKmNC8ArcNLJ4+Z7tFmXHacIL0zftUMKBQ==
-  dependencies:
-    "@ledgerhq/compressjs" "1.3.2"
-    "@ledgerhq/errors" "4.72.2"
-    "@ledgerhq/hw-app-btc" "4.72.2"
-    "@ledgerhq/hw-app-eth" "4.72.2"
-    "@ledgerhq/hw-app-xrp" "4.72.2"
-    "@ledgerhq/hw-transport" "4.72.2"
-    "@ledgerhq/hw-transport-mocker" "4.72.2"
-    "@ledgerhq/logs" "4.72.0"
-    bignumber.js "^9.0.0"
-    bip32-path "^0.4.2"
-    blake2b "^2.1.3"
-    bs58check "^2.1.2"
-    crypto-js "^3.1.9-1"
-    eip55 "^1.0.3"
-    ethereumjs-tx "^1.3.7"
-    invariant "^2.2.2"
-    lodash "^4.17.15"
-    lru-cache "5.1.1"
-    numeral "^2.0.6"
-    prando "^5.1.1"
-    react "16.10.2"
-    react-redux "5"
-    redux "^4.0.4"
-    reselect "^4.0.0"
-    ripple-binary-codec "^0.2.0"
-    ripple-bs58check "^2.0.2"
-    ripple-hashes "^0.3.1"
-    ripple-lib "1.1.2"
-    rxjs "^6.5.3"
-    rxjs-compat "^6.5.3"
-    sha.js "^2.4.11"
+"@ledgerhq/live-common@^8.0.0-alpha.12":
+  version "8.0.0-alpha.12"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-8.0.0-alpha.12.tgz#db5c0f6c7f0ed147109d4e92e47313205fbb3844"
+  integrity sha512-gAdlYuvv9A7F+ov8ekd0vN+CwvVPYTOk/zOGU9SvN1YcJGffdJnbwxAU2eRJZeDLFpB5iCbkVGcaZJF/rNXuPA==
 
 "@ledgerhq/logs@4.72.0", "@ledgerhq/logs@^4.70.0", "@ledgerhq/logs@^4.72.0":
   version "4.72.0"
