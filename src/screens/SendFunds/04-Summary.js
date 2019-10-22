@@ -14,7 +14,11 @@ import { connect } from "react-redux";
 import { translate, Trans } from "react-i18next";
 import i18next from "i18next";
 import type { NavigationScreenProp } from "react-navigation";
-import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
+import type {
+  Account,
+  AccountLike,
+  Transaction,
+} from "@ledgerhq/live-common/lib/types";
 import { getMainAccount } from "@ledgerhq/live-common/lib/account";
 import { accountAndParentScreenSelector } from "../../reducers/accounts";
 import colors from "../../colors";
@@ -41,7 +45,7 @@ type Props = {
   navigation: NavigationScreenProp<{
     params: {
       accountId: string,
-      transaction: *,
+      transaction: Transaction,
     },
   }>,
 };
@@ -94,6 +98,7 @@ const SendSummary = ({ account, parentAccount, navigation }: Props) => {
       accountId: account.id,
       parentId: parentAccount && parentAccount.id,
       transaction,
+      status,
     });
   }, [
     setHighFeesOpen,

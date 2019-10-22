@@ -14,7 +14,11 @@ import { compose } from "redux";
 import { translate, Trans } from "react-i18next";
 import i18next from "i18next";
 import type { NavigationScreenProp } from "react-navigation";
-import type { AccountLike, Account } from "@ledgerhq/live-common/lib/types";
+import type {
+  AccountLike,
+  Account,
+  Transaction,
+} from "@ledgerhq/live-common/lib/types";
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { accountAndParentScreenSelector } from "../../reducers/accounts";
@@ -38,7 +42,7 @@ type Props = {
   navigation: NavigationScreenProp<{
     params: {
       accountId: string,
-      transaction: *,
+      transaction: Transaction,
     },
   }>,
 };

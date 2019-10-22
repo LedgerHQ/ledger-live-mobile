@@ -1,6 +1,5 @@
 // @flow
-import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
-import React, { PureComponent, useMemo } from "react";
+import React, { PureComponent } from "react";
 import { View, StyleSheet } from "react-native";
 import { Trans } from "react-i18next";
 import { BigNumber } from "bignumber.js";
@@ -8,7 +7,7 @@ import type {
   Unit,
   Account,
   AccountLike,
-  Transaction,
+  TransactionStatus,
 } from "@ledgerhq/live-common/lib/types";
 import {
   getMainAccount,
@@ -28,7 +27,7 @@ import getWindowDimensions from "../../logic/getWindowDimensions";
 type Props = {
   modelId: DeviceModelId,
   wired: boolean,
-  transaction: Transaction,
+  status: TransactionStatus,
   account: AccountLike,
   parentAccount: ?Account,
 };
@@ -57,17 +56,10 @@ class DataRow extends PureComponent<{
 const ValidateOnDevice = ({
   modelId,
   wired,
-  transaction,
   account,
   parentAccount,
+  status,
 }: Props) => {
-  const { setAccount, setTransaction, status } = useBridgeTransaction();
-
-  useMemo(() => {
-    setAccount(account, parentAccount);
-    setTransaction(transaction);
-  }, [setAccount, setTransaction, account, parentAccount, transaction]);
-
   const { amount, estimatedFees } = status;
   const mainAccount = getMainAccount(account, parentAccount);
   const mainAccountUnit = getAccountUnit(mainAccount);

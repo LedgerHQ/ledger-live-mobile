@@ -2,7 +2,11 @@
 import { RecipientRequired } from "@ledgerhq/errors";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
-import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
+import type {
+  Account,
+  AccountLike,
+  Transaction,
+} from "@ledgerhq/live-common/lib/types";
 import i18next from "i18next";
 import React, { useCallback, useRef, useEffect } from "react";
 import { Trans, translate } from "react-i18next";
@@ -37,7 +41,7 @@ type Props = {
     params: {
       accountId: string,
       parentId: string,
-      transaction: *,
+      transaction: Transaction,
       justScanned?: boolean,
     },
   }>,

@@ -66,7 +66,7 @@ class EthereumEditGasLimit extends PureComponent<Props, State> {
       accountId: account.id,
       parentId: parentAccount && parentAccount.id,
       transaction: bridge.updateTransaction(transaction, {
-        gasLimit: BigNumber(gasLimit),
+        userGasLimit: BigNumber(gasLimit),
       }),
     });
   };
