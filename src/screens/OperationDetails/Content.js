@@ -93,7 +93,8 @@ class Content extends PureComponent<Props, State> {
     const currency = getAccountCurrency(account);
     const parentCurrency = getAccountCurrency(mainAccount);
     const amount = getOperationAmountNumber(operation);
-    const valueColor = amount.isNegative() ? colors.smoke : colors.green;
+    const isNegative = amount.isNegative();
+    const valueColor = isNegative ? colors.smoke : colors.green;
     const confirmations = operation.blockHeight
       ? mainAccount.blockHeight - operation.blockHeight
       : 0;
@@ -267,7 +268,7 @@ class Content extends PureComponent<Props, State> {
             })}
           </LText>
         </View>
-        {operation.type === "OUT" ? (
+        {isNegative ? (
           <View style={styles.section}>
             <LText style={styles.sectionTitle}>
               <Trans i18nKey="operationDetails.fees" />

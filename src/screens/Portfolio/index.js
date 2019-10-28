@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { View, StyleSheet, Animated } from "react-native";
 import type { SectionBase } from "react-native/Libraries/Lists/SectionList";
 import type {
-  TokenAccount,
+  AccountLikeArray,
   Account,
   Operation,
   Portfolio,
@@ -73,7 +73,7 @@ class PortfolioScreen extends Component<
   {
     acceptTradingWarning: () => void,
     accounts: Account[],
-    allAccounts: (Account | TokenAccount)[],
+    allAccounts: AccountLikeArray,
     portfolio: Portfolio,
     navigation: *,
     hasCompletedOnboarding: boolean,

@@ -28,6 +28,8 @@ class EmptyStateAccount extends PureComponent<{
     const { account, parentAccount } = this.props;
     const mainAccount = getMainAccount(account, parentAccount);
     const hasSubAccounts = Array.isArray(mainAccount.subAccounts);
+    const isToken =
+      listTokenTypesForCryptoCurrency(mainAccount.currency).length > 0;
 
     return (
       <View style={styles.root}>
@@ -37,8 +39,8 @@ class EmptyStateAccount extends PureComponent<{
             <Trans i18nKey="account.emptyState.title" />
           </LText>
           <LText style={styles.desc}>
-            {hasSubAccounts ? (
-              <Trans i18nKey="common:account.emptyState.descToken">
+            {hasSubAccounts && isToken ? (
+              <Trans i18nKey="account.emptyState.descToken">
                 {"Make sure the"}
                 <LText semiBold style={styles.managerAppName}>
                   {mainAccount.currency.managerAppName}
@@ -51,15 +53,14 @@ class EmptyStateAccount extends PureComponent<{
                 <LText semiBold style={styles.managerAppName}>
                   {account &&
                     account.currency &&
-                    // $FlowFixMe
-                    listTokenTypesForCryptoCurrency(account.currency).join(
+                    listTokenTypesForCryptoCurrency(mainAccount.currency).join(
                       ", ",
                     )}
                   {"tokens"}
                 </LText>
               </Trans>
             ) : (
-              <Trans i18nKey="common:account.emptyState.desc">
+              <Trans i18nKey="account.emptyState.desc">
                 {"Make sure the"}
                 <LText semiBold style={styles.managerAppName}>
                   {mainAccount.currency.managerAppName}

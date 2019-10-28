@@ -28,6 +28,9 @@ type Props = {
 const icons = {
   OUT: [SendUnconfirmedIcon, SendConfirmedIcon, SendFailed],
   IN: [ReceiveUnconfirmedIcon, ReceiveConfirmedIcon],
+  CREATE: [SendUnconfirmedIcon, SendConfirmedIcon, SendFailed],
+  DELEGATE: [SendUnconfirmedIcon, SendConfirmedIcon, SendFailed],
+  REVEAL: [SendUnconfirmedIcon, SendConfirmedIcon, SendFailed],
   NONE: [],
 };
 

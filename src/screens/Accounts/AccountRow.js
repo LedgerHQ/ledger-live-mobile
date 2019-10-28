@@ -7,6 +7,7 @@ import { compose } from "redux";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { listSubAccounts } from "@ledgerhq/live-common/lib/account";
+import { listTokenTypesForCryptoCurrency } from "@ledgerhq/live-common/src/currencies";
 import type { Account, SubAccount } from "@ledgerhq/live-common/lib/types";
 import Icon from "react-native-vector-icons/dist/FontAwesome";
 import LText from "../../components/LText";
@@ -74,6 +75,9 @@ class AccountRow extends PureComponent<Props, State> {
   render() {
     const { account, isUpToDateAccount, syncState } = this.props;
     const subAccounts = listSubAccounts(account);
+
+    const isToken =
+      listTokenTypesForCryptoCurrency(account.currency).length > 0;
 
     return (
       <View style={styles.root}>
@@ -154,8 +158,12 @@ class AccountRow extends PureComponent<Props, State> {
                     <Trans
                       i18nKey={
                         this.state.collapsed
-                          ? "accounts.row.showTokens"
-                          : "accounts.row.hideTokens"
+                          ? `accounts.row.${
+                              isToken ? "showTokens" : "showSubAccounts"
+                            }`
+                          : `accounts.row.${
+                              isToken ? "hideTokens" : "hideSubAccounts"
+                            }`
                       }
                       values={{
                         length: subAccounts.length,

@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, useMemo } from "react";
 import { compose } from "redux";
 import { Trans } from "react-i18next";
 import take from "lodash/take";
@@ -10,6 +10,7 @@ import Icon from "react-native-vector-icons/dist/FontAwesome";
 import MaterialIcon from "react-native-vector-icons/dist/MaterialIcons";
 import { withNavigation } from "react-navigation";
 import { listSubAccounts } from "@ledgerhq/live-common/lib/account";
+import { listTokenTypesForCryptoCurrency } from "@ledgerhq/live-common/lib/currencies";
 import SubAccountRow from "../../components/SubAccountRow";
 import withEnv from "../../logic/withEnv";
 import colors from "../../colors";
@@ -88,6 +89,11 @@ const SubAccountsList = ({
   const [isCollapsed, setCollapsed] = useState(true);
   const subAccounts = listSubAccounts(parentAccount);
 
+  const isToken = useMemo(
+    () => listTokenTypesForCryptoCurrency(parentAccount.currency).length > 0,
+    [parentAccount],
+  );
+
   const renderHeader = useCallback(
     () => (
       <View style={styles.header}>
@@ -95,10 +101,13 @@ const SubAccountsList = ({
           fontWeight="500"
           style={{ color: colors.darkBlue, fontSize: 16 }}
         >
-          <Trans i18nKey="common.token" count={subAccounts.length} />
+          <Trans
+            i18nKey={isToken ? "common.token" : "common.subaccount"}
+            count={subAccounts.length}
+          />
           {` (${subAccounts.length})`}
         </LText>
-        {subAccounts.length > 0 ? (
+        {isToken && subAccounts.length > 0 ? (
           <Button
             containerStyle={{ width: 120 }}
             type="lightSecondary"
@@ -115,7 +124,7 @@ const SubAccountsList = ({
         ) : null}
       </View>
     ),
-    [subAccounts, navigation, accountId],
+    [isToken, subAccounts, navigation, accountId],
   );
 
   const renderFooter = useCallback(() => {
@@ -158,8 +167,8 @@ const SubAccountsList = ({
             <Trans
               i18nKey={
                 isCollapsed
-                  ? "account.tokens.seeMore"
-                  : "account.tokens.seeLess"
+                  ? `account.${isToken ? "tokens" : "subaccounts"}.seeMore`
+                  : `account.${isToken ? "tokens" : "subaccounts"}.seeLess`
               }
             />
           }
@@ -175,7 +184,7 @@ const SubAccountsList = ({
         />
       </Card>
     );
-  }, [isCollapsed, navigation, subAccounts, accountId]);
+  }, [subAccounts.length, isToken, isCollapsed, navigation, accountId]);
 
   const renderItem = useCallback(
     ({ item }) => (
@@ -185,6 +194,14 @@ const SubAccountsList = ({
     ),
     [onAccountPress],
   );
+
+  if (
+    !isToken &&
+    subAccounts.length === 0 &&
+    parentAccount.currency.family === "tezos" // Scoped for Tezos now, might need to change with future coins integration
+  ) {
+    return null;
+  }
 
   return (
     <View style={styles.subAccountList}>

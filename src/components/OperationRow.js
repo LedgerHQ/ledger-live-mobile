@@ -78,12 +78,8 @@ class OperationRow extends PureComponent<Props, *> {
     const currency = getAccountCurrency(account);
     const unit = getAccountUnit(account);
 
-    const text =
-      operation.type === "IN" ? (
-        <Trans i18nKey="common.received" />
-      ) : (
-        <Trans i18nKey="common.sent" />
-      );
+    const text = <Trans i18nKey={`operations.types.${operation.type}`} />;
+
     const isOptimistic = operation.blockHeight === null;
     const spinner = (
       <View
