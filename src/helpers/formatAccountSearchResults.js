@@ -4,7 +4,6 @@ import reduce from "lodash/reduce";
 import forEach from "lodash/forEach";
 import type {
   Account,
-  TokenAccount,
   AccountLike,
   AccountLikeArray,
 } from "@ledgerhq/live-common/lib/types/account";
@@ -33,7 +32,7 @@ export const formatSearchResults = (
 ): SearchResult[] => {
   const formated = reduce(
     searchResults,
-    (acc, account: TokenAccount | Account) => {
+    (acc, account: AccountLike) => {
       if (account.type === "Account") {
         if (!acc[account.id]) {
           acc[account.id] = {

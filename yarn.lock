@@ -814,9 +814,9 @@
     events "^3.0.0"
 
 "@ledgerhq/live-common@8":
-  version "8.4.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-8.4.0.tgz#efb81315f306aeaefdb6e89fdba493336a72c612"
-  integrity sha512-LzHJW6RVrcjK0fr3TLRspi7qeJMR+BWdl6crDGO/qr3s6NJ8+rdY5+5a6QVNDDJfPujplLCxWGFXVQzQ+W2Vkw==
+  version "8.4.1"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-8.4.1.tgz#e60726692e6e669e3ec5eca594bffe42659ed651"
+  integrity sha512-geJdm/lF2qAS+0UAIpq0TphzItXVUsL4/GJZkcz/3wc1JKcUgTPn1+xLpy1URVZPPuWq4nHcST9PQYF4ZYjGRg==
   dependencies:
     "@ledgerhq/compressjs" "1.3.2"
     "@ledgerhq/devices" "4"
@@ -881,9 +881,9 @@
     uuid "^3.3.3"
 
 "@ledgerhq/react-native-ledger-core@^3.3.4":
-  version "3.5.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/react-native-ledger-core/-/react-native-ledger-core-3.5.0.tgz#9718990d5e423d049e25e36f135919a459d6d746"
-  integrity sha512-9Slc+h/Kh5s1qo4OjKusufXq7aqS7WuC4GvE8G+SdBQp3G6fxKdYT72t+pNkfKBEGkCADgKOssJn79J55TvsYw==
+  version "3.5.3"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/react-native-ledger-core/-/react-native-ledger-core-3.5.3.tgz#89731b184671c72d20feaac764e642d9cb45699a"
+  integrity sha512-RyBGN0S9CWybVzJETWhCyQAExot7nKkVNW7f+7aYYiW0XBN3g9yGGiILeCTLu7+KpK9XxJoLCW2zsQRr/9a/pQ==
 
 "@ledgerhq/react-native-passcode-auth@^2.0.0":
   version "2.0.0"
@@ -7711,9 +7711,9 @@ regenerator-runtime@^0.12.0:
   integrity sha512-odxIc1/vDlo4iZcfXqRYFj0vpXFNoGdKMAUieAlFYO6m/nl5e9KR/beGf41z4a1FI+aQgtjhuaSlDxQ0hmkrHg==
 
 regenerator-runtime@^0.13.2:
-  version "0.13.2"
-  resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.13.2.tgz#32e59c9a6fb9b1a4aff09b4930ca2d4477343447"
-  integrity sha512-S/TQAZJO+D3m9xeN1WTI8dLKBBiRgXBlTJvbWjCThHWZj9EvHK70Ff50/tYj2J/fvBY6JtFVwRuazHN2E7M9BA==
+  version "0.13.3"
+  resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.13.3.tgz#7cf6a77d8f5c6f60eb73c5fc1955b2ceb01e6bf5"
+  integrity sha512-naKIZz2GQ8JWh///G7L3X6LaQUAMp2lvb1rvwwsURe/VXwD6VMfr+/1NuNw3ag8v2kY1aQ/go5SNn79O9JU7yw==
 
 regenerator-transform@^0.13.3:
   version "0.13.3"
