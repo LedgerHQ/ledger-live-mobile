@@ -619,8 +619,8 @@
       "howTo": "To add token accounts, you need to <0>receive funds</0> through your <1>Ethereum address</1>."
     },
     "subaccounts": {
-      "seeMore": "See more Subaccounts",
-      "seeLess": "See less Subaccounts"
+      "seeMore": "See more subaccounts",
+      "seeLess": "See less subaccounts"
     },
     "send": "Send",
     "receive": "Receive",
