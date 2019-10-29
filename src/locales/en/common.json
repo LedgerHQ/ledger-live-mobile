@@ -289,8 +289,12 @@
       "description": "Please restart your device or contact us"
     },
     "UnavailableTezosOriginatedAccountReceive": {
-      "title": "Cannot receive funds on originated account",
+      "title": "Cannot receive on subaccounts, please select the parent account.",
       "description": "If you want to receive funds, please use the parent account"
+    },
+    "UnavailableTezosOriginatedAccountSend": {
+      "title": "Cannot send from subaccounts yet",
+      "description": "This feature will be added at a later stage due to changes recently introduced by the Babylon amendment."
     },
     "generic": {
       "title": "{{message}}",
