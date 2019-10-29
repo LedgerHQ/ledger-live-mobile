@@ -89,15 +89,16 @@ const SendAmount = ({ account, parentAccount, navigation }: Props) => {
     });
   }, [account, parentAccount, navigation, transaction]);
 
-  const onNetworkInfoCancel = useCallback(() => {
+  const onBridgeErrorCancel = useCallback(() => {
     const parent = navigation.dangerouslyGetParent();
     if (parent) parent.goBack();
   }, [navigation]);
 
-  const onNetworkInfoRetry = useCallback(() => {
+  const onBridgeErrorRetry = useCallback(() => {
     if (!transaction) return;
-    setTransaction(transaction); // ¯\_(ツ)_/¯
-  }, [setTransaction, transaction]);
+    const bridge = getAccountBridge(account, parentAccount);
+    setTransaction(bridge.updateTransaction(transaction, {}));
+  }, [setTransaction, account, parentAccount, transaction]);
 
   const blur = useCallback(() => Keyboard.dismiss(), []);
 
@@ -187,16 +188,16 @@ const SendAmount = ({ account, parentAccount, navigation }: Props) => {
 
       <GenericErrorBottomModal
         error={bridgeError}
-        onClose={onNetworkInfoRetry}
+        onClose={onBridgeErrorRetry}
         footerButtons={
           <>
             <CancelButton
               containerStyle={styles.button}
-              onPress={onNetworkInfoCancel}
+              onPress={onBridgeErrorCancel}
             />
             <RetryButton
               containerStyle={[styles.button, styles.buttonRight]}
-              onPress={onNetworkInfoRetry}
+              onPress={onBridgeErrorRetry}
             />
           </>
         }

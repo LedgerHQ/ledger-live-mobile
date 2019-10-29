@@ -34,7 +34,15 @@ export const formatSearchResults = (
   const formated = reduce(
     searchResults,
     (acc, account: TokenAccount | Account) => {
-      if (account.type === "TokenAccount") {
+      if (account.type === "Account") {
+        if (!acc[account.id]) {
+          acc[account.id] = {
+            account,
+            tokenAccounts: [],
+          };
+        }
+        acc[account.id].match = true;
+      } else {
         const parentId = account.parentId;
         const parentAccount = accounts.find((a: Account) => a.id === parentId);
         if (!acc[account.parentId]) {
@@ -51,14 +59,6 @@ export const formatSearchResults = (
             match: true,
           },
         ];
-      } else if (account.type === "Account") {
-        if (!acc[account.id]) {
-          acc[account.id] = {
-            account,
-            tokenAccounts: [],
-          };
-        }
-        acc[account.id].match = true;
       }
       return acc;
     },
