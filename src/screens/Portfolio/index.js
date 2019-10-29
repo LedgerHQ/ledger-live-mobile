@@ -51,8 +51,6 @@ import NoOpStatePortfolio from "./NoOpStatePortfolio";
 import NoOperationFooter from "../../components/NoOperationFooter";
 import MigrateAccountsBanner from "../MigrateAccounts/Banner";
 
-const forceInset = { bottom: "always" };
-
 const AnimatedSectionList = Animated.createAnimatedComponent(SectionList);
 const List = globalSyncRefreshControl(AnimatedSectionList);
 
@@ -185,7 +183,9 @@ class PortfolioScreen extends Component<
     });
 
     return (
-      <View style={[styles.root, { paddingTop: extraStatusBarPadding }]}>
+      <SafeAreaView
+        style={[styles.root, { paddingTop: extraStatusBarPadding }]}
+      >
         <StickyHeader
           navigation={navigation}
           scrollY={scrollY}
@@ -195,7 +195,7 @@ class PortfolioScreen extends Component<
         <SyncBackground />
         <TrackScreen category="Portfolio" accountsLength={accounts.length} />
 
-        <SafeAreaView style={styles.inner} forceInset={forceInset}>
+        <View style={styles.inner}>
           <List
             forwardedRef={this.ref}
             sections={sections}
@@ -225,9 +225,9 @@ class PortfolioScreen extends Component<
             ListEmptyComponent={this.ListEmptyComponent}
           />
           <MigrateAccountsBanner />
-        </SafeAreaView>
+        </View>
         {disclaimer}
-      </View>
+      </SafeAreaView>
     );
   }
 }
