@@ -1,6 +1,6 @@
 // @flow
 
-import { afterLibcoreGC } from "@ledgerhq/live-common/lib/libcore/access";
+import { deleteLibcore, afterLibcoreGC } from "@ledgerhq/live-common/lib/libcore/access";
 import { delay } from "@ledgerhq/live-common/lib/promise";
 
 export default (job?: () => Promise<any>) =>
@@ -10,5 +10,6 @@ export default (job?: () => Promise<any>) =>
       await job();
     }
     await libcore.getPoolInstance().freshResetAll();
+    deleteLibcore();
     await delay(2000);
   });
