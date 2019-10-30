@@ -1,4 +1,5 @@
 /* @flow */
+import { BigNumber } from "bignumber.js";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
 import React, { useCallback } from "react";
 import {
@@ -76,6 +77,7 @@ const SendAmount = ({ account, parentAccount, navigation }: Props) => {
 
     setTransaction(
       bridge.updateTransaction(transaction, {
+        amount: BigNumber(0),
         useAllAmount: !transaction.useAllAmount,
       }),
     );
@@ -109,10 +111,7 @@ const SendAmount = ({ account, parentAccount, navigation }: Props) => {
   const unit = getAccountUnit(account);
   const {
     errors: { amount: amountError },
-    warnings: { amount: amountWarning },
   } = status;
-
-  // console.log({ transaction, status, bridgePending, bridgeError });
 
   return (
     <>
@@ -171,12 +170,7 @@ const SendAmount = ({ account, parentAccount, navigation }: Props) => {
                       />
                     }
                     onPress={onContinue}
-                    disabled={
-                      !!amountError ||
-                      !!amountWarning ||
-                      bridgePending ||
-                      amount.isZero()
-                    }
+                    disabled={!!amountError || bridgePending || amount.isZero()}
                     pending={bridgePending}
                   />
                 </View>

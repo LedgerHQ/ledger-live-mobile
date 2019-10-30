@@ -75,12 +75,9 @@ class RippleEditTag extends PureComponent<Props, State> {
     const transaction = navigation.getParam("transaction");
     navigation.navigate("SendSummary", {
       accountId: account.id,
-      transaction: bridge.editTransactionExtra(
-        account,
-        transaction,
-        "tag",
-        tag && tag.toNumber(),
-      ),
+      transaction: bridge.updateTransaction(transaction, {
+        tag: tag && tag.toNumber(),
+      }),
     });
   };
 

@@ -85,8 +85,9 @@ const SendSelectRecipient = ({
     navigation.navigate("ScanRecipient", {
       accountId: navigation.getParam("accountId"),
       parentId: navigation.getParam("parentId"),
+      transaction,
     });
-  }, [navigation]);
+  }, [navigation, transaction]);
 
   const onChangeText = useCallback(
     recipient => {
