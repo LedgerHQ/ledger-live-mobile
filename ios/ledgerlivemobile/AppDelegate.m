@@ -17,6 +17,7 @@
 #endif
 #import <React/RCTLinkingManager.h>
 #import "RNSplashScreen.h"
+#import "RNQuickActionManager.h"
 
 @implementation AppDelegate
 
@@ -99,6 +100,9 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
   [self showOverlay];
+
+- (void)application:(UIApplication *)application performActionForShortcutItem:(UIApplicationShortcutItem *)shortcutItem completionHandler:(void (^)(BOOL succeeded)) completionHandler {
+  [RNQuickActionManager onQuickActionPress:shortcutItem completionHandler:completionHandler];
 }
 
 - (NSURL *)sourceURLForBridge:(RCTBridge *)bridge

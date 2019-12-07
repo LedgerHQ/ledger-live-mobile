@@ -4,11 +4,19 @@ import "../shim";
 import "./polyfill";
 import "./live-common-setup";
 import "./implement-react-native-libcore";
-import React, { Fragment, Component } from "react";
-import { StyleSheet, View, Text } from "react-native";
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { NavigationActions } from "react-navigation";
+import { DeviceEventEmitter, StyleSheet, View, Text } from "react-native";
 import SplashScreen from "react-native-splash-screen";
+import QuickActions from "react-native-quick-actions";
+import i18next from "i18next";
+import { createStructuredSelector } from "reselect";
 import logger from "./logger";
-import { exportSelector as settingsExportSelector } from "./reducers/settings";
+import {
+  exportSelector as settingsExportSelector,
+  readOnlyModeEnabledSelector,
+} from "./reducers/settings";
 import { exportSelector as accountsExportSelector } from "./reducers/accounts";
 import { exportSelector as bleSelector } from "./reducers/ble";
 import CounterValues from "./countervalues";
@@ -43,7 +51,11 @@ Text.defaultProps = Text.defaultProps || {};
 // $FlowFixMe
 Text.defaultProps.allowFontScaling = false;
 
-class App extends Component<*> {
+const mapStateToProps = createStructuredSelector({
+  readOnlyModeEnabled: readOnlyModeEnabledSelector,
+});
+
+class AppInner extends Component<*> {
   hasCountervaluesChanged = (a, b) => a.countervalues !== b.countervalues;
 
   hasSettingsChanged = (a, b) => a.settings !== b.settings;
@@ -52,7 +64,59 @@ class App extends Component<*> {
 
   hasBleChanged = (a, b) => a.ble !== b.ble;
 
+  handleQuickAction = data => {
+    if (data && data.type) {
+      this.navigator &&
+        this.navigator.dispatch(
+          NavigationActions.navigate({ routeName: data.userInfo.url }),
+        );
+    }
+  };
+
+  componentDidMount(): void {
+    const { readOnlyModeEnabled } = this.props;
+
+    DeviceEventEmitter.addListener(
+      "quickActionShortcut",
+      this.handleQuickAction,
+    );
+
+    QuickActions.popInitialAction().then(this.handleQuickAction);
+    const options = [
+      {
+        type: "receive",
+        title: i18next.t("quickActions.receive"),
+        icon: "receive",
+        userInfo: { url: "ReceiveFunds" },
+      },
+      {
+        type: "send",
+        title: i18next.t("quickActions.send"),
+        icon: "send",
+        userInfo: { url: "SendFunds" },
+      },
+      {
+        type: "accounts",
+        title: i18next.t("quickActions.accounts"),
+        icon: "accounts",
+        userInfo: { url: "Accounts" },
+      },
+    ];
+
+    if (!readOnlyModeEnabled) {
+      options.push({
+        type: "manager",
+        title: i18next.t("quickActions.manager"),
+        icon: "manager",
+        userInfo: { url: "Manager" },
+      });
+    }
+    QuickActions.setShortcutItems(options);
+  }
+
   render() {
+    const { importDataString } = this.props;
+
     return (
       <View style={styles.root}>
         <DBSave
@@ -83,18 +147,19 @@ class App extends Component<*> {
         <AppStateListener />
 
         <SyncNewAccounts priority={5} />
-
         <AppContainer
-          screenProps={{
-            importDataString: this.props.importDataString,
+          screenProps={{ importDataString }}
+          ref={nav => {
+            this.navigator = nav;
           }}
         />
-
         <DebugRejectSwitch />
       </View>
     );
   }
 }
+
+const App = connect(mapStateToProps)(AppInner);
 
 export default class Root extends Component<
   { importDataString?: string },
@@ -128,7 +193,7 @@ export default class Root extends Component<
         <LedgerStoreProvider onInitFinished={this.onInitFinished}>
           {(ready, store) =>
             ready ? (
-              <Fragment>
+              <>
                 <StyledStatusBar />
                 <SetEnvsFromSettings />
                 <HookSentry />
@@ -146,7 +211,7 @@ export default class Root extends Component<
                     </BridgeSyncProvider>
                   </LocaleProvider>
                 </AuthPass>
-              </Fragment>
+              </>
             ) : (
               <LoadingApp />
             )

@@ -321,6 +321,14 @@
       "description": "Something went wrong. Please retry or contact us."
     }
   },
+  "quickActions": {
+    "portfolio": "Portfolio",
+    "manager": "Manager",
+    "accounts": "Accounts",
+    "send": "Send",
+    "receive": "Receive",
+    "settings": "Settings"
+  },
   "bluetooth": {
     "required": "Oops, Bluetooth disabled",
     "locationRequiredTitle": "Location is required for Bluetooth LE",
