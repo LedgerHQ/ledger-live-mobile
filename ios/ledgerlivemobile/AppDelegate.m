@@ -100,8 +100,10 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
   [self showOverlay];
+}
 
 - (void)application:(UIApplication *)application performActionForShortcutItem:(UIApplicationShortcutItem *)shortcutItem completionHandler:(void (^)(BOOL succeeded)) completionHandler {
+
   [RNQuickActionManager onQuickActionPress:shortcutItem completionHandler:completionHandler];
 }
 
