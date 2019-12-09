@@ -73,6 +73,8 @@ class AppInner extends Component<*> {
     }
   };
 
+  navigator: *;
+
   componentDidMount(): void {
     const { readOnlyModeEnabled } = this.props;
 
