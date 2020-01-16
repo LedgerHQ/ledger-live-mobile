@@ -37,6 +37,8 @@
     "lint": "eslint src",
     "flow": "flow",
     "test": "yarn check --integrity && ./scripts/check-no-dups.sh && yarn lint --quiet",
+    "test-ios": "wdio ./tests/config/wdio.ios.app.conf.js",
+    "test-android": "wdio ./tests/config/wdio.android.app.conf.js",
     "sync-flowtyped": "NODE_OPTIONS=--max_old_space_size=10000 flow-typed install -s -o && rm flow-typed/npm/axios_*",
     "sync-locales": "./scripts/sync-locales.sh",
     "debugSVG": "sh scripts/debugsvg.sh | node_modules/.bin/prettier --parser flow > src/screens/DebugSVG.js",
@@ -162,8 +164,15 @@
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",
+    "@babel/register": "^7.8.0",
     "@babel/runtime": "^7.6.2",
     "@react-native-community/eslint-config": "^0.0.5",
+    "@wdio/appium-service": "^5.18.2",
+    "@wdio/cli": "^5.18.5",
+    "@wdio/local-runner": "^5.18.5",
+    "@wdio/mocha-framework": "^5.16.15",
+    "@wdio/spec-reporter": "^5.16.11",
+    "appium": "^1.16.0",
     "babel-jest": "^24.9.0",
     "eslint": "^6.5.1",
     "eslint-config-airbnb": "^18.0.1",
@@ -183,6 +192,7 @@
     "react-native-debugger-open": "^0.3.22",
     "react-test-renderer": "16.9.0",
     "rn-nodeify": "^10.2.0",
+    "webdriverio": "^5.18.5",
     "yarn-deduplicate": "^1.1.1"
   },
   "resolutions": {
