@@ -16,6 +16,7 @@ import type {
   AccountLike,
 } from "@ledgerhq/live-common/lib/types";
 
+import debounce from "lodash/debounce";
 import LText from "./LText";
 import CurrencyUnitValue from "./CurrencyUnitValue";
 import CounterValue from "./CounterValue";
@@ -46,24 +47,28 @@ class OperationRow extends PureComponent<Props, *> {
     displayCurrencyLogo: false,
   };
 
-  goToOperationDetails = () => {
-    const {
-      navigation,
-      account,
-      parentAccount,
-      operation,
-      isSubOperation,
-    } = this.props;
-    const params = {
-      accountId: account.id,
-      parentId: parentAccount && parentAccount.id,
-      operation, // FIXME we should pass a operationId instead because data can changes over time.
-      isSubOperation,
-      key: operation.id,
-    };
+  goToOperationDetails = debounce(
+    () => {
+      const {
+        navigation,
+        account,
+        parentAccount,
+        operation,
+        isSubOperation,
+      } = this.props;
+      const params = {
+        accountId: account.id,
+        parentId: parentAccount && parentAccount.id,
+        operation, // FIXME we should pass a operationId instead because data can changes over time.
+        isSubOperation,
+        key: operation.id,
+      };
 
-    navigation.push("OperationDetails", params);
-  };
+      navigation.push("OperationDetails", params);
+    },
+    500,
+    { leading: true, trailing: false },
+  );
 
   render() {
     const {
