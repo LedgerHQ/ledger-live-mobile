@@ -36,15 +36,6 @@
     "preinternal": "bundle install",
     "pod": "cd ios && bundle exec pod install"
   },
-  "jest": {
-    "preset": "react-native",
-    "transformIgnorePatterns": [
-      "node_modules/(?!react-navigation)/"
-    ],
-    "transform": {
-      "^.+\\.js$": "<rootDir>/node_modules/react-native/jest/preprocessor.js"
-    }
-  },
   "dependencies": {
     "@ledgerhq/compressjs": "^1.3.2",
     "@ledgerhq/devices": "5.7.0",
@@ -155,6 +146,11 @@
     "@babel/core": "^7.6.2",
     "@babel/runtime": "^7.6.2",
     "@react-native-community/eslint-config": "^0.0.5",
+    "@types/jest": "^25.1.2",
+    "@types/node": "^13.7.1",
+    "@types/react": "^16.9.19",
+    "@types/react-native": "^0.61.15",
+    "@types/react-test-renderer": "^16.9.2",
     "babel-jest": "^24.9.0",
     "eslint": "^6.5.1",
     "eslint-config-airbnb": "^18.0.1",
@@ -174,6 +170,7 @@
     "react-native-debugger-open": "^0.3.22",
     "react-test-renderer": "16.9.0",
     "rn-nodeify": "^10.2.0",
+    "typescript": "^3.7.5",
     "yarn-deduplicate": "^1.1.1"
   },
   "resolutions": {
