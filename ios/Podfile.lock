@@ -306,7 +306,7 @@ PODS:
     - React-cxxreact (= 0.61.2)
     - React-jsi (= 0.61.2)
     - ReactCommon/jscallinvoker (= 0.61.2)
-  - ReactNativeART (1.0.3):
+  - ReactNativeART (1.1.2):
     - React
   - RNAnalytics (0.1.0-beta.0):
     - Analytics
@@ -592,7 +592,7 @@ SPEC CHECKSUMS:
   React-RCTText: e3ef6191cdb627855ff7fe8fa0c1e14094967fb8
   React-RCTVibration: fb54c732fd20405a76598e431aa2f8c2bf527de9
   ReactCommon: 5848032ed2f274fcb40f6b9ec24067787c42d479
-  ReactNativeART: 7d65fa7e1469cbcfa351070cdd3b6135ad60c799
+  ReactNativeART: c580fba2f7d188d8fa4418ce78db8130654ed10f
   RNAnalytics: 5c242b7f8117f108f5df71e96b908185db3fb4ee
   RNCAsyncStorage: 5d83b49070d41fd72906a116c5e7bdac4ea3a814
   RNCMaskedView: a88953beefbd347a29072d9eba90e42945fe291e
