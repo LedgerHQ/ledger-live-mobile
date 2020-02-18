@@ -1542,24 +1542,24 @@
   resolved "https://registry.yarnpkg.com/@segment/analytics-react-native/-/analytics-react-native-0.1.0-beta.0.tgz#fb1c5ff9f72d6946b263777943af7d7abb157694"
   integrity sha512-hIVs10hZn7i13BqKu/ikHhgOZUwXCFjjy61DFFsZbD7d/3Xi/X810TjQva+lBH1E27kbp+WIJ8nh+UzWlKTjPw==
 
-"@sentry/cli@^1.36.1":
-  version "1.40.0"
-  resolved "https://registry.yarnpkg.com/@sentry/cli/-/cli-1.40.0.tgz#ab6565034d63bb6dfa840954f16efb058578fbcb"
-  integrity sha512-xn9MnHPnH9d8/BnOCg9GubGhdXTv+aZ+4ax0YEsjQklq8u9GfFZVpBQJ0cykMUBup7+DHmyGGga8qcoO9ew0gw==
+"@sentry/cli@^1.43.0":
+  version "1.51.0"
+  resolved "https://registry.yarnpkg.com/@sentry/cli/-/cli-1.51.0.tgz#2ce7d03b7aebf3f9e9a7186bac1a777fc3dc0e82"
+  integrity sha512-QXdW3smFW9Wjd5gYHuA9u9tCra87VqpeFljRKdD7D2CwnYCnFDeluVk3l9O8Me6IoVBuL9Uwxx8q1vPtob4n3Q==
   dependencies:
     fs-copy-file-sync "^1.1.1"
-    https-proxy-agent "^2.2.1"
+    https-proxy-agent "^4.0.0"
     mkdirp "^0.5.1"
     node-fetch "^2.1.2"
     progress "2.0.0"
     proxy-from-env "^1.0.0"
 
-"@sentry/wizard@^0.12.1":
-  version "0.12.1"
-  resolved "https://registry.yarnpkg.com/@sentry/wizard/-/wizard-0.12.1.tgz#e63bb94c26479e958418dfdce6387ad39b31bdbc"
-  integrity sha512-kSqGcETUHR6n3DlyU/gcCwu+fcDVveEFXmLqGvib7c4nlV/ZwxT0J9TQi2u3Ux5EZQjYjTsdtvw6PYXvPXRPZA==
+"@sentry/wizard@^0.13.0":
+  version "0.13.0"
+  resolved "https://registry.yarnpkg.com/@sentry/wizard/-/wizard-0.13.0.tgz#9eb2c2a9051f849815856293bca086725ecfc298"
+  integrity sha512-tI1B9NVIWZvAjgGOdI6JZuHVzIxOoO2JDNWJHD4voS4JyImko0zqGCDz15Nm4vh6RJKdHBUR841PTV2X3k2WaQ==
   dependencies:
-    "@sentry/cli" "^1.36.1"
+    "@sentry/cli" "^1.43.0"
     chalk "^2.4.1"
     glob "^7.1.3"
     inquirer "^6.2.0"
@@ -1567,7 +1567,7 @@
     opn "^5.4.0"
     r2 "^2.0.1"
     read-env "^1.3.0"
-    xcode "https://github.com/apache/cordova-node-xcode#e7646f0680d509b590b839e567c217590451505b"
+    xcode "2.0.0"
     yargs "^12.0.2"
 
 "@sindresorhus/is@^0.7.0":
@@ -2363,11 +2363,6 @@ base64-js@0.0.8:
   version "0.0.8"
   resolved "https://registry.yarnpkg.com/base64-js/-/base64-js-0.0.8.tgz#1101e9544f4a76b1bc3b26d452ca96d7a35e7978"
   integrity sha1-EQHpVE9KdrG8OybUUsqW16NeeXg=
-
-base64-js@1.1.2:
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/base64-js/-/base64-js-1.1.2.tgz#d6400cac1c4c660976d90d07a04351d89395f5e8"
-  integrity sha1-1kAMrBxMZgl22Q0HoENR2JOV9eg=
 
 base64-js@^1.0.2, base64-js@^1.1.2, base64-js@^1.2.3:
   version "1.3.0"
@@ -3266,7 +3261,7 @@ crypto-js@^3.1.9-1:
   resolved "https://registry.yarnpkg.com/crypto-js/-/crypto-js-3.1.9-1.tgz#fda19e761fc077e01ffbfdc6e9fdfc59e8806cd8"
   integrity sha1-/aGedh/Ad+Af+/3G6f38WeiAbNg=
 
-css-select@^2.0.2:
+css-select@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/css-select/-/css-select-2.1.0.tgz#6a34653356635934a81baca68d0255432105dbef"
   integrity sha512-Dqk7LQKpwLoH3VovzZnkzegqNSuAziQyNZUcrdDM401iY+R5NkGBXGmtO05/yaXQziALuPogeG0b7UAgjnTJTQ==
@@ -3276,10 +3271,10 @@ css-select@^2.0.2:
     domutils "^1.7.0"
     nth-check "^1.0.2"
 
-css-tree@^1.0.0-alpha.37:
-  version "1.0.0-alpha.38"
-  resolved "https://registry.yarnpkg.com/css-tree/-/css-tree-1.0.0-alpha.38.tgz#a75431f4162da84dbdb3c4804e79ad784aa7593c"
-  integrity sha512-pWuxS4kaECFopOc1NZff+dYdw+brc1Tt0UAuTiw56/Trtae4NdHtbDH24311UWfMmcpZe7jLy0e64ZeJg9t7bQ==
+css-tree@^1.0.0-alpha.39:
+  version "1.0.0-alpha.39"
+  resolved "https://registry.yarnpkg.com/css-tree/-/css-tree-1.0.0-alpha.39.tgz#2bff3ffe1bb3f776cf7eefd91ee5cba77a149eeb"
+  integrity sha512-7UvkEYgBAHRG9Nt980lYxjsTrCyHFN53ky3wVsDkiMdVqylqRt+Zc+jm5qw7/qyOvN2dHSYtX0e4MbCCExSvnA==
   dependencies:
     mdn-data "2.0.6"
     source-map "^0.6.1"
@@ -5190,7 +5185,7 @@ https-browserify@~1.0.0:
   resolved "https://registry.yarnpkg.com/https-browserify/-/https-browserify-1.0.0.tgz#ec06c10e0a34c0f2faf199f7fd7fc78fffd03c73"
   integrity sha1-7AbBDgo0wPL68Zn3/X/Hj//QPHM=
 
-https-proxy-agent@2.2.1, https-proxy-agent@^2.2.1:
+https-proxy-agent@2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/https-proxy-agent/-/https-proxy-agent-2.2.1.tgz#51552970fa04d723e04c56d04178c3f92592bbc0"
   integrity sha512-HPCTS1LW51bcyMYbxUIOO4HEOlQ1/1qRaFWcyxvwaqUS9TY88aoEuHUY33kuAh1YhVVaDQhLZsnPd+XNARWZlQ==
@@ -8064,15 +8059,6 @@ pkg-dir@^4.2.0:
   dependencies:
     find-up "^4.0.0"
 
-plist@2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/plist/-/plist-2.0.1.tgz#0a32ca9481b1c364e92e18dc55c876de9d01da8b"
-  integrity sha1-CjLKlIGxw2TpLhjcVch23p0B2os=
-  dependencies:
-    base64-js "1.1.2"
-    xmlbuilder "8.2.2"
-    xmldom "0.1.x"
-
 plist@^3.0.0, plist@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/plist/-/plist-3.0.1.tgz#a9b931d17c304e8912ef0ba3bdd6182baf2e1f8c"
@@ -8264,10 +8250,10 @@ punycode@^2.1.0, punycode@^2.1.1:
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-2.1.1.tgz#b58b010ac40c22c5657616c8d2c2c02c7bf479ec"
   integrity sha512-XRsRjdf+j5ml+y/6GKHPZbrF/8p2Yga0JPtdqTIY2Xe5ohJPD9saDJJLPvp9+NSBprVvevdXZybnj2cv8OEd0A==
 
-qrcode@^1.2.0:
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/qrcode/-/qrcode-1.2.2.tgz#f3c97f5a4c32cf5c2ec75b63c1b66a38df122693"
-  integrity sha512-iHD3eGma3PMaIfvM+p6oaTZjz83PsEIJ5F4H3oqyfKbQM+kbWjJjHdnTRlzi9q0KoiJ9QFKfiNhkEAYOWTTDdw==
+qrcode@1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/qrcode/-/qrcode-1.2.0.tgz#330d24313fbf8d429a806091af9525250239e44a"
+  integrity sha512-wZK0Z0eYmOUDP2tOGzmLdeBn5Npa+4wms9GdvzH7HrywvGUq/Stz0BKUhW4DfmBf1PSrm9dNfdnVDq683Zxvag==
   dependencies:
     can-promise "^0.0.1"
     dijkstrajs "^1.0.1"
@@ -8352,10 +8338,10 @@ range-parser@~1.2.0:
   resolved "https://registry.yarnpkg.com/range-parser/-/range-parser-1.2.0.tgz#f49be6b487894ddc40dcc94a322f611092e00d5e"
   integrity sha1-9JvmtIeJTdxA3MlKMi9hEJLgDV4=
 
-raven-js@^3.24.2:
-  version "3.27.0"
-  resolved "https://registry.yarnpkg.com/raven-js/-/raven-js-3.27.0.tgz#9f47c03e17933ce756e189f3669d49c441c1ba6e"
-  integrity sha512-vChdOL+yzecfnGA+B5EhEZkJ3kY3KlMzxEhShKh6Vdtooyl0yZfYNFQfYzgMf2v4pyQa+OTZ5esTxxgOOZDHqw==
+raven-js@^3.27.1:
+  version "3.27.2"
+  resolved "https://registry.yarnpkg.com/raven-js/-/raven-js-3.27.2.tgz#6c33df952026cd73820aa999122b7b7737a66775"
+  integrity sha512-mFWQcXnhRFEQe5HeFroPaEghlnqy7F5E2J3Fsab189ondqUzcjwSVi7el7F36cr6PvQYXoZ1P2F5CSF2/azeMQ==
 
 rc@^1.2.7:
   version "1.2.8"
@@ -8424,10 +8410,10 @@ react-native-camera@3.18.0:
   dependencies:
     prop-types "^15.6.2"
 
-react-native-config@0.11.7:
-  version "0.11.7"
-  resolved "https://registry.yarnpkg.com/react-native-config/-/react-native-config-0.11.7.tgz#a2b323f2ecd76a4df88cbb6bc86eaa2ef9febee7"
-  integrity sha512-dn5s+zhwLyE25vRT/vaEtLk/j8ZL1UZKvejORNDWakSwpOnLmFurFeaZV83IqkPlfWHXHFdsYe2IRYG1WN4WkQ==
+react-native-config@0.12.0:
+  version "0.12.0"
+  resolved "https://registry.yarnpkg.com/react-native-config/-/react-native-config-0.12.0.tgz#910e52226b60e0c9f2b648772eea2a93f8701751"
+  integrity sha512-lC8QOZCGCXgFh74uWSVGMaChg+Qf2BScWzVd9C4yrFnfxrHSFyIekqOOq/sjE8Uu2ifgxZmSiK1Z8EEi78AmQA==
 
 react-native-crypto@^2.2.0:
   version "2.2.0"
@@ -8467,10 +8453,10 @@ react-native-extra-dimensions-android@^1.2.5:
   resolved "https://registry.yarnpkg.com/react-native-extra-dimensions-android/-/react-native-extra-dimensions-android-1.2.5.tgz#8ade91029aaac7519bf305116d39019e618a60f0"
   integrity sha512-eorFo9X1vEqAWUkgcZ300yKBG1wtgNeE7tdWAH2CE+P50FGTniJg5Sr6l1iPWG8ZskQOuF+KeiSTFlDa4vLfMw==
 
-react-native-fingerprint-scanner@^3.0.2:
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/react-native-fingerprint-scanner/-/react-native-fingerprint-scanner-3.0.2.tgz#ca9994de4b30dcf5ad2f5b420bfdd4d8775e8831"
-  integrity sha512-e6EkSgThwHAI9y5y2G3HdEbuKBka2lu3gRzpWzQs8FQF3t2DIB7fRHdA3/fnd33T39P0vU6hSCc9xwSpDbSdyg==
+react-native-fingerprint-scanner@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/react-native-fingerprint-scanner/-/react-native-fingerprint-scanner-4.0.0.tgz#e091c7f13b7504c4ed7efc825cc138001b4b6d87"
+  integrity sha512-VVSFGZbdVoWhR1YlFBtSjhr4keWY1cbGi0PN4naNqtTiic4zHZPQ85iKsGG0sqN7o4dVHx9VXkrx5n75S0TM5Q==
 
 react-native-gesture-handler@1.6.0:
   version "1.6.0"
@@ -8487,10 +8473,10 @@ react-native-iphone-x-helper@^1.2.1:
   resolved "https://registry.yarnpkg.com/react-native-iphone-x-helper/-/react-native-iphone-x-helper-1.2.1.tgz#645e2ffbbb49e80844bb4cbbe34a126fda1e6772"
   integrity sha512-/VbpIEp8tSNNHIvstuA3Swx610whci1Zpc9mqNkqn14DkMbw+ORviln2u0XyHG1kPvvwTNGZY6QpeFwxYaSdbQ==
 
-react-native-keychain@^3.1.3:
-  version "3.1.3"
-  resolved "https://registry.yarnpkg.com/react-native-keychain/-/react-native-keychain-3.1.3.tgz#fce176e7b95243cecda1896a7e6bdfe0335d778a"
-  integrity sha512-eWUbjYJge4icX8FhWJk/OPlyGxPnW9bZDysBX3WwOG37iurdH692HKnM2Ih+S+0te65RytImvUrcVnHVBbumYg==
+react-native-keychain@^4.0.5:
+  version "4.0.5"
+  resolved "https://registry.yarnpkg.com/react-native-keychain/-/react-native-keychain-4.0.5.tgz#6d3aef8f2789fc0dfa8149b8400d82ff77be361a"
+  integrity sha512-TbiO8AO055EPjaxIuKxrCEOB4r81uQCVDFbtcs+e4pEOHxf6z3JgDC0UU0poJElKfCh37b+TFRxQhg6DbsYJBA==
 
 react-native-level-fs@^3.0.0:
   version "3.0.1"
@@ -8526,13 +8512,13 @@ react-native-progress@^4.0.3:
     "@react-native-community/art" "^1.0.3"
     prop-types "^15.7.2"
 
-react-native-qrcode-svg@5.1.2:
-  version "5.1.2"
-  resolved "https://registry.yarnpkg.com/react-native-qrcode-svg/-/react-native-qrcode-svg-5.1.2.tgz#1368a1142b7d4916c3d8b1903fd2046185340fd0"
-  integrity sha512-nQ0x2DHQMC2XI5QDxYMGaUhqZ4UT/o/V1Wr0oet5uZwkfnc8OoPt08dae/tO7VcCG7x3plmmafm7Tsh3g67bHA==
+react-native-qrcode-svg@6.0.3:
+  version "6.0.3"
+  resolved "https://registry.yarnpkg.com/react-native-qrcode-svg/-/react-native-qrcode-svg-6.0.3.tgz#27b6a7a1df02c5bf10796fd97e8b55c0044dc0f8"
+  integrity sha512-Zag+k0TEkRQ5jwGaidXvwCB4PXvxeeTr0OrQbXPRGvSohshRaNmsv2q7ib1FYdvvDeOygWOA5XdgmOH9D8xdAA==
   dependencies:
     prop-types "^15.5.10"
-    qrcode "^1.2.0"
+    qrcode "1.2.0"
 
 react-native-randombytes@^3.5.3:
   version "3.5.3"
@@ -8571,13 +8557,13 @@ react-native-screens@^1.0.0-alpha.22:
   resolved "https://registry.yarnpkg.com/react-native-screens/-/react-native-screens-1.0.0-alpha.22.tgz#7a120377b52aa9bbb94d0b8541a014026be9289b"
   integrity sha512-kSyAt0AeVU6N7ZonfV6dP6iZF8B7Bce+tk3eujXhzBGsLg0VSLnU7uE9VqJF0xdQrHR91ZjGgVMieo/8df9KTA==
 
-react-native-sentry@0.42.0:
-  version "0.42.0"
-  resolved "https://registry.yarnpkg.com/react-native-sentry/-/react-native-sentry-0.42.0.tgz#9cd59659d9b6cd36d6fc4c48f50613cd82cde25f"
-  integrity sha512-Nt3/yDSiK0QCtuWMEX04e4DJ3sWyMbjUPiiRNs3omD0rCzt51i4F5/fORDz7aMuYH2tSUw6RWCfJmxc3ILvx7Q==
+react-native-sentry@0.43.2:
+  version "0.43.2"
+  resolved "https://registry.yarnpkg.com/react-native-sentry/-/react-native-sentry-0.43.2.tgz#1505d16d334656f25f4d515e004d0c5a4ac5a01b"
+  integrity sha512-MDrMkt/ntyQhhn+b3EVUuB/lXvQbSLvCOpkAvioNOzddoyo2R6i3rVZ3aZmPN1oK3O9GFE4tSa0M+eTHni7AaQ==
   dependencies:
-    "@sentry/wizard" "^0.12.1"
-    raven-js "^3.24.2"
+    "@sentry/wizard" "^0.13.0"
+    raven-js "^3.27.1"
 
 react-native-simple-store@2.0.2:
   version "2.0.2"
@@ -8599,13 +8585,13 @@ react-native-splash-screen@3.2.0:
   resolved "https://registry.yarnpkg.com/react-native-splash-screen/-/react-native-splash-screen-3.2.0.tgz#d47ec8557b1ba988ee3ea98d01463081b60fff45"
   integrity sha512-Ls9qiNZzW/OLFoI25wfjjAcrf2DZ975hn2vr6U9gyuxi2nooVbzQeFoQS5vQcbCt9QX5NY8ASEEAtlLdIa6KVg==
 
-react-native-svg@^9.13.3:
-  version "9.13.3"
-  resolved "https://registry.yarnpkg.com/react-native-svg/-/react-native-svg-9.13.3.tgz#6414b337d55af169ac2487ab70f3108404434446"
-  integrity sha512-H50b2m4jvrQ7KxKs8uYSuWecr6e5XC7BDfS7DaA96+0Owjh0C9DksI5l8SRyHnmE+emiYMPu6Qqfr9dCyKkaJQ==
+react-native-svg@^11.0.1:
+  version "11.0.1"
+  resolved "https://registry.yarnpkg.com/react-native-svg/-/react-native-svg-11.0.1.tgz#e92e7e9f9cb2604333fd5014fd4edcf62fea6496"
+  integrity sha512-XriIwSoe9eTtKyqxpNC6POSOqmXAB9mZQOm5tMoaimEqQOMfzgYrBoF9nY6VPGmaH5dRlWBqnnBf389APiZFcQ==
   dependencies:
-    css-select "^2.0.2"
-    css-tree "^1.0.0-alpha.37"
+    css-select "^2.1.0"
+    css-tree "^1.0.0-alpha.39"
 
 react-native-tab-view@^2.11.0:
   version "2.11.0"
@@ -8624,10 +8610,10 @@ react-native-tcp@^3.3.2:
     process "^0.11.9"
     util "^0.10.3"
 
-react-native-udp@^2.6.0:
-  version "2.6.0"
-  resolved "https://registry.yarnpkg.com/react-native-udp/-/react-native-udp-2.6.0.tgz#6fe64467073a47aa728c70d35c899ddbc0b23886"
-  integrity sha512-P7aFWYbOPFmLgcza7zc1OVV2NqyYhpfb3/Fz3Bi6yy4e4G8Qt7/btfjy22+Y4pMQV1ogXCa2RR1zOdkbMoCczQ==
+react-native-udp@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/react-native-udp/-/react-native-udp-3.0.0.tgz#73ed5d67f413176ada37c193639dc3d7578ba720"
+  integrity sha512-RcG1W762W+1LhvlMPEyef0OoMdhuzf5fTJC9iMMBaaHw+zqS+vX7XWe6f0vP75ZovOGBMD74r7Mcd5RT1/M4Kw==
   dependencies:
     base64-js "0.0.8"
     events "^1.0.2"
@@ -9633,15 +9619,6 @@ simple-markdown@^0.4.4:
   resolved "https://registry.yarnpkg.com/simple-markdown/-/simple-markdown-0.4.4.tgz#9bd597bdd5c2f5a789e56a4dbf06427d76c3834f"
   integrity sha512-ZmlNUGR1KI12sPHeQ7dQY1qM5KfOgFqClNNVO8zQ9Pg6u7gHLCPFGD+VC7MCwpGDMd1uw3Bb2TfFfR8d6bB34A==
 
-simple-plist@^0.2.1:
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/simple-plist/-/simple-plist-0.2.1.tgz#71766db352326928cf3a807242ba762322636723"
-  integrity sha1-cXZts1IyaSjPOoByQrp2IyJjZyM=
-  dependencies:
-    bplist-creator "0.0.7"
-    bplist-parser "0.1.1"
-    plist "2.0.1"
-
 simple-plist@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/simple-plist/-/simple-plist-1.0.0.tgz#bed3085633b22f371e111f45d159a1ccf94b81eb"
@@ -10576,11 +10553,6 @@ utils-merge@1.0.1:
   resolved "https://registry.yarnpkg.com/utils-merge/-/utils-merge-1.0.1.tgz#9f95710f50a267947b2ccc124741c1028427e713"
   integrity sha1-n5VxD1CiZ5R7LMwSR0HBAoQn5xM=
 
-uuid@3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.0.1.tgz#6544bba2dfda8c1cf17e629a3a305e2bb1fee6c1"
-  integrity sha1-ZUS7ot/ajBzxfmKaOjBeK7H+5sE=
-
 uuid@^3.3.2:
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.3.2.tgz#1b4af4955eb3077c501c23872fc6513811587131"
@@ -10847,7 +10819,7 @@ x-address-codec@^0.7.0:
   dependencies:
     base-x "^1.0.1"
 
-xcode@^2.0.0:
+xcode@2.0.0, xcode@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/xcode/-/xcode-2.0.0.tgz#134f1f94c26fbfe8a9aaa9724bfb2772419da1a2"
   integrity sha512-5xF6RCjAdDEiEsbbZaS/gBRt3jZ/177otZcpoLCjGN/u1LrfgH7/Sgeeavpr/jELpyDqN2im3AKosl2G2W8hfw==
@@ -10855,22 +10827,10 @@ xcode@^2.0.0:
     simple-plist "^1.0.0"
     uuid "^3.3.2"
 
-"xcode@https://github.com/apache/cordova-node-xcode#e7646f0680d509b590b839e567c217590451505b":
-  version "1.0.1-dev"
-  resolved "https://github.com/apache/cordova-node-xcode#e7646f0680d509b590b839e567c217590451505b"
-  dependencies:
-    simple-plist "^0.2.1"
-    uuid "3.0.1"
-
 xml-name-validator@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/xml-name-validator/-/xml-name-validator-3.0.0.tgz#6ae73e06de4d8c6e47f9fb181f78d648ad457c6a"
   integrity sha512-A5CUptxDsvxKJEU3yO6DuWBSJz/qizqzJKOMIfUJHETbBw/sFaDxgd6fxm1ewUaM0jZ444Fc5vC5ROYurg/4Pw==
-
-xmlbuilder@8.2.2:
-  version "8.2.2"
-  resolved "https://registry.yarnpkg.com/xmlbuilder/-/xmlbuilder-8.2.2.tgz#69248673410b4ba42e1a6136551d2922335aa773"
-  integrity sha1-aSSGc0ELS6QuGmE2VR0pIjNap3M=
 
 xmlbuilder@^9.0.7:
   version "9.0.7"
