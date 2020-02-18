@@ -14,7 +14,7 @@ import type { Account } from "@ledgerhq/live-common/lib/types";
 import type { Result } from "@ledgerhq/live-common/lib/cross";
 import type { ImportItem } from "@ledgerhq/live-common/lib/account";
 import { importAccountsMakeItems } from "@ledgerhq/live-common/lib/account";
-import { translate, Trans } from "react-i18next";
+import { withTranslation, Trans } from "react-i18next";
 import i18next from "i18next";
 
 import { importDesktopSettings } from "../../actions/settings";
@@ -224,7 +224,7 @@ class DisplayResult extends Component<Props, State> {
   }
 }
 
-export default translate()(
+export default withTranslation()(
   connect(
     createStructuredSelector({ accounts: accountsSelector }),
     {

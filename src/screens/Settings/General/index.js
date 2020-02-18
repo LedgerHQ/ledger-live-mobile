@@ -5,7 +5,7 @@ import type { NavigationScreenProp } from "react-navigation";
 // $FlowFixMe
 import { ScrollView } from "react-navigation";
 import i18next from "i18next";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import { TrackScreen } from "../../../analytics";
 import CountervalueSettingsRow from "./CountervalueSettingsRow";
 import AuthSecurityToggle from "./AuthSecurityToggle";
@@ -39,4 +39,4 @@ const styles = StyleSheet.create({
   root: { paddingTop: 16, paddingBottom: 64 },
 });
 
-export default translate()(GeneralSettings);
+export default withTranslation()(GeneralSettings);

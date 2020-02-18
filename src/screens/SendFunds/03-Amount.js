@@ -12,7 +12,7 @@ import {
 import { SafeAreaView } from "react-navigation";
 import { connect } from "react-redux";
 import { compose } from "redux";
-import { translate, Trans } from "react-i18next";
+import { withTranslation, Trans } from "react-i18next";
 import i18next from "i18next";
 import type { NavigationScreenProp } from "react-navigation";
 import type {
@@ -268,6 +268,6 @@ const styles = StyleSheet.create({
 });
 
 export default compose(
-  translate(),
+  withTranslation(),
   connect(accountAndParentScreenSelector),
 )(SendAmount);

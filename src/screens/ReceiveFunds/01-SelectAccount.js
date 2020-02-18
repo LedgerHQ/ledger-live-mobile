@@ -8,7 +8,7 @@ import { SafeAreaView, FlatList } from "react-navigation";
 import type { NavigationScreenProp } from "react-navigation";
 import { connect } from "react-redux";
 import { compose } from "redux";
-import { translate, Trans } from "react-i18next";
+import { withTranslation, Trans } from "react-i18next";
 import type {
   Account,
   AccountLikeArray,
@@ -162,5 +162,5 @@ const styles = StyleSheet.create({
 
 export default compose(
   connect(mapStateToProps),
-  translate(),
+  withTranslation(),
 )(ReceiveFunds);

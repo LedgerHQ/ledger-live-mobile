@@ -10,7 +10,7 @@ import {
   progressOfFrames,
 } from "qrloop";
 import { decode } from "@ledgerhq/live-common/lib/cross";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import i18next from "i18next";
 
 import colors from "../../colors";
@@ -149,7 +149,7 @@ class Scan extends PureComponent<
   }
 }
 
-export default translate()(Scan);
+export default withTranslation()(Scan);
 
 const styles = StyleSheet.create({
   root: {

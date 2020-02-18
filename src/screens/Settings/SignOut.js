@@ -1,7 +1,7 @@
 /* @flow */
 import React, { Component } from "react";
 import { View, Text, StyleSheet, Alert } from "react-native";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 
 import type { T } from "../../types/common";
 import { withReboot } from "../../context/Reboot";
@@ -33,7 +33,7 @@ class SignOut extends Component<{ reboot: (?boolean) => *, t: T }> {
   }
 }
 
-export default translate()(withReboot(SignOut));
+export default withTranslation()(withReboot(SignOut));
 
 const styles = StyleSheet.create({
   root: {

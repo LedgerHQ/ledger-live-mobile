@@ -3,7 +3,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import { compose } from "redux";
 
 import type { AsyncState } from "../reducers/bridgeSync";
@@ -50,6 +50,6 @@ export default (Decorated: React$ComponentType<any>) => {
 
   return compose(
     connect(mapStateToProps),
-    translate(),
+    withTranslation(),
   )(SyncIndicator);
 };

@@ -2,7 +2,7 @@
 
 import React, { PureComponent } from "react";
 import { View, StyleSheet } from "react-native";
-import { Trans, translate } from "react-i18next";
+import { Trans, withTranslation } from "react-i18next";
 import NoLocationImage from "../../icons/NoLocationImage";
 import LocationServicesButton from "./LocationServicesButton";
 import AppPermissionsButton from "./AppPermissionsButton";
@@ -72,4 +72,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default translate()(LocationRequired);
+export default withTranslation()(LocationRequired);

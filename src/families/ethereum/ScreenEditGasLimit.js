@@ -5,7 +5,7 @@ import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
 import { BigNumber } from "bignumber.js";
 import i18next from "i18next";
 import React, { PureComponent } from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import {
   Keyboard,
   ScrollView,
@@ -131,5 +131,5 @@ const styles = StyleSheet.create({
 });
 
 export default connect(accountAndParentScreenSelector)(
-  translate()(EthereumEditGasLimit),
+  withTranslation()(EthereumEditGasLimit),
 );

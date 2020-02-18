@@ -2,7 +2,7 @@
 import React, { PureComponent } from "react";
 import liveCommonPkg from "@ledgerhq/live-common/package.json";
 import { StyleSheet, View } from "react-native";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 
 import colors, { rgba } from "../../colors";
 import QRCodeTopLayer from "./QRCodeTopLayer";
@@ -45,7 +45,7 @@ class CameraScreen extends PureComponent<Props> {
   }
 }
 
-export default translate()(CameraScreen);
+export default withTranslation()(CameraScreen);
 
 const styles = StyleSheet.create({
   camera: {

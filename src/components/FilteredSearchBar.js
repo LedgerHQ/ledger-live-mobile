@@ -1,7 +1,7 @@
 // @flow
 import React, { PureComponent, Fragment } from "react";
 import { StyleSheet, View, TouchableOpacity } from "react-native";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 
 import SearchIcon from "../icons/Search";
 import Search from "./Search";
@@ -125,4 +125,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default translate()(FilteredSearchBar);
+export default withTranslation()(FilteredSearchBar);

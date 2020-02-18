@@ -14,7 +14,7 @@ import i18next from "i18next";
 import { connect } from "react-redux";
 import { SafeAreaView } from "react-navigation";
 import type { NavigationScreenProp } from "react-navigation";
-import { translate, Trans } from "react-i18next";
+import { withTranslation, Trans } from "react-i18next";
 import Icon from "react-native-vector-icons/dist/Feather";
 import type {
   AccountLike,
@@ -434,4 +434,4 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = accountAndParentScreenSelector;
 
-export default connect(mapStateToProps)(translate()(SelectValidator));
+export default connect(mapStateToProps)(withTranslation()(SelectValidator));

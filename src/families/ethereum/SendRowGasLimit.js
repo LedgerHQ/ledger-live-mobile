@@ -1,7 +1,7 @@
 /* @flow */
 import React, { PureComponent } from "react";
 import { View, StyleSheet } from "react-native";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
 import type { Transaction } from "@ledgerhq/live-common/lib/families/ethereum/types";
 import { BigNumber } from "bignumber.js";
@@ -68,4 +68,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default translate()(EthereumGasLimit);
+export default withTranslation()(EthereumGasLimit);

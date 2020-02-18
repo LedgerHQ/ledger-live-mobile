@@ -4,7 +4,7 @@ import type { NavigationScreenProp } from "react-navigation";
 import * as Keychain from "react-native-keychain";
 import { connect } from "react-redux";
 import { compose } from "redux";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import i18next from "i18next";
 import { PasswordsDontMatchError } from "@ledgerhq/errors";
 import { Vibration } from "react-native";
@@ -104,5 +104,5 @@ export default compose(
     null,
     mapDispatchToProps,
   ),
-  translate(),
+  withTranslation(),
 )(ConfirmPassword);

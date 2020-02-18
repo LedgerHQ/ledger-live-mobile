@@ -2,7 +2,7 @@
 import React, { PureComponent } from "react";
 import { AppState } from "react-native";
 import { connect } from "react-redux";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import { createStructuredSelector } from "reselect";
 import { privacySelector } from "../../reducers/settings";
 import { SkipLockContext } from "../../components/behaviour/SkipLock";
@@ -159,4 +159,4 @@ class AuthPass extends PureComponent<Props, State> {
   }
 }
 
-export default translate()(connect(mapStateToProps)(AuthPass));
+export default withTranslation()(connect(mapStateToProps)(AuthPass));

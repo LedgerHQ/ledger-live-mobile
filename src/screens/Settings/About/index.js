@@ -4,7 +4,7 @@ import { View, StyleSheet } from "react-native";
 // $FlowFixMe
 import { ScrollView } from "react-navigation";
 import i18next from "i18next";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import { TrackScreen } from "../../../analytics";
 import AppVersionRow from "./AppVersionRow";
 import LiveReviewRow from "./LiveReviewRow";
@@ -43,4 +43,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default translate()(About);
+export default withTranslation()(About);

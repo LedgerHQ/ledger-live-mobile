@@ -2,7 +2,7 @@
 import React, { Component } from "react";
 import { compose } from "redux";
 import { connect } from "react-redux";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import { View, StyleSheet, TouchableWithoutFeedback } from "react-native";
 // $FlowFixMe
 import { ScrollView } from "react-navigation";
@@ -126,7 +126,7 @@ class Settings extends Component<Props, *> {
 
 export default compose(
   connect(mapStateToProps),
-  translate(),
+  withTranslation(),
 )(Settings);
 
 const styles = StyleSheet.create({

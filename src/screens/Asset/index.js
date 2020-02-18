@@ -14,7 +14,7 @@ import type {
   Unit,
 } from "@ledgerhq/live-common/lib/types";
 import React, { PureComponent } from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import { StyleSheet, View } from "react-native";
 import { compose } from "redux";
 import { connect } from "react-redux";
@@ -274,7 +274,7 @@ export default compose(
     mapStateToProps,
     mapDispatchToProps,
   ),
-  translate(),
+  withTranslation(),
 )(withNavigation(Asset));
 
 const styles = StyleSheet.create({

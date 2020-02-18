@@ -12,7 +12,7 @@ import {
 } from "@ledgerhq/live-common/lib/account";
 import { createStructuredSelector } from "reselect";
 import uniq from "lodash/uniq";
-import { translate, Trans } from "react-i18next";
+import { withTranslation, Trans } from "react-i18next";
 import { StyleSheet, View } from "react-native";
 // $FlowFixMe
 import { SafeAreaView, ScrollView } from "react-navigation";
@@ -493,7 +493,7 @@ const styles = StyleSheet.create({
 });
 
 export default compose(
-  translate(),
+  withTranslation(),
   connect(
     mapStateToProps,
     mapDispatchToProps,

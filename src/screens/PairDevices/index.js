@@ -5,7 +5,7 @@ import { StyleSheet } from "react-native";
 import i18next from "i18next";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import type { NavigationScreenProp } from "react-navigation";
 import { SafeAreaView } from "react-navigation";
 import { timeout } from "rxjs/operators";
@@ -241,7 +241,7 @@ export default connect(
   {
     addKnownDevice,
   },
-)(translate()(Screen));
+)(withTranslation()(Screen));
 
 const styles = StyleSheet.create({
   root: {

@@ -14,7 +14,7 @@ import type {
 } from "@ledgerhq/live-common/lib/types";
 // $FlowFixMe
 import { SectionList, SafeAreaView } from "react-navigation";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import {
   groupAccountsOperationsByDay,
   isAccountEmpty,
@@ -223,7 +223,7 @@ class PortfolioScreen extends Component<
   }
 }
 
-export default translate()(
+export default withTranslation()(
   connect(
     mapStateToProps,
     mapDispatchToProps,

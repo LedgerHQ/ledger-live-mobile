@@ -2,7 +2,7 @@
 
 import { View, StyleSheet } from "react-native";
 import React, { PureComponent } from "react";
-import { Trans, translate } from "react-i18next";
+import { Trans, withTranslation } from "react-i18next";
 
 import colors from "../colors";
 import LiveLogo from "../icons/LiveLogoIcon";
@@ -68,4 +68,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default translate()(Installing);
+export default withTranslation()(Installing);

@@ -8,7 +8,7 @@ import { View, StyleSheet, Linking, ScrollView } from "react-native";
 import { SafeAreaView } from "react-navigation";
 import { connect } from "react-redux";
 import QRCode from "react-native-qrcode-svg";
-import { translate, Trans } from "react-i18next";
+import { withTranslation, Trans } from "react-i18next";
 import type { NavigationScreenProp } from "react-navigation";
 import ReactNativeModal from "react-native-modal";
 import type { Account, TokenAccount } from "@ledgerhq/live-common/lib/types";
@@ -532,4 +532,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default connect(mapStateToProps)(translate()(ReceiveConfirmation));
+export default connect(mapStateToProps)(withTranslation()(ReceiveConfirmation));

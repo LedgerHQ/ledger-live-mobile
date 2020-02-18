@@ -4,7 +4,7 @@ import { createStructuredSelector } from "reselect";
 import { Switch, Alert } from "react-native";
 import { connect } from "react-redux";
 import { compose } from "redux";
-import { translate, Trans } from "react-i18next";
+import { withTranslation, Trans } from "react-i18next";
 import type { T } from "../../../types/common";
 import { setPrivacyBiometrics } from "../../../actions/settings";
 import { privacySelector } from "../../../reducers/settings";
@@ -117,5 +117,5 @@ export default compose(
     mapStateToProps,
     mapDispatchToProps,
   ),
-  translate(),
+  withTranslation(),
 )(BiometricsRow);

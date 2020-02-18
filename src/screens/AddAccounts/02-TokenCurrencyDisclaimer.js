@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from "react";
-import { translate, Trans } from "react-i18next";
+import { withTranslation, Trans } from "react-i18next";
 import i18next from "i18next";
 import { StyleSheet, View, Linking } from "react-native";
 import { SafeAreaView } from "react-navigation";
@@ -147,4 +147,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default translate()(AddAccountsTokenCurrencyDisclaimer);
+export default withTranslation()(AddAccountsTokenCurrencyDisclaimer);

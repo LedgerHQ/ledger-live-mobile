@@ -1,6 +1,6 @@
 // @flow
 import React, { PureComponent } from "react";
-import { translate, Trans } from "react-i18next";
+import { withTranslation, Trans } from "react-i18next";
 import {
   TouchableWithoutFeedback,
   View,
@@ -246,7 +246,7 @@ class AuthScreen extends PureComponent<Props, State> {
   }
 }
 
-export default translate()(withReboot(AuthScreen));
+export default withTranslation()(withReboot(AuthScreen));
 
 const styles = StyleSheet.create({
   root: {

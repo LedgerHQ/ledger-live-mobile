@@ -6,7 +6,7 @@ import { StyleSheet } from "react-native";
 import { FlatList } from "react-navigation";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import i18next from "i18next";
 import { compose } from "redux";
 import type { Account } from "@ledgerhq/live-common/lib/types";
@@ -85,7 +85,7 @@ class Accounts extends Component<Props> {
 
 export default compose(
   connect(mapStateToProps),
-  translate(),
+  withTranslation(),
 )(Accounts);
 
 const styles = StyleSheet.create({

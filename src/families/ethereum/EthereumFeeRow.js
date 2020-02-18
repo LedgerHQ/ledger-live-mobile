@@ -1,7 +1,7 @@
 /* @flow */
 import React, { Fragment, useCallback, useState } from "react";
 import { View, StyleSheet, Linking } from "react-native";
-import { Trans, translate } from "react-i18next";
+import { Trans, withTranslation } from "react-i18next";
 import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
 import type { Transaction } from "@ledgerhq/live-common/lib/families/ethereum/types";
 import { getMainAccount } from "@ledgerhq/live-common/lib/account";
@@ -126,7 +126,7 @@ const EthereumFeeRow = ({
   );
 };
 
-export default translate()(EthereumFeeRow);
+export default withTranslation()(EthereumFeeRow);
 const styles = StyleSheet.create({
   accountContainer: {
     flex: 1,

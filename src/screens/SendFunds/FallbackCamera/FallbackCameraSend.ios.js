@@ -1,6 +1,6 @@
 /* @flow */
 import React, { PureComponent } from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import { Linking } from "react-native";
 import type { NavigationScreenProp } from "react-navigation";
 import i18next from "i18next";
@@ -33,4 +33,4 @@ class FallBackCameraScreen extends PureComponent<{
   }
 }
 
-export default translate()(FallBackCameraScreen);
+export default withTranslation()(FallBackCameraScreen);

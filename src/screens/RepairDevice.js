@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { View, StyleSheet, ScrollView, Dimensions } from "react-native";
 import { SafeAreaView } from "react-navigation";
 import i18next from "i18next";
-import { translate, Trans } from "react-i18next";
+import { withTranslation, Trans } from "react-i18next";
 import type { NavigationScreenProp } from "react-navigation";
 import firmwareUpdateRepair from "@ledgerhq/live-common/lib/hw/firmwareUpdate-repair";
 
@@ -160,4 +160,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default translate()(RepairDevice);
+export default withTranslation()(RepairDevice);

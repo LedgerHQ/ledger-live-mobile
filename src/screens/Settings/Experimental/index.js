@@ -5,7 +5,7 @@ import type { NavigationScreenProp } from "react-navigation";
 // $FlowFixMe
 import { ScrollView } from "react-navigation";
 import i18next from "i18next";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import { isEnvDefault } from "@ledgerhq/live-common/lib/env";
 
 import { TrackScreen } from "../../../analytics";
@@ -52,4 +52,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default translate()(ExperimentalSettings);
+export default withTranslation()(ExperimentalSettings);

@@ -2,7 +2,7 @@
 import React, { PureComponent } from "react";
 import { compose } from "redux";
 import { connect } from "react-redux";
-import { Trans, translate } from "react-i18next";
+import { Trans, withTranslation } from "react-i18next";
 import {
   TouchableOpacity,
   View,
@@ -153,7 +153,7 @@ class Distribution extends PureComponent<Props, *> {
 }
 
 export default compose(
-  translate(),
+  withTranslation(),
   connect(mapStateToProps),
 )(withNavigation(Distribution));
 

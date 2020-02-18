@@ -5,7 +5,7 @@ import { View, ScrollView, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-navigation";
 import { connect } from "react-redux";
 import { compose } from "redux";
-import { translate, Trans } from "react-i18next";
+import { withTranslation, Trans } from "react-i18next";
 import type { NavigationScreenProp } from "react-navigation";
 import type { Account, TokenAccount } from "@ledgerhq/live-common/lib/types";
 import {
@@ -188,5 +188,5 @@ const styles = StyleSheet.create({
 
 export default compose(
   connect(mapStateToProps),
-  translate(),
+  withTranslation(),
 )(ConnectDevice);

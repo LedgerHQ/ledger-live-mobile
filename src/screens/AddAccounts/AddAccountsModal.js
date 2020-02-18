@@ -3,7 +3,7 @@
 import React, { PureComponent } from "react";
 import Icon from "react-native-vector-icons/dist/Feather";
 import IconFa from "react-native-vector-icons/dist/FontAwesome";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import Config from "react-native-config";
 import { SafeAreaView } from "react-navigation";
 import type { NavigationScreenProp } from "react-navigation";
@@ -81,4 +81,4 @@ class AddAccountsModal extends PureComponent<Props> {
   }
 }
 
-export default translate()(connect(mapStateToProps)(AddAccountsModal));
+export default withTranslation()(connect(mapStateToProps)(AddAccountsModal));

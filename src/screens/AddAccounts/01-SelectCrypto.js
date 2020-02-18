@@ -1,7 +1,7 @@
 // @flow
 
 import React, { useMemo } from "react";
-import { translate, Trans } from "react-i18next";
+import { withTranslation, Trans } from "react-i18next";
 import { StyleSheet, View } from "react-native";
 // $FlowFixMe
 import { SafeAreaView, FlatList } from "react-navigation";
@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
 });
 
 const enhancer = compose(
-  translate(),
+  withTranslation(),
   withEnv("MANAGER_DEV_MODE", "devMode"),
 );
 

@@ -5,7 +5,7 @@ import { View, StyleSheet, TouchableOpacity } from "react-native";
 // $FlowFixMe
 import { SafeAreaView, ScrollView } from "react-navigation";
 import { connect } from "react-redux";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import type {
   Account,
   Operation,
@@ -112,7 +112,7 @@ class OperationDetails extends PureComponent<Props, *> {
 }
 
 export default connect(accountAndParentScreenSelector)(
-  translate()(OperationDetails),
+  withTranslation()(OperationDetails),
 );
 
 const styles = StyleSheet.create({

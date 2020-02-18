@@ -2,7 +2,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
-import { Trans, translate } from "react-i18next";
+import { Trans, withTranslation } from "react-i18next";
 import { View, StyleSheet } from "react-native";
 import Slider from "react-native-slider";
 import type { NavigationScreenProp } from "react-navigation";
@@ -147,7 +147,7 @@ export default compose(
     mapStateToProps,
     mapDispatchToProps,
   ),
-  translate(),
+  withTranslation(),
 )(EachCurrencySettings);
 
 const styles = StyleSheet.create({

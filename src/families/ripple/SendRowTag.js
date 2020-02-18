@@ -1,7 +1,7 @@
 /* @flow */
 import React, { PureComponent } from "react";
 import { View, StyleSheet } from "react-native";
-import { translate, Trans } from "react-i18next";
+import { withTranslation, Trans } from "react-i18next";
 import type { Account } from "@ledgerhq/live-common/lib/types";
 import { BigNumber } from "bignumber.js";
 import type { Transaction } from "@ledgerhq/live-common/lib/families/ripple/types";
@@ -64,4 +64,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default translate()(RippleTagRow);
+export default withTranslation()(RippleTagRow);

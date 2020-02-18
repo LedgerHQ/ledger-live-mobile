@@ -1,7 +1,7 @@
 // @flow
 import React from "react";
 import { View, StyleSheet } from "react-native";
-import { Trans, translate } from "react-i18next";
+import { Trans, withTranslation } from "react-i18next";
 import type {
   Account,
   AccountLike,
@@ -156,4 +156,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default translate()(ValidateOnDevice);
+export default withTranslation()(ValidateOnDevice);

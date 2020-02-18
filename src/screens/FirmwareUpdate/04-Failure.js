@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { View, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-navigation";
 import type { NavigationStackProp } from "react-navigation-stack";
-import { translate, Trans } from "react-i18next";
+import { withTranslation, Trans } from "react-i18next";
 
 import { TrackScreen } from "../../analytics";
 import GenericErrorView from "../../components/GenericErrorView";
@@ -117,4 +117,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default translate()(FirmwareUpdateFailure);
+export default withTranslation()(FirmwareUpdateFailure);

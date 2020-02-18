@@ -5,7 +5,7 @@ import { View, StyleSheet, Image } from "react-native";
 import { withNavigationFocus, ScrollView } from "react-navigation";
 import type { NavigationScreenProp } from "react-navigation";
 import { connect } from "react-redux";
-import { Trans, translate } from "react-i18next";
+import { Trans, withTranslation } from "react-i18next";
 import i18next from "i18next";
 import { compose } from "redux";
 import manager from "@ledgerhq/live-common/lib/manager";
@@ -240,7 +240,7 @@ const styles = StyleSheet.create({
 });
 
 export default compose(
-  translate(),
+  withTranslation(),
   connect(
     mapStateToProps,
     { removeKnownDevice },

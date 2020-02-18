@@ -1,7 +1,7 @@
 /* @flow */
 import React, { PureComponent } from "react";
 import type { NavigationScreenProp } from "react-navigation";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import i18next from "i18next";
 import type { T } from "../../../types/common";
 import PasswordForm from "./PasswordForm";
@@ -48,4 +48,4 @@ class PasswordAdd extends PureComponent<Props, State> {
   }
 }
 
-export default translate()(PasswordAdd);
+export default withTranslation()(PasswordAdd);

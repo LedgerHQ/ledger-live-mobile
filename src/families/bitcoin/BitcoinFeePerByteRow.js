@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import invariant from "invariant";
 import { View, StyleSheet, Linking } from "react-native";
 import type { AccountLike, Transaction } from "@ledgerhq/live-common/lib/types";
-import { Trans, translate } from "react-i18next";
+import { Trans, withTranslation } from "react-i18next";
 import SummaryRow from "../../screens/SendFunds/SummaryRow";
 import LText from "../../components/LText";
 
@@ -83,4 +83,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default translate()(BitcoinFeePerByteRow);
+export default withTranslation()(BitcoinFeePerByteRow);

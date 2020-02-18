@@ -5,7 +5,7 @@ import { RNCamera } from "react-native-camera";
 import { connect } from "react-redux";
 import Config from "react-native-config";
 import type { NavigationScreenProp } from "react-navigation";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import i18next from "i18next";
 import { decodeURIScheme } from "@ledgerhq/live-common/lib/currencies";
 import type {
@@ -141,7 +141,7 @@ class ScanRecipient extends PureComponent<Props, State> {
 
 const mapStateToProps = accountAndParentScreenSelector;
 
-export default translate()(connect(mapStateToProps)(ScanRecipient));
+export default withTranslation()(connect(mapStateToProps)(ScanRecipient));
 
 const styles = StyleSheet.create({
   root: {

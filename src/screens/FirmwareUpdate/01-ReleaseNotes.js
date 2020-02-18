@@ -4,7 +4,7 @@ import { View, StyleSheet } from "react-native";
 // $FlowFixMe
 import { SafeAreaView, ScrollView } from "react-navigation";
 import type { NavigationScreenProp } from "react-navigation";
-import { translate, Trans } from "react-i18next";
+import { withTranslation, Trans } from "react-i18next";
 import i18next from "i18next";
 
 import manager from "@ledgerhq/live-common/lib/manager";
@@ -112,4 +112,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default translate()(FirmwareUpdateReleaseNotes);
+export default withTranslation()(FirmwareUpdateReleaseNotes);

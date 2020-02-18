@@ -7,7 +7,7 @@ import { FlatList } from "react-navigation";
 import Icon from "react-native-vector-icons/dist/FontAwesome";
 import type { Account } from "@ledgerhq/live-common/lib/types";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import { BigNumber } from "bignumber.js";
 import { getFieldByFamily, editTxFeeByFamily } from "../families/helpers";
 import type { T } from "../types/common";
@@ -165,7 +165,7 @@ class EditFeeUnit extends PureComponent<Props, State> {
     );
   }
 }
-export default translate()(EditFeeUnit);
+export default withTranslation()(EditFeeUnit);
 
 const styles = StyleSheet.create({
   buttonContainer: {

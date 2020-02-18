@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from "react";
-import { Trans, translate } from "react-i18next";
+import { Trans, withTranslation } from "react-i18next";
 import { View, StyleSheet } from "react-native";
 // $FlowFixMe
 import { SafeAreaView, ScrollView } from "react-navigation";
@@ -82,4 +82,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default translate()(ExchangeScreen);
+export default withTranslation()(ExchangeScreen);

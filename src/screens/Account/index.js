@@ -7,7 +7,7 @@ import { SectionList } from "react-navigation";
 import type { SectionBase } from "react-native/Libraries/Lists/SectionList";
 import { connect } from "react-redux";
 import type { NavigationScreenProp } from "react-navigation";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import {
   isAccountEmpty,
   groupAccountOperationsByDay,
@@ -315,7 +315,7 @@ class AccountScreen extends PureComponent<Props, State> {
   }
 }
 
-export default translate()(
+export default withTranslation()(
   connect(
     (state, props) => {
       const { account, parentAccount } = accountAndParentScreenSelector(

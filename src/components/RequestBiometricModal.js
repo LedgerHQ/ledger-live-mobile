@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import FingerprintScanner from "react-native-fingerprint-scanner";
 
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import type { T } from "../types/common";
 
 import { privacySelector } from "../reducers/settings";
@@ -76,7 +76,7 @@ class Auth extends PureComponent<AuthProps> {
   }
 }
 
-export const RequestBiometricAuth = translate()(Auth);
+export const RequestBiometricAuth = withTranslation()(Auth);
 
 const mapStateToProps = createStructuredSelector({
   privacy: privacySelector,
@@ -120,5 +120,5 @@ class RequestBiometricModal extends PureComponent<ModalProps> {
 
 export default compose(
   connect(mapStateToProps),
-  translate(),
+  withTranslation(),
 )(RequestBiometricModal);

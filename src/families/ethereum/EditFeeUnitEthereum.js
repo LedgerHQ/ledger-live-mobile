@@ -2,7 +2,7 @@
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
 import React, { useMemo, useState, useCallback } from "react";
 import { View, StyleSheet } from "react-native";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import Slider from "react-native-slider";
 import type { NavigationScreenProp } from "react-navigation";
 import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
@@ -150,7 +150,7 @@ const EditFeeUnitEthereum = ({
   );
 };
 
-export default translate()(EditFeeUnitEthereum);
+export default withTranslation()(EditFeeUnitEthereum);
 
 const styles = StyleSheet.create({
   root: {

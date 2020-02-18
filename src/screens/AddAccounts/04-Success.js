@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component, PureComponent } from "react";
-import { translate, Trans } from "react-i18next";
+import { withTranslation, Trans } from "react-i18next";
 import { StyleSheet, View } from "react-native";
 import type { NavigationScreenProp } from "react-navigation";
 import type { CryptoCurrency } from "@ledgerhq/live-common/lib/types";
@@ -145,4 +145,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default translate()(AddAccountsSuccess);
+export default withTranslation()(AddAccountsSuccess);

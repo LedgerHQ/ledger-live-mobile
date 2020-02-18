@@ -1,7 +1,7 @@
 // @flow
 import React, { PureComponent } from "react";
 import { TouchableWithoutFeedback, View, StyleSheet } from "react-native";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 
 import { withNavigation } from "react-navigation";
 import type { NavigationScreenProp } from "react-navigation";
@@ -61,5 +61,5 @@ const styles = StyleSheet.create({
 
 export default compose(
   withNavigation,
-  translate(),
+  withTranslation(),
 )(StepHeader);

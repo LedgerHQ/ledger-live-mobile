@@ -3,7 +3,7 @@ import React, { PureComponent } from "react";
 import { View, StyleSheet } from "react-native";
 // $FlowFixMe
 import { ScrollView } from "react-navigation";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import i18next from "i18next";
 import type { Account } from "@ledgerhq/live-common/lib/types";
 import type { NavigationScreenProp } from "react-navigation";
@@ -103,7 +103,7 @@ export default compose(
     mapStateToProps,
     mapDispatchToProps,
   ),
-  translate(),
+  withTranslation(),
 )(AccountSettings);
 
 const styles = StyleSheet.create({

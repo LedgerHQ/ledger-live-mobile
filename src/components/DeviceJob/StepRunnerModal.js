@@ -2,7 +2,7 @@
 
 import React, { PureComponent } from "react";
 import { StyleSheet } from "react-native";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import BottomModal from "../BottomModal";
 import Close from "../../icons/Close";
 import Touchable from "../Touchable";
@@ -81,4 +81,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default translate()(SelectDeviceConnectModal);
+export default withTranslation()(SelectDeviceConnectModal);

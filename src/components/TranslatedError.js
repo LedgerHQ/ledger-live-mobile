@@ -1,6 +1,6 @@
 // @flow
 import { PureComponent } from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 
 type Props = {
   error: ?Error,
@@ -37,4 +37,4 @@ class TranslatedError extends PureComponent<Props> {
   }
 }
 
-export default translate()(TranslatedError);
+export default withTranslation()(TranslatedError);

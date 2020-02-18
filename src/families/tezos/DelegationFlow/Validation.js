@@ -7,7 +7,7 @@ import { View, StyleSheet, ActivityIndicator } from "react-native";
 import { connect } from "react-redux";
 import { SafeAreaView } from "react-navigation";
 import type { NavigationScreenProp } from "react-navigation";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import i18next from "i18next";
 import type {
   AccountLike,
@@ -131,4 +131,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(translate()(Validation));
+)(withTranslation()(Validation));

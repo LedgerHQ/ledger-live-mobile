@@ -9,7 +9,7 @@ import type {
 } from "@ledgerhq/live-common/lib/types";
 import i18next from "i18next";
 import React, { useCallback, useRef, useEffect } from "react";
-import { Trans, translate } from "react-i18next";
+import { Trans, withTranslation } from "react-i18next";
 import { Platform, ScrollView, StyleSheet, View } from "react-native";
 import Icon from "react-native-vector-icons/dist/FontAwesome";
 import type { NavigationScreenProp } from "react-navigation";
@@ -299,6 +299,6 @@ const styles = StyleSheet.create({
 });
 
 export default compose(
-  translate(),
+  withTranslation(),
   connect(accountAndParentScreenSelector),
 )(SendSelectRecipient);

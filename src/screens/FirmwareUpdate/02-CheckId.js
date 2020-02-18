@@ -4,7 +4,7 @@ import React, { Component } from "react";
 import { View, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-navigation";
 import type { NavigationStackProp } from "react-navigation-stack";
-import { translate, Trans } from "react-i18next";
+import { withTranslation, Trans } from "react-i18next";
 import firmwareUpdatePrepare from "@ledgerhq/live-common/lib/hw/firmwareUpdate-prepare";
 import type { FirmwareUpdateContext } from "@ledgerhq/live-common/lib/types/manager";
 import manager from "@ledgerhq/live-common/lib/manager";
@@ -177,4 +177,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default translate()(FirmwareUpdateCheckId);
+export default withTranslation()(FirmwareUpdateCheckId);

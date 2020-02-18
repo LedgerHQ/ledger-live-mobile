@@ -4,7 +4,7 @@ import { View, StyleSheet, Animated } from "react-native";
 // $FlowFixMe
 import { SafeAreaView } from "react-navigation";
 import { connect } from "react-redux";
-import { translate, Trans } from "react-i18next";
+import { withTranslation, Trans } from "react-i18next";
 import type { NavigationScreenProp } from "react-navigation";
 import invariant from "invariant";
 import Icon from "react-native-vector-icons/dist/Feather";
@@ -485,5 +485,5 @@ const styles = StyleSheet.create({
 });
 
 export default connect(accountAndParentScreenSelector)(
-  translate()(DelegationSummary),
+  withTranslation()(DelegationSummary),
 );

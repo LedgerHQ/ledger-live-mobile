@@ -1,7 +1,7 @@
 // @flow
 
 import React from "react";
-import { Trans, translate } from "react-i18next";
+import { Trans, withTranslation } from "react-i18next";
 import type { NavigationScreenProp } from "react-navigation";
 
 import HeaderRightClose from "../../components/HeaderRightClose";
@@ -25,4 +25,4 @@ function AddAccountsHeaderRightClose({ navigation }: Props) {
   );
 }
 
-export default translate()(AddAccountsHeaderRightClose);
+export default withTranslation()(AddAccountsHeaderRightClose);

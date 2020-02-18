@@ -1,6 +1,6 @@
 /* @flow */
 import React, { Component } from "react";
-import { translate, Trans } from "react-i18next";
+import { withTranslation, Trans } from "react-i18next";
 import Button from "./Button";
 
 class RetryButton extends Component<*> {
@@ -15,4 +15,4 @@ class RetryButton extends Component<*> {
   }
 }
 
-export default translate()(RetryButton);
+export default withTranslation()(RetryButton);

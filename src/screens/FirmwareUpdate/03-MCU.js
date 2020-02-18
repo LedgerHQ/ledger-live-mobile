@@ -4,7 +4,7 @@ import React, { Component } from "react";
 import { View, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-navigation";
 import type { NavigationStackProp } from "react-navigation-stack";
-import { translate, Trans } from "react-i18next";
+import { withTranslation, Trans } from "react-i18next";
 import firmwareUpdateMain from "@ledgerhq/live-common/lib/hw/firmwareUpdate-main";
 import type { FirmwareUpdateContext } from "@ledgerhq/live-common/lib/types/manager";
 import logger from "../../logger";
@@ -146,4 +146,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default translate()(FirmwareUpdateMCU);
+export default withTranslation()(FirmwareUpdateMCU);

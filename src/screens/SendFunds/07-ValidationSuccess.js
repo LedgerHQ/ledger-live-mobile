@@ -2,7 +2,7 @@
 import React, { Component } from "react";
 import { View, StyleSheet } from "react-native";
 import { connect } from "react-redux";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import type { NavigationScreenProp } from "react-navigation";
 import type {
   TokenAccount,
@@ -77,4 +77,4 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = accountAndParentScreenSelector;
 
-export default connect(mapStateToProps)(translate()(ValidationSuccess));
+export default connect(mapStateToProps)(withTranslation()(ValidationSuccess));

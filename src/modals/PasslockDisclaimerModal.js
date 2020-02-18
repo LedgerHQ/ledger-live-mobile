@@ -1,7 +1,7 @@
 /* @flow */
 
 import React, { Component } from "react";
-import { Trans, translate } from "react-i18next";
+import { Trans, withTranslation } from "react-i18next";
 import { Image, View, StyleSheet } from "react-native";
 import BottomModal from "../components/BottomModal";
 import Button from "../components/Button";
@@ -68,7 +68,7 @@ class PasslockDisclaimerModal extends Component<Props> {
   }
 }
 
-export default translate()(PasslockDisclaimerModal);
+export default withTranslation()(PasslockDisclaimerModal);
 
 const styles = StyleSheet.create({
   root: {

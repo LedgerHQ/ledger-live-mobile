@@ -2,7 +2,7 @@
 
 import React, { Component } from "react";
 import { withNavigation, SafeAreaView } from "react-navigation";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 
@@ -86,6 +86,6 @@ class CreateModal extends Component<Props> {
   }
 }
 
-export default translate()(
+export default withTranslation()(
   withNavigation(connect(mapStateToProps)(CreateModal)),
 );

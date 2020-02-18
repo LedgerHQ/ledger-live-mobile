@@ -1,6 +1,6 @@
 /* @flow */
 import React, { Component } from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import { View, StyleSheet } from "react-native";
 import type { T } from "../../types/common";
 import LText from "../../components/LText";
@@ -42,4 +42,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default translate()(PoweredByLedger);
+export default withTranslation()(PoweredByLedger);

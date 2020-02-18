@@ -3,7 +3,7 @@
 import React, { createContext, PureComponent } from "react";
 import hoistNonReactStatic from "hoist-non-react-statics";
 import type { NavigationScreenProp } from "react-navigation";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 
 import getStep from "./steps";
 
@@ -157,7 +157,7 @@ export function withOnboardingContext(Comp: React$ComponentType<any>) {
   }
 
   // Gives component ability to prev/next and change the steps mode
-  // for comfort, it also add the translate() decorator
+  // for comfort, it also add the withTranslation() decorator
   function WithOnboardingContext(props: any) {
     return (
       <OnboardingContext.Consumer>
@@ -172,5 +172,5 @@ export function withOnboardingContext(Comp: React$ComponentType<any>) {
     headerShown: false,
   };
 
-  return translate()(WithOnboardingContext);
+  return withTranslation()(WithOnboardingContext);
 }

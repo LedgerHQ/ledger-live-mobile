@@ -4,7 +4,7 @@ import { StyleSheet, ScrollView } from "react-native";
 import { SafeAreaView } from "react-navigation";
 import { connect } from "react-redux";
 import { compose } from "redux";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import i18next from "i18next";
 import type { NavigationScreenProp } from "react-navigation";
 import type {
@@ -95,5 +95,5 @@ const mapStateToProps = accountAndParentScreenSelector;
 
 export default compose(
   connect(mapStateToProps),
-  translate(),
+  withTranslation(),
 )(ConnectDevice);

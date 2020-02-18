@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from "react";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import { StyleSheet, ScrollView } from "react-native";
 import { SafeAreaView } from "react-navigation";
 import type { NavigationScreenProp } from "react-navigation";
@@ -86,4 +86,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default translate()(AddAccountsSelectDevice);
+export default withTranslation()(AddAccountsSelectDevice);

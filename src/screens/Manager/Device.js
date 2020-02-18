@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 // $FlowFixMe
 import { ScrollView } from "react-navigation";
 import type { NavigationScreenProp } from "react-navigation";
-import { translate, Trans } from "react-i18next";
+import { withTranslation, Trans } from "react-i18next";
 import type {
   DeviceInfo,
   OsuFirmware,
@@ -89,7 +89,7 @@ class DeviceLabel extends Component<Props & { tintColor: string }, State> {
   }
 }
 
-const DeviceLabelT = translate()(DeviceLabel);
+const DeviceLabelT = withTranslation()(DeviceLabel);
 
 class ManagerDevice extends Component<Props, { opened: boolean }> {
   static navigationOptions = props => ({
@@ -179,4 +179,4 @@ export default connect(
   {
     removeKnownDevice,
   },
-)(translate()(ManagerDevice));
+)(withTranslation()(ManagerDevice));

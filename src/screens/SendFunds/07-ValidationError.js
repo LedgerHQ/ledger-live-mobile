@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { StyleSheet, Linking } from "react-native";
 import { SafeAreaView } from "react-navigation";
 import { connect } from "react-redux";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import type { NavigationScreenProp } from "react-navigation";
 import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
 import { accountAndParentScreenSelector } from "../../reducers/accounts";
@@ -77,4 +77,4 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = accountAndParentScreenSelector;
 
-export default connect(mapStateToProps)(translate()(ValidationError));
+export default connect(mapStateToProps)(withTranslation()(ValidationError));

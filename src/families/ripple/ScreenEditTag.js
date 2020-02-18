@@ -6,7 +6,7 @@ import { SafeAreaView, ScrollView } from "react-navigation";
 import type { NavigationScreenProp } from "react-navigation";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import i18next from "i18next";
 import { BigNumber } from "bignumber.js";
 import type { Account } from "@ledgerhq/live-common/lib/types";
@@ -147,4 +147,4 @@ const mapStateToProps = createStructuredSelector({
   account: accountScreenSelector,
 });
 
-export default connect(mapStateToProps)(translate()(RippleEditTag));
+export default connect(mapStateToProps)(withTranslation()(RippleEditTag));

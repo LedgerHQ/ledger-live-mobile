@@ -2,7 +2,7 @@
 import React, { useCallback } from "react";
 import { StyleSheet, ScrollView, View, Linking } from "react-native";
 import { SafeAreaView } from "react-navigation";
-import { translate, Trans } from "react-i18next";
+import { withTranslation, Trans } from "react-i18next";
 import i18next from "i18next";
 import type { NavigationScreenProp } from "react-navigation";
 import colors from "../../../colors";
@@ -136,4 +136,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default translate()(DelegationStarted);
+export default withTranslation()(DelegationStarted);

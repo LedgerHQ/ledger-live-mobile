@@ -1,7 +1,7 @@
 /* @flow */
 import React, { Component } from "react";
 import { View, StyleSheet } from "react-native";
-import { Trans, translate } from "react-i18next";
+import { Trans, withTranslation } from "react-i18next";
 import LText from "./LText";
 
 type Props = {
@@ -46,4 +46,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default translate()(TabIcon);
+export default withTranslation()(TabIcon);

@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-navigation";
 import { connect } from "react-redux";
-import { translate, Trans } from "react-i18next";
+import { withTranslation, Trans } from "react-i18next";
 import i18next from "i18next";
 import { compose } from "redux";
 import { createStructuredSelector } from "reselect";
@@ -185,5 +185,5 @@ const mapStateToProps = createStructuredSelector({
 
 export default compose(
   connect(mapStateToProps),
-  translate(),
+  withTranslation(),
 )(BitcoinEditFeePerByte);

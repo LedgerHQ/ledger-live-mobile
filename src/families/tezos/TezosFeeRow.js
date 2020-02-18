@@ -2,7 +2,7 @@
 import React, { Component } from "react";
 import { View, StyleSheet, Linking } from "react-native";
 import type { AccountLike } from "@ledgerhq/live-common/lib/types";
-import { Trans, translate } from "react-i18next";
+import { Trans, withTranslation } from "react-i18next";
 import type { Transaction } from "@ledgerhq/live-common/lib/families/ripple/types";
 import {
   getAccountUnit,
@@ -90,4 +90,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default translate()(TezosFeeRow);
+export default withTranslation()(TezosFeeRow);

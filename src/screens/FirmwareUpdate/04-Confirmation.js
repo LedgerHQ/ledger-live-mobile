@@ -4,7 +4,7 @@ import React, { Component } from "react";
 import { View, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-navigation";
 import type { NavigationScreenProp } from "react-navigation";
-import { translate, Trans } from "react-i18next";
+import { withTranslation, Trans } from "react-i18next";
 import { TrackScreen } from "../../analytics";
 
 import GenericSuccessView from "../../components/GenericSuccessView";
@@ -94,4 +94,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default translate()(FirmwareUpdateConfirmation);
+export default withTranslation()(FirmwareUpdateConfirmation);

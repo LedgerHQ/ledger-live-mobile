@@ -1,7 +1,7 @@
 /* @flow */
 
 import React, { Component } from "react";
-import { Trans, translate } from "react-i18next";
+import { Trans, withTranslation } from "react-i18next";
 import { Image, View, StyleSheet } from "react-native";
 import BottomModal from "../components/BottomModal";
 import Button from "../components/Button";
@@ -75,7 +75,7 @@ class PinModal extends Component<Props> {
   }
 }
 
-export default translate()(PinModal);
+export default withTranslation()(PinModal);
 
 const styles = StyleSheet.create({
   root: {

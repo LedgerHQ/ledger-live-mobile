@@ -8,7 +8,7 @@ import type { NavigationScreenProp } from "react-navigation";
 import type { Account } from "@ledgerhq/live-common/lib/types";
 import { connect } from "react-redux";
 import { compose } from "redux";
-import { translate } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import { createStructuredSelector } from "reselect";
 import { accountScreenSelector } from "../../reducers/accounts";
 import { updateAccount } from "../../actions/accounts";
@@ -88,7 +88,7 @@ export default compose(
     mapStateToProps,
     mapDispatchToProps,
   ),
-  translate(),
+  withTranslation(),
 )(EditAccountUnits);
 
 const styles = StyleSheet.create({
