@@ -311,8 +311,6 @@ PODS:
     - React
   - RNCAsyncStorage (1.8.0):
     - React
-  - RNCMaskedView (0.1.6):
-    - React
   - RNGestureHandler (1.6.0):
     - React
   - RNKeychain (4.0.5):
@@ -392,7 +390,6 @@ DEPENDENCIES:
   - "ReactNativeART (from `../node_modules/@react-native-community/art`)"
   - "RNAnalytics (from `../node_modules/@segment/analytics-react-native`)"
   - "RNCAsyncStorage (from `../node_modules/@react-native-community/async-storage`)"
-  - "RNCMaskedView (from `../node_modules/@react-native-community/masked-view`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNKeychain (from `../node_modules/react-native-keychain`)
   - "RNLibLedgerCore (from `../node_modules/@ledgerhq/react-native-ledger-core`)"
@@ -508,8 +505,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@segment/analytics-react-native"
   RNCAsyncStorage:
     :path: "../node_modules/@react-native-community/async-storage"
-  RNCMaskedView:
-    :path: "../node_modules/@react-native-community/masked-view"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
   RNKeychain:
@@ -589,7 +584,6 @@ SPEC CHECKSUMS:
   ReactNativeART: c580fba2f7d188d8fa4418ce78db8130654ed10f
   RNAnalytics: 5c242b7f8117f108f5df71e96b908185db3fb4ee
   RNCAsyncStorage: 5d83b49070d41fd72906a116c5e7bdac4ea3a814
-  RNCMaskedView: a88953beefbd347a29072d9eba90e42945fe291e
   RNGestureHandler: dde546180bf24af0b5f737c8ad04b6f3fa51609a
   RNKeychain: 840f8e6f13be0576202aefcdffd26a4f54bfe7b5
   RNLibLedgerCore: 0f37d09ec17d94b1f72841970a5f89e20294b872
