@@ -66,7 +66,7 @@ class OperationDetails extends PureComponent<Props, *> {
       return {
         title: i18next.t("operationDetails.title"),
         headerLeft: <BackButton navigation={navigation} />,
-        headerRight: <CloseButton navigation={navigation} />,
+        headerRight: () => <CloseButton navigation={navigation} />,
       };
     }
 

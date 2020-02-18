@@ -232,7 +232,7 @@ const AccountsStack = createStackNavigator(
   stackNavigatorConfig,
 );
 AccountsStack.navigationOptions = {
-  header: null,
+  headerShown: false,
   tabBarIcon: (props: *) => (
     <TabIcon Icon={AccountsIcon} i18nKey="tabs.accounts" {...props} />
   ),
@@ -271,7 +271,7 @@ const Main = createBottomTabNavigator(
 );
 
 Main.navigationOptions = {
-  header: null,
+  headerShown: false,
 };
 
 const ReceiveFunds = createStackNavigator(
@@ -286,7 +286,7 @@ const ReceiveFunds = createStackNavigator(
   },
 );
 ReceiveFunds.navigationOptions = ({ navigation }) => ({
-  header: null,
+  headerShown: false,
   gesturesEnabled:
     Platform.OS === "ios"
       ? navigation.getParam("allowNavigation", true)
@@ -302,7 +302,7 @@ const addAccountsNavigatorConfig = {
     navigation: NavigationScreenProp<*>,
   }) => ({
     ...defaultNavigationOptions,
-    headerRight: <AddAccountsHeaderRightClose navigation={navigation} />,
+    headerRight: () => <AddAccountsHeaderRightClose navigation={navigation} />,
   }),
 };
 
@@ -324,7 +324,7 @@ const AddAccounts = createStackNavigator(
 );
 
 AddAccounts.navigationOptions = {
-  header: null,
+  headerShown: false,
 };
 
 const SendFunds = createStackNavigator(
@@ -344,7 +344,7 @@ const SendFunds = createStackNavigator(
 );
 
 SendFunds.navigationOptions = ({ navigation }) => ({
-  header: null,
+  headerShown: false,
   gesturesEnabled:
     Platform.OS === "ios"
       ? navigation.getParam("allowNavigation", true)
@@ -361,7 +361,7 @@ const MigrateAccountsFlow = createStackNavigator(
 );
 
 MigrateAccountsFlow.navigationOptions = ({ navigation }) => ({
-  header: null,
+  headerShown: false,
   gesturesEnabled:
     Platform.OS === "ios"
       ? navigation.getParam("allowNavigation", true)
@@ -385,7 +385,7 @@ const FirmwareUpdate = createStackNavigator(
 );
 
 FirmwareUpdate.navigationOptions = {
-  header: null,
+  headerShown: false,
 };
 
 const AccountSettings = createStackNavigator(
@@ -400,7 +400,7 @@ const AccountSettings = createStackNavigator(
 );
 
 AccountSettings.navigationOptions = {
-  header: null,
+  headerShown: false,
 };
 
 const ImportAccounts = createStackNavigator(
@@ -419,7 +419,7 @@ const ImportAccounts = createStackNavigator(
 );
 
 ImportAccounts.navigationOptions = {
-  header: null,
+  headerShown: false,
 };
 
 const PasswordAddFlow = createStackNavigator(
@@ -432,7 +432,7 @@ const PasswordAddFlow = createStackNavigator(
 );
 
 PasswordAddFlow.navigationOptions = {
-  header: null,
+  headerShown: false,
 };
 
 const PasswordModifyFlow = createStackNavigator(
@@ -443,7 +443,7 @@ const PasswordModifyFlow = createStackNavigator(
 );
 
 PasswordModifyFlow.navigationOptions = {
-  header: null,
+  headerShown: false,
 };
 
 const sendScreens = {};
@@ -514,7 +514,7 @@ const Onboarding = createStackNavigator({
   OnboardingStepFinish,
 });
 
-Onboarding.navigationOptions = { header: null };
+Onboarding.navigationOptions = { headerShown: false };
 
 const BaseOnboarding = createStackNavigator(
   {
@@ -537,7 +537,7 @@ const RootNavigator = createSwitchNavigator({
   BaseOnboarding,
 });
 
-RootNavigator.navigationOptions = { header: null };
+RootNavigator.navigationOptions = { headerShown: false };
 
 // $FlowFixMe
 const AppContainer = createAppContainer(RootNavigator);

@@ -26,7 +26,7 @@ const List = globalSyncRefreshControl(FlatList);
 const navigationOptions = {
   title: i18next.t("accounts.title"),
   headerLeft: <AccountOrder />,
-  headerRight: <AddAccount />,
+  headerRight: () => <AddAccount />,
   tabBarIcon: ({ tintColor }: { tintColor: string }) => (
     <AccountsIcon size={18} color={tintColor} />
   ),

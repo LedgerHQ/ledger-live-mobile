@@ -91,7 +91,7 @@ class DebugBLE extends Component<
 > {
   static navigationOptions = ({ navigation }: *) => ({
     title: "Debug BLE",
-    headerRight: (
+    headerRight: () => (
       <Button
         event="DebugBLEBenchmark"
         type="lightSecondary"

@@ -26,7 +26,7 @@ const DelegationFlow = createStackNavigator(
 );
 
 DelegationFlow.navigationOptions = ({ navigation }) => ({
-  header: null,
+  headerShown: false,
   gesturesEnabled:
     Platform.OS === "ios"
       ? navigation.getParam("allowNavigation", true)

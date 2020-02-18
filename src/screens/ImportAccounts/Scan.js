@@ -41,7 +41,7 @@ class Scan extends PureComponent<
     navigation: NavigationScreenProp<*>,
   }) => ({
     title: i18next.t("account.import.scan.title"),
-    headerRight: (
+    headerRight: () => (
       <HeaderRightClose navigation={navigation} color={colors.white} />
     ),
     headerLeft: null,

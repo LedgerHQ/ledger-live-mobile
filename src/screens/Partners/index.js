@@ -23,7 +23,7 @@ type Props = {
 
 class ExchangeScreen extends Component<Props> {
   static navigationOptions = {
-    header: null,
+    headerShown: false,
   };
 
   render() {

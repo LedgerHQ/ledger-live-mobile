@@ -30,7 +30,7 @@ type Props = {
 
 class ValidationError extends Component<Props> {
   static navigationOptions = {
-    header: null,
+    headerShown: false,
   };
 
   dismiss = () => {
