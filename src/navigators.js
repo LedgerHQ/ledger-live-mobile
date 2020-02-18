@@ -302,7 +302,7 @@ const addAccountsNavigatorConfig = {
     navigation: NavigationScreenProp<*>,
   }) => ({
     ...defaultNavigationOptions,
-    headerRight: () => <AddAccountsHeaderRightClose navigation={navigation} />,
+    headerRight: <AddAccountsHeaderRightClose navigation={navigation} />,
   }),
 };
 

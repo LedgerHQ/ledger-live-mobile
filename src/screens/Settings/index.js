@@ -124,10 +124,7 @@ class Settings extends Component<Props, *> {
   }
 }
 
-export default compose(
-  connect(mapStateToProps),
-  withTranslation(),
-)(Settings);
+export default compose(connect(mapStateToProps), withTranslation())(Settings);
 
 const styles = StyleSheet.create({
   root: {

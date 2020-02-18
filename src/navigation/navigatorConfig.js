@@ -29,7 +29,7 @@ export const closableNavigationOptions = ({
   navigation: NavigationScreenProp<*>,
 }) => ({
   ...defaultNavigationOptions,
-  headerRight: () => <HeaderRightClose navigation={navigation} />,
+  headerRight: <HeaderRightClose navigation={navigation} />,
 });
 
 export const closableStackNavigatorConfig = {

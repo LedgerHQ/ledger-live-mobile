@@ -82,7 +82,7 @@ const List = accountSyncRefreshControl(AnimatedSectionList);
 class AccountScreen extends PureComponent<Props, State> {
   static navigationOptions = ({ navigation }) => ({
     headerTitle: <AccountHeaderTitle navigation={navigation} />,
-    headerRight: () => <AccountHeaderRight navigation={navigation} />,
+    headerRight: <AccountHeaderRight navigation={navigation} />,
   });
 
   state = {
