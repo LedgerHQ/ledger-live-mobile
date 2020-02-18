@@ -4,7 +4,7 @@ import "../shim";
 import "./polyfill";
 import "./live-common-setup";
 import "./implement-react-native-libcore";
-import React, { Fragment, Component } from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import { StyleSheet, View, Text } from "react-native";
 import SplashScreen from "react-native-splash-screen";
@@ -27,7 +27,7 @@ import StyledStatusBar from "./components/StyledStatusBar";
 import { BridgeSyncProvider } from "./bridge/BridgeSyncContext";
 import DBSave from "./components/DBSave";
 import DebugRejectSwitch from "./components/DebugRejectSwitch";
-import AppStateListener from "./components/AppStateListener";
+import useAppStateListener from "./components/useAppStateListener";
 import SyncNewAccounts from "./bridge/SyncNewAccounts";
 import { OnboardingContextProvider } from "./screens/Onboarding/onboardingContext";
 import HookAnalytics from "./analytics/HookAnalytics";
@@ -56,57 +56,63 @@ Text.defaultProps = Text.defaultProps || {};
 // $FlowFixMe
 Text.defaultProps.allowFontScaling = false;
 
-class App extends Component<*> {
-  hasCountervaluesChanged = (a, b) => a.countervalues !== b.countervalues;
+interface AppProps {
+  importDataString: string;
+}
 
-  hasSettingsChanged = (a, b) => a.settings !== b.settings;
+function App({ importDataString }: AppProps) {
+  useAppStateListener();
 
-  hasAccountsChanged = (a, b) => a.accounts !== b.accounts;
-
-  hasBleChanged = (a, b) => a.ble !== b.ble;
-
-  render() {
-    return (
-      <View style={styles.root}>
-        <DBSave
-          dbKey="countervalues"
-          throttle={2000}
-          hasChanged={this.hasCountervaluesChanged}
-          lense={CounterValues.exportSelector}
-        />
-        <DBSave
-          dbKey="settings"
-          throttle={400}
-          hasChanged={this.hasSettingsChanged}
-          lense={settingsExportSelector}
-        />
-        <DBSave
-          dbKey="accounts"
-          throttle={500}
-          hasChanged={this.hasAccountsChanged}
-          lense={accountsExportSelector}
-        />
-        <DBSave
-          dbKey="ble"
-          throttle={500}
-          hasChanged={this.hasBleChanged}
-          lense={bleSelector}
-        />
-
-        <AppStateListener />
-
-        <SyncNewAccounts priority={5} />
-
-        <AppContainer
-          screenProps={{
-            importDataString: this.props.importDataString,
-          }}
-        />
-
-        <DebugRejectSwitch />
-      </View>
-    );
+  function hasCountervaluesChanged(a, b): boolean {
+    return a.countervalues !== b.countervalues;
   }
+
+  function hasSettingsChanged(a, b): boolean {
+    return a.settings !== b.settings;
+  }
+
+  function hasAccountsChanged(a, b): boolean {
+    return a.accounts !== b.accounts;
+  }
+
+  function hasBleChanged(a, b): boolean {
+    return a.ble !== b.ble;
+  }
+
+  return (
+    <View style={styles.root}>
+      <DBSave
+        dbKey="countervalues"
+        throttle={2000}
+        hasChanged={hasCountervaluesChanged}
+        lense={CounterValues.exportSelector}
+      />
+      <DBSave
+        dbKey="settings"
+        throttle={400}
+        hasChanged={hasSettingsChanged}
+        lense={settingsExportSelector}
+      />
+      <DBSave
+        dbKey="accounts"
+        throttle={500}
+        hasChanged={hasAccountsChanged}
+        lense={accountsExportSelector}
+      />
+      <DBSave
+        dbKey="ble"
+        throttle={500}
+        hasChanged={hasBleChanged}
+        lense={bleSelector}
+      />
+
+      <SyncNewAccounts priority={5} />
+
+      <AppContainer screenProps={{ importDataString }} />
+
+      <DebugRejectSwitch />
+    </View>
+  );
 }
 
 export default class Root extends Component<
@@ -141,7 +147,7 @@ export default class Root extends Component<
         <LedgerStoreProvider onInitFinished={this.onInitFinished}>
           {(ready, store) =>
             ready ? (
-              <Fragment>
+              <>
                 <StyledStatusBar />
                 <SetEnvsFromSettings />
                 <HookSentry />
@@ -159,7 +165,7 @@ export default class Root extends Component<
                     </BridgeSyncProvider>
                   </LocaleProvider>
                 </AuthPass>
-              </Fragment>
+              </>
             ) : (
               <LoadingApp />
             )
