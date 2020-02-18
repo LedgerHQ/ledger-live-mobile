@@ -232,7 +232,7 @@ const AccountsStack = createStackNavigator(
   stackNavigatorConfig,
 );
 AccountsStack.navigationOptions = {
-  headerShown: false,
+  header: null,
   tabBarIcon: (props: *) => (
     <TabIcon Icon={AccountsIcon} i18nKey="tabs.accounts" {...props} />
   ),
@@ -271,7 +271,7 @@ const Main = createBottomTabNavigator(
 );
 
 Main.navigationOptions = {
-  headerShown: false,
+  header: null,
 };
 
 const ReceiveFunds = createStackNavigator(
@@ -286,7 +286,7 @@ const ReceiveFunds = createStackNavigator(
   },
 );
 ReceiveFunds.navigationOptions = ({ navigation }) => ({
-  headerShown: false,
+  header: null,
   gesturesEnabled:
     Platform.OS === "ios"
       ? navigation.getParam("allowNavigation", true)
@@ -324,7 +324,7 @@ const AddAccounts = createStackNavigator(
 );
 
 AddAccounts.navigationOptions = {
-  headerShown: false,
+  header: null,
 };
 
 const SendFunds = createStackNavigator(
@@ -344,7 +344,7 @@ const SendFunds = createStackNavigator(
 );
 
 SendFunds.navigationOptions = ({ navigation }) => ({
-  headerShown: false,
+  header: null,
   gesturesEnabled:
     Platform.OS === "ios"
       ? navigation.getParam("allowNavigation", true)
@@ -361,7 +361,7 @@ const MigrateAccountsFlow = createStackNavigator(
 );
 
 MigrateAccountsFlow.navigationOptions = ({ navigation }) => ({
-  headerShown: false,
+  header: null,
   gesturesEnabled:
     Platform.OS === "ios"
       ? navigation.getParam("allowNavigation", true)
@@ -385,7 +385,7 @@ const FirmwareUpdate = createStackNavigator(
 );
 
 FirmwareUpdate.navigationOptions = {
-  headerShown: false,
+  header: null,
 };
 
 const AccountSettings = createStackNavigator(
@@ -400,7 +400,7 @@ const AccountSettings = createStackNavigator(
 );
 
 AccountSettings.navigationOptions = {
-  headerShown: false,
+  header: null,
 };
 
 const ImportAccounts = createStackNavigator(
@@ -419,7 +419,7 @@ const ImportAccounts = createStackNavigator(
 );
 
 ImportAccounts.navigationOptions = {
-  headerShown: false,
+  header: null,
 };
 
 const PasswordAddFlow = createStackNavigator(
@@ -432,7 +432,7 @@ const PasswordAddFlow = createStackNavigator(
 );
 
 PasswordAddFlow.navigationOptions = {
-  headerShown: false,
+  header: null,
 };
 
 const PasswordModifyFlow = createStackNavigator(
@@ -443,7 +443,7 @@ const PasswordModifyFlow = createStackNavigator(
 );
 
 PasswordModifyFlow.navigationOptions = {
-  headerShown: false,
+  header: null,
 };
 
 const sendScreens = {};
@@ -514,7 +514,7 @@ const Onboarding = createStackNavigator({
   OnboardingStepFinish,
 });
 
-Onboarding.navigationOptions = { headerShown: false };
+Onboarding.navigationOptions = { header: null };
 
 const BaseOnboarding = createStackNavigator(
   {
@@ -537,7 +537,7 @@ const RootNavigator = createSwitchNavigator({
   BaseOnboarding,
 });
 
-RootNavigator.navigationOptions = { headerShown: false };
+RootNavigator.navigationOptions = { header: null };
 
 // $FlowFixMe
 const AppContainer = createAppContainer(RootNavigator);

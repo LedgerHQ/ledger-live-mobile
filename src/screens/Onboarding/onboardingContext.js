@@ -169,7 +169,7 @@ export function withOnboardingContext(Comp: React$ComponentType<any>) {
   hoistNonReactStatic(WithOnboardingContext, Comp);
 
   WithOnboardingContext.navigationOptions = {
-    headerShown: false,
+    header: null,
   };
 
   return withTranslation()(WithOnboardingContext);

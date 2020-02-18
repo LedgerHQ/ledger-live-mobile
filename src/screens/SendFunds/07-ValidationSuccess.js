@@ -30,7 +30,7 @@ type Props = {
 
 class ValidationSuccess extends Component<Props> {
   static navigationOptions = {
-    headerShown: false,
+    header: null,
     gesturesEnabled: false,
   };
 

@@ -28,7 +28,7 @@ type State = {};
 
 class FirmwareUpdateFailure extends Component<Props, State> {
   static navigationOptions = {
-    headerShown: false,
+    header: null,
   };
 
   onRetry = () => {

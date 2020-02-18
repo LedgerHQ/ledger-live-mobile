@@ -19,19 +19,17 @@ export const defaultNavigationOptions = {
 
 export const stackNavigatorConfig = {
   defaultNavigationOptions,
+  cardStyle: styles.card,
+  headerLayoutPreset: "center",
 };
 
 export const closableNavigationOptions = ({
   navigation,
 }: {
   navigation: NavigationScreenProp<*>,
-  headerTitleAlign: "center",
-  cardStyle: styles.card,
 }) => ({
   ...defaultNavigationOptions,
   headerRight: () => <HeaderRightClose navigation={navigation} />,
-  headerTitleAlign: "center",
-  cardStyle: styles.card,
 });
 
 export const closableStackNavigatorConfig = {

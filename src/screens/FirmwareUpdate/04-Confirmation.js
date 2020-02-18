@@ -27,7 +27,7 @@ type State = {};
 
 class FirmwareUpdateConfirmation extends Component<Props, State> {
   static navigationOptions = {
-    headerShown: false,
+    header: null,
   };
 
   onClose = () => {
