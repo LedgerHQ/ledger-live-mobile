@@ -121,7 +121,6 @@
     "react-native-qrcode-svg": "6.0.3",
     "react-native-randombytes": "^3.5.3",
     "react-native-reanimated": "^1.7.0",
-    "react-native-safe-area-context": "^0.7.3",
     "react-native-screens": "^1.0.0-alpha.22",
     "react-native-sentry": "0.43.2",
     "react-native-simple-store": "2.0.2",
