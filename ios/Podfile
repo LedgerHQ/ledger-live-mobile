@@ -75,6 +75,8 @@ target 'ledgerlivemobile' do
   pod 'RNLibLedgerCore', :path => '../node_modules/@ledgerhq/react-native-ledger-core'
 
 
+  pod 'react-native-safe-area-context', :path => '../node_modules/react-native-safe-area-context'
+
   target 'ledgerlivemobileTests' do
     inherit! :search_paths
     # Pods for testing

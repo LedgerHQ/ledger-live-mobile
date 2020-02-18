@@ -10,7 +10,7 @@ import { ScrollView } from "react-navigation";
 import { createStructuredSelector } from "reselect";
 
 import { encode } from "@ledgerhq/live-common/lib/cross";
-import { dataToFrames } from "qrloop/exporter";
+import { dataToFrames } from "qrloop";
 
 import { accountsSelector } from "../../../reducers/accounts";
 import { exportSettingsSelector } from "../../../reducers/settings";

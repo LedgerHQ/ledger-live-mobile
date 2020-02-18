@@ -4,7 +4,7 @@ import React, { useCallback } from "react";
 import { Trans } from "react-i18next";
 import { StyleSheet, View, ScrollView, Linking } from "react-native";
 import { withNavigation, SafeAreaView } from "react-navigation";
-import differenceInCalendarDays from "date-fns/difference_in_calendar_days";
+import { differenceInCalendarDays } from "date-fns";
 import {
   getDefaultExplorerView,
   getTransactionExplorer,

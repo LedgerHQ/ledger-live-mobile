@@ -8,7 +8,7 @@ import {
   framesToData,
   areFramesComplete,
   progressOfFrames,
-} from "qrloop/importer";
+} from "qrloop";
 import { decode } from "@ledgerhq/live-common/lib/cross";
 import { translate } from "react-i18next";
 import i18next from "i18next";
