@@ -36,10 +36,6 @@ const currencyColors = {
 };
 
 class CurrenciesList extends PureComponent<Props> {
-  static navigationOptions = () => ({
-    title: i18next.t("settings.rates.header"),
-  });
-
   renderItem = ({ index, item: p }: { index: number, item: Pair }) => (
     <SettingsRow
       title={

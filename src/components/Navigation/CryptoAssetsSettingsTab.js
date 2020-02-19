@@ -2,7 +2,7 @@
 import React from "react";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { useTranslation } from "react-i18next";
-import { TabName } from "../../const";
+import { ScreenName } from "../../const";
 import styles from "../../navigation/styles";
 import RatesList from "../../screens/Settings/CryptoAssets/Rates/RatesList";
 import CurrenciesList from "../../screens/Settings/CryptoAssets/Currencies/CurrenciesList";
@@ -17,8 +17,16 @@ export default function CryptoAssetsSettingsTab() {
         headerStyle: styles.headerNoShadow,
       }}
     >
-      <Tab.Screen name={TabName.RatesList} component={RatesList} />
-      <Tab.Screen name={TabName.CurrenciesList} component={CurrenciesList} />
+      <Tab.Screen
+        name={ScreenName.RatesList}
+        component={RatesList}
+        options={{ headerTitle: t("settings.rates.header") }}
+      />
+      <Tab.Screen
+        name={ScreenName.CurrenciesList}
+        component={CurrenciesList}
+        options={{ headerTitle: t("settings.currencies.header") }}
+      />
     </Tab.Navigator>
   );
 }

@@ -7,6 +7,7 @@ export const ScreenName: { [key: string]: string } = {
   ExperimentalSettings: "ExperimentalSettings",
   CurrenciesList: "CurrenciesList",
   CurrencySettings: "CurrencySettings",
+  CountervalueSettings: "CountervalueSettings",
   DebugBLE: "DebugBLE",
   DebugBLEBenchmark: "DebugBLEBenchmark",
   DebugCrash: "DebugCrash",
@@ -21,8 +22,11 @@ export const ScreenName: { [key: string]: string } = {
   DebugSVG: "DebugSVG",
   DebugWSImport: "DebugWSImport",
   GeneralSettings: "GeneralSettings",
-  CountervalueSettings: "CountervalueSettings",
   HelpSettings: "HelpSettings",
+  Manager: "Manager",
+  ManagerAppsList: "ManagerAppsList",
+  ManagerDevice: "ManagerDevice",
+  ManagerMain: "ManagerMain",
   RatesList: "RatesList",
   RateProviderSettings: "RateProviderSettings",
   RepairDevice: "RepairDevice",
@@ -31,4 +35,8 @@ export const ScreenName: { [key: string]: string } = {
 
 export const TabName: { [key: string]: string } = {
   CryptoAssetsSettings: "CryptoAssetsSettings",
+};
+
+export const StackName: { [key: string]: string } = {
+  MangerMain: "ManagerMain",
 };

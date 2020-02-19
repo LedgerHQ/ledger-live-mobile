@@ -50,10 +50,6 @@ type State = {
 };
 
 class ManagerAppsList extends Component<Props, State> {
-  static navigationOptions = {
-    title: i18next.t("manager.appList.title"),
-  };
-
   state = {
     apps: [],
     pending: true,
