@@ -32,6 +32,9 @@ export const ScreenName: { [key: string]: string } = {
   Portfolio: "Portfolio",
   RatesList: "RatesList",
   RateProviderSettings: "RateProviderSettings",
+  ReceiveConfirmation: "ReceiveConfirmation",
+  ReceiveConnectDevice: "ReceiveConnectDevice",
+  ReceiveSelectAccount: "ReceiveSelectAccount",
   RepairDevice: "RepairDevice",
   Settings: "Settings",
   Transfer: "Transfer",
@@ -45,4 +48,5 @@ export const TabName: { [key: string]: string } = {
 export const StackName: { [key: string]: string } = {
   Accounts: "Accounts",
   ManagerMain: "ManagerMain",
+  ReceiveFunds: "ReceiveFunds",
 };
