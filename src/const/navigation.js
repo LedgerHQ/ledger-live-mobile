@@ -29,17 +29,20 @@ export const ScreenName: { [key: string]: string } = {
   ManagerAppsList: "ManagerAppsList",
   ManagerDevice: "ManagerDevice",
   ManagerMain: "ManagerMain",
+  Portfolio: "Portfolio",
   RatesList: "RatesList",
   RateProviderSettings: "RateProviderSettings",
   RepairDevice: "RepairDevice",
   Settings: "Settings",
+  Transfer: "Transfer",
 };
 
 export const TabName: { [key: string]: string } = {
   CryptoAssetsSettings: "CryptoAssetsSettings",
+  Main: "Main",
 };
 
 export const StackName: { [key: string]: string } = {
-  AccountsStack: "AccountsStack",
-  MangerMain: "ManagerMain",
+  Accounts: "Accounts",
+  ManagerMain: "ManagerMain",
 };
