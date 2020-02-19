@@ -1,8 +1,7 @@
 /* @flow */
 import React, { Component } from "react";
-import { StyleSheet } from "react-native";
+import { FlatList, StyleSheet } from "react-native";
 // $FlowFixMe
-import { FlatList } from "react-navigation";
 import type { NavigationScreenProp } from "react-navigation";
 import { track } from "../analytics";
 import SettingsRow from "../components/SettingsRow";
@@ -17,7 +16,6 @@ type EntryComponent<Item> = React$ComponentType<EntryProps<Item>>;
 type Opts<Item> = {
   id: string,
   itemEventProperties: Item => ?Object,
-  title: React$Node,
   keyExtractor: Item => string,
   formatItem?: Item => string,
   Entry?: EntryComponent<Item>,
@@ -59,7 +57,6 @@ export default <Item>(opts: Opts<Item>) => {
   const {
     id,
     itemEventProperties,
-    title,
     keyExtractor,
     navigationOptions = {},
   } = opts;
@@ -71,7 +68,7 @@ export default <Item>(opts: Opts<Item>) => {
     onValueChange: (Item, *) => void,
     navigation: NavigationScreenProp<*>,
   }> {
-    static navigationOptions = { title, ...navigationOptions };
+    static navigationOptions = navigationOptions;
 
     onPress = (item: Item) => {
       const { navigation, onValueChange } = this.props;

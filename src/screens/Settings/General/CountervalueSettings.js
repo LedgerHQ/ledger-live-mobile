@@ -1,7 +1,6 @@
 /* @flow */
 import { connect } from "react-redux";
 import { listSupportedFiats } from "@ledgerhq/live-common/lib/currencies";
-import i18next from "i18next";
 import { setCountervalue } from "../../../actions/settings";
 import {
   counterValueCurrencySelector,
