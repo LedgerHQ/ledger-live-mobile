@@ -9,49 +9,59 @@ import GeneralSettings from "../../screens/Settings/General";
 import CountervalueSettings from "../../screens/Settings/General/CountervalueSettings";
 import HelpSettings from "../../screens/Settings/Help";
 import CryptoAssetsSettingsTab from "./CryptoAssetsSettingsTab";
+import CurrencySettings from "../../screens/Settings/CryptoAssets/Currencies/CurrencySettings";
 
 export default function SettingsStack() {
   const { t } = useTranslation();
+
   return (
     <Stack.Navigator>
       <Stack.Screen
         name={ScreenName.Settings}
         component={Settings}
         options={{
-          title: t("settings.header"),
+          headerTitle: t("settings.header"),
         }}
       />
       <Stack.Screen
         name={ScreenName.CountervalueSettings}
         component={CountervalueSettings}
         options={{
-          title: t("settings.display.counterValue"),
+          headerTitle: t("settings.display.counterValue"),
         }}
       />
       <Stack.Screen
         name={ScreenName.GeneralSettings}
         component={GeneralSettings}
         options={{
-          title: t("settings.display.title"),
+          headerTitle: t("settings.display.title"),
         }}
       />
       <Stack.Screen
         name={ScreenName.AboutSettings}
         component={AboutSettings}
         options={{
-          title: t("settings.about.title"),
+          headerTitle: t("settings.about.title"),
         }}
       />
       <Stack.Screen
         name={ScreenName.HelpSettings}
         component={HelpSettings}
         options={{
-          title: t("settings.help.header"),
+          headerTitle: t("settings.help.header"),
         }}
       />
       <Stack.Screen
         name={TabName.CryptoAssetsSettings}
         component={CryptoAssetsSettingsTab}
+      />
+      <Stack.Screen
+        name={ScreenName.CurrencySettings}
+        component={CurrencySettings}
+        options={({ state }) => ({
+          headerTitle: state.params.headerTitle,
+          headerRight: null,
+        })}
       />
     </Stack.Navigator>
   );
