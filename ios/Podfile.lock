@@ -263,6 +263,8 @@ PODS:
     - React
   - react-native-randombytes (3.5.3):
     - React
+  - react-native-safe-area-context (0.7.3):
+    - React
   - react-native-splash-screen (3.2.0):
     - React
   - react-native-udp (3.0.0):
@@ -311,6 +313,8 @@ PODS:
     - React
   - RNCAsyncStorage (1.8.0):
     - React
+  - RNCMaskedView (0.1.6):
+    - React
   - RNGestureHandler (1.6.0):
     - React
   - RNKeychain (4.0.5):
@@ -322,7 +326,7 @@ PODS:
     - React
   - RNReanimated (1.7.0):
     - React
-  - RNScreens (1.0.0-alpha.22):
+  - RNScreens (2.0.0-beta.7):
     - React
   - RNSVG (11.0.1):
     - React
@@ -373,6 +377,7 @@ DEPENDENCIES:
   - react-native-locale (from `../node_modules/react-native-locale`)
   - "react-native-netinfo (from `../node_modules/@react-native-community/netinfo`)"
   - react-native-randombytes (from `../node_modules/react-native-randombytes`)
+  - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - react-native-splash-screen (from `../node_modules/react-native-splash-screen`)
   - react-native-udp (from `../node_modules/react-native-udp`)
   - react-native-version-number (from `../node_modules/react-native-version-number`)
@@ -390,6 +395,7 @@ DEPENDENCIES:
   - "ReactNativeART (from `../node_modules/@react-native-community/art`)"
   - "RNAnalytics (from `../node_modules/@segment/analytics-react-native`)"
   - "RNCAsyncStorage (from `../node_modules/@react-native-community/async-storage`)"
+  - "RNCMaskedView (from `../node_modules/@react-native-community/masked-view`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNKeychain (from `../node_modules/react-native-keychain`)
   - "RNLibLedgerCore (from `../node_modules/@ledgerhq/react-native-ledger-core`)"
@@ -473,6 +479,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-community/netinfo"
   react-native-randombytes:
     :path: "../node_modules/react-native-randombytes"
+  react-native-safe-area-context:
+    :path: "../node_modules/react-native-safe-area-context"
   react-native-splash-screen:
     :path: "../node_modules/react-native-splash-screen"
   react-native-udp:
@@ -505,6 +513,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@segment/analytics-react-native"
   RNCAsyncStorage:
     :path: "../node_modules/@react-native-community/async-storage"
+  RNCMaskedView:
+    :path: "../node_modules/@react-native-community/masked-view"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
   RNKeychain:
@@ -568,6 +578,7 @@ SPEC CHECKSUMS:
   react-native-locale: bd8edf0e51706d469af3e2fa568a8102213a3139
   react-native-netinfo: b84ff0cae1147315b5dc1daf0f65c0cc6ee71fb3
   react-native-randombytes: 3638d24759d67c68f6ccba60c52a7a8a8faa6a23
+  react-native-safe-area-context: e200d4433aba6b7e60b52da5f37af11f7a0b0392
   react-native-splash-screen: 200d11d188e2e78cea3ad319964f6142b6384865
   react-native-udp: 33df202da784dcdbd0915e4bdb2ef7b3c9aeffe3
   react-native-version-number: b415bbec6a13f2df62bf978e85bc0d699462f37f
@@ -584,12 +595,13 @@ SPEC CHECKSUMS:
   ReactNativeART: c580fba2f7d188d8fa4418ce78db8130654ed10f
   RNAnalytics: 5c242b7f8117f108f5df71e96b908185db3fb4ee
   RNCAsyncStorage: 5d83b49070d41fd72906a116c5e7bdac4ea3a814
+  RNCMaskedView: a88953beefbd347a29072d9eba90e42945fe291e
   RNGestureHandler: dde546180bf24af0b5f737c8ad04b6f3fa51609a
   RNKeychain: 840f8e6f13be0576202aefcdffd26a4f54bfe7b5
   RNLibLedgerCore: 0f37d09ec17d94b1f72841970a5f89e20294b872
   RNOS: 6f2f9a70895bbbfbdad7196abd952e7b01d45027
   RNReanimated: 031fe8d9ea93c2bd689a40f05320ef9d96f74d7f
-  RNScreens: 720a9e6968beb73e8196239801e887d8401f86ed
+  RNScreens: b9ea46d65967a1f74b9aaa1229d0f74f58d216b5
   RNSVG: 67f1f12dae2cef6ed59a42cae74a6b8f5a9e7b46
   RNVectorIcons: 0bb4def82230be1333ddaeee9fcba45f0b288ed4
   Sentry: 4e8a17b61ddd116f89536cc81d567fdee1ebca96

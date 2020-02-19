@@ -4,10 +4,12 @@ import "../shim";
 import "./polyfill";
 import "./live-common-setup";
 import "./implement-react-native-libcore";
+import "react-native-gesture-handler";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { StyleSheet, View, Text } from "react-native";
 import SplashScreen from "react-native-splash-screen";
+import { NavigationContainer } from "@react-navigation/native";
 import Transport from "@ledgerhq/hw-transport";
 import { NotEnoughBalance } from "@ledgerhq/errors";
 import { log } from "@ledgerhq/logs";
@@ -32,7 +34,8 @@ import SyncNewAccounts from "./bridge/SyncNewAccounts";
 import { OnboardingContextProvider } from "./screens/Onboarding/onboardingContext";
 import HookAnalytics from "./analytics/HookAnalytics";
 import HookSentry from "./components/HookSentry";
-import AppContainer from "./navigators";
+// import AppContainer from "./navigators";
+import { SettingsStack } from "./components/Navigation";
 import SetEnvsFromSettings from "./components/SetEnvsFromSettings";
 
 checkLibs({
@@ -57,7 +60,7 @@ Text.defaultProps = Text.defaultProps || {};
 Text.defaultProps.allowFontScaling = false;
 
 interface AppProps {
-  importDataString: string;
+  importDataString: boolean;
 }
 
 function App({ importDataString }: AppProps) {
@@ -108,7 +111,8 @@ function App({ importDataString }: AppProps) {
 
       <SyncNewAccounts priority={5} />
 
-      <AppContainer screenProps={{ importDataString }} />
+      {/* <AppContainer screenProps={{ importDataString }} /> */}
+      <SettingsStack />
 
       <DebugRejectSwitch />
     </View>
@@ -147,7 +151,7 @@ export default class Root extends Component<
         <LedgerStoreProvider onInitFinished={this.onInitFinished}>
           {(ready, store) =>
             ready ? (
-              <>
+              <NavigationContainer>
                 <StyledStatusBar />
                 <SetEnvsFromSettings />
                 <HookSentry />
@@ -165,7 +169,7 @@ export default class Root extends Component<
                     </BridgeSyncProvider>
                   </LocaleProvider>
                 </AuthPass>
-              </>
+              </NavigationContainer>
             ) : (
               <LoadingApp />
             )

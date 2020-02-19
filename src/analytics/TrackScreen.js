@@ -1,32 +1,25 @@
 // @flow
-import { PureComponent } from "react";
-import { withNavigationFocus } from "react-navigation";
+import { useEffect, useRef } from "react";
+import { useIsFocused } from "@react-navigation/native";
 import { screen } from "./segment";
 
-class TrackScreen extends PureComponent<{
-  category: string,
-  name?: string,
-  isFocused: boolean,
-}> {
-  componentDidMount() {
-    if (this.props.isFocused) {
-      this.record();
-    }
-  }
-  componentDidUpdate(prev) {
-    if (!prev.isFocused && this.props.isFocused) {
-      this.record();
-    }
-  }
-  record() {
-    const { category, name, isFocused, ...properties } = this.props;
-    // $FlowFixMe
-    delete properties.navigation;
-    screen(category, name, properties);
-  }
-  render() {
-    return null;
-  }
+interface Props {
+  category: string;
+  name?: string;
+  isFocused: boolean;
 }
 
-export default withNavigationFocus(TrackScreen);
+export default function TrackScreen({ category, name, ...props }: Props) {
+  const isFocused = useIsFocused();
+
+  const isFocusedRef = useRef(isFocused);
+
+  useEffect(() => {
+    if (isFocusedRef.current !== isFocused) {
+      isFocusedRef.current = isFocused;
+      screen(category, name, props);
+    }
+  }, [category, name, props, isFocused]);
+
+  return null;
+}
