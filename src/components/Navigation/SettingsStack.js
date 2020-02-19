@@ -10,6 +10,7 @@ import CountervalueSettings from "../../screens/Settings/General/CountervalueSet
 import HelpSettings from "../../screens/Settings/Help";
 import CryptoAssetsSettingsTab from "./CryptoAssetsSettingsTab";
 import CurrencySettings from "../../screens/Settings/CryptoAssets/Currencies/CurrencySettings";
+import RateProviderSettings from "../../screens/Settings/CryptoAssets/Rates/RateProviderSettings";
 
 export default function SettingsStack() {
   const { t } = useTranslation();
@@ -62,6 +63,13 @@ export default function SettingsStack() {
           headerTitle: state.params.headerTitle,
           headerRight: null,
         })}
+      />
+      <Stack.Screen
+        name={ScreenName.RateProviderSettings}
+        component={RateProviderSettings}
+        options={{
+          headerTitle: t("settings.cryptoAssets.rateProviderHeader"),
+        }}
       />
     </Stack.Navigator>
   );
