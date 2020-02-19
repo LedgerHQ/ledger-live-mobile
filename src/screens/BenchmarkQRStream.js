@@ -14,10 +14,6 @@ export default class BenchmarkQRStream extends PureComponent<
   },
   *,
 > {
-  static navigationOptions = {
-    title: "Benchmark QRStream",
-  };
-
   state = {
     ...getWindowDimensions(),
     benchmarks: [],

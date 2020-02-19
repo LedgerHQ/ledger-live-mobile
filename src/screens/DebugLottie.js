@@ -26,10 +26,6 @@ type State = {
 };
 
 class DebugLottie extends Component<{}, State> {
-  static navigationOptions = {
-    title: "Debug Lottie",
-  };
-
   state = {
     anim: null,
   };

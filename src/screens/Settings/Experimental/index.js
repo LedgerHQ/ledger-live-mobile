@@ -1,11 +1,6 @@
 /* @flow */
-import React, { PureComponent } from "react";
-import { StyleSheet, View } from "react-native";
-import type { NavigationScreenProp } from "react-navigation";
-// $FlowFixMe
-import { ScrollView } from "react-navigation";
-import i18next from "i18next";
-import { withTranslation } from "react-i18next";
+import React from "react";
+import { ScrollView, StyleSheet, View } from "react-native";
 import { isEnvDefault } from "@ledgerhq/live-common/lib/env";
 
 import { TrackScreen } from "../../../analytics";
@@ -15,30 +10,22 @@ import Disclaimer from "./Disclaimer";
 import { experimentalFeatures } from "../../../experimental";
 import FeatureRow from "./FeatureRow";
 
-class ExperimentalSettings extends PureComponent<{
-  navigation: NavigationScreenProp<*>,
-}> {
-  static navigationOptions = {
-    title: i18next.t("settings.experimental.title"),
-  };
-
-  render() {
-    return (
-      <ScrollView contentContainerStyle={styles.root}>
-        <TrackScreen category="Settings" name="Experimental" />
-        <View style={styles.container}>
-          <View style={styles.disclaimerContainer}>
-            <Disclaimer />
-          </View>
-          {experimentalFeatures.map(feat =>
-            !feat.shadow || (feat.shadow && !isEnvDefault(feat.name)) ? (
-              <FeatureRow key={feat.name} feature={feat} />
-            ) : null,
-          )}
+export default function ExperimentalSettings() {
+  return (
+    <ScrollView contentContainerStyle={styles.root}>
+      <TrackScreen category="Settings" name="Experimental" />
+      <View style={styles.container}>
+        <View style={styles.disclaimerContainer}>
+          <Disclaimer />
         </View>
-      </ScrollView>
-    );
-  }
+        {experimentalFeatures.map(feat =>
+          !feat.shadow || (feat.shadow && !isEnvDefault(feat.name)) ? (
+            <FeatureRow key={feat.name} feature={feat} />
+          ) : null,
+        )}
+      </View>
+    </ScrollView>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -51,5 +38,3 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
   },
 });
-
-export default withTranslation()(ExperimentalSettings);

@@ -41,10 +41,6 @@ class RepairDevice extends Component<Props, State> {
     selected: false,
   };
 
-  static navigationOptions = {
-    title: i18next.t("RepairDevice.title"),
-  };
-
   componentDidMount() {
     if (this.sub) this.sub.unsubscribe();
   }

@@ -8,7 +8,7 @@ import {
   TouchableWithoutFeedback,
 } from "react-native";
 import { connect } from "react-redux";
-import { SafeAreaView } from "react-navigation";
+import { SafeAreaView } from "react-native-safe-area-view";
 import type { NavigationScreenProp } from "react-navigation";
 import { addKnownDevice } from "../actions/ble";
 import colors from "../colors";
@@ -28,10 +28,6 @@ class DebugHttpTransport extends Component<
     text: string,
   },
 > {
-  static navigationOptions = {
-    title: "Debug Http Transport",
-  };
-
   state = {
     text: "",
   };
@@ -110,9 +106,6 @@ const styles = StyleSheet.create({
   },
 });
 
-export default connect(
-  null,
-  {
-    addKnownDevice,
-  },
-)(DebugHttpTransport);
+export default connect(null, {
+  addKnownDevice,
+})(DebugHttpTransport);

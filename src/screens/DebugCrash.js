@@ -15,10 +15,6 @@ class DebugBLE extends Component<
     renderCrash: boolean,
   },
 > {
-  static navigationOptions = {
-    title: "Debug Crash",
-  };
-
   state = {
     renderCrash: false,
   };

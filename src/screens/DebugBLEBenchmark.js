@@ -83,10 +83,6 @@ class DebugBLEBenchmark extends Component<
     error: ?Error,
   },
 > {
-  static navigationOptions = {
-    title: "Debug BLE Benchmark",
-  };
-
   state = {
     exchangeStats: [],
     // $FlowFixMe

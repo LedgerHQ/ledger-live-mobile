@@ -14,10 +14,6 @@ class DebugWSImport extends Component<
   { navigation: * },
   { ip: string, secret: string, scanning: boolean },
 > {
-  static navigationOptions = {
-    title: "Experimental WS Import",
-  };
-
   state = {
     secret: "",
     ip: "",
