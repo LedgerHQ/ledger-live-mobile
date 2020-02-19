@@ -5,7 +5,13 @@ export const ScreenName: { [key: string]: string } = {
   AboutSettings: "AboutSettings",
   Account: "Account",
   Accounts: "Accounts",
+  AddAccountsAccounts: "AddAccountsAccounts",
+  AddAccountsSelectCrypto: "AddAccountsSelectCrypto",
+  AddAccountsSelectDevice: "AddAccountsSelectDevice",
+  AddAccountsSuccess: "AddAccountsSuccess",
+  AddAccountsTokenCurrencyDisclaimer: "AddAccountsTokenCurrencyDisclaimer",
   BenchmarkQRStream: "BenchmarkQRStream",
+  EditAccountName: "EditAccountName",
   ExperimentalSettings: "ExperimentalSettings",
   CurrenciesList: "CurrenciesList",
   CurrencySettings: "CurrencySettings",
@@ -47,6 +53,7 @@ export const TabName: { [key: string]: string } = {
 
 export const StackName: { [key: string]: string } = {
   Accounts: "Accounts",
+  AddAccounts: "AddAccounts",
   ManagerMain: "ManagerMain",
   ReceiveFunds: "ReceiveFunds",
 };
