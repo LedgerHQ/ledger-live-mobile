@@ -1,2 +1,2 @@
 // @flow
-export * from "./screen";
+export * from "./navigation";

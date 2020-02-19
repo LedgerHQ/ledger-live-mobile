@@ -5,7 +5,7 @@ export const ScreenName: { [key: string]: string } = {
   AboutSettings: "AboutSettings",
   BenchmarkQRStream: "BenchmarkQRStream",
   ExperimentalSettings: "ExperimentalSettings",
-  CryptoAssetsSettings: "CryptoAssetsSettings",
+  CurrenciesList: "CurrenciesList",
   CurrencySettings: "CurrencySettings",
   DebugBLE: "DebugBLE",
   DebugBLEBenchmark: "DebugBLEBenchmark",
@@ -23,7 +23,12 @@ export const ScreenName: { [key: string]: string } = {
   GeneralSettings: "GeneralSettings",
   CountervalueSettings: "CountervalueSettings",
   HelpSettings: "HelpSettings",
+  RatesList: "RatesList",
   RateProviderSettings: "RateProviderSettings",
   RepairDevice: "RepairDevice",
   Settings: "Settings",
+};
+
+export const TabName: { [key: string]: string } = {
+  CryptoAssetsSettings: "CryptoAssetsSettings",
 };

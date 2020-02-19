@@ -2,12 +2,13 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useTranslation } from "react-i18next";
-import { ScreenName } from "../../const";
+import { ScreenName, TabName } from "../../const";
 import Settings from "../../screens/Settings";
 import AboutSettings from "../../screens/Settings/About";
 import GeneralSettings from "../../screens/Settings/General";
 import CountervalueSettings from "../../screens/Settings/General/CountervalueSettings";
 import HelpSettings from "../../screens/Settings/Help";
+import CryptoAssetsSettingsTab from "./CryptoAssetsSettingsTab";
 
 export default function SettingsStack() {
   const { t } = useTranslation();
@@ -47,6 +48,10 @@ export default function SettingsStack() {
         options={{
           title: t("settings.help.header"),
         }}
+      />
+      <Stack.Screen
+        name={TabName.CryptoAssetsSettings}
+        component={CryptoAssetsSettingsTab}
       />
     </Stack.Navigator>
   );
