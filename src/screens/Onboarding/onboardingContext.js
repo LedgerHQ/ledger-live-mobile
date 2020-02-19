@@ -1,9 +1,17 @@
 // @flow
 
-import React, { createContext, PureComponent } from "react";
-import hoistNonReactStatic from "hoist-non-react-statics";
+import React, {
+  createContext,
+  PureComponent,
+  useContext,
+  useEffect,
+} from "react";
 import type { NavigationScreenProp } from "react-navigation";
-import { withTranslation } from "react-i18next";
+import {
+  useIsFocused,
+  useNavigation,
+  useNavigationState,
+} from "@react-navigation/native";
 
 import getStep from "./steps";
 
@@ -126,51 +134,38 @@ export class OnboardingContextProvider extends PureComponent<
   }
 }
 
+export function useNavigationInterceptor() {
+  const onboardingContext = useContext(OnboardingContext);
+  const isFocused = useIsFocused();
+  const routeName = useNavigationState(state => state.routeName);
+  const navigation = useNavigation();
+
+  function next() {
+    onboardingContext.nextWithNavigation(navigation);
+  }
+
+  function prev() {
+    onboardingContext.prevWithNavigation(navigation);
+  }
+
+  useEffect(() => {
+    if (!isFocused) {
+      return;
+    }
+
+    onboardingContext.syncNavigation(routeName);
+  }, [isFocused, routeName, onboardingContext]);
+
+  return {
+    ...onboardingContext,
+    next,
+    prev,
+  };
+}
+
 export function withOnboardingContext(Comp: React$ComponentType<any>) {
-  // Only purpose of this component is to intercept the
-  // `navigation` object given by react-navigation in each
-  // screen, and to inject it on next/prev
-  type NavInterceptorProps = {
-    navigation: NavigationScreenProp<*>,
-    syncNavigation: string => void,
-    nextWithNavigation: (NavigationScreenProp<*>) => void,
-    prevWithNavigation: (NavigationScreenProp<*>) => void,
+  return (props: any) => {
+    const navigationInterceptor = useNavigationInterceptor();
+    return <Comp {...props} {...navigationInterceptor} />;
   };
-
-  class NavigationInterceptor extends PureComponent<NavInterceptorProps> {
-    // hack: make onboarding context provider aware of current route
-    componentDidMount() {
-      this.sub = this.props.navigation.addListener("didFocus", () => {
-        this.props.syncNavigation(this.props.navigation.state.routeName);
-      });
-    }
-
-    componentWillUnmount() {
-      this.sub.remove();
-    }
-
-    sub: *;
-
-    next = () => this.props.nextWithNavigation(this.props.navigation);
-    prev = () => this.props.prevWithNavigation(this.props.navigation);
-    render = () => <Comp {...this.props} next={this.next} prev={this.prev} />;
-  }
-
-  // Gives component ability to prev/next and change the steps mode
-  // for comfort, it also add the withTranslation() decorator
-  function WithOnboardingContext(props: any) {
-    return (
-      <OnboardingContext.Consumer>
-        {contextProps => <NavigationInterceptor {...props} {...contextProps} />}
-      </OnboardingContext.Consumer>
-    );
-  }
-
-  hoistNonReactStatic(WithOnboardingContext, Comp);
-
-  WithOnboardingContext.navigationOptions = {
-    header: null,
-  };
-
-  return withTranslation()(WithOnboardingContext);
 }

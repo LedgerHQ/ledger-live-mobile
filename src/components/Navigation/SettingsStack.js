@@ -7,6 +7,7 @@ import Settings from "../../screens/Settings";
 import AboutSettings from "../../screens/Settings/About";
 import GeneralSettings from "../../screens/Settings/General";
 import CountervalueSettings from "../../screens/Settings/General/CountervalueSettings";
+import HelpSettings from "../../screens/Settings/Help";
 
 export default function SettingsStack() {
   const { t } = useTranslation();
@@ -38,6 +39,13 @@ export default function SettingsStack() {
         component={AboutSettings}
         options={{
           title: t("settings.about.title"),
+        }}
+      />
+      <Stack.Screen
+        name={ScreenName.HelpSettings}
+        component={HelpSettings}
+        options={{
+          title: t("settings.help.header"),
         }}
       />
     </Stack.Navigator>

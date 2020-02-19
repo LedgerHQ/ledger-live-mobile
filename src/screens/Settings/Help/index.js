@@ -1,37 +1,24 @@
 /* @flow */
-import React, { PureComponent } from "react";
-import type { NavigationScreenProp } from "react-navigation";
-import { View, StyleSheet } from "react-native";
-// $FlowFixMe
-import { ScrollView } from "react-navigation";
-import i18next from "i18next";
-import { withTranslation } from "react-i18next";
+import React from "react";
+import { ScrollView, View, StyleSheet } from "react-native";
 import { TrackScreen } from "../../../analytics";
 import LedgerSupportRow from "./LedgerSupportRow";
 import ClearCacheRow from "./ClearCacheRow";
 import HardResetRow from "./HardResetRow";
 import ConfigureDeviceRow from "./ConfigureDeviceRow";
 
-class HelpSettings extends PureComponent<{
-  navigation: NavigationScreenProp<*>,
-}> {
-  static navigationOptions = {
-    title: i18next.t("settings.help.header"),
-  };
-
-  render() {
-    return (
-      <ScrollView contentContainerStyle={styles.root}>
-        <TrackScreen category="Settings" name="Help" />
-        <LedgerSupportRow />
-        <ConfigureDeviceRow navigation={this.props.navigation} />
-        <View style={styles.container}>
-          <ClearCacheRow />
-          <HardResetRow />
-        </View>
-      </ScrollView>
-    );
-  }
+export default function HelpSettings() {
+  return (
+    <ScrollView contentContainerStyle={styles.root}>
+      <TrackScreen category="Settings" name="Help" />
+      <LedgerSupportRow />
+      <ConfigureDeviceRow />
+      <View style={styles.container}>
+        <ClearCacheRow />
+        <HardResetRow />
+      </View>
+    </ScrollView>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -40,5 +27,3 @@ const styles = StyleSheet.create({
     marginTop: 16,
   },
 });
-
-export default withTranslation()(HelpSettings);
