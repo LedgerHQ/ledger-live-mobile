@@ -12,9 +12,7 @@ import Icon from "react-native-vector-icons/dist/Feather";
 import Config from "react-native-config";
 import type { NavigationScreenProp } from "react-navigation";
 import type { CryptoCurrency } from "@ledgerhq/live-common/lib/types";
-import i18next from "i18next";
 import { cryptoCurrenciesSelector } from "../../reducers/accounts";
-import type { T } from "../../types/common";
 import SettingsCard from "../../components/SettingsCard";
 import PoweredByLedger from "./PoweredByLedger";
 import Assets from "../../icons/Assets";
@@ -111,12 +109,6 @@ export default function Settings({ navigation }: Props) {
     </ScrollView>
   );
 }
-
-// class Settings extends Component<Props, *> {
-//   static navigationOptions = {
-//     title: i18next.t("settings.header"),
-//   };
-// }
 
 const styles = StyleSheet.create({
   root: {

@@ -9,6 +9,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { StyleSheet, View, Text } from "react-native";
 import SplashScreen from "react-native-splash-screen";
+import { I18nextProvider } from "react-i18next";
 import { NavigationContainer } from "@react-navigation/native";
 import Transport from "@ledgerhq/hw-transport";
 import { NotEnoughBalance } from "@ledgerhq/errors";
@@ -19,7 +20,7 @@ import { exportSelector as settingsExportSelector } from "./reducers/settings";
 import { exportSelector as accountsExportSelector } from "./reducers/accounts";
 import { exportSelector as bleSelector } from "./reducers/ble";
 import CounterValues from "./countervalues";
-import LocaleProvider from "./context/Locale";
+import LocaleProvider, { i18n } from "./context/Locale";
 import RebootProvider from "./context/Reboot";
 import ButtonUseTouchable from "./context/ButtonUseTouchable";
 import AuthPass from "./context/AuthPass";
@@ -151,25 +152,29 @@ export default class Root extends Component<
         <LedgerStoreProvider onInitFinished={this.onInitFinished}>
           {(ready, store) =>
             ready ? (
-              <NavigationContainer>
+              <>
                 <StyledStatusBar />
                 <SetEnvsFromSettings />
                 <HookSentry />
                 <HookAnalytics store={store} />
                 <AuthPass>
-                  <LocaleProvider>
-                    <BridgeSyncProvider>
-                      <CounterValues.PollingProvider>
-                        <ButtonUseTouchable.Provider value={true}>
-                          <OnboardingContextProvider>
-                            <App importDataString={importDataString} />
-                          </OnboardingContextProvider>
-                        </ButtonUseTouchable.Provider>
-                      </CounterValues.PollingProvider>
-                    </BridgeSyncProvider>
-                  </LocaleProvider>
+                  <NavigationContainer>
+                    <I18nextProvider i18n={i18n}>
+                      <LocaleProvider>
+                        <BridgeSyncProvider>
+                          <CounterValues.PollingProvider>
+                            <ButtonUseTouchable.Provider value={true}>
+                              <OnboardingContextProvider>
+                                <App importDataString={importDataString} />
+                              </OnboardingContextProvider>
+                            </ButtonUseTouchable.Provider>
+                          </CounterValues.PollingProvider>
+                        </BridgeSyncProvider>
+                      </LocaleProvider>
+                    </I18nextProvider>
+                  </NavigationContainer>
                 </AuthPass>
-              </NavigationContainer>
+              </>
             ) : (
               <LoadingApp />
             )

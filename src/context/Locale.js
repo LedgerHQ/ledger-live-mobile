@@ -36,6 +36,8 @@ i18next
     },
   });
 
+export { i18next as i18n };
+
 // $FlowFixMe
 const LocaleContext = React.createContext(getLocaleState(i18next));
 

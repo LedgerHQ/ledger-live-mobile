@@ -6,7 +6,6 @@ import { screen } from "./segment";
 interface Props {
   category: string;
   name?: string;
-  isFocused: boolean;
 }
 
 export default function TrackScreen({ category, name, ...props }: Props) {
