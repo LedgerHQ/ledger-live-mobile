@@ -3,6 +3,8 @@
 // This will be converted into string enum once TypeScript is supported in this project.
 export const ScreenName: { [key: string]: string } = {
   AboutSettings: "AboutSettings",
+  Account: "Account",
+  Accounts: "Accounts",
   BenchmarkQRStream: "BenchmarkQRStream",
   ExperimentalSettings: "ExperimentalSettings",
   CurrenciesList: "CurrenciesList",
@@ -38,5 +40,6 @@ export const TabName: { [key: string]: string } = {
 };
 
 export const StackName: { [key: string]: string } = {
+  AccountsStack: "AccountsStack",
   MangerMain: "ManagerMain",
 };
