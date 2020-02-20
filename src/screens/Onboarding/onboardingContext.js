@@ -12,6 +12,7 @@ import {
   useNavigation,
   useNavigationState,
 } from "@react-navigation/native";
+import { useTranslation } from "react-i18next";
 
 import getStep from "./steps";
 
@@ -166,6 +167,8 @@ export function useNavigationInterceptor() {
 export function withOnboardingContext(Comp: React$ComponentType<any>) {
   return (props: any) => {
     const navigationInterceptor = useNavigationInterceptor();
-    return <Comp {...props} {...navigationInterceptor} />;
+    const { t } = useTranslation();
+
+    return <Comp {...props} {...navigationInterceptor} t={t} />;
   };
 }
