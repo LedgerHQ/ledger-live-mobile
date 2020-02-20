@@ -1,15 +1,14 @@
 // @flow
 
-import React, { PureComponent } from "react";
+import React from "react";
 import { View, StyleSheet } from "react-native";
-import { withNavigation } from "@react-navigation/compat";
-
+import { useTranslation } from "react-i18next";
 import colors from "../../colors";
 import Touchable from "../../components/Touchable";
 import LText from "../../components/LText";
 import IconArrowLeft from "../../icons/ArrowLeft";
 import HelpLink from "../../components/HelpLink";
-import { withOnboardingContext } from "./onboardingContext";
+import { useNavigationInterceptor } from "./onboardingContext";
 import getStep from "./steps";
 import { deviceNames } from "../../wording";
 import type { OnboardingStepProps } from "./types";
@@ -28,62 +27,59 @@ const hitSlop = {
   bottom: 16,
 };
 
-class OnboardingHeader extends PureComponent<Props> {
-  render() {
-    const {
-      mode,
-      stepId,
-      prev,
-      t,
-      withSkip,
-      withNeedHelp,
-      next,
-      titleOverride,
-      firstTimeOnboarding,
-    } = this.props;
-    const steps = getStep(mode, firstTimeOnboarding);
-    const visibleSteps = steps.filter(s => !s.isGhost);
-    const indexInSteps = visibleSteps.findIndex(s => s.id === stepId);
-    const stepMsg = t("onboarding.stepCount", {
-      current: indexInSteps + 1,
-      total: visibleSteps.length,
-    });
+export default function OnboardingHeader({
+  mode,
+  stepId,
+  withSkip,
+  withNeedHelp,
+  titleOverride,
+  firstTimeOnboarding,
+}: Props) {
+  const { next, prev } = useNavigationInterceptor();
+  const { t } = useTranslation();
 
-    let stepIdOverride = stepId;
-    if (mode === "restore" && stepId === "OnboardingStepWriteRecovery") {
-      stepIdOverride = "OnboardingStepWriteRecoveryRestore";
-    }
+  const steps = getStep(mode, firstTimeOnboarding);
+  const visibleSteps = steps.filter(s => !s.isGhost);
+  const indexInSteps = visibleSteps.findIndex(s => s.id === stepId);
+  const stepMsg = t("onboarding.stepCount", {
+    current: indexInSteps + 1,
+    total: visibleSteps.length,
+  });
 
-    return (
-      <View style={styles.root}>
-        <View style={styles.headerHeader}>
-          <Touchable
-            event="OnboardingBack"
-            style={styles.arrow}
-            onPress={prev}
-            hitSlop={hitSlop}
-          >
-            <IconArrowLeft size={16} color={colors.grey} />
-          </Touchable>
-          {withSkip && (
-            <Touchable event="OnboardingSkip" onPress={next} hitSlop={hitSlop}>
-              <LText style={styles.skip} semiBold>
-                {t("common.skip")}
-              </LText>
-            </Touchable>
-          )}
-          {withNeedHelp && <HelpLink />}
-        </View>
-        <LText semiBold style={styles.steps}>
-          {stepMsg}
-        </LText>
-        <LText secondary semiBold style={styles.title}>
-          {titleOverride ||
-            t(`onboarding.stepsTitles.${stepIdOverride}`, deviceNames.nanoX)}
-        </LText>
-      </View>
-    );
+  let stepIdOverride = stepId;
+  if (mode === "restore" && stepId === "OnboardingStepWriteRecovery") {
+    stepIdOverride = "OnboardingStepWriteRecoveryRestore";
   }
+
+  return (
+    <View style={styles.root}>
+      <View style={styles.headerHeader}>
+        <Touchable
+          event="OnboardingBack"
+          style={styles.arrow}
+          onPress={prev}
+          hitSlop={hitSlop}
+        >
+          <IconArrowLeft size={16} color={colors.grey} />
+        </Touchable>
+        {withSkip && (
+          <Touchable event="OnboardingSkip" onPress={next} hitSlop={hitSlop}>
+            <LText style={styles.skip} semiBold>
+              {t("common.skip")}
+            </LText>
+          </Touchable>
+        )}
+        {withNeedHelp && <HelpLink />}
+      </View>
+      <LText semiBold style={styles.steps}>
+        {stepMsg}
+      </LText>
+      <LText secondary semiBold style={styles.title}>
+        {titleOverride ||
+          t(`onboarding.stepsTitles.${stepIdOverride}`, deviceNames.nanoX)}
+      </LText>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -123,5 +119,3 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
 });
-
-export default withNavigation(withOnboardingContext(OnboardingHeader));
