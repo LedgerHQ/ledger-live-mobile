@@ -111,7 +111,7 @@ function App({ importDataString }: AppProps) {
 
       <SyncNewAccounts priority={5} />
 
-      <RootNavigatorStack screenProps={{ importDataString }} />
+      <RootNavigatorStack importDataString={importDataString} />
 
       <DebugRejectSwitch />
     </View>
