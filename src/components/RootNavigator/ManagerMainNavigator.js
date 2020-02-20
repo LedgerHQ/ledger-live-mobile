@@ -7,7 +7,7 @@ import styles from "../../navigation/styles";
 import ManagerAppsList from "../../screens/Manager/AppsList";
 import ManagerDevice from "../../screens/Manager/Device";
 
-export default function CryptoAssetsSettingsTab() {
+export default function ManagerMainNavigator() {
   const { t } = useTranslation();
 
   return (

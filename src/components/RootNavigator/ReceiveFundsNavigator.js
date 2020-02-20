@@ -6,7 +6,7 @@ import ReceiveConfirmation from "../../screens/ReceiveFunds/03-Confirmation";
 import ReceiveConnectDevice from "../../screens/ReceiveFunds/02-ConnectDevice";
 import ReceiveSelectAccount from "../../screens/ReceiveFunds/01-SelectAccount";
 
-export default function ReceiveFundsStack() {
+export default function ReceiveFundsNavigator() {
   return (
     <Stack.Navigator>
       <Stack.Screen

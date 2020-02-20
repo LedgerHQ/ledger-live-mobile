@@ -91,13 +91,8 @@ export const ScreenName: { [key: string]: string } = {
   Transfer: "Transfer",
 };
 
-export const TabName: { [key: string]: string } = {
-  CryptoAssetsSettings: "CryptoAssetsSettings",
-  Main: "Main",
-  ManagerMain: "ManagerMain",
-};
-
-export const StackName: { [key: string]: string } = {
+export const NavigatorName: { [key: string]: string } = {
+  // Stack
   Accounts: "Accounts",
   AccountSettings: "AccountSettings",
   AddAccounts: "AddAccounts",
@@ -106,7 +101,7 @@ export const StackName: { [key: string]: string } = {
   FirmwareUpdate: "FirmwareUpdate",
   ImportAccounts: "ImportAccounts",
   Manager: "Manager",
-  ManagerMain: "ManagerMain",
+  ManagerStack: "ManagerStack",
   MigrateAccountsFlow: "MigrateAccountsFlow",
   Onboarding: "Onboarding",
   PasswordAddFlow: "PasswordAddFlow",
@@ -114,9 +109,13 @@ export const StackName: { [key: string]: string } = {
   ReceiveFunds: "ReceiveFunds",
   SendFunds: "SendFunds",
   Settings: "Settings",
-};
 
-export const SwitchName: { [key: string]: string } = {
+  // Tab
+  CryptoAssetsSettings: "CryptoAssetsSettings",
+  Main: "Main",
+  ManagerMain: "ManagerMain",
+
+  // Root
   RootNavigator: "RootNavigator",
 };
 

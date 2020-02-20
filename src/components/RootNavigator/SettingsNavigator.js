@@ -2,7 +2,7 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useTranslation } from "react-i18next";
-import { ScreenName, TabName } from "../../const";
+import { ScreenName, NavigatorName } from "../../const";
 import BenchmarkQRStream from "../../screens/BenchmarkQRStream";
 import DebugBLE from "../../screens/DebugBLE";
 import DebugBLEBenchmark from "../../screens/DebugBLEBenchmark";
@@ -18,7 +18,7 @@ import AboutSettings from "../../screens/Settings/About";
 import GeneralSettings from "../../screens/Settings/General";
 import CountervalueSettings from "../../screens/Settings/General/CountervalueSettings";
 import HelpSettings from "../../screens/Settings/Help";
-import CryptoAssetsSettingsTab from "./CryptoAssetsSettingsTab";
+import CryptoAssetsSettingsTab from "./CryptoAssetsSettingsNavigator";
 import CurrencySettings from "../../screens/Settings/CryptoAssets/Currencies/CurrencySettings";
 import DebugSettings, {
   DebugDevices,
@@ -29,7 +29,7 @@ import ExperimentalSettings from "../../screens/Settings/Experimental";
 import RateProviderSettings from "../../screens/Settings/CryptoAssets/Rates/RateProviderSettings";
 import RepairDevice from "../../screens/RepairDevice";
 
-export default function SettingsStack() {
+export default function SettingsNavigator() {
   const { t } = useTranslation();
 
   return (
@@ -70,7 +70,7 @@ export default function SettingsStack() {
         }}
       />
       <Stack.Screen
-        name={TabName.CryptoAssetsSettings}
+        name={NavigatorName.CryptoAssetsSettings}
         component={CryptoAssetsSettingsTab}
       />
       <Stack.Screen

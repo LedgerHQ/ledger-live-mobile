@@ -3,17 +3,17 @@ import React, { useMemo } from "react";
 import { useSelector } from "react-redux";
 import Config from "react-native-config";
 import { createStackNavigator } from "@react-navigation/stack";
-import { StackName } from "../../const";
+import { NavigatorName } from "../../const";
 import { hasCompletedOnboardingSelector } from "../../reducers/settings";
-import BaseNavigatorStack from "./BaseNavigatorStack";
-import BaseOnboardingStack from "./BaseOnboardingStack";
-import ImportAccountsStack from "./ImportAccountsStack";
+import BaseNavigatorStack from "./BaseNavigator";
+import BaseOnboardingStack from "./BaseOnboardingNavigator";
+import ImportAccountsStack from "./ImportAccountsNavigator";
 
 interface Props {
   importDataString: string;
 }
 
-export default function RootNavigatorStack({ importDataString }: Props) {
+export default function RootNavigator({ importDataString }: Props) {
   const hasCompletedOnboarding = useSelector(hasCompletedOnboardingSelector);
 
   const data = useMemo<string | false>(() => {
@@ -30,17 +30,17 @@ export default function RootNavigatorStack({ importDataString }: Props) {
     <Stack.Navigator>
       {data ? (
         <Stack.Screen
-          name={StackName.ImportAccounts}
+          name={NavigatorName.ImportAccounts}
           component={ImportAccountsStack}
         />
       ) : goToOnboarding ? (
         <Stack.Screen
-          name={StackName.BaseNavigator}
+          name={NavigatorName.BaseNavigator}
           component={BaseNavigatorStack}
         />
       ) : (
         <Stack.Screen
-          name={StackName.BaseOnboarding}
+          name={NavigatorName.BaseOnboarding}
           component={BaseOnboardingStack}
         />
       )}

@@ -1,15 +1,15 @@
 // @flow
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import { ScreenName, StackName } from "../../const";
+import { ScreenName, NavigatorName } from "../../const";
 import Manager from "../../screens/Manager";
-import ManagerMain from "./ManagerMainTab";
+import ManagerMain from "./ManagerMainNavigator";
 
-export default function ManagerStack() {
+export default function ManagerNavigator() {
   return (
     <Stack.Navigator>
       <Stack.Screen name={ScreenName.Manager} component={Manager} />
-      <Stack.Screen name={StackName.ManagerMain} component={ManagerMain} />
+      <Stack.Screen name={NavigatorName.ManagerMain} component={ManagerMain} />
     </Stack.Navigator>
   );
 }

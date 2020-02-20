@@ -4,7 +4,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { ScreenName } from "../../const";
 import PasswordRemove from "../../screens/Settings/General/PasswordRemove";
 
-export default function ImportAccountsStack() {
+export default function PasswordModifyFlowNavigator() {
   return (
     <Stack.Navigator>
       <Stack.Screen

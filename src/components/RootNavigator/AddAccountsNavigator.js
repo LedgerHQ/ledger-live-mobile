@@ -9,7 +9,7 @@ import AddAccountsAccounts from "../../screens/AddAccounts/03-Accounts";
 import AddAccountsSuccess from "../../screens/AddAccounts/04-Success";
 import EditAccountName from "../../screens/AccountSettings/EditAccountName";
 
-export default function AddAccountsStack() {
+export default function AddAccountsNavigator() {
   return (
     <Stack.Navigator>
       <Stack.Screen

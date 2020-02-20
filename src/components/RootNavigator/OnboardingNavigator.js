@@ -13,7 +13,7 @@ import OnboardingStepShareData from "../../screens/Onboarding/steps/share-data";
 import OnboardingStepScanQR from "../../screens/Onboarding/steps/scan-qr";
 import OnboardingStepFinish from "../../screens/Onboarding/steps/finish";
 
-export default function OnboardingStack() {
+export default function OnboardingNavigator() {
   return (
     <Stack.Navigator>
       <Stack.Screen

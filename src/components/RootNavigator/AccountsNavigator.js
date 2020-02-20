@@ -5,7 +5,7 @@ import { ScreenName } from "../../const";
 import Accounts from "../../screens/Accounts";
 import Account from "../../screens/Account";
 
-export default function AccountsStack() {
+export default function AccountsNavigator() {
   return (
     <Stack.Navigator>
       <Stack.Screen name={ScreenName.Accounts} component={Accounts} />

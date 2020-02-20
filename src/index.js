@@ -35,7 +35,7 @@ import SyncNewAccounts from "./bridge/SyncNewAccounts";
 import { OnboardingContextProvider } from "./screens/Onboarding/onboardingContext";
 import HookAnalytics from "./analytics/HookAnalytics";
 import HookSentry from "./components/HookSentry";
-import { RootNavigatorStack } from "./components/Navigation";
+import RootNavigator from "./components/RootNavigator";
 import SetEnvsFromSettings from "./components/SetEnvsFromSettings";
 
 checkLibs({
@@ -111,7 +111,7 @@ function App({ importDataString }: AppProps) {
 
       <SyncNewAccounts priority={5} />
 
-      <RootNavigatorStack importDataString={importDataString} />
+      <RootNavigator importDataString={importDataString} />
 
       <DebugRejectSwitch />
     </View>

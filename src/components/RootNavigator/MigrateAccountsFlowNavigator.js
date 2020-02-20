@@ -6,7 +6,7 @@ import MigrateAccountsOverview from "../../screens/MigrateAccounts/01-Overview";
 import MigrateAccountsConnectDevice from "../../screens/MigrateAccounts/02-ConnectDevice";
 import MigrateAccountsProgress from "../../screens/MigrateAccounts/03-Progress";
 
-export default function MigrateAccountsFlowStack() {
+export default function MigrateAccountsFlowNavigator() {
   return (
     <Stack.Navigator>
       <Stack.Screen

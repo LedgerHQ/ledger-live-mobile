@@ -1,7 +1,7 @@
 // @flow
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import { ScreenName, StackName, TabName } from "../../const";
+import { ScreenName, NavigatorName } from "../../const";
 import perFamilyScreens from "../../generated/screens";
 import OperationDetails from "../../screens/OperationDetails";
 import PairDevices from "../../screens/PairDevices";
@@ -10,16 +10,16 @@ import Distribution from "../../screens/Distribution";
 import Asset from "../../screens/Asset";
 import ScanRecipient from "../../screens/SendFunds/ScanRecipient";
 import FallbackCameraSend from "../../screens/SendFunds/FallbackCamera/FallbackCameraSend";
-import Main from "./MainTab";
-import ReceiveFundsStack from "./ReceiveFundsStack";
-import SendFundsStack from "./SendFundsStack";
-import AddAccountsStack from "./AddAccountsStack";
-import FirmwareUpdateStack from "./FirmwareUpdateStack";
-import AccountSettingsStack from "./AccountSettingsStack";
-import ImportAccountsStack from "./ImportAccountsStack";
-import PasswordAddFlowStack from "./PasswordAddFlowStack";
-import PasswordModifyFlowStack from "./PasswordModifyFlowStack";
-import MigrateAccountsFlowStack from "./MigrateAccountsFlowStack";
+import Main from "./MainTabNavigator";
+import ReceiveFundsStack from "./ReceiveFundsNavigator";
+import SendFundsStack from "./SendFundsNavigator";
+import AddAccountsStack from "./AddAccountsNavigator";
+import FirmwareUpdateStack from "./FirmwareUpdateNavigator";
+import AccountSettingsStack from "./AccountSettings";
+import ImportAccountsStack from "./ImportAccountsNavigator";
+import PasswordAddFlowStack from "./PasswordAddFlowNavigator";
+import PasswordModifyFlowStack from "./PasswordModifyFlowNavigator";
+import MigrateAccountsFlowStack from "./MigrateAccountsFlowNavigator";
 
 const {
   sendScreens: generatedSendScreens,
@@ -41,18 +41,21 @@ const {
   { sendScreens: {}, baseScreens: {} },
 );
 
-export default function BaseNavigatorStack() {
+export default function BaseNavigator() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name={TabName.Main} component={Main} />
+      <Stack.Screen name={NavigatorName.Main} component={Main} />
       <Stack.Screen
-        name={StackName.ReceiveFunds}
+        name={NavigatorName.ReceiveFunds}
         component={ReceiveFundsStack}
       />
-      <Stack.Screen name={StackName.SendFunds} component={SendFundsStack} />
-      <Stack.Screen name={StackName.AddAccounts} component={AddAccountsStack} />
+      <Stack.Screen name={NavigatorName.SendFunds} component={SendFundsStack} />
       <Stack.Screen
-        name={StackName.FirmwareUpdate}
+        name={NavigatorName.AddAccounts}
+        component={AddAccountsStack}
+      />
+      <Stack.Screen
+        name={NavigatorName.FirmwareUpdate}
         component={FirmwareUpdateStack}
       />
       <Stack.Screen
@@ -60,11 +63,11 @@ export default function BaseNavigatorStack() {
         component={OperationDetails}
       />
       <Stack.Screen
-        name={StackName.AccountSettings}
+        name={NavigatorName.AccountSettings}
         component={AccountSettingsStack}
       />
       <Stack.Screen
-        name={StackName.ImportAccounts}
+        name={NavigatorName.ImportAccounts}
         component={ImportAccountsStack}
       />
       <Stack.Screen name={ScreenName.PairDevices} component={PairDevices} />
@@ -73,15 +76,15 @@ export default function BaseNavigatorStack() {
         component={EditDeviceName}
       />
       <Stack.Screen
-        name={StackName.PasswordAddFlow}
+        name={NavigatorName.PasswordAddFlow}
         component={PasswordAddFlowStack}
       />
       <Stack.Screen
-        name={StackName.PasswordModifyFlow}
+        name={NavigatorName.PasswordModifyFlow}
         component={PasswordModifyFlowStack}
       />
       <Stack.Screen
-        name={StackName.MigrateAccountsFlow}
+        name={NavigatorName.MigrateAccountsFlow}
         component={MigrateAccountsFlowStack}
       />
       <Stack.Screen name={ScreenName.Distribution} component={Distribution} />

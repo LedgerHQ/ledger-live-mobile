@@ -7,7 +7,7 @@ import styles from "../../navigation/styles";
 import RatesList from "../../screens/Settings/CryptoAssets/Rates/RatesList";
 import CurrenciesList from "../../screens/Settings/CryptoAssets/Currencies/CurrenciesList";
 
-export default function CryptoAssetsSettingsTab() {
+export default function CryptoAssetsSettingsNavigator() {
   const { t } = useTranslation();
 
   return (

@@ -8,7 +8,7 @@ import FirmwareUpdateMCU from "../../screens/FirmwareUpdate/03-MCU";
 import FirmwareUpdateConfirmation from "../../screens/FirmwareUpdate/04-Confirmation";
 import FirmwareUpdateFailure from "../../screens/FirmwareUpdate/04-Failure";
 
-export default function FirmwareUpdateStack() {
+export default function FirmwareUpdateNavigator() {
   return (
     <Stack.Navigator>
       <Stack.Screen

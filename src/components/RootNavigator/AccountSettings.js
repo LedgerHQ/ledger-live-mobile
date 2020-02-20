@@ -8,7 +8,7 @@ import EditAccountName from "../../screens/AccountSettings/EditAccountName";
 import AdvancedLogs from "../../screens/AccountSettings/AdvancedLogs";
 import CurrencySettings from "../../screens/Settings/CryptoAssets/Currencies/CurrencySettings";
 
-export default function AccountSettingsStack() {
+export default function AccountSettingsNavigator() {
   return (
     <Stack.Navigator>
       <Stack.Screen

@@ -11,7 +11,7 @@ import SendValidation from "../../screens/SendFunds/06-Validation";
 import SendValidationSuccess from "../../screens/SendFunds/07-ValidationSuccess";
 import SendValidationError from "../../screens/SendFunds/07-ValidationError";
 
-export default function SendFundsStack() {
+export default function SendFundsNavigator() {
   return (
     <Stack.Navigator>
       <Stack.Screen name={ScreenName.SendFundsMain} component={SendFundsMain} />

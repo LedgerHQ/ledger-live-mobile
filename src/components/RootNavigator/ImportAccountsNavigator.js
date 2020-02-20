@@ -6,7 +6,7 @@ import ScanAccounts from "../../screens/ImportAccounts/Scan";
 import DisplayResult from "../../screens/ImportAccounts/DisplayResult";
 import FallBackCameraScreen from "../../screens/ImportAccounts/FallBackCameraScreen";
 
-export default function ImportAccountsStack() {
+export default function ImportAccountsNavigator() {
   return (
     <Stack.Navigator>
       <Stack.Screen name={ScreenName.ScanAccounts} component={ScanAccounts} />
