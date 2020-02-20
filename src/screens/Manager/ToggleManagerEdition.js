@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { StyleSheet } from "react-native";
 import { connect } from "react-redux";
 import { compose } from "redux";
-import { withNavigation } from "react-navigation";
+import { withNavigation } from "@react-navigation/compat";
 import type { NavigationScreenProp } from "react-navigation";
 import { Trans, translate } from "react-i18next";
 import Touchable from "../../components/Touchable";

@@ -13,8 +13,8 @@ import {
   TextInput,
   View,
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import type { NavigationScreenProp } from "react-navigation";
-import { SafeAreaView } from "react-navigation";
 import { connect } from "react-redux";
 import colors from "../../colors";
 import Button from "../../components/Button";

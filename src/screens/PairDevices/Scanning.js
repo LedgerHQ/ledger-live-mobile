@@ -1,9 +1,7 @@
 // @flow
 
 import React, { Component, Fragment } from "react";
-import { StyleSheet } from "react-native";
-// $FlowFixMe
-import { FlatList } from "react-navigation";
+import { StyleSheet, FlatList } from "react-native";
 import { connect } from "react-redux";
 import { Trans } from "react-i18next";
 import { createStructuredSelector } from "reselect";

@@ -5,7 +5,7 @@ import Icon from "react-native-vector-icons/dist/Feather";
 import IconFa from "react-native-vector-icons/dist/FontAwesome";
 import { withTranslation } from "react-i18next";
 import Config from "react-native-config";
-import { SafeAreaView } from "react-navigation";
+import { SafeAreaView } from "react-native-safe-area-context";
 import type { NavigationScreenProp } from "react-navigation";
 
 import { connect } from "react-redux";

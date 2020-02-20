@@ -4,7 +4,7 @@ import React, { Component } from "react";
 import { withTranslation, Trans } from "react-i18next";
 import i18next from "i18next";
 import { StyleSheet, View, Linking } from "react-native";
-import { SafeAreaView } from "react-navigation";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 import type { NavigationScreenProp } from "react-navigation";
 import type { TokenCurrency } from "@ledgerhq/live-common/lib/types";

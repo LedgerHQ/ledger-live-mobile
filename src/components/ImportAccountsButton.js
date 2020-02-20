@@ -1,6 +1,6 @@
 // @flow
 import React from "react";
-import { withNavigation } from "react-navigation";
+import { withNavigation } from "@react-navigation/compat";
 import Button from "./Button";
 
 const ImportAccountsButton = ({

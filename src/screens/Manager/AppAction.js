@@ -4,7 +4,7 @@ import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { View, StyleSheet, Image } from "react-native";
 import { Trans } from "react-i18next";
-import { SafeAreaView } from "react-navigation";
+import { SafeAreaView } from "react-native-safe-area-context";
 import ProgressCircle from "react-native-progress/Circle";
 import { withDevice } from "@ledgerhq/live-common/lib/hw/deviceAccess";
 import type { DeviceModelId } from "@ledgerhq/devices";
@@ -331,7 +331,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(AppAction);
+export default connect(mapStateToProps, mapDispatchToProps)(AppAction);

@@ -13,7 +13,7 @@ import { Trans, withTranslation } from "react-i18next";
 import { Platform, ScrollView, StyleSheet, View } from "react-native";
 import Icon from "react-native-vector-icons/dist/FontAwesome";
 import type { NavigationScreenProp } from "react-navigation";
-import { SafeAreaView } from "react-navigation";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { track, TrackScreen } from "../../analytics";

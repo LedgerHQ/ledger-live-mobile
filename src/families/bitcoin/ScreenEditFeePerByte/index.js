@@ -6,7 +6,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native";
-import { SafeAreaView } from "react-navigation";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { connect } from "react-redux";
 import { withTranslation, Trans } from "react-i18next";
 import i18next from "i18next";

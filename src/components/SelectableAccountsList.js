@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import { listTokenTypesForCryptoCurrency } from "@ledgerhq/live-common/lib/currencies";
 import type { Account } from "@ledgerhq/live-common/lib/types";
-import { withNavigation } from "react-navigation";
+import { withNavigation } from "@react-navigation/compat";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 import type { NavigationScreenProp } from "react-navigation";
 import { track } from "../analytics";

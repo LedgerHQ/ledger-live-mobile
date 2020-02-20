@@ -3,7 +3,7 @@ import { compose } from "redux";
 import { connect } from "react-redux";
 import Config from "react-native-config";
 import { createStructuredSelector } from "reselect";
-import { withNavigation } from "react-navigation";
+import { withNavigation } from "@react-navigation/compat";
 import { Buffer } from "buffer";
 import { hasCompletedOnboardingSelector } from "../reducers/settings";
 

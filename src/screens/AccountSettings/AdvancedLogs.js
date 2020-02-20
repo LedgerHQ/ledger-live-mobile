@@ -1,9 +1,7 @@
 /* @flow */
 import React, { PureComponent } from "react";
 import i18next from "i18next";
-import { View, StyleSheet } from "react-native";
-// $FlowFixMe
-import { ScrollView } from "react-navigation";
+import { View, StyleSheet, ScrollView } from "react-native";
 import type { NavigationScreenProp } from "react-navigation";
 import type { Account } from "@ledgerhq/live-common/lib/types";
 import { connect } from "react-redux";
@@ -70,10 +68,7 @@ class AdvancedLogs extends PureComponent<Props> {
 }
 
 export default compose(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps,
-  ),
+  connect(mapStateToProps, mapDispatchToProps),
   withTranslation(),
 )(AdvancedLogs);
 

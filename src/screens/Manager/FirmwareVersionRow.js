@@ -2,7 +2,7 @@
 import React, { PureComponent } from "react";
 import { Trans } from "react-i18next";
 import { StyleSheet } from "react-native";
-import { withNavigation } from "react-navigation";
+import { withNavigation } from "@react-navigation/compat";
 import type { DeviceInfo } from "@ledgerhq/live-common/lib/types/manager";
 
 import LText from "../../components/LText";

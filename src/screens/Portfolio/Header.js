@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
-import { withNavigation } from "react-navigation";
+import { withNavigation } from "@react-navigation/compat";
 import type { NavigationScreenProp } from "react-navigation";
 import type { AsyncState } from "../../reducers/bridgeSync";
 import { globalSyncStateSelector } from "../../reducers/bridgeSync";

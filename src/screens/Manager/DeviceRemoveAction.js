@@ -4,7 +4,8 @@ import React, { PureComponent } from "react";
 import { View, StyleSheet } from "react-native";
 import { Trans } from "react-i18next";
 import { connect } from "react-redux";
-import { withNavigation, SafeAreaView } from "react-navigation";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { withNavigation } from "@react-navigation/compat";
 import { disconnect } from "@ledgerhq/live-common/lib/hw";
 import { getDeviceModel } from "@ledgerhq/devices";
 import type { DeviceModelId } from "@ledgerhq/devices";
@@ -149,7 +150,6 @@ const styles = StyleSheet.create({
   },
 });
 
-export default connect(
-  null,
-  { removeKnownDevice },
-)(withNavigation(DeviceRemoveAction));
+export default connect(null, { removeKnownDevice })(
+  withNavigation(DeviceRemoveAction),
+);

@@ -2,7 +2,7 @@
 
 import React, { Component } from "react";
 import { StyleSheet, View } from "react-native";
-import { SafeAreaView } from "react-navigation";
+import { SafeAreaView } from "react-native-safe-area-context";
 import LottieView from "lottie-react-native";
 import Button from "../components/Button";
 import colors from "../colors";

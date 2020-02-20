@@ -5,7 +5,7 @@ import i18next from "i18next";
 import { from, of } from "rxjs";
 import { delay } from "rxjs/operators";
 import { View, StyleSheet, Linking, ScrollView } from "react-native";
-import { SafeAreaView } from "react-navigation";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { connect } from "react-redux";
 import QRCode from "react-native-qrcode-svg";
 import { withTranslation, Trans } from "react-i18next";
@@ -139,10 +139,7 @@ class ReceiveConfirmation extends Component<Props, State> {
     this.sub = withDevice(deviceId)(transport =>
       mainAccount.id.startsWith("mock")
         ? // $FlowFixMe
-          of({}).pipe(
-            delay(1000),
-            rejectionOp(),
-          )
+          of({}).pipe(delay(1000), rejectionOp())
         : from(
             getAddress(transport, {
               derivationMode: mainAccount.derivationMode,

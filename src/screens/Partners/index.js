@@ -2,9 +2,8 @@
 
 import React, { Component } from "react";
 import { Trans, withTranslation } from "react-i18next";
-import { View, StyleSheet } from "react-native";
-// $FlowFixMe
-import { SafeAreaView, ScrollView } from "react-navigation";
+import { View, StyleSheet, ScrollView } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import partners from "@ledgerhq/live-common/lib/partners/reactNative";
 import type { NavigationScreenProp } from "react-navigation";
 import type { T } from "../../types/common";

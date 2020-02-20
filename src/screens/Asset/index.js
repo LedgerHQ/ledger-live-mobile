@@ -15,17 +15,12 @@ import type {
 } from "@ledgerhq/live-common/lib/types";
 import React, { PureComponent } from "react";
 import { withTranslation } from "react-i18next";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, SectionList } from "react-native";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import type { SectionBase } from "react-native/Libraries/Lists/SectionList";
-import {
-  // prettier-ignore
-  // $FlowFixMe
-  SectionList,
-  SafeAreaView,
-  withNavigation,
-} from "react-navigation";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { withNavigation } from "@react-navigation/compat";
 import type { NavigationScreenProp } from "react-navigation";
 import CurrencyIcon from "../../components/CurrencyIcon";
 import colors from "../../colors";
@@ -270,10 +265,7 @@ const mapStateToProps = (state: State, props: *) => {
 
 const mapDispatchToProps = { switchCountervalueFirst };
 export default compose(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps,
-  ),
+  connect(mapStateToProps, mapDispatchToProps),
   withTranslation(),
 )(withNavigation(Asset));
 

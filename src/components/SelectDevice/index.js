@@ -7,7 +7,7 @@ import { createStructuredSelector } from "reselect";
 import { discoverDevices } from "@ledgerhq/live-common/lib/hw";
 import { Trans } from "react-i18next";
 import type { TransportModule } from "@ledgerhq/live-common/lib/hw";
-import { withNavigation } from "react-navigation";
+import { withNavigation } from "@react-navigation/compat";
 import type { NavigationScreenProp } from "react-navigation";
 import { knownDevicesSelector } from "../../reducers/ble";
 import { removeKnownDevice } from "../../actions/ble";
@@ -145,7 +145,7 @@ class SelectDevice extends Component<OwnProps, State> {
                   deviceName: e.name || "",
                   modelId:
                     (e.deviceModel && e.deviceModel.id) ||
-                    (Config.FALLBACK_DEVICE_MODEL_ID || "nanoX"),
+                    Config.FALLBACK_DEVICE_MODEL_ID || "nanoX",
                   wired: e.id.startsWith("httpdebug|")
                     ? Config.FALLBACK_DEVICE_WIRED === "YES"
                     : e.id.startsWith("usb|"),

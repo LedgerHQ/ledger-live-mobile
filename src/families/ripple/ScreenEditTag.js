@@ -1,8 +1,7 @@
 /* @flow */
 import React, { PureComponent } from "react";
-import { View, StyleSheet, TextInput } from "react-native";
-// $FlowFixMe
-import { SafeAreaView, ScrollView } from "react-navigation";
+import { View, StyleSheet, TextInput, ScrollView } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import type { NavigationScreenProp } from "react-navigation";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";

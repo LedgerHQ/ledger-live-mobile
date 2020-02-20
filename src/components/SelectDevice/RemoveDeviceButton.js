@@ -1,7 +1,8 @@
 // @flow
 import React, { PureComponent } from "react";
 import { StyleSheet, Animated } from "react-native";
-import { SafeAreaView, withNavigation } from "react-navigation";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { withNavigation } from "@react-navigation/compat";
 import type { NavigationScreenProp } from "react-navigation";
 import { compose } from "redux";
 import { Trans } from "react-i18next";
@@ -121,9 +122,6 @@ const styles = StyleSheet.create({
 });
 
 export default compose(
-  connect(
-    null,
-    { removeKnownDevices },
-  ),
+  connect(null, { removeKnownDevices }),
   withNavigation,
 )(RemoveDeviceButton);

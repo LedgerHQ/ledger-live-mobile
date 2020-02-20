@@ -2,9 +2,8 @@
 
 import React, { useMemo } from "react";
 import { withTranslation, Trans } from "react-i18next";
-import { StyleSheet, View } from "react-native";
-// $FlowFixMe
-import { SafeAreaView, FlatList } from "react-navigation";
+import { StyleSheet, View, FlatList } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import i18next from "i18next";
 import { compose } from "redux";
 import type { NavigationScreenProp } from "react-navigation";

@@ -1,9 +1,7 @@
 // @flow
 
 import React, { PureComponent } from "react";
-import { StyleSheet, View, Animated } from "react-native";
-// $FlowFixMe
-import { SectionList } from "react-navigation";
+import { StyleSheet, View, Animated, SectionList } from "react-native";
 import type { SectionBase } from "react-native/Libraries/Lists/SectionList";
 import { connect } from "react-redux";
 import type { NavigationScreenProp } from "react-navigation";

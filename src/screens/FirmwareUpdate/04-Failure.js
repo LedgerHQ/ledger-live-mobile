@@ -1,7 +1,7 @@
 /* @flow */
 import React, { Component } from "react";
 import { View, StyleSheet } from "react-native";
-import { SafeAreaView } from "react-navigation";
+import { SafeAreaView } from "react-native-safe-area-context";
 import type { NavigationStackProp } from "react-navigation-stack";
 import { withTranslation, Trans } from "react-i18next";
 

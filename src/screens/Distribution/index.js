@@ -9,9 +9,10 @@ import {
   StyleSheet,
   Platform,
   Dimensions,
+  FlatList,
 } from "react-native";
-// $FlowFixMe
-import { FlatList, SafeAreaView, withNavigation } from "react-navigation";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { withNavigation } from "@react-navigation/compat";
 import type { NavigationScreenProp } from "react-navigation";
 import i18next from "i18next";
 import { getAssetsDistribution } from "@ledgerhq/live-common/lib/portfolio";

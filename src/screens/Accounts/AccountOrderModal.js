@@ -4,7 +4,8 @@ import React, { Component } from "react";
 import { View, StyleSheet } from "react-native";
 import { Trans } from "react-i18next";
 
-import { withNavigation, SafeAreaView } from "react-navigation";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { withNavigation } from "@react-navigation/compat";
 
 import MenuTitle from "../../components/MenuTitle";
 import OrderOption from "./OrderOption";

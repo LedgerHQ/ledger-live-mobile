@@ -1,7 +1,8 @@
 /* @flow */
 
 import React, { Component } from "react";
-import { withNavigation, SafeAreaView } from "react-navigation";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { withNavigation } from "@react-navigation/compat";
 import { withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";

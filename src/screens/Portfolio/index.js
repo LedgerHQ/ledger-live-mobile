@@ -3,7 +3,7 @@
 import React, { Component } from "react";
 import { createStructuredSelector } from "reselect";
 import { connect } from "react-redux";
-import { View, StyleSheet, Animated } from "react-native";
+import { View, StyleSheet, Animated, SectionList } from "react-native";
 import type { SectionBase } from "react-native/Libraries/Lists/SectionList";
 import type {
   AccountLike,
@@ -12,8 +12,7 @@ import type {
   Portfolio,
   Currency,
 } from "@ledgerhq/live-common/lib/types";
-// $FlowFixMe
-import { SectionList, SafeAreaView } from "react-navigation";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { withTranslation } from "react-i18next";
 import {
   groupAccountsOperationsByDay,
@@ -224,10 +223,7 @@ class PortfolioScreen extends Component<
 }
 
 export default withTranslation()(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps,
-  )(PortfolioScreen),
+  connect(mapStateToProps, mapDispatchToProps)(PortfolioScreen),
 );
 
 const styles = StyleSheet.create({

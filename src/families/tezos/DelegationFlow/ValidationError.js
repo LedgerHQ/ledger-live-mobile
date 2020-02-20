@@ -1,7 +1,7 @@
 /* @flow */
 import React, { Component } from "react";
 import { StyleSheet, Linking } from "react-native";
-import { SafeAreaView } from "react-navigation";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { connect } from "react-redux";
 import { withTranslation } from "react-i18next";
 import type { NavigationScreenProp } from "react-navigation";

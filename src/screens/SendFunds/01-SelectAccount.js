@@ -1,8 +1,7 @@
 /* @flow */
 import React, { Component } from "react";
-import { View, StyleSheet } from "react-native";
-// $FlowFixMe
-import { SafeAreaView, FlatList } from "react-navigation";
+import { View, StyleSheet, FlatList } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import type { NavigationScreenProp } from "react-navigation";
 import { createStructuredSelector } from "reselect";
 import { connect } from "react-redux";

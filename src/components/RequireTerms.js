@@ -9,7 +9,7 @@ import {
   Linking,
   ActivityIndicator,
 } from "react-native";
-import { SafeAreaView } from "react-navigation";
+import { SafeAreaView } from "react-native-safe-area-context";
 import colors from "../colors";
 import { useTerms, useTermsAccept, url } from "../logic/terms";
 import getWindowDimensions from "../logic/getWindowDimensions";

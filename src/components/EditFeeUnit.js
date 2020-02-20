@@ -1,9 +1,7 @@
 /* @flow */
 import React, { PureComponent, Fragment } from "react";
-import { View, StyleSheet, Keyboard } from "react-native";
+import { FlatList, View, StyleSheet, Keyboard } from "react-native";
 import type { NavigationScreenProp } from "react-navigation";
-// $FlowFixMe
-import { FlatList } from "react-navigation";
 import Icon from "react-native-vector-icons/dist/FontAwesome";
 import type { Account } from "@ledgerhq/live-common/lib/types";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";

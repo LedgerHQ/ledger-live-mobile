@@ -3,7 +3,7 @@ import React, { PureComponent } from "react";
 import { TouchableWithoutFeedback, View, StyleSheet } from "react-native";
 import { withTranslation } from "react-i18next";
 
-import { withNavigation } from "react-navigation";
+import { withNavigation } from "@react-navigation/compat";
 import type { NavigationScreenProp } from "react-navigation";
 import { compose } from "redux";
 import colors from "../colors";
@@ -59,7 +59,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default compose(
-  withNavigation,
-  withTranslation(),
-)(StepHeader);
+export default compose(withNavigation, withTranslation())(StepHeader);

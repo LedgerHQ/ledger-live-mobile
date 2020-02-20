@@ -2,12 +2,12 @@
 
 import React, { Component } from "react";
 import { StyleSheet } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import i18next from "i18next";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { withTranslation } from "react-i18next";
 import type { NavigationScreenProp } from "react-navigation";
-import { SafeAreaView } from "react-navigation";
 import { timeout } from "rxjs/operators";
 import getDeviceInfo from "@ledgerhq/live-common/lib/hw/getDeviceInfo";
 import getDeviceName from "@ledgerhq/live-common/lib/hw/getDeviceName";

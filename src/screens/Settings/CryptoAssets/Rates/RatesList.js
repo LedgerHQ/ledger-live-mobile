@@ -1,10 +1,7 @@
 /* @flow */
 import React, { PureComponent } from "react";
-import { StyleSheet, View } from "react-native";
-// $FlowFixMe
-import { FlatList } from "react-navigation";
+import { StyleSheet, View, FlatList } from "react-native";
 import { connect } from "react-redux";
-import i18next from "i18next";
 import { Trans } from "react-i18next";
 import { createStructuredSelector } from "reselect";
 import type { NavigationScreenProp } from "react-navigation";

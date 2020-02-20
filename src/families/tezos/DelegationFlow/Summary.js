@@ -1,8 +1,7 @@
 /* @flow */
 import React, { useCallback, useEffect, useState } from "react";
 import { View, StyleSheet, Animated } from "react-native";
-// $FlowFixMe
-import { SafeAreaView } from "react-navigation";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { connect } from "react-redux";
 import { withTranslation, Trans } from "react-i18next";
 import type { NavigationScreenProp } from "react-navigation";

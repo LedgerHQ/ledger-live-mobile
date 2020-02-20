@@ -1,9 +1,7 @@
 // @flow
 import React, { Component, Fragment } from "react";
-import { View, StyleSheet } from "react-native";
-
-// $FlowFixMe
-import { SectionList, SafeAreaView } from "react-navigation";
+import { View, StyleSheet, SectionList } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { HeaderBackButton } from "react-navigation-stack";
 import groupBy from "lodash/groupBy";
 import concat from "lodash/concat";
@@ -225,13 +223,10 @@ class DisplayResult extends Component<Props, State> {
 }
 
 export default withTranslation()(
-  connect(
-    createStructuredSelector({ accounts: accountsSelector }),
-    {
-      importAccounts,
-      importDesktopSettings,
-    },
-  )(DisplayResult),
+  connect(createStructuredSelector({ accounts: accountsSelector }), {
+    importAccounts,
+    importDesktopSettings,
+  })(DisplayResult),
 );
 
 const styles = StyleSheet.create({

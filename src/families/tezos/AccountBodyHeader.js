@@ -1,7 +1,7 @@
 // @flow
 import React, { useCallback, useState } from "react";
 import { Trans } from "react-i18next";
-import { withNavigation } from "react-navigation";
+import { withNavigation } from "@react-navigation/compat";
 import { differenceInCalendarDays } from "date-fns";
 import { StyleSheet, Platform, View } from "react-native";
 import type { AccountLike, Account } from "@ledgerhq/live-common/lib/types";

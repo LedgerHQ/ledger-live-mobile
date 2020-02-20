@@ -3,7 +3,7 @@
 import React, { PureComponent } from "react";
 import { View, StyleSheet } from "react-native";
 
-import { withNavigation } from "react-navigation";
+import { withNavigation } from "@react-navigation/compat";
 
 import { Trans } from "react-i18next";
 import Icon from "react-native-vector-icons/dist/Feather";

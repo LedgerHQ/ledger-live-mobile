@@ -4,7 +4,7 @@ import React, { useCallback } from "react";
 import { Trans } from "react-i18next";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import type { NavigationScreenProp } from "react-navigation";
-import { withNavigation } from "react-navigation";
+import { withNavigation } from "@react-navigation/compat";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { createStructuredSelector } from "reselect";
@@ -75,7 +75,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default compose(
-  withNavigation,
-  connect(mapStateToProps),
-)(Banner);
+export default compose(withNavigation, connect(mapStateToProps))(Banner);

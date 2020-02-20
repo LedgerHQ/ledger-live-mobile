@@ -1,7 +1,7 @@
 // @flow
 
 import React, { PureComponent } from "react";
-import { withNavigation } from "react-navigation";
+import { withNavigation } from "@react-navigation/compat";
 import Icon from "react-native-vector-icons/dist/Feather";
 import Touchable from "../../components/Touchable";
 import colors from "../../colors";

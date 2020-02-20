@@ -1,9 +1,7 @@
 /* @flow */
 import React, { Component } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, ScrollView } from "react-native";
 import { connect } from "react-redux";
-// $FlowFixMe
-import { ScrollView } from "react-navigation";
 import type { NavigationScreenProp } from "react-navigation";
 import { withTranslation, Trans } from "react-i18next";
 import type {
@@ -174,9 +172,6 @@ const styles = StyleSheet.create({
   },
 });
 
-export default connect(
-  null,
-  {
-    removeKnownDevice,
-  },
-)(withTranslation()(ManagerDevice));
+export default connect(null, {
+  removeKnownDevice,
+})(withTranslation()(ManagerDevice));

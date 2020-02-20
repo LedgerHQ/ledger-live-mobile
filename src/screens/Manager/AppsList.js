@@ -1,8 +1,6 @@
 /* @flow */
 import React, { Component } from "react";
-import { View, StyleSheet } from "react-native";
-// $FlowFixMe
-import { FlatList } from "react-navigation";
+import { View, StyleSheet, FlatList } from "react-native";
 import { withTranslation } from "react-i18next";
 import i18next from "i18next";
 import manager from "@ledgerhq/live-common/lib/manager";

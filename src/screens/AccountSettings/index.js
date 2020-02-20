@@ -1,8 +1,6 @@
 /* @flow */
 import React, { PureComponent } from "react";
-import { View, StyleSheet } from "react-native";
-// $FlowFixMe
-import { ScrollView } from "react-navigation";
+import { View, StyleSheet, ScrollView } from "react-native";
 import { withTranslation } from "react-i18next";
 import i18next from "i18next";
 import type { Account } from "@ledgerhq/live-common/lib/types";
@@ -99,10 +97,7 @@ class AccountSettings extends PureComponent<Props, State> {
 }
 
 export default compose(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps,
-  ),
+  connect(mapStateToProps, mapDispatchToProps),
   withTranslation(),
 )(AccountSettings);
 

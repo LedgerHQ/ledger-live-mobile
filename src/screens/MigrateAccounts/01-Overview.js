@@ -4,14 +4,9 @@ import { getCryptoCurrencyById } from "@ledgerhq/live-common/lib/data/cryptocurr
 import type { Account } from "@ledgerhq/live-common/lib/types";
 import React, { useCallback } from "react";
 import { Trans } from "react-i18next";
-import { StyleSheet, View } from "react-native";
-import {
-  // prettier-ignore
-  // $FlowFixMe
-  SectionList,
-  withNavigation,
-  SafeAreaView,
-} from "react-navigation";
+import { StyleSheet, View, SectionList } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { withNavigation } from "@react-navigation/compat";
 import type { NavigationScreenProp } from "react-navigation";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";

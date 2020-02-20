@@ -2,7 +2,7 @@
 
 import React, { PureComponent } from "react";
 import { Keyboard, View, StyleSheet } from "react-native";
-import { SafeAreaView } from "react-navigation";
+import { SafeAreaView } from "react-native-safe-area-context";
 import type { NavigationScreenProp } from "react-navigation";
 import { withTranslation, Trans } from "react-i18next";
 import i18next from "i18next";
@@ -174,10 +174,7 @@ class EditDeviceName extends PureComponent<
 }
 
 export default compose(
-  connect(
-    null,
-    mapDispatchToProps,
-  ),
+  connect(null, mapDispatchToProps),
   withTranslation(),
 )(EditDeviceName);
 

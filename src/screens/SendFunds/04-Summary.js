@@ -1,9 +1,8 @@
 /* @flow */
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
 import React, { useState, useCallback, Component } from "react";
-import { View, StyleSheet } from "react-native";
-// $FlowFixMe
-import { SafeAreaView, ScrollView } from "react-navigation";
+import { View, StyleSheet, ScrollView } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { connect } from "react-redux";
 import { withTranslation, Trans } from "react-i18next";
 import i18next from "i18next";
