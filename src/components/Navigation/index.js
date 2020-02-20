@@ -1,2 +1,2 @@
 // @flow
-export { default as SettingsStack } from "./SettingsStack";
+export { default as RootNavigatorStack } from "./RootNavigatorStack";

@@ -1,21 +1,36 @@
 // @flow
+import perFamilyScreens from "../generated/screens";
 
 // This will be converted into string enum once TypeScript is supported in this project.
 export const ScreenName: { [key: string]: string } = {
   AboutSettings: "AboutSettings",
   Account: "Account",
   Accounts: "Accounts",
+  AccountCurrencySettings: "AccountCurrencySettings",
+  AccountSettingsMain: "AccountSettingsMain",
   AddAccountsAccounts: "AddAccountsAccounts",
   AddAccountsSelectCrypto: "AddAccountsSelectCrypto",
   AddAccountsSelectDevice: "AddAccountsSelectDevice",
   AddAccountsSuccess: "AddAccountsSuccess",
   AddAccountsTokenCurrencyDisclaimer: "AddAccountsTokenCurrencyDisclaimer",
+  AdvancedLogs: "AdvancedLogs",
+  Asset: "Asset",
   BenchmarkQRStream: "BenchmarkQRStream",
   EditAccountName: "EditAccountName",
+  EditAccountUnits: "EditAccountUnits",
+  EditDeviceName: "EditDeviceName",
   ExperimentalSettings: "ExperimentalSettings",
+  FallBackCameraScreen: "FallBackCameraScreen",
+  FallbackCameraSend: "FallbackCameraSend",
+  FirmwareUpdateCheckId: "FirmwareUpdateCheckId",
+  FirmwareUpdateConfirmation: "FirmwareUpdateConfirmation",
+  FirmwareUpdateFailure: "FirmwareUpdateFailure",
+  FirmwareUpdateMCU: "FirmwareUpdateMCU",
+  FirmwareUpdateReleaseNotes: "FirmwareUpdateReleaseNotes",
+  ConfirmPassword: "ConfirmPassword",
+  CountervalueSettings: "CountervalueSettings",
   CurrenciesList: "CurrenciesList",
   CurrencySettings: "CurrencySettings",
-  CountervalueSettings: "CountervalueSettings",
   DebugBLE: "DebugBLE",
   DebugBLEBenchmark: "DebugBLEBenchmark",
   DebugCrash: "DebugCrash",
@@ -29,12 +44,32 @@ export const ScreenName: { [key: string]: string } = {
   DebugStore: "DebugStore",
   DebugSVG: "DebugSVG",
   DebugWSImport: "DebugWSImport",
+  DisplayResult: "DisplayResult",
+  Distribution: "Distribution",
   GeneralSettings: "GeneralSettings",
   HelpSettings: "HelpSettings",
   Manager: "Manager",
   ManagerAppsList: "ManagerAppsList",
   ManagerDevice: "ManagerDevice",
   ManagerMain: "ManagerMain",
+  MigrateAccountsOverview: "MigrateAccountsOverview",
+  MigrateAccountsConnectDevice: "MigrateAccountsConnectDevice",
+  MigrateAccountsProgress: "MigrateAccountsProgress",
+  OnboardingOrNavigator: "OnboardingOrNavigator",
+  OnboardingStepFinish: "OnboardingStepFinish",
+  OnboardingStepScanQR: "OnboardingStepScanQR",
+  OnboardingStepChooseDevice: "OnboardingStepChooseDevice",
+  OnboardingStepGetStarted: "OnboardingStepGetStarted",
+  OnboardingStepSecurityChecklist: "OnboardingStepSecurityChecklist",
+  OnboardingStepSetupPin: "OnboardingStepSetupPin",
+  OnboardingStepShareData: "OnboardingStepShareData",
+  OnboardingStepPairNew: "OnboardingStepPairNew",
+  OnboardingStepPassword: "OnboardingStepPassword",
+  OnboardingStepWriteRecovery: "OnboardingStepWriteRecovery",
+  OperationDetails: "OperationDetails",
+  PairDevices: "PairDevices",
+  PasswordAdd: "PasswordAdd",
+  PasswordRemove: "PasswordRemove",
   Portfolio: "Portfolio",
   RatesList: "RatesList",
   RateProviderSettings: "RateProviderSettings",
@@ -42,6 +77,16 @@ export const ScreenName: { [key: string]: string } = {
   ReceiveConnectDevice: "ReceiveConnectDevice",
   ReceiveSelectAccount: "ReceiveSelectAccount",
   RepairDevice: "RepairDevice",
+  ScanAccounts: "ScanAccounts",
+  ScanRecipient: "ScanRecipient",
+  SendAmount: "SendAmount",
+  SendConnectDevice: "SendConnectDevice",
+  SendFundsMain: "SendFundsMain",
+  SendSelectRecipient: "SendSelectRecipient",
+  SendSummary: "SendSummary",
+  SendValidation: "SendValidation",
+  SendValidationError: "SendValidationError",
+  SendValidationSuccess: "SendValidationSuccess",
   Settings: "Settings",
   Transfer: "Transfer",
 };
@@ -49,11 +94,45 @@ export const ScreenName: { [key: string]: string } = {
 export const TabName: { [key: string]: string } = {
   CryptoAssetsSettings: "CryptoAssetsSettings",
   Main: "Main",
+  ManagerMain: "ManagerMain",
 };
 
 export const StackName: { [key: string]: string } = {
   Accounts: "Accounts",
+  AccountSettings: "AccountSettings",
   AddAccounts: "AddAccounts",
+  BaseNavigator: "BaseNavigator",
+  BaseOnboarding: "BaseOnboarding",
+  FirmwareUpdate: "FirmwareUpdate",
+  ImportAccounts: "ImportAccounts",
+  Manager: "Manager",
   ManagerMain: "ManagerMain",
+  MigrateAccountsFlow: "MigrateAccountsFlow",
+  Onboarding: "Onboarding",
+  PasswordAddFlow: "PasswordAddFlow",
+  PasswordModifyFlow: "PasswordModifyFlow",
   ReceiveFunds: "ReceiveFunds",
+  SendFunds: "SendFunds",
+  Settings: "Settings",
 };
+
+export const SwitchName: { [key: string]: string } = {
+  RootNavigator: "RootNavigator",
+};
+
+export const GeneratedFamilyScreenName: {
+  [key: string]: string,
+} = Object.values(perFamilyScreens).reduce(
+  (prev, item) => ({
+    ...prev,
+    ...extractNames(item.sendScreens),
+    ...extractNames(item.baseScreens),
+  }),
+  {},
+);
+
+function extractNames(obj?: { [key: string]: any }): { [key: string]: string } {
+  return obj
+    ? Object.keys(obj).reduce((prev, key) => ({ ...prev, [key]: key }), {})
+    : {};
+}
