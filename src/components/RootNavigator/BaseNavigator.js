@@ -11,15 +11,15 @@ import Asset from "../../screens/Asset";
 import ScanRecipient from "../../screens/SendFunds/ScanRecipient";
 import FallbackCameraSend from "../../screens/SendFunds/FallbackCamera/FallbackCameraSend";
 import Main from "./MainTabNavigator";
-import ReceiveFundsStack from "./ReceiveFundsNavigator";
-import SendFundsStack from "./SendFundsNavigator";
-import AddAccountsStack from "./AddAccountsNavigator";
-import FirmwareUpdateStack from "./FirmwareUpdateNavigator";
-import AccountSettingsStack from "./AccountSettings";
-import ImportAccountsStack from "./ImportAccountsNavigator";
-import PasswordAddFlowStack from "./PasswordAddFlowNavigator";
-import PasswordModifyFlowStack from "./PasswordModifyFlowNavigator";
-import MigrateAccountsFlowStack from "./MigrateAccountsFlowNavigator";
+import ReceiveFundsNavigator from "./ReceiveFundsNavigator";
+import SendFundsNavigator from "./SendFundsNavigator";
+import AddAccountsNavigator from "./AddAccountsNavigator";
+import FirmwareUpdateNavigator from "./FirmwareUpdateNavigator";
+import AccountSettingsNavigator from "./AccountSettings";
+import ImportAccountsNavigator from "./ImportAccountsNavigator";
+import PasswordAddFlowNavigator from "./PasswordAddFlowNavigator";
+import PasswordModifyFlowNavigator from "./PasswordModifyFlowNavigator";
+import MigrateAccountsFlowNavigator from "./MigrateAccountsFlowNavigator";
 
 const {
   sendScreens: generatedSendScreens,
@@ -47,16 +47,19 @@ export default function BaseNavigator() {
       <Stack.Screen name={NavigatorName.Main} component={Main} />
       <Stack.Screen
         name={NavigatorName.ReceiveFunds}
-        component={ReceiveFundsStack}
+        component={ReceiveFundsNavigator}
       />
-      <Stack.Screen name={NavigatorName.SendFunds} component={SendFundsStack} />
+      <Stack.Screen
+        name={NavigatorName.SendFunds}
+        component={SendFundsNavigator}
+      />
       <Stack.Screen
         name={NavigatorName.AddAccounts}
-        component={AddAccountsStack}
+        component={AddAccountsNavigator}
       />
       <Stack.Screen
         name={NavigatorName.FirmwareUpdate}
-        component={FirmwareUpdateStack}
+        component={FirmwareUpdateNavigator}
       />
       <Stack.Screen
         name={ScreenName.OperationDetails}
@@ -64,11 +67,11 @@ export default function BaseNavigator() {
       />
       <Stack.Screen
         name={NavigatorName.AccountSettings}
-        component={AccountSettingsStack}
+        component={AccountSettingsNavigator}
       />
       <Stack.Screen
         name={NavigatorName.ImportAccounts}
-        component={ImportAccountsStack}
+        component={ImportAccountsNavigator}
       />
       <Stack.Screen name={ScreenName.PairDevices} component={PairDevices} />
       <Stack.Screen
@@ -77,15 +80,15 @@ export default function BaseNavigator() {
       />
       <Stack.Screen
         name={NavigatorName.PasswordAddFlow}
-        component={PasswordAddFlowStack}
+        component={PasswordAddFlowNavigator}
       />
       <Stack.Screen
         name={NavigatorName.PasswordModifyFlow}
-        component={PasswordModifyFlowStack}
+        component={PasswordModifyFlowNavigator}
       />
       <Stack.Screen
         name={NavigatorName.MigrateAccountsFlow}
-        component={MigrateAccountsFlowStack}
+        component={MigrateAccountsFlowNavigator}
       />
       <Stack.Screen name={ScreenName.Distribution} component={Distribution} />
       <Stack.Screen name={ScreenName.Asset} component={Asset} />

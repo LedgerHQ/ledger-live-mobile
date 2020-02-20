@@ -5,9 +5,9 @@ import Config from "react-native-config";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigatorName } from "../../const";
 import { hasCompletedOnboardingSelector } from "../../reducers/settings";
-import BaseNavigatorStack from "./BaseNavigator";
-import BaseOnboardingStack from "./BaseOnboardingNavigator";
-import ImportAccountsStack from "./ImportAccountsNavigator";
+import BaseNavigator from "./BaseNavigator";
+import BaseOnboardingNavigator from "./BaseOnboardingNavigator";
+import ImportAccountsNavigator from "./ImportAccountsNavigator";
 
 interface Props {
   importDataString: string;
@@ -31,17 +31,17 @@ export default function RootNavigator({ importDataString }: Props) {
       {data ? (
         <Stack.Screen
           name={NavigatorName.ImportAccounts}
-          component={ImportAccountsStack}
+          component={ImportAccountsNavigator}
         />
       ) : goToOnboarding ? (
         <Stack.Screen
           name={NavigatorName.BaseNavigator}
-          component={BaseNavigatorStack}
+          component={BaseNavigator}
         />
       ) : (
         <Stack.Screen
           name={NavigatorName.BaseOnboarding}
-          component={BaseOnboardingStack}
+          component={BaseOnboardingNavigator}
         />
       )}
     </Stack.Navigator>

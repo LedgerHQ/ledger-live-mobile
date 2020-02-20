@@ -4,21 +4,21 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { ScreenName, NavigatorName } from "../../const";
 import PairDevices from "../../screens/PairDevices";
 import EditDeviceName from "../../screens/EditDeviceName";
-import OnboardingStack from "./OnboardingNavigator";
-import ImportAccountsStack from "./ImportAccountsNavigator";
-import PasswordAddFlowStack from "./PasswordAddFlowNavigator";
-import PasswordModifyFlowStack from "./PasswordModifyFlowNavigator";
+import OnboardingNavigator from "./OnboardingNavigator";
+import ImportAccountsNavigator from "./ImportAccountsNavigator";
+import PasswordAddFlowNavigator from "./PasswordAddFlowNavigator";
+import PasswordModifyFlowNavigator from "./PasswordModifyFlowNavigator";
 
 export default function BaseOnboardingNavigator() {
   return (
     <Stack.Navigator>
       <Stack.Screen
         name={NavigatorName.Onboarding}
-        component={OnboardingStack}
+        component={OnboardingNavigator}
       />
       <Stack.Screen
         name={NavigatorName.ImportAccounts}
-        component={ImportAccountsStack}
+        component={ImportAccountsNavigator}
       />
       <Stack.Screen name={ScreenName.PairDevices} component={PairDevices} />
       <Stack.Screen
@@ -27,11 +27,11 @@ export default function BaseOnboardingNavigator() {
       />
       <Stack.Screen
         name={NavigatorName.PasswordAddFlow}
-        component={PasswordAddFlowStack}
+        component={PasswordAddFlowNavigator}
       />
       <Stack.Screen
         name={NavigatorName.PasswordModifyFlow}
-        component={PasswordModifyFlowStack}
+        component={PasswordModifyFlowNavigator}
       />
     </Stack.Navigator>
   );
