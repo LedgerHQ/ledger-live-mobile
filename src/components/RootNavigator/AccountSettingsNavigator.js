@@ -7,10 +7,13 @@ import EditAccountUnits from "../../screens/AccountSettings/EditAccountUnits";
 import EditAccountName from "../../screens/AccountSettings/EditAccountName";
 import AdvancedLogs from "../../screens/AccountSettings/AdvancedLogs";
 import CurrencySettings from "../../screens/Settings/CryptoAssets/Currencies/CurrencySettings";
+import { closableStackNavigatorConfig } from "../../navigation/navigatorConfig";
 
 export default function AccountSettingsNavigator() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{ ...closableStackNavigatorConfig, headerShown: false }}
+    >
       <Stack.Screen
         name={ScreenName.AccountSettingsMain}
         component={AccountSettingsMain}

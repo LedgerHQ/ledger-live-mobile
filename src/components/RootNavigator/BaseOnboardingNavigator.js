@@ -8,10 +8,18 @@ import OnboardingNavigator from "./OnboardingNavigator";
 import ImportAccountsNavigator from "./ImportAccountsNavigator";
 import PasswordAddFlowNavigator from "./PasswordAddFlowNavigator";
 import PasswordModifyFlowNavigator from "./PasswordModifyFlowNavigator";
+import { closableStackNavigatorConfig } from "../../navigation/navigatorConfig";
 
 export default function BaseOnboardingNavigator() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      mode="modal"
+      headerMode="screen"
+      screenOptions={{
+        ...closableStackNavigatorConfig,
+        headerShown: false,
+      }}
+    >
       <Stack.Screen
         name={NavigatorName.Onboarding}
         component={OnboardingNavigator}

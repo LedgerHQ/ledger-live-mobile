@@ -15,11 +15,13 @@ import ReceiveFundsNavigator from "./ReceiveFundsNavigator";
 import SendFundsNavigator from "./SendFundsNavigator";
 import AddAccountsNavigator from "./AddAccountsNavigator";
 import FirmwareUpdateNavigator from "./FirmwareUpdateNavigator";
-import AccountSettingsNavigator from "./AccountSettings";
+import AccountSettingsNavigator from "./AccountSettingsNavigator";
 import ImportAccountsNavigator from "./ImportAccountsNavigator";
 import PasswordAddFlowNavigator from "./PasswordAddFlowNavigator";
 import PasswordModifyFlowNavigator from "./PasswordModifyFlowNavigator";
 import MigrateAccountsFlowNavigator from "./MigrateAccountsFlowNavigator";
+import { closableStackNavigatorConfig } from "../../navigation/navigatorConfig";
+import TransparentHeaderNavigationOptions from "../../navigation/TransparentHeaderNavigationOptions";
 
 const {
   sendScreens: generatedSendScreens,
@@ -43,7 +45,7 @@ const {
 
 export default function BaseNavigator() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator mode="modal" screenOptions={closableStackNavigatorConfig}>
       <Stack.Screen name={NavigatorName.Main} component={Main} />
       <Stack.Screen
         name={NavigatorName.ReceiveFunds}
@@ -92,7 +94,11 @@ export default function BaseNavigator() {
       />
       <Stack.Screen name={ScreenName.Distribution} component={Distribution} />
       <Stack.Screen name={ScreenName.Asset} component={Asset} />
-      <Stack.Screen name={ScreenName.ScanRecipient} component={ScanRecipient} />
+      <Stack.Screen
+        name={ScreenName.ScanRecipient}
+        component={ScanRecipient}
+        options={TransparentHeaderNavigationOptions}
+      />
       <Stack.Screen
         name={ScreenName.FallbackCameraSend}
         component={FallbackCameraSend}

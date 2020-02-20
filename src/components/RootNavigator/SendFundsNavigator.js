@@ -10,10 +10,11 @@ import SendConnectDevice from "../../screens/SendFunds/05-ConnectDevice";
 import SendValidation from "../../screens/SendFunds/06-Validation";
 import SendValidationSuccess from "../../screens/SendFunds/07-ValidationSuccess";
 import SendValidationError from "../../screens/SendFunds/07-ValidationError";
+import { closableStackNavigatorConfig } from "../../navigation/navigatorConfig";
 
 export default function SendFundsNavigator() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={closableStackNavigatorConfig}>
       <Stack.Screen name={ScreenName.SendFundsMain} component={SendFundsMain} />
       <Stack.Screen
         name={ScreenName.SendSelectRecipient}

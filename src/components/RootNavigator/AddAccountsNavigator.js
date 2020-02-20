@@ -7,11 +7,31 @@ import AddAccountsSelectDevice from "../../screens/AddAccounts/02-SelectDevice";
 import AddAccountsTokenCurrencyDisclaimer from "../../screens/AddAccounts/02-TokenCurrencyDisclaimer";
 import AddAccountsAccounts from "../../screens/AddAccounts/03-Accounts";
 import AddAccountsSuccess from "../../screens/AddAccounts/04-Success";
+import AddAccountsHeaderRightClose from "../../screens/AddAccounts/AddAccountsHeaderRightClose";
 import EditAccountName from "../../screens/AccountSettings/EditAccountName";
+import {
+  defaultNavigationOptions,
+  closableStackNavigatorConfig,
+} from "../../navigation/navigatorConfig";
+
+const addAccountsNavigatorConfig = {
+  ...closableStackNavigatorConfig,
+  headerMode: "float",
+  defaultNavigationOptions: ({
+    navigation,
+  }: {
+    navigation: NavigationScreenProp<*>,
+  }) => ({
+    ...defaultNavigationOptions,
+    headerRight: () => <AddAccountsHeaderRightClose navigation={navigation} />,
+  }),
+};
 
 export default function AddAccountsNavigator() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{ ...addAccountsNavigatorConfig, headerShown: false }}
+    >
       <Stack.Screen
         name={ScreenName.AddAccountsSelectCrypto}
         component={AddAccountsSelectCrypto}

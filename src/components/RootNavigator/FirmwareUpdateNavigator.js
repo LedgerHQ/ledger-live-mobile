@@ -7,10 +7,13 @@ import FirmwareUpdateCheckId from "../../screens/FirmwareUpdate/02-CheckId";
 import FirmwareUpdateMCU from "../../screens/FirmwareUpdate/03-MCU";
 import FirmwareUpdateConfirmation from "../../screens/FirmwareUpdate/04-Confirmation";
 import FirmwareUpdateFailure from "../../screens/FirmwareUpdate/04-Failure";
+import { closableStackNavigatorConfig } from "../../navigation/navigatorConfig";
 
 export default function FirmwareUpdateNavigator() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{ ...closableStackNavigatorConfig, headerShown: false }}
+    >
       <Stack.Screen
         name={ScreenName.FirmwareUpdateReleaseNotes}
         component={FirmwareUpdateReleaseNotes}
