@@ -16,7 +16,7 @@ export default function ImportAccountsNavigator() {
       <Stack.Screen
         name={ScreenName.ScanAccounts}
         component={ScanAccounts}
-        options={TransparentHeaderNavigationOptions}
+        options={{ ...TransparentHeaderNavigationOptions, headerShown: true }}
       />
       <Stack.Screen name={ScreenName.DisplayResult} component={DisplayResult} />
       <Stack.Screen

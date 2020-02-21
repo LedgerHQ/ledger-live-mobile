@@ -54,8 +54,8 @@ class Scan extends PureComponent<
   };
 
   componentDidMount() {
-    const { navigation } = this.props;
-    const data = navigation.getParam("data");
+    const { route } = this.props;
+    const { data } = route.params || {};
     if (data) {
       const frames = data.reduce(parseFramesReducer, null);
       if (areFramesComplete(frames)) {
@@ -98,10 +98,13 @@ class Scan extends PureComponent<
   };
 
   onResult = result => {
+    const { route } = this.props;
+    const { onFinish } = route.params || {};
+
     // $FlowFixMe
     this.props.navigation.replace("DisplayResult", {
       result,
-      onFinish: this.props.navigation.getParam("onFinish"),
+      onFinish,
     });
   };
 

@@ -28,14 +28,12 @@ const hitSlop = {
 };
 
 export default function OnboardingHeader({
-  mode,
   stepId,
   withSkip,
   withNeedHelp,
   titleOverride,
-  firstTimeOnboarding,
 }: Props) {
-  const { next, prev } = useNavigationInterceptor();
+  const { next, prev, mode, firstTimeOnboarding } = useNavigationInterceptor();
   const { t } = useTranslation();
 
   const steps = getStep(mode, firstTimeOnboarding);
