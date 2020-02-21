@@ -1,7 +1,6 @@
 // @flow
 
 import React from "react";
-import type { NavigationScreenProp } from "react-navigation";
 import HeaderRightClose from "../components/HeaderRightClose";
 import HeaderTitle from "../components/HeaderTitle";
 import HeaderBackImage from "../components/HeaderBackImage";
@@ -18,23 +17,19 @@ export const defaultNavigationOptions = {
 };
 
 export const stackNavigatorConfig = {
-  defaultNavigationOptions,
+  ...defaultNavigationOptions,
   cardStyle: styles.card,
   headerLayoutPreset: "center",
 };
 
-export const closableNavigationOptions = ({
-  navigation,
-}: {
-  navigation: NavigationScreenProp<*>,
-}) => ({
+export const closableNavigationOptions = ({ navigation }) => ({
   ...defaultNavigationOptions,
   headerRight: <HeaderRightClose navigation={navigation} />,
 });
 
 export const closableStackNavigatorConfig = {
   ...stackNavigatorConfig,
-  defaultNavigationOptions: closableNavigationOptions,
+  ...closableNavigationOptions,
 };
 
 export const topTabNavigatorConfig = {

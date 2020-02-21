@@ -3,6 +3,7 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useTranslation } from "react-i18next";
 import { ScreenName, NavigatorName } from "../../const";
+import SettingsIcon from "../../icons/Settings";
 import BenchmarkQRStream from "../../screens/BenchmarkQRStream";
 import DebugBLE from "../../screens/DebugBLE";
 import DebugBLEBenchmark from "../../screens/DebugBLEBenchmark";
@@ -28,12 +29,21 @@ import DebugExport from "../../screens/Settings/Debug/ExportAccounts";
 import ExperimentalSettings from "../../screens/Settings/Experimental";
 import RateProviderSettings from "../../screens/Settings/CryptoAssets/Rates/RateProviderSettings";
 import RepairDevice from "../../screens/RepairDevice";
+import { stackNavigatorConfig } from "../../navigation/navigatorConfig";
+import TabIcon from "../TabIcon";
 
 export default function SettingsNavigator() {
   const { t } = useTranslation();
 
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        ...stackNavigatorConfig,
+        tabBarIcon: (props: *) => (
+          <TabIcon Icon={SettingsIcon} i18nKey="tabs.settings" {...props} />
+        ),
+      }}
+    >
       <Stack.Screen
         name={ScreenName.Settings}
         component={Settings}

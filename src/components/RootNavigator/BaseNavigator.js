@@ -10,7 +10,7 @@ import Distribution from "../../screens/Distribution";
 import Asset from "../../screens/Asset";
 import ScanRecipient from "../../screens/SendFunds/ScanRecipient";
 import FallbackCameraSend from "../../screens/SendFunds/FallbackCamera/FallbackCameraSend";
-import Main from "./MainTabNavigator";
+import Main from "./MainNavigator";
 import ReceiveFundsNavigator from "./ReceiveFundsNavigator";
 import SendFundsNavigator from "./SendFundsNavigator";
 import AddAccountsNavigator from "./AddAccountsNavigator";

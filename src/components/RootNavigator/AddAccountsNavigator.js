@@ -9,28 +9,17 @@ import AddAccountsAccounts from "../../screens/AddAccounts/03-Accounts";
 import AddAccountsSuccess from "../../screens/AddAccounts/04-Success";
 import AddAccountsHeaderRightClose from "../../screens/AddAccounts/AddAccountsHeaderRightClose";
 import EditAccountName from "../../screens/AccountSettings/EditAccountName";
-import {
-  defaultNavigationOptions,
-  closableStackNavigatorConfig,
-} from "../../navigation/navigatorConfig";
-
-const addAccountsNavigatorConfig = {
-  ...closableStackNavigatorConfig,
-  headerMode: "float",
-  defaultNavigationOptions: ({
-    navigation,
-  }: {
-    navigation: NavigationScreenProp<*>,
-  }) => ({
-    ...defaultNavigationOptions,
-    headerRight: () => <AddAccountsHeaderRightClose navigation={navigation} />,
-  }),
-};
+import { closableStackNavigatorConfig } from "../../navigation/navigatorConfig";
 
 export default function AddAccountsNavigator() {
   return (
     <Stack.Navigator
-      screenOptions={{ ...addAccountsNavigatorConfig, headerShown: false }}
+      headerMode="float"
+      screenOptions={{
+        ...closableStackNavigatorConfig,
+        headerRight: AddAccountsHeaderRightClose,
+        headerShown: false,
+      }}
     >
       <Stack.Screen
         name={ScreenName.AddAccountsSelectCrypto}
