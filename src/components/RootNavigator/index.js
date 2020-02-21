@@ -35,13 +35,13 @@ export default function RootNavigator({ importDataString }: Props) {
         />
       ) : goToOnboarding ? (
         <Stack.Screen
-          name={NavigatorName.BaseNavigator}
-          component={BaseNavigator}
+          name={NavigatorName.BaseOnboarding}
+          component={BaseOnboardingNavigator}
         />
       ) : (
         <Stack.Screen
-          name={NavigatorName.BaseOnboarding}
-          component={BaseOnboardingNavigator}
+          name={NavigatorName.BaseNavigator}
+          component={BaseNavigator}
         />
       )}
     </Stack.Navigator>

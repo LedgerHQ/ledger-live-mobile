@@ -108,9 +108,9 @@ export default function BaseNavigator() {
         <Stack.Screen name={name} component={generatedSendScreens[name]} />
       ))}
 
-      {Object.keys(generatedBaseScreens).map(name => (
+      {/* {Object.keys(generatedBaseScreens).map(name => (
         <Stack.Screen name={name} component={generatedSendScreens[name]} />
-      ))}
+      ))} */}
     </Stack.Navigator>
   );
 }
