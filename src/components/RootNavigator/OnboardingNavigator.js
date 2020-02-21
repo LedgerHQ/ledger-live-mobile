@@ -17,12 +17,12 @@ export default function OnboardingNavigator() {
   return (
     <Stack.Navigator headerMode="screen" screenOptions={{ headerShown: false }}>
       <Stack.Screen
-        name={ScreenName.OnboardingStepGetStarted}
-        component={OnboardingStepGetStarted}
-      />
-      <Stack.Screen
         name={ScreenName.OnboardingStepChooseDevice}
         component={OnboardingStepChooseDevice}
+      />
+      <Stack.Screen
+        name={ScreenName.OnboardingStepGetStarted}
+        component={OnboardingStepGetStarted}
       />
       <Stack.Screen
         name={ScreenName.OnboardingStepSetupPin}
@@ -41,16 +41,16 @@ export default function OnboardingNavigator() {
         component={OnboardingStepPairNew}
       />
       <Stack.Screen
+        name={ScreenName.OnboardingStepScanQR}
+        component={OnboardingStepScanQR}
+      />
+      <Stack.Screen
         name={ScreenName.OnboardingStepPassword}
         component={OnboardingStepPassword}
       />
       <Stack.Screen
         name={ScreenName.OnboardingStepShareData}
         component={OnboardingStepShareData}
-      />
-      <Stack.Screen
-        name={ScreenName.OnboardingStepScanQR}
-        component={OnboardingStepScanQR}
       />
       <Stack.Screen
         name={ScreenName.OnboardingStepFinish}

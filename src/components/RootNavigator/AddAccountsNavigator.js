@@ -41,10 +41,6 @@ export default function AddAccountsNavigator() {
         component={AddAccountsSelectDevice}
       />
       <Stack.Screen
-        name={ScreenName.AddAccountsTokenCurrencyDisclaimer}
-        component={AddAccountsTokenCurrencyDisclaimer}
-      />
-      <Stack.Screen
         name={ScreenName.AddAccountsAccounts}
         component={AddAccountsAccounts}
       />
@@ -55,6 +51,10 @@ export default function AddAccountsNavigator() {
       <Stack.Screen
         name={ScreenName.EditAccountName}
         component={EditAccountName}
+      />
+      <Stack.Screen
+        name={ScreenName.AddAccountsTokenCurrencyDisclaimer}
+        component={AddAccountsTokenCurrencyDisclaimer}
       />
     </Stack.Navigator>
   );
