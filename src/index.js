@@ -9,6 +9,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { StyleSheet, View, Text } from "react-native";
 import SplashScreen from "react-native-splash-screen";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 import { I18nextProvider } from "react-i18next";
 import { NavigationContainer } from "@react-navigation/native";
 import Transport from "@ledgerhq/hw-transport";
@@ -156,21 +157,23 @@ export default class Root extends Component<
                 <HookSentry />
                 <HookAnalytics store={store} />
                 <AuthPass>
-                  <NavigationContainer>
-                    <I18nextProvider i18n={i18n}>
-                      <LocaleProvider>
-                        <BridgeSyncProvider>
-                          <CounterValues.PollingProvider>
-                            <ButtonUseTouchable.Provider value={true}>
-                              <OnboardingContextProvider>
-                                <App importDataString={importDataString} />
-                              </OnboardingContextProvider>
-                            </ButtonUseTouchable.Provider>
-                          </CounterValues.PollingProvider>
-                        </BridgeSyncProvider>
-                      </LocaleProvider>
-                    </I18nextProvider>
-                  </NavigationContainer>
+                  <SafeAreaProvider>
+                    <NavigationContainer>
+                      <I18nextProvider i18n={i18n}>
+                        <LocaleProvider>
+                          <BridgeSyncProvider>
+                            <CounterValues.PollingProvider>
+                              <ButtonUseTouchable.Provider value={true}>
+                                <OnboardingContextProvider>
+                                  <App importDataString={importDataString} />
+                                </OnboardingContextProvider>
+                              </ButtonUseTouchable.Provider>
+                            </CounterValues.PollingProvider>
+                          </BridgeSyncProvider>
+                        </LocaleProvider>
+                      </I18nextProvider>
+                    </NavigationContainer>
+                  </SafeAreaProvider>
                 </AuthPass>
               </>
             ) : (
