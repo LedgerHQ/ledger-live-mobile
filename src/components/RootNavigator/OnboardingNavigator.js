@@ -15,7 +15,7 @@ import OnboardingStepFinish from "../../screens/Onboarding/steps/finish";
 
 export default function OnboardingNavigator() {
   return (
-    <Stack.Navigator headerMode="screen" screenOptions={{ headerShown: false }}>
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen
         name={ScreenName.OnboardingStepChooseDevice}
         component={OnboardingStepChooseDevice}

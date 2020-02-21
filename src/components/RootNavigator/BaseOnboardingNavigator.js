@@ -14,7 +14,6 @@ export default function BaseOnboardingNavigator() {
   return (
     <Stack.Navigator
       mode="modal"
-      headerMode="screen"
       screenOptions={{
         ...closableStackNavigatorConfig,
         headerShown: false,
