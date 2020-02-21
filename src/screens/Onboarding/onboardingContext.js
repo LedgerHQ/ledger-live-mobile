@@ -11,6 +11,7 @@ import {
   useIsFocused,
   useNavigation,
   useNavigationState,
+  useRoute,
 } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
 
@@ -71,16 +72,14 @@ export class OnboardingContextProvider extends PureComponent<
 
   // Navigate to next step
   // we may want to handle onboarding finish here (e.g update settings)
-  next = (navigation: NavigationScreenProp<*>) => {
-    const currentStep = navigation.state.routeName;
+  next = (navigation: NavigationScreenProp<*>, currentStep) => {
     const steps = getStepForState(this.state);
     const i = steps.findIndex(s => s.id === currentStep) + 1;
     this.navigate(navigation, i);
   };
 
   // Navigate to previous step
-  prev = (navigation: NavigationScreenProp<*>) => {
-    const currentStep = navigation.state.routeName;
+  prev = (navigation: NavigationScreenProp<*>, currentStep) => {
     const steps = getStepForState(this.state);
     const i = steps.findIndex(s => s.id === currentStep) - 1;
     this.navigate(navigation, i);
@@ -138,15 +137,15 @@ export class OnboardingContextProvider extends PureComponent<
 export function useNavigationInterceptor() {
   const onboardingContext = useContext(OnboardingContext);
   const isFocused = useIsFocused();
-  const routeName = useNavigationState(state => state.routeName);
+  const { name: routeName } = useRoute();
   const navigation = useNavigation();
 
   function next() {
-    onboardingContext.nextWithNavigation(navigation);
+    onboardingContext.nextWithNavigation(navigation, routeName);
   }
 
   function prev() {
-    onboardingContext.prevWithNavigation(navigation);
+    onboardingContext.prevWithNavigation(navigation, routeName);
   }
 
   useEffect(() => {

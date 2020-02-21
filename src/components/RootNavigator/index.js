@@ -27,7 +27,7 @@ export default function RootNavigator({ importDataString }: Props) {
   const goToOnboarding = !hasCompletedOnboarding && !Config.SKIP_ONBOARDING;
 
   return (
-    <Stack.Navigator headerMode="screen" screenOptions={{ headerShown: false }}>
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
       {data ? (
         <Stack.Screen
           name={NavigatorName.ImportAccounts}
