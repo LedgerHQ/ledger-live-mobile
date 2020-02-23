@@ -6,6 +6,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { withNavigation } from "@react-navigation/compat";
 import { decode } from "@ledgerhq/live-common/lib/cross";
 import { RNCamera } from "react-native-camera";
+import { ScreenName } from "../const";
 import colors from "../colors";
 import CameraScreen from "../components/CameraScreen";
 
@@ -34,7 +35,7 @@ class DebugWSImport extends Component<
         };
 
         ws.onmessage = event => {
-          this.props.navigation.navigate("DisplayResult", {
+          this.props.navigation.navigate(ScreenName.DisplayResult, {
             // $FlowFixMe
             result: decode(event.data),
           });

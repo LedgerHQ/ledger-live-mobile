@@ -11,6 +11,7 @@ import type { NavigationScreenProp } from "react-navigation";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import colors from "../../colors";
+import { NavigatorName, ScreenName } from "../../const";
 import BottomModal from "../../components/BottomModal";
 import BottomModalChoice from "../../components/BottomModalChoice";
 import { readOnlyModeEnabledSelector } from "../../reducers/settings";
@@ -34,17 +35,17 @@ const mapStateToProps = createStructuredSelector({
 
 class AddAccountsModal extends PureComponent<Props> {
   onClickAdd = () => {
-    this.props.navigation.navigate("AddAccounts");
+    this.props.navigation.navigate(NavigatorName.AddAccounts);
     this.props.onClose();
   };
 
   onClickImport = () => {
-    this.props.navigation.navigate("ImportAccounts");
+    this.props.navigation.navigate(NavigatorName.ImportAccounts);
     this.props.onClose();
   };
 
   onClickWSImport = () => {
-    this.props.navigation.navigate("DebugWSImport");
+    this.props.navigation.navigate(ScreenName.DebugWSImport);
     this.props.onClose();
   };
 

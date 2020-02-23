@@ -6,6 +6,7 @@ import type { NavigationScreenProp } from "react-navigation";
 import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
 import { getMainAccount } from "@ledgerhq/live-common/lib/account";
 import { listTokenTypesForCryptoCurrency } from "@ledgerhq/live-common/lib/currencies";
+import { ScreenName } from "../../const";
 import colors from "../../colors";
 import LText from "../../components/LText";
 import Button from "../../components/Button";
@@ -18,7 +19,7 @@ class EmptyStateAccount extends PureComponent<{
 }> {
   goToReceiveFunds = () => {
     const { navigation, account, parentAccount } = this.props;
-    navigation.navigate("ReceiveConnectDevice", {
+    navigation.navigate(ScreenName.ReceiveConnectDevice, {
       accountId: account.id,
       parentId: parentAccount && parentAccount.id,
     });

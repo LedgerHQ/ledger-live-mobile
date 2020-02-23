@@ -16,6 +16,7 @@ import { withNavigation } from "@react-navigation/compat";
 import type { NavigationScreenProp } from "react-navigation";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
+import { ScreenName } from "../../const";
 import CounterValue from "../CounterValue";
 import CurrencyUnitValue from "../CurrencyUnitValue";
 import colors from "../../colors";
@@ -48,7 +49,7 @@ const Row = ({
 }: Props) => {
   const onAccountPress = useCallback(
     (parentAccount?: ?Account) => {
-      navigation.navigate("Account", {
+      navigation.navigate(ScreenName.Account, {
         accountId: account.id,
         parentId: parentAccount ? parentAccount.id : undefined,
       });

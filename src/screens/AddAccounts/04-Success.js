@@ -7,6 +7,7 @@ import type { NavigationScreenProp } from "react-navigation";
 import type { CryptoCurrency } from "@ledgerhq/live-common/lib/types";
 
 import Icon from "react-native-vector-icons/dist/Feather";
+import { ScreenName } from "../../const";
 import colors, { rgba } from "../../colors";
 import { TrackScreen } from "../../analytics";
 import LText from "../../components/LText";
@@ -33,11 +34,11 @@ class AddAccountsSuccess extends Component<Props, State> {
   };
 
   primaryCTA = () => {
-    this.props.navigation.navigate("Accounts");
+    this.props.navigation.navigate(ScreenName.Accounts);
   };
 
   secondaryCTA = () => {
-    this.props.navigation.navigate("AddAccountsSelectCrypto");
+    this.props.navigation.navigate(ScreenName.AddAccountsSelectCrypto);
   };
 
   render() {

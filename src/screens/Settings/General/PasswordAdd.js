@@ -3,6 +3,7 @@ import React, { PureComponent } from "react";
 import type { NavigationScreenProp } from "react-navigation";
 import { withTranslation } from "react-i18next";
 import i18next from "i18next";
+import { ScreenName } from "../../../const";
 import type { T } from "../../../types/common";
 import PasswordForm from "./PasswordForm";
 
@@ -31,7 +32,7 @@ class PasswordAdd extends PureComponent<Props, State> {
     const { navigation } = this.props;
     const { password } = this.state;
     if (!password) return;
-    navigation.navigate("ConfirmPassword", { password });
+    navigation.navigate(ScreenName.ConfirmPassword, { password });
   };
 
   render() {

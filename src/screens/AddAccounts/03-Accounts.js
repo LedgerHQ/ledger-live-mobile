@@ -19,6 +19,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import type { NavigationStackProp } from "react-navigation-stack";
 import type { CryptoCurrency, Account } from "@ledgerhq/live-common/lib/types";
 import { getCurrencyBridge } from "@ledgerhq/live-common/lib/bridge";
+import { ScreenName } from "../../const";
 import { replaceAccounts } from "../../actions/accounts";
 import { accountsSelector } from "../../reducers/accounts";
 import logger from "../../logger";
@@ -183,7 +184,7 @@ class AddAccountsAccounts extends PureComponent<Props, State> {
   };
 
   quitFlow = () => {
-    this.props.navigation.navigate("Accounts");
+    this.props.navigation.navigate(ScreenName.Accounts);
   };
 
   scanSubscription: *;

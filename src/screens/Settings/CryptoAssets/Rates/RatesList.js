@@ -6,6 +6,7 @@ import { Trans } from "react-i18next";
 import { createStructuredSelector } from "reselect";
 import type { NavigationScreenProp } from "react-navigation";
 import type { Currency } from "@ledgerhq/live-common/lib/types";
+import { ScreenName } from "../../../../const";
 import { pairsSelector } from "../../../../countervalues";
 import SettingsRow from "../../../../components/SettingsRow";
 import LText from "../../../../components/LText";
@@ -57,7 +58,7 @@ class CurrenciesList extends PureComponent<Props> {
       compact
       event="RateSettingsRow"
       onPress={() =>
-        this.props.navigation.navigate("RateProviderSettings", {
+        this.props.navigation.navigate(ScreenName.RateProviderSettings, {
           from: p.from.ticker,
           to: p.to.ticker,
           selected: p.exchange,

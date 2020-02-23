@@ -16,6 +16,7 @@ import {
   useCurrenciesByMarketcap,
 } from "@ledgerhq/live-common/lib/currencies";
 
+import { ScreenName } from "../../const";
 import { listCryptoCurrencies } from "../../cryptocurrencies";
 import { TrackScreen } from "../../analytics";
 import FilteredSearchBar from "../../components/FilteredSearchBar";
@@ -56,11 +57,11 @@ const AddAccountsSelectCrypto = ({ devMode, navigation }: Props) => {
   const sortedCryptoCurrencies = useCurrenciesByMarketcap(cryptoCurrencies);
 
   const onPressCurrency = (currency: CryptoCurrency) => {
-    navigation.navigate("AddAccountsSelectDevice", { currency });
+    navigation.navigate(ScreenName.AddAccountsSelectDevice, { currency });
   };
 
   const onPressToken = (token: TokenCurrency) => {
-    navigation.navigate("AddAccountsTokenCurrencyDisclaimer", {
+    navigation.navigate(ScreenName.AddAccountsTokenCurrencyDisclaimer, {
       token,
     });
   };

@@ -19,6 +19,7 @@ import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { Trans } from "react-i18next";
 import { listTokenTypesForCryptoCurrency } from "@ledgerhq/live-common/lib/data/tokens";
+import { ScreenName } from "../../const";
 import { localeIds } from "../../languages";
 import LText from "../../components/LText";
 import OperationIcon from "../../components/OperationIcon";
@@ -72,7 +73,7 @@ class Content extends PureComponent<Props, State> {
   onPress = () => {
     const { navigation, account, parentAccount } = this.props;
 
-    navigation.navigate("Account", {
+    navigation.navigate(ScreenName.Account, {
       accountId: account.id,
       parentId: parentAccount && parentAccount.id,
     });

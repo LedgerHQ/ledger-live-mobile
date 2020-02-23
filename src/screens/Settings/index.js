@@ -12,6 +12,7 @@ import Icon from "react-native-vector-icons/dist/Feather";
 import Config from "react-native-config";
 import type { NavigationScreenProp } from "react-navigation";
 import type { CryptoCurrency } from "@ledgerhq/live-common/lib/types";
+import { NavigatorName, ScreenName } from "../../const";
 import { cryptoCurrenciesSelector } from "../../reducers/accounts";
 import SettingsCard from "../../components/SettingsCard";
 import PoweredByLedger from "./PoweredByLedger";
@@ -64,40 +65,42 @@ export default function Settings({ navigation }: Props) {
           title={t("settings.display.title")}
           desc={t("settings.display.desc")}
           icon={<Display size={16} color={colors.live} />}
-          onClick={() => navigation.navigate("GeneralSettings")}
+          onClick={() => navigation.navigate(ScreenName.GeneralSettings)}
         />
         {currencies.length > 0 && (
           <SettingsCard
             title={t("settings.cryptoAssets.title")}
             desc={t("settings.cryptoAssets.desc")}
             icon={<Assets size={16} color={colors.live} />}
-            onClick={() => navigation.navigate("CryptoAssetsSettings")}
+            onClick={() =>
+              navigation.navigate(NavigatorName.CryptoAssetsSettings)
+            }
           />
         )}
         <SettingsCard
           title={t("settings.about.title")}
           desc={t("settings.about.desc")}
           icon={<LiveLogoIcon size={16} color={colors.live} />}
-          onClick={() => navigation.navigate("AboutSettings")}
+          onClick={() => navigation.navigate(ScreenName.AboutSettings)}
         />
         <SettingsCard
           title={t("settings.help.title")}
           desc={t("settings.help.desc")}
           icon={<Help size={16} color={colors.live} />}
-          onClick={() => navigation.navigate("HelpSettings")}
+          onClick={() => navigation.navigate(ScreenName.HelpSettings)}
         />
         <SettingsCard
           title={t("settings.experimental.title")}
           desc={t("settings.experimental.desc")}
           icon={<Atom size={16} color={colors.live} />}
-          onClick={() => navigation.navigate("ExperimentalSettings")}
+          onClick={() => navigation.navigate(ScreenName.ExperimentalSettings)}
         />
         {debugVisible ? (
           <SettingsCard
             title="Debug"
             desc="Use at your own risk – Developer tools"
             icon={<Icon name="wind" size={16} color={colors.live} />}
-            onClick={() => navigation.navigate("DebugSettings")}
+            onClick={() => navigation.navigate(ScreenName.DebugSettings)}
           />
         ) : null}
         <TouchableWithoutFeedback onPress={onDebugHiddenPress}>

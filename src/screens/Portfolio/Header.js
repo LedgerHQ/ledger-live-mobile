@@ -10,6 +10,7 @@ import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { withNavigation } from "@react-navigation/compat";
 import type { NavigationScreenProp } from "react-navigation";
+import { ScreenName } from "../../const";
 import type { AsyncState } from "../../reducers/bridgeSync";
 import { globalSyncStateSelector } from "../../reducers/bridgeSync";
 import { isUpToDateSelector } from "../../reducers/accounts";
@@ -41,7 +42,7 @@ class PortfolioHeader extends Component<{
   };
 
   onDistributionButtonPress = () => {
-    this.props.navigation.navigate("Distribution");
+    this.props.navigation.navigate(ScreenName.Distribution);
   };
 
   render() {

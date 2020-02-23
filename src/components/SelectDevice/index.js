@@ -9,6 +9,7 @@ import { Trans } from "react-i18next";
 import type { TransportModule } from "@ledgerhq/live-common/lib/hw";
 import { withNavigation } from "@react-navigation/compat";
 import type { NavigationScreenProp } from "react-navigation";
+import { ScreenName } from "../../const";
 import { knownDevicesSelector } from "../../reducers/ble";
 import { removeKnownDevice } from "../../actions/ble";
 import DeviceItem from "../DeviceItem";
@@ -145,7 +146,8 @@ class SelectDevice extends Component<OwnProps, State> {
                   deviceName: e.name || "",
                   modelId:
                     (e.deviceModel && e.deviceModel.id) ||
-                    Config.FALLBACK_DEVICE_MODEL_ID || "nanoX",
+                    Config.FALLBACK_DEVICE_MODEL_ID ||
+                    "nanoX",
                   wired: e.id.startsWith("httpdebug|")
                     ? Config.FALLBACK_DEVICE_WIRED === "YES"
                     : e.id.startsWith("usb|"),
@@ -187,7 +189,7 @@ class SelectDevice extends Component<OwnProps, State> {
         },
       };
     }
-    navigation.navigate("PairDevices", opts);
+    navigation.navigate(ScreenName.PairDevices, opts);
   };
 
   renderItem = (item: *) => (

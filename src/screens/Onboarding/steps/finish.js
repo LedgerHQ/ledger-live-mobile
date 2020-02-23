@@ -8,6 +8,7 @@ import { createStructuredSelector } from "reselect";
 
 import { TrackScreen } from "../../../analytics";
 import { completeOnboarding } from "../../../actions/settings";
+import { NavigatorName } from "../../../const";
 import LText from "../../../components/LText";
 import Button from "../../../components/Button";
 import OnboardingLayout from "../OnboardingLayout";
@@ -36,7 +37,7 @@ class OnboardingStepFinish extends Component<Props> {
   onFinish = () => {
     this.props.completeOnboarding();
     this.props.resetCurrentStep();
-    this.props.navigation.navigate("Main");
+    this.props.navigation.navigate(NavigatorName.Main);
   };
 
   render() {
@@ -114,8 +115,5 @@ const styles = StyleSheet.create({
 });
 
 export default withOnboardingContext(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps,
-  )(OnboardingStepFinish),
+  connect(mapStateToProps, mapDispatchToProps)(OnboardingStepFinish),
 );

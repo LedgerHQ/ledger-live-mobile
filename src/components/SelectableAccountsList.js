@@ -14,6 +14,7 @@ import type { Account } from "@ledgerhq/live-common/lib/types";
 import { withNavigation } from "@react-navigation/compat";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 import type { NavigationScreenProp } from "react-navigation";
+import { ScreenName } from "../const";
 import { track } from "../analytics";
 import AccountCard from "./AccountCard";
 import CheckBox from "./CheckBox";
@@ -174,7 +175,7 @@ class SelectableAccount extends PureComponent<
     const { account, navigation, onAccountNameChange } = this.props;
     if (!onAccountNameChange) return;
     swipedAccountSubject.next({ row: -1, list: -1 });
-    navigation.navigate("EditAccountName", {
+    navigation.navigate(ScreenName.EditAccountName, {
       onAccountNameChange,
       account,
     });

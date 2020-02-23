@@ -4,6 +4,7 @@ import { Trans } from "react-i18next";
 import { View, StyleSheet } from "react-native";
 import type { NavigationScreenProp } from "react-navigation";
 import colors from "../../colors";
+import { NavigatorName } from "../../const";
 import LText from "../../components/LText";
 import Button from "../../components/Button";
 import IconReceive from "../../icons/Receive";
@@ -16,7 +17,7 @@ type Props = {
 class NoOpStatePortfolio extends PureComponent<Props> {
   navigateToReceive = () =>
     this.props.navigation.navigate({
-      routeName: "ReceiveFunds",
+      routeName: NavigatorName.ReceiveFunds,
       params: {
         goBackKey: this.props.navigation.state.key,
       },

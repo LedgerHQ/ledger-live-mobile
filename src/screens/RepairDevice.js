@@ -6,6 +6,7 @@ import { withTranslation, Trans } from "react-i18next";
 import type { NavigationScreenProp } from "react-navigation";
 import firmwareUpdateRepair from "@ledgerhq/live-common/lib/hw/firmwareUpdate-repair";
 
+import { NavigatorName } from "../const";
 import logger from "../logger";
 import type { T } from "../types/common";
 import Button from "../components/Button";
@@ -56,7 +57,7 @@ class RepairDevice extends Component<Props, State> {
       },
       complete: () => {
         this.props.navigation.goBack();
-        this.props.navigation.navigate("Manager");
+        this.props.navigation.navigate(NavigatorName.Manager);
       },
       error: error => {
         logger.critical(error);

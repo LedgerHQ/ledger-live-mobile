@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 
 import { TrackScreen } from "../../../analytics";
 import { completeOnboarding } from "../../../actions/settings";
+import { NavigatorName } from "../../../const";
 import LText from "../../../components/LText";
 import Button from "../../../components/Button";
 import OnboardingLayout from "../OnboardingLayout";
@@ -35,7 +36,7 @@ class OnboardingStepScanQR extends Component<Props> {
   );
 
   navigateToQR = () =>
-    this.props.navigation.navigate("ImportAccounts", {
+    this.props.navigation.navigate(NavigatorName.ImportAccounts, {
       onFinish: async n => {
         n.dismiss();
         this.props.next();
@@ -89,8 +90,5 @@ const styles = StyleSheet.create({
 });
 
 export default withOnboardingContext(
-  connect(
-    null,
-    mapDispatchToProps,
-  )(OnboardingStepScanQR),
+  connect(null, mapDispatchToProps)(OnboardingStepScanQR),
 );

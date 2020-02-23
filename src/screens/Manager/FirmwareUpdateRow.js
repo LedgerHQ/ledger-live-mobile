@@ -8,6 +8,7 @@ import type {
   FirmwareUpdateContext,
 } from "@ledgerhq/live-common/lib/types/manager";
 import manager from "@ledgerhq/live-common/lib/manager";
+import { ScreenName } from "../../const";
 import LText from "../../components/LText";
 import colors from "../../colors";
 
@@ -38,7 +39,7 @@ class FirmwareUpdateRow extends PureComponent<Props, State> {
 
     if (this.unmount) return;
     if (deviceInfo.isOSU) {
-      navigation.navigate("FirmwareUpdateMCU", {
+      navigation.navigate(ScreenName.FirmwareUpdateMCU, {
         deviceId,
         firmware,
       });
@@ -55,7 +56,7 @@ class FirmwareUpdateRow extends PureComponent<Props, State> {
     const { navigation, deviceId } = this.props;
     const { firmware } = this.state;
     if (!firmware) return;
-    navigation.navigate("FirmwareUpdate", {
+    navigation.navigate(ScreenName.FirmwareUpdate, {
       deviceId,
       firmware,
     });

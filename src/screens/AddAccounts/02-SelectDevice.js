@@ -9,6 +9,7 @@ import type { CryptoCurrency } from "@ledgerhq/live-common/lib/types";
 import i18next from "i18next";
 
 import { prepareCurrency } from "../../bridge/cache";
+import { ScreenName } from "../../const";
 import colors from "../../colors";
 import { TrackScreen } from "../../analytics";
 import SelectDevice from "../../components/SelectDevice";
@@ -50,7 +51,7 @@ class AddAccountsSelectDevice extends Component<Props, State> {
   onSelectDevice = (meta: *) => {
     const { navigation } = this.props;
     const currency = navigation.getParam("currency");
-    navigation.navigate("AddAccountsAccounts", { currency, ...meta });
+    navigation.navigate(ScreenName.AddAccountsAccounts, { currency, ...meta });
   };
 
   render() {

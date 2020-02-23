@@ -37,7 +37,10 @@ export default function MainNavigator() {
           ),
         }}
       />
-      <Tab.Screen name={NavigatorName.Accounts} component={AccountsNavigator} />
+      <Tab.Screen
+        name={NavigatorName.AccountsStack}
+        component={AccountsNavigator}
+      />
       <Tab.Screen name={ScreenName.Transfer} component={Transfer} />
       <Tab.Screen name={NavigatorName.Manager} component={ManagerNavigator} />
       <Tab.Screen name={NavigatorName.Settings} component={SettingsNavigator} />

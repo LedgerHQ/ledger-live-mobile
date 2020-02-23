@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import Icon from "react-native-vector-icons/dist/Feather";
 import type { Account, TokenAccount } from "@ledgerhq/live-common/lib/types";
 
+import { NavigatorName } from "../../const";
 import { accountAndParentScreenSelector } from "../../reducers/accounts";
 import Touchable from "../../components/Touchable";
 import BottomModal from "../../components/BottomModal";
@@ -56,7 +57,7 @@ const AccountHeaderRight = ({ navigation, account, parentAccount }: Props) => {
       <Touchable
         event="AccountGoSettings"
         onPress={() => {
-          navigation.navigate("AccountSettings", {
+          navigation.navigate(NavigatorName.AccountSettings, {
             accountId: account.id,
           });
         }}

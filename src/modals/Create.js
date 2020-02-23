@@ -7,6 +7,7 @@ import { withTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 
+import { NavigatorName, ScreenName } from "../const";
 import { accountsCountSelector } from "../reducers/accounts";
 import IconSend from "../icons/Send";
 import IconReceive from "../icons/Receive";
@@ -44,9 +45,10 @@ class CreateModal extends Component<Props> {
     onClose();
   };
 
-  onSendFunds = () => this.onNavigate("SendFunds", "sendfunds");
-  onReceiveFunds = () => this.onNavigate("ReceiveFunds", "receivefunds");
-  onExchange = () => this.onNavigate("Transfer", "transfer");
+  onSendFunds = () => this.onNavigate(NavigatorName.SendFunds, "sendfunds");
+  onReceiveFunds = () =>
+    this.onNavigate(NavigatorName.ReceiveFunds, "receivefunds");
+  onExchange = () => this.onNavigate(ScreenName.Transfer, "transfer");
 
   render() {
     const {

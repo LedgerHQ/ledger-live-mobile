@@ -17,6 +17,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { track, TrackScreen } from "../../analytics";
+import { ScreenName } from "../../const";
 import SyncOneAccountOnMount from "../../bridge/SyncOneAccountOnMount";
 import SyncSkipUnderPriority from "../../bridge/SyncSkipUnderPriority";
 import colors from "../../colors";
@@ -82,7 +83,7 @@ const SendSelectRecipient = ({
   }, []);
 
   const onPressScan = useCallback(() => {
-    navigation.navigate("ScanRecipient", {
+    navigation.navigate(ScreenName.ScanRecipient, {
       accountId: navigation.getParam("accountId"),
       parentId: navigation.getParam("parentId"),
       transaction,
@@ -112,7 +113,7 @@ const SendSelectRecipient = ({
   const onPressContinue = useCallback(async () => {
     if (!account) return;
 
-    navigation.navigate("SendAmount", {
+    navigation.navigate(ScreenName.SendAmount, {
       accountId: account.id,
       parentId: parentAccount && parentAccount.id,
       transaction,

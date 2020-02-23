@@ -6,7 +6,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import type { NavigationScreenProp } from "react-navigation";
 import { withTranslation, Trans } from "react-i18next";
 import { TrackScreen } from "../../analytics";
-
+import { ScreenName } from "../../const";
 import GenericSuccessView from "../../components/GenericSuccessView";
 import Button from "../../components/Button";
 import colors from "../../colors";
@@ -31,7 +31,7 @@ class FirmwareUpdateConfirmation extends Component<Props, State> {
   };
 
   onClose = () => {
-    this.props.navigation.navigate("Manager");
+    this.props.navigation.navigate(ScreenName.Manager);
   };
 
   render() {

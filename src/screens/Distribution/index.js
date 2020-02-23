@@ -19,6 +19,7 @@ import { getAssetsDistribution } from "@ledgerhq/live-common/lib/portfolio";
 import { createStructuredSelector, createSelector } from "reselect";
 import type { AssetsDistribution } from "@ledgerhq/live-common/lib/types/portfolio";
 import type { Currency } from "@ledgerhq/live-common/lib/types/currencies";
+import { ScreenName } from "../../const";
 import type { T } from "../../types/common";
 import TrackScreen from "../../analytics/TrackScreen";
 import { accountsSelector } from "../../reducers/accounts";
@@ -66,7 +67,7 @@ class Distribution extends PureComponent<Props, *> {
     <TouchableOpacity
       onPress={() => this.onHighlightChange(index)}
       onLongPress={() =>
-        this.props.navigation.navigate("Asset", {
+        this.props.navigation.navigate(ScreenName.Asset, {
           currency: item.currency,
         })
       }

@@ -6,6 +6,7 @@ import { createStructuredSelector } from "reselect";
 import type { AccountLike, Account } from "@ledgerhq/live-common/lib/types";
 import { getMainAccount } from "@ledgerhq/live-common/lib/account";
 import { connect } from "react-redux";
+import { ScreenName } from "../../const";
 import { readOnlyModeEnabledSelector } from "../../reducers/settings";
 import {
   ReceiveActionDefault,
@@ -41,14 +42,14 @@ const AccountActions = ({
     (decorators && decorators.ReceiveAction) || ReceiveActionDefault;
 
   const onSend = useCallback(() => {
-    navigation.navigate("SendSelectRecipient", {
+    navigation.navigate(ScreenName.SendSelectRecipient, {
       accountId,
       parentId,
     });
   }, [accountId, parentId, navigation]);
 
   const onReceive = useCallback(() => {
-    navigation.navigate("ReceiveConnectDevice", {
+    navigation.navigate(ScreenName.ReceiveConnectDevice, {
       accountId,
       parentId,
     });

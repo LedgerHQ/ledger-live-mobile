@@ -17,6 +17,7 @@ import {
   flattenAccountsSelector,
 } from "../../reducers/accounts";
 import colors from "../../colors";
+import { ScreenName } from "../../const";
 import { TrackScreen } from "../../analytics";
 import LText from "../../components/LText";
 import FilteredSearchBar from "../../components/FilteredSearchBar";
@@ -54,7 +55,7 @@ const ReceiveFunds = ({ accounts, allAccounts, navigation }: Props) => {
             account={account}
             style={styles.card}
             onPress={() => {
-              navigation.navigate("ReceiveConnectDevice", {
+              navigation.navigate(ScreenName.ReceiveConnectDevice, {
                 accountId: account.id,
                 parentId:
                   account.type !== "Account" ? account.parentId : undefined,

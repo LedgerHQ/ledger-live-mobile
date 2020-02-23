@@ -17,6 +17,7 @@ import { bufferTime, shareReplay } from "rxjs/operators";
 import type { NavigationScreenProp } from "react-navigation";
 import { withDevice } from "@ledgerhq/live-common/lib/hw/deviceAccess";
 import { disconnect } from "@ledgerhq/live-common/lib/hw";
+import { ScreenName } from "../const";
 import LText from "../components/LText";
 import Button from "../components/Button";
 import KeyboardView from "../components/KeyboardView";
@@ -96,7 +97,7 @@ class DebugBLE extends Component<
         type="lightSecondary"
         containerStyle={{ width: 100 }}
         onPress={() =>
-          navigation.navigate("DebugBLEBenchmark", {
+          navigation.navigate(ScreenName.DebugBLEBenchmark, {
             deviceId: navigation.getParam("deviceId"),
           })
         }

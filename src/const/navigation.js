@@ -93,7 +93,7 @@ export const ScreenName: { [key: string]: string } = {
 
 export const NavigatorName: { [key: string]: string } = {
   // Stack
-  Accounts: "Accounts",
+  AccountsStack: "AccountsStack",
   AccountSettings: "AccountSettings",
   AddAccounts: "AddAccounts",
   BaseNavigator: "BaseNavigator",

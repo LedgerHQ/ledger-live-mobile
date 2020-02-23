@@ -20,6 +20,7 @@ import {
 } from "../../reducers/accounts";
 import withEnv from "../../logic/withEnv";
 import colors from "../../colors";
+import { ScreenName } from "../../const";
 import { TrackScreen } from "../../analytics";
 import LText from "../../components/LText";
 import FilteredSearchBar from "../../components/FilteredSearchBar";
@@ -82,7 +83,7 @@ class SendFundsSelectAccount extends Component<Props, State> {
           account={account}
           style={styles.cardStyle}
           onPress={() => {
-            this.props.navigation.navigate("SendSelectRecipient", {
+            this.props.navigation.navigate(ScreenName.SendSelectRecipient, {
               accountId: account.id,
               parentId:
                 account.type !== "Account" ? account.parentId : undefined,

@@ -1,21 +1,23 @@
 // @flow
 import React from "react";
-import { withNavigation } from "@react-navigation/compat";
+import { useNavigation } from "@react-navigation/native";
+import { ScreenName } from "../const";
+
 import Button from "./Button";
 
-const ImportAccountsButton = ({
-  title,
-  navigation,
-}: {
-  title: string,
-  navigation: *,
-}) => (
-  <Button
-    event="ImportAccounts"
-    type="primary"
-    title={title}
-    onPress={() => navigation.navigate("ImportAccounts")}
-  />
-);
+interface Props {
+  title: string;
+}
 
-export default withNavigation(ImportAccountsButton);
+export default function ImportAccountsButton({ title }: Props) {
+  const { navigate } = useNavigation();
+
+  return (
+    <Button
+      event="ImportAccounts"
+      type="primary"
+      title={title}
+      onPress={() => navigate(ScreenName.ImportAccounts)}
+    />
+  );
+}

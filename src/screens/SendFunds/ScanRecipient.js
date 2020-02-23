@@ -14,6 +14,7 @@ import type {
   Transaction,
 } from "@ledgerhq/live-common/lib/types";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
+import { ScreenName } from "../../const";
 import { accountAndParentScreenSelector } from "../../reducers/accounts";
 import HeaderRightClose from "../../components/HeaderRightClose";
 import StyledStatusBar from "../../components/StyledStatusBar";
@@ -94,7 +95,7 @@ class ScanRecipient extends PureComponent<Props, State> {
       }
     }
 
-    this.props.navigation.navigate("SendSelectRecipient", {
+    this.props.navigation.navigate(ScreenName.SendSelectRecipient, {
       accountId: account.id,
       parentId: parentAccount && parentAccount.id,
       transaction: bridge.updateTransaction(transaction, patch),

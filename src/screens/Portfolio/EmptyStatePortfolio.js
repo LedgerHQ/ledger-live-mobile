@@ -7,6 +7,7 @@ import type { NavigationScreenProp } from "react-navigation";
 import Icon from "react-native-vector-icons/dist/Feather";
 import { createStructuredSelector } from "reselect";
 import colors from "../../colors";
+import { ScreenName } from "../../const";
 import LText from "../../components/LText";
 import Button from "../../components/Button";
 import AddAccountsModal from "../AddAccounts/AddAccountsModal";
@@ -32,7 +33,7 @@ class EmptyStatePortfolio extends PureComponent<Props, State> {
     isAddModalOpened: false,
   };
 
-  navigateToManager = () => this.props.navigation.navigate("Manager");
+  navigateToManager = () => this.props.navigation.navigate(ScreenName.Manager);
 
   openAddModal = () => this.setState({ isAddModalOpened: true });
 
@@ -93,10 +94,7 @@ class EmptyStatePortfolio extends PureComponent<Props, State> {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  null,
-)(EmptyStatePortfolio);
+export default connect(mapStateToProps, null)(EmptyStatePortfolio);
 
 const styles = StyleSheet.create({
   root: {

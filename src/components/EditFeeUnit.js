@@ -1,5 +1,5 @@
 /* @flow */
-import React, { PureComponent, Fragment } from "react";
+import React, { PureComponent } from "react";
 import { FlatList, View, StyleSheet, Keyboard } from "react-native";
 import type { NavigationScreenProp } from "react-navigation";
 import Icon from "react-native-vector-icons/dist/FontAwesome";
@@ -84,7 +84,7 @@ class EditFeeUnit extends PureComponent<Props, State> {
     const transaction = navigation.getParam("transaction");
     const feeCustomUnit = transaction.feeCustomUnit || account.unit;
     return (
-      <Fragment>
+      <>
         <View style={styles.inputContainer}>
           <View style={styles.inputRow}>
             <CurrencyInput
@@ -159,7 +159,7 @@ class EditFeeUnit extends PureComponent<Props, State> {
             {account.unit.code}
           </FlatList>
         </BottomModal>
-      </Fragment>
+      </>
     );
   }
 }

@@ -11,6 +11,7 @@ import type { NavigationScreenProp } from "react-navigation";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import colors from "../../colors";
+import { ScreenName } from "../../const";
 import AccountCard from "../../components/AccountCard";
 import Button from "../../components/Button";
 import Circle from "../../components/Circle";
@@ -47,7 +48,7 @@ const forceInset = { bottom: "always" };
 const Overview = ({ navigation, migratableAccounts, currencyIds }: Props) => {
   const showNotice = navigation.getParam("showNotice");
   const startMigration = useCallback(() => {
-    navigation.navigate("MigrateAccountsConnectDevice", {
+    navigation.navigate(ScreenName.MigrateAccountsConnectDevice, {
       currency: getCryptoCurrencyById(currencyIds[0]),
     });
   }, [navigation, currencyIds]);

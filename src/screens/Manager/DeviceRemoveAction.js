@@ -12,6 +12,7 @@ import type { DeviceModelId } from "@ledgerhq/devices";
 import { delay } from "@ledgerhq/live-common/lib/promise";
 
 import { removeKnownDevice } from "../../actions/ble";
+import { ScreenName } from "../../const";
 import Close from "../../icons/Close";
 
 import BottomModal from "../../components/BottomModal";
@@ -50,7 +51,7 @@ class DeviceRemoveAction extends PureComponent<Props, State> {
     removeKnownDevice(deviceId);
     onClose();
     await Promise.all([disconnect(deviceId).catch(() => {}), delay(100)]);
-    navigation.navigate("Manager");
+    navigation.navigate(ScreenName.Manager);
   };
 
   render() {

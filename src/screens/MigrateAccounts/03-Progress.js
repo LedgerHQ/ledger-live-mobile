@@ -18,6 +18,7 @@ import { createStructuredSelector } from "reselect";
 import { reduce } from "rxjs/operators";
 import { setAccounts } from "../../actions/accounts";
 import colors, { rgba } from "../../colors";
+import { ScreenName } from "../../const";
 import Button from "../../components/Button";
 import LText from "../../components/LText";
 import RoundedCurrencyIcon from "../../components/RoundedCurrencyIcon";
@@ -96,11 +97,11 @@ const Progress = ({
   const navigateToNextStep = useCallback(() => {
     if (migratableAccounts.length) {
       if (finishedWithDevice) {
-        navigation.navigate("MigrateAccountsOverview", {
+        navigation.navigate(ScreenName.MigrateAccountsOverview, {
           showNotice: noticeAwareStatus !== "error",
         });
       } else {
-        navigation.navigate("MigrateAccountsConnectDevice", {
+        navigation.navigate(ScreenName.MigrateAccountsConnectDevice, {
           deviceMeta,
           currency: noticeAwareStatus === "error" ? currency : nextCurrency,
         });

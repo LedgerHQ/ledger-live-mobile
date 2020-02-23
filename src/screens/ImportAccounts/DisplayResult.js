@@ -19,8 +19,9 @@ import { importDesktopSettings } from "../../actions/settings";
 import { importAccounts } from "../../actions/accounts";
 import { accountsSelector } from "../../reducers/accounts";
 import { TrackScreen } from "../../analytics";
-import LText from "../../components/LText";
 import colors from "../../colors";
+import { ScreenName } from "../../const";
+import LText from "../../components/LText";
 import Button from "../../components/Button";
 import StyledStatusBar from "../../components/StyledStatusBar";
 import DisplayResultItem from "./DisplayResultItem";
@@ -123,7 +124,7 @@ class DisplayResult extends Component<Props, State> {
     }
 
     if (onFinish) onFinish(navigation);
-    else navigation.navigate("Accounts");
+    else navigation.navigate(ScreenName.Accounts);
   };
 
   onSwitchResultItem = (checked: boolean, account: Account) => {

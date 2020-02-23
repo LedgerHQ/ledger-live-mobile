@@ -15,6 +15,7 @@ import type {
 import { getMainAccount } from "@ledgerhq/live-common/lib/account";
 import { accountAndParentScreenSelector } from "../../reducers/accounts";
 import colors from "../../colors";
+import { ScreenName } from "../../const";
 import { TrackScreen } from "../../analytics";
 import { useTransactionChangeFromNavigation } from "../../logic/screenTransactionHooks";
 import Button from "../../components/Button";
@@ -65,7 +66,7 @@ const SendSummary = ({ account, parentAccount, navigation }: Props) => {
   const [highFeesOpen, setHighFeesOpen] = useState(false);
 
   const onAcceptFees = useCallback(async () => {
-    navigation.navigate("SendConnectDevice", {
+    navigation.navigate(ScreenName.SendConnectDevice, {
       accountId: account.id,
       parentId: parentAccount && parentAccount.id,
       transaction,
@@ -93,7 +94,7 @@ const SendSummary = ({ account, parentAccount, navigation }: Props) => {
       return;
     }
 
-    navigation.navigate("SendConnectDevice", {
+    navigation.navigate(ScreenName.SendConnectDevice, {
       accountId: account.id,
       parentId: parentAccount && parentAccount.id,
       transaction,

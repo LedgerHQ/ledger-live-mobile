@@ -3,6 +3,7 @@
 import React, { PureComponent } from "react";
 import { withNavigation } from "@react-navigation/compat";
 import Icon from "react-native-vector-icons/dist/Feather";
+import { NavigatorName } from "../../const";
 import Touchable from "../../components/Touchable";
 import colors from "../../colors";
 import AddAccountsModal from "../AddAccounts/AddAccountsModal";
@@ -16,7 +17,7 @@ class AddAccount extends PureComponent<
   };
 
   onPress = () => {
-    this.props.navigation.navigate("ImportAccounts");
+    this.props.navigation.navigate(NavigatorName.ImportAccounts);
   };
 
   openAddModal = () => this.setState({ isAddModalOpened: true });

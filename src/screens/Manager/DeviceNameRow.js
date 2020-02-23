@@ -6,6 +6,7 @@ import { withNavigation } from "@react-navigation/compat";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import colors from "../../colors";
+import { ScreenName } from "../../const";
 import { deviceNameByDeviceIdSelector } from "../../reducers/ble";
 import { saveBleDeviceName } from "../../actions/ble";
 import LText from "../../components/LText";
@@ -38,7 +39,7 @@ class DeviceNameRow extends PureComponent<Props> {
 
   onPress = () => {
     const { navigation, deviceId, savedName } = this.props;
-    navigation.navigate("EditDeviceName", {
+    navigation.navigate(ScreenName.EditDeviceName, {
       deviceId,
       deviceName: savedName,
     });

@@ -10,6 +10,7 @@ import {
 import { connect } from "react-redux";
 import { SafeAreaView } from "react-native-safe-area-context";
 import type { NavigationScreenProp } from "react-navigation";
+import { ScreenName } from "../const";
 import { addKnownDevice } from "../actions/ble";
 import colors from "../colors";
 import { getFontStyle } from "../components/LText";
@@ -47,7 +48,7 @@ class DebugHttpTransport extends Component<
       id: `httpdebug|ws://${ip}:${port}`,
       name: ip,
     });
-    this.props.navigation.navigate("Manager");
+    this.props.navigation.navigate(ScreenName.Manager);
   };
 
   render() {

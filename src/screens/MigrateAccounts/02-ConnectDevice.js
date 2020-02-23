@@ -9,6 +9,7 @@ import { withNavigation } from "@react-navigation/compat";
 import { connect } from "react-redux";
 import { TrackScreen } from "../../analytics";
 import colors from "../../colors";
+import { ScreenName } from "../../const";
 import { connectingStep, currencyApp } from "../../components/DeviceJob/steps";
 import SelectDevice from "../../components/SelectDevice";
 import StepHeader from "../../components/StepHeader";
@@ -22,7 +23,7 @@ type Props = {
 const ConnectDevice = ({ navigation }: Props) => {
   const onSelectDevice = useCallback(
     deviceMeta => {
-      navigation.navigate("MigrateAccountsProgress", {
+      navigation.navigate(ScreenName.MigrateAccountsProgress, {
         currency: navigation.getParam("currency"),
         deviceMeta,
       });

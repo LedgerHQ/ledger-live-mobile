@@ -16,6 +16,7 @@ import withEnv from "../../logic/withEnv";
 import FilteredSearchBar from "../../components/FilteredSearchBar";
 import LText from "../../components/LText";
 import { TrackScreen } from "../../analytics";
+import { ScreenName } from "../../const";
 
 import AppsListPending from "./AppsListPending";
 import AppsListError from "./AppsListError";
@@ -124,7 +125,9 @@ class ManagerAppsList extends Component<Props, State> {
 
   onActionOpenAccounts = () => {
     const { navigation } = this.props;
-    this.setState({ action: null }, () => navigation.navigate("Accounts"));
+    this.setState({ action: null }, () =>
+      navigation.navigate(ScreenName.Accounts),
+    );
   };
 
   onInstall = (app: ApplicationVersion) => {

@@ -6,6 +6,7 @@ import i18next from "i18next";
 import { createStructuredSelector } from "reselect";
 import type { NavigationScreenProp } from "react-navigation";
 import type { CryptoCurrency } from "@ledgerhq/live-common/lib/types";
+import { ScreenName } from "../../../../const";
 import { cryptoCurrenciesSelector } from "../../../../reducers/accounts";
 import SettingsRow from "../../../../components/SettingsRow";
 import CurrencyIcon from "../../../../components/CurrencyIcon";
@@ -34,7 +35,7 @@ class CurrenciesList extends PureComponent<Props> {
       desc={null}
       arrowRight
       onPress={() =>
-        this.props.navigation.navigate("CurrencySettings", {
+        this.props.navigation.navigate(ScreenName.CurrencySettings, {
           currencyId: item.id,
         })
       }

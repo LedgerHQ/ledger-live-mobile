@@ -9,8 +9,9 @@ import { compose } from "redux";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 
-import colors from "../../colors";
 import { TrackScreen } from "../../analytics";
+import colors from "../../colors";
+import { ScreenName } from "../../const";
 import LText from "../../components/LText";
 import InfoIcon from "../../components/InfoIcon";
 import Check from "../../icons/Check";
@@ -29,7 +30,7 @@ class Paired extends PureComponent<{
 }> {
   onEdit = () => {
     const { deviceId, name, deviceName, navigation } = this.props;
-    navigation.navigate("EditDeviceName", {
+    navigation.navigate(ScreenName.EditDeviceName, {
       deviceId,
       deviceName: name || deviceName,
     });

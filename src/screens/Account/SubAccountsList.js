@@ -12,6 +12,7 @@ import Icon from "react-native-vector-icons/dist/FontAwesome";
 import MaterialIcon from "react-native-vector-icons/dist/MaterialIcons";
 import { listSubAccounts } from "@ledgerhq/live-common/lib/account";
 import { listTokenTypesForCryptoCurrency } from "@ledgerhq/live-common/lib/currencies";
+import { ScreenName } from "../../const";
 import SubAccountRow from "../../components/SubAccountRow";
 import withEnv from "../../logic/withEnv";
 import colors from "../../colors";
@@ -115,7 +116,9 @@ const SubAccountsList = ({
               <MaterialIcon color={colors.live} name="add" size={20} />
             )}
             onPress={() =>
-              navigation.navigate("ReceiveConnectDevice", { accountId })
+              navigation.navigate(ScreenName.ReceiveConnectDevice, {
+                accountId,
+              })
             }
             size={14}
           />
@@ -132,7 +135,7 @@ const SubAccountsList = ({
         <Touchable
           event="AccountReceiveSubAccount"
           onPress={() =>
-            navigation.navigate("ReceiveConnectDevice", { accountId })
+            navigation.navigate(ScreenName.ReceiveConnectDevice, { accountId })
           }
         >
           <View style={styles.footer}>

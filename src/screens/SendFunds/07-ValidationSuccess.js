@@ -12,6 +12,7 @@ import type {
 import { accountAndParentScreenSelector } from "../../reducers/accounts";
 import { TrackScreen } from "../../analytics";
 import colors from "../../colors";
+import { ScreenName } from "../../const";
 import PreventNativeBack from "../../components/PreventNativeBack";
 import ValidateSuccess from "../../components/ValidateSuccess";
 
@@ -47,7 +48,7 @@ class ValidationSuccess extends Component<Props> {
     if (!account) return;
     const result = navigation.getParam("result");
     if (!result) return;
-    navigation.navigate("OperationDetails", {
+    navigation.navigate(ScreenName.OperationDetails, {
       accountId: account.id,
       parentId: parentAccount && parentAccount.id,
       operation: result,

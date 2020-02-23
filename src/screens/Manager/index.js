@@ -11,6 +11,7 @@ import manager from "@ledgerhq/live-common/lib/manager";
 import { disconnect } from "@ledgerhq/live-common/lib/hw";
 import { createStructuredSelector } from "reselect";
 import { removeKnownDevice } from "../../actions/ble";
+import { ScreenName } from "../../const";
 import {
   connectingStep,
   dashboard,
@@ -114,7 +115,7 @@ class ChooseDevice extends Component<
       version,
       mcuVersion,
     });
-    this.props.navigation.navigate("ManagerMain", {
+    this.props.navigation.navigate(ScreenName.ManagerMain, {
       meta,
     });
   };

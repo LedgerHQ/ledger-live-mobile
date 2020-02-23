@@ -9,6 +9,7 @@ import i18next from "i18next";
 import manager from "@ledgerhq/live-common/lib/manager";
 import type { FirmwareUpdateContext } from "@ledgerhq/live-common/lib/types/manager";
 import { TrackScreen } from "../../analytics";
+import { ScreenName } from "../../const";
 import Button from "../../components/Button";
 import SafeMarkdown from "../../components/SafeMarkdown";
 import LText from "../../components/LText";
@@ -36,7 +37,7 @@ class FirmwareUpdateReleaseNotes extends Component<Props, State> {
 
   onNext = () => {
     const { navigation } = this.props;
-    navigation.navigate("FirmwareUpdateCheckId", {
+    navigation.navigate(ScreenName.FirmwareUpdateCheckId, {
       ...navigation.state.params,
     });
   };

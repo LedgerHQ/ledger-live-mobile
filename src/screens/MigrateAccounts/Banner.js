@@ -9,6 +9,7 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 import { createStructuredSelector } from "reselect";
 import colors from "../../colors";
+import { ScreenName } from "../../const";
 import LText from "../../components/LText";
 import IconArrowRight from "../../icons/ArrowRight";
 import LiveLogo from "../../icons/LiveLogoIcon";
@@ -26,7 +27,7 @@ const Banner = ({
   navigation: NavigationScreenProp<*>,
 }) => {
   const navigateToAccountMigration = useCallback(() => {
-    navigation.navigate("MigrateAccountsOverview");
+    navigation.navigate(ScreenName.MigrateAccountsOverview);
   }, [navigation]);
 
   if (!someAccountsNeedMigrationSelector) return null;

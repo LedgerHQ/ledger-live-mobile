@@ -10,6 +10,7 @@ import { listSubAccounts } from "@ledgerhq/live-common/lib/account";
 import { listTokenTypesForCryptoCurrency } from "@ledgerhq/live-common/lib/currencies";
 import type { Account, SubAccount } from "@ledgerhq/live-common/lib/types";
 import Icon from "react-native-vector-icons/dist/FontAwesome";
+import { ScreenName } from "../../const";
 import LText from "../../components/LText";
 import CurrencyUnitValue from "../../components/CurrencyUnitValue";
 import CounterValue from "../../components/CounterValue";
@@ -54,13 +55,13 @@ class AccountRow extends PureComponent<Props, State> {
   };
 
   onAccountPress = () => {
-    this.props.navigation.navigate("Account", {
+    this.props.navigation.navigate(ScreenName.Account, {
       accountId: this.props.account.id,
     });
   };
 
   onSubAccountPress = (subAccount: SubAccount) => {
-    this.props.navigation.navigate("Account", {
+    this.props.navigation.navigate(ScreenName.Account, {
       parentId: this.props.account.id,
       accountId: subAccount.id,
     });

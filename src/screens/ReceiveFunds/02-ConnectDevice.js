@@ -14,6 +14,7 @@ import {
 } from "@ledgerhq/live-common/lib/account";
 import { accountAndParentScreenSelector } from "../../reducers/accounts";
 import colors from "../../colors";
+import { ScreenName } from "../../const";
 import { TrackScreen } from "../../analytics";
 import StepHeader from "../../components/StepHeader";
 import SelectDevice from "../../components/SelectDevice";
@@ -74,7 +75,7 @@ const ConnectDevice = ({
   const onSelectDevice = useCallback(
     (meta: *) => {
       if (!account) return;
-      navigation.navigate("ReceiveConfirmation", {
+      navigation.navigate(ScreenName.ReceiveConfirmation, {
         accountId: account.id,
         parentId: parentAccount && parentAccount.id,
         ...meta,
@@ -85,7 +86,7 @@ const ConnectDevice = ({
 
   const onSkipDevice = useCallback(() => {
     if (!account) return;
-    navigation.navigate("ReceiveConfirmation", {
+    navigation.navigate(ScreenName.ReceiveConfirmation, {
       accountId: account.id,
       parentId: parentAccount && parentAccount.id,
     });
