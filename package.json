@@ -111,7 +111,7 @@
     "react-native-android-location-services-dialog-box": "^2.8.2",
     "react-native-ble-plx": "^1.1.1",
     "react-native-camera": "3.18.0",
-    "react-native-config": "0.12.0",
+    "react-native-config": "0.11.7",
     "react-native-crypto": "^2.2.0",
     "react-native-easy-markdown": "^1.5.0",
     "react-native-extra-dimensions-android": "^1.2.5",
