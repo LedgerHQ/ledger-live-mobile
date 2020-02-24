@@ -48,35 +48,35 @@ export default function SettingsNavigator() {
         name={ScreenName.Settings}
         component={Settings}
         options={{
-          headerTitle: t("settings.header"),
+          title: t("settings.header"),
         }}
       />
       <Stack.Screen
         name={ScreenName.CountervalueSettings}
         component={CountervalueSettings}
         options={{
-          headerTitle: t("settings.display.counterValue"),
+          title: t("settings.display.counterValue"),
         }}
       />
       <Stack.Screen
         name={ScreenName.GeneralSettings}
         component={GeneralSettings}
         options={{
-          headerTitle: t("settings.display.title"),
+          title: t("settings.display.title"),
         }}
       />
       <Stack.Screen
         name={ScreenName.AboutSettings}
         component={AboutSettings}
         options={{
-          headerTitle: t("settings.about.title"),
+          title: t("settings.about.title"),
         }}
       />
       <Stack.Screen
         name={ScreenName.HelpSettings}
         component={HelpSettings}
         options={{
-          headerTitle: t("settings.help.header"),
+          title: t("settings.help.header"),
         }}
       />
       <Stack.Screen
@@ -86,8 +86,8 @@ export default function SettingsNavigator() {
       <Stack.Screen
         name={ScreenName.CurrencySettings}
         component={CurrencySettings}
-        options={({ state }) => ({
-          headerTitle: state.params.headerTitle,
+        options={({ route }) => ({
+          title: route.params.headerTitle,
           headerRight: null,
         })}
       />
@@ -95,119 +95,119 @@ export default function SettingsNavigator() {
         name={ScreenName.RateProviderSettings}
         component={RateProviderSettings}
         options={{
-          headerTitle: t("settings.cryptoAssets.rateProviderHeader"),
+          title: t("settings.cryptoAssets.rateProviderHeader"),
         }}
       />
       <Stack.Screen
         name={ScreenName.RepairDevice}
         component={RepairDevice}
         options={{
-          headerTitle: t("RepairDevice.title"),
+          title: t("RepairDevice.title"),
         }}
       />
       <Stack.Screen
         name={ScreenName.ExperimentalSettings}
         component={ExperimentalSettings}
         options={{
-          headerTitle: t("settings.experimental.title"),
+          title: t("settings.experimental.title"),
         }}
       />
       <Stack.Screen
         name={ScreenName.DebugSettings}
         component={DebugSettings}
         options={{
-          headerTitle: "Debug",
+          title: "Debug",
         }}
       />
       <Stack.Screen
         name={ScreenName.DebugDevices}
         component={DebugDevices}
         options={{
-          headerTitle: "Debug Devices",
+          title: "Debug Devices",
         }}
       />
       <Stack.Screen
         name={ScreenName.DebugMocks}
         component={DebugMocks}
         options={{
-          headerTitle: "Mock & Test",
+          title: "Mock & Test",
         }}
       />
       <Stack.Screen
         name={ScreenName.DebugExport}
         component={DebugExport}
         options={{
-          headerTitle: "Export Accounts",
+          title: "Export Accounts",
         }}
       />
       <Stack.Screen
         name={ScreenName.DebugBLE}
         component={DebugBLE}
         options={{
-          headerTitle: "Debug BLE",
+          title: "Debug BLE",
         }}
       />
       <Stack.Screen
         name={ScreenName.DebugBLEBenchmark}
         component={DebugBLEBenchmark}
         options={{
-          headerTitle: "Debug BLE Benchmark",
+          title: "Debug BLE Benchmark",
         }}
       />
       <Stack.Screen
         name={ScreenName.DebugCrash}
         component={DebugCrash}
         options={{
-          headerTitle: "Debug Crash",
+          title: "Debug Crash",
         }}
       />
       <Stack.Screen
         name={ScreenName.DebugStore}
         component={DebugStore}
         options={{
-          headerTitle: "Debug Store",
+          title: "Debug Store",
         }}
       />
       <Stack.Screen
         name={ScreenName.DebugHttpTransport}
         component={DebugHttpTransport}
         options={{
-          headerTitle: "Debug Http Transport",
+          title: "Debug Http Transport",
         }}
       />
       <Stack.Screen
         name={ScreenName.DebugIcons}
         component={DebugIcons}
         options={{
-          headerTitle: "Debug Icons",
+          title: "Debug Icons",
         }}
       />
       <Stack.Screen
         name={ScreenName.DebugLottie}
         component={DebugLottie}
         options={{
-          headerTitle: "Debug Lottie",
+          title: "Debug Lottie",
         }}
       />
       <Stack.Screen
         name={ScreenName.DebugSVG}
         component={DebugSVG}
         options={{
-          headerTitle: "Debug Svg Icons",
+          title: "Debug Svg Icons",
         }}
       />
       <Stack.Screen
         name={ScreenName.DebugWSImport}
         component={DebugWSImport}
         options={{
-          headerTitle: "Experimental WS Import",
+          title: "Experimental WS Import",
         }}
       />
       <Stack.Screen
         name={ScreenName.BenchmarkQRStream}
         component={BenchmarkQRStream}
         options={{
-          headerTitle: "Benchmark QRStream",
+          title: "Benchmark QRStream",
         }}
       />
     </Stack.Navigator>
