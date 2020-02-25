@@ -2,18 +2,18 @@
 import React, { PureComponent } from "react";
 import { StyleSheet, View, Linking } from "react-native";
 import { Trans } from "react-i18next";
-import TrackScreen from "../../analytics/TrackScreen";
-import colors from "../../colors";
-import { ScreenName } from "../../const";
-import LText from "../../components/LText";
-import Touchable from "../../components/Touchable";
-import IconArrowRight from "../../icons/ArrowRight";
-import Button from "../../components/Button";
-import { urls } from "../../config/urls";
-import { withOnboardingContext } from "../Onboarding/onboardingContext";
-import type { OnboardingStepProps } from "../Onboarding/types";
-import DeviceNanoAction from "../../components/DeviceNanoAction";
-import getWindowDimensions from "../../logic/getWindowDimensions";
+import TrackScreen from "../../../analytics/TrackScreen";
+import colors from "../../../colors";
+import { ScreenName } from "../../../const";
+import LText from "../../../components/LText";
+import Touchable from "../../../components/Touchable";
+import IconArrowRight from "../../../icons/ArrowRight";
+import Button from "../../../components/Button";
+import { urls } from "../../../config/urls";
+import { withOnboardingContext } from "../../Onboarding/onboardingContext";
+import type { OnboardingStepProps } from "../../Onboarding/types";
+import DeviceNanoAction from "../../../components/DeviceNanoAction";
+import getWindowDimensions from "../../../logic/getWindowDimensions";
 
 const hitSlop = {
   top: 16,

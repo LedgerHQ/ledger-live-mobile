@@ -5,11 +5,11 @@ import { StyleSheet } from "react-native";
 import { withNavigation } from "@react-navigation/compat";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
-import colors from "../../colors";
-import { ScreenName } from "../../const";
-import { deviceNameByDeviceIdSelector } from "../../reducers/ble";
-import { saveBleDeviceName } from "../../actions/ble";
-import LText from "../../components/LText";
+import colors from "../../../colors";
+import { ScreenName } from "../../../const";
+import { deviceNameByDeviceIdSelector } from "../../../reducers/ble";
+import { saveBleDeviceName } from "../../../actions/ble";
+import LText from "../../../components/LText";
 import Row from "./Row";
 
 type Props = {
