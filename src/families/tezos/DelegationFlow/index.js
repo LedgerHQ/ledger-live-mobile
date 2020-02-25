@@ -12,7 +12,7 @@ import DelegationValidation from "./Validation";
 import DelegationValidationSuccess from "./ValidationSuccess";
 import DelegationValidationError from "./ValidationError";
 
-export default function DelegationFlow() {
+function DelegationFlow() {
   return (
     <Stack.Navigator
       screenOptions={{
@@ -47,5 +47,7 @@ export default function DelegationFlow() {
     </Stack.Navigator>
   );
 }
+
+export { DelegationFlow as component };
 
 const Stack = createStackNavigator();

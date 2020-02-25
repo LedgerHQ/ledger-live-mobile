@@ -7,11 +7,11 @@ import { useLocale } from "../context/Locale";
 
 interface Props {
   unit: Unit;
-  value: BigNumber;
-  showCode: boolean;
+  value: ?BigNumber;
+  showCode?: boolean;
   alwaysShowSign?: boolean;
-  before: string;
-  after: string;
+  before?: string;
+  after?: string;
 }
 
 export default function CurrencyUnitValue({

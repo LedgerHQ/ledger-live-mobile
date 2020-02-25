@@ -1,5 +1,5 @@
 // @flow
-import React, { Component } from "react";
+import React, { useState } from "react";
 import {
   View,
   StyleSheet,
@@ -7,152 +7,113 @@ import {
   Keyboard,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { connect } from "react-redux";
-import { withTranslation, Trans } from "react-i18next";
-import i18next from "i18next";
-import { compose } from "redux";
-import { createStructuredSelector } from "reselect";
-import type { NavigationScreenProp } from "react-navigation";
-import type { Account } from "@ledgerhq/live-common/lib/types";
+import { useSelector } from "react-redux";
+import { Trans } from "react-i18next";
+import { useRoute, useNavigation } from "@react-navigation/native";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
-
 import { BigNumber } from "bignumber.js";
 import colors from "../../../colors";
 import { accountScreenSelector } from "../../../reducers/accounts";
-
 import Button from "../../../components/Button";
 import KeyboardView from "../../../components/KeyboardView";
 import FeesRow from "./FeesRow";
 import CustomFeesRow from "./CustomFeesRow";
 import { track } from "../../../analytics";
+import { i18n } from "../../../context/Locale";
 
 const forceInset = { bottom: "always" };
 
-type Transaction = *;
-
-type Props = {
-  account: Account,
-  navigation: NavigationScreenProp<{
-    params: {
-      accountId: string,
-      transaction: Transaction,
-    },
-  }>,
-};
-type State = {
-  feePerByte: ?BigNumber,
-  focusedItemKey: string,
-  error?: boolean,
+const options = {
+  title: i18n.t("operationDetails.title"),
+  headerLeft: null,
 };
 
-class BitcoinEditFeePerByte extends Component<Props, State> {
-  static navigationOptions = {
-    title: i18next.t("operationDetails.title"),
-    headerLeft: null,
-  };
+function BitcoinEditFeePerByte() {
+  const account = useSelector(accountScreenSelector);
+  const route = useRoute();
+  const { navigate } = useNavigation();
 
-  static default;
+  const transaction = route.params?.transaction;
+  const [feePerByte, setFeePerByte] = useState(transaction.feePerByte);
+  const items = transaction.networkInfo
+    ? transaction.networkInfo.feeItems.items
+    : [];
+  const selectedItem =
+    feePerByte &&
+    items.find(item => item.feePerByte && item.feePerByte.eq(feePerByte));
+  const [focusedItemKey, setFocusedItemKey] = useState(
+    selectedItem ? selectedItem.key : "custom",
+  );
+  const [error, setError] = useState();
 
-  items: Array<*>;
-
-  constructor({ navigation }) {
-    super();
-    const transaction = navigation.getParam("transaction");
-
-    this.items = transaction.networkInfo
-      ? transaction.networkInfo.feeItems.items
-      : [];
-
-    const feePerByte = transaction.feePerByte;
-
-    const selectedItem =
-      feePerByte &&
-      this.items.find(
-        item => item.feePerByte && item.feePerByte.eq(feePerByte),
-      );
-
-    const focusedItemKey = selectedItem ? selectedItem.key : "custom";
-
-    this.state = {
-      feePerByte,
-      focusedItemKey,
-    };
+  function onChangeCustomFeeRow(feePerByte: BigNumber) {
+    setFeePerByte(feePerByte);
+    setFocusedItemKey("custom");
+    setError(!feePerByte.isGreaterThan(0));
+    track("SendChangeCustomFees");
   }
 
-  onChangeCustomFeeRow = (feePerByte: BigNumber) => {
-    this.setState({
-      feePerByte,
-      focusedItemKey: "custom",
-      error: !feePerByte.isGreaterThan(0),
-    });
-    track("SendChangeCustomFees");
-  };
-
-  onChangeFeeRow = (feePerByte: ?BigNumber, key: string) => {
-    this.setState({ feePerByte, focusedItemKey: key, error: undefined });
+  function onChangeFeeRow(feePerByte: ?BigNumber, key: string) {
+    setFeePerByte(feePerByte);
+    setFocusedItemKey(key);
+    setError(undefined);
     Keyboard.dismiss();
-  };
+  }
 
-  onValidateFees = () => {
-    const { navigation, account } = this.props;
-    const { feePerByte } = this.state;
+  function onValidateFees() {
     const bridge = getAccountBridge(account);
-    const transaction = navigation.getParam("transaction");
     Keyboard.dismiss();
 
-    navigation.navigate("SendSummary", {
+    navigate("SendSummary", {
       accountId: account.id,
       transaction: bridge.updateTransaction(transaction, { feePerByte }),
     });
-  };
-
-  render() {
-    const { navigation } = this.props;
-    const { feePerByte, focusedItemKey, error } = this.state;
-    const transaction: Transaction = navigation.getParam("transaction");
-    if (!transaction) return null;
-
-    const isCustom = focusedItemKey === "custom";
-
-    return (
-      <SafeAreaView style={styles.root} forceInset={forceInset}>
-        <KeyboardView style={styles.container}>
-          <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-            <View style={{ flex: 1 }}>
-              {this.items.map(item => (
-                <FeesRow
-                  key={item.key}
-                  itemKey={item.key}
-                  title={<Trans i18nKey={`fees.speed.${item.speed}`} />}
-                  value={item.feePerByte}
-                  isSelected={item.key === focusedItemKey}
-                  onPress={this.onChangeFeeRow}
-                />
-              ))}
-              <CustomFeesRow
-                initialValue={isCustom ? feePerByte : null}
-                title={<Trans i18nKey="fees.speed.custom" />}
-                isValid={!error}
-                onPress={this.onChangeCustomFeeRow}
-                isSelected={isCustom}
-              />
-              <View style={styles.buttonContainer}>
-                <Button
-                  event="BitcoinEditFeePerByteContinue"
-                  type="primary"
-                  disabled={!!error}
-                  title={<Trans i18nKey="send.fees.validate" />}
-                  containerStyle={styles.continueButton}
-                  onPress={this.onValidateFees}
-                />
-              </View>
-            </View>
-          </TouchableWithoutFeedback>
-        </KeyboardView>
-      </SafeAreaView>
-    );
   }
+
+  if (!transaction) return null;
+
+  const isCustom = focusedItemKey === "custom";
+
+  return (
+    <SafeAreaView style={styles.root} forceInset={forceInset}>
+      <KeyboardView style={styles.container}>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <View style={{ flex: 1 }}>
+            {items.map(item => (
+              <FeesRow
+                key={item.key}
+                itemKey={item.key}
+                title={<Trans i18nKey={`fees.speed.${item.speed}`} />}
+                value={item.feePerByte}
+                isSelected={item.key === focusedItemKey}
+                onPress={onChangeFeeRow}
+              />
+            ))}
+            <CustomFeesRow
+              initialValue={isCustom ? feePerByte : null}
+              title={<Trans i18nKey="fees.speed.custom" />}
+              isValid={!error}
+              onPress={onChangeCustomFeeRow}
+              isSelected={isCustom}
+            />
+            <View style={styles.buttonContainer}>
+              <Button
+                event="BitcoinEditFeePerByteContinue"
+                type="primary"
+                disabled={!!error}
+                title={<Trans i18nKey="send.fees.validate" />}
+                containerStyle={styles.continueButton}
+                onPress={onValidateFees}
+              />
+            </View>
+          </View>
+        </TouchableWithoutFeedback>
+      </KeyboardView>
+    </SafeAreaView>
+  );
 }
+
+export { options, BitcoinEditFeePerByte as component };
 
 const styles = StyleSheet.create({
   root: {
@@ -178,12 +139,3 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
 });
-
-const mapStateToProps = createStructuredSelector({
-  account: accountScreenSelector,
-});
-
-export default compose(
-  connect(mapStateToProps),
-  withTranslation(),
-)(BitcoinEditFeePerByte);

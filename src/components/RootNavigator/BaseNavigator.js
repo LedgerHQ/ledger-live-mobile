@@ -2,7 +2,7 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { ScreenName, NavigatorName } from "../../const";
-import perFamilyScreens from "../../generated/screens";
+import * as families from "../../families";
 import OperationDetails from "../../screens/OperationDetails";
 import PairDevices from "../../screens/PairDevices";
 import EditDeviceName from "../../screens/EditDeviceName";
@@ -22,26 +22,6 @@ import PasswordModifyFlowNavigator from "./PasswordModifyFlowNavigator";
 import MigrateAccountsFlowNavigator from "./MigrateAccountsFlowNavigator";
 import { closableStackNavigatorConfig } from "../../navigation/navigatorConfig";
 import TransparentHeaderNavigationOptions from "../../navigation/TransparentHeaderNavigationOptions";
-
-const {
-  sendScreens: generatedSendScreens,
-  baseScreens: generatedBaseScreens,
-}: {
-  [key: string]: string,
-} = Object.values(perFamilyScreens).reduce(
-  (prev, item) => ({
-    ...prev,
-    sendScreens: {
-      ...prev.sendScreens,
-      ...item.sendScreens,
-    },
-    baseScreens: {
-      ...prev.baseScreens,
-      ...item.baseScreens,
-    },
-  }),
-  { sendScreens: {}, baseScreens: {} },
-);
 
 export default function BaseNavigator() {
   return (
@@ -104,13 +84,17 @@ export default function BaseNavigator() {
         component={FallbackCameraSend}
       />
 
-      {Object.keys(generatedSendScreens).map(name => (
-        <Stack.Screen name={name} component={generatedSendScreens[name]} />
-      ))}
-
-      {Object.keys(generatedBaseScreens).map(name => (
-        <Stack.Screen name={name} component={generatedBaseScreens[name]} />
-      ))}
+      {Object.keys(families).map(name => {
+        const { component, options } = families[name];
+        return (
+          <Stack.Screen
+            key={name}
+            name={name}
+            component={component}
+            options={options}
+          />
+        );
+      })}
     </Stack.Navigator>
   );
 }
