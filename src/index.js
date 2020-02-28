@@ -156,8 +156,8 @@ export default class Root extends Component<
                 <SetEnvsFromSettings />
                 <HookSentry />
                 <HookAnalytics store={store} />
-                <AuthPass>
-                  <SafeAreaProvider>
+                <SafeAreaProvider>
+                  <AuthPass>
                     <NavigationContainer>
                       <I18nextProvider i18n={i18n}>
                         <LocaleProvider>
@@ -173,8 +173,8 @@ export default class Root extends Component<
                         </LocaleProvider>
                       </I18nextProvider>
                     </NavigationContainer>
-                  </SafeAreaProvider>
-                </AuthPass>
+                  </AuthPass>
+                </SafeAreaProvider>
               </>
             ) : (
               <LoadingApp />

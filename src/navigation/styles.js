@@ -8,7 +8,6 @@ let headerStyleShadow;
 
 if (Platform.OS === "ios") {
   headerStyle = {
-    height: 48,
     borderBottomWidth: 0,
   };
   headerStyleShadow = {
@@ -21,8 +20,6 @@ if (Platform.OS === "ios") {
 } else {
   const statusBarPadding = StatusBar.currentHeight;
   headerStyle = {
-    height: 48 + statusBarPadding,
-    paddingTop: statusBarPadding,
     elevation: 0,
   };
   headerStyleShadow = {
@@ -45,7 +42,6 @@ export default StyleSheet.create({
     ...headerStyle,
   },
   bottomTabBar: {
-    height: 56,
     borderTopColor: colors.lightFog,
     backgroundColor: colors.white,
   },

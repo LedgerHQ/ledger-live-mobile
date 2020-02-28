@@ -13,7 +13,7 @@ const hitSlop = {
   bottom: 25,
 };
 
-class Transfer extends Component<
+export class TransferHeader extends Component<
   { tintColor: string, navigation: * },
   { isModalOpened: boolean },
 > {
@@ -65,16 +65,6 @@ class Transfer extends Component<
   }
 }
 
-export default class Create extends Component<*> {
-  static navigationOptions = (navOpts: { navigation: * }) => ({
-    tabBarIcon: (props: *) => (
-      <Transfer {...props} navigation={navOpts.navigation} />
-    ),
-    tabBarOnPress: () => {}, // noop
-  });
-
-  render() {
-    const { ...props } = this.props;
-    return <ExchangeScreen {...props} />;
-  }
+export default function Create(props: *) {
+  return <ExchangeScreen {...props} />;
 }

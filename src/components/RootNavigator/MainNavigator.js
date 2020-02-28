@@ -4,34 +4,30 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { ScreenName, NavigatorName } from "../../const";
 import PortfolioIcon from "../../icons/Portfolio";
 import Portfolio from "../../screens/Portfolio";
-import Transfer from "../../screens/Transfer";
+import Transfer, { TransferHeader } from "../../screens/Transfer";
 import AccountsNavigator from "./AccountsNavigator";
 import ManagerNavigator from "./ManagerNavigator";
 import SettingsNavigator from "./SettingsNavigator";
 import styles from "../../navigation/styles";
-import HiddenTabBarIfKeyboardVisible from "../HiddenTabBarIfKeyboardVisible";
 import TabIcon from "../TabIcon";
+import AccountsIcon from "../../icons/Accounts";
+import ManagerIcon from "../../icons/Manager";
+import NanoXIcon from "../../icons/TabNanoX";
+import ReadOnlyTab from "../ReadOnlyTab";
+import SettingsIcon from "../../icons/Settings";
 
 export default function MainNavigator() {
   return (
     <Tab.Navigator
-      screenOptions={{
-        tabBarOptions: {
-          style: styles.bottomTabBar,
-          showLabel: false,
-        },
-        tabBarComponent: HiddenTabBarIfKeyboardVisible,
-        tabBarOnPress: ({ navigation, defaultHandler }) => {
-          defaultHandler();
-          navigation.emit("refocus");
-        },
+      tabBarOptions={{
+        style: styles.bottomTabBar,
+        showLabel: false,
       }}
     >
       <Tab.Screen
         name={ScreenName.Portfolio}
         component={Portfolio}
         options={{
-          headerShown: true,
           tabBarIcon: (props: *) => (
             <TabIcon Icon={PortfolioIcon} i18nKey="tabs.portfolio" {...props} />
           ),
@@ -40,10 +36,46 @@ export default function MainNavigator() {
       <Tab.Screen
         name={NavigatorName.AccountsStack}
         component={AccountsNavigator}
+        options={{
+          tabBarIcon: (props: *) => (
+            <TabIcon Icon={AccountsIcon} i18nKey="tabs.accounts" {...props} />
+          ),
+        }}
       />
-      <Tab.Screen name={ScreenName.Transfer} component={Transfer} />
-      <Tab.Screen name={NavigatorName.Manager} component={ManagerNavigator} />
-      <Tab.Screen name={NavigatorName.Settings} component={SettingsNavigator} />
+      <Tab.Screen
+        name={ScreenName.Transfer}
+        component={Transfer}
+        options={{
+          tabBarIcon: (props: *) => <TransferHeader {...props} />,
+          tabBarOnPress: () => {}, // noop
+        }}
+      />
+      <Tab.Screen
+        name={NavigatorName.Manager}
+        component={ManagerNavigator}
+        options={{
+          tabBarIcon: (props: *) => (
+            <ReadOnlyTab
+              OnIcon={NanoXIcon}
+              oni18nKey="tabs.nanoX"
+              OffIcon={ManagerIcon}
+              offi18nKey="tabs.manager"
+              {...props}
+            />
+          ),
+          tabBarVisible: ({ route }) =>
+            route.params ? !route.params.editMode : true,
+        }}
+      />
+      <Tab.Screen
+        name={NavigatorName.Settings}
+        component={SettingsNavigator}
+        options={{
+          tabBarIcon: (props: *) => (
+            <TabIcon Icon={SettingsIcon} i18nKey="tabs.settings" {...props} />
+          ),
+        }}
+      />
     </Tab.Navigator>
   );
 }

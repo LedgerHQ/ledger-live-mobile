@@ -26,7 +26,11 @@ import TransparentHeaderNavigationOptions from "../../navigation/TransparentHead
 export default function BaseNavigator() {
   return (
     <Stack.Navigator mode="modal" screenOptions={closableStackNavigatorConfig}>
-      <Stack.Screen name={NavigatorName.Main} component={Main} />
+      <Stack.Screen
+        name={NavigatorName.Main}
+        component={Main}
+        options={{ headerShown: false }}
+      />
       <Stack.Screen
         name={NavigatorName.ReceiveFunds}
         component={ReceiveFundsNavigator}
