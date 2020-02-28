@@ -13,17 +13,17 @@ type Props = {
 
 class TabIcon extends Component<Props> {
   render() {
-    const { Icon, i18nKey, tintColor, focused } = this.props;
+    const { Icon, i18nKey, color, focused } = this.props;
 
     return (
       <View style={styles.root}>
-        <Icon size={18} color={tintColor} />
+        <Icon size={18} color={color} />
         <LText
           numberOfLines={1}
           semiBold={!focused}
           bold={focused}
           secondary
-          style={[styles.text, { color: tintColor }]}
+          style={[styles.text, { color }]}
         >
           <Trans i18nKey={i18nKey} />
         </LText>
