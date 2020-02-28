@@ -2,7 +2,7 @@
 /* eslint-disable no-console */
 import React, { Component } from "react";
 import { View, StyleSheet } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import SafeAreaView from "react-native-safe-area-view";
 import type { NavigationScreenProp } from "react-navigation";
 import { withTranslation, Trans } from "react-i18next";
 import { TrackScreen } from "../../analytics";

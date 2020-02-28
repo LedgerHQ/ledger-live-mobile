@@ -3,7 +3,7 @@
 import React, { useCallback } from "react";
 import { Trans } from "react-i18next";
 import { ScrollView, StyleSheet } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import SafeAreaView from "react-native-safe-area-view";
 import type { NavigationScreenProp } from "react-navigation";
 import { withNavigation } from "@react-navigation/compat";
 import { connect } from "react-redux";

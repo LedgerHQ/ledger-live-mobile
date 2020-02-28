@@ -15,7 +15,7 @@ import uniq from "lodash/uniq";
 import { withTranslation, Trans } from "react-i18next";
 import { StyleSheet, View, ScrollView } from "react-native";
 // $FlowFixMe
-import { SafeAreaView } from "react-native-safe-area-context";
+import SafeAreaView from "react-native-safe-area-view";
 import type { NavigationStackProp } from "react-navigation-stack";
 import type { CryptoCurrency, Account } from "@ledgerhq/live-common/lib/types";
 import { getCurrencyBridge } from "@ledgerhq/live-common/lib/bridge";

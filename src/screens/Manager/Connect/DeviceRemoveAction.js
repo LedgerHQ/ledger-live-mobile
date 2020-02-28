@@ -4,7 +4,7 @@ import React, { PureComponent } from "react";
 import { View, StyleSheet } from "react-native";
 import { Trans } from "react-i18next";
 import { connect } from "react-redux";
-import { SafeAreaView } from "react-native-safe-area-context";
+import SafeAreaView from "react-native-safe-area-view";
 import { withNavigation } from "@react-navigation/compat";
 import { disconnect } from "@ledgerhq/live-common/lib/hw";
 import { getDeviceModel } from "@ledgerhq/devices";

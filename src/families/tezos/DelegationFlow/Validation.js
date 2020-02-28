@@ -5,7 +5,7 @@
 import React from "react";
 import { View, StyleSheet, ActivityIndicator } from "react-native";
 import { connect } from "react-redux";
-import { SafeAreaView } from "react-native-safe-area-context";
+import SafeAreaView from "react-native-safe-area-view";
 import type { NavigationScreenProp } from "react-navigation";
 import { withTranslation } from "react-i18next";
 import i18next from "i18next";

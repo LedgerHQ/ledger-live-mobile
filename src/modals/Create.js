@@ -1,7 +1,7 @@
 /* @flow */
 
 import React, { Component } from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
+import SafeAreaView from "react-native-safe-area-view";
 import { withNavigation } from "@react-navigation/compat";
 import { withTranslation } from "react-i18next";
 import { connect } from "react-redux";

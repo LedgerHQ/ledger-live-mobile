@@ -3,7 +3,7 @@ import React, { useCallback } from "react";
 import i18next from "i18next";
 import { View, StyleSheet, FlatList } from "react-native";
 import { createStructuredSelector } from "reselect";
-import { SafeAreaView } from "react-native-safe-area-context";
+import SafeAreaView from "react-native-safe-area-view";
 import type { NavigationScreenProp } from "react-navigation";
 import { connect } from "react-redux";
 import { compose } from "redux";

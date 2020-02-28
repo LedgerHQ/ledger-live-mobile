@@ -12,7 +12,7 @@ import type {
   Portfolio,
   Currency,
 } from "@ledgerhq/live-common/lib/types";
-import { SafeAreaView } from "react-native-safe-area-context";
+import SafeAreaView from "react-native-safe-area-view";
 import { withTranslation } from "react-i18next";
 import {
   groupAccountsOperationsByDay,

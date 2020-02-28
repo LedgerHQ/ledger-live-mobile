@@ -1,7 +1,7 @@
 // @flow
 import React, { Component, Fragment } from "react";
 import { View, StyleSheet, SectionList } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import SafeAreaView from "react-native-safe-area-view";
 import { HeaderBackButton } from "react-navigation-stack";
 import groupBy from "lodash/groupBy";
 import concat from "lodash/concat";

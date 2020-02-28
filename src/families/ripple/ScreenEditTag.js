@@ -1,7 +1,7 @@
 /* @flow */
 import React, { useState } from "react";
 import { View, StyleSheet, TextInput, ScrollView } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import SafeAreaView from "react-native-safe-area-view";
 import { useRoute, useNavigation } from "@react-navigation/native";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";

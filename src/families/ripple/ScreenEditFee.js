@@ -1,7 +1,7 @@
 // @flow
 import React from "react";
 import { StyleSheet } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import SafeAreaView from "react-native-safe-area-view";
 import { useSelector } from "react-redux";
 import { useRoute } from "@react-navigation/native";
 import colors from "../../colors";

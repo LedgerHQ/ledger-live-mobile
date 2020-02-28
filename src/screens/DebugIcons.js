@@ -2,7 +2,7 @@
 
 import React from "react";
 import { ScrollView, StyleSheet } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import SafeAreaView from "react-native-safe-area-view";
 import { UserRefusedAddress } from "@ledgerhq/errors";
 import colors from "../colors";
 import DeviceNanoAction from "../components/DeviceNanoAction";

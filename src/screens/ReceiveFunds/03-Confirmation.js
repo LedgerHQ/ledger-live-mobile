@@ -5,7 +5,7 @@ import i18next from "i18next";
 import { from, of } from "rxjs";
 import { delay } from "rxjs/operators";
 import { View, StyleSheet, Linking, ScrollView } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import SafeAreaView from "react-native-safe-area-view";
 import { connect } from "react-redux";
 import QRCode from "react-native-qrcode-svg";
 import { withTranslation, Trans } from "react-i18next";

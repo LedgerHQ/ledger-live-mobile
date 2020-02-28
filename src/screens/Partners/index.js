@@ -3,7 +3,7 @@
 import React, { Component } from "react";
 import { Trans, withTranslation } from "react-i18next";
 import { View, StyleSheet, ScrollView } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import SafeAreaView from "react-native-safe-area-view";
 import partners from "@ledgerhq/live-common/lib/partners/reactNative";
 import type { NavigationScreenProp } from "react-navigation";
 import type { T } from "../../types/common";

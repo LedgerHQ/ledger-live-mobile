@@ -2,7 +2,7 @@
 import React, { PureComponent } from "react";
 import i18next from "i18next";
 import { View, StyleSheet, ScrollView } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import SafeAreaView from "react-native-safe-area-view";
 import type { NavigationScreenProp } from "react-navigation";
 import type { Account } from "@ledgerhq/live-common/lib/types";
 import { connect } from "react-redux";

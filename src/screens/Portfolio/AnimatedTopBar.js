@@ -8,7 +8,7 @@ import {
   TouchableWithoutFeedback,
   Platform,
 } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import SafeAreaView from "react-native-safe-area-view";
 import type AnimatedValue from "react-native/Libraries/Animated/src/nodes/AnimatedValue";
 import type { Portfolio, Currency } from "@ledgerhq/live-common/lib/types";
 import extraStatusBarPadding from "../../logic/extraStatusBarPadding";

@@ -2,7 +2,7 @@
 
 import React, { PureComponent } from "react";
 import { StatusBar, StyleSheet, View, ScrollView } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import SafeAreaView from "react-native-safe-area-view";
 import colors from "../../colors";
 import OnboardingHeader from "./OnboardingHeader";
 
@@ -104,10 +104,7 @@ export default class OnboardingLayout extends PureComponent<Props> {
     }
 
     return (
-      <SafeAreaView
-        forceInset={{ bottom: "always", top: "always" }}
-        style={[styles.root, isCentered && styles.centered, style]}
-      >
+      <SafeAreaView style={[styles.root, isCentered && styles.centered, style]}>
         {inner}
       </SafeAreaView>
     );

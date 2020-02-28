@@ -8,7 +8,7 @@ import {
   Image,
   Vibration,
 } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import SafeAreaView from "react-native-safe-area-view";
 import * as Keychain from "react-native-keychain";
 import { PasswordIncorrectError } from "@ledgerhq/errors";
 import type { T } from "../../types/common";

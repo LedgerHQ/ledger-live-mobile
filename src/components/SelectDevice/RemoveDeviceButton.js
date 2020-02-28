@@ -1,7 +1,7 @@
 // @flow
 import React, { PureComponent } from "react";
 import { StyleSheet, Animated } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import SafeAreaView from "react-native-safe-area-view";
 import { withNavigation } from "@react-navigation/compat";
 import type { NavigationScreenProp } from "react-navigation";
 import { compose } from "redux";

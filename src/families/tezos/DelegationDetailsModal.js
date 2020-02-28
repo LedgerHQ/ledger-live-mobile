@@ -3,7 +3,7 @@
 import React, { useCallback } from "react";
 import { Trans } from "react-i18next";
 import { StyleSheet, View, ScrollView, Linking } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import SafeAreaView from "react-native-safe-area-view";
 import { withNavigation } from "@react-navigation/compat";
 import { differenceInCalendarDays } from "date-fns";
 import {

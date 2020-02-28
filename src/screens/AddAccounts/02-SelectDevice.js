@@ -3,7 +3,7 @@
 import React, { Component } from "react";
 import { withTranslation } from "react-i18next";
 import { StyleSheet, ScrollView } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import SafeAreaView from "react-native-safe-area-view";
 import type { NavigationScreenProp } from "react-navigation";
 import type { CryptoCurrency } from "@ledgerhq/live-common/lib/types";
 import i18next from "i18next";

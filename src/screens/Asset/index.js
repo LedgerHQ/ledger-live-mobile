@@ -19,7 +19,7 @@ import { StyleSheet, View, SectionList } from "react-native";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import type { SectionBase } from "react-native/Libraries/Lists/SectionList";
-import { SafeAreaView } from "react-native-safe-area-context";
+import SafeAreaView from "react-native-safe-area-view";
 import { withNavigation } from "@react-navigation/compat";
 import type { NavigationScreenProp } from "react-navigation";
 import CurrencyIcon from "../../components/CurrencyIcon";

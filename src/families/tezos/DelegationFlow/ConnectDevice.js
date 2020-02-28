@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from "react";
 import { StyleSheet, ScrollView } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import SafeAreaView from "react-native-safe-area-view";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { withTranslation } from "react-i18next";

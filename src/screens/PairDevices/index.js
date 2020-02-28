@@ -2,7 +2,7 @@
 
 import React, { Component } from "react";
 import { StyleSheet } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import SafeAreaView from "react-native-safe-area-view";
 import i18next from "i18next";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";

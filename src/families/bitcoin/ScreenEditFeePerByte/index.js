@@ -6,7 +6,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import SafeAreaView from "react-native-safe-area-view";
 import { useSelector } from "react-redux";
 import { Trans } from "react-i18next";
 import { useRoute, useNavigation } from "@react-navigation/native";

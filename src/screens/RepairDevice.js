@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from "react";
 import { View, StyleSheet, ScrollView, Dimensions } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import SafeAreaView from "react-native-safe-area-view";
 import { withTranslation, Trans } from "react-i18next";
 import type { NavigationScreenProp } from "react-navigation";
 import firmwareUpdateRepair from "@ledgerhq/live-common/lib/hw/firmwareUpdate-repair";

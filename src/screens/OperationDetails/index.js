@@ -2,7 +2,7 @@
 import React, { PureComponent } from "react";
 import i18next from "i18next";
 import { View, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import SafeAreaView from "react-native-safe-area-view";
 import { connect } from "react-redux";
 import { withTranslation } from "react-i18next";
 import type {

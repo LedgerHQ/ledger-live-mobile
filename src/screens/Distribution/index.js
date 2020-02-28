@@ -11,7 +11,7 @@ import {
   Dimensions,
   FlatList,
 } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import SafeAreaView from "react-native-safe-area-view";
 import { withNavigation } from "@react-navigation/compat";
 import type { NavigationScreenProp } from "react-navigation";
 import i18next from "i18next";

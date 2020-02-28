@@ -19,7 +19,7 @@ export type OnboardingContextType = {
   showWelcome: boolean,
   setShowWelcome: boolean => Promise<void>,
 
-  firstTimeOnboarding: boolean,
+  firstTimeOnboarding?: boolean,
   setFirstTimeOnboarding: boolean => Promise<void>,
 
   // allow to change the steps on the fly

@@ -2,7 +2,7 @@
 
 import React, { PureComponent } from "react";
 import { Keyboard, View, StyleSheet } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import SafeAreaView from "react-native-safe-area-view";
 import type { NavigationScreenProp } from "react-navigation";
 import { withTranslation, Trans } from "react-i18next";
 import i18next from "i18next";
