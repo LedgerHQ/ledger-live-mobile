@@ -25,7 +25,7 @@ class FormatDay extends Component<Props> {
         : dayDiff === 1
         ? ` - ${i18next.t("common.yesterday")}`
         : "";
-    return `${format(day, "MMMM DD, YYYY")}${suffix}`;
+    return `${format(day, "MMMM dd, yyyy")}${suffix}`;
   }
 }
 
