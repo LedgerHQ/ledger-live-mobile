@@ -1,6 +1,6 @@
 // @flow
 
-import { StyleSheet, Platform, StatusBar } from "react-native";
+import { StyleSheet, Platform } from "react-native";
 import colors from "../colors";
 
 let headerStyle;
@@ -18,7 +18,6 @@ if (Platform.OS === "ios") {
     },
   };
 } else {
-  const statusBarPadding = StatusBar.currentHeight;
   headerStyle = {
     elevation: 0,
   };

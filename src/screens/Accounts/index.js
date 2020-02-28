@@ -21,15 +21,6 @@ import MigrateAccountsBanner from "../MigrateAccounts/Banner";
 
 const List = globalSyncRefreshControl(FlatList);
 
-const navigationOptions = {
-  title: i18next.t("accounts.title"),
-  headerLeft: <AccountOrder />,
-  headerRight: <AddAccount />,
-  tabBarIcon: ({ tintColor }: { tintColor: string }) => (
-    <AccountsIcon size={18} color={tintColor} />
-  ),
-};
-
 const mapStateToProps = createStructuredSelector({
   accounts: accountsSelector,
 });
@@ -40,8 +31,6 @@ type Props = {
 };
 
 class Accounts extends Component<Props> {
-  static navigationOptions = navigationOptions;
-
   renderItem = ({ item, index }: { item: Account, index: number }) => (
     <AccountRow
       navigation={this.props.navigation}

@@ -1,7 +1,7 @@
 // @flow
 
-import React, { PureComponent } from "react";
-import { withNavigationFocus } from "react-navigation";
+import React, { useState } from "react";
+import { useIsFocused } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/dist/Feather";
 import Touchable from "../../components/Touchable";
 import colors from "../../colors";
@@ -9,37 +9,41 @@ import AccountOrderModal from "./AccountOrderModal";
 import RefreshAccountsOrdering from "../../components/RefreshAccountOrdering";
 
 // update at boot and each time focus or open state changes
-const RefreshAccounts = withNavigationFocus(({ isFocused, isOpened }) => (
-  <RefreshAccountsOrdering
-    onMount
-    onUpdate
-    nonce={`${isFocused}_${isOpened}`}
-  />
-));
-
-class AccountOrder extends PureComponent<{}, { isOpened: boolean }> {
-  state = {
-    isOpened: false,
-  };
-
-  onPress = () => this.setState({ isOpened: true });
-
-  onClose = () => this.setState({ isOpened: false });
-
-  render() {
-    const { isOpened } = this.state;
-    return (
-      <Touchable
-        event="AccountOrderOpen"
-        style={{ marginHorizontal: 16 }}
-        onPress={this.onPress}
-      >
-        <Icon name="sliders" color={colors.grey} size={20} />
-        <RefreshAccounts isOpened={isOpened} />
-        <AccountOrderModal isOpened={isOpened} onClose={this.onClose} />
-      </Touchable>
-    );
-  }
+interface RefreshAccountsProps {
+  isOpened: boolean;
 }
 
-export default AccountOrder;
+function RefreshAccounts({ isOpened }: RefreshAccountsProps) {
+  const isFocused = useIsFocused();
+  return (
+    <RefreshAccountsOrdering
+      onMount
+      onUpdate
+      nonce={`${isFocused}_${isOpened.toString()}`}
+    />
+  );
+}
+
+export default function AccountOrder() {
+  const [isOpened, setIsOpened] = useState(false);
+
+  function onPress(): void {
+    setIsOpened(true);
+  }
+
+  function onClose(): void {
+    setIsOpened(false);
+  }
+
+  return (
+    <Touchable
+      event="AccountOrderOpen"
+      style={{ marginHorizontal: 16 }}
+      onPress={onPress}
+    >
+      <Icon name="sliders" color={colors.grey} size={20} />
+      <RefreshAccounts isOpened={isOpened} />
+      <AccountOrderModal isOpened={isOpened} onClose={onClose} />
+    </Touchable>
+  );
+}

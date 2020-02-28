@@ -1,35 +1,31 @@
 /* @flow */
 import React, { Component } from "react";
 import { View, StyleSheet } from "react-native";
-import { Trans, withTranslation } from "react-i18next";
+import { Trans } from "react-i18next";
 import LText from "./LText";
 
-type Props = {
-  tintColor: string,
-  focused: boolean,
-  i18nKey: string,
-  Icon: *,
-};
+interface Props {
+  color: string;
+  focused: boolean;
+  i18nKey: string;
+  Icon: *;
+}
 
-class TabIcon extends Component<Props> {
-  render() {
-    const { Icon, i18nKey, color, focused } = this.props;
-
-    return (
-      <View style={styles.root}>
-        <Icon size={18} color={color} />
-        <LText
-          numberOfLines={1}
-          semiBold={!focused}
-          bold={focused}
-          secondary
-          style={[styles.text, { color }]}
-        >
-          <Trans i18nKey={i18nKey} />
-        </LText>
-      </View>
-    );
-  }
+export default function TabIcon({ Icon, i18nKey, color, focused }: Props) {
+  return (
+    <View style={styles.root}>
+      <Icon size={18} color={color} />
+      <LText
+        numberOfLines={1}
+        semiBold={!focused}
+        bold={focused}
+        secondary
+        style={[styles.text, { color }]}
+      >
+        <Trans i18nKey={i18nKey} />
+      </LText>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -45,5 +41,3 @@ const styles = StyleSheet.create({
     marginTop: 6,
   },
 });
-
-export default withTranslation()(TabIcon);
