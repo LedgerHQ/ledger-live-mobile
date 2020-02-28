@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { View, StyleSheet, Image } from "react-native";
 import { createStructuredSelector } from "reselect";
 import { TrackScreen } from "../../../analytics";
-import { ScreenName } from "../../../const";
+import { ScreenName, NavigatorName } from "../../../const";
 import type { Privacy } from "../../../reducers/settings";
 import { privacySelector } from "../../../reducers/settings";
 import LText from "../../../components/LText";
@@ -48,7 +48,7 @@ class OnboardingStepPassword extends Component<
   };
 
   navigateToPassword = () => {
-    this.props.navigation.navigate(ScreenName.PasswordAdd);
+    this.props.navigation.navigate(NavigatorName.PasswordAddFlow);
   };
 
   Footer = () => {

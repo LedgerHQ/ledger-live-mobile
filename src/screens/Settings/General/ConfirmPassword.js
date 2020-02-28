@@ -5,7 +5,6 @@ import * as Keychain from "react-native-keychain";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { withTranslation } from "react-i18next";
-import i18next from "i18next";
 import { PasswordsDontMatchError } from "@ledgerhq/errors";
 import { Vibration } from "react-native";
 import { setPrivacy } from "../../../actions/settings";
@@ -31,19 +30,15 @@ const mapDispatchToProps = {
 };
 
 class ConfirmPassword extends PureComponent<Props, State> {
-  static navigationOptions = {
-    title: i18next.t("auth.confirmPassword.title"),
-  };
-
   componentDidMount() {
     Keychain.getSupportedBiometryType().then(biometricsType => {
       if (biometricsType) this.setState({ biometricsType });
     });
   }
 
-  constructor({ navigation }) {
+  constructor({ route }) {
     super();
-    const password = navigation.getParam("password");
+    const password = route.params?.password;
     this.state = {
       password,
       confirmPassword: "",
@@ -100,9 +95,6 @@ class ConfirmPassword extends PureComponent<Props, State> {
 }
 
 export default compose(
-  connect(
-    null,
-    mapDispatchToProps,
-  ),
+  connect(null, mapDispatchToProps),
   withTranslation(),
 )(ConfirmPassword);

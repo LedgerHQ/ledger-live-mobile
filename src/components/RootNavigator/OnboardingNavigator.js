@@ -1,7 +1,7 @@
 // @flow
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import { ScreenName } from "../../const";
+import { ScreenName, NavigatorName } from "../../const";
 import OnboardingStepChooseDevice from "../../screens/Onboarding/steps/choose-device";
 import OnboardingStepGetStarted from "../../screens/Onboarding/steps/get-started";
 import OnboardingStepSetupPin from "../../screens/Onboarding/steps/setup-pin";
@@ -12,6 +12,7 @@ import OnboardingStepPassword from "../../screens/Onboarding/steps/password";
 import OnboardingStepShareData from "../../screens/Onboarding/steps/share-data";
 import OnboardingStepScanQR from "../../screens/Onboarding/steps/scan-qr";
 import OnboardingStepFinish from "../../screens/Onboarding/steps/finish";
+import PasswordAddFlowNavigator from "./PasswordAddFlowNavigator";
 
 export default function OnboardingNavigator() {
   return (
@@ -55,6 +56,10 @@ export default function OnboardingNavigator() {
       <Stack.Screen
         name={ScreenName.OnboardingStepFinish}
         component={OnboardingStepFinish}
+      />
+      <Stack.Screen
+        name={NavigatorName.PasswordAddFlow}
+        component={PasswordAddFlowNavigator}
       />
     </Stack.Navigator>
   );

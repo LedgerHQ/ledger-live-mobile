@@ -2,7 +2,6 @@
 import React, { PureComponent } from "react";
 import type { NavigationScreenProp } from "react-navigation";
 import { withTranslation } from "react-i18next";
-import i18next from "i18next";
 import { ScreenName } from "../../../const";
 import type { T } from "../../../types/common";
 import PasswordForm from "./PasswordForm";
@@ -16,10 +15,6 @@ type State = {
 };
 
 class PasswordAdd extends PureComponent<Props, State> {
-  static navigationOptions = {
-    title: i18next.t("auth.addPassword.title"),
-  };
-
   state = {
     password: "",
   };

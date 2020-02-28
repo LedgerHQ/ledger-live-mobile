@@ -37,7 +37,6 @@ class OnboardingStepFinish extends Component<Props> {
   onFinish = () => {
     this.props.completeOnboarding();
     this.props.resetCurrentStep();
-    this.props.navigation.navigate(NavigatorName.Main);
   };
 
   render() {
