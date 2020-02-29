@@ -42,21 +42,21 @@ class AddAccountsSelectDevice extends Component<Props, State> {
   };
 
   componentDidMount() {
-    const { navigation } = this.props;
-    const currency = navigation.getParam("currency");
+    const currency = this.props.route.params?.currency;
     // load ahead of time
     prepareCurrency(currency);
   }
 
   onSelectDevice = (meta: *) => {
-    const { navigation } = this.props;
-    const currency = navigation.getParam("currency");
-    navigation.navigate(ScreenName.AddAccountsAccounts, { currency, ...meta });
+    const currency = this.props.route.params?.currency;
+    this.props.navigation.navigate(ScreenName.AddAccountsAccounts, {
+      currency,
+      ...meta,
+    });
   };
 
   render() {
-    const { navigation } = this.props;
-    const currency = navigation.getParam("currency");
+    const currency = this.props.route.params?.currency;
     return (
       <SafeAreaView style={styles.root} forceInset={forceInset}>
         <ScrollView

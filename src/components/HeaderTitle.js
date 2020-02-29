@@ -1,31 +1,25 @@
 /* @flow */
-import React, { Component } from "react";
+import React from "react";
 import { TouchableWithoutFeedback, StyleSheet } from "react-native";
-import { withNavigation } from "@react-navigation/compat";
 import LText from "./LText";
 import colors from "../colors";
 
-class HeaderTitle extends Component<*> {
-  onPress = () => {
-    this.props.navigation.emit("refocus");
-  };
-
-  render() {
-    const { style, ...newProps } = this.props;
-    return (
-      <TouchableWithoutFeedback onPress={this.onPress}>
-        <LText
-          {...newProps}
-          secondary
-          semiBold
-          style={[styleSheet.root, style]}
-        />
-      </TouchableWithoutFeedback>
-    );
+export default function HeaderTitle({ style, ...newProps }: *) {
+  function onPress(): void {
+    newProps.navigation.emit("refocus");
   }
-}
 
-export default withNavigation(HeaderTitle);
+  return (
+    <TouchableWithoutFeedback onPress={onPress}>
+      <LText
+        {...newProps}
+        secondary
+        semiBold
+        style={[styleSheet.root, style]}
+      />
+    </TouchableWithoutFeedback>
+  );
+}
 
 const styleSheet = StyleSheet.create({
   root: {
