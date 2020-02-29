@@ -72,7 +72,6 @@
     "@segment/analytics-ios": "github:LedgerHQ/analytics-ios#efb4cd1771dab568422473fd680ffb748b102f07",
     "@segment/analytics-react-native": "^0.1.0-beta.0",
     "@tradle/react-native-http": "^2.0.0",
-    "add": "^2.0.6",
     "assert": "^2.0.0",
     "async": "^3.1.1",
     "axios": "^0.19.2",
