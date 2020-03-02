@@ -2,7 +2,6 @@
 import React, { Component } from "react";
 import { View, StyleSheet } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
-import type { NavigationStackProp } from "react-navigation-stack";
 import { withTranslation, Trans } from "react-i18next";
 
 import { TrackScreen } from "../../analytics";
@@ -13,16 +12,15 @@ import colors from "../../colors";
 
 const forceInset = { bottom: "always" };
 
-type Navigation = NavigationStackProp<{
-  params: {
-    deviceId: string,
-    error: Error,
-  },
-}>;
+interface RouteParams {
+  deviceId: string;
+  error: Error;
+}
 
-type Props = {
-  navigation: Navigation,
-};
+interface Props {
+  navigation: *;
+  route: { params: RouteParams };
+}
 
 type State = {};
 
@@ -42,8 +40,7 @@ class FirmwareUpdateFailure extends Component<Props, State> {
   };
 
   render() {
-    const { navigation } = this.props;
-    const error = navigation.getParam("error");
+    const error = this.props.route.params?.error;
     return (
       <SafeAreaView style={styles.root} forceInset={forceInset}>
         <TrackScreen category="FirmwareUpdate" name="Failure" />

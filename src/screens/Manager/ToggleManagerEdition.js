@@ -11,13 +11,14 @@ import colors from "../../colors";
 import { knownDevicesSelector } from "../../reducers/ble";
 import type { DeviceLike } from "../../reducers/ble";
 
-// interface RouteParams {
-//   editMode: boolean;
-// }
+interface RouteParams {
+  editMode: boolean;
+}
 
 interface Props {
   navigation: *;
   knownDevices: DeviceLike[];
+  route: { params: RouteParams };
 }
 
 const mapStateToProps = state => ({
@@ -27,7 +28,7 @@ const mapStateToProps = state => ({
 class ToggleManagerEdition extends Component<Props> {
   onPress = () => {
     const { navigation } = this.props;
-    const editMode = !navigation.getParam("editMode");
+    const editMode = !this.props.route.params?.editMode;
     navigation.setParams({ editMode });
     if (editMode) {
       const n = navigation.dangerouslyGetParent();
@@ -36,8 +37,8 @@ class ToggleManagerEdition extends Component<Props> {
   };
 
   render() {
-    const { navigation, knownDevices } = this.props;
-    const editMode = !navigation.getParam("editMode");
+    const { knownDevices, route } = this.props;
+    const editMode = !route.params?.editMode;
     return knownDevices.length > 0 ? (
       <Touchable
         event="ManagerToggleEdit"

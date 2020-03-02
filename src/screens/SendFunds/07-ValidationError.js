@@ -4,7 +4,6 @@ import { StyleSheet, Linking } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { connect } from "react-redux";
 import { withTranslation } from "react-i18next";
-import type { NavigationScreenProp } from "react-navigation";
 import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
 import { accountAndParentScreenSelector } from "../../reducers/accounts";
 import { TrackScreen } from "../../analytics";
@@ -14,19 +13,20 @@ import { urls } from "../../config/urls";
 
 const forceInset = { bottom: "always" };
 
-type Props = {
-  account: AccountLike,
-  parentAccount: ?Account,
-  navigation: NavigationScreenProp<{
-    params: {
-      accountId: string,
-      parentId: String,
-      deviceId: string,
-      transaction: *,
-      error: Error,
-    },
-  }>,
-};
+interface RouteParams {
+  accountId: string;
+  parentId: String;
+  deviceId: string;
+  transaction: *;
+  error: Error;
+}
+
+interface Props {
+  account: AccountLike;
+  parentAccount: ?Account;
+  navigation: *;
+  route: { params: RouteParams };
+}
 
 class ValidationError extends Component<Props> {
   dismiss = () => {
@@ -47,8 +47,7 @@ class ValidationError extends Component<Props> {
   };
 
   render() {
-    const { navigation } = this.props;
-    const error = navigation.getParam("error");
+    const error = this.props.route.params?.error;
 
     return (
       <SafeAreaView style={styles.root} forceInset={forceInset}>

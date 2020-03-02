@@ -3,7 +3,6 @@
 import React, { useCallback } from "react";
 import { ScrollView, StyleSheet } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
-import type { NavigationScreenProp } from "react-navigation";
 import { withNavigation } from "@react-navigation/compat";
 import { connect } from "react-redux";
 import { TrackScreen } from "../../analytics";
@@ -14,19 +13,20 @@ import SelectDevice from "../../components/SelectDevice";
 
 const forceInset = { bottom: "always" };
 
-type Props = {
-  navigation: NavigationScreenProp<*>,
-};
+interface Props {
+  navigation: *;
+  route: *;
+}
 
-const ConnectDevice = ({ navigation }: Props) => {
+const ConnectDevice = ({ navigation, route }: Props) => {
   const onSelectDevice = useCallback(
     deviceMeta => {
       navigation.navigate(ScreenName.MigrateAccountsProgress, {
-        currency: navigation.getParam("currency"),
+        currency: route.params?.currency,
         deviceMeta,
       });
     },
-    [navigation],
+    [navigation, route.params],
   );
 
   return (
@@ -37,10 +37,10 @@ const ConnectDevice = ({ navigation }: Props) => {
         contentContainerStyle={styles.scrollContainer}
       >
         <SelectDevice
-          deviceMeta={navigation.getParam("deviceMeta")}
+          deviceMeta={route.params?.deviceMeta}
           onSelect={onSelectDevice}
           autoSelectOnAdd
-          steps={[connectingStep, currencyApp(navigation.getParam("currency"))]}
+          steps={[connectingStep, currencyApp(route.params?.currency)]}
         />
       </ScrollView>
     </SafeAreaView>

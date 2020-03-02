@@ -13,7 +13,6 @@ import SafeAreaView from "react-native-safe-area-view";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { withTranslation, Trans } from "react-i18next";
-import type { NavigationScreenProp } from "react-navigation";
 import type {
   AccountLike,
   Account,
@@ -36,18 +35,19 @@ import AmountInput from "./AmountInput";
 
 const forceInset = { bottom: "always" };
 
-type Props = {
-  account: AccountLike,
-  parentAccount: ?Account,
-  navigation: NavigationScreenProp<{
-    params: {
-      accountId: string,
-      transaction: Transaction,
-    },
-  }>,
-};
+interface RouteParams {
+  accountId: string;
+  transaction: Transaction;
+}
 
-const SendAmount = ({ account, parentAccount, navigation }: Props) => {
+interface Props {
+  account: AccountLike;
+  parentAccount: ?Account;
+  navigation: *;
+  route: { params: RouteParams };
+}
+
+const SendAmount = ({ account, parentAccount, navigation, route }: Props) => {
   const {
     transaction,
     setTransaction,
@@ -55,7 +55,7 @@ const SendAmount = ({ account, parentAccount, navigation }: Props) => {
     bridgePending,
     bridgeError,
   } = useBridgeTransaction(() => ({
-    transaction: navigation.getParam("transaction"),
+    transaction: route.transaction,
     account,
     parentAccount,
   }));

@@ -14,7 +14,6 @@ import {
   getTransactionExplorer,
 } from "@ledgerhq/live-common/lib/explorers";
 import { getMainAccount } from "@ledgerhq/live-common/lib/account";
-import type { NavigationScreenProp } from "react-navigation";
 import byFamiliesOperationDetails from "../../generated/operationDetails";
 import { accountAndParentScreenSelector } from "../../reducers/accounts";
 import { TrackScreen } from "../../analytics";
@@ -26,18 +25,17 @@ import ArrowLeft from "../../icons/ArrowLeft";
 
 const forceInset = { bottom: "always" };
 
-type Props = {
-  account: AccountLike,
-  parentAccount: ?Account,
-  navigation: Navigation,
-};
+interface RouteParams {
+  accountId: string;
+  operation: Operation;
+}
 
-type Navigation = NavigationScreenProp<{
-  params: {
-    accountId: string,
-    operation: Operation,
-  },
-}>;
+interface Props {
+  account: AccountLike;
+  parentAccount: ?Account;
+  navigation: *;
+  route: { params: RouteParams };
+}
 
 export const BackButton = ({ navigation }: { navigation: Navigation }) => (
   <TouchableOpacity style={{ padding: 16 }} onPress={() => navigation.goBack()}>
@@ -56,9 +54,9 @@ export const CloseButton = ({ navigation }: { navigation: Navigation }) => (
 
 class OperationDetails extends PureComponent<Props, *> {
   render() {
-    const { navigation, account, parentAccount } = this.props;
+    const { route, navigation, account, parentAccount } = this.props;
     if (!account) return null;
-    const operation = navigation.getParam("operation");
+    const operation = route.params?.operation;
     const mainAccount = getMainAccount(account, parentAccount);
     const url = getTransactionExplorer(
       getDefaultExplorerView(mainAccount.currency),

@@ -5,7 +5,6 @@ import { View, StyleSheet, ScrollView } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { connect } from "react-redux";
 import { withTranslation, Trans } from "react-i18next";
-import type { NavigationScreenProp } from "react-navigation";
 import type {
   Account,
   AccountLike,
@@ -32,25 +31,26 @@ import ConfirmationModal from "../../components/ConfirmationModal";
 
 const forceInset = { bottom: "always" };
 
-type Props = {
-  account: AccountLike,
-  parentAccount: ?Account,
-  navigation: NavigationScreenProp<{
-    params: {
-      accountId: string,
-      transaction: Transaction,
-    },
-  }>,
-};
+interface RouteParams {
+  accountId: string;
+  transaction: Transaction;
+}
 
-const SendSummary = ({ account, parentAccount, navigation }: Props) => {
+interface Props {
+  account: AccountLike;
+  parentAccount: ?Account;
+  navigation: *;
+  route: { params: RouteParams };
+}
+
+const SendSummary = ({ account, parentAccount, navigation, route }: Props) => {
   const {
     transaction,
     setTransaction,
     status,
     bridgePending,
   } = useBridgeTransaction(() => ({
-    transaction: navigation.getParam("transaction"),
+    transaction: route.params?.transaction,
     account,
     parentAccount,
   }));

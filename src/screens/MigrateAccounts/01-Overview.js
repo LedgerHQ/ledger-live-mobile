@@ -36,16 +36,22 @@ const mapStateToProps = createStructuredSelector({
       .sort(),
 });
 
-type Props = {
-  navigation: NavigationScreenProp<*>,
-  currencyIds: string[],
-  migratableAccounts: Account[],
-};
+interface Props {
+  navigation: NavigationScreenProp<*>;
+  currencyIds: string[];
+  migratableAccounts: Account[];
+  route: *;
+}
 
 const forceInset = { bottom: "always" };
 
-const Overview = ({ navigation, migratableAccounts, currencyIds }: Props) => {
-  const showNotice = navigation.getParam("showNotice");
+const Overview = ({
+  route,
+  navigation,
+  migratableAccounts,
+  currencyIds,
+}: Props) => {
+  const showNotice = route.params?.showNotice;
   const startMigration = useCallback(() => {
     navigation.navigate(ScreenName.MigrateAccountsConnectDevice, {
       currency: getCryptoCurrencyById(currencyIds[0]),

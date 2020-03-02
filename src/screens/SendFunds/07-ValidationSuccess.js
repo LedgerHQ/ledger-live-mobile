@@ -3,7 +3,6 @@ import React, { Component } from "react";
 import { View, StyleSheet } from "react-native";
 import { connect } from "react-redux";
 import { withTranslation } from "react-i18next";
-import type { NavigationScreenProp } from "react-navigation";
 import type {
   TokenAccount,
   Account,
@@ -16,18 +15,19 @@ import { ScreenName } from "../../const";
 import PreventNativeBack from "../../components/PreventNativeBack";
 import ValidateSuccess from "../../components/ValidateSuccess";
 
-type Props = {
-  account: ?(TokenAccount | Account),
-  parentAccount: ?Account,
-  navigation: NavigationScreenProp<{
-    params: {
-      accountId: string,
-      deviceId: string,
-      transaction: *,
-      result: Operation,
-    },
-  }>,
-};
+interface RouteParams {
+  accountId: string;
+  deviceId: string;
+  transaction: *;
+  result: Operation;
+}
+
+interface Props {
+  account: ?(TokenAccount | Account);
+  parentAccount: ?Account;
+  navigation: *;
+  route: { params: RouteParams };
+}
 
 class ValidationSuccess extends Component<Props> {
   dismiss = () => {
@@ -39,9 +39,9 @@ class ValidationSuccess extends Component<Props> {
   };
 
   goToOperationDetails = () => {
-    const { navigation, account, parentAccount } = this.props;
+    const { navigation, route, account, parentAccount } = this.props;
     if (!account) return;
-    const result = navigation.getParam("result");
+    const result = route.params?.result;
     if (!result) return;
     navigation.navigate(ScreenName.OperationDetails, {
       accountId: account.id,

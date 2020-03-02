@@ -5,7 +5,6 @@ import SafeAreaView from "react-native-safe-area-view";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { withTranslation, Trans } from "react-i18next";
-import type { NavigationScreenProp } from "react-navigation";
 import type { Account, TokenAccount } from "@ledgerhq/live-common/lib/types";
 import {
   getMainAccount,
@@ -29,20 +28,19 @@ import GenericErrorView from "../../components/GenericErrorView";
 
 const forceInset = { bottom: "always" };
 
-type Navigation = NavigationScreenProp<{
-  params: {
-    accountId: string,
-    parentId: string,
-    title: string,
-  },
-}>;
+interface RouteParams {
+  accountId: string;
+  parentId: string;
+  title: string;
+}
 
-type Props = {
-  account: ?(TokenAccount | Account),
-  parentAccount: ?Account,
-  navigation: Navigation,
-  readOnlyModeEnabled: boolean,
-};
+interface Props {
+  account: ?(TokenAccount | Account);
+  parentAccount: ?Account;
+  navigation: *;
+  route: { params: RouteParams };
+  readOnlyModeEnabled: boolean;
+}
 
 const mapStateToProps = (s, p) => ({
   ...accountAndParentScreenSelector(s, p),
@@ -52,18 +50,19 @@ const mapStateToProps = (s, p) => ({
 const ConnectDevice = ({
   readOnlyModeEnabled,
   navigation,
+  route,
   account,
   parentAccount,
 }: Props) => {
   useEffect(() => {
     const readOnlyTitle = "transfer.receive.titleReadOnly";
-    if (readOnlyModeEnabled && navigation.getParam("title") !== readOnlyTitle) {
+    if (readOnlyModeEnabled && route.params?.title !== readOnlyTitle) {
       navigation.setParams({
         title: readOnlyTitle,
         headerRight: null,
       });
     }
-  }, [navigation, readOnlyModeEnabled]);
+  }, [navigation, readOnlyModeEnabled, route.params]);
 
   const error = useMemo(
     () => (account ? getReceiveFlowError(account, parentAccount) : null),

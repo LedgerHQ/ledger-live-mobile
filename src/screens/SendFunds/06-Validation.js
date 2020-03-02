@@ -3,7 +3,6 @@ import React from "react";
 import { View, StyleSheet, ActivityIndicator } from "react-native";
 import { connect } from "react-redux";
 import SafeAreaView from "react-native-safe-area-view";
-import type { NavigationScreenProp } from "react-navigation";
 import { withTranslation } from "react-i18next";
 import type {
   AccountLike,
@@ -23,26 +22,28 @@ import { useSignWithDevice } from "../../logic/screenTransactionHooks";
 
 const forceInset = { bottom: "always" };
 
-type Props = {
-  account: AccountLike,
-  parentAccount: ?Account,
-  updateAccountWithUpdater: (string, (Account) => Account) => void,
-  navigation: NavigationScreenProp<{
-    params: {
-      accountId: string,
-      deviceId: string,
-      modelId: DeviceModelId,
-      wired: boolean,
-      transaction: Transaction,
-      status: TransactionStatus,
-    },
-  }>,
-};
+interface RouteParams {
+  accountId: string;
+  deviceId: string;
+  modelId: DeviceModelId;
+  wired: boolean;
+  transaction: Transaction;
+  status: TransactionStatus;
+}
+
+interface Props {
+  account: AccountLike;
+  parentAccount: ?Account;
+  updateAccountWithUpdater: (string, (Account) => Account) => void;
+  navigation: *;
+  route: { params: RouteParams };
+}
 
 const Validation = ({
   account,
   parentAccount,
   navigation,
+  route,
   updateAccountWithUpdater,
 }: Props) => {
   const [signing, signed] = useSignWithDevice({
@@ -53,10 +54,8 @@ const Validation = ({
     updateAccountWithUpdater,
   });
 
-  const status = navigation.getParam("status");
-  const transaction = navigation.getParam("transaction");
-  const modelId = navigation.getParam("modelId");
-  const wired = navigation.getParam("wired");
+  const { status, transaction, modelId, wired } = route.params || {};
+
   return (
     <SafeAreaView style={styles.root} forceInset={forceInset}>
       <TrackScreen category="SendFunds" name="Validation" signed={signed} />

@@ -1,7 +1,6 @@
 // @flow
 
 import React, { Component } from "react";
-import i18next from "i18next";
 import { from, of } from "rxjs";
 import { delay } from "rxjs/operators";
 import { View, StyleSheet, Linking, ScrollView } from "react-native";
@@ -9,7 +8,6 @@ import SafeAreaView from "react-native-safe-area-view";
 import { connect } from "react-redux";
 import QRCode from "react-native-qrcode-svg";
 import { withTranslation, Trans } from "react-i18next";
-import type { NavigationScreenProp } from "react-navigation";
 import ReactNativeModal from "react-native-modal";
 import type { Account, TokenAccount } from "@ledgerhq/live-common/lib/types";
 import {
@@ -25,7 +23,6 @@ import { accountAndParentScreenSelector } from "../../reducers/accounts";
 import colors from "../../colors";
 import { TrackScreen } from "../../analytics";
 import PreventNativeBack from "../../components/PreventNativeBack";
-import StepHeader from "../../components/StepHeader";
 import LText from "../../components/LText/index";
 import DisplayAddress from "../../components/DisplayAddress";
 import VerifyAddressDisclaimer from "../../components/VerifyAddressDisclaimer";
@@ -47,22 +44,21 @@ import { rejectionOp } from "../../components/DebugRejectSwitch";
 
 const forceInset = { bottom: "always" };
 
-type Navigation = NavigationScreenProp<{
-  params: {
-    accountId: string,
-    deviceId: string,
-    modelId: DeviceModelId,
-    wired: boolean,
-    allowNavigation?: boolean,
-  },
-}>;
+interface RouteParams {
+  accountId: string;
+  deviceId: string;
+  modelId: DeviceModelId;
+  wired: boolean;
+  allowNavigation?: boolean;
+}
 
-type Props = {
-  account: ?(TokenAccount | Account),
-  parentAccount: ?Account,
-  navigation: Navigation,
-  readOnlyModeEnabled: boolean,
-};
+interface Props {
+  account: ?(TokenAccount | Account);
+  parentAccount: ?Account;
+  navigation: *;
+  route: { params: RouteParams };
+  readOnlyModeEnabled: boolean;
+}
 
 type State = {
   verified: boolean,
@@ -89,8 +85,8 @@ class ReceiveConfirmation extends Component<Props, State> {
   sub: *;
 
   componentDidMount() {
-    const { navigation } = this.props;
-    const deviceId = navigation.getParam("deviceId");
+    const { navigation, route } = this.props;
+    const deviceId = route.params?.deviceId;
 
     if (deviceId) {
       const n = navigation.dangerouslyGetParent();
@@ -178,17 +174,12 @@ class ReceiveConfirmation extends Component<Props, State> {
   };
 
   render() {
-    const {
-      account,
-      parentAccount,
-      navigation,
-      readOnlyModeEnabled,
-    } = this.props;
+    const { account, parentAccount, route, readOnlyModeEnabled } = this.props;
     if (!account) return null;
     const { verified, error, isModalOpened, onModalHide, zoom } = this.state;
     const { width } = getWindowDimensions();
-    const unsafe = !navigation.getParam("deviceId");
-    const allowNavigation = navigation.getParam("allowNavigation");
+    const unsafe = !route.params?.deviceId;
+    const allowNavigation = route.params?.allowNavigation;
     const QRSize = Math.round(width / 1.8 - 16);
     const mainAccount = getMainAccount(account, parentAccount);
     const currency = getAccountCurrency(account);
@@ -344,8 +335,8 @@ class ReceiveConfirmation extends Component<Props, State> {
               <View style={styles.modalBody}>
                 <View style={styles.modalIcon}>
                   <DeviceNanoAction
-                    modelId={navigation.getParam("modelId")}
-                    wired={navigation.getParam("wired")}
+                    modelId={route.params?.modelId}
+                    wired={route.params?.wired}
                     error={error}
                   />
                 </View>

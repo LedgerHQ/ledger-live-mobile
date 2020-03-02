@@ -11,7 +11,6 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Trans } from "react-i18next";
 import { StyleSheet, View } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
-import type { NavigationScreenProp } from "react-navigation";
 import { withNavigation } from "@react-navigation/compat";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
@@ -48,16 +47,18 @@ const mapDispatchToProps = {
 
 const forceInset = { bottom: "always" };
 
-type Props = {
-  navigation: NavigationScreenProp<*>,
-  accounts: Account[],
-  setAccounts: (Account[]) => void,
-  currencyIds: string[],
-  migratableAccounts: Account[],
-};
+interface Props {
+  navigation: *;
+  route: *;
+  accounts: Account[];
+  setAccounts: (Account[]) => void;
+  currencyIds: string[];
+  migratableAccounts: Account[];
+}
 
 const Progress = ({
   navigation,
+  route,
   accounts,
   setAccounts,
   currencyIds,
@@ -69,8 +70,7 @@ const Progress = ({
   const prevAccountCount = useRef(migratableAccounts.length);
   const prevCurrencyIds = useRef(currencyIds);
 
-  const currency = navigation.getParam("currency");
-  const deviceMeta = navigation.getParam("deviceMeta");
+  const { currency, deviceMeta } = route.params || {};
 
   const noticeAwareStatus =
     status === "done" && prevAccountCount.current === migratableAccounts.length

@@ -4,7 +4,6 @@ import { StyleSheet, View } from "react-native";
 import { RNCamera } from "react-native-camera";
 import { connect } from "react-redux";
 import Config from "react-native-config";
-import type { NavigationScreenProp } from "react-navigation";
 import { withTranslation } from "react-i18next";
 import { decodeURIScheme } from "@ledgerhq/live-common/lib/currencies";
 import type {
@@ -20,16 +19,17 @@ import CameraScreen from "../../components/CameraScreen";
 import FallBackCamera from "./FallbackCamera/Fallback";
 import getWindowDimensions from "../../logic/getWindowDimensions";
 
-type Props = {
-  navigation: NavigationScreenProp<{
-    params: {
-      accountId: string,
-      transaction: Transaction,
-    },
-  }>,
-  account: AccountLike,
-  parentAccount: ?Account,
-};
+interface RouteParams {
+  accountId: string;
+  transaction: Transaction;
+}
+
+interface Props {
+  navigation: *;
+  route: { params: RouteParams };
+  account: AccountLike;
+  parentAccount: ?Account;
+}
 
 type State = {
   width: number,
@@ -60,11 +60,11 @@ class ScanRecipient extends PureComponent<Props, State> {
   };
 
   onResult = (result: string) => {
-    const { account, parentAccount, navigation } = this.props;
+    const { account, parentAccount, route } = this.props;
     if (!account) return;
     const bridge = getAccountBridge(account, parentAccount);
     const { amount, address, currency, ...rest } = decodeURIScheme(result);
-    const transaction = navigation.getParam("transaction");
+    const transaction = route.params?.transaction;
     const patch: Object = {};
     patch.recipient = address;
     if (amount) {

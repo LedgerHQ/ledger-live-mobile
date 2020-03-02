@@ -6,7 +6,6 @@ import SafeAreaView from "react-native-safe-area-view";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { withTranslation } from "react-i18next";
-import type { NavigationScreenProp } from "react-navigation";
 import { timeout } from "rxjs/operators";
 import getDeviceInfo from "@ledgerhq/live-common/lib/hw/getDeviceInfo";
 import getDeviceName from "@ledgerhq/live-common/lib/hw/getDeviceName";
@@ -27,15 +26,16 @@ import Scanning from "./Scanning";
 import ScanningTimeout from "./ScanningTimeout";
 import RenderError from "./RenderError";
 
-type Props = {
-  navigation: NavigationScreenProp<{
-    params: {
-      onDone?: (deviceId: string) => void,
-    },
-  }>,
-  knownDevices: DeviceLike[],
-  addKnownDevice: DeviceLike => *,
-};
+interface RouteParams {
+  onDone?: (deviceId: string) => void;
+}
+
+interface Props {
+  navigation: *;
+  route: { params: RouteParams };
+  knownDevices: DeviceLike[];
+  addKnownDevice: DeviceLike => *;
+}
 
 type Device = {
   id: string,
@@ -145,8 +145,8 @@ class PairDevices extends Component<Props, State> {
   };
 
   onDone = (deviceId: string) => {
-    const { navigation } = this.props;
-    const onDone = navigation.getParam("onDone");
+    const { navigation, route } = this.props;
+    const onDone = route.params?.onDone;
     navigation.goBack();
     if (onDone) {
       onDone(deviceId);

@@ -3,7 +3,6 @@
 import React, { Component } from "react";
 import { View, StyleSheet } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
-import type { NavigationStackProp } from "react-navigation-stack";
 import { withTranslation, Trans } from "react-i18next";
 import firmwareUpdateMain from "@ledgerhq/live-common/lib/hw/firmwareUpdate-main";
 import type { FirmwareUpdateContext } from "@ledgerhq/live-common/lib/types/manager";
@@ -17,16 +16,15 @@ import Installing from "../../components/Installing";
 
 const forceInset = { bottom: "always" };
 
-type Navigation = NavigationStackProp<{
-  params: {
-    deviceId: string,
-    firmware: FirmwareUpdateContext,
-  },
-}>;
+interface RouteParams {
+  deviceId: string;
+  firmware: FirmwareUpdateContext;
+}
 
-type Props = {
-  navigation: Navigation,
-};
+interface Props {
+  navigation: *;
+  route: { params: RouteParams };
+}
 
 type State = {
   installing: ?string,
@@ -43,8 +41,7 @@ class FirmwareUpdateMCU extends Component<Props, State> {
 
   async componentDidMount() {
     const { navigation } = this.props;
-    const deviceId = navigation.getParam("deviceId");
-    const firmware = navigation.getParam("firmware");
+    const { deviceId, firmware } = this.props.route.params || {};
 
     this.sub = firmwareUpdateMain(deviceId, firmware).subscribe({
       next: patch => {

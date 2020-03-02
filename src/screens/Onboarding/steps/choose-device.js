@@ -23,12 +23,12 @@ import Circle from "../../../components/Circle";
 import Close from "../../../icons/Close";
 import { hasCompletedOnboardingSelector } from "../../../reducers/settings";
 
-const CloseOnboarding = ({ navigation }: *) => (
+const CloseOnboarding = ({ navigation, route }: *) => (
   <Touchable
     event="OnboardingClose"
     style={styles.close}
     onPress={() => {
-      navigation.navigate(navigation.getParam("goingBackToScreen"));
+      navigation.navigate(route.params?.goingBackToScreen);
     }}
   >
     <Circle size={28} bg={colors.lightFog}>

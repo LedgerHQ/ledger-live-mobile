@@ -11,7 +11,6 @@ import React, { useCallback, useRef, useEffect } from "react";
 import { Trans, withTranslation } from "react-i18next";
 import { Platform, ScrollView, StyleSheet, View } from "react-native";
 import Icon from "react-native-vector-icons/dist/FontAwesome";
-import type { NavigationScreenProp } from "react-navigation";
 import SafeAreaView from "react-native-safe-area-view";
 import { connect } from "react-redux";
 import { compose } from "redux";
@@ -36,24 +35,26 @@ const withoutHiddenError = error =>
 
 const forceInset = { bottom: "always" };
 
-type Props = {
-  account: AccountLike,
-  parentAccount: ?Account,
-  navigation: NavigationScreenProp<{
-    params: {
-      accountId: string,
-      parentId: string,
-      transaction: Transaction,
-      justScanned?: boolean,
-    },
-  }>,
-  t: T,
-};
+interface RouteParams {
+  accountId: string;
+  parentId: string;
+  transaction: Transaction;
+  justScanned?: boolean;
+}
+
+interface Props {
+  account: AccountLike;
+  parentAccount: ?Account;
+  navigation: *;
+  route: { params: RouteParams };
+  t: T;
+}
 
 const SendSelectRecipient = ({
   account,
   parentAccount,
   navigation,
+  route,
   t,
 }: Props) => {
   const {
@@ -66,7 +67,7 @@ const SendSelectRecipient = ({
 
   // handle changes from camera qr code
   const initialTransaction = useRef(transaction);
-  const navigationTransaction = navigation.getParam("transaction");
+  const navigationTransaction = route.params?.transaction;
   useEffect(() => {
     if (
       initialTransaction.current !== navigationTransaction &&
@@ -82,11 +83,11 @@ const SendSelectRecipient = ({
 
   const onPressScan = useCallback(() => {
     navigation.navigate(ScreenName.ScanRecipient, {
-      accountId: navigation.getParam("accountId"),
-      parentId: navigation.getParam("parentId"),
+      accountId: route.params?.accountId,
+      parentId: route.params?.parentId,
       transaction,
     });
-  }, [navigation, transaction]);
+  }, [navigation, transaction, route.params]);
 
   const onChangeText = useCallback(
     recipient => {

@@ -1,6 +1,5 @@
 import React, { useState, useCallback, useEffect, memo } from "react";
 import { NavigationActions } from "react-navigation";
-import type { Action, State } from "@ledgerhq/live-common/lib/apps";
 
 import { useApps } from "./shared";
 import AppsScreen from "./AppsScreen";
@@ -15,18 +14,15 @@ const MANAGER_TABS = {
   CATALOG: "CATALOG",
   INSTALLED_APPS: "INSTALLED_APPS",
 };
-type Props = {
-  screenProps: {
-    state: State,
-    dispatch: Action => void,
-  },
-  navigation: *,
-};
+interface Props {
+  navigation: *;
+  route: *;
+}
 
 /** navigation action listener */
 let navListener;
 
-const Manager = ({ navigation }: Props) => {
+const Manager = ({ navigation, route }: Props) => {
   const { appRes, deviceId, deviceInfo } = navigation.state.params;
   const [unfilteredState, dispatch] = useApps(appRes, deviceId);
 
@@ -139,8 +135,8 @@ const Manager = ({ navigation }: Props) => {
         setAppUninstallWithDependencies={setAppUninstallWithDependencies}
         setStorageWarning={setStorageWarning}
         managerTabs={MANAGER_TABS}
-        deviceId={navigation.getParam("deviceId")}
-        initialDeviceName={navigation.getParam("deviceName")}
+        deviceId={route.params?.deviceId}
+        initialDeviceName={route.params?.deviceName}
         blockNavigation={blockNavigation}
         deviceInfo={deviceInfo}
       />
