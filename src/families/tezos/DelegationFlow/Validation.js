@@ -6,9 +6,7 @@ import React from "react";
 import { View, StyleSheet, ActivityIndicator } from "react-native";
 import { connect } from "react-redux";
 import SafeAreaView from "react-native-safe-area-view";
-import type { NavigationScreenProp } from "react-navigation";
 import { withTranslation } from "react-i18next";
-import i18next from "i18next";
 import type {
   AccountLike,
   Account,
@@ -20,7 +18,6 @@ import { updateAccountWithUpdater } from "../../../actions/accounts";
 import { accountAndParentScreenSelector } from "../../../reducers/accounts";
 import { TrackScreen } from "../../../analytics";
 import colors from "../../../colors";
-import StepHeader from "../../../components/StepHeader";
 import PreventNativeBack from "../../../components/PreventNativeBack";
 import ValidateOnDevice from "../../../components/ValidateOnDevice";
 import SkipLock from "../../../components/behaviour/SkipLock";
@@ -28,27 +25,29 @@ import { useSignWithDevice } from "../../../logic/screenTransactionHooks";
 
 const forceInset = { bottom: "always" };
 
-type Props = {
-  account: AccountLike,
-  parentAccount: ?Account,
-  updateAccountWithUpdater: (string, (Account) => Account) => void,
-  navigation: NavigationScreenProp<{
-    params: {
-      accountId: string,
-      deviceId: string,
-      modelId: DeviceModelId,
-      wired: boolean,
-      transaction: Transaction,
-      status: TransactionStatus,
-    },
-  }>,
-};
+interface RouteParams {
+  accountId: string;
+  deviceId: string;
+  modelId: DeviceModelId;
+  wired: boolean;
+  transaction: Transaction;
+  status: TransactionStatus;
+}
+
+interface Props {
+  account: AccountLike;
+  parentAccount: ?Account;
+  updateAccountWithUpdater: (string, (Account) => Account) => void;
+  navigation: *;
+  route: { params: RouteParams };
+}
 
 const Validation = ({
   account,
   parentAccount,
   navigation,
   updateAccountWithUpdater,
+  route,
 }: Props) => {
   const [signing, signed] = useSignWithDevice({
     context: "Delegation",
@@ -58,10 +57,7 @@ const Validation = ({
     updateAccountWithUpdater,
   });
 
-  const status = navigation.getParam("status");
-  const transaction = navigation.getParam("transaction");
-  const modelId = navigation.getParam("modelId");
-  const wired = navigation.getParam("wired");
+  const { status, transaction, modelId, wired } = route.params || {};
   return (
     <SafeAreaView style={styles.root} forceInset={forceInset}>
       <TrackScreen

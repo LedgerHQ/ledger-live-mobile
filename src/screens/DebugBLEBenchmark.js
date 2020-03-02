@@ -15,13 +15,13 @@ import LText from "../components/LText";
 import TranslatedError from "../components/TranslatedError";
 import colors from "../colors";
 
-type Props = {
-  width: number,
-  height: number,
-  data: number[],
-};
+interface GraphProps {
+  width: number;
+  height: number;
+  data: number[];
+}
 
-class Graph extends PureComponent<Props> {
+class Graph extends PureComponent<GraphProps> {
   render() {
     const { width, height, data } = this.props;
 
@@ -66,15 +66,18 @@ const benchmark = ({ inputAPDUSize, outputAPDUSize }) => {
 
 const speedStatusSize = 10;
 
+interface RouteParams {
+  deviceId: string;
+}
+
+interface Props {
+  navigation: *;
+  route: { params: RouteParams };
+  device: *;
+}
+
 class DebugBLEBenchmark extends Component<
-  {
-    navigation: NavigationScreenProp<{
-      params: {
-        deviceId: string,
-      },
-    }>,
-    device: *,
-  },
+  Props,
   {
     exchangeStats: [number, number][],
     speedStats: number[],
@@ -112,8 +115,7 @@ class DebugBLEBenchmark extends Component<
     if (this.sub) {
       this.sub.unsubscribe();
     }
-    const { navigation } = this.props;
-    const deviceId = navigation.getParam("deviceId");
+    const deviceId = this.route.params?.deviceId;
     this.sub = withDevice(deviceId)(t => {
       const loop = () => {
         const input = benchmark(this.state);

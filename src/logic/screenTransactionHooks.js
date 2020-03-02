@@ -3,6 +3,7 @@
 import { concat, of, from } from "rxjs";
 import { concatMap, filter } from "rxjs/operators";
 import { useState, useCallback, useEffect, useRef } from "react";
+import { useRoute } from "@react-navigation/native";
 import type {
   Account,
   AccountLike,
@@ -14,14 +15,11 @@ import { addPendingOperation } from "@ledgerhq/live-common/lib/account";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import logger from "../logger";
 
-export const useTransactionChangeFromNavigation = ({
-  navigation,
-  setTransaction,
-}: {
-  navigation: *,
+export const useTransactionChangeFromNavigation = (
   setTransaction: Transaction => void,
-}) => {
-  const navigationTransaction = navigation.getParam("transaction");
+) => {
+  const route = useRoute();
+  const navigationTransaction = route.params?.transaction;
   const navigationTxRef = useRef(navigationTransaction);
   useEffect(() => {
     if (navigationTxRef.current !== navigationTransaction) {
@@ -35,6 +33,7 @@ export const useSignWithDevice = ({
   account,
   parentAccount,
   navigation,
+  route,
   updateAccountWithUpdater,
   context,
 }: {
@@ -42,6 +41,7 @@ export const useSignWithDevice = ({
   account: AccountLike,
   parentAccount: ?Account,
   navigation: *,
+  route: *,
   updateAccountWithUpdater: (string, (Account) => Account) => void,
 }) => {
   const [signing, setSigning] = useState(false);
@@ -49,8 +49,7 @@ export const useSignWithDevice = ({
   const subscription = useRef(null);
 
   const signWithDevice = useCallback(() => {
-    const deviceId = navigation.getParam("deviceId");
-    const transaction = navigation.getParam("transaction");
+    const { deviceId, transaction } = route.params || {};
     const bridge = getAccountBridge(account, parentAccount);
     const mainAccount = getMainAccount(account, parentAccount);
 

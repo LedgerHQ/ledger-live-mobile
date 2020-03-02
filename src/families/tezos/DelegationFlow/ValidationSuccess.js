@@ -3,7 +3,6 @@ import React, { Component } from "react";
 import { View, StyleSheet, Linking } from "react-native";
 import { connect } from "react-redux";
 import { withTranslation, Trans } from "react-i18next";
-import type { NavigationScreenProp } from "react-navigation";
 import type {
   TokenAccount,
   Account,
@@ -18,18 +17,19 @@ import ValidateSuccess from "../../../components/ValidateSuccess";
 import Button from "../../../components/Button";
 import { urls } from "../../../config/urls";
 
-type Props = {
-  account: ?(TokenAccount | Account),
-  parentAccount: ?Account,
-  navigation: NavigationScreenProp<{
-    params: {
-      accountId: string,
-      deviceId: string,
-      transaction: Transaction,
-      result: Operation,
-    },
-  }>,
-};
+interface RouteParams {
+  accountId: string;
+  deviceId: string;
+  transaction: Transaction;
+  result: Operation;
+}
+
+interface Props {
+  account: ?(TokenAccount | Account);
+  parentAccount: ?Account;
+  navigation: *;
+  route: { params: RouteParams };
+}
 
 class ValidationSuccess extends Component<Props> {
   dismiss = () => {
@@ -54,7 +54,7 @@ class ValidationSuccess extends Component<Props> {
   };
 
   render() {
-    const transaction = this.props.navigation.getParam("transaction");
+    const transaction = this.props.params?.transaction;
     if (transaction.family !== "tezos") return null;
     return (
       <View style={styles.root}>

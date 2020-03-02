@@ -56,10 +56,7 @@ const SendSummary = ({ account, parentAccount, navigation }: Props) => {
   }));
 
   // handle any edit screen changes like fees changes
-  useTransactionChangeFromNavigation({
-    navigation,
-    setTransaction,
-  });
+  useTransactionChangeFromNavigation(setTransaction);
 
   const [highFeesOpen, setHighFeesOpen] = useState(false);
 

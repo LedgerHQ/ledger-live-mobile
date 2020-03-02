@@ -4,7 +4,6 @@ import { View, StyleSheet, Animated } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { connect } from "react-redux";
 import { withTranslation, Trans } from "react-i18next";
-import type { NavigationScreenProp } from "react-navigation";
 import invariant from "invariant";
 import Icon from "react-native-vector-icons/dist/Feather";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
@@ -40,17 +39,18 @@ import BakerImage from "../BakerImage";
 
 const forceInset = { bottom: "always" };
 
-type Props = {
-  account: AccountLike,
-  parentAccount: ?Account,
-  navigation: NavigationScreenProp<{
-    params: {
-      mode?: "delegate" | "undelegate",
-      accountId: string,
-      parentId?: string,
-    },
-  }>,
-};
+interface RouteParams {
+  mode?: "delegate" | "undelegate";
+  accountId: string;
+  parentId?: string;
+}
+
+interface Props {
+  account: AccountLike;
+  parentAccount: ?Account;
+  navigation: *;
+  route: { params: RouteParams };
+}
 
 const AccountBalanceTag = ({ account }: { account: AccountLike }) => {
   const unit = getAccountUnit(account);
@@ -115,7 +115,12 @@ const BakerSelection = ({
   </View>
 );
 
-const DelegationSummary = ({ account, parentAccount, navigation }: Props) => {
+const DelegationSummary = ({
+  account,
+  parentAccount,
+  navigation,
+  route,
+}: Props) => {
   const bakers = useBakers(whitelist);
   const randomBaker = useRandomBaker(bakers);
 
@@ -140,7 +145,7 @@ const DelegationSummary = ({ account, parentAccount, navigation }: Props) => {
 
     // make sure the mode is in sync (an account changes can reset it)
     const patch: Object = {
-      mode: navigation.getParam("mode") || "delegate",
+      mode: route.params?.mode ?? "delegate",
     };
 
     // make sure that in delegate mode, a transaction recipient is set (random pick)
@@ -218,10 +223,7 @@ const DelegationSummary = ({ account, parentAccount, navigation }: Props) => {
   const accountName = getAccountName(account);
 
   // handle any edit screen changes
-  useTransactionChangeFromNavigation({
-    navigation,
-    setTransaction,
-  });
+  useTransactionChangeFromNavigation(setTransaction);
 
   const onContinue = useCallback(async () => {
     navigation.navigate("DelegationConnectDevice", {

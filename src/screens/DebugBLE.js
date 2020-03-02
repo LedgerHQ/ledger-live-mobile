@@ -14,7 +14,6 @@ import { from, Observable } from "rxjs";
 import { listen } from "@ledgerhq/logs";
 import type { Log } from "@ledgerhq/logs";
 import { bufferTime, shareReplay } from "rxjs/operators";
-import type { NavigationScreenProp } from "react-navigation";
 import { withDevice } from "@ledgerhq/live-common/lib/hw/deviceAccess";
 import { disconnect } from "@ledgerhq/live-common/lib/hw";
 import LText from "../components/LText";
@@ -73,15 +72,18 @@ class LogItem extends PureComponent<{ log: Log }> {
   }
 }
 
+interface RouteParams {
+  deviceId: string;
+}
+
+interface Props {
+  navigation: *;
+  route: { params: RouteParams };
+  device: *;
+}
+
 class DebugBLE extends Component<
-  {
-    navigation: NavigationScreenProp<{
-      params: {
-        deviceId: string,
-      },
-    }>,
-    device: *,
-  },
+  Props,
   {
     logs: Log[],
     apdu: string,
@@ -144,8 +146,7 @@ class DebugBLE extends Component<
 
   send = async () => {
     const { apdu, bleframe, useBLEframe } = this.state;
-    const { navigation } = this.props;
-    const deviceId = navigation.getParam("deviceId");
+    const deviceId = this.props.route.params?.deviceId;
     const msg = Buffer.from(useBLEframe ? bleframe : apdu, "hex");
     try {
       await withDevice(deviceId)(t =>
@@ -158,8 +159,7 @@ class DebugBLE extends Component<
   };
 
   inferMTU = async () => {
-    const { navigation } = this.props;
-    const deviceId = navigation.getParam("deviceId");
+    const deviceId = this.props.route.params?.deviceId;
     try {
       const mtu = await withDevice(deviceId)(t =>
         // $FlowFixMe bro i know
@@ -173,8 +173,7 @@ class DebugBLE extends Component<
 
   currentConnectionPriority = "Balanced";
   toggleConnectionPriority = async () => {
-    const { navigation } = this.props;
-    const deviceId = navigation.getParam("deviceId");
+    const deviceId = this.props.route.params?.deviceId;
     const choices = ["Balanced", "High", "LowPower"];
     const nextPriority =
       choices[
@@ -196,8 +195,7 @@ class DebugBLE extends Component<
   };
 
   connect = async () => {
-    const { navigation } = this.props;
-    const deviceId = navigation.getParam("deviceId");
+    const deviceId = this.props.route.params?.deviceId;
     try {
       await withDevice(deviceId)(() => from([{}])).toPromise();
     } catch (error) {
@@ -206,8 +204,7 @@ class DebugBLE extends Component<
   };
 
   disconnect = async () => {
-    const { navigation } = this.props;
-    const deviceId = navigation.getParam("deviceId");
+    const deviceId = this.props.route.params?.deviceId;
     try {
       await disconnect(deviceId);
     } catch (error) {
@@ -220,8 +217,7 @@ class DebugBLE extends Component<
   };
 
   render() {
-    const { navigation } = this.props;
-    const deviceId = navigation.getParam("deviceId");
+    const deviceId = this.route.params?.deviceId;
     const { logs, useBLEframe } = this.state;
     return (
       <KeyboardView style={{ flex: 1 }}>
