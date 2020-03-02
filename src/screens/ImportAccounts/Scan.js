@@ -11,11 +11,8 @@ import {
 } from "qrloop";
 import { decode } from "@ledgerhq/live-common/lib/cross";
 import { withTranslation } from "react-i18next";
-import i18next from "i18next";
 
-import colors from "../../colors";
 import { TrackScreen } from "../../analytics";
-import HeaderRightClose from "../../components/HeaderRightClose";
 import StyledStatusBar from "../../components/StyledStatusBar";
 import FallBackCamera from "./FallBackCamera";
 import CameraScreen from "../../components/CameraScreen";
@@ -35,18 +32,6 @@ class Scan extends PureComponent<
     height: number,
   },
 > {
-  static navigationOptions = ({
-    navigation,
-  }: {
-    navigation: NavigationScreenProp<*>,
-  }) => ({
-    title: i18next.t("account.import.scan.title"),
-    headerRight: (
-      <HeaderRightClose navigation={navigation} color={colors.white} />
-    ),
-    headerLeft: null,
-  });
-
   state = {
     progress: 0,
     error: null,
@@ -55,7 +40,7 @@ class Scan extends PureComponent<
 
   componentDidMount() {
     const { route } = this.props;
-    const { data } = route.params || {};
+    const data = this.props.route.params?.data;
     if (data) {
       const frames = data.reduce(parseFramesReducer, null);
       if (areFramesComplete(frames)) {

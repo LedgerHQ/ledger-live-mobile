@@ -14,7 +14,6 @@ import {
 import SafeAreaView from "react-native-safe-area-view";
 import { withNavigation } from "@react-navigation/compat";
 import type { NavigationScreenProp } from "react-navigation";
-import i18next from "i18next";
 import { getAssetsDistribution } from "@ledgerhq/live-common/lib/portfolio";
 import { createStructuredSelector, createSelector } from "reselect";
 import type { AssetsDistribution } from "@ledgerhq/live-common/lib/types/portfolio";
@@ -57,11 +56,6 @@ class Distribution extends PureComponent<Props, *> {
     highlight: -1,
   };
   flatListRef = React.createRef();
-
-  static navigationOptions = {
-    title: i18next.t("distribution.header"),
-    headerLeft: null,
-  };
 
   renderItem = ({ item, index }: { item: DistributionItem, index: number }) => (
     <TouchableOpacity

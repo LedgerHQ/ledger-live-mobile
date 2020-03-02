@@ -5,7 +5,6 @@ import { View, StyleSheet, ScrollView } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { connect } from "react-redux";
 import { withTranslation, Trans } from "react-i18next";
-import i18next from "i18next";
 import type { NavigationScreenProp } from "react-navigation";
 import type {
   Account,
@@ -27,7 +26,6 @@ import SummaryFromSection from "./SummaryFromSection";
 import SummaryToSection from "./SummaryToSection";
 import SummaryAmountSection from "./SummaryAmountSection";
 import SummaryTotalSection from "./SummaryTotalSection";
-import StepHeader from "../../components/StepHeader";
 import SectionSeparator from "../../components/SectionSeparator";
 import AlertTriangle from "../../icons/AlertTriangle";
 import ConfirmationModal from "../../components/ConfirmationModal";
@@ -180,18 +178,6 @@ const SendSummary = ({ account, parentAccount, navigation }: Props) => {
       />
     </SafeAreaView>
   );
-};
-
-SendSummary.navigationOptions = {
-  headerTitle: (
-    <StepHeader
-      title={i18next.t("send.stepperHeader.summary")}
-      subtitle={i18next.t("send.stepperHeader.stepRange", {
-        currentStep: "4",
-        totalSteps: "6",
-      })}
-    />
-  ),
 };
 
 const styles = StyleSheet.create({

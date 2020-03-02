@@ -2,12 +2,9 @@
 import React, { useCallback } from "react";
 import { StyleSheet, ScrollView, View, Linking } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
-import { withTranslation, Trans } from "react-i18next";
-import i18next from "i18next";
-import type { NavigationScreenProp } from "react-navigation";
+import { Trans } from "react-i18next";
 import colors from "../../../colors";
 import { TrackScreen } from "../../../analytics";
-import StepHeader from "../../../components/StepHeader";
 import Button from "../../../components/Button";
 import LText from "../../../components/LText";
 import ExternalLink from "../../../components/ExternalLink";
@@ -17,15 +14,12 @@ import { urls } from "../../../config/urls";
 
 const forceInset = { bottom: "always" };
 
-type Props = {
-  navigation: NavigationScreenProp<{
-    params: {},
-  }>,
-};
+interface Props {
+  navigation: *;
+}
 
-const DelegationStarted = ({ navigation }: Props) => {
+export default function DelegationStarted({ navigation }: Props) {
   const onNext = useCallback(() => {
-    // $FlowFixMe
     navigation.navigate("DelegationSummary", {
       ...navigation.state.params,
     });
@@ -82,11 +76,7 @@ const DelegationStarted = ({ navigation }: Props) => {
       </View>
     </SafeAreaView>
   );
-};
-
-DelegationStarted.navigationOptions = {
-  headerTitle: <StepHeader title={i18next.t("delegation.started.title")} />,
-};
+}
 
 const styles = StyleSheet.create({
   root: {
@@ -135,5 +125,3 @@ const styles = StyleSheet.create({
     padding: 16,
   },
 });
-
-export default withTranslation()(DelegationStarted);

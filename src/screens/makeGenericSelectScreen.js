@@ -19,7 +19,6 @@ type Opts<Item> = {
   keyExtractor: Item => string,
   formatItem?: Item => string,
   Entry?: EntryComponent<Item>,
-  navigationOptions?: Object,
   // TODO in future: searchable: boolean
 };
 
@@ -54,12 +53,7 @@ const styles = StyleSheet.create({
 });
 
 export default <Item>(opts: Opts<Item>) => {
-  const {
-    id,
-    itemEventProperties,
-    keyExtractor,
-    navigationOptions = {},
-  } = opts;
+  const { id, itemEventProperties, keyExtractor } = opts;
   const Entry: EntryComponent<Item> = getEntryFromOptions(opts);
 
   return class GenericSelectScreen extends Component<{
@@ -68,8 +62,6 @@ export default <Item>(opts: Opts<Item>) => {
     onValueChange: (Item, *) => void,
     navigation: NavigationScreenProp<*>,
   }> {
-    static navigationOptions = navigationOptions;
-
     onPress = (item: Item) => {
       const { navigation, onValueChange } = this.props;
       onValueChange(item, this.props);

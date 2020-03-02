@@ -13,7 +13,6 @@ import SafeAreaView from "react-native-safe-area-view";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { withTranslation, Trans } from "react-i18next";
-import i18next from "i18next";
 import type { NavigationScreenProp } from "react-navigation";
 import type {
   AccountLike,
@@ -29,7 +28,6 @@ import { TrackScreen } from "../../analytics";
 import LText from "../../components/LText";
 import CurrencyUnitValue from "../../components/CurrencyUnitValue";
 import Button from "../../components/Button";
-import StepHeader from "../../components/StepHeader";
 import KeyboardView from "../../components/KeyboardView";
 import RetryButton from "../../components/RetryButton";
 import CancelButton from "../../components/CancelButton";
@@ -201,18 +199,6 @@ const SendAmount = ({ account, parentAccount, navigation }: Props) => {
       />
     </>
   );
-};
-
-SendAmount.navigationOptions = {
-  headerTitle: (
-    <StepHeader
-      title={i18next.t("send.stepperHeader.selectAmount")}
-      subtitle={i18next.t("send.stepperHeader.stepRange", {
-        currentStep: "3",
-        totalSteps: "6",
-      })}
-    />
-  ),
 };
 
 const styles = StyleSheet.create({

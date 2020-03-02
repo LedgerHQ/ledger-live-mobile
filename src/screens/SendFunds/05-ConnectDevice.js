@@ -5,7 +5,6 @@ import SafeAreaView from "react-native-safe-area-view";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { withTranslation } from "react-i18next";
-import i18next from "i18next";
 import type { NavigationScreenProp } from "react-navigation";
 import type {
   Account,
@@ -17,7 +16,6 @@ import { getMainAccount } from "@ledgerhq/live-common/lib/account/helpers";
 import { accountAndParentScreenSelector } from "../../reducers/accounts";
 import colors from "../../colors";
 import { TrackScreen } from "../../analytics";
-import StepHeader from "../../components/StepHeader";
 import SelectDevice from "../../components/SelectDevice";
 import { connectingStep, accountApp } from "../../components/DeviceJob/steps";
 
@@ -36,18 +34,6 @@ type Props = {
 };
 
 class ConnectDevice extends Component<Props> {
-  static navigationOptions = {
-    headerTitle: (
-      <StepHeader
-        title={i18next.t("send.stepperHeader.connectDevice")}
-        subtitle={i18next.t("send.stepperHeader.stepRange", {
-          currentStep: "5",
-          totalSteps: "6",
-        })}
-      />
-    ),
-  };
-
   onSelectDevice = (meta: *) => {
     const { navigation } = this.props;
     // $FlowFixMe

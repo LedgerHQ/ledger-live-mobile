@@ -29,6 +29,7 @@ import ExperimentalSettings from "../../screens/Settings/Experimental";
 import RateProviderSettings from "../../screens/Settings/CryptoAssets/Rates/RateProviderSettings";
 import RepairDevice from "../../screens/RepairDevice";
 import { stackNavigatorConfig } from "../../navigation/navigatorConfig";
+import Button from "../Button";
 
 export default function SettingsNavigator() {
   const { t } = useTranslation();
@@ -91,6 +92,7 @@ export default function SettingsNavigator() {
         component={RateProviderSettings}
         options={{
           title: t("settings.cryptoAssets.rateProviderHeader"),
+          headerRight: null,
         }}
       />
       <Stack.Screen
@@ -133,6 +135,19 @@ export default function SettingsNavigator() {
         component={DebugExport}
         options={{
           title: "Export Accounts",
+          headerRight: ({ route, navigation }) => (
+            <Button
+              event="DebugBLEBenchmark"
+              type="lightSecondary"
+              containerStyle={{ width: 100 }}
+              onPress={() =>
+                navigation.navigate(ScreenName.DebugBLEBenchmark, {
+                  deviceId: route.params?.deviceId,
+                })
+              }
+              title="Benchmark"
+            />
+          ),
         }}
       />
       <Stack.Screen

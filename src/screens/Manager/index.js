@@ -5,7 +5,6 @@ import { withNavigationFocus } from "react-navigation";
 import type { NavigationScreenProp } from "react-navigation";
 import { connect } from "react-redux";
 import { Trans, withTranslation } from "react-i18next";
-import i18next from "i18next";
 import { compose } from "redux";
 import manager from "@ledgerhq/live-common/lib/manager";
 import { disconnect } from "@ledgerhq/live-common/lib/hw";
@@ -78,22 +77,6 @@ class ChooseDevice extends Component<
     showMenu: boolean,
   },
 > {
-  static navigationOptions = ({ navigation }) => {
-    const { params } = navigation.state;
-    let key = "manager.title";
-
-    if (params) {
-      if (params.title) {
-        key = params.title;
-      }
-    }
-    const title = i18next.t(key);
-    return {
-      title,
-      headerRight: null,
-    };
-  };
-
   state = {
     showMenu: false,
   };

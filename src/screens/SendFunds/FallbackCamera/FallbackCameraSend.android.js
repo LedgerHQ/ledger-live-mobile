@@ -3,7 +3,6 @@ import React, { PureComponent } from "react";
 import { withTranslation } from "react-i18next";
 import { AppState, Linking } from "react-native";
 import type { NavigationScreenProp } from "react-navigation";
-import i18next from "i18next";
 import type { T } from "../../../types/common";
 import FallbackCameraBody from "../../../components/FallbackCameraBody";
 
@@ -19,11 +18,6 @@ class FallBackCameraScreen extends PureComponent<Props, State> {
   state = {
     appState: AppState.currentState,
     openSettingsPressed: false,
-  };
-
-  static navigationOptions = {
-    title: i18next.t("send.scan.fallback.header"),
-    headerLeft: null,
   };
 
   componentDidMount() {

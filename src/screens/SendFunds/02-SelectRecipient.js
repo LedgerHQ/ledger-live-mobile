@@ -7,7 +7,6 @@ import type {
   AccountLike,
   Transaction,
 } from "@ledgerhq/live-common/lib/types";
-import i18next from "i18next";
 import React, { useCallback, useRef, useEffect } from "react";
 import { Trans, withTranslation } from "react-i18next";
 import { Platform, ScrollView, StyleSheet, View } from "react-native";
@@ -26,7 +25,6 @@ import type { T } from "../../types/common";
 import Button from "../../components/Button";
 import KeyboardView from "../../components/KeyboardView";
 import LText, { getFontStyle } from "../../components/LText";
-import StepHeader from "../../components/StepHeader";
 import TextInput from "../../components/TextInput";
 import TranslatedError from "../../components/TranslatedError";
 import RetryButton from "../../components/RetryButton";
@@ -215,18 +213,6 @@ const SendSelectRecipient = ({
       />
     </>
   );
-};
-
-SendSelectRecipient.navigationOptions = {
-  headerTitle: (
-    <StepHeader
-      title={i18next.t("send.stepperHeader.recipientAddress")}
-      subtitle={i18next.t("send.stepperHeader.stepRange", {
-        currentStep: "2",
-        totalSteps: "6",
-      })}
-    />
-  ),
 };
 
 const IconQRCode = ({ size, color }: { size: number, color: string }) => (

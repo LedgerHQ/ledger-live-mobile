@@ -1,13 +1,14 @@
 // @flow
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
+import { useTranslation } from "react-i18next";
 import { ScreenName } from "../../const";
-import { i18n } from "../../context/Locale";
 import PasswordAdd from "../../screens/Settings/General/PasswordAdd";
 import ConfirmPassword from "../../screens/Settings/General/ConfirmPassword";
 import { closableStackNavigatorConfig } from "../../navigation/navigatorConfig";
 
 export default function PasswordAddFlowNavigator() {
+  const { t } = useTranslation();
   return (
     <Stack.Navigator
       screenOptions={{ ...closableStackNavigatorConfig, headerShown: false }}
@@ -15,13 +16,13 @@ export default function PasswordAddFlowNavigator() {
       <Stack.Screen
         name={ScreenName.PasswordAdd}
         component={PasswordAdd}
-        options={{ title: i18n.t("auth.addPassword.title") }}
+        options={{ title: t("auth.addPassword.title") }}
       />
       <Stack.Screen
         name={ScreenName.ConfirmPassword}
         component={ConfirmPassword}
         options={{
-          title: i18n.t("auth.confirmPassword.title"),
+          title: t("auth.confirmPassword.title"),
         }}
       />
     </Stack.Navigator>

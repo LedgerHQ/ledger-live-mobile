@@ -27,10 +27,6 @@ type Props = {
 type State = {};
 
 class FirmwareUpdateFailure extends Component<Props, State> {
-  static navigationOptions = {
-    header: null,
-  };
-
   onRetry = () => {
     const { navigation } = this.props;
     if (navigation.replace) {

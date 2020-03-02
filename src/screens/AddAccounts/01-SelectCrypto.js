@@ -4,7 +4,6 @@ import React, { useMemo } from "react";
 import { withTranslation, Trans } from "react-i18next";
 import { StyleSheet, View, FlatList } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
-import i18next from "i18next";
 import { compose } from "redux";
 import type { NavigationScreenProp } from "react-navigation";
 import type {
@@ -20,7 +19,6 @@ import { ScreenName } from "../../const";
 import { listCryptoCurrencies } from "../../cryptocurrencies";
 import { TrackScreen } from "../../analytics";
 import FilteredSearchBar from "../../components/FilteredSearchBar";
-import StepHeader from "../../components/StepHeader";
 import KeyboardView from "../../components/KeyboardView";
 import CurrencyRow from "../../components/CurrencyRow";
 import LText from "../../components/LText";
@@ -103,18 +101,6 @@ const AddAccountsSelectCrypto = ({ devMode, navigation }: Props) => {
       </KeyboardView>
     </SafeAreaView>
   );
-};
-
-AddAccountsSelectCrypto.navigationOptions = {
-  headerTitle: (
-    <StepHeader
-      title={i18next.t("common.cryptoAsset")}
-      subtitle={i18next.t("send.stepperHeader.stepRange", {
-        currentStep: "1",
-        totalSteps: "3",
-      })}
-    />
-  ),
 };
 
 const styles = StyleSheet.create({

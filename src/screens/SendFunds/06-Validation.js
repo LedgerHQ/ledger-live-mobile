@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 import SafeAreaView from "react-native-safe-area-view";
 import type { NavigationScreenProp } from "react-navigation";
 import { withTranslation } from "react-i18next";
-import i18next from "i18next";
 import type {
   AccountLike,
   Account,
@@ -17,7 +16,6 @@ import { updateAccountWithUpdater } from "../../actions/accounts";
 import { accountAndParentScreenSelector } from "../../reducers/accounts";
 import { TrackScreen } from "../../analytics";
 import colors from "../../colors";
-import StepHeader from "../../components/StepHeader";
 import PreventNativeBack from "../../components/PreventNativeBack";
 import ValidateOnDevice from "../../components/ValidateOnDevice";
 import SkipLock from "../../components/behaviour/SkipLock";
@@ -85,21 +83,6 @@ const Validation = ({
       )}
     </SafeAreaView>
   );
-};
-
-Validation.navigationOptions = {
-  headerTitle: (
-    <StepHeader
-      title={i18next.t("send.stepperHeader.verification")}
-      subtitle={i18next.t("send.stepperHeader.stepRange", {
-        currentStep: "6",
-        totalSteps: "6",
-      })}
-    />
-  ),
-  headerLeft: null,
-  headerRight: null,
-  gesturesEnabled: false,
 };
 
 const styles = StyleSheet.create({

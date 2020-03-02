@@ -5,7 +5,6 @@ import { concat, from } from "rxjs";
 import { ignoreElements } from "rxjs/operators";
 import { compose } from "redux";
 import { connect } from "react-redux";
-import i18next from "i18next";
 import {
   isAccountEmpty,
   groupAddAccounts,
@@ -27,7 +26,6 @@ import colors from "../../colors";
 import { TrackScreen } from "../../analytics";
 import Button from "../../components/Button";
 import PreventNativeBack from "../../components/PreventNativeBack";
-import StepHeader from "../../components/StepHeader";
 import SelectableAccountsList from "../../components/SelectableAccountsList";
 import LiveLogo from "../../icons/LiveLogoIcon";
 import IconPause from "../../icons/Pause";
@@ -82,19 +80,6 @@ const mapDispatchToProps = {
 };
 
 class AddAccountsAccounts extends PureComponent<Props, State> {
-  static navigationOptions = {
-    headerTitle: (
-      <StepHeader
-        title={i18next.t("tabs.accounts")}
-        subtitle={i18next.t("send.stepperHeader.stepRange", {
-          currentStep: "3",
-          totalSteps: "3",
-        })}
-      />
-    ),
-    gesturesEnabled: false,
-  };
-
   state = {
     // we assume status is scanning at beginning because we start sync at mount
     scanning: true,

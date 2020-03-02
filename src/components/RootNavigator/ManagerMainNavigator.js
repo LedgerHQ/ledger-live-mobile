@@ -20,7 +20,7 @@ export default function ManagerMainNavigator() {
       <Tab.Screen
         name={ScreenName.ManagerAppsList}
         component={ManagerAppsList}
-        options={{ headerTitle: t("manager.appList.title") }}
+        options={{ title: t("manager.appList.title") }}
       />
       <Tab.Screen name={ScreenName.ManagerDevice} component={ManagerDevice} />
     </Tab.Navigator>

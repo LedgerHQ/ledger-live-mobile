@@ -6,7 +6,6 @@ import { connect } from "react-redux";
 import Config from "react-native-config";
 import type { NavigationScreenProp } from "react-navigation";
 import { withTranslation } from "react-i18next";
-import i18next from "i18next";
 import { decodeURIScheme } from "@ledgerhq/live-common/lib/currencies";
 import type {
   Account,
@@ -16,10 +15,8 @@ import type {
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { ScreenName } from "../../const";
 import { accountAndParentScreenSelector } from "../../reducers/accounts";
-import HeaderRightClose from "../../components/HeaderRightClose";
 import StyledStatusBar from "../../components/StyledStatusBar";
 import CameraScreen from "../../components/CameraScreen";
-import colors from "../../colors";
 import FallBackCamera from "./FallbackCamera/Fallback";
 import getWindowDimensions from "../../logic/getWindowDimensions";
 
@@ -40,22 +37,6 @@ type State = {
 };
 
 class ScanRecipient extends PureComponent<Props, State> {
-  static navigationOptions = ({
-    navigation,
-  }: {
-    navigation: NavigationScreenProp<*>,
-  }) => ({
-    title: i18next.t("send.scan.title"),
-    headerRight: (
-      <HeaderRightClose
-        navigation={navigation}
-        color={colors.white}
-        preferDismiss={false}
-      />
-    ),
-    headerLeft: null,
-  });
-
   state = {
     ...getWindowDimensions(),
   };

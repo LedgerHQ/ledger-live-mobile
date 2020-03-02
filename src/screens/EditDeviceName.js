@@ -5,7 +5,6 @@ import { Keyboard, View, StyleSheet } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import type { NavigationScreenProp } from "react-navigation";
 import { withTranslation, Trans } from "react-i18next";
-import i18next from "i18next";
 import Icon from "react-native-vector-icons/dist/Feather";
 import { compose } from "redux";
 import { connect } from "react-redux";
@@ -58,11 +57,6 @@ class EditDeviceName extends PureComponent<
     connecting: ?DeviceMeta,
   },
 > {
-  static navigationOptions = {
-    title: i18next.t("EditDeviceName.title"),
-    headerLeft: null,
-  };
-
   initialName = this.props.navigation.getParam("deviceName");
 
   state = {

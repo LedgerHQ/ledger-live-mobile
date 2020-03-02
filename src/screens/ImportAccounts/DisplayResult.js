@@ -13,7 +13,6 @@ import type { Result } from "@ledgerhq/live-common/lib/cross";
 import type { ImportItem } from "@ledgerhq/live-common/lib/account";
 import { importAccountsMakeItems } from "@ledgerhq/live-common/lib/account";
 import { withTranslation, Trans } from "react-i18next";
-import i18next from "i18next";
 
 import { importDesktopSettings } from "../../actions/settings";
 import { importAccounts } from "../../actions/accounts";
@@ -52,7 +51,7 @@ type State = {
   importSettings: boolean,
 };
 
-const BackButton = ({ navigation }: { navigation: Nav }) => (
+export const BackButton = ({ navigation }: { navigation: Nav }) => (
   <HeaderBackButton
     tintColor={colors.grey}
     onPress={() => {
@@ -77,11 +76,6 @@ class DisplayResult extends Component<Props, State> {
     this.unmounted = true;
   }
 
-  static navigationOptions = ({ navigation }) => ({
-    title: i18next.t("account.import.result.title"),
-    headerLeft: <BackButton navigation={navigation} />,
-  });
-
   onRetry = () => {
     const { navigation } = this.props;
     if (navigation.replace) navigation.replace("ScanAccounts");
@@ -89,7 +83,7 @@ class DisplayResult extends Component<Props, State> {
 
   static getDerivedStateFromProps(nextProps: Props, prevState: State) {
     const items = importAccountsMakeItems({
-      result: nextProps.navigation.getParam("result"),
+      result: nextProps.route.params?.result,
       accounts: nextProps.accounts,
       items: prevState.items,
     });
@@ -116,11 +110,11 @@ class DisplayResult extends Component<Props, State> {
   onImport = async () => {
     const { importAccounts, importDesktopSettings, navigation } = this.props;
     const { selectedAccounts, items, importSettings } = this.state;
-    const onFinish = navigation.getParam("onFinish");
+    const onFinish = this.route.params?.onFinish;
     this.setState({ importing: true });
     importAccounts({ items, selectedAccounts });
     if (importSettings) {
-      importDesktopSettings(navigation.getParam("result").settings);
+      importDesktopSettings(this.route.params?.result.settings);
     }
 
     if (onFinish) onFinish(navigation);

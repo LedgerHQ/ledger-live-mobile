@@ -4,7 +4,6 @@ import { View, StyleSheet, ScrollView } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import type { NavigationScreenProp } from "react-navigation";
 import { withTranslation, Trans } from "react-i18next";
-import i18next from "i18next";
 
 import manager from "@ledgerhq/live-common/lib/manager";
 import type { FirmwareUpdateContext } from "@ledgerhq/live-common/lib/types/manager";
@@ -31,10 +30,6 @@ type Props = {
 type State = {};
 
 class FirmwareUpdateReleaseNotes extends Component<Props, State> {
-  static navigationOptions = {
-    headerTitle: i18next.t("FirmwareUpdate.title"),
-  };
-
   onNext = () => {
     const { navigation } = this.props;
     navigation.navigate(ScreenName.FirmwareUpdateCheckId, {

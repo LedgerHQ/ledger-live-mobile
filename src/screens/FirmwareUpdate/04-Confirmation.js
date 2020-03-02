@@ -26,10 +26,6 @@ type Props = {
 type State = {};
 
 class FirmwareUpdateConfirmation extends Component<Props, State> {
-  static navigationOptions = {
-    header: null,
-  };
-
   onClose = () => {
     this.props.navigation.navigate(ScreenName.Manager);
   };

@@ -2,7 +2,6 @@
 import React, { PureComponent } from "react";
 import { View, StyleSheet, ScrollView } from "react-native";
 import { withTranslation } from "react-i18next";
-import i18next from "i18next";
 import type { Account } from "@ledgerhq/live-common/lib/types";
 import type { NavigationScreenProp } from "react-navigation";
 import { connect } from "react-redux";
@@ -39,10 +38,6 @@ const mapDispatchToProps = {
   deleteAccount,
 };
 class AccountSettings extends PureComponent<Props, State> {
-  static navigationOptions = {
-    title: i18next.t("account.settings.header"),
-  };
-
   state = {
     isModalOpened: false,
   };

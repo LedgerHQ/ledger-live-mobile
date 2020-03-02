@@ -1,6 +1,5 @@
 // @flow
 import React, { useCallback, useEffect, useMemo } from "react";
-import i18next from "i18next";
 import { View, ScrollView, StyleSheet } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { connect } from "react-redux";
@@ -16,7 +15,6 @@ import { accountAndParentScreenSelector } from "../../reducers/accounts";
 import colors from "../../colors";
 import { ScreenName } from "../../const";
 import { TrackScreen } from "../../analytics";
-import StepHeader from "../../components/StepHeader";
 import SelectDevice from "../../components/SelectDevice";
 import Button from "../../components/Button";
 import {
@@ -142,23 +140,6 @@ const ConnectDevice = ({
       </View>
     </SafeAreaView>
   );
-};
-
-ConnectDevice.navigationOptions = ({ navigation }) => {
-  const { params } = navigation.state;
-  const key = (params && params.title) || "transfer.receive.titleDevice";
-
-  return {
-    headerTitle: (
-      <StepHeader
-        title={i18next.t(key)}
-        subtitle={i18next.t("send.stepperHeader.stepRange", {
-          currentStep: "2",
-          totalSteps: "3",
-        })}
-      />
-    ),
-  };
 };
 
 const styles = StyleSheet.create({

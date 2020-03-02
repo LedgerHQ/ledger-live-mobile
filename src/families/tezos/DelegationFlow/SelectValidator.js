@@ -324,14 +324,6 @@ const SelectValidator = ({ account, parentAccount, navigation }: Props) => {
   );
 };
 
-SelectValidator.navigationOptions = {
-  headerRight: null,
-  gesturesEnabled: false,
-  headerTitle: (
-    <StepHeader title={i18next.t("delegation.selectValidatorTitle")} />
-  ),
-};
-
 const styles = StyleSheet.create({
   root: {
     flex: 1,

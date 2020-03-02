@@ -29,11 +29,6 @@ const mapDispatchToProps = {
   updateAccount,
 };
 class AdvancedLogs extends PureComponent<Props> {
-  static navigationOptions = {
-    title: i18next.t("account.settings.advanced.title"),
-    headerRight: null,
-  };
-
   render() {
     const { account } = this.props;
     const usefulData = {

@@ -1,7 +1,6 @@
 // @flow
 
 import React, { useCallback } from "react";
-import { Trans } from "react-i18next";
 import { ScrollView, StyleSheet } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import type { NavigationScreenProp } from "react-navigation";
@@ -12,7 +11,6 @@ import colors from "../../colors";
 import { ScreenName } from "../../const";
 import { connectingStep, currencyApp } from "../../components/DeviceJob/steps";
 import SelectDevice from "../../components/SelectDevice";
-import StepHeader from "../../components/StepHeader";
 
 const forceInset = { bottom: "always" };
 
@@ -48,23 +46,6 @@ const ConnectDevice = ({ navigation }: Props) => {
     </SafeAreaView>
   );
 };
-
-ConnectDevice.navigationOptions = () => ({
-  headerTitle: (
-    <StepHeader
-      title={<Trans i18nKey="migrateAccounts.connectDevice.headerTitle" />}
-      subtitle={
-        <Trans
-          i18nKey="send.stepperHeader.stepRange"
-          values={{
-            currentStep: "2",
-            totalSteps: "3",
-          }}
-        />
-      }
-    />
-  ),
-});
 
 const styles = StyleSheet.create({
   root: {

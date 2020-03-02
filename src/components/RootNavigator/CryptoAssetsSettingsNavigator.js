@@ -20,12 +20,12 @@ export default function CryptoAssetsSettingsNavigator() {
       <Tab.Screen
         name={ScreenName.RatesList}
         component={RatesList}
-        options={{ headerTitle: t("settings.rates.header") }}
+        options={{ title: t("settings.rates.header") }}
       />
       <Tab.Screen
         name={ScreenName.CurrenciesList}
         component={CurrenciesList}
-        options={{ headerTitle: t("settings.currencies.header") }}
+        options={{ title: t("settings.currencies.header") }}
       />
     </Tab.Navigator>
   );

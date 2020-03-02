@@ -11,7 +11,6 @@ import logger from "../../logger";
 import { TrackScreen } from "../../analytics";
 import colors from "../../colors";
 import DeviceNanoAction from "../../components/DeviceNanoAction";
-import StepHeader from "../../components/StepHeader";
 import { BulletItem } from "../../components/BulletList";
 import getWindowDimensions from "../../logic/getWindowDimensions";
 import Installing from "../../components/Installing";
@@ -35,16 +34,6 @@ type State = {
 };
 
 class FirmwareUpdateMCU extends Component<Props, State> {
-  static navigationOptions = {
-    headerLeft: null,
-    headerTitle: (
-      <StepHeader
-        subtitle={<Trans i18nKey="FirmwareUpdate.title" />}
-        title={<Trans i18nKey="FirmwareUpdateMCU.title" />}
-      />
-    ),
-  };
-
   state = {
     installing: null,
     progress: 0,

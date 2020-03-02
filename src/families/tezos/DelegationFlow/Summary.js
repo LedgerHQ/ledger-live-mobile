@@ -7,7 +7,6 @@ import { withTranslation, Trans } from "react-i18next";
 import type { NavigationScreenProp } from "react-navigation";
 import invariant from "invariant";
 import Icon from "react-native-vector-icons/dist/Feather";
-import i18next from "i18next";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import {
   getAccountCurrency,
@@ -33,7 +32,6 @@ import Button from "../../../components/Button";
 import LText from "../../../components/LText";
 import Circle from "../../../components/Circle";
 import CurrencyIcon from "../../../components/CurrencyIcon";
-import StepHeader from "../../../components/StepHeader";
 import CurrencyUnitValue from "../../../components/CurrencyUnitValue";
 import Touchable from "../../../components/Touchable";
 import VerifyAddressDisclaimer from "../../../components/VerifyAddressDisclaimer";
@@ -358,20 +356,6 @@ const DelegationSummary = ({ account, parentAccount, navigation }: Props) => {
       </View>
     </SafeAreaView>
   );
-};
-
-DelegationSummary.navigationOptions = {
-  headerLeft: null,
-  gesturesEnabled: false,
-  headerTitle: (
-    <StepHeader
-      title={i18next.t("delegation.summaryTitle")}
-      subtitle={i18next.t("send.stepperHeader.stepRange", {
-        currentStep: "1",
-        totalSteps: "3",
-      })}
-    />
-  ),
 };
 
 const styles = StyleSheet.create({

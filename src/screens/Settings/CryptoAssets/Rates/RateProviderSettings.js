@@ -2,7 +2,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { View, StyleSheet } from "react-native";
-import i18next from "i18next";
 import { Trans } from "react-i18next";
 import { findCurrencyByTicker } from "@ledgerhq/live-common/lib/currencies";
 
@@ -71,8 +70,6 @@ const injectItems = C => {
       return <C {...this.props} from={from} to={to} items={items} />;
     }
   }
-  // $FlowFixMe
-  Clz.navigationOptions = C.navigationOptions;
 
   return Clz;
 };
@@ -91,9 +88,6 @@ const Screen = makeGenericSelectScreen({
   itemEventProperties: item => ({ exchange: item.id }),
   keyExtractor: item => item.id,
   formatItem: item => item.name,
-  navigationOptions: {
-    headerRight: null,
-  },
 });
 
 export default injectItems(

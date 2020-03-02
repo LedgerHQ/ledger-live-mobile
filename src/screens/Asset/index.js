@@ -16,6 +16,7 @@ import type {
 import React, { PureComponent } from "react";
 import { withTranslation } from "react-i18next";
 import { StyleSheet, View, SectionList } from "react-native";
+import { useRoute } from "@react-navigation/native";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import type { SectionBase } from "react-native/Libraries/Lists/SectionList";
@@ -62,25 +63,21 @@ type Props = {
   navigation: NavigationScreenProp<*>,
 };
 
-class Asset extends PureComponent<Props, *> {
-  static navigationOptions = ({ navigation }) => ({
-    headerTitle: (
-      <View
-        style={{
-          flexDirection: "row",
-        }}
-      >
-        <View style={{ marginRight: 5, justifyContent: "center" }}>
-          <CurrencyIcon size={16} currency={navigation.state.params.currency} />
-        </View>
-        <LText semiBold secondary style={{ fontSize: 16 }}>
-          {navigation.state.params.currency.name}
-        </LText>
+export function HeaderTitle() {
+  const route = useRoute();
+  return (
+    <View style={{ flexDirection: "row" }}>
+      <View style={{ marginRight: 5, justifyContent: "center" }}>
+        <CurrencyIcon size={16} currency={route.params?.currency} />
       </View>
-    ),
-    headerRight: null,
-  });
+      <LText semiBold secondary style={{ fontSize: 16 }}>
+        {route.params?.currency.name}
+      </LText>
+    </View>
+  );
+}
 
+class Asset extends PureComponent<Props, *> {
   state = {
     opCount: 50,
   };

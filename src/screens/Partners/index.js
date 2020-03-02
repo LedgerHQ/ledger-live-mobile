@@ -21,10 +21,6 @@ type Props = {
 };
 
 class ExchangeScreen extends Component<Props> {
-  static navigationOptions = {
-    header: null,
-  };
-
   render() {
     const { t } = this.props;
 

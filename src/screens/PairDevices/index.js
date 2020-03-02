@@ -3,7 +3,6 @@
 import React, { Component } from "react";
 import { StyleSheet } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
-import i18next from "i18next";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { withTranslation } from "react-i18next";
@@ -55,10 +54,6 @@ type State = {
 };
 
 class PairDevices extends Component<Props, State> {
-  static navigationOptions = {
-    title: i18next.t("SelectDevice.title"),
-  };
-
   state = {
     status: "scanning",
     device: null,
@@ -218,11 +213,6 @@ class PairDevices extends Component<Props, State> {
 const forceInset = { bottom: "always" };
 
 class Screen extends Component<Props, State> {
-  static navigationOptions = {
-    title: i18next.t("SelectDevice.title"),
-    headerLeft: null,
-  };
-
   render() {
     return (
       <RequiresBLE>

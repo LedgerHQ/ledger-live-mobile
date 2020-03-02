@@ -94,21 +94,6 @@ const Validation = ({
   );
 };
 
-Validation.navigationOptions = {
-  headerTitle: (
-    <StepHeader
-      title={i18next.t("send.stepperHeader.verification")}
-      subtitle={i18next.t("send.stepperHeader.stepRange", {
-        currentStep: "3",
-        totalSteps: "3",
-      })}
-    />
-  ),
-  headerLeft: null,
-  headerRight: null,
-  gesturesEnabled: false,
-};
-
 const styles = StyleSheet.create({
   root: {
     flex: 1,

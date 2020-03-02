@@ -43,8 +43,6 @@ import colors from "../../colors";
 import CurrencyUnitValue from "../../components/CurrencyUnitValue";
 import Header from "./Header";
 import EmptyStateAccount from "./EmptyStateAccount";
-import AccountHeaderRight from "./AccountHeaderRight";
-import AccountHeaderTitle from "./AccountHeaderTitle";
 import AccountActions from "./AccountActions";
 import AccountGraphCard from "../../components/AccountGraphCard";
 import NoOperationFooter from "../../components/NoOperationFooter";
@@ -79,11 +77,6 @@ const AnimatedSectionList = Animated.createAnimatedComponent(SectionList);
 const List = accountSyncRefreshControl(AnimatedSectionList);
 
 class AccountScreen extends PureComponent<Props, State> {
-  static navigationOptions = ({ navigation }) => ({
-    headerTitle: <AccountHeaderTitle navigation={navigation} />,
-    headerRight: <AccountHeaderRight navigation={navigation} />,
-  });
-
   state = {
     opCount: 100,
   };

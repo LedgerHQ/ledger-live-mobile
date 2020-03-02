@@ -11,10 +11,6 @@ class FallBackCameraScreen extends PureComponent<{
   navigation: NavigationScreenProp<*>,
   t: T,
 }> {
-  static navigationOptions = {
-    title: i18next.t("account.import.fallback.header"),
-  };
-
   openNativeSettings = () => {
     Linking.openURL("app-settings:");
   };

@@ -5,7 +5,6 @@ import * as Keychain from "react-native-keychain";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { withTranslation } from "react-i18next";
-import i18next from "i18next";
 import { PasswordsDontMatchError } from "@ledgerhq/errors";
 import { Vibration } from "react-native";
 import { disablePrivacy } from "../../../actions/settings";
@@ -28,10 +27,6 @@ const mapDispatchToProps = {
 };
 
 class PasswordRemove extends PureComponent<Props, State> {
-  static navigationOptions = {
-    title: i18next.t("auth.confirmPassword.title"),
-  };
-
   state = {
     error: null,
     confirmPassword: "",
@@ -82,9 +77,6 @@ class PasswordRemove extends PureComponent<Props, State> {
 }
 
 export default compose(
-  connect(
-    null,
-    mapDispatchToProps,
-  ),
+  connect(null, mapDispatchToProps),
   withTranslation(),
 )(PasswordRemove);

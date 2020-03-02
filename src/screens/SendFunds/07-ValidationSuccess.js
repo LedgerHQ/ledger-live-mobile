@@ -30,11 +30,6 @@ type Props = {
 };
 
 class ValidationSuccess extends Component<Props> {
-  static navigationOptions = {
-    header: null,
-    gesturesEnabled: false,
-  };
-
   dismiss = () => {
     const { navigation } = this.props;
     if (navigation.dismiss) {

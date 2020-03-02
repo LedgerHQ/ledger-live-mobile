@@ -29,10 +29,6 @@ type State = {};
 const IconPlus = () => <Icon name="plus" color={colors.live} size={16} />;
 
 class AddAccountsSuccess extends Component<Props, State> {
-  static navigationOptions = {
-    header: null,
-  };
-
   primaryCTA = () => {
     this.props.navigation.navigate(ScreenName.Accounts);
   };

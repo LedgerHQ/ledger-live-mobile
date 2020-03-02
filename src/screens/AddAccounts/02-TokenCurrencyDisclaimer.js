@@ -2,7 +2,6 @@
 
 import React, { Component } from "react";
 import { withTranslation, Trans } from "react-i18next";
-import i18next from "i18next";
 import { StyleSheet, View, Linking } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 
@@ -45,10 +44,6 @@ type Props = {
 };
 
 class AddAccountsTokenCurrencyDisclaimer extends Component<Props> {
-  static navigationOptions = {
-    title: i18next.t("addAccounts.tokens.title"),
-  };
-
   onBack = () => this.props.navigation.goBack();
 
   onClose = () => {

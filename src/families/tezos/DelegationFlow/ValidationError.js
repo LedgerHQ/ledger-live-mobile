@@ -29,10 +29,6 @@ type Props = {
 };
 
 class ValidationError extends Component<Props> {
-  static navigationOptions = {
-    header: null,
-  };
-
   dismiss = () => {
     const { navigation } = this.props;
     if (navigation.dismiss) {

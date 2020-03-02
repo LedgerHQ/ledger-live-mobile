@@ -1,6 +1,5 @@
 /* @flow */
 import React, { PureComponent } from "react";
-import i18next from "i18next";
 import { View, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { connect } from "react-redux";
@@ -40,13 +39,13 @@ type Navigation = NavigationScreenProp<{
   },
 }>;
 
-const BackButton = ({ navigation }: { navigation: Navigation }) => (
+export const BackButton = ({ navigation }: { navigation: Navigation }) => (
   <TouchableOpacity style={{ padding: 16 }} onPress={() => navigation.goBack()}>
     <ArrowLeft size={18} color={colors.grey} />
   </TouchableOpacity>
 );
 
-const CloseButton = ({ navigation }: { navigation: Navigation }) => (
+export const CloseButton = ({ navigation }: { navigation: Navigation }) => (
   <TouchableOpacity
     onPress={() => navigation.popToTop()}
     style={{ padding: 16 }}
@@ -56,26 +55,6 @@ const CloseButton = ({ navigation }: { navigation: Navigation }) => (
 );
 
 class OperationDetails extends PureComponent<Props, *> {
-  static navigationOptions = ({ navigation }) => {
-    const {
-      params: { isSubOperation },
-    } = navigation.state;
-
-    if (isSubOperation) {
-      return {
-        title: i18next.t("operationDetails.title"),
-        headerLeft: <BackButton navigation={navigation} />,
-        headerRight: <CloseButton navigation={navigation} />,
-      };
-    }
-
-    return {
-      title: i18next.t("operationDetails.title"),
-      headerLeft: <BackButton navigation={navigation} />,
-      headerRight: null,
-    };
-  };
-
   render() {
     const { navigation, account, parentAccount } = this.props;
     if (!account) return null;

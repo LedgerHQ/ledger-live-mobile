@@ -6,7 +6,6 @@ import type { NavigationScreenProp } from "react-navigation";
 import { createStructuredSelector } from "reselect";
 import { connect } from "react-redux";
 import { compose } from "redux";
-import i18next from "i18next";
 import { withTranslation, Trans } from "react-i18next";
 import type {
   Account,
@@ -25,7 +24,6 @@ import { TrackScreen } from "../../analytics";
 import LText from "../../components/LText";
 import FilteredSearchBar from "../../components/FilteredSearchBar";
 import AccountCard from "../../components/AccountCard";
-import StepHeader from "../../components/StepHeader";
 import KeyboardView from "../../components/KeyboardView";
 import { formatSearchResults } from "../../helpers/formatAccountSearchResults";
 import type { SearchResult } from "../../helpers/formatAccountSearchResults";
@@ -44,18 +42,6 @@ type Props = {
 type State = {};
 
 class SendFundsSelectAccount extends Component<Props, State> {
-  static navigationOptions = {
-    headerTitle: (
-      <StepHeader
-        title={i18next.t("send.stepperHeader.selectAccount")}
-        subtitle={i18next.t("send.stepperHeader.stepRange", {
-          currentStep: "1",
-          totalSteps: "6",
-        })}
-      />
-    ),
-  };
-
   renderList = items => {
     const { accounts } = this.props;
     const formatedList = formatSearchResults(items, accounts);

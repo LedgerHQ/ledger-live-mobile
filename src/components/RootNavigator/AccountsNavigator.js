@@ -8,6 +8,8 @@ import AccountOrder from "../../screens/Accounts/AccountOrder";
 import AddAccount from "../../screens/Accounts/AddAccount";
 import Account from "../../screens/Account";
 import { stackNavigatorConfig } from "../../navigation/navigatorConfig";
+import AccountHeaderRight from "../../screens/Account/AccountHeaderRight";
+import AccountHeaderTitle from "../../screens/Account/AccountHeaderTitle";
 
 export default function AccountsNavigator() {
   const { t } = useTranslation();
@@ -22,7 +24,18 @@ export default function AccountsNavigator() {
           headerRight: () => <AddAccount />,
         }}
       />
-      <Stack.Screen name={ScreenName.Account} component={Account} />
+      <Stack.Screen
+        name={ScreenName.Account}
+        component={Account}
+        options={{
+          headerTitle: ({ navigation }) => (
+            <AccountHeaderTitle navigation={navigation} />
+          ),
+          headerRight: ({ navigation }) => (
+            <AccountHeaderRight navigation={navigation} />
+          ),
+        }}
+      />
     </Stack.Navigator>
   );
 }

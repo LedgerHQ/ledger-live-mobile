@@ -22,7 +22,6 @@ import { ScreenName } from "../../const";
 import Button from "../../components/Button";
 import LText from "../../components/LText";
 import RoundedCurrencyIcon from "../../components/RoundedCurrencyIcon";
-import StepHeader from "../../components/StepHeader";
 import TranslatedError from "../../components/TranslatedError";
 import logger from "../../logger";
 import extraStatusBarPadding from "../../logic/extraStatusBarPadding";
@@ -216,23 +215,6 @@ const Progress = ({
     </SafeAreaView>
   );
 };
-
-Progress.navigationOptions = () => ({
-  headerTitle: (
-    <StepHeader
-      title={<Trans i18nKey="migrateAccounts.progress.headerTitle" />}
-      subtitle={
-        <Trans
-          i18nKey="send.stepperHeader.stepRange"
-          values={{
-            currentStep: "3",
-            totalSteps: "3",
-          }}
-        />
-      }
-    />
-  ),
-});
 
 const styles = StyleSheet.create({
   root: {

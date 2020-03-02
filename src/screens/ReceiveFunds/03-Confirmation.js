@@ -78,28 +78,6 @@ const mapStateToProps = (s, p) => ({
 });
 
 class ReceiveConfirmation extends Component<Props, State> {
-  static navigationOptions = ({ navigation }: { navigation: Navigation }) => {
-    const options: any = {
-      headerTitle: (
-        <StepHeader
-          title={i18next.t("account.receive")}
-          subtitle={i18next.t("send.stepperHeader.stepRange", {
-            currentStep: "3",
-            totalSteps: "3",
-          })}
-        />
-      ),
-    };
-
-    if (!navigation.getParam("allowNavigation")) {
-      options.headerLeft = null;
-      options.headerRight = () => null;
-      options.gesturesEnabled = false;
-    }
-
-    return options;
-  };
-
   state = {
     verified: false,
     isModalOpened: false,

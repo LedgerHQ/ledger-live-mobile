@@ -6,7 +6,6 @@ import { StyleSheet, ScrollView } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import type { NavigationScreenProp } from "react-navigation";
 import type { CryptoCurrency } from "@ledgerhq/live-common/lib/types";
-import i18next from "i18next";
 
 import { prepareCurrency } from "../../bridge/cache";
 import { ScreenName } from "../../const";
@@ -14,7 +13,6 @@ import colors from "../../colors";
 import { TrackScreen } from "../../analytics";
 import SelectDevice from "../../components/SelectDevice";
 import { connectingStep, currencyApp } from "../../components/DeviceJob/steps";
-import StepHeader from "../../components/StepHeader";
 
 const forceInset = { bottom: "always" };
 
@@ -29,18 +27,6 @@ type Props = {
 type State = {};
 
 class AddAccountsSelectDevice extends Component<Props, State> {
-  static navigationOptions = {
-    headerTitle: (
-      <StepHeader
-        title={i18next.t("common.device")}
-        subtitle={i18next.t("send.stepperHeader.stepRange", {
-          currentStep: "2",
-          totalSteps: "3",
-        })}
-      />
-    ),
-  };
-
   componentDidMount() {
     const currency = this.props.route.params?.currency;
     // load ahead of time

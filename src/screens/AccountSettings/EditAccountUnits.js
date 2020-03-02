@@ -1,6 +1,5 @@
 /* @flow */
 import React, { PureComponent } from "react";
-import i18next from "i18next";
 import { View, StyleSheet, ScrollView, FlatList } from "react-native";
 import type { NavigationScreenProp } from "react-navigation";
 import type { Account } from "@ledgerhq/live-common/lib/types";
@@ -28,11 +27,6 @@ const mapDispatchToProps = {
   updateAccount,
 };
 class EditAccountUnits extends PureComponent<Props> {
-  static navigationOptions = {
-    title: i18next.t("account.settings.accountUnits.title"),
-    headerRight: null,
-  };
-
   keyExtractor = (item: any) => item.code;
 
   updateAccount = (item: any) => {

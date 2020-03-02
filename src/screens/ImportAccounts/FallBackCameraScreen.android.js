@@ -21,10 +21,6 @@ class FallBackCameraScreen extends PureComponent<Props, State> {
     openSettingsPressed: false,
   };
 
-  static navigationOptions = {
-    title: i18next.t("account.import.fallback.header"),
-  };
-
   componentDidMount() {
     AppState.addEventListener("change", this.handleAppStateChange);
   }

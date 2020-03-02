@@ -11,7 +11,6 @@ import manager from "@ledgerhq/live-common/lib/manager";
 import { TrackScreen } from "../../analytics";
 import { deviceNames } from "../../wording";
 import colors from "../../colors";
-import StepHeader from "../../components/StepHeader";
 import LText from "../../components/LText";
 import DeviceNanoAction from "../../components/DeviceNanoAction";
 import LiveLogo from "../../icons/LiveLogoIcon";
@@ -41,16 +40,6 @@ class FirmwareUpdateCheckId extends Component<Props, State> {
   state = {
     progress: 0,
     displayedOnDevice: false,
-  };
-
-  static navigationOptions = {
-    headerLeft: null,
-    headerTitle: (
-      <StepHeader
-        subtitle={<Trans i18nKey="FirmwareUpdate.title" />}
-        title={<Trans i18nKey="FirmwareUpdateCheckId.title" />}
-      />
-    ),
   };
 
   sub: *;

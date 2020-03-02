@@ -16,7 +16,6 @@ import AccountCard from "../../components/AccountCard";
 import Button from "../../components/Button";
 import Circle from "../../components/Circle";
 import LText from "../../components/LText";
-import StepHeader from "../../components/StepHeader";
 import IconExclamationCircle from "../../icons/ExclamationCircle";
 import LiveLogo from "../../icons/LiveLogoIcon";
 import extraStatusBarPadding from "../../logic/extraStatusBarPadding";
@@ -125,22 +124,6 @@ const Overview = ({ navigation, migratableAccounts, currencyIds }: Props) => {
   );
 };
 
-Overview.navigationOptions = () => ({
-  headerTitle: (
-    <StepHeader
-      title={<Trans i18nKey="migrateAccounts.overview.headerTitle" />}
-      subtitle={
-        <Trans
-          i18nKey="send.stepperHeader.stepRange"
-          values={{
-            currentStep: "1",
-            totalSteps: "3",
-          }}
-        />
-      }
-    />
-  ),
-});
 const styles = StyleSheet.create({
   root: {
     flex: 1,

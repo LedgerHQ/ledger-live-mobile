@@ -1,6 +1,5 @@
 /* @flow */
 import React, { useCallback } from "react";
-import i18next from "i18next";
 import { View, StyleSheet, FlatList } from "react-native";
 import { createStructuredSelector } from "reselect";
 import SafeAreaView from "react-native-safe-area-view";
@@ -22,7 +21,6 @@ import { TrackScreen } from "../../analytics";
 import LText from "../../components/LText";
 import FilteredSearchBar from "../../components/FilteredSearchBar";
 import AccountCard from "../../components/AccountCard";
-import StepHeader from "../../components/StepHeader";
 import KeyboardView from "../../components/KeyboardView";
 import { formatSearchResults } from "../../helpers/formatAccountSearchResults";
 import type { SearchResult } from "../../helpers/formatAccountSearchResults";
@@ -107,18 +105,6 @@ const ReceiveFunds = ({ accounts, allAccounts, navigation }: Props) => {
       </KeyboardView>
     </SafeAreaView>
   );
-};
-
-ReceiveFunds.navigationOptions = {
-  headerTitle: (
-    <StepHeader
-      title={i18next.t("transfer.receive.headerTitle")}
-      subtitle={i18next.t("send.stepperHeader.stepRange", {
-        currentStep: "1",
-        totalSteps: "3",
-      })}
-    />
-  ),
 };
 
 const mapStateToProps = createStructuredSelector({
