@@ -14,6 +14,11 @@ import { accountScreenSelector } from "../../reducers/accounts";
 import colors from "../../colors";
 import { track } from "../../analytics";
 
+// interface RouteParams {
+//   accountId: string;
+//   transaction: Transaction;
+// }
+
 const forceInset = { bottom: "always" };
 
 const uint32maxPlus1 = BigNumber(2).pow(32);

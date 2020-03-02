@@ -17,6 +17,11 @@ const options = {
   headerLeft: null,
 };
 
+// interface RouteParams {
+//   accountId: string;
+//   transaction: Transaction;
+// }
+
 function RippleEditFee() {
   const account = useSelector(accountScreenSelector);
   const route = useRoute();

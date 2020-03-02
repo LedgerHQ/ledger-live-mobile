@@ -3,7 +3,7 @@ import React from "react";
 import { StyleSheet, ScrollView } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { useSelector } from "react-redux";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { getMainAccount } from "@ledgerhq/live-common/lib/account/helpers";
 import { accountAndParentScreenSelector } from "../../../reducers/accounts";
 import colors from "../../../colors";
@@ -16,15 +16,22 @@ import {
 
 const forceInset = { bottom: "always" };
 
+// interface RouteParams {
+//   accountId: string;
+//   transaction: Transaction;
+//   status: TransactionStatus;
+// }
+
 export default function ConnectDevice() {
   const navigation = useNavigation();
+  const route = useRoute();
   const { account, parentAccount } = useSelector(
     accountAndParentScreenSelector,
   );
 
   function onSelectDevice(meta: *): void {
     navigation.replace("DelegationValidation", {
-      ...navigation.state.params,
+      ...route.params,
       ...meta,
     });
   }

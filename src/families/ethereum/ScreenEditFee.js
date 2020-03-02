@@ -10,6 +10,11 @@ import { accountAndParentScreenSelector } from "../../reducers/accounts";
 import KeyboardView from "../../components/KeyboardView";
 import EditFeeUnitEthereum from "./EditFeeUnitEthereum";
 
+// interface RouteParams {
+//   accountId: string;
+//   transaction: Transaction;
+// }
+
 const forceInset = { bottom: "always" };
 
 const options = {

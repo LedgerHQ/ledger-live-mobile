@@ -28,6 +28,11 @@ const options = {
   headerLeft: null,
 };
 
+// interface RouteParams {
+//   accountId: string;
+//   transaction: Transaction;
+// }
+
 function BitcoinEditFeePerByte() {
   const account = useSelector(accountScreenSelector);
   const route = useRoute();

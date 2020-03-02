@@ -13,7 +13,6 @@ import {
 import i18next from "i18next";
 import { connect } from "react-redux";
 import SafeAreaView from "react-native-safe-area-view";
-import type { NavigationScreenProp } from "react-navigation";
 import { withTranslation, Trans } from "react-i18next";
 import Icon from "react-native-vector-icons/dist/Feather";
 import type {
@@ -32,7 +31,6 @@ import { accountAndParentScreenSelector } from "../../../reducers/accounts";
 import { TrackScreen } from "../../../analytics";
 import colors from "../../../colors";
 import InfoModal from "../../../components/InfoModal";
-import StepHeader from "../../../components/StepHeader";
 import LText, { getFontStyle } from "../../../components/LText";
 import Touchable from "../../../components/Touchable";
 import Button from "../../../components/Button";
@@ -44,16 +42,17 @@ import BakerImage from "../BakerImage";
 
 const forceInset = { bottom: "always" };
 
+interface RouteParams {
+  accountId: string;
+  transaction: Transaction;
+  status: TransactionStatus;
+}
+
 type Props = {
   account: AccountLike,
   parentAccount: ?Account,
-  navigation: NavigationScreenProp<{
-    params: {
-      accountId: string,
-      transaction: Transaction,
-      status: TransactionStatus,
-    },
-  }>,
+  navigation: *,
+  route: { params: RouteParams },
 };
 
 const keyExtractor = baker => baker.address;
@@ -129,7 +128,12 @@ const BakerRow = ({
 
 const ModalIcon = () => <Icon name="user-plus" size={24} color={colors.live} />;
 
-const SelectValidator = ({ account, parentAccount, navigation }: Props) => {
+const SelectValidator = ({
+  account,
+  parentAccount,
+  navigation,
+  route,
+}: Props) => {
   const bakers = useBakers(whitelist);
   const [editingCustom, setEditingCustom] = useState(false);
   const [keyboardHeight, setKeyboardHeight] = useState(0);
@@ -176,10 +180,9 @@ const SelectValidator = ({ account, parentAccount, navigation }: Props) => {
     return {
       account,
       parentAccount,
-      transaction: bridge.updateTransaction(
-        navigation.getParam("transaction"),
-        { recipient: "" },
-      ),
+      transaction: bridge.updateTransaction(route.params?.transaction, {
+        recipient: "",
+      }),
     };
   });
 
@@ -228,16 +231,15 @@ const SelectValidator = ({ account, parentAccount, navigation }: Props) => {
   const onItemPress = useCallback(
     (baker: Baker) => {
       const bridge = getAccountBridge(account, parentAccount);
-      const transaction = bridge.updateTransaction(
-        navigation.getParam("transaction"),
-        { recipient: baker.address },
-      );
+      const transaction = bridge.updateTransaction(route.params?.transaction, {
+        recipient: baker.address,
+      });
       navigation.navigate("DelegationSummary", {
         ...navigation.state.params,
         transaction,
       });
     },
-    [navigation, account, parentAccount],
+    [navigation, account, parentAccount, route.params],
   );
 
   const renderItem = useCallback(

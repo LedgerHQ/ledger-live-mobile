@@ -4,7 +4,6 @@ import { StyleSheet } from "react-native";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { withNavigation } from "@react-navigation/compat";
-import type { NavigationScreenProp } from "react-navigation";
 import { Trans, translate } from "react-i18next";
 import Touchable from "../../components/Touchable";
 import LText from "../../components/LText";
@@ -12,14 +11,14 @@ import colors from "../../colors";
 import { knownDevicesSelector } from "../../reducers/ble";
 import type { DeviceLike } from "../../reducers/ble";
 
-type Props = {
-  navigation: NavigationScreenProp<{
-    params: {
-      editMode: boolean,
-    },
-  }>,
-  knownDevices: DeviceLike[],
-};
+// interface RouteParams {
+//   editMode: boolean;
+// }
+
+interface Props {
+  navigation: *;
+  knownDevices: DeviceLike[];
+}
 
 const mapStateToProps = state => ({
   knownDevices: knownDevicesSelector(state),
