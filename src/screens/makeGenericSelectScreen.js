@@ -1,8 +1,6 @@
 /* @flow */
 import React, { Component } from "react";
 import { FlatList, StyleSheet } from "react-native";
-// $FlowFixMe
-import type { NavigationScreenProp } from "react-navigation";
 import { track } from "../analytics";
 import SettingsRow from "../components/SettingsRow";
 
@@ -60,7 +58,7 @@ export default <Item>(opts: Opts<Item>) => {
     selectedKey: string,
     items: Item[],
     onValueChange: (Item, *) => void,
-    navigation: NavigationScreenProp<*>,
+    navigation: *,
   }> {
     onPress = (item: Item) => {
       const { navigation, onValueChange } = this.props;

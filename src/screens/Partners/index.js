@@ -5,7 +5,6 @@ import { Trans, withTranslation } from "react-i18next";
 import { View, StyleSheet, ScrollView } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import partners from "@ledgerhq/live-common/lib/partners/reactNative";
-import type { NavigationScreenProp } from "react-navigation";
 import type { T } from "../../types/common";
 import PartnerCard from "../../components/PartnerCard";
 import LText from "../../components/LText";
@@ -16,7 +15,7 @@ import TrackScreen from "../../analytics/TrackScreen";
 const forceInset = { bottom: "always" };
 
 type Props = {
-  navigation: NavigationScreenProp<*>,
+  navigation: *,
   t: T,
 };
 

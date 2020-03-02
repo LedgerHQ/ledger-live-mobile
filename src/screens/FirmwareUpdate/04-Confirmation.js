@@ -3,7 +3,6 @@
 import React, { Component } from "react";
 import { View, StyleSheet } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
-import type { NavigationScreenProp } from "react-navigation";
 import { withTranslation, Trans } from "react-i18next";
 import { TrackScreen } from "../../analytics";
 import { ScreenName } from "../../const";
@@ -13,15 +12,13 @@ import colors from "../../colors";
 
 const forceInset = { bottom: "always" };
 
-type Navigation = NavigationScreenProp<{
-  params: {
-    deviceId: string,
-  },
-}>;
-
-type Props = {
-  navigation: Navigation,
-};
+interface RouteParams {
+  deviceId: string;
+}
+interface Props {
+  navigation: *;
+  route: { params: RouteParams };
+}
 
 type State = {};
 

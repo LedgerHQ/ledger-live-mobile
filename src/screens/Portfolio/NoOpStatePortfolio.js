@@ -2,7 +2,6 @@
 import React, { PureComponent } from "react";
 import { Trans } from "react-i18next";
 import { View, StyleSheet } from "react-native";
-import type { NavigationScreenProp } from "react-navigation";
 import colors from "../../colors";
 import { NavigatorName } from "../../const";
 import LText from "../../components/LText";
@@ -11,7 +10,7 @@ import IconReceive from "../../icons/Receive";
 import PortfolioNoOpIllustration from "../../icons/PortfolioNoOpIllustration";
 
 type Props = {
-  navigation: NavigationScreenProp<*>,
+  navigation: *,
 };
 
 class NoOpStatePortfolio extends PureComponent<Props> {

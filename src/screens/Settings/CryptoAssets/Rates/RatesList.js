@@ -4,7 +4,6 @@ import { StyleSheet, View, FlatList } from "react-native";
 import { connect } from "react-redux";
 import { Trans } from "react-i18next";
 import { createStructuredSelector } from "reselect";
-import type { NavigationScreenProp } from "react-navigation";
 import type { Currency } from "@ledgerhq/live-common/lib/types";
 import { ScreenName } from "../../../../const";
 import { pairsSelector } from "../../../../countervalues";
@@ -20,7 +19,7 @@ type Pair = {|
 |};
 
 type Props = {|
-  navigation: NavigationScreenProp<*>,
+  navigation: *,
   pairs: Pair[],
 |};
 

@@ -1,7 +1,5 @@
 // @flow
 
-import type { NavigationScreenProp } from "react-navigation";
-
 export type Step = {
   id: string,
   isGhost?: boolean,
@@ -38,7 +36,7 @@ export type OnboardingContextType = {
 
 export type OnboardingStepProps = OnboardingContextType & {
   t: *,
-  navigation: NavigationScreenProp<*>,
+  navigation: *,
   next: Noop,
   prev: Noop,
 };
@@ -52,5 +50,5 @@ type OnboardingMode = "full" | "alreadyInitialized" | "restore" | "qr";
 
 export type DeviceNames = "nanoS" | "nanoX" | "blue";
 
-type StepNavigateType = (NavigationScreenProp<*>) => void;
+type StepNavigateType = (*) => void;
 type Noop = any => any;

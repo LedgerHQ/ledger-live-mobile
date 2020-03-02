@@ -2,7 +2,6 @@
 import React, { PureComponent } from "react";
 import { StyleSheet, View } from "react-native";
 import { RNCamera } from "react-native-camera";
-import type { NavigationScreenProp } from "react-navigation";
 import {
   parseFramesReducer,
   framesToData,
@@ -19,9 +18,10 @@ import CameraScreen from "../../components/CameraScreen";
 import GenericErrorBottomModal from "../../components/GenericErrorBottomModal";
 import getWindowDimensions from "../../logic/getWindowDimensions";
 
-type Props = {
-  navigation: NavigationScreenProp<*>,
-};
+interface Props {
+  navigation: *;
+  route: *;
+}
 
 class Scan extends PureComponent<
   Props,
@@ -39,7 +39,6 @@ class Scan extends PureComponent<
   };
 
   componentDidMount() {
-    const { route } = this.props;
     const data = this.props.route.params?.data;
     if (data) {
       const frames = data.reduce(parseFramesReducer, null);

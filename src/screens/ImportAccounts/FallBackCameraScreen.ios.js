@@ -2,13 +2,11 @@
 import React, { PureComponent } from "react";
 import { withTranslation } from "react-i18next";
 import { Linking } from "react-native";
-import type { NavigationScreenProp } from "react-navigation";
-import i18next from "i18next";
 import type { T } from "../../types/common";
 import FallbackCameraBody from "../../components/FallbackCameraBody";
 
 class FallBackCameraScreen extends PureComponent<{
-  navigation: NavigationScreenProp<*>,
+  navigation: *,
   t: T,
 }> {
   openNativeSettings = () => {

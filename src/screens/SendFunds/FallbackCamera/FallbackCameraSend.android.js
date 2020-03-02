@@ -2,14 +2,13 @@
 import React, { PureComponent } from "react";
 import { withTranslation } from "react-i18next";
 import { AppState, Linking } from "react-native";
-import type { NavigationScreenProp } from "react-navigation";
 import type { T } from "../../../types/common";
 import FallbackCameraBody from "../../../components/FallbackCameraBody";
 
-type Props = {
-  navigation: NavigationScreenProp<*>,
-  t: T,
-};
+interface Props {
+  navigation: *;
+  t: T;
+}
 type State = {
   appSTate: string,
   openSettingsPressed: boolean,

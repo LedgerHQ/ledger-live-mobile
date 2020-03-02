@@ -6,11 +6,9 @@ import React, {
   useContext,
   useEffect,
 } from "react";
-import type { NavigationScreenProp } from "react-navigation";
 import {
   useIsFocused,
   useNavigation,
-  useNavigationState,
   useRoute,
 } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
@@ -72,14 +70,14 @@ export class OnboardingContextProvider extends PureComponent<
 
   // Navigate to next step
   // we may want to handle onboarding finish here (e.g update settings)
-  next = (navigation: NavigationScreenProp<*>, currentStep) => {
+  next = (navigation: *, currentStep) => {
     const steps = getStepForState(this.state);
     const i = steps.findIndex(s => s.id === currentStep) + 1;
     this.navigate(navigation, i);
   };
 
   // Navigate to previous step
-  prev = (navigation: NavigationScreenProp<*>, currentStep) => {
+  prev = (navigation: *, currentStep) => {
     const steps = getStepForState(this.state);
     const i = steps.findIndex(s => s.id === currentStep) - 1;
     this.navigate(navigation, i);
@@ -98,7 +96,7 @@ export class OnboardingContextProvider extends PureComponent<
   setFirstTimeOnboarding = (firstTimeOnboarding: boolean): Promise<void> =>
     new Promise(r => this.setState({ firstTimeOnboarding }, r));
 
-  navigate = (navigation: NavigationScreenProp<*>, index: number) => {
+  navigate = (navigation: *, index: number) => {
     const steps = getStepForState(this.state);
     if (index === -1 || index === steps.length) return;
     const currentStep = steps[index].id;

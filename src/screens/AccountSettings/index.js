@@ -3,7 +3,6 @@ import React, { PureComponent } from "react";
 import { View, StyleSheet, ScrollView } from "react-native";
 import { withTranslation } from "react-i18next";
 import type { Account } from "@ledgerhq/live-common/lib/types";
-import type { NavigationScreenProp } from "react-navigation";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { createStructuredSelector } from "reselect";
@@ -20,13 +19,16 @@ import DeleteAccountRow from "./DeleteAccountRow";
 import DeleteAccountModal from "./DeleteAccountModal";
 import AccountAdvancedLogsRow from "./AccountAdvancedLogsRow";
 
-type Props = {
-  navigation: NavigationScreenProp<{
-    accountId: string,
-  }>,
-  account: Account,
-  deleteAccount: Function,
-};
+interface RouteParams {
+  accountId: string;
+}
+
+interface Props {
+  navigation: *;
+  route: { params: RouteParams };
+  account: Account;
+  deleteAccount: Function;
+}
 
 type State = {
   isModalOpened: boolean,

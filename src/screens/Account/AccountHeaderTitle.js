@@ -2,7 +2,6 @@
 import React, { Component } from "react";
 import { TouchableWithoutFeedback, View, StyleSheet } from "react-native";
 import { connect } from "react-redux";
-import type { NavigationScreenProp } from "react-navigation";
 import type { AccountLike } from "@ledgerhq/live-common/lib/types";
 import {
   getAccountCurrency,
@@ -13,7 +12,7 @@ import { accountAndParentScreenSelector } from "../../reducers/accounts";
 import ParentCurrencyIcon from "../../components/ParentCurrencyIcon";
 
 type Props = {
-  navigation: NavigationScreenProp<*>,
+  navigation: *,
   account: AccountLike,
 };
 const mapStateToProps = accountAndParentScreenSelector;

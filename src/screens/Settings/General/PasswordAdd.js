@@ -1,15 +1,14 @@
 /* @flow */
 import React, { PureComponent } from "react";
-import type { NavigationScreenProp } from "react-navigation";
 import { withTranslation } from "react-i18next";
 import { ScreenName } from "../../../const";
 import type { T } from "../../../types/common";
 import PasswordForm from "./PasswordForm";
 
-type Props = {
-  t: T,
-  navigation: NavigationScreenProp<{ goBack: () => void }>,
-};
+interface Props {
+  t: T;
+  navigation: *;
+}
 type State = {
   password: string,
 };

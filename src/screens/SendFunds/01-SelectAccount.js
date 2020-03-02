@@ -2,7 +2,6 @@
 import React, { Component } from "react";
 import { View, StyleSheet, FlatList } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
-import type { NavigationScreenProp } from "react-navigation";
 import { createStructuredSelector } from "reselect";
 import { connect } from "react-redux";
 import { compose } from "redux";
@@ -31,13 +30,11 @@ import type { SearchResult } from "../../helpers/formatAccountSearchResults";
 const SEARCH_KEYS = ["name", "unit.code", "token.name", "token.ticker"];
 const forceInset = { bottom: "always" };
 
-type Props = {
-  accounts: Account[],
-  allAccounts: AccountLikeArray,
-  navigation: NavigationScreenProp<{
-    params: {},
-  }>,
-};
+interface Props {
+  accounts: Account[];
+  allAccounts: AccountLikeArray;
+  navigation: *;
+}
 
 type State = {};
 

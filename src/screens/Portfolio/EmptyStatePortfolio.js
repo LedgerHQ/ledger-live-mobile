@@ -3,7 +3,6 @@ import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { Trans } from "react-i18next";
 import { View, StyleSheet } from "react-native";
-import type { NavigationScreenProp } from "react-navigation";
 import Icon from "react-native-vector-icons/dist/Feather";
 import { createStructuredSelector } from "reselect";
 import colors from "../../colors";
@@ -15,7 +14,7 @@ import EmptyAccountsIllustration from "../../icons/EmptyAccountsIllustration";
 import { hasInstalledAnyAppSelector } from "../../reducers/settings";
 
 type Props = {
-  navigation: NavigationScreenProp<*>,
+  navigation: *,
   hasInstalledAnyApp: boolean,
 };
 

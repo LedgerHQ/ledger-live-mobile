@@ -22,7 +22,6 @@ import { connect } from "react-redux";
 import type { SectionBase } from "react-native/Libraries/Lists/SectionList";
 import SafeAreaView from "react-native-safe-area-view";
 import { withNavigation } from "@react-navigation/compat";
-import type { NavigationScreenProp } from "react-navigation";
 import CurrencyIcon from "../../components/CurrencyIcon";
 import colors from "../../colors";
 import { switchCountervalueFirst } from "../../actions/settings";
@@ -60,7 +59,7 @@ type Props = {
   currency: Currency,
   portfolio: *,
   counterValueCurrency: Currency,
-  navigation: NavigationScreenProp<*>,
+  navigation: *,
 };
 
 export function HeaderTitle() {

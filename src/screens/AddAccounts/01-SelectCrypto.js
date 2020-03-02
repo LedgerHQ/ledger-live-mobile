@@ -5,7 +5,6 @@ import { withTranslation, Trans } from "react-i18next";
 import { StyleSheet, View, FlatList } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { compose } from "redux";
-import type { NavigationScreenProp } from "react-navigation";
 import type {
   CryptoCurrency,
   TokenCurrency,
@@ -29,12 +28,10 @@ import withEnv from "../../logic/withEnv";
 const SEARCH_KEYS = ["name", "ticker"];
 const forceInset = { bottom: "always" };
 
-type Props = {
-  devMode: boolean,
-  navigation: NavigationScreenProp<{
-    params: {},
-  }>,
-};
+interface Props {
+  devMode: boolean;
+  navigation: *;
+}
 
 const keyExtractor = currency => currency.id;
 

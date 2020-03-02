@@ -2,7 +2,6 @@
 import React, { Component } from "react";
 import { View, StyleSheet, ScrollView } from "react-native";
 import { withNavigationFocus } from "react-navigation";
-import type { NavigationScreenProp } from "react-navigation";
 import { connect } from "react-redux";
 import { Trans, withTranslation } from "react-i18next";
 import { compose } from "redux";
@@ -67,7 +66,7 @@ const mapStateToProps = createStructuredSelector({
 
 class ChooseDevice extends Component<
   {
-    navigation: NavigationScreenProp<*>,
+    navigation: *,
     isFocused: boolean,
     readOnlyModeEnabled: boolean,
     knownDevices: DeviceLike[],

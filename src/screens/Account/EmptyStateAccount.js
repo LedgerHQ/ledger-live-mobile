@@ -2,7 +2,6 @@
 import React, { PureComponent } from "react";
 import { Trans } from "react-i18next";
 import { View, Image, StyleSheet } from "react-native";
-import type { NavigationScreenProp } from "react-navigation";
 import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
 import { getMainAccount } from "@ledgerhq/live-common/lib/account";
 import { listTokenTypesForCryptoCurrency } from "@ledgerhq/live-common/lib/currencies";
@@ -15,7 +14,7 @@ import Receive from "../../icons/Receive";
 class EmptyStateAccount extends PureComponent<{
   account: AccountLike,
   parentAccount: ?Account,
-  navigation: NavigationScreenProp<*>,
+  navigation: *,
 }> {
   goToReceiveFunds = () => {
     const { navigation, account, parentAccount } = this.props;

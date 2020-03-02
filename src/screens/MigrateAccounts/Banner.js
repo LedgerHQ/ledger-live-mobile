@@ -3,7 +3,6 @@
 import React, { useCallback } from "react";
 import { Trans } from "react-i18next";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
-import type { NavigationScreenProp } from "react-navigation";
 import { withNavigation } from "@react-navigation/compat";
 import { connect } from "react-redux";
 import { compose } from "redux";
@@ -24,7 +23,7 @@ const Banner = ({
   someAccountsNeedMigrationSelector,
 }: {
   someAccountsNeedMigrationSelector: boolean,
-  navigation: NavigationScreenProp<*>,
+  navigation: *,
 }) => {
   const navigateToAccountMigration = useCallback(() => {
     navigation.navigate(ScreenName.MigrateAccountsOverview);

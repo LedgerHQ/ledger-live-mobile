@@ -1,6 +1,5 @@
 /* @flow */
 import React, { Component } from "react";
-import type { NavigationScreenProp } from "react-navigation";
 
 import Touchable from "./Touchable";
 import CloseIcon from "../icons/Close";
@@ -9,7 +8,7 @@ import ConfirmationModal from "./ConfirmationModal";
 
 type Props = {
   preferDismiss: boolean,
-  navigation: NavigationScreenProp<*>,
+  navigation: *,
   color: string,
   withConfirmation?: boolean,
   confirmationTitle?: React$Node,

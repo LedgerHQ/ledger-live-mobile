@@ -9,7 +9,6 @@ import {
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { withNavigation } from "@react-navigation/compat";
-import type { NavigationScreenProp } from "react-navigation";
 import { ScreenName } from "../../const";
 import type { AsyncState } from "../../reducers/bridgeSync";
 import { globalSyncStateSelector } from "../../reducers/bridgeSync";
@@ -35,7 +34,7 @@ class PortfolioHeader extends Component<{
   globalSyncState: AsyncState,
   showGreeting: boolean,
   networkError: ?Error,
-  navigation: { emit: (event: string) => void } & NavigationScreenProp<*>,
+  navigation: { emit: (event: string) => void } & *,
 }> {
   onRefocus = () => {
     this.props.navigation.emit("refocus");

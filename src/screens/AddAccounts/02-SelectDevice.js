@@ -4,7 +4,6 @@ import React, { Component } from "react";
 import { withTranslation } from "react-i18next";
 import { StyleSheet, ScrollView } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
-import type { NavigationScreenProp } from "react-navigation";
 import type { CryptoCurrency } from "@ledgerhq/live-common/lib/types";
 
 import { prepareCurrency } from "../../bridge/cache";
@@ -16,13 +15,14 @@ import { connectingStep, currencyApp } from "../../components/DeviceJob/steps";
 
 const forceInset = { bottom: "always" };
 
-type Props = {
-  navigation: NavigationScreenProp<{
-    params: {
-      currency: CryptoCurrency,
-    },
-  }>,
-};
+interface RouteParams {
+  currency: CryptoCurrency;
+}
+
+interface Props {
+  navigation: *;
+  route: { params: RouteParams };
+}
 
 type State = {};
 

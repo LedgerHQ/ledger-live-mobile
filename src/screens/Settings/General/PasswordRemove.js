@@ -1,6 +1,5 @@
 /* @flow */
 import React, { PureComponent } from "react";
-import type { NavigationScreenProp } from "react-navigation";
 import * as Keychain from "react-native-keychain";
 import { connect } from "react-redux";
 import { compose } from "redux";
@@ -12,11 +11,11 @@ import type { T } from "../../../types/common";
 import PasswordForm from "./PasswordForm";
 import { VIBRATION_PATTERN_ERROR } from "../../../constants";
 
-type Props = {
-  t: T,
-  disablePrivacy(): () => *,
-  navigation: NavigationScreenProp<{}>,
-};
+interface Props {
+  t: T;
+  disablePrivacy(): () => *;
+  navigation: *;
+}
 type State = {
   error: ?Error,
   confirmPassword: string,

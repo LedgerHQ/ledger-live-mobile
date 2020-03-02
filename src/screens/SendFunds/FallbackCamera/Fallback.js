@@ -1,9 +1,8 @@
 /* @flow */
 import { PureComponent } from "react";
-import type { NavigationScreenProp } from "react-navigation";
 
 class FallBackCamera extends PureComponent<{
-  navigation: NavigationScreenProp<*>,
+  navigation: *,
 }> {
   componentDidMount() {
     const { navigation } = this.props;

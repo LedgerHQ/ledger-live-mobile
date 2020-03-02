@@ -3,7 +3,6 @@ import React, { PureComponent } from "react";
 import { StyleSheet, Animated } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { withNavigation } from "@react-navigation/compat";
-import type { NavigationScreenProp } from "react-navigation";
 import { compose } from "redux";
 import { Trans } from "react-i18next";
 import { connect } from "react-redux";
@@ -18,7 +17,7 @@ const AnimatedSafeView = Animated.createAnimatedComponent(SafeAreaView);
 const forceInset = { bottom: "always" };
 
 type Props = {
-  navigation: NavigationScreenProp<*>,
+  navigation: *,
   show: boolean,
   deviceIds: string[],
   removeKnownDevices: (deviceIds: string[]) => void,

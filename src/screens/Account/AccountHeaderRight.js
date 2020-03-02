@@ -1,7 +1,6 @@
 /* @flow */
 import React, { useState, useCallback } from "react";
 import { View } from "react-native";
-import type { NavigationScreenProp } from "react-navigation";
 import { connect } from "react-redux";
 import Icon from "react-native-vector-icons/dist/Feather";
 import type { Account, TokenAccount } from "@ledgerhq/live-common/lib/types";
@@ -15,7 +14,7 @@ import colors from "../../colors";
 import TokenContractAddress from "./TokenContractAddress";
 
 type Props = {
-  navigation: NavigationScreenProp<*>,
+  navigation: *,
   account: ?(Account | TokenAccount),
   parentAccount: ?Account,
 };

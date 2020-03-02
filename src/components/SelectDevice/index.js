@@ -8,7 +8,6 @@ import { discoverDevices } from "@ledgerhq/live-common/lib/hw";
 import { Trans } from "react-i18next";
 import type { TransportModule } from "@ledgerhq/live-common/lib/hw";
 import { withNavigation } from "@react-navigation/compat";
-import type { NavigationScreenProp } from "react-navigation";
 import { ScreenName } from "../../const";
 import { knownDevicesSelector } from "../../reducers/ble";
 import { removeKnownDevice } from "../../actions/ble";
@@ -34,7 +33,7 @@ type Props = {
   usbOnly?: boolean,
   filter?: TransportModule => boolean,
   deviceModelId: DeviceNames,
-  navigation: NavigationScreenProp<*>,
+  navigation: *,
   autoSelectOnAdd?: boolean,
 };
 

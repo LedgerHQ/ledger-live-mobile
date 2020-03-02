@@ -9,7 +9,6 @@ import {
 } from "react-native";
 import { connect } from "react-redux";
 import SafeAreaView from "react-native-safe-area-view";
-import type { NavigationScreenProp } from "react-navigation";
 import { ScreenName } from "../const";
 import { addKnownDevice } from "../actions/ble";
 import colors from "../colors";
@@ -22,7 +21,7 @@ const forceInset = { bottom: "always" };
 
 class DebugHttpTransport extends Component<
   {
-    navigation: NavigationScreenProp<*>,
+    navigation: *,
     addKnownDevice: (*) => void,
   },
   {

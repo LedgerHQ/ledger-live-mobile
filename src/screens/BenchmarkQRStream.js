@@ -3,14 +3,13 @@
 import React, { PureComponent } from "react";
 import { StyleSheet, View } from "react-native";
 import { RNCamera } from "react-native-camera";
-import type { NavigationScreenProp } from "react-navigation";
 import LText from "../components/LText";
 import colors, { rgba } from "../colors";
 import getWindowDimensions from "../logic/getWindowDimensions";
 
 export default class BenchmarkQRStream extends PureComponent<
   {
-    navigation: NavigationScreenProp<*>,
+    navigation: *,
   },
   *,
 > {

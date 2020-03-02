@@ -7,7 +7,6 @@ import { Trans } from "react-i18next";
 import { StyleSheet, View, SectionList } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { withNavigation } from "@react-navigation/compat";
-import type { NavigationScreenProp } from "react-navigation";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import colors from "../../colors";
@@ -37,7 +36,7 @@ const mapStateToProps = createStructuredSelector({
 });
 
 interface Props {
-  navigation: NavigationScreenProp<*>;
+  navigation: *;
   currencyIds: string[];
   migratableAccounts: Account[];
   route: *;

@@ -5,7 +5,6 @@ import SafeAreaView from "react-native-safe-area-view";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { withTranslation } from "react-i18next";
-import type { NavigationScreenProp } from "react-navigation";
 import type {
   Account,
   AccountLike,
@@ -21,16 +20,17 @@ import { connectingStep, accountApp } from "../../components/DeviceJob/steps";
 
 const forceInset = { bottom: "always" };
 
+interface RouteParams {
+  accountId: string;
+  transaction: Transaction;
+  status: TransactionStatus;
+}
+
 type Props = {
   account: AccountLike,
   parentAccount: ?Account,
-  navigation: NavigationScreenProp<{
-    params: {
-      accountId: string,
-      transaction: Transaction,
-      status: TransactionStatus,
-    },
-  }>,
+  navigation: *,
+  route: { params: RouteParams },
 };
 
 class ConnectDevice extends Component<Props> {

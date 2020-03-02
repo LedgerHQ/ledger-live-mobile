@@ -13,7 +13,6 @@ import React, { useCallback } from "react";
 import { Platform, StyleSheet, View } from "react-native";
 import { RectButton } from "react-native-gesture-handler";
 import { withNavigation } from "@react-navigation/compat";
-import type { NavigationScreenProp } from "react-navigation";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { ScreenName } from "../../const";
@@ -35,7 +34,7 @@ export type AccountDistributionItem = {
 type Props = {
   item: AccountDistributionItem,
   accounts: Account[],
-  navigation: NavigationScreenProp<*>,
+  navigation: *,
 };
 
 const mapStateToProps = createStructuredSelector({

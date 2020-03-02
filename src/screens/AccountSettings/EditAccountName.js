@@ -3,7 +3,6 @@ import React, { PureComponent } from "react";
 import i18next from "i18next";
 import { View, StyleSheet, ScrollView } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
-import type { NavigationScreenProp } from "react-navigation";
 import type { Account } from "@ledgerhq/live-common/lib/types";
 import { connect } from "react-redux";
 import { compose } from "redux";
@@ -22,18 +21,19 @@ export const MAX_ACCOUNT_NAME_LENGHT = 50;
 
 const forceInset = { bottom: "always" };
 
-type Props = {
-  navigation: NavigationScreenProp<{
-    params: {
-      account: *,
-      accountId?: string,
-      accountName?: string,
-      onAccountNameChange: (string, *) => void,
-    },
-  }>,
-  updateAccount: Function,
-  account: Account,
-};
+interface RouteParams {
+  account: *;
+  accountId?: string;
+  accountName?: string;
+  onAccountNameChange: (string, *) => void;
+}
+
+interface Props {
+  navigation: *;
+  route: { params: RouteParams };
+  updateAccount: Function;
+  account: Account;
+}
 
 type State = {
   accountName: string,

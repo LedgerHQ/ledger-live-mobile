@@ -10,8 +10,6 @@ import {
 } from "react-native";
 import Icon from "react-native-vector-icons/dist/Feather";
 import Config from "react-native-config";
-import type { NavigationScreenProp } from "react-navigation";
-import type { CryptoCurrency } from "@ledgerhq/live-common/lib/types";
 import { NavigatorName, ScreenName } from "../../const";
 import { cryptoCurrenciesSelector } from "../../reducers/accounts";
 import SettingsCard from "../../components/SettingsCard";
@@ -27,7 +25,7 @@ import timer from "../../timer";
 
 // We can extend specific type for screen components from typescritpt definitions later
 interface Props {
-  navigation: NavigationScreenProp<*>;
+  navigation: *;
 }
 
 export default function Settings({ navigation }: Props) {

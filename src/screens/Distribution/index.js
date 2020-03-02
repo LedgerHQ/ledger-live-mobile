@@ -13,7 +13,6 @@ import {
 } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { withNavigation } from "@react-navigation/compat";
-import type { NavigationScreenProp } from "react-navigation";
 import { getAssetsDistribution } from "@ledgerhq/live-common/lib/portfolio";
 import { createStructuredSelector, createSelector } from "reselect";
 import type { AssetsDistribution } from "@ledgerhq/live-common/lib/types/portfolio";
@@ -34,7 +33,7 @@ import { calculateCountervalueSelector } from "../../actions/general";
 const forceInset = { bottom: "always" };
 
 type Props = {
-  navigation: NavigationScreenProp<*>,
+  navigation: *,
   distribution: AssetsDistribution,
   counterValueCurrency: Currency,
   t: T,

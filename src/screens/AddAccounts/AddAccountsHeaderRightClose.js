@@ -2,12 +2,11 @@
 
 import React from "react";
 import { Trans, withTranslation } from "react-i18next";
-import type { NavigationScreenProp } from "react-navigation";
 
 import HeaderRightClose from "../../components/HeaderRightClose";
 
 type Props = {
-  navigation: NavigationScreenProp<*>,
+  navigation: *,
 };
 
 const routesWithConfirmation = ["AddAccountsAccounts"];

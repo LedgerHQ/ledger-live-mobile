@@ -2,14 +2,13 @@
 
 import React, { Component } from "react";
 import { StyleSheet, View } from "react-native";
-import type { NavigationScreenProp } from "react-navigation";
 import { Sentry } from "react-native-sentry";
 
 import Button from "../components/Button";
 
 class DebugBLE extends Component<
   {
-    navigation: NavigationScreenProp<*>,
+    navigation: *,
   },
   {
     renderCrash: boolean,

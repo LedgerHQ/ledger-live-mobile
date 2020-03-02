@@ -13,7 +13,6 @@ import { listTokenTypesForCryptoCurrency } from "@ledgerhq/live-common/lib/curre
 import type { Account } from "@ledgerhq/live-common/lib/types";
 import { withNavigation } from "@react-navigation/compat";
 import Swipeable from "react-native-gesture-handler/Swipeable";
-import type { NavigationScreenProp } from "react-navigation";
 import { ScreenName } from "../const";
 import { track } from "../analytics";
 import AccountCard from "./AccountCard";
@@ -32,7 +31,7 @@ const selectAllHitSlop = {
 };
 
 type ListProps = {
-  navigation: NavigationScreenProp<*>,
+  navigation: *,
   accounts: Account[],
   onPressAccount?: Account => void,
   onSelectAll?: (Account[]) => void,
@@ -125,7 +124,7 @@ class SelectableAccount extends PureComponent<
     showHint: boolean,
     rowIndex: number,
     listIndex: number,
-    navigation: NavigationScreenProp<*>,
+    navigation: *,
     onAccountNameChange?: (name: string, changedAccount: Account) => void,
   },
   { stopAnimation: boolean },

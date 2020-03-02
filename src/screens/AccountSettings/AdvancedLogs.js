@@ -2,7 +2,6 @@
 import React, { PureComponent } from "react";
 import i18next from "i18next";
 import { View, StyleSheet, ScrollView } from "react-native";
-import type { NavigationScreenProp } from "react-navigation";
 import type { Account } from "@ledgerhq/live-common/lib/types";
 import { connect } from "react-redux";
 import { compose } from "redux";
@@ -14,13 +13,16 @@ import LText from "../../components/LText";
 import { localeIds } from "../../languages";
 import colors from "../../colors";
 
-type Props = {
-  navigation: NavigationScreenProp<{
-    accountId: string,
-  }>,
-  updateAccount: Function,
-  account: Account,
-};
+interface RouteParams {
+  accountId: string;
+}
+
+interface Props {
+  navigation: *;
+  route: { params: RouteParams };
+  updateAccount: Function;
+  account: Account;
+}
 
 const mapStateToProps = createStructuredSelector({
   account: accountScreenSelector,

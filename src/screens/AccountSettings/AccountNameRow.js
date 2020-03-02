@@ -2,7 +2,6 @@
 import React, { PureComponent } from "react";
 import { Trans } from "react-i18next";
 import { StyleSheet } from "react-native";
-import type { NavigationScreenProp } from "react-navigation";
 import type { Account } from "@ledgerhq/live-common/lib/types";
 import { ScreenName } from "../../const";
 import SettingsRow from "../../components/SettingsRow";
@@ -10,7 +9,7 @@ import LText from "../../components/LText";
 import colors from "../../colors";
 
 type Props = {
-  navigation: NavigationScreenProp<*>,
+  navigation: *,
   account: Account,
 };
 

@@ -4,7 +4,6 @@ import React, { PureComponent } from "react";
 import { StyleSheet, View, Animated, SectionList } from "react-native";
 import type { SectionBase } from "react-native/Libraries/Lists/SectionList";
 import { connect } from "react-redux";
-import type { NavigationScreenProp } from "react-navigation";
 import { withTranslation } from "react-i18next";
 import {
   isAccountEmpty,
@@ -52,22 +51,25 @@ import SubAccountsList from "./SubAccountsList";
 import perFamilyAccountHeader from "../../generated/AccountHeader";
 import perFamilyAccountBodyHeader from "../../generated/AccountBodyHeader";
 
-type Props = {
-  useCounterValue: boolean,
-  switchCountervalueFirst: () => *,
-  account: AccountLike,
-  parentAccount: ?Account,
-  countervalueChange: ValueChange,
-  cryptoChange: ValueChange,
-  range: PortfolioRange,
-  history: BalanceHistoryWithCountervalue,
-  counterValueCurrency: Currency,
-  countervalueAvailable: boolean,
-  navigation: { emit: (event: string) => void } & NavigationScreenProp<{
-    accountId: string,
-    parentId?: string,
-  }>,
-};
+interface RouteParams {
+  accountId: string;
+  parentId?: string;
+}
+
+interface Props {
+  useCounterValue: boolean;
+  switchCountervalueFirst: () => *;
+  account: AccountLike;
+  parentAccount: ?Account;
+  countervalueChange: ValueChange;
+  cryptoChange: ValueChange;
+  range: PortfolioRange;
+  history: BalanceHistoryWithCountervalue;
+  counterValueCurrency: Currency;
+  countervalueAvailable: boolean;
+  navigation: { emit: (event: string) => void } & *;
+  route: { params: RouteParams };
+}
 
 type State = {
   opCount: number,

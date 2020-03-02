@@ -6,7 +6,6 @@ import IconFa from "react-native-vector-icons/dist/FontAwesome";
 import { withTranslation } from "react-i18next";
 import Config from "react-native-config";
 import SafeAreaView from "react-native-safe-area-view";
-import type { NavigationScreenProp } from "react-navigation";
 
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
@@ -17,7 +16,7 @@ import BottomModalChoice from "../../components/BottomModalChoice";
 import { readOnlyModeEnabledSelector } from "../../reducers/settings";
 
 type Props = {
-  navigation: NavigationScreenProp<*>,
+  navigation: *,
   isOpened: boolean,
   onClose: () => void,
   readOnlyModeEnabled: boolean,

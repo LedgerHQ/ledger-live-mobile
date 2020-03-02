@@ -1,7 +1,6 @@
 /* @flow */
 import React, { PureComponent } from "react";
 import { View, StyleSheet, ScrollView, FlatList } from "react-native";
-import type { NavigationScreenProp } from "react-navigation";
 import type { Account } from "@ledgerhq/live-common/lib/types";
 import { connect } from "react-redux";
 import { compose } from "redux";
@@ -12,13 +11,16 @@ import { updateAccount } from "../../actions/accounts";
 import SettingsRow from "../../components/SettingsRow";
 import Touchable from "../../components/Touchable";
 
-type Props = {
-  navigation: NavigationScreenProp<{
-    accountId: string,
-  }>,
-  updateAccount: Function,
-  account: Account,
-};
+interface RouteParams {
+  accountId: string;
+}
+
+interface Props {
+  navigation: *;
+  route: { params: RouteParams };
+  updateAccount: Function;
+  account: Account;
+}
 
 const mapStateToProps = createStructuredSelector({
   account: accountScreenSelector,

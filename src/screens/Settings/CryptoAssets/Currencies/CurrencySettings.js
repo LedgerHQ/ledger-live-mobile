@@ -5,7 +5,6 @@ import { compose } from "redux";
 import { Trans, withTranslation } from "react-i18next";
 import { View, StyleSheet } from "react-native";
 import Slider from "react-native-slider";
-import type { NavigationScreenProp } from "react-navigation";
 import type { CryptoCurrency } from "@ledgerhq/live-common/lib/types";
 import { getCryptoCurrencyById } from "@ledgerhq/live-common/lib/currencies";
 import SettingsRow from "../../../../components/SettingsRow";
@@ -21,7 +20,7 @@ import CurrencyIcon from "../../../../components/CurrencyIcon";
 
 type Props = {
   confirmationsNb: number,
-  navigation: NavigationScreenProp<*>,
+  navigation: *,
   updateCurrencySettings: Function,
   t: T,
   defaults: *,
@@ -32,7 +31,7 @@ type LocalState = {
 };
 const mapStateToProps = (
   state: State,
-  props: { navigation: NavigationScreenProp<*>, currencyId: string },
+  props: { navigation: *, currencyId: string },
 ) => {
   const currency = getCryptoCurrencyById(
     props.navigation.state.params.currencyId,
