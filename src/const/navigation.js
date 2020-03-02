@@ -1,5 +1,4 @@
 // @flow
-// import perFamilyScreens from "../generated/screens";
 
 // This will be converted into string enum once TypeScript is supported in this project.
 export const ScreenName: { [key: string]: string } = {
@@ -118,20 +117,3 @@ export const NavigatorName: { [key: string]: string } = {
   // Root
   RootNavigator: "RootNavigator",
 };
-
-// export const GeneratedFamilyScreenName: {
-//   [key: string]: string,
-// } = Object.values(perFamilyScreens).reduce(
-//   (prev, item) => ({
-//     ...prev,
-//     ...extractNames(item.sendScreens),
-//     ...extractNames(item.baseScreens),
-//   }),
-//   {},
-// );
-
-// function extractNames(obj?: { [key: string]: any }): { [key: string]: string } {
-//   return obj
-//     ? Object.keys(obj).reduce((prev, key) => ({ ...prev, [key]: key }), {})
-//     : {};
-// }
