@@ -114,12 +114,10 @@ export const someAccountsNeedMigrationSelector = createSelector(
 );
 
 // $FlowFixMe
-export const currenciesSelector = createSelector(
-  accountsSelector,
-  accounts =>
-    uniq(flattenAccounts(accounts).map(a => getAccountCurrency(a))).sort(
-      (a, b) => a.name.localeCompare(b.name),
-    ),
+export const currenciesSelector = createSelector(accountsSelector, accounts =>
+  uniq(flattenAccounts(accounts).map(a => getAccountCurrency(a))).sort((a, b) =>
+    a.name.localeCompare(b.name),
+  ),
 );
 
 // $FlowFixMe
@@ -179,9 +177,8 @@ export const isUpToDateAccountSelector = createSelector(
 );
 
 // $FlowFixMe
-export const isUpToDateSelector = createSelector(
-  accountsSelector,
-  accounts => accounts.every(isUpToDateAccount),
+export const isUpToDateSelector = createSelector(accountsSelector, accounts =>
+  accounts.every(isUpToDateAccount),
 );
 
 export default handleActions(handlers, initialState);

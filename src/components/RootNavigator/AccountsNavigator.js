@@ -27,13 +27,11 @@ export default function AccountsNavigator() {
       <Stack.Screen
         name={ScreenName.Account}
         component={Account}
-        options={{
-          headerTitle: ({ navigation }) => (
-            <AccountHeaderTitle navigation={navigation} />
-          ),
-          headerRight: ({ navigation }) => (
-            <AccountHeaderRight navigation={navigation} />
-          ),
+        options={({ navigation }) => {
+          return {
+            headerTitle: () => <AccountHeaderTitle navigation={navigation} />,
+            headerRight: () => <AccountHeaderRight navigation={navigation} />,
+          };
         }}
       />
     </Stack.Navigator>

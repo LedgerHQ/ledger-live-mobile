@@ -1,5 +1,5 @@
 /* @flow */
-import React, { Component } from "react";
+import React from "react";
 import { View, StyleSheet } from "react-native";
 import { Trans } from "react-i18next";
 import LText from "./LText";

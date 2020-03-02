@@ -133,21 +133,23 @@ export default function SettingsNavigator() {
       <Stack.Screen
         name={ScreenName.DebugExport}
         component={DebugExport}
-        options={{
-          title: "Export Accounts",
-          headerRight: ({ route, navigation }) => (
-            <Button
-              event="DebugBLEBenchmark"
-              type="lightSecondary"
-              containerStyle={{ width: 100 }}
-              onPress={() =>
-                navigation.navigate(ScreenName.DebugBLEBenchmark, {
-                  deviceId: route.params?.deviceId,
-                })
-              }
-              title="Benchmark"
-            />
-          ),
+        options={({ route, navigation }) => {
+          return {
+            title: "Export Accounts",
+            headerRight: () => (
+              <Button
+                event="DebugBLEBenchmark"
+                type="lightSecondary"
+                containerStyle={{ width: 100 }}
+                onPress={() =>
+                  navigation.navigate(ScreenName.DebugBLEBenchmark, {
+                    deviceId: route.params?.deviceId,
+                  })
+                }
+                title="Benchmark"
+              />
+            ),
+          };
         }}
       />
       <Stack.Screen

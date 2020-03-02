@@ -8,6 +8,6 @@ export default function useAppStateListener(): void {
   const { isConnected } = useNetInfo();
 
   useEffect(() => {
-    dispatch(syncIsConnected(isConnected))
+    dispatch(syncIsConnected(isConnected));
   }, [dispatch, isConnected]);
 }

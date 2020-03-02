@@ -262,10 +262,7 @@ export const currencySettingsSelector = (
 });
 
 // $FlowFixMe
-export const privacySelector = createSelector(
-  storeSelector,
-  s => s.privacy,
-);
+export const privacySelector = createSelector(storeSelector, s => s.privacy);
 
 // $FlowFixMe
 export const reportErrorsEnabledSelector = createSelector(

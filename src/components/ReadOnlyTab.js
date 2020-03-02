@@ -47,7 +47,4 @@ class ReadOnlyTab extends Component<
   }
 }
 
-export default connect(
-  mapStateToProps,
-  null,
-)(ReadOnlyTab);
+export default connect(mapStateToProps, null)(ReadOnlyTab);

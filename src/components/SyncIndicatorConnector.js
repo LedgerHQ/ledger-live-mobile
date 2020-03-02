@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { withTranslation } from "react-i18next";
 import { compose } from "redux";
-
 import type { AsyncState } from "../reducers/bridgeSync";
 import { globalSyncStateSelector } from "../reducers/bridgeSync";
 import { isUpToDateSelector } from "../reducers/accounts";
@@ -48,8 +47,5 @@ export default (Decorated: React$ComponentType<any>) => {
     </BridgeSyncConsumer>
   );
 
-  return compose(
-    connect(mapStateToProps),
-    withTranslation(),
-  )(SyncIndicator);
+  return compose(connect(mapStateToProps), withTranslation())(SyncIndicator);
 };

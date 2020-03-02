@@ -1,5 +1,5 @@
 /* @flow */
-import React, { PureComponent, Fragment } from "react";
+import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { Trans } from "react-i18next";
 import { View, StyleSheet } from "react-native";
@@ -49,7 +49,7 @@ class ClearCacheRow extends PureComponent<Props, State> {
     const { isModalOpened } = this.state;
 
     return (
-      <Fragment>
+      <>
         <SettingsRow
           event="ClearCacheRow"
           title={<Trans i18nKey="settings.help.clearCache" />}
@@ -97,15 +97,12 @@ class ClearCacheRow extends PureComponent<Props, State> {
             }
           />
         </BottomModal>
-      </Fragment>
+      </>
     );
   }
 }
 
-export default connect(
-  null,
-  mapDispatchToProps,
-)(withReboot(ClearCacheRow));
+export default connect(null, mapDispatchToProps)(withReboot(ClearCacheRow));
 
 const styles = StyleSheet.create({
   footerContainer: {

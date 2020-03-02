@@ -28,7 +28,6 @@ class DebugWSImport extends Component<
       this.setState({ secret: share[0], ip: share[1], scanning: false }, () => {
         const { ip, secret } = this.state;
 
-        /* global WebSocket */
         const ws = new WebSocket(`ws://${ip}:1234`);
         ws.onopen = () => {
           ws.send(secret);

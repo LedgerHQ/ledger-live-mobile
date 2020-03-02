@@ -8,7 +8,6 @@ import { createStructuredSelector } from "reselect";
 
 import { TrackScreen } from "../../../analytics";
 import { completeOnboarding } from "../../../actions/settings";
-import { NavigatorName } from "../../../const";
 import LText from "../../../components/LText";
 import Button from "../../../components/Button";
 import OnboardingLayout from "../OnboardingLayout";

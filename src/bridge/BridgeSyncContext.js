@@ -259,9 +259,6 @@ class Provider extends Component<BridgeSyncProviderOwnProps, Sync> {
   }
 }
 
-export const BridgeSyncProvider = connect(
-  mapStateToProps,
-  actions,
-)(Provider);
+export const BridgeSyncProvider = connect(mapStateToProps, actions)(Provider);
 
 export const BridgeSyncConsumer = BridgeSyncContext.Consumer;

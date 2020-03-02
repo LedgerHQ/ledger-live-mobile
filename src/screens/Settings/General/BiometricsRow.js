@@ -18,6 +18,7 @@ type Props = {
   iconLeft: *,
   t: T,
 };
+
 type State = {
   validationPending: boolean,
 };
@@ -113,9 +114,6 @@ class BiometricsRow extends Component<Props, State> {
 }
 
 export default compose(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps,
-  ),
+  connect(mapStateToProps, mapDispatchToProps),
   withTranslation(),
 )(BiometricsRow);

@@ -52,7 +52,6 @@ class AddAccountsTokenCurrencyDisclaimer extends Component<Props> {
   };
 
   render() {
-    const { navigation } = this.props;
     const token = this.props.route.params?.token;
 
     const tokenName = `${token.name} (${token.ticker})`;
