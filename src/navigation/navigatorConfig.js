@@ -14,6 +14,7 @@ export const defaultNavigationOptions = {
   headerBackTitle: null,
   headerBackImage: (props: {}) => <HeaderBackImage {...props} />,
   headerTitleAllowFontScaling: false,
+  gestureEnabled: false,
 };
 
 export const stackNavigatorConfig = {

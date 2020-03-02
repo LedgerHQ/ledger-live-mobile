@@ -272,10 +272,11 @@ const SelectValidator = ({
         desc="Please enter the address of the custom validator to delegate your account to."
         confirmLabel="Confirm validator"
         confirmProps={{
-          disabled: bridgePending || !!error,
+          disabled: bridgePending || !!status.errors.recipient,
           pending: bridgePending,
         }}
         style={keyboardHeight ? { marginBottom: keyboardHeight } : undefined}
+        containerStyle={{ alignSelf: "stretch" }}
       >
         <TextInput
           placeholder="Enter validator address"
@@ -399,7 +400,6 @@ const styles = StyleSheet.create({
     opacity: 0.5,
   },
   addressInput: {
-    alignSelf: "stretch",
     color: colors.darkBlue,
     ...getFontStyle({ semiBold: true }),
     fontSize: 20,

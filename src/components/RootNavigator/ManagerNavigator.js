@@ -23,6 +23,7 @@ export default function ManagerNavigator() {
         options={{
           title: ({ route }) => route.params?.title ?? "manager.title",
           headerRight: null,
+          gestureEnabled: false,
         }}
       />
       <Stack.Screen
