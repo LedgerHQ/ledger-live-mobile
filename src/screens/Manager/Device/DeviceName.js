@@ -1,7 +1,7 @@
 /* @flow */
 import React, { useCallback } from "react";
 import { StyleSheet, View } from "react-native";
-import { withNavigation } from "react-navigation";
+import { withNavigation } from "@react-navigation/compat";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { Trans } from "react-i18next";

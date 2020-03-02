@@ -1,6 +1,6 @@
 // @flow
 import React, { PureComponent } from "react";
-import { withNavigationFocus } from "react-navigation";
+import { withNavigationFocus } from "@react-navigation/compat";
 
 // $FlowFixMe
 export const SkipLockContext = React.createContext((_: boolean) => {});

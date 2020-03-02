@@ -2,12 +2,11 @@
 import React, { Component, Fragment } from "react";
 import { View, StyleSheet, SectionList } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
-import { HeaderBackButton } from "react-navigation-stack";
+import { HeaderBackButton } from "@react-navigation/stack";
 import groupBy from "lodash/groupBy";
 import concat from "lodash/concat";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
-import type { NavigationStackProp } from "react-navigation-stack";
 import type { Account } from "@ledgerhq/live-common/lib/types";
 import type { Result } from "@ledgerhq/live-common/lib/cross";
 import type { ImportItem } from "@ledgerhq/live-common/lib/account";

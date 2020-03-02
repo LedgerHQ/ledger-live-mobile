@@ -1,5 +1,4 @@
 import React, { useState, useCallback, useEffect, memo } from "react";
-import { NavigationActions } from "react-navigation";
 
 import { useApps } from "./shared";
 import AppsScreen from "./AppsScreen";
@@ -84,7 +83,7 @@ const Manager = ({ navigation, route }: Props) => {
       if (blockNavigation) {
         /** we listen for future navigation actions that trigger page changes (not SET_PARAMS) */
         navListener = navigation.addListener("action", e => {
-          if (e.action && e.action.type !== NavigationActions.SET_PARAMS) {
+          if (e.action && e.action.type !== "SET_PARAMS") {
             /** set quit manager modal to the navigation action we caught */
             setQuitManagerAction(e.action);
           }

@@ -38,9 +38,6 @@
   },
   "jest": {
     "preset": "react-native",
-    "transformIgnorePatterns": [
-      "node_modules/(?!react-navigation)/"
-    ],
     "transform": {
       "^.+\\.js$": "<rootDir>/node_modules/react-native/jest/preprocessor.js"
     }
@@ -139,9 +136,6 @@
     "react-native-udp": "^3.0.0",
     "react-native-vector-icons": "^6.6.0",
     "react-native-version-number": "^0.3.6",
-    "react-navigation": "4.1.1",
-    "react-navigation-stack": "1.10.3",
-    "react-navigation-tabs": "2.6.0",
     "react-redux": "7.2.0",
     "readable-stream": "3.6.0",
     "redux": "4.0.5",
