@@ -3,7 +3,6 @@
 import React, { PureComponent } from "react";
 import { Keyboard, View, StyleSheet } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
-import type { NavigationScreenProp } from "react-navigation";
 import { withTranslation, Trans } from "react-i18next";
 import Icon from "react-native-vector-icons/dist/Feather";
 import { compose } from "redux";
@@ -40,24 +39,27 @@ const mapDispatchToProps = {
   saveBleDeviceName,
 };
 
+interface RouteParams {
+  deviceId: string;
+  deviceName: string;
+}
+
+interface Props {
+  navigation: *;
+  route: { params: RouteParams };
+  deviceName: string;
+  saveBleDeviceName: (string, string) => *;
+}
+
 class EditDeviceName extends PureComponent<
-  {
-    navigation: NavigationScreenProp<{
-      params: {
-        deviceId: string,
-        deviceName: string,
-      },
-    }>,
-    deviceName: string,
-    saveBleDeviceName: (string, string) => *,
-  },
+  Props,
   {
     name: string,
     error: ?Error,
     connecting: ?DeviceMeta,
   },
 > {
-  initialName = this.props.navigation.getParam("deviceName");
+  initialName = this.props.route.params?.deviceName;
 
   state = {
     name: this.initialName,
@@ -93,7 +95,7 @@ class EditDeviceName extends PureComponent<
           this.setState(prevState => ({
             name: prevState.name.trim(),
             connecting: {
-              deviceId: this.props.navigation.getParam("deviceId"),
+              deviceId: this.props.route.params?.deviceId,
               deviceName: prevState.name.trim(),
               modelId: "nanoX",
               wired: false,
@@ -111,8 +113,8 @@ class EditDeviceName extends PureComponent<
   };
 
   onDone = () => {
-    const { saveBleDeviceName, navigation } = this.props;
-    saveBleDeviceName(navigation.getParam("deviceId"), this.state.name);
+    const { saveBleDeviceName, route } = this.props;
+    saveBleDeviceName(route.params?.deviceId, this.state.name);
     this.props.navigation.goBack();
   };
 

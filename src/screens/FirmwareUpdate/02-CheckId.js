@@ -3,7 +3,6 @@
 import React, { Component } from "react";
 import { View, StyleSheet } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
-import type { NavigationStackProp } from "react-navigation-stack";
 import { withTranslation, Trans } from "react-i18next";
 import firmwareUpdatePrepare from "@ledgerhq/live-common/lib/hw/firmwareUpdate-prepare";
 import type { FirmwareUpdateContext } from "@ledgerhq/live-common/lib/types/manager";
@@ -20,16 +19,15 @@ import getWindowDimensions from "../../logic/getWindowDimensions";
 
 const forceInset = { bottom: "always" };
 
-type Navigation = NavigationStackProp<{
-  params: {
-    deviceId: string,
-    firmware: FirmwareUpdateContext,
-  },
-}>;
+interface RouteParams {
+  deviceId: string;
+  firmware: FirmwareUpdateContext;
+}
 
-type Props = {
-  navigation: Navigation,
-};
+interface Props {
+  navigation: *;
+  route: { params: RouteParams };
+}
 
 type State = {
   progress: number,
@@ -45,9 +43,8 @@ class FirmwareUpdateCheckId extends Component<Props, State> {
   sub: *;
 
   componentDidMount() {
-    const { navigation } = this.props;
-    const deviceId = navigation.getParam("deviceId");
-    const firmware = navigation.getParam("firmware");
+    const { navigation, route } = this.props;
+    const { deviceId, firmware } = route.params || {};
 
     if (!firmware) {
       // if there is no latest firmware we'll jump to success screen
@@ -86,9 +83,8 @@ class FirmwareUpdateCheckId extends Component<Props, State> {
   }
 
   render() {
-    const { navigation } = this.props;
     const { progress } = this.state;
-    const { osu } = navigation.getParam("firmware");
+    const { osu } = this.props.route.params?.firmware.osu;
     const windowWidth = getWindowDimensions().width;
 
     return (

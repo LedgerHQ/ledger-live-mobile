@@ -47,7 +47,7 @@ class ValidationError extends Component<Props> {
   };
 
   render() {
-    const error = this.route.params?.error;
+    const error = this.props.route.params?.error;
 
     return (
       <SafeAreaView style={styles.root} forceInset={forceInset}>

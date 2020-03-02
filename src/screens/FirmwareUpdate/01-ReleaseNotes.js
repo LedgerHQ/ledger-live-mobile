@@ -2,7 +2,6 @@
 import React, { Component } from "react";
 import { View, StyleSheet, ScrollView } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
-import type { NavigationScreenProp } from "react-navigation";
 import { withTranslation, Trans } from "react-i18next";
 
 import manager from "@ledgerhq/live-common/lib/manager";
@@ -16,16 +15,15 @@ import colors from "../../colors";
 
 const forceInset = { bottom: "always" };
 
-type Navigation = NavigationScreenProp<{
-  params: {
-    deviceId: string,
-    firmware: FirmwareUpdateContext,
-  },
-}>;
+interface RouteParams {
+  deviceId: string;
+  firmware: FirmwareUpdateContext;
+}
 
-type Props = {
-  navigation: Navigation,
-};
+interface Props {
+  navigation: *;
+  route: { params: RouteParams };
+}
 
 type State = {};
 
@@ -38,8 +36,7 @@ class FirmwareUpdateReleaseNotes extends Component<Props, State> {
   };
 
   render() {
-    const { navigation } = this.props;
-    const firmware = navigation.getParam("firmware");
+    const firmware = this.props.route.params?.firmware;
     if (!firmware) return null;
     const { osu } = firmware;
     const version = manager.getFirmwareVersion(osu);

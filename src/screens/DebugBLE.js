@@ -217,7 +217,7 @@ class DebugBLE extends Component<
   };
 
   render() {
-    const deviceId = this.route.params?.deviceId;
+    const deviceId = this.props.route.params?.deviceId;
     const { logs, useBLEframe } = this.state;
     return (
       <KeyboardView style={{ flex: 1 }}>

@@ -30,19 +30,18 @@ import HeaderBackImage from "../../components/HeaderBackImage";
 
 const forceInset = { bottom: "always" };
 
-type Nav = NavigationStackProp<{
-  params: {
-    result: Result,
-    onFinish?: (NavigationStackProp<*>) => void,
-  },
-}>;
+interface RouteParams {
+  result: Result;
+  onFinish?: (*) => void;
+}
 
-type Props = {
-  navigation: Nav,
-  accounts: Account[],
-  importAccounts: ({ items: ImportItem[], selectedAccounts: string[] }) => void,
-  importDesktopSettings: (*) => void,
-};
+interface Props {
+  navigation: *;
+  route: { params: RouteParams };
+  accounts: Account[];
+  importAccounts: ({ items: ImportItem[], selectedAccounts: string[] }) => void;
+  importDesktopSettings: (*) => void;
+}
 
 type State = {
   selectedAccounts: string[],
@@ -110,11 +109,11 @@ class DisplayResult extends Component<Props, State> {
   onImport = async () => {
     const { importAccounts, importDesktopSettings, navigation } = this.props;
     const { selectedAccounts, items, importSettings } = this.state;
-    const onFinish = this.route.params?.onFinish;
+    const onFinish = this.props.route.params?.onFinish;
     this.setState({ importing: true });
     importAccounts({ items, selectedAccounts });
     if (importSettings) {
-      importDesktopSettings(this.route.params?.result.settings);
+      importDesktopSettings(this.props.route.params?.result.settings);
     }
 
     if (onFinish) onFinish(navigation);

@@ -15,7 +15,6 @@ import { withTranslation, Trans } from "react-i18next";
 import { StyleSheet, View, ScrollView } from "react-native";
 // $FlowFixMe
 import SafeAreaView from "react-native-safe-area-view";
-import type { NavigationStackProp } from "react-navigation-stack";
 import type { CryptoCurrency, Account } from "@ledgerhq/live-common/lib/types";
 import { getCurrencyBridge } from "@ledgerhq/live-common/lib/bridge";
 import { ScreenName } from "../../const";
@@ -48,20 +47,21 @@ const SectionAccounts = ({ defaultSelected, ...rest }: *) => {
   return <SelectableAccountsList {...rest} />;
 };
 
-type Props = {
-  navigation: NavigationStackProp<{
-    params: {
-      currency: CryptoCurrency,
-      deviceId: string,
-    },
-  }>,
+interface RouteParams {
+  currency: CryptoCurrency;
+  deviceId: string;
+}
+
+interface Props {
+  navigation: *;
+  route: { params: RouteParams };
   replaceAccounts: ({
     scannedAccounts: Account[],
     selectedIds: string[],
     renamings: { [id: string]: string },
-  }) => void,
-  existingAccounts: Account[],
-};
+  }) => void;
+  existingAccounts: Account[];
+}
 
 type State = {
   scanning: boolean,
@@ -104,9 +104,7 @@ class AddAccountsAccounts extends PureComponent<Props, State> {
   };
 
   startSubscription = () => {
-    const { navigation } = this.props;
-    const currency = navigation.getParam("currency");
-    const deviceId = navigation.getParam("deviceId");
+    const { currency, deviceId } = this.props.route.params || {};
     const bridge = getCurrencyBridge(currency);
     const syncConfig = {
       // TODO later we need to paginate only a few ops, not all (for add accounts)
@@ -194,9 +192,9 @@ class AddAccountsAccounts extends PureComponent<Props, State> {
     }));
 
   import = () => {
-    const { replaceAccounts, navigation } = this.props;
+    const { replaceAccounts, navigation, route } = this.props;
     const { scannedAccounts, selectedIds } = this.state;
-    const currency = navigation.getParam("currency");
+    const currency = route.params?.currency;
     replaceAccounts({
       scannedAccounts,
       selectedIds,
@@ -234,8 +232,8 @@ class AddAccountsAccounts extends PureComponent<Props, State> {
   scrollView = createRef();
 
   render() {
-    const { existingAccounts, navigation } = this.props;
-    const currency = navigation.getParam("currency");
+    const { existingAccounts, route } = this.props;
+    const currency = route.params?.currency;
     const { selectedIds, scanning, scannedAccounts, error } = this.state;
 
     const { sections, alreadyEmptyAccount } = groupAddAccounts(

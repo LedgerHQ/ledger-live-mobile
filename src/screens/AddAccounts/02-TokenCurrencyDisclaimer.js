@@ -35,13 +35,14 @@ const Disclaimer = ({ tokenName }: { tokenName: string }) => (
   </View>
 );
 
-type Props = {
-  navigation: NavigationScreenProp<{
-    params: {
-      token: TokenCurrency,
-    },
-  }>,
-};
+interface RouteParams {
+  token: TokenCurrency;
+}
+
+interface Props {
+  navigation: *;
+  route: { params: RouteParams };
+}
 
 class AddAccountsTokenCurrencyDisclaimer extends Component<Props> {
   onBack = () => this.props.navigation.goBack();
@@ -53,7 +54,7 @@ class AddAccountsTokenCurrencyDisclaimer extends Component<Props> {
 
   render() {
     const { navigation } = this.props;
-    const token = navigation.getParam("token");
+    const token = this.props.route.params?.token;
 
     const tokenName = `${token.name} (${token.ticker})`;
 

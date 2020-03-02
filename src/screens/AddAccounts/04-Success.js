@@ -3,7 +3,6 @@
 import React, { Component, PureComponent } from "react";
 import { withTranslation, Trans } from "react-i18next";
 import { StyleSheet, View } from "react-native";
-import type { NavigationScreenProp } from "react-navigation";
 import type { CryptoCurrency } from "@ledgerhq/live-common/lib/types";
 
 import Icon from "react-native-vector-icons/dist/Feather";
@@ -15,14 +14,15 @@ import Button from "../../components/Button";
 import IconCheck from "../../icons/Check";
 import CurrencyIcon from "../../components/CurrencyIcon";
 
-type Props = {
-  navigation: NavigationScreenProp<{
-    params: {
-      currency: CryptoCurrency,
-      deviceId: string,
-    },
-  }>,
-};
+interface RouteParams {
+  currency: CryptoCurrency;
+  deviceId: string;
+}
+
+interface Props {
+  navigation: *;
+  route: { params: RouteParams };
+}
 
 type State = {};
 
@@ -38,8 +38,7 @@ class AddAccountsSuccess extends Component<Props, State> {
   };
 
   render() {
-    const { navigation } = this.props;
-    const currency = navigation.getParam("currency");
+    const currency = this.props.route.params?.currency;
     return (
       <View style={styles.root}>
         <TrackScreen category="AddAccounts" name="Success" />

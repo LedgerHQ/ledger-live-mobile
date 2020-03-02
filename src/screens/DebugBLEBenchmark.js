@@ -115,7 +115,7 @@ class DebugBLEBenchmark extends Component<
     if (this.sub) {
       this.sub.unsubscribe();
     }
-    const deviceId = this.route.params?.deviceId;
+    const deviceId = this.props.route.params?.deviceId;
     this.sub = withDevice(deviceId)(t => {
       const loop = () => {
         const input = benchmark(this.state);

@@ -54,7 +54,7 @@ class ValidationSuccess extends Component<Props> {
   };
 
   render() {
-    const transaction = this.props.params?.transaction;
+    const transaction = this.props.route.params?.transaction;
     if (transaction.family !== "tezos") return null;
     return (
       <View style={styles.root}>
