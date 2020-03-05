@@ -25,8 +25,7 @@ const styleSheet = StyleSheet.create({
   root: {
     color: colors.darkBlue,
     fontSize: 16,
-    textAlign: "center",
-    flexGrow: 1,
-    paddingVertical: 5,
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
