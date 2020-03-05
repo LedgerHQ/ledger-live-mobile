@@ -3,7 +3,7 @@ PODS:
   - boost-for-react-native (1.63.0)
   - CocoaAsyncSocket (7.6.3)
   - CocoaLibEvent (1.0.0)
-  - djinni_objc (4.7.1)
+  - djinni_objc (4.9.1)
   - DoubleConversion (1.1.6)
   - FBLazyVector (0.61.2)
   - FBReactNativeSpec (0.61.2):
@@ -67,7 +67,7 @@ PODS:
     - DoubleConversion
     - glog
   - glog (0.3.5)
-  - ledger-core-objc (4.7.1):
+  - ledger-core-objc (4.9.1):
     - djinni_objc
   - lottie-ios (3.1.6)
   - lottie-react-native (3.3.2):
@@ -245,13 +245,13 @@ PODS:
     - React
     - react-native-ble-plx-swift
   - react-native-ble-plx-swift (1.1.1)
-  - react-native-camera (3.18.0):
+  - react-native-camera (3.19.0):
     - React
-    - react-native-camera/RCT (= 3.18.0)
-    - react-native-camera/RN (= 3.18.0)
-  - react-native-camera/RCT (3.18.0):
+    - react-native-camera/RCT (= 3.19.0)
+    - react-native-camera/RN (= 3.19.0)
+  - react-native-camera/RCT (3.19.0):
     - React
-  - react-native-camera/RN (3.18.0):
+  - react-native-camera/RN (3.19.0):
     - React
   - react-native-config (0.11.7):
     - React
@@ -259,7 +259,7 @@ PODS:
     - React
   - react-native-locale (0.0.19):
     - React
-  - react-native-netinfo (5.5.0):
+  - react-native-netinfo (5.5.1):
     - React
   - react-native-randombytes (3.5.3):
     - React
@@ -311,22 +311,22 @@ PODS:
   - RNAnalytics (0.1.0-beta.0):
     - Analytics
     - React
-  - RNCAsyncStorage (1.8.0):
+  - RNCAsyncStorage (1.8.1):
     - React
-  - RNCMaskedView (0.1.6):
+  - RNCMaskedView (0.1.7):
     - React
   - RNGestureHandler (1.6.0):
     - React
   - RNKeychain (4.0.5):
     - React
-  - RNLibLedgerCore (4.7.1):
+  - RNLibLedgerCore (4.9.1):
     - ledger-core-objc
     - React
   - RNOS (1.2.6):
     - React
   - RNReanimated (1.7.0):
     - React
-  - RNScreens (2.0.0-beta.10):
+  - RNScreens (2.2.0):
     - React
   - RNSVG (11.0.1):
     - React
@@ -543,7 +543,7 @@ SPEC CHECKSUMS:
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
   CocoaAsyncSocket: eafaa68a7e0ec99ead0a7b35015e0bf25d2c8987
   CocoaLibEvent: 2fab71b8bd46dd33ddb959f7928ec5909f838e3f
-  djinni_objc: a5bcaa0471e20bb4bc7cbf7bad91bb1793d8d503
+  djinni_objc: 0e5d7171eea9a4f3ded83e18a442ad06b7e0e243
   DoubleConversion: 5805e889d232975c086db112ece9ed034df7a0b2
   FBLazyVector: 68b6a76960fbd8ecd9fb7ce0aadd3329c3340a99
   FBReactNativeSpec: 5a764c60abdc3336a213e5310c40b74741f32839
@@ -556,7 +556,7 @@ SPEC CHECKSUMS:
   FlipperKit: 0730530396cb6a3879353fd204220ae1258d4f77
   Folly: 30e7936e1c45c08d884aa59369ed951a8e68cf51
   glog: 1f3da668190260b06b429bb211bfbee5cd790c28
-  ledger-core-objc: dc3bfe1ef37c0ecbc5041d769d8055517b050af2
+  ledger-core-objc: d590c2be69b58ec003bac5b0603b2227aa2fb0f6
   lottie-ios: 85ce835dd8c53e02509f20729fc7d6a4e6645a0a
   lottie-react-native: 2a1a82bb326ae51331a5520de0cf706733c6db69
   OpenSSL-Universal: 8b48cc0d10c1b2923617dfe5c178aa9ed2689355
@@ -572,11 +572,11 @@ SPEC CHECKSUMS:
   React-jsinspector: 111d7d342b07a904c400592e02a2b958f1098b60
   react-native-ble-plx: 304c7bee074a05581672c9990f375b3906808718
   react-native-ble-plx-swift: eb64f02b988becb84a60164aba9fab5d6ddb6dc8
-  react-native-camera: 3308898e1b09bf6211647c6e3e42d5f7aa02259e
+  react-native-camera: 1f4c5be75a037b5573716a01d84ca0390c162954
   react-native-config: 55548054279d92e0e4566ea15a8b9b81028ec342
   react-native-fingerprint-scanner: 03f3d966edacf2f515e361595b6778d3502db4fb
   react-native-locale: bd8edf0e51706d469af3e2fa568a8102213a3139
-  react-native-netinfo: b84ff0cae1147315b5dc1daf0f65c0cc6ee71fb3
+  react-native-netinfo: 3bf235d94cc291cf0673ad9fd9eaae82f84ed8a9
   react-native-randombytes: 3638d24759d67c68f6ccba60c52a7a8a8faa6a23
   react-native-safe-area-context: e200d4433aba6b7e60b52da5f37af11f7a0b0392
   react-native-splash-screen: 200d11d188e2e78cea3ad319964f6142b6384865
@@ -594,14 +594,14 @@ SPEC CHECKSUMS:
   ReactCommon: 5848032ed2f274fcb40f6b9ec24067787c42d479
   ReactNativeART: c580fba2f7d188d8fa4418ce78db8130654ed10f
   RNAnalytics: 5c242b7f8117f108f5df71e96b908185db3fb4ee
-  RNCAsyncStorage: 5d83b49070d41fd72906a116c5e7bdac4ea3a814
-  RNCMaskedView: a88953beefbd347a29072d9eba90e42945fe291e
+  RNCAsyncStorage: e0dd7c8a36543b4ef84969acd9f8aceba3a92dc2
+  RNCMaskedView: 76c40a1d41c3e2535df09246a2b5487f04de0814
   RNGestureHandler: dde546180bf24af0b5f737c8ad04b6f3fa51609a
   RNKeychain: 840f8e6f13be0576202aefcdffd26a4f54bfe7b5
-  RNLibLedgerCore: 0f37d09ec17d94b1f72841970a5f89e20294b872
+  RNLibLedgerCore: 3f021805466a40157274016e10a8bdf57aa41587
   RNOS: 6f2f9a70895bbbfbdad7196abd952e7b01d45027
   RNReanimated: 031fe8d9ea93c2bd689a40f05320ef9d96f74d7f
-  RNScreens: c596b54c3ab63b0390aa3cb081edd438147d40ae
+  RNScreens: 812b79d384e2bea7eebc4ec981469160d4948fd5
   RNSVG: 67f1f12dae2cef6ed59a42cae74a6b8f5a9e7b46
   RNVectorIcons: 0bb4def82230be1333ddaeee9fcba45f0b288ed4
   Sentry: 4e8a17b61ddd116f89536cc81d567fdee1ebca96
