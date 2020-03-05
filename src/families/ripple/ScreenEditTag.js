@@ -9,7 +9,7 @@ import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { i18n } from "../../context/Locale";
 import KeyboardView from "../../components/KeyboardView";
 import Button from "../../components/Button";
-import { accountAndParentScreenSelectorCreator } from "../../reducers/accounts";
+import { accountScreenSelector } from "../../reducers/accounts";
 import colors from "../../colors";
 import { track } from "../../analytics";
 
@@ -33,7 +33,7 @@ const options = {
 };
 
 function RippleEditTag({ route, navigation }: Props) {
-  const { account } = useSelector(accountAndParentScreenSelectorCreator(route));
+  const { account } = useSelector(accountScreenSelector(route));
   const { t } = useTranslation();
   const transaction = route.params?.transaction;
 

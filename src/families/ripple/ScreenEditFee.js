@@ -5,7 +5,7 @@ import SafeAreaView from "react-native-safe-area-view";
 import { useSelector } from "react-redux";
 import colors from "../../colors";
 import { i18n } from "../../context/Locale";
-import { accountAndParentScreenSelectorCreator } from "../../reducers/accounts";
+import { accountScreenSelector } from "../../reducers/accounts";
 import KeyboardView from "../../components/KeyboardView";
 import EditFeeUnit from "../../components/EditFeeUnit";
 
@@ -26,7 +26,7 @@ interface Props {
 }
 
 function RippleEditFee({ route }: Props) {
-  const { account } = useSelector(accountAndParentScreenSelectorCreator(route));
+  const { account } = useSelector(accountScreenSelector(route));
   const transaction = route.params?.transaction;
 
   if (!transaction) return null;

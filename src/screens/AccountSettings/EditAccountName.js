@@ -7,7 +7,7 @@ import type { Account } from "@ledgerhq/live-common/lib/types";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { Trans, withTranslation } from "react-i18next";
-import { accountAndParentScreenSelectorCreator } from "../../reducers/accounts";
+import { accountScreenSelector } from "../../reducers/accounts";
 import { updateAccount } from "../../actions/accounts";
 import Button from "../../components/Button";
 import TextInput from "../../components/TextInput";
@@ -39,7 +39,7 @@ type State = {
 };
 
 const mapStateToProps = (state, { route }) =>
-  accountAndParentScreenSelectorCreator(route)(state);
+  accountScreenSelector(route)(state);
 
 const mapDispatchToProps = {
   updateAccount,

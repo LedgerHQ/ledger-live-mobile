@@ -12,7 +12,7 @@ import { Trans } from "react-i18next";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { BigNumber } from "bignumber.js";
 import colors from "../../../colors";
-import { accountAndParentScreenSelectorCreator } from "../../../reducers/accounts";
+import { accountScreenSelector } from "../../../reducers/accounts";
 import Button from "../../../components/Button";
 import KeyboardView from "../../../components/KeyboardView";
 import FeesRow from "./FeesRow";
@@ -38,7 +38,7 @@ interface Props {
 }
 
 function BitcoinEditFeePerByte({ navigation, route }: Props) {
-  const { account } = useSelector(accountAndParentScreenSelectorCreator(route));
+  const { account } = useSelector(accountScreenSelector(route));
 
   const transaction = route.params?.transaction;
   const [feePerByte, setFeePerByte] = useState(transaction.feePerByte);

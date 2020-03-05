@@ -10,7 +10,7 @@ import {
 } from "@ledgerhq/live-common/lib/explorers";
 import { getMainAccount } from "@ledgerhq/live-common/lib/account";
 import byFamiliesOperationDetails from "../../generated/operationDetails";
-import { accountAndParentScreenSelectorCreator } from "../../reducers/accounts";
+import { accountScreenSelector } from "../../reducers/accounts";
 import { TrackScreen } from "../../analytics";
 import Footer from "./Footer";
 import Content from "./Content";
@@ -46,9 +46,7 @@ export const CloseButton = ({ navigation }: { navigation: Navigation }) => (
 );
 
 export default function OperationDetails({ route, navigation }: Props) {
-  const { account, parentAccount } = useSelector(
-    accountAndParentScreenSelectorCreator(route),
-  );
+  const { account, parentAccount } = useSelector(accountScreenSelector(route));
   if (!account) return null;
   const operation = route.params?.operation;
   const mainAccount = getMainAccount(account, parentAccount);

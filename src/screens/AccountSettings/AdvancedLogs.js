@@ -3,7 +3,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { View, StyleSheet, ScrollView } from "react-native";
 import { useSelector } from "react-redux";
-import { accountAndParentScreenSelectorCreator } from "../../reducers/accounts";
+import { accountScreenSelector } from "../../reducers/accounts";
 import LText from "../../components/LText";
 import { localeIds } from "../../languages";
 import colors from "../../colors";
@@ -18,7 +18,7 @@ interface Props {
 }
 
 export default function AdvancedLogs({ route }: Props) {
-  const { account } = useSelector(accountAndParentScreenSelectorCreator(route));
+  const { account } = useSelector(accountScreenSelector(route));
   const { t } = useTranslation();
 
   const usefulData = {

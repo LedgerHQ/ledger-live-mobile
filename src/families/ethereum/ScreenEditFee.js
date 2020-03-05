@@ -5,7 +5,7 @@ import SafeAreaView from "react-native-safe-area-view";
 import { useSelector } from "react-redux";
 import { i18n } from "../../context/Locale";
 import colors from "../../colors";
-import { accountAndParentScreenSelectorCreator } from "../../reducers/accounts";
+import { accountScreenSelector } from "../../reducers/accounts";
 import KeyboardView from "../../components/KeyboardView";
 import EditFeeUnitEthereum from "./EditFeeUnitEthereum";
 
@@ -26,9 +26,7 @@ interface Props {
 }
 
 function EthereumEditFee({ route }: Props) {
-  const { account, parentAccount } = useSelector(
-    accountAndParentScreenSelectorCreator(route),
-  );
+  const { account, parentAccount } = useSelector(accountScreenSelector(route));
   const transaction = route.params?.transaction;
 
   if (!transaction) return null;

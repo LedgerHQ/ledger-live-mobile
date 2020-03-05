@@ -4,7 +4,7 @@ import { StyleSheet, ScrollView } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { useSelector } from "react-redux";
 import { getMainAccount } from "@ledgerhq/live-common/lib/account/helpers";
-import { accountAndParentScreenSelectorCreator } from "../../../reducers/accounts";
+import { accountScreenSelector } from "../../../reducers/accounts";
 import colors from "../../../colors";
 import { TrackScreen } from "../../../analytics";
 import SelectDevice from "../../../components/SelectDevice";
@@ -27,9 +27,7 @@ interface Props {
 }
 
 export default function ConnectDevice({ navigation, route }: Props) {
-  const { account, parentAccount } = useSelector(
-    accountAndParentScreenSelectorCreator(route),
-  );
+  const { account, parentAccount } = useSelector(accountScreenSelector(route));
 
   function onSelectDevice(meta: *): void {
     navigation.replace("DelegationValidation", {

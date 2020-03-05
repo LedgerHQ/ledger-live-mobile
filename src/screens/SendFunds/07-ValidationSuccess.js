@@ -8,7 +8,7 @@ import type {
   Account,
   Operation,
 } from "@ledgerhq/live-common/lib/types";
-import { accountAndParentScreenSelectorCreator } from "../../reducers/accounts";
+import { accountScreenSelector } from "../../reducers/accounts";
 import { TrackScreen } from "../../analytics";
 import colors from "../../colors";
 import { ScreenName } from "../../const";
@@ -72,6 +72,6 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state, { route }) =>
-  accountAndParentScreenSelectorCreator(route)(state);
+  accountScreenSelector(route)(state);
 
 export default connect(mapStateToProps)(withTranslation()(ValidationSuccess));

@@ -5,7 +5,7 @@ import SafeAreaView from "react-native-safe-area-view";
 import { connect } from "react-redux";
 import { withTranslation } from "react-i18next";
 import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
-import { accountAndParentScreenSelectorCreator } from "../../../reducers/accounts";
+import { accountScreenSelector } from "../../../reducers/accounts";
 import ValidateError from "../../../components/ValidateError";
 import { TrackScreen } from "../../../analytics";
 import colors from "../../../colors";
@@ -71,6 +71,6 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state, { route }) =>
-  accountAndParentScreenSelectorCreator(route)(state);
+  accountScreenSelector(route)(state);
 
 export default connect(mapStateToProps)(withTranslation()(ValidationError));

@@ -23,7 +23,7 @@ import {
 } from "@ledgerhq/live-common/lib/families/tezos/bakers";
 import whitelist from "@ledgerhq/live-common/lib/families/tezos/bakers.whitelist-default";
 import type { AccountLike } from "@ledgerhq/live-common/lib/types";
-import { accountAndParentScreenSelectorCreator } from "../../../reducers/accounts";
+import { accountScreenSelector } from "../../../reducers/accounts";
 import colors, { rgba } from "../../../colors";
 import { TrackScreen } from "../../../analytics";
 import { useTransactionChangeFromNavigation } from "../../../logic/screenTransactionHooks";
@@ -114,9 +114,7 @@ const BakerSelection = ({
 );
 
 export default function DelegationSummary({ navigation, route }: Props) {
-  const { account, parentAccount } = useSelector(
-    accountAndParentScreenSelectorCreator(route),
-  );
+  const { account, parentAccount } = useSelector(accountScreenSelector(route));
   const bakers = useBakers(whitelist);
   const randomBaker = useRandomBaker(bakers);
 

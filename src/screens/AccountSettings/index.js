@@ -6,7 +6,7 @@ import type { Account } from "@ledgerhq/live-common/lib/types";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { ScreenName } from "../../const";
-import { accountAndParentScreenSelectorCreator } from "../../reducers/accounts";
+import { accountScreenSelector } from "../../reducers/accounts";
 import { deleteAccount } from "../../actions/accounts";
 import BottomModal from "../../components/BottomModal";
 import { TrackScreen } from "../../analytics";
@@ -34,7 +34,7 @@ type State = {
 };
 
 const mapStateToProps = (state, { route }) =>
-  accountAndParentScreenSelectorCreator(route)(state);
+  accountScreenSelector(route)(state);
 
 const mapDispatchToProps = {
   deleteAccount,

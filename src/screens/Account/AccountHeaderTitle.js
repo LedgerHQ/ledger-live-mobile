@@ -8,13 +8,13 @@ import {
   getAccountName,
 } from "@ledgerhq/live-common/lib/account";
 import LText from "../../components/LText";
-import { accountAndParentScreenSelectorCreator } from "../../reducers/accounts";
+import { accountScreenSelector } from "../../reducers/accounts";
 import ParentCurrencyIcon from "../../components/ParentCurrencyIcon";
 
 export default function AccountHeaderTitle() {
   const navigation = useNavigation();
   const route = useRoute();
-  const { account } = useSelector(accountAndParentScreenSelectorCreator(route));
+  const { account } = useSelector(accountScreenSelector(route));
 
   function onPress() {
     navigation.emit("refocus");

@@ -27,7 +27,7 @@ import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import type { Baker } from "@ledgerhq/live-common/lib/families/tezos/bakers";
 import { useBakers } from "@ledgerhq/live-common/lib/families/tezos/bakers";
 import whitelist from "@ledgerhq/live-common/lib/families/tezos/bakers.whitelist-default";
-import { accountAndParentScreenSelectorCreator } from "../../../reducers/accounts";
+import { accountScreenSelector } from "../../../reducers/accounts";
 import { TrackScreen } from "../../../analytics";
 import colors from "../../../colors";
 import InfoModal from "../../../components/InfoModal";
@@ -427,6 +427,6 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state, { route }) =>
-  accountAndParentScreenSelectorCreator(route)(state);
+  accountScreenSelector(route)(state);
 
 export default connect(mapStateToProps)(withTranslation()(SelectValidator));

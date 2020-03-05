@@ -6,7 +6,7 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/dist/Feather";
 
 import { NavigatorName, ScreenName } from "../../const";
-import { accountAndParentScreenSelectorCreator } from "../../reducers/accounts";
+import { accountScreenSelector } from "../../reducers/accounts";
 import Touchable from "../../components/Touchable";
 import BottomModal from "../../components/BottomModal";
 import Wrench from "../../icons/Wrench";
@@ -16,9 +16,7 @@ import TokenContractAddress from "./TokenContractAddress";
 export default function AccountHeaderRight() {
   const navigation = useNavigation();
   const route = useRoute();
-  const { account, parentAccount } = useSelector(
-    accountAndParentScreenSelectorCreator(route),
-  );
+  const { account, parentAccount } = useSelector(accountScreenSelector(route));
 
   const [isOpened, setOpened] = useState(false);
 

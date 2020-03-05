@@ -17,7 +17,7 @@ import { i18n } from "../../context/Locale";
 import colors from "../../colors";
 import Button from "../../components/Button";
 import KeyboardView from "../../components/KeyboardView";
-import { accountAndParentScreenSelectorCreator } from "../../reducers/accounts";
+import { accountScreenSelector } from "../../reducers/accounts";
 
 const forceInset = { bottom: "always" };
 
@@ -38,9 +38,7 @@ interface Props {
 
 function EthereumEditGasLimit({ navigation, route }: Props) {
   const { t } = useTranslation();
-  const { account, parentAccount } = useSelector(
-    accountAndParentScreenSelectorCreator(route),
-  );
+  const { account, parentAccount } = useSelector(accountScreenSelector(route));
   const transaction = route.params?.transaction;
   const [gasLimit, setGasLimit] = useState(
     transaction.userGasLimit || transaction.estimatedGasLimit,

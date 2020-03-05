@@ -9,7 +9,7 @@ import type {
 } from "@ledgerhq/live-common/lib/types";
 import type { DeviceModelId } from "@ledgerhq/devices";
 import { updateAccountWithUpdater } from "../../actions/accounts";
-import { accountAndParentScreenSelectorCreator } from "../../reducers/accounts";
+import { accountScreenSelector } from "../../reducers/accounts";
 import { TrackScreen } from "../../analytics";
 import colors from "../../colors";
 import PreventNativeBack from "../../components/PreventNativeBack";
@@ -34,9 +34,7 @@ interface Props {
 }
 
 export default function Validation({ navigation, route }: Props) {
-  const { account, parentAccount } = useSelector(
-    accountAndParentScreenSelectorCreator(route),
-  );
+  const { account, parentAccount } = useSelector(accountScreenSelector(route));
   const dispatch = useDispatch();
   const [signing, signed] = useSignWithDevice({
     context: "Send",

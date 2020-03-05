@@ -14,7 +14,7 @@ import { ScreenName } from "../../const";
 import SyncOneAccountOnMount from "../../bridge/SyncOneAccountOnMount";
 import SyncSkipUnderPriority from "../../bridge/SyncSkipUnderPriority";
 import colors from "../../colors";
-import { accountAndParentScreenSelectorCreator } from "../../reducers/accounts";
+import { accountScreenSelector } from "../../reducers/accounts";
 import Button from "../../components/Button";
 import KeyboardView from "../../components/KeyboardView";
 import LText, { getFontStyle } from "../../components/LText";
@@ -43,9 +43,7 @@ interface Props {
 
 export default function SendSelectRecipient({ navigation, route }: Props) {
   const { t } = useTranslation();
-  const { account, parentAccount } = useSelector(
-    accountAndParentScreenSelectorCreator(route),
-  );
+  const { account, parentAccount } = useSelector(accountScreenSelector(route));
   const {
     transaction,
     setTransaction,
