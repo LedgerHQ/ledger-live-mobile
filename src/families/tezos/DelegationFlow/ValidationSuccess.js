@@ -9,7 +9,7 @@ import type {
   Operation,
   Transaction,
 } from "@ledgerhq/live-common/lib/types";
-import { accountAndParentScreenSelector } from "../../../reducers/accounts";
+import { accountAndParentScreenSelectorCreator } from "../../../reducers/accounts";
 import { TrackScreen } from "../../../analytics";
 import colors from "../../../colors";
 import PreventNativeBack from "../../../components/PreventNativeBack";
@@ -108,6 +108,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const mapStateToProps = accountAndParentScreenSelector;
+const mapStateToProps = (state, { route }) =>
+  accountAndParentScreenSelectorCreator(route)(state);
 
 export default connect(mapStateToProps)(withTranslation()(ValidationSuccess));

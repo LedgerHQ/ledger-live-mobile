@@ -1,25 +1,25 @@
 /* @flow */
 import React, { useState, useCallback } from "react";
 import { View } from "react-native";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/dist/Feather";
-import type { Account, TokenAccount } from "@ledgerhq/live-common/lib/types";
 
 import { NavigatorName } from "../../const";
-import { accountAndParentScreenSelector } from "../../reducers/accounts";
+import { accountAndParentScreenSelectorCreator } from "../../reducers/accounts";
 import Touchable from "../../components/Touchable";
 import BottomModal from "../../components/BottomModal";
 import Wrench from "../../icons/Wrench";
 import colors from "../../colors";
 import TokenContractAddress from "./TokenContractAddress";
 
-type Props = {
-  navigation: *,
-  account: ?(Account | TokenAccount),
-  parentAccount: ?Account,
-};
+export default function AccountHeaderRight() {
+  const navigation = useNavigation();
+  const route = useRoute();
+  const { account, parentAccount } = useSelector(
+    accountAndParentScreenSelectorCreator(route),
+  );
 
-const AccountHeaderRight = ({ navigation, account, parentAccount }: Props) => {
   const [isOpened, setOpened] = useState(false);
 
   const toggleModal = useCallback(() => setOpened(!isOpened), [isOpened]);
@@ -69,6 +69,4 @@ const AccountHeaderRight = ({ navigation, account, parentAccount }: Props) => {
   }
 
   return null;
-};
-
-export default connect(accountAndParentScreenSelector)(AccountHeaderRight);
+}

@@ -19,7 +19,7 @@ import getAddress from "@ledgerhq/live-common/lib/hw/getAddress";
 import { withDevice } from "@ledgerhq/live-common/lib/hw/deviceAccess";
 import type { DeviceModelId } from "@ledgerhq/devices";
 import getWindowDimensions from "../../logic/getWindowDimensions";
-import { accountAndParentScreenSelector } from "../../reducers/accounts";
+import { accountAndParentScreenSelectorCreator } from "../../reducers/accounts";
 import colors from "../../colors";
 import { TrackScreen } from "../../analytics";
 import PreventNativeBack from "../../components/PreventNativeBack";
@@ -68,8 +68,8 @@ type State = {
   zoom: boolean,
 };
 
-const mapStateToProps = (s, p) => ({
-  ...accountAndParentScreenSelector(s, p),
+const mapStateToProps = (s, { route }) => ({
+  ...accountAndParentScreenSelectorCreator(route)(s),
   readOnlyModeEnabled: readOnlyModeEnabledSelector(s),
 });
 

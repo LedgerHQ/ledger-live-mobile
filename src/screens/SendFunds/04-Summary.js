@@ -3,15 +3,11 @@ import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTran
 import React, { useState, useCallback, Component } from "react";
 import { View, StyleSheet, ScrollView } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
-import { connect } from "react-redux";
-import { withTranslation, Trans } from "react-i18next";
-import type {
-  Account,
-  AccountLike,
-  Transaction,
-} from "@ledgerhq/live-common/lib/types";
+import { useSelector } from "react-redux";
+import { Trans } from "react-i18next";
+import type { Transaction } from "@ledgerhq/live-common/lib/types";
 import { getMainAccount } from "@ledgerhq/live-common/lib/account";
-import { accountAndParentScreenSelector } from "../../reducers/accounts";
+import { accountAndParentScreenSelectorCreator } from "../../reducers/accounts";
 import colors from "../../colors";
 import { ScreenName } from "../../const";
 import { TrackScreen } from "../../analytics";
@@ -37,13 +33,14 @@ interface RouteParams {
 }
 
 interface Props {
-  account: AccountLike;
-  parentAccount: ?Account;
   navigation: *;
   route: { params: RouteParams };
 }
 
-const SendSummary = ({ account, parentAccount, navigation, route }: Props) => {
+export default function SendSummary({ navigation, route }: Props) {
+  const { account, parentAccount } = useSelector(
+    accountAndParentScreenSelectorCreator(route),
+  );
   const {
     transaction,
     setTransaction,
@@ -175,7 +172,7 @@ const SendSummary = ({ account, parentAccount, navigation, route }: Props) => {
       />
     </SafeAreaView>
   );
-};
+}
 
 const styles = StyleSheet.create({
   root: {
@@ -211,10 +208,6 @@ const styles = StyleSheet.create({
     left: 16,
   },
 });
-
-export default connect(accountAndParentScreenSelector)(
-  withTranslation()(SendSummary),
-);
 
 class VerticalConnector extends Component<*> {
   render() {

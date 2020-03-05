@@ -3,9 +3,8 @@ import React from "react";
 import { StyleSheet, ScrollView } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { useSelector } from "react-redux";
-import { useNavigation, useRoute } from "@react-navigation/native";
 import { getMainAccount } from "@ledgerhq/live-common/lib/account/helpers";
-import { accountAndParentScreenSelector } from "../../../reducers/accounts";
+import { accountAndParentScreenSelectorCreator } from "../../../reducers/accounts";
 import colors from "../../../colors";
 import { TrackScreen } from "../../../analytics";
 import SelectDevice from "../../../components/SelectDevice";
@@ -16,17 +15,20 @@ import {
 
 const forceInset = { bottom: "always" };
 
-// interface RouteParams {
-//   accountId: string;
-//   transaction: Transaction;
-//   status: TransactionStatus;
-// }
+interface RouteParams {
+  accountId: string;
+  transaction: Transaction;
+  status: TransactionStatus;
+}
 
-export default function ConnectDevice() {
-  const navigation = useNavigation();
-  const route = useRoute();
+interface Props {
+  navigation: *;
+  route: { params: RouteParams };
+}
+
+export default function ConnectDevice({ navigation, route }: Props) {
   const { account, parentAccount } = useSelector(
-    accountAndParentScreenSelector,
+    accountAndParentScreenSelectorCreator(route),
   );
 
   function onSelectDevice(meta: *): void {

@@ -4,18 +4,15 @@
 
 import React from "react";
 import { View, StyleSheet, ActivityIndicator } from "react-native";
-import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import SafeAreaView from "react-native-safe-area-view";
-import { withTranslation } from "react-i18next";
 import type {
-  AccountLike,
-  Account,
   Transaction,
   TransactionStatus,
 } from "@ledgerhq/live-common/lib/types";
 import type { DeviceModelId } from "@ledgerhq/devices";
 import { updateAccountWithUpdater } from "../../../actions/accounts";
-import { accountAndParentScreenSelector } from "../../../reducers/accounts";
+import { accountAndParentScreenSelectorCreator } from "../../../reducers/accounts";
 import { TrackScreen } from "../../../analytics";
 import colors from "../../../colors";
 import PreventNativeBack from "../../../components/PreventNativeBack";
@@ -35,26 +32,22 @@ interface RouteParams {
 }
 
 interface Props {
-  account: AccountLike;
-  parentAccount: ?Account;
-  updateAccountWithUpdater: (string, (Account) => Account) => void;
   navigation: *;
   route: { params: RouteParams };
 }
 
-const Validation = ({
-  account,
-  parentAccount,
-  navigation,
-  updateAccountWithUpdater,
-  route,
-}: Props) => {
+export default function Validation({ navigation, route }: Props) {
+  const { account, parentAccount } = useSelector(
+    accountAndParentScreenSelectorCreator(route),
+  );
+  const dispatch = useDispatch();
   const [signing, signed] = useSignWithDevice({
     context: "Delegation",
     account,
     parentAccount,
     navigation,
-    updateAccountWithUpdater,
+    updateAccountWithUpdater: (...args) =>
+      dispatch(updateAccountWithUpdater(...args)),
   });
 
   const { status, transaction, modelId, wired } = route.params || {};
@@ -88,7 +81,7 @@ const Validation = ({
       )}
     </SafeAreaView>
   );
-};
+}
 
 const styles = StyleSheet.create({
   root: {
@@ -102,14 +95,3 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
-
-const mapStateToProps = accountAndParentScreenSelector;
-
-const mapDispatchToProps = {
-  updateAccountWithUpdater,
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(withTranslation()(Validation));

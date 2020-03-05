@@ -145,7 +145,9 @@ export const accountScreenSelector = createSelector(
 );
 
 // FIXME rename to accountScreenSelector
-export const accountAndParentScreenSelector = (state: *, { route }: *) => {
+export const accountAndParentScreenSelectorCreator = (route: *) => (
+  state: *,
+) => {
   const { accountId, parentId } = route.params;
   const parentAccount: ?Account =
     parentId && accountSelector(state, { accountId: parentId });

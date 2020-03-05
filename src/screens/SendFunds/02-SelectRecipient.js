@@ -2,25 +2,19 @@
 import { RecipientRequired } from "@ledgerhq/errors";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
-import type {
-  Account,
-  AccountLike,
-  Transaction,
-} from "@ledgerhq/live-common/lib/types";
+import type { Transaction } from "@ledgerhq/live-common/lib/types";
 import React, { useCallback, useRef, useEffect } from "react";
-import { Trans, withTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { Platform, ScrollView, StyleSheet, View } from "react-native";
 import Icon from "react-native-vector-icons/dist/FontAwesome";
 import SafeAreaView from "react-native-safe-area-view";
-import { connect } from "react-redux";
-import { compose } from "redux";
+import { useSelector } from "react-redux";
 import { track, TrackScreen } from "../../analytics";
 import { ScreenName } from "../../const";
 import SyncOneAccountOnMount from "../../bridge/SyncOneAccountOnMount";
 import SyncSkipUnderPriority from "../../bridge/SyncSkipUnderPriority";
 import colors from "../../colors";
-import { accountAndParentScreenSelector } from "../../reducers/accounts";
-import type { T } from "../../types/common";
+import { accountAndParentScreenSelectorCreator } from "../../reducers/accounts";
 import Button from "../../components/Button";
 import KeyboardView from "../../components/KeyboardView";
 import LText, { getFontStyle } from "../../components/LText";
@@ -43,20 +37,15 @@ interface RouteParams {
 }
 
 interface Props {
-  account: AccountLike;
-  parentAccount: ?Account;
   navigation: *;
   route: { params: RouteParams };
-  t: T;
 }
 
-const SendSelectRecipient = ({
-  account,
-  parentAccount,
-  navigation,
-  route,
-  t,
-}: Props) => {
+export default function SendSelectRecipient({ navigation, route }: Props) {
+  const { t } = useTranslation();
+  const { account, parentAccount } = useSelector(
+    accountAndParentScreenSelectorCreator(route),
+  );
   const {
     transaction,
     setTransaction,
@@ -214,7 +203,7 @@ const SendSelectRecipient = ({
       />
     </>
   );
-};
+}
 
 const IconQRCode = ({ size, color }: { size: number, color: string }) => (
   <Icon name="qrcode" size={size} color={color} />
@@ -285,8 +274,3 @@ const styles = StyleSheet.create({
     marginLeft: 8,
   },
 });
-
-export default compose(
-  withTranslation(),
-  connect(accountAndParentScreenSelector),
-)(SendSelectRecipient);

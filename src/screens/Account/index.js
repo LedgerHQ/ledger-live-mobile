@@ -30,7 +30,7 @@ import {
   counterValueCurrencySelector,
   countervalueFirstSelector,
 } from "../../reducers/settings";
-import { accountAndParentScreenSelector } from "../../reducers/accounts";
+import { accountAndParentScreenSelectorCreator } from "../../reducers/accounts";
 import { TrackScreen } from "../../analytics";
 import accountSyncRefreshControl from "../../components/accountSyncRefreshControl";
 import OperationRow from "../../components/OperationRow";
@@ -311,11 +311,10 @@ class AccountScreen extends PureComponent<Props, State> {
 
 export default withTranslation()(
   connect(
-    (state, props) => {
-      const { account, parentAccount } = accountAndParentScreenSelector(
-        state,
-        props,
-      );
+    (state, { route }) => {
+      const { account, parentAccount } = accountAndParentScreenSelectorCreator(
+        route,
+      )(state);
       if (!account) return {};
       const range = selectedTimeRangeSelector(state);
       const counterValueCurrency = counterValueCurrencySelector(state);

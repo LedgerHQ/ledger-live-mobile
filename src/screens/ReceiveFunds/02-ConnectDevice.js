@@ -2,15 +2,13 @@
 import React, { useCallback, useEffect, useMemo } from "react";
 import { View, ScrollView, StyleSheet } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
-import { connect } from "react-redux";
-import { compose } from "redux";
-import { withTranslation, Trans } from "react-i18next";
-import type { Account, TokenAccount } from "@ledgerhq/live-common/lib/types";
+import { useSelector } from "react-redux";
+import { Trans } from "react-i18next";
 import {
   getMainAccount,
   getReceiveFlowError,
 } from "@ledgerhq/live-common/lib/account";
-import { accountAndParentScreenSelector } from "../../reducers/accounts";
+import { accountAndParentScreenSelectorCreator } from "../../reducers/accounts";
 import colors from "../../colors";
 import { ScreenName } from "../../const";
 import { TrackScreen } from "../../analytics";
@@ -35,25 +33,16 @@ interface RouteParams {
 }
 
 interface Props {
-  account: ?(TokenAccount | Account);
-  parentAccount: ?Account;
   navigation: *;
   route: { params: RouteParams };
-  readOnlyModeEnabled: boolean;
 }
 
-const mapStateToProps = (s, p) => ({
-  ...accountAndParentScreenSelector(s, p),
-  readOnlyModeEnabled: readOnlyModeEnabledSelector(s),
-});
+export default function ConnectDevice({ navigation, route }: Props) {
+  const { account, parentAccount } = useSelector(
+    accountAndParentScreenSelectorCreator(route),
+  );
+  const readOnlyModeEnabled = useSelector(readOnlyModeEnabledSelector);
 
-const ConnectDevice = ({
-  readOnlyModeEnabled,
-  navigation,
-  route,
-  account,
-  parentAccount,
-}: Props) => {
   useEffect(() => {
     const readOnlyTitle = "transfer.receive.titleReadOnly";
     if (readOnlyModeEnabled && route.params?.title !== readOnlyTitle) {
@@ -139,7 +128,7 @@ const ConnectDevice = ({
       </View>
     </SafeAreaView>
   );
-};
+}
 
 const styles = StyleSheet.create({
   root: {
@@ -166,8 +155,3 @@ const styles = StyleSheet.create({
     borderTopColor: colors.lightFog,
   },
 });
-
-export default compose(
-  connect(mapStateToProps),
-  withTranslation(),
-)(ConnectDevice);

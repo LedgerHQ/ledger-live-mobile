@@ -2,8 +2,8 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { View, StyleSheet, Animated } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
-import { connect } from "react-redux";
-import { withTranslation, Trans } from "react-i18next";
+import { useSelector } from "react-redux";
+import { Trans } from "react-i18next";
 import invariant from "invariant";
 import Icon from "react-native-vector-icons/dist/Feather";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
@@ -22,8 +22,8 @@ import {
   useRandomBaker,
 } from "@ledgerhq/live-common/lib/families/tezos/bakers";
 import whitelist from "@ledgerhq/live-common/lib/families/tezos/bakers.whitelist-default";
-import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
-import { accountAndParentScreenSelector } from "../../../reducers/accounts";
+import type { AccountLike } from "@ledgerhq/live-common/lib/types";
+import { accountAndParentScreenSelectorCreator } from "../../../reducers/accounts";
 import colors, { rgba } from "../../../colors";
 import { TrackScreen } from "../../../analytics";
 import { useTransactionChangeFromNavigation } from "../../../logic/screenTransactionHooks";
@@ -46,8 +46,6 @@ interface RouteParams {
 }
 
 interface Props {
-  account: AccountLike;
-  parentAccount: ?Account;
   navigation: *;
   route: { params: RouteParams };
 }
@@ -115,12 +113,10 @@ const BakerSelection = ({
   </View>
 );
 
-const DelegationSummary = ({
-  account,
-  parentAccount,
-  navigation,
-  route,
-}: Props) => {
+export default function DelegationSummary({ navigation, route }: Props) {
+  const { account, parentAccount } = useSelector(
+    accountAndParentScreenSelectorCreator(route),
+  );
   const bakers = useBakers(whitelist);
   const randomBaker = useRandomBaker(bakers);
 
@@ -169,6 +165,7 @@ const DelegationSummary = ({
     parentAccount,
     setTransaction,
     transaction,
+    route.params,
   ]);
 
   const [rotateAnim] = useState(() => new Animated.Value(0));
@@ -358,7 +355,7 @@ const DelegationSummary = ({
       </View>
     </SafeAreaView>
   );
-};
+}
 
 const styles = StyleSheet.create({
   root: {
@@ -468,7 +465,3 @@ const styles = StyleSheet.create({
     left: 16,
   },
 });
-
-export default connect(accountAndParentScreenSelector)(
-  withTranslation()(DelegationSummary),
-);

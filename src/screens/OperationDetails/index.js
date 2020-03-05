@@ -1,21 +1,16 @@
 /* @flow */
-import React, { PureComponent } from "react";
+import React from "react";
 import { View, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
-import { connect } from "react-redux";
-import { withTranslation } from "react-i18next";
-import type {
-  Account,
-  Operation,
-  AccountLike,
-} from "@ledgerhq/live-common/lib/types";
+import { useSelector } from "react-redux";
+import type { Operation } from "@ledgerhq/live-common/lib/types";
 import {
   getDefaultExplorerView,
   getTransactionExplorer,
 } from "@ledgerhq/live-common/lib/explorers";
 import { getMainAccount } from "@ledgerhq/live-common/lib/account";
 import byFamiliesOperationDetails from "../../generated/operationDetails";
-import { accountAndParentScreenSelector } from "../../reducers/accounts";
+import { accountAndParentScreenSelectorCreator } from "../../reducers/accounts";
 import { TrackScreen } from "../../analytics";
 import Footer from "./Footer";
 import Content from "./Content";
@@ -31,8 +26,6 @@ interface RouteParams {
 }
 
 interface Props {
-  account: AccountLike;
-  parentAccount: ?Account;
   navigation: *;
   route: { params: RouteParams };
 }
@@ -52,44 +45,40 @@ export const CloseButton = ({ navigation }: { navigation: Navigation }) => (
   </TouchableOpacity>
 );
 
-class OperationDetails extends PureComponent<Props, *> {
-  render() {
-    const { route, navigation, account, parentAccount } = this.props;
-    if (!account) return null;
-    const operation = route.params?.operation;
-    const mainAccount = getMainAccount(account, parentAccount);
-    const url = getTransactionExplorer(
-      getDefaultExplorerView(mainAccount.currency),
-      operation.hash,
-    );
-    const specific = byFamiliesOperationDetails[mainAccount.currency.family];
-    const urlWhatIsThis =
-      specific &&
-      specific.getURLWhatIsThis &&
-      specific.getURLWhatIsThis(operation);
+export default function OperationDetails({ route, navigation }: Props) {
+  const { account, parentAccount } = useSelector(
+    accountAndParentScreenSelectorCreator(route),
+  );
+  if (!account) return null;
+  const operation = route.params?.operation;
+  const mainAccount = getMainAccount(account, parentAccount);
+  const url = getTransactionExplorer(
+    getDefaultExplorerView(mainAccount.currency),
+    operation.hash,
+  );
+  const specific = byFamiliesOperationDetails[mainAccount.currency.family];
+  const urlWhatIsThis =
+    specific &&
+    specific.getURLWhatIsThis &&
+    specific.getURLWhatIsThis(operation);
 
-    return (
-      <SafeAreaView style={styles.container} forceInset={forceInset}>
-        <TrackScreen category="OperationDetails" />
-        <ScrollView>
-          <View style={styles.root}>
-            <Content
-              account={account}
-              parentAccount={parentAccount}
-              operation={operation}
-              navigation={navigation}
-            />
-          </View>
-        </ScrollView>
-        <Footer url={url} urlWhatIsThis={urlWhatIsThis} />
-      </SafeAreaView>
-    );
-  }
+  return (
+    <SafeAreaView style={styles.container} forceInset={forceInset}>
+      <TrackScreen category="OperationDetails" />
+      <ScrollView>
+        <View style={styles.root}>
+          <Content
+            account={account}
+            parentAccount={parentAccount}
+            operation={operation}
+            navigation={navigation}
+          />
+        </View>
+      </ScrollView>
+      <Footer url={url} urlWhatIsThis={urlWhatIsThis} />
+    </SafeAreaView>
+  );
 }
-
-export default connect(accountAndParentScreenSelector)(
-  withTranslation()(OperationDetails),
-);
 
 const styles = StyleSheet.create({
   container: {

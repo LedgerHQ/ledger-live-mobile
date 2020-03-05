@@ -1,5 +1,6 @@
 /* @flow */
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
+import type { Transaction } from "@ledgerhq/live-common/lib/families/ethereum/types";
 import { BigNumber } from "bignumber.js";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -11,13 +12,12 @@ import {
   View,
 } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
-import { useRoute, useNavigation } from "@react-navigation/native";
 import { useSelector } from "react-redux";
 import { i18n } from "../../context/Locale";
 import colors from "../../colors";
 import Button from "../../components/Button";
 import KeyboardView from "../../components/KeyboardView";
-import { accountAndParentScreenSelector } from "../../reducers/accounts";
+import { accountAndParentScreenSelectorCreator } from "../../reducers/accounts";
 
 const forceInset = { bottom: "always" };
 
@@ -26,13 +26,21 @@ const options = {
   headerLeft: null,
 };
 
-function EthereumEditGasLimit() {
+interface RouteParams {
+  accountId: string;
+  transaction: Transaction;
+}
+
+interface Props {
+  navigation: *;
+  route: { params: RouteParams };
+}
+
+function EthereumEditGasLimit({ navigation, route }: Props) {
   const { t } = useTranslation();
   const { account, parentAccount } = useSelector(
-    accountAndParentScreenSelector,
+    accountAndParentScreenSelectorCreator(route),
   );
-  const { navigate } = useNavigation();
-  const route = useRoute();
   const transaction = route.params?.transaction;
   const [gasLimit, setGasLimit] = useState(
     transaction.userGasLimit || transaction.estimatedGasLimit,
@@ -42,7 +50,7 @@ function EthereumEditGasLimit() {
     const bridge = getAccountBridge(account, parentAccount);
 
     Keyboard.dismiss();
-    navigate("SendSummary", {
+    navigation.navigate("SendSummary", {
       accountId: account.id,
       parentId: parentAccount && parentAccount.id,
       transaction: bridge.updateTransaction(transaction, {

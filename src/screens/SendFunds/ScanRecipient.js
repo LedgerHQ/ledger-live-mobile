@@ -13,7 +13,7 @@ import type {
 } from "@ledgerhq/live-common/lib/types";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { ScreenName } from "../../const";
-import { accountAndParentScreenSelector } from "../../reducers/accounts";
+import { accountAndParentScreenSelectorCreator } from "../../reducers/accounts";
 import StyledStatusBar from "../../components/StyledStatusBar";
 import CameraScreen from "../../components/CameraScreen";
 import FallBackCamera from "./FallbackCamera/Fallback";
@@ -121,7 +121,8 @@ class ScanRecipient extends PureComponent<Props, State> {
   }
 }
 
-const mapStateToProps = accountAndParentScreenSelector;
+const mapStateToProps = (state, { route }) =>
+  accountAndParentScreenSelectorCreator(route)(state);
 
 export default withTranslation()(connect(mapStateToProps)(ScanRecipient));
 

@@ -10,17 +10,12 @@ import {
   Keyboard,
 } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
-import { connect } from "react-redux";
-import { compose } from "redux";
-import { withTranslation, Trans } from "react-i18next";
-import type {
-  AccountLike,
-  Account,
-  Transaction,
-} from "@ledgerhq/live-common/lib/types";
+import { useSelector } from "react-redux";
+import { Trans } from "react-i18next";
+import type { Transaction } from "@ledgerhq/live-common/lib/types";
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
-import { accountAndParentScreenSelector } from "../../reducers/accounts";
+import { accountAndParentScreenSelectorCreator } from "../../reducers/accounts";
 import colors from "../../colors";
 import { ScreenName } from "../../const";
 import { TrackScreen } from "../../analytics";
@@ -41,13 +36,14 @@ interface RouteParams {
 }
 
 interface Props {
-  account: AccountLike;
-  parentAccount: ?Account;
   navigation: *;
   route: { params: RouteParams };
 }
 
-const SendAmount = ({ account, parentAccount, navigation, route }: Props) => {
+export default function SendAmount({ navigation, route }: Props) {
+  const { account, parentAccount } = useSelector(
+    accountAndParentScreenSelectorCreator(route),
+  );
   const {
     transaction,
     setTransaction,
@@ -199,7 +195,7 @@ const SendAmount = ({ account, parentAccount, navigation, route }: Props) => {
       />
     </>
   );
-};
+}
 
 const styles = StyleSheet.create({
   root: {
@@ -253,8 +249,3 @@ const styles = StyleSheet.create({
     marginLeft: 8,
   },
 });
-
-export default compose(
-  withTranslation(),
-  connect(accountAndParentScreenSelector),
-)(SendAmount);
