@@ -11,22 +11,21 @@ import colors from "../colors";
 export const defaultNavigationOptions = {
   headerStyle: styles.header,
   headerTitle: (props: {}) => <HeaderTitle {...props} />,
-  headerBackTitle: null,
-  headerBackImage: (props: {}) => <HeaderBackImage {...props} />,
+  headerBackTitleVisible: false,
+  headerBackImage: () => <HeaderBackImage />,
   headerTitleAllowFontScaling: false,
-  gestureEnabled: false,
 };
 
 export const stackNavigatorConfig = {
   ...defaultNavigationOptions,
   cardStyle: styles.card,
-  headerLayoutPreset: "center",
+  headerTitleAlign: "center",
 };
 
-export const closableNavigationOptions = ({ navigation }) => ({
+export const closableNavigationOptions = {
   ...defaultNavigationOptions,
-  headerRight: <HeaderRightClose navigation={navigation} />,
-});
+  headerRight: () => <HeaderRightClose />,
+};
 
 export const closableStackNavigatorConfig = {
   ...stackNavigatorConfig,
