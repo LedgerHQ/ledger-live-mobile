@@ -19,7 +19,7 @@ export default function FirmwareUpdateNavigator() {
         name={ScreenName.FirmwareUpdateReleaseNotes}
         component={FirmwareUpdateReleaseNotes}
         options={{
-          headerTitle: t("FirmwareUpdate.title"),
+          title: t("FirmwareUpdate.title"),
         }}
       />
       <Stack.Screen
@@ -27,7 +27,7 @@ export default function FirmwareUpdateNavigator() {
         component={FirmwareUpdateCheckId}
         options={{
           headerLeft: null,
-          headerTitle: (
+          headerTitle: () => (
             <StepHeader
               subtitle={<Trans i18nKey="FirmwareUpdate.title" />}
               title={<Trans i18nKey="FirmwareUpdateCheckId.title" />}
@@ -40,7 +40,7 @@ export default function FirmwareUpdateNavigator() {
         component={FirmwareUpdateMCU}
         options={{
           headerLeft: null,
-          headerTitle: (
+          headerTitle: () => (
             <StepHeader
               subtitle={<Trans i18nKey="FirmwareUpdate.title" />}
               title={<Trans i18nKey="FirmwareUpdateMCU.title" />}

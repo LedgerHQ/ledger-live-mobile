@@ -17,7 +17,6 @@ export default function ReceiveFundsNavigator() {
       headerMode="float"
       screenOptions={{
         ...closableStackNavigatorConfig,
-        headerShown: false,
         gesturesEnabled: ({ route }) =>
           Platform.OS === "ios"
             ? route.params
@@ -30,7 +29,7 @@ export default function ReceiveFundsNavigator() {
         name={ScreenName.ReceiveSelectAccount}
         component={ReceiveSelectAccount}
         options={{
-          headerTitle: (
+          headerTitle: () => (
             <StepHeader
               title={t("transfer.receive.headerTitle")}
               subtitle={t("send.stepperHeader.stepRange", {
@@ -63,7 +62,7 @@ export default function ReceiveFundsNavigator() {
         component={ReceiveConfirmation}
         options={({ route }) => {
           const options = {
-            headerTitle: (
+            headerTitle: () => (
               <StepHeader
                 title={t("account.receive")}
                 subtitle={t("send.stepperHeader.stepRange", {

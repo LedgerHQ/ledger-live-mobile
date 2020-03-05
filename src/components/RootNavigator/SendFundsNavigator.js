@@ -22,7 +22,7 @@ export default function SendFundsNavigator() {
         name={ScreenName.SendFundsMain}
         component={SendFundsMain}
         options={{
-          headerTitle: (
+          headerTitle: () => (
             <StepHeader
               title={t("send.stepperHeader.selectAccount")}
               subtitle={t("send.stepperHeader.stepRange", {
@@ -37,7 +37,7 @@ export default function SendFundsNavigator() {
         name={ScreenName.SendSelectRecipient}
         component={SendSelectRecipient}
         options={{
-          headerTitle: (
+          headerTitle: () => (
             <StepHeader
               title={t("send.stepperHeader.recipientAddress")}
               subtitle={t("send.stepperHeader.stepRange", {
@@ -52,7 +52,7 @@ export default function SendFundsNavigator() {
         name={ScreenName.SendAmount}
         component={SendAmount}
         options={{
-          headerTitle: (
+          headerTitle: () => (
             <StepHeader
               title={t("send.stepperHeader.selectAmount")}
               subtitle={t("send.stepperHeader.stepRange", {
@@ -67,7 +67,7 @@ export default function SendFundsNavigator() {
         name={ScreenName.SendSummary}
         component={SendSummary}
         options={{
-          headerTitle: (
+          headerTitle: () => (
             <StepHeader
               title={t("send.stepperHeader.summary")}
               subtitle={t("send.stepperHeader.stepRange", {
@@ -82,7 +82,7 @@ export default function SendFundsNavigator() {
         name={ScreenName.SendConnectDevice}
         component={SendConnectDevice}
         options={{
-          headerTitle: (
+          headerTitle: () => (
             <StepHeader
               title={t("send.stepperHeader.connectDevice")}
               subtitle={t("send.stepperHeader.stepRange", {
@@ -97,7 +97,7 @@ export default function SendFundsNavigator() {
         name={ScreenName.SendValidation}
         component={SendValidation}
         options={{
-          headerTitle: (
+          headerTitle: () => (
             <StepHeader
               title={t("send.stepperHeader.verification")}
               subtitle={t("send.stepperHeader.stepRange", {

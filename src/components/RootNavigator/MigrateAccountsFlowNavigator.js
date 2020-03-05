@@ -24,7 +24,7 @@ export default function MigrateAccountsFlowNavigator() {
         name={ScreenName.MigrateAccountsOverview}
         component={MigrateAccountsOverview}
         options={{
-          headerTitle: (
+          headerTitle: () => (
             <StepHeader
               title={<Trans i18nKey="migrateAccounts.overview.headerTitle" />}
               subtitle={
@@ -44,7 +44,7 @@ export default function MigrateAccountsFlowNavigator() {
         name={ScreenName.MigrateAccountsConnectDevice}
         component={MigrateAccountsConnectDevice}
         options={{
-          headerTitle: (
+          headerTitle: () => (
             <StepHeader
               title={
                 <Trans i18nKey="migrateAccounts.connectDevice.headerTitle" />
@@ -66,7 +66,7 @@ export default function MigrateAccountsFlowNavigator() {
         name={ScreenName.MigrateAccountsProgress}
         component={MigrateAccountsProgress}
         options={{
-          headerTitle: (
+          headerTitle: () => (
             <StepHeader
               title={<Trans i18nKey="migrateAccounts.progress.headerTitle" />}
               subtitle={
