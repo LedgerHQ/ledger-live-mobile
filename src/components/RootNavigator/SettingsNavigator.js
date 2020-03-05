@@ -30,16 +30,13 @@ import RateProviderSettings from "../../screens/Settings/CryptoAssets/Rates/Rate
 import RepairDevice from "../../screens/RepairDevice";
 import { stackNavigatorConfig } from "../../navigation/navigatorConfig";
 import Button from "../Button";
+import OnboardingNavigator from "./OnboardingNavigator";
 
 export default function SettingsNavigator() {
   const { t } = useTranslation();
 
   return (
-    <Stack.Navigator
-      screenOptions={{
-        ...stackNavigatorConfig,
-      }}
-    >
+    <Stack.Navigator screenOptions={stackNavigatorConfig}>
       <Stack.Screen
         name={ScreenName.Settings}
         component={Settings}
@@ -221,6 +218,11 @@ export default function SettingsNavigator() {
         options={{
           title: "Benchmark QRStream",
         }}
+      />
+      <Stack.Screen
+        name={NavigatorName.Onboarding}
+        component={OnboardingNavigator}
+        options={{ headerShown: false }}
       />
     </Stack.Navigator>
   );

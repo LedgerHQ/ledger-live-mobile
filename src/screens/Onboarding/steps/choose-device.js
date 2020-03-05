@@ -2,10 +2,10 @@
 
 import React, { Component, PureComponent } from "react";
 import { BackHandler, StyleSheet } from "react-native";
-
 import { Trans } from "react-i18next";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { TrackScreen } from "../../../analytics";
 import LText from "../../../components/LText";
 import Touchable from "../../../components/Touchable";
@@ -23,19 +23,24 @@ import Circle from "../../../components/Circle";
 import Close from "../../../icons/Close";
 import { hasCompletedOnboardingSelector } from "../../../reducers/settings";
 
-const CloseOnboarding = ({ navigation, route }: *) => (
-  <Touchable
-    event="OnboardingClose"
-    style={styles.close}
-    onPress={() => {
-      navigation.navigate(route.params?.goingBackToScreen);
-    }}
-  >
-    <Circle size={28} bg={colors.lightFog}>
-      <Close size={14} color={colors.grey} />
-    </Circle>
-  </Touchable>
-);
+function CloseOnboarding() {
+  const { navigate } = useNavigation();
+  const route = useRoute();
+
+  return (
+    <Touchable
+      event="OnboardingClose"
+      style={styles.close}
+      onPress={() => {
+        navigate(route.params?.goingBackToScreen);
+      }}
+    >
+      <Circle size={28} bg={colors.lightFog}>
+        <Close size={14} color={colors.grey} />
+      </Circle>
+    </Touchable>
+  );
+}
 
 class OnboardingStepChooseDevice extends Component<
   OnboardingStepProps & {
@@ -78,7 +83,7 @@ class OnboardingStepChooseDevice extends Component<
   };
 
   render() {
-    const { hasCompletedOnboarding, navigation, showWelcome } = this.props;
+    const { hasCompletedOnboarding, showWelcome } = this.props;
 
     if (showWelcome) {
       return (
@@ -89,9 +94,7 @@ class OnboardingStepChooseDevice extends Component<
     return (
       <OnboardingLayout isFull>
         <TrackScreen category="Onboarding" name="Device" />
-        {hasCompletedOnboarding ? (
-          <CloseOnboarding navigation={navigation} />
-        ) : null}
+        {hasCompletedOnboarding ? <CloseOnboarding /> : null}
         <LText secondary semiBold style={styles.title}>
           <Trans i18nKey="onboarding.stepsTitles.OnboardingStepChooseDevice" />
         </LText>
