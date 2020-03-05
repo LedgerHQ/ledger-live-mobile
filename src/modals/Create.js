@@ -33,22 +33,20 @@ const mapStateToProps = createStructuredSelector({
 });
 
 class CreateModal extends Component<Props> {
-  onNavigate = (routeName: string, key: string) => {
+  onNavigate = (routeName: string) => {
     const { navigation, onClose } = this.props;
     navigation.navigate({
       routeName,
       params: {
         goBackKey: navigation.state.key,
       },
-      key,
     });
     onClose();
   };
 
-  onSendFunds = () => this.onNavigate(NavigatorName.SendFunds, "sendfunds");
-  onReceiveFunds = () =>
-    this.onNavigate(NavigatorName.ReceiveFunds, "receivefunds");
-  onExchange = () => this.onNavigate(ScreenName.Transfer, "transfer");
+  onSendFunds = () => this.onNavigate(NavigatorName.SendFunds);
+  onReceiveFunds = () => this.onNavigate(NavigatorName.ReceiveFunds);
+  onExchange = () => this.onNavigate(ScreenName.Transfer);
 
   render() {
     const {
