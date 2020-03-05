@@ -65,14 +65,14 @@ export default function BaseNavigator() {
           if (route.params?.isSubOperation) {
             return {
               title: t("operationDetails.title"),
-              headerLeft: <BackButton navigation={navigation} />,
-              headerRight: <CloseButton navigation={navigation} />,
+              headerLeft: () => <BackButton navigation={navigation} />,
+              headerRight: () => <CloseButton navigation={navigation} />,
             };
           }
 
           return {
             title: t("operationDetails.title"),
-            headerLeft: <BackButton navigation={navigation} />,
+            headerLeft: () => <BackButton navigation={navigation} />,
             headerRight: null,
           };
         }}
