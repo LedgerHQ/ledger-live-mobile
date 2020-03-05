@@ -41,18 +41,22 @@ export default function BaseNavigator() {
       <Stack.Screen
         name={NavigatorName.ReceiveFunds}
         component={ReceiveFundsNavigator}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name={NavigatorName.SendFunds}
         component={SendFundsNavigator}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name={NavigatorName.AddAccounts}
         component={AddAccountsNavigator}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name={NavigatorName.FirmwareUpdate}
         component={FirmwareUpdateNavigator}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name={ScreenName.OperationDetails}
@@ -76,10 +80,12 @@ export default function BaseNavigator() {
       <Stack.Screen
         name={NavigatorName.AccountSettings}
         component={AccountSettingsNavigator}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name={NavigatorName.ImportAccounts}
         component={ImportAccountsNavigator}
+        options={{ headerShown: false }}
       />
       <Stack.Screen name={ScreenName.PairDevices} component={PairDevices} />
       <Stack.Screen
@@ -89,19 +95,23 @@ export default function BaseNavigator() {
       <Stack.Screen
         name={NavigatorName.PasswordAddFlow}
         component={PasswordAddFlowNavigator}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name={NavigatorName.PasswordModifyFlow}
         component={PasswordModifyFlowNavigator}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name={NavigatorName.MigrateAccountsFlow}
         component={MigrateAccountsFlowNavigator}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name={ScreenName.Distribution}
         component={Distribution}
         options={{
+          ...closableStackNavigatorConfig,
           title: t("distribution.header"),
           headerLeft: null,
         }}

@@ -1,7 +1,7 @@
 // @flow
 
 // This will be converted into string enum once TypeScript is supported in this project.
-export const ScreenName: { [key: string]: string } = {
+export const ScreenName = {
   AboutSettings: "AboutSettings",
   Account: "Account",
   Accounts: "Accounts",
@@ -90,7 +90,7 @@ export const ScreenName: { [key: string]: string } = {
   Transfer: "Transfer",
 };
 
-export const NavigatorName: { [key: string]: string } = {
+export const NavigatorName = {
   // Stack
   AccountsStack: "AccountsStack",
   AccountSettings: "AccountSettings",

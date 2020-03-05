@@ -16,9 +16,7 @@ import colors from "../../colors";
 export default function ImportAccountsNavigator() {
   const { t } = useTranslation();
   return (
-    <Stack.Navigator
-      screenOptions={{ ...closableStackNavigatorConfig, headerShown: false }}
-    >
+    <Stack.Navigator screenOptions={closableStackNavigatorConfig}>
       <Stack.Screen
         name={ScreenName.ScanAccounts}
         component={ScanAccounts}

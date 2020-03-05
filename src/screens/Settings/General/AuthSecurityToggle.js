@@ -4,6 +4,7 @@ import { Switch } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useSelector } from "react-redux";
 import { Trans } from "react-i18next";
+import { NavigatorName } from "../../../const";
 import { privacySelector } from "../../../reducers/settings";
 import SettingsRow from "../../../components/SettingsRow";
 import BiometricsRow from "./BiometricsRow";
@@ -14,9 +15,9 @@ export default function AuthSecurityToggle() {
 
   function onValueChange(authSecurityEnabled: boolean): void {
     if (authSecurityEnabled) {
-      navigate("PasswordAdd");
+      navigate(NavigatorName.PasswordAddFlow);
     } else {
-      navigate("PasswordRemove");
+      navigate(NavigatorName.PasswordModifyFlow);
     }
   }
 
