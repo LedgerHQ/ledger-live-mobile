@@ -253,7 +253,7 @@ PODS:
     - React
   - react-native-camera/RN (3.19.0):
     - React
-  - react-native-config (0.11.7):
+  - react-native-config (0.12.0):
     - React
   - react-native-fingerprint-scanner (4.0.0):
     - React
@@ -317,7 +317,7 @@ PODS:
     - React
   - RNGestureHandler (1.6.0):
     - React
-  - RNKeychain (4.0.5):
+  - RNKeychain (5.0.0):
     - React
   - RNLibLedgerCore (4.9.1):
     - ledger-core-objc
@@ -328,7 +328,7 @@ PODS:
     - React
   - RNScreens (2.2.0):
     - React
-  - RNSVG (11.0.1):
+  - RNSVG (12.0.2):
     - React
   - RNVectorIcons (6.6.0):
     - React
@@ -573,7 +573,7 @@ SPEC CHECKSUMS:
   react-native-ble-plx: 304c7bee074a05581672c9990f375b3906808718
   react-native-ble-plx-swift: eb64f02b988becb84a60164aba9fab5d6ddb6dc8
   react-native-camera: 1f4c5be75a037b5573716a01d84ca0390c162954
-  react-native-config: 55548054279d92e0e4566ea15a8b9b81028ec342
+  react-native-config: f2c2ae45625a068c35681a16b9bfb1ca58b0adc7
   react-native-fingerprint-scanner: 03f3d966edacf2f515e361595b6778d3502db4fb
   react-native-locale: bd8edf0e51706d469af3e2fa568a8102213a3139
   react-native-netinfo: 3bf235d94cc291cf0673ad9fd9eaae82f84ed8a9
@@ -597,12 +597,12 @@ SPEC CHECKSUMS:
   RNCAsyncStorage: e0dd7c8a36543b4ef84969acd9f8aceba3a92dc2
   RNCMaskedView: 76c40a1d41c3e2535df09246a2b5487f04de0814
   RNGestureHandler: dde546180bf24af0b5f737c8ad04b6f3fa51609a
-  RNKeychain: 840f8e6f13be0576202aefcdffd26a4f54bfe7b5
+  RNKeychain: 589a5504ba18b854fb8c2ba6402387b9529da959
   RNLibLedgerCore: 3f021805466a40157274016e10a8bdf57aa41587
   RNOS: 6f2f9a70895bbbfbdad7196abd952e7b01d45027
   RNReanimated: 031fe8d9ea93c2bd689a40f05320ef9d96f74d7f
   RNScreens: 812b79d384e2bea7eebc4ec981469160d4948fd5
-  RNSVG: 67f1f12dae2cef6ed59a42cae74a6b8f5a9e7b46
+  RNSVG: 9f7446f2e8fb1a5dc66a4aff58c33d367291d34c
   RNVectorIcons: 0bb4def82230be1333ddaeee9fcba45f0b288ed4
   Sentry: 4e8a17b61ddd116f89536cc81d567fdee1ebca96
   SentryReactNative: 07237139c00366ea2e75ae3e5c566e7a71c27a90
@@ -610,6 +610,6 @@ SPEC CHECKSUMS:
   Yoga: 14927e37bd25376d216b150ab2a561773d57911f
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: cef3bafdf44ce4d3f648c48a504fcdaa1183fc36
+PODFILE CHECKSUM: ab3dc9d1621681c932aca2da0356fbf9d79ad657
 
 COCOAPODS: 1.8.4

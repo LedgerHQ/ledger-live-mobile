@@ -9,7 +9,7 @@ import {
   ToastAndroid,
   Switch,
 } from "react-native";
-import uuid from "uuid/v4";
+import { v4 as uuid } from "uuid";
 import { from, Observable } from "rxjs";
 import { listen } from "@ledgerhq/logs";
 import type { Log } from "@ledgerhq/logs";
