@@ -33,9 +33,7 @@ const mapStateToProps = (
   state: State,
   props: { navigation: *, currencyId: string },
 ) => {
-  const currency = getCryptoCurrencyById(
-    props.navigation.state.params.currencyId,
-  );
+  const currency = getCryptoCurrencyById(props.route.params.currencyId);
   return {
     confirmationsNb: confirmationsNbForCurrencySelector(state, { currency }),
     defaults: currencySettingsDefaults(currency),

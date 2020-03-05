@@ -5,9 +5,8 @@ import { withTranslation } from "react-i18next";
 import type { Account } from "@ledgerhq/live-common/lib/types";
 import { connect } from "react-redux";
 import { compose } from "redux";
-import { createStructuredSelector } from "reselect";
 import { ScreenName } from "../../const";
-import { accountScreenSelector } from "../../reducers/accounts";
+import { accountAndParentScreenSelectorCreator } from "../../reducers/accounts";
 import { deleteAccount } from "../../actions/accounts";
 import BottomModal from "../../components/BottomModal";
 import { TrackScreen } from "../../analytics";
@@ -33,12 +32,14 @@ interface Props {
 type State = {
   isModalOpened: boolean,
 };
-const mapStateToProps = createStructuredSelector({
-  account: accountScreenSelector,
-});
+
+const mapStateToProps = (state, { route }) =>
+  accountAndParentScreenSelectorCreator(route)(state);
+
 const mapDispatchToProps = {
   deleteAccount,
 };
+
 class AccountSettings extends PureComponent<Props, State> {
   state = {
     isModalOpened: false,

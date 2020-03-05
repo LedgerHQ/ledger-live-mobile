@@ -7,8 +7,7 @@ import type { Account } from "@ledgerhq/live-common/lib/types";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { Trans, withTranslation } from "react-i18next";
-import { createStructuredSelector } from "reselect";
-import { accountScreenSelector } from "../../reducers/accounts";
+import { accountAndParentScreenSelectorCreator } from "../../reducers/accounts";
 import { updateAccount } from "../../actions/accounts";
 import Button from "../../components/Button";
 import TextInput from "../../components/TextInput";
@@ -38,9 +37,10 @@ interface Props {
 type State = {
   accountName: string,
 };
-const mapStateToProps = createStructuredSelector({
-  account: accountScreenSelector,
-});
+
+const mapStateToProps = (state, { route }) =>
+  accountAndParentScreenSelectorCreator(route)(state);
+
 const mapDispatchToProps = {
   updateAccount,
 };
@@ -60,7 +60,7 @@ class EditAccountName extends PureComponent<Props, State> {
     const {
       onAccountNameChange,
       account: accountFromAdd,
-    } = this.props.navigation.state.params;
+    } = this.props.route.params;
 
     const isImportingAccounts = !!accountFromAdd;
     const cleanAccountName = accountName.trim();
@@ -81,7 +81,7 @@ class EditAccountName extends PureComponent<Props, State> {
   render() {
     const { account } = this.props;
     const { accountName } = this.state;
-    const { account: accountFromAdd } = this.props.navigation.state.params;
+    const { account: accountFromAdd } = this.props.route.params;
 
     const initialAccountName = account ? account.name : accountFromAdd.name;
 

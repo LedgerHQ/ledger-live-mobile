@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 import { View, StyleSheet, TextInput, ScrollView } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
-import { useRoute, useNavigation } from "@react-navigation/native";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { BigNumber } from "bignumber.js";
@@ -10,14 +9,19 @@ import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { i18n } from "../../context/Locale";
 import KeyboardView from "../../components/KeyboardView";
 import Button from "../../components/Button";
-import { accountScreenSelector } from "../../reducers/accounts";
+import { accountAndParentScreenSelectorCreator } from "../../reducers/accounts";
 import colors from "../../colors";
 import { track } from "../../analytics";
 
-// interface RouteParams {
-//   accountId: string;
-//   transaction: Transaction;
-// }
+interface RouteParams {
+  accountId: string;
+  transaction: Transaction;
+}
+
+interface Props {
+  navigation: *;
+  route: { params: RouteParams };
+}
 
 const forceInset = { bottom: "always" };
 
@@ -28,11 +32,9 @@ const options = {
   headerLeft: null,
 };
 
-function RippleEditTag() {
-  const account = useSelector(accountScreenSelector);
+function RippleEditTag({ route, navigation }: Props) {
+  const { account } = useSelector(accountAndParentScreenSelectorCreator(route));
   const { t } = useTranslation();
-  const { navigate } = useNavigation();
-  const route = useRoute();
   const transaction = route.params?.transaction;
 
   const [tag, setTag] = useState<BigNumber | typeof undefined | null>(
@@ -56,7 +58,7 @@ function RippleEditTag() {
 
   function onValidateText(): void {
     const bridge = getAccountBridge(account);
-    navigate("SendSummary", {
+    navigation.navigate("SendSummary", {
       accountId: account.id,
       transaction: bridge.updateTransaction(transaction, {
         tag: tag && tag.toNumber(),

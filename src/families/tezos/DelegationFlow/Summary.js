@@ -203,10 +203,10 @@ export default function DelegationSummary({ navigation, route }: Props) {
   const onChangeDelegator = useCallback(() => {
     rotateAnim.setValue(0);
     navigation.navigate("DelegationSelectValidator", {
-      ...navigation.state.params,
+      ...route.params,
       transaction,
     });
-  }, [rotateAnim, navigation, transaction]);
+  }, [rotateAnim, navigation, transaction, route.params]);
 
   const delegation = useDelegation(account);
   const addr =

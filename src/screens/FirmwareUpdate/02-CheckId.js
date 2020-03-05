@@ -49,9 +49,7 @@ class FirmwareUpdateCheckId extends Component<Props, State> {
     if (!firmware) {
       // if there is no latest firmware we'll jump to success screen
       if (navigation.replace) {
-        navigation.replace("FirmwareUpdateConfirmation", {
-          ...navigation.state.params,
-        });
+        navigation.replace("FirmwareUpdateConfirmation", route.params);
       }
       return;
     }
@@ -62,15 +60,13 @@ class FirmwareUpdateCheckId extends Component<Props, State> {
       },
       complete: () => {
         if (navigation.replace) {
-          navigation.replace("FirmwareUpdateMCU", {
-            ...navigation.state.params,
-          });
+          navigation.replace("FirmwareUpdateMCU", route.params);
         }
       },
       error: error => {
         if (navigation.replace) {
           navigation.replace("FirmwareUpdateFailure", {
-            ...navigation.state.params,
+            ...route.params,
             error,
           });
         }

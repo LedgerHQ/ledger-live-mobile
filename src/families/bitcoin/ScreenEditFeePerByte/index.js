@@ -9,11 +9,10 @@ import {
 import SafeAreaView from "react-native-safe-area-view";
 import { useSelector } from "react-redux";
 import { Trans } from "react-i18next";
-import { useRoute, useNavigation } from "@react-navigation/native";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { BigNumber } from "bignumber.js";
 import colors from "../../../colors";
-import { accountScreenSelector } from "../../../reducers/accounts";
+import { accountAndParentScreenSelectorCreator } from "../../../reducers/accounts";
 import Button from "../../../components/Button";
 import KeyboardView from "../../../components/KeyboardView";
 import FeesRow from "./FeesRow";
@@ -28,15 +27,18 @@ const options = {
   headerLeft: null,
 };
 
-// interface RouteParams {
-//   accountId: string;
-//   transaction: Transaction;
-// }
+interface RouteParams {
+  accountId: string;
+  transaction: Transaction;
+}
 
-function BitcoinEditFeePerByte() {
-  const account = useSelector(accountScreenSelector);
-  const route = useRoute();
-  const { navigate } = useNavigation();
+interface Props {
+  navigation: *;
+  route: { params: RouteParams };
+}
+
+function BitcoinEditFeePerByte({ navigation, route }: Props) {
+  const { account } = useSelector(accountAndParentScreenSelectorCreator(route));
 
   const transaction = route.params?.transaction;
   const [feePerByte, setFeePerByte] = useState(transaction.feePerByte);
@@ -69,7 +71,7 @@ function BitcoinEditFeePerByte() {
     const bridge = getAccountBridge(account);
     Keyboard.dismiss();
 
-    navigate("SendSummary", {
+    navigation.navigate("SendSummary", {
       accountId: account.id,
       transaction: bridge.updateTransaction(transaction, { feePerByte }),
     });

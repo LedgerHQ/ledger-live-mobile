@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/dist/Feather";
 
-import { NavigatorName } from "../../const";
+import { NavigatorName, ScreenName } from "../../const";
 import { accountAndParentScreenSelectorCreator } from "../../reducers/accounts";
 import Touchable from "../../components/Touchable";
 import BottomModal from "../../components/BottomModal";
@@ -57,7 +57,10 @@ export default function AccountHeaderRight() {
         event="AccountGoSettings"
         onPress={() => {
           navigation.navigate(NavigatorName.AccountSettings, {
-            accountId: account.id,
+            screen: ScreenName.AccountSettingsMain,
+            params: {
+              accountId: account.id,
+            },
           });
         }}
       >

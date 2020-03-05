@@ -16,14 +16,15 @@ const forceInset = { bottom: "always" };
 
 interface Props {
   navigation: *;
+  route: { params: * };
 }
 
-export default function DelegationStarted({ navigation }: Props) {
+export default function DelegationStarted({ navigation, route }: Props) {
   const onNext = useCallback(() => {
     navigation.navigate("DelegationSummary", {
-      ...navigation.state.params,
+      ...route.params,
     });
-  }, [navigation]);
+  }, [navigation, route.params]);
 
   const howDelegationWorks = useCallback(() => {
     Linking.openURL(urls.delegation);

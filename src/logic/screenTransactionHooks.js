@@ -86,7 +86,7 @@ export const useSignWithDevice = ({
 
             case "broadcasted":
               navigation.replace(context + "ValidationSuccess", {
-                ...navigation.state.params,
+                ...route.params,
                 result: e.operation,
               });
               updateAccountWithUpdater(mainAccount.id, account =>
@@ -106,12 +106,19 @@ export const useSignWithDevice = ({
           }
           // $FlowFixMe
           navigation.replace(context + "ValidationError", {
-            ...navigation.state.params,
+            ...route.params,
             error,
           });
         },
       });
-  }, [context, account, navigation, parentAccount, updateAccountWithUpdater]);
+  }, [
+    context,
+    account,
+    navigation,
+    parentAccount,
+    updateAccountWithUpdater,
+    route.params,
+  ]);
 
   useEffect(() => {
     signWithDevice();

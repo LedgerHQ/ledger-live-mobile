@@ -136,14 +136,6 @@ export const accountSelector = createSelector(
   (accounts, accountId) => accounts.find(a => a.id === accountId),
 );
 
-// $FlowFixMe
-export const accountScreenSelector = createSelector(
-  // DEPRECATED
-  accountsSelector,
-  (_, { navigation }) => navigation.state.params.accountId,
-  (accounts, accountId) => accounts.find(a => a.id === accountId),
-);
-
 // FIXME rename to accountScreenSelector
 export const accountAndParentScreenSelectorCreator = (route: *) => (
   state: *,

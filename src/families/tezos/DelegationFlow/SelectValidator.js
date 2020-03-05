@@ -207,10 +207,10 @@ const SelectValidator = ({
   const continueCustom = useCallback(() => {
     setEditingCustom(false);
     navigation.navigate("DelegationSummary", {
-      ...navigation.state.params,
+      ...route.params,
       transaction,
     });
-  }, [navigation, transaction]);
+  }, [navigation, transaction, route.params]);
 
   const enableCustomValidator = useCallback(() => {
     setEditingCustom(true);
@@ -235,7 +235,7 @@ const SelectValidator = ({
         recipient: baker.address,
       });
       navigation.navigate("DelegationSummary", {
-        ...navigation.state.params,
+        ...route.params,
         transaction,
       });
     },

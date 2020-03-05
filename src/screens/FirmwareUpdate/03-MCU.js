@@ -40,7 +40,7 @@ class FirmwareUpdateMCU extends Component<Props, State> {
   sub: *;
 
   async componentDidMount() {
-    const { navigation } = this.props;
+    const { navigation, route } = this.props;
     const { deviceId, firmware } = this.props.route.params || {};
 
     this.sub = firmwareUpdateMain(deviceId, firmware).subscribe({
@@ -49,16 +49,14 @@ class FirmwareUpdateMCU extends Component<Props, State> {
       },
       complete: () => {
         if (navigation.replace) {
-          navigation.replace("FirmwareUpdateConfirmation", {
-            ...navigation.state.params,
-          });
+          navigation.replace("FirmwareUpdateConfirmation", route.params);
         }
       },
       error: error => {
         logger.critical(error);
         if (navigation.replace) {
           navigation.replace("FirmwareUpdateFailure", {
-            ...navigation.state.params,
+            ...route.params,
             error,
           });
         }

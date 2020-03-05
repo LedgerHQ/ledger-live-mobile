@@ -1,14 +1,9 @@
 /* @flow */
-import React, { PureComponent } from "react";
-import i18next from "i18next";
+import React from "react";
+import { useTranslation } from "react-i18next";
 import { View, StyleSheet, ScrollView } from "react-native";
-import type { Account } from "@ledgerhq/live-common/lib/types";
-import { connect } from "react-redux";
-import { compose } from "redux";
-import { withTranslation } from "react-i18next";
-import { createStructuredSelector } from "reselect";
-import { accountScreenSelector } from "../../reducers/accounts";
-import { updateAccount } from "../../actions/accounts";
+import { useSelector } from "react-redux";
+import { accountAndParentScreenSelectorCreator } from "../../reducers/accounts";
 import LText from "../../components/LText";
 import { localeIds } from "../../languages";
 import colors from "../../colors";
@@ -20,54 +15,41 @@ interface RouteParams {
 interface Props {
   navigation: *;
   route: { params: RouteParams };
-  updateAccount: Function;
-  account: Account;
 }
 
-const mapStateToProps = createStructuredSelector({
-  account: accountScreenSelector,
-});
-const mapDispatchToProps = {
-  updateAccount,
-};
-class AdvancedLogs extends PureComponent<Props> {
-  render() {
-    const { account } = this.props;
-    const usefulData = {
-      xpub: account.xpub || undefined,
-      index: account.index,
-      freshAddressPath: account.freshAddressPath,
-      id: account.id,
-      blockHeight: account.blockHeight,
-    };
+export default function AdvancedLogs({ route }: Props) {
+  const { account } = useSelector(accountAndParentScreenSelectorCreator(route));
+  const { t } = useTranslation();
 
-    const readableDate = account.lastSyncDate.toLocaleDateString(localeIds, {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-      hour: "2-digit",
-      minute: "2-digit",
-    });
+  const usefulData = {
+    xpub: account.xpub || undefined,
+    index: account.index,
+    freshAddressPath: account.freshAddressPath,
+    id: account.id,
+    blockHeight: account.blockHeight,
+  };
 
-    return (
-      <ScrollView contentContainerStyle={styles.root}>
-        <View style={styles.body}>
-          <LText semiBold style={styles.sync}>
-            {i18next.t("common.sync.ago", { time: readableDate })}
-          </LText>
-          <LText selectable monospace style={styles.mono}>
-            {JSON.stringify(usefulData, null, 2)}
-          </LText>
-        </View>
-      </ScrollView>
-    );
-  }
+  const readableDate = account.lastSyncDate.toLocaleDateString(localeIds, {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+
+  return (
+    <ScrollView contentContainerStyle={styles.root}>
+      <View style={styles.body}>
+        <LText semiBold style={styles.sync}>
+          {t("common.sync.ago", { time: readableDate })}
+        </LText>
+        <LText selectable monospace style={styles.mono}>
+          {JSON.stringify(usefulData, null, 2)}
+        </LText>
+      </View>
+    </ScrollView>
+  );
 }
-
-export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
-  withTranslation(),
-)(AdvancedLogs);
 
 const styles = StyleSheet.create({
   root: {

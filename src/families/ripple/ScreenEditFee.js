@@ -3,10 +3,9 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { useSelector } from "react-redux";
-import { useRoute } from "@react-navigation/native";
 import colors from "../../colors";
 import { i18n } from "../../context/Locale";
-import { accountScreenSelector } from "../../reducers/accounts";
+import { accountAndParentScreenSelectorCreator } from "../../reducers/accounts";
 import KeyboardView from "../../components/KeyboardView";
 import EditFeeUnit from "../../components/EditFeeUnit";
 
@@ -17,14 +16,17 @@ const options = {
   headerLeft: null,
 };
 
-// interface RouteParams {
-//   accountId: string;
-//   transaction: Transaction;
-// }
+interface RouteParams {
+  accountId: string;
+  transaction: Transaction;
+}
 
-function RippleEditFee() {
-  const account = useSelector(accountScreenSelector);
-  const route = useRoute();
+interface Props {
+  route: { params: RouteParams };
+}
+
+function RippleEditFee({ route }: Props) {
+  const { account } = useSelector(accountAndParentScreenSelectorCreator(route));
   const transaction = route.params?.transaction;
 
   if (!transaction) return null;

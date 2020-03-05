@@ -29,10 +29,8 @@ type State = {};
 
 class FirmwareUpdateReleaseNotes extends Component<Props, State> {
   onNext = () => {
-    const { navigation } = this.props;
-    navigation.navigate(ScreenName.FirmwareUpdateCheckId, {
-      ...navigation.state.params,
-    });
+    const { navigation, route } = this.props;
+    navigation.navigate(ScreenName.FirmwareUpdateCheckId, route.params);
   };
 
   render() {

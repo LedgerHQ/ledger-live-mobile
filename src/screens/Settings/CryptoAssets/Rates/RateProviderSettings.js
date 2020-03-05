@@ -75,7 +75,7 @@ const injectItems = C => {
 };
 
 const mapStateToProps = (state: State, props: *) => ({
-  selectedKey: props.navigation.state.params.selected,
+  selectedKey: props.route.params.selected,
 });
 
 const mapDispatchToProps = {

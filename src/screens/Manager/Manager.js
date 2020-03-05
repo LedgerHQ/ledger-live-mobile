@@ -22,7 +22,7 @@ interface Props {
 let navListener;
 
 const Manager = ({ navigation, route }: Props) => {
-  const { appRes, deviceId, deviceInfo } = navigation.state.params;
+  const { appRes, deviceId, deviceInfo } = route.params;
   const [unfilteredState, dispatch] = useApps(appRes, deviceId);
 
   const state = {

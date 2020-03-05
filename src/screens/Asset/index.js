@@ -241,7 +241,7 @@ class Asset extends PureComponent<Props, *> {
 }
 
 const mapStateToProps = (state: State, props: *) => {
-  const currency = props.navigation.state.params.currency;
+  const currency = props.route.params.currency;
   return {
     currency,
     range: selectedTimeRangeSelector(state),
