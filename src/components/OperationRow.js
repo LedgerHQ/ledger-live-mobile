@@ -22,6 +22,7 @@ import CounterValue from "./CounterValue";
 
 import OperationIcon from "./OperationIcon";
 import colors from "../colors";
+import { ScreenName } from "../const";
 import OperationRowDate from "./OperationRowDate";
 import LiveLogo from "../icons/LiveLogoIcon";
 import Spinning from "./Spinning";
@@ -62,7 +63,7 @@ class OperationRow extends PureComponent<Props, *> {
       key: operation.id,
     };
 
-    navigation.push("OperationDetails", params);
+    navigation.push(ScreenName.OperationDetails, params);
   }, 300);
 
   render() {
