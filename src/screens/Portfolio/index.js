@@ -135,7 +135,6 @@ class PortfolioScreen extends Component<
         operation={item}
         parentAccount={parentAccount}
         account={account}
-        navigation={this.props.navigation}
         multipleAccounts
         isLast={section.data.length - 1 === index}
       />
@@ -157,12 +156,7 @@ class PortfolioScreen extends Component<
   // }
 
   render() {
-    const {
-      navigation,
-      accounts,
-      portfolio,
-      counterValueCurrency,
-    } = this.props;
+    const { accounts, portfolio, counterValueCurrency } = this.props;
     const { opCount, scrollY } = this.state;
 
     const { sections, completed } = groupAccountsOperationsByDay(accounts, {
@@ -175,7 +169,6 @@ class PortfolioScreen extends Component<
         style={[styles.root, { paddingTop: extraStatusBarPadding }]}
       >
         <StickyHeader
-          navigation={navigation}
           scrollY={scrollY}
           portfolio={portfolio}
           counterValueCurrency={counterValueCurrency}

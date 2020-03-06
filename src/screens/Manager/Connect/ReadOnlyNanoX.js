@@ -4,7 +4,7 @@ import { StyleSheet, View, Linking } from "react-native";
 import { Trans } from "react-i18next";
 import TrackScreen from "../../../analytics/TrackScreen";
 import colors from "../../../colors";
-import { ScreenName } from "../../../const";
+import { ScreenName, NavigatorName } from "../../../const";
 import LText from "../../../components/LText";
 import Touchable from "../../../components/Touchable";
 import IconArrowRight from "../../../icons/ArrowRight";
@@ -29,9 +29,12 @@ class ReadOnlyNanoX extends PureComponent<OnboardingStepProps> {
   onboarding = async () => {
     this.props.setShowWelcome(false);
     this.props.setFirstTimeOnboarding(false);
-    this.props.navigation.navigate(ScreenName.OnboardingStepChooseDevice, {
-      goingBackToScreen: ScreenName.Manager,
-      autoJumpToNanoX: true,
+    this.props.navigation.navigate(NavigatorName.Onboarding, {
+      screen: ScreenName.OnboardingStepChooseDevice,
+      params: {
+        goingBackToScreen: ScreenName.Manager,
+        autoJumpToNanoX: true,
+      },
     });
   };
 

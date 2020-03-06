@@ -10,7 +10,7 @@ import colors from "../colors";
 
 export const defaultNavigationOptions = {
   headerStyle: styles.header,
-  headerTitle: (props: {}) => <HeaderTitle {...props} />,
+  headerTitle: (props: *) => <HeaderTitle {...props} />,
   headerBackTitleVisible: false,
   headerBackImage: () => <HeaderBackImage />,
   headerTitleAllowFontScaling: false,

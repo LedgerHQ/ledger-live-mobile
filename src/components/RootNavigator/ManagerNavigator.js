@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import { ScreenName, NavigatorName } from "../../const";
 import Manager from "../../screens/Manager";
 import ManagerMainNavigator from "./ManagerMainNavigator";
+import OnboardingNavigator from "./OnboardingNavigator";
 import { stackNavigatorConfig } from "../../navigation/navigatorConfig";
 import styles from "../../navigation/styles";
 
@@ -32,6 +33,11 @@ export default function ManagerNavigator() {
         options={{
           headerShown: false,
         }}
+      />
+      <Stack.Screen
+        name={NavigatorName.Onboarding}
+        component={OnboardingNavigator}
+        options={{ headerShown: false }}
       />
     </Stack.Navigator>
   );

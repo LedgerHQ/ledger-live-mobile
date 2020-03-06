@@ -94,7 +94,7 @@ class AccountScreen extends PureComponent<Props, State> {
     index: number,
     section: SectionBase<*>,
   }) => {
-    const { account, parentAccount, navigation } = this.props;
+    const { account, parentAccount } = this.props;
     if (!account) return null;
 
     return (
@@ -102,7 +102,6 @@ class AccountScreen extends PureComponent<Props, State> {
         operation={item}
         account={account}
         parentAccount={parentAccount}
-        navigation={navigation}
         isLast={section.data.length - 1 === index}
       />
     );

@@ -171,7 +171,7 @@ class Asset extends PureComponent<Props, *> {
     index: number,
     section: SectionBase<*>,
   }) => {
-    const { allAccounts, accounts, navigation } = this.props;
+    const { allAccounts, accounts } = this.props;
     const account = accounts.find(a => a.id === item.accountId);
     const parentAccount =
       account && account.type !== "Account"
@@ -185,7 +185,6 @@ class Asset extends PureComponent<Props, *> {
         operation={item}
         parentAccount={parentAccount}
         account={account}
-        navigation={navigation}
         multipleAccounts
         isLast={section.data.length - 1 === index}
       />

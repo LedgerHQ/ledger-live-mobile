@@ -48,8 +48,7 @@ class OnboardingStepChooseDevice extends Component<
   },
 > {
   componentDidMount() {
-    const { autoJumpToNanoX } = this.props.route.params || {};
-    if (autoJumpToNanoX) this.chooseNanoX();
+    if (this.props.route.params?.autoJumpToNanoX) this.chooseNanoX();
 
     BackHandler.addEventListener("hardwareBackPress", this.handleBackButton);
   }

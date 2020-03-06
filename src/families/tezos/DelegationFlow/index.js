@@ -29,7 +29,9 @@ function DelegationFlow() {
         name={"DelegationStarted"}
         component={DelegationStarted}
         options={{
-          headerTitle: <StepHeader title={t("delegation.started.title")} />,
+          headerTitle: () => (
+            <StepHeader title={t("delegation.started.title")} />
+          ),
         }}
       />
       <Stack.Screen
@@ -38,7 +40,7 @@ function DelegationFlow() {
         options={{
           headerLeft: null,
           gesturesEnabled: false,
-          headerTitle: (
+          headerTitle: () => (
             <StepHeader
               title={t("delegation.summaryTitle")}
               subtitle={t("send.stepperHeader.stepRange", {
@@ -55,7 +57,7 @@ function DelegationFlow() {
         options={{
           headerRight: null,
           gesturesEnabled: false,
-          headerTitle: (
+          headerTitle: () => (
             <StepHeader title={t("delegation.selectValidatorTitle")} />
           ),
         }}
@@ -64,7 +66,7 @@ function DelegationFlow() {
         name={"DelegationConnectDevice"}
         component={DelegationConnectDevice}
         options={{
-          headerTitle: (
+          headerTitle: () => (
             <StepHeader
               title={t("send.stepperHeader.connectDevice")}
               subtitle={t("send.stepperHeader.stepRange", {
@@ -79,7 +81,7 @@ function DelegationFlow() {
         name={"DelegationValidation"}
         component={DelegationValidation}
         options={{
-          headerTitle: (
+          headerTitle: () => (
             <StepHeader
               title={t("send.stepperHeader.verification")}
               subtitle={t("send.stepperHeader.stepRange", {

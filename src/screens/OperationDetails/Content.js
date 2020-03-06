@@ -220,7 +220,6 @@ class Content extends PureComponent<Props, State> {
                   operation={op}
                   parentAccount={account}
                   account={opAccount}
-                  navigation={this.props.navigation}
                   multipleAccounts
                   isLast={subOperations.length - 1 === i}
                 />
@@ -241,7 +240,6 @@ class Content extends PureComponent<Props, State> {
                 operation={op}
                 parentAccount={null}
                 account={account}
-                navigation={this.props.navigation}
                 multipleAccounts
                 isLast={internalOperations.length - 1 === i}
               />

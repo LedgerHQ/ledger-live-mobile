@@ -1,37 +1,32 @@
 // @flow
-import React, { PureComponent } from "react";
+import React from "react";
 import { TouchableWithoutFeedback, View, StyleSheet } from "react-native";
-import { withTranslation } from "react-i18next";
-
-import { withNavigation } from "@react-navigation/compat";
-import { compose } from "redux";
+import { useNavigation } from "@react-navigation/native";
 import colors from "../colors";
 import LText from "./LText";
 
-type Props = {
-  title: React$Node,
-  subtitle?: React$Node,
-  navigation: { emit: (event: string) => void } & *,
-};
+interface Props {
+  title: React$Node;
+  subtitle?: React$Node;
+}
 
-class StepHeader extends PureComponent<Props> {
-  onPress = () => {
-    this.props.navigation.emit("refocus");
-  };
+export default function StepHeader({ title, subtitle }: Props) {
+  const navigation = useNavigation();
 
-  render() {
-    const { title, subtitle } = this.props;
-    return (
-      <TouchableWithoutFeedback onPress={this.onPress}>
-        <View style={styles.root}>
-          <LText style={styles.subtitle}>{subtitle}</LText>
-          <LText semiBold secondary numberOfLines={1} style={styles.title}>
-            {title}
-          </LText>
-        </View>
-      </TouchableWithoutFeedback>
-    );
+  function onPress() {
+    navigation.emit("refocus");
   }
+
+  return (
+    <TouchableWithoutFeedback onPress={onPress}>
+      <View style={styles.root}>
+        <LText style={styles.subtitle}>{subtitle}</LText>
+        <LText semiBold secondary numberOfLines={1} style={styles.title}>
+          {title}
+        </LText>
+      </View>
+    </TouchableWithoutFeedback>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -51,5 +46,3 @@ const styles = StyleSheet.create({
     color: colors.grey,
   },
 });
-
-export default compose(withNavigation, withTranslation())(StepHeader);

@@ -2,7 +2,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
-import { Trans, withTranslation } from "react-i18next";
+import { Trans, withTranslation, useTranslation } from "react-i18next";
 import { View, StyleSheet } from "react-native";
 import Slider from "react-native-slider";
 import type { CryptoCurrency } from "@ledgerhq/live-common/lib/types";
@@ -47,9 +47,9 @@ const mapDispatchToProps = {
 
 class EachCurrencySettings extends Component<Props, LocalState> {
   componentDidMount() {
-    const { navigation, t, currency } = this.props;
+    const { navigation, currency } = this.props;
     navigation.setParams({
-      headerTitle: <CustomCurrencyHeader currency={currency} t={t} />,
+      headerTitle: () => <CustomCurrencyHeader currency={currency} />,
     });
   }
 
@@ -188,11 +188,10 @@ const styles = StyleSheet.create({
 
 export function CustomCurrencyHeader({
   currency,
-  t,
 }: {
   currency: CryptoCurrency,
-  t: T,
 }) {
+  const { t } = useTranslation();
   return (
     <View
       style={{
