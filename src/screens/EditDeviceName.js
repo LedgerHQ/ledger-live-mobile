@@ -121,6 +121,7 @@ class EditDeviceName extends PureComponent<
   render() {
     const { name, error, connecting } = this.state;
     const remainingCount = MAX_DEVICE_NAME - name.length;
+
     return (
       <SafeAreaView style={styles.safearea} forceInset={forceInset}>
         <TrackScreen category="EditDeviceName" />

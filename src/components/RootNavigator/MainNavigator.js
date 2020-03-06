@@ -1,6 +1,5 @@
 // @flow
 import React from "react";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { ScreenName, NavigatorName } from "../../const";
 import PortfolioIcon from "../../icons/Portfolio";
 import Portfolio from "../../screens/Portfolio";
@@ -15,6 +14,8 @@ import ManagerIcon from "../../icons/Manager";
 import NanoXIcon from "../../icons/TabNanoX";
 import ReadOnlyTab from "../ReadOnlyTab";
 import SettingsIcon from "../../icons/Settings";
+
+import Tab from "./CustomBlockRouterNavigator";
 
 export default function MainNavigator() {
   return (
@@ -80,5 +81,3 @@ export default function MainNavigator() {
     </Tab.Navigator>
   );
 }
-
-const Tab = createBottomTabNavigator();
