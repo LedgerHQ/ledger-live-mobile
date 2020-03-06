@@ -1,5 +1,5 @@
 // @flow
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import { View, StyleSheet, SectionList } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { HeaderBackButton } from "@react-navigation/stack";
@@ -18,7 +18,7 @@ import { importAccounts } from "../../actions/accounts";
 import { accountsSelector } from "../../reducers/accounts";
 import { TrackScreen } from "../../analytics";
 import colors from "../../colors";
-import { ScreenName } from "../../const";
+import { NavigatorName } from "../../const";
 import LText from "../../components/LText";
 import Button from "../../components/Button";
 import StyledStatusBar from "../../components/StyledStatusBar";
@@ -116,7 +116,7 @@ class DisplayResult extends Component<Props, State> {
     }
 
     if (onFinish) onFinish(navigation);
-    else navigation.navigate(ScreenName.Accounts);
+    else navigation.navigate(NavigatorName.AccountsStack);
   };
 
   onSwitchResultItem = (checked: boolean, account: Account) => {
@@ -179,7 +179,7 @@ class DisplayResult extends Component<Props, State> {
       <SafeAreaView forceInset={forceInset} style={styles.root}>
         <TrackScreen category="ImportAccounts" name="DisplayResult" />
         <StyledStatusBar />
-        <Fragment>
+        <>
           <SectionList
             style={styles.body}
             contentContainerStyle={styles.list}
@@ -209,7 +209,7 @@ class DisplayResult extends Component<Props, State> {
               onPress={this.onImport}
             />
           </View>
-        </Fragment>
+        </>
       </SafeAreaView>
     );
   }

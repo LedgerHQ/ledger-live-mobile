@@ -13,6 +13,7 @@ import { withTranslation } from "react-i18next";
 
 import { TrackScreen } from "../../analytics";
 import StyledStatusBar from "../../components/StyledStatusBar";
+import { ScreenName } from "../../const";
 import FallBackCamera from "./FallBackCamera";
 import CameraScreen from "../../components/CameraScreen";
 import GenericErrorBottomModal from "../../components/GenericErrorBottomModal";
@@ -86,7 +87,7 @@ class Scan extends PureComponent<
     const { onFinish } = route.params || {};
 
     // $FlowFixMe
-    this.props.navigation.replace("DisplayResult", {
+    this.props.navigation.replace(ScreenName.DisplayResult, {
       result,
       onFinish,
     });

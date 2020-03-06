@@ -91,6 +91,10 @@ export default function BaseNavigator() {
       <Stack.Screen
         name={ScreenName.EditDeviceName}
         component={EditDeviceName}
+        options={{
+          title: t("EditDeviceName.title"),
+          headerLeft: null,
+        }}
       />
       <Stack.Screen
         name={NavigatorName.PasswordAddFlow}
