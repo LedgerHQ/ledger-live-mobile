@@ -35,6 +35,7 @@ export default function BaseOnboardingNavigator() {
         options={{
           title: t("SelectDevice.title"),
           headerLeft: null,
+          headerShown: true,
         }}
       />
       <Stack.Screen
@@ -43,6 +44,7 @@ export default function BaseOnboardingNavigator() {
         options={{
           title: t("EditDeviceName.title"),
           headerLeft: null,
+          headerShown: true,
         }}
       />
       <Stack.Screen
