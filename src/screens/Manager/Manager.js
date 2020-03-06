@@ -19,7 +19,7 @@ interface Props {
 }
 
 /** navigation action listener */
-let navListener;
+// let navListener;
 
 const Manager = ({ navigation, route }: Props) => {
   const { appRes, deviceId, deviceInfo } = route.params.meta;
