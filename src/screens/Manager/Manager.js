@@ -22,7 +22,8 @@ interface Props {
 let navListener;
 
 const Manager = ({ navigation, route }: Props) => {
-  const { appRes, deviceId, deviceInfo } = route.params;
+  const { appRes, deviceId, deviceInfo } = route.params.meta;
+
   const [unfilteredState, dispatch] = useApps(appRes, deviceId);
 
   const state = {
@@ -73,29 +74,29 @@ const Manager = ({ navigation, route }: Props) => {
    * updates navigation params to block it if un/installation is running
    * (Main navigation router handles the blocking)
    * */
-  useEffect(() => {
-    const n = navigation.dangerouslyGetParent();
-    if (n) {
-      /** set navigation param */
-      n.setParams({ blockNavigation });
-
-      // if we should block navigation
-      if (blockNavigation) {
-        /** we listen for future navigation actions that trigger page changes (not SET_PARAMS) */
-        navListener = navigation.addListener("action", e => {
-          if (e.action && e.action.type !== "SET_PARAMS") {
-            /** set quit manager modal to the navigation action we caught */
-            setQuitManagerAction(e.action);
-          }
-        });
-      } else if (navListener) {
-        /** if we should unblock navigation AND previous navListner was set
-         * we remove the listener and reset the quit modal state to null */
-        navListener.remove();
-        setQuitManagerAction(null);
-      }
-    }
-  }, [blockNavigation, setQuitManagerAction, navigation]);
+  // useEffect(() => {
+  //   const n = navigation.dangerouslyGetParent();
+  //   if (n) {
+  //     /** set navigation param */
+  //     n.setParams({ blockNavigation });
+  //
+  //     // if we should block navigation
+  //     if (blockNavigation) {
+  //       /** we listen for future navigation actions that trigger page changes (not SET_PARAMS) */
+  //       navListener = navigation.addListener("action", e => {
+  //         if (e.action && e.action.type !== "SET_PARAMS") {
+  //           /** set quit manager modal to the navigation action we caught */
+  //           setQuitManagerAction(e.action);
+  //         }
+  //       });
+  //     } else if (navListener) {
+  //       /** if we should unblock navigation AND previous navListner was set
+  //        * we remove the listener and reset the quit modal state to null */
+  //       navListener.remove();
+  //       setQuitManagerAction(null);
+  //     }
+  //   }
+  // }, [blockNavigation, setQuitManagerAction, navigation]);
 
   /**
    * Resets the navigation params in order to unlock navigation

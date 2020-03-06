@@ -11,6 +11,8 @@ import Touchable from "../../../components/Touchable";
 import colors from "../../../colors";
 import Edit from "../../../icons/Edit";
 
+import { ScreenName } from "../../../const";
+
 type Props = {
   navigation: *,
   deviceId: string,
@@ -30,7 +32,7 @@ const DeviceNameRow = ({
 }: Props) => {
   const onPress = useCallback(
     () =>
-      navigation.navigate("EditDeviceName", {
+      navigation.navigate(ScreenName.EditDeviceName, {
         deviceId,
         deviceName: savedName,
       }),

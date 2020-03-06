@@ -112,7 +112,6 @@ export const NavigatorName = {
   // Tab
   CryptoAssetsSettings: "CryptoAssetsSettings",
   Main: "Main",
-  ManagerMain: "ManagerMain",
 
   // Root
   RootNavigator: "RootNavigator",

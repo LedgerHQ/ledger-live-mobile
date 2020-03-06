@@ -4,7 +4,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { useTranslation } from "react-i18next";
 import { ScreenName, NavigatorName } from "../../const";
 import Manager from "../../screens/Manager";
-import ManagerMainNavigator from "./ManagerMainNavigator";
+import ManagerMain from "../../screens/Manager/Manager";
 import OnboardingNavigator from "./OnboardingNavigator";
 import { stackNavigatorConfig } from "../../navigation/navigatorConfig";
 import styles from "../../navigation/styles";
@@ -28,11 +28,9 @@ export default function ManagerNavigator() {
         })}
       />
       <Stack.Screen
-        name={NavigatorName.ManagerMain}
-        component={ManagerMainNavigator}
-        options={{
-          headerShown: false,
-        }}
+        name={ScreenName.ManagerMain}
+        component={ManagerMain}
+        options={{ title: t("manager.appList.title") }}
       />
       <Stack.Screen
         name={NavigatorName.Onboarding}
