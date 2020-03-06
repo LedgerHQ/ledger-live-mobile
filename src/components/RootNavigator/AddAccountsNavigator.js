@@ -20,8 +20,7 @@ export default function AddAccountsNavigator() {
       headerMode="float"
       screenOptions={{
         ...closableStackNavigatorConfig,
-        headerRight: AddAccountsHeaderRightClose,
-        headerShown: false,
+        headerRight: () => <AddAccountsHeaderRightClose />,
       }}
     >
       <Stack.Screen

@@ -9,7 +9,6 @@ import ConfirmationModal from "./ConfirmationModal";
 
 interface Props {
   preferDismiss: boolean;
-  navigation: *;
   color: string;
   withConfirmation?: boolean;
   confirmationTitle?: React$Node;
