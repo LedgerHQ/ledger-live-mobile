@@ -135,7 +135,7 @@ const Manager = ({ navigation, route }: Props) => {
         setAppUninstallWithDependencies={setAppUninstallWithDependencies}
         setStorageWarning={setStorageWarning}
         managerTabs={MANAGER_TABS}
-        deviceId={route.params?.deviceId}
+        deviceId={deviceId}
         initialDeviceName={route.params?.deviceName}
         blockNavigation={blockNavigation}
         deviceInfo={deviceInfo}
