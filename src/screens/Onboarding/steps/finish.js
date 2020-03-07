@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useEffect } from "react";
+import React from "react";
 import { Trans } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { Image, View, StyleSheet } from "react-native";
@@ -13,7 +13,7 @@ import OnboardingLayout from "../OnboardingLayout";
 import ConfettiParty from "../../../components/ConfettiParty";
 import { useNavigationInterceptor } from "../onboardingContext";
 import colors from "../../../colors";
-import { ScreenName, NavigatorName } from "../../../const";
+import { NavigatorName } from "../../../const";
 
 import { readOnlyModeEnabledSelector } from "../../../reducers/settings";
 
