@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef } from "react";
 import { ScrollView, StyleProp } from "react-native";
-import { useIsFocused } from "@react-navigation/native";
+import { useIsFocused, useScrollToTop } from "@react-navigation/native";
 import { headerPressSubject } from "../navigation/observable";
 
 interface Props {
@@ -13,6 +13,7 @@ interface Props {
 export default function NavigationScrollView({ children, style }: Props) {
   const isFocused = useIsFocused();
   const ref = useRef();
+  useScrollToTop(ref);
 
   useEffect(() => {
     const subscription = headerPressSubject.subscribe(() => {

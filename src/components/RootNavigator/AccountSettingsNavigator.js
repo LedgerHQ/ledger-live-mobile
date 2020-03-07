@@ -13,7 +13,7 @@ import { closableStackNavigatorConfig } from "../../navigation/navigatorConfig";
 export default function AccountSettingsNavigator() {
   const { t } = useTranslation();
   return (
-    <Stack.Navigator screenOptions={{ ...closableStackNavigatorConfig }}>
+    <Stack.Navigator screenOptions={closableStackNavigatorConfig}>
       <Stack.Screen
         name={ScreenName.AccountSettingsMain}
         component={AccountSettingsMain}
