@@ -2,12 +2,7 @@
 import React, { useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import {
-  ScrollView,
-  View,
-  StyleSheet,
-  TouchableWithoutFeedback,
-} from "react-native";
+import { View, StyleSheet, TouchableWithoutFeedback } from "react-native";
 import Icon from "react-native-vector-icons/dist/Feather";
 import Config from "react-native-config";
 import { NavigatorName, ScreenName } from "../../const";
@@ -22,6 +17,7 @@ import Display from "../../icons/Display";
 import colors from "../../colors";
 import TrackScreen from "../../analytics/TrackScreen";
 import timer from "../../timer";
+import NavigationScrollView from "../../components/NavigationScrollView";
 
 // We can extend specific type for screen components from typescritpt definitions later
 interface Props {
@@ -56,7 +52,7 @@ export default function Settings({ navigation }: Props) {
   }
 
   return (
-    <ScrollView>
+    <NavigationScrollView>
       <TrackScreen category="Settings" />
       <View style={styles.root}>
         <SettingsCard
@@ -107,7 +103,7 @@ export default function Settings({ navigation }: Props) {
           </View>
         </TouchableWithoutFeedback>
       </View>
-    </ScrollView>
+    </NavigationScrollView>
   );
 }
 

@@ -1,15 +1,13 @@
 /* @flow */
 import React from "react";
 import { TouchableWithoutFeedback, StyleSheet } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 import LText from "./LText";
 import colors from "../colors";
+import { headerPressSubject } from "../navigation/observable";
 
 export default function HeaderTitle({ style, ...newProps }: *) {
-  const navigation = useNavigation();
-
   function onPress(): void {
-    navigation.emit("refocus");
+    headerPressSubject.next();
   }
 
   return (
