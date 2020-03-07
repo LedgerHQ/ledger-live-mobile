@@ -1,9 +1,9 @@
 // @flow
 import React from "react";
 import { TouchableWithoutFeedback, View, StyleSheet } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 import colors from "../colors";
 import LText from "./LText";
+import { headerPressSubject } from "../navigation/observable";
 
 interface Props {
   title: React$Node;
@@ -11,10 +11,8 @@ interface Props {
 }
 
 export default function StepHeader({ title, subtitle }: Props) {
-  const navigation = useNavigation();
-
   function onPress() {
-    navigation.emit("refocus");
+    headerPressSubject.next();
   }
 
   return (

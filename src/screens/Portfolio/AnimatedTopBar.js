@@ -8,7 +8,6 @@ import {
   TouchableWithoutFeedback,
   Platform,
 } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 import SafeAreaView from "react-native-safe-area-view";
 import type AnimatedValue from "react-native/Libraries/Animated/src/nodes/AnimatedValue";
 import type { Portfolio, Currency } from "@ledgerhq/live-common/lib/types";
@@ -16,6 +15,7 @@ import extraStatusBarPadding from "../../logic/extraStatusBarPadding";
 import BalanceHeader from "./BalanceHeader";
 import HeaderErrorTitle from "../../components/HeaderErrorTitle";
 import HeaderSynchronizing from "../../components/HeaderSynchronizing";
+import { headerPressSubject } from "../../navigation/observable";
 
 interface Props {
   scrollY: AnimatedValue;
@@ -32,7 +32,6 @@ export default function AnimatedTopBar({
   pending,
   error,
 }: Props) {
-  const navigation = useNavigation();
   const [ignorePointerEvents, setIgnorePointerEvents] = useState(true);
 
   useEffect(() => {
@@ -46,7 +45,7 @@ export default function AnimatedTopBar({
   }, [scrollY]);
 
   function onPress() {
-    navigation.emit("refocus");
+    headerPressSubject.next();
   }
 
   const opacity = scrollY.interpolate({

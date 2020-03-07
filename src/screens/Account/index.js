@@ -50,6 +50,7 @@ import type { Item } from "../../components/Graph/types";
 import SubAccountsList from "./SubAccountsList";
 import perFamilyAccountHeader from "../../generated/AccountHeader";
 import perFamilyAccountBodyHeader from "../../generated/AccountBodyHeader";
+import { headerPressSubject } from "../../navigation/observable";
 
 interface RouteParams {
   accountId: string;
@@ -251,7 +252,7 @@ class AccountScreen extends PureComponent<Props, State> {
   ref = React.createRef();
 
   onPress = () => {
-    this.props.navigation.emit("refocus");
+    headerPressSubject.next();
   };
 
   renderSectionHeader = ({ section }) => <SectionHeader section={section} />;

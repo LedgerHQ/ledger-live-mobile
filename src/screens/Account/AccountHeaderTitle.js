@@ -1,7 +1,7 @@
 /* @flow */
 import React from "react";
 import { TouchableWithoutFeedback, View, StyleSheet } from "react-native";
-import { useNavigation, useRoute } from "@react-navigation/native";
+import { useRoute } from "@react-navigation/native";
 import { useSelector } from "react-redux";
 import {
   getAccountCurrency,
@@ -10,14 +10,14 @@ import {
 import LText from "../../components/LText";
 import { accountScreenSelector } from "../../reducers/accounts";
 import ParentCurrencyIcon from "../../components/ParentCurrencyIcon";
+import { headerPressSubject } from "../../navigation/observable";
 
 export default function AccountHeaderTitle() {
-  const navigation = useNavigation();
   const route = useRoute();
   const { account } = useSelector(accountScreenSelector(route));
 
   function onPress() {
-    navigation.emit("refocus");
+    headerPressSubject.next();
   }
 
   if (!account) return null;

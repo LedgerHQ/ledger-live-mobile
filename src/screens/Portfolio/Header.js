@@ -20,6 +20,7 @@ import Greetings from "./Greetings";
 import IconPie from "../../icons/Pie";
 import colors from "../../colors";
 import Touchable from "../../components/Touchable";
+import { headerPressSubject } from "../../navigation/observable";
 
 const mapStateToProps = createStructuredSelector({
   networkError: networkErrorSelector,
@@ -37,7 +38,7 @@ class PortfolioHeader extends Component<{
   navigation: { emit: (event: string) => void } & *,
 }> {
   onRefocus = () => {
-    this.props.navigation.emit("refocus");
+    headerPressSubject.next();
   };
 
   onDistributionButtonPress = () => {
