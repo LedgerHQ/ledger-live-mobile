@@ -2,7 +2,7 @@
 
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
-import { ScrollView, StyleSheet, Dimensions } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
 import QRCode from "react-native-qrcode-svg";
 import VersionNumber from "react-native-version-number";
 import { createStructuredSelector } from "reselect";
@@ -13,6 +13,7 @@ import { dataToFrames } from "qrloop";
 import { accountsSelector } from "../../../reducers/accounts";
 import { exportSettingsSelector } from "../../../reducers/settings";
 import LText from "../../../components/LText";
+import NavigationScrollView from "../../../components/NavigationScrollView";
 
 export type Props = {|
   accounts: *,
@@ -72,14 +73,14 @@ class ExportAccounts extends PureComponent<Props, State> {
     if (!this.chunks) return null;
 
     return (
-      <ScrollView contentContainerStyle={styles.root}>
+      <NavigationScrollView contentContainerStyle={styles.root}>
         <QRCode size={size} value={this.chunks[frame]} />
         <LText style={styles.subText}>
           {frame + 1}
           {" / "}
           {this.chunks.length}
         </LText>
-      </ScrollView>
+      </NavigationScrollView>
     );
   }
 }

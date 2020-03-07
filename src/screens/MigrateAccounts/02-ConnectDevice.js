@@ -1,7 +1,7 @@
 // @flow
 
 import React, { useCallback } from "react";
-import { ScrollView, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { withNavigation } from "@react-navigation/compat";
 import { connect } from "react-redux";
@@ -10,6 +10,7 @@ import colors from "../../colors";
 import { ScreenName } from "../../const";
 import { connectingStep, currencyApp } from "../../components/DeviceJob/steps";
 import SelectDevice from "../../components/SelectDevice";
+import NavigationScrollView from "../../components/NavigationScrollView";
 
 const forceInset = { bottom: "always" };
 
@@ -32,7 +33,7 @@ const ConnectDevice = ({ navigation, route }: Props) => {
   return (
     <SafeAreaView style={styles.root} forceInset={forceInset}>
       <TrackScreen category="MigrateAccount" name="ConnectDevice" />
-      <ScrollView
+      <NavigationScrollView
         style={styles.scroll}
         contentContainerStyle={styles.scrollContainer}
       >
@@ -42,7 +43,7 @@ const ConnectDevice = ({ navigation, route }: Props) => {
           autoSelectOnAdd
           steps={[connectingStep, currencyApp(route.params?.currency)]}
         />
-      </ScrollView>
+      </NavigationScrollView>
     </SafeAreaView>
   );
 };

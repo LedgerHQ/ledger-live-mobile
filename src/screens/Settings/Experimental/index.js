@@ -1,6 +1,6 @@
 /* @flow */
 import React from "react";
-import { ScrollView, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { isEnvDefault } from "@ledgerhq/live-common/lib/env";
 
 import { TrackScreen } from "../../../analytics";
@@ -9,10 +9,11 @@ import colors from "../../../colors";
 import Disclaimer from "./Disclaimer";
 import { experimentalFeatures } from "../../../experimental";
 import FeatureRow from "./FeatureRow";
+import NavigationScrollView from "../../../components/NavigationScrollView";
 
 export default function ExperimentalSettings() {
   return (
-    <ScrollView contentContainerStyle={styles.root}>
+    <NavigationScrollView contentContainerStyle={styles.root}>
       <TrackScreen category="Settings" name="Experimental" />
       <View style={styles.container}>
         <View style={styles.disclaimerContainer}>
@@ -24,7 +25,7 @@ export default function ExperimentalSettings() {
           ) : null,
         )}
       </View>
-    </ScrollView>
+    </NavigationScrollView>
   );
 }
 

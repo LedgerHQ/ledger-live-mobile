@@ -12,7 +12,7 @@ import {
 import { createStructuredSelector } from "reselect";
 import uniq from "lodash/uniq";
 import { withTranslation, Trans } from "react-i18next";
-import { StyleSheet, View, ScrollView } from "react-native";
+import { StyleSheet, View } from "react-native";
 // $FlowFixMe
 import SafeAreaView from "react-native-safe-area-view";
 import type { CryptoCurrency, Account } from "@ledgerhq/live-common/lib/types";
@@ -33,6 +33,7 @@ import LText from "../../components/LText";
 import RetryButton from "../../components/RetryButton";
 import CancelButton from "../../components/CancelButton";
 import GenericErrorBottomModal from "../../components/GenericErrorBottomModal";
+import NavigationScrollView from "../../components/NavigationScrollView";
 import { prepareCurrency } from "../../bridge/cache";
 
 const forceInset = { bottom: "always" };
@@ -273,7 +274,7 @@ class AddAccountsAccounts extends PureComponent<Props, State> {
       <SafeAreaView style={styles.root} forceInset={forceInset}>
         <TrackScreen category="AddAccounts" name="Accounts" />
         <PreventNativeBack />
-        <ScrollView
+        <NavigationScrollView
           style={styles.inner}
           contentContainerStyle={styles.innerContent}
           // $FlowFixMe
@@ -313,7 +314,7 @@ class AddAccountsAccounts extends PureComponent<Props, State> {
           ) : null}
 
           {scanning ? <ScanLoading /> : null}
-        </ScrollView>
+        </NavigationScrollView>
         {!!scannedAccounts.length && (
           <Footer
             isScanning={scanning}

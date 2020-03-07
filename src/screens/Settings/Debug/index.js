@@ -1,7 +1,7 @@
 /* @flow */
 import React from "react";
 import { useSelector } from "react-redux";
-import { ScrollView, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import config from "react-native-config";
 import { accountsSelector } from "../../../reducers/accounts";
@@ -21,12 +21,13 @@ import ReadOnlyModeRow from "../General/ReadOnlyModeRow";
 import OpenDebugStore from "./OpenDebugStore";
 import OpenLottie from "./OpenDebugLottie";
 import SkipLock from "../../../components/behaviour/SkipLock";
+import NavigationScrollView from "../../../components/NavigationScrollView";
 
 export function DebugMocks() {
   const accounts = useSelector(accountsSelector);
 
   return (
-    <ScrollView contentContainerStyle={styles.root}>
+    <NavigationScrollView contentContainerStyle={styles.root}>
       {config.BRIDGESTREAM_DATA ? (
         // $FlowFixMe
         <ImportBridgeStreamData
@@ -44,7 +45,7 @@ export function DebugMocks() {
       <OpenDebugSVG />
       <ReadOnlyModeRow />
       <SkipLock />
-    </ScrollView>
+    </NavigationScrollView>
   );
 }
 
@@ -56,17 +57,17 @@ export function DebugDevices() {
   }
 
   return (
-    <ScrollView contentContainerStyle={styles.root}>
+    <NavigationScrollView contentContainerStyle={styles.root}>
       <OpenDebugHttpTransport />
       <ConfigUSBDeviceSupport />
       <SelectDevice onSelect={onSelect} />
-    </ScrollView>
+    </NavigationScrollView>
   );
 }
 
 export default function DebugSettings({ navigation: { navigate } }: any) {
   return (
-    <ScrollView contentContainerStyle={styles.root}>
+    <NavigationScrollView contentContainerStyle={styles.root}>
       <TrackScreen category="Settings" name="Debug" />
       <SettingsRow
         title="Mock & Test"
@@ -80,7 +81,7 @@ export default function DebugSettings({ navigation: { navigate } }: any) {
         title="Export accounts (LiveQR)"
         onPress={() => navigate(ScreenName.DebugExport)}
       />
-    </ScrollView>
+    </NavigationScrollView>
   );
 }
 

@@ -1,11 +1,5 @@
 import React, { useState, useMemo, useCallback, useRef } from "react";
-import {
-  View,
-  StyleSheet,
-  Platform,
-  VirtualizedList,
-  ScrollView,
-} from "react-native";
+import { View, StyleSheet, Platform, VirtualizedList } from "react-native";
 import ReactNativeModal from "react-native-modal";
 
 import i18next from "i18next";
@@ -25,6 +19,7 @@ import colors from "../../../colors";
 import TextInput from "../../../components/TextInput";
 import LText from "../../../components/LText";
 import Touchable from "../../../components/Touchable";
+import NavigationScrollView from "../../../components/NavigationScrollView";
 import Styles from "../../../navigation/styles";
 
 import AppRow from "../AppsList/AppRow";
@@ -81,7 +76,7 @@ const Placeholder = ({
   ]);
 
   return found && parent ? (
-    <ScrollView>
+    <NavigationScrollView>
       <View style={styles.noResult}>
         <View style={styles.placeholderIcon}>
           <AppIcon icon={parent.icon} size={60} />
@@ -138,7 +133,7 @@ const Placeholder = ({
           />
         </View>
       </View>
-    </ScrollView>
+    </NavigationScrollView>
   ) : (
     <View style={styles.noResult}>
       <View style={styles.noResultIcon}>

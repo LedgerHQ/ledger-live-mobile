@@ -2,7 +2,7 @@
 
 import React, { Component, createRef } from "react";
 import { Trans } from "react-i18next";
-import { StyleSheet, View, Linking, ScrollView } from "react-native";
+import { StyleSheet, View, Linking } from "react-native";
 
 import { TrackScreen } from "../../../analytics";
 import LText from "../../../components/LText";
@@ -13,6 +13,7 @@ import OnboardingLayout from "../OnboardingLayout";
 import OnboardingChoice from "../OnboardingChoice";
 import { withOnboardingContext } from "../onboardingContext";
 import { Bullet } from "../../../components/BulletList";
+import NavigationScrollView from "../../../components/NavigationScrollView";
 import colors, { rgba } from "../../../colors";
 import { urls } from "../../../config/urls";
 import IconWarning from "../../../icons/Warning";
@@ -103,7 +104,7 @@ class OnboardingStepSecurityChecklist extends Component<
         withNeedHelp
       >
         <TrackScreen category="Onboarding" name="Security" />
-        <ScrollView
+        <NavigationScrollView
           ref={this.scrollView}
           horizontal
           pagingEnabled
@@ -151,7 +152,7 @@ class OnboardingStepSecurityChecklist extends Component<
               <Trans i18nKey="common.no" />
             </OnboardingChoice>
           </View>
-        </ScrollView>
+        </NavigationScrollView>
         <BottomModal
           id="SecurityModal"
           isOpened={isErrorModalOpened}

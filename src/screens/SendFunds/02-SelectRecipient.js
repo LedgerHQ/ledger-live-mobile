@@ -5,7 +5,7 @@ import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTran
 import type { Transaction } from "@ledgerhq/live-common/lib/types";
 import React, { useCallback, useRef, useEffect } from "react";
 import { Trans, useTranslation } from "react-i18next";
-import { Platform, ScrollView, StyleSheet, View } from "react-native";
+import { Platform, StyleSheet, View } from "react-native";
 import Icon from "react-native-vector-icons/dist/FontAwesome";
 import SafeAreaView from "react-native-safe-area-view";
 import { useSelector } from "react-redux";
@@ -23,6 +23,7 @@ import TranslatedError from "../../components/TranslatedError";
 import RetryButton from "../../components/RetryButton";
 import CancelButton from "../../components/CancelButton";
 import GenericErrorBottomModal from "../../components/GenericErrorBottomModal";
+import NavigationScrollView from "../../components/NavigationScrollView";
 
 const withoutHiddenError = error =>
   error instanceof RecipientRequired ? null : error;
@@ -120,7 +121,7 @@ export default function SendSelectRecipient({ navigation, route }: Props) {
         <SyncSkipUnderPriority priority={100} />
         <SyncOneAccountOnMount priority={100} accountId={account.id} />
         <KeyboardView style={{ flex: 1 }}>
-          <ScrollView
+          <NavigationScrollView
             style={styles.container}
             keyboardShouldPersistTaps="handled"
           >
@@ -169,7 +170,8 @@ export default function SendSelectRecipient({ navigation, route }: Props) {
                 <TranslatedError error={error || warning} />
               </LText>
             )}
-          </ScrollView>
+            Navigation
+          </NavigationScrollView>
           <View style={[styles.container, styles.containerFlexEnd]}>
             <Button
               event="SendRecipientContinue"

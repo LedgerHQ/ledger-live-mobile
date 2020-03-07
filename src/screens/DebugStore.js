@@ -1,8 +1,9 @@
 // @flow
 
 import React, { PureComponent } from "react";
-import { ScrollView, Text, StyleSheet, View } from "react-native";
+import { Text, StyleSheet, View } from "react-native";
 import { useSelector } from "react-redux";
+import NavigationScrollView from "../components/NavigationScrollView";
 
 import colors from "../colors";
 
@@ -62,9 +63,9 @@ export default function DebugStore() {
   const state = useSelector(s => s);
 
   return (
-    <ScrollView>
+    <NavigationScrollView>
       <CollapsibleThingy obj={state} depth={1} />
-    </ScrollView>
+    </NavigationScrollView>
   );
 }
 

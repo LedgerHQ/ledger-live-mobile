@@ -1,6 +1,6 @@
 /* @flow */
 import React, { Component } from "react";
-import { View, StyleSheet, ScrollView } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { withNavigationFocus } from "@react-navigation/compat";
 import { connect } from "react-redux";
 import { Trans, withTranslation } from "react-i18next";
@@ -27,6 +27,7 @@ import type { DeviceLike } from "../../reducers/ble";
 import Trash from "../../icons/Trash";
 import BottomModal from "../../components/BottomModal";
 import ModalBottomAction from "../../components/ModalBottomAction";
+import NavigationScrollView from "../../components/NavigationScrollView";
 import ReadOnlyNanoX from "./Connect/ReadOnlyNanoX";
 import { readOnlyModeEnabledSelector } from "../../reducers/settings";
 
@@ -138,7 +139,7 @@ class ChooseDevice extends Component<
     }
 
     return (
-      <ScrollView style={styles.root}>
+      <NavigationScrollView style={styles.root}>
         <TrackScreen category="Manager" name="ChooseDevice" />
         <LText semiBold style={styles.title}>
           <Trans i18nKey="manager.connect" />
@@ -159,7 +160,7 @@ class ChooseDevice extends Component<
             deviceName={this.chosenDevice.deviceName}
           />
         )}
-      </ScrollView>
+      </NavigationScrollView>
     );
   }
 }

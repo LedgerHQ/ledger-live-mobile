@@ -1,6 +1,6 @@
 /* @flow */
 import React from "react";
-import { View, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
+import { View, StyleSheet, TouchableOpacity } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { useSelector } from "react-redux";
 import type { Operation } from "@ledgerhq/live-common/lib/types";
@@ -12,6 +12,7 @@ import { getMainAccount } from "@ledgerhq/live-common/lib/account";
 import byFamiliesOperationDetails from "../../generated/operationDetails";
 import { accountScreenSelector } from "../../reducers/accounts";
 import { TrackScreen } from "../../analytics";
+import NavigationScrollView from "../../components/NavigationScrollView";
 import Footer from "./Footer";
 import Content from "./Content";
 import colors from "../../colors";
@@ -63,7 +64,7 @@ export default function OperationDetails({ route, navigation }: Props) {
   return (
     <SafeAreaView style={styles.container} forceInset={forceInset}>
       <TrackScreen category="OperationDetails" />
-      <ScrollView>
+      <NavigationScrollView>
         <View style={styles.root}>
           <Content
             account={account}
@@ -72,7 +73,7 @@ export default function OperationDetails({ route, navigation }: Props) {
             navigation={navigation}
           />
         </View>
-      </ScrollView>
+      </NavigationScrollView>
       <Footer url={url} urlWhatIsThis={urlWhatIsThis} />
     </SafeAreaView>
   );

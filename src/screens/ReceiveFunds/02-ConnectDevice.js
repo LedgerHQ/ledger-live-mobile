@@ -1,6 +1,6 @@
 // @flow
 import React, { useCallback, useEffect, useMemo } from "react";
-import { View, ScrollView, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { useSelector } from "react-redux";
 import { Trans } from "react-i18next";
@@ -19,6 +19,7 @@ import {
   accountApp,
   receiveVerifyStep,
 } from "../../components/DeviceJob/steps";
+import NavigationScrollView from "../../components/NavigationScrollView";
 import { readOnlyModeEnabledSelector } from "../../reducers/settings";
 import ReadOnlyWarning from "./ReadOnlyWarning";
 import NotSyncedWarning from "./NotSyncedWarning";
@@ -103,7 +104,7 @@ export default function ConnectDevice({ navigation, route }: Props) {
   return (
     <SafeAreaView style={styles.root} forceInset={forceInset}>
       <TrackScreen category="ReceiveFunds" name="ConnectDevice" />
-      <ScrollView
+      <NavigationScrollView
         style={styles.scroll}
         contentContainerStyle={styles.scrollContainer}
       >
@@ -115,7 +116,7 @@ export default function ConnectDevice({ navigation, route }: Props) {
             receiveVerifyStep(mainAccount),
           ]}
         />
-      </ScrollView>
+      </NavigationScrollView>
       <View style={styles.footer}>
         <Button
           event="ReceiveWithoutDevice"

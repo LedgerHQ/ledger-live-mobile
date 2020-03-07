@@ -1,6 +1,6 @@
 /* @flow */
 import React, { PureComponent } from "react";
-import { View, StyleSheet, ScrollView } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { withTranslation } from "react-i18next";
 import type { Account } from "@ledgerhq/live-common/lib/types";
 import { connect } from "react-redux";
@@ -9,6 +9,7 @@ import { ScreenName } from "../../const";
 import { accountScreenSelector } from "../../reducers/accounts";
 import { deleteAccount } from "../../actions/accounts";
 import BottomModal from "../../components/BottomModal";
+import NavigationScrollView from "../../components/NavigationScrollView";
 import { TrackScreen } from "../../analytics";
 
 import AccountNameRow from "./AccountNameRow";
@@ -65,7 +66,7 @@ class AccountSettings extends PureComponent<Props, State> {
 
     if (!account) return null;
     return (
-      <ScrollView>
+      <NavigationScrollView>
         <TrackScreen category="AccountSettings" />
         <View style={styles.sectionRow}>
           <AccountNameRow account={account} navigation={navigation} />
@@ -90,7 +91,7 @@ class AccountSettings extends PureComponent<Props, State> {
             account={account}
           />
         </BottomModal>
-      </ScrollView>
+      </NavigationScrollView>
     );
   }
 }

@@ -4,19 +4,14 @@ import type { Transaction } from "@ledgerhq/live-common/lib/families/ethereum/ty
 import { BigNumber } from "bignumber.js";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import {
-  Keyboard,
-  ScrollView,
-  StyleSheet,
-  TextInput,
-  View,
-} from "react-native";
+import { Keyboard, StyleSheet, TextInput, View } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { useSelector } from "react-redux";
 import { i18n } from "../../context/Locale";
 import colors from "../../colors";
 import Button from "../../components/Button";
 import KeyboardView from "../../components/KeyboardView";
+import NavigationScrollView from "../../components/NavigationScrollView";
 import { accountScreenSelector } from "../../reducers/accounts";
 
 const forceInset = { bottom: "always" };
@@ -60,7 +55,7 @@ function EthereumEditGasLimit({ navigation, route }: Props) {
   return (
     <SafeAreaView style={{ flex: 1 }} forceInset={forceInset}>
       <KeyboardView style={styles.body}>
-        <ScrollView contentContainerStyle={styles.root}>
+        <NavigationScrollView contentContainerStyle={styles.root}>
           <TextInput
             autoFocus
             style={styles.textInputAS}
@@ -81,7 +76,7 @@ function EthereumEditGasLimit({ navigation, route }: Props) {
               containerStyle={styles.buttonContainer}
             />
           </View>
-        </ScrollView>
+        </NavigationScrollView>
       </KeyboardView>
     </SafeAreaView>
   );

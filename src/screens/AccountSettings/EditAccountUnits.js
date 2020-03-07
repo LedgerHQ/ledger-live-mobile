@@ -1,6 +1,6 @@
 /* @flow */
 import React, { PureComponent } from "react";
-import { View, StyleSheet, ScrollView, FlatList } from "react-native";
+import { View, StyleSheet, FlatList } from "react-native";
 import type { Account } from "@ledgerhq/live-common/lib/types";
 import { connect } from "react-redux";
 import { compose } from "redux";
@@ -9,6 +9,7 @@ import { accountScreenSelector } from "../../reducers/accounts";
 import { updateAccount } from "../../actions/accounts";
 import SettingsRow from "../../components/SettingsRow";
 import Touchable from "../../components/Touchable";
+import NavigationScrollView from "../../components/NavigationScrollView";
 
 interface RouteParams {
   accountId: string;
@@ -45,7 +46,7 @@ class EditAccountUnits extends PureComponent<Props> {
     const { account } = this.props;
     const accountUnits = account.currency.units;
     return (
-      <ScrollView contentContainerStyle={styles.root}>
+      <NavigationScrollView contentContainerStyle={styles.root}>
         <View style={styles.body}>
           <FlatList
             data={accountUnits}
@@ -72,7 +73,7 @@ class EditAccountUnits extends PureComponent<Props> {
             {account.unit.code}
           </FlatList>
         </View>
-      </ScrollView>
+      </NavigationScrollView>
     );
   }
 }

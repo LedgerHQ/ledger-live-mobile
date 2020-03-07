@@ -2,7 +2,7 @@
 
 import React, { Component } from "react";
 import { withTranslation } from "react-i18next";
-import { StyleSheet, ScrollView } from "react-native";
+import { StyleSheet } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import type { CryptoCurrency } from "@ledgerhq/live-common/lib/types";
 
@@ -12,6 +12,7 @@ import colors from "../../colors";
 import { TrackScreen } from "../../analytics";
 import SelectDevice from "../../components/SelectDevice";
 import { connectingStep, currencyApp } from "../../components/DeviceJob/steps";
+import NavigationScrollView from "../../components/NavigationScrollView";
 
 const forceInset = { bottom: "always" };
 
@@ -45,7 +46,7 @@ class AddAccountsSelectDevice extends Component<Props, State> {
     const currency = this.props.route.params?.currency;
     return (
       <SafeAreaView style={styles.root} forceInset={forceInset}>
-        <ScrollView
+        <NavigationScrollView
           style={styles.scroll}
           contentContainerStyle={styles.scrollContainer}
         >
@@ -54,7 +55,7 @@ class AddAccountsSelectDevice extends Component<Props, State> {
             onSelect={this.onSelectDevice}
             steps={[connectingStep, currencyApp(currency)]}
           />
-        </ScrollView>
+        </NavigationScrollView>
       </SafeAreaView>
     );
   }

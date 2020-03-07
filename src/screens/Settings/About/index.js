@@ -1,7 +1,8 @@
 /* @flow */
 import React from "react";
-import { ScrollView, View, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { TrackScreen } from "../../../analytics";
+import NavigationScrollView from "../../../components/NavigationScrollView";
 import AppVersionRow from "./AppVersionRow";
 import LiveReviewRow from "./LiveReviewRow";
 import PrivacyPolicyRow from "./PrivacyPolicyRow";
@@ -10,7 +11,7 @@ import DescriptionRow from "./DescriptionRow";
 
 export default function About() {
   return (
-    <ScrollView contentContainerStyle={styles.root}>
+    <NavigationScrollView contentContainerStyle={styles.root}>
       <TrackScreen category="Settings" name="About" />
       <DescriptionRow />
       <AppVersionRow />
@@ -19,7 +20,7 @@ export default function About() {
       <View style={styles.container}>
         <LiveReviewRow />
       </View>
-    </ScrollView>
+    </NavigationScrollView>
   );
 }
 

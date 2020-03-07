@@ -1,23 +1,24 @@
 /* @flow */
 import React from "react";
-import { ScrollView, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import { TrackScreen } from "../../../analytics";
 import CountervalueSettingsRow from "./CountervalueSettingsRow";
 import AuthSecurityToggle from "./AuthSecurityToggle";
 import ReportErrorsRow from "./ReportErrorsRow";
 import AnalyticsRow from "./AnalyticsRow";
 import HideEmptyTokenAccountsRow from "./HideEmptyTokenAccountsRow";
+import NavigationScrollView from "../../../components/NavigationScrollView";
 
 export default function GeneralSettings() {
   return (
-    <ScrollView contentContainerStyle={styles.root}>
+    <NavigationScrollView contentContainerStyle={styles.root}>
       <TrackScreen category="Settings" name="General" />
       <CountervalueSettingsRow />
       <HideEmptyTokenAccountsRow />
       <AuthSecurityToggle />
       <ReportErrorsRow />
       <AnalyticsRow />
-    </ScrollView>
+    </NavigationScrollView>
   );
 }
 

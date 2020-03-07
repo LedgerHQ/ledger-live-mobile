@@ -2,7 +2,7 @@
 
 import React, { useCallback } from "react";
 import { Trans } from "react-i18next";
-import { StyleSheet, View, ScrollView, Linking } from "react-native";
+import { StyleSheet, View, Linking } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { withNavigation } from "@react-navigation/compat";
 import { differenceInCalendarDays } from "date-fns";
@@ -30,6 +30,7 @@ import CurrencyIcon from "../../components/CurrencyIcon";
 import Touchable from "../../components/Touchable";
 import BottomModal from "../../components/BottomModal";
 import Circle from "../../components/Circle";
+import NavigationScrollView from "../../components/NavigationScrollView";
 import Close from "../../icons/Close";
 import colors, { rgba } from "../../colors";
 import BakerImage from "./BakerImage";
@@ -254,7 +255,7 @@ const DelegationDetailsModal = ({
           </LText>
         </View>
 
-        <ScrollView style={{ height }}>
+        <NavigationScrollView style={{ height }}>
           {baker ? (
             <Property label={<Trans i18nKey="delegation.validator" />}>
               <LText
@@ -322,7 +323,7 @@ const DelegationDetailsModal = ({
               </LText>
             </Touchable>
           </Property>
-        </ScrollView>
+        </NavigationScrollView>
 
         {account.type !== "Account" ? null : (
           <View style={styles.footer}>

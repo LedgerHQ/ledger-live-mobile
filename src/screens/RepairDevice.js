@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from "react";
-import { View, StyleSheet, ScrollView, Dimensions } from "react-native";
+import { View, StyleSheet, Dimensions } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { withTranslation, Trans } from "react-i18next";
 import firmwareUpdateRepair from "@ledgerhq/live-common/lib/hw/firmwareUpdate-repair";
@@ -14,6 +14,7 @@ import DeviceNanoAction from "../components/DeviceNanoAction";
 import SelectDevice from "../components/SelectDevice";
 import GenericErrorView from "../components/GenericErrorView";
 import Installing from "../components/Installing";
+import NavigationScrollView from "../components/NavigationScrollView";
 
 import { connectingStep } from "../components/DeviceJob/steps";
 import { TrackScreen } from "../analytics";
@@ -79,7 +80,7 @@ class RepairDevice extends Component<Props, State> {
       body = <Installing progress={progress} installing="flash" />;
     } else if (ready) {
       body = (
-        <ScrollView
+        <NavigationScrollView
           style={styles.body}
           contentContainerStyle={styles.bodyContent}
         >
@@ -109,7 +110,7 @@ class RepairDevice extends Component<Props, State> {
             onPress={this.onReady}
             title={<Trans i18nKey="RepairDevice.action" />}
           />
-        </ScrollView>
+        </NavigationScrollView>
       );
     } else {
       body = (

@@ -1,18 +1,19 @@
 // @flow
 
 import React from "react";
-import { ScrollView, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { UserRefusedAddress } from "@ledgerhq/errors";
 import colors from "../colors";
 import DeviceNanoAction from "../components/DeviceNanoAction";
+import NavigationScrollView from "../components/NavigationScrollView";
 
 const forceInset = { bottom: "always" };
 
 export default function DebugIcons() {
   return (
     <SafeAreaView style={styles.root} forceInset={forceInset}>
-      <ScrollView contentContainerStyle={styles.scrollView}>
+      <NavigationScrollView contentContainerStyle={styles.scrollView}>
         <DeviceNanoAction width={250} />
         <DeviceNanoAction width={250} action="accept" screen="validation" />
         <DeviceNanoAction width={250} screen="home" />
@@ -49,7 +50,7 @@ export default function DebugIcons() {
           action="accept"
         />
         <DeviceNanoAction width={250} modelId="nanoS" wired screen="pin" />
-      </ScrollView>
+      </NavigationScrollView>
     </SafeAreaView>
   );
 }
@@ -59,7 +60,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.white,
   },
-  scrollView: {
+  NavigationscrollView: {
     alignItems: "center",
   },
 });

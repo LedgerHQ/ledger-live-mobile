@@ -1,15 +1,16 @@
 /* @flow */
 import React from "react";
-import { ScrollView, View, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { TrackScreen } from "../../../analytics";
 import LedgerSupportRow from "./LedgerSupportRow";
 import ClearCacheRow from "./ClearCacheRow";
 import HardResetRow from "./HardResetRow";
 import ConfigureDeviceRow from "./ConfigureDeviceRow";
+import NavigationScrollView from "../../../components/NavigationScrollView";
 
 export default function HelpSettings() {
   return (
-    <ScrollView contentContainerStyle={styles.root}>
+    <NavigationScrollView contentContainerStyle={styles.root}>
       <TrackScreen category="Settings" name="Help" />
       <LedgerSupportRow />
       <ConfigureDeviceRow />
@@ -17,7 +18,7 @@ export default function HelpSettings() {
         <ClearCacheRow />
         <HardResetRow />
       </View>
-    </ScrollView>
+    </NavigationScrollView>
   );
 }
 

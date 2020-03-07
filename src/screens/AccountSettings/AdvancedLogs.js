@@ -1,10 +1,11 @@
 /* @flow */
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { View, StyleSheet, ScrollView } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { useSelector } from "react-redux";
 import { accountScreenSelector } from "../../reducers/accounts";
 import LText from "../../components/LText";
+import NavigationScrollView from "../../components/NavigationScrollView";
 import { localeIds } from "../../languages";
 import colors from "../../colors";
 
@@ -38,7 +39,7 @@ export default function AdvancedLogs({ route }: Props) {
   });
 
   return (
-    <ScrollView contentContainerStyle={styles.root}>
+    <NavigationScrollView contentContainerStyle={styles.root}>
       <View style={styles.body}>
         <LText semiBold style={styles.sync}>
           {t("common.sync.ago", { time: readableDate })}
@@ -47,7 +48,7 @@ export default function AdvancedLogs({ route }: Props) {
           {JSON.stringify(usefulData, null, 2)}
         </LText>
       </View>
-    </ScrollView>
+    </NavigationScrollView>
   );
 }
 

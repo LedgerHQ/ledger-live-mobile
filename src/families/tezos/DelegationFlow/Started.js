@@ -1,6 +1,6 @@
 // @flow
 import React, { useCallback } from "react";
-import { StyleSheet, ScrollView, View, Linking } from "react-native";
+import { StyleSheet, View, Linking } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { Trans } from "react-i18next";
 import colors from "../../../colors";
@@ -9,6 +9,7 @@ import Button from "../../../components/Button";
 import LText from "../../../components/LText";
 import ExternalLink from "../../../components/ExternalLink";
 import BulletList, { BulletGreenCheck } from "../../../components/BulletList";
+import NavigationScrollView from "../../../components/NavigationScrollView";
 import IlluStaking from "../IlluStaking";
 import { urls } from "../../../config/urls";
 
@@ -32,7 +33,7 @@ export default function DelegationStarted({ navigation, route }: Props) {
 
   return (
     <SafeAreaView style={styles.root} forceInset={forceInset}>
-      <ScrollView
+      <NavigationScrollView
         style={styles.scroll}
         contentContainerStyle={styles.scrollContainer}
       >
@@ -66,7 +67,7 @@ export default function DelegationStarted({ navigation, route }: Props) {
             }}
           />
         </View>
-      </ScrollView>
+      </NavigationScrollView>
       <View style={styles.footer}>
         <Button
           event="DelegationStartedBtn"

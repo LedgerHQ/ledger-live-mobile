@@ -1,6 +1,6 @@
 // @flow
 import React from "react";
-import { StyleSheet, ScrollView } from "react-native";
+import { StyleSheet } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { useSelector } from "react-redux";
 import { getMainAccount } from "@ledgerhq/live-common/lib/account/helpers";
@@ -12,6 +12,7 @@ import {
   connectingStep,
   accountApp,
 } from "../../../components/DeviceJob/steps";
+import NavigationScrollView from "../../../components/NavigationScrollView";
 
 const forceInset = { bottom: "always" };
 
@@ -41,7 +42,7 @@ export default function ConnectDevice({ navigation, route }: Props) {
 
   return (
     <SafeAreaView style={styles.root} forceInset={forceInset}>
-      <ScrollView
+      <NavigationScrollView
         style={styles.scroll}
         contentContainerStyle={styles.scrollContainer}
       >
@@ -50,7 +51,7 @@ export default function ConnectDevice({ navigation, route }: Props) {
           onSelect={onSelectDevice}
           steps={[connectingStep, accountApp(mainAccount)]}
         />
-      </ScrollView>
+      </NavigationScrollView>
     </SafeAreaView>
   );
 }

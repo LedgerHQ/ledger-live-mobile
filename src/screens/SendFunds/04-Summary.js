@@ -1,7 +1,7 @@
 /* @flow */
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
 import React, { useState, useCallback, Component } from "react";
-import { View, StyleSheet, ScrollView } from "react-native";
+import { View, StyleSheet } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { useSelector } from "react-redux";
 import { Trans } from "react-i18next";
@@ -24,6 +24,7 @@ import SummaryTotalSection from "./SummaryTotalSection";
 import SectionSeparator from "../../components/SectionSeparator";
 import AlertTriangle from "../../icons/AlertTriangle";
 import ConfirmationModal from "../../components/ConfirmationModal";
+import NavigationScrollView from "../../components/NavigationScrollView";
 
 const forceInset = { bottom: "always" };
 
@@ -113,7 +114,7 @@ export default function SendSummary({ navigation, route }: Props) {
   return (
     <SafeAreaView style={styles.root} forceInset={forceInset}>
       <TrackScreen category="SendFunds" name="Summary" />
-      <ScrollView style={styles.body}>
+      <NavigationScrollView style={styles.body}>
         <SummaryFromSection account={account} parentAccount={parentAccount} />
         <VerticalConnector />
         <SummaryToSection recipient={transaction.recipient} />
@@ -140,7 +141,7 @@ export default function SendSummary({ navigation, route }: Props) {
           parentAccount={parentAccount}
           amount={totalSpent}
         />
-      </ScrollView>
+      </NavigationScrollView>
       <View style={styles.footer}>
         <LText style={styles.error}>
           <TranslatedError error={transactionError} />

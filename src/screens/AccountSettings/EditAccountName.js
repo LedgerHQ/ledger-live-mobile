@@ -1,7 +1,7 @@
 /* @flow */
 import React, { PureComponent } from "react";
 import i18next from "i18next";
-import { View, StyleSheet, ScrollView } from "react-native";
+import { View, StyleSheet } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import type { Account } from "@ledgerhq/live-common/lib/types";
 import { connect } from "react-redux";
@@ -13,6 +13,7 @@ import Button from "../../components/Button";
 import TextInput from "../../components/TextInput";
 import KeyboardView from "../../components/KeyboardView";
 import { getFontStyle } from "../../components/LText";
+import NavigationScrollView from "../../components/NavigationScrollView";
 
 import colors from "../../colors";
 
@@ -88,7 +89,7 @@ class EditAccountName extends PureComponent<Props, State> {
     return (
       <SafeAreaView style={styles.safeArea} forceInset={forceInset}>
         <KeyboardView style={styles.body}>
-          <ScrollView
+          <NavigationScrollView
             contentContainerStyle={styles.root}
             keyboardShouldPersistTaps="handled"
           >
@@ -115,7 +116,7 @@ class EditAccountName extends PureComponent<Props, State> {
                 containerStyle={styles.buttonContainer}
               />
             </View>
-          </ScrollView>
+          </NavigationScrollView>
         </KeyboardView>
       </SafeAreaView>
     );

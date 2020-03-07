@@ -1,6 +1,6 @@
 /* @flow */
 import React, { Component } from "react";
-import { View, StyleSheet, ScrollView } from "react-native";
+import { View, StyleSheet } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { withTranslation, Trans } from "react-i18next";
 
@@ -11,6 +11,7 @@ import { ScreenName } from "../../const";
 import Button from "../../components/Button";
 import SafeMarkdown from "../../components/SafeMarkdown";
 import LText from "../../components/LText";
+import NavigationScrollView from "../../components/NavigationScrollView";
 import colors from "../../colors";
 
 const forceInset = { bottom: "always" };
@@ -41,7 +42,10 @@ class FirmwareUpdateReleaseNotes extends Component<Props, State> {
     return (
       <SafeAreaView style={styles.root} forceInset={forceInset}>
         <TrackScreen category="FirmwareUpdate" name="ReleaseNotes" />
-        <ScrollView style={styles.body} contentContainerStyle={styles.content}>
+        <NavigationScrollView
+          style={styles.body}
+          contentContainerStyle={styles.content}
+        >
           <LText style={styles.intro}>
             <Trans
               i18nKey="FirmwareUpdateReleaseNotes.introTitle"
@@ -61,7 +65,7 @@ class FirmwareUpdateReleaseNotes extends Component<Props, State> {
               <SafeMarkdown markdown={osu.notes} />
             </View>
           ) : null}
-        </ScrollView>
+        </NavigationScrollView>
         <View style={styles.footer}>
           <Button
             event="FirmwareUpdateReleaseNotesContinue"

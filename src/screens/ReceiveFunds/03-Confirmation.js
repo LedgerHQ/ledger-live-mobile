@@ -3,7 +3,7 @@
 import React, { Component } from "react";
 import { from, of } from "rxjs";
 import { delay } from "rxjs/operators";
-import { View, StyleSheet, Linking, ScrollView } from "react-native";
+import { View, StyleSheet, Linking } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { connect } from "react-redux";
 import QRCode from "react-native-qrcode-svg";
@@ -36,6 +36,7 @@ import Button from "../../components/Button";
 import CurrencyIcon from "../../components/CurrencyIcon";
 import CopyLink from "../../components/CopyLink";
 import ShareLink from "../../components/ShareLink";
+import NavigationScrollView from "../../components/NavigationScrollView";
 import { urls } from "../../config/urls";
 import { readOnlyModeEnabledSelector } from "../../reducers/settings";
 import SkipLock from "../../components/behaviour/SkipLock";
@@ -198,7 +199,10 @@ class ReceiveConfirmation extends Component<Props, State> {
             <SkipLock />
           </>
         )}
-        <ScrollView style={{ flex: 1 }} contentContainerStyle={styles.root}>
+        <NavigationScrollView
+          style={{ flex: 1 }}
+          contentContainerStyle={styles.root}
+        >
           <View style={styles.container}>
             <Touchable event="QRZoom" onPress={this.onZoom}>
               {width < 350 ? (
@@ -290,7 +294,7 @@ class ReceiveConfirmation extends Component<Props, State> {
               }
             />
           </View>
-        </ScrollView>
+        </NavigationScrollView>
         {verified && (
           <View style={styles.footer}>
             <Button

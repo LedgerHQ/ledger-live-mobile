@@ -2,12 +2,13 @@
 
 import React, { Component } from "react";
 import { Trans, withTranslation } from "react-i18next";
-import { View, StyleSheet, ScrollView } from "react-native";
+import { View, StyleSheet } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import partners from "@ledgerhq/live-common/lib/partners/reactNative";
 import type { T } from "../../types/common";
 import PartnerCard from "../../components/PartnerCard";
 import LText from "../../components/LText";
+import NavigationScrollView from "../../components/NavigationScrollView";
 import colors from "../../colors";
 import extraStatusBarPadding from "../../logic/extraStatusBarPadding";
 import TrackScreen from "../../analytics/TrackScreen";
@@ -29,7 +30,7 @@ class ExchangeScreen extends Component<Props> {
         forceInset={forceInset}
       >
         <TrackScreen category="Partners" />
-        <ScrollView style={styles.scrollView}>
+        <NavigationScrollView style={styles.scrollView}>
           <View style={styles.body}>
             <LText secondary style={styles.title} bold>
               <Trans i18nKey="partners.title" />
@@ -41,7 +42,7 @@ class ExchangeScreen extends Component<Props> {
               <PartnerCard icon={card.Logo} key={card.id} t={t} card={card} />
             ))}
           </View>
-        </ScrollView>
+        </NavigationScrollView>
       </SafeAreaView>
     );
   }
