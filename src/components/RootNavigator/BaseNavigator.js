@@ -131,19 +131,13 @@ export default function BaseNavigator() {
       <Stack.Screen
         name={ScreenName.ScanRecipient}
         component={ScanRecipient}
-        options={({ navigation }) => {
-          return {
-            ...TransparentHeaderNavigationOptions,
-            title: t("send.scan.title"),
-            headerRight: () => (
-              <HeaderRightClose
-                navigation={navigation}
-                color={colors.white}
-                preferDismiss={false}
-              />
-            ),
-            headerLeft: null,
-          };
+        options={{
+          ...TransparentHeaderNavigationOptions,
+          title: t("send.scan.title"),
+          headerRight: () => (
+            <HeaderRightClose color={colors.white} preferDismiss={false} />
+          ),
+          headerLeft: null,
         }}
       />
       <Stack.Screen

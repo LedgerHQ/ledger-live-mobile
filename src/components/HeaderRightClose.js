@@ -34,7 +34,10 @@ export default function HeaderRightClose({
       navigation.dangerouslyGetParent().pop();
       return;
     }
+
     if (navigation.closeDrawer) navigation.closeDrawer();
+
+    navigation.goBack();
   }
 
   function onPress(): void {
@@ -55,7 +58,7 @@ export default function HeaderRightClose({
 
   function onConfirm() {
     setOnModalHide(close);
-    isConfirmationModalOpened(false);
+    setIsConfirmationModalOpened(false);
   }
 
   return (
