@@ -8,7 +8,7 @@ import {
 import { BottomTabView } from "@react-navigation/bottom-tabs";
 import { BehaviorSubject } from "rxjs";
 
-const lockSubject = new BehaviorSubject(false);
+export const lockSubject = new BehaviorSubject(false);
 const actionSubject = new BehaviorSubject();
 
 /** use Effect to trigger lock navigation updates and callback to retrieve catched navigation actions */
