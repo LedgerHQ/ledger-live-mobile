@@ -6,7 +6,7 @@ import { useIsFocused, useScrollToTop } from "@react-navigation/native";
 import { headerPressSubject } from "../navigation/observable";
 
 interface Props {
-  children: React.ReactNode;
+  children: React$Element;
   style: StyleProp<ScrollView>;
 }
 
