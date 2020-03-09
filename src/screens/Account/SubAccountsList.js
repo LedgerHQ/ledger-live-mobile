@@ -12,7 +12,7 @@ import Icon from "react-native-vector-icons/dist/FontAwesome";
 import MaterialIcon from "react-native-vector-icons/dist/MaterialIcons";
 import { listSubAccounts } from "@ledgerhq/live-common/lib/account";
 import { listTokenTypesForCryptoCurrency } from "@ledgerhq/live-common/lib/currencies";
-import { ScreenName } from "../../const";
+import { NavigatorName, ScreenName } from "../../const";
 import SubAccountRow from "../../components/SubAccountRow";
 import withEnv from "../../logic/withEnv";
 import colors from "../../colors";
@@ -96,6 +96,15 @@ const SubAccountsList = ({
     [parentAccount],
   );
 
+  const navigateToReceiveConnectDevice = useCallback(() => {
+    navigation.navigate(NavigatorName.ReceiveFunds, {
+      screen: ScreenName.ReceiveConnectDevice,
+      params: {
+        accountId,
+      },
+    });
+  }, [accountId, navigation]);
+
   const renderHeader = useCallback(
     () => (
       <View style={styles.header}>
@@ -115,17 +124,13 @@ const SubAccountsList = ({
             IconLeft={() => (
               <MaterialIcon color={colors.live} name="add" size={20} />
             )}
-            onPress={() =>
-              navigation.navigate(ScreenName.ReceiveConnectDevice, {
-                accountId,
-              })
-            }
+            onPress={navigateToReceiveConnectDevice}
             size={14}
           />
         ) : null}
       </View>
     ),
-    [isToken, subAccounts, navigation, accountId],
+    [isToken, subAccounts, navigateToReceiveConnectDevice],
   );
 
   const renderFooter = useCallback(() => {
@@ -134,9 +139,7 @@ const SubAccountsList = ({
       return (
         <Touchable
           event="AccountReceiveSubAccount"
-          onPress={() =>
-            navigation.navigate(ScreenName.ReceiveConnectDevice, { accountId })
-          }
+          onPress={navigateToReceiveConnectDevice}
         >
           <View style={styles.footer}>
             <Icon color={colors.live} size={26} name="plus" />
