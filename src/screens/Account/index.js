@@ -38,6 +38,7 @@ import SectionHeader from "../../components/SectionHeader";
 import NoMoreOperationFooter from "../../components/NoMoreOperationFooter";
 import LText from "../../components/LText";
 import LoadingFooter from "../../components/LoadingFooter";
+import { ScreenName } from "../../const";
 import colors from "../../colors";
 import CurrencyUnitValue from "../../components/CurrencyUnitValue";
 import Header from "./Header";
@@ -166,8 +167,7 @@ class AccountScreen extends PureComponent<Props, State> {
 
   onAccountPress = debounce((tokenAccount: TokenAccount) => {
     const { navigation, account } = this.props;
-    // $FlowFixMe
-    navigation.push("Account", {
+    navigation.push(ScreenName.Account, {
       parentId: account.id,
       accountId: tokenAccount.id,
     });

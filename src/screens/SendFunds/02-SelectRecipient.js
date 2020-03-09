@@ -170,7 +170,6 @@ export default function SendSelectRecipient({ navigation, route }: Props) {
                 <TranslatedError error={error || warning} />
               </LText>
             )}
-            Navigation
           </NavigationScrollView>
           <View style={[styles.container, styles.containerFlexEnd]}>
             <Button
