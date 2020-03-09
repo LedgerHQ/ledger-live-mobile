@@ -49,7 +49,7 @@ export default function SendAmount({ navigation, route }: Props) {
     bridgePending,
     bridgeError,
   } = useBridgeTransaction(() => ({
-    transaction: route.transaction,
+    transaction: route.params.transaction,
     account,
     parentAccount,
   }));

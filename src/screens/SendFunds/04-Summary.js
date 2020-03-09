@@ -46,7 +46,7 @@ export default function SendSummary({ navigation, route }: Props) {
     status,
     bridgePending,
   } = useBridgeTransaction(() => ({
-    transaction: route.params?.transaction,
+    transaction: route.params.transaction,
     account,
     parentAccount,
   }));
