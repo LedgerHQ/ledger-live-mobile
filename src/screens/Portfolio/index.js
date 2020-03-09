@@ -1,24 +1,15 @@
 // @flow
 
-import React, { Component } from "react";
-import { createStructuredSelector } from "reselect";
-import { connect } from "react-redux";
+import React, { useRef, useState } from "react";
+import { useSelector } from "react-redux";
 import { View, StyleSheet, Animated, SectionList } from "react-native";
 import type { SectionBase } from "react-native/Libraries/Lists/SectionList";
-import type {
-  AccountLike,
-  Account,
-  Operation,
-  Portfolio,
-  Currency,
-} from "@ledgerhq/live-common/lib/types";
+import type { Operation } from "@ledgerhq/live-common/lib/types";
 import SafeAreaView from "react-native-safe-area-view";
-import { withTranslation } from "react-i18next";
 import {
   groupAccountsOperationsByDay,
   isAccountEmpty,
 } from "@ledgerhq/live-common/lib/account";
-import type AnimatedValue from "react-native/Libraries/Animated/src/nodes/AnimatedValue";
 
 import colors from "../../colors";
 
@@ -26,10 +17,7 @@ import {
   accountsSelector,
   flattenAccountsSelector,
 } from "../../reducers/accounts";
-import {
-  hasCompletedOnboardingSelector,
-  counterValueCurrencySelector,
-} from "../../reducers/settings";
+import { counterValueCurrencySelector } from "../../reducers/settings";
 import { portfolioSelector } from "../../actions/portfolio";
 import SectionHeader from "../../components/SectionHeader";
 import NoMoreOperationFooter from "../../components/NoMoreOperationFooter";
@@ -51,56 +39,35 @@ import RequireTerms from "../../components/RequireTerms";
 const AnimatedSectionList = Animated.createAnimatedComponent(SectionList);
 const List = globalSyncRefreshControl(AnimatedSectionList);
 
-const mapStateToProps = createStructuredSelector({
-  accounts: accountsSelector,
-  allAccounts: flattenAccountsSelector,
-  hasCompletedOnboarding: hasCompletedOnboardingSelector,
-  counterValueCurrency: counterValueCurrencySelector,
-  portfolio: portfolioSelector,
-});
+interface Props {
+  navigation: *;
+}
 
-const mapDispatchToProps = null;
+export default function PortfolioScreen({ navigation }: Props) {
+  const accounts = useSelector(accountsSelector);
+  const allAccounts = useSelector(flattenAccountsSelector);
+  const counterValueCurrency = useSelector(counterValueCurrencySelector);
+  const portfolio = useSelector(portfolioSelector);
 
-class PortfolioScreen extends Component<
-  {
-    acceptTradingWarning: () => void,
-    accounts: Account[],
-    allAccounts: AccountLike[],
-    portfolio: Portfolio,
-    navigation: *,
-    hasCompletedOnboarding: boolean,
-    counterValueCurrency: Currency,
-  },
-  {
-    opCount: number,
-    scrollY: AnimatedValue,
-  },
-> {
-  state = {
-    opCount: 50,
-    scrollY: new Animated.Value(0),
-  };
+  const [opCount, setOpCount] = useState(50);
+  const scrollY = useRef(new Animated.Value(0)).current;
+  const ref = useRef();
 
-  ref = React.createRef();
+  function keyExtractor(item: Operation) {
+    return item.id;
+  }
 
-  keyExtractor = (item: Operation) => item.id;
-
-  ListHeaderComponent = () => {
-    const { accounts, counterValueCurrency } = this.props;
-
+  function ListHeaderComponent() {
     return (
       <GraphCardContainer
         counterValueCurrency={counterValueCurrency}
-        portfolio={this.props.portfolio}
+        portfolio={portfolio}
         showGreeting={!accounts.every(isAccountEmpty)}
       />
     );
-  };
+  }
 
-  ListEmptyComponent = () => {
-    const { accounts } = this.props;
-    const { navigation } = this.props;
-
+  function ListEmptyComponent() {
     if (accounts.length === 0) {
       return <EmptyStatePortfolio navigation={navigation} />;
     }
@@ -110,9 +77,9 @@ class PortfolioScreen extends Component<
     }
 
     return null;
-  };
+  }
 
-  renderItem = ({
+  function renderItem({
     item,
     index,
     section,
@@ -120,8 +87,7 @@ class PortfolioScreen extends Component<
     item: Operation,
     index: number,
     section: SectionBase<*>,
-  }) => {
-    const { allAccounts, accounts } = this.props;
+  }) {
     const account = allAccounts.find(a => a.id === item.accountId);
     const parentAccount =
       account && account.type !== "Account"
@@ -139,15 +105,15 @@ class PortfolioScreen extends Component<
         isLast={section.data.length - 1 === index}
       />
     );
-  };
+  }
 
-  renderSectionHeader = ({ section }: { section: * }) => (
-    <SectionHeader section={section} />
-  );
+  function renderSectionHeader({ section }: { section: * }) {
+    return <SectionHeader section={section} />;
+  }
 
-  onEndReached = () => {
-    this.setState(({ opCount }) => ({ opCount: opCount + 50 }));
-  };
+  function onEndReached() {
+    setOpCount(opCount + 50);
+  }
 
   // componentDidMount() {
   //   this.props.navigation.navigate("DelegationSummary", {
@@ -155,69 +121,58 @@ class PortfolioScreen extends Component<
   //   });
   // }
 
-  render() {
-    const { accounts, portfolio, counterValueCurrency } = this.props;
-    const { opCount, scrollY } = this.state;
+  const { sections, completed } = groupAccountsOperationsByDay(accounts, {
+    count: opCount,
+    withSubAccounts: true,
+  });
 
-    const { sections, completed } = groupAccountsOperationsByDay(accounts, {
-      count: opCount,
-      withSubAccounts: true,
-    });
+  return (
+    <SafeAreaView style={[styles.root, { paddingTop: extraStatusBarPadding }]}>
+      <StickyHeader
+        scrollY={scrollY}
+        portfolio={portfolio}
+        counterValueCurrency={counterValueCurrency}
+      />
+      <SyncBackground />
 
-    return (
-      <SafeAreaView
-        style={[styles.root, { paddingTop: extraStatusBarPadding }]}
-      >
-        <StickyHeader
-          scrollY={scrollY}
-          portfolio={portfolio}
-          counterValueCurrency={counterValueCurrency}
+      <RequireTerms />
+
+      <TrackScreen category="Portfolio" accountsLength={accounts.length} />
+
+      <View style={styles.inner}>
+        <List
+          forwardedRef={ref}
+          sections={sections}
+          style={styles.list}
+          contentContainerStyle={styles.contentContainer}
+          keyExtractor={keyExtractor}
+          renderItem={renderItem}
+          renderSectionHeader={renderSectionHeader}
+          onEndReached={onEndReached}
+          stickySectionHeadersEnabled={false}
+          showsVerticalScrollIndicator={false}
+          scrollEventThrottle={16}
+          onScroll={Animated.event(
+            [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+            { useNativeDriver: true },
+          )}
+          ListHeaderComponent={ListHeaderComponent}
+          ListFooterComponent={
+            !completed ? (
+              <LoadingFooter />
+            ) : accounts.every(isAccountEmpty) ? null : sections.length ? (
+              <NoMoreOperationFooter />
+            ) : (
+              <NoOperationFooter />
+            )
+          }
+          ListEmptyComponent={ListEmptyComponent}
         />
-        <SyncBackground />
-
-        <RequireTerms />
-
-        <TrackScreen category="Portfolio" accountsLength={accounts.length} />
-
-        <View style={styles.inner}>
-          <List
-            forwardedRef={this.ref}
-            sections={sections}
-            style={styles.list}
-            contentContainerStyle={styles.contentContainer}
-            keyExtractor={this.keyExtractor}
-            renderItem={this.renderItem}
-            renderSectionHeader={this.renderSectionHeader}
-            onEndReached={this.onEndReached}
-            stickySectionHeadersEnabled={false}
-            showsVerticalScrollIndicator={false}
-            scrollEventThrottle={16}
-            onScroll={Animated.event(
-              [{ nativeEvent: { contentOffset: { y: scrollY } } }],
-              { useNativeDriver: true },
-            )}
-            ListHeaderComponent={this.ListHeaderComponent}
-            ListFooterComponent={
-              !completed ? (
-                <LoadingFooter />
-              ) : accounts.every(isAccountEmpty) ? null : sections.length ? (
-                <NoMoreOperationFooter />
-              ) : (
-                <NoOperationFooter />
-              )
-            }
-            ListEmptyComponent={this.ListEmptyComponent}
-          />
-          <MigrateAccountsBanner />
-        </View>
-      </SafeAreaView>
-    );
-  }
+        <MigrateAccountsBanner />
+      </View>
+    </SafeAreaView>
+  );
 }
-
-export default withTranslation()(
-  connect(mapStateToProps, mapDispatchToProps)(PortfolioScreen),
-);
 
 const styles = StyleSheet.create({
   root: {
