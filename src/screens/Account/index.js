@@ -227,7 +227,7 @@ export default function AccountScreen({ navigation, route }: Props) {
     );
   }
 
-  function renderSectionHeader({ section }) {
+  function renderSectionHeader({ section }: any) {
     return <SectionHeader section={section} />;
   }
 
