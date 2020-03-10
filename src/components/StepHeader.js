@@ -3,7 +3,7 @@ import React from "react";
 import { TouchableWithoutFeedback, View, StyleSheet } from "react-native";
 import colors from "../colors";
 import LText from "./LText";
-import { headerPressSubject } from "../navigation/observable";
+import { headerPressSubject } from "../navigation/utils";
 
 interface Props {
   title: React$Node;

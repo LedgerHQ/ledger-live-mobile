@@ -1,6 +1,6 @@
 // @flow
 import React from "react";
-import format from "date-fns/format";
+import { format } from "date-fns";
 
 import compareDate from "../logic/compareDate";
 
@@ -9,7 +9,7 @@ interface Props {
   format?: string;
 }
 
-function FormatDate({ date, format: formatProp = "MMMM d, YYYY" }: Props) {
+function FormatDate({ date, format: formatProp = "MMMM d, yyyy" }: Props) {
   return format(date, formatProp);
 }
 

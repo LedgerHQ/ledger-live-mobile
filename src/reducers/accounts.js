@@ -138,9 +138,9 @@ export const accountSelector = createSelector(
 
 export const accountScreenSelector = (route: *) => (state: *) => {
   const { accountId, parentId } = route.params;
-  const parentAccount: ?Account =
+  const parentAccount: Account =
     parentId && accountSelector(state, { accountId: parentId });
-  let account: ?AccountLike;
+  let account: AccountLike | typeof undefined;
   if (parentAccount) {
     const { subAccounts } = parentAccount;
     if (subAccounts) {

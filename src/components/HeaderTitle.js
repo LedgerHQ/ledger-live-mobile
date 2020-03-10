@@ -3,7 +3,7 @@ import React from "react";
 import { TouchableWithoutFeedback, StyleSheet } from "react-native";
 import LText from "./LText";
 import colors from "../colors";
-import { headerPressSubject } from "../navigation/observable";
+import { headerPressSubject } from "../navigation/utils";
 
 export default function HeaderTitle({ style, ...newProps }: *) {
   function onPress(): void {

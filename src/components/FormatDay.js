@@ -1,8 +1,7 @@
 // @flow
 import { Component } from "react";
 import i18next from "i18next";
-import format from "date-fns/format";
-import { differenceInCalendarDays } from "date-fns";
+import { format, differenceInCalendarDays } from "date-fns";
 import compareDate from "../logic/compareDate";
 
 type Props = {

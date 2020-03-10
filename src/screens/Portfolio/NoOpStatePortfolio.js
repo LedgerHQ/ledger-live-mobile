@@ -1,7 +1,8 @@
 /* @flow */
-import React, { PureComponent } from "react";
+import React from "react";
 import { Trans } from "react-i18next";
 import { View, StyleSheet } from "react-native";
+import { useRoute, useNavigation } from "@react-navigation/native";
 import colors from "../../colors";
 import { NavigatorName } from "../../const";
 import LText from "../../components/LText";
@@ -9,46 +10,41 @@ import Button from "../../components/Button";
 import IconReceive from "../../icons/Receive";
 import PortfolioNoOpIllustration from "../../icons/PortfolioNoOpIllustration";
 
-type Props = {
-  navigation: *,
-};
+export default function NoOpStatePortfolio() {
+  const route = useRoute();
+  const { navigate } = useNavigation();
 
-class NoOpStatePortfolio extends PureComponent<Props> {
-  navigateToReceive = () =>
-    this.props.navigation.navigate({
-      routeName: NavigatorName.ReceiveFunds,
+  function navigateToReceive() {
+    navigate(NavigatorName.ReceiveFunds, {
       params: {
-        goBackKey: this.props.navigation.state.key,
+        goBackKey: route.key,
       },
       key: "receivefunds",
     });
-
-  render() {
-    return (
-      <View style={styles.root}>
-        <View style={styles.body}>
-          <PortfolioNoOpIllustration />
-          <LText secondary semiBold style={styles.title}>
-            {<Trans i18nKey="portfolio.noOpState.title" />}
-          </LText>
-          <LText style={styles.desc}>
-            {<Trans i18nKey="portfolio.noOpState.desc" />}
-          </LText>
-          <Button
-            event="PortfolioNoOpToReceive"
-            type="primary"
-            IconLeft={IconReceive}
-            onPress={this.navigateToReceive}
-            title={<Trans i18nKey="account.receive" />}
-            containerStyle={styles.buttonFull}
-          />
-        </View>
-      </View>
-    );
   }
-}
 
-export default NoOpStatePortfolio;
+  return (
+    <View style={styles.root}>
+      <View style={styles.body}>
+        <PortfolioNoOpIllustration />
+        <LText secondary semiBold style={styles.title}>
+          {<Trans i18nKey="portfolio.noOpState.title" />}
+        </LText>
+        <LText style={styles.desc}>
+          {<Trans i18nKey="portfolio.noOpState.desc" />}
+        </LText>
+        <Button
+          event="PortfolioNoOpToReceive"
+          type="primary"
+          IconLeft={IconReceive}
+          onPress={navigateToReceive}
+          title={<Trans i18nKey="account.receive" />}
+          containerStyle={styles.buttonFull}
+        />
+      </View>
+    </View>
+  );
+}
 
 const styles = StyleSheet.create({
   root: {

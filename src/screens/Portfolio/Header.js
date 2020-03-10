@@ -20,7 +20,7 @@ import Greetings from "./Greetings";
 import IconPie from "../../icons/Pie";
 import colors from "../../colors";
 import Touchable from "../../components/Touchable";
-import { headerPressSubject } from "../../navigation/observable";
+import { headerPressSubject } from "../../navigation/utils";
 
 const mapStateToProps = createStructuredSelector({
   networkError: networkErrorSelector,

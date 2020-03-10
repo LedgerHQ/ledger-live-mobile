@@ -15,7 +15,7 @@ import extraStatusBarPadding from "../../logic/extraStatusBarPadding";
 import BalanceHeader from "./BalanceHeader";
 import HeaderErrorTitle from "../../components/HeaderErrorTitle";
 import HeaderSynchronizing from "../../components/HeaderSynchronizing";
-import { headerPressSubject } from "../../navigation/observable";
+import { headerPressSubject } from "../../navigation/utils";
 
 interface Props {
   scrollY: AnimatedValue;

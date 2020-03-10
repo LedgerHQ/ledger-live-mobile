@@ -35,6 +35,7 @@ import NoOpStatePortfolio from "./NoOpStatePortfolio";
 import NoOperationFooter from "../../components/NoOperationFooter";
 import MigrateAccountsBanner from "../MigrateAccounts/Banner";
 import RequireTerms from "../../components/RequireTerms";
+import { useScrollToTop } from "../../navigation/utils";
 
 const AnimatedSectionList = Animated.createAnimatedComponent(SectionList);
 const List = globalSyncRefreshControl(AnimatedSectionList);
@@ -52,6 +53,7 @@ export default function PortfolioScreen({ navigation }: Props) {
   const [opCount, setOpCount] = useState(50);
   const scrollY = useRef(new Animated.Value(0)).current;
   const ref = useRef();
+  useScrollToTop(ref);
 
   function keyExtractor(item: Operation) {
     return item.id;
@@ -73,7 +75,7 @@ export default function PortfolioScreen({ navigation }: Props) {
     }
 
     if (accounts.every(isAccountEmpty)) {
-      return <NoOpStatePortfolio navigation={navigation} />;
+      return <NoOpStatePortfolio />;
     }
 
     return null;
@@ -114,12 +116,6 @@ export default function PortfolioScreen({ navigation }: Props) {
   function onEndReached() {
     setOpCount(opCount + 50);
   }
-
-  // componentDidMount() {
-  //   this.props.navigation.navigate("DelegationSummary", {
-  //     accountId: this.props.accounts.find(a => a.currency.id === "tezos").id,
-  //   });
-  // }
 
   const { sections, completed } = groupAccountsOperationsByDay(accounts, {
     count: opCount,

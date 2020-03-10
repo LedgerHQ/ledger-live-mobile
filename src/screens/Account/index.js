@@ -1,10 +1,9 @@
 // @flow
 
-import React, { PureComponent } from "react";
+import React, { useState, useRef } from "react";
 import { StyleSheet, View, Animated, SectionList } from "react-native";
 import type { SectionBase } from "react-native/Libraries/Lists/SectionList";
-import { connect } from "react-redux";
-import { withTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
 import {
   isAccountEmpty,
   groupAccountOperationsByDay,
@@ -13,18 +12,12 @@ import {
 } from "@ledgerhq/live-common/lib/account";
 import type {
   TokenAccount,
-  Account,
-  Currency,
   Operation,
   Unit,
-  BalanceHistoryWithCountervalue,
-  PortfolioRange,
-  AccountLike,
 } from "@ledgerhq/live-common/lib/types";
-import type { ValueChange } from "@ledgerhq/live-common/lib/types/portfolio";
 import debounce from "lodash/debounce";
 import { switchCountervalueFirst } from "../../actions/settings";
-import { balanceHistoryWithCountervalueSelector } from "../../actions/portfolio";
+import { balanceHistoryWithCountervalueSelectorCreator } from "../../actions/portfolio";
 import {
   selectedTimeRangeSelector,
   counterValueCurrencySelector,
@@ -51,7 +44,7 @@ import type { Item } from "../../components/Graph/types";
 import SubAccountsList from "./SubAccountsList";
 import perFamilyAccountHeader from "../../generated/AccountHeader";
 import perFamilyAccountBodyHeader from "../../generated/AccountBodyHeader";
-import { headerPressSubject } from "../../navigation/observable";
+import { useScrollToTop } from "../../navigation/utils";
 
 interface RouteParams {
   accountId: string;
@@ -59,44 +52,46 @@ interface RouteParams {
 }
 
 interface Props {
-  useCounterValue: boolean;
-  switchCountervalueFirst: () => *;
-  account: AccountLike;
-  parentAccount: ?Account;
-  countervalueChange: ValueChange;
-  cryptoChange: ValueChange;
-  range: PortfolioRange;
-  history: BalanceHistoryWithCountervalue;
-  counterValueCurrency: Currency;
-  countervalueAvailable: boolean;
-  navigation: { emit: (event: string) => void } & *;
+  navigation: any;
   route: { params: RouteParams };
 }
-
-type State = {
-  opCount: number,
-};
 
 const AnimatedSectionList = Animated.createAnimatedComponent(SectionList);
 const List = accountSyncRefreshControl(AnimatedSectionList);
 
-class AccountScreen extends PureComponent<Props, State> {
-  state = {
-    opCount: 100,
-  };
+export default function AccountScreen({ navigation, route }: Props) {
+  const dispatch = useDispatch();
+  const { account, parentAccount } = useSelector(accountScreenSelector(route));
+  const range = useSelector(selectedTimeRangeSelector);
+  const {
+    countervalueAvailable,
+    countervalueChange,
+    cryptoChange,
+    history,
+  } = useSelector(
+    balanceHistoryWithCountervalueSelectorCreator({ account, range }),
+  );
+  const useCounterValue = useSelector(countervalueFirstSelector);
+  const counterValueCurrency = useSelector(counterValueCurrencySelector);
 
-  keyExtractor = (item: Operation) => item.id;
+  const [opCount, setOpCount] = useState(100);
+  const ref = useRef();
 
-  renderItem = ({
+  useScrollToTop(ref);
+
+  function keyExtractor(item: Operation) {
+    return item.id;
+  }
+
+  function renderItem({
     item,
     index,
     section,
   }: {
     item: Operation,
     index: number,
-    section: SectionBase<*>,
-  }) => {
-    const { account, parentAccount } = this.props;
+    section: SectionBase<any>,
+  }) {
     if (!account) return null;
 
     return (
@@ -107,17 +102,17 @@ class AccountScreen extends PureComponent<Props, State> {
         isLast={section.data.length - 1 === index}
       />
     );
-  };
+  }
 
-  onEndReached = () => {
-    this.setState(({ opCount }) => ({ opCount: opCount + 50 }));
-  };
+  function onEndReached(): void {
+    setOpCount(opCount + 50);
+  }
 
-  onSwitchAccountCurrency = () => {
-    this.props.switchCountervalueFirst();
-  };
+  function onSwitchAccountCurrency(): void {
+    dispatch(switchCountervalueFirst());
+  }
 
-  renderListHeaderTitle = ({
+  function renderListHeaderTitle({
     useCounterValue,
     cryptoCurrencyUnit,
     counterValueUnit,
@@ -127,8 +122,7 @@ class AccountScreen extends PureComponent<Props, State> {
     cryptoCurrencyUnit: Unit,
     counterValueUnit: Unit,
     item: Item,
-  }) => {
-    const { countervalueAvailable } = this.props;
+  }) {
     const items = [
       { unit: cryptoCurrencyUnit, value: item.value },
       countervalueAvailable && item.countervalue
@@ -145,9 +139,7 @@ class AccountScreen extends PureComponent<Props, State> {
       <Touchable
         event="SwitchAccountCurrency"
         eventProperties={{ useCounterValue: shouldUseCounterValue }}
-        onPress={
-          countervalueAvailable ? this.onSwitchAccountCurrency : undefined
-        }
+        onPress={countervalueAvailable ? onSwitchAccountCurrency : undefined}
       >
         <View style={styles.balanceContainer}>
           {items[0] ? (
@@ -163,29 +155,16 @@ class AccountScreen extends PureComponent<Props, State> {
         </View>
       </Touchable>
     );
-  };
+  }
 
-  onAccountPress = debounce((tokenAccount: TokenAccount) => {
-    const { navigation, account } = this.props;
+  const onAccountPress = debounce((tokenAccount: TokenAccount) => {
     navigation.push(ScreenName.Account, {
       parentId: account.id,
       accountId: tokenAccount.id,
     });
   }, 300);
 
-  ListHeaderComponent = () => {
-    const {
-      history,
-      useCounterValue,
-      counterValueCurrency,
-      countervalueAvailable,
-      range,
-      account,
-      parentAccount,
-      cryptoChange,
-      countervalueChange,
-    } = this.props;
-
+  function ListHeaderComponent() {
     if (!account) return null;
     const mainAccount = getMainAccount(account, parentAccount);
 
@@ -215,7 +194,7 @@ class AccountScreen extends PureComponent<Props, State> {
             }
             countervalueAvailable={countervalueAvailable}
             counterValueCurrency={counterValueCurrency}
-            renderTitle={this.renderListHeaderTitle}
+            renderTitle={renderListHeaderTitle}
           />
         )}
         {empty ? null : (
@@ -228,16 +207,15 @@ class AccountScreen extends PureComponent<Props, State> {
         {!empty && account.type === "Account" && account.subAccounts ? (
           <SubAccountsList
             accountId={account.id}
-            onAccountPress={this.onAccountPress}
+            onAccountPress={onAccountPress}
             parentAccount={account}
           />
         ) : null}
       </View>
     );
-  };
+  }
 
-  ListEmptyComponent = () => {
-    const { account, parentAccount, navigation } = this.props;
+  function ListEmptyComponent() {
     return (
       isAccountEmpty(account) && (
         <EmptyStateAccount
@@ -247,94 +225,59 @@ class AccountScreen extends PureComponent<Props, State> {
         />
       )
     );
-  };
-
-  ref = React.createRef();
-
-  onPress = () => {
-    headerPressSubject.next();
-  };
-
-  renderSectionHeader = ({ section }) => <SectionHeader section={section} />;
-
-  render() {
-    const { account } = this.props;
-    const { opCount } = this.state;
-    if (!account) return null;
-    const currency = getAccountCurrency(account);
-
-    const analytics = (
-      <TrackScreen
-        category="Account"
-        currency={currency.id}
-        operationsSize={account.operations.length}
-      />
-    );
-
-    const { sections, completed } = groupAccountOperationsByDay(account, {
-      count: opCount,
-    });
-
-    return (
-      <View style={styles.root}>
-        {analytics}
-        <List
-          ref={this.ref}
-          sections={sections}
-          style={styles.sectionList}
-          contentContainerStyle={styles.contentContainer}
-          ListFooterComponent={
-            !completed ? (
-              <LoadingFooter />
-            ) : sections.length === 0 ? (
-              isAccountEmpty(account) ? null : (
-                <NoOperationFooter />
-              )
-            ) : (
-              <NoMoreOperationFooter />
-            )
-          }
-          ListHeaderComponent={this.ListHeaderComponent}
-          ListEmptyComponent={this.ListEmptyComponent}
-          keyExtractor={this.keyExtractor}
-          renderItem={this.renderItem}
-          renderSectionHeader={this.renderSectionHeader}
-          onEndReached={this.onEndReached}
-          showsVerticalScrollIndicator={false}
-          accountId={account.id}
-          stickySectionHeadersEnabled={false}
-        />
-      </View>
-    );
   }
-}
 
-export default withTranslation()(
-  connect(
-    (state, { route }) => {
-      const { account, parentAccount } = accountScreenSelector(route)(state);
-      if (!account) return {};
-      const range = selectedTimeRangeSelector(state);
-      const counterValueCurrency = counterValueCurrencySelector(state);
-      const useCounterValue = countervalueFirstSelector(state);
-      const balanceHistoryWithCountervalue = balanceHistoryWithCountervalueSelector(
-        state,
-        { account, range },
-      );
-      return {
-        ...balanceHistoryWithCountervalue,
-        useCounterValue,
-        counterValueCurrency,
-        range,
-        account,
-        parentAccount,
-      };
-    },
-    {
-      switchCountervalueFirst,
-    },
-  )(AccountScreen),
-);
+  function renderSectionHeader({ section }) {
+    return <SectionHeader section={section} />;
+  }
+
+  if (!account) return null;
+  const currency = getAccountCurrency(account);
+
+  const analytics = (
+    <TrackScreen
+      category="Account"
+      currency={currency.id}
+      operationsSize={account.operations.length}
+    />
+  );
+
+  const { sections, completed } = groupAccountOperationsByDay(account, {
+    count: opCount,
+  });
+
+  return (
+    <View style={styles.root}>
+      {analytics}
+      <List
+        ref={ref}
+        sections={sections}
+        style={styles.sectionList}
+        contentContainerStyle={styles.contentContainer}
+        ListFooterComponent={
+          !completed ? (
+            <LoadingFooter />
+          ) : sections.length === 0 ? (
+            isAccountEmpty(account) ? null : (
+              <NoOperationFooter />
+            )
+          ) : (
+            <NoMoreOperationFooter />
+          )
+        }
+        ListHeaderComponent={ListHeaderComponent}
+        ListEmptyComponent={ListEmptyComponent}
+        keyExtractor={keyExtractor}
+        renderItem={renderItem}
+        renderSectionHeader={renderSectionHeader}
+        onEndReached={onEndReached}
+        showsVerticalScrollIndicator={false}
+        accountId={account.id}
+        stickySectionHeadersEnabled={false}
+      />
+    </View>
+  );
+}
 
 const styles = StyleSheet.create({
   root: {

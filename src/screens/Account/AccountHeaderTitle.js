@@ -10,7 +10,7 @@ import {
 import LText from "../../components/LText";
 import { accountScreenSelector } from "../../reducers/accounts";
 import ParentCurrencyIcon from "../../components/ParentCurrencyIcon";
-import { headerPressSubject } from "../../navigation/observable";
+import { headerPressSubject } from "../../navigation/utils";
 
 export default function AccountHeaderTitle() {
   const route = useRoute();
