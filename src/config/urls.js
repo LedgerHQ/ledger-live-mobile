@@ -18,6 +18,7 @@ export const urls = {
     "https://support.ledger.com/hc/en-us/articles/115005197845-Manage-ERC20-tokens",
   errors: {
     PairingFailed: "https://support.ledger.com/hc/en-us/articles/360025864773",
+    SyncError: "https://support.ledger.com/hc/en-us/articles/360012109220",
   },
   multipleAddresses:
     "https://support.ledger.com/hc/en-us/articles/360033802154",
