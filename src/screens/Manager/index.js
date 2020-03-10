@@ -98,7 +98,7 @@ class ChooseDevice extends Component<
       version,
       mcuVersion,
     });
-    this.props.navigation.navigate(ScreenName.ManagerMain, {
+    this.props.navigation.navigate(ScreenName.Manager, {
       meta,
     });
   };

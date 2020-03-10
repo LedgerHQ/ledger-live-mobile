@@ -21,11 +21,11 @@ export default function ManagerNavigator() {
       <Stack.Screen
         name={ScreenName.Manager}
         component={Manager}
-        options={({ route }) => ({
-          title: t(route.params?.title ?? "manager.title"),
+        options={{
+          title: t("manager.title"),
           headerRight: null,
           gestureEnabled: false,
-        })}
+        }}
       />
       <Stack.Screen
         name={ScreenName.ManagerMain}
