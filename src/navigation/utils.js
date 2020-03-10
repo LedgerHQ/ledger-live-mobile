@@ -16,6 +16,7 @@ export function useScrollToTop(
 
   useEffect(() => {
     const subscription = headerPressSubject.subscribe(() => {
+      console.warn("subject event", ref.current);
       if (!ref.current || !isFocused) {
         return;
       }

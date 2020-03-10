@@ -1,6 +1,6 @@
 // @flow
 
-import React from "react";
+import React, { useRef } from "react";
 import { StyleSheet, FlatList } from "react-native";
 import { useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
@@ -12,12 +12,15 @@ import TrackScreen from "../../analytics/TrackScreen";
 import NoAccounts from "./NoAccounts";
 import AccountRow from "./AccountRow";
 import MigrateAccountsBanner from "../MigrateAccounts/Banner";
+import { useScrollToTop } from "../../navigation/utils";
 
 const List = globalSyncRefreshControl(FlatList);
 
 export default function Accounts() {
   const navigation = useNavigation();
   const accounts = useSelector(accountsSelector);
+  const ref = useRef();
+  useScrollToTop(ref);
 
   function renderItem({ item, index }: { item: Account, index: number }) {
     return (
@@ -43,6 +46,7 @@ export default function Accounts() {
     <>
       <TrackScreen category="Accounts" accountsLength={accounts.length} />
       <List
+        forwardedRef={ref}
         data={accounts}
         renderItem={renderItem}
         keyExtractor={item => item.id}
