@@ -137,7 +137,7 @@ export default function PortfolioScreen({ navigation }: Props) {
 
       <View style={styles.inner}>
         <List
-          forwardedRef={ref}
+          ref={ref}
           sections={sections}
           style={styles.list}
           contentContainerStyle={styles.contentContainer}

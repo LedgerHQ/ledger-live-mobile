@@ -46,7 +46,7 @@ export default function Accounts() {
     <>
       <TrackScreen category="Accounts" accountsLength={accounts.length} />
       <List
-        forwardedRef={ref}
+        ref={ref}
         data={accounts}
         renderItem={renderItem}
         keyExtractor={item => item.id}

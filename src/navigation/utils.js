@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { ScrollView } from "react-native";
 import { Subject } from "rxjs/Subject";
 import {
   useIsFocused,
@@ -16,12 +17,23 @@ export function useScrollToTop(
 
   useEffect(() => {
     const subscription = headerPressSubject.subscribe(() => {
-      console.warn("subject event", ref.current);
       if (!ref.current || !isFocused) {
         return;
       }
 
-      ref.current.scrollTo();
+      if (typeof ref.current.scrollTo === "function") {
+        ref.current.scrollTo();
+        return;
+      }
+
+      if (typeof ref.current.scrollToOffset === "function") {
+        ref.current.scrollToOffset({ offset: 0 });
+        return;
+      }
+
+      // if (somehow access to FlatList which is wrapped by Animated and used in Portfolio) {
+      //  scrollToTop()
+      // }
     });
 
     return () => subscription.unsubscribe();

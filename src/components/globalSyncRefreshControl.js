@@ -14,10 +14,10 @@ interface Props {
 }
 
 export default (ScrollListLike: any) => {
-  return function Inner({ forwardedRef, ...ScrollListLikeProps }: Props) {
+  function Inner({ forwardedRef, ...ScrollListLikeProps }: Props) {
     const [refreshing, setRefreshing] = useState(false);
     const setSyncBehavior = useContext(BridgeSyncContext);
-    const cvPoll = useContext(CounterValues.PollingContext);
+    const { poll: cvPoll } = useContext(CounterValues.PollingContext);
 
     function onRefresh() {
       cvPoll();
@@ -51,5 +51,9 @@ export default (ScrollListLike: any) => {
         }
       />
     );
-  };
+  }
+
+  return React.forwardRef((props, ref) => (
+    <Inner {...props} forwardedRef={ref} />
+  ));
 };
