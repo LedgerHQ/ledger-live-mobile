@@ -20,6 +20,7 @@ export type Props = {
   style?: ViewStyleProp,
   preventBackdropClick?: boolean,
   containerStyle?: ViewStyleProp,
+  styles?: ViewStyleProp,
 };
 
 // Add some extra padding at the bottom of the modal
@@ -39,6 +40,7 @@ const BottomModal = ({
   preventBackdropClick,
   id,
   containerStyle,
+  styles: propStyles,
   ...rest
 }: Props) => {
   const backDropProps = preventBackdropClick
@@ -58,7 +60,7 @@ const BottomModal = ({
         deviceHeight={height}
         useNativeDriver
         hideModalContentWhileAnimating
-        style={styles.root}
+        style={[styles.root, propStyles || {}]}
       >
         <View style={[styles.modal, containerStyle]}>
           <View style={style}>
