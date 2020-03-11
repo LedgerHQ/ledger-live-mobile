@@ -40,10 +40,7 @@ export default function RootNavigator({ importDataString }: Props) {
         />
       ) : null}
 
-      <Stack.Screen
-        name={NavigatorName.BaseNavigator}
-        component={BaseNavigator}
-      />
+      <Stack.Screen name={NavigatorName.Base} component={BaseNavigator} />
     </Stack.Navigator>
   );
 }

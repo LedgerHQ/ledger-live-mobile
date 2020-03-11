@@ -95,7 +95,7 @@ export const NavigatorName = {
   AccountsStack: "AccountsStack",
   AccountSettings: "AccountSettings",
   AddAccounts: "AddAccounts",
-  BaseNavigator: "BaseNavigator",
+  Base: "Base",
   BaseOnboarding: "BaseOnboarding",
   FirmwareUpdate: "FirmwareUpdate",
   ImportAccounts: "ImportAccounts",

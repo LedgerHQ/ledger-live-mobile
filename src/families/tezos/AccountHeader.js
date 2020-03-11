@@ -8,6 +8,7 @@ import { getMainAccount } from "@ledgerhq/live-common/lib/account";
 import { getCurrencyColor } from "@ledgerhq/live-common/lib/currencies";
 import { isAccountDelegating } from "@ledgerhq/live-common/lib/families/tezos/bakers";
 import colors from "../../colors";
+import { NavigatorName } from "../../const";
 import IlluStaking from "./IlluStaking";
 import Button from "../../components/Button";
 import LText from "../../components/LText";
@@ -49,9 +50,12 @@ const TezosAccountHeader = ({
   navigation: *,
 }) => {
   const onEarnRewards = useCallback(() => {
-    navigation.navigate("DelegationStarted", {
-      accountId: account.id,
-      parentId: parentAccount ? parentAccount.id : undefined,
+    navigation.navigate("DelegationFlow", {
+      screen: "DelegationStarted",
+      params: {
+        accountId: account.id,
+        parentId: parentAccount ? parentAccount.id : undefined,
+      },
     });
   }, [navigation, account, parentAccount]);
 

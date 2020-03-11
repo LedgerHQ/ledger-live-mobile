@@ -37,7 +37,7 @@ export default function OnboardingStepFinish({ navigation }: Props) {
       parentNav.popToTop();
     }
 
-    navigation.navigate(NavigatorName.BaseNavigator, {
+    navigation.navigate(NavigatorName.Base, {
       screen: NavigatorName.Main,
     });
   }
