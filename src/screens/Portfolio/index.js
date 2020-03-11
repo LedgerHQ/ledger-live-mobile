@@ -37,8 +37,7 @@ import MigrateAccountsBanner from "../MigrateAccounts/Banner";
 import RequireTerms from "../../components/RequireTerms";
 import { useScrollToTop } from "../../navigation/utils";
 
-const AnimatedSectionList = Animated.createAnimatedComponent(SectionList);
-const List = globalSyncRefreshControl(AnimatedSectionList);
+const List = globalSyncRefreshControl(SectionList);
 
 interface Props {
   navigation: *;
@@ -148,10 +147,9 @@ export default function PortfolioScreen({ navigation }: Props) {
           stickySectionHeadersEnabled={false}
           showsVerticalScrollIndicator={false}
           scrollEventThrottle={16}
-          onScroll={Animated.event(
-            [{ nativeEvent: { contentOffset: { y: scrollY } } }],
-            { useNativeDriver: true },
-          )}
+          onScroll={Animated.event([
+            { nativeEvent: { contentOffset: { y: scrollY } } },
+          ])}
           ListHeaderComponent={ListHeaderComponent}
           ListFooterComponent={
             !completed ? (

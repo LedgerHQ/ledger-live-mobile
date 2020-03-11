@@ -31,9 +31,13 @@ export function useScrollToTop(
         return;
       }
 
-      // if (somehow access to FlatList which is wrapped by Animated and used in Portfolio) {
-      //  scrollToTop()
-      // }
+      if (typeof ref.current.scrollToLocation === "function") {
+        ref.current.scrollToLocation({
+          itemIndex: 0,
+          sectionIndex: 0,
+          viewPosition: 1,
+        });
+      }
     });
 
     return () => subscription.unsubscribe();
