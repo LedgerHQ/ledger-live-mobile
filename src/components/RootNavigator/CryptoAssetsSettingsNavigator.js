@@ -12,7 +12,7 @@ export default function CryptoAssetsSettingsNavigator() {
 
   return (
     <Tab.Navigator
-      screenOptions={{
+      tabBarOptions={{
         headerStyle: styles.headerNoShadow,
       }}
     >
