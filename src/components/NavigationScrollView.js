@@ -1,7 +1,7 @@
 // @flow
 
 import React, { useRef } from "react";
-import { ScrollView, StyleProp } from "react-native";
+import { ScrollView } from "react-native";
 import { useScrollToTop } from "../navigation/utils";
 
 export default function NavigationScrollView({
