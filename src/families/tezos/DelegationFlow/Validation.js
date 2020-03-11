@@ -32,23 +32,22 @@ interface RouteParams {
 }
 
 interface Props {
-  navigation: *;
   route: { params: RouteParams };
 }
 
-export default function Validation({ navigation, route }: Props) {
+export default function Validation({ route }: Props) {
   const { account, parentAccount } = useSelector(accountScreenSelector(route));
   const dispatch = useDispatch();
   const [signing, signed] = useSignWithDevice({
     context: "Delegation",
     account,
     parentAccount,
-    navigation,
     updateAccountWithUpdater: (...args) =>
       dispatch(updateAccountWithUpdater(...args)),
   });
 
   const { status, transaction, modelId, wired } = route.params || {};
+
   return (
     <SafeAreaView style={styles.root} forceInset={forceInset}>
       <TrackScreen

@@ -3,7 +3,7 @@
 import { concat, of, from } from "rxjs";
 import { concatMap, filter } from "rxjs/operators";
 import { useState, useCallback, useEffect, useRef } from "react";
-import { useRoute } from "@react-navigation/native";
+import { useRoute, useNavigation } from "@react-navigation/native";
 import type {
   Account,
   AccountLike,
@@ -32,18 +32,16 @@ export const useTransactionChangeFromNavigation = (
 export const useSignWithDevice = ({
   account,
   parentAccount,
-  navigation,
-  route,
   updateAccountWithUpdater,
   context,
 }: {
   context: string,
   account: AccountLike,
   parentAccount: ?Account,
-  navigation: *,
-  route: *,
   updateAccountWithUpdater: (string, (Account) => Account) => void,
 }) => {
+  const route = useRoute();
+  const navigation = useNavigation();
   const [signing, setSigning] = useState(false);
   const [signed, setSigned] = useState(false);
   const subscription = useRef(null);

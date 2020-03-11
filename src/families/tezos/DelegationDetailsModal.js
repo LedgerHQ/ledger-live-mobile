@@ -4,7 +4,7 @@ import React, { useCallback } from "react";
 import { Trans } from "react-i18next";
 import { StyleSheet, View, Linking } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
-import { withNavigation } from "@react-navigation/compat";
+import { useNavigation } from "@react-navigation/native";
 import { differenceInCalendarDays } from "date-fns";
 import {
   getDefaultExplorerView,
@@ -33,17 +33,17 @@ import Circle from "../../components/Circle";
 import NavigationScrollView from "../../components/NavigationScrollView";
 import Close from "../../icons/Close";
 import colors, { rgba } from "../../colors";
+import { NavigatorName, ScreenName } from "../../const";
 import BakerImage from "./BakerImage";
 import DelegatingContainer from "./DelegatingContainer";
 
-type Props = {
-  isOpened: boolean,
-  onClose: () => void,
-  navigation: *,
-  account: AccountLike,
-  parentAccount: ?Account,
-  delegation: Delegation,
-};
+interface Props {
+  isOpened: boolean;
+  onClose: () => void;
+  account: AccountLike;
+  parentAccount: ?Account;
+  delegation: Delegation;
+}
 
 const forceInset = { bottom: "always" };
 
@@ -153,14 +153,14 @@ const FooterBtn = ({
   </Touchable>
 );
 
-const DelegationDetailsModal = ({
+export default function DelegationDetailsModal({
   onClose,
   isOpened,
   account,
   parentAccount,
   delegation,
-  navigation,
-}: Props) => {
+}: Props) {
+  const navigation = useNavigation();
   const currency = getAccountCurrency(account);
   const unit = getAccountUnit(account);
   const mainAccount = getMainAccount(account, parentAccount);
@@ -185,28 +185,37 @@ const DelegationDetailsModal = ({
   }, [txURL]);
 
   const onReceive = useCallback(() => {
-    navigation.navigate("ReceiveConnectDevice", {
-      accountId,
-      parentId,
+    navigation.navigate(NavigatorName.ReceiveFunds, {
+      screen: ScreenName.ReceiveConnectDevice,
+      params: {
+        accountId,
+        parentId,
+      },
     });
     onClose();
   }, [accountId, parentId, navigation, onClose]);
 
   const onChangeValidator = useCallback(() => {
     // FIXME how to get rid of Started step in nav stack?
-    navigation.navigate("DelegationSummary", {
-      accountId,
-      parentId,
+    navigation.navigate("DelegationFlow", {
+      screen: "DelegationSummary",
+      params: {
+        accountId,
+        parentId,
+      },
     });
     onClose();
   }, [accountId, parentId, navigation, onClose]);
 
   const onEndDelegation = useCallback(() => {
     // FIXME how to get rid of Started step in nav stack?
-    navigation.navigate("DelegationSummary", {
-      accountId,
-      parentId,
-      mode: "undelegate",
+    navigation.navigate("DelegationFlow", {
+      screen: "DelegationSummary",
+      params: {
+        accountId,
+        parentId,
+        mode: "undelegate",
+      },
     });
     onClose();
   }, [accountId, parentId, navigation, onClose]);
@@ -369,6 +378,4 @@ const DelegationDetailsModal = ({
       </SafeAreaView>
     </BottomModal>
   );
-};
-
-export default withNavigation(DelegationDetailsModal);
+}
