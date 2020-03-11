@@ -20,7 +20,6 @@ function DelegationFlow() {
     <Stack.Navigator
       screenOptions={{
         ...closableStackNavigatorConfig,
-        headerShown: false,
         gesturesEnabled: ({ route }) =>
           Platform.OS === "ios" ? route.params.allowNavigation : false,
       }}
@@ -110,6 +109,10 @@ function DelegationFlow() {
   );
 }
 
-export { DelegationFlow as component };
+const options = {
+  headerShown: false,
+};
+
+export { DelegationFlow as component, options };
 
 const Stack = createStackNavigator();
