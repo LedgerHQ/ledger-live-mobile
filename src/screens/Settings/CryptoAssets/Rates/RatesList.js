@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { Trans } from "react-i18next";
 import { createStructuredSelector } from "reselect";
 import type { Currency } from "@ledgerhq/live-common/lib/types";
-import { ScreenName } from "../../../../const";
+import { NavigatorName, ScreenName } from "../../../../const";
 import { pairsSelector } from "../../../../countervalues";
 import SettingsRow from "../../../../components/SettingsRow";
 import LText from "../../../../components/LText";
@@ -57,10 +57,13 @@ class CurrenciesList extends PureComponent<Props> {
       compact
       event="RateSettingsRow"
       onPress={() =>
-        this.props.navigation.navigate(ScreenName.RateProviderSettings, {
-          from: p.from.ticker,
-          to: p.to.ticker,
-          selected: p.exchange,
+        this.props.navigation.navigate(NavigatorName.Settings, {
+          screen: ScreenName.RateProviderSettings,
+          params: {
+            from: p.from.ticker,
+            to: p.to.ticker,
+            selected: p.exchange,
+          },
         })
       }
     >
