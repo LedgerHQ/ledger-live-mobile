@@ -49,7 +49,6 @@ export default function MainNavigator() {
         options={{
           headerShown: false,
           tabBarIcon: (props: *) => <TransferHeader {...props} />,
-          tabBarOnPress: () => {}, // noop
         }}
       />
       <Tab.Screen

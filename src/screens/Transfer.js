@@ -20,7 +20,7 @@ interface Props {
 }
 
 export function TransferHeader(props: Props) {
-  const [isModalOpened, setIsModalOpened] = useState();
+  const [isModalOpened, setIsModalOpened] = useState(false);
 
   function openModal() {
     setIsModalOpened(true);
@@ -34,7 +34,7 @@ export function TransferHeader(props: Props) {
     <>
       <Touchable
         event="Transfer"
-        disabled={lockSubject.getValue}
+        disabled={lockSubject.getValue()}
         hitSlop={hitSlop}
         onPress={openModal}
       >
@@ -46,6 +46,4 @@ export function TransferHeader(props: Props) {
   );
 }
 
-export default function Create(props: *) {
-  return <ExchangeScreen {...props} />;
-}
+export default ExchangeScreen;
