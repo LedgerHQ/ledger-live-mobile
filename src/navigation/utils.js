@@ -21,25 +21,41 @@ export function useScrollToTop(
         return;
       }
 
+      // this handles ScrollView
       if (typeof ref.current.scrollTo === "function") {
         ref.current.scrollTo();
         return;
       }
 
+      // this handles FlatList
       if (typeof ref.current.scrollToOffset === "function") {
         ref.current.scrollToOffset({ offset: 0 });
         return;
       }
 
+      // this handles SectionList
       if (typeof ref.current.scrollToLocation === "function") {
-        ref.current.scrollToLocation({
-          itemIndex: 0,
-          sectionIndex: 0,
-          viewPosition: 1,
-        });
+        scrollSectionListToTop(ref.current);
+        return;
+      }
+
+      // this handles SectionList with Animated wrapper
+      if (
+        typeof ref.current.getNode === "function" &&
+        typeof ref.current.getNode().scrollToLocation === "function"
+      ) {
+        scrollSectionListToTop(ref.current.getNode());
       }
     });
 
     return () => subscription.unsubscribe();
   }, [isFocused, ref]);
+}
+
+function scrollSectionListToTop(compRef: React$Node): void {
+  compRef.scrollToLocation({
+    itemIndex: 0,
+    sectionIndex: 0,
+    viewPosition: 1,
+  });
 }

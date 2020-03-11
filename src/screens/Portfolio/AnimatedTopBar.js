@@ -1,13 +1,13 @@
 // @flow
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   StyleSheet,
-  Animated,
   View,
   TouchableWithoutFeedback,
   Platform,
 } from "react-native";
+import Animated from "react-native-reanimated";
 import SafeAreaView from "react-native-safe-area-view";
 import type AnimatedValue from "react-native/Libraries/Animated/src/nodes/AnimatedValue";
 import type { Portfolio, Currency } from "@ledgerhq/live-common/lib/types";
@@ -32,33 +32,18 @@ export default function AnimatedTopBar({
   pending,
   error,
 }: Props) {
-  const [ignorePointerEvents, setIgnorePointerEvents] = useState(true);
-
-  useEffect(() => {
-    scrollY.addListener(({ value }) => {
-      setIgnorePointerEvents(value < 90);
-    });
-
-    return () => {
-      scrollY.removeAllListeners();
-    };
-  }, [scrollY]);
-
   function onPress() {
     headerPressSubject.next();
   }
 
-  const opacity = scrollY.interpolate({
+  const opacity = Animated.interpolate(scrollY, {
     inputRange: [90, 150],
     outputRange: [0, 1],
     extrapolate: "clamp",
   });
 
   return (
-    <Animated.View
-      pointerEvents={ignorePointerEvents ? "none" : "auto"}
-      style={[styles.root, { opacity }]}
-    >
+    <Animated.View style={[styles.root, { opacity }]}>
       <TouchableWithoutFeedback onPress={onPress}>
         <View style={[styles.outer, { paddingTop: extraStatusBarPadding }]}>
           <SafeAreaView>

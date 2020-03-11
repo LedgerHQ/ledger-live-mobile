@@ -2,10 +2,12 @@
 
 import React, { useRef, useState } from "react";
 import { useSelector } from "react-redux";
-import { View, StyleSheet, Animated, SectionList } from "react-native";
+import { View, StyleSheet, SectionList } from "react-native";
+import SafeAreaView from "react-native-safe-area-view";
+import Animated from "react-native-reanimated";
+import { createNativeWrapper } from "react-native-gesture-handler";
 import type { SectionBase } from "react-native/Libraries/Lists/SectionList";
 import type { Operation } from "@ledgerhq/live-common/lib/types";
-import SafeAreaView from "react-native-safe-area-view";
 import {
   groupAccountsOperationsByDay,
   isAccountEmpty,
@@ -37,7 +39,14 @@ import MigrateAccountsBanner from "../MigrateAccounts/Banner";
 import RequireTerms from "../../components/RequireTerms";
 import { useScrollToTop } from "../../navigation/utils";
 
-const List = globalSyncRefreshControl(SectionList);
+const AnimatedSectionList = createNativeWrapper(
+  Animated.createAnimatedComponent(SectionList),
+  {
+    disallowInterruption: true,
+    shouldCancelWhenOutside: false,
+  },
+);
+const List = globalSyncRefreshControl(AnimatedSectionList);
 
 interface Props {
   navigation: *;
