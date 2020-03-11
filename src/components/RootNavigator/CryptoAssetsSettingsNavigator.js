@@ -13,7 +13,6 @@ export default function CryptoAssetsSettingsNavigator() {
   return (
     <Tab.Navigator
       screenOptions={{
-        title: t("settings.cryptoAssets.header"),
         headerStyle: styles.headerNoShadow,
       }}
     >

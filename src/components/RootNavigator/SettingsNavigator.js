@@ -75,6 +75,7 @@ export default function SettingsNavigator() {
       <Stack.Screen
         name={NavigatorName.CryptoAssetsSettings}
         component={CryptoAssetsSettingsTab}
+        options={{ title: t("settings.cryptoAssets.header") }}
       />
       <Stack.Screen
         name={ScreenName.CurrencySettings}

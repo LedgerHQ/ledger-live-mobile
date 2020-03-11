@@ -9,7 +9,7 @@ import { closableStackNavigatorConfig } from "../../navigation/navigatorConfig";
 export default function PasswordModifyFlowNavigator() {
   const { t } = useTranslation();
   return (
-    <Stack.Navigator screenOptions={{ ...closableStackNavigatorConfig }}>
+    <Stack.Navigator screenOptions={closableStackNavigatorConfig}>
       <Stack.Screen
         name={ScreenName.PasswordRemove}
         component={PasswordRemove}
