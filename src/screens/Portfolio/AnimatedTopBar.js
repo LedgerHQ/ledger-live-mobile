@@ -1,6 +1,6 @@
 // @flow
 
-import React from "react";
+import React, { useState } from "react";
 import {
   StyleSheet,
   View,
@@ -8,7 +8,6 @@ import {
   Platform,
 } from "react-native";
 import Animated from "react-native-reanimated";
-import SafeAreaView from "react-native-safe-area-view";
 import type AnimatedValue from "react-native/Libraries/Animated/src/nodes/AnimatedValue";
 import type { Portfolio, Currency } from "@ledgerhq/live-common/lib/types";
 import extraStatusBarPadding from "../../logic/extraStatusBarPadding";
@@ -25,6 +24,8 @@ interface Props {
   error: ?Error;
 }
 
+const { call, cond, interpolate, lessThan, useCode } = Animated;
+
 export default function AnimatedTopBar({
   scrollY,
   portfolio,
@@ -32,21 +33,40 @@ export default function AnimatedTopBar({
   pending,
   error,
 }: Props) {
+  const [isShown, setIsShown] = useState(false);
+
   function onPress() {
     headerPressSubject.next();
   }
 
-  const opacity = Animated.interpolate(scrollY, {
+  const opacity = interpolate(scrollY, {
     inputRange: [90, 150],
     outputRange: [0, 1],
     extrapolate: "clamp",
   });
 
+  useCode(
+    () =>
+      cond(
+        lessThan(scrollY, 90),
+        call([], () => {
+          setIsShown(false);
+        }),
+        call([], () => {
+          setIsShown(true);
+        }),
+      ),
+    [isShown],
+  );
+
   return (
-    <Animated.View style={[styles.root, { opacity }]}>
+    <Animated.View
+      style={[styles.root, { opacity }]}
+      pointerEvents={isShown ? "auto" : "none"}
+    >
       <TouchableWithoutFeedback onPress={onPress}>
         <View style={[styles.outer, { paddingTop: extraStatusBarPadding }]}>
-          <SafeAreaView>
+          <View>
             {pending ? (
               <View style={styles.content}>
                 <HeaderSynchronizing />
@@ -61,7 +81,7 @@ export default function AnimatedTopBar({
                 portfolio={portfolio}
               />
             )}
-          </SafeAreaView>
+          </View>
         </View>
       </TouchableWithoutFeedback>
     </Animated.View>
