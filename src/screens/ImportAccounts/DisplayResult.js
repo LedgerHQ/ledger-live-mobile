@@ -2,6 +2,7 @@
 import React, { Component } from "react";
 import { View, StyleSheet, SectionList } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
+import { useNavigation } from "@react-navigation/native";
 import { HeaderBackButton } from "@react-navigation/stack";
 import groupBy from "lodash/groupBy";
 import concat from "lodash/concat";
@@ -11,14 +12,14 @@ import type { Account } from "@ledgerhq/live-common/lib/types";
 import type { Result } from "@ledgerhq/live-common/lib/cross";
 import type { ImportItem } from "@ledgerhq/live-common/lib/account";
 import { importAccountsMakeItems } from "@ledgerhq/live-common/lib/account";
-import { withTranslation, Trans } from "react-i18next";
+import { Trans } from "react-i18next";
 
 import { importDesktopSettings } from "../../actions/settings";
 import { importAccounts } from "../../actions/accounts";
 import { accountsSelector } from "../../reducers/accounts";
 import { TrackScreen } from "../../analytics";
 import colors from "../../colors";
-import { NavigatorName } from "../../const";
+import { NavigatorName, ScreenName } from "../../const";
 import LText from "../../components/LText";
 import Button from "../../components/Button";
 import StyledStatusBar from "../../components/StyledStatusBar";
@@ -31,15 +32,15 @@ const forceInset = { bottom: "always" };
 
 interface RouteParams {
   result: Result;
-  onFinish?: (*) => void;
+  onFinish?: () => void;
 }
 
 interface Props {
-  navigation: *;
+  navigation: any;
   route: { params: RouteParams };
   accounts: Account[];
   importAccounts: ({ items: ImportItem[], selectedAccounts: string[] }) => void;
-  importDesktopSettings: (*) => void;
+  importDesktopSettings: (settings: any) => void;
 }
 
 type State = {
@@ -49,16 +50,19 @@ type State = {
   importSettings: boolean,
 };
 
-export const BackButton = ({ navigation }: { navigation: Nav }) => (
-  <HeaderBackButton
-    tintColor={colors.grey}
-    onPress={() => {
-      if (navigation.replace) navigation.replace("ScanAccounts");
-    }}
-  >
-    <HeaderBackImage />
-  </HeaderBackButton>
-);
+export function BackButton() {
+  const navigation = useNavigation();
+  return (
+    <HeaderBackButton
+      tintColor={colors.grey}
+      onPress={() => {
+        if (navigation.replace) navigation.replace(ScreenName.ScanAccounts);
+      }}
+    >
+      <HeaderBackImage />
+    </HeaderBackButton>
+  );
+}
 
 class DisplayResult extends Component<Props, State> {
   state = {
@@ -99,12 +103,6 @@ class DisplayResult extends Component<Props, State> {
     return { items, selectedAccounts };
   }
 
-  close = () => {
-    const { navigation } = this.props;
-    // $FlowFixMe
-    navigation.dismiss();
-  };
-
   onImport = async () => {
     const { importAccounts, importDesktopSettings, navigation } = this.props;
     const { selectedAccounts, items, importSettings } = this.state;
@@ -115,7 +113,7 @@ class DisplayResult extends Component<Props, State> {
       importDesktopSettings(this.props.route.params?.result.settings);
     }
 
-    if (onFinish) onFinish(navigation);
+    if (onFinish) onFinish();
     else navigation.navigate(NavigatorName.AccountsStack);
   };
 
@@ -215,12 +213,13 @@ class DisplayResult extends Component<Props, State> {
   }
 }
 
-export default withTranslation()(
-  connect(createStructuredSelector({ accounts: accountsSelector }), {
+export default connect(
+  createStructuredSelector({ accounts: accountsSelector }),
+  {
     importAccounts,
     importDesktopSettings,
-  })(DisplayResult),
-);
+  },
+)(DisplayResult);
 
 const styles = StyleSheet.create({
   root: {

@@ -83,8 +83,7 @@ class Scan extends PureComponent<
   };
 
   onResult = result => {
-    const { route } = this.props;
-    const { onFinish } = route.params || {};
+    const onFinish = this.props.route.params?.onFinish;
 
     // $FlowFixMe
     this.props.navigation.replace(ScreenName.DisplayResult, {

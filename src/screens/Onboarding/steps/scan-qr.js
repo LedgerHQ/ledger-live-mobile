@@ -39,8 +39,7 @@ class OnboardingStepScanQR extends Component<Props> {
     this.props.navigation.navigate(NavigatorName.ImportAccounts, {
       screen: ScreenName.ScanAccounts,
       params: {
-        onFinish: async n => {
-          n.dismiss();
+        onFinish: () => {
           this.props.next();
         },
       },
