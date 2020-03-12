@@ -153,6 +153,9 @@ export const accountScreenSelector = (route: any) => (state: any) => {
 };
 
 const isUpToDateAccount = a => {
+  if (!a) {
+    return false;
+  }
   const { lastSyncDate } = a;
   const { blockAvgTime } = a.currency;
   const outdated =
