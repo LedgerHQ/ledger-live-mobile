@@ -60,26 +60,16 @@ export default function ReceiveFundsNavigator() {
       <Stack.Screen
         name={ScreenName.ReceiveConfirmation}
         component={ReceiveConfirmation}
-        options={({ route }) => {
-          const options = {
-            headerTitle: () => (
-              <StepHeader
-                title={t("account.receive")}
-                subtitle={t("send.stepperHeader.stepRange", {
-                  currentStep: "3",
-                  totalSteps: "3",
-                })}
-              />
-            ),
-          };
-
-          if (!route.params?.allowNavigation) {
-            options.headerLeft = null;
-            options.headerRight = () => null;
-            options.gesturesEnabled = false;
-          }
-
-          return options;
+        options={{
+          headerTitle: () => (
+            <StepHeader
+              title={t("account.receive")}
+              subtitle={t("send.stepperHeader.stepRange", {
+                currentStep: "3",
+                totalSteps: "3",
+              })}
+            />
+          ),
         }}
       />
     </Stack.Navigator>
