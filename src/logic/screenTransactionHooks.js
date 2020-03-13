@@ -51,8 +51,6 @@ export const useSignWithDevice = ({
     const bridge = getAccountBridge(account, parentAccount);
     const mainAccount = getMainAccount(account, parentAccount);
 
-    const n = navigation.dangerouslyGetParent();
-    if (n) n.setParams({ allowNavigation: false });
     setSigning(true);
 
     subscription.current = bridge
@@ -102,7 +100,6 @@ export const useSignWithDevice = ({
           } else {
             logger.critical(error);
           }
-          // $FlowFixMe
           navigation.replace(context + "ValidationError", {
             ...route.params,
             error,
@@ -121,8 +118,6 @@ export const useSignWithDevice = ({
   useEffect(() => {
     signWithDevice();
     return () => {
-      const n = navigation.dangerouslyGetParent();
-      if (n) n.setParams({ allowNavigation: true });
       if (subscription.current) {
         subscription.current.unsubscribe();
       }

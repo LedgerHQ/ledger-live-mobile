@@ -98,12 +98,17 @@ function DelegationFlow() {
         name={"DelegationValidationSuccess"}
         component={DelegationValidationSuccess}
         options={{
+          headerShown: false,
           gesturesEnabled: false,
         }}
       />
       <Stack.Screen
         name={"DelegationValidationError"}
         component={DelegationValidationError}
+        options={{
+          headerShown: false,
+          gesturesEnabled: false,
+        }}
       />
     </Stack.Navigator>
   );

@@ -30,12 +30,8 @@ interface Props {
 }
 
 class ValidationSuccess extends Component<Props> {
-  dismiss = () => {
-    const { navigation } = this.props;
-    if (navigation.dismiss) {
-      const dismissed = navigation.dismiss();
-      if (!dismissed) navigation.goBack();
-    }
+  onClose = () => {
+    this.props.navigation.dangerouslyGetParent().pop();
   };
 
   goToOperationDetails = () => {
@@ -56,7 +52,7 @@ class ValidationSuccess extends Component<Props> {
         <TrackScreen category="SendFunds" name="ValidationSuccess" />
         <PreventNativeBack />
         <ValidateSuccess
-          onClose={this.dismiss}
+          onClose={this.onClose}
           onViewDetails={this.goToOperationDetails}
         />
       </View>
