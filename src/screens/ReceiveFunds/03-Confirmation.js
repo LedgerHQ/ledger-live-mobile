@@ -57,7 +57,7 @@ interface RouteParams {
 interface Props {
   account: ?(TokenAccount | Account);
   parentAccount: ?Account;
-  navigation: any
+  navigation: any;
   route: { params: RouteParams };
   readOnlyModeEnabled: boolean;
 }
