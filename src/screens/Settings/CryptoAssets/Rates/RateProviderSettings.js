@@ -17,7 +17,7 @@ const getExchanges = (from: Currency, to: Currency) =>
   CounterValues.fetchExchangesForPair(from, to);
 
 const extractFromTo = props => {
-  const { params } = props.navigation.state;
+  const { params } = props.route;
   const from = findCurrencyByTicker(params.from);
   const to = findCurrencyByTicker(params.to);
   return { from, to };

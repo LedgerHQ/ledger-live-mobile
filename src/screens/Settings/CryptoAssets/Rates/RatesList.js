@@ -56,16 +56,13 @@ class CurrenciesList extends PureComponent<Props> {
       arrowRight
       compact
       event="RateSettingsRow"
-      onPress={() =>
-        this.props.navigation.navigate(NavigatorName.Settings, {
-          screen: ScreenName.RateProviderSettings,
-          params: {
-            from: p.from.ticker,
-            to: p.to.ticker,
-            selected: p.exchange,
-          },
-        })
-      }
+      onPress={() => {
+        this.props.navigation.navigate(ScreenName.RateProviderSettings, {
+          from: p.from.ticker,
+          to: p.to.ticker,
+          selected: p.exchange,
+        });
+      }}
     >
       {/* FIXME display actual name instead of ID */}
       <LText>{p.exchange || ""}</LText>
