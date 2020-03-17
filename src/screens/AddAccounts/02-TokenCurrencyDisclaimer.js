@@ -1,7 +1,7 @@
 // @flow
 
-import React, { Component } from "react";
-import { withTranslation, Trans } from "react-i18next";
+import React from "react";
+import { Trans } from "react-i18next";
 import { StyleSheet, View, Linking } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 
@@ -43,52 +43,54 @@ interface Props {
   route: { params: RouteParams };
 }
 
-class AddAccountsTokenCurrencyDisclaimer extends Component<Props> {
-  onBack = () => this.props.navigation.goBack();
-
-  onClose = () => {
-    const { navigation } = this.props;
-    if (navigation && navigation.dismiss) navigation.dismiss();
-  };
-
-  render() {
-    const token = this.props.route.params?.token;
-
-    const tokenName = `${token.name} (${token.ticker})`;
-
-    return (
-      <SafeAreaView style={styles.root} forceInset={forceInset}>
-        <View style={styles.wrapper}>
-          <CurrencyIcon size={56} radius={16} currency={token} />
-        </View>
-        <View style={[styles.wrapper, styles.spacer]}>
-          <LText secondary bold style={styles.tokenName}>
-            {tokenName}
-          </LText>
-        </View>
-        <View style={styles.disclaimerWrapper}>
-          <Disclaimer tokenName={tokenName} />
-        </View>
-        <View style={styles.buttonWrapper}>
-          <Button
-            event="AddAccountTokenDisclaimerBack"
-            title="change assets"
-            type="secondary"
-            onPress={this.onBack}
-            containerStyle={[styles.button, styles.buttonSpace]}
-          />
-
-          <Button
-            event="AddAccountTokenDisclaimerClose"
-            title="close"
-            type="primary"
-            onPress={this.onClose}
-            containerStyle={styles.button}
-          />
-        </View>
-      </SafeAreaView>
-    );
+export default function AddAccountsTokenCurrencyDisclaimer({
+  navigation,
+  route,
+}: Props) {
+  function onBack(): void {
+    navigation.goBack();
   }
+
+  function onClose(): void {
+    navigation.dangerouslyGetParent().pop();
+  }
+
+  const token = route.params?.token;
+
+  const tokenName = `${token.name} (${token.ticker})`;
+
+  return (
+    <SafeAreaView style={styles.root} forceInset={forceInset}>
+      <View style={styles.wrapper}>
+        <CurrencyIcon size={56} radius={16} currency={token} />
+      </View>
+      <View style={[styles.wrapper, styles.spacer]}>
+        <LText secondary bold style={styles.tokenName}>
+          {tokenName}
+        </LText>
+      </View>
+      <View style={styles.disclaimerWrapper}>
+        <Disclaimer tokenName={tokenName} />
+      </View>
+      <View style={styles.buttonWrapper}>
+        <Button
+          event="AddAccountTokenDisclaimerBack"
+          title="change assets"
+          type="secondary"
+          onPress={onBack}
+          containerStyle={[styles.button, styles.buttonSpace]}
+        />
+
+        <Button
+          event="AddAccountTokenDisclaimerClose"
+          title="close"
+          type="primary"
+          onPress={onClose}
+          containerStyle={styles.button}
+        />
+      </View>
+    </SafeAreaView>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -140,5 +142,3 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
 });
-
-export default withTranslation()(AddAccountsTokenCurrencyDisclaimer);
