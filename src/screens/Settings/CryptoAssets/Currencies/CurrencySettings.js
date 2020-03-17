@@ -48,7 +48,7 @@ const mapDispatchToProps = {
 class EachCurrencySettings extends Component<Props, LocalState> {
   componentDidMount() {
     const { navigation, currency } = this.props;
-    navigation.setParams({
+    navigation.setOptions({
       headerTitle: () => <CustomCurrencyHeader currency={currency} />,
     });
   }

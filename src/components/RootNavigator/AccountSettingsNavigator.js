@@ -13,12 +13,15 @@ import { closableStackNavigatorConfig } from "../../navigation/navigatorConfig";
 export default function AccountSettingsNavigator() {
   const { t } = useTranslation();
   return (
-    <Stack.Navigator screenOptions={closableStackNavigatorConfig}>
+    <Stack.Navigator
+      screenOptions={{ ...closableStackNavigatorConfig, headerRight: null }}
+    >
       <Stack.Screen
         name={ScreenName.AccountSettingsMain}
         component={AccountSettingsMain}
         options={{
           title: t("account.settings.header"),
+          headerRight: closableStackNavigatorConfig.headerRight,
         }}
       />
       <Stack.Screen
@@ -26,19 +29,20 @@ export default function AccountSettingsNavigator() {
         component={EditAccountUnits}
         options={{
           title: t("account.settings.accountUnits.title"),
-          headerRight: null,
         }}
       />
       <Stack.Screen
         name={ScreenName.EditAccountName}
         component={EditAccountName}
+        options={{
+          title: t("account.settings.accountName.title"),
+        }}
       />
       <Stack.Screen
         name={ScreenName.AdvancedLogs}
         component={AdvancedLogs}
         options={{
           title: t("account.settings.advanced.title"),
-          headerRight: null,
         }}
       />
       <Stack.Screen
