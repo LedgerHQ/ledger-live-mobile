@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { Trans } from "react-i18next";
 import { createStructuredSelector } from "reselect";
 import type { Currency } from "@ledgerhq/live-common/lib/types";
-import { NavigatorName, ScreenName } from "../../../../const";
+import { ScreenName } from "../../../../const";
 import { pairsSelector } from "../../../../countervalues";
 import SettingsRow from "../../../../components/SettingsRow";
 import LText from "../../../../components/LText";
