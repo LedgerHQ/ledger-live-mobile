@@ -18,37 +18,28 @@ export function useScrollToTop(
   useEffect(() => {
     const subscription = headerPressSubject.subscribe(() => {
       if (!ref.current || !isFocused) {
-        return;
+        return subscription.unsubscribe();
       }
 
-      // this handles ScrollView
       if (typeof ref.current.scrollTo === "function") {
+        // this handles ScrollView
         ref.current.scrollTo();
-        return;
-      }
-
-      // this handles FlatList
-      if (typeof ref.current.scrollToOffset === "function") {
+      } else if (typeof ref.current.scrollToOffset === "function") {
+        // this handles FlatList
         ref.current.scrollToOffset({ offset: 0 });
-        return;
-      }
-
-      // this handles SectionList
-      if (typeof ref.current.scrollToLocation === "function") {
+      } else if (typeof ref.current.scrollToLocation === "function") {
+        // this handles SectionList
         scrollSectionListToTop(ref.current);
-        return;
-      }
-
-      // this handles SectionList with Animated wrapper
-      if (
+      } else if (
         typeof ref.current.getNode === "function" &&
         typeof ref.current.getNode().scrollToLocation === "function"
       ) {
+        // this handles SectionList with Animated wrapper
         scrollSectionListToTop(ref.current.getNode());
       }
-    });
 
-    return () => subscription.unsubscribe();
+      return subscription.unsubscribe();
+    });
   }, [isFocused, ref]);
 }
 
@@ -56,6 +47,7 @@ function scrollSectionListToTop(compRef: React$Node): void {
   compRef.scrollToLocation({
     itemIndex: 0,
     sectionIndex: 0,
-    viewPosition: 1,
+    // Set big enough offset umber for unfixed header hight
+    viewOffset: 1000,
   });
 }

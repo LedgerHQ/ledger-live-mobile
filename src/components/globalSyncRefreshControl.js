@@ -8,13 +8,12 @@ import { SYNC_DELAY } from "../constants";
 
 interface Props {
   error?: Error;
-  isPending: boolean;
   isError: boolean;
-  forwardedRef?: *;
+  forwardedRef?: any;
 }
 
 export default (ScrollListLike: any) => {
-  function Inner({ forwardedRef, ...ScrollListLikeProps }: Props) {
+  function Inner({ forwardedRef, ...scrollListLikeProps }: Props) {
     const [refreshing, setRefreshing] = useState(false);
     const setSyncBehavior = useContext(BridgeSyncContext);
     const { poll: cvPoll } = useContext(CounterValues.PollingContext);
@@ -44,7 +43,7 @@ export default (ScrollListLike: any) => {
 
     return (
       <ScrollListLike
-        {...ScrollListLikeProps}
+        {...scrollListLikeProps}
         ref={forwardedRef}
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />

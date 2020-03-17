@@ -1,119 +1,85 @@
 // @flow
 
-import React, { PureComponent } from "react";
-import { connect } from "react-redux";
+import React, { useContext, useEffect, useMemo, useState } from "react";
+import { useSelector } from "react-redux";
 import { RefreshControl } from "react-native";
-import { createStructuredSelector } from "reselect";
 import type { BehaviorAction } from "../bridge/BridgeSyncContext";
-import type { AsyncState } from "../reducers/bridgeSync";
 import { accountSyncStateSelector } from "../reducers/bridgeSync";
-import { BridgeSyncConsumer } from "../bridge/BridgeSyncContext";
+import { BridgeSyncContext } from "../bridge/BridgeSyncContext";
 import CounterValues from "../countervalues";
 import { SYNC_DELAY } from "../constants";
 
-const mapStateToProps = createStructuredSelector({
-  accountSyncState: accountSyncStateSelector,
-});
-
-const Connector = (Decorated: React$ComponentType<any>) => {
-  const SyncIndicator = ({
-    accountSyncState,
-    ...rest
-  }: {
-    accountSyncState: AsyncState,
-  }) => (
-    <BridgeSyncConsumer>
-      {setSyncBehavior => {
-        const isPending = accountSyncState.pending;
-        return (
-          <CounterValues.PollingConsumer>
-            {cvPolling => (
-              <Decorated
-                cvPoll={cvPolling.poll}
-                isPending={isPending}
-                setSyncBehavior={setSyncBehavior}
-                {...rest}
-              />
-            )}
-          </CounterValues.PollingConsumer>
-        );
-      }}
-    </BridgeSyncConsumer>
-  );
-
-  return connect(mapStateToProps)(SyncIndicator);
-};
-
-type Props = {
-  error: ?Error,
-  isPending: boolean,
-  isError: boolean,
-  accountId: string,
-  cvPoll: *,
-  setSyncBehavior: *,
-  forwardedRef?: *,
-  provideSyncRefreshControlBehavior?: BehaviorAction,
-};
+interface Props {
+  error: ?Error;
+  isError: boolean;
+  accountId: string;
+  forwardedRef?: any;
+  provideSyncRefreshControlBehavior?: BehaviorAction;
+}
 
 export default (ScrollListLike: any) => {
-  class Inner extends PureComponent<
-    Props,
-    {
-      lastClickTime: number,
-      refreshing: boolean,
-    },
-  > {
-    state = {
-      lastClickTime: 0,
-      refreshing: false,
-    };
+  function Inner({
+    accountId,
+    error,
+    isError,
+    forwardedRef,
+    ...scrollListLikeProps
+  }: Props) {
+    const setSyncBehavior = useContext(BridgeSyncContext);
+    const { poll: cvPoll } = useContext(CounterValues.PollingContext);
+    const { pending: isPending } = useSelector(state =>
+      accountSyncStateSelector(state, { accountId }),
+    );
 
-    timeout: *;
+    const [lastClickTime, setLastClickTime] = useState(0);
+    const [refreshing, setRefreshing] = useState(false);
 
-    componentWillUnmount() {
-      clearTimeout(this.timeout);
-    }
-
-    onPress = () => {
-      const { setSyncBehavior, accountId } = this.props;
-      this.props.cvPoll();
+    function onPress() {
+      cvPoll();
       setSyncBehavior({
         type: "SYNC_ONE_ACCOUNT",
         accountId,
         priority: 10,
       });
-      this.setState({ lastClickTime: Date.now(), refreshing: true }, () => {
-        this.timeout = setTimeout(() => {
-          this.setState({ refreshing: false });
-        }, SYNC_DELAY);
-      });
-    };
-
-    render() {
-      const {
-        accountId,
-        isPending,
-        error,
-        isError,
-        setSyncBehavior,
-        forwardedRef,
-        ...props
-      } = this.props;
-      const { refreshing } = this.state;
-      const { lastClickTime } = this.state;
-      const isUserClick = Date.now() - lastClickTime < 1000;
-      const isLoading = (isPending && isUserClick) || refreshing;
-      return (
-        <ScrollListLike
-          {...props}
-          ref={forwardedRef}
-          refreshControl={
-            <RefreshControl refreshing={isLoading} onRefresh={this.onPress} />
-          }
-        />
-      );
+      setLastClickTime(Date.now());
+      setRefreshing(true);
     }
+
+    useEffect(() => {
+      if (!refreshing) {
+        return () => {};
+      }
+
+      const timer = setTimeout(() => {
+        setRefreshing(false);
+      }, SYNC_DELAY);
+
+      return () => {
+        clearTimeout(timer);
+      };
+    }, [refreshing]);
+
+    const isUserClick = useMemo(() => Date.now() - lastClickTime < 1000, [
+      lastClickTime,
+    ]);
+    const isLoading = useMemo(() => (isPending && isUserClick) || refreshing, [
+      isPending,
+      isUserClick,
+      refreshing,
+    ]);
+
+    return (
+      <ScrollListLike
+        {...scrollListLikeProps}
+        ref={forwardedRef}
+        refreshControl={
+          <RefreshControl refreshing={isLoading} onRefresh={onPress} />
+        }
+      />
+    );
   }
 
-  return Connector(Inner);
+  return React.forwardRef((prop, ref) => (
+    <Inner {...prop} forwardedRef={ref} />
+  ));
 };
