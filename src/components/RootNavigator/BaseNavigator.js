@@ -87,7 +87,11 @@ export default function BaseNavigator() {
         component={ImportAccountsNavigator}
         options={{ headerShown: false }}
       />
-      <Stack.Screen name={ScreenName.PairDevices} component={PairDevices} />
+      <Stack.Screen
+        name={ScreenName.PairDevices}
+        component={PairDevices}
+        options={{ title: t("SelectDevice.title"), headerLeft: null }}
+      />
       <Stack.Screen
         name={ScreenName.EditDeviceName}
         component={EditDeviceName}
