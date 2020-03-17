@@ -105,9 +105,8 @@ const Progress = ({
           currency: noticeAwareStatus === "error" ? currency : nextCurrency,
         });
       }
-    } else if (navigation.dismiss) {
-      const dismissed = navigation.dismiss();
-      if (!dismissed) navigation.goBack();
+    } else {
+      navigation.dangerouslyGetParent().pop();
     }
   }, [
     navigation,

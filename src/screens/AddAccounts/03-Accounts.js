@@ -217,8 +217,8 @@ class AddAccountsAccounts extends PureComponent<Props, State> {
     const { cancelled } = this.state;
     const { navigation } = this.props;
 
-    if (cancelled && navigation.dismiss) {
-      navigation.dismiss();
+    if (cancelled) {
+      navigation.dangerouslyGetParent().pop();
     }
   };
 
