@@ -69,6 +69,20 @@ import SendConnectDevice from "./screens/SendFunds/05-ConnectDevice";
 import SendValidation from "./screens/SendFunds/06-Validation";
 import SendValidationSuccess from "./screens/SendFunds/07-ValidationSuccess";
 import SendValidationError from "./screens/SendFunds/07-ValidationError";
+
+import FreezeInfo from "./screens/FreezeFunds/01-Info";
+import FreezeAmount from "./screens/FreezeFunds/02-Amount";
+import FreezeConnectDevice from "./screens/FreezeFunds/03-ConnectDevice";
+import FreezeValidation from "./screens/FreezeFunds/04-Validation";
+import FreezeValidationError from "./screens/FreezeFunds/04-ValidationError";
+import FreezeValidationSuccess from "./screens/FreezeFunds/04-ValidationSuccess";
+
+import UnfreezeAmount from "./screens/UnfreezeFunds/01-Amount";
+import UnfreezeConnectDevice from "./screens/UnfreezeFunds/02-ConnectDevice";
+import UnfreezeValidation from "./screens/UnfreezeFunds/03-Validation";
+import UnfreezeValidationError from "./screens/UnfreezeFunds/03-ValidationError";
+import UnfreezeValidationSuccess from "./screens/UnfreezeFunds/03-ValidationSuccess";
+
 import FirmwareUpdateReleaseNotes from "./screens/FirmwareUpdate/01-ReleaseNotes";
 import FirmwareUpdateCheckId from "./screens/FirmwareUpdate/02-CheckId";
 import FirmwareUpdateMCU from "./screens/FirmwareUpdate/03-MCU";
@@ -372,6 +386,48 @@ SendFunds.navigationOptions = ({ navigation }) => ({
       : false,
 });
 
+const FreezeFunds = createStackNavigator(
+  {
+    // $FlowFixMe
+    FreezeInfo,
+    // $FlowFixMe
+    FreezeAmount,
+    FreezeConnectDevice,
+    FreezeValidation,
+    FreezeValidationSuccess,
+    FreezeValidationError,
+  },
+  closableStackNavigatorConfig,
+);
+
+FreezeFunds.navigationOptions = ({ navigation }) => ({
+  header: null,
+  gesturesEnabled:
+    Platform.OS === "ios"
+      ? navigation.getParam("allowNavigation", true)
+      : false,
+});
+
+const UnfreezeFunds = createStackNavigator(
+  {
+    // $FlowFixMe
+    UnfreezeAmount,
+    UnfreezeConnectDevice,
+    UnfreezeValidation,
+    UnfreezeValidationSuccess,
+    UnfreezeValidationError,
+  },
+  closableStackNavigatorConfig,
+);
+
+UnfreezeFunds.navigationOptions = ({ navigation }) => ({
+  header: null,
+  gesturesEnabled:
+    Platform.OS === "ios"
+      ? navigation.getParam("allowNavigation", true)
+      : false,
+});
+
 const MigrateAccountsFlow = createStackNavigator(
   {
     MigrateAccountsOverview,
@@ -484,6 +540,8 @@ const BaseNavigator = createStackNavigator(
     Main,
     ReceiveFunds,
     SendFunds,
+    FreezeFunds,
+    UnfreezeFunds,
     AddAccounts,
     FirmwareUpdate,
     OperationDetails,

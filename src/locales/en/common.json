@@ -1055,6 +1055,68 @@
       "ethTokenNetworkFees": "Network fees for ERC20 token operations are paid in ETH"
     }
   },
+  "freeze": {
+    "stepperHeader": {
+      "info": "Earn rewards",
+      "selectAmount": "Freeze",
+      "summary": "Summary",
+      "connectDevice": "Connect Device",
+      "verification": "Verification",
+      "stepRange": "Step {{currentStep}} of {{totalSteps}}"
+    },
+    "info": {
+      "description": "Freeze your TRX to earn rewards while keeping full security and control of your assets.",
+      "steps": {
+        "0": "Frozen assets stay yours.",
+        "1": "You can unfreeze your assets after 3 days.",
+        "2": "Freeze and vote securely with your Ledger device."
+      },
+      "howVotingWorks": "How voting works",
+      "cta": "Continue"
+    },
+    "amount": {
+      "available": "Total available",
+      "loadingNetwork": "Loading Network fees...",
+      "noRateProvider": "Not available",
+      "infoLabel": "Bandwidth or energy"
+    },
+    "validation": {
+      "message": "Always verify that your device displays the address exactly as provided",
+      "success": "Assets frozen",
+      "amount": "Amount",
+      "info": "You will start earning {{resource}} once the network has confirmed the freeze. You can shortly vote for Super Representatives to also earn rewards.",
+      "button": {
+        "pending": "Transaction under validation",
+        "pendingDesc": "You have to wait 1 minute before being able to vote",
+        "vote": "Vote",
+        "voteTimer": "0:{{time}}",
+        "later": "I'll vote later",
+        "retry": "Retry"
+      }
+    }
+  },
+  "unfreeze": {
+    "stepperHeader": {
+      "selectAmount": "Unfreeze",
+      "summary": "Summary",
+      "connectDevice": "Connect Device",
+      "verification": "Verification",
+      "stepRange": "Step {{currentStep}} of {{totalSteps}}"
+    },
+    "amount": {
+      "title": "Select the kind of asset to unfreeze",
+      "info": "Unfreezing will decrease your {{resource}} and will cancel your votes.",
+      "cta": "Continue"
+    },
+    "validation": {
+      "success": "Your assets have been unfrozen successfully.",
+      "info": "Your Bandwidth points will be decreased and your votes will be canceled.",
+      "button": {
+        "done": "Done",
+        "cta": "See details"
+      }
+    }
+  },
   "addAccounts": {
     "quitConfirmation": {
       "title": "Cancel add account",
@@ -1499,12 +1561,24 @@
     "howDelegationWorks": "How delegation works"
   },
   "ValidateOnDevice": {
-    "title": "Please confirm the operation on your {{productName}} to send it",
-    "warning": "Always verify that your device displays the address exactly as provided by the {{recipientWording}}",
+    "title": {
+      "send": "Please confirm the operation on your {{productName}} to send it",
+      "freeze": "Please confirm the operation on your device to freeze assets",
+      "unfreeze": "Please confirm the operation on your device to unfreeze assets"
+    },
+    "warning": "Always verify that your device displays the address exactly as provided{{recipientWording}}",
     "recipientWording": {
-      "send": "recipient",
-      "delegate": "validator",
-      "undelegate": "validator"
+      "send": "by the recipient",
+      "delegate": "by the validator",
+      "undelegate": "by the validator",
+      "freeze": "",
+      "unfreeze": ""
+    },
+    "address": "Address",
+    "resource": "Resource",
+    "infoWording": {
+      "freeze": "Frozen tokens are \"locked\" for a period of 3 days",
+      "unfreeze": "Your {{resource}} points will be reduced, and all your votes will be canceled"
     }
   },
   "Terms": {
