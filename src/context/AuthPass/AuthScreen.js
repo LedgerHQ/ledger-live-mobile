@@ -126,7 +126,9 @@ class AuthScreen extends PureComponent<Props, State> {
     const { unlock } = this.props;
     if (!password) return;
     try {
-      const credentials = await Keychain.getGenericPassword();
+      const credentials = await Keychain.getGenericPassword({
+        accessControl: Keychain.ACCESS_CONTROL.DEVICE_PASSCODE,
+      });
       if (id !== this.submitId) return;
       if (credentials && credentials.password === password) {
         unlock();

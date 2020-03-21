@@ -53,7 +53,9 @@ class ConfirmPassword extends PureComponent<Props, State> {
     const { password, biometricsType } = this.state;
     const { setPrivacy, navigation } = this.props;
     try {
-      await Keychain.setGenericPassword("ledger", password);
+      await Keychain.setGenericPassword("ledger", password, {
+        accessControl: Keychain.ACCESS_CONTROL.DEVICE_PASSCODE,
+      });
       setPrivacy({
         biometricsType,
         biometricsEnabled: false,
