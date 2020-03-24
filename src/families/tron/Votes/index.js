@@ -1,4 +1,5 @@
 // @flow
+import invariant from "invariant";
 import React, { useEffect, useState, useCallback, useMemo } from "react";
 import { View, Linking, TouchableOpacity, StyleSheet } from "react-native";
 import { Trans } from "react-i18next";
@@ -53,9 +54,9 @@ const Delegation = ({ account }: Props) => {
   const nextVotingDate = useNewVotingDate();
   const nextDate = <DateFromNow date={nextVotingDate} />;
 
-  const {
-    tronResources: { votes, tronPower, unwithdrawnReward } = {},
-  } = account;
+  const { tronResources } = account;
+  invariant(tronResources, "tron resources is defined");
+  const { votes, tronPower, unwithdrawnReward } = tronResources;
 
   const formattedUnwidthDrawnReward = formatCurrencyUnit(
     account.unit,
