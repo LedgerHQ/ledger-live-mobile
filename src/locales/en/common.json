@@ -1566,7 +1566,7 @@
       "freeze": "Please confirm the operation on your device to freeze assets",
       "unfreeze": "Please confirm the operation on your device to unfreeze assets"
     },
-    "warning": "Always verify that your device displays the address exactly as provided{{recipientWording}}",
+    "warning": "Always verify that your device displays the address exactly as provided {{recipientWording}}",
     "recipientWording": {
       "send": "by the recipient",
       "delegate": "by the validator",
