@@ -184,13 +184,6 @@ const UnfreezeAmount = ({ account, parentAccount, navigation }: Props) => {
               </LText>
               <CheckBox isChecked={resource === "ENERGY"} />
             </TouchableOpacity>
-            <LText
-              style={[error ? styles.error : styles.warning]}
-              numberOfLines={2}
-            >
-              <TranslatedError error={error || warning} />
-            </LText>
-
             <View style={styles.infoSection}>
               <Info size={16} color={colors.live} />
               <LText style={styles.infoText} numberOfLines={3}>
@@ -200,6 +193,12 @@ const UnfreezeAmount = ({ account, parentAccount, navigation }: Props) => {
                 />
               </LText>
             </View>
+            <LText
+              style={[error ? styles.error : styles.warning]}
+              numberOfLines={2}
+            >
+              <TranslatedError error={error || warning} />
+            </LText>
           </View>
 
           <View style={styles.bottomWrapper}>
@@ -217,7 +216,7 @@ const UnfreezeAmount = ({ account, parentAccount, navigation }: Props) => {
                   />
                 }
                 onPress={onContinue}
-                disabled={!!status.errors.amount || bridgePending}
+                disabled={!!error || bridgePending}
                 pending={bridgePending}
               />
             </View>
@@ -290,6 +289,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     padding: 16,
     borderRadius: 4,
+    marginTop: 8,
+    marginBottom: 16,
   },
   infoText: { color: colors.live, marginLeft: 16, flex: 1 },
   bottomWrapper: {
