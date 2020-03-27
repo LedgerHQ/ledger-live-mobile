@@ -1,6 +1,5 @@
 // @flow
-import invariant from "invariant";
-import React, { useEffect, useState, useCallback, useMemo } from "react";
+import React, { useCallback } from "react";
 import { View, Linking, TouchableOpacity, StyleSheet } from "react-native";
 import { withNavigation } from "react-navigation";
 import { Trans } from "react-i18next";
@@ -66,16 +65,8 @@ const Delegation = ({ account, parentAccount, navigation }: Props) => {
 
   const { votes, tronPower, unwithdrawnReward } = tronResources || {};
 
-const Delegation = ({ account }: Props) => {
-  const superRepresentatives = useTronSuperRepresentatives();
-  const nextVotingDate = useNewVotingDate();
-  const nextDate = <DateFromNow date={nextVotingDate} />;
-
-  const { tronResources } = account;
-  invariant(tronResources, "tron resources is defined");
-  const { votes, tronPower, unwithdrawnReward } = tronResources;
-
   const formattedUnwidthDrawnReward = BigNumber(unwithdrawnReward || 0);
+
   const formattedVotes = formatVotes(votes, superRepresentatives);
 
   const totalVotesUsed = votes.reduce(
