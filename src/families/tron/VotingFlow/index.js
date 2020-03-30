@@ -8,11 +8,11 @@ import VotingStarted from "./Started";
 
 const VotingFlow = createStackNavigator(
   {
-    // $FlowFixMe
     VotingStarted: {
+      // $FlowFixMe
       screen: VotingStarted,
       navigationOptions: {
-        title: i18next.t("delegation.started.title"),
+        title: i18next.t("tron.voting.flow.started.title"),
       },
     },
   },
