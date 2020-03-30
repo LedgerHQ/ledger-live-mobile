@@ -93,8 +93,11 @@ const Delegation = ({ account, parentAccount, navigation }: Props) => {
   );
 
   const onDelegate = useCallback(() => {
-    /** @TODO open delegation modal */
-  }, []);
+    navigation.navigate("VotingStarted", {
+      accountId,
+      parentId,
+    });
+  }, [navigation, accountId, parentId]);
 
   const hasRewards = BigNumber(unwithdrawnReward).gt(0);
   const nextRewardDate = getNextRewardDate(account);
