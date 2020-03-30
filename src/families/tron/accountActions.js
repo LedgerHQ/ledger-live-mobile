@@ -77,6 +77,7 @@ const ManageAction = ({
       tronPower,
       frozen: { bandwidth, energy } = {},
       frozen,
+      votes,
     } = {},
   } = account;
 
@@ -153,7 +154,11 @@ const ManageAction = ({
         />
         <ChoiceButton
           disabled={!canVote}
-          onPress={() => onSelectAction()}
+          onPress={() =>
+            // eslint-disable-next-line spaced-comment
+            /** @TODO replace VotingCast with the right naming if different **/
+            onSelectAction(votes.length ? "VotingCast" : "VotingStarted")
+          }
           label={<Trans i18nKey="tron.manage.vote.title" />}
           Icon={VoteIcon}
         />

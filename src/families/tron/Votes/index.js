@@ -93,8 +93,14 @@ const Delegation = ({ account, parentAccount, navigation }: Props) => {
   );
 
   const onDelegate = useCallback(() => {
-    /** @TODO open delegation modal */
-  }, []);
+    // eslint-disable-next-line spaced-comment
+    /** @TODO replace VotingCast with the right naming if different **/
+    const screenName = votes.length ? "VotingCast" : "VotingStarted";
+    navigation.navigate(screenName, {
+      accountId,
+      parentId,
+    });
+  }, [navigation, accountId, parentId, votes]);
 
   const hasRewards = BigNumber(unwithdrawnReward).gt(0);
   const nextRewardDate = getNextRewardDate(account);

@@ -1481,6 +1481,17 @@
         "button": "Vote now"
       },
       "flow": {
+        "started": {
+          "title": "Vote",
+          "description": "Vote for one or more Super Representatives to start earning rewards.",
+          "button": {
+            "continue": "Cast Votes"
+          }
+        }
+      }
+    },
+    "freeze": {
+      "flow": {
         "steps": {
           "starter": {
             "title": "Earn staking rewards",
