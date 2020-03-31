@@ -28,10 +28,12 @@ import Button from "../../../components/Button";
 import colors from "../../../colors";
 import ExternalLink from "../../../icons/ExternalLink";
 import Info from "../../../icons/Info";
+import ArrowRight from "../../../icons/ArrowRight";
 import DateFromNow from "../../../components/DateFromNow";
 import CurrencyUnitValue from "../../../components/CurrencyUnitValue";
 import CounterValue from "../../../components/CounterValue";
 import IlluRewards from "../IlluRewards";
+import ProgressCircle from "../../../components/ProgressCircle";
 
 type Props = {
   account: Account,
@@ -95,7 +97,7 @@ const Delegation = ({ account, parentAccount, navigation }: Props) => {
   const onDelegate = useCallback(() => {
     // eslint-disable-next-line spaced-comment
     /** @TODO replace VotingCast with the right naming if different **/
-    const screenName = votes.length ? "VotingCast" : "VotingStarted";
+    const screenName = votes.length ? "VoteSelectValidator" : "VoteStarted";
     navigation.navigate(screenName, {
       accountId,
       parentId,
@@ -106,6 +108,8 @@ const Delegation = ({ account, parentAccount, navigation }: Props) => {
   const nextRewardDate = getNextRewardDate(account);
 
   const canClaimRewards = hasRewards && !nextRewardDate;
+
+  const percentVotesUsed = totalVotesUsed / tronPower;
 
   return (
     <View style={styles.root}>
@@ -148,12 +152,7 @@ const Delegation = ({ account, parentAccount, navigation }: Props) => {
       {tronPower > 0 ? (
         formattedVotes.length > 0 ? (
           <>
-            <Header
-              total={tronPower}
-              used={totalVotesUsed}
-              count={formattedVotes.length}
-              onPress={onDelegate}
-            />
+            <Header count={formattedVotes.length} onPress={onDelegate} />
             <View style={[styles.container, styles.noPadding]}>
               {formattedVotes.map(
                 ({ validator, address, voteCount }, index) => (
@@ -166,6 +165,33 @@ const Delegation = ({ account, parentAccount, navigation }: Props) => {
                     explorerView={explorerView}
                   />
                 ),
+              )}
+              {percentVotesUsed < 1 && (
+                <View style={[styles.container]}>
+                  <TouchableOpacity onPress={onDelegate} style={styles.warn}>
+                    <ProgressCircle
+                      size={60}
+                      progress={percentVotesUsed}
+                      backgroundColor={colors.fog}
+                    />
+                    <View style={styles.warnSection}>
+                      <LText
+                        semiBold
+                        style={[styles.warnText, styles.warnTitle]}
+                      >
+                        <Trans
+                          i18nKey="tron.voting.remainingVotes.title"
+                          values={{ amount: tronPower - totalVotesUsed }}
+                        />
+                      </LText>
+                      <LText style={styles.warnText}>
+                        <Trans i18nKey="tron.voting.remainingVotes.description" />
+                      </LText>
+                    </View>
+
+                    <ArrowRight size={16} color={colors.live} />
+                  </TouchableOpacity>
+                </View>
               )}
             </View>
           </>
@@ -284,6 +310,33 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: colors.darkBlue,
     marginRight: 6,
+  },
+  warn: {
+    flexDirection: "row",
+    padding: 8,
+    backgroundColor: colors.lightLive,
+    borderRadius: 4,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  warnSection: {
+    flexDirection: "column",
+    flex: 1,
+    marginHorizontal: 6,
+    justifyContent: "center",
+    alignItems: "flex-start",
+  },
+  warnTitle: {
+    fontSize: 14,
+  },
+  warnText: {
+    color: colors.live,
+    marginLeft: 0,
+    fontSize: 13,
+  },
+  cta: {
+    flex: 1,
+    flexGrow: 0.5,
   },
   title: {
     fontSize: 18,

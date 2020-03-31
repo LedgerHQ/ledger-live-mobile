@@ -1136,6 +1136,22 @@
       }
     }
   },
+  "vote": {
+    "stepperHeader": {
+      "selectValidator": "Cast votes",
+      "castVote": "My votes",
+      "connectDevice": "Connect Device",
+      "verification": "Verification",
+      "stepRange": "Step {{currentStep}} of {{totalSteps}}"
+    },
+    "selectValidator": {},
+    "validation": {
+      "message": "Always verify that your device displays the address exactly as provided",
+      "success": "Your votes were cast successfully",
+      "info": "",
+      "button": {}
+    }
+  },
   "addAccounts": {
     "quitConfirmation": {
       "title": "Cancel add account",
@@ -1476,9 +1492,8 @@
       },
       "manageVotes": "Manage votes",
       "remainingVotes": {
-        "title": "You still have {{amount}}TP remaining",
-        "description": "You didn't use all of your frozen assets to vote for a SR.",
-        "button": "Vote now"
+        "title": "You still have votes remaining",
+        "description": "Cast your remaining votes to earn more XTZ"
       },
       "flow": {
         "started": {
@@ -1600,18 +1615,24 @@
       "send": "Please confirm the operation on your {{productName}} to send it",
       "freeze": "Please confirm the operation on your device to freeze assets",
       "unfreeze": "Please confirm the operation on your device to unfreeze assets",
-      "claimReward": "Please confirm the operation on your device to claim your rewards"
+      "claimReward": "Please confirm the operation on your device to claim your rewards",
+      "vote": "Please confirm the operation on your device to cast your votes"
     },
-    "warning": "Always verify that your device displays the address exactly as provided{{recipientWording}}",
+    "warning": "Always verify that your device displays the address exactly as provided {{recipientWording}}",
     "recipientWording": {
       "send": "by the recipient",
       "delegate": "by the validator",
       "undelegate": "by the validator",
       "freeze": "",
       "unfreeze": "",
-      "claimReward": ""
+      "claimReward": "",
+      "vote": ""
     },
     "address": "Address",
+    "fromAddress": "From",
+    "toAddress": "To",
+    "name": "Name",
+    "amount": "Amount",
     "resource": "Resource",
     "infoWording": {
       "freeze": "Frozen tokens are \"locked\" for a period of 3 days",
