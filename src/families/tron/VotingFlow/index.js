@@ -4,22 +4,35 @@ import { createStackNavigator } from "react-navigation-stack";
 import i18next from "i18next";
 import { closableStackNavigatorConfig } from "../../../navigation/navigatorConfig";
 
-import VotingStarted from "./Started";
+import VoteStarted from "./Started";
 
-const VotingFlow = createStackNavigator(
+import VoteSelectValidator from "./01-SelectValidator";
+import CastVote from "./02-CastVote";
+import VoteConnectDevice from "./03-ConnectDevice";
+import VoteValidation from "./04-Validation";
+import VoteValidationError from "./04-ValidationError";
+import VoteValidationSuccess from "./04-ValidationSuccess";
+
+const VoteFlow = createStackNavigator(
   {
-    VotingStarted: {
+    VoteStarted: {
       // $FlowFixMe
-      screen: VotingStarted,
+      screen: VoteStarted,
       navigationOptions: {
         title: i18next.t("tron.voting.flow.started.title"),
       },
     },
+    VoteSelectValidator,
+    CastVote,
+    VoteConnectDevice,
+    VoteValidation,
+    VoteValidationError,
+    VoteValidationSuccess,
   },
   closableStackNavigatorConfig,
 );
 
-VotingFlow.navigationOptions = ({ navigation }) => ({
+VoteFlow.navigationOptions = ({ navigation }) => ({
   header: null,
   gesturesEnabled:
     Platform.OS === "ios"
@@ -27,4 +40,4 @@ VotingFlow.navigationOptions = ({ navigation }) => ({
       : false,
 });
 
-export default VotingFlow;
+export default VoteFlow;

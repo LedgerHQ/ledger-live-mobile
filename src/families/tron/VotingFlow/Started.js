@@ -14,9 +14,9 @@ type Props = {
   t: TFunction,
 };
 
-function VotingStarted({ navigation, t }: Props) {
+function VoteStarted({ navigation, t }: Props) {
   const onNext = useCallback(() => {
-    navigation.navigate("VotingCast", {
+    navigation.navigate("VoteConnectDevice", {
       ...navigation.state.params,
     });
   }, [navigation]);
@@ -31,19 +31,19 @@ function VotingStarted({ navigation, t }: Props) {
         <IlluVotes />
 
         <LText style={styles.description}>
-          {t("tron.voting.flow.started.description")}
+          {t("tron.vote.flow.started.description")}
         </LText>
       </View>
 
       <View style={styles.footer}>
         <Button
-          event="VotingStartedContinueBtn"
+          event="VoteStartedContinueBtn"
           onPress={onNext}
-          title={t("tron.voting.flow.started.button.continue")}
+          title={t("tron.vote.flow.started.button.continue")}
           type="primary"
         />
         <Button
-          event="VotingStartedCancelBtn"
+          event="VoteStartedCancelBtn"
           onPress={onCancel}
           title={t("common.cancel")}
           type="negativePrimary"
@@ -80,4 +80,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default translate()(VotingStarted);
+export default translate()(VoteStarted);
