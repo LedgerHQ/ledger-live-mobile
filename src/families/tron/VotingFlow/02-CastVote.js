@@ -99,7 +99,7 @@ const CastVote = ({ account, navigation }: Props) => {
     <>
       <TrackScreen category="Vote" name="CastVote" />
       <SafeAreaView style={styles.root} forceInset={forceInset}>
-        <View style={styles.root}></View>
+        <View style={styles.root} />
         <View style={styles.bottomWrapper}>
           <View style={styles.continueWrapper}>
             <Button
