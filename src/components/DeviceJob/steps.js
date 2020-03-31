@@ -190,7 +190,7 @@ export const listApps: Step = {
     ),
   run: meta =>
     withDevice(meta.deviceId)(transport =>
-      listAppsTransport(transport, meta.deviceInfo),
+      listAppsTransport(transport, meta.deviceInfo, meta.modelId),
     ).pipe(
       map((e: *) => ({
         ...meta,
