@@ -1145,6 +1145,17 @@
       "stepRange": "Step {{currentStep}} of {{totalSteps}}"
     },
     "selectValidator": {},
+    "castVotes": {
+      "ranking": "Ranking: <0>{{rank}}</0>",
+      "nbOfVotes": "Nb of votes",
+      "percentage": "Percentage",
+      "estYield": "Est. yield",
+      "seeFullList": "See full list",
+      "votesRemaining": "Votes remaining: <0>{{total}}</0>",
+      "voteFor": "Vote for",
+      "validateVotes": "Validate votes",
+      "votesRequired": "Votes required "
+    },
     "validation": {
       "message": "Always verify that your device displays the address exactly as provided",
       "success": "Your votes were cast successfully",

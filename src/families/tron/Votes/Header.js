@@ -12,7 +12,7 @@ type Props = {
   onPress: () => void,
 };
 
-const Header = ({ count }: Props) => {
+const Header = ({ count, onPress }: Props) => {
   return (
     <>
       <View style={styles.root}>
@@ -23,9 +23,7 @@ const Header = ({ count }: Props) => {
           containerStyle={{ flexGrow: 0.5 }}
           type="lightSecondary"
           event="TronManageVotes"
-          onPress={() => {
-            /** @TODO redirect to voting flow */
-          }}
+          onPress={onPress}
           title={<Trans i18nKey="tron.voting.manageVotes" />}
         />
       </View>

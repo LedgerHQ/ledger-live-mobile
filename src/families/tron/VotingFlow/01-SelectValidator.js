@@ -158,19 +158,29 @@ SelectValidator.navigationOptions = {
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: colors.white,
+    backgroundColor: colors.lightGrey,
   },
   topContainer: { paddingHorizontal: 32 },
   bottomWrapper: {
     alignSelf: "stretch",
     alignItems: "center",
     justifyContent: "flex-end",
+    padding: 16,
+    backgroundColor: colors.white,
+    borderTopWidth: StyleSheet.hairlineWidth,
+    borderTopColor: colors.lightGrey,
+  },
+  button: {
+    flex: 1,
+    marginHorizontal: 8,
+  },
+  buttonRight: {
+    marginLeft: 8,
   },
   continueWrapper: {
     alignSelf: "stretch",
     alignItems: "stretch",
     justifyContent: "flex-end",
-    paddingBottom: 16,
   },
 });
 

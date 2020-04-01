@@ -94,9 +94,15 @@ const Delegation = ({ account, parentAccount, navigation }: Props) => {
     [accountId, navigation, parentId],
   );
 
+  const onManageVotes = useCallback(() => {
+    navigation.navigate("CastVote", {
+      accountId,
+      parentId,
+    });
+  }, [navigation, accountId, parentId]);
+
   const onDelegate = useCallback(() => {
-    // eslint-disable-next-line spaced-comment
-    /** @TODO replace VotingCast with the right naming if different **/
+    /** @TODO TRON replace this condition with lastvoted date */
     const screenName = votes.length ? "VoteSelectValidator" : "VoteStarted";
     navigation.navigate(screenName, {
       accountId,
@@ -152,7 +158,7 @@ const Delegation = ({ account, parentAccount, navigation }: Props) => {
       {tronPower > 0 ? (
         formattedVotes.length > 0 ? (
           <>
-            <Header count={formattedVotes.length} onPress={onDelegate} />
+            <Header count={formattedVotes.length} onPress={onManageVotes} />
             <View style={[styles.container, styles.noPadding]}>
               {formattedVotes.map(
                 ({ validator, address, voteCount }, index) => (

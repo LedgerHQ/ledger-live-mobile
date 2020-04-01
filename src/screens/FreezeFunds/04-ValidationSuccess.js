@@ -48,11 +48,13 @@ type Props = {
   }>,
 };
 
-const ValidationSuccess = ({ navigation }: Props) => {
+const ValidationSuccess = ({ account, navigation }: Props) => {
   const time = useTimer(60);
 
   const transaction = navigation.getParam("transaction");
   const resource = transaction.resource || "";
+
+  const accountId = account.id;
 
   const dismiss = useCallback(() => {
     if (navigation.dismiss) {
@@ -62,9 +64,11 @@ const ValidationSuccess = ({ navigation }: Props) => {
   }, [navigation]);
 
   const goToVote = useCallback(() => {
-    /** @TODO redirect to Vote flow */
-    // navigation.navigate("Vote", {
-    //   accountId: account.id,
+    /** @TODO TRON replace this condition with lastvoted date */
+    // const screenName = votes.length ? "VoteSelectValidator" : "VoteStarted";
+    // navigation.navigate(screenName, {
+    //   accountId,
+    //   parentId: undefined,
     // });
   }, []);
 

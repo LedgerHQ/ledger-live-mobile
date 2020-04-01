@@ -155,8 +155,7 @@ const ManageAction = ({
         <ChoiceButton
           disabled={!canVote}
           onPress={() =>
-            // eslint-disable-next-line spaced-comment
-            /** @TODO replace VotingCast with the right naming if different **/
+            /** @TODO TRON replace this condition with lastvoted date */
             onSelectAction(votes.length ? "VoteSelectValidator" : "VoteStarted")
           }
           label={<Trans i18nKey="tron.manage.vote.title" />}

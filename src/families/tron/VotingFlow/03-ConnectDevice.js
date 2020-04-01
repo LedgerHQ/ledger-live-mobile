@@ -10,7 +10,6 @@ import type { NavigationScreenProp } from "react-navigation";
 import type { Account, Transaction } from "@ledgerhq/live-common/lib/types";
 
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
-import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { accountAndParentScreenSelector } from "../../../reducers/accounts";
 
 import colors from "../../../colors";
@@ -39,18 +38,9 @@ const ConnectDevice = ({ account, navigation }: Props) => {
     account && account.tronResources,
     "account and tron resources required",
   );
-  const bridge = getAccountBridge(account, undefined);
 
   const { transaction, status } = useBridgeTransaction(() => {
-    const t = bridge.createTransaction(account);
-
-    const { tronResources } = account;
-    const { votes } = tronResources;
-
-    const transaction = bridge.updateTransaction(t, {
-      mode: "vote",
-      votes,
-    });
+    const transaction = navigation.getParam("transaction");
 
     return { account, transaction };
   });
