@@ -5,22 +5,21 @@ import React, { useCallback } from "react";
 import { View, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-navigation";
 import { useSelector } from "react-redux";
-import { translate } from "react-i18next";
-import type { TFunction } from "react-i18next";
 import i18next from "i18next";
 
 import type { NavigationScreenProp } from "react-navigation";
 import type { Transaction } from "@ledgerhq/live-common/lib/types";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 
-import { accountAndParentScreenSelector } from "../../../reducers/accounts";
-import colors from "../../../colors";
-import { TrackScreen } from "../../../analytics";
-import Button from "../../../components/Button";
-import StepHeader from "../../../components/StepHeader";
-import RetryButton from "../../../components/RetryButton";
-import CancelButton from "../../../components/CancelButton";
-import GenericErrorBottomModal from "../../../components/GenericErrorBottomModal";
+import { accountAndParentScreenSelector } from "../../../../reducers/accounts";
+import colors from "../../../../colors";
+import { TrackScreen } from "../../../../analytics";
+import StepHeader from "../../../../components/StepHeader";
+import RetryButton from "../../../../components/RetryButton";
+import CancelButton from "../../../../components/CancelButton";
+import GenericErrorBottomModal from "../../../../components/GenericErrorBottomModal";
+import SelectValidatorMain from "./Main";
+import SelectValidatorFooter from "./Footer";
 
 const forceInset = { bottom: "always" };
 
@@ -31,10 +30,9 @@ type Props = {
       transaction: Transaction,
     },
   }>,
-  t: TFunction,
 };
 
-function SelectValidator({ navigation, t }: Props) {
+export default function SelectValidator({ navigation }: Props) {
   const { account } = useSelector(state =>
     accountAndParentScreenSelector(state, { navigation }),
   );
@@ -103,24 +101,15 @@ function SelectValidator({ navigation, t }: Props) {
   return (
     <>
       <TrackScreen category="Vote" name="SelectValidator" />
+
       <SafeAreaView style={styles.root} forceInset={forceInset}>
-        <View style={styles.root} />
-        <View style={styles.bottomWrapper}>
-          <View style={styles.continueWrapper}>
-            <Button
-              event="SelectValidatorContinue"
-              type="primary"
-              title={t(
-                !bridgePending
-                  ? "common.continue"
-                  : "vote.amount.loadingNetwork",
-              )}
-              onPress={onContinue}
-              disabled={!!status.errors.amount || bridgePending}
-              pending={bridgePending}
-            />
-          </View>
-        </View>
+        <SelectValidatorMain />
+
+        <SelectValidatorFooter
+          bridgePending={bridgePending}
+          onContinue={onContinue}
+          status={status}
+        />
       </SafeAreaView>
 
       <GenericErrorBottomModal
@@ -162,18 +151,4 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
   },
   topContainer: { paddingHorizontal: 32 },
-  bottomWrapper: {
-    alignSelf: "stretch",
-    alignItems: "center",
-    justifyContent: "flex-end",
-  },
-  continueWrapper: {
-    alignSelf: "stretch",
-    alignItems: "stretch",
-    justifyContent: "flex-end",
-    paddingBottom: 16,
-  },
-  button: {},
 });
-
-export default translate()(SelectValidator);
