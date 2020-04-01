@@ -1502,6 +1502,14 @@
           "button": {
             "continue": "Cast Votes"
           }
+        },
+        "selectValidator": {
+          "sections": {
+            "title": {
+              "superRepresentatives": "Super representatives",
+              "candidates": "Candidates"
+            }
+          }
         }
       }
     },

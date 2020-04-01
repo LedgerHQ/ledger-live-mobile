@@ -103,7 +103,7 @@ export default function SelectValidator({ navigation }: Props) {
       <TrackScreen category="Vote" name="SelectValidator" />
 
       <SafeAreaView style={styles.root} forceInset={forceInset}>
-        <SelectValidatorMain />
+        <SelectValidatorMain transaction={transaction} />
 
         <SelectValidatorFooter
           bridgePending={bridgePending}
