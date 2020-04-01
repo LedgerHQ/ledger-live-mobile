@@ -4,12 +4,13 @@ import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTran
 import React, { useCallback } from "react";
 import { View, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-navigation";
-import { connect } from "react-redux";
-import { Trans } from "react-i18next";
+import { useSelector } from "react-redux";
+import { translate } from "react-i18next";
+import type { TFunction } from "react-i18next";
 import i18next from "i18next";
 
 import type { NavigationScreenProp } from "react-navigation";
-import type { Account, Transaction } from "@ledgerhq/live-common/lib/types";
+import type { Transaction } from "@ledgerhq/live-common/lib/types";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 
 import { accountAndParentScreenSelector } from "../../../reducers/accounts";
@@ -24,20 +25,24 @@ import GenericErrorBottomModal from "../../../components/GenericErrorBottomModal
 const forceInset = { bottom: "always" };
 
 type Props = {
-  account: Account,
   navigation: NavigationScreenProp<{
     params: {
       accountId: string,
       transaction: Transaction,
     },
   }>,
+  t: TFunction,
 };
 
-const SelectValidator = ({ account, navigation }: Props) => {
+function SelectValidator({ navigation, t }: Props) {
+  const { account } = useSelector(state =>
+    accountAndParentScreenSelector(state, { navigation }),
+  );
   invariant(
     account && account.tronResources,
     "account and tron resources required",
   );
+
   const bridge = getAccountBridge(account, undefined);
 
   const {
@@ -47,12 +52,12 @@ const SelectValidator = ({ account, navigation }: Props) => {
     bridgeError,
     bridgePending,
   } = useBridgeTransaction(() => {
-    const t = bridge.createTransaction(account);
+    const tx = bridge.createTransaction(account);
 
     const { tronResources } = account;
     const { votes } = tronResources;
 
-    const transaction = bridge.updateTransaction(t, {
+    const transaction = bridge.updateTransaction(tx, {
       mode: "vote",
       votes,
     });
@@ -105,15 +110,11 @@ const SelectValidator = ({ account, navigation }: Props) => {
             <Button
               event="SelectValidatorContinue"
               type="primary"
-              title={
-                <Trans
-                  i18nKey={
-                    !bridgePending
-                      ? "common.continue"
-                      : "vote.amount.loadingNetwork"
-                  }
-                />
-              }
+              title={t(
+                !bridgePending
+                  ? "common.continue"
+                  : "vote.amount.loadingNetwork",
+              )}
               onPress={onContinue}
               disabled={!!status.errors.amount || bridgePending}
               pending={bridgePending}
@@ -140,7 +141,7 @@ const SelectValidator = ({ account, navigation }: Props) => {
       />
     </>
   );
-};
+}
 
 SelectValidator.navigationOptions = {
   headerTitle: (
@@ -172,6 +173,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
     paddingBottom: 16,
   },
+  button: {},
 });
 
-export default connect(accountAndParentScreenSelector)(SelectValidator);
+export default translate()(SelectValidator);
