@@ -6,6 +6,8 @@ import { StyleSheet } from "react-native";
 import { SafeAreaView } from "react-navigation";
 import { useSelector } from "react-redux";
 import i18next from "i18next";
+import { translate } from "react-i18next";
+import type { TFunction } from "react-i18next";
 
 import type { NavigationScreenProp } from "react-navigation";
 import type { Transaction } from "@ledgerhq/live-common/lib/types";
@@ -24,9 +26,9 @@ import RetryButton from "../../../../components/RetryButton";
 import CancelButton from "../../../../components/CancelButton";
 import GenericErrorBottomModal from "../../../../components/GenericErrorBottomModal";
 import SelectValidatorMain from "./Main";
-import type { Section } from "./Main";
 import SelectValidatorFooter from "./Footer";
-import { getIsVoted } from "./utils";
+import { getIsVoted, SelectValidatorProvider } from "./utils";
+import type { Section } from "./utils";
 
 const forceInset = { bottom: "always" };
 
@@ -37,9 +39,10 @@ type Props = {
       transaction: Transaction,
     },
   }>,
+  t: TFunction,
 };
 
-export default function SelectValidator({ navigation }: Props) {
+function SelectValidator({ navigation, t }: Props) {
   const { account } = useSelector(state =>
     accountAndParentScreenSelector(state, { navigation }),
   );
@@ -151,38 +154,41 @@ export default function SelectValidator({ navigation }: Props) {
     <>
       <TrackScreen category="Vote" name="SelectValidator" />
 
-      <SafeAreaView style={styles.root} forceInset={forceInset}>
-        <SelectValidatorMain
-          sections={sections}
-          transaction={transaction}
-          onPress={onSelectSuperRepresentative}
-          onChangeSearchQuery={onChangeSearchQuery}
-        />
+      <SelectValidatorProvider
+        value={{
+          bridgePending,
+          onContinue,
+          onChangeSearchQuery,
+          onSelectSuperRepresentative,
+          searchQuery,
+          sections,
+          status,
+          transaction,
+          t,
+        }}
+      >
+        <SafeAreaView style={styles.root} forceInset={forceInset}>
+          <SelectValidatorMain />
+          <SelectValidatorFooter />
+        </SafeAreaView>
 
-        <SelectValidatorFooter
-          bridgePending={bridgePending}
-          onContinue={onContinue}
-          status={status}
-          transaction={transaction}
+        <GenericErrorBottomModal
+          error={bridgeError}
+          onClose={onBridgeErrorRetry}
+          footerButtons={
+            <>
+              <CancelButton
+                containerStyle={styles.button}
+                onPress={onBridgeErrorCancel}
+              />
+              <RetryButton
+                containerStyle={[styles.button, styles.buttonRight]}
+                onPress={onBridgeErrorRetry}
+              />
+            </>
+          }
         />
-      </SafeAreaView>
-
-      <GenericErrorBottomModal
-        error={bridgeError}
-        onClose={onBridgeErrorRetry}
-        footerButtons={
-          <>
-            <CancelButton
-              containerStyle={styles.button}
-              onPress={onBridgeErrorCancel}
-            />
-            <RetryButton
-              containerStyle={[styles.button, styles.buttonRight]}
-              onPress={onBridgeErrorRetry}
-            />
-          </>
-        }
-      />
+      </SelectValidatorProvider>
     </>
   );
 }
@@ -205,6 +211,8 @@ SelectValidator.navigationOptions = {
     borderBottomWidth: 0,
   },
 };
+
+export default translate()(SelectValidator);
 
 const styles = StyleSheet.create({
   root: {

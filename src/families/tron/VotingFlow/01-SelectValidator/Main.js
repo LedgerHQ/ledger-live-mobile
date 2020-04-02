@@ -1,8 +1,6 @@
 // @flow
 import { BigNumber } from "bignumber.js";
 import React from "react";
-import { translate } from "react-i18next";
-import type { TFunction } from "react-i18next";
 import { View, StyleSheet, TouchableOpacity, Platform } from "react-native";
 import { SectionList } from "react-navigation";
 import type { Transaction } from "@ledgerhq/live-common/lib/types";
@@ -12,37 +10,21 @@ import LText from "../../../../components/LText";
 import TextInput from "../../../../components/TextInput";
 import SearchIcon from "../../../../icons/Search";
 import Trophy from "../../../../icons/Trophy";
-import { getIsVoted } from "./utils";
+import { getIsVoted, useSelectValidatorContext } from "./utils";
 
-type Props = {
-  transaction: Transaction,
-  sections: Section[],
-  // eslint-disable-next-line spaced-comment
-  /** @TODO export data type from live-common **/
-  onPress: (item: any) => void,
-  onChangeSearchQuery: (searchQuery: string) => void,
-  t: TFunction,
-};
+export default function SelectValidatorMain() {
+  const {
+    onSelectSuperRepresentative,
+    sections,
+    transaction,
+    t,
+  } = useSelectValidatorContext();
 
-export type Section = {
-  type: "superRepresentatives" | "candidates",
-  // eslint-disable-next-line spaced-comment
-  /** @TODO export data type from live-common **/
-  data: any[],
-};
-
-function SelectValidatorMain({
-  transaction,
-  sections,
-  onPress,
-  onChangeSearchQuery,
-  t,
-}: Props) {
   return (
     <SectionList
       sections={sections}
       keyExtractor={({ address }, i) => address + i}
-      ListHeaderComponent={translate()(SelectValidatorMainHeader)}
+      ListHeaderComponent={SelectValidatorMainHeader}
       renderSectionHeader={({ section: { type } }) => (
         <View style={styles.sectionHeaderWrapper}>
           <LText style={styles.sectionHeaderText}>
@@ -55,7 +37,7 @@ function SelectValidatorMain({
 
         return (
           <TouchableOpacity
-            onPress={() => onPress(item)}
+            onPress={() => onSelectSuperRepresentative(item)}
             style={styles.wrapper}
           >
             <View style={styles.iconWrapper}>
@@ -90,11 +72,9 @@ function SelectValidatorMain({
   );
 }
 
-type SelectValidatorMainHeaderProps = {
-  t: TFunction,
-};
+function SelectValidatorMainHeader() {
+  const { searchQuery, onChangeSearchQuery, t } = useSelectValidatorContext();
 
-function SelectValidatorMainHeader({ t }: SelectValidatorMainHeaderProps) {
   return (
     <View style={styles.headerWrapper}>
       <View style={styles.searchBar}>
@@ -103,25 +83,20 @@ function SelectValidatorMainHeader({ t }: SelectValidatorMainHeaderProps) {
         </View>
 
         <TextInput
-          // ref={textInput}
           returnKeyType="search"
           maxLength={50}
-          // onChangeText={setQuery}
+          onChangeText={onChangeSearchQuery}
           clearButtonMode="always"
           style={[styles.searchBarText, styles.searchBarInput]}
           placeholder={t("common.search")}
           placeholderTextColor={colors.smoke}
-          // onInputCleared={clear}
-          // onFocus={onFocus}
-          // value={query}
+          value={searchQuery}
           numberOfLines={1}
         />
       </View>
     </View>
   );
 }
-
-export default translate()(SelectValidatorMain);
 
 const styles = StyleSheet.create({
   sectionHeaderWrapper: {

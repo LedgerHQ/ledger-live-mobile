@@ -1,28 +1,20 @@
 // @flow
 import React from "react";
 import { View, StyleSheet } from "react-native";
-import { translate } from "react-i18next";
-import type { TFunction } from "react-i18next";
-import type { Transaction } from "@ledgerhq/live-common/lib/types";
 import Button from "../../../../components/Button";
 import LText from "../../../../components/LText";
 import colors from "../../../../colors";
+import { useSelectValidatorContext } from "./utils";
 
-type Props = {
-  t: TFunction,
-  bridgePending: boolean,
-  onContinue: () => void,
-  status: any,
-  transaction: Transaction,
-};
+export default function SelectValidatorFooter() {
+  const {
+    bridgePending,
+    onContinue,
+    status,
+    t,
+    transaction,
+  } = useSelectValidatorContext();
 
-function SelectValidatorFooter({
-  t,
-  bridgePending,
-  onContinue,
-  status,
-  transaction,
-}: Props) {
   return (
     <View style={styles.wrapper}>
       <View style={styles.remainingWrapper}>
@@ -73,5 +65,3 @@ const styles = StyleSheet.create({
     color: colors.darkBlue,
   },
 });
-
-export default translate()(SelectValidatorFooter);
