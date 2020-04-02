@@ -24,9 +24,7 @@ function SelectValidatorFooter({
         <Button
           event="SelectValidatorContinue"
           type="primary"
-          title={t(
-            !bridgePending ? "common.continue" : "vote.amount.loadingNetwork",
-          )}
+          title={t(!bridgePending ? "common.continue" : "common.loading")}
           onPress={onContinue}
           disabled={!!status.errors.amount || bridgePending}
           pending={bridgePending}
