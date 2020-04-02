@@ -31,13 +31,11 @@ const FreezeInfo = ({ navigation }: Props) => {
   }, [navigation]);
 
   const onCancel = useCallback(() => {
-    // $FlowFixMe
-    navigation.pop();
+    navigation.goBack();
   }, [navigation]);
 
   const howVotingWorks = useCallback(() => {
-    /** @TODO get the correct support page link for the voting part */
-    Linking.openURL(urls.delegation);
+    Linking.openURL(urls.tronStaking);
   }, []);
 
   return (
