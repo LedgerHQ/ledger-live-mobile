@@ -11,9 +11,9 @@ export default function SelectValidatorFooter() {
     bridgePending,
     isSearchBoxFocused,
     onContinue,
+    remainingCount,
     status,
     t,
-    transaction,
   } = useSelectValidatorContext();
 
   if (isSearchBoxFocused) {
@@ -26,7 +26,7 @@ export default function SelectValidatorFooter() {
         <LText style={styles.remainingText}>
           {t("tron.voting.flow.selectValidator.footer.remaining")}{" "}
           <LText semiBold style={styles.remainingCount}>
-            {DEFAULT_REPRESENTATIVES_COUNT - (transaction.votes || []).length}
+            {remainingCount}
           </LText>
         </LText>
       </View>
@@ -44,8 +44,6 @@ export default function SelectValidatorFooter() {
     </View>
   );
 }
-
-const DEFAULT_REPRESENTATIVES_COUNT = 5;
 
 const styles = StyleSheet.create({
   wrapper: {

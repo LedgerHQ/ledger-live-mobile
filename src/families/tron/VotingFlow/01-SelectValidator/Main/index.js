@@ -15,6 +15,7 @@ export default function SelectValidatorMain() {
     onSelectSuperRepresentative,
     sections,
     transaction,
+    remainingCount,
     t,
   } = useSelectValidatorContext();
 
@@ -33,10 +34,13 @@ export default function SelectValidatorMain() {
         )}
         renderItem={({ item, index }) => {
           const { address, sr } = item;
+          const isVoted = getIsVoted(transaction, address);
+          const disabled = !isVoted && remainingCount <= 0;
 
           return (
             <TouchableOpacity
               onPress={() => onSelectSuperRepresentative(item)}
+              disabled={disabled}
               style={styles.wrapper}
             >
               <View style={styles.iconWrapper}>
@@ -62,7 +66,7 @@ export default function SelectValidatorMain() {
               </View>
 
               <View>
-                <CheckBox isChecked={getIsVoted(transaction, address)} />
+                <CheckBox isChecked={isVoted} disabled={disabled} />
               </View>
             </TouchableOpacity>
           );

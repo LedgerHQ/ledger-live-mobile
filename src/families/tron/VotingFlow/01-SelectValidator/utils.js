@@ -14,6 +14,7 @@ type SelectValidatorContextValue = {
   // eslint-disable-next-line spaced-comment
   /** @TODO export data type from live-common **/
   onSelectSuperRepresentative: (item: any) => void,
+  remainingCount: number,
   searchQuery: string,
   sections: Section[],
   setIsSearchBoxFocused: (focused: boolean) => void,

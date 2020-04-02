@@ -123,6 +123,9 @@ function SelectValidator({ navigation, t }: Props) {
     });
   }, [account, navigation, transaction, status]);
 
+  const remainingCount =
+    DEFAULT_REPRESENTATIVES_COUNT - transaction.votes.length;
+
   return (
     <>
       <TrackScreen category="Vote" name="SelectValidator" />
@@ -133,6 +136,7 @@ function SelectValidator({ navigation, t }: Props) {
           isSearchBoxFocused,
           onContinue,
           onSelectSuperRepresentative,
+          remainingCount,
           searchQuery,
           sections,
           setIsSearchBoxFocused,
@@ -150,6 +154,8 @@ function SelectValidator({ navigation, t }: Props) {
     </>
   );
 }
+
+const DEFAULT_REPRESENTATIVES_COUNT = 5;
 
 SelectValidator.navigationOptions = {
   headerTitle: (
