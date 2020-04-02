@@ -9,13 +9,13 @@ export function getIsVoted(transaction: Transaction, address: string) {
 
 type SelectValidatorContextValue = {
   bridgePending: boolean,
-  onChangeSearchQuery: (searchQuery: string) => void,
   onContinue: () => void,
   // eslint-disable-next-line spaced-comment
   /** @TODO export data type from live-common **/
   onSelectSuperRepresentative: (item: any) => void,
   searchQuery: string,
   sections: Section[],
+  setSearchQuery: (searchQuery: string) => void,
   status: any,
   t: TFunction,
   transaction: Transaction,

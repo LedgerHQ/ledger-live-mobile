@@ -76,9 +76,10 @@ function SelectValidator({ navigation, t }: Props) {
   invariant(transaction, "transaction is required");
   invariant(transaction.votes, "transaction.votes is required");
 
+  const [searchQuery, setSearchQuery] = useState("");
   const superRepresentatives = useTronSuperRepresentatives();
   const sortedSuperRepresentatives = useSortedSr(
-    "",
+    searchQuery,
     superRepresentatives,
     transaction.votes || [],
   );
@@ -107,11 +108,6 @@ function SelectValidator({ navigation, t }: Props) {
   //   },
   //   [setTransaction, transaction, bridge, defaultUnit],
   // );
-
-  const [searchQuery, setSearchQuery] = useState("");
-  const onChangeSearchQuery = useCallback(value => {
-    setSearchQuery(value);
-  }, []);
 
   const onSelectSuperRepresentative = useCallback(
     ({ address }) => {
@@ -158,10 +154,10 @@ function SelectValidator({ navigation, t }: Props) {
         value={{
           bridgePending,
           onContinue,
-          onChangeSearchQuery,
           onSelectSuperRepresentative,
           searchQuery,
           sections,
+          setSearchQuery,
           status,
           transaction,
           t,

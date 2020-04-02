@@ -73,7 +73,7 @@ export default function SelectValidatorMain() {
 }
 
 function SelectValidatorMainHeader() {
-  const { searchQuery, onChangeSearchQuery, t } = useSelectValidatorContext();
+  const { searchQuery, setSearchQuery, t } = useSelectValidatorContext();
 
   return (
     <View style={styles.headerWrapper}>
@@ -85,11 +85,12 @@ function SelectValidatorMainHeader() {
         <TextInput
           returnKeyType="search"
           maxLength={50}
-          onChangeText={onChangeSearchQuery}
+          onChangeText={setSearchQuery}
           clearButtonMode="always"
           style={[styles.searchBarText, styles.searchBarInput]}
           placeholder={t("common.search")}
           placeholderTextColor={colors.smoke}
+          onInputCleared={() => setSearchQuery("")}
           value={searchQuery}
           numberOfLines={1}
         />
