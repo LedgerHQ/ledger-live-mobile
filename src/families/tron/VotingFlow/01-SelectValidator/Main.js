@@ -3,7 +3,6 @@ import { BigNumber } from "bignumber.js";
 import React from "react";
 import { View, StyleSheet, TouchableOpacity, Platform } from "react-native";
 import { SectionList } from "react-navigation";
-import type { Transaction } from "@ledgerhq/live-common/lib/types";
 import colors from "../../../../colors";
 import CheckBox from "../../../../components/CheckBox";
 import LText from "../../../../components/LText";
