@@ -59,8 +59,7 @@
       "hours_plural": "in {{time}} hours",
       "days": "in one day",
       "days_plural": "in {{time}} days"
-    },
-    "loading": "Loading..."
+    }
   },
   "errors": {
     "AccountNameRequired": {

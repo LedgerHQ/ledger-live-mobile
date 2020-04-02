@@ -3,12 +3,14 @@ import { BigNumber } from "bignumber.js";
 import React from "react";
 import { translate } from "react-i18next";
 import type { TFunction } from "react-i18next";
-import { View, StyleSheet, TouchableOpacity } from "react-native";
+import { View, StyleSheet, TouchableOpacity, Platform } from "react-native";
 import { SectionList } from "react-navigation";
 import type { Transaction } from "@ledgerhq/live-common/lib/types";
 import colors from "../../../../colors";
 import CheckBox from "../../../../components/CheckBox";
 import LText from "../../../../components/LText";
+import TextInput from "../../../../components/TextInput";
+import SearchIcon from "../../../../icons/Search";
 import Trophy from "../../../../icons/Trophy";
 import { getIsVoted } from "./utils";
 
@@ -18,6 +20,7 @@ type Props = {
   // eslint-disable-next-line spaced-comment
   /** @TODO export data type from live-common **/
   onPress: (item: any) => void,
+  onChangeSearchQuery: (searchQuery: string) => void,
   t: TFunction,
 };
 
@@ -28,14 +31,21 @@ export type Section = {
   data: any[],
 };
 
-function SelectValidatorMain({ transaction, sections, onPress, t }: Props) {
+function SelectValidatorMain({
+  transaction,
+  sections,
+  onPress,
+  onChangeSearchQuery,
+  t,
+}: Props) {
   return (
     <SectionList
       sections={sections}
       keyExtractor={({ address }, i) => address + i}
+      ListHeaderComponent={translate()(SelectValidatorMainHeader)}
       renderSectionHeader={({ section: { type } }) => (
-        <View style={styles.headerWrapper}>
-          <LText style={styles.headerText}>
+        <View style={styles.sectionHeaderWrapper}>
+          <LText style={styles.sectionHeaderText}>
             {t(`tron.voting.flow.selectValidator.sections.title.${type}`)}
           </LText>
         </View>
@@ -80,16 +90,47 @@ function SelectValidatorMain({ transaction, sections, onPress, t }: Props) {
   );
 }
 
+type SelectValidatorMainHeaderProps = {
+  t: TFunction,
+};
+
+function SelectValidatorMainHeader({ t }: SelectValidatorMainHeaderProps) {
+  return (
+    <View style={styles.headerWrapper}>
+      <View style={styles.searchBar}>
+        <View style={styles.searchBarIcon}>
+          <SearchIcon size={16} color={colors.smoke} />
+        </View>
+
+        <TextInput
+          // ref={textInput}
+          returnKeyType="search"
+          maxLength={50}
+          // onChangeText={setQuery}
+          clearButtonMode="always"
+          style={[styles.searchBarText, styles.searchBarInput]}
+          placeholder={t("common.search")}
+          placeholderTextColor={colors.smoke}
+          // onInputCleared={clear}
+          // onFocus={onFocus}
+          // value={query}
+          numberOfLines={1}
+        />
+      </View>
+    </View>
+  );
+}
+
 export default translate()(SelectValidatorMain);
 
 const styles = StyleSheet.create({
-  headerWrapper: {
+  sectionHeaderWrapper: {
     paddingHorizontal: 16,
     height: 32,
     justifyContent: "center",
     backgroundColor: colors.lightGrey,
   },
-  headerText: {
+  sectionHeaderText: {
     color: colors.smoke,
   },
   wrapper: {
@@ -122,5 +163,44 @@ const styles = StyleSheet.create({
   },
   yieldText: {
     fontSize: 17,
+  },
+  headerWrapper: {
+    paddingHorizontal: 16,
+    paddingBottom: 14,
+    alignItems: "stretch",
+  },
+  searchBar: {
+    flexGrow: 1,
+    flexShrink: 1,
+    flexDirection: "row",
+    height: 44,
+    alignItems: "center",
+    justifyContent: "flex-start",
+    backgroundColor: colors.lightGrey,
+    borderRadius: 3,
+    paddingRight: Platform.OS === "ios" ? 0 : 44,
+  },
+  searchBarIcon: {
+    flexBasis: 44,
+    flexGrow: 0,
+    width: 44,
+    height: 44,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  searchBarInput: {
+    flexGrow: 1,
+    flexDirection: "row",
+    height: 44,
+    alignItems: "center",
+    justifyContent: "flex-start",
+    backgroundColor: colors.lightGrey,
+    borderRadius: 3,
+  },
+  searchBarText: {
+    flex: 1,
+    fontSize: 14,
+    lineHeight: 17,
+    color: colors.smoke,
   },
 });

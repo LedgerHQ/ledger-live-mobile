@@ -1,7 +1,7 @@
 /* @flow */
 import invariant from "invariant";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
-import React, { useCallback, useMemo } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import { StyleSheet } from "react-native";
 import { SafeAreaView } from "react-navigation";
 import { useSelector } from "react-redux";
@@ -18,6 +18,7 @@ import {
 import { accountAndParentScreenSelector } from "../../../../reducers/accounts";
 import colors from "../../../../colors";
 import { TrackScreen } from "../../../../analytics";
+import { defaultNavigationOptions } from "../../../../navigation/navigatorConfig";
 import StepHeader from "../../../../components/StepHeader";
 import RetryButton from "../../../../components/RetryButton";
 import CancelButton from "../../../../components/CancelButton";
@@ -104,6 +105,11 @@ export default function SelectValidator({ navigation }: Props) {
   //   [setTransaction, transaction, bridge, defaultUnit],
   // );
 
+  const [searchQuery, setSearchQuery] = useState("");
+  const onChangeSearchQuery = useCallback(value => {
+    setSearchQuery(value);
+  }, []);
+
   const onSelectSuperRepresentative = useCallback(
     ({ address }) => {
       const isVoted = getIsVoted(transaction, address);
@@ -150,6 +156,7 @@ export default function SelectValidator({ navigation }: Props) {
           sections={sections}
           transaction={transaction}
           onPress={onSelectSuperRepresentative}
+          onChangeSearchQuery={onChangeSearchQuery}
         />
 
         <SelectValidatorFooter
@@ -191,6 +198,12 @@ SelectValidator.navigationOptions = {
     />
   ),
   headerLeft: null,
+  headerStyle: {
+    ...defaultNavigationOptions.headerStyle,
+    elevation: 0,
+    shadowOpacity: 0,
+    borderBottomWidth: 0,
+  },
 };
 
 const styles = StyleSheet.create({
