@@ -988,10 +988,10 @@
   resolved "https://registry.yarnpkg.com/@ledgerhq/logs/-/logs-5.11.0.tgz#9ad2aefceeef48cf9d77972f67e63ba478dd04cc"
   integrity sha512-NiFDdxLU/z1VGQy0/cbpv7UScMDQ/rU8SznqILSHYTnhK2xvvNFTUkd1W2mpmf9E/hzXFI0UAOieLQ44qovX3w==
 
-"@ledgerhq/react-native-hid@5.12.0":
-  version "5.12.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/react-native-hid/-/react-native-hid-5.12.0.tgz#8377bc31f169c64d039cf61b58a4dae776db1d70"
-  integrity sha512-PVj3At+Mhjs0E+cmDcWcRciIrC3pDru7nU/2rI2BJsnriRRM4HISlLrTU5r8pqs/8KuXFm98Md1H4vo7Y+PBjw==
+"@ledgerhq/react-native-hid@5.12.3":
+  version "5.12.3"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/react-native-hid/-/react-native-hid-5.12.3.tgz#4794f524bf083e40937bf509c93ad48cc8187ec9"
+  integrity sha512-f6+2Be/rqdpICcSniSI6eyAkzNs2UkdCJP7sdXDdPsaJRXBA9zEmXdvySLRTulGM+PDmXemAP+jyKXNaScd3jA==
   dependencies:
     "@ledgerhq/devices" "^5.12.0"
     "@ledgerhq/errors" "^5.12.0"
