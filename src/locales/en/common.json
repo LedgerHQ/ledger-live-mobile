@@ -1151,7 +1151,7 @@
       "success": "Your votes were cast successfully",
       "info": "",
       "button": {}
-    },
+    }
   },
   "addAccounts": {
     "quitConfirmation": {
@@ -1510,6 +1510,9 @@
               "superRepresentatives": "Super representatives",
               "candidates": "Candidates"
             }
+          },
+          "footer": {
+            "remaining": "Representatives remaining: "
           }
         }
       }

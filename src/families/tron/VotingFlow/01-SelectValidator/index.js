@@ -156,6 +156,7 @@ export default function SelectValidator({ navigation }: Props) {
           bridgePending={bridgePending}
           onContinue={onContinue}
           status={status}
+          transaction={transaction}
         />
       </SafeAreaView>
 
