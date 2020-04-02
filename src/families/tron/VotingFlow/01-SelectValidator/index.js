@@ -22,9 +22,6 @@ import colors from "../../../../colors";
 import { TrackScreen } from "../../../../analytics";
 import { defaultNavigationOptions } from "../../../../navigation/navigatorConfig";
 import StepHeader from "../../../../components/StepHeader";
-import RetryButton from "../../../../components/RetryButton";
-import CancelButton from "../../../../components/CancelButton";
-import GenericErrorBottomModal from "../../../../components/GenericErrorBottomModal";
 import SelectValidatorMain from "./Main";
 import SelectValidatorFooter from "./Footer";
 import { getIsVoted, SelectValidatorProvider } from "./utils";
@@ -46,24 +43,21 @@ function SelectValidator({ navigation, t }: Props) {
   const { account } = useSelector(state =>
     accountAndParentScreenSelector(state, { navigation }),
   );
-  invariant(
-    account && account.tronResources,
-    "account and tron resources required",
-  );
+  invariant(account, "account and tron resources required");
 
   const bridge = getAccountBridge(account, undefined);
+  const { tronResources } = account;
+  invariant(tronResources, "Tron resources required");
+
+  const { votes, tronPower } = tronResources;
 
   const {
     transaction,
     status,
     setTransaction,
-    bridgeError,
     bridgePending,
   } = useBridgeTransaction(() => {
     const tx = bridge.createTransaction(account);
-
-    const { tronResources } = account;
-    const { votes } = tronResources;
 
     const transaction = bridge.updateTransaction(tx, {
       mode: "vote",
@@ -99,17 +93,6 @@ function SelectValidator({ navigation, t }: Props) {
     [sortedSuperRepresentatives],
   );
 
-  // const onChange = useCallback(
-  //   (address, vote) => {
-  //     setTransaction(
-  //       bridge.updateTransaction(transaction, {
-  //         amount: getDecimalPart(amount, defaultUnit.magnitude),
-  //       }),
-  //     );
-  //   },
-  //   [setTransaction, transaction, bridge, defaultUnit],
-  // );
-
   const onSelectSuperRepresentative = useCallback(
     ({ address }) => {
       const isVoted = getIsVoted(transaction, address);
@@ -125,27 +108,20 @@ function SelectValidator({ navigation, t }: Props) {
   );
 
   const onContinue = useCallback(() => {
+    const { votes } = transaction;
+    const tx =
+      votes.length === 1 && votes[0].voteCount === 0
+        ? bridge.updateTransaction(transaction, {
+            votes: [{ ...votes[0], voteCount: tronPower }],
+          })
+        : transaction;
+
     navigation.navigate("CastVote", {
       accountId: account.id,
-      transaction,
+      transaction: tx,
       status,
     });
   }, [account, navigation, transaction, status]);
-
-  const onBridgeErrorCancel = useCallback(() => {
-    const parent = navigation.dangerouslyGetParent();
-    if (parent) parent.goBack();
-  }, [navigation]);
-
-  const onBridgeErrorRetry = useCallback(() => {
-    if (!transaction) return;
-    setTransaction(bridge.updateTransaction(transaction, {}));
-  }, [setTransaction, transaction, bridge]);
-
-  if (!account || !transaction) return null;
-
-  // const error = bridgePending ? null : status.errors.votes;
-  // const warning = status.warnings.votes;
 
   return (
     <>
@@ -170,23 +146,6 @@ function SelectValidator({ navigation, t }: Props) {
           <SelectValidatorMain />
           <SelectValidatorFooter />
         </SafeAreaView>
-
-        <GenericErrorBottomModal
-          error={bridgeError}
-          onClose={onBridgeErrorRetry}
-          footerButtons={
-            <>
-              <CancelButton
-                containerStyle={styles.button}
-                onPress={onBridgeErrorCancel}
-              />
-              <RetryButton
-                containerStyle={[styles.button, styles.buttonRight]}
-                onPress={onBridgeErrorRetry}
-              />
-            </>
-          }
-        />
       </SelectValidatorProvider>
     </>
   );
