@@ -41,6 +41,7 @@ const styles = StyleSheet.create({
     alignSelf: "stretch",
     alignItems: "center",
     justifyContent: "flex-end",
+    padding: 16,
   },
   continueWrapper: {
     alignSelf: "stretch",

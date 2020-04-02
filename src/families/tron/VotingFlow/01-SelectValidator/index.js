@@ -1,8 +1,8 @@
 /* @flow */
 import invariant from "invariant";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
-import React, { useCallback } from "react";
-import { View, StyleSheet } from "react-native";
+import React, { useCallback, useMemo } from "react";
+import { StyleSheet } from "react-native";
 import { SafeAreaView } from "react-navigation";
 import { useSelector } from "react-redux";
 import i18next from "i18next";
@@ -10,6 +10,10 @@ import i18next from "i18next";
 import type { NavigationScreenProp } from "react-navigation";
 import type { Transaction } from "@ledgerhq/live-common/lib/types";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
+import {
+  useTronSuperRepresentatives,
+  useSortedSr,
+} from "@ledgerhq/live-common/lib/families/tron/react";
 
 import { accountAndParentScreenSelector } from "../../../../reducers/accounts";
 import colors from "../../../../colors";
@@ -19,7 +23,9 @@ import RetryButton from "../../../../components/RetryButton";
 import CancelButton from "../../../../components/CancelButton";
 import GenericErrorBottomModal from "../../../../components/GenericErrorBottomModal";
 import SelectValidatorMain from "./Main";
+import type { Section } from "./Main";
 import SelectValidatorFooter from "./Footer";
+import { getIsVoted } from "./utils";
 
 const forceInset = { bottom: "always" };
 
@@ -63,17 +69,54 @@ export default function SelectValidator({ navigation }: Props) {
     return { account, transaction };
   });
 
+  invariant(transaction, "transaction is required");
+  invariant(transaction.votes, "transaction.votes is required");
+
+  const superRepresentatives = useTronSuperRepresentatives();
+  const sortedSuperRepresentatives = useSortedSr(
+    "",
+    superRepresentatives,
+    transaction.votes || [],
+  );
+
+  const sections = useMemo<Section[]>(
+    () => [
+      {
+        type: "superRepresentatives",
+        data: sortedSuperRepresentatives.filter(({ isSR }) => isSR),
+      },
+      {
+        type: "candidates",
+        data: sortedSuperRepresentatives.filter(({ isSR }) => !isSR),
+      },
+    ],
+    [sortedSuperRepresentatives],
+  );
+
   // const onChange = useCallback(
   //   (address, vote) => {
-  //     /** @TODO update vote transaction */
-  //     // setTransaction(
-  //     //   bridge.updateTransaction(transaction, {
-  //     //     amount: getDecimalPart(amount, defaultUnit.magnitude),
-  //     //   }),
-  //     // );
+  //     setTransaction(
+  //       bridge.updateTransaction(transaction, {
+  //         amount: getDecimalPart(amount, defaultUnit.magnitude),
+  //       }),
+  //     );
   //   },
   //   [setTransaction, transaction, bridge, defaultUnit],
   // );
+
+  const onSelectSuperRepresentative = useCallback(
+    ({ address }) => {
+      const isVoted = getIsVoted(transaction, address);
+      const newVotes = isVoted
+        ? transaction.votes.filter(v => v.address !== address)
+        : [...transaction.votes, { address, voteCount: 0 }];
+      const tx = bridge.updateTransaction(transaction, {
+        votes: newVotes,
+      });
+      setTransaction(tx);
+    },
+    [transaction],
+  );
 
   const onContinue = useCallback(() => {
     navigation.navigate("CastVote", {
@@ -103,7 +146,11 @@ export default function SelectValidator({ navigation }: Props) {
       <TrackScreen category="Vote" name="SelectValidator" />
 
       <SafeAreaView style={styles.root} forceInset={forceInset}>
-        <SelectValidatorMain transaction={transaction} />
+        <SelectValidatorMain
+          sections={sections}
+          transaction={transaction}
+          onPress={onSelectSuperRepresentative}
+        />
 
         <SelectValidatorFooter
           bridgePending={bridgePending}

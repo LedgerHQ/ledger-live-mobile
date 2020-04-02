@@ -1,62 +1,34 @@
 // @flow
 import { BigNumber } from "bignumber.js";
-import invariant from "invariant";
-import React, { useCallback, useMemo, useState } from "react";
+import React from "react";
 import { translate } from "react-i18next";
 import type { TFunction } from "react-i18next";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { SectionList } from "react-navigation";
-import {
-  useTronSuperRepresentatives,
-  useSortedSr,
-} from "@ledgerhq/live-common/lib/families/tron/react";
 import type { Transaction } from "@ledgerhq/live-common/lib/types";
-import colors, { lighten } from "../../../../colors";
+import colors from "../../../../colors";
 import CheckBox from "../../../../components/CheckBox";
 import LText from "../../../../components/LText";
 import Trophy from "../../../../icons/Trophy";
+import { getIsVoted } from "./utils";
 
 type Props = {
   transaction: Transaction,
+  sections: Section[],
+  // eslint-disable-next-line spaced-comment
+  /** @TODO export data type from live-common **/
+  onPress: (item: any) => void,
   t: TFunction,
 };
 
-function SelectValidatorMain({ transaction, t }: Props) {
-  invariant(transaction, "transaction is required");
+export type Section = {
+  type: "superRepresentatives" | "candidates",
+  // eslint-disable-next-line spaced-comment
+  /** @TODO export data type from live-common **/
+  data: any[],
+};
 
-  const superRepresentatives = useTronSuperRepresentatives();
-  const sortedSuperRepresentatives = useSortedSr(
-    "",
-    superRepresentatives,
-    transaction.votes || [],
-  );
-
-  const sections = useMemo(
-    () => [
-      {
-        type: "superRepresentatives",
-        data: sortedSuperRepresentatives.filter(({ isSR }) => isSR),
-      },
-      {
-        type: "candidates",
-        data: sortedSuperRepresentatives.filter(({ isSR }) => !isSR),
-      },
-    ],
-    [sortedSuperRepresentatives],
-  );
-
-  const [selected, setSelected] = useState<{
-    [address: string]: true,
-  }>({});
-
-  const onPressItemCreator = useCallback(
-    ({ address }) => () => {
-      const isSelected = !!selected[address];
-      setSelected({ ...selected, [address]: isSelected ? undefined : true });
-    },
-    [selected],
-  );
-
+function SelectValidatorMain({ transaction, sections, onPress, t }: Props) {
   return (
     <SectionList
       sections={sections}
@@ -69,11 +41,11 @@ function SelectValidatorMain({ transaction, t }: Props) {
         </View>
       )}
       renderItem={({ item, index }) => {
-        const { sr } = item;
+        const { address, sr } = item;
 
         return (
           <TouchableOpacity
-            onPress={onPressItemCreator(item)}
+            onPress={() => onPress(item)}
             style={styles.wrapper}
           >
             <View style={styles.iconWrapper}>
@@ -99,7 +71,7 @@ function SelectValidatorMain({ transaction, t }: Props) {
             </View>
 
             <View>
-              <CheckBox isChecked={!!selected[sr.address]} />
+              <CheckBox isChecked={getIsVoted(transaction, address)} />
             </View>
           </TouchableOpacity>
         );
