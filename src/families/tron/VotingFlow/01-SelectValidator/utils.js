@@ -9,12 +9,14 @@ export function getIsVoted(transaction: Transaction, address: string) {
 
 type SelectValidatorContextValue = {
   bridgePending: boolean,
+  isSearchBoxFocused: boolean,
   onContinue: () => void,
   // eslint-disable-next-line spaced-comment
   /** @TODO export data type from live-common **/
   onSelectSuperRepresentative: (item: any) => void,
   searchQuery: string,
   sections: Section[],
+  setIsSearchBoxFocused: (focused: boolean) => void,
   setSearchQuery: (searchQuery: string) => void,
   status: any,
   t: TFunction,

@@ -9,11 +9,16 @@ import { useSelectValidatorContext } from "./utils";
 export default function SelectValidatorFooter() {
   const {
     bridgePending,
+    isSearchBoxFocused,
     onContinue,
     status,
     t,
     transaction,
   } = useSelectValidatorContext();
+
+  if (isSearchBoxFocused) {
+    return null;
+  }
 
   return (
     <View style={styles.wrapper}>

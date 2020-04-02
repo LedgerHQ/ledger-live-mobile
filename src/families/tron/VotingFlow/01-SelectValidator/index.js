@@ -76,6 +76,7 @@ function SelectValidator({ navigation, t }: Props) {
   invariant(transaction, "transaction is required");
   invariant(transaction.votes, "transaction.votes is required");
 
+  const [isSearchBoxFocused, setIsSearchBoxFocused] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const superRepresentatives = useTronSuperRepresentatives();
   const sortedSuperRepresentatives = useSortedSr(
@@ -153,10 +154,12 @@ function SelectValidator({ navigation, t }: Props) {
       <SelectValidatorProvider
         value={{
           bridgePending,
+          isSearchBoxFocused,
           onContinue,
           onSelectSuperRepresentative,
           searchQuery,
           sections,
+          setIsSearchBoxFocused,
           setSearchQuery,
           status,
           transaction,
