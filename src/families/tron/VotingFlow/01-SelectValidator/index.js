@@ -128,7 +128,7 @@ function SelectValidator({ navigation, t }: Props) {
       transaction: tx,
       status,
     });
-  }, [account, navigation, transaction, status]);
+  }, [account, navigation, transaction, status, tronPower, bridge]);
 
   const remainingCount =
     DEFAULT_REPRESENTATIVES_COUNT - transaction.votes.length;
