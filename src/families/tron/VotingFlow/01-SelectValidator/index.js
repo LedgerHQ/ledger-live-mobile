@@ -85,7 +85,11 @@ function SelectValidator({ navigation, t }: Props) {
   );
 
   const sections = useMemo<Section[]>(() => {
-    if (!transaction.votes.length) {
+    const selected = sortedSuperRepresentatives.filter(({ address }) =>
+      getIsVoted(transaction, address),
+    );
+
+    if (!selected.length) {
       return [
         {
           type: "superRepresentatives",
@@ -101,9 +105,7 @@ function SelectValidator({ navigation, t }: Props) {
     return [
       {
         type: "selected",
-        data: sortedSuperRepresentatives.filter(({ address }) =>
-          getIsVoted(transaction, address),
-        ),
+        data: selected,
       },
       {
         type: "superRepresentatives",

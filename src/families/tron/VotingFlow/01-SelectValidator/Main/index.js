@@ -24,25 +24,23 @@ export default function SelectValidatorMain() {
         <SectionList
           sections={sections}
           keyExtractor={({ address }) => address}
-          renderSectionHeader={({ section: { type } }) => {
-            return (
+          renderSectionHeader={({ section: { type, data } }) =>
+            data.length ? (
               <View style={styles.sectionHeaderWrapper}>
                 <LText style={styles.sectionHeaderText}>
                   {t(`tron.voting.flow.selectValidator.sections.title.${type}`)}
                 </LText>
               </View>
-            );
-          }}
-          renderItem={({ item }) => {
-            return (
-              <Item
-                item={item}
-                transaction={transaction}
-                remainingCount={remainingCount}
-                onSelectSuperRepresentative={onSelectSuperRepresentative}
-              />
-            );
-          }}
+            ) : null
+          }
+          renderItem={({ item }) => (
+            <Item
+              item={item}
+              transaction={transaction}
+              remainingCount={remainingCount}
+              onSelectSuperRepresentative={onSelectSuperRepresentative}
+            />
+          )}
         />
       </>
     ),
