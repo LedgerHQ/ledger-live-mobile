@@ -1,6 +1,5 @@
 /* @flow */
 import invariant from "invariant";
-import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
 import React, { useCallback, useMemo, useState } from "react";
 import { StyleSheet } from "react-native";
 import { SafeAreaView } from "react-navigation";
@@ -8,15 +7,14 @@ import { useSelector } from "react-redux";
 import i18next from "i18next";
 import { translate } from "react-i18next";
 import type { TFunction } from "react-i18next";
-
 import type { NavigationScreenProp } from "react-navigation";
-import type { Transaction } from "@ledgerhq/live-common/lib/types";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
+import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
+import type { Transaction } from "@ledgerhq/live-common/lib/types";
 import {
   useTronSuperRepresentatives,
   useSortedSr,
 } from "@ledgerhq/live-common/lib/families/tron/react";
-
 import { accountAndParentScreenSelector } from "../../../../reducers/accounts";
 import colors from "../../../../colors";
 import { TrackScreen } from "../../../../analytics";
@@ -86,19 +84,41 @@ function SelectValidator({ navigation, t }: Props) {
     transaction.votes || [],
   );
 
-  const sections = useMemo<Section[]>(
-    () => [
+  const sections = useMemo<Section[]>(() => {
+    if (!transaction.votes.length) {
+      return [
+        {
+          type: "superRepresentatives",
+          data: sortedSuperRepresentatives.filter(({ isSR }) => isSR),
+        },
+        {
+          type: "candidates",
+          data: sortedSuperRepresentatives.filter(({ isSR }) => !isSR),
+        },
+      ];
+    }
+
+    return [
+      {
+        type: "selected",
+        data: sortedSuperRepresentatives.filter(({ address }) =>
+          getIsVoted(transaction, address),
+        ),
+      },
       {
         type: "superRepresentatives",
-        data: sortedSuperRepresentatives.filter(({ isSR }) => isSR),
+        data: sortedSuperRepresentatives.filter(
+          ({ address, isSR }) => !getIsVoted(transaction, address) && isSR,
+        ),
       },
       {
         type: "candidates",
-        data: sortedSuperRepresentatives.filter(({ isSR }) => !isSR),
+        data: sortedSuperRepresentatives.filter(
+          ({ address, isSR }) => !getIsVoted(transaction, address) && !isSR,
+        ),
       },
-    ],
-    [sortedSuperRepresentatives],
-  );
+    ];
+  }, [sortedSuperRepresentatives, transaction]);
 
   const onSelectSuperRepresentative = useCallback(
     ({ address }) => {

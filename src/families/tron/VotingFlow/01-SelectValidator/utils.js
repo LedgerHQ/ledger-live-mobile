@@ -22,7 +22,7 @@ type SelectValidatorContextValue = {
 };
 
 export type Section = {
-  type: "superRepresentatives" | "candidates",
+  type: "selected" | "superRepresentatives" | "candidates",
   data: Item[],
 };
 
