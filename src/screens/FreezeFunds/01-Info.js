@@ -51,6 +51,7 @@ const FreezeInfo = ({ navigation }: Props) => {
         </LText>
         <BulletList
           style={{ paddingHorizontal: 16 }}
+          itemContainerStyle={{ height: 48 }}
           Bullet={BulletGreenCheck}
           list={[
             <Trans i18nKey="freeze.info.steps.0" />,
