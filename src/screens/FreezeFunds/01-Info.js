@@ -87,6 +87,7 @@ const FreezeInfo = ({ navigation }: Props) => {
           title={<Trans i18nKey="common.cancel" />}
           type="secondary"
           outline={false}
+          containerStyle={styles.buttonContainer}
         />
       </View>
     </SafeAreaView>
@@ -143,6 +144,9 @@ const styles = StyleSheet.create({
   },
   footer: {
     padding: 16,
+  },
+  buttonContainer: {
+    marginTop: 4,
   },
 });
 
