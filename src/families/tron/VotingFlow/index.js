@@ -15,13 +15,6 @@ import VoteValidationSuccess from "./04-ValidationSuccess";
 
 const VoteFlow = createStackNavigator(
   {
-    VoteStarted: {
-      // $FlowFixMe
-      screen: VoteStarted,
-      navigationOptions: {
-        title: i18next.t("tron.voting.flow.started.title"),
-      },
-    },
     // $FlowFixMe
     VoteSelectValidator,
     CastVote,
@@ -29,6 +22,13 @@ const VoteFlow = createStackNavigator(
     VoteValidation,
     VoteValidationError,
     VoteValidationSuccess,
+    VoteStarted: {
+      // $FlowFixMe
+      screen: VoteStarted,
+      navigationOptions: {
+        title: i18next.t("tron.voting.flow.started.title"),
+      },
+    },
   },
   closableStackNavigatorConfig,
 );
