@@ -115,13 +115,6 @@ const Delegation = ({ account, parentAccount, navigation }: Props) => {
     [accountId, navigation, parentId],
   );
 
-  const onManageVotes = useCallback(() => {
-    navigation.navigate("CastVote", {
-      accountId,
-      parentId,
-    });
-  }, [navigation, accountId, parentId]);
-
   const onDelegate = useCallback(() => {
     const screenName = lastVotedDate ? "VoteSelectValidator" : "VoteStarted";
     navigation.navigate(screenName, {
@@ -181,7 +174,7 @@ const Delegation = ({ account, parentAccount, navigation }: Props) => {
       {tronPower > 0 ? (
         formattedVotes.length > 0 ? (
           <>
-            <Header count={formattedVotes.length} onPress={onManageVotes} />
+            <Header count={formattedVotes.length} onPress={onDelegate} />
             <View style={[styles.container, styles.noPadding]}>
               {formattedVotes.map(
                 ({ validator, address, voteCount, isSR }, index) => (
