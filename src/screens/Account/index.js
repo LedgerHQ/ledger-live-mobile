@@ -155,12 +155,12 @@ export default function AccountScreen({ navigation, route }: Props) {
         <View style={styles.balanceContainer}>
           {items[0] ? (
             <LText style={styles.balanceText} tertiary>
-              <CurrencyUnitValue {...items[0]} />
+              <CurrencyUnitValue {...items[0]} disableRounding />
             </LText>
           ) : null}
           {items[1] ? (
             <LText style={styles.balanceSubText} tertiary>
-              <CurrencyUnitValue {...items[1]} />
+              <CurrencyUnitValue {...items[1]} disableRounding />
             </LText>
           ) : null}
         </View>

@@ -257,7 +257,7 @@
       "title": "Insufficient balance in parent account"
     },
     "NotEnoughSpendableBalance": {
-      "title": "Insufficient balance for this operation"
+      "title": "Balance cannot get below {{minimumAmount}}"
     },
     "NotEnoughBalanceBecauseDestinationNotCreated": {
       "title": "Minimum of {{minimalAmount}} required to activate recipient address"
@@ -340,6 +340,9 @@
     "TronTransactionExpired": {
       "title": "Transaction has expired",
       "description": "Signature must be applied within 30 seconds. Please try again."
+    },
+    "TronNotEnoughEnergy": {
+      "title": "Not enough Energy to send this token"
     },
     "UpdateYourApp": {
       "title": "App update required",
@@ -1580,7 +1583,7 @@
       "manageVotes": "Manage votes",
       "remainingVotes": {
         "title": "You still have votes remaining",
-        "description": "Cast your remaining votes to earn more XTZ"
+        "description": "Cast your remaining votes to earn more rewards"
       },
       "flow": {
         "started": {

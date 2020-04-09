@@ -5,6 +5,11 @@ import { useSelector } from "react-redux";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/dist/FontAwesome";
 
+import {
+  getDefaultExplorerView,
+  getAccountContractExplorer,
+} from "@ledgerhq/live-common/lib/explorers";
+import { getMainAccount } from "@ledgerhq/live-common/lib/account/helpers";
 import { NavigatorName, ScreenName } from "../../const";
 import { accountScreenSelector } from "../../reducers/accounts";
 import Touchable from "../../components/Touchable";
@@ -37,6 +42,15 @@ export default function AccountHeaderRight() {
   if (!account) return null;
 
   if (account.type === "TokenAccount" && parentAccount) {
+    const mainAccount = getMainAccount(account, parentAccount);
+    const explorerView = getDefaultExplorerView(mainAccount.currency);
+
+    const url = getAccountContractExplorer(
+      explorerView,
+      account,
+      parentAccount,
+    );
+
     return (
       <>
         <Touchable event="ShowContractAddress" onPress={toggleModal}>
@@ -45,7 +59,7 @@ export default function AccountHeaderRight() {
           </View>
         </Touchable>
         {isOpened ? (
-          isShowingContract ? (
+          isShowingContract && url ? (
             <BottomModal
               id="ContractAddress"
               isOpened={isOpened}
@@ -54,15 +68,15 @@ export default function AccountHeaderRight() {
             >
               <TokenContractAddress
                 account={account}
-                parentAccount={parentAccount}
                 onClose={closeModal}
+                url={url}
               />
             </BottomModal>
           ) : (
             <BlacklistTokenModal
               isOpened={isOpened}
               onClose={closeModal}
-              onShowContract={setIsShowingContract}
+              onShowContract={url ? setIsShowingContract : null}
               token={account.token}
             />
           )
