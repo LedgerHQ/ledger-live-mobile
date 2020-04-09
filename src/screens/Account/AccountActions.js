@@ -36,8 +36,6 @@ export default function AccountActions({ account, parentAccount }: Props) {
   const ReceiveAction =
     (decorators && decorators.ReceiveAction) || ReceiveActionDefault;
 
-  const ManageAction = (decorators && decorators.ManageAction) || null;
-
   const onNavigate = useCallback(
     (name: string, params?: { screen: string }) => {
       navigation.navigate(name, {
@@ -48,6 +46,17 @@ export default function AccountActions({ account, parentAccount }: Props) {
     },
     [accountId, navigation, parentId],
   );
+
+  const manageAction =
+    (decorators &&
+      decorators.getManageAction &&
+      decorators.getManageAction({
+        account,
+        parentAccount,
+        onNavigate,
+        style: styles.scrollBtn,
+      })) ||
+    null;
 
   const onSend = useCallback(() => {
     onNavigate(NavigatorName.SendFunds, {
@@ -61,8 +70,8 @@ export default function AccountActions({ account, parentAccount }: Props) {
     });
   }, [onNavigate]);
 
-  const Container = ManageAction ? ScrollViewContainer : View;
-  const btnStyle = ManageAction ? styles.scrollBtn : styles.btn;
+  const Container = manageAction ? ScrollViewContainer : View;
+  const btnStyle = manageAction ? styles.scrollBtn : styles.btn;
 
   return (
     <Container style={styles.root}>
@@ -80,14 +89,7 @@ export default function AccountActions({ account, parentAccount }: Props) {
         style={[btnStyle]}
         onPress={onReceive}
       />
-      {ManageAction && (
-        <ManageAction
-          account={account}
-          parentAccount={parentAccount}
-          onNavigate={onNavigate}
-          style={[btnStyle]}
-        />
-      )}
+      {manageAction}
     </Container>
   );
 }
@@ -108,7 +110,6 @@ const styles = StyleSheet.create({
   root: {
     width: "100%",
     flexDirection: "row",
-    flexWrap: "wrap",
     paddingTop: 8,
     paddingBottom: 12,
     paddingHorizontal: 12,
