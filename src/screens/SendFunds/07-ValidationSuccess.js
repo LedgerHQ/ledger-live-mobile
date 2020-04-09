@@ -42,7 +42,10 @@ class ValidationSuccess extends Component<Props> {
     navigation.navigate(ScreenName.OperationDetails, {
       accountId: account.id,
       parentId: parentAccount && parentAccount.id,
-      operation: result,
+      operation:
+        result.subOperations && result.subOperations[0]
+          ? result.subOperations[0]
+          : result,
     });
   };
 
