@@ -1,21 +1,22 @@
 // @flow
 
 import React, { useContext, useEffect, useMemo, useState } from "react";
-import { useSelector } from "react-redux";
 import { RefreshControl } from "react-native";
-import type { BehaviorAction } from "../bridge/BridgeSyncContext";
-import { accountSyncStateSelector } from "../reducers/bridgeSync";
-import { BridgeSyncContext } from "../bridge/BridgeSyncContext";
+import {
+  useBridgeSync,
+  useAccountSyncState,
+} from "@ledgerhq/live-common/lib/bridge/react";
+import type { Sync } from "@ledgerhq/live-common/lib/bridge/react/types";
 import CounterValues from "../countervalues";
 import { SYNC_DELAY } from "../constants";
 
-interface Props {
-  error: ?Error;
-  isError: boolean;
-  accountId: string;
-  forwardedRef?: any;
-  provideSyncRefreshControlBehavior?: BehaviorAction;
-}
+type Props = {
+  error: ?Error,
+  isError: boolean,
+  accountId: string,
+  forwardedRef?: any,
+  provideSyncRefreshControlBehavior?: Sync,
+};
 
 export default (ScrollListLike: any) => {
   function Inner({
@@ -25,12 +26,9 @@ export default (ScrollListLike: any) => {
     forwardedRef,
     ...scrollListLikeProps
   }: Props) {
-    const setSyncBehavior = useContext(BridgeSyncContext);
+    const { pending: isPending } = useAccountSyncState({ accountId });
+    const setSyncBehavior = useBridgeSync();
     const { poll: cvPoll } = useContext(CounterValues.PollingContext);
-    const { pending: isPending } = useSelector(state =>
-      accountSyncStateSelector(state, { accountId }),
-    );
-
     const [lastClickTime, setLastClickTime] = useState(0);
     const [refreshing, setRefreshing] = useState(false);
 
@@ -62,11 +60,7 @@ export default (ScrollListLike: any) => {
     const isUserClick = useMemo(() => Date.now() - lastClickTime < 1000, [
       lastClickTime,
     ]);
-    const isLoading = useMemo(() => (isPending && isUserClick) || refreshing, [
-      isPending,
-      isUserClick,
-      refreshing,
-    ]);
+    const isLoading = (isPending && isUserClick) || refreshing;
 
     return (
       <ScrollListLike
@@ -79,6 +73,7 @@ export default (ScrollListLike: any) => {
     );
   }
 
+  // $FlowFixMe
   return React.forwardRef((prop, ref) => (
     <Inner {...prop} forwardedRef={ref} />
   ));

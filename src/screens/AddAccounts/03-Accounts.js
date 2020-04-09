@@ -3,7 +3,6 @@
 import React, { PureComponent, createRef, useEffect } from "react";
 import { concat, from } from "rxjs";
 import { ignoreElements } from "rxjs/operators";
-import { compose } from "redux";
 import { connect } from "react-redux";
 import {
   isAccountEmpty,
@@ -11,9 +10,8 @@ import {
 } from "@ledgerhq/live-common/lib/account";
 import { createStructuredSelector } from "reselect";
 import uniq from "lodash/uniq";
-import { withTranslation, Trans } from "react-i18next";
+import { Trans } from "react-i18next";
 import { StyleSheet, View } from "react-native";
-// $FlowFixMe
 import SafeAreaView from "react-native-safe-area-view";
 import type { CryptoCurrency, Account } from "@ledgerhq/live-common/lib/types";
 import { getCurrencyBridge } from "@ledgerhq/live-common/lib/bridge";
@@ -35,10 +33,11 @@ import CancelButton from "../../components/CancelButton";
 import GenericErrorBottomModal from "../../components/GenericErrorBottomModal";
 import NavigationScrollView from "../../components/NavigationScrollView";
 import { prepareCurrency } from "../../bridge/cache";
+import { blacklistedTokenIdsSelector } from "../../reducers/settings";
 
 const forceInset = { bottom: "always" };
 
-const SectionAccounts = ({ defaultSelected, ...rest }: *) => {
+const SectionAccounts = ({ defaultSelected, ...rest }: any) => {
   useEffect(() => {
     if (defaultSelected && rest.onSelectAll) {
       rest.onSelectAll(rest.accounts);
@@ -48,21 +47,22 @@ const SectionAccounts = ({ defaultSelected, ...rest }: *) => {
   return <SelectableAccountsList {...rest} />;
 };
 
-interface RouteParams {
-  currency: CryptoCurrency;
-  deviceId: string;
-}
+type RouteParams = {
+  currency: CryptoCurrency,
+  deviceId: string,
+};
 
-interface Props {
-  navigation: *;
-  route: { params: RouteParams };
+type Props = {
+  navigation: any,
+  route: { params: RouteParams },
   replaceAccounts: ({
     scannedAccounts: Account[],
     selectedIds: string[],
     renamings: { [id: string]: string },
-  }) => void;
-  existingAccounts: Account[];
-}
+  }) => void,
+  existingAccounts: Account[],
+  blacklistedTokenIds?: string[],
+};
 
 type State = {
   scanning: boolean,
@@ -74,6 +74,7 @@ type State = {
 
 const mapStateToProps = createStructuredSelector({
   existingAccounts: accountsSelector,
+  blacklistedTokenIds: blacklistedTokenIdsSelector,
 });
 
 const mapDispatchToProps = {
@@ -105,12 +106,14 @@ class AddAccountsAccounts extends PureComponent<Props, State> {
   };
 
   startSubscription = () => {
-    const { currency, deviceId } = this.props.route.params || {};
+    const { route, blacklistedTokenIds } = this.props;
+    const { currency, deviceId } = route.params || {};
     const bridge = getCurrencyBridge(currency);
     const syncConfig = {
-      // TODO later we need to paginate only a few ops, not all (for add accounts)
-      // paginationConfig will come from redux
-      paginationConfig: {},
+      paginationConfig: {
+        operation: 0,
+      },
+      blacklistedTokenIds,
     };
     this.scanSubscription = concat(
       from(prepareCurrency(currency)).pipe(ignoreElements()),
@@ -157,7 +160,7 @@ class AddAccountsAccounts extends PureComponent<Props, State> {
     this.startSubscription();
   };
 
-  stopSubscription = (syncUI = true) => {
+  stopSubscription = (syncUI?: boolean = true) => {
     if (this.scanSubscription) {
       this.scanSubscription.unsubscribe();
       this.scanSubscription = null;
@@ -171,7 +174,7 @@ class AddAccountsAccounts extends PureComponent<Props, State> {
     this.props.navigation.navigate(ScreenName.Accounts);
   };
 
-  scanSubscription: *;
+  scanSubscription: any;
 
   onPressAccount = (account: Account) => {
     const { selectedIds } = this.state;
@@ -182,12 +185,12 @@ class AddAccountsAccounts extends PureComponent<Props, State> {
     this.setState({ selectedIds: newSelectedIds });
   };
 
-  selectAll = accounts =>
+  selectAll = (accounts: Account[]) =>
     this.setState(({ selectedIds }) => ({
       selectedIds: uniq([...selectedIds, ...accounts.map(a => a.id)]),
     }));
 
-  unselectAll = accounts =>
+  unselectAll = (accounts: Account[]) =>
     this.setState(({ selectedIds }) => ({
       selectedIds: selectedIds.filter(id => !accounts.find(a => a.id === id)),
     }));
@@ -477,7 +480,8 @@ const styles = StyleSheet.create({
   },
 });
 
-export default compose(
-  withTranslation(),
-  connect(mapStateToProps, mapDispatchToProps),
+// $FlowFixMe
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
 )(AddAccountsAccounts);

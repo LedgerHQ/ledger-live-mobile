@@ -17,31 +17,40 @@ import { urls } from "../../config/urls";
 
 const forceInset = { bottom: "always" };
 
-const Disclaimer = ({ tokenName }: { tokenName: string }) => (
+const Disclaimer = ({
+  tokenName,
+  tokenType,
+}: {
+  tokenName: string,
+  tokenType: string,
+}) => (
   <View style={styles.disclaimer}>
     <Info size={18} color={colors.live} />
     <View style={styles.disclaimerTextWrapper}>
       <LText style={styles.disclaimerText}>
-        <Trans i18nKey="addAccounts.tokens.disclaimer" values={{ tokenName }} />
+        <Trans
+          i18nKey={`addAccounts.tokens.${tokenType}.disclaimer`}
+          values={{ tokenName }}
+        />
       </LText>
       <ExternalLink
         event="AddAccountsTokenDisclaimerLearnMore"
         color={colors.live}
-        text={<Trans i18nKey="addAccounts.tokens.learnMore" />}
-        onPress={() => Linking.openURL(urls.erc20)}
+        text={<Trans i18nKey={`addAccounts.tokens.${tokenType}.learnMore`} />}
+        onPress={() => Linking.openURL(urls.supportLinkByTokenType[tokenType])}
       />
     </View>
   </View>
 );
 
-interface RouteParams {
-  token: TokenCurrency;
-}
+type RouteParams = {
+  token: TokenCurrency,
+};
 
-interface Props {
-  navigation: *;
-  route: { params: RouteParams };
-}
+type Props = {
+  navigation: any,
+  route: { params: RouteParams },
+};
 
 export default function AddAccountsTokenCurrencyDisclaimer({
   navigation,
@@ -70,7 +79,7 @@ export default function AddAccountsTokenCurrencyDisclaimer({
         </LText>
       </View>
       <View style={styles.disclaimerWrapper}>
-        <Disclaimer tokenName={tokenName} />
+        <Disclaimer tokenName={tokenName} tokenType={token.tokenType} />
       </View>
       <View style={styles.buttonWrapper}>
         <Button

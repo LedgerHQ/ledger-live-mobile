@@ -21,32 +21,33 @@ import ArrowLeft from "../../icons/ArrowLeft";
 
 const forceInset = { bottom: "always" };
 
-interface RouteParams {
-  accountId: string;
-  operation: Operation;
-}
+type RouteParams = {
+  accountId: string,
+  operation: Operation,
+};
 
-interface Props {
-  navigation: *;
-  route: { params: RouteParams };
-}
+type Props = {
+  navigation: any,
+  route: { params: RouteParams },
+};
 
 export const BackButton = ({ navigation }: { navigation: Navigation }) => (
-  <TouchableOpacity style={{ padding: 16 }} onPress={() => navigation.goBack()}>
+  <TouchableOpacity style={styles.buttons} onPress={() => navigation.goBack()}>
     <ArrowLeft size={18} color={colors.grey} />
   </TouchableOpacity>
 );
 
 export const CloseButton = ({ navigation }: { navigation: Navigation }) => (
   <TouchableOpacity
+    // $FlowFixMe
     onPress={() => navigation.popToTop()}
-    style={{ padding: 16 }}
+    style={styles.buttons}
   >
     <Close size={18} color={colors.grey} />
   </TouchableOpacity>
 );
 
-export default function OperationDetails({ route, navigation }: Props) {
+export default function OperationDetails({ route }: Props) {
   const { account, parentAccount } = useSelector(accountScreenSelector(route));
   if (!account) return null;
   const operation = route.params?.operation;
@@ -70,7 +71,6 @@ export default function OperationDetails({ route, navigation }: Props) {
             account={account}
             parentAccount={parentAccount}
             operation={operation}
-            navigation={navigation}
           />
         </View>
       </NavigationScrollView>
@@ -87,5 +87,8 @@ const styles = StyleSheet.create({
   root: {
     paddingTop: 24,
     paddingBottom: 64,
+  },
+  buttons: {
+    padding: 16,
   },
 });

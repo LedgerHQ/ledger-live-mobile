@@ -1,7 +1,7 @@
 /* @flow */
 import { BigNumber } from "bignumber.js";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
-import React, { useCallback } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import {
   View,
   StyleSheet,
@@ -13,6 +13,7 @@ import SafeAreaView from "react-native-safe-area-view";
 import { useSelector } from "react-redux";
 import { Trans } from "react-i18next";
 import type { Transaction } from "@ledgerhq/live-common/lib/types";
+import { useDebounce } from "@ledgerhq/live-common/lib/hooks/useDebounce";
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { accountScreenSelector } from "../../reducers/accounts";
@@ -42,6 +43,8 @@ interface Props {
 
 export default function SendAmount({ navigation, route }: Props) {
   const { account, parentAccount } = useSelector(accountScreenSelector(route));
+  const [maxSpendable, setMaxSpendable] = useState(null);
+
   const {
     transaction,
     setTransaction,
@@ -53,6 +56,30 @@ export default function SendAmount({ navigation, route }: Props) {
     account,
     parentAccount,
   }));
+
+  const debouncedTransaction = useDebounce(transaction, 500);
+
+  useEffect(() => {
+    if (!account) return;
+
+    let cancelled = false;
+    getAccountBridge(account, parentAccount)
+      .estimateMaxSpendable({
+        account,
+        parentAccount,
+        transaction: debouncedTransaction,
+      })
+      .then(estimate => {
+        if (cancelled) return;
+
+        setMaxSpendable(estimate);
+      });
+
+    // eslint-disable-next-line consistent-return
+    return () => {
+      cancelled = true;
+    };
+  }, [account, parentAccount, debouncedTransaction]);
 
   const onChange = useCallback(
     amount => {
@@ -109,7 +136,7 @@ export default function SendAmount({ navigation, route }: Props) {
       <SafeAreaView style={styles.root} forceInset={forceInset}>
         <KeyboardView style={styles.container}>
           <TouchableWithoutFeedback onPress={blur}>
-            <View style={{ flex: 1 }}>
+            <View style={styles.amountWrapper}>
               <AmountInput
                 editable={!useAllAmount}
                 account={account}
@@ -134,7 +161,7 @@ export default function SendAmount({ navigation, route }: Props) {
                       <CurrencyUnitValue
                         showCode
                         unit={unit}
-                        value={account.balance}
+                        value={maxSpendable}
                       />
                     </LText>
                   </View>
@@ -144,7 +171,7 @@ export default function SendAmount({ navigation, route }: Props) {
                         <Trans i18nKey="send.amount.useMax" />
                       </LText>
                       <Switch
-                        style={{ opacity: 0.99 }}
+                        style={styles.switch}
                         value={useAllAmount}
                         onValueChange={toggleUseAllAmount}
                       />
@@ -166,7 +193,6 @@ export default function SendAmount({ navigation, route }: Props) {
                     }
                     onPress={onContinue}
                     disabled={!!status.errors.amount || bridgePending}
-                    pending={bridgePending}
                   />
                 </View>
               </View>
@@ -245,5 +271,11 @@ const styles = StyleSheet.create({
   },
   buttonRight: {
     marginLeft: 8,
+  },
+  amountWrapper: {
+    flex: 1,
+  },
+  switch: {
+    opacity: 0.99,
   },
 });

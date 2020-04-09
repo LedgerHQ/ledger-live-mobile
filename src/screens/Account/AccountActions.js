@@ -41,25 +41,30 @@ const AccountActions = ({
   const ReceiveAction =
     (decorators && decorators.ReceiveAction) || ReceiveActionDefault;
 
-  const onSend = useCallback(() => {
-    navigation.navigate(NavigatorName.SendFunds, {
-      screen: ScreenName.SendSelectRecipient,
-      params: {
+  const ManageAction = (decorators && decorators.ManageAction) || null;
+
+  const onNavigate = useCallback(
+    (name: string, params?: { screen: string }) => {
+      navigation.navigate(name, {
         accountId,
         parentId,
-      },
+        ...params,
+      });
+    },
+    [accountId, parentId, navigation],
+  );
+
+  const onSend = useCallback(() => {
+    onNavigate(NavigatorName.SendFunds, {
+      screen: ScreenName.SendSelectRecipient,
     });
-  }, [accountId, parentId, navigation]);
+  }, [onNavigate]);
 
   const onReceive = useCallback(() => {
-    navigation.navigate(NavigatorName.ReceiveFunds, {
+    onNavigate(NavigatorName.ReceiveFunds, {
       screen: ScreenName.ReceiveConnectDevice,
-      params: {
-        accountId,
-        parentId,
-      },
     });
-  }, [accountId, parentId, navigation]);
+  }, [onNavigate]);
 
   return (
     <View style={styles.root}>
@@ -77,6 +82,14 @@ const AccountActions = ({
         style={[styles.btn, !readOnlyModeEnabled ? styles.marginLeft : null]}
         onPress={onReceive}
       />
+      {ManageAction && (
+        <ManageAction
+          account={account}
+          parentAccount={parentAccount}
+          onNavigate={onNavigate}
+          style={[styles.btn, styles.manageAction]}
+        />
+      )}
     </View>
   );
 };
@@ -96,6 +109,9 @@ const styles = StyleSheet.create({
   },
   marginLeft: {
     marginLeft: 8,
+  },
+  manageAction: {
+    marginLeft: 16,
   },
 });
 

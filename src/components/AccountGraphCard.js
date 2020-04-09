@@ -46,6 +46,7 @@ type Props = {
   setSelectedTimeRange: string => void,
   useCounterValue?: boolean,
   renderTitle?: ({ counterValueUnit: Unit, item: Item }) => React$Node,
+  renderAccountSummary: () => ?React$Node,
 };
 
 type State = {
@@ -81,6 +82,7 @@ class AccountGraphCard extends PureComponent<Props, State> {
       renderTitle,
       useCounterValue,
       valueChange,
+      renderAccountSummary,
     } = this.props;
 
     const isAvailable = !useCounterValue || countervalueAvailable;
@@ -124,6 +126,9 @@ class AccountGraphCard extends PureComponent<Props, State> {
             items={this.timeRangeItems}
           />
         </View>
+        {renderAccountSummary && (
+          <View style={styles.accountSummary}>{renderAccountSummary()}</View>
+        )}
       </Card>
     );
   }
@@ -236,6 +241,13 @@ const styles = StyleSheet.create({
   pillsContainer: {
     marginTop: 16,
     alignItems: "center",
+  },
+  accountSummary: {
+    marginTop: 16,
+    alignItems: "center",
+    paddingHorizontal: 16,
+    flexDirection: "row",
+    overflow: "hidden",
   },
   deltaPercent: {
     marginRight: 20,

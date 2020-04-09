@@ -45,6 +45,7 @@ import SubAccountsList from "./SubAccountsList";
 import perFamilyAccountHeader from "../../generated/AccountHeader";
 import perFamilyAccountBodyHeader from "../../generated/AccountBodyHeader";
 import { useScrollToTop } from "../../navigation/utils";
+import perFamilyAccountBalanceSummaryFooter from "../../generated/AccountBalanceSummaryFooter";
 
 interface RouteParams {
   accountId: string;
@@ -110,6 +111,16 @@ export default function AccountScreen({ navigation, route }: Props) {
 
   function onSwitchAccountCurrency(): void {
     dispatch(switchCountervalueFirst());
+  }
+
+  function renderAccountSummary() {
+    const mainAccount = getMainAccount(account, parentAccount);
+    const AccountBalanceSummaryFooter =
+      perFamilyAccountBalanceSummaryFooter[mainAccount.currency.family];
+
+    if (AccountBalanceSummaryFooter)
+      return <AccountBalanceSummaryFooter account={account} />;
+    return null;
   }
 
   function renderListHeaderTitle({
@@ -195,6 +206,7 @@ export default function AccountScreen({ navigation, route }: Props) {
             countervalueAvailable={countervalueAvailable}
             counterValueCurrency={counterValueCurrency}
             renderTitle={renderListHeaderTitle}
+            renderAccountSummary={renderAccountSummary}
           />
         )}
         {empty ? null : (

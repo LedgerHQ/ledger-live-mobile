@@ -31,7 +31,6 @@ import GraphCardContainer from "./GraphCardContainer";
 import StickyHeader from "./StickyHeader";
 import EmptyStatePortfolio from "./EmptyStatePortfolio";
 import extraStatusBarPadding from "../../logic/extraStatusBarPadding";
-import SyncBackground from "../../bridge/SyncBackground";
 import TrackScreen from "../../analytics/TrackScreen";
 import NoOpStatePortfolio from "./NoOpStatePortfolio";
 import NoOperationFooter from "../../components/NoOperationFooter";
@@ -137,7 +136,6 @@ export default function PortfolioScreen({ navigation }: Props) {
         portfolio={portfolio}
         counterValueCurrency={counterValueCurrency}
       />
-      <SyncBackground />
 
       <RequireTerms />
 
@@ -155,7 +153,6 @@ export default function PortfolioScreen({ navigation }: Props) {
           onEndReached={onEndReached}
           stickySectionHeadersEnabled={false}
           showsVerticalScrollIndicator={false}
-          scrollEventThrottle={16}
           onScroll={Animated.event([
             { nativeEvent: { contentOffset: { y: scrollY } } },
           ])}

@@ -1,54 +1,55 @@
 // @flow
 
-import React, { PureComponent } from "react";
+import React from "react";
 import { StyleSheet } from "react-native";
-import { withTranslation } from "react-i18next";
+import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import BottomModal from "../BottomModal";
 import Close from "../../icons/Close";
 import Touchable from "../Touchable";
 import colors from "../../colors";
-import type { Step, DeviceMeta } from "./types";
+import type { Step } from "./types";
 import type { DeviceNames } from "../../screens/Onboarding/types";
 import { ErrorFooterGeneric, RenderError } from "./StepRenders";
 
-class SelectDeviceConnectModal extends PureComponent<{
-  meta: ?DeviceMeta,
+type Props = {
+  meta: ?Device,
   onClose: () => void,
   onRetry: () => void,
   onStepDone: () => void,
   step: Step,
   error: ?Error,
   deviceModelId: DeviceNames,
-}> {
-  render() {
-    const { meta, onClose, onRetry, onStepDone, error, step } = this.props;
+};
 
-    return (
-      <BottomModal
-        id="DeviceJobModal"
-        isOpened={!!meta}
-        onClose={onClose}
-        preventBackdropClick={error ? undefined : true}
-      >
-        {error ? (
-          <RenderError
-            error={error}
-            onRetry={onRetry}
-            Footer={step.ErrorFooter || ErrorFooterGeneric}
-          />
-        ) : meta ? (
-          <step.Body meta={meta} step={step} onDone={onStepDone} />
-        ) : null}
-        <Touchable
-          event="DeviceJobClose"
-          style={styles.close}
-          onPress={onClose}
-        >
-          <Close color={colors.fog} size={20} />
-        </Touchable>
-      </BottomModal>
-    );
-  }
+export default function SelectDeviceConnectModal({
+  meta,
+  onClose,
+  onRetry,
+  onStepDone,
+  error,
+  step,
+}: Props) {
+  return (
+    <BottomModal
+      id="DeviceJobModal"
+      isOpened={!!meta}
+      onClose={onClose}
+      preventBackdropClick={error ? undefined : true}
+    >
+      {error ? (
+        <RenderError
+          error={error}
+          onRetry={onRetry}
+          Footer={step.ErrorFooter || ErrorFooterGeneric}
+        />
+      ) : meta ? (
+        <step.Body meta={meta} step={step} onDone={onStepDone} />
+      ) : null}
+      <Touchable event="DeviceJobClose" style={styles.close} onPress={onClose}>
+        <Close color={colors.fog} size={20} />
+      </Touchable>
+    </BottomModal>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -80,5 +81,3 @@ const styles = StyleSheet.create({
     alignSelf: "stretch",
   },
 });
-
-export default withTranslation()(SelectDeviceConnectModal);

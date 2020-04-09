@@ -3,25 +3,26 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import type { Portfolio, Currency } from "@ledgerhq/live-common/lib/types";
-import AnimatedTopBar from "./AnimatedTopBar";
+import { useGlobalSyncState } from "@ledgerhq/live-common/lib/bridge/react";
 import { isUpToDateSelector } from "../../reducers/accounts";
-import { globalSyncStateSelector } from "../../reducers/bridgeSync";
 import { networkErrorSelector } from "../../reducers/appstate";
+import AnimatedTopBar from "./AnimatedTopBar";
 
-interface Props {
-  portfolio: Portfolio;
-  counterValueCurrency: Currency;
-  scrollY: *;
-}
+type Props = {
+  portfolio: Portfolio,
+  counterValueCurrency: Currency,
+  scrollY: any,
+};
 
 export default function StickyHeader({
   scrollY,
   counterValueCurrency,
   portfolio,
 }: Props) {
-  const networkError = useSelector(networkErrorSelector);
-  const globalSyncState = useSelector(globalSyncStateSelector);
   const isUpToDate = useSelector(isUpToDateSelector);
+  const networkError = useSelector(networkErrorSelector);
+  const globalSyncState = useGlobalSyncState();
+
   return (
     <AnimatedTopBar
       scrollY={scrollY}

@@ -16,12 +16,12 @@ import HeaderErrorTitle from "../../components/HeaderErrorTitle";
 import HeaderSynchronizing from "../../components/HeaderSynchronizing";
 import { headerPressSubject } from "../../navigation/utils";
 
-interface Props {
-  scrollY: AnimatedValue;
-  portfolio: Portfolio;
-  counterValueCurrency: Currency;
-  pending: boolean;
-  error: ?Error;
+type Props = {
+  scrollY: AnimatedValue,
+  portfolio: Portfolio,
+  counterValueCurrency: Currency,
+  pending: boolean,
+  error: ?Error,
 }
 
 const { call, cond, interpolate, lessThan, useCode } = Animated;

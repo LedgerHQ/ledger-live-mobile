@@ -1,24 +1,27 @@
 // @flow
 
 import React, { useCallback, useState, useMemo } from "react";
-import { compose } from "redux";
 import { Trans } from "react-i18next";
 import take from "lodash/take";
 import { Platform, StyleSheet, View, FlatList } from "react-native";
-// !! Using nested list via react-navigation prompts some ui warnings some investigating needed to fully resolve this issue !!
-import { withNavigation } from "@react-navigation/compat";
-import type { Account, SubAccount } from "@ledgerhq/live-common/lib/types";
 import Icon from "react-native-vector-icons/dist/FontAwesome";
 import MaterialIcon from "react-native-vector-icons/dist/MaterialIcons";
+import { useNavigation } from "@react-navigation/native";
+import type {
+  Account,
+  SubAccount,
+  TokenCurrency,
+} from "@ledgerhq/live-common/lib/types";
+import useEnv from "@ledgerhq/live-common/lib/hooks/useEnv";
 import { listSubAccounts } from "@ledgerhq/live-common/lib/account";
 import { listTokenTypesForCryptoCurrency } from "@ledgerhq/live-common/lib/currencies";
 import { NavigatorName, ScreenName } from "../../const";
 import SubAccountRow from "../../components/SubAccountRow";
-import withEnv from "../../logic/withEnv";
 import colors from "../../colors";
 import LText from "../../components/LText";
 import Button from "../../components/Button";
 import Touchable from "../../components/Touchable";
+import BlacklistTokenModal from "../Settings/Accounts/BlacklistTokenModal";
 
 const keyExtractor = o => o.id;
 
@@ -77,18 +80,22 @@ const Card = ({ children }: { children: any }) => (
   <View style={styles.card}>{children}</View>
 );
 
-const SubAccountsList = ({
+export default function SubAccountsList({
   parentAccount,
   onAccountPress,
-  navigation,
   accountId,
 }: {
   parentAccount: Account,
-  onAccountPress: SubAccount => *,
-  navigation: *,
+  onAccountPress: (subAccount: SubAccount) => void,
   accountId: string,
-}) => {
+}) {
+  useEnv("HIDE_EMPTY_TOKEN_ACCOUNTS");
+
+  const navigation = useNavigation();
   const [isCollapsed, setCollapsed] = useState(true);
+  const [blacklistToken, setBlacklistToken] = useState<
+    TokenCurrency | typeof undefined,
+  >();
   const subAccounts = listSubAccounts(parentAccount);
 
   const isToken = useMemo(
@@ -104,6 +111,14 @@ const SubAccountsList = ({
       },
     });
   }, [accountId, navigation]);
+
+  const onBlacklistToken = useCallback(token => setBlacklistToken(token), [
+    setBlacklistToken,
+  ]);
+  const onClearBlacklistToken = useCallback(
+    () => setBlacklistToken(undefined),
+    [setBlacklistToken],
+  );
 
   const renderHeader = useCallback(
     () => (
@@ -145,7 +160,10 @@ const SubAccountsList = ({
             <Icon color={colors.live} size={26} name="plus" />
             <View style={styles.footerText}>
               <LText style={{ fontSize: 16 }}>
-                <Trans i18nKey="account.tokens.howTo">
+                <Trans
+                  i18nKey="account.tokens.howTo"
+                  values={{ currency: parentAccount.currency.family }}
+                >
                   <LText semiBold>text</LText>
                   <LText semiBold>text</LText>
                 </Trans>
@@ -188,15 +206,25 @@ const SubAccountsList = ({
         />
       </Card>
     );
-  }, [subAccounts.length, isToken, isCollapsed, navigation, accountId]);
+  }, [
+    subAccounts.length,
+    isCollapsed,
+    isToken,
+    navigateToReceiveConnectDevice,
+    parentAccount.currency.family,
+  ]);
 
   const renderItem = useCallback(
     ({ item }) => (
       <Card>
-        <SubAccountRow account={item} onSubAccountPress={onAccountPress} />
+        <SubAccountRow
+          account={item}
+          onBlacklistToken={onBlacklistToken}
+          onSubAccountPress={onAccountPress}
+        />
       </Card>
     ),
-    [onAccountPress],
+    [onAccountPress, onBlacklistToken],
   );
 
   if (
@@ -216,11 +244,11 @@ const SubAccountsList = ({
         ListHeaderComponent={renderHeader}
         ListFooterComponent={renderFooter}
       />
+      <BlacklistTokenModal
+        onClose={onClearBlacklistToken}
+        isOpened={!!blacklistToken}
+        token={blacklistToken}
+      />
     </View>
   );
-};
-
-export default compose(
-  withNavigation,
-  withEnv("HIDE_EMPTY_TOKEN_ACCOUNTS"),
-)(SubAccountsList);
+}

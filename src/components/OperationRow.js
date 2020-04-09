@@ -28,14 +28,14 @@ import OperationRowDate from "./OperationRowDate";
 import LiveLogo from "../icons/LiveLogoIcon";
 import Spinning from "./Spinning";
 
-interface Props {
-  operation: Operation;
-  parentAccount: ?Account;
-  account: AccountLike;
-  multipleAccounts?: boolean;
-  isLast: boolean;
-  isSubOperation?: boolean;
-}
+type Props = {
+  operation: Operation,
+  parentAccount: ?Account,
+  account: AccountLike,
+  multipleAccounts?: boolean,
+  isLast: boolean,
+  isSubOperation?: boolean,
+};
 
 const placeholderProps = {
   width: 40,
@@ -142,16 +142,18 @@ export default function OperationRow({
               </LText>
             )}
             <View style={styles.bodyRight}>
-              <CounterValue
-                showCode
-                date={operation.date}
-                currency={currency}
-                value={amount}
-                alwaysShowSign
-                withPlaceholder
-                placeholderProps={placeholderProps}
-                Wrapper={OpCounterValue}
-              />
+              {amount.isZero() ? null : (
+                <CounterValue
+                  showCode
+                  date={operation.date}
+                  currency={currency}
+                  value={amount}
+                  alwaysShowSign
+                  withPlaceholder
+                  placeholderProps={placeholderProps}
+                  Wrapper={OpCounterValue}
+                />
+              )}
             </View>
           </View>
         </View>
@@ -160,7 +162,7 @@ export default function OperationRow({
   );
 }
 
-const OpCounterValue = ({ children }: { children: * }) => (
+const OpCounterValue = ({ children }: { children: any }) => (
   <LText tertiary numberOfLines={1} style={styles.bottomRow}>
     {children}
   </LText>

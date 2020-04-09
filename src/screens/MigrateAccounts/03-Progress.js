@@ -11,9 +11,7 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Trans } from "react-i18next";
 import { StyleSheet, View } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
-import { withNavigation } from "@react-navigation/compat";
-import { connect } from "react-redux";
-import { createStructuredSelector } from "reselect";
+import { useDispatch, useSelector } from "react-redux";
 import { reduce } from "rxjs/operators";
 import { setAccounts } from "../../actions/accounts";
 import colors, { rgba } from "../../colors";
@@ -28,42 +26,28 @@ import {
   accountsSelector,
   migratableAccountsSelector,
 } from "../../reducers/accounts";
+import { blacklistedTokenIdsSelector } from "../../reducers/settings";
 
-const mapStateToProps = createStructuredSelector({
-  accounts: accountsSelector,
-  migratableAccounts: migratableAccountsSelector,
-  currencyIds: state =>
+const forceInset = { bottom: "always" };
+
+type Props = {
+  navigation: any,
+  route: any,
+};
+
+export default function Progress({ navigation, route }: Props) {
+  const accounts = useSelector(accountsSelector);
+  const blacklistedTokenIds = useSelector(blacklistedTokenIdsSelector);
+  const migratableAccounts = useSelector(migratableAccountsSelector);
+  const currencyIds = useSelector(state =>
     migratableAccountsSelector(state)
       .reduce(
         (c, a) => (c.includes(a.currency.id) ? c : [...c, a.currency.id]),
         [],
       )
       .sort(),
-});
-
-const mapDispatchToProps = {
-  setAccounts,
-};
-
-const forceInset = { bottom: "always" };
-
-interface Props {
-  navigation: *;
-  route: *;
-  accounts: Account[];
-  setAccounts: (Account[]) => void;
-  currencyIds: string[];
-  migratableAccounts: Account[];
-}
-
-const Progress = ({
-  navigation,
-  route,
-  accounts,
-  setAccounts,
-  currencyIds,
-  migratableAccounts,
-}: Props) => {
+  );
+  const dispatch = useDispatch();
   const [status, setStatus] = useState("pending");
   const [error, setError] = useState(null);
   const scanSubscription = useRef(null);
@@ -122,8 +106,8 @@ const Progress = ({
   const startScanAccountsDevice = useCallback(() => {
     const syncConfig = {
       // TODO later we need to paginate only a few ops, not all (for add accounts)
-      // paginationConfig will come from redux
       paginationConfig: {},
+      blacklistedTokenIds,
     };
     unsub();
     scanSubscription.current = getCurrencyBridge(currency)
@@ -137,8 +121,10 @@ const Progress = ({
       )
       .subscribe({
         next: scannedAccounts => {
-          setAccounts(
-            migrateAccounts({ scannedAccounts, existingAccounts: accounts }),
+          dispatch(
+            setAccounts(
+              migrateAccounts({ scannedAccounts, existingAccounts: accounts }),
+            ),
           );
           setStatus("done");
         },
@@ -148,7 +134,7 @@ const Progress = ({
           setError(err);
         },
       });
-  }, [currency, deviceId, setAccounts, unsub, accounts, setStatus, setError]);
+  }, [blacklistedTokenIds, unsub, currency, deviceId, dispatch, accounts]);
 
   useEffect(() => {
     startScanAccountsDevice();
@@ -213,7 +199,7 @@ const Progress = ({
       ) : null}
     </SafeAreaView>
   );
-};
+}
 
 const styles = StyleSheet.create({
   root: {
@@ -261,8 +247,3 @@ const styles = StyleSheet.create({
     width: "100%",
   },
 });
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(withNavigation(Progress));

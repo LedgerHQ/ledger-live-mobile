@@ -9,17 +9,18 @@ import BottomModal from "./BottomModal";
 import LText from "./LText";
 import Button from "./Button";
 
-type Props = {
+type Props = {|
   isOpened: boolean,
   onClose: () => void,
   onConfirm: () => *,
+  onModalHide?: () => *,
   confirmationTitle?: React$Node,
   confirmationDesc?: React$Node,
   Icon?: React$ComponentType<*>,
   confirmButtonText?: React$Node,
   rejectButtonText?: React$Node,
   alert: boolean,
-};
+|};
 
 class ConfirmationModal extends PureComponent<Props> {
   static defaultProps = {
@@ -53,7 +54,7 @@ class ConfirmationModal extends PureComponent<Props> {
           </View>
         )}
         {confirmationTitle && (
-          <LText semiBold style={styles.confirmationTitle}>
+          <LText secondary semiBold style={styles.confirmationTitle}>
             {confirmationTitle}
           </LText>
         )}
@@ -92,11 +93,12 @@ const styles = StyleSheet.create({
   },
   confirmationTitle: {
     textAlign: "center",
-    fontSize: 14,
+    fontSize: 18,
     color: colors.darkBlue,
   },
   confirmationDesc: {
     marginVertical: 24,
+    paddingHorizontal: 32,
     textAlign: "center",
     fontSize: 14,
     color: colors.smoke,

@@ -6,10 +6,14 @@ import { View, StyleSheet, TouchableWithoutFeedback } from "react-native";
 import Icon from "react-native-vector-icons/dist/Feather";
 import Config from "react-native-config";
 import { NavigatorName, ScreenName } from "../../const";
-import { cryptoCurrenciesSelector } from "../../reducers/accounts";
+import {
+  accountsSelector,
+  cryptoCurrenciesSelector,
+} from "../../reducers/accounts";
 import SettingsCard from "../../components/SettingsCard";
 import PoweredByLedger from "./PoweredByLedger";
 import Assets from "../../icons/Assets";
+import Accounts from "../../icons/Accounts";
 import LiveLogoIcon from "../../icons/LiveLogoIcon";
 import Atom from "../../icons/Atom";
 import Help from "../../icons/Help";
@@ -19,14 +23,14 @@ import TrackScreen from "../../analytics/TrackScreen";
 import timer from "../../timer";
 import NavigationScrollView from "../../components/NavigationScrollView";
 
-// We can extend specific type for screen components from typescritpt definitions later
-interface Props {
-  navigation: *;
+type Props = {
+  navigation: any,
 }
 
 export default function Settings({ navigation }: Props) {
   const { t } = useTranslation();
   const currencies = useSelector(cryptoCurrenciesSelector);
+  const accounts = useSelector(accountsSelector);
 
   const [debugVisible, setDebugVisible] = useState(
     Config.FORCE_DEBUG_VISIBLE || false,
@@ -69,6 +73,14 @@ export default function Settings({ navigation }: Props) {
             onClick={() =>
               navigation.navigate(NavigatorName.CryptoAssetsSettings)
             }
+          />
+        )}
+        {accounts.length > 0 && (
+          <SettingsCard
+            title={t("settings.accounts.title")}
+            desc={t("settings.accounts.desc")}
+            icon={<Accounts size={16} color={colors.live} />}
+            onClick={() => navigation.navigate(NavigatorName.AccountSettings)}
           />
         )}
         <SettingsCard

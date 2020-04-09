@@ -9,9 +9,10 @@ import {
   flattenAccounts,
   getAccountCurrency,
   importAccountsReduce,
+  isUpToDateAccount,
+  withoutToken,
 } from "@ledgerhq/live-common/lib/account";
 import accountModel from "../logic/accountModel";
-import { UP_TO_DATE_THRESHOLD } from "../constants";
 
 export type AccountsState = {
   active: Account[],
@@ -75,6 +76,11 @@ const handlers: Object = {
       pendingOperations: [],
     })),
   }),
+
+  BLACKLIST_TOKEN: (
+    state: AccountsState,
+    { payload: tokenId }: { payload: string },
+  ) => ({ active: state.active.map(a => withoutToken(a, tokenId)) }),
 };
 
 // Selectors
@@ -114,10 +120,12 @@ export const someAccountsNeedMigrationSelector = createSelector(
 );
 
 // $FlowFixMe
-export const currenciesSelector = createSelector(accountsSelector, accounts =>
-  uniq(flattenAccounts(accounts).map(a => getAccountCurrency(a))).sort((a, b) =>
-    a.name.localeCompare(b.name),
-  ),
+export const currenciesSelector = createSelector(
+  accountsSelector,
+  accounts =>
+    uniq(flattenAccounts(accounts).map(a => getAccountCurrency(a))).sort(
+      (a, b) => a.name.localeCompare(b.name),
+    ),
 );
 
 // $FlowFixMe
@@ -138,9 +146,9 @@ export const accountSelector = createSelector(
 
 export const accountScreenSelector = (route: any) => (state: any) => {
   const { accountId, parentId } = route.params;
-  const parentAccount: Account =
+  const parentAccount: ?Account =
     parentId && accountSelector(state, { accountId: parentId });
-  let account: AccountLike | typeof undefined;
+  let account: ?AccountLike;
   if (parentAccount) {
     const { subAccounts } = parentAccount;
     if (subAccounts) {
@@ -152,27 +160,10 @@ export const accountScreenSelector = (route: any) => (state: any) => {
   return { parentAccount, account };
 };
 
-const isUpToDateAccount = a => {
-  if (!a) {
-    return false;
-  }
-  const { lastSyncDate } = a;
-  const { blockAvgTime } = a.currency;
-  const outdated =
-    Date.now() - (lastSyncDate || 0) >
-    (blockAvgTime || 0) * 1000 + UP_TO_DATE_THRESHOLD;
-  return !outdated;
-};
-
 // $FlowFixMe
-export const isUpToDateAccountSelector = createSelector(
-  accountSelector,
-  isUpToDateAccount,
-);
-
-// $FlowFixMe
-export const isUpToDateSelector = createSelector(accountsSelector, accounts =>
-  accounts.every(isUpToDateAccount),
+export const isUpToDateSelector = createSelector(
+  accountsSelector,
+  accounts => accounts.every(isUpToDateAccount),
 );
 
 export default handleActions(handlers, initialState);

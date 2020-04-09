@@ -1,5 +1,4 @@
 // @flow
-/* eslint-disable import/first */
 import "../shim";
 import "./polyfill";
 import "./live-common-setup";

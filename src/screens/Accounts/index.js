@@ -1,10 +1,10 @@
 // @flow
 
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { StyleSheet, FlatList } from "react-native";
 import { useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
-import type { Account } from "@ledgerhq/live-common/lib/types";
+import type { Account, TokenCurrency } from "@ledgerhq/live-common/lib/types";
 import { accountsSelector } from "../../reducers/accounts";
 import globalSyncRefreshControl from "../../components/globalSyncRefreshControl";
 import TrackScreen from "../../analytics/TrackScreen";
@@ -13,6 +13,7 @@ import NoAccounts from "./NoAccounts";
 import AccountRow from "./AccountRow";
 import MigrateAccountsBanner from "../MigrateAccounts/Banner";
 import { useScrollToTop } from "../../navigation/utils";
+import BlacklistTokenModal from "../Settings/Accounts/BlacklistTokenModal";
 
 const List = globalSyncRefreshControl(FlatList);
 
@@ -22,12 +23,17 @@ export default function Accounts() {
   const ref = useRef();
   useScrollToTop(ref);
 
+  const [blacklistToken, setBlacklistToken] = useState<?TokenCurrency>(
+    undefined,
+  );
+
   function renderItem({ item, index }: { item: Account, index: number }) {
     return (
       <AccountRow
         navigation={navigation}
         account={item}
         accountId={item.id}
+        onBlacklistToken={setBlacklistToken}
         isLast={index === accounts.length - 1}
       />
     );
@@ -54,6 +60,11 @@ export default function Accounts() {
         contentContainerStyle={styles.contentContainer}
       />
       <MigrateAccountsBanner />
+      <BlacklistTokenModal
+        onClose={() => setBlacklistToken(undefined)}
+        isOpened={!!blacklistToken}
+        token={blacklistToken}
+      />
     </>
   );
 }

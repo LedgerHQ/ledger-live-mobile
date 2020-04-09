@@ -1,9 +1,9 @@
 /* @flow */
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { View } from "react-native";
 import { useSelector } from "react-redux";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import Icon from "react-native-vector-icons/dist/Feather";
+import Icon from "react-native-vector-icons/dist/FontAwesome";
 
 import { NavigatorName, ScreenName } from "../../const";
 import { accountScreenSelector } from "../../reducers/accounts";
@@ -12,6 +12,7 @@ import BottomModal from "../../components/BottomModal";
 import Wrench from "../../icons/Wrench";
 import colors from "../../colors";
 import TokenContractAddress from "./TokenContractAddress";
+import BlacklistTokenModal from "../Settings/Accounts/BlacklistTokenModal";
 
 export default function AccountHeaderRight() {
   const navigation = useNavigation();
@@ -19,9 +20,19 @@ export default function AccountHeaderRight() {
   const { account, parentAccount } = useSelector(accountScreenSelector(route));
 
   const [isOpened, setOpened] = useState(false);
+  const [isShowingContract, setIsShowingContract] = useState(false);
 
   const toggleModal = useCallback(() => setOpened(!isOpened), [isOpened]);
-  const closeModal = () => setOpened(false);
+  const closeModal = () => {
+    setIsShowingContract(false);
+    setOpened(false);
+  };
+
+  useEffect(() => {
+    if (!account) {
+      navigation.navigate("Accounts");
+    }
+  }, [account, navigation]);
 
   if (!account) return null;
 
@@ -30,21 +41,32 @@ export default function AccountHeaderRight() {
       <>
         <Touchable event="ShowContractAddress" onPress={toggleModal}>
           <View style={{ marginRight: 16 }}>
-            <Icon name="file-text" size={20} color={colors.grey} />
+            <Icon name="ellipsis-h" size={20} color={colors.grey} />
           </View>
         </Touchable>
-        <BottomModal
-          id="ContractAddress"
-          isOpened={isOpened}
-          preventBackdropClick={false}
-          onClose={closeModal}
-        >
-          <TokenContractAddress
-            account={account}
-            parentAccount={parentAccount}
-            onClose={closeModal}
-          />
-        </BottomModal>
+        {isOpened ? (
+          isShowingContract ? (
+            <BottomModal
+              id="ContractAddress"
+              isOpened={isOpened}
+              preventBackdropClick={false}
+              onClose={closeModal}
+            >
+              <TokenContractAddress
+                account={account}
+                parentAccount={parentAccount}
+                onClose={closeModal}
+              />
+            </BottomModal>
+          ) : (
+            <BlacklistTokenModal
+              isOpened={isOpened}
+              onClose={closeModal}
+              onShowContract={setIsShowingContract}
+              token={account.token}
+            />
+          )
+        ) : null}
       </>
     );
   }

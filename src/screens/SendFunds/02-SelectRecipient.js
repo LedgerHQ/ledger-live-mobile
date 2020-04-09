@@ -1,6 +1,10 @@
 /* @flow */
 import { RecipientRequired } from "@ledgerhq/errors";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
+import {
+  SyncOneAccountOnMount,
+  SyncSkipUnderPriority,
+} from "@ledgerhq/live-common/lib/bridge/react";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
 import type { Transaction } from "@ledgerhq/live-common/lib/types";
 import React, { useCallback, useRef, useEffect } from "react";
@@ -11,8 +15,6 @@ import SafeAreaView from "react-native-safe-area-view";
 import { useSelector } from "react-redux";
 import { track, TrackScreen } from "../../analytics";
 import { ScreenName } from "../../const";
-import SyncOneAccountOnMount from "../../bridge/SyncOneAccountOnMount";
-import SyncSkipUnderPriority from "../../bridge/SyncSkipUnderPriority";
 import colors from "../../colors";
 import { accountScreenSelector } from "../../reducers/accounts";
 import Button from "../../components/Button";
@@ -177,7 +179,6 @@ export default function SendSelectRecipient({ navigation, route }: Props) {
               type="primary"
               title={<Trans i18nKey="common.continue" />}
               disabled={bridgePending || !!status.errors.recipient}
-              pending={bridgePending}
               onPress={onPressContinue}
             />
           </View>

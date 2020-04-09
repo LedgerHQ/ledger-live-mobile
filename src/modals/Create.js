@@ -41,7 +41,10 @@ class CreateModal extends Component<Props> {
         goBackKey: navigation.state.key,
       },
     });
-    onClose();
+
+    if (onClose) {
+      onClose();
+    }
   };
 
   onSendFunds = () => this.onNavigate(NavigatorName.SendFunds);
