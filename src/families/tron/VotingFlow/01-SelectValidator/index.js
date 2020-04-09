@@ -2,11 +2,9 @@
 import invariant from "invariant";
 import React, { useCallback, useState, useMemo } from "react";
 import { StyleSheet, TouchableOpacity, FlatList } from "react-native";
-import { SafeAreaView } from "react-navigation";
+import SafeAreaView from "react-native-safe-area-view";
 import { useSelector } from "react-redux";
-import i18next from "i18next";
 import { Trans } from "react-i18next";
-import type { NavigationScreenProp } from "react-navigation";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
 import type { Transaction } from "@ledgerhq/live-common/lib/types";
@@ -16,11 +14,9 @@ import {
   SR_MAX_VOTES,
   SR_THRESHOLD,
 } from "@ledgerhq/live-common/lib/families/tron/react";
-import { accountAndParentScreenSelector } from "../../../../reducers/accounts";
+import { accountScreenSelector } from "../../../../reducers/accounts";
 import colors from "../../../../colors";
 import { TrackScreen } from "../../../../analytics";
-import { defaultNavigationOptions } from "../../../../navigation/navigatorConfig";
-import StepHeader from "../../../../components/StepHeader";
 
 import SelectValidatorFooter from "./Footer";
 
@@ -47,18 +43,19 @@ const infoModalData = [
 
 const forceInset = { bottom: "always" };
 
-type Props = {
-  navigation: NavigationScreenProp<{
-    params: {
-      accountId: string,
-      transaction: Transaction,
-    },
-  }>,
+type RouteParams = {
+  accountId: string,
+  transaction: Transaction,
 };
 
-function SelectValidator({ navigation }: Props) {
+type Props = {
+  navigation: any,
+  route: { params: RouteParams },
+};
+
+export default function SelectValidator({ navigation, route }: Props) {
   const { account } = useSelector(state =>
-    accountAndParentScreenSelector(state, { navigation }),
+    accountScreenSelector(state, { navigation }),
   );
   invariant(account, "account and tron resources required");
 
@@ -69,7 +66,7 @@ function SelectValidator({ navigation }: Props) {
   const { tronPower } = tronResources;
 
   const { transaction, setTransaction } = useBridgeTransaction(() => {
-    const tx = navigation.getParam("transaction");
+    const tx = route.params.transaction;
 
     if (!tx) {
       const t = bridge.createTransaction(account);
@@ -168,7 +165,7 @@ function SelectValidator({ navigation }: Props) {
   );
 }
 
-const HeaderLeft = () => {
+export function SelectValidatorHeaderLeft() {
   const [infoModalOpen, setInfoModalOpen] = useState();
 
   const openInfoModal = useCallback(() => {
@@ -191,29 +188,7 @@ const HeaderLeft = () => {
       />
     </>
   );
-};
-
-SelectValidator.navigationOptions = {
-  headerTitle: (
-    <StepHeader
-      title={i18next.t("vote.stepperHeader.selectValidator")}
-      subtitle={i18next.t("vote.stepperHeader.stepRange", {
-        currentStep: "1",
-        totalSteps: "4",
-      })}
-    />
-  ),
-  headerLeft: <HeaderLeft />,
-  headerStyle: {
-    ...defaultNavigationOptions.headerStyle,
-    elevation: 0,
-    shadowOpacity: 0,
-    borderBottomWidth: 0,
-  },
-  gesturesEnabled: false,
-};
-
-export default SelectValidator;
+}
 
 const styles = StyleSheet.create({
   root: {

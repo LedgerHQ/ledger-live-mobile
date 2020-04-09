@@ -1,7 +1,7 @@
 // @flow
 import React, { useCallback } from "react";
 import { View, StyleSheet } from "react-native";
-import { SafeAreaView } from "react-navigation";
+import SafeAreaView from "react-native-safe-area-view";
 import { Trans } from "react-i18next";
 import colors from "../../../colors";
 import Button from "../../../components/Button";

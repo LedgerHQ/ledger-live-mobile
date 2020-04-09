@@ -1,11 +1,7 @@
 /* @flow */
-import React, { Component } from "react";
+import React, { useCallback } from "react";
 import { StyleSheet, Linking } from "react-native";
-import { SafeAreaView } from "react-navigation";
-import { connect } from "react-redux";
-import type { NavigationScreenProp } from "react-navigation";
-import type { Account } from "@ledgerhq/live-common/lib/types";
-import { accountAndParentScreenSelector } from "../../../reducers/accounts";
+import SafeAreaView from "react-native-safe-area-view";
 import { TrackScreen } from "../../../analytics";
 import colors from "../../../colors";
 import ValidateError from "../../../components/ValidateError";
@@ -13,56 +9,44 @@ import { urls } from "../../../config/urls";
 
 const forceInset = { bottom: "always" };
 
-type Props = {
-  account: Account,
-  navigation: NavigationScreenProp<{
-    params: {
-      accountId: string,
-      deviceId: string,
-      transaction: *,
-      error: Error,
-    },
-  }>,
+type RouteParams = {
+  accountId: string,
+  deviceId: string,
+  transaction: *,
+  error: Error,
 };
 
-class ValidationError extends Component<Props> {
-  static navigationOptions = {
-    header: null,
-  };
+type Props = {
+  navigation: any,
+  route: { params: RouteParams },
+};
 
-  dismiss = () => {
-    const { navigation } = this.props;
-    if (navigation.dismiss) {
-      const dismissed = navigation.dismiss();
-      if (!dismissed) navigation.goBack();
-    }
-  };
+export default function ValidationError({ navigation, route }: Props) {
+  const onClose = useCallback(() => {
+    navigation.dangerouslyGetParent().pop();
+  }, [navigation]);
 
-  contactUs = () => {
+  const contactUs = useCallback(() => {
     Linking.openURL(urls.contact);
-  };
+  }, []);
 
-  retry = () => {
-    const { navigation } = this.props;
+  const retry = useCallback(() => {
     navigation.goBack();
-  };
+  }, [navigation]);
 
-  render() {
-    const { navigation } = this.props;
-    const error = navigation.getParam("error");
+  const error = route.params.error;
 
-    return (
-      <SafeAreaView style={styles.root} forceInset={forceInset}>
-        <TrackScreen category="votes" name="ValidationError" />
-        <ValidateError
-          error={error}
-          onRetry={this.retry}
-          onClose={this.dismiss}
-          onContactUs={this.contactUs}
-        />
-      </SafeAreaView>
-    );
-  }
+  return (
+    <SafeAreaView style={styles.root} forceInset={forceInset}>
+      <TrackScreen category="votes" name="ValidationError" />
+      <ValidateError
+        error={error}
+        onRetry={retry}
+        onClose={onClose}
+        onContactUs={contactUs}
+      />
+    </SafeAreaView>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -71,7 +55,3 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
   },
 });
-
-const mapStateToProps = accountAndParentScreenSelector;
-
-export default connect(mapStateToProps)(ValidationError);

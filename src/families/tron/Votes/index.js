@@ -1,7 +1,7 @@
 // @flow
 import React, { useCallback, useState, useMemo } from "react";
 import { View, Linking, TouchableOpacity, StyleSheet } from "react-native";
-import { withNavigation } from "react-navigation";
+import { useNavigation } from "@react-navigation/native";
 import { Trans } from "react-i18next";
 import { BigNumber } from "bignumber.js";
 
@@ -17,8 +17,6 @@ import {
   MIN_TRANSACTION_AMOUNT,
 } from "@ledgerhq/live-common/lib/families/tron/react";
 import { getDefaultExplorerView } from "@ledgerhq/live-common/lib/explorers";
-
-import type { NavigationScreenProp } from "react-navigation";
 import type { Account } from "@ledgerhq/live-common/lib/types";
 
 import { urls } from "../../../config/urls";
@@ -49,15 +47,10 @@ const infoRewardsModalData = [
 type Props = {
   account: Account,
   parentAccount: ?Account,
-  navigation: NavigationScreenProp<{
-    params: {
-      accountId: string,
-      parentId: string,
-    },
-  }>,
 };
 
-const Delegation = ({ account, parentAccount, navigation }: Props) => {
+const Delegation = ({ account, parentAccount }: Props) => {
+  const navigation = useNavigation();
   const [infoRewardsModal, setRewardsInfoModal] = useState();
 
   const superRepresentatives = useTronSuperRepresentatives();
@@ -405,16 +398,8 @@ const styles = StyleSheet.create({
   },
 });
 
-const Votes = ({ account, parentAccount, navigation }: Props) => {
+export default function Votes({ account, parentAccount }: Props) {
   if (!account || !account.tronResources) return null;
 
-  return (
-    <Delegation
-      account={account}
-      parentAccount={parentAccount}
-      navigation={navigation}
-    />
-  );
-};
-
-export default withNavigation(Votes);
+  return <Delegation account={account} parentAccount={parentAccount} />;
+}

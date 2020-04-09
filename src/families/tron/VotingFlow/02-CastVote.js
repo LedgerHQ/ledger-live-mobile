@@ -3,13 +3,9 @@ import invariant from "invariant";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
 import React, { useCallback, useState, useMemo } from "react";
 import { View, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
-import { SafeAreaView } from "react-navigation";
-import { connect } from "react-redux";
+import SafeAreaView from "react-native-safe-area-view";
+import { useSelector } from "react-redux";
 import { Trans } from "react-i18next";
-import i18next from "i18next";
-
-import type { NavigationScreenProp } from "react-navigation";
-import type { Account } from "@ledgerhq/live-common/lib/types";
 import type {
   Vote,
   Transaction,
@@ -22,11 +18,10 @@ import {
   formatVotes,
 } from "@ledgerhq/live-common/lib/families/tron/react";
 
-import { accountAndParentScreenSelector } from "../../../reducers/accounts";
+import { accountScreenSelector } from "../../../reducers/accounts";
 import colors from "../../../colors";
 import { TrackScreen } from "../../../analytics";
 import Button from "../../../components/Button";
-import StepHeader from "../../../components/StepHeader";
 import RetryButton from "../../../components/RetryButton";
 import CancelButton from "../../../components/CancelButton";
 import GenericErrorBottomModal from "../../../components/GenericErrorBottomModal";
@@ -39,17 +34,18 @@ import Check from "../../../icons/Check";
 
 const forceInset = { bottom: "always" };
 
-type Props = {
-  account: Account,
-  navigation: NavigationScreenProp<{
-    params: {
-      accountId: string,
-      transaction: Transaction,
-    },
-  }>,
+type RouteParams = {
+  accountId: string,
+  transaction: Transaction,
 };
 
-const CastVote = ({ account, navigation }: Props) => {
+type Props = {
+  navigation: any,
+  route: { params: RouteParams },
+};
+
+export default function CastVote({ route, navigation }: Props) {
+  const { account } = useSelector(accountScreenSelector(route));
   const bridge = getAccountBridge(account, undefined);
 
   const { tronResources } = account;
@@ -63,7 +59,7 @@ const CastVote = ({ account, navigation }: Props) => {
     bridgeError,
     bridgePending,
   } = useBridgeTransaction(() => {
-    const tx = navigation.getParam("transaction");
+    const tx = route.params.transaction;
 
     if (!tx) {
       const t = bridge.createTransaction(account);
@@ -269,20 +265,7 @@ const CastVote = ({ account, navigation }: Props) => {
       />
     </>
   );
-};
-
-CastVote.navigationOptions = {
-  headerTitle: (
-    <StepHeader
-      title={i18next.t("vote.stepperHeader.castVote")}
-      subtitle={i18next.t("vote.stepperHeader.stepRange", {
-        currentStep: "2",
-        totalSteps: "4",
-      })}
-    />
-  ),
-  headerLeft: null,
-};
+}
 
 const styles = StyleSheet.create({
   root: {
@@ -340,5 +323,3 @@ const styles = StyleSheet.create({
   addMoreVotesLabel: { color: colors.live, fontSize: 16 },
   votesSuccess: { color: colors.success, marginLeft: 10 },
 });
-
-export default connect(accountAndParentScreenSelector)(CastVote);
