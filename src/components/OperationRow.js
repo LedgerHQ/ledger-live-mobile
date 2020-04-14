@@ -1,10 +1,11 @@
 /* @flow */
-import React from "react";
+import React, { useCallback } from "react";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { Trans } from "react-i18next";
 import { useNavigation } from "@react-navigation/native";
 import { getOperationAmountNumber } from "@ledgerhq/live-common/lib/operation";
 import {
+  getMainAccount,
   getAccountCurrency,
   getAccountName,
   getAccountUnit,
@@ -28,6 +29,8 @@ import OperationRowDate from "./OperationRowDate";
 import LiveLogo from "../icons/LiveLogoIcon";
 import Spinning from "./Spinning";
 
+import perFamilyOperationDetails from "../generated/operationDetails";
+
 type Props = {
   operation: Operation,
   parentAccount: ?Account,
@@ -47,7 +50,6 @@ export default function OperationRow({
   parentAccount,
   operation,
   isSubOperation,
-
   multipleAccounts,
   isLast,
 }: Props) {
@@ -63,22 +65,33 @@ export default function OperationRow({
     });
   }, 300);
 
+  const renderAmountCellExtra = useCallback(() => {
+    const mainAccount = getMainAccount(account, parentAccount);
+    const currency = getAccountCurrency(account);
+    const unit = getAccountUnit(account);
+    const specific = mainAccount.currency.family
+      ? perFamilyOperationDetails[mainAccount.currency.family]
+      : null;
+
+    const Element =
+      specific && specific.amountCell
+        ? specific.amountCell[operation.type]
+        : null;
+
+    return Element ? (
+      <Element operation={operation} unit={unit} currency={currency} />
+    ) : null;
+  }, [account, parentAccount, operation]);
+
   const amount = getOperationAmountNumber(operation);
   const valueColor = amount.isNegative() ? colors.darkBlue : colors.green;
   const currency = getAccountCurrency(account);
   const unit = getAccountUnit(account);
 
   const text = <Trans i18nKey={`operations.types.${operation.type}`} />;
-
   const isOptimistic = operation.blockHeight === null;
   const spinner = (
-    <View
-      style={{
-        height: 14,
-        marginRight: 4,
-        justifyContent: "center",
-      }}
-    >
+    <View style={styles.spinner}>
       <Spinning>
         <LiveLogo color={colors.grey} size={10} />
       </Spinning>
@@ -96,8 +109,9 @@ export default function OperationRow({
             parentAccount={parentAccount}
           />
         </View>
+
         <View style={[styles.wrapper, isOptimistic ? styles.optimistic : null]}>
-          <View style={styles.body}>
+          <View style={styles.bodyLeft}>
             <LText
               numberOfLines={1}
               semiBold
@@ -105,64 +119,65 @@ export default function OperationRow({
             >
               {multipleAccounts ? getAccountName(account) : text}
             </LText>
-            <LText
-              tertiary
-              numberOfLines={1}
-              style={[styles.bodyRight, styles.topRow, { color: valueColor }]}
-            >
-              <CurrencyUnitValue
-                showCode
-                unit={unit}
-                value={amount}
-                alwaysShowSign
-              />
-            </LText>
-          </View>
-          <View style={styles.body}>
-            {isOptimistic && spinner}
+
             {isOptimistic ? (
-              <LText
-                numberOfLines={1}
-                style={[styles.bodyLeft, styles.bottomRow]}
-              >
-                <Trans
-                  i18nKey={
-                    amount.isNegative()
-                      ? "operationDetails.sending"
-                      : "operationDetails.receiving"
-                  }
-                />
-              </LText>
+              <View style={styles.optimisticRow}>
+                {spinner}
+                <LText
+                  numberOfLines={1}
+                  style={[styles.bodyLeft, styles.bottomRow]}
+                >
+                  <Trans
+                    i18nKey={
+                      amount.isNegative()
+                        ? "operationDetails.sending"
+                        : "operationDetails.receiving"
+                    }
+                  />
+                </LText>
+              </View>
             ) : (
-              <LText
-                numberOfLines={1}
-                style={[styles.bodyLeft, styles.bottomRow]}
-              >
+              <LText numberOfLines={1} style={[styles.bottomRow]}>
                 {text} <OperationRowDate date={operation.date} />
               </LText>
             )}
+          </View>
+
+          <View style={styles.bodyRight}>{renderAmountCellExtra()}</View>
+
+          {amount.isZero() ? null : (
             <View style={styles.bodyRight}>
-              {amount.isZero() ? null : (
-                <CounterValue
+              <LText
+                tertiary
+                numberOfLines={1}
+                style={[styles.bodyRight, styles.topRow, { color: valueColor }]}
+              >
+                <CurrencyUnitValue
                   showCode
-                  date={operation.date}
-                  currency={currency}
+                  unit={unit}
                   value={amount}
                   alwaysShowSign
-                  withPlaceholder
-                  placeholderProps={placeholderProps}
-                  Wrapper={OpCounterValue}
                 />
-              )}
+              </LText>
+              <CounterValue
+                showCode
+                date={operation.date}
+                currency={currency}
+                value={amount}
+                alwaysShowSign
+                withPlaceholder
+                placeholderProps={placeholderProps}
+                Wrapper={OpCounterValue}
+              />
             </View>
-          </View>
+          )}
         </View>
       </TouchableOpacity>
     </View>
   );
 }
 
-const OpCounterValue = ({ children }: { children: any }) => (
+const OpCounterValue = ({ children }: { children: React$Node }) => (
   <LText tertiary numberOfLines={1} style={styles.bottomRow}>
     {children}
   </LText>
@@ -187,34 +202,49 @@ const styles = StyleSheet.create({
   },
   wrapper: {
     flex: 1,
-    flexDirection: "column",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
     marginLeft: 16,
     marginRight: 10,
   },
   body: {
-    alignItems: "center",
-    flexDirection: "row",
+    alignItems: "flex-start",
+    flexDirection: "column",
+    justifyContent: "flex-start",
     flex: 1,
   },
   topRow: {
     color: colors.darkBlue,
     fontSize: 14,
-    marginBottom: 2,
+    flex: 1,
   },
   bottomRow: {
     color: colors.grey,
     fontSize: 14,
+    flex: 1,
   },
+  optimisticRow: { flexDirection: "row", alignItems: "center" },
   optimistic: {
     opacity: 0.5,
   },
   bodyLeft: {
+    alignItems: "flex-start",
+    flexDirection: "column",
+    justifyContent: "flex-start",
     flexGrow: 1,
     flexShrink: 1,
   },
   bodyRight: {
-    paddingLeft: 4,
-    height: 20,
     alignItems: "flex-end",
+    flexDirection: "column",
+    justifyContent: "flex-start",
+    flexShrink: 1,
+    paddingLeft: 10,
+  },
+  spinner: {
+    height: 14,
+    marginRight: 4,
+    justifyContent: "center",
   },
 });
