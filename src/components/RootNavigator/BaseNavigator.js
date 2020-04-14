@@ -18,6 +18,7 @@ import Main from "./MainNavigator";
 import ReceiveFundsNavigator from "./ReceiveFundsNavigator";
 import SendFundsNavigator from "./SendFundsNavigator";
 import FreezeNavigator from "./FreezeNavigator";
+import UnfreezeNavigator from "./UnfreezeNavigator";
 import ClaimRewardsNavigator from "./ClaimRewardsNavigator";
 import AddAccountsNavigator from "./AddAccountsNavigator";
 import FirmwareUpdateNavigator from "./FirmwareUpdateNavigator";
@@ -53,6 +54,11 @@ export default function BaseNavigator() {
       <Stack.Screen
         name={NavigatorName.Freeze}
         component={FreezeNavigator}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name={NavigatorName.Unfreeze}
+        component={UnfreezeNavigator}
         options={{ headerShown: false }}
       />
       <Stack.Screen

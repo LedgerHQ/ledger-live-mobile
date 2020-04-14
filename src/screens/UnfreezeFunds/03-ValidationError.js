@@ -1,11 +1,8 @@
 /* @flow */
-import React, { Component } from "react";
+import React, { useCallback } from "react";
 import { StyleSheet, Linking } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
-import { connect } from "react-redux";
-import type { Account } from "@ledgerhq/live-common/lib/types";
 import { urls } from "../../config/urls";
-import { accountAndParentScreenSelector } from "../../reducers/accounts";
 import { TrackScreen } from "../../analytics";
 import colors from "../../colors";
 import ValidateError from "../../components/ValidateError";
@@ -13,8 +10,6 @@ import ValidateError from "../../components/ValidateError";
 const forceInset = { bottom: "always" };
 
 type Props = {
-  account: Account,
-  parentAccount: ?Account,
   navigation: any,
   route: { params: RouteParams },
 };
@@ -22,44 +17,34 @@ type Props = {
 type RouteParams = {
   accountId: string,
   deviceId: string,
-  transaction: *,
+  transaction: any,
   error: Error,
 };
 
-class ValidationError extends Component<Props> {
-  static navigationOptions = {
-    header: null,
-  };
-
-  onClose = () => {
-    const { navigation } = this.props;
+export default function ValidationError({ navigation, route }: Props) {
+  const onClose = useCallback(() => {
     navigation.dangerouslyGetParent().pop();
-  };
+  }, [navigation]);
 
-  contactUs = () => {
+  const contactUs = useCallback(() => {
     Linking.openURL(urls.contact);
-  };
+  }, []);
 
-  retry = () => {
-    const { navigation } = this.props;
+  const retry = useCallback(() => {
     navigation.goBack();
-  };
+  }, [navigation]);
 
-  render() {
-    const { route } = this.props;
-
-    return (
-      <SafeAreaView style={styles.root} forceInset={forceInset}>
-        <TrackScreen category="UnfreezeFunds" name="ValidationError" />
-        <ValidateError
-          error={route.params.error}
-          onRetry={this.retry}
-          onClose={this.onClose}
-          onContactUs={this.contactUs}
-        />
-      </SafeAreaView>
-    );
-  }
+  return (
+    <SafeAreaView style={styles.root} forceInset={forceInset}>
+      <TrackScreen category="UnfreezeFunds" name="ValidationError" />
+      <ValidateError
+        error={route.params.error}
+        onRetry={retry}
+        onClose={onClose}
+        onContactUs={contactUs}
+      />
+    </SafeAreaView>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -68,7 +53,3 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
   },
 });
-
-const mapStateToProps = accountAndParentScreenSelector;
-
-export default connect(mapStateToProps)(ValidationError);

@@ -12,7 +12,7 @@ const forceInset = { bottom: "always" };
 type RouteParams = {
   accountId: string,
   deviceId: string,
-  transaction: *,
+  transaction: any,
   error: Error,
 };
 

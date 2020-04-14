@@ -5,9 +5,9 @@ import type { AccountLike } from "@ledgerhq/live-common/lib/types";
 import BitcoinFeePerByteRow from "./BitcoinFeePerByteRow";
 
 type Props = {
-  transaction: *,
+  transaction: any,
   account: AccountLike,
-  navigation: *,
+  navigation: any,
 };
 
 export default function BitcoinSendRowsFee({ account, ...props }: Props) {

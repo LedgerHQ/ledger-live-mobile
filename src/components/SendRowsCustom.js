@@ -8,9 +8,9 @@ export default ({
   account,
   navigation,
 }: {
-  transaction: *,
+  transaction: any,
   account: Account,
-  navigation: *,
+  navigation: any,
 }) => {
   const C = perFamily[account.currency.family];
   return C ? (

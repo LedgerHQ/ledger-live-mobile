@@ -1,17 +1,17 @@
 /* @flow */
 import React, { useCallback } from "react";
 import { View, StyleSheet } from "react-native";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import { Trans } from "react-i18next";
-import type { Account, Operation } from "@ledgerhq/live-common/lib/types";
-import { accountAndParentScreenSelector } from "../../reducers/accounts";
+import type { Operation } from "@ledgerhq/live-common/lib/types";
+import { accountScreenSelector } from "../../reducers/accounts";
 import { TrackScreen } from "../../analytics";
 import colors from "../../colors";
+import { ScreenName } from "../../const";
 import PreventNativeBack from "../../components/PreventNativeBack";
 import ValidateSuccess from "../../components/ValidateSuccess";
 
 type Props = {
-  account: Account,
   navigation: any,
   route: { params: RouteParams },
 };
@@ -23,7 +23,8 @@ type RouteParams = {
   result: Operation,
 };
 
-const ValidationSuccess = ({ navigation, route, account }: Props) => {
+export default function ValidationSuccess({ navigation, route }: Props) {
+  const { account } = useSelector(accountScreenSelector(route));
   const transaction = route.params.transaction;
   const resource = transaction.resource || "";
 
@@ -35,7 +36,7 @@ const ValidationSuccess = ({ navigation, route, account }: Props) => {
     if (!account) return;
     const result = route.params.result;
     if (!result) return;
-    navigation.navigate("OperationDetails", {
+    navigation.navigate(ScreenName.OperationDetails, {
       accountId: account.id,
       operation: result,
     });
@@ -58,12 +59,7 @@ const ValidationSuccess = ({ navigation, route, account }: Props) => {
       />
     </View>
   );
-};
-
-ValidationSuccess.navigationOptions = {
-  header: null,
-  gesturesEnabled: false,
-};
+}
 
 const styles = StyleSheet.create({
   root: {
@@ -82,7 +78,3 @@ const styles = StyleSheet.create({
   label: { fontSize: 12 },
   subLabel: { color: colors.grey },
 });
-
-const mapStateToProps = accountAndParentScreenSelector;
-
-export default connect(mapStateToProps)(ValidationSuccess);
