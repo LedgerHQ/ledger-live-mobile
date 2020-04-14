@@ -24,7 +24,7 @@ import Close from "../../../icons/Close";
 type Props = {
   blacklistedTokenIds: string[],
   showToken: string => void,
-  navigation: NavigationScreenProp<*>,
+  navigation: any,
 };
 
 const mapDispatchToProps = {

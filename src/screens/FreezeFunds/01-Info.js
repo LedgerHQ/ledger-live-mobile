@@ -17,20 +17,18 @@ import IlluRewards from "../../families/tron/IlluRewards";
 const forceInset = { bottom: "always" };
 
 type Props = {
-  navigation: NavigationScreenProp<{
-    params: {},
-  }>,
+  navigation: any,
+  route: { params: RouteParams },
 };
 
-const FreezeInfo = ({ navigation }: Props) => {
+type RouteParams = {};
+
+const FreezeInfo = ({ navigation, route }: Props) => {
   const onNext = useCallback(() => {
-    navigation.navigate("FreezeAmount", {
-      ...navigation.state.params,
-    });
-  }, [navigation]);
+    navigation.navigate("FreezeAmount", route.params);
+  }, [navigation, route.params]);
 
   const onCancel = useCallback(() => {
-    // $FlowFixMe
     navigation.popToTop();
   }, [navigation]);
 

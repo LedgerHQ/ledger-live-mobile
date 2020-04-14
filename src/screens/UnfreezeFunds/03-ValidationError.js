@@ -15,14 +15,15 @@ const forceInset = { bottom: "always" };
 type Props = {
   account: Account,
   parentAccount: ?Account,
-  navigation: NavigationScreenProp<{
-    params: {
-      accountId: string,
-      deviceId: string,
-      transaction: *,
-      error: Error,
-    },
-  }>,
+  navigation: any,
+  route: { params: RouteParams },
+};
+
+type RouteParams = {
+  accountId: string,
+  deviceId: string,
+  transaction: *,
+  error: Error,
 };
 
 class ValidationError extends Component<Props> {

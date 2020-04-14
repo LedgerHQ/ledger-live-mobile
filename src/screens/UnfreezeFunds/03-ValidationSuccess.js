@@ -3,7 +3,6 @@ import React, { useCallback } from "react";
 import { View, StyleSheet } from "react-native";
 import { connect } from "react-redux";
 import { Trans } from "react-i18next";
-import SafeAreaView from "react-native-safe-area-view";
 import type { Account, Operation } from "@ledgerhq/live-common/lib/types";
 import { accountAndParentScreenSelector } from "../../reducers/accounts";
 import { TrackScreen } from "../../analytics";
@@ -13,14 +12,15 @@ import ValidateSuccess from "../../components/ValidateSuccess";
 
 type Props = {
   account: Account,
-  navigation: NavigationScreenProp<{
-    params: {
-      accountId: string,
-      deviceId: string,
-      transaction: *,
-      result: Operation,
-    },
-  }>,
+  navigation: any,
+  route: { params: RouteParams },
+};
+
+type RouteParams = {
+  accountId: string,
+  deviceId: string,
+  transaction: *,
+  result: Operation,
 };
 
 const ValidationSuccess = ({ navigation, account }: Props) => {

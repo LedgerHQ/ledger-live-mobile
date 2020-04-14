@@ -27,16 +27,17 @@ const forceInset = { bottom: "always" };
 type Props = {
   account: Account,
   updateAccountWithUpdater: (string, (Account) => Account) => void,
-  navigation: NavigationScreenProp<{
-    params: {
-      accountId: string,
-      deviceId: string,
-      modelId: DeviceModelId,
-      wired: boolean,
-      transaction: Transaction,
-      status: TransactionStatus,
-    },
-  }>,
+  navigation: any,
+  route: { params: RouteParams },
+};
+
+type RouteParams = {
+  accountId: string,
+  deviceId: string,
+  modelId: DeviceModelId,
+  wired: boolean,
+  transaction: Transaction,
+  status: TransactionStatus,
 };
 
 const Validation = ({

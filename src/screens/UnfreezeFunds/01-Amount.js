@@ -80,12 +80,13 @@ const forceInset = { bottom: "always" };
 
 type Props = {
   account: Account,
-  navigation: NavigationScreenProp<{
-    params: {
-      accountId: string,
-      transaction: Transaction,
-    },
-  }>,
+  navigation: any,
+  route: { params: RouteParams },
+};
+
+type RouteParams = {
+  accountId: string,
+  transaction: Transaction,
 };
 
 const UnfreezeAmount = ({ account, navigation }: Props) => {

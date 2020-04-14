@@ -22,13 +22,14 @@ const forceInset = { bottom: "always" };
 
 type Props = {
   account: Account,
-  navigation: NavigationScreenProp<{
-    params: {
-      accountId: string,
-      transaction: Transaction,
-      status: TransactionStatus,
-    },
-  }>,
+  navigation: any,
+  route: { params: RouteParams },
+};
+
+type RouteParams = {
+  accountId: string,
+  transaction: Transaction,
+  status: TransactionStatus,
 };
 
 class ConnectDevice extends Component<Props> {
@@ -45,10 +46,9 @@ class ConnectDevice extends Component<Props> {
   };
 
   onSelectDevice = (meta: *) => {
-    const { navigation } = this.props;
-    // $FlowFixMe
+    const { navigation, route } = this.props;
     navigation.replace("FreezeValidation", {
-      ...navigation.state.params,
+      ...route.params,
       ...meta,
     });
   };

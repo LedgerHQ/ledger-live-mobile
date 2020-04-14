@@ -21,14 +21,15 @@ import LText from "../../components/LText";
 
 type Props = {
   account: Account,
-  navigation: NavigationScreenProp<{
-    params: {
-      accountId: string,
-      deviceId: string,
-      transaction: *,
-      result: Operation,
-    },
-  }>,
+  navigation: any,
+  route: { params: RouteParams },
+};
+
+type RouteParams = {
+  accountId: string,
+  deviceId: string,
+  transaction: *,
+  result: Operation,
 };
 
 const ValidationSuccess = ({ account, navigation }: Props) => {

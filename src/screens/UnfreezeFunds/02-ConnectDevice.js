@@ -24,13 +24,14 @@ const forceInset = { bottom: "always" };
 
 type Props = {
   account: Account,
-  navigation: NavigationScreenProp<{
-    params: {
-      accountId: string,
-      transaction: Transaction,
-      status: TransactionStatus,
-    },
-  }>,
+  navigation: any,
+  route: { params: RouteParams },
+};
+
+type RouteParams = {
+  accountId: string,
+  transaction: Transaction,
+  status: TransactionStatus,
 };
 
 class ConnectDevice extends Component<Props> {

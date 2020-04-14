@@ -68,12 +68,13 @@ const getDecimalPart = (value: BigNumber, magnitude: number) =>
 
 type Props = {
   account: Account,
-  navigation: NavigationScreenProp<{
-    params: {
-      accountId: string,
-      transaction: Transaction,
-    },
-  }>,
+  navigation: any,
+  route: { params: RouteParams },
+};
+
+type RouteParams = {
+  accountId: string,
+  transaction: Transaction,
 };
 
 const FreezeAmount = ({ account, navigation }: Props) => {
