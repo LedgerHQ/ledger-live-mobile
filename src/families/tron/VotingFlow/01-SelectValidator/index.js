@@ -46,6 +46,7 @@ const forceInset = { bottom: "always" };
 type RouteParams = {
   accountId: string,
   transaction: Transaction,
+  fromStep2?: boolean,
 };
 
 type Props = {
@@ -54,9 +55,7 @@ type Props = {
 };
 
 export default function SelectValidator({ navigation, route }: Props) {
-  const { account } = useSelector(state =>
-    accountScreenSelector(state, { navigation }),
-  );
+  const { account } = useSelector(accountScreenSelector(route));
   invariant(account, "account and tron resources required");
 
   const bridge = getAccountBridge(account, undefined);
@@ -119,6 +118,10 @@ export default function SelectValidator({ navigation, route }: Props) {
             votes: [{ ...votes[0], voteCount: tronPower }],
           })
         : transaction;
+
+    if (navigation.getParam("fromStep2")) {
+      navigation.pop(2);
+    }
 
     navigation.navigate("CastVote", {
       accountId: account.id,

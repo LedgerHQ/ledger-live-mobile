@@ -1,7 +1,7 @@
 // @flow
 
 import React from "react";
-import { Trans } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { StyleSheet, View, Linking } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 
@@ -56,6 +56,11 @@ export default function AddAccountsTokenCurrencyDisclaimer({
   navigation,
   route,
 }: Props) {
+  const { t } = useTranslation();
+
+  const token = route.params.token;
+  const tokenName = `${token.name} (${token.ticker})`;
+
   function onBack(): void {
     navigation.goBack();
   }
@@ -63,10 +68,6 @@ export default function AddAccountsTokenCurrencyDisclaimer({
   function onClose(): void {
     navigation.dangerouslyGetParent().pop();
   }
-
-  const token = route.params?.token;
-
-  const tokenName = `${token.name} (${token.ticker})`;
 
   return (
     <SafeAreaView style={styles.root} forceInset={forceInset}>
@@ -84,7 +85,7 @@ export default function AddAccountsTokenCurrencyDisclaimer({
       <View style={styles.buttonWrapper}>
         <Button
           event="AddAccountTokenDisclaimerBack"
-          title="change assets"
+          title={t("addAccounts.tokens.changeAssets")}
           type="secondary"
           onPress={onBack}
           containerStyle={[styles.button, styles.buttonSpace]}
@@ -92,7 +93,7 @@ export default function AddAccountsTokenCurrencyDisclaimer({
 
         <Button
           event="AddAccountTokenDisclaimerClose"
-          title="close"
+          title={t("common.close")}
           type="primary"
           onPress={onClose}
           containerStyle={styles.button}
