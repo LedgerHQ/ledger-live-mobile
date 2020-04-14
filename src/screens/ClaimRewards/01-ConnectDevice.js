@@ -45,13 +45,13 @@ export default function ConnectDevice({ navigation, route }: Props) {
   const onSelectDevice = useCallback(
     (meta: *) => {
       navigation.replace(ScreenName.ClaimRewardsValidation, {
-        ...navigation.state.params,
+        ...route.params,
         ...meta,
         transaction,
         status,
       });
     },
-    [navigation, status, transaction],
+    [navigation, status, transaction, route.params],
   );
 
   if (!account) return null;

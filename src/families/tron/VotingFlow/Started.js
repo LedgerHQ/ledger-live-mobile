@@ -10,14 +10,13 @@ import IlluVotes from "../IlluVotes";
 
 type Props = {
   navigation: any,
+  route: { params: {} },
 };
 
-function VoteStarted({ navigation }: Props) {
+function VoteStarted({ navigation, route }: Props) {
   const onNext = useCallback(() => {
-    navigation.replace("VoteSelectValidator", {
-      ...navigation.state.params,
-    });
-  }, [navigation]);
+    navigation.replace("VoteSelectValidator", route.params);
+  }, [navigation, route.params]);
 
   const onCancel = useCallback(() => {
     navigation.dangerouslyGetParent().pop();

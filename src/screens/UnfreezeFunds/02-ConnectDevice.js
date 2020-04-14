@@ -48,10 +48,9 @@ class ConnectDevice extends Component<Props> {
   };
 
   onSelectDevice = (meta: *) => {
-    const { navigation } = this.props;
-    // $FlowFixMe
+    const { navigation, route } = this.props;
     navigation.replace("UnfreezeValidation", {
-      ...navigation.state.params,
+      ...route.params,
       ...meta,
     });
   };
