@@ -10,20 +10,18 @@ import {
   TouchableOpacity,
 } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import { Trans } from "react-i18next";
-import i18next from "i18next";
-
-import type { Account, Transaction } from "@ledgerhq/live-common/lib/types";
+import invariant from "invariant";
+import type { Transaction } from "@ledgerhq/live-common/lib/types";
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
-import { accountAndParentScreenSelector } from "../../reducers/accounts";
+import { accountScreenSelector } from "../../reducers/accounts";
 import colors from "../../colors";
 import { TrackScreen } from "../../analytics";
 import LText from "../../components/LText";
 import CurrencyUnitValue from "../../components/CurrencyUnitValue";
 import Button from "../../components/Button";
-import StepHeader from "../../components/StepHeader";
 import ToggleButton from "../../components/ToggleButton";
 import KeyboardView from "../../components/KeyboardView";
 import RetryButton from "../../components/RetryButton";
@@ -32,7 +30,6 @@ import GenericErrorBottomModal from "../../components/GenericErrorBottomModal";
 import CurrencyInput from "../../components/CurrencyInput";
 import TranslatedError from "../../components/TranslatedError";
 import InfoModal from "../../modals/Info";
-
 import Info from "../../icons/Info";
 import BandwidthIcon from "../../icons/Bandwidth";
 import EnergyIcon from "../../icons/Energy";
@@ -67,7 +64,6 @@ const getDecimalPart = (value: BigNumber, magnitude: number) =>
   value.minus(value.modulo(10 ** magnitude));
 
 type Props = {
-  account: Account,
   navigation: any,
   route: { params: RouteParams },
 };
@@ -77,7 +73,10 @@ type RouteParams = {
   transaction: Transaction,
 };
 
-const FreezeAmount = ({ account, navigation }: Props) => {
+export default function FreezeAmount({ navigation, route }: Props) {
+  const { account } = useSelector(accountScreenSelector(route));
+  invariant(account, "account is required");
+
   const bridge = getAccountBridge(account, undefined);
 
   const defaultUnit = getAccountUnit(account);
@@ -326,20 +325,7 @@ const FreezeAmount = ({ account, navigation }: Props) => {
       />
     </>
   );
-};
-
-FreezeAmount.navigationOptions = {
-  headerTitle: (
-    <StepHeader
-      title={i18next.t("freeze.stepperHeader.selectAmount")}
-      subtitle={i18next.t("freeze.stepperHeader.stepRange", {
-        currentStep: "1",
-        totalSteps: "3",
-      })}
-    />
-  ),
-  headerLeft: null,
-};
+}
 
 const styles = StyleSheet.create({
   root: {
@@ -463,5 +449,3 @@ const styles = StyleSheet.create({
   },
   infoLabel: { color: colors.grey, marginRight: 10 },
 });
-
-export default connect(accountAndParentScreenSelector)(FreezeAmount);

@@ -1,27 +1,22 @@
 // @flow
-import React, { Component } from "react";
+import React, { useCallback } from "react";
 import { StyleSheet, ScrollView } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
-import { connect } from "react-redux";
-import i18next from "i18next";
-
+import { useSelector } from "react-redux";
 import type {
-  Account,
   Transaction,
   TransactionStatus,
 } from "@ledgerhq/live-common/lib/types";
-
-import { accountAndParentScreenSelector } from "../../reducers/accounts";
+import { accountScreenSelector } from "../../reducers/accounts";
 import colors from "../../colors";
+import { ScreenName } from "../../const";
 import { TrackScreen } from "../../analytics";
-import StepHeader from "../../components/StepHeader";
 import SelectDevice from "../../components/SelectDevice";
 import { connectingStep, accountApp } from "../../components/DeviceJob/steps";
 
 const forceInset = { bottom: "always" };
 
 type Props = {
-  account: Account,
   navigation: any,
   route: { params: RouteParams },
 };
@@ -32,46 +27,35 @@ type RouteParams = {
   status: TransactionStatus,
 };
 
-class ConnectDevice extends Component<Props> {
-  static navigationOptions = {
-    headerTitle: (
-      <StepHeader
-        title={i18next.t("freeze.stepperHeader.connectDevice")}
-        subtitle={i18next.t("freeze.stepperHeader.stepRange", {
-          currentStep: "2",
-          totalSteps: "3",
-        })}
-      />
-    ),
-  };
+export default function ConnectDevice({ navigation, route }: Props) {
+  const { account } = useSelector(accountScreenSelector(route));
 
-  onSelectDevice = (meta: *) => {
-    const { navigation, route } = this.props;
-    navigation.replace("FreezeValidation", {
-      ...route.params,
-      ...meta,
-    });
-  };
+  const onSelectDevice = useCallback(
+    (meta: any) => {
+      navigation.replace(ScreenName.FreezeValidation, {
+        ...route.params,
+        ...meta,
+      });
+    },
+    [navigation, route.params],
+  );
 
-  render() {
-    const { account } = this.props;
-    if (!account) return null;
+  if (!account) return null;
 
-    return (
-      <SafeAreaView style={styles.root} forceInset={forceInset}>
-        <ScrollView
-          style={styles.scroll}
-          contentContainerStyle={styles.scrollContainer}
-        >
-          <TrackScreen category="FreezeFunds" name="ConnectDevice" />
-          <SelectDevice
-            onSelect={this.onSelectDevice}
-            steps={[connectingStep, accountApp(account)]}
-          />
-        </ScrollView>
-      </SafeAreaView>
-    );
-  }
+  return (
+    <SafeAreaView style={styles.root} forceInset={forceInset}>
+      <ScrollView
+        style={styles.scroll}
+        contentContainerStyle={styles.scrollContainer}
+      >
+        <TrackScreen category="FreezeFunds" name="ConnectDevice" />
+        <SelectDevice
+          onSelect={onSelectDevice}
+          steps={[connectingStep, accountApp(account)]}
+        />
+      </ScrollView>
+    </SafeAreaView>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -86,7 +70,3 @@ const styles = StyleSheet.create({
     padding: 16,
   },
 });
-
-const mapStateToProps = accountAndParentScreenSelector;
-
-export default connect(mapStateToProps)(ConnectDevice);

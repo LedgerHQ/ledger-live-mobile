@@ -27,7 +27,7 @@ export const ScreenName = {
   FirmwareUpdateMCU: "FirmwareUpdateMCU",
   FirmwareUpdateReleaseNotes: "FirmwareUpdateReleaseNotes",
   FreezeInfo: "FreezeInfo",
-  FreezeFreezeAmount: "FreezeFreezeAmount",
+  FreezeAmount: "FreezeAmount",
   FreezeConnectDevice: "FreezeConnectDevice",
   FreezeValidation: "FreezeValidation",
   FreezeValidationError: "FreezeValidationError",

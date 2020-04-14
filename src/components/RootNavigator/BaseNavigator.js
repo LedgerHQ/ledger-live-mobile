@@ -17,6 +17,7 @@ import FallbackCameraSend from "../../screens/SendFunds/FallbackCamera/FallbackC
 import Main from "./MainNavigator";
 import ReceiveFundsNavigator from "./ReceiveFundsNavigator";
 import SendFundsNavigator from "./SendFundsNavigator";
+import FreezeNavigator from "./FreezeNavigator";
 import ClaimRewardsNavigator from "./ClaimRewardsNavigator";
 import AddAccountsNavigator from "./AddAccountsNavigator";
 import FirmwareUpdateNavigator from "./FirmwareUpdateNavigator";
@@ -47,6 +48,11 @@ export default function BaseNavigator() {
       <Stack.Screen
         name={NavigatorName.SendFunds}
         component={SendFundsNavigator}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name={NavigatorName.Freeze}
+        component={FreezeNavigator}
         options={{ headerShown: false }}
       />
       <Stack.Screen

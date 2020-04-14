@@ -1,17 +1,16 @@
 /* @flow */
 import React, { useCallback, useMemo } from "react";
 import { View, StyleSheet } from "react-native";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import { Trans } from "react-i18next";
+import invariant from "invariant";
 import {
   useTronPowerLoading,
   getLastVotedDate,
 } from "@ledgerhq/live-common/lib/families/tron/react";
 import { useTimer } from "@ledgerhq/live-common/lib/hooks/useTimer";
-
-import type { Account, Operation } from "@ledgerhq/live-common/lib/types";
-
-import { accountAndParentScreenSelector } from "../../reducers/accounts";
+import type { Operation } from "@ledgerhq/live-common/lib/types";
+import { accountScreenSelector } from "../../reducers/accounts";
 import { TrackScreen } from "../../analytics";
 import colors from "../../colors";
 import PreventNativeBack from "../../components/PreventNativeBack";
@@ -20,7 +19,6 @@ import Button from "../../components/Button";
 import LText from "../../components/LText";
 
 type Props = {
-  account: Account,
   navigation: any,
   route: { params: RouteParams },
 };
@@ -32,7 +30,10 @@ type RouteParams = {
   result: Operation,
 };
 
-const ValidationSuccess = ({ account, navigation, route }: Props) => {
+export default function ValidationSuccess({ navigation, route }: Props) {
+  const { account } = useSelector(accountScreenSelector(route));
+  invariant(account, "account is required");
+
   const time = useTimer(60);
   const isLoading = useTronPowerLoading(account);
 
@@ -108,18 +109,13 @@ const ValidationSuccess = ({ account, navigation, route }: Props) => {
             title={<Trans i18nKey="freeze.validation.button.later" />}
             type="lightSecondary"
             containerStyle={styles.button}
-            onPress={dismiss}
+            onPress={onClose}
           />
         }
       />
     </View>
   );
-};
-
-ValidationSuccess.navigationOptions = {
-  header: null,
-  gesturesEnabled: false,
-};
+}
 
 const styles = StyleSheet.create({
   root: {
@@ -140,7 +136,3 @@ const styles = StyleSheet.create({
   label: { fontSize: 12 },
   subLabel: { color: colors.grey },
 });
-
-const mapStateToProps = accountAndParentScreenSelector;
-
-export default connect(mapStateToProps)(ValidationSuccess);

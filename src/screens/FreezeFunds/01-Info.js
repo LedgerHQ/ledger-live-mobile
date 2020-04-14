@@ -3,10 +3,9 @@ import React, { useCallback } from "react";
 import { StyleSheet, ScrollView, View, Linking } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { Trans } from "react-i18next";
-import i18next from "i18next";
 import colors from "../../colors";
+import { ScreenName } from "../../const";
 import { TrackScreen } from "../../analytics";
-import StepHeader from "../../components/StepHeader";
 import Button from "../../components/Button";
 import LText from "../../components/LText";
 import ExternalLink from "../../components/ExternalLink";
@@ -23,9 +22,9 @@ type Props = {
 
 type RouteParams = {};
 
-const FreezeInfo = ({ navigation, route }: Props) => {
+export default function FreezeInfo({ navigation, route }: Props) {
   const onNext = useCallback(() => {
-    navigation.navigate("FreezeAmount", route.params);
+    navigation.navigate(ScreenName.FreezeAmount, route.params);
   }, [navigation, route.params]);
 
   const onCancel = useCallback(() => {
@@ -90,11 +89,7 @@ const FreezeInfo = ({ navigation, route }: Props) => {
       </View>
     </SafeAreaView>
   );
-};
-
-FreezeInfo.navigationOptions = {
-  headerTitle: <StepHeader title={i18next.t("freeze.stepperHeader.info")} />,
-};
+}
 
 const styles = StyleSheet.create({
   root: {
@@ -147,5 +142,3 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
 });
-
-export default FreezeInfo;
