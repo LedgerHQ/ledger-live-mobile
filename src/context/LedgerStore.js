@@ -67,6 +67,9 @@ export default class LedgerStoreProvider extends Component<
     }
     store.dispatch(importSettings(settingsData));
 
+    /** check accounts data and migrate if needed  */
+    await db.migrateAccounts();
+
     const accountsData = await db.get("accounts");
     store.dispatch(importAccounts(accountsData));
 
