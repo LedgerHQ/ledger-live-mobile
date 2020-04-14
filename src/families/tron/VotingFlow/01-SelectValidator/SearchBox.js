@@ -1,21 +1,20 @@
 // @flow
 import React from "react";
 import { View, StyleSheet, Platform } from "react-native";
-import type { TFunction } from "react-i18next";
-import { translate } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import colors from "../../../../colors";
 import TextInput from "../../../../components/TextInput";
 import SearchIcon from "../../../../icons/Search";
 
-function SelectValidatorSearchBox({
+export default function SelectValidatorSearchBox({
   searchQuery,
   setSearchQuery,
-  t,
 }: {
   searchQuery: string,
   setSearchQuery: (query: string) => void,
-  t: TFunction,
 }) {
+  const { t } = useTranslation();
+
   return (
     <View style={styles.wrapper}>
       <View style={styles.searchBar}>
@@ -81,5 +80,3 @@ const styles = StyleSheet.create({
     color: colors.smoke,
   },
 });
-
-export default translate()(SelectValidatorSearchBox);

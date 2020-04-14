@@ -4,7 +4,6 @@ import { View, StyleSheet } from "react-native";
 import { withNavigationFocus } from "@react-navigation/compat";
 import { connect } from "react-redux";
 import { Trans } from "react-i18next";
-import { compose } from "redux";
 import manager from "@ledgerhq/live-common/lib/manager";
 import { disconnect } from "@ledgerhq/live-common/lib/hw";
 import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
@@ -210,8 +209,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default compose(
-  // $FlowFixMe
-  connect(mapStateToProps, { removeKnownDevice }),
-  withNavigationFocus(),
-)(ChooseDevice);
+// $FlowFixMe
+export default connect(mapStateToProps, { removeKnownDevice })(
+  withNavigationFocus(ChooseDevice),
+);

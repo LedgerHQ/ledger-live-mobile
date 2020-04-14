@@ -11,6 +11,7 @@ import styles from "../../navigation/styles";
 
 export default function ManagerNavigator() {
   const { t } = useTranslation();
+
   return (
     <Stack.Navigator
       screenOptions={{
