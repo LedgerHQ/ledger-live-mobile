@@ -1,10 +1,9 @@
 // @flow
 import React, { useCallback } from "react";
 import { StyleSheet, ScrollView, View, Linking } from "react-native";
-import { SafeAreaView } from "react-navigation";
+import SafeAreaView from "react-native-safe-area-view";
 import { Trans } from "react-i18next";
 import i18next from "i18next";
-import type { NavigationScreenProp } from "react-navigation";
 import colors from "../../colors";
 import { TrackScreen } from "../../analytics";
 import StepHeader from "../../components/StepHeader";

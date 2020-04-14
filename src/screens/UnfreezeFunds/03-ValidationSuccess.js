@@ -3,10 +3,8 @@ import React, { useCallback } from "react";
 import { View, StyleSheet } from "react-native";
 import { connect } from "react-redux";
 import { Trans } from "react-i18next";
-
-import type { NavigationScreenProp } from "react-navigation";
+import SafeAreaView from "react-native-safe-area-view";
 import type { Account, Operation } from "@ledgerhq/live-common/lib/types";
-
 import { accountAndParentScreenSelector } from "../../reducers/accounts";
 import { TrackScreen } from "../../analytics";
 import colors from "../../colors";

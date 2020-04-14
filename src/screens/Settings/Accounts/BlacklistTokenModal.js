@@ -3,7 +3,7 @@ import React, { useCallback, useState } from "react";
 import { connect } from "react-redux";
 import type { TokenCurrency } from "@ledgerhq/live-common/lib/types";
 import { View, StyleSheet } from "react-native";
-import { SafeAreaView } from "react-navigation";
+import SafeAreaView from "react-native-safe-area-view";
 import { Trans } from "react-i18next";
 import Icon from "react-native-vector-icons/dist/Feather";
 import BottomModal from "../../../components/BottomModal";
@@ -122,10 +122,7 @@ const BlacklistTokenModal = ({
   );
 };
 
-export default connect(
-  null,
-  mapDispatchToProps,
-)(BlacklistTokenModal);
+export default connect(null, mapDispatchToProps)(BlacklistTokenModal);
 
 const styles = StyleSheet.create({
   header: {

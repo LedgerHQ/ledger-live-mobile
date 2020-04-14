@@ -1,10 +1,9 @@
 /* @flow */
 import React, { Component } from "react";
 import { StyleSheet, Linking } from "react-native";
-import { SafeAreaView } from "react-navigation";
+import SafeAreaView from "react-native-safe-area-view";
 import { connect } from "react-redux";
 
-import type { NavigationScreenProp } from "react-navigation";
 import type { Account } from "@ledgerhq/live-common/lib/types";
 
 import { accountAndParentScreenSelector } from "../../reducers/accounts";

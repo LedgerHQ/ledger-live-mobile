@@ -4,12 +4,11 @@ import { BigNumber } from "bignumber.js";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
 import React, { useCallback, useMemo } from "react";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
-import { SafeAreaView } from "react-navigation";
+import SafeAreaView from "react-native-safe-area-view";
 import { connect } from "react-redux";
 import { Trans } from "react-i18next";
 import i18next from "i18next";
 
-import type { NavigationScreenProp } from "react-navigation";
 import type { Account, Transaction } from "@ledgerhq/live-common/lib/types";
 
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";

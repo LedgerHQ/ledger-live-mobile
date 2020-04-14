@@ -9,7 +9,6 @@ import {
 } from "@ledgerhq/live-common/lib/families/tron/react";
 import { useTimer } from "@ledgerhq/live-common/lib/hooks/useTimer";
 
-import type { NavigationScreenProp } from "react-navigation";
 import type { Account, Operation } from "@ledgerhq/live-common/lib/types";
 
 import { accountAndParentScreenSelector } from "../../reducers/accounts";
