@@ -119,7 +119,7 @@ export default function SelectValidator({ navigation, route }: Props) {
           })
         : transaction;
 
-    if (navigation.getParam("fromStep2")) {
+    if (route.params.fromStep2) {
       navigation.pop(2);
     }
 
@@ -127,7 +127,14 @@ export default function SelectValidator({ navigation, route }: Props) {
       accountId: account.id,
       transaction: tx,
     });
-  }, [account, navigation, transaction, tronPower, bridge]);
+  }, [
+    account,
+    navigation,
+    transaction,
+    tronPower,
+    bridge,
+    route.params.fromStep2,
+  ]);
 
   const remainingCount = SR_MAX_VOTES - votes.length;
 

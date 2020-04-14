@@ -19,12 +19,12 @@ type Props = {
 type RouteParams = {
   accountId: string,
   deviceId: string,
-  transaction: *,
+  transaction: any,
   result: Operation,
 };
 
-const ValidationSuccess = ({ navigation, account }: Props) => {
-  const transaction = navigation.getParam("transaction");
+const ValidationSuccess = ({ navigation, route, account }: Props) => {
+  const transaction = route.params.transaction;
   const resource = transaction.resource || "";
 
   const onClose = useCallback(() => {
@@ -33,13 +33,13 @@ const ValidationSuccess = ({ navigation, account }: Props) => {
 
   const goToOperationDetails = useCallback(() => {
     if (!account) return;
-    const result = navigation.getParam("result");
+    const result = route.params.result;
     if (!result) return;
     navigation.navigate("OperationDetails", {
       accountId: account.id,
       operation: result,
     });
-  }, [navigation, account]);
+  }, [navigation, account, route.params.result]);
 
   return (
     <View style={styles.root}>

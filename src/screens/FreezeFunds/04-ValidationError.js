@@ -17,7 +17,7 @@ const forceInset = { bottom: "always" };
 type Props = {
   account: Account,
   navigation: any,
-  route: { pararms: RouteParams },
+  route: { params: RouteParams },
 };
 
 type RouteParams = {
@@ -32,7 +32,7 @@ class ValidationError extends Component<Props> {
     header: null,
   };
 
-  dismiss = () => {
+  onClose = () => {
     const { navigation } = this.props;
     navigation.dangerouslyGetParent().pop();
   };
@@ -47,16 +47,15 @@ class ValidationError extends Component<Props> {
   };
 
   render() {
-    const { navigation } = this.props;
-    const error = navigation.getParam("error");
+    const { route } = this.props;
 
     return (
       <SafeAreaView style={styles.root} forceInset={forceInset}>
         <TrackScreen category="FreezeFunds" name="ValidationError" />
         <ValidateError
-          error={error}
+          error={route.params.error}
           onRetry={this.retry}
-          onClose={this.dismiss}
+          onClose={this.onClose}
           onContactUs={this.contactUs}
         />
       </SafeAreaView>

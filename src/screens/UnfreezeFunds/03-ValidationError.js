@@ -46,14 +46,13 @@ class ValidationError extends Component<Props> {
   };
 
   render() {
-    const { navigation } = this.props;
-    const error = navigation.getParam("error");
+    const { route } = this.props;
 
     return (
       <SafeAreaView style={styles.root} forceInset={forceInset}>
         <TrackScreen category="UnfreezeFunds" name="ValidationError" />
         <ValidateError
-          error={error}
+          error={route.params.error}
           onRetry={this.retry}
           onClose={this.onClose}
           onContactUs={this.contactUs}

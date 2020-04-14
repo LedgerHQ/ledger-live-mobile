@@ -43,6 +43,7 @@ type RouteParams = {
 const Validation = ({
   account,
   navigation,
+  route,
   updateAccountWithUpdater,
 }: Props) => {
   const [signing, signed] = useSignWithDevice({
@@ -53,10 +54,7 @@ const Validation = ({
     updateAccountWithUpdater,
   });
 
-  const status = navigation.getParam("status");
-  const transaction = navigation.getParam("transaction");
-  const modelId = navigation.getParam("modelId");
-  const wired = navigation.getParam("wired");
+  const { status, transaction, modelId, wired } = route.params;
 
   return (
     <SafeAreaView style={styles.root} forceInset={forceInset}>

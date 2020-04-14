@@ -28,15 +28,15 @@ type Props = {
 type RouteParams = {
   accountId: string,
   deviceId: string,
-  transaction: *,
+  transaction: any,
   result: Operation,
 };
 
-const ValidationSuccess = ({ account, navigation }: Props) => {
+const ValidationSuccess = ({ account, navigation, route }: Props) => {
   const time = useTimer(60);
   const isLoading = useTronPowerLoading(account);
 
-  const transaction = navigation.getParam("transaction");
+  const transaction = route.params.transaction;
   const resource = transaction.resource || "";
 
   const accountId = account.id;
