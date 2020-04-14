@@ -22,7 +22,7 @@ type Props = {
   counterValueCurrency: Currency,
   pending: boolean,
   error: ?Error,
-}
+};
 
 const { call, cond, interpolate, lessThan, useCode } = Animated;
 

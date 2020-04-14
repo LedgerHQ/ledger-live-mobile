@@ -25,7 +25,7 @@ import NavigationScrollView from "../../components/NavigationScrollView";
 
 type Props = {
   navigation: any,
-}
+};
 
 export default function Settings({ navigation }: Props) {
   const { t } = useTranslation();

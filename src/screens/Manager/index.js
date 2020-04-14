@@ -37,8 +37,8 @@ const RemoveDeviceModal = ({
   open,
   deviceName,
 }: {
-  onHideMenu: () => *,
-  remove: () => *,
+  onHideMenu: () => void,
+  remove: () => Promise<void>,
   open: boolean,
   deviceName: string,
 }) => (
@@ -212,9 +212,6 @@ const styles = StyleSheet.create({
 
 export default compose(
   // $FlowFixMe
-  connect(
-    mapStateToProps,
-    { removeKnownDevice },
-  ),
+  connect(mapStateToProps, { removeKnownDevice }),
   withNavigationFocus(),
 )(ChooseDevice);

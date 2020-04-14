@@ -29,7 +29,4 @@ const Screen = makeGenericSelectScreen({
 });
 
 // $FlowFixMe
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Screen);
+export default connect(mapStateToProps, mapDispatchToProps)(Screen);
