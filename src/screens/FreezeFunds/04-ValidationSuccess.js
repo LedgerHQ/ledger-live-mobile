@@ -43,28 +43,25 @@ const ValidationSuccess = ({ account, navigation }: Props) => {
 
   const lastVotedDate = useMemo(() => getLastVotedDate(account), [account]);
 
-  const dismiss = useCallback(() => {
-    if (navigation.dismiss) {
-      const dismissed = navigation.dismiss();
-      if (!dismissed) navigation.goBack();
-    }
+  const onClose = useCallback(() => {
+    navigation.dangerouslyGetParent().pop();
   }, [navigation]);
 
   const goToVote = useCallback(() => {
     const screenName = lastVotedDate ? "VoteSelectValidator" : "VoteStarted";
-    navigation.dismiss();
+    onClose();
     navigation.navigate(screenName, {
       accountId,
       parentId: undefined,
     });
-  }, [lastVotedDate, accountId, navigation]);
+  }, [lastVotedDate, accountId, navigation, onClose]);
 
   return (
     <View style={styles.root}>
       <TrackScreen category="FreezeFunds" name="ValidationSuccess" />
       <PreventNativeBack />
       <ValidateSuccess
-        onClose={dismiss}
+        onClose={onClose}
         onViewDetails={goToVote}
         title={<Trans i18nKey="freeze.validation.success" />}
         description={

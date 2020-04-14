@@ -31,12 +31,9 @@ class ValidationError extends Component<Props> {
     header: null,
   };
 
-  dismiss = () => {
+  onClose = () => {
     const { navigation } = this.props;
-    if (navigation.dismiss) {
-      const dismissed = navigation.dismiss();
-      if (!dismissed) navigation.goBack();
-    }
+    navigation.dangerouslyGetParent().pop();
   };
 
   contactUs = () => {
@@ -58,7 +55,7 @@ class ValidationError extends Component<Props> {
         <ValidateError
           error={error}
           onRetry={this.retry}
-          onClose={this.dismiss}
+          onClose={this.onClose}
           onContactUs={this.contactUs}
         />
       </SafeAreaView>

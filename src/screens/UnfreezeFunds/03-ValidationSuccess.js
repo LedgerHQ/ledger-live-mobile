@@ -27,11 +27,8 @@ const ValidationSuccess = ({ navigation, account }: Props) => {
   const transaction = navigation.getParam("transaction");
   const resource = transaction.resource || "";
 
-  const dismiss = useCallback(() => {
-    if (navigation.dismiss) {
-      const dismissed = navigation.dismiss();
-      if (!dismissed) navigation.goBack();
-    }
+  const onClose = useCallback(() => {
+    navigation.dangerouslyGetParent().pop();
   }, [navigation]);
 
   const goToOperationDetails = useCallback(() => {
@@ -49,7 +46,7 @@ const ValidationSuccess = ({ navigation, account }: Props) => {
       <TrackScreen category="UnfreezeFunds" name="ValidationSuccess" />
       <PreventNativeBack />
       <ValidateSuccess
-        onClose={dismiss}
+        onClose={onClose}
         onViewDetails={goToOperationDetails}
         title={<Trans i18nKey="unfreeze.validation.success" />}
         description={

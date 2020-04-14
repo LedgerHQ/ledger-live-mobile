@@ -20,7 +20,7 @@ function VoteStarted({ navigation }: Props) {
   }, [navigation]);
 
   const onCancel = useCallback(() => {
-    navigation.dismiss();
+    navigation.dangerouslyGetParent().pop();
   }, [navigation]);
 
   return (

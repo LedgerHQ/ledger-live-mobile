@@ -34,10 +34,7 @@ class ValidationError extends Component<Props> {
 
   dismiss = () => {
     const { navigation } = this.props;
-    if (navigation.dismiss) {
-      const dismissed = navigation.dismiss();
-      if (!dismissed) navigation.goBack();
-    }
+    navigation.dangerouslyGetParent().pop();
   };
 
   contactUs = () => {
