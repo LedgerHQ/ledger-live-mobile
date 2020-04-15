@@ -98,17 +98,14 @@ const Delegation = ({ account, parentAccount }: Props) => {
     [accountId, navigation, parentId],
   );
 
-  const onDelegateFreeze = useCallback(
-    () =>
-      navigation.navigate(NavigatorName.Freeze, {
-        screen: ScreenName.FreezeInfo,
-        params: {
-          accountId,
-          parentId,
-        },
-      }),
-    [accountId, navigation, parentId],
-  );
+  const onDelegateFreeze = useCallback(() => {
+    navigation.navigate(NavigatorName.Freeze, {
+      params: {
+        accountId,
+        parentId,
+      },
+    });
+  }, [accountId, navigation, parentId]);
 
   const onManageVotes = useCallback(() => {
     navigation.navigate("CastVote", {

@@ -22,14 +22,16 @@ export default function FreezeNavigator() {
         name={ScreenName.FreezeInfo}
         component={Info}
         options={{
-          headerTitle: <StepHeader title={t("freeze.stepperHeader.info")} />,
+          headerTitle: () => (
+            <StepHeader title={t("freeze.stepperHeader.info")} />
+          ),
         }}
       />
       <Stack.Screen
         name={ScreenName.FreezeAmount}
         component={Amount}
         options={{
-          headerTitle: (
+          headerTitle: () => (
             <StepHeader
               title={t("freeze.stepperHeader.selectAmount")}
               subtitle={t("freeze.stepperHeader.stepRange", {
@@ -45,7 +47,7 @@ export default function FreezeNavigator() {
         name={ScreenName.FreezeConnectDevice}
         component={ConnectDevice}
         options={{
-          headerTitle: (
+          headerTitle: () => (
             <StepHeader
               title={t("freeze.stepperHeader.connectDevice")}
               subtitle={t("freeze.stepperHeader.stepRange", {
@@ -60,7 +62,7 @@ export default function FreezeNavigator() {
         name={ScreenName.FreezeValidation}
         component={Validation}
         options={{
-          headerTitle: (
+          headerTitle: () => (
             <StepHeader
               title={t("freeze.stepperHeader.verification")}
               subtitle={t("freeze.stepperHeader.stepRange", {
