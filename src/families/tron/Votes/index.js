@@ -100,6 +100,7 @@ const Delegation = ({ account, parentAccount }: Props) => {
 
   const onDelegateFreeze = useCallback(() => {
     navigation.navigate(NavigatorName.Freeze, {
+      screen: ScreenName.FreezeInfo,
       params: {
         accountId,
         parentId,
