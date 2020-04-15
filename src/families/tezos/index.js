@@ -1,4 +1,4 @@
 // @flow
-import * as DelegationFlow from "./DelegationFlow";
+import * as TezosDelegationFlow from "./DelegationFlow";
 
-export { DelegationFlow };
+export { TezosDelegationFlow };

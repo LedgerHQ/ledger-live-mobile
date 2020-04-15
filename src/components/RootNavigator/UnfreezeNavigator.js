@@ -21,7 +21,7 @@ export default function UnfreezeNavigator() {
         name={ScreenName.UnfreezeAmount}
         component={Amount}
         options={{
-          headerTitle: (
+          headerTitle: () => (
             <StepHeader
               title={t("unfreeze.stepperHeader.selectAmount")}
               subtitle={t("unfreeze.stepperHeader.stepRange", {
@@ -36,7 +36,7 @@ export default function UnfreezeNavigator() {
         name={ScreenName.UnfreezeConnectDevice}
         component={ConnectDevice}
         options={{
-          headerTitle: (
+          headerTitle: () => (
             <StepHeader
               title={t("unfreeze.stepperHeader.connectDevice")}
               subtitle={t("unfreeze.stepperHeader.stepRange", {
@@ -51,7 +51,7 @@ export default function UnfreezeNavigator() {
         name={ScreenName.UnfreezeValidation}
         component={Validation}
         options={{
-          headerTitle: (
+          headerTitle: () => (
             <StepHeader
               title={t("unfreeze.stepperHeader.verification")}
               subtitle={t("unfreeze.stepperHeader.stepRange", {

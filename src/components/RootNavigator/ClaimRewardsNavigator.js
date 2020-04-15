@@ -20,7 +20,7 @@ export default function ClaimRewardsNavigator() {
         name={ScreenName.ClaimRewardsConnectDevice}
         component={ConnectDevice}
         options={{
-          headerTitle: (
+          headerTitle: () => (
             <StepHeader
               title={t("claimReward.stepperHeader.connectDevice")}
               subtitle={t("claimReward.stepperHeader.stepRange", {
@@ -35,7 +35,7 @@ export default function ClaimRewardsNavigator() {
         name={ScreenName.ClaimRewardsValidation}
         component={Validation}
         options={{
-          headerTitle: (
+          headerTitle: () => (
             <StepHeader
               title={t("claimReward.stepperHeader.verification")}
               subtitle={t("claimReward.stepperHeader.stepRange", {

@@ -49,7 +49,7 @@ const TezosAccountHeader = ({
   navigation: *,
 }) => {
   const onEarnRewards = useCallback(() => {
-    navigation.navigate("DelegationFlow", {
+    navigation.navigate("TezosDelegationFlow", {
       screen: "DelegationStarted",
       params: {
         accountId: account.id,

@@ -22,6 +22,11 @@ type Props = {
   parentAccount: ?Account,
 };
 
+type NavOptions = {
+  screen: string,
+  params?: { [key: string]: any },
+};
+
 export default function AccountActions({ account, parentAccount }: Props) {
   const navigation = useNavigation();
   const readOnlyModeEnabled = useSelector(readOnlyModeEnabledSelector);
@@ -37,11 +42,14 @@ export default function AccountActions({ account, parentAccount }: Props) {
     (decorators && decorators.ReceiveAction) || ReceiveActionDefault;
 
   const onNavigate = useCallback(
-    (name: string, params?: { screen: string }) => {
+    (name: string, options?: NavOptions) => {
       navigation.navigate(name, {
-        accountId,
-        parentId,
-        ...params,
+        ...options,
+        params: {
+          accountId,
+          parentId,
+          ...(options ? options.params : {}),
+        },
       });
     },
     [accountId, navigation, parentId],

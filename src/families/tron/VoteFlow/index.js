@@ -18,7 +18,7 @@ import VoteValidation from "./04-Validation";
 import VoteValidationError from "./04-ValidationError";
 import VoteValidationSuccess from "./04-ValidationSuccess";
 
-function VotingFlow() {
+function VoteFlow() {
   const { t } = useTranslation();
 
   return (
@@ -40,7 +40,7 @@ function VotingFlow() {
         name="VoteSelectValidator"
         component={VoteSelectValidator}
         options={{
-          headerTitle: (
+          headerTitle: () => (
             <StepHeader
               title={t("vote.stepperHeader.selectValidator")}
               subtitle={t("vote.stepperHeader.stepRange", {
@@ -49,7 +49,7 @@ function VotingFlow() {
               })}
             />
           ),
-          headerLeft: <SelectValidatorHeaderLeft />,
+          headerLeft: () => <SelectValidatorHeaderLeft />,
           headerStyle: {
             ...defaultNavigationOptions.headerStyle,
             elevation: 0,
@@ -63,7 +63,7 @@ function VotingFlow() {
         name="CastVote"
         component={CastVote}
         options={{
-          headerTitle: (
+          headerTitle: () => (
             <StepHeader
               title={t("vote.stepperHeader.castVote")}
               subtitle={t("vote.stepperHeader.stepRange", {
@@ -79,7 +79,7 @@ function VotingFlow() {
         name="VoteConnectDevice"
         component={VoteConnectDevice}
         options={{
-          headerTitle: (
+          headerTitle: () => (
             <StepHeader
               title={t("vote.stepperHeader.connectDevice")}
               subtitle={t("vote.stepperHeader.stepRange", {
@@ -94,7 +94,7 @@ function VotingFlow() {
         name="VoteValidation"
         component={VoteValidation}
         options={{
-          headerTitle: (
+          headerTitle: () => (
             <StepHeader
               title={t("vote.stepperHeader.verification")}
               subtitle={t("vote.stepperHeader.stepRange", {
@@ -131,6 +131,6 @@ const options = {
   headerShown: false,
 };
 
-export { VotingFlow as component, options };
+export { VoteFlow as component, options };
 
 const Stack = createStackNavigator();

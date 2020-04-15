@@ -89,14 +89,15 @@ const Delegation = ({ account, parentAccount }: Props) => {
     setRewardsInfoModal,
   ]);
 
-  const claimRewards = useCallback(
-    () =>
-      navigation.navigate("ClaimRewardsConnectDevice", {
+  const claimRewards = useCallback(() => {
+    navigation.navigate(NavigatorName.ClaimRewards, {
+      screen: ScreenName.ClaimRewardsConnectDevice,
+      params: {
         accountId,
         parentId,
-      }),
-    [accountId, navigation, parentId],
-  );
+      },
+    });
+  }, [accountId, navigation, parentId]);
 
   const onDelegateFreeze = useCallback(() => {
     navigation.navigate(NavigatorName.Freeze, {
@@ -117,7 +118,7 @@ const Delegation = ({ account, parentAccount }: Props) => {
 
   const onDelegate = useCallback(() => {
     const screenName = lastVotedDate ? "VoteSelectValidator" : "VoteStarted";
-    navigation.navigate(screenName, {
+    navigation.navigate("VoteFlow", screenName, {
       accountId,
       parentId,
     });
