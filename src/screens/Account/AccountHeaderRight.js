@@ -35,7 +35,7 @@ export default function AccountHeaderRight() {
 
   useEffect(() => {
     if (!account) {
-      navigation.navigate("Accounts");
+      navigation.navigate(ScreenName.Accounts);
     }
   }, [account, navigation]);
 

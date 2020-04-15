@@ -21,6 +21,7 @@ import ClockIcon from "../../icons/Clock";
 import LText from "../../components/LText";
 import DateFromNow from "../../components/DateFromNow";
 import colors from "../../colors";
+import { ScreenName } from "../../const";
 
 type ChoiceButtonProps = {
   disabled: boolean,
@@ -137,7 +138,9 @@ const Manage = ({
         <ChoiceButton
           disabled={!canFreeze}
           onPress={() =>
-            onSelectAction(canVote ? "FreezeAmount" : "FreezeInfo")
+            onSelectAction(
+              canVote ? ScreenName.FreezeAmount : ScreenName.FreezeInfo,
+            )
           }
           label={<Trans i18nKey="tron.manage.freeze.title" />}
           description={<Trans i18nKey="tron.manage.freeze.description" />}
@@ -145,7 +148,7 @@ const Manage = ({
         />
         <ChoiceButton
           disabled={!canUnfreeze}
-          onPress={() => onSelectAction("UnfreezeAmount")}
+          onPress={() => onSelectAction(ScreenName.UnfreezeAmount)}
           label={<Trans i18nKey="tron.manage.unfreeze.title" />}
           description={<Trans i18nKey="tron.manage.unfreeze.description" />}
           Icon={UnfreezeIcon}

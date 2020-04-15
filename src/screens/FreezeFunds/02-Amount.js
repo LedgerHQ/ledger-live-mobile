@@ -18,6 +18,7 @@ import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { accountScreenSelector } from "../../reducers/accounts";
 import colors from "../../colors";
+import { ScreenName } from "../../const";
 import { TrackScreen } from "../../analytics";
 import LText from "../../components/LText";
 import CurrencyUnitValue from "../../components/CurrencyUnitValue";
@@ -118,7 +119,7 @@ export default function FreezeAmount({ navigation, route }: Props) {
   );
 
   const onContinue = useCallback(() => {
-    navigation.navigate("FreezeConnectDevice", {
+    navigation.navigate(ScreenName.FreezeConnectDevice, {
       accountId: account.id,
       transaction,
       status,

@@ -4,7 +4,6 @@ import { View, Linking, TouchableOpacity, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Trans } from "react-i18next";
 import { BigNumber } from "bignumber.js";
-
 import {
   getAccountUnit,
   getAccountCurrency,
@@ -18,13 +17,13 @@ import {
 } from "@ledgerhq/live-common/lib/families/tron/react";
 import { getDefaultExplorerView } from "@ledgerhq/live-common/lib/explorers";
 import type { Account } from "@ledgerhq/live-common/lib/types";
-
 import { urls } from "../../../config/urls";
 import Row from "./Row";
 import Header from "./Header";
 import LText from "../../../components/LText";
 import Button from "../../../components/Button";
 import colors from "../../../colors";
+import { NavigatorName, ScreenName } from "../../../const";
 import ExternalLink from "../../../icons/ExternalLink";
 import Info from "../../../icons/Info";
 import ArrowRight from "../../../icons/ArrowRight";
@@ -101,9 +100,12 @@ const Delegation = ({ account, parentAccount }: Props) => {
 
   const onDelegateFreeze = useCallback(
     () =>
-      navigation.navigate("FreezeInfo", {
-        accountId,
-        parentId,
+      navigation.navigate(NavigatorName.Freeze, {
+        screen: ScreenName.FreezeInfo,
+        params: {
+          accountId,
+          parentId,
+        },
       }),
     [accountId, navigation, parentId],
   );

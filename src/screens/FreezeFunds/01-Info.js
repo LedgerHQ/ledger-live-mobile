@@ -71,6 +71,7 @@ export default function FreezeInfo({ navigation, route }: Props) {
           />
         </View>
       </ScrollView>
+
       <View style={styles.footer}>
         <Button
           event="FreezeInfoBtn"
