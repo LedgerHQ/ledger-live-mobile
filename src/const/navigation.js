@@ -110,6 +110,8 @@ export const ScreenName = {
   SendValidationError: "SendValidationError",
   SendValidationSuccess: "SendValidationSuccess",
   Settings: "Settings",
+  StellarEditMemoType: "StellarEditMemoType",
+  StellarEditMemoValue: "StellarEditMemoValue",
   TezosDelegationFlow: "TezosDelegationFlow",
   Transfer: "Transfer",
   UnfreezeAmount: "UnfreezeAmount",

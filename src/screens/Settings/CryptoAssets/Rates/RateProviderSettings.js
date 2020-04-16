@@ -91,5 +91,6 @@ const Screen = makeGenericSelectScreen({
 });
 
 export default injectItems(
+  // $FlowFixMe
   connect(mapStateToProps, mapDispatchToProps)(Screen),
 );
