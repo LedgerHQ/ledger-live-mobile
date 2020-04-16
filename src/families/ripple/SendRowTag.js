@@ -8,6 +8,7 @@ import type { Transaction } from "@ledgerhq/live-common/lib/families/ripple/type
 import type { T } from "../../types/common";
 import LText from "../../components/LText";
 import colors from "../../colors";
+import { ScreenName } from "../../const";
 import SummaryRow from "../../screens/SendFunds/SummaryRow";
 
 type Props = {
@@ -23,7 +24,7 @@ type State = {
 class RippleTagRow extends PureComponent<Props, State> {
   editTag = () => {
     const { account, navigation, transaction } = this.props;
-    navigation.navigate("RippleEditTag", {
+    navigation.navigate(ScreenName.RippleEditTag, {
       accountId: account.id,
       transaction,
     });

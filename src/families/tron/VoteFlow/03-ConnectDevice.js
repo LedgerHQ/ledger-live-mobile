@@ -8,6 +8,7 @@ import type { Transaction } from "@ledgerhq/live-common/lib/types";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
 import { accountScreenSelector } from "../../../reducers/accounts";
 import colors from "../../../colors";
+import { ScreenName } from "../../../const";
 import { TrackScreen } from "../../../analytics";
 import SelectDevice from "../../../components/SelectDevice";
 import {
@@ -42,8 +43,8 @@ export default function ConnectDevice({ navigation, route }: Props) {
   });
 
   const onSelectDevice = useCallback(
-    (meta: *) => {
-      navigation.replace("VoteValidation", {
+    (meta: any) => {
+      navigation.replace(ScreenName.VoteValidation, {
         ...route.params,
         ...meta,
         transaction,

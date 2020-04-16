@@ -4,8 +4,13 @@ import { StyleSheet } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { useSelector } from "react-redux";
 import { getMainAccount } from "@ledgerhq/live-common/lib/account/helpers";
+import type {
+  Transaction,
+  TransactionStatus,
+} from "@ledgerhq/live-common/lib/types";
 import { accountScreenSelector } from "../../../reducers/accounts";
 import colors from "../../../colors";
+import { ScreenName } from "../../../const";
 import { TrackScreen } from "../../../analytics";
 import SelectDevice from "../../../components/SelectDevice";
 import {
@@ -16,22 +21,22 @@ import NavigationScrollView from "../../../components/NavigationScrollView";
 
 const forceInset = { bottom: "always" };
 
-interface RouteParams {
-  accountId: string;
-  transaction: Transaction;
-  status: TransactionStatus;
-}
+type Props = {
+  navigation: any,
+  route: { params: RouteParams },
+};
 
-interface Props {
-  navigation: *;
-  route: { params: RouteParams };
-}
+type RouteParams = {
+  accountId: string,
+  transaction: Transaction,
+  status: TransactionStatus,
+};
 
 export default function ConnectDevice({ navigation, route }: Props) {
   const { account, parentAccount } = useSelector(accountScreenSelector(route));
 
-  function onSelectDevice(meta: *): void {
-    navigation.replace("DelegationValidation", {
+  function onSelectDevice(meta: any): void {
+    navigation.replace(ScreenName.DelegationValidation, {
       ...route.params,
       ...meta,
     });

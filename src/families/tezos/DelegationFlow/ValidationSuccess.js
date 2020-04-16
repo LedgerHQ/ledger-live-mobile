@@ -12,30 +12,31 @@ import type {
 import { accountScreenSelector } from "../../../reducers/accounts";
 import { TrackScreen } from "../../../analytics";
 import colors from "../../../colors";
+import { ScreenName } from "../../../const";
 import PreventNativeBack from "../../../components/PreventNativeBack";
 import ValidateSuccess from "../../../components/ValidateSuccess";
 import Button from "../../../components/Button";
 import { urls } from "../../../config/urls";
 
-interface RouteParams {
-  accountId: string;
-  deviceId: string;
-  transaction: Transaction;
-  result: Operation;
-}
+type Props = {
+  account: ?(TokenAccount | Account),
+  parentAccount: ?Account,
+  navigation: any,
+  route: { params: RouteParams },
+};
 
-interface Props {
-  account: ?(TokenAccount | Account);
-  parentAccount: ?Account;
-  navigation: *;
-  route: { params: RouteParams };
-}
+type RouteParams = {
+  accountId: string,
+  deviceId: string,
+  transaction: Transaction,
+  result: Operation,
+};
 
 class ValidationSuccess extends Component<Props> {
   goToAccount = () => {
     const { navigation, account, parentAccount } = this.props;
     if (!account) return;
-    navigation.navigate("Account", {
+    navigation.navigate(ScreenName.Account, {
       accountId: account.id,
       parentId: parentAccount && parentAccount.id,
     });

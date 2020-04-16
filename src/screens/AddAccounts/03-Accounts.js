@@ -15,11 +15,11 @@ import { StyleSheet, View } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import type { CryptoCurrency, Account } from "@ledgerhq/live-common/lib/types";
 import { getCurrencyBridge } from "@ledgerhq/live-common/lib/bridge";
-import { ScreenName } from "../../const";
 import { replaceAccounts } from "../../actions/accounts";
 import { accountsSelector } from "../../reducers/accounts";
 import logger from "../../logger";
 import colors from "../../colors";
+import { ScreenName } from "../../const";
 import { TrackScreen } from "../../analytics";
 import Button from "../../components/Button";
 import PreventNativeBack from "../../components/PreventNativeBack";
@@ -205,7 +205,7 @@ class AddAccountsAccounts extends PureComponent<Props, State> {
       renamings: {}, // renaming was done in scannedAccounts directly.. (see if we want later to change this paradigm)
     });
     if (navigation.replace) {
-      navigation.replace("AddAccountsSuccess", { currency });
+      navigation.replace(ScreenName.AddAccountsSuccess, { currency });
     }
   };
 

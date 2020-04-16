@@ -8,11 +8,12 @@ import {
   defaultNavigationOptions,
 } from "../../../navigation/navigatorConfig";
 import StepHeader from "../../../components/StepHeader";
+import { ScreenName } from "../../../const";
 import VoteStarted from "./Started";
 import VoteSelectValidator, {
   SelectValidatorHeaderLeft,
 } from "./01-SelectValidator";
-import CastVote from "./02-CastVote";
+import VoteCast from "./02-VoteCast";
 import VoteConnectDevice from "./03-ConnectDevice";
 import VoteValidation from "./04-Validation";
 import VoteValidationError from "./04-ValidationError";
@@ -30,14 +31,14 @@ function VoteFlow() {
       }}
     >
       <Stack.Screen
-        name="VoteStarted"
+        name={ScreenName.VoteStarted}
         component={VoteStarted}
         options={{
           title: t("tron.voting.flow.started.title"),
         }}
       />
       <Stack.Screen
-        name="VoteSelectValidator"
+        name={ScreenName.VoteSelectValidator}
         component={VoteSelectValidator}
         options={{
           headerTitle: () => (
@@ -60,8 +61,8 @@ function VoteFlow() {
         }}
       />
       <Stack.Screen
-        name="CastVote"
-        component={CastVote}
+        name={ScreenName.VoteCast}
+        component={VoteCast}
         options={{
           headerTitle: () => (
             <StepHeader
@@ -76,7 +77,7 @@ function VoteFlow() {
         }}
       />
       <Stack.Screen
-        name="VoteConnectDevice"
+        name={ScreenName.VoteConnectDevice}
         component={VoteConnectDevice}
         options={{
           headerTitle: () => (
@@ -91,7 +92,7 @@ function VoteFlow() {
         }}
       />
       <Stack.Screen
-        name="VoteValidation"
+        name={ScreenName.VoteValidation}
         component={VoteValidation}
         options={{
           headerTitle: () => (
@@ -109,14 +110,14 @@ function VoteFlow() {
         }}
       />
       <Stack.Screen
-        name="VoteValidationError"
+        name={ScreenName.VoteValidationError}
         component={VoteValidationError}
         options={{
           header: null,
         }}
       />
       <Stack.Screen
-        name="VoteValidationSuccess"
+        name={ScreenName.VoteValidationSuccess}
         component={VoteValidationSuccess}
         options={{
           header: null,

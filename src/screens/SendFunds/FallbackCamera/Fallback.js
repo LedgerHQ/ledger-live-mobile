@@ -1,18 +1,16 @@
 /* @flow */
 import { PureComponent } from "react";
+import { ScreenName } from "../../../const";
 
-class FallBackCamera extends PureComponent<{
-  navigation: *,
+export default class FallBackCamera extends PureComponent<{
+  navigation: any,
 }> {
   componentDidMount() {
     const { navigation } = this.props;
-    // $FlowFixMe
-    navigation.replace("FallbackCameraSend");
+    navigation.replace(ScreenName.FallbackCameraSend);
   }
 
   render() {
     return null;
   }
 }
-
-export default FallBackCamera;

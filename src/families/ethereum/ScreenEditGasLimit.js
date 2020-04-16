@@ -9,6 +9,7 @@ import SafeAreaView from "react-native-safe-area-view";
 import { useSelector } from "react-redux";
 import { i18n } from "../../context/Locale";
 import colors from "../../colors";
+import { ScreenName } from "../../const";
 import Button from "../../components/Button";
 import KeyboardView from "../../components/KeyboardView";
 import NavigationScrollView from "../../components/NavigationScrollView";
@@ -21,15 +22,15 @@ const options = {
   headerLeft: null,
 };
 
-interface RouteParams {
-  accountId: string;
-  transaction: Transaction;
-}
+type Props = {
+  navigation: any,
+  route: { params: RouteParams },
+};
 
-interface Props {
-  navigation: *;
-  route: { params: RouteParams };
-}
+type RouteParams = {
+  accountId: string,
+  transaction: Transaction,
+};
 
 function EthereumEditGasLimit({ navigation, route }: Props) {
   const { t } = useTranslation();
@@ -43,7 +44,7 @@ function EthereumEditGasLimit({ navigation, route }: Props) {
     const bridge = getAccountBridge(account, parentAccount);
 
     Keyboard.dismiss();
-    navigation.navigate("SendSummary", {
+    navigation.navigate(ScreenName.SendSummary, {
       accountId: account.id,
       parentId: parentAccount && parentAccount.id,
       transaction: bridge.updateTransaction(transaction, {

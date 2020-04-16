@@ -30,6 +30,7 @@ import whitelist from "@ledgerhq/live-common/lib/families/tezos/bakers.whitelist
 import { accountScreenSelector } from "../../../reducers/accounts";
 import { TrackScreen } from "../../../analytics";
 import colors from "../../../colors";
+import { ScreenName } from "../../../const";
 import InfoModal from "../../../components/InfoModal";
 import LText, { getFontStyle } from "../../../components/LText";
 import Touchable from "../../../components/Touchable";
@@ -206,7 +207,7 @@ const SelectValidator = ({
 
   const continueCustom = useCallback(() => {
     setEditingCustom(false);
-    navigation.navigate("DelegationSummary", {
+    navigation.navigate(ScreenName.DelegationSummary, {
       ...route.params,
       transaction,
     });
@@ -234,7 +235,7 @@ const SelectValidator = ({
       const transaction = bridge.updateTransaction(route.params?.transaction, {
         recipient: baker.address,
       });
-      navigation.navigate("DelegationSummary", {
+      navigation.navigate(ScreenName.DelegationSummary, {
         ...route.params,
         transaction,
       });

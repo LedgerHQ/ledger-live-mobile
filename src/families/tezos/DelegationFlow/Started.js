@@ -4,6 +4,7 @@ import { StyleSheet, View, Linking } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { Trans } from "react-i18next";
 import colors from "../../../colors";
+import { ScreenName } from "../../../const";
 import { TrackScreen } from "../../../analytics";
 import Button from "../../../components/Button";
 import LText from "../../../components/LText";
@@ -22,7 +23,7 @@ interface Props {
 
 export default function DelegationStarted({ navigation, route }: Props) {
   const onNext = useCallback(() => {
-    navigation.navigate("DelegationSummary", {
+    navigation.navigate(ScreenName.DelegationSummary, {
       ...route.params,
     });
   }, [navigation, route.params]);

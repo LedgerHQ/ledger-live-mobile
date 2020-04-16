@@ -1,5 +1,4 @@
 /* @flow */
-/* eslint-disable no-console */
 import React, { Component } from "react";
 import { View, StyleSheet } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
@@ -10,6 +9,7 @@ import manager from "@ledgerhq/live-common/lib/manager";
 import { TrackScreen } from "../../analytics";
 import { deviceNames } from "../../wording";
 import colors from "../../colors";
+import { ScreenName } from "../../const";
 import LText from "../../components/LText";
 import DeviceNanoAction from "../../components/DeviceNanoAction";
 import LiveLogo from "../../icons/LiveLogoIcon";
@@ -19,15 +19,15 @@ import getWindowDimensions from "../../logic/getWindowDimensions";
 
 const forceInset = { bottom: "always" };
 
-interface RouteParams {
-  deviceId: string;
-  firmware: FirmwareUpdateContext;
-}
+type Props = {
+  navigation: any,
+  route: { params: RouteParams },
+};
 
-interface Props {
-  navigation: *;
-  route: { params: RouteParams };
-}
+type RouteParams = {
+  deviceId: string,
+  firmware: FirmwareUpdateContext,
+};
 
 type State = {
   progress: number,
@@ -49,7 +49,7 @@ class FirmwareUpdateCheckId extends Component<Props, State> {
     if (!firmware) {
       // if there is no latest firmware we'll jump to success screen
       if (navigation.replace) {
-        navigation.replace("FirmwareUpdateConfirmation", route.params);
+        navigation.replace(ScreenName.FirmwareUpdateConfirmation, route.params);
       }
       return;
     }
@@ -60,12 +60,12 @@ class FirmwareUpdateCheckId extends Component<Props, State> {
       },
       complete: () => {
         if (navigation.replace) {
-          navigation.replace("FirmwareUpdateMCU", route.params);
+          navigation.replace(ScreenName.FirmwareUpdateMCU, route.params);
         }
       },
       error: error => {
         if (navigation.replace) {
-          navigation.replace("FirmwareUpdateFailure", {
+          navigation.replace(ScreenName.FirmwareUpdateFailure, {
             ...route.params,
             error,
           });

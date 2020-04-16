@@ -10,16 +10,15 @@ import type {
   Vote,
   Transaction,
 } from "@ledgerhq/live-common/lib/families/tron/types";
-
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import {
   useTronSuperRepresentatives,
   SR_MAX_VOTES,
   formatVotes,
 } from "@ledgerhq/live-common/lib/families/tron/react";
-
 import { accountScreenSelector } from "../../../reducers/accounts";
 import colors from "../../../colors";
+import { ScreenName } from "../../../const";
 import { TrackScreen } from "../../../analytics";
 import Button from "../../../components/Button";
 import RetryButton from "../../../components/RetryButton";
@@ -27,7 +26,6 @@ import CancelButton from "../../../components/CancelButton";
 import GenericErrorBottomModal from "../../../components/GenericErrorBottomModal";
 import LText from "../../../components/LText";
 import ArrowRight from "../../../icons/ArrowRight";
-
 import VoteRow from "./02-VoteRow";
 import VoteModal from "./02-VoteModal";
 import Check from "../../../icons/Check";
@@ -44,7 +42,7 @@ type Props = {
   route: { params: RouteParams },
 };
 
-export default function CastVote({ route, navigation }: Props) {
+export default function VoteCast({ route, navigation }: Props) {
   const { account } = useSelector(accountScreenSelector(route));
   const bridge = getAccountBridge(account, undefined);
 
@@ -142,8 +140,7 @@ export default function CastVote({ route, navigation }: Props) {
   );
 
   const onBack = useCallback(() => {
-    // $FlowFixMe
-    navigation.push("VoteSelectValidator", {
+    navigation.push(ScreenName.VoteSelectValidator, {
       accountId: account.id,
       transaction,
       status,
@@ -152,7 +149,7 @@ export default function CastVote({ route, navigation }: Props) {
   }, [account, navigation, transaction, status]);
 
   const onContinue = useCallback(() => {
-    navigation.navigate("VoteConnectDevice", {
+    navigation.navigate(ScreenName.VoteConnectDevice, {
       accountId: account.id,
       transaction,
       status,
@@ -173,7 +170,7 @@ export default function CastVote({ route, navigation }: Props) {
 
   return (
     <>
-      <TrackScreen category="Vote" name="CastVote" />
+      <TrackScreen category="Vote" name="VoteCast" />
       <SafeAreaView style={styles.root} forceInset={forceInset}>
         <ScrollView style={[styles.root]}>
           {formattedVotes.map((vote, i) => (
@@ -225,7 +222,7 @@ export default function CastVote({ route, navigation }: Props) {
           </View>
           <View style={styles.continueWrapper}>
             <Button
-              event="CastVoteContinue"
+              event="VoteCastContinue"
               type="primary"
               title={<Trans i18nKey="common.continue" />}
               onPress={onContinue}

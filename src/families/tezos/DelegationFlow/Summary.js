@@ -25,6 +25,7 @@ import whitelist from "@ledgerhq/live-common/lib/families/tezos/bakers.whitelist
 import type { AccountLike } from "@ledgerhq/live-common/lib/types";
 import { accountScreenSelector } from "../../../reducers/accounts";
 import colors, { rgba } from "../../../colors";
+import { ScreenName } from "../../../const";
 import { TrackScreen } from "../../../analytics";
 import { useTransactionChangeFromNavigation } from "../../../logic/screenTransactionHooks";
 import Button from "../../../components/Button";
@@ -200,7 +201,7 @@ export default function DelegationSummary({ navigation, route }: Props) {
 
   const onChangeDelegator = useCallback(() => {
     rotateAnim.setValue(0);
-    navigation.navigate("DelegationSelectValidator", {
+    navigation.navigate(ScreenName.DelegationSelectValidator, {
       ...route.params,
       transaction,
     });
@@ -221,7 +222,7 @@ export default function DelegationSummary({ navigation, route }: Props) {
   useTransactionChangeFromNavigation(setTransaction);
 
   const onContinue = useCallback(async () => {
-    navigation.navigate("DelegationConnectDevice", {
+    navigation.navigate(ScreenName.DelegationConnectDevice, {
       accountId: account.id,
       parentId: parentAccount && parentAccount.id,
       transaction,

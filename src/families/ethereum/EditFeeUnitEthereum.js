@@ -15,6 +15,7 @@ import {
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { getMainAccount } from "@ledgerhq/live-common/lib/account";
 import colors from "../../colors";
+import { ScreenName } from "../../const";
 import LText from "../../components/LText";
 import CurrencyUnitValue from "../../components/CurrencyUnitValue";
 import SettingsRow from "../../components/SettingsRow";
@@ -78,7 +79,7 @@ export default function EditFeeUnitEthereum({
   );
 
   const onValidateFees = useCallback(() => {
-    navigate("SendSummary", {
+    navigate(ScreenName.SendSummary, {
       accountId: account.id,
       parentId: parentAccount && parentAccount.id,
       transaction: bridge.updateTransaction(transaction, { gasPrice }),

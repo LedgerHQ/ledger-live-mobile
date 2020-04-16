@@ -4,6 +4,7 @@ import { View, StyleSheet } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { Trans } from "react-i18next";
 import colors from "../../../colors";
+import { ScreenName } from "../../../const";
 import Button from "../../../components/Button";
 import LText from "../../../components/LText";
 import IlluVotes from "../IlluVotes";
@@ -15,7 +16,7 @@ type Props = {
 
 function VoteStarted({ navigation, route }: Props) {
   const onNext = useCallback(() => {
-    navigation.replace("VoteSelectValidator", route.params);
+    navigation.replace(ScreenName.VoteSelectValidator, route.params);
   }, [navigation, route.params]);
 
   const onCancel = useCallback(() => {

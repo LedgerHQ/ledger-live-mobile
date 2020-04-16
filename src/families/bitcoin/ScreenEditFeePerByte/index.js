@@ -1,4 +1,5 @@
 // @flow
+import { BigNumber } from "bignumber.js";
 import React, { useState } from "react";
 import {
   View,
@@ -10,8 +11,9 @@ import SafeAreaView from "react-native-safe-area-view";
 import { useSelector } from "react-redux";
 import { Trans } from "react-i18next";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
-import { BigNumber } from "bignumber.js";
+import type { Transaction } from "@ledgerhq/live-common/lib/families/bitcoin/types";
 import colors from "../../../colors";
+import { ScreenName } from "../../../const";
 import { accountScreenSelector } from "../../../reducers/accounts";
 import Button from "../../../components/Button";
 import KeyboardView from "../../../components/KeyboardView";
@@ -27,15 +29,15 @@ const options = {
   headerLeft: null,
 };
 
-interface RouteParams {
-  accountId: string;
-  transaction: Transaction;
-}
+type Props = {
+  navigation: any,
+  route: { params: RouteParams },
+};
 
-interface Props {
-  navigation: *;
-  route: { params: RouteParams };
-}
+type RouteParams = {
+  accountId: string,
+  transaction: Transaction,
+};
 
 function BitcoinEditFeePerByte({ navigation, route }: Props) {
   const { account } = useSelector(accountScreenSelector(route));
@@ -71,7 +73,7 @@ function BitcoinEditFeePerByte({ navigation, route }: Props) {
     const bridge = getAccountBridge(account);
     Keyboard.dismiss();
 
-    navigation.navigate("SendSummary", {
+    navigation.navigate(ScreenName.SendSummary, {
       accountId: account.id,
       transaction: bridge.updateTransaction(transaction, { feePerByte }),
     });

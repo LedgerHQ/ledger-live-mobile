@@ -197,8 +197,8 @@ export default function DelegationDetailsModal({
 
   const onChangeValidator = useCallback(() => {
     // FIXME how to get rid of Started step in nav stack?
-    navigation.navigate("TezosDelegationFlow", {
-      screen: "DelegationSummary",
+    navigation.navigate(NavigatorName.TezosDelegationFlow, {
+      screen: ScreenName.DelegationSummary,
       params: {
         accountId,
         parentId,
@@ -209,8 +209,8 @@ export default function DelegationDetailsModal({
 
   const onEndDelegation = useCallback(() => {
     // FIXME how to get rid of Started step in nav stack?
-    navigation.navigate("TezosDelegationFlow", {
-      screen: "DelegationSummary",
+    navigation.navigate(NavigatorName.TezosDelegationFlow, {
+      screen: ScreenName.DelegationSummary,
       params: {
         accountId,
         parentId,

@@ -4,28 +4,27 @@ import { View, StyleSheet, Linking } from "react-native";
 import type { AccountLike } from "@ledgerhq/live-common/lib/types";
 import { Trans, withTranslation } from "react-i18next";
 import type { Transaction } from "@ledgerhq/live-common/lib/families/ripple/types";
-
 import SummaryRow from "../../screens/SendFunds/SummaryRow";
 import LText from "../../components/LText";
 import CurrencyUnitValue from "../../components/CurrencyUnitValue";
 import CounterValue from "../../components/CounterValue";
 import ExternalLink from "../../icons/ExternalLink";
 import { urls } from "../../config/urls";
-
 import colors from "../../colors";
+import { ScreenName } from "../../const";
 import type { T } from "../../types/common";
 
 type Props = {
   account: AccountLike,
   transaction: Transaction,
-  navigation: *,
+  navigation: any,
   t: T,
 };
 
 class RippleFeeRow extends Component<Props> {
   openFees = () => {
     const { account, navigation, transaction } = this.props;
-    navigation.navigate("RippleEditFee", {
+    navigation.navigate(ScreenName.RippleEditFee, {
       accountId: account.id,
       transaction,
     });

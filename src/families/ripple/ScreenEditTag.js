@@ -12,6 +12,7 @@ import Button from "../../components/Button";
 import NavigationScrollView from "../../components/NavigationScrollView";
 import { accountScreenSelector } from "../../reducers/accounts";
 import colors from "../../colors";
+import { ScreenName } from "../../const";
 import { track } from "../../analytics";
 
 interface RouteParams {
@@ -59,7 +60,7 @@ function RippleEditTag({ route, navigation }: Props) {
 
   function onValidateText(): void {
     const bridge = getAccountBridge(account);
-    navigation.navigate("SendSummary", {
+    navigation.navigate(ScreenName.SendSummary, {
       accountId: account.id,
       transaction: bridge.updateTransaction(transaction, {
         tag: tag && tag.toNumber(),

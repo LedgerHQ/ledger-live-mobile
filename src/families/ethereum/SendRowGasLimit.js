@@ -8,6 +8,7 @@ import { BigNumber } from "bignumber.js";
 import type { T } from "../../types/common";
 import LText from "../../components/LText";
 import colors from "../../colors";
+import { ScreenName } from "../../const";
 import SummaryRow from "../../screens/SendFunds/SummaryRow";
 
 type Props = {
@@ -24,7 +25,7 @@ type State = {
 class EthereumGasLimit extends PureComponent<Props, State> {
   editGasLimit = () => {
     const { account, parentAccount, navigation, transaction } = this.props;
-    navigation.navigate("EthereumEditGasLimit", {
+    navigation.navigate(ScreenName.EthereumEditGasLimit, {
       accountId: account.id,
       parentId: parentAccount && parentAccount.id,
       transaction,

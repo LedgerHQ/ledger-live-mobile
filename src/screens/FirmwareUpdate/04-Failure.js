@@ -3,12 +3,12 @@ import React, { Component } from "react";
 import { View, StyleSheet } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { withTranslation, Trans } from "react-i18next";
-
 import { TrackScreen } from "../../analytics";
 import GenericErrorView from "../../components/GenericErrorView";
 import Button from "../../components/Button";
 import NeedHelp from "../../components/NeedHelp";
 import colors from "../../colors";
+import { ScreenName } from "../../const";
 
 const forceInset = { bottom: "always" };
 
@@ -28,7 +28,7 @@ class FirmwareUpdateFailure extends Component<Props, State> {
   onRetry = () => {
     const { navigation, route } = this.props;
     if (navigation.replace) {
-      navigation.replace("FirmwareUpdateMCU", route.params);
+      navigation.replace(ScreenName.FirmwareUpdateMCU, route.params);
     }
   };
 

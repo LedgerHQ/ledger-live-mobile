@@ -1,5 +1,4 @@
 /* @flow */
-/* eslint-disable no-console */
 import React, { Component } from "react";
 import { View, StyleSheet } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
@@ -9,6 +8,7 @@ import type { FirmwareUpdateContext } from "@ledgerhq/live-common/lib/types/mana
 import logger from "../../logger";
 import { TrackScreen } from "../../analytics";
 import colors from "../../colors";
+import { ScreenName } from "../../const";
 import DeviceNanoAction from "../../components/DeviceNanoAction";
 import { BulletItem } from "../../components/BulletList";
 import getWindowDimensions from "../../logic/getWindowDimensions";
@@ -49,13 +49,16 @@ class FirmwareUpdateMCU extends Component<Props, State> {
       },
       complete: () => {
         if (navigation.replace) {
-          navigation.replace("FirmwareUpdateConfirmation", route.params);
+          navigation.replace(
+            ScreenName.FirmwareUpdateConfirmation,
+            route.params,
+          );
         }
       },
       error: error => {
         logger.critical(error);
         if (navigation.replace) {
-          navigation.replace("FirmwareUpdateFailure", {
+          navigation.replace(ScreenName.FirmwareUpdateFailure, {
             ...route.params,
             error,
           });

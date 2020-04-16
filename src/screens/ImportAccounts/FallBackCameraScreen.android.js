@@ -2,6 +2,7 @@
 import React, { PureComponent } from "react";
 import { withTranslation } from "react-i18next";
 import { AppState, Linking } from "react-native";
+import { ScreenName } from "../../const";
 import type { T } from "../../types/common";
 import FallbackCameraBody from "../../components/FallbackCameraBody";
 
@@ -35,7 +36,7 @@ class FallBackCameraScreen extends PureComponent<Props, State> {
       nextAppState === "active" &&
       openSettingsPressed
     ) {
-      navigation.replace("ScanAccounts");
+      navigation.replace(ScreenName.ScanAccounts);
     }
     this.setState({ appState: nextAppState });
   };

@@ -16,12 +16,10 @@ import {
 } from "@ledgerhq/live-common/lib/families/tron/react";
 import { accountScreenSelector } from "../../../../reducers/accounts";
 import colors from "../../../../colors";
+import { ScreenName } from "../../../../const";
 import { TrackScreen } from "../../../../analytics";
-
 import SelectValidatorFooter from "./Footer";
-
 import InfoModal from "../../../../modals/Info";
-
 import Trophy from "../../../../icons/Trophy";
 import Medal from "../../../../icons/Medal";
 import Info from "../../../../icons/Info";
@@ -123,7 +121,7 @@ export default function SelectValidator({ navigation, route }: Props) {
       navigation.pop(2);
     }
 
-    navigation.navigate("CastVote", {
+    navigation.navigate(ScreenName.VoteCast, {
       accountId: account.id,
       transaction: tx,
     });

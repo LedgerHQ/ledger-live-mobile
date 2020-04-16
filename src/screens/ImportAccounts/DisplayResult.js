@@ -80,7 +80,7 @@ class DisplayResult extends Component<Props, State> {
 
   onRetry = () => {
     const { navigation } = this.props;
-    if (navigation.replace) navigation.replace("ScanAccounts");
+    if (navigation.replace) navigation.replace(ScreenName.ScanAccounts);
   };
 
   static getDerivedStateFromProps(nextProps: Props, prevState: State) {

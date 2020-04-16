@@ -3,8 +3,9 @@ import React from "react";
 import { Platform } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useTranslation } from "react-i18next";
+import StepHeader from "../../../components/StepHeader";
+import { ScreenName } from "../../../const";
 import { closableStackNavigatorConfig } from "../../../navigation/navigatorConfig";
-
 import DelegationStarted from "./Started";
 import DelegationSummary from "./Summary";
 import DelegationSelectValidator from "./SelectValidator";
@@ -12,7 +13,6 @@ import DelegationConnectDevice from "./ConnectDevice";
 import DelegationValidation from "./Validation";
 import DelegationValidationSuccess from "./ValidationSuccess";
 import DelegationValidationError from "./ValidationError";
-import StepHeader from "../../../components/StepHeader";
 
 function DelegationFlow() {
   const { t } = useTranslation();
@@ -25,7 +25,7 @@ function DelegationFlow() {
       }}
     >
       <Stack.Screen
-        name={"DelegationStarted"}
+        name={ScreenName.DelegationStarted}
         component={DelegationStarted}
         options={{
           headerTitle: () => (
@@ -34,7 +34,7 @@ function DelegationFlow() {
         }}
       />
       <Stack.Screen
-        name={"DelegationSummary"}
+        name={ScreenName.DelegationSummary}
         component={DelegationSummary}
         options={{
           headerLeft: null,
@@ -51,7 +51,7 @@ function DelegationFlow() {
         }}
       />
       <Stack.Screen
-        name={"DelegationSelectValidator"}
+        name={ScreenName.DelegationSelectValidator}
         component={DelegationSelectValidator}
         options={{
           headerRight: null,
@@ -62,7 +62,7 @@ function DelegationFlow() {
         }}
       />
       <Stack.Screen
-        name={"DelegationConnectDevice"}
+        name={ScreenName.DelegationConnectDevice}
         component={DelegationConnectDevice}
         options={{
           headerTitle: () => (
@@ -77,7 +77,7 @@ function DelegationFlow() {
         }}
       />
       <Stack.Screen
-        name={"DelegationValidation"}
+        name={ScreenName.DelegationValidation}
         component={DelegationValidation}
         options={{
           headerTitle: () => (
@@ -95,7 +95,7 @@ function DelegationFlow() {
         }}
       />
       <Stack.Screen
-        name={"DelegationValidationSuccess"}
+        name={ScreenName.DelegationValidationSuccess}
         component={DelegationValidationSuccess}
         options={{
           headerShown: false,
@@ -103,7 +103,7 @@ function DelegationFlow() {
         }}
       />
       <Stack.Screen
-        name={"DelegationValidationError"}
+        name={ScreenName.DelegationValidationError}
         component={DelegationValidationError}
         options={{
           headerShown: false,

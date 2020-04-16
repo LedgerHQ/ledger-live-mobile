@@ -7,6 +7,7 @@ import type { Operation } from "@ledgerhq/live-common/lib/types";
 import { accountScreenSelector } from "../../../reducers/accounts";
 import { TrackScreen } from "../../../analytics";
 import colors from "../../../colors";
+import { ScreenName } from "../../../const";
 import PreventNativeBack from "../../../components/PreventNativeBack";
 import ValidateSuccess from "../../../components/ValidateSuccess";
 
@@ -35,7 +36,7 @@ export default function ValidationSuccess({ navigation, route }: Props) {
     const result = route.params?.result;
     if (!result) return;
 
-    navigation.navigate("OperationDetails", {
+    navigation.navigate(ScreenName.OperationDetails, {
       accountId: account.id,
       operation: result,
     });
