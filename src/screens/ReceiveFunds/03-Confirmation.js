@@ -46,21 +46,21 @@ import { closableStackNavigatorConfig } from "../../navigation/navigatorConfig";
 
 const forceInset = { bottom: "always" };
 
-interface RouteParams {
-  accountId: string;
-  deviceId: string;
-  modelId: DeviceModelId;
-  wired: boolean;
-  allowNavigation?: boolean;
-}
+type Props = {
+  account: ?(TokenAccount | Account),
+  parentAccount: ?Account,
+  navigation: any,
+  route: { params: RouteParams },
+  readOnlyModeEnabled: boolean,
+};
 
-interface Props {
-  account: ?(TokenAccount | Account);
-  parentAccount: ?Account;
-  navigation: any;
-  route: { params: RouteParams };
-  readOnlyModeEnabled: boolean;
-}
+type RouteParams = {
+  accountId: string,
+  deviceId: string,
+  modelId: DeviceModelId,
+  wired: boolean,
+  allowNavigation?: boolean,
+};
 
 export default function ReceiveConfirmation({ navigation, route }: Props) {
   const { account, parentAccount } = useSelector(accountScreenSelector(route));

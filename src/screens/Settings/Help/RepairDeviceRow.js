@@ -4,9 +4,9 @@ import { Trans } from "react-i18next";
 import { ScreenName } from "../../../const";
 import SettingsRow from "../../../components/SettingsRow";
 
-interface Props {
-  navigation: *;
-}
+type Props = {
+  navigation: any,
+};
 
 class RepairDeviceRow extends PureComponent<Props> {
   onPress = async () => {

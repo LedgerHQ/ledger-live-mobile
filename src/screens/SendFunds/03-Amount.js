@@ -31,15 +31,15 @@ import AmountInput from "./AmountInput";
 
 const forceInset = { bottom: "always" };
 
-interface RouteParams {
-  accountId: string;
-  transaction: Transaction;
-}
+type Props = {
+  navigation: any,
+  route: { params: RouteParams },
+};
 
-interface Props {
-  navigation: *;
-  route: { params: RouteParams };
-}
+type RouteParams = {
+  accountId: string,
+  transaction: Transaction,
+};
 
 export default function SendAmount({ navigation, route }: Props) {
   const { account, parentAccount } = useSelector(accountScreenSelector(route));

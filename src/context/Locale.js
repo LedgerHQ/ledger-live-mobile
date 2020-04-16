@@ -2,10 +2,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import i18next from "i18next";
 import { initReactI18next } from "react-i18next";
+import type { TFunction } from "react-i18next";
 import Locale from "react-native-locale";
 import { locales } from "../languages";
-
-export type TranslateFunction = (string, ?Object) => string;
 
 const languageDetector = {
   type: "languageDetector",
@@ -41,15 +40,15 @@ export { i18next as i18n };
 // $FlowFixMe
 const LocaleContext = React.createContext(getLocaleState(i18next));
 
-interface Props {
-  children: React.ReactNode;
-}
+type Props = {
+  children: React$Node,
+};
 
-interface LocaleState {
-  i18n: *;
-  t: TranslateFunction;
-  locale: string;
-}
+type LocaleState = {
+  i18n: any,
+  t: TFunction,
+  locale: string,
+};
 
 function getLocaleState(i18n): LocaleState {
   return {

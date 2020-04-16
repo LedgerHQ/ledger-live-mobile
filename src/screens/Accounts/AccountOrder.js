@@ -9,9 +9,9 @@ import AccountOrderModal from "./AccountOrderModal";
 import RefreshAccountsOrdering from "../../components/RefreshAccountOrdering";
 
 // update at boot and each time focus or open state changes
-interface RefreshAccountsProps {
-  isOpened: boolean;
-}
+type RefreshAccountsProps = {
+  isOpened: boolean,
+};
 
 function RefreshAccounts({ isOpened }: RefreshAccountsProps) {
   const isFocused = useIsFocused();

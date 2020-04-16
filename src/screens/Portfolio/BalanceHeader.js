@@ -9,10 +9,10 @@ import LText from "../../components/LText";
 import Space from "../../components/Space";
 import CurrencyUnitValue from "../../components/CurrencyUnitValue";
 
-interface Props {
-  portfolio: Portfolio;
-  counterValueCurrency: Currency;
-}
+type Props = {
+  portfolio: Portfolio,
+  counterValueCurrency: Currency,
+};
 
 export default function BalanceHeader({
   portfolio,

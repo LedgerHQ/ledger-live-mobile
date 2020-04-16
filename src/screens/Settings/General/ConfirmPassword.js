@@ -12,11 +12,13 @@ import type { T } from "../../../types/common";
 import PasswordForm from "./PasswordForm";
 import { VIBRATION_PATTERN_ERROR } from "../../../constants";
 
-interface Props {
-  t: T;
-  setPrivacy: Privacy => *;
-  navigation: *;
-}
+type Props = {
+  t: T,
+  setPrivacy: (privacy: Privacy) => void,
+  navigation: any,
+  route: any,
+};
+
 type State = {
   password: string,
   confirmPassword: string,
@@ -63,7 +65,8 @@ class ConfirmPassword extends PureComponent<Props, State> {
       const n = navigation.dangerouslyGetParent();
       if (n) n.goBack();
     } catch (err) {
-      console.log("could not save credentials"); // eslint-disable-line
+      // eslint-disable-next-line no-console
+      console.log("could not save credentials");
     }
   }
 
@@ -96,6 +99,7 @@ class ConfirmPassword extends PureComponent<Props, State> {
 }
 
 export default compose(
+  // $FlowFixMe
   connect(null, mapDispatchToProps),
   withTranslation(),
 )(ConfirmPassword);

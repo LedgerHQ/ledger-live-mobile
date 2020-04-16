@@ -6,14 +6,16 @@ import { ScreenName } from "../../const";
 import type { T } from "../../types/common";
 import FallbackCameraBody from "../../components/FallbackCameraBody";
 
-interface Props {
-  navigation: *;
-  t: T;
-}
+type Props = {
+  navigation: any,
+  t: T,
+};
+
 type State = {
   appSTate: string,
   openSettingsPressed: boolean,
 };
+
 class FallBackCameraScreen extends PureComponent<Props, State> {
   state = {
     appState: AppState.currentState,

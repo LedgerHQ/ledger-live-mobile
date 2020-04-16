@@ -30,9 +30,9 @@ export type AccountDistributionItem = {
   countervalue: BigNumber, // countervalue of the amount that was calculated based of the rate provided
 };
 
-interface Props {
-  item: AccountDistributionItem;
-}
+type Props = {
+  item: AccountDistributionItem,
+};
 
 export default function Row({
   item: { currency, distribution, account, amount },

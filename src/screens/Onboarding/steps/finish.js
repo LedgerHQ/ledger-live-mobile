@@ -19,9 +19,9 @@ import { readOnlyModeEnabledSelector } from "../../../reducers/settings";
 
 const logo = <Image source={require("../../../images/logo.png")} />;
 
-interface Props {
-  navigation: *;
-}
+type Props = {
+  navigation: any,
+};
 
 export default function OnboardingStepFinish({ navigation }: Props) {
   const readOnlyModeEnabled = useSelector(readOnlyModeEnabledSelector);

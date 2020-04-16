@@ -11,16 +11,16 @@ import SettingsRow from "../../components/SettingsRow";
 import Touchable from "../../components/Touchable";
 import NavigationScrollView from "../../components/NavigationScrollView";
 
-interface RouteParams {
-  accountId: string;
-}
+type Props = {
+  navigation: any,
+  route: { params: RouteParams },
+  updateAccount: Function,
+  account: Account,
+};
 
-interface Props {
-  navigation: *;
-  route: { params: RouteParams };
-  updateAccount: Function;
-  account: Account;
-}
+type RouteParams = {
+  accountId: string,
+};
 
 const mapStateToProps = (state, { route }) =>
   accountScreenSelector(route)(state);

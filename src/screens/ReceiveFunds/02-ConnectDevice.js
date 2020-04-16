@@ -27,16 +27,16 @@ import GenericErrorView from "../../components/GenericErrorView";
 
 const forceInset = { bottom: "always" };
 
-interface RouteParams {
-  accountId: string;
-  parentId: string;
-  title: string;
-}
+type Props = {
+  navigation: any,
+  route: { params: RouteParams },
+};
 
-interface Props {
-  navigation: *;
-  route: { params: RouteParams };
-}
+type RouteParams = {
+  accountId: string,
+  parentId: string,
+  title: string,
+};
 
 export default function ConnectDevice({ navigation, route }: Props) {
   const { account, parentAccount } = useSelector(accountScreenSelector(route));

@@ -5,10 +5,11 @@ import { ScreenName } from "../../../const";
 import type { T } from "../../../types/common";
 import PasswordForm from "./PasswordForm";
 
-interface Props {
-  t: T;
-  navigation: *;
-}
+type Props = {
+  t: T,
+  navigation: any,
+};
+
 type State = {
   password: string,
 };

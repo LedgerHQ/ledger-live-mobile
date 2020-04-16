@@ -14,10 +14,10 @@ import NavigationScrollView from "../../components/NavigationScrollView";
 
 const forceInset = { bottom: "always" };
 
-interface Props {
-  navigation: *;
-  route: *;
-}
+type Props = {
+  navigation: any,
+  route: any,
+};
 
 const ConnectDevice = ({ navigation, route }: Props) => {
   const onSelectDevice = useCallback(

@@ -15,19 +15,19 @@ import { ScreenName } from "../../const";
 import PreventNativeBack from "../../components/PreventNativeBack";
 import ValidateSuccess from "../../components/ValidateSuccess";
 
-interface RouteParams {
-  accountId: string;
-  deviceId: string;
-  transaction: *;
-  result: Operation;
-}
+type Props = {
+  account: ?(TokenAccount | Account),
+  parentAccount: ?Account,
+  navigation: any,
+  route: { params: RouteParams },
+};
 
-interface Props {
-  account: ?(TokenAccount | Account);
-  parentAccount: ?Account;
-  navigation: *;
-  route: { params: RouteParams };
-}
+type RouteParams = {
+  accountId: string,
+  deviceId: string,
+  transaction: any,
+  result: Operation,
+};
 
 class ValidationSuccess extends Component<Props> {
   onClose = () => {

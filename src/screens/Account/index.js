@@ -47,15 +47,15 @@ import perFamilyAccountBodyHeader from "../../generated/AccountBodyHeader";
 import { useScrollToTop } from "../../navigation/utils";
 import perFamilyAccountBalanceSummaryFooter from "../../generated/AccountBalanceSummaryFooter";
 
-interface RouteParams {
-  accountId: string;
-  parentId?: string;
-}
+type Props = {
+  navigation: any,
+  route: { params: RouteParams },
+};
 
-interface Props {
-  navigation: any;
-  route: { params: RouteParams };
-}
+type RouteParams = {
+  accountId: string,
+  parentId?: string,
+};
 
 const AnimatedSectionList = Animated.createAnimatedComponent(SectionList);
 const List = accountSyncRefreshControl(AnimatedSectionList);

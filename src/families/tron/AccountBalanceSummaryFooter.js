@@ -20,9 +20,9 @@ import BandwidthIcon from "../../icons/Bandwidth";
 import EnergyIcon from "../../icons/Energy";
 import CurrencyUnitValue from "../../components/CurrencyUnitValue";
 
-interface Props {
-  account: Account;
-}
+type Props = {
+  account: Account,
+};
 
 type InfoName = "available" | "frozen" | "bandwidth" | "energy";
 
@@ -100,11 +100,11 @@ export function AccountBalanceFooter({ account }: Props) {
   return <AccountBalanceSummaryFooter account={account} />;
 }
 
-interface InfoItemProps {
-  onPress: () => void;
-  title: React$Node;
-  value: React$Node;
-}
+type InfoItemProps = {
+  onPress: () => void,
+  title: React$Node,
+  value: React$Node,
+};
 
 function InfoItem({ onPress, title, value }: InfoItemProps) {
   return (

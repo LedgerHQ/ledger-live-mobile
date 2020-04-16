@@ -37,13 +37,13 @@ import { NavigatorName, ScreenName } from "../../const";
 import BakerImage from "./BakerImage";
 import DelegatingContainer from "./DelegatingContainer";
 
-interface Props {
-  isOpened: boolean;
-  onClose: () => void;
-  account: AccountLike;
-  parentAccount: ?Account;
-  delegation: Delegation;
-}
+type Props = {
+  isOpened: boolean,
+  onClose: () => void,
+  account: AccountLike,
+  parentAccount: ?Account,
+  delegation: Delegation,
+};
 
 const forceInset = { bottom: "always" };
 

@@ -14,10 +14,10 @@ const hitSlop = {
   bottom: 25,
 };
 
-interface Props {
-  tintColor: string;
-  navigation: *;
-}
+type Props = {
+  tintColor: string,
+  navigation: any,
+};
 
 export function TransferHeader(props: Props) {
   const [isModalOpened, setIsModalOpened] = useState(false);

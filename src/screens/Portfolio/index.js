@@ -47,9 +47,9 @@ const AnimatedSectionList = createNativeWrapper(
 );
 const List = globalSyncRefreshControl(AnimatedSectionList);
 
-interface Props {
-  navigation: *;
-}
+type Props = {
+  navigation: any,
+};
 
 export default function PortfolioScreen({ navigation }: Props) {
   const accounts = useSelector(accountsSelector);

@@ -19,16 +19,16 @@ import DeleteAccountRow from "./DeleteAccountRow";
 import DeleteAccountModal from "./DeleteAccountModal";
 import AccountAdvancedLogsRow from "./AccountAdvancedLogsRow";
 
-interface RouteParams {
-  accountId: string;
-}
+type Props = {
+  navigation: any,
+  route: { params: RouteParams },
+  account: Account,
+  deleteAccount: Function,
+};
 
-interface Props {
-  navigation: *;
-  route: { params: RouteParams };
-  account: Account;
-  deleteAccount: Function;
-}
+type RouteParams = {
+  accountId: string,
+};
 
 type State = {
   isModalOpened: boolean,

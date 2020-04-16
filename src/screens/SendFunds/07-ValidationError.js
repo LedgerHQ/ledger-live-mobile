@@ -13,20 +13,20 @@ import { urls } from "../../config/urls";
 
 const forceInset = { bottom: "always" };
 
-interface RouteParams {
-  accountId: string;
-  parentId: String;
-  deviceId: string;
-  transaction: *;
-  error: Error;
-}
+type Props = {
+  account: AccountLike,
+  parentAccount: ?Account,
+  navigation: any,
+  route: { params: RouteParams },
+};
 
-interface Props {
-  account: AccountLike;
-  parentAccount: ?Account;
-  navigation: *;
-  route: { params: RouteParams };
-}
+type RouteParams = {
+  accountId: string,
+  parentId: String,
+  deviceId: string,
+  transaction: any,
+  error: Error,
+};
 
 class ValidationError extends Component<Props> {
   onClose = () => {

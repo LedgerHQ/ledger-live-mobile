@@ -16,15 +16,15 @@ import colors from "../../colors";
 
 const forceInset = { bottom: "always" };
 
-interface RouteParams {
-  deviceId: string;
-  firmware: FirmwareUpdateContext;
-}
+type Props = {
+  navigation: any,
+  route: { params: RouteParams },
+};
 
-interface Props {
-  navigation: *;
-  route: { params: RouteParams };
-}
+type RouteParams = {
+  deviceId: string,
+  firmware: FirmwareUpdateContext,
+};
 
 type State = {};
 

@@ -11,11 +11,12 @@ import type { T } from "../../../types/common";
 import PasswordForm from "./PasswordForm";
 import { VIBRATION_PATTERN_ERROR } from "../../../constants";
 
-interface Props {
-  t: T;
-  disablePrivacy(): () => *;
-  navigation: *;
-}
+type Props = {
+  t: T,
+  disablePrivacy: () => void,
+  navigation: any,
+};
+
 type State = {
   error: ?Error,
   confirmPassword: string,
@@ -76,6 +77,7 @@ class PasswordRemove extends PureComponent<Props, State> {
 }
 
 export default compose(
+  // $FlowFixMe
   connect(null, mapDispatchToProps),
   withTranslation(),
 )(PasswordRemove);

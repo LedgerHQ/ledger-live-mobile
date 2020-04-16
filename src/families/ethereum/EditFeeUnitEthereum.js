@@ -42,11 +42,11 @@ const GasSlider = React.memo(({ defaultGas, value, onChange }: *) => {
   );
 });
 
-interface Props {
-  account: AccountLike;
-  parentAccount: ?Account;
-  transaction: Transaction;
-}
+type Props = {
+  account: AccountLike,
+  parentAccount: ?Account,
+  transaction: Transaction,
+};
 
 export default function EditFeeUnitEthereum({
   account,

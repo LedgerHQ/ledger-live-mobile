@@ -72,15 +72,15 @@ class LogItem extends PureComponent<{ log: Log }> {
   }
 }
 
-interface RouteParams {
-  deviceId: string;
-}
+type Props = {
+  navigation: any,
+  route: { params: RouteParams },
+  device: any,
+};
 
-interface Props {
-  navigation: *;
-  route: { params: RouteParams };
-  device: *;
-}
+type RouteParams = {
+  deviceId: string,
+};
 
 class DebugBLE extends Component<
   Props,

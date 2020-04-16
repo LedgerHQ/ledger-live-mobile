@@ -3,10 +3,10 @@ import { useEffect, useRef } from "react";
 import { useIsFocused } from "@react-navigation/native";
 import { screen } from "./segment";
 
-interface Props {
-  category: string;
-  name?: string;
-}
+type Props = {
+  category: string,
+  name?: string,
+};
 
 export default function TrackScreen({ category, name, ...props }: Props) {
   const isFocused = useIsFocused();

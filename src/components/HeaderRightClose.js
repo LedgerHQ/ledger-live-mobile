@@ -7,13 +7,13 @@ import CloseIcon from "../icons/Close";
 import colors from "../colors";
 import ConfirmationModal from "./ConfirmationModal";
 
-interface Props {
-  preferDismiss: boolean;
-  color: string;
-  withConfirmation?: boolean;
-  confirmationTitle?: React$Node;
-  confirmationDesc?: React$Node;
-}
+type Props = {
+  preferDismiss: boolean,
+  color: string,
+  withConfirmation?: boolean,
+  confirmationTitle?: React$Node,
+  confirmationDesc?: React$Node,
+};
 
 export default function HeaderRightClose({
   color = colors.grey,

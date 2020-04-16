@@ -10,9 +10,9 @@ import colors from "../../colors";
 import LText from "../LText";
 import Circle from "../Circle";
 
-interface Props {
-  onPress: () => *;
-}
+type Props = {
+  onPress: () => void,
+};
 
 export default function PairNewDeviceButton({ onPress }: Props) {
   return (

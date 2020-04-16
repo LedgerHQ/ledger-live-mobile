@@ -9,14 +9,14 @@ import NavigationScrollView from "../../components/NavigationScrollView";
 import { localeIds } from "../../languages";
 import colors from "../../colors";
 
-interface RouteParams {
-  accountId: string;
-}
+type Props = {
+  navigation: any,
+  route: { params: RouteParams },
+};
 
-interface Props {
-  navigation: *;
-  route: { params: RouteParams };
-}
+type RouteParams = {
+  accountId: string,
+};
 
 export default function AdvancedLogs({ route }: Props) {
   const { account } = useSelector(accountScreenSelector(route));

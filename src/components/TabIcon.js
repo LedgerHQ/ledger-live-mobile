@@ -4,12 +4,12 @@ import { View, StyleSheet } from "react-native";
 import { Trans } from "react-i18next";
 import LText from "./LText";
 
-interface Props {
-  color: string;
-  focused: boolean;
-  i18nKey: string;
-  Icon: *;
-}
+type Props = {
+  color: string,
+  focused: boolean,
+  i18nKey: string,
+  Icon: any,
+};
 
 export default function TabIcon({ Icon, i18nKey, color, focused }: Props) {
   return (

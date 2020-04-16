@@ -16,14 +16,14 @@ import NavigationScrollView from "../../components/NavigationScrollView";
 
 const forceInset = { bottom: "always" };
 
-interface RouteParams {
-  currency: CryptoCurrency;
-}
+type Props = {
+  navigation: any,
+  route: { params: RouteParams },
+};
 
-interface Props {
-  navigation: *;
-  route: { params: RouteParams };
-}
+type RouteParams = {
+  currency: CryptoCurrency,
+};
 
 type State = {};
 

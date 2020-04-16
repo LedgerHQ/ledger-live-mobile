@@ -14,15 +14,15 @@ import Button from "../../components/Button";
 import IconCheck from "../../icons/Check";
 import CurrencyIcon from "../../components/CurrencyIcon";
 
-interface RouteParams {
-  currency: CryptoCurrency;
-  deviceId: string;
-}
+type Props = {
+  navigation: any,
+  route: { params: RouteParams },
+};
 
-interface Props {
-  navigation: *;
-  route: { params: RouteParams };
-}
+type RouteParams = {
+  currency: CryptoCurrency,
+  deviceId: string,
+};
 
 type State = {};
 

@@ -43,17 +43,17 @@ import BakerImage from "../BakerImage";
 
 const forceInset = { bottom: "always" };
 
-interface RouteParams {
-  accountId: string;
-  transaction: Transaction;
-  status: TransactionStatus;
-}
-
 type Props = {
   account: AccountLike,
   parentAccount: ?Account,
-  navigation: *,
+  navigation: any,
   route: { params: RouteParams },
+};
+
+type RouteParams = {
+  accountId: string,
+  transaction: Transaction,
+  status: TransactionStatus,
 };
 
 const keyExtractor = baker => baker.address;
@@ -433,4 +433,5 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state, { route }) =>
   accountScreenSelector(route)(state);
 
+// $FlowFixMe
 export default connect(mapStateToProps)(withTranslation()(SelectValidator));

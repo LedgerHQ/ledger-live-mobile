@@ -19,10 +19,10 @@ import CameraScreen from "../../components/CameraScreen";
 import GenericErrorBottomModal from "../../components/GenericErrorBottomModal";
 import getWindowDimensions from "../../logic/getWindowDimensions";
 
-interface Props {
-  navigation: *;
-  route: *;
-}
+type Props = {
+  navigation: any,
+  route: any,
+};
 
 class Scan extends PureComponent<
   Props,
@@ -85,7 +85,6 @@ class Scan extends PureComponent<
   onResult = result => {
     const onFinish = this.props.route.params?.onFinish;
 
-    // $FlowFixMe
     this.props.navigation.replace(ScreenName.DisplayResult, {
       result,
       onFinish,

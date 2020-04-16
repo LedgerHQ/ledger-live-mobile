@@ -18,10 +18,10 @@ import Button from "./Button";
 import colors from "../colors";
 import CloseIcon from "../icons/Close";
 
-interface Props {
-  account: Account;
-  field: string;
-}
+type Props = {
+  account: Account,
+  field: string,
+};
 
 export default function EditFreeUnit({ account, field }: Props) {
   const { navigate } = useNavigation();

@@ -26,16 +26,16 @@ import Scanning from "./Scanning";
 import ScanningTimeout from "./ScanningTimeout";
 import RenderError from "./RenderError";
 
-interface RouteParams {
-  onDone?: (deviceId: string) => void;
-}
+type Props = {
+  navigation: any,
+  route: { params: RouteParams },
+  knownDevices: DeviceLike[],
+  addKnownDevice: DeviceLike => void,
+};
 
-interface Props {
-  navigation: *;
-  route: { params: RouteParams };
-  knownDevices: DeviceLike[];
-  addKnownDevice: DeviceLike => *;
-}
+type RouteParams = {
+  onDone?: (deviceId: string) => void,
+};
 
 type Device = {
   id: string,
@@ -224,6 +224,7 @@ class Screen extends Component<Props, State> {
   }
 }
 
+// $FlowFixMe
 export default connect(
   createStructuredSelector({
     knownDevices: knownDevicesSelector,

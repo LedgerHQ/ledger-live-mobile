@@ -28,10 +28,10 @@ import withEnv from "../../logic/withEnv";
 const SEARCH_KEYS = ["name", "ticker"];
 const forceInset = { bottom: "always" };
 
-interface Props {
-  devMode: boolean;
-  navigation: *;
-}
+type Props = {
+  devMode: boolean,
+  navigation: any,
+};
 
 const keyExtractor = currency => currency.id;
 

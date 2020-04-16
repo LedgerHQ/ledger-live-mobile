@@ -39,17 +39,17 @@ const mapDispatchToProps = {
   saveBleDeviceName,
 };
 
-interface RouteParams {
-  deviceId: string;
-  deviceName: string;
-}
+type Props = {
+  navigation: any,
+  route: { params: RouteParams },
+  deviceName: string,
+  saveBleDeviceName: (string, string) => void,
+};
 
-interface Props {
-  navigation: *;
-  route: { params: RouteParams };
-  deviceName: string;
-  saveBleDeviceName: (string, string) => *;
-}
+type RouteParams = {
+  deviceId: string,
+  deviceName: string,
+};
 
 class EditDeviceName extends PureComponent<
   Props,
@@ -171,6 +171,7 @@ class EditDeviceName extends PureComponent<
 }
 
 export default compose(
+  // $FlowFixMe
   connect(null, mapDispatchToProps),
   withTranslation(),
 )(EditDeviceName);

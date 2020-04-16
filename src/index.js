@@ -59,9 +59,9 @@ Text.defaultProps = Text.defaultProps || {};
 // $FlowFixMe
 Text.defaultProps.allowFontScaling = false;
 
-interface AppProps {
-  importDataString: boolean;
-}
+type AppProps = {
+  importDataString: boolean,
+};
 
 function App({ importDataString }: AppProps) {
   useAppStateListener();

@@ -2,9 +2,9 @@
 import { useMemo } from "react";
 import { useLocale } from "../context/Locale";
 
-interface Props {
-  date: Date;
-}
+type Props = {
+  date: Date,
+};
 
 export default function OperationRowDate({ date }: Props) {
   const { locale } = useLocale();

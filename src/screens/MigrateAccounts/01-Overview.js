@@ -35,12 +35,12 @@ const mapStateToProps = createStructuredSelector({
       .sort(),
 });
 
-interface Props {
-  navigation: *;
-  currencyIds: string[];
-  migratableAccounts: Account[];
-  route: *;
-}
+type Props = {
+  navigation: any,
+  currencyIds: string[],
+  migratableAccounts: Account[],
+  route: any,
+};
 
 const forceInset = { bottom: "always" };
 

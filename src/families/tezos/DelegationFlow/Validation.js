@@ -22,18 +22,18 @@ import { useSignWithDevice } from "../../../logic/screenTransactionHooks";
 
 const forceInset = { bottom: "always" };
 
-interface RouteParams {
-  accountId: string;
-  deviceId: string;
-  modelId: DeviceModelId;
-  wired: boolean;
-  transaction: Transaction;
-  status: TransactionStatus;
-}
+type Props = {
+  route: { params: RouteParams },
+};
 
-interface Props {
-  route: { params: RouteParams };
-}
+type RouteParams = {
+  accountId: string,
+  deviceId: string,
+  modelId: DeviceModelId,
+  wired: boolean,
+  transaction: Transaction,
+  status: TransactionStatus,
+};
 
 export default function Validation({ route }: Props) {
   const { account, parentAccount } = useSelector(accountScreenSelector(route));

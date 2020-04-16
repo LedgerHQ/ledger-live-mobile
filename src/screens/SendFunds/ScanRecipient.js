@@ -19,17 +19,17 @@ import CameraScreen from "../../components/CameraScreen";
 import FallBackCamera from "./FallbackCamera/Fallback";
 import getWindowDimensions from "../../logic/getWindowDimensions";
 
-interface RouteParams {
-  accountId: string;
-  transaction: Transaction;
-}
+type Props = {
+  navigation: any,
+  route: { params: RouteParams },
+  account: AccountLike,
+  parentAccount: ?Account,
+};
 
-interface Props {
-  navigation: *;
-  route: { params: RouteParams };
-  account: AccountLike;
-  parentAccount: ?Account;
-}
+type RouteParams = {
+  accountId: string,
+  transaction: Transaction,
+};
 
 type State = {
   width: number,

@@ -30,18 +30,18 @@ import HeaderBackImage from "../../components/HeaderBackImage";
 
 const forceInset = { bottom: "always" };
 
-interface RouteParams {
-  result: Result;
-  onFinish?: () => void;
-}
+type Props = {
+  navigation: any,
+  route: { params: RouteParams },
+  accounts: Account[],
+  importAccounts: ({ items: ImportItem[], selectedAccounts: string[] }) => void,
+  importDesktopSettings: (settings: any) => void,
+};
 
-interface Props {
-  navigation: any;
-  route: { params: RouteParams };
-  accounts: Account[];
-  importAccounts: ({ items: ImportItem[], selectedAccounts: string[] }) => void;
-  importDesktopSettings: (settings: any) => void;
-}
+type RouteParams = {
+  result: Result,
+  onFinish?: () => void,
+};
 
 type State = {
   selectedAccounts: string[],
@@ -213,6 +213,7 @@ class DisplayResult extends Component<Props, State> {
   }
 }
 
+// $FlowFixMe
 export default connect(
   createStructuredSelector({ accounts: accountsSelector }),
   {

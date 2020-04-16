@@ -1,5 +1,4 @@
 /* @flow */
-/* eslint-disable no-console */
 import React, { Component } from "react";
 import { View, StyleSheet } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
@@ -12,13 +11,14 @@ import colors from "../../colors";
 
 const forceInset = { bottom: "always" };
 
-interface RouteParams {
-  deviceId: string;
-}
-interface Props {
-  navigation: *;
-  route: { params: RouteParams };
-}
+type Props = {
+  navigation: any,
+  route: { params: RouteParams },
+};
+
+type RouteParams = {
+  deviceId: string,
+};
 
 type State = {};
 

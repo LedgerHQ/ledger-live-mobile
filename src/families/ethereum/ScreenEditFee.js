@@ -3,6 +3,7 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { useSelector } from "react-redux";
+import type { Transaction } from "@ledgerhq/live-common/lib/families/ethereum/types";
 import { i18n } from "../../context/Locale";
 import colors from "../../colors";
 import { accountScreenSelector } from "../../reducers/accounts";
@@ -16,14 +17,14 @@ const options = {
   headerLeft: null,
 };
 
-interface RouteParams {
-  accountId: string;
-  transaction: Transaction;
-}
+type Props = {
+  route: { params: RouteParams },
+};
 
-interface Props {
-  route: { params: RouteParams };
-}
+type RouteParams = {
+  accountId: string,
+  transaction: Transaction,
+};
 
 function EthereumEditFee({ route }: Props) {
   const { account, parentAccount } = useSelector(accountScreenSelector(route));

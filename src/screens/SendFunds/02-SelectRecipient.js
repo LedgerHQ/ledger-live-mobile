@@ -32,17 +32,17 @@ const withoutHiddenError = error =>
 
 const forceInset = { bottom: "always" };
 
-interface RouteParams {
-  accountId: string;
-  parentId: string;
-  transaction: Transaction;
-  justScanned?: boolean;
-}
+type Props = {
+  navigation: any,
+  route: { params: RouteParams },
+};
 
-interface Props {
-  navigation: *;
-  route: { params: RouteParams };
-}
+type RouteParams = {
+  accountId: string,
+  parentId: string,
+  transaction: Transaction,
+  justScanned?: boolean,
+};
 
 export default function SendSelectRecipient({ navigation, route }: Props) {
   const { t } = useTranslation();

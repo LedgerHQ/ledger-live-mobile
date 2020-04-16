@@ -18,16 +18,16 @@ import NavigationScrollView from "../../components/NavigationScrollView";
 
 const forceInset = { bottom: "always" };
 
-interface RouteParams {
-  accountId: string;
-  transaction: Transaction;
-  status: TransactionStatus;
-}
+type Props = {
+  navigation: any,
+  route: { params: RouteParams },
+};
 
-interface Props {
-  navigation: *;
-  route: { params: RouteParams };
-}
+type RouteParams = {
+  accountId: string,
+  transaction: Transaction,
+  status: TransactionStatus,
+};
 
 export default function ConnectDevice({ navigation, route }: Props) {
   const { account, parentAccount } = useSelector(accountScreenSelector(route));

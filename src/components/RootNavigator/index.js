@@ -9,9 +9,9 @@ import BaseNavigator from "./BaseNavigator";
 import BaseOnboardingNavigator from "./BaseOnboardingNavigator";
 import ImportAccountsNavigator from "./ImportAccountsNavigator";
 
-interface Props {
-  importDataString: string;
-}
+type Props = {
+  importDataString: string,
+};
 
 export default function RootNavigator({ importDataString }: Props) {
   const hasCompletedOnboarding = useSelector(hasCompletedOnboardingSelector);

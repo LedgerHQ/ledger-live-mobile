@@ -15,10 +15,11 @@ const MANAGER_TABS = {
   CATALOG: "CATALOG",
   INSTALLED_APPS: "INSTALLED_APPS",
 };
-interface Props {
-  navigation: *;
-  route: *;
-}
+
+type Props = {
+  navigation: any,
+  route: any,
+};
 
 const Manager = ({ navigation, route }: Props) => {
   const { appRes, deviceId, deviceInfo } = route.params.meta;

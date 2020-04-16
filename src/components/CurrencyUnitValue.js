@@ -5,14 +5,14 @@ import type { Unit } from "@ledgerhq/live-common/lib/types";
 
 import { useLocale } from "../context/Locale";
 
-interface Props {
-  unit: Unit;
-  value: ?BigNumber;
-  showCode?: boolean;
-  alwaysShowSign?: boolean;
-  before?: string;
-  after?: string;
-}
+type Props = {
+  unit: Unit,
+  value: ?BigNumber,
+  showCode?: boolean,
+  alwaysShowSign?: boolean,
+  before?: string,
+  after?: string,
+};
 
 export default function CurrencyUnitValue({
   unit,

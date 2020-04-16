@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { BigNumber } from "bignumber.js";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
+import type { Transaction } from "@ledgerhq/live-common/lib/families/ripple/types";
 import { i18n } from "../../context/Locale";
 import KeyboardView from "../../components/KeyboardView";
 import Button from "../../components/Button";
@@ -15,15 +16,15 @@ import colors from "../../colors";
 import { ScreenName } from "../../const";
 import { track } from "../../analytics";
 
-interface RouteParams {
-  accountId: string;
-  transaction: Transaction;
-}
+type Props = {
+  navigation: any,
+  route: { params: RouteParams },
+};
 
-interface Props {
-  navigation: *;
-  route: { params: RouteParams };
-}
+type RouteParams = {
+  accountId: string,
+  transaction: Transaction,
+};
 
 const forceInset = { bottom: "always" };
 

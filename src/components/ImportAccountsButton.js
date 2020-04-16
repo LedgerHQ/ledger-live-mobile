@@ -5,9 +5,9 @@ import { ScreenName } from "../const";
 
 import Button from "./Button";
 
-interface Props {
-  title: string;
-}
+type Props = {
+  title: string,
+};
 
 export default function ImportAccountsButton({ title }: Props) {
   const { navigate } = useNavigation();

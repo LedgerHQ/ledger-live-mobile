@@ -13,19 +13,19 @@ import { urls } from "../../../config/urls";
 
 const forceInset = { bottom: "always" };
 
-interface RouteParams {
-  accountId: string;
-  parentId: String;
-  deviceId: string;
-  transaction: *;
-  error: Error;
-}
-
 type Props = {
   account: AccountLike,
   parentAccount: ?Account,
-  navigation: *,
+  navigation: any,
   route: { params: RouteParams },
+};
+
+type RouteParams = {
+  accountId: string,
+  parentId: String,
+  deviceId: string,
+  transaction: any,
+  error: Error,
 };
 
 class ValidationError extends Component<Props> {
@@ -69,4 +69,5 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state, { route }) =>
   accountScreenSelector(route)(state);
 
+// $FlowFixMe
 export default connect(mapStateToProps)(withTranslation()(ValidationError));

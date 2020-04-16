@@ -16,10 +16,10 @@ import { urls } from "../../../config/urls";
 
 const forceInset = { bottom: "always" };
 
-interface Props {
-  navigation: *;
-  route: { params: * };
-}
+type Props = {
+  navigation: any,
+  route: { params: any },
+};
 
 export default function DelegationStarted({ navigation, route }: Props) {
   const onNext = useCallback(() => {

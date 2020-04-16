@@ -21,19 +21,19 @@ export const MAX_ACCOUNT_NAME_LENGHT = 50;
 
 const forceInset = { bottom: "always" };
 
-interface RouteParams {
-  account: *;
-  accountId?: string;
-  accountName?: string;
-  onAccountNameChange: (string, *) => void;
-}
+type Props = {
+  navigation: any,
+  route: { params: RouteParams },
+  updateAccount: Function,
+  account: Account,
+};
 
-interface Props {
-  navigation: *;
-  route: { params: RouteParams };
-  updateAccount: Function;
-  account: Account;
-}
+type RouteParams = {
+  account: any,
+  accountId?: string,
+  accountName?: string,
+  onAccountNameChange: (name: string, changedAccount: Account) => void,
+};
 
 type State = {
   accountName: string,
@@ -124,6 +124,7 @@ class EditAccountName extends PureComponent<Props, State> {
 }
 
 export default compose(
+  // $FlowFixMe
   connect(mapStateToProps, mapDispatchToProps),
   withTranslation(),
 )(EditAccountName);

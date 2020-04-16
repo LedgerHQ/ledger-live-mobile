@@ -40,16 +40,16 @@ import BakerImage from "../BakerImage";
 
 const forceInset = { bottom: "always" };
 
-interface RouteParams {
-  mode?: "delegate" | "undelegate";
-  accountId: string;
-  parentId?: string;
-}
+type Props = {
+  navigation: any,
+  route: { params: RouteParams },
+};
 
-interface Props {
-  navigation: *;
-  route: { params: RouteParams };
-}
+type RouteParams = {
+  mode?: "delegate" | "undelegate",
+  accountId: string,
+  parentId?: string,
+};
 
 const AccountBalanceTag = ({ account }: { account: AccountLike }) => {
   const unit = getAccountUnit(account);
@@ -79,7 +79,7 @@ const Words = ({
 }: {
   children: React$Node,
   highlighted?: boolean,
-  style?: *,
+  style?: any,
 }) => (
   <LText
     numberOfLines={1}

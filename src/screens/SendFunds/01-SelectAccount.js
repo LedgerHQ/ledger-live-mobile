@@ -30,11 +30,11 @@ import type { SearchResult } from "../../helpers/formatAccountSearchResults";
 const SEARCH_KEYS = ["name", "unit.code", "token.name", "token.ticker"];
 const forceInset = { bottom: "always" };
 
-interface Props {
-  accounts: Account[];
-  allAccounts: AccountLikeArray;
-  navigation: *;
-}
+type Props = {
+  accounts: Account[],
+  allAccounts: AccountLikeArray,
+  navigation: any,
+};
 
 type State = {};
 

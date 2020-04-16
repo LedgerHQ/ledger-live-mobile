@@ -14,11 +14,11 @@ import LText from "../components/LText";
 import TranslatedError from "../components/TranslatedError";
 import colors from "../colors";
 
-interface GraphProps {
-  width: number;
-  height: number;
-  data: number[];
-}
+type GraphProps = {
+  width: number,
+  height: number,
+  data: number[],
+};
 
 class Graph extends PureComponent<GraphProps> {
   render() {
@@ -65,15 +65,15 @@ const benchmark = ({ inputAPDUSize, outputAPDUSize }) => {
 
 const speedStatusSize = 10;
 
-interface RouteParams {
-  deviceId: string;
-}
+type Props = {
+  navigation: any,
+  route: { params: RouteParams },
+  device: any,
+};
 
-interface Props {
-  navigation: *;
-  route: { params: RouteParams };
-  device: *;
-}
+type RouteParams = {
+  deviceId: string,
+};
 
 class DebugBLEBenchmark extends Component<
   Props,
@@ -87,7 +87,6 @@ class DebugBLEBenchmark extends Component<
 > {
   state = {
     exchangeStats: [],
-    // $FlowFixMe
     speedStats: Array(speedStatusSize).fill(0),
     inputAPDUSize: 100,
     outputAPDUSize: 100,

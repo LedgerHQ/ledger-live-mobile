@@ -12,15 +12,15 @@ import { ScreenName } from "../../const";
 
 const forceInset = { bottom: "always" };
 
-interface RouteParams {
-  deviceId: string;
-  error: Error;
-}
+type Props = {
+  navigation: any,
+  route: { params: RouteParams },
+};
 
-interface Props {
-  navigation: *;
-  route: { params: RouteParams };
-}
+type RouteParams = {
+  deviceId: string,
+  error: Error,
+};
 
 type State = {};
 
