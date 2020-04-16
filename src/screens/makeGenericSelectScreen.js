@@ -17,6 +17,8 @@ type Opts<Item> = {
   keyExtractor: Item => string,
   formatItem?: Item => string,
   Entry?: EntryComponent<Item>,
+  navigationOptions?: Object,
+  ListHeaderComponent?: any,
   // TODO in future: searchable: boolean
 };
 
@@ -58,12 +60,15 @@ export default <Item>(opts: Opts<Item>) => {
     selectedKey: string,
     items: Item[],
     onValueChange: (Item, *) => void,
-    navigation: *,
+    navigation: any,
+    cancelNavigateBack: ?boolean,
   }> {
     onPress = (item: Item) => {
-      const { navigation, onValueChange } = this.props;
+      const { navigation, onValueChange, cancelNavigateBack } = this.props;
       onValueChange(item, this.props);
-      navigation.goBack();
+      if (!cancelNavigateBack) {
+        navigation.goBack();
+      }
       track(id, itemEventProperties(item));
     };
 
@@ -78,6 +83,7 @@ export default <Item>(opts: Opts<Item>) => {
     render() {
       return (
         <FlatList
+          ListHeaderComponent={opts.ListHeaderComponent}
           data={this.props.items}
           renderItem={this.renderItem}
           keyExtractor={keyExtractor}
