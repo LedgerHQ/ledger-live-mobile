@@ -8,7 +8,8 @@ const ACCOUNTS_KEY = "accounts";
 const ACCOUNTS_DB_PREFIX = "accounts.active.";
 
 export async function clearDb() {
-  await store.delete(["settings", "accounts", "countervalues", "ble"]);
+  const list = await store.keys();
+  await store.delete(list.filter(k => k !== "user"));
 }
 
 export async function getUser(): Promise<{ id: string }> {

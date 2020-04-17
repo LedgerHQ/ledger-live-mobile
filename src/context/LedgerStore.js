@@ -7,6 +7,7 @@ import { createStore, applyMiddleware, compose } from "redux";
 import { getAccounts, getCountervalues, getSettings, getBle } from "../db";
 import CounterValues from "../countervalues";
 import reducers from "../reducers";
+import { refreshAccountsOrdering } from "../actions/general";
 import { importSettings } from "../actions/settings";
 import { importStore as importAccounts } from "../actions/accounts";
 import { importBle } from "../actions/ble";
@@ -69,6 +70,8 @@ export default class LedgerStoreProvider extends Component<
 
     const accountsData = await getAccounts();
     store.dispatch(importAccounts(accountsData));
+
+    store.dispatch(refreshAccountsOrdering());
 
     const countervaluesData = await getCountervalues();
     store.dispatch(CounterValues.importAction(countervaluesData));
