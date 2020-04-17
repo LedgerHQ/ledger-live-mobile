@@ -80,14 +80,14 @@ export default function FreezeNavigator() {
         name={ScreenName.FreezeValidationSuccess}
         component={ValidationSuccess}
         options={{
-          header: null,
+          headerTitle: null,
           gesturesEnabled: false,
         }}
       />
       <Stack.Screen
         name={ScreenName.FreezeValidationError}
         component={ValidationError}
-        options={{ header: null }}
+        options={{ headerTitle: null }}
       />
     </Stack.Navigator>
   );

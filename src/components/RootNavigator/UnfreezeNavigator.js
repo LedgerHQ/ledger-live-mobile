@@ -69,14 +69,14 @@ export default function UnfreezeNavigator() {
         name={ScreenName.UnfreezeValidationSuccess}
         component={ValidationSuccess}
         options={{
-          header: null,
+          headerTitle: null,
           gesturesEnabled: false,
         }}
       />
       <Stack.Screen
         name={ScreenName.UnfreezeValidationError}
         component={ValidationError}
-        options={{ header: null }}
+        options={{ headerTitle: null }}
       />
     </Stack.Navigator>
   );

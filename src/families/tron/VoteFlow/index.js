@@ -113,14 +113,14 @@ function VoteFlow() {
         name={ScreenName.VoteValidationError}
         component={VoteValidationError}
         options={{
-          header: null,
+          headerTitle: null,
         }}
       />
       <Stack.Screen
         name={ScreenName.VoteValidationSuccess}
         component={VoteValidationSuccess}
         options={{
-          header: null,
+          headerTitle: null,
           gesturesEnabled: false,
         }}
       />
