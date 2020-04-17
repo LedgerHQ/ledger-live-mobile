@@ -6,7 +6,7 @@ import { StyleSheet, View } from "react-native";
 import type { CryptoCurrency } from "@ledgerhq/live-common/lib/types";
 
 import Icon from "react-native-vector-icons/dist/Feather";
-import { ScreenName } from "../../const";
+import { ScreenName, NavigatorName } from "../../const";
 import colors, { rgba } from "../../colors";
 import { TrackScreen } from "../../analytics";
 import LText from "../../components/LText";
@@ -30,7 +30,8 @@ const IconPlus = () => <Icon name="plus" color={colors.live} size={16} />;
 
 class AddAccountsSuccess extends Component<Props, State> {
   primaryCTA = () => {
-    this.props.navigation.navigate(ScreenName.Accounts);
+    console.log("primaryCTA", this.props.navigation);
+    this.props.navigation.navigate(NavigatorName.AccountsStack);
   };
 
   secondaryCTA = () => {
