@@ -152,7 +152,7 @@ export const NavigatorName = {
   Settings: "Settings",
   TezosDelegationFlow: "TezosDelegationFlow",
   Unfreeze: "Unfreeze",
-  VoteFlow: "VoteFlow",
+  VoteFlow: "TronVoteFlow",
   /* eslint-disable sort-keys */
 
   // Tab
