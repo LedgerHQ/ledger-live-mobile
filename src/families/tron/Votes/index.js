@@ -120,9 +120,12 @@ const Delegation = ({ account, parentAccount }: Props) => {
     const screenName = lastVotedDate
       ? ScreenName.VoteSelectValidator
       : ScreenName.VoteStarted;
-    navigation.navigate(NavigatorName.VoteFlow, screenName, {
-      accountId,
-      parentId,
+    navigation.navigate(NavigatorName.VoteFlow, {
+      screen: screenName,
+      params: {
+        accountId,
+        parentId,
+      },
     });
   }, [lastVotedDate, navigation, accountId, parentId]);
 
