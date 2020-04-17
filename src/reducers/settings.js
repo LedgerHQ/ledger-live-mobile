@@ -14,8 +14,7 @@ import { createSelector } from "reselect";
 import type {
   CryptoCurrency,
   Currency,
-  Account,
-  TokenAccount,
+  AccountLike,
 } from "@ledgerhq/live-common/lib/types";
 import { getAccountCurrency } from "@ledgerhq/live-common/lib/account/helpers";
 import Config from "react-native-config";
@@ -305,7 +304,7 @@ export const experimentalUSBEnabledSelector = createSelector(
 
 export const currencySettingsForAccountSelector = (
   s: *,
-  { account }: { account: TokenAccount | Account },
+  { account }: { account: AccountLike },
 ) => currencySettingsSelector(s, { currency: getAccountCurrency(account) });
 
 export const exchangeSettingsForPairSelector = (

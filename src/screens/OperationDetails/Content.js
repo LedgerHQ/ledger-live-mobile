@@ -58,7 +58,9 @@ type Props = {
 export default function Content({ account, parentAccount, operation }: Props) {
   const navigation = useNavigation();
   const { t } = useTranslation();
-  const currencySettings = useSelector(currencySettingsForAccountSelector);
+  const currencySettings = useSelector(s =>
+    currencySettingsForAccountSelector(s, { account }),
+  );
 
   const [isModalOpened, setIsModalOpened] = useState(false);
 
