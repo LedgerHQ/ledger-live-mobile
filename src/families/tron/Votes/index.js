@@ -110,9 +110,12 @@ const Delegation = ({ account, parentAccount }: Props) => {
   }, [accountId, navigation, parentId]);
 
   const onManageVotes = useCallback(() => {
-    navigation.navigate(ScreenName.VoteCast, {
-      accountId,
-      parentId,
+    navigation.navigate(NavigatorName.VoteFlow, {
+      screen: ScreenName.VoteCast,
+      params: {
+        accountId,
+        parentId,
+      },
     });
   }, [navigation, accountId, parentId]);
 
