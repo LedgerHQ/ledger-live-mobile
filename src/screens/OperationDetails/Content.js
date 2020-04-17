@@ -3,7 +3,7 @@ import React, { useCallback, useState } from "react";
 import { View, StyleSheet, Linking } from "react-native";
 import uniq from "lodash/uniq";
 import { useSelector } from "react-redux";
-import { Trans, useTranslation } from "react-i18next";
+import { Trans } from "react-i18next";
 import { useNavigation } from "@react-navigation/native";
 import type {
   Account,
@@ -58,7 +58,9 @@ type Props = {
 export default function Content({ account, parentAccount, operation }: Props) {
   const navigation = useNavigation();
   const { t } = useTranslation();
-  const currencySettings = useSelector(currencySettingsForAccountSelector);
+  const currencySettings = useSelector(s =>
+    currencySettingsForAccountSelector(s, { account }),
+  );
 
   const [isModalOpened, setIsModalOpened] = useState(false);
 
