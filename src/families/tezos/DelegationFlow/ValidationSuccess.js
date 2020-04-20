@@ -1,14 +1,9 @@
 /* @flow */
-import React, { Component } from "react";
+import React, { useCallback } from "react";
 import { View, StyleSheet, Linking } from "react-native";
-import { connect } from "react-redux";
-import { withTranslation, Trans } from "react-i18next";
-import type {
-  TokenAccount,
-  Account,
-  Operation,
-  Transaction,
-} from "@ledgerhq/live-common/lib/types";
+import { useSelector } from "react-redux";
+import { Trans } from "react-i18next";
+import type { Operation, Transaction } from "@ledgerhq/live-common/lib/types";
 import { accountScreenSelector } from "../../../reducers/accounts";
 import { TrackScreen } from "../../../analytics";
 import colors from "../../../colors";
@@ -19,8 +14,6 @@ import Button from "../../../components/Button";
 import { urls } from "../../../config/urls";
 
 type Props = {
-  account: ?(TokenAccount | Account),
-  parentAccount: ?Account,
   navigation: any,
   route: { params: RouteParams },
 };
@@ -32,62 +25,62 @@ type RouteParams = {
   result: Operation,
 };
 
-class ValidationSuccess extends Component<Props> {
-  goToAccount = () => {
-    const { navigation, account, parentAccount } = this.props;
+export default function ValidationSuccess({ navigation, route }: Props) {
+  const { account, parentAccount } = useSelector(accountScreenSelector(route));
+
+  const goToAccount = useCallback(() => {
     if (!account) return;
     navigation.navigate(ScreenName.Account, {
       accountId: account.id,
       parentId: parentAccount && parentAccount.id,
     });
-  };
+  }, [navigation, account, parentAccount]);
 
-  goToHelp = () => {
+  const goToHelp = useCallback(() => {
     Linking.openURL(urls.delegation);
-  };
+  }, []);
 
-  render() {
-    const transaction = this.props.route.params?.transaction;
-    if (transaction.family !== "tezos") return null;
-    return (
-      <View style={styles.root}>
-        <TrackScreen category="SendFunds" name="ValidationSuccess" />
-        <PreventNativeBack />
-        <ValidateSuccess
-          title={
-            <Trans
-              i18nKey={"delegation.broadcastSuccessTitle." + transaction.mode}
-            />
-          }
-          description={
-            <Trans
-              i18nKey={
-                "delegation.broadcastSuccessDescription." + transaction.mode
-              }
-            />
-          }
-          primaryButton={
-            <Button
-              event="DelegationSuccessGoToAccount"
-              title={<Trans i18nKey="delegation.goToAccount" />}
-              type="primary"
-              containerStyle={styles.button}
-              onPress={this.goToAccount}
-            />
-          }
-          secondaryButton={
-            <Button
-              event="DelegationSuccessHowTo"
-              title={<Trans i18nKey="delegation.howDelegationWorks" />}
-              type="lightSecondary"
-              containerStyle={styles.button}
-              onPress={this.goToHelp}
-            />
-          }
-        />
-      </View>
-    );
-  }
+  const transaction = route.params.transaction;
+  if (transaction.family !== "tezos") return null;
+
+  return (
+    <View style={styles.root}>
+      <TrackScreen category="SendFunds" name="ValidationSuccess" />
+      <PreventNativeBack />
+      <ValidateSuccess
+        title={
+          <Trans
+            i18nKey={"delegation.broadcastSuccessTitle." + transaction.mode}
+          />
+        }
+        description={
+          <Trans
+            i18nKey={
+              "delegation.broadcastSuccessDescription." + transaction.mode
+            }
+          />
+        }
+        primaryButton={
+          <Button
+            event="DelegationSuccessGoToAccount"
+            title={<Trans i18nKey="delegation.goToAccount" />}
+            type="primary"
+            containerStyle={styles.button}
+            onPress={goToAccount}
+          />
+        }
+        secondaryButton={
+          <Button
+            event="DelegationSuccessHowTo"
+            title={<Trans i18nKey="delegation.howDelegationWorks" />}
+            type="lightSecondary"
+            containerStyle={styles.button}
+            onPress={goToHelp}
+          />
+        }
+      />
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -100,8 +93,3 @@ const styles = StyleSheet.create({
     marginTop: 24,
   },
 });
-
-const mapStateToProps = (state, { route }) =>
-  accountScreenSelector(route)(state);
-
-export default connect(mapStateToProps)(withTranslation()(ValidationSuccess));
