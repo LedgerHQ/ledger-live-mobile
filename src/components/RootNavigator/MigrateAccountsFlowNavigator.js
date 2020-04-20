@@ -16,7 +16,7 @@ export default function MigrateAccountsFlowNavigator() {
       screenOptions={{
         ...closableStackNavigatorConfig,
         headerShown: false,
-        gesturesEnabled: ({ route }) =>
+        gestureEnabled: ({ route }) =>
           Platform.OS === "ios" ? route.params.allowNavigation : false,
       }}
     >

@@ -20,7 +20,7 @@ function DelegationFlow() {
     <Stack.Navigator
       screenOptions={{
         ...closableStackNavigatorConfig,
-        gesturesEnabled: ({ route }) =>
+        gestureEnabled: ({ route }) =>
           Platform.OS === "ios" ? route.params.allowNavigation : false,
       }}
     >
@@ -38,7 +38,7 @@ function DelegationFlow() {
         component={DelegationSummary}
         options={{
           headerLeft: null,
-          gesturesEnabled: false,
+          gestureEnabled: false,
           headerTitle: () => (
             <StepHeader
               title={t("delegation.summaryTitle")}
@@ -55,7 +55,7 @@ function DelegationFlow() {
         component={DelegationSelectValidator}
         options={{
           headerRight: null,
-          gesturesEnabled: false,
+          gestureEnabled: false,
           headerTitle: () => (
             <StepHeader title={t("delegation.selectValidatorTitle")} />
           ),
@@ -91,7 +91,7 @@ function DelegationFlow() {
           ),
           headerLeft: null,
           headerRight: null,
-          gesturesEnabled: false,
+          gestureEnabled: false,
         }}
       />
       <Stack.Screen
@@ -99,7 +99,7 @@ function DelegationFlow() {
         component={DelegationValidationSuccess}
         options={{
           headerShown: false,
-          gesturesEnabled: false,
+          gestureEnabled: false,
         }}
       />
       <Stack.Screen
@@ -107,7 +107,7 @@ function DelegationFlow() {
         component={DelegationValidationError}
         options={{
           headerShown: false,
-          gesturesEnabled: false,
+          gestureEnabled: false,
         }}
       />
     </Stack.Navigator>

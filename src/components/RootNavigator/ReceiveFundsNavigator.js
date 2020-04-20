@@ -17,7 +17,7 @@ export default function ReceiveFundsNavigator() {
       headerMode="float"
       screenOptions={{
         ...closableStackNavigatorConfig,
-        gesturesEnabled: ({ route }) =>
+        gestureEnabled: ({ route }) =>
           Platform.OS === "ios"
             ? route.params
               ? undefined

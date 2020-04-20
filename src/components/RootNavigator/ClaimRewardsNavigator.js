@@ -46,7 +46,7 @@ export default function ClaimRewardsNavigator() {
           ),
           headerLeft: null,
           headerRight: null,
-          gesturesEnabled: false,
+          gestureEnabled: false,
         }}
       />
       <Stack.Screen
@@ -54,7 +54,7 @@ export default function ClaimRewardsNavigator() {
         component={ValidationSuccess}
         options={{
           headerTitle: null,
-          gesturesEnabled: false,
+          gestureEnabled: false,
         }}
       />
       <Stack.Screen

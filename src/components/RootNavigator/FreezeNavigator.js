@@ -73,7 +73,7 @@ export default function FreezeNavigator() {
           ),
           headerLeft: null,
           headerRight: null,
-          gesturesEnabled: false,
+          gestureEnabled: false,
         }}
       />
       <Stack.Screen
@@ -81,7 +81,7 @@ export default function FreezeNavigator() {
         component={ValidationSuccess}
         options={{
           headerTitle: null,
-          gesturesEnabled: false,
+          gestureEnabled: false,
         }}
       />
       <Stack.Screen

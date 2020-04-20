@@ -26,7 +26,7 @@ function VoteFlow() {
     <Stack.Navigator
       screenOptions={{
         ...closableStackNavigatorConfig,
-        gesturesEnabled: ({ route }) =>
+        gestureEnabled: ({ route }) =>
           Platform.OS === "ios" ? route.params?.allowNavigation ?? true : false,
       }}
     >
@@ -57,7 +57,7 @@ function VoteFlow() {
             shadowOpacity: 0,
             borderBottomWidth: 0,
           },
-          gesturesEnabled: false,
+          gestureEnabled: false,
         }}
       />
       <Stack.Screen
@@ -106,7 +106,7 @@ function VoteFlow() {
           ),
           headerLeft: null,
           headerRight: null,
-          gesturesEnabled: false,
+          gestureEnabled: false,
         }}
       />
       <Stack.Screen
@@ -121,7 +121,7 @@ function VoteFlow() {
         component={VoteValidationSuccess}
         options={{
           headerTitle: null,
-          gesturesEnabled: false,
+          gestureEnabled: false,
         }}
       />
     </Stack.Navigator>

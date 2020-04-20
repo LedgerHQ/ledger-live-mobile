@@ -108,7 +108,7 @@ export default function SendFundsNavigator() {
           ),
           headerLeft: null,
           headerRight: null,
-          gesturesEnabled: false,
+          gestureEnabled: false,
         }}
       />
       <Stack.Screen
@@ -116,7 +116,7 @@ export default function SendFundsNavigator() {
         component={SendValidationSuccess}
         options={{
           headerShown: false,
-          gesturesEnabled: false,
+          gestureEnabled: false,
         }}
       />
       <Stack.Screen

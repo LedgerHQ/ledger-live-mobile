@@ -66,7 +66,7 @@ export default function AddAccountsNavigator() {
               })}
             />
           ),
-          gesturesEnabled: false,
+          gestureEnabled: false,
         }}
       />
       <Stack.Screen

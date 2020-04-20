@@ -144,13 +144,13 @@ export default function ReceiveConfirmation({ navigation, route }: Props) {
       navigation.setOptions({
         headerLeft: null,
         headerRight: () => null,
-        gesturesEnabled: false,
+        gestureEnabled: false,
       });
       return;
     }
 
     const { headerLeft, headerRight } = closableStackNavigatorConfig;
-    navigation.setOptions({ headerLeft, headerRight, gesturesEnabled: true });
+    navigation.setOptions({ headerLeft, headerRight, gestureEnabled: true });
   }, [allowNavigation, navigation]);
 
   useEffect(() => {
