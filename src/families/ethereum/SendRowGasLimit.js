@@ -1,11 +1,9 @@
 /* @flow */
-import React, { PureComponent } from "react";
+import React, { useCallback } from "react";
 import { View, StyleSheet } from "react-native";
-import { withTranslation } from "react-i18next";
+import { useTranslation, useNavigation } from "react-i18next";
 import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
 import type { Transaction } from "@ledgerhq/live-common/lib/families/ethereum/types";
-import { BigNumber } from "bignumber.js";
-import type { T } from "../../types/common";
 import LText from "../../components/LText";
 import colors from "../../colors";
 import { ScreenName } from "../../const";
@@ -15,41 +13,40 @@ type Props = {
   account: AccountLike,
   parentAccount: ?Account,
   transaction: Transaction,
-  navigation: *,
-  t: T,
 };
 
-type State = {
-  gasLimit: ?BigNumber,
-};
-class EthereumGasLimit extends PureComponent<Props, State> {
-  editGasLimit = () => {
-    const { account, parentAccount, navigation, transaction } = this.props;
+export default function EthereumGasLimit({
+  account,
+  parentAccount,
+  transaction,
+}: Props) {
+  const { t } = useTranslation();
+  const navigation = useNavigation();
+
+  const editGasLimit = useCallback(() => {
     navigation.navigate(ScreenName.EthereumEditGasLimit, {
       accountId: account.id,
       parentId: parentAccount && parentAccount.id,
       transaction,
     });
-  };
+  }, [navigation, account, parentAccount, transaction]);
 
-  render() {
-    const { t, transaction } = this.props;
-    const gasLimit = transaction.userGasLimit || transaction.estimatedGasLimit;
-    return (
-      <View>
-        <SummaryRow title={t("send.summary.gasLimit")} info="info">
-          <View style={styles.gasLimitContainer}>
-            {gasLimit && (
-              <LText style={styles.gasLimitText}>{gasLimit.toString()}</LText>
-            )}
-            <LText style={styles.link} onPress={this.editGasLimit}>
-              {t("common.edit")}
-            </LText>
-          </View>
-        </SummaryRow>
-      </View>
-    );
-  }
+  const gasLimit = transaction.userGasLimit || transaction.estimatedGasLimit;
+
+  return (
+    <View>
+      <SummaryRow title={t("send.summary.gasLimit")} info="info">
+        <View style={styles.gasLimitContainer}>
+          {gasLimit && (
+            <LText style={styles.gasLimitText}>{gasLimit.toString()}</LText>
+          )}
+          <LText style={styles.link} onPress={editGasLimit}>
+            {t("common.edit")}
+          </LText>
+        </View>
+      </SummaryRow>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -68,5 +65,3 @@ const styles = StyleSheet.create({
     color: colors.darkBlue,
   },
 });
-
-export default withTranslation()(EthereumGasLimit);

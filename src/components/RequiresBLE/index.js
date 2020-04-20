@@ -3,7 +3,6 @@
 // otherwise render an error
 
 import React, { Component } from "react";
-import { withTranslation } from "react-i18next";
 import { Observable } from "rxjs/Observable";
 import TransportBLE from "../../react-native-hw-transport-ble";
 import RequiresLocationOnAndroid from "./RequiresLocationOnAndroid";
@@ -45,10 +44,10 @@ class RequiresBLE extends Component<Props, State> {
   }
 }
 
-const RequiresBLEWrapped = ({ children }: *) => (
-  <RequiresLocationOnAndroid>
-    <RequiresBLE>{children}</RequiresBLE>
-  </RequiresLocationOnAndroid>
-);
-
-export default withTranslation()(RequiresBLEWrapped);
+export default function RequiresBLEWrapped({ children }: *) {
+  return (
+    <RequiresLocationOnAndroid>
+      <RequiresBLE>{children}</RequiresBLE>
+    </RequiresLocationOnAndroid>
+  );
+}

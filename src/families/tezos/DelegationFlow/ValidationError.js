@@ -1,11 +1,7 @@
 /* @flow */
-import React, { Component } from "react";
+import React, { useCallback } from "react";
 import { StyleSheet, Linking } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
-import { connect } from "react-redux";
-import { withTranslation } from "react-i18next";
-import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
-import { accountScreenSelector } from "../../../reducers/accounts";
 import ValidateError from "../../../components/ValidateError";
 import { TrackScreen } from "../../../analytics";
 import colors from "../../../colors";
@@ -14,8 +10,6 @@ import { urls } from "../../../config/urls";
 const forceInset = { bottom: "always" };
 
 type Props = {
-  account: AccountLike,
-  parentAccount: ?Account,
   navigation: any,
   route: { params: RouteParams },
 };
@@ -28,35 +22,32 @@ type RouteParams = {
   error: Error,
 };
 
-class ValidationError extends Component<Props> {
-  onClose = () => {
-    this.props.navigation.dangerouslyGetParent().pop();
-  };
+export default function ValidationError({ navigation, route }: Props) {
+  const onClose = useCallback(() => {
+    navigation.dangerouslyGetParent().pop();
+  }, [navigation]);
 
-  contactUs = () => {
+  const contactUs = useCallback(() => {
     Linking.openURL(urls.contact);
-  };
+  }, []);
 
-  retry = () => {
-    const { navigation } = this.props;
+  const retry = useCallback(() => {
     navigation.goBack();
-  };
+  }, [navigation]);
 
-  render() {
-    const error = this.props.route.params?.error;
+  const error = route.params?.error;
 
-    return (
-      <SafeAreaView style={styles.root} forceInset={forceInset}>
-        <TrackScreen category="DelegationFlow" name="ValidationError" />
-        <ValidateError
-          error={error}
-          onRetry={this.retry}
-          onClose={this.onClose}
-          onContactUs={this.contactUs}
-        />
-      </SafeAreaView>
-    );
-  }
+  return (
+    <SafeAreaView style={styles.root} forceInset={forceInset}>
+      <TrackScreen category="DelegationFlow" name="ValidationError" />
+      <ValidateError
+        error={error}
+        onRetry={retry}
+        onClose={onClose}
+        onContactUs={contactUs}
+      />
+    </SafeAreaView>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -65,9 +56,3 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
   },
 });
-
-const mapStateToProps = (state, { route }) =>
-  accountScreenSelector(route)(state);
-
-// $FlowFixMe
-export default connect(mapStateToProps)(withTranslation()(ValidationError));

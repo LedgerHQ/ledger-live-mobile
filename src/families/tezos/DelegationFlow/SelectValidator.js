@@ -10,10 +10,9 @@ import {
   Platform,
   Linking,
 } from "react-native";
-import i18next from "i18next";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import SafeAreaView from "react-native-safe-area-view";
-import { withTranslation, Trans } from "react-i18next";
+import { useTranslation, Trans } from "react-i18next";
 import Icon from "react-native-vector-icons/dist/Feather";
 import type {
   AccountLike,
@@ -42,19 +41,6 @@ import Info from "../../../icons/Info";
 import BakerImage from "../BakerImage";
 
 const forceInset = { bottom: "always" };
-
-type Props = {
-  account: AccountLike,
-  parentAccount: ?Account,
-  navigation: any,
-  route: { params: RouteParams },
-};
-
-type RouteParams = {
-  accountId: string,
-  transaction: Transaction,
-  status: TransactionStatus,
-};
 
 const keyExtractor = baker => baker.address;
 
@@ -129,12 +115,22 @@ const BakerRow = ({
 
 const ModalIcon = () => <Icon name="user-plus" size={24} color={colors.live} />;
 
-const SelectValidator = ({
-  account,
-  parentAccount,
-  navigation,
-  route,
-}: Props) => {
+type Props = {
+  account: AccountLike,
+  parentAccount: ?Account,
+  navigation: any,
+  route: { params: RouteParams },
+};
+
+type RouteParams = {
+  accountId: string,
+  transaction: Transaction,
+  status: TransactionStatus,
+};
+
+export default function SelectValidator({ navigation, route }: Props) {
+  const { t } = useTranslation();
+  const { account, parentAccount } = useSelector(accountScreenSelector(route));
   const bakers = useBakers(whitelist);
   const [editingCustom, setEditingCustom] = useState(false);
   const [keyboardHeight, setKeyboardHeight] = useState(0);
@@ -302,7 +298,7 @@ const SelectValidator = ({
         id="SelectValidatorInfos"
         isOpened={showInfos}
         onClose={hideInfos}
-        confirmLabel={i18next.t("common.close")}
+        confirmLabel={t("common.close")}
       >
         <View style={styles.providedByContainer}>
           <LText semiBold style={styles.providedByText}>
@@ -326,7 +322,7 @@ const SelectValidator = ({
       </View>
     </SafeAreaView>
   );
-};
+}
 
 const styles = StyleSheet.create({
   root: {
@@ -429,9 +425,3 @@ const styles = StyleSheet.create({
     alignSelf: "stretch",
   },
 });
-
-const mapStateToProps = (state, { route }) =>
-  accountScreenSelector(route)(state);
-
-// $FlowFixMe
-export default connect(mapStateToProps)(withTranslation()(SelectValidator));

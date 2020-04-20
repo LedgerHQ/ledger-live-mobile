@@ -139,11 +139,11 @@ class AuthScreen extends PureComponent<Props, State> {
           password: "",
         });
       } else {
-        console.log("no credentials stored"); // eslint-disable-line
+        console.log("no credentials stored"); // eslint-disable-line no-console
       }
     } catch (err) {
       if (id !== this.submitId) return;
-      console.log("could not load credentials"); // eslint-disable-line
+      console.log("could not load credentials"); // eslint-disable-line no-console
       this.setState({ passwordError: err, password: "" });
     }
   };

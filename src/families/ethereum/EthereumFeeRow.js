@@ -117,7 +117,6 @@ export default function EthereumFeeRow({
       <EthereumGasLimit
         account={account}
         parentAccount={parentAccount}
-        navigation={navigation}
         transaction={transaction}
       />
     </>

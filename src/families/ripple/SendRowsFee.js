@@ -8,10 +8,9 @@ import RippleFeeRow from "./RippleFeeRow";
 type Props = {
   transaction: Transaction,
   account: AccountLike,
-  navigation: *,
 };
-export default function RippleSendRowsFee({ account, ...props }: Props) {
-  if (account.type !== "Account") return null;
+export default function RippleSendRowsFee(props: Props) {
+  if (props.account.type !== "Account") return null;
 
-  return <RippleFeeRow {...props} account={account} />;
+  return <RippleFeeRow {...props} />;
 }
