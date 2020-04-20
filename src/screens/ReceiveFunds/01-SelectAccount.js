@@ -1,15 +1,9 @@
 /* @flow */
 import React, { useCallback } from "react";
 import { View, StyleSheet, FlatList } from "react-native";
-import { createStructuredSelector } from "reselect";
 import SafeAreaView from "react-native-safe-area-view";
-import { connect } from "react-redux";
-import { compose } from "redux";
-import { withTranslation, Trans } from "react-i18next";
-import type {
-  Account,
-  AccountLikeArray,
-} from "@ledgerhq/live-common/lib/types";
+import { useSelector } from "react-redux";
+import { Trans } from "react-i18next";
 import {
   accountsSelector,
   flattenAccountsSelector,
@@ -28,14 +22,12 @@ const SEARCH_KEYS = ["name", "unit.code", "token.name", "token.ticker"];
 const forceInset = { bottom: "always" };
 
 type Props = {
-  accounts: Account[],
-  allAccounts: AccountLikeArray,
-  navigation: *,
+  navigation: any,
 };
 
-// type State = {};
-
-const ReceiveFunds = ({ accounts, allAccounts, navigation }: Props) => {
+export default function ReceiveFunds({ navigation }: Props) {
+  const allAccounts = useSelector(flattenAccountsSelector);
+  const accounts = useSelector(accountsSelector);
   const keyExtractor = item => item.account.id;
 
   const renderItem = useCallback(
@@ -102,12 +94,7 @@ const ReceiveFunds = ({ accounts, allAccounts, navigation }: Props) => {
       </KeyboardView>
     </SafeAreaView>
   );
-};
-
-const mapStateToProps = createStructuredSelector({
-  allAccounts: flattenAccountsSelector,
-  accounts: accountsSelector,
-});
+}
 
 const styles = StyleSheet.create({
   root: {
@@ -142,8 +129,3 @@ const styles = StyleSheet.create({
     color: colors.fog,
   },
 });
-
-export default compose(
-  connect(mapStateToProps),
-  withTranslation(),
-)(ReceiveFunds);

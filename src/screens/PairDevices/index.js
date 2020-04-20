@@ -3,9 +3,7 @@
 import React, { Component } from "react";
 import { StyleSheet } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
-import { connect } from "react-redux";
-import { createStructuredSelector } from "reselect";
-import { withTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
 import { timeout } from "rxjs/operators";
 import getDeviceInfo from "@ledgerhq/live-common/lib/hw/getDeviceInfo";
 import getDeviceName from "@ledgerhq/live-common/lib/hw/getDeviceName";
@@ -212,27 +210,21 @@ class PairDevices extends Component<Props, State> {
 
 const forceInset = { bottom: "always" };
 
-class Screen extends Component<Props, State> {
-  render() {
-    return (
-      <RequiresBLE>
-        <SafeAreaView forceInset={forceInset} style={styles.root}>
-          <PairDevices {...this.props} />
-        </SafeAreaView>
-      </RequiresBLE>
-    );
-  }
-}
+export default function Screen() {
+  const knownDevices = useSelector(knownDevicesSelector);
+  const dispatch = useDispatch();
 
-// $FlowFixMe
-export default connect(
-  createStructuredSelector({
-    knownDevices: knownDevicesSelector,
-  }),
-  {
-    addKnownDevice,
-  },
-)(withTranslation()(Screen));
+  return (
+    <RequiresBLE>
+      <SafeAreaView forceInset={forceInset} style={styles.root}>
+        <PairDevices
+          knownDevices={knownDevices}
+          addKnownDevice={(...args) => dispatch(addKnownDevice(...args))}
+        />
+      </SafeAreaView>
+    </RequiresBLE>
+  );
+}
 
 const styles = StyleSheet.create({
   root: {

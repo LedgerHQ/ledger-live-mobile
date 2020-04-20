@@ -2,7 +2,7 @@
 import React, { Component } from "react";
 import { View, StyleSheet } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
-import { withTranslation, Trans } from "react-i18next";
+import { Trans } from "react-i18next";
 import firmwareUpdatePrepare from "@ledgerhq/live-common/lib/hw/firmwareUpdate-prepare";
 import type { FirmwareUpdateContext } from "@ledgerhq/live-common/lib/types/manager";
 import manager from "@ledgerhq/live-common/lib/manager";
@@ -34,7 +34,7 @@ type State = {
   displayedOnDevice: boolean,
 };
 
-class FirmwareUpdateCheckId extends Component<Props, State> {
+export default class FirmwareUpdateCheckId extends Component<Props, State> {
   state = {
     progress: 0,
     displayedOnDevice: false,
@@ -157,5 +157,3 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
 });
-
-export default withTranslation()(FirmwareUpdateCheckId);

@@ -1,13 +1,8 @@
 /* @flow */
-import React, { Component } from "react";
+import React, { useCallback } from "react";
 import { View, StyleSheet } from "react-native";
-import { connect } from "react-redux";
-import { withTranslation } from "react-i18next";
-import type {
-  TokenAccount,
-  Account,
-  Operation,
-} from "@ledgerhq/live-common/lib/types";
+import { useSelector } from "react-redux";
+import type { Operation } from "@ledgerhq/live-common/lib/types";
 import { accountScreenSelector } from "../../reducers/accounts";
 import { TrackScreen } from "../../analytics";
 import colors from "../../colors";
@@ -16,8 +11,6 @@ import PreventNativeBack from "../../components/PreventNativeBack";
 import ValidateSuccess from "../../components/ValidateSuccess";
 
 type Props = {
-  account: ?(TokenAccount | Account),
-  parentAccount: ?Account,
   navigation: any,
   route: { params: RouteParams },
 };
@@ -29,13 +22,14 @@ type RouteParams = {
   result: Operation,
 };
 
-class ValidationSuccess extends Component<Props> {
-  onClose = () => {
-    this.props.navigation.dangerouslyGetParent().pop();
-  };
+export default function ValidationSuccess({ navigation, route }: Props) {
+  const { account, parentAccount } = useSelector(accountScreenSelector(route));
 
-  goToOperationDetails = () => {
-    const { navigation, route, account, parentAccount } = this.props;
+  const onClose = useCallback(() => {
+    navigation.dangerouslyGetParent().pop();
+  }, [navigation]);
+
+  const goToOperationDetails = useCallback(() => {
     if (!account) return;
     const result = route.params?.result;
     if (!result) return;
@@ -47,20 +41,15 @@ class ValidationSuccess extends Component<Props> {
           ? result.subOperations[0]
           : result,
     });
-  };
+  }, [navigation, route.params, account, parentAccount]);
 
-  render() {
-    return (
-      <View style={styles.root}>
-        <TrackScreen category="SendFunds" name="ValidationSuccess" />
-        <PreventNativeBack />
-        <ValidateSuccess
-          onClose={this.onClose}
-          onViewDetails={this.goToOperationDetails}
-        />
-      </View>
-    );
-  }
+  return (
+    <View style={styles.root}>
+      <TrackScreen category="SendFunds" name="ValidationSuccess" />
+      <PreventNativeBack />
+      <ValidateSuccess onClose={onClose} onViewDetails={goToOperationDetails} />
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -69,8 +58,3 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
   },
 });
-
-const mapStateToProps = (state, { route }) =>
-  accountScreenSelector(route)(state);
-
-export default connect(mapStateToProps)(withTranslation()(ValidationSuccess));

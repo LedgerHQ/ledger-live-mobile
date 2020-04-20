@@ -14,10 +14,8 @@ import type {
   Unit,
 } from "@ledgerhq/live-common/lib/types";
 import React, { PureComponent } from "react";
-import { withTranslation } from "react-i18next";
 import { StyleSheet, View, SectionList } from "react-native";
 import { useRoute } from "@react-navigation/native";
-import { compose } from "redux";
 import { connect } from "react-redux";
 import type { SectionBase } from "react-native/Libraries/Lists/SectionList";
 import SafeAreaView from "react-native-safe-area-view";
@@ -54,12 +52,12 @@ type Props = {
   allAccounts: Account[],
   useCounterValue: boolean,
   counterValueUnit: Unit,
-  switchCountervalueFirst: () => *,
+  switchCountervalueFirst: () => void,
   range: PortfolioRange,
   currency: Currency,
-  portfolio: *,
+  portfolio: any,
   counterValueCurrency: Currency,
-  navigation: *,
+  navigation: any,
 };
 
 export function HeaderTitle() {
@@ -259,9 +257,9 @@ const mapStateToProps = (state: State, props: *) => {
 };
 
 const mapDispatchToProps = { switchCountervalueFirst };
-export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
-  withTranslation(),
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
 )(withNavigation(Asset));
 
 const styles = StyleSheet.create({

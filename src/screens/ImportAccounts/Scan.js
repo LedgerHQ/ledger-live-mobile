@@ -9,7 +9,6 @@ import {
   progressOfFrames,
 } from "qrloop";
 import { decode } from "@ledgerhq/live-common/lib/cross";
-import { withTranslation } from "react-i18next";
 
 import { TrackScreen } from "../../analytics";
 import StyledStatusBar from "../../components/StyledStatusBar";
@@ -24,7 +23,7 @@ type Props = {
   route: any,
 };
 
-class Scan extends PureComponent<
+export default class Scan extends PureComponent<
   Props,
   {
     progress: number,
@@ -134,8 +133,6 @@ class Scan extends PureComponent<
     );
   }
 }
-
-export default withTranslation()(Scan);
 
 const styles = StyleSheet.create({
   root: {

@@ -5,7 +5,7 @@ import SafeAreaView from "react-native-safe-area-view";
 import { createStructuredSelector } from "reselect";
 import { connect } from "react-redux";
 import { compose } from "redux";
-import { withTranslation, Trans } from "react-i18next";
+import { Trans } from "react-i18next";
 import type {
   Account,
   AccountLikeArray,
@@ -153,5 +153,4 @@ const styles = StyleSheet.create({
 export default compose(
   connect(mapStateToProps),
   withEnv("HIDE_EMPTY_TOKEN_ACCOUNTS"),
-  withTranslation(),
 )(SendFundsSelectAccount);

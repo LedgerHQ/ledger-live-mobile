@@ -1,8 +1,8 @@
 /* @flow */
-import React, { Component } from "react";
+import React, { useCallback } from "react";
 import { View, StyleSheet } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
-import { withTranslation, Trans } from "react-i18next";
+import { Trans } from "react-i18next";
 
 import manager from "@ledgerhq/live-common/lib/manager";
 import type { FirmwareUpdateContext } from "@ledgerhq/live-common/lib/types/manager";
@@ -26,57 +26,55 @@ type RouteParams = {
   firmware: FirmwareUpdateContext,
 };
 
-type State = {};
-
-class FirmwareUpdateReleaseNotes extends Component<Props, State> {
-  onNext = () => {
-    const { navigation, route } = this.props;
+export default function FirmwareUpdateReleaseNotes({
+  navigation,
+  route,
+}: Props) {
+  const onNext = useCallback(() => {
     navigation.navigate(ScreenName.FirmwareUpdateCheckId, route.params);
-  };
+  }, [navigation, route.params]);
 
-  render() {
-    const firmware = this.props.route.params?.firmware;
-    if (!firmware) return null;
-    const { osu } = firmware;
-    const version = manager.getFirmwareVersion(osu);
-    return (
-      <SafeAreaView style={styles.root} forceInset={forceInset}>
-        <TrackScreen category="FirmwareUpdate" name="ReleaseNotes" />
-        <NavigationScrollView
-          style={styles.body}
-          contentContainerStyle={styles.content}
-        >
-          <LText style={styles.intro}>
-            <Trans
-              i18nKey="FirmwareUpdateReleaseNotes.introTitle"
-              values={{ version }}
-            >
-              {"You are about to install "}
-              <LText semiBold>firmware version {version}.</LText>
-            </Trans>
-            {"\n\n"}
-            <Trans i18nKey="FirmwareUpdateReleaseNotes.introDescription1" />{" "}
-            <LText semiBold>
-              <Trans i18nKey="FirmwareUpdateReleaseNotes.introDescription2" />
-            </LText>
+  const firmware = route.params.firmware;
+  if (!firmware) return null;
+  const { osu } = firmware;
+  const version = manager.getFirmwareVersion(osu);
+  return (
+    <SafeAreaView style={styles.root} forceInset={forceInset}>
+      <TrackScreen category="FirmwareUpdate" name="ReleaseNotes" />
+      <NavigationScrollView
+        style={styles.body}
+        contentContainerStyle={styles.content}
+      >
+        <LText style={styles.intro}>
+          <Trans
+            i18nKey="FirmwareUpdateReleaseNotes.introTitle"
+            values={{ version }}
+          >
+            {"You are about to install "}
+            <LText semiBold>firmware version {version}.</LText>
+          </Trans>
+          {"\n\n"}
+          <Trans i18nKey="FirmwareUpdateReleaseNotes.introDescription1" />{" "}
+          <LText semiBold>
+            <Trans i18nKey="FirmwareUpdateReleaseNotes.introDescription2" />
           </LText>
-          {osu.notes ? (
-            <View style={styles.markdownSection}>
-              <SafeMarkdown markdown={osu.notes} />
-            </View>
-          ) : null}
-        </NavigationScrollView>
-        <View style={styles.footer}>
-          <Button
-            event="FirmwareUpdateReleaseNotesContinue"
-            type="primary"
-            onPress={this.onNext}
-            title={<Trans i18nKey="FirmwareUpdateReleaseNotes.action" />}
-          />
-        </View>
-      </SafeAreaView>
-    );
-  }
+        </LText>
+        {osu.notes ? (
+          <View style={styles.markdownSection}>
+            <SafeMarkdown markdown={osu.notes} />
+          </View>
+        ) : null}
+      </NavigationScrollView>
+      <View style={styles.footer}>
+        <Button
+          event="FirmwareUpdateReleaseNotesContinue"
+          type="primary"
+          onPress={onNext}
+          title={<Trans i18nKey="FirmwareUpdateReleaseNotes.action" />}
+        />
+      </View>
+    </SafeAreaView>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -105,5 +103,3 @@ const styles = StyleSheet.create({
     padding: 16,
   },
 });
-
-export default withTranslation()(FirmwareUpdateReleaseNotes);

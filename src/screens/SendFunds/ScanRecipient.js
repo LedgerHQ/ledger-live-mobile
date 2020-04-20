@@ -4,7 +4,6 @@ import { StyleSheet, View } from "react-native";
 import { RNCamera } from "react-native-camera";
 import { connect } from "react-redux";
 import Config from "react-native-config";
-import { withTranslation } from "react-i18next";
 import { decodeURIScheme } from "@ledgerhq/live-common/lib/currencies";
 import type {
   Account,
@@ -124,7 +123,7 @@ class ScanRecipient extends PureComponent<Props, State> {
 const mapStateToProps = (state, { route }) =>
   accountScreenSelector(route)(state);
 
-export default withTranslation()(connect(mapStateToProps)(ScanRecipient));
+export default connect(mapStateToProps)(ScanRecipient);
 
 const styles = StyleSheet.create({
   root: {

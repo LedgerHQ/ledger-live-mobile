@@ -1,8 +1,8 @@
 /* @flow */
-import React, { Component } from "react";
+import React, { useCallback } from "react";
 import { View, StyleSheet } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
-import { withTranslation, Trans } from "react-i18next";
+import { Trans } from "react-i18next";
 import { TrackScreen } from "../../analytics";
 import GenericErrorView from "../../components/GenericErrorView";
 import Button from "../../components/Button";
@@ -22,49 +22,44 @@ type RouteParams = {
   error: Error,
 };
 
-type State = {};
-
-class FirmwareUpdateFailure extends Component<Props, State> {
-  onRetry = () => {
-    const { navigation, route } = this.props;
+export default function FirmwareUpdateFailure({ navigation, route }: Props) {
+  const onRetry = useCallback(() => {
     if (navigation.replace) {
       navigation.replace(ScreenName.FirmwareUpdateMCU, route.params);
     }
-  };
+  }, [navigation, route.params]);
 
-  onClose = () => {
-    const n = this.props.navigation.dangerouslyGetParent();
+  const onClose = useCallback(() => {
+    const n = navigation.dangerouslyGetParent();
     if (n) n.goBack();
-  };
+  }, [navigation]);
 
-  render() {
-    const error = this.props.route.params?.error;
-    return (
-      <SafeAreaView style={styles.root} forceInset={forceInset}>
-        <TrackScreen category="FirmwareUpdate" name="Failure" />
-        <View style={styles.body}>
-          <GenericErrorView error={error} />
-          <Button
-            event="FirmwareUpdateFailureRetry"
-            type="primary"
-            onPress={this.onRetry}
-            title={<Trans i18nKey="common.retry" />}
-            containerStyle={styles.button}
-          />
-          <Button
-            event="FirmwareUpdateFailureClose"
-            type="lightSecondary"
-            onPress={this.onClose}
-            title={<Trans i18nKey="common.close" />}
-            containerStyle={styles.button}
-          />
-        </View>
-        <View style={styles.footer}>
-          <NeedHelp />
-        </View>
-      </SafeAreaView>
-    );
-  }
+  const error = route.params.error;
+  return (
+    <SafeAreaView style={styles.root} forceInset={forceInset}>
+      <TrackScreen category="FirmwareUpdate" name="Failure" />
+      <View style={styles.body}>
+        <GenericErrorView error={error} />
+        <Button
+          event="FirmwareUpdateFailureRetry"
+          type="primary"
+          onPress={onRetry}
+          title={<Trans i18nKey="common.retry" />}
+          containerStyle={styles.button}
+        />
+        <Button
+          event="FirmwareUpdateFailureClose"
+          type="lightSecondary"
+          onPress={onClose}
+          title={<Trans i18nKey="common.close" />}
+          containerStyle={styles.button}
+        />
+      </View>
+      <View style={styles.footer}>
+        <NeedHelp />
+      </View>
+    </SafeAreaView>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -107,5 +102,3 @@ const styles = StyleSheet.create({
     borderColor: colors.lightFog,
   },
 });
-
-export default withTranslation()(FirmwareUpdateFailure);

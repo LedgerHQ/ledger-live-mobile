@@ -1,8 +1,7 @@
 /* @flow */
 import React, { PureComponent } from "react";
-import { compose } from "redux";
 import { connect } from "react-redux";
-import { Trans, withTranslation } from "react-i18next";
+import { Trans } from "react-i18next";
 import {
   TouchableOpacity,
   View,
@@ -18,7 +17,6 @@ import { createStructuredSelector, createSelector } from "reselect";
 import type { AssetsDistribution } from "@ledgerhq/live-common/lib/types/portfolio";
 import type { Currency } from "@ledgerhq/live-common/lib/types/currencies";
 import { ScreenName } from "../../const";
-import type { T } from "../../types/common";
 import TrackScreen from "../../analytics/TrackScreen";
 import { accountsSelector } from "../../reducers/accounts";
 import DistributionCard from "./DistributionCard";
@@ -36,7 +34,6 @@ type Props = {
   navigation: *,
   distribution: AssetsDistribution,
   counterValueCurrency: Currency,
-  t: T,
 };
 
 const distributionSelector = createSelector(
@@ -148,10 +145,7 @@ class Distribution extends PureComponent<Props, *> {
   }
 }
 
-export default compose(
-  withTranslation(),
-  connect(mapStateToProps),
-)(withNavigation(Distribution));
+export default connect(mapStateToProps)(withNavigation(Distribution));
 
 const styles = StyleSheet.create({
   wrapper: {

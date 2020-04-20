@@ -2,7 +2,7 @@
 import React, { Component } from "react";
 import { View, StyleSheet } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
-import { withTranslation, Trans } from "react-i18next";
+import { Trans } from "react-i18next";
 import firmwareUpdateMain from "@ledgerhq/live-common/lib/hw/firmwareUpdate-main";
 import type { FirmwareUpdateContext } from "@ledgerhq/live-common/lib/types/manager";
 import logger from "../../logger";
@@ -31,7 +31,7 @@ type State = {
   progress: number,
 };
 
-class FirmwareUpdateMCU extends Component<Props, State> {
+export default class FirmwareUpdateMCU extends Component<Props, State> {
   state = {
     installing: null,
     progress: 0,
@@ -132,5 +132,3 @@ const styles = StyleSheet.create({
     marginVertical: 30,
   },
 });
-
-export default withTranslation()(FirmwareUpdateMCU);
