@@ -56,13 +56,17 @@ export default function OperationRow({
   const navigation = useNavigation();
 
   const goToOperationDetails = debounce(() => {
-    navigation.push(ScreenName.OperationDetails, {
-      accountId: account.id,
-      parentId: parentAccount && parentAccount.id,
-      operation, // FIXME we should pass a operationId instead because data can changes over time.
-      isSubOperation,
-      key: operation.id,
-    });
+    /** if suboperation push to stack navigation else we simply navigate */
+    navigation[isSubOperation ? "push" : "navigate"](
+      ScreenName.OperationDetails,
+      {
+        accountId: account.id,
+        parentId: parentAccount && parentAccount.id,
+        operation, // FIXME we should pass a operationId instead because data can changes over time.
+        isSubOperation,
+        key: operation.id,
+      },
+    );
   }, 300);
 
   const renderAmountCellExtra = useCallback(() => {
