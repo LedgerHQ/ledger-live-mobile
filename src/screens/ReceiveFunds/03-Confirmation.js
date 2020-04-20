@@ -3,7 +3,7 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { from, of } from "rxjs";
 import { delay } from "rxjs/operators";
-import { View, StyleSheet, Linking } from "react-native";
+import { View, StyleSheet, Linking, Platform } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { useSelector } from "react-redux";
 import QRCode from "react-native-qrcode-svg";
@@ -59,7 +59,6 @@ type RouteParams = {
   deviceId: string,
   modelId: DeviceModelId,
   wired: boolean,
-  allowNavigation?: boolean,
 };
 
 export default function ReceiveConfirmation({ navigation, route }: Props) {
@@ -150,7 +149,11 @@ export default function ReceiveConfirmation({ navigation, route }: Props) {
     }
 
     const { headerLeft, headerRight } = closableStackNavigatorConfig;
-    navigation.setOptions({ headerLeft, headerRight, gestureEnabled: true });
+    navigation.setOptions({
+      headerLeft,
+      headerRight,
+      gestureEnabled: Platform.OS === "ios",
+    });
   }, [allowNavigation, navigation]);
 
   useEffect(() => {

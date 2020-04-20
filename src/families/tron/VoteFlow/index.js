@@ -24,11 +24,10 @@ function VoteFlow() {
 
   return (
     <Stack.Navigator
-      screenOptions={({ route }) => ({
+      screenOptions={{
         ...closableStackNavigatorConfig,
-        gestureEnabled:
-          Platform.OS === "ios" ? route.params?.allowNavigation ?? true : false,
-      })}
+        gestureEnabled: Platform.OS === "ios",
+      }}
     >
       <Stack.Screen
         name={ScreenName.VoteStarted}

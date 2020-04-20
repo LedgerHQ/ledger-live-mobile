@@ -46,7 +46,7 @@ export default function Validation({ route }: Props) {
       dispatch(updateAccountWithUpdater(...args)),
   });
 
-  const { status, transaction, modelId, wired } = route.params || {};
+  const { status, transaction, modelId, wired } = route.params;
 
   return (
     <SafeAreaView style={styles.root} forceInset={forceInset}>

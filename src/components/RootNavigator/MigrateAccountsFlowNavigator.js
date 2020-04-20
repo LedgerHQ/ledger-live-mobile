@@ -13,12 +13,11 @@ import StepHeader from "../StepHeader";
 export default function MigrateAccountsFlowNavigator() {
   return (
     <Stack.Navigator
-      screenOptions={({ route }) => ({
+      screenOptions={{
         ...closableStackNavigatorConfig,
         headerShown: false,
-        gestureEnabled:
-          Platform.OS === "ios" ? route.params.allowNavigation : false,
-      })}
+        gestureEnabled: Platform.OS === "ios",
+      }}
     >
       <Stack.Screen
         name={ScreenName.MigrateAccountsOverview}

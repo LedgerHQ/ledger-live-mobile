@@ -3,6 +3,7 @@
 import { concat, of, from } from "rxjs";
 import { concatMap, filter } from "rxjs/operators";
 import { useState, useCallback, useEffect, useRef } from "react";
+import { Platform } from "react-native";
 import { useRoute, useNavigation } from "@react-navigation/native";
 import type {
   Account,
@@ -50,6 +51,10 @@ export const useSignWithDevice = ({
     const { deviceId, transaction } = route.params || {};
     const bridge = getAccountBridge(account, parentAccount);
     const mainAccount = getMainAccount(account, parentAccount);
+
+    navigation.setOptions({
+      gestureEnabled: false,
+    });
 
     setSigning(true);
 
@@ -118,6 +123,9 @@ export const useSignWithDevice = ({
   useEffect(() => {
     signWithDevice();
     return () => {
+      navigation.setOptions({
+        gestureEnabled: Platform.OS === "ios",
+      });
       if (subscription.current) {
         subscription.current.unsubscribe();
       }
