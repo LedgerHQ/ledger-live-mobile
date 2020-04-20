@@ -15,15 +15,15 @@ export default function ReceiveFundsNavigator() {
   return (
     <Stack.Navigator
       headerMode="float"
-      screenOptions={{
+      screenOptions={({ route }) => ({
         ...closableStackNavigatorConfig,
-        gestureEnabled: ({ route }) =>
+        gestureEnabled:
           Platform.OS === "ios"
             ? route.params
               ? undefined
               : route.params.allowNavigation
             : false,
-      }}
+      })}
     >
       <Stack.Screen
         name={ScreenName.ReceiveSelectAccount}

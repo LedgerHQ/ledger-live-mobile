@@ -18,11 +18,11 @@ function DelegationFlow() {
   const { t } = useTranslation();
   return (
     <Stack.Navigator
-      screenOptions={{
+      screenOptions={({ route }) => ({
         ...closableStackNavigatorConfig,
-        gestureEnabled: ({ route }) =>
+        gestureEnabled:
           Platform.OS === "ios" ? route.params.allowNavigation : false,
-      }}
+      })}
     >
       <Stack.Screen
         name={ScreenName.DelegationStarted}
