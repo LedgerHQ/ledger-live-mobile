@@ -149,8 +149,15 @@ async function migrateAccountsIfNecessary(): Promise<void> {
   const hasOldAccounts = keys.includes(ACCOUNTS_KEY);
   if (hasOldAccounts) {
     log("db", "should migrateAccountsIfNecessary");
-    /** fetch old accounts db data */
-    const oldAccounts = await store.get(ACCOUNTS_KEY);
+
+    let oldAccounts = null;
+    try {
+      /** fetch old accounts db data */
+      oldAccounts = await store.get(ACCOUNTS_KEY);
+    } catch (e) {
+      /** catch possible "Row too big to fit into CursorWindow" */
+      console.error(e);
+    }
     /** format old data to be saved on an account based key */
     const accountsData = (oldAccounts && oldAccounts.active) || [];
 
