@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import Animated from "react-native-reanimated";
 import type AnimatedValue from "react-native/Libraries/Animated/src/nodes/AnimatedValue";
+import { useSafeArea } from "react-native-safe-area-context";
 import type { Portfolio, Currency } from "@ledgerhq/live-common/lib/types";
 import extraStatusBarPadding from "../../logic/extraStatusBarPadding";
 import BalanceHeader from "./BalanceHeader";
@@ -33,6 +34,7 @@ export default function AnimatedTopBar({
   pending,
   error,
 }: Props) {
+  const { top } = useSafeArea();
   const [isShown, setIsShown] = useState(false);
 
   function onPress() {
@@ -59,6 +61,8 @@ export default function AnimatedTopBar({
     [isShown],
   );
 
+  const contentStyle = [styles.content, { height: top + 56 }];
+
   return (
     <Animated.View
       style={[styles.root, { opacity }]}
@@ -68,17 +72,18 @@ export default function AnimatedTopBar({
         <View style={[styles.outer, { paddingTop: extraStatusBarPadding }]}>
           <View>
             {pending ? (
-              <View style={styles.content}>
+              <View style={[...contentStyle, { marginBottom: 8 }]}>
                 <HeaderSynchronizing />
               </View>
             ) : error ? (
-              <View style={styles.content}>
+              <View style={contentStyle}>
                 <HeaderErrorTitle error={error} />
               </View>
             ) : (
               <BalanceHeader
                 counterValueCurrency={counterValueCurrency}
                 portfolio={portfolio}
+                style={contentStyle}
               />
             )}
           </View>
@@ -113,8 +118,7 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
   content: {
-    justifyContent: "center",
+    justifyContent: "flex-end",
     paddingVertical: 8,
-    height: 56,
   },
 });

@@ -12,14 +12,16 @@ import CurrencyUnitValue from "../../components/CurrencyUnitValue";
 type Props = {
   portfolio: Portfolio,
   counterValueCurrency: Currency,
+  style?: any,
 };
 
 export default function BalanceHeader({
   portfolio,
   counterValueCurrency,
+  style,
 }: Props) {
   return (
-    <View style={styles.content}>
+    <View style={[styles.content, style]}>
       <LText secondary semiBold style={styles.labelText}>
         <Trans i18nKey="portfolio.totalBalance" />
       </LText>
