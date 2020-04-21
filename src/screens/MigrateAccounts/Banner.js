@@ -3,10 +3,8 @@
 import React, { useCallback } from "react";
 import { Trans } from "react-i18next";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
-import { withNavigation } from "@react-navigation/compat";
-import { connect } from "react-redux";
-import { compose } from "redux";
-import { createStructuredSelector } from "reselect";
+import { useNavigation } from "@react-navigation/native";
+import { useSelector } from "react-redux";
 import colors from "../../colors";
 import { ScreenName } from "../../const";
 import LText from "../../components/LText";
@@ -14,22 +12,18 @@ import IconArrowRight from "../../icons/ArrowRight";
 import LiveLogo from "../../icons/LiveLogoIcon";
 import { someAccountsNeedMigrationSelector } from "../../reducers/accounts";
 
-const mapStateToProps = createStructuredSelector({
-  someAccountsNeedMigrationSelector,
-});
+export default function Banner() {
+  const navigation = useNavigation();
 
-const Banner = ({
-  navigation,
-  someAccountsNeedMigrationSelector,
-}: {
-  someAccountsNeedMigrationSelector: boolean,
-  navigation: *,
-}) => {
+  const someAccountsNeedMigration = useSelector(
+    someAccountsNeedMigrationSelector,
+  );
+
   const navigateToAccountMigration = useCallback(() => {
     navigation.navigate(ScreenName.MigrateAccountsOverview);
   }, [navigation]);
 
-  if (!someAccountsNeedMigrationSelector) return null;
+  if (!someAccountsNeedMigration) return null;
 
   return (
     <TouchableOpacity style={styles.root} onPress={navigateToAccountMigration}>
@@ -44,7 +38,7 @@ const Banner = ({
       </View>
     </TouchableOpacity>
   );
-};
+}
 
 const styles = StyleSheet.create({
   root: {
@@ -74,5 +68,3 @@ const styles = StyleSheet.create({
     marginRight: 8,
   },
 });
-
-export default compose(withNavigation, connect(mapStateToProps))(Banner);

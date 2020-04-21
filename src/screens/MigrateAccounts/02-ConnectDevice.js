@@ -3,8 +3,6 @@
 import React, { useCallback } from "react";
 import { StyleSheet } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
-import { withNavigation } from "@react-navigation/compat";
-import { connect } from "react-redux";
 import { TrackScreen } from "../../analytics";
 import colors from "../../colors";
 import { ScreenName } from "../../const";
@@ -19,7 +17,7 @@ type Props = {
   route: any,
 };
 
-const ConnectDevice = ({ navigation, route }: Props) => {
+export default function ConnectDevice({ navigation, route }: Props) {
   const onSelectDevice = useCallback(
     deviceMeta => {
       navigation.navigate(ScreenName.MigrateAccountsProgress, {
@@ -46,7 +44,7 @@ const ConnectDevice = ({ navigation, route }: Props) => {
       </NavigationScrollView>
     </SafeAreaView>
   );
-};
+}
 
 const styles = StyleSheet.create({
   root: {
@@ -65,5 +63,3 @@ const styles = StyleSheet.create({
     borderTopColor: colors.lightFog,
   },
 });
-
-export default connect()(withNavigation(ConnectDevice)); // NB flow issue if not connected

@@ -1,14 +1,11 @@
 // @flow
 
 import { getCryptoCurrencyById } from "@ledgerhq/live-common/lib/data/cryptocurrencies";
-import type { Account } from "@ledgerhq/live-common/lib/types";
-import React, { useCallback } from "react";
+import React, { useCallback, useMemo } from "react";
 import { Trans } from "react-i18next";
 import { StyleSheet, View, SectionList } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
-import { withNavigation } from "@react-navigation/compat";
-import { connect } from "react-redux";
-import { createStructuredSelector } from "reselect";
+import { useSelector } from "react-redux";
 import colors from "../../colors";
 import { ScreenName } from "../../const";
 import AccountCard from "../../components/AccountCard";
@@ -18,38 +15,27 @@ import LText from "../../components/LText";
 import IconExclamationCircle from "../../icons/ExclamationCircle";
 import LiveLogo from "../../icons/LiveLogoIcon";
 import extraStatusBarPadding from "../../logic/extraStatusBarPadding";
-import {
-  accountsSelector,
-  migratableAccountsSelector,
-} from "../../reducers/accounts";
-
-const mapStateToProps = createStructuredSelector({
-  accounts: accountsSelector,
-  migratableAccounts: migratableAccountsSelector,
-  currencyIds: state =>
-    migratableAccountsSelector(state)
-      .reduce(
-        (c, a) => (c.includes(a.currency.id) ? c : [...c, a.currency.id]),
-        [],
-      )
-      .sort(),
-});
+import { migratableAccountsSelector } from "../../reducers/accounts";
 
 type Props = {
   navigation: any,
-  currencyIds: string[],
-  migratableAccounts: Account[],
   route: any,
 };
 
 const forceInset = { bottom: "always" };
 
-const Overview = ({
-  route,
-  navigation,
-  migratableAccounts,
-  currencyIds,
-}: Props) => {
+export default function Overview({ route, navigation }: Props) {
+  const migratableAccounts = useSelector(migratableAccountsSelector);
+  const currencyIds = useMemo(
+    migratableAccounts
+      .reduce(
+        (c, a) => (c.includes(a.currency.id) ? c : [...c, a.currency.id]),
+        [],
+      )
+      .sort(),
+    [migratableAccounts],
+  );
+
   const showNotice = route.params?.showNotice;
   const startMigration = useCallback(() => {
     navigation.navigate(ScreenName.MigrateAccountsConnectDevice, {
@@ -127,7 +113,7 @@ const Overview = ({
       </View>
     </SafeAreaView>
   );
-};
+}
 
 const styles = StyleSheet.create({
   root: {
@@ -179,5 +165,3 @@ const styles = StyleSheet.create({
     width: "100%",
   },
 });
-
-export default connect(mapStateToProps)(withNavigation(Overview));
