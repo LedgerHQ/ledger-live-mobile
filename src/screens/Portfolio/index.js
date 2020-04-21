@@ -1,5 +1,4 @@
 // @flow
-
 import React, { useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { View, StyleSheet, SectionList } from "react-native";
@@ -37,6 +36,8 @@ import NoOperationFooter from "../../components/NoOperationFooter";
 import MigrateAccountsBanner from "../MigrateAccounts/Banner";
 import RequireTerms from "../../components/RequireTerms";
 import { useScrollToTop } from "../../navigation/utils";
+
+export { default as PortfolioTabIcon } from "./TabIcon";
 
 const AnimatedSectionList = createNativeWrapper(
   Animated.createAnimatedComponent(SectionList),

@@ -6,7 +6,7 @@ import {
   useScrollToTop as useNativeScrollToTop,
 } from "@react-navigation/native";
 
-export const headerPressSubject = new Subject();
+const scrollSubject = new Subject();
 
 export function useScrollToTop(
   ref: React.MutableRefObject<ScrollView | undefined>,
@@ -16,7 +16,7 @@ export function useScrollToTop(
   useNativeScrollToTop(ref);
 
   useEffect(() => {
-    const subscription = headerPressSubject.subscribe(() => {
+    const subscription = scrollSubject.subscribe(() => {
       if (!ref.current || !isFocused) {
         return subscription.unsubscribe();
       }
@@ -50,4 +50,8 @@ function scrollSectionListToTop(compRef: React$Node): void {
     // Set big enough offset umber for unfixed header hight
     viewOffset: 1000,
   });
+}
+
+export function scrollToTop(): void {
+  scrollSubject.next();
 }

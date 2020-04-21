@@ -1,9 +1,8 @@
 // @flow
 import React from "react";
 import { ScreenName, NavigatorName } from "../../const";
-import PortfolioIcon from "../../icons/Portfolio";
-import Portfolio from "../../screens/Portfolio";
-import Transfer, { TransferHeader } from "../../screens/Transfer";
+import Portfolio, { PortfolioTabIcon } from "../../screens/Portfolio";
+import Transfer, { TransferTabIcon } from "../../screens/Transfer";
 import AccountsNavigator from "./AccountsNavigator";
 import ManagerNavigator from "./ManagerNavigator";
 import SettingsNavigator from "./SettingsNavigator";
@@ -29,16 +28,14 @@ export default function MainNavigator() {
         name={ScreenName.Portfolio}
         component={Portfolio}
         options={{
-          tabBarIcon: (props: *) => (
-            <TabIcon Icon={PortfolioIcon} i18nKey="tabs.portfolio" {...props} />
-          ),
+          tabBarIcon: (props: any) => <PortfolioTabIcon {...props} />,
         }}
       />
       <Tab.Screen
         name={NavigatorName.AccountsStack}
         component={AccountsNavigator}
         options={{
-          tabBarIcon: (props: *) => (
+          tabBarIcon: (props: any) => (
             <TabIcon Icon={AccountsIcon} i18nKey="tabs.accounts" {...props} />
           ),
         }}
@@ -48,14 +45,14 @@ export default function MainNavigator() {
         component={Transfer}
         options={{
           headerShown: false,
-          tabBarIcon: (props: *) => <TransferHeader {...props} />,
+          tabBarIcon: (props: any) => <TransferTabIcon {...props} />,
         }}
       />
       <Tab.Screen
         name={NavigatorName.Manager}
         component={ManagerNavigator}
         options={({ route }) => ({
-          tabBarIcon: (props: *) => (
+          tabBarIcon: (props: any) => (
             <ReadOnlyTab
               OnIcon={NanoXIcon}
               oni18nKey="tabs.nanoX"
@@ -71,7 +68,7 @@ export default function MainNavigator() {
         name={NavigatorName.Settings}
         component={SettingsNavigator}
         options={{
-          tabBarIcon: (props: *) => (
+          tabBarIcon: (props: any) => (
             <TabIcon Icon={SettingsIcon} i18nKey="tabs.settings" {...props} />
           ),
         }}

@@ -18,7 +18,7 @@ import Greetings from "./Greetings";
 import IconPie from "../../icons/Pie";
 import colors from "../../colors";
 import { ScreenName } from "../../const";
-import { headerPressSubject } from "../../navigation/utils";
+import { scrollToTop } from "../../navigation/utils";
 
 type Props = {
   showDistribution?: boolean,
@@ -32,10 +32,6 @@ export default function PortfolioHeader({
   showDistribution,
 }: Props) {
   const navigation = useNavigation();
-
-  const onRefocus = useCallback(() => {
-    headerPressSubject.next();
-  }, []);
 
   const onDistributionButtonPress = useCallback(() => {
     navigation.navigate(ScreenName.Distribution);
@@ -64,7 +60,7 @@ export default function PortfolioHeader({
 
   return (
     <View style={styles.wrapper}>
-      <TouchableWithoutFeedback onPress={onRefocus}>
+      <TouchableWithoutFeedback onPress={scrollToTop}>
         <View style={styles.content}>{content}</View>
       </TouchableWithoutFeedback>
       {showDistribution && (

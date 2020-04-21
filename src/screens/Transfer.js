@@ -19,7 +19,9 @@ type Props = {
   navigation: any,
 };
 
-export function TransferHeader(props: Props) {
+export default ExchangeScreen;
+
+export function TransferTabIcon(props: Props) {
   const [isModalOpened, setIsModalOpened] = useState(false);
 
   function openModal() {
@@ -45,5 +47,3 @@ export function TransferHeader(props: Props) {
     </>
   );
 }
-
-export default ExchangeScreen;

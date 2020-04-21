@@ -15,7 +15,7 @@ import extraStatusBarPadding from "../../logic/extraStatusBarPadding";
 import BalanceHeader from "./BalanceHeader";
 import HeaderErrorTitle from "../../components/HeaderErrorTitle";
 import HeaderSynchronizing from "../../components/HeaderSynchronizing";
-import { headerPressSubject } from "../../navigation/utils";
+import { scrollToTop } from "../../navigation/utils";
 
 type Props = {
   scrollY: AnimatedValue,
@@ -36,10 +36,6 @@ export default function AnimatedTopBar({
 }: Props) {
   const { top } = useSafeArea();
   const [isShown, setIsShown] = useState(false);
-
-  function onPress() {
-    headerPressSubject.next();
-  }
 
   const opacity = interpolate(scrollY, {
     inputRange: [90, 150],
@@ -68,7 +64,7 @@ export default function AnimatedTopBar({
       style={[styles.root, { opacity }]}
       pointerEvents={isShown ? "auto" : "none"}
     >
-      <TouchableWithoutFeedback onPress={onPress}>
+      <TouchableWithoutFeedback onPress={scrollToTop}>
         <View style={[styles.outer, { paddingTop: extraStatusBarPadding }]}>
           <View>
             {pending ? (

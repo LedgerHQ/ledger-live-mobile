@@ -3,15 +3,11 @@ import React from "react";
 import { TouchableWithoutFeedback, StyleSheet } from "react-native";
 import LText from "./LText";
 import colors from "../colors";
-import { headerPressSubject } from "../navigation/utils";
+import { scrollToTop } from "../navigation/utils";
 
 export default function HeaderTitle({ style, ...newProps }: *) {
-  function onPress(): void {
-    headerPressSubject.next();
-  }
-
   return (
-    <TouchableWithoutFeedback onPress={onPress}>
+    <TouchableWithoutFeedback onPress={scrollToTop}>
       <LText
         {...newProps}
         secondary

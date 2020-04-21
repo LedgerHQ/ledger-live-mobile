@@ -10,19 +10,15 @@ import {
 import LText from "../../components/LText";
 import { accountScreenSelector } from "../../reducers/accounts";
 import ParentCurrencyIcon from "../../components/ParentCurrencyIcon";
-import { headerPressSubject } from "../../navigation/utils";
+import { scrollToTop } from "../../navigation/utils";
 
 export default function AccountHeaderTitle() {
   const route = useRoute();
   const { account } = useSelector(accountScreenSelector(route));
 
-  function onPress() {
-    headerPressSubject.next();
-  }
-
   if (!account) return null;
   return (
-    <TouchableWithoutFeedback onPress={onPress}>
+    <TouchableWithoutFeedback onPress={scrollToTop}>
       <View style={styles.headerContainer}>
         <View style={styles.iconContainer}>
           <ParentCurrencyIcon

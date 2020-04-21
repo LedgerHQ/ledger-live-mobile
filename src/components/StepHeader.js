@@ -3,7 +3,7 @@ import React from "react";
 import { TouchableWithoutFeedback, View, StyleSheet } from "react-native";
 import colors from "../colors";
 import LText from "./LText";
-import { headerPressSubject } from "../navigation/utils";
+import { scrollToTop } from "../navigation/utils";
 
 type Props = {
   title: React$Node,
@@ -11,12 +11,8 @@ type Props = {
 };
 
 export default function StepHeader({ title, subtitle }: Props) {
-  function onPress() {
-    headerPressSubject.next();
-  }
-
   return (
-    <TouchableWithoutFeedback onPress={onPress}>
+    <TouchableWithoutFeedback onPress={scrollToTop}>
       <View style={styles.root}>
         <LText style={styles.subtitle}>{subtitle}</LText>
         <LText semiBold secondary numberOfLines={1} style={styles.title}>
