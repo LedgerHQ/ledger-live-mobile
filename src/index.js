@@ -4,7 +4,7 @@ import "./polyfill";
 import "./live-common-setup";
 import "./implement-react-native-libcore";
 import "react-native-gesture-handler";
-import React, { Component } from "react";
+import React, { Component, useCallback } from "react";
 import { connect } from "react-redux";
 import { StyleSheet, View, Text } from "react-native";
 import SplashScreen from "react-native-splash-screen";
@@ -16,6 +16,7 @@ import { NotEnoughBalance } from "@ledgerhq/errors";
 import { log } from "@ledgerhq/logs";
 import { checkLibs } from "@ledgerhq/live-common/lib/sanityChecks";
 import logger from "./logger";
+import { saveAccounts, saveBle, saveSettings, saveCountervalues } from "./db";
 import { exportSelector as settingsExportSelector } from "./reducers/settings";
 import { exportSelector as accountsExportSelector } from "./reducers/accounts";
 import { exportSelector as bleSelector } from "./reducers/ble";
@@ -37,6 +38,7 @@ import HookAnalytics from "./analytics/HookAnalytics";
 import HookSentry from "./components/HookSentry";
 import RootNavigator from "./components/RootNavigator";
 import SetEnvsFromSettings from "./components/SetEnvsFromSettings";
+import type { State } from "./reducers";
 
 checkLibs({
   NotEnoughBalance,
@@ -66,46 +68,58 @@ type AppProps = {
 function App({ importDataString }: AppProps) {
   useAppStateListener();
 
-  function hasCountervaluesChanged(a, b): boolean {
-    return a.countervalues !== b.countervalues;
-  }
+  const getCountervaluesChanged = useCallback(
+    (a, b) => a.countervalues !== b.countervalues,
+    [],
+  );
 
-  function hasSettingsChanged(a, b): boolean {
-    return a.settings !== b.settings;
-  }
+  const getSettingsChanged = useCallback(
+    (a, b) => a.settings !== b.settings,
+    [],
+  );
 
-  function hasAccountsChanged(a, b): boolean {
-    return a.accounts !== b.accounts;
-  }
+  const getAccountsChanged = useCallback((oldState: State, newState: State): ?{
+    changed: string[],
+  } => {
+    if (oldState.accounts !== newState.accounts) {
+      return {
+        changed: newState.accounts.active
+          .filter(a => {
+            const old = oldState.accounts.active.find(b => a.id === b.id);
+            return !old || old !== a;
+          })
+          .map(a => a.id),
+      };
+    }
+    return null;
+  }, []);
 
-  function hasBleChanged(a, b): boolean {
-    return a.ble !== b.ble;
-  }
+  const getBleChanged = (a, b) => a.ble !== b.ble;
 
   return (
     <View style={styles.root}>
       <DBSave
-        dbKey="countervalues"
+        save={saveCountervalues}
         throttle={2000}
-        hasChanged={hasCountervaluesChanged}
+        getChangesStats={getCountervaluesChanged}
         lense={CounterValues.exportSelector}
       />
       <DBSave
-        dbKey="settings"
+        save={saveSettings}
         throttle={400}
-        hasChanged={hasSettingsChanged}
+        getChangesStats={getSettingsChanged}
         lense={settingsExportSelector}
       />
       <DBSave
-        dbKey="accounts"
+        save={saveAccounts}
         throttle={500}
-        hasChanged={hasAccountsChanged}
+        getChangesStats={getAccountsChanged}
         lense={accountsExportSelector}
       />
       <DBSave
-        dbKey="ble"
+        save={saveBle}
         throttle={500}
-        hasChanged={hasBleChanged}
+        getChangesStats={getBleChanged}
         lense={bleSelector}
       />
 

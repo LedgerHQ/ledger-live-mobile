@@ -17,7 +17,6 @@ function RefreshAccounts({ isOpened }: RefreshAccountsProps) {
   const isFocused = useIsFocused();
   return (
     <RefreshAccountsOrdering
-      onMount
       onUpdate
       nonce={`${isFocused}_${isOpened.toString()}`}
     />
