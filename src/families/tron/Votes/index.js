@@ -110,7 +110,7 @@ const Delegation = ({ account, parentAccount }: Props) => {
   }, [accountId, navigation, parentId]);
 
   const onManageVotes = useCallback(() => {
-    navigation.navigate(NavigatorName.VoteFlow, {
+    navigation.navigate(NavigatorName.TronVoteFlow, {
       screen: ScreenName.VoteCast,
       params: {
         accountId,
@@ -123,7 +123,7 @@ const Delegation = ({ account, parentAccount }: Props) => {
     const screenName = lastVotedDate
       ? ScreenName.VoteSelectValidator
       : ScreenName.VoteStarted;
-    navigation.navigate(NavigatorName.VoteFlow, {
+    navigation.navigate(NavigatorName.TronVoteFlow, {
       screen: screenName,
       params: {
         accountId,

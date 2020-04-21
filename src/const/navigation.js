@@ -151,8 +151,8 @@ export const NavigatorName = {
   SendFunds: "SendFunds",
   Settings: "Settings",
   TezosDelegationFlow: "TezosDelegationFlow",
+  TronVoteFlow: "TronVoteFlow",
   Unfreeze: "Unfreeze",
-  VoteFlow: "TronVoteFlow",
   /* eslint-disable sort-keys */
 
   // Tab
