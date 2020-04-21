@@ -56,8 +56,7 @@ export default function OperationRow({
   const navigation = useNavigation();
 
   const goToOperationDetails = debounce(() => {
-    /** if suboperation push to stack navigation else we simply navigate */
-    navigation[isSubOperation ? "push" : "navigate"](
+    const params = [
       ScreenName.OperationDetails,
       {
         accountId: account.id,
@@ -66,7 +65,11 @@ export default function OperationRow({
         isSubOperation,
         key: operation.id,
       },
-    );
+    ];
+
+    /** if suboperation push to stack navigation else we simply navigate */
+    if (isSubOperation) navigation.push(...params);
+    else navigation.navigate(...params);
   }, 300);
 
   const renderAmountCellExtra = useCallback(() => {
