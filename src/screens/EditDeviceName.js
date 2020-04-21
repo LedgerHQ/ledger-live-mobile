@@ -3,9 +3,8 @@
 import React, { PureComponent } from "react";
 import { Keyboard, View, StyleSheet } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
-import { withTranslation, Trans } from "react-i18next";
+import { Trans } from "react-i18next";
 import Icon from "react-native-vector-icons/dist/Feather";
-import { compose } from "redux";
 import { connect } from "react-redux";
 import { DeviceNameInvalid } from "@ledgerhq/errors";
 import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
@@ -170,11 +169,8 @@ class EditDeviceName extends PureComponent<
   }
 }
 
-export default compose(
-  // $FlowFixMe
-  connect(null, mapDispatchToProps),
-  withTranslation(),
-)(EditDeviceName);
+// $FlowFixMe
+export default connect(null, mapDispatchToProps)(EditDeviceName);
 
 const styles = StyleSheet.create({
   safearea: {

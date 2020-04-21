@@ -5,8 +5,7 @@ import { View, StyleSheet } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import type { Account } from "@ledgerhq/live-common/lib/types";
 import { connect } from "react-redux";
-import { compose } from "redux";
-import { Trans, withTranslation } from "react-i18next";
+import { Trans } from "react-i18next";
 import { accountScreenSelector } from "../../reducers/accounts";
 import { updateAccount } from "../../actions/accounts";
 import Button from "../../components/Button";
@@ -123,11 +122,8 @@ class EditAccountName extends PureComponent<Props, State> {
   }
 }
 
-export default compose(
-  // $FlowFixMe
-  connect(mapStateToProps, mapDispatchToProps),
-  withTranslation(),
-)(EditAccountName);
+// $FlowFixMe
+export default connect(mapStateToProps, mapDispatchToProps)(EditAccountName);
 
 const styles = StyleSheet.create({
   root: {

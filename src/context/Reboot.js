@@ -1,5 +1,5 @@
 // @flow
-import React, { Fragment } from "react";
+import React, { Fragment, useContext } from "react";
 import hoistNonReactStatic from "hoist-non-react-statics";
 import db from "../db";
 import clearLibcore from "../helpers/clearLibcore";
@@ -60,3 +60,7 @@ export const withReboot = (Cmp: *) => {
   hoistNonReactStatic(WithReboot, Cmp);
   return WithReboot;
 };
+
+export function useReboot() {
+  return useContext(RebootContext);
+}

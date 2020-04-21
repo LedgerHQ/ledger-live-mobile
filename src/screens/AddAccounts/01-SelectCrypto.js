@@ -1,10 +1,9 @@
 // @flow
 
 import React, { useMemo } from "react";
-import { withTranslation, Trans } from "react-i18next";
+import { Trans } from "react-i18next";
 import { StyleSheet, View, FlatList } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
-import { compose } from "redux";
 import type {
   CryptoCurrency,
   TokenCurrency,
@@ -13,6 +12,7 @@ import {
   listTokens,
   useCurrenciesByMarketcap,
 } from "@ledgerhq/live-common/lib/currencies";
+import useEnv from "@ledgerhq/live-common/lib/hooks/useEnv";
 
 import { ScreenName } from "../../const";
 import { listCryptoCurrencies } from "../../cryptocurrencies";
@@ -23,7 +23,6 @@ import CurrencyRow from "../../components/CurrencyRow";
 import LText from "../../components/LText";
 
 import colors from "../../colors";
-import withEnv from "../../logic/withEnv";
 
 const SEARCH_KEYS = ["name", "ticker"];
 const forceInset = { bottom: "always" };
@@ -43,7 +42,8 @@ const renderEmptyList = () => (
   </View>
 );
 
-const AddAccountsSelectCrypto = ({ devMode, navigation }: Props) => {
+export default function AddAccountsSelectCrypto({ navigation }: Props) {
+  const devMode = useEnv("MANAGER_DEV_MODE");
   const cryptoCurrencies = useMemo(
     () => listCryptoCurrencies(devMode).concat(listTokens()),
     [devMode],
@@ -98,7 +98,7 @@ const AddAccountsSelectCrypto = ({ devMode, navigation }: Props) => {
       </KeyboardView>
     </SafeAreaView>
   );
-};
+}
 
 const styles = StyleSheet.create({
   root: {
@@ -122,10 +122,3 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
 });
-
-const enhancer = compose(
-  withTranslation(),
-  withEnv("MANAGER_DEV_MODE", "devMode"),
-);
-
-export default enhancer(AddAccountsSelectCrypto);

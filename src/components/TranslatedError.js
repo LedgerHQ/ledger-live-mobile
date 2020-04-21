@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 
 type Props = {
   error: ?Error,
-  field: "title" | "description",
+  field?: "title" | "description",
 };
 
 export default function TranslatedError({ error, field = "title" }: Props) {

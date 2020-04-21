@@ -1,7 +1,7 @@
 // @flow
 
-import React, { Component, PureComponent } from "react";
-import { withTranslation, Trans } from "react-i18next";
+import React, { useCallback } from "react";
+import { Trans } from "react-i18next";
 import { StyleSheet, View } from "react-native";
 import type { CryptoCurrency } from "@ledgerhq/live-common/lib/types";
 
@@ -24,71 +24,69 @@ type RouteParams = {
   deviceId: string,
 };
 
-type State = {};
-
 const IconPlus = () => <Icon name="plus" color={colors.live} size={16} />;
 
-class AddAccountsSuccess extends Component<Props, State> {
-  primaryCTA = () => {
-    this.props.navigation.navigate(NavigatorName.AccountsStack);
-  };
+export default function AddAccountsSuccess({ navigation, route }: Props) {
+  const primaryCTA = useCallback(() => {
+    navigation.navigate(NavigatorName.AccountsStack);
+  }, [navigation]);
 
-  secondaryCTA = () => {
-    this.props.navigation.navigate(ScreenName.AddAccountsSelectCrypto);
-  };
+  const secondaryCTA = useCallback(() => {
+    navigation.navigate(ScreenName.AddAccountsSelectCrypto);
+  }, [navigation]);
 
-  render() {
-    const currency = this.props.route.params?.currency;
-    return (
-      <View style={styles.root}>
-        <TrackScreen category="AddAccounts" name="Success" />
-        <CurrencySuccess currency={currency} />
-        <LText secondary semiBold style={styles.title}>
-          <Trans i18nKey="addAccounts.imported" />
-        </LText>
-        <LText style={styles.desc}>
-          <Trans i18nKey="addAccounts.success.desc" />
-        </LText>
-        <View style={styles.buttonsContainer}>
-          <Button
-            event="AddAccountsDone"
-            containerStyle={styles.button}
-            type="primary"
-            title={<Trans i18nKey="addAccounts.success.cta" />}
-            onPress={this.primaryCTA}
-          />
-          <Button
-            event="AddAccountsAgain"
-            IconLeft={IconPlus}
-            onPress={this.secondaryCTA}
-            type="lightSecondary"
-            title={<Trans i18nKey="addAccounts.success.secondaryCTA" />}
-          />
-        </View>
+  const currency = route.params.currency;
+
+  return (
+    <View style={styles.root}>
+      <TrackScreen category="AddAccounts" name="Success" />
+      <CurrencySuccess currency={currency} />
+      <LText secondary semiBold style={styles.title}>
+        <Trans i18nKey="addAccounts.imported" />
+      </LText>
+      <LText style={styles.desc}>
+        <Trans i18nKey="addAccounts.success.desc" />
+      </LText>
+      <View style={styles.buttonsContainer}>
+        <Button
+          event="AddAccountsDone"
+          containerStyle={styles.button}
+          type="primary"
+          title={<Trans i18nKey="addAccounts.success.cta" />}
+          onPress={primaryCTA}
+        />
+        <Button
+          event="AddAccountsAgain"
+          IconLeft={IconPlus}
+          onPress={secondaryCTA}
+          type="lightSecondary"
+          title={<Trans i18nKey="addAccounts.success.secondaryCTA" />}
+        />
       </View>
-    );
-  }
+    </View>
+  );
 }
 
-class CurrencySuccess extends PureComponent<{ currency: CryptoCurrency }> {
-  render() {
-    const { currency } = this.props;
-    return (
-      <View
-        style={[
-          styles.currencySuccess,
-          {
-            backgroundColor: rgba(currency.color, 0.14),
-          },
-        ]}
-      >
-        <View style={styles.successBadge}>
-          <IconCheck size={16} color={colors.white} />
-        </View>
-        <CurrencyIcon currency={currency} size={32} />
+type CurrencySuccessProps = {
+  currency: CryptoCurrency,
+};
+
+function CurrencySuccess({ currency }: CurrencySuccessProps) {
+  return (
+    <View
+      style={[
+        styles.currencySuccess,
+        {
+          backgroundColor: rgba(currency.color, 0.14),
+        },
+      ]}
+    >
+      <View style={styles.successBadge}>
+        <IconCheck size={16} color={colors.white} />
       </View>
-    );
-  }
+      <CurrencyIcon currency={currency} size={32} />
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -140,5 +138,3 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
 });
-
-export default withTranslation()(AddAccountsSuccess);

@@ -1,7 +1,6 @@
 // @flow
 
-import React, { Component } from "react";
-import { withTranslation } from "react-i18next";
+import React, { useCallback, useEffect } from "react";
 import { StyleSheet } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import type { CryptoCurrency } from "@ledgerhq/live-common/lib/types";
@@ -25,40 +24,38 @@ type RouteParams = {
   currency: CryptoCurrency,
 };
 
-type State = {};
+export default function AddAccountsSelectDevice({ navigation, route }: Props) {
+  const onSelectDevice = useCallback(
+    (meta: *) => {
+      const currency = route.params.currency;
+      navigation.navigate(ScreenName.AddAccountsAccounts, {
+        currency,
+        ...meta,
+      });
+    },
+    [navigation, route],
+  );
 
-class AddAccountsSelectDevice extends Component<Props, State> {
-  componentDidMount() {
-    const currency = this.props.route.params?.currency;
+  useEffect(() => {
     // load ahead of time
-    prepareCurrency(currency);
-  }
+    prepareCurrency(route.params.currency);
+  }, [route.params.currency]);
 
-  onSelectDevice = (meta: *) => {
-    const currency = this.props.route.params?.currency;
-    this.props.navigation.navigate(ScreenName.AddAccountsAccounts, {
-      currency,
-      ...meta,
-    });
-  };
-
-  render() {
-    const currency = this.props.route.params?.currency;
-    return (
-      <SafeAreaView style={styles.root} forceInset={forceInset}>
-        <NavigationScrollView
-          style={styles.scroll}
-          contentContainerStyle={styles.scrollContainer}
-        >
-          <TrackScreen category="AddAccounts" name="SelectDevice" />
-          <SelectDevice
-            onSelect={this.onSelectDevice}
-            steps={[connectingStep, currencyApp(currency)]}
-          />
-        </NavigationScrollView>
-      </SafeAreaView>
-    );
-  }
+  const currency = route.params.currency;
+  return (
+    <SafeAreaView style={styles.root} forceInset={forceInset}>
+      <NavigationScrollView
+        style={styles.scroll}
+        contentContainerStyle={styles.scrollContainer}
+      >
+        <TrackScreen category="AddAccounts" name="SelectDevice" />
+        <SelectDevice
+          onSelect={onSelectDevice}
+          steps={[connectingStep, currencyApp(currency)]}
+        />
+      </NavigationScrollView>
+    </SafeAreaView>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -73,5 +70,3 @@ const styles = StyleSheet.create({
     padding: 16,
   },
 });
-
-export default withTranslation()(AddAccountsSelectDevice);

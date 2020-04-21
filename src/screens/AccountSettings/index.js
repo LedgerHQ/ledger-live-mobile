@@ -1,10 +1,8 @@
 /* @flow */
 import React, { PureComponent } from "react";
 import { View, StyleSheet } from "react-native";
-import { withTranslation } from "react-i18next";
 import type { Account } from "@ledgerhq/live-common/lib/types";
 import { connect } from "react-redux";
-import { compose } from "redux";
 import { ScreenName } from "../../const";
 import { accountScreenSelector } from "../../reducers/accounts";
 import { deleteAccount } from "../../actions/accounts";
@@ -96,10 +94,8 @@ class AccountSettings extends PureComponent<Props, State> {
   }
 }
 
-export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
-  withTranslation(),
-)(AccountSettings);
+// $FlowFixMe
+export default connect(mapStateToProps, mapDispatchToProps)(AccountSettings);
 
 const styles = StyleSheet.create({
   sectionRow: {

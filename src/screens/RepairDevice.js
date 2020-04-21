@@ -2,12 +2,11 @@
 import React, { Component } from "react";
 import { View, StyleSheet, Dimensions } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
-import { withTranslation, Trans } from "react-i18next";
+import { Trans } from "react-i18next";
 import firmwareUpdateRepair from "@ledgerhq/live-common/lib/hw/firmwareUpdate-repair";
 
 import { NavigatorName } from "../const";
 import logger from "../logger";
-import type { T } from "../types/common";
 import Button from "../components/Button";
 import { BulletItem } from "../components/BulletList";
 import DeviceNanoAction from "../components/DeviceNanoAction";
@@ -23,9 +22,9 @@ import colors from "../colors";
 const forceInset = { bottom: "always" };
 
 type Props = {
-  navigation: *,
-  t: T,
+  navigation: any,
 };
+
 type State = {
   ready: boolean,
   error: ?Error,
@@ -33,7 +32,7 @@ type State = {
   selected: boolean,
 };
 
-class RepairDevice extends Component<Props, State> {
+export default class RepairDevice extends Component<Props, State> {
   state = {
     error: null,
     progress: 0,
@@ -49,7 +48,7 @@ class RepairDevice extends Component<Props, State> {
     this.setState({ ready: true });
   };
 
-  onSelectDevice = meta => {
+  onSelectDevice = (meta: any) => {
     this.setState({ selected: true });
     this.sub = firmwareUpdateRepair(meta.deviceId).subscribe({
       next: patch => {
@@ -66,7 +65,7 @@ class RepairDevice extends Component<Props, State> {
     });
   };
 
-  sub: *;
+  sub: any;
 
   render() {
     const { ready, progress, error, selected } = this.state;
@@ -155,5 +154,3 @@ const styles = StyleSheet.create({
     marginVertical: 30,
   },
 });
-
-export default withTranslation()(RepairDevice);
