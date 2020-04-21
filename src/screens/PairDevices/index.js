@@ -7,13 +7,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { timeout } from "rxjs/operators";
 import getDeviceInfo from "@ledgerhq/live-common/lib/hw/getDeviceInfo";
 import getDeviceName from "@ledgerhq/live-common/lib/hw/getDeviceName";
-import checkDeviceForManager from "@ledgerhq/live-common/lib/hw/checkDeviceForManager";
+import { listApps } from "@ledgerhq/live-common/lib/apps/hw";
 import { delay } from "@ledgerhq/live-common/lib/promise";
 import logger from "../../logger";
 import TransportBLE from "../../react-native-hw-transport-ble";
 import { GENUINE_CHECK_TIMEOUT } from "../../constants";
 import { addKnownDevice } from "../../actions/ble";
+import { installAppFirstTime } from "../../actions/settings";
 import { knownDevicesSelector } from "../../reducers/ble";
+import { hasCompletedOnboardingSelector } from "../../reducers/settings";
 import type { DeviceLike } from "../../reducers/ble";
 import colors from "../../colors";
 import RequiresBLE from "../../components/RequiresBLE";
@@ -29,6 +31,8 @@ type Props = {
   route: { params: RouteParams },
   knownDevices: DeviceLike[],
   addKnownDevice: DeviceLike => void,
+  hasCompletedOnboarding: boolean,
+  installAppFirstTime: (value: boolean) => void,
 };
 
 type RouteParams = {
@@ -81,6 +85,7 @@ class PairDevices extends Component<Props, State> {
   };
 
   onSelect = async (device: Device) => {
+    const { hasCompletedOnboarding, installAppFirstTime } = this.props;
     this.setState({ device, status: "pairing", genuineAskedOnDevice: false });
     try {
       const transport = await TransportBLE.open(device);
@@ -98,11 +103,22 @@ class PairDevices extends Component<Props, State> {
           reject = error;
         });
 
-        checkDeviceForManager(transport, deviceInfo)
+        listApps(transport, deviceInfo)
           .pipe(timeout(GENUINE_CHECK_TIMEOUT))
           .subscribe({
             next: e => {
-              if (e.type === "result") return;
+              if (e.type === "result") {
+                if (!hasCompletedOnboarding) {
+                  const hasAnyAppInstalled =
+                    e.result && e.result.installed.length > 0;
+
+                  if (!hasAnyAppInstalled) {
+                    installAppFirstTime(false);
+                  }
+                }
+
+                return;
+              }
               this.setState({
                 genuineAskedOnDevice: e.type === "allow-manager-requested",
               });
@@ -211,15 +227,20 @@ class PairDevices extends Component<Props, State> {
 const forceInset = { bottom: "always" };
 
 export default function Screen() {
-  const knownDevices = useSelector(knownDevicesSelector);
   const dispatch = useDispatch();
+  const knownDevices = useSelector(knownDevicesSelector);
+  const hasCompletedOnboarding = useSelector(hasCompletedOnboardingSelector);
 
   return (
     <RequiresBLE>
       <SafeAreaView forceInset={forceInset} style={styles.root}>
         <PairDevices
           knownDevices={knownDevices}
+          hasCompletedOnboarding={hasCompletedOnboarding}
           addKnownDevice={(...args) => dispatch(addKnownDevice(...args))}
+          installAppFirstTime={(...args) =>
+            dispatch(installAppFirstTime(...args))
+          }
         />
       </SafeAreaView>
     </RequiresBLE>

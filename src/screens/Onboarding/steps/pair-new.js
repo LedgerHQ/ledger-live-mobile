@@ -11,6 +11,12 @@ import OnboardingLayout from "../OnboardingLayout";
 import { withOnboardingContext } from "../onboardingContext";
 import { urls } from "../../../config/urls";
 
+import {
+  connectingStep,
+  dashboard,
+  listApps,
+} from "../../../components/DeviceJob/steps";
+
 import type { OnboardingStepProps } from "../types";
 
 class OnboardingStepPairNew extends Component<OnboardingStepProps> {
@@ -51,6 +57,7 @@ class OnboardingStepPairNew extends Component<OnboardingStepProps> {
           usbOnly={usbOnly}
           deviceModelId={deviceModelId}
           onSelect={this.props.next}
+          steps={usbOnly ? [connectingStep, dashboard, listApps] : []}
           autoSelectOnAdd
         />
       </OnboardingLayout>
