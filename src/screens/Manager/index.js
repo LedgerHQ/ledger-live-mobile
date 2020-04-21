@@ -1,13 +1,12 @@
 /* @flow */
 import React, { Component } from "react";
 import { View, StyleSheet } from "react-native";
-import { withNavigationFocus } from "@react-navigation/compat";
-import { connect } from "react-redux";
+import { useIsFocused } from "@react-navigation/native";
+import { useDispatch, useSelector } from "react-redux";
 import { Trans } from "react-i18next";
 import manager from "@ledgerhq/live-common/lib/manager";
 import { disconnect } from "@ledgerhq/live-common/lib/hw";
 import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
-import { createStructuredSelector } from "reselect";
 import { removeKnownDevice } from "../../actions/ble";
 import { ScreenName } from "../../const";
 import {
@@ -60,18 +59,19 @@ const RemoveDeviceModal = ({
   </BottomModal>
 );
 
-const mapStateToProps = createStructuredSelector({
-  readOnlyModeEnabled: readOnlyModeEnabledSelector,
-});
+type Props = {
+  navigation: any,
+  knownDevices: DeviceLike[],
+};
+
+type ChooseDeviceProps = Props & {
+  isFocused: boolean,
+  readOnlyModeEnabled: boolean,
+  removeKnownDevice: string => void,
+};
 
 class ChooseDevice extends Component<
-  {
-    navigation: any,
-    isFocused: boolean,
-    readOnlyModeEnabled: boolean,
-    knownDevices: DeviceLike[],
-    removeKnownDevice: string => void,
-  },
+  ChooseDeviceProps,
   {
     showMenu: boolean,
   },
@@ -209,7 +209,17 @@ const styles = StyleSheet.create({
   },
 });
 
-// $FlowFixMe
-export default connect(mapStateToProps, { removeKnownDevice })(
-  withNavigationFocus(ChooseDevice),
-);
+export default function Screen(props: Props) {
+  const isFocused = useIsFocused();
+  const dispatch = useDispatch();
+  const readOnlyModeEnabled = useSelector(readOnlyModeEnabledSelector);
+
+  return (
+    <ChooseDevice
+      {...props}
+      isFocused={isFocused}
+      readOnlyModeEnabled={readOnlyModeEnabled}
+      removeKnownDevice={(...args) => dispatch(removeKnownDevice(...args))}
+    />
+  );
+}

@@ -1,6 +1,6 @@
 /* @flow */
 import React, { PureComponent } from "react";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import { Trans } from "react-i18next";
 import {
   TouchableOpacity,
@@ -11,9 +11,8 @@ import {
   FlatList,
 } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
-import { withNavigation } from "@react-navigation/compat";
 import { getAssetsDistribution } from "@ledgerhq/live-common/lib/portfolio";
-import { createStructuredSelector, createSelector } from "reselect";
+import { createSelector } from "reselect";
 import type { AssetsDistribution } from "@ledgerhq/live-common/lib/types/portfolio";
 import type { Currency } from "@ledgerhq/live-common/lib/types/currencies";
 import { ScreenName } from "../../const";
@@ -31,7 +30,10 @@ import { calculateCountervalueSelector } from "../../actions/general";
 const forceInset = { bottom: "always" };
 
 type Props = {
-  navigation: *,
+  navigation: any,
+};
+
+type DistributionProps = Props & {
   distribution: AssetsDistribution,
   counterValueCurrency: Currency,
 };
@@ -42,12 +44,7 @@ const distributionSelector = createSelector(
   getAssetsDistribution,
 );
 
-const mapStateToProps = createStructuredSelector({
-  distribution: distributionSelector,
-  counterValueCurrency: counterValueCurrencySelector,
-});
-
-class Distribution extends PureComponent<Props, *> {
+class Distribution extends PureComponent<DistributionProps, *> {
   state = {
     highlight: -1,
   };
@@ -145,7 +142,18 @@ class Distribution extends PureComponent<Props, *> {
   }
 }
 
-export default connect(mapStateToProps)(withNavigation(Distribution));
+export default function Screen({ navigation }: Props) {
+  const distribution = useSelector(distributionSelector);
+  const counterValueCurrency = useSelector(counterValueCurrencySelector);
+
+  return (
+    <Distribution
+      navigation={navigation}
+      distribution={distribution}
+      counterValueCurrency={counterValueCurrency}
+    />
+  );
+}
 
 const styles = StyleSheet.create({
   wrapper: {

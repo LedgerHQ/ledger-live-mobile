@@ -3,7 +3,7 @@
 import React, { Component } from "react";
 import { StyleSheet } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
-import { withNavigation } from "@react-navigation/compat";
+import { useNavigation } from "@react-navigation/native";
 import { decode } from "@ledgerhq/live-common/lib/cross";
 import { RNCamera } from "react-native-camera";
 import { ScreenName } from "../const";
@@ -13,7 +13,7 @@ import CameraScreen from "../components/CameraScreen";
 const forceInset = { bottom: "always" };
 
 class DebugWSImport extends Component<
-  { navigation: * },
+  { navigation: any },
   { ip: string, secret: string, scanning: boolean },
 > {
   state = {
@@ -76,4 +76,8 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withNavigation(DebugWSImport);
+export default function Screen() {
+  const navigation = useNavigation();
+
+  return <DebugWSImport navigation={navigation} />;
+}

@@ -1,8 +1,8 @@
 // @flow
 import React, { useCallback } from "react";
 import { Trans } from "react-i18next";
-import { withNavigation } from "@react-navigation/compat";
 import { StyleSheet, View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import type { AccountLike, Account } from "@ledgerhq/live-common/lib/types";
 import { getMainAccount } from "@ledgerhq/live-common/lib/account";
 import { getCurrencyColor } from "@ledgerhq/live-common/lib/currencies";
@@ -40,15 +40,14 @@ const styles = StyleSheet.create({
   },
 });
 
-const TezosAccountHeader = ({
-  account,
-  parentAccount,
-  navigation,
-}: {
+type Props = {
   account: AccountLike,
   parentAccount: ?Account,
-  navigation: any,
-}) => {
+};
+
+export default function TezosAccountHeader({ account, parentAccount }: Props) {
+  const navigation = useNavigation();
+
   const onEarnRewards = useCallback(() => {
     navigation.navigate(ScreenName.TezosDelegationFlow, {
       screen: "DelegationStarted",
@@ -79,6 +78,4 @@ const TezosAccountHeader = ({
       <IlluStaking style={styles.bannerImage} />
     </View>
   );
-};
-
-export default withNavigation(TezosAccountHeader);
+}

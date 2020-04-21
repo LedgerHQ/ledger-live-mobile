@@ -1,5 +1,5 @@
 import React, { memo, useMemo, useCallback } from "react";
-import { useDispatch, useSelector } from "redux";
+import { useDispatch, useSelector } from "react-redux";
 import { StyleSheet, View } from "react-native";
 import { Trans } from "react-i18next";
 

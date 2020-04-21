@@ -85,16 +85,13 @@ export const portfolioSelector = (state: State) => {
   });
 };
 
-export const currencyPortfolioSelector = (
-  state: State,
-  {
-    currency,
-    range,
-  }: {
-    currency: CryptoCurrency | TokenCurrency,
-    range: PortfolioRange,
-  },
-) => {
+export const currencyPortfolioSelectorCreator = ({
+  currency,
+  range,
+}: {
+  currency: CryptoCurrency | TokenCurrency,
+  range: PortfolioRange,
+}) => (state: State) => {
   const accounts = flattenAccounts(accountsSelector(state)).filter(
     a => getAccountCurrency(a) === currency,
   );

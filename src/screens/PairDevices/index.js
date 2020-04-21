@@ -29,9 +29,12 @@ import RenderError from "./RenderError";
 type Props = {
   navigation: any,
   route: { params: RouteParams },
+};
+
+type PairDevicesProps = Props & {
   knownDevices: DeviceLike[],
-  addKnownDevice: DeviceLike => void,
   hasCompletedOnboarding: boolean,
+  addKnownDevice: DeviceLike => void,
   installAppFirstTime: (value: boolean) => void,
 };
 
@@ -55,7 +58,7 @@ type State = {
   genuineAskedOnDevice: boolean,
 };
 
-class PairDevices extends Component<Props, State> {
+class PairDevices extends Component<PairDevicesProps, State> {
   state = {
     status: "scanning",
     device: null,
@@ -226,7 +229,7 @@ class PairDevices extends Component<Props, State> {
 
 const forceInset = { bottom: "always" };
 
-export default function Screen() {
+export default function Screen(props: Props) {
   const dispatch = useDispatch();
   const knownDevices = useSelector(knownDevicesSelector);
   const hasCompletedOnboarding = useSelector(hasCompletedOnboardingSelector);
@@ -235,6 +238,7 @@ export default function Screen() {
     <RequiresBLE>
       <SafeAreaView forceInset={forceInset} style={styles.root}>
         <PairDevices
+          {...props}
           knownDevices={knownDevices}
           hasCompletedOnboarding={hasCompletedOnboarding}
           addKnownDevice={(...args) => dispatch(addKnownDevice(...args))}

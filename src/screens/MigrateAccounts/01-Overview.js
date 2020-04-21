@@ -27,12 +27,13 @@ const forceInset = { bottom: "always" };
 export default function Overview({ route, navigation }: Props) {
   const migratableAccounts = useSelector(migratableAccountsSelector);
   const currencyIds = useMemo(
-    migratableAccounts
-      .reduce(
-        (c, a) => (c.includes(a.currency.id) ? c : [...c, a.currency.id]),
-        [],
-      )
-      .sort(),
+    () =>
+      migratableAccounts
+        .reduce(
+          (c, a) => (c.includes(a.currency.id) ? c : [...c, a.currency.id]),
+          [],
+        )
+        .sort(),
     [migratableAccounts],
   );
 
