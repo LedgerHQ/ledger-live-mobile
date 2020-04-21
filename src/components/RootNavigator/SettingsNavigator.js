@@ -14,6 +14,7 @@ import DebugStore from "../../screens/DebugStore";
 import DebugSVG from "../../screens/DebugSVG";
 import DebugWSImport from "../../screens/DebugWSImport";
 import Settings from "../../screens/Settings";
+import AccountsSettings from "../../screens/Settings/Accounts";
 import AboutSettings from "../../screens/Settings/About";
 import GeneralSettings from "../../screens/Settings/General";
 import CountervalueSettings from "../../screens/Settings/General/CountervalueSettings";
@@ -56,6 +57,13 @@ export default function SettingsNavigator() {
         component={GeneralSettings}
         options={{
           title: t("settings.display.title"),
+        }}
+      />
+      <Stack.Screen
+        name={ScreenName.AccountsSettings}
+        component={AccountsSettings}
+        options={{
+          title: t("settings.accounts.title"),
         }}
       />
       <Stack.Screen

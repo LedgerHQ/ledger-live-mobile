@@ -80,7 +80,7 @@ export default function Settings({ navigation }: Props) {
             title={t("settings.accounts.title")}
             desc={t("settings.accounts.desc")}
             icon={<Accounts size={16} color={colors.live} />}
-            onClick={() => navigation.navigate(NavigatorName.AccountSettings)}
+            onClick={() => navigation.navigate(ScreenName.AccountsSettings)}
           />
         )}
         <SettingsCard
