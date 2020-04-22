@@ -2,7 +2,7 @@
 import React from "react";
 import { Trans } from "react-i18next";
 import { View, StyleSheet } from "react-native";
-import { useRoute, useNavigation } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import colors from "../../colors";
 import { NavigatorName } from "../../const";
 import LText from "../../components/LText";
@@ -11,16 +11,10 @@ import IconReceive from "../../icons/Receive";
 import PortfolioNoOpIllustration from "../../icons/PortfolioNoOpIllustration";
 
 export default function NoOpStatePortfolio() {
-  const route = useRoute();
-  const { navigate } = useNavigation();
+  const navigation = useNavigation();
 
   function navigateToReceive() {
-    navigate(NavigatorName.ReceiveFunds, {
-      params: {
-        goBackKey: route.key,
-      },
-      key: "receivefunds",
-    });
+    navigation.navigate(NavigatorName.ReceiveFunds);
   }
 
   return (

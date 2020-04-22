@@ -10,7 +10,8 @@ import ComingSoon from "../../icons/ComingSoon";
 
 const forceInset = { bottom: "always" };
 
-export default function ExchangeScreen() {
+export default function ExchangeScreen({ route }) {
+  console.log(JSON.stringify(route, null, 2));
   return (
     <SafeAreaView
       style={[styles.root, { paddingTop: extraStatusBarPadding }]}

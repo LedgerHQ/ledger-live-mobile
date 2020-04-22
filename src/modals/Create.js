@@ -27,26 +27,28 @@ export default function CreateModal({ isOpened, onClose }: ModalProps) {
   const accountsCount = useSelector(accountsCountSelector);
 
   const onNavigate = useCallback(
-    (routeName: string) => {
-      navigation.navigate({
-        routeName,
-        params: {
-          goBackKey: route.key,
-        },
-      });
+    (name: string, options?: { [key: string]: any }) => {
+      navigation.navigate(name, options);
 
       if (onClose) {
         onClose();
       }
     },
-    [navigation, route.key, onClose],
+    [navigation, onClose],
   );
 
-  const onSendFunds = useCallback(() => onNavigate(NavigatorName.SendFunds), [
-    onNavigate,
-  ]);
+  const onSendFunds = useCallback(
+    () =>
+      onNavigate(NavigatorName.SendFunds, {
+        screen: ScreenName.SendFundsMain,
+      }),
+    [onNavigate],
+  );
   const onReceiveFunds = useCallback(
-    () => onNavigate(NavigatorName.ReceiveFunds),
+    () =>
+      onNavigate(NavigatorName.ReceiveFunds, {
+        screen: ScreenName.ReceiveSelectAccount,
+      }),
     [onNavigate],
   );
   const onExchange = useCallback(() => onNavigate(ScreenName.Transfer), [
@@ -80,3 +82,8 @@ export default function CreateModal({ isOpened, onClose }: ModalProps) {
     </BottomModal>
   );
 }
+
+type NavOptions = {
+  screen: string,
+  params?: { [key: string]: any },
+};
