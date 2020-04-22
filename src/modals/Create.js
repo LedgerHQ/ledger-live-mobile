@@ -2,7 +2,7 @@
 
 import React, { useCallback } from "react";
 import SafeAreaView from "react-native-safe-area-view";
-import { useNavigation, useRoute } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 
@@ -20,7 +20,6 @@ const forceInset = { bottom: "always" };
 
 export default function CreateModal({ isOpened, onClose }: ModalProps) {
   const navigation = useNavigation();
-  const route = useRoute();
   const { t } = useTranslation();
 
   const readOnlyModeEnabled = useSelector(readOnlyModeEnabledSelector);
@@ -82,8 +81,3 @@ export default function CreateModal({ isOpened, onClose }: ModalProps) {
     </BottomModal>
   );
 }
-
-type NavOptions = {
-  screen: string,
-  params?: { [key: string]: any },
-};
