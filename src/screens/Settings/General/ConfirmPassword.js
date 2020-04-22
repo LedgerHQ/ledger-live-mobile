@@ -1,11 +1,12 @@
 /* @flow */
 import React, { PureComponent } from "react";
+import { Platform, Vibration } from "react-native";
 import * as Keychain from "react-native-keychain";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { withTranslation } from "react-i18next";
 import { PasswordsDontMatchError } from "@ledgerhq/errors";
-import { Vibration } from "react-native";
+
 import { setPrivacy } from "../../../actions/settings";
 import type { Privacy } from "../../../reducers/settings";
 import type { T } from "../../../types/common";
@@ -54,8 +55,15 @@ class ConfirmPassword extends PureComponent<Props, State> {
   async save() {
     const { password, biometricsType } = this.state;
     const { setPrivacy, navigation } = this.props;
+    const options =
+      Platform.OS === "ios"
+        ? {}
+        : {
+            accessControl: Keychain.ACCESS_CONTROL.APPLICATION_PASSWORD,
+            rules: Keychain.SECURITY_RULES.NONE,
+          };
     try {
-      await Keychain.setGenericPassword("ledger", password);
+      await Keychain.setGenericPassword("ledger", password, options);
       setPrivacy({
         biometricsType,
         biometricsEnabled: false,

@@ -7,6 +7,7 @@ import {
   StyleSheet,
   Image,
   Vibration,
+  Platform,
 } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import * as Keychain from "react-native-keychain";
@@ -126,7 +127,15 @@ class AuthScreen extends PureComponent<Props, State> {
     const { unlock } = this.props;
     if (!password) return;
     try {
-      const credentials = await Keychain.getGenericPassword();
+      const options =
+        Platform.OS === "ios"
+          ? {}
+          : {
+              accessControl: Keychain.ACCESS_CONTROL.APPLICATION_PASSWORD,
+              rules: Keychain.SECURITY_RULES.NONE,
+            };
+
+      const credentials = await Keychain.getGenericPassword(options);
       if (id !== this.submitId) return;
       if (credentials && credentials.password === password) {
         unlock();
