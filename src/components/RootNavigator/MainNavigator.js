@@ -51,7 +51,7 @@ export default function MainNavigator() {
       <Tab.Screen
         name={NavigatorName.Manager}
         component={ManagerNavigator}
-        options={({ route }) => ({
+        options={{
           tabBarIcon: (props: any) => (
             <ReadOnlyTab
               OnIcon={NanoXIcon}
@@ -61,8 +61,7 @@ export default function MainNavigator() {
               {...props}
             />
           ),
-          tabBarVisible: route.params ? !route.params.editMode : true,
-        })}
+        }}
       />
       <Tab.Screen
         name={NavigatorName.Settings}

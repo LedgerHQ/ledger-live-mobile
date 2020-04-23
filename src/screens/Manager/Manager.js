@@ -10,6 +10,7 @@ import StorageWarningModal from "./Modals/StorageWarningModal";
 import AppDependenciesModal from "./Modals/AppDependenciesModal";
 import UninstallDependenciesModal from "./Modals/UninstallDependenciesModal";
 import { useLockNavigation } from "../../components/RootNavigator/CustomBlockRouterNavigator";
+import { stackNavigatorConfig } from "../../navigation/navigatorConfig";
 
 const MANAGER_TABS = {
   CATALOG: "CATALOG",
@@ -53,6 +54,17 @@ const Manager = ({ navigation, route }: Props) => {
 
   // send informations to main router in order to lock navigation
   useLockNavigation(blockNavigation, setQuitManagerAction);
+
+  useEffect(() => {
+    navigation.setOptions({
+      headerLeft: !blockNavigation
+        ? stackNavigatorConfig.headerBackImage
+        : null,
+    });
+    navigation.dangerouslyGetParent().setOptions({
+      tabBarVisible: !blockNavigation,
+    });
+  }, [navigation, blockNavigation]);
 
   /**
    * Resets the navigation params in order to unlock navigation
