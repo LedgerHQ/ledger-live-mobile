@@ -1,7 +1,8 @@
 /* @flow */
 import React, { useCallback } from "react";
 import { View, StyleSheet } from "react-native";
-import { useTranslation, useNavigation } from "react-i18next";
+import { useTranslation } from "react-i18next";
+import { useNavigation } from "@react-navigation/native";
 import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
 import type { Transaction } from "@ledgerhq/live-common/lib/families/ethereum/types";
 import LText from "../../components/LText";
