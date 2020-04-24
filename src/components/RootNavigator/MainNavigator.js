@@ -4,14 +4,11 @@ import { ScreenName, NavigatorName } from "../../const";
 import Portfolio, { PortfolioTabIcon } from "../../screens/Portfolio";
 import Transfer, { TransferTabIcon } from "../../screens/Transfer";
 import AccountsNavigator from "./AccountsNavigator";
-import ManagerNavigator from "./ManagerNavigator";
+import ManagerNavigator, { ManagerTabIcon } from "./ManagerNavigator";
 import SettingsNavigator from "./SettingsNavigator";
 import styles from "../../navigation/styles";
 import TabIcon from "../TabIcon";
 import AccountsIcon from "../../icons/Accounts";
-import ManagerIcon from "../../icons/Manager";
-import NanoXIcon from "../../icons/TabNanoX";
-import ReadOnlyTab from "../ReadOnlyTab";
 import SettingsIcon from "../../icons/Settings";
 
 import Tab from "./CustomBlockRouterNavigator";
@@ -52,15 +49,7 @@ export default function MainNavigator() {
         name={NavigatorName.Manager}
         component={ManagerNavigator}
         options={{
-          tabBarIcon: (props: any) => (
-            <ReadOnlyTab
-              OnIcon={NanoXIcon}
-              oni18nKey="tabs.nanoX"
-              OffIcon={ManagerIcon}
-              offi18nKey="tabs.manager"
-              {...props}
-            />
-          ),
+          tabBarIcon: (props: any) => <ManagerTabIcon {...props} />,
         }}
       />
       <Tab.Screen
