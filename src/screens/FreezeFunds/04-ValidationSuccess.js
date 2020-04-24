@@ -13,6 +13,7 @@ import type { Operation } from "@ledgerhq/live-common/lib/types";
 import { accountScreenSelector } from "../../reducers/accounts";
 import { TrackScreen } from "../../analytics";
 import colors from "../../colors";
+import { NavigatorName, ScreenName } from "../../const";
 import PreventNativeBack from "../../components/PreventNativeBack";
 import ValidateSuccess from "../../components/ValidateSuccess";
 import Button from "../../components/Button";
@@ -49,11 +50,16 @@ export default function ValidationSuccess({ navigation, route }: Props) {
   }, [navigation]);
 
   const goToVote = useCallback(() => {
-    const screenName = lastVotedDate ? "VoteSelectValidator" : "VoteStarted";
     onClose();
-    navigation.navigate(screenName, {
-      accountId,
-      parentId: undefined,
+    const screenName = lastVotedDate
+      ? ScreenName.VoteSelectValidator
+      : ScreenName.VoteStarted;
+    navigation.navigate(NavigatorName.TronVoteFlow, {
+      screen: screenName,
+      params: {
+        accountId,
+        parentId: undefined,
+      },
     });
   }, [lastVotedDate, accountId, navigation, onClose]);
 

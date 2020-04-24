@@ -86,6 +86,8 @@ const Manage = ({
     } = {},
   } = account;
 
+  const accountId = account.id;
+
   const canFreeze =
     spendableBalance && spendableBalance.gt(MIN_TRANSACTION_AMOUNT);
 
@@ -114,9 +116,10 @@ const Manage = ({
   const onSelectAction = useCallback(
     (selection: ?string, options?: NavOptions) => {
       onCloseModal();
-      if (selection) onNavigate(selection, options);
+      if (selection)
+        onNavigate(selection, { ...options, params: { accountId } });
     },
-    [onCloseModal, onNavigate],
+    [onCloseModal, onNavigate, accountId],
   );
 
   return (
@@ -171,7 +174,7 @@ const Manage = ({
         <ChoiceButton
           disabled={!canVote}
           onPress={() =>
-            onSelectAction("TronVoteFlow", {
+            onSelectAction(NavigatorName.TronVoteFlow, {
               screen: lastVotedDate ? "VoteSelectValidator" : "VoteStarted",
             })
           }
