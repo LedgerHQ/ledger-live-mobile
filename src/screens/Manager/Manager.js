@@ -57,12 +57,10 @@ const Manager = ({ navigation, route }: Props) => {
 
   useEffect(() => {
     navigation.setOptions({
-      headerLeft: !blockNavigation
-        ? stackNavigatorConfig.headerBackImage
-        : null,
-    });
-    navigation.dangerouslyGetParent().setOptions({
-      tabBarVisible: !blockNavigation,
+      headerBackImage: blockNavigation
+        ? () => null
+        : stackNavigatorConfig.headerBackImage,
+      gestureEnabled: !blockNavigation,
     });
   }, [navigation, blockNavigation]);
 
