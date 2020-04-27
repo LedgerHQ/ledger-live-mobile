@@ -1,5 +1,5 @@
 // @flow
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   useNavigationBuilder,
   createNavigatorFactory,
@@ -10,6 +10,22 @@ import { BehaviorSubject } from "rxjs";
 
 export const lockSubject = new BehaviorSubject(false);
 const actionSubject = new BehaviorSubject();
+
+export function useIsNavLocked(): boolean {
+  const [isLocked, setIsLocked] = useState(false);
+
+  useEffect(() => {
+    const subscription = lockSubject.subscribe(val => {
+      setIsLocked(val);
+    });
+
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, []);
+
+  return isLocked;
+}
 
 /** use Effect to trigger lock navigation updates and callback to retrieve catched navigation actions */
 export const useLockNavigation = (when, callback = () => {}) => {

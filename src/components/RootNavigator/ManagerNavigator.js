@@ -1,7 +1,6 @@
 // @flow
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { TouchableOpacity } from "react-native";
-import { useIsFocused } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useTranslation } from "react-i18next";
 import { ScreenName, NavigatorName } from "../../const";
@@ -13,7 +12,7 @@ import styles from "../../navigation/styles";
 import ReadOnlyTab from "../ReadOnlyTab";
 import ManagerIcon from "../../icons/Manager";
 import NanoXIcon from "../../icons/TabNanoX";
-import { lockSubject } from "./CustomBlockRouterNavigator";
+import { useIsNavLocked } from "./CustomBlockRouterNavigator";
 
 export default function ManagerNavigator() {
   const { t } = useTranslation();
@@ -51,17 +50,7 @@ export default function ManagerNavigator() {
 const Stack = createStackNavigator();
 
 export function ManagerTabIcon(props: any) {
-  const [disabled, setDisabled] = useState(false);
-
-  useEffect(() => {
-    const subscription = lockSubject.subscribe(val => {
-      setDisabled(val);
-    });
-
-    return () => {
-      subscription.unsubscribe();
-    };
-  }, []);
+  const isNavLocked = useIsNavLocked();
 
   const content = (
     <ReadOnlyTab
@@ -73,12 +62,9 @@ export function ManagerTabIcon(props: any) {
     />
   );
 
-  if (!disabled) {
-    return content;
+  if (isNavLocked) {
+    return <TouchableOpacity onPress={() => {}}>{content}</TouchableOpacity>;
   }
 
-  return (
-    // Prevent triggering navigation by wrapping tab icon with a dummy touchable
-    <TouchableOpacity onPress={() => {}}>{content}</TouchableOpacity>
-  );
+  return content;
 }
