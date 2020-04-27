@@ -94,7 +94,7 @@ function AccountBalanceSummaryFooter({ account }: Props) {
   );
 }
 
-export function AccountBalanceFooter({ account }: Props) {
+export default function AccountBalanceFooter({ account }: Props) {
   if (!account.tronResources) return null;
 
   return <AccountBalanceSummaryFooter account={account} />;
