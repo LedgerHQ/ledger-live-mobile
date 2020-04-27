@@ -1,10 +1,10 @@
 // @flow
 
-import React, { useRef, useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import { StyleSheet, FlatList } from "react-native";
 import { useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
-import type { Account, TokenCurrency } from "@ledgerhq/live-common/lib/types";
+import type { Account } from "@ledgerhq/live-common/lib/types";
 import { accountsSelector } from "../../reducers/accounts";
 import globalSyncRefreshControl from "../../components/globalSyncRefreshControl";
 import TrackScreen from "../../analytics/TrackScreen";
@@ -13,7 +13,7 @@ import NoAccounts from "./NoAccounts";
 import AccountRow from "./AccountRow";
 import MigrateAccountsBanner from "../MigrateAccounts/Banner";
 import { useScrollToTop } from "../../navigation/utils";
-import BlacklistTokenModal from "../Settings/Accounts/BlacklistTokenModal";
+import TokenContextualModal from "../Settings/Accounts/TokenContextualModal";
 
 const List = globalSyncRefreshControl(FlatList);
 
@@ -23,21 +23,20 @@ export default function Accounts() {
   const ref = useRef();
   useScrollToTop(ref);
 
-  const [blacklistToken, setBlacklistToken] = useState<?TokenCurrency>(
-    undefined,
-  );
+  const [account, setAccount] = useState(undefined);
 
-  function renderItem({ item, index }: { item: Account, index: number }) {
-    return (
+  const renderItem = useCallback(
+    ({ item, index }: { item: Account, index: number }) => (
       <AccountRow
         navigation={navigation}
         account={item}
         accountId={item.id}
-        onBlacklistToken={setBlacklistToken}
+        onSetAccount={setAccount}
         isLast={index === accounts.length - 1}
       />
-    );
-  }
+    ),
+    [navigation, accounts.length],
+  );
 
   if (accounts.length === 0) {
     return (
@@ -60,10 +59,10 @@ export default function Accounts() {
         contentContainerStyle={styles.contentContainer}
       />
       <MigrateAccountsBanner />
-      <BlacklistTokenModal
-        onClose={() => setBlacklistToken(undefined)}
-        isOpened={!!blacklistToken}
-        token={blacklistToken}
+      <TokenContextualModal
+        onClose={() => setAccount(undefined)}
+        isOpened={account}
+        account={account}
       />
     </>
   );

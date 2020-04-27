@@ -10,7 +10,7 @@ import { useNavigation } from "@react-navigation/native";
 import type {
   Account,
   SubAccount,
-  TokenCurrency,
+  TokenAccount,
 } from "@ledgerhq/live-common/lib/types";
 import useEnv from "@ledgerhq/live-common/lib/hooks/useEnv";
 import { listSubAccounts } from "@ledgerhq/live-common/lib/account";
@@ -21,7 +21,7 @@ import colors from "../../colors";
 import LText from "../../components/LText";
 import Button from "../../components/Button";
 import Touchable from "../../components/Touchable";
-import BlacklistTokenModal from "../Settings/Accounts/BlacklistTokenModal";
+import TokenContextualModal from "../Settings/Accounts/TokenContextualModal";
 
 const keyExtractor = o => o.id;
 
@@ -93,9 +93,7 @@ export default function SubAccountsList({
 
   const navigation = useNavigation();
   const [isCollapsed, setCollapsed] = useState(true);
-  const [blacklistToken, setBlacklistToken] = useState<
-    TokenCurrency | typeof undefined,
-  >();
+  const [account, setAccount] = useState<TokenAccount | typeof undefined>();
   const subAccounts = listSubAccounts(parentAccount);
 
   const isToken = useMemo(
@@ -112,13 +110,7 @@ export default function SubAccountsList({
     });
   }, [accountId, navigation]);
 
-  const onBlacklistToken = useCallback(token => setBlacklistToken(token), [
-    setBlacklistToken,
-  ]);
-  const onClearBlacklistToken = useCallback(
-    () => setBlacklistToken(undefined),
-    [setBlacklistToken],
-  );
+  const onClearAccount = useCallback(() => setAccount(undefined), [setAccount]);
 
   const renderHeader = useCallback(
     () => (
@@ -219,12 +211,12 @@ export default function SubAccountsList({
       <Card>
         <SubAccountRow
           account={item}
-          onBlacklistToken={onBlacklistToken}
+          onSubAccountLongPress={setAccount}
           onSubAccountPress={onAccountPress}
         />
       </Card>
     ),
-    [onAccountPress, onBlacklistToken],
+    [onAccountPress, setAccount],
   );
 
   if (
@@ -244,10 +236,10 @@ export default function SubAccountsList({
         ListHeaderComponent={renderHeader}
         ListFooterComponent={renderFooter}
       />
-      <BlacklistTokenModal
-        onClose={onClearBlacklistToken}
-        isOpened={!!blacklistToken}
-        token={blacklistToken}
+      <TokenContextualModal
+        onClose={onClearAccount}
+        isOpened={!!account}
+        account={account}
       />
     </View>
   );

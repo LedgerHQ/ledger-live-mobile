@@ -142,6 +142,13 @@ export const accountSelector = createSelector(
   (accounts, accountId) => accounts.find(a => a.id === accountId),
 );
 
+// $FlowFixMe
+export const parentAccountSelector = createSelector(
+  accountsSelector,
+  (_, { account }) => (account ? account.parentId : null),
+  (accounts, accountId) => accounts.find(a => a.id === accountId),
+);
+
 export const accountScreenSelector = (route: any) => (state: any) => {
   const { accountId, parentId } = route.params;
   const parentAccount: ?Account =

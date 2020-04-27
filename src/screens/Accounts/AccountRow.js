@@ -13,7 +13,7 @@ import { listTokenTypesForCryptoCurrency } from "@ledgerhq/live-common/lib/curre
 import type {
   Account,
   SubAccount,
-  TokenCurrency,
+  TokenAccount,
 } from "@ledgerhq/live-common/lib/types";
 import Icon from "react-native-vector-icons/dist/FontAwesome";
 import { ScreenName } from "../../const";
@@ -31,7 +31,7 @@ type Props = {
   accountId: string,
   navigation: *,
   isLast: boolean,
-  onBlacklistToken: TokenCurrency => void,
+  onSetAccount: TokenAccount => void,
 };
 
 const placeholderProps = {
@@ -46,7 +46,7 @@ const AccountRow = ({
   navigation,
   account,
   accountId,
-  onBlacklistToken,
+  onSetAccount,
 }: Props) => {
   // makes it refresh if this changes
   useEnv("HIDE_EMPTY_TOKEN_ACCOUNTS");
@@ -80,6 +80,10 @@ const AccountRow = ({
   const subAccounts = listSubAccounts(account);
 
   const isToken = listTokenTypesForCryptoCurrency(account.currency).length > 0;
+
+  const onSubAccountLongPress = useCallback(account => onSetAccount(account), [
+    onSetAccount,
+  ]);
 
   return (
     <View style={styles.root}>
@@ -148,7 +152,7 @@ const AccountRow = ({
                   key={i}
                   account={tkn}
                   onSubAccountPress={onSubAccountPress}
-                  onBlacklistToken={onBlacklistToken}
+                  onSubAccountLongPress={onSubAccountLongPress}
                 />
               ))}
             </View>
