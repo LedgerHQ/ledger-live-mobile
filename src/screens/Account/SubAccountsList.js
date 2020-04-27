@@ -80,19 +80,24 @@ const Card = ({ children }: { children: any }) => (
   <View style={styles.card}>{children}</View>
 );
 
+type Props = {
+  parentAccount: Account,
+  onAccountPress: (subAccount: SubAccount) => void,
+  accountId: string,
+  isCollapsed: boolean,
+  onToggle: () => void,
+};
+
 export default function SubAccountsList({
   parentAccount,
   onAccountPress,
   accountId,
-}: {
-  parentAccount: Account,
-  onAccountPress: (subAccount: SubAccount) => void,
-  accountId: string,
-}) {
+  isCollapsed,
+  onToggle,
+}: Props) {
   useEnv("HIDE_EMPTY_TOKEN_ACCOUNTS");
 
   const navigation = useNavigation();
-  const [isCollapsed, setCollapsed] = useState(true);
   const [account, setAccount] = useState<TokenAccount | typeof undefined>();
   const subAccounts = listSubAccounts(parentAccount);
 
@@ -193,7 +198,7 @@ export default function SubAccountsList({
               size={16}
             />
           )}
-          onPress={() => setCollapsed(isCollapsed => !isCollapsed)}
+          onPress={onToggle}
           size={13}
         />
       </Card>
@@ -204,6 +209,7 @@ export default function SubAccountsList({
     isToken,
     navigateToReceiveConnectDevice,
     parentAccount.currency.family,
+    onToggle,
   ]);
 
   const renderItem = useCallback(

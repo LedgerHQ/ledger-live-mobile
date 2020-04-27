@@ -175,6 +175,8 @@ export default function AccountScreen({ navigation, route }: Props) {
     });
   }, 300);
 
+  const [isCollapsed, setIsCollapsed] = useState(true);
+
   function ListHeaderComponent() {
     if (!account) return null;
     const mainAccount = getMainAccount(account, parentAccount);
@@ -221,6 +223,8 @@ export default function AccountScreen({ navigation, route }: Props) {
             accountId={account.id}
             onAccountPress={onAccountPress}
             parentAccount={account}
+            isCollapsed={isCollapsed}
+            onToggle={() => setIsCollapsed(!isCollapsed)}
           />
         ) : null}
       </View>
