@@ -29,7 +29,7 @@ export default function MainNavigator() {
         }}
       />
       <Tab.Screen
-        name={NavigatorName.AccountsStack}
+        name={NavigatorName.Accounts}
         component={AccountsNavigator}
         options={{
           tabBarIcon: (props: any) => (

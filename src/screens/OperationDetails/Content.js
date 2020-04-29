@@ -17,7 +17,7 @@ import {
   getAccountUnit,
   getAccountName,
 } from "@ledgerhq/live-common/lib/account";
-import { ScreenName } from "../../const";
+import { NavigatorName, ScreenName } from "../../const";
 import { localeIds } from "../../languages";
 import LText from "../../components/LText";
 import OperationIcon from "../../components/OperationIcon";
@@ -65,9 +65,12 @@ export default function Content({ account, parentAccount, operation }: Props) {
   const [isModalOpened, setIsModalOpened] = useState(false);
 
   const onPress = useCallback(() => {
-    navigation.navigate(ScreenName.Account, {
-      accountId: account.id,
-      parentId: parentAccount && parentAccount.id,
+    navigation.navigate(NavigatorName.Accounts, {
+      screen: ScreenName.Account,
+      params: {
+        accountId: account.id,
+        parentId: parentAccount && parentAccount.id,
+      },
     });
   }, [account.id, navigation, parentAccount]);
 
