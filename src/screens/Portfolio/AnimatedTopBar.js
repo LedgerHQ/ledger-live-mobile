@@ -57,7 +57,10 @@ export default function AnimatedTopBar({
     [isShown],
   );
 
-  const contentStyle = [styles.content, { height: top + 56 }];
+  const contentStyle = [
+    styles.content,
+    { height: Platform.OS === "ios" ? top + 56 : 56 },
+  ];
 
   return (
     <Animated.View
