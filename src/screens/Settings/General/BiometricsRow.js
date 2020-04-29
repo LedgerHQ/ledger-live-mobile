@@ -10,7 +10,7 @@ import { setPrivacyBiometrics } from "../../../actions/settings";
 import { privacySelector } from "../../../reducers/settings";
 import type { Privacy } from "../../../reducers/settings";
 import SettingsRow from "../../../components/SettingsRow";
-import RequestBiometricModal from "../../../components/RequestBiometricModal";
+import RequestBiometricAuth from "../../../components/RequestBiometricAuth";
 
 type Props = {
   privacy: ?Privacy,
@@ -59,10 +59,6 @@ class BiometricsRow extends Component<Props, State> {
     );
   };
 
-  onCancel = () => {
-    this.setState({ validationPending: false });
-  };
-
   render() {
     const { privacy, iconLeft } = this.props;
     const { validationPending } = this.state;
@@ -100,11 +96,10 @@ class BiometricsRow extends Component<Props, State> {
                 onValueChange={this.onValueChange}
               />
             </SettingsRow>
-            <RequestBiometricModal
-              isVisible={validationPending}
+            <RequestBiometricAuth
+              disabled={!validationPending}
               onSuccess={this.onSuccess}
               onError={this.onError}
-              onCancel={this.onCancel}
             />
           </>
         )}
@@ -114,6 +109,9 @@ class BiometricsRow extends Component<Props, State> {
 }
 
 export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  ),
   withTranslation(),
 )(BiometricsRow);

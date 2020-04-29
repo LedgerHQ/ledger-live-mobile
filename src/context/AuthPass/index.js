@@ -9,7 +9,7 @@ import { SkipLockContext } from "../../components/behaviour/SkipLock";
 import { AUTOLOCK_TIMEOUT } from "../../constants";
 import type { Privacy } from "../../reducers/settings";
 import AuthScreen from "./AuthScreen";
-import RequestBiometricModal from "../../components/RequestBiometricModal";
+import RequestBiometricAuth from "../../components/RequestBiometricAuth";
 
 const mapStateToProps = createStructuredSelector({
   privacy: privacySelector,
@@ -103,10 +103,6 @@ class AuthPass extends PureComponent<Props, State> {
     });
   };
 
-  onCancel = () => {
-    this.setState({ authModalOpen: false });
-  };
-
   // lock the app
   lock = () => {
     if (!this.props.privacy || this.state.skipLockCount) return;
@@ -142,11 +138,10 @@ class AuthPass extends PureComponent<Props, State> {
             lock={this.lock}
             unlock={this.unlock}
           />
-          <RequestBiometricModal
-            isVisible={authModalOpen}
+          <RequestBiometricAuth
+            disabled={!authModalOpen}
             onSuccess={this.onSuccess}
             onError={this.onError}
-            onCancel={this.onCancel}
           />
         </>
       );
