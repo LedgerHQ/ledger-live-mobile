@@ -133,7 +133,8 @@ export const ScreenName = {
 export const NavigatorName = {
   // Stack
   /* eslint sort-keys: ["error", "asc", {"caseSensitive": false}] */
-  Accounts: "Accounts",
+  // add "Navigator" postfix to distinguish this from ScreenName.Accounts
+  Accounts: "AccountsNavigator",
   AccountSettings: "AccountSettings",
   AddAccounts: "AddAccounts",
   Base: "Base",

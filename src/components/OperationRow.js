@@ -2,7 +2,7 @@
 import React, { useCallback } from "react";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { Trans } from "react-i18next";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { getOperationAmountNumber } from "@ledgerhq/live-common/lib/operation";
 import {
   getMainAccount,
@@ -54,6 +54,7 @@ export default function OperationRow({
   isLast,
 }: Props) {
   const navigation = useNavigation();
+  const route = useRoute();
 
   const goToOperationDetails = debounce(() => {
     const params = [
@@ -64,6 +65,7 @@ export default function OperationRow({
         operation, // FIXME we should pass a operationId instead because data can changes over time.
         isSubOperation,
         key: operation.id,
+        ...route.params,
       },
     ];
 

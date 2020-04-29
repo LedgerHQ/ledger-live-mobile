@@ -4,7 +4,7 @@ import { View, StyleSheet, Linking } from "react-native";
 import uniq from "lodash/uniq";
 import { useSelector } from "react-redux";
 import { Trans, useTranslation } from "react-i18next";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import type {
   Account,
   Operation,
@@ -57,6 +57,7 @@ type Props = {
 
 export default function Content({ account, parentAccount, operation }: Props) {
   const navigation = useNavigation();
+  const route = useRoute();
   const { t } = useTranslation();
   const currencySettings = useSelector(s =>
     currencySettingsForAccountSelector(s, { account }),
@@ -65,14 +66,18 @@ export default function Content({ account, parentAccount, operation }: Props) {
   const [isModalOpened, setIsModalOpened] = useState(false);
 
   const onPress = useCallback(() => {
-    navigation.navigate(NavigatorName.Accounts, {
-      screen: ScreenName.Account,
-      params: {
-        accountId: account.id,
-        parentId: parentAccount && parentAccount.id,
-      },
-    });
-  }, [account.id, navigation, parentAccount]);
+    if (route.params?.isForwardedFromAccounts) {
+      navigation.dangerouslyGetParent().pop();
+    } else {
+      navigation.navigate(NavigatorName.Accounts, {
+        screen: ScreenName.Accounts,
+        params: {
+          accountId: account.id,
+          parentId: parentAccount && parentAccount.id,
+        },
+      });
+    }
+  }, [account.id, navigation, parentAccount, route]);
 
   const onPressInfo = useCallback(() => {
     setIsModalOpened(true);
