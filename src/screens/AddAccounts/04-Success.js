@@ -28,7 +28,7 @@ const IconPlus = () => <Icon name="plus" color={colors.live} size={16} />;
 
 export default function AddAccountsSuccess({ navigation, route }: Props) {
   const primaryCTA = useCallback(() => {
-    navigation.navigate(NavigatorName.AccountsStack);
+    navigation.navigate(NavigatorName.Accounts);
   }, [navigation]);
 
   const secondaryCTA = useCallback(() => {
