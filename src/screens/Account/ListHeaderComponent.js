@@ -25,7 +25,7 @@ import perFamilyAccountHeader from "../../generated/AccountHeader";
 import perFamilyAccountBodyHeader from "../../generated/AccountBodyHeader";
 import perFamilyAccountBalanceSummaryFooter from "../../generated/AccountBalanceSummaryFooter";
 
-function renderAccountSummary(account, parentAccount) {
+const renderAccountSummary = (account, parentAccount) => () => {
   const mainAccount = getMainAccount(account, parentAccount);
   const AccountBalanceSummaryFooter =
     perFamilyAccountBalanceSummaryFooter[mainAccount.currency.family];
@@ -33,7 +33,7 @@ function renderAccountSummary(account, parentAccount) {
   if (AccountBalanceSummaryFooter)
     return <AccountBalanceSummaryFooter account={account} />;
   return null;
-}
+};
 
 type HeaderTitleProps = {
   useCounterValue: boolean,
