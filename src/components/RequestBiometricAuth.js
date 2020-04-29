@@ -3,6 +3,12 @@ import { useCallback, useEffect, useRef } from "react";
 import FingerprintScanner from "react-native-fingerprint-scanner";
 import { useTranslation } from "react-i18next";
 
+type Props = {
+  disabled: boolean,
+  onSuccess: () => void,
+  onError: (error: Error) => void,
+};
+
 export function useBiometricAuth({ disabled, onSuccess, onError }: Props) {
   const pending = useRef(false);
   const { t } = useTranslation();
@@ -37,12 +43,7 @@ export function useBiometricAuth({ disabled, onSuccess, onError }: Props) {
   }, [disabled, auth]);
 }
 
-type Props = {
-  disabled: boolean,
-  onSuccess: () => void,
-  onError: (error: Error) => void,
-};
-
+// deplicate once AuthPass component is refactored with hooks API
 export default function RequestBiometricAuth(props: Props) {
   useBiometricAuth(props);
 
