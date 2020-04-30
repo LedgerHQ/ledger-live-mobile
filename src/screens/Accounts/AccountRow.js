@@ -60,6 +60,7 @@ const AccountRow = ({
   const onAccountPress = useCallback(() => {
     navigation.navigate(ScreenName.Account, {
       accountId,
+      isForwardedFromAccounts: true,
     });
   }, [accountId, navigation]);
 

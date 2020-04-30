@@ -30,7 +30,7 @@ export default function Accounts({ navigation, route }: Props) {
         isForwardedFromAccounts: true,
       });
     }
-  }, [navigation, route.params]);
+  });
 
   const accounts = useSelector(accountsSelector);
   const ref = useRef();
