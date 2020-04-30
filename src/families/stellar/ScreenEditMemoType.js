@@ -50,7 +50,6 @@ const Screen = connect(mapStateToProps)(
   makeGenericSelectScreen({
     id: "StellarEditMemoType",
     itemEventProperties: item => ({ memoType: item.value }),
-    title: i18next.t("send.summary.memo.type"),
     keyExtractor: item => item.value,
     formatItem: item => i18next.t(`stellar.memoType.${item.label}`),
     ListHeaderComponent: () => (
