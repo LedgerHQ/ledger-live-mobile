@@ -63,6 +63,11 @@ const Screen = connect(mapStateToProps)(
   }),
 );
 
+const options = {
+  title: i18next.t("send.summary.memo.type"),
+  headerLeft: null,
+};
+
 const styles = StyleSheet.create({
   memo: {
     marginBottom: 16,
@@ -74,4 +79,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export { Screen as component };
+export { Screen as component, options };
