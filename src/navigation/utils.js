@@ -37,9 +37,9 @@ export function useScrollToTop(
         // this handles SectionList with Animated wrapper
         scrollSectionListToTop(ref.current.getNode());
       }
-
-      return subscription.unsubscribe();
     });
+
+    return () => subscription.unsubscribe();
   }, [isFocused, ref]);
 }
 
