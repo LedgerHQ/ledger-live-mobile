@@ -1,12 +1,11 @@
 // @flow
 
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import { StyleSheet, FlatList } from "react-native";
 import { useSelector } from "react-redux";
 import type { Account } from "@ledgerhq/live-common/lib/types";
 import { accountsSelector } from "../../reducers/accounts";
 import globalSyncRefreshControl from "../../components/globalSyncRefreshControl";
-import { ScreenName } from "../../const";
 import TrackScreen from "../../analytics/TrackScreen";
 
 import NoAccounts from "./NoAccounts";
@@ -19,19 +18,9 @@ const List = globalSyncRefreshControl(FlatList);
 
 type Props = {
   navigation: any,
-  route: { params?: { accountId: string, parentId: string } },
 };
 
-export default function Accounts({ navigation, route }: Props) {
-  useEffect(() => {
-    if (route.params?.accountId || route.params?.parentId) {
-      navigation.navigate(ScreenName.Account, {
-        ...route.params,
-        isForwardedFromAccounts: true,
-      });
-    }
-  });
-
+export default function Accounts({ navigation }: Props) {
   const accounts = useSelector(accountsSelector);
   const ref = useRef();
   useScrollToTop(ref);
