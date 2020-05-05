@@ -66,14 +66,15 @@ export default function Content({ account, parentAccount, operation }: Props) {
 
   const onPress = useCallback(() => {
     navigation.navigate(NavigatorName.Accounts);
-    navigation.navigate(NavigatorName.Accounts, {
-      screen: ScreenName.Account,
-      params: {
+    // setTimeout is the way to make sure that it navigates to accounts screen first
+    // then stack account screen on top
+    setTimeout(() =>
+      navigation.navigate(ScreenName.Account, {
         accountId: account.id,
         parentId: parentAccount && parentAccount.id,
-      },
-    });
-  }, [navigation, account, parentAccount]);
+      }),
+    );
+  }, [account.id, navigation, parentAccount]);
 
   const onPressInfo = useCallback(() => {
     setIsModalOpened(true);
