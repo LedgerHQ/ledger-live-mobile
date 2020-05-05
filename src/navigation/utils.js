@@ -18,7 +18,7 @@ export function useScrollToTop(
   useEffect(() => {
     const subscription = scrollSubject.subscribe(() => {
       if (!ref.current || !isFocused) {
-        return subscription.unsubscribe();
+        return;
       }
 
       if (typeof ref.current.scrollTo === "function") {
@@ -39,7 +39,9 @@ export function useScrollToTop(
       }
     });
 
-    return () => subscription.unsubscribe();
+    return () => {
+      subscription.unsubscribe();
+    };
   }, [isFocused, ref]);
 }
 
