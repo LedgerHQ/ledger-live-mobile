@@ -4,7 +4,7 @@ import { View, StyleSheet, Linking } from "react-native";
 import uniq from "lodash/uniq";
 import { useSelector } from "react-redux";
 import { Trans, useTranslation } from "react-i18next";
-import { useNavigation, CommonActions } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import type {
   Account,
   Operation,
@@ -65,86 +65,13 @@ export default function Content({ account, parentAccount, operation }: Props) {
   const [isModalOpened, setIsModalOpened] = useState(false);
 
   const onPress = useCallback(() => {
-    navigation.dispatch(state => {
-      const routes = state.routes
-        .filter(r => r.name !== ScreenName.OperationDetails)
-        .map(r =>
-          r.name === NavigatorName.Main
-            ? {
-                ...r,
-                state: {
-                  stale: false,
-                  type: "tab",
-                  key: "tab-89JpjXp2J7",
-                  index: 1,
-                  routeNames: [
-                    "Portfolio",
-                    "AccountsNavigator",
-                    "Transfer",
-                    "Manager",
-                    "Settings",
-                  ],
-                  history: [
-                    {
-                      type: "route",
-                      key: "Portfolio-bEavJ4xI1R",
-                    },
-                  ],
-                  routes: [
-                    {
-                      name: "Portfolio",
-                      key: "Portfolio-bEavJ4xI1R",
-                    },
-                    {
-                      name: "AccountsNavigator",
-                      key: "AccountsNavigator--6bAw_h6_e",
-                      state: {
-                        stale: false,
-                        type: "stack",
-                        key: "stack-Qv_KXVfsxj",
-                        routeNames: ["Accounts", "Account"],
-                        index: 1,
-                        routes: [
-                          {
-                            key: "Accounts-uPicJaR0yz",
-                            name: "Accounts",
-                          },
-                          {
-                            key: "Account-PgHvlboa9",
-                            name: "Account",
-                            params: {
-                              accountId: account.id,
-                              parentId: parentAccount && parentAccount.id,
-                            },
-                          },
-                        ],
-                      },
-                    },
-                    {
-                      name: "Transfer",
-                      key: "Transfer-t8eAcwRRP0",
-                    },
-                    {
-                      name: "Manager",
-                      key: "Manager-MenYV0LbzY",
-                    },
-                    {
-                      name: "Settings",
-                      key: "Settings-jKdbRmHZQy",
-                    },
-                  ],
-                },
-              }
-            : r,
-        );
-
-      const newState = {
-        ...state,
-        index: routes.length - 1,
-        routes,
-      };
-
-      return CommonActions.reset(newState);
+    navigation.navigate(NavigatorName.Accounts);
+    navigation.navigate(NavigatorName.Accounts, {
+      screen: ScreenName.Account,
+      params: {
+        accountId: account.id,
+        parentId: parentAccount && parentAccount.id,
+      },
     });
   }, [navigation, account, parentAccount]);
 
