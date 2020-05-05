@@ -28,7 +28,7 @@ config.capabilities = [
     // The path to the app
     "appium:app": join(
       process.cwd(),
-      "android/app/build/outputs/apk/stagingRelease/app-x86_64-stagingRelease.apk",
+      "android/app/build/outputs/apk/stagingRelease/app-x86-stagingRelease.apk",
     ),
     // Read the reset strategies very well, they differ per platform, see
     // http://appium.io/docs/en/writing-running-appium/other/reset-strategies/
