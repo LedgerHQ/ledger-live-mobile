@@ -16,7 +16,7 @@ jobs:
         with:
           node-version: 12.x
 
-        uses: actions/setup-ruby@v1
+      - uses: actions/setup-ruby@v1
         with:
           ruby-version: 2.7.x
 
