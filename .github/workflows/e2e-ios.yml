@@ -9,18 +9,18 @@ jobs:
         with:
           username: ${{ github.actor }}
           ban: ledgerlive
-      - uses: actions/checkout@v1
+
+      - uses: actions/checkout@v2
 
       - uses: actions/setup-node@master
         with:
           node-version: 12.x
 
-      - name: Set up Ruby
         uses: actions/setup-ruby@v1
         with:
           ruby-version: 2.7.x
 
-      - name: get yarn cache
+      - name: Get yarn cache
         id: yarn-cache
         run: echo "::set-output name=dir::$(yarn cache dir)"
 
@@ -31,16 +31,16 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
 
-      - name: install dependencies
+      - name: Install dependencies
         run: yarn
 
-      - name: install applesimutils
+      - name: Install applesimutils
         run: |
           brew tap wix/brew
           brew install applesimutils
 
-      - name: build
-        run: yarn e2e:build --configuration=ios.staging
+      - name: Build
+        run: yarn e2e:build -c ios.staging
 
-      - name: test
-        run: yarn e2e:test --configuration=ios.staging
+      - name: Test
+        run: yarn e2e:test -c ios.staging
