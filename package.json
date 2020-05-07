@@ -25,6 +25,9 @@
     "android:install": "./scripts/install-and-run-apk.sh",
     "staging-android": "yarn android:staging && yarn android:install",
     "mock-android": "yarn android:mock && yarn android:install",
+    "detox": "./node_modules/.bin/detox",
+    "e2e:build": "yarn detox build",
+    "e2e:test": "yarn detox test",
     "ios:ipa": "bundle exec fastlane ios build_ipa --env production",
     "ios:ipadev": "bundle exec fastlane ios build_ipa development:true --env production",
     "ios:beta": "bundle exec fastlane ios clean_beta --env production",
@@ -48,6 +51,19 @@
     "transform": {
       "^.+\\.js$": "<rootDir>/node_modules/react-native/jest/preprocessor.js"
     }
+  },
+  "detox": {
+    "configurations": {
+      "ios.sim.debug": {
+        "binaryPath": "ios/build/ledgerlivemobile/Build/Products/Debug-iphonesimulator/ledgerlivemobile.app",
+        "build": "xcodebuild -workspace ios/ledgerlivemobile.xcworkspace -scheme ledgerlivemobile -configuration Debug -sdk iphonesimulator -derivedDataPath ios/build",
+        "type": "ios.simulator",
+        "device": {
+          "type": "iPhone 11 Pro"
+        }
+      }
+    },
+    "test-runner": "jest"
   },
   "dependencies": {
     "@ledgerhq/compressjs": "^1.3.2",
@@ -166,6 +182,7 @@
     "@babel/runtime": "^7.8.7",
     "@react-native-community/eslint-config": "^0.0.7",
     "babel-jest": "^25.1.0",
+    "detox": "^16.4.0",
     "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-config-prettier": "^6.10.0",
