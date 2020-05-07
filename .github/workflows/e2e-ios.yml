@@ -34,6 +34,11 @@ jobs:
       - name: install dependencies
         run: yarn
 
+      - name: install applesimutils
+        run: |
+          brew tap wix/brew
+          brew install applesimutils
+
       - name: build
         run: yarn e2e:build --configuration=ios.staging
 
