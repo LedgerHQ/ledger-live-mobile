@@ -63,7 +63,7 @@
         }
       },
       "android.staging": {
-        "binaryPath": "android/app/build/outputs/apk/stagingRelease/app-x86_64-stagingRelease.apk",
+        "binaryPath": "android/app/build/outputs/apk/stagingRelease/app-x86-stagingRelease.apk",
         "testBinaryPath": "android/app/build/outputs/apk/androidTest/stagingRelease/app-stagingRelease-androidTest.apk",
         "build": "cd android && ./gradlew assembleStagingRelease assembleAndroidTest -DtestBuildType=stagingRelease && cd ..",
         "type": "android.emulator",
