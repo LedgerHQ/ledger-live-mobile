@@ -6,6 +6,7 @@ buildscript {
         minSdkVersion = 24
         compileSdkVersion = 28
         targetSdkVersion = 28
+        kotlinVersion = '1.3.72'
     }
     repositories {
         jcenter()
@@ -16,6 +17,7 @@ buildscript {
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
     }
 }
 
@@ -29,10 +31,13 @@ allprojects {
         maven {
             // Android JSC is installed from npm
             url("$rootDir/../node_modules/jsc-android/dist")
-       }
+        }
         google()
         jcenter()
         maven { url 'https://jitpack.io' }
+        maven {
+            url "$rootDir/../node_modules/detox/Detox-android"
+        }
     }
     gradle.projectsEvaluated {
         tasks.withType(JavaCompile) {

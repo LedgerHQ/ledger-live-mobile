@@ -61,7 +61,16 @@
         "device": {
           "type": "iPhone 11 Pro"
         }
-      }
+      },
+      "android.staging": {
+        "binaryPath": "android/app/build/outputs/apk/stagingRelease/app-x86_64-stagingRelease.apk",
+        "testBinaryPath": "android/app/build/outputs/apk/androidTest/stagingRelease/app-stagingRelease-androidTest.apk",
+        "build": "cd android && ./gradlew assembleStagingRelease assembleAndroidTest -DtestBuildType=stagingRelease && cd ..",
+        "type": "android.emulator",
+        "device": {
+          "avdName": "Nexus_5X_API_29_x86"
+        }
+    }
     },
     "test-runner": "jest"
   },
