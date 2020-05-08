@@ -48,4 +48,4 @@ jobs:
     runs-on: macos-latest
     steps:
       - name: List emulators
-        run: "$ANDROID_HOME"/emulator/emulator -list-avds
+        run: $ANDROID_HOME/emulator/emulator -list-avds
