@@ -1,8 +1,8 @@
-name: e2e test for iOS
+name: e2e test
 on: [push, pull_request]
 
 jobs:
-  test:
+  ios:
     runs-on: macos-latest
     steps:
       - uses: ledgerhq/actions/check-member@v1.0.0
@@ -44,3 +44,8 @@ jobs:
 
       - name: Test
         run: yarn e2e:test -c ios.staging
+  android:
+    runs-on: macos-latest
+    steps:
+      - name: List emulators
+        run: "$ANDROID_HOME"/emulator/emulator -list-avds
