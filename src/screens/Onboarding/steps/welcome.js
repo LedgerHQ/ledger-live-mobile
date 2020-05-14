@@ -52,6 +52,7 @@ class OnboardingStepWelcome extends Component<Props> {
           type="primary"
           title={<Trans i18nKey="onboarding.stepWelcome.start" />}
           onPress={onWelcomed}
+          accessibilityLabel="get-started-button"
         />
         <View style={styles.sub}>
           <LText style={styles.subText}>
