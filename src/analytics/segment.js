@@ -1,7 +1,7 @@
 // @flow
 /* eslint-disable no-console */
 
-import uuid from "uuid/v4";
+import { v4 as uuid } from "uuid";
 import { Sentry } from "react-native-sentry";
 import Config from "react-native-config";
 import { Platform } from "react-native";
@@ -116,7 +116,7 @@ export const screen = (
   name: ?string,
   properties: ?Object,
 ) => {
-  const title = category + (name ? " " + name : "");
+  const title = `Page ${category + (name ? ` ${name}` : "")}`;
   Sentry.captureBreadcrumb({
     message: title,
     category: "screen",
@@ -129,7 +129,7 @@ export const screen = (
   if (ANALYTICS_LOGS)
     console.log("analytics:screen", category, name, properties);
   if (!token) return;
-  analytics.screen(
+  analytics.track(
     title,
     {
       ...extraProperties(storeInstance),
