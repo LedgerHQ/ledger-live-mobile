@@ -1,6 +1,6 @@
 // @flow
 import React, { useCallback, useState, useMemo } from "react";
-import { View, Linking, TouchableOpacity, StyleSheet } from "react-native";
+import { View, TouchableOpacity, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Trans, useTranslation } from "react-i18next";
 import { BigNumber } from "bignumber.js";
@@ -24,7 +24,6 @@ import LText from "../../../components/LText";
 import Button from "../../../components/Button";
 import colors from "../../../colors";
 import { NavigatorName, ScreenName } from "../../../const";
-import ExternalLink from "../../../icons/ExternalLink";
 import Info from "../../../icons/Info";
 import ArrowRight from "../../../icons/ArrowRight";
 import DateFromNow from "../../../components/DateFromNow";
@@ -35,6 +34,7 @@ import ProgressCircle from "../../../components/ProgressCircle";
 import InfoModal from "../../../modals/Info";
 import ClaimRewards from "../../../icons/ClaimReward";
 import DelegationInfo from "../../../components/DelegationInfo";
+import AccountSectionLabel from "../../../components/AccountSectionLabel";
 
 const infoRewardsModalData = [
   {
@@ -143,17 +143,13 @@ const Delegation = ({ account, parentAccount }: Props) => {
 
   return (
     <View style={styles.root}>
-      {hasRewards || (tronPower > 0 && formattedVotes.length > 0) ? (
+      {(hasRewards || (tronPower > 0 && formattedVotes.length > 0)) && (
         <>
-          <TouchableOpacity
-            style={styles.labelContainer}
+          <AccountSectionLabel
+            name={t("tron.voting.rewards.title")}
+            icon={<Info size={16} color={colors.darkBlue} />}
             onPress={openRewardsInfoModal}
-          >
-            <LText semiBold style={styles.label}>
-              <Trans i18nKey="tron.voting.rewards.title" />
-            </LText>
-            <Info size={16} color={colors.darkBlue} />
-          </TouchableOpacity>
+          />
           <View style={styles.rewardSection}>
             <View style={styles.labelSection}>
               <LText semiBold style={styles.title}>
@@ -181,8 +177,8 @@ const Delegation = ({ account, parentAccount }: Props) => {
             />
           </View>
         </>
-      ) : null}
-      {true || tronPower > 0 ? (
+      )}
+      {tronPower > 0 ? (
         formattedVotes.length > 0 ? (
           <>
             <Header count={formattedVotes.length} onPress={onManageVotes} />
@@ -228,11 +224,7 @@ const Delegation = ({ account, parentAccount }: Props) => {
           </>
         ) : (
           <>
-            <View style={styles.labelContainer}>
-              <LText semiBold style={styles.label}>
-                <Trans i18nKey="tron.voting.votes.title" />
-              </LText>
-            </View>
+            <AccountSectionLabel name={t("tron.voting.votes.title")} />
             <DelegationInfo
               description={t("tron.voting.votes.description", {
                 name: account.currency.name,
@@ -302,16 +294,6 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "flex-start",
     justifyContent: "center",
-  },
-  labelContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    paddingVertical: 12,
-  },
-  label: {
-    fontSize: 18,
-    color: colors.darkBlue,
-    marginRight: 6,
   },
   warn: {
     flexDirection: "row",

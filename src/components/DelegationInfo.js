@@ -1,7 +1,6 @@
 // @flow
 import React from "react";
 import { View, StyleSheet, TouchableOpacity, Linking } from "react-native";
-import { useTranslation } from "react-i18next";
 import colors from "../colors";
 import ExternalLink from "../icons/ExternalLink";
 import Button from "./Button";
