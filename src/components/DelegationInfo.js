@@ -5,34 +5,39 @@ import { useTranslation } from "react-i18next";
 import colors from "../colors";
 import ExternalLink from "../icons/ExternalLink";
 import Button from "./Button";
-import IlluRewards from "./IlluRewards";
 import LText from "./LText";
 
 type Props = {
+  title?: string,
   description: string,
+  image?: React$Node,
   infoUrl: string,
   infoTitle: String,
-  disabled: boolean,
+  disabled?: boolean,
   onPress: () => void,
+  ctaTitle: string,
 };
 
-export default function EarnRewardsCard({
+export default function DelegationInfo({
+  title,
   description,
+  image,
   infoUrl,
   infoTitle,
   disabled,
   onPress,
+  ctaTitle,
 }: Props) {
-  const { t } = useTranslation();
-
   return (
     <View>
       <View style={styles.container}>
         <View style={styles.container}>
-          <IlluRewards style={styles.illustration} />
-          <LText semiBold style={styles.title}>
-            {t("account.earnRewardsCard.title")}
-          </LText>
+          {image}
+          {title && (
+            <LText semiBold style={styles.title}>
+              {title}
+            </LText>
+          )}
           <LText style={styles.description}>{description}</LText>
           <TouchableOpacity
             style={styles.infoLinkContainer}
@@ -48,7 +53,7 @@ export default function EarnRewardsCard({
           type="primary"
           disabled={disabled}
           onPress={onPress}
-          title={t("account.earnRewardsCard.cta")}
+          title={ctaTitle}
           event=""
         />
       </View>
@@ -64,7 +69,6 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "stretch",
   },
-  illustration: { alignSelf: "center", marginBottom: 16 },
   title: {
     fontSize: 18,
     lineHeight: 22,

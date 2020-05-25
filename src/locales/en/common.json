@@ -822,9 +822,11 @@
     "energy": "Energy",
     "delegatedAssets": "Delegated assets",
     "undelegating": "Undelegating",
-    "earnRewardsCard": {
-      "title": "Earn rewards",
-      "cta": "Earn rewards"
+    "delegation": {
+      "info": {
+        "title": "Earn rewards",
+        "cta": "Earn rewards"
+      }
     }
   },
   "accounts": {
