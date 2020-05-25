@@ -2,7 +2,7 @@
 import React, { useCallback, useState, useMemo } from "react";
 import { View, Linking, TouchableOpacity, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { Trans } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { BigNumber } from "bignumber.js";
 import {
   getAccountUnit,
@@ -30,10 +30,11 @@ import ArrowRight from "../../../icons/ArrowRight";
 import DateFromNow from "../../../components/DateFromNow";
 import CurrencyUnitValue from "../../../components/CurrencyUnitValue";
 import CounterValue from "../../../components/CounterValue";
-import IlluRewards from "../IlluRewards";
+import IlluRewards from "../../../components/IlluRewards";
 import ProgressCircle from "../../../components/ProgressCircle";
 import InfoModal from "../../../modals/Info";
 import ClaimRewards from "../../../icons/ClaimReward";
+import EarnRewardsCard from "../../../components/EarnRewardsCard";
 
 const infoRewardsModalData = [
   {
@@ -49,6 +50,7 @@ type Props = {
 };
 
 const Delegation = ({ account, parentAccount }: Props) => {
+  const { t } = useTranslation();
   const navigation = useNavigation();
   const [infoRewardsModal, setRewardsInfoModal] = useState();
 
@@ -260,36 +262,15 @@ const Delegation = ({ account, parentAccount }: Props) => {
         )
       ) : (
         canFreeze && (
-          <View style={styles.container}>
-            <View style={styles.container}>
-              <IlluRewards style={styles.illustration} />
-              <LText semiBold style={styles.title}>
-                <Trans i18nKey="tron.voting.earnRewars" />
-              </LText>
-              <LText style={styles.description}>
-                <Trans
-                  i18nKey="tron.voting.delegationEarn"
-                  values={{ name: account.currency.name }}
-                />
-              </LText>
-              <TouchableOpacity
-                style={styles.infoLinkContainer}
-                onPress={() => Linking.openURL(urls.tronStaking)}
-              >
-                <LText bold style={styles.infoLink}>
-                  <Trans i18nKey="tron.voting.howItWorks" />
-                </LText>
-                <ExternalLink size={11} color={colors.live} />
-              </TouchableOpacity>
-            </View>
-            <Button
-              type="primary"
-              disabled={!canFreeze}
-              onPress={onDelegateFreeze}
-              title={<Trans i18nKey="tron.voting.startEarning" />}
-              event=""
-            />
-          </View>
+          <EarnRewardsCard
+            description={t("tron.voting.delegationEarn", {
+              name: account.currency.name,
+            })}
+            infoUrl={urls.tronStaking}
+            infoTitle={t("tron.voting.howItWorks")}
+            disabled={!canFreeze}
+            onPress={onDelegateFreeze}
+          />
         )
       )}
       <InfoModal
@@ -312,7 +293,6 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "stretch",
   },
-  illustration: { alignSelf: "center", marginBottom: 16 },
   noPadding: {
     padding: 0,
   },
