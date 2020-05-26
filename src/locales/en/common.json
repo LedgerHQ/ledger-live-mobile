@@ -1594,11 +1594,19 @@
       "reward": "Collect rewards",
       "votingPower": "Voting power: {{amount}}%",
       "estYield": "est. yield",
+      "stepperHeader": {
+        "starter": "Earn rewards",
+        "validator": "Validators",
+        "amount": "Amount",
+        "summary": "Summary",
+        "connectDevice": "Connect device",
+        "verification": "Verification",
+        "stepRange": "Step {{currentStep}} of {{totalSteps}}"
+      },
       "flow": {
         "title": "Delegate assets",
         "steps": {
           "starter": {
-            "title": "Earn rewards",
             "description": "Delegate your ATOM to earn rewards while keeping full security  and control on your assets.",
             "steps": {
               "0": "Delegated assets stay yours",
@@ -1611,18 +1619,17 @@
             "cta": "Continue"
           },
           "validator": {
-            "title": "Validators",
-            "myDelegations": "My delegations"
+            "validators": "Validators",
+            "myDelegations": "My delegations",
+            "cta": "Continue",
+            "estYield": "Est. yield: {{amount}}",
+            "assetsRemaining": "Assets remaining: <0>{{amount}}</0>",
+            "noResultsFound": "No validators found for <0>{{search}}</0>"
           },
           "amount": {
-            "title": "",
             "assetsRemaining": "Assets remaining: <0>{{amount}}</0>"
           },
-          "connectDevice": {
-            "title": "Device"
-          },
-          "success": {
-            "title": "Success",
+          "verification": {
             "success": {
               "title": "You have successfully delegated your assets",
               "text": "Your account balance will update once the blockchain has confirmed the transaction.",

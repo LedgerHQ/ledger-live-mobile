@@ -29,7 +29,7 @@ type Props = {
 
 function DelegationStarted({ navigation, route }: Props) {
   const onNext = useCallback(() => {
-    navigation.navigate(ScreenName.DelegationSummary, {
+    navigation.navigate(ScreenName.CosmosDelegationValidator, {
       ...route.params,
     });
   }, [navigation, route.params]);

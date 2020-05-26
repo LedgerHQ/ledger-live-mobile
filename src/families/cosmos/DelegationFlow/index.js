@@ -31,7 +31,7 @@ function DelegationFlow() {
         name={ScreenName.CosmosDelegationStarted}
         component={DelegationStarted}
         options={{
-          title: t("cosmos.delegation.flow.steps.starter.title"),
+          title: t("cosmos.delegation.stepperHeader.starter"),
         }}
       />
       <Stack.Screen
@@ -40,10 +40,10 @@ function DelegationFlow() {
         options={{
           headerTitle: () => (
             <StepHeader
-              title={t("cosmos.delegation.flow.steps.validator.title")}
-              subtitle={t("delegation.stepperHeader.stepRange", {
+              title={t("cosmos.delegation.stepperHeader.validator")}
+              subtitle={t("cosmos.delegation.stepperHeader.stepRange", {
                 currentStep: "1",
-                totalSteps: "4",
+                totalSteps: "3",
               })}
             />
           ),
@@ -63,10 +63,10 @@ function DelegationFlow() {
         options={{
           headerTitle: () => (
             <StepHeader
-              title={t("cosmos.delegation.flow.steps.amount.title")}
-              subtitle={t("delegation.stepperHeader.stepRange", {
-                currentStep: "2",
-                totalSteps: "4",
+              title={t("cosmos.delegation.stepperHeader.amount")}
+              subtitle={t("cosmos.delegation.stepperHeader.stepRange", {
+                currentStep: "1",
+                totalSteps: "3",
               })}
             />
           ),
@@ -79,10 +79,10 @@ function DelegationFlow() {
         options={{
           headerTitle: () => (
             <StepHeader
-              title={t("cosmos.delegation.flow.steps.connectDevice.title")}
-              subtitle={t("delegation.stepperHeader.stepRange", {
-                currentStep: "3",
-                totalSteps: "4",
+              title={t("cosmos.delegation.stepperHeader.connectDevice")}
+              subtitle={t("cosmos.delegation.stepperHeader.stepRange", {
+                currentStep: "2",
+                totalSteps: "3",
               })}
             />
           ),
@@ -94,10 +94,10 @@ function DelegationFlow() {
         options={{
           headerTitle: () => (
             <StepHeader
-              title={t("cosmos.delegation.flow.steps.success.title")}
-              subtitle={t("delegation.stepperHeader.stepRange", {
-                currentStep: "4",
-                totalSteps: "4",
+              title={t("cosmos.delegation.stepperHeader.verification")}
+              subtitle={t("cosmos.delegation.stepperHeader.stepRange", {
+                currentStep: "3",
+                totalSteps: "3",
               })}
             />
           ),
