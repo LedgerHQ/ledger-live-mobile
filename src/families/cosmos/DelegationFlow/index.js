@@ -31,7 +31,7 @@ function DelegationFlow() {
         name={ScreenName.CosmosDelegationStarted}
         component={DelegationStarted}
         options={{
-          title: t("tron.voting.flow.started.title"),
+          title: t("cosmos.delegation.flow.steps.starter.title"),
         }}
       />
       <Stack.Screen
@@ -40,7 +40,7 @@ function DelegationFlow() {
         options={{
           headerTitle: () => (
             <StepHeader
-              title={t("delegation.stepperHeader.selectValidator")}
+              title={t("cosmos.delegation.flow.steps.validator.title")}
               subtitle={t("delegation.stepperHeader.stepRange", {
                 currentStep: "1",
                 totalSteps: "4",
@@ -63,7 +63,7 @@ function DelegationFlow() {
         options={{
           headerTitle: () => (
             <StepHeader
-              title={t("delegation.stepperHeader.castDelegation")}
+              title={t("cosmos.delegation.flow.steps.amount.title")}
               subtitle={t("delegation.stepperHeader.stepRange", {
                 currentStep: "2",
                 totalSteps: "4",
@@ -79,7 +79,7 @@ function DelegationFlow() {
         options={{
           headerTitle: () => (
             <StepHeader
-              title={t("delegation.stepperHeader.connectDevice")}
+              title={t("cosmos.delegation.flow.steps.connectDevice.title")}
               subtitle={t("delegation.stepperHeader.stepRange", {
                 currentStep: "3",
                 totalSteps: "4",
@@ -94,7 +94,7 @@ function DelegationFlow() {
         options={{
           headerTitle: () => (
             <StepHeader
-              title={t("delegation.stepperHeader.verification")}
+              title={t("cosmos.delegation.flow.steps.success.title")}
               subtitle={t("delegation.stepperHeader.stepRange", {
                 currentStep: "4",
                 totalSteps: "4",

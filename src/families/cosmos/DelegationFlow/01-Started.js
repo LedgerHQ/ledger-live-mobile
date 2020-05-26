@@ -1,12 +1,22 @@
 // @flow
 import React, { useCallback } from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Linking } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { Trans } from "react-i18next";
 import colors from "../../../colors";
 import { ScreenName } from "../../../const";
 import Button from "../../../components/Button";
 import LText from "../../../components/LText";
+
+import ExternalLink from "../../../components/ExternalLink";
+import BulletList, { BulletGreenCheck } from "../../../components/BulletList";
+import NavigationScrollView from "../../../components/NavigationScrollView";
+import IlluRewards from "../IlluRewards";
+import { urls } from "../../../config/urls";
+import { TrackScreen } from "../../../analytics";
+import VerifyAddressDisclaimer from "../../../components/VerifyAddressDisclaimer";
+
+const forceInset = { bottom: "always" };
 
 type RouteParams = {
   accountId: string,
@@ -19,37 +29,69 @@ type Props = {
 
 function DelegationStarted({ navigation, route }: Props) {
   const onNext = useCallback(() => {
-    navigation.navigate(ScreenName.CosmosDelegationValidator, route.params);
+    navigation.navigate(ScreenName.DelegationSummary, {
+      ...route.params,
+    });
   }, [navigation, route.params]);
 
-  const onCancel = useCallback(() => {
-    navigation.dangerouslyGetParent().pop();
-  }, [navigation]);
+  const howDelegationWorks = useCallback(() => {
+    Linking.openURL(urls.delegation);
+  }, []);
 
   return (
-    <SafeAreaView style={styles.root}>
-      <View style={styles.main}>
-        <LText style={styles.description}>
-          <Trans i18nKey="cosmos.delegation.flow.started.description" />
+    <SafeAreaView style={styles.root} forceInset={forceInset}>
+      <NavigationScrollView
+        style={styles.scroll}
+        contentContainerStyle={styles.scrollContainer}
+      >
+        <TrackScreen category="DelegationFlow" name="Started" />
+        <IlluRewards />
+        <LText semiBold style={styles.title}>
+          <Trans
+            secondary
+            i18nKey="cosmos.delegation.flow.steps.starter.title"
+          />
         </LText>
-      </View>
-
+        <LText secondary style={styles.description}>
+          <Trans i18nKey="cosmos.delegation.flow.steps.starter.description" />
+        </LText>
+        <BulletList
+          Bullet={BulletGreenCheck}
+          list={[
+            <Trans i18nKey="cosmos.delegation.flow.steps.starter.steps.0" />,
+            <Trans i18nKey="cosmos.delegation.flow.steps.starter.steps.1" />,
+            <Trans i18nKey="cosmos.delegation.flow.steps.starter.steps.2" />,
+          ].map(wording => (
+            <LText secondary semiBold style={styles.bulletItem}>
+              {wording}
+            </LText>
+          ))}
+        />
+        <View style={styles.howDelegationWorks}>
+          <ExternalLink
+            event="DelegationStartedHowDelegationWorks"
+            onPress={howDelegationWorks}
+            text={<Trans i18nKey="delegation.howDelegationWorks" />}
+            ltextProps={{
+              secondary: true,
+            }}
+          />
+        </View>
+        <View style={styles.warning}>
+          <VerifyAddressDisclaimer
+            text={
+              <Trans i18nKey="cosmos.delegation.flow.steps.starter.warning.description" />
+            }
+            verified
+          />
+        </View>
+      </NavigationScrollView>
       <View style={styles.footer}>
         <Button
-          event="Cosmos DelegationStartedContinueBtn"
+          event="DelegationStartedBtn"
           onPress={onNext}
-          title={
-            <Trans i18nKey="cosmos.delegation.flow.started.button.continue" />
-          }
+          title={<Trans i18nKey="cosmos.delegation.flow.steps.starter.cta" />}
           type="primary"
-        />
-        <Button
-          event="Cosmos DelegationStartedCancelBtn"
-          onPress={onCancel}
-          title={<Trans i18nKey="common.cancel" />}
-          type="secondary"
-          outline={false}
-          containerStyle={styles.buttonContainer}
         />
       </View>
     </SafeAreaView>
@@ -60,27 +102,33 @@ const styles = StyleSheet.create({
   root: {
     flex: 1,
     backgroundColor: colors.white,
-    padding: 16,
   },
-  main: {
+  scroll: {
     flex: 1,
+  },
+  scrollContainer: {
+    paddingHorizontal: 32,
+    paddingVertical: 32,
     alignItems: "center",
-    justifyContent: "center",
+  },
+  title: {
+    fontSize: 22,
+    lineHeight: 33,
+    color: colors.darkBlue,
+    paddingVertical: 16,
   },
   description: {
-    fontSize: 16,
-    lineHeight: 22,
-    color: colors.grey,
+    fontSize: 14,
+    lineHeight: 21,
+    color: colors.darkBlue,
     textAlign: "center",
-    marginVertical: 16,
+    marginBottom: 16,
   },
-  footer: {
-    alignSelf: "stretch",
+  bulletItem: {
+    fontSize: 14,
+    color: colors.black,
   },
-  buttonContainer: {
-    marginTop: 4,
-  },
-  howVotingWorks: {
+  howDelegationWorks: {
     marginTop: 32,
     borderRadius: 32,
     paddingVertical: 8,
@@ -88,6 +136,17 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: colors.live,
     flexDirection: "row",
+  },
+  howDelegationWorksText: {
+    color: colors.live,
+    fontSize: 14,
+  },
+  warning: {
+    width: "100%",
+    marginTop: 16,
+  },
+  footer: {
+    padding: 16,
   },
 });
 
