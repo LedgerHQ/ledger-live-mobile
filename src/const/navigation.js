@@ -139,6 +139,7 @@ export const NavigatorName = {
   AddAccounts: "AddAccounts",
   Base: "Base",
   BaseOnboarding: "BaseOnboarding",
+  CosmosDelegationFlow: "CosmosDelegationFlow",
   ClaimRewards: "ClaimRewards",
   FirmwareUpdate: "FirmwareUpdate",
   Freeze: "Freeze",

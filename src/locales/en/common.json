@@ -68,7 +68,8 @@
       "hours_plural": "{{time}} hours ago",
       "days": "yesterday",
       "days_plural": "{{time}} days ago"
-    }
+    },
+    "seeMore": "See more"
   },
   "errors": {
     "AccountAwaitingSendPendingOperations": {
@@ -823,6 +824,8 @@
     "delegatedAssets": "Delegated assets",
     "undelegating": "Undelegating",
     "delegation": {
+      "sectionLabel": "Delegations",
+      "addDelegation": "Add Delegation",
       "info": {
         "title": "Earn rewards",
         "cta": "Earn rewards"
