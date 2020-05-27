@@ -18,7 +18,6 @@ import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
 
 import { accountScreenSelector } from "../../../reducers/accounts";
 import colors from "../../../colors";
-import { ScreenName } from "../../../const";
 import Button from "../../../components/Button";
 import CurrencyInput from "../../../components/CurrencyInput";
 import LText from "../../../components/LText";
@@ -29,9 +28,12 @@ type RouteParams = {
   accountId: string,
   transaction: Transaction,
   validator: CosmosValidatorItem,
-  min: BigNumber,
-  max: BigNumber,
-  value: BigNumber,
+  validatorSrc?: CosmosValidatorItem,
+  min?: BigNumber,
+  max?: BigNumber,
+  value?: BigNumber,
+  redelegatedBalance?: BigNumber,
+  nextScreen: string,
 };
 
 type Props = {
@@ -54,6 +56,11 @@ function DelegationAmount({ navigation, route }: Props) {
     route,
   ]);
 
+  const redelegatedBalance = useMemo(
+    () => route?.params?.redelegatedBalance ?? BigNumber(0),
+    [route],
+  );
+
   const [value, setValue] = useState(() => initialValue);
 
   const initialMax = useMemo(() => route?.params?.max ?? BigNumber(0), [route]);
@@ -69,7 +76,7 @@ function DelegationAmount({ navigation, route }: Props) {
   const onNext = useCallback(() => {
     const tx = route.params.transaction;
     const validators = tx.validators;
-    const validatorAddress = route.params?.validator?.validatorAddress;
+    const validatorAddress = route.params.validator.validatorAddress;
 
     const i = validators.findIndex(
       ({ address }) => address === validatorAddress,
@@ -85,7 +92,7 @@ function DelegationAmount({ navigation, route }: Props) {
       validators,
     });
 
-    navigation.navigate(ScreenName.CosmosDelegationValidator, {
+    navigation.navigate(route.params.nextScreen, {
       ...route.params,
       transaction,
     });
@@ -177,7 +184,27 @@ function DelegationAmount({ navigation, route }: Props) {
             </LText>
           </View>
         )}
-
+        {!error && redelegatedBalance.gt(0) && (
+          <View style={[styles.labelContainer, styles.labelSmall]}>
+            <LText style={[styles.assetsRemaining, styles.small]}>
+              <Trans
+                i18nKey="cosmos.redelegation.flow.steps.amount.newRedelegatedBalance"
+                values={{
+                  amount: formatCurrencyUnit(
+                    unit,
+                    redelegatedBalance.plus(value),
+                    {
+                      showCode: true,
+                    },
+                  ),
+                  name: route.params.validator?.name ?? "",
+                }}
+              >
+                <LText semiBold>{""}</LText>
+              </Trans>
+            </LText>
+          </View>
+        )}
         <Button
           disabled={error}
           event="Cosmos DelegationAmountContinueBtn"
@@ -222,11 +249,18 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingBottom: 16,
   },
+  labelSmall: {
+    paddingBottom: 4,
+  },
   assetsRemaining: {
     fontSize: 16,
     textAlign: "center",
     lineHeight: 32,
     paddingHorizontal: 10,
+  },
+  small: {
+    fontSize: 11,
+    lineHeight: 16,
   },
   error: {
     color: colors.alert,
