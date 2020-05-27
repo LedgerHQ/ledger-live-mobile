@@ -60,18 +60,14 @@ function DelegationFlow() {
       <Stack.Screen
         name={ScreenName.CosmosDelegationAmount}
         component={DelegationAmount}
-        options={{
+        options={({ route }) => ({
           headerTitle: () => (
             <StepHeader
-              title={t("cosmos.delegation.stepperHeader.amount")}
-              subtitle={t("cosmos.delegation.stepperHeader.stepRange", {
-                currentStep: "1",
-                totalSteps: "3",
-              })}
+              title={route.params?.validator?.name ?? ""}
+              subtitle={t("cosmos.delegation.stepperHeader.amountSubTitle")}
             />
           ),
-          headerLeft: null,
-        }}
+        })}
       />
       <Stack.Screen
         name={ScreenName.CosmosDelegationConnectDevice}

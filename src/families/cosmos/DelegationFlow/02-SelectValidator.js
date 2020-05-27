@@ -29,6 +29,7 @@ import Button from "../../../components/Button";
 import SelectValidatorSearchBox from "../../tron/VoteFlow/01-SelectValidator/SearchBox";
 import LText from "../../../components/LText";
 import Item from "./Item";
+import Check from "../../../icons/Check";
 
 type RouteParams = {
   accountId: string,
@@ -87,10 +88,11 @@ function DelegationSelectValidator({ navigation, route }: Props) {
   const delegationsAvailable = cosmosResources.delegatedBalance.plus(
     account.spendableBalance,
   );
-  const delegationsUsed = delegations.reduce(
+  const delegationsUsed = transaction.validators.reduce(
     (sum, v) => sum.plus(v.amount),
     BigNumber(0),
   );
+  const max = delegationsAvailable.minus(delegationsUsed);
 
   const selectedValidators = useMemo(() => transaction.validators || [], [
     transaction,
@@ -135,22 +137,29 @@ function DelegationSelectValidator({ navigation, route }: Props) {
     });
   }, [navigation, route.params, transaction, status]);
 
-  const onSelect = useCallback(() => {
-    navigation.navigate(ScreenName.CosmosDelegationAmount, {
-      ...route.params,
-      transaction,
-      status,
-    });
-  }, [navigation, route.params, transaction, status]);
+  const onSelect = useCallback(
+    (validator, value) => {
+      navigation.navigate(ScreenName.CosmosDelegationAmount, {
+        ...route.params,
+        transaction,
+        validator,
+        max,
+        value,
+        status,
+      });
+    },
+    [navigation, route.params, transaction, status, max],
+  );
 
   const renderItem = useCallback(
     ({ item }) => {
       const val = selectedValidators.find(
         ({ address }) => address === item.validator.validatorAddress,
       );
+      const disabled = (!val || val.amount.lte(0)) && max.lte(0);
       return (
         <Item
-          disabled={false}
+          disabled={disabled}
           value={val ? val.amount : null}
           unit={unit}
           item={item}
@@ -158,7 +167,7 @@ function DelegationSelectValidator({ navigation, route }: Props) {
         />
       );
     },
-    [selectedValidators, unit, onSelect],
+    [selectedValidators, unit, onSelect, max],
   );
 
   return (
@@ -194,18 +203,30 @@ function DelegationSelectValidator({ navigation, route }: Props) {
       </View>
 
       <View style={styles.footer}>
-        <LText style={styles.assetsRemaining}>
-          <Trans
-            i18nKey="cosmos.delegation.flow.steps.validator.assetsRemaining"
-            values={{
-              amount: formatCurrencyUnit(unit, delegationsAvailable, {
-                showCode: true,
-              }),
-            }}
-          >
-            <LText semiBold>{""}</LText>
-          </Trans>
-        </LText>
+        {max.isZero() && (
+          <View style={styles.labelContainer}>
+            <Check size={16} color={colors.success} />
+            <LText style={[styles.assetsRemaining, styles.success]}>
+              <Trans i18nKey="cosmos.delegation.flow.steps.validator.allAssetsUsed" />
+            </LText>
+          </View>
+        )}
+        {max.gt(0) && (
+          <View style={styles.labelContainer}>
+            <LText style={styles.assetsRemaining}>
+              <Trans
+                i18nKey="cosmos.delegation.flow.steps.validator.totalAvailable"
+                values={{
+                  amount: formatCurrencyUnit(unit, max, {
+                    showCode: true,
+                  }),
+                }}
+              >
+                <LText semiBold>{""}</LText>
+              </Trans>
+            </LText>
+          </View>
+        )}
         <Button
           event="Cosmos DelegationSelectValidatorContinueBtn"
           onPress={onNext}
@@ -247,11 +268,24 @@ const styles = StyleSheet.create({
     padding: 16,
     backgroundColor: colors.white,
   },
+  labelContainer: {
+    width: "100%",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    paddingBottom: 16,
+  },
   assetsRemaining: {
     fontSize: 16,
     textAlign: "center",
     lineHeight: 32,
-    paddingBottom: 16,
+    paddingHorizontal: 10,
+  },
+  error: {
+    color: colors.alert,
+  },
+  success: {
+    color: colors.success,
   },
 });
 

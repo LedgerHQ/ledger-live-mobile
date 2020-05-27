@@ -9,7 +9,6 @@ import type { Unit } from "@ledgerhq/live-common/lib/types";
 
 import colors from "../../../colors";
 import LText from "../../../components/LText";
-import Trophy from "../../../icons/Trophy";
 import CurrencyUnitValue from "../../../components/CurrencyUnitValue";
 import ArrowRight from "../../../icons/ArrowRight";
 import FirstLetterIcon from "../../../components/FirstLetterIcon";
@@ -18,7 +17,7 @@ type Props = {
   item: CosmosMappedValidator,
   disabled: boolean,
   value: ?BigNumber,
-  onSelect: (address: string) => void,
+  onSelect: (validator: CosmosMappedValidator, value: ?BigNumber) => void,
   unit: Unit,
 };
 
@@ -28,9 +27,10 @@ function Item({ item, value, disabled, onSelect, unit }: Props) {
     validator: { validatorAddress, estimatedYearlyRewardsRate, name },
   } = item;
 
-  const select = useCallback(() => onSelect(validatorAddress), [
+  const select = useCallback(() => onSelect(item.validator, value), [
     onSelect,
     item,
+    value,
   ]);
 
   const isDisabled = (!value || value.gt(0)) && disabled;
@@ -39,10 +39,13 @@ function Item({ item, value, disabled, onSelect, unit }: Props) {
     <TouchableOpacity
       onPress={select}
       disabled={isDisabled}
-      style={[styles.wrapper, isDisabled ? styles.disabledWrapper : {}]}
+      style={[styles.wrapper]}
     >
       <View style={[styles.iconWrapper]}>
-        <FirstLetterIcon label={name || validatorAddress} />
+        <FirstLetterIcon
+          style={isDisabled ? styles.disabledWrapper : {}}
+          label={name || validatorAddress}
+        />
       </View>
 
       <View style={styles.nameWrapper}>
@@ -66,7 +69,10 @@ function Item({ item, value, disabled, onSelect, unit }: Props) {
         </LText>
       </View>
       <View style={styles.value}>
-        <LText semiBold style={styles.valueLabel}>
+        <LText
+          semiBold
+          style={[styles.valueLabel, isDisabled ? styles.disabledText : {}]}
+        >
           {value ? (
             <CurrencyUnitValue value={value} unit={unit} showCode={false} />
           ) : (
@@ -109,7 +115,7 @@ const styles = StyleSheet.create({
     color: colors.grey,
   },
   disabledWrapper: {
-    backgroundColor: colors.lightGrey,
+    backgroundColor: colors.lightFog,
   },
   disabledText: {
     color: colors.grey,

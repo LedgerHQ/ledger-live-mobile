@@ -1597,7 +1597,7 @@
       "stepperHeader": {
         "starter": "Earn rewards",
         "validator": "Validators",
-        "amount": "Amount",
+        "amountSubTitle": "Amount to delegate",
         "summary": "Summary",
         "connectDevice": "Connect device",
         "verification": "Verification",
@@ -1623,11 +1623,15 @@
             "myDelegations": "My delegations",
             "cta": "Continue",
             "estYield": "Est. yield: {{amount}}",
-            "assetsRemaining": "Assets remaining: <0>{{amount}}</0>",
+            "totalAvailable": "Total available: <0>{{amount}}</0>",
+            "allAssetsUsed": "All assets used",
             "noResultsFound": "No validators found for <0>{{search}}</0>"
           },
           "amount": {
-            "assetsRemaining": "Assets remaining: <0>{{amount}}</0>"
+            "assetsRemaining": "Assets remaining: <0>{{amount}}</0>",
+            "allAssetsUsed": "All assets used",
+            "incorrectAmount": "Incorrect amount",
+            "cta": "Continue"
           },
           "verification": {
             "success": {

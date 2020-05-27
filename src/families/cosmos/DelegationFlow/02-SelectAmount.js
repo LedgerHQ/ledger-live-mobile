@@ -1,25 +1,36 @@
 // @flow
 import invariant from "invariant";
-import React, { useCallback } from "react";
+import React, { useCallback, useState, useMemo } from "react";
 import { View, StyleSheet } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { Trans } from "react-i18next";
 import { useSelector } from "react-redux";
+import { BigNumber } from "bignumber.js";
 
-import type { Transaction } from "@ledgerhq/live-common/lib/types";
+import type {
+  CosmosValidatorItem,
+  Transaction,
+} from "@ledgerhq/live-common/lib/families/cosmos/types";
 
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
-import { getMainAccount } from "@ledgerhq/live-common/lib/account";
-import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
+import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
+import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
 
 import { accountScreenSelector } from "../../../reducers/accounts";
 import colors from "../../../colors";
 import { ScreenName } from "../../../const";
 import Button from "../../../components/Button";
+import CurrencyInput from "../../../components/CurrencyInput";
+import LText from "../../../components/LText";
+import Warning from "../../../icons/Warning";
+import Check from "../../../icons/Check";
 
 type RouteParams = {
   accountId: string,
   transaction: Transaction,
+  validator: CosmosValidatorItem,
+  max: BigNumber,
+  value: BigNumber,
 };
 
 type Props = {
@@ -31,73 +42,124 @@ function DelegationAmount({ navigation, route }: Props) {
   const { account } = useSelector(accountScreenSelector(route));
 
   invariant(
-    account && account.cosmosResources,
-    "account and cosmos resources required",
+    account && account.cosmosResources && route.params.transaction,
+    "account and cosmos transaction required",
   );
 
-  const mainAccount = getMainAccount(account, undefined);
   const bridge = getAccountBridge(account, undefined);
+  const unit = getAccountUnit(account);
 
-  const { cosmosResources } = mainAccount;
+  const initialValue = useMemo(() => route?.params?.value ?? BigNumber(0), [
+    route,
+  ]);
 
-  const { transaction, status } = useBridgeTransaction(() => {
-    const tx = route.params.transaction;
+  const [value, setValue] = useState(() => initialValue);
 
-    if (!tx) {
-      const t = bridge.createTransaction(mainAccount);
-      const delegations = cosmosResources.delegations || [];
+  const initialMax = useMemo(() => route?.params?.max ?? BigNumber(0), [route]);
 
-      return {
-        account,
-        transaction: bridge.updateTransaction(t, {
-          mode: "delegate",
-          validators: delegations.map(({ validatorAddress, amount }) => ({
-            address: validatorAddress,
-            amount,
-          })),
-          /** @TODO remove this once the bridge handles it */
-          recipient: mainAccount.freshAddress,
-        }),
-      };
-    }
-
-    return { account, transaction: tx };
-  });
+  const max = useMemo(() => initialMax.minus(value.minus(initialValue)), [
+    initialValue,
+    initialMax,
+    value,
+  ]);
 
   const onNext = useCallback(() => {
+    const tx = route.params.transaction;
+    const validators = tx.validators;
+    const validatorAddress = route.params?.validator?.validatorAddress;
+
+    const i = validators.findIndex(
+      ({ address }) => address === validatorAddress,
+    );
+
+    if (i >= 0) {
+      validators[i].amount = value;
+    } else {
+      validators.push({ address: validatorAddress, amount: value });
+    }
+
+    const transaction = bridge.updateTransaction(tx, {
+      validators,
+    });
+
     navigation.navigate(ScreenName.CosmosDelegationValidator, {
       ...route.params,
       transaction,
-      status,
     });
-  }, [navigation, route.params, transaction, status]);
+  }, [navigation, route.params, bridge, value]);
 
-  const onCancel = useCallback(() => {
-    navigation.pop();
-  }, [navigation]);
+  const [ratioButtons] = useState(
+    [0.25, 0.5, 0.75, 1].map(ratio => ({
+      label: `${ratio * 100}%`,
+      value: initialMax.plus(initialValue).multipliedBy(ratio),
+    })),
+  );
+
+  const error = useMemo(() => max.lt(0), [max]);
 
   return (
     <SafeAreaView style={styles.root}>
       <View style={styles.main}>
-        <Button type="primary" title="go next" event="" onPress={onNext} />
+        <CurrencyInput
+          unit={unit}
+          value={value}
+          onChange={setValue}
+          inputStyle={styles.inputStyle}
+          hasError={error}
+        />
+        <View style={styles.ratioButtonContainer}>
+          {ratioButtons.map(({ label, value: v }) => (
+            <Button
+              containerStyle={styles.ratioButton}
+              event=""
+              type={value.eq(v) ? "primary" : "secondary"}
+              title={label}
+              onPress={() => setValue(v)}
+            />
+          ))}
+        </View>
       </View>
 
       <View style={styles.footer}>
+        {error && (
+          <View style={styles.labelContainer}>
+            <Warning size={16} color={colors.alert} />
+            <LText style={[styles.assetsRemaining, styles.error]}>
+              <Trans i18nKey="cosmos.delegation.flow.steps.amount.incorrectAmount" />
+            </LText>
+          </View>
+        )}
+        {max.isZero() && (
+          <View style={styles.labelContainer}>
+            <Check size={16} color={colors.success} />
+            <LText style={[styles.assetsRemaining, styles.success]}>
+              <Trans i18nKey="cosmos.delegation.flow.steps.amount.allAssetsUsed" />
+            </LText>
+          </View>
+        )}
+        {max.gt(0) && (
+          <View style={styles.labelContainer}>
+            <LText style={styles.assetsRemaining}>
+              <Trans
+                i18nKey="cosmos.delegation.flow.steps.amount.assetsRemaining"
+                values={{
+                  amount: formatCurrencyUnit(unit, max, {
+                    showCode: true,
+                  }),
+                }}
+              >
+                <LText semiBold>{""}</LText>
+              </Trans>
+            </LText>
+          </View>
+        )}
+
         <Button
+          disabled={error}
           event="Cosmos DelegationAmountContinueBtn"
           onPress={onNext}
-          title={
-            <Trans i18nKey="cosmos.delegation.flow.amount.button.continue" />
-          }
+          title={<Trans i18nKey="cosmos.delegation.flow.steps.amount.cta" />}
           type="primary"
-        />
-        <Button
-          event="Cosmos DelegationAmountCancelBtn"
-          onPress={onCancel}
-          title={<Trans i18nKey="common.cancel" />}
-          type="secondary"
-          outline={false}
-          containerStyle={styles.buttonContainer}
         />
       </View>
     </SafeAreaView>
@@ -115,27 +177,38 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  description: {
-    fontSize: 16,
-    lineHeight: 22,
-    color: colors.grey,
-    textAlign: "center",
-    marginVertical: 16,
+  inputStyle: { textAlign: "center", fontSize: 40, fontWeight: "600" },
+  ratioButtonContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignContent: "center",
+    height: 36,
+    marginTop: 16,
   },
+  ratioButton: { marginHorizontal: 5 },
   footer: {
     alignSelf: "stretch",
+    padding: 16,
+    backgroundColor: colors.white,
   },
-  buttonContainer: {
-    marginTop: 4,
-  },
-  howVotingWorks: {
-    marginTop: 32,
-    borderRadius: 32,
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    borderWidth: 1,
-    borderColor: colors.live,
+  labelContainer: {
+    width: "100%",
     flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    paddingBottom: 16,
+  },
+  assetsRemaining: {
+    fontSize: 16,
+    textAlign: "center",
+    lineHeight: 32,
+    paddingHorizontal: 10,
+  },
+  error: {
+    color: colors.alert,
+  },
+  success: {
+    color: colors.success,
   },
 });
 
