@@ -139,16 +139,22 @@ function DelegationSelectValidator({ navigation, route }: Props) {
 
   const onSelect = useCallback(
     (validator, value) => {
+      const initialDelegation = delegations.find(
+        ({ validatorAddress }) =>
+          validatorAddress === validator.validatorAddress,
+      );
+
       navigation.navigate(ScreenName.CosmosDelegationAmount, {
         ...route.params,
         transaction,
         validator,
+        min: initialDelegation?.amount ?? null,
         max,
         value,
         status,
       });
     },
-    [navigation, route.params, transaction, status, max],
+    [navigation, route.params, transaction, status, max, delegations],
   );
 
   const renderItem = useCallback(

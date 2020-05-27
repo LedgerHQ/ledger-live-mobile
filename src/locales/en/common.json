@@ -1630,7 +1630,8 @@
           "amount": {
             "assetsRemaining": "Assets remaining: <0>{{amount}}</0>",
             "allAssetsUsed": "All assets used",
-            "incorrectAmount": "Incorrect amount",
+            "minAmount": "Minimum amount: <0>{{min}}</0>",
+            "incorrectAmount": "Maximum amount: <0>{{max}}</0>",
             "cta": "Continue"
           },
           "verification": {

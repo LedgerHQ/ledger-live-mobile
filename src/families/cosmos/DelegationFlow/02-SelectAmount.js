@@ -1,7 +1,7 @@
 // @flow
 import invariant from "invariant";
 import React, { useCallback, useState, useMemo } from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Keyboard } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { Trans } from "react-i18next";
 import { useSelector } from "react-redux";
@@ -29,6 +29,7 @@ type RouteParams = {
   accountId: string,
   transaction: Transaction,
   validator: CosmosValidatorItem,
+  min: BigNumber,
   max: BigNumber,
   value: BigNumber,
 };
@@ -63,6 +64,8 @@ function DelegationAmount({ navigation, route }: Props) {
     value,
   ]);
 
+  const min = useMemo(() => route?.params?.min ?? BigNumber(0), [route]);
+
   const onNext = useCallback(() => {
     const tx = route.params.transaction;
     const validators = tx.validators;
@@ -95,7 +98,7 @@ function DelegationAmount({ navigation, route }: Props) {
     })),
   );
 
-  const error = useMemo(() => max.lt(0), [max]);
+  const error = useMemo(() => max.lt(0) || value.lt(min), [value, max, min]);
 
   return (
     <SafeAreaView style={styles.root}>
@@ -114,7 +117,10 @@ function DelegationAmount({ navigation, route }: Props) {
               event=""
               type={value.eq(v) ? "primary" : "secondary"}
               title={label}
-              onPress={() => setValue(v)}
+              onPress={() => {
+                Keyboard.dismiss();
+                setValue(v);
+              }}
             />
           ))}
         </View>
@@ -125,7 +131,25 @@ function DelegationAmount({ navigation, route }: Props) {
           <View style={styles.labelContainer}>
             <Warning size={16} color={colors.alert} />
             <LText style={[styles.assetsRemaining, styles.error]}>
-              <Trans i18nKey="cosmos.delegation.flow.steps.amount.incorrectAmount" />
+              <Trans
+                i18nKey={
+                  value.lt(min)
+                    ? "cosmos.delegation.flow.steps.amount.minAmount"
+                    : "cosmos.delegation.flow.steps.amount.incorrectAmount"
+                }
+                values={{
+                  min: formatCurrencyUnit(unit, min, {
+                    showCode: true,
+                    showAllDigits: true,
+                  }),
+                  max: formatCurrencyUnit(unit, initialMax, {
+                    showCode: true,
+                    showAllDigits: true,
+                  }),
+                }}
+              >
+                <LText semiBold>{""}</LText>
+              </Trans>
             </LText>
           </View>
         )}
@@ -137,7 +161,7 @@ function DelegationAmount({ navigation, route }: Props) {
             </LText>
           </View>
         )}
-        {max.gt(0) && (
+        {max.gt(0) && !error && (
           <View style={styles.labelContainer}>
             <LText style={styles.assetsRemaining}>
               <Trans
