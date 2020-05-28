@@ -1985,8 +1985,12 @@
     "infoWording": {
       "freeze": "Frozen tokens are \"locked\" for a period of 3 days",
       "unfreeze": "Your {{resource}} points will be reduced, and all your votes will be canceled",
-      "claimRewards": "Rewards can be claimed once every 24 hours.",
-      "redelegate": "You will have to wait 21 days for undelegated assets to be added to your available balance."
+      "claimReward": "Rewards can be claimed once every 24 hours.",
+      "cosmos": {
+        "claimReward": "If the selected validator has pending rewards, they will automatically be claimed.",
+        "redelegate": "You will have to wait 21 days for undelegated assets to be added to your available balance.",
+        "undelegate": "You will have to wait 21 days for undelegated assets to be added to your available balance."
+      }
     },
     "amount": "Amount",
     "account": "Account",
@@ -1994,9 +1998,9 @@
     "to": "To",
     "redelegationAmount": "Redelegation amount",
     "gas": "Gas",
-    "address": "Address",
     "validatorAddress": "Validator address",
-    "rewardAmount": "Reward amount"
+    "rewardAmount": "Reward amount",
+    "undelegatedAmount": "Undelegated amount"
   },
   "Terms": {
     "title": "Terms of Use",

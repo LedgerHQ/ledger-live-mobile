@@ -1,7 +1,7 @@
 // @flow
 import type { BigNumber } from "bignumber.js";
 import invariant from "invariant";
-import React, { useCallback } from "react";
+import React from "react";
 import { View, StyleSheet } from "react-native";
 import { useTranslation } from "react-i18next";
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
@@ -20,13 +20,6 @@ import {
 import CurrencyUnitValue from "../../components/CurrencyUnitValue";
 import colors from "../../colors";
 import Info from "../../icons/Info";
-
-export default {
-  disableFees: () => true,
-  pre: Pre,
-  fees: Fees,
-  post: Post,
-};
 
 function Pre({
   account,
@@ -71,7 +64,7 @@ function Pre({
                 <LText
                   semiBold
                   numberOfText={1}
-                  style={[styles.text, styles.biggerText]}
+                  style={[styles.text, styles.biggerText, styles.labelText]}
                 >
                   {validator?.name ?? address}
                 </LText>
@@ -123,23 +116,51 @@ function Pre({
           </DataRow>
         </>
       );
-    case "claimRewards":
+    case "claimReward":
       return (
         <>
-          <DataRow label={t("ValidateOnDevice.address")}>
+          <DataRow label={t("ValidateOnDevice.account")}>
             <LText semiBold style={styles.text}>
               {account.freshAddress}
             </LText>
           </DataRow>
 
-          <DataRow label={t("ValidateOnDevice.validatorAddress")}>
+          <DataRow
+            label={t("ValidateOnDevice.validatorAddress")}
+            numberOfLines={2}
+          >
             <LText semiBold style={styles.text}>
               {mappedDelegations[0].address}
             </LText>
           </DataRow>
 
           <DataRow label={t("ValidateOnDevice.rewardAmount")}>
+            <LText semiBold style={[styles.text, styles.valueTextForLongKey]}>
+              {mappedDelegations[0].formattedAmount}
+            </LText>
+          </DataRow>
+        </>
+      );
+    case "undelegate":
+      return (
+        <>
+          <DataRow label={t("ValidateOnDevice.account")}>
             <LText semiBold style={styles.text}>
+              {account.freshAddress}
+            </LText>
+          </DataRow>
+
+          <DataRow
+            label={t("ValidateOnDevice.validatorAddress")}
+            numberOfLines={2}
+          >
+            <LText semiBold style={styles.text}>
+              {mappedDelegations[0].address}
+            </LText>
+          </DataRow>
+
+          <DataRow label={t("ValidateOnDevice.undelegatedAmount")}>
+            <LText semiBold style={[styles.text, styles.valueTextForLongKey]}>
               {mappedDelegations[0].formattedAmount}
             </LText>
           </DataRow>
@@ -170,6 +191,7 @@ function Fees({
       return null;
     default:
       return (
+        // TODO: Investiage why fee amount doesn't show up on claimReward
         <DataRowUnitValue
           label={t("send.validation.fees")}
           unit={mainAccountUnit}
@@ -186,7 +208,8 @@ function Post({ transaction }: { transaction: Transaction }) {
 
   switch (transaction.mode) {
     case "redelegate":
-    case "claimRewards":
+    case "claimReward":
+    case "undelegate":
       return (
         <DataRow>
           <Info size={22} color={colors.live} />
@@ -195,20 +218,30 @@ function Post({ transaction }: { transaction: Transaction }) {
             style={[styles.text, styles.infoText]}
             numberOfLines={3}
           >
-            {t(`ValidateOnDevice.infoWording.${transaction.mode}`)}
+            {t(`ValidateOnDevice.infoWording.cosmos.${transaction.mode}`)}
           </LText>
         </DataRow>
       );
     default:
-      null;
+      return null;
   }
 }
+
+export default {
+  disableFees: () => false,
+  pre: Pre,
+  fee: Fees,
+  post: Post,
+};
 
 const styles = StyleSheet.create({
   text: {
     color: colors.darkBlue,
     textAlign: "right",
     flex: 1,
+  },
+  labelText: {
+    textAlign: "left",
   },
   valueTextForLongKey: {
     flex: 0.5,
