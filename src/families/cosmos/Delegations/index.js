@@ -13,7 +13,7 @@ import {
 import { useCosmosMappedDelegations } from "@ledgerhq/live-common/lib/families/cosmos/react";
 import type { CosmosMappedDelegation } from "@ledgerhq/live-common/lib/families/cosmos/types";
 import type { Account } from "@ledgerhq/live-common/lib/types";
-import DelegationInfo from "../../../components/DelegationInfo";
+import AccountDelegationInfo from "../../../components/AccountDelegationInfo";
 import IlluRewards from "../../../components/IlluRewards";
 import { urls } from "../../../config/urls";
 import AccountSectionLabel from "../../../components/AccountSectionLabel";
@@ -24,14 +24,15 @@ import type { IconProps } from "../../../components/DelegationDrawer";
 import Touchable from "../../../components/Touchable";
 import colors, { rgba } from "../../../colors";
 import { ScreenName, NavigatorName } from "../../../const";
-import DelegationRow from "./Row";
-import DelegationLabelRight from "./LabelRight";
 import Circle from "../../../components/Circle";
 import LText from "../../../components/LText";
+import FirstLetterIcon from "../../../components/FirstLetterIcon";
 import DelegateIcon from "../../../icons/Delegate";
 import RedelegateIcon from "../../../icons/Redelegate";
 import UndelegateIcon from "../../../icons/Undelegate";
 import ClaimRewardIcon from "../../../icons/ClaimReward";
+import DelegationRow from "./Row";
+import DelegationLabelRight from "./LabelRight";
 
 type Props = {
   account: Account,
@@ -49,20 +50,23 @@ export default function Deleagations({ account }: Props) {
   const [delegation, setDelegation] = useState<?CosmosMappedDelegation>();
 
   const onDelegate = useCallback(() => {
-    // TODO: check destination and params.
     // TODO: check whether onDelegate and onAddDelegation are the same or not
     navigation.navigate(NavigatorName.CosmosDelegationFlow, {
-      screen: ScreenName.DelegationSelectValidator,
+      screen: ScreenName.CosmosDelegationStarted,
+      params: { accountId: account.id },
+    });
+  }, [navigation, account.id]);
+
+  const onRedelegate = useCallback(() => {
+    navigation.navigate(NavigatorName.CosmosRedelegationFlow, {
+      screen: ScreenName.CosmosRedelegationValidator,
       params: {
-        account,
+        accountId: account.id,
+        validatorSrcAddress:
+          account.cosmosResources?.delegations[0].validatorAddress,
       },
     });
   }, [navigation, account]);
-
-  const onRedelegate = useCallback(() => {
-    // TODO: check destination and params.
-    navigation.navigate(NavigatorName.CosmosRedelegationFlow);
-  }, [navigation]);
 
   const onCollectRewards = useCallback(() => {
     // TODO: check destination and params.
@@ -195,10 +199,14 @@ export default function Deleagations({ account }: Props) {
         onClose={onCloseDrawer}
         account={account}
         ValidatorImage={({ size }) => (
-          <Circle crop size={size}>
-            {/* TODO use FirstLetterIcon */}
-            <LText style={{ color: colors.white }}>TODO</LText>
-          </Circle>
+          <FirstLetterIcon
+            label={
+              delegation?.validator?.name ?? delegation?.validatorAddress ?? ""
+            }
+            round
+            size={size}
+            fontSize={24}
+          />
         )}
         // TODO Check CosmosMappedDelegation type
         amount={delegation?.amount ?? BigNumber(0)}
@@ -207,7 +215,7 @@ export default function Deleagations({ account }: Props) {
       />
 
       {delegations.length === 0 ? (
-        <DelegationInfo
+        <AccountDelegationInfo
           title={t("account.delegation.info.title")}
           image={<IlluRewards style={styles.illustration} />}
           description={t("tron.voting.delegationEarn", {

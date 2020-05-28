@@ -33,7 +33,7 @@ import IlluRewards from "../../../components/IlluRewards";
 import ProgressCircle from "../../../components/ProgressCircle";
 import InfoModal from "../../../modals/Info";
 import ClaimRewards from "../../../icons/ClaimReward";
-import DelegationInfo from "../../../components/DelegationInfo";
+import AccountDelegationInfo from "../../../components/AccountDelegationInfo";
 import AccountSectionLabel from "../../../components/AccountSectionLabel";
 
 const infoRewardsModalData = [
@@ -225,7 +225,7 @@ const Delegation = ({ account, parentAccount }: Props) => {
         ) : (
           <>
             <AccountSectionLabel name={t("tron.voting.votes.title")} />
-            <DelegationInfo
+            <AccountDelegationInfo
               description={t("tron.voting.votes.description", {
                 name: account.currency.name,
               })}
@@ -238,7 +238,7 @@ const Delegation = ({ account, parentAccount }: Props) => {
         )
       ) : (
         canFreeze && (
-          <DelegationInfo
+          <AccountDelegationInfo
             title={t("account.delegation.info.title")}
             image={<IlluRewards style={styles.illustration} />}
             description={t("tron.voting.delegationEarn", {
