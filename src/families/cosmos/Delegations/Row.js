@@ -6,9 +6,9 @@ import type { CosmosMappedDelegation } from "@ledgerhq/live-common/lib/families/
 import type { Currency } from "@ledgerhq/live-common/lib/types";
 import CounterValue from "../../../components/CounterValue";
 import colors from "../../../colors";
-import Trophy from "../../../icons/Trophy";
 import ArrowRight from "../../../icons/ArrowRight";
 import LText from "../../../components/LText";
+import FirstLetterIcon from "../../../components/FirstLetterIcon";
 
 type Props = {
   delegation: CosmosMappedDelegation,
@@ -36,8 +36,7 @@ export default function DelegationRow({
       onPress={() => onPress(delegation)}
     >
       <View style={styles.icon}>
-        {/* TODO: use FirstLetterIcon instead */}
-        <Trophy size={16} color={colors.live} />
+        <FirstLetterIcon label={validator?.name ?? validatorAddress ?? ""} />
       </View>
 
       <View style={styles.nameWrapper}>
