@@ -51,11 +51,19 @@ export default function DelegationRow({
         </View>
       </View>
 
-      <LText semiBold>{formattedAmount}</LText>
+      <View style={styles.rightWrapper}>
+        <LText semiBold>{formattedAmount}</LText>
 
-      <LText style={styles.counterValue}>
-        <CounterValue currency={currency} value={amount} />
-      </LText>
+        <LText style={styles.counterValue}>
+          <CounterValue
+            currency={currency}
+            showCode
+            value={amount}
+            alwaysShowSign={false}
+            withPlaceholder
+          />
+        </LText>
+      </View>
     </TouchableOpacity>
   );
 }
@@ -94,4 +102,7 @@ const styles = StyleSheet.create({
     marginRight: 8,
   },
   counterValue: { color: colors.grey },
+  rightWrapper: {
+    alignItems: "flex-end",
+  },
 });

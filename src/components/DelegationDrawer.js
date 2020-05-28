@@ -86,10 +86,12 @@ export default function DelegationDrawer({
 
           <LText tertiary style={styles.counterValue}>
             <CounterValue
-              showCode
-              date={counterValueDate}
               currency={currency}
+              showCode
               value={amount}
+              alwaysShowSign={false}
+              withPlaceholder
+              date={counterValueDate}
             />
           </LText>
         </View>
