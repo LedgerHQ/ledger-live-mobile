@@ -85,7 +85,7 @@ function Pre({
         </View>
       );
     }
-    case "redelegate": {
+    case "redelegate":
       return (
         <>
           <DataRow label={t("ValidateOnDevice.account")}>
@@ -123,7 +123,28 @@ function Pre({
           </DataRow>
         </>
       );
-    }
+    case "claimRewards":
+      return (
+        <>
+          <DataRow label={t("ValidateOnDevice.address")}>
+            <LText semiBold style={styles.text}>
+              {account.freshAddress}
+            </LText>
+          </DataRow>
+
+          <DataRow label={t("ValidateOnDevice.validatorAddress")}>
+            <LText semiBold style={styles.text}>
+              {mappedDelegations[0].address}
+            </LText>
+          </DataRow>
+
+          <DataRow label={t("ValidateOnDevice.rewardAmount")}>
+            <LText semiBold style={styles.text}>
+              {mappedDelegations[0].formattedAmount}
+            </LText>
+          </DataRow>
+        </>
+      );
     default:
       return null;
   }
@@ -165,6 +186,7 @@ function Post({ transaction }: { transaction: Transaction }) {
 
   switch (transaction.mode) {
     case "redelegate":
+    case "claimRewards":
       return (
         <DataRow>
           <Info size={22} color={colors.live} />
