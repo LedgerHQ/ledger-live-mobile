@@ -146,6 +146,12 @@ export const ScreenName = {
   CosmosUndelegationValidation: "CosmosUndelegationValidation",
   CosmosUndelegationValidationError: "CosmosUndelegationValidationError",
   CosmosUndelegationValidationSuccess: "CosmosUndelegationValidationSuccess",
+  CosmosClaimRewardsValidator: "CosmosClaimRewardsValidator",
+  CosmosClaimRewardsMethod: "CosmosClaimRewardsMethod",
+  CosmosClaimRewardsConnectDevice: "CosmosClaimRewardsConnectDevice",
+  CosmosClaimRewardsValidation: "CosmosClaimRewardsValidation",
+  CosmosClaimRewardsValidationError: "CosmosClaimRewardsValidationError",
+  CosmosClaimRewardsValidationSuccess: "CosmosClaimRewardsValidationSuccess",
 };
 
 export const NavigatorName = {
@@ -157,7 +163,7 @@ export const NavigatorName = {
   AddAccounts: "AddAccounts",
   Base: "Base",
   BaseOnboarding: "BaseOnboarding",
-  CosmosCollectRewardsFlow: "CosmosCollectRewardsFlow",
+  CosmosClaimRewardsFlow: "CosmosClaimRewardsFlow",
   CosmosDelegationFlow: "CosmosDelegationFlow",
   CosmosRedelegationFlow: "CosmosRedelegationFlow",
   CosmosUndelegationFlow: "CosmosUndelegationFlow",
