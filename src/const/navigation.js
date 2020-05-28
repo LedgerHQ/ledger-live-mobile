@@ -157,6 +157,10 @@ export const NavigatorName = {
   AddAccounts: "AddAccounts",
   Base: "Base",
   BaseOnboarding: "BaseOnboarding",
+  CosmosCollectRewardsFlow: "CosmosCollectRewardsFlow",
+  CosmosDelegationFlow: "CosmosDelegationFlow",
+  CosmosRedelegationFlow: "CosmosRedelegationFlow",
+  CosmosUndelegationFlow: "CosmosUndelegationFlow",
   ClaimRewards: "ClaimRewards",
   FirmwareUpdate: "FirmwareUpdate",
   Freeze: "Freeze",
@@ -177,6 +181,7 @@ export const NavigatorName = {
   CosmosDelegationFlow: "CosmosDelegationFlow",
   CosmosRedelegationFlow: "CosmosRedelegationFlow",
   CosmosUndelegationFlow: "CosmosUndelegationFlow",
+
 
   // Tab
   CryptoAssetsSettings: "CryptoAssetsSettings",
