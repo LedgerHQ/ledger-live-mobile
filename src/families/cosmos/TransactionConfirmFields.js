@@ -1,7 +1,7 @@
 // @flow
 import type { BigNumber } from "bignumber.js";
 import invariant from "invariant";
-import React from "react";
+import React, { useCallback } from "react";
 import { View, StyleSheet } from "react-native";
 import { useTranslation } from "react-i18next";
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
@@ -22,9 +22,10 @@ import colors from "../../colors";
 import Info from "../../icons/Info";
 
 export default {
+  disableFees: () => true,
   pre: Pre,
   fees: Fees,
-  disableFees: () => true,
+  post: Post,
 };
 
 function Pre({
@@ -120,17 +121,6 @@ function Pre({
               />
             </LText>
           </DataRow>
-
-          <DataRow>
-            <Info size={22} color={colors.live} />
-            <LText
-              semiBold
-              style={[styles.text, styles.infoText]}
-              numberOfLines={3}
-            >
-              {t("ValidateOnDevice.infoWording.redelegate")}
-            </LText>
-          </DataRow>
         </>
       );
     }
@@ -165,6 +155,30 @@ function Fees({
           value={estimatedFees}
         />
       );
+  }
+}
+
+function Post({ transaction }: { transaction: Transaction }) {
+  invariant(transaction.family === "cosmos", "cosmos transaction");
+
+  const { t } = useTranslation();
+
+  switch (transaction.mode) {
+    case "redelegate":
+      return (
+        <DataRow>
+          <Info size={22} color={colors.live} />
+          <LText
+            semiBold
+            style={[styles.text, styles.infoText]}
+            numberOfLines={3}
+          >
+            {t(`ValidateOnDevice.infoWording.${transaction.mode}`)}
+          </LText>
+        </DataRow>
+      );
+    default:
+      null;
   }
 }
 
