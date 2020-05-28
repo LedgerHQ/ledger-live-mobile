@@ -1920,7 +1920,10 @@
       "freeze": "Please confirm the operation on your device to freeze assets",
       "unfreeze": "Please confirm the operation on your device to unfreeze assets",
       "claimReward": "Please confirm the operation on your device to claim your rewards",
-      "vote": "Please confirm the operation on your device to cast your votes"
+      "vote": "Please confirm the operation on your device to cast your votes",
+      "delegate": "Please confirm the operation on your device to cast your votes",
+      "redelegate": "You have successfully redelegated your assets. Please confirm the operation on your device to cast your votes",
+      "undelegate": "Please confirm the operation on your device to undelegate assets"
     },
     "warning": "Always verify that your device displays the address exactly as provided {{recipientWording}}",
     "recipientWording": {
