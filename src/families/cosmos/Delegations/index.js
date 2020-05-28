@@ -2,14 +2,17 @@
 import { BigNumber } from "bignumber.js";
 import React, { useCallback, useState, useMemo } from "react";
 import type { ElementProps } from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Linking } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
 import { getAccountCurrency } from "@ledgerhq/live-common/lib/account";
+import {
+  getDefaultExplorerView,
+  getAddressExplorer,
+} from "@ledgerhq/live-common/lib/explorers";
 import { useCosmosMappedDelegations } from "@ledgerhq/live-common/lib/families/cosmos/react";
 import type { CosmosMappedDelegation } from "@ledgerhq/live-common/lib/families/cosmos/types";
 import type { Account } from "@ledgerhq/live-common/lib/types";
-import { TouchableOpacity } from "react-native-gesture-handler";
 import DelegationInfo from "../../../components/DelegationInfo";
 import IlluRewards from "../../../components/IlluRewards";
 import { urls } from "../../../config/urls";
@@ -18,6 +21,7 @@ import DelegationDrawer, {
   styles as drawerStyles,
 } from "../../../components/DelegationDrawer";
 import type { IconProps } from "../../../components/DelegationDrawer";
+import Touchable from "../../../components/Touchable";
 import colors, { rgba } from "../../../colors";
 import { ScreenName, NavigatorName } from "../../../const";
 import DelegationRow from "./Row";
@@ -43,56 +47,6 @@ export default function Deleagations({ account }: Props) {
   const navigation = useNavigation();
 
   const [delegation, setDelegation] = useState<?CosmosMappedDelegation>();
-
-  const data = useMemo<$PropertyType<DelegationDrawerProps, "data">>(
-    () =>
-      delegation
-        ? [
-            {
-              label: t("delegation.validator"),
-              Component:
-                delegation.validator?.name ?? delegation.validatorAddress ?? "",
-            },
-            {
-              label: t("delegation.validatorAddress"),
-              Component: () => {
-                return (
-                  // TODO link to explorer
-                  <TouchableOpacity onPress={() => {}}>
-                    <LText
-                      numberOfLines={1}
-                      semiBold
-                      ellipsizeMode="middle"
-                      style={[
-                        drawerStyles.valueText,
-                        drawerStyles.valueTextTouchable,
-                      ]}
-                    >
-                      {delegation.validatorAddress}
-                    </LText>
-                  </TouchableOpacity>
-                );
-              },
-            },
-            {
-              label: t("delegation.delegatedAccount"),
-              Component: account.name,
-            },
-            {
-              label: t("cosmos.delegation.drawer.status"),
-              Component:
-                delegation.status === "bonded"
-                  ? t("cosmos.delegation.drawer.active")
-                  : t("cosmos.delegation.drawer.inactive"),
-            },
-            {
-              label: t("cosmos.delegation.drawer.rewards"),
-              Component: delegation.formattedAmount ?? "",
-            },
-          ]
-        : [],
-    [delegation, t, account],
-  );
 
   const onDelegate = useCallback(() => {
     // TODO: check destination and params.
@@ -127,6 +81,66 @@ export default function Deleagations({ account }: Props) {
   const onCloseDrawer = useCallback(() => {
     setDelegation();
   }, []);
+
+  const onOpenExplorer = useCallback(() => {
+    const url = getAddressExplorer(
+      getDefaultExplorerView(account.currency),
+      delegation?.validatorAddress ?? "",
+    );
+    if (url) Linking.openURL(url);
+  }, [account.currency, delegation]);
+
+  const data = useMemo<$PropertyType<DelegationDrawerProps, "data">>(
+    () =>
+      delegation
+        ? [
+            {
+              label: t("delegation.validator"),
+              Component:
+                delegation.validator?.name ?? delegation.validatorAddress ?? "",
+            },
+            {
+              label: t("delegation.validatorAddress"),
+              Component: () => {
+                return (
+                  <Touchable
+                    onPress={onOpenExplorer}
+                    event="DelegationOpenExplorer"
+                  >
+                    <LText
+                      numberOfLines={1}
+                      semiBold
+                      ellipsizeMode="middle"
+                      style={[
+                        drawerStyles.valueText,
+                        drawerStyles.valueTextTouchable,
+                      ]}
+                    >
+                      {delegation.validatorAddress}
+                    </LText>
+                  </Touchable>
+                );
+              },
+            },
+            {
+              label: t("delegation.delegatedAccount"),
+              Component: account.name,
+            },
+            {
+              label: t("cosmos.delegation.drawer.status"),
+              Component:
+                delegation.status === "bonded"
+                  ? t("cosmos.delegation.drawer.active")
+                  : t("cosmos.delegation.drawer.inactive"),
+            },
+            {
+              label: t("cosmos.delegation.drawer.rewards"),
+              Component: delegation.formattedAmount ?? "",
+            },
+          ]
+        : [],
+    [delegation, t, account, onOpenExplorer],
+  );
 
   const actions = useMemo<DelegationDrawerActions>(
     () => [
