@@ -1941,7 +1941,8 @@
       "freeze": "Frozen tokens are \"locked\" for a period of 3 days",
       "unfreeze": "Your {{resource}} points will be reduced, and all your votes will be canceled",
       "claimReward": "Rewards can be claimed once every 24 hours."
-    }
+    },
+    "amount": "Amount"
   },
   "Terms": {
     "title": "Terms of Use",
