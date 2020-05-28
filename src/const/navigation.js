@@ -178,10 +178,6 @@ export const NavigatorName = {
   TronVoteFlow: "TronVoteFlow",
   Unfreeze: "Unfreeze",
   /* eslint-disable sort-keys */
-  CosmosDelegationFlow: "CosmosDelegationFlow",
-  CosmosRedelegationFlow: "CosmosRedelegationFlow",
-  CosmosUndelegationFlow: "CosmosUndelegationFlow",
-
 
   // Tab
   CryptoAssetsSettings: "CryptoAssetsSettings",

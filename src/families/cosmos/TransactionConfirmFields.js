@@ -13,8 +13,13 @@ import type {
 import { useCosmosPreloadData } from "@ledgerhq/live-common/lib/families/cosmos/react";
 import { mapDelegationInfo } from "@ledgerhq/live-common/lib/families/cosmos/utils";
 import LText from "../../components/LText";
-import { DataRowUnitValue } from "../../components/ValidateOnDeviceDataRow";
+import {
+  DataRow,
+  DataRowUnitValue,
+} from "../../components/ValidateOnDeviceDataRow";
+import CurrencyUnitValue from "../../components/CurrencyUnitValue";
 import colors from "../../colors";
+import Info from "../../icons/Info";
 
 export default {
   pre: Pre,
@@ -35,15 +40,14 @@ function Pre({
 
   const unit = getAccountUnit(account);
   const { validators } = useCosmosPreloadData();
+  const mappedDelegations = mapDelegationInfo(
+    transaction.validators,
+    validators,
+    unit,
+  );
 
   switch (transaction.mode) {
     case "delegate": {
-      const mappedDelegations = mapDelegationInfo(
-        transaction.validators,
-        validators,
-        unit,
-      );
-
       return (
         <View style={styles.listWrapper}>
           <View style={styles.row}>
@@ -80,6 +84,56 @@ function Pre({
         </View>
       );
     }
+    case "redelegate": {
+      return (
+        <>
+          <DataRow label={t("ValidateOnDevice.account")}>
+            <LText semiBold style={styles.text}>
+              {account.freshAddress}
+            </LText>
+          </DataRow>
+
+          <DataRow label={t("ValidateOnDevice.from")}>
+            <LText semiBold style={styles.text}>
+              {transaction.cosmosSourceValidator}
+            </LText>
+          </DataRow>
+
+          <DataRow label={t("ValidateOnDevice.to")}>
+            <LText semiBold style={styles.text}>
+              {transaction.validators[0].address}
+            </LText>
+          </DataRow>
+
+          <DataRow label={t("ValidateOnDevice.redelegationAmount")}>
+            <LText semiBold style={[styles.text, styles.valueTextForLongKey]}>
+              {mappedDelegations[0].formattedAmount}
+            </LText>
+          </DataRow>
+
+          <DataRow label={t("ValidateOnDevice.gas")}>
+            <LText semiBold style={styles.text}>
+              <CurrencyUnitValue
+                unit={unit}
+                value={transaction.fees}
+                disableRounding
+              />
+            </LText>
+          </DataRow>
+
+          <DataRow>
+            <Info size={22} color={colors.live} />
+            <LText
+              semiBold
+              style={[styles.text, styles.infoText]}
+              numberOfLines={3}
+            >
+              {t("ValidateOnDevice.infoWording.redelegate")}
+            </LText>
+          </DataRow>
+        </>
+      );
+    }
     default:
       return null;
   }
@@ -101,6 +155,7 @@ function Fees({
   switch (transaction.mode) {
     case "send":
     case "delegate":
+    case "redelegate":
       return null;
     default:
       return (
@@ -116,12 +171,22 @@ function Fees({
 const styles = StyleSheet.create({
   text: {
     color: colors.darkBlue,
+    textAlign: "right",
+    flex: 1,
+  },
+  valueTextForLongKey: {
+    flex: 0.5,
   },
   greyText: {
     color: colors.grey,
   },
   biggerText: {
     fontSize: 16,
+  },
+  infoText: {
+    color: colors.live,
+    textAlign: "left",
+    marginLeft: 8,
   },
   listWrapper: {
     paddingHorizontal: 16,
