@@ -1588,6 +1588,14 @@
         "title": "Undelegating",
         "description": "Undelegated assets are in a timelock of 21 days, before being available."
       }
+    },
+    "delegation": {
+      "drawer": {
+        "status": "Status",
+        "rewards": "Rewards",
+        "active": "Active",
+        "inactive": "Inactive"
+      }
     }
   },
   "tezos": {
@@ -1768,7 +1776,13 @@
     },
     "summaryTitle": "Summary",
     "goToAccount": "Go to account",
-    "howDelegationWorks": "How delegation works"
+    "howDelegationWorks": "How delegation works",
+    "actions": {
+      "delegate": "Delegate",
+      "redelegate": "Redelegate",
+      "collectRewards": "Collect rewards",
+      "undelegate": "Undelegate"
+    }
   },
   "ValidateOnDevice": {
     "title": {
