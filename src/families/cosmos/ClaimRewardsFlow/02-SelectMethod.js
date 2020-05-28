@@ -18,13 +18,11 @@ import {
   getMainAccount,
   getAccountCurrency,
 } from "@ledgerhq/live-common/lib/account";
-import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
 
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
 import { accountScreenSelector } from "../../../reducers/accounts";
 import colors from "../../../colors";
 import Button from "../../../components/Button";
-import CurrencyInput from "../../../components/CurrencyInput";
 import LText from "../../../components/LText";
 import { ScreenName } from "../../../const";
 import ToggleButton from "../../../components/ToggleButton";
