@@ -49,34 +49,52 @@ export default function Deleagations({ account }: Props) {
 
   const [delegation, setDelegation] = useState<?CosmosMappedDelegation>();
 
+  const onNavigate = useCallback(
+    ({
+      route,
+      screen,
+      params,
+    }: {
+      route: $Values<typeof NavigatorName> | $Values<typeof ScreenName>,
+      screen?: $Values<typeof ScreenName>,
+      params?: { [key: string]: any },
+    }) => {
+      setDelegation();
+      navigation.navigate(route, {
+        screen,
+        params: { ...params, accountId: account.id },
+      });
+    },
+    [navigation, account.id],
+  );
+
   const onDelegate = useCallback(() => {
-    // TODO: check whether onDelegate and onAddDelegation are the same or not
-    navigation.navigate(NavigatorName.CosmosDelegationFlow, {
+    onNavigate({
+      route: NavigatorName.CosmosDelegationFlow,
       screen: ScreenName.CosmosDelegationStarted,
-      params: { accountId: account.id },
     });
-  }, [navigation, account.id]);
+  }, [onNavigate]);
 
   const onRedelegate = useCallback(() => {
-    navigation.navigate(NavigatorName.CosmosRedelegationFlow, {
+    onNavigate({
+      route: NavigatorName.CosmosRedelegationFlow,
       screen: ScreenName.CosmosRedelegationValidator,
       params: {
-        accountId: account.id,
         validatorSrcAddress:
           account.cosmosResources?.delegations[0].validatorAddress,
       },
     });
-  }, [navigation, account]);
+  }, [onNavigate, account]);
 
   const onCollectRewards = useCallback(() => {
     // TODO: check destination and params.
-    navigation.navigate(NavigatorName.CosmosCollectRewardsFlow);
-  }, [navigation]);
+    onNavigate({ route: NavigatorName.CosmosCollectRewardsFlow });
+  }, [onNavigate]);
 
   const onUndelegate = useCallback(() => {
     // TODO: check destination and params.
-    navigation.navigate(NavigatorName.CosmosUndelegationFlow);
-  }, [navigation]);
+    onNavigate({ route: NavigatorName.CosmosUndelegationFlow });
+  }, [onNavigate]);
 
   const onSeeMore = useCallback((delegation: CosmosMappedDelegation) => {
     setDelegation(delegation);
