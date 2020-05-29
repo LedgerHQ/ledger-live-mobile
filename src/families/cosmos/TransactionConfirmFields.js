@@ -173,12 +173,12 @@ function Pre({
 
 function Fees({
   transaction,
-  mainAccountUnit,
-  estimatedFees,
+  unit,
+  value,
 }: {
   transaction: Transaction,
-  mainAccountUnit: Unit,
-  estimatedFees: BigNumber,
+  unit: Unit,
+  value: BigNumber,
 }) {
   invariant(transaction.family === "cosmos", "cosmos transaction");
 
@@ -191,11 +191,10 @@ function Fees({
       return null;
     default:
       return (
-        // TODO: Investiage why fee amount doesn't show up on claimReward
         <DataRowUnitValue
           label={t("send.validation.fees")}
-          unit={mainAccountUnit}
-          value={estimatedFees}
+          unit={unit}
+          value={value}
         />
       );
   }
