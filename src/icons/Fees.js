@@ -1,6 +1,6 @@
 // @flow
 import React from "react";
-import Svg, { Mask, Path, G, Rect, Defs } from "react-native-svg";
+import Svg, { Mask, Path, G, Rect } from "react-native-svg";
 import colors from "../colors";
 
 export default function Redelegate({
