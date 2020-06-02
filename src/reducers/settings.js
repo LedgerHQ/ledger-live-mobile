@@ -17,7 +17,7 @@ import type {
   AccountLike,
 } from "@ledgerhq/live-common/lib/types";
 import { getAccountCurrency } from "@ledgerhq/live-common/lib/account/helpers";
-import Config from "react-native-config";
+import Config from "react-native-ultimate-config";
 import type { State } from ".";
 import { currencySettingsDefaults } from "../helpers/CurrencySettingsDefaults";
 
@@ -195,7 +195,7 @@ const handlers: Object = {
     selectedTimeRange,
   }),
 
-  SETTINGS_COMPLETE_ONBOARDING: state => ({
+  SETTINGS_COMPLETE_ONBOARDING: (state) => ({
     ...state,
     hasCompletedOnboarding: true,
   }),
@@ -215,7 +215,7 @@ const handlers: Object = {
     experimentalUSBEnabled: action.enabled,
   }),
 
-  SETTINGS_SWITCH_COUNTERVALUE_FIRST: state => ({
+  SETTINGS_SWITCH_COUNTERVALUE_FIRST: (state) => ({
     ...state,
     countervalueFirst: !state.countervalueFirst,
   }),
@@ -228,7 +228,7 @@ const handlers: Object = {
     const ids = state.blacklistedTokenIds;
     return {
       ...state,
-      blacklistedTokenIds: ids.filter(id => id !== tokenId),
+      blacklistedTokenIds: ids.filter((id) => id !== tokenId),
     };
   },
   BLACKLIST_TOKEN: (state: SettingsState, { payload: tokenId }) => {
@@ -262,7 +262,9 @@ export const counterValueExchangeSelector = createSelector(
   counterValueExchangeLocalSelector,
 );
 
-const defaultCurrencySettingsForCurrency: Currency => CurrencySettings = crypto => {
+const defaultCurrencySettingsForCurrency: (Currency) => CurrencySettings = (
+  crypto,
+) => {
   const defaults = currencySettingsDefaults(crypto);
   return {
     confirmationsNb: defaults.confirmationsNb
@@ -282,24 +284,24 @@ export const currencySettingsSelector = (
 });
 
 // $FlowFixMe
-export const privacySelector = createSelector(storeSelector, s => s.privacy);
+export const privacySelector = createSelector(storeSelector, (s) => s.privacy);
 
 // $FlowFixMe
 export const reportErrorsEnabledSelector = createSelector(
   storeSelector,
-  s => s.reportErrorsEnabled,
+  (s) => s.reportErrorsEnabled,
 );
 
 // $FlowFixMe
 export const analyticsEnabledSelector = createSelector(
   storeSelector,
-  s => s.analyticsEnabled,
+  (s) => s.analyticsEnabled,
 );
 
 // $FlowFixMe
 export const experimentalUSBEnabledSelector = createSelector(
   storeSelector,
-  s => s.experimentalUSBEnabled,
+  (s) => s.experimentalUSBEnabled,
 );
 
 export const currencySettingsForAccountSelector = (
@@ -347,8 +349,8 @@ export const blacklistedTokenIdsSelector = (state: State) =>
 export const exportSettingsSelector = createSelector(
   counterValueCurrencySelector,
   () => getEnv("MANAGER_DEV_MODE"),
-  state => state.settings.currenciesSettings,
-  state => state.settings.pairExchanges,
+  (state) => state.settings.currenciesSettings,
+  (state) => state.settings.pairExchanges,
   (
     counterValueCurrency,
     developerModeEnabled,

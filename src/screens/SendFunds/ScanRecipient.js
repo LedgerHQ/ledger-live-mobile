@@ -3,7 +3,7 @@ import React, { PureComponent } from "react";
 import { StyleSheet, View } from "react-native";
 import { RNCamera } from "react-native-camera";
 import { connect } from "react-redux";
-import Config from "react-native-config";
+import Config from "react-native-ultimate-config";
 import { decodeURIScheme } from "@ledgerhq/live-common/lib/currencies";
 import type {
   Account,

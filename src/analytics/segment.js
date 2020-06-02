@@ -3,7 +3,7 @@
 
 import { v4 as uuid } from "uuid";
 import { Sentry } from "react-native-sentry";
-import Config from "react-native-config";
+import Config from "react-native-ultimate-config";
 import { Platform } from "react-native";
 import analytics from "@segment/analytics-react-native";
 import VersionNumber from "react-native-version-number";
@@ -19,10 +19,11 @@ import type { State } from "../reducers";
 
 const sessionId = uuid();
 
-const appVersion = `${VersionNumber.appVersion ||
-  ""} (${VersionNumber.buildVersion || ""})`;
+const appVersion = `${VersionNumber.appVersion || ""} (${
+  VersionNumber.buildVersion || ""
+})`;
 
-const extraProperties = store => {
+const extraProperties = (store) => {
   const state: State = store.getState();
   const { localeIdentifier, preferredLanguages } = Locale.constants();
   const devices = knownDevicesSelector(state);

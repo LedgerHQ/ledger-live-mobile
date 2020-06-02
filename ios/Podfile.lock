@@ -255,8 +255,6 @@ PODS:
     - React
   - react-native-camera/RN (3.26.0):
     - React
-  - react-native-config (1.2.0):
-    - React
   - react-native-fingerprint-scanner (5.0.0):
     - React
   - react-native-locale (0.0.19):
@@ -271,6 +269,8 @@ PODS:
     - React
   - react-native-udp (3.1.0):
     - CocoaAsyncSocket
+    - React
+  - react-native-ultimate-config (3.1.1):
     - React
   - react-native-version-number (0.3.6):
     - React
@@ -413,7 +413,6 @@ DEPENDENCIES:
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - react-native-ble-plx (from `../node_modules/react-native-ble-plx`)
   - react-native-camera (from `../node_modules/react-native-camera`)
-  - react-native-config (from `../node_modules/react-native-config`)
   - react-native-fingerprint-scanner (from `../node_modules/react-native-fingerprint-scanner`)
   - react-native-locale (from `../node_modules/react-native-locale`)
   - "react-native-netinfo (from `../node_modules/@react-native-community/netinfo`)"
@@ -421,6 +420,7 @@ DEPENDENCIES:
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - react-native-splash-screen (from `../node_modules/react-native-splash-screen`)
   - react-native-udp (from `../node_modules/react-native-udp`)
+  - react-native-ultimate-config (from `../node_modules/react-native-ultimate-config`)
   - react-native-version-number (from `../node_modules/react-native-version-number`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
   - React-RCTAnimation (from `../node_modules/react-native/Libraries/NativeAnimation`)
@@ -509,8 +509,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-ble-plx"
   react-native-camera:
     :path: "../node_modules/react-native-camera"
-  react-native-config:
-    :path: "../node_modules/react-native-config"
   react-native-fingerprint-scanner:
     :path: "../node_modules/react-native-fingerprint-scanner"
   react-native-locale:
@@ -525,6 +523,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-splash-screen"
   react-native-udp:
     :path: "../node_modules/react-native-udp"
+  react-native-ultimate-config:
+    :path: "../node_modules/react-native-ultimate-config"
   react-native-version-number:
     :path: "../node_modules/react-native-version-number"
   React-RCTActionSheet:
@@ -613,7 +613,6 @@ SPEC CHECKSUMS:
   React-jsinspector: 512e560d0e985d0e8c479a54a4e5c147a9c83493
   react-native-ble-plx: 21acd4201f9de46ab690b24898e8d3ad02f518fd
   react-native-camera: 2b74be8edc1103c4c46d1f4e5f41723d9ff052cc
-  react-native-config: 1ad4712773ff7e867b261be0aab293921d4498f9
   react-native-fingerprint-scanner: 3e8c46641b5751a31f45e66789d4b6f342be5e6d
   react-native-locale: bd8edf0e51706d469af3e2fa568a8102213a3139
   react-native-netinfo: cb74e17062b2af5a16a4b137f32495f241df1a8e
@@ -621,6 +620,7 @@ SPEC CHECKSUMS:
   react-native-safe-area-context: b11a34881faac509cad5578726c98161ad4d275c
   react-native-splash-screen: 200d11d188e2e78cea3ad319964f6142b6384865
   react-native-udp: 7823da0f50a80bec14ca4fd77601101f95a68892
+  react-native-ultimate-config: 0578ad8093801f4d1bfd88cf93babf7264317fd9
   react-native-version-number: b415bbec6a13f2df62bf978e85bc0d699462f37f
   React-RCTActionSheet: f41ea8a811aac770e0cc6e0ad6b270c644ea8b7c
   React-RCTAnimation: 49ab98b1c1ff4445148b72a3d61554138565bad0

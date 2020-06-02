@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { View, StyleSheet, TouchableWithoutFeedback } from "react-native";
 import Icon from "react-native-vector-icons/dist/Feather";
-import Config from "react-native-config";
+import Config from "react-native-ultimate-config";
 import { NavigatorName, ScreenName } from "../../const";
 import {
   accountsSelector,

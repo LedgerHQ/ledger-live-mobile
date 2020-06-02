@@ -1,7 +1,7 @@
 // @flow
 import React, { useMemo } from "react";
 import { useSelector } from "react-redux";
-import Config from "react-native-config";
+import Config from "react-native-ultimate-config";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigatorName } from "../../const";
 import { hasCompletedOnboardingSelector } from "../../reducers/settings";

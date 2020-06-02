@@ -1,7 +1,7 @@
 // @flow
 import React, { Component } from "react";
 import { StyleSheet, View, Platform, Image } from "react-native";
-import Config from "react-native-config";
+import Config from "react-native-ultimate-config";
 import { useDispatch, useSelector } from "react-redux";
 import { Trans } from "react-i18next";
 import { useNavigation } from "@react-navigation/native";
@@ -31,7 +31,7 @@ type Props = {
   onStepEntered?: (number, Object) => void,
   withArrows?: boolean,
   usbOnly?: boolean,
-  filter?: TransportModule => boolean,
+  filter?: (TransportModule) => boolean,
   deviceModelId: DeviceNames,
   autoSelectOnAdd?: boolean,
 };
@@ -42,9 +42,9 @@ type SelectDeviceProps = Props & {
     id: string,
     name: string,
   }>,
-  removeKnownDevice: string => *,
-  setReadOnlyMode: boolean => void,
-  installAppFirstTime: boolean => void,
+  removeKnownDevice: (string) => *,
+  setReadOnlyMode: (boolean) => void,
+  installAppFirstTime: (boolean) => void,
 };
 
 type State = {
@@ -85,7 +85,7 @@ const ORBar = () => (
 
 const getAll = ({ knownDevices }, { devices }): Device[] =>
   devices.concat(
-    knownDevices.map(d => ({
+    knownDevices.map((d) => ({
       deviceId: d.id,
       deviceName: d.name || "",
       wired: false,
@@ -136,7 +136,7 @@ class SelectDevice extends Component<SelectDeviceProps, State> {
       complete: () => {
         this.setState({ scanning: false });
       },
-      next: e =>
+      next: (e) =>
         this.setState(({ devices }) => ({
           devices:
             e.type === "add"
@@ -151,7 +151,7 @@ class SelectDevice extends Component<SelectDeviceProps, State> {
                     ? Config.FALLBACK_DEVICE_WIRED === "YES"
                     : e.id.startsWith("usb|"),
                 })
-              : devices.filter(d => d.deviceId !== e.id),
+              : devices.filter((d) => d.deviceId !== e.id),
         })),
     });
   }
@@ -186,9 +186,9 @@ class SelectDevice extends Component<SelectDeviceProps, State> {
     let opts;
     if (autoSelectOnAdd) {
       opts = {
-        onDone: deviceId => {
+        onDone: (deviceId) => {
           const device = getAll(this.props, this.state).find(
-            d => d.deviceId === deviceId,
+            (d) => d.deviceId === deviceId,
           );
           if (device) {
             this.onSelect(device);

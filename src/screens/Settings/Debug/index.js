@@ -3,7 +3,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import config from "react-native-config";
+import config from "react-native-ultimate-config";
 import { accountsSelector } from "../../../reducers/accounts";
 import { TrackScreen } from "../../../analytics";
 import SettingsRow from "../../../components/SettingsRow";

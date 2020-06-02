@@ -84,3 +84,5 @@ src/generated/
 # CocoaPods
 /ios/Pods/
 
+# react-native-ultimate-config
+rnuc.xcconfig

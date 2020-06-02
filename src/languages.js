@@ -1,5 +1,5 @@
 // @flow
-import Config from "react-native-config";
+import Config from "react-native-ultimate-config";
 import allLocales from "./locales";
 
 export const localeIds: string[] = Object.keys(allLocales);

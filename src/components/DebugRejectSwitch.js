@@ -4,7 +4,7 @@ import React, { PureComponent } from "react";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { Subject, Observable, throwError } from "rxjs";
-import Config from "react-native-config";
+import Config from "react-native-ultimate-config";
 import { flatMap } from "rxjs/operators";
 import LText from "./LText";
 
@@ -20,7 +20,7 @@ export const rejectionOp = (createError: () => Error = defaultErrorCreator) => <
 ): Observable<T> =>
   !Config.MOCK
     ? observable
-    : Observable.create(o => {
+    : Observable.create((o) => {
         const s = observable.subscribe(o);
         const s2 = rejections
           .pipe(flatMap(() => throwError(createError())))

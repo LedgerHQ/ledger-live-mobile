@@ -24,6 +24,8 @@ if [[ $DEBUG_RNDEBUGGER == "1" ]]; then
   rndebugger-open
 fi
 
+yarn rnuc .env
+
 if [ "$(uname)" == "Darwin" ]; then
   if ! [ -x "$(command -v bundle)" ]; then
     echo 'Error: `bundle` command is missing. Please install Bundler. https://bundler.io' >&2

@@ -11,6 +11,7 @@ import com.facebook.soloader.SoLoader;
 import com.facebook.react.ReactInstanceManager;
 
 import org.reactnative.camera.RNCameraPackage;
+import com.reactnativeultimateconfig.UltimateConfigModule;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
@@ -57,6 +58,7 @@ public class MainApplication extends Application implements ReactApplication {
     super.onCreate();
     SoLoader.init(this, /* native exopackage */ false);
     initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
+    UltimateConfigModule.setBuildConfig(BuildConfig.class);
   }
 
   /**

@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 // @flow
 import { Sentry } from "react-native-sentry";
-import Config from "react-native-config";
+import Config from "react-native-ultimate-config";
 // for now we have the bare minimum
 
 export default {

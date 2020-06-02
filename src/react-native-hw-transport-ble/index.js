@@ -1,6 +1,6 @@
 // @flow
 
-import Config from "react-native-config";
+import Config from "react-native-ultimate-config";
 import BleTransport from "@ledgerhq/react-native-hw-transport-ble";
 import makeMock from "./makeMock";
 import createAPDUMock from "../logic/createAPDUMock";
@@ -12,7 +12,7 @@ const transport = Config.MOCK
       createTransportDeviceMock: (id, name) => {
         names[id] = name;
         const apduMock = createAPDUMock({
-          setDeviceName: name => {
+          setDeviceName: (name) => {
             names[id] = name;
             return Promise.resolve();
           },

@@ -6,7 +6,7 @@ import "react-native-gesture-handler";
 
 import { AppRegistry } from "react-native";
 import { Sentry } from "react-native-sentry";
-import Config from "react-native-config";
+import Config from "react-native-ultimate-config";
 
 import App from "./src";
 import { getEnabled } from "./src/components/HookSentry";
@@ -39,14 +39,16 @@ if (Config.SENTRY_DSN && !__DEV__) {
         Array.isArray(exception.values)
       ) {
         const { values } = exception;
-        const shouldBlacklist = values.some(item => {
+        const shouldBlacklist = values.some((item) => {
           if (item && typeof item === "object") {
             const { type, value } = item;
             return (
               (typeof type === "string" &&
-                blacklistErrorName.some(pattern => type.match(pattern))) ||
+                blacklistErrorName.some((pattern) => type.match(pattern))) ||
               (typeof value === "string" &&
-                blacklistErrorDescription.some(pattern => value.match(pattern)))
+                blacklistErrorDescription.some((pattern) =>
+                  value.match(pattern),
+                ))
             );
           }
           return false;
