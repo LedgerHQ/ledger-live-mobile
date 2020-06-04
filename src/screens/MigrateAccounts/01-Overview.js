@@ -4,7 +4,7 @@ import { getCryptoCurrencyById } from "@ledgerhq/live-common/lib/data/cryptocurr
 import React, { useCallback, useMemo } from "react";
 import { Trans } from "react-i18next";
 import { StyleSheet, View, SectionList } from "react-native";
-import SafeAreaView from "react-native-safe-area-view";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { useSelector } from "react-redux";
 import colors from "../../colors";
 import { ScreenName } from "../../const";

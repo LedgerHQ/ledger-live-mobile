@@ -2,7 +2,7 @@
 
 import React, { Component } from "react";
 import { StyleSheet } from "react-native";
-import SafeAreaView from "react-native-safe-area-view";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
 import { decode } from "@ledgerhq/live-common/lib/cross";
 import { RNCamera } from "react-native-camera";

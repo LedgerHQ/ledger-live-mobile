@@ -1,7 +1,7 @@
 /* @flow */
 import React from "react";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
-import SafeAreaView from "react-native-safe-area-view";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { useSelector } from "react-redux";
 import type { Operation } from "@ledgerhq/live-common/lib/types";
 import {

@@ -2,7 +2,7 @@
 import invariant from "invariant";
 import React, { useCallback } from "react";
 import { StyleSheet, ScrollView } from "react-native";
-import SafeAreaView from "react-native-safe-area-view";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { useSelector } from "react-redux";
 import type { Transaction } from "@ledgerhq/live-common/lib/types";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";

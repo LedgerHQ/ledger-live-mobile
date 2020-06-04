@@ -10,7 +10,7 @@ import type {
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Trans } from "react-i18next";
 import { StyleSheet, View } from "react-native";
-import SafeAreaView from "react-native-safe-area-view";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { useDispatch, useSelector } from "react-redux";
 import { reduce } from "rxjs/operators";
 import { setAccounts } from "../../actions/accounts";

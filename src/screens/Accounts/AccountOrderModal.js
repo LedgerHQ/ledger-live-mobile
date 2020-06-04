@@ -3,7 +3,7 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
 import { Trans } from "react-i18next";
-import SafeAreaView from "react-native-safe-area-view";
+import { SafeAreaView } from "react-native-safe-area-context";
 import MenuTitle from "../../components/MenuTitle";
 import OrderOption from "./OrderOption";
 import BottomModal from "../../components/BottomModal";

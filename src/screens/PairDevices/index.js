@@ -2,7 +2,7 @@
 
 import React, { Component } from "react";
 import { StyleSheet } from "react-native";
-import SafeAreaView from "react-native-safe-area-view";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { useDispatch, useSelector } from "react-redux";
 import { timeout } from "rxjs/operators";
 import getDeviceInfo from "@ledgerhq/live-common/lib/hw/getDeviceInfo";

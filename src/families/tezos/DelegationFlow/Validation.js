@@ -5,7 +5,7 @@
 import React from "react";
 import { View, StyleSheet, ActivityIndicator } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
-import SafeAreaView from "react-native-safe-area-view";
+import { SafeAreaView } from "react-native-safe-area-context";
 import type {
   Transaction,
   TransactionStatus,

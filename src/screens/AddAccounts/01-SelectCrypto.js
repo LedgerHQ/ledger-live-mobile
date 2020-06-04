@@ -3,7 +3,7 @@
 import React, { useMemo } from "react";
 import { Trans } from "react-i18next";
 import { StyleSheet, View, FlatList } from "react-native";
-import SafeAreaView from "react-native-safe-area-view";
+import { SafeAreaView } from "react-native-safe-area-context";
 import type {
   CryptoCurrency,
   TokenCurrency,

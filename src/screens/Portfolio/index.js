@@ -2,7 +2,7 @@
 import React, { useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { View, StyleSheet, SectionList } from "react-native";
-import SafeAreaView from "react-native-safe-area-view";
+import { SafeAreaView } from "react-native-safe-area-context";
 import Animated from "react-native-reanimated";
 import { createNativeWrapper } from "react-native-gesture-handler";
 import type { SectionBase } from "react-native/Libraries/Lists/SectionList";

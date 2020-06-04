@@ -11,7 +11,7 @@ import {
   Linking,
 } from "react-native";
 import { useSelector } from "react-redux";
-import SafeAreaView from "react-native-safe-area-view";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { useTranslation, Trans } from "react-i18next";
 import Icon from "react-native-vector-icons/dist/Feather";
 import type {

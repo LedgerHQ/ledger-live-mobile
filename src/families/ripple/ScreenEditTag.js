@@ -1,7 +1,7 @@
 /* @flow */
 import React, { useState } from "react";
 import { View, StyleSheet, TextInput } from "react-native";
-import SafeAreaView from "react-native-safe-area-view";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { BigNumber } from "bignumber.js";

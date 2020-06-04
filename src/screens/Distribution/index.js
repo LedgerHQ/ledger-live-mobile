@@ -10,7 +10,7 @@ import {
   Dimensions,
   FlatList,
 } from "react-native";
-import SafeAreaView from "react-native-safe-area-view";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { getAssetsDistribution } from "@ledgerhq/live-common/lib/portfolio";
 import { createSelector } from "reselect";
 import type { AssetsDistribution } from "@ledgerhq/live-common/lib/types/portfolio";

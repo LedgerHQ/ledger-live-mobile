@@ -1,7 +1,7 @@
 // @flow
 import React, { PureComponent } from "react";
 import { StyleSheet, Animated } from "react-native";
-import SafeAreaView from "react-native-safe-area-view";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
 import { Trans } from "react-i18next";
 import { useDispatch } from "react-redux";

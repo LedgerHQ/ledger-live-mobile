@@ -2,7 +2,7 @@
 
 import React, { useCallback } from "react";
 import { StyleSheet } from "react-native";
-import SafeAreaView from "react-native-safe-area-view";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { TrackScreen } from "../../analytics";
 import colors from "../../colors";
 import { ScreenName } from "../../const";

@@ -18,7 +18,7 @@ import { StyleSheet, View, SectionList } from "react-native";
 import { useRoute } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
 import type { SectionBase } from "react-native/Libraries/Lists/SectionList";
-import SafeAreaView from "react-native-safe-area-view";
+import { SafeAreaView } from "react-native-safe-area-context";
 import CurrencyIcon from "../../components/CurrencyIcon";
 import colors from "../../colors";
 import { switchCountervalueFirst } from "../../actions/settings";

@@ -1,7 +1,7 @@
 /* @flow */
 import React, { Component } from "react";
 import { View, StyleSheet } from "react-native";
-import SafeAreaView from "react-native-safe-area-view";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { Trans } from "react-i18next";
 import firmwareUpdateMain from "@ledgerhq/live-common/lib/hw/firmwareUpdate-main";
 import type { FirmwareUpdateContext } from "@ledgerhq/live-common/lib/types/manager";

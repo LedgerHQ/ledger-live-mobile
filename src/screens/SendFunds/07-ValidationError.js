@@ -1,7 +1,7 @@
 /* @flow */
 import React, { useCallback } from "react";
 import { StyleSheet, Linking } from "react-native";
-import SafeAreaView from "react-native-safe-area-view";
+import { SafeAreaView } from "react-native-safe-area-context";
 import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
 import { TrackScreen } from "../../analytics";
 import colors from "../../colors";

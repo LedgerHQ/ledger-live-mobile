@@ -1,7 +1,7 @@
 /* @flow */
 import React, { Component } from "react";
 import { View, StyleSheet } from "react-native";
-import SafeAreaView from "react-native-safe-area-view";
+import { SafeAreaView } from "react-native-safe-area-context";
 import LText from "./LText";
 import colors from "../colors";
 

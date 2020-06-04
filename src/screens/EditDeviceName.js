@@ -2,7 +2,7 @@
 
 import React, { PureComponent } from "react";
 import { Keyboard, View, StyleSheet } from "react-native";
-import SafeAreaView from "react-native-safe-area-view";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { Trans } from "react-i18next";
 import Icon from "react-native-vector-icons/dist/Feather";
 import { connect } from "react-redux";

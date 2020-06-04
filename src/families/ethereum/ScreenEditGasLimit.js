@@ -5,7 +5,7 @@ import { BigNumber } from "bignumber.js";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Keyboard, StyleSheet, TextInput, View } from "react-native";
-import SafeAreaView from "react-native-safe-area-view";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { useSelector } from "react-redux";
 import { i18n } from "../../context/Locale";
 import colors from "../../colors";

@@ -11,7 +11,7 @@ import React, { useCallback, useRef, useEffect } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { Platform, StyleSheet, View } from "react-native";
 import Icon from "react-native-vector-icons/dist/FontAwesome";
-import SafeAreaView from "react-native-safe-area-view";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { useSelector } from "react-redux";
 import { track, TrackScreen } from "../../analytics";
 import { ScreenName } from "../../const";

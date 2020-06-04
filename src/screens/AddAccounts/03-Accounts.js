@@ -12,7 +12,7 @@ import {
 import { createStructuredSelector } from "reselect";
 import uniq from "lodash/uniq";
 import { Trans } from "react-i18next";
-import SafeAreaView from "react-native-safe-area-view";
+import { SafeAreaView } from "react-native-safe-area-context";
 import type { CryptoCurrency, Account } from "@ledgerhq/live-common/lib/types";
 import { getCurrencyBridge } from "@ledgerhq/live-common/lib/bridge";
 import { replaceAccounts } from "../../actions/accounts";

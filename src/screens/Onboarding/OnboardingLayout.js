@@ -2,7 +2,7 @@
 
 import React, { PureComponent } from "react";
 import { StatusBar, StyleSheet, View, ScrollView } from "react-native";
-import SafeAreaView from "react-native-safe-area-view";
+import { SafeAreaView } from "react-native-safe-area-context";
 import colors from "../../colors";
 import OnboardingHeader from "./OnboardingHeader";
 
