@@ -28,7 +28,7 @@ type Props = {
 export default function ReceiveFunds({ navigation }: Props) {
   const allAccounts = useSelector(flattenAccountsSelector);
   const accounts = useSelector(accountsSelector);
-  const keyExtractor = (item) => item.account.id;
+  const keyExtractor = item => item.account.id;
 
   const renderItem = useCallback(
     ({ item: result }: { item: SearchResult }) => {
@@ -52,11 +52,11 @@ export default function ReceiveFunds({ navigation }: Props) {
         </View>
       );
     },
-    [navigation]
+    [navigation],
   );
 
   const renderList = useCallback(
-    (items) => {
+    items => {
       const formatedList = formatSearchResults(items, accounts);
 
       return (
@@ -69,7 +69,7 @@ export default function ReceiveFunds({ navigation }: Props) {
         />
       );
     },
-    [accounts, renderItem]
+    [accounts, renderItem],
   );
 
   return (

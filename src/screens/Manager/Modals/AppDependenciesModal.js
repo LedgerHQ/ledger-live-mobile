@@ -59,7 +59,7 @@ function AppDependenciesModal({
         eventProperties: { appName: name },
       },
     ],
-    [installAppDependencies, onClose, name]
+    [installAppDependencies, onClose, name],
   );
 
   return (

@@ -4,7 +4,7 @@ import { Buffer } from "buffer";
 import { delay } from "@ledgerhq/live-common/lib/promise";
 
 export type ApduMock = {
-  exchange: (Buffer) => Promise<Buffer>,
+  exchange: Buffer => Promise<Buffer>,
   close: () => Promise<void>,
 };
 
@@ -13,7 +13,7 @@ const successResponse = Buffer.from([0x90, 0x00]);
 
 export default (arg: {
   getDeviceName: () => Promise<string>,
-  setDeviceName: (string) => Promise<void>,
+  setDeviceName: string => Promise<void>,
   getAddress: () => Promise<{
     publicKey: string,
     address: string,
@@ -38,7 +38,7 @@ export default (arg: {
         // answer from a nano s 1.5.5 that have allowed manager
         return Buffer.from(
           "3110000405312e352e3504ae00000004312e37002013fe17e06cf2f710d33328aa46d1053f8fadd48dcaeca2c5512dd79e2158d5779000",
-          "hex"
+          "hex",
         );
       }
       case "e0d2": {

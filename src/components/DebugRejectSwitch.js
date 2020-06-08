@@ -14,9 +14,9 @@ const defaultErrorCreator = () => new Error("DebugRejectSwitch");
 
 // usage: observable.pipe(rejectionOp())
 export const rejectionOp = (createError: () => Error = defaultErrorCreator) => <
-  T
+  T,
 >(
-  observable: Observable<T>
+  observable: Observable<T>,
 ): Observable<T> =>
   !Config.MOCK
     ? observable
@@ -34,7 +34,7 @@ export const rejectionOp = (createError: () => Error = defaultErrorCreator) => <
 // usage: hookRejections(promise)
 export const hookRejections = <T>(
   p: Promise<T>,
-  createError: () => Error = defaultErrorCreator
+  createError: () => Error = defaultErrorCreator,
 ): Promise<T> =>
   !Config.MOCK
     ? p

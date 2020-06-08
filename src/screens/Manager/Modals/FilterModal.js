@@ -181,7 +181,7 @@ const FilterModalComponent = ({
         </Touchable>
       );
     },
-    [state]
+    [state],
   );
 
   const onFilterActions = [

@@ -37,7 +37,7 @@ export default function Accounts({ navigation }: Props) {
         isLast={index === accounts.length - 1}
       />
     ),
-    [navigation, accounts.length]
+    [navigation, accounts.length],
   );
 
   if (accounts.length === 0) {
@@ -56,7 +56,7 @@ export default function Accounts({ navigation }: Props) {
         ref={ref}
         data={accounts}
         renderItem={renderItem}
-        keyExtractor={(item) => item.id}
+        keyExtractor={item => item.id}
         style={styles.list}
         contentContainerStyle={styles.contentContainer}
       />

@@ -11,7 +11,7 @@ import { withReboot } from "../../../context/Reboot";
 
 type Props = {
   readOnlyModeEnabled: boolean,
-  setReadOnlyMode: (boolean) => void,
+  setReadOnlyMode: boolean => void,
   reboot: (?boolean) => *,
 };
 const mapStateToProps = createStructuredSelector({
@@ -57,5 +57,5 @@ class DeveloperModeRow extends PureComponent<Props> {
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(withReboot(DeveloperModeRow));

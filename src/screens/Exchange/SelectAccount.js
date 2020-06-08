@@ -1,12 +1,13 @@
 /* @flow */
 import React, { useCallback } from "react";
 import { View, StyleSheet, FlatList } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+// $FlowFixMe
+import SafeAreaView from "react-native-safe-area-view";
+import type { NavigationScreenProp } from "react-navigation";
 import { Trans, useTranslation } from "react-i18next";
 import type {
   Account,
   AccountLikeArray,
-  CryptoCurrency,
 } from "@ledgerhq/live-common/lib/types";
 import { useSelector } from "react-redux";
 import {
@@ -28,14 +29,12 @@ import { NavigatorName } from "../../const";
 const SEARCH_KEYS = ["name", "unit.code", "token.name", "token.ticker"];
 const forceInset = { bottom: "always" };
 
-type RouteParams = {
-  currency: CryptoCurrency,
-};
+type Navigation = NavigationScreenProp<{ params: {} }>;
 
 type Props = {
   accounts: Account[],
   allAccounts: AccountLikeArray,
-  navigation: any,
+  navigation: Navigation,
   route: { params: RouteParams },
 };
 
@@ -45,7 +44,7 @@ export default function SelectAccount({ navigation, route }: Props) {
   const accounts = useSelector(accountsSelector);
   const { t } = useTranslation();
 
-  const keyExtractor = (item) => item.account.id;
+  const keyExtractor = item => item.account.id;
   const renderItem = useCallback(
     ({ item: result }: { item: SearchResult }) => {
       const { account } = result;
@@ -69,18 +68,18 @@ export default function SelectAccount({ navigation, route }: Props) {
         </View>
       );
     },
-    [navigation]
+    [navigation],
   );
 
   const elligibleAccountsForSelectedCurrency = allAccounts.filter(
-    (account) =>
+    account =>
       (account.type === "TokenAccount"
         ? account.token.id
-        : account.currency.id) === currency.id
+        : account.currency.id) === currency.id,
   );
 
   const renderList = useCallback(
-    (items) => {
+    items => {
       const formatedList = formatSearchResults(items, accounts);
       return (
         <FlatList
@@ -92,7 +91,7 @@ export default function SelectAccount({ navigation, route }: Props) {
         />
       );
     },
-    [accounts, renderItem]
+    [accounts, renderItem],
   );
 
   // empty state if no accounts available for this currency

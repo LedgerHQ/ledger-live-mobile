@@ -56,7 +56,7 @@ class EditDeviceName extends PureComponent<
     name: string,
     error: ?Error,
     connecting: ?Device,
-  }
+  },
 > {
   initialName = this.props.route.params?.deviceName;
 
@@ -75,7 +75,7 @@ class EditDeviceName extends PureComponent<
   };
 
   validate = () => {
-    this.setState((prevState) => {
+    this.setState(prevState => {
       const invalidCharacters = prevState.name.replace(/[\x00-\x7F]*/g, "");
       return {
         error: invalidCharacters
@@ -91,7 +91,7 @@ class EditDeviceName extends PureComponent<
       Keyboard.dismiss();
       setTimeout(
         () =>
-          this.setState((prevState) => ({
+          this.setState(prevState => ({
             name: prevState.name.trim(),
             connecting: {
               deviceId: this.props.route.params?.deviceId,
@@ -100,7 +100,7 @@ class EditDeviceName extends PureComponent<
               wired: false,
             },
           })),
-        800
+        800,
       );
     } else {
       this.props.navigation.goBack();

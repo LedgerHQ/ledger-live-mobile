@@ -11,9 +11,8 @@ import colors from "../../../colors";
 class AppVersionRow extends PureComponent<*> {
   render() {
     const { appVersion, buildVersion } = VersionNumber;
-    const version = `${appVersion || ""} (${
-      cleanBuildVersion(buildVersion) || ""
-    })`;
+    const version = `${appVersion || ""} (${cleanBuildVersion(buildVersion) ||
+      ""})`;
     return (
       <SettingsRow
         event="AppVersionRow"

@@ -37,7 +37,7 @@ type Props = {
   }>,
 };
 
-const keyExtractor = (currency) => currency.id;
+const keyExtractor = currency => currency.id;
 
 const renderEmptyList = () => (
   <View style={styles.emptySearch}>
@@ -52,13 +52,13 @@ export default function ExchangeSelectCrypto({ navigation }: Props) {
 
   const cryptoCurrencies = useMemo(
     () => listCryptoCurrencies(devMode).concat(listTokens()),
-    [devMode]
+    [devMode],
   );
 
   const sortedCryptoCurrencies = useCurrenciesByMarketcap(cryptoCurrencies);
 
-  const supportedCryptoCurrencies = sortedCryptoCurrencies.filter((currency) =>
-    supportedCurrenciesIds.includes(currency.id)
+  const supportedCryptoCurrencies = sortedCryptoCurrencies.filter(currency =>
+    supportedCurrenciesIds.includes(currency.id),
   );
 
   const onPressCurrency = (currency: CryptoCurrency) => {
@@ -80,7 +80,7 @@ export default function ExchangeSelectCrypto({ navigation }: Props) {
     }
   };
 
-  const renderList = (items) => (
+  const renderList = items => (
     <FlatList
       contentContainerStyle={styles.list}
       data={items}

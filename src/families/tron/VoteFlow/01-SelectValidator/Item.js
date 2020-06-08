@@ -36,7 +36,7 @@ function Item({
 
   const onSelect = useCallback(
     () => onSelectSuperRepresentative(item, selected),
-    [onSelectSuperRepresentative, item, selected]
+    [onSelectSuperRepresentative, item, selected],
   );
 
   const isDisabled = !selected && disabled;

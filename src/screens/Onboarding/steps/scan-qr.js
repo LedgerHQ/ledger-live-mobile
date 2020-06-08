@@ -92,5 +92,5 @@ const styles = StyleSheet.create({
 });
 
 export default withOnboardingContext(
-  connect(null, mapDispatchToProps)(OnboardingStepScanQR)
+  connect(null, mapDispatchToProps)(OnboardingStepScanQR),
 );

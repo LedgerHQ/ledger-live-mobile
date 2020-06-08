@@ -25,8 +25,8 @@ const GasSlider = React.memo(({ defaultGas, value, onChange }: *) => {
   const range = useMemo(() => inferDynamicRange(defaultGas), [defaultGas]);
   const index = reverseRangeIndex(range, value);
   const setValueIndex = useCallback(
-    (i) => onChange(projectRangeIndex(range, i)),
-    [range, onChange]
+    i => onChange(projectRangeIndex(range, i)),
+    [range, onChange],
   );
 
   return (
@@ -69,13 +69,13 @@ export default function EditFeeUnitEthereum({
   const feeCustomUnit = transaction.feeCustomUnit;
 
   const onChangeF = useCallback(
-    (value) => {
+    value => {
       const { gasPrice } = bridge.updateTransaction(transaction, {
         gasPrice: value,
       });
       setGasPrice(gasPrice);
     },
-    [bridge, transaction]
+    [bridge, transaction],
   );
 
   const onValidateFees = useCallback(() => {

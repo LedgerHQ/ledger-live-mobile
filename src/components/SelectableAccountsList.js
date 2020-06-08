@@ -32,7 +32,7 @@ const selectAllHitSlop = {
 
 type Props = {
   accounts: Account[],
-  onPressAccount?: (Account) => void,
+  onPressAccount?: Account => void,
   onSelectAll?: (Account[]) => void,
   onUnselectAll?: (Account[]) => void,
   selectedIds: string[],
@@ -73,7 +73,7 @@ export default function SelectableAccountsList({
     onUnselectAllProp && onUnselectAllProp(accounts);
   }, [accounts, onUnselectAllProp]);
 
-  const areAllSelected = accounts.every((a) => selectedIds.indexOf(a.id) > -1);
+  const areAllSelected = accounts.every(a => selectedIds.indexOf(a.id) > -1);
   return (
     <View style={[styles.root, style]}>
       {header ? (
@@ -106,7 +106,7 @@ export default function SelectableAccountsList({
 class SelectableAccount extends PureComponent<
   {
     account: Account,
-    onPress?: (Account) => void,
+    onPress?: Account => void,
     isDisabled?: boolean,
     isSelected?: boolean,
     showHint: boolean,
@@ -115,7 +115,7 @@ class SelectableAccount extends PureComponent<
     navigation: *,
     onAccountNameChange?: (name: string, changedAccount: Account) => void,
   },
-  { stopAnimation: boolean }
+  { stopAnimation: boolean },
 > {
   state = {
     stopAnimation: false,
@@ -129,7 +129,7 @@ class SelectableAccount extends PureComponent<
   panResponder: *;
   swipeableRow: Swipeable;
 
-  updateRef = (ref) => {
+  updateRef = ref => {
     if (ref) this.swipeableRow = ref;
   };
 
@@ -169,7 +169,7 @@ class SelectableAccount extends PureComponent<
   };
 
   componentDidMount() {
-    swipedAccountSubject.subscribe((msg) => {
+    swipedAccountSubject.subscribe(msg => {
       const { row, list } = msg;
       this.setState({ stopAnimation: true });
       if (

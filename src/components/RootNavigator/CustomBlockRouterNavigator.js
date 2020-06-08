@@ -15,7 +15,7 @@ export function useIsNavLocked(): boolean {
   const [isLocked, setIsLocked] = useState(false);
 
   useEffect(() => {
-    const subscription = lockSubject.subscribe((val) => {
+    const subscription = lockSubject.subscribe(val => {
       setIsLocked(val);
     });
 
@@ -42,7 +42,7 @@ export const useLockNavigation = (when, callback = () => {}) => {
   }, [callback, when]);
 };
 
-const Router = (options) => {
+const Router = options => {
   const router = TabRouter(options);
 
   return {

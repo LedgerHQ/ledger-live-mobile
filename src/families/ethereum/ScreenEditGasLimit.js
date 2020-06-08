@@ -37,7 +37,7 @@ function EthereumEditGasLimit({ navigation, route }: Props) {
   const { account, parentAccount } = useSelector(accountScreenSelector(route));
   const transaction = route.params?.transaction;
   const [gasLimit, setGasLimit] = useState(
-    transaction.userGasLimit || transaction.estimatedGasLimit
+    transaction.userGasLimit || transaction.estimatedGasLimit,
   );
 
   function onValidateText() {

@@ -109,7 +109,7 @@ const CollapsibleList = ({
       // closing
       set(openState, runCollapse(clock, openState, 0)),
       openState,
-    ]
+    ],
   );
 
   // interpolated height from opening anim state for list container

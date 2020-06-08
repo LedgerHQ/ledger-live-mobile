@@ -42,8 +42,8 @@ const InstallSuccessBar = ({ state, navigation, disable }: Props) => {
     () =>
       !hasBeenShown && installQueue.length <= 0 && uninstallQueue.length <= 0
         ? recentlyInstalledApps
-            .filter((appName) => installed.some(({ name }) => name === appName))
-            .map((name) => appByName[name])
+            .filter(appName => installed.some(({ name }) => name === appName))
+            .map(name => appByName[name])
         : [],
     [
       appByName,
@@ -52,12 +52,12 @@ const InstallSuccessBar = ({ state, navigation, disable }: Props) => {
       recentlyInstalledApps,
       uninstallQueue.length,
       installed,
-    ]
+    ],
   );
 
   const hasLiveSupported = useMemo(
     () => successInstalls.find(isLiveSupportedApp),
-    [successInstalls]
+    [successInstalls],
   );
 
   const onClose = useCallback(() => setHasBeenShown(true), []);

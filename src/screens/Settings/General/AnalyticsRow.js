@@ -14,7 +14,7 @@ import Track from "../../../analytics/Track";
 
 type Props = {
   analyticsEnabled: boolean,
-  setAnalytics: (boolean) => void,
+  setAnalytics: boolean => void,
 };
 
 type State = {

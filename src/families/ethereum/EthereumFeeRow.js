@@ -35,7 +35,7 @@ export default function EthereumFeeRow({
   const [isNetworkFeeHelpOpened, setNetworkFeeHelpOpened] = useState(false);
   const toggleNetworkFeeHelpModal = useCallback(
     () => setNetworkFeeHelpOpened(!isNetworkFeeHelpOpened),
-    [isNetworkFeeHelpOpened]
+    [isNetworkFeeHelpOpened],
   );
   const closeNetworkFeeHelpModal = () => setNetworkFeeHelpOpened(false);
 

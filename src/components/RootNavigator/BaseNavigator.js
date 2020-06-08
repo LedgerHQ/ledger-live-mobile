@@ -182,7 +182,7 @@ export default function BaseNavigator() {
         }}
       />
 
-      {Object.keys(families).map((name) => {
+      {Object.keys(families).map(name => {
         const { component, options } = families[name];
         return (
           <Stack.Screen

@@ -37,7 +37,7 @@ export default function ConnectDevice({ navigation, route }: Props) {
         ...meta,
       });
     },
-    [navigation, route.params]
+    [navigation, route.params],
   );
 
   if (!account) return null;

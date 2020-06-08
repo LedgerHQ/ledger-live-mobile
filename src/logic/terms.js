@@ -11,7 +11,7 @@ const currentTermsRequired = "2019-12-04";
 
 export async function isAcceptedTerms() {
   const acceptedTermsVersion = await AsyncStorage.getItem(
-    "acceptedTermsVersion"
+    "acceptedTermsVersion",
   );
   return acceptedTermsVersion === currentTermsRequired;
 }

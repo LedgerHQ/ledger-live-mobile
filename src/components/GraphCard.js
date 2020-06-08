@@ -32,7 +32,7 @@ const mapDispatchToProps = {
 
 type Props = {
   portfolio: Portfolio,
-  setSelectedTimeRange: (string) => void,
+  setSelectedTimeRange: string => void,
   counterValueCurrency: Currency,
   useCounterValue?: boolean,
   renderTitle?: ({ counterValueUnit: Unit, item: Item }) => React$Node,
@@ -53,11 +53,11 @@ class GraphCard extends PureComponent<Props, State> {
     { key: "year", label: <Trans i18nKey="common:time.year" /> },
   ];
 
-  onTimeRangeChange = (item) => this.props.setSelectedTimeRange(item.key);
+  onTimeRangeChange = item => this.props.setSelectedTimeRange(item.key);
 
-  onItemHover = (hoveredItem) => this.setState({ hoveredItem });
+  onItemHover = hoveredItem => this.setState({ hoveredItem });
 
-  mapGraphValue = (d) => d.value.toNumber();
+  mapGraphValue = d => d.value.toNumber();
 
   render() {
     const { portfolio, renderTitle, counterValueCurrency } = this.props;

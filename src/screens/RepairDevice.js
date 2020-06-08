@@ -51,14 +51,14 @@ export default class RepairDevice extends Component<Props, State> {
   onSelectDevice = (meta: any) => {
     this.setState({ selected: true });
     this.sub = firmwareUpdateRepair(meta.deviceId).subscribe({
-      next: (patch) => {
+      next: patch => {
         this.setState(patch);
       },
       complete: () => {
         this.props.navigation.goBack();
         this.props.navigation.navigate(NavigatorName.Manager);
       },
-      error: (error) => {
+      error: error => {
         logger.critical(error);
         this.setState({ error });
       },

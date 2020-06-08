@@ -172,10 +172,10 @@ class Asset extends PureComponent<AssetProps, any> {
     section: SectionBase<*>,
   }) => {
     const { allAccounts, accounts } = this.props;
-    const account = accounts.find((a) => a.id === item.accountId);
+    const account = accounts.find(a => a.id === item.accountId);
     const parentAccount =
       account && account.type !== "Account"
-        ? allAccounts.find((a) => a.id === account.parentId)
+        ? allAccounts.find(a => a.id === account.parentId)
         : null;
 
     if (!account) return null;
@@ -192,7 +192,7 @@ class Asset extends PureComponent<AssetProps, any> {
   };
 
   onEndReached = () => {
-    this.setState((prevState) => ({ opCount: prevState.opCount + 50 }));
+    this.setState(prevState => ({ opCount: prevState.opCount + 50 }));
   };
 
   keyExtractor = (item: Operation) => item.id;
@@ -248,9 +248,9 @@ export default function Screen(props: Props) {
   const accounts = useMemo(
     () =>
       flattenAccounts(allAccounts)
-        .filter((a) => getAccountCurrency(a) === currency)
+        .filter(a => getAccountCurrency(a) === currency)
         .sort((a, b) => b.balance.comparedTo(a.balance)),
-    [allAccounts, currency]
+    [allAccounts, currency],
   );
   const counterValueCurrency = useSelector(counterValueCurrencySelector);
   const useCounterValue = useSelector(countervalueFirstSelector);
@@ -258,7 +258,7 @@ export default function Screen(props: Props) {
     currencyPortfolioSelectorCreator({
       currency,
       range,
-    })
+    }),
   );
 
   return (

@@ -1,7 +1,7 @@
 import React from "react";
 import Svg, { G, Rect, Path } from "react-native-svg";
 
-const DeviceIconCheck = (props) => (
+const DeviceIconCheck = props => (
   <Svg width={15} height={15} {...props}>
     <G fill="#6490F1">
       <Rect width={15} height={15} fillOpacity={0.3} rx={2} />

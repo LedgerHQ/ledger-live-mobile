@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
 });
 
 const MemoTermsConditionsRow: React$ComponentType<{}> = memo(
-  TermsConditionsRow
+  TermsConditionsRow,
 );
 
 export default MemoTermsConditionsRow;

@@ -42,7 +42,7 @@ import BakerImage from "../BakerImage";
 
 const forceInset = { bottom: "always" };
 
-const keyExtractor = (baker) => baker.address;
+const keyExtractor = baker => baker.address;
 
 const BakerHead = ({ onPressHelp }: { onPressHelp: () => void }) => (
   <View style={styles.bakerHead}>
@@ -68,7 +68,7 @@ const BakerRow = ({
   onPress,
   baker,
 }: {
-  onPress: (Baker) => void,
+  onPress: Baker => void,
   baker: Baker,
 }) => {
   const onPressT = useCallback(() => {
@@ -137,7 +137,7 @@ export default function SelectValidator({ navigation, route }: Props) {
   const [showInfos, setShowInfos] = useState(false);
 
   if (Platform.OS === "ios") {
-    const keyboardDidShow = (event) => {
+    const keyboardDidShow = event => {
       const { height } = event.endCoordinates;
 
       setKeyboardHeight(height);
@@ -152,11 +152,11 @@ export default function SelectValidator({ navigation, route }: Props) {
     useEffect(() => {
       const keyboardDidShowListener = Keyboard.addListener(
         "keyboardDidShow",
-        keyboardDidShow
+        keyboardDidShow,
       );
       const keyboardDidHideListener = Keyboard.addListener(
         "keyboardDidHide",
-        keyboardDidHide
+        keyboardDidHide,
       );
 
       return () => {
@@ -192,11 +192,11 @@ export default function SelectValidator({ navigation, route }: Props) {
   }
 
   const onChangeText = useCallback(
-    (recipient) => {
+    recipient => {
       const bridge = getAccountBridge(account, parentAccount);
       setTransaction(bridge.updateTransaction(transaction, { recipient }));
     },
-    [account, parentAccount, setTransaction, transaction]
+    [account, parentAccount, setTransaction, transaction],
   );
 
   const clear = useCallback(() => onChangeText(""), [onChangeText]);
@@ -236,12 +236,12 @@ export default function SelectValidator({ navigation, route }: Props) {
         transaction,
       });
     },
-    [navigation, account, parentAccount, route.params]
+    [navigation, account, parentAccount, route.params],
   );
 
   const renderItem = useCallback(
     ({ item }) => <BakerRow baker={item} onPress={onItemPress} />,
-    [onItemPress]
+    [onItemPress],
   );
 
   return (

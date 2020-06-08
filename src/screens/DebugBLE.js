@@ -21,9 +21,9 @@ import Button from "../components/Button";
 import KeyboardView from "../components/KeyboardView";
 import colors from "../colors";
 
-const logsObservable = Observable.create((o) =>
-  listen((log) => o.next(log))
-).pipe(shareReplay(1000));
+const logsObservable = Observable.create(o => listen(log => o.next(log))).pipe(
+  shareReplay(1000),
+);
 
 logsObservable.subscribe();
 
@@ -62,7 +62,10 @@ class LogItem extends PureComponent<{ log: Log }> {
           {text}
         </LText>
         <LText style={{ marginRight: 5, fontSize: 8 }}>
-          {log.date.toISOString().split("T")[1].replace("Z", "")}
+          {log.date
+            .toISOString()
+            .split("T")[1]
+            .replace("Z", "")}
         </LText>
       </View>
     );
@@ -86,7 +89,7 @@ class DebugBLE extends Component<
     apdu: string,
     bleframe: string,
     useBLEframe: boolean,
-  }
+  },
 > {
   state = {
     logs: [],
@@ -98,9 +101,9 @@ class DebugBLE extends Component<
   sub: *;
 
   componentDidMount() {
-    this.sub = logsObservable.pipe(bufferTime(200)).subscribe((buffer) => {
+    this.sub = logsObservable.pipe(bufferTime(200)).subscribe(buffer => {
       this.setState(({ logs }) =>
-        buffer.length === 0 ? null : { logs: logs.concat(buffer) }
+        buffer.length === 0 ? null : { logs: logs.concat(buffer) },
       );
     });
   }
@@ -146,9 +149,9 @@ class DebugBLE extends Component<
     const deviceId = this.props.route.params?.deviceId;
     const msg = Buffer.from(useBLEframe ? bleframe : apdu, "hex");
     try {
-      await withDevice(deviceId)((t) =>
+      await withDevice(deviceId)(t =>
         // $FlowFixMe
-        from(useBLEframe ? t.write(msg) : t.exchange(msg))
+        from(useBLEframe ? t.write(msg) : t.exchange(msg)),
       ).toPromise();
     } catch (error) {
       this.addError(error, "send");
@@ -158,9 +161,9 @@ class DebugBLE extends Component<
   inferMTU = async () => {
     const deviceId = this.props.route.params?.deviceId;
     try {
-      const mtu = await withDevice(deviceId)((t) =>
+      const mtu = await withDevice(deviceId)(t =>
         // $FlowFixMe bro i know
-        from(t.inferMTU())
+        from(t.inferMTU()),
       ).toPromise();
       ToastAndroid.show("mtu set to " + mtu, ToastAndroid.SHORT);
     } catch (error) {
@@ -178,13 +181,13 @@ class DebugBLE extends Component<
       ];
     this.currentConnectionPriority = nextPriority;
     try {
-      await withDevice(deviceId)((t) =>
+      await withDevice(deviceId)(t =>
         // $FlowFixMe bro i know
-        from(t.requestConnectionPriority(nextPriority))
+        from(t.requestConnectionPriority(nextPriority)),
       ).toPromise();
       ToastAndroid.show(
         "connection priority set to " + nextPriority,
-        ToastAndroid.SHORT
+        ToastAndroid.SHORT,
       );
     } catch (error) {
       this.addError(error, "changePrio");

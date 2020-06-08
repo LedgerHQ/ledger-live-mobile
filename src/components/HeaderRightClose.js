@@ -25,7 +25,7 @@ export default function HeaderRightClose({
   const navigation = useNavigation();
 
   const [isConfirmationModalOpened, setIsConfirmationModalOpened] = useState(
-    false
+    false,
   );
   const [onModalHide, setOnModalHide] = useState();
 

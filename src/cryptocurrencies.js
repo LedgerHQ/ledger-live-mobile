@@ -8,23 +8,23 @@ import { getFullListSortedCryptoCurrenciesSync } from "./countervalues";
 
 // TODO move to use live-common functions
 export const listCryptoCurrencies = (
-  withDevCrypto?: boolean
+  withDevCrypto?: boolean,
 ): CryptoCurrency[] =>
   getFullListSortedCryptoCurrenciesSync().filter(
-    (c) => isCurrencySupported(c) && (withDevCrypto || !c.isTestnetFor)
+    c => isCurrencySupported(c) && (withDevCrypto || !c.isTestnetFor),
   );
 
 export const supportsExistingAccount = ({
   currencyId,
 }: {
   currencyId: string,
-}) => listCryptoCurrencies(true).some((c) => c.id === currencyId);
+}) => listCryptoCurrencies(true).some(c => c.id === currencyId);
 
 const SHOW_LEGACY_NEW_ACCOUNT = false;
 
 export const shouldShowNewAccount = (
   currency: CryptoCurrency,
-  derivationMode: DerivationMode
+  derivationMode: DerivationMode,
 ) =>
   derivationMode === ""
     ? !!SHOW_LEGACY_NEW_ACCOUNT || !currency.supportsSegwit

@@ -7,7 +7,7 @@ import colors from "../colors";
 
 export default class SafeMarkdown extends PureComponent<
   { markdown: string },
-  { error: ?Error }
+  { error: ?Error },
 > {
   state = {
     error: null,

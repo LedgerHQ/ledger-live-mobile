@@ -18,7 +18,7 @@ import LText from "../../../components/LText";
 type Props = {
   app: App,
   state: State,
-  dispatch: (Action) => void,
+  dispatch: Action => void,
   notEnoughMemoryToInstall: boolean,
   isInstalled: boolean,
   isInstalledView: boolean,
@@ -56,7 +56,7 @@ const AppStateButton = ({
 
   const canUpdate = useMemo(
     () => installed.some(({ name, updated }) => name === app.name && !updated),
-    [app.name, installed]
+    [app.name, installed],
   );
 
   const renderAppState = () => {

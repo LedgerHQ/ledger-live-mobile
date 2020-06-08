@@ -14,7 +14,7 @@ class RequiresBLE extends Component<
   },
   {
     state: { granted: ?boolean },
-  }
+  },
 > {
   state = {
     granted: null,

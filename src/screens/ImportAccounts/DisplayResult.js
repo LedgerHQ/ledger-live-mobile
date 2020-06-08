@@ -97,7 +97,7 @@ class DisplayResult extends Component<Props, State> {
           cur.mode !== "id" && cur.mode !== "unsupported"
             ? concat(acc, cur.account.id)
             : acc,
-        []
+        [],
       );
     }
     return { items, selectedAccounts };
@@ -124,7 +124,7 @@ class DisplayResult extends Component<Props, State> {
       }));
     } else {
       this.setState(({ selectedAccounts }) => ({
-        selectedAccounts: selectedAccounts.filter((s) => s !== account.id),
+        selectedAccounts: selectedAccounts.filter(s => s !== account.id),
       }));
     }
   };
@@ -134,7 +134,7 @@ class DisplayResult extends Component<Props, State> {
       key={account.id}
       account={account}
       mode={mode}
-      checked={this.state.selectedAccounts.some((s) => s === account.id)}
+      checked={this.state.selectedAccounts.some(s => s === account.id)}
       onSwitch={this.onSwitchResultItem}
       importing={this.state.importing}
     />
@@ -144,7 +144,7 @@ class DisplayResult extends Component<Props, State> {
     <ResultSection mode={mode} />
   );
 
-  onSwitchSettings = (importSettings) => this.setState({ importSettings });
+  onSwitchSettings = importSettings => this.setState({ importSettings });
 
   ListFooterComponent = () => (
     <DisplayResultSettingsSection
@@ -167,7 +167,7 @@ class DisplayResult extends Component<Props, State> {
     </View>
   );
 
-  keyExtractor = (item) => item.account.id;
+  keyExtractor = item => item.account.id;
 
   render() {
     const { items } = this.state;
@@ -186,7 +186,7 @@ class DisplayResult extends Component<Props, State> {
             ListFooterComponent={this.ListFooterComponent}
             ListEmptyComponent={this.ListEmptyComponent}
             keyExtractor={this.keyExtractor}
-            sections={Object.keys(itemsGroupedByMode).map((mode) => ({
+            sections={Object.keys(itemsGroupedByMode).map(mode => ({
               mode,
               data: itemsGroupedByMode[mode],
             }))}
@@ -219,7 +219,7 @@ export default connect(
   {
     importAccounts,
     importDesktopSettings,
-  }
+  },
 )(DisplayResult);
 
 const styles = StyleSheet.create({

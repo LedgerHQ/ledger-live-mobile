@@ -40,7 +40,7 @@ const initialLayout = { width, height };
 
 type Props = {
   state: State,
-  dispatch: (Action) => void,
+  dispatch: Action => void,
   setAppInstallWithDependencies: ({ app: App, dependencies: App[] }) => void,
   setAppUninstallWithDependencies: ({ dependents: App[], app: App }) => void,
   setStorageWarning: () => void,
@@ -97,8 +97,8 @@ const AppsScreen = ({
   const [scrollY, setScrollY] = useState(0);
 
   const onScroll = useCallback(
-    (evt) => setScrollY(evt.nativeEvent.contentOffset.y),
-    [setScrollY]
+    evt => setScrollY(evt.nativeEvent.contentOffset.y),
+    [setScrollY],
   );
 
   const scrollToTop = useCallback(() => {
@@ -110,23 +110,23 @@ const AppsScreen = ({
   }, [scrollY]);
 
   const jumpTo = useCallback(
-    (key) => {
+    key => {
       track("ManagerTabBarClick", { tab: key });
       setIndex(key === managerTabs.CATALOG ? 0 : 1);
       scrollToTop();
     },
-    [managerTabs.CATALOG, scrollToTop]
+    [managerTabs.CATALOG, scrollToTop],
   );
 
   const onIndexChange = useCallback(
-    (index) => {
+    index => {
       track("ManagerTabSwipe", {
         tab: index === 0 ? managerTabs.CATALOG : managerTabs.INSTALLED_APPS,
       });
       setIndex(index);
       scrollToTop();
     },
-    [managerTabs.CATALOG, managerTabs.INSTALLED_APPS, scrollToTop]
+    [managerTabs.CATALOG, managerTabs.INSTALLED_APPS, scrollToTop],
   );
 
   const onUninstallAll = useCallback(() => dispatch({ type: "wipe" }), [
@@ -138,7 +138,7 @@ const AppsScreen = ({
       type: sort,
       order,
     }),
-    [sort, order]
+    [sort, order],
   );
 
   const { update, device, catalog } = useAppsSections(state, {
@@ -163,7 +163,7 @@ const AppsScreen = ({
         </LText>
       </Touchable>
     ),
-    [setIndex]
+    [setIndex],
   );
 
   const renderScene = ({ route }: *) => {
@@ -252,7 +252,7 @@ const AppsScreen = ({
         )}
       </View>
     ),
-    [update, managerTabs]
+    [update, managerTabs],
   );
 
   const elements = [

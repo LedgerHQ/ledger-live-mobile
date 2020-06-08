@@ -27,7 +27,7 @@ type Props = {
   title: React$Node,
   last?: boolean,
   initialValue: ?BigNumber,
-  onPress: (BigNumber) => void,
+  onPress: BigNumber => void,
   isSelected: boolean,
   isValid?: boolean,
 };

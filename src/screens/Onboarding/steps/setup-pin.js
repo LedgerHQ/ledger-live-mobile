@@ -21,7 +21,7 @@ import PinModal from "../../../modals/Pin";
 
 class OnboardingStepSetupPin extends Component<
   OnboardingStepProps,
-  { isModalOpened: boolean }
+  { isModalOpened: boolean },
 > {
   state = {
     isModalOpened: false,

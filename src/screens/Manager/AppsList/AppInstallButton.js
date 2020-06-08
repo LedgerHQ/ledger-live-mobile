@@ -34,7 +34,7 @@ export default function AppInstallButton({
 
   const canUpdate = useMemo(
     () => installed.some(({ name, updated }) => name === app.name && !updated),
-    [installed, app.name]
+    [installed, app.name],
   );
 
   const needsDependencies = useAppInstallNeedsDeps(state, app);

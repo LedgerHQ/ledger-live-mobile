@@ -111,11 +111,11 @@ export default function FreezeAmount({ navigation, route }: Props) {
         setTransaction(
           bridge.updateTransaction(transaction, {
             amount: getDecimalPart(amount, defaultUnit.magnitude),
-          })
+          }),
         );
       }
     },
-    [setTransaction, transaction, bridge, defaultUnit]
+    [setTransaction, transaction, bridge, defaultUnit],
   );
 
   const onContinue = useCallback(() => {
@@ -149,25 +149,25 @@ export default function FreezeAmount({ navigation, route }: Props) {
   }, [setInfoModalOpen]);
 
   const onRatioPress = useCallback(
-    (value) => {
+    value => {
       blur();
       selectRatio(value);
       onChange(value, true);
     },
-    [blur, onChange]
+    [blur, onChange],
   );
 
   const onChangeResource = useCallback(
     (resource: string) => {
       setTransaction(bridge.updateTransaction(transaction, { resource }));
     },
-    [bridge, transaction, setTransaction]
+    [bridge, transaction, setTransaction],
   );
 
   /** show amount ratio buttons only if we can ratio the available assets to 25% or less */
   const showAmountRatio = useMemo(
     () => spendableBalance.gt(BigNumber(4 * 10 ** defaultUnit.magnitude)),
-    [spendableBalance, defaultUnit]
+    [spendableBalance, defaultUnit],
   );
 
   const amountButtons = useMemo(
@@ -190,7 +190,7 @@ export default function FreezeAmount({ navigation, route }: Props) {
           value: spendableBalance,
         },
       ],
-    [showAmountRatio, spendableBalance]
+    [showAmountRatio, spendableBalance],
   );
 
   if (!account || !transaction) return null;
@@ -281,7 +281,7 @@ export default function FreezeAmount({ navigation, route }: Props) {
                       unit={unit}
                       value={getDecimalPart(
                         account.spendableBalance,
-                        defaultUnit.magnitude
+                        defaultUnit.magnitude,
                       )}
                     />
                   </LText>

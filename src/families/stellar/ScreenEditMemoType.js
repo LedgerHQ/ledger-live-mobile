@@ -12,7 +12,7 @@ import colors from "../../colors";
 import { ScreenName } from "../../const";
 import makeGenericSelectScreen from "../../screens/makeGenericSelectScreen";
 
-const items = StellarMemoType.map((type) => ({
+const items = StellarMemoType.map(type => ({
   label: type,
   value: type,
 }));
@@ -49,9 +49,9 @@ const mapStateToProps = (state: State, props: any) => ({
 const Screen = connect(mapStateToProps)(
   makeGenericSelectScreen({
     id: "StellarEditMemoType",
-    itemEventProperties: (item) => ({ memoType: item.value }),
-    keyExtractor: (item) => item.value,
-    formatItem: (item) => i18next.t(`stellar.memoType.${item.label}`),
+    itemEventProperties: item => ({ memoType: item.value }),
+    keyExtractor: item => item.value,
+    formatItem: item => i18next.t(`stellar.memoType.${item.label}`),
     ListHeaderComponent: () => (
       <View style={styles.memo}>
         <LText style={styles.text}>
@@ -59,7 +59,7 @@ const Screen = connect(mapStateToProps)(
         </LText>
       </View>
     ),
-  })
+  }),
 );
 
 const options = {

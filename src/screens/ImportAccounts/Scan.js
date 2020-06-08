@@ -30,7 +30,7 @@ export default class Scan extends PureComponent<
     error: ?Error,
     width: number,
     height: number,
-  }
+  },
 > {
   state = {
     progress: 0,
@@ -81,7 +81,7 @@ export default class Scan extends PureComponent<
     this.setState({ error: null });
   };
 
-  onResult = (result) => {
+  onResult = result => {
     const onFinish = this.props.route.params?.onFinish;
 
     this.props.navigation.replace(ScreenName.DisplayResult, {

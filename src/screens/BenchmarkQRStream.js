@@ -11,7 +11,7 @@ export default class BenchmarkQRStream extends PureComponent<
   {
     navigation: *,
   },
-  *
+  *,
 > {
   state = {
     ...getWindowDimensions(),
@@ -35,7 +35,7 @@ export default class BenchmarkQRStream extends PureComponent<
         const bench = { count: this.count, dataSize: this.dataSize };
         this.setState(({ benchmarks }) => ({
           end: data === "end",
-          benchmarks: benchmarks.some((b) => b.dataSize === bench.dataSize)
+          benchmarks: benchmarks.some(b => b.dataSize === bench.dataSize)
             ? benchmarks
             : benchmarks.concat(bench),
         }));
@@ -53,7 +53,7 @@ export default class BenchmarkQRStream extends PureComponent<
 
   render() {
     const { width, height, benchmarks, end } = this.state;
-    const summary = benchmarks.map((b) => `${b.dataSize}:${b.count}`).join(" ");
+    const summary = benchmarks.map(b => `${b.dataSize}:${b.count}`).join(" ");
     const cameraRatio = 16 / 9;
     const cameraDimensions =
       width > height
@@ -69,7 +69,7 @@ export default class BenchmarkQRStream extends PureComponent<
       return (
         <View style={styles.resultRoot}>
           <LText selectable style={styles.result}>
-            {benchmarks.map((b) => `${b.dataSize} ${b.count}`).join("\n")}
+            {benchmarks.map(b => `${b.dataSize} ${b.count}`).join("\n")}
           </LText>
         </View>
       );

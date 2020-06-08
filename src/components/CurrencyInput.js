@@ -17,7 +17,7 @@ import colors from "../colors";
 function format(
   unit: Unit,
   value: BigNumber,
-  { isFocused, showAllDigits, subMagnitude }
+  { isFocused, showAllDigits, subMagnitude },
 ) {
   return formatCurrencyUnit(unit, value, {
     useGrouping: !isFocused,
@@ -29,8 +29,8 @@ function format(
 
 type Props = {
   isActive: boolean,
-  onFocus: (boolean) => void,
-  onChange: (BigNumber) => void,
+  onFocus: boolean => void,
+  onChange: BigNumber => void,
   unit: Unit,
   value: ?BigNumber,
   showAllDigits?: boolean,
@@ -155,8 +155,8 @@ class CurrencyInput extends PureComponent<Props, State> {
       clamp(
         Math.sqrt((screenWidth * 32) / displayValue.length),
         8,
-        isActive ? 32 : 24
-      )
+        isActive ? 32 : 24,
+      ),
     );
 
     return (

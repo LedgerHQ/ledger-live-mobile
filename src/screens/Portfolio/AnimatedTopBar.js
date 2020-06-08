@@ -52,9 +52,9 @@ export default function AnimatedTopBar({
         }),
         call([], () => {
           setIsShown(true);
-        })
+        }),
       ),
-    [isShown]
+    [isShown],
   );
 
   const contentStyle = [

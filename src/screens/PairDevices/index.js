@@ -34,7 +34,7 @@ type Props = {
 type PairDevicesProps = Props & {
   knownDevices: DeviceLike[],
   hasCompletedOnboarding: boolean,
-  addKnownDevice: (DeviceLike) => void,
+  addKnownDevice: DeviceLike => void,
   installAppFirstTime: (value: boolean) => void,
 };
 
@@ -109,7 +109,7 @@ class PairDevices extends Component<PairDevicesProps, State> {
         listApps(transport, deviceInfo)
           .pipe(timeout(GENUINE_CHECK_TIMEOUT))
           .subscribe({
-            next: (e) => {
+            next: e => {
               if (e.type === "result") {
                 if (!hasCompletedOnboarding) {
                   const hasAnyAppInstalled =
@@ -127,7 +127,7 @@ class PairDevices extends Component<PairDevicesProps, State> {
               });
             },
             complete: () => resolve(),
-            error: (e) => reject(e),
+            error: e => reject(e),
           });
 
         await genuineCheckPromise;

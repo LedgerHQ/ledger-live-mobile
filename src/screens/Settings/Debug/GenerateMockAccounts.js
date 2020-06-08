@@ -16,8 +16,8 @@ async function injectMockAccountsInDB(count) {
         accountModel.encode(
           genAccount(String(Math.random()), {
             currency: sample(listCryptoCurrencies()),
-          })
-        )
+          }),
+        ),
       ),
   });
 }

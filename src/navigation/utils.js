@@ -9,7 +9,7 @@ import {
 const scrollSubject = new Subject();
 
 export function useScrollToTop(
-  ref: React.MutableRefObject<ScrollView | undefined>
+  ref: React.MutableRefObject<ScrollView | undefined>,
 ) {
   const isFocused = useIsFocused();
 

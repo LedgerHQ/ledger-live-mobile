@@ -44,7 +44,7 @@ type HeaderTitleProps = {
 
 const renderListHeaderTitle = (
   countervalueAvailable,
-  onSwitchAccountCurrency
+  onSwitchAccountCurrency,
 ) => ({
   useCounterValue,
   cryptoCurrencyUnit,
@@ -144,7 +144,7 @@ function ListHeaderComponent({
           counterValueCurrency={counterValueCurrency}
           renderTitle={renderListHeaderTitle(
             countervalueAvailable,
-            onSwitchAccountCurrency
+            onSwitchAccountCurrency,
           )}
           renderAccountSummary={renderAccountSummary(account, parentAccount)}
         />

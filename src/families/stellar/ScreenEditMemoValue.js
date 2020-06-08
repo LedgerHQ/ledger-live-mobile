@@ -34,7 +34,7 @@ function StellarEditMemoValue({ navigation, route }: Props) {
   invariant(account, "account is required");
 
   const [memoValue, setMemoValue] = useState(
-    route.params.transaction.memoValue
+    route.params.transaction.memoValue,
   );
 
   const onChangeMemoValue = useCallback((str: string) => {

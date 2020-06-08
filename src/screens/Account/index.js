@@ -64,7 +64,7 @@ export default function AccountScreen({ navigation, route }: Props) {
     cryptoChange,
     history,
   } = useSelector(
-    balanceHistoryWithCountervalueSelectorCreator({ account, range })
+    balanceHistoryWithCountervalueSelectorCreator({ account, range }),
   );
   const useCounterValue = useSelector(countervalueFirstSelector);
   const counterValueCurrency = useSelector(counterValueCurrencySelector);
@@ -98,7 +98,7 @@ export default function AccountScreen({ navigation, route }: Props) {
           navigation={navigation}
         />
       ),
-    [account, parentAccount, navigation]
+    [account, parentAccount, navigation],
   );
 
   const renderItem = useCallback(
@@ -122,7 +122,7 @@ export default function AccountScreen({ navigation, route }: Props) {
         />
       );
     },
-    [account, parentAccount]
+    [account, parentAccount],
   );
 
   if (!account) return null;

@@ -36,7 +36,7 @@ class CurrenciesList extends PureComponent<Props> {
     />
   );
 
-  keyExtractor = (item) => item.id;
+  keyExtractor = item => item.id;
 
   render() {
     const { currencies } = this.props;

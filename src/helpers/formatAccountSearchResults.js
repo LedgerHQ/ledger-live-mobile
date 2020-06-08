@@ -13,22 +13,22 @@ export type SearchResult = {
   match?: boolean,
 };
 
-const flattenStructuredSearchResults = (structuredResults) =>
+const flattenStructuredSearchResults = structuredResults =>
   reduce(
     structuredResults,
     (acc, account) => {
       acc.push(account);
-      forEach(account.tokenAccounts, (tokenAccount) => {
+      forEach(account.tokenAccounts, tokenAccount => {
         acc.push(tokenAccount);
       });
       return acc;
     },
-    []
+    [],
   );
 
 export const formatSearchResults = (
   searchResults: AccountLikeArray,
-  accounts: Account[]
+  accounts: Account[],
 ): SearchResult[] => {
   const formated = reduce(
     searchResults,
@@ -61,7 +61,7 @@ export const formatSearchResults = (
       }
       return acc;
     },
-    {}
+    {},
   );
   return flattenStructuredSearchResults(formated);
 };

@@ -42,7 +42,7 @@ class OrderOption extends Component<{
   id: string,
   t: *,
   orderAccounts: string,
-  setOrderAccounts: (string) => void,
+  setOrderAccounts: string => void,
   refreshAccountsOrdering: () => void,
 }> {
   onPress = () => {
@@ -77,5 +77,5 @@ export default connect(
   {
     setOrderAccounts,
     refreshAccountsOrdering,
-  }
+  },
 )(OrderOption);

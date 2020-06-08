@@ -2,11 +2,20 @@
 import color from "color";
 
 export const rgba = (c: string, a: number) =>
-  color(c).alpha(a).rgb().toString();
+  color(c)
+    .alpha(a)
+    .rgb()
+    .toString();
 
-export const darken = (c: string, a: number) => color(c).darken(a).toString();
+export const darken = (c: string, a: number) =>
+  color(c)
+    .darken(a)
+    .toString();
 
-export const lighten = (c: string, a: number) => color(c).lighten(a).toString();
+export const lighten = (c: string, a: number) =>
+  color(c)
+    .lighten(a)
+    .toString();
 
 export default {
   /* MAIN */

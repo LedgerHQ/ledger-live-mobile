@@ -13,7 +13,7 @@ import Svg, {
 import getWindowDimensions from "../logic/getWindowDimensions";
 
 const { width } = getWindowDimensions();
-const ConnectNanoXIllustration = (props) => (
+const ConnectNanoXIllustration = props => (
   <Svg
     width={width * 0.7}
     height={((width * 0.7) / 194) * 149}

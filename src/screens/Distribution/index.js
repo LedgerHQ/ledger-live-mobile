@@ -41,7 +41,7 @@ type DistributionProps = Props & {
 const distributionSelector = createSelector(
   accountsSelector,
   calculateCountervalueSelector,
-  getAssetsDistribution
+  getAssetsDistribution,
 );
 
 class Distribution extends PureComponent<DistributionProps, *> {
@@ -66,14 +66,14 @@ class Distribution extends PureComponent<DistributionProps, *> {
     </TouchableOpacity>
   );
 
-  onHighlightChange = (index) => {
+  onHighlightChange = index => {
     this.setState({ highlight: index });
     if (this.flatListRef.current) {
       this.flatListRef.current.scrollToIndex({ index }, true);
     }
   };
 
-  keyExtractor = (item) => item.currency.id;
+  keyExtractor = item => item.currency.id;
 
   ListHeaderComponent = () => {
     const { counterValueCurrency, distribution } = this.props;

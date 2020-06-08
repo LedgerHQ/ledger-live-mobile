@@ -25,7 +25,7 @@ export default class Touchable extends Component<
   },
   {
     pending: boolean,
-  }
+  },
 > {
   state = {
     pending: false,

@@ -85,7 +85,7 @@ export const stop = () => {
 export const track = (
   event: string,
   properties: ?Object,
-  mandatory: ?boolean
+  mandatory: ?boolean,
 ) => {
   Sentry.captureBreadcrumb({
     message: event,
@@ -108,14 +108,14 @@ export const track = (
       ...extraProperties(storeInstance),
       ...properties,
     },
-    context
+    context,
   );
 };
 
 export const screen = (
   category: string,
   name: ?string,
-  properties: ?Object
+  properties: ?Object,
 ) => {
   const title = `Page ${category + (name ? ` ${name}` : "")}`;
   Sentry.captureBreadcrumb({
@@ -136,6 +136,6 @@ export const screen = (
       ...extraProperties(storeInstance),
       ...properties,
     },
-    context
+    context,
   );
 };

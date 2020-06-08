@@ -25,7 +25,7 @@ class Graph extends PureComponent<GraphProps> {
     const { width, height, data } = this.props;
 
     const points = data.map((value, index) => ({ value, index }));
-    const maxY = maxBy(data, (v) => v);
+    const maxY = maxBy(data, v => v);
 
     const x = scale
       .scaleLinear()
@@ -39,8 +39,8 @@ class Graph extends PureComponent<GraphProps> {
 
     const line = shape
       .line()
-      .x((d) => x(d.index))
-      .y((d) => y(d.value))
+      .x(d => x(d.index))
+      .y(d => y(d.value))
       .curve(shape.curveLinear)(points);
 
     return (
@@ -58,7 +58,7 @@ const benchmark = ({ inputAPDUSize, outputAPDUSize }) => {
   const data = Buffer.from(
     Array(inSize)
       .fill(0)
-      .map((_, i) => i % 255)
+      .map((_, i) => i % 255),
   );
   return Buffer.concat([head, data]);
 };
@@ -83,7 +83,7 @@ class DebugBLEBenchmark extends Component<
     inputAPDUSize: number,
     outputAPDUSize: number,
     error: ?Error,
-  }
+  },
 > {
   state = {
     exchangeStats: [],
@@ -114,13 +114,13 @@ class DebugBLEBenchmark extends Component<
       this.sub.unsubscribe();
     }
     const deviceId = this.props.route.params?.deviceId;
-    this.sub = withDevice(deviceId)((t) => {
+    this.sub = withDevice(deviceId)(t => {
       const loop = () => {
         const input = benchmark(this.state);
         return from(t.exchange(input)).pipe(
-          concatMap((output) => {
+          concatMap(output => {
             const dataExchanged = input.length + output.length;
-            this.setState((prev) => {
+            this.setState(prev => {
               const exchangeStats = [[Date.now(), dataExchanged]]
                 .concat(prev.exchangeStats)
                 .slice(0, 5);
@@ -147,12 +147,12 @@ class DebugBLEBenchmark extends Component<
               };
             });
             return loop();
-          })
+          }),
         );
       };
       return loop();
     }).subscribe({
-      error: (error) => {
+      error: error => {
         this.setState({ error });
       },
     });
@@ -189,7 +189,7 @@ class DebugBLEBenchmark extends Component<
               minimumValue={5}
               maximumValue={260}
               step={1}
-              onValueChange={(inputAPDUSize) => {
+              onValueChange={inputAPDUSize => {
                 this.setState({ inputAPDUSize });
               }}
               value={inputAPDUSize}
@@ -203,7 +203,7 @@ class DebugBLEBenchmark extends Component<
               minimumValue={5}
               maximumValue={255}
               step={1}
-              onValueChange={(outputAPDUSize) => {
+              onValueChange={outputAPDUSize => {
                 this.setState({ outputAPDUSize });
               }}
               value={outputAPDUSize}

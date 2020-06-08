@@ -119,16 +119,16 @@ class AddAccountsAccounts extends PureComponent<Props, State> {
     };
     this.scanSubscription = concat(
       from(prepareCurrency(currency)).pipe(ignoreElements()),
-      bridge.scanAccounts({ currency, deviceId, syncConfig })
+      bridge.scanAccounts({ currency, deviceId, syncConfig }),
     ).subscribe({
       next: ({ account }) =>
         this.setState(
           ({ scannedAccounts, selectedIds }, { existingAccounts }) => {
             const hasAlreadyBeenScanned = !!scannedAccounts.find(
-              (a) => account.id === a.id
+              a => account.id === a.id,
             );
             const hasAlreadyBeenImported = !!existingAccounts.find(
-              (a) => account.id === a.id
+              a => account.id === a.id,
             );
             const isNewAccount = isAccountEmpty(account);
             if (!hasAlreadyBeenScanned) {
@@ -141,10 +141,10 @@ class AddAccountsAccounts extends PureComponent<Props, State> {
               };
             }
             return null;
-          }
+          },
         ),
       complete: () => this.setState({ scanning: false }),
-      error: (error) => {
+      error: error => {
         logger.critical(error);
         this.setState({ error });
       },
@@ -182,21 +182,19 @@ class AddAccountsAccounts extends PureComponent<Props, State> {
     const { selectedIds } = this.state;
     const isChecked = selectedIds.indexOf(account.id) > -1;
     const newSelectedIds = isChecked
-      ? selectedIds.filter((id) => id !== account.id)
+      ? selectedIds.filter(id => id !== account.id)
       : [...selectedIds, account.id];
     this.setState({ selectedIds: newSelectedIds });
   };
 
   selectAll = (accounts: Account[]) =>
     this.setState(({ selectedIds }) => ({
-      selectedIds: uniq([...selectedIds, ...accounts.map((a) => a.id)]),
+      selectedIds: uniq([...selectedIds, ...accounts.map(a => a.id)]),
     }));
 
   unselectAll = (accounts: Account[]) =>
     this.setState(({ selectedIds }) => ({
-      selectedIds: selectedIds.filter(
-        (id) => !accounts.find((a) => a.id === id)
-      ),
+      selectedIds: selectedIds.filter(id => !accounts.find(a => a.id === id)),
     }));
 
   import = () => {
@@ -232,9 +230,9 @@ class AddAccountsAccounts extends PureComponent<Props, State> {
   };
 
   onAccountNameChange = (name: string, changedAccount: Account) => {
-    this.setState((prevState) => ({
-      scannedAccounts: prevState.scannedAccounts.map((account) =>
-        account.id === changedAccount.id ? { ...account, name } : account
+    this.setState(prevState => ({
+      scannedAccounts: prevState.scannedAccounts.map(account =>
+        account.id === changedAccount.id ? { ...account, name } : account,
       ),
     }));
   };
@@ -251,12 +249,12 @@ class AddAccountsAccounts extends PureComponent<Props, State> {
       scannedAccounts,
       {
         scanning,
-      }
+      },
     );
 
-    const cantCreateAccount = !sections.some((s) => s.id === "creatable");
+    const cantCreateAccount = !sections.some(s => s.id === "creatable");
     const noImportableAccounts = !sections.some(
-      (s) => s.id === "importable" || s.id === "creatable" || s.id === "migrate"
+      s => s.id === "importable" || s.id === "creatable" || s.id === "migrate",
     );
 
     const emptyTexts = {
@@ -279,7 +277,7 @@ class AddAccountsAccounts extends PureComponent<Props, State> {
       ),
     };
 
-    const supportLink = sections.map((s) => s.supportLink).find(Boolean);
+    const supportLink = sections.map(s => s.supportLink).find(Boolean);
 
     return (
       <SafeAreaView style={styles.root} forceInset={forceInset}>
@@ -506,5 +504,5 @@ const styles = StyleSheet.create({
 // $FlowFixMe
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(AddAccountsAccounts);

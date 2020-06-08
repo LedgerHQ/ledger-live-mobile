@@ -46,10 +46,10 @@ const UpdateAllModal = ({
         event: "ManagerAppUpdateAllModalCancel",
       },
     ],
-    [onConfirm, onClose, apps]
+    [onConfirm, onClose, apps],
   );
 
-  const data = apps.map((app) => ({
+  const data = apps.map(app => ({
     ...app,
     installed: installed.find(({ name }) => name === app.name),
   }));
@@ -86,7 +86,7 @@ const UpdateAllModal = ({
         </View>
       );
     },
-    [state.deviceModel]
+    [state.deviceModel],
   );
 
   return (

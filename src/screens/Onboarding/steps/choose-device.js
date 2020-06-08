@@ -45,7 +45,7 @@ function CloseOnboarding() {
 class OnboardingStepChooseDevice extends Component<
   OnboardingStepProps & {
     hasCompletedOnboarding: boolean,
-  }
+  },
 > {
   componentDidMount() {
     if (this.props.route.params?.autoJumpToNanoX) this.chooseNanoX();
@@ -190,5 +190,5 @@ const styles = StyleSheet.create({
 export default connect(
   createStructuredSelector({
     hasCompletedOnboarding: hasCompletedOnboardingSelector,
-  })
+  }),
 )(withOnboardingContext(OnboardingStepChooseDevice));

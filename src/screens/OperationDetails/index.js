@@ -54,7 +54,7 @@ export default function OperationDetails({ route }: Props) {
   const mainAccount = getMainAccount(account, parentAccount);
   const url = getTransactionExplorer(
     getDefaultExplorerView(mainAccount.currency),
-    operation.hash
+    operation.hash,
   );
   const specific = byFamiliesOperationDetails[mainAccount.currency.family];
   const urlWhatIsThis =

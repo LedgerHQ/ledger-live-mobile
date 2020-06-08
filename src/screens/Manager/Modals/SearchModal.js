@@ -44,11 +44,11 @@ const Placeholder = ({
   const found = useMemo(
     () =>
       tokens.find(
-        (token) =>
+        token =>
           token.name.toLowerCase().includes(query.toLowerCase()) ||
-          token.ticker.toLowerCase().includes(query.toLowerCase())
+          token.ticker.toLowerCase().includes(query.toLowerCase()),
       ),
-    [query]
+    [query],
   );
 
   const parentInstalled = useMemo(
@@ -56,7 +56,7 @@ const Placeholder = ({
       found &&
       found.parentCurrency &&
       installed.find(({ name }) => name === found.parentCurrency.name),
-    [found, installed]
+    [found, installed],
   );
 
   const parent = useMemo(
@@ -64,7 +64,7 @@ const Placeholder = ({
       found &&
       found.parentCurrency &&
       apps.find(({ name }) => name === found.parentCurrency.name),
-    [found, apps]
+    [found, apps],
   );
 
   const install = useCallback(() => parent && onInstall(parent.name), [
@@ -149,7 +149,7 @@ const { height } = getWindowDimensions();
 
 type Props = {
   state: State,
-  dispatch: (Action) => void,
+  dispatch: Action => void,
   isInstalledView: boolean,
   apps?: App[],
   disabled: boolean,
@@ -183,7 +183,7 @@ export default ({
     setDepsUninstall();
   }, []);
 
-  const closeSearchModal = useCallback((deps) => {
+  const closeSearchModal = useCallback(deps => {
     setIsOpen(false);
     if (deps) {
       if (deps.dependencies) setDepsInstall(deps);
@@ -210,13 +210,13 @@ export default ({
       installedApps: [],
       type: [],
     }),
-    [query]
+    [query],
   );
 
   const sortedApps: Array<App> = useSortedFilteredApps(
     apps || state.apps,
     filterOptions,
-    { type: "marketcap", order: "desc" }
+    { type: "marketcap", order: "desc" },
   );
 
   const addAccount = useCallback(() => {
@@ -225,14 +225,14 @@ export default ({
   }, [navigation]);
 
   const onInstall = useCallback(
-    (name) => {
+    name => {
       if (!hasInstalledAnyApp) {
         reduxDispatch(installAppFirstTime(true));
       }
       dispatch({ type: "install", name });
       setIsOpen(false);
     },
-    [dispatch, reduxDispatch, hasInstalledAnyApp]
+    [dispatch, reduxDispatch, hasInstalledAnyApp],
   );
 
   const NoResult = useMemo(
@@ -253,7 +253,7 @@ export default ({
       sortedApps.length,
       state.apps,
       state.installed,
-    ]
+    ],
   );
 
   const renderRow = useCallback(
@@ -269,7 +269,7 @@ export default ({
         setAppUninstallWithDependencies={closeSearchModal}
       />
     ),
-    [state, dispatch, isInstalledView, closeSearchModal]
+    [state, dispatch, isInstalledView, closeSearchModal],
   );
   const keyExtractor = useCallback((d: App) => String(d.id) + "SEARCH", []);
 
@@ -278,7 +278,7 @@ export default ({
       !isInstalledView
         ? t("manager.appList.searchAppsCatalog")
         : t("manager.appList.searchAppsInstalled"),
-    [isInstalledView, t]
+    [isInstalledView, t],
   );
 
   /** use this on modal show instead of textinput autofocus since we have to wait for the modal to be visible before focusing */

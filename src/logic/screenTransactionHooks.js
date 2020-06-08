@@ -17,7 +17,7 @@ import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import logger from "../logger";
 
 export const useTransactionChangeFromNavigation = (
-  setTransaction: (Transaction) => void
+  setTransaction: Transaction => void,
 ) => {
   const route = useRoute();
   const navigationTransaction = route.params?.transaction;
@@ -62,8 +62,8 @@ export const useSignWithDevice = ({
       .signOperation({ account: mainAccount, transaction, deviceId })
       .pipe(
         // FIXME later we will need to treat more events
-        filter((e) => e.type === "signed"),
-        concatMap((e) =>
+        filter(e => e.type === "signed"),
+        concatMap(e =>
           // later we will have more events
           concat(
             of(e),
@@ -73,13 +73,13 @@ export const useSignWithDevice = ({
                   account: mainAccount,
                   signedOperation: e.signedOperation,
                 })
-                .then((operation) => ({ type: "broadcasted", operation }))
-            )
-          )
-        )
+                .then(operation => ({ type: "broadcasted", operation })),
+            ),
+          ),
+        ),
       )
       .subscribe({
-        next: (e) => {
+        next: e => {
           switch (e.type) {
             case "signed":
               setSigned(true);
@@ -90,15 +90,15 @@ export const useSignWithDevice = ({
                 ...route.params,
                 result: e.operation,
               });
-              updateAccountWithUpdater(mainAccount.id, (account) =>
-                addPendingOperation(account, e.operation)
+              updateAccountWithUpdater(mainAccount.id, account =>
+                addPendingOperation(account, e.operation),
               );
               break;
 
             default:
           }
         },
-        error: (e) => {
+        error: e => {
           let error = e;
           if (e && e.statusCode === 0x6985) {
             error = new UserRefusedOnDevice();

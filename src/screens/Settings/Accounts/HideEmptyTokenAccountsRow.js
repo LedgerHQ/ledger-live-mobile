@@ -10,7 +10,7 @@ import withEnv from "../../../logic/withEnv";
 
 type Props = {
   hideEmptyTokenAccountsEnabled: boolean,
-  setHideEmptyTokenAccounts: (boolean) => void,
+  setHideEmptyTokenAccounts: boolean => void,
 };
 
 const mapDispatchToProps = {
@@ -45,5 +45,5 @@ class HideEmptyTokenAccountsRow extends PureComponent<Props> {
 
 export default compose(
   withEnv("HIDE_EMPTY_TOKEN_ACCOUNTS", "hideEmptyTokenAccountsEnabled"),
-  connect(null, mapDispatchToProps)
+  connect(null, mapDispatchToProps),
 )(HideEmptyTokenAccountsRow);

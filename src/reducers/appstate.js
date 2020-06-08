@@ -20,7 +20,7 @@ const initialState: AppState = {
 const handlers: Object = {
   SYNC_IS_CONNECTED: (
     state: AppState,
-    { isConnected }: { isConnected: boolean }
+    { isConnected }: { isConnected: boolean },
   ) => ({
     isConnected,
   }),
@@ -35,7 +35,7 @@ const globalNetworkDown = new NetworkDown();
 // $FlowFixMe
 export const networkErrorSelector = createSelector(
   isConnectedSelector,
-  (isConnected) => (!isConnected ? globalNetworkDown : null)
+  isConnected => (!isConnected ? globalNetworkDown : null),
 );
 
 export default handleActions(handlers, initialState);

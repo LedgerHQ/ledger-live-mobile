@@ -52,7 +52,7 @@ export default function DelegationStarted({ navigation, route }: Props) {
             <Trans i18nKey="delegation.started.steps.0" />,
             <Trans i18nKey="delegation.started.steps.1" />,
             <Trans i18nKey="delegation.started.steps.2" />,
-          ].map((wording) => (
+          ].map(wording => (
             <LText secondary semiBold style={styles.bulletItem}>
               {wording}
             </LText>

@@ -19,13 +19,13 @@ type Props = {
 
 export default function ConnectDevice({ navigation, route }: Props) {
   const onSelectDevice = useCallback(
-    (deviceMeta) => {
+    deviceMeta => {
       navigation.navigate(ScreenName.MigrateAccountsProgress, {
         currency: route.params?.currency,
         deviceMeta,
       });
     },
-    [navigation, route.params]
+    [navigation, route.params],
   );
 
   return (

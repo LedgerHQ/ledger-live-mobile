@@ -40,14 +40,14 @@ const handlers: Object = {
 
   SET_ACCOUNTS: (
     state: AccountsState,
-    { payload }: { payload: Account[] }
+    { payload }: { payload: Account[] },
   ) => ({
     active: payload,
   }),
 
   UPDATE_ACCOUNT: (
     state: AccountsState,
-    { accountId, updater }: { accountId: string, updater: (Account) => Account }
+    { accountId, updater }: { accountId: string, updater: Account => Account },
   ): AccountsState => {
     function update(existingAccount) {
       if (accountId !== existingAccount.id) return existingAccount;
@@ -63,13 +63,13 @@ const handlers: Object = {
 
   DELETE_ACCOUNT: (
     state: AccountsState,
-    { payload: account }: { payload: Account }
+    { payload: account }: { payload: Account },
   ): AccountsState => ({
-    active: state.active.filter((acc) => acc.id !== account.id),
+    active: state.active.filter(acc => acc.id !== account.id),
   }),
 
   CLEAN_CACHE: (state: AccountsState): AccountsState => ({
-    active: state.active.map((account) => ({
+    active: state.active.map(account => ({
       ...account,
       lastSyncDate: new Date(0),
       operations: [],
@@ -79,8 +79,8 @@ const handlers: Object = {
 
   BLACKLIST_TOKEN: (
     state: AccountsState,
-    { payload: tokenId }: { payload: string }
-  ) => ({ active: state.active.map((a) => withoutToken(a, tokenId)) }),
+    { payload: tokenId }: { payload: string },
+  ) => ({ active: state.active.map(a => withoutToken(a, tokenId)) }),
 };
 
 // Selectors
@@ -97,56 +97,56 @@ export const migratableAccountsSelector = (s: *): Account[] =>
 // $FlowFixMe
 export const flattenAccountsSelector = createSelector(
   accountsSelector,
-  flattenAccounts
+  flattenAccounts,
 );
 
 // $FlowFixMe
 export const flattenAccountsEnforceHideEmptyTokenSelector = createSelector(
   accountsSelector,
-  (accounts) =>
-    flattenAccounts(accounts, { enforceHideEmptyTokenAccounts: true })
+  accounts =>
+    flattenAccounts(accounts, { enforceHideEmptyTokenAccounts: true }),
 );
 
 // $FlowFixMe
 export const accountsCountSelector = createSelector(
   accountsSelector,
-  (acc) => acc.length
+  acc => acc.length,
 );
 
 // $FlowFixMe
 export const someAccountsNeedMigrationSelector = createSelector(
   accountsSelector,
-  (accounts) => accounts.some(canBeMigrated)
+  accounts => accounts.some(canBeMigrated),
 );
 
 // $FlowFixMe
-export const currenciesSelector = createSelector(accountsSelector, (accounts) =>
-  uniq(
-    flattenAccounts(accounts).map((a) => getAccountCurrency(a))
-  ).sort((a, b) => a.name.localeCompare(b.name))
+export const currenciesSelector = createSelector(accountsSelector, accounts =>
+  uniq(flattenAccounts(accounts).map(a => getAccountCurrency(a))).sort((a, b) =>
+    a.name.localeCompare(b.name),
+  ),
 );
 
 // $FlowFixMe
 export const cryptoCurrenciesSelector = createSelector(
   accountsSelector,
-  (accounts) =>
-    uniq(accounts.map((a) => a.currency)).sort((a, b) =>
-      a.name.localeCompare(b.name)
-    )
+  accounts =>
+    uniq(accounts.map(a => a.currency)).sort((a, b) =>
+      a.name.localeCompare(b.name),
+    ),
 );
 
 // $FlowFixMe
 export const accountSelector = createSelector(
   accountsSelector,
   (_, { accountId }) => accountId,
-  (accounts, accountId) => accounts.find((a) => a.id === accountId)
+  (accounts, accountId) => accounts.find(a => a.id === accountId),
 );
 
 // $FlowFixMe
 export const parentAccountSelector = createSelector(
   accountsSelector,
   (_, { account }) => (account ? account.parentId : null),
-  (accounts, accountId) => accounts.find((a) => a.id === accountId)
+  (accounts, accountId) => accounts.find(a => a.id === accountId),
 );
 
 export const accountScreenSelector = (route: any) => (state: any) => {
@@ -157,7 +157,7 @@ export const accountScreenSelector = (route: any) => (state: any) => {
   if (parentAccount) {
     const { subAccounts } = parentAccount;
     if (subAccounts) {
-      account = subAccounts.find((t) => t.id === accountId);
+      account = subAccounts.find(t => t.id === accountId);
     }
   } else {
     account = accountSelector(state, { accountId });
@@ -166,8 +166,8 @@ export const accountScreenSelector = (route: any) => (state: any) => {
 };
 
 // $FlowFixMe
-export const isUpToDateSelector = createSelector(accountsSelector, (accounts) =>
-  accounts.every(isUpToDateAccount)
+export const isUpToDateSelector = createSelector(accountsSelector, accounts =>
+  accounts.every(isUpToDateAccount),
 );
 
 export default handleActions(handlers, initialState);

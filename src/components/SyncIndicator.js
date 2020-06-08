@@ -19,7 +19,7 @@ type Props = {
 
 class SyncIndicatorInner extends PureComponent<
   Props,
-  { lastClickTime: number }
+  { lastClickTime: number },
 > {
   state = {
     lastClickTime: 0,

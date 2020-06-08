@@ -26,7 +26,7 @@ class DebugHttpTransport extends Component<
   },
   {
     text: string,
-  }
+  },
 > {
   state = {
     text: "",

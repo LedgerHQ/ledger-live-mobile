@@ -9,7 +9,7 @@ import colors from "../colors";
 
 type Props = {
   isChecked: boolean,
-  onChange?: (boolean) => void,
+  onChange?: boolean => void,
   disabled?: boolean,
   style?: *,
 };

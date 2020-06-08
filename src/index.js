@@ -70,12 +70,12 @@ function App({ importDataString }: AppProps) {
 
   const getCountervaluesChanged = useCallback(
     (a, b) => a.countervalues !== b.countervalues,
-    []
+    [],
   );
 
   const getSettingsChanged = useCallback(
     (a, b) => a.settings !== b.settings,
-    []
+    [],
   );
 
   const getAccountsChanged = useCallback((oldState: State, newState: State): ?{
@@ -84,11 +84,11 @@ function App({ importDataString }: AppProps) {
     if (oldState.accounts !== newState.accounts) {
       return {
         changed: newState.accounts.active
-          .filter((a) => {
-            const old = oldState.accounts.active.find((b) => a.id === b.id);
+          .filter(a => {
+            const old = oldState.accounts.active.find(b => a.id === b.id);
             return !old || old !== a;
           })
-          .map((a) => a.id),
+          .map(a => a.id),
       };
     }
     return null;
@@ -134,7 +134,7 @@ function App({ importDataString }: AppProps) {
 
 export default class Root extends Component<
   { importDataString?: string },
-  { appState: * }
+  { appState: * },
 > {
   initTimeout: *;
 

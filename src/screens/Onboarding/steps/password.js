@@ -33,7 +33,7 @@ class OnboardingStepPassword extends Component<
   OnboardingStepProps & {
     privacy: ?Privacy,
   },
-  { isModalOpened: boolean }
+  { isModalOpened: boolean },
 > {
   state = {
     isModalOpened: false,
@@ -148,6 +148,6 @@ export default withOnboardingContext(
   connect(
     createStructuredSelector({
       privacy: privacySelector,
-    })
-  )(OnboardingStepPassword)
+    }),
+  )(OnboardingStepPassword),
 );

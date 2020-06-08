@@ -55,8 +55,8 @@ const VoteModal = ({
   const { current: votesAvailable } = useRef(
     tronPower -
       votes
-        .filter((v) => v.address !== address)
-        .reduce((sum, { voteCount }) => sum + voteCount, 0)
+        .filter(v => v.address !== address)
+        .reduce((sum, { voteCount }) => sum + voteCount, 0),
   );
 
   const focusInput = useCallback(() => {
@@ -64,11 +64,11 @@ const VoteModal = ({
   }, [inputRef]);
 
   const handleChange = useCallback(
-    (text) => {
+    text => {
       setValue(parseInt(text || "0", 10));
       setUseAllAmount(false);
     },
-    [setValue]
+    [setValue],
   );
 
   const toggleUseAllAmount = useCallback(() => {
@@ -78,7 +78,7 @@ const VoteModal = ({
 
   const onContinue = useCallback(
     () => onChange({ address, voteCount: value }),
-    [address, onChange, value]
+    [address, onChange, value],
   );
 
   const remove = useCallback(() => onRemove(vote), [onRemove, vote]);

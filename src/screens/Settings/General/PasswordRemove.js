@@ -79,5 +79,5 @@ class PasswordRemove extends PureComponent<Props, State> {
 export default compose(
   // $FlowFixMe
   connect(null, mapDispatchToProps),
-  withTranslation()
+  withTranslation(),
 )(PasswordRemove);

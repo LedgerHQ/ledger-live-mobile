@@ -15,7 +15,7 @@ export default function OperationRowDate({ date }: Props) {
         hour: "2-digit",
         minute: "2-digit",
       }),
-    [date, locale]
+    [date, locale],
   );
 
   return `at ${localeTimeString}`;

@@ -53,7 +53,7 @@ export default function ValidateOnDevice({
   const Post = r && r.post;
   const noFees = r && r.disableFees && r.disableFees(transaction);
   const transRecipientWording = t(
-    `ValidateOnDevice.recipientWording.${transaction.mode || "send"}`
+    `ValidateOnDevice.recipientWording.${transaction.mode || "send"}`,
   );
   const recipientWording =
     transRecipientWording !==
@@ -63,7 +63,7 @@ export default function ValidateOnDevice({
 
   const transTitleWording = t(
     `ValidateOnDevice.title.${transaction.mode || "send"}`,
-    getDeviceModel(modelId)
+    getDeviceModel(modelId),
   );
   const titleWording =
     transTitleWording !== `ValidateOnDevice.title.${transaction.mode || "send"}`

@@ -61,7 +61,7 @@ type Props = BaseButtonProps & {
 
 const ButtonWrapped = (props: BaseButtonProps) => (
   <ButtonUseTouchable.Consumer>
-    {(useTouchable) => <Button {...props} useTouchable={useTouchable} />}
+    {useTouchable => <Button {...props} useTouchable={useTouchable} />}
   </ButtonUseTouchable.Consumer>
 );
 
@@ -71,7 +71,7 @@ class Button extends PureComponent<
     pending: boolean,
     spinnerOn: boolean,
     anim: Animated.Value,
-  }
+  },
 > {
   static defaultProps = {
     outline: true,
@@ -124,7 +124,7 @@ class Button extends PureComponent<
         clearTimeout(this.timeout);
         if (!this.unmounted) {
           this.setState(({ pending }) =>
-            pending ? { pending: false, spinnerOn: false } : null
+            pending ? { pending: false, spinnerOn: false } : null,
           );
 
           Animated.spring(this.state.anim, {
@@ -156,7 +156,7 @@ class Button extends PureComponent<
 
     if (__DEV__ && "style" in otherProps) {
       console.warn(
-        "Button props 'style' must not be used. Use 'containerStyle' instead."
+        "Button props 'style' must not be used. Use 'containerStyle' instead.",
       );
     }
 

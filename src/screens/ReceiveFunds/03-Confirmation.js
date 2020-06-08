@@ -79,7 +79,7 @@ export default function ReceiveConfirmation({ navigation, route }: Props) {
       if (!account) return;
       const mainAccount = getMainAccount(account, parentAccount);
 
-      sub.current = withDevice(deviceId)((transport) =>
+      sub.current = withDevice(deviceId)(transport =>
         mainAccount.id.startsWith("mock")
           ? // $FlowFixMe
             of({}).pipe(delay(1000), rejectionOp())
@@ -89,14 +89,14 @@ export default function ReceiveConfirmation({ navigation, route }: Props) {
                 currency: mainAccount.currency,
                 path: mainAccount.freshAddressPath,
                 verify: true,
-              })
-            )
+              }),
+            ),
       ).subscribe({
         complete: () => {
           setVerified(true);
           setAllowNavigation(true);
         },
-        error: (error) => {
+        error: error => {
           if (error && error.name !== "UserRefusedAddress") {
             logger.critical(error);
           }
@@ -106,7 +106,7 @@ export default function ReceiveConfirmation({ navigation, route }: Props) {
         },
       });
     },
-    [account, parentAccount]
+    [account, parentAccount],
   );
 
   function contactUs(): void {

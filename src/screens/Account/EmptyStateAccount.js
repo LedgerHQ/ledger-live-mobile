@@ -74,7 +74,7 @@ class EmptyStateAccount extends PureComponent<{
                   {account &&
                     account.currency &&
                     listTokenTypesForCryptoCurrency(mainAccount.currency).join(
-                      ", "
+                      ", ",
                     )}
                   {"tokens"}
                 </LText>

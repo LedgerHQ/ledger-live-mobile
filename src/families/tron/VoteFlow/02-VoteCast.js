@@ -86,7 +86,7 @@ export default function VoteCast({ route, navigation }: Props) {
 
   const votesRemaining = useMemo(
     () => tronPower - votes.reduce((sum, { voteCount }) => sum + voteCount, 0),
-    [tronPower, votes]
+    [tronPower, votes],
   );
 
   const [editVote, setEditVote] = useState();
@@ -96,18 +96,18 @@ export default function VoteCast({ route, navigation }: Props) {
   const onChange = useCallback(
     (vote: Vote) => {
       const nextVotes = [...votes];
-      const index = votes.findIndex((v) => v.address === vote.address);
+      const index = votes.findIndex(v => v.address === vote.address);
 
       if (index >= 0) nextVotes[index] = vote;
       else if (nextVotes.length < 5) nextVotes.push(vote);
       setTransaction(
         bridge.updateTransaction(transaction, {
           votes: nextVotes,
-        })
+        }),
       );
       closeEditVote();
     },
-    [votes, setTransaction, bridge, transaction, closeEditVote]
+    [votes, setTransaction, bridge, transaction, closeEditVote],
   );
 
   const openEditModal = useCallback(
@@ -115,28 +115,28 @@ export default function VoteCast({ route, navigation }: Props) {
       setEditVote({ vote, name });
       setopenIndex(-1);
     },
-    [setEditVote]
+    [setEditVote],
   );
 
   const [openIndex, setopenIndex] = useState(-1);
 
   const onOpen = useCallback(
-    (i) => {
+    i => {
       setopenIndex(i);
     },
-    [setopenIndex]
+    [setopenIndex],
   );
 
   const onRemove = useCallback(
     (vote: Vote) => {
       setTransaction(
         bridge.updateTransaction(transaction, {
-          votes: votes.filter((v) => v.address !== vote.address),
-        })
+          votes: votes.filter(v => v.address !== vote.address),
+        }),
       );
       closeEditVote();
     },
-    [votes, setTransaction, bridge, transaction, closeEditVote]
+    [votes, setTransaction, bridge, transaction, closeEditVote],
   );
 
   const onBack = useCallback(() => {

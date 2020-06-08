@@ -39,7 +39,7 @@ export default (opts: Opts) => {
 
     static listen(observer: *) {
       // $FlowFixMe
-      return Observable.create((observer) => {
+      return Observable.create(observer => {
         let timeout;
 
         const unsubscribe = () => {
@@ -56,7 +56,7 @@ export default (opts: Opts) => {
               type: "add",
               descriptor: createTransportDeviceMock(
                 "mock_2",
-                "Nano X de Arnaud"
+                "Nano X de Arnaud",
               ),
             });
             timeout = setTimeout(() => {
@@ -64,7 +64,7 @@ export default (opts: Opts) => {
                 type: "add",
                 descriptor: createTransportDeviceMock(
                   "mock_3",
-                  "Nano X de Didier Duchmol"
+                  "Nano X de Didier Duchmol",
                 ),
               });
             }, 2000);
@@ -82,7 +82,7 @@ export default (opts: Opts) => {
       return new BluetoothTransportMock(
         typeof device === "string"
           ? createTransportDeviceMock(device, "")
-          : device
+          : device,
       );
     }
 

@@ -54,7 +54,7 @@ export default function FreezeInfo({ navigation, route }: Props) {
             <Trans i18nKey="freeze.info.steps.0" />,
             <Trans i18nKey="freeze.info.steps.1" />,
             <Trans i18nKey="freeze.info.steps.2" />,
-          ].map((wording) => (
+          ].map(wording => (
             <LText secondary semiBold style={styles.bulletItem}>
               {wording}
             </LText>

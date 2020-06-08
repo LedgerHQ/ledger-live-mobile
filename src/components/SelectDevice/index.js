@@ -90,7 +90,7 @@ const getAll = ({ knownDevices }, { devices }): Device[] =>
       deviceName: d.name || "",
       wired: false,
       modelId: "nanoX",
-    }))
+    })),
   );
 
 class SelectDevice extends Component<SelectDeviceProps, State> {
@@ -188,7 +188,7 @@ class SelectDevice extends Component<SelectDeviceProps, State> {
       opts = {
         onDone: (deviceId) => {
           const device = getAll(this.props, this.state).find(
-            (d) => d.deviceId === deviceId
+            (d) => d.deviceId === deviceId,
           );
           if (device) {
             this.onSelect(device);
@@ -227,7 +227,7 @@ class SelectDevice extends Component<SelectDeviceProps, State> {
     const [ble, other] = all.reduce(
       ([ble, other], device) =>
         device.wired ? [ble, [...other, device]] : [[...ble, device], other],
-      [[], []]
+      [[], []],
     );
 
     const hasUSBSection = Platform.OS === "android" || other.length > 0;

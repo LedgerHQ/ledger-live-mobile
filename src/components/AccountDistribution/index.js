@@ -17,18 +17,18 @@ const mapStateToProps = (state, props) => {
   const { accounts } = props;
   const total = accounts.reduce(
     (total, a) => total.plus(a.balance),
-    BigNumber(0)
+    BigNumber(0),
   );
 
   return {
-    accountDistribution: accounts.map((a) => ({
+    accountDistribution: accounts.map(a => ({
       account: a,
       currency: getAccountCurrency(a),
       distribution: a.balance.div(total).toFixed(2),
       amount: a.balance,
       countervalue: calculateCountervalueSelector(state)(
         getAccountCurrency(a),
-        a.balance
+        a.balance,
       ),
     })),
     counterValueCurrency: counterValueCurrencySelector,
@@ -49,7 +49,7 @@ const AccountDistribution = ({
         values={{ count: accountDistribution.length }}
       />
     </LText>
-    {accountDistribution.map((item) => (
+    {accountDistribution.map(item => (
       <View style={styles.root} key={item.account.id}>
         <Row item={item} />
       </View>

@@ -30,7 +30,7 @@ export default function EditFreeUnit({ account, field }: Props) {
   const fieldByFamily = useFieldByFamily(field);
 
   const [fee, setFee] = useState<BigNumber | null | typeof undefined>(
-    fieldByFamily
+    fieldByFamily,
   );
   const [isModalOpened, setIsModalOpened] = useState(false);
   const [isValid, setIsValid] = useState(true);

@@ -51,7 +51,7 @@ export default function ConnectDevice({ navigation, route }: Props) {
         status,
       });
     },
-    [navigation, status, transaction, route.params]
+    [navigation, status, transaction, route.params],
   );
 
   if (!account) return null;

@@ -18,7 +18,7 @@ export default function ImportBridgeStreamData({ title, dataStr }: Props) {
       title={title}
       onPress={() => {
         const data = JSON.parse(
-          Buffer.from(dataStr, "base64").toString("utf8")
+          Buffer.from(dataStr, "base64").toString("utf8"),
         );
         navigation.navigate(NavigatorName.ImportAccounts, {
           screen: ScreenName.ScanAccounts,

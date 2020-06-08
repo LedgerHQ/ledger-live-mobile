@@ -23,7 +23,7 @@ import Close from "../../../icons/Close";
 
 type Props = {
   blacklistedTokenIds: string[],
-  showToken: (string) => void,
+  showToken: string => void,
   navigation: any,
 };
 
@@ -55,7 +55,7 @@ const AccountsSettings = ({ blacklistedTokenIds, showToken }: Props) => {
         </LText>
       </View>
     ),
-    []
+    [],
   );
 
   const renderItem = useCallback(
@@ -74,10 +74,10 @@ const AccountsSettings = ({ blacklistedTokenIds, showToken }: Props) => {
         </TouchableOpacity>
       </View>
     ),
-    [showToken]
+    [showToken],
   );
 
-  const keyExtractor = useCallback((token) => token.id, []);
+  const keyExtractor = useCallback(token => token.id, []);
 
   const renderHeader = useCallback(
     () => (
@@ -95,7 +95,7 @@ const AccountsSettings = ({ blacklistedTokenIds, showToken }: Props) => {
         </SettingsRow>
       </>
     ),
-    []
+    [],
   );
 
   const sections = useMemo(() => {
@@ -104,7 +104,7 @@ const AccountsSettings = ({ blacklistedTokenIds, showToken }: Props) => {
       const token = findTokenById(tokenId);
       if (token) {
         const parentCurrency = token.parentCurrency;
-        const index = tmpSections.findIndex((s) => s.key === parentCurrency.id);
+        const index = tmpSections.findIndex(s => s.key === parentCurrency.id);
         if (index < 0) {
           tmpSections.push({
             key: parentCurrency.id,
@@ -171,5 +171,5 @@ const styles = StyleSheet.create({
 });
 
 export default compose(connect(mapStateToProps, mapDispatchToProps))(
-  AccountsSettings
+  AccountsSettings,
 );

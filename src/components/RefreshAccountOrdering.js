@@ -41,5 +41,5 @@ class RefreshAccountsOrdering extends PureComponent<{
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(RefreshAccountsOrdering);

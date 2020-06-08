@@ -12,7 +12,7 @@ class DebugBLE extends Component<
   },
   {
     renderCrash: boolean,
-  }
+  },
 > {
   state = {
     renderCrash: false,

@@ -120,7 +120,7 @@ export default function CoinifyWidget({ mode, account, meta }: Props) {
     widgetConfig.transferInMedia = "";
   }
 
-  const handleMessage = useCallback((message) => {
+  const handleMessage = useCallback(message => {
     const { type, event, context } = JSON.parse(message.nativeEvent.data);
     if (type !== "event") return;
     if (event === "misc.opened-external-link") {
@@ -146,7 +146,7 @@ export default function CoinifyWidget({ mode, account, meta }: Props) {
   }, []);
 
   const settleTrade = useCallback(
-    (status) => {
+    status => {
       if (account && webView.current) {
         webView.current.postMessage(
           JSON.stringify({
@@ -156,7 +156,7 @@ export default function CoinifyWidget({ mode, account, meta }: Props) {
               address: account.freshAddress,
               status,
             },
-          })
+          }),
         );
         if (status === "accepted") {
           track("Coinify Confirm Buy End", {
@@ -165,7 +165,7 @@ export default function CoinifyWidget({ mode, account, meta }: Props) {
         }
       }
     },
-    [account]
+    [account],
   );
 
   const url = `${coinifyConfig.url}?${querystring.stringify(widgetConfig)}`;

@@ -21,7 +21,7 @@ type Props = {
   color: string,
   isInteractive: boolean,
   onItemHover?: (?Item) => void,
-  mapValue: (Item) => number,
+  mapValue: Item => number,
   shape: string,
 };
 
@@ -51,7 +51,7 @@ export default class Graph extends PureComponent<Props> {
 
     const maxY = mapValue(maxBy(data, mapValue));
 
-    const yExtractor = (d) => y(mapValue(d));
+    const yExtractor = d => y(mapValue(d));
 
     const curve = d3shape[shape];
 
@@ -67,14 +67,14 @@ export default class Graph extends PureComponent<Props> {
 
     const area = d3shape
       .area()
-      .x((d) => x(d.date))
+      .x(d => x(d.date))
       .y0(y(0))
       .y1(yExtractor)
       .curve(curve)(data);
 
     const line = d3shape
       .line()
-      .x((d) => x(d.date))
+      .x(d => x(d.date))
       .y(yExtractor)
       .curve(curve)(data);
 

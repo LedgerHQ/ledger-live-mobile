@@ -65,7 +65,7 @@ const InfoModal = ({
     {desc ? <LText style={styles.modalDesc}>{desc}</LText> : null}
     {bullets ? (
       <View style={styles.bulletsContainer}>
-        {bullets.map((b) => (
+        {bullets.map(b => (
           <BulletLine key={b.key}>{b.val}</BulletLine>
         ))}
       </View>

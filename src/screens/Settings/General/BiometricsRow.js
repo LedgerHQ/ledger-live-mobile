@@ -29,7 +29,7 @@ export default function BiometricsRow({ iconLeft }: Props) {
         dispatch(setPrivacyBiometrics(false));
       }
     },
-    [dispatch, validationPending]
+    [dispatch, validationPending],
   );
 
   const onSuccess = useCallback(() => {
@@ -38,14 +38,14 @@ export default function BiometricsRow({ iconLeft }: Props) {
   }, [dispatch]);
 
   const onError = useCallback(
-    (error) => {
+    error => {
       setValidationPending(false);
       Alert.alert(
         t("auth.failed.title"),
-        `${t("auth.failed.denied")}\n${String(error || "")}`
+        `${t("auth.failed.denied")}\n${String(error || "")}`,
       );
     },
-    [t]
+    [t],
   );
 
   useBiometricAuth({

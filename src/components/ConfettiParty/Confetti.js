@@ -17,7 +17,7 @@ class Confetti extends PureComponent<
   },
   {
     progress: Animated.Value,
-  }
+  },
 > {
   state = {
     progress: new Animated.Value(0),

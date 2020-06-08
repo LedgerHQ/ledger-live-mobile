@@ -69,7 +69,7 @@ export default function SendAmount({ navigation, route }: Props) {
         parentAccount,
         transaction: debouncedTransaction,
       })
-      .then((estimate) => {
+      .then(estimate => {
         if (cancelled) return;
 
         setMaxSpendable(estimate);
@@ -82,13 +82,13 @@ export default function SendAmount({ navigation, route }: Props) {
   }, [account, parentAccount, debouncedTransaction]);
 
   const onChange = useCallback(
-    (amount) => {
+    amount => {
       if (!amount.isNaN()) {
         const bridge = getAccountBridge(account, parentAccount);
         setTransaction(bridge.updateTransaction(transaction, { amount }));
       }
     },
-    [setTransaction, account, parentAccount, transaction]
+    [setTransaction, account, parentAccount, transaction],
   );
 
   const toggleUseAllAmount = useCallback(() => {
@@ -99,7 +99,7 @@ export default function SendAmount({ navigation, route }: Props) {
       bridge.updateTransaction(transaction, {
         amount: BigNumber(0),
         useAllAmount: !transaction.useAllAmount,
-      })
+      }),
     );
   }, [setTransaction, account, parentAccount, transaction]);
 

@@ -19,10 +19,10 @@ export default function ExperimentalSettings() {
         <View style={styles.disclaimerContainer}>
           <Disclaimer />
         </View>
-        {experimentalFeatures.map((feat) =>
+        {experimentalFeatures.map(feat =>
           !feat.shadow || (feat.shadow && !isEnvDefault(feat.name)) ? (
             <FeatureRow key={feat.name} feature={feat} />
-          ) : null
+          ) : null,
         )}
       </View>
     </NavigationScrollView>
