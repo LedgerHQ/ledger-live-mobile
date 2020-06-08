@@ -183,7 +183,7 @@
     "jest": "^26.0.1",
     "jetifier": "^1.6.5",
     "metro-react-native-babel-preset": "^0.58.0",
-    "prettier": "^2.0.5",
+    "prettier": "1.19.1",
     "react-native-debugger-open": "^0.3.24",
     "react-test-renderer": "16.11.0",
     "rn-nodeify": "^10.2.0",

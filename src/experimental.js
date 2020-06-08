@@ -72,7 +72,7 @@ export const isReadOnly = (key: EnvName) => key in Config;
 
 export const enabledExperimentalFeatures = (): string[] =>
   // $FlowFixMe
-  experimentalFeatures.map((e) => e.name).filter((k) => isEnvDefault(k));
+  experimentalFeatures.map(e => e.name).filter(k => isEnvDefault(k));
 
 (async () => {
   const envs = await getStorageEnv();
@@ -88,10 +88,7 @@ export const enabledExperimentalFeatures = (): string[] =>
   /* eslint-enable guard-for-in */
 
   const saveEnvs = async (name, value) => {
-    if (
-      experimentalFeatures.find((f) => f.name === name) &&
-      !isReadOnly(name)
-    ) {
+    if (experimentalFeatures.find(f => f.name === name) && !isReadOnly(name)) {
       await setStorageEnvs(name, value);
     }
   };

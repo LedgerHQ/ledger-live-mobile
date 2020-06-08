@@ -19,11 +19,10 @@ import type { State } from "../reducers";
 
 const sessionId = uuid();
 
-const appVersion = `${VersionNumber.appVersion || ""} (${
-  VersionNumber.buildVersion || ""
-})`;
+const appVersion = `${VersionNumber.appVersion ||
+  ""} (${VersionNumber.buildVersion || ""})`;
 
-const extraProperties = (store) => {
+const extraProperties = store => {
   const state: State = store.getState();
   const { localeIdentifier, preferredLanguages } = Locale.constants();
   const devices = knownDevicesSelector(state);

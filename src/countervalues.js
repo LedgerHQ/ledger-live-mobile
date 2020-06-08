@@ -31,14 +31,14 @@ const LEDGER_COUNTERVALUES_API = "https://countervalues.api.live.ledger.com";
 export const pairsSelector = createSelector(
   currenciesSelector,
   counterValueCurrencySelector,
-  (state) => state,
+  state => state,
   (currencies, counterValueCurrency, state) => {
     if (currencies.length === 0) return [];
     const intermediaries = uniq(
-      currencies.map((c) => intermediaryCurrency(c, counterValueCurrency)),
-    ).filter((c) => c !== counterValueCurrency);
+      currencies.map(c => intermediaryCurrency(c, counterValueCurrency)),
+    ).filter(c => c !== counterValueCurrency);
     return intermediaries
-      .map((from) => ({
+      .map(from => ({
         from,
         to: counterValueCurrency,
         exchange: exchangeSettingsForPairSelector(state, {
@@ -48,7 +48,7 @@ export const pairsSelector = createSelector(
       }))
       .concat(
         currencies
-          .map((from) => {
+          .map(from => {
             if (intermediaries.includes(from) || from.disableCountervalue)
               return null;
             const to = intermediaryCurrency(from, counterValueCurrency);
@@ -59,7 +59,7 @@ export const pairsSelector = createSelector(
             });
             return { from, to, exchange };
           })
-          .filter((p) => p),
+          .filter(p => p),
       );
   },
 );
@@ -104,7 +104,7 @@ implementCountervalues({
     ? (...args) => console.log("CounterValues:", ...args) // eslint-disable-line no-console
     : undefined,
   getAPIBaseURL: () => LEDGER_COUNTERVALUES_API,
-  storeSelector: (state) => state.countervalues,
+  storeSelector: state => state.countervalues,
   pairsSelector,
   setExchangePairsAction,
   addExtraPollingHooks,
@@ -129,11 +129,11 @@ let syncCache = listCryptoCurrencies(true).sort((a, b) =>
 export const getFullListSortedCryptoCurrencies: () => PC = () => {
   if (!sortCache) {
     sortCache = CounterValues.fetchTickersByMarketcap().then(
-      (tickers) => {
+      tickers => {
         const list = listCryptoCurrencies(true).slice(0);
         const prependList = [];
-        tickers.forEach((ticker) => {
-          const item = list.find((c) => c.ticker === ticker);
+        tickers.forEach(ticker => {
+          const item = list.find(c => c.ticker === ticker);
           if (item) {
             list.splice(list.indexOf(item), 1);
             prependList.push(item);

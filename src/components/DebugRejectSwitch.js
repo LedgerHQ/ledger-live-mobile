@@ -20,7 +20,7 @@ export const rejectionOp = (createError: () => Error = defaultErrorCreator) => <
 ): Observable<T> =>
   !Config.MOCK
     ? observable
-    : Observable.create((o) => {
+    : Observable.create(o => {
         const s = observable.subscribe(o);
         const s2 = rejections
           .pipe(flatMap(() => throwError(createError())))

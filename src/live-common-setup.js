@@ -73,11 +73,11 @@ registerTransportModule({
     }
   },
 
-  disconnect: (id) =>
+  disconnect: id =>
     id.startsWith("usb|")
       ? Promise.resolve() // nothing to do
       : null,
-  discovery: Observable.create((o) => HIDTransport.listen(o)).pipe(
+  discovery: Observable.create(o => HIDTransport.listen(o)).pipe(
     map(({ type, descriptor, deviceModel }) => {
       const name = deviceModel.productName;
       return {
@@ -95,16 +95,16 @@ registerTransportModule({
 let DebugHttpProxy;
 const httpdebug: TransportModule = {
   id: "httpdebug",
-  open: (id) =>
+  open: id =>
     id.startsWith("httpdebug|") ? DebugHttpProxy.open(id.slice(10)) : null,
-  disconnect: (id) =>
+  disconnect: id =>
     id.startsWith("httpdebug|")
       ? Promise.resolve() // nothing to do
       : null,
 };
 if (__DEV__ && Config.DEVICE_PROXY_URL) {
   DebugHttpProxy = withStaticURLs(Config.DEVICE_PROXY_URL.split("|"));
-  httpdebug.discovery = Observable.create((o) => DebugHttpProxy.listen(o)).pipe(
+  httpdebug.discovery = Observable.create(o => DebugHttpProxy.listen(o)).pipe(
     map(({ type, descriptor }) => ({
       type,
       id: `httpdebug|${descriptor}`,
@@ -120,6 +120,6 @@ registerTransportModule(httpdebug);
 
 registerTransportModule({
   id: "ble",
-  open: (id) => BluetoothTransport.open(id),
-  disconnect: (id) => BluetoothTransport.disconnect(id),
+  open: id => BluetoothTransport.open(id),
+  disconnect: id => BluetoothTransport.disconnect(id),
 });

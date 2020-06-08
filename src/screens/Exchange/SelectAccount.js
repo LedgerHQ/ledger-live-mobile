@@ -1,13 +1,12 @@
 /* @flow */
 import React, { useCallback } from "react";
 import { View, StyleSheet, FlatList } from "react-native";
-// $FlowFixMe
-import SafeAreaView from "react-native-safe-area-view";
-import type { NavigationScreenProp } from "react-navigation";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { Trans, useTranslation } from "react-i18next";
 import type {
   Account,
   AccountLikeArray,
+  CryptoCurrency,
 } from "@ledgerhq/live-common/lib/types";
 import { useSelector } from "react-redux";
 import {
@@ -29,7 +28,9 @@ import { NavigatorName } from "../../const";
 const SEARCH_KEYS = ["name", "unit.code", "token.name", "token.ticker"];
 const forceInset = { bottom: "always" };
 
-type Navigation = NavigationScreenProp<{ params: {} }>;
+type RouteParams = {
+  currency: CryptoCurrency,
+};
 
 type Props = {
   accounts: Account[],
