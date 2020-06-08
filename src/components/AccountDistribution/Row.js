@@ -47,12 +47,12 @@ export default function Row({
         parentId: parentAccount ? parentAccount.id : undefined,
       });
     },
-    [account, navigation],
+    [account, navigation]
   );
 
   const parentAccount =
     account.type !== "Account"
-      ? accounts.find(a => a.id === account.parentId)
+      ? accounts.find((a) => a.id === account.parentId)
       : null;
   const color = getCurrencyColor(currency);
   const percentage = Math.round(distribution * 1e4) / 1e2;

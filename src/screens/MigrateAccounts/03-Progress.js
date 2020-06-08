@@ -39,13 +39,13 @@ export default function Progress({ navigation, route }: Props) {
   const accounts = useSelector(accountsSelector);
   const blacklistedTokenIds = useSelector(blacklistedTokenIdsSelector);
   const migratableAccounts = useSelector(migratableAccountsSelector);
-  const currencyIds = useSelector(state =>
+  const currencyIds = useSelector((state) =>
     migratableAccountsSelector(state)
       .reduce(
         (c, a) => (c.includes(a.currency.id) ? c : [...c, a.currency.id]),
-        [],
+        []
       )
-      .sort(),
+      .sort()
   );
   const dispatch = useDispatch();
   const [status, setStatus] = useState("pending");
@@ -116,19 +116,19 @@ export default function Progress({ navigation, route }: Props) {
         reduce(
           (all: Account[], event: ScanAccountEvent) =>
             all.concat(event.account),
-          [],
-        ),
+          []
+        )
       )
       .subscribe({
-        next: scannedAccounts => {
+        next: (scannedAccounts) => {
           dispatch(
             setAccounts(
-              migrateAccounts({ scannedAccounts, existingAccounts: accounts }),
-            ),
+              migrateAccounts({ scannedAccounts, existingAccounts: accounts })
+            )
           );
           setStatus("done");
         },
-        error: err => {
+        error: (err) => {
           logger.critical(err);
           setStatus("error");
           setError(err);

@@ -14,7 +14,7 @@ class KeyboardBackgroundDismiss extends PureComponent<Props> {
     if (Platform.OS === "android") {
       this.keyboardDidHideListener = Keyboard.addListener(
         "keyboardDidHide",
-        Keyboard.dismiss,
+        Keyboard.dismiss
       );
     }
   }

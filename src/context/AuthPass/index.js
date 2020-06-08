@@ -36,7 +36,7 @@ let wasUnlocked = false;
 
 class AuthPass extends PureComponent<Props, State> {
   setEnabled = (enabled: boolean) => {
-    this.setState(prevState => ({
+    this.setState((prevState) => ({
       skipLockCount: prevState.skipLockCount + (enabled ? 1 : -1),
     }));
   };
@@ -65,7 +65,7 @@ class AuthPass extends PureComponent<Props, State> {
 
   appInBg: number;
 
-  handleAppStateChange = nextAppState => {
+  handleAppStateChange = (nextAppState) => {
     if (
       this.state.appState.match(/inactive|background/) &&
       nextAppState === "active" &&
@@ -96,7 +96,7 @@ class AuthPass extends PureComponent<Props, State> {
     this.unlock();
   };
 
-  onError = error => {
+  onError = (error) => {
     this.setState({ authModalOpen: false });
     this.setState({
       biometricsError: error,
@@ -113,7 +113,7 @@ class AuthPass extends PureComponent<Props, State> {
         isLocked: true,
         biometricsError: null,
       },
-      () => this.auth(),
+      () => this.auth()
     );
   };
 

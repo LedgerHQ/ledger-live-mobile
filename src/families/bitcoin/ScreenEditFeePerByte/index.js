@@ -49,9 +49,9 @@ function BitcoinEditFeePerByte({ navigation, route }: Props) {
     : [];
   const selectedItem =
     feePerByte &&
-    items.find(item => item.feePerByte && item.feePerByte.eq(feePerByte));
+    items.find((item) => item.feePerByte && item.feePerByte.eq(feePerByte));
   const [focusedItemKey, setFocusedItemKey] = useState(
-    selectedItem ? selectedItem.key : "custom",
+    selectedItem ? selectedItem.key : "custom"
   );
   const [error, setError] = useState();
 
@@ -88,7 +88,7 @@ function BitcoinEditFeePerByte({ navigation, route }: Props) {
       <KeyboardView style={styles.container}>
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <View style={{ flex: 1 }}>
-            {items.map(item => (
+            {items.map((item) => (
               <FeesRow
                 key={item.key}
                 itemKey={item.key}

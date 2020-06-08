@@ -31,7 +31,7 @@ const UninstallAllModal = ({ isOpened, onClose, onConfirm }: Props) => {
         event: "ManagerUninstallAllCancel",
       },
     ],
-    [onConfirm, onClose],
+    [onConfirm, onClose]
   );
 
   return (

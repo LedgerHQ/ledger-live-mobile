@@ -13,7 +13,7 @@ const deviceStorage = {
       const value = cache[key];
       return Promise.resolve(value);
     }
-    return Promise.resolve(key.map(k => cache[k]));
+    return Promise.resolve(key.map((k) => cache[k]));
   },
 
   /**
@@ -53,7 +53,7 @@ const deviceStorage = {
    */
   delete(key) {
     if (Array.isArray(key)) {
-      key.forEach(k => {
+      key.forEach((k) => {
         delete cache[k];
       });
     } else {
@@ -87,8 +87,8 @@ const deviceStorage = {
     }
     return Promise.reject(
       new Error(
-        `Existing value for key "${key}" must be of type null or Array, received ${typeof currentValue}.`,
-      ),
+        `Existing value for key "${key}" must be of type null or Array, received ${typeof currentValue}.`
+      )
     );
   },
 };

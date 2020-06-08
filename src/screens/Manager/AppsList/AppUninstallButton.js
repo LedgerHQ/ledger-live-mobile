@@ -13,7 +13,7 @@ import Touchable from "../../../components/Touchable";
 type Props = {
   app: App,
   state: State,
-  dispatch: Action => void,
+  dispatch: (Action) => void,
   setAppUninstallWithDependencies: ({ dependents: App[], app: App }) => void,
 };
 

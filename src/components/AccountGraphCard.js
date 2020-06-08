@@ -43,7 +43,7 @@ type Props = {
   valueChange: ValueChange,
   countervalueAvailable: boolean,
   counterValueCurrency: Currency,
-  setSelectedTimeRange: string => void,
+  setSelectedTimeRange: (string) => void,
   useCounterValue?: boolean,
   renderTitle?: ({ counterValueUnit: Unit, item: Item }) => React$Node,
   renderAccountSummary: () => ?React$Node,
@@ -64,13 +64,13 @@ class AccountGraphCard extends PureComponent<Props, State> {
     { key: "year", label: <Trans i18nKey="common:time.year" /> },
   ];
 
-  onTimeRangeChange = item => this.props.setSelectedTimeRange(item.key);
+  onTimeRangeChange = (item) => this.props.setSelectedTimeRange(item.key);
 
-  onItemHover = hoveredItem => this.setState({ hoveredItem });
+  onItemHover = (hoveredItem) => this.setState({ hoveredItem });
 
-  mapCryptoValue = d => d.value.toNumber();
+  mapCryptoValue = (d) => d.value.toNumber();
   // $FlowFixMe
-  mapCounterValue = d => (d.countervalue ? d.countervalue.toNumber() : 0);
+  mapCounterValue = (d) => (d.countervalue ? d.countervalue.toNumber() : 0);
 
   render() {
     const {

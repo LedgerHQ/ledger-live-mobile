@@ -16,7 +16,7 @@ import {
  */
 export const opRetentionStategy = (maxDaysOld: number, keepFirst: number) => (
   op: Operation,
-  index: number,
+  index: number
 ): boolean =>
   index < keepFirst || Date.now() - op.date < 1000 * 60 * 60 * 24 * maxDaysOld;
 

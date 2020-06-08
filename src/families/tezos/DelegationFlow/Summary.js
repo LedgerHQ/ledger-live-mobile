@@ -153,8 +153,8 @@ export default function DelegationSummary({ navigation, route }: Props) {
       setTransaction(
         getAccountBridge(account, parentAccount).updateTransaction(
           transaction,
-          patch,
-        ),
+          patch
+        )
       );
     }
   }, [
@@ -187,7 +187,7 @@ export default function DelegationSummary({ navigation, route }: Props) {
           useNativeDriver: true,
         }),
         Animated.delay(1000),
-      ]),
+      ])
     ).start();
     return () => {
       rotateAnim.setValue(0);

@@ -45,7 +45,7 @@ const AnimatedSectionList = createNativeWrapper(
   {
     disallowInterruption: true,
     shouldCancelWhenOutside: false,
-  },
+  }
 );
 const List = globalSyncRefreshControl(AnimatedSectionList);
 
@@ -102,10 +102,10 @@ export default function PortfolioScreen({ navigation }: Props) {
     index: number,
     section: SectionBase<*>,
   }) {
-    const account = allAccounts.find(a => a.id === item.accountId);
+    const account = allAccounts.find((a) => a.id === item.accountId);
     const parentAccount =
       account && account.type !== "Account"
-        ? accounts.find(a => a.id === account.parentId)
+        ? accounts.find((a) => a.id === account.parentId)
         : null;
 
     if (!account) return null;

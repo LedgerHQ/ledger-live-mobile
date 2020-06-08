@@ -99,7 +99,7 @@ const Manage = ({
 
   const effectiveTimeToUnfreeze = Math.min(
     timeToUnfreezeBandwidth,
-    timeToUnfreezeEnergy,
+    timeToUnfreezeEnergy
   );
 
   const canUnfreeze =
@@ -119,7 +119,7 @@ const Manage = ({
       if (selection)
         onNavigate(selection, { ...options, params: { accountId } });
     },
-    [onCloseModal, onNavigate, accountId],
+    [onCloseModal, onNavigate, accountId]
   );
 
   return (

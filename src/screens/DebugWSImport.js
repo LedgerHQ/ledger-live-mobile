@@ -14,7 +14,7 @@ const forceInset = { bottom: "always" };
 
 class DebugWSImport extends Component<
   { navigation: any },
-  { ip: string, secret: string, scanning: boolean },
+  { ip: string, secret: string, scanning: boolean }
 > {
   state = {
     secret: "",
@@ -33,7 +33,7 @@ class DebugWSImport extends Component<
           ws.send(secret);
         };
 
-        ws.onmessage = event => {
+        ws.onmessage = (event) => {
           this.props.navigation.navigate(ScreenName.DisplayResult, {
             // $FlowFixMe
             result: decode(event.data),

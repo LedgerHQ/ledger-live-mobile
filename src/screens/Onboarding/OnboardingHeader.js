@@ -37,8 +37,8 @@ export default function OnboardingHeader({
   const { t } = useTranslation();
 
   const steps = getStep(mode, firstTimeOnboarding);
-  const visibleSteps = steps.filter(s => !s.isGhost);
-  const indexInSteps = visibleSteps.findIndex(s => s.id === stepId);
+  const visibleSteps = steps.filter((s) => !s.isGhost);
+  const indexInSteps = visibleSteps.findIndex((s) => s.id === stepId);
   const stepMsg = t("onboarding.stepCount", {
     current: indexInSteps + 1,
     total: visibleSteps.length,

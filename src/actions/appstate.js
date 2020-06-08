@@ -4,7 +4,7 @@ import { isConnectedSelector } from "../reducers/appstate";
 
 export const syncIsConnected = (isConnected: boolean) => (
   dispatch: *,
-  getState: *,
+  getState: *
 ) => {
   const currently = isConnectedSelector(getState());
   if (currently !== isConnected) {

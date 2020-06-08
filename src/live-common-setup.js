@@ -86,7 +86,7 @@ registerTransportModule({
         id: `usb|${JSON.stringify(descriptor)}`,
         name,
       };
-    }),
+    })
   ),
 });
 
@@ -109,7 +109,7 @@ if (__DEV__ && Config.DEVICE_PROXY_URL) {
       type,
       id: `httpdebug|${descriptor}`,
       name: descriptor,
-    })),
+    }))
   );
 } else {
   DebugHttpProxy = withStaticURLs([]);

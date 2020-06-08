@@ -35,7 +35,7 @@ const DBSave = <D, S>({
         await save(lense(state), changedStats); // we save it for real
         lastSavedState.current = state; // for the next round, we will be able to compare with latest successful state
       }, throttle),
-    [throttle],
+    [throttle]
   );
 
   useFlushMechanism(checkForSave);
@@ -52,7 +52,7 @@ const DBSave = <D, S>({
 export default DBSave;
 
 const flushes = [];
-export const flushAll = () => Promise.all(flushes.map(flush => flush()));
+export const flushAll = () => Promise.all(flushes.map((flush) => flush()));
 function useFlushMechanism({
   flush,
   cancel,

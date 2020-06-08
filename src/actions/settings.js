@@ -17,10 +17,10 @@ type SetExchangePairs = (
     from: Currency,
     to: Currency,
     exchange: ?string,
-  }>,
+  }>
 ) => *;
 
-export const setExchangePairsAction: SetExchangePairs = pairs => ({
+export const setExchangePairsAction: SetExchangePairs = (pairs) => ({
   type: "SETTINGS_SET_PAIRS",
   pairs,
 });
@@ -86,7 +86,7 @@ export const setSelectedTimeRange = (selectedTimeRange: string) => ({
 
 export const updateCurrencySettings = (
   ticker: string,
-  patch: $Shape<CurrencySettings>,
+  patch: $Shape<CurrencySettings>
 ) => ({
   type: "UPDATE_CURRENCY_SETTINGS",
   ticker,

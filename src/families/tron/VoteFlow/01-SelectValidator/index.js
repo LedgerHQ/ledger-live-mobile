@@ -92,20 +92,20 @@ export default function SelectValidator({ navigation, route }: Props) {
   const sortedSuperRepresentatives = useSortedSr(
     searchQuery,
     superRepresentatives,
-    votes || [],
+    votes || []
   );
 
   const onSelectSuperRepresentative = useCallback(
     ({ address }, selected) => {
       const newVotes = selected
-        ? votes.filter(v => v.address !== address)
+        ? votes.filter((v) => v.address !== address)
         : [...votes, { address, voteCount: 0 }];
       const tx = bridge.updateTransaction(transaction, {
         votes: newVotes,
       });
       setTransaction(tx);
     },
-    [bridge, setTransaction, transaction, votes],
+    [bridge, setTransaction, transaction, votes]
   );
 
   const onContinue = useCallback(() => {
@@ -138,19 +138,19 @@ export default function SelectValidator({ navigation, route }: Props) {
 
   const disabled = useMemo(
     () => votes.length === 0 || votes.length > SR_MAX_VOTES,
-    [votes],
+    [votes]
   );
 
   const renderItem = useCallback(
     ({ item }) => (
       <Item
         item={item}
-        selected={votes.some(v => v.address === item.address)}
+        selected={votes.some((v) => v.address === item.address)}
         disabled={remainingCount === 0}
         onSelectSuperRepresentative={onSelectSuperRepresentative}
       />
     ),
-    [onSelectSuperRepresentative, remainingCount, votes],
+    [onSelectSuperRepresentative, remainingCount, votes]
   );
 
   return (

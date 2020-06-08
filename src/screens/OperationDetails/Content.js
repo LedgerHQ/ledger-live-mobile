@@ -58,8 +58,8 @@ type Props = {
 export default function Content({ account, parentAccount, operation }: Props) {
   const navigation = useNavigation();
   const { t } = useTranslation();
-  const currencySettings = useSelector(s =>
-    currencySettingsForAccountSelector(s, { account }),
+  const currencySettings = useSelector((s) =>
+    currencySettingsForAccountSelector(s, { account })
   );
 
   const [isModalOpened, setIsModalOpened] = useState(false);
@@ -72,7 +72,7 @@ export default function Content({ account, parentAccount, operation }: Props) {
       navigation.navigate(ScreenName.Account, {
         accountId: account.id,
         parentId: parentAccount && parentAccount.id,
-      }),
+      })
     );
   }, [account.id, navigation, parentAccount]);
 
@@ -213,7 +213,7 @@ export default function Content({ account, parentAccount, operation }: Props) {
           </View>
           {subOperations.map((op, i) => {
             const opAccount = (account.subAccounts || []).find(
-              acc => acc.id === op.accountId,
+              (acc) => acc.id === op.accountId
             );
 
             if (!opAccount) return null;

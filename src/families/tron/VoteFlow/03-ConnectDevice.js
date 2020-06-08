@@ -33,7 +33,7 @@ export default function ConnectDevice({ navigation, route }: Props) {
 
   invariant(
     account && account.tronResources,
-    "account and tron resources required",
+    "account and tron resources required"
   );
 
   const { transaction, status } = useBridgeTransaction(() => {
@@ -51,7 +51,7 @@ export default function ConnectDevice({ navigation, route }: Props) {
         status,
       });
     },
-    [navigation, status, transaction, route.params],
+    [navigation, status, transaction, route.params]
   );
 
   if (!account) return null;

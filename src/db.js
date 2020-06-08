@@ -10,7 +10,7 @@ const ACCOUNTS_DB_PREFIX = "accounts.active.";
 
 export async function clearDb() {
   const list = await store.keys();
-  await store.delete(list.filter(k => k !== "user"));
+  await store.delete(list.filter((k) => k !== "user"));
 }
 
 export async function getUser(): Promise<{ id: string }> {
@@ -53,7 +53,7 @@ const formatAccountDBKey = (id: string): string => `${ACCOUNTS_DB_PREFIX}${id}`;
 
 /** get Db accounts keys */
 function onlyAccountsKeys(keys: string[]): Array<string> {
-  return keys.filter(key => key.indexOf(ACCOUNTS_DB_PREFIX) === 0);
+  return keys.filter((key) => key.indexOf(ACCOUNTS_DB_PREFIX) === 0);
 }
 
 // get accounts specific method to aggregate all account keys into the correct format
@@ -69,9 +69,9 @@ async function unsafeGetAccounts(): Promise<{ active: AccountRaw[] }> {
     if (keys.includes(ACCOUNTS_KEY_SORT)) {
       const ids = await store.get(ACCOUNTS_KEY_SORT);
       active = active
-        .map(a => [a, ids.indexOf(a.data.id)])
+        .map((a) => [a, ids.indexOf(a.data.id)])
         .sort((a, b) => a[1] - b[1])
-        .map(a => a[0]);
+        .map((a) => a[0]);
     }
     return { active };
   }
@@ -89,7 +89,7 @@ async function unsafeSaveAccounts(
   },
   stats?: ?{
     changed: string[],
-  },
+  }
 ): Promise<void> {
   log("db", "saving accounts...");
   const keys = await store.keys();
@@ -104,8 +104,8 @@ async function unsafeSaveAccounts(
   /** Find current DB accounts keys diff with app state to remove them */
   const deletedKeys =
     currentAccountKeys && currentAccountKeys.length
-      ? currentAccountKeys.filter(key =>
-          dbData.every(([accountKey]) => accountKey !== key),
+      ? currentAccountKeys.filter((key) =>
+          dbData.every(([accountKey]) => accountKey !== key)
         )
       : [];
 
@@ -118,7 +118,7 @@ async function unsafeSaveAccounts(
   await store.save([
     ...dbDataWithOnlyChanges,
     // also store an index of ids to keep sort in memory
-    [ACCOUNTS_KEY_SORT, newAccounts.map(a => a.data.id)],
+    [ACCOUNTS_KEY_SORT, newAccounts.map((a) => a.data.id)],
   ]);
 
   /** then delete potential removed keys */
@@ -130,16 +130,16 @@ async function unsafeSaveAccounts(
     "saved " +
       dbDataWithOnlyChanges.length +
       " accounts" +
-      (deletedKeys.length ? " and deleted " + deletedKeys.length : ""),
+      (deletedKeys.length ? " and deleted " + deletedKeys.length : "")
   );
 }
 
 export const getAccounts: typeof unsafeGetAccounts = atomicQueue(
-  unsafeGetAccounts,
+  unsafeGetAccounts
 );
 
 export const saveAccounts: typeof unsafeSaveAccounts = atomicQueue(
-  unsafeSaveAccounts,
+  unsafeSaveAccounts
 );
 
 async function migrateAccountsIfNecessary(): Promise<void> {

@@ -42,7 +42,7 @@ function setupDirtyHackToHandleLibcoreDoubleCallback() {
     try {
       if (
         e.message.match(
-          /only one callback may be registered to a function in a native module/,
+          /only one callback may be registered to a function in a native module/
         )
       ) {
         return;

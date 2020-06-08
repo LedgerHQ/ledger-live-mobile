@@ -31,7 +31,7 @@ const QuitManagerModal = ({
           ? "update"
           : "install"
         : "uninstall",
-    [uninstallQueue.length, installQueue.length],
+    [uninstallQueue.length, installQueue.length]
   );
 
   return (

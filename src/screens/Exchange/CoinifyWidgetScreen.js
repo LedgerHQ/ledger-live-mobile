@@ -29,7 +29,7 @@ export default function CoinifyWidgetScreen({ route }: Props) {
   const accountId = route.params.accountId;
   const mode = route.params.mode;
   const meta = route.params.meta;
-  const account = allAccounts.find(a => a.id === accountId);
+  const account = allAccounts.find((a) => a.id === accountId);
 
   const forceInset = { bottom: "always" };
 

@@ -31,7 +31,7 @@ type Props = {
   accountId: string,
   navigation: *,
   isLast: boolean,
-  onSetAccount: TokenAccount => void,
+  onSetAccount: (TokenAccount) => void,
 };
 
 const placeholderProps = {
@@ -71,20 +71,21 @@ const AccountRow = ({
         accountId: subAccount.id,
       });
     },
-    [accountId, navigation],
+    [accountId, navigation]
   );
 
   const onExpandSubAccountsPress = useCallback(() => {
-    setCollapsed(collapsed => !collapsed);
+    setCollapsed((collapsed) => !collapsed);
   }, []);
 
   const subAccounts = listSubAccounts(account);
 
   const isToken = listTokenTypesForCryptoCurrency(account.currency).length > 0;
 
-  const onSubAccountLongPress = useCallback(account => onSetAccount(account), [
-    onSetAccount,
-  ]);
+  const onSubAccountLongPress = useCallback(
+    (account) => onSetAccount(account),
+    [onSetAccount]
+  );
 
   return (
     <View style={styles.root}>

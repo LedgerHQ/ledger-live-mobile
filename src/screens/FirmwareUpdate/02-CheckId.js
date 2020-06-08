@@ -55,7 +55,7 @@ export default class FirmwareUpdateCheckId extends Component<Props, State> {
     }
 
     this.sub = firmwareUpdatePrepare(deviceId, firmware).subscribe({
-      next: patch => {
+      next: (patch) => {
         this.setState(patch);
       },
       complete: () => {
@@ -63,7 +63,7 @@ export default class FirmwareUpdateCheckId extends Component<Props, State> {
           navigation.replace(ScreenName.FirmwareUpdateMCU, route.params);
         }
       },
-      error: error => {
+      error: (error) => {
         if (navigation.replace) {
           navigation.replace(ScreenName.FirmwareUpdateFailure, {
             ...route.params,

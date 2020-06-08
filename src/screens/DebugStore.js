@@ -9,14 +9,14 @@ import colors from "../colors";
 
 class CollapsibleThingy extends PureComponent<
   { obj: Object, depth: number },
-  { shown: {} },
+  { shown: {} }
 > {
   state = {
     shown: {},
   };
 
-  toggleCollapse = key =>
-    this.setState(prevState => ({
+  toggleCollapse = (key) =>
+    this.setState((prevState) => ({
       shown: { ...prevState.shown, [key]: !prevState.shown[key] },
     }));
 
@@ -26,7 +26,7 @@ class CollapsibleThingy extends PureComponent<
 
     return (
       <View>
-        {Object.keys(obj || {}).map(key => {
+        {Object.keys(obj || {}).map((key) => {
           const rowKey = depth + key;
           const value = obj[key];
           const isObject = typeof value === "object";
@@ -60,7 +60,7 @@ class CollapsibleThingy extends PureComponent<
 }
 
 export default function DebugStore() {
-  const state = useSelector(s => s);
+  const state = useSelector((s) => s);
 
   return (
     <NavigationScrollView>

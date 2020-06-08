@@ -48,14 +48,14 @@ class TextInput extends PureComponent<*, State> {
     }
   };
 
-  onChangeText = text => {
+  onChangeText = (text) => {
     this.setState({ value: text, focused: true });
     if (this.props.onChangeText) {
       this.props.onChangeText(text);
     }
   };
 
-  onContentSizeChange = event => {
+  onContentSizeChange = (event) => {
     const { height } = event.nativeEvent.contentSize;
 
     this.setState({ height });

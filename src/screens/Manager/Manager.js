@@ -37,7 +37,7 @@ const Manager = ({ navigation, route }: Props) => {
   const [storageWarning, setStorageWarning] = useState(null);
   /** install app with dependencies modal state */
   const [appInstallWithDependencies, setAppInstallWithDependencies] = useState(
-    null,
+    null
   );
   /** uninstall app with dependencies modal state */
   const [
@@ -72,7 +72,7 @@ const Manager = ({ navigation, route }: Props) => {
     navigation.dispatch({
       ...CommonActions.navigate(
         quitManagerAction.payload.name,
-        quitManagerAction.payload.params,
+        quitManagerAction.payload.params
       ),
       force: true, // custom navigation option to force redirect
     });

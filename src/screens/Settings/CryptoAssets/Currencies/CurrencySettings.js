@@ -31,7 +31,7 @@ type LocalState = {
 };
 const mapStateToProps = (
   state: State,
-  props: { navigation: *, currencyId: string },
+  props: { navigation: *, currencyId: string }
 ) => {
   const currency = getCryptoCurrencyById(props.route.params.currencyId);
   return {
@@ -103,7 +103,7 @@ class EachCurrencySettings extends Component<Props, LocalState> {
                 value={value}
                 thumbTintColor={colors.live}
                 minimumTrackTintColor={colors.live}
-                onValueChange={val => this.setState({ value: val })}
+                onValueChange={(val) => this.setState({ value: val })}
                 onSlidingComplete={this.updateSettings}
               />
               <View style={styles.textContainer}>
@@ -136,7 +136,7 @@ class EachCurrencySettings extends Component<Props, LocalState> {
 
 export default compose(
   connect(mapStateToProps, mapDispatchToProps),
-  withTranslation(),
+  withTranslation()
 )(EachCurrencySettings);
 
 const styles = StyleSheet.create({

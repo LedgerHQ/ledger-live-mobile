@@ -19,7 +19,7 @@ import ByteSize from "../../../components/ByteSize";
 type Props = {
   app: App,
   state: State,
-  dispatch: Action => void,
+  dispatch: (Action) => void,
   isInstalledView: boolean,
   setAppInstallWithDependencies: ({ app: App, dependencies: App[] }) => void,
   setAppUninstallWithDependencies: ({ dependents: App[], app: App }) => void,
@@ -39,7 +39,7 @@ const AppRow = ({
   const { name, bytes, icon, version: appVersion } = app;
   const { installed } = state;
 
-  const isInstalled = useMemo(() => installed.find(i => i.name === name), [
+  const isInstalled = useMemo(() => installed.find((i) => i.name === name), [
     installed,
     name,
   ]);

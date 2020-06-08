@@ -18,8 +18,8 @@ type Props = {
   disabled?: boolean,
   withArrow?: boolean,
   description?: React$Node,
-  onSelect?: Device => any,
-  onBluetoothDeviceAction?: Device => any,
+  onSelect?: (Device) => any,
+  onBluetoothDeviceAction?: (Device) => any,
 };
 
 const iconByFamily = {

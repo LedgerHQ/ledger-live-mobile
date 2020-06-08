@@ -1,7 +1,7 @@
 // @flow
 import React, { useCallback, useEffect, useMemo } from "react";
 import { View, StyleSheet } from "react-native";
-import SafeAreaView from "react-native-safe-area-view";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { useSelector } from "react-redux";
 import {
   getMainAccount,
@@ -46,7 +46,7 @@ export default function ConnectDevice({ navigation, route }: Props) {
 
   const error = useMemo(
     () => (account ? getReceiveFlowError(account, parentAccount) : null),
-    [account, parentAccount],
+    [account, parentAccount]
   );
 
   const onSelectDevice = useCallback(
@@ -59,7 +59,7 @@ export default function ConnectDevice({ navigation, route }: Props) {
         mode: "buy",
       });
     },
-    [account, navigation, parentAccount],
+    [account, navigation, parentAccount]
   );
 
   if (!account) return null;

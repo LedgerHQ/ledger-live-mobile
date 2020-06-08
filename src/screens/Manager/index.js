@@ -67,14 +67,14 @@ type Props = {
 type ChooseDeviceProps = Props & {
   isFocused: boolean,
   readOnlyModeEnabled: boolean,
-  removeKnownDevice: string => void,
+  removeKnownDevice: (string) => void,
 };
 
 class ChooseDevice extends Component<
   ChooseDeviceProps,
   {
     showMenu: boolean,
-  },
+  }
 > {
   state = {
     showMenu: false,

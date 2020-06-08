@@ -6,16 +6,16 @@ import SettingsRow from "../components/SettingsRow";
 
 type EntryProps<Item> = {
   item: Item,
-  onPress: Item => void,
+  onPress: (Item) => void,
   selected: boolean,
 };
 type EntryComponent<Item> = React$ComponentType<EntryProps<Item>>;
 
 type Opts<Item> = {
   id: string,
-  itemEventProperties: Item => ?Object,
-  keyExtractor: Item => string,
-  formatItem?: Item => string,
+  itemEventProperties: (Item) => ?Object,
+  keyExtractor: (Item) => string,
+  formatItem?: (Item) => string,
   Entry?: EntryComponent<Item>,
   navigationOptions?: Object,
   ListHeaderComponent?: any,

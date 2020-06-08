@@ -17,8 +17,8 @@ import ScanningHeader from "./ScanningHeader";
 
 type Props = {
   knownDevices: DeviceLike[],
-  onSelect: Device => *,
-  onError: Error => *,
+  onSelect: (Device) => *,
+  onError: (Error) => *,
   onTimeout: () => *,
 };
 
@@ -54,19 +54,19 @@ class Scanning extends Component<Props, State> {
 
   startScan = async () => {
     this.sub = Observable.create(TransportBLE.listen).subscribe({
-      next: e => {
+      next: (e) => {
         if (e.type === "add") {
           clearTimeout(this.timeout);
           const device = e.descriptor;
           this.setState(({ devices }) => ({
             // FIXME seems like we have dup. ideally we'll remove them on the listen side!
-            devices: devices.some(i => i.id === device.id)
+            devices: devices.some((i) => i.id === device.id)
               ? devices
               : devices.concat(device),
           }));
         }
       },
-      error: error => {
+      error: (error) => {
         logger.critical(error);
         this.props.onError(error);
       },
@@ -81,7 +81,7 @@ class Scanning extends Component<Props, State> {
   };
 
   renderItem = ({ item }: { item: * }) => {
-    const knownDevice = this.props.knownDevices.find(d => d.id === item.id);
+    const knownDevice = this.props.knownDevices.find((d) => d.id === item.id);
     return (
       <DeviceItem
         device={item}
@@ -122,7 +122,7 @@ class Scanning extends Component<Props, State> {
 export default connect(
   createStructuredSelector({
     knownDevices: knownDevicesSelector,
-  }),
+  })
 )(Scanning);
 
 const styles = StyleSheet.create({

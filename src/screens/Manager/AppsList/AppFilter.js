@@ -9,11 +9,11 @@ import FilterModalComponent from "../Modals/FilterModal";
 
 type Props = {
   filter: ?string,
-  setFilter: string => void,
+  setFilter: (string) => void,
   sort: string,
-  setSort: string => void,
+  setSort: (string) => void,
   order: string,
-  setOrder: string => void,
+  setOrder: (string) => void,
   disabled: boolean,
 };
 

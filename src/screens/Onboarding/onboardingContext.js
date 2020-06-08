@@ -42,14 +42,15 @@ const INITIAL_CONTEXT: $Shape<OnboardingContextType> = {
 // $FlowFixMe
 const OnboardingContext = createContext(INITIAL_CONTEXT);
 
-const getStepForState = state => getStep(state.mode, state.firstTimeOnboarding);
+const getStepForState = (state) =>
+  getStep(state.mode, state.firstTimeOnboarding);
 
 // Provide each step screen a set of props used
 // in various ways: display the total number of steps,
 // navigate between steps, jump, etc.
 export class OnboardingContextProvider extends PureComponent<
   OnboardingContextProviderProps,
-  OnboardingContextType,
+  OnboardingContextType
 > {
   constructor(props: OnboardingContextProviderProps) {
     super(props);
@@ -72,29 +73,29 @@ export class OnboardingContextProvider extends PureComponent<
   // we may want to handle onboarding finish here (e.g update settings)
   next = (navigation: *, currentStep) => {
     const steps = getStepForState(this.state);
-    const i = steps.findIndex(s => s.id === currentStep) + 1;
+    const i = steps.findIndex((s) => s.id === currentStep) + 1;
     this.navigate(navigation, i);
   };
 
   // Navigate to previous step
   prev = (navigation: *, currentStep) => {
     const steps = getStepForState(this.state);
-    const i = steps.findIndex(s => s.id === currentStep) - 1;
+    const i = steps.findIndex((s) => s.id === currentStep) - 1;
     this.navigate(navigation, i);
   };
 
   // Replace current steps with steps of given mode
-  setOnboardingMode: SetOnboardingModeType = mode =>
-    new Promise(resolve => this.setState({ mode }, resolve));
+  setOnboardingMode: SetOnboardingModeType = (mode) =>
+    new Promise((resolve) => this.setState({ mode }, resolve));
 
-  setOnboardingDeviceModel: SetOnboardingDeviceModelType = deviceModelId =>
-    new Promise(resolve => this.setState({ deviceModelId }, resolve));
+  setOnboardingDeviceModel: SetOnboardingDeviceModelType = (deviceModelId) =>
+    new Promise((resolve) => this.setState({ deviceModelId }, resolve));
 
   setShowWelcome = (showWelcome: boolean): Promise<void> =>
-    new Promise(r => this.setState({ showWelcome }, r));
+    new Promise((r) => this.setState({ showWelcome }, r));
 
   setFirstTimeOnboarding = (firstTimeOnboarding: boolean): Promise<void> =>
-    new Promise(r => this.setState({ firstTimeOnboarding }, r));
+    new Promise((r) => this.setState({ firstTimeOnboarding }, r));
 
   navigate = (navigation: *, index: number) => {
     const steps = getStepForState(this.state);
@@ -114,12 +115,12 @@ export class OnboardingContextProvider extends PureComponent<
   };
 
   resetCurrentStep = (): Promise<void> =>
-    new Promise(resolve => {
+    new Promise((resolve) => {
       this.setState(
-        state => ({
+        (state) => ({
           currentStep: getStepForState(state)[0].id,
         }),
-        resolve,
+        resolve
       );
     });
 

@@ -35,7 +35,7 @@ const renderDepLine = ({ item }: *) => (
 
 type Props = {
   appUninstallWithDependencies: ?{ app: App, dependents: App[] },
-  dispatch: Action => void,
+  dispatch: (Action) => void,
   onClose: () => void,
 };
 
@@ -75,7 +75,7 @@ const UninstallDependenciesModal = ({
         eventProperties: { appName: name },
       },
     ],
-    [unInstallApp, onClose, name],
+    [unInstallApp, onClose, name]
   );
 
   return (

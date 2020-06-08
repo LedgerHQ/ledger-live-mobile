@@ -44,18 +44,18 @@ export default class FirmwareUpdateMCU extends Component<Props, State> {
     const { deviceId, firmware } = this.props.route.params || {};
 
     this.sub = firmwareUpdateMain(deviceId, firmware).subscribe({
-      next: patch => {
+      next: (patch) => {
         this.setState(patch);
       },
       complete: () => {
         if (navigation.replace) {
           navigation.replace(
             ScreenName.FirmwareUpdateConfirmation,
-            route.params,
+            route.params
           );
         }
       },
-      error: error => {
+      error: (error) => {
         logger.critical(error);
         if (navigation.replace) {
           navigation.replace(ScreenName.FirmwareUpdateFailure, {

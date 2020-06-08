@@ -28,7 +28,7 @@ import { accountSelector } from "../reducers/accounts";
 type Props = {
   account: SubAccount,
   parentAccount: Account,
-  onSubAccountPress: SubAccount => *,
+  onSubAccountPress: (SubAccount) => *,
   onSubAccountLongPress: (TokenAccount, Account) => *,
 };
 

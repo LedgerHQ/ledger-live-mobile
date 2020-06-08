@@ -27,7 +27,7 @@ import CancelButton from "../../components/CancelButton";
 import GenericErrorBottomModal from "../../components/GenericErrorBottomModal";
 import NavigationScrollView from "../../components/NavigationScrollView";
 
-const withoutHiddenError = error =>
+const withoutHiddenError = (error) =>
   error instanceof RecipientRequired ? null : error;
 
 const forceInset = { bottom: "always" };
@@ -80,11 +80,11 @@ export default function SendSelectRecipient({ navigation, route }: Props) {
   }, [navigation, transaction, route.params]);
 
   const onChangeText = useCallback(
-    recipient => {
+    (recipient) => {
       const bridge = getAccountBridge(account, parentAccount);
       setTransaction(bridge.updateTransaction(transaction, { recipient }));
     },
-    [account, parentAccount, setTransaction, transaction],
+    [account, parentAccount, setTransaction, transaction]
   );
   const clear = useCallback(() => onChangeText(""), [onChangeText]);
 

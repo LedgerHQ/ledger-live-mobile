@@ -39,12 +39,8 @@ function AccountBalanceSummaryFooter({ account }: Props) {
   const unit = getAccountUnit(account);
 
   const formattedBandwidth = useMemo(
-    () =>
-      freeLimit
-        .plus(gainedLimit)
-        .minus(gainedUsed)
-        .minus(freeUsed),
-    [freeLimit, gainedLimit, gainedUsed, freeUsed],
+    () => freeLimit.plus(gainedLimit).minus(gainedUsed).minus(freeUsed),
+    [freeLimit, gainedLimit, gainedUsed, freeUsed]
   );
 
   const onCloseModal = useCallback(() => {
@@ -53,7 +49,7 @@ function AccountBalanceSummaryFooter({ account }: Props) {
 
   const onPressInfoCreator = useCallback(
     (infoName: InfoName) => () => setInfoName(infoName),
-    [],
+    []
   );
 
   return (

@@ -13,7 +13,7 @@ export default class AppPermissionsButton extends PureComponent<
   {
     appState: ?string,
     buttonPressed: boolean,
-  },
+  }
 > {
   state = {
     appState: AppState.currentState,

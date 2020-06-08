@@ -25,7 +25,7 @@ export default function AccountOrderModal({ onClose, isOpened }: Props) {
         <MenuTitle>
           <Trans i18nKey="common.sortBy" />
         </MenuTitle>
-        {choices.map(id => (
+        {choices.map((id) => (
           <OrderOption key={id} id={id} />
         ))}
         <View style={styles.buttonContainer}>

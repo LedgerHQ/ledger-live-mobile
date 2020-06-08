@@ -19,16 +19,16 @@ const initialState: BleState = {
 const handlers: Object = {
   BLE_ADD_DEVICE: (state: BleState, { device }: { device: DeviceLike }) => ({
     knownDevices: state.knownDevices
-      .filter(d => d.id !== device.id)
+      .filter((d) => d.id !== device.id)
       .concat({ id: device.id, name: device.name }),
   }),
 
   BLE_REMOVE_DEVICE: (state: BleState, { deviceId }: { deviceId: string }) => ({
-    knownDevices: state.knownDevices.filter(d => d.id !== deviceId),
+    knownDevices: state.knownDevices.filter((d) => d.id !== deviceId),
   }),
 
   BLE_REMOVE_DEVICES: (state: BleState, { ids }: { ids: string[] }) => ({
-    knownDevices: state.knownDevices.filter(d => !ids.includes(d.id)),
+    knownDevices: state.knownDevices.filter((d) => !ids.includes(d.id)),
   }),
 
   BLE_IMPORT: (state: BleState, { ble }: { ble: BleState }) => ({
@@ -38,10 +38,10 @@ const handlers: Object = {
 
   BLE_SAVE_DEVICE_NAME: (
     state: BleState,
-    { deviceId, name }: { deviceId: string, name: string },
+    { deviceId, name }: { deviceId: string, name: string }
   ) => ({
-    knownDevices: state.knownDevices.map(d =>
-      d.id === deviceId ? { ...d, name } : d,
+    knownDevices: state.knownDevices.map((d) =>
+      d.id === deviceId ? { ...d, name } : d
     ),
   }),
 };
@@ -52,9 +52,9 @@ export const exportSelector = (s: State) => s.ble;
 export const knownDevicesSelector = (s: State) => s.ble.knownDevices;
 
 export const deviceNameByDeviceIdSelectorCreator = (deviceId: string) => (
-  s: State,
+  s: State
 ) => {
-  const d = s.ble.knownDevices.find(d => d.id === deviceId);
+  const d = s.ble.knownDevices.find((d) => d.id === deviceId);
   return d ? d.name : "";
 };
 

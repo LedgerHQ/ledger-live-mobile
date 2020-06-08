@@ -34,7 +34,7 @@ const DeviceAppStorage = ({
         ratio: Number((bytes / appsSpaceBytes) * 100).toFixed(2),
         color: (currency && currency.color) || "#000000",
       })),
-    [apps, appsSpaceBytes],
+    [apps, appsSpaceBytes]
   );
 
   const storageWarnStyle = {

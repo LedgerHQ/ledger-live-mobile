@@ -32,7 +32,7 @@ type Props = {
   navigation: any,
 };
 
-const keyExtractor = currency => currency.id;
+const keyExtractor = (currency) => currency.id;
 
 const renderEmptyList = () => (
   <View style={styles.emptySearch}>
@@ -46,7 +46,7 @@ export default function AddAccountsSelectCrypto({ navigation }: Props) {
   const devMode = useEnv("MANAGER_DEV_MODE");
   const cryptoCurrencies = useMemo(
     () => listCryptoCurrencies(devMode).concat(listTokens()),
-    [devMode],
+    [devMode]
   );
 
   const sortedCryptoCurrencies = useCurrenciesByMarketcap(cryptoCurrencies);
@@ -69,7 +69,7 @@ export default function AddAccountsSelectCrypto({ navigation }: Props) {
     }
   };
 
-  const renderList = items => (
+  const renderList = (items) => (
     <FlatList
       contentContainerStyle={styles.list}
       data={items}

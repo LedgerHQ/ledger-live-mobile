@@ -108,7 +108,7 @@ const VoteRow = ({
     if (rowRef && rowRef.current && rowRef.current.transitionTo)
       rowRef.current.transitionTo(
         { opacity: 0, height: 0, marginVertical: 0 },
-        400,
+        400
       );
     else removeVote();
   }, [rowRef, removeVote]);

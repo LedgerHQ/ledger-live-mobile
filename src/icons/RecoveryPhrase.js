@@ -1,7 +1,7 @@
 import React from "react";
 import Svg, { G, Path, Rect } from "react-native-svg";
 
-const RecoveryPhrase = props => (
+const RecoveryPhrase = (props) => (
   <Svg width={145} height={109} {...props}>
     <G fill="none" fillRule="evenodd" transform="translate(-1)">
       <Path

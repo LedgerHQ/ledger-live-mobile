@@ -49,20 +49,20 @@ export const calculateCountervalueSelector = (state: State) => {
 export const sortAccountsComparatorSelector = createSelector(
   orderAccountsSelector,
   calculateCountervalueSelector,
-  sortAccountsComparatorFromOrder,
+  sortAccountsComparatorFromOrder
 );
 
 const nestedSortAccountsSelector = createSelector(
   accountsSelector,
   sortAccountsComparatorSelector,
-  nestedSortAccounts,
+  nestedSortAccounts
 );
 
 // $FlowFixMe go home you're drunk (works on desktop)
 export const flattenSortAccountsSelector = createSelector(
   accountsSelector,
   sortAccountsComparatorSelector,
-  flattenSortAccounts,
+  flattenSortAccounts
 );
 
 export const refreshAccountsOrdering = () => (dispatch: *, getState: *) => {

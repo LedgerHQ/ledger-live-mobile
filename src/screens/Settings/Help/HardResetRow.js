@@ -33,7 +33,7 @@ class HardResetRow extends PureComponent<Props, State> {
 
   onHardReset = async () => {
     await Promise.all(
-      this.props.knownDevices.map(d => disconnect(d.id).catch(() => {})),
+      this.props.knownDevices.map((d) => disconnect(d.id).catch(() => {}))
     );
     return this.props.reboot(true);
   };
@@ -73,5 +73,5 @@ class HardResetRow extends PureComponent<Props, State> {
 export default connect(
   createStructuredSelector({
     knownDevices: knownDevicesSelector,
-  }),
+  })
 )(withReboot(HardResetRow));

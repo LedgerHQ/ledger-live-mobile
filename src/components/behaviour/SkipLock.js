@@ -23,7 +23,7 @@ class SkipLock extends PureComponent<{
     this.report(false);
   }
 
-  report = enabled => {
+  report = (enabled) => {
     if (this.lastValue !== enabled) {
       this.props.setEnabled(enabled);
       this.lastValue = enabled;
@@ -35,7 +35,7 @@ class SkipLock extends PureComponent<{
   }
 }
 
-export default function(props: any) {
+export default function (props: any) {
   const isFocused = useIsFocused();
   const setEnabled = useContext(SkipLockContext);
 

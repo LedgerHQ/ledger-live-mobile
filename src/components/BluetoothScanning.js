@@ -20,7 +20,7 @@ class LeftRightDots extends PureComponent<
     isAnimated?: boolean,
     isError?: boolean,
   },
-  { progress: Animated.Value },
+  { progress: Animated.Value }
 > {
   state = {
     progress: new Animated.Value(0),
@@ -55,7 +55,7 @@ class LeftRightDots extends PureComponent<
           duration: 1000,
           useNativeDriver: true,
         }),
-      ]),
+      ])
     ).start();
   }
 
@@ -70,7 +70,7 @@ class LeftRightDots extends PureComponent<
           inputRange: [0, i / 7, (i + 1) / 7, (i + 2) / 7, 1],
           outputRange: [0, 0.5, 1, 0.5, 0],
           extrapolate: "clamp",
-        }),
+        })
       );
 
     return (

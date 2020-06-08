@@ -21,8 +21,8 @@ const createLedgerStore = () =>
       applyMiddleware(thunk),
       typeof __REDUX_DEVTOOLS_EXTENSION__ === "function"
         ? __REDUX_DEVTOOLS_EXTENSION__()
-        : f => f,
-    ),
+        : (f) => f
+    )
   );
 
 export default class LedgerStoreProvider extends Component<
@@ -33,7 +33,7 @@ export default class LedgerStoreProvider extends Component<
   {
     store: *,
     ready: boolean,
-  },
+  }
 > {
   state = {
     store: createLedgerStore(),
@@ -60,7 +60,7 @@ export default class LedgerStoreProvider extends Component<
       settingsData &&
       settingsData.counterValue &&
       !supportedCountervalues.find(
-        ({ ticker }) => ticker === settingsData.counterValue,
+        ({ ticker }) => ticker === settingsData.counterValue
       )
     ) {
       settingsData.counterValue = INITIAL_STATE.counterValue;

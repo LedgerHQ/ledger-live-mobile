@@ -13,7 +13,7 @@ import AppUpdateStepper from "./AppUpdateStepper";
 type Props = {
   state: State,
   appsToUpdate: App[],
-  dispatch: Action => void,
+  dispatch: (Action) => void,
 };
 
 const AppUpdateAll = ({ state, appsToUpdate, dispatch }: Props) => {

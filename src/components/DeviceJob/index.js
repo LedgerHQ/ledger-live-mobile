@@ -12,7 +12,7 @@ import type { DeviceNames } from "../../screens/Onboarding/types";
 const runStep = (
   step: Step,
   meta: Object,
-  onDoneO: Observable<*>,
+  onDoneO: Observable<*>
 ): Observable<Object> => step.run(meta, onDoneO);
 
 type StepEvent =
@@ -23,33 +23,33 @@ const chainSteps = (
   steps: Step[],
   // meta is an object we accumulates over time to update the UI and yield the result of everything.
   meta: Device,
-  onDoneO: Observable<number>,
+  onDoneO: Observable<number>
 ): Observable<StepEvent> =>
-  Observable.create(o => {
+  Observable.create((o) => {
     const obs: Observable<*> = steps.reduce(
       (meta: Observable<*>, step: Step, i: number) =>
         meta.pipe(
-          tap(meta => {
+          tap((meta) => {
             // we emit entering a new step
             o.next({ type: "step", step: i, meta });
           }),
-          mergeMap(meta =>
+          mergeMap((meta) =>
             // for a given step, we chain the previous step result in. we also provide events of onDone taps (allow to interrupt the UI).
-            runStep(step, meta, onDoneO.pipe(filter(index => index === i))),
+            runStep(step, meta, onDoneO.pipe(filter((index) => index === i)))
           ),
-          tap(meta => {
+          tap((meta) => {
             // we need to emit globally the meta incremental updates
             o.next({ type: "meta", meta });
           }),
-          last(), // at the end, we only care about the last meta
+          last() // at the end, we only care about the last meta
         ),
-      from([meta]),
+      from([meta])
     );
     const sub = obs.subscribe({
       complete: () => {
         o.complete();
       },
-      error: e => {
+      error: (e) => {
         o.error(e);
       },
     });
@@ -64,7 +64,7 @@ class DeviceJob extends Component<
     // as soon as meta is set, the DeviceJob starts
     meta: ?Device,
     steps: Step[],
-    onDone: Object => void,
+    onDone: (Object) => void,
     onCancel: () => void,
     editMode?: boolean,
     deviceModelId: DeviceNames,
@@ -74,7 +74,7 @@ class DeviceJob extends Component<
     meta: ?Object,
     error: ?Error,
     stepIndex: number,
-  },
+  }
 > {
   static defaultProps = {
     steps: [],
@@ -114,7 +114,7 @@ class DeviceJob extends Component<
     if (this.sub) this.sub.unsubscribe();
   }
 
-  debouncedSetStepIndex = debounce(stepIndex => {
+  debouncedSetStepIndex = debounce((stepIndex) => {
     this.setState({ stepIndex });
   }, 1000);
 
@@ -147,7 +147,7 @@ class DeviceJob extends Component<
             this.props.onDone(meta);
           });
         },
-        next: e => {
+        next: (e) => {
           meta = e.meta;
           this.setState({ meta }); // refresh the UI
           if (e.type === "step") {
@@ -156,10 +156,10 @@ class DeviceJob extends Component<
             if (onStepEntered) onStepEntered(e.step, e.meta);
           }
         },
-        error: error => {
+        error: (error) => {
           this.setState({ error });
         },
-      },
+      }
     );
   };
 

@@ -89,7 +89,7 @@ export default connect(
   createStructuredSelector({
     accounts: accountsSelector,
     settings: exportSettingsSelector,
-  }),
+  })
 )(ExportAccounts);
 
 const styles = StyleSheet.create({

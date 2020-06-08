@@ -24,7 +24,7 @@ const StorageWarningModal = ({ warning, onClose }: Props) => {
         event: "ManagerStorageWarningModalClose",
       },
     ],
-    [onClose],
+    [onClose]
   );
 
   return (

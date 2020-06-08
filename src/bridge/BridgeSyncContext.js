@@ -17,10 +17,10 @@ export const BridgeSyncProvider = ({ children }: { children: React$Node }) => {
   const updateAccount = useCallback(
     (accountId, updater) =>
       dispatch(updateAccountWithUpdater(accountId, updater)),
-    [dispatch],
+    [dispatch]
   );
 
-  const recoverError = useCallback(error => {
+  const recoverError = useCallback((error) => {
     logger.critical(error);
   }, []);
 

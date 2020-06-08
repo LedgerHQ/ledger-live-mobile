@@ -76,13 +76,13 @@ const ToggleButton = ({ value, options, onChange }: Props) => {
   const [width, setWidth] = useState(0);
   // animation translate state
   const [animIndex] = useState(new Value(0));
-  const onLayout = useCallback(evt => {
+  const onLayout = useCallback((evt) => {
     setWidth(evt.nativeEvent.layout.width);
   }, []);
 
   if (!options.length) return null;
 
-  const activeIndex = options.findIndex(opt => opt.value === value);
+  const activeIndex = options.findIndex((opt) => opt.value === value);
 
   // animation clock
   const clock = new Clock();

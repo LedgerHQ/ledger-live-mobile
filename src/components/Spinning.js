@@ -30,7 +30,7 @@ class Spinning extends Component<Props> {
         duration: 1000,
         easing: Easing.linear,
         useNativeDriver: true,
-      }),
+      })
     ).start();
   };
 

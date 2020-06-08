@@ -16,7 +16,7 @@ export default function Banner() {
   const navigation = useNavigation();
 
   const someAccountsNeedMigration = useSelector(
-    someAccountsNeedMigrationSelector,
+    someAccountsNeedMigrationSelector
   );
 
   const navigateToAccountMigration = useCallback(() => {

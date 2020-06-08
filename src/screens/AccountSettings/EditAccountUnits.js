@@ -30,7 +30,7 @@ export default function EditAccountUnits({ navigation, route }: Props) {
       dispatch(updateAccount(newAccount));
       navigation.goBack();
     },
-    [account, navigation, dispatch],
+    [account, navigation, dispatch]
   );
 
   const accountUnits = account.currency.units;

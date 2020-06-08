@@ -23,7 +23,7 @@ import Button from "../../components/Button";
 import Touchable from "../../components/Touchable";
 import TokenContextualModal from "../Settings/Accounts/TokenContextualModal";
 
-const keyExtractor = o => o.id;
+const keyExtractor = (o) => o.id;
 
 const styles = StyleSheet.create({
   footer: {
@@ -103,7 +103,7 @@ export default function SubAccountsList({
 
   const isToken = useMemo(
     () => listTokenTypesForCryptoCurrency(parentAccount.currency).length > 0,
-    [parentAccount],
+    [parentAccount]
   );
 
   const navigateToReceiveConnectDevice = useCallback(() => {
@@ -140,7 +140,7 @@ export default function SubAccountsList({
         ) : null}
       </View>
     ),
-    [isToken, subAccounts, navigateToReceiveConnectDevice],
+    [isToken, subAccounts, navigateToReceiveConnectDevice]
   );
 
   const renderFooter = useCallback(() => {
@@ -215,12 +215,12 @@ export default function SubAccountsList({
       <Card>
         <SubAccountRow
           account={item}
-          onSubAccountLongPress={account => setAccount(account)}
+          onSubAccountLongPress={(account) => setAccount(account)}
           onSubAccountPress={onAccountPress}
         />
       </Card>
     ),
-    [onAccountPress],
+    [onAccountPress]
   );
 
   if (

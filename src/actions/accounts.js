@@ -43,12 +43,12 @@ export const setAccounts = (accounts: Account[]) => ({
 
 export type UpdateAccountWithUpdater = (
   accountId: string,
-  (Account) => Account,
+  (Account) => Account
 ) => *;
 
 export const updateAccountWithUpdater: UpdateAccountWithUpdater = (
   accountId,
-  updater,
+  updater
 ) => ({
   type: "UPDATE_ACCOUNT",
   accountId,
@@ -56,14 +56,14 @@ export const updateAccountWithUpdater: UpdateAccountWithUpdater = (
 });
 
 export type UpdateAccount = ($Shape<Account>) => *;
-export const updateAccount: UpdateAccount = payload =>
+export const updateAccount: UpdateAccount = (payload) =>
   updateAccountWithUpdater(payload.id, (account: Account) => ({
     ...account,
     ...payload,
   }));
 
-export type DeleteAccount = Account => { type: string, payload: Account };
-export const deleteAccount: DeleteAccount = payload => ({
+export type DeleteAccount = (Account) => { type: string, payload: Account };
+export const deleteAccount: DeleteAccount = (payload) => ({
   type: "DELETE_ACCOUNT",
   payload,
 });

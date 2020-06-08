@@ -58,7 +58,7 @@ const AppsList = ({
       setAppInstallWithDependencies,
       setAppUninstallWithDependencies,
       setStorageWarning,
-    ],
+    ]
   );
 
   if (!apps || apps.length <= 0)

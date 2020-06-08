@@ -31,10 +31,10 @@ export default function Overview({ route, navigation }: Props) {
       migratableAccounts
         .reduce(
           (c, a) => (c.includes(a.currency.id) ? c : [...c, a.currency.id]),
-          [],
+          []
         )
         .sort(),
-    [migratableAccounts],
+    [migratableAccounts]
   );
 
   const showNotice = route.params?.showNotice;
@@ -91,10 +91,10 @@ export default function Overview({ route, navigation }: Props) {
         style={styles.body}
         renderItem={renderItem}
         renderSectionHeader={renderSectionHeader}
-        keyExtractor={account => account.id}
-        sections={currencyIds.map(currencyId => ({
+        keyExtractor={(account) => account.id}
+        sections={currencyIds.map((currencyId) => ({
           currencyId,
-          data: migratableAccounts.filter(a => a.currency.id === currencyId),
+          data: migratableAccounts.filter((a) => a.currency.id === currencyId),
         }))}
       />
 

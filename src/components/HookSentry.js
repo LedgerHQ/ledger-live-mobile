@@ -25,5 +25,5 @@ class HookSentry extends PureComponent<{ enabled: boolean }> {
 export default connect(
   createStructuredSelector({
     enabled: reportErrorsEnabledSelector,
-  }),
+  })
 )(HookSentry);

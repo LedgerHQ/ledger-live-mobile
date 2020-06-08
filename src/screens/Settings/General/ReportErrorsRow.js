@@ -10,7 +10,7 @@ import { reportErrorsEnabledSelector } from "../../../reducers/settings";
 
 type Props = {
   reportErrorsEnabled: boolean,
-  setReportErrors: boolean => void,
+  setReportErrors: (boolean) => void,
 };
 const mapStateToProps = createStructuredSelector({
   reportErrorsEnabled: reportErrorsEnabledSelector,

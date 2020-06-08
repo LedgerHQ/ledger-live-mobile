@@ -56,7 +56,7 @@ export const balanceHistoryWithCountervalueSelectorCreator = ({
       intermediary,
       toExchange,
       to: counterValueCurrency,
-    }),
+    })
   );
 };
 
@@ -93,7 +93,7 @@ export const currencyPortfolioSelectorCreator = ({
   range: PortfolioRange,
 }) => (state: State) => {
   const accounts = flattenAccounts(accountsSelector(state)).filter(
-    a => getAccountCurrency(a) === currency,
+    (a) => getAccountCurrency(a) === currency
   );
 
   const counterValueCurrency = counterValueCurrencySelector(state);

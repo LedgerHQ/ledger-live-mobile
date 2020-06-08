@@ -6,12 +6,12 @@ import { useBridgeSync } from "@ledgerhq/live-common/lib/bridge/react";
 import { accountsSelector } from "../reducers/accounts";
 
 export default function SyncNewAccounts({ priority }: { priority: number }) {
-  const ids = useSelector(accountsSelector).map(a => a.id);
+  const ids = useSelector(accountsSelector).map((a) => a.id);
   const ref = useRef(ids);
   const sync = useBridgeSync();
 
   useEffect(() => {
-    const accountIds = ids.filter(a => !ref.current.includes(a));
+    const accountIds = ids.filter((a) => !ref.current.includes(a));
     if (accountIds.length > 0) {
       ref.current = ids;
       sync({

@@ -15,7 +15,7 @@ export default class RebootProvider extends React.Component<
   },
   {
     rebootId: number,
-  },
+  }
 > {
   state = {
     rebootId: 0,
@@ -24,7 +24,7 @@ export default class RebootProvider extends React.Component<
   reboot = async (resetData: boolean = false) => {
     const { onRebootStart, onRebootEnd } = this.props;
     if (onRebootStart) onRebootStart();
-    this.setState(state => ({
+    this.setState((state) => ({
       rebootId: state.rebootId + 1,
     }));
     if (resetData) {
@@ -50,7 +50,7 @@ export const withReboot = (Cmp: *) => {
     render() {
       return (
         <RebootContext.Consumer>
-          {reboot => <Cmp reboot={reboot} {...this.props} />}
+          {(reboot) => <Cmp reboot={reboot} {...this.props} />}
         </RebootContext.Consumer>
       );
     }

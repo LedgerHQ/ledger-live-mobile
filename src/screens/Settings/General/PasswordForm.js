@@ -13,7 +13,7 @@ import colors from "../../../colors";
 
 type Props = {
   t: T,
-  onChange: string => void,
+  onChange: (string) => void,
   onSubmit: () => void,
   error?: ?Error,
   placeholder: string,

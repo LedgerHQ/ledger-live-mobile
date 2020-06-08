@@ -182,7 +182,7 @@ class DebugSVG extends Component<{}> {
       <SafeAreaView style={styles.root}>
         <ScrollView>
           <View style={styles.wrapper}>
-            {this.icons().map(iconObj => (
+            {this.icons().map((iconObj) => (
               <View
                 style={[
                   styles.card,

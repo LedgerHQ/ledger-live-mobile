@@ -44,7 +44,7 @@ const TokenContextualModal = ({
   onClose: () => void,
   account: TokenAccount,
   parentAccount: Account,
-  blacklistToken: string => void,
+  blacklistToken: (string) => void,
 }) => {
   const mainAccount = account ? getMainAccount(account, parentAccount) : null;
   const explorerView = mainAccount
@@ -171,7 +171,7 @@ const mapStateToProps = createStructuredSelector({
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(TokenContextualModal);
 
 const styles = StyleSheet.create({

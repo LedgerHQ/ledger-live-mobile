@@ -29,7 +29,7 @@ type SecurityChecklist = {
 
 class OnboardingStepSecurityChecklist extends Component<
   OnboardingStepProps,
-  SecurityChecklist,
+  SecurityChecklist
 > {
   state = {
     pinCode: null,

@@ -41,7 +41,7 @@ import type { Step } from "./types";
 import { RenderStep } from "./StepRenders";
 import DisplayAddress from "../DisplayAddress";
 
-const inferWordingValues = meta => {
+const inferWordingValues = (meta) => {
   const deviceModel = getDeviceModel(meta.modelId);
   return {
     productName: deviceModel.productName,
@@ -78,10 +78,10 @@ export const connectingStep: Step = {
       />
     );
   },
-  run: meta =>
+  run: (meta) =>
     // $FlowFixMe
     withDevice(meta.deviceId)(() => from([meta])).pipe(
-      rejectionOp(() => new CantOpenDevice()),
+      rejectionOp(() => new CantOpenDevice())
     ),
 };
 
@@ -103,16 +103,16 @@ export const dashboard: Step = {
       }
     />
   ),
-  run: meta =>
+  run: (meta) =>
     // $FlowFixMe
-    withDevicePolling(meta.deviceId)(transport =>
-      from(getDeviceInfo(transport)),
+    withDevicePolling(meta.deviceId)((transport) =>
+      from(getDeviceInfo(transport))
     ).pipe(
-      map(deviceInfo => ({
+      map((deviceInfo) => ({
         ...meta,
         deviceInfo,
       })),
-      rejectionOp(() => new CantOpenDevice()),
+      rejectionOp(() => new CantOpenDevice())
     ),
 };
 
@@ -145,9 +145,9 @@ export const genuineCheck: Step = {
         title={<Trans i18nKey="SelectDevice.steps.genuineCheckPending.title" />}
       />
     ),
-  run: meta =>
-    withDevice(meta.deviceId)(transport =>
-      checkDeviceForManager(transport, meta.deviceInfo),
+  run: (meta) =>
+    withDevice(meta.deviceId)((transport) =>
+      checkDeviceForManager(transport, meta.deviceInfo)
     ).pipe(
       map((e: SocketEvent) => {
         if (e.type === "result") {
@@ -160,7 +160,7 @@ export const genuineCheck: Step = {
           ...meta,
           genuineAskedOnDevice: e.type === "allow-manager-requested",
         };
-      }),
+      })
     ),
 };
 
@@ -193,19 +193,19 @@ export const listApps: Step = {
         title={<Trans i18nKey="SelectDevice.steps.listApps.title" />}
       />
     ),
-  run: meta =>
-    withDevice(meta.deviceId)(transport =>
-      listAppsTransport(transport, meta.deviceInfo),
+  run: (meta) =>
+    withDevice(meta.deviceId)((transport) =>
+      listAppsTransport(transport, meta.deviceInfo)
     ).pipe(
       map((e: *) => ({
         ...meta,
         ...(e.type === "result" ? { appRes: e.result } : {}),
         allowManagerRequested: e.type === "device-permission-requested",
-      })),
+      }))
     ),
 };
 
-export const currencyApp: CryptoCurrency => Step = currency => ({
+export const currencyApp: (CryptoCurrency) => Step = (currency) => ({
   Body: ({ meta, onClose }: *) => {
     const { t } = useTranslation();
     const navigation = useNavigation();
@@ -254,9 +254,9 @@ export const currencyApp: CryptoCurrency => Step = currency => ({
       </RenderStep>
     );
   },
-  run: meta =>
+  run: (meta) =>
     // $FlowFixMe
-    withDevicePolling(meta.deviceId)(transport => {
+    withDevicePolling(meta.deviceId)((transport) => {
       if (meta.deviceId.startsWith("mock")) {
         return of({
           ...meta,
@@ -272,16 +272,16 @@ export const currencyApp: CryptoCurrency => Step = currency => ({
           derivationMode,
           path: runDerivationScheme(
             getDerivationScheme({ currency, derivationMode }),
-            currency,
+            currency
           ),
-        }),
+        })
       );
     }).pipe(
-      map(addressInfo => ({
+      map((addressInfo) => ({
         ...meta,
         addressInfo,
       })),
-      rejectionOp(() => new CantOpenDevice()),
+      rejectionOp(() => new CantOpenDevice())
     ),
 });
 
@@ -300,7 +300,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export const accountApp: Account => Step = account => ({
+export const accountApp: (Account) => Step = (account) => ({
   Body: ({ meta }: *) => {
     const wordingValues = {
       ...inferWordingValues(meta),
@@ -326,9 +326,9 @@ export const accountApp: Account => Step = account => ({
       />
     );
   },
-  run: meta =>
+  run: (meta) =>
     // $FlowFixMe
-    withDevicePolling(meta.deviceId)(transport =>
+    withDevicePolling(meta.deviceId)((transport) =>
       from(
         account.id.startsWith("mock")
           ? [
@@ -341,7 +341,7 @@ export const accountApp: Account => Step = account => ({
               derivationMode: account.derivationMode,
               currency: account.currency,
               path: account.freshAddressPath,
-            }).then(addressInfo => {
+            }).then((addressInfo) => {
               if (addressInfo.address !== account.freshAddress) {
                 throw new WrongDeviceForAccount("WrongDeviceForAccount", {
                   accountName: account.name,
@@ -351,16 +351,16 @@ export const accountApp: Account => Step = account => ({
                 ...meta,
                 addressInfo,
               };
-            }),
-      ),
+            })
+      )
     ).pipe(
       rejectionOp(
-        () => new WrongDeviceForAccount("", { accountName: account.name }),
-      ),
+        () => new WrongDeviceForAccount("", { accountName: account.name })
+      )
     ),
 });
 
-export const receiveVerifyStep: Account => Step = account => ({
+export const receiveVerifyStep: (Account) => Step = (account) => ({
   Body: ({ onDone, meta }: *) => (
     <RenderStep
       icon={
@@ -401,11 +401,11 @@ export const receiveVerifyStep: Account => Step = account => ({
   run: (meta, onDoneO) =>
     onDoneO.pipe(
       map(() => meta),
-      first(),
+      first()
     ),
 });
 
-export const verifyAddressOnDeviceStep: Account => Step = account => ({
+export const verifyAddressOnDeviceStep: (Account) => Step = (account) => ({
   Body: ({ meta }: *) => (
     <RenderStep
       icon={
@@ -438,16 +438,16 @@ export const verifyAddressOnDeviceStep: Account => Step = account => ({
     </RenderStep>
   ),
 
-  run: meta =>
-    withDevice(meta.deviceId)(transport =>
+  run: (meta) =>
+    withDevice(meta.deviceId)((transport) =>
       from(
         getAddress(transport, {
           derivationMode: account.derivationMode,
           currency: account.currency,
           path: account.freshAddressPath,
           verify: true,
-        }),
-      ),
+        })
+      )
     ),
 });
 
@@ -467,18 +467,18 @@ export const getDeviceName: Step = {
     />
   ),
 
-  run: meta =>
-    withDevice(meta.deviceId)(transport =>
+  run: (meta) =>
+    withDevice(meta.deviceId)((transport) =>
       from(
-        getDeviceNameTransport(transport).then(deviceName => ({
+        getDeviceNameTransport(transport).then((deviceName) => ({
           ...meta,
           deviceName,
-        })),
-      ),
+        }))
+      )
     ),
 };
 
-export const editDeviceName: string => Step = deviceName => ({
+export const editDeviceName: (string) => Step = (deviceName) => ({
   Body: ({ meta }: *) => (
     <RenderStep
       icon={
@@ -494,8 +494,8 @@ export const editDeviceName: string => Step = deviceName => ({
     />
   ),
 
-  run: meta =>
-    withDevice(meta.deviceId)(transport =>
-      from(editDeviceNameTransport(transport, deviceName).then(() => meta)),
+  run: (meta) =>
+    withDevice(meta.deviceId)((transport) =>
+      from(editDeviceNameTransport(transport, deviceName).then(() => meta))
     ),
 });

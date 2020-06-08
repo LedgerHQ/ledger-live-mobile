@@ -8,8 +8,8 @@ import { withDevice } from "@ledgerhq/live-common/lib/hw/deviceAccess";
 export function useApps(listAppsRes: ListAppsResult, deviceId: string) {
   const exec = useCallback(
     (...a) =>
-      withDevice(deviceId)(transport => execWithTransport(transport)(...a)),
-    [deviceId],
+      withDevice(deviceId)((transport) => execWithTransport(transport)(...a)),
+    [deviceId]
   );
 
   return useAppsRunner(listAppsRes, exec);

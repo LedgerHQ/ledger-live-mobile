@@ -15,10 +15,10 @@ export type OnboardingContextType = {
   deviceModelId: DeviceNames,
 
   showWelcome: boolean,
-  setShowWelcome: boolean => Promise<void>,
+  setShowWelcome: (boolean) => Promise<void>,
 
   firstTimeOnboarding?: boolean,
-  setFirstTimeOnboarding: boolean => Promise<void>,
+  setFirstTimeOnboarding: (boolean) => Promise<void>,
 
   // allow to change the steps on the fly
   // e.g: skip (& hide) steps if device is already initialized
@@ -41,8 +41,8 @@ export type OnboardingStepProps = OnboardingContextType & {
   prev: Noop,
 };
 
-export type SetOnboardingModeType = OnboardingMode => Promise<void>;
-export type SetOnboardingDeviceModelType = DeviceNames => Promise<void>;
+export type SetOnboardingModeType = (OnboardingMode) => Promise<void>;
+export type SetOnboardingDeviceModelType = (DeviceNames) => Promise<void>;
 
 export type OnboardingContextProviderProps = { children: * };
 
@@ -51,4 +51,4 @@ type OnboardingMode = "full" | "alreadyInitialized" | "restore" | "qr";
 export type DeviceNames = "nanoS" | "nanoX" | "blue";
 
 type StepNavigateType = (*) => void;
-type Noop = any => any;
+type Noop = (any) => any;

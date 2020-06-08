@@ -59,7 +59,7 @@ function OperationDetailsExtra({
       const value = formatCurrencyUnit(
         account.unit,
         BigNumber(extra.frozenAmount),
-        { showCode: true },
+        { showCode: true }
       );
       return (
         <Section
@@ -72,7 +72,7 @@ function OperationDetailsExtra({
       const value = formatCurrencyUnit(
         account.unit,
         BigNumber(extra.unfreezeAmount),
-        { showCode: true },
+        { showCode: true }
       );
       return (
         <Section
@@ -100,14 +100,14 @@ function OperationDetailsVotes({
   const formattedVotes = formatVotes(votes, sp);
 
   const redirectAddressCreator = useCallback(
-    address => () => {
+    (address) => () => {
       const url = getAddressExplorer(
         getDefaultExplorerView(account.currency),
-        address,
+        address
       );
       if (url) Linking.openURL(url);
     },
-    [account],
+    [account]
   );
 
   return (
@@ -180,7 +180,7 @@ const AmountCell = ({
 
 const FreezeAmountCell = ({ operation, currency, unit }: Props) => {
   const amount = new BigNumber(
-    operation.extra ? operation.extra.frozenAmount : 0,
+    operation.extra ? operation.extra.frozenAmount : 0
   );
 
   return (
@@ -195,7 +195,7 @@ const FreezeAmountCell = ({ operation, currency, unit }: Props) => {
 
 const UnfreezeAmountCell = ({ operation, currency, unit }: Props) => {
   const amount = new BigNumber(
-    operation.extra ? operation.extra.unfreezeAmount : 0,
+    operation.extra ? operation.extra.unfreezeAmount : 0
   );
 
   return (

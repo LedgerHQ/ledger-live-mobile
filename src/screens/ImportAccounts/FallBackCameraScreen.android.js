@@ -30,7 +30,7 @@ class FallBackCameraScreen extends PureComponent<Props, State> {
     AppState.removeEventListener("change", this.handleAppStateChange);
   }
 
-  handleAppStateChange = nextAppState => {
+  handleAppStateChange = (nextAppState) => {
     const { appState, openSettingsPressed } = this.state;
     const { navigation } = this.props;
     if (

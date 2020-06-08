@@ -15,7 +15,7 @@ type Item = {
 type Props = {
   value: string,
   items: Item[],
-  onChange: Item => void,
+  onChange: (Item) => void,
   isDisabled?: boolean,
 };
 
@@ -43,7 +43,7 @@ class Pill extends PureComponent<{
   item: Item,
   first: boolean,
   active: boolean,
-  onPress: Item => void,
+  onPress: (Item) => void,
   isDisabled?: boolean,
 }> {
   render() {

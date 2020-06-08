@@ -34,7 +34,7 @@ import DateFromNow from "../../components/DateFromNow";
 
 /** @TODO move this to common */
 const getUnfreezeData = (
-  account: Account,
+  account: Account
 ): {
   unfreezeBandwidth: BigNumber,
   unfreezeEnergy: BigNumber,
@@ -90,7 +90,7 @@ type RouteParams = {
 
 export default function UnfreezeAmount({ route }: Props) {
   const { account: accountLike, parentAccount } = useSelector(
-    accountScreenSelector(route),
+    accountScreenSelector(route)
   );
   if (!accountLike) {
     return null;
@@ -162,7 +162,7 @@ function UnfreezeAmountInner({ account }: InnerProps) {
     (resource: string) => {
       setTransaction(bridge.updateTransaction(transaction, { resource }));
     },
-    [bridge, transaction, setTransaction],
+    [bridge, transaction, setTransaction]
   );
 
   const error = useMemo(() => {

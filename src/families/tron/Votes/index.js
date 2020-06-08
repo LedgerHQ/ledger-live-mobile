@@ -78,7 +78,7 @@ const Delegation = ({ account, parentAccount }: Props) => {
 
   const totalVotesUsed = votes.reduce(
     (sum, { voteCount }) => sum + voteCount,
-    0,
+    0
   );
 
   const openRewardsInfoModal = useCallback(() => setRewardsInfoModal(true), [
@@ -196,7 +196,7 @@ const Delegation = ({ account, parentAccount }: Props) => {
                     explorerView={explorerView}
                     isSR={isSR}
                   />
-                ),
+                )
               )}
               {percentVotesUsed < 1 && (
                 <View style={[styles.container]}>

@@ -39,7 +39,7 @@ type Props = {
 type State = {};
 
 class SendFundsSelectAccount extends Component<Props, State> {
-  renderList = items => {
+  renderList = (items) => {
     const { accounts } = this.props;
     const formatedList = formatSearchResults(items, accounts);
 
@@ -85,7 +85,7 @@ class SendFundsSelectAccount extends Component<Props, State> {
     </View>
   );
 
-  keyExtractor = item => item.account.id;
+  keyExtractor = (item) => item.account.id;
 
   render() {
     const { allAccounts } = this.props;
@@ -95,7 +95,7 @@ class SendFundsSelectAccount extends Component<Props, State> {
         <KeyboardView style={{ flex: 1 }}>
           <View style={styles.searchContainer}>
             <FilteredSearchBar
-              list={allAccounts.filter(account => !isAccountEmpty(account))}
+              list={allAccounts.filter((account) => !isAccountEmpty(account))}
               inputWrapperStyle={styles.padding}
               renderList={this.renderList}
               renderEmptySearch={this.renderEmptySearch}
@@ -152,5 +152,5 @@ const styles = StyleSheet.create({
 
 export default compose(
   connect(mapStateToProps),
-  withEnv("HIDE_EMPTY_TOKEN_ACCOUNTS"),
+  withEnv("HIDE_EMPTY_TOKEN_ACCOUNTS")
 )(SendFundsSelectAccount);

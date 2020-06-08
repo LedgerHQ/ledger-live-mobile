@@ -17,14 +17,14 @@ type Props = {
   height: number,
   data: ItemArray,
   color: string,
-  mapValue: Item => number,
+  mapValue: (Item) => number,
   onItemHover?: (?Item) => void,
   children: *,
   x: *,
   y: *,
 };
 
-const bisectDate = array.bisector(d => d.date).left;
+const bisectDate = array.bisector((d) => d.date).left;
 
 export default class BarInteraction extends Component<
   Props,
@@ -32,7 +32,7 @@ export default class BarInteraction extends Component<
     barVisible: boolean,
     barOffsetX: number,
     barOffsetY: number,
-  },
+  }
 > {
   state = {
     barVisible: false,
@@ -81,7 +81,7 @@ export default class BarInteraction extends Component<
   onPanGestureEvent = (e: *) => {
     const r = this.collectHovered(e.nativeEvent.x);
     if (!r) return;
-    this.setState(oldState => {
+    this.setState((oldState) => {
       if (
         oldState.barOffsetX === r.barOffsetX &&
         oldState.barOffsetY === r.barOffsetY

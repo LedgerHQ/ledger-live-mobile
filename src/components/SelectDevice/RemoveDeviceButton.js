@@ -65,7 +65,7 @@ class RemoveDeviceButton extends PureComponent<RemoveDeviceButtonProps> {
     this.props.reset();
     this.hideButton();
     await Promise.all(
-      this.props.deviceIds.map(id => disconnect(id).catch(() => {})),
+      this.props.deviceIds.map((id) => disconnect(id).catch(() => {}))
     );
   };
 

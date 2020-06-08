@@ -58,7 +58,7 @@ export default function AccountActions({ account, parentAccount }: Props) {
         },
       });
     },
-    [accountId, navigation, parentId],
+    [accountId, navigation, parentId]
   );
 
   const manageAction =

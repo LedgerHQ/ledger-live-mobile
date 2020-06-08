@@ -31,7 +31,7 @@ type OwnProps = {
   account: AccountLike,
   currency: string,
   value: BigNumber,
-  onChange: BigNumber => void,
+  onChange: (BigNumber) => void,
   error?: ?Error,
   warning?: ?Error,
 };
@@ -39,8 +39,8 @@ type OwnProps = {
 type Props = OwnProps & {
   fiatCurrency: Currency,
   t: T,
-  getCounterValue: BigNumber => ?BigNumber,
-  getReverseCounterValue: BigNumber => ?BigNumber,
+  getCounterValue: (BigNumber) => ?BigNumber,
+  getReverseCounterValue: (BigNumber) => ?BigNumber,
   editable?: boolean,
 };
 
@@ -62,7 +62,7 @@ class AmountInput extends Component<Props, OwnState> {
   }
 
   handleAmountChange = (changeField: "crypto" | "fiat") => (
-    value: BigNumber,
+    value: BigNumber
   ) => {
     const { getReverseCounterValue, onChange } = this.props;
     if (changeField === "crypto") {
@@ -82,7 +82,7 @@ class AmountInput extends Component<Props, OwnState> {
     track(
       direction === "crypto"
         ? "SendAmountCryptoFocused"
-        : "SendAmountFiatFocused",
+        : "SendAmountFiatFocused"
     );
   };
 
@@ -202,7 +202,7 @@ const mapStateToProps = (state: State, props: OwnProps) => {
     to: counterValueCurrency,
   });
 
-  const getCounterValue = value =>
+  const getCounterValue = (value) =>
     CounterValues.calculateWithIntermediarySelector(state, {
       from: currency,
       fromExchange,
@@ -213,7 +213,7 @@ const mapStateToProps = (state: State, props: OwnProps) => {
       disableRounding: true,
     });
 
-  const getReverseCounterValue = value =>
+  const getReverseCounterValue = (value) =>
     CounterValues.reverseWithIntermediarySelector(state, {
       from: currency,
       fromExchange,
@@ -232,5 +232,5 @@ const mapStateToProps = (state: State, props: OwnProps) => {
 
 export default compose(
   connect(mapStateToProps),
-  withTranslation(),
+  withTranslation()
 )(AmountInput);

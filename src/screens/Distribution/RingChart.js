@@ -12,7 +12,7 @@ import type { DistributionItem } from "./DistributionCard";
 type Props = {
   data: Array<DistributionItem>,
   size: number,
-  onHighlightChange: number => void,
+  onHighlightChange: (number) => void,
   highlight: number,
 };
 
@@ -30,7 +30,7 @@ class RingChart extends PureComponent<Props> {
   constructor(props: Props) {
     super(props);
     this.panResponder = PanResponder.create({
-      onPanResponderGrant: event => {
+      onPanResponderGrant: (event) => {
         this.offsetX = event.nativeEvent.pageX - event.nativeEvent.locationX;
         this.offsetY = event.nativeEvent.pageY - event.nativeEvent.locationY;
         this.findHighlightedArc(event);

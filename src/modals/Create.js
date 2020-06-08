@@ -33,7 +33,7 @@ export default function CreateModal({ isOpened, onClose }: ModalProps) {
         onClose();
       }
     },
-    [navigation, onClose],
+    [navigation, onClose]
   );
 
   const onSendFunds = useCallback(
@@ -41,14 +41,14 @@ export default function CreateModal({ isOpened, onClose }: ModalProps) {
       onNavigate(NavigatorName.SendFunds, {
         screen: ScreenName.SendFundsMain,
       }),
-    [onNavigate],
+    [onNavigate]
   );
   const onReceiveFunds = useCallback(
     () =>
       onNavigate(NavigatorName.ReceiveFunds, {
         screen: ScreenName.ReceiveSelectAccount,
       }),
-    [onNavigate],
+    [onNavigate]
   );
   const onExchange = useCallback(() => onNavigate(ScreenName.Exchange), [
     onNavigate,

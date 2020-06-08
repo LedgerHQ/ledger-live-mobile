@@ -35,7 +35,7 @@ export const pairsSelector = createSelector(
   (currencies, counterValueCurrency, state) => {
     if (currencies.length === 0) return [];
     const intermediaries = uniq(
-      currencies.map((c) => intermediaryCurrency(c, counterValueCurrency)),
+      currencies.map((c) => intermediaryCurrency(c, counterValueCurrency))
     ).filter((c) => c !== counterValueCurrency);
     return intermediaries
       .map((from) => ({
@@ -59,9 +59,9 @@ export const pairsSelector = createSelector(
             });
             return { from, to, exchange };
           })
-          .filter((p) => p),
+          .filter((p) => p)
       );
-  },
+  }
 );
 
 const addExtraPollingHooks = (schedulePoll, cancelPoll) => {
@@ -90,7 +90,7 @@ const addExtraPollingHooks = (schedulePoll, cancelPoll) => {
 
   AppState.addEventListener("change", handleAppStateChange);
   const unsubConnectionChange = NetInfo.addEventListener(
-    handleConnectivityChange,
+    handleConnectivityChange
   );
 
   return () => {
@@ -123,7 +123,7 @@ type PC = Promise<CryptoCurrency[]>;
 
 let sortCache;
 let syncCache = listCryptoCurrencies(true).sort((a, b) =>
-  a.name.localeCompare(b.name),
+  a.name.localeCompare(b.name)
 );
 
 export const getFullListSortedCryptoCurrencies: () => PC = () => {
@@ -146,7 +146,7 @@ export const getFullListSortedCryptoCurrencies: () => PC = () => {
       () => {
         sortCache = null; // reset the cache for the next time it comes here to "try again"
         return syncCache; // fallback on default sort
-      },
+      }
     );
   }
 

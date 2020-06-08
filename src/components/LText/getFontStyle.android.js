@@ -12,7 +12,7 @@ export default ({
   if (__DEV__) {
     invariant(
       !((semiBold || bold) && tertiary),
-      "There is no case where Rubik is semibold/bold in this design",
+      "There is no case where Rubik is semibold/bold in this design"
     );
   }
   const family = secondary

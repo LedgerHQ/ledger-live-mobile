@@ -42,12 +42,10 @@ class ConfettiParty extends PureComponent<*, { confetti: Array<Object> }> {
   }
 
   emitConfetti = () => {
-    this.setState(prevState => ({
+    this.setState((prevState) => ({
       confetti: [
         ...prevState.confetti,
-        ...Array(100)
-          .fill(null)
-          .map(confettiMap),
+        ...Array(100).fill(null).map(confettiMap),
       ],
     }));
   };

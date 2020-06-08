@@ -41,7 +41,7 @@ function RippleEditTag({ route, navigation }: Props) {
   const transaction = route.params?.transaction;
 
   const [tag, setTag] = useState<BigNumber | typeof undefined | null>(
-    transaction.tag,
+    transaction.tag
   );
 
   function onTagFieldFocus(): void {

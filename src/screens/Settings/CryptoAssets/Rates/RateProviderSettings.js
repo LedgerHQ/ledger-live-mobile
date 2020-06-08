@@ -16,7 +16,7 @@ import LText from "../../../../components/LText";
 const getExchanges = (from: Currency, to: Currency) =>
   CounterValues.fetchExchangesForPair(from, to);
 
-const extractFromTo = props => {
+const extractFromTo = (props) => {
   const { params } = props.route;
   const from = findCurrencyByTicker(params.from);
   const to = findCurrencyByTicker(params.to);
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const injectItems = C => {
+const injectItems = (C) => {
   class Clz extends Component<*, *> {
     state = {
       items: [],
@@ -85,12 +85,12 @@ const mapDispatchToProps = {
 
 const Screen = makeGenericSelectScreen({
   id: "RateProviderSettingsSelect",
-  itemEventProperties: item => ({ exchange: item.id }),
-  keyExtractor: item => item.id,
-  formatItem: item => item.name,
+  itemEventProperties: (item) => ({ exchange: item.id }),
+  keyExtractor: (item) => item.id,
+  formatItem: (item) => item.name,
 });
 
 export default injectItems(
   // $FlowFixMe
-  connect(mapStateToProps, mapDispatchToProps)(Screen),
+  connect(mapStateToProps, mapDispatchToProps)(Screen)
 );

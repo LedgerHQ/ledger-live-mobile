@@ -98,11 +98,11 @@ class EditAccountName extends PureComponent<Props, State> {
               defaultValue={initialAccountName}
               returnKeyType="done"
               maxLength={MAX_ACCOUNT_NAME_LENGHT}
-              onChangeText={accountName => this.setState({ accountName })}
+              onChangeText={(accountName) => this.setState({ accountName })}
               onSubmitEditing={this.onNameEndEditing}
               clearButtonMode="while-editing"
               placeholder={i18next.t(
-                "account.settings.accountName.placeholder",
+                "account.settings.accountName.placeholder"
               )}
             />
             <View style={styles.flex}>

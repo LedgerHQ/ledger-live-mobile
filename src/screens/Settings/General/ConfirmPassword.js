@@ -33,7 +33,7 @@ const mapDispatchToProps = {
 
 class ConfirmPassword extends PureComponent<Props, State> {
   componentDidMount() {
-    Keychain.getSupportedBiometryType().then(biometricsType => {
+    Keychain.getSupportedBiometryType().then((biometricsType) => {
       if (biometricsType) this.setState({ biometricsType });
     });
   }
@@ -107,5 +107,5 @@ class ConfirmPassword extends PureComponent<Props, State> {
 export default compose(
   // $FlowFixMe
   connect(null, mapDispatchToProps),
-  withTranslation(),
+  withTranslation()
 )(ConfirmPassword);

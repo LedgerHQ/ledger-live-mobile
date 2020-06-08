@@ -54,7 +54,7 @@ export default function ConnectDevice({ navigation, route }: Props) {
 
   const error = useMemo(
     () => (account ? getReceiveFlowError(account, parentAccount) : null),
-    [account, parentAccount],
+    [account, parentAccount]
   );
 
   const onSelectDevice = useCallback(
@@ -66,7 +66,7 @@ export default function ConnectDevice({ navigation, route }: Props) {
         ...meta,
       });
     },
-    [account, navigation, parentAccount],
+    [account, navigation, parentAccount]
   );
 
   const onSkipDevice = useCallback(() => {

@@ -35,7 +35,7 @@ export default function DeviceNameRow({
         deviceId,
         deviceName: savedName,
       }),
-    [deviceId, navigation, savedName],
+    [deviceId, navigation, savedName]
   );
 
   return (

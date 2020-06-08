@@ -10,7 +10,7 @@ import CheckBox from "../../components/CheckBox";
 
 class DisplayResultSettingsSection extends PureComponent<{
   checked: boolean,
-  onSwitch: boolean => void,
+  onSwitch: (boolean) => void,
 }> {
   render() {
     const { checked, onSwitch } = this.props;

@@ -18,7 +18,7 @@ import type { OnboardingStepProps } from "../types";
 
 class OnboardingStepWriteRecovery extends Component<
   OnboardingStepProps,
-  { isModalOpened: boolean },
+  { isModalOpened: boolean }
 > {
   state = {
     isModalOpened: false,

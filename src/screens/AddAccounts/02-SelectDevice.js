@@ -40,7 +40,7 @@ export default function AddAccountsSelectDevice({ navigation, route }: Props) {
         navigation.navigate(ScreenName.AddAccountsAccounts, arg);
       }
     },
-    [navigation, route],
+    [navigation, route]
   );
 
   useEffect(() => {
