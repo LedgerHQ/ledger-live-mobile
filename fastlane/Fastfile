@@ -87,6 +87,8 @@ platform :ios do
   private_lane :build do |options|
     method = (options[:development] ? "development" : "app-store")
 
+    sh("yarn rnuc .env.production")
+
     if options[:development]
       gym(
         scheme: "ledgerlivemobile",
@@ -188,6 +190,8 @@ platform :android do
   desc "private: build the app apk for the specified build `type`. Defaults to `Release`"
   private_lane :build do |options|
     type = options.fetch(:type, "Release")
+
+    sh("yarn rnuc .env.production")
 
     gradle(task: "clean", project_dir: 'android/')
     gradle(

@@ -14,6 +14,7 @@ fi
 
 echo "--- BUILD UNSIGNED APP ---"
 # Build unsigned app
+yarn rnuc .env.production
 cd android
 ./gradlew assembleRelease
 
