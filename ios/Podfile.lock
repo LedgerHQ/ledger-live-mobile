@@ -3,7 +3,7 @@ PODS:
   - boost-for-react-native (1.63.0)
   - CocoaAsyncSocket (7.6.4)
   - CocoaLibEvent (1.0.0)
-  - djinni_objc (4.11.0)
+  - djinni_objc (4.12.0)
   - DoubleConversion (1.1.6)
   - FBLazyVector (0.62.2)
   - FBReactNativeSpec (0.62.2):
@@ -69,7 +69,7 @@ PODS:
     - DoubleConversion
     - glog
   - glog (0.3.5)
-  - ledger-core-objc (4.11.0):
+  - ledger-core-objc (4.12.0):
     - djinni_objc
   - lottie-ios (3.1.8)
   - lottie-react-native (3.4.0):
@@ -247,13 +247,13 @@ PODS:
   - react-native-ble-plx (2.0.0):
     - MultiplatformBleAdapter (= 0.1.5)
     - React
-  - react-native-camera (3.26.0):
+  - react-native-camera (3.28.0):
     - React
-    - react-native-camera/RCT (= 3.26.0)
-    - react-native-camera/RN (= 3.26.0)
-  - react-native-camera/RCT (3.26.0):
+    - react-native-camera/RCT (= 3.28.0)
+    - react-native-camera/RN (= 3.28.0)
+  - react-native-camera/RCT (3.28.0):
     - React
-  - react-native-camera/RN (3.26.0):
+  - react-native-camera/RN (3.28.0):
     - React
   - react-native-fingerprint-scanner (5.0.0):
     - React
@@ -274,7 +274,7 @@ PODS:
     - React
   - react-native-version-number (0.3.6):
     - React
-  - react-native-webview (9.4.0):
+  - react-native-webview (10.2.3):
     - React
   - React-RCTActionSheet (0.62.2):
     - React-Core/RCTActionSheetHeaders (= 0.62.2)
@@ -346,9 +346,9 @@ PODS:
     - React
   - RNGestureHandler (1.6.1):
     - React
-  - RNKeychain (6.0.0):
+  - RNKeychain (6.1.1):
     - React
-  - RNLibLedgerCore (4.11.0):
+  - RNLibLedgerCore (4.12.0):
     - ledger-core-objc
     - React
   - RNOS (1.2.6):
@@ -588,7 +588,7 @@ SPEC CHECKSUMS:
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
   CocoaAsyncSocket: 694058e7c0ed05a9e217d1b3c7ded962f4180845
   CocoaLibEvent: 2fab71b8bd46dd33ddb959f7928ec5909f838e3f
-  djinni_objc: 1076088fe90615b4681346fb6bc5ad2563be5390
+  djinni_objc: 00fe3e8b5e8a429d43ec383e892044eafae10b16
   DoubleConversion: 5805e889d232975c086db112ece9ed034df7a0b2
   FBLazyVector: 4aab18c93cd9546e4bfed752b4084585eca8b245
   FBReactNativeSpec: 5465d51ccfeecb7faa12f9ae0024f2044ce4044e
@@ -601,7 +601,7 @@ SPEC CHECKSUMS:
   FlipperKit: 6dc9b8f4ef60d9e5ded7f0264db299c91f18832e
   Folly: 30e7936e1c45c08d884aa59369ed951a8e68cf51
   glog: 1f3da668190260b06b429bb211bfbee5cd790c28
-  ledger-core-objc: d6e1da4d592c4e98785a76a2c81eced493f4c311
+  ledger-core-objc: 1bbae170b7e0b6ea54ac061394bee9096fa06d2c
   lottie-ios: 48fac6be217c76937e36e340e2d09cf7b10b7f5f
   lottie-react-native: a664f59f1f298c2696dd0ae07b15cbdfc433cb02
   MultiplatformBleAdapter: 3c4391d428382738a47662ae1f665a29ce78ff39
@@ -617,7 +617,7 @@ SPEC CHECKSUMS:
   React-jsiexecutor: 1540d1c01bb493ae3124ed83351b1b6a155db7da
   React-jsinspector: 512e560d0e985d0e8c479a54a4e5c147a9c83493
   react-native-ble-plx: 21acd4201f9de46ab690b24898e8d3ad02f518fd
-  react-native-camera: 2b74be8edc1103c4c46d1f4e5f41723d9ff052cc
+  react-native-camera: 8ab02aac456a7db830980cef5f3772644fe96e1f
   react-native-fingerprint-scanner: 3e8c46641b5751a31f45e66789d4b6f342be5e6d
   react-native-locale: bd8edf0e51706d469af3e2fa568a8102213a3139
   react-native-netinfo: cb74e17062b2af5a16a4b137f32495f241df1a8e
@@ -627,7 +627,7 @@ SPEC CHECKSUMS:
   react-native-udp: 7823da0f50a80bec14ca4fd77601101f95a68892
   react-native-ultimate-config: 0578ad8093801f4d1bfd88cf93babf7264317fd9
   react-native-version-number: b415bbec6a13f2df62bf978e85bc0d699462f37f
-  react-native-webview: cf5527893252b3b036eea024a1da6996f7344c74
+  react-native-webview: 0bacc79175bc44869e4c1a015b9bc21df8cf4feb
   React-RCTActionSheet: f41ea8a811aac770e0cc6e0ad6b270c644ea8b7c
   React-RCTAnimation: 49ab98b1c1ff4445148b72a3d61554138565bad0
   React-RCTBlob: a332773f0ebc413a0ce85942a55b064471587a71
@@ -643,8 +643,8 @@ SPEC CHECKSUMS:
   RNCAsyncStorage: d059c3ee71738c39834a627476322a5a8cd5bf36
   RNCMaskedView: 5a8ec07677aa885546a0d98da336457e2bea557f
   RNGestureHandler: 8f09cd560f8d533eb36da5a6c5a843af9f056b38
-  RNKeychain: bf2d7e9a0ae7a073c07770dd2aa6d11c67581733
-  RNLibLedgerCore: 31ce2aa98ed7d6a7c1f20508129c6ec469793099
+  RNKeychain: db956c02a018f7dd3a0ea8a6cf3087bc1894bf2b
+  RNLibLedgerCore: 26f5642965e1a09fa4bad35e6b95932dc8384126
   RNOS: 6f2f9a70895bbbfbdad7196abd952e7b01d45027
   RNReanimated: b5ccb50650ba06f6e749c7c329a1bc3ae0c88b43
   RNScreens: 62211832af51e0aebcf6e8c36bcf7dd65592f244
