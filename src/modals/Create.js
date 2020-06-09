@@ -9,6 +9,7 @@ import { NavigatorName, ScreenName } from "../const";
 import { accountsCountSelector } from "../reducers/accounts";
 import IconSend from "../icons/Send";
 import IconReceive from "../icons/Receive";
+import IconSwap from "../icons/Swap";
 import IconExchange from "../icons/Exchange";
 import BottomModal from "../components/BottomModal";
 import BottomModalChoice from "../components/BottomModalChoice";
@@ -51,26 +52,44 @@ export default function CreateModal({ isOpened, onClose }: ModalProps) {
     onNavigate,
   ]);
 
+  const onSwap = useCallback(
+    () =>
+      onNavigate(NavigatorName.Swap, {
+        screen: ScreenName.SwapLanding,
+      }),
+    [onNavigate],
+  );
+
   return (
     <BottomModal id="CreateModal" isOpened={isOpened} onClose={onClose}>
-      <BottomModalChoice
-        event="TransferSend"
-        title={t("transfer.send.title")}
-        onPress={accountsCount > 0 && !readOnlyModeEnabled ? onSendFunds : null}
-        Icon={IconSend}
-      />
-      <BottomModalChoice
-        event="TransferReceive"
-        title={t("transfer.receive.title")}
-        onPress={accountsCount > 0 ? onReceiveFunds : null}
-        Icon={IconReceive}
-      />
-      <BottomModalChoice
-        event="TransferExchange"
-        title={t("transfer.exchange.title")}
-        Icon={IconExchange}
-        onPress={onExchange}
-      />
+      <SafeAreaView forceInset={forceInset}>
+        <BottomModalChoice
+          event="TransferSend"
+          title={t("transfer.send.title")}
+          onPress={
+            accountsCount > 0 && !readOnlyModeEnabled ? onSendFunds : null
+          }
+          Icon={IconSend}
+        />
+        <BottomModalChoice
+          event="TransferReceive"
+          title={t("transfer.receive.title")}
+          onPress={accountsCount > 0 ? onReceiveFunds : null}
+          Icon={IconReceive}
+        />
+        <BottomModalChoice
+          event="TransferSwap"
+          title={t("transfer.swap.title")}
+          Icon={IconSwap}
+          onPress={onSwap}
+        />
+        <BottomModalChoice
+          event="TransferExchange"
+          title={t("transfer.exchange.title")}
+          Icon={IconExchange}
+          onPress={onExchange}
+        />
+      </SafeAreaView>
     </BottomModal>
   );
 }

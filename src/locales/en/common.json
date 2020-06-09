@@ -506,6 +506,9 @@
     "StellarMemoRecommended": {
       "title": "When sending to this recipient, a memo may be required"
     },
+    "SwapExchangeRateOutOfBounds": {
+      "title": "Amount must be between {{unit}} {{minAmountFrom}} and {{unit}} {{maxAmountFrom}}"
+    },
     "generic": {
       "title": "{{message}}",
       "description": "Something went wrong. Please retry or contact us."
@@ -1224,6 +1227,53 @@
     },
     "exchange": {
       "title": "Buy crypto assets"
+    },
+    "swap": {
+      "title": "Swap",
+      "landing": {
+        "header": "Swap",
+        "title": "Welcome to Swap",
+        "disclaimer": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec commodo sed mi sit amet mattis. Sed nec lacus aliquam, cursus nulla vitae, condimentum velit"
+      },
+      "main": {
+        "header": "Swap"
+      },
+      "form": {
+        "tab": "Exchange",
+        "button": "Continue",
+        "from": "From",
+        "to": "To",
+        "balance": "Balance <0>123</0>",
+        "fromAccount": "Select Account",
+        "toAccount": "Select Account",
+        "noApp": {
+          "title":"App not installed on device",
+          "desc":"You need the app to be installed on your device to be able to swap it. Go to manager to install the app",
+          "cta":"Go to Manager",
+          "close":"Close"
+        },
+        "noAccounts": {
+          "title":"No {{ticker}} account",
+          "desc":"You don’t have any {{currencyName}} account. You need an origin account to be able to swap funds",
+          "cta":"Close"
+        },
+        "summary":{
+          "from": "From",
+          "to": "To",
+          "send": "Send",
+          "receive": "Receive",
+          "provider": "Provider",
+          "fees": "Fees"
+        }
+      },
+      "missingAppPlaceholder": {
+        "title": "Please install the Exchange app on your device",
+        "description": "Go to manager and install Exchange app to swap assets",
+        "button": "Go to Manager"
+      },
+      "history": {
+        "tab": "History"
+      }
     }
   },
   "sync": {

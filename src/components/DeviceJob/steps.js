@@ -28,6 +28,11 @@ import getDeviceNameTransport from "@ledgerhq/live-common/lib/hw/getDeviceName";
 import editDeviceNameTransport from "@ledgerhq/live-common/lib/hw/editDeviceName";
 import checkDeviceForManager from "@ledgerhq/live-common/lib/hw/checkDeviceForManager";
 import { listApps as listAppsTransport } from "@ledgerhq/live-common/lib/apps/hw";
+import { initSwap } from "@ledgerhq/live-common/lib/swap";
+import type {
+  Exchange,
+  ExchangeRate,
+} from "@ledgerhq/live-common/lib/swap/types";
 import type { SocketEvent } from "@ledgerhq/live-common/lib/types/manager";
 import BluetoothScanning from "../BluetoothScanning";
 import DeviceNanoAction from "../DeviceNanoAction";
@@ -493,4 +498,17 @@ export const editDeviceName: string => Step = deviceName => ({
     withDevice(meta.deviceId)(transport =>
       from(editDeviceNameTransport(transport, deviceName).then(() => meta)),
     ),
+});
+
+export const initSwapStep: ({
+  exchange: Exchange,
+  exchangeRate: ExchangeRate,
+}) => Step = ({ exchange, exchangeRate }) => ({
+  Body: ({ meta }: *) => (
+    <LText secondary semiBold style={styles.appInstalled}>{"wadus"}</LText>
+  ),
+
+  run: meta => {
+    return initSwap(exchange, exchangeRate, meta.deviceId);
+  },
 });
