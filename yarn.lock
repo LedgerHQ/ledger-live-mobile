@@ -3729,16 +3729,17 @@ detect-newline@^3.0.0:
   resolved "https://registry.yarnpkg.com/detect-newline/-/detect-newline-3.1.0.tgz#576f5dfc63ae1a192ff192d8ad3af6308991b651"
   integrity sha512-TLz+x/vEXm/Y7P7wn1EJFNLxYpUD4TgMosxY6fAVJUnJMbupHBOncxyWUG9OpTaH9EBD7uFI5LfEgmMOc54DsA==
 
-detox@^16.4.0:
-  version "16.4.0"
-  resolved "https://registry.yarnpkg.com/detox/-/detox-16.4.0.tgz#f4279fe725b020dadd6f2327bf6b5427a9f2d902"
-  integrity sha512-2dB6bJ9GCM7BuZCWubSRQLX1QLaKvPue9zu4+jcDMhhbQL08KKIClb2yelMalSyjtM04hX7OUw+SBArIwU13Dg==
+detox@^16.7.2:
+  version "16.7.2"
+  resolved "https://registry.yarnpkg.com/detox/-/detox-16.7.2.tgz#531c98416adf52d4ba95601b669969acadafb970"
+  integrity sha512-+837eRgk4xOewXmeF5H6vOTn0RbKUFIyCi5UsTXEhvplsMk+KrrqfKik2j8fvubJkByry7HqIN/JF9jKe+meIQ==
   dependencies:
     "@babel/core" "^7.4.5"
     bunyan "^1.8.12"
     bunyan-debug-stream "^1.1.0"
     chalk "^2.4.2"
     child-process-promise "^2.2.0"
+    find-up "^4.1.0"
     fs-extra "^4.0.2"
     funpermaproxy "^1.0.1"
     get-port "^2.1.0"

@@ -70,7 +70,7 @@
         "device": {
           "avdName": "Nexus_5X_API_29_x86"
         }
-    }
+      }
     },
     "test-runner": "jest"
   },
@@ -191,7 +191,7 @@
     "@babel/runtime": "^7.8.7",
     "@react-native-community/eslint-config": "^0.0.7",
     "babel-jest": "^25.1.0",
-    "detox": "^16.4.0",
+    "detox": "^16.7.2",
     "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-config-prettier": "^6.10.0",
