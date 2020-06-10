@@ -182,7 +182,7 @@ export default function CoinifyWidget({ mode, account, meta }: Props) {
             </View>
           ) : null
         }
-        originWhitelist={["https://*"]}
+        originWhitelist={["*"]}
         allowsInlineMediaPlayback
         source={{
           uri: url,
