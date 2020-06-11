@@ -1,12 +1,14 @@
 // @flow
+
 import React from "react";
-import { Platform } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useTranslation } from "react-i18next";
 import { ScreenName } from "../../const";
 import SwapSummary from "../../screens/Swap/Form/Summary";
+import SwapError from "../../screens/Swap/Form/Error";
 import SwapFormAmount from "../../screens/Swap/Form/Amount";
 import SwapFormOrHistory from "../../screens/Swap/FormOrHistory";
+import SwapPendingOperation from "../../screens/Swap/Form/PendingOperation";
 import SwapFormSelectCrypto from "../../screens/Swap/Form/SelectAccount/01-SelectCrypto";
 import SwapFormSelectAccount from "../../screens/Swap/Form/SelectAccount/02-SelectAccount";
 import { closableStackNavigatorConfig } from "../../navigation/navigatorConfig";
@@ -56,6 +58,22 @@ export default function SwapNavigator() {
         options={{
           headerTitle: () => <StepHeader title={t("transfer.swap.title")} />,
           headerRight: null,
+        }}
+      />
+      <Stack.Screen
+        name={ScreenName.SwapError}
+        component={SwapError}
+        options={{
+          headerTitle: () => <StepHeader title={t("transfer.swap.title")} />,
+          headerLeft: null,
+        }}
+      />
+      <Stack.Screen
+        name={ScreenName.SwapPendingOperation}
+        component={SwapPendingOperation}
+        options={{
+          headerTitle: () => <StepHeader title={t("transfer.swap.title")} />,
+          headerLeft: null,
         }}
       />
     </Stack.Navigator>

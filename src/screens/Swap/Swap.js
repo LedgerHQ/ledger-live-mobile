@@ -13,19 +13,13 @@ import colors from "../../colors";
 
 type MaybeProviders = ?(AvailableProvider[]);
 
-// const litecoinAccount =
-//   "libcore:1:litecoin:Ltub2Zx1tbqWB7AbC4fb7aWgsuyXBm2qt97gzG5av4PHAjdAhvdZQFHS7nmcScgtAvpgcGAkVQQvR9BXwu54ny6Yqwst4KQAnyD1Yx6VezNf1S8:segwit";
-// const bitcoinAccount =
-//   "libcore:1:bitcoin:xpub6DACJs4ZgE67HEu53j2osRtw51wfJybJ88ccVQnHpmjqr9XJfMYXn6Fxt3u772FonuWfqYUrb9Z9wxe2S9pTzxGDiQZDk1cMPiDH2S5HjYa:native_segwit";
-
 const Swap = () => {
   const [providers, setProviders] = useState<MaybeProviders>();
   const [showLandingPage, setShowLandingPage] = useState(true);
+  const [meta, setMeta] = useState({});
   const [installedApps, setInstalledApps] = useState();
   const { navigate } = useNavigation();
   const route = useRoute();
-
-  console.log("wadus -2", { params: route.params });
 
   useEffect(() => {
     getProviders().then(setProviders);
@@ -34,10 +28,12 @@ const Swap = () => {
   const onSetResult = useCallback(
     data => {
       if (!data) return;
-      const { installed } = data.appRes;
+      const { deviceId, deviceName, appRes } = data;
+      const { installed } = appRes;
       setInstalledApps(installed);
+      setMeta({ deviceId, deviceName });
     },
-    [setInstalledApps],
+    [setMeta, setInstalledApps],
   );
 
   const showInstallSwap =
@@ -57,18 +53,8 @@ const Swap = () => {
       ) : showInstallSwap ? (
         <MissingSwapApp />
       ) : (
-        <Form installedApps={installedApps} providers={providers} />
+        <Form installedApps={installedApps} meta={meta} providers={providers} />
       )}
-      {/* <DeviceJob
-            meta={{ ...result, modelId: "nanoX" }}
-            deviceModelId="nanoX"
-            steps={[
-              connectingStep,
-              initSwapStep({ exchange, exchangeRate: rate }),
-            ]}
-            onCancel={onCancel}
-            onDone={onDone}
-          /> */}
     </View>
   );
 };

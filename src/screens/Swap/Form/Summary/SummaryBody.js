@@ -1,31 +1,38 @@
 // @flow
-
 import React from "react";
-import { Trans } from "react-i18next";
 import { StyleSheet, View } from "react-native";
-import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
-import LText from "../../../components/LText";
-import type { SwapRouteParams } from ".";
-import CurrencyUnitValue from "../../../components/CurrencyUnitValue";
-import Button from "../../../components/Button";
+import { Trans } from "react-i18next";
+import { getAccountUnit } from "@ledgerhq/live-common/lib/account/helpers";
+import type {
+  Exchange,
+  ExchangeRate,
+} from "@ledgerhq/live-common/lib/swap/types";
+import LText from "../../../../components/LText";
+import CurrencyUnitValue from "../../../../components/CurrencyUnitValue";
 import SectionSeparator, {
   ArrowDownCircle,
-} from "../../../components/SectionSeparator";
-import CurrencyIcon from "../../../components/CurrencyIcon";
-import colors from "../../../colors";
+} from "../../../../components/SectionSeparator";
+import CurrencyIcon from "../../../../components/CurrencyIcon";
+import colors from "../../../../colors";
 
-type Props = {
-  navigation: any,
-  route: {
-    params: SwapRouteParams,
-  },
-};
+const SummaryBody = ({
+  exchange,
+  exchangeRate,
+}: {
+  exchange: Exchange,
+  exchangeRate: ExchangeRate,
+}) => {
+  const {
+    fromAccount,
+    fromCurrency,
+    fromAmount,
+    toAccount,
+    toCurrency,
+  } = exchange;
+  const { magnitudeAwareRate } = exchangeRate;
 
-const SwapFormSummary = ({ navigation, route }: Props) => {
-  const { exchange, exchangeRate, target } = route.params;
-  const { fromAccount, fromCurrency, toCurrency, toAccount } = exchange;
   return (
-    <View style={styles.root}>
+    <>
       <View style={styles.row}>
         <LText primary style={styles.label}>
           <Trans i18nKey="transfer.swap.form.summary.from" />
@@ -44,8 +51,8 @@ const SwapFormSummary = ({ navigation, route }: Props) => {
         <LText tertiary style={styles.value2}>
           <CurrencyUnitValue
             showCode
-            unit={getAccountUnit(toAccount)}
-            value={fromAccount.balance}
+            unit={getAccountUnit(fromAccount)}
+            value={fromAmount}
           />
         </LText>
       </View>
@@ -73,7 +80,7 @@ const SwapFormSummary = ({ navigation, route }: Props) => {
           <CurrencyUnitValue
             showCode
             unit={getAccountUnit(toAccount)}
-            value={toAccount.balance}
+            value={fromAmount.times(magnitudeAwareRate)}
           />
         </LText>
       </View>
@@ -89,30 +96,15 @@ const SwapFormSummary = ({ navigation, route }: Props) => {
             <Trans i18nKey="transfer.swap.form.summary.fees" />
           </LText>
           <LText tertiary style={styles.value3}>
-            {exchangeRate.rate}
+            {"!!!!{FIXME} I dont have a transaction"}
           </LText>
         </View>
       </View>
-      <View style={styles.buttonWrapper}>
-        <Button
-          event="SwapSummaryConfirm"
-          type={"primary"}
-          title={<Trans i18nKey="transfer.swap.form.button" />}
-          onPress={() => {}}
-          containerStyle={styles.button}
-        />
-      </View>
-    </View>
+    </>
   );
 };
 
 const styles = StyleSheet.create({
-  root: {
-    flex: 1,
-    padding: 16,
-    paddingTop: 32,
-    backgroundColor: colors.white,
-  },
   row: {
     justifyContent: "space-between",
     flexDirection: "row",
@@ -153,13 +145,6 @@ const styles = StyleSheet.create({
     backgroundColor: colors.lightFog,
     padding: 16,
   },
-  buttonWrapper: {
-    flex: 1,
-    justifyContent: "flex-end",
-  },
-  button: {
-    width: "100%",
-  },
 });
 
-export default SwapFormSummary;
+export default SummaryBody;

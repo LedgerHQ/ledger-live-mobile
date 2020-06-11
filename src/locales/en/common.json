@@ -509,6 +509,10 @@
     "SwapExchangeRateOutOfBounds": {
       "title": "Amount must be between {{unit}} {{minAmountFrom}} and {{unit}} {{maxAmountFrom}}"
     },
+    "SwapGenericAPIError": {
+      "title": "Timeout",
+      "description": "The offer has expired, please retry operation"
+    },
     "generic": {
       "title": "{{message}}",
       "description": "Something went wrong. Please retry or contact us."
@@ -1230,6 +1234,7 @@
     },
     "swap": {
       "title": "Swap",
+      "selectDevice": "Select your device",
       "landing": {
         "header": "Swap",
         "title": "Welcome to Swap",
@@ -1239,6 +1244,7 @@
         "header": "Swap"
       },
       "form": {
+        "validate": "Confirm Swap transaction",
         "tab": "Exchange",
         "button": "Continue",
         "from": "From",
@@ -1263,7 +1269,17 @@
           "send": "Send",
           "receive": "Receive",
           "provider": "Provider",
-          "fees": "Fees"
+          "fees": "Fees",
+          "title": "Pending operation",
+          "description": "Swap operation is being broadcasted to changely, that will treat it before sending you the requested funds. To see the status of your operation go to the history tab of the swap page",
+          "label": "Your Swap ID:",
+          "disclaimer": {
+            "title": "Terms and conditions",
+            "desc": "Exchange services provided by {{provider}}. By clicking “Accept”, I acknowledge and understand that my transaction may trigger AML/KYC verification according to {{provider}} AML/KYC.",
+            "tos": "Terms & conditions",
+            "accept": "Accept",
+            "reject": "Don't Accept"
+          }
         }
       },
       "missingAppPlaceholder": {

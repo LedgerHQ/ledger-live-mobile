@@ -4,10 +4,7 @@ import { View, StyleSheet, FlatList } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { useSelector } from "react-redux";
 import { Trans } from "react-i18next";
-import {
-  getAccountCurrency,
-  isAccountEmpty,
-} from "@ledgerhq/live-common/lib/account/helpers";
+import { getAccountCurrency } from "@ledgerhq/live-common/lib/account/helpers";
 import {
   accountsSelector,
   flattenAccountsSelector,
@@ -38,6 +35,7 @@ export default function SwapFormSelectAccount({ navigation, route }: Props) {
   const accounts = useSelector(accountsSelector);
   const keyExtractor = item => item.account.id;
   const { exchange, target } = route.params;
+
   const accountKey = target === "from" ? "fromAccount" : "toAccount";
   const parentAccountKey =
     target === "from" ? "fromParentAccount" : "toParentAccount";
@@ -56,7 +54,7 @@ export default function SwapFormSelectAccount({ navigation, route }: Props) {
             account={account}
             style={styles.card}
             onPress={() => {
-              navigation.navigate("wadus", {
+              navigation.navigate(ScreenName.SwapForm, {
                 ...route.params,
                 exchange: {
                   ...exchange,
@@ -100,7 +98,9 @@ export default function SwapFormSelectAccount({ navigation, route }: Props) {
             keys={SEARCH_KEYS}
             inputWrapperStyle={styles.card}
             list={allAccounts.filter(
-              a => getAccountCurrency(a) === currency && a.balance.gt(0),
+              a =>
+                getAccountCurrency(a) === currency &&
+                (target === "to" || a.balance.gt(0)),
             )}
             renderList={renderList}
             renderEmptySearch={() => (

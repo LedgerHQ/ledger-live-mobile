@@ -505,7 +505,18 @@ export const initSwapStep: ({
   exchangeRate: ExchangeRate,
 }) => Step = ({ exchange, exchangeRate }) => ({
   Body: ({ meta }: *) => (
-    <LText secondary semiBold style={styles.appInstalled}>{"wadus"}</LText>
+    <RenderStep
+      icon={
+        <DeviceNanoAction
+          width={240}
+          action="accept"
+          screen="validation"
+          modelId={meta.modelId}
+          wired={meta.wired}
+        />
+      }
+      title={<Trans i18nKey="transfer.swap.form.validate" />}
+    />
   ),
 
   run: meta => {

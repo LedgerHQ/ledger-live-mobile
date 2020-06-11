@@ -133,7 +133,7 @@ const SwapFormAmount = ({ navigation, route }: Props) => {
           <Button
             event="SwapAmountContinue"
             type="primary"
-            disabled={!!error || amount.eq(0)}
+            disabled={!!error || amount.eq(0) || !rate}
             title={<Trans i18nKey={"common.continue"} />}
             onPress={onContinue}
           />

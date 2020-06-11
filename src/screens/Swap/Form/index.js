@@ -20,8 +20,8 @@ import Icon from "react-native-vector-icons/dist/Ionicons";
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import type { Currency } from "@ledgerhq/live-common/lib/types";
 import { findTokenById } from "@ledgerhq/live-common/lib/data/tokens";
-import IconArrowDown from "../../../icons/ArrowDown";
 import CurrencyUnitValue from "../../../components/CurrencyUnitValue";
+
 import SectionSeparator, {
   ArrowDownCircle,
 } from "../../../components/SectionSeparator";
@@ -46,9 +46,11 @@ export type SwapRouteParams = {
 const Form = ({
   providers,
   installedApps,
+  meta,
 }: {
   providers: any,
   installedApps: any,
+  meta: any,
 }) => {
   const { navigate } = useNavigation();
   const route = useRoute();
@@ -65,7 +67,7 @@ const Form = ({
       }),
     [accounts, installedApps, selectableCurrencies],
   );
-  const { exchange } = route.params || {};
+  const { exchange, deviceId, deviceName } = route.params || {};
   const { fromAccount, fromCurrency, toAccount, toCurrency } = exchange || {};
 
   const startSelectAccountFlow = useCallback(
@@ -80,20 +82,21 @@ const Form = ({
       });
     },
     [
-      selectableCurrencies,
-      currenciesStatus,
-      exchange,
-      installedApps,
       navigate,
       providers,
+      installedApps,
+      exchange,
+      selectableCurrencies,
+      currenciesStatus,
     ],
   );
 
   const onContinue = useCallback(() => {
     navigate(ScreenName.SwapFormAmount, {
       ...route.params,
+      ...meta,
     });
-  }, [navigate, route.params]);
+  }, [navigate, meta, route.params]);
 
   const canContinue = useMemo(() => {
     if (!exchange) return false;

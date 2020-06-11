@@ -1,6 +1,7 @@
 // @flow
 
 import React from "react";
+import { Trans } from "react-i18next";
 import { StyleSheet } from "react-native";
 import SelectDevice from "../../components/SelectDevice";
 import {
@@ -15,7 +16,7 @@ const Connect = ({ setResult }: { setResult: () => void }) => {
   return (
     <>
       <LText semiBold style={styles.selectDevice}>
-        {"!!!Select your device!!!"}
+        <Trans i18nKey={"transfer.swap.selectDevice"} />
       </LText>
       <SelectDevice
         withArrows
