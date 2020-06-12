@@ -2,7 +2,14 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import { Trans } from "react-i18next";
-import { getAccountUnit } from "@ledgerhq/live-common/lib/account/helpers";
+import type {
+  Transaction,
+  TransactionStatus,
+} from "@ledgerhq/live-common/lib/types";
+import {
+  getAccountUnit,
+  getAccountCurrency,
+} from "@ledgerhq/live-common/lib/account/helpers";
 import type {
   Exchange,
   ExchangeRate,
@@ -16,21 +23,19 @@ import CurrencyIcon from "../../../../components/CurrencyIcon";
 import colors from "../../../../colors";
 
 const SummaryBody = ({
+  status,
   exchange,
   exchangeRate,
 }: {
+  status: TransactionStatus,
   exchange: Exchange,
   exchangeRate: ExchangeRate,
 }) => {
-  const {
-    fromAccount,
-    fromCurrency,
-    fromAmount,
-    toAccount,
-    toCurrency,
-  } = exchange;
+  const { fromAccount, toAccount } = exchange;
+  const fromCurrency = getAccountCurrency(fromAccount);
+  const toCurrency = getAccountCurrency(toAccount);
   const { magnitudeAwareRate } = exchangeRate;
-
+  const { amount, estimatedFees } = status;
   return (
     <>
       <View style={styles.row}>
@@ -52,7 +57,7 @@ const SummaryBody = ({
           <CurrencyUnitValue
             showCode
             unit={getAccountUnit(fromAccount)}
-            value={fromAmount}
+            value={amount}
           />
         </LText>
       </View>
@@ -80,7 +85,7 @@ const SummaryBody = ({
           <CurrencyUnitValue
             showCode
             unit={getAccountUnit(toAccount)}
-            value={fromAmount.times(magnitudeAwareRate)}
+            value={amount.times(magnitudeAwareRate)}
           />
         </LText>
       </View>
@@ -96,7 +101,11 @@ const SummaryBody = ({
             <Trans i18nKey="transfer.swap.form.summary.fees" />
           </LText>
           <LText tertiary style={styles.value3}>
-            {"!!!!{FIXME} I dont have a transaction"}
+            <CurrencyUnitValue
+              showCode
+              unit={getAccountUnit(fromAccount)}
+              value={estimatedFees}
+            />
           </LText>
         </View>
       </View>

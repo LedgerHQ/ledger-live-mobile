@@ -9,6 +9,7 @@ import type {
   TokenCurrency,
 } from "@ledgerhq/live-common/lib/types";
 import { useCurrenciesByMarketcap } from "@ledgerhq/live-common/lib/currencies";
+import { getAccountCurrency } from "@ledgerhq/live-common/lib/account";
 import type { SwapRouteParams } from "..";
 import BadSelectionModal from "./BadSelectionModal";
 import { ScreenName } from "../../../../const";
@@ -48,10 +49,13 @@ export default function SwapFormSelectCrypto({ route, navigation }: Props) {
     currenciesStatus,
     target,
   } = route.params;
+
   const [badSelection, setBadSelection] = useState(null);
   const maybeFilteredCurrencies =
     target === "to"
-      ? selectableCurrencies.filter(c => c !== exchange.fromCurrency)
+      ? selectableCurrencies.filter(
+          c => c !== getAccountCurrency(exchange.fromAccount),
+        )
       : selectableCurrencies;
   const sortedCryptoCurrencies = useCurrenciesByMarketcap(
     maybeFilteredCurrencies,
@@ -68,20 +72,19 @@ export default function SwapFormSelectCrypto({ route, navigation }: Props) {
           navigation.navigate(ScreenName.SwapFormSelectAccount, {
             exchange: {
               ...exchange,
-              fromCurrency: currencyOrToken,
               fromAccount: null,
-              toCurrency: null,
               toAccount: null,
             },
+            selectedCurrency: currencyOrToken,
             target,
           });
         } else {
           navigation.navigate(ScreenName.SwapFormSelectAccount, {
             exchange: {
               ...exchange,
-              toCurrency: currencyOrToken,
               toAccount: null,
             },
+            selectedCurrency: currencyOrToken,
             target,
           });
         }

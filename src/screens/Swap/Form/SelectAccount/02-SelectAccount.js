@@ -34,14 +34,11 @@ export default function SwapFormSelectAccount({ navigation, route }: Props) {
   const allAccounts = useSelector(flattenAccountsSelector);
   const accounts = useSelector(accountsSelector);
   const keyExtractor = item => item.account.id;
-  const { exchange, target } = route.params;
+  const { exchange, target, selectedCurrency } = route.params;
 
   const accountKey = target === "from" ? "fromAccount" : "toAccount";
   const parentAccountKey =
     target === "from" ? "fromParentAccount" : "toParentAccount";
-  const currency =
-    target === "from" ? exchange.fromCurrency : exchange.toCurrency;
-
   const renderItem = useCallback(
     ({ item: result }: { item: SearchResult }) => {
       const { account } = result;
@@ -99,7 +96,7 @@ export default function SwapFormSelectAccount({ navigation, route }: Props) {
             inputWrapperStyle={styles.card}
             list={allAccounts.filter(
               a =>
-                getAccountCurrency(a) === currency &&
+                getAccountCurrency(a) === selectedCurrency &&
                 (target === "to" || a.balance.gt(0)),
             )}
             renderList={renderList}

@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
 import { useDispatch } from "react-redux";
 import { getMainAccount } from "@ledgerhq/live-common/lib/account";
+import type { Transaction } from "@ledgerhq/live-common/lib/types";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { concat, of, from } from "rxjs";
 import { concatMap, filter } from "rxjs/operators";
@@ -21,6 +22,7 @@ import { connectingStep, initSwapStep } from "../../components/DeviceJob/steps";
 type Props = {
   exchange: Exchange,
   exchangeRate: ExchangeRate,
+  transaction: Transaction,
   deviceId: string,
   deviceName: string,
   onComplete: (swapId: string) => void,
@@ -30,6 +32,7 @@ type Props = {
 const Confirmation = ({
   exchange,
   exchangeRate,
+  transaction,
   deviceId,
   deviceName,
   onComplete,
@@ -119,7 +122,10 @@ const Confirmation = ({
     <DeviceJob
       meta={{ deviceId, deviceName, modelId: "nanoX" }}
       deviceModelId="nanoX"
-      steps={[connectingStep, initSwapStep({ exchange, exchangeRate })]}
+      steps={[
+        connectingStep,
+        initSwapStep({ exchange, exchangeRate, transaction }),
+      ]}
       onCancel={onCancel}
       onDone={({ initSwapResult, error }) => {
         if (error) {

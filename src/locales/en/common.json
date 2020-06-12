@@ -1252,6 +1252,10 @@
         "balance": "Balance <0>123</0>",
         "fromAccount": "Select Account",
         "toAccount": "Select Account",
+        "amount": {
+          "useMax": "Use max",
+          "available": "Total available"
+        },
         "noApp": {
           "title":"App not installed on device",
           "desc":"You need the app to be installed on your device to be able to swap it. Go to manager to install the app",
@@ -1269,7 +1273,7 @@
           "send": "Send",
           "receive": "Receive",
           "provider": "Provider",
-          "fees": "Fees",
+          "fees": "Max fees",
           "title": "Pending operation",
           "description": "Swap operation is being broadcasted to changely, that will treat it before sending you the requested funds. To see the status of your operation go to the history tab of the swap page",
           "label": "Your Swap ID:",

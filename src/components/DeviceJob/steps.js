@@ -7,7 +7,11 @@ import { Trans, useTranslation } from "react-i18next";
 import { from, of } from "rxjs";
 import { map, first, retryWhen } from "rxjs/operators";
 import { useNavigation } from "@react-navigation/native";
-import type { CryptoCurrency, Account } from "@ledgerhq/live-common/lib/types";
+import type {
+  CryptoCurrency,
+  Account,
+  Transaction,
+} from "@ledgerhq/live-common/lib/types";
 import { getDeviceModel } from "@ledgerhq/devices";
 import getAddress from "@ledgerhq/live-common/lib/hw/getAddress";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
@@ -503,7 +507,8 @@ export const editDeviceName: string => Step = deviceName => ({
 export const initSwapStep: ({
   exchange: Exchange,
   exchangeRate: ExchangeRate,
-}) => Step = ({ exchange, exchangeRate }) => ({
+  transaction: Transaction,
+}) => Step = ({ exchange, exchangeRate, transaction }) => ({
   Body: ({ meta }: *) => (
     <RenderStep
       icon={
@@ -520,6 +525,6 @@ export const initSwapStep: ({
   ),
 
   run: meta => {
-    return initSwap(exchange, exchangeRate, meta.deviceId);
+    return initSwap(exchange, exchangeRate, transaction, meta.deviceId);
   },
 });

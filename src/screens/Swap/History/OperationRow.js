@@ -79,8 +79,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
   },
   arrow: {
-    flexShrink: 0,
-    flexGrow: 1,
+    flex: 1,
     marginLeft: 16,
     marginRight: 16,
     alignItems: "center",
@@ -106,7 +105,7 @@ const styles = StyleSheet.create({
     color: colors.grey,
   },
   accountWrapper: {
-    flexShrink: 1,
+    width: "35%",
   },
 });
 

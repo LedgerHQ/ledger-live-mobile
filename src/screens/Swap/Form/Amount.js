@@ -1,9 +1,17 @@
 // @flow
 import React, { useCallback, useEffect, useState } from "react";
+import invariant from "invariant";
 import { BigNumber } from "bignumber.js";
-import { View, StyleSheet } from "react-native";
+import { View, Switch, StyleSheet } from "react-native";
 import { Trans } from "react-i18next";
-import { getAccountUnit } from "@ledgerhq/live-common/lib/account/helpers";
+import {
+  getAccountUnit,
+  getAccountCurrency,
+  getMainAccount,
+} from "@ledgerhq/live-common/lib/account/helpers";
+import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
+import { getAbandonSeedAddress } from "@ledgerhq/live-common/lib/data/abandonseed";
+import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
 import { NotEnoughBalance } from "@ledgerhq/errors";
 import { getExchangeRates } from "@ledgerhq/live-common/lib/swap";
 import type { SwapRouteParams } from ".";
@@ -24,66 +32,115 @@ type Props = {
 };
 
 const SwapFormAmount = ({ navigation, route }: Props) => {
-  const { exchange, target } = route.params;
-  const { fromAccount, toAccount } = exchange;
+  const { exchange } = route.params;
+  const { fromAccount, fromParentAccount, toAccount } = exchange;
   const fromUnit = getAccountUnit(fromAccount);
   const toUnit = getAccountUnit(toAccount);
   const warning = null;
-  const [amount, setAmount] = useState(BigNumber(0));
   const [error, setError] = useState(null);
   const [rate, setRate] = useState(null);
+  const [useAllAmount, setUseAllAmount] = useState(false);
+  const [maxSpendable, setMaxSpendable] = useState(BigNumber(0));
+
+  const { status, transaction, setTransaction } = useBridgeTransaction(() => ({
+    account: fromAccount,
+    parentAccount: fromParentAccount,
+  }));
+
+  invariant(transaction, "transaction must be defined");
+
+  const onAmountChange = useCallback(
+    amount => {
+      if (!amount.eq(transaction.amount)) {
+        const bridge = getAccountBridge(fromAccount, fromParentAccount);
+        const fromCurrency = getAccountCurrency(
+          getMainAccount(fromAccount, fromParentAccount),
+        );
+        console.log("ABANDONESEED", getAbandonSeedAddress(fromCurrency.id))
+        setTransaction(
+          bridge.updateTransaction(transaction, {
+            amount,
+            recipient: getAbandonSeedAddress(fromCurrency.id),
+          }),
+        );
+        setRate(null);
+
+        if (maxSpendable && maxSpendable.gt(0) && amount.gt(maxSpendable)) {
+          setError(new NotEnoughBalance());
+        } else {
+          setError(null);
+        }
+      }
+    },
+    [fromAccount, fromParentAccount, maxSpendable, setTransaction, transaction],
+  );
 
   useEffect(() => {
     let ignore = false;
-    async function getRates() {
-      try {
-        const rates = await getExchangeRates({
-          ...exchange,
-          fromAmount: amount,
-        });
-        if (ignore) return;
-        setError(null);
-        setRate(rates[0]); // TODO when we have more rates, what?
-      } catch (error) {
-        if (ignore) return;
-        setError(error);
-      }
+    async function getEstimatedMaxSpendable() {
+      const bridge = getAccountBridge(fromAccount, fromParentAccount);
+      const max = await bridge.estimateMaxSpendable({
+        account: fromAccount,
+        parentAccount: fromParentAccount,
+        transaction,
+      });
+      setMaxSpendable(max);
     }
-    if (!ignore && amount.gt(0) && !amount.isNaN()) {
-      if (amount.gt(fromAccount.balance)) {
-        // TODO use available balance instead
-        setError(new NotEnoughBalance());
-      } else {
-        getRates();
-      }
+    if (!ignore) {
+      getEstimatedMaxSpendable();
     }
 
     return () => {
       ignore = true;
     };
-  }, [exchange, fromAccount, toAccount, amount]);
+  }, [transaction, fromAccount, fromParentAccount]);
+
+  useEffect(() => {
+    let ignore = false;
+    async function getRates() {
+      try {
+        const rates = await getExchangeRates(exchange, transaction);
+        if (ignore) return;
+
+        setRate(rates[0]); // FIXME when we have more rates, what?
+      } catch (error) {
+        if (ignore) return;
+        setError(error);
+      }
+    }
+    if (!ignore && !error && transaction.amount.gt(0)) {
+      getRates();
+    }
+
+    return () => {
+      ignore = true;
+    };
+  }, [exchange, fromAccount, toAccount, error, transaction]);
 
   const onContinue = useCallback(() => {
     navigation.navigate(ScreenName.SwapSummary, {
       ...route.params,
-      exchange: {
-        ...exchange,
-        fromAmount: amount,
-      },
+      exchange,
       exchangeRate: rate,
+      transaction,
+      status,
     });
-  }, [amount, exchange, navigation, rate, route.params]);
+  }, [transaction, status, exchange, navigation, rate, route.params]);
+
+  const toggleSendMax = useCallback(() => {
+    const newUseAllAmount = !useAllAmount;
+    setUseAllAmount(newUseAllAmount);
+    onAmountChange(newUseAllAmount ? maxSpendable : BigNumber(0));
+  }, [useAllAmount, setUseAllAmount, onAmountChange, maxSpendable]);
 
   return (
     <View style={styles.container}>
       <View style={styles.wrapper}>
         <CurrencyInput
-          editable={true}
-          isActive={true}
-          // onFocus={this.onCryptoFieldFocus}
-          onChange={setAmount}
+          editable={!useAllAmount}
+          onChange={onAmountChange}
           unit={fromUnit}
-          value={amount}
+          value={transaction.amount}
           renderRight={
             <LText style={[styles.currency, styles.active]} tertiary>
               {fromUnit.code}
@@ -103,7 +160,9 @@ const SwapFormAmount = ({ navigation, route }: Props) => {
         <CurrencyInput
           isActive={false}
           unit={toUnit}
-          value={rate ? amount.times(rate.magnitudeAwareRate) : null}
+          value={
+            rate ? transaction.amount.times(rate.magnitudeAwareRate) : null
+          }
           placeholder={"0"}
           editable={false}
           showAllDigits
@@ -118,22 +177,32 @@ const SwapFormAmount = ({ navigation, route }: Props) => {
         <View style={styles.available}>
           <View style={styles.availableLeft}>
             <LText>
-              <Trans i18nKey="send.amount.available" />
+              <Trans i18nKey="transfer.swap.form.amount.available" />
             </LText>
             <LText tertiary style={styles.availableAmount}>
               <CurrencyUnitValue
                 showCode
                 unit={fromUnit}
-                value={fromAccount.balance}
+                value={maxSpendable}
               />
             </LText>
+          </View>
+          <View style={styles.availableRight}>
+            <LText style={styles.maxLabel}>
+              <Trans i18nKey="transfer.swap.form.amount.useMax" />
+            </LText>
+            <Switch
+              style={styles.switch}
+              value={useAllAmount}
+              onValueChange={toggleSendMax}
+            />
           </View>
         </View>
         <View style={styles.continueWrapper}>
           <Button
             event="SwapAmountContinue"
             type="primary"
-            disabled={!!error || amount.eq(0) || !rate}
+            disabled={!!error || transaction.amount.eq(0) || !rate}
             title={<Trans i18nKey={"common.continue"} />}
             onPress={onContinue}
           />

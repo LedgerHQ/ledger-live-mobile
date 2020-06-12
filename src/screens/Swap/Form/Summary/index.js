@@ -19,8 +19,14 @@ type Props = {
 };
 
 const SwapFormSummary = ({ navigation, route }: Props) => {
-  const { exchange, exchangeRate, deviceName, deviceId } = route.params;
-  const { fromAccount, fromCurrency, fromAmount } = exchange;
+  const {
+    exchange,
+    exchangeRate,
+    transaction,
+    status,
+    deviceName,
+    deviceId,
+  } = route.params;
   const [confirmed, setConfirmed] = useState(false);
   const [acceptedDisclaimer, setAcceptedDisclaimer] = useState(false);
 
@@ -31,26 +37,27 @@ const SwapFormSummary = ({ navigation, route }: Props) => {
 
   return (
     <View style={styles.root}>
-      <SummaryBody exchange={exchange} exchangeRate={exchangeRate} />
+      <SummaryBody
+        exchange={exchange}
+        exchangeRate={exchangeRate}
+        status={status}
+      />
       {confirmed ? (
         acceptedDisclaimer ? (
           <Confirmation
             exchange={exchange}
             exchangeRate={exchangeRate}
+            transaction={transaction}
             deviceId={deviceId}
             deviceName={deviceName}
             onComplete={swapId =>
               navigation.replace(ScreenName.SwapPendingOperation, { swapId })
             }
             onError={error => {
-              setConfirmed(false);
-              setAcceptedDisclaimer(false);
+              reset();
               navigation.navigate(ScreenName.SwapError, { error });
             }}
-            onCancel={() => {
-              setConfirmed(false);
-              setAcceptedDisclaimer(false);
-            }}
+            onCancel={reset}
           />
         ) : (
           <DisclaimerModal

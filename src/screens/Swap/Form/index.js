@@ -17,8 +17,15 @@ import type {
 } from "@ledgerhq/live-common/lib/swap/types";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/dist/Ionicons";
-import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
-import type { Currency } from "@ledgerhq/live-common/lib/types";
+import {
+  getAccountUnit,
+  getAccountCurrency,
+} from "@ledgerhq/live-common/lib/account";
+import type {
+  Currency,
+  Transaction,
+  TransactionStatus,
+} from "@ledgerhq/live-common/lib/types";
 import { findTokenById } from "@ledgerhq/live-common/lib/data/tokens";
 import CurrencyUnitValue from "../../../components/CurrencyUnitValue";
 
@@ -38,6 +45,11 @@ export type SwapRouteParams = {
   exchangeRate: ExchangeRate,
   currenciesStatus: CurrenciesStatus,
   selectableCurrencies: Currency[],
+  transaction?: Transaction,
+  status?: TransactionStatus,
+  deviceName?: string,
+  deviceId?: string,
+  selectedCurrency?: Currency,
   providers: any,
   installedApps: any,
   target: "from" | "to",
@@ -68,7 +80,9 @@ const Form = ({
     [accounts, installedApps, selectableCurrencies],
   );
   const { exchange, deviceId, deviceName } = route.params || {};
-  const { fromAccount, fromCurrency, toAccount, toCurrency } = exchange || {};
+  const { fromAccount, toAccount } = exchange || {};
+  const fromCurrency = fromAccount ? getAccountCurrency(fromAccount) : null;
+  const toCurrency = toAccount ? getAccountCurrency(toAccount) : null;
 
   const startSelectAccountFlow = useCallback(
     (target: SelectAccountFlowTarget) => {
@@ -100,8 +114,8 @@ const Form = ({
 
   const canContinue = useMemo(() => {
     if (!exchange) return false;
-    const { fromCurrency, fromAccount, toCurrency, toAccount } = exchange;
-    return fromCurrency && fromAccount && toCurrency && toAccount;
+    const { fromAccount, toAccount } = exchange;
+    return fromAccount && toAccount;
   }, [exchange]);
 
   return (
