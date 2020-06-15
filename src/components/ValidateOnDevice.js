@@ -1,5 +1,6 @@
 // @flow
 import React from "react";
+import invariant from "invariant";
 import { View, StyleSheet, ScrollView } from "react-native";
 import { Trans, useTranslation } from "react-i18next";
 import type {
@@ -12,6 +13,9 @@ import {
   getMainAccount,
   getAccountUnit,
 } from "@ledgerhq/live-common/lib/account";
+
+import { getDeviceTransactionConfig } from "@ledgerhq/live-common/lib/transaction";
+import type { DeviceTransactionField } from "@ledgerhq/live-common/lib/transaction";
 import type { DeviceModelId } from "@ledgerhq/devices";
 import { getDeviceModel } from "@ledgerhq/devices";
 
@@ -21,7 +25,74 @@ import DeviceNanoAction from "./DeviceNanoAction";
 import VerifyAddressDisclaimer from "./VerifyAddressDisclaimer";
 import getWindowDimensions from "../logic/getWindowDimensions";
 import perFamilyTransactionConfirmFields from "../generated/TransactionConfirmFields";
-import { DataRowUnitValue } from "./ValidateOnDeviceDataRow";
+import { DataRow, DataRowUnitValue } from "./ValidateOnDeviceDataRow";
+
+export type FieldComponentProps = {
+  account: AccountLike,
+  parentAccount: ?Account,
+  transaction: Transaction,
+  status: TransactionStatus,
+  field: DeviceTransactionField,
+};
+
+export type FieldComponent = React$ComponentType<FieldComponentProps>;
+
+const AmountField = ({
+  account,
+  status: { amount },
+  field,
+}: FieldComponentProps) => (
+  <DataRowUnitValue
+    label={field.label}
+    unit={getAccountUnit(account)}
+    value={amount}
+  />
+);
+
+const FeesField = ({
+  account,
+  parentAccount,
+  status,
+  field,
+}: FieldComponentProps) => {
+  const mainAccount = getMainAccount(account, parentAccount);
+  const { estimatedFees } = status;
+  const feesUnit = getAccountUnit(mainAccount);
+  return (
+    <DataRowUnitValue
+      label={field.label}
+      unit={feesUnit}
+      value={estimatedFees}
+    />
+  );
+};
+
+const AddressField = ({ field }: FieldComponentProps) => {
+  invariant(field.type === "address", "AddressField invalid");
+  return (
+    <DataRow label={field.label}>
+      <LText>{field.address}</LText>
+    </DataRow>
+  );
+};
+
+// NB Leaving AddressField although I think it's redundant at this point
+// in case we want specific styles for addresses.
+const TextField = ({ field }: FieldComponentProps) => {
+  invariant(field.type === "text", "TextField invalid");
+  return (
+    <DataRow label={field.label}>
+      <LText>{field.value}</LText>
+    </DataRow>
+  );
+};
+
+const commonFieldComponents: { [_: *]: FieldComponent } = {
+  amount: AmountField,
+  fees: FeesField,
+  address: AddressField,
+  text: TextField,
+};
 
 type Props = {
   modelId: DeviceModelId,
@@ -43,15 +114,23 @@ export default function ValidateOnDevice({
   transaction,
 }: Props) {
   const { t } = useTranslation();
-  const { amount, estimatedFees } = status;
   const mainAccount = getMainAccount(account, parentAccount);
-  const mainAccountUnit = getAccountUnit(mainAccount);
-  const unit = getAccountUnit(account);
   const r = perFamilyTransactionConfirmFields[mainAccount.currency.family];
-  const Fees = r && r.fee;
-  const Pre = r && r.pre;
-  const Post = r && r.post;
-  const noFees = r && r.disableFees && r.disableFees(transaction);
+
+  const fieldComponents = {
+    ...commonFieldComponents,
+    ...(r && r.fieldComponents),
+  };
+  const Warning = r && r.warning;
+  const Title = r && r.title;
+
+  const fields = getDeviceTransactionConfig({
+    account,
+    parentAccount,
+    transaction,
+    status,
+  });
+
   const transRecipientWording = t(
     `ValidateOnDevice.recipientWording.${transaction.mode || "send"}`,
   );
@@ -83,50 +162,48 @@ export default function ValidateOnDevice({
               screen="validation"
             />
           </View>
-          <View style={styles.titleContainer}>
-            <LText secondary semiBold style={styles.title}>
-              {titleWording}
-            </LText>
-          </View>
+          {Title ? (
+            <Title
+              account={account}
+              parentAccount={parentAccount}
+              transaction={transaction}
+              status={status}
+            />
+          ) : (
+            <View style={styles.titleContainer}>
+              <LText secondary semiBold style={styles.title}>
+                {titleWording}
+              </LText>
+            </View>
+          )}
 
           <View style={styles.dataRows}>
-            {Pre ? (
-              <Pre
-                account={account}
-                parentAccount={parentAccount}
-                transaction={transaction}
-                status={status}
-              />
-            ) : null}
-
-            {!amount.isZero() ? (
-              <DataRowUnitValue
-                label={<Trans i18nKey="send.validation.amount" />}
-                unit={unit}
-                value={amount}
-              />
-            ) : null}
-            {!noFees ? (
-              Fees ? (
-                <Fees
+            {fields.map((field, i) => {
+              const MaybeComponent = fieldComponents[field.type];
+              if (!MaybeComponent) {
+                console.warn(
+                  `TransactionConfirm field ${field.type} is not implemented! add a generic implementation in components/TransactionConfirm.js or inside families/*/TransactionConfirmFields.js`,
+                );
+                return null;
+              }
+              return (
+                <MaybeComponent
+                  key={i}
+                  field={field}
+                  account={account}
+                  parentAccount={parentAccount}
                   transaction={transaction}
-                  unit={mainAccountUnit}
-                  value={estimatedFees}
+                  status={status}
                 />
-              ) : (
-                <DataRowUnitValue
-                  label={<Trans i18nKey="send.validation.fees" />}
-                  unit={mainAccountUnit}
-                  value={estimatedFees}
-                />
-              )
-            ) : null}
+              );
+            })}
 
-            {Post ? (
-              <Post
+            {Warning ? (
+              <Warning
                 account={account}
                 parentAccount={parentAccount}
                 transaction={transaction}
+                recipientWording={recipientWording}
                 status={status}
               />
             ) : null}
