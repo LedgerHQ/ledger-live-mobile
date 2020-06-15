@@ -923,7 +923,7 @@
     },
     "claimReward": {
       "sectionLabel": "Rewards",
-      "cta": "Claim rewards"
+      "cta": "Claim"
     },
     "undelegation": {
       "sectionLabel": "Undelegation(s)"
@@ -1731,8 +1731,7 @@
             "totalAvailable": "Total available: <0>{{amount}}</0>",
             "allAssetsUsed": "All assets used",
             "noResultsFound": "No validators found for <0>{{search}}</0>",
-            "currentAmount": "(+ <0>{{amount}}</0>)",
-            "feesInfo": "Selected amounts are fees included"
+            "currentAmount": "(+ <0>{{amount}}</0>)"
           },
           "amount": {
             "assetsRemaining": "Assets remaining: <0>{{amount}}</0>",
@@ -2046,7 +2045,6 @@
     "goToAccount": "Go to account",
     "howDelegationWorks": "How delegation works",
     "actions": {
-      "delegate": "Delegate",
       "redelegate": "Redelegate",
       "collectRewards": "Collect rewards",
       "undelegate": "Undelegate"
