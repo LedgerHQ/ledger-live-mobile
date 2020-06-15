@@ -25,7 +25,11 @@ import DeviceNanoAction from "./DeviceNanoAction";
 import VerifyAddressDisclaimer from "./VerifyAddressDisclaimer";
 import getWindowDimensions from "../logic/getWindowDimensions";
 import perFamilyTransactionConfirmFields from "../generated/TransactionConfirmFields";
-import { DataRow, DataRowUnitValue } from "./ValidateOnDeviceDataRow";
+import {
+  DataRow,
+  DataRowUnitValue,
+  DataColumn,
+} from "./ValidateOnDeviceDataRow";
 
 export type FieldComponentProps = {
   account: AccountLike,
@@ -70,9 +74,9 @@ const FeesField = ({
 const AddressField = ({ field }: FieldComponentProps) => {
   invariant(field.type === "address", "AddressField invalid");
   return (
-    <DataRow label={field.label}>
+    <DataColumn label={field.label}>
       <LText>{field.address}</LText>
-    </DataRow>
+    </DataColumn>
   );
 };
 
