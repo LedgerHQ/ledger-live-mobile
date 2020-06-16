@@ -56,7 +56,6 @@ const SwapFormAmount = ({ navigation, route }: Props) => {
         const fromCurrency = getAccountCurrency(
           getMainAccount(fromAccount, fromParentAccount),
         );
-        console.log("ABANDONESEED", getAbandonSeedAddress(fromCurrency.id))
         setTransaction(
           bridge.updateTransaction(transaction, {
             amount,

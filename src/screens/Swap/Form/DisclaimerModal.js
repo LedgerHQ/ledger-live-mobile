@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
   },
   firstButton: {
     marginTop: 24,
-  }
+  },
 });
 
 export default DisclaimerModal;

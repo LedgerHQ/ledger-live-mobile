@@ -1,37 +1,52 @@
 import React, { useRef, useEffect, useState } from "react";
 import { StyleSheet, View, Animated, SectionList } from "react-native";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import getCompleteSwapHistory from "@ledgerhq/live-common/lib/swap/getCompleteSwapHistory";
+import updateAccountSwapStatus from "@ledgerhq/live-common/lib/swap/updateAccountSwapStatus";
+import { updateAccountWithUpdater } from "../../../actions/accounts";
 import { accountsSelector } from "../../../reducers/accounts";
 import OperationRow from "./OperationRow";
 import LText from "../../../components/LText";
-import accountSyncRefreshControl from "../../../components/accountSyncRefreshControl";
 import colors from "../../../colors";
 
 const AnimatedSectionList = Animated.createAnimatedComponent(SectionList);
-const List = accountSyncRefreshControl(AnimatedSectionList);
 
 const History = () => {
   const accounts = useSelector(accountsSelector);
+  const dispatch = useDispatch();
   const [sections, setSections] = useState([]);
-
   const ref = useRef();
+
+  const accountsRef = useRef(accounts);
+
+  useEffect(() => {
+    accountsRef.current = accounts;
+  }, [accounts]);
 
   useEffect(() => {
     (async function asyncGetCompleteSwapHistory() {
-      // Do the day mapping for this on live-common side
-      setSections([
-        { day: new Date(), data: await getCompleteSwapHistory(accounts, true) },
-      ]);
-      setSections([
-        { day: new Date(), data: await getCompleteSwapHistory(accounts) },
-      ]);
+      setSections(await getCompleteSwapHistory(accounts));
     })();
   }, [accounts, setSections]);
 
+  useEffect(() => {
+    (async function asyncUpdateAccountSwapStatus() {
+      const newAccounts = await Promise.all(
+        accountsRef.current.map(updateAccountSwapStatus),
+      );
+      newAccounts.forEach(account =>
+        dispatch(
+          updateAccountWithUpdater(account.id, a =>
+            account === a ? null : account,
+          ),
+        ),
+      );
+    })();
+  }, [dispatch]);
+
   return (
     <View style={styles.root}>
-      <List
+      <AnimatedSectionList
         ref={ref}
         sections={sections}
         style={styles.sectionList}
