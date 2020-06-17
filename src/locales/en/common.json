@@ -1851,7 +1851,7 @@
           },
           "verification": {
             "success": {
-              "title": "You have successfully claimed your rewards, they automatically added to the available balance.",
+              "title": "You have successfully claimed your rewards, they were automatically added to your available balance.",
               "titleCompound": "Your rewards have been automaticaly delegated to the same validator.",
               "text": "Your account balance will update once the blockchain has confirmed the transaction.",
               "cta": "View details"
