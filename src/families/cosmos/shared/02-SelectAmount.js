@@ -278,6 +278,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    minHeight: 150,
   },
   inputStyle: { textAlign: "center", fontSize: 40, fontWeight: "600" },
   ratioButtonContainer: {
