@@ -104,13 +104,17 @@ export default function DelegationDrawer({
           showsVerticalScrollIndicator={true}
         >
           {data.map((field, i) => (
-            <DataField {...field} isLast={i === data.length - 1} />
+            <DataField
+              {...field}
+              key={field.label}
+              isLast={i === data.length - 1}
+            />
           ))}
         </ScrollView>
 
         <View style={[styles.row, styles.actionsRow]}>
-          {actions.map(props => (
-            <ActionButton {...props} />
+          {actions.map(a => (
+            <ActionButton {...a} key={a.label} />
           ))}
         </View>
       </SafeAreaView>
