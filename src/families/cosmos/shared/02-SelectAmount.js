@@ -6,7 +6,8 @@ import {
   StyleSheet,
   Keyboard,
   TouchableOpacity,
-  ScrollView,
+  TouchableWithoutFeedback,
+  Dimensions,
 } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { Trans } from "react-i18next";
@@ -30,6 +31,7 @@ import LText from "../../../components/LText";
 import Warning from "../../../icons/Warning";
 import Check from "../../../icons/Check";
 import KeyboardView from "../../../components/KeyboardView";
+import { useKeyboardVisible } from "../../../logic/keyboardVisible";
 
 type RouteParams = {
   accountId: string,
@@ -50,6 +52,8 @@ type Props = {
 };
 
 function DelegationAmount({ navigation, route }: Props) {
+  const isKeyBoardVisible = useKeyboardVisible();
+
   const { account } = useSelector(accountScreenSelector(route));
 
   invariant(
@@ -130,7 +134,7 @@ function DelegationAmount({ navigation, route }: Props) {
 
   return (
     <SafeAreaView style={styles.root}>
-      <ScrollView>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <KeyboardView>
           <View style={styles.main}>
             <CurrencyInput
@@ -205,7 +209,14 @@ function DelegationAmount({ navigation, route }: Props) {
               </View>
             )}
             {max.gt(0) && !error && (
-              <View style={styles.labelContainer}>
+              <View
+                style={[
+                  styles.labelContainer,
+                  isKeyBoardVisible && Dimensions.get("window").height < 600
+                    ? styles.noPaddingBottom
+                    : undefined,
+                ]}
+              >
                 <LText style={styles.assetsRemaining}>
                   <Trans
                     i18nKey="cosmos.delegation.flow.steps.amount.assetsRemaining"
@@ -252,7 +263,7 @@ function DelegationAmount({ navigation, route }: Props) {
             />
           </View>
         </KeyboardView>
-      </ScrollView>
+      </TouchableWithoutFeedback>
     </SafeAreaView>
   );
 }
@@ -267,7 +278,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    minHeight: 150,
   },
   inputStyle: { textAlign: "center", fontSize: 40, fontWeight: "600" },
   ratioButtonContainer: {
@@ -300,7 +310,6 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
   },
   labelContainer: {
-    width: "100%",
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
@@ -324,6 +333,9 @@ const styles = StyleSheet.create({
   },
   success: {
     color: colors.success,
+  },
+  noPaddingBottom: {
+    paddingBottom: 0,
   },
 });
 
