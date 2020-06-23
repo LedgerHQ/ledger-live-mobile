@@ -221,6 +221,7 @@
     "react-native-debugger-open": "^0.3.24",
     "react-test-renderer": "16.12.0",
     "rn-nodeify": "^10.2.0",
+    "ws": "^7.3.0",
     "yarn-deduplicate": "^2.0.0"
   },
   "react-native": {

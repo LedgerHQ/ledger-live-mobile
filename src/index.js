@@ -202,3 +202,20 @@ export default class Root extends Component<
 if (__DEV__) {
   require("./snoopy");
 }
+
+function listenToDetox() {
+  const path = "localhost:8099";
+  const ws = new WebSocket(`ws://${path}`);
+  ws.onopen = () => {
+    // eslint-disable-next-line no-console
+    console.log(`Start listening to ${path}`);
+  };
+
+  ws.onmessage = event => {
+    // eslint-disable-next-line no-console
+    console.log(`[E2E Bridge]: ${event.data}`);
+    ws.send("pong");
+  };
+}
+
+listenToDetox();
