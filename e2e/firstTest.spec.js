@@ -1,17 +1,8 @@
 import { Server } from "ws";
 
-let wss: Server;
-
 describe("Ledger Live Mobile", () => {
   beforeAll(() => {
-    wss = new Server({ port: 8099 });
-    wss.on("connection", ws => {
-      ws.send("ping");
-      ws.on("message", message => {
-        // eslint-disable-next-line no-console
-        console.log(`[E2E Bridge]: ${message}`);
-      });
-    });
+    initE2EBridge();
   });
 
   afterAll(() => {
@@ -23,6 +14,49 @@ describe("Ledger Live Mobile", () => {
   });
 
   it("should have welcome screen", async () => {
+    postMessage({ type: "handshake" });
     // await element(by.id("OnboardingWelcomeContinue")).tap();
   });
 });
+
+function initE2EBridge(): Promise<void> {
+  const port = 8099;
+  wss = new Server({ port });
+  log(`Start listening on localhost:${port}`);
+
+  wss.on("connection", ws => {
+    log(`New connection`);
+    ws.on("message", onMessage);
+  });
+}
+
+let wss: Server;
+
+function postMessage(message: Message) {
+  for (const ws of wss.clients.values()) {
+    ws.send(JSON.stringify(message));
+  }
+}
+
+type Message = HandshakeMessage;
+
+type HandshakeMessage = {
+  type: "handshake",
+};
+
+function onMessage(messageStr: string) {
+  const msg = JSON.parse(messageStr);
+  log(`New Message\n${JSON.stringify(msg, null, 2)}`);
+
+  switch (msg.type) {
+    case "handshake":
+      break;
+    default:
+      break;
+  }
+}
+
+function log(message: string) {
+  // eslint-disable-next-line no-console
+  console.log(`[E2E Bridge Server]: ${message}`);
+}
