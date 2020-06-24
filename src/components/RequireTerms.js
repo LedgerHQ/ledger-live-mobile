@@ -118,6 +118,7 @@ const RequireTermsModal = () => {
             event="TermsAcceptSwitch"
             onPress={onSwitch}
             style={styles.switchRow}
+            testID="TermsAcceptSwitch"
           >
             <CheckBox isChecked={toggle} />
             <LText semiBold style={styles.switchLabel}>
@@ -131,6 +132,7 @@ const RequireTermsModal = () => {
             disabled={!toggle}
             onPress={accept}
             title={<Trans i18nKey="common.confirm" />}
+            testID="TermsConfirm"
           />
         </View>
       </SafeAreaView>

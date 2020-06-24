@@ -14,8 +14,8 @@ describe("Ledger Live Mobile", () => {
   });
 
   it("should have welcome screen", async () => {
-    postMessage({ type: "handshake" });
-    // await element(by.id("OnboardingWelcomeContinue")).tap();
+    await element(by.id("TermsAcceptSwitch"))?.tap();
+    await element(by.id("TermsConfirm"))?.tap();
   });
 });
 
