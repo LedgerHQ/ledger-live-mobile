@@ -2,9 +2,11 @@
 
 import Transport from "@ledgerhq/hw-transport";
 import { from, Observable } from "rxjs";
+import { first } from "rxjs/operators";
 import { delay } from "@ledgerhq/live-common/lib/promise";
 import type { ApduMock } from "../logic/createAPDUMock";
 import { hookRejections, rejectionOp } from "../components/DebugRejectSwitch";
+import { e2eBridgeSubject } from "../e2e-bridge";
 
 export type DeviceMock = {
   id: string,
@@ -40,38 +42,45 @@ export default (opts: Opts) => {
     static listen(observer: *) {
       // $FlowFixMe
       return Observable.create(observer => {
-        let timeout;
-
-        const unsubscribe = () => {
-          clearTimeout(timeout);
-        };
-
-        timeout = setTimeout(() => {
+        const subscription = e2eBridgeSubject.pipe(first()).subscribe(msg => {
           observer.next({
-            type: "add",
-            descriptor: createTransportDeviceMock("mock_1", "Nano X de David"),
+            type: msg.type,
+            descriptor: createTransportDeviceMock(
+              msg.payload.id,
+              msg.paylaoad.name,
+            ),
           });
-          timeout = setTimeout(() => {
-            observer.next({
-              type: "add",
-              descriptor: createTransportDeviceMock(
-                "mock_2",
-                "Nano X de Arnaud",
-              ),
-            });
-            timeout = setTimeout(() => {
-              observer.next({
-                type: "add",
-                descriptor: createTransportDeviceMock(
-                  "mock_3",
-                  "Nano X de Didier Duchmol",
-                ),
-              });
-            }, 2000);
-          }, 1000);
-        }, 500);
-
-        return unsubscribe;
+        });
+        return subscription.unsubscribe();
+        // let timeout;
+        // const unsubscribe = () => {
+        //   clearTimeout(timeout);
+        // };
+        // timeout = setTimeout(() => {
+        //   observer.next({
+        //     type: "add",
+        //     descriptor: createTransportDeviceMock("mock_1", "Nano X de David"),
+        //   });
+        //   timeout = setTimeout(() => {
+        //     observer.next({
+        //       type: "add",
+        //       descriptor: createTransportDeviceMock(
+        //         "mock_2",
+        //         "Nano X de Arnaud",
+        //       ),
+        //     });
+        //     timeout = setTimeout(() => {
+        //       observer.next({
+        //         type: "add",
+        //         descriptor: createTransportDeviceMock(
+        //           "mock_3",
+        //           "Nano X de Didier Duchmol",
+        //         ),
+        //       });
+        //     }, 2000);
+        //   }, 1000);
+        // }, 500);
+        // return unsubscribe;
       })
         .pipe(rejectionOp())
         .subscribe(observer);

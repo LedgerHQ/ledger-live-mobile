@@ -54,6 +54,7 @@ class ReadOnlyNanoX extends PureComponent<OnboardingStepProps> {
         </LText>
         <Button
           event="ReadOnlyOnboarding"
+          testID="ReadOnlyOnboarding"
           type="primary"
           containerStyle={styles.button}
           title={<Trans i18nKey="manager.readOnly.button" />}

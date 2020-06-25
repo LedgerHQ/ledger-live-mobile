@@ -66,6 +66,7 @@ export default class Touchable extends Component<
         onPress={this.onPress}
         disabled={disabled}
         hitSlop={defaultHitSlop}
+        testID={event}
         {...rest}
       >
         {children}

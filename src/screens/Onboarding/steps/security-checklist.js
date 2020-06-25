@@ -44,6 +44,7 @@ class OnboardingStepSecurityChecklist extends Component<
     return (
       <Button
         event="OnboardingSecurityContinue"
+        testID="OnboardingSecurityContinue"
         type="primary"
         title={<Trans i18nKey="common.continue" />}
         onPress={next}

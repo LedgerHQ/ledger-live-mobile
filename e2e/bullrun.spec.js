@@ -13,9 +13,24 @@ describe("Ledger Live Mobile", () => {
     await device.reloadReactNative();
   });
 
-  it("should have welcome screen", async () => {
+  it("should pair a new device", async () => {
     await element(by.id("TermsAcceptSwitch"))?.tap();
     await element(by.id("TermsConfirm"))?.tap();
+    await element(by.id("TabBarManager")).tap();
+    await element(by.id("ReadOnlyOnboarding")).tap();
+    await element(by.id("OnboardingGetStartedChoiceInitialized")).tap();
+    await element(by.id("OnboardingPinYes")).tap();
+    await element(by.id("OnboardingRecoveryYes")).tap();
+    await element(by.id("OnboardingSecurityContinue")).tap();
+    console.log("hey");
+    await element(by.id("PairDevice")).tap();
+    console.log("yo");
+    postMessage({
+      type: "add",
+      payload: { id: "mock_1", name: "Nano X de David" },
+    });
+    // await element(by.id("TabBarAccounts")).tap();
+    // await element(by.id("OpenAddAccountModal")).tap();
   });
 });
 
@@ -25,7 +40,7 @@ function initE2EBridge(): Promise<void> {
   log(`Start listening on localhost:${port}`);
 
   wss.on("connection", ws => {
-    log(`New connection`);
+    log(`Connection`);
     ws.on("message", onMessage);
   });
 }
@@ -38,15 +53,20 @@ function postMessage(message: Message) {
   }
 }
 
-type Message = HandshakeMessage;
+type Message = MessageHandshake | MessageAddDevice;
 
-type HandshakeMessage = {
+type MessageHandshake = {
   type: "handshake",
+};
+
+type MessageAddDevice = {
+  type: "add",
+  payload: { id: string, name: string },
 };
 
 function onMessage(messageStr: string) {
   const msg = JSON.parse(messageStr);
-  log(`New Message\n${JSON.stringify(msg, null, 2)}`);
+  log(`Message\n${JSON.stringify(msg, null, 2)}`);
 
   switch (msg.type) {
     case "handshake":

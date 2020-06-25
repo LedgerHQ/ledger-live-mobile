@@ -1,0 +1,13 @@
+detox[68192] INFO:  [DetoxServer.js] server listening on localhost:60918...
+detox[68192] INFO:  [AppleSimUtils.js] com.ledger.live launched. To watch simulator logs, run:
+        /usr/bin/xcrun simctl spawn 6214FE63-6F31-436A-89A4-9EA777DE7858 log stream --level debug --style compact --predicate 'process == "ledgerlivemobile"'
+detox[68192] INFO:  at e2e/bullrun.spec.js:138:11 
+ [E2E Bridge Server]: Start listening on localhost:8099
+detox[68192] INFO:  [1m[37mLedger Live Mobile: [39m[22m[90mshould pair a new device[39m
+detox[68192] INFO:  at e2e/bullrun.spec.js:138:11 
+ [E2E Bridge Server]: Connection
+detox[68192] INFO:  at e2e/bullrun.spec.js:68:21 
+ hey
+detox[68192] INFO:  at e2e/bullrun.spec.js:73:21 
+ yo
+detox[68192] INFO:  [1m[37mLedger Live Mobile: [39m[22m[90mshould pair a new device[39m[90m [[32mOK[90m][39m
