@@ -7,6 +7,7 @@ import "react-native-gesture-handler";
 import React, { Component, useCallback } from "react";
 import { connect } from "react-redux";
 import { StyleSheet, View, Text } from "react-native";
+import Config from "react-native-config";
 import SplashScreen from "react-native-splash-screen";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { I18nextProvider } from "react-i18next";
@@ -39,9 +40,6 @@ import HookSentry from "./components/HookSentry";
 import RootNavigator from "./components/RootNavigator";
 import SetEnvsFromSettings from "./components/SetEnvsFromSettings";
 import type { State } from "./reducers";
-import { initE2EBridge } from "./e2e-bridge";
-
-initE2EBridge();
 
 checkLibs({
   NotEnoughBalance,
@@ -204,4 +202,8 @@ export default class Root extends Component<
 
 if (__DEV__) {
   require("./snoopy");
+}
+
+if (Config.MOCK) {
+  import("./e2e-bridge").then(({ initE2EBridge }) => initE2EBridge());
 }
