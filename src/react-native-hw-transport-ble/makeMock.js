@@ -2,8 +2,7 @@
 
 import Transport from "@ledgerhq/hw-transport";
 import { from } from "rxjs";
-import { take } from "rxjs/operators";
-import { delay } from "@ledgerhq/live-common/lib/promise";
+import { take, first, filter } from "rxjs/operators";
 import type { ApduMock } from "../logic/createAPDUMock";
 import { hookRejections } from "../components/DebugRejectSwitch";
 import { e2eBridgeSubject } from "../e2e-bridge";
@@ -40,19 +39,32 @@ export default (opts: Opts) => {
     static setLogLevel = (_param: string) => {};
 
     static listen(observer: *) {
-      return e2eBridgeSubject.pipe(take(3)).subscribe(msg => {
-        observer.next({
-          type: msg.type,
-          descriptor: createTransportDeviceMock(
-            msg.payload.id,
-            msg.payload.name,
-          ),
+      return e2eBridgeSubject
+        .pipe(
+          filter(msg => msg.type === "add"),
+          take(3),
+        )
+        .subscribe(msg => {
+          observer.next({
+            type: msg.type,
+            descriptor: createTransportDeviceMock(
+              msg.payload.id,
+              msg.payload.name,
+            ),
+          });
         });
-      });
     }
 
     static async open(device: *) {
-      await hookRejections(delay(1000));
+      await e2eBridgeSubject
+        .pipe(
+          filter(msg => {
+            console.log("!!!!!!!!!!!!!!!!", msg.type);
+            return msg.type === "open";
+          }),
+          first(),
+        )
+        .toPromise();
       return new BluetoothTransportMock(
         typeof device === "string"
           ? createTransportDeviceMock(device, "")

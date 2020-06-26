@@ -38,6 +38,9 @@ describe("Ledger Live Mobile", () => {
     });
     await wait(1000);
     await element(by.id("DeviceItemEnter Nano X de David")).tap();
+    await wait(1000);
+    postMessage({ type: "open" });
+    await wait(10000);
     // await element(by.id("TabBarAccounts")).tap();
     // await element(by.id("OpenAddAccountModal")).tap();
   });
@@ -75,7 +78,8 @@ type Message<T: string, P: { [key: string]: any } | typeof undefined> = {
 
 type PostMessage =
   | Message<"handshake">
-  | Message<"add", { id: string, name: string }>;
+  | Message<"add", { id: string, name: string }>
+  | Message<"open">;
 
 function onMessage(messageStr: string) {
   const msg = JSON.parse(messageStr);

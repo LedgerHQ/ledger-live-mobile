@@ -99,38 +99,33 @@ class PairDevices extends Component<PairDevicesProps, State> {
         if (this.unmounted) return;
 
         this.setState({ device, status: "genuinecheck" });
-        let resolve;
-        let reject;
-        const genuineCheckPromise = new Promise((success, error) => {
-          resolve = success;
-          reject = error;
+
+        await new Promise((resolve, reject) => {
+          listApps(transport, deviceInfo)
+            .pipe(timeout(GENUINE_CHECK_TIMEOUT))
+            .subscribe({
+              next: e => {
+                if (e.type === "result") {
+                  if (!hasCompletedOnboarding) {
+                    const hasAnyAppInstalled =
+                      e.result && e.result.installed.length > 0;
+
+                    if (!hasAnyAppInstalled) {
+                      installAppFirstTime(false);
+                    }
+                  }
+
+                  return;
+                }
+                this.setState({
+                  genuineAskedOnDevice: e.type === "allow-manager-requested",
+                });
+              },
+              complete: () => resolve(),
+              error: e => reject(e),
+            });
         });
 
-        listApps(transport, deviceInfo)
-          .pipe(timeout(GENUINE_CHECK_TIMEOUT))
-          .subscribe({
-            next: e => {
-              if (e.type === "result") {
-                if (!hasCompletedOnboarding) {
-                  const hasAnyAppInstalled =
-                    e.result && e.result.installed.length > 0;
-
-                  if (!hasAnyAppInstalled) {
-                    installAppFirstTime(false);
-                  }
-                }
-
-                return;
-              }
-              this.setState({
-                genuineAskedOnDevice: e.type === "allow-manager-requested",
-              });
-            },
-            complete: () => resolve(),
-            error: e => reject(e),
-          });
-
-        await genuineCheckPromise;
         if (this.unmounted) return;
 
         const name = (await getDeviceName(transport)) || device.name;
