@@ -22,6 +22,7 @@ export default class Touchable extends Component<
     children: *,
     event: string,
     eventProperties?: Object,
+    testID?: string,
   },
   {
     pending: boolean,
@@ -58,7 +59,14 @@ export default class Touchable extends Component<
   };
 
   render() {
-    const { onPress, children, event, eventProperties, ...rest } = this.props;
+    const {
+      onPress,
+      children,
+      event,
+      eventProperties,
+      testID,
+      ...rest
+    } = this.props;
     const { pending } = this.state;
     const disabled = !onPress || pending;
     return (
@@ -66,7 +74,7 @@ export default class Touchable extends Component<
         onPress={this.onPress}
         disabled={disabled}
         hitSlop={defaultHitSlop}
-        testID={event}
+        testID={testID ?? event}
         {...rest}
       >
         {children}

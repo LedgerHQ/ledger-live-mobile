@@ -58,6 +58,7 @@ export default class DeviceItem extends PureComponent<Props> {
           <Touchable
             event="DeviceItemEnter"
             onPress={disabled ? undefined : this.onPress}
+            testID={`DeviceItemEnter ${deviceMeta.deviceName ?? ""}`}
           >
             <View style={[styles.root, disabled && styles.rootDisabled]}>
               <View style={styles.iconWrapper}>

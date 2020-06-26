@@ -61,7 +61,9 @@ type Props = BaseButtonProps & {
 
 const ButtonWrapped = (props: BaseButtonProps) => (
   <ButtonUseTouchable.Consumer>
-    {useTouchable => <Button {...props} useTouchable={useTouchable} />}
+    {useTouchable => (
+      <Button {...props} useTouchable={useTouchable} testID={props.event} />
+    )}
   </ButtonUseTouchable.Consumer>
 );
 

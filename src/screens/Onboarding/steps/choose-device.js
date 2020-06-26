@@ -143,6 +143,7 @@ class DeviceItem extends PureComponent<DeviceItemProps> {
         style={styles.deviceItem}
         event={event}
         eventProperties={eventProperties}
+        testID={event + eventProperties.product}
       >
         <Icon />
         <LText semiBold style={styles.deviceTitle}>
