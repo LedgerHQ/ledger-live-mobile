@@ -1,11 +1,11 @@
 // @flow
 
 import Transport from "@ledgerhq/hw-transport";
-import { from, Observable } from "rxjs";
-import { first } from "rxjs/operators";
+import { from } from "rxjs";
+import { take } from "rxjs/operators";
 import { delay } from "@ledgerhq/live-common/lib/promise";
 import type { ApduMock } from "../logic/createAPDUMock";
-import { hookRejections, rejectionOp } from "../components/DebugRejectSwitch";
+import { hookRejections } from "../components/DebugRejectSwitch";
 import { e2eBridgeSubject } from "../e2e-bridge";
 
 export type DeviceMock = {
@@ -40,50 +40,15 @@ export default (opts: Opts) => {
     static setLogLevel = (_param: string) => {};
 
     static listen(observer: *) {
-      // $FlowFixMe
-      return Observable.create(observer => {
-        const subscription = e2eBridgeSubject.pipe(first()).subscribe(msg => {
-          observer.next({
-            type: msg.type,
-            descriptor: createTransportDeviceMock(
-              msg.payload.id,
-              msg.paylaoad.name,
-            ),
-          });
+      return e2eBridgeSubject.pipe(take(3)).subscribe(msg => {
+        observer.next({
+          type: msg.type,
+          descriptor: createTransportDeviceMock(
+            msg.payload.id,
+            msg.payload.name,
+          ),
         });
-        return subscription.unsubscribe();
-        // let timeout;
-        // const unsubscribe = () => {
-        //   clearTimeout(timeout);
-        // };
-        // timeout = setTimeout(() => {
-        //   observer.next({
-        //     type: "add",
-        //     descriptor: createTransportDeviceMock("mock_1", "Nano X de David"),
-        //   });
-        //   timeout = setTimeout(() => {
-        //     observer.next({
-        //       type: "add",
-        //       descriptor: createTransportDeviceMock(
-        //         "mock_2",
-        //         "Nano X de Arnaud",
-        //       ),
-        //     });
-        //     timeout = setTimeout(() => {
-        //       observer.next({
-        //         type: "add",
-        //         descriptor: createTransportDeviceMock(
-        //           "mock_3",
-        //           "Nano X de Didier Duchmol",
-        //         ),
-        //       });
-        //     }, 2000);
-        //   }, 1000);
-        // }, 500);
-        // return unsubscribe;
-      })
-        .pipe(rejectionOp())
-        .subscribe(observer);
+      });
     }
 
     static async open(device: *) {

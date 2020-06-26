@@ -22,17 +22,31 @@ describe("Ledger Live Mobile", () => {
     await element(by.id("OnboardingPinYes")).tap();
     await element(by.id("OnboardingRecoveryYes")).tap();
     await element(by.id("OnboardingSecurityContinue")).tap();
-    console.log("hey");
     await element(by.id("PairDevice")).tap();
-    console.log("yo");
     postMessage({
       type: "add",
       payload: { id: "mock_1", name: "Nano X de David" },
+    });
+    await wait(1000);
+    postMessage({
+      type: "add",
+      payload: { id: "mock_2", name: "Nano X de Arnaud" },
+    });
+    await wait(1000);
+    postMessage({
+      type: "add",
+      payload: { id: "mock_3", name: "Nano X de Didier Duchmol" },
     });
     // await element(by.id("TabBarAccounts")).tap();
     // await element(by.id("OpenAddAccountModal")).tap();
   });
 });
+
+function wait(ms: number): Promise<void> {
+  return new Promise(res => {
+    setTimeout(res, ms);
+  });
+}
 
 function initE2EBridge(): Promise<void> {
   const port = 8099;
