@@ -14,3 +14,9 @@ export const syncIsConnected = (isConnected: boolean) => (
     });
   }
 };
+
+export const dismissCarousel = () => (dispatch: *) => {
+  dispatch({
+    type: "DISMISS_CAROUSEL",
+  });
+};

@@ -27,6 +27,7 @@ import OperationRow from "../../components/OperationRow";
 import globalSyncRefreshControl from "../../components/globalSyncRefreshControl";
 
 import GraphCardContainer from "./GraphCardContainer";
+import Carousel from "../../components/Carousel";
 import StickyHeader from "./StickyHeader";
 import EmptyStatePortfolio from "./EmptyStatePortfolio";
 import extraStatusBarPadding from "../../logic/extraStatusBarPadding";
@@ -36,7 +37,6 @@ import NoOperationFooter from "../../components/NoOperationFooter";
 import MigrateAccountsBanner from "../MigrateAccounts/Banner";
 import RequireTerms from "../../components/RequireTerms";
 import { useScrollToTop } from "../../navigation/utils";
-import { BuyCryptoBanner } from "../../components/banners/BuyCryptoBanner";
 
 export { default as PortfolioTabIcon } from "./TabIcon";
 
@@ -71,7 +71,7 @@ export default function PortfolioScreen({ navigation }: Props) {
   function ListHeaderComponent() {
     return (
       <>
-        <BuyCryptoBanner />
+        <Carousel />
         <GraphCardContainer
           counterValueCurrency={counterValueCurrency}
           portfolio={portfolio}

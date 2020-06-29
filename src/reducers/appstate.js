@@ -11,10 +11,12 @@ export type AsyncState = {
 
 export type AppState = {
   isConnected: boolean,
+  dismissedCarousel: boolean,
 };
 
 const initialState: AppState = {
   isConnected: true,
+  dismissedCarousel: false,
 };
 
 const handlers: Object = {
@@ -22,13 +24,20 @@ const handlers: Object = {
     state: AppState,
     { isConnected }: { isConnected: boolean },
   ) => ({
+    ...state,
     isConnected,
+  }),
+  DISMISS_CAROUSEL: (state: AppState) => ({
+    ...state,
+    dismissedCarousel: !state.dismissedCarousel,
   }),
 };
 
 // Selectors
 
 export const isConnectedSelector = (state: State) => state.appstate.isConnected;
+export const dismissedCarouselSelector = (state: State) =>
+  state.appstate.dismissedCarousel;
 
 const globalNetworkDown = new NetworkDown();
 
