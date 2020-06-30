@@ -29,6 +29,7 @@ function onMessage(event: { data: mixed }) {
       postMessage({ type: "handshake" });
       break;
     case "add":
+    case "open":
       e2eBridgeSubject.next(msg);
       break;
     default:

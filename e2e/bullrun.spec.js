@@ -40,7 +40,7 @@ describe("Ledger Live Mobile", () => {
     await element(by.id("DeviceItemEnter Nano X de David")).tap();
     await wait(1000);
     postMessage({ type: "open" });
-    await wait(10000);
+    await wait(1000 * 20);
     // await element(by.id("TabBarAccounts")).tap();
     // await element(by.id("OpenAddAccountModal")).tap();
   });

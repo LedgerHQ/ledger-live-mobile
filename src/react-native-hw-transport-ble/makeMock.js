@@ -58,10 +58,7 @@ export default (opts: Opts) => {
     static async open(device: *) {
       await e2eBridgeSubject
         .pipe(
-          filter(msg => {
-            console.log("!!!!!!!!!!!!!!!!", msg.type);
-            return msg.type === "open";
-          }),
+          filter(msg => msg.type === "open"),
           first(),
         )
         .toPromise();
