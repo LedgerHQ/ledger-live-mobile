@@ -99,7 +99,7 @@ export default function SelectAccount({ navigation, route }: Props) {
         <View style={styles.iconContainer}>
           <InfoIcon size={22} color={colors.live} />
         </View>
-        <LText style={styles.title}>
+        <LText semiBold style={styles.title}>
           {t("exchange.buy.emptyState.title", { currency: currency.name })}
         </LText>
         <LText style={styles.description}>
@@ -207,11 +207,13 @@ const styles = StyleSheet.create({
     color: colors.darkBlue,
     fontSize: 16,
     marginBottom: 16,
+    paddingHorizontal: 16,
   },
   description: {
     textAlign: "center",
     color: colors.smoke,
     fontSize: 14,
+    paddingHorizontal: 16,
   },
   buttonContainer: {
     paddingTop: 24,

@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
   },
   emptySearch: {
-    paddingHorizontal: 16,
+    paddingHorizontal: 32,
   },
   emptySearchText: {
     textAlign: "center",

@@ -84,8 +84,6 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     paddingTop: 24,
-    paddingLeft: 16,
-    paddingRight: 16,
     flexDirection: "row",
   },
   button: {
