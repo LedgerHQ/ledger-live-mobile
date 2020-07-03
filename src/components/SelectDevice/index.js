@@ -1,5 +1,5 @@
 // @flow
-import React, { Component } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { StyleSheet, View, Platform, Image } from "react-native";
 import Config from "react-native-config";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,7 +10,6 @@ import type { TransportModule } from "@ledgerhq/live-common/lib/hw";
 import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import { ScreenName } from "../../const";
 import { knownDevicesSelector } from "../../reducers/ble";
-import { removeKnownDevice } from "../../actions/ble";
 import DeviceItem from "../DeviceItem";
 import DeviceJob from "../DeviceJob";
 import type { Step } from "../DeviceJob/types";
@@ -36,23 +35,139 @@ type Props = {
   autoSelectOnAdd?: boolean,
 };
 
-type SelectDeviceProps = Props & {
-  navigation: any,
-  knownDevices: Array<{
-    id: string,
-    name: string,
-  }>,
-  removeKnownDevice: (val: string) => void,
-  setReadOnlyMode: (val: boolean) => void,
-  installAppFirstTime: (val: boolean) => void,
-};
+export default function SelectDevice({
+  steps = [],
+  onStepEntered,
+  usbOnly,
+  withArrows,
+  deviceModelId,
+  deviceMeta,
+  filter = () => true,
+  autoSelectOnAdd = false,
+  onSelect,
+  onBluetoothDeviceAction,
+}: Props) {
+  const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const knownDevices = useSelector(knownDevicesSelector);
 
-type State = {
-  devices: Array<Device>,
-  scanning: boolean,
-  connecting: ?Device,
-  showMenu: boolean,
-};
+  const [devices, setDevices] = useState([]);
+  const [connecting, setConnecting] = useState();
+
+  const onDone = useCallback(
+    (info: any) => {
+      /** if list apps succeed we update settings with state of apps installed */
+      if (info && info.appRes) {
+        const hasAnyAppinstalled =
+          info.appRes.installed && info.appRes.installed.length > 0;
+
+        dispatch(installAppFirstTime(hasAnyAppinstalled));
+      }
+
+      setConnecting();
+      onSelect(info);
+
+      // Always false until we pair a device?
+      dispatch(setReadOnlyMode(false));
+    },
+    [dispatch, onSelect],
+  );
+
+  const onCancel = useCallback(() => {
+    setConnecting();
+  }, []);
+
+  const onPairNewDevice = useCallback(() => {
+    const onDone = autoSelectOnAdd
+      ? deviceId => {
+          const device = getAll({ knownDevices }, { devices }).find(
+            d => d.deviceId === deviceId,
+          );
+          if (device) {
+            setConnecting(device);
+          }
+        }
+      : undefined;
+    navigation.navigate(ScreenName.PairDevices, { onDone });
+  }, [autoSelectOnAdd, knownDevices, devices, navigation]);
+
+  const renderItem = useCallback(
+    (item: Device) => (
+      <DeviceItem
+        key={item.deviceId}
+        deviceMeta={item}
+        onSelect={setConnecting}
+        withArrow={!!withArrows}
+        onBluetoothDeviceAction={onBluetoothDeviceAction}
+      />
+    ),
+    [withArrows, onBluetoothDeviceAction],
+  );
+
+  const all: Device[] = getAll({ knownDevices }, { devices });
+
+  const [ble, other] = all.reduce(
+    ([ble, other], device) =>
+      device.wired ? [ble, [...other, device]] : [[...ble, device], other],
+    [[], []],
+  );
+
+  const hasUSBSection = Platform.OS === "android" || other.length > 0;
+
+  useEffect(() => {
+    const subscription = discoverDevices(filter).subscribe(e => {
+      setDevices(devices =>
+        e.type === "add"
+          ? [
+              ...devices,
+              {
+                deviceId: e.id,
+                deviceName: e.name || "",
+                modelId:
+                  (e.deviceModel && e.deviceModel.id) ||
+                  Config.FALLBACK_DEVICE_MODEL_ID ||
+                  "nanoX",
+                wired: e.id.startsWith("httpdebug|")
+                  ? Config.FALLBACK_DEVICE_WIRED === "YES"
+                  : e.id.startsWith("usb|"),
+              },
+            ]
+          : devices.filter(d => d.deviceId !== e.id),
+      );
+    });
+    return () => subscription.unsubscribe;
+  }, [knownDevices, filter]);
+
+  return (
+    <View>
+      {usbOnly && withArrows ? (
+        <UsbPlaceholder />
+      ) : ble.length === 0 ? (
+        <BluetoothEmpty onPairNewDevice={onPairNewDevice} />
+      ) : (
+        <View>
+          <BluetoothHeader />
+          {ble.map(renderItem)}
+          <PairNewDeviceButton onPress={onPairNewDevice} />
+        </View>
+      )}
+      {hasUSBSection &&
+        !usbOnly &&
+        (ble.length === 0 ? <ORBar /> : <USBHeader />)}
+      {other.length === 0 ? <USBEmpty /> : other.map(renderItem)}
+
+      <DeviceJob
+        meta={deviceMeta || connecting}
+        steps={steps}
+        onCancel={onCancel}
+        onStepEntered={onStepEntered}
+        onDone={onDone}
+        editMode={false}
+        deviceModelId={deviceModelId}
+      />
+    </View>
+  );
+}
 
 const BluetoothHeader = () => (
   <View style={styles.bluetoothHeader}>
@@ -83,202 +198,16 @@ const ORBar = () => (
   />
 );
 
-const getAll = ({ knownDevices }, { devices }): Device[] =>
-  devices.concat(
-    knownDevices.map(d => ({
+function getAll({ knownDevices }, { devices }): Device[] {
+  return [
+    ...devices,
+    ...knownDevices.map(d => ({
       deviceId: d.id,
       deviceName: d.name || "",
       wired: false,
       modelId: "nanoX",
     })),
-  );
-
-class SelectDevice extends Component<SelectDeviceProps, State> {
-  static defaultProps = {
-    steps: [],
-    filter: () => true,
-    showDiscoveredDevices: true,
-    showKnownDevices: true,
-    autoSelectOnAdd: false,
-  };
-
-  state = {
-    devices: [],
-    scanning: true,
-    connecting: null,
-    showMenu: false,
-  };
-
-  listingSubscription: *;
-
-  componentDidMount() {
-    this.observe();
-  }
-
-  componentDidUpdate({ knownDevices }: SelectDeviceProps) {
-    if (this.props.knownDevices !== knownDevices) {
-      this.observe();
-    }
-  }
-
-  componentWillUnmount() {
-    if (this.listingSubscription) {
-      this.listingSubscription.unsubscribe();
-    }
-  }
-
-  observe() {
-    if (this.listingSubscription) {
-      this.listingSubscription.unsubscribe();
-      this.setState({ devices: [] });
-    }
-    this.listingSubscription = discoverDevices(this.props.filter).subscribe({
-      complete: () => {
-        this.setState({ scanning: false });
-      },
-      next: e =>
-        this.setState(({ devices }) => ({
-          devices:
-            e.type === "add"
-              ? devices.concat({
-                  deviceId: e.id,
-                  deviceName: e.name || "",
-                  modelId:
-                    (e.deviceModel && e.deviceModel.id) ||
-                    Config.FALLBACK_DEVICE_MODEL_ID ||
-                    "nanoX",
-                  wired: e.id.startsWith("httpdebug|")
-                    ? Config.FALLBACK_DEVICE_WIRED === "YES"
-                    : e.id.startsWith("usb|"),
-                })
-              : devices.filter(d => d.deviceId !== e.id),
-        })),
-    });
-  }
-
-  onSelect = (connecting: Device) => {
-    this.setState({ connecting });
-  };
-
-  onDone = (info: any) => {
-    /** if list apps succeed we update settings with state of apps installed */
-    if (info && info.appRes) {
-      const hasAnyAppinstalled =
-        info.appRes.installed && info.appRes.installed.length > 0;
-
-      this.props.installAppFirstTime(hasAnyAppinstalled);
-    }
-
-    this.setState({ connecting: null }, () => {
-      this.props.onSelect(info);
-    });
-
-    // Always false until we pair a device?
-    this.props.setReadOnlyMode(false);
-  };
-
-  onCancel = () => {
-    this.setState({ connecting: null });
-  };
-
-  onPairNewDevice = () => {
-    const { navigation, autoSelectOnAdd } = this.props;
-    let opts;
-    if (autoSelectOnAdd) {
-      opts = {
-        onDone: deviceId => {
-          const device = getAll(this.props, this.state).find(
-            d => d.deviceId === deviceId,
-          );
-          if (device) {
-            this.onSelect(device);
-          }
-        },
-      };
-    }
-    navigation.navigate(ScreenName.PairDevices, opts);
-  };
-
-  renderItem = (item: Device) => (
-    <DeviceItem
-      key={item.deviceId}
-      deviceMeta={item}
-      onSelect={this.onSelect}
-      withArrow={!!this.props.withArrows}
-      onBluetoothDeviceAction={this.props.onBluetoothDeviceAction}
-    />
-  );
-
-  keyExtractor = (item: *) => item.id;
-
-  render() {
-    const {
-      steps,
-      onStepEntered,
-      usbOnly,
-      withArrows,
-      deviceModelId,
-      deviceMeta,
-    } = this.props;
-    const { connecting } = this.state;
-
-    const all: Device[] = getAll(this.props, this.state);
-
-    const [ble, other] = all.reduce(
-      ([ble, other], device) =>
-        device.wired ? [ble, [...other, device]] : [[...ble, device], other],
-      [[], []],
-    );
-
-    const hasUSBSection = Platform.OS === "android" || other.length > 0;
-
-    return (
-      <View>
-        {usbOnly && withArrows ? (
-          <UsbPlaceholder />
-        ) : ble.length === 0 ? (
-          <BluetoothEmpty onPairNewDevice={this.onPairNewDevice} />
-        ) : (
-          <View>
-            <BluetoothHeader />
-            {ble.map(this.renderItem)}
-            <PairNewDeviceButton onPress={this.onPairNewDevice} />
-          </View>
-        )}
-        {hasUSBSection &&
-          !usbOnly &&
-          (ble.length === 0 ? <ORBar /> : <USBHeader />)}
-        {other.length === 0 ? <USBEmpty /> : other.map(this.renderItem)}
-
-        <DeviceJob
-          meta={deviceMeta || connecting}
-          steps={steps}
-          onCancel={this.onCancel}
-          onStepEntered={onStepEntered}
-          onDone={this.onDone}
-          editMode={false}
-          deviceModelId={deviceModelId}
-        />
-      </View>
-    );
-  }
-}
-
-export default function Screen(props: Props) {
-  const navigation = useNavigation();
-  const dispatch = useDispatch();
-  const knownDevices = useSelector(knownDevicesSelector);
-
-  return (
-    <SelectDevice
-      {...props}
-      navigation={navigation}
-      knownDevices={knownDevices}
-      removeKnownDevice={(...args) => dispatch(removeKnownDevice(...args))}
-      setReadOnlyMode={(...args) => dispatch(setReadOnlyMode(...args))}
-      installAppFirstTime={(...args) => dispatch(installAppFirstTime(...args))}
-    />
-  );
+  ];
 }
 
 const styles = StyleSheet.create({
