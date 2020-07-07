@@ -29,7 +29,7 @@ type RouteParams = {
   status: TransactionStatus,
 };
 
-export default function ConnectDevice({ navigation, route }: Props) {
+export default function ConnectDevice({ navigation, route, status }: Props) {
   const { account, parentAccount } = useSelector(accountScreenSelector(route));
 
   function onSelectDevice(meta: *): void {
@@ -54,6 +54,7 @@ export default function ConnectDevice({ navigation, route }: Props) {
           account={account}
           parentAccount={parentAccount}
           transaction={route.params.transaction}
+          status={status}
         />
       </NavigationScrollView>
     </SafeAreaView>

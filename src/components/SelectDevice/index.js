@@ -49,6 +49,7 @@ export default function SelectDevice({
   autoSelectOnAdd = false,
   // onSelect,
   onBluetoothDeviceAction,
+  status,
 }: Props) {
   const navigation = useNavigation();
   // const dispatch = useDispatch();
@@ -101,9 +102,10 @@ export default function SelectDevice({
         parentAccount,
         transaction,
         device,
+        status,
       });
     },
-    [navigation, account, parentAccount, transaction],
+    [navigation, account, parentAccount, transaction, status],
   );
 
   const renderItem = useCallback(

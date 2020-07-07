@@ -1,5 +1,5 @@
 // @flow
-import React from "react";
+import React, { useEffect } from "react";
 import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import LText from "../LText";
 import { ConnectDevice, Loading } from "./components";
@@ -43,13 +43,13 @@ export default function DeviceAction<R, H, P>({
     passWarning,
   } = hookState;
 
-  if ((!isLoading && !device) || unresponsive) {
-    return <ConnectDevice />;
-  }
+  // if ((!isLoading && !device) || unresponsive) {
+  //   return <ConnectDevice />;
+  // }
 
-  if (isLoading) {
-    return <Loading />;
-  }
+  // if (isLoading) {
+  //   return <Loading />;
+  // }
 
   return <LText>{JSON.stringify(hookState, null, 2)}</LText>;
 }

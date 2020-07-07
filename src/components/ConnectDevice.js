@@ -1,20 +1,19 @@
 // @flow
 import React from "react";
 import SafeAreaView from "react-native-safe-area-view";
-import { Observable } from "rxjs";
 import { createAction } from "@ledgerhq/live-common/lib/hw/actions/app";
+import connectApp from "@ledgerhq/live-common/lib/hw/connectApp";
 import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import DeviceAction from "./DeviceAction";
 
-const connectAppExec = command("connectApp");
-const action = createAction(connectAppExec);
+const action = createAction(connectApp);
 
 type Props = {
   route: { params: { device: Device, account: Account } },
 };
 
 export default function ConnectDevice({ route }: Props) {
-  const { account, parentAccount, transaction } = route.params;
+  const { account, parentAccount, transaction, status } = route.params;
   const tokenCurrency =
     account && account.type === "TokenAccount" && account.token;
 
@@ -27,14 +26,10 @@ export default function ConnectDevice({ route }: Props) {
           parentAccount,
           account,
           transaction,
-          // status,
+          status,
         }}
         device={route.params.device}
       />
     </SafeAreaView>
   );
-}
-
-function command() {
-  return () => Observable.create();
 }

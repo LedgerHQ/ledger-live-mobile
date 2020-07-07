@@ -4,7 +4,7 @@ import React, { useCallback } from "react";
 import { View, StyleSheet } from "react-native";
 import last from "lodash/last";
 import { Trans, useTranslation } from "react-i18next";
-import { from, of } from "rxjs";
+import { from, of, Observable } from "rxjs";
 import { map, first } from "rxjs/operators";
 import { useNavigation } from "@react-navigation/native";
 import type { CryptoCurrency, Account } from "@ledgerhq/live-common/lib/types";
