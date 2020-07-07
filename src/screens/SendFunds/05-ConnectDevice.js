@@ -51,6 +51,9 @@ export default function ConnectDevice({ navigation, route }: Props) {
         <SelectDevice
           onSelect={onSelectDevice}
           steps={[connectingStep, accountApp(mainAccount)]}
+          account={account}
+          parentAccount={parentAccount}
+          transaction={route.params.transaction}
         />
       </NavigationScrollView>
     </SafeAreaView>

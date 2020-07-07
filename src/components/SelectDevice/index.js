@@ -11,9 +11,9 @@ import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import { ScreenName } from "../../const";
 import { knownDevicesSelector } from "../../reducers/ble";
 import DeviceItem from "../DeviceItem";
-import DeviceJob from "../DeviceJob";
+// import DeviceJob from "../DeviceJob";
 import type { Step } from "../DeviceJob/types";
-import { setReadOnlyMode, installAppFirstTime } from "../../actions/settings";
+// import { setReadOnlyMode, installAppFirstTime } from "../../actions/settings";
 import BluetoothEmpty from "./BluetoothEmpty";
 import USBEmpty from "./USBEmpty";
 import LText from "../LText";
@@ -24,7 +24,7 @@ import PairNewDeviceButton from "./PairNewDeviceButton";
 
 type Props = {
   onBluetoothDeviceAction?: (device: Device) => any,
-  onSelect: (meta: Device) => void,
+  // onSelect: (meta: Device) => void,
   deviceMeta?: Device,
   steps?: Step[],
   onStepEntered?: (number, Object) => void,
@@ -36,6 +36,9 @@ type Props = {
 };
 
 export default function SelectDevice({
+  account,
+  parentAccount,
+  transaction,
   steps = [],
   onStepEntered,
   usbOnly,
@@ -44,38 +47,38 @@ export default function SelectDevice({
   deviceMeta,
   filter = () => true,
   autoSelectOnAdd = false,
-  onSelect,
+  // onSelect,
   onBluetoothDeviceAction,
 }: Props) {
   const navigation = useNavigation();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const knownDevices = useSelector(knownDevicesSelector);
 
   const [devices, setDevices] = useState([]);
   const [connecting, setConnecting] = useState();
 
-  const onDone = useCallback(
-    (info: any) => {
-      /** if list apps succeed we update settings with state of apps installed */
-      if (info && info.appRes) {
-        const hasAnyAppinstalled =
-          info.appRes.installed && info.appRes.installed.length > 0;
+  // const onDone = useCallback(
+  //   (info: any) => {
+  //     /** if list apps succeed we update settings with state of apps installed */
+  //     if (info && info.appRes) {
+  //       const hasAnyAppinstalled =
+  //         info.appRes.installed && info.appRes.installed.length > 0;
 
-        dispatch(installAppFirstTime(hasAnyAppinstalled));
-      }
+  //       dispatch(installAppFirstTime(hasAnyAppinstalled));
+  //     }
 
-      setConnecting();
-      onSelect(info);
+  //     setConnecting();
+  //     onSelect(info);
 
-      // Always false until we pair a device?
-      dispatch(setReadOnlyMode(false));
-    },
-    [dispatch, onSelect],
-  );
+  //     // Always false until we pair a device?
+  //     dispatch(setReadOnlyMode(false));
+  //   },
+  //   [dispatch, onSelect],
+  // );
 
-  const onCancel = useCallback(() => {
-    setConnecting();
-  }, []);
+  // const onCancel = useCallback(() => {
+  //   setConnecting();
+  // }, []);
 
   const onPairNewDevice = useCallback(() => {
     const onDone = autoSelectOnAdd
@@ -91,17 +94,29 @@ export default function SelectDevice({
     navigation.navigate(ScreenName.PairDevices, { onDone });
   }, [autoSelectOnAdd, knownDevices, devices, navigation]);
 
+  const onSelect = useCallback(
+    device => {
+      navigation.navigate(ScreenName.ConnectDevice, {
+        account,
+        parentAccount,
+        transaction,
+        device,
+      });
+    },
+    [navigation, account, parentAccount, transaction],
+  );
+
   const renderItem = useCallback(
     (item: Device) => (
       <DeviceItem
         key={item.deviceId}
         deviceMeta={item}
-        onSelect={setConnecting}
+        onSelect={onSelect}
         withArrow={!!withArrows}
         onBluetoothDeviceAction={onBluetoothDeviceAction}
       />
     ),
-    [withArrows, onBluetoothDeviceAction],
+    [withArrows, onBluetoothDeviceAction, onSelect],
   );
 
   const all: Device[] = getAll({ knownDevices }, { devices });
@@ -116,24 +131,30 @@ export default function SelectDevice({
 
   useEffect(() => {
     const subscription = discoverDevices(filter).subscribe(e => {
-      setDevices(devices =>
-        e.type === "add"
-          ? [
-              ...devices,
-              {
-                deviceId: e.id,
-                deviceName: e.name || "",
-                modelId:
-                  (e.deviceModel && e.deviceModel.id) ||
-                  Config.FALLBACK_DEVICE_MODEL_ID ||
-                  "nanoX",
-                wired: e.id.startsWith("httpdebug|")
-                  ? Config.FALLBACK_DEVICE_WIRED === "YES"
-                  : e.id.startsWith("usb|"),
-              },
-            ]
-          : devices.filter(d => d.deviceId !== e.id),
-      );
+      setDevices(devices => {
+        if (e.type !== "add") {
+          return devices.filter(d => d.deviceId !== e.id);
+        }
+
+        if (!devices.find(d => d.deviceId === e.id)) {
+          return [
+            ...devices,
+            {
+              deviceId: e.id,
+              deviceName: e.name || "",
+              modelId:
+                (e.deviceModel && e.deviceModel.id) ||
+                Config.FALLBACK_DEVICE_MODEL_ID ||
+                "nanoX",
+              wired: e.id.startsWith("httpdebug|")
+                ? Config.FALLBACK_DEVICE_WIRED === "YES"
+                : e.id.startsWith("usb|"),
+            },
+          ];
+        }
+
+        return devices;
+      });
     });
     return () => subscription.unsubscribe;
   }, [knownDevices, filter]);
@@ -156,7 +177,7 @@ export default function SelectDevice({
         (ble.length === 0 ? <ORBar /> : <USBHeader />)}
       {other.length === 0 ? <USBEmpty /> : other.map(renderItem)}
 
-      <DeviceJob
+      {/* <DeviceJob
         meta={deviceMeta || connecting}
         steps={steps}
         onCancel={onCancel}
@@ -164,7 +185,7 @@ export default function SelectDevice({
         onDone={onDone}
         editMode={false}
         deviceModelId={deviceModelId}
-      />
+      /> */}
     </View>
   );
 }

@@ -23,6 +23,7 @@ export const ScreenName = {
   ClaimRewardsValidationError: "ClaimRewardsValidationError",
   ClaimRewardsValidationSuccess: "ClaimRewardsValidationSuccess",
   ConfirmPassword: "ConfirmPassword",
+  ConnectDevice: "ConnectDevice",
   CountervalueSettings: "CountervalueSettings",
   CurrenciesList: "CurrenciesList",
   CurrencySettings: "CurrencySettings",
