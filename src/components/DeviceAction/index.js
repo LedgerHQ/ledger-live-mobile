@@ -6,7 +6,8 @@ import type {
   Device,
 } from "@ledgerhq/live-common/lib/hw/actions/types";
 import LText from "../LText";
-import { ConnectDevice, Loading } from "./components";
+import ValidateOnDevice from "../ValidateOnDevice";
+import { ConnectDevice, Loading, OpenAppRequest } from "./components";
 
 type Props<R, H, P> = {
   Result?: React$ComponentType<P>,
@@ -33,33 +34,56 @@ export default function DeviceAction<R, H, P>({
     // requestQuitApp,
     // deviceInfo,
     // repairModalOpened,
-    // requestOpenApp,
-    // allowOpeningRequestedWording,
+    requestOpenApp,
+    allowOpeningRequestedWording,
     // requiresAppInstallation,
     // inWrongDeviceForAccount,
     // onRetry,
     // onAutoRepair,
     // closeRepairModal,
     // onRepairModal,
-    // deviceSignatureRequested,
+    deviceSignatureRequested,
     // deviceStreamingProgress,
     // displayUpgradeWarning,
     // passWarning,
   } = status;
 
-  // if ((!isLoading && !device) || unresponsive) {
-  //   return <ConnectDevice />;
-  // }
+  if (allowOpeningRequestedWording || requestOpenApp) {
+    // requestOpenApp for Nano S 1.3.1 (need to ask user to open the app.)
+    const wording = allowOpeningRequestedWording || requestOpenApp;
+    return <OpenAppRequest wording={wording} />;
+  }
 
-  // if (isLoading) {
-  //   return <Loading />;
-  // }
+  if ((!isLoading && !device) || unresponsive) {
+    return <ConnectDevice />;
+  }
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (request && device && deviceSignatureRequested) {
+    const { account, parentAccount, status, transaction } = request;
+    if (account && status && transaction) {
+      return (
+        <ValidateOnDevice
+          {...device}
+          account={account}
+          parentAccount={parentAccount}
+          transaction={transaction}
+          status={status}
+        />
+      );
+    }
+  }
 
   const payload = action.mapResult(status);
 
   // if (!payload) {
   //   return null;
   // }
+
+  // return Result && <Result {...payload} />;
 
   return (
     <ScrollView>

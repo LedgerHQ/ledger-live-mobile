@@ -1,5 +1,6 @@
 // @flow
 import React from "react";
+import { View } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import type {
   Account,
@@ -11,6 +12,7 @@ import { createAction } from "@ledgerhq/live-common/lib/hw/actions/transaction";
 import connectApp from "@ledgerhq/live-common/lib/hw/connectApp";
 import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import DeviceAction from "../../components/DeviceAction";
+import LText from "../../components/LText";
 
 const action = createAction(connectApp);
 
@@ -42,7 +44,7 @@ export default function ConnectDevice({ navigation, route }: Props) {
   // );
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ flex: 1 }}>
       <DeviceAction
         action={action}
         request={{
@@ -54,7 +56,17 @@ export default function ConnectDevice({ navigation, route }: Props) {
         }}
         device={route.params.device}
         // onResult={onResult}
+        Result={Validation}
       />
     </SafeAreaView>
+  );
+}
+
+function Validation(props) {
+  return (
+    <>
+      <LText>Validate Transaction</LText>
+      <LText>{JSON.stringify(props, null, 2)}</LText>
+    </>
   );
 }

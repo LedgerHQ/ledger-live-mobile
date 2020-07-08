@@ -2,16 +2,13 @@
 import React, { useCallback } from "react";
 import { StyleSheet } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
-import { useSelector } from "react-redux";
 import type {
   Transaction,
   TransactionStatus,
   Account,
   AccountLike,
 } from "@ledgerhq/live-common/lib/types";
-
 import { getMainAccount } from "@ledgerhq/live-common/lib/account/helpers";
-import { accountScreenSelector } from "../../reducers/accounts";
 import colors from "../../colors";
 import { ScreenName } from "../../const";
 import { TrackScreen } from "../../analytics";
@@ -34,32 +31,19 @@ type RouteParams = {
 };
 
 export default function ConnectDevice({ navigation, route }: Props) {
-  // const { account, parentAccount } = useSelector(accountScreenSelector(route));
-
-  const { account, parentAccount, transaction, status } = route.params;
-
-  // function onSelectDevice(meta: *): void {
-  //   navigation.replace(ScreenName.SendValidation, {
-  //     ...route.params,
-  //     ...meta,
-  //   });
-  // }
+  const { account } = route.params;
 
   const onSelect = useCallback(
     device => {
       navigation.navigate(ScreenName.SendConnectDevice, {
-        account,
-        parentAccount,
-        transaction,
+        ...route.params,
         device,
-        status,
       });
     },
-    [navigation, account, parentAccount, transaction, status],
+    [navigation, route.params],
   );
 
   if (!account) return null;
-  const mainAccount = getMainAccount(account, parentAccount);
   return (
     <SafeAreaView style={styles.root} forceInset={forceInset}>
       <NavigationScrollView
@@ -67,14 +51,7 @@ export default function ConnectDevice({ navigation, route }: Props) {
         contentContainerStyle={styles.scrollContainer}
       >
         <TrackScreen category="SendFunds" name="ConnectDevice" />
-        <SelectDevice
-          onSelect={onSelect}
-          steps={[connectingStep, accountApp(mainAccount)]}
-          account={account}
-          parentAccount={parentAccount}
-          transaction={route.params.transaction}
-          status={status}
-        />
+        <SelectDevice onSelect={onSelect} />
       </NavigationScrollView>
     </SafeAreaView>
   );

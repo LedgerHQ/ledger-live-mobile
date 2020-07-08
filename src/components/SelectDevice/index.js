@@ -2,7 +2,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { StyleSheet, View, Platform, Image } from "react-native";
 import Config from "react-native-config";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Trans } from "react-i18next";
 import { useNavigation } from "@react-navigation/native";
 import { discoverDevices } from "@ledgerhq/live-common/lib/hw";
@@ -19,37 +19,32 @@ import USBEmpty from "./USBEmpty";
 import LText from "../LText";
 import colors from "../../colors";
 import SectionSeparator from "../SectionSeparator";
-import type { DeviceNames } from "../../screens/Onboarding/types";
 import PairNewDeviceButton from "./PairNewDeviceButton";
 
 type Props = {
   onBluetoothDeviceAction?: (device: Device) => any,
   onSelect: (device: Device) => void,
-  deviceMeta?: Device,
-  steps?: Step[],
-  onStepEntered?: (number, Object) => void,
+  // deviceMeta?: Device,
+  // steps?: Step[],
+  // onStepEntered?: (number, Object) => void,
   withArrows?: boolean,
   usbOnly?: boolean,
   filter?: (transportModule: TransportModule) => boolean,
-  deviceModelId: DeviceNames,
+  // deviceModelId: DeviceNames,
   autoSelectOnAdd?: boolean,
 };
 
 export default function SelectDevice({
-  account,
-  parentAccount,
-  transaction,
-  steps = [],
-  onStepEntered,
+  // steps = [],
+  // onStepEntered,
   usbOnly,
   withArrows,
-  deviceModelId,
-  deviceMeta,
+  // deviceModelId,
+  // deviceMeta,
   filter = () => true,
   autoSelectOnAdd = false,
   onSelect,
   onBluetoothDeviceAction,
-  status,
 }: Props) {
   const navigation = useNavigation();
   // const dispatch = useDispatch();
