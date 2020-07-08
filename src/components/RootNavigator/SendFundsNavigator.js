@@ -7,6 +7,7 @@ import SendFundsMain from "../../screens/SendFunds/01-SelectAccount";
 import SendSelectRecipient from "../../screens/SendFunds/02-SelectRecipient";
 import SendAmount from "../../screens/SendFunds/03-Amount";
 import SendSummary from "../../screens/SendFunds/04-Summary";
+import SendSelectDevice from "../../screens/SendFunds/SelectDevice";
 import SendConnectDevice from "../../screens/SendFunds/05-ConnectDevice";
 import SendValidation from "../../screens/SendFunds/06-Validation";
 import SendValidationSuccess from "../../screens/SendFunds/07-ValidationSuccess";
@@ -72,6 +73,21 @@ export default function SendFundsNavigator() {
               title={t("send.stepperHeader.summary")}
               subtitle={t("send.stepperHeader.stepRange", {
                 currentStep: "4",
+                totalSteps: "6",
+              })}
+            />
+          ),
+        }}
+      />
+      <Stack.Screen
+        name={ScreenName.SendSelectDevice}
+        component={SendSelectDevice}
+        options={{
+          headerTitle: () => (
+            <StepHeader
+              title={t("send.stepperHeader.selectDevice")}
+              subtitle={t("send.stepperHeader.stepRange", {
+                currentStep: "5",
                 totalSteps: "6",
               })}
             />

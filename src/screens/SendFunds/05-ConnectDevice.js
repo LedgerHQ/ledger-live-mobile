@@ -1,75 +1,60 @@
 // @flow
 import React from "react";
-import { StyleSheet } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
-import { useSelector } from "react-redux";
 import type {
+  Account,
+  AccountLike,
   Transaction,
   TransactionStatus,
 } from "@ledgerhq/live-common/lib/types";
-import { getMainAccount } from "@ledgerhq/live-common/lib/account/helpers";
-import { accountScreenSelector } from "../../reducers/accounts";
-import colors from "../../colors";
-import { ScreenName } from "../../const";
-import { TrackScreen } from "../../analytics";
-import SelectDevice from "../../components/SelectDevice";
-import { connectingStep, accountApp } from "../../components/DeviceJob/steps";
-import NavigationScrollView from "../../components/NavigationScrollView";
+import { createAction } from "@ledgerhq/live-common/lib/hw/actions/transaction";
+import connectApp from "@ledgerhq/live-common/lib/hw/connectApp";
+import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
+import DeviceAction from "../../components/DeviceAction";
 
-const forceInset = { bottom: "always" };
+const action = createAction(connectApp);
 
 type Props = {
   navigation: any,
-  route: { params: RouteParams },
+  route: {
+    params: RouteParams,
+  },
 };
 
 type RouteParams = {
-  accountId: string,
+  device: Device,
+  account: ?AccountLike,
+  parentAccount: ?Account,
   transaction: Transaction,
   status: TransactionStatus,
 };
 
-export default function ConnectDevice({ navigation, route, status }: Props) {
-  const { account, parentAccount } = useSelector(accountScreenSelector(route));
+export default function ConnectDevice({ navigation, route }: Props) {
+  const { account, parentAccount, transaction, status } = route.params;
+  const tokenCurrency =
+    account && account.type === "TokenAccount" && account.token;
 
-  function onSelectDevice(meta: *): void {
-    navigation.replace(ScreenName.SendValidation, {
-      ...route.params,
-      ...meta,
-    });
-  }
+  // const onResult = useCallback(
+  //   _result => {
+  //     navigation.navgate(ScreenName.SendValidation);
+  //   },
+  //   [navigation],
+  // );
 
-  if (!account) return null;
-  const mainAccount = getMainAccount(account, parentAccount);
   return (
-    <SafeAreaView style={styles.root} forceInset={forceInset}>
-      <NavigationScrollView
-        style={styles.scroll}
-        contentContainerStyle={styles.scrollContainer}
-      >
-        <TrackScreen category="SendFunds" name="ConnectDevice" />
-        <SelectDevice
-          onSelect={onSelectDevice}
-          steps={[connectingStep, accountApp(mainAccount)]}
-          account={account}
-          parentAccount={parentAccount}
-          transaction={route.params.transaction}
-          status={status}
-        />
-      </NavigationScrollView>
+    <SafeAreaView>
+      <DeviceAction
+        action={action}
+        request={{
+          account,
+          parentAccount,
+          transaction,
+          status,
+          tokenCurrency,
+        }}
+        device={route.params.device}
+        // onResult={onResult}
+      />
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  root: {
-    flex: 1,
-    backgroundColor: colors.white,
-  },
-  scroll: {
-    flex: 1,
-  },
-  scrollContainer: {
-    padding: 16,
-  },
-});

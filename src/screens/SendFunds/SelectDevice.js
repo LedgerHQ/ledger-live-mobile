@@ -1,0 +1,94 @@
+// @flow
+import React, { useCallback } from "react";
+import { StyleSheet } from "react-native";
+import SafeAreaView from "react-native-safe-area-view";
+import { useSelector } from "react-redux";
+import type {
+  Transaction,
+  TransactionStatus,
+  Account,
+  AccountLike,
+} from "@ledgerhq/live-common/lib/types";
+
+import { getMainAccount } from "@ledgerhq/live-common/lib/account/helpers";
+import { accountScreenSelector } from "../../reducers/accounts";
+import colors from "../../colors";
+import { ScreenName } from "../../const";
+import { TrackScreen } from "../../analytics";
+import SelectDevice from "../../components/SelectDevice";
+import { connectingStep, accountApp } from "../../components/DeviceJob/steps";
+import NavigationScrollView from "../../components/NavigationScrollView";
+
+const forceInset = { bottom: "always" };
+
+type Props = {
+  navigation: any,
+  route: { params: RouteParams },
+};
+
+type RouteParams = {
+  account: ?AccountLike,
+  parentAccount: ?Account,
+  transaction: Transaction,
+  status: TransactionStatus,
+};
+
+export default function ConnectDevice({ navigation, route }: Props) {
+  // const { account, parentAccount } = useSelector(accountScreenSelector(route));
+
+  const { account, parentAccount, transaction, status } = route.params;
+
+  // function onSelectDevice(meta: *): void {
+  //   navigation.replace(ScreenName.SendValidation, {
+  //     ...route.params,
+  //     ...meta,
+  //   });
+  // }
+
+  const onSelect = useCallback(
+    device => {
+      navigation.navigate(ScreenName.SendConnectDevice, {
+        account,
+        parentAccount,
+        transaction,
+        device,
+        status,
+      });
+    },
+    [navigation, account, parentAccount, transaction, status],
+  );
+
+  if (!account) return null;
+  const mainAccount = getMainAccount(account, parentAccount);
+  return (
+    <SafeAreaView style={styles.root} forceInset={forceInset}>
+      <NavigationScrollView
+        style={styles.scroll}
+        contentContainerStyle={styles.scrollContainer}
+      >
+        <TrackScreen category="SendFunds" name="ConnectDevice" />
+        <SelectDevice
+          onSelect={onSelect}
+          steps={[connectingStep, accountApp(mainAccount)]}
+          account={account}
+          parentAccount={parentAccount}
+          transaction={route.params.transaction}
+          status={status}
+        />
+      </NavigationScrollView>
+    </SafeAreaView>
+  );
+}
+
+const styles = StyleSheet.create({
+  root: {
+    flex: 1,
+    backgroundColor: colors.white,
+  },
+  scroll: {
+    flex: 1,
+  },
+  scrollContainer: {
+    padding: 16,
+  },
+});

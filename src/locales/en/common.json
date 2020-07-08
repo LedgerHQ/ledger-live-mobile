@@ -1456,9 +1456,6 @@
       }
     }
   },
-  "ConnectDevice": {
-    "title": "Connect Device"
-  },
   "EditDeviceName": {
     "title": "Rename device",
     "charactersRemaining": "{{remainingCount}} characters remaining",

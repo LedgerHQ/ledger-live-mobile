@@ -24,7 +24,7 @@ import PairNewDeviceButton from "./PairNewDeviceButton";
 
 type Props = {
   onBluetoothDeviceAction?: (device: Device) => any,
-  // onSelect: (meta: Device) => void,
+  onSelect: (device: Device) => void,
   deviceMeta?: Device,
   steps?: Step[],
   onStepEntered?: (number, Object) => void,
@@ -47,7 +47,7 @@ export default function SelectDevice({
   deviceMeta,
   filter = () => true,
   autoSelectOnAdd = false,
-  // onSelect,
+  onSelect,
   onBluetoothDeviceAction,
   status,
 }: Props) {
@@ -94,19 +94,6 @@ export default function SelectDevice({
       : undefined;
     navigation.navigate(ScreenName.PairDevices, { onDone });
   }, [autoSelectOnAdd, knownDevices, devices, navigation]);
-
-  const onSelect = useCallback(
-    device => {
-      navigation.navigate(ScreenName.ConnectDevice, {
-        account,
-        parentAccount,
-        transaction,
-        device,
-        status,
-      });
-    },
-    [navigation, account, parentAccount, transaction, status],
-  );
 
   const renderItem = useCallback(
     (item: Device) => (

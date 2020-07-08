@@ -33,7 +33,6 @@ import { closableStackNavigatorConfig } from "../../navigation/navigatorConfig";
 import TransparentHeaderNavigationOptions from "../../navigation/TransparentHeaderNavigationOptions";
 import colors from "../../colors";
 import HeaderRightClose from "../HeaderRightClose";
-import ConnectDevice from "../ConnectDevice";
 
 export default function BaseNavigator() {
   const { t } = useTranslation();
@@ -116,11 +115,6 @@ export default function BaseNavigator() {
         name={NavigatorName.ImportAccounts}
         component={ImportAccountsNavigator}
         options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name={ScreenName.ConnectDevice}
-        component={ConnectDevice}
-        options={{ title: t("ConnectDevice.title"), headerLeft: null }}
       />
       <Stack.Screen
         name={ScreenName.PairDevices}

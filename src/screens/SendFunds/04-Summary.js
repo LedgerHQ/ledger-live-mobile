@@ -85,9 +85,15 @@ export default function SendSummary({ navigation, route }: Props) {
       return;
     }
 
-    navigation.navigate(ScreenName.SendConnectDevice, {
-      accountId: account.id,
-      parentId: parentAccount && parentAccount.id,
+    // navigation.navigate(ScreenName.SendConnectDevice, {
+    //   accountId: account.id,
+    //   parentId: parentAccount && parentAccount.id,
+    //   transaction,
+    //   status,
+    // });
+    navigation.navigate(ScreenName.SendSelectDevice, {
+      account,
+      parentAccount,
       transaction,
       status,
     });
