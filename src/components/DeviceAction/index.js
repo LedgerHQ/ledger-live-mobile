@@ -1,5 +1,6 @@
 // @flow
-import React, { useEffect } from "react";
+import React from "react";
+import type { TransactionState } from "@ledgerhq/live-common/lib/types";
 import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import LText from "../LText";
 import { ConnectDevice, Loading } from "./components";
@@ -11,45 +12,49 @@ type Props<R, H, P> = {
   action: Action<R, H, P>,
   request: R,
   device: Device,
+  onResult: (transactionState: TransactionState) => void,
 };
 
 export default function DeviceAction<R, H, P>({
   action,
   request,
   device: selectedDevice,
+  onResult,
 }: Props<R, H, P>) {
-  const hookState = action.useHook(selectedDevice, request);
+  const txState = action.useHook(selectedDevice, request);
   const {
-    appAndVersion,
+    // appAndVersion,
     device,
     unresponsive,
-    error,
+    // error,
     isLoading,
-    allowManagerRequestedWording,
-    requestQuitApp,
-    deviceInfo,
-    repairModalOpened,
-    requestOpenApp,
-    allowOpeningRequestedWording,
-    requiresAppInstallation,
-    inWrongDeviceForAccount,
-    onRetry,
-    onAutoRepair,
-    closeRepairModal,
-    onRepairModal,
-    deviceSignatureRequested,
-    deviceStreamingProgress,
-    displayUpgradeWarning,
-    passWarning,
-  } = hookState;
+    // allowManagerRequestedWording,
+    // requestQuitApp,
+    // deviceInfo,
+    // repairModalOpened,
+    // requestOpenApp,
+    // allowOpeningRequestedWording,
+    // requiresAppInstallation,
+    // inWrongDeviceForAccount,
+    // onRetry,
+    // onAutoRepair,
+    // closeRepairModal,
+    // onRepairModal,
+    // deviceSignatureRequested,
+    // deviceStreamingProgress,
+    // displayUpgradeWarning,
+    // passWarning,
+  } = txState;
 
-  // if ((!isLoading && !device) || unresponsive) {
-  //   return <ConnectDevice />;
-  // }
+  if ((!isLoading && !device) || unresponsive) {
+    return <ConnectDevice />;
+  }
 
-  // if (isLoading) {
-  //   return <Loading />;
-  // }
+  if (isLoading) {
+    return <Loading />;
+  }
 
-  return <LText>{JSON.stringify(hookState, null, 2)}</LText>;
+  onResult(txState);
+
+  return <LText>{JSON.stringify(txState, null, 2)}</LText>;
 }
