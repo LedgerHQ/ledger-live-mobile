@@ -1,7 +1,7 @@
 // @flow
 import React from "react";
 import SafeAreaView from "react-native-safe-area-view";
-import { createAction } from "@ledgerhq/live-common/lib/hw/actions/app";
+import { createAction } from "@ledgerhq/live-common/lib/hw/actions/transaction";
 import connectApp from "@ledgerhq/live-common/lib/hw/connectApp";
 import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import DeviceAction from "./DeviceAction";
