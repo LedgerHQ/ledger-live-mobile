@@ -11,7 +11,7 @@ import { ConnectDevice, Loading, OpenAppRequest } from "./components";
 
 type Props<R, H, P> = {
   Result?: React$ComponentType<P>,
-  onResult?: P => void,
+  onResult?: (paylaod: P) => void,
   action: Action<R, H, P>,
   request: R,
   device: Device,
@@ -21,7 +21,7 @@ export default function DeviceAction<R, H, P>({
   action,
   request,
   device: selectedDevice,
-  Result,
+  onResult,
 }: Props<R, H, P>) {
   const status = action.useHook(selectedDevice, request);
   const {
@@ -79,11 +79,13 @@ export default function DeviceAction<R, H, P>({
 
   const payload = action.mapResult(status);
 
-  // if (!payload) {
-  //   return null;
-  // }
+  if (!payload) {
+    return null;
+  }
 
-  // return Result && <Result {...payload} />;
+  if (onResult) {
+    onResult(payload);
+  }
 
   return (
     <ScrollView>

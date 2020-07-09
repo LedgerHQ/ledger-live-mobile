@@ -110,8 +110,6 @@ export default function ValidateOnDevice({
     status,
   });
 
-  console.log(JSON.stringify(fields, null, 2));
-
   const transRecipientWording = t(
     `ValidateOnDevice.recipientWording.${transaction.mode || "send"}`,
   );
