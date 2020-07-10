@@ -1,7 +1,7 @@
 // @flow
-import React, { useCallback } from "react";
+import React from "react";
+import { StyleSheet } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
-import { UserRefusedOnDevice } from "@ledgerhq/errors";
 import type {
   Account,
   AccountLike,
@@ -11,9 +11,8 @@ import type {
 import { createAction } from "@ledgerhq/live-common/lib/hw/actions/transaction";
 import connectApp from "@ledgerhq/live-common/lib/hw/connectApp";
 import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
-import { ScreenName } from "../../const";
 import DeviceAction from "../../components/DeviceAction";
-import LText from "../../components/LText";
+import { useSignedTxHandler } from "../../logic/screenTransactionHooks";
 
 const action = createAction(connectApp);
 
@@ -26,44 +25,25 @@ type Props = {
 
 type RouteParams = {
   device: Device,
-  account: ?AccountLike,
+  account: AccountLike,
   parentAccount: ?Account,
   transaction: Transaction,
   status: TransactionStatus,
 };
 
-export default function ConnectDevice({ navigation, route }: Props) {
+export default function ConnectDevice({ route }: Props) {
   const { account, parentAccount, transaction, status } = route.params;
   const tokenCurrency =
-    account && account.type === "TokenAccount" && account.token;
+    account.type === "TokenAccount" ? account.token : undefined;
 
-  const onResult = useCallback(
-    ({ signedOperation, transactionSignError }) => {
-      if (transactionSignError) {
-        navigation.replace(ScreenName.SendValidationError, {
-          error:
-            transactionSignError.name === "TransactionRefusedOnDevice"
-              ? new UserRefusedOnDevice()
-              : transactionSignError,
-        });
-        return;
-      }
-
-      try {
-        // await broadcasting tx
-        navigation.replace(ScreenName.SendValidationSuccess, {
-          result: signedOperation.operation,
-        });
-        // updateAccountWithUpdater(mainAccount.id, account =>
-        //   addPendingOperation(account, e.operation),
-        // );
-      } catch (error) {}
-    },
-    [navigation],
-  );
+  const onResult = useSignedTxHandler({
+    context: "Send",
+    account,
+    parentAccount,
+  });
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={styles.root}>
       <DeviceAction
         action={action}
         request={{
@@ -75,17 +55,13 @@ export default function ConnectDevice({ navigation, route }: Props) {
         }}
         device={route.params.device}
         onResult={onResult}
-        Result={Validation}
       />
     </SafeAreaView>
   );
 }
 
-function Validation(props) {
-  return (
-    <>
-      <LText>Validate Transaction</LText>
-      <LText>{JSON.stringify(props, null, 2)}</LText>
-    </>
-  );
-}
+const styles = StyleSheet.create({
+  root: {
+    flex: 1,
+  },
+});

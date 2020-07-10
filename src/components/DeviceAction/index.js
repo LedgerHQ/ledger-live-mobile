@@ -11,7 +11,7 @@ import { ConnectDevice, Loading, OpenAppRequest } from "./components";
 
 type Props<R, H, P> = {
   Result?: React$ComponentType<P>,
-  onResult?: (paylaod: P) => void,
+  onResult?: (paylaod: P) => Promise<void>,
   action: Action<R, H, P>,
   request: R,
   device: Device,

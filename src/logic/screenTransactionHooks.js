@@ -1,5 +1,5 @@
 /* @flow */
-
+import invariant from "invariant";
 import { concat, of, from } from "rxjs";
 import { concatMap, filter } from "rxjs/operators";
 import { useState, useCallback, useEffect, useRef } from "react";
@@ -9,11 +9,18 @@ import type {
   Account,
   AccountLike,
   Transaction,
+  SignedOperation,
+  Operation,
 } from "@ledgerhq/live-common/lib/types";
 import { UserRefusedOnDevice } from "@ledgerhq/errors";
 import { getMainAccount } from "@ledgerhq/live-common/lib/account/helpers";
 import { addPendingOperation } from "@ledgerhq/live-common/lib/account";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
+import { execAndWaitAtLeast } from "@ledgerhq/live-common/lib/promise";
+import { getEnv } from "@ledgerhq/live-common/lib/env";
+import { useDispatch } from "react-redux";
+import { TransactionRefusedOnDevice } from "@ledgerhq/live-common/lib/errors";
+import { updateAccountWithUpdater } from "../actions/accounts";
 import logger from "../logger";
 
 export const useTransactionChangeFromNavigation = (
@@ -136,3 +143,80 @@ export const useSignWithDevice = ({
 
   return [signing, signed];
 };
+
+type SignTransactionArgs = {
+  account: AccountLike,
+  parentAccount: ?Account,
+};
+
+// TODO move to live-common
+function useBroadcast({ account, parentAccount }: SignTransactionArgs) {
+  const broadcast = useCallback(
+    async (signedOperation: SignedOperation): Promise<Operation> => {
+      invariant(account, "account not present");
+      const mainAccount = getMainAccount(account, parentAccount);
+      const bridge = getAccountBridge(account, parentAccount);
+
+      if (getEnv("DISABLE_TRANSACTION_BROADCAST")) {
+        return Promise.resolve(signedOperation.operation);
+      }
+
+      return execAndWaitAtLeast(3000, () =>
+        bridge.broadcast({
+          account: mainAccount,
+          signedOperation,
+        }),
+      );
+    },
+    [account, parentAccount],
+  );
+
+  return broadcast;
+}
+
+export function useSignedTxHandler({
+  context,
+  account,
+  parentAccount,
+  ...txArgs
+}: SignTransactionArgs & {
+  context: string,
+  account: AccountLike,
+  parentAccount: ?Account,
+}) {
+  const navigation = useNavigation();
+  const broadcast = useBroadcast(txArgs);
+  const dispatch = useDispatch();
+  const mainAccount = getMainAccount(account, parentAccount);
+
+  return useCallback(
+    async ({ signedOperation, transactionSignError }) => {
+      try {
+        if (transactionSignError) {
+          throw transactionSignError;
+        }
+
+        await broadcast(signedOperation);
+        navigation.replace(context + "ValidationSuccess", {
+          result: signedOperation.operation,
+        });
+        dispatch(
+          updateAccountWithUpdater(mainAccount.id, account =>
+            addPendingOperation(account, signedOperation.operation),
+          ),
+        );
+      } catch (error) {
+        if (
+          !(
+            error instanceof UserRefusedOnDevice ||
+            error instanceof TransactionRefusedOnDevice
+          )
+        ) {
+          logger.critical(error);
+        }
+        navigation.replace(context + "ValidationError", { error });
+      }
+    },
+    [navigation, context, broadcast, mainAccount, dispatch],
+  );
+}

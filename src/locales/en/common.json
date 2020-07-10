@@ -373,6 +373,10 @@
       "title": "Oops, a time out occurred ({{tag}})",
       "description": "It took too long for the server to respond."
     },
+    "TransactionRefusedOnDevice": {
+      "title": "Transaction refused on device",
+      "description": "Please retry or contact Ledger Support in case of doubt."
+    },
     "TransportError": {
       "title": "Something went wrong. Please reconnect your device.",
       "description": "{{message}}"
