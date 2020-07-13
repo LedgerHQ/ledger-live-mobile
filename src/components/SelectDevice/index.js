@@ -11,8 +11,6 @@ import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import { ScreenName } from "../../const";
 import { knownDevicesSelector } from "../../reducers/ble";
 import DeviceItem from "../DeviceItem";
-// import DeviceJob from "../DeviceJob";
-import type { Step } from "../DeviceJob/types";
 // import { setReadOnlyMode, installAppFirstTime } from "../../actions/settings";
 import BluetoothEmpty from "./BluetoothEmpty";
 import USBEmpty from "./USBEmpty";
@@ -22,73 +20,28 @@ import SectionSeparator from "../SectionSeparator";
 import PairNewDeviceButton from "./PairNewDeviceButton";
 
 type Props = {
-  onBluetoothDeviceAction?: (device: Device) => any,
+  onBluetoothDeviceAction?: (device: Device) => void,
   onSelect: (device: Device) => void,
-  // deviceMeta?: Device,
-  // steps?: Step[],
-  // onStepEntered?: (number, Object) => void,
   withArrows?: boolean,
   usbOnly?: boolean,
   filter?: (transportModule: TransportModule) => boolean,
-  // deviceModelId: DeviceNames,
-  autoSelectOnAdd?: boolean,
 };
 
 export default function SelectDevice({
-  // steps = [],
-  // onStepEntered,
   usbOnly,
   withArrows,
-  // deviceModelId,
-  // deviceMeta,
   filter = () => true,
-  autoSelectOnAdd = false,
   onSelect,
   onBluetoothDeviceAction,
 }: Props) {
   const navigation = useNavigation();
-  // const dispatch = useDispatch();
   const knownDevices = useSelector(knownDevicesSelector);
 
   const [devices, setDevices] = useState([]);
-  const [connecting, setConnecting] = useState();
-
-  // const onDone = useCallback(
-  //   (info: any) => {
-  //     /** if list apps succeed we update settings with state of apps installed */
-  //     if (info && info.appRes) {
-  //       const hasAnyAppinstalled =
-  //         info.appRes.installed && info.appRes.installed.length > 0;
-
-  //       dispatch(installAppFirstTime(hasAnyAppinstalled));
-  //     }
-
-  //     setConnecting();
-  //     onSelect(info);
-
-  //     // Always false until we pair a device?
-  //     dispatch(setReadOnlyMode(false));
-  //   },
-  //   [dispatch, onSelect],
-  // );
-
-  // const onCancel = useCallback(() => {
-  //   setConnecting();
-  // }, []);
 
   const onPairNewDevice = useCallback(() => {
-    const onDone = autoSelectOnAdd
-      ? deviceId => {
-          const device = getAll({ knownDevices }, { devices }).find(
-            d => d.deviceId === deviceId,
-          );
-          if (device) {
-            setConnecting(device);
-          }
-        }
-      : undefined;
-    navigation.navigate(ScreenName.PairDevices, { onDone });
-  }, [autoSelectOnAdd, knownDevices, devices, navigation]);
+    navigation.navigate(ScreenName.PairDevices);
+  }, [navigation]);
 
   const renderItem = useCallback(
     (item: Device) => (
@@ -160,16 +113,6 @@ export default function SelectDevice({
         !usbOnly &&
         (ble.length === 0 ? <ORBar /> : <USBHeader />)}
       {other.length === 0 ? <USBEmpty /> : other.map(renderItem)}
-
-      {/* <DeviceJob
-        meta={deviceMeta || connecting}
-        steps={steps}
-        onCancel={onCancel}
-        onStepEntered={onStepEntered}
-        onDone={onDone}
-        editMode={false}
-        deviceModelId={deviceModelId}
-      /> */}
     </View>
   );
 }
