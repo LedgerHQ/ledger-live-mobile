@@ -3,7 +3,7 @@ import { View, StyleSheet } from "react-native";
 import React from "react";
 import LText from "../LText";
 
-export function OpenAppRequest({ wording }: { wording: string }) {
+export function renderAllowOpeningApp({ wording }: { wording: string }) {
   return (
     <Wrapper>
       <LText>Open {wording} App</LText>
@@ -11,7 +11,7 @@ export function OpenAppRequest({ wording }: { wording: string }) {
   );
 }
 
-export function ConnectDevice() {
+export function renderConnectYourDevice() {
   return (
     <Wrapper>
       <LText>Connect your device</LText>
@@ -19,7 +19,7 @@ export function ConnectDevice() {
   );
 }
 
-export function Loading() {
+export function renderLoading() {
   return (
     <Wrapper style={styles.wrapper}>
       <LText>Loading...</LText>

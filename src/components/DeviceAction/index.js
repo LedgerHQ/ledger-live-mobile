@@ -7,7 +7,11 @@ import type {
 } from "@ledgerhq/live-common/lib/hw/actions/types";
 import LText from "../LText";
 import ValidateOnDevice from "../ValidateOnDevice";
-import { ConnectDevice, Loading, OpenAppRequest } from "./components";
+import {
+  renderConnectYourDevice,
+  renderLoading,
+  renderAllowOpeningApp,
+} from "./rendering";
 
 type Props<R, H, P> = {
   onResult?: (paylaod: P) => Promise<void>,
@@ -49,15 +53,15 @@ export default function DeviceAction<R, H, P>({
   if (allowOpeningRequestedWording || requestOpenApp) {
     // requestOpenApp for Nano S 1.3.1 (need to ask user to open the app.)
     const wording = allowOpeningRequestedWording || requestOpenApp;
-    return <OpenAppRequest wording={wording} />;
+    return renderAllowOpeningApp({ wording });
   }
 
   if ((!isLoading && !device) || unresponsive) {
-    return <ConnectDevice />;
+    return renderConnectYourDevice();
   }
 
   if (isLoading) {
-    return <Loading />;
+    return renderLoading();
   }
 
   if (request && device && deviceSignatureRequested) {
