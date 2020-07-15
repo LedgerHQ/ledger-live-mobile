@@ -1,5 +1,5 @@
 /* @flow */
-import React, { Component, useEffect, useCallback, useState } from "react";
+import React, { useEffect, useCallback, useState } from "react";
 import { View, StyleSheet } from "react-native";
 import { useIsFocused } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,14 +7,10 @@ import { Trans } from "react-i18next";
 import manager from "@ledgerhq/live-common/lib/manager";
 import { disconnect } from "@ledgerhq/live-common/lib/hw";
 import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
+import { createAction } from "@ledgerhq/live-common/lib/hw/actions/manager";
+import connectManager from "@ledgerhq/live-common/lib/hw/connectManager";
 import { removeKnownDevice } from "../../actions/ble";
 import { ScreenName } from "../../const";
-import {
-  connectingStep,
-  dashboard,
-  listApps,
-  getDeviceName,
-} from "../../components/DeviceJob/steps";
 import SelectDevice from "../../components/SelectDevice";
 import colors from "../../colors";
 import TrackScreen from "../../analytics/TrackScreen";
@@ -28,6 +24,9 @@ import ModalBottomAction from "../../components/ModalBottomAction";
 import NavigationScrollView from "../../components/NavigationScrollView";
 import ReadOnlyNanoX from "./Connect/ReadOnlyNanoX";
 import { readOnlyModeEnabledSelector } from "../../reducers/settings";
+import DeviceAction from "../../components/DeviceAction";
+
+const action = createAction(connectManager);
 
 type Props = {
   navigation: any,
@@ -40,6 +39,7 @@ export default function Screen({ navigation }: Props) {
   const readOnlyModeEnabled = useSelector(readOnlyModeEnabledSelector);
   const [showMenu, setShowMenu] = useState(false);
   const [device, setDevice] = useState();
+  const [isDeviceActionOpen, setIsDeviceActionOpen] = useState(false);
 
   const onShowMenu = useCallback((device: Device) => {
     setDevice(device);
@@ -60,19 +60,30 @@ export default function Screen({ navigation }: Props) {
   }, [device, onHideMenu, dispatch]);
 
   const onSelect = useCallback((device: Device) => {
-    console.log(JSON.stringify(device, null, 2));
+    setDevice(device);
+    setIsDeviceActionOpen(true);
   }, []);
 
-  const onConnect = useCallback(() => {
-    // const { version, mcuVersion } = meta.deviceInfo;
-    // track("ManagerDeviceEntered", {
-    //   version,
-    //   mcuVersion,
-    // });
-    // this.props.navigation.navigate(ScreenName.ManagerMain, {
-    //   meta,
-    // });
-  });
+  const onCloseDeviceActionModal = useCallback(() => {
+    setIsDeviceActionOpen(false);
+  }, []);
+
+  const onResult = useCallback(
+    meta => {
+      setIsDeviceActionOpen(false);
+      const { version, mcuVersion } = meta.deviceInfo;
+      track("ManagerDeviceEntered", {
+        version,
+        mcuVersion,
+      });
+      navigation.navigate(ScreenName.ManagerMain, {
+        meta,
+        ...device,
+      });
+      setDevice();
+    },
+    [navigation, device],
+  );
 
   useEffect(() => {
     if (!readOnlyModeEnabled) {
@@ -100,12 +111,20 @@ export default function Screen({ navigation }: Props) {
       <SelectDevice onSelect={onSelect} onBluetoothDeviceAction={onShowMenu} />
 
       {device && (
-        <RemoveDeviceModal
-          onHideMenu={onHideMenu}
-          open={showMenu}
-          remove={remove}
-          deviceName={device.deviceName || ""}
-        />
+        <>
+          <RemoveDeviceModal
+            onHideMenu={onHideMenu}
+            open={showMenu}
+            remove={remove}
+            deviceName={device.deviceName || ""}
+          />
+          <ConnectDeviceModal
+            device={device}
+            isOpened={isDeviceActionOpen}
+            onClose={onCloseDeviceActionModal}
+            onResult={onResult}
+          />
+        </>
       )}
     </NavigationScrollView>
   );
@@ -135,6 +154,43 @@ function RemoveDeviceModal({
               title={<Trans i18nKey="common.forgetDevice" />}
               onPress={remove}
               containerStyle={styles.buttonContainer}
+            />
+          </View>
+        }
+      />
+    </BottomModal>
+  );
+}
+
+type ConnectDeviceModalProps = {
+  device: Device,
+  onClose: () => void,
+  isOpened: boolean,
+  onResult: $PropertyType<$PropertyType<DeviceAction, "props">, "onResult">,
+};
+
+function ConnectDeviceModal({
+  isOpened,
+  device,
+  onClose,
+  onResult,
+}: ConnectDeviceModalProps) {
+  return (
+    <BottomModal
+      id="ConnectDeviceModal"
+      isOpened={isOpened}
+      onClose={onClose}
+      onResult={onResult}
+    >
+      <ModalBottomAction
+        footer={
+          <View style={styles.footerContainer}>
+            <DeviceAction
+              action={action}
+              device={device}
+              request={null}
+              onClose={onClose}
+              onResult={onResult}
             />
           </View>
         }

@@ -10,7 +10,6 @@ import ValidateOnDevice from "../ValidateOnDevice";
 import { ConnectDevice, Loading, OpenAppRequest } from "./components";
 
 type Props<R, H, P> = {
-  Result?: React$ComponentType<P>,
   onResult?: (paylaod: P) => Promise<void>,
   action: Action<R, H, P>,
   request: R,
@@ -32,8 +31,7 @@ export default function DeviceAction<R, H, P>({
     isLoading,
     // allowManagerRequestedWording,
     // requestQuitApp,
-    // deviceInfo,
-    // repairModalOpened,
+
     requestOpenApp,
     allowOpeningRequestedWording,
     // requiresAppInstallation,

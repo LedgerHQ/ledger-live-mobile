@@ -22,8 +22,8 @@ type Props = {
 };
 
 const Manager = ({ navigation, route }: Props) => {
-  const { appRes, deviceId, deviceInfo } = route.params.meta;
-  const [state, dispatch] = useApps(appRes, deviceId);
+  const { result, deviceId, deviceInfo } = route.params.meta;
+  const [state, dispatch] = useApps(result, deviceId);
 
   const { apps, currentError, installQueue, uninstallQueue } = state;
   const blockNavigation = installQueue.length + uninstallQueue.length > 0;
