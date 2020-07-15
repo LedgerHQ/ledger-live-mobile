@@ -1,6 +1,6 @@
 // @flow
 
-import React from "react";
+import React, { memo, useCallback } from "react";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import Swiper from "react-native-swiper";
@@ -12,34 +12,6 @@ import BackupPack from "./slides/BackupPack";
 import StakeCosmos from "./slides/StakeCosmos";
 import IconClose from "../../icons/Close";
 import colors from "../../colors";
-
-const Carousel = () => {
-  const slides = getDefaultSlides();
-  const dispatch = useDispatch();
-  const hidden = useSelector(dismissedCarouselSelector);
-  return hidden ? null : (
-    <View style={styles.wrapper}>
-      <Swiper
-        style={styles.scrollView}
-        autoplay
-        autoplayTimeout={5}
-        showsButtons={false}
-        dotStyle={styles.bullet}
-        activeDotStyle={[styles.bullet, { opacity: 1 }]}
-      >
-        {slides.map(({ id, Component }) => (
-          <Component key={id} />
-        ))}
-      </Swiper>
-      <TouchableOpacity
-        style={styles.dismissCarousel}
-        onPress={() => dispatch(dismissCarousel())}
-      >
-        <IconClose color={colors.white} size={16} />
-      </TouchableOpacity>
-    </View>
-  );
-};
 
 export const getDefaultSlides = () => {
   return [
@@ -60,6 +32,35 @@ export const getDefaultSlides = () => {
       Component: () => <StakeCosmos />,
     },
   ];
+};
+
+const slides = getDefaultSlides();
+
+const Carousel = () => {
+  const dispatch = useDispatch();
+  const hidden = useSelector(dismissedCarouselSelector);
+
+  const onClose = useCallback(() => dispatch(dismissCarousel()), [dispatch]);
+
+  return hidden ? null : (
+    <View style={styles.wrapper}>
+      <Swiper
+        style={styles.scrollView}
+        autoplay
+        autoplayTimeout={5}
+        showsButtons={false}
+        dotStyle={styles.bullet}
+        activeDotStyle={[styles.bullet, { opacity: 1 }]}
+      >
+        {slides.map(({ id, Component }) => (
+          <Component key={id} />
+        ))}
+      </Swiper>
+      <TouchableOpacity style={styles.dismissCarousel} onPress={onClose}>
+        <IconClose color={colors.white} size={16} />
+      </TouchableOpacity>
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({
@@ -86,6 +87,7 @@ const styles = StyleSheet.create({
     position: "relative",
     borderRadius: 4,
     overflow: "hidden",
+    height: 193,
   },
   label: {
     fontSize: 40,
@@ -93,4 +95,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Carousel;
+export default memo<{}>(Carousel);

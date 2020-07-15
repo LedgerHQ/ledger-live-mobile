@@ -1,7 +1,7 @@
 // @flow
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useCallback } from "react";
 import { useSelector } from "react-redux";
-import { View, StyleSheet, SectionList } from "react-native";
+import { StyleSheet, SectionList, FlatList } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import Animated from "react-native-reanimated";
 import { createNativeWrapper } from "react-native-gesture-handler";
@@ -68,10 +68,9 @@ export default function PortfolioScreen({ navigation }: Props) {
     return item.id;
   }
 
-  function ListHeaderComponent() {
+  const ListHeaderComponent = useCallback(() => {
     return (
       <>
-        <Carousel />
         <GraphCardContainer
           counterValueCurrency={counterValueCurrency}
           portfolio={portfolio}
@@ -79,7 +78,7 @@ export default function PortfolioScreen({ navigation }: Props) {
         />
       </>
     );
-  }
+  }, [accounts, counterValueCurrency, portfolio]);
 
   function ListEmptyComponent() {
     if (accounts.length === 0) {
@@ -146,35 +145,43 @@ export default function PortfolioScreen({ navigation }: Props) {
 
       <TrackScreen category="Portfolio" accountsLength={accounts.length} />
 
-      <View style={styles.inner}>
-        <List
-          ref={ref}
-          sections={sections}
-          style={styles.list}
-          contentContainerStyle={styles.contentContainer}
-          keyExtractor={keyExtractor}
-          renderItem={renderItem}
-          renderSectionHeader={renderSectionHeader}
-          onEndReached={onEndReached}
-          stickySectionHeadersEnabled={false}
-          showsVerticalScrollIndicator={false}
-          onScroll={Animated.event([
-            { nativeEvent: { contentOffset: { y: scrollY } } },
-          ])}
-          ListHeaderComponent={ListHeaderComponent}
-          ListFooterComponent={
-            !completed ? (
-              <LoadingFooter />
-            ) : accounts.every(isAccountEmpty) ? null : sections.length ? (
-              <NoMoreOperationFooter />
-            ) : (
-              <NoOperationFooter />
-            )
-          }
-          ListEmptyComponent={ListEmptyComponent}
-        />
-        <MigrateAccountsBanner />
-      </View>
+      <FlatList
+        data={[
+          ...(accounts.length > 0 && !accounts.every(isAccountEmpty)
+            ? [<Carousel />]
+            : []),
+          ListHeaderComponent(),
+          <List
+            ref={ref}
+            sections={sections}
+            style={styles.list}
+            contentContainerStyle={styles.contentContainer}
+            keyExtractor={keyExtractor}
+            renderItem={renderItem}
+            renderSectionHeader={renderSectionHeader}
+            onEndReached={onEndReached}
+            stickySectionHeadersEnabled={false}
+            showsVerticalScrollIndicator={false}
+            onScroll={Animated.event([
+              { nativeEvent: { contentOffset: { y: scrollY } } },
+            ])}
+            ListFooterComponent={
+              !completed ? (
+                <LoadingFooter />
+              ) : accounts.every(isAccountEmpty) ? null : sections.length ? (
+                <NoMoreOperationFooter />
+              ) : (
+                <NoOperationFooter />
+              )
+            }
+            ListEmptyComponent={ListEmptyComponent}
+          />,
+        ]}
+        style={styles.inner}
+        renderItem={({ item }) => item}
+        keyExtractor={(item, index) => String(index)}
+      />
+      <MigrateAccountsBanner />
     </SafeAreaView>
   );
 }
