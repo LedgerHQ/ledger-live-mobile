@@ -12,13 +12,13 @@ import { ConnectDevice, Loading, OpenAppRequest } from "./components";
 type Props<R, H, P> = {
   onResult?: (paylaod: P) => Promise<void>,
   action: Action<R, H, P>,
-  request: R,
+  request?: R,
   device: Device,
 };
 
 export default function DeviceAction<R, H, P>({
   action,
-  request,
+  request = null,
   device: selectedDevice,
   onResult,
 }: Props<R, H, P>) {

@@ -22,8 +22,8 @@ type Props = {
 };
 
 const Manager = ({ navigation, route }: Props) => {
-  const { result, deviceId, deviceInfo } = route.params.meta;
-  const [state, dispatch] = useApps(result, deviceId);
+  const { result, device } = route.params;
+  const [state, dispatch] = useApps(result, device.deviceId);
 
   const { apps, currentError, installQueue, uninstallQueue } = state;
   const blockNavigation = installQueue.length + uninstallQueue.length > 0;
@@ -107,10 +107,10 @@ const Manager = ({ navigation, route }: Props) => {
         setAppUninstallWithDependencies={setAppUninstallWithDependencies}
         setStorageWarning={setStorageWarning}
         managerTabs={MANAGER_TABS}
-        deviceId={deviceId}
+        deviceId={device.deviceId}
         initialDeviceName={route.params?.deviceName}
         blockNavigation={blockNavigation}
-        deviceInfo={deviceInfo}
+        deviceInfo={device.deviceInfo}
       />
       <GenericErrorBottomModal error={error} onClose={closeErrorModal} />
       <QuitManagerModal

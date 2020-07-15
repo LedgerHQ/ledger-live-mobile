@@ -4,7 +4,6 @@ import { View, StyleSheet } from "react-native";
 import { useIsFocused } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
 import { Trans } from "react-i18next";
-import manager from "@ledgerhq/live-common/lib/manager";
 import { disconnect } from "@ledgerhq/live-common/lib/hw";
 import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import { createAction } from "@ledgerhq/live-common/lib/hw/actions/manager";
@@ -38,7 +37,7 @@ export default function Screen({ navigation }: Props) {
   const dispatch = useDispatch();
   const readOnlyModeEnabled = useSelector(readOnlyModeEnabledSelector);
   const [showMenu, setShowMenu] = useState(false);
-  const [device, setDevice] = useState();
+  const [device, setDevice] = useState<?Device>();
   const [isDeviceActionOpen, setIsDeviceActionOpen] = useState(false);
 
   const onShowMenu = useCallback((device: Device) => {
@@ -69,8 +68,11 @@ export default function Screen({ navigation }: Props) {
   }, []);
 
   const onResult = useCallback(
-    meta => {
+    async meta => {
       setIsDeviceActionOpen(false);
+      if (!device) {
+        return;
+      }
       const { version, mcuVersion } = meta.deviceInfo;
       track("ManagerDeviceEntered", {
         version,
@@ -78,7 +80,7 @@ export default function Screen({ navigation }: Props) {
       });
       navigation.navigate(ScreenName.ManagerMain, {
         meta,
-        ...device,
+        device,
       });
       setDevice();
     },
@@ -166,7 +168,7 @@ type ConnectDeviceModalProps = {
   device: Device,
   onClose: () => void,
   isOpened: boolean,
-  onResult: $PropertyType<$PropertyType<DeviceAction, "props">, "onResult">,
+  onResult: $PropertyType<React$ElementProps<typeof DeviceAction>, "onResult">,
 };
 
 function ConnectDeviceModal({
@@ -188,7 +190,6 @@ function ConnectDeviceModal({
             <DeviceAction
               action={action}
               device={device}
-              request={null}
               onClose={onClose}
               onResult={onResult}
             />
