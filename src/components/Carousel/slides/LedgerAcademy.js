@@ -13,7 +13,7 @@ import ExternalLink from "../../../icons/ExternalLink";
 const LedgerAcademy = () => {
   const slideWidth = getWindowDimensions().width - 32;
   const onClick = useCallback(() => {
-    Linking.openURL(urls.banners.backupPack);
+    Linking.openURL(urls.banners.ledgerAcademy);
   }, []);
   return (
     <View style={[styles.wrapper, { width: slideWidth }]}>
