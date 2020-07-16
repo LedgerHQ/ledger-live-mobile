@@ -1410,6 +1410,9 @@
       }
     }
   },
+  "DeviceAction": {
+    "loading": "Loading..."
+  },
   "SelectDevice": {
     "title": "Pair new device",
     "deviceNotFoundPairNewDevice": "Add new Ledger Nano X",

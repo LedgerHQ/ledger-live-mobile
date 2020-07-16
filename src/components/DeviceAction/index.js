@@ -5,6 +5,7 @@ import type {
   Action,
   Device,
 } from "@ledgerhq/live-common/lib/hw/actions/types";
+import { useTranslation } from "react-i18next";
 import LText from "../LText";
 import ValidateOnDevice from "../ValidateOnDevice";
 import {
@@ -26,6 +27,7 @@ export default function DeviceAction<R, H, P>({
   device: selectedDevice,
   onResult,
 }: Props<R, H, P>) {
+  const { t } = useTranslation();
   const status = action.useHook(selectedDevice, request);
   const {
     // appAndVersion,
@@ -61,7 +63,7 @@ export default function DeviceAction<R, H, P>({
   }
 
   if (isLoading) {
-    return renderLoading();
+    return renderLoading({ t });
   }
 
   if (request && device && deviceSignatureRequested) {
