@@ -63,5 +63,6 @@ export default function ConnectDevice({ route }: Props) {
 const styles = StyleSheet.create({
   root: {
     flex: 1,
+    padding: 16,
   },
 });

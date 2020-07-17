@@ -1411,7 +1411,12 @@
     }
   },
   "DeviceAction": {
-    "loading": "Loading..."
+    "loading": "Loading...",
+    "outdated": "App version outdated",
+    "outdatedDesc": "An important update is available for the {{appName}} application on your device. Please go to the Manager to update it.",
+    "button": {
+      "openManager": "Open Manager"
+    }
   },
   "SelectDevice": {
     "title": "Pair new device",

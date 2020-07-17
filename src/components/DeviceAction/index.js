@@ -6,9 +6,11 @@ import type {
   Device,
 } from "@ledgerhq/live-common/lib/hw/actions/types";
 import { useTranslation } from "react-i18next";
+import { useNavigation } from "@react-navigation/native";
 import LText from "../LText";
 import ValidateOnDevice from "../ValidateOnDevice";
 import {
+  renderWarningOutdated,
   renderConnectYourDevice,
   renderLoading,
   renderAllowOpeningApp,
@@ -28,29 +30,38 @@ export default function DeviceAction<R, H, P>({
   onResult,
 }: Props<R, H, P>) {
   const { t } = useTranslation();
+  const navigation = useNavigation();
   const status = action.useHook(selectedDevice, request);
   const {
-    // appAndVersion,
+    appAndVersion,
     device,
     unresponsive,
-    // error,
+    error,
     isLoading,
-    // allowManagerRequestedWording,
-    // requestQuitApp,
-
+    allowManagerRequestedWording,
+    requestQuitApp,
     requestOpenApp,
     allowOpeningRequestedWording,
-    // requiresAppInstallation,
-    // inWrongDeviceForAccount,
-    // onRetry,
-    // onAutoRepair,
-    // closeRepairModal,
-    // onRepairModal,
+    requiresAppInstallation,
+    inWrongDeviceForAccount,
+    onRetry,
+    onAutoRepair,
+    closeRepairModal,
+    onRepairModal,
     deviceSignatureRequested,
-    // deviceStreamingProgress,
-    // displayUpgradeWarning,
-    // passWarning,
+    deviceStreamingProgress,
+    displayUpgradeWarning,
+    passWarning,
   } = status;
+
+  if (displayUpgradeWarning && appAndVersion) {
+    return renderWarningOutdated({
+      t,
+      appName: appAndVersion.name,
+      passWarning,
+      navigation,
+    });
+  }
 
   if (allowOpeningRequestedWording || requestOpenApp) {
     // requestOpenApp for Nano S 1.3.1 (need to ask user to open the app.)
