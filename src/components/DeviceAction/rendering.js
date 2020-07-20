@@ -10,8 +10,10 @@ import colors from "../../colors";
 import Button from "../Button";
 import { NavigatorName } from "../../const";
 import Warning from "../../icons/Warning";
+import AlertTriangle from "../../icons/AlertTriangle";
 import Animation from "../Animation";
 import getDeviceAnimation from "./getDeviceAnimation";
+import TranslatedError from "../TranslatedError";
 
 type RawProps = {
   t: (key: string, options?: { [key: string]: string }) => string,
@@ -130,6 +132,46 @@ export function renderAllowOpeningApp({
   );
 }
 
+// export function renderInWrongAppForAccount({t}: {...RawProps}) {
+//   return (
+//     <View style={styles.wrapper}>
+
+//     </View>
+//   )
+// }
+
+export function renderError({
+  t,
+  error,
+  onRetry,
+}: {
+  ...RawProps,
+  error: Error,
+  onRetry?: () => void,
+}) {
+  return (
+    <View style={styles.wrapper}>
+      <View style={styles.iconContainer}>
+        <AlertTriangle size={28} />
+      </View>
+      <LText style={[styles.text, styles.title]} bold>
+        <TranslatedError error={error} field="description" />
+      </LText>
+      {onRetry && (
+        <View style={styles.actionContainer}>
+          <Button
+            event="DeviceActionErrorRetry"
+            type="primary"
+            title={t("common.retry")}
+            onPress={onRetry}
+            containerStyle={styles.button}
+          />
+        </View>
+      )}
+    </View>
+  );
+}
+
 export function renderConnectYourDevice() {
   return (
     <View>
@@ -170,7 +212,7 @@ export function renderWarningOutdated({
 
   return (
     <View style={styles.wrapper}>
-      <View style={styles.warningIconContainer}>
+      <View style={styles.iconContainer}>
         <Warning size={28} color={colors.yellow} />
       </View>
       <LText style={[styles.text, styles.title]} bold>
@@ -213,7 +255,7 @@ const styles = StyleSheet.create({
   text: {
     color: colors.darkBlue,
   },
-  warningIconContainer: {
+  iconContainer: {
     padding: 8,
   },
   title: {

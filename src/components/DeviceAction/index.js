@@ -17,6 +17,8 @@ import {
   renderRequestQuitApp,
   renderRequiresAppInstallation,
   renderAllowManager,
+  // renderInWrongAppForAccount,
+  renderError,
 } from "./rendering";
 
 type Props<R, H, P> = {
@@ -109,9 +111,13 @@ export default function DeviceAction<R, H, P>({
   //   });
   // }
 
-  // if (!isLoading && error) {
-  //   return renderError({ error, onRetry, withExportLogs: true });
-  // }
+  if (!isLoading && error) {
+    return renderError({
+      t,
+      error,
+      onRetry,
+    });
+  }
 
   if ((!isLoading && !device) || unresponsive) {
     return renderConnectYourDevice();
