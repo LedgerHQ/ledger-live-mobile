@@ -1,7 +1,7 @@
 // @flow
 import React from "react";
 import { View, StyleSheet } from "react-native";
-// import LottieView from "lottie-react-native";
+import type { TokenCurrency } from "@ledgerhq/live-common/lib/types";
 import LText from "../LText";
 import getWindowDimensions from "../../logic/getWindowDimensions";
 import Spinning from "../Spinning";
@@ -10,6 +10,8 @@ import colors from "../../colors";
 import Button from "../Button";
 import { NavigatorName } from "../../const";
 import Warning from "../../icons/Warning";
+import Animation from "../Animation";
+import getDeviceAnimation from "./getDeviceAnimation";
 
 // const anims = {
 //   pairing: {
@@ -22,10 +24,64 @@ type RawProps = {
   t: (key: string, options?: { [key: string]: string }) => string,
 };
 
-export function renderAllowOpeningApp({ wording }: { wording: string }) {
+type ModelId = "nanoX" | "nanoS";
+
+export function renderRequestQuitApp({
+  t,
+  modelId,
+}: {
+  ...RawProps,
+  modelId: ModelId,
+}) {
   return (
-    <View>
-      <LText>Open {wording} App</LText>
+    <View style={styles.wrapper}>
+      <View style={styles.animationContainer}>
+        <Animation source={getDeviceAnimation({ modelId, key: "quitApp" })} />
+      </View>
+      <LText style={styles.text} semiBold>
+        {t("DeviceAction.quitApp")}
+      </LText>
+    </View>
+  );
+}
+
+export function renderAllowOpeningApp({
+  t,
+  navigation,
+  modelId,
+  wording,
+  tokenContext,
+  isDeviceBlocker,
+}: {
+  ...RawProps,
+  navigation: any,
+  modelId: ModelId,
+  wording: string,
+  tokenContext?: ?TokenCurrency,
+  isDeviceBlocker?: boolean,
+}) {
+  if (isDeviceBlocker) {
+    // TODO: disable gesture, modal close, hide header buttons
+    navigation.setOptions({
+      gestureEnabled: false,
+    });
+  }
+
+  return (
+    <View style={styles.wrapper}>
+      <View style={styles.animationContainer}>
+        <Animation source={getDeviceAnimation({ modelId, key: "openApp" })} />
+      </View>
+      <LText style={styles.text} semiBold>
+        {t("DeviceAction.allowAppPermission", { wording })}
+      </LText>
+      {tokenContext ? (
+        <LText style={styles.text} semiBold>
+          {t("DeviceAction.allowAppPermissionSubtitleToken", {
+            token: tokenContext.name,
+          })}
+        </LText>
+      ) : null}
     </View>
   );
 }
@@ -131,5 +187,9 @@ const styles = StyleSheet.create({
   },
   actionContainer: {
     flexDirection: "row",
+  },
+  animationContainer: {
+    alignSelf: "stretch",
+    height: 180,
   },
 });

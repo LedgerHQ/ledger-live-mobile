@@ -14,6 +14,7 @@ import {
   renderConnectYourDevice,
   renderLoading,
   renderAllowOpeningApp,
+  renderRequestQuitApp,
 } from "./rendering";
 
 type Props<R, H, P> = {
@@ -54,6 +55,8 @@ export default function DeviceAction<R, H, P>({
     passWarning,
   } = status;
 
+  const modelId = device?.modelId ?? selectedDevice.modelId;
+
   if (displayUpgradeWarning && appAndVersion) {
     return renderWarningOutdated({
       t,
@@ -63,11 +66,46 @@ export default function DeviceAction<R, H, P>({
     });
   }
 
+  if (requestQuitApp) {
+    return renderRequestQuitApp({
+      t,
+      modelId,
+    });
+  }
+
+  // if (requiresAppInstallation) {
+  //   const { appName } = requiresAppInstallation;
+  //   return renderRequiresAppInstallation({ appName });
+  // }
+
+  // if (allowManagerRequestedWording) {
+  //   const wording = allowManagerRequestedWording;
+  //   return renderAllowManager({ modelId, type, wording });
+  // }
+
   if (allowOpeningRequestedWording || requestOpenApp) {
     // requestOpenApp for Nano S 1.3.1 (need to ask user to open the app.)
     const wording = allowOpeningRequestedWording || requestOpenApp;
-    return renderAllowOpeningApp({ wording });
+    return renderAllowOpeningApp({
+      t,
+      navigation,
+      modelId,
+      wording,
+      tokenContext: request?.tokenCurrency,
+      isDeviceBlocker: !requestOpenApp,
+    });
   }
+
+  // if (inWrongDeviceForAccount) {
+  //   return renderInWrongAppForAccount({
+  //     onRetry,
+  //     accountName: inWrongDeviceForAccount.accountName,
+  //   });
+  // }
+
+  // if (!isLoading && error) {
+  //   return renderError({ error, onRetry, withExportLogs: true });
+  // }
 
   if ((!isLoading && !device) || unresponsive) {
     return renderConnectYourDevice();
@@ -76,6 +114,10 @@ export default function DeviceAction<R, H, P>({
   if (isLoading) {
     return renderLoading({ t });
   }
+
+  // if (deviceInfo && deviceInfo.isBootloader) {
+  //   return renderBootloaderStep({ onAutoRepair });
+  // }
 
   if (request && device && deviceSignatureRequested) {
     const { account, parentAccount, status, transaction } = request;
