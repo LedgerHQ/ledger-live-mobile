@@ -17,7 +17,7 @@ import {
   renderRequestQuitApp,
   renderRequiresAppInstallation,
   renderAllowManager,
-  // renderInWrongAppForAccount,
+  renderInWrongAppForAccount,
   renderError,
 } from "./rendering";
 
@@ -104,12 +104,13 @@ export default function DeviceAction<R, H, P>({
     });
   }
 
-  // if (inWrongDeviceForAccount) {
-  //   return renderInWrongAppForAccount({
-  //     onRetry,
-  //     accountName: inWrongDeviceForAccount.accountName,
-  //   });
-  // }
+  if (inWrongDeviceForAccount) {
+    return renderInWrongAppForAccount({
+      t,
+      onRetry,
+      accountName: inWrongDeviceForAccount.accountName,
+    });
+  }
 
   if (!isLoading && error) {
     return renderError({

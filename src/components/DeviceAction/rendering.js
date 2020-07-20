@@ -1,6 +1,7 @@
 // @flow
 import React from "react";
 import { View, StyleSheet } from "react-native";
+import { WrongDeviceForAccount } from "@ledgerhq/errors";
 import type { TokenCurrency } from "@ledgerhq/live-common/lib/types";
 import LText from "../LText";
 import getWindowDimensions from "../../logic/getWindowDimensions";
@@ -132,13 +133,21 @@ export function renderAllowOpeningApp({
   );
 }
 
-// export function renderInWrongAppForAccount({t}: {...RawProps}) {
-//   return (
-//     <View style={styles.wrapper}>
-
-//     </View>
-//   )
-// }
+export function renderInWrongAppForAccount({
+  t,
+  onRetry,
+  accountName,
+}: {
+  ...RawProps,
+  accountName: string,
+  onRetry?: () => void,
+}) {
+  return renderError({
+    t,
+    error: new WrongDeviceForAccount(null, { accountName }),
+    onRetry,
+  });
+}
 
 export function renderError({
   t,
