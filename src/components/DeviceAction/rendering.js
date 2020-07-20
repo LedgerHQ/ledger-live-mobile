@@ -13,13 +13,6 @@ import Warning from "../../icons/Warning";
 import Animation from "../Animation";
 import getDeviceAnimation from "./getDeviceAnimation";
 
-// const anims = {
-//   pairing: {
-//     anim: require("../../animations/pairing.json"),
-//     imageAssetsFolder: undefined,
-//   },
-// };
-
 type RawProps = {
   t: (key: string, options?: { [key: string]: string }) => string,
 };
@@ -68,6 +61,30 @@ export function renderRequiresAppInstallation({
           containerStyle={styles.button}
         />
       </View>
+    </View>
+  );
+}
+
+export function renderAllowManager({
+  t,
+  modelId,
+  wording,
+}: {
+  ...RawProps,
+  modelId: ModelId,
+  wording: string,
+}) {
+  // TODO: disable gesture, modal close, hide header buttons
+  return (
+    <View style={styles.wrapper}>
+      <View style={styles.animationContainer}>
+        <Animation
+          source={getDeviceAnimation({ modelId, key: "allowManager" })}
+        />
+      </View>
+      <LText style={styles.text} semiBold>
+        {t("DeviceAction.allowManagerPermission", { wording })}
+      </LText>
     </View>
   );
 }

@@ -16,6 +16,7 @@ import {
   renderAllowOpeningApp,
   renderRequestQuitApp,
   renderRequiresAppInstallation,
+  renderAllowManager,
 } from "./rendering";
 
 type Props<R, H, P> = {
@@ -83,10 +84,10 @@ export default function DeviceAction<R, H, P>({
     });
   }
 
-  // if (allowManagerRequestedWording) {
-  //   const wording = allowManagerRequestedWording;
-  //   return renderAllowManager({ modelId, type, wording });
-  // }
+  if (allowManagerRequestedWording) {
+    const wording = allowManagerRequestedWording;
+    return renderAllowManager({ t, modelId, wording });
+  }
 
   if (allowOpeningRequestedWording || requestOpenApp) {
     // requestOpenApp for Nano S 1.3.1 (need to ask user to open the app.)
