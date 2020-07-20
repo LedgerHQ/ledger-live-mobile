@@ -181,10 +181,32 @@ export function renderError({
   );
 }
 
-export function renderConnectYourDevice() {
+export function renderConnectYourDevice({
+  t,
+  modelId,
+  unresponsive,
+}: {
+  ...RawProps,
+  modelId: ModelId,
+  unresponsive: boolean,
+}) {
   return (
-    <View>
-      <LText>Connect your device</LText>
+    <View style={styles.wrapper}>
+      <View style={styles.animationContainer}>
+        <Animation
+          source={getDeviceAnimation({
+            modelId,
+            key: unresponsive ? "enterPinCode" : "plugAndPinCode",
+          })}
+        />
+      </View>
+      <LText style={styles.text} semiBold>
+        {t(
+          unresponsive
+            ? "DeviceAction.unlockDevice"
+            : "DeviceAction.connectAndUnlockDevice",
+        )}
+      </LText>
     </View>
   );
 }

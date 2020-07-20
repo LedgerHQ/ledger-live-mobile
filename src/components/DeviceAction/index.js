@@ -121,7 +121,11 @@ export default function DeviceAction<R, H, P>({
   }
 
   if ((!isLoading && !device) || unresponsive) {
-    return renderConnectYourDevice();
+    return renderConnectYourDevice({
+      t,
+      modelId,
+      unresponsive,
+    });
   }
 
   if (isLoading) {
