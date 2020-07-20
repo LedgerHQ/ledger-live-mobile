@@ -15,6 +15,7 @@ import {
   renderLoading,
   renderAllowOpeningApp,
   renderRequestQuitApp,
+  renderRequiresAppInstallation,
 } from "./rendering";
 
 type Props<R, H, P> = {
@@ -73,10 +74,14 @@ export default function DeviceAction<R, H, P>({
     });
   }
 
-  // if (requiresAppInstallation) {
-  //   const { appName } = requiresAppInstallation;
-  //   return renderRequiresAppInstallation({ appName });
-  // }
+  if (requiresAppInstallation) {
+    const { appName } = requiresAppInstallation;
+    return renderRequiresAppInstallation({
+      t,
+      navigation,
+      appName: "APP NAME",
+    });
+  }
 
   // if (allowManagerRequestedWording) {
   //   const wording = allowManagerRequestedWording;

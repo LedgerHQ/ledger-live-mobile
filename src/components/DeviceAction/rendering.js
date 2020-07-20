@@ -45,6 +45,33 @@ export function renderRequestQuitApp({
   );
 }
 
+export function renderRequiresAppInstallation({
+  t,
+  navigation,
+  appName,
+}: {
+  ...RawProps,
+  navigation: any,
+  appName: string,
+}) {
+  return (
+    <View style={styles.wrapper}>
+      <LText style={styles.text} semiBold>
+        {t("DeviceAction.appNotInstalled", { appName })}
+      </LText>
+      <View style={styles.actionContainer}>
+        <Button
+          event="DeviceActionRequiresAppInstallationOpenManager"
+          type="primary"
+          title={t("DeviceAction.button.openManager")}
+          onPress={() => navigation.navigate(NavigatorName.Manager)}
+          containerStyle={styles.button}
+        />
+      </View>
+    </View>
+  );
+}
+
 export function renderAllowOpeningApp({
   t,
   navigation,
@@ -187,6 +214,7 @@ const styles = StyleSheet.create({
   },
   actionContainer: {
     flexDirection: "row",
+    padding: 8,
   },
   animationContainer: {
     alignSelf: "stretch",
