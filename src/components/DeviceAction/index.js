@@ -1,13 +1,11 @@
 // @flow
 import React from "react";
-import { ScrollView } from "react-native";
 import type {
   Action,
   Device,
 } from "@ledgerhq/live-common/lib/hw/actions/types";
 import { useTranslation } from "react-i18next";
 import { useNavigation } from "@react-navigation/native";
-import LText from "../LText";
 import ValidateOnDevice from "../ValidateOnDevice";
 import {
   renderWarningOutdated,
@@ -19,6 +17,7 @@ import {
   renderAllowManager,
   renderInWrongAppForAccount,
   renderError,
+  renderBootloaderStep,
 } from "./rendering";
 
 type Props<R, H, P> = {
@@ -45,6 +44,7 @@ export default function DeviceAction<R, H, P>({
     isLoading,
     allowManagerRequestedWording,
     requestQuitApp,
+    deviceInfo,
     requestOpenApp,
     allowOpeningRequestedWording,
     requiresAppInstallation,
@@ -132,9 +132,9 @@ export default function DeviceAction<R, H, P>({
     return renderLoading({ t });
   }
 
-  // if (deviceInfo && deviceInfo.isBootloader) {
-  //   return renderBootloaderStep({ onAutoRepair });
-  // }
+  if (deviceInfo && deviceInfo.isBootloader) {
+    return renderBootloaderStep({ t });
+  }
 
   if (request && device && deviceSignatureRequested) {
     const { account, parentAccount, status, transaction } = request;
@@ -161,10 +161,5 @@ export default function DeviceAction<R, H, P>({
     onResult(payload);
   }
 
-  return (
-    <ScrollView>
-      <LText>{JSON.stringify(status, null, 2)}</LText>
-      <LText>{JSON.stringify(payload, null, 2)}</LText>
-    </ScrollView>
-  );
+  return null;
 }

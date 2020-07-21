@@ -1,7 +1,7 @@
 // @flow
 import React from "react";
 import { View, StyleSheet } from "react-native";
-import { WrongDeviceForAccount } from "@ledgerhq/errors";
+import { WrongDeviceForAccount, UnexpectedBootloader } from "@ledgerhq/errors";
 import type { TokenCurrency } from "@ledgerhq/live-common/lib/types";
 import LText from "../LText";
 import getWindowDimensions from "../../logic/getWindowDimensions";
@@ -271,6 +271,13 @@ export function renderWarningOutdated({
       </View>
     </View>
   );
+}
+
+export function renderBootloaderStep({ t }: RawProps) {
+  return renderError({
+    t,
+    error: new UnexpectedBootloader(),
+  });
 }
 
 const styles = StyleSheet.create({

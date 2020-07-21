@@ -468,7 +468,7 @@
       "description": "The connected device is not associated with the account you selected. Please connect the right device."
     },
     "UnexpectedBootloader": {
-      "title": "Opps, your device should not be in Bootloader mode",
+      "title": "Oops, your device should not be in Bootloader mode",
       "description": "Please restart your device or contact us"
     },
     "UnavailableTezosOriginatedAccountReceive": {
