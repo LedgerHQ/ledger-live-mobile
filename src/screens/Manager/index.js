@@ -67,21 +67,15 @@ export default function Screen({ navigation }: Props) {
 
   const onResult = useCallback(
     async meta => {
-      if (!device) {
-        return;
-      }
       const { version, mcuVersion } = meta.deviceInfo;
       track("ManagerDeviceEntered", {
         version,
         mcuVersion,
       });
-      navigation.navigate(ScreenName.ManagerMain, {
-        meta,
-        device,
-      });
+      navigation.navigate(ScreenName.ManagerMain, meta);
       setDevice();
     },
-    [navigation, device],
+    [navigation],
   );
 
   useEffect(() => {
