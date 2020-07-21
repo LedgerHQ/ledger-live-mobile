@@ -1,10 +1,12 @@
 // @flow
 
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import type { CryptoCurrency } from "@ledgerhq/live-common/lib/types";
-
+import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
+import { createAction } from "@ledgerhq/live-common/lib/hw/actions/app";
+import connectApp from "@ledgerhq/live-common/lib/hw/connectApp";
 import { prepareCurrency } from "../../bridge/cache";
 import { ScreenName } from "../../const";
 import colors from "../../colors";
@@ -12,6 +14,7 @@ import { TrackScreen } from "../../analytics";
 import SelectDevice from "../../components/SelectDevice";
 import { connectingStep, currencyApp } from "../../components/DeviceJob/steps";
 import NavigationScrollView from "../../components/NavigationScrollView";
+import DeviceActionModal from "../../components/DeviceActionModal";
 
 const forceInset = { bottom: "always" };
 
@@ -25,9 +28,18 @@ type RouteParams = {
   inline?: boolean,
 };
 
+const action = createAction(connectApp);
+
 export default function AddAccountsSelectDevice({ navigation, route }: Props) {
-  const onSelectDevice = useCallback(
-    (meta: *) => {
+  const [device, setDevice] = useState<?Device>();
+
+  const onClose = useCallback(() => {
+    setDevice();
+  }, []);
+
+  const onResult = useCallback(
+    async meta => {
+      setDevice();
       const { currency, inline } = route.params;
       const arg = {
         currency,
@@ -57,10 +69,22 @@ export default function AddAccountsSelectDevice({ navigation, route }: Props) {
       >
         <TrackScreen category="AddAccounts" name="SelectDevice" />
         <SelectDevice
-          onSelect={onSelectDevice}
+          onSelect={setDevice}
           steps={[connectingStep, currencyApp(currency)]}
         />
       </NavigationScrollView>
+      <DeviceActionModal
+        action={action}
+        device={device}
+        onResult={onResult}
+        onClose={onClose}
+        request={{
+          currency:
+            currency.type === "TokenCurrency"
+              ? currency.parentCurrency
+              : currency,
+        }}
+      />
     </SafeAreaView>
   );
 }

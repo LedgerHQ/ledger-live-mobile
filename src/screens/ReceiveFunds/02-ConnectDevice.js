@@ -64,10 +64,6 @@ export default function ConnectDevice({ navigation, route }: Props) {
     [account, parentAccount],
   );
 
-  const onSelectDevice = useCallback(device => {
-    setDevice(device);
-  }, []);
-
   const onResult = useCallback(
     async meta => {
       setDevice();
@@ -127,7 +123,7 @@ export default function ConnectDevice({ navigation, route }: Props) {
         contentContainerStyle={styles.scrollContainer}
       >
         <SelectDevice
-          onSelect={onSelectDevice}
+          onSelect={setDevice}
           steps={[
             connectingStep,
             accountApp(mainAccount),
