@@ -23,7 +23,7 @@ import ModalBottomAction from "../../components/ModalBottomAction";
 import NavigationScrollView from "../../components/NavigationScrollView";
 import ReadOnlyNanoX from "./Connect/ReadOnlyNanoX";
 import { readOnlyModeEnabledSelector } from "../../reducers/settings";
-import DeviceAction from "../../components/DeviceAction";
+import DeviceActionModal from "../../components/DeviceActionModal";
 
 const action = createAction(connectManager);
 
@@ -120,7 +120,8 @@ export default function Screen({ navigation }: Props) {
             remove={remove}
             deviceName={device.deviceName || ""}
           />
-          <ConnectDeviceModal
+          <DeviceActionModal
+            action={action}
             device={device}
             isOpened={isDeviceActionOpen}
             onClose={onCloseDeviceActionModal}
@@ -156,42 +157,6 @@ function RemoveDeviceModal({
               title={<Trans i18nKey="common.forgetDevice" />}
               onPress={remove}
               containerStyle={styles.buttonContainer}
-            />
-          </View>
-        }
-      />
-    </BottomModal>
-  );
-}
-
-type ConnectDeviceModalProps = {
-  device: Device,
-  onClose: () => void,
-  isOpened: boolean,
-  onResult: $PropertyType<React$ElementProps<typeof DeviceAction>, "onResult">,
-};
-
-function ConnectDeviceModal({
-  isOpened,
-  device,
-  onClose,
-  onResult,
-}: ConnectDeviceModalProps) {
-  return (
-    <BottomModal
-      id="ConnectDeviceModal"
-      isOpened={isOpened}
-      onClose={onClose}
-      onResult={onResult}
-    >
-      <ModalBottomAction
-        footer={
-          <View style={styles.footerContainer}>
-            <DeviceAction
-              action={action}
-              device={device}
-              onClose={onClose}
-              onResult={onResult}
             />
           </View>
         }
