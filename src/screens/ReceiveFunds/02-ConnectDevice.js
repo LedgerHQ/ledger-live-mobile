@@ -1,5 +1,5 @@
 // @flow
-import React, { useCallback, useEffect, useMemo } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { View, StyleSheet } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { useSelector } from "react-redux";
@@ -8,6 +8,9 @@ import {
   getMainAccount,
   getReceiveFlowError,
 } from "@ledgerhq/live-common/lib/account";
+import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
+import { createAction } from "@ledgerhq/live-common/lib/hw/actions/app";
+import connectApp from "@ledgerhq/live-common/lib/hw/connectApp";
 import { accountScreenSelector } from "../../reducers/accounts";
 import colors from "../../colors";
 import { ScreenName } from "../../const";
@@ -24,6 +27,7 @@ import { readOnlyModeEnabledSelector } from "../../reducers/settings";
 import ReadOnlyWarning from "./ReadOnlyWarning";
 import NotSyncedWarning from "./NotSyncedWarning";
 import GenericErrorView from "../../components/GenericErrorView";
+import DeviceActionModal from "../../components/DeviceActionModal";
 
 const forceInset = { bottom: "always" };
 
@@ -38,9 +42,12 @@ type RouteParams = {
   title: string,
 };
 
+const action = createAction(connectApp);
+
 export default function ConnectDevice({ navigation, route }: Props) {
   const { account, parentAccount } = useSelector(accountScreenSelector(route));
   const readOnlyModeEnabled = useSelector(readOnlyModeEnabledSelector);
+  const [device, setDevice] = useState<?Device>();
 
   useEffect(() => {
     const readOnlyTitle = "transfer.receive.titleReadOnly";
@@ -57,8 +64,13 @@ export default function ConnectDevice({ navigation, route }: Props) {
     [account, parentAccount],
   );
 
-  const onSelectDevice = useCallback(
-    (meta: *) => {
+  const onSelectDevice = useCallback(device => {
+    setDevice(device);
+  }, []);
+
+  const onResult = useCallback(
+    async meta => {
+      setDevice();
       if (!account) return;
       navigation.navigate(ScreenName.ReceiveConfirmation, {
         accountId: account.id,
@@ -66,8 +78,12 @@ export default function ConnectDevice({ navigation, route }: Props) {
         ...meta,
       });
     },
-    [account, navigation, parentAccount],
+    [navigation, account, parentAccount],
   );
+
+  const onClose = useCallback(() => {
+    setDevice();
+  }, []);
 
   const onSkipDevice = useCallback(() => {
     if (!account) return;
@@ -90,6 +106,8 @@ export default function ConnectDevice({ navigation, route }: Props) {
   }
 
   const mainAccount = getMainAccount(account, parentAccount);
+  const tokenCurrency =
+    account && account.type === "TokenAccount" && account.token;
 
   if (readOnlyModeEnabled) {
     return <ReadOnlyWarning continue={onSkipDevice} />;
@@ -125,6 +143,14 @@ export default function ConnectDevice({ navigation, route }: Props) {
           onPress={onSkipDevice}
         />
       </View>
+
+      <DeviceActionModal
+        action={action}
+        device={device}
+        onResult={onResult}
+        onClose={onClose}
+        request={{ account: mainAccount, tokenCurrency }}
+      />
     </SafeAreaView>
   );
 }

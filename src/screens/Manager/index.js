@@ -38,7 +38,6 @@ export default function Screen({ navigation }: Props) {
   const readOnlyModeEnabled = useSelector(readOnlyModeEnabledSelector);
   const [showMenu, setShowMenu] = useState(false);
   const [device, setDevice] = useState<?Device>();
-  const [isDeviceActionOpen, setIsDeviceActionOpen] = useState(false);
 
   const onShowMenu = useCallback((device: Device) => {
     setDevice(device);
@@ -60,16 +59,14 @@ export default function Screen({ navigation }: Props) {
 
   const onSelect = useCallback((device: Device) => {
     setDevice(device);
-    setIsDeviceActionOpen(true);
   }, []);
 
   const onCloseDeviceActionModal = useCallback(() => {
-    setIsDeviceActionOpen(false);
+    setDevice();
   }, []);
 
   const onResult = useCallback(
     async meta => {
-      setIsDeviceActionOpen(false);
       if (!device) {
         return;
       }
@@ -120,15 +117,15 @@ export default function Screen({ navigation }: Props) {
             remove={remove}
             deviceName={device.deviceName || ""}
           />
-          <DeviceActionModal
-            action={action}
-            device={device}
-            isOpened={isDeviceActionOpen}
-            onClose={onCloseDeviceActionModal}
-            onResult={onResult}
-          />
         </>
       )}
+
+      <DeviceActionModal
+        action={action}
+        device={device}
+        onClose={onCloseDeviceActionModal}
+        onResult={onResult}
+      />
     </NavigationScrollView>
   );
 }

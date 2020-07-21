@@ -9,38 +9,42 @@ import ModalBottomAction from "./ModalBottomAction";
 type Props = {
   // TODO: fix action type
   action: any,
-  device: Device,
+  device: ?Device,
+  // TODO: fix request type
+  request?: any,
   onClose: () => void,
-  isOpened: boolean,
   onResult: $PropertyType<React$ElementProps<typeof DeviceAction>, "onResult">,
 };
 
 export default function DeviceActionModal({
   action,
-  isOpened,
   device,
+  request,
   onClose,
   onResult,
 }: Props) {
   return (
     <BottomModal
       id="DeviceActionModal"
-      isOpened={isOpened}
+      isOpened={!!device}
       onClose={onClose}
       onResult={onResult}
     >
-      <ModalBottomAction
-        footer={
-          <View style={styles.footerContainer}>
-            <DeviceAction
-              action={action}
-              device={device}
-              onClose={onClose}
-              onResult={onResult}
-            />
-          </View>
-        }
-      />
+      {device && (
+        <ModalBottomAction
+          footer={
+            <View style={styles.footerContainer}>
+              <DeviceAction
+                action={action}
+                device={device}
+                request={request}
+                onClose={onClose}
+                onResult={onResult}
+              />
+            </View>
+          }
+        />
+      )}
     </BottomModal>
   );
 }
