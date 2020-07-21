@@ -211,7 +211,13 @@ export function renderConnectYourDevice({
   );
 }
 
-export function renderLoading({ t }: RawProps) {
+export function renderLoading({
+  t,
+  description,
+}: {
+  ...RawProps,
+  description?: string,
+}) {
   return (
     <View style={styles.wrapper}>
       <View style={styles.spinnerContainer}>
@@ -219,7 +225,9 @@ export function renderLoading({ t }: RawProps) {
           <LiveLogo size={32} color={colors.grey} />
         </Spinning>
       </View>
-      <LText style={styles.text}>{t("DeviceAction.loading")}</LText>
+      <LText style={styles.text}>
+        {description ?? t("DeviceAction.loading")}
+      </LText>
     </View>
   );
 }

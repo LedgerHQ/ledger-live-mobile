@@ -8,12 +8,10 @@ import type {
   Account,
   AccountLike,
 } from "@ledgerhq/live-common/lib/types";
-import { getMainAccount } from "@ledgerhq/live-common/lib/account/helpers";
 import colors from "../../colors";
 import { ScreenName } from "../../const";
 import { TrackScreen } from "../../analytics";
 import SelectDevice from "../../components/SelectDevice";
-import { connectingStep, accountApp } from "../../components/DeviceJob/steps";
 import NavigationScrollView from "../../components/NavigationScrollView";
 
 const forceInset = { bottom: "always" };

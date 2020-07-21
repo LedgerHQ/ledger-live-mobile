@@ -1247,7 +1247,13 @@
         "title": "Choose Unit"
       },
       "ethTokenNetworkFees": "Network fees for ERC20 token operations are paid in ETH"
-    }
+    },
+    "verification": {
+      "streaming": {
+        "accurate": "Loading... ({{percentage}})",
+        "inaccurate": "Loading..."
+      }
+    },
   },
   "freeze": {
     "stepperHeader": {

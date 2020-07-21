@@ -50,9 +50,6 @@ export default function DeviceAction<R, H, P>({
     requiresAppInstallation,
     inWrongDeviceForAccount,
     onRetry,
-    onAutoRepair,
-    closeRepairModal,
-    onRepairModal,
     deviceSignatureRequested,
     deviceStreamingProgress,
     displayUpgradeWarning,
@@ -82,7 +79,7 @@ export default function DeviceAction<R, H, P>({
     return renderRequiresAppInstallation({
       t,
       navigation,
-      appName: "APP NAME",
+      appName,
     });
   }
 
@@ -149,6 +146,18 @@ export default function DeviceAction<R, H, P>({
         />
       );
     }
+  }
+
+  if (typeof deviceStreamingProgress === "number") {
+    return renderLoading({
+      t,
+      description:
+        deviceStreamingProgress > 0
+          ? t("send.verification.streaming.accurate", {
+              percentage: (deviceStreamingProgress * 100).toFixed(0) + "%",
+            })
+          : t("send.verification.streaming.inaccurate"),
+    });
   }
 
   const payload = action.mapResult(status);
