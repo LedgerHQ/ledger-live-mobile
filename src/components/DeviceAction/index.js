@@ -136,6 +136,11 @@ export default function DeviceAction<R, H, P>({
   if (request && device && deviceSignatureRequested) {
     const { account, parentAccount, status, transaction } = request;
     if (account && status && transaction) {
+      navigation.setOptions({
+        headerLeft: null,
+        headerRight: null,
+        gestureEnabled: false,
+      });
       return (
         <ValidateOnDevice
           {...device}

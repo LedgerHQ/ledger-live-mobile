@@ -115,7 +115,6 @@ export const ScreenName = {
   SendSelectDevice: "SendSelectDevice",
   SendSelectRecipient: "SendSelectRecipient",
   SendSummary: "SendSummary",
-  SendValidation: "SendValidation",
   SendValidationError: "SendValidationError",
   SendValidationSuccess: "SendValidationSuccess",
   Settings: "Settings",
