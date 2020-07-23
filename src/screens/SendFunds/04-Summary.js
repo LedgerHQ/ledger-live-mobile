@@ -58,21 +58,14 @@ export default function SendSummary({ navigation, route }: Props) {
 
   const onAcceptFees = useCallback(async () => {
     navigation.navigate(ScreenName.SendConnectDevice, {
-      accountId: account.id,
-      parentId: parentAccount && parentAccount.id,
+      ...route.params,
       transaction,
       status,
+      context: "Send",
     });
 
     setHighFeesOpen(false);
-  }, [
-    setHighFeesOpen,
-    status,
-    account,
-    parentAccount,
-    navigation,
-    transaction,
-  ]);
+  }, [setHighFeesOpen, status, navigation, transaction, route.params]);
 
   const onRejectFees = useCallback(() => {
     setHighFeesOpen(false);
@@ -84,27 +77,12 @@ export default function SendSummary({ navigation, route }: Props) {
       setHighFeesOpen(true);
       return;
     }
-
-    // navigation.navigate(ScreenName.SendConnectDevice, {
-    //   accountId: account.id,
-    //   parentId: parentAccount && parentAccount.id,
-    //   transaction,
-    //   status,
-    // });
     navigation.navigate(ScreenName.SendSelectDevice, {
-      account,
-      parentAccount,
+      ...route.params,
       transaction,
       status,
     });
-  }, [
-    setHighFeesOpen,
-    status,
-    account,
-    parentAccount,
-    navigation,
-    transaction,
-  ]);
+  }, [setHighFeesOpen, status, navigation, transaction, route.params]);
 
   if (!account || !transaction || !transaction.recipient) return null; // FIXME why is recipient sometimes empty?
 

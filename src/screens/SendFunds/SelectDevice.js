@@ -5,13 +5,11 @@ import SafeAreaView from "react-native-safe-area-view";
 import type {
   Transaction,
   TransactionStatus,
-  Account,
-  AccountLike,
 } from "@ledgerhq/live-common/lib/types";
 import colors from "../../colors";
 import { ScreenName } from "../../const";
 import { TrackScreen } from "../../analytics";
-import SelectDevice from "../../components/SelectDevice";
+import SelectDeviceComp from "../../components/SelectDevice";
 import NavigationScrollView from "../../components/NavigationScrollView";
 
 const forceInset = { bottom: "always" };
@@ -22,26 +20,23 @@ type Props = {
 };
 
 type RouteParams = {
-  account: ?AccountLike,
-  parentAccount: ?Account,
+  accountId: string,
   transaction: Transaction,
   status: TransactionStatus,
 };
 
-export default function ConnectDevice({ navigation, route }: Props) {
-  const { account } = route.params;
-
+export default function SelectDevice({ navigation, route }: Props) {
   const onSelect = useCallback(
     device => {
       navigation.navigate(ScreenName.SendConnectDevice, {
         ...route.params,
         device,
+        context: "Send",
       });
     },
     [navigation, route.params],
   );
 
-  if (!account) return null;
   return (
     <SafeAreaView style={styles.root} forceInset={forceInset}>
       <NavigationScrollView
@@ -49,7 +44,7 @@ export default function ConnectDevice({ navigation, route }: Props) {
         contentContainerStyle={styles.scrollContainer}
       >
         <TrackScreen category="SendFunds" name="ConnectDevice" />
-        <SelectDevice onSelect={onSelect} />
+        <SelectDeviceComp onSelect={onSelect} />
       </NavigationScrollView>
     </SafeAreaView>
   );

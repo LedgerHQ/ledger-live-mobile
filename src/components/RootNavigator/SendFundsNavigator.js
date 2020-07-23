@@ -8,7 +8,7 @@ import SendSelectRecipient from "../../screens/SendFunds/02-SelectRecipient";
 import SendAmount from "../../screens/SendFunds/03-Amount";
 import SendSummary from "../../screens/SendFunds/04-Summary";
 import SendSelectDevice from "../../screens/SendFunds/SelectDevice";
-import SendConnectDevice from "../../screens/SendFunds/05-ConnectDevice";
+import SendConnectDevice from "../../screens/ConnectDevice";
 import SendValidationSuccess from "../../screens/SendFunds/07-ValidationSuccess";
 import SendValidationError from "../../screens/SendFunds/07-ValidationError";
 import { closableStackNavigatorConfig } from "../../navigation/navigatorConfig";

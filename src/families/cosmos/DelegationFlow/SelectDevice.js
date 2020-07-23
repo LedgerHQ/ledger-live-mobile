@@ -11,11 +11,7 @@ import { accountScreenSelector } from "../../../reducers/accounts";
 import colors from "../../../colors";
 import { ScreenName } from "../../../const";
 import { TrackScreen } from "../../../analytics";
-import SelectDevice from "../../../components/SelectDevice";
-import {
-  connectingStep,
-  accountApp,
-} from "../../../components/DeviceJob/steps";
+import SelectDeviceComp from "../../../components/SelectDevice";
 
 const forceInset = { bottom: "always" };
 
@@ -29,15 +25,13 @@ type Props = {
   route: { params: RouteParams },
 };
 
-export default function ConnectDevice({ navigation, route }: Props) {
+export default function SelectDevice({ navigation, route }: Props) {
   const { account } = useSelector(accountScreenSelector(route));
 
   invariant(
     account && account.cosmosResources,
     "account and cosmos resources required",
   );
-
-  const mainAccount = getMainAccount(account, undefined);
 
   const { transaction, status } = useBridgeTransaction(() => {
     const transaction = route.params.transaction;
@@ -47,7 +41,7 @@ export default function ConnectDevice({ navigation, route }: Props) {
 
   const onSelectDevice = useCallback(
     (meta: any) => {
-      navigation.replace(ScreenName.CosmosDelegationValidation, {
+      navigation.replace(ScreenName.CosmosDelegationConnectDevice, {
         ...route.params,
         ...meta,
         transaction,
@@ -66,10 +60,7 @@ export default function ConnectDevice({ navigation, route }: Props) {
         contentContainerStyle={styles.scrollContainer}
       >
         <TrackScreen category="CosmosDelegation" name="ConnectDevice" />
-        <SelectDevice
-          onSelect={onSelectDevice}
-          steps={[connectingStep, accountApp(mainAccount)]}
-        />
+        <SelectDeviceComp onSelect={onSelectDevice} />
       </ScrollView>
     </SafeAreaView>
   );

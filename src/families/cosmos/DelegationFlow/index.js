@@ -12,8 +12,8 @@ import { ScreenName } from "../../../const";
 import DelegationStarted from "./01-Started";
 import DelegationSelectValidator from "./02-SelectValidator";
 import DelegationAmount from "../shared/02-SelectAmount";
-import DelegationConnectDevice from "./03-ConnectDevice";
-import DelegationValidation from "./04-Validation";
+import DelegationSelectDevice from "./SelectDevice";
+import DelegationConnectDevice from "../../../screens/ConnectDevice";
 import DelegationValidationError from "./04-ValidationError";
 import DelegationValidationSuccess from "./04-ValidationSuccess";
 
@@ -74,6 +74,24 @@ function DelegationFlow() {
         })}
       />
       <Stack.Screen
+        name={ScreenName.CosmosDelegationSelectDevice}
+        component={DelegationSelectDevice}
+        options={{
+          headerTitle: () => (
+            <StepHeader
+              title={t("cosmos.delegation.stepperHeader.selectDevice")}
+              subtitle={t("cosmos.delegation.stepperHeader.stepRange", {
+                currentStep: "3",
+                totalSteps: "3",
+              })}
+            />
+          ),
+          headerLeft: null,
+          headerRight: null,
+          gestureEnabled: false,
+        }}
+      />
+      <Stack.Screen
         name={ScreenName.CosmosDelegationConnectDevice}
         component={DelegationConnectDevice}
         options={{
@@ -86,24 +104,6 @@ function DelegationFlow() {
               })}
             />
           ),
-        }}
-      />
-      <Stack.Screen
-        name={ScreenName.CosmosDelegationValidation}
-        component={DelegationValidation}
-        options={{
-          headerTitle: () => (
-            <StepHeader
-              title={t("cosmos.delegation.stepperHeader.verification")}
-              subtitle={t("cosmos.delegation.stepperHeader.stepRange", {
-                currentStep: "3",
-                totalSteps: "3",
-              })}
-            />
-          ),
-          headerLeft: null,
-          headerRight: null,
-          gestureEnabled: false,
         }}
       />
       <Stack.Screen
