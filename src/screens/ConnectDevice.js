@@ -15,6 +15,7 @@ import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import { accountScreenSelector } from "../reducers/accounts";
 import DeviceAction from "../components/DeviceAction";
 import { useSignedTxHandler } from "../logic/screenTransactionHooks";
+import { TrackScreen } from "../analytics";
 
 const action = createAction(connectApp);
 
@@ -22,6 +23,7 @@ type Props = {
   navigation: any,
   route: {
     params: RouteParams,
+    name: string,
   },
 };
 
@@ -50,6 +52,10 @@ export default function ConnectDevice({ route }: Props) {
 
   return (
     <SafeAreaView style={styles.root}>
+      <TrackScreen
+        category={route.name.replace("ConnectDevice", "")}
+        name="ConnectDevice"
+      />
       <DeviceAction
         action={action}
         request={{
