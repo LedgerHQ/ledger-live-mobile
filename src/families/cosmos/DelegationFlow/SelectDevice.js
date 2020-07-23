@@ -6,7 +6,7 @@ import SafeAreaView from "react-native-safe-area-view";
 import { useSelector } from "react-redux";
 import type { Transaction } from "@ledgerhq/live-common/lib/types";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
-import { getMainAccount } from "@ledgerhq/live-common/lib/account";
+import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import { accountScreenSelector } from "../../../reducers/accounts";
 import colors from "../../../colors";
 import { ScreenName } from "../../../const";
@@ -40,12 +40,13 @@ export default function SelectDevice({ navigation, route }: Props) {
   });
 
   const onSelectDevice = useCallback(
-    (meta: any) => {
+    (device: Device) => {
       navigation.replace(ScreenName.CosmosDelegationConnectDevice, {
         ...route.params,
-        ...meta,
+        device,
         transaction,
         status,
+        context: "CosmosDelegation",
       });
     },
     [navigation, status, transaction, route.params],

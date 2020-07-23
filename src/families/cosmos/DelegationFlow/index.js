@@ -13,7 +13,7 @@ import DelegationStarted from "./01-Started";
 import DelegationSelectValidator from "./02-SelectValidator";
 import DelegationAmount from "../shared/02-SelectAmount";
 import DelegationSelectDevice from "./SelectDevice";
-import DelegationConnectDevice from "../../../screens/ConnectDevice";
+import ConnectDevice from "../../../screens/ConnectDevice";
 import DelegationValidationError from "./04-ValidationError";
 import DelegationValidationSuccess from "./04-ValidationSuccess";
 
@@ -93,7 +93,7 @@ function DelegationFlow() {
       />
       <Stack.Screen
         name={ScreenName.CosmosDelegationConnectDevice}
-        component={DelegationConnectDevice}
+        component={ConnectDevice}
         options={{
           headerTitle: () => (
             <StepHeader
