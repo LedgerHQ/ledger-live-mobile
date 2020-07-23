@@ -30,7 +30,6 @@ type RouteParams = {
   accountId: string,
   transaction: Transaction,
   status: TransactionStatus,
-  context: string,
 };
 
 export default function ConnectDevice({ route }: Props) {
@@ -40,12 +39,11 @@ export default function ConnectDevice({ route }: Props) {
   invariant(accountLike, "account is required");
   const account = getMainAccount(accountLike, parentAccount);
 
-  const { transaction, status, context } = route.params;
+  const { transaction, status } = route.params;
   const tokenCurrency =
     account.type === "TokenAccount" ? account.token : undefined;
 
   const onResult = useSignedTxHandler({
-    context,
     account,
     parentAccount,
   });

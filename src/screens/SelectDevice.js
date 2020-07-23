@@ -6,17 +6,16 @@ import type {
   Transaction,
   TransactionStatus,
 } from "@ledgerhq/live-common/lib/types";
-import colors from "../../colors";
-import { ScreenName } from "../../const";
-import { TrackScreen } from "../../analytics";
-import SelectDeviceComp from "../../components/SelectDevice";
-import NavigationScrollView from "../../components/NavigationScrollView";
+import colors from "../colors";
+import { TrackScreen } from "../analytics";
+import SelectDeviceComp from "../components/SelectDevice";
+import NavigationScrollView from "../components/NavigationScrollView";
 
 const forceInset = { bottom: "always" };
 
 type Props = {
   navigation: any,
-  route: { params: RouteParams },
+  route: { params: RouteParams, name: string },
 };
 
 type RouteParams = {
@@ -28,13 +27,12 @@ type RouteParams = {
 export default function SelectDevice({ navigation, route }: Props) {
   const onSelect = useCallback(
     device => {
-      navigation.navigate(ScreenName.SendConnectDevice, {
+      navigation.navigate(route.name.replace("SelectDevice", "ConnectDevice"), {
         ...route.params,
         device,
-        context: "Send",
       });
     },
-    [navigation, route.params],
+    [navigation, route],
   );
 
   return (

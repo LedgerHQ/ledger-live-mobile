@@ -175,21 +175,21 @@ function useBroadcast({ account, parentAccount }: SignTransactionArgs) {
 }
 
 export function useSignedTxHandler({
-  context,
   account,
   parentAccount,
   ...txArgs
 }: SignTransactionArgs & {
-  context: string,
   account: AccountLike,
   parentAccount: ?Account,
 }) {
   const navigation = useNavigation();
+  const route = useRoute();
   const broadcast = useBroadcast(txArgs);
   const dispatch = useDispatch();
   const mainAccount = getMainAccount(account, parentAccount);
 
   return useCallback(
+    // TODO: fix type error
     async ({ signedOperation, transactionSignError }) => {
       try {
         if (transactionSignError) {
@@ -197,9 +197,12 @@ export function useSignedTxHandler({
         }
 
         await broadcast(signedOperation);
-        navigation.replace(context + "ValidationSuccess", {
-          result: signedOperation.operation,
-        });
+        navigation.replace(
+          route.name.replace("ConnectDevice", "ValidationSuccess"),
+          {
+            result: signedOperation.operation,
+          },
+        );
         dispatch(
           updateAccountWithUpdater(mainAccount.id, account =>
             addPendingOperation(account, signedOperation.operation),
@@ -214,9 +217,12 @@ export function useSignedTxHandler({
         ) {
           logger.critical(error);
         }
-        navigation.replace(context + "ValidationError", { error });
+        navigation.replace(
+          route.name.replace("ConnectDevice", "ValidationError"),
+          { error },
+        );
       }
     },
-    [navigation, context, broadcast, mainAccount, dispatch],
+    [navigation, route, broadcast, mainAccount, dispatch],
   );
 }
