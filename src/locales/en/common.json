@@ -1254,7 +1254,7 @@
         "accurate": "Loading... ({{percentage}})",
         "inaccurate": "Loading..."
       }
-    },
+    }
   },
   "freeze": {
     "stepperHeader": {
@@ -1844,6 +1844,7 @@
       "stepperHeader": {
         "amountSubTitle": "Amount to undelegate",
         "summary": "Summary",
+        "selectDevice": "Select device",
         "connectDevice": "Connect device",
         "verification": "Verification",
         "stepRange": "Step {{currentStep}} of {{totalSteps}}"

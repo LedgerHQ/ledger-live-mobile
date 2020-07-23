@@ -6,16 +6,13 @@ import SafeAreaView from "react-native-safe-area-view";
 import { useSelector } from "react-redux";
 import type { Transaction } from "@ledgerhq/live-common/lib/types";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
+import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import { getMainAccount } from "@ledgerhq/live-common/lib/account";
 import { accountScreenSelector } from "../../../reducers/accounts";
 import colors from "../../../colors";
 import { ScreenName } from "../../../const";
 import { TrackScreen } from "../../../analytics";
 import SelectDevice from "../../../components/SelectDevice";
-import {
-  connectingStep,
-  accountApp,
-} from "../../../components/DeviceJob/steps";
 
 const forceInset = { bottom: "always" };
 
@@ -30,14 +27,16 @@ type Props = {
 };
 
 export default function ConnectDevice({ navigation, route }: Props) {
-  const { account } = useSelector(accountScreenSelector(route));
+  const { account: accountLike, parentAccount } = useSelector(
+    accountScreenSelector(route),
+  );
 
   invariant(
-    account && account.cosmosResources,
+    accountLike && accountLike.cosmosResources,
     "account and cosmos resources required",
   );
 
-  const mainAccount = getMainAccount(account, undefined);
+  const account = getMainAccount(accountLike, parentAccount);
 
   const { transaction, status } = useBridgeTransaction(() => {
     const transaction = route.params.transaction;
@@ -46,18 +45,17 @@ export default function ConnectDevice({ navigation, route }: Props) {
   });
 
   const onSelectDevice = useCallback(
-    (meta: any) => {
-      navigation.replace(ScreenName.CosmosUndelegationValidation, {
+    (device: Device) => {
+      navigation.replace(ScreenName.CosmosUndelegationConnectDevice, {
         ...route.params,
-        ...meta,
+        device,
         transaction,
         status,
+        context: "CosmosUndelegation",
       });
     },
     [navigation, status, transaction, route.params],
   );
-
-  if (!account) return null;
 
   return (
     <SafeAreaView style={styles.root} forceInset={forceInset}>
@@ -66,10 +64,7 @@ export default function ConnectDevice({ navigation, route }: Props) {
         contentContainerStyle={styles.scrollContainer}
       >
         <TrackScreen category="CosmosUndelegation" name="ConnectDevice" />
-        <SelectDevice
-          onSelect={onSelectDevice}
-          steps={[connectingStep, accountApp(mainAccount)]}
-        />
+        <SelectDevice onSelect={onSelectDevice} />
       </ScrollView>
     </SafeAreaView>
   );
