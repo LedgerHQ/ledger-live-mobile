@@ -1808,6 +1808,7 @@
         "amountSubTitle": "Amount to redelegate",
         "amountTitle": "{{from}} → {{to}}",
         "summary": "Summary",
+        "selectDevice": "Select device",
         "connectDevice": "Connect device",
         "verification": "Verification",
         "stepRange": "Step {{currentStep}} of {{totalSteps}}"

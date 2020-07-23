@@ -11,8 +11,8 @@ import StepHeader from "../../../components/StepHeader";
 import { ScreenName } from "../../../const";
 import RedelegationSelectValidator from "./01-SelectValidator";
 import RedelegationAmount from "../shared/02-SelectAmount";
-import RedelegationConnectDevice from "./03-ConnectDevice";
-import RedelegationValidation from "./04-Validation";
+import RedelegationSelectDevice from "./03-SelectDevice";
+import ConnectDevice from "../../../screens/ConnectDevice";
 import RedelegationValidationError from "./04-ValidationError";
 import RedelegationValidationSuccess from "./04-ValidationSuccess";
 
@@ -65,8 +65,23 @@ function RedelegationFlow() {
         })}
       />
       <Stack.Screen
+        name={ScreenName.CosmosRedelegationSelectDevice}
+        component={RedelegationSelectDevice}
+        options={{
+          headerTitle: () => (
+            <StepHeader
+              title={t("cosmos.redelegation.stepperHeader.selectDevice")}
+              subtitle={t("cosmos.redelegation.stepperHeader.stepRange", {
+                currentStep: "2",
+                totalSteps: "3",
+              })}
+            />
+          ),
+        }}
+      />
+      <Stack.Screen
         name={ScreenName.CosmosRedelegationConnectDevice}
-        component={RedelegationConnectDevice}
+        component={ConnectDevice}
         options={{
           headerTitle: () => (
             <StepHeader
@@ -77,24 +92,6 @@ function RedelegationFlow() {
               })}
             />
           ),
-        }}
-      />
-      <Stack.Screen
-        name={ScreenName.CosmosRedelegationValidation}
-        component={RedelegationValidation}
-        options={{
-          headerTitle: () => (
-            <StepHeader
-              title={t("cosmos.redelegation.stepperHeader.verification")}
-              subtitle={t("cosmos.redelegation.stepperHeader.stepRange", {
-                currentStep: "3",
-                totalSteps: "3",
-              })}
-            />
-          ),
-          headerLeft: null,
-          headerRight: null,
-          gestureEnabled: false,
         }}
       />
       <Stack.Screen

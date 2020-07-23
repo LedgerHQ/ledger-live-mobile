@@ -6,16 +6,12 @@ import SafeAreaView from "react-native-safe-area-view";
 import { useSelector } from "react-redux";
 import type { Transaction } from "@ledgerhq/live-common/lib/types";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
-import { getMainAccount } from "@ledgerhq/live-common/lib/account";
+import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import { accountScreenSelector } from "../../../reducers/accounts";
 import colors from "../../../colors";
 import { ScreenName } from "../../../const";
 import { TrackScreen } from "../../../analytics";
 import SelectDevice from "../../../components/SelectDevice";
-import {
-  connectingStep,
-  accountApp,
-} from "../../../components/DeviceJob/steps";
 
 const forceInset = { bottom: "always" };
 
@@ -37,8 +33,6 @@ export default function ConnectDevice({ navigation, route }: Props) {
     "account and cosmos resources required",
   );
 
-  const mainAccount = getMainAccount(account, undefined);
-
   const { transaction, status } = useBridgeTransaction(() => {
     const transaction = route.params.transaction;
 
@@ -46,12 +40,13 @@ export default function ConnectDevice({ navigation, route }: Props) {
   });
 
   const onSelectDevice = useCallback(
-    (meta: any) => {
-      navigation.replace(ScreenName.CosmosRedelegationValidation, {
+    (device: Device) => {
+      navigation.replace(ScreenName.CosmosRedelegationConnectDevice, {
         ...route.params,
-        ...meta,
+        device,
         transaction,
         status,
+        context: "CosmosRedelegation",
       });
     },
     [navigation, status, transaction, route.params],
@@ -66,10 +61,7 @@ export default function ConnectDevice({ navigation, route }: Props) {
         contentContainerStyle={styles.scrollContainer}
       >
         <TrackScreen category="CosmosRedelegation" name="ConnectDevice" />
-        <SelectDevice
-          onSelect={onSelectDevice}
-          steps={[connectingStep, accountApp(mainAccount)]}
-        />
+        <SelectDevice onSelect={onSelectDevice} />
       </ScrollView>
     </SafeAreaView>
   );
