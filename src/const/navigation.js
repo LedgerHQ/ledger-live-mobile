@@ -156,6 +156,7 @@ export const ScreenName = {
   CosmosUndelegationValidationSuccess: "CosmosUndelegationValidationSuccess",
   CosmosClaimRewardsValidator: "CosmosClaimRewardsValidator",
   CosmosClaimRewardsMethod: "CosmosClaimRewardsMethod",
+  CosmosClaimRewardsSelectDevice: "CosmosClaimRewardsSelectDevice",
   CosmosClaimRewardsConnectDevice: "CosmosClaimRewardsConnectDevice",
   CosmosClaimRewardsValidation: "CosmosClaimRewardsValidation",
   CosmosClaimRewardsValidationError: "CosmosClaimRewardsValidationError",
