@@ -11,7 +11,7 @@ import StepHeader from "../../../components/StepHeader";
 import { ScreenName } from "../../../const";
 import RedelegationSelectValidator from "./01-SelectValidator";
 import RedelegationAmount from "../shared/02-SelectAmount";
-import RedelegationSelectDevice from "./03-SelectDevice";
+import SelectDevice from "../../../screens/SelectDevice";
 import ConnectDevice from "../../../screens/ConnectDevice";
 import RedelegationValidationError from "./04-ValidationError";
 import RedelegationValidationSuccess from "./04-ValidationSuccess";
@@ -66,7 +66,7 @@ function RedelegationFlow() {
       />
       <Stack.Screen
         name={ScreenName.CosmosRedelegationSelectDevice}
-        component={RedelegationSelectDevice}
+        component={SelectDevice}
         options={{
           headerTitle: () => (
             <StepHeader

@@ -7,8 +7,8 @@ import { closableStackNavigatorConfig } from "../../../navigation/navigatorConfi
 import StepHeader from "../../../components/StepHeader";
 import { ScreenName } from "../../../const";
 import UndelegationAmount from "./01-Amount";
+import SelectDevice from "../../../screens/SelectDevice";
 import ConnectDevice from "../../../screens/ConnectDevice";
-import UndelegationSelectDevice from "./02-SelectDevice";
 import UndelegationValidationError from "./03-ValidationError";
 import UndelegationValidationSuccess from "./03-ValidationSuccess";
 
@@ -36,7 +36,7 @@ function UndelegationFlow() {
       />
       <Stack.Screen
         name={ScreenName.CosmosUndelegationSelectDevice}
-        component={UndelegationSelectDevice}
+        component={SelectDevice}
         options={{
           headerTitle: () => (
             <StepHeader

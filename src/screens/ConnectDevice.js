@@ -12,6 +12,7 @@ import type {
 import { createAction } from "@ledgerhq/live-common/lib/hw/actions/transaction";
 import connectApp from "@ledgerhq/live-common/lib/hw/connectApp";
 import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
+import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
 import { accountScreenSelector } from "../reducers/accounts";
 import DeviceAction from "../components/DeviceAction";
 import { useSignedTxHandler } from "../logic/screenTransactionHooks";
@@ -41,7 +42,11 @@ export default function ConnectDevice({ route }: Props) {
   invariant(accountLike, "account is required");
   const account = getMainAccount(accountLike, parentAccount);
 
-  const { transaction, status } = route.params;
+  const { transaction, status } = useBridgeTransaction(() => ({
+    account,
+    transaction: route.params.transaction,
+  }));
+
   const tokenCurrency =
     account.type === "TokenAccount" ? account.token : undefined;
 
@@ -49,6 +54,10 @@ export default function ConnectDevice({ route }: Props) {
     account,
     parentAccount,
   });
+
+  if (!transaction) {
+    return null;
+  }
 
   return (
     <SafeAreaView style={styles.root}>

@@ -61,7 +61,6 @@ export default function SendSummary({ navigation, route }: Props) {
       ...route.params,
       transaction,
       status,
-      context: "Send",
     });
 
     setHighFeesOpen(false);
