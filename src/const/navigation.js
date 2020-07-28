@@ -124,7 +124,7 @@ export const ScreenName = {
   Transfer: "Transfer",
   UnfreezeAmount: "UnfreezeAmount",
   UnfreezeConnectDevice: "UnfreezeConnectDevice",
-  UnfreezeValidation: "UnfreezeValidation",
+  UnfreezeSelectDevice: "UnfreezeSelectDevice",
   UnfreezeValidationError: "UnfreezeValidationError",
   UnfreezeValidationSuccess: "UnfreezeValidationSuccess",
   VoteCast: "VoteCast",

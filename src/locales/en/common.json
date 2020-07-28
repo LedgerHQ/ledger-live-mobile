@@ -1299,6 +1299,7 @@
     "stepperHeader": {
       "selectAmount": "Unfreeze",
       "summary": "Summary",
+      "selectDevice": "Select Device",
       "connectDevice": "Connect Device",
       "verification": "Verification",
       "stepRange": "Step {{currentStep}} of {{totalSteps}}"
