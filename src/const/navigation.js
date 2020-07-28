@@ -19,7 +19,7 @@ export const ScreenName = {
   BenchmarkQRStream: "BenchmarkQRStream",
   BitcoinEditFeePerByte: "BitcoinEditFeePerByte",
   ClaimRewardsConnectDevice: "ClaimRewardsConnectDevice",
-  ClaimRewardsValidation: "ClaimRewardsValidation",
+  ClaimRewardsSelectDevice: "ClaimRewardsSelectDevice",
   ClaimRewardsValidationError: "ClaimRewardsValidationError",
   ClaimRewardsValidationSuccess: "ClaimRewardsValidationSuccess",
   ConfirmPassword: "ConfirmPassword",

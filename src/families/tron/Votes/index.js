@@ -93,7 +93,7 @@ const Delegation = ({ account, parentAccount }: Props) => {
 
   const claimRewards = useCallback(() => {
     navigation.navigate(NavigatorName.ClaimRewards, {
-      screen: ScreenName.ClaimRewardsConnectDevice,
+      screen: ScreenName.ClaimRewardsSelectDevice,
       params: {
         accountId,
         parentId,

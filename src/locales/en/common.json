@@ -1319,6 +1319,7 @@
   },
   "claimReward": {
     "stepperHeader": {
+      "selectDevice": "Select Device",
       "connectDevice": "Connect Device",
       "verification": "Verification",
       "stepRange": "Step {{currentStep}} of {{totalSteps}}"
