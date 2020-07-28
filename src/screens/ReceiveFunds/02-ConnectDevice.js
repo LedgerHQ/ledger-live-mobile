@@ -17,11 +17,6 @@ import { ScreenName } from "../../const";
 import { TrackScreen } from "../../analytics";
 import SelectDevice from "../../components/SelectDevice";
 import Button from "../../components/Button";
-import {
-  connectingStep,
-  accountApp,
-  receiveVerifyStep,
-} from "../../components/DeviceJob/steps";
 import NavigationScrollView from "../../components/NavigationScrollView";
 import { readOnlyModeEnabledSelector } from "../../reducers/settings";
 import ReadOnlyWarning from "./ReadOnlyWarning";
@@ -122,14 +117,7 @@ export default function ConnectDevice({ navigation, route }: Props) {
         style={styles.scroll}
         contentContainerStyle={styles.scrollContainer}
       >
-        <SelectDevice
-          onSelect={setDevice}
-          steps={[
-            connectingStep,
-            accountApp(mainAccount),
-            receiveVerifyStep(mainAccount),
-          ]}
-        />
+        <SelectDevice onSelect={setDevice} />
       </NavigationScrollView>
       <View style={styles.footer}>
         <Button
