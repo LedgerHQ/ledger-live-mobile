@@ -1243,6 +1243,9 @@
       "main": {
         "header": "Swap"
       },
+      "notAvailable":{
+        "title": "Swap feature is not available in your country"
+      },
       "form": {
         "validate": "Confirm Swap transaction",
         "tab": "Exchange",
@@ -1286,13 +1289,26 @@
           }
         }
       },
+        "operationDetails": {
+          "swapId": "Swap ID",
+          "provider": "Provider",
+          "date": "Date",
+          "from": "From",
+          "fromAmount": "Initial amount",
+          "to": "To",
+          "toAmount": "Credited amount"
+      },
       "missingAppPlaceholder": {
         "title": "Please install the Exchange app on your device",
         "description": "Go to manager and install Exchange app to swap assets",
         "button": "Go to Manager"
       },
       "history": {
-        "tab": "History"
+        "tab": "History",
+        "empty": {
+          "title": "No history",
+          "desc": "You don’t have any history swap"
+        }
       }
     }
   },

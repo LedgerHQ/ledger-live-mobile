@@ -1,23 +1,16 @@
 // @flow
-import React from "react";
-import { StyleSheet, View } from "react-native";
+import React, { useCallback } from "react";
+import { TouchableOpacity, StyleSheet, View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account/helpers";
 import type { MappedSwapOperation } from "@ledgerhq/live-common/lib/swap/types";
 import Icon from "react-native-vector-icons/dist/Ionicons";
-import IconSwap from "../../../icons/Swap";
+
 import LText from "../../../components/LText";
 import CurrencyUnitValue from "../../../components/CurrencyUnitValue";
-import colors, { rgba } from "../../../colors";
-
-const getStatusColor = status => {
-  return (
-    {
-      finished: colors.green,
-      new: colors.grey,
-      failed: colors.alert,
-    }[status] || colors.grey
-  );
-};
+import colors from "../../../colors";
+import { ScreenName } from "../../../const";
+import SwapStatusIndicator from "../SwapStatusIndicator";
 
 const OperationRow = ({ item }: { item: MappedSwapOperation }) => {
   const {
@@ -29,43 +22,47 @@ const OperationRow = ({ item }: { item: MappedSwapOperation }) => {
     toAmount,
     status,
   } = item;
-  const statusColor = getStatusColor(status);
+  const navigation = useNavigation();
+
+  const onOpenOperationDetails = useCallback(() => {
+    navigation.navigate(ScreenName.SwapOperationDetails, {
+      swapOperation: item,
+    });
+  }, [item, navigation]);
 
   return (
-    <View style={styles.root}>
-      <View
-        style={[styles.status, { backgroundColor: rgba(statusColor, 0.1) }]}
-      >
-        <IconSwap color={statusColor} size={16} />
+    <TouchableOpacity key={swapId} onPress={onOpenOperationDetails}>
+      <View style={styles.root}>
+        <SwapStatusIndicator small status={status} />
+        <View style={[styles.accountWrapper, { marginLeft: 18 }]}>
+          <LText numberOfLines={1} semiBold style={styles.name}>
+            {fromAccount.name}
+          </LText>
+          <LText tertiary style={styles.amount}>
+            <CurrencyUnitValue
+              showCode
+              unit={getAccountUnit(fromAccount)}
+              value={fromAmount}
+            />
+          </LText>
+        </View>
+        <View style={styles.arrow}>
+          <Icon name={"ios-arrow-round-forward"} size={30} color={colors.fog} />
+        </View>
+        <View style={[styles.accountWrapper, { alignItems: "flex-end" }]}>
+          <LText numberOfLines={1} semiBold style={styles.name}>
+            {toAccount.name}
+          </LText>
+          <LText tertiary style={styles.amount}>
+            <CurrencyUnitValue
+              showCode
+              unit={getAccountUnit(toAccount)}
+              value={toAmount}
+            />
+          </LText>
+        </View>
       </View>
-      <View style={styles.accountWrapper}>
-        <LText numberOfLines={1} semiBold style={styles.name}>
-          {fromAccount.name}
-        </LText>
-        <LText tertiary style={styles.amount}>
-          <CurrencyUnitValue
-            showCode
-            unit={getAccountUnit(fromAccount)}
-            value={fromAmount}
-          />
-        </LText>
-      </View>
-      <View style={styles.arrow}>
-        <Icon name={"ios-arrow-round-forward"} size={30} color={colors.grey} />
-      </View>
-      <View style={[styles.accountWrapper, { alignItems: "flex-end" }]}>
-        <LText numberOfLines={1} semiBold style={styles.name}>
-          {toAccount.name}
-        </LText>
-        <LText tertiary style={styles.amount}>
-          <CurrencyUnitValue
-            showCode
-            unit={getAccountUnit(toAccount)}
-            value={toAmount}
-          />
-        </LText>
-      </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
@@ -83,14 +80,6 @@ const styles = StyleSheet.create({
     marginLeft: 16,
     marginRight: 16,
     alignItems: "center",
-  },
-  status: {
-    height: 38,
-    width: 38,
-    borderRadius: 38,
-    alignItems: "center",
-    justifyContent: "center",
-    marginRight: 18,
   },
   name: {
     flexShrink: 1,

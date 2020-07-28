@@ -2,9 +2,9 @@
   "version": "v1",
   "packages": {
     "@ledgerhq/live-common": {
-      "signature": "6fb8f9123337a2d25f59ac207d84a604",
+      "signature": "4d35b940993fdccdbb8374f78799e1f7",
       "file": true,
-      "replaced": "^12.27.2"
+      "replaced": "^13.3.0"
     }
   }
 }

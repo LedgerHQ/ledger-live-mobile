@@ -11,9 +11,8 @@ import CurrencyUnitValue from "../../components/CurrencyUnitValue";
 import LText from "../../components/LText";
 import SectionSeparator from "../../components/SectionSeparator";
 import CurrencyIcon from "../../components/CurrencyIcon";
-import IconSwap from "../../icons/Swap";
-import { getStatusColor } from "./History/OperationRow";
-import colors, { rgba } from "../../colors";
+import SwapStatusIndicator, { getStatusColor } from "./SwapStatusIndicator";
+import colors from "../../colors";
 
 type Props = {
   navigation: any,
@@ -39,6 +38,8 @@ const OperationDetails = ({ navigation, route }: Props) => {
   const fromCurrency = getAccountCurrency(fromAccount);
   const toCurrency = getAccountCurrency(toAccount);
   const statusColor = getStatusColor(status);
+  const dotStyles = { backgroundColor: statusColor };
+  const textColorStyles = { color: statusColor };
   // FIXME  this will break for tokens.
   return (
     <View style={styles.root}>
@@ -46,17 +47,13 @@ const OperationDetails = ({ navigation, route }: Props) => {
         style={styles.scrollView}
         contentContainerStyle={styles.scrollViewContent}
       >
-        <View
-          style={[styles.status, { backgroundColor: rgba(statusColor, 0.1) }]}
-        >
-          <IconSwap color={statusColor} size={26} />
-        </View>
+        <SwapStatusIndicator status={status} />
         <LText tertiary style={styles.fromAmount}>
           <CurrencyUnitValue
             alwaysShowSign
             showCode
             unit={getAccountUnit(fromAccount)}
-            value={fromAmount}
+            value={fromAmount.times(-1)}
           />
         </LText>
         <View style={styles.arrow}>
@@ -67,11 +64,13 @@ const OperationDetails = ({ navigation, route }: Props) => {
             alwaysShowSign
             showCode
             unit={getAccountUnit(toAccount)}
-            value={toAmount.times(-1)}
+            value={toAmount}
           />
         </LText>
-        <LText style={styles.statusText}>{status}</LText>
-
+        <View style={styles.statusTextWrapper}>
+          <View style={[styles.statusDot, dotStyles]} />
+          <LText style={[styles.statusText, textColorStyles]}>{status}</LText>
+        </View>
         <View style={styles.fieldsWrapper}>
           <LText style={styles.label}>
             <Trans i18nKey={"transfer.swap.operationDetails.swapId"} />
@@ -92,9 +91,9 @@ const OperationDetails = ({ navigation, route }: Props) => {
             <Trans i18nKey={"transfer.swap.operationDetails.from"} />
           </LText>
           <View style={styles.account}>
-            <CurrencyIcon size={16} currency={toCurrency} />
+            <CurrencyIcon size={16} currency={fromCurrency} />
             <LText semiBold style={styles.accountName}>
-              {toAccount.name}
+              {fromAccount.name}
             </LText>
           </View>
           <LText style={styles.label}>
@@ -114,9 +113,9 @@ const OperationDetails = ({ navigation, route }: Props) => {
             <Trans i18nKey={"transfer.swap.operationDetails.to"} />
           </LText>
           <View style={styles.account}>
-            <CurrencyIcon size={16} currency={fromCurrency} />
+            <CurrencyIcon size={16} currency={toCurrency} />
             <LText semiBold style={styles.accountName}>
-              {fromAccount.name}
+              {toAccount.name}
             </LText>
           </View>
           <LText style={styles.label}>
@@ -156,24 +155,38 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginBottom: 24,
   },
+  statusTextWrapper: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    marginTop: 24,
+  },
+  statusDot: {
+    height: 6,
+    width: 6,
+    marginRight: 8,
+    borderRadius: 6,
+    backgroundColor: "grey",
+  },
   statusText: {
     fontSize: 16,
     lineHeight: 22,
-    marginTop: 24,
+    textTransform: "capitalize",
   },
   arrow: {
     transform: [{ rotate: "90deg" }],
     marginVertical: 8,
   },
-  fromAmount: {
-    fontSize: 20,
-    lineHeight: 24,
-    color: colors.grey,
-  },
   toAmount: {
     fontSize: 20,
     lineHeight: 24,
     color: colors.green,
+  },
+  fromAmount: {
+    marginTop: 24,
+    fontSize: 20,
+    lineHeight: 24,
+    color: colors.grey,
   },
   fieldsWrapper: {
     paddingTop: 32,

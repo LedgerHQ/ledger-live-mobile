@@ -2,19 +2,17 @@
 import React from "react";
 import { Trans } from "react-i18next";
 import SafeAreaView from "react-native-safe-area-view";
-import { StyleSheet, View } from "react-native";
+import { Image, StyleSheet, View } from "react-native";
 import Button from "../../components/Button";
 import LText from "../../components/LText";
-import IconDonjon from "../../icons/Donjon";
+import swapIllustration from "../../images/swap.png";
 import colors from "../../colors";
 
 const Landing = ({ onContinue }: { onContinue: any }) => {
   return (
     <SafeAreaView style={styles.root}>
       <View style={styles.wrapper}>
-        <View style={styles.illustration}>
-          <IconDonjon size={96} color="#E59450" />
-        </View>
+        <Image source={swapIllustration} style={styles.illustration} />
         <LText secondary style={styles.title}>
           <Trans i18nKey="transfer.swap.landing.title" />
         </LText>
@@ -48,14 +46,9 @@ const styles = StyleSheet.create({
   },
 
   illustration: {
-    height: 148,
-    width: 148,
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 74,
-    backgroundColor: colors.lightGrey,
-    color: "#ff0000",
-    marginBottom: 24,
+    width: 238,
+    height: 128,
+    marginBottom: 40,
   },
 
   title: {

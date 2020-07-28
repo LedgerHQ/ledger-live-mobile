@@ -1,11 +1,18 @@
 import React, { useRef, useEffect, useState } from "react";
-import { StyleSheet, View, Animated, SectionList } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Animated,
+  SectionList,
+  RefreshControl,
+} from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import getCompleteSwapHistory from "@ledgerhq/live-common/lib/swap/getCompleteSwapHistory";
 import updateAccountSwapStatus from "@ledgerhq/live-common/lib/swap/updateAccountSwapStatus";
 import { updateAccountWithUpdater } from "../../../actions/accounts";
 import { accountsSelector } from "../../../reducers/accounts";
 import OperationRow from "./OperationRow";
+import EmptyState from "./EmptyState";
 import LText from "../../../components/LText";
 import colors from "../../../colors";
 
@@ -15,6 +22,7 @@ const History = () => {
   const accounts = useSelector(accountsSelector);
   const dispatch = useDispatch();
   const [sections, setSections] = useState([]);
+  const [isRefreshing, setIsRefreshing] = useState(false);
   const ref = useRef();
 
   const accountsRef = useRef(accounts);
@@ -24,16 +32,16 @@ const History = () => {
   }, [accounts]);
 
   useEffect(() => {
-    (async function asyncGetCompleteSwapHistory() {
-      setSections(await getCompleteSwapHistory(accounts));
-    })();
-  }, [accounts, setSections]);
+    setSections(getCompleteSwapHistory(accountsRef.current));
+  }, [setSections]);
 
   useEffect(() => {
-    (async function asyncUpdateAccountSwapStatus() {
+    let cancelled = false;
+    async function asyncUpdateAccountSwapStatus() {
       const newAccounts = await Promise.all(
         accountsRef.current.map(updateAccountSwapStatus),
       );
+      if (cancelled) return;
       newAccounts.forEach(account =>
         dispatch(
           updateAccountWithUpdater(account.id, a =>
@@ -41,8 +49,22 @@ const History = () => {
           ),
         ),
       );
-    })();
-  }, [dispatch]);
+      setIsRefreshing(false);
+    }
+
+    if (isRefreshing) {
+      asyncUpdateAccountSwapStatus();
+    }
+
+    return () => {
+      cancelled = true;
+    };
+  }, [isRefreshing, dispatch]);
+
+  // NB if renderItem={OperationRow} it crashes ¯\_(ツ)_/¯
+  const renderItem = ({ item }: { item: Operation }) => (
+    <OperationRow item={item} />
+  );
 
   return (
     <View style={styles.root}>
@@ -52,10 +74,16 @@ const History = () => {
         style={styles.sectionList}
         contentContainerStyle={styles.contentContainer}
         ListEmptyComponent={_ => {
-          return <LText>{"Placeholder for history"}</LText>;
+          return <EmptyState />;
         }}
+        refreshControl={
+          <RefreshControl
+            refreshing={isRefreshing}
+            onRefresh={() => setIsRefreshing(true)}
+          />
+        }
         keyExtractor={({ swapId }) => swapId}
-        renderItem={OperationRow}
+        renderItem={renderItem}
         renderSectionHeader={({ section }) => {
           return (
             <LText semiBold style={styles.section}>
@@ -73,7 +101,7 @@ const History = () => {
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: colors.lightFog,
+    backgroundColor: colors.white,
   },
   header: {
     flexDirection: "column",

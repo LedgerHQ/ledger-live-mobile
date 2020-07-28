@@ -1,12 +1,13 @@
 // @flow
 
 import React, { useState, useEffect, useCallback } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, ActivityIndicator } from "react-native";
 import { getProviders } from "@ledgerhq/live-common/lib/swap";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import type { AvailableProvider } from "@ledgerhq/live-common/lib/swap/types";
 import MissingSwapApp from "./MissingSwapApp";
 import Landing from "./Landing";
+import NotAvailable from "./NotAvailable";
 import Form from "./Form";
 import Connect from "./Connect";
 import colors from "../../colors";
@@ -23,7 +24,7 @@ const Swap = () => {
 
   useEffect(() => {
     getProviders().then(setProviders);
-  }, [setProviders]);
+  }, []);
 
   const onSetResult = useCallback(
     data => {
@@ -46,7 +47,13 @@ const Swap = () => {
 
   return (
     <View style={styles.root}>
-      {showLandingPage ? (
+      {!providers ? (
+        <View style={styles.loading}>
+          <ActivityIndicator />
+        </View>
+      ) : !providers.length ? (
+        <NotAvailable />
+      ) : showLandingPage ? (
         <Landing providers={providers} onContinue={onContinue} />
       ) : !installedApps ? (
         <Connect setResult={onSetResult} />
@@ -64,6 +71,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 16,
     backgroundColor: colors.white,
+  },
+  loading: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
   },
   selectDevice: {
     fontSize: 15,

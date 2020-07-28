@@ -83,7 +83,7 @@ export default function CreateModal({ isOpened, onClose }: ModalProps) {
         event="TransferSwap"
         title={t("transfer.swap.title")}
         Icon={IconSwap}
-        onPress={onSwap}
+        onPress={accountsCount > 0 && !readOnlyModeEnabled ? onSwap : null}
       />
     </BottomModal>
   );
