@@ -1335,6 +1335,7 @@
     "stepperHeader": {
       "selectValidator": "Cast votes",
       "castVote": "My votes",
+      "selectDevice": "Select Device",
       "connectDevice": "Connect Device",
       "verification": "Verification",
       "stepRange": "Step {{currentStep}} of {{totalSteps}}"

@@ -14,8 +14,8 @@ import VoteSelectValidator, {
   SelectValidatorHeaderLeft,
 } from "./01-SelectValidator";
 import VoteCast from "./02-VoteCast";
-import VoteConnectDevice from "./03-ConnectDevice";
-import VoteValidation from "./04-Validation";
+import VoteSelectDevice from "../../../screens/SelectDevice";
+import VoteConnectDevice from "../../../screens/ConnectDevice";
 import VoteValidationError from "./04-ValidationError";
 import VoteValidationSuccess from "./04-ValidationSuccess";
 
@@ -76,6 +76,21 @@ function VoteFlow() {
         }}
       />
       <Stack.Screen
+        name={ScreenName.VoteSelectDevice}
+        component={VoteSelectDevice}
+        options={{
+          headerTitle: () => (
+            <StepHeader
+              title={t("vote.stepperHeader.selectDevice")}
+              subtitle={t("vote.stepperHeader.stepRange", {
+                currentStep: "3",
+                totalSteps: "4",
+              })}
+            />
+          ),
+        }}
+      />
+      <Stack.Screen
         name={ScreenName.VoteConnectDevice}
         component={VoteConnectDevice}
         options={{
@@ -88,24 +103,6 @@ function VoteFlow() {
               })}
             />
           ),
-        }}
-      />
-      <Stack.Screen
-        name={ScreenName.VoteValidation}
-        component={VoteValidation}
-        options={{
-          headerTitle: () => (
-            <StepHeader
-              title={t("vote.stepperHeader.verification")}
-              subtitle={t("vote.stepperHeader.stepRange", {
-                currentStep: "4",
-                totalSteps: "4",
-              })}
-            />
-          ),
-          headerLeft: null,
-          headerRight: null,
-          gestureEnabled: false,
         }}
       />
       <Stack.Screen

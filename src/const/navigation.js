@@ -129,6 +129,7 @@ export const ScreenName = {
   UnfreezeValidationSuccess: "UnfreezeValidationSuccess",
   VoteCast: "VoteCast",
   VoteConnectDevice: "VoteConnectDevice",
+  VoteSelectDevice: "VoteSelectDevice",
   VoteSelectValidator: "VoteSelectValidator",
   VoteStarted: "VoteStarted",
   VoteValidation: "VoteValidation",
