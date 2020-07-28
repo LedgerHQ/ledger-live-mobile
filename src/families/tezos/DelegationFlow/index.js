@@ -9,8 +9,8 @@ import { closableStackNavigatorConfig } from "../../../navigation/navigatorConfi
 import DelegationStarted from "./Started";
 import DelegationSummary from "./Summary";
 import DelegationSelectValidator from "./SelectValidator";
-import DelegationConnectDevice from "./ConnectDevice";
-import DelegationValidation from "./Validation";
+import DelegationSelectDevice from "../../../screens/SelectDevice";
+import DelegationConnectDevice from "../../../screens/ConnectDevice";
 import DelegationValidationSuccess from "./ValidationSuccess";
 import DelegationValidationError from "./ValidationError";
 
@@ -76,21 +76,18 @@ function DelegationFlow() {
         }}
       />
       <Stack.Screen
-        name={ScreenName.DelegationValidation}
-        component={DelegationValidation}
+        name={ScreenName.DelegationSelectDevice}
+        component={DelegationSelectDevice}
         options={{
           headerTitle: () => (
             <StepHeader
-              title={t("send.stepperHeader.verification")}
+              title={t("send.stepperHeader.selectDevice")}
               subtitle={t("send.stepperHeader.stepRange", {
-                currentStep: "3",
+                currentStep: "2",
                 totalSteps: "3",
               })}
             />
           ),
-          headerLeft: null,
-          headerRight: null,
-          gestureEnabled: false,
         }}
       />
       <Stack.Screen
