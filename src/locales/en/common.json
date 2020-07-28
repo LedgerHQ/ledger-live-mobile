@@ -1261,6 +1261,7 @@
       "info": "Earn rewards",
       "selectAmount": "Freeze",
       "summary": "Summary",
+      "selectDevice": "Select Device",
       "connectDevice": "Connect Device",
       "verification": "Verification",
       "stepRange": "Step {{currentStep}} of {{totalSteps}}"

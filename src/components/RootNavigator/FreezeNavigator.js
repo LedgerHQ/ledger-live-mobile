@@ -7,8 +7,8 @@ import { ScreenName } from "../../const";
 import { closableStackNavigatorConfig } from "../../navigation/navigatorConfig";
 import Info from "../../screens/FreezeFunds/01-Info";
 import Amount from "../../screens/FreezeFunds/02-Amount";
-import ConnectDevice from "../../screens/FreezeFunds/03-ConnectDevice";
-import Validation from "../../screens/FreezeFunds/04-Validation";
+import SelectDevice from "../../screens/SelectDevice";
+import ConnectDevice from "../../screens/ConnectDevice";
 import ValidationSuccess from "../../screens/FreezeFunds/04-ValidationSuccess";
 import ValidationError from "../../screens/FreezeFunds/04-ValidationError";
 import StepHeader from "../StepHeader";
@@ -44,6 +44,21 @@ export default function FreezeNavigator() {
         }}
       />
       <Stack.Screen
+        name={ScreenName.FreezeSelectDevice}
+        component={SelectDevice}
+        options={{
+          headerTitle: () => (
+            <StepHeader
+              title={t("freeze.stepperHeader.selectDevice")}
+              subtitle={t("freeze.stepperHeader.stepRange", {
+                currentStep: "2",
+                totalSteps: "3",
+              })}
+            />
+          ),
+        }}
+      />
+      <Stack.Screen
         name={ScreenName.FreezeConnectDevice}
         component={ConnectDevice}
         options={{
@@ -56,24 +71,6 @@ export default function FreezeNavigator() {
               })}
             />
           ),
-        }}
-      />
-      <Stack.Screen
-        name={ScreenName.FreezeValidation}
-        component={Validation}
-        options={{
-          headerTitle: () => (
-            <StepHeader
-              title={t("freeze.stepperHeader.verification")}
-              subtitle={t("freeze.stepperHeader.stepRange", {
-                currentStep: "3",
-                totalSteps: "3",
-              })}
-            />
-          ),
-          headerLeft: null,
-          headerRight: null,
-          gestureEnabled: false,
         }}
       />
       <Stack.Screen

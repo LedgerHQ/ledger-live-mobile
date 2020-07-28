@@ -71,7 +71,7 @@ export const ScreenName = {
   FreezeAmount: "FreezeAmount",
   FreezeConnectDevice: "FreezeConnectDevice",
   FreezeInfo: "FreezeInfo",
-  FreezeValidation: "FreezeValidation",
+  FreezeSelectDevice: "FreezeSelectDevice",
   FreezeValidationError: "FreezeValidationError",
   FreezeValidationSuccess: "FreezeValidationSuccess",
   GeneralSettings: "GeneralSettings",
