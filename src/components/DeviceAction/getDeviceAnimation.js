@@ -1,4 +1,5 @@
 // @flow
+import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 
 const nanoS = {
   plugAndPinCode: {
@@ -28,47 +29,77 @@ const nanoS = {
 };
 
 const nanoX = {
-  plugAndPinCode: {
-    light: require("../../animations/nanoX/1PlugAndPinCode/light.json"),
-    dark: require("../../animations/nanoX/1PlugAndPinCode/dark.json"),
+  wired: {
+    plugAndPinCode: {
+      light: require("../../animations/nanoX/wired/1PlugAndPinCode/light.json"),
+      dark: require("../../animations/nanoX/wired/1PlugAndPinCode/dark.json"),
+    },
+    enterPinCode: {
+      light: require("../../animations/nanoX/wired/3EnterPinCode/light.json"),
+      dark: require("../../animations/nanoX/wired/3EnterPinCode/dark.json"),
+    },
+    quitApp: {
+      light: require("../../animations/nanoX/wired/4QuitApp/light.json"),
+      dark: require("../../animations/nanoX/wired/4QuitApp/dark.json"),
+    },
+    allowManager: {
+      light: require("../../animations/nanoX/wired/5AllowManager/light.json"),
+      dark: require("../../animations/nanoX/wired/5AllowManager/dark.json"),
+    },
+    openApp: {
+      light: require("../../animations/nanoX/wired/6OpenApp/light.json"),
+      dark: require("../../animations/nanoX/wired/6OpenApp/dark.json"),
+    },
+    validate: {
+      light: require("../../animations/nanoX/wired/7Validate/light.json"),
+      dark: require("../../animations/nanoX/wired/7Validate/dark.json"),
+    },
   },
-  enterPinCode: {
-    light: require("../../animations/nanoX/3EnterPinCode/light.json"),
-    dark: require("../../animations/nanoX/3EnterPinCode/dark.json"),
-  },
-  quitApp: {
-    light: require("../../animations/nanoX/4QuitApp/light.json"),
-    dark: require("../../animations/nanoX/4QuitApp/dark.json"),
-  },
-  allowManager: {
-    light: require("../../animations/nanoX/5AllowManager/light.json"),
-    dark: require("../../animations/nanoX/5AllowManager/dark.json"),
-  },
-  openApp: {
-    light: require("../../animations/nanoX/6OpenApp/light.json"),
-    dark: require("../../animations/nanoX/6OpenApp/dark.json"),
-  },
-  validate: {
-    light: require("../../animations/nanoX/7Validate/light.json"),
-    dark: require("../../animations/nanoX/7Validate/dark.json"),
+  bluetooth: {
+    plugAndPinCode: {
+      light: require("../../animations/nanoX/bluetooth/1PlugAndPinCode/light.json"),
+      dark: require("../../animations/nanoX/bluetooth/1PlugAndPinCode/dark.json"),
+    },
+    enterPinCode: {
+      light: require("../../animations/nanoX/bluetooth/3EnterPinCode/light.json"),
+      dark: require("../../animations/nanoX/bluetooth/3EnterPinCode/dark.json"),
+    },
+    quitApp: {
+      light: require("../../animations/nanoX/bluetooth/4QuitApp/light.json"),
+      dark: require("../../animations/nanoX/bluetooth/4QuitApp/dark.json"),
+    },
+    allowManager: {
+      light: require("../../animations/nanoX/bluetooth/5AllowManager/light.json"),
+      dark: require("../../animations/nanoX/bluetooth/5AllowManager/dark.json"),
+    },
+    openApp: {
+      light: require("../../animations/nanoX/bluetooth/6OpenApp/light.json"),
+      dark: require("../../animations/nanoX/bluetooth/6OpenApp/dark.json"),
+    },
+    validate: {
+      light: require("../../animations/nanoX/bluetooth/7Validate/light.json"),
+      dark: require("../../animations/nanoX/bluetooth/7Validate/dark.json"),
+    },
   },
 };
-
-const animations = { nanoX, nanoS };
 
 type InferredKeys = $Keys<typeof nanoS>;
 
 export default function getDeviceAnimation({
-  modelId,
-  // theme,
+  theme = "light",
   key,
+  device,
 }: {
-  modelId: "nanoX" | "nanoS",
-  // theme: "light" | "dark",
+  theme?: "light" | "dark",
   key: InferredKeys,
+  device: Device,
 }) {
-  const lvl1 = animations[modelId] || animations.nanoX;
-  const lvl2 = lvl1[key] || animations.nanoX[key];
-  // if (theme === "dark" && lvl2.dark) return lvl2.dark;
-  return lvl2.light;
+  if (device.modelId === "blue") {
+    return null;
+  }
+  const animation =
+    device.modelId === "nanoS"
+      ? nanoS[key]
+      : nanoX[device.wired ? "wired" : "bluetooth"][key];
+  return animation[theme];
 }

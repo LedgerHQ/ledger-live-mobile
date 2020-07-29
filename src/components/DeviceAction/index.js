@@ -56,8 +56,6 @@ export default function DeviceAction<R, H, P>({
     passWarning,
   } = status;
 
-  const modelId = device?.modelId ?? selectedDevice.modelId;
-
   if (displayUpgradeWarning && appAndVersion) {
     return renderWarningOutdated({
       t,
@@ -70,7 +68,7 @@ export default function DeviceAction<R, H, P>({
   if (requestQuitApp) {
     return renderRequestQuitApp({
       t,
-      modelId,
+      device: selectedDevice,
     });
   }
 
@@ -85,7 +83,7 @@ export default function DeviceAction<R, H, P>({
 
   if (allowManagerRequestedWording) {
     const wording = allowManagerRequestedWording;
-    return renderAllowManager({ t, modelId, wording });
+    return renderAllowManager({ t, device: selectedDevice, wording });
   }
 
   if (allowOpeningRequestedWording || requestOpenApp) {
@@ -94,7 +92,7 @@ export default function DeviceAction<R, H, P>({
     return renderAllowOpeningApp({
       t,
       navigation,
-      modelId,
+      device: selectedDevice,
       wording,
       tokenContext: request?.tokenCurrency,
       isDeviceBlocker: !requestOpenApp,
@@ -120,7 +118,7 @@ export default function DeviceAction<R, H, P>({
   if ((!isLoading && !device) || unresponsive) {
     return renderConnectYourDevice({
       t,
-      modelId,
+      device: selectedDevice,
       unresponsive,
     });
   }

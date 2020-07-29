@@ -4,6 +4,7 @@ import { View, StyleSheet } from "react-native";
 import Icon from "react-native-vector-icons/dist/Feather";
 import { WrongDeviceForAccount, UnexpectedBootloader } from "@ledgerhq/errors";
 import type { TokenCurrency } from "@ledgerhq/live-common/lib/types";
+import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import LText from "../LText";
 import getWindowDimensions from "../../logic/getWindowDimensions";
 import Spinning from "../Spinning";
@@ -20,19 +21,17 @@ type RawProps = {
   t: (key: string, options?: { [key: string]: string }) => string,
 };
 
-type ModelId = "nanoX" | "nanoS";
-
 export function renderRequestQuitApp({
   t,
-  modelId,
+  device,
 }: {
   ...RawProps,
-  modelId: ModelId,
+  device: Device,
 }) {
   return (
     <View style={styles.wrapper}>
       <View style={styles.animationContainer}>
-        <Animation source={getDeviceAnimation({ modelId, key: "quitApp" })} />
+        <Animation source={getDeviceAnimation({ device, key: "quitApp" })} />
       </View>
       <LText style={styles.text} semiBold>
         {t("DeviceAction.quitApp")}
@@ -70,19 +69,19 @@ export function renderRequiresAppInstallation({
 
 export function renderAllowManager({
   t,
-  modelId,
   wording,
+  device,
 }: {
   ...RawProps,
-  modelId: ModelId,
   wording: string,
+  device: Device,
 }) {
   // TODO: disable gesture, modal close, hide header buttons
   return (
     <View style={styles.wrapper}>
       <View style={styles.animationContainer}>
         <Animation
-          source={getDeviceAnimation({ modelId, key: "allowManager" })}
+          source={getDeviceAnimation({ device, key: "allowManager" })}
         />
       </View>
       <LText style={styles.text} semiBold>
@@ -95,17 +94,17 @@ export function renderAllowManager({
 export function renderAllowOpeningApp({
   t,
   navigation,
-  modelId,
   wording,
   tokenContext,
   isDeviceBlocker,
+  device,
 }: {
   ...RawProps,
   navigation: any,
-  modelId: ModelId,
   wording: string,
   tokenContext?: ?TokenCurrency,
   isDeviceBlocker?: boolean,
+  device: Device,
 }) {
   if (isDeviceBlocker) {
     // TODO: disable gesture, modal close, hide header buttons
@@ -117,7 +116,7 @@ export function renderAllowOpeningApp({
   return (
     <View style={styles.wrapper}>
       <View style={styles.animationContainer}>
-        <Animation source={getDeviceAnimation({ modelId, key: "openApp" })} />
+        <Animation source={getDeviceAnimation({ device, key: "openApp" })} />
       </View>
       <LText style={styles.text} semiBold>
         {t("DeviceAction.allowAppPermission", { wording })}
@@ -188,19 +187,19 @@ export function renderError({
 
 export function renderConnectYourDevice({
   t,
-  modelId,
   unresponsive,
+  device,
 }: {
   ...RawProps,
-  modelId: ModelId,
   unresponsive: boolean,
+  device: Device,
 }) {
   return (
     <View style={styles.wrapper}>
       <View style={styles.animationContainer}>
         <Animation
           source={getDeviceAnimation({
-            modelId,
+            device,
             key: unresponsive ? "enterPinCode" : "plugAndPinCode",
           })}
         />
@@ -333,6 +332,7 @@ const styles = StyleSheet.create({
   },
   animationContainer: {
     alignSelf: "stretch",
-    height: 180,
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
