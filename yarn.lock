@@ -971,10 +971,23 @@
   resolved "https://registry.yarnpkg.com/@ledgerhq/errors/-/errors-5.19.1.tgz#3d25cc0ee92feee35415236c741ef668a106e275"
   integrity sha512-9v4ishxc2doiR06E/87uJdT7LjnSpnWPftDaBXBm/6KEgjPGtGBCcRW3fkmQTWNE115e6TG9JYRiVRPuqs6GHg==
 
-"@ledgerhq/hw-app-btc@5.19.1", "@ledgerhq/hw-app-btc@^5.19.1":
+"@ledgerhq/hw-app-btc@5.19.1":
   version "5.19.1"
   resolved "https://registry.yarnpkg.com/@ledgerhq/hw-app-btc/-/hw-app-btc-5.19.1.tgz#3c48583c0ce28b3f0c79e7f4a663f1f3cc525068"
   integrity sha512-HWDTzXtuK4YFPeVgk2pMUoB3G9Rp/uCeUvspfEXIpsYadpq0ivTlA7aqtNCtWnYW3aU8Rkueniul3YG+oW7XVQ==
+  dependencies:
+    "@ledgerhq/hw-transport" "^5.19.1"
+    "@ledgerhq/logs" "^5.19.1"
+    bip32-path "^0.4.2"
+    invariant "^2.2.4"
+    ripemd160 "2"
+    semver "^7.3.2"
+    sha.js "2"
+
+"@ledgerhq/hw-app-btc@^5.20.0":
+  version "5.20.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-app-btc/-/hw-app-btc-5.20.0.tgz#6144b6fb13e63c95ed5ec847230fcebbff9d0993"
+  integrity sha512-f8+KYFZD/ttdP0fnGyyNia5ANAtvgkzaZ1Yiobo8Wz9zP/xBvwXQ9oa345N1m/jEhKDfU12X2pPTfIIk7Fpljg==
   dependencies:
     "@ledgerhq/hw-transport" "^5.19.1"
     "@ledgerhq/logs" "^5.19.1"
@@ -993,6 +1006,16 @@
     "@ledgerhq/hw-transport" "^5.19.1"
     bignumber.js "^9.0.0"
     rlp "^2.2.5"
+
+"@ledgerhq/hw-app-eth@5.20.0":
+  version "5.20.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-app-eth/-/hw-app-eth-5.20.0.tgz#59306601c1309e15a948c9b3d06e7dc85480f48e"
+  integrity sha512-kL+oEJGhkd0A6GahRiDTp8RbheHYV+CQv04O+enQqIPuT++IZvSRlv03lBQNyNziX8b64/ZM+kQHWGesN7w7xg==
+  dependencies:
+    "@ledgerhq/errors" "^5.19.1"
+    "@ledgerhq/hw-transport" "^5.19.1"
+    bignumber.js "^9.0.0"
+    rlp "^2.2.6"
 
 "@ledgerhq/hw-app-str@^5.19.1":
   version "5.19.1"
@@ -1058,16 +1081,16 @@
     "@ledgerhq/errors" "^5.19.1"
     events "^3.1.0"
 
-"@ledgerhq/live-common@^13.3.1":
-  version "13.3.1"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-13.3.1.tgz#29898363635ee7623441121d88aff77a050bfea5"
-  integrity sha512-9FImGvXQL+wr0kb+tn7NnjSgY2JJTsr2+tkUd464RCuWybkqOmUgdhuAgBBtowv/uKk+XU0gaRwuLXtmN+cbVA==
+"@ledgerhq/live-common@13.5.0-actions.2":
+  version "13.5.0-actions.2"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-13.5.0-actions.2.tgz#92b391a43f66bf03fb120ec68da83fb75c87fa53"
+  integrity sha512-QYYdDfNyp8T2V6BZ5XNbGXNmBtHIxLhLowZlwQtgPWiM0RlgSoNHTOsMZ9a92yirdqfSIpae0rqcExPl2/gavw==
   dependencies:
     "@ledgerhq/compressjs" "1.3.2"
     "@ledgerhq/devices" "5.19.1"
     "@ledgerhq/errors" "5.19.1"
-    "@ledgerhq/hw-app-btc" "^5.19.1"
-    "@ledgerhq/hw-app-eth" "5.19.1"
+    "@ledgerhq/hw-app-btc" "^5.20.0"
+    "@ledgerhq/hw-app-eth" "5.20.0"
     "@ledgerhq/hw-app-str" "^5.19.1"
     "@ledgerhq/hw-app-trx" "5.19.1"
     "@ledgerhq/hw-app-xrp" "5.19.1"
@@ -1077,10 +1100,12 @@
     "@ledgerhq/logs" "5.19.1"
     async "^3.2.0"
     axios "0.19.0"
+    bchaddrjs "^0.4.9"
     bignumber.js "^9.0.0"
     bip32-path "^0.4.2"
     blake2b "^2.1.3"
     bs58check "^2.1.2"
+    cashaddrjs "^0.3.12"
     crypto-js "^3.1.9-1"
     eip55 "^1.0.3"
     ethereumjs-tx "^1.3.7"
@@ -1098,7 +1123,7 @@
     ripple-lib "1.1.2"
     rxjs "^6.6.0"
     rxjs-compat "^6.6.0"
-    secp256k1 "^4.0.1"
+    secp256k1 "^4.0.2"
     semver "^7.3.2"
     sha.js "^2.4.11"
     triple-beam "^1.3.0"
@@ -2207,6 +2232,14 @@ basic-auth@~2.0.0:
   dependencies:
     safe-buffer "5.1.1"
 
+bchaddrjs@^0.4.9:
+  version "0.4.9"
+  resolved "https://registry.yarnpkg.com/bchaddrjs/-/bchaddrjs-0.4.9.tgz#c17036bf5bab31bfbb9f3cec432c7c578f0faf46"
+  integrity sha512-Mf5Uf+P452ltYg1b/NncX/eAEKW+iAfUs8rO1mcgro8S+/WG6gRh8OqgBtyCK1jBHViajovWoAG+ZCkKbhZbNg==
+  dependencies:
+    bs58check "^2.1.2"
+    cashaddrjs "^0.3.12"
+
 bcrypt-pbkdf@^1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/bcrypt-pbkdf/-/bcrypt-pbkdf-1.0.2.tgz#a4301d389b6a43f9b67ff3ca11a3f6637e360e9e"
@@ -2219,7 +2252,7 @@ before-after-hook@^2.0.0:
   resolved "https://registry.yarnpkg.com/before-after-hook/-/before-after-hook-2.1.0.tgz#b6c03487f44e24200dd30ca5e6a1979c5d2fb635"
   integrity sha512-IWIbu7pMqyw3EAJHzzHbWa85b6oud/yfKYg5rqB5hNE8CeMi3nX+2C2sj0HswfblST86hpVEOAb9x34NZd6P7A==
 
-big-integer@^1.6.17, big-integer@^1.6.7:
+big-integer@1.6.36, big-integer@^1.6.17, big-integer@^1.6.7:
   version "1.6.36"
   resolved "https://registry.yarnpkg.com/big-integer/-/big-integer-1.6.36.tgz#78631076265d4ae3555c04f85e7d9d2f3a071a36"
   integrity sha512-t70bfa7HYEA1D9idDbmuv7YbsbVkQ+Hp+8KFSul4aE5e/i1bjCNIRYJZlA8Q8p0r9T8cF/RVvwUgRA//FydEyg==
@@ -2594,6 +2627,13 @@ caseless@^0.12.0, caseless@~0.12.0:
   version "0.12.0"
   resolved "https://registry.yarnpkg.com/caseless/-/caseless-0.12.0.tgz#1b681c21ff84033c826543090689420d187151dc"
   integrity sha1-G2gcIf+EAzyCZUMJBolCDRhxUdw=
+
+cashaddrjs@^0.3.12:
+  version "0.3.12"
+  resolved "https://registry.yarnpkg.com/cashaddrjs/-/cashaddrjs-0.3.12.tgz#73089588113459741e854aa842db1f7816d8428d"
+  integrity sha512-GdjCYMVwd86HXcFcxyEZQLPLFv8a/u0ccYPsO0PpnUW26LhZzHX9l9QA+DjaeUah7tnebwPs33NWDbbUy8iVYQ==
+  dependencies:
+    big-integer "1.6.36"
 
 chainsaw@~0.1.0:
   version "0.1.0"
@@ -8966,6 +9006,13 @@ rlp@^2.0.0, rlp@^2.2.5:
   dependencies:
     bn.js "^4.11.1"
 
+rlp@^2.2.6:
+  version "2.2.6"
+  resolved "https://registry.yarnpkg.com/rlp/-/rlp-2.2.6.tgz#c80ba6266ac7a483ef1e69e8e2f056656de2fb2c"
+  integrity sha512-HAfAmL6SDYNWPUOJNrM500x4Thn4PZsEy5pijPh40U9WfNk0z15hUYzO9xVIMAdIHdFtD8CBDHd75Td1g36Mjg==
+  dependencies:
+    bn.js "^4.11.1"
+
 rn-nodeify@^10.2.0:
   version "10.2.0"
   resolved "https://registry.yarnpkg.com/rn-nodeify/-/rn-nodeify-10.2.0.tgz#e68843bf280edf878b7615b255fb5e71cde9f8f6"
@@ -9141,10 +9188,10 @@ secp256k1@^3.0.1:
     nan "^2.14.0"
     safe-buffer "^5.1.2"
 
-secp256k1@^4.0.1:
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/secp256k1/-/secp256k1-4.0.1.tgz#b9570ca26ace9e74c3171512bba253da9c0b6d60"
-  integrity sha512-iGRjbGAKfXMqhtdkkuNxsgJQfJO8Oo78Rm7DAvsG3XKngq+nJIOGqrCSXcQqIVsmCj0wFanE5uTKFxV3T9j2wg==
+secp256k1@^4.0.2:
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/secp256k1/-/secp256k1-4.0.2.tgz#15dd57d0f0b9fdb54ac1fa1694f40e5e9a54f4a1"
+  integrity sha512-UDar4sKvWAksIlfX3xIaQReADn+WFnHvbVujpcbr+9Sf/69odMwy2MUsz5CKLQgX9nsIyrjuxL2imVyoNHa3fg==
   dependencies:
     elliptic "^6.5.2"
     node-addon-api "^2.0.0"
