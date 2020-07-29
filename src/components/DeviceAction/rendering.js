@@ -1,20 +1,20 @@
 // @flow
 import React from "react";
 import { View, StyleSheet } from "react-native";
+import Icon from "react-native-vector-icons/dist/Feather";
 import { WrongDeviceForAccount, UnexpectedBootloader } from "@ledgerhq/errors";
 import type { TokenCurrency } from "@ledgerhq/live-common/lib/types";
 import LText from "../LText";
 import getWindowDimensions from "../../logic/getWindowDimensions";
 import Spinning from "../Spinning";
 import LiveLogo from "../../icons/LiveLogoIcon";
-import colors from "../../colors";
+import colors, { lighten } from "../../colors";
 import Button from "../Button";
 import { NavigatorName } from "../../const";
-import Warning from "../../icons/Warning";
-import AlertTriangle from "../../icons/AlertTriangle";
 import Animation from "../Animation";
 import getDeviceAnimation from "./getDeviceAnimation";
 import TranslatedError from "../TranslatedError";
+import Circle from "../Circle";
 
 type RawProps = {
   t: (key: string, options?: { [key: string]: string }) => string,
@@ -161,9 +161,14 @@ export function renderError({
   return (
     <View style={styles.wrapper}>
       <View style={styles.iconContainer}>
-        <AlertTriangle size={28} />
+        <Circle size={60} bg={lighten(colors.alert, 0.75)}>
+          <Icon size={28} name="alert-triangle" color={colors.alert} />
+        </Circle>
       </View>
       <LText style={[styles.text, styles.title]} bold>
+        <TranslatedError error={error} field="title" />
+      </LText>
+      <LText style={[styles.text, styles.description]} bold>
         <TranslatedError error={error} field="description" />
       </LText>
       {onRetry && (
@@ -252,8 +257,11 @@ export function renderWarningOutdated({
   return (
     <View style={styles.wrapper}>
       <View style={styles.iconContainer}>
-        <Warning size={28} color={colors.yellow} />
+        <Circle size={60} bg={lighten(colors.yellow, 0.4)}>
+          <Icon size={28} name="alert-triangle" color={colors.yellow} />
+        </Circle>
       </View>
+
       <LText style={[styles.text, styles.title]} bold>
         {t("DeviceAction.outdated")}
       </LText>
@@ -262,18 +270,18 @@ export function renderWarningOutdated({
       </LText>
       <View style={styles.actionContainer}>
         <Button
+          event="DeviceActionWarningOutdatedOpenManager"
+          type="primary"
+          title={t("DeviceAction.button.openManager")}
+          onPress={onOpenManager}
+          containerStyle={styles.button}
+        />
+        <Button
           event="DeviceActionWarningOutdatedContinue"
           type="secondary"
           title={t("common.continue")}
           onPress={passWarning}
           outline={false}
-          containerStyle={styles.button}
-        />
-        <Button
-          event="DeviceActionWarningOutdatedOpenManager"
-          type="primary"
-          title={t("DeviceAction.button.openManager")}
-          onPress={onOpenManager}
           containerStyle={styles.button}
         />
       </View>
@@ -300,12 +308,14 @@ const styles = StyleSheet.create({
   },
   text: {
     color: colors.darkBlue,
+    textAlign: "center",
   },
   iconContainer: {
-    padding: 8,
+    margin: 16,
   },
   title: {
     padding: 8,
+    fontSize: 16,
   },
   description: {
     color: colors.grey,
@@ -318,8 +328,8 @@ const styles = StyleSheet.create({
     margin: 8,
   },
   actionContainer: {
-    flexDirection: "row",
-    padding: 8,
+    paddingVertical: 8,
+    alignSelf: "stretch",
   },
   animationContainer: {
     alignSelf: "stretch",
