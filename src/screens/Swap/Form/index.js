@@ -27,6 +27,8 @@ import type {
   TransactionStatus,
 } from "@ledgerhq/live-common/lib/types";
 import { findTokenById } from "@ledgerhq/live-common/lib/data/tokens";
+import type { DeviceInfo } from "@ledgerhq/live-common/lib/types/manager";
+import type { DeviceModel } from "@ledgerhq/devices";
 import CurrencyUnitValue from "../../../components/CurrencyUnitValue";
 
 import SectionSeparator, {
@@ -47,24 +49,31 @@ export type SwapRouteParams = {
   selectableCurrencies: Currency[],
   transaction?: Transaction,
   status?: TransactionStatus,
-  deviceName?: string,
-  deviceId?: string,
   selectedCurrency?: Currency,
   providers: any,
   installedApps: any,
   target: "from" | "to",
+  deviceMeta: DeviceMeta,
 };
 
+type DeviceMeta = {
+  appRes: { installed: any },
+  deviceId: string,
+  deviceInfo: DeviceInfo,
+  deviceName: string,
+  modelId: DeviceModel,
+  wired: boolean,
+};
 const Form = ({
   providers,
-  installedApps,
-  meta,
+  deviceMeta,
 }: {
   providers: any,
-  installedApps: any,
-  meta: any,
+  deviceMeta: DeviceMeta,
 }) => {
   const { navigate } = useNavigation();
+  const { appRes } = deviceMeta;
+  const { installed: installedApps } = appRes;
   const route = useRoute();
   const accounts = useSelector(accountsSelector);
   const selectableCurrencies = useSelector(state =>
@@ -79,7 +88,7 @@ const Form = ({
       }),
     [accounts, installedApps, selectableCurrencies],
   );
-  const { exchange, deviceId, deviceName } = route.params || {};
+  const { exchange } = route.params || {};
   const { fromAccount, toAccount } = exchange || {};
   const fromCurrency = fromAccount ? getAccountCurrency(fromAccount) : null;
   const toCurrency = toAccount ? getAccountCurrency(toAccount) : null;
@@ -108,9 +117,9 @@ const Form = ({
   const onContinue = useCallback(() => {
     navigate(ScreenName.SwapFormAmount, {
       ...route.params,
-      ...meta,
+      deviceMeta,
     });
-  }, [navigate, meta, route.params]);
+  }, [navigate, deviceMeta, route.params]);
 
   const canContinue = useMemo(() => {
     if (!exchange) return false;

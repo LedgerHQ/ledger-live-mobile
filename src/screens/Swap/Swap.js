@@ -3,7 +3,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { StyleSheet, View, ActivityIndicator } from "react-native";
 import { getProviders } from "@ledgerhq/live-common/lib/swap";
-import { useNavigation, useRoute } from "@react-navigation/native";
 import type { AvailableProvider } from "@ledgerhq/live-common/lib/swap/types";
 import MissingSwapApp from "./MissingSwapApp";
 import Landing from "./Landing";
@@ -17,10 +16,7 @@ type MaybeProviders = ?(AvailableProvider[]);
 const Swap = () => {
   const [providers, setProviders] = useState<MaybeProviders>();
   const [showLandingPage, setShowLandingPage] = useState(true);
-  const [meta, setMeta] = useState({});
-  const [installedApps, setInstalledApps] = useState();
-  const { navigate } = useNavigation();
-  const route = useRoute();
+  const [deviceMeta, setDeviceMeta] = useState();
 
   useEffect(() => {
     getProviders().then(setProviders);
@@ -29,17 +25,14 @@ const Swap = () => {
   const onSetResult = useCallback(
     data => {
       if (!data) return;
-      const { deviceId, deviceName, appRes } = data;
-      const { installed } = appRes;
-      setInstalledApps(installed);
-      setMeta({ deviceId, deviceName });
+      setDeviceMeta(data);
     },
-    [setMeta, setInstalledApps],
+    [setDeviceMeta],
   );
 
   const showInstallSwap =
-    installedApps && !installedApps.some(a => a.name === "Bitcoin");
-  // ↑ FIXME Use swap once we have swap app for real
+    deviceMeta?.appRes?.installed &&
+    !deviceMeta?.appRes?.installed.some(a => a.name === "Exchange");
 
   const onContinue = useCallback(() => {
     setShowLandingPage(false);
@@ -55,13 +48,13 @@ const Swap = () => {
         <NotAvailable />
       ) : showLandingPage ? (
         <Landing providers={providers} onContinue={onContinue} />
-      ) : !installedApps ? (
+      ) : !deviceMeta?.appRes?.installed ? (
         <Connect setResult={onSetResult} />
       ) : showInstallSwap ? (
         <MissingSwapApp />
-      ) : (
-        <Form installedApps={installedApps} meta={meta} providers={providers} />
-      )}
+      ) : deviceMeta ? (
+        <Form deviceMeta={deviceMeta} providers={providers} />
+      ) : null}
     </View>
   );
 };

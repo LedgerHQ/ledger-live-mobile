@@ -24,8 +24,7 @@ const SwapFormSummary = ({ navigation, route }: Props) => {
     exchangeRate,
     transaction,
     status,
-    deviceName,
-    deviceId,
+    deviceMeta,
   } = route.params;
   const [confirmed, setConfirmed] = useState(false);
   const [acceptedDisclaimer, setAcceptedDisclaimer] = useState(false);
@@ -48,8 +47,7 @@ const SwapFormSummary = ({ navigation, route }: Props) => {
             exchange={exchange}
             exchangeRate={exchangeRate}
             transaction={transaction}
-            deviceId={deviceId}
-            deviceName={deviceName}
+            deviceMeta={deviceMeta}
             onComplete={swapId =>
               navigation.replace(ScreenName.SwapPendingOperation, { swapId })
             }
