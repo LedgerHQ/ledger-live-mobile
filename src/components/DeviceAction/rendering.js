@@ -67,6 +67,41 @@ export function renderRequiresAppInstallation({
   );
 }
 
+export function renderVerifyAddress({
+  t,
+  device,
+  currencyName,
+  onPress,
+}: {
+  ...RawProps,
+  device: Device,
+  currencyName: string,
+  onPress: () => void,
+}) {
+  return (
+    <View style={styles.wrapper}>
+      <View style={styles.animationContainer}>
+        <Animation source={getDeviceAnimation({ device, key: "validate" })} />
+      </View>
+      <LText style={[styles.text, styles.title]} semiBold>
+        {t("DeviceAction.verifyAddress.title")}
+      </LText>
+      <LText style={[styles.text, styles.description]} semiBold>
+        {t("DeviceAction.verifyAddress.description", { currencyName })}
+      </LText>
+      <View style={styles.actionContainer}>
+        <Button
+          event="DeviceActionVerifyAddress"
+          type="primary"
+          title={t("common.continue")}
+          onPress={onPress}
+          containerStyle={styles.button}
+        />
+      </View>
+    </View>
+  );
+}
+
 export function renderAllowManager({
   t,
   wording,
@@ -84,7 +119,7 @@ export function renderAllowManager({
           source={getDeviceAnimation({ device, key: "allowManager" })}
         />
       </View>
-      <LText style={styles.text} semiBold>
+      <LText style={[styles.text, styles.description]} semiBold>
         {t("DeviceAction.allowManagerPermission", { wording })}
       </LText>
     </View>

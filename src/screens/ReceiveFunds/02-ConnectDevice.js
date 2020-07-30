@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { View, StyleSheet } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { useSelector } from "react-redux";
-import { Trans } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import {
   getMainAccount,
   getReceiveFlowError,
@@ -23,6 +23,8 @@ import ReadOnlyWarning from "./ReadOnlyWarning";
 import NotSyncedWarning from "./NotSyncedWarning";
 import GenericErrorView from "../../components/GenericErrorView";
 import DeviceActionModal from "../../components/DeviceActionModal";
+import LText from "../../components/LText";
+import { renderVerifyAddress } from "../../components/DeviceAction/rendering";
 
 const forceInset = { bottom: "always" };
 
@@ -40,6 +42,7 @@ type RouteParams = {
 const action = createAction(connectApp);
 
 export default function ConnectDevice({ navigation, route }: Props) {
+  const { t } = useTranslation();
   const { account, parentAccount } = useSelector(accountScreenSelector(route));
   const readOnlyModeEnabled = useSelector(readOnlyModeEnabledSelector);
   const [device, setDevice] = useState<?Device>();
@@ -60,21 +63,23 @@ export default function ConnectDevice({ navigation, route }: Props) {
   );
 
   const onResult = useCallback(
-    async meta => {
-      setDevice();
-      if (!account) return;
-      navigation.navigate(ScreenName.ReceiveConfirmation, {
-        accountId: account.id,
-        parentId: parentAccount && parentAccount.id,
-        ...meta,
+    payload => {
+      return renderVerifyAddress({
+        t,
+        navigation,
+        currencyName: "CURRENCY_NAME",
+        device: payload.device,
+        onPress: () => {
+          setDevice();
+          navigation.navigate(ScreenName.ReceiveConfirmation, {
+            ...route.params,
+            ...payload,
+          });
+        },
       });
     },
-    [navigation, account, parentAccount],
+    [navigation, t, route.params],
   );
-
-  const onClose = useCallback(() => {
-    setDevice();
-  }, []);
 
   const onSkipDevice = useCallback(() => {
     if (!account) return;
@@ -83,6 +88,10 @@ export default function ConnectDevice({ navigation, route }: Props) {
       parentId: parentAccount && parentAccount.id,
     });
   }, [account, navigation, parentAccount]);
+
+  const onClose = useCallback(() => {
+    setDevice();
+  }, []);
 
   if (!account) return null;
 
@@ -123,7 +132,7 @@ export default function ConnectDevice({ navigation, route }: Props) {
         <Button
           event="ReceiveWithoutDevice"
           type="lightSecondary"
-          title={<Trans i18nKey="transfer.receive.withoutDevice" />}
+          title={t("transfer.receive.withoutDevice")}
           onPress={onSkipDevice}
         />
       </View>
