@@ -21,7 +21,7 @@ import {
 } from "./rendering";
 
 type Props<R, H, P> = {
-  onResult?: (paylaod: P) => Promise<void> | void,
+  onResult: (paylaod: P) => Promise<void> | void,
   action: Action<R, H, P>,
   request?: R,
   device: Device,
@@ -170,7 +170,7 @@ export default function DeviceAction<R, H, P>({
   }
 
   if (onResult) {
-    return onResult(payload);
+    return onResult(payload) || null;
   }
 
   return null;
