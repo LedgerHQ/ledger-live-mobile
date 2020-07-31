@@ -7,10 +7,12 @@ import { useTranslation } from "react-i18next";
 import {
   getMainAccount,
   getReceiveFlowError,
+  getAccountCurrency,
 } from "@ledgerhq/live-common/lib/account";
 import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import { createAction } from "@ledgerhq/live-common/lib/hw/actions/app";
 import connectApp from "@ledgerhq/live-common/lib/hw/connectApp";
+
 import { accountScreenSelector } from "../../reducers/accounts";
 import colors from "../../colors";
 import { ScreenName } from "../../const";
@@ -23,7 +25,6 @@ import ReadOnlyWarning from "./ReadOnlyWarning";
 import NotSyncedWarning from "./NotSyncedWarning";
 import GenericErrorView from "../../components/GenericErrorView";
 import DeviceActionModal from "../../components/DeviceActionModal";
-import LText from "../../components/LText";
 import { renderVerifyAddress } from "../../components/DeviceAction/rendering";
 
 const forceInset = { bottom: "always" };
@@ -64,10 +65,13 @@ export default function ConnectDevice({ navigation, route }: Props) {
 
   const onResult = useCallback(
     payload => {
+      if (!account) {
+        return null;
+      }
       return renderVerifyAddress({
         t,
         navigation,
-        currencyName: "CURRENCY_NAME",
+        currencyName: getAccountCurrency(account).name,
         device: payload.device,
         onPress: () => {
           setDevice();
@@ -78,7 +82,7 @@ export default function ConnectDevice({ navigation, route }: Props) {
         },
       });
     },
-    [navigation, t, route.params],
+    [navigation, t, route.params, account],
   );
 
   const onSkipDevice = useCallback(() => {
