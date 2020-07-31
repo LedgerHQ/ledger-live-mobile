@@ -21,7 +21,7 @@ import {
 } from "./rendering";
 
 type Props<R, H, P> = {
-  onResult: (paylaod: P) => Promise<void> | void,
+  onResult: (paylaod: P) => Promise<void> | void | React$Node,
   action: Action<R, H, P>,
   request?: R,
   device: Device,

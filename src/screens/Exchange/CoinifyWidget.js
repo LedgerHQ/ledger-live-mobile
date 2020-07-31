@@ -4,22 +4,20 @@ import React, { useRef, useCallback, useState, useEffect } from "react";
 import { WebView } from "react-native-webview";
 import querystring from "querystring";
 import { ActivityIndicator, StyleSheet, View, Linking } from "react-native";
-// $FlowFixMe
-import type { Account } from "@ledgerhq/live-common/lib/types";
+import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
 import {
   getAccountCurrency,
   getMainAccount,
 } from "@ledgerhq/live-common/lib/account/helpers";
-import type { AccountLike } from "@ledgerhq/live-common/lib/types/account";
+import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
+import { createAction } from "@ledgerhq/live-common/lib/hw/actions/app";
+import connectApp from "@ledgerhq/live-common/lib/hw/connectApp";
+import DeviceAction from "../../components/DeviceAction";
 import { getConfig } from "./coinifyConfig";
 import colors from "../../colors";
-import DeviceJob from "../../components/DeviceJob";
-import {
-  accountApp,
-  connectingStep,
-  verifyAddressOnDeviceStep,
-} from "../../components/DeviceJob/steps";
 import { track } from "../../analytics";
+
+const action = createAction(connectApp);
 
 type CoinifyWidgetConfig = {
   primaryColor?: string,
@@ -73,16 +71,16 @@ const injectedCode = `
 
 type Props = {
   account?: AccountLike,
-  parentAccount?: Account,
+  parentAccount: ?Account,
   mode: string,
-  meta?: *,
+  device: Device,
 };
 
 export default function CoinifyWidget({
   mode,
   account,
   parentAccount,
-  meta,
+  device,
 }: Props) {
   const [isWaitingDeviceJob, setWaitingDeviceJob] = useState(false);
   const [firstLoadDone, setFirstLoadDone] = useState(false);
@@ -180,6 +178,21 @@ export default function CoinifyWidget({
     [account],
   );
 
+  const onResult = useCallback(() => {
+    // if transaction is refused
+    //     settleTrade("rejected");
+    //     setWaitingDeviceJob(false);
+    // else
+    //     settleTrade("accepted");
+    //     setWaitingDeviceJob(false);
+  }, []);
+
+  if (!account) {
+    return null;
+  }
+
+  const tokenCurrency = account.type === "TokenAccount" ? account.token : null;
+
   const url = `${coinifyConfig.url}?${querystring.stringify(widgetConfig)}`;
 
   return (
@@ -213,24 +226,30 @@ export default function CoinifyWidget({
         }}
       />
       {isWaitingDeviceJob ? (
-        <DeviceJob
-          deviceModelId="nanoX" // NB: EditDeviceName feature is only available on NanoX over BLE.
-          meta={meta}
-          onCancel={() => {
-            settleTrade("rejected");
-            setWaitingDeviceJob(false);
-          }}
-          onDone={() => {
-            settleTrade("accepted");
-            setWaitingDeviceJob(false);
-          }}
-          steps={[
-            connectingStep,
-            accountApp(mainAccount),
-            verifyAddressOnDeviceStep(mainAccount),
-          ]}
+        <DeviceAction
+          action={action}
+          device={device}
+          request={{ account: mainAccount, tokenCurrency }}
+          onResult={onResult}
         />
-      ) : null}
+      ) : // <DeviceJob
+      //   deviceModelId="nanoX" // NB: EditDeviceName feature is only available on NanoX over BLE.
+      //   meta={meta}
+      //   onCancel={() => {
+      //     settleTrade("rejected");
+      //     setWaitingDeviceJob(false);
+      //   }}
+      //   onDone={() => {
+      //     settleTrade("accepted");
+      //     setWaitingDeviceJob(false);
+      //   }}
+      //   steps={[
+      //     connectingStep,
+      //     accountApp(mainAccount),
+      //     verifyAddressOnDeviceStep(mainAccount),
+      //   ]}
+      // />
+      null}
     </View>
   );
 }
