@@ -6,6 +6,7 @@ import type {
 } from "@ledgerhq/live-common/lib/hw/actions/types";
 import { useTranslation } from "react-i18next";
 import { useNavigation } from "@react-navigation/native";
+import LText from "../LText";
 import ValidateOnDevice from "../ValidateOnDevice";
 import {
   renderWarningOutdated,
@@ -56,6 +57,9 @@ export default function DeviceAction<R, H, P>({
     deviceStreamingProgress,
     displayUpgradeWarning,
     passWarning,
+    initSwapRequested,
+    initSwapError,
+    initSwapResult,
     // TODO: fix flow type
   } = (status: any);
 
@@ -89,6 +93,10 @@ export default function DeviceAction<R, H, P>({
     return renderAllowManager({ t, device: selectedDevice, wording });
   }
 
+  // FIXME move out of here, this shouldn't be here.
+  if (initSwapRequested && !initSwapResult && !initSwapError) {
+    return <LText>{"Confirm SWAP transaction"}</LText>;
+  }
   if (allowOpeningRequestedWording || requestOpenApp) {
     // requestOpenApp for Nano S 1.3.1 (need to ask user to open the app.)
     const wording = allowOpeningRequestedWording || requestOpenApp;

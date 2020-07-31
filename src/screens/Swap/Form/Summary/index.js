@@ -28,7 +28,6 @@ const SwapFormSummary = ({ navigation, route }: Props) => {
   } = route.params;
   const [confirmed, setConfirmed] = useState(false);
   const [acceptedDisclaimer, setAcceptedDisclaimer] = useState(false);
-
   const reset = useCallback(() => {
     setConfirmed(false);
     setAcceptedDisclaimer(false);
@@ -48,9 +47,6 @@ const SwapFormSummary = ({ navigation, route }: Props) => {
             exchangeRate={exchangeRate}
             transaction={transaction}
             deviceMeta={deviceMeta}
-            onComplete={swapId =>
-              navigation.replace(ScreenName.SwapPendingOperation, { swapId })
-            }
             onError={error => {
               reset();
               navigation.navigate(ScreenName.SwapError, { error });
