@@ -178,14 +178,19 @@ export default function CoinifyWidget({
     [account],
   );
 
-  const onResult = useCallback(() => {
-    // if transaction is refused
-    //     settleTrade("rejected");
-    //     setWaitingDeviceJob(false);
-    // else
-    //     settleTrade("accepted");
-    //     setWaitingDeviceJob(false);
-  }, []);
+  const onResult = useCallback(
+    // TODO: Fix flow type
+    ({ signedOperation, transactionSignError }) => {
+      if (transactionSignError) {
+        settleTrade("rejected");
+        setWaitingDeviceJob(false);
+        return;
+      }
+      settleTrade("accepted");
+      setWaitingDeviceJob(false);
+    },
+    [settleTrade],
+  );
 
   if (!account) {
     return null;
