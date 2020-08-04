@@ -237,24 +237,7 @@ export default function CoinifyWidget({
           request={{ account: mainAccount, tokenCurrency }}
           onResult={onResult}
         />
-      ) : // <DeviceJob
-      //   deviceModelId="nanoX" // NB: EditDeviceName feature is only available on NanoX over BLE.
-      //   meta={meta}
-      //   onCancel={() => {
-      //     settleTrade("rejected");
-      //     setWaitingDeviceJob(false);
-      //   }}
-      //   onDone={() => {
-      //     settleTrade("accepted");
-      //     setWaitingDeviceJob(false);
-      //   }}
-      //   steps={[
-      //     connectingStep,
-      //     accountApp(mainAccount),
-      //     verifyAddressOnDeviceStep(mainAccount),
-      //   ]}
-      // />
-      null}
+      ) : null}
     </View>
   );
 }
