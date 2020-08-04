@@ -60,7 +60,7 @@ type RouteParams = {
   accountId: string,
   modelId: DeviceModelId,
   wired: boolean,
-  device: Device,
+  device?: Device,
 };
 
 export default function ReceiveConfirmation({ navigation, route }: Props) {
@@ -177,7 +177,7 @@ export default function ReceiveConfirmation({ navigation, route }: Props) {
 
   if (!account) return null;
   const { width } = getWindowDimensions();
-  const unsafe = !route.params.device.deviceId;
+  const unsafe = !route.params.device?.deviceId;
   const QRSize = Math.round(width / 1.8 - 16);
   const mainAccount = getMainAccount(account, parentAccount);
   const currency = getAccountCurrency(account);
