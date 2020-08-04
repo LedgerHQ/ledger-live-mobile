@@ -12,7 +12,6 @@ import { ScreenName } from "../../const";
 import colors from "../../colors";
 import { TrackScreen } from "../../analytics";
 import SelectDevice from "../../components/SelectDevice";
-import { connectingStep, currencyApp } from "../../components/DeviceJob/steps";
 import NavigationScrollView from "../../components/NavigationScrollView";
 import DeviceActionModal from "../../components/DeviceActionModal";
 
@@ -68,10 +67,7 @@ export default function AddAccountsSelectDevice({ navigation, route }: Props) {
         contentContainerStyle={styles.scrollContainer}
       >
         <TrackScreen category="AddAccounts" name="SelectDevice" />
-        <SelectDevice
-          onSelect={setDevice}
-          steps={[connectingStep, currencyApp(currency)]}
-        />
+        <SelectDevice onSelect={setDevice} />
       </NavigationScrollView>
       <DeviceActionModal
         action={action}
