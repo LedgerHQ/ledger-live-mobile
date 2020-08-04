@@ -37,7 +37,7 @@ export default function AddAccountsSelectDevice({ navigation, route }: Props) {
   }, []);
 
   const onResult = useCallback(
-    async meta => {
+    meta => {
       setDevice();
       const { currency, inline } = route.params;
       const arg = {

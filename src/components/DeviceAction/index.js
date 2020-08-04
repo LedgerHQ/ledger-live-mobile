@@ -170,7 +170,11 @@ export default function DeviceAction<R, H, P>({
   }
 
   if (onResult) {
-    return onResult(payload) || null;
+    const result = onResult(payload);
+    if (result?.then || typeof result === "undefined") {
+      return null;
+    }
+    return result;
   }
 
   return null;

@@ -12,7 +12,7 @@ import ValidationSuccess from "../../screens/UnfreezeFunds/03-ValidationSuccess"
 import ValidationError from "../../screens/UnfreezeFunds/03-ValidationError";
 import StepHeader from "../StepHeader";
 
-const totalSteps = "3"
+const totalSteps = "3";
 
 export default function UnfreezeNavigator() {
   const { t } = useTranslation();
@@ -28,7 +28,7 @@ export default function UnfreezeNavigator() {
               title={t("unfreeze.stepperHeader.selectAmount")}
               subtitle={t("unfreeze.stepperHeader.stepRange", {
                 currentStep: "1",
-                totalSteps:,
+                totalSteps,
               })}
             />
           ),
