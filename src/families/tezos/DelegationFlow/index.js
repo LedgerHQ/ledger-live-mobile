@@ -14,6 +14,8 @@ import DelegationConnectDevice from "../../../screens/ConnectDevice";
 import DelegationValidationSuccess from "./ValidationSuccess";
 import DelegationValidationError from "./ValidationError";
 
+const totalSteps = "3";
+
 function DelegationFlow() {
   const { t } = useTranslation();
   return (
@@ -43,7 +45,7 @@ function DelegationFlow() {
               title={t("delegation.summaryTitle")}
               subtitle={t("send.stepperHeader.stepRange", {
                 currentStep: "1",
-                totalSteps: "3",
+                totalSteps,
               })}
             />
           ),
@@ -69,7 +71,7 @@ function DelegationFlow() {
               title={t("send.stepperHeader.connectDevice")}
               subtitle={t("send.stepperHeader.stepRange", {
                 currentStep: "2",
-                totalSteps: "3",
+                totalSteps,
               })}
             />
           ),
@@ -83,8 +85,8 @@ function DelegationFlow() {
             <StepHeader
               title={t("send.stepperHeader.selectDevice")}
               subtitle={t("send.stepperHeader.stepRange", {
-                currentStep: "2",
-                totalSteps: "3",
+                currentStep: "3",
+                totalSteps,
               })}
             />
           ),

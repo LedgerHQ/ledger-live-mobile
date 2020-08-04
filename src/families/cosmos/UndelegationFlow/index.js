@@ -12,6 +12,8 @@ import ConnectDevice from "../../../screens/ConnectDevice";
 import UndelegationValidationError from "./03-ValidationError";
 import UndelegationValidationSuccess from "./03-ValidationSuccess";
 
+const totalSteps = "3";
+
 function UndelegationFlow() {
   const { t } = useTranslation();
 
@@ -43,7 +45,7 @@ function UndelegationFlow() {
               title={t("cosmos.undelegation.stepperHeader.selectDevice")}
               subtitle={t("cosmos.undelegation.stepperHeader.stepRange", {
                 currentStep: "2",
-                totalSteps: "3",
+                totalSteps,
               })}
             />
           ),
@@ -57,8 +59,8 @@ function UndelegationFlow() {
             <StepHeader
               title={t("cosmos.undelegation.stepperHeader.connectDevice")}
               subtitle={t("cosmos.undelegation.stepperHeader.stepRange", {
-                currentStep: "2",
-                totalSteps: "3",
+                currentStep: "3",
+                totalSteps,
               })}
             />
           ),

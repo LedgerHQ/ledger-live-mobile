@@ -11,6 +11,8 @@ import ValidationSuccess from "../../screens/ClaimRewards/02-ValidationSuccess";
 import ValidationError from "../../screens/ClaimRewards/02-ValidationError";
 import StepHeader from "../StepHeader";
 
+const totalSteps = "2";
+
 export default function ClaimRewardsNavigator() {
   const { t } = useTranslation();
 
@@ -25,7 +27,7 @@ export default function ClaimRewardsNavigator() {
               title={t("claimReward.stepperHeader.selectDevice")}
               subtitle={t("claimReward.stepperHeader.stepRange", {
                 currentStep: "1",
-                totalSteps: "2",
+                totalSteps,
               })}
             />
           ),
@@ -39,8 +41,8 @@ export default function ClaimRewardsNavigator() {
             <StepHeader
               title={t("claimReward.stepperHeader.connectDevice")}
               subtitle={t("claimReward.stepperHeader.stepRange", {
-                currentStep: "1",
-                totalSteps: "2",
+                currentStep: "2",
+                totalSteps,
               })}
             />
           ),

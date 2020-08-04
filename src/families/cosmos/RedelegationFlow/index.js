@@ -16,6 +16,8 @@ import ConnectDevice from "../../../screens/ConnectDevice";
 import RedelegationValidationError from "./04-ValidationError";
 import RedelegationValidationSuccess from "./04-ValidationSuccess";
 
+const totalSteps = "3";
+
 function RedelegationFlow() {
   const { t } = useTranslation();
 
@@ -35,7 +37,7 @@ function RedelegationFlow() {
               title={t("cosmos.redelegation.stepperHeader.validator")}
               subtitle={t("cosmos.redelegation.stepperHeader.stepRange", {
                 currentStep: "1",
-                totalSteps: "3",
+                totalSteps,
               })}
             />
           ),
@@ -73,7 +75,7 @@ function RedelegationFlow() {
               title={t("cosmos.redelegation.stepperHeader.selectDevice")}
               subtitle={t("cosmos.redelegation.stepperHeader.stepRange", {
                 currentStep: "2",
-                totalSteps: "3",
+                totalSteps,
               })}
             />
           ),
@@ -87,8 +89,8 @@ function RedelegationFlow() {
             <StepHeader
               title={t("cosmos.redelegation.stepperHeader.connectDevice")}
               subtitle={t("cosmos.redelegation.stepperHeader.stepRange", {
-                currentStep: "2",
-                totalSteps: "3",
+                currentStep: "3",
+                totalSteps,
               })}
             />
           ),

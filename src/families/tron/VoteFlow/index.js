@@ -19,6 +19,8 @@ import VoteConnectDevice from "../../../screens/ConnectDevice";
 import VoteValidationError from "./04-ValidationError";
 import VoteValidationSuccess from "./04-ValidationSuccess";
 
+const totalSteps = "4";
+
 function VoteFlow() {
   const { t } = useTranslation();
 
@@ -45,7 +47,7 @@ function VoteFlow() {
               title={t("vote.stepperHeader.selectValidator")}
               subtitle={t("vote.stepperHeader.stepRange", {
                 currentStep: "1",
-                totalSteps: "4",
+                totalSteps,
               })}
             />
           ),
@@ -68,7 +70,7 @@ function VoteFlow() {
               title={t("vote.stepperHeader.castVote")}
               subtitle={t("vote.stepperHeader.stepRange", {
                 currentStep: "2",
-                totalSteps: "4",
+                totalSteps,
               })}
             />
           ),
@@ -84,7 +86,7 @@ function VoteFlow() {
               title={t("vote.stepperHeader.selectDevice")}
               subtitle={t("vote.stepperHeader.stepRange", {
                 currentStep: "3",
-                totalSteps: "4",
+                totalSteps,
               })}
             />
           ),
@@ -98,8 +100,8 @@ function VoteFlow() {
             <StepHeader
               title={t("vote.stepperHeader.connectDevice")}
               subtitle={t("vote.stepperHeader.stepRange", {
-                currentStep: "3",
-                totalSteps: "4",
+                currentStep: "4",
+                totalSteps,
               })}
             />
           ),

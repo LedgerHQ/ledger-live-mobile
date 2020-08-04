@@ -13,6 +13,8 @@ import ValidationSuccess from "../../screens/FreezeFunds/04-ValidationSuccess";
 import ValidationError from "../../screens/FreezeFunds/04-ValidationError";
 import StepHeader from "../StepHeader";
 
+const totalSteps = "3";
+
 export default function FreezeNavigator() {
   const { t } = useTranslation();
 
@@ -36,7 +38,7 @@ export default function FreezeNavigator() {
               title={t("freeze.stepperHeader.selectAmount")}
               subtitle={t("freeze.stepperHeader.stepRange", {
                 currentStep: "1",
-                totalSteps: "3",
+                totalSteps,
               })}
             />
           ),
@@ -52,7 +54,7 @@ export default function FreezeNavigator() {
               title={t("freeze.stepperHeader.selectDevice")}
               subtitle={t("freeze.stepperHeader.stepRange", {
                 currentStep: "2",
-                totalSteps: "3",
+                totalSteps,
               })}
             />
           ),
@@ -66,8 +68,8 @@ export default function FreezeNavigator() {
             <StepHeader
               title={t("freeze.stepperHeader.connectDevice")}
               subtitle={t("freeze.stepperHeader.stepRange", {
-                currentStep: "2",
-                totalSteps: "3",
+                currentStep: "3",
+                totalSteps,
               })}
             />
           ),

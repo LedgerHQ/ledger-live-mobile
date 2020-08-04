@@ -14,6 +14,8 @@ import SendValidationError from "../../screens/SendFunds/07-ValidationError";
 import { closableStackNavigatorConfig } from "../../navigation/navigatorConfig";
 import StepHeader from "../StepHeader";
 
+const totalSteps = "6";
+
 export default function SendFundsNavigator() {
   const { t } = useTranslation();
   return (
@@ -27,7 +29,7 @@ export default function SendFundsNavigator() {
               title={t("send.stepperHeader.selectAccount")}
               subtitle={t("send.stepperHeader.stepRange", {
                 currentStep: "1",
-                totalSteps: "6",
+                totalSteps,
               })}
             />
           ),
@@ -42,7 +44,7 @@ export default function SendFundsNavigator() {
               title={t("send.stepperHeader.recipientAddress")}
               subtitle={t("send.stepperHeader.stepRange", {
                 currentStep: "2",
-                totalSteps: "6",
+                totalSteps,
               })}
             />
           ),
@@ -57,7 +59,7 @@ export default function SendFundsNavigator() {
               title={t("send.stepperHeader.selectAmount")}
               subtitle={t("send.stepperHeader.stepRange", {
                 currentStep: "3",
-                totalSteps: "6",
+                totalSteps,
               })}
             />
           ),
@@ -72,7 +74,7 @@ export default function SendFundsNavigator() {
               title={t("send.stepperHeader.summary")}
               subtitle={t("send.stepperHeader.stepRange", {
                 currentStep: "4",
-                totalSteps: "6",
+                totalSteps,
               })}
             />
           ),
@@ -87,7 +89,7 @@ export default function SendFundsNavigator() {
               title={t("send.stepperHeader.selectDevice")}
               subtitle={t("send.stepperHeader.stepRange", {
                 currentStep: "5",
-                totalSteps: "6",
+                totalSteps,
               })}
             />
           ),
@@ -101,8 +103,8 @@ export default function SendFundsNavigator() {
             <StepHeader
               title={t("send.stepperHeader.connectDevice")}
               subtitle={t("send.stepperHeader.stepRange", {
-                currentStep: "5",
-                totalSteps: "6",
+                currentStep: "6",
+                totalSteps,
               })}
             />
           ),

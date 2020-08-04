@@ -17,6 +17,8 @@ import ConnectDevice from "../../../screens/ConnectDevice";
 import DelegationValidationError from "./04-ValidationError";
 import DelegationValidationSuccess from "./04-ValidationSuccess";
 
+const totalSteps = "3";
+
 function DelegationFlow() {
   const { t } = useTranslation();
 
@@ -43,7 +45,7 @@ function DelegationFlow() {
               title={t("cosmos.delegation.stepperHeader.validator")}
               subtitle={t("cosmos.delegation.stepperHeader.stepRange", {
                 currentStep: "1",
-                totalSteps: "3",
+                totalSteps,
               })}
             />
           ),
@@ -81,8 +83,8 @@ function DelegationFlow() {
             <StepHeader
               title={t("cosmos.delegation.stepperHeader.selectDevice")}
               subtitle={t("cosmos.delegation.stepperHeader.stepRange", {
-                currentStep: "3",
-                totalSteps: "3",
+                currentStep: "2",
+                totalSteps,
               })}
             />
           ),
@@ -96,8 +98,8 @@ function DelegationFlow() {
             <StepHeader
               title={t("cosmos.delegation.stepperHeader.connectDevice")}
               subtitle={t("cosmos.delegation.stepperHeader.stepRange", {
-                currentStep: "2",
-                totalSteps: "3",
+                currentStep: "3",
+                totalSteps,
               })}
             />
           ),

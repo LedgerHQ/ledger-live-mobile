@@ -16,6 +16,8 @@ import ClaimRewardsConnectDevice from "../../../screens/ConnectDevice";
 import ClaimRewardsValidationError from "./04-ValidationError";
 import ClaimRewardsValidationSuccess from "./04-ValidationSuccess";
 
+const totalSteps = "3";
+
 function ClaimRewardsFlow() {
   const { t } = useTranslation();
 
@@ -35,7 +37,7 @@ function ClaimRewardsFlow() {
               title={t("cosmos.claimRewards.stepperHeader.validator")}
               subtitle={t("cosmos.claimRewards.stepperHeader.stepRange", {
                 currentStep: "1",
-                totalSteps: "3",
+                totalSteps,
               })}
             />
           ),
@@ -67,7 +69,7 @@ function ClaimRewardsFlow() {
               title={t("cosmos.claimRewards.stepperHeader.selectDevice")}
               subtitle={t("cosmos.claimRewards.stepperHeader.stepRange", {
                 currentStep: "2",
-                totalSteps: "3",
+                totalSteps,
               })}
             />
           ),
@@ -81,8 +83,8 @@ function ClaimRewardsFlow() {
             <StepHeader
               title={t("cosmos.claimRewards.stepperHeader.connectDevice")}
               subtitle={t("cosmos.claimRewards.stepperHeader.stepRange", {
-                currentStep: "2",
-                totalSteps: "3",
+                currentStep: "3",
+                totalSteps,
               })}
             />
           ),
