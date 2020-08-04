@@ -1221,7 +1221,6 @@
       "summary": "Summary",
       "selectDevice": "Select Device",
       "connectDevice": "Connect Device",
-      "verification": "Verification",
       "stepRange": "Step {{currentStep}} of {{totalSteps}}"
     },
     "recipient": {
@@ -1289,7 +1288,6 @@
       "summary": "Summary",
       "selectDevice": "Select Device",
       "connectDevice": "Connect Device",
-      "verification": "Verification",
       "stepRange": "Step {{currentStep}} of {{totalSteps}}"
     },
     "info": {
@@ -1328,7 +1326,6 @@
       "summary": "Summary",
       "selectDevice": "Select Device",
       "connectDevice": "Connect Device",
-      "verification": "Verification",
       "stepRange": "Step {{currentStep}} of {{totalSteps}}"
     },
     "amount": {
@@ -1349,7 +1346,6 @@
     "stepperHeader": {
       "selectDevice": "Select Device",
       "connectDevice": "Connect Device",
-      "verification": "Verification",
       "stepRange": "Step {{currentStep}} of {{totalSteps}}"
     },
     "validation": {
@@ -1366,7 +1362,6 @@
       "castVote": "My votes",
       "selectDevice": "Select Device",
       "connectDevice": "Connect Device",
-      "verification": "Verification",
       "stepRange": "Step {{currentStep}} of {{totalSteps}}"
     },
     "selectValidator": {},
@@ -1781,7 +1776,6 @@
         "summary": "Summary",
         "selectDevice": "Select device",
         "connectDevice": "Connect device",
-        "verification": "Verification",
         "stepRange": "Step {{currentStep}} of {{totalSteps}}"
       },
       "flow": {
@@ -1844,7 +1838,6 @@
         "summary": "Summary",
         "selectDevice": "Select device",
         "connectDevice": "Connect device",
-        "verification": "Verification",
         "stepRange": "Step {{currentStep}} of {{totalSteps}}"
       },
       "flow": {
@@ -1881,7 +1874,6 @@
         "summary": "Summary",
         "selectDevice": "Select device",
         "connectDevice": "Connect device",
-        "verification": "Verification",
         "stepRange": "Step {{currentStep}} of {{totalSteps}}"
       },
       "flow": {
@@ -1910,7 +1902,6 @@
         "summary": "Summary",
         "selectDevice": "Select device",
         "connectDevice": "Connect device",
-        "verification": "Verification",
         "stepRange": "Step {{currentStep}} of {{totalSteps}}"
       },
       "flow": {
