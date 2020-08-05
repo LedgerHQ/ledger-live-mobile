@@ -68,7 +68,6 @@ target 'ledgerlivemobile' do
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
   pod 'react-native-ble-plx', :path => '../node_modules/react-native-ble-plx'
-  pod 'react-native-ble-plx-swift', :path => '../node_modules/react-native-ble-plx'
 
   pod 'djinni_objc', :path => '../node_modules/@ledgerhq/react-native-ledger-core'
   pod 'ledger-core-objc', :path => '../node_modules/@ledgerhq/react-native-ledger-core'
