@@ -22,9 +22,8 @@ type Props = {
 };
 
 const Manager = ({ navigation, route }: Props) => {
-  console.log(Object.keys(route.params));
-  const { result, deviceInfo } = route.params;
-  const [state, dispatch] = useApps(result, deviceInfo.deviceId);
+  const { appRes, deviceId, deviceInfo } = route.params.meta;
+  const [state, dispatch] = useApps(appRes, deviceId);
 
   const { apps, currentError, installQueue, uninstallQueue } = state;
   const blockNavigation = installQueue.length + uninstallQueue.length > 0;
@@ -108,8 +107,8 @@ const Manager = ({ navigation, route }: Props) => {
         setAppUninstallWithDependencies={setAppUninstallWithDependencies}
         setStorageWarning={setStorageWarning}
         managerTabs={MANAGER_TABS}
-        deviceId={deviceInfo.deviceId}
-        initialDeviceName={route.params.device.deviceName}
+        deviceId={deviceId}
+        initialDeviceName={route.params?.deviceName}
         blockNavigation={blockNavigation}
         deviceInfo={deviceInfo}
       />
