@@ -6,7 +6,6 @@ import { Trans } from "react-i18next";
 import LText from "../../../components/LText";
 import Button from "../../../components/Button";
 import IconSwap from "../../../icons/Swap";
-import { ScreenName } from "../../../const";
 import colors, { rgba } from "../../../colors";
 
 const PendingOperation = () => {
@@ -14,7 +13,7 @@ const PendingOperation = () => {
   const route = useRoute();
 
   const onComplete = useCallback(() => {
-    navigation.replace(ScreenName.Portfolio);
+    navigation.dangerouslyGetParent().pop();
   }, [navigation]);
 
   const { swapId } = route.params;
