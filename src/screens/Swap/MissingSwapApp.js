@@ -20,7 +20,7 @@ const MissingSwapApp = () => {
   return (
     <SafeAreaView style={styles.root}>
       <View style={styles.illustration}>
-        <AppIcon size={60} icon="bitcoin" />
+        <AppIcon size={60} icon="exchange" />
       </View>
       <LText secondary style={styles.title}>
         <Trans i18nKey="transfer.swap.missingAppPlaceholder.title" />
