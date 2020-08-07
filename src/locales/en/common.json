@@ -1238,10 +1238,13 @@
       "landing": {
         "header": "Swap",
         "title": "Welcome to Swap",
-        "disclaimer": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec commodo sed mi sit amet mattis. Sed nec lacus aliquam, cursus nulla vitae, condimentum velit"
+        "disclaimer": "Exchange crypto assets directly from your Ledger device. This service is not available in the US and a few other countries."
       },
       "main": {
         "header": "Swap"
+      },
+      "kyc": {
+        "disclaimer": "By continuing, you accept that your location data will be shared with third party service providers in order for them to comply with their AML/KYC procedures"
       },
       "notAvailable":{
         "title": "Swap feature is not available in your country"

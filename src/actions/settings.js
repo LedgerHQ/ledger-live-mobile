@@ -64,6 +64,11 @@ export const setAnalytics = (analyticsEnabled: boolean) => ({
   analyticsEnabled,
 });
 
+export const setHasAcceptedSwapKYC = (hasAcceptedSwapKYC: boolean) => ({
+  type: "SETTINGS_SET_HAS_ACCEPTED_SWAP_KYC",
+  hasAcceptedSwapKYC,
+});
+
 export const setReadOnlyMode = (enabled: boolean) => ({
   type: "SETTINGS_SET_READONLY_MODE",
   enabled,

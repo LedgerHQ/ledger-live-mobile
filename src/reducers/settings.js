@@ -75,6 +75,7 @@ export type SettingsState = {
   blacklistedTokenIds: string[],
   dismissedBanners: string[],
   hasAvailableUpdate: boolean,
+  hasAcceptedSwapKYC: boolean,
 };
 
 export const INITIAL_STATE: SettingsState = {
@@ -96,6 +97,7 @@ export const INITIAL_STATE: SettingsState = {
   blacklistedTokenIds: [],
   dismissedBanners: [],
   hasAvailableUpdate: false,
+  hasAcceptedSwapKYC: false,
 };
 
 const pairHash = (from, to) => `${from.ticker}_${to.ticker}`;
@@ -158,6 +160,14 @@ const handlers: Object = {
   SETTINGS_SET_ANALYTICS: (state: SettingsState, { analyticsEnabled }) => ({
     ...state,
     analyticsEnabled,
+  }),
+
+  SETTINGS_SET_HAS_ACCEPTED_SWAP_KYC: (
+    state: SettingsState,
+    { hasAcceptedSwapKYC },
+  ) => ({
+    ...state,
+    hasAcceptedSwapKYC,
   }),
 
   SETTINGS_SET_COUNTERVALUE: (state: SettingsState, { counterValue }) => ({
@@ -346,6 +356,9 @@ export const orderAccountsSelector = (state: State) =>
 
 export const hasCompletedOnboardingSelector = (state: State) =>
   state.settings.hasCompletedOnboarding;
+
+export const hasAcceptedSwapKYCSelector = (state: State) =>
+  state.settings.hasAcceptedSwapKYC;
 
 export const hasInstalledAnyAppSelector = (state: State) =>
   state.settings.hasInstalledAnyApp;

@@ -1,14 +1,29 @@
 // @flow
-import React from "react";
+import React, { useCallback, useState } from "react";
 import { Trans } from "react-i18next";
 import SafeAreaView from "react-native-safe-area-view";
-import { Image, StyleSheet, View } from "react-native";
+import {
+  TouchableWithoutFeedback,
+  Image,
+  StyleSheet,
+  View,
+} from "react-native";
+import { useDispatch } from "react-redux";
 import Button from "../../components/Button";
 import LText from "../../components/LText";
+import CheckBox from "../../components/CheckBox";
 import swapIllustration from "../../images/swap.png";
 import colors from "../../colors";
+import { setHasAcceptedSwapKYC } from "../../actions/settings";
 
-const Landing = ({ onContinue }: { onContinue: any }) => {
+const Landing = () => {
+  const [isChecked, setIsChecked] = useState(false);
+  const dispatch = useDispatch();
+  const onAcceptSwapKYC = useCallback(
+    () => dispatch(setHasAcceptedSwapKYC(true)),
+    [dispatch],
+  );
+
   return (
     <SafeAreaView style={styles.root}>
       <View style={styles.wrapper}>
@@ -20,12 +35,26 @@ const Landing = ({ onContinue }: { onContinue: any }) => {
           <Trans i18nKey="transfer.swap.landing.disclaimer" />
         </LText>
       </View>
-      <Button
-        event="ConfirmSwapLandingDisclaimer"
-        type={"primary"}
-        title={<Trans i18nKey="common.continue" />}
-        onPress={onContinue}
-      />
+      <View style={styles.footer}>
+        <TouchableWithoutFeedback
+          event="SwapTermsAcceptSwitch"
+          onPress={() => setIsChecked(!isChecked)}
+        >
+          <View style={styles.switchRow}>
+            <CheckBox isChecked={isChecked} />
+            <LText semiBold style={styles.switchLabel}>
+              <Trans i18nKey="transfer.swap.kyc.disclaimer" />
+            </LText>
+          </View>
+        </TouchableWithoutFeedback>
+        <Button
+          event="ConfirmSwapLandingDisclaimer"
+          type={"primary"}
+          title={<Trans i18nKey="common.continue" />}
+          disabled={!isChecked}
+          onPress={onAcceptSwapKYC}
+        />
+      </View>
     </SafeAreaView>
   );
 };
@@ -38,6 +67,24 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
   },
 
+  footer: {
+    flexDirection: "column",
+    justifyContent: "space-between",
+    borderTopWidth: 1,
+    borderTopColor: colors.lightFog,
+  },
+
+  switchRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginVertical: 20,
+  },
+  switchLabel: {
+    marginLeft: 8,
+    color: colors.darkBlue,
+    fontSize: 13,
+    paddingRight: 16,
+  },
   wrapper: {
     flexGrow: 1,
     flexShrink: 0,

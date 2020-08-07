@@ -4,6 +4,8 @@ import React, { useState, useEffect, useCallback } from "react";
 import { StyleSheet, View, ActivityIndicator } from "react-native";
 import { getProviders } from "@ledgerhq/live-common/lib/swap";
 import type { AvailableProvider } from "@ledgerhq/live-common/lib/swap/types";
+import { useSelector } from "react-redux";
+import { hasAcceptedSwapKYCSelector } from "../../reducers/settings";
 import MissingSwapApp from "./MissingSwapApp";
 import Landing from "./Landing";
 import NotAvailable from "./NotAvailable";
@@ -15,7 +17,7 @@ type MaybeProviders = ?(AvailableProvider[]);
 
 const Swap = () => {
   const [providers, setProviders] = useState<MaybeProviders>();
-  const [showLandingPage, setShowLandingPage] = useState(true);
+  const hasAcceptedSwapKYC = useSelector(hasAcceptedSwapKYCSelector);
   const [deviceMeta, setDeviceMeta] = useState();
 
   useEffect(() => {
@@ -34,10 +36,6 @@ const Swap = () => {
     deviceMeta?.appRes?.installed &&
     !deviceMeta?.appRes?.installed.some(a => a.name === "Exchange");
 
-  const onContinue = useCallback(() => {
-    setShowLandingPage(false);
-  }, [setShowLandingPage]);
-
   return (
     <View style={styles.root}>
       {!providers ? (
@@ -46,8 +44,8 @@ const Swap = () => {
         </View>
       ) : !providers.length ? (
         <NotAvailable />
-      ) : showLandingPage ? (
-        <Landing providers={providers} onContinue={onContinue} />
+      ) : !hasAcceptedSwapKYC ? (
+        <Landing providers={providers} />
       ) : !deviceMeta?.appRes?.installed ? (
         <Connect setResult={onSetResult} />
       ) : showInstallSwap ? (
