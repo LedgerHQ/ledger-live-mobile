@@ -72,11 +72,13 @@ export function renderVerifyAddress({
   device,
   currencyName,
   onPress,
+  address,
 }: {
   ...RawProps,
   device: Device,
   currencyName: string,
-  onPress: () => void,
+  onPress?: () => void,
+  address?: string,
 }) {
   return (
     <View style={styles.wrapper}>
@@ -90,13 +92,22 @@ export function renderVerifyAddress({
         {t("DeviceAction.verifyAddress.description", { currencyName })}
       </LText>
       <View style={styles.actionContainer}>
-        <Button
-          event="DeviceActionVerifyAddress"
-          type="primary"
-          title={t("common.continue")}
-          onPress={onPress}
-          containerStyle={styles.button}
-        />
+        {onPress && (
+          <Button
+            event="DeviceActionVerifyAddress"
+            type="primary"
+            title={t("common.continue")}
+            onPress={onPress}
+            containerStyle={styles.button}
+          />
+        )}
+        {address && (
+          <View>
+            <LText bold style={[styles.text, styles.title]}>
+              {address}
+            </LText>
+          </View>
+        )}
       </View>
     </View>
   );

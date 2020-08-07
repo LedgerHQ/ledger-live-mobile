@@ -36,6 +36,7 @@ export default function CoinifyWidgetScreen({ route }: Props) {
         parentAccount={parentAccount}
         device={device}
         mode={mode}
+        verifyAddress
       />
     </SafeAreaView>
   );

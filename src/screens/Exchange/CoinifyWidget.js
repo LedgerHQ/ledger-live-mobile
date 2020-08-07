@@ -1,5 +1,4 @@
 // @flow
-
 import React, { useRef, useCallback, useState, useEffect } from "react";
 import { WebView } from "react-native-webview";
 import querystring from "querystring";
@@ -12,7 +11,14 @@ import {
 import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import { createAction } from "@ledgerhq/live-common/lib/hw/actions/app";
 import connectApp from "@ledgerhq/live-common/lib/hw/connectApp";
+import { WrongDeviceForAccount } from "@ledgerhq/errors";
+import { useTranslation } from "react-i18next";
+import { from } from "rxjs";
+import { withDevice } from "@ledgerhq/live-common/lib/hw/deviceAccess";
+import getAddress from "@ledgerhq/live-common/lib/hw/getAddress";
 import DeviceAction from "../../components/DeviceAction";
+import BottomModal from "../../components/BottomModal";
+import { renderVerifyAddress } from "../../components/DeviceAction/rendering";
 import { getConfig } from "./coinifyConfig";
 import colors from "../../colors";
 import { track } from "../../analytics";
@@ -74,6 +80,7 @@ type Props = {
   parentAccount: ?Account,
   mode: string,
   device: Device,
+  verifyAddress?: boolean,
 };
 
 export default function CoinifyWidget({
@@ -178,10 +185,13 @@ export default function CoinifyWidget({
     [account],
   );
 
-  const onResult = useCallback(
-    // TODO: Fix flow type
-    ({ signedOperation, transactionSignError }) => {
-      if (transactionSignError) {
+  const onResult = useCallback(() => {
+    setWaitingDeviceJob(true);
+  }, []);
+
+  const onVerify = useCallback(
+    confirmed => {
+      if (confirmed) {
         settleTrade("rejected");
         setWaitingDeviceJob(false);
         return;
@@ -199,6 +209,10 @@ export default function CoinifyWidget({
   const tokenCurrency = account.type === "TokenAccount" ? account.token : null;
 
   const url = `${coinifyConfig.url}?${querystring.stringify(widgetConfig)}`;
+
+  if (!mainAccount) {
+    return null;
+  }
 
   return (
     <View style={[styles.root]}>
@@ -224,22 +238,77 @@ export default function CoinifyWidget({
         scalesPageToFitmediaPlaybackRequiresUserAction
         automaticallyAdjustContentInsets={false}
         scrollEnabled={true}
-        style={{
-          flex: 0,
-          width: "100%",
-          height: "100%",
-        }}
+        style={styles.webview}
       />
-      {isWaitingDeviceJob ? (
-        <DeviceAction
-          action={action}
-          device={device}
-          request={{ account: mainAccount, tokenCurrency }}
-          onResult={onResult}
-        />
-      ) : null}
+      <BottomModal id="DeviceActionModal" isOpened={false}>
+        <View style={styles.modalContainer}>
+          {isWaitingDeviceJob ? (
+            <DeviceAction
+              action={action}
+              device={device}
+              request={{ account: mainAccount, tokenCurrency }}
+              onResult={onResult}
+            />
+          ) : (
+            <VerifyAddress
+              account={mainAccount}
+              device={device}
+              onResult={onVerify}
+            />
+          )}
+        </View>
+      </BottomModal>
     </View>
   );
+}
+
+function VerifyAddress({
+  account,
+  device,
+  onResult,
+}: {
+  account: Account,
+  device: Device,
+  onResult: (confirmed: boolean, error?: Error) => void,
+}) {
+  const { t } = useTranslation();
+
+  const onConfirmAddress = useCallback(async () => {
+    try {
+      const { address } = await withDevice(device.deviceId)(transport =>
+        from(
+          getAddress(transport, {
+            derivationMode: account.derivationMode,
+            currency: account.currency,
+            path: account.freshAddressPath,
+            verify: true,
+          }),
+        ),
+      ).toPromise();
+      if (address !== account.freshAddress) {
+        throw new WrongDeviceForAccount(
+          `WrongDeviceForAccount ${account.name}`,
+          {
+            accountName: account.name,
+          },
+        );
+      }
+      onResult(true);
+    } catch (err) {
+      onResult(false, err);
+    }
+  }, [account, device, onResult]);
+
+  useEffect(() => {
+    onConfirmAddress();
+  }, [onConfirmAddress]);
+
+  return renderVerifyAddress({
+    t,
+    currencyName: getAccountCurrency(account).name,
+    device,
+    address: account.freshAddress,
+  });
 }
 
 const styles = StyleSheet.create({
@@ -257,5 +326,13 @@ const styles = StyleSheet.create({
     right: 0,
     bottom: 0,
     justifyContent: "center",
+  },
+  modalContainer: {
+    flexDirection: "row",
+  },
+  webview: {
+    flex: 0,
+    width: "100%",
+    height: "100%",
   },
 });

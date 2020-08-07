@@ -12,7 +12,7 @@ type Props = {
   device: ?Device,
   // TODO: fix request type
   request?: any,
-  onClose: () => void,
+  onClose?: () => void,
   onResult: $PropertyType<React$ElementProps<typeof DeviceAction>, "onResult">,
 };
 
