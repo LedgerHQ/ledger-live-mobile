@@ -12,7 +12,10 @@ import { createAction as initSwapCreateAction } from "@ledgerhq/live-common/lib/
 import initSwap from "@ledgerhq/live-common/lib/swap/initSwap";
 import connectApp from "@ledgerhq/live-common/lib/hw/connectApp";
 import { useDispatch } from "react-redux";
-import { addPendingOperation } from "@ledgerhq/live-common/lib/account";
+import {
+  addPendingOperation,
+  getMainAccount,
+} from "@ledgerhq/live-common/lib/account";
 import addToSwapHistory from "@ledgerhq/live-common/lib/swap/addToSwapHistory";
 import { useNavigation } from "@react-navigation/native";
 import { ScreenName } from "../../const";
@@ -61,25 +64,36 @@ const Confirmation = ({
   const onComplete = useCallback(
     result => {
       const { operation, swapId } = result;
-      const account = exchange.fromAccount;
-      if (!account) return;
+      const mainAccount = getMainAccount(fromAccount, fromParentAccount);
+
+      if (!mainAccount) return;
       dispatch(
-        updateAccountWithUpdater(account.id, account =>
+        // FIXME potentially ignoring updated account?
+        updateAccountWithUpdater(mainAccount.id, _ =>
           addPendingOperation(
-            addToSwapHistory(
-              account,
+            addToSwapHistory({
+              account: fromAccount,
+              parentAccount: fromParentAccount,
               operation,
               transaction,
-              { exchange, exchangeRate },
+              swap: { exchange, exchangeRate },
               swapId,
-            ),
+            }),
             operation,
           ),
         ),
       );
       navigation.replace(ScreenName.SwapPendingOperation, { swapId });
     },
-    [dispatch, exchange, exchangeRate, navigation, transaction],
+    [
+      dispatch,
+      exchange,
+      exchangeRate,
+      fromAccount,
+      fromParentAccount,
+      navigation,
+      transaction,
+    ],
   );
 
   useEffect(() => {

@@ -2,11 +2,10 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import { Trans } from "react-i18next";
-import type {
-  Transaction,
-  TransactionStatus,
-} from "@ledgerhq/live-common/lib/types";
+import type { TransactionStatus } from "@ledgerhq/live-common/lib/types";
 import {
+  getMainAccount,
+  getAccountName,
   getAccountUnit,
   getAccountCurrency,
 } from "@ledgerhq/live-common/lib/account/helpers";
@@ -31,7 +30,7 @@ const SummaryBody = ({
   exchange: Exchange,
   exchangeRate: ExchangeRate,
 }) => {
-  const { fromAccount, toAccount } = exchange;
+  const { fromAccount, fromParentAccount, toAccount } = exchange;
   const fromCurrency = getAccountCurrency(fromAccount);
   const toCurrency = getAccountCurrency(toAccount);
   const { magnitudeAwareRate } = exchangeRate;
@@ -45,7 +44,7 @@ const SummaryBody = ({
         <View style={styles.accountNameWrapper}>
           <CurrencyIcon size={16} currency={fromCurrency} />
           <LText semiBold style={styles.value}>
-            {fromAccount.name}
+            {getAccountName(fromAccount)}
           </LText>
         </View>
       </View>
@@ -73,7 +72,7 @@ const SummaryBody = ({
         <View style={styles.accountNameWrapper}>
           <CurrencyIcon size={16} currency={toCurrency} />
           <LText semiBold style={styles.value}>
-            {toAccount.name}
+            {getAccountName(toAccount)}
           </LText>
         </View>
       </View>
@@ -105,7 +104,9 @@ const SummaryBody = ({
           <LText tertiary style={styles.value3}>
             <CurrencyUnitValue
               showCode
-              unit={getAccountUnit(fromAccount)}
+              unit={getAccountUnit(
+                getMainAccount(fromAccount, fromParentAccount),
+              )}
               value={estimatedFees}
             />
           </LText>

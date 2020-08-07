@@ -9,6 +9,7 @@ import SwapError from "../../screens/Swap/Form/Error";
 import SwapFormAmount from "../../screens/Swap/Form/Amount";
 import SwapFormOrHistory from "../../screens/Swap/FormOrHistory";
 import SwapOperationDetails from "../../screens/Swap/OperationDetails";
+import { BackButton } from "../../screens/OperationDetails";
 import SwapPendingOperation from "../../screens/Swap/Form/PendingOperation";
 import SwapFormSelectCrypto from "../../screens/Swap/Form/SelectAccount/01-SelectCrypto";
 import SwapFormSelectAccount from "../../screens/Swap/Form/SelectAccount/02-SelectAccount";
@@ -79,10 +80,11 @@ export default function SwapNavigator() {
       <Stack.Screen
         name={ScreenName.SwapOperationDetails}
         component={SwapOperationDetails}
-        options={{
+        options={({ navigation }) => ({
           headerTitle: () => <StepHeader title={t("transfer.swap.title")} />,
-          headerLeft: null,
-        }}
+          headerLeft: () => <BackButton navigation={navigation} />,
+          headerRight: null,
+        })}
       />
     </Stack.Navigator>
   );

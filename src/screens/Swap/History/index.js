@@ -10,7 +10,7 @@ import { useSelector, useDispatch } from "react-redux";
 import getCompleteSwapHistory from "@ledgerhq/live-common/lib/swap/getCompleteSwapHistory";
 import updateAccountSwapStatus from "@ledgerhq/live-common/lib/swap/updateAccountSwapStatus";
 import { updateAccountWithUpdater } from "../../../actions/accounts";
-import { accountsSelector } from "../../../reducers/accounts";
+import { flattenAccountsSelector } from "../../../reducers/accounts";
 import OperationRow from "./OperationRow";
 import EmptyState from "./EmptyState";
 import LText from "../../../components/LText";
@@ -19,7 +19,7 @@ import colors from "../../../colors";
 const AnimatedSectionList = Animated.createAnimatedComponent(SectionList);
 
 const History = () => {
-  const accounts = useSelector(accountsSelector);
+  const accounts = useSelector(flattenAccountsSelector);
   const dispatch = useDispatch();
   const [sections, setSections] = useState([]);
   const [isRefreshing, setIsRefreshing] = useState(false);

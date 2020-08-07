@@ -76,7 +76,9 @@ const OperationDetails = ({ navigation, route }: Props) => {
           <LText style={styles.label}>
             <Trans i18nKey={"transfer.swap.operationDetails.swapId"} />
           </LText>
-          <LText style={styles.value}>{swapId}</LText>
+          <LText selectable style={styles.value}>
+            {swapId}
+          </LText>
           <LText style={styles.label}>
             <Trans i18nKey={"transfer.swap.operationDetails.provider"} />
           </LText>
