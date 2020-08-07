@@ -20,9 +20,11 @@ import Icon from "react-native-vector-icons/dist/Ionicons";
 import {
   getAccountUnit,
   getAccountCurrency,
+  getAccountName,
 } from "@ledgerhq/live-common/lib/account";
 import type {
-  Currency,
+  CryptoCurrency,
+  TokenCurrency,
   Transaction,
   TransactionStatus,
 } from "@ledgerhq/live-common/lib/types";
@@ -46,17 +48,17 @@ export type SwapRouteParams = {
   exchange: Exchange,
   exchangeRate: ExchangeRate,
   currenciesStatus: CurrenciesStatus,
-  selectableCurrencies: Currency[],
+  selectableCurrencies: (CryptoCurrency | TokenCurrency)[],
   transaction?: Transaction,
   status?: TransactionStatus,
-  selectedCurrency?: Currency,
+  selectedCurrency: CryptoCurrency | TokenCurrency,
   providers: any,
   installedApps: any,
   target: "from" | "to",
   deviceMeta: DeviceMeta,
 };
 
-type DeviceMeta = {
+export type DeviceMeta = {
   appRes: { installed: any },
   deviceId: string,
   deviceInfo: DeviceInfo,
@@ -143,7 +145,7 @@ const Form = ({
               <>
                 <CurrencyIcon size={16} currency={fromCurrency} />
                 <LText semiBold style={styles.accountName}>
-                  {fromAccount.name}
+                  {getAccountName(fromAccount)}
                 </LText>
                 <View style={{ marginTop: 4, marginLeft: 8 }}>
                   <Icon name="ios-arrow-down" size={16} color={colors.black} />
@@ -189,7 +191,7 @@ const Form = ({
               <>
                 <CurrencyIcon size={16} currency={toCurrency} />
                 <LText semiBold style={styles.accountName}>
-                  {toAccount.name}
+                  {getAccountName(toAccount)}
                 </LText>
                 <View style={{ marginTop: 4, marginLeft: 8 }}>
                   <Icon name="ios-arrow-down" size={16} color={colors.black} />
@@ -291,7 +293,7 @@ const selectableCurrenciesSelector = (state, props: { providers: any }) => {
   const cryptoCurrencies = allIds
     .map(findCryptoCurrencyById)
     .filter(Boolean)
-    .filter(isCurrencySupported); // TODO filter for swapSupported currencies, is this not handled in backend?
+    .filter(isCurrencySupported);
   return [...cryptoCurrencies, ...tokenCurrencies];
 };
 

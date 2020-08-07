@@ -2,7 +2,10 @@
 import React, { useCallback } from "react";
 import { TouchableOpacity, StyleSheet, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { getAccountUnit } from "@ledgerhq/live-common/lib/account/helpers";
+import {
+  getAccountUnit,
+  getAccountName,
+} from "@ledgerhq/live-common/lib/account/helpers";
 import type { MappedSwapOperation } from "@ledgerhq/live-common/lib/swap/types";
 import Icon from "react-native-vector-icons/dist/Ionicons";
 
@@ -36,7 +39,7 @@ const OperationRow = ({ item }: { item: MappedSwapOperation }) => {
         <SwapStatusIndicator small status={status} />
         <View style={[styles.accountWrapper, { marginLeft: 18 }]}>
           <LText numberOfLines={1} semiBold style={styles.name}>
-            {fromAccount.name}
+            {getAccountName(fromAccount)}
           </LText>
           <LText tertiary style={styles.amount}>
             <CurrencyUnitValue
@@ -51,7 +54,7 @@ const OperationRow = ({ item }: { item: MappedSwapOperation }) => {
         </View>
         <View style={[styles.accountWrapper, { alignItems: "flex-end" }]}>
           <LText numberOfLines={1} semiBold style={styles.name}>
-            {toAccount.name}
+            {getAccountName(toAccount)}
           </LText>
           <LText tertiary style={styles.amount}>
             <CurrencyUnitValue

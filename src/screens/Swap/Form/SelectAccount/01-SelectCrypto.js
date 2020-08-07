@@ -50,13 +50,14 @@ export default function SwapFormSelectCrypto({ route, navigation }: Props) {
     target,
   } = route.params;
 
+  const isFrom = target === "from";
+
   const [badSelection, setBadSelection] = useState(null);
-  const maybeFilteredCurrencies =
-    target === "to"
-      ? selectableCurrencies.filter(
-          c => c !== getAccountCurrency(exchange.fromAccount),
-        )
-      : selectableCurrencies;
+  const maybeFilteredCurrencies = !isFrom
+    ? selectableCurrencies.filter(
+        c => c !== getAccountCurrency(exchange.fromAccount),
+      )
+    : selectableCurrencies;
   const sortedCryptoCurrencies = useCurrenciesByMarketcap(
     maybeFilteredCurrencies,
   );

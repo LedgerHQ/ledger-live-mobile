@@ -94,7 +94,9 @@ const SummaryBody = ({
           <LText primary style={styles.label}>
             <Trans i18nKey="transfer.swap.form.summary.provider" />
           </LText>
-          <LText style={styles.value3}>{exchangeRate.provider}</LText>
+          <LText style={[styles.value3, styles.capitalize]}>
+            {exchangeRate.provider}
+          </LText>
         </View>
         <View style={styles.row}>
           <LText primary style={styles.label}>
@@ -153,6 +155,9 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     backgroundColor: colors.lightFog,
     padding: 16,
+  },
+  capitalize: {
+    textTransform: "capitalize",
   },
 });
 

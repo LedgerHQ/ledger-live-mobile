@@ -1,16 +1,20 @@
 /* @flow */
-import React, { useCallback } from "react";
-import { View, StyleSheet, FlatList } from "react-native";
-import SafeAreaView from "react-native-safe-area-view";
+
+import React, { useCallback, useMemo } from "react";
+import { View, StyleSheet, FlatList, SafeAreaView } from "react-native";
+import { Trans, useTranslation } from "react-i18next";
+import type {
+  Account,
+  AccountLikeArray,
+} from "@ledgerhq/live-common/lib/types";
 import { useSelector } from "react-redux";
-import { Trans } from "react-i18next";
-import { getAccountCurrency } from "@ledgerhq/live-common/lib/account/helpers";
 import {
-  accountsSelector,
-  flattenAccountsSelector,
-} from "../../../../reducers/accounts";
+  accountWithMandatoryTokens,
+  flattenAccounts,
+} from "@ledgerhq/live-common/lib/account/helpers";
+import type { SwapRouteParams } from "..";
+import { accountsSelector } from "../../../../reducers/accounts";
 import colors from "../../../../colors";
-import { ScreenName } from "../../../../const";
 import { TrackScreen } from "../../../../analytics";
 import LText from "../../../../components/LText";
 import FilteredSearchBar from "../../../../components/FilteredSearchBar";
@@ -18,30 +22,64 @@ import AccountCard from "../../../../components/AccountCard";
 import KeyboardView from "../../../../components/KeyboardView";
 import { formatSearchResults } from "../../../../helpers/formatAccountSearchResults";
 import type { SearchResult } from "../../../../helpers/formatAccountSearchResults";
-import type { SwapRouteParams } from "..";
+import InfoIcon from "../../../../icons/Info";
+import PlusIcon from "../../../../icons/Plus";
+import Button from "../../../../components/Button";
+import { NavigatorName, ScreenName } from "../../../../const";
 
 const SEARCH_KEYS = ["name", "unit.code", "token.name", "token.ticker"];
-const forceInset = { bottom: "always" };
 
 type Props = {
+  accounts: Account[],
+  allAccounts: AccountLikeArray,
   navigation: any,
-  route: {
-    params: SwapRouteParams,
-  },
+  route: { params: SwapRouteParams },
 };
 
-export default function SwapFormSelectAccount({ navigation, route }: Props) {
-  const allAccounts = useSelector(flattenAccountsSelector);
-  const accounts = useSelector(accountsSelector);
-  const keyExtractor = item => item.account.id;
+export default function SelectAccount({ navigation, route }: Props) {
   const { exchange, target, selectedCurrency } = route.params;
+  const accounts = useSelector(accountsSelector);
 
-  const accountKey = target === "from" ? "fromAccount" : "toAccount";
-  const parentAccountKey =
-    target === "from" ? "fromParentAccount" : "toParentAccount";
+  const enhancedAccounts = useMemo(() => {
+    const filteredAccounts = accounts.filter(
+      acc =>
+        acc.currency.id ===
+        (selectedCurrency.type === "TokenCurrency"
+          ? selectedCurrency.parentCurrency.id
+          : selectedCurrency.id),
+    );
+    if (selectedCurrency.type === "TokenCurrency") {
+      return filteredAccounts.map(acc => {
+        return accountWithMandatoryTokens(acc, [selectedCurrency]);
+      });
+    }
+    return filteredAccounts;
+  }, [accounts, selectedCurrency]);
+
+  const allAccounts = flattenAccounts(enhancedAccounts);
+
+  const { t } = useTranslation();
+
+  const keyExtractor = item => item.account.id;
+  const isFrom = target === "from";
+
   const renderItem = useCallback(
     ({ item: result }: { item: SearchResult }) => {
       const { account } = result;
+      const parentAccount =
+        account.type === "TokenAccount"
+          ? accounts.find(a => a.id === account.parentId)
+          : null;
+      const accountParams = isFrom
+        ? {
+            fromAccount: account,
+            fromParentAccount: parentAccount,
+          }
+        : {
+            toAccount: account,
+            toParentAccount: parentAccount,
+          };
+
       return (
         <View
           style={account.type === "Account" ? undefined : styles.tokenCardStyle}
@@ -55,10 +93,7 @@ export default function SwapFormSelectAccount({ navigation, route }: Props) {
                 ...route.params,
                 exchange: {
                   ...exchange,
-                  [accountKey]: account,
-                  [parentAccountKey]: account.parentId
-                    ? accounts.find(a => a.id === account.parentId)
-                    : null,
+                  ...accountParams,
                 },
               });
             }}
@@ -66,39 +101,97 @@ export default function SwapFormSelectAccount({ navigation, route }: Props) {
         </View>
       );
     },
-    [accounts, exchange, accountKey, parentAccountKey, route, navigation],
+    [accounts, isFrom, navigation, route.params, exchange],
+  );
+
+  const elligibleAccountsForSelectedCurrency = allAccounts.filter(
+    account =>
+      (isFrom ? account.balance.gt(0) : true) &&
+      (account.type === "TokenAccount"
+        ? account.token.id
+        : account.currency.id) === selectedCurrency.id,
   );
 
   const renderList = useCallback(
     items => {
-      const formatedList = formatSearchResults(items, accounts);
-
+      const formatedList = formatSearchResults(items, enhancedAccounts);
       return (
         <FlatList
           data={formatedList}
           renderItem={renderItem}
           keyExtractor={keyExtractor}
           showsVerticalScrollIndicator={false}
+          ListFooterComponent={
+            <Button
+              containerStyle={styles.addButton}
+              event="ExchangeStartBuyFlow"
+              type="tertiary"
+              outline={false}
+              IconLeft={PlusIcon}
+              title={t("exchange.buy.emptyState.CTAButton")}
+              onPress={() =>
+                navigation.navigate(NavigatorName.AddAccounts, {
+                  currency:
+                    selectedCurrency.type === "TokenCurrency"
+                      ? selectedCurrency.parentCurrency
+                      : selectedCurrency,
+                })
+              }
+            />
+          }
           keyboardDismissMode="on-drag"
         />
       );
     },
-    [accounts, renderItem],
+    [enhancedAccounts, renderItem, t, navigation, selectedCurrency],
   );
 
+  // empty state if no accounts available for this currency
+  if (!elligibleAccountsForSelectedCurrency.length) {
+    return (
+      <View style={styles.emptyStateBody}>
+        <View style={styles.iconContainer}>
+          <InfoIcon size={22} color={colors.live} />
+        </View>
+        <LText semiBold style={styles.title}>
+          {t("exchange.buy.emptyState.title", {
+            currency: selectedCurrency.name,
+          })}
+        </LText>
+        <LText style={styles.description}>
+          {t("exchange.buy.emptyState.description", {
+            currency: selectedCurrency.name,
+          })}
+        </LText>
+        <View style={styles.buttonContainer}>
+          <Button
+            containerStyle={styles.button}
+            event="ExchangeStartBuyFlow"
+            type="primary"
+            title={t("exchange.buy.emptyState.CTAButton")}
+            onPress={() =>
+              navigation.navigate(
+                NavigatorName.AddAccounts,
+                selectedCurrency.type === "TokenCurrency"
+                  ? { token: selectedCurrency }
+                  : { selectedCurrency },
+              )
+            }
+          />
+        </View>
+      </View>
+    );
+  }
+
   return (
-    <SafeAreaView style={styles.root} forceInset={forceInset}>
+    <SafeAreaView style={styles.root}>
       <TrackScreen category="ReceiveFunds" name="SelectAccount" />
       <KeyboardView style={{ flex: 1 }}>
         <View style={styles.searchContainer}>
           <FilteredSearchBar
             keys={SEARCH_KEYS}
             inputWrapperStyle={styles.card}
-            list={allAccounts.filter(
-              a =>
-                getAccountCurrency(a) === selectedCurrency &&
-                (target === "to" || a.balance.gt(0)),
-            )}
+            list={elligibleAccountsForSelectedCurrency}
             renderList={renderList}
             renderEmptySearch={() => (
               <View style={styles.emptyResults}>
@@ -115,6 +208,12 @@ export default function SwapFormSelectAccount({ navigation, route }: Props) {
 }
 
 const styles = StyleSheet.create({
+  addAccountButton: {
+    flex: 1,
+    flexDirection: "row",
+    paddingVertical: 16,
+    alignItems: "center",
+  },
   root: {
     flex: 1,
     backgroundColor: colors.white,
@@ -145,5 +244,47 @@ const styles = StyleSheet.create({
   emptyText: {
     fontSize: 16,
     color: colors.fog,
+  },
+  emptyStateBody: {
+    flex: 1,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  iconContainer: {
+    width: 56,
+    height: 56,
+    borderRadius: 50,
+    backgroundColor: colors.lightLive,
+    marginBottom: 24,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  title: {
+    textAlign: "center",
+    color: colors.darkBlue,
+    fontSize: 16,
+    marginBottom: 16,
+  },
+  description: {
+    textAlign: "center",
+    paddingHorizontal: 16,
+    color: colors.smoke,
+    fontSize: 14,
+  },
+  buttonContainer: {
+    paddingTop: 24,
+    paddingLeft: 16,
+    paddingRight: 16,
+    flexDirection: "row",
+  },
+  button: {
+    flex: 1,
+  },
+  addButton: {
+    marginTop: 16,
+    paddingLeft: 8,
+    alignItems: "flex-start",
   },
 });

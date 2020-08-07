@@ -2,6 +2,7 @@ import React from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
 import type { MappedSwapOperation } from "@ledgerhq/live-common/lib/swap/types";
 import {
+  getAccountName,
   getAccountUnit,
   getAccountCurrency,
 } from "@ledgerhq/live-common/lib/account/helpers";
@@ -40,7 +41,7 @@ const OperationDetails = ({ navigation, route }: Props) => {
   const statusColor = getStatusColor(status);
   const dotStyles = { backgroundColor: statusColor };
   const textColorStyles = { color: statusColor };
-  // FIXME  this will break for tokens.
+
   return (
     <View style={styles.root}>
       <ScrollView
@@ -93,7 +94,7 @@ const OperationDetails = ({ navigation, route }: Props) => {
           <View style={styles.account}>
             <CurrencyIcon size={16} currency={fromCurrency} />
             <LText semiBold style={styles.accountName}>
-              {fromAccount.name}
+              {getAccountName(fromAccount)}
             </LText>
           </View>
           <LText style={styles.label}>
@@ -115,7 +116,7 @@ const OperationDetails = ({ navigation, route }: Props) => {
           <View style={styles.account}>
             <CurrencyIcon size={16} currency={toCurrency} />
             <LText semiBold style={styles.accountName}>
-              {toAccount.name}
+              {getAccountName(toAccount)}
             </LText>
           </View>
           <LText style={styles.label}>
