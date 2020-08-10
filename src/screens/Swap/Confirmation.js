@@ -68,12 +68,10 @@ const Confirmation = ({
 
       if (!mainAccount) return;
       dispatch(
-        // FIXME potentially ignoring updated account?
-        updateAccountWithUpdater(mainAccount.id, _ =>
+        updateAccountWithUpdater(mainAccount.id, account =>
           addPendingOperation(
             addToSwapHistory({
-              account: fromAccount,
-              parentAccount: fromParentAccount,
+              account,
               operation,
               transaction,
               swap: { exchange, exchangeRate },
