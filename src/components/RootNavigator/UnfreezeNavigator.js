@@ -62,6 +62,9 @@ export default function UnfreezeNavigator() {
               })}
             />
           ),
+          headerLeft: null,
+          headerRight: null,
+          gestureEnabled: false,
         }}
       />
       <Stack.Screen

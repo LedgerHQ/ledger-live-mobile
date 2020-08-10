@@ -19,6 +19,8 @@ import {
   renderError,
   renderBootloaderStep,
 } from "./rendering";
+import PreventNativeBack from "../PreventNativeBack";
+import SkipLock from "../behaviour/SkipLock";
 
 type Props<R, H, P> = {
   onResult: (paylaod: P) => Promise<void> | void | React$Node,
@@ -140,13 +142,17 @@ export default function DeviceAction<R, H, P>({
         gestureEnabled: false,
       });
       return (
-        <ValidateOnDevice
-          {...device}
-          account={account}
-          parentAccount={parentAccount}
-          transaction={transaction}
-          status={status}
-        />
+        <>
+          <PreventNativeBack />
+          <SkipLock />
+          <ValidateOnDevice
+            {...device}
+            account={account}
+            parentAccount={parentAccount}
+            transaction={transaction}
+            status={status}
+          />
+        </>
       );
     }
   }

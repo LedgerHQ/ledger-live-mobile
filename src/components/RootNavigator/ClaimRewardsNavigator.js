@@ -46,6 +46,9 @@ export default function ClaimRewardsNavigator() {
               })}
             />
           ),
+          headerLeft: null,
+          headerRight: null,
+          gestureEnabled: false,
         }}
       />
       <Stack.Screen
