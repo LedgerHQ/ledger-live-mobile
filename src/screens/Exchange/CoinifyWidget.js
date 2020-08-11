@@ -91,6 +91,7 @@ export default function CoinifyWidget({
 }: Props) {
   const [isWaitingDeviceJob, setWaitingDeviceJob] = useState(false);
   const [firstLoadDone, setFirstLoadDone] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const webView = useRef(null);
 
   const mainAccount = account ? getMainAccount(account, parentAccount) : null;
@@ -150,6 +151,7 @@ export default function CoinifyWidget({
         track("Coinify Confirm Buy Start", {
           currencyName: getAccountCurrency(account).name,
         });
+        setIsOpen(true)
         setWaitingDeviceJob(true);
       } else {
         // TODO this is a problem, it should not occur.
@@ -186,11 +188,12 @@ export default function CoinifyWidget({
   );
 
   const onResult = useCallback(() => {
-    setWaitingDeviceJob(true);
+    setWaitingDeviceJob(false);
   }, []);
 
   const onVerify = useCallback(
     confirmed => {
+      setIsOpen(false);
       if (confirmed) {
         settleTrade("rejected");
         setWaitingDeviceJob(false);
@@ -240,7 +243,7 @@ export default function CoinifyWidget({
         scrollEnabled={true}
         style={styles.webview}
       />
-      <BottomModal id="DeviceActionModal" isOpened={false}>
+      <BottomModal id="DeviceActionModal" isOpened={isOpen}>
         <View style={styles.modalContainer}>
           {isWaitingDeviceJob ? (
             <DeviceAction
