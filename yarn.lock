@@ -9351,10 +9351,10 @@ react-native-tab-view@^2.11.0, react-native-tab-view@^2.13.0:
   resolved "https://registry.yarnpkg.com/react-native-tab-view/-/react-native-tab-view-2.14.0.tgz#dd801f82fdb8e92fce9688b78d13923f3a5a2b3f"
   integrity sha512-Z7XAM3NsMB96c17e9EAveunk7SUgilXWwVUTmWI1u/+p2SeOMUOB87z+//UXrcVlD1e9BPweR73q7dq7krTzTg==
 
-react-native-tcp@^3.3.2:
-  version "3.3.2"
-  resolved "https://registry.yarnpkg.com/react-native-tcp/-/react-native-tcp-3.3.2.tgz#b38c153039acac89294caa4991689c003ec62dce"
-  integrity sha512-zjFmjAvYOsBkR1MF7htuPlk+uOzTykKaeu/eN+I7fkZ7UqBCW+9u/gJgWCv6Tjfn2tGgku6hsEWril4Oy3zJhg==
+react-native-tcp@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/react-native-tcp/-/react-native-tcp-4.0.0.tgz#142f519798cc41cc3bb39ad45e2970a8643ef461"
+  integrity sha512-68lSq2qns6P33yH7vYuiU5rV7xEiNuA2GYIStFlMvF/uEKDHL53MDgQLC2alKEU9JAHfmB8uUmcu3QQSGkaoig==
   dependencies:
     base64-js "0.0.8"
     buffer "^5.0.0"
@@ -9363,10 +9363,10 @@ react-native-tcp@^3.3.2:
     process "^0.11.9"
     util "^0.10.3"
 
-react-native-udp@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/react-native-udp/-/react-native-udp-3.0.0.tgz#73ed5d67f413176ada37c193639dc3d7578ba720"
-  integrity sha512-RcG1W762W+1LhvlMPEyef0OoMdhuzf5fTJC9iMMBaaHw+zqS+vX7XWe6f0vP75ZovOGBMD74r7Mcd5RT1/M4Kw==
+react-native-udp@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/react-native-udp/-/react-native-udp-3.1.0.tgz#d2cc0aa6dbc431868e74bc7c60130c93c8568002"
+  integrity sha512-+eOygl5tOav/LYY2ok2jy6K7gOaB38IhjYetKAUy/lB7aOcZkx1pBsqW98Gc8Z+mPjXZSbgABB0nKPPN9CQueQ==
   dependencies:
     base64-js "0.0.8"
     events "^1.0.2"
