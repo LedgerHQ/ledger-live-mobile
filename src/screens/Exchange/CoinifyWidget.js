@@ -151,7 +151,7 @@ export default function CoinifyWidget({
         track("Coinify Confirm Buy Start", {
           currencyName: getAccountCurrency(account).name,
         });
-        setIsOpen(true)
+        setIsOpen(true);
         setWaitingDeviceJob(true);
       } else {
         // TODO this is a problem, it should not occur.
@@ -194,12 +194,7 @@ export default function CoinifyWidget({
   const onVerify = useCallback(
     confirmed => {
       setIsOpen(false);
-      if (confirmed) {
-        settleTrade("rejected");
-        setWaitingDeviceJob(false);
-        return;
-      }
-      settleTrade("accepted");
+      settleTrade(confirmed ? "accepted" : "rejected");
       setWaitingDeviceJob(false);
     },
     [settleTrade],
