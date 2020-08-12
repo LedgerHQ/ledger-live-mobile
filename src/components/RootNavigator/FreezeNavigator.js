@@ -73,9 +73,6 @@ export default function FreezeNavigator() {
               })}
             />
           ),
-          headerLeft: null,
-          headerRight: null,
-          gestureEnabled: false,
         }}
       />
       <Stack.Screen

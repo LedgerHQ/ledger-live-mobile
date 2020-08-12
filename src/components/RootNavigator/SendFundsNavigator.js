@@ -108,9 +108,6 @@ export default function SendFundsNavigator() {
               })}
             />
           ),
-          headerLeft: null,
-          headerRight: null,
-          gestureEnabled: false,
         }}
       />
       <Stack.Screen

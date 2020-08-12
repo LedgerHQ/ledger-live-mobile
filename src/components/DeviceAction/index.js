@@ -177,6 +177,7 @@ export default function DeviceAction<R, H, P>({
 
   if (onResult) {
     const result = onResult(payload);
+    // $FlowFixMe
     if (result?.then || typeof result === "undefined") {
       return null;
     }
