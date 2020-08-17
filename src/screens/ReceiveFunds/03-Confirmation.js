@@ -1,8 +1,8 @@
 // @flow
 
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { from, of } from "rxjs";
-import { delay } from "rxjs/operators";
+import { of } from "rxjs";
+import { delay, retryWhen } from "rxjs/operators";
 import { View, StyleSheet, Linking, Platform } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { useSelector } from "react-redux";
@@ -15,9 +15,12 @@ import {
   getAccountCurrency,
   getAccountName,
 } from "@ledgerhq/live-common/lib/account";
-import getAddress from "@ledgerhq/live-common/lib/hw/getAddress";
-import { withDevice } from "@ledgerhq/live-common/lib/hw/deviceAccess";
+import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import type { DeviceModelId } from "@ledgerhq/devices";
+import {
+  retryWhileErrors,
+  genericCanRetryOnError,
+} from "@ledgerhq/live-common/lib/hw/deviceAccess";
 import getWindowDimensions from "../../logic/getWindowDimensions";
 import { accountScreenSelector } from "../../reducers/accounts";
 import colors from "../../colors";
@@ -79,18 +82,18 @@ export default function ReceiveConfirmation({ navigation, route }: Props) {
       if (!account) return;
       const mainAccount = getMainAccount(account, parentAccount);
 
-      sub.current = withDevice(deviceId)(transport =>
-        mainAccount.id.startsWith("mock")
-          ? // $FlowFixMe
-            of({}).pipe(delay(1000), rejectionOp())
-          : from(
-              getAddress(transport, {
-                derivationMode: mainAccount.derivationMode,
-                currency: mainAccount.currency,
-                path: mainAccount.freshAddressPath,
-                verify: true,
-              }),
-            ),
+      sub.current = (mainAccount.id.startsWith("mock")
+        ? // $FlowFixMe
+          of({}).pipe(delay(1000), rejectionOp())
+        : getAccountBridge(mainAccount)
+            .receive(mainAccount, {
+              deviceId,
+              verify: true,
+            })
+            .pipe(
+              // $FlowFixMe
+              retryWhen(retryWhileErrors(genericCanRetryOnError)),
+            )
       ).subscribe({
         complete: () => {
           setVerified(true);
