@@ -14,7 +14,6 @@ import Button from "../Button";
 import { NavigatorName } from "../../const";
 import Animation from "../Animation";
 import getDeviceAnimation from "./getDeviceAnimation";
-import TranslatedError from "../TranslatedError";
 import GenericErrorView from "../GenericErrorView";
 import Circle from "../Circle";
 
