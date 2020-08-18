@@ -96,7 +96,9 @@ function DelegationFlow() {
         name={ScreenName.DelegationValidationSuccess}
         component={DelegationValidationSuccess}
         options={{
-          headerShown: false,
+          headerLeft: null,
+          headerRight: null,
+          headerTitle: null,
           gestureEnabled: false,
         }}
       />
