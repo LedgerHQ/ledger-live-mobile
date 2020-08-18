@@ -206,7 +206,7 @@ export function renderError({
 }) {
   return (
     <View style={styles.wrapper}>
-      <GenericErrorView error={error} />
+      <GenericErrorView error={error} withDescription />
       {onRetry && (
         <View style={styles.actionContainer}>
           <Button
