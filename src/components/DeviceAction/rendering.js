@@ -15,6 +15,7 @@ import { NavigatorName } from "../../const";
 import Animation from "../Animation";
 import getDeviceAnimation from "./getDeviceAnimation";
 import TranslatedError from "../TranslatedError";
+import GenericErrorView from "../GenericErrorView";
 import Circle from "../Circle";
 
 type RawProps = {
@@ -205,17 +206,7 @@ export function renderError({
 }) {
   return (
     <View style={styles.wrapper}>
-      <View style={styles.iconContainer}>
-        <Circle size={60} bg={lighten(colors.alert, 0.75)}>
-          <Icon size={28} name="alert-triangle" color={colors.alert} />
-        </Circle>
-      </View>
-      <LText style={[styles.text, styles.title]} bold>
-        <TranslatedError error={error} field="title" />
-      </LText>
-      <LText style={[styles.text, styles.description]} bold>
-        <TranslatedError error={error} field="description" />
-      </LText>
+      <GenericErrorView error={error} />
       {onRetry && (
         <View style={styles.actionContainer}>
           <Button

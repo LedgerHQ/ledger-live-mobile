@@ -56,7 +56,8 @@ export default function DeviceAction<R, H, P>({
     deviceStreamingProgress,
     displayUpgradeWarning,
     passWarning,
-  } = status;
+    // TODO: fix flow type
+  } = (status: any);
 
   if (displayUpgradeWarning && appAndVersion) {
     return renderWarningOutdated({
@@ -96,6 +97,7 @@ export default function DeviceAction<R, H, P>({
       navigation,
       device: selectedDevice,
       wording,
+      // $FlowFixMe
       tokenContext: request?.tokenCurrency,
       isDeviceBlocker: !requestOpenApp,
     });
@@ -134,6 +136,7 @@ export default function DeviceAction<R, H, P>({
   }
 
   if (request && device && deviceSignatureRequested) {
+    // $FlowFixMe
     const { account, parentAccount, status, transaction } = request;
     if (account && status && transaction) {
       navigation.setOptions({
@@ -181,6 +184,7 @@ export default function DeviceAction<R, H, P>({
     if (result?.then || typeof result === "undefined") {
       return null;
     }
+    // $FlowFixMe
     return result;
   }
 
