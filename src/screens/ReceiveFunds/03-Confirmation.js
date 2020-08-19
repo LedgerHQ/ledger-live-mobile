@@ -2,7 +2,7 @@
 
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { of } from "rxjs";
-import { delay, retryWhen } from "rxjs/operators";
+import { delay } from "rxjs/operators";
 import { View, StyleSheet, Linking, Platform } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { useSelector } from "react-redux";
@@ -17,10 +17,6 @@ import {
 } from "@ledgerhq/live-common/lib/account";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import type { DeviceModelId } from "@ledgerhq/devices";
-import {
-  retryWhileErrors,
-  genericCanRetryOnError,
-} from "@ledgerhq/live-common/lib/hw/deviceAccess";
 import getWindowDimensions from "../../logic/getWindowDimensions";
 import { accountScreenSelector } from "../../reducers/accounts";
 import colors from "../../colors";
