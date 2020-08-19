@@ -85,15 +85,10 @@ export default function ReceiveConfirmation({ navigation, route }: Props) {
       sub.current = (mainAccount.id.startsWith("mock")
         ? // $FlowFixMe
           of({}).pipe(delay(1000), rejectionOp())
-        : getAccountBridge(mainAccount)
-            .receive(mainAccount, {
-              deviceId,
-              verify: true,
-            })
-            .pipe(
-              // $FlowFixMe
-              retryWhen(retryWhileErrors(genericCanRetryOnError)),
-            )
+        : getAccountBridge(mainAccount).receive(mainAccount, {
+            deviceId,
+            verify: true,
+          })
       ).subscribe({
         complete: () => {
           setVerified(true);
