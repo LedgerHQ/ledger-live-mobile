@@ -1,8 +1,8 @@
 // @flow
 
-import React, { useCallback, useEffect, useState } from "react";
-import { from, of } from "rxjs";
-import { delay, first } from "rxjs/operators";
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import { of } from "rxjs";
+import { delay } from "rxjs/operators";
 import { View, StyleSheet, Linking, Platform } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { useSelector } from "react-redux";
@@ -15,11 +15,9 @@ import {
   getAccountCurrency,
   getAccountName,
 } from "@ledgerhq/live-common/lib/account";
-import getAddress from "@ledgerhq/live-common/lib/hw/getAddress";
-import { withDevice } from "@ledgerhq/live-common/lib/hw/deviceAccess";
+import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import type { DeviceModelId } from "@ledgerhq/devices";
 import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
-import { WrongDeviceForAccount } from "@ledgerhq/errors";
 import getWindowDimensions from "../../logic/getWindowDimensions";
 import { accountScreenSelector } from "../../reducers/accounts";
 import colors from "../../colors";
@@ -73,46 +71,34 @@ export default function ReceiveConfirmation({ navigation, route }: Props) {
   const [error, setError] = useState(null);
   const [zoom, setZoom] = useState(false);
   const [allowNavigation, setAllowNavigation] = useState(true);
+  const sub = useRef();
 
   const verifyOnDevice = useCallback(
     async (device: Device): Promise<void> => {
       if (!account) return;
       const mainAccount = getMainAccount(account, parentAccount);
 
-      try {
-        const { address } = await withDevice(device.deviceId)(transport =>
-          mainAccount.id.startsWith("mock")
-            ? // $FlowFixMe
-              of({}).pipe(delay(1000), rejectionOp())
-            : from(
-                getAddress(transport, {
-                  derivationMode: mainAccount.derivationMode,
-                  currency: mainAccount.currency,
-                  path: mainAccount.freshAddressPath,
-                  verify: true,
-                }),
-              ),
-        )
-          .pipe(first())
-          .toPromise();
-        if (address !== mainAccount.freshAddress) {
-          throw new WrongDeviceForAccount(
-            `WrongDeviceForAccount ${mainAccount.name}`,
-            {
-              accountName: mainAccount.name,
-            },
-          );
-        }
-        setVerified(true);
-        setAllowNavigation(true);
-      } catch (error) {
-        if (error && error.name !== "UserRefusedAddress") {
-          logger.critical(error);
-        }
-        setError(error);
-        setIsModalOpened(true);
-        setAllowNavigation(true);
-      }
+      sub.current = (mainAccount.id.startsWith("mock")
+        ? // $FlowFixMe
+          of({}).pipe(delay(1000), rejectionOp())
+        : getAccountBridge(mainAccount).receive(mainAccount, {
+            deviceId: device.deviceId,
+            verify: true,
+          })
+      ).subscribe({
+        complete: () => {
+          setVerified(true);
+          setAllowNavigation(true);
+        },
+        error: error => {
+          if (error && error.name !== "UserRefusedAddress") {
+            logger.critical(error);
+          }
+          setError(error);
+          setIsModalOpened(true);
+          setAllowNavigation(true);
+        },
+      });
     },
     [account, parentAccount],
   );
@@ -156,9 +142,9 @@ export default function ReceiveConfirmation({ navigation, route }: Props) {
       return;
     }
 
-    const { headerLeft, headerRight } = closableStackNavigatorConfig;
+    const { headerRight } = closableStackNavigatorConfig;
     navigation.setOptions({
-      headerLeft,
+      headerLeft: null,
       headerRight,
       gestureEnabled: Platform.OS === "ios",
     });
