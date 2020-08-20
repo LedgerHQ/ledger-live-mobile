@@ -9,11 +9,13 @@ export default ({
   account,
   parentAccount,
   navigation,
+  status,
 }: {
   transaction: any,
   account: AccountLike,
   parentAccount: ?Account,
   navigation: any,
+  status: TransactionStatus,
 }) => {
   const mainAccount = getMainAccount(account, parentAccount);
   const C = perFamily[mainAccount.currency.family];
@@ -23,6 +25,7 @@ export default ({
       account={account}
       parentAccount={parentAccount}
       navigation={navigation}
+      status={status}
     />
   ) : null;
 };

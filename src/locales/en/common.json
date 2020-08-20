@@ -334,7 +334,7 @@
       "description": "Make sure the account to debit has sufficient balance"
     },
     "NotEnoughGas": {
-      "title": "Insufficient ETH for network fee",
+      "title": "The ETH balance in the parent account is insufficient for network fees",
       "description": "Please send some ETH to your account to pay for ERC20 token transactions."
     },
     "NotEnoughBalanceToDelegate": {

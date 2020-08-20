@@ -105,7 +105,7 @@ export default function SendSummary({ navigation, route }: Props) {
   const {
     amount,
     totalSpent,
-    errors: { transaction: transactionError },
+    errors: { transaction: transactionError, gasPrice: feeError },
   } = status;
   const mainAccount = getMainAccount(account, parentAccount);
 
@@ -139,6 +139,7 @@ export default function SendSummary({ navigation, route }: Props) {
           parentAccount={parentAccount}
           transaction={transaction}
           navigation={navigation}
+          status={status}
         />
         {!amount.eq(totalSpent) ? (
           <>
@@ -161,7 +162,7 @@ export default function SendSummary({ navigation, route }: Props) {
           title={<Trans i18nKey="common.continue" />}
           containerStyle={styles.continueButton}
           onPress={onContinue}
-          disabled={bridgePending || !!transactionError}
+          disabled={bridgePending || !!transactionError || !!feeError}
         />
       </View>
       <ConfirmationModal

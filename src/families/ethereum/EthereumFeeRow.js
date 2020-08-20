@@ -2,7 +2,11 @@
 import React, { useCallback, useState } from "react";
 import { View, StyleSheet, Linking } from "react-native";
 import { Trans, useTranslation } from "react-i18next";
-import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
+import type {
+  Account,
+  AccountLike,
+  TransactionStatus,
+} from "@ledgerhq/live-common/lib/types";
 import type { Transaction } from "@ledgerhq/live-common/lib/families/ethereum/types";
 import { getMainAccount } from "@ledgerhq/live-common/lib/account";
 import SummaryRow from "../../screens/SendFunds/SummaryRow";
@@ -17,12 +21,14 @@ import colors from "../../colors";
 import { ScreenName } from "../../const";
 import BottomModal from "../../components/BottomModal";
 import TokenNetworkFeeInfo from "./TokenNetworkFeeInfo";
+import TranslatedError from "../../components/TranslatedError";
 
 type Props = {
   account: AccountLike,
   parentAccount: ?Account,
   transaction: Transaction,
   navigation: any,
+  status: TransactionStatus,
 };
 
 export default function EthereumFeeRow({
@@ -30,6 +36,7 @@ export default function EthereumFeeRow({
   parentAccount,
   transaction,
   navigation,
+  status,
 }: Props) {
   const { t } = useTranslation();
   const [isNetworkFeeHelpOpened, setNetworkFeeHelpOpened] = useState(false);
@@ -119,6 +126,11 @@ export default function EthereumFeeRow({
         parentAccount={parentAccount}
         transaction={transaction}
       />
+      {status.errors.gasPrice ? (
+        <LText style={styles.error}>
+          <TranslatedError error={status.errors.gasPrice} />
+        </LText>
+      ) : null}
     </>
   );
 }
@@ -127,6 +139,11 @@ const styles = StyleSheet.create({
   accountContainer: {
     flex: 1,
     flexDirection: "row",
+  },
+  error: {
+    color: colors.alert,
+    fontSize: 12,
+    marginBottom: 5,
   },
   summaryRowText: {
     fontSize: 16,
