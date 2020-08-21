@@ -184,7 +184,7 @@ export function useSignedTxHandler({
 }) {
   const navigation = useNavigation();
   const route = useRoute();
-  const broadcast = useBroadcast(txArgs);
+  const broadcast = useBroadcast({ ...txArgs, account, parentAccount });
   const dispatch = useDispatch();
   const mainAccount = getMainAccount(account, parentAccount);
 
