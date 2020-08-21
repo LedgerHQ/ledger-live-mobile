@@ -104,7 +104,7 @@
       "title": "Oops, no device found",
       "description": "Please make sure your {{productName}} is unlocked with Bluetooth enabled"
     },
-    "CosmosClaimRewardsFeesWarning": {
+    "ClaimRewardsFeesWarning": {
       "title": "The amount of rewards are lower than the estimated fees required to claim them",
       "description": ""
     },
