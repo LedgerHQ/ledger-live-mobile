@@ -177,14 +177,13 @@ function useBroadcast({ account, parentAccount }: SignTransactionArgs) {
 export function useSignedTxHandler({
   account,
   parentAccount,
-  ...txArgs
 }: SignTransactionArgs & {
   account: AccountLike,
   parentAccount: ?Account,
 }) {
   const navigation = useNavigation();
   const route = useRoute();
-  const broadcast = useBroadcast({ ...txArgs, account, parentAccount });
+  const broadcast = useBroadcast({ account, parentAccount });
   const dispatch = useDispatch();
   const mainAccount = getMainAccount(account, parentAccount);
 
