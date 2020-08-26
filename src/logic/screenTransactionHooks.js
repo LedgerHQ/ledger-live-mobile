@@ -161,8 +161,7 @@ function useBroadcast({ account, parentAccount }: SignTransactionArgs) {
         return Promise.resolve(signedOperation.operation);
       }
 
-      return execAndWaitAtLeast(
-        3000,
+      return execAndWaitAtLeast(3000, () =>
         bridge.broadcast({
           account: mainAccount,
           signedOperation,
@@ -190,7 +189,6 @@ export function useSignedTxHandler({
 
   return useCallback(
     // TODO: fix type error
-    // $FlowFixMe
     async ({ signedOperation, transactionSignError }) => {
       try {
         if (transactionSignError) {
