@@ -57,9 +57,9 @@ export default function ConnectDevice({ route }: Props) {
   });
 
   const onResult = useCallback(
-    payload => {
+    async payload => {
       setIsInteracting(false);
-      handleTx(payload);
+      await handleTx(payload);
     },
     [handleTx],
   );
