@@ -1,6 +1,6 @@
 // @flow
 import invariant from "invariant";
-import React from "react";
+import React, { useState, useCallback } from "react";
 import { StyleSheet } from "react-native";
 import { useSelector } from "react-redux";
 import SafeAreaView from "react-native-safe-area-view";
@@ -41,6 +41,7 @@ export default function ConnectDevice({ route }: Props) {
   );
   invariant(accountLike, "account is required");
   const account = getMainAccount(accountLike, parentAccount);
+  const [isInteracting, setIsInteracting] = useState(true);
 
   const { transaction, status } = useBridgeTransaction(() => ({
     account,
@@ -50,10 +51,18 @@ export default function ConnectDevice({ route }: Props) {
   const tokenCurrency =
     account.type === "TokenAccount" ? account.token : undefined;
 
-  const onResult = useSignedTxHandler({
+  const handleTx = useSignedTxHandler({
     account,
     parentAccount,
   });
+
+  const onResult = useCallback(
+    payload => {
+      setIsInteracting(false);
+      handleTx(payload);
+    },
+    [handleTx],
+  );
 
   if (!transaction) {
     return null;
@@ -65,18 +74,20 @@ export default function ConnectDevice({ route }: Props) {
         category={route.name.replace("ConnectDevice", "")}
         name="ConnectDevice"
       />
-      <DeviceAction
-        action={action}
-        request={{
-          account,
-          parentAccount,
-          transaction,
-          status,
-          tokenCurrency,
-        }}
-        device={route.params.device}
-        onResult={onResult}
-      />
+      {isInteracting && (
+        <DeviceAction
+          action={action}
+          request={{
+            account,
+            parentAccount,
+            transaction,
+            status,
+            tokenCurrency,
+          }}
+          device={route.params.device}
+          onResult={onResult}
+        />
+      )}
     </SafeAreaView>
   );
 }
