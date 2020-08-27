@@ -15,6 +15,7 @@ import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTran
 import { NotEnoughBalance } from "@ledgerhq/errors";
 import { getExchangeRates } from "@ledgerhq/live-common/lib/swap";
 import type { SwapRouteParams } from ".";
+import KeyboardView from "../../../components/KeyboardView";
 import LText from "../../../components/LText";
 import SectionSeparator from "../../../components/SectionSeparator";
 import CurrencyInput from "../../../components/CurrencyInput";
@@ -133,7 +134,7 @@ const SwapFormAmount = ({ navigation, route }: Props) => {
   }, [useAllAmount, setUseAllAmount, onAmountChange, maxSpendable]);
 
   return (
-    <View style={styles.container}>
+    <KeyboardView style={styles.container}>
       <View style={styles.wrapper}>
         <CurrencyInput
           editable={!useAllAmount}
@@ -208,7 +209,7 @@ const SwapFormAmount = ({ navigation, route }: Props) => {
           />
         </View>
       </View>
-    </View>
+    </KeyboardView>
   );
 };
 
@@ -258,6 +259,7 @@ const styles = StyleSheet.create({
     alignSelf: "stretch",
     alignItems: "flex-end",
     justifyContent: "flex-end",
+    paddingBottom: 16,
   },
   continueWrapper: {
     alignSelf: "stretch",

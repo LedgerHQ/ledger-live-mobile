@@ -5,6 +5,7 @@ import { StyleSheet, View, ActivityIndicator } from "react-native";
 import { getProviders } from "@ledgerhq/live-common/lib/swap";
 import type { AvailableProvider } from "@ledgerhq/live-common/lib/swap/types";
 import { useSelector } from "react-redux";
+import SafeAreaView from "react-native-safe-area-view";
 import { hasAcceptedSwapKYCSelector } from "../../reducers/settings";
 import MissingSwapApp from "./MissingSwapApp";
 import Landing from "./Landing";
@@ -37,7 +38,7 @@ const Swap = () => {
     !deviceMeta?.appRes?.installed.some(a => a.name === "Exchange");
 
   return (
-    <View style={styles.root}>
+    <SafeAreaView style={styles.root}>
       {!providers ? (
         <View style={styles.loading}>
           <ActivityIndicator />
@@ -53,7 +54,7 @@ const Swap = () => {
       ) : deviceMeta ? (
         <Form deviceMeta={deviceMeta} providers={providers} />
       ) : null}
-    </View>
+    </SafeAreaView>
   );
 };
 const styles = StyleSheet.create({
