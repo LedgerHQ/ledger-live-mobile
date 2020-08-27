@@ -45,7 +45,7 @@ import { RenderStep } from "./StepRenders";
 import DisplayAddress from "../DisplayAddress";
 
 const inferWordingValues = meta => {
-  const deviceModel = getDeviceModel(meta.modelId);
+  const deviceModel = meta.modelId ? getDeviceModel(meta.modelId) : {};
   return {
     productName: deviceModel.productName,
     deviceName: meta.deviceName,
