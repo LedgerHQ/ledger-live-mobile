@@ -437,6 +437,7 @@ export const verifyAddressOnDeviceStep: Account => Step = account => ({
     getAccountBridge(account)
       .receive(account, {
         deviceId: meta.deviceId,
+        verify: true,
       })
       .pipe(
         map(addressInfo => addressInfo),
