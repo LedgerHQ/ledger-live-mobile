@@ -4,6 +4,7 @@ import React, { useCallback, useMemo } from "react";
 import { StyleSheet } from "react-native";
 import { useSelector } from "react-redux";
 import SafeAreaView from "react-native-safe-area-view";
+import { useTranslation } from "react-i18next";
 import { getMainAccount } from "@ledgerhq/live-common/lib/account";
 import type {
   Transaction,
@@ -15,6 +16,7 @@ import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
 import { accountScreenSelector } from "../reducers/accounts";
 import DeviceAction from "../components/DeviceAction";
+import { renderLoading } from "../components/DeviceAction/rendering";
 import { useSignedTxHandler } from "../logic/screenTransactionHooks";
 import { TrackScreen } from "../analytics";
 
@@ -36,6 +38,7 @@ type RouteParams = {
 };
 
 export default function ConnectDevice({ route }: Props) {
+  const { t } = useTranslation();
   const { account: accountLike, parentAccount } = useSelector(
     accountScreenSelector(route),
   );
@@ -56,8 +59,9 @@ export default function ConnectDevice({ route }: Props) {
   });
 
   const onResult = useCallback(
-    async payload => {
-      await handleTx(payload);
+    payload => {
+      handleTx(payload);
+      return renderLoading({ t });
     },
     [handleTx],
   );
