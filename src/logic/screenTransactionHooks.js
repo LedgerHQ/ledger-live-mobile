@@ -189,6 +189,7 @@ export function useSignedTxHandler({
 
   return useCallback(
     // TODO: fix type error
+    // $FlowFixMe
     async ({ signedOperation, transactionSignError }) => {
       try {
         if (transactionSignError) {

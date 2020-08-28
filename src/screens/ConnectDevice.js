@@ -1,6 +1,6 @@
 // @flow
 import invariant from "invariant";
-import React, { useState, useCallback } from "react";
+import React, { useCallback, useMemo } from "react";
 import { StyleSheet } from "react-native";
 import { useSelector } from "react-redux";
 import SafeAreaView from "react-native-safe-area-view";
@@ -41,7 +41,6 @@ export default function ConnectDevice({ route }: Props) {
   );
   invariant(accountLike, "account is required");
   const account = getMainAccount(accountLike, parentAccount);
-  const [isInteracting, setIsInteracting] = useState(true);
 
   const { transaction, status } = useBridgeTransaction(() => ({
     account,
@@ -58,37 +57,36 @@ export default function ConnectDevice({ route }: Props) {
 
   const onResult = useCallback(
     async payload => {
-      setIsInteracting(false);
       await handleTx(payload);
     },
     [handleTx],
   );
 
-  if (!transaction) {
-    return null;
-  }
-
-  return (
-    <SafeAreaView style={styles.root}>
-      <TrackScreen
-        category={route.name.replace("ConnectDevice", "")}
-        name="ConnectDevice"
-      />
-      {isInteracting && (
-        <DeviceAction
-          action={action}
-          request={{
-            account,
-            parentAccount,
-            transaction,
-            status,
-            tokenCurrency,
-          }}
-          device={route.params.device}
-          onResult={onResult}
-        />
-      )}
-    </SafeAreaView>
+  return useMemo(
+    () =>
+      transaction ? (
+        <SafeAreaView style={styles.root}>
+          <TrackScreen
+            category={route.name.replace("ConnectDevice", "")}
+            name="ConnectDevice"
+          />
+          <DeviceAction
+            action={action}
+            request={{
+              account,
+              parentAccount,
+              transaction,
+              status,
+              tokenCurrency,
+            }}
+            device={route.params.device}
+            onResult={onResult}
+          />
+        </SafeAreaView>
+      ) : null,
+    // prevent rerendering caused by optimistic update (i.e. exclude account related deps)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [status, transaction, tokenCurrency],
   );
 }
 
