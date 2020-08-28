@@ -56,32 +56,32 @@ export default function SendSummary({ navigation, route }: Props) {
 
   const [highFeesOpen, setHighFeesOpen] = useState(false);
 
-  const onAcceptFees = useCallback(async () => {
-    navigation.navigate(ScreenName.SendConnectDevice, {
-      ...route.params,
-      transaction,
-      status,
-    });
-
-    setHighFeesOpen(false);
-  }, [setHighFeesOpen, status, navigation, transaction, route.params]);
-
-  const onRejectFees = useCallback(() => {
-    setHighFeesOpen(false);
-  }, [setHighFeesOpen]);
-
-  const onContinue = useCallback(async () => {
-    const { warnings } = status;
-    if (Object.keys(warnings).includes("feeTooHigh")) {
-      setHighFeesOpen(true);
-      return;
-    }
+  const navigateToNext = useCallback(() => {
     navigation.navigate(ScreenName.SendSelectDevice, {
       ...route.params,
       transaction,
       status,
     });
-  }, [setHighFeesOpen, status, navigation, transaction, route.params]);
+  }, [navigation, route, transaction, status]);
+
+  const onAcceptFees = useCallback(() => {
+    navigateToNext();
+
+    setHighFeesOpen(false);
+  }, [navigateToNext, setHighFeesOpen]);
+
+  const onRejectFees = useCallback(() => {
+    setHighFeesOpen(false);
+  }, [setHighFeesOpen]);
+
+  const onContinue = useCallback(() => {
+    const { warnings } = status;
+    if (Object.keys(warnings).includes("feeTooHigh")) {
+      setHighFeesOpen(true);
+      return;
+    }
+    navigateToNext();
+  }, [navigateToNext, setHighFeesOpen, status]);
 
   if (!account || !transaction || !transaction.recipient) return null; // FIXME why is recipient sometimes empty?
 

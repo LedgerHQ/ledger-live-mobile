@@ -86,7 +86,7 @@ export default function ConnectDevice({ route }: Props) {
       ) : null,
     // prevent rerendering caused by optimistic update (i.e. exclude account related deps)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [status, transaction, tokenCurrency],
+    [status, transaction, tokenCurrency, route, onResult],
   );
 }
 
