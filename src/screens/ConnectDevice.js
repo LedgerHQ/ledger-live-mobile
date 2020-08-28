@@ -63,7 +63,7 @@ export default function ConnectDevice({ route }: Props) {
       handleTx(payload);
       return renderLoading({ t });
     },
-    [handleTx],
+    [handleTx, t],
   );
 
   return useMemo(
