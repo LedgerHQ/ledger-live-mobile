@@ -88,7 +88,7 @@ export function renderVerifyAddress({
       <LText style={[styles.text, styles.title]} semiBold>
         {t("DeviceAction.verifyAddress.title")}
       </LText>
-      <LText style={[styles.text, styles.description]} semiBold>
+      <LText style={[styles.text, styles.description]}>
         {t("DeviceAction.verifyAddress.description", { currencyName })}
       </LText>
       <View style={styles.actionContainer}>
@@ -130,7 +130,7 @@ export function renderAllowManager({
           source={getDeviceAnimation({ device, key: "allowManager" })}
         />
       </View>
-      <LText style={[styles.text, styles.description]} semiBold>
+      <LText style={styles.text} semiBold>
         {t("DeviceAction.allowManagerPermission", { wording })}
       </LText>
     </View>
@@ -265,7 +265,7 @@ export function renderLoading({
           <LiveLogo size={32} color={colors.grey} />
         </Spinning>
       </View>
-      <LText style={styles.text}>
+      <LText semiBold style={styles.text}>
         {description ?? t("DeviceAction.loading")}
       </LText>
     </View>
