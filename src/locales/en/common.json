@@ -1246,7 +1246,7 @@
       "kyc": {
         "disclaimer": "By continuing, you accept that your location data will be shared with third party service providers in order for them to comply with their AML/KYC procedures"
       },
-      "notAvailable":{
+      "notAvailable": {
         "title": "Swap feature is not available in your country"
       },
       "form": {
@@ -1263,17 +1263,17 @@
           "available": "Total available"
         },
         "noApp": {
-          "title":"App not installed on device",
-          "desc":"You need the app to be installed on your device to be able to swap it. Go to manager to install the app",
-          "cta":"Go to Manager",
-          "close":"Close"
+          "title": "App not installed on device",
+          "desc": "You need the app to be installed on your device to be able to swap it. Go to manager to install the app",
+          "cta": "Go to Manager",
+          "close": "Close"
         },
         "noAccounts": {
-          "title":"No {{ticker}} account",
-          "desc":"You don’t have any {{currencyName}} account. You need an origin account to be able to swap funds",
-          "cta":"Close"
+          "title": "No {{ticker}} account",
+          "desc": "You don’t have any {{currencyName}} account. You need an origin account to be able to swap funds",
+          "cta": "Close"
         },
-        "summary":{
+        "summary": {
           "from": "From",
           "to": "To",
           "send": "Send",
@@ -1292,14 +1292,14 @@
           }
         }
       },
-        "operationDetails": {
-          "swapId": "Swap ID",
-          "provider": "Provider",
-          "date": "Date",
-          "from": "From",
-          "fromAmount": "Initial amount",
-          "to": "To",
-          "toAmount": "Credited amount"
+      "operationDetails": {
+        "swapId": "Swap ID",
+        "provider": "Provider",
+        "date": "Date",
+        "from": "From",
+        "fromAmount": "Initial amount",
+        "to": "To",
+        "toAmount": "Credited amount"
       },
       "missingAppPlaceholder": {
         "title": "Please install the Exchange app on your device",
@@ -1308,6 +1308,8 @@
       },
       "history": {
         "tab": "History",
+        "exportButton": "Export operations",
+        "exportFilename": "Swap operations",
         "empty": {
           "title": "No history",
           "desc": "You don’t have any history swap"
