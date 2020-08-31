@@ -196,7 +196,7 @@ export function useSignedTxHandler({
           throw transactionSignError;
         }
 
-        await broadcast(signedOperation);
+        const operation = await broadcast(signedOperation);
         navigation.replace(
           route.name.replace("ConnectDevice", "ValidationSuccess"),
           {
@@ -204,9 +204,9 @@ export function useSignedTxHandler({
           },
         );
         dispatch(
-          updateAccountWithUpdater(mainAccount.id, account =>
-            addPendingOperation(account, signedOperation.operation),
-          ),
+          updateAccountWithUpdater(mainAccount.id, account => {
+            return addPendingOperation(account, operation);
+          }),
         );
       } catch (error) {
         if (
