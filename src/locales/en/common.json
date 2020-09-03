@@ -449,7 +449,7 @@
     },
     "UserRefusedAddress": {
       "title": "Receive address rejected",
-      "description": "Please try again or contact Ledger Support when in doubt"
+      "description": "Please try again"
     },
     "UserRefusedDeviceNameChange": {
       "title": "Rename canceled on device",

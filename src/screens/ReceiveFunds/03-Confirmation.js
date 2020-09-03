@@ -27,11 +27,9 @@ import LText from "../../components/LText/index";
 import DisplayAddress from "../../components/DisplayAddress";
 import VerifyAddressDisclaimer from "../../components/VerifyAddressDisclaimer";
 import BottomModal from "../../components/BottomModal";
-import DeviceNanoAction from "../../components/DeviceNanoAction";
 import Close from "../../icons/Close";
 import QRcodeZoom from "../../icons/QRcodeZoom";
 import Touchable from "../../components/Touchable";
-import TranslatedError from "../../components/TranslatedError";
 import Button from "../../components/Button";
 import CurrencyIcon from "../../components/CurrencyIcon";
 import CopyLink from "../../components/CopyLink";
@@ -43,6 +41,7 @@ import SkipLock from "../../components/behaviour/SkipLock";
 import logger from "../../logger";
 import { rejectionOp } from "../../components/DebugRejectSwitch";
 import { closableStackNavigatorConfig } from "../../navigation/navigatorConfig";
+import GenericErrorView from "../../components/GenericErrorView";
 
 const forceInset = { bottom: "always" };
 
@@ -309,21 +308,7 @@ export default function ReceiveConfirmation({ navigation, route }: Props) {
       >
         {error ? (
           <View style={styles.modal}>
-            <View style={styles.modalBody}>
-              <View style={styles.modalIcon}>
-                <DeviceNanoAction
-                  modelId={route.params.modelId}
-                  wired={route.params.wired}
-                  error={error}
-                />
-              </View>
-              <LText secondary semiBold style={styles.modalTitle}>
-                <TranslatedError error={error} />
-              </LText>
-              <LText style={styles.modalDescription}>
-                <TranslatedError error={error} field="description" />
-              </LText>
-            </View>
+            <GenericErrorView error={error} />
             <View style={styles.buttonsContainer}>
               <Button
                 event="ReceiveRetry"
