@@ -82,7 +82,7 @@ export function renderVerifyAddress({
 }) {
   return (
     <View style={styles.wrapper}>
-      <View style={styles.animationContainer}>
+      <View style={[styles.animationContainer, styles.verifyAddress]}>
         <Animation source={getDeviceAnimation({ device, key: "validate" })} />
       </View>
       <LText style={[styles.text, styles.title]} semiBold>
@@ -365,7 +365,6 @@ const styles = StyleSheet.create({
     margin: 8,
   },
   actionContainer: {
-    paddingVertical: 8,
     alignSelf: "stretch",
   },
   animationContainer: {
@@ -375,5 +374,8 @@ const styles = StyleSheet.create({
   },
   connectDeviceContainer: {
     height: 100,
+  },
+  verifyAddress: {
+    height: 72,
   },
 });
