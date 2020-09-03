@@ -205,7 +205,7 @@ export function renderError({
 }) {
   return (
     <View style={styles.wrapper}>
-      <GenericErrorView error={error} withDescription />
+      <GenericErrorView error={error} withDescription withIcon />
       {onRetry && (
         <View style={styles.actionContainer}>
           <Button
@@ -244,7 +244,9 @@ export function renderConnectYourDevice({
         {t(
           unresponsive
             ? "DeviceAction.unlockDevice"
-            : "DeviceAction.connectAndUnlockDevice",
+            : device.wired
+            ? "DeviceAction.connectAndUnlockDevice"
+            : "DeviceAction.turnOnAndUnlockDevice",
         )}
       </LText>
     </View>
