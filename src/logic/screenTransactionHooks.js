@@ -151,7 +151,7 @@ type SignTransactionArgs = {
 
 // TODO move to live-common
 function useBroadcast({ account, parentAccount }: SignTransactionArgs) {
-  const broadcast = useCallback(
+  return useCallback(
     async (signedOperation: SignedOperation): Promise<Operation> => {
       invariant(account, "account not present");
       const mainAccount = getMainAccount(account, parentAccount);
@@ -170,8 +170,6 @@ function useBroadcast({ account, parentAccount }: SignTransactionArgs) {
     },
     [account, parentAccount],
   );
-
-  return broadcast;
 }
 
 export function useSignedTxHandler({
@@ -200,13 +198,13 @@ export function useSignedTxHandler({
         navigation.replace(
           route.name.replace("ConnectDevice", "ValidationSuccess"),
           {
-            result: signedOperation.operation,
+            result: operation,
           },
         );
         dispatch(
-          updateAccountWithUpdater(mainAccount.id, account => {
-            return addPendingOperation(account, operation);
-          }),
+          updateAccountWithUpdater(mainAccount.id, account =>
+            addPendingOperation(account, operation),
+          ),
         );
       } catch (error) {
         if (
