@@ -232,7 +232,7 @@ export function renderConnectYourDevice({
 }) {
   return (
     <View style={styles.wrapper}>
-      <View style={styles.animationContainer}>
+      <View style={[styles.animationContainer, styles.connectDeviceContainer]}>
         <Animation
           source={getDeviceAnimation({
             device,
@@ -372,5 +372,8 @@ const styles = StyleSheet.create({
     alignSelf: "stretch",
     alignItems: "center",
     justifyContent: "center",
+  },
+  connectDeviceContainer: {
+    height: 100,
   },
 });
