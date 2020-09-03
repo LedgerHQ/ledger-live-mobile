@@ -103,10 +103,6 @@ export default function ReceiveConfirmation({ navigation, route }: Props) {
     [account, parentAccount],
   );
 
-  function contactUs(): void {
-    Linking.openURL(urls.contact);
-  }
-
   function onRetry(): void {
     if (isModalOpened) {
       setIsModalOpened(false);
@@ -329,13 +325,6 @@ export default function ReceiveConfirmation({ navigation, route }: Props) {
               </LText>
             </View>
             <View style={styles.buttonsContainer}>
-              <Button
-                event="ReceiveContactUs"
-                type="secondary"
-                title={<Trans i18nKey="common.contactUs" />}
-                containerStyle={styles.button}
-                onPress={contactUs}
-              />
               <Button
                 event="ReceiveRetry"
                 type="primary"
