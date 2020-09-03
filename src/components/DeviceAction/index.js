@@ -149,7 +149,7 @@ export default function DeviceAction<R, H, P>({
           <PreventNativeBack />
           <SkipLock />
           <ValidateOnDevice
-            {...device}
+            device={device}
             account={account}
             parentAccount={parentAccount}
             transaction={transaction}
