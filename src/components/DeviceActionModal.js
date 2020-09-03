@@ -5,6 +5,9 @@ import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import DeviceAction from "./DeviceAction";
 import BottomModal from "./BottomModal";
 import ModalBottomAction from "./ModalBottomAction";
+import Close from "../icons/Close";
+import Touchable from "./Touchable";
+import colors from "../colors";
 
 type Props = {
   // TODO: fix action type
@@ -45,6 +48,13 @@ export default function DeviceActionModal({
           }
         />
       )}
+      <Touchable
+        event="DeviceActionModalClose"
+        style={styles.close}
+        onPress={onClose}
+      >
+        <Close color={colors.fog} size={20} />
+      </Touchable>
     </BottomModal>
   );
 }
@@ -52,5 +62,10 @@ export default function DeviceActionModal({
 const styles = StyleSheet.create({
   footerContainer: {
     flexDirection: "row",
+  },
+  close: {
+    position: "absolute",
+    right: 16,
+    top: 16,
   },
 });
