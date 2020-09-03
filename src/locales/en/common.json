@@ -873,6 +873,7 @@
     "send": "Send",
     "receive": "Receive",
     "buy": "Buy",
+    "swap": "Swap",
     "manage": "Manage",
     "lastOperations": "Last operations",
     "emptyState": {
