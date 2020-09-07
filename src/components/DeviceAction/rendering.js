@@ -9,6 +9,7 @@ import LText from "../LText";
 import getWindowDimensions from "../../logic/getWindowDimensions";
 import Spinning from "../Spinning";
 import LiveLogo from "../../icons/LiveLogoIcon";
+import BigSpinner from "../../icons/BigSpinner";
 import colors, { lighten } from "../../colors";
 import Button from "../Button";
 import { NavigatorName } from "../../const";
@@ -264,7 +265,7 @@ export function renderLoading({
     <View style={styles.wrapper}>
       <View style={styles.spinnerContainer}>
         <Spinning>
-          <LiveLogo size={32} color={colors.grey} />
+          <BigSpinner />
         </Spinning>
       </View>
       <LText semiBold style={styles.text}>
