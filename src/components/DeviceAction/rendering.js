@@ -8,7 +8,6 @@ import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import LText from "../LText";
 import getWindowDimensions from "../../logic/getWindowDimensions";
 import Spinning from "../Spinning";
-import LiveLogo from "../../icons/LiveLogoIcon";
 import BigSpinner from "../../icons/BigSpinner";
 import colors, { lighten } from "../../colors";
 import Button from "../Button";
