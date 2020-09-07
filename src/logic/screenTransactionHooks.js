@@ -198,7 +198,7 @@ export function useSignedTxHandler({
         navigation.replace(
           route.name.replace("ConnectDevice", "ValidationSuccess"),
           {
-            accountId: route.params.accountId,
+            ...route.params,
             result: operation,
           },
         );
