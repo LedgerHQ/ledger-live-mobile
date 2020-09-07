@@ -1282,7 +1282,7 @@
           "provider": "Provider",
           "fees": "Max fees",
           "title": "Pending operation",
-          "description": "Swap operation is being broadcasted to changely, that will treat it before sending you the requested funds. To see the status of your operation go to the history tab of the swap page",
+          "description": "Swap operation is being broadcasted to Changelly, that will treat it before sending you the requested funds. To see the status of your operation go to the history tab of the swap page",
           "label": "Your Swap ID:",
           "disclaimer": {
             "title": "Terms and conditions",
