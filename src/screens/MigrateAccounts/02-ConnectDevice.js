@@ -4,11 +4,12 @@ import React, { useCallback, useState } from "react";
 import { StyleSheet } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { createAction } from "@ledgerhq/live-common/lib/hw/actions/app";
+import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import connectApp from "@ledgerhq/live-common/lib/hw/connectApp";
+import type { Currency } from "@ledgerhq/live-common/lib/types";
 import { TrackScreen } from "../../analytics";
 import colors from "../../colors";
 import { ScreenName } from "../../const";
-import { connectingStep, currencyApp } from "../../components/DeviceJob/steps";
 import SelectDevice from "../../components/SelectDevice";
 import NavigationScrollView from "../../components/NavigationScrollView";
 import DeviceActionModal from "../../components/DeviceActionModal";
@@ -51,12 +52,7 @@ export default function ConnectDevice({ navigation, route }: Props) {
         style={styles.scroll}
         contentContainerStyle={styles.scrollContainer}
       >
-        <SelectDevice
-          deviceMeta={route.params?.deviceMeta}
-          onSelect={setDevice}
-          autoSelectOnAdd
-          steps={[connectingStep, currencyApp(route.params?.currency)]}
-        />
+        <SelectDevice onSelect={setDevice} autoSelectOnAdd />
       </NavigationScrollView>
       <DeviceActionModal
         action={action}
