@@ -1,8 +1,6 @@
 // @flow
 import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 
-// const models = { nanoS, nanoX, blue };
-
 const animations = {
   nanoS: {
     plugAndPinCode: {
