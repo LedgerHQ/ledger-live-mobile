@@ -237,7 +237,12 @@ export function renderConnectYourDevice({
 }) {
   return (
     <View style={styles.wrapper}>
-      <View style={[styles.animationContainer, styles.connectDeviceContainer]}>
+      <View
+        style={[
+          styles.animationContainer,
+          device.modelId !== "blue" ? styles.connectDeviceContainer : undefined,
+        ]}
+      >
         <Animation
           source={getDeviceAnimation({
             device,
