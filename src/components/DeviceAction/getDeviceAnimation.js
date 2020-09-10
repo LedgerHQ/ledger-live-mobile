@@ -113,9 +113,6 @@ export default function getDeviceAnimation({
   key: string,
   device: Device,
 }) {
-  if (device.modelId === "blue") {
-    return null;
-  }
   const animation = ["nanoS", "blue"].includes(device.modelId)
     ? animations[device.modelId][key]
     : animations.nanoX[device.wired ? "wired" : "bluetooth"][key];
