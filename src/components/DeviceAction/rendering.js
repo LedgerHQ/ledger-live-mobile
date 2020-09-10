@@ -82,7 +82,12 @@ export function renderVerifyAddress({
 }) {
   return (
     <View style={styles.wrapper}>
-      <View style={[styles.animationContainer, styles.verifyAddress]}>
+      <View
+        style={[
+          styles.animationContainer,
+          device.modelId !== "blue" ? styles.verifyAddress : undefined,
+        ]}
+      >
         <Animation source={getDeviceAnimation({ device, key: "validate" })} />
       </View>
       <LText style={[styles.text, styles.title]} semiBold>
