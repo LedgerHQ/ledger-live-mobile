@@ -200,17 +200,10 @@ export default function CoinifyWidget({
     [settleTrade],
   );
 
-  if (!account) {
-    return null;
-  }
-
-  const tokenCurrency = account.type === "TokenAccount" ? account.token : null;
+  const tokenCurrency =
+    account && account.type === "TokenAccount" ? account.token : null;
 
   const url = `${coinifyConfig.url}?${querystring.stringify(widgetConfig)}`;
-
-  if (!mainAccount) {
-    return null;
-  }
 
   return (
     <View style={[styles.root]}>
