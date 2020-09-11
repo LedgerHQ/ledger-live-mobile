@@ -14,8 +14,6 @@ import connectApp from "@ledgerhq/live-common/lib/hw/connectApp";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { WrongDeviceForAccount } from "@ledgerhq/errors";
 import { useTranslation } from "react-i18next";
-import { from } from "rxjs";
-import { withDevice } from "@ledgerhq/live-common/lib/hw/deviceAccess";
 import DeviceAction from "../../components/DeviceAction";
 import BottomModal from "../../components/BottomModal";
 import { renderVerifyAddress } from "../../components/DeviceAction/rendering";
@@ -266,14 +264,12 @@ function VerifyAddress({
 
   const onConfirmAddress = useCallback(async () => {
     try {
-      const { address } = await withDevice(device.deviceId)(transport =>
-        from(
-          getAccountBridge(account).receive(account, {
-            deviceId: device.deviceId,
-            verify: true,
-          }),
-        ),
-      ).toPromise();
+      const { address } = await getAccountBridge(account)
+        .receive(account, {
+          deviceId: device.deviceId,
+          verify: true,
+        })
+        .toPromise();
       if (address !== account.freshAddress) {
         throw new WrongDeviceForAccount(
           `WrongDeviceForAccount ${account.name}`,
