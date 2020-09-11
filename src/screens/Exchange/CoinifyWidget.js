@@ -86,7 +86,9 @@ export default function CoinifyWidget({
   parentAccount,
   device,
 }: Props) {
-  const [isWaitingDeviceJob, setWaitingDeviceJob] = useState(false);
+  const [requestingAction, setRequestingAction] = useState<
+    "none" | "connect" | "verify",
+  >("none");
   const [firstLoadDone, setFirstLoadDone] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const webView = useRef(null);
@@ -148,8 +150,8 @@ export default function CoinifyWidget({
         track("Coinify Confirm Buy Start", {
           currencyName: getAccountCurrency(account).name,
         });
+        setRequestingAction("connect");
         setIsOpen(true);
-        setWaitingDeviceJob(true);
       } else {
         // TODO this is a problem, it should not occur.
       }
@@ -185,14 +187,14 @@ export default function CoinifyWidget({
   );
 
   const onResult = useCallback(() => {
-    setWaitingDeviceJob(false);
+    setRequestingAction("connect");
   }, []);
 
   const onVerify = useCallback(
     confirmed => {
       setIsOpen(false);
       settleTrade(confirmed ? "accepted" : "rejected");
-      setWaitingDeviceJob(false);
+      setRequestingAction("none");
     },
     [settleTrade],
   );
@@ -230,20 +232,20 @@ export default function CoinifyWidget({
       />
       <BottomModal id="DeviceActionModal" isOpened={isOpen}>
         <View style={styles.modalContainer}>
-          {isWaitingDeviceJob ? (
+          {setRequestingAction === "connect" ? (
             <DeviceAction
               action={action}
               device={device}
               request={{ account: mainAccount, tokenCurrency }}
               onResult={onResult}
             />
-          ) : (
+          ) : setRequestingAction === "verify" ? (
             <VerifyAddress
               account={mainAccount}
               device={device}
               onResult={onVerify}
             />
-          )}
+          ) : null}
         </View>
       </BottomModal>
     </View>
