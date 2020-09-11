@@ -232,14 +232,14 @@ export default function CoinifyWidget({
       />
       <BottomModal id="DeviceActionModal" isOpened={isOpen}>
         <View style={styles.modalContainer}>
-          {setRequestingAction === "connect" ? (
+          {requestingAction === "connect" ? (
             <DeviceAction
               action={action}
               device={device}
               request={{ account: mainAccount, tokenCurrency }}
               onResult={onResult}
             />
-          ) : setRequestingAction === "verify" ? (
+          ) : requestingAction === "verify" ? (
             <VerifyAddress
               account={mainAccount}
               device={device}
