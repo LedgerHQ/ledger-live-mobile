@@ -180,10 +180,12 @@ export default function DeviceAction<R, H, P>({
 
   if (onResult) {
     const result = onResult(payload);
+    // return null if handler doesn't return a component or it is an async function
     // $FlowFixMe
     if (result?.then || typeof result === "undefined") {
       return null;
     }
+    // otherwise, render component
     // $FlowFixMe
     return result;
   }
