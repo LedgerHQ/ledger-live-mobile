@@ -11,11 +11,11 @@ import {
 import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import { createAction } from "@ledgerhq/live-common/lib/hw/actions/app";
 import connectApp from "@ledgerhq/live-common/lib/hw/connectApp";
+import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { WrongDeviceForAccount } from "@ledgerhq/errors";
 import { useTranslation } from "react-i18next";
 import { from } from "rxjs";
 import { withDevice } from "@ledgerhq/live-common/lib/hw/deviceAccess";
-import getAddress from "@ledgerhq/live-common/lib/hw/getAddress";
 import DeviceAction from "../../components/DeviceAction";
 import BottomModal from "../../components/BottomModal";
 import { renderVerifyAddress } from "../../components/DeviceAction/rendering";
@@ -268,10 +268,8 @@ function VerifyAddress({
     try {
       const { address } = await withDevice(device.deviceId)(transport =>
         from(
-          getAddress(transport, {
-            derivationMode: account.derivationMode,
-            currency: account.currency,
-            path: account.freshAddressPath,
+          getAccountBridge(account).receive(account, {
+            deviceId: device.deviceId,
             verify: true,
           }),
         ),
