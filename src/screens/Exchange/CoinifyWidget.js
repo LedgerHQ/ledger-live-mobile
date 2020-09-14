@@ -187,7 +187,7 @@ export default function CoinifyWidget({
   );
 
   const onResult = useCallback(() => {
-    setRequestingAction("connect");
+    setRequestingAction("verify");
   }, []);
 
   const onVerify = useCallback(
