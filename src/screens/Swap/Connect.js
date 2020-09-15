@@ -3,7 +3,7 @@
 import React from "react";
 import { Trans } from "react-i18next";
 import { StyleSheet } from "react-native";
-import SelectDevice from "../../components/SelectDevice";
+import SelectDevice from "../../components/SelectDevice/legacy";
 import {
   connectingStep,
   dashboard,

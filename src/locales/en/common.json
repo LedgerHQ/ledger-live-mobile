@@ -1583,6 +1583,10 @@
       "title": "Verify address on device",
       "description": "Please verify that the {{currencyName}} address to be shown in Ledger Live matches the one on your Ledger device"
     },
+    "confirmSwap": {
+      "title": "Confirm swap operation on device",
+      "description": "Lorem ipsum dolor sit amet Nullam erat velit, fermentum eu sem sed, accumsan ullamcorper orci. Praesent dui nulla, fermentum ut dui id, facilisis maximus nunc. Vivamus pulvinar tincidunt ligula ac mattis."
+    },
     "button": {
       "openManager": "Open Manager"
     }

@@ -118,6 +118,33 @@ export function renderVerifyAddress({
   );
 }
 
+export function renderConfirmSwap({
+  t,
+  device,
+}: {
+  ...RawProps,
+  device: Device,
+}) {
+  return (
+    <View style={styles.wrapper}>
+      <View
+        style={[
+          styles.animationContainer,
+          device.modelId !== "blue" ? styles.verifyAddress : undefined,
+        ]}
+      >
+        <Animation source={getDeviceAnimation({ device, key: "validate" })} />
+      </View>
+      <LText style={[styles.text, styles.title]} semiBold>
+        {t("DeviceAction.confirmSwap.title")}
+      </LText>
+      <LText style={[styles.text, styles.description]}>
+        {t("DeviceAction.confirmSwap.description")}
+      </LText>
+    </View>
+  );
+}
+
 export function renderAllowManager({
   t,
   wording,
