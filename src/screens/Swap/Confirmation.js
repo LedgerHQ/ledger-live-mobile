@@ -2,16 +2,10 @@
 
 import React, { useCallback, useEffect, useState } from "react";
 import { View, StyleSheet } from "react-native";
-import type {
-  Transaction,
-  TransactionRaw,
-} from "@ledgerhq/live-common/lib/types";
+import type { Transaction } from "@ledgerhq/live-common/lib/types";
 import type {
   Exchange,
   ExchangeRate,
-  ExchangeRateRaw,
-  ExchangeRaw,
-  SwapRequestEvent,
 } from "@ledgerhq/live-common/lib/swap/types";
 import { createAction } from "@ledgerhq/live-common/lib/hw/actions/transaction";
 import { createAction as initSwapCreateAction } from "@ledgerhq/live-common/lib/hw/actions/initSwap";
@@ -24,13 +18,6 @@ import {
 } from "@ledgerhq/live-common/lib/account";
 import addToSwapHistory from "@ledgerhq/live-common/lib/swap/addToSwapHistory";
 import { useNavigation } from "@react-navigation/native";
-import { fromTransactionRaw } from "@ledgerhq/live-common/lib/transaction";
-import {
-  fromExchangeRaw,
-  fromExchangeRateRaw,
-} from "@ledgerhq/live-common/lib/swap/serialization";
-import type { Observable } from "rxjs";
-import { from } from "rxjs";
 import { ScreenName } from "../../const";
 import { updateAccountWithUpdater } from "../../actions/accounts";
 import DeviceAction from "../../components/DeviceAction";
@@ -41,32 +28,8 @@ import LText from "../../components/LText";
 import LoadingFooter from "../../components/LoadingFooter";
 import type { DeviceMeta } from "./Form";
 
-// FIXME I don't know how to keep both mobile and desktop happy for the initswap.
-const hackyMiddlemanThatIShouldntNeed = ({
-  exchange,
-  exchangeRate,
-  transaction,
-  deviceId,
-}: {
-  exchange: ExchangeRaw,
-  exchangeRate: ExchangeRateRaw,
-  transaction: TransactionRaw,
-  deviceId: string,
-}): Observable<SwapRequestEvent> => {
-  return from(
-    initSwap({
-      exchange: fromExchangeRaw(exchange),
-      exchangeRate: fromExchangeRateRaw(exchangeRate),
-      transaction: fromTransactionRaw(transaction),
-      deviceId,
-    }),
-  );
-};
 const action = createAction(connectApp);
-const action2 = initSwapCreateAction(
-  connectApp,
-  hackyMiddlemanThatIShouldntNeed,
-);
+const action2 = initSwapCreateAction(connectApp, initSwap);
 
 type Props = {
   exchange: Exchange,

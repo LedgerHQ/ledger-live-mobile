@@ -16,7 +16,6 @@ import SwapStatusIndicator, { getStatusColor } from "./SwapStatusIndicator";
 import colors from "../../colors";
 
 type Props = {
-  navigation: any,
   route: {
     params: {
       swapOperation: MappedSwapOperation,
@@ -24,7 +23,7 @@ type Props = {
   },
 };
 
-const OperationDetails = ({ navigation, route }: Props) => {
+const OperationDetails = ({ route }: Props) => {
   const { swapOperation } = route.params;
   const {
     swapId,

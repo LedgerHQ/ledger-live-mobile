@@ -6,7 +6,7 @@ import IconAD from "react-native-vector-icons/dist/AntDesign";
 import IconSwap from "../../icons/Swap";
 import colors, { rgba } from "../../colors";
 
-export const getStatusColor = status => {
+export const getStatusColor = (status: string) => {
   return (
     {
       sending: colors.green,
