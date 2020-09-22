@@ -1265,13 +1265,18 @@
         },
         "noApp": {
           "title": "App not installed on device",
-          "desc": "You need the app to be installed on your device to be able to swap it. Go to manager to install the app",
+          "desc": "You need the app to be installed on your device to be able to swap it. Go to manager to install the app.",
           "cta": "Go to Manager",
           "close": "Close"
         },
         "noAccounts": {
-          "title": "No {{ticker}} account",
-          "desc": "You don’t have any {{currencyName}} account. You need an origin account to be able to swap funds",
+          "title": "No eligible {{ticker}} account",
+          "desc": "You don't have {{currencyName}} accounts with balance.",
+          "cta": "Close"
+        },
+        "outdatedApp": {
+          "title": "App update available",
+          "desc": "You need to update the {{currencyName}} app.",
           "cta": "Close"
         },
         "summary": {
