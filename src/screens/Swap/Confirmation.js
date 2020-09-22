@@ -126,7 +126,7 @@ const Confirmation = ({
           onClose={() => undefined}
           key={"initSwap"}
           action={action2}
-          device={deviceMeta}
+          device={deviceMeta.device}
           request={{
             exchange,
             exchangeRate,
@@ -143,7 +143,7 @@ const Confirmation = ({
       ) : (
         <DeviceAction
           action={action}
-          device={deviceMeta}
+          device={deviceMeta.device}
           request={{
             tokenCurrency,
             parentAccount: fromParentAccount,

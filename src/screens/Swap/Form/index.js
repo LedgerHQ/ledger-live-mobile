@@ -30,9 +30,9 @@ import type {
 } from "@ledgerhq/live-common/lib/types";
 import { findTokenById } from "@ledgerhq/live-common/lib/data/tokens";
 import type { DeviceInfo } from "@ledgerhq/live-common/lib/types/manager";
-import type { DeviceModel } from "@ledgerhq/devices";
+import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
+import { isCurrencySwapSupported } from "@ledgerhq/live-common/lib/swap";
 import CurrencyUnitValue from "../../../components/CurrencyUnitValue";
-
 import SectionSeparator, {
   ArrowDownCircle,
 } from "../../../components/SectionSeparator";
@@ -59,12 +59,9 @@ export type SwapRouteParams = {
 };
 
 export type DeviceMeta = {
-  appRes: { installed: any },
-  deviceId: string,
+  result: { installed: any },
+  device: Device,
   deviceInfo: DeviceInfo,
-  deviceName: string,
-  modelId: DeviceModel,
-  wired: boolean,
 };
 const Form = ({
   providers,
@@ -74,8 +71,8 @@ const Form = ({
   deviceMeta: DeviceMeta,
 }) => {
   const { navigate } = useNavigation();
-  const { appRes } = deviceMeta;
-  const { installed: installedApps } = appRes;
+  const { result } = deviceMeta;
+  const { installed: installedApps } = result;
   const route = useRoute();
   const accounts = useSelector(accountsSelector);
   const selectableCurrencies = useSelector(state =>
@@ -282,6 +279,8 @@ const styles = StyleSheet.create({
 
 const selectableCurrenciesSelector = (state, props: { providers: any }) => {
   const { providers } = props;
+  if (!providers) return [];
+
   const allIds = uniq(
     providers.reduce(
       (ac, { supportedCurrencies }) => [...ac, ...supportedCurrencies],
@@ -289,12 +288,18 @@ const selectableCurrenciesSelector = (state, props: { providers: any }) => {
     ),
   );
 
-  const tokenCurrencies = allIds.map(findTokenById).filter(Boolean);
+  const tokenCurrencies = allIds
+    .map(findTokenById)
+    .filter(Boolean)
+    .filter(t => !t.delisted);
   const cryptoCurrencies = allIds
     .map(findCryptoCurrencyById)
     .filter(Boolean)
     .filter(isCurrencySupported);
-  return [...cryptoCurrencies, ...tokenCurrencies];
+
+  return [...cryptoCurrencies, ...tokenCurrencies].filter(
+    isCurrencySwapSupported,
+  );
 };
 
 export default Form;

@@ -47,7 +47,7 @@ const Swap = () => {
         <NotAvailable />
       ) : !hasAcceptedSwapKYC ? (
         <Landing providers={providers} />
-      ) : !deviceMeta?.appRes?.installed ? (
+      ) : !deviceMeta?.result?.installed ? (
         <Connect setResult={onSetResult} />
       ) : showInstallSwap ? (
         <MissingSwapApp />
