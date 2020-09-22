@@ -10,28 +10,33 @@ import LText from "../../components/LText";
 import AppIcon from "../Manager/AppsList/AppIcon";
 import colors from "../../colors";
 
-const MissingSwapApp = () => {
+const MissingOrOutdatedSwapApp = ({
+  outdated = false,
+}: {
+  outdated?: boolean,
+}) => {
   const { navigate } = useNavigation();
   const onPress = () => {
     navigate(ScreenName.Manager);
   };
 
-  // TODO replace with correct illustration
+  const key = outdated ? "outdatedApp" : "missingApp";
+
   return (
     <SafeAreaView style={styles.root}>
       <View style={styles.illustration}>
         <AppIcon size={60} icon="exchange" />
       </View>
       <LText secondary style={styles.title}>
-        <Trans i18nKey="transfer.swap.missingAppPlaceholder.title" />
+        <Trans i18nKey={`transfer.swap.${key}.title`} />
       </LText>
       <LText primary style={styles.description}>
-        <Trans i18nKey="transfer.swap.missingAppPlaceholder.description" />
+        <Trans i18nKey={`transfer.swap.${key}.description`} />
       </LText>
       <Button
         event="MissingSwapAppPlaceholderGoToManager"
         type={"primary"}
-        title={<Trans i18nKey="transfer.swap.missingAppPlaceholder.button" />}
+        title={<Trans i18nKey={`transfer.swap.${key}.button`} />}
         onPress={onPress}
         containerStyle={styles.button}
       />
@@ -81,4 +86,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MissingSwapApp;
+export default MissingOrOutdatedSwapApp;

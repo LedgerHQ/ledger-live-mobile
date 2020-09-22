@@ -7,7 +7,7 @@ import type { AvailableProvider } from "@ledgerhq/live-common/lib/swap/types";
 import { useSelector } from "react-redux";
 import SafeAreaView from "react-native-safe-area-view";
 import { hasAcceptedSwapKYCSelector } from "../../reducers/settings";
-import MissingSwapApp from "./MissingSwapApp";
+import MissingOrOutdatedSwapApp from "./MissingOrOutdatedSwapApp";
 import Landing from "./Landing";
 import NotAvailable from "./NotAvailable";
 import Form from "./Form";
@@ -33,10 +33,9 @@ const Swap = () => {
     [setDeviceMeta],
   );
 
-  const showInstallSwap =
-    deviceMeta?.appRes?.installed &&
-    !deviceMeta?.appRes?.installed.some(a => a.name === "Exchange");
-
+  const exchangeApp = deviceMeta?.result?.installed.find(
+    a => a.name === "Exchange",
+  );
   return (
     <SafeAreaView style={styles.root}>
       {!providers ? (
@@ -49,8 +48,10 @@ const Swap = () => {
         <Landing providers={providers} />
       ) : !deviceMeta?.result?.installed ? (
         <Connect setResult={onSetResult} />
-      ) : showInstallSwap ? (
-        <MissingSwapApp />
+      ) : !exchangeApp ? (
+        <MissingOrOutdatedSwapApp />
+      ) : !exchangeApp.updated ? (
+        <MissingOrOutdatedSwapApp outdated />
       ) : deviceMeta ? (
         <Form deviceMeta={deviceMeta} providers={providers} />
       ) : null}

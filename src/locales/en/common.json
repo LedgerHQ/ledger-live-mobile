@@ -1307,9 +1307,14 @@
         "to": "To",
         "toAmount": "Credited amount"
       },
-      "missingAppPlaceholder": {
+      "missingApp": {
         "title": "Please install the Exchange app on your device",
         "description": "Go to manager and install Exchange app to swap assets",
+        "button": "Go to Manager"
+      },
+      "outdatedApp": {
+        "title": "Please update the Exchange app on your device",
+        "description": "Go to manager and update Exchange app to swap assets",
         "button": "Go to Manager"
       },
       "history": {
