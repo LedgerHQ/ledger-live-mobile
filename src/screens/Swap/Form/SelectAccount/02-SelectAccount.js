@@ -14,6 +14,7 @@ import {
 } from "@ledgerhq/live-common/lib/account/helpers";
 import type { SwapRouteParams } from "..";
 import { accountsSelector } from "../../../../reducers/accounts";
+import NoAccountsEmptyState from "./NoAccountsEmptyState";
 import colors from "../../../../colors";
 import { TrackScreen } from "../../../../analytics";
 import LText from "../../../../components/LText";
@@ -22,7 +23,6 @@ import AccountCard from "../../../../components/AccountCard";
 import KeyboardView from "../../../../components/KeyboardView";
 import { formatSearchResults } from "../../../../helpers/formatAccountSearchResults";
 import type { SearchResult } from "../../../../helpers/formatAccountSearchResults";
-import InfoIcon from "../../../../icons/Info";
 import PlusIcon from "../../../../icons/Plus";
 import Button from "../../../../components/Button";
 import { NavigatorName, ScreenName } from "../../../../const";
@@ -124,11 +124,11 @@ export default function SelectAccount({ navigation, route }: Props) {
           ListFooterComponent={
             <Button
               containerStyle={styles.addButton}
-              event="ExchangeStartBuyFlow"
+              event="SwapSelectAccountNoToAccount"
               type="tertiary"
               outline={false}
               IconLeft={PlusIcon}
-              title={t("exchange.buy.emptyState.CTAButton")}
+              title={t("transfer.swap.emptyState.CTAButton")}
               onPress={() =>
                 navigation.navigate(NavigatorName.AddAccounts, {
                   currency:
@@ -146,41 +146,8 @@ export default function SelectAccount({ navigation, route }: Props) {
     [enhancedAccounts, renderItem, t, navigation, selectedCurrency],
   );
 
-  // empty state if no accounts available for this currency
   if (!elligibleAccountsForSelectedCurrency.length) {
-    return (
-      <View style={styles.emptyStateBody}>
-        <View style={styles.iconContainer}>
-          <InfoIcon size={22} color={colors.live} />
-        </View>
-        <LText semiBold style={styles.title}>
-          {t("exchange.buy.emptyState.title", {
-            currency: selectedCurrency.name,
-          })}
-        </LText>
-        <LText style={styles.description}>
-          {t("exchange.buy.emptyState.description", {
-            currency: selectedCurrency.name,
-          })}
-        </LText>
-        <View style={styles.buttonContainer}>
-          <Button
-            containerStyle={styles.button}
-            event="ExchangeStartBuyFlow"
-            type="primary"
-            title={t("exchange.buy.emptyState.CTAButton")}
-            onPress={() =>
-              navigation.navigate(
-                NavigatorName.AddAccounts,
-                selectedCurrency.type === "TokenCurrency"
-                  ? { token: selectedCurrency }
-                  : { selectedCurrency },
-              )
-            }
-          />
-        </View>
-      </View>
-    );
+    return <NoAccountsEmptyState selectedCurrency={selectedCurrency} />;
   }
 
   return (

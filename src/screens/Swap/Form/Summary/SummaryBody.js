@@ -54,6 +54,7 @@ const SummaryBody = ({
         </LText>
         <LText tertiary style={styles.value2}>
           <CurrencyUnitValue
+            disableRounding
             showCode
             unit={getAccountUnit(fromAccount)}
             value={amount}
@@ -82,6 +83,7 @@ const SummaryBody = ({
         </LText>
         <LText tertiary style={styles.value2}>
           <CurrencyUnitValue
+            disableRounding
             showCode
             unit={getAccountUnit(toAccount)}
             value={amount.times(magnitudeAwareRate)}
@@ -103,6 +105,7 @@ const SummaryBody = ({
           </LText>
           <LText tertiary style={styles.value3}>
             <CurrencyUnitValue
+              disableRounding
               showCode
               unit={getAccountUnit(
                 getMainAccount(fromAccount, fromParentAccount),

@@ -1271,7 +1271,8 @@
         },
         "noAccounts": {
           "title": "No eligible {{ticker}} account",
-          "desc": "You don't have {{currencyName}} accounts with balance.",
+          "desc": "You don't have {{currencyName}} accounts that can be selected for this action.",
+          "addAccountCta": "Add Account",
           "cta": "Close"
         },
         "outdatedApp": {
@@ -1316,6 +1317,11 @@
         "title": "Please update the Exchange app on your device",
         "description": "Go to manager and update Exchange app to swap assets",
         "button": "Go to Manager"
+      },
+      "emptyState": {
+        "title": "No {{currency}} account",
+        "description": "You need to add an account before swapping {{currency}}",
+        "CTAButton": "Add account"
       },
       "history": {
         "tab": "History",

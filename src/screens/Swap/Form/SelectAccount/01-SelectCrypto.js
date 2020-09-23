@@ -64,11 +64,14 @@ export default function SwapFormSelectCrypto({ route, navigation }: Props) {
   const clearBadSelection = useCallback(() => setBadSelection(null), [
     setBadSelection,
   ]);
+  const isCurrencyOK = (status, target) =>
+    !status || status === "ok" || (target === "to" && status === "noAccounts");
 
   const onPressItem = useCallback(
     (currencyOrToken: CryptoCurrency | TokenCurrency) => {
       const status = currenciesStatus[currencyOrToken.id];
-      if (status === "ok") {
+
+      if (isCurrencyOK(status, target)) {
         if (target === "from") {
           navigation.navigate(ScreenName.SwapFormSelectAccount, {
             exchange: {
@@ -96,21 +99,27 @@ export default function SwapFormSelectCrypto({ route, navigation }: Props) {
     [currenciesStatus, exchange, navigation, target],
   );
 
-  const renderList = items => (
-    <FlatList
-      contentContainerStyle={styles.list}
-      data={items}
-      renderItem={({ item }) => (
-        <CurrencyRow
-          status={currenciesStatus[item.id]}
-          currency={item}
-          onPress={onPressItem}
-        />
-      )}
-      keyExtractor={keyExtractor}
-      showsVerticalScrollIndicator={false}
-      keyboardDismissMode="on-drag"
-    />
+  const renderList = useCallback(
+    items => (
+      <FlatList
+        contentContainerStyle={styles.list}
+        data={items}
+        renderItem={({ item }) => {
+          const status = currenciesStatus[item.id];
+          return (
+            <CurrencyRow
+              isOK={isCurrencyOK(status, target)}
+              currency={item}
+              onPress={onPressItem}
+            />
+          );
+        }}
+        keyExtractor={keyExtractor}
+        showsVerticalScrollIndicator={false}
+        keyboardDismissMode="on-drag"
+      />
+    ),
+    [currenciesStatus, onPressItem, target],
   );
 
   return (
@@ -132,6 +141,7 @@ export default function SwapFormSelectCrypto({ route, navigation }: Props) {
           onClose={clearBadSelection}
           currency={badSelection.currency}
           status={badSelection.status}
+          target={target}
         />
       )}
     </SafeAreaView>

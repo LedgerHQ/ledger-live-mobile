@@ -16,7 +16,7 @@ import colors from "../colors";
 type Props = {
   currency: CryptoCurrency | TokenCurrency,
   onPress: (CryptoCurrency | TokenCurrency) => void,
-  status?: ?CurrencyStatus,
+  isOK?: boolean,
   style?: *,
 };
 
@@ -26,8 +26,8 @@ class CurrencyRow extends PureComponent<Props> {
   };
 
   render() {
-    const { currency, style, status } = this.props;
-    const isOK = !status || status === "ok";
+    const { currency, style, isOK = true } = this.props;
+
     return (
       <RectButton style={[styles.root, style]} onPress={this.onPress}>
         <CircleCurrencyIcon
