@@ -1,11 +1,13 @@
 // @flow
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Linking } from "react-native";
 import Icon from "react-native-vector-icons/dist/Feather";
 import { WrongDeviceForAccount, UnexpectedBootloader } from "@ledgerhq/errors";
 import type { TokenCurrency } from "@ledgerhq/live-common/lib/types";
 import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
+import { urls } from "../../config/urls";
 import LText from "../LText";
+import InfoBox from "../InfoBox";
 import getWindowDimensions from "../../logic/getWindowDimensions";
 import Spinning from "../Spinning";
 import BigSpinner from "../../icons/BigSpinner";
@@ -127,8 +129,12 @@ export function renderConfirmSwap({
 }) {
   return (
     <View style={styles.wrapper}>
+      <InfoBox onLearnMore={() => Linking.openURL(urls.swap.learnMore)}>
+        {t("DeviceAction.confirmSwap.alert")}
+      </InfoBox>
       <View
         style={[
+          { marginTop: 16 },
           styles.animationContainer,
           device.modelId !== "blue" ? styles.verifyAddress : undefined,
         ]}
@@ -137,9 +143,6 @@ export function renderConfirmSwap({
       </View>
       <LText style={[styles.text, styles.title]} semiBold>
         {t("DeviceAction.confirmSwap.title")}
-      </LText>
-      <LText style={[styles.text, styles.description]}>
-        {t("DeviceAction.confirmSwap.description")}
       </LText>
     </View>
   );

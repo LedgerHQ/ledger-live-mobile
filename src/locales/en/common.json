@@ -1601,7 +1601,7 @@
     },
     "confirmSwap": {
       "title": "Confirm swap operation on device",
-      "description": "Lorem ipsum dolor sit amet Nullam erat velit, fermentum eu sem sed, accumsan ullamcorper orci. Praesent dui nulla, fermentum ut dui id, facilisis maximus nunc. Vivamus pulvinar tincidunt ligula ac mattis."
+      "alert": "Verify the Swap details on your device before sending it. The addresses are exchanged securely so you don’t have to verify them"
     },
     "button": {
       "openManager": "Open Manager"
