@@ -1236,6 +1236,8 @@
     "swap": {
       "title": "Swap",
       "selectDevice": "Select your device",
+      "broadcasting": "Broadcasting swap",
+      "loadingFees": "Loading fees...",
       "landing": {
         "header": "Swap",
         "title": "Welcome to Swap",

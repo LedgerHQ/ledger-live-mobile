@@ -31,7 +31,7 @@ const PendingOperation = () => {
           <LText style={styles.swapLabel}>
             <Trans i18nKey={"transfer.swap.form.summary.label"} />
           </LText>
-          <LText tertiary style={styles.swapID}>
+          <LText selectable tertiary style={styles.swapID}>
             {swapId}
           </LText>
         </View>

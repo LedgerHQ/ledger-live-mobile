@@ -2,6 +2,8 @@
 
 import React, { useCallback, useEffect, useState } from "react";
 import { View, StyleSheet } from "react-native";
+import { Trans, useTranslation } from "react-i18next";
+
 import type { Transaction } from "@ledgerhq/live-common/lib/types";
 import type {
   Exchange,
@@ -18,6 +20,7 @@ import {
 } from "@ledgerhq/live-common/lib/account";
 import addToSwapHistory from "@ledgerhq/live-common/lib/swap/addToSwapHistory";
 import { useNavigation } from "@react-navigation/native";
+import { renderLoading } from "../../components/DeviceAction/rendering";
 import { ScreenName } from "../../const";
 import { updateAccountWithUpdater } from "../../actions/accounts";
 import DeviceAction from "../../components/DeviceAction";
@@ -108,6 +111,8 @@ const Confirmation = ({
     }
   }, [broadcast, onComplete, onError, signedOperation, swapData]);
 
+  const { t } = useTranslation();
+
   return (
     <BottomModal
       id="SwapConfirmationFeedback"
@@ -117,10 +122,7 @@ const Confirmation = ({
       style={styles.root}
     >
       {signedOperation ? (
-        <View>
-          <LoadingFooter />
-          <LText>{"broadcasting"}</LText>
-        </View>
+        renderLoading({ t, description: t("transfer.swap.broadcasting") })
       ) : !swapData ? (
         <DeviceAction
           onClose={() => undefined}

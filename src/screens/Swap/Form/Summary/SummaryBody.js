@@ -43,7 +43,12 @@ const SummaryBody = ({
         </LText>
         <View style={styles.accountNameWrapper}>
           <CurrencyIcon size={16} currency={fromCurrency} />
-          <LText semiBold style={styles.value}>
+          <LText
+            numberOfLines={1}
+            ellipsizeMode="middle"
+            semiBold
+            style={styles.value}
+          >
             {getAccountName(fromAccount)}
           </LText>
         </View>
@@ -72,7 +77,12 @@ const SummaryBody = ({
         </LText>
         <View style={styles.accountNameWrapper}>
           <CurrencyIcon size={16} currency={toCurrency} />
-          <LText semiBold style={styles.value}>
+          <LText
+            numberOfLines={1}
+            ellipsizeMode="middle"
+            semiBold
+            style={styles.value}
+          >
             {getAccountName(toAccount)}
           </LText>
         </View>
@@ -129,15 +139,17 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   label: {
+    flex: 1,
     fontSize: 12,
     lineHeight: 18,
     color: colors.smoke,
   },
   accountNameWrapper: {
+    flex: 3,
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "flex-end",
   },
   value: {
     fontSize: 14,

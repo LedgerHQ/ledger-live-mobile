@@ -212,7 +212,15 @@ const SwapFormAmount = ({ navigation, route }: Props) => {
             event="SwapAmountContinue"
             type="primary"
             disabled={!canContinue}
-            title={<Trans i18nKey={"common.continue"} />}
+            title={
+              <Trans
+                i18nKey={
+                  bridgePending
+                    ? "transfer.swap.loadingFees"
+                    : "common.continue"
+                }
+              />
+            }
             onPress={onContinue}
           />
         </View>
