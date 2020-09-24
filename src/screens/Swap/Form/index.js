@@ -141,7 +141,12 @@ const Form = ({
             {fromAccount ? (
               <>
                 <CurrencyIcon size={16} currency={fromCurrency} />
-                <LText semiBold style={styles.accountName}>
+                <LText
+                  semiBold
+                  style={styles.accountName}
+                  numberOfLines={1}
+                  ellipsizeMode="middle"
+                >
                   {getAccountName(fromAccount)}
                 </LText>
                 <View style={{ marginTop: 4, marginLeft: 8 }}>
@@ -150,7 +155,12 @@ const Form = ({
               </>
             ) : (
               <>
-                <LText semiBold style={styles.accountName}>
+                <LText
+                  semiBold
+                  style={styles.accountName}
+                  numberOfLines={1}
+                  ellipsizeMode="middle"
+                >
                   <Trans i18nKey={"transfer.swap.form.fromAccount"} />
                 </LText>
                 <View style={{ marginTop: 4, marginLeft: 8 }}>
@@ -269,6 +279,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     lineHeight: 25,
     marginLeft: 8,
+    flexShrink: 1,
   },
   accountBalance: {
     fontSize: 14,
