@@ -1278,7 +1278,8 @@
         "outdatedApp": {
           "title": "App update available",
           "desc": "You need to update the {{currencyName}} app.",
-          "cta": "Close"
+          "cta": "Go to Manager",
+          "close": "Close"
         },
         "summary": {
           "from": "From",

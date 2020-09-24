@@ -52,13 +52,13 @@ const BadSelectionModal = ({
           values={{ currencyName: currency.name }}
         />
       </LText>
-      {status === "noApp" ? (
+      {["noApp", "outdatedApp"].includes(status) ? (
         <>
           <Button
             containerStyle={styles.closeButton}
             onPress={openManagerForApp}
             type={"primary"}
-            event={"GoToManagerFromSwapAppNotInstalled"}
+            event={"GoToManagerFromSwapAppNotInstalledOrOutdated"}
             title={<Trans i18nKey={`transfer.swap.form.${status}.cta`} />}
           />
           <Button

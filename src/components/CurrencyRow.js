@@ -37,7 +37,7 @@ class CurrencyRow extends PureComponent<Props> {
         />
         <LText
           semiBold
-          style={[styles.name, !isOK ? { color: colors.lightFog } : null]}
+          style={[styles.name, !isOK ? { color: colors.fog } : null]}
         >
           {`${currency.name} (${currency.ticker})`}
         </LText>
