@@ -197,7 +197,12 @@ const Form = ({
             {toAccount ? (
               <>
                 <CurrencyIcon size={16} currency={toCurrency} />
-                <LText semiBold style={styles.accountName}>
+                <LText
+                  semiBold
+                  style={styles.accountName}
+                  numberOfLines={1}
+                  ellipsizeMode="middle"
+                >
                   {getAccountName(toAccount)}
                 </LText>
                 <View style={{ marginTop: 4, marginLeft: 8 }}>
