@@ -37,7 +37,6 @@ const SwapFormAmount = ({ navigation, route }: Props) => {
   const { fromAccount, fromParentAccount, toAccount } = exchange;
   const fromUnit = getAccountUnit(fromAccount);
   const toUnit = getAccountUnit(toAccount);
-  const warning = null;
   const [error, setError] = useState(null);
   const [rate, setRate] = useState(null);
   const [useAllAmount, setUseAllAmount] = useState(false);
@@ -141,6 +140,9 @@ const SwapFormAmount = ({ navigation, route }: Props) => {
   const hasErrors = Object.keys(status.errors).length;
   const canContinue = !bridgePending && !hasErrors && rate;
 
+  const amountError =
+    transaction.amount.gt(0) &&
+    (error || status.errors?.gasPrice || status.errors?.amount);
   return (
     <KeyboardView style={styles.container}>
       <View style={styles.wrapper}>
@@ -157,10 +159,10 @@ const SwapFormAmount = ({ navigation, route }: Props) => {
           hasError={!!error}
         />
         <LText
-          style={[error ? styles.error : styles.warning]}
+          style={[amountError ? styles.error : styles.warning]}
           numberOfLines={2}
         >
-          <TranslatedError error={error || warning} />
+          <TranslatedError error={amountError || undefined} />
         </LText>
       </View>
       <SectionSeparator />
