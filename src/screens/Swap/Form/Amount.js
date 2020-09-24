@@ -194,7 +194,7 @@ const SwapFormAmount = ({ navigation, route }: Props) => {
             <Switch
               style={styles.switch}
               value={useAllAmount}
-              disabled={!!error || maxSpendable.eq(0)}
+              disabled={(!!error && !useAllAmount) || maxSpendable.eq(0)}
               onValueChange={toggleSendMax}
             />
           </View>
