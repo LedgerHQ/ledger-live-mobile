@@ -1,5 +1,5 @@
-import React from "react";
-import { ScrollView, StyleSheet, View } from "react-native";
+import React, { useCallback } from "react";
+import { ScrollView, StyleSheet, View, Linking } from "react-native";
 import type { MappedSwapOperation } from "@ledgerhq/live-common/lib/swap/types";
 import {
   getAccountName,
@@ -14,6 +14,8 @@ import SectionSeparator from "../../components/SectionSeparator";
 import CurrencyIcon from "../../components/CurrencyIcon";
 import SwapStatusIndicator, { getStatusColor } from "./SwapStatusIndicator";
 import colors from "../../colors";
+import { urls } from "../../config/urls";
+import { localeIds } from "../../languages";
 
 type Props = {
   route: {
@@ -40,6 +42,10 @@ const OperationDetails = ({ route }: Props) => {
   const statusColor = getStatusColor(status);
   const dotStyles = { backgroundColor: statusColor };
   const textColorStyles = { color: statusColor };
+
+  const openProvider = useCallback(() => {
+    Linking.openURL(urls.swap.providers[provider].main);
+  }, [provider]);
 
   return (
     <View style={styles.root}>
@@ -81,11 +87,24 @@ const OperationDetails = ({ route }: Props) => {
           <LText style={styles.label}>
             <Trans i18nKey={"transfer.swap.operationDetails.provider"} />
           </LText>
-          <LText style={styles.value}>{provider}</LText>
+          <LText
+            onPress={openProvider}
+            style={[styles.value, { textTransform: "capitalize" }]}
+          >
+            {provider}
+          </LText>
           <LText style={styles.label}>
             <Trans i18nKey={"transfer.swap.operationDetails.date"} />
           </LText>
-          <LText style={styles.value}>{operation.date.toString()}</LText>
+          <LText style={styles.value}>
+            {operation.date.toLocaleDateString(localeIds, {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+              hour: "2-digit",
+              minute: "2-digit",
+            })}
+          </LText>
 
           <SectionSeparator style={{ marginBottom: 32 }} />
 
@@ -94,7 +113,12 @@ const OperationDetails = ({ route }: Props) => {
           </LText>
           <View style={styles.account}>
             <CurrencyIcon size={16} currency={fromCurrency} />
-            <LText semiBold style={styles.accountName}>
+            <LText
+              numberOfLines={1}
+              ellipsizeMode="middle"
+              semiBold
+              style={styles.accountName}
+            >
               {getAccountName(fromAccount)}
             </LText>
           </View>
@@ -116,7 +140,12 @@ const OperationDetails = ({ route }: Props) => {
           </LText>
           <View style={styles.account}>
             <CurrencyIcon size={16} currency={toCurrency} />
-            <LText semiBold style={styles.accountName}>
+            <LText
+              numberOfLines={1}
+              ellipsizeMode="middle"
+              semiBold
+              style={styles.accountName}
+            >
               {getAccountName(toAccount)}
             </LText>
           </View>
@@ -210,8 +239,10 @@ const styles = StyleSheet.create({
   account: {
     marginBottom: 32,
     flexDirection: "row",
+    alignItems: "center",
   },
   accountName: {
+    flex: 1,
     marginLeft: 8,
     color: colors.darkBlue,
   },
