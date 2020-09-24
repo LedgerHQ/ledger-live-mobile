@@ -32,30 +32,22 @@ const History = () => {
   const [isRefreshing, setIsRefreshing] = useState(false);
   const ref = useRef();
 
-  const accountsRef = useRef(accounts);
-
   useEffect(() => {
-    accountsRef.current = accounts;
-  }, [accounts]);
-
-  useEffect(() => {
-    setSections(getCompleteSwapHistory(accountsRef.current));
-  }, [setSections]);
+    setSections(getCompleteSwapHistory(accounts));
+  }, [accounts, setSections]);
 
   useEffect(() => {
     let cancelled = false;
     async function asyncUpdateAccountSwapStatus() {
-      const newAccounts = await Promise.all(
-        accountsRef.current.map(updateAccountSwapStatus),
+      const updatedAccounts = await Promise.all(
+        accounts.map(updateAccountSwapStatus),
       );
-      if (cancelled) return;
-      newAccounts.forEach(account =>
-        dispatch(
-          updateAccountWithUpdater(account.id, a =>
-            account === a ? null : account,
-          ),
-        ),
-      );
+
+      if (!cancelled) {
+        updatedAccounts.filter(Boolean).forEach(account => {
+          dispatch(updateAccountWithUpdater(account.id, _ => account));
+        });
+      }
       setIsRefreshing(false);
     }
 
@@ -66,16 +58,14 @@ const History = () => {
     return () => {
       cancelled = true;
     };
-  }, [isRefreshing, dispatch]);
+  }, [isRefreshing, dispatch, accounts]);
 
-  // NB if renderItem={OperationRow} it crashes ¯\_(ツ)_/¯
   const renderItem = ({ item }: { item: Operation }) => (
     <OperationRow item={item} />
   );
 
   const exportSwapHistory = async () => {
-    const history = await getCompleteSwapHistory(accountsRef.current);
-    const mapped = await mappedSwapOperationsToCSV(history);
+    const mapped = await mappedSwapOperationsToCSV(sections);
     const base64 = Buffer.from(mapped).toString("base64");
     const options = {
       title: t("transfer.swap.history.exportButton"),
