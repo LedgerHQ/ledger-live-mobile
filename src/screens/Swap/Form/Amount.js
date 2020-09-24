@@ -43,7 +43,12 @@ const SwapFormAmount = ({ navigation, route }: Props) => {
   const [useAllAmount, setUseAllAmount] = useState(false);
   const [maxSpendable, setMaxSpendable] = useState(BigNumber(0));
 
-  const { status, transaction, setTransaction } = useBridgeTransaction(() => ({
+  const {
+    status,
+    transaction,
+    setTransaction,
+    bridgePending,
+  } = useBridgeTransaction(() => ({
     account: fromAccount,
     parentAccount: fromParentAccount,
   }));
@@ -133,6 +138,9 @@ const SwapFormAmount = ({ navigation, route }: Props) => {
     onAmountChange(newUseAllAmount ? maxSpendable : BigNumber(0));
   }, [useAllAmount, setUseAllAmount, onAmountChange, maxSpendable]);
 
+  const hasErrors = Object.keys(status.errors).length;
+  const canContinue = !bridgePending && !hasErrors && rate;
+
   return (
     <KeyboardView style={styles.container}>
       <View style={styles.wrapper}>
@@ -203,7 +211,7 @@ const SwapFormAmount = ({ navigation, route }: Props) => {
           <Button
             event="SwapAmountContinue"
             type="primary"
-            disabled={!!error || transaction.amount.eq(0) || !rate}
+            disabled={!canContinue}
             title={<Trans i18nKey={"common.continue"} />}
             onPress={onContinue}
           />
