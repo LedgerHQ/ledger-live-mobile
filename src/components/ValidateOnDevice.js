@@ -12,6 +12,7 @@ import type {
 import {
   getMainAccount,
   getAccountUnit,
+  findSubAccountById,
 } from "@ledgerhq/live-common/lib/account";
 
 import { getDeviceTransactionConfig } from "@ledgerhq/live-common/lib/transaction";
@@ -41,13 +42,20 @@ function AmountField({
   parentAccount,
   status,
   field,
+  transaction,
 }: FieldComponentProps) {
   let unit;
   if (account.type === "TokenAccount") {
     unit = getAccountUnit(account);
   } else {
     const mainAccount = getMainAccount(account, parentAccount);
-    unit = getAccountUnit(mainAccount);
+    if (transaction.subAccountId) {
+      const subAccount = findSubAccountById(
+        mainAccount,
+        transaction.subAccountId,
+      );
+      unit = getAccountUnit(subAccount || mainAccount);
+    } else unit = getAccountUnit(mainAccount);
   }
   return (
     <DataRowUnitValue label={field.label} unit={unit} value={status.amount} />
