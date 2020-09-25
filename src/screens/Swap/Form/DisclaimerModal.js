@@ -41,7 +41,7 @@ const DisclaimerModal = ({
       </LText>
       <ExternalLink
         text={<Trans i18nKey="transfer.swap.form.summary.disclaimer.tos" />}
-        onPress={() => Linking.openURL(urls.swap[provider].tos)}
+        onPress={() => Linking.openURL(urls.swap.providers[provider].tos)}
         event="OpenTerms"
       />
       <Button
