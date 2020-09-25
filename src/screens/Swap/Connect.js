@@ -20,14 +20,13 @@ const Connect = ({ setResult }: { setResult: (result: any) => void }) => {
         <Trans i18nKey={"transfer.swap.selectDevice"} />
       </LText>
       <SelectDevice onSelect={setDevice} autoSelectOnAdd />
-      {device ? (
-        <DeviceActionModal
-          device={device}
-          onResult={setResult}
-          action={action}
-          request={null}
-        />
-      ) : null}
+      <DeviceActionModal
+        onClose={setDevice}
+        device={device}
+        onResult={setResult}
+        action={action}
+        request={null}
+      />
     </>
   );
 };
