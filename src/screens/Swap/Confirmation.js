@@ -1,10 +1,13 @@
 // @flow
 
 import React, { useCallback, useEffect, useState } from "react";
-import { View, StyleSheet } from "react-native";
-import { Trans, useTranslation } from "react-i18next";
+import { StyleSheet } from "react-native";
+import { useTranslation } from "react-i18next";
 
-import type { Transaction } from "@ledgerhq/live-common/lib/types";
+import type {
+  Transaction,
+  TransactionStatus,
+} from "@ledgerhq/live-common/lib/types";
 import type {
   Exchange,
   ExchangeRate,
@@ -27,12 +30,10 @@ import DeviceAction from "../../components/DeviceAction";
 import BottomModal from "../../components/BottomModal";
 import { useBroadcast } from "../../components/useBroadcast";
 
-import LText from "../../components/LText";
-import LoadingFooter from "../../components/LoadingFooter";
 import type { DeviceMeta } from "./Form";
 
-const action = createAction(connectApp);
-const action2 = initSwapCreateAction(connectApp, initSwap);
+const silentSigningAction = createAction(connectApp);
+const swapAction = initSwapCreateAction(connectApp, initSwap);
 
 type Props = {
   exchange: Exchange,
@@ -41,6 +42,7 @@ type Props = {
   deviceMeta: DeviceMeta,
   onError: (error: Error) => void,
   onCancel: () => void,
+  status: TransactionStatus,
 };
 const Confirmation = ({
   exchange,
@@ -49,6 +51,7 @@ const Confirmation = ({
   onError,
   onCancel,
   deviceMeta,
+  status,
 }: Props) => {
   const { fromAccount, fromParentAccount } = exchange;
   const [swapData, setSwapData] = useState(null);
@@ -127,7 +130,7 @@ const Confirmation = ({
         <DeviceAction
           onClose={() => undefined}
           key={"initSwap"}
-          action={action2}
+          action={swapAction}
           device={deviceMeta.device}
           request={{
             exchange,
@@ -144,9 +147,10 @@ const Confirmation = ({
         />
       ) : (
         <DeviceAction
-          action={action}
+          action={silentSigningAction}
           device={deviceMeta.device}
           request={{
+            status,
             tokenCurrency,
             parentAccount: fromParentAccount,
             account: fromAccount,

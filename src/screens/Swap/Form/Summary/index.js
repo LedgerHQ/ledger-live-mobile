@@ -26,6 +26,7 @@ const SwapFormSummary = ({ navigation, route }: Props) => {
     status,
     deviceMeta,
   } = route.params;
+
   const [confirmed, setConfirmed] = useState(false);
   const [acceptedDisclaimer, setAcceptedDisclaimer] = useState(false);
   const reset = useCallback(() => {
@@ -33,18 +34,20 @@ const SwapFormSummary = ({ navigation, route }: Props) => {
     setAcceptedDisclaimer(false);
   }, [setAcceptedDisclaimer, setConfirmed]);
 
-  return (
+  return status && transaction ? (
     <View style={styles.root}>
       <SummaryBody
         exchange={exchange}
         exchangeRate={exchangeRate}
         status={status}
       />
+
       {confirmed ? (
         acceptedDisclaimer ? (
           <Confirmation
             exchange={exchange}
             exchangeRate={exchangeRate}
+            status={status}
             transaction={transaction}
             deviceMeta={deviceMeta}
             onError={error => {
@@ -73,7 +76,7 @@ const SwapFormSummary = ({ navigation, route }: Props) => {
         </View>
       )}
     </View>
-  );
+  ) : null;
 };
 
 const styles = StyleSheet.create({
