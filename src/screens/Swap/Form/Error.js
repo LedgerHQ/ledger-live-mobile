@@ -3,11 +3,14 @@
 import React, { useCallback } from "react";
 import { StyleSheet, View } from "react-native";
 import { useNavigation, useRoute } from "@react-navigation/native";
+import SafeAreaView from "react-native-safe-area-view";
 import { Trans } from "react-i18next";
 import colors from "../../../colors";
 import GenericErrorView from "../../../components/GenericErrorView";
 import Button from "../../../components/Button";
 import { ScreenName } from "../../../const";
+
+const forceInset = { bottom: "always" };
 
 const Error = () => {
   const navigation = useNavigation();
@@ -18,7 +21,7 @@ const Error = () => {
 
   const { error } = route.params;
   return (
-    <View style={styles.root}>
+    <SafeAreaView style={styles.root} forceInset={forceInset}>
       <View style={styles.wrapper}>
         <GenericErrorView error={error} />
       </View>
@@ -28,7 +31,7 @@ const Error = () => {
         title={<Trans i18nKey="common.retry" />}
         event={"SwapErrorRetry"}
       />
-    </View>
+    </SafeAreaView>
   );
 };
 

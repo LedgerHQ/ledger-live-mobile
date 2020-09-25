@@ -3,6 +3,7 @@
 import React, { useCallback, useState } from "react";
 import { Trans } from "react-i18next";
 import { StyleSheet, View } from "react-native";
+import SafeAreaView from "react-native-safe-area-view";
 import IconAD from "react-native-vector-icons/dist/AntDesign";
 import { SwapGenericAPIError } from "@ledgerhq/live-common/lib/errors";
 import type { SwapRouteParams } from "..";
@@ -13,6 +14,8 @@ import SummaryBody from "./SummaryBody";
 import colors from "../../../../colors";
 import { ScreenName } from "../../../../const";
 import CountdownTimer from "../../../../components/CountdownTimer";
+
+const forceInset = { bottom: "always" };
 
 type Props = {
   navigation: any,
@@ -46,7 +49,7 @@ const SwapFormSummary = ({ navigation, route }: Props) => {
   }, [navigation, reset]);
 
   return status && transaction ? (
-    <View style={styles.root}>
+    <SafeAreaView style={styles.root} forceInset={forceInset}>
       <SummaryBody
         exchange={exchange}
         exchangeRate={exchangeRate}
@@ -92,7 +95,7 @@ const SwapFormSummary = ({ navigation, route }: Props) => {
           />
         </View>
       )}
-    </View>
+    </SafeAreaView>
   ) : null;
 };
 
@@ -117,7 +120,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderStyle: "solid",
     borderColor: colors.smoke,
-    marginRight: 24,
     paddingVertical: 2,
     paddingHorizontal: 12,
     minWidth: 90,

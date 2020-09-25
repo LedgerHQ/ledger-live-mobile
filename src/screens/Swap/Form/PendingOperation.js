@@ -2,11 +2,14 @@
 import React, { useCallback } from "react";
 import { StyleSheet, View } from "react-native";
 import { useNavigation, useRoute } from "@react-navigation/native";
+import SafeAreaView from "react-native-safe-area-view";
 import { Trans } from "react-i18next";
 import LText from "../../../components/LText";
 import Button from "../../../components/Button";
 import IconSwap from "../../../icons/Swap";
 import colors, { rgba } from "../../../colors";
+
+const forceInset = { bottom: "always" };
 
 const PendingOperation = () => {
   const navigation = useNavigation();
@@ -19,7 +22,7 @@ const PendingOperation = () => {
   const { swapId } = route.params;
 
   return (
-    <View style={styles.root}>
+    <SafeAreaView style={styles.root} forceInset={forceInset}>
       <View style={styles.wrapper}>
         <View style={styles.iconWrapper}>
           <IconSwap color={colors.live} size={20} />
@@ -47,7 +50,7 @@ const PendingOperation = () => {
           onPress={onComplete}
         />
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
