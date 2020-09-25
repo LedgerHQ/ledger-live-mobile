@@ -12,7 +12,7 @@ import {
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { getAbandonSeedAddress } from "@ledgerhq/live-common/lib/data/abandonseed";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
-import { NotEnoughBalance } from "@ledgerhq/errors";
+import { AmountRequired, NotEnoughBalance } from "@ledgerhq/errors";
 import { getExchangeRates } from "@ledgerhq/live-common/lib/swap";
 import type { SwapRouteParams } from ".";
 import KeyboardView from "../../../components/KeyboardView";
@@ -143,6 +143,9 @@ const SwapFormAmount = ({ navigation, route }: Props) => {
   const amountError =
     transaction.amount.gt(0) &&
     (error || status.errors?.gasPrice || status.errors?.amount);
+  const hideError =
+    useAllAmount && amountError && amountError instanceof AmountRequired;
+
   return (
     <KeyboardView style={styles.container}>
       <View style={styles.wrapper}>
@@ -162,7 +165,7 @@ const SwapFormAmount = ({ navigation, route }: Props) => {
           style={[amountError ? styles.error : styles.warning]}
           numberOfLines={2}
         >
-          <TranslatedError error={amountError || undefined} />
+          <TranslatedError error={(!hideError && amountError) || undefined} />
         </LText>
       </View>
       <SectionSeparator />
