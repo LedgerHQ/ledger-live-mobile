@@ -39,6 +39,7 @@ const SwapFormAmount = ({ navigation, route }: Props) => {
   const toUnit = getAccountUnit(toAccount);
   const [error, setError] = useState(null);
   const [rate, setRate] = useState(null);
+  const [rateExpiration, setRateExpiration] = useState(null);
   const [useAllAmount, setUseAllAmount] = useState(false);
   const [maxSpendable, setMaxSpendable] = useState(BigNumber(0));
 
@@ -68,6 +69,7 @@ const SwapFormAmount = ({ navigation, route }: Props) => {
           }),
         );
         setRate(null);
+        setRateExpiration(null);
 
         if (maxSpendable && maxSpendable.gt(0) && amount.gt(maxSpendable)) {
           setError(new NotEnoughBalance());
@@ -107,6 +109,7 @@ const SwapFormAmount = ({ navigation, route }: Props) => {
         if (ignore) return;
 
         setRate(rates[0]); // FIXME when we have more rates, what?
+        setRateExpiration(new Date(Date.now() + 60000));
       } catch (error) {
         if (ignore) return;
         setError(error);
@@ -128,8 +131,17 @@ const SwapFormAmount = ({ navigation, route }: Props) => {
       exchangeRate: rate,
       transaction,
       status,
+      rateExpiration,
     });
-  }, [transaction, status, exchange, navigation, rate, route.params]);
+  }, [
+    navigation,
+    route.params,
+    exchange,
+    rate,
+    transaction,
+    status,
+    rateExpiration,
+  ]);
 
   const toggleSendMax = useCallback(() => {
     const newUseAllAmount = !useAllAmount;

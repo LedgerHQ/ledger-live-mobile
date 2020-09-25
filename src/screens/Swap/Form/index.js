@@ -56,6 +56,7 @@ export type SwapRouteParams = {
   installedApps: any,
   target: "from" | "to",
   deviceMeta: DeviceMeta,
+  rateExpiration?: Date,
 };
 
 export type DeviceMeta = {

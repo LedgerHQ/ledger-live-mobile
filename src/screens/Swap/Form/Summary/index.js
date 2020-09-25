@@ -3,6 +3,8 @@
 import React, { useCallback, useState } from "react";
 import { Trans } from "react-i18next";
 import { StyleSheet, View } from "react-native";
+import IconAD from "react-native-vector-icons/dist/AntDesign";
+import { SwapGenericAPIError } from "@ledgerhq/live-common/lib/errors";
 import type { SwapRouteParams } from "..";
 import DisclaimerModal from "../DisclaimerModal";
 import Button from "../../../../components/Button";
@@ -10,6 +12,7 @@ import Confirmation from "../../Confirmation";
 import SummaryBody from "./SummaryBody";
 import colors from "../../../../colors";
 import { ScreenName } from "../../../../const";
+import CountdownTimer from "../../../../components/CountdownTimer";
 
 type Props = {
   navigation: any,
@@ -25,6 +28,7 @@ const SwapFormSummary = ({ navigation, route }: Props) => {
     transaction,
     status,
     deviceMeta,
+    rateExpiration,
   } = route.params;
 
   const [confirmed, setConfirmed] = useState(false);
@@ -33,6 +37,13 @@ const SwapFormSummary = ({ navigation, route }: Props) => {
     setConfirmed(false);
     setAcceptedDisclaimer(false);
   }, [setAcceptedDisclaimer, setConfirmed]);
+
+  const onRatesExpired = useCallback(() => {
+    reset();
+    navigation.navigate(ScreenName.SwapError, {
+      error: new SwapGenericAPIError(),
+    });
+  }, [navigation, reset]);
 
   return status && transaction ? (
     <View style={styles.root}>
@@ -65,6 +76,12 @@ const SwapFormSummary = ({ navigation, route }: Props) => {
         )
       ) : (
         <View style={styles.buttonWrapper}>
+          <View style={styles.countdownTimer}>
+            <IconAD size={14} name="clockcircleo" color={colors.smoke} />
+            <View style={{ marginLeft: 9 }}>
+              <CountdownTimer end={rateExpiration} callback={onRatesExpired} />
+            </View>
+          </View>
           <Button
             event="SwapSummaryConfirm"
             type={"primary"}
@@ -92,6 +109,20 @@ const styles = StyleSheet.create({
   },
   button: {
     width: "100%",
+  },
+  countdownTimer: {
+    flexDirection: "row",
+    alignItems: "center",
+    borderRadius: 12,
+    borderWidth: 1,
+    borderStyle: "solid",
+    borderColor: colors.smoke,
+    marginRight: 24,
+    paddingVertical: 2,
+    paddingHorizontal: 12,
+    minWidth: 90,
+    alignSelf: "center",
+    marginBottom: 40,
   },
 });
 

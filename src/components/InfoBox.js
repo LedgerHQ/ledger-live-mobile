@@ -16,16 +16,9 @@ export default function InfoBox({ children: description, onLearnMore }: Props) {
     <View style={styles.root}>
       <IconHelp color={colors.live} size={16} />
       <Text style={styles.content}>
-        <LText ff="Inter|Regular" fontSize={3}>
-          {description}
-        </LText>{" "}
+        <LText fontSize={3}>{description}</LText>{" "}
         {onLearnMore && (
-          <LText
-            ff="Inter|Regular"
-            style={styles.learnMore}
-            fontSize={3}
-            onPress={onLearnMore}
-          >
+          <LText style={styles.learnMore} fontSize={3} onPress={onLearnMore}>
             <Trans i18nKey={"common.learnMore"} />
           </LText>
         )}
