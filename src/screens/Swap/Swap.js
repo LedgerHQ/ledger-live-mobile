@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { StyleSheet, View, ActivityIndicator } from "react-native";
 import { getProviders } from "@ledgerhq/live-common/lib/swap";
-import type { AvailableProvider } from "@ledgerhq/live-common/lib/swap/types";
+import { SwapNoAvailableProviders } from "@ledgerhq/live-common/lib/errors";
 import { useSelector } from "react-redux";
 import SafeAreaView from "react-native-safe-area-view";
 import { hasAcceptedSwapKYCSelector } from "../../reducers/settings";
@@ -14,16 +14,23 @@ import Form from "./Form";
 import Connect from "./Connect";
 import colors from "../../colors";
 
-type MaybeProviders = ?(AvailableProvider[]);
-
 const Swap = () => {
-  const [providers, setProviders] = useState<MaybeProviders>();
+  const [providers, setProviders] = useState();
+  const [error, setProvidersError] = useState();
   const hasAcceptedSwapKYC = useSelector(hasAcceptedSwapKYCSelector);
   const [deviceMeta, setDeviceMeta] = useState();
 
   useEffect(() => {
-    getProviders().then(setProviders);
-  }, []);
+    if (providers === undefined) {
+      getProviders().then(maybeProviders => {
+        if (maybeProviders instanceof SwapNoAvailableProviders) {
+          setProvidersError(maybeProviders);
+        } else {
+          setProviders(providers);
+        }
+      });
+    }
+  }, [providers]);
 
   const onSetResult = useCallback(
     data => {
@@ -38,12 +45,12 @@ const Swap = () => {
   );
   return (
     <SafeAreaView style={styles.root}>
-      {!providers ? (
+      {error ? (
+        <NotAvailable />
+      ) : !providers ? (
         <View style={styles.loading}>
           <ActivityIndicator />
         </View>
-      ) : !providers.length ? (
-        <NotAvailable />
       ) : !hasAcceptedSwapKYC ? (
         <Landing providers={providers} />
       ) : !deviceMeta?.result?.installed ? (
