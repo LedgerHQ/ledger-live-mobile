@@ -19,14 +19,20 @@ import {
   getAccountName,
 } from "@ledgerhq/live-common/lib/account";
 import type {
+  Account,
+  AccountLike,
+} from "@ledgerhq/live-common/lib/types/account";
+import type {
   CryptoCurrency,
   TokenCurrency,
   Transaction,
   TransactionStatus,
 } from "@ledgerhq/live-common/lib/types";
-import { isCurrencySupported } from "@ledgerhq/live-common/lib/currencies";
-import { findCryptoCurrencyById } from "@ledgerhq/cryptoassets/lib/currencies";
-import { findTokenById } from "@ledgerhq/cryptoassets/lib/tokens";
+import {
+  isCurrencySupported,
+  findCryptoCurrencyById,
+  findTokenById,
+} from "@ledgerhq/live-common/lib/currencies";
 import type { DeviceInfo } from "@ledgerhq/live-common/lib/types/manager";
 import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import { isCurrencySwapSupported } from "@ledgerhq/live-common/lib/swap";
@@ -65,9 +71,13 @@ export type DeviceMeta = {
 const Form = ({
   providers,
   deviceMeta,
+  defaultAccount,
+  defaultParentAccount,
 }: {
   providers: any,
   deviceMeta: DeviceMeta,
+  defaultAccount: ?AccountLike,
+  defaultParentAccount: ?Account,
 }) => {
   const { navigate } = useNavigation();
   const { result } = deviceMeta;
@@ -86,8 +96,18 @@ const Form = ({
       }),
     [accounts, installedApps, selectableCurrencies],
   );
-  const { exchange } = route.params || {};
-  const { fromAccount, toAccount } = exchange || {};
+
+  const exchange = useMemo(() => {
+    return (
+      route.params?.exchange || {
+        fromAccount: defaultAccount?.balance.gt(0) ? defaultAccount : undefined,
+        fromParentAccount: defaultAccount?.balance.gt(0)
+          ? defaultParentAccount
+          : undefined,
+      }
+    );
+  }, [defaultAccount, defaultParentAccount, route.params]);
+  const { fromAccount, toAccount } = exchange;
   const fromCurrency = fromAccount ? getAccountCurrency(fromAccount) : null;
   const toCurrency = toAccount ? getAccountCurrency(toAccount) : null;
 

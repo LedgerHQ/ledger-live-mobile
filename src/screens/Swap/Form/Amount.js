@@ -10,7 +10,7 @@ import {
   getMainAccount,
 } from "@ledgerhq/live-common/lib/account/helpers";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
-import { getAbandonSeedAddress } from "@ledgerhq/cryptoassets/lib/abandonseed";
+import { getAbandonSeedAddress } from "@ledgerhq/live-common/lib/currencies";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
 import { AmountRequired, NotEnoughBalance } from "@ledgerhq/errors";
 import { getExchangeRates } from "@ledgerhq/live-common/lib/swap";

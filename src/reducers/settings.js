@@ -8,6 +8,9 @@ import {
   getCryptoCurrencyById,
   getFiatCurrencyByTicker,
   listSupportedFiats,
+  isCurrencySupported,
+  findCryptoCurrencyById,
+  findTokenById,
 } from "@ledgerhq/live-common/lib/currencies";
 import { getEnv, setEnvUnsafe } from "@ledgerhq/live-common/lib/env";
 import { createSelector } from "reselect";
@@ -15,11 +18,17 @@ import type {
   CryptoCurrency,
   Currency,
   AccountLike,
+  TokenCurrency,
 } from "@ledgerhq/live-common/lib/types";
 import { getAccountCurrency } from "@ledgerhq/live-common/lib/account/helpers";
 import Config from "react-native-config";
-import type { State } from ".";
+import type { AvailableProvider } from "@ledgerhq/live-common/lib/swap/types";
+import type { OutputSelector } from "reselect";
+import uniq from "lodash/uniq";
+
+import { isCurrencySwapSupported } from "@ledgerhq/live-common/lib/swap";
 import { currencySettingsDefaults } from "../helpers/CurrencySettingsDefaults";
+import type { State } from ".";
 
 const bitcoin = getCryptoCurrencyById("bitcoin");
 const ethereum = getCryptoCurrencyById("ethereum");
@@ -76,6 +85,7 @@ export type SettingsState = {
   dismissedBanners: string[],
   hasAvailableUpdate: boolean,
   hasAcceptedSwapKYC: boolean,
+  swapProviders?: AvailableProvider[],
 };
 
 export const INITIAL_STATE: SettingsState = {
@@ -98,6 +108,7 @@ export const INITIAL_STATE: SettingsState = {
   dismissedBanners: [],
   hasAvailableUpdate: false,
   hasAcceptedSwapKYC: false,
+  swapProviders: [],
 };
 
 const pairHash = (from, to) => `${from.ticker}_${to.ticker}`;
@@ -260,9 +271,12 @@ const handlers: Object = {
     ...state,
     hasAvailableUpdate: action.enabled,
   }),
-
   DANGEROUSLY_OVERRIDE_STATE: (state: SettingsState): SettingsState => ({
     ...state,
+  }),
+  SETTINGS_SET_SWAP_PROVIDERS: (state, { swapProviders }) => ({
+    ...state,
+    swapProviders,
   }),
 };
 
@@ -399,5 +413,36 @@ export const dismissedBannersSelector = (state: State) =>
 
 export const hasAvailableUpdateSelector = (state: State) =>
   state.settings.hasAvailableUpdate;
+
+export const swapProvidersSelector = (state: State) =>
+  state.settings.swapProviders;
+
+export const swapSupportedCurrenciesSelector: OutputSelector<
+  State,
+  { accountId: string },
+  (TokenCurrency | CryptoCurrency)[],
+> = createSelector(swapProvidersSelector, swapProviders => {
+  if (!swapProviders) return [];
+
+  const allIds = uniq(
+    swapProviders.reduce(
+      (ac, { supportedCurrencies }) => [...ac, ...supportedCurrencies],
+      [],
+    ),
+  );
+
+  const tokenCurrencies = allIds
+    .map(findTokenById)
+    .filter(Boolean)
+    .filter(t => !t.delisted);
+  const cryptoCurrencies = allIds
+    .map(findCryptoCurrencyById)
+    .filter(Boolean)
+    .filter(isCurrencySupported);
+
+  return [...cryptoCurrencies, ...tokenCurrencies].filter(
+    isCurrencySwapSupported,
+  );
+});
 
 export default handleActions(handlers, INITIAL_STATE);

@@ -1,6 +1,7 @@
 // @flow
 
 import type { Currency } from "@ledgerhq/live-common/lib/types";
+import type { AvailableProvider } from "@ledgerhq/live-common/lib/swap/types";
 
 export type CurrencySettings = {
   confirmationsNb: number,
@@ -133,4 +134,9 @@ export const dismissBanner = (bannerId: string) => ({
 export const setAvailableUpdate = (enabled: boolean) => ({
   type: "SETTINGS_SET_AVAILABLE_UPDATE",
   enabled,
+});
+
+export const setSwapProviders = (swapProviders?: AvailableProvider[]) => ({
+  type: "SETTINGS_SET_SWAP_PROVIDERS",
+  swapProviders,
 });

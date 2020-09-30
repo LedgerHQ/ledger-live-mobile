@@ -4,9 +4,17 @@ import React, { useState, useEffect, useCallback } from "react";
 import { StyleSheet, View, ActivityIndicator } from "react-native";
 import { getProviders } from "@ledgerhq/live-common/lib/swap";
 import { SwapNoAvailableProviders } from "@ledgerhq/live-common/lib/errors";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import SafeAreaView from "react-native-safe-area-view";
-import { hasAcceptedSwapKYCSelector } from "../../reducers/settings";
+import type {
+  Account,
+  AccountLike,
+} from "@ledgerhq/live-common/lib/types/account";
+import {
+  hasAcceptedSwapKYCSelector,
+  swapProvidersSelector,
+} from "../../reducers/settings";
+import { setSwapProviders } from "../../actions/settings";
 import MissingOrOutdatedSwapApp from "./MissingOrOutdatedSwapApp";
 import Landing from "./Landing";
 import NotAvailable from "./NotAvailable";
@@ -14,23 +22,33 @@ import Form from "./Form";
 import Connect from "./Connect";
 import colors from "../../colors";
 
-const Swap = () => {
-  const [providers, setProviders] = useState();
-  const [error, setProvidersError] = useState();
+const Swap = ({
+  defaultAccount,
+  defaultParentAccount,
+}: {
+  defaultAccount?: AccountLike,
+  defaultParentAccount?: Account,
+}) => {
+  const dispatch = useDispatch();
+  const providers = useSelector(swapProvidersSelector);
   const hasAcceptedSwapKYC = useSelector(hasAcceptedSwapKYCSelector);
+  const [hasUpToDateProviders, setHasUpToDateProviders] = useState(false);
   const [deviceMeta, setDeviceMeta] = useState();
 
   useEffect(() => {
-    if (providers === undefined) {
+    if (hasAcceptedSwapKYC) {
       getProviders().then(maybeProviders => {
-        if (maybeProviders instanceof SwapNoAvailableProviders) {
-          setProvidersError(maybeProviders);
-        } else {
-          setProviders(maybeProviders);
-        }
+        dispatch(
+          setSwapProviders(
+            maybeProviders instanceof SwapNoAvailableProviders
+              ? []
+              : maybeProviders,
+          ),
+        );
+        setHasUpToDateProviders(true);
       });
     }
-  }, [providers]);
+  }, [dispatch, hasAcceptedSwapKYC]);
 
   const onSetResult = useCallback(
     data => {
@@ -45,14 +63,14 @@ const Swap = () => {
   );
   return (
     <SafeAreaView style={styles.root}>
-      {error ? (
-        <NotAvailable />
-      ) : !providers ? (
+      {!hasAcceptedSwapKYC ? (
+        <Landing />
+      ) : !hasUpToDateProviders ? (
         <View style={styles.loading}>
           <ActivityIndicator />
         </View>
-      ) : !hasAcceptedSwapKYC ? (
-        <Landing providers={providers} />
+      ) : !providers?.length ? (
+        <NotAvailable />
       ) : !deviceMeta?.result?.installed ? (
         <Connect setResult={onSetResult} />
       ) : !exchangeApp ? (
@@ -60,7 +78,12 @@ const Swap = () => {
       ) : !exchangeApp.updated ? (
         <MissingOrOutdatedSwapApp outdated />
       ) : deviceMeta ? (
-        <Form deviceMeta={deviceMeta} providers={providers} />
+        <Form
+          deviceMeta={deviceMeta}
+          providers={providers}
+          defaultAccount={defaultAccount}
+          defaultParentAccount={defaultParentAccount}
+        />
       ) : null}
     </SafeAreaView>
   );
