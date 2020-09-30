@@ -55,7 +55,7 @@
     "@ledgerhq/devices": "5.25.0",
     "@ledgerhq/errors": "5.25.0",
     "@ledgerhq/hw-app-btc": "5.25.0",
-    "@ledgerhq/hw-app-eth": "5.25.1",
+    "@ledgerhq/hw-app-eth": "5.25.2",
     "@ledgerhq/hw-app-xrp": "5.25.0",
     "@ledgerhq/hw-transport": "5.25.0",
     "@ledgerhq/hw-transport-http": "5.25.0",
