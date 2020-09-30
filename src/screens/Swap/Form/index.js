@@ -25,7 +25,8 @@ import type {
   TransactionStatus,
 } from "@ledgerhq/live-common/lib/types";
 import { isCurrencySupported } from "@ledgerhq/live-common/lib/currencies";
-import { findCryptoCurrencyById, findTokenById } from "@ledgerhq/cryptoassets";
+import { findCryptoCurrencyById } from "@ledgerhq/cryptoassets/lib/currencies";
+import { findTokenById } from "@ledgerhq/cryptoassets/lib/tokens";
 import type { DeviceInfo } from "@ledgerhq/live-common/lib/types/manager";
 import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import { isCurrencySwapSupported } from "@ledgerhq/live-common/lib/swap";

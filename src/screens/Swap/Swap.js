@@ -26,7 +26,7 @@ const Swap = () => {
         if (maybeProviders instanceof SwapNoAvailableProviders) {
           setProvidersError(maybeProviders);
         } else {
-          setProviders(providers);
+          setProviders(maybeProviders);
         }
       });
     }
