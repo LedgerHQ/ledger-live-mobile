@@ -5,10 +5,6 @@ import { TouchableOpacity, StyleSheet, View } from "react-native";
 import { Trans } from "react-i18next";
 import { useSelector } from "react-redux";
 import uniq from "lodash/uniq";
-import {
-  findCryptoCurrencyById,
-  isCurrencySupported,
-} from "@ledgerhq/live-common/lib/data/cryptocurrencies";
 import { getCurrenciesWithStatus } from "@ledgerhq/live-common/lib/swap/logic";
 import type { CurrenciesStatus } from "@ledgerhq/live-common/lib/swap/logic";
 import type {
@@ -28,7 +24,8 @@ import type {
   Transaction,
   TransactionStatus,
 } from "@ledgerhq/live-common/lib/types";
-import { findTokenById } from "@ledgerhq/live-common/lib/data/tokens";
+import { isCurrencySupported } from "@ledgerhq/live-common/lib/currencies";
+import { findCryptoCurrencyById, findTokenById } from "@ledgerhq/cryptoassets";
 import type { DeviceInfo } from "@ledgerhq/live-common/lib/types/manager";
 import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import { isCurrencySwapSupported } from "@ledgerhq/live-common/lib/swap";
