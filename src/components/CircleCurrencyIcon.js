@@ -6,7 +6,7 @@ import { getCryptoCurrencyIcon } from "@ledgerhq/live-common/lib/reactNative";
 import { getCurrencyColor } from "@ledgerhq/live-common/lib/currencies";
 
 import LText from "./LText";
-import colors, { rgba } from "../colors";
+import { rgba } from "../colors";
 
 type Props = {
   currency: *,

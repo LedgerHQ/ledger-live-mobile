@@ -137,7 +137,7 @@ const Confirmation = ({
             exchangeRate,
             transaction,
           }}
-          onResult={({ initSwapResult, initSwapError, ...rest }) => {
+          onResult={({ initSwapResult, initSwapError }) => {
             if (initSwapError) {
               onError(initSwapError);
             } else {

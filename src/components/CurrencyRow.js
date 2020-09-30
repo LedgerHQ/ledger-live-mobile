@@ -3,7 +3,6 @@
 import { StyleSheet } from "react-native";
 import React, { PureComponent } from "react";
 import { RectButton } from "react-native-gesture-handler";
-import type { CurrencyStatus } from "@ledgerhq/live-common/lib/swap/logic";
 import type {
   CryptoCurrency,
   TokenCurrency,

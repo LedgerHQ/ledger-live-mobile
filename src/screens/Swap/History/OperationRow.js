@@ -16,15 +16,7 @@ import { ScreenName } from "../../../const";
 import SwapStatusIndicator from "../SwapStatusIndicator";
 
 const OperationRow = ({ item }: { item: MappedSwapOperation }) => {
-  const {
-    swapId,
-    provider,
-    fromAccount,
-    toAccount,
-    fromAmount,
-    toAmount,
-    status,
-  } = item;
+  const { swapId, fromAccount, toAccount, fromAmount, toAmount, status } = item;
   const navigation = useNavigation();
 
   const onOpenOperationDetails = useCallback(() => {
