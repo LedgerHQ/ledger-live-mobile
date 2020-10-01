@@ -7,6 +7,7 @@ import {
   Image,
   StyleSheet,
   View,
+  ScrollView,
 } from "react-native";
 import { useDispatch } from "react-redux";
 import Button from "../../components/Button";
@@ -26,15 +27,17 @@ const Landing = () => {
 
   return (
     <SafeAreaView style={styles.root}>
-      <View style={styles.wrapper}>
-        <Image source={swapIllustration} style={styles.illustration} />
-        <LText secondary style={styles.title}>
-          <Trans i18nKey="transfer.swap.landing.title" />
-        </LText>
-        <LText primary style={styles.disclaimer}>
-          <Trans i18nKey="transfer.swap.landing.disclaimer" />
-        </LText>
-      </View>
+      <ScrollView contentContainerStyle={{ flex: 1 }}>
+        <View style={styles.wrapper}>
+          <Image source={swapIllustration} style={styles.illustration} />
+          <LText secondary style={styles.title}>
+            <Trans i18nKey="transfer.swap.landing.title" />
+          </LText>
+          <LText primary style={styles.disclaimer}>
+            <Trans i18nKey="transfer.swap.landing.disclaimer" />
+          </LText>
+        </View>
+      </ScrollView>
       <View style={styles.footer}>
         <TouchableWithoutFeedback
           event="SwapTermsAcceptSwitch"
@@ -62,13 +65,13 @@ const Landing = () => {
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    paddingHorizontal: 16,
-    paddingVertical: 16,
     backgroundColor: colors.white,
   },
 
   footer: {
     flexDirection: "column",
+    padding: 16,
+    paddingTop: 0,
     justifyContent: "space-between",
     borderTopWidth: 1,
     borderTopColor: colors.lightFog,
@@ -88,13 +91,15 @@ const styles = StyleSheet.create({
   wrapper: {
     flexGrow: 1,
     flexShrink: 0,
+    marginTop: 16,
+    paddingHorizontal: 16,
     alignItems: "center",
     justifyContent: "center",
   },
 
   illustration: {
-    width: 238,
-    height: 128,
+    width: 244,
+    height: 131,
     marginBottom: 40,
   },
 

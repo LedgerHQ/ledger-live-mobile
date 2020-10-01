@@ -270,6 +270,7 @@ const Form = ({
 const styles = StyleSheet.create({
   root: {
     flex: 1,
+    padding: 16,
   },
   top: {
     justifyContent: "space-around",

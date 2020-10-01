@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { Trans } from "react-i18next";
-import { StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import connectManager from "@ledgerhq/live-common/lib/hw/connectManager";
 import { createAction } from "@ledgerhq/live-common/lib/hw/actions/manager";
 import SelectDevice from "../../components/SelectDevice";
@@ -15,7 +15,7 @@ const action = createAction(connectManager);
 const Connect = ({ setResult }: { setResult: (result: any) => void }) => {
   const [device, setDevice] = useState(null);
   return (
-    <>
+    <View style={styles.root}>
       <LText semiBold style={styles.selectDevice}>
         <Trans i18nKey={"transfer.swap.selectDevice"} />
       </LText>
@@ -27,7 +27,7 @@ const Connect = ({ setResult }: { setResult: (result: any) => void }) => {
         action={action}
         request={null}
       />
-    </>
+    </View>
   );
 };
 

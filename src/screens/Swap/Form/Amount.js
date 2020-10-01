@@ -156,7 +156,8 @@ const SwapFormAmount = ({ navigation, route }: Props) => {
     transaction.amount.gt(0) &&
     (error || status.errors?.gasPrice || status.errors?.amount);
   const hideError =
-    useAllAmount && amountError && amountError instanceof AmountRequired;
+    bridgePending ||
+    (useAllAmount && amountError && amountError instanceof AmountRequired);
 
   return (
     <KeyboardView style={styles.container}>
@@ -171,7 +172,7 @@ const SwapFormAmount = ({ navigation, route }: Props) => {
               {fromUnit.code}
             </LText>
           }
-          hasError={!!error}
+          hasError={!hideError && !!error}
         />
         <LText
           style={[amountError ? styles.error : styles.warning]}
@@ -252,8 +253,7 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   wrapper: {
-    flexBasis: 100,
-    flexShrink: 0.5,
+    flexBasis: 80,
     flexDirection: "column",
     justifyContent: "center",
   },

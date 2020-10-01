@@ -91,8 +91,6 @@ const Swap = ({
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    paddingHorizontal: 16,
-    paddingVertical: 16,
     backgroundColor: colors.white,
   },
   loading: {
