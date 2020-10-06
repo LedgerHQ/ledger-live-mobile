@@ -8,14 +8,14 @@ import uniq from "lodash/uniq";
 import {
   implementCountervalues,
   getCountervalues,
-} from "@ledgerhq/live-common/lib/countervalues";
+} from "@ledgerhq/live-common/lib/countervalues-old";
 import { listCryptoCurrencies } from "@ledgerhq/live-common/lib/currencies";
 import type { CryptoCurrency } from "@ledgerhq/live-common/lib/types";
 import {
   fetchExchangesForPairImplementation,
   fetchTickersByMarketcapImplementation,
   getDailyRatesImplementation,
-} from "@ledgerhq/live-common/lib/countervalues/mock";
+} from "@ledgerhq/live-common/lib/countervalues-old/mock";
 import Config from "react-native-config";
 import { setExchangePairsAction } from "./actions/settings";
 import { currenciesSelector } from "./reducers/accounts";
