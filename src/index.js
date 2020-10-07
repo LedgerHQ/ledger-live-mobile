@@ -45,6 +45,7 @@ import HookAnalytics from "./analytics/HookAnalytics";
 import HookSentry from "./components/HookSentry";
 import RootNavigator from "./components/RootNavigator";
 import SetEnvsFromSettings from "./components/SetEnvsFromSettings";
+import CounterValuesProvider from "./components/CounterValuesProvider";
 import type { State } from "./reducers";
 
 import { ScreenName, NavigatorName } from "./const";
@@ -296,13 +297,15 @@ export default class Root extends Component<
                       <I18nextProvider i18n={i18n}>
                         <LocaleProvider>
                           <BridgeSyncProvider>
-                            <CounterValues.PollingProvider>
-                              <ButtonUseTouchable.Provider value={true}>
-                                <OnboardingContextProvider>
-                                  <App importDataString={importDataString} />
-                                </OnboardingContextProvider>
-                              </ButtonUseTouchable.Provider>
-                            </CounterValues.PollingProvider>
+                            <CounterValuesProvider>
+                              <CounterValues.PollingProvider>
+                                <ButtonUseTouchable.Provider value={true}>
+                                  <OnboardingContextProvider>
+                                    <App importDataString={importDataString} />
+                                  </OnboardingContextProvider>
+                                </ButtonUseTouchable.Provider>
+                              </CounterValues.PollingProvider>
+                            </CounterValuesProvider>
                           </BridgeSyncProvider>
                         </LocaleProvider>
                       </I18nextProvider>

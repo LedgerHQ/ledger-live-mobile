@@ -3,6 +3,7 @@ import { log } from "@ledgerhq/logs";
 import store from "react-native-simple-store";
 import { atomicQueue } from "@ledgerhq/live-common/lib/promise";
 import type { AccountRaw } from "@ledgerhq/live-common/lib/types";
+import { CounterValuesState } from "@ledgerhq/live-common/lib/countervalues/types";
 
 const ACCOUNTS_KEY = "accounts";
 const ACCOUNTS_KEY_SORT = "accounts.sort";
@@ -31,13 +32,21 @@ export async function saveSettings(obj: *): Promise<void> {
   await store.save("settings", obj);
 }
 
-export async function getCountervalues(): Promise<*> {
-  const countervalues = await store.get("countervalues");
+export async function getCountervaluesOld(): Promise<*> {
+  const countervalues = await store.get("countervalues-old");
   return countervalues;
 }
 
-export async function saveCountervalues(obj: *): Promise<void> {
-  await store.save("countervalues", obj);
+export function getCountervalues(): Promise<
+  CounterValuesState | typeof undefined,
+> {
+  return store.get("countervalues");
+}
+
+export async function saveCountervalues(
+  state: CounterValuesState,
+): Promise<void> {
+  await store.save("countervalues", state);
 }
 
 export async function getBle(): Promise<*> {
