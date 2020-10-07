@@ -1,11 +1,18 @@
 // @flow
 
-import React from "react";
+import React, { useCallback } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { StyleSheet, View, Linking } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
+import { useSelector } from "react-redux";
 
 import type { TokenCurrency } from "@ledgerhq/live-common/lib/types";
+
+import {
+  flattenAccounts,
+  getAccountCurrency,
+} from "@ledgerhq/live-common/lib/account";
+import { accountsSelector } from "../../reducers/accounts";
 
 import colors from "../../colors";
 import Info from "../../icons/Info";
@@ -14,7 +21,7 @@ import CurrencyIcon from "../../components/CurrencyIcon";
 import Button from "../../components/Button";
 import LText from "../../components/LText";
 import { urls } from "../../config/urls";
-import { ScreenName } from "../../const";
+import { ScreenName, NavigatorName } from "../../const";
 
 const forceInset = { bottom: "always" };
 
@@ -58,13 +65,56 @@ export default function AddAccountsTokenCurrencyDisclaimer({
   route,
 }: Props) {
   const { t } = useTranslation();
+  const accounts = useSelector(accountsSelector);
 
   const token = route.params.token;
   const tokenName = `${token.name} (${token.ticker})`;
 
-  function onClose(): void {
+  const flatAccounts = flattenAccounts(accounts);
+
+  const parentCurrency = token.parentCurrency;
+
+  const parentTokenAccount =
+    parentCurrency &&
+    flatAccounts.find(acc => {
+      const c = getAccountCurrency(acc);
+      return c.id === parentCurrency.id;
+    });
+
+  const tokenAccount = flatAccounts.find(acc => {
+    const c = getAccountCurrency(acc);
+    return c.id === token.id;
+  });
+
+  const onClose = useCallback(() => {
     navigation.dangerouslyGetParent().pop();
-  }
+  }, [navigation]);
+
+  // specific cta in case of token accounts
+  const onTokenCta = useCallback(() => {
+    if (parentTokenAccount && parentTokenAccount.type === "Account") {
+      onClose();
+      navigation.navigate(NavigatorName.ReceiveFunds, {
+        screen: ScreenName.ReceiveSelectAccount,
+        params: {
+          // prefill search input with account name or token name
+          currency: tokenAccount ? token.name : parentTokenAccount.name,
+        },
+      });
+    } else {
+      // set parentCurrency in already opened add account flow and continue
+      navigation.navigate(ScreenName.AddAccountsSelectDevice, {
+        currency: parentCurrency,
+      });
+    }
+  }, [
+    parentTokenAccount,
+    parentCurrency,
+    onClose,
+    navigation,
+    tokenAccount,
+    token.name,
+  ]);
 
   return (
     <SafeAreaView style={styles.root} forceInset={forceInset}>
@@ -85,19 +135,19 @@ export default function AddAccountsTokenCurrencyDisclaimer({
           title={t("common.close")}
           type="secondary"
           onPress={onClose}
-          containerStyle={[styles.button, styles.buttonSpace]}
+          containerStyle={[styles.buttonSpace]}
         />
         <Button
           event="AddAccountTokenDisclaimerBack"
-          title={t("addAccounts.tokens.createParentCurrencyAccount", {
-            parrentCurrencyName: token.parentCurrency.ticker,
-          })}
-          type="primary"
-          onPress={() =>
-            navigation.navigate(ScreenName.AddAccountsSelectDevice, {
-              currency: token.parentCurrency,
-            })
+          title={
+            parentTokenAccount
+              ? t("account.receive")
+              : t("addAccounts.tokens.createParentCurrencyAccount", {
+                  parrentCurrencyName: token.parentCurrency.ticker,
+                })
           }
+          type="primary"
+          onPress={onTokenCta}
           containerStyle={styles.button}
         />
       </View>
@@ -131,6 +181,7 @@ const styles = StyleSheet.create({
   },
   buttonSpace: {
     marginRight: 16,
+    flex: 0.5,
   },
   disclaimerWrapper: {
     flex: 1,
