@@ -28,7 +28,7 @@ import {
 const LEDGER_COUNTERVALUES_API = "https://countervalues.api.live.ledger.com";
 
 // $FlowFixMe
-export const pairsSelector = createSelector(
+const pairsSelector = createSelector(
   currenciesSelector,
   counterValueCurrencySelector,
   state => state,
@@ -126,7 +126,7 @@ let syncCache = listCryptoCurrencies(true).sort((a, b) =>
   a.name.localeCompare(b.name),
 );
 
-export const getFullListSortedCryptoCurrencies: () => PC = () => {
+const getFullListSortedCryptoCurrencies: () => PC = () => {
   if (!sortCache) {
     sortCache = CounterValues.fetchTickersByMarketcap().then(
       tickers => {
@@ -158,5 +158,3 @@ export const getFullListSortedCryptoCurrenciesSync: () => CryptoCurrency[] = () 
 
 // trigger the catch straight away
 getFullListSortedCryptoCurrencies();
-
-export default CounterValues;

@@ -20,19 +20,13 @@ import { NotEnoughBalance } from "@ledgerhq/errors";
 import { log } from "@ledgerhq/logs";
 import { checkLibs } from "@ledgerhq/live-common/lib/sanityChecks";
 import logger from "./logger";
-import {
-  saveAccounts,
-  saveBle,
-  saveSettings,
-  saveCountervaluesOld,
-} from "./db";
+import { saveAccounts, saveBle, saveSettings } from "./db";
 import {
   exportSelector as settingsExportSelector,
   hasCompletedOnboardingSelector,
 } from "./reducers/settings";
 import { exportSelector as accountsExportSelector } from "./reducers/accounts";
 import { exportSelector as bleSelector } from "./reducers/ble";
-import CounterValues from "./countervalues";
 import LocaleProvider, { i18n } from "./context/Locale";
 import RebootProvider from "./context/Reboot";
 import ButtonUseTouchable from "./context/ButtonUseTouchable";
@@ -83,11 +77,6 @@ type AppProps = {
 function App({ importDataString }: AppProps) {
   useAppStateListener();
 
-  const getCountervaluesChanged = useCallback(
-    (a, b) => a.countervalues !== b.countervalues,
-    [],
-  );
-
   const getSettingsChanged = useCallback(
     (a, b) => a.settings !== b.settings,
     [],
@@ -113,12 +102,6 @@ function App({ importDataString }: AppProps) {
 
   return (
     <View style={styles.root}>
-      <DBSave
-        save={saveCountervaluesOld}
-        throttle={2000}
-        getChangesStats={getCountervaluesChanged}
-        lense={CounterValues.exportSelector}
-      />
       <DBSave
         save={saveSettings}
         throttle={400}
@@ -303,13 +286,11 @@ export default class Root extends Component<
                         <LocaleProvider>
                           <BridgeSyncProvider>
                             <CounterValuesProvider>
-                              <CounterValues.PollingProvider>
-                                <ButtonUseTouchable.Provider value={true}>
-                                  <OnboardingContextProvider>
-                                    <App importDataString={importDataString} />
-                                  </OnboardingContextProvider>
-                                </ButtonUseTouchable.Provider>
-                              </CounterValues.PollingProvider>
+                              <ButtonUseTouchable.Provider value={true}>
+                                <OnboardingContextProvider>
+                                  <App importDataString={importDataString} />
+                                </OnboardingContextProvider>
+                              </ButtonUseTouchable.Provider>
                             </CounterValuesProvider>
                           </BridgeSyncProvider>
                         </LocaleProvider>

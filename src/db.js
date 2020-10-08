@@ -32,17 +32,6 @@ export async function saveSettings(obj: *): Promise<void> {
   await store.save("settings", obj);
 }
 
-export async function getCountervaluesOld(): Promise<*> {
-  const countervalues = await store.get("countervalues-old");
-  return countervalues;
-}
-
-export async function saveCountervaluesOld(
-  state: CounterValuesState,
-): Promise<void> {
-  await store.save("countervalues-old", state);
-}
-
 export function getCountervalues(): Promise<
   CounterValuesState | typeof undefined,
 > {
