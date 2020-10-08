@@ -20,7 +20,12 @@ import { NotEnoughBalance } from "@ledgerhq/errors";
 import { log } from "@ledgerhq/logs";
 import { checkLibs } from "@ledgerhq/live-common/lib/sanityChecks";
 import logger from "./logger";
-import { saveAccounts, saveBle, saveSettings, saveCountervalues } from "./db";
+import {
+  saveAccounts,
+  saveBle,
+  saveSettings,
+  saveCountervaluesOld,
+} from "./db";
 import {
   exportSelector as settingsExportSelector,
   hasCompletedOnboardingSelector,
@@ -109,7 +114,7 @@ function App({ importDataString }: AppProps) {
   return (
     <View style={styles.root}>
       <DBSave
-        save={saveCountervalues}
+        save={saveCountervaluesOld}
         throttle={2000}
         getChangesStats={getCountervaluesChanged}
         lense={CounterValues.exportSelector}

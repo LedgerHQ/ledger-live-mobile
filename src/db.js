@@ -37,6 +37,12 @@ export async function getCountervaluesOld(): Promise<*> {
   return countervalues;
 }
 
+export async function saveCountervaluesOld(
+  state: CounterValuesState,
+): Promise<void> {
+  await store.save("countervalues-old", state);
+}
+
 export function getCountervalues(): Promise<
   CounterValuesState | typeof undefined,
 > {
