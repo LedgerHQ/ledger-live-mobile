@@ -12,7 +12,7 @@ import {
 import type { TokenAccount, Operation } from "@ledgerhq/live-common/lib/types";
 import debounce from "lodash/debounce";
 import { switchCountervalueFirst } from "../../actions/settings";
-import { balanceHistoryWithCountervalueSelectorCreator } from "../../actions/portfolio";
+import { useBalanceHistoryWithCountervalue } from "../../actions/portfolio";
 import {
   selectedTimeRangeSelector,
   counterValueCurrencySelector,
@@ -63,9 +63,7 @@ export default function AccountScreen({ navigation, route }: Props) {
     countervalueChange,
     cryptoChange,
     history,
-  } = useSelector(
-    balanceHistoryWithCountervalueSelectorCreator({ account, range }),
-  );
+  } = useBalanceHistoryWithCountervalue({ account, range });
   const useCounterValue = useSelector(countervalueFirstSelector);
   const counterValueCurrency = useSelector(counterValueCurrencySelector);
 
