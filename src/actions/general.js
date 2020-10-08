@@ -1,76 +1,156 @@
 // @flow
-
-import type { BigNumber } from "bignumber.js";
-import { createSelector } from "reselect";
+import { BigNumber } from "bignumber.js";
+import { useMemo, useCallback, useEffect, useState, useRef } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import type { Currency } from "@ledgerhq/live-common/lib/types";
+import { isAccountDelegating } from "@ledgerhq/live-common/lib/families/tezos/bakers";
 import {
   nestedSortAccounts,
   flattenSortAccounts,
   sortAccountsComparatorFromOrder,
 } from "@ledgerhq/live-common/lib/account";
-import type { State } from "../reducers";
-import CounterValues from "../countervalues";
+import { getAssetsDistribution } from "@ledgerhq/live-common/lib/portfolio";
+import { useCountervaluesState } from "@ledgerhq/live-common/lib/countervalues/react";
+import { calculate } from "@ledgerhq/live-common/lib/countervalues/logic";
+import { accountsSelector } from "../reducers/accounts";
 import {
-  intermediaryCurrency,
   counterValueCurrencySelector,
-  exchangeSettingsForPairSelector,
   orderAccountsSelector,
 } from "../reducers/settings";
-import { accountsSelector } from "../reducers/accounts";
-import { flushAll } from "../components/DBSave";
-import clearLibcore from "../helpers/clearLibcore";
 import { clearBridgeCache } from "../bridge/cache";
+import clearLibcore from "../helpers/clearLibcore";
+import { flushAll } from "../components/DBSave";
 
-export const calculateCountervalueSelector = (state: State) => {
-  const counterValueCurrency = counterValueCurrencySelector(state);
-  return (currency: Currency, value: BigNumber): ?BigNumber => {
-    const intermediary = intermediaryCurrency(currency, counterValueCurrency);
-    const fromExchange = exchangeSettingsForPairSelector(state, {
-      from: currency,
-      to: intermediary,
+export function useDistribution() {
+  const accounts = useSelector(accountsSelector);
+  const calc = useCalculateCountervalueCallback();
+
+  return useMemo(() => {
+    return getAssetsDistribution(accounts, calc, {
+      minShowFirst: 6,
+      maxShowFirst: 6,
+      showFirstThreshold: 0.95,
     });
-    const toExchange = exchangeSettingsForPairSelector(state, {
-      from: intermediary,
-      to: counterValueCurrency,
+  }, [accounts, calc]);
+}
+
+export function useCalculateCountervalueCallback() {
+  const to = useSelector(counterValueCurrencySelector);
+  const state = useCountervaluesState();
+
+  return useCallback(
+    (from: Currency, value: BigNumber): ?BigNumber => {
+      const countervalue = calculate(state, {
+        value: value.toNumber(),
+        from,
+        to,
+        disableRounding: true,
+      });
+      return typeof countervalue === "number"
+        ? BigNumber(countervalue)
+        : countervalue;
+    },
+    [to, state],
+  );
+}
+
+export function useSortAccountsComparator() {
+  const accounts = useSelector(orderAccountsSelector);
+  const calc = useCalculateCountervalueCallback();
+
+  return sortAccountsComparatorFromOrder(accounts, calc);
+}
+
+export function useNestedSortAccounts() {
+  const accounts = useSelector(accountsSelector);
+  const comparator = useSortAccountsComparator();
+
+  return useMemo(() => nestedSortAccounts(accounts, comparator), [
+    accounts,
+    comparator,
+  ]);
+}
+
+export function useFlattenSortAccountsEnforceHideEmptyToken() {
+  const accounts = useSelector(accountsSelector);
+  const comparator = useSortAccountsComparator();
+  return useMemo(
+    () =>
+      flattenSortAccounts(accounts, comparator, {
+        enforceHideEmptySubAccounts: true,
+      }),
+    [accounts, comparator],
+  );
+}
+
+export function useHaveUndelegatedAccountsSelector() {
+  const accounts = useFlattenSortAccountsEnforceHideEmptyToken();
+  return useMemo(
+    () =>
+      accounts.some(
+        acc =>
+          acc.currency &&
+          acc.currency.family === "tezos" &&
+          !isAccountDelegating(acc),
+      ),
+    [accounts],
+  );
+}
+
+export function useRefreshAccountsOrdering() {
+  const payload = useNestedSortAccounts();
+  const dispatch = useDispatch();
+  const [isRefreshing, setIsRefreshing] = useState(false);
+
+  // workaround for not reflecting the latest payload when calling refresh right after updating accounts
+  useEffect(() => {
+    if (!isRefreshing) {
+      return;
+    }
+    dispatch({
+      type: "SET_ACCOUNTS",
+      payload,
     });
-    return CounterValues.calculateWithIntermediarySelector(state, {
-      from: currency,
-      fromExchange,
-      intermediary,
-      toExchange,
-      to: counterValueCurrency,
-      value,
-      disableRounding: true,
-    });
-  };
-};
+    setIsRefreshing(false);
+  }, [isRefreshing, dispatch, payload]);
 
-// $FlowFixMe go home you're drunk (works on desktop)
-export const sortAccountsComparatorSelector = createSelector(
-  orderAccountsSelector,
-  calculateCountervalueSelector,
-  sortAccountsComparatorFromOrder,
-);
+  return useCallback(() => {
+    setIsRefreshing(true);
+  }, []);
+}
 
-const nestedSortAccountsSelector = createSelector(
-  accountsSelector,
-  sortAccountsComparatorSelector,
-  nestedSortAccounts,
-);
+export function useRefreshAccountsOrderingEffect({
+  onMount = false,
+  onUnmount = false,
+  onUpdate = false,
+}: {
+  onMount?: boolean,
+  onUnmount?: boolean,
+  onUpdate?: boolean,
+}) {
+  const refreshAccountsOrdering = useRefreshAccountsOrdering();
 
-// $FlowFixMe go home you're drunk (works on desktop)
-export const flattenSortAccountsSelector = createSelector(
-  accountsSelector,
-  sortAccountsComparatorSelector,
-  flattenSortAccounts,
-);
+  const didMount = useRef(false);
+  useEffect(() => {
+    if (didMount.current) {
+      if (onUpdate) {
+        refreshAccountsOrdering();
+      }
+    } else {
+      didMount.current = true;
+    }
 
-export const refreshAccountsOrdering = () => (dispatch: *, getState: *) => {
-  dispatch({
-    type: "SET_ACCOUNTS",
-    payload: nestedSortAccountsSelector(getState()),
-  });
-};
+    if (onMount) {
+      refreshAccountsOrdering();
+    }
+
+    return () => {
+      if (onUnmount) {
+        refreshAccountsOrdering();
+      }
+    };
+  }, [onMount, onUnmount, onUpdate, refreshAccountsOrdering]);
+}
 
 export const cleanCache = () => async (dispatch: *) => {
   dispatch({ type: "CLEAN_CACHE" });
