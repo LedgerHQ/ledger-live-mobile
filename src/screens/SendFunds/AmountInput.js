@@ -1,164 +1,137 @@
 // @flow
-import React, { Component } from "react";
+import React, { useCallback, useState } from "react";
 import { View, StyleSheet } from "react-native";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import { BigNumber } from "bignumber.js";
-import debounce from "lodash/debounce";
-
-import type { Currency, AccountLike } from "@ledgerhq/live-common/lib/types";
+import type { AccountLike } from "@ledgerhq/live-common/lib/types";
 import {
   getAccountUnit,
   getAccountCurrency,
 } from "@ledgerhq/live-common/lib/account/helpers";
-import { withTranslation } from "react-i18next";
-import { compose } from "redux";
-import { track } from "../../analytics";
 import {
-  counterValueCurrencySelector,
-  intermediaryCurrency,
-  exchangeSettingsForPairSelector,
-} from "../../reducers/settings";
-import type { State } from "../../reducers";
+  useCalculate,
+  useCountervaluesState,
+} from "@ledgerhq/live-common/lib/countervalues/react";
+import { calculate } from "@ledgerhq/live-common/lib/countervalues/logic";
+import { useTranslation } from "react-i18next";
+import { track } from "../../analytics";
+import { counterValueCurrencySelector } from "../../reducers/settings";
 import LText from "../../components/LText/index";
-import CounterValues from "../../countervalues";
 import colors from "../../colors";
 import CounterValuesSeparator from "./CounterValuesSeparator";
 import CurrencyInput from "../../components/CurrencyInput";
 import TranslatedError from "../../components/TranslatedError";
-import type { T } from "../../types/common";
 
-type OwnProps = {
+type Props = {
   account: AccountLike,
-  currency: string,
   value: BigNumber,
   onChange: BigNumber => void,
   error?: ?Error,
   warning?: ?Error,
-};
-
-type Props = OwnProps & {
-  fiatCurrency: Currency,
-  t: T,
-  getCounterValue: BigNumber => ?BigNumber,
-  getReverseCounterValue: BigNumber => ?BigNumber,
   editable?: boolean,
 };
 
-type OwnState = {
-  active: "crypto" | "fiat",
-};
+export default function AmountInput({
+  onChange,
+  value,
+  account,
+  error,
+  warning,
+  editable,
+}: Props) {
+  const { t } = useTranslation();
+  const fiatCurrency = useSelector(counterValueCurrencySelector);
+  const cryptoCurrency = getAccountCurrency(account);
+  const cryptoUnit = getAccountUnit(account);
+  const fiatCountervalue = useCalculate({
+    from: cryptoCurrency,
+    to: fiatCurrency,
+    value: value.toNumber(),
+    disableRounding: true,
+  });
+  const fiatVal = BigNumber(fiatCountervalue ?? 0);
+  const fiatUnit = fiatCurrency.units[0];
+  const state = useCountervaluesState();
 
-class AmountInput extends Component<Props, OwnState> {
-  input = React.createRef();
+  const [active, setActive] = useState<"crypto" | "fiat" | "none">("none");
 
-  state = {
-    active: "crypto",
-  };
-
-  componentDidMount() {
-    if (this.input.current) {
-      this.input.current.focus();
-    }
-  }
-
-  handleAmountChange = (changeField: "crypto" | "fiat") => (
-    value: BigNumber,
-  ) => {
-    const { getReverseCounterValue, onChange } = this.props;
-    if (changeField === "crypto") {
-      onChange(value);
-    } else {
-      const cryptoVal = getReverseCounterValue(value) || BigNumber(0);
+  const onChangeFiatAmount = useCallback(
+    val => {
+      const cryptoVal = BigNumber(
+        calculate(state, {
+          from: cryptoCurrency,
+          to: fiatCurrency,
+          value: val.toNumber(),
+          reverse: true,
+        }) ?? 0,
+      );
       onChange(cryptoVal);
-    }
-  };
+    },
+    [onChange, state, cryptoCurrency, fiatCurrency],
+  );
 
-  onCryptoFieldChange = debounce(this.handleAmountChange("crypto"), 250);
+  const onCryptoFieldFocus = useCallback(() => {
+    setActive("crypto");
+    track("SendAmountCryptoFocused");
+  }, []);
 
-  onFiatFieldChange = debounce(this.handleAmountChange("fiat"), 250);
+  const onFiatFieldFocus = useCallback(() => {
+    setActive("fiat");
+    track("SendAmountFiatFocused");
+  }, []);
 
-  onFocus = (direction: "crypto" | "fiat") => () => {
-    this.setState({ active: direction });
-    track(
-      direction === "crypto"
-        ? "SendAmountCryptoFocused"
-        : "SendAmountFiatFocused",
-    );
-  };
-
-  onCryptoFieldFocus = this.onFocus("crypto");
-
-  onFiatFieldFocus = this.onFocus("fiat");
-
-  render() {
-    const { active } = this.state;
-    const {
-      t,
-      currency,
-      value,
-      fiatCurrency,
-      getCounterValue,
-      account,
-      error,
-      warning,
-      editable,
-    } = this.props;
-    const isCrypto = active === "crypto";
-    const fiat = value ? getCounterValue(value) : BigNumber(0);
-    const rightUnit = fiatCurrency.units[0];
-    const unit = getAccountUnit(account);
-    return (
-      <View style={styles.container}>
-        <View style={styles.wrapper}>
-          <CurrencyInput
-            editable={editable}
-            isActive={isCrypto}
-            onFocus={this.onCryptoFieldFocus}
-            onChange={this.onCryptoFieldChange}
-            unit={unit}
-            value={value}
-            renderRight={
-              <LText
-                style={[styles.currency, isCrypto ? styles.active : null]}
-                semiBold
-              >
-                {currency}
-              </LText>
-            }
-            hasError={!!error}
-            hasWarning={!!warning}
-          />
-          <LText
-            style={[error ? styles.error : styles.warning]}
-            numberOfLines={2}
-          >
-            <TranslatedError error={error || warning} />
-          </LText>
-        </View>
-        <CounterValuesSeparator />
-        <View style={styles.wrapper}>
-          <CurrencyInput
-            isActive={!isCrypto}
-            onFocus={this.onFiatFieldFocus}
-            onChange={this.onFiatFieldChange}
-            unit={rightUnit}
-            value={value ? fiat : null}
-            placeholder={!fiat ? t("send.amount.noRateProvider") : undefined}
-            editable={!!fiat && editable}
-            showAllDigits
-            renderRight={
-              <LText
-                style={[styles.currency, !isCrypto ? styles.active : null]}
-                semiBold
-              >
-                {rightUnit.code}
-              </LText>
-            }
-          />
-        </View>
+  const isCrypto = active === "crypto";
+  return (
+    <View style={styles.container}>
+      <View style={styles.wrapper}>
+        <CurrencyInput
+          editable={editable}
+          isActive={isCrypto}
+          onFocus={onCryptoFieldFocus}
+          onChange={onChange}
+          unit={cryptoUnit}
+          value={value}
+          renderRight={
+            <LText
+              style={[styles.currency, isCrypto ? styles.active : null]}
+              semiBold
+            >
+              {cryptoUnit.code}
+            </LText>
+          }
+          hasError={!!error}
+          hasWarning={!!warning}
+        />
+        <LText
+          style={[error ? styles.error : styles.warning]}
+          numberOfLines={2}
+        >
+          <TranslatedError error={error || warning} />
+        </LText>
       </View>
-    );
-  }
+      <CounterValuesSeparator />
+      <View style={styles.wrapper}>
+        <CurrencyInput
+          isActive={!isCrypto}
+          onFocus={onFiatFieldFocus}
+          onChange={onChangeFiatAmount}
+          unit={fiatUnit}
+          value={value ? fiatVal : null}
+          placeholder={!fiatVal ? t("send.amount.noRateProvider") : undefined}
+          editable={!!fiatVal && editable}
+          showAllDigits
+          renderRight={
+            <LText
+              style={[styles.currency, !isCrypto ? styles.active : null]}
+              semiBold
+            >
+              {fiatUnit.code}
+            </LText>
+          }
+        />
+      </View>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -187,50 +160,3 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
 });
-
-const mapStateToProps = (state: State, props: OwnProps) => {
-  const { account } = props;
-  const currency = getAccountCurrency(account);
-  const counterValueCurrency = counterValueCurrencySelector(state);
-  const intermediary = intermediaryCurrency(currency, counterValueCurrency);
-  const fromExchange = exchangeSettingsForPairSelector(state, {
-    from: currency,
-    to: intermediary,
-  });
-  const toExchange = exchangeSettingsForPairSelector(state, {
-    from: intermediary,
-    to: counterValueCurrency,
-  });
-
-  const getCounterValue = value =>
-    CounterValues.calculateWithIntermediarySelector(state, {
-      from: currency,
-      fromExchange,
-      intermediary,
-      toExchange,
-      to: counterValueCurrency,
-      value,
-      disableRounding: true,
-    });
-
-  const getReverseCounterValue = value =>
-    CounterValues.reverseWithIntermediarySelector(state, {
-      from: currency,
-      fromExchange,
-      intermediary,
-      toExchange,
-      to: counterValueCurrency,
-      value,
-    });
-
-  return {
-    fiatCurrency: counterValueCurrency,
-    getCounterValue,
-    getReverseCounterValue,
-  };
-};
-
-export default compose(
-  connect(mapStateToProps),
-  withTranslation(),
-)(AmountInput);
