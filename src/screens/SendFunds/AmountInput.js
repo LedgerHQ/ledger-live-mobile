@@ -4,15 +4,7 @@ import { View, StyleSheet } from "react-native";
 import { useSelector } from "react-redux";
 import { BigNumber } from "bignumber.js";
 import type { AccountLike } from "@ledgerhq/live-common/lib/types";
-import {
-  getAccountUnit,
-  getAccountCurrency,
-} from "@ledgerhq/live-common/lib/account/helpers";
-import {
-  useCalculate,
-  useCountervaluesState,
-} from "@ledgerhq/live-common/lib/countervalues/react";
-import { calculate } from "@ledgerhq/live-common/lib/countervalues/logic";
+import { useSendAmount } from "@ledgerhq/live-common/lib/countervalues/react";
 import { useTranslation } from "react-i18next";
 import { track } from "../../analytics";
 import { counterValueCurrencySelector } from "../../reducers/settings";
@@ -33,7 +25,7 @@ type Props = {
 
 export default function AmountInput({
   onChange,
-  value,
+  value: cryptoAmount,
   account,
   error,
   warning,
@@ -41,33 +33,24 @@ export default function AmountInput({
 }: Props) {
   const { t } = useTranslation();
   const fiatCurrency = useSelector(counterValueCurrencySelector);
-  const cryptoCurrency = getAccountCurrency(account);
-  const cryptoUnit = getAccountUnit(account);
-  const fiatCountervalue = useCalculate({
-    from: cryptoCurrency,
-    to: fiatCurrency,
-    value: value.toNumber(),
-    disableRounding: true,
+  const {
+    cryptoUnit,
+    fiatAmount,
+    fiatUnit,
+    calculateCryptoAmount,
+  } = useSendAmount({
+    account,
+    fiatCurrency,
+    cryptoAmount,
   });
-  const fiatVal = BigNumber(fiatCountervalue ?? 0);
-  const fiatUnit = fiatCurrency.units[0];
-  const state = useCountervaluesState();
-
   const [active, setActive] = useState<"crypto" | "fiat" | "none">("none");
 
   const onChangeFiatAmount = useCallback(
-    val => {
-      const cryptoVal = BigNumber(
-        calculate(state, {
-          from: cryptoCurrency,
-          to: fiatCurrency,
-          value: val.toNumber(),
-          reverse: true,
-        }) ?? 0,
-      );
-      onChange(cryptoVal);
+    (fiatAmount: BigNumber) => {
+      const amount = calculateCryptoAmount(fiatAmount);
+      onChange(amount);
     },
-    [onChange, state, cryptoCurrency, fiatCurrency],
+    [onChange, calculateCryptoAmount],
   );
 
   const onCryptoFieldFocus = useCallback(() => {
@@ -90,7 +73,7 @@ export default function AmountInput({
           onFocus={onCryptoFieldFocus}
           onChange={onChange}
           unit={cryptoUnit}
-          value={value}
+          value={cryptoAmount}
           renderRight={
             <LText
               style={[styles.currency, isCrypto ? styles.active : null]}
@@ -116,9 +99,11 @@ export default function AmountInput({
           onFocus={onFiatFieldFocus}
           onChange={onChangeFiatAmount}
           unit={fiatUnit}
-          value={value ? fiatVal : null}
-          placeholder={!fiatVal ? t("send.amount.noRateProvider") : undefined}
-          editable={!!fiatVal && editable}
+          value={cryptoAmount ? fiatAmount : null}
+          placeholder={
+            !fiatAmount ? t("send.amount.noRateProvider") : undefined
+          }
+          editable={!!fiatAmount && editable}
           showAllDigits
           renderRight={
             <LText
