@@ -1,5 +1,4 @@
 // @flow
-
 import React, { useMemo } from "react";
 import { Trans } from "react-i18next";
 import { StyleSheet, View, FlatList } from "react-native";
@@ -11,18 +10,15 @@ import type {
 import {
   listTokens,
   useCurrenciesByMarketcap,
+  listSupportedCurrencies,
 } from "@ledgerhq/live-common/lib/currencies";
-
-import useEnv from "@ledgerhq/live-common/lib/hooks/useEnv";
 import { track } from "../../analytics/segment";
-import { listCryptoCurrencies } from "../../cryptocurrencies";
 import { TrackScreen } from "../../analytics";
 import FilteredSearchBar from "../../components/FilteredSearchBar";
 import KeyboardView from "../../components/KeyboardView";
 import CurrencyRow from "../../components/CurrencyRow";
 import LText from "../../components/LText";
 import { supportedCurrenciesIds } from "./coinifyConfig";
-
 import colors from "../../colors";
 
 const SEARCH_KEYS = ["name", "ticker"];
@@ -45,13 +41,12 @@ const renderEmptyList = () => (
 );
 
 export default function ExchangeSelectCrypto({ navigation, route }: Props) {
-  const devMode = useEnv("MANAGER_DEV_MODE");
   const { params } = route;
   const initialCurrencySelected = params?.currency;
 
   const cryptoCurrencies = useMemo(
-    () => listCryptoCurrencies(devMode).concat(listTokens()),
-    [devMode],
+    () => listSupportedCurrencies().concat(listTokens()),
+    [],
   );
 
   const sortedCryptoCurrencies = useCurrenciesByMarketcap(cryptoCurrencies);
