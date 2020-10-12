@@ -8,10 +8,7 @@ import { useSelector } from "react-redux";
 
 import type { TokenCurrency } from "@ledgerhq/live-common/lib/types";
 
-import {
-  flattenAccounts,
-  getAccountCurrency,
-} from "@ledgerhq/live-common/lib/account";
+import { findTokenAccountByCurrency } from "@ledgerhq/live-common/lib/account";
 import { accountsSelector } from "../../reducers/accounts";
 
 import colors from "../../colors";
@@ -70,21 +67,13 @@ export default function AddAccountsTokenCurrencyDisclaimer({
   const token = route.params.token;
   const tokenName = `${token.name} (${token.ticker})`;
 
-  const flatAccounts = flattenAccounts(accounts);
-
   const parentCurrency = token.parentCurrency;
 
-  const parentTokenAccount =
-    parentCurrency &&
-    flatAccounts.find(acc => {
-      const c = getAccountCurrency(acc);
-      return c.id === parentCurrency.id;
-    });
+  const accountData = findTokenAccountByCurrency(token, accounts);
 
-  const tokenAccount = flatAccounts.find(acc => {
-    const c = getAccountCurrency(acc);
-    return c.id === token.id;
-  });
+  const parentTokenAccount = accountData ? accountData.parentAccount : null;
+
+  const tokenAccount = accountData ? accountData.account : null;
 
   const onClose = useCallback(() => {
     navigation.dangerouslyGetParent().pop();
