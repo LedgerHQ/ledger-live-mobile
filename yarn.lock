@@ -1093,8 +1093,8 @@
   resolved "https://registry.yarnpkg.com/@ledgerhq/devices/-/devices-5.25.0.tgz#c9522d7495e7be41fad59eb7d5e4e3e1030fd205"
   integrity sha512-3wsxVDkUYd5ERA5KVy99wEGbHAkfsuWbQ8b2ruzr8JX9wIxUS8mu1XkdoDt5M+H4jXP9C8ZGj9YT3VsiiIzfxg==
   dependencies:
-    "@ledgerhq/errors" "^5.25.0"
-    "@ledgerhq/logs" "^5.25.0"
+    "@ledgerhq/errors" "^5.26.0"
+    "@ledgerhq/logs" "^5.26.0"
     rxjs "^6.6.3"
 
 "@ledgerhq/errors@5.26.0", "@ledgerhq/errors@^5.26.0":
@@ -1120,14 +1120,14 @@
     semver "^7.3.2"
     sha.js "2"
 
-"@ledgerhq/hw-app-eth@5.25.3":
-  version "5.25.3"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-app-eth/-/hw-app-eth-5.25.3.tgz#82345804d2b87c2887984606b5599fa15a4afc65"
-  integrity sha512-BbJsHed6tjTzZTqwsTUNj9vhR0hYp0IcBWZF6WKYJ2pX3FVuFT9CxmzkCv0geDbYdFxYyDKlGliTyx/L2R5PDg==
+"@ledgerhq/hw-app-eth@5.26.0":
+  version "5.26.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-app-eth/-/hw-app-eth-5.26.0.tgz#9bed9cebefdcc2e11d6e24ebdd8e6f261928603f"
+  integrity sha512-q8LEyhmPrMyztrtIR7W5EvClavpUFWiDqmHG4fJ9lVkcv2ATN4j5c1TjrLX4OrpMkYoLdj+5nk1sWey/KLxncQ==
   dependencies:
-    "@ledgerhq/cryptoassets" "^5.25.3"
-    "@ledgerhq/errors" "^5.25.0"
-    "@ledgerhq/hw-transport" "^5.25.0"
+    "@ledgerhq/cryptoassets" "^5.26.0"
+    "@ledgerhq/errors" "^5.26.0"
+    "@ledgerhq/hw-transport" "^5.26.0"
     bignumber.js "^9.0.1"
     rlp "^2.2.6"
 
@@ -1211,8 +1211,8 @@
   resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport/-/hw-transport-5.25.0.tgz#e04e2130fedcb433ee68f25125e6ac49efa0aede"
   integrity sha512-q6hhWWwbSZPmzdTaQMowY+uQYwCC4xRqRQFQFgF6BjZFn2n+AwGOEU9mDmHnjL6XxkQfj8CjWuPJSRRv5OLmlg==
   dependencies:
-    "@ledgerhq/devices" "^5.25.0"
-    "@ledgerhq/errors" "^5.25.0"
+    "@ledgerhq/devices" "^5.26.0"
+    "@ledgerhq/errors" "^5.26.0"
     events "^3.2.0"
 
 "@ledgerhq/live-common@^15.3.0":
