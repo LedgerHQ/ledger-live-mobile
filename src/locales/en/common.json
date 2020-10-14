@@ -1349,8 +1349,13 @@
     },
     "lending": {
       "title": "Lend crypto",
+      "howDoesLendingWork": "How does lending works",
       "dashboard": {
-        "tabTitle": "Dashboard"
+        "tabTitle": "Dashboard",
+        "assetsTitle": "Assets to lend",
+        "accountsTitle": "Active accounts",
+        "emptySateDescription": "You can lend assets directly from your Ethereum accounts and earn passive revenue.",
+        "apy": "{{value}} APY"
       },
       "closedLoans": {
         "tabTitle": "Closed loans"
