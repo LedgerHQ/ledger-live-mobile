@@ -1346,6 +1346,18 @@
           "desc": "Either you have not made any swaps yet, or Ledger Live has been reset in the meantime."
         }
       }
+    },
+    "lending": {
+      "title": "Lend crypto",
+      "dashboard": {
+        "tabTitle": "Dashboard"
+      },
+      "closedLoans": {
+        "tabTitle": "Closed loans"
+      },
+      "history": {
+        "tabTitle": "History"
+      }
     }
   },
   "sync": {

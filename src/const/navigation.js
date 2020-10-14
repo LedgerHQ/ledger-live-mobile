@@ -188,6 +188,10 @@ export const ScreenName = {
   AlgorandOptInValidation: "AlgorandOptInValidation",
   AlgorandOptInValidationError: "AlgorandOptInValidationError",
   AlgorandOptInValidationSuccess: "AlgorandOptInValidationSuccess",
+
+  LendingDashboard: "LendingDashboard",
+  LendingClosedLoans: "LendingClosedLoans",
+  LendingHistory: "LendingHistory",
 };
 
 export const NavigatorName = {
@@ -224,6 +228,7 @@ export const NavigatorName = {
   TezosDelegationFlow: "TezosDelegationFlow",
   TronVoteFlow: "TronVoteFlow",
   Unfreeze: "Unfreeze",
+  Lending: "Lending",
   /* eslint-disable sort-keys */
 
   // Tab
