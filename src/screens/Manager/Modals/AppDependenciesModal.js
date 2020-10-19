@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 16,
-    color: colors.darkBlue,
+     
   },
   warnText: {
     textAlign: "center",

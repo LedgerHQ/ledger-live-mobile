@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
     marginTop: 24,
     marginBottom: 16,
     textAlign: "center",
-    color: colors.darkBlue,
+     
     fontSize: 16,
   },
   desc: {

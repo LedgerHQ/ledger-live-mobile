@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
   title: {
     marginTop: 32,
     textAlign: "center",
-    color: colors.darkBlue,
+     
     fontSize: 18,
   },
   description: {

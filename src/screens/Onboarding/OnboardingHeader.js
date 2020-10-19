@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   title: {
-    color: colors.darkBlue,
+     
     fontSize: 24,
     lineHeight: 36,
   },

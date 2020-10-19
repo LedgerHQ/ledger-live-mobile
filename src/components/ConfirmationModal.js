@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
   confirmationTitle: {
     textAlign: "center",
     fontSize: 18,
-    color: colors.darkBlue,
+     
   },
   confirmationDesc: {
     marginVertical: 24,

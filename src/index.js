@@ -24,6 +24,7 @@ import { saveAccounts, saveBle, saveSettings, saveCountervalues } from "./db";
 import {
   exportSelector as settingsExportSelector,
   hasCompletedOnboardingSelector,
+  themeSelector,
 } from "./reducers/settings";
 import { exportSelector as accountsExportSelector } from "./reducers/accounts";
 import { exportSelector as bleSelector } from "./reducers/ble";
@@ -48,6 +49,13 @@ import SetEnvsFromSettings from "./components/SetEnvsFromSettings";
 import type { State } from "./reducers";
 
 import { ScreenName, NavigatorName } from "./const";
+import { lightTheme, duskTheme, darkTheme } from "./colors";
+
+const themes = {
+  light: lightTheme,
+  dusk: duskTheme,
+  dark: darkTheme,
+};
 
 checkLibs({
   NotEnoughBalance,
@@ -242,12 +250,18 @@ const DeepLinkingNavigator = ({ children }: { children: React$Node }) => {
         });
   }, [getInitialState, hasCompletedOnboarding]);
 
+  const theme = useSelector(themeSelector);
+
   if (!isReady) {
     return null;
   }
 
   return (
-    <NavigationContainer initialState={initialState} ref={ref}>
+    <NavigationContainer
+      theme={themes[theme]}
+      initialState={initialState}
+      ref={ref}
+    >
       {children}
     </NavigationContainer>
   );
@@ -286,13 +300,13 @@ export default class Root extends Component<
           {(ready, store) =>
             ready ? (
               <>
-                <StyledStatusBar />
                 <SetEnvsFromSettings />
                 <HookSentry />
                 <HookAnalytics store={store} />
-                <SafeAreaProvider>
-                  <AuthPass>
-                    <DeepLinkingNavigator>
+                <AuthPass>
+                  <DeepLinkingNavigator>
+                    <StyledStatusBar />
+                    <SafeAreaProvider>
                       <I18nextProvider i18n={i18n}>
                         <LocaleProvider>
                           <BridgeSyncProvider>
@@ -306,9 +320,9 @@ export default class Root extends Component<
                           </BridgeSyncProvider>
                         </LocaleProvider>
                       </I18nextProvider>
-                    </DeepLinkingNavigator>
-                  </AuthPass>
-                </SafeAreaProvider>
+                    </SafeAreaProvider>
+                  </DeepLinkingNavigator>
+                </AuthPass>
               </>
             ) : (
               <LoadingApp />

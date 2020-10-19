@@ -57,7 +57,7 @@ function SectionWrapper({ onPress, children, style }: FieldWrapperProps) {
 export const styles = StyleSheet.create({
   wrapper: {
     padding: 16,
-    color: colors.darkBlue,
+     
   },
   titleWrapper: {
     flexDirection: "row",
@@ -70,6 +70,6 @@ export const styles = StyleSheet.create({
     marginRight: 8,
   },
   value: {
-    color: colors.darkBlue,
+     
   },
 });

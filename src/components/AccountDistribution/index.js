@@ -9,7 +9,6 @@ import { BigNumber } from "bignumber.js";
 import { connect } from "react-redux";
 import LText from "../LText";
 import Row from "./Row";
-import colors from "../../colors";
 import { calculateCountervalueSelector } from "../../actions/general";
 import { counterValueCurrencySelector } from "../../reducers/settings";
 
@@ -64,7 +63,6 @@ const styles = StyleSheet.create({
   distributionTitle: {
     fontSize: 16,
     lineHeight: 24,
-    color: colors.darkBlue,
     marginLeft: 16,
     marginTop: 8,
     marginBottom: 8,

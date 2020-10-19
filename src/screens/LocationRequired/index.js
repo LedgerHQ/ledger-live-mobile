@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   title: {
-    color: colors.darkBlue,
+     
     fontSize: 18,
     marginTop: 24,
   },

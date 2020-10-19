@@ -12,8 +12,7 @@ import {
   isAccountEmpty,
 } from "@ledgerhq/live-common/lib/account";
 
-import colors from "../../colors";
-
+import { useTheme } from "@react-navigation/native";
 import {
   accountsSelector,
   flattenAccountsSelector,
@@ -63,6 +62,7 @@ export default function PortfolioScreen({ navigation }: Props) {
   const scrollY = useRef(new Animated.Value(0)).current;
   const ref = useRef();
   useScrollToTop(ref);
+  const { colors } = useTheme();
 
   function keyExtractor(item: Operation) {
     return item.id;
@@ -138,7 +138,15 @@ export default function PortfolioScreen({ navigation }: Props) {
     accounts.length === 0 || accounts.every(isAccountEmpty);
 
   return (
-    <SafeAreaView style={[styles.root, { paddingTop: extraStatusBarPadding }]}>
+    <SafeAreaView
+      style={[
+        styles.root,
+        {
+          paddingTop: extraStatusBarPadding,
+          backgroundColor: colors.background,
+        },
+      ]}
+    >
       {!showingPlaceholder ? (
         <StickyHeader
           scrollY={scrollY}
@@ -187,7 +195,6 @@ export default function PortfolioScreen({ navigation }: Props) {
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: colors.lightGrey,
   },
   inner: {
     position: "relative",

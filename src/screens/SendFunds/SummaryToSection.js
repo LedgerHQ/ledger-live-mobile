@@ -35,6 +35,6 @@ export default class SummaryToSection extends PureComponent<Props> {
 const styles = StyleSheet.create({
   summaryRowText: {
     fontSize: 16,
-    color: colors.darkBlue,
+     
   },
 });

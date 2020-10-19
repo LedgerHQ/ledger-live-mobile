@@ -22,10 +22,10 @@ import DistributionCard from "./DistributionCard";
 import LText from "../../components/LText";
 import type { DistributionItem } from "./DistributionCard";
 import { counterValueCurrencySelector } from "../../reducers/settings";
-import colors from "../../colors";
 import RingChart from "./RingChart";
 import CurrencyUnitValue from "../../components/CurrencyUnitValue";
 import { calculateCountervalueSelector } from "../../actions/general";
+import { useTheme } from "@react-navigation/native";
 
 const forceInset = { bottom: "always" };
 
@@ -36,6 +36,7 @@ type Props = {
 type DistributionProps = Props & {
   distribution: AssetsDistribution,
   counterValueCurrency: Currency,
+  colors: *,
 };
 
 const distributionSelector = createSelector(
@@ -76,18 +77,19 @@ class Distribution extends PureComponent<DistributionProps, *> {
   keyExtractor = item => item.currency.id;
 
   ListHeaderComponent = () => {
-    const { counterValueCurrency, distribution } = this.props;
+    const { counterValueCurrency, distribution, colors } = this.props;
     const { highlight } = this.state;
     const size = Dimensions.get("window").width / 3;
     return (
       <View>
-        <View style={styles.header}>
+        <View style={[styles.header, { backgroundColor: colors.white }]}>
           <View style={[styles.chartWrapper, { height: size }]}>
             <RingChart
               size={size}
               onHighlightChange={this.onHighlightChange}
               highlight={highlight}
               data={distribution.list}
+              bg={colors.white}
             />
             <View style={styles.assetWrapper} pointerEvents="none">
               <LText semiBold style={styles.assetCount}>
@@ -102,7 +104,7 @@ class Distribution extends PureComponent<DistributionProps, *> {
             </View>
           </View>
           <View style={styles.total}>
-            <LText semiBold style={styles.label}>
+            <LText semiBold style={styles.label} color="smoke">
               <Trans i18nKey="distribution.total" />
             </LText>
             <LText semiBold style={styles.amount}>
@@ -125,11 +127,14 @@ class Distribution extends PureComponent<DistributionProps, *> {
   };
 
   render() {
-    const { distribution } = this.props;
+    const { distribution, colors } = this.props;
 
     const Header = this.ListHeaderComponent;
     return (
-      <SafeAreaView style={styles.wrapper} forceInset={forceInset}>
+      <SafeAreaView
+        style={[styles.wrapper, { backgroundColor: colors.background }]}
+        forceInset={forceInset}
+      >
         <TrackScreen category="Distribution" />
         <Header />
         <FlatList
@@ -138,7 +143,7 @@ class Distribution extends PureComponent<DistributionProps, *> {
           data={distribution.list}
           renderItem={this.renderItem}
           keyExtractor={this.keyExtractor}
-          contentContainerStyle={styles.root}
+          contentContainerStyle={[styles.root]}
         />
       </SafeAreaView>
     );
@@ -148,12 +153,14 @@ class Distribution extends PureComponent<DistributionProps, *> {
 export default function Screen({ navigation }: Props) {
   const distribution = useSelector(distributionSelector);
   const counterValueCurrency = useSelector(counterValueCurrencySelector);
+  const { colors } = useTheme();
 
   return (
     <Distribution
       navigation={navigation}
       distribution={distribution}
       counterValueCurrency={counterValueCurrency}
+      colors={colors}
     />
   );
 }
@@ -165,19 +172,17 @@ const styles = StyleSheet.create({
   root: {
     padding: 16,
     paddingTop: 0,
-    backgroundColor: colors.lightGrey,
     paddingBottom: 16,
   },
   distributionTitle: {
     fontSize: 16,
     lineHeight: 24,
-    color: colors.darkBlue,
+
     marginLeft: 16,
     marginTop: 8,
     marginBottom: 8,
   },
   header: {
-    backgroundColor: colors.white,
     borderRadius: 4,
     padding: 16,
     flexDirection: "row",
@@ -213,21 +218,16 @@ const styles = StyleSheet.create({
   },
   assetCount: {
     fontSize: 27,
-    color: colors.darkBlue,
   },
 
-  assets: {
-    color: colors.darkBlue,
-  },
+  assets: {},
 
   label: {
     fontSize: 14,
-    color: colors.smoke,
   },
 
   amount: {
     fontSize: 22,
-    color: colors.darkBlue,
   },
 
   total: {

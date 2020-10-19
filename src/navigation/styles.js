@@ -1,5 +1,5 @@
 // @flow
-
+import React from "react";
 import { StyleSheet, Platform } from "react-native";
 import colors from "../colors";
 
@@ -23,31 +23,32 @@ if (Platform.OS === "ios") {
   };
   headerStyleShadow = {
     borderBottomWidth: 1,
-    borderBottomColor: colors.lightFog,
   };
 }
 
-export default StyleSheet.create({
-  card: {
-    backgroundColor: colors.lightGrey,
-  },
-  header: {
-    backgroundColor: colors.white,
-    ...headerStyle,
-    ...headerStyleShadow,
-  },
-  headerNoShadow: {
-    backgroundColor: colors.white,
-    ...headerStyle,
-  },
-  bottomTabBar: {
-    borderTopColor: colors.lightFog,
-    backgroundColor: colors.white,
-  },
-  transparentHeader: {
-    backgroundColor: "transparent",
-    shadowOpacity: 0,
-    elevation: 0,
-  },
-  labelStyle: { fontSize: 12 },
-});
+function Styles() {
+  return StyleSheet.create({
+    card: {
+      backgroundColor: colors.lightGrey,
+    },
+    header: {
+      ...headerStyle,
+      ...headerStyleShadow,
+    },
+    headerNoShadow: {
+      ...headerStyle,
+    },
+    bottomTabBar: {
+      borderTopColor: colors.lightFog,
+      backgroundColor: colors.white,
+    },
+    transparentHeader: {
+      backgroundColor: "transparent",
+      shadowOpacity: 0,
+      elevation: 0,
+    },
+    labelStyle: { fontSize: 12 },
+  });
+}
+
+export default Styles();

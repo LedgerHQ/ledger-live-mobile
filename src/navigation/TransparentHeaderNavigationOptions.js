@@ -8,5 +8,5 @@ import colors from "../colors";
 export default {
   headerTransparent: true,
   headerStyle: [styles.header, styles.transparentHeader],
-  headerTitle: () => <HeaderTitle style={{ color: colors.white }} />,
+  headerTitle: () => <HeaderTitle />,
 };

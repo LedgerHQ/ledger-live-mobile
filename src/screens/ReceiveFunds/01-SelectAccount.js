@@ -4,11 +4,11 @@ import { View, StyleSheet, FlatList } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { useSelector } from "react-redux";
 import { Trans } from "react-i18next";
+import { useTheme } from "@react-navigation/native";
 import {
   accountsSelector,
   flattenAccountsSelector,
 } from "../../reducers/accounts";
-import colors from "../../colors";
 import { ScreenName } from "../../const";
 import { TrackScreen } from "../../analytics";
 import LText from "../../components/LText";
@@ -27,6 +27,7 @@ type Props = {
 };
 
 export default function ReceiveFunds({ navigation, route }: Props) {
+  const { colors } = useTheme();
   const allAccounts = useSelector(flattenAccountsSelector);
   const accounts = useSelector(accountsSelector);
   const keyExtractor = item => item.account.id;
@@ -39,7 +40,16 @@ export default function ReceiveFunds({ navigation, route }: Props) {
       const { account } = result;
       return (
         <View
-          style={account.type === "Account" ? undefined : styles.tokenCardStyle}
+          style={
+            account.type === "Account"
+              ? undefined
+              : [
+                  styles.tokenCardStyle,
+                  {
+                    borderLeftColor: colors.fog,
+                  },
+                ]
+          }
         >
           <AccountCard
             disabled={!result.match}
@@ -77,7 +87,15 @@ export default function ReceiveFunds({ navigation, route }: Props) {
   );
 
   return (
-    <SafeAreaView style={styles.root} forceInset={forceInset}>
+    <SafeAreaView
+      style={[
+        styles.root,
+        {
+          backgroundColor: colors.white,
+        },
+      ]}
+      forceInset={forceInset}
+    >
       <TrackScreen category="ReceiveFunds" name="SelectAccount" />
       <KeyboardView style={{ flex: 1 }}>
         <View style={styles.searchContainer}>
@@ -89,7 +107,7 @@ export default function ReceiveFunds({ navigation, route }: Props) {
             initialQuery={initialCurrencySelected}
             renderEmptySearch={() => (
               <View style={styles.emptyResults}>
-                <LText style={styles.emptyText}>
+                <LText style={styles.emptyText} color="fog">
                   <Trans i18nKey="transfer.receive.noAccount" />
                 </LText>
               </View>
@@ -104,13 +122,11 @@ export default function ReceiveFunds({ navigation, route }: Props) {
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: colors.white,
   },
   tokenCardStyle: {
     marginLeft: 26,
     paddingLeft: 7,
     borderLeftWidth: 1,
-    borderLeftColor: colors.fog,
   },
   card: {
     paddingHorizontal: 16,
@@ -131,6 +147,5 @@ const styles = StyleSheet.create({
   },
   emptyText: {
     fontSize: 16,
-    color: colors.fog,
   },
 });

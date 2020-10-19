@@ -2,8 +2,8 @@
 import React from "react";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "@react-navigation/native";
 import { ScreenName } from "../../const";
-import colors from "../../colors";
 import styles from "../../navigation/styles";
 import Buy from "../../screens/Exchange/Buy";
 import History from "../../screens/Exchange/History";
@@ -16,11 +16,15 @@ type TabLabelProps = {
 
 export default function CryptoAssetsSettingsNavigator() {
   const { t } = useTranslation();
+  const { colors } = useTheme();
 
   return (
     <Tab.Navigator
       tabBarOptions={{
-        headerStyle: styles.headerNoShadow,
+        headerStyle: {
+          ...styles.headerNoShadow,
+          backgroundColor: colors.white,
+        },
         indicatorStyle: {
           backgroundColor: colors.live,
         },

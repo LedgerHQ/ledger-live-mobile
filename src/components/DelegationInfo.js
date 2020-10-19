@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     marginBottom: 24,
   },
   text: {
-    color: colors.darkBlue,
+     
   },
   greyText: { color: colors.grey },
 });

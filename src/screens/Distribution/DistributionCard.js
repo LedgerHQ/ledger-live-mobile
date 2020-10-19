@@ -8,7 +8,7 @@ import type {
 } from "@ledgerhq/live-common/lib/types/currencies";
 import { getCurrencyColor } from "@ledgerhq/live-common/lib/currencies";
 
-import colors from "../../colors";
+import { useTheme } from "@react-navigation/native";
 import LText from "../../components/LText";
 import CurrencyUnitValue from "../../components/CurrencyUnitValue";
 import ProgressBar from "../../components/ProgressBar";
@@ -34,9 +34,16 @@ export default function DistributionCard({
 }: Props) {
   const color = getCurrencyColor(currency);
   const percentage = Math.round(distribution * 1e4) / 1e2;
+  const { colors } = useTheme();
 
   return (
-    <View style={[styles.root, highlighting ? { borderColor: color } : {}]}>
+    <View
+      style={[
+        styles.root,
+        { backgroundColor: colors.white, borderColor: colors.white },
+        highlighting ? { borderColor: color } : {},
+      ]}
+    >
       <View style={styles.currencyLogo}>
         <ParentCurrencyIcon currency={currency} size={18} />
       </View>
@@ -53,7 +60,7 @@ export default function DistributionCard({
           <>
             <View style={styles.rateRow}>
               <CurrencyRate currency={currency} />
-              <LText semiBold style={styles.counterValue}>
+              <LText semiBold style={styles.counterValue} color="grey">
                 <CounterValue currency={currency} value={amount} />
               </LText>
             </View>
@@ -62,6 +69,7 @@ export default function DistributionCard({
               <LText
                 semiBold
                 style={styles.percentage}
+                color="smoke"
               >{`${percentage}%`}</LText>
             </View>
           </>
@@ -73,13 +81,11 @@ export default function DistributionCard({
 
 const styles = StyleSheet.create({
   root: {
-    backgroundColor: colors.white,
     borderRadius: 4,
     padding: 16,
     flexDirection: "row",
     alignItems: "center",
     marginBottom: 7,
-    borderColor: "white",
     borderWidth: 1,
   },
   rightContainer: {
@@ -96,7 +102,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   darkBlue: {
-    color: colors.darkBlue,
     fontSize: 14,
     lineHeight: 21,
   },
@@ -112,7 +117,6 @@ const styles = StyleSheet.create({
   counterValue: {
     fontSize: 12,
     lineHeight: 18,
-    color: colors.grey,
   },
   percentage: {
     width: 45,
@@ -120,7 +124,6 @@ const styles = StyleSheet.create({
     textAlign: "right",
     fontSize: 12,
     lineHeight: 18,
-    color: colors.smoke,
   },
   barValue: {},
 });

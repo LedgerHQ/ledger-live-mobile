@@ -63,6 +63,6 @@ const styles = StyleSheet.create({
   },
   gasLimitText: {
     fontSize: 16,
-    color: colors.darkBlue,
+     
   },
 });

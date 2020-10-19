@@ -240,7 +240,7 @@ const styles = StyleSheet.create({
   },
   title: {
     textAlign: "center",
-    color: colors.darkBlue,
+     
     fontSize: 16,
     marginBottom: 16,
   },

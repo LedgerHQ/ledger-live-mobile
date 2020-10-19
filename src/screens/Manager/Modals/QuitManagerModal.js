@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
   title: {
     lineHeight: 24,
     fontSize: 20,
-    color: colors.darkBlue,
+     
   },
   warnText: {
     textAlign: "center",

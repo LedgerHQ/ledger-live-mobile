@@ -18,9 +18,9 @@ import {
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import type { DeviceModelId } from "@ledgerhq/devices";
 import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
+import { useTheme } from "@react-navigation/native";
 import getWindowDimensions from "../../logic/getWindowDimensions";
 import { accountScreenSelector } from "../../reducers/accounts";
-import colors from "../../colors";
 import { TrackScreen } from "../../analytics";
 import PreventNativeBack from "../../components/PreventNativeBack";
 import LText from "../../components/LText/index";
@@ -61,6 +61,7 @@ type RouteParams = {
 };
 
 export default function ReceiveConfirmation({ navigation, route }: Props) {
+  const { colors } = useTheme();
   const { account, parentAccount } = useSelector(accountScreenSelector(route));
   const readOnlyModeEnabled = useSelector(readOnlyModeEnabledSelector);
 
@@ -164,7 +165,10 @@ export default function ReceiveConfirmation({ navigation, route }: Props) {
   const currency = getAccountCurrency(account);
 
   return (
-    <SafeAreaView style={styles.root} forceInset={forceInset}>
+    <SafeAreaView
+      style={[styles.root, { backgroundColor: colors.white }]}
+      forceInset={forceInset}
+    >
       <TrackScreen
         category="ReceiveFunds"
         name="Confirmation"
@@ -188,7 +192,9 @@ export default function ReceiveConfirmation({ navigation, route }: Props) {
                 <QRcodeZoom size={72} />
               </View>
             ) : (
-              <View style={styles.qrWrapper}>
+              <View
+                style={[styles.qrWrapper, { borderColor: colors.lightFog }]}
+              >
                 <QRCode
                   size={QRSize}
                   value={mainAccount.freshAddress}
@@ -198,7 +204,7 @@ export default function ReceiveConfirmation({ navigation, route }: Props) {
             )}
           </Touchable>
           <View>
-            <LText style={styles.addressTitle}>
+            <LText style={styles.addressTitle} color="grey">
               <Trans i18nKey="transfer.receive.address" />
             </LText>
           </View>
@@ -239,7 +245,7 @@ export default function ReceiveConfirmation({ navigation, route }: Props) {
                   event="ReceiveVerifyTransactionHelp"
                   onPress={() => Linking.openURL(urls.verifyTransactionDetails)}
                 >
-                  <LText semiBold style={styles.learnmore}>
+                  <LText semiBold style={styles.learnmore} color="live">
                     <Trans i18nKey="common.learnMore" />
                   </LText>
                 </Touchable>
@@ -272,7 +278,7 @@ export default function ReceiveConfirmation({ navigation, route }: Props) {
         </View>
       </NavigationScrollView>
       {verified && (
-        <View style={styles.footer}>
+        <View style={[styles.footer, { borderTopColor: colors.lightFog }]}>
           <Button
             event="ReceiveDone"
             containerStyle={styles.button}
@@ -296,7 +302,7 @@ export default function ReceiveConfirmation({ navigation, route }: Props) {
         useNativeDriver
         hideModalContentWhileAnimating
       >
-        <View style={styles.qrZoomWrapper}>
+        <View style={[styles.qrZoomWrapper, { backgroundColor: colors.white }]}>
           <QRCode size={width - 66} value={mainAccount.freshAddress} ecl="H" />
         </View>
       </ReactNativeModal>
@@ -335,7 +341,6 @@ export default function ReceiveConfirmation({ navigation, route }: Props) {
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: colors.white,
   },
   container: {
     flex: 1,
@@ -351,7 +356,7 @@ const styles = StyleSheet.create({
   },
   qrWrapper: {
     borderWidth: 1,
-    borderColor: colors.lightFog,
+
     padding: 16,
     borderRadius: 4,
     shadowOpacity: 0.03,
@@ -364,7 +369,6 @@ const styles = StyleSheet.create({
     padding: 8,
   },
   qrZoomWrapper: {
-    backgroundColor: colors.white,
     padding: 16,
     borderRadius: 4,
     alignItems: "center",
@@ -372,12 +376,10 @@ const styles = StyleSheet.create({
   addressTitle: {
     paddingTop: 16,
     fontSize: 14,
-    color: colors.grey,
   },
   addressTitleBold: {
     paddingLeft: 8,
     fontSize: 16,
-    color: colors.darkBlue,
   },
   addressWrapper: {
     paddingTop: 8,
@@ -409,14 +411,12 @@ const styles = StyleSheet.create({
   modalTitle: {
     paddingTop: 40,
     fontSize: 16,
-    color: colors.darkBlue,
     textAlign: "center",
   },
   modalDescription: {
     paddingTop: 16,
     marginBottom: 40,
     fontSize: 14,
-    color: colors.grey,
     paddingHorizontal: 40,
     textAlign: "center",
   },
@@ -439,7 +439,6 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     paddingHorizontal: 8,
     paddingTop: 8,
-    borderTopColor: colors.lightFog,
   },
   close: {
     position: "absolute",
@@ -447,7 +446,6 @@ const styles = StyleSheet.create({
     top: 10,
   },
   learnmore: {
-    color: colors.live,
     paddingLeft: 8,
     paddingTop: 4,
   },

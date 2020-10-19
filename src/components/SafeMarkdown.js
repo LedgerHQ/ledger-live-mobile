@@ -30,7 +30,7 @@ export default class SafeMarkdown extends PureComponent<
 const markdownStyles = StyleSheet.create({
   text: {
     ...getFontStyle(),
-    color: colors.darkBlue,
+     
     fontSize: 14,
     textAlign: "justify",
   },

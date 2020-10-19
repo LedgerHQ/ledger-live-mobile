@@ -12,6 +12,7 @@ import { BigNumber } from "bignumber.js";
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account/helpers";
 
 import * as Animatable from "react-native-animatable";
+import { useTheme } from "@react-navigation/native";
 import Section from "../../screens/OperationDetails/Section";
 import OperationStatusIcon from "../../icons/OperationStatusIcon";
 
@@ -79,6 +80,7 @@ const OperationIcon = ({
   confirmed,
   operation: { hasFailed, extra },
 }: OperationIconProps) => {
+  const { colors } = useTheme();
   const rewards = extra.rewards && extra.rewards.gt(0) ? extra.rewards : null;
   return rewards ? (
     <View style={styles.operationIconContainer}>
@@ -88,7 +90,7 @@ const OperationIcon = ({
         useNativeDriver
         style={[
           styles.operationMainIcon,
-          { width: size - 2, height: size - 2 },
+          { width: size - 2, height: size - 2, backgroundColor: colors.white },
         ]}
       >
         <OperationStatusIcon
@@ -127,7 +129,6 @@ const styles = StyleSheet.create({
   operationMainIcon: {
     position: "relative",
     zIndex: 1,
-    backgroundColor: "white",
     borderRadius: 100,
   },
   operationSecondaryIcon: { position: "absolute", zIndex: 0, right: 0, top: 0 },

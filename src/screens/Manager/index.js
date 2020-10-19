@@ -192,7 +192,6 @@ class ChooseDevice extends Component<
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: colors.white,
     paddingHorizontal: 16,
   },
   or: {
@@ -202,7 +201,6 @@ const styles = StyleSheet.create({
     lineHeight: 27,
     fontSize: 18,
     marginVertical: 24,
-    color: colors.darkBlue,
   },
   section: {
     fontSize: 14,

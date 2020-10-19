@@ -16,6 +16,7 @@ import BalanceHeader from "./BalanceHeader";
 import HeaderErrorTitle from "../../components/HeaderErrorTitle";
 import HeaderSynchronizing from "../../components/HeaderSynchronizing";
 import { scrollToTop } from "../../navigation/utils";
+import { useTheme } from "@react-navigation/native";
 
 type Props = {
   scrollY: AnimatedValue,
@@ -34,6 +35,7 @@ export default function AnimatedTopBar({
   pending,
   error,
 }: Props) {
+  const { colors } = useTheme();
   const { top } = useSafeArea();
   const [isShown, setIsShown] = useState(false);
 
@@ -64,7 +66,7 @@ export default function AnimatedTopBar({
 
   return (
     <Animated.View
-      style={[styles.root, { opacity }]}
+      style={[styles.root, { opacity, backgroundColor: colors.card }]}
       pointerEvents={isShown ? "auto" : "none"}
     >
       <TouchableWithoutFeedback onPress={scrollToTop}>
@@ -94,7 +96,6 @@ export default function AnimatedTopBar({
 
 const styles = StyleSheet.create({
   root: {
-    backgroundColor: "white",
     zIndex: 2,
     position: "absolute",
     top: 0,

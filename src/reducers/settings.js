@@ -61,6 +61,8 @@ export type Privacy = {
   biometricsEnabled: boolean,
 };
 
+export type Theme = "light" | "dark" | "dusk";
+
 export type SettingsState = {
   counterValue: string,
   counterValueExchange: ?string,
@@ -86,6 +88,7 @@ export type SettingsState = {
   hasAvailableUpdate: boolean,
   hasAcceptedSwapKYC: boolean,
   swapProviders?: AvailableProvider[],
+  theme: Theme,
 };
 
 export const INITIAL_STATE: SettingsState = {
@@ -109,6 +112,7 @@ export const INITIAL_STATE: SettingsState = {
   hasAvailableUpdate: false,
   hasAcceptedSwapKYC: false,
   swapProviders: [],
+  theme: "light",
 };
 
 const pairHash = (from, to) => `${from.ticker}_${to.ticker}`;
@@ -278,6 +282,10 @@ const handlers: Object = {
     ...state,
     swapProviders,
   }),
+  SETTINGS_SET_THEME: (state, { payload: theme }) => ({
+    ...state,
+    theme,
+  }),
 };
 
 const storeSelector = (state: *): SettingsState => state.settings;
@@ -446,3 +454,5 @@ export const swapSupportedCurrenciesSelector: OutputSelector<
 });
 
 export default handleActions(handlers, INITIAL_STATE);
+
+export const themeSelector = (state: State) => state.settings.theme;

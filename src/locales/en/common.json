@@ -1052,6 +1052,8 @@
       "passwordDesc": "Set a password to prevent unauthorized access to Ledger Live data on your phone.",
       "counterValue": "Countervalue",
       "counterValueDesc": "Set the currency shown next to your balance and operations.",
+      "theme": "Theme",
+      "themeDesc": "Set the app UI theme",
       "exchange": "Rate provider",
       "exchangeDesc": "Set provider of exchange rate from Bitcoin to {{fiat}}",
       "stock": "Regional market indicator",

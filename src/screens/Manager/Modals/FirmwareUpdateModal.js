@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
   title: {
     lineHeight: 24,
     fontSize: 16,
-    color: colors.darkBlue,
+     
   },
   text: {
     textAlign: "center",

@@ -24,9 +24,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  rootSelected: {
-    backgroundColor: "#f9f9f9",
-  },
   label: {
     fontSize: 14,
     flex: 1,
@@ -58,7 +55,7 @@ class OrderOption extends Component<{
       <Touchable
         event="AccountOrderOption"
         eventProperties={{ accountOrderId: id }}
-        style={[styles.root, selected && styles.rootSelected]}
+        style={[styles.root]}
         onPress={this.onPress}
       >
         <LText semiBold style={styles.label}>

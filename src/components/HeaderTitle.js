@@ -20,7 +20,7 @@ export default function HeaderTitle({ style, ...newProps }: *) {
 
 const styleSheet = StyleSheet.create({
   root: {
-    color: colors.darkBlue,
+     
     fontSize: 16,
     alignItems: "center",
     justifyContent: "center",

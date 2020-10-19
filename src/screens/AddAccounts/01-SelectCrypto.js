@@ -14,6 +14,7 @@ import {
 } from "@ledgerhq/live-common/lib/currencies";
 import useEnv from "@ledgerhq/live-common/lib/hooks/useEnv";
 
+import { useTheme } from "@react-navigation/native";
 import { ScreenName } from "../../const";
 import { listCryptoCurrencies } from "../../cryptocurrencies";
 import { TrackScreen } from "../../analytics";
@@ -21,8 +22,6 @@ import FilteredSearchBar from "../../components/FilteredSearchBar";
 import KeyboardView from "../../components/KeyboardView";
 import CurrencyRow from "../../components/CurrencyRow";
 import LText from "../../components/LText";
-
-import colors from "../../colors";
 
 const SEARCH_KEYS = ["name", "ticker"];
 const forceInset = { bottom: "always" };
@@ -43,6 +42,7 @@ const renderEmptyList = () => (
 );
 
 export default function AddAccountsSelectCrypto({ navigation }: Props) {
+  const { colors } = useTheme();
   const devMode = useEnv("MANAGER_DEV_MODE");
   const cryptoCurrencies = useMemo(
     () => listCryptoCurrencies(devMode).concat(listTokens()),
@@ -83,7 +83,10 @@ export default function AddAccountsSelectCrypto({ navigation }: Props) {
   );
 
   return (
-    <SafeAreaView style={styles.root} forceInset={forceInset}>
+    <SafeAreaView
+      style={[styles.root, { backgroundColor: colors.white }]}
+      forceInset={forceInset}
+    >
       <TrackScreen category="AddAccounts" name="SelectCrypto" />
       <KeyboardView style={{ flex: 1 }}>
         <View style={styles.searchContainer}>
@@ -103,7 +106,6 @@ export default function AddAccountsSelectCrypto({ navigation }: Props) {
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: colors.white,
   },
   searchContainer: {
     paddingTop: 16,

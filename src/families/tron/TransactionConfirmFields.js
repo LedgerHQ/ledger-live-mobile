@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     marginLeft: 8,
   },
   text: {
-    color: colors.darkBlue,
+     
     fontSize: 14,
     flex: 1,
     textAlign: "right",

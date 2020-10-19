@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
     alignItems: "flex-end",
   },
   title: {
-    color: colors.darkBlue,
+     
   },
   summaryValueText: {
     fontSize: 18,

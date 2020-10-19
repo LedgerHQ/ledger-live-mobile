@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   titleInside: {
-    color: colors.darkBlue,
+     
   },
 });
 

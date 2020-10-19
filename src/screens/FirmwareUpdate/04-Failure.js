@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 16,
-    color: colors.darkBlue,
+     
     paddingHorizontal: 16,
     paddingBottom: 16,
     textAlign: "center",

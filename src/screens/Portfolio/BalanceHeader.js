@@ -22,7 +22,7 @@ export default function BalanceHeader({
 }: Props) {
   return (
     <View style={[styles.content, style]}>
-      <LText secondary semiBold style={styles.labelText}>
+      <LText secondary color="grey" semiBold style={styles.labelText}>
         <Trans i18nKey="portfolio.totalBalance" />
       </LText>
       <Space h={5} />
@@ -47,10 +47,8 @@ const styles = StyleSheet.create({
   },
   labelText: {
     fontSize: 14,
-    color: colors.grey,
   },
   balanceText: {
     fontSize: 16,
-    color: colors.darkBlue,
   },
 });

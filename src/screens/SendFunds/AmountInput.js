@@ -131,6 +131,7 @@ class AmountInput extends Component<Props, OwnState> {
           <LText
             style={[error ? styles.error : styles.warning]}
             numberOfLines={2}
+            color={error ? "alert" : warning ? "orange" : "darkBlue"}
           >
             <TranslatedError error={error || warning} />
           </LText>
@@ -150,6 +151,7 @@ class AmountInput extends Component<Props, OwnState> {
               <LText
                 style={[styles.currency, !isCrypto ? styles.active : null]}
                 semiBold
+                color="grey"
               >
                 {rightUnit.code}
               </LText>
@@ -173,17 +175,14 @@ const styles = StyleSheet.create({
   },
   currency: {
     fontSize: 24,
-    color: colors.grey,
   },
   active: {
     fontSize: 32,
   },
   error: {
-    color: colors.alert,
     fontSize: 14,
   },
   warning: {
-    color: colors.orange,
     fontSize: 14,
   },
 });

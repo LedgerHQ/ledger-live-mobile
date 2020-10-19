@@ -7,10 +7,10 @@ import i18next from "i18next";
 import type { Account } from "@ledgerhq/live-common/lib/types";
 import type { Transaction } from "@ledgerhq/live-common/lib/families/algorand/types";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
+import { useTheme } from "@react-navigation/native";
 import KeyboardView from "../../components/KeyboardView";
 import Button from "../../components/Button";
 import { ScreenName } from "../../const";
-import colors from "../../colors";
 
 const forceInset = { bottom: "always" };
 
@@ -25,6 +25,7 @@ type RouteParams = {
 };
 
 function AlgorandEditMemo({ navigation, route }: Props) {
+  const { colors } = useTheme();
   const { t } = useTranslation();
   const [memo, setMemo] = useState(route.params.transaction.memo);
   const account = route.params.account;
@@ -42,7 +43,7 @@ function AlgorandEditMemo({ navigation, route }: Props) {
 
   return (
     <SafeAreaView style={styles.root} forceInset={forceInset}>
-      <KeyboardView style={styles.body}>
+      <KeyboardView style={[styles.body, { backgroundColor: colors.white }]}>
         <ScrollView
           contentContainerStyle={styles.root}
           keyboardShouldPersistTaps="always"
@@ -87,12 +88,10 @@ const styles = StyleSheet.create({
   body: {
     flexDirection: "column",
     flex: 1,
-    backgroundColor: colors.white,
   },
   textInputAS: {
     padding: 16,
     fontSize: 30,
-    color: colors.darkBlue,
   },
   buttonContainer: {
     marginHorizontal: 16,

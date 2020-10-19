@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     alignItems: "stretch",
   },
   title: {
-    color: colors.darkBlue,
+     
     fontSize: 16,
   },
   card: {
@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   currencyValue: {
-    color: colors.darkBlue,
+     
     fontSize: 14,
   },
   counterValue: {
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   delegatorName: {
-    color: colors.darkBlue,
+     
     fontSize: 14,
   },
   subtitle: {

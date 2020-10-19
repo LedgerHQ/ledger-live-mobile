@@ -100,7 +100,6 @@ const styles = StyleSheet.create({
     zIndex: 10,
     width: "100%",
     height: 38,
-    backgroundColor: colors.white,
   },
   progressLabel: {
     flex: 1,
@@ -108,7 +107,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     flexWrap: "nowrap",
     alignItems: "center",
-    backgroundColor: colors.white,
   },
   progressBar: { flexShrink: 0, flexGrow: 0, flexBasis: 6 },
 });

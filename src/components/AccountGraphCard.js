@@ -19,7 +19,7 @@ import {
 import { getCurrencyColor } from "@ledgerhq/live-common/lib/currencies";
 import type { ValueChange } from "@ledgerhq/live-common/lib/types/portfolio";
 
-import colors from "../colors";
+import { ensureContrast, withTheme } from "../colors";
 import getWindowDimensions from "../logic/getWindowDimensions";
 import { setSelectedTimeRange } from "../actions/settings";
 import Delta from "./Delta";
@@ -48,6 +48,7 @@ type Props = {
   useCounterValue?: boolean,
   renderTitle?: ({ counterValueUnit: Unit, item: Item }) => React$Node,
   renderAccountSummary: () => ?React$Node,
+  colors: *,
 };
 
 type State = {
@@ -84,6 +85,7 @@ class AccountGraphCard extends PureComponent<Props, State> {
       useCounterValue,
       valueChange,
       renderAccountSummary,
+      colors,
     } = this.props;
 
     const isAvailable = !useCounterValue || countervalueAvailable;
@@ -92,7 +94,10 @@ class AccountGraphCard extends PureComponent<Props, State> {
 
     const currency = getAccountCurrency(account);
     const unit = getAccountUnit(account);
-    const graphColor = getCurrencyColor(currency);
+    const graphColor = ensureContrast(
+      getCurrencyColor(currency),
+      colors.background,
+    );
 
     return (
       <Card style={styles.root}>
@@ -214,7 +219,6 @@ class GraphCardHeader extends PureComponent<{
 
 const styles = StyleSheet.create({
   root: {
-    backgroundColor: colors.white,
     paddingVertical: 16,
     margin: 16,
     ...Platform.select({
@@ -245,7 +249,6 @@ const styles = StyleSheet.create({
   },
   balanceText: {
     fontSize: 22,
-    color: colors.darkBlue,
   },
   subtitleContainer: {
     flexDirection: "row",
@@ -269,4 +272,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default compose(connect(null, mapDispatchToProps))(AccountGraphCard);
+export default compose(
+  withTheme,
+  connect(null, mapDispatchToProps),
+)(AccountGraphCard);

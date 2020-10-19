@@ -218,7 +218,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   topText: {
-    color: colors.darkBlue,
+     
     fontSize: 14,
     flex: 1,
   },

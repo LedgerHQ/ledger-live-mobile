@@ -32,7 +32,6 @@ const styles = StyleSheet.create({
   title: {
     textAlign: "center",
     flexGrow: 1,
-    color: colors.darkBlue,
     fontSize: 16,
   },
   subtitle: {

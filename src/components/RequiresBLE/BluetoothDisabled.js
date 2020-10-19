@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
   },
   titleFont: {
-    color: colors.darkBlue,
+     
     fontSize: 18,
     marginTop: 32,
   },

@@ -14,7 +14,7 @@ import type {
 import { getCurrencyColor } from "@ledgerhq/live-common/lib/currencies";
 import type { ValueChange } from "@ledgerhq/live-common/lib/types/portfolio";
 
-import colors from "../colors";
+import { ensureContrast, withTheme } from "../colors";
 import getWindowDimensions from "../logic/getWindowDimensions";
 import { setSelectedTimeRange } from "../actions/settings";
 import Delta from "./Delta";
@@ -41,6 +41,7 @@ type Props = {
   setSelectedTimeRange: string => void,
   useCounterValue?: boolean,
   renderTitle?: ({ counterValueUnit: Unit, item: Item }) => React$Node,
+  colors: *,
 };
 
 type State = {
@@ -76,6 +77,7 @@ class AssetGraphCard extends PureComponent<Props, State> {
       renderTitle,
       useCounterValue,
       valueChange,
+      colors,
     } = this.props;
 
     const isAvailable = !useCounterValue || countervalueAvailable;
@@ -83,7 +85,10 @@ class AssetGraphCard extends PureComponent<Props, State> {
     const { hoveredItem } = this.state;
 
     const unit = currency.units[0];
-    const graphColor = getCurrencyColor(currency);
+    const graphColor = ensureContrast(
+      getCurrencyColor(currency),
+      colors.background,
+    );
 
     return (
       <Card style={styles.root}>
@@ -196,7 +201,6 @@ class GraphCardHeader extends PureComponent<{
 
 const styles = StyleSheet.create({
   root: {
-    backgroundColor: colors.white,
     paddingVertical: 16,
     margin: 16,
     ...Platform.select({
@@ -219,7 +223,6 @@ const styles = StyleSheet.create({
   },
   balanceText: {
     fontSize: 22,
-    color: colors.darkBlue,
   },
   subtitleContainer: {
     flexDirection: "row",
@@ -236,4 +239,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default compose(connect(null, mapDispatchToProps))(AssetGraphCard);
+export default compose(
+  withTheme,
+  connect(null, mapDispatchToProps),
+)(AssetGraphCard);

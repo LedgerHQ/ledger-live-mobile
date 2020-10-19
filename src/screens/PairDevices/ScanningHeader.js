@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     marginTop: 32,
   },
   TitleText: {
-    color: colors.darkBlue,
+     
     fontSize: 18,
   },
   SubtitleContainer: {

@@ -68,6 +68,6 @@ const styles = StyleSheet.create({
 
   mono: {
     fontSize: 14,
-    color: colors.darkBlue,
+     
   },
 });

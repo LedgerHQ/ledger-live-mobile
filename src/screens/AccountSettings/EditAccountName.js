@@ -136,12 +136,10 @@ const styles = StyleSheet.create({
   body: {
     flexDirection: "column",
     flex: 1,
-    backgroundColor: colors.white,
   },
   textInputAS: {
     padding: 16,
     fontSize: 20,
-    color: colors.darkBlue,
     ...getFontStyle({ semiBold: true }),
   },
   buttonContainer: {

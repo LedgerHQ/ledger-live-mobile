@@ -58,7 +58,7 @@ export default DeleteAccountModal;
 
 const styles = StyleSheet.create({
   accountName: {
-    color: colors.darkBlue,
+     
   },
   footerContainer: {
     flexDirection: "row",

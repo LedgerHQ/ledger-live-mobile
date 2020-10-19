@@ -13,9 +13,9 @@ import { Platform, StyleSheet, View } from "react-native";
 import Icon from "react-native-vector-icons/dist/FontAwesome";
 import SafeAreaView from "react-native-safe-area-view";
 import { useSelector } from "react-redux";
+import { useTheme } from "@react-navigation/native";
 import { track, TrackScreen } from "../../analytics";
 import { ScreenName } from "../../const";
-import colors from "../../colors";
 import { accountScreenSelector } from "../../reducers/accounts";
 import Button from "../../components/Button";
 import KeyboardView from "../../components/KeyboardView";
@@ -45,6 +45,7 @@ type RouteParams = {
 };
 
 export default function SendSelectRecipient({ navigation, route }: Props) {
+  const { colors } = useTheme();
   const { t } = useTranslation();
   const { account, parentAccount } = useSelector(accountScreenSelector(route));
   const {
@@ -118,7 +119,10 @@ export default function SendSelectRecipient({ navigation, route }: Props) {
 
   return (
     <>
-      <SafeAreaView style={styles.root} forceInset={forceInset}>
+      <SafeAreaView
+        style={[styles.root, { backgroundColor: colors.white }]}
+        forceInset={forceInset}
+      >
         <TrackScreen category="SendFunds" name="SelectRecipient" />
         <SyncSkipUnderPriority priority={100} />
         <SyncOneAccountOnMount priority={100} accountId={account.id} />
@@ -135,11 +139,19 @@ export default function SendSelectRecipient({ navigation, route }: Props) {
               onPress={onPressScan}
             />
             <View style={styles.separatorContainer}>
-              <View style={styles.separatorLine} />
-              <LText style={styles.separatorText}>
-                {<Trans i18nKey="common.or" />}
-              </LText>
-              <View style={styles.separatorLine} />
+              <View
+                style={[
+                  styles.separatorLine,
+                  { borderBottomColor: colors.lightFog },
+                ]}
+              />
+              <LText color="grey">{<Trans i18nKey="common.or" />}</LText>
+              <View
+                style={[
+                  styles.separatorLine,
+                  { borderBottomColor: colors.lightFog },
+                ]}
+              />
             </View>
             <View style={styles.inputWrapper}>
               {/* make this a recipient component */}
@@ -148,8 +160,9 @@ export default function SendSelectRecipient({ navigation, route }: Props) {
                 placeholderTextColor={colors.fog}
                 style={[
                   styles.addressInput,
-                  error && styles.invalidAddressInput,
-                  warning && styles.warning,
+                  { color: colors.darkBlue },
+                  error && { color: colors.alert },
+                  warning && { color: colors.orange },
                 ]}
                 onFocus={onRecipientFieldFocus}
                 onChangeText={onChangeText}
@@ -164,10 +177,8 @@ export default function SendSelectRecipient({ navigation, route }: Props) {
             </View>
             {(error || warning) && (
               <LText
-                style={[
-                  styles.warningBox,
-                  error ? styles.error : styles.warning,
-                ]}
+                style={[styles.warningBox]}
+                color={error ? "alert" : warning ? "orange" : "darkBlue"}
               >
                 <TranslatedError error={error || warning} />
               </LText>
@@ -212,12 +223,12 @@ const IconQRCode = ({ size, color }: { size: number, color: string }) => (
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: colors.white,
   },
   a: {},
   container: {
     paddingHorizontal: 16,
     paddingVertical: 16,
+    backgroundColor: "transparent",
   },
   separatorContainer: {
     marginTop: 32,
@@ -226,12 +237,9 @@ const styles = StyleSheet.create({
   },
   separatorLine: {
     flex: 1,
-    borderBottomColor: colors.lightFog,
+
     borderBottomWidth: 1,
     marginHorizontal: 8,
-  },
-  separatorText: {
-    color: colors.grey,
   },
   containerFlexEnd: {
     flex: 1,
@@ -239,16 +247,9 @@ const styles = StyleSheet.create({
   },
   addressInput: {
     flex: 1,
-    color: colors.darkBlue,
     ...getFontStyle({ semiBold: true }),
     fontSize: 20,
     paddingVertical: 16,
-  },
-  invalidAddressInput: {
-    color: colors.alert,
-  },
-  warning: {
-    color: colors.orange,
   },
   warningBox: {
     marginTop: 8,
@@ -257,9 +258,6 @@ const styles = StyleSheet.create({
         marginLeft: 6,
       },
     }),
-  },
-  error: {
-    color: colors.alert,
   },
   inputWrapper: {
     flexDirection: "row",

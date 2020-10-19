@@ -14,6 +14,7 @@ type Props = {
   size: number,
   onHighlightChange: number => void,
   highlight: number,
+  bg: string,
 };
 
 class RingChart extends PureComponent<Props> {
@@ -119,7 +120,7 @@ class RingChart extends PureComponent<Props> {
   };
 
   render() {
-    const { highlight, size } = this.props;
+    const { highlight, size, bg } = this.props;
     return (
       <View {...this.panResponder.panHandlers}>
         <Svg width={size} height={size} viewBox="0 0 76 76">
@@ -137,7 +138,7 @@ class RingChart extends PureComponent<Props> {
                 }
               />
             ))}
-            <Circle cx={0} cy={0} r="26" fill="#fff" />
+            <Circle cx={0} cy={0} r="26" fill={bg} />
           </G>
         </Svg>
       </View>

@@ -88,7 +88,7 @@ const getActions = ({ account }: { account: Account }) => {
       extra: !canUnfreeze && effectiveTimeToUnfreeze < Infinity && (
         <View style={styles.timeWarn}>
           <ClockIcon color={colors.grey} size={16} />
-          <LText style={styles.timeLabel} semiBold>
+          <LText style={styles.timeLabel} semiBold color="grey">
             <DateFromNow date={effectiveTimeToUnfreeze} />
           </LText>
         </View>
@@ -123,7 +123,6 @@ const styles = StyleSheet.create({
     marginLeft: 8,
     fontSize: 12,
     lineHeight: 16,
-    color: colors.grey,
   },
 });
 

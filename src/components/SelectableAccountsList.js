@@ -235,7 +235,6 @@ class SelectableAccount extends PureComponent<
           friction={2}
           leftThreshold={50}
           renderLeftActions={this.renderLeftActions}
-          style={{ backgroundColor: "#ffffff" }}
         >
           {inner}
           {subAccountCount ? (

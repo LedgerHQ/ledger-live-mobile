@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   textTitle: {
-    color: colors.darkBlue,
+     
     fontSize: 16,
   },
   textContract: {

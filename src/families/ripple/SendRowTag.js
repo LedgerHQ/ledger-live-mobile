@@ -54,6 +54,6 @@ const styles = StyleSheet.create({
   },
   tagText: {
     fontSize: 16,
-    color: colors.darkBlue,
+     
   },
 });

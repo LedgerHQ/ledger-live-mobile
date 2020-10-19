@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
     marginVertical: 16,
     fontSize: 14,
     lineHeight: 21,
-    color: colors.darkBlue,
+     
   },
   modalDesc: {
     textAlign: "center",

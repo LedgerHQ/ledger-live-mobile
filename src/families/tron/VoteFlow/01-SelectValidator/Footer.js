@@ -56,6 +56,6 @@ const styles = StyleSheet.create({
     color: colors.grey,
   },
   remainingCount: {
-    color: colors.darkBlue,
+     
   },
 });

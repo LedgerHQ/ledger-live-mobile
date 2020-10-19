@@ -79,7 +79,7 @@ class OnboardingStepWelcome extends Component<Props> {
 
 const styles = StyleSheet.create({
   title: {
-    color: colors.darkBlue,
+     
     fontSize: 20,
     textAlign: "center",
     marginBottom: 16,

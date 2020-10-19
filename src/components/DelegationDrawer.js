@@ -200,7 +200,7 @@ export const styles = StyleSheet.create({
     alignSelf: "center",
   },
   text: {
-    color: colors.darkBlue,
+     
   },
   currencyValue: {
     fontSize: 22,

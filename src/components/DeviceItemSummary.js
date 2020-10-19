@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
   },
   deviceNameText: {
     fontSize: 16,
-    color: colors.darkBlue,
+     
     paddingRight: 8,
   },
   genuine: {

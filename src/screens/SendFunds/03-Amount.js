@@ -16,8 +16,8 @@ import type { Transaction } from "@ledgerhq/live-common/lib/types";
 import { useDebounce } from "@ledgerhq/live-common/lib/hooks/useDebounce";
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
+import { useTheme } from "@react-navigation/native";
 import { accountScreenSelector } from "../../reducers/accounts";
-import colors from "../../colors";
 import { ScreenName } from "../../const";
 import { TrackScreen } from "../../analytics";
 import LText from "../../components/LText";
@@ -42,6 +42,7 @@ type RouteParams = {
 };
 
 export default function SendAmount({ navigation, route }: Props) {
+  const { colors } = useTheme();
   const { account, parentAccount } = useSelector(accountScreenSelector(route));
   const [maxSpendable, setMaxSpendable] = useState(null);
 
@@ -133,7 +134,10 @@ export default function SendAmount({ navigation, route }: Props) {
   return (
     <>
       <TrackScreen category="SendFunds" name="Amount" />
-      <SafeAreaView style={styles.root} forceInset={forceInset}>
+      <SafeAreaView
+        style={[styles.root, { backgroundColor: colors.white }]}
+        forceInset={forceInset}
+      >
         <KeyboardView style={styles.container}>
           <TouchableWithoutFeedback onPress={blur}>
             <View style={styles.amountWrapper}>
@@ -152,12 +156,12 @@ export default function SendAmount({ navigation, route }: Props) {
               />
 
               <View style={styles.bottomWrapper}>
-                <View style={styles.available}>
+                <View style={[styles.available]}>
                   <View style={styles.availableLeft}>
-                    <LText>
+                    <LText color="grey">
                       <Trans i18nKey="send.amount.available" />
                     </LText>
-                    <LText semiBold style={styles.availableAmount}>
+                    <LText semiBold color="grey">
                       <CurrencyUnitValue
                         showCode
                         unit={unit}
@@ -167,7 +171,7 @@ export default function SendAmount({ navigation, route }: Props) {
                   </View>
                   {typeof useAllAmount === "boolean" ? (
                     <View style={styles.availableRight}>
-                      <LText style={styles.maxLabel}>
+                      <LText style={styles.maxLabel} color="grey">
                         <Trans i18nKey="send.amount.useMax" />
                       </LText>
                       <Switch
@@ -224,7 +228,6 @@ export default function SendAmount({ navigation, route }: Props) {
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: colors.white,
   },
   container: {
     flex: 1,
@@ -236,11 +239,8 @@ const styles = StyleSheet.create({
     display: "flex",
     flexGrow: 1,
     fontSize: 16,
-    color: colors.grey,
+
     marginBottom: 16,
-  },
-  availableAmount: {
-    color: colors.darkBlue,
   },
   availableRight: {
     alignItems: "center",

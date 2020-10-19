@@ -30,7 +30,12 @@ class AccountNameRow extends PureComponent<Props> {
           })
         }
       >
-        <LText semiBold numberOfLines={1} style={styles.accountName}>
+        <LText
+          semiBold
+          numberOfLines={1}
+          style={styles.accountName}
+          color="grey"
+        >
           {account.name}
         </LText>
       </SettingsRow>
@@ -44,6 +49,5 @@ const styles = StyleSheet.create({
   accountName: {
     flexShrink: 1,
     textAlign: "right",
-    color: colors.grey,
   },
 });

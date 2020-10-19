@@ -4,7 +4,6 @@ import { StyleSheet, TouchableOpacity } from "react-native";
 import { useTranslation } from "react-i18next";
 import LText from "../../../components/LText";
 import InfoModal from "../../../modals/Info";
-import colors from "../../../colors";
 
 type Props = {
   disabled?: boolean,
@@ -25,10 +24,7 @@ export default function DelegationLabelRight({ onPress, disabled }: Props) {
 
   return (
     <TouchableOpacity onPress={onClick}>
-      <LText
-        semiBold
-        style={[styles.actionColor, disabled ? { color: colors.grey } : {}]}
-      >
+      <LText semiBold color={disabled ? "grey" : "live"}>
         {t("account.delegation.addDelegation")}
       </LText>
       <InfoModal
@@ -50,7 +46,4 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   illustration: { alignSelf: "center", marginBottom: 16 },
-  actionColor: {
-    color: colors.live,
-  },
 });

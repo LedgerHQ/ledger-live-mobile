@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   currencyValue: {
-    color: colors.darkBlue,
+     
     fontSize: 22,
   },
   counterValue: {
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
     color: colors.smoke,
   },
   propertyValueText: {
-    color: colors.darkBlue,
+     
     fontSize: 14,
   },
   propertyValueTextTouchable: {
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
   },
   footerBtnLabel: {
     marginTop: 8,
-    color: colors.darkBlue,
+     
     fontSize: 14,
     textAlign: "center",
   },

@@ -25,6 +25,7 @@ import perFamilyTransactionConfirmFields from "../generated/TransactionConfirmFi
 import { DataRowUnitValue, TextValueField } from "./ValidateOnDeviceDataRow";
 import Animation from "./Animation";
 import getDeviceAnimation from "./DeviceAction/getDeviceAnimation";
+import { useTheme } from "@react-navigation/native";
 
 export type FieldComponentProps = {
   account: AccountLike,
@@ -106,6 +107,8 @@ export default function ValidateOnDevice({
   status,
   transaction,
 }: Props) {
+  const { colors, dark } = useTheme();
+  const theme = dark ? "dark" : "light";
   const { t } = useTranslation();
   const mainAccount = getMainAccount(account, parentAccount);
   const r = perFamilyTransactionConfirmFields[mainAccount.currency.family];
@@ -148,7 +151,7 @@ export default function ValidateOnDevice({
         <View style={styles.innerContainer}>
           <View style={styles.picture}>
             <Animation
-              source={getDeviceAnimation({ device, key: "validate" })}
+              source={getDeviceAnimation({ device, key: "validate", theme })}
             />
           </View>
           {Title ? (
@@ -246,7 +249,6 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 18,
-    color: colors.darkBlue,
     textAlign: "center",
   },
 });

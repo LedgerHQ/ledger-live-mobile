@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
   },
   tagText: {
     fontSize: 14,
-    color: colors.darkBlue,
+     
   },
   link: {
     color: colors.live,

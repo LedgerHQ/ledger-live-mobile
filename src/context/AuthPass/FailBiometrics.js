@@ -50,7 +50,7 @@ export default FailBiometrics;
 
 const styles = StyleSheet.create({
   root: {
-    color: colors.darkBlue,
+     
     fontSize: 16,
   },
   textContainer: {

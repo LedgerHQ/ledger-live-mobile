@@ -39,16 +39,14 @@ class AccountCard extends PureComponent<Props> {
           <LText
             semiBold
             numberOfLines={1}
-            style={[
-              styles.accountNameText,
-              { color: disabled ? colors.grey : colors.darkBlue },
-            ]}
+            color={disabled ? "grey" : "darkBlue"}
+            style={[styles.accountNameText]}
           >
             {getAccountName(account)}
           </LText>
         </View>
         <View style={styles.balanceContainer}>
-          <LText semiBold style={styles.balanceNumText}>
+          <LText semiBold color="grey">
             <CurrencyUnitValue showCode unit={unit} value={account.balance} />
           </LText>
         </View>
@@ -63,6 +61,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     paddingVertical: 16,
     alignItems: "center",
+    backgroundColor: "transparent",
   },
   accountName: {
     flexGrow: 1,

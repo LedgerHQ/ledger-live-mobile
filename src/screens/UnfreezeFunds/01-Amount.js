@@ -6,7 +6,7 @@ import { View, StyleSheet, TouchableOpacity } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { useSelector } from "react-redux";
 import { Trans } from "react-i18next";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useTheme } from "@react-navigation/native";
 import type { Account, Transaction } from "@ledgerhq/live-common/lib/types";
 import {
   getMainAccount,
@@ -15,7 +15,6 @@ import {
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
 import { accountScreenSelector } from "../../reducers/accounts";
-import colors from "../../colors";
 import { ScreenName } from "../../const";
 import { TrackScreen } from "../../analytics";
 import LText from "../../components/LText";
@@ -104,6 +103,7 @@ type InnerProps = {
 };
 
 function UnfreezeAmountInner({ account }: InnerProps) {
+  const { colors } = useTheme();
   const navigation = useNavigation();
   const bridge = getAccountBridge(account, undefined);
   const unit = getAccountUnit(account);
@@ -174,10 +174,13 @@ function UnfreezeAmountInner({ account }: InnerProps) {
   return (
     <>
       <TrackScreen category="UnfreezeFunds" name="Amount" />
-      <SafeAreaView style={styles.root} forceInset={forceInset}>
+      <SafeAreaView
+        style={[styles.root, { backgroundColor: colors.background }]}
+        forceInset={forceInset}
+      >
         <View style={styles.container}>
           <View style={styles.wrapper}>
-            <LText style={styles.label}>
+            <LText style={styles.label} color="grey">
               <Trans i18nKey="unfreeze.amount.title" />
             </LText>
 
@@ -193,14 +196,14 @@ function UnfreezeAmountInner({ account }: InnerProps) {
               <View style={styles.selectCardLabelContainer}>
                 <LText
                   semiBold
-                  style={!canUnfreezeBandwidth ? styles.disabledLabel : {}}
+                  color={!canUnfreezeBandwidth ? "grey" : "darkBlue"}
                 >
                   <Trans i18nKey="account.bandwidth" />
                 </LText>
                 {unfreezeBandwidth.gt(0) && !canUnfreezeBandwidth ? (
                   <View style={styles.timeWarn}>
                     <ClockIcon color={colors.grey} size={12} />
-                    <LText style={styles.timeLabel} semiBold>
+                    <LText style={styles.timeLabel} semiBold color="grey">
                       <DateFromNow date={+bandwidthExpiredAt} />
                     </LText>
                   </View>
@@ -208,17 +211,15 @@ function UnfreezeAmountInner({ account }: InnerProps) {
               </View>
               <LText
                 semiBold
-                style={[
-                  styles.frozenAmount,
-                  !canUnfreezeBandwidth ? styles.disabledLabel : {},
-                ]}
+                style={[styles.frozenAmount]}
+                color={!canUnfreezeBandwidth ? "grey" : "darkBlue"}
               >
                 <CurrencyUnitValue unit={unit} value={unfreezeBandwidth} />
               </LText>
               <CheckBox isChecked={resource === "BANDWIDTH"} />
             </TouchableOpacity>
             <TouchableOpacity
-              style={styles.selectCard}
+              style={[styles.selectCard, { backgroundColor: colors.white }]}
               disabled={!canUnfreezeEnergy}
               onPress={() => onChangeResource("ENERGY")}
             >
@@ -229,14 +230,19 @@ function UnfreezeAmountInner({ account }: InnerProps) {
               <View style={styles.selectCardLabelContainer}>
                 <LText
                   semiBold
-                  style={!canUnfreezeEnergy ? styles.disabledLabel : {}}
+                  color={!canUnfreezeEnergy ? "grey" : "darkBlue"}
                 >
                   <Trans i18nKey="account.energy" />
                 </LText>
                 {unfreezeEnergy.gt(0) && !canUnfreezeEnergy ? (
-                  <View style={styles.timeWarn}>
+                  <View
+                    style={[
+                      styles.timeWarn,
+                      { backgroundColor: colors.lightFog },
+                    ]}
+                  >
                     <ClockIcon color={colors.grey} size={12} />
-                    <LText style={styles.timeLabel} semiBold>
+                    <LText style={styles.timeLabel} semiBold color="grey">
                       <DateFromNow date={+energyExpiredAt} />
                     </LText>
                   </View>
@@ -244,19 +250,22 @@ function UnfreezeAmountInner({ account }: InnerProps) {
               </View>
               <LText
                 semiBold
-                style={[
-                  styles.frozenAmount,
-                  !canUnfreezeEnergy ? styles.disabledLabel : {},
-                ]}
+                style={[styles.frozenAmount]}
+                color={!canUnfreezeEnergy ? "grey" : "darkBlue"}
               >
                 <CurrencyUnitValue unit={unit} value={unfreezeEnergy} />
               </LText>
               <CheckBox isChecked={resource === "ENERGY"} />
             </TouchableOpacity>
 
-            <View style={styles.infoSection}>
+            <View
+              style={[
+                styles.infoSection,
+                { backgroundColor: colors.lightLive },
+              ]}
+            >
               <Info size={16} color={colors.live} />
-              <LText style={styles.infoText} numberOfLines={3}>
+              <LText style={styles.infoText} numberOfLines={3} color="live">
                 <Trans
                   i18nKey="unfreeze.amount.info"
                   values={{ resource: (resource || "").toLowerCase() }}
@@ -265,8 +274,9 @@ function UnfreezeAmountInner({ account }: InnerProps) {
             </View>
 
             <LText
-              style={[error ? styles.error : styles.warning]}
+              style={[styles.error]}
               numberOfLines={2}
+              color={error ? "alert" : "orange"}
             >
               <TranslatedError error={error || warning} />
             </LText>
@@ -310,7 +320,7 @@ function UnfreezeAmountInner({ account }: InnerProps) {
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: colors.lightGrey,
+
     paddingTop: 16,
     paddingHorizontal: 16,
     alignItems: "stretch",
@@ -318,14 +328,13 @@ const styles = StyleSheet.create({
   container: { flex: 1 },
   label: {
     fontSize: 14,
-    color: colors.grey,
     paddingVertical: 8,
   },
   selectCard: {
     paddingHorizontal: 16,
     height: 55,
     borderRadius: 4,
-    backgroundColor: colors.white,
+
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "flex-start",
@@ -333,12 +342,11 @@ const styles = StyleSheet.create({
     elevation: 1,
   },
   selectCardLabelContainer: { marginLeft: 8 },
-  disabledLabel: { color: colors.grey },
   frozenAmount: { flex: 1, textAlign: "right", marginRight: 16 },
   infoSection: {
     flexShrink: 1,
     flexDirection: "row",
-    backgroundColor: colors.lightLive,
+
     alignItems: "center",
     justifyContent: "center",
     padding: 16,
@@ -346,7 +354,7 @@ const styles = StyleSheet.create({
     marginTop: 8,
     marginBottom: 16,
   },
-  infoText: { color: colors.live, marginLeft: 16, flex: 1 },
+  infoText: { marginLeft: 16, flex: 1 },
   bottomWrapper: {
     alignSelf: "stretch",
     alignItems: "center",
@@ -372,12 +380,6 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
   },
   error: {
-    color: colors.alert,
-    fontSize: 14,
-    textAlign: "center",
-  },
-  warning: {
-    color: colors.orange,
     fontSize: 14,
     textAlign: "center",
   },
@@ -386,7 +388,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "flex-end",
     borderRadius: 4,
-    backgroundColor: colors.lightFog,
+
     paddingVertical: 2,
     paddingHorizontal: 7,
   },
@@ -394,6 +396,5 @@ const styles = StyleSheet.create({
     marginLeft: 4,
     fontSize: 11,
     lineHeight: 16,
-    color: colors.grey,
   },
 });

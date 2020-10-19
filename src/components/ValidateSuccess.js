@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 18,
-    color: colors.darkBlue,
+     
     paddingHorizontal: 16,
     paddingBottom: 16,
     textAlign: "center",

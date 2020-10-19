@@ -8,8 +8,8 @@ import { Trans } from "react-i18next";
 import type { Transaction } from "@ledgerhq/live-common/lib/types";
 import { getMainAccount } from "@ledgerhq/live-common/lib/account";
 import { NotEnoughGas } from "@ledgerhq/errors";
+import { useTheme } from "@react-navigation/native";
 import { accountScreenSelector } from "../../reducers/accounts";
-import colors from "../../colors";
 import { ScreenName, NavigatorName } from "../../const";
 import { TrackScreen } from "../../analytics";
 import { useTransactionChangeFromNavigation } from "../../logic/screenTransactionHooks";
@@ -41,6 +41,7 @@ type RouteParams = {
 };
 
 export default function SendSummary({ navigation, route }: Props) {
+  const { colors } = useTheme();
   const { account, parentAccount } = useSelector(accountScreenSelector(route));
   const {
     transaction,
@@ -102,14 +103,19 @@ export default function SendSummary({ navigation, route }: Props) {
   const mainAccount = getMainAccount(account, parentAccount);
 
   return (
-    <SafeAreaView style={styles.root} forceInset={forceInset}>
+    <SafeAreaView
+      style={[styles.root, { backgroundColor: colors.white }]}
+      forceInset={forceInset}
+    >
       <TrackScreen category="SendFunds" name="Summary" />
       <NavigationScrollView style={styles.body}>
         <SummaryFromSection account={account} parentAccount={parentAccount} />
-        <VerticalConnector />
+        <VerticalConnector
+          style={[styles.verticalConnector, { borderColor: colors.lightFog }]}
+        />
         <SummaryToSection recipient={transaction.recipient} />
         {status.warnings.recipient ? (
-          <LText style={styles.warning}>
+          <LText style={styles.warning} color="orange">
             <TranslatedError error={status.warnings.recipient} />
           </LText>
         ) : null}
@@ -152,7 +158,7 @@ export default function SendSummary({ navigation, route }: Props) {
         ) : null}
       </NavigationScrollView>
       <View style={styles.footer}>
-        <LText style={styles.error}>
+        <LText style={styles.error} color="alert">
           <TranslatedError error={transactionError} />
         </LText>
         {error && error instanceof NotEnoughGas ? (
@@ -195,12 +201,12 @@ export default function SendSummary({ navigation, route }: Props) {
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: colors.white,
     flexDirection: "column",
   },
   body: {
     flex: 1,
     paddingHorizontal: 16,
+    backgroundColor: "transparent",
   },
   footer: {
     flexDirection: "column",
@@ -213,12 +219,10 @@ const styles = StyleSheet.create({
     alignSelf: "stretch",
   },
   error: {
-    color: colors.alert,
     fontSize: 12,
     marginBottom: 5,
   },
   warning: {
-    color: colors.orange,
     fontSize: 14,
     marginBottom: 16,
     paddingLeft: 50,
@@ -226,7 +230,6 @@ const styles = StyleSheet.create({
   verticalConnector: {
     position: "absolute",
     borderLeftWidth: 2,
-    borderColor: colors.lightFog,
     height: 20,
     top: 60,
     left: 16,
@@ -243,6 +246,7 @@ const styles = StyleSheet.create({
 
 class VerticalConnector extends Component<*> {
   render() {
-    return <View style={styles.verticalConnector} />;
+    const { style } = this.props;
+    return <View style={style} />;
   }
 }

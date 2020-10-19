@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
   titleText: {
     marginTop: 32,
     textAlign: "center",
-    color: colors.darkBlue,
+     
     fontSize: 18,
   },
   SubtitleText: {

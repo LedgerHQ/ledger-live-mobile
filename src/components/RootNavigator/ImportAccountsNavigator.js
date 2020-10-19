@@ -1,6 +1,7 @@
 // @flow
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
+import { useTheme } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
 import { ScreenName } from "../../const";
 import ScanAccounts from "../../screens/ImportAccounts/Scan";
@@ -11,10 +12,10 @@ import FallBackCameraScreen from "../../screens/ImportAccounts/FallBackCameraScr
 import { closableStackNavigatorConfig } from "../../navigation/navigatorConfig";
 import TransparentHeaderNavigationOptions from "../../navigation/TransparentHeaderNavigationOptions";
 import HeaderRightClose from "../HeaderRightClose";
-import colors from "../../colors";
 
 export default function ImportAccountsNavigator() {
   const { t } = useTranslation();
+  const { colors } = useTheme();
   return (
     <Stack.Navigator screenOptions={closableStackNavigatorConfig}>
       <Stack.Screen

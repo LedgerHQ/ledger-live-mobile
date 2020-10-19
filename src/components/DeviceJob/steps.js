@@ -305,7 +305,7 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   appInstalled: {
-    color: colors.darkBlue,
+     
     fontSize: 16,
     paddingVertical: 16,
     textAlign: "center",

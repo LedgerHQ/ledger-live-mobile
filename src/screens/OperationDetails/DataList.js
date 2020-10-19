@@ -77,6 +77,6 @@ const styles = StyleSheet.create({
     marginRight: 8,
   },
   value: {
-    color: colors.darkBlue,
+     
   },
 });

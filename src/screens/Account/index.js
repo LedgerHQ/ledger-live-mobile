@@ -11,6 +11,7 @@ import {
 } from "@ledgerhq/live-common/lib/account";
 import type { TokenAccount, Operation } from "@ledgerhq/live-common/lib/types";
 import debounce from "lodash/debounce";
+import { useTheme } from "@react-navigation/native";
 import { switchCountervalueFirst } from "../../actions/settings";
 import { balanceHistoryWithCountervalueSelectorCreator } from "../../actions/portfolio";
 import {
@@ -26,7 +27,6 @@ import SectionHeader from "../../components/SectionHeader";
 import NoMoreOperationFooter from "../../components/NoMoreOperationFooter";
 import LoadingFooter from "../../components/LoadingFooter";
 import { ScreenName } from "../../const";
-import colors from "../../colors";
 import EmptyStateAccount from "./EmptyStateAccount";
 import NoOperationFooter from "../../components/NoOperationFooter";
 import { useScrollToTop } from "../../navigation/utils";
@@ -73,6 +73,8 @@ export default function AccountScreen({ navigation, route }: Props) {
   const ref = useRef();
 
   useScrollToTop(ref);
+
+  const { colors } = useTheme();
 
   const onEndReached = useCallback(() => {
     setOpCount(opCount + 50);
@@ -141,12 +143,12 @@ export default function AccountScreen({ navigation, route }: Props) {
   });
 
   return (
-    <View style={styles.root}>
+    <View style={[styles.root, { backgroundColor: colors.background }]}>
       {analytics}
       <List
         ref={ref}
         sections={sections}
-        style={styles.sectionList}
+        style={[styles.sectionList, { backgroundColor: colors.lightGrey }]}
         contentContainerStyle={styles.contentContainer}
         ListFooterComponent={
           !completed ? (
@@ -196,7 +198,6 @@ const styles = StyleSheet.create({
   },
   sectionList: {
     flex: 1,
-    backgroundColor: colors.lightGrey,
   },
   balanceContainer: {
     alignItems: "center",
@@ -205,11 +206,6 @@ const styles = StyleSheet.create({
   balanceText: {
     fontSize: 22,
     paddingBottom: 4,
-    color: colors.darkBlue,
-  },
-  balanceSubText: {
-    fontSize: 16,
-    color: colors.smoke,
   },
   contentContainer: {
     paddingBottom: 64,

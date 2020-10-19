@@ -1,24 +1,27 @@
 // @flow
 import React from "react";
+import { useTheme } from "@react-navigation/native";
 import { ScreenName, NavigatorName } from "../../const";
 import Portfolio, { PortfolioTabIcon } from "../../screens/Portfolio";
 import Transfer, { TransferTabIcon } from "../../screens/Transfer";
 import AccountsNavigator from "./AccountsNavigator";
 import ManagerNavigator, { ManagerTabIcon } from "./ManagerNavigator";
 import SettingsNavigator from "./SettingsNavigator";
-import styles from "../../navigation/styles";
 import TabIcon from "../TabIcon";
-import colors from "../../colors";
 import AccountsIcon from "../../icons/Accounts";
 import SettingsIcon from "../../icons/Settings";
 
 import Tab from "./CustomBlockRouterNavigator";
 
 export default function MainNavigator() {
+  const { colors } = useTheme();
   return (
     <Tab.Navigator
       tabBarOptions={{
-        style: styles.bottomTabBar,
+        style: {
+          borderTopColor: colors.lightFog,
+          backgroundColor: colors.card,
+        },
         showLabel: false,
         activeTintColor: colors.live,
       }}
