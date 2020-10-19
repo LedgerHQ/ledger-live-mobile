@@ -18,7 +18,7 @@ export default function CountervaluesProvider({
 }: {
   children: React$Node,
 }) {
-  const trackingPairs = useTrackingPairs();
+  const userSettings = useUserSettings();
   const [savedState, setSavedState] = useState();
 
   useEffect(() => {
@@ -30,10 +30,7 @@ export default function CountervaluesProvider({
   }, []);
 
   return (
-    <Countervalues
-      userSettings={{ trackingPairs, autofillGaps: true }}
-      savedState={savedState}
-    >
+    <Countervalues userSettings={userSettings} savedState={savedState}>
       <CountervaluesManager>{children}</CountervaluesManager>
     </Countervalues>
   );
@@ -78,11 +75,14 @@ function usePollingManager() {
   }, [isInternetReachable, isActive, start, stop]);
 }
 
-export function useTrackingPairs() {
+export function useUserSettings() {
   const accounts = useSelector(accountsSelector);
   const countervalue = useSelector(counterValueCurrencySelector);
-  return useMemo(() => inferTrackingPairForAccounts(accounts, countervalue), [
-    accounts,
-    countervalue,
-  ]);
+  return useMemo(
+    () => ({
+      trackingPaires: inferTrackingPairForAccounts(accounts, countervalue),
+      autofillGaps: true,
+    }),
+    [accounts, countervalue],
+  );
 }
