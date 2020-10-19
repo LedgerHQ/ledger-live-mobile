@@ -2,7 +2,7 @@
 import React from "react";
 import { BigNumber } from "bignumber.js";
 import { useSelector } from "react-redux";
-import type { CryptoCurrency } from "@ledgerhq/live-common/lib/types";
+import type { Currency } from "@ledgerhq/live-common/lib/types";
 import { useCalculate } from "@ledgerhq/live-common/lib/countervalues/react";
 import { counterValueCurrencySelector } from "../reducers/settings";
 import CurrencyUnitValue from "./CurrencyUnitValue";
@@ -10,7 +10,7 @@ import LText from "./LText";
 
 type Props = {
   // wich market to query
-  currency: CryptoCurrency,
+  currency: Currency,
   // when? if not given: take latest
   date?: Date,
   value: BigNumber,
