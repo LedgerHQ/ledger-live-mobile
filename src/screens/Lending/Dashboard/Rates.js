@@ -54,7 +54,7 @@ const Row = ({
 
   return (
     <View style={styles.row}>
-      <CurrencyIcon currency={token} size={32} />
+      <CurrencyIcon radius={100} currency={token} size={32} />
       <View style={styles.currencySection}>
         <LText semiBold style={styles.title}>
           {token.ticker}

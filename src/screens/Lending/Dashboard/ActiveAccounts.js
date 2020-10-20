@@ -29,22 +29,24 @@ const Row = ({ summary }: RowProps) => {
 
   return (
     <View style={styles.row}>
-      <CurrencyIcon currency={token} size={32} />
+      <CurrencyIcon radius={100} currency={token} size={32} />
       <View style={styles.currencySection}>
         <LText semiBold style={styles.subTitle}>
           {parentAccount?.name}
         </LText>
-        <LText style={styles.title}>{name}</LText>
+        <LText semiBold style={styles.title}>
+          {name}
+        </LText>
       </View>
       <View style={[styles.currencySection, styles.alignEnd]}>
-        <LText>
+        <LText semiBold>
           <CurrencyUnitValue
             unit={token.units[0]}
             value={totalSupplied}
             showCode
           />
         </LText>
-        <LText>
+        <LText style={styles.subTitle}>
           <CounterValue
             currency={token}
             value={totalSupplied}

@@ -2,7 +2,10 @@
 
 import React, { PureComponent } from "react";
 import { View, StyleSheet } from "react-native";
-import { getCryptoCurrencyIcon } from "@ledgerhq/live-common/lib/reactNative";
+import {
+  getCryptoCurrencyIcon,
+  getTokenCurrencyIcon,
+} from "@ledgerhq/live-common/lib/reactNative";
 import { getCurrencyColor } from "@ledgerhq/live-common/lib/currencies";
 
 import LText from "./LText";
@@ -27,6 +30,8 @@ export default class CurrencyIcon extends PureComponent<Props> {
         width: size,
         height: size,
       };
+      const TokenIconCurrency =
+        getTokenCurrencyIcon && getTokenCurrencyIcon(currency);
 
       return (
         <View
@@ -36,9 +41,19 @@ export default class CurrencyIcon extends PureComponent<Props> {
             radius ? { borderRadius: radius } : null,
           ]}
         >
-          <LText semiBold style={{ color: currencyColor, fontSize: size / 2 }}>
-            {currency.ticker[0]}
-          </LText>
+          {TokenIconCurrency ? (
+            <TokenIconCurrency
+              size={size * 0.55}
+              color={currencyColor || currency.color}
+            />
+          ) : (
+            <LText
+              semiBold
+              style={{ color: currencyColor, fontSize: size / 2 }}
+            >
+              {currency.ticker[0]}
+            </LText>
+          )}
         </View>
       );
     }
