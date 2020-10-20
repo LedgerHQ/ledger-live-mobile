@@ -5,14 +5,14 @@ import { SectionList, View, StyleSheet } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
-// import { useNavigation } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import type {
   AccountLikeArray,
   Operation,
 } from "@ledgerhq/live-common/lib/types";
 import { groupAccountsOperationsByDay } from "@ledgerhq/live-common/lib/account";
 import colors from "../../../colors";
-// import { NavigatorName } from "../../../const";
+import { ScreenName } from "../../../const";
 
 import { flattenSortAccountsSelector } from "../../../actions/general";
 import TrackScreen from "../../../analytics/TrackScreen";
@@ -60,9 +60,11 @@ export default function History() {
     count: opCount,
     withSubAccounts: false,
   });
-  // const navigation = useNavigation();
+  const navigation = useNavigation();
 
-  const navigateToCompoundDashboard = useCallback(() => {}, []);
+  const navigateToCompoundDashboard = useCallback(() => {
+    navigation.navigate(ScreenName.LendingDashboard);
+  }, [navigation]);
 
   return (
     <SafeAreaView style={[styles.root]} forceInset={forceInset}>

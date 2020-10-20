@@ -1,6 +1,6 @@
 // @flow
 import React, { useMemo } from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, FlatList } from "react-native";
 import { BigNumber } from "bignumber.js";
 import { Trans } from "react-i18next";
 import type { AccountLikeArray } from "@ledgerhq/live-common/lib/types";
@@ -86,9 +86,12 @@ const Rates = ({
 }) => {
   return (
     <View>
-      {rates.map(r => (
-        <Row data={r} key={r.ctoken.id} accounts={accounts} />
-      ))}
+      <FlatList
+        data={rates}
+        renderItem={({ item }) => (
+          <Row data={item} key={item.ctoken.id} accounts={accounts} />
+        )}
+      />
     </View>
   );
 };

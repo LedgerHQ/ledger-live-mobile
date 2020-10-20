@@ -1,14 +1,13 @@
 // @flow
 
 import React, { useCallback } from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, FlatList } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
-// import { useNavigation } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import { makeClosedHistoryForAccounts } from "@ledgerhq/live-common/lib/compound/logic";
 import colors from "../../../colors";
-// import { NavigatorName } from "../../../const";
 
 import { useCompoundSummaries } from "../useCompoundSummaries";
 import { flattenSortAccountsSelector } from "../../../actions/general";
@@ -16,6 +15,7 @@ import TrackScreen from "../../../analytics/TrackScreen";
 
 import EmptyState from "../shared/EmptyState";
 import Row from "../shared/Row";
+import { ScreenName } from "../../../const";
 
 const forceInset = { bottom: "always" };
 
@@ -24,45 +24,42 @@ export default function ClosedLoans() {
   const accounts = useSelector(flattenSortAccountsSelector);
   const summaries = useCompoundSummaries(accounts);
   const closedLoans = makeClosedHistoryForAccounts(summaries);
-  // const navigation = useNavigation();
+  const navigation = useNavigation();
 
-  const navigateToCompoundDashboard = useCallback(() => {}, []);
+  const navigateToCompoundDashboard = useCallback(() => {
+    navigation.navigate(ScreenName.LendingDashboard);
+  }, [navigation]);
 
   return (
     <SafeAreaView style={[styles.root]} forceInset={forceInset}>
       <TrackScreen category="Lending" />
       <View style={styles.body}>
-        {closedLoans.length > 0 ? (
-          <View style={styles.rows}>
-            {closedLoans.map((loan, i) => {
-              const { account, parentAccount, amountSupplied, endDate } = loan;
+        <View style={styles.rows}>
+          <FlatList
+            data={closedLoans}
+            renderItem={({ item, index }) => {
+              const { account, parentAccount, amountSupplied, endDate } = item;
               return (
-                <>
-                  {i > 0 && (
-                    <View
-                      key={`${endDate.toDateString()}${i}`}
-                      style={styles.separator}
-                    />
-                  )}
-                  <Row
-                    key={`${endDate.toDateString()}${i}`}
-                    account={account}
-                    parentAccount={parentAccount}
-                    value={amountSupplied}
-                    onPress={() => {}}
-                  />
-                </>
+                <Row
+                  key={`${endDate.toDateString()}${index}`}
+                  account={account}
+                  parentAccount={parentAccount}
+                  value={amountSupplied}
+                  onPress={() => {}}
+                />
               );
-            })}
-          </View>
-        ) : (
-          <EmptyState
-            title={t("transfer.lending.closedLoans.tabTitle")}
-            description={t("transfer.lending.closedLoans.description")}
-            buttonLabel={t("transfer.lending.closedLoans.cta")}
-            onClick={navigateToCompoundDashboard}
+            }}
+            ItemSeparatorComponent={() => <View style={styles.separator} />}
+            ListEmptyComponent={() => (
+              <EmptyState
+                title={t("transfer.lending.closedLoans.tabTitle")}
+                description={t("transfer.lending.closedLoans.description")}
+                buttonLabel={t("transfer.lending.closedLoans.cta")}
+                onClick={navigateToCompoundDashboard}
+              />
+            )}
           />
-        )}
+        </View>
       </View>
     </SafeAreaView>
   );
