@@ -2,64 +2,10 @@
 
 import React from "react";
 import { View, StyleSheet } from "react-native";
-import { getAccountName } from "@ledgerhq/live-common/lib/account";
 import type { CompoundAccountSummary } from "@ledgerhq/live-common/lib/compound/types";
 // import { getAccountCapabilities } from "@ledgerhq/live-common/lib/compound/logic";
-import LText from "../../../components/LText";
-import CurrencyUnitValue from "../../../components/CurrencyUnitValue";
-import CurrencyIcon from "../../../components/CurrencyIcon";
-import CounterValue from "../../../components/CounterValue";
+import Row from "../shared/Row";
 import colors from "../../../colors";
-
-type RowProps = {
-  summary: CompoundAccountSummary,
-};
-
-const Row = ({ summary }: RowProps) => {
-  const { account, parentAccount, totalSupplied } = summary;
-  const { token } = account;
-  const name = getAccountName(account);
-  // const capabilities = getAccountCapabilities(account);
-  //
-  // const openManageModal = useCallback(() => {
-  //   // dispatch(openModal("MODAL_LEND_MANAGE", { ...summary }));
-  // }, [summary]);
-
-  // END HACK
-
-  return (
-    <View style={styles.row}>
-      <CurrencyIcon radius={100} currency={token} size={32} />
-      <View style={styles.currencySection}>
-        <LText semiBold style={styles.subTitle}>
-          {parentAccount?.name}
-        </LText>
-        <LText semiBold style={styles.title}>
-          {name}
-        </LText>
-      </View>
-      <View style={[styles.currencySection, styles.alignEnd]}>
-        <LText semiBold>
-          <CurrencyUnitValue
-            unit={token.units[0]}
-            value={totalSupplied}
-            showCode
-          />
-        </LText>
-        <LText style={styles.subTitle}>
-          <CounterValue
-            currency={token}
-            value={totalSupplied}
-            disableRounding
-            fontSize={3}
-            showCode
-            alwaysShowSign={false}
-          />
-        </LText>
-      </View>
-    </View>
-  );
-};
 
 type Props = {
   summaries: CompoundAccountSummary[],
@@ -68,12 +14,21 @@ type Props = {
 const ActiveAccounts = ({ summaries }: Props) => {
   return (
     <View style={styles.root}>
-      {summaries.map((s, i) => (
-        <>
-          {i > 0 && <View style={styles.separator} />}
-          <Row key={s.account.id} summary={s} />
-        </>
-      ))}
+      {summaries.map((summary, i) => {
+        const { account, parentAccount, totalSupplied } = summary;
+        return (
+          <>
+            {i > 0 && <View style={styles.separator} />}
+            <Row
+              key={account.id}
+              account={account}
+              parentAccount={parentAccount}
+              value={totalSupplied}
+              onPress={() => {}}
+            />
+          </>
+        );
+      })}
     </View>
   );
 };

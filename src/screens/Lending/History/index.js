@@ -1,28 +1,126 @@
 // @flow
 
-import React from "react";
-import { View, StyleSheet } from "react-native";
+import React, { useCallback, useMemo, useState } from "react";
+import { SectionList, View, StyleSheet } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 // import { useNavigation } from "@react-navigation/native";
+import type {
+  AccountLikeArray,
+  Operation,
+} from "@ledgerhq/live-common/lib/types";
+import { groupAccountsOperationsByDay } from "@ledgerhq/live-common/lib/account";
 import colors from "../../../colors";
 // import { NavigatorName } from "../../../const";
-import extraStatusBarPadding from "../../../logic/extraStatusBarPadding";
+
+import { flattenSortAccountsSelector } from "../../../actions/general";
 import TrackScreen from "../../../analytics/TrackScreen";
 
-const forceInset = { bottom: "always" };
+import EmptyState from "../shared/EmptyState";
+import OperationRow from "../../../components/OperationRow";
+import SectionHeader from "../../../components/SectionHeader";
+import NoMoreOperationFooter from "../../../components/NoMoreOperationFooter";
+import LoadingFooter from "../../../components/LoadingFooter";
 
-export default function Dashboard() {
+const forceInset = { bottom: "always" };
+// $FlowFixMe
+const useCompoundHistory = (accounts: AccountLikeArray): AccountLikeArray => {
+  const filterOps = (op: Operation): boolean =>
+    ["REDEEM", "SUPPLY"].includes(op.type);
+  const history = useMemo(
+    () =>
+      accounts.map(acc => {
+        const operations = acc.operations.filter(filterOps);
+        return {
+          ...acc,
+          operations,
+        };
+      }),
+    [accounts],
+  );
+
+  return history;
+};
+
+function keyExtractor(item: Operation) {
+  return item.id;
+}
+
+export default function History() {
   const { t } = useTranslation();
+  const accounts = useSelector(flattenSortAccountsSelector);
+  const history = useCompoundHistory(accounts);
+
+  const [opCount, setOpCount] = useState(50);
+
+  const onEndReached = useCallback(() => setOpCount(opCount + 50), [opCount]);
+
+  const { sections, completed } = groupAccountsOperationsByDay(history, {
+    count: opCount,
+    withSubAccounts: false,
+  });
   // const navigation = useNavigation();
 
+  const navigateToCompoundDashboard = useCallback(() => {}, []);
+
   return (
-    <SafeAreaView
-      style={[styles.root, { paddingTop: extraStatusBarPadding }]}
-      forceInset={forceInset}
-    >
+    <SafeAreaView style={[styles.root]} forceInset={forceInset}>
       <TrackScreen category="Lending" />
-      <View style={styles.body}></View>
+      <View style={styles.body}>
+        {/** $FlowFixMe */}
+        <SectionList
+          sections={sections}
+          renderSectionHeader={({ section }: { section: * }) => {
+            return <SectionHeader section={section} />;
+          }}
+          renderItem={({
+            item,
+            index,
+            section,
+          }: {
+            item: Operation,
+            index: number,
+            section: *,
+          }) => {
+            const account = accounts.find(a => a.id === item.accountId);
+            const parentAccount =
+              account && account.type !== "Account"
+                ? accounts.find(a => a.id === account.parentId)
+                : null;
+
+            if (!account) return null;
+
+            return (
+              <OperationRow
+                operation={item}
+                account={account}
+                parentAccount={parentAccount}
+                isLast={section.data.length - 1 === index}
+              />
+            );
+          }}
+          keyExtractor={keyExtractor}
+          stickySectionHeadersEnabled={false}
+          showsVerticalScrollIndicator={false}
+          ListEmptyComponent={() => (
+            <EmptyState
+              title={t("transfer.lending.history.tabTitle")}
+              description={t("transfer.lending.history.description")}
+              buttonLabel={t("transfer.lending.history.cta")}
+              onClick={navigateToCompoundDashboard}
+            />
+          )}
+          ListFooterComponent={
+            !completed ? (
+              <LoadingFooter />
+            ) : sections.length ? (
+              <NoMoreOperationFooter />
+            ) : null
+          }
+          onEndReached={onEndReached}
+        />
+      </View>
     </SafeAreaView>
   );
 }
@@ -35,8 +133,8 @@ const styles = StyleSheet.create({
   body: {
     flex: 1,
     display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    margin: 16,
+    alignItems: "stretch",
+    justifyContent: "flex-start",
+    padding: 16,
   },
 });

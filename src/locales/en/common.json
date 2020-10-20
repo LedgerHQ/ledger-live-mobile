@@ -1358,10 +1358,14 @@
         "apy": "{{value}} APY"
       },
       "closedLoans": {
-        "tabTitle": "Closed loans"
+        "tabTitle": "Closed loans",
+        "description": "View all your withdrawn loans and the interest you have earned.",
+        "cta": "Lend asset"
       },
       "history": {
-        "tabTitle": "History"
+        "tabTitle": "History",
+        "description": "View the history of all your loan transactions.",
+        "cta": "Lend asset"
       }
     }
   },
