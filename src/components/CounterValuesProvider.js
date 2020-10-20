@@ -6,10 +6,9 @@ import { useNetInfo } from "@react-native-community/netinfo";
 import {
   Countervalues,
   useCountervaluesPolling,
-  useStoreUpdater,
 } from "@ledgerhq/live-common/lib/countervalues/react";
 import { inferTrackingPairForAccounts } from "@ledgerhq/live-common/lib/countervalues/logic";
-import { getCountervalues, saveCountervalues } from "../db";
+import { getCountervalues } from "../db";
 import { accountsSelector } from "../reducers/accounts";
 import { counterValueCurrencySelector } from "../reducers/settings";
 
@@ -37,7 +36,6 @@ export default function CountervaluesProvider({
 }
 
 function CountervaluesManager({ children }: { children: React$Node }) {
-  useStoreUpdater(saveCountervalues);
   usePollingManager();
 
   return children;

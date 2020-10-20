@@ -19,8 +19,17 @@ import Transport from "@ledgerhq/hw-transport";
 import { NotEnoughBalance } from "@ledgerhq/errors";
 import { log } from "@ledgerhq/logs";
 import { checkLibs } from "@ledgerhq/live-common/lib/sanityChecks";
+import {
+  useCountervaluesExport,
+  useCountervaluesPolling,
+} from "@ledgerhq/live-common/lib/countervalues/react";
 import logger from "./logger";
-import { saveAccounts, saveBle, saveSettings } from "./db";
+import {
+  saveAccounts,
+  saveBle,
+  saveSettings,
+  saveCountervalues as saveCountervaluesRaw,
+} from "./db";
 import {
   exportSelector as settingsExportSelector,
   hasCompletedOnboardingSelector,
@@ -35,7 +44,7 @@ import LedgerStoreProvider from "./context/LedgerStore";
 import LoadingApp from "./components/LoadingApp";
 import StyledStatusBar from "./components/StyledStatusBar";
 import { BridgeSyncProvider } from "./bridge/BridgeSyncContext";
-import DBSave from "./components/DBSave";
+import useDBSaveEffect from "./components/DBSave";
 import DebugRejectSwitch from "./components/DebugRejectSwitch";
 import useAppStateListener from "./components/useAppStateListener";
 import SyncNewAccounts from "./bridge/SyncNewAccounts";
@@ -98,29 +107,49 @@ function App({ importDataString }: AppProps) {
     return null;
   }, []);
 
-  const getBleChanged = (a, b) => a.ble !== b.ble;
+  const rawState = useCountervaluesExport();
+  const { wipe } = useCountervaluesPolling();
+
+  const saveCountervalues = useCallback(async () => {
+    if (Object.keys(rawState).length === 1) {
+      wipe();
+      await saveCountervaluesRaw(rawState);
+      return;
+    }
+    if (!Object.keys(rawState.status).length) return;
+    await saveCountervaluesRaw(rawState);
+  }, [wipe, rawState]);
+
+  useDBSaveEffect({
+    save: saveCountervalues,
+    throttle: 2000,
+    getChangesStats: () => true,
+    lense: () => {},
+  });
+
+  useDBSaveEffect({
+    save: saveSettings,
+    throttle: 400,
+    getChangesStats: getSettingsChanged,
+    lense: settingsExportSelector,
+  });
+
+  useDBSaveEffect({
+    save: saveAccounts,
+    throttle: 500,
+    getChangesStats: getAccountsChanged,
+    lense: accountsExportSelector,
+  });
+
+  useDBSaveEffect({
+    save: saveBle,
+    throttle: 500,
+    getChangesStats: (a, b) => a.ble !== b.ble,
+    lense: bleSelector,
+  });
 
   return (
     <View style={styles.root}>
-      <DBSave
-        save={saveSettings}
-        throttle={400}
-        getChangesStats={getSettingsChanged}
-        lense={settingsExportSelector}
-      />
-      <DBSave
-        save={saveAccounts}
-        throttle={500}
-        getChangesStats={getAccountsChanged}
-        lense={accountsExportSelector}
-      />
-      <DBSave
-        save={saveBle}
-        throttle={500}
-        getChangesStats={getBleChanged}
-        lense={bleSelector}
-      />
-
       <SyncNewAccounts priority={5} />
 
       <RootNavigator importDataString={importDataString} />
