@@ -4,7 +4,6 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 import { Trans } from "react-i18next";
 import type { Portfolio, Currency } from "@ledgerhq/live-common/lib/types";
-import colors from "../../colors";
 import LText from "../../components/LText";
 import Space from "../../components/Space";
 import CurrencyUnitValue from "../../components/CurrencyUnitValue";

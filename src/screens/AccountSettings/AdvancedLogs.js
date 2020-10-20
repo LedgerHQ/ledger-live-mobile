@@ -7,7 +7,6 @@ import { accountScreenSelector } from "../../reducers/accounts";
 import LText from "../../components/LText";
 import NavigationScrollView from "../../components/NavigationScrollView";
 import { localeIds } from "../../languages";
-import colors from "../../colors";
 
 type Props = {
   navigation: any,

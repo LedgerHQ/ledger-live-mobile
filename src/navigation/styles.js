@@ -1,10 +1,9 @@
 // @flow
-import React from "react";
 import { StyleSheet, Platform } from "react-native";
 import colors from "../colors";
 
-let headerStyle;
-let headerStyleShadow;
+let headerStyle = {};
+let headerStyleShadow = {};
 
 if (Platform.OS === "ios") {
   headerStyle = {

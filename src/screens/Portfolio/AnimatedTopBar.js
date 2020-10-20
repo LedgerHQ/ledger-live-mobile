@@ -11,12 +11,12 @@ import Animated from "react-native-reanimated";
 import type AnimatedValue from "react-native/Libraries/Animated/src/nodes/AnimatedValue";
 import { useSafeArea } from "react-native-safe-area-context";
 import type { Portfolio, Currency } from "@ledgerhq/live-common/lib/types";
+import { useTheme } from "@react-navigation/native";
 import extraStatusBarPadding from "../../logic/extraStatusBarPadding";
 import BalanceHeader from "./BalanceHeader";
 import HeaderErrorTitle from "../../components/HeaderErrorTitle";
 import HeaderSynchronizing from "../../components/HeaderSynchronizing";
 import { scrollToTop } from "../../navigation/utils";
-import { useTheme } from "@react-navigation/native";
 
 type Props = {
   scrollY: AnimatedValue,

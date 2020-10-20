@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { Trans } from "react-i18next";
-import { useTheme } from "@react-navigation/native";
 import { themeSelector } from "../../../reducers/settings";
 import SettingsRow from "../../../components/SettingsRow";
 import LText from "../../../components/LText";
@@ -14,8 +13,6 @@ export default function ThemeSettingsRow() {
   const theme = useSelector(themeSelector);
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
-  const { colors } = useTheme();
-
   const selectTheme = t => () => {
     dispatch(setTheme(t));
     setIsOpen(false);

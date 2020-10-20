@@ -21,7 +21,6 @@ import {
 import type { State } from "../../reducers";
 import LText from "../../components/LText/index";
 import CounterValues from "../../countervalues";
-import colors from "../../colors";
 import CounterValuesSeparator from "./CounterValuesSeparator";
 import CurrencyInput from "../../components/CurrencyInput";
 import TranslatedError from "../../components/TranslatedError";

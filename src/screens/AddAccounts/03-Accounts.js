@@ -38,8 +38,6 @@ import NavigationScrollView from "../../components/NavigationScrollView";
 import { prepareCurrency } from "../../bridge/cache";
 import { blacklistedTokenIdsSelector } from "../../reducers/settings";
 
-const forceInset = { bottom: "always" };
-
 const SectionAccounts = ({ defaultSelected, ...rest }: any) => {
   useEffect(() => {
     if (defaultSelected && rest.onSelectAll) {

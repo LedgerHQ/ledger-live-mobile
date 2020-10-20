@@ -1,7 +1,6 @@
 /* @flow */
 import React, { Component } from "react";
 import { StyleSheet } from "react-native";
-import colors from "../colors";
 import LText from "./LText";
 import FormatDay from "./FormatDay";
 

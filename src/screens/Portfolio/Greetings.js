@@ -4,7 +4,6 @@ import React, { PureComponent } from "react";
 import { Trans } from "react-i18next";
 import { View, StyleSheet } from "react-native";
 import LText from "../../components/LText";
-import colors from "../../colors";
 
 const getCurrentGreetings = () => {
   const localTimeHour = new Date().getHours();

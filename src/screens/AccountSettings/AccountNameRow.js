@@ -6,7 +6,6 @@ import type { Account } from "@ledgerhq/live-common/lib/types";
 import { ScreenName } from "../../const";
 import SettingsRow from "../../components/SettingsRow";
 import LText from "../../components/LText";
-import colors from "../../colors";
 
 type Props = {
   navigation: *,

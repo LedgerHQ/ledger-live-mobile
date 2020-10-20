@@ -8,7 +8,6 @@ import { StellarMemoType } from "@ledgerhq/live-common/lib/families/stellar/type
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import LText from "../../components/LText";
 import type { State } from "../../reducers";
-import colors from "../../colors";
 import { ScreenName } from "../../const";
 import makeGenericSelectScreen from "../../screens/makeGenericSelectScreen";
 

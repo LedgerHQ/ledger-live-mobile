@@ -13,19 +13,19 @@ import {
   getMainAccount,
   getAccountUnit,
 } from "@ledgerhq/live-common/lib/account";
+import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 
 import { getDeviceTransactionConfig } from "@ledgerhq/live-common/lib/transaction";
 import type { DeviceTransactionField } from "@ledgerhq/live-common/lib/transaction";
 import { getDeviceModel } from "@ledgerhq/devices";
 
-import colors from "../colors";
+import { useTheme } from "@react-navigation/native";
 import LText from "./LText";
 import VerifyAddressDisclaimer from "./VerifyAddressDisclaimer";
 import perFamilyTransactionConfirmFields from "../generated/TransactionConfirmFields";
 import { DataRowUnitValue, TextValueField } from "./ValidateOnDeviceDataRow";
 import Animation from "./Animation";
 import getDeviceAnimation from "./DeviceAction/getDeviceAnimation";
-import { useTheme } from "@react-navigation/native";
 
 export type FieldComponentProps = {
   account: AccountLike,
@@ -107,7 +107,7 @@ export default function ValidateOnDevice({
   status,
   transaction,
 }: Props) {
-  const { colors, dark } = useTheme();
+  const { dark } = useTheme();
   const theme = dark ? "dark" : "light";
   const { t } = useTranslation();
   const mainAccount = getMainAccount(account, parentAccount);

@@ -4,7 +4,6 @@ import { StyleSheet } from "react-native";
 import type { Transaction } from "@ledgerhq/live-common/lib/types";
 import { DataRow } from "../../components/ValidateOnDeviceDataRow";
 import LText from "../../components/LText";
-import colors from "../../colors";
 
 type Props = {
   transaction: Transaction,

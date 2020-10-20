@@ -2,9 +2,9 @@
 import React, { memo } from "react";
 import { View, StyleSheet, Linking } from "react-native";
 import { Trans } from "react-i18next";
+import { useTheme } from "@react-navigation/native";
 import ExternalLink from "../../icons/ExternalLink";
 import Button from "../../components/Button";
-import { useTheme } from "@react-navigation/native";
 
 type Props = {
   url: ?string,

@@ -15,6 +15,7 @@ import { getAssetsDistribution } from "@ledgerhq/live-common/lib/portfolio";
 import { createSelector } from "reselect";
 import type { AssetsDistribution } from "@ledgerhq/live-common/lib/types/portfolio";
 import type { Currency } from "@ledgerhq/live-common/lib/types/currencies";
+import { useTheme } from "@react-navigation/native";
 import { ScreenName } from "../../const";
 import TrackScreen from "../../analytics/TrackScreen";
 import { accountsSelector } from "../../reducers/accounts";
@@ -25,7 +26,6 @@ import { counterValueCurrencySelector } from "../../reducers/settings";
 import RingChart from "./RingChart";
 import CurrencyUnitValue from "../../components/CurrencyUnitValue";
 import { calculateCountervalueSelector } from "../../actions/general";
-import { useTheme } from "@react-navigation/native";
 
 const forceInset = { bottom: "always" };
 

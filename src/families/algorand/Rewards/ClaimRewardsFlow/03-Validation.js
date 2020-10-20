@@ -9,6 +9,7 @@ import type {
   TransactionStatus,
 } from "@ledgerhq/live-common/lib/types";
 import type { DeviceModelId } from "@ledgerhq/devices";
+import { useTheme } from "@react-navigation/native";
 import { useSignWithDevice } from "../../../../logic/screenTransactionHooks";
 import { updateAccountWithUpdater } from "../../../../actions/accounts";
 import { accountScreenSelector } from "../../../../reducers/accounts";
@@ -16,7 +17,6 @@ import { TrackScreen } from "../../../../analytics";
 import PreventNativeBack from "../../../../components/PreventNativeBack";
 import ValidateOnDevice from "../../../../components/ValidateOnDevice";
 import SkipLock from "../../../../components/behaviour/SkipLock";
-import { useTheme } from "@react-navigation/native";
 
 const forceInset = { bottom: "always" };
 

@@ -1,6 +1,6 @@
 // @flow
 import React, { useState, useCallback } from "react";
-import { StyleSheet, TouchableOpacity } from "react-native";
+import { TouchableOpacity } from "react-native";
 import { useTranslation } from "react-i18next";
 import LText from "../../../components/LText";
 import InfoModal from "../../../modals/Info";
@@ -40,10 +40,3 @@ export default function DelegationLabelRight({ onPress, disabled }: Props) {
     </TouchableOpacity>
   );
 }
-
-const styles = StyleSheet.create({
-  root: {
-    padding: 16,
-  },
-  illustration: { alignSelf: "center", marginBottom: 16 },
-});

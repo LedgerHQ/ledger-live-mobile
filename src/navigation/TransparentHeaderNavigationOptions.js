@@ -3,7 +3,6 @@
 import React from "react";
 import HeaderTitle from "../components/HeaderTitle";
 import styles from "./styles";
-import colors from "../colors";
 
 export default {
   headerTransparent: true,
