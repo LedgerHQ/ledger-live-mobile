@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
   },
   title: {
     textAlign: "center",
-     
+
     fontSize: 16,
   },
   body: {},
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
   },
   switchLabel: {
     marginLeft: 8,
-     
+
     fontSize: 13,
     paddingRight: 16,
   },

@@ -158,7 +158,7 @@ class Row extends PureComponent<RowProps> {
 const styles = StyleSheet.create({
   title: {
     fontSize: 24,
-     
+
     marginVertical: 32,
   },
   subtitle: {
@@ -182,7 +182,6 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 14,
-     
   },
   rowIcon: {
     width: 16,

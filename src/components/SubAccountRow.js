@@ -129,7 +129,6 @@ const styles = StyleSheet.create({
     flexDirection: "column",
   },
   accountNameText: {
-     
     fontSize: 16,
     marginBottom: 4,
   },
@@ -139,7 +138,6 @@ const styles = StyleSheet.create({
   },
   balanceNumText: {
     fontSize: 16,
-     
   },
   balanceCounterContainer: {
     marginTop: 5,

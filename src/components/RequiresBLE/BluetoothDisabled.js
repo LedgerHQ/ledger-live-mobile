@@ -52,7 +52,6 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
   },
   titleFont: {
-     
     fontSize: 18,
     marginTop: 32,
   },

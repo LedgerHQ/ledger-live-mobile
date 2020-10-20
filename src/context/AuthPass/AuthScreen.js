@@ -276,7 +276,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: "center",
     marginVertical: 16,
-     
   },
   description: {
     color: colors.grey,

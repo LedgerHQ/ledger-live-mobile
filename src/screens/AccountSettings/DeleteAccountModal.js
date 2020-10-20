@@ -57,9 +57,7 @@ class DeleteAccountModal extends PureComponent<Props> {
 export default DeleteAccountModal;
 
 const styles = StyleSheet.create({
-  accountName: {
-     
-  },
+  accountName: {},
   footerContainer: {
     flexDirection: "row",
     justifyContent: "space-around",

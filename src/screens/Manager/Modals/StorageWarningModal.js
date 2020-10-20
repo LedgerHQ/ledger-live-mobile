@@ -61,7 +61,6 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 16,
-     
   },
   warnText: {
     textAlign: "center",

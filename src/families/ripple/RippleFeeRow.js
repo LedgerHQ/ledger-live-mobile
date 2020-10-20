@@ -78,7 +78,6 @@ const styles = StyleSheet.create({
   summaryRowText: {
     fontSize: 16,
     textAlign: "right",
-     
   },
   countervalue: {
     fontSize: 12,

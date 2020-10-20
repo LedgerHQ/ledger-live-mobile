@@ -193,7 +193,6 @@ const styles = StyleSheet.create({
   title: {
     marginVertical: 16,
     fontSize: 16,
-     
   },
   modalActions: {
     flexDirection: "row",

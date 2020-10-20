@@ -68,6 +68,5 @@ const styles = StyleSheet.create({
 
   mono: {
     fontSize: 14,
-     
   },
 });

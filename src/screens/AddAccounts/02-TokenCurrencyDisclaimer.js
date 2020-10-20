@@ -126,7 +126,6 @@ const styles = StyleSheet.create({
     paddingTop: 16,
   },
   tokenName: {
-     
     fontSize: 18,
   },
   buttonWrapper: {

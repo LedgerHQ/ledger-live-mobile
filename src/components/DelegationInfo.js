@@ -48,8 +48,6 @@ const styles = StyleSheet.create({
     paddingLeft: 16,
     marginBottom: 24,
   },
-  text: {
-     
-  },
+  text: {},
   greyText: { color: colors.grey },
 });

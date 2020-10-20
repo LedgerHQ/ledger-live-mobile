@@ -62,7 +62,6 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 20,
-     
   },
   description: {
     color: colors.grey,

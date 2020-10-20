@@ -105,7 +105,6 @@ const styles = StyleSheet.create({
   textInputAS: {
     padding: 16,
     fontSize: 30,
-     
   },
   buttonContainer: {
     marginHorizontal: 16,

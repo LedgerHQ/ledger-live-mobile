@@ -63,6 +63,5 @@ const styles = StyleSheet.create({
   },
   gasLimitText: {
     fontSize: 16,
-     
   },
 });

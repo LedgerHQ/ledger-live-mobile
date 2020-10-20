@@ -199,9 +199,7 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     alignSelf: "center",
   },
-  text: {
-     
-  },
+  text: {},
   currencyValue: {
     fontSize: 22,
   },

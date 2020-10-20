@@ -24,7 +24,6 @@ const styles = StyleSheet.create({
     marginLeft: 8,
   },
   text: {
-     
     fontSize: 14,
     flex: 1,
     textAlign: "right",

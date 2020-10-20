@@ -42,7 +42,6 @@ const styles = StyleSheet.create({
     lineHeight: 22,
     textAlign: "left",
     paddingVertical: 4,
-     
   },
   button: { paddingRight: 0 },
 });

@@ -104,7 +104,6 @@ const styles = StyleSheet.create({
   title: {
     marginTop: 32,
     fontSize: 18,
-     
   },
   description: {
     marginTop: 16,

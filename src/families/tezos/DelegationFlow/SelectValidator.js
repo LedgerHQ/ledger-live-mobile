@@ -372,7 +372,6 @@ const styles = StyleSheet.create({
   },
   bakerName: {
     fontSize: 14,
-     
   },
   overdelegatedIndicator: {
     position: "absolute",
@@ -397,7 +396,6 @@ const styles = StyleSheet.create({
     opacity: 0.5,
   },
   addressInput: {
-     
     ...getFontStyle({ semiBold: true }),
     fontSize: 20,
     paddingVertical: 16,

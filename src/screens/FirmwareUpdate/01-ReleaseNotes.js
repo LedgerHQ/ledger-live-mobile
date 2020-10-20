@@ -90,7 +90,6 @@ const styles = StyleSheet.create({
   },
   intro: {
     fontSize: 14,
-     
   },
   markdownSection: {
     marginTop: 20,

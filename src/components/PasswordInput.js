@@ -131,7 +131,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   input: {
-     
     fontSize: 16,
     paddingHorizontal: 16,
     height: 48,

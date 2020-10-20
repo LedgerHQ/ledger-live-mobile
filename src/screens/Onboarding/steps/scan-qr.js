@@ -86,9 +86,7 @@ const styles = StyleSheet.create({
     color: colors.smoke,
     textAlign: "center",
   },
-  titleInside: {
-     
-  },
+  titleInside: {},
 });
 
 export default withOnboardingContext(

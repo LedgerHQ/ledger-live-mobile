@@ -54,6 +54,5 @@ const styles = StyleSheet.create({
   },
   tagText: {
     fontSize: 16,
-     
   },
 });

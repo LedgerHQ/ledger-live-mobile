@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 14,
     lineHeight: 16,
-     
+
     paddingBottom: 4,
   },
   labelContainer: {

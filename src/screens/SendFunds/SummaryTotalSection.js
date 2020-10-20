@@ -108,9 +108,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "flex-end",
   },
-  title: {
-     
-  },
+  title: {},
   summaryValueText: {
     fontSize: 18,
   },

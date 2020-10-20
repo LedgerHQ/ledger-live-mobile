@@ -55,7 +55,5 @@ const styles = StyleSheet.create({
   remainingText: {
     color: colors.grey,
   },
-  remainingCount: {
-     
-  },
+  remainingCount: {},
 });

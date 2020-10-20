@@ -155,7 +155,6 @@ class DeviceItem extends PureComponent<DeviceItemProps> {
 
 const styles = StyleSheet.create({
   title: {
-     
     fontSize: 24,
     lineHeight: 36,
     margin: 16,
@@ -178,7 +177,6 @@ const styles = StyleSheet.create({
   deviceTitle: {
     marginTop: 16,
     fontSize: 16,
-     
   },
   deviceDesc: {
     marginTop: 8,

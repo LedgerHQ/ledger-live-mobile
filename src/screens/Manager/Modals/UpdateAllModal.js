@@ -111,7 +111,7 @@ const UpdateAllModal = ({
 const styles = StyleSheet.create({
   title: {
     fontSize: 16,
-     
+
     marginVertical: 24,
   },
   warnText: {
@@ -149,7 +149,6 @@ const styles = StyleSheet.create({
     flexBasis: "30%",
     marginHorizontal: 12,
     fontSize: 14,
-     
   },
   appLineText: {
     textAlign: "right",

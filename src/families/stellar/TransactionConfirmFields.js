@@ -49,7 +49,6 @@ const deviceMemoLabels = {
 
 const styles = StyleSheet.create({
   text: {
-     
     fontSize: 14,
     flex: 1,
     textAlign: "right",
