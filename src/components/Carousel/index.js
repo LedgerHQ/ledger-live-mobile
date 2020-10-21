@@ -15,8 +15,8 @@ import BuyCrypto from "./slides/BuyCrypto";
 import BackupPack from "./slides/BackupPack";
 import StakeCosmos from "./slides/StakeCosmos";
 import StakeAlgo from "./slides/StakeAlgo";
-import Sell from "./slides/Sell";
-import Vote from "./slides/Vote";
+// import Sell from "./slides/Sell";
+// import Vote from "./slides/Vote";
 import Swap from "./slides/Swap";
 import IconClose from "../../icons/Close";
 import colors from "../../colors";
@@ -48,14 +48,14 @@ export const getDefaultSlides = () => {
       Component: () => <StakeAlgo />,
     },
     // TODO enable when ready
-    {
-      id: "sell",
-      Component: () => <Sell />,
-    },
-    {
-      id: "vote",
-      Component: () => <Vote />,
-    },
+    // {
+    //   id: "sell",
+    //   Component: () => <Sell />,
+    // },
+    // {
+    //   id: "vote",
+    //   Component: () => <Vote />,
+    // },
   ];
 };
 
