@@ -58,7 +58,7 @@ export default function BaseInfoModal({
 }
 
 const styles = StyleSheet.create({
-  root: { flex: 1 },
+  root: { flex: 1, backgroundColor: colors.white },
   topSection: { flex: 0.6, backgroundColor: colors.lightFog },
   bottomSection: { flex: 1, paddingHorizontal: 16, paddingVertical: 24 },
   ctaSection: { padding: 16 },

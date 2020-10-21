@@ -4,7 +4,7 @@ import { View, StyleSheet, Image } from "react-native";
 import { Trans } from "react-i18next";
 import { useNavigation } from "@react-navigation/native";
 import BaseInfoModal from "../BaseModal";
-import termsImg from "../../../../images/lending-terms.png";
+import termsImg from "../../../../images/lending-info-2.png";
 import { ScreenName } from "../../../../const";
 
 export default function LendingInfoStep1() {
@@ -29,6 +29,11 @@ export default function LendingInfoStep1() {
 }
 
 const styles = StyleSheet.create({
-  imageContainer: { width: "100%", height: "100%", paddingHorizontal: 24 },
+  imageContainer: {
+    width: "100%",
+    height: "100%",
+    paddingHorizontal: 24,
+    paddingTop: 32,
+  },
   image: { width: "100%", height: "100%" },
 });
