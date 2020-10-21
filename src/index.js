@@ -108,17 +108,11 @@ function App({ importDataString }: AppProps) {
   }, []);
 
   const rawState = useCountervaluesExport();
-  const { wipe } = useCountervaluesPolling();
 
   const saveCountervalues = useCallback(async () => {
-    if (Object.keys(rawState).length === 1) {
-      wipe();
-      await saveCountervaluesRaw(rawState);
-      return;
-    }
     if (!Object.keys(rawState.status).length) return;
     await saveCountervaluesRaw(rawState);
-  }, [wipe, rawState]);
+  }, [rawState]);
 
   useDBSaveEffect({
     save: saveCountervalues,
