@@ -8,11 +8,10 @@ import LendingTerms from "../../screens/Lending/modals/InfoModals/TermsStep";
 import LendingInfo1 from "../../screens/Lending/modals/InfoModals/Step-1";
 import LendingInfo2 from "../../screens/Lending/modals/InfoModals/Step-2";
 import LendingInfo3 from "../../screens/Lending/modals/InfoModals/Step-3";
-import Styles from "../../navigation/styles";
-
 import { BackButton, CloseButton } from "../../screens/OperationDetails";
 import colors from "../../colors";
 import Close from "../../icons/Close";
+import { closableStackNavigatorConfig } from "../../navigation/navigatorConfig";
 
 export default function LendingInfoNavigator() {
   const { t } = useTranslation();
@@ -23,7 +22,7 @@ export default function LendingInfoNavigator() {
         const { params } = route;
         const onlyTerms = params?.onlyTerms;
         return {
-          headerStyle: Styles.headerNoShadow,
+          ...closableStackNavigatorConfig,
           title: t("transfer.lending.info.title"),
           ...(onlyTerms
             ? {
