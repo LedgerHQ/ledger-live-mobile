@@ -10,6 +10,7 @@ import {
 import {
   useDistribution as useDistributionCommon,
   useCalculateCountervalueCallback as useCalculateCountervalueCallbackCommon,
+  useCountervaluesPolling,
 } from "@ledgerhq/live-common/lib/countervalues/react";
 import { accountsSelector } from "../reducers/accounts";
 import {
@@ -129,10 +130,16 @@ export function useRefreshAccountsOrderingEffect({
   }, [onMount, onUnmount, onUpdate, refreshAccountsOrdering]);
 }
 
-export const cleanCache = () => async (dispatch: *) => {
-  dispatch({ type: "CLEAN_CACHE" });
-  dispatch({ type: "LEDGER_CV:WIPE" });
-  await clearBridgeCache();
-  await clearLibcore();
-  flushAll();
-};
+export function useCleanCache() {
+  const dispatch = useDispatch();
+  const { wipe } = useCountervaluesPolling();
+
+  return useCallback(async () => {
+    dispatch({ type: "CLEAN_CACHE" });
+    dispatch({ type: "LEDGER_CV:WIPE" });
+    await clearBridgeCache();
+    await clearLibcore();
+    wipe();
+    flushAll();
+  }, [dispatch, wipe]);
+}
