@@ -13,6 +13,7 @@ import {
 } from "@ledgerhq/live-common/lib/account";
 
 import { useTheme } from "@react-navigation/native";
+
 import {
   accountsSelector,
   flattenAccountsSelector,
