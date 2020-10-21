@@ -11,7 +11,7 @@ export const url =
 export const LendingUrl = "";
 
 const currentTermsRequired = "2019-12-04";
-const currentLendingTermsRequired = "2020-12-08";
+const currentLendingTermsRequired = "2019-12-04";
 
 export async function isAcceptedTerms() {
   const acceptedTermsVersion = await AsyncStorage.getItem(
