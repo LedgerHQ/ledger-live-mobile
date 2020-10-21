@@ -31,6 +31,12 @@ type Props = {
   route: { params: RouteParams },
 };
 
+export const PopButton = ({ navigation }: { navigation: Navigation }) => (
+  <TouchableOpacity style={styles.buttons} onPress={() => navigation.pop()}>
+    <ArrowLeft size={18} color={colors.grey} />
+  </TouchableOpacity>
+);
+
 export const BackButton = ({ navigation }: { navigation: Navigation }) => (
   <TouchableOpacity style={styles.buttons} onPress={() => navigation.goBack()}>
     <ArrowLeft size={18} color={colors.grey} />

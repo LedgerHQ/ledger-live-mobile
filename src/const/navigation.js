@@ -192,6 +192,10 @@ export const ScreenName = {
   LendingDashboard: "LendingDashboard",
   LendingClosedLoans: "LendingClosedLoans",
   LendingHistory: "LendingHistory",
+  LendingTerms: "LendingTerms",
+  LendingInfo1: "LendingInfo1",
+  LendingInfo2: "LendingInfo2",
+  LendingInfo3: "LendingInfo3",
 };
 
 export const NavigatorName = {
@@ -229,6 +233,7 @@ export const NavigatorName = {
   TronVoteFlow: "TronVoteFlow",
   Unfreeze: "Unfreeze",
   Lending: "Lending",
+  LendingFlow: "LendingFlow",
   /* eslint-disable sort-keys */
 
   // Tab

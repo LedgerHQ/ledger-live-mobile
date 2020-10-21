@@ -1366,6 +1366,30 @@
         "tabTitle": "History",
         "description": "View the history of all your loan transactions.",
         "cta": "Lend asset"
+      },
+      "terms": {
+        "label": "Lend crypto",
+        "title": "Lend asset on the Compound Protocol",
+        "description": "Compound Protocol allows you to lend and borrow assets on the blockchain.  You can lend assets and earn interests directly from Ledger Live.",
+        "switchLabel": "I have read, understand and accept the <0>terms and conditions</0>"
+      },
+      "info": {
+        "1": {
+          "label": "Step 1/3",
+          "title": "Approving an account allows the protocol to process future loans",
+          "description": "You need to authorize the Compound smart contract to transfer up to a certain amount of assets to the protocol. Enabling an account gives permission to the protocol to process future loans."
+        },
+        "2": {
+          "label": "Step 2/3",
+          "title": "Supply assets to earn interests",
+          "description": "After an account is enabled, you can select the amount of assets you want to lend and issue a transaction to the protocol. Interests accrue immediately after the transaction is confirmed."
+        },
+        "3": {
+          "label": "Step 3/3",
+          "title": "Withdraw your gains whenever you feel like it",
+          "description": "You can withdraw at any time your loan principal and interests, in its entirety or partially, directly from you Ledger wallet.",
+          "cta": "Lend now"
+        }
       }
     }
   },

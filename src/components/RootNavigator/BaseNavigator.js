@@ -31,6 +31,7 @@ import PasswordModifyFlowNavigator from "./PasswordModifyFlowNavigator";
 import MigrateAccountsFlowNavigator from "./MigrateAccountsFlowNavigator";
 import SwapNavigator from "./SwapNavigator";
 import LendingNavigator from "./LendingNavigator";
+import LendingFlowNavigator from "./LendingFlowNavigator";
 import { closableStackNavigatorConfig } from "../../navigation/navigatorConfig";
 import Account from "../../screens/Account";
 import TransparentHeaderNavigationOptions from "../../navigation/TransparentHeaderNavigationOptions";
@@ -73,6 +74,11 @@ export default function BaseNavigator() {
           headerLeft: null,
           title: t("transfer.lending.title"),
         }}
+      />
+      <Stack.Screen
+        name={NavigatorName.LendingFlow}
+        component={LendingFlowNavigator}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name={NavigatorName.Freeze}

@@ -7,7 +7,11 @@ const rawURL =
 export const url =
   "https://github.com/LedgerHQ/ledger-live-mobile/blob/master/TERMS.md";
 
+// @TODO fill in the condition terms
+export const LendingUrl = "";
+
 const currentTermsRequired = "2019-12-04";
+const currentLendingTermsRequired = "2020-12-08";
 
 export async function isAcceptedTerms() {
   const acceptedTermsVersion = await AsyncStorage.getItem(
@@ -18,6 +22,20 @@ export async function isAcceptedTerms() {
 
 export async function acceptTerms() {
   await AsyncStorage.setItem("acceptedTermsVersion", currentTermsRequired);
+}
+
+export async function isAcceptedLendingTerms() {
+  const acceptedLendingTermsVersion = await AsyncStorage.getItem(
+    "acceptedLendingTermsVersion",
+  );
+  return acceptedLendingTermsVersion === currentLendingTermsRequired;
+}
+
+export async function acceptLendingTerms() {
+  await AsyncStorage.setItem(
+    "acceptedLendingTermsVersion",
+    currentLendingTermsRequired,
+  );
 }
 
 export async function load() {

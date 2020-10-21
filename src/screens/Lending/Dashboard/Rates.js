@@ -1,15 +1,17 @@
 // @flow
-import React, { useMemo } from "react";
-import { View, StyleSheet, FlatList } from "react-native";
+import React, { useMemo, useCallback } from "react";
+import { TouchableOpacity, View, StyleSheet, FlatList } from "react-native";
 import { BigNumber } from "bignumber.js";
 import { Trans } from "react-i18next";
 import type { AccountLikeArray } from "@ledgerhq/live-common/lib/types";
 import type { CurrentRate } from "@ledgerhq/live-common/lib/families/ethereum/modules/compound";
 // import { formatShort } from "@ledgerhq/live-common/lib/currencies";
+import { useNavigation } from "@react-navigation/native";
 import LText from "../../../components/LText";
 import CurrencyUnitValue from "../../../components/CurrencyUnitValue";
 import CurrencyIcon from "../../../components/CurrencyIcon";
 import colors from "../../../colors";
+import { NavigatorName } from "../../../const";
 
 const Row = ({
   data,
@@ -20,6 +22,11 @@ const Row = ({
   accounts: AccountLikeArray,
 }) => {
   const { token, supplyAPY } = data;
+  const navigation = useNavigation();
+
+  const navigateToEnableFlow = useCallback(() => {
+    navigation.navigate(NavigatorName.LendingFlow, { token });
+  }, [navigation, token]);
 
   // const openManageModal = useCallback(() => {
   //   const account = accounts.find(
@@ -53,7 +60,7 @@ const Row = ({
   }, [token.id, accounts]);
 
   return (
-    <View style={styles.row}>
+    <TouchableOpacity style={styles.row} onPress={navigateToEnableFlow}>
       <CurrencyIcon radius={100} currency={token} size={32} />
       <View style={styles.currencySection}>
         <LText semiBold style={styles.title}>
@@ -73,7 +80,7 @@ const Row = ({
           values={{ value: supplyAPY }}
         />
       </LText>
-    </View>
+    </TouchableOpacity>
   );
 };
 
