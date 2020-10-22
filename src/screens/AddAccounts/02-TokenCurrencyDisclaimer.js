@@ -19,6 +19,7 @@ import Button from "../../components/Button";
 import LText from "../../components/LText";
 import { urls } from "../../config/urls";
 import { ScreenName, NavigatorName } from "../../const";
+import { TrackScreen } from "../../analytics";
 
 const forceInset = { bottom: "always" };
 
@@ -30,6 +31,11 @@ const Disclaimer = ({
   tokenType: string,
 }) => (
   <View style={styles.disclaimer}>
+    <TrackScreen
+      category="AddAccounts"
+      name="TokenCurrencyDisclaimer"
+      currencyName={tokenName}
+    />
     <Info size={18} color={colors.live} />
     <View style={styles.disclaimerTextWrapper}>
       <LText style={styles.disclaimerText}>
