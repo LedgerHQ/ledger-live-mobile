@@ -79,8 +79,6 @@ export default function AddAccountsTokenCurrencyDisclaimer({
 
   const parentTokenAccount = accountData ? accountData.parentAccount : null;
 
-  const tokenAccount = accountData ? accountData.account : null;
-
   const onClose = useCallback(() => {
     navigation.dangerouslyGetParent().pop();
   }, [navigation]);
@@ -92,8 +90,8 @@ export default function AddAccountsTokenCurrencyDisclaimer({
       navigation.navigate(NavigatorName.ReceiveFunds, {
         screen: ScreenName.ReceiveSelectAccount,
         params: {
-          // prefill search input with account name or token name
-          currency: tokenAccount ? token.name : parentTokenAccount.name,
+          // prefilter with token curency
+          selectedCurrency: token,
         },
       });
     } else {
@@ -102,14 +100,7 @@ export default function AddAccountsTokenCurrencyDisclaimer({
         currency: parentCurrency,
       });
     }
-  }, [
-    parentTokenAccount,
-    parentCurrency,
-    onClose,
-    navigation,
-    tokenAccount,
-    token.name,
-  ]);
+  }, [parentTokenAccount, onClose, navigation, token, parentCurrency]);
 
   return (
     <SafeAreaView style={styles.root} forceInset={forceInset}>
