@@ -19,10 +19,7 @@ import Transport from "@ledgerhq/hw-transport";
 import { NotEnoughBalance } from "@ledgerhq/errors";
 import { log } from "@ledgerhq/logs";
 import { checkLibs } from "@ledgerhq/live-common/lib/sanityChecks";
-import {
-  useCountervaluesExport,
-  useCountervaluesPolling,
-} from "@ledgerhq/live-common/lib/countervalues/react";
+import { useCountervaluesExport } from "@ledgerhq/live-common/lib/countervalues/react";
 import logger from "./logger";
 import {
   saveAccounts,
