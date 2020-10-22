@@ -54,15 +54,22 @@ export default function ReceiveFunds({ navigation, route }: Props) {
       );
       if (selectedCurrency.type === "TokenCurrency") {
         // add in the token subAccount if it does not exist
-        return filteredAccounts.map(acc => {
-          return accountWithMandatoryTokens(acc, [selectedCurrency]);
-        });
+        return flattenAccounts(
+          filteredAccounts.map(acc => {
+            return accountWithMandatoryTokens(acc, [selectedCurrency]);
+          }),
+        ).filter(
+          acc =>
+            acc.type === "Account" ||
+            (acc.type === "TokenAccount" &&
+              acc.token.id === selectedCurrency.id),
+        );
       }
-      return filteredAccounts;
+      return flattenAccounts(filteredAccounts);
     }
-    return accounts;
+    return flattenAccounts(accounts);
   }, [accounts, selectedCurrency]);
-  const allAccounts = flattenAccounts(enhancedAccounts);
+  const allAccounts = enhancedAccounts;
 
   const keyExtractor = item => item.account.id;
 
@@ -79,6 +86,7 @@ export default function ReceiveFunds({ navigation, route }: Props) {
             style={styles.card}
             onPress={() => {
               navigation.navigate(ScreenName.ReceiveConnectDevice, {
+                account,
                 accountId: account.id,
                 parentId:
                   account.type !== "Account" ? account.parentId : undefined,
