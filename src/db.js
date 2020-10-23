@@ -8,6 +8,7 @@ import type { CounterValuesStateRaw } from "@ledgerhq/live-common/lib/counterval
 const ACCOUNTS_KEY = "accounts";
 const ACCOUNTS_KEY_SORT = "accounts.sort";
 const ACCOUNTS_DB_PREFIX = "accounts.active.";
+const COUNTERVALUES_DB_PREFIX = "countervalues.";
 
 export async function clearDb() {
   const list = await store.keys();
@@ -32,16 +33,42 @@ export async function saveSettings(obj: *): Promise<void> {
   await store.save("settings", obj);
 }
 
-export function getCountervalues(): Promise<
-  CounterValuesStateRaw | typeof undefined,
-> {
-  return store.get("countervalues");
+export const getCountervalues: typeof unsafeGetCountervalues = atomicQueue(
+  unsafeGetCountervalues,
+);
+
+export const saveCountervalues: typeof unsafeSaveCountervalues = atomicQueue(
+  unsafeSaveCountervalues,
+);
+
+export async function unsafeGetCountervalues(): Promise<CounterValuesStateRaw> {
+  const keys = (await store.keys()).filter(
+    k => k.indexOf(COUNTERVALUES_DB_PREFIX) === 0,
+  );
+
+  if (!keys.length) {
+    return { status: {} };
+  }
+  return (await store.get(keys)).reduce(
+    (prev, val, i) => ({
+      ...prev,
+      [keys[i].split(COUNTERVALUES_DB_PREFIX)[1]]: val,
+    }),
+    {},
+  );
 }
 
-export async function saveCountervalues(
+async function unsafeSaveCountervalues(
   state: CounterValuesStateRaw,
+  changed: boolean,
 ): Promise<void> {
-  await store.save("countervalues", state);
+  if (!changed) return;
+
+  const data = Object.entries(state).map(([key, val]) => [
+    `${COUNTERVALUES_DB_PREFIX}${key}`,
+    val,
+  ]);
+  await store.save(data);
 }
 
 export async function getBle(): Promise<*> {
