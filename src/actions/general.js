@@ -12,6 +12,8 @@ import {
   useCalculateCountervalueCallback as useCalculateCountervalueCallbackCommon,
   useCountervaluesPolling,
 } from "@ledgerhq/live-common/lib/countervalues/react";
+import { inferTrackingPairForAccounts } from "@ledgerhq/live-common/lib/countervalues/logic";
+import { pairId } from "@ledgerhq/live-common/lib/countervalues/helpers";
 import { accountsSelector } from "../reducers/accounts";
 import {
   counterValueCurrencySelector,
@@ -142,4 +144,29 @@ export function useCleanCache() {
     wipe();
     flushAll();
   }, [dispatch, wipe]);
+}
+
+export function useUserSettings() {
+  const trackingPairs = useTrackingPairs();
+  return useMemo(
+    () => ({
+      trackingPairs,
+      autofillGaps: true,
+    }),
+    [trackingPairs],
+  );
+}
+
+export function useTrackingPairIds(): string[] {
+  const trackingPairs = useTrackingPairs();
+  return useMemo(() => trackingPairs.map(p => pairId(p)), [trackingPairs]);
+}
+
+export function useTrackingPairs() {
+  const accounts = useSelector(accountsSelector);
+  const countervalue = useSelector(counterValueCurrencySelector);
+  return useMemo(() => inferTrackingPairForAccounts(accounts, countervalue), [
+    accounts,
+    countervalue,
+  ]);
 }

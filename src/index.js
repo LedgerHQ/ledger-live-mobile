@@ -47,7 +47,7 @@ import RootNavigator from "./components/RootNavigator";
 import SetEnvsFromSettings from "./components/SetEnvsFromSettings";
 import CounterValuesProvider from "./components/CounterValuesProvider";
 import type { State } from "./reducers";
-
+import { useTrackingPairIds } from "./actions/general";
 import { ScreenName, NavigatorName } from "./const";
 
 checkLibs({
@@ -100,11 +100,15 @@ function App({ importDataString }: AppProps) {
   }, []);
 
   const rawState = useCountervaluesExport();
+  const pairIds = useTrackingPairIds();
 
   useDBSaveEffect({
     save: saveCountervalues,
     throttle: 2000,
-    getChangesStats: () => !!Object.keys(rawState.status).length,
+    getChangesStats: () => ({
+      changed: !!Object.keys(rawState.status).length,
+      pairIds,
+    }),
     lense: () => rawState,
   });
 

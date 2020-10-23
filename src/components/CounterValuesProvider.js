@@ -1,16 +1,13 @@
 // @flow
-import React, { useState, useEffect, useMemo, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { AppState } from "react-native";
-import { useSelector } from "react-redux";
 import { useNetInfo } from "@react-native-community/netinfo";
 import {
   Countervalues,
   useCountervaluesPolling,
 } from "@ledgerhq/live-common/lib/countervalues/react";
-import { inferTrackingPairForAccounts } from "@ledgerhq/live-common/lib/countervalues/logic";
 import { getCountervalues } from "../db";
-import { accountsSelector } from "../reducers/accounts";
-import { counterValueCurrencySelector } from "../reducers/settings";
+import { useUserSettings } from "../actions/general";
 
 export default function CountervaluesProvider({
   children,
@@ -71,16 +68,4 @@ function usePollingManager() {
     }
     start();
   }, [isInternetReachable, isActive, start, stop]);
-}
-
-export function useUserSettings() {
-  const accounts = useSelector(accountsSelector);
-  const countervalue = useSelector(counterValueCurrencySelector);
-  return useMemo(
-    () => ({
-      trackingPairs: inferTrackingPairForAccounts(accounts, countervalue),
-      autofillGaps: true,
-    }),
-    [accounts, countervalue],
-  );
 }
