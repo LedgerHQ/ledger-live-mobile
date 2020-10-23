@@ -1054,7 +1054,7 @@
   dependencies:
     commander "^2.20.0"
 
-"@ledgerhq/cryptoassets@5.27.2", "@ledgerhq/cryptoassets@^5.27.1", "@ledgerhq/cryptoassets@^5.27.2":
+"@ledgerhq/cryptoassets@5.27.2", "@ledgerhq/cryptoassets@^5.27.2":
   version "5.27.2"
   resolved "https://registry.yarnpkg.com/@ledgerhq/cryptoassets/-/cryptoassets-5.27.2.tgz#8f6cfc9cd0ac90b6389f73ca7d5126b663b0dd93"
   integrity sha512-3AMzLPpqK7ldVGwNzggPpgRB3ZhhhLz+FB+bQQSCBzk1knBR1JZmuw1i9cG6W+28vQsQkQUTWpH6nXKTjhwbRg==
@@ -1087,17 +1087,6 @@
     ripemd160 "2"
     semver "^7.3.2"
     sha.js "2"
-
-"@ledgerhq/hw-app-eth@5.27.1":
-  version "5.27.1"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-app-eth/-/hw-app-eth-5.27.1.tgz#c442a643fd3032c02b8ca946b8bd185e155bc600"
-  integrity sha512-mR3NsHBQ5DKCutWZP00IrhRlYpOjgLbBVYM3NKr0P3q0LrcmYRpTp0JM3B3OSZF/6j4HwZDWVp2E/2GIksqZ8Q==
-  dependencies:
-    "@ledgerhq/cryptoassets" "^5.27.1"
-    "@ledgerhq/errors" "^5.26.0"
-    "@ledgerhq/hw-transport" "^5.26.0"
-    bignumber.js "^9.0.1"
-    rlp "^2.2.6"
 
 "@ledgerhq/hw-app-eth@5.27.2":
   version "5.27.2"
@@ -1174,10 +1163,10 @@
     "@ledgerhq/errors" "^5.26.0"
     events "^3.2.0"
 
-"@ledgerhq/live-common@^15.5.0-ethjs.3":
-  version "15.5.0-ethjs.3"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-15.5.0-ethjs.3.tgz#0e60e6eeb1c26f02249cdafa536bf1a86a7be4a3"
-  integrity sha512-jQz/PS04olhUw6Y2ln9F9UQ7/ibUUMx24jnl0RVLKmEm6Yn2kFxne4HmCLt7S3aIjsfOUneQdJaJh2vP/99Rlg==
+"@ledgerhq/live-common@^15.5.0-ethjs.6":
+  version "15.5.0-ethjs.6"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-15.5.0-ethjs.6.tgz#aaf4cf2fed11c298da6a371e135c88a41e7fd776"
+  integrity sha512-8mWuqQzAX0l+F0OfCTLnFcEwT16jL7r8z14mk/TotLGyv7pV5IfS0OlqFPYThwKpzmx6YybsUDiYn5DfGrljfQ==
   dependencies:
     "@ledgerhq/compressjs" "1.3.2"
     "@ledgerhq/cryptoassets" "5.27.2"

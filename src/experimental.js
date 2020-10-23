@@ -47,6 +47,13 @@ export const experimentalFeatures: Feature[] = [
       "Changing the app provider in the Manager may make it impossible to install or uninstall apps on your Ledger device.",
     minValue: 1,
   },
+  {
+    type: "toggle",
+    name: "EXPERIMENTAL_EXPLORERS",
+    title: "Experimental Explorers API",
+    description:
+      "Try an upcoming version of Ledger's blockchain explorers. Changing this setting may affect the account balance and synchronization as well as the send feature.",
+  },
   /*
   {
     type: "toggle",
