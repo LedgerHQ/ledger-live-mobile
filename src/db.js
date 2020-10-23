@@ -42,9 +42,7 @@ export const saveCountervalues: typeof unsafeSaveCountervalues = atomicQueue(
 );
 
 export async function unsafeGetCountervalues(): Promise<CounterValuesStateRaw> {
-  const keys = (await store.keys()).filter(
-    k => k.indexOf(COUNTERVALUES_DB_PREFIX) === 0,
-  );
+  const keys = await getKeys(COUNTERVALUES_DB_PREFIX);
 
   if (!keys.length) {
     return { status: {} };
@@ -58,6 +56,10 @@ export async function unsafeGetCountervalues(): Promise<CounterValuesStateRaw> {
   );
 }
 
+async function getKeys(prefix: string) {
+  return (await store.keys()).filter(k => k.indexOf(prefix) === 0);
+}
+
 async function unsafeSaveCountervalues(
   state: CounterValuesStateRaw,
   changed: boolean,
@@ -69,6 +71,13 @@ async function unsafeSaveCountervalues(
     val,
   ]);
   await store.save(data);
+
+  const deletedKeys = (await getKeys(COUNTERVALUES_DB_PREFIX)).filter(
+    k => Object.keys(state).includes(k.split(COUNTERVALUES_DB_PREFIX)[1]) === 0,
+  );
+  if (deletedKeys.length) {
+    await store.delete(deletedKeys);
+  }
 }
 
 export async function getBle(): Promise<*> {

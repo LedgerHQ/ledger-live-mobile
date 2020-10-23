@@ -21,12 +21,7 @@ import { log } from "@ledgerhq/logs";
 import { checkLibs } from "@ledgerhq/live-common/lib/sanityChecks";
 import { useCountervaluesExport } from "@ledgerhq/live-common/lib/countervalues/react";
 import logger from "./logger";
-import {
-  saveAccounts,
-  saveBle,
-  saveSettings,
-  saveCountervalues as saveCountervaluesRaw,
-} from "./db";
+import { saveAccounts, saveBle, saveSettings, saveCountervalues } from "./db";
 import {
   exportSelector as settingsExportSelector,
   hasCompletedOnboardingSelector,
@@ -106,16 +101,11 @@ function App({ importDataString }: AppProps) {
 
   const rawState = useCountervaluesExport();
 
-  const saveCountervalues = useCallback(async () => {
-    if (!Object.keys(rawState.status).length) return;
-    await saveCountervaluesRaw(rawState);
-  }, [rawState]);
-
   useDBSaveEffect({
     save: saveCountervalues,
     throttle: 2000,
-    getChangesStats: () => true,
-    lense: () => {},
+    getChangesStats: () => !!Object.keys(rawState.status).length,
+    lense: () => rawState,
   });
 
   useDBSaveEffect({
