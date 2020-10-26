@@ -15,6 +15,7 @@ import { Trans } from "react-i18next";
 import SafeAreaView from "react-native-safe-area-view";
 import type { CryptoCurrency, Account } from "@ledgerhq/live-common/lib/types";
 import { getCurrencyBridge } from "@ledgerhq/live-common/lib/bridge";
+import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import { replaceAccounts } from "../../actions/accounts";
 import { accountsSelector } from "../../reducers/accounts";
 import logger from "../../logger";
@@ -50,7 +51,7 @@ const SectionAccounts = ({ defaultSelected, ...rest }: any) => {
 
 type RouteParams = {
   currency: CryptoCurrency,
-  deviceId: string,
+  device: Device,
   inline?: boolean,
 };
 
@@ -109,7 +110,10 @@ class AddAccountsAccounts extends PureComponent<Props, State> {
 
   startSubscription = () => {
     const { route, blacklistedTokenIds } = this.props;
-    const { currency, deviceId } = route.params || {};
+    const {
+      currency,
+      device: { deviceId },
+    } = route.params || {};
     const bridge = getCurrencyBridge(currency);
     const syncConfig = {
       paginationConfig: {
@@ -117,9 +121,16 @@ class AddAccountsAccounts extends PureComponent<Props, State> {
       },
       blacklistedTokenIds,
     };
+    // will be set to false if an existing account is found
+    let onlyNewAccounts = true;
+
     this.scanSubscription = concat(
       from(prepareCurrency(currency)).pipe(ignoreElements()),
-      bridge.scanAccounts({ currency, deviceId, syncConfig }),
+      bridge.scanAccounts({
+        currency,
+        deviceId,
+        syncConfig,
+      }),
     ).subscribe({
       next: ({ account }) =>
         this.setState(
@@ -131,13 +142,20 @@ class AddAccountsAccounts extends PureComponent<Props, State> {
               a => account.id === a.id,
             );
             const isNewAccount = isAccountEmpty(account);
+            if (!isNewAccount && !hasAlreadyBeenImported) {
+              onlyNewAccounts = false;
+            }
+
             if (!hasAlreadyBeenScanned) {
               return {
                 scannedAccounts: [...scannedAccounts, account],
-                selectedIds:
-                  !hasAlreadyBeenImported && !isNewAccount
-                    ? uniq([...selectedIds, account.id])
-                    : selectedIds,
+                selectedIds: onlyNewAccounts
+                  ? hasAlreadyBeenImported || selectedIds.length > 0
+                    ? selectedIds
+                    : [account.id]
+                  : !hasAlreadyBeenImported && !isNewAccount
+                  ? uniq([...selectedIds, account.id])
+                  : selectedIds,
               };
             }
             return null;
@@ -281,7 +299,11 @@ class AddAccountsAccounts extends PureComponent<Props, State> {
 
     return (
       <SafeAreaView style={styles.root} forceInset={forceInset}>
-        <TrackScreen category="AddAccounts" name="Accounts" />
+        <TrackScreen
+          category="AddAccounts"
+          name="Accounts"
+          currencyName={currency.name}
+        />
         <PreventNativeBack />
         <NavigationScrollView
           style={styles.inner}

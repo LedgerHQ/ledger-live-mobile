@@ -1,7 +1,7 @@
 // @flow
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useCallback } from "react";
 import { useSelector } from "react-redux";
-import { View, StyleSheet, SectionList } from "react-native";
+import { StyleSheet, SectionList, FlatList } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import Animated from "react-native-reanimated";
 import { createNativeWrapper } from "react-native-gesture-handler";
@@ -11,9 +11,7 @@ import {
   groupAccountsOperationsByDay,
   isAccountEmpty,
 } from "@ledgerhq/live-common/lib/account";
-
 import colors from "../../colors";
-
 import {
   accountsSelector,
   flattenAccountsSelector,
@@ -27,6 +25,7 @@ import OperationRow from "../../components/OperationRow";
 import globalSyncRefreshControl from "../../components/globalSyncRefreshControl";
 
 import GraphCardContainer from "./GraphCardContainer";
+import Carousel from "../../components/Carousel";
 import StickyHeader from "./StickyHeader";
 import EmptyStatePortfolio from "./EmptyStatePortfolio";
 import extraStatusBarPadding from "../../logic/extraStatusBarPadding";
@@ -36,7 +35,6 @@ import NoOperationFooter from "../../components/NoOperationFooter";
 import MigrateAccountsBanner from "../MigrateAccounts/Banner";
 import RequireTerms from "../../components/RequireTerms";
 import { useScrollToTop } from "../../navigation/utils";
-import { BuyCryptoBanner } from "../../components/banners/BuyCryptoBanner";
 
 export { default as PortfolioTabIcon } from "./TabIcon";
 
@@ -68,10 +66,9 @@ export default function PortfolioScreen({ navigation }: Props) {
     return item.id;
   }
 
-  function ListHeaderComponent() {
+  const ListHeaderComponent = useCallback(() => {
     return (
       <>
-        <BuyCryptoBanner />
         <GraphCardContainer
           counterValueCurrency={counterValueCurrency}
           portfolio={portfolio}
@@ -79,7 +76,7 @@ export default function PortfolioScreen({ navigation }: Props) {
         />
       </>
     );
-  }
+  }, [accounts, counterValueCurrency, portfolio]);
 
   function ListEmptyComponent() {
     if (accounts.length === 0) {
@@ -134,47 +131,60 @@ export default function PortfolioScreen({ navigation }: Props) {
     withSubAccounts: true,
   });
 
+  const showingPlaceholder =
+    accounts.length === 0 || accounts.every(isAccountEmpty);
+
   return (
     <SafeAreaView style={[styles.root, { paddingTop: extraStatusBarPadding }]}>
-      <StickyHeader
-        scrollY={scrollY}
-        portfolio={portfolio}
-        counterValueCurrency={counterValueCurrency}
-      />
+      {!showingPlaceholder ? (
+        <StickyHeader
+          scrollY={scrollY}
+          portfolio={portfolio}
+          counterValueCurrency={counterValueCurrency}
+        />
+      ) : null}
 
       <RequireTerms />
 
       <TrackScreen category="Portfolio" accountsLength={accounts.length} />
 
-      <View style={styles.inner}>
-        <List
-          ref={ref}
-          sections={sections}
-          style={styles.list}
-          contentContainerStyle={styles.contentContainer}
-          keyExtractor={keyExtractor}
-          renderItem={renderItem}
-          renderSectionHeader={renderSectionHeader}
-          onEndReached={onEndReached}
-          stickySectionHeadersEnabled={false}
-          showsVerticalScrollIndicator={false}
-          onScroll={Animated.event([
-            { nativeEvent: { contentOffset: { y: scrollY } } },
-          ])}
-          ListHeaderComponent={ListHeaderComponent}
-          ListFooterComponent={
-            !completed ? (
-              <LoadingFooter />
-            ) : accounts.every(isAccountEmpty) ? null : sections.length ? (
-              <NoMoreOperationFooter />
-            ) : (
-              <NoOperationFooter />
-            )
-          }
-          ListEmptyComponent={ListEmptyComponent}
-        />
-        <MigrateAccountsBanner />
-      </View>
+      <FlatList
+        ref={ref}
+        data={[
+          ...(accounts.length > 0 && !accounts.every(isAccountEmpty)
+            ? [<Carousel />]
+            : []),
+          ListHeaderComponent(),
+          <List
+            sections={sections}
+            style={styles.list}
+            contentContainerStyle={styles.contentContainer}
+            keyExtractor={keyExtractor}
+            renderItem={renderItem}
+            renderSectionHeader={renderSectionHeader}
+            onEndReached={onEndReached}
+            stickySectionHeadersEnabled={false}
+            showsVerticalScrollIndicator={false}
+            onScroll={Animated.event([
+              { nativeEvent: { contentOffset: { y: scrollY } } },
+            ])}
+            ListFooterComponent={
+              !completed ? (
+                <LoadingFooter />
+              ) : accounts.every(isAccountEmpty) ? null : sections.length ? (
+                <NoMoreOperationFooter />
+              ) : (
+                <NoOperationFooter />
+              )
+            }
+            ListEmptyComponent={ListEmptyComponent}
+          />,
+        ]}
+        style={styles.inner}
+        renderItem={({ item }) => item}
+        keyExtractor={(item, index) => String(index)}
+      />
+      <MigrateAccountsBanner />
     </SafeAreaView>
   );
 }

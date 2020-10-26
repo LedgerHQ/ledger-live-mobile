@@ -82,11 +82,11 @@ export default function DelegationDrawer({
         />
 
         <View style={styles.subHeader}>
-          <LText tertiary style={[styles.text, styles.currencyValue]}>
+          <LText semiBold style={[styles.text, styles.currencyValue]}>
             <CurrencyUnitValue showCode unit={unit} value={amount} />
           </LText>
 
-          <LText tertiary style={styles.counterValue}>
+          <LText semiBold style={styles.counterValue}>
             <CounterValue
               currency={currency}
               showCode
@@ -119,7 +119,7 @@ export default function DelegationDrawer({
 
 type FieldType = {
   label: string,
-  Component: string | ComponentType<{}>,
+  Component: React$Node,
 };
 
 type DataFieldProps = FieldType & {
@@ -137,19 +137,7 @@ function DataField({ label, Component, isLast }: DataFieldProps) {
         </LText>
       </View>
 
-      <View style={styles.valueWrapper}>
-        {typeof Component === "string" ? (
-          <LText
-            numberOfLines={1}
-            semiBold
-            style={[styles.text, styles.valueText]}
-          >
-            {Component}
-          </LText>
-        ) : (
-          <Component />
-        )}
-      </View>
+      <View style={styles.valueWrapper}>{Component}</View>
     </View>
   );
 }
@@ -202,7 +190,10 @@ export const styles = StyleSheet.create({
     alignSelf: "flex-end",
     marginRight: 16,
   },
-  scrollSection: { height: height - 400, paddingHorizontal: 16 },
+  scrollSection: {
+    maxHeight: height - normalize(425),
+    paddingHorizontal: 16,
+  },
   subHeader: {
     paddingBottom: 16,
     alignItems: "center",
@@ -239,12 +230,6 @@ export const styles = StyleSheet.create({
   valueWrapper: {
     width: "50%",
     alignItems: "flex-end",
-  },
-  valueText: {
-    fontSize: 14,
-  },
-  valueTextTouchable: {
-    color: colors.live,
   },
   actionsRow: {
     paddingTop: 16,

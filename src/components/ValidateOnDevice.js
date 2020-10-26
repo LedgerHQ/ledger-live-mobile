@@ -16,16 +16,15 @@ import {
 
 import { getDeviceTransactionConfig } from "@ledgerhq/live-common/lib/transaction";
 import type { DeviceTransactionField } from "@ledgerhq/live-common/lib/transaction";
-import type { DeviceModelId } from "@ledgerhq/devices";
 import { getDeviceModel } from "@ledgerhq/devices";
 
 import colors from "../colors";
 import LText from "./LText";
-import DeviceNanoAction from "./DeviceNanoAction";
 import VerifyAddressDisclaimer from "./VerifyAddressDisclaimer";
-import getWindowDimensions from "../logic/getWindowDimensions";
 import perFamilyTransactionConfirmFields from "../generated/TransactionConfirmFields";
 import { DataRowUnitValue, TextValueField } from "./ValidateOnDeviceDataRow";
+import Animation from "./Animation";
+import getDeviceAnimation from "./DeviceAction/getDeviceAnimation";
 
 export type FieldComponentProps = {
   account: AccountLike,
@@ -36,6 +35,24 @@ export type FieldComponentProps = {
 };
 
 export type FieldComponent = React$ComponentType<FieldComponentProps>;
+
+function AmountField({
+  account,
+  parentAccount,
+  status,
+  field,
+}: FieldComponentProps) {
+  let unit;
+  if (account.type === "TokenAccount") {
+    unit = getAccountUnit(account);
+  } else {
+    const mainAccount = getMainAccount(account, parentAccount);
+    unit = getAccountUnit(mainAccount);
+  }
+  return (
+    <DataRowUnitValue label={field.label} unit={unit} value={status.amount} />
+  );
+}
 
 function FeesField({
   account,
@@ -68,25 +85,22 @@ function TextField({ field }: FieldComponentProps) {
 }
 
 const commonFieldComponents: { [_: *]: FieldComponent } = {
+  amount: AmountField,
   fees: FeesField,
   address: AddressField,
   text: TextField,
 };
 
 type Props = {
-  modelId: DeviceModelId,
-  wired: boolean,
+  device: Device,
   status: TransactionStatus,
   transaction: Transaction,
   account: AccountLike,
   parentAccount: ?Account,
 };
 
-const { width } = getWindowDimensions();
-
 export default function ValidateOnDevice({
-  modelId,
-  wired,
+  device,
   account,
   parentAccount,
   status,
@@ -121,24 +135,20 @@ export default function ValidateOnDevice({
 
   const transTitleWording = t(
     `ValidateOnDevice.title.${transaction.mode || "send"}`,
-    getDeviceModel(modelId),
+    getDeviceModel(device.modelId),
   );
   const titleWording =
     transTitleWording !== `ValidateOnDevice.title.${transaction.mode || "send"}`
       ? transTitleWording
-      : t("ValidateOnDevice.title.send", getDeviceModel(modelId));
+      : t("ValidateOnDevice.title.send", getDeviceModel(device.modelId));
 
   return (
     <View style={styles.root}>
       <ScrollView style={styles.scrollContainer}>
         <View style={styles.innerContainer}>
           <View style={styles.picture}>
-            <DeviceNanoAction
-              modelId={modelId}
-              wired={wired}
-              action="accept"
-              width={width * 0.8}
-              screen="validation"
+            <Animation
+              source={getDeviceAnimation({ device, key: "validate" })}
             />
           </View>
           {Title ? (

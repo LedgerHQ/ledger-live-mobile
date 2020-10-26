@@ -24,7 +24,13 @@ export type FeatureToggle = {
   valueOff?: any,
 };
 
-export type Feature = FeatureCommon & FeatureToggle;
+export type FeatureInteger = {
+  type: "integer",
+  minValue?: number,
+  maxValue?: number,
+};
+
+export type Feature = FeatureCommon & (FeatureToggle | FeatureInteger);
 
 export const experimentalFeatures: Feature[] = [
   {
@@ -32,6 +38,23 @@ export const experimentalFeatures: Feature[] = [
     name: "MANAGER_DEV_MODE",
     title: "Developer mode",
     description: "Show developer and testnet apps in the Manager.",
+  },
+  {
+    type: "integer",
+    name: "FORCE_PROVIDER",
+    title: "Manager provider",
+    description:
+      "Changing the app provider in the Manager may make it impossible to install or uninstall apps on your Ledger device.",
+    minValue: 1,
+  },
+  {
+    type: "toggle",
+    name: "EXPERIMENTAL_CURRENCIES_JS_BRIDGE",
+    valueOn: "ethereum",
+    valueOff: "",
+    title: "Experimental Ethereum implementation",
+    description:
+      "Switch to a new JavaScript implementation of Ethereum. This should improve performance and fix a few bugs, as well as display token operations as fee operations instead of send transactions.",
   },
   /*
   {

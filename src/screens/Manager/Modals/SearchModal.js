@@ -78,17 +78,14 @@ const Placeholder = ({
         <View style={styles.placeholderIcon}>
           <AppIcon icon={parent.icon} size={60} />
         </View>
-        {!parentInstalled && (
-          <LText semiBold style={styles.noResultText}>
-            <Trans
-              i18nKey="manager.noAppNeededForToken"
-              values={{
-                appName: parent.name,
-                tokenName: `${found.name} (${found.ticker})`,
-              }}
-            />
-          </LText>
-        )}
+        <LText semiBold style={styles.noResultText}>
+          <Trans
+            i18nKey="manager.noAppNeededForToken"
+            values={{
+              tokenType: found.tokenType.toUpperCase(),
+            }}
+          />
+        </LText>
         <LText style={styles.noResultDesc}>
           <Trans
             i18nKey={
@@ -156,6 +153,7 @@ type Props = {
   setAppInstallWithDependencies: ({ app: App, dependencies: App[] }) => void,
   setAppUninstallWithDependencies: ({ dependents: App[], app: App }) => void,
   navigation: *,
+  searchQuery?: string,
 };
 
 export default ({
@@ -167,15 +165,18 @@ export default ({
   setAppInstallWithDependencies,
   setAppUninstallWithDependencies,
   navigation,
+  searchQuery,
 }: Props) => {
   const { t } = useTranslation();
   const textInput = useRef();
   const listRef = useRef();
   const reduxDispatch = useDispatch();
   const hasInstalledAnyApp = useSelector(hasInstalledAnyAppSelector);
-  const [isOpened, setIsOpen] = useState(false);
+  const [isOpened, setIsOpen] = useState(!!searchQuery);
   const [depInstall, setDepsInstall] = useState();
   const [depUninstall, setDepsUninstall] = useState();
+  const [query, setQuery] = useState(searchQuery || null);
+
   const openSearchModal = useCallback(() => {
     setQuery("");
     setIsOpen(true);
@@ -201,7 +202,6 @@ export default ({
     setAppUninstallWithDependencies,
   ]);
 
-  const [query, setQuery] = useState(null);
   const clear = useCallback(() => setQuery(""), [setQuery]);
 
   const filterOptions: FilterOptions = useMemo(

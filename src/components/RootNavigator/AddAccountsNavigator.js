@@ -17,14 +17,19 @@ type Route = {
   params: ?{ currency: * },
 };
 
+const totalSteps = "3";
+
 export default function AddAccountsNavigator({ route }: { route: Route }) {
   const { t } = useTranslation();
   const currency = route && route.params && route.params.currency;
+  const token = route && route.params && route.params.token;
   return (
     <Stack.Navigator
       headerMode="float"
       initialRouteName={
-        currency
+        token
+          ? ScreenName.AddAccountsTokenCurrencyDisclaimer
+          : currency
           ? ScreenName.AddAccountsSelectDevice
           : ScreenName.AddAccountsSelectCrypto
       }
@@ -42,7 +47,7 @@ export default function AddAccountsNavigator({ route }: { route: Route }) {
               title={t("common.cryptoAsset")}
               subtitle={t("send.stepperHeader.stepRange", {
                 currentStep: "1",
-                totalSteps: "3",
+                totalSteps,
               })}
             />
           ),
@@ -58,7 +63,7 @@ export default function AddAccountsNavigator({ route }: { route: Route }) {
               title={t("common.device")}
               subtitle={t("send.stepperHeader.stepRange", {
                 currentStep: "2",
-                totalSteps: "3",
+                totalSteps,
               })}
             />
           ),
@@ -73,7 +78,7 @@ export default function AddAccountsNavigator({ route }: { route: Route }) {
               title={t("tabs.accounts")}
               subtitle={t("send.stepperHeader.stepRange", {
                 currentStep: "3",
-                totalSteps: "3",
+                totalSteps,
               })}
             />
           ),
@@ -98,6 +103,7 @@ export default function AddAccountsNavigator({ route }: { route: Route }) {
       <Stack.Screen
         name={ScreenName.AddAccountsTokenCurrencyDisclaimer}
         component={AddAccountsTokenCurrencyDisclaimer}
+        initialParams={token ? { token } : undefined}
         options={{
           title: t("addAccounts.tokens.title"),
         }}

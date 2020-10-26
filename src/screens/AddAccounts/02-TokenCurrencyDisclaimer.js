@@ -1,11 +1,15 @@
 // @flow
 
-import React from "react";
+import React, { useCallback } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { StyleSheet, View, Linking } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
+import { useSelector } from "react-redux";
 
 import type { TokenCurrency } from "@ledgerhq/live-common/lib/types";
+
+import { findTokenAccountByCurrency } from "@ledgerhq/live-common/lib/account";
+import { accountsSelector } from "../../reducers/accounts";
 
 import colors from "../../colors";
 import Info from "../../icons/Info";
@@ -14,6 +18,8 @@ import CurrencyIcon from "../../components/CurrencyIcon";
 import Button from "../../components/Button";
 import LText from "../../components/LText";
 import { urls } from "../../config/urls";
+import { ScreenName, NavigatorName } from "../../const";
+import { TrackScreen } from "../../analytics";
 
 const forceInset = { bottom: "always" };
 
@@ -25,6 +31,11 @@ const Disclaimer = ({
   tokenType: string,
 }) => (
   <View style={styles.disclaimer}>
+    <TrackScreen
+      category="AddAccounts"
+      name="TokenCurrencyDisclaimer"
+      currencyName={tokenName}
+    />
     <Info size={18} color={colors.live} />
     <View style={styles.disclaimerTextWrapper}>
       <LText style={styles.disclaimerText}>
@@ -57,17 +68,39 @@ export default function AddAccountsTokenCurrencyDisclaimer({
   route,
 }: Props) {
   const { t } = useTranslation();
+  const accounts = useSelector(accountsSelector);
 
   const token = route.params.token;
   const tokenName = `${token.name} (${token.ticker})`;
 
-  function onBack(): void {
-    navigation.goBack();
-  }
+  const parentCurrency = token.parentCurrency;
 
-  function onClose(): void {
+  const accountData = findTokenAccountByCurrency(token, accounts);
+
+  const parentTokenAccount = accountData ? accountData.parentAccount : null;
+
+  const onClose = useCallback(() => {
     navigation.dangerouslyGetParent().pop();
-  }
+  }, [navigation]);
+
+  // specific cta in case of token accounts
+  const onTokenCta = useCallback(() => {
+    if (parentTokenAccount && parentTokenAccount.type === "Account") {
+      onClose();
+      navigation.navigate(NavigatorName.ReceiveFunds, {
+        screen: ScreenName.ReceiveSelectAccount,
+        params: {
+          // prefilter with token curency
+          selectedCurrency: token,
+        },
+      });
+    } else {
+      // set parentCurrency in already opened add account flow and continue
+      navigation.navigate(ScreenName.AddAccountsSelectDevice, {
+        currency: parentCurrency,
+      });
+    }
+  }, [parentTokenAccount, onClose, navigation, token, parentCurrency]);
 
   return (
     <SafeAreaView style={styles.root} forceInset={forceInset}>
@@ -84,18 +117,23 @@ export default function AddAccountsTokenCurrencyDisclaimer({
       </View>
       <View style={styles.buttonWrapper}>
         <Button
-          event="AddAccountTokenDisclaimerBack"
-          title={t("addAccounts.tokens.changeAssets")}
-          type="secondary"
-          onPress={onBack}
-          containerStyle={[styles.button, styles.buttonSpace]}
-        />
-
-        <Button
           event="AddAccountTokenDisclaimerClose"
           title={t("common.close")}
-          type="primary"
+          type="secondary"
           onPress={onClose}
+          containerStyle={[styles.buttonSpace]}
+        />
+        <Button
+          event="AddAccountTokenDisclaimerBack"
+          title={
+            parentTokenAccount
+              ? t("account.receive")
+              : t("addAccounts.tokens.createParentCurrencyAccount", {
+                  parrentCurrencyName: token.parentCurrency.ticker,
+                })
+          }
+          type="primary"
+          onPress={onTokenCta}
           containerStyle={styles.button}
         />
       </View>
@@ -129,6 +167,7 @@ const styles = StyleSheet.create({
   },
   buttonSpace: {
     marginRight: 16,
+    flex: 0.5,
   },
   disclaimerWrapper: {
     flex: 1,

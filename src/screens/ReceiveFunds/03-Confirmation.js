@@ -1,7 +1,7 @@
 // @flow
 
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { from, of } from "rxjs";
+import { of } from "rxjs";
 import { delay } from "rxjs/operators";
 import { View, StyleSheet, Linking, Platform } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
@@ -9,15 +9,19 @@ import { useSelector } from "react-redux";
 import QRCode from "react-native-qrcode-svg";
 import { Trans } from "react-i18next";
 import ReactNativeModal from "react-native-modal";
-import type { Account, TokenAccount } from "@ledgerhq/live-common/lib/types";
+import type {
+  Account,
+  TokenAccount,
+  AccountLike,
+} from "@ledgerhq/live-common/lib/types";
 import {
   getMainAccount,
   getAccountCurrency,
   getAccountName,
 } from "@ledgerhq/live-common/lib/account";
-import getAddress from "@ledgerhq/live-common/lib/hw/getAddress";
-import { withDevice } from "@ledgerhq/live-common/lib/hw/deviceAccess";
+import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import type { DeviceModelId } from "@ledgerhq/devices";
+import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import getWindowDimensions from "../../logic/getWindowDimensions";
 import { accountScreenSelector } from "../../reducers/accounts";
 import colors from "../../colors";
@@ -27,11 +31,9 @@ import LText from "../../components/LText/index";
 import DisplayAddress from "../../components/DisplayAddress";
 import VerifyAddressDisclaimer from "../../components/VerifyAddressDisclaimer";
 import BottomModal from "../../components/BottomModal";
-import DeviceNanoAction from "../../components/DeviceNanoAction";
 import Close from "../../icons/Close";
 import QRcodeZoom from "../../icons/QRcodeZoom";
 import Touchable from "../../components/Touchable";
-import TranslatedError from "../../components/TranslatedError";
 import Button from "../../components/Button";
 import CurrencyIcon from "../../components/CurrencyIcon";
 import CopyLink from "../../components/CopyLink";
@@ -43,6 +45,7 @@ import SkipLock from "../../components/behaviour/SkipLock";
 import logger from "../../logger";
 import { rejectionOp } from "../../components/DebugRejectSwitch";
 import { closableStackNavigatorConfig } from "../../navigation/navigatorConfig";
+import GenericErrorView from "../../components/GenericErrorView";
 
 const forceInset = { bottom: "always" };
 
@@ -55,14 +58,16 @@ type Props = {
 };
 
 type RouteParams = {
+  account: AccountLike,
   accountId: string,
-  deviceId: string,
   modelId: DeviceModelId,
   wired: boolean,
+  device?: Device,
 };
 
 export default function ReceiveConfirmation({ navigation, route }: Props) {
-  const { account, parentAccount } = useSelector(accountScreenSelector(route));
+  const { account } = route.params;
+  const { parentAccount } = useSelector(accountScreenSelector(route));
   const readOnlyModeEnabled = useSelector(readOnlyModeEnabledSelector);
 
   const [verified, setVerified] = useState(false);
@@ -71,26 +76,20 @@ export default function ReceiveConfirmation({ navigation, route }: Props) {
   const [error, setError] = useState(null);
   const [zoom, setZoom] = useState(false);
   const [allowNavigation, setAllowNavigation] = useState(true);
-
   const sub = useRef();
 
   const verifyOnDevice = useCallback(
-    async (deviceId: string): Promise<void> => {
+    async (device: Device): Promise<void> => {
       if (!account) return;
       const mainAccount = getMainAccount(account, parentAccount);
 
-      sub.current = withDevice(deviceId)(transport =>
-        mainAccount.id.startsWith("mock")
-          ? // $FlowFixMe
-            of({}).pipe(delay(1000), rejectionOp())
-          : from(
-              getAddress(transport, {
-                derivationMode: mainAccount.derivationMode,
-                currency: mainAccount.currency,
-                path: mainAccount.freshAddressPath,
-                verify: true,
-              }),
-            ),
+      sub.current = (mainAccount.id.startsWith("mock")
+        ? // $FlowFixMe
+          of({}).pipe(delay(1000), rejectionOp())
+        : getAccountBridge(mainAccount).receive(mainAccount, {
+            deviceId: device.deviceId,
+            verify: true,
+          })
       ).subscribe({
         complete: () => {
           setVerified(true);
@@ -108,10 +107,6 @@ export default function ReceiveConfirmation({ navigation, route }: Props) {
     },
     [account, parentAccount],
   );
-
-  function contactUs(): void {
-    Linking.openURL(urls.contact);
-  }
 
   function onRetry(): void {
     if (isModalOpened) {
@@ -148,34 +143,28 @@ export default function ReceiveConfirmation({ navigation, route }: Props) {
       return;
     }
 
-    const { headerLeft, headerRight } = closableStackNavigatorConfig;
+    const { headerRight } = closableStackNavigatorConfig;
     navigation.setOptions({
-      headerLeft,
+      headerLeft: null,
       headerRight,
       gestureEnabled: Platform.OS === "ios",
     });
   }, [allowNavigation, navigation]);
 
   useEffect(() => {
-    const deviceId = route.params?.deviceId;
+    const device = route.params.device;
 
-    if (deviceId) {
+    if (device) {
       setAllowNavigation(false);
-      verifyOnDevice(deviceId);
+      verifyOnDevice(device);
     } else {
       setAllowNavigation(true);
     }
-
-    return () => {
-      if (sub.current) {
-        sub.current.unsubscribe();
-      }
-    };
   }, [route.params, account, parentAccount, verifyOnDevice]);
 
   if (!account) return null;
   const { width } = getWindowDimensions();
-  const unsafe = !route.params?.deviceId;
+  const unsafe = !route.params.device?.deviceId;
   const QRSize = Math.round(width / 1.8 - 16);
   const mainAccount = getMainAccount(account, parentAccount);
   const currency = getAccountCurrency(account);
@@ -325,29 +314,8 @@ export default function ReceiveConfirmation({ navigation, route }: Props) {
       >
         {error ? (
           <View style={styles.modal}>
-            <View style={styles.modalBody}>
-              <View style={styles.modalIcon}>
-                <DeviceNanoAction
-                  modelId={route.params?.modelId}
-                  wired={route.params?.wired}
-                  error={error}
-                />
-              </View>
-              <LText secondary semiBold style={styles.modalTitle}>
-                <TranslatedError error={error} />
-              </LText>
-              <LText style={styles.modalDescription}>
-                <TranslatedError error={error} field="description" />
-              </LText>
-            </View>
+            <GenericErrorView error={error} />
             <View style={styles.buttonsContainer}>
-              <Button
-                event="ReceiveContactUs"
-                type="secondary"
-                title={<Trans i18nKey="common.contactUs" />}
-                containerStyle={styles.button}
-                onPress={contactUs}
-              />
               <Button
                 event="ReceiveRetry"
                 type="primary"

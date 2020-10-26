@@ -16,6 +16,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.lightGrey,
     alignItems: "center",
     flexDirection: "row",
+    flexWrap: "wrap",
   },
   dataColumn: {
     padding: 12,
@@ -29,13 +30,12 @@ const styles = StyleSheet.create({
     color: colors.grey,
     textAlign: "left",
     fontSize: 14,
-    paddingRight: 16,
-    flex: 0.5,
+    paddingRight: 8,
   },
   dataRowValue: {
     color: colors.darkBlue,
     fontSize: 14,
-    flex: 1,
+    flexGrow: 1,
     textAlign: "right",
   },
   text: {
@@ -154,7 +154,7 @@ export class DataRowUnitValue extends PureComponent<{
     const { label, value, unit } = this.props;
     return (
       <DataRow label={label}>
-        <LText tertiary style={styles.dataRowValue}>
+        <LText semiBold style={styles.dataRowValue}>
           <CurrencyUnitValue unit={unit} value={value} disableRounding />
         </LText>
       </DataRow>
