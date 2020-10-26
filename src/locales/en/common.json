@@ -1391,6 +1391,24 @@
           "description": "You can withdraw at any time your loan principal and interests, in its entirety or partially, directly from you Ledger wallet.",
           "cta": "Lend now"
         }
+      },
+      "enable": {
+        "stepperHeader": {
+          "selectAccount": "Choose an account",
+          "enable": "Enable",
+          "selectDevice": "Select Device",
+          "connectDevice": "Connect Device",
+          "stepRange": "Step {{currentStep}} of {{totalSteps}}"
+        },
+        "selectAccount": {
+          "enabledAccountsAmount": "You have {{number}} accounts that approved {{amount}}",
+          "enabledAccountsNoLimit": "You have {{number}} accounts that approved an unlimited amount of DAI",
+          "noEnabledAccounts": "You need to approve an account before you can lend."
+        },
+        "enable": {},
+        "selectDevice": {},
+        "connectDevice": {},
+        "stepRange": {}
       }
     }
   },

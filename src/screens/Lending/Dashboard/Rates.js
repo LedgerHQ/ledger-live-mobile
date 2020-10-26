@@ -11,7 +11,7 @@ import LText from "../../../components/LText";
 import CurrencyUnitValue from "../../../components/CurrencyUnitValue";
 import CurrencyIcon from "../../../components/CurrencyIcon";
 import colors from "../../../colors";
-import { NavigatorName } from "../../../const";
+import { NavigatorName, ScreenName } from "../../../const";
 
 const Row = ({
   data,
@@ -25,7 +25,10 @@ const Row = ({
   const navigation = useNavigation();
 
   const navigateToEnableFlow = useCallback(() => {
-    navigation.navigate(NavigatorName.LendingFlow, { token });
+    navigation.navigate(NavigatorName.LendingInfo, {
+      screen: ScreenName.LendingInfo1,
+      params: { currency: token },
+    });
   }, [navigation, token]);
 
   // const openManageModal = useCallback(() => {

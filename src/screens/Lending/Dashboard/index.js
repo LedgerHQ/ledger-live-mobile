@@ -30,7 +30,7 @@ export default function Dashboard() {
     isAcceptedLendingTerms().then(
       hasAccepted =>
         !hasAccepted &&
-        navigation.navigate(NavigatorName.LendingFlow, {
+        navigation.navigate(NavigatorName.LendingInfo, {
           screen: ScreenName.LendingTerms,
           params: { onlyTerms: true },
         }),

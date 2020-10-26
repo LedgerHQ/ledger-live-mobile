@@ -196,6 +196,14 @@ export const ScreenName = {
   LendingInfo1: "LendingInfo1",
   LendingInfo2: "LendingInfo2",
   LendingInfo3: "LendingInfo3",
+
+  LendingEnableSelectAccount: "LendingEnableSelectAccount",
+  LendingEnableAmount: "LendingEnableAmount",
+  LendingEnableSelectDevice: "LendingEnableSelectDevice",
+  LendingEnableConnectDevice: "LendingEnableConnectDevice",
+  LendingEnableValidation: "LendingEnableValidation",
+  LendingEnableValidationError: "LendingEnableValidationError",
+  LendingEnableValidationSuccess: "LendingEnableValidationSuccess",
 };
 
 export const NavigatorName = {
@@ -233,7 +241,8 @@ export const NavigatorName = {
   TronVoteFlow: "TronVoteFlow",
   Unfreeze: "Unfreeze",
   Lending: "Lending",
-  LendingFlow: "LendingFlow",
+  LendingInfo: "LendingInfo",
+  LendingEnableFlow: "LendingEnableFlow",
   /* eslint-disable sort-keys */
 
   // Tab
