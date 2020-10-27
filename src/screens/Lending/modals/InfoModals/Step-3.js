@@ -19,10 +19,12 @@ type Props = {
 export default function LendingInfoStep3({ route: { params } }: Props) {
   const navigation = useNavigation();
   const onNext = useCallback(() => {
-    navigation.navigate(NavigatorName.LendingEnableFlow, {
-      screen: ScreenName.LendingEnableSelectAccount,
-      params,
-    });
+    const n = navigation.dangerouslyGetParent();
+    if (n)
+      n.replace(NavigatorName.LendingEnableFlow, {
+        screen: ScreenName.LendingEnableSelectAccount,
+        params,
+      });
   }, [params, navigation]);
 
   return (

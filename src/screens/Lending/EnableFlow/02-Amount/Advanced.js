@@ -2,7 +2,7 @@
 import invariant from "invariant";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
 import React, { useCallback } from "react";
-import { StyleSheet, View, TouchableOpacity } from "react-native";
+import { StyleSheet, View } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { useSelector } from "react-redux";
 import { Trans, useTranslation } from "react-i18next";
@@ -18,19 +18,13 @@ import {
 } from "@ledgerhq/live-common/lib/currencies";
 import { accountScreenSelector } from "../../../../reducers/accounts";
 import colors, { rgba } from "../../../../colors";
-import { ScreenName, NavigatorName } from "../../../../const";
+import { ScreenName } from "../../../../const";
 import { TrackScreen } from "../../../../analytics";
 import LText from "../../../../components/LText";
 import Button from "../../../../components/Button";
 import RetryButton from "../../../../components/RetryButton";
 import CancelButton from "../../../../components/CancelButton";
 import GenericErrorBottomModal from "../../../../components/GenericErrorBottomModal";
-import Circle from "../../../../components/Circle";
-import CurrencyIcon from "../../../../components/CurrencyIcon";
-import Compound, { compoundColor } from "../../../../icons/Compound";
-import LinkedIcons from "../../../../icons/LinkedIcons";
-import Plus from "../../../../icons/Plus";
-import ArrowRight from "../../../../icons/ArrowRight";
 
 const forceInset = { bottom: "always" };
 
@@ -41,11 +35,11 @@ type Props = {
 
 type RouteParams = {
   accountId: string,
-  parentId: string,
+  transaction: Transaction,
   currency: TokenCurrency,
 };
 
-export default function SendAmount({ navigation, route }: Props) {
+export default function EnableAdvanced({ navigation, route }: Props) {
   const { t } = useTranslation();
   const { currency } = route.params;
   const { account, parentAccount } = useSelector(accountScreenSelector(route));
@@ -80,28 +74,12 @@ export default function SendAmount({ navigation, route }: Props) {
   });
 
   const onContinue = useCallback(() => {
-    navigation.navigate(ScreenName.LendingEnableSummary, {
-      ...route.params,
+    navigation.navigate(ScreenName.SendSummary, {
       accountId: account.id,
       parentId: parentAccount && parentAccount.id,
       transaction,
-      currentNavigation: ScreenName.LendingEnableSummary,
-      nextNavigation: ScreenName.LendingEnableSelectDevice,
-      overrideAmountLabel: transaction?.useAllAmount
-        ? t("transfer.lending.enable.enable.noLimit", {
-            assetName: currency.name,
-          })
-        : undefined,
     });
-  }, [
-    navigation,
-    route.params,
-    account.id,
-    parentAccount,
-    transaction,
-    t,
-    currency.name,
-  ]);
+  }, [account, parentAccount, navigation, transaction]);
 
   const onBridgeErrorCancel = useCallback(() => {
     const parent = navigation.dangerouslyGetParent();
@@ -114,85 +92,14 @@ export default function SendAmount({ navigation, route }: Props) {
     setTransaction(bridge.updateTransaction(transaction, {}));
   }, [setTransaction, account, parentAccount, transaction]);
 
-  const navigateAdvanced = useCallback(() => {
-    navigation.push(NavigatorName.LendingEnableFlow, {
-      screen: ScreenName.LendingEnableAmountAdvanced,
-      params: {
-        ...route.params,
-        transaction,
-      },
-    });
-  }, [navigation, route.params, transaction]);
-
   if (!account || !transaction) return null;
-
-  const { amount, useAllAmount } = transaction;
-
-  const name = parentAccount?.name;
-  const unit = getAccountUnit(account);
-
-  const formattedAmount =
-    amount &&
-    formatCurrencyUnit(unit, amount, {
-      showAllDigits: false,
-      disableRounding: false,
-      showCode: true,
-    });
 
   return (
     <>
       <TrackScreen category="SendFunds" name="Amount" />
       <SafeAreaView style={styles.root} forceInset={forceInset}>
-        <View style={styles.container}>
-          <LinkedIcons
-            left={
-              <View style={styles.currencyIconContainer}>
-                <CurrencyIcon size={62} radius={62} currency={currency} />
-                <LText style={styles.balanceLabel} semiBold numberOfLines={1}>
-                  DAI 42000
-                </LText>
-              </View>
-            }
-            center={<Plus size={12} color={colors.live} />}
-            right={
-              <Circle size={62} bg={rgba(compoundColor, 0.2)}>
-                <Compound size={62 * 0.55} />
-              </Circle>
-            }
-          />
-          <View style={styles.summaryRow}>
-            <Trans
-              i18nKey="transfer.lending.enable.enable.summary"
-              values={{
-                contractName: t("transfer.lending.enable.enable.contractName", {
-                  currencyName: currency.ticker,
-                }),
-                accountName: name,
-                amount:
-                  amount && amount.gt(0)
-                    ? t("transfer.lending.enable.enable.limit", {
-                        amount: formattedAmount,
-                      })
-                    : t("transfer.lending.enable.enable.noLimit", {
-                        assetName: currency.name,
-                      }),
-              }}
-            >
-              <LText semiBold style={styles.label} />
-              <LText semiBold style={styles.liveLabel} />
-            </Trans>
-          </View>
-        </View>
+        <View style={styles.container}></View>
         <View style={styles.bottomWrapper}>
-          <TouchableOpacity
-            onPress={navigateAdvanced}
-            style={styles.advancedButton}
-          >
-            <LText semiBold style={styles.advancedLabel}>
-              <Trans i18nKey="transfer.lending.enable.enable.advanced" />
-            </LText>
-            <ArrowRight color={colors.live} size={16} />
-          </TouchableOpacity>
           <View style={styles.continueWrapper}>
             <Button
               event="FreezeAmountContinue"
@@ -294,20 +201,5 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-  },
-  advancedButton: {
-    width: "100%",
-    borderRadius: 4,
-    borderWidth: 1,
-    borderColor: colors.lightFog,
-    padding: 12,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: 24,
-  },
-  advancedLabel: {
-    fontSize: 13,
-    color: colors.live,
   },
 });

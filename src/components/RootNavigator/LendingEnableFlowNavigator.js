@@ -5,6 +5,8 @@ import { useTranslation } from "react-i18next";
 import { ScreenName } from "../../const";
 import LendingEnableSelectAccount from "../../screens/Lending/EnableFlow/01-SelectAccount";
 import LendingEnableAmount from "../../screens/Lending/EnableFlow/02-Amount";
+import LendingEnableAmountAdvanced from "../../screens/Lending/EnableFlow/02-Amount/Advanced";
+import LendingEnableSummary from "../../screens/SendFunds/04-Summary";
 import SelectDevice from "../../screens/SelectDevice";
 import LendingEnableConnectDevice from "../../screens/ConnectDevice";
 import LendingEnableValidationSuccess from "../../screens/Lending/EnableFlow/04-ValidationSuccess";
@@ -12,7 +14,7 @@ import LendingEnableValidationError from "../../screens/Lending/EnableFlow/04-Va
 import { closableStackNavigatorConfig } from "../../navigation/navigatorConfig";
 import StepHeader from "../StepHeader";
 
-const totalSteps = "4";
+const totalSteps = "5";
 
 export default function LendingEnableFlowNavigator() {
   const { t } = useTranslation();
@@ -49,6 +51,36 @@ export default function LendingEnableFlowNavigator() {
         }}
       />
       <Stack.Screen
+        name={ScreenName.LendingEnableAmountAdvanced}
+        component={LendingEnableAmountAdvanced}
+        options={{
+          headerTitle: () => (
+            <StepHeader
+              title={t("transfer.lending.enable.stepperHeader.advanced")}
+              subtitle={t("transfer.lending.enable.stepperHeader.stepRange", {
+                currentStep: "2",
+                totalSteps,
+              })}
+            />
+          ),
+        }}
+      />
+      <Stack.Screen
+        name={ScreenName.LendingEnableSummary}
+        component={LendingEnableSummary}
+        options={{
+          headerTitle: () => (
+            <StepHeader
+              title={t("transfer.lending.enable.stepperHeader.advanced")}
+              subtitle={t("transfer.lending.enable.stepperHeader.stepRange", {
+                currentStep: "3",
+                totalSteps,
+              })}
+            />
+          ),
+        }}
+      />
+      <Stack.Screen
         name={ScreenName.LendingEnableSelectDevice}
         component={SelectDevice}
         options={{
@@ -56,7 +88,7 @@ export default function LendingEnableFlowNavigator() {
             <StepHeader
               title={t("transfer.lending.enable.stepperHeader.selectDevice")}
               subtitle={t("transfer.lending.enable.stepperHeader.stepRange", {
-                currentStep: "3",
+                currentStep: "4",
                 totalSteps,
               })}
             />
@@ -71,7 +103,7 @@ export default function LendingEnableFlowNavigator() {
             <StepHeader
               title={t("transfer.lending.enable.stepperHeader.connectDevice")}
               subtitle={t("transfer.lending.enable.stepperHeader.stepRange", {
-                currentStep: "4",
+                currentStep: "5",
                 totalSteps,
               })}
             />

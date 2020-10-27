@@ -35,12 +35,16 @@ type Props = {
   route: { params: RouteParams },
 };
 
-type RouteParams = {
+export type RouteParams = {
   accountId: string,
   transaction: Transaction,
+  currentNavigation?: string,
+  nextNavigation?: string,
+  overrideAmountLabel?: string,
 };
 
-export default function SendSummary({ navigation, route }: Props) {
+function SendSummary({ navigation, route }: Props) {
+  const { nextNavigation, overrideAmountLabel } = route.params;
   const { account, parentAccount } = useSelector(accountScreenSelector(route));
   const {
     transaction,
@@ -59,12 +63,12 @@ export default function SendSummary({ navigation, route }: Props) {
   const [highFeesOpen, setHighFeesOpen] = useState(false);
 
   const navigateToNext = useCallback(() => {
-    navigation.navigate(ScreenName.SendSelectDevice, {
+    navigation.navigate(nextNavigation, {
       ...route.params,
       transaction,
       status,
     });
-  }, [navigation, route, transaction, status]);
+  }, [navigation, nextNavigation, route.params, transaction, status]);
 
   const onAcceptFees = useCallback(() => {
     navigateToNext();
@@ -123,12 +127,14 @@ export default function SendSummary({ navigation, route }: Props) {
           account={account}
           parentAccount={parentAccount}
           amount={amount}
+          overrideAmountLabel={overrideAmountLabel}
         />
         <SendRowsFee
           account={account}
           parentAccount={parentAccount}
           transaction={transaction}
           navigation={navigation}
+          route={route}
         />
         {error ? (
           <View style={styles.gasPriceError}>
@@ -192,6 +198,11 @@ export default function SendSummary({ navigation, route }: Props) {
   );
 }
 
+SendSummary.defaultProps = {
+  currentNavigation: ScreenName.SendSummary,
+  nextNavigation: ScreenName.SendSelectDevice,
+};
+
 const styles = StyleSheet.create({
   root: {
     flex: 1,
@@ -246,3 +257,5 @@ class VerticalConnector extends Component<*> {
     return <View style={styles.verticalConnector} />;
   }
 }
+
+export default SendSummary;

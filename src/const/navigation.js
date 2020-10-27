@@ -199,6 +199,8 @@ export const ScreenName = {
 
   LendingEnableSelectAccount: "LendingEnableSelectAccount",
   LendingEnableAmount: "LendingEnableAmount",
+  LendingEnableAmountAdvanced: "LendingEnableAmountAdvanced",
+  LendingEnableSummary: "LendingEnableSummary",
   LendingEnableSelectDevice: "LendingEnableSelectDevice",
   LendingEnableConnectDevice: "LendingEnableConnectDevice",
   LendingEnableValidation: "LendingEnableValidation",

@@ -15,7 +15,6 @@ import {
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { getMainAccount } from "@ledgerhq/live-common/lib/account";
 import colors from "../../colors";
-import { ScreenName } from "../../const";
 import LText from "../../components/LText";
 import CurrencyUnitValue from "../../components/CurrencyUnitValue";
 import SettingsRow from "../../components/SettingsRow";
@@ -42,16 +41,23 @@ const GasSlider = React.memo(({ defaultGas, value, onChange }: *) => {
   );
 });
 
+type RouteParams = {
+  accountId: string,
+  transaction: Transaction,
+  currentNavigation: string,
+};
 type Props = {
   account: AccountLike,
   parentAccount: ?Account,
   transaction: Transaction,
+  route: { params: RouteParams },
 };
 
 export default function EditFeeUnitEthereum({
   account,
   parentAccount,
   transaction,
+  route,
 }: Props) {
   const { navigate } = useNavigation();
   const { t } = useTranslation();
@@ -79,12 +85,22 @@ export default function EditFeeUnitEthereum({
   );
 
   const onValidateFees = useCallback(() => {
-    navigate(ScreenName.SendSummary, {
+    const { currentNavigation } = route.params;
+    navigate(currentNavigation, {
+      ...route.params,
       accountId: account.id,
       parentId: parentAccount && parentAccount.id,
       transaction: bridge.updateTransaction(transaction, { gasPrice }),
     });
-  }, [account, gasPrice, navigate, parentAccount, bridge, transaction]);
+  }, [
+    route.params,
+    navigate,
+    account.id,
+    parentAccount,
+    bridge,
+    transaction,
+    gasPrice,
+  ]);
 
   const { networkInfo } = transaction;
   if (!networkInfo) return null;

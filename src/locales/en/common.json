@@ -1396,6 +1396,8 @@
         "stepperHeader": {
           "selectAccount": "Choose an account",
           "enable": "Enable",
+          "advanced": "Advanced",
+          "amount": "Enter amount",
           "selectDevice": "Select Device",
           "connectDevice": "Connect Device",
           "stepRange": "Step {{currentStep}} of {{totalSteps}}"
@@ -1410,8 +1412,17 @@
           "limit": "limited {{amount}}",
           "noLimit": "no limit {{assetName}}",
           "contractName": "Compound {{currencyName}}",
-          "advanced": "Advanced mode",
-          "amountLabel": "Amount to enable"
+          "advanced": "Advanced mode"
+        },
+        "advanced": {
+          "amountLabel": "Amount to approve",
+          "amountLabelTooltip": "This limits the amount available to the smart contract.",
+          "limit": "Limit",
+          "limited": "Limited",
+          "noLimit": "No Limit"
+        },
+        "amount": {
+          "totalAvailable": "Total available"
         },
         "selectDevice": {},
         "connectDevice": {},
