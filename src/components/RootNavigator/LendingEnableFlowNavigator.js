@@ -6,6 +6,7 @@ import { ScreenName } from "../../const";
 import LendingEnableSelectAccount from "../../screens/Lending/EnableFlow/01-SelectAccount";
 import LendingEnableAmount from "../../screens/Lending/EnableFlow/02-Amount";
 import LendingEnableAmountAdvanced from "../../screens/Lending/EnableFlow/02-Amount/Advanced";
+import LendingEnableAmountInput from "../../screens/Lending/EnableFlow/02-Amount/AmountInput";
 import LendingEnableSummary from "../../screens/SendFunds/04-Summary";
 import SelectDevice from "../../screens/SelectDevice";
 import LendingEnableConnectDevice from "../../screens/ConnectDevice";
@@ -57,6 +58,21 @@ export default function LendingEnableFlowNavigator() {
           headerTitle: () => (
             <StepHeader
               title={t("transfer.lending.enable.stepperHeader.advanced")}
+              subtitle={t("transfer.lending.enable.stepperHeader.stepRange", {
+                currentStep: "2",
+                totalSteps,
+              })}
+            />
+          ),
+        }}
+      />
+      <Stack.Screen
+        name={ScreenName.LendingEnableAmountInput}
+        component={LendingEnableAmountInput}
+        options={{
+          headerTitle: () => (
+            <StepHeader
+              title={t("transfer.lending.enable.stepperHeader.amount")}
               subtitle={t("transfer.lending.enable.stepperHeader.stepRange", {
                 currentStep: "2",
                 totalSteps,

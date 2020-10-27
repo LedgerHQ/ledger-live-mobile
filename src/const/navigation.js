@@ -200,6 +200,7 @@ export const ScreenName = {
   LendingEnableSelectAccount: "LendingEnableSelectAccount",
   LendingEnableAmount: "LendingEnableAmount",
   LendingEnableAmountAdvanced: "LendingEnableAmountAdvanced",
+  LendingEnableAmountInput: "LendingEnableAmountInput",
   LendingEnableSummary: "LendingEnableSummary",
   LendingEnableSelectDevice: "LendingEnableSelectDevice",
   LendingEnableConnectDevice: "LendingEnableConnectDevice",

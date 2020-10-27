@@ -43,7 +43,16 @@ export type RouteParams = {
   overrideAmountLabel?: string,
 };
 
-function SendSummary({ navigation, route }: Props) {
+const defaultParams = {
+  currentNavigation: ScreenName.SendSummary,
+  nextNavigation: ScreenName.SendSelectDevice,
+};
+
+function SendSummary({ navigation, route: initialRoute }: Props) {
+  const route = {
+    ...initialRoute,
+    params: { ...defaultParams, ...initialRoute.params },
+  };
   const { nextNavigation, overrideAmountLabel } = route.params;
   const { account, parentAccount } = useSelector(accountScreenSelector(route));
   const {
@@ -197,11 +206,6 @@ function SendSummary({ navigation, route }: Props) {
     </SafeAreaView>
   );
 }
-
-SendSummary.defaultProps = {
-  currentNavigation: ScreenName.SendSummary,
-  nextNavigation: ScreenName.SendSelectDevice,
-};
 
 const styles = StyleSheet.create({
   root: {

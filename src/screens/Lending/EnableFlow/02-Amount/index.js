@@ -31,6 +31,7 @@ import Compound, { compoundColor } from "../../../../icons/Compound";
 import LinkedIcons from "../../../../icons/LinkedIcons";
 import Plus from "../../../../icons/Plus";
 import ArrowRight from "../../../../icons/ArrowRight";
+import CurrencyUnitValue from "../../../../components/CurrencyUnitValue";
 
 const forceInset = { bottom: "always" };
 
@@ -43,11 +44,12 @@ type RouteParams = {
   accountId: string,
   parentId: string,
   currency: TokenCurrency,
+  transaction?: Transaction,
 };
 
 export default function SendAmount({ navigation, route }: Props) {
   const { t } = useTranslation();
-  const { currency } = route.params;
+  const { currency, transaction: tx } = route.params;
   const { account, parentAccount } = useSelector(accountScreenSelector(route));
   invariant(
     account && account.type === "TokenAccount",
@@ -67,14 +69,16 @@ export default function SendAmount({ navigation, route }: Props) {
     // $FlowFixMe
     const t = bridge.createTransaction(account);
 
-    const transaction = bridge.updateTransaction(t, {
-      recipient: ctoken?.contractAddress || "",
-      mode: "erc20.approve",
-      useAllAmount: true,
-      gasPrice: null,
-      userGasLimit: null,
-      subAccountId: account.id,
-    });
+    const transaction =
+      tx ||
+      bridge.updateTransaction(t, {
+        recipient: ctoken?.contractAddress || "",
+        mode: "erc20.approve",
+        useAllAmount: true,
+        gasPrice: null,
+        userGasLimit: null,
+        subAccountId: account.id,
+      });
 
     return { account, parentAccount, transaction };
   });
@@ -124,10 +128,10 @@ export default function SendAmount({ navigation, route }: Props) {
     });
   }, [navigation, route.params, transaction]);
 
-  if (!account || !transaction) return null;
+  if (!transaction) return null;
 
-  const { amount, useAllAmount } = transaction;
-
+  const { amount } = transaction;
+  const { spendableBalance } = account;
   const name = parentAccount?.name;
   const unit = getAccountUnit(account);
 
@@ -149,7 +153,11 @@ export default function SendAmount({ navigation, route }: Props) {
               <View style={styles.currencyIconContainer}>
                 <CurrencyIcon size={62} radius={62} currency={currency} />
                 <LText style={styles.balanceLabel} semiBold numberOfLines={1}>
-                  DAI 42000
+                  <CurrencyUnitValue
+                    showCode
+                    unit={unit}
+                    value={spendableBalance}
+                  />
                 </LText>
               </View>
             }

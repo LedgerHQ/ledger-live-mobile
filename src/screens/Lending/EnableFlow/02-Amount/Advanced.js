@@ -2,22 +2,19 @@
 import invariant from "invariant";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
 import React, { useCallback } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, Switch, TouchableOpacity } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { useSelector } from "react-redux";
-import { Trans, useTranslation } from "react-i18next";
+import { Trans } from "react-i18next";
 import type {
   Transaction,
   TokenCurrency,
 } from "@ledgerhq/live-common/lib/types";
-import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
-import {
-  findCompoundToken,
-  formatCurrencyUnit,
-} from "@ledgerhq/live-common/lib/currencies";
+import { BigNumber } from "bignumber.js";
+import { getAccountUnit } from "@ledgerhq/live-common/lib/account/helpers";
 import { accountScreenSelector } from "../../../../reducers/accounts";
-import colors, { rgba } from "../../../../colors";
+import colors from "../../../../colors";
 import { ScreenName } from "../../../../const";
 import { TrackScreen } from "../../../../analytics";
 import LText from "../../../../components/LText";
@@ -25,6 +22,9 @@ import Button from "../../../../components/Button";
 import RetryButton from "../../../../components/RetryButton";
 import CancelButton from "../../../../components/CancelButton";
 import GenericErrorBottomModal from "../../../../components/GenericErrorBottomModal";
+import TooltipLabel from "../../../../components/TooltipLabel";
+import CurrencyUnitValue from "../../../../components/CurrencyUnitValue";
+import CounterValue from "../../../../components/CounterValue";
 
 const forceInset = { bottom: "always" };
 
@@ -40,46 +40,32 @@ type RouteParams = {
 };
 
 export default function EnableAdvanced({ navigation, route }: Props) {
-  const { t } = useTranslation();
-  const { currency } = route.params;
   const { account, parentAccount } = useSelector(accountScreenSelector(route));
   invariant(
     account && account.type === "TokenAccount",
     "token account required",
   );
-
+  const bridge = getAccountBridge(account, parentAccount);
   const {
     transaction,
     setTransaction,
     status,
     bridgePending,
     bridgeError,
-  } = useBridgeTransaction(() => {
-    const bridge = getAccountBridge(account, parentAccount);
-    const ctoken = findCompoundToken(account.token);
-
-    // $FlowFixMe
-    const t = bridge.createTransaction(account);
-
-    const transaction = bridge.updateTransaction(t, {
-      recipient: ctoken?.contractAddress || "",
-      mode: "erc20.approve",
-      useAllAmount: true,
-      gasPrice: null,
-      userGasLimit: null,
-      subAccountId: account.id,
-    });
-
-    return { account, parentAccount, transaction };
-  });
+  } = useBridgeTransaction(() => ({
+    transaction: route.params.transaction,
+    account,
+    parentAccount,
+  }));
 
   const onContinue = useCallback(() => {
-    navigation.navigate(ScreenName.SendSummary, {
+    navigation.navigate(ScreenName.LendingEnableAmount, {
+      ...route.params,
       accountId: account.id,
       parentId: parentAccount && parentAccount.id,
       transaction,
     });
-  }, [account, parentAccount, navigation, transaction]);
+  }, [navigation, route.params, account.id, parentAccount, transaction]);
 
   const onBridgeErrorCancel = useCallback(() => {
     const parent = navigation.dangerouslyGetParent();
@@ -88,17 +74,93 @@ export default function EnableAdvanced({ navigation, route }: Props) {
 
   const onBridgeErrorRetry = useCallback(() => {
     if (!transaction) return;
-    const bridge = getAccountBridge(account, parentAccount);
     setTransaction(bridge.updateTransaction(transaction, {}));
-  }, [setTransaction, account, parentAccount, transaction]);
+  }, [bridge, setTransaction, transaction]);
 
-  if (!account || !transaction) return null;
+  const updateLimitTransaction = useCallback(
+    (useAllAmount: boolean) => {
+      setTransaction(
+        bridge.updateTransaction(transaction, {
+          amount: BigNumber(0),
+          useAllAmount,
+        }),
+      );
+    },
+    [bridge, transaction, setTransaction],
+  );
+
+  const onEditAmount = useCallback(() => {
+    navigation.push(ScreenName.LendingEnableAmountInput, {
+      ...route.params,
+      transaction,
+    });
+  }, [navigation, route.params, transaction]);
+
+  if (!transaction) return null;
+
+  const { useAllAmount, amount } = transaction;
+  const unit = getAccountUnit(account);
+  const { currency } = route.params;
 
   return (
     <>
       <TrackScreen category="SendFunds" name="Amount" />
       <SafeAreaView style={styles.root} forceInset={forceInset}>
-        <View style={styles.container}></View>
+        <View style={styles.container}>
+          <View style={styles.row}>
+            <TooltipLabel
+              label={
+                <Trans i18nKey="transfer.lending.enable.advanced.amountLabel" />
+              }
+              tooltip={
+                <Trans i18nKey="transfer.lending.enable.advanced.amountLabelTooltip" />
+              }
+            />
+            <View style={styles.limitRow}>
+              {!useAllAmount && (
+                <LText semiBold style={styles.limitLabel}>
+                  <Trans i18nKey="transfer.lending.enable.advanced.limited" />
+                </LText>
+              )}
+              <Switch
+                style={styles.switch}
+                onValueChange={updateLimitTransaction}
+                value={useAllAmount}
+              />
+            </View>
+          </View>
+          <View style={styles.row}>
+            <LText style={styles.label}>
+              <Trans i18nKey="transfer.lending.enable.advanced.limit" />
+            </LText>
+            {useAllAmount ? (
+              <LText semiBold style={styles.limitLabel}>
+                <Trans i18nKey="transfer.lending.enable.advanced.noLimit" />
+              </LText>
+            ) : (
+              <TouchableOpacity
+                style={styles.editSection}
+                onPress={onEditAmount}
+              >
+                <LText semiBold numberOfLines={1} style={styles.limitLabel}>
+                  <CurrencyUnitValue showCode unit={unit} value={amount} />
+                </LText>
+                <LText style={styles.link}>
+                  <Trans i18nKey="common.edit" />{" "}
+                </LText>
+                <LText style={styles.countervalue}>
+                  <CounterValue
+                    showCode
+                    currency={currency}
+                    value={amount}
+                    withPlaceholder
+                    before="≈ "
+                  />
+                </LText>
+              </TouchableOpacity>
+            )}
+          </View>
+        </View>
         <View style={styles.bottomWrapper}>
           <View style={styles.continueWrapper}>
             <Button
@@ -141,8 +203,17 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    paddingHorizontal: 16,
     alignItems: "stretch",
+  },
+  row: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginVertical: 12,
+  },
+  limitRow: {
+    flexDirection: "row",
+    alignItems: "center",
   },
   bottomWrapper: {
     alignSelf: "stretch",
@@ -161,45 +232,25 @@ const styles = StyleSheet.create({
   buttonRight: {
     marginLeft: 8,
   },
-  balanceLabel: {
-    position: "absolute",
-    bottom: -28,
-    height: 20,
-    lineHeight: 20,
-    borderRadius: 4,
-    color: colors.grey,
-    backgroundColor: colors.lightFog,
-    width: "auto",
-    flexGrow: 1,
-    fontSize: 11,
-    paddingHorizontal: 4,
-  },
-  summaryRow: {
+  switch: { marginLeft: 8 },
+  limitLabel: { fontSize: 14, color: colors.darkBlue },
+  label: { fontSize: 13, color: colors.grey },
+  editSection: {
     flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    flexWrap: "wrap",
-    marginTop: 54,
+    flexWrap: "nowrap",
   },
-  label: {
-    fontSize: 16,
-    lineHeight: 19,
-    color: colors.darkBlue,
-    marginVertical: 8,
-  },
-  liveLabel: {
-    fontSize: 16,
+  link: {
     color: colors.live,
-    backgroundColor: colors.lightLive,
-    borderRadius: 4,
-    paddingHorizontal: 4,
-    height: 24,
-    lineHeight: 24,
-    marginVertical: 8,
+    textDecorationStyle: "solid",
+    textDecorationLine: "underline",
+    textDecorationColor: colors.live,
+    marginLeft: 8,
   },
-  currencyIconContainer: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
+  countervalue: {
+    fontSize: 12,
+    color: colors.grey,
+    position: "absolute",
+    bottom: -20,
+    right: 0,
   },
 });
