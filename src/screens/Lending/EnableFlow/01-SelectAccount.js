@@ -98,13 +98,14 @@ function LendingEnableSelectAccount({ route, navigation }: Props) {
                   account.type !== "Account"
                     ? account.parentId
                     : parentAccount?.id,
+                currency,
               });
             }}
           />
         </View>
       );
     },
-    [navigation],
+    [currency, navigation],
   );
   const renderList = useCallback(
     items => {

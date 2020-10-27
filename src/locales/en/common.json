@@ -1405,7 +1405,14 @@
           "enabledAccountsNoLimit": "You have {{number}} accounts that approved an unlimited amount of DAI",
           "noEnabledAccounts": "You need to approve an account before you can lend."
         },
-        "enable": {},
+        "enable": {
+          "summary": "<0>I grant access to </0><1>{{contractName}}</1><0> smart contract on my account </0><1>{{accountName}}</1><0> for a </0><1>{{amount}}</1><0> amount</0>",
+          "limit": "limited {{amount}}",
+          "noLimit": "no limit {{assetName}}",
+          "contractName": "Compound {{currencyName}}",
+          "advanced": "Advanced mode",
+          "amountLabel": "Amount to enable"
+        },
         "selectDevice": {},
         "connectDevice": {},
         "stepRange": {}
