@@ -25,6 +25,7 @@ import GenericErrorBottomModal from "../../../../components/GenericErrorBottomMo
 import TooltipLabel from "../../../../components/TooltipLabel";
 import CurrencyUnitValue from "../../../../components/CurrencyUnitValue";
 import CounterValue from "../../../../components/CounterValue";
+import TranslatedError from "../../../../components/TranslatedError";
 
 const forceInset = { bottom: "always" };
 
@@ -81,12 +82,12 @@ export default function EnableAdvanced({ navigation, route }: Props) {
     (useAllAmount: boolean) => {
       setTransaction(
         bridge.updateTransaction(transaction, {
-          amount: BigNumber(0),
+          amount: !useAllAmount ? account.spendableBalance : BigNumber(0),
           useAllAmount,
         }),
       );
     },
-    [bridge, transaction, setTransaction],
+    [setTransaction, bridge, transaction, account.spendableBalance],
   );
 
   const onEditAmount = useCallback(() => {
@@ -96,15 +97,16 @@ export default function EnableAdvanced({ navigation, route }: Props) {
     });
   }, [navigation, route.params, transaction]);
 
-  if (!transaction) return null;
-
   const { useAllAmount, amount } = transaction;
   const unit = getAccountUnit(account);
   const { currency } = route.params;
 
+  const error = status.errors.amount;
+  const warning = status.warnings.amount;
+
   return (
     <>
-      <TrackScreen category="SendFunds" name="Amount" />
+      <TrackScreen category="LendingEnableFlow" name="Amount" />
       <SafeAreaView style={styles.root} forceInset={forceInset}>
         <View style={styles.container}>
           <View style={styles.row}>
@@ -159,6 +161,14 @@ export default function EnableAdvanced({ navigation, route }: Props) {
                 </LText>
               </TouchableOpacity>
             )}
+          </View>
+          <View style={styles.row}>
+            <LText
+              style={[styles.error, warning ? styles.warning : null]}
+              numberOfLines={2}
+            >
+              <TranslatedError error={error || warning} />
+            </LText>
           </View>
         </View>
         <View style={styles.bottomWrapper}>
@@ -252,5 +262,14 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: -20,
     right: 0,
+  },
+  error: {
+    flex: 1,
+    color: colors.alert,
+    fontSize: 14,
+    textAlign: "right",
+  },
+  warning: {
+    color: colors.orange,
   },
 });

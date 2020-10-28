@@ -16,17 +16,18 @@ type Props = {
   size: number,
   color?: string,
   radius?: number,
+  bg?: string,
 };
 
 export default class CurrencyIcon extends PureComponent<Props> {
   render() {
-    const { size, currency, color, radius } = this.props;
+    const { size, currency, color, radius, bg } = this.props;
 
     const currencyColor = color || getCurrencyColor(currency);
 
     if (currency.type === "TokenCurrency") {
       const dynamicStyle = {
-        backgroundColor: rgba(currencyColor, 0.1),
+        backgroundColor: bg || rgba(currencyColor, 0.1),
         width: size,
         height: size,
       };

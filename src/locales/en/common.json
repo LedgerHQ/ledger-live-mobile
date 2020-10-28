@@ -1420,7 +1420,22 @@
         "assetsTitle": "Assets to lend",
         "accountsTitle": "Active accounts",
         "emptySateDescription": "You can lend assets directly from your Ethereum accounts and earn passive revenue.",
-        "apy": "{{value}} APY"
+        "apy": "{{value}} APY",
+        "activeAccount": {
+          "account": "Account",
+          "amountSupplied": "Amount supplied",
+          "interestEarned": "Interest earned",
+          "status": "Status",
+          "EARNING": "Earning",
+          "ENABLING": "Approving",
+          "INACTIVE": "Inactive",
+          "SUPPLYING": "Supplying",
+          "approve": "Approve",
+          "supply": "Supply",
+          "withdraw": "Withdraw",
+          "amountRedeemed": "Amount redeemed",
+          "endDate": "End date"
+        }
       },
       "closedLoans": {
         "tabTitle": "Closed loans",
@@ -1489,9 +1504,14 @@
         "amount": {
           "totalAvailable": "Total available"
         },
-        "selectDevice": {},
-        "connectDevice": {},
-        "stepRange": {}
+        "validation": {
+          "success": "The transaction is being processed",
+          "info": "Please be patient, the transaction is being processed, once the transaction is confirmed you will be able to issue loans on the Compound protocol",
+          "extraInfo": "Transactions can take some time to be displayed in an explorer and to be confirmed.",
+          "button": {
+            "done": "Close"
+          }
+        }
       }
     }
   },
@@ -2575,7 +2595,7 @@
       "tabTitle": "History"
     }
   },
-  
+
   "banner": {
     "exchangeBuyCrypto": {
       "title": "BUY CRYPTO",

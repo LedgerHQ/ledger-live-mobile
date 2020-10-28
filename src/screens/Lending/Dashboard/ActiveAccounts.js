@@ -3,8 +3,7 @@
 import React from "react";
 import { View, StyleSheet, FlatList } from "react-native";
 import type { CompoundAccountSummary } from "@ledgerhq/live-common/lib/compound/types";
-// import { getAccountCapabilities } from "@ledgerhq/live-common/lib/compound/logic";
-import Row from "../shared/Row";
+import Row from "./ActiveAccountRow";
 import colors from "../../../colors";
 import EmptyState from "./EmptyState";
 
@@ -17,18 +16,8 @@ const ActiveAccounts = ({ summaries }: Props) => {
     <View style={styles.root}>
       <FlatList
         data={summaries}
-        renderItem={({ item, index }) => {
-          const { account, parentAccount, totalSupplied } = item;
-          return (
-            <Row
-              key={account.id + index}
-              account={account}
-              parentAccount={parentAccount}
-              value={totalSupplied}
-              onPress={() => {}}
-            />
-          );
-        }}
+        renderItem={({ item }) => <Row item={item} />}
+        keyExtractor={(item, index) => item.account.id + index}
         ItemSeparatorComponent={() => <View style={styles.separator} />}
         ListEmptyComponent={() => <EmptyState />}
       />

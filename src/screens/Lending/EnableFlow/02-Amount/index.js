@@ -83,6 +83,21 @@ export default function SendAmount({ navigation, route }: Props) {
     return { account, parentAccount, transaction };
   });
 
+  invariant(transaction, "transaction required");
+
+  const { amount } = transaction;
+  const { spendableBalance } = account;
+  const name = parentAccount?.name;
+  const unit = getAccountUnit(account);
+
+  const formattedAmount =
+    amount &&
+    formatCurrencyUnit(unit, amount, {
+      showAllDigits: false,
+      disableRounding: false,
+      showCode: true,
+    });
+
   const onContinue = useCallback(() => {
     navigation.navigate(ScreenName.LendingEnableSummary, {
       ...route.params,
@@ -95,16 +110,17 @@ export default function SendAmount({ navigation, route }: Props) {
         ? t("transfer.lending.enable.enable.noLimit", {
             assetName: currency.name,
           })
-        : undefined,
+        : formattedAmount,
     });
   }, [
+    transaction,
     navigation,
     route.params,
     account.id,
     parentAccount,
-    transaction,
     t,
     currency.name,
+    formattedAmount,
   ]);
 
   const onBridgeErrorCancel = useCallback(() => {
@@ -128,24 +144,9 @@ export default function SendAmount({ navigation, route }: Props) {
     });
   }, [navigation, route.params, transaction]);
 
-  if (!transaction) return null;
-
-  const { amount } = transaction;
-  const { spendableBalance } = account;
-  const name = parentAccount?.name;
-  const unit = getAccountUnit(account);
-
-  const formattedAmount =
-    amount &&
-    formatCurrencyUnit(unit, amount, {
-      showAllDigits: false,
-      disableRounding: false,
-      showCode: true,
-    });
-
   return (
     <>
-      <TrackScreen category="SendFunds" name="Amount" />
+      <TrackScreen category="LendingEnableFlow" name="Amount" />
       <SafeAreaView style={styles.root} forceInset={forceInset}>
         <View style={styles.container}>
           <LinkedIcons

@@ -6,9 +6,10 @@ import type { Operation } from "@ledgerhq/live-common/lib/types";
 import { accountScreenSelector } from "../../../reducers/accounts";
 import { TrackScreen } from "../../../analytics";
 import colors from "../../../colors";
-import { ScreenName } from "../../../const";
 import PreventNativeBack from "../../../components/PreventNativeBack";
 import ValidateSuccess from "../../../components/ValidateSuccess";
+import UpdateIcon from "../../../icons/Update";
+import { Trans } from "react-i18next";
 
 type Props = {
   navigation: any,
@@ -22,32 +23,29 @@ type RouteParams = {
   result: Operation,
 };
 
-export default function ValidationSuccess({ navigation, route }: Props) {
-  const { account, parentAccount } = useSelector(accountScreenSelector(route));
-
+export default function ValidationSuccess({ navigation }: Props) {
   const onClose = useCallback(() => {
-    navigation.dangerouslyGetParent().pop();
+    const n = navigation.dangerouslyGetParent() || navigation;
+    n.goBack();
   }, [navigation]);
-
-  const goToOperationDetails = useCallback(() => {
-    if (!account) return;
-    const result = route.params?.result;
-    if (!result) return;
-    navigation.navigate(ScreenName.OperationDetails, {
-      accountId: account.id,
-      parentId: parentAccount && parentAccount.id,
-      operation:
-        result.subOperations && result.subOperations[0]
-          ? result.subOperations[0]
-          : result,
-    });
-  }, [navigation, route.params, account, parentAccount]);
 
   return (
     <View style={styles.root}>
-      <TrackScreen category="SendFunds" name="ValidationSuccess" />
+      <TrackScreen category="LendingEnableFlow" name="ValidationSuccess" />
       <PreventNativeBack />
-      <ValidateSuccess onClose={onClose} onViewDetails={goToOperationDetails} />
+      <ValidateSuccess
+        icon={<UpdateIcon size={24} color={colors.live} />}
+        iconColor={colors.live}
+        title={<Trans i18nKey="transfer.lending.enable.validation.success" />}
+        description={
+          <Trans i18nKey="transfer.lending.enable.validation.info" />
+        }
+        info={<Trans i18nKey="transfer.lending.enable.validation.extraInfo" />}
+        onLearnMore={() => {
+          /** @TODO redirect to support page */
+        }}
+        onClose={onClose}
+      />
     </View>
   );
 }

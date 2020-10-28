@@ -98,9 +98,8 @@ const Rates = ({
     <View>
       <FlatList
         data={rates}
-        renderItem={({ item }) => (
-          <Row data={item} key={item.ctoken.id} accounts={accounts} />
-        )}
+        renderItem={({ item }) => <Row data={item} accounts={accounts} />}
+        keyExtractor={item => item.ctoken.id}
       />
     </View>
   );

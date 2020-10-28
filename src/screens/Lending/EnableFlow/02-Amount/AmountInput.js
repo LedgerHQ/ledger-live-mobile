@@ -1,7 +1,7 @@
 /* @flow */
 import invariant from "invariant";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
-import React, { useCallback, useState, useEffect } from "react";
+import React, { useCallback } from "react";
 import {
   View,
   StyleSheet,
@@ -14,7 +14,6 @@ import { Trans } from "react-i18next";
 import type { Transaction } from "@ledgerhq/live-common/lib/types";
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
-import { useDebounce } from "@ledgerhq/live-common/lib/hooks/useDebounce";
 import { accountScreenSelector } from "../../../../reducers/accounts";
 import colors from "../../../../colors";
 import { ScreenName } from "../../../../const";
@@ -110,11 +109,7 @@ export default function SendAmount({ navigation, route }: Props) {
                 onChange={onChange}
                 currency={unit.code}
                 value={amount}
-                error={
-                  amount.eq(0) && (bridgePending || !transaction.useAllAmount)
-                    ? null
-                    : status.errors.amount
-                }
+                error={status.errors.amount}
                 warning={status.warnings.amount}
               />
 
