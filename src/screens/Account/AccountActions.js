@@ -3,12 +3,16 @@ import React, { useCallback, useState } from "react";
 import { View, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import type { AccountLike, Account } from "@ledgerhq/live-common/lib/types";
+import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
+import { useLocale } from "../../context/Locale";
 import {
   getAccountCurrency,
+  getAccountUnit,
   getMainAccount,
 } from "@ledgerhq/live-common/lib/account";
 import { useSelector } from "react-redux";
 import { Trans } from "react-i18next";
+import { getAccountCapabilities } from "@ledgerhq/live-common/lib/compound/logic";
 import { NavigatorName, ScreenName } from "../../const";
 import {
   readOnlyModeEnabledSelector,
@@ -26,9 +30,16 @@ import LText from "../../components/LText";
 import Touchable from "../../components/Touchable";
 import colors from "../../colors";
 import Button from "../../components/Button";
+import InfoBox from "../../components/InfoBox";
+import WarningBox from "../../components/WarningBox";
 import Transfer from "../../icons/Transfer";
 import Swap from "../../icons/Swap";
+import Lending from "../../icons/Lending";
+import Plus from "../../icons/Plus";
+import Supply from "../../icons/Supply";
+import Withdraw from "../../icons/Withdraw";
 import Exchange from "../../icons/Exchange";
+import BigNumber from "bignumber.js";
 
 type ChoiceButtonProps = {
   disabled: boolean,
@@ -58,7 +69,7 @@ const ChoiceButton = ({
     eventProperties={eventProperties}
     style={styles.button}
     disabled={disabled}
-    onPress={() => onNavigate(...navigationParams)}
+    onPress={() => onNavigate(...(navigationParams || []))}
   >
     <View
       style={[
@@ -94,16 +105,94 @@ type NavOptions = {
 
 export default function AccountActions({ account, parentAccount }: Props) {
   const [modalOpen, setModalOpen] = useState();
+  const [displayLendingActions, setDisplayLendingActions] = useState(false);
   const navigation = useNavigation();
+  const { locale } = useLocale();
   const readOnlyModeEnabled = useSelector(readOnlyModeEnabledSelector);
   const availableOnSwap = useSelector(state =>
     swapSupportedCurrenciesSelector(state, { accountId: account.id }),
   );
   const mainAccount = getMainAccount(account, parentAccount);
   const decorators = perFamilyAccountActions[mainAccount.currency.family];
+  const currency = getAccountCurrency(account);
+  const unit = getAccountUnit(account);
 
   const accountId = account.id;
   const parentId = parentAccount && parentAccount.id;
+
+  const availableOnCompound =
+    account.type === "TokenAccount" && !!account.compoundBalance;
+  const compoundCapabilities = availableOnCompound
+    ? getAccountCapabilities(account)
+    : {};
+
+  let lendingInfoBanner = null;
+
+  if (availableOnCompound) {
+    const lendingInfoBannerContent = !compoundCapabilities.status ? (
+      <Trans i18nKey="transfer.lending.banners.needApproval" />
+    ) : compoundCapabilities.enabledAmountIsUnlimited ? (
+      <Trans i18nKey="transfer.lending.banners.fullyApproved" />
+    ) : !!compoundCapabilities.status &&
+      compoundCapabilities.enabledAmount.gt(0) &&
+      compoundCapabilities.canSupplyMax ? (
+      <Trans
+        i18nKey="transfer.lending.banners.approvedCanReduce"
+        values={{
+          value: formatCurrencyUnit(unit, compoundCapabilities.enabledAmount, {
+            locale,
+            showAllDigits: false,
+            disableRounding: true,
+            showCode: true,
+          }),
+        }}
+      >
+        <LText semiBold />
+      </Trans>
+    ) : compoundCapabilities.enabledAmount.gt(0) ? (
+      <Trans
+        i18nKey="transfer.lending.banners.approvedButNotEnough"
+        values={{
+          value: formatCurrencyUnit(unit, compoundCapabilities.enabledAmount, {
+            locale,
+            showAllDigits: false,
+            disableRounding: true,
+            showCode: true,
+          }),
+        }}
+      >
+        <LText semiBold />
+      </Trans>
+    ) : null;
+
+    if (lendingInfoBannerContent) {
+      lendingInfoBanner = (
+        <View style={styles.bannerBox}>
+          <InfoBox>{lendingInfoBannerContent}</InfoBox>
+        </View>
+      );
+    }
+  }
+
+  let lendingWarningBanner = null;
+
+  if (availableOnCompound) {
+    const lendingWarningBannerContent =
+      compoundCapabilities.status === "ENABLING" ? (
+        <Trans i18nKey="transfer.lending.banners.approving" />
+      ) : !!compoundCapabilities.status &&
+        !compoundCapabilities.canSupplyMax ? (
+        <Trans i18nKey="transfer.lending.banners.notEnough" />
+      ) : null;
+
+    if (lendingWarningBannerContent) {
+      lendingWarningBanner = (
+        <View style={styles.bannerBox}>
+          <WarningBox>{lendingWarningBannerContent}</WarningBox>
+        </View>
+      );
+    }
+  }
 
   const SendAction = (decorators && decorators.SendAction) || SendActionDefault;
 
@@ -111,7 +200,10 @@ export default function AccountActions({ account, parentAccount }: Props) {
     (decorators && decorators.ReceiveAction) || ReceiveActionDefault;
 
   const openModal = useCallback(() => setModalOpen(true), [setModalOpen]);
-  const closeModal = useCallback(() => setModalOpen(false), [setModalOpen]);
+  const closeModal = useCallback(() => {
+    setModalOpen(false);
+    setDisplayLendingActions(false);
+  }, [setModalOpen, setDisplayLendingActions]);
 
   const onNavigate = useCallback(
     (name: string, options?: NavOptions) => {
@@ -127,8 +219,6 @@ export default function AccountActions({ account, parentAccount }: Props) {
     },
     [accountId, navigation, parentId, closeModal],
   );
-
-  const currency = getAccountCurrency(account);
 
   const canBeBought = isCurrencySupported(currency);
 
@@ -182,7 +272,88 @@ export default function AccountActions({ account, parentAccount }: Props) {
           },
         ]
       : []),
+    ...(availableOnCompound
+      ? [
+          {
+            onNavigate: () => {
+              setDisplayLendingActions(true);
+            },
+            label: (
+              <Trans
+                i18nKey="transfer.lending.actionTitle"
+                values={{ currency: currency.name }}
+              />
+            ),
+            Icon: Lending,
+            event: "Lend Crypto Account Button",
+            eventProperties: { currencyName: currency.name },
+          },
+        ]
+      : []),
   ];
+
+  const lendingActions = !availableOnCompound
+    ? []
+    : [
+        {
+          navigationParams: [
+            NavigatorName.LendingEnableFlow,
+            {
+              screen: ScreenName.LendingEnableAmount,
+              params: {
+                accountId: account.id,
+                parentId: account.parentId,
+                currency,
+              },
+            },
+          ],
+          label: (
+            <Trans
+              i18nKey="transfer.lending.accountActions.approve"
+              values={{ currency: currency.name }}
+            />
+          ),
+          Icon: Plus,
+          event: "Approve Crypto Account Button",
+          eventProperties: { currencyName: currency.name },
+        },
+        {
+          navigationParams: [
+            NavigatorName.Lending,
+            {
+              screen: ScreenName.LendingDashboard,
+            },
+          ],
+          label: (
+            <Trans
+              i18nKey="transfer.lending.accountActions.supply"
+              values={{ currency: currency.name }}
+            />
+          ),
+          Icon: Supply,
+          event: "Supply Crypto Account Button",
+          eventProperties: { currencyName: currency.name },
+          disabled: !compoundCapabilities.canSupply,
+        },
+        {
+          navigationParams: [
+            NavigatorName.Lending,
+            {
+              screen: ScreenName.LendingDashboard,
+            },
+          ],
+          label: (
+            <Trans
+              i18nKey="transfer.lending.accountActions.withdraw"
+              values={{ currency: currency.name }}
+            />
+          ),
+          Icon: Withdraw,
+          event: "Withdraw Crypto Account Button",
+          eventProperties: { currencyName: currency.name },
+          disabled: !compoundCapabilities.canWithdraw,
+        },
+      ];
 
   const onSend = useCallback(() => {
     onNavigate(NavigatorName.SendFunds, {
@@ -227,8 +398,14 @@ export default function AccountActions({ account, parentAccount }: Props) {
             onClose={closeModal}
             containerStyle={styles.modal}
           >
-            {actions.map((a, i) => (
-              <ChoiceButton key={i} onNavigate={onNavigate} {...a} />
+            {displayLendingActions && (lendingInfoBanner || null)}
+            {displayLendingActions && (lendingWarningBanner || null)}
+            {(displayLendingActions ? lendingActions : actions).map((a, i) => (
+              <ChoiceButton
+                key={i}
+                onNavigate={a.onNavigate || onNavigate}
+                {...a}
+              />
             ))}
           </BottomModal>
         </>
@@ -258,6 +435,10 @@ const styles = StyleSheet.create({
     flex: 1,
     marginHorizontal: 4,
     paddingHorizontal: 6,
+  },
+  bannerBox: {
+    paddingHorizontal: 8,
+    paddingTop: 8,
   },
   button: {
     width: "100%",

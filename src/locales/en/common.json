@@ -29,6 +29,7 @@
     "or": "OR",
     "rename": "Rename",
     "learnMore": "Learn more",
+    "viewDetails": "View details",
     "today": "Today",
     "yesterday": "Yesterday",
     "upToDate": "Up to date",
@@ -1399,6 +1400,20 @@
     },
     "lending": {
       "title": "Lend crypto",
+      "actionTitle": "Lend",
+      "accountActions": {
+        "approve": "Approve",
+        "supply": "Supply",
+        "withdraw": "Withdraw"
+      },
+      "banners": {
+        "needApproval": "You need to approve this account before being able to lend assets.",
+        "fullyApproved": "You have fully approved this account. You can reduce the amount at a fee.",
+        "approvedCanReduce": "You have approved <0>{{value}}</0> on this account. You can reduce the amount at a fee.",
+        "approvedButNotEnough": "You have approved <0>{{value}}</0> on this account. ",
+        "approving": "The approval transaction allowing you to lend is pending.",
+        "notEnough": "You don't have enough balance approved to supply all your assets."
+      },
       "howDoesLendingWork": "How does lending works",
       "dashboard": {
         "tabTitle": "Dashboard",
