@@ -1405,7 +1405,20 @@
         "assetsTitle": "Assets to lend",
         "accountsTitle": "Active accounts",
         "emptySateDescription": "You can lend assets directly from your Ethereum accounts and earn passive revenue.",
-        "apy": "{{value}} APY"
+        "apy": "{{value}} APY",
+        "activeAccount": {
+          "account": "Account",
+          "amountSupplied": "Amount supplied",
+          "interestEarned": "Interest earned",
+          "status": "Status",
+          "EARNING": "Earning",
+          "ENABLING": "Approving",
+          "INACTIVE": "Inactive",
+          "SUPPLYING": "Supplying",
+          "approve": "Approve",
+          "supply": "Supply",
+          "withdraw": "Withdraw"
+        }
       },
       "closedLoans": {
         "tabTitle": "Closed loans",
