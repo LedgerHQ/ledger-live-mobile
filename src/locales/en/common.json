@@ -1417,7 +1417,9 @@
           "SUPPLYING": "Supplying",
           "approve": "Approve",
           "supply": "Supply",
-          "withdraw": "Withdraw"
+          "withdraw": "Withdraw",
+          "amountRedeemed": "Amount redeemed",
+          "endDate": "End date"
         }
       },
       "closedLoans": {

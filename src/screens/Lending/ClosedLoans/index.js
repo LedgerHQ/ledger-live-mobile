@@ -14,8 +14,8 @@ import { flattenSortAccountsSelector } from "../../../actions/general";
 import TrackScreen from "../../../analytics/TrackScreen";
 
 import EmptyState from "../shared/EmptyState";
-import Row from "../shared/Row";
 import { ScreenName } from "../../../const";
+import ClosedLoansRow from "./ClosedLoansRow";
 
 const forceInset = { bottom: "always" };
 
@@ -37,18 +37,12 @@ export default function ClosedLoans() {
         <View style={styles.rows}>
           <FlatList
             data={closedLoans}
-            renderItem={({ item, index }) => {
-              const { account, parentAccount, amountSupplied, endDate } = item;
-              return (
-                <Row
-                  key={`${endDate.toDateString()}${index}`}
-                  account={account}
-                  parentAccount={parentAccount}
-                  value={amountSupplied}
-                  onPress={() => {}}
-                />
-              );
-            }}
+            renderItem={({ item, index }) => (
+              <ClosedLoansRow
+                key={`${item.endDate.toDateString()}${index}`}
+                item={item}
+              />
+            )}
             ItemSeparatorComponent={() => <View style={styles.separator} />}
             ListEmptyComponent={() => (
               <EmptyState

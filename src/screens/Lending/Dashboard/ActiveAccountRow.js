@@ -35,7 +35,7 @@ export default function ActiveAccountRow({ item }: RowProps) {
     status,
   } = item;
   const { token } = account;
-  const name = getAccountName(account);
+  const name = getAccountName(parentAccount || account);
   const currency = getAccountCurrency(account);
   const { canSupply, canWithdraw } = getAccountCapabilities(account) || {};
 
