@@ -16,9 +16,8 @@ const ActiveAccounts = ({ summaries }: Props) => {
     <View style={styles.root}>
       <FlatList
         data={summaries}
-        renderItem={({ item, index }) => (
-          <Row key={item.account.id + index} item={item} />
-        )}
+        renderItem={({ item }) => <Row item={item} />}
+        keyExtractor={(item, index) => item.account.id + index}
         ItemSeparatorComponent={() => <View style={styles.separator} />}
         ListEmptyComponent={() => <EmptyState />}
       />
