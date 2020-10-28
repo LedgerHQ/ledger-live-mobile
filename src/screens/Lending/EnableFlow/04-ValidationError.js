@@ -42,7 +42,7 @@ export default function ValidationError({ navigation, route }: Props) {
 
   return (
     <SafeAreaView style={styles.root} forceInset={forceInset}>
-      <TrackScreen category="SendFunds" name="ValidationError" />
+      <TrackScreen category="LendingEnableFlow" name="ValidationError" />
       <ValidateError
         error={error}
         onRetry={retry}

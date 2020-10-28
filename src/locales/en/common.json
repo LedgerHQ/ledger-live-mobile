@@ -1474,9 +1474,14 @@
         "amount": {
           "totalAvailable": "Total available"
         },
-        "selectDevice": {},
-        "connectDevice": {},
-        "stepRange": {}
+        "validation": {
+          "success": "The transaction is being processed",
+          "info": "Please be patient, the transaction is being processed, once the transaction is confirmed you will be able to issue loans on the Compound protocol",
+          "extraInfo": "Transactions can take some time to be displayed in an explorer and to be confirmed.",
+          "button": {
+            "done": "Close"
+          }
+        }
       }
     }
   },
@@ -2560,7 +2565,7 @@
       "tabTitle": "History"
     }
   },
-  
+
   "banner": {
     "exchangeBuyCrypto": {
       "title": "BUY CRYPTO",
