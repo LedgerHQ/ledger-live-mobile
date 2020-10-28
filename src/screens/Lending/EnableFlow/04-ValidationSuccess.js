@@ -23,11 +23,10 @@ type RouteParams = {
   result: Operation,
 };
 
-export default function ValidationSuccess({ navigation, route }: Props) {
-  const { account, parentAccount } = useSelector(accountScreenSelector(route));
-
+export default function ValidationSuccess({ navigation }: Props) {
   const onClose = useCallback(() => {
-    navigation.dangerouslyGetParent().pop();
+    const n = navigation.dangerouslyGetParent() || navigation;
+    n.goBack();
   }, [navigation]);
 
   return (
