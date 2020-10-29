@@ -7,11 +7,15 @@ import BaseInfoModal from "../BaseModal";
 import termsImg from "../../../../images/lending-info-1.png";
 import { ScreenName } from "../../../../const";
 
-export default function LendingInfoStep1() {
+type Props = {
+  route: { params: { endCallback: () => void } },
+};
+
+export default function LendingInfoStep1({ route: { params } }: Props) {
   const navigation = useNavigation();
   const onNext = useCallback(() => {
-    navigation.push(ScreenName.LendingInfo2);
-  }, [navigation]);
+    navigation.push(ScreenName.LendingInfo2, params);
+  }, [navigation, params]);
 
   return (
     <BaseInfoModal

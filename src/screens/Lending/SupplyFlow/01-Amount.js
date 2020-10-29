@@ -10,7 +10,7 @@ import { accountScreenSelector } from "../../../reducers/accounts";
 import { ScreenName } from "../../../const";
 
 import AmountScreen from "../shared/01-Amount";
-import useLendingTerms from "../shared/useLendingTerms";
+import LendingWarnings from "../shared/LendingWarnings";
 
 type Props = {
   navigation: any,
@@ -24,7 +24,6 @@ type RouteParams = {
 };
 
 export default function SupplyAmount({ navigation, route }: Props) {
-  useLendingTerms();
   const { account, parentAccount } = useSelector(accountScreenSelector(route));
   invariant(
     account && account.type === "TokenAccount",
@@ -71,17 +70,20 @@ export default function SupplyAmount({ navigation, route }: Props) {
   }, [account.id, navigation, parentAccount, route.params, transaction]);
 
   return (
-    <AmountScreen
-      navigation={navigation}
-      route={route}
-      transaction={transaction}
-      setTransaction={setTransaction}
-      status={status}
-      bridgePending={bridgePending}
-      bridgeError={bridgeError}
-      max={account.spendableBalance}
-      onContinue={onContinue}
-      category={"LendingSupplyFlow"}
-    />
+    <>
+      <LendingWarnings />
+      <AmountScreen
+        navigation={navigation}
+        route={route}
+        transaction={transaction}
+        setTransaction={setTransaction}
+        status={status}
+        bridgePending={bridgePending}
+        bridgeError={bridgeError}
+        max={account.spendableBalance}
+        onContinue={onContinue}
+        category={"LendingSupplyFlow"}
+      />
+    </>
   );
 }

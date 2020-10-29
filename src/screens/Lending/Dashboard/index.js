@@ -13,7 +13,7 @@ import TrackScreen from "../../../analytics/TrackScreen";
 import LText from "../../../components/LText";
 import Rates from "./Rates";
 import ActiveAccounts from "./ActiveAccounts";
-import useLendingTerms from "../shared/useLendingTerms";
+import LendingWarnings from "../shared/LendingWarnings";
 
 const forceInset = { bottom: "always" };
 
@@ -23,11 +23,10 @@ export default function Dashboard() {
   const summaries = useCompoundSummaries(accounts);
   const rates = listCurrentRates();
 
-  useLendingTerms();
-
   return (
     <SafeAreaView style={[styles.root]} forceInset={forceInset}>
       <TrackScreen category="Lending" />
+      <LendingWarnings />
       <View style={styles.body}>
         <LText style={styles.title} semiBold>
           {t("transfer.lending.dashboard.assetsTitle")}

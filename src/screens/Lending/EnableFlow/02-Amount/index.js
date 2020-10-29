@@ -32,7 +32,7 @@ import LinkedIcons from "../../../../icons/LinkedIcons";
 import Plus from "../../../../icons/Plus";
 import ArrowRight from "../../../../icons/ArrowRight";
 import CurrencyUnitValue from "../../../../components/CurrencyUnitValue";
-import useLendingTerms from "../../shared/useLendingTerms";
+import LendingWarnings from "../../shared/LendingWarnings";
 
 const forceInset = { bottom: "always" };
 
@@ -49,7 +49,6 @@ type RouteParams = {
 };
 
 export default function SendAmount({ navigation, route }: Props) {
-  useLendingTerms();
   const { t } = useTranslation();
   const { currency, transaction: tx } = route.params;
   const { account, parentAccount } = useSelector(accountScreenSelector(route));
@@ -150,6 +149,7 @@ export default function SendAmount({ navigation, route }: Props) {
   return (
     <>
       <TrackScreen category="LendingEnableFlow" name="Amount" />
+      <LendingWarnings />
       <SafeAreaView style={styles.root} forceInset={forceInset}>
         <View style={styles.container}>
           <LinkedIcons

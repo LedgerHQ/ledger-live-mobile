@@ -6,12 +6,17 @@ import { useNavigation } from "@react-navigation/native";
 import BaseInfoModal from "../BaseModal";
 import termsImg from "../../../../images/lending-info-3.png";
 
-export default function LendingInfoStep3() {
+type Props = {
+  route: { params: { endCallback: () => void } },
+};
+
+export default function LendingInfoStep3({ route: { params } }: Props) {
   const navigation = useNavigation();
   const onNext = useCallback(() => {
     const n = navigation.dangerouslyGetParent() || navigation;
     n.pop();
-  }, [navigation]);
+    params?.endCallback && params.endCallback();
+  }, [navigation, params]);
 
   return (
     <BaseInfoModal

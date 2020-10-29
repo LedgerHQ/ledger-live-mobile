@@ -25,7 +25,7 @@ import FilteredSearchBar from "../../../components/FilteredSearchBar";
 import AccountCard from "../../../components/AccountCard";
 import KeyboardView from "../../../components/KeyboardView";
 import InfoBox from "../../../components/InfoBox";
-import useLendingTerms from "../shared/useLendingTerms";
+import LendingWarnings from "../shared/LendingWarnings";
 
 const SEARCH_KEYS = [
   "account.name",
@@ -43,7 +43,6 @@ type Props = {
 const keyExtractor = item => item.account.id;
 
 function LendingEnableSelectAccount({ route, navigation }: Props) {
-  useLendingTerms();
   const currency = route?.params?.currency;
   invariant(currency, "currency required");
   let enabledTotalAmount = null;
@@ -138,6 +137,7 @@ function LendingEnableSelectAccount({ route, navigation }: Props) {
   return (
     <SafeAreaView style={styles.root} forceInset={forceInset}>
       <TrackScreen category="LendingEnableFlow" name="SelectAccount" />
+      <LendingWarnings />
       <KeyboardView style={{ flex: 1 }}>
         <View style={styles.searchContainer}>
           <FilteredSearchBar

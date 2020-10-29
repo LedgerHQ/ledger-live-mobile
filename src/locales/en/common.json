@@ -1410,6 +1410,10 @@
         "supply": "Supply",
         "withdraw": "Withdraw"
       },
+      "highFees": {
+        "title": "High fees on Ethereum",
+        "description": "Due to congestion on the Ethereum network, you may experience high fees when issuing transactions."
+      },
       "account": {
         "amountSupplied": "Amount supplied",
         "amountSuppliedTooltip": "Amount lent to the network",

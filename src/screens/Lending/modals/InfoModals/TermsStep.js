@@ -12,7 +12,11 @@ import termsImg from "../../../../images/lending-terms.png";
 import { ScreenName } from "../../../../const";
 import { acceptLendingTerms, LendingUrl } from "../../../../logic/terms";
 
-export default function TermsStep() {
+type Props = {
+  route: { params: { endCallback: () => void } },
+};
+
+export default function TermsStep({ route: { params } }: Props) {
   const navigation = useNavigation();
   const [hasAcceptedTerms, setHasAcceptedTerms] = useState(false);
 
@@ -27,8 +31,10 @@ export default function TermsStep() {
 
   const onNext = useCallback(() => {
     if (hasAcceptedTerms)
-      acceptLendingTerms().then(() => navigation.push(ScreenName.LendingInfo1));
-  }, [hasAcceptedTerms, navigation]);
+      acceptLendingTerms().then(() =>
+        navigation.push(ScreenName.LendingInfo1, params),
+      );
+  }, [hasAcceptedTerms, navigation, params]);
 
   return (
     <BaseInfoModal
