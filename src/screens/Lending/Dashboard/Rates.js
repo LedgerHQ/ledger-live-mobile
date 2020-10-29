@@ -25,33 +25,11 @@ const Row = ({
   const navigation = useNavigation();
 
   const navigateToEnableFlow = useCallback(() => {
-    navigation.navigate(NavigatorName.LendingInfo, {
-      screen: ScreenName.LendingInfo1,
+    navigation.navigate(NavigatorName.LendingEnableFlow, {
+      screen: ScreenName.LendingEnableSelectAccount,
       params: { currency: token },
     });
   }, [navigation, token]);
-
-  // const openManageModal = useCallback(() => {
-  //   const account = accounts.find(
-  //     a => a.type === "TokenAccount" && a.token.id === token.id,
-  //   );
-  //   const parentAccount = accounts.find(a => a.parentId === a.id);
-  //   if (!account) {
-  //     //dispatch(openModal("MODAL_ADD_ACCOUNTS", { currency: token }));
-  //   } else {
-  //     // dispatch(
-  //     //   openModal("MODAL_LEND_ENABLE_INFO", {
-  //     //     account,
-  //     //     parentAccount,
-  //     //     currency: token,
-  //     //   }),
-  //     // );
-  //   }
-  // }, [accounts, token]);
-
-  // const grossSupply = useMemo((): string => {
-  //   return formatShort(token.units[0], totalSupply);
-  // }, [token, totalSupply]);
 
   const totalBalance = useMemo(() => {
     return accounts.reduce((total, account) => {

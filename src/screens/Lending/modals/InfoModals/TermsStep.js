@@ -3,7 +3,6 @@ import React, { useCallback, useState } from "react";
 import { View, StyleSheet, Image, Linking } from "react-native";
 import { Trans } from "react-i18next";
 import { useNavigation } from "@react-navigation/native";
-import type { TokenCurrency } from "@ledgerhq/live-common/lib/types";
 import BaseInfoModal from "../BaseModal";
 import colors from "../../../../colors";
 import Touchable from "../../../../components/Touchable";
@@ -13,18 +12,7 @@ import termsImg from "../../../../images/lending-terms.png";
 import { ScreenName } from "../../../../const";
 import { acceptLendingTerms, LendingUrl } from "../../../../logic/terms";
 
-type Props = {
-  route: {
-    params: {
-      onlyTerms?: boolean,
-      currency?: TokenCurrency,
-    },
-  },
-};
-
-export default function TermsStep({ route }: Props) {
-  const { params } = route;
-  const { onlyTerms } = params;
+export default function TermsStep() {
   const navigation = useNavigation();
   const [hasAcceptedTerms, setHasAcceptedTerms] = useState(false);
 
@@ -39,12 +27,8 @@ export default function TermsStep({ route }: Props) {
 
   const onNext = useCallback(() => {
     if (hasAcceptedTerms)
-      acceptLendingTerms().then(() =>
-        onlyTerms
-          ? navigation.pop()
-          : navigation.push(ScreenName.LendingInfo1, params),
-      );
-  }, [hasAcceptedTerms, navigation, onlyTerms, params]);
+      acceptLendingTerms().then(() => navigation.push(ScreenName.LendingInfo1));
+  }, [hasAcceptedTerms, navigation]);
 
   return (
     <BaseInfoModal

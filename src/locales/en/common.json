@@ -832,7 +832,10 @@
       "FEES": "Fees",
       "OPT_IN": "Opt in",
       "OPT_OUT": "Opt out",
-      "CLOSE_ACCOUNT": "Close account"
+      "CLOSE_ACCOUNT": "Close account",
+      "REDEEM": "Withdraw",
+      "SUPPLY": "Supply",
+      "APPROVE": "Approve"
     }
   },
   "operationDetails": {
@@ -1407,6 +1410,16 @@
         "supply": "Supply",
         "withdraw": "Withdraw"
       },
+      "account": {
+        "amountSupplied": "Amount supplied",
+        "amountSuppliedTooltip": "Amount lent to the network",
+        "currencyAPY": "Currency APY",
+        "currencyAPYTooltip": "Actual return rate of a supply by the end of the year if the deposit is continuously compounded.",
+        "accruedInterests": "Accrued interests",
+        "accruedInterestsTooltip": "Interest being generated",
+        "interestEarned": "Interest earned",
+        "interestEarnedTooltip": "All time interest earned during lending"
+      },
       "banners": {
         "needApproval": "You need to approve this account before being able to lend assets.",
         "fullyApproved": "You have fully approved this account. You can reduce the amount at a fee.",
@@ -1476,7 +1489,7 @@
       "enable": {
         "stepperHeader": {
           "selectAccount": "Choose an account",
-          "enable": "Enable",
+          "enable": "Approve",
           "advanced": "Advanced",
           "amount": "Enter amount",
           "summary": "Summary",

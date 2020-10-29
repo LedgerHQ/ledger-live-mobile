@@ -49,9 +49,14 @@ export default function AccountActions({ account }: Props) {
         },
         {
           navigationParams: [
-            NavigatorName.Lending,
+            NavigatorName.LendingSupplyFlow,
             {
-              screen: ScreenName.LendingDashboard,
+              screen: ScreenName.LendingSupplyAmount,
+              params: {
+                accountId: account.id,
+                parentId: account.parentId,
+                currency,
+              },
             },
           ],
           label: (
@@ -67,9 +72,14 @@ export default function AccountActions({ account }: Props) {
         },
         {
           navigationParams: [
-            NavigatorName.Lending,
+            NavigatorName.LendingWithdrawFlow,
             {
-              screen: ScreenName.LendingDashboard,
+              screen: ScreenName.LendingWithdrawAmount,
+              params: {
+                accountId: account.id,
+                parentId: account.parentId,
+                currency,
+              },
             },
           ],
           label: (

@@ -3,24 +3,15 @@ import React, { useCallback } from "react";
 import { View, StyleSheet, Image } from "react-native";
 import { Trans } from "react-i18next";
 import { useNavigation } from "@react-navigation/native";
-import type { TokenCurrency } from "@ledgerhq/live-common/lib/types";
 import BaseInfoModal from "../BaseModal";
 import termsImg from "../../../../images/lending-info-1.png";
 import { ScreenName } from "../../../../const";
 
-type Props = {
-  route: {
-    params: {
-      currency?: TokenCurrency,
-    },
-  },
-};
-
-export default function LendingInfoStep1({ route }: Props) {
+export default function LendingInfoStep1() {
   const navigation = useNavigation();
   const onNext = useCallback(() => {
-    navigation.push(ScreenName.LendingInfo2, route.params);
-  }, [navigation, route.params]);
+    navigation.push(ScreenName.LendingInfo2);
+  }, [navigation]);
 
   return (
     <BaseInfoModal

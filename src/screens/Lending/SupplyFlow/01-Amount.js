@@ -10,6 +10,7 @@ import { accountScreenSelector } from "../../../reducers/accounts";
 import { ScreenName } from "../../../const";
 
 import AmountScreen from "../shared/01-Amount";
+import useLendingTerms from "../shared/useLendingTerms";
 
 type Props = {
   navigation: any,
@@ -23,6 +24,7 @@ type RouteParams = {
 };
 
 export default function SupplyAmount({ navigation, route }: Props) {
+  useLendingTerms();
   const { account, parentAccount } = useSelector(accountScreenSelector(route));
   invariant(
     account && account.type === "TokenAccount",
