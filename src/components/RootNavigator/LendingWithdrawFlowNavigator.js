@@ -3,29 +3,29 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useTranslation } from "react-i18next";
 import { ScreenName } from "../../const";
-import LendingSupplyAmount from "../../screens/Lending/SupplyFlow/01-Amount";
-import LendingSupplySummary from "../../screens/SendFunds/04-Summary";
+import LendingWithdrawAmount from "../../screens/Lending/WithdrawFlow/01-Amount";
+import LendingWithdrawSummary from "../../screens/SendFunds/04-Summary";
 import SelectDevice from "../../screens/SelectDevice";
-import LendingSupplyConnectDevice from "../../screens/ConnectDevice";
-import LendingSupplyValidationSuccess from "../../screens/Lending/SupplyFlow/03-ValidationSuccess";
-import LendingSupplyValidationError from "../../screens/Lending/SupplyFlow/03-ValidationError";
+import LendingWithdrawConnectDevice from "../../screens/ConnectDevice";
+import LendingWithdrawValidationSuccess from "../../screens/Lending/WithdrawFlow/03-ValidationSuccess";
+import LendingWithdrawValidationError from "../../screens/Lending/WithdrawFlow/03-ValidationError";
 import { closableStackNavigatorConfig } from "../../navigation/navigatorConfig";
 import StepHeader from "../StepHeader";
 
 const totalSteps = "4";
 
-export default function LendingSupplyFlowNavigator() {
+export default function LendingWithdrawFlowNavigator() {
   const { t } = useTranslation();
   return (
     <Stack.Navigator screenOptions={closableStackNavigatorConfig}>
       <Stack.Screen
-        name={ScreenName.LendingSupplyAmount}
-        component={LendingSupplyAmount}
+        name={ScreenName.LendingWithdrawAmount}
+        component={LendingWithdrawAmount}
         options={{
           headerTitle: () => (
             <StepHeader
-              title={t("transfer.lending.supply.stepperHeader.amount")}
-              subtitle={t("transfer.lending.supply.stepperHeader.stepRange", {
+              title={t("transfer.lending.withdraw.stepperHeader.amount")}
+              subtitle={t("transfer.lending.withdraw.stepperHeader.stepRange", {
                 currentStep: "1",
                 totalSteps,
               })}
@@ -34,13 +34,13 @@ export default function LendingSupplyFlowNavigator() {
         }}
       />
       <Stack.Screen
-        name={ScreenName.LendingSupplySummary}
-        component={LendingSupplySummary}
+        name={ScreenName.LendingWithdrawSummary}
+        component={LendingWithdrawSummary}
         options={{
           headerTitle: () => (
             <StepHeader
-              title={t("transfer.lending.supply.stepperHeader.summary")}
-              subtitle={t("transfer.lending.supply.stepperHeader.stepRange", {
+              title={t("transfer.lending.withdraw.stepperHeader.summary")}
+              subtitle={t("transfer.lending.withdraw.stepperHeader.stepRange", {
                 currentStep: "2",
                 totalSteps,
               })}
@@ -49,13 +49,13 @@ export default function LendingSupplyFlowNavigator() {
         }}
       />
       <Stack.Screen
-        name={ScreenName.LendingSupplySelectDevice}
+        name={ScreenName.LendingWithdrawSelectDevice}
         component={SelectDevice}
         options={{
           headerTitle: () => (
             <StepHeader
-              title={t("transfer.lending.supply.stepperHeader.selectDevice")}
-              subtitle={t("transfer.lending.supply.stepperHeader.stepRange", {
+              title={t("transfer.lending.withdraw.stepperHeader.selectDevice")}
+              subtitle={t("transfer.lending.withdraw.stepperHeader.stepRange", {
                 currentStep: "3",
                 totalSteps,
               })}
@@ -64,13 +64,13 @@ export default function LendingSupplyFlowNavigator() {
         }}
       />
       <Stack.Screen
-        name={ScreenName.LendingSupplyConnectDevice}
-        component={LendingSupplyConnectDevice}
+        name={ScreenName.LendingWithdrawConnectDevice}
+        component={LendingWithdrawConnectDevice}
         options={{
           headerTitle: () => (
             <StepHeader
-              title={t("transfer.lending.supply.stepperHeader.connectDevice")}
-              subtitle={t("transfer.lending.supply.stepperHeader.stepRange", {
+              title={t("transfer.lending.withdraw.stepperHeader.connectDevice")}
+              subtitle={t("transfer.lending.withdraw.stepperHeader.stepRange", {
                 currentStep: "4",
                 totalSteps,
               })}
@@ -79,18 +79,18 @@ export default function LendingSupplyFlowNavigator() {
         }}
       />
       <Stack.Screen
-        name={ScreenName.LendingSupplyValidationSuccess}
-        component={LendingSupplyValidationSuccess}
+        name={ScreenName.LendingWithdrawValidationSuccess}
+        component={LendingWithdrawValidationSuccess}
         options={{
           headerLeft: null,
           headerShown: false,
           headerRight: null,
-          gestureSupplyd: false,
+          gestureWithdrawd: false,
         }}
       />
       <Stack.Screen
-        name={ScreenName.LendingSupplyValidationError}
-        component={LendingSupplyValidationError}
+        name={ScreenName.LendingWithdrawValidationError}
+        component={LendingWithdrawValidationError}
         options={{
           headerShown: false,
         }}

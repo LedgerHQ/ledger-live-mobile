@@ -34,6 +34,7 @@ import LendingNavigator from "./LendingNavigator";
 import LendingInfoNavigator from "./LendingInfoNavigator";
 import LendingEnableFlowNavigator from "./LendingEnableFlowNavigator";
 import LendingSupplyFlowNavigator from "./LendingSupplyFlowNavigator";
+import LendingWithdrawFlowNavigator from "./LendingWithdrawFlowNavigator";
 import { closableStackNavigatorConfig } from "../../navigation/navigatorConfig";
 import Account from "../../screens/Account";
 import TransparentHeaderNavigationOptions from "../../navigation/TransparentHeaderNavigationOptions";
@@ -90,6 +91,11 @@ export default function BaseNavigator() {
       <Stack.Screen
         name={NavigatorName.LendingSupplyFlow}
         component={LendingSupplyFlowNavigator}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name={NavigatorName.LendingWithdrawFlow}
+        component={LendingWithdrawFlowNavigator}
         options={{ headerShown: false }}
       />
       <Stack.Screen

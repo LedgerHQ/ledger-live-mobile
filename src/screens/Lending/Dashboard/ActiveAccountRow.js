@@ -171,7 +171,15 @@ export default function ActiveAccountRow({ item }: RowProps) {
         event: "Lending ActiveAccounts Modal Withdraw",
         disabled: !canWithdraw,
         onPress: () => {
-          // @TODO replace icon + navigate to withdraw flow
+          onCloseDrawer();
+          navigation.navigate(NavigatorName.LendingWithdrawFlow, {
+            screen: ScreenName.LendingWithdrawAmount,
+            params: {
+              accountId: account.id,
+              parentId: account.parentId,
+              currency,
+            },
+          });
         },
       },
     ],

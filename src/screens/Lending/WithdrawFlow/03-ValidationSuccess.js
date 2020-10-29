@@ -47,17 +47,13 @@ export default function ValidationSuccess({ navigation, route }: Props) {
 
   return (
     <View style={styles.root}>
-      <TrackScreen category="LendingSupplyFlow" name="ValidationSuccess" />
+      <TrackScreen category="LendingWithdrawFlow" name="ValidationSuccess" />
       <PreventNativeBack />
       <ValidateSuccess
-        title={<Trans i18nKey="transfer.lending.supply.validation.success" />}
+        title={<Trans i18nKey="transfer.lending.withdraw.validation.success" />}
         description={
-          <Trans i18nKey="transfer.lending.supply.validation.info" />
+          <Trans i18nKey="transfer.lending.withdraw.validation.info" />
         }
-        info={<Trans i18nKey="transfer.lending.supply.validation.extraInfo" />}
-        onLearnMore={() => {
-          /** @TODO redirect to support page */
-        }}
         onViewDetails={goToOperationDetails}
         onClose={onClose}
       />

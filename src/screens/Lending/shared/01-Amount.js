@@ -7,10 +7,11 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   TouchableOpacity,
+  Switch,
 } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { useSelector } from "react-redux";
-import { Trans } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import invariant from "invariant";
 import type {
   Transaction,
@@ -43,6 +44,7 @@ type Props = {
   bridgeError: *,
   max: BigNumber,
   onContinue: () => void,
+  onChangeSendMax?: () => void,
   category: string,
 };
 
@@ -62,8 +64,10 @@ export default function AmountScreen({
   bridgeError,
   max,
   onContinue,
+  onChangeSendMax,
   category,
 }: Props) {
+  const { t } = useTranslation();
   const { account, parentAccount } = useSelector(accountScreenSelector(route));
   invariant(account, "account is required");
 
@@ -76,6 +80,7 @@ export default function AmountScreen({
       setTransaction(
         bridge.updateTransaction(transaction, {
           amount,
+          useAllAmount: false,
         }),
       );
     },
@@ -112,28 +117,29 @@ export default function AmountScreen({
   );
 
   const amountButtons = useMemo(
-    () => [
-      {
-        label: "25%",
-        value: max.multipliedBy(0.25),
-      },
-      {
-        label: "50%",
-        value: max.multipliedBy(0.5),
-      },
-      {
-        label: "75%",
-        value: max.multipliedBy(0.75),
-      },
-      {
-        label: "100%",
-        value: max,
-      },
-    ],
-    [max],
+    () =>
+      !onChangeSendMax && [
+        {
+          label: "25%",
+          value: max.multipliedBy(0.25),
+        },
+        {
+          label: "50%",
+          value: max.multipliedBy(0.5),
+        },
+        {
+          label: "75%",
+          value: max.multipliedBy(0.75),
+        },
+        {
+          label: "100%",
+          value: max,
+        },
+      ],
+    [max, onChangeSendMax],
   );
 
-  const { amount } = transaction;
+  const { amount, useAllAmount } = transaction;
   const unit = getAccountUnit(account);
 
   const error = amount.eq(0) || bridgePending ? null : status.errors.amount;
@@ -152,12 +158,17 @@ export default function AmountScreen({
                   isActive
                   onChange={onChange}
                   unit={unit}
-                  value={amount}
+                  value={useAllAmount ? undefined : amount}
                   autoFocus
                   style={styles.inputContainer}
                   inputStyle={styles.inputStyle}
                   hasError={!!error}
                   hasWarning={!!warning}
+                  placeholder={
+                    useAllAmount
+                      ? t("transfer.lending.supply.amount.placeholderMax")
+                      : undefined
+                  }
                 />
                 <LText
                   style={[error ? styles.error : styles.warning]}
@@ -195,12 +206,37 @@ export default function AmountScreen({
               )}
               <View style={styles.bottomWrapper}>
                 <View style={styles.available}>
-                  <LText semiBold style={styles.availableAmount}>
-                    <Trans i18nKey="transfer.lending.supply.amount.totalAvailable" />
-                  </LText>
-                  <LText semiBold style={styles.availableAmount}>
-                    <CurrencyUnitValue showCode unit={unit} value={max} />
-                  </LText>
+                  {onChangeSendMax ? (
+                    <>
+                      <View style={styles.availableLeft}>
+                        <LText semiBold style={styles.availableAmount}>
+                          <Trans i18nKey="transfer.lending.supply.amount.totalAvailable" />
+                        </LText>
+                        <LText semiBold>
+                          <CurrencyUnitValue showCode unit={unit} value={max} />
+                        </LText>
+                      </View>
+                      <View style={styles.availableRight}>
+                        <LText style={styles.maxLabel}>
+                          <Trans i18nKey="send.amount.useMax" />
+                        </LText>
+                        <Switch
+                          style={styles.switch}
+                          value={useAllAmount}
+                          onValueChange={onChangeSendMax}
+                        />
+                      </View>
+                    </>
+                  ) : (
+                    <>
+                      <LText semiBold style={styles.availableAmount}>
+                        <Trans i18nKey="transfer.lending.supply.amount.totalAvailable" />
+                      </LText>
+                      <LText semiBold>
+                        <CurrencyUnitValue showCode unit={unit} value={max} />
+                      </LText>
+                    </>
+                  )}
                 </View>
                 <View style={styles.continueWrapper}>
                   <Button
@@ -261,9 +297,18 @@ const styles = StyleSheet.create({
     color: colors.grey,
     marginBottom: 8,
   },
+  availableRight: {
+    alignItems: "center",
+    justifyContent: "flex-end",
+    flexDirection: "row",
+  },
+  availableLeft: {
+    justifyContent: "center",
+    flexGrow: 1,
+  },
   availableAmount: {
     color: colors.grey,
-    marginHorizontal: 3,
+    marginRight: 6,
   },
   bottomWrapper: {
     alignSelf: "stretch",

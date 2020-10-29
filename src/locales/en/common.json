@@ -1524,7 +1524,8 @@
           "stepRange": "Step {{currentStep}} of {{totalSteps}}"
         },
         "amount": {
-          "totalAvailable": "Available balance"
+          "totalAvailable": "Available balance",
+          "placeholderMax": "Withdraw Max"
         },
         "validation": {
           "success": "Deposit sent successfully",

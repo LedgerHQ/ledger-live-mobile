@@ -215,6 +215,14 @@ export const ScreenName = {
   LendingSupplyValidation: "LendingSupplyValidation",
   LendingSupplyValidationError: "LendingSupplyValidationError",
   LendingSupplyValidationSuccess: "LendingSupplyValidationSuccess",
+
+  LendingWithdrawAmount: "LendingWithdrawAmount",
+  LendingWithdrawSummary: "LendingWithdrawSummary",
+  LendingWithdrawSelectDevice: "LendingWithdrawSelectDevice",
+  LendingWithdrawConnectDevice: "LendingWithdrawConnectDevice",
+  LendingWithdrawValidation: "LendingWithdrawValidation",
+  LendingWithdrawValidationError: "LendingWithdrawValidationError",
+  LendingWithdrawValidationSuccess: "LendingWithdrawValidationSuccess",
 };
 
 export const NavigatorName = {
@@ -255,6 +263,7 @@ export const NavigatorName = {
   LendingInfo: "LendingInfo",
   LendingEnableFlow: "LendingEnableFlow",
   LendingSupplyFlow: "LendingSupplyFlow",
+  LendingWithdrawFlow: "LendingWithdrawFlow",
   /* eslint-disable sort-keys */
 
   // Tab
