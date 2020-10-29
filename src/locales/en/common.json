@@ -1005,6 +1005,7 @@
       }
     },
     "availableBalance": "Available balance",
+    "totalSupplied": "Amount supplied",
     "tronFrozen": "Frozen",
     "bandwidth": "Bandwidth",
     "energy": "Energy",

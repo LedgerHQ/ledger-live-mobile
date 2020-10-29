@@ -11,6 +11,10 @@ import type {
   AccountLike,
   Account,
 } from "@ledgerhq/live-common/lib/types";
+import {
+  getAccountCapabilities,
+  makeCompoundSummaryForAccount,
+} from "@ledgerhq/live-common/lib/compound/logic";
 
 import LText from "../../components/LText";
 import colors from "../../colors";
@@ -22,6 +26,7 @@ import Touchable from "../../components/Touchable";
 import TransactionsPendingConfirmationWarning from "../../components/TransactionsPendingConfirmationWarning";
 import type { Item } from "../../components/Graph/types";
 import SubAccountsList from "./SubAccountsList";
+import CompoundSummary from "./CompoundSummary";
 import perFamilyAccountHeader from "../../generated/AccountHeader";
 import perFamilyAccountBodyHeader from "../../generated/AccountBodyHeader";
 import perFamilyAccountBalanceSummaryFooter from "../../generated/AccountBalanceSummaryFooter";
@@ -31,9 +36,38 @@ const renderAccountSummary = (account, parentAccount) => () => {
   const AccountBalanceSummaryFooter =
     perFamilyAccountBalanceSummaryFooter[mainAccount.currency.family];
 
+  const availableOnCompound =
+    account.type === "TokenAccount" && !!account.compoundBalance;
+
+  const footers = [];
+
+  if (availableOnCompound) {
+    const compoundCapabilities = getAccountCapabilities(account);
+
+    if (compoundCapabilities.status) {
+      const compoundSummary = makeCompoundSummaryForAccount(
+        account,
+        parentAccount,
+      );
+
+      footers.push(
+        <CompoundSummary
+          key="compoundSummary"
+          account={account}
+          compoundSummary={compoundSummary}
+        />,
+      );
+    }
+  }
+
   if (AccountBalanceSummaryFooter)
-    return <AccountBalanceSummaryFooter account={account} />;
-  return null;
+    footers.push(
+      <AccountBalanceSummaryFooter
+        account={account}
+        key="accountbalancesummary"
+      />,
+    );
+  return footers;
 };
 
 type HeaderTitleProps = {
