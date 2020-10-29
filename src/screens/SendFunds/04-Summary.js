@@ -41,6 +41,7 @@ export type RouteParams = {
   currentNavigation?: string,
   nextNavigation?: string,
   overrideAmountLabel?: string,
+  hideTotal?: boolean,
 };
 
 const defaultParams = {
@@ -53,7 +54,7 @@ function SendSummary({ navigation, route: initialRoute }: Props) {
     ...initialRoute,
     params: { ...defaultParams, ...initialRoute.params },
   };
-  const { nextNavigation, overrideAmountLabel } = route.params;
+  const { nextNavigation, overrideAmountLabel, hideTotal } = route.params;
   const { account, parentAccount } = useSelector(accountScreenSelector(route));
   const {
     transaction,
@@ -155,7 +156,7 @@ function SendSummary({ navigation, route: initialRoute }: Props) {
             </LText>
           </View>
         ) : null}
-        {!amount.eq(totalSpent) ? (
+        {!amount.eq(totalSpent) && !hideTotal ? (
           <>
             <SectionSeparator lineColor={colors.lightFog} />
             <SummaryTotalSection

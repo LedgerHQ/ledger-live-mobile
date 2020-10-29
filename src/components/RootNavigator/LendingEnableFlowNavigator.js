@@ -87,7 +87,7 @@ export default function LendingEnableFlowNavigator() {
         options={{
           headerTitle: () => (
             <StepHeader
-              title={t("transfer.lending.enable.stepperHeader.advanced")}
+              title={t("transfer.lending.enable.stepperHeader.summary")}
               subtitle={t("transfer.lending.enable.stepperHeader.stepRange", {
                 currentStep: "3",
                 totalSteps,

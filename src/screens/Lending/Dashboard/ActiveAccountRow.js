@@ -18,6 +18,8 @@ import colors, { rgba } from "../../../colors";
 import DelegationDrawer from "../../../components/DelegationDrawer";
 import Circle from "../../../components/Circle";
 import Plus from "../../../icons/Plus";
+import Supply from "../../../icons/Supply";
+import Withdraw from "../../../icons/Withdraw";
 import Compound, { compoundColor } from "../../../icons/Compound";
 import { NavigatorName, ScreenName } from "../../../const";
 
@@ -134,13 +136,21 @@ export default function ActiveAccountRow({ item }: RowProps) {
             {...props}
             bg={!canSupply ? colors.lightFog : colors.lightLive}
           >
-            <Plus size={24} color={!canSupply ? colors.grey : colors.live} />
+            <Supply size={24} color={!canSupply ? colors.grey : colors.live} />
           </Circle>
         ),
-        event: "Lending ActiveAccounts Modal Enable",
+        event: "Lending ActiveAccounts Modal Supply",
         disabled: !canSupply,
         onPress: () => {
-          // @TODO replace icon + navigate to supply flow
+          onCloseDrawer();
+          navigation.navigate(NavigatorName.LendingSupplyFlow, {
+            screen: ScreenName.LendingSupplyAmount,
+            params: {
+              accountId: account.id,
+              parentId: account.parentId,
+              currency,
+            },
+          });
         },
       },
       {
@@ -152,10 +162,13 @@ export default function ActiveAccountRow({ item }: RowProps) {
             {...props}
             bg={!canWithdraw ? colors.lightFog : colors.lightLive}
           >
-            <Plus size={24} color={!canWithdraw ? colors.grey : colors.live} />
+            <Withdraw
+              size={16}
+              color={!canWithdraw ? colors.grey : colors.live}
+            />
           </Circle>
         ),
-        event: "Lending ActiveAccounts Modal Enable",
+        event: "Lending ActiveAccounts Modal Withdraw",
         disabled: !canWithdraw,
         onPress: () => {
           // @TODO replace icon + navigate to withdraw flow
@@ -169,6 +182,7 @@ export default function ActiveAccountRow({ item }: RowProps) {
       canWithdraw,
       currency,
       navigation,
+      onCloseDrawer,
     ],
   );
 

@@ -1479,6 +1479,7 @@
           "enable": "Enable",
           "advanced": "Advanced",
           "amount": "Enter amount",
+          "summary": "Summary",
           "selectDevice": "Select Device",
           "connectDevice": "Connect Device",
           "stepRange": "Step {{currentStep}} of {{totalSteps}}"
@@ -1511,6 +1512,44 @@
           "extraInfo": "Transactions can take some time to be displayed in an explorer and to be confirmed.",
           "button": {
             "done": "Close"
+          }
+        }
+      },
+      "supply": {
+        "stepperHeader": {
+          "amount": "Supply",
+          "summary": "Summary",
+          "selectDevice": "Select Device",
+          "connectDevice": "Connect Device",
+          "stepRange": "Step {{currentStep}} of {{totalSteps}}"
+        },
+        "amount": {
+          "totalAvailable": "Available balance"
+        },
+        "validation": {
+          "success": "Deposit sent successfully",
+          "info": "Once the transaction is confirmed you will be able to issue loans on the Compound protocol",
+          "extraInfo": "Transactions can take some time to be displayed in an explorer and to be confirmed.",
+          "button": {
+            "done": "Done",
+            "cta": "View details"
+          }
+        }
+      },
+      "withdraw": {
+        "stepperHeader": {
+          "amount": "Withdraw",
+          "summary": "Summary",
+          "selectDevice": "Select Device",
+          "connectDevice": "Connect Device",
+          "stepRange": "Step {{currentStep}} of {{totalSteps}}"
+        },
+        "validation": {
+          "success": "Withdrawal sent successfully",
+          "info": "Your assets will be available once the network has confirmed the withdrawal.",
+          "button": {
+            "done": "Done",
+            "cta": "View details"
           }
         }
       }

@@ -135,7 +135,7 @@ function LendingEnableSelectAccount({ route, navigation }: Props) {
   );
   return (
     <SafeAreaView style={styles.root} forceInset={forceInset}>
-      <TrackScreen category="LendingEnable" name="SelectAccount" />
+      <TrackScreen category="LendingEnableFlow" name="SelectAccount" />
       <KeyboardView style={{ flex: 1 }}>
         <View style={styles.searchContainer}>
           <FilteredSearchBar

@@ -7,7 +7,6 @@ import { TrackScreen } from "../../../analytics";
 import colors from "../../../colors";
 import PreventNativeBack from "../../../components/PreventNativeBack";
 import ValidateSuccess from "../../../components/ValidateSuccess";
-import UpdateIcon from "../../../icons/Update";
 
 type Props = {
   navigation: any,
@@ -29,16 +28,14 @@ export default function ValidationSuccess({ navigation }: Props) {
 
   return (
     <View style={styles.root}>
-      <TrackScreen category="LendingEnableFlow" name="ValidationSuccess" />
+      <TrackScreen category="LendingSupplyFlow" name="ValidationSuccess" />
       <PreventNativeBack />
       <ValidateSuccess
-        icon={<UpdateIcon size={24} color={colors.live} />}
-        iconColor={colors.live}
-        title={<Trans i18nKey="transfer.lending.enable.validation.success" />}
+        title={<Trans i18nKey="transfer.lending.supply.validation.success" />}
         description={
-          <Trans i18nKey="transfer.lending.enable.validation.info" />
+          <Trans i18nKey="transfer.lending.supply.validation.info" />
         }
-        info={<Trans i18nKey="transfer.lending.enable.validation.extraInfo" />}
+        info={<Trans i18nKey="transfer.lending.supply.validation.extraInfo" />}
         onLearnMore={() => {
           /** @TODO redirect to support page */
         }}

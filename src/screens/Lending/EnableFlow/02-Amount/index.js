@@ -111,6 +111,7 @@ export default function SendAmount({ navigation, route }: Props) {
             assetName: currency.name,
           })
         : formattedAmount,
+      hideTotal: true,
     });
   }, [
     transaction,
