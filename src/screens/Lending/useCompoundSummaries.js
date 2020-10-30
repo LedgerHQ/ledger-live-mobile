@@ -10,14 +10,14 @@ import { isCompoundTokenSupported } from "@ledgerhq/live-common/lib/families/eth
 const makeSummaries = (accounts: AccountLikeArray): CompoundAccountSummary[] =>
   accounts
     .map(acc => {
-      if (acc.type !== "TokenAccount") return;
+      if (acc.type !== "TokenAccount") return null;
       const ctoken = findCompoundToken(acc.token);
-      if (!ctoken) return;
+      if (!ctoken) return null;
 
-      if (!isCompoundTokenSupported(ctoken)) return;
+      if (!isCompoundTokenSupported(ctoken)) return null;
 
       const parentAccount = accounts.find(a => a.id === acc.parentId);
-      if (!parentAccount || parentAccount.type !== "Account") return;
+      if (!parentAccount || parentAccount.type !== "Account") return null;
       const summary = makeCompoundSummaryForAccount(acc, parentAccount);
       return summary;
     })

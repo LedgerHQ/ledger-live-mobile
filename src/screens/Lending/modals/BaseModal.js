@@ -1,4 +1,4 @@
-//$flow
+// $flow
 import React from "react";
 import { View, ScrollView, StyleSheet } from "react-native";
 import { Trans } from "react-i18next";

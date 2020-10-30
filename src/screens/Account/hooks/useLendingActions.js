@@ -1,6 +1,6 @@
 /* @flow */
 import React from "react";
-import type { AccountLike, Account } from "@ledgerhq/live-common/lib/types";
+import type { AccountLike } from "@ledgerhq/live-common/lib/types";
 import { getAccountCurrency } from "@ledgerhq/live-common/lib/account";
 import { Trans } from "react-i18next";
 import { getAccountCapabilities } from "@ledgerhq/live-common/lib/compound/logic";
@@ -19,7 +19,7 @@ export default function AccountActions({ account }: Props) {
   const availableOnCompound =
     account.type === "TokenAccount" && !!account.compoundBalance;
   const compoundCapabilities = availableOnCompound
-    ? getAccountCapabilities(account)
+    ? account.type === "TokenAccount" && getAccountCapabilities(account)
     : {};
 
   const lendingActions = !availableOnCompound
@@ -32,7 +32,7 @@ export default function AccountActions({ account }: Props) {
               screen: ScreenName.LendingEnableAmount,
               params: {
                 accountId: account.id,
-                parentId: account.parentId,
+                parentId: account.type === "TokenAccount" && account.parentId,
                 currency,
               },
             },
@@ -54,7 +54,7 @@ export default function AccountActions({ account }: Props) {
               screen: ScreenName.LendingSupplyAmount,
               params: {
                 accountId: account.id,
-                parentId: account.parentId,
+                parentId: account.type === "TokenAccount" && account.parentId,
                 currency,
               },
             },
@@ -68,7 +68,7 @@ export default function AccountActions({ account }: Props) {
           Icon: Supply,
           event: "Supply Crypto Account Button",
           eventProperties: { currencyName: currency.name },
-          disabled: !compoundCapabilities.canSupply,
+          disabled: !compoundCapabilities || compoundCapabilities.canSupply,
         },
         {
           navigationParams: [
@@ -77,7 +77,7 @@ export default function AccountActions({ account }: Props) {
               screen: ScreenName.LendingWithdrawAmount,
               params: {
                 accountId: account.id,
-                parentId: account.parentId,
+                parentId: account.type === "TokenAccount" && account.parentId,
                 currency,
               },
             },
@@ -91,7 +91,7 @@ export default function AccountActions({ account }: Props) {
           Icon: Withdraw,
           event: "Withdraw Crypto Account Button",
           eventProperties: { currencyName: currency.name },
-          disabled: !compoundCapabilities.canWithdraw,
+          disabled: !compoundCapabilities || !compoundCapabilities.canWithdraw,
         },
       ];
 

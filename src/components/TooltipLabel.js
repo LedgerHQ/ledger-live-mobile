@@ -1,6 +1,6 @@
 // @flow
 import React, { useCallback, useState } from "react";
-import { View, TouchableOpacity, StyleSheet } from "react-native";
+import { TouchableOpacity, StyleSheet } from "react-native";
 
 import LText from "./LText";
 import colors from "../colors";
