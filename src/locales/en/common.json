@@ -640,6 +640,10 @@
       "vote": {
         "title": "Vote with your ledger",
         "description": "Vote directly from your Ledger Wallet."
+      },
+      "lending": {
+        "title": "Lend crypto",
+        "description": "Lend asset on the Compound Protocol"
       }
     }
   },
@@ -1422,7 +1426,9 @@
         "accruedInterests": "Accrued interests",
         "accruedInterestsTooltip": "Interest being generated",
         "interestEarned": "Interest earned",
-        "interestEarnedTooltip": "All time interest earned during lending"
+        "interestEarnedTooltip": "All time interest earned during lending",
+        "openLoans": "Open loans",
+        "closedLoans": "Closed loans"
       },
       "banners": {
         "needApproval": "You need to approve this account before being able to lend assets.",

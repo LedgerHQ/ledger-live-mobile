@@ -1,8 +1,7 @@
 // @flow
 
 import React, { useCallback, useMemo, useState } from "react";
-import { SectionList, View, StyleSheet } from "react-native";
-import SafeAreaView from "react-native-safe-area-view";
+import { SectionList, View, StyleSheet, SafeAreaView } from "react-native";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
@@ -23,7 +22,6 @@ import SectionHeader from "../../../components/SectionHeader";
 import NoMoreOperationFooter from "../../../components/NoMoreOperationFooter";
 import LoadingFooter from "../../../components/LoadingFooter";
 
-const forceInset = { bottom: "always" };
 // $FlowFixMe
 const useCompoundHistory = (accounts: AccountLikeArray): AccountLikeArray => {
   const filterOps = (op: Operation): boolean =>
@@ -67,7 +65,7 @@ export default function History() {
   }, [navigation]);
 
   return (
-    <SafeAreaView style={[styles.root]} forceInset={forceInset}>
+    <SafeAreaView style={[styles.root]}>
       <TrackScreen category="Lending" />
       <View style={styles.body}>
         {/** $FlowFixMe */}

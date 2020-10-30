@@ -8,8 +8,8 @@ import {
   Keyboard,
   TouchableOpacity,
   Switch,
+  SafeAreaView,
 } from "react-native";
-import SafeAreaView from "react-native-safe-area-view";
 import { useSelector } from "react-redux";
 import { Trans, useTranslation } from "react-i18next";
 import invariant from "invariant";
@@ -32,13 +32,11 @@ import GenericErrorBottomModal from "../../../components/GenericErrorBottomModal
 import CurrencyInput from "../../../components/CurrencyInput";
 import TranslatedError from "../../../components/TranslatedError";
 
-const forceInset = { bottom: "always" };
-
 type Props = {
   navigation: any,
   route: { params: RouteParams },
   transaction: Transaction,
-  setTransaction: () => void,
+  setTransaction: (tx: any) => void,
   status: *,
   bridgePending: boolean,
   bridgeError: *,
@@ -148,7 +146,7 @@ export default function AmountScreen({
   return (
     <>
       <TrackScreen category={category} name="Amount" />
-      <SafeAreaView style={styles.root} forceInset={forceInset}>
+      <SafeAreaView style={styles.root}>
         <KeyboardView style={styles.container}>
           <TouchableWithoutFeedback onPress={blur}>
             <View style={styles.root}>
@@ -375,5 +373,11 @@ const styles = StyleSheet.create({
     color: colors.orange,
     fontSize: 14,
     textAlign: "center",
+  },
+  maxLabel: {
+    marginRight: 4,
+  },
+  switch: {
+    opacity: 0.99,
   },
 });

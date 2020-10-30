@@ -1,8 +1,7 @@
 // @flow
 
 import React, { useCallback } from "react";
-import { View, StyleSheet, FlatList } from "react-native";
-import SafeAreaView from "react-native-safe-area-view";
+import { View, StyleSheet, FlatList, SafeAreaView } from "react-native";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
@@ -17,8 +16,6 @@ import EmptyState from "../shared/EmptyState";
 import { ScreenName } from "../../../const";
 import ClosedLoansRow from "./ClosedLoansRow";
 
-const forceInset = { bottom: "always" };
-
 export default function ClosedLoans() {
   const { t } = useTranslation();
   const accounts = useSelector(flattenSortAccountsSelector);
@@ -31,7 +28,7 @@ export default function ClosedLoans() {
   }, [navigation]);
 
   return (
-    <SafeAreaView style={[styles.root]} forceInset={forceInset}>
+    <SafeAreaView style={[styles.root]}>
       <TrackScreen category="Lending" />
       <View style={styles.body}>
         <View style={styles.rows}>

@@ -11,10 +11,7 @@ import type {
   AccountLike,
   Account,
 } from "@ledgerhq/live-common/lib/types";
-import {
-  getAccountCapabilities,
-  makeCompoundSummaryForAccount,
-} from "@ledgerhq/live-common/lib/compound/logic";
+import type { CompoundAccountSummary } from "@ledgerhq/live-common/lib/compound/types";
 
 import LText from "../../components/LText";
 import colors from "../../colors";
@@ -26,38 +23,31 @@ import Touchable from "../../components/Touchable";
 import TransactionsPendingConfirmationWarning from "../../components/TransactionsPendingConfirmationWarning";
 import type { Item } from "../../components/Graph/types";
 import SubAccountsList from "./SubAccountsList";
-import CompoundSummary from "./CompoundSummary";
+import CompoundSummary from "../Lending/Account/CompoundSummary";
+import CompoundAccountBodyHeader from "../Lending/Account/AccountBodyHeader";
 import perFamilyAccountHeader from "../../generated/AccountHeader";
 import perFamilyAccountBodyHeader from "../../generated/AccountBodyHeader";
 import perFamilyAccountBalanceSummaryFooter from "../../generated/AccountBalanceSummaryFooter";
 
-const renderAccountSummary = (account, parentAccount) => () => {
+const renderAccountSummary = (
+  account,
+  parentAccount,
+  compoundSummary,
+) => () => {
   const mainAccount = getMainAccount(account, parentAccount);
   const AccountBalanceSummaryFooter =
     perFamilyAccountBalanceSummaryFooter[mainAccount.currency.family];
 
-  const availableOnCompound =
-    account.type === "TokenAccount" && !!account.compoundBalance;
-
   const footers = [];
 
-  if (availableOnCompound) {
-    const compoundCapabilities = getAccountCapabilities(account);
-
-    if (compoundCapabilities.status) {
-      const compoundSummary = makeCompoundSummaryForAccount(
-        account,
-        parentAccount,
-      );
-
-      footers.push(
-        <CompoundSummary
-          key="compoundSummary"
-          account={account}
-          compoundSummary={compoundSummary}
-        />,
-      );
-    }
+  if (compoundSummary) {
+    footers.push(
+      <CompoundSummary
+        key="compoundSummary"
+        account={account}
+        compoundSummary={compoundSummary}
+      />,
+    );
   }
 
   if (AccountBalanceSummaryFooter)
@@ -136,6 +126,7 @@ type Props = {
   counterValueCurrency: Unit,
   onAccountPress: () => void,
   onSwitchAccountCurrency: () => void,
+  compoundSummary?: CompoundAccountSummary,
 };
 
 function ListHeaderComponent({
@@ -150,6 +141,7 @@ function ListHeaderComponent({
   counterValueCurrency,
   onAccountPress,
   onSwitchAccountCurrency,
+  compoundSummary,
 }: Props) {
   const [isCollapsed, setIsCollapsed] = useState(true);
   if (!account) return null;
@@ -186,7 +178,11 @@ function ListHeaderComponent({
             countervalueAvailable,
             onSwitchAccountCurrency,
           )}
-          renderAccountSummary={renderAccountSummary(account, parentAccount)}
+          renderAccountSummary={renderAccountSummary(
+            account,
+            parentAccount,
+            compoundSummary,
+          )}
         />
       )}
       {empty ? null : (
@@ -203,6 +199,13 @@ function ListHeaderComponent({
           parentAccount={account}
           isCollapsed={isCollapsed}
           onToggle={() => setIsCollapsed(!isCollapsed)}
+        />
+      ) : null}
+      {compoundSummary ? (
+        <CompoundAccountBodyHeader
+          account={account}
+          parentAccount={parentAccount}
+          compoundSummary={compoundSummary}
         />
       ) : null}
     </View>

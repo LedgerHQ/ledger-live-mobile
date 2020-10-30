@@ -1,8 +1,7 @@
 // @flow
 
 import React from "react";
-import { View, StyleSheet } from "react-native";
-import SafeAreaView from "react-native-safe-area-view";
+import { View, StyleSheet, SafeAreaView } from "react-native";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { listCurrentRates } from "@ledgerhq/live-common/lib/families/ethereum/modules/compound";
@@ -15,8 +14,6 @@ import Rates from "./Rates";
 import ActiveAccounts from "./ActiveAccounts";
 import LendingWarnings from "../shared/LendingWarnings";
 
-const forceInset = { bottom: "always" };
-
 export default function Dashboard() {
   const { t } = useTranslation();
   const accounts = useSelector(flattenSortAccountsSelector);
@@ -24,7 +21,7 @@ export default function Dashboard() {
   const rates = listCurrentRates();
 
   return (
-    <SafeAreaView style={[styles.root]} forceInset={forceInset}>
+    <SafeAreaView style={[styles.root]}>
       <TrackScreen category="Lending" />
       <LendingWarnings />
       <View style={styles.body}>

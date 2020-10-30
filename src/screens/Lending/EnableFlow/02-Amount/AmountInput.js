@@ -7,8 +7,8 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   Keyboard,
+  SafeAreaView,
 } from "react-native";
-import SafeAreaView from "react-native-safe-area-view";
 import { useSelector } from "react-redux";
 import { Trans } from "react-i18next";
 import type { Transaction } from "@ledgerhq/live-common/lib/types";
@@ -26,8 +26,6 @@ import GenericErrorBottomModal from "../../../../components/GenericErrorBottomMo
 import AmountInput from "../../../SendFunds/AmountInput";
 import LText from "../../../../components/LText";
 import CurrencyUnitValue from "../../../../components/CurrencyUnitValue";
-
-const forceInset = { bottom: "always" };
 
 type Props = {
   navigation: any,
@@ -99,7 +97,7 @@ export default function SendAmount({ navigation, route }: Props) {
   return (
     <>
       <TrackScreen category="LendingEnableFlow" name="AmountInput" />
-      <SafeAreaView style={styles.root} forceInset={forceInset}>
+      <SafeAreaView style={styles.root}>
         <KeyboardView style={styles.container}>
           <TouchableWithoutFeedback onPress={blur}>
             <View style={styles.amountWrapper}>

@@ -2,8 +2,13 @@
 import invariant from "invariant";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
 import React, { useCallback } from "react";
-import { StyleSheet, View, Switch, TouchableOpacity } from "react-native";
-import SafeAreaView from "react-native-safe-area-view";
+import {
+  StyleSheet,
+  View,
+  Switch,
+  TouchableOpacity,
+  SafeAreaView,
+} from "react-native";
 import { useSelector } from "react-redux";
 import { Trans } from "react-i18next";
 import type {
@@ -26,8 +31,6 @@ import TooltipLabel from "../../../../components/TooltipLabel";
 import CurrencyUnitValue from "../../../../components/CurrencyUnitValue";
 import CounterValue from "../../../../components/CounterValue";
 import TranslatedError from "../../../../components/TranslatedError";
-
-const forceInset = { bottom: "always" };
 
 type Props = {
   navigation: any,
@@ -58,6 +61,8 @@ export default function EnableAdvanced({ navigation, route }: Props) {
     account,
     parentAccount,
   }));
+
+  invariant(transaction, "transaction required");
 
   const onContinue = useCallback(() => {
     navigation.navigate(ScreenName.LendingEnableAmount, {
@@ -107,7 +112,7 @@ export default function EnableAdvanced({ navigation, route }: Props) {
   return (
     <>
       <TrackScreen category="LendingEnableFlow" name="Amount" />
-      <SafeAreaView style={styles.root} forceInset={forceInset}>
+      <SafeAreaView style={styles.root}>
         <View style={styles.container}>
           <View style={styles.row}>
             <TooltipLabel

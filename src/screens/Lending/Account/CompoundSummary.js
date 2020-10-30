@@ -10,10 +10,10 @@ import type { Account } from "@ledgerhq/live-common/lib/types";
 import { listCurrentRates } from "@ledgerhq/live-common/lib/families/ethereum/modules/compound";
 
 import { findCompoundToken } from "@ledgerhq/live-common/lib/currencies";
-import colors from "../../colors";
-import CurrencyUnitValue from "../../components/CurrencyUnitValue";
-import InfoItem from "../../components/BalanceSummaryInfoItem";
-import InfoModal from "../../modals/Info";
+import colors from "../../../colors";
+import CurrencyUnitValue from "../../../components/CurrencyUnitValue";
+import InfoItem from "../../../components/BalanceSummaryInfoItem";
+import InfoModal from "../../../modals/Info";
 
 type Props = {
   account: Account,

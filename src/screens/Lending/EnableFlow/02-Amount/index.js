@@ -2,8 +2,7 @@
 import invariant from "invariant";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
 import React, { useCallback } from "react";
-import { StyleSheet, View, TouchableOpacity } from "react-native";
-import SafeAreaView from "react-native-safe-area-view";
+import { StyleSheet, View, TouchableOpacity, SafeAreaView } from "react-native";
 import { useSelector } from "react-redux";
 import { Trans, useTranslation } from "react-i18next";
 import type {
@@ -33,8 +32,6 @@ import Plus from "../../../../icons/Plus";
 import ArrowRight from "../../../../icons/ArrowRight";
 import CurrencyUnitValue from "../../../../components/CurrencyUnitValue";
 import LendingWarnings from "../../shared/LendingWarnings";
-
-const forceInset = { bottom: "always" };
 
 type Props = {
   navigation: any,
@@ -150,7 +147,7 @@ export default function SendAmount({ navigation, route }: Props) {
     <>
       <TrackScreen category="LendingEnableFlow" name="Amount" />
       <LendingWarnings />
-      <SafeAreaView style={styles.root} forceInset={forceInset}>
+      <SafeAreaView style={styles.root}>
         <View style={styles.container}>
           <LinkedIcons
             left={

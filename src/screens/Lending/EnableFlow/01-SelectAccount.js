@@ -2,8 +2,7 @@
 import invariant from "invariant";
 import { BigNumber } from "bignumber.js";
 import React, { useCallback, useState } from "react";
-import { View, StyleSheet, FlatList } from "react-native";
-import SafeAreaView from "react-native-safe-area-view";
+import { View, StyleSheet, FlatList, SafeAreaView } from "react-native";
 import { useSelector } from "react-redux";
 import { Trans } from "react-i18next";
 import type {
@@ -44,7 +43,6 @@ const SEARCH_KEYS = [
   "account.token.name",
   "account.token.ticker",
 ];
-const forceInset = { bottom: "always" };
 
 type Props = {
   navigation: any,
@@ -180,7 +178,7 @@ function LendingEnableSelectAccount({ route, navigation }: Props) {
         </View>
       );
     },
-    [navigation],
+    [redirectToSupplyFlow],
   );
   const renderList = useCallback(
     items => {
@@ -209,7 +207,7 @@ function LendingEnableSelectAccount({ route, navigation }: Props) {
     [],
   );
   return (
-    <SafeAreaView style={styles.root} forceInset={forceInset}>
+    <SafeAreaView style={styles.root}>
       <TrackScreen category="LendingEnableFlow" name="SelectAccount" />
       <LendingWarnings />
       <ConfirmationModal

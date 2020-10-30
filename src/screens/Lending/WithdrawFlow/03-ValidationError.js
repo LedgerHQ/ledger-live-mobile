@@ -1,14 +1,11 @@
 /* @flow */
 import React, { useCallback } from "react";
-import { StyleSheet, Linking } from "react-native";
-import SafeAreaView from "react-native-safe-area-view";
+import { StyleSheet, Linking, SafeAreaView } from "react-native";
 import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
 import { TrackScreen } from "../../../analytics";
 import colors from "../../../colors";
 import ValidateError from "../../../components/ValidateError";
 import { urls } from "../../../config/urls";
-
-const forceInset = { bottom: "always" };
 
 type Props = {
   account: AccountLike,
@@ -41,7 +38,7 @@ export default function ValidationError({ navigation, route }: Props) {
   const error = route.params.error;
 
   return (
-    <SafeAreaView style={styles.root} forceInset={forceInset}>
+    <SafeAreaView style={styles.root}>
       <TrackScreen category="LendingWithdrawFlow" name="ValidationError" />
       <ValidateError
         error={error}
