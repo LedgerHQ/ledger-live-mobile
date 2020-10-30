@@ -1,6 +1,6 @@
 // @flow
 import React from "react";
-import Svg, { Path, Rect } from "react-native-svg";
+import Svg, { Path } from "react-native-svg";
 
 type Props = {
   size: number,
@@ -9,44 +9,48 @@ type Props = {
 
 export default function Lending({ size = 16, color }: Props) {
   return (
-    <Svg width={size} height={size} viewBox="0 0 16 17">
+    <Svg width={size} height={size} viewBox="0 0 16 16" fill="none">
       <Path
-        d="M2.54541 7.27274V11.0909C2.54541 12.1955 3.44084 13.0909 4.54541 13.0909H9.4545"
+        d="M6 11.3333V14"
         stroke={color}
-        stroke-width="1.5"
-      />
-      <Path
-        d="M7.27263 10.5455L9.45445 13.0909L7.27263 15.6364"
-        stroke={color}
-        stroke-width="1.5"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <Path
-        d="M13.4546 9.09091V5.27273C13.4546 4.16816 12.5592 3.27273 11.4546 3.27273H6.90914"
+        d="M14 7.33334L14 14"
         stroke={color}
-        stroke-width="1.5"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <Path
-        d="M9.0909 5.81819L6.90908 3.27274L9.0909 0.727281"
+        d="M10 9.33334L10 14"
         stroke={color}
-        stroke-width="1.5"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
-      <Rect
-        x="11.6591"
-        y="10.9318"
-        width="3.59091"
-        height="3.59091"
-        rx="1.79545"
+      <Path
+        d="M2 12.6667L2 14"
         stroke={color}
-        stroke-width="1.5"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
-      <Rect
-        x="0.75"
-        y="1.47726"
-        width="3.59091"
-        height="3.59091"
-        rx="1.79545"
+      <Path
+        d="M2 8.66667C9.33333 6.66667 13.9998 1.33334 13.9998 1.33334"
         stroke={color}
-        stroke-width="1.5"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <Path
+        d="M11.6665 1.33334L13.9998 1.33334V3.66667"
+        stroke={color}
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </Svg>
   );

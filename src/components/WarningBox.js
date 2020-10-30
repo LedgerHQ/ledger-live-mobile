@@ -12,7 +12,11 @@ type Props = {
   learnMoreKey?: String,
 };
 
-export default function WarningBox({ children: description, onLearnMore, learnMoreKey }: Props) {
+export default function WarningBox({
+  children: description,
+  onLearnMore,
+  learnMoreKey,
+}: Props) {
   return (
     <View style={styles.root}>
       <IconHelp color={colors.lightOrange} size={16} />

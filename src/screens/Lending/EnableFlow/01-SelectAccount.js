@@ -1,7 +1,7 @@
 /* @flow */
 import invariant from "invariant";
 import { BigNumber } from "bignumber.js";
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import { View, StyleSheet, FlatList } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { useSelector } from "react-redux";
@@ -16,16 +16,27 @@ import type {
 import { isAccountEmpty } from "@ledgerhq/live-common/lib/account";
 import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
 import { getAccountCapabilities } from "@ledgerhq/live-common/lib/compound/logic";
+import {
+  getAccountName,
+  getAccountCurrency,
+  getAccountUnit,
+} from "@ledgerhq/live-common/lib/account/helpers";
 import { subAccountByCurrencyOrderedScreenSelector } from "../../../reducers/accounts";
-import colors from "../../../colors";
-import { ScreenName } from "../../../const";
+import colors, { rgba } from "../../../colors";
+import { ScreenName, NavigatorName } from "../../../const";
 import { TrackScreen } from "../../../analytics";
 import LText from "../../../components/LText";
 import FilteredSearchBar from "../../../components/FilteredSearchBar";
-import AccountCard from "../../../components/AccountCard";
 import KeyboardView from "../../../components/KeyboardView";
 import InfoBox from "../../../components/InfoBox";
 import LendingWarnings from "../shared/LendingWarnings";
+import Card from "../../../components/Card";
+import CurrencyIcon from "../../../components/CurrencyIcon";
+import CheckCircle from "../../../icons/CheckCircle";
+import CurrencyUnitValue from "../../../components/CurrencyUnitValue";
+import ConfirmationModal from "../../../components/ConfirmationModal";
+import Circle from "../../../components/Circle";
+import Info from "../../../icons/Info";
 
 const SEARCH_KEYS = [
   "account.name",
@@ -78,6 +89,29 @@ function LendingEnableSelectAccount({ route, navigation }: Props) {
       disableRounding: false,
     });
 
+  const [approveInfoModalOpen, setApproveInfoModalOpen] = useState(false);
+
+  const closeApproveInfoModal = useCallback(
+    () => setApproveInfoModalOpen(false),
+    [],
+  );
+  const redirectToEnableFlow = useCallback(() => {
+    const n = navigation.dangerouslyGetParent() || navigation;
+    n.push(ScreenName.LendingEnableAmount, { ...approveInfoModalOpen });
+    closeApproveInfoModal();
+  }, [approveInfoModalOpen, closeApproveInfoModal, navigation]);
+
+  const redirectToSupplyFlow = useCallback(
+    params => {
+      const n = navigation.dangerouslyGetParent() || navigation;
+      n.replace(NavigatorName.LendingSupplyFlow, {
+        screen: ScreenName.LendingSupplyAmount,
+        params,
+      });
+    },
+    [navigation],
+  );
+
   const renderItem = useCallback(
     ({
       item: result,
@@ -85,28 +119,68 @@ function LendingEnableSelectAccount({ route, navigation }: Props) {
       item: { account: AccountLike, parentAccount?: Account },
     }) => {
       const { account, parentAccount } = result;
+
+      const currency = getAccountCurrency(account);
+      const unit = getAccountUnit(account);
+      const capabilities =
+        account.type === "TokenAccount" && getAccountCapabilities(account);
+      const name = getAccountName(parentAccount || account);
+      const isEnabled =
+        capabilities &&
+        ((capabilities.enabledAmount && capabilities.enabledAmount.gt(0)) ||
+          capabilities.enabledAmountIsUnlimited);
+
       return (
         <View
           style={account.type === "Account" ? undefined : styles.tokenCardStyle}
         >
-          <AccountCard
-            account={account}
-            style={styles.cardStyle}
+          <Card
             onPress={() => {
-              navigation.push(ScreenName.LendingEnableAmount, {
-                accountId: account.id,
-                parentId:
-                  account.type !== "Account"
-                    ? account.parentId
-                    : parentAccount?.id,
-                currency,
-              });
+              isEnabled
+                ? redirectToSupplyFlow({
+                    accountId: account.id,
+                    parentId:
+                      account.type !== "Account"
+                        ? account.parentId
+                        : parentAccount?.id,
+                    currency,
+                  })
+                : setApproveInfoModalOpen({
+                    accountId: account.id,
+                    parentId:
+                      account.type !== "Account"
+                        ? account.parentId
+                        : parentAccount?.id,
+                    currency,
+                  });
             }}
-          />
+            style={[styles.card, styles.cardStyle]}
+          >
+            <CurrencyIcon size={20} currency={currency} />
+            <View style={styles.accountName}>
+              <LText
+                semiBold
+                numberOfLines={1}
+                style={[styles.accountNameText, { color: colors.darkBlue }]}
+              >
+                {name}
+              </LText>
+            </View>
+            <View style={styles.balanceContainer}>
+              <LText semiBold style={styles.balanceNumText}>
+                <CurrencyUnitValue
+                  showCode
+                  unit={unit}
+                  value={account.balance}
+                />
+              </LText>
+              {isEnabled && <CheckCircle size={16} color={colors.success} />}
+            </View>
+          </Card>
         </View>
       );
     },
-    [currency, navigation],
+    [navigation],
   );
   const renderList = useCallback(
     items => {
@@ -138,6 +212,24 @@ function LendingEnableSelectAccount({ route, navigation }: Props) {
     <SafeAreaView style={styles.root} forceInset={forceInset}>
       <TrackScreen category="LendingEnableFlow" name="SelectAccount" />
       <LendingWarnings />
+      <ConfirmationModal
+        isOpened={!!approveInfoModalOpen}
+        onClose={closeApproveInfoModal}
+        onConfirm={redirectToEnableFlow}
+        confirmationTitle={
+          <Trans i18nKey="transfer.lending.enable.info.title" />
+        }
+        confirmationDesc={
+          <Trans i18nKey="transfer.lending.enable.info.description" />
+        }
+        confirmButtonText={<Trans i18nKey="transfer.lending.enable.info.cta" />}
+        Icon={() => (
+          <Circle size={56} bg={rgba(colors.live, 0.2)}>
+            <Info size={24} color={colors.live} />
+          </Circle>
+        )}
+        hideRejectButton
+      />
       <KeyboardView style={{ flex: 1 }}>
         <View style={styles.searchContainer}>
           <FilteredSearchBar
@@ -216,6 +308,30 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent",
   },
   infoSection: { padding: 16 },
+  card: {
+    flex: 1,
+    flexDirection: "row",
+    paddingVertical: 16,
+    alignItems: "center",
+  },
+  accountName: {
+    flexGrow: 1,
+    flexShrink: 1,
+    marginLeft: 8,
+  },
+  accountNameText: {
+    fontSize: 14,
+  },
+  balanceContainer: {
+    flexDirection: "row",
+    marginLeft: 16,
+    alignItems: "center",
+    justifyContent: "flex-end",
+  },
+  balanceNumText: {
+    color: colors.grey,
+    marginRight: 6,
+  },
 });
 
 export default LendingEnableSelectAccount;

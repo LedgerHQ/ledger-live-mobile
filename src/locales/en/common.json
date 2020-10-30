@@ -1491,6 +1491,11 @@
         }
       },
       "enable": {
+        "info": {
+          "title": "This account is not approved",
+          "description": "You need to approved an account before being able to lend this asset.",
+          "cta": "Approve Account"
+        },
         "stepperHeader": {
           "selectAccount": "Choose an account",
           "enable": "Approve",
