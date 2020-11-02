@@ -1,7 +1,11 @@
 /* @flow */
 import React, { useCallback } from "react";
 import { StyleSheet, Linking, SafeAreaView } from "react-native";
-import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
+import type {
+  Account,
+  AccountLike,
+  TokenCurrency,
+} from "@ledgerhq/live-common/lib/types";
 import { TrackScreen } from "../../../analytics";
 import colors from "../../../colors";
 import ValidateError from "../../../components/ValidateError";
@@ -20,6 +24,7 @@ type RouteParams = {
   deviceId: string,
   transaction: any,
   error: Error,
+  currency: TokenCurrency,
 };
 
 export default function ValidationError({ navigation, route }: Props) {
@@ -35,11 +40,15 @@ export default function ValidationError({ navigation, route }: Props) {
     navigation.goBack();
   }, [navigation]);
 
-  const error = route.params.error;
+  const { error, currency } = route.params;
 
   return (
     <SafeAreaView style={styles.root}>
-      <TrackScreen category="LendingEnableFlow" name="ValidationError" />
+      <TrackScreen
+        category="Lend Approve"
+        name="Fail"
+        eventProperties={{ currencyName: currency.name }}
+      />
       <ValidateError
         error={error}
         onRetry={retry}

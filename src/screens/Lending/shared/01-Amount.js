@@ -42,7 +42,7 @@ type Props = {
   bridgeError: *,
   max: BigNumber,
   onContinue: () => void,
-  onChangeSendMax?: () => void,
+  onChangeSendMax?: (value: boolean) => void,
   category: string,
 };
 
@@ -66,6 +66,7 @@ export default function AmountScreen({
   category,
 }: Props) {
   const { t } = useTranslation();
+  const { currency } = route.params;
   const { account, parentAccount } = useSelector(accountScreenSelector(route));
   invariant(account, "account is required");
 
@@ -145,7 +146,11 @@ export default function AmountScreen({
 
   return (
     <>
-      <TrackScreen category={category} name="Amount" />
+      <TrackScreen
+        category={category}
+        name="step 1 (Amount)"
+        eventProperties={{ currencyName: currency.name }}
+      />
       <SafeAreaView style={styles.root}>
         <KeyboardView style={styles.container}>
           <TouchableWithoutFeedback onPress={blur}>

@@ -44,7 +44,7 @@ export default function AccountActions({ account }: Props) {
             />
           ),
           Icon: Plus,
-          event: "Approve Crypto Account Button",
+          event: "Lend Approve Manage Account",
           eventProperties: { currencyName: currency.name },
         },
         {
@@ -66,7 +66,7 @@ export default function AccountActions({ account }: Props) {
             />
           ),
           Icon: Supply,
-          event: "Supply Crypto Account Button",
+          event: "Lend Supply Manage Account",
           eventProperties: { currencyName: currency.name },
           disabled: !compoundCapabilities || compoundCapabilities.canSupply,
         },
@@ -89,7 +89,7 @@ export default function AccountActions({ account }: Props) {
             />
           ),
           Icon: Withdraw,
-          event: "Withdraw Crypto Account Button",
+          event: "Lend Withdraw Manage Account",
           eventProperties: { currencyName: currency.name },
           disabled: !compoundCapabilities || !compoundCapabilities.canWithdraw,
         },

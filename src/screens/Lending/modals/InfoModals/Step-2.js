@@ -19,6 +19,7 @@ export default function LendingInfoStep2({ route: { params } }: Props) {
 
   return (
     <BaseInfoModal
+      event="Edu step 2"
       title={<Trans i18nKey="transfer.lending.info.2.title" />}
       description={<Trans i18nKey="transfer.lending.info.2.description" />}
       badgeLabel={<Trans i18nKey="transfer.lending.info.2.label" />}

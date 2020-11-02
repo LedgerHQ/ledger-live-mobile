@@ -11,7 +11,10 @@ import {
 } from "react-native";
 import { useSelector } from "react-redux";
 import { Trans } from "react-i18next";
-import type { Transaction } from "@ledgerhq/live-common/lib/types";
+import type {
+  Transaction,
+  TokenCurrency,
+} from "@ledgerhq/live-common/lib/types";
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { accountScreenSelector } from "../../../../reducers/accounts";
@@ -35,9 +38,11 @@ type Props = {
 type RouteParams = {
   accountId: string,
   transaction: Transaction,
+  currency: TokenCurrency,
 };
 
 export default function SendAmount({ navigation, route }: Props) {
+  const { currency } = route.params;
   const { account, parentAccount } = useSelector(accountScreenSelector(route));
   invariant(
     account && account.type === "TokenAccount",
@@ -96,7 +101,11 @@ export default function SendAmount({ navigation, route }: Props) {
 
   return (
     <>
-      <TrackScreen category="LendingEnableFlow" name="AmountInput" />
+      <TrackScreen
+        category="Lend Approve"
+        name="step 1 (Amount)"
+        eventProperties={{ currencyName: currency.name }}
+      />
       <SafeAreaView style={styles.root}>
         <KeyboardView style={styles.container}>
           <TouchableWithoutFeedback onPress={blur}>

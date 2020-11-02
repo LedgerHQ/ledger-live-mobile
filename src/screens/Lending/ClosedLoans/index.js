@@ -29,7 +29,7 @@ export default function ClosedLoans() {
 
   return (
     <SafeAreaView style={[styles.root]}>
-      <TrackScreen category="Lending" />
+      <TrackScreen category="Lend" name="Closed Positions" />
       <View style={styles.body}>
         <View style={styles.rows}>
           <FlatList

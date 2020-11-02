@@ -1,6 +1,6 @@
 // @flow
 import React, { useMemo, useCallback } from "react";
-import { TouchableOpacity, View, StyleSheet, FlatList } from "react-native";
+import { View, StyleSheet, FlatList } from "react-native";
 import { BigNumber } from "bignumber.js";
 import { Trans } from "react-i18next";
 import type { AccountLikeArray } from "@ledgerhq/live-common/lib/types";
@@ -10,6 +10,7 @@ import { useNavigation } from "@react-navigation/native";
 import LText from "../../../components/LText";
 import CurrencyUnitValue from "../../../components/CurrencyUnitValue";
 import CurrencyIcon from "../../../components/CurrencyIcon";
+import Touchable from "../../../components/Touchable";
 import colors from "../../../colors";
 import { NavigatorName, ScreenName } from "../../../const";
 
@@ -41,7 +42,12 @@ const Row = ({
   }, [token.id, accounts]);
 
   return (
-    <TouchableOpacity style={styles.row} onPress={navigateToEnableFlow}>
+    <Touchable
+      style={styles.row}
+      onPress={navigateToEnableFlow}
+      event="Page Lend deposit"
+      eventProperties={{ currency: token.id }}
+    >
       <CurrencyIcon radius={100} currency={token} size={32} />
       <View style={styles.currencySection}>
         <LText semiBold style={styles.title}>
@@ -61,7 +67,7 @@ const Row = ({
           values={{ value: supplyAPY }}
         />
       </LText>
-    </TouchableOpacity>
+    </Touchable>
   );
 };
 

@@ -208,7 +208,11 @@ function LendingEnableSelectAccount({ route, navigation }: Props) {
   );
   return (
     <SafeAreaView style={styles.root}>
-      <TrackScreen category="LendingEnableFlow" name="SelectAccount" />
+      <TrackScreen
+        category="Lend Approve"
+        name="Select Account"
+        eventProperties={{ currencyName: currency.name }}
+      />
       <LendingWarnings />
       <ConfirmationModal
         isOpened={!!approveInfoModalOpen}

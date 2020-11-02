@@ -82,7 +82,7 @@ export default function SupplyAmount({ navigation, route }: Props) {
         bridgeError={bridgeError}
         max={account.spendableBalance}
         onContinue={onContinue}
-        category={"LendingSupplyFlow"}
+        category={"Lend Supply"}
       />
     </>
   );

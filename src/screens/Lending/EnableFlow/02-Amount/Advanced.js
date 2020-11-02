@@ -111,7 +111,11 @@ export default function EnableAdvanced({ navigation, route }: Props) {
 
   return (
     <>
-      <TrackScreen category="LendingEnableFlow" name="Amount" />
+      <TrackScreen
+        category="Lend Approve"
+        name="step 1 (Advanced)"
+        eventProperties={{ currencyName: currency.name }}
+      />
       <SafeAreaView style={styles.root}>
         <View style={styles.container}>
           <View style={styles.row}>

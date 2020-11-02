@@ -66,7 +66,7 @@ export default function History() {
 
   return (
     <SafeAreaView style={[styles.root]}>
-      <TrackScreen category="Lending" />
+      <TrackScreen category="Lend" name="History" />
       <View style={styles.body}>
         {/** $FlowFixMe */}
         <SectionList

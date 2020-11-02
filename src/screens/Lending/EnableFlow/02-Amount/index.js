@@ -145,7 +145,11 @@ export default function SendAmount({ navigation, route }: Props) {
 
   return (
     <>
-      <TrackScreen category="LendingEnableFlow" name="Amount" />
+      <TrackScreen
+        category="Lend Approve"
+        name="step 1"
+        eventProperties={{ currencyName: currency.name }}
+      />
       <LendingWarnings />
       <SafeAreaView style={styles.root}>
         <View style={styles.container}>

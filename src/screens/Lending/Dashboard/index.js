@@ -22,7 +22,7 @@ export default function Dashboard() {
 
   return (
     <SafeAreaView style={[styles.root]}>
-      <TrackScreen category="Lending" />
+      <TrackScreen category="Lend" />
       <LendingWarnings />
       <View style={styles.body}>
         <LText style={styles.title} semiBold>

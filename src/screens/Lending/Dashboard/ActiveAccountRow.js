@@ -113,7 +113,8 @@ export default function ActiveAccountRow({ item }: RowProps) {
             <Plus size={24} color={colors.live} />
           </Circle>
         ),
-        event: "Lending ActiveAccounts Modal Enable",
+        event: "Lend Approve Manage ActiveAccounts",
+        eventProperties: { currencyName: currency.name },
         disabled: false,
         onPress: () => {
           onCloseDrawer();
@@ -139,7 +140,8 @@ export default function ActiveAccountRow({ item }: RowProps) {
             <Supply size={24} color={!canSupply ? colors.grey : colors.live} />
           </Circle>
         ),
-        event: "Lending ActiveAccounts Modal Supply",
+        event: "Lend Supply Manage ActiveAccounts",
+        eventProperties: { currencyName: currency.name },
         disabled: !canSupply,
         onPress: () => {
           onCloseDrawer();
@@ -168,7 +170,8 @@ export default function ActiveAccountRow({ item }: RowProps) {
             />
           </Circle>
         ),
-        event: "Lending ActiveAccounts Modal Withdraw",
+        event: "Lend Withdraw Manage ActiveAccounts",
+        eventProperties: { currencyName: currency.name },
         disabled: !canWithdraw,
         onPress: () => {
           onCloseDrawer();

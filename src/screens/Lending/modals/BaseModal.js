@@ -5,6 +5,7 @@ import { Trans } from "react-i18next";
 import LText from "../../../components/LText";
 import Button from "../../../components/Button";
 import colors from "../../../colors";
+import { TrackScreen } from "../../../analytics";
 
 type Props = {
   illustration: React$Node,
@@ -16,6 +17,7 @@ type Props = {
   onNext: () => {},
   disabled?: boolean,
   header?: React$Node,
+  event?: string,
 };
 
 export default function BaseInfoModal({
@@ -28,9 +30,11 @@ export default function BaseInfoModal({
   onNext,
   disabled,
   header,
+  event,
 }: Props) {
   return (
     <View style={styles.root}>
+      {event && <TrackScreen category="Lend" name={event} />}
       {header}
       <View style={styles.topSection}>{illustration}</View>
       <ScrollView style={styles.bottomSection}>

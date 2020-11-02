@@ -41,7 +41,7 @@ export default function WithdrawAmount({ navigation, route }: Props) {
   const bridge = getAccountBridge(account, parentAccount);
   const ctoken = findCompoundToken(account.token);
   const unit = getAccountUnit(account);
-  const tokenUnit = ctoken.units[0];
+  const tokenUnit = ctoken?.units[0];
 
   const {
     transaction,
@@ -127,7 +127,7 @@ export default function WithdrawAmount({ navigation, route }: Props) {
         max={max}
         onChangeSendMax={onChangeSendMax}
         onContinue={onContinue}
-        category={"LendingWithdrawFlow"}
+        category={"Lend Withdraw"}
       />
     </>
   );

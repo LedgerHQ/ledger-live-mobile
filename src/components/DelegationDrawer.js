@@ -157,6 +157,7 @@ type Action = {
   label: React$Node,
   Icon: string | ComponentType<IconProps>,
   event: string,
+  eventProperties?: *,
   disabled?: boolean,
   onPress: () => void,
 };
@@ -167,11 +168,19 @@ export type IconProps = {
   bg?: string,
 };
 
-function ActionButton({ label, Icon, event, onPress, disabled }: Action) {
+function ActionButton({
+  label,
+  Icon,
+  event,
+  eventProperties,
+  onPress,
+  disabled,
+}: Action) {
   return (
     <Touchable
       disabled={disabled}
       event={event}
+      eventProperties={eventProperties}
       style={styles.actionButtonWrapper}
       onPress={onPress}
     >

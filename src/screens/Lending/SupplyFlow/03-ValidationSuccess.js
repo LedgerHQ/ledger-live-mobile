@@ -1,7 +1,7 @@
 /* @flow */
 import React, { useCallback } from "react";
 import { View, StyleSheet } from "react-native";
-import type { Operation } from "@ledgerhq/live-common/lib/types";
+import type { Operation, TokenCurrency } from "@ledgerhq/live-common/lib/types";
 import { Trans } from "react-i18next";
 import { useSelector } from "react-redux";
 import { TrackScreen } from "../../../analytics";
@@ -21,6 +21,7 @@ type RouteParams = {
   deviceId: string,
   transaction: any,
   result: Operation,
+  currency: TokenCurrency,
 };
 
 export default function ValidationSuccess({ navigation, route }: Props) {
@@ -45,9 +46,15 @@ export default function ValidationSuccess({ navigation, route }: Props) {
     });
   }, [account, route.params?.result, navigation, parentAccount]);
 
+  const { currency } = route.params;
+
   return (
     <View style={styles.root}>
-      <TrackScreen category="LendingSupplyFlow" name="ValidationSuccess" />
+      <TrackScreen
+        category="Lend Supply"
+        name="Success"
+        eventProperties={{ currencyName: currency.name }}
+      />
       <PreventNativeBack />
       <ValidateSuccess
         title={<Trans i18nKey="transfer.lending.supply.validation.success" />}

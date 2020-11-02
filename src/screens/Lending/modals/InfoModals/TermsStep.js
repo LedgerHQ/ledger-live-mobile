@@ -1,6 +1,12 @@
 // $flow
 import React, { useCallback, useState } from "react";
-import { View, StyleSheet, Image, Linking } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Image,
+  Linking,
+  TouchableOpacity,
+} from "react-native";
 import { Trans } from "react-i18next";
 import { useNavigation } from "@react-navigation/native";
 import BaseInfoModal from "../BaseModal";
@@ -50,15 +56,12 @@ export default function TermsStep({ route: { params } }: Props) {
       onNext={onNext}
     >
       <View style={styles.footer}>
-        <Touchable
-          event="LendingTermsAcceptSwitch"
-          onPress={onTogleAcceptedTerms}
-        >
+        <TouchableOpacity onPress={onTogleAcceptedTerms}>
           <CheckBox isChecked={hasAcceptedTerms} />
-        </Touchable>
+        </TouchableOpacity>
 
         <Touchable
-          event="LendingTermsConditions"
+          event="Page Lend TC accepted"
           style={styles.switchRow}
           onPress={onTermsClick}
         >
