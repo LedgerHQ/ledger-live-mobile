@@ -1,7 +1,7 @@
 /* @flow */
 import invariant from "invariant";
 import { BigNumber } from "bignumber.js";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import { View, StyleSheet, FlatList, SafeAreaView } from "react-native";
 import { useSelector } from "react-redux";
 import { Trans } from "react-i18next";
@@ -62,6 +62,16 @@ function LendingEnableSelectAccount({ route, navigation }: Props) {
     ({ account }) =>
       account.type === "TokenAccount" && !isAccountEmpty(account),
   );
+
+  useEffect(() => {
+    if (!filteredAccounts.length) {
+      const n = navigation.dangerouslyGetParent() || navigation;
+      n.replace(NavigatorName.AddAccounts, {
+        screen: ScreenName.AddAccountsTokenCurrencyDisclaimer,
+        params: { token: currency },
+      });
+    }
+  }, [currency, filteredAccounts, navigation]);
 
   filteredAccounts.some(({ account }) => {
     const { enabledAmount, enabledAmountIsUnlimited } =
