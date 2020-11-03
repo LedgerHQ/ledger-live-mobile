@@ -18,6 +18,8 @@ export const urls = {
     "https://support.ledger.com/hc/en-us/articles/115005197845-Manage-ERC20-tokens",
   errors: {
     PairingFailed: "https://support.ledger.com/hc/en-us/articles/360025864773",
+    BitcoinCashHardforkOct2020Warning:
+      "https://www.ledger.com/bitcoin-cash-fork-15-november-2020-what-it-means-for-you",
   },
   multipleAddresses:
     "https://support.ledger.com/hc/en-us/articles/360033802154",
@@ -32,8 +34,27 @@ export const urls = {
       "https://support.ledger.com/hc/en-us/articles/115005197845-Manage-ERC20-tokens",
     trc10: "https://support.ledger.com/hc/en-us/articles/360013062159",
     trc20: "https://support.ledger.com/hc/en-us/articles/360013062159",
+    asa: "https://support.ledger.com/hc/en-us/articles/360015896040",
   },
   cosmosStaking: "https://www.ledger.com/staking-cosmos",
   cosmosStakingRewards:
     "https://support.ledger.com/hc/en-us/articles/360014339340-Earn-Cosmos-staking-rewards",
+  algorandStaking: "https://support.ledger.com/hc/en-us/articles/360015897740",
+  swap: {
+    info: "https://www.ledger.com/swap",
+    learnMore: "https://www.ledger.com/swap",
+    providers: {
+      changelly: {
+        main: "https://changelly.com/",
+        tos: "https://changelly.com/terms-of-use",
+      },
+    },
+  },
+  // Banners
+  banners: {
+    backupPack:
+      "https://shop.ledger.com/products/ledger-backup-pack?utm_source=ledger_live&utm_medium=self_referral&utm_content=banner_desktop=banner_desktop",
+    ledgerAcademy:
+      "https://www.ledger.com/academy/?utm_source=ledger_live&utm_medium=self_referral&utm_content=banner_desktop",
+  },
 };

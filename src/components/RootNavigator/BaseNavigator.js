@@ -29,11 +29,15 @@ import ImportAccountsNavigator from "./ImportAccountsNavigator";
 import PasswordAddFlowNavigator from "./PasswordAddFlowNavigator";
 import PasswordModifyFlowNavigator from "./PasswordModifyFlowNavigator";
 import MigrateAccountsFlowNavigator from "./MigrateAccountsFlowNavigator";
+import SwapNavigator from "./SwapNavigator";
 import { closableStackNavigatorConfig } from "../../navigation/navigatorConfig";
+import Account from "../../screens/Account";
 import TransparentHeaderNavigationOptions from "../../navigation/TransparentHeaderNavigationOptions";
 import colors from "../../colors";
 import HeaderRightClose from "../HeaderRightClose";
 import StepHeader from "../StepHeader";
+import AccountHeaderTitle from "../../screens/Account/AccountHeaderTitle";
+import AccountHeaderRight from "../../screens/Account/AccountHeaderRight";
 
 export default function BaseNavigator() {
   const { t } = useTranslation();
@@ -52,6 +56,11 @@ export default function BaseNavigator() {
       <Stack.Screen
         name={NavigatorName.SendFunds}
         component={SendFundsNavigator}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name={NavigatorName.Swap}
+        component={SwapNavigator}
         options={{ headerShown: false }}
       />
       <Stack.Screen
@@ -82,6 +91,7 @@ export default function BaseNavigator() {
       <Stack.Screen
         name={NavigatorName.Exchange}
         component={ExchangeNavigator}
+        options={{ headerLeft: null }}
       />
       <Stack.Screen
         name={NavigatorName.ExchangeBuyFlow}
@@ -181,6 +191,17 @@ export default function BaseNavigator() {
         }}
       />
       <Stack.Screen
+        name={ScreenName.Account}
+        component={Account}
+        options={({ route, navigation }) => ({
+          headerLeft: () => (
+            <BackButton navigation={navigation} route={route} />
+          ),
+          headerTitle: () => <AccountHeaderTitle />,
+          headerRight: () => <AccountHeaderRight />,
+        })}
+      />
+      <Stack.Screen
         name={ScreenName.ScanRecipient}
         component={ScanRecipient}
         options={{
@@ -200,7 +221,6 @@ export default function BaseNavigator() {
           headerLeft: null,
         }}
       />
-
       {Object.keys(families).map(name => {
         const { component, options } = families[name];
         return (

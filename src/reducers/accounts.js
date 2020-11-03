@@ -11,6 +11,7 @@ import {
   importAccountsReduce,
   isUpToDateAccount,
   withoutToken,
+  clearAccount,
 } from "@ledgerhq/live-common/lib/account";
 import accountModel from "../logic/accountModel";
 
@@ -69,18 +70,17 @@ const handlers: Object = {
   }),
 
   CLEAN_CACHE: (state: AccountsState): AccountsState => ({
-    active: state.active.map(account => ({
-      ...account,
-      lastSyncDate: new Date(0),
-      operations: [],
-      pendingOperations: [],
-    })),
+    active: state.active.map(clearAccount),
   }),
 
   BLACKLIST_TOKEN: (
     state: AccountsState,
     { payload: tokenId }: { payload: string },
   ) => ({ active: state.active.map(a => withoutToken(a, tokenId)) }),
+
+  DANGEROUSLY_OVERRIDE_STATE: (state: AccountsState): AccountsState => ({
+    ...state,
+  }),
 };
 
 // Selectors
@@ -153,15 +153,19 @@ export const accountScreenSelector = (route: any) => (state: any) => {
   const { accountId, parentId } = route.params;
   const parentAccount: ?Account =
     parentId && accountSelector(state, { accountId: parentId });
-  let account: ?AccountLike;
-  if (parentAccount) {
-    const { subAccounts } = parentAccount;
-    if (subAccounts) {
-      account = subAccounts.find(t => t.id === accountId);
+  let account: ?AccountLike = route.params.account;
+
+  if (!account) {
+    if (parentAccount) {
+      const { subAccounts } = parentAccount;
+      if (subAccounts) {
+        account = subAccounts.find(t => t.id === accountId);
+      }
+    } else {
+      account = accountSelector(state, { accountId });
     }
-  } else {
-    account = accountSelector(state, { accountId });
   }
+
   return { parentAccount, account };
 };
 

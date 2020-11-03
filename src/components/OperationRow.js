@@ -80,13 +80,17 @@ export default function OperationRow({
       ? perFamilyOperationDetails[mainAccount.currency.family]
       : null;
 
-    const Element =
+    const SpecificAmountCell =
       specific && specific.amountCell
         ? specific.amountCell[operation.type]
         : null;
 
-    return Element ? (
-      <Element operation={operation} unit={unit} currency={currency} />
+    return SpecificAmountCell ? (
+      <SpecificAmountCell
+        operation={operation}
+        unit={unit}
+        currency={currency}
+      />
     ) : null;
   }, [account, parentAccount, operation]);
 
@@ -155,7 +159,7 @@ export default function OperationRow({
           {amount.isZero() ? null : (
             <View style={styles.bodyRight}>
               <LText
-                tertiary
+                semiBold
                 numberOfLines={1}
                 style={[styles.bodyRight, styles.topRow, { color: valueColor }]}
               >
@@ -185,7 +189,7 @@ export default function OperationRow({
 }
 
 const OpCounterValue = ({ children }: { children: React$Node }) => (
-  <LText tertiary numberOfLines={1} style={styles.bottomRow}>
+  <LText semiBold numberOfLines={1} style={styles.bottomRow}>
     {children}
   </LText>
 );
@@ -246,8 +250,8 @@ const styles = StyleSheet.create({
     alignItems: "flex-end",
     flexDirection: "column",
     justifyContent: "flex-start",
-    flexShrink: 1,
-    paddingLeft: 10,
+    flexShrink: 0,
+    paddingLeft: 6,
   },
   spinner: {
     height: 14,

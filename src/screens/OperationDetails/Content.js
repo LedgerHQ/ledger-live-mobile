@@ -62,10 +62,6 @@ type Props = {
 export default function Content({ account, parentAccount, operation }: Props) {
   const navigation = useNavigation();
   const { t } = useTranslation();
-  const currencySettings = useSelector(s =>
-    currencySettingsForAccountSelector(s, { account }),
-  );
-
   const [isModalOpened, setIsModalOpened] = useState(false);
 
   const onPress = useCallback(() => {
@@ -89,6 +85,9 @@ export default function Content({ account, parentAccount, operation }: Props) {
   }, []);
 
   const mainAccount = getMainAccount(account, parentAccount);
+  const currencySettings = useSelector(s =>
+    currencySettingsForAccountSelector(s, { account: mainAccount }),
+  );
   const currency = getAccountCurrency(account);
   const isToken = currency.type === "TokenCurrency";
   const unit = getAccountUnit(account);
@@ -136,7 +135,7 @@ export default function Content({ account, parentAccount, operation }: Props) {
 
         {hasFailed || amount.isZero() ? null : (
           <LText
-            tertiary
+            semiBold
             numberOfLines={1}
             style={[styles.currencyUnitValue, { color: valueColor }]}
           >
@@ -151,7 +150,7 @@ export default function Content({ account, parentAccount, operation }: Props) {
         )}
 
         {hasFailed || amount.isZero() ? null : (
-          <LText tertiary style={styles.counterValue}>
+          <LText semiBold style={styles.counterValue}>
             <CounterValue
               showCode
               alwaysShowSign
@@ -284,7 +283,7 @@ export default function Content({ account, parentAccount, operation }: Props) {
         })}
       />
 
-      {isNegative ? (
+      {isNegative || operation.fee ? (
         <Section
           title={t("operationDetails.fees")}
           headerRight={

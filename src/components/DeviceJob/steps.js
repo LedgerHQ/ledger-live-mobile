@@ -5,12 +5,17 @@ import { View, StyleSheet } from "react-native";
 import last from "lodash/last";
 import { Trans, useTranslation } from "react-i18next";
 import { from, of } from "rxjs";
-import { map, first } from "rxjs/operators";
+import { map, first, retryWhen } from "rxjs/operators";
 import { useNavigation } from "@react-navigation/native";
-import type { CryptoCurrency, Account } from "@ledgerhq/live-common/lib/types";
+import type {
+  CryptoCurrency,
+  Account,
+  Transaction,
+} from "@ledgerhq/live-common/lib/types";
 import { getDeviceModel } from "@ledgerhq/devices";
 import getAddress from "@ledgerhq/live-common/lib/hw/getAddress";
-import { WrongDeviceForAccount, CantOpenDevice } from "@ledgerhq/errors";
+import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
+import { CantOpenDevice } from "@ledgerhq/errors";
 import {
   getDerivationScheme,
   runDerivationScheme,
@@ -19,12 +24,19 @@ import {
 import {
   withDevice,
   withDevicePolling,
+  retryWhileErrors,
+  genericCanRetryOnError,
 } from "@ledgerhq/live-common/lib/hw/deviceAccess";
 import getDeviceInfo from "@ledgerhq/live-common/lib/hw/getDeviceInfo";
 import getDeviceNameTransport from "@ledgerhq/live-common/lib/hw/getDeviceName";
 import editDeviceNameTransport from "@ledgerhq/live-common/lib/hw/editDeviceName";
 import checkDeviceForManager from "@ledgerhq/live-common/lib/hw/checkDeviceForManager";
 import { listApps as listAppsTransport } from "@ledgerhq/live-common/lib/apps/hw";
+import { initSwap } from "@ledgerhq/live-common/lib/swap";
+import type {
+  Exchange,
+  ExchangeRate,
+} from "@ledgerhq/live-common/lib/swap/types";
 import type { SocketEvent } from "@ledgerhq/live-common/lib/types/manager";
 import BluetoothScanning from "../BluetoothScanning";
 import DeviceNanoAction from "../DeviceNanoAction";
@@ -42,7 +54,7 @@ import { RenderStep } from "./StepRenders";
 import DisplayAddress from "../DisplayAddress";
 
 const inferWordingValues = meta => {
-  const deviceModel = getDeviceModel(meta.modelId);
+  const deviceModel = meta.modelId ? getDeviceModel(meta.modelId) : {};
   return {
     productName: deviceModel.productName,
     deviceName: meta.deviceName,
@@ -327,37 +339,29 @@ export const accountApp: Account => Step = account => ({
     );
   },
   run: meta =>
-    // $FlowFixMe
-    withDevicePolling(meta.deviceId)(transport =>
-      from(
-        account.id.startsWith("mock")
-          ? [
-              {
-                ...meta,
-                addressInfo: { address: account.freshAddress },
-              },
-            ]
-          : getAddress(transport, {
-              derivationMode: account.derivationMode,
-              currency: account.currency,
-              path: account.freshAddressPath,
-            }).then(addressInfo => {
-              if (addressInfo.address !== account.freshAddress) {
-                throw new WrongDeviceForAccount("WrongDeviceForAccount", {
-                  accountName: account.name,
-                });
-              }
+    account.id.startsWith("mock")
+      ? withDevicePolling(meta.deviceId)(() =>
+          from([
+            {
+              ...meta,
+              addressInfo: { address: account.freshAddress },
+            },
+          ]),
+        )
+      : getAccountBridge(account)
+          .receive(account, {
+            deviceId: meta.deviceId,
+          })
+          .pipe(
+            map(addressInfo => {
               return {
                 ...meta,
                 addressInfo,
               };
             }),
-      ),
-    ).pipe(
-      rejectionOp(
-        () => new WrongDeviceForAccount("", { accountName: account.name }),
-      ),
-    ),
+            // $FlowFixMe
+            retryWhen(retryWhileErrors(genericCanRetryOnError)),
+          ),
 });
 
 export const receiveVerifyStep: Account => Step = account => ({
@@ -439,16 +443,16 @@ export const verifyAddressOnDeviceStep: Account => Step = account => ({
   ),
 
   run: meta =>
-    withDevice(meta.deviceId)(transport =>
-      from(
-        getAddress(transport, {
-          derivationMode: account.derivationMode,
-          currency: account.currency,
-          path: account.freshAddressPath,
-          verify: true,
-        }),
+    getAccountBridge(account)
+      .receive(account, {
+        deviceId: meta.deviceId,
+        verify: true,
+      })
+      .pipe(
+        map(addressInfo => addressInfo),
+        // $FlowFixMe
+        retryWhen(retryWhileErrors(genericCanRetryOnError)),
       ),
-    ),
 });
 
 export const getDeviceName: Step = {
@@ -498,4 +502,29 @@ export const editDeviceName: string => Step = deviceName => ({
     withDevice(meta.deviceId)(transport =>
       from(editDeviceNameTransport(transport, deviceName).then(() => meta)),
     ),
+});
+
+export const initSwapStep: ({
+  exchange: Exchange,
+  exchangeRate: ExchangeRate,
+  transaction: Transaction,
+}) => Step = ({ exchange, exchangeRate, transaction }) => ({
+  Body: ({ meta }: *) => (
+    <RenderStep
+      icon={
+        <DeviceNanoAction
+          width={240}
+          action="accept"
+          screen="validation"
+          modelId={meta.modelId}
+          wired={meta.wired}
+        />
+      }
+      title={<Trans i18nKey="transfer.swap.form.validate" />}
+    />
+  ),
+
+  run: meta => {
+    return initSwap(exchange, exchangeRate, transaction, meta.deviceId);
+  },
 });
