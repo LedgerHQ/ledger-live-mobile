@@ -19,6 +19,7 @@ import type {
 } from "@ledgerhq/live-common/lib/types";
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
+import { useSupplyMaxChoiceButtons } from "@ledgerhq/live-common/lib/compound/react";
 import { accountScreenSelector } from "../../../reducers/accounts";
 import colors from "../../../colors";
 import { TrackScreen } from "../../../analytics";
@@ -115,28 +116,12 @@ export default function AmountScreen({
     [blur, onChange],
   );
 
-  const amountButtons = useMemo(
-    () =>
-      !onChangeSendMax && [
-        {
-          label: "25%",
-          value: max.multipliedBy(0.25),
-        },
-        {
-          label: "50%",
-          value: max.multipliedBy(0.5),
-        },
-        {
-          label: "75%",
-          value: max.multipliedBy(0.75),
-        },
-        {
-          label: "100%",
-          value: max,
-        },
-      ],
-    [max, onChangeSendMax],
-  );
+  const maxChoiceButtons = useSupplyMaxChoiceButtons(max);
+
+  const amountButtons = useMemo(() => !onChangeSendMax && maxChoiceButtons, [
+    maxChoiceButtons,
+    onChangeSendMax,
+  ]);
 
   const { amount, useAllAmount } = transaction;
   const unit = getAccountUnit(account);

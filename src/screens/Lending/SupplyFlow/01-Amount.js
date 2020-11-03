@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import type { TokenCurrency } from "@ledgerhq/live-common/lib/types";
 import { findCompoundToken } from "@ledgerhq/live-common/lib/currencies";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
+import { useSupplyMax } from "@ledgerhq/live-common/lib/compound/react";
 import { accountScreenSelector } from "../../../reducers/accounts";
 import { ScreenName } from "../../../const";
 
@@ -30,6 +31,8 @@ export default function SupplyAmount({ navigation, route }: Props) {
     "token account required",
   );
 
+  const max = useSupplyMax(account);
+
   const {
     transaction,
     setTransaction,
@@ -47,7 +50,7 @@ export default function SupplyAmount({ navigation, route }: Props) {
       recipient: ctoken?.contractAddress || "",
       mode: "compound.supply",
       subAccountId: account.id,
-      amount: account.spendableBalance,
+      amount: max,
       gasPrice: null,
       userGasLimit: null,
     });
@@ -80,7 +83,7 @@ export default function SupplyAmount({ navigation, route }: Props) {
         status={status}
         bridgePending={bridgePending}
         bridgeError={bridgeError}
-        max={account.spendableBalance}
+        max={max}
         onContinue={onContinue}
         category={"Lend Supply"}
       />
