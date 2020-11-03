@@ -16,7 +16,7 @@ import BackupPack from "./slides/BackupPack";
 import StakeCosmos from "./slides/StakeCosmos";
 import StakeAlgo from "./slides/StakeAlgo";
 import Lending from "./slides/Lending";
-import BlackFriday from "./slides/BlackFriday";
+// import BlackFriday from "./slides/BlackFriday";
 // import Sell from "./slides/Sell";
 // import Vote from "./slides/Vote";
 import Swap from "./slides/Swap";
@@ -53,12 +53,12 @@ export const getDefaultSlides = () => {
       id: "lending",
       Component: () => <Lending />,
     },
-    {
-      id: "blackfriday",
-      Component: () => <BlackFriday />,
-      start: new Date("1 Nov 2020 00:01:00 PST"),
-      end: new Date("30 Nov 2020 23:59:00 PST"),
-    },
+    // {
+    //   id: "blackfriday",
+    //   Component: () => <BlackFriday />,
+    //   start: new Date("1 Nov 2020 00:01:00 PST"),
+    //   end: new Date("30 Nov 2020 23:59:00 PST"),
+    // },
     // TODO enable when ready
     // {
     //   id: "sell",
