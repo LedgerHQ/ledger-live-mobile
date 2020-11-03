@@ -1012,7 +1012,7 @@
       }
     },
     "availableBalance": "Available balance",
-    "totalSupplied": "Amount supplied",
+    "totalSupplied": "Amount deposited",
     "tronFrozen": "Frozen",
     "bandwidth": "Bandwidth",
     "energy": "Energy",
@@ -1419,14 +1419,14 @@
         "description": "Due to congestion on the Ethereum network, you may experience high fees when issuing transactions."
       },
       "account": {
-        "amountSupplied": "Amount supplied",
+        "amountSupplied": "Amount deposited",
         "amountSuppliedTooltip": "Amount lent to the network",
         "currencyAPY": "Currency APY",
-        "currencyAPYTooltip": "Actual return rate of a supply by the end of the year if the deposit is continuously compounded.",
-        "accruedInterests": "Accrued interests",
-        "accruedInterestsTooltip": "Interest being generated",
+        "currencyAPYTooltip": "Yearly return rate of a deposit that’s continuously compounded",
+        "accruedInterests": "Accrued interest",
+        "accruedInterestsTooltip": "Interest generated on your lent assets",
         "interestEarned": "Interest earned",
-        "interestEarnedTooltip": "All time interest earned during lending",
+        "interestEarnedTooltip": "Interest you have earned after withdrawal",
         "openLoans": "Open loans",
         "closedLoans": "Closed loans"
       },
@@ -1434,20 +1434,20 @@
         "needApproval": "You need to approve this account before being able to lend assets.",
         "fullyApproved": "You have fully approved this account. You can reduce the amount at a fee.",
         "approvedCanReduce": "You have approved <0>{{value}}</0> on this account. You can reduce the amount at a fee.",
-        "approvedButNotEnough": "You have approved <0>{{value}}</0> on this account. ",
-        "approving": "The approval transaction allowing you to lend is pending.",
-        "notEnough": "You don't have enough balance approved to supply all your assets."
+        "approvedButNotEnough": "You have approved <0>{{value}}</0> on this account.",
+        "approving": "You can deposit assets once the account approval is confirmed.",
+        "notEnough": "You must increase the limit approved on your account to lend."
       },
       "howDoesLendingWork": "How does lending works",
       "dashboard": {
         "tabTitle": "Dashboard",
         "assetsTitle": "Assets to lend",
         "accountsTitle": "Active accounts",
-        "emptySateDescription": "You can lend assets directly from your Ethereum accounts and earn passive revenue.",
+        "emptySateDescription": "You can lend assets directly from your Ethereum accounts and earn interest.",
         "apy": "{{value}} APY",
         "activeAccount": {
           "account": "Account",
-          "amountSupplied": "Amount supplied",
+          "amountSupplied": "Amount deposited",
           "interestEarned": "Interest earned",
           "status": "Status",
           "EARNING": "Earning",
@@ -1457,7 +1457,7 @@
           "approve": "Approve",
           "supply": "Supply",
           "withdraw": "Withdraw",
-          "amountRedeemed": "Amount redeemed",
+          "amountRedeemed": "Amount withdrawn",
           "endDate": "End date"
         }
       },
@@ -1475,7 +1475,7 @@
         "label": "Lend crypto",
         "title": "Lend asset on the Compound Protocol",
         "description": "Compound Protocol allows you to lend and borrow assets on the blockchain.  You can lend assets and earn interests directly from Ledger Live.",
-        "switchLabel": "I have read, understand and accept the <0>terms and conditions</0>"
+        "switchLabel": "I have read and agree with the <0>Terms of Use</0>."
       },
       "info": {
         "title": "Lend crypto",

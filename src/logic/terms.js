@@ -8,7 +8,7 @@ export const url =
   "https://github.com/LedgerHQ/ledger-live-mobile/blob/master/TERMS.md";
 
 const currentTermsRequired = "2019-12-04";
-const currentLendingTermsRequired = "2019-12-04";
+const currentLendingTermsRequired = "2020-11-10";
 
 export async function isAcceptedTerms() {
   const acceptedTermsVersion = await AsyncStorage.getItem(

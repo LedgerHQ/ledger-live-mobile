@@ -219,7 +219,7 @@ export const subAccountByCurrencyOrderedSelector: OutputSelector<
 export const subAccountByCurrencyOrderedScreenSelector = (route: any) => (
   state: any,
 ) => {
-  const currency = route?.params?.currency;
+  const currency = route?.params?.currency || {};
   if (!currency) return [];
   return subAccountByCurrencyOrderedSelector(state, { currency });
 };
