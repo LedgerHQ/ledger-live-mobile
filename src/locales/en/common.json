@@ -639,6 +639,14 @@
       "vote": {
         "title": "Vote with your ledger",
         "description": "Vote directly from your Ledger Wallet."
+      },
+      "lending": {
+        "title": "Lend Crypto",
+        "description": "Lend stablecoins to the Compound protocol"
+      },
+      "blackfriday": {
+        "title": "BLACK FRIDAY ",
+        "description": "Enjoy 40% off with promo code BLACKFRIDAY20"
       }
     }
   },

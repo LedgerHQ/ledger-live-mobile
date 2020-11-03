@@ -15,6 +15,8 @@ import BuyCrypto from "./slides/BuyCrypto";
 import BackupPack from "./slides/BackupPack";
 import StakeCosmos from "./slides/StakeCosmos";
 import StakeAlgo from "./slides/StakeAlgo";
+import Lending from "./slides/Lending";
+import BlackFriday from "./slides/BlackFriday";
 // import Sell from "./slides/Sell";
 // import Vote from "./slides/Vote";
 import Swap from "./slides/Swap";
@@ -47,6 +49,16 @@ export const getDefaultSlides = () => {
       id: "stakeAlgo",
       Component: () => <StakeAlgo />,
     },
+    {
+      id: "lending",
+      Component: () => <Lending />,
+    },
+    {
+      id: "blackfriday",
+      Component: () => <BlackFriday />,
+      start: new Date("1 Nov 2020 00:01:00 PST"),
+      end: new Date("30 Nov 2020 23:59:00 PST"),
+    },
     // TODO enable when ready
     // {
     //   id: "sell",
@@ -59,7 +71,6 @@ export const getDefaultSlides = () => {
   ];
 };
 
-const slides = getDefaultSlides();
 const hitSlop = {
   top: 16,
   left: 16,
@@ -73,6 +84,17 @@ const Carousel = () => {
   const dispatch = useDispatch();
   const hidden = useSelector(carouselVisibilitySelector);
   const [showDismissConfirmation, setShowDismissConfirmation] = useState(false);
+
+  let slides = getDefaultSlides();
+  slides = slides.filter(slide => {
+    if (slide.start && slide.start > new Date()) {
+      return false;
+    }
+    if (slide.end && slide.end < new Date()) {
+      return false;
+    }
+    return true;
+  });
 
   const onDismiss = useCallback(() => setShowDismissConfirmation(true), []);
 
