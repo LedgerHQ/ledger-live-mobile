@@ -1,6 +1,6 @@
 /* @flow */
 import React, { useCallback } from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Linking } from "react-native";
 import type { Operation, TokenCurrency } from "@ledgerhq/live-common/lib/types";
 import { Trans } from "react-i18next";
 import { TrackScreen } from "../../../analytics";
@@ -8,6 +8,7 @@ import colors from "../../../colors";
 import PreventNativeBack from "../../../components/PreventNativeBack";
 import ValidateSuccess from "../../../components/ValidateSuccess";
 import UpdateIcon from "../../../icons/Update";
+import { urls } from "../../../config/urls";
 
 type Props = {
   navigation: any,
@@ -47,7 +48,7 @@ export default function ValidationSuccess({ navigation, route }: Props) {
         }
         info={<Trans i18nKey="transfer.lending.enable.validation.extraInfo" />}
         onLearnMore={() => {
-          /** @TODO redirect to support page */
+          Linking.openURL(urls.approvedOperation);
         }}
         onClose={onClose}
       />

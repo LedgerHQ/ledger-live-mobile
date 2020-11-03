@@ -1,11 +1,12 @@
 // @flow
 
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Linking } from "react-native";
 import { Trans } from "react-i18next";
 import LText from "../../../components/LText";
 import ExternalLink from "../../../components/ExternalLink";
 import colors from "../../../colors";
+import { urls } from "../../../config/urls";
 
 const EmptyState = () => {
   return (
@@ -17,7 +18,7 @@ const EmptyState = () => {
         text={<Trans i18nKey="transfer.lending.howDoesLendingWork" />}
         event="Lending Support Link Click"
         onPress={() => {
-          /** @TODO link to support page */
+          Linking.openURL(urls.compound);
         }}
       />
     </View>

@@ -16,7 +16,8 @@ import CheckBox from "../../../../components/CheckBox";
 import LText from "../../../../components/LText";
 import termsImg from "../../../../images/lending-terms.png";
 import { ScreenName } from "../../../../const";
-import { acceptLendingTerms, LendingUrl } from "../../../../logic/terms";
+import { acceptLendingTerms } from "../../../../logic/terms";
+import { urls } from "../../../../config/urls";
 
 type Props = {
   route: { params: { endCallback: () => void } },
@@ -32,7 +33,7 @@ export default function TermsStep({ route: { params } }: Props) {
   );
 
   const onTermsClick = useCallback(() => {
-    Linking.openURL(LendingUrl);
+    Linking.openURL(urls.compoundTnC);
   }, []);
 
   const onNext = useCallback(() => {

@@ -1,6 +1,6 @@
 /* @flow */
 import React, { useCallback } from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Linking } from "react-native";
 import type { Operation, TokenCurrency } from "@ledgerhq/live-common/lib/types";
 import { Trans } from "react-i18next";
 import { useSelector } from "react-redux";
@@ -10,6 +10,7 @@ import PreventNativeBack from "../../../components/PreventNativeBack";
 import ValidateSuccess from "../../../components/ValidateSuccess";
 import { accountScreenSelector } from "../../../reducers/accounts";
 import { ScreenName } from "../../../const";
+import { urls } from "../../../config/urls";
 
 type Props = {
   navigation: any,
@@ -63,7 +64,7 @@ export default function ValidationSuccess({ navigation, route }: Props) {
         }
         info={<Trans i18nKey="transfer.lending.supply.validation.extraInfo" />}
         onLearnMore={() => {
-          /** @TODO redirect to support page */
+          Linking.openURL(urls.approvedOperation);
         }}
         onViewDetails={goToOperationDetails}
         onClose={onClose}

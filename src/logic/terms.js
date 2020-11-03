@@ -7,9 +7,6 @@ const rawURL =
 export const url =
   "https://github.com/LedgerHQ/ledger-live-mobile/blob/master/TERMS.md";
 
-// @TODO fill in the condition terms
-export const LendingUrl = "";
-
 const currentTermsRequired = "2019-12-04";
 const currentLendingTermsRequired = "2019-12-04";
 

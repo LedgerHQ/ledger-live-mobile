@@ -2,7 +2,13 @@
 import invariant from "invariant";
 import { BigNumber } from "bignumber.js";
 import React, { useCallback, useState, useEffect } from "react";
-import { View, StyleSheet, FlatList, SafeAreaView } from "react-native";
+import {
+  View,
+  StyleSheet,
+  FlatList,
+  SafeAreaView,
+  Linking,
+} from "react-native";
 import { useSelector } from "react-redux";
 import { Trans } from "react-i18next";
 import type {
@@ -36,6 +42,7 @@ import CurrencyUnitValue from "../../../components/CurrencyUnitValue";
 import ConfirmationModal from "../../../components/ConfirmationModal";
 import Circle from "../../../components/Circle";
 import Info from "../../../icons/Info";
+import { urls } from "../../../config/urls";
 
 const SEARCH_KEYS = [
   "account.name",
@@ -257,7 +264,7 @@ function LendingEnableSelectAccount({ route, navigation }: Props) {
             onLearnMore={
               !enabledTotalAmount
                 ? () => {
-                    // @TODO redirect to suport page
+                    Linking.openURL(urls.compound);
                   }
                 : undefined
             }
