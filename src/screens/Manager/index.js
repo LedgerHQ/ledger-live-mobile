@@ -12,6 +12,7 @@ import connectManager from "@ledgerhq/live-common/lib/hw/connectManager";
 import { createAction } from "@ledgerhq/live-common/lib/hw/actions/manager";
 import { removeKnownDevice } from "../../actions/ble";
 import { ScreenName } from "../../const";
+import type { ManagerTab } from "./Manager";
 import SelectDevice from "../../components/SelectDevice";
 import colors from "../../colors";
 import TrackScreen from "../../analytics/TrackScreen";
@@ -61,6 +62,7 @@ const RemoveDeviceModal = ({
 
 type RouteParams = {
   searchQuery?: string,
+  tab?: ManagerTab,
 };
 
 type Props = {

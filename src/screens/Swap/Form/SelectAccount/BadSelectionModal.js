@@ -27,17 +27,23 @@ const BadSelectionModal = ({
 }) => {
   const { navigate } = useNavigation();
   const openManagerForApp = useCallback(() => {
+    const outdated = status === "outdatedApp";
     navigate(NavigatorName.Manager, {
       screen: ScreenName.Manager,
-      params: {
-        searchQuery: currency
-          ? currency.type === "TokenCurrency"
-            ? currency?.parentCurrency?.managerAppName
-            : currency?.managerAppName
-          : null,
-      },
+      params: outdated
+        ? {
+            tab: MANAGER_TABS.INSTALLED_APPS,
+            updateModalOpened: true,
+          }
+        : {
+            searchQuery: currency
+              ? currency.type === "TokenCurrency"
+                ? currency?.parentCurrency?.managerAppName
+                : currency?.managerAppName
+              : null,
+          },
     });
-  }, [navigate, currency]);
+  }, [status, navigate, currency]);
 
   if (!currency) return null;
   const appName =
