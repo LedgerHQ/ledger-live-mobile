@@ -166,7 +166,7 @@ export default function ActiveAccountRow({ item }: RowProps) {
             bg={!canWithdraw ? colors.lightFog : colors.lightLive}
           >
             <Withdraw
-              size={16}
+              size={24}
               color={!canWithdraw ? colors.grey : colors.live}
             />
           </Circle>
