@@ -99,10 +99,10 @@ export default function ClosedLoansRow({ item }: RowProps) {
         <CurrencyIcon radius={100} currency={token} size={32} />
         <View style={styles.currencySection}>
           <LText numberOfLines={1} semiBold style={styles.subTitle}>
-            {accountName}
+            {name}
           </LText>
           <LText numberOfLines={1} semiBold style={styles.title}>
-            {name}
+            {accountName}
           </LText>
         </View>
         <View style={[styles.currencySection, styles.alignEnd]}>
