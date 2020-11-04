@@ -837,9 +837,9 @@
       "OPT_IN": "Opt in",
       "OPT_OUT": "Opt out",
       "CLOSE_ACCOUNT": "Close account",
-      "REDEEM": "Withdraw",
-      "SUPPLY": "Supply",
-      "APPROVE": "Approve"
+      "SUPPLY": "Deposited",
+      "REDEEM": "Withdrawn",
+      "APPROVE": "Enabled"
     }
   },
   "operationDetails": {
