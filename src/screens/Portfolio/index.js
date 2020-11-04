@@ -39,14 +39,14 @@ import { useScrollToTop } from "../../navigation/utils";
 
 export { default as PortfolioTabIcon } from "./TabIcon";
 
-const AnimatedSectionList = createNativeWrapper(
-  Animated.createAnimatedComponent(SectionList),
+const AnimatedFlatList = createNativeWrapper(
+  Animated.createAnimatedComponent(FlatList),
   {
     disallowInterruption: true,
     shouldCancelWhenOutside: false,
   },
 );
-const List = globalSyncRefreshControl(FlatList);
+const SectionListWithRefreshControl = globalSyncRefreshControl(SectionList);
 
 type Props = {
   navigation: any,
@@ -149,14 +149,14 @@ export default function PortfolioScreen({ navigation }: Props) {
 
       <TrackScreen category="Portfolio" accountsLength={accounts.length} />
       <OngoingScams />
-      <List
+      <AnimatedFlatList
         ref={ref}
         data={[
           ...(accounts.length > 0 && !accounts.every(isAccountEmpty)
             ? [<Carousel />]
             : []),
           ListHeaderComponent(),
-          <AnimatedSectionList
+          <SectionListWithRefreshControl
             sections={sections}
             style={styles.list}
             contentContainerStyle={styles.contentContainer}
@@ -165,10 +165,6 @@ export default function PortfolioScreen({ navigation }: Props) {
             renderSectionHeader={renderSectionHeader}
             onEndReached={onEndReached}
             stickySectionHeadersEnabled={false}
-            showsVerticalScrollIndicator={false}
-            onScroll={Animated.event([
-              { nativeEvent: { contentOffset: { y: scrollY } } },
-            ])}
             ListFooterComponent={
               !completed ? (
                 <LoadingFooter />
@@ -184,6 +180,10 @@ export default function PortfolioScreen({ navigation }: Props) {
         style={styles.inner}
         renderItem={({ item }) => item}
         keyExtractor={(item, index) => String(index)}
+        showsVerticalScrollIndicator={false}
+        onScroll={Animated.event([
+          { nativeEvent: { contentOffset: { y: scrollY } } },
+        ])}
       />
       <MigrateAccountsBanner />
     </SafeAreaView>
