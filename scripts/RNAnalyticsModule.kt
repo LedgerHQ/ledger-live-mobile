@@ -72,10 +72,6 @@ class RNAnalyticsModule(context: ReactApplicationContext): ReactContextBaseJavaM
             builder.trackApplicationLifecycleEvents()
         }
 
-        if(options.getBoolean("trackAttributionData")) {
-            builder.trackAttributionInformation()
-        }
-
         if(options.hasKey("flushInterval")) {
             builder.flushInterval(
                 options.getInt("flushInterval").toLong(),
