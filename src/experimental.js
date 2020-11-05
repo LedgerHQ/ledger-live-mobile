@@ -49,24 +49,18 @@ export const experimentalFeatures: Feature[] = [
   },
   {
     type: "toggle",
-    name: "EXPERIMENTAL_CURRENCIES_JS_BRIDGE",
-    valueOn: "ethereum",
-    valueOff: "",
-    title: "Experimental Ethereum implementation",
+    name: "EXPERIMENTAL_EXPLORERS",
+    title: "Experimental Explorers API",
     description:
-      "Switch to a new JavaScript implementation of Ethereum. This should improve performance and fix a few bugs, as well as display token operations as fee operations instead of send transactions.",
+      "Try an upcoming version of Ledger's blockchain explorers. Changing this setting may affect the account balance and synchronization as well as the send feature.",
   },
-  /*
   {
     type: "toggle",
-    name: "API_TEZOS_NODE",
-    valueOn: "https://xtz-node.explorers.prod.aws.ledger.fr/",
-    valueOff: "https://mainnet.tezrpc.me/",
-    title: "Experimental Tezos Send",
+    name: "EXPERIMENTAL_QUIT_APP",
+    title: "Quit apps automatically",
     description:
-      "Workaround for Sending Tezos. Switch to another experimental node.",
+      "Enabling this setting will automatically quit an application on your device when another one needs to be opened. This will make switching between apps more seamless.",
   },
-*/
 ];
 
 const storageKey = "experimentalFlags";
