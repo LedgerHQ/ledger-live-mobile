@@ -7,6 +7,7 @@ import {
   flattenSortAccounts,
   sortAccountsComparatorFromOrder,
 } from "@ledgerhq/live-common/lib/account";
+import type { FlattenAccountsOptions } from "@ledgerhq/live-common/lib/account";
 import {
   useDistribution as useDistributionCommon,
   useCalculateCountervalueCallback as useCalculateCountervalueCallbackCommon,
@@ -51,20 +52,20 @@ export function useNestedSortAccounts() {
   ]);
 }
 
-export function useFlattenSortAccountsEnforceHideEmptyToken() {
+export function useFlattenSortAccounts(options?: FlattenAccountsOptions) {
   const accounts = useSelector(accountsSelector);
   const comparator = useSortAccountsComparator();
-  return useMemo(
-    () =>
-      flattenSortAccounts(accounts, comparator, {
-        enforceHideEmptySubAccounts: true,
-      }),
-    [accounts, comparator],
-  );
+  return useMemo(() => flattenSortAccounts(accounts, comparator, options), [
+    accounts,
+    comparator,
+    options,
+  ]);
 }
 
 export function useHaveUndelegatedAccountsSelector() {
-  const accounts = useFlattenSortAccountsEnforceHideEmptyToken();
+  const accounts = useFlattenSortAccounts({
+    enforceHideEmptySubAccounts: true,
+  });
   return useMemo(
     () =>
       accounts.some(
