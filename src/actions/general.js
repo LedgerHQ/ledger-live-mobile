@@ -62,22 +62,6 @@ export function useFlattenSortAccounts(options?: FlattenAccountsOptions) {
   ]);
 }
 
-export function useHaveUndelegatedAccountsSelector() {
-  const accounts = useFlattenSortAccounts({
-    enforceHideEmptySubAccounts: true,
-  });
-  return useMemo(
-    () =>
-      accounts.some(
-        acc =>
-          acc.currency &&
-          acc.currency.family === "tezos" &&
-          !isAccountDelegating(acc),
-      ),
-    [accounts],
-  );
-}
-
 export function useRefreshAccountsOrdering() {
   const payload = useNestedSortAccounts();
   const dispatch = useDispatch();
