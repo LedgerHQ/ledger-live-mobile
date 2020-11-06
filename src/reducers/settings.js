@@ -1,7 +1,7 @@
 // @flow
 /* eslint import/no-cycle: 0 */
 import { handleActions } from "redux-actions";
-import { Platform } from "react-native";
+import { Platform, Appearance } from "react-native";
 import merge from "lodash/merge";
 import {
   findCurrencyByTicker,
@@ -61,6 +61,8 @@ export type Privacy = {
   biometricsEnabled: boolean,
 };
 
+const colorScheme = Appearance.getColorScheme();
+
 export type Theme = "light" | "dark" | "dusk";
 
 export type SettingsState = {
@@ -113,7 +115,7 @@ export const INITIAL_STATE: SettingsState = {
   hasAvailableUpdate: false,
   hasAcceptedSwapKYC: false,
   swapProviders: [],
-  theme: "light",
+  theme: colorScheme === "dark" ? "dusk" : "light",
   carouselVisibility: 0,
 };
 
