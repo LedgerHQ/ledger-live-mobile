@@ -31,9 +31,15 @@ import PasswordAddFlowNavigator from "./PasswordAddFlowNavigator";
 import PasswordModifyFlowNavigator from "./PasswordModifyFlowNavigator";
 import MigrateAccountsFlowNavigator from "./MigrateAccountsFlowNavigator";
 import SwapNavigator from "./SwapNavigator";
+import LendingNavigator from "./LendingNavigator";
+import LendingInfoNavigator from "./LendingInfoNavigator";
+import LendingEnableFlowNavigator from "./LendingEnableFlowNavigator";
+import LendingSupplyFlowNavigator from "./LendingSupplyFlowNavigator";
+import LendingWithdrawFlowNavigator from "./LendingWithdrawFlowNavigator";
 import { closableStackNavigatorConfig } from "../../navigation/navigatorConfig";
 import Account from "../../screens/Account";
 import TransparentHeaderNavigationOptions from "../../navigation/TransparentHeaderNavigationOptions";
+import styles from "../../navigation/styles";
 import HeaderRightClose from "../HeaderRightClose";
 import StepHeader from "../StepHeader";
 import AccountHeaderTitle from "../../screens/Account/AccountHeaderTitle";
@@ -62,6 +68,35 @@ export default function BaseNavigator() {
       <Stack.Screen
         name={NavigatorName.Swap}
         component={SwapNavigator}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name={NavigatorName.Lending}
+        component={LendingNavigator}
+        options={{
+          headerStyle: styles.headerNoShadow,
+          headerLeft: null,
+          title: t("transfer.lending.title"),
+        }}
+      />
+      <Stack.Screen
+        name={NavigatorName.LendingInfo}
+        component={LendingInfoNavigator}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name={NavigatorName.LendingEnableFlow}
+        component={LendingEnableFlowNavigator}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name={NavigatorName.LendingSupplyFlow}
+        component={LendingSupplyFlowNavigator}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name={NavigatorName.LendingWithdrawFlow}
+        component={LendingWithdrawFlowNavigator}
         options={{ headerShown: false }}
       />
       <Stack.Screen

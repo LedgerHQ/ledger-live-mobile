@@ -133,6 +133,11 @@ export const dismissBanner = (bannerId: string) => ({
   payload: bannerId,
 });
 
+export const setCarouselVisibility = (nonce: number) => ({
+  type: "SETTINGS_SET_CAROUSEL_VISIBILITY",
+  payload: nonce,
+});
+
 export const setAvailableUpdate = (enabled: boolean) => ({
   type: "SETTINGS_SET_AVAILABLE_UPDATE",
   enabled,

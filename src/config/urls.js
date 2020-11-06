@@ -50,4 +50,16 @@ export const urls = {
       },
     },
   },
+  // Banners
+  banners: {
+    backupPack:
+      "https://shop.ledger.com/products/ledger-backup-pack?utm_source=ledger_live&utm_medium=self_referral&utm_content=banner_desktop=banner_desktop",
+    ledgerAcademy:
+      "https://www.ledger.com/academy/?utm_source=ledger_live&utm_medium=self_referral&utm_content=banner_desktop",
+    ongoingScams: "https://www.ledger.com/ongoing-phishing-campaigns",
+  },
+  compound: "https://support.ledger.com/hc/en-us/articles/360017215099",
+  compoundTnC: "https://shop.ledger.com/pages/ledger-live-terms-of-use",
+  approvedOperation:
+    "https://support.ledger.com/hc/en-us/articles/115005307809-Track-your-transaction",
 };

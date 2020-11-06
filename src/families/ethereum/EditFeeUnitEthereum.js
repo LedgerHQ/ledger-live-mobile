@@ -1,6 +1,7 @@
 // @flow
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
 import React, { useMemo, useState, useCallback } from "react";
+import { BigNumber } from "bignumber.js";
 import { View, StyleSheet } from "react-native";
 import { useTranslation } from "react-i18next";
 import Slider from "react-native-slider";
@@ -15,14 +16,12 @@ import {
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { getMainAccount } from "@ledgerhq/live-common/lib/account";
 import colors from "../../colors";
-import { ScreenName } from "../../const";
 import LText from "../../components/LText";
 import CurrencyUnitValue from "../../components/CurrencyUnitValue";
 import SettingsRow from "../../components/SettingsRow";
 import Button from "../../components/Button";
 
-const GasSlider = React.memo(({ defaultGas, value, onChange }: *) => {
-  const range = useMemo(() => inferDynamicRange(defaultGas), [defaultGas]);
+const GasSlider = React.memo(({ value, onChange, range }: *) => {
   const index = reverseRangeIndex(range, value);
   const setValueIndex = useCallback(
     i => onChange(projectRangeIndex(range, i)),
@@ -42,16 +41,26 @@ const GasSlider = React.memo(({ defaultGas, value, onChange }: *) => {
   );
 });
 
+type RouteParams = {
+  accountId: string,
+  transaction: Transaction,
+  currentNavigation: string,
+};
 type Props = {
   account: AccountLike,
   parentAccount: ?Account,
   transaction: Transaction,
+  route: { params: RouteParams },
 };
+
+const fallbackGasPrice = inferDynamicRange(BigNumber(10e9));
+let lastNetworkGasPrice; // local cache of last value to prevent extra blinks
 
 export default function EditFeeUnitEthereum({
   account,
   parentAccount,
   transaction,
+  route,
 }: Props) {
   const { navigate } = useNavigation();
   const { t } = useTranslation();
@@ -65,7 +74,15 @@ export default function EditFeeUnitEthereum({
   const mainAccount = getMainAccount(account, parentAccount);
   const bridge = getAccountBridge(account, parentAccount);
 
-  const [gasPrice, setGasPrice] = useState(transaction.gasPrice);
+  const networkGasPrice =
+    transaction.networkInfo && transaction.networkInfo.gasPrice;
+  if (!lastNetworkGasPrice && networkGasPrice) {
+    lastNetworkGasPrice = networkGasPrice;
+  }
+  const range = networkGasPrice || lastNetworkGasPrice || fallbackGasPrice;
+  const [gasPrice, setGasPrice] = useState(
+    transaction.gasPrice || range.initial,
+  );
   const feeCustomUnit = transaction.feeCustomUnit;
 
   const onChangeF = useCallback(
@@ -79,12 +96,22 @@ export default function EditFeeUnitEthereum({
   );
 
   const onValidateFees = useCallback(() => {
-    navigate(ScreenName.SendSummary, {
+    const { currentNavigation } = route.params;
+    navigate(currentNavigation, {
+      ...route.params,
       accountId: account.id,
       parentId: parentAccount && parentAccount.id,
       transaction: bridge.updateTransaction(transaction, { gasPrice }),
     });
-  }, [account, gasPrice, navigate, parentAccount, bridge, transaction]);
+  }, [
+    route.params,
+    navigate,
+    account.id,
+    parentAccount,
+    bridge,
+    transaction,
+    gasPrice,
+  ]);
 
   const { networkInfo } = transaction;
   if (!networkInfo) return null;
@@ -116,6 +143,7 @@ export default function EditFeeUnitEthereum({
           <GasSlider
             defaultGas={serverGas}
             value={gasPrice}
+            range={range}
             onChange={onChangeF}
           />
           <View style={styles.textContainer}>

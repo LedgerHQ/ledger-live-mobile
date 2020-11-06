@@ -2,7 +2,10 @@
 
 import React, { memo, useMemo } from "react";
 import { View, StyleSheet } from "react-native";
-import { getCryptoCurrencyIcon } from "@ledgerhq/live-common/lib/reactNative";
+import {
+  getCryptoCurrencyIcon,
+  getTokenCurrencyIcon,
+} from "@ledgerhq/live-common/lib/reactNative";
 import { getCurrencyColor } from "@ledgerhq/live-common/lib/currencies";
 
 import { useTheme } from "@react-navigation/native";
@@ -14,9 +17,10 @@ type Props = {
   size: number,
   color?: string,
   radius?: number,
+  bg?: string,
 };
 
-function CurrencyIcon({ size, currency, color, radius }: Props) {
+function CurrencyIcon({ size, currency, color, radius, bg }: Props) {
   const { colors } = useTheme();
   const currencyColor = useMemo(
     () =>
@@ -26,10 +30,12 @@ function CurrencyIcon({ size, currency, color, radius }: Props) {
 
   if (currency.type === "TokenCurrency") {
     const dynamicStyle = {
-      backgroundColor: rgba(currencyColor, 0.1),
+      backgroundColor: bg || rgba(currencyColor, 0.1),
       width: size,
       height: size,
     };
+    const TokenIconCurrency =
+      getTokenCurrencyIcon && getTokenCurrencyIcon(currency);
 
     return (
       <View
@@ -39,9 +45,16 @@ function CurrencyIcon({ size, currency, color, radius }: Props) {
           radius ? { borderRadius: radius } : null,
         ]}
       >
-        <LText semiBold style={{ color: currencyColor, fontSize: size / 2 }}>
-          {currency.ticker[0]}
-        </LText>
+        {TokenIconCurrency ? (
+          <TokenIconCurrency
+            size={size * 0.55}
+            color={currencyColor || currency.color}
+          />
+        ) : (
+          <LText semiBold style={{ color: currencyColor, fontSize: size / 2 }}>
+            {currency.ticker[0]}
+          </LText>
+        )}
       </View>
     );
   }
