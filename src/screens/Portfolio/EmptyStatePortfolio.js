@@ -42,7 +42,7 @@ function EmptyStatePortfolio({ navigation, showHelp = true }: Props) {
         <View style={styles.help}>
           <HelpLink
             url={hasInstalledAnyApp ? urls.addAccount : urls.goToManager}
-            color={colors.grey}
+            color="grey"
           />
         </View>
       ) : null}

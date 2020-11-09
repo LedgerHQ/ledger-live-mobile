@@ -10,13 +10,14 @@ import type {
 
 import LText from "./LText";
 import CircleCurrencyIcon from "./CircleCurrencyIcon";
-import colors from "../colors";
+import { withTheme } from "../colors";
 
 type Props = {
   currency: CryptoCurrency | TokenCurrency,
   onPress: (CryptoCurrency | TokenCurrency) => void,
   isOK?: boolean,
   style?: *,
+  colors: *,
 };
 
 class CurrencyRow extends PureComponent<Props> {
@@ -25,7 +26,7 @@ class CurrencyRow extends PureComponent<Props> {
   };
 
   render() {
-    const { currency, style, isOK = true } = this.props;
+    const { currency, style, isOK = true, colors } = this.props;
 
     return (
       <RectButton style={[styles.root, style]} onPress={this.onPress}>
@@ -42,7 +43,11 @@ class CurrencyRow extends PureComponent<Props> {
           {`${currency.name} (${currency.ticker})`}
         </LText>
         {currency.type === "TokenCurrency" && currency.parentCurrency ? (
-          <LText semiBold style={styles.currencyLabel}>
+          <LText
+            semiBold
+            style={[styles.currencyLabel, { borderColor: colors.grey }]}
+            color="grey"
+          >
             {currency.parentCurrency.name}
           </LText>
         ) : null}
@@ -71,14 +76,12 @@ const styles = StyleSheet.create({
     textAlign: "right",
     borderRadius: 4,
     borderWidth: 1,
-    borderColor: colors.grey,
     paddingHorizontal: 6,
     fontSize: 10,
     height: 24,
     lineHeight: 24,
-    color: colors.grey,
     marginLeft: 12,
   },
 });
 
-export default CurrencyRow;
+export default withTheme(CurrencyRow);

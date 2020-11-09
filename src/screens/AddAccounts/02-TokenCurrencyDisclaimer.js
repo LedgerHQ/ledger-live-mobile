@@ -46,7 +46,6 @@ const Disclaimer = ({
       </LText>
       <ExternalLink
         event="AddAccountsTokenDisclaimerLearnMore"
-        color={colors.live}
         text={<Trans i18nKey={`addAccounts.tokens.${tokenType}.learnMore`} />}
         onPress={() => Linking.openURL(urls.supportLinkByTokenType[tokenType])}
       />

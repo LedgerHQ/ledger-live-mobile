@@ -11,18 +11,19 @@ import Card from "./Card";
 import CurrencyIcon from "./CurrencyIcon";
 import CurrencyUnitValue from "./CurrencyUnitValue";
 import LText from "./LText";
-import colors from "../colors";
+import { withTheme } from "../colors";
 
 type Props = {
   account: AccountLike,
   onPress?: () => void,
   style?: any,
   disabled?: boolean,
+  colors: *,
 };
 
 class AccountCard extends PureComponent<Props> {
   render() {
-    const { onPress, account, style, disabled } = this.props;
+    const { onPress, account, style, disabled, colors } = this.props;
     const currency = getAccountCurrency(account);
     const unit = getAccountUnit(account);
     return (
@@ -75,9 +76,6 @@ const styles = StyleSheet.create({
     marginLeft: 16,
     alignItems: "flex-end",
   },
-  balanceNumText: {
-    color: colors.grey,
-  },
 });
 
-export default AccountCard;
+export default withTheme(AccountCard);

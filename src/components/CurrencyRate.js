@@ -9,7 +9,6 @@ import type {
   TokenCurrency,
 } from "@ledgerhq/live-common/lib/types/currencies";
 import { getCurrencyColor } from "@ledgerhq/live-common/lib/currencies";
-import colors from "../colors";
 import LText from "./LText";
 import CounterValue from "./CounterValue";
 import CurrencyUnitValue from "./CurrencyUnitValue";
@@ -34,7 +33,12 @@ class CurrencyRate extends PureComponent<Props> {
     return (
       <View style={styles.wrapper}>
         <Icon name="activity" color={color} size={iconSize} />
-        <LText numberOfLines={1} semiBold style={[styles.text, fontStyle]}>
+        <LText
+          numberOfLines={1}
+          semiBold
+          style={[styles.text, fontStyle]}
+          color="grey"
+        >
           <CurrencyUnitValue unit={currency.units[0]} value={one} />
           {" = "}
           <CounterValue currency={currency} value={one} />
@@ -51,7 +55,6 @@ const styles = StyleSheet.create({
   },
   text: {
     marginLeft: 4,
-    color: colors.grey,
     fontSize: 12,
     lineHeight: 18,
   },

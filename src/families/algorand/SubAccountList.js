@@ -72,7 +72,6 @@ const Placeholder = ({ accountId }: { accountId: string }) => {
             secondary: true,
             style: styles.howAsaWorksText,
           }}
-          color="live"
         />
       </View>
       <Button

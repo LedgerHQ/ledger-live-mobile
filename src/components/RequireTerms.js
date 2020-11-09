@@ -9,7 +9,7 @@ import {
   Linking,
   ActivityIndicator,
 } from "react-native";
-import colors from "../colors";
+import { useTheme } from "@react-navigation/native";
 import { useTerms, useTermsAccept, url } from "../logic/terms";
 import getWindowDimensions from "../logic/getWindowDimensions";
 import LText from "./LText";
@@ -52,7 +52,6 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "space-between",
     borderTopWidth: 1,
-    borderTopColor: colors.lightFog,
   },
   footerClose: {
     marginTop: 16,
@@ -63,6 +62,7 @@ const styles = StyleSheet.create({
 });
 
 const RequireTermsModal = () => {
+  const { colors } = useTheme();
   const [markdown, error, retry] = useTerms();
   const [accepted, accept] = useTermsAccept();
   const [toggle, setToggle] = useState(false);
@@ -110,7 +110,7 @@ const RequireTermsModal = () => {
           )}
         </ScrollView>
 
-        <View style={styles.footer}>
+        <View style={[styles.footer, { borderTopColor: colors.lightFog }]}>
           <Touchable
             event="TermsAcceptSwitch"
             onPress={onSwitch}
@@ -144,6 +144,7 @@ export const TermModals = ({
   isOpened: boolean,
   close: () => void,
 }) => {
+  const { colors } = useTheme();
   const [markdown, error, retry] = useTerms();
   const height = getWindowDimensions().height - 320;
 
@@ -189,7 +190,13 @@ export const TermModals = ({
           )}
         </ScrollView>
 
-        <View style={[styles.footer, styles.footerClose]}>
+        <View
+          style={[
+            styles.footer,
+            { borderTopColor: colors.lightFog },
+            styles.footerClose,
+          ]}
+        >
           <Button
             event="TermsClose"
             type="primary"

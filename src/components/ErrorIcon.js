@@ -9,12 +9,13 @@ import {
   UserRefusedAllowManager,
 } from "@ledgerhq/errors";
 import { SwapGenericAPIError } from "@ledgerhq/live-common/lib/errors";
+import { useTheme } from "@react-navigation/native";
 import Rounded from "./Rounded";
 import IconNanoX from "../icons/NanoX";
 import Close from "../icons/Close";
 import ErrorBadge from "./ErrorBadge";
 import Circle from "./Circle";
-import colors, { lighten, rgba } from "../colors";
+import { lighten, rgba } from "../colors";
 import BluetoothScanning from "./BluetoothScanning";
 import ErrorCrossBadge from "./ErrorCrossBadge";
 
@@ -23,6 +24,7 @@ type Props = {
 };
 
 export default function ErrorIcon({ error }: Props) {
+  const { colors } = useTheme();
   if (!error) return null;
   if (typeof error !== "object") {
     // this case should not happen (it is supposed to be a ?Error)
