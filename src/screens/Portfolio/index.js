@@ -33,6 +33,7 @@ import TrackScreen from "../../analytics/TrackScreen";
 import NoOpStatePortfolio from "./NoOpStatePortfolio";
 import NoOperationFooter from "../../components/NoOperationFooter";
 import MigrateAccountsBanner from "../MigrateAccounts/Banner";
+import OngoingScams from "../../components/banners/OngoingScams";
 import RequireTerms from "../../components/RequireTerms";
 import { useScrollToTop } from "../../navigation/utils";
 
@@ -45,7 +46,7 @@ const AnimatedSectionList = createNativeWrapper(
     shouldCancelWhenOutside: false,
   },
 );
-const List = globalSyncRefreshControl(AnimatedSectionList);
+const List = globalSyncRefreshControl(FlatList);
 
 type Props = {
   navigation: any,
@@ -147,15 +148,15 @@ export default function PortfolioScreen({ navigation }: Props) {
       <RequireTerms />
 
       <TrackScreen category="Portfolio" accountsLength={accounts.length} />
-
-      <FlatList
+      <OngoingScams />
+      <List
         ref={ref}
         data={[
           ...(accounts.length > 0 && !accounts.every(isAccountEmpty)
             ? [<Carousel />]
             : []),
           ListHeaderComponent(),
-          <List
+          <AnimatedSectionList
             sections={sections}
             style={styles.list}
             contentContainerStyle={styles.contentContainer}
