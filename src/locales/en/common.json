@@ -1288,7 +1288,7 @@
       }
     },
     "exchange": {
-      "title": "Buy crypto assets"
+      "title": "Buy/Sell crypto assets"
     },
     "swap": {
       "title": "Swap",
@@ -1666,6 +1666,10 @@
     "confirmSwap": {
       "title": "Confirm swap operation on device",
       "alert": "Verify the Swap details on your device before sending it. The addresses are exchanged securely so you don’t have to verify them."
+    },
+    "confirmSell": {
+      "title": "Confirm sell operation on device",
+      "alert": "Verify the Sell details on your device before sending it. The addresses are exchanged securely so you don’t have to verify them."
     },
     "button": {
       "openManager": "Open Manager"
@@ -2468,6 +2472,20 @@
       "title": "Buy crypto via our partner",
       "description": "Purchase crypto assets via Coinify and receive your coins directly in your Ledger account",
       "CTAButton": "Buy now",
+      "emptyState": {
+        "title": "No {{currency}} account",
+        "description": "You need to add an account before buying {{currency}}",
+        "CTAButton": "Add account"
+      }
+    },
+    "sell": {
+      "tabTitle": "Sell",
+      "selectCurrency": "Select a currency",
+      "selectAccount": "Select an account",
+      "connectDevice": "Connect your device",
+      "title": "Sell crypto via our partner",
+      "description": "Sell crypto assets directly from your ledger using Coinify and receive fiat on your bank account",
+      "CTAButton": "Sell now",
       "emptyState": {
         "title": "No {{currency}} account",
         "description": "You need to add an account before buying {{currency}}",
