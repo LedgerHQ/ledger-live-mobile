@@ -13,7 +13,9 @@ import EditDeviceName from "../../screens/EditDeviceName";
 import Distribution from "../../screens/Distribution";
 import Asset, { HeaderTitle } from "../../screens/Asset";
 import ScanRecipient from "../../screens/SendFunds/ScanRecipient";
-import FallbackCameraSend from "../../screens/SendFunds/FallbackCamera/FallbackCameraSend";
+import WalletConnectScan from "../../screens/WalletConnect/Scan";
+import WalletConnectConnect from "../../screens/WalletConnect/Connect";
+import FallbackCameraSend from "../FallbackCamera/FallbackCameraSend";
 import Main from "./MainNavigator";
 import ReceiveFundsNavigator from "./ReceiveFundsNavigator";
 import SendFundsNavigator from "./SendFundsNavigator";
@@ -245,6 +247,27 @@ export default function BaseNavigator() {
           headerRight: () => (
             <HeaderRightClose color={colors.white} preferDismiss={false} />
           ),
+          headerLeft: null,
+        }}
+      />
+      <Stack.Screen
+        name={ScreenName.WalletConnectScan}
+        component={WalletConnectScan}
+        options={{
+          ...TransparentHeaderNavigationOptions,
+          title: "Wallet Connect",
+          headerRight: () => (
+            <HeaderRightClose color={colors.white} preferDismiss={false} />
+          ),
+          headerLeft: null,
+        }}
+      />
+      <Stack.Screen
+        name={ScreenName.WalletConnectConnect}
+        component={WalletConnectConnect}
+        options={{
+          title: "Wallet Connect",
+          headerRight: () => <HeaderRightClose preferDismiss={false} />,
           headerLeft: null,
         }}
       />

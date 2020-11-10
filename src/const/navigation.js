@@ -223,6 +223,9 @@ export const ScreenName = {
   LendingWithdrawValidation: "Lend WithdrawValidation",
   LendingWithdrawValidationError: "Lend WithdrawValidationError",
   LendingWithdrawValidationSuccess: "Lend WithdrawValidationSuccess",
+
+  WalletConnectScan: "WalletConnectScan",
+  WalletConnectConnect: "WalletConnectConnect",
 };
 
 export const NavigatorName = {

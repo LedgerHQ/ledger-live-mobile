@@ -1417,6 +1417,9 @@
         }
       }
     },
+    "walletconnect": {
+      "actionTitle": "WalletConnect",
+    },
     "lending": {
       "title": "Lend crypto",
       "actionTitle": "Lend",
