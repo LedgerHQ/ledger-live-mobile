@@ -54,9 +54,9 @@
   },
   "detox": {
     "configurations": {
-      "ios.dev": {
+      "ios.debug": {
         "binaryPath": "ios/build/Build/Products/Debug-iphonesimulator/ledgerlivemobile.app",
-        "build": "export ENVFILE=.env.mock && xcodebuild -workspace ios/ledgerlivemobile.xcworkspace -scheme ledgerlivemobile -configuration Debug -sdk iphonesimulator -derivedDataPath ios/build -quiet",
+        "build": "export ENVFILE=.env.mock && xcodebuild ARCHS=x86_64 ONLY_ACTIVE_ARCH=no -workspace ios/ledgerlivemobile.xcworkspace -scheme ledgerlivemobile -configuration Debug -sdk iphonesimulator -derivedDataPath ios/build",
         "type": "ios.simulator",
         "device": {
           "type": "iPhone 11 Pro"
@@ -64,7 +64,7 @@
       },
       "ios.staging": {
         "binaryPath": "ios/build/Build/Products/Staging-iphonesimulator/ledgerlivemobile.app",
-        "build": "export RCT_NO_LAUNCH_PACKAGER=true && export ENVFILE=.env.mock && xcodebuild -workspace ios/ledgerlivemobile.xcworkspace -scheme ledgerlivemobile -configuration Staging -sdk iphonesimulator -derivedDataPath ios/build -quiet",
+        "build": "export RCT_NO_LAUNCH_PACKAGER=true && export ENVFILE=.env.mock && xcodebuild ARCHS=x86_64 ONLY_ACTIVE_ARCH=no -workspace ios/ledgerlivemobile.xcworkspace -scheme ledgerlivemobile -configuration Staging -sdk iphonesimulator -derivedDataPath ios/build",
         "type": "ios.simulator",
         "device": {
           "type": "iPhone 11 Pro"
