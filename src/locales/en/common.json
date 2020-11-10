@@ -29,6 +29,7 @@
     "or": "OR",
     "rename": "Rename",
     "learnMore": "Learn more",
+    "viewDetails": "View details",
     "today": "Today",
     "yesterday": "Yesterday",
     "upToDate": "Up to date",
@@ -113,9 +114,15 @@
       "title": "Oops, manager connection failed",
       "description": "Please make sure your {{productName}} is unlocked with Bluetooth enabled"
     },
+    "CompoundLowerAllowanceOfActiveAccountError": {
+      "title": "Minimum of {{minimumAmount}} required."
+    },
     "ClaimRewardsFeesWarning": {
       "title": "The amount of rewards are lower than the estimated fees required to claim them",
       "description": ""
+    },
+    "CompoundLowerAllowanceOfActiveAccountError": {
+      "title": "You cannot reduce the amount approved while having an active deposit."
     },
     "CosmosBroadcastCodeInternal": {
       "title": "Something went wrong (Error #1)",
@@ -515,10 +522,10 @@
       "title": "When sending to this recipient, a memo may be required"
     },
     "SwapExchangeRateAmountTooLow": {
-      "title": "Amount must be higher than {{unit}} {{minAmountFrom}}"
+      "title": "Amount must be higher than {{minAmountFrom}} {{unit}}"
     },
     "SwapExchangeRateAmountTooHigh": {
-      "title": "Amount must be lower than {{unit}} {{maxAmountFrom}}"
+      "title": "Amount must be lower than {{maxAmountFrom}} {{unit}}"
     },
     "SwapGenericAPIError": {
       "title": "Exchange rate expired",
@@ -639,7 +646,16 @@
       "vote": {
         "title": "Vote with your ledger",
         "description": "Vote directly from your Ledger Wallet."
+      },
+      "lending": {
+        "title": "Lend crypto",
+        "description": "Lend assets on the Compound Protocol"
       }
+    }
+  },
+  "banners": {
+    "ongoingScams": {
+      "description": "There are ongoing phishing scams on our userbase, please be careful and never share your recovery phrase."
     }
   },
   "onboarding": {
@@ -831,7 +847,10 @@
       "FEES": "Fees",
       "OPT_IN": "Opt in",
       "OPT_OUT": "Opt out",
-      "CLOSE_ACCOUNT": "Close account"
+      "CLOSE_ACCOUNT": "Close account",
+      "SUPPLY": "Deposited",
+      "REDEEM": "Withdrawn",
+      "APPROVE": "Enabled"
     }
   },
   "operationDetails": {
@@ -1004,6 +1023,7 @@
       }
     },
     "availableBalance": "Available balance",
+    "totalSupplied": "Amount deposited",
     "tronFrozen": "Frozen",
     "bandwidth": "Bandwidth",
     "energy": "Energy",
@@ -1394,6 +1414,183 @@
         "empty": {
           "title": "Your previous swaps will appear here",
           "desc": "Either you have not made any swaps yet, or Ledger Live has been reset in the meantime."
+        }
+      }
+    },
+    "lending": {
+      "title": "Lend crypto",
+      "actionTitle": "Lend",
+      "accountActions": {
+        "approve": "Approve",
+        "supply": "Supply",
+        "withdraw": "Withdraw"
+      },
+      "highFees": {
+        "title": "High fees on Ethereum",
+        "description": "Due to congestion on the Ethereum network, you may experience high fees when issuing transactions."
+      },
+      "account": {
+        "amountSupplied": "Amount deposited",
+        "amountSuppliedTooltip": "Amount lent to the network",
+        "currencyAPY": "Currency APY",
+        "currencyAPYTooltip": "Yearly return rate of a deposit that’s continuously compounded",
+        "accruedInterests": "Accrued interest",
+        "accruedInterestsTooltip": "Interest generated on your lent assets",
+        "interestEarned": "Interest earned",
+        "interestEarnedTooltip": "Interest you have earned after withdrawal",
+        "openLoans": "Open loans",
+        "closedLoans": "Closed loans"
+      },
+      "banners": {
+        "needApproval": "You need to approve this account before being able to lend assets.",
+        "fullyApproved": "You have fully approved this account. You can reduce the amount at a fee.",
+        "approvedCanReduce": "You have approved <0>{{value}}</0> on this account. You can reduce the amount at a fee.",
+        "approvedButNotEnough": "You have approved <0>{{value}}</0> on this account.",
+        "approving": "You can deposit assets once the account approval is confirmed.",
+        "notEnough": "You must increase the limit approved on your account to lend."
+      },
+      "howDoesLendingWork": "How does lending works",
+      "dashboard": {
+        "tabTitle": "Dashboard",
+        "assetsTitle": "Assets to lend",
+        "accountsTitle": "Approved accounts",
+        "emptySateDescription": "You can lend assets directly from your Ethereum accounts and earn interest.",
+        "apy": "{{value}} APY",
+        "activeAccount": {
+          "account": "Account",
+          "amountSupplied": "Amount deposited",
+          "interestEarned": "Interest earned",
+          "status": "Status",
+          "EARNING": "Earning",
+          "ENABLING": "Approving",
+          "INACTIVE": "Inactive",
+          "SUPPLYING": "Supplying",
+          "approve": "Approve",
+          "supply": "Supply",
+          "withdraw": "Withdraw",
+          "amountRedeemed": "Amount withdrawn",
+          "endDate": "End date"
+        }
+      },
+      "closedLoans": {
+        "tabTitle": "Closed loans",
+        "description": "View all your withdrawn loans and the interest you have earned.",
+        "cta": "Lend asset"
+      },
+      "history": {
+        "tabTitle": "History",
+        "description": "View the history of all your loan transactions.",
+        "cta": "Lend asset"
+      },
+      "terms": {
+        "label": "Lend crypto",
+        "title": "Lend assets on the Compound Protocol",
+        "description": "The Compound protocol allows you to lend and borrow assets on the Ethereum network. You can lend assets and earn interest directly from your Ledger acccount.",
+        "switchLabel": "I have read and agree with the <0>Terms of Use</0>."
+      },
+      "info": {
+        "title": "Lend crypto",
+        "1": {
+          "label": "Step 1/3",
+          "title": "Approving an account allows the protocol to process future loans.",
+          "description": "You need to authorize the Compound smart contract to transfer up to a certain amount of assets to the protocol. Enabling an account gives permission to the protocol to process future loans."
+        },
+        "2": {
+          "label": "Step 2/3",
+          "title": "Deposit assets to earn interest.",
+          "description": "Once an account is approved, you can select the amount of assets you want to lend and issue a transaction to the protocol. Interest accrue immediately after the transaction is confirmed."
+        },
+        "3": {
+          "label": "Step 3/3",
+          "title": "Withdraw assets at any time.",
+          "description": "You can withdraw your assets and earned interest at any time, partially or entirely, directly from your Ledger account.",
+          "cta": "Lend now"
+        }
+      },
+      "enable": {
+        "info": {
+          "title": "This account is not approved",
+          "description": "You need to approve an account before being able to lend this asset.",
+          "cta": "Approve Account"
+        },
+        "stepperHeader": {
+          "selectAccount": "Choose an account",
+          "enable": "Approve",
+          "advanced": "Advanced",
+          "amount": "Enter amount",
+          "summary": "Summary",
+          "selectDevice": "Select Device",
+          "connectDevice": "Connect Device",
+          "stepRange": "Step {{currentStep}} of {{totalSteps}}"
+        },
+        "selectAccount": {
+          "enabledAccountsAmount": "You have {{number}} accounts that approved {{amount}}",
+          "enabledAccountsNoLimit": "You have {{number}} accounts that approved an unlimited amount of DAI",
+          "noEnabledAccounts": "You need to approve an account before you can lend."
+        },
+        "enable": {
+          "summary": "<0>I grant the </0><1>{{contractName}}</1><0> smart contract access to my </0><1>{{accountName}}</1><0> account for a </0><1>{{amount}}</1><0> amount</0>",
+          "limit": "limited {{amount}}",
+          "noLimit": "no limit {{assetName}}",
+          "contractName": "Compound {{currencyName}}",
+          "advanced": "Advanced"
+        },
+        "advanced": {
+          "amountLabel": "Amount to approve",
+          "amountLabelTooltip": "This limits the amount available to the smart contract.",
+          "limit": "Limit",
+          "limited": "Limited",
+          "noLimit": "No Limit"
+        },
+        "amount": {
+          "totalAvailable": "Total available"
+        },
+        "validation": {
+          "success": "Operation sent successfully",
+          "info": "The approval was sent to the network for confirmation. You’ll be able to issue loans once it is confirmed.",
+          "extraInfo": "Transactions can take some time to be displayed in an explorer and to be confirmed.",
+          "button": {
+            "done": "Close"
+          }
+        }
+      },
+      "supply": {
+        "stepperHeader": {
+          "amount": "Supply",
+          "summary": "Summary",
+          "selectDevice": "Select Device",
+          "connectDevice": "Connect Device",
+          "stepRange": "Step {{currentStep}} of {{totalSteps}}"
+        },
+        "amount": {
+          "totalAvailable": "Available balance",
+          "placeholderMax": "Withdraw Max"
+        },
+        "validation": {
+          "success": "Deposit sent successfully",
+          "info": "You will start earning interest once the network has confirmed the deposit.",
+          "extraInfo": "Transactions can take some time to be displayed in an explorer and to be confirmed.",
+          "button": {
+            "done": "Done",
+            "cta": "View details"
+          }
+        }
+      },
+      "withdraw": {
+        "stepperHeader": {
+          "amount": "Withdraw",
+          "summary": "Summary",
+          "selectDevice": "Select Device",
+          "connectDevice": "Connect Device",
+          "stepRange": "Step {{currentStep}} of {{totalSteps}}"
+        },
+        "validation": {
+          "success": "Withdrawal sent successfully",
+          "info": "Your assets will be available once the network has confirmed the withdrawal.",
+          "button": {
+            "done": "Done",
+            "cta": "View details"
+          }
         }
       }
     }
@@ -2427,13 +2624,18 @@
     },
     "warning": "Always verify that your device displays the address exactly as provided {{recipientWording}}",
     "recipientWording": {
-      "send": "by the recipient",
-      "delegate": "by the validator",
-      "undelegate": "by the validator",
-      "freeze": "",
-      "unfreeze": "",
-      "claimReward": "",
-      "vote": ""
+      "send": "Always verify that your device displays the address exactly as provided by the recipient",
+      "delegate": "Always verify that your device displays the address exactly as provided by the validator",
+      "undelegate": "Always verify that your device displays the address exactly as provided by the validator",
+      "freeze": "Always verify that your device displays the address exactly as provided ",
+      "unfreeze": "Always verify that your device displays the address exactly as provided ",
+      "claimReward": "Always verify that your device displays the address exactly as provided ",
+      "vote": "Always verify that your device displays the address exactly as provided ",
+      "erc20": {
+        "approve": "Verify the operation details on your device before sending it."
+      },
+      "compound.supply": "Verify the deposit details on your device before sending it.",
+      "compound.withdraw": "Verify the withdrawal details on your device before sending it."
     },
     "name": "Name",
     "votes": "Votes",
@@ -2445,7 +2647,8 @@
         "claimReward": "If the selected validator has pending rewards, they will automatically be claimed.",
         "redelegate": "You will have to wait 21 days for undelegated assets to be added to your available balance.",
         "undelegate": "You will have to wait 21 days for undelegated assets to be added to your available balance."
-      }
+      },
+      "lending": "Verify the operation details on your device before sending it."
     },
     "amount": "Amount",
     "account": "Account",
@@ -2461,7 +2664,7 @@
   "Terms": {
     "title": "Terms of Use",
     "read": "Read the Terms of Use",
-    "switchLabel": "I have read and agree with the Terms of Use and Privacy Policy"
+    "switchLabel": "I have read and accepted the Terms & Conditions."
   },
   "exchange": {
     "buy": {
@@ -2496,7 +2699,7 @@
       "tabTitle": "History"
     }
   },
-  
+
   "banner": {
     "exchangeBuyCrypto": {
       "title": "BUY CRYPTO",
