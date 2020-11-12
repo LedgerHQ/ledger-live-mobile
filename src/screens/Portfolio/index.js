@@ -148,10 +148,11 @@ export default function PortfolioScreen({ navigation }: Props) {
       <RequireTerms />
 
       <TrackScreen category="Portfolio" accountsLength={accounts.length} />
-      <OngoingScams />
+
       <AnimatedFlatList
         ref={ref}
         data={[
+          <OngoingScams />,
           ...(accounts.length > 0 && !accounts.every(isAccountEmpty)
             ? [<Carousel />]
             : []),
