@@ -3,7 +3,7 @@
 import React, { useCallback } from "react";
 import { Trans } from "react-i18next";
 import { StyleSheet, View, Linking } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useTheme } from "@react-navigation/native";
 import { differenceInCalendarDays } from "date-fns";
 import {
   getDefaultExplorerView,
@@ -31,7 +31,7 @@ import BottomModal from "../../components/BottomModal";
 import Circle from "../../components/Circle";
 import NavigationScrollView from "../../components/NavigationScrollView";
 import Close from "../../icons/Close";
-import colors, { rgba } from "../../colors";
+import { rgba } from "../../colors";
 import { NavigatorName, ScreenName } from "../../const";
 import BakerImage from "./BakerImage";
 import DelegatingContainer from "./DelegatingContainer";
@@ -65,12 +65,9 @@ const styles = StyleSheet.create({
     fontSize: 22,
   },
   counterValue: {
-    color: colors.grey,
     fontSize: 16,
   },
-
   propertyRow: {
-    borderBottomColor: colors.lightFog,
     borderBottomWidth: 1,
     paddingVertical: 16,
     flexDirection: "row",
@@ -82,13 +79,9 @@ const styles = StyleSheet.create({
   propertyLabel: {
     paddingRight: 8,
     fontSize: 14,
-    color: colors.smoke,
   },
   propertyValueText: {
     fontSize: 14,
-  },
-  propertyValueTextTouchable: {
-    color: colors.live,
   },
   propertyBody: {
     width: "50%",
@@ -120,14 +113,23 @@ const Property = ({
   label: React$Node,
   children: React$Node,
   last?: boolean,
-}) => (
-  <View style={[styles.propertyRow, last ? styles.propertyRowLast : null]}>
-    <LText semiBold style={styles.propertyLabel}>
-      {label}
-    </LText>
-    <View style={styles.propertyBody}>{children}</View>
-  </View>
-);
+}) => {
+  const { colors } = useTheme();
+  return (
+    <View
+      style={[
+        styles.propertyRow,
+        { borderBottomColor: colors.lightFog },
+        last ? styles.propertyRowLast : null,
+      ]}
+    >
+      <LText semiBold style={styles.propertyLabel} color="smoke">
+        {label}
+      </LText>
+      <View style={styles.propertyBody}>{children}</View>
+    </View>
+  );
+};
 
 const FooterBtn = ({
   label,
@@ -155,6 +157,7 @@ export default function DelegationDetailsModal({
   parentAccount,
   delegation,
 }: Props) {
+  const { colors } = useTheme();
   const navigation = useNavigation();
   const currency = getAccountCurrency(account);
   const unit = getAccountUnit(account);
@@ -250,7 +253,7 @@ export default function DelegationDetailsModal({
             <CurrencyUnitValue showCode unit={unit} value={amount} />
           </LText>
 
-          <LText semiBold style={styles.counterValue}>
+          <LText semiBold style={styles.counterValue} color="grey">
             <CounterValue
               showCode
               date={delegation.operation.date}
@@ -276,10 +279,8 @@ export default function DelegationDetailsModal({
             <Touchable event="DelegationDetailsOpenBaker" onPress={onOpenBaker}>
               <LText
                 semiBold
-                style={[
-                  styles.propertyValueText,
-                  styles.propertyValueTextTouchable,
-                ]}
+                style={[styles.propertyValueText]}
+                color="live"
                 numberOfLines={1}
                 ellipsizeMode="middle"
               >
@@ -317,10 +318,8 @@ export default function DelegationDetailsModal({
             >
               <LText
                 semiBold
-                style={[
-                  styles.propertyValueText,
-                  styles.propertyValueTextTouchable,
-                ]}
+                style={[styles.propertyValueText]}
+                color="live"
                 numberOfLines={1}
                 ellipsizeMode="middle"
               >

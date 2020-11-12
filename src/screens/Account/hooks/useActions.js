@@ -21,9 +21,10 @@ import Exchange from "../../../icons/Exchange";
 type Props = {
   account: AccountLike,
   parentAccount: ?Account,
+  colors: *,
 };
 
-export default function useActions({ account, parentAccount }: Props) {
+export default function useActions({ account, parentAccount, colors }: Props) {
   const readOnlyModeEnabled = useSelector(readOnlyModeEnabledSelector);
   const availableOnSwap = useSelector(state =>
     swapSupportedCurrenciesSelector(state, { accountId: account.id }),
@@ -45,6 +46,7 @@ export default function useActions({ account, parentAccount }: Props) {
       decorators.getActions({
         account,
         parentAccount,
+        colors,
       })) ||
     [];
 

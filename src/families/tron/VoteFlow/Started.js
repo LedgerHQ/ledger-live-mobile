@@ -4,7 +4,6 @@ import { View, StyleSheet } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { Trans } from "react-i18next";
 import { useTheme } from "@react-navigation/native";
-import colors from "../../../colors";
 import { ScreenName } from "../../../const";
 import Button from "../../../components/Button";
 import LText from "../../../components/LText";
@@ -78,15 +77,6 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     marginTop: 4,
-  },
-  howVotingWorks: {
-    marginTop: 32,
-    borderRadius: 32,
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    borderWidth: 1,
-    borderColor: colors.live,
-    flexDirection: "row",
   },
 });
 
