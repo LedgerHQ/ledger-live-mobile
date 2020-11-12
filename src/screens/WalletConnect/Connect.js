@@ -2,12 +2,13 @@
 import React, { useContext, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { View, StyleSheet } from "react-native";
+import { useFocusEffect } from '@react-navigation/native';
 import LText from "../../components/LText";
 import Button from "../../components/Button";
 import { context, STATUS } from "./Provider";
 import colors from "../../colors";
 
-export default function Scan({ route }) {
+export default function Connect({ route }) {
   const { t } = useTranslation();
   const wcContext = useContext(context);
 
@@ -17,6 +18,13 @@ export default function Scan({ route }) {
     },
     [],
   );
+  useFocusEffect(() => {
+    console.log("focus", wcContext);
+    if (wcContext.currentCallRequestId) {
+      console.log("abort error");
+      wcContext.setCurrentCallRequestError(new Error("Aborted"));
+    }
+  }, [wcContext]);
 
   return (
     <>

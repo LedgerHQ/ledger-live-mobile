@@ -21,13 +21,15 @@ class ValidateError extends PureComponent<Props> {
       <View style={styles.root}>
         <View style={styles.container}>
           <GenericErrorView error={error} />
-          <Button
-            event="SendErrorRetry"
-            title={<Trans i18nKey="send.validation.button.retry" />}
-            type="primary"
-            containerStyle={styles.button}
-            onPress={onRetry}
-          />
+          {onRetry ? (
+            <Button
+              event="SendErrorRetry"
+              title={<Trans i18nKey="send.validation.button.retry" />}
+              type="primary"
+              containerStyle={styles.button}
+              onPress={onRetry}
+            />
+          ) : null}
           <Button
             event="SendErrorClose"
             title={<Trans i18nKey="common.close" />}

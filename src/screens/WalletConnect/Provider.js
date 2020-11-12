@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import WalletConnect from "@walletconnect/client";
 import { useSelector } from "react-redux";
+import { parseCallRequest } from "@ledgerhq/live-common/lib/walletconnect";
 import { saveWCSession, getWCSession } from "../../db";
 import { accountScreenSelector } from "../../reducers/accounts";
 import { NavigatorName, ScreenName } from "../../const";
@@ -22,6 +23,9 @@ const Provider = ({ children }) => {
   const [status, setStatus] = useState(STATUS.DISCONNECTED);
   const [error, setError] = useState();
   const [initDone, setInitDone] = useState(false);
+  const [currentCallRequestId, setCurrentCallRequestId] = useState();
+  const [currentCallRequestError, setCurrentCallRequestError] = useState();
+  const [currentCallRequestResult, setCurrentCallRequestResult] = useState();
 
   const connect = ({ uri, account }) => {
     setStatus(STATUS.CONNECTING);
@@ -87,6 +91,33 @@ const Provider = ({ children }) => {
       disconnect();
     });
 
+    connector.on("call_request", async (error, payload) => {
+      if (error) {
+        // ?
+        setError(error);
+        setStatus(STATUS.ERROR);
+        return;
+      }
+
+      const wcCallRequest = await parseCallRequest(account, payload);
+
+      console.log("call request", wcCallRequest, payload.id);
+
+      if (
+        wcCallRequest.type === "transaction" &&
+        wcCallRequest.method === "send"
+      ) {
+        setCurrentCallRequestId(payload.id);
+        navigate(NavigatorName.SendFunds, {
+          screen: ScreenName.SendSummary,
+          params: {
+            transaction: wcCallRequest.data,
+            accountId: account.id,
+          },
+        });
+      }
+    });
+
     setConnector(connector);
     if (connector.connected) {
       setStatus(STATUS.CONNECTED);
@@ -105,6 +136,32 @@ const Provider = ({ children }) => {
   };
 
   useEffect(() => {
+    if (!(currentCallRequestResult || currentCallRequestError)) {
+      return;
+    }
+    if (currentCallRequestResult) {
+      connector.approveRequest({
+        id: currentCallRequestId,
+        result: currentCallRequestResult,
+      });
+    }
+    if (currentCallRequestError) {
+      connector.rejectRequest({
+        id: currentCallRequestId,
+        error: { message: currentCallRequestError.message },
+      });
+    }
+    setCurrentCallRequestId();
+    setCurrentCallRequestResult();
+    setCurrentCallRequestError();
+  }, [
+    currentCallRequestId,
+    currentCallRequestError,
+    currentCallRequestResult,
+    connector,
+  ]);
+
+  useEffect(() => {
     if (initDone) {
       return;
     }
@@ -116,7 +173,7 @@ const Provider = ({ children }) => {
     };
 
     init();
-  });
+  }, [initDone]);
 
   const { account } = useSelector(
     accountScreenSelector({
@@ -154,6 +211,9 @@ const Provider = ({ children }) => {
         disconnect,
         status,
         error,
+        currentCallRequestId,
+        setCurrentCallRequestResult,
+        setCurrentCallRequestError,
       }}
     >
       {children}
