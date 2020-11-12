@@ -5,6 +5,7 @@ import { View, StyleSheet, TouchableOpacity, Platform } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import Swiper from "react-native-swiper";
 import { Trans } from "react-i18next";
+import { useTheme } from "@react-navigation/native";
 import { setCarouselVisibility } from "../../actions/settings";
 import { carouselVisibilitySelector } from "../../reducers/settings";
 import LedgerAcademy from "./slides/LedgerAcademy";
@@ -20,7 +21,6 @@ import StakeAlgo from "./slides/StakeAlgo";
 import Lending from "./slides/Lending";
 import Swap from "./slides/Swap";
 import IconClose from "../../icons/Close";
-import colors from "../../colors";
 
 export const getDefaultSlides = () => {
   return [
@@ -75,6 +75,7 @@ const hitSlop = {
 export const CAROUSEL_NONCE: number = 2;
 
 const Carousel = () => {
+  const { colors } = useTheme();
   const dispatch = useDispatch();
   const hidden = useSelector(carouselVisibilitySelector);
   const [showDismissConfirmation, setShowDismissConfirmation] = useState(false);
@@ -129,8 +130,11 @@ const Carousel = () => {
             autoplay
             autoplayTimeout={5}
             showsButtons={false}
-            dotStyle={styles.bullet}
-            activeDotStyle={[styles.bullet, { opacity: 1 }]}
+            dotStyle={[styles.bullet, { backgroundColor: colors.fog }]}
+            activeDotStyle={[
+              styles.bullet,
+              { backgroundColor: colors.fog, opacity: 1 },
+            ]}
           >
             {slides.map(({ id, Component }) => (
               <Component key={id} />
@@ -159,7 +163,6 @@ const styles = StyleSheet.create({
     height: 5,
     width: 5,
     borderRadius: 5,
-    backgroundColor: colors.fog,
     opacity: 0.5,
     margin: 4,
     marginBottom: -20,

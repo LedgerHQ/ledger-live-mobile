@@ -10,7 +10,7 @@ import {
   getAccountUnit,
 } from "@ledgerhq/live-common/lib/account";
 import { useDelegation } from "@ledgerhq/live-common/lib/families/tezos/bakers";
-import colors from "../../colors";
+import { useTheme } from "@react-navigation/native";
 import Button from "../../components/Button";
 import LText from "../../components/LText";
 import CurrencyUnitValue from "../../components/CurrencyUnitValue";
@@ -29,13 +29,11 @@ const styles = StyleSheet.create({
   card: {
     marginTop: 16,
     borderRadius: 4,
-    backgroundColor: colors.white,
     ...Platform.select({
       android: {
         elevation: 1,
       },
       ios: {
-        shadowColor: colors.black,
         shadowOpacity: 0.03,
         shadowRadius: 8,
         shadowOffset: {
@@ -47,7 +45,7 @@ const styles = StyleSheet.create({
   cardHead: {
     height: 72,
     padding: 16,
-    borderBottomColor: colors.lightFog,
+
     borderBottomWidth: 1,
     flexDirection: "row",
     alignItems: "center",
@@ -64,20 +62,18 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   counterValue: {
-    color: colors.grey,
     fontSize: 14,
   },
   delegatorName: {
     fontSize: 14,
   },
   subtitle: {
-    color: colors.grey,
     fontSize: 14,
   },
 });
 
 const OpCounterValue = ({ children }: *) => (
-  <LText semiBold numberOfLines={1} style={styles.counterValue}>
+  <LText semiBold numberOfLines={1} style={styles.counterValue} color="grey">
     {children}
   </LText>
 );
@@ -94,6 +90,7 @@ export default function TezosAccountBodyHeader({
   account: AccountLike,
   parentAccount: ?Account,
 }) {
+  const { colors } = useTheme();
   const [openedModal, setOpenedModal] = useState(false);
 
   const onModalClose = useCallback(() => {
@@ -122,9 +119,28 @@ export default function TezosAccountBodyHeader({
         <Trans i18nKey="delegation.delegation" />
       </LText>
 
-      <View style={styles.card}>
+      <View
+        style={[
+          styles.card,
+          {
+            backgroundColor: colors.white,
+            ...Platform.select({
+              android: {},
+              ios: {
+                shadowColor: colors.black,
+              },
+            }),
+          },
+        ]}
+      >
         <View
-          style={[styles.cardHead, { opacity: delegation.isPending ? 0.5 : 1 }]}
+          style={[
+            styles.cardHead,
+            {
+              borderBottomColor: colors.lightFog,
+              opacity: delegation.isPending ? 0.5 : 1,
+            },
+          ]}
         >
           <BakerImage size={40} baker={delegation.baker} />
           <View style={styles.cardHeadBody}>
@@ -137,7 +153,7 @@ export default function TezosAccountBodyHeader({
               </LText>
             </View>
             <View style={styles.row}>
-              <LText style={styles.subtitle}>
+              <LText style={styles.subtitle} color="grey">
                 {days ? (
                   <Trans
                     i18nKey="delegation.durationDays"

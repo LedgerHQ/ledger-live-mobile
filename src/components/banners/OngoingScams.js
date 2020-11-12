@@ -2,16 +2,17 @@ import React from "react";
 import { StyleSheet, View, Linking } from "react-native";
 import { Trans } from "react-i18next";
 import { RectButton } from "react-native-gesture-handler";
+import { useTheme } from "@react-navigation/native";
 import { urls } from "../../config/urls";
 
 import LText from "../LText";
-import colors from "../../colors";
 import { useBanner } from "./hooks";
 import AlertTriangle from "../../icons/AlertTriangle";
 import ExternalLink from "../ExternalLink";
 import CloseIcon from "../../icons/Close";
 
 const OngoingScams = () => {
+  const { colors } = useTheme();
   const [isDismissed, dismiss] = useBanner("ONGOING_SCAMS");
 
   if (isDismissed) {
@@ -19,7 +20,7 @@ const OngoingScams = () => {
   }
 
   return (
-    <View style={styles.banner}>
+    <View style={[styles.banner, { backgroundColor: colors.orange }]}>
       <RectButton style={styles.closeButton} onPress={dismiss}>
         <CloseIcon size={16} color={colors.white} />
       </RectButton>
@@ -32,7 +33,7 @@ const OngoingScams = () => {
           <AlertTriangle size={24} color={colors.orange} />
         </View>
         <View style={styles.contentContainer}>
-          <LText semiBold style={styles.description}>
+          <LText semiBold style={styles.description} color="white">
             {<Trans i18nKey="banners.ongoingScams.description" />}
           </LText>
           <View style={styles.learnMoreWrapper}>
@@ -40,7 +41,7 @@ const OngoingScams = () => {
               color={colors.white}
               text={<Trans i18nKey="common.learnMore" />}
               ltextProps={{
-                style: styles.learnMore,
+                style: [styles.learnMore, { color: colors.white }],
               }}
               onPress={() => () => Linking.openURL(urls.banners.ongoingScams)}
               event="LearMoreOngoingScams"
@@ -58,7 +59,6 @@ const styles = StyleSheet.create({
     position: "relative",
     borderRadius: 4,
     overflow: "hidden",
-    backgroundColor: colors.orange,
     marginBottom: 8,
   },
   innerContainer: {
@@ -74,7 +74,6 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   description: {
-    color: colors.white,
     fontSize: 13,
     lineHeight: 19,
     marginRight: 40,
@@ -100,7 +99,6 @@ const styles = StyleSheet.create({
     lineHeight: 19,
     marginRight: 2,
     textDecorationLine: "underline",
-    color: colors.white,
   },
 });
 

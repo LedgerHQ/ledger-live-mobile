@@ -1,7 +1,6 @@
 // @flow
 import React from "react";
 import { TouchableWithoutFeedback, View, StyleSheet } from "react-native";
-import colors from "../colors";
 import LText from "./LText";
 import { scrollToTop } from "../navigation/utils";
 
@@ -14,7 +13,9 @@ export default function StepHeader({ title, subtitle }: Props) {
   return (
     <TouchableWithoutFeedback onPress={scrollToTop}>
       <View style={styles.root}>
-        <LText style={styles.subtitle}>{subtitle}</LText>
+        <LText style={styles.subtitle} color="grey">
+          {subtitle}
+        </LText>
         <LText semiBold secondary numberOfLines={1} style={styles.title}>
           {title}
         </LText>
@@ -36,6 +37,5 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     textAlign: "center",
-    color: colors.grey,
   },
 });

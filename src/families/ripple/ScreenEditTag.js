@@ -7,12 +7,12 @@ import { useTranslation } from "react-i18next";
 import { BigNumber } from "bignumber.js";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import type { Transaction } from "@ledgerhq/live-common/lib/families/ripple/types";
+import { useTheme } from "@react-navigation/native";
 import { i18n } from "../../context/Locale";
 import KeyboardView from "../../components/KeyboardView";
 import Button from "../../components/Button";
 import NavigationScrollView from "../../components/NavigationScrollView";
 import { accountScreenSelector } from "../../reducers/accounts";
-import colors from "../../colors";
 import { ScreenName } from "../../const";
 import { track } from "../../analytics";
 
@@ -36,6 +36,7 @@ const options = {
 };
 
 function RippleEditTag({ route, navigation }: Props) {
+  const { colors } = useTheme();
   const { account } = useSelector(accountScreenSelector(route));
   const { t } = useTranslation();
   const transaction = route.params?.transaction;
@@ -71,7 +72,7 @@ function RippleEditTag({ route, navigation }: Props) {
 
   return (
     <SafeAreaView style={{ flex: 1 }} forceInset={forceInset}>
-      <KeyboardView style={styles.body}>
+      <KeyboardView style={[styles.body, { backgroundColor: colors.white }]}>
         <NavigationScrollView
           contentContainerStyle={styles.root}
           keyboardShouldPersistTaps="always"
@@ -112,7 +113,6 @@ const styles = StyleSheet.create({
   body: {
     flexDirection: "column",
     flex: 1,
-    backgroundColor: colors.white,
   },
   textInputAS: {
     padding: 16,

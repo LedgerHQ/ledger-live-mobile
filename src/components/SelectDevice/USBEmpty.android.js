@@ -4,15 +4,21 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 
 import { Trans } from "react-i18next";
-import colors from "../../colors";
+import { useTheme } from "@react-navigation/native";
 import LText from "../LText";
 import USBIcon from "../../icons/USB";
 
 export default function USBEmpty() {
+  const { colors } = useTheme();
   return (
-    <View style={styles.root}>
+    <View
+      style={[
+        styles.root,
+        { backgroundColor: colors.lightLive, borderColor: colors.lightLive },
+      ]}
+    >
       <USBIcon />
-      <LText semiBold style={styles.text}>
+      <LText semiBold style={styles.text} color="live">
         <Trans i18nKey="SelectDevice.usb" />
       </LText>
     </View>
@@ -25,15 +31,12 @@ const styles = StyleSheet.create({
     padding: 16,
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: colors.lightLive,
     borderRadius: 4,
     borderWidth: 1,
-    borderColor: colors.lightLive,
   },
   text: {
     marginLeft: 12,
     flex: 1,
-    color: colors.live,
     fontSize: 14,
   },
 });

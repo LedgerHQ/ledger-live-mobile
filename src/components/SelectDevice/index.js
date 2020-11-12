@@ -14,7 +14,6 @@ import DeviceItem from "../DeviceItem";
 import BluetoothEmpty from "./BluetoothEmpty";
 import USBEmpty from "./USBEmpty";
 import LText from "../LText";
-import colors from "../../colors";
 import SectionSeparator from "../SectionSeparator";
 import PairNewDeviceButton from "./PairNewDeviceButton";
 
@@ -122,14 +121,14 @@ export default function SelectDevice({
 
 const BluetoothHeader = () => (
   <View style={styles.bluetoothHeader}>
-    <LText semiBold style={styles.section}>
+    <LText semiBold style={styles.section} color="grey">
       <Trans i18nKey="common.bluetooth" />
     </LText>
   </View>
 );
 
 const USBHeader = () => (
-  <LText semiBold style={styles.section}>
+  <LText semiBold style={styles.section} color="grey">
     <Trans i18nKey="common.usb" />
   </LText>
 );
@@ -143,7 +142,7 @@ const UsbPlaceholder = () => (
 
 const ORBar = () => (
   <SectionSeparator thin style={styles.or}>
-    <LText semiBold style={{ color: colors.lightFog }}>
+    <LText semiBold color="lightFog">
       <Trans i18nKey="common.or" />
     </LText>
   </SectionSeparator>
@@ -166,15 +165,10 @@ const styles = StyleSheet.create({
     fontSize: 14,
     lineHeight: 21,
     marginBottom: 12,
-    color: colors.grey,
   },
   addContainer: {
     flexDirection: "row",
     alignItems: "center",
-  },
-  add: {
-    marginRight: 8,
-    color: colors.live,
   },
   bluetoothHeader: {
     flexDirection: "row",

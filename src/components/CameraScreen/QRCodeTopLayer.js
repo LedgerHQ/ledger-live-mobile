@@ -3,16 +3,14 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import { Trans } from "react-i18next";
 
-import colors from "../../colors";
-
 import LText from "../LText";
 
 const QRCodeTopLayer = () => (
   <>
-    <LText semiBold style={styles.text}>
+    <LText semiBold style={styles.text} color="white">
       <Trans i18nKey="account.import.scan.descTop.line1" />
     </LText>
-    <LText bold style={styles.text}>
+    <LText bold style={styles.text} color="white">
       <Trans i18nKey="account.import.scan.descTop.line2" />
     </LText>
   </>
@@ -23,7 +21,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     lineHeight: 32,
     textAlign: "center",
-    color: colors.white,
   },
 });
 
