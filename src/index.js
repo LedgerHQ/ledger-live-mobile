@@ -41,11 +41,13 @@ import DebugRejectSwitch from "./components/DebugRejectSwitch";
 import useAppStateListener from "./components/useAppStateListener";
 import SyncNewAccounts from "./bridge/SyncNewAccounts";
 import { OnboardingContextProvider } from "./screens/Onboarding/onboardingContext";
+import WalletConnectProvider from "./screens/WalletConnect/Provider";
 import HookAnalytics from "./analytics/HookAnalytics";
 import HookSentry from "./components/HookSentry";
 import RootNavigator from "./components/RootNavigator";
 import SetEnvsFromSettings from "./components/SetEnvsFromSettings";
 import type { State } from "./reducers";
+import { navigationRef } from "./rootnavigation";
 
 import { ScreenName, NavigatorName } from "./const";
 
@@ -209,10 +211,9 @@ const linking = {
 };
 
 const DeepLinkingNavigator = ({ children }: { children: React$Node }) => {
-  const ref = React.useRef();
   const hasCompletedOnboarding = useSelector(hasCompletedOnboardingSelector);
 
-  const { getInitialState } = useLinking(ref, {
+  const { getInitialState } = useLinking(navigationRef, {
     ...linking,
     enabled: hasCompletedOnboarding,
     getStateFromPath(path, config) {
@@ -247,7 +248,7 @@ const DeepLinkingNavigator = ({ children }: { children: React$Node }) => {
   }
 
   return (
-    <NavigationContainer initialState={initialState} ref={ref}>
+    <NavigationContainer initialState={initialState} ref={navigationRef}>
       {children}
     </NavigationContainer>
   );
@@ -299,7 +300,9 @@ export default class Root extends Component<
                             <CounterValues.PollingProvider>
                               <ButtonUseTouchable.Provider value={true}>
                                 <OnboardingContextProvider>
-                                  <App importDataString={importDataString} />
+                                  <WalletConnectProvider>
+                                    <App importDataString={importDataString} />
+                                  </WalletConnectProvider>
                                 </OnboardingContextProvider>
                               </ButtonUseTouchable.Provider>
                             </CounterValues.PollingProvider>

@@ -1,0 +1,10 @@
+{
+  "version": "v1",
+  "packages": {
+    "@ledgerhq/live-common": {
+      "signature": "4e1331a492eae17b8b31c31a6e4e70a7",
+      "file": true,
+      "replaced": "^15.7.7"
+    }
+  }
+}

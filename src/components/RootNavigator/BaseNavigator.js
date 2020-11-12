@@ -49,6 +49,7 @@ import AccountHeaderRight from "../../screens/Account/AccountHeaderRight";
 
 export default function BaseNavigator() {
   const { t } = useTranslation();
+  console.log("stack", Stack);
   return (
     <Stack.Navigator mode="modal" screenOptions={closableStackNavigatorConfig}>
       <Stack.Screen
