@@ -12,12 +12,6 @@ export default function Connect({ route }) {
   const { t } = useTranslation();
   const wcContext = useContext(context);
 
-  useEffect(
-    () => () => {
-      wcContext.disconnect();
-    },
-    [],
-  );
   useFocusEffect(() => {
     console.log("focus", wcContext);
     if (wcContext.currentCallRequestId) {

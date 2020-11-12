@@ -13,6 +13,7 @@ type Props = {
   withConfirmation?: boolean,
   confirmationTitle?: React$Node,
   confirmationDesc?: React$Node,
+  onClose: Function,
 };
 
 export default function HeaderRightClose({
@@ -21,6 +22,7 @@ export default function HeaderRightClose({
   withConfirmation,
   confirmationTitle,
   confirmationDesc,
+  onClose,
 }: Props) {
   const navigation = useNavigation();
 
@@ -30,6 +32,10 @@ export default function HeaderRightClose({
   const [onModalHide, setOnModalHide] = useState();
 
   function close(): void {
+    if (onClose) {
+      onClose();
+    }
+
     if (navigation.dangerouslyGetParent().pop && preferDismiss) {
       navigation.dangerouslyGetParent().pop();
       return;

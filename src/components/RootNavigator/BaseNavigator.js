@@ -1,5 +1,5 @@
 // @flow
-import React from "react";
+import React, { useContext } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useTranslation } from "react-i18next";
 import { ScreenName, NavigatorName } from "../../const";
@@ -46,10 +46,12 @@ import HeaderRightClose from "../HeaderRightClose";
 import StepHeader from "../StepHeader";
 import AccountHeaderTitle from "../../screens/Account/AccountHeaderTitle";
 import AccountHeaderRight from "../../screens/Account/AccountHeaderRight";
+import { context as _wcContext } from "../../screens/WalletConnect/Provider";
 
 export default function BaseNavigator() {
   const { t } = useTranslation();
-  console.log("stack", Stack);
+  const wcContext = useContext(_wcContext);
+
   return (
     <Stack.Navigator mode="modal" screenOptions={closableStackNavigatorConfig}>
       <Stack.Screen
@@ -268,8 +270,16 @@ export default function BaseNavigator() {
         component={WalletConnectConnect}
         options={{
           title: "Wallet Connect",
-          headerRight: () => <HeaderRightClose preferDismiss={false} />,
+          headerRight: () => (
+            <HeaderRightClose
+              onClose={() => {
+                wcContext.disconnect();
+              }}
+              preferDismiss={false}
+            />
+          ),
           headerLeft: null,
+          gestureEnabled: false,
         }}
       />
       <Stack.Screen
