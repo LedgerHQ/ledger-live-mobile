@@ -30,7 +30,11 @@ export default function ValidateOnDevice({ device, message }: Props) {
           {t("walletconnect.stepVerification.action")}
         </LText>
         <View style={styles.messageContainer}>
-          <LText semiBold>{message.message}</LText>
+          <LText semiBold>
+            {message.message.domain
+              ? JSON.stringify(message.message)
+              : message.message}
+          </LText>
         </View>
       </ScrollView>
     </View>
