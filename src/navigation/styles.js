@@ -1,6 +1,5 @@
 // @flow
 import { StyleSheet, Platform } from "react-native";
-import colors from "../colors";
 
 let headerStyle = {};
 let headerStyleShadow = {};
@@ -27,9 +26,6 @@ if (Platform.OS === "ios") {
 
 function Styles() {
   return StyleSheet.create({
-    card: {
-      backgroundColor: colors.lightGrey,
-    },
     header: {
       ...headerStyle,
       ...headerStyleShadow,
@@ -37,16 +33,11 @@ function Styles() {
     headerNoShadow: {
       ...headerStyle,
     },
-    bottomTabBar: {
-      borderTopColor: colors.lightFog,
-      backgroundColor: colors.white,
-    },
     transparentHeader: {
       backgroundColor: "transparent",
       shadowOpacity: 0,
       elevation: 0,
     },
-    labelStyle: { fontSize: 12 },
   });
 }
 

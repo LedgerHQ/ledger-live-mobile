@@ -1,5 +1,5 @@
 // @flow
-import React from "react";
+import React, { useMemo } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useTranslation } from "react-i18next";
@@ -11,7 +11,7 @@ import LendingInfo2 from "../../screens/Lending/modals/InfoModals/Step-2";
 import LendingInfo3 from "../../screens/Lending/modals/InfoModals/Step-3";
 import { CloseButton } from "../../screens/OperationDetails";
 import Close from "../../icons/Close";
-import { closableStackNavigatorConfig } from "../../navigation/navigatorConfig";
+import { getStackNavigatorConfig } from "../../navigation/navigatorConfig";
 
 const goBackOptions = colors => ({ route: { params }, navigation }) => ({
   headerRight: () => (
@@ -32,12 +32,16 @@ const goBackOptions = colors => ({ route: { params }, navigation }) => ({
 export default function LendingInfoNavigator() {
   const { t } = useTranslation();
   const { colors } = useTheme();
+  const stackNavigationConfig = useMemo(
+    () => getStackNavigatorConfig(colors, true),
+    [colors],
+  );
   return (
     <Stack.Navigator
       headerMode="float"
       screenOptions={({ navigation }) => {
         return {
-          ...closableStackNavigatorConfig,
+          ...stackNavigationConfig,
           title: t("transfer.lending.info.title"),
 
           headerLeft: null,

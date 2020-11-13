@@ -9,10 +9,7 @@ import EditAccountUnits from "../../screens/AccountSettings/EditAccountUnits";
 import EditAccountName from "../../screens/AccountSettings/EditAccountName";
 import AdvancedLogs from "../../screens/AccountSettings/AdvancedLogs";
 import CurrencySettings from "../../screens/Settings/CryptoAssets/Currencies/CurrencySettings";
-import {
-  getStackNavigatorConfig,
-  closableStackNavigatorConfig,
-} from "../../navigation/navigatorConfig";
+import { getStackNavigatorConfig } from "../../navigation/navigatorConfig";
 
 export default function AccountSettingsNavigator() {
   const { colors } = useTheme();
@@ -20,6 +17,10 @@ export default function AccountSettingsNavigator() {
   const stackNavConfig = useMemo(() => getStackNavigatorConfig(colors), [
     colors,
   ]);
+  const closableNavconfig = useMemo(
+    () => getStackNavigatorConfig(colors, true),
+    [colors],
+  );
   return (
     <Stack.Navigator screenOptions={stackNavConfig}>
       <Stack.Screen
@@ -27,7 +28,7 @@ export default function AccountSettingsNavigator() {
         component={AccountSettingsMain}
         options={{
           title: t("account.settings.header"),
-          headerRight: closableStackNavigatorConfig.headerRight,
+          headerRight: closableNavconfig.headerRight,
         }}
       />
       <Stack.Screen

@@ -4,12 +4,13 @@ import React, { PureComponent } from "react";
 import { StyleSheet, View } from "react-native";
 import { RNCamera } from "react-native-camera";
 import LText from "../components/LText";
-import colors, { rgba } from "../colors";
+import { rgba, withTheme } from "../colors";
 import getWindowDimensions from "../logic/getWindowDimensions";
 
-export default class BenchmarkQRStream extends PureComponent<
+class BenchmarkQRStream extends PureComponent<
   {
     navigation: *,
+    colors: *,
   },
   *,
 > {
@@ -52,6 +53,7 @@ export default class BenchmarkQRStream extends PureComponent<
   };
 
   render() {
+    const { colors } = this.props;
     const { width, height, benchmarks, end } = this.state;
     const summary = benchmarks.map(b => `${b.dataSize}:${b.count}`).join(" ");
     const cameraRatio = 16 / 9;
@@ -75,6 +77,11 @@ export default class BenchmarkQRStream extends PureComponent<
       );
     }
 
+    const darkenStyle = {
+      ...styles.darken,
+      backgroundColor: rgba(colors.darkBlue, 0.4),
+    };
+
     return (
       <View style={styles.root}>
         <RNCamera
@@ -87,14 +94,14 @@ export default class BenchmarkQRStream extends PureComponent<
           {({ status }) =>
             status === "READY" ? (
               <View style={wrapperStyle}>
-                <View style={[styles.darken, styles.centered, styles.topCell]}>
-                  <LText semiBold style={styles.text}>
+                <View style={[darkenStyle, styles.centered, styles.topCell]}>
+                  <LText semiBold style={styles.text} color="white">
                     {"ledger-live-tools.netlify.com/qrstreambenchmark"}
                   </LText>
                 </View>
 
                 <View style={styles.row}>
-                  <View style={styles.darken} />
+                  <View style={[darkenStyle]} />
                   <View
                     style={{ width: viewFinderSize, height: viewFinderSize }}
                   >
@@ -134,11 +141,11 @@ export default class BenchmarkQRStream extends PureComponent<
                       />
                     </View>
                   </View>
-                  <View style={styles.darken} />
+                  <View style={[darkenStyle]} />
                 </View>
-                <View style={[styles.darken, styles.centered]}>
+                <View style={[darkenStyle, styles.centered]}>
                   <View style={styles.centered}>
-                    <LText semiBold style={styles.text}>
+                    <LText semiBold style={styles.text} color="white">
                       {summary}
                     </LText>
                   </View>
@@ -189,13 +196,11 @@ const styles = StyleSheet.create({
     paddingTop: 64,
   },
   darken: {
-    backgroundColor: rgba(colors.darkBlue, 0.4),
     flexGrow: 1,
   },
   text: {
     fontSize: 14,
     textAlign: "center",
-    color: colors.white,
   },
   border: {
     borderColor: "white",
@@ -218,8 +223,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  progressText: {
-    color: colors.white,
-    fontSize: 16,
-  },
 });
+
+export default withTheme(BenchmarkQRStream);

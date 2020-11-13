@@ -44,7 +44,7 @@ import { readOnlyModeEnabledSelector } from "../../reducers/settings";
 import SkipLock from "../../components/behaviour/SkipLock";
 import logger from "../../logger";
 import { rejectionOp } from "../../components/DebugRejectSwitch";
-import { closableStackNavigatorConfig } from "../../navigation/navigatorConfig";
+import { getStackNavigatorConfig } from "../../navigation/navigatorConfig";
 import GenericErrorView from "../../components/GenericErrorView";
 
 const forceInset = { bottom: "always" };
@@ -143,13 +143,13 @@ export default function ReceiveConfirmation({ navigation, route }: Props) {
       return;
     }
 
-    const { headerRight } = closableStackNavigatorConfig;
+    const { headerRight } = getStackNavigatorConfig(colors, true);
     navigation.setOptions({
       headerLeft: null,
       headerRight,
       gestureEnabled: Platform.OS === "ios",
     });
-  }, [allowNavigation, navigation]);
+  }, [allowNavigation, colors, navigation]);
 
   useEffect(() => {
     const device = route.params.device;
