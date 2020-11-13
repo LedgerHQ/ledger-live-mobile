@@ -7,6 +7,7 @@ import type {
 import { useTranslation } from "react-i18next";
 import { useNavigation } from "@react-navigation/native";
 import ValidateOnDevice from "../ValidateOnDevice";
+import ValidateMessageOnDevice from "../ValidateMessageOnDevice";
 import {
   renderWarningOutdated,
   renderConnectYourDevice,
@@ -22,6 +23,7 @@ import {
 } from "./rendering";
 import PreventNativeBack from "../PreventNativeBack";
 import SkipLock from "../behaviour/SkipLock";
+import LText from "../LText";
 
 type Props<R, H, P> = {
   onResult: (paylaod: P) => Promise<void> | void | React$Node,
@@ -60,6 +62,9 @@ export default function DeviceAction<R, H, P>({
     initSwapRequested,
     initSwapError,
     initSwapResult,
+    signMessageRequested,
+    signMessageError,
+    signMessageResult,
     allowOpeningGranted,
     // TODO: fix flow type
   } = (status: any);
@@ -167,6 +172,21 @@ export default function DeviceAction<R, H, P>({
         </>
       );
     }
+  }
+
+  console.log("status", status);
+
+  if (request && device && signMessageRequested) {
+    return (
+      <>
+        <PreventNativeBack />
+        <SkipLock />
+        <ValidateMessageOnDevice
+          device={device}
+          message={signMessageRequested}
+        />
+      </>
+    );
   }
 
   if (typeof deviceStreamingProgress === "number") {

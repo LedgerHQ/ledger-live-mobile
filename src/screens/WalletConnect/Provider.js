@@ -125,6 +125,17 @@ const Provider = ({ children }) => {
           },
         });
       }
+
+      if (wcCallRequest.type === "message") {
+        setCurrentCallRequestId(payload.id);
+        navigate(NavigatorName.SignMessage, {
+          screen: ScreenName.SignSummary,
+          params: {
+            message: wcCallRequest.data,
+            accountId: account.id,
+          },
+        });
+      }
     });
 
     setConnector(connector);
@@ -152,6 +163,7 @@ const Provider = ({ children }) => {
       return;
     }
     if (currentCallRequestResult) {
+      console.log("aprrove");
       connector.approveRequest({
         id: currentCallRequestId,
         result: currentCallRequestResult,

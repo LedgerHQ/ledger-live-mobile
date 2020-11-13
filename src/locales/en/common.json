@@ -2704,6 +2704,17 @@
     "isconnecting": "is connecting, please wait...",
     "disconnect": "Disconnect",
     "retry": "Retry",
-    "close": "Close"
+    "close": "Close",
+    "successTitle": "Message signed",
+    "successDescription": "You have signed the message received from a third party application",
+    "stepperHeader": {
+      "summary": "Summary",
+      "selectDevice": "Select Device",
+      "connectDevice": "Connect Device",
+      "stepRange": "Step {{currentStep}} of {{totalSteps}}"
+    },
+    "stepVerification": {
+      "action": "Please confirm the operation on your device to sign message"
+    }
   }
 }
