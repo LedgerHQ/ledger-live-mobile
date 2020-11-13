@@ -10,8 +10,11 @@ import { context, STATUS } from "./Provider";
 import Spinning from "../../components/Spinning";
 import BigSpinner from "../../icons/BigSpinner";
 import Disconnect from "../../icons/Disconnect";
+import Check from "../../icons/Check";
+import CrossRound from "../../icons/CrossRound";
 import CurrencyIcon from "../../components/CurrencyIcon";
 import InfoBox from "../../components/InfoBox";
+import Circle from "../../components/Circle";
 import WarningBox from "../../components/WarningBox";
 import colors from "../../colors";
 
@@ -46,6 +49,8 @@ export default function Connect({ route, navigation }) {
   const correctIcons = _.filter((wcContext.dappInfo || {}).icons, icon =>
     ["png", "jpg", "jpeg", "bmp", "gif"].includes(icon.split(".")[-1]),
   );
+
+  console.log("error", wcContext.error);
 
   return (
     <>
@@ -97,14 +102,21 @@ export default function Connect({ route, navigation }) {
         ) : wcContext.status === STATUS.CONNECTED ? (
           <>
             <View style={styles.centerContainer}>
-              <Image
-                source={
-                  correctIcons.length
-                    ? correctIcons[0]
-                    : require("../../images/walletconnect.png")
-                }
-                style={styles.logo}
-              />
+              <View style={styles.logoContainer}>
+                <Image
+                  source={
+                    correctIcons.length
+                      ? correctIcons[0]
+                      : require("../../images/walletconnect.png")
+                  }
+                  style={styles.logo}
+                />
+                <View style={styles.checkContainer}>
+                  <Circle bg={colors.green} size={24}>
+                    <Check color="white" size={12} />
+                  </Circle>
+                </View>
+              </View>
               <LText semiBold style={styles.peerName}>
                 {wcContext.dappInfo.name}
               </LText>
@@ -123,9 +135,10 @@ export default function Connect({ route, navigation }) {
             </View>
           </>
         ) : wcContext.status === STATUS.ERROR ? (
-          <>
-            <LText>Error</LText>
-          </>
+          <View style={styles.centerContainer}>
+            <CrossRound size={50} color={colors.alert} />
+            <LText primary style={styles.error}>{wcContext.error.message}</LText>
+          </View>
         ) : (
           <>
             <View style={styles.centerContainer}>
@@ -179,6 +192,29 @@ export default function Connect({ route, navigation }) {
             IconLeft={Disconnect}
           />
         </View>
+      ) : wcContext.status === STATUS.ERROR ? (
+        <View style={styles.verticalButtonsContainer}>
+          <Button
+            containerStyle={styles.verticalButton}
+            type="primary"
+            title="Retry"
+            onPress={() => {
+              wcContext.connect({
+                account: route.params.defaultAccount,
+                uri: route.params.uri,
+              });
+            }}
+          />
+          <Button
+            containerStyle={styles.verticalButton}
+            type="greySecondary"
+            title="Close"
+            onPress={() => {
+              wcContext.disconnect();
+              navigation.goBack();
+            }}
+          />
+        </View>
       ) : null}
     </>
   );
@@ -193,6 +229,12 @@ const styles = StyleSheet.create({
   },
   centerContainer: {
     alignItems: "center",
+  },
+  verticalButtonsContainer: {
+    marginHorizontal: 16,
+  },
+  verticalButton: {
+    marginVertical: 8,
   },
   messagesContainer: {
     marginHorizontal: 16,
@@ -224,6 +266,14 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     marginHorizontal: 16,
   },
+  logoContainer: {
+    position: "relative",
+  },
+  checkContainer: {
+    position: "absolute",
+    top: -5,
+    right: -6,
+  },
   accountTitleContainer: {
     flexDirection: "row",
     alignItems: "center",
@@ -247,6 +297,10 @@ const styles = StyleSheet.create({
     width: 64,
     height: 64,
   },
+  error: {
+    textAlign: "center",
+    marginTop: 60,
+  },
   peerName: {
     fontSize: 18,
     lineHeight: 22,
@@ -265,5 +319,5 @@ const styles = StyleSheet.create({
   },
   messagesSeparator: {
     height: 16,
-  }
+  },
 });

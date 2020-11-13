@@ -57,7 +57,7 @@ const Provider = ({ children }) => {
             },
       );
     } catch (e) {
-      setError(error);
+      setError(e);
       setStatus(STATUS.ERROR);
       return;
     }
