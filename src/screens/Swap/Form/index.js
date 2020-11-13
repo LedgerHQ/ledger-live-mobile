@@ -35,7 +35,7 @@ import {
 } from "@ledgerhq/live-common/lib/currencies";
 import type { DeviceInfo } from "@ledgerhq/live-common/lib/types/manager";
 import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
-import { isCurrencySwapSupported } from "@ledgerhq/live-common/lib/exchange/swap";
+import { isCurrencyExchangeSupported } from "@ledgerhq/live-common/lib/exchange";
 import CurrencyUnitValue from "../../../components/CurrencyUnitValue";
 import SectionSeparator, {
   ArrowDownCircle,
@@ -336,7 +336,7 @@ const selectableCurrenciesSelector = (state, props: { providers: any }) => {
     .filter(isCurrencySupported);
 
   return [...cryptoCurrencies, ...tokenCurrencies].filter(
-    isCurrencySwapSupported,
+    isCurrencyExchangeSupported,
   );
 };
 

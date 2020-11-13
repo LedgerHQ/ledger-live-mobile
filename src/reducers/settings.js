@@ -26,7 +26,7 @@ import type { AvailableProvider } from "@ledgerhq/live-common/lib/exchange/swap/
 import type { OutputSelector } from "reselect";
 import uniq from "lodash/uniq";
 
-import { isCurrencySwapSupported } from "@ledgerhq/live-common/lib/exchange/swap";
+import { isCurrencyExchangeSupported } from "@ledgerhq/live-common/lib/exchange";
 import { currencySettingsDefaults } from "../helpers/CurrencySettingsDefaults";
 import type { State } from ".";
 
@@ -450,7 +450,7 @@ export const swapSupportedCurrenciesSelector: OutputSelector<
     .filter(isCurrencySupported);
 
   return [...cryptoCurrencies, ...tokenCurrencies].filter(
-    isCurrencySwapSupported,
+    isCurrencyExchangeSupported,
   );
 });
 

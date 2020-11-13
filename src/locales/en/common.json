@@ -943,6 +943,7 @@
     "send": "Send",
     "receive": "Receive",
     "buy": "Buy",
+    "sell": "Sell",
     "swap": "Swap",
     "manage": "Manage",
     "lastOperations": "Last operations",
@@ -1308,7 +1309,7 @@
       }
     },
     "exchange": {
-      "title": "Buy/Sell crypto assets"
+      "title": "Buy / Sell"
     },
     "swap": {
       "title": "Swap",
