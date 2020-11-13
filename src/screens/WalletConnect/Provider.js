@@ -26,6 +26,8 @@ const Provider = ({ children }) => {
   const [currentCallRequestId, setCurrentCallRequestId] = useState();
   const [currentCallRequestError, setCurrentCallRequestError] = useState();
   const [currentCallRequestResult, setCurrentCallRequestResult] = useState();
+  const [dappInfo, setDappInfo] = useState();
+  const [approveSession, setApproveSession] = useState();
 
   const connect = ({ uri, account }) => {
     setStatus(STATUS.CONNECTING);
@@ -60,16 +62,23 @@ const Provider = ({ children }) => {
       return;
     }
 
-    connector.on("session_request", () => {
+    connector.on("session_request", (error, payload) => {
       if (error) {
         setError(error);
         setStatus(STATUS.ERROR);
         return;
       }
 
-      connector.approveSession({
-        accounts: [account.freshAddress],
-        chainId: account.currency.ethereumLikeInfo.chainId,
+      setDappInfo(payload.params[0].peerMeta);
+      setApproveSession({
+        fn: () => {
+          console.log("approve session", (new Error()).stack);
+          connector.approveSession({
+            accounts: [account.freshAddress],
+            chainId: account.currency.ethereumLikeInfo.chainId,
+          });
+          setApproveSession();
+        },
       });
     });
 
@@ -120,6 +129,7 @@ const Provider = ({ children }) => {
 
     setConnector(connector);
     if (connector.connected) {
+      setDappInfo(session.session.peerMeta);
       setStatus(STATUS.CONNECTED);
     }
   };
@@ -129,6 +139,8 @@ const Provider = ({ children }) => {
       connector.killSession();
     }
 
+    setDappInfo();
+    setApproveSession();
     setSession({});
     setError();
     setStatus(STATUS.DISCONNECTED);
@@ -214,6 +226,8 @@ const Provider = ({ children }) => {
         currentCallRequestId,
         setCurrentCallRequestResult,
         setCurrentCallRequestError,
+        dappInfo,
+        approveSession: approveSession && approveSession.fn,
       }}
     >
       {children}
