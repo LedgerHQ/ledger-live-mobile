@@ -127,7 +127,7 @@ export default function useActions({ account, parentAccount }: Props) {
                 },
               },
             ],
-            label: <Trans i18nKey="transfer.walletconnect.actionTitle" />,
+            label: <Trans i18nKey="account.walletconnect" />,
             Icon: WalletConnect,
             event: "WalletConnect Account Button",
             eventProperties: { currencyName: currency.name },

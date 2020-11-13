@@ -81,8 +81,7 @@ export default function Connect({ route, navigation }) {
               </LText>
             </View>
             <LText primary style={[styles.details, styles.infos]}>
-              Wants to connect to the following Ethereum account through your
-              wallet :
+              {t("walletconnect.disclaimer")}
             </LText>
             <View style={styles.accountContainer}>
               <View style={styles.accountTitleContainer}>
@@ -121,17 +120,18 @@ export default function Connect({ route, navigation }) {
                 {wcContext.dappInfo.name}
               </LText>
               <LText primary style={styles.details}>
-                Connected
+                {t("walletconnect.connected")}
               </LText>
             </View>
             <View style={styles.messagesContainer}>
               <InfoBox>
-                <Trans i18nKey="transfer.lending.banners.needApproval" />
+                <Trans
+                  i18nKey="walletconnect.info"
+                  values={{ name: wcContext.dappInfo.name }}
+                />
               </InfoBox>
               <View style={styles.messagesSeparator} />
-              <WarningBox>
-                {"Sharing receive addresses from dApp is not secure. Always use Ledger Live when sharing your address to receive funds."}
-              </WarningBox>
+              <WarningBox>{t("walletconnect.warning")}</WarningBox>
             </View>
           </>
         ) : wcContext.status === STATUS.ERROR ? (
@@ -151,7 +151,7 @@ export default function Connect({ route, navigation }) {
                     {wcContext.dappInfo.name}
                   </LText>
                   <LText primary style={styles.details}>
-                    is connecting, please wait...
+                    {t("walletconnect.isconnecting")}
                   </LText>
                 </>
               ) : null}
@@ -164,7 +164,7 @@ export default function Connect({ route, navigation }) {
           <Button
             containerStyle={styles.buttonContainer}
             type="secondary"
-            title="Reject"
+            title={t("walletconnect.reject")}
             onPress={() => {
               wcContext.disconnect();
               navigation.goBack();
@@ -173,7 +173,7 @@ export default function Connect({ route, navigation }) {
           <Button
             containerStyle={styles.buttonContainer}
             type="primary"
-            title="Connect"
+            title={t("walletconnect.connect")}
             onPress={() => {
               wcContext.approveSession();
             }}
@@ -184,7 +184,7 @@ export default function Connect({ route, navigation }) {
           <Button
             containerStyle={styles.buttonContainer}
             type="primary"
-            title="Disconnect"
+            title={t("walletconnect.disconnect")}
             onPress={() => {
               wcContext.disconnect();
               navigation.goBack();
@@ -197,7 +197,7 @@ export default function Connect({ route, navigation }) {
           <Button
             containerStyle={styles.verticalButton}
             type="primary"
-            title="Retry"
+            title={t("walletconnect.retry")}
             onPress={() => {
               wcContext.connect({
                 account: route.params.defaultAccount,
@@ -208,7 +208,7 @@ export default function Connect({ route, navigation }) {
           <Button
             containerStyle={styles.verticalButton}
             type="greySecondary"
-            title="Close"
+            title={t("walletconnect.close")}
             onPress={() => {
               wcContext.disconnect();
               navigation.goBack();
