@@ -231,6 +231,8 @@ export const ScreenName = {
 
   WalletConnectScan: "WalletConnectScan",
   WalletConnectConnect: "WalletConnectConnect",
+  WalletConnectDeeplinkingSelectAccount:
+    "WalletConnectDeeplinkingSelectAccount",
 };
 
 export const NavigatorName = {

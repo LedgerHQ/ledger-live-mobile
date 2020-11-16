@@ -151,6 +151,11 @@ const linking = {
       path: "",
       initialRouteName: NavigatorName.Main,
       screens: {
+        /**
+         * @params ?uri: string
+         * ie: "ledgerhq://wc?uri=wc:00e46b69-d0cc-4b3e-b6a2-cee442f97188@1?bridge=https%3A%2F%2Fbridge.walletconnect.org&key=91303dedf64285cbbaf9120f6e9d160a5c8aa3deb67017a3874cd272323f48ae
+         */
+        [ScreenName.WalletConnectDeeplinkingSelectAccount]: "wc",
         [NavigatorName.Main]: {
           path: "",
           /**
@@ -231,7 +236,7 @@ const DeepLinkingNavigator = ({ children }: { children: React$Node }) => {
   React.useEffect(() => {
     if (hasCompletedOnboarding)
       getInitialState()
-        .catch(() => {
+        .catch((e) => {
           setIsReady(true);
         })
         .then(state => {
