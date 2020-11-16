@@ -179,7 +179,7 @@ platform :ios do
     export_options_method = "ad-hoc"
     code_sign_identity = "iPhone Developer"
     MY_APP_ID = ENV["APP_IDENTIFIER"]
-    MY_PROFILE = "match Development #{ENV["APP_IDENTIFIER"]}"
+    MY_PROFILE = "match AdHoc #{ENV["APP_IDENTIFIER"]}"
     MY_TEAM = ENV["DEVELOPER_TEAM_ID"]
 
     settings_to_override = {
