@@ -207,16 +207,24 @@ export default function SendAmount({ navigation, route }: Props) {
               }}
             >
               <LText semiBold style={styles.label} />
-              <LText numberOfLines={1} semiBold style={styles.liveLabel} />
+              <LText
+                numberOfLines={1}
+                semiBold
+                style={[
+                  styles.liveLabel,
+                  { backgroundColor: colors.lightLive },
+                ]}
+                color="live"
+              />
             </Trans>
           </View>
         </View>
         <View style={styles.bottomWrapper}>
           <TouchableOpacity
             onPress={navigateAdvanced}
-            style={styles.advancedButton}
+            style={[styles.advancedButton, { borderColor: colors.lightFog }]}
           >
-            <LText semiBold style={styles.advancedLabel}>
+            <LText semiBold style={styles.advancedLabel} color="live">
               <Trans i18nKey="transfer.lending.enable.enable.advanced" />
             </LText>
             <ArrowRight color={colors.live} size={16} />
@@ -302,13 +310,10 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 16,
     lineHeight: 19,
-    color: colors.darkBlue,
     marginVertical: 8,
   },
   liveLabel: {
     fontSize: 16,
-    color: colors.live,
-    backgroundColor: colors.lightLive,
     borderRadius: 4,
     paddingHorizontal: 4,
     height: 24,
@@ -324,7 +329,6 @@ const styles = StyleSheet.create({
     width: "100%",
     borderRadius: 4,
     borderWidth: 1,
-    borderColor: colors.lightFog,
     padding: 12,
     flexDirection: "row",
     justifyContent: "space-between",
@@ -333,6 +337,5 @@ const styles = StyleSheet.create({
   },
   advancedLabel: {
     fontSize: 13,
-    color: colors.live,
   },
 });
