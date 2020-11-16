@@ -38,19 +38,24 @@ function Delta({ valueChange, percent, unit, style }: Props) {
 
   const absDelta = delta.absoluteValue();
 
+  const [color, ArrowIcon, sign] = !delta.isZero()
+    ? delta.isGreaterThan(0)
+      ? [colors.success, IconArrowUp, "+"]
+      : [colors.alert, IconArrowDown, "-"]
+    : [colors.darkBlue, null, ""];
+
   return (
     <View style={[styles.root, style]}>
-      {!delta.isZero() ? (
-        delta.isGreaterThan(0) ? (
-          <IconArrowUp size={12} color={colors.success} />
-        ) : (
-          <IconArrowDown size={12} color={colors.alert} />
-        )
-      ) : null}
-      <View style={styles.content}>
-        <LText semiBold style={styles.text}>
+      {percent ? <ArrowIcon size={12} color={color} /> : null}
+      <View style={percent ? styles.content : null}>
+        <LText semiBold style={[styles.text, { color }]}>
           {unit ? (
-            <CurrencyUnitValue unit={unit} value={absDelta} />
+            <CurrencyUnitValue
+              before={`(${sign} `}
+              after={")"}
+              unit={unit}
+              value={absDelta}
+            />
           ) : percent ? (
             `${absDelta.toFixed(0)}%`
           ) : null}

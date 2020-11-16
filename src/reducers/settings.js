@@ -92,6 +92,7 @@ export type SettingsState = {
   swapProviders?: AvailableProvider[],
   theme: Theme,
   carouselVisibility: number,
+  discreetMode: boolean,
 };
 
 export const INITIAL_STATE: SettingsState = {
@@ -117,6 +118,7 @@ export const INITIAL_STATE: SettingsState = {
   swapProviders: [],
   theme: colorScheme === "dark" ? "dusk" : "light",
   carouselVisibility: 0,
+  discreetMode: false,
 };
 
 const pairHash = (from, to) => `${from.ticker}_${to.ticker}`;
@@ -294,6 +296,10 @@ const handlers: Object = {
     ...state,
     carouselVisibility: payload,
   }),
+  SETTINGS_SET_DISCREET_MODE: (state: AppState, { payload }) => ({
+    ...state,
+    discreetMode: payload,
+  }),
 };
 
 const storeSelector = (state: *): SettingsState => state.settings;
@@ -463,6 +469,9 @@ export const swapSupportedCurrenciesSelector: OutputSelector<
     isCurrencySwapSupported,
   );
 });
+
+export const discreetModeSelector = (state: State): boolean =>
+  state.settings.discreetMode === true;
 
 export default handleActions(handlers, INITIAL_STATE);
 

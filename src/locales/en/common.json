@@ -4,6 +4,7 @@
     "apply": "Apply",
     "back": "Back",
     "delete": "Delete",
+    "paste": "Paste",
     "yes": "Yes",
     "no": "No",
     "gotit": "Got it",
@@ -90,10 +91,6 @@
     "BluetoothRequired": {
       "title": "Oops, Bluetooth disabled",
       "description": "Please enable Bluetooth in your phone Settings. ({{state}} state)"
-    },
-    "BitcoinCashHardforkOct2020Warning": {
-      "title": "",
-      "description": "Bitcoin Cash is currently undergoing a hard fork without replay protection. We will temporarily interrupt the Bitcoin Cash service until the network has stabilized."
     },
     "BtcUnmatchedApp": {
       "title": "That's the wrong app",
@@ -649,7 +646,11 @@
       },
       "lending": {
         "title": "Lend crypto",
-        "description": "Lend assets on the Compound Protocol"
+        "description": "Lend asset on the Compound Protocol"
+      },
+      "blackfriday": {
+        "title": "BLACK FRIDAY",
+        "description": "Enjoy 40% off with promo code BLACKFRIDAY20"
       }
     }
   },
@@ -1628,7 +1629,8 @@
     "recipient": {
       "scan": "Scan QR Code",
       "enterAddress": "Enter address",
-      "input": "Enter address"
+      "input": "Enter address",
+      "verifyAddress": "Kindly verify the address matches the one shared by the recipient"
     },
     "amount": {
       "available": "Total available",

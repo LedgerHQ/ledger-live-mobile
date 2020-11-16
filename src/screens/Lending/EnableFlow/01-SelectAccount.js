@@ -44,6 +44,7 @@ import ConfirmationModal from "../../../components/ConfirmationModal";
 import Circle from "../../../components/Circle";
 import Info from "../../../icons/Info";
 import { urls } from "../../../config/urls";
+import { discreetModeSelector } from "../../../reducers/settings";
 
 const SEARCH_KEYS = [
   "account.name",
@@ -63,6 +64,8 @@ function LendingEnableSelectAccount({ route, navigation }: Props) {
   const { colors } = useTheme();
   const currency = route?.params?.currency;
   invariant(currency, "currency required");
+  const discreet = useSelector(discreetModeSelector);
+
   let enabledTotalAmount = null;
   const accounts = useSelector(
     subAccountByCurrencyOrderedScreenSelector(route),
@@ -104,6 +107,7 @@ function LendingEnableSelectAccount({ route, navigation }: Props) {
     formatCurrencyUnit(currency.units[0], enabledTotalAmount, {
       showCode: true,
       disableRounding: false,
+      discreet,
     });
 
   const [approveInfoModalOpen, setApproveInfoModalOpen] = useState(false);

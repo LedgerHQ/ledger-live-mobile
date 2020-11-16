@@ -2,11 +2,12 @@
 
 import React, { useCallback } from "react";
 import { Trans } from "react-i18next";
-import { Image, View, StyleSheet, TouchableOpacity } from "react-native";
+import { Image, View, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import getWindowDimensions from "../../../logic/getWindowDimensions";
 import lending from "../../../images/compound.png";
 import LText from "../../LText";
+import Touchable from "../../Touchable";
 import { NavigatorName } from "../../../const";
 
 const Lending = () => {
@@ -18,7 +19,7 @@ const Lending = () => {
   }, [navigation]);
 
   return (
-    <TouchableOpacity onPress={onClick}>
+    <Touchable event="Lending Carousel" onPress={onClick}>
       <View style={[styles.wrapper, { width: slideWidth }]}>
         <Image
           style={styles.illustration}
@@ -34,7 +35,7 @@ const Lending = () => {
           </LText>
         </View>
       </View>
-    </TouchableOpacity>
+    </Touchable>
   );
 };
 

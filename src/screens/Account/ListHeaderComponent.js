@@ -216,12 +216,13 @@ const styles = StyleSheet.create({
     flexDirection: "column",
   },
   balanceContainer: {
-    alignItems: "center",
+    alignItems: "flex-start",
     marginBottom: 10,
   },
   balanceText: {
     fontSize: 22,
     paddingBottom: 4,
+    lineHeight: 24,
   },
   balanceSubText: {
     fontSize: 16,

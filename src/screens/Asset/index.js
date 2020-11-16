@@ -301,12 +301,13 @@ const styles = StyleSheet.create({
   },
   balanceText: {
     fontSize: 22,
+    lineHeight: 24,
   },
   balanceSubText: {
     fontSize: 16,
   },
   balanceContainer: {
     marginLeft: 16,
-    alignItems: "center",
+    alignItems: "flex-start",
   },
 });

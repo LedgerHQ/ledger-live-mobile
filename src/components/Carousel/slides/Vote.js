@@ -2,10 +2,11 @@
 
 import React, { useCallback } from "react";
 import { Trans } from "react-i18next";
-import { Image, View, StyleSheet, TouchableOpacity } from "react-native";
+import { Image, View, StyleSheet } from "react-native";
 import getWindowDimensions from "../../../logic/getWindowDimensions";
 import sell from "../../../images/banners/vote.png";
 import LText from "../../LText";
+import Touchable from "../../Touchable";
 
 const Vote = () => {
   const slideWidth = getWindowDimensions().width - 32;
@@ -16,7 +17,7 @@ const Vote = () => {
   );
 
   return (
-    <TouchableOpacity onPress={onClick}>
+    <Touchable event="Vote Carousel" onPress={onClick}>
       <View style={[styles.wrapper, { width: slideWidth }]}>
         <Image style={styles.illustration} source={sell} />
         <View>
@@ -28,7 +29,7 @@ const Vote = () => {
           </LText>
         </View>
       </View>
-    </TouchableOpacity>
+    </Touchable>
   );
 };
 

@@ -2,7 +2,7 @@
 import React, { useCallback } from "react";
 import { View, StyleSheet, Linking } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
-import { Trans, useTranslation } from "react-i18next";
+import { Trans } from "react-i18next";
 import { useTheme } from "@react-navigation/native";
 import { ScreenName } from "../../../const";
 import Button from "../../../components/Button";
@@ -29,7 +29,6 @@ type Props = {
 
 export default function DelegationStarted({ navigation, route }: Props) {
   const { colors } = useTheme();
-  const { t } = useTranslation();
   const onNext = useCallback(() => {
     navigation.navigate(ScreenName.CosmosDelegationValidator, {
       ...route.params,
@@ -37,10 +36,6 @@ export default function DelegationStarted({ navigation, route }: Props) {
   }, [navigation, route.params]);
 
   const howDelegationWorks = useCallback(() => {
-    Linking.openURL(urls.cosmosStaking);
-  }, []);
-
-  const onLearnMore = useCallback(() => {
     Linking.openURL(urls.cosmosStakingRewards);
   }, []);
 
@@ -93,15 +88,6 @@ export default function DelegationStarted({ navigation, route }: Props) {
               <Trans i18nKey="cosmos.delegation.flow.steps.starter.warning.description" />
             }
             verified
-            action={
-              <Button
-                event="DelegationStartedLearnMore"
-                type="lightSecondary"
-                onPress={onLearnMore}
-                containerStyle={styles.learnMoreBtn}
-                title={t("common.learnMore")}
-              />
-            }
           />
         </View>
       </NavigationScrollView>

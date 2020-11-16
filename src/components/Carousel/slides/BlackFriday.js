@@ -2,44 +2,51 @@
 
 import React, { useCallback } from "react";
 import { Trans } from "react-i18next";
-import { Image, View, StyleSheet } from "react-native";
+import {
+  Linking,
+  Image,
+  View,
+  StyleSheet,
+  TouchableOpacity,
+} from "react-native";
 import getWindowDimensions from "../../../logic/getWindowDimensions";
-import sell from "../../../images/banners/sell.png";
+import blackfriday from "../../../images/banners/blackfriday.png";
 import LText from "../../LText";
-import Touchable from "../../Touchable";
+import { urls } from "../../../config/urls";
+import colors from "../../../colors";
 
-const Sell = () => {
+const Blackfriday = () => {
   const slideWidth = getWindowDimensions().width - 32;
-
-  const onClick = useCallback(
-    () => {}, // TODO Add implementation when Sell reaches LLM
-    [],
-  );
-
+  const onClick = useCallback(() => {
+    Linking.openURL(urls.banners.blackfriday);
+  }, []);
   return (
-    <Touchable event="Sell Carousel" onPress={onClick}>
+    <TouchableOpacity onPress={onClick}>
       <View style={[styles.wrapper, { width: slideWidth }]}>
-        <Image style={styles.illustration} source={sell} />
+        <Image
+          style={styles.illustration}
+          source={blackfriday}
+          width={127}
+          height={88}
+        />
         <View>
           <LText semiBold secondary style={styles.label}>
-            <Trans i18nKey={`carousel.banners.sell.title`} />
+            <Trans i18nKey={`carousel.banners.blackfriday.title`} />
           </LText>
           <LText primary style={styles.description}>
-            <Trans i18nKey={`carousel.banners.sell.description`} />
+            <Trans i18nKey={`carousel.banners.blackfriday.description`} />
           </LText>
         </View>
       </View>
-    </Touchable>
+    </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
   illustration: {
     position: "absolute",
-    bottom: -10,
+    bottom: 0,
     right: 0,
-    width: 120,
-    height: 100,
   },
   wrapper: {
     width: "100%",
@@ -59,11 +66,13 @@ const styles = StyleSheet.create({
     textTransform: "uppercase",
     letterSpacing: 1,
     opacity: 0.5,
+    color: colors.darkBlue,
     fontSize: 10,
     lineHeight: 15,
     marginRight: 100,
   },
   description: {
+    color: colors.darkBlue,
     fontSize: 13,
     lineHeight: 19,
     marginTop: 8,
@@ -75,4 +84,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Sell;
+export default Blackfriday;

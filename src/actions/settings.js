@@ -152,3 +152,8 @@ export const setTheme = (payload: Theme) => ({
   type: "SETTINGS_SET_THEME",
   payload,
 });
+
+export const setDiscreetMode = (payload: boolean) => ({
+  type: "SETTINGS_SET_DISCREET_MODE",
+  payload,
+});

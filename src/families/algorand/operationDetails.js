@@ -13,8 +13,10 @@ import { getAccountUnit } from "@ledgerhq/live-common/lib/account/helpers";
 
 import * as Animatable from "react-native-animatable";
 import { useTheme } from "@react-navigation/native";
+import { useSelector } from "react-redux";
 import Section from "../../screens/OperationDetails/Section";
 import OperationStatusIcon from "../../icons/OperationStatusIcon";
+import { discreetModeSelector } from "../../reducers/settings";
 
 type Props = {
   extra: {
@@ -28,12 +30,14 @@ type Props = {
 function OperationDetailsExtra({ extra, account }: Props) {
   const { t } = useTranslation();
   const unit = getAccountUnit(account);
+  const discreet = useSelector(discreetModeSelector);
   const formattedRewards =
     extra.rewards && extra.rewards.gt(0)
       ? formatCurrencyUnit(unit, extra.rewards, {
           disableRounding: true,
           alwaysShowSign: false,
           showCode: true,
+          discreet,
         })
       : null;
 

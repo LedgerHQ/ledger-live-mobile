@@ -20,11 +20,13 @@ import type {
   Currency,
   Unit,
 } from "@ledgerhq/live-common/lib/types";
+import { useSelector } from "react-redux";
 import LText from "../../components/LText";
 import CurrencyUnitValue from "../../components/CurrencyUnitValue";
 import CounterValue from "../../components/CounterValue";
 import DelegationInfo from "../../components/DelegationInfo";
 import Section from "../../screens/OperationDetails/Section";
+import { discreetModeSelector } from "../../reducers/settings";
 
 const helpURL = "https://support.ledger.com/hc/en-us/articles/360013062139";
 
@@ -47,6 +49,7 @@ function OperationDetailsExtra({
   account,
 }: OperationDetailsExtraProps) {
   const { t } = useTranslation();
+  const discreet = useSelector(discreetModeSelector);
 
   switch (type) {
     case "VOTE": {
@@ -59,7 +62,7 @@ function OperationDetailsExtra({
       const value = formatCurrencyUnit(
         account.unit,
         BigNumber(extra.frozenAmount),
-        { showCode: true },
+        { showCode: true, discreet },
       );
       return (
         <Section
@@ -72,7 +75,7 @@ function OperationDetailsExtra({
       const value = formatCurrencyUnit(
         account.unit,
         BigNumber(extra.unfreezeAmount),
-        { showCode: true },
+        { showCode: true, discreet },
       );
       return (
         <Section
