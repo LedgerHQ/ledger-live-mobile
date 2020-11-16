@@ -1,10 +1,9 @@
 // @flow
 
 import React, { useState } from "react";
-import { useIsFocused } from "@react-navigation/native";
+import { useIsFocused, useTheme } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/dist/Feather";
 import Touchable from "../../components/Touchable";
-import colors from "../../colors";
 import AccountOrderModal from "./AccountOrderModal";
 import RefreshAccountsOrdering from "../../components/RefreshAccountOrdering";
 
@@ -24,6 +23,7 @@ function RefreshAccounts({ isOpened }: RefreshAccountsProps) {
 }
 
 export default function AccountOrder() {
+  const { colors } = useTheme();
   const [isOpened, setIsOpened] = useState(false);
 
   function onPress(): void {

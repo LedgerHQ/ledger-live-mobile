@@ -6,8 +6,8 @@ import type { PressEvent } from "react-native/Libraries/Types/CoreEventTypes";
 import * as d3shape from "d3-shape";
 import Svg, { Path, G, Circle } from "react-native-svg";
 import { getCurrencyColor } from "@ledgerhq/live-common/lib/currencies";
-import colors from "../../colors";
 import type { DistributionItem } from "./DistributionCard";
+import { withTheme } from "../../colors";
 
 type Props = {
   data: Array<DistributionItem>,
@@ -15,6 +15,7 @@ type Props = {
   onHighlightChange: number => void,
   highlight: number,
   bg: string,
+  colors: *,
 };
 
 class RingChart extends PureComponent<Props> {
@@ -120,7 +121,7 @@ class RingChart extends PureComponent<Props> {
   };
 
   render() {
-    const { highlight, size, bg } = this.props;
+    const { highlight, size, bg, colors } = this.props;
     return (
       <View {...this.panResponder.panHandlers}>
         <Svg width={size} height={size} viewBox="0 0 76 76">
@@ -146,4 +147,4 @@ class RingChart extends PureComponent<Props> {
   }
 }
 
-export default RingChart;
+export default withTheme(RingChart);

@@ -1,10 +1,10 @@
 // @flow
 import React, { useState, useCallback, useEffect } from "react";
 import { Trans } from "react-i18next";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useTheme } from "@react-navigation/native";
 import Circle from "../../../components/Circle";
 import AmountUp from "../../../icons/AmountUp";
-import colors, { rgba } from "../../../colors";
+import { rgba } from "../../../colors";
 import { isAcceptedLendingTerms } from "../../../logic/terms";
 import { NavigatorName, ScreenName } from "../../../const";
 import ConfirmationModal from "../../../components/ConfirmationModal";
@@ -12,6 +12,7 @@ import ConfirmationModal from "../../../components/ConfirmationModal";
 let HAS_BEEN_SHOWN = false;
 
 export default function HighFeeWarningModal() {
+  const { colors } = useTheme();
   const [isOpened, setIsOpened] = useState(false);
 
   const navigation = useNavigation();

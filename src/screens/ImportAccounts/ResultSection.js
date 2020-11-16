@@ -4,7 +4,6 @@ import { StyleSheet } from "react-native";
 import { Trans } from "react-i18next";
 import { useTheme } from "@react-navigation/native";
 import LText from "../../components/LText";
-import colors from "../../colors";
 
 type Props = { mode: string };
 
@@ -37,6 +36,7 @@ function ResultSection({ mode }: Props) {
     <LText
       semiBold
       style={[styles.sectionHeaderText, { backgroundColor: colors.white }]}
+      color="grey"
     >
       {text}
     </LText>
@@ -45,7 +45,6 @@ function ResultSection({ mode }: Props) {
 
 const styles = StyleSheet.create({
   sectionHeaderText: {
-    color: colors.grey,
     fontSize: 14,
     paddingTop: 24,
     paddingBottom: 16,

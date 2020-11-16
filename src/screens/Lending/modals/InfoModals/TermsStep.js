@@ -10,7 +10,6 @@ import {
 import { Trans } from "react-i18next";
 import { useNavigation } from "@react-navigation/native";
 import BaseInfoModal from "../BaseModal";
-import colors from "../../../../colors";
 import Touchable from "../../../../components/Touchable";
 import CheckBox from "../../../../components/CheckBox";
 import LText from "../../../../components/LText";
@@ -68,7 +67,7 @@ export default function TermsStep({ route: { params } }: Props) {
         >
           <LText style={styles.switchLabel}>
             <Trans i18nKey="transfer.lending.terms.switchLabel">
-              <LText semiBold style={styles.conditionsText} />
+              <LText semiBold style={styles.conditionsText} color="live" />
             </Trans>
           </LText>
         </Touchable>
@@ -85,13 +84,11 @@ const styles = StyleSheet.create({
   },
   switchLabel: {
     marginLeft: 8,
-    color: colors.darkBlue,
     fontSize: 13,
     paddingRight: 16,
   },
   conditionsText: {
     textDecorationLine: "underline",
-    color: colors.live,
   },
   footer: {
     flexDirection: "row",

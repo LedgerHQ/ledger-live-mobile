@@ -4,13 +4,12 @@ import React, { useCallback, useMemo, useState } from "react";
 import { SectionList, View, StyleSheet, SafeAreaView } from "react-native";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useTheme } from "@react-navigation/native";
 import type {
   AccountLikeArray,
   Operation,
 } from "@ledgerhq/live-common/lib/types";
 import { groupAccountsOperationsByDay } from "@ledgerhq/live-common/lib/account";
-import colors from "../../../colors";
 import { ScreenName } from "../../../const";
 
 import { flattenSortAccountsSelector } from "../../../actions/general";
@@ -46,6 +45,7 @@ function keyExtractor(item: Operation) {
 }
 
 export default function History() {
+  const { colors } = useTheme();
   const { t } = useTranslation();
   const accounts = useSelector(flattenSortAccountsSelector);
   const history = useCompoundHistory(accounts);
@@ -65,7 +65,7 @@ export default function History() {
   }, [navigation]);
 
   return (
-    <SafeAreaView style={[styles.root]}>
+    <SafeAreaView style={[styles.root, { backgroundColor: colors.lightGrey }]}>
       <TrackScreen category="Lend" name="History" />
       <View style={styles.body}>
         {/** $FlowFixMe */}
@@ -128,7 +128,6 @@ export default function History() {
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: colors.lightGrey,
   },
   body: {
     flex: 1,

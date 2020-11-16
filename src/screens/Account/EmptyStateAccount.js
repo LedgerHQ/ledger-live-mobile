@@ -9,17 +9,20 @@ import {
 } from "@ledgerhq/live-common/lib/account";
 import { listTokenTypesForCryptoCurrency } from "@ledgerhq/live-common/lib/currencies";
 import { ScreenName, NavigatorName } from "../../const";
-import colors from "../../colors";
+
 import LText from "../../components/LText";
 import Button from "../../components/Button";
 import Receive from "../../icons/Receive";
 import Exchange from "../../icons/Exchange";
 import { isCurrencySupported } from "../Exchange/coinifyConfig";
 
+import { withTheme } from "../../colors";
+
 class EmptyStateAccount extends PureComponent<{
   account: AccountLike,
   parentAccount: ?Account,
   navigation: *,
+  colors: *,
 }> {
   goToReceiveFunds = () => {
     const { navigation, account, parentAccount } = this.props;
@@ -44,7 +47,7 @@ class EmptyStateAccount extends PureComponent<{
   };
 
   render() {
-    const { account, parentAccount } = this.props;
+    const { account, parentAccount, colors } = this.props;
     const mainAccount = getMainAccount(account, parentAccount);
     const hasSubAccounts = Array.isArray(mainAccount.subAccounts);
     const isToken =
@@ -52,25 +55,25 @@ class EmptyStateAccount extends PureComponent<{
     const canBeBought = isCurrencySupported(getAccountCurrency(account));
 
     return (
-      <View style={styles.root}>
+      <View style={[styles.root, { backgroundColor: colors.lightGrey }]}>
         <View style={styles.body}>
           <Image source={require("../../images/EmptyStateAccount.png")} />
           <LText secondary semiBold style={styles.title}>
             <Trans i18nKey="account.emptyState.title" />
           </LText>
-          <LText style={styles.desc}>
+          <LText style={styles.desc} color="grey">
             {hasSubAccounts && isToken ? (
               <Trans i18nKey="account.emptyState.descToken">
                 {"Make sure the"}
-                <LText semiBold style={styles.managerAppName}>
+                <LText semiBold color="darkBlue">
                   {mainAccount.currency.managerAppName}
                 </LText>
                 {"app is installed and start receiving"}
-                <LText semiBold style={styles.managerAppName}>
+                <LText semiBold color="darkBlue">
                   {mainAccount.currency.ticker}
                 </LText>
                 {"and"}
-                <LText semiBold style={styles.managerAppName}>
+                <LText semiBold color="darkBlue">
                   {account &&
                     account.currency &&
                     listTokenTypesForCryptoCurrency(mainAccount.currency).join(
@@ -82,18 +85,18 @@ class EmptyStateAccount extends PureComponent<{
             ) : canBeBought ? (
               <Trans i18nKey="account.emptyState.descWithBuy">
                 {"Make sure the"}
-                <LText semiBold style={styles.managerAppName}>
+                <LText semiBold color="darkBlue">
                   {mainAccount.currency.managerAppName}
                 </LText>
                 {"app is installed so you can buy or receive"}
-                <LText semiBold style={styles.managerAppName}>
+                <LText semiBold color="darkBlue">
                   {getAccountCurrency(account).ticker}
                 </LText>
               </Trans>
             ) : (
               <Trans i18nKey="account.emptyState.desc">
                 {"Make sure the"}
-                <LText semiBold style={styles.managerAppName}>
+                <LText semiBold color="darkBlue">
                   {mainAccount.currency.managerAppName}
                 </LText>
                 {"app is installed and start receiving"}
@@ -130,7 +133,7 @@ class EmptyStateAccount extends PureComponent<{
   }
 }
 
-export default EmptyStateAccount;
+export default withTheme(EmptyStateAccount);
 
 const styles = StyleSheet.create({
   root: {
@@ -138,7 +141,6 @@ const styles = StyleSheet.create({
     margin: 16,
     flexDirection: "column",
     justifyContent: "center",
-    backgroundColor: colors.lightGrey,
   },
   body: {
     alignItems: "center",
@@ -152,13 +154,9 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   desc: {
-    color: colors.grey,
     marginHorizontal: 24,
     textAlign: "center",
     marginBottom: 32,
-  },
-  managerAppName: {
-    color: colors.black,
   },
   buttonContainer: {
     flexDirection: "row",

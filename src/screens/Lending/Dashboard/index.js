@@ -5,9 +5,9 @@ import { ScrollView, StyleSheet, SafeAreaView } from "react-native";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { listCurrentRates } from "@ledgerhq/live-common/lib/families/ethereum/modules/compound";
+import { useTheme } from "@react-navigation/native";
 import { useCompoundSummaries } from "../useCompoundSummaries";
 import { flattenSortAccountsSelector } from "../../../actions/general";
-import colors from "../../../colors";
 import TrackScreen from "../../../analytics/TrackScreen";
 import LText from "../../../components/LText";
 import Rates from "./Rates";
@@ -15,13 +15,14 @@ import ActiveAccounts from "./ActiveAccounts";
 import LendingWarnings from "../shared/LendingWarnings";
 
 export default function Dashboard() {
+  const { colors } = useTheme();
   const { t } = useTranslation();
   const accounts = useSelector(flattenSortAccountsSelector);
   const summaries = useCompoundSummaries(accounts);
   const rates = listCurrentRates();
 
   return (
-    <SafeAreaView style={[styles.root]}>
+    <SafeAreaView style={[styles.root, { backgroundColor: colors.lightGrey }]}>
       <TrackScreen category="Lend" />
       <LendingWarnings />
       <ScrollView style={styles.body}>
@@ -41,7 +42,6 @@ export default function Dashboard() {
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: colors.lightGrey,
   },
   body: {
     flex: 1,

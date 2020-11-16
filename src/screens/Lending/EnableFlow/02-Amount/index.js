@@ -15,8 +15,9 @@ import {
   findCompoundToken,
   formatCurrencyUnit,
 } from "@ledgerhq/live-common/lib/currencies";
+import { useTheme } from "@react-navigation/native";
 import { accountScreenSelector } from "../../../../reducers/accounts";
-import colors, { rgba } from "../../../../colors";
+import { rgba } from "../../../../colors";
 import { ScreenName, NavigatorName } from "../../../../const";
 import { TrackScreen } from "../../../../analytics";
 import LText from "../../../../components/LText";
@@ -46,6 +47,7 @@ type RouteParams = {
 };
 
 export default function SendAmount({ navigation, route }: Props) {
+  const { colors } = useTheme();
   const { t } = useTranslation();
   const { currency, transaction: tx } = route.params;
   const { account, parentAccount } = useSelector(accountScreenSelector(route));
@@ -151,13 +153,23 @@ export default function SendAmount({ navigation, route }: Props) {
         eventProperties={{ currencyName: currency.name }}
       />
       <LendingWarnings />
-      <SafeAreaView style={styles.root}>
+      <SafeAreaView style={[styles.root, { backgroundColor: colors.white }]}>
         <View style={styles.container}>
           <LinkedIcons
             left={
               <View style={styles.currencyIconContainer}>
                 <CurrencyIcon size={62} radius={62} currency={currency} />
-                <LText style={styles.balanceLabel} semiBold numberOfLines={1}>
+                <LText
+                  style={[
+                    styles.balanceLabel,
+                    {
+                      backgroundColor: colors.lightFog,
+                    },
+                  ]}
+                  color="grey"
+                  semiBold
+                  numberOfLines={1}
+                >
                   <CurrencyUnitValue
                     showCode
                     unit={unit}
@@ -242,7 +254,6 @@ export default function SendAmount({ navigation, route }: Props) {
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: colors.white,
   },
   container: {
     flex: 1,
@@ -273,8 +284,6 @@ const styles = StyleSheet.create({
     height: 20,
     lineHeight: 20,
     borderRadius: 4,
-    color: colors.grey,
-    backgroundColor: colors.lightFog,
     width: "auto",
     flexGrow: 1,
     fontSize: 11,

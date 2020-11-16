@@ -6,12 +6,11 @@ import { Trans } from "react-i18next";
 import type { AccountLikeArray } from "@ledgerhq/live-common/lib/types";
 import type { CurrentRate } from "@ledgerhq/live-common/lib/families/ethereum/modules/compound";
 // import { formatShort } from "@ledgerhq/live-common/lib/currencies";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useTheme } from "@react-navigation/native";
 import LText from "../../../components/LText";
 import CurrencyUnitValue from "../../../components/CurrencyUnitValue";
 import CurrencyIcon from "../../../components/CurrencyIcon";
 import Touchable from "../../../components/Touchable";
-import colors from "../../../colors";
 import { NavigatorName, ScreenName } from "../../../const";
 
 const Row = ({
@@ -22,6 +21,7 @@ const Row = ({
   data: CurrentRate,
   accounts: AccountLikeArray,
 }) => {
+  const { colors } = useTheme();
   const { token, supplyAPY } = data;
   const navigation = useNavigation();
 
@@ -43,7 +43,7 @@ const Row = ({
 
   return (
     <Touchable
-      style={styles.row}
+      style={[styles.row, { backgroundColor: colors.white }]}
       onPress={navigateToEnableFlow}
       event="Page Lend deposit"
       eventProperties={{ currency: token.id }}
@@ -53,7 +53,7 @@ const Row = ({
         <LText semiBold style={styles.title}>
           {token.ticker}
         </LText>
-        <LText style={styles.subTitle}>
+        <LText style={styles.subTitle} color="grey">
           <CurrencyUnitValue
             unit={token.units[0]}
             value={totalBalance}
@@ -61,7 +61,16 @@ const Row = ({
           />
         </LText>
       </View>
-      <LText bold style={styles.badge}>
+      <LText
+        bold
+        style={[
+          styles.badge,
+          {
+            backgroundColor: colors.lightLive,
+          },
+        ]}
+        color="live"
+      >
         <Trans
           i18nKey="transfer.lending.dashboard.apy"
           values={{ value: supplyAPY }}
@@ -97,7 +106,6 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     padding: 8,
     marginVertical: 4,
-    backgroundColor: colors.white,
     height: 70,
     borderRadius: 4,
   },
@@ -105,18 +113,14 @@ const styles = StyleSheet.create({
   title: {
     lineHeight: 17,
     fontSize: 14,
-    color: colors.darkBlue,
   },
   subTitle: {
     lineHeight: 15,
     fontSize: 12,
-    color: colors.grey,
   },
   badge: {
     fontSize: 13,
     lineHeight: 24,
-    color: colors.live,
-    backgroundColor: colors.lightLive,
     borderRadius: 24,
     height: 24,
     paddingHorizontal: 8,

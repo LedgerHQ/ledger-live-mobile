@@ -5,13 +5,14 @@ import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { StyleSheet } from "react-native";
 import { Trans } from "react-i18next";
+import { compose } from "redux";
 import { refreshAccountsOrdering } from "../../actions/general";
 import { setOrderAccounts } from "../../actions/settings";
 import { orderAccountsSelector } from "../../reducers/settings";
 import Check from "../../icons/Check";
 import LText from "../../components/LText";
 import Touchable from "../../components/Touchable";
-import colors from "../../colors";
+import { withTheme } from "../../colors";
 
 const styles = StyleSheet.create({
   root: {
@@ -28,11 +29,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     flex: 1,
   },
-  order: {
-    fontSize: 14,
-    color: colors.grey,
-    marginRight: 8,
-  },
 });
 
 class OrderOption extends Component<{
@@ -41,6 +37,7 @@ class OrderOption extends Component<{
   orderAccounts: string,
   setOrderAccounts: string => void,
   refreshAccountsOrdering: () => void,
+  colors: *,
 }> {
   onPress = () => {
     const { id, setOrderAccounts, refreshAccountsOrdering } = this.props;
@@ -49,7 +46,7 @@ class OrderOption extends Component<{
   };
 
   render() {
-    const { id, orderAccounts } = this.props;
+    const { id, orderAccounts, colors } = this.props;
     const selected = orderAccounts === id;
     return (
       <Touchable
@@ -67,12 +64,15 @@ class OrderOption extends Component<{
   }
 }
 
-export default connect(
-  createStructuredSelector({
-    orderAccounts: orderAccountsSelector,
-  }),
-  {
-    setOrderAccounts,
-    refreshAccountsOrdering,
-  },
+export default compose(
+  connect(
+    createStructuredSelector({
+      orderAccounts: orderAccountsSelector,
+    }),
+    {
+      setOrderAccounts,
+      refreshAccountsOrdering,
+    },
+  ),
+  withTheme,
 )(OrderOption);

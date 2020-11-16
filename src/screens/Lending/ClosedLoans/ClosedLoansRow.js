@@ -12,11 +12,11 @@ import LText from "../../../components/LText";
 import CurrencyUnitValue from "../../../components/CurrencyUnitValue";
 import CurrencyIcon from "../../../components/CurrencyIcon";
 import CounterValue from "../../../components/CounterValue";
-import colors, { rgba } from "../../../colors";
 import DelegationDrawer from "../../../components/DelegationDrawer";
 import Circle from "../../../components/Circle";
 import Compound, { compoundColor } from "../../../icons/Compound";
 import { useLocale } from "../../../context/Locale";
+import { rgba } from "../../../colors";
 
 type RowProps = {
   item: ClosedLoanHistory,
@@ -98,7 +98,12 @@ export default function ClosedLoansRow({ item }: RowProps) {
       <TouchableOpacity style={styles.row} onPress={onOpenDrawer}>
         <CurrencyIcon radius={100} currency={token} size={32} />
         <View style={styles.currencySection}>
-          <LText numberOfLines={1} semiBold style={styles.subTitle}>
+          <LText
+            numberOfLines={1}
+            semiBold
+            style={styles.subTitle}
+            color="grey"
+          >
             {name}
           </LText>
           <LText numberOfLines={1} semiBold style={styles.title}>
@@ -113,7 +118,7 @@ export default function ClosedLoansRow({ item }: RowProps) {
               showCode
             />
           </LText>
-          <LText style={styles.subTitle}>
+          <LText style={styles.subTitle} color="grey">
             <CounterValue
               currency={token}
               value={amountSupplied}
@@ -160,12 +165,10 @@ const styles = StyleSheet.create({
   title: {
     lineHeight: 17,
     fontSize: 14,
-    color: colors.darkBlue,
   },
   subTitle: {
     lineHeight: 15,
     fontSize: 12,
-    color: colors.grey,
   },
   currencyIconContainer: {
     flexDirection: "row",

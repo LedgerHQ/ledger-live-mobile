@@ -13,7 +13,6 @@ import { createAction } from "@ledgerhq/live-common/lib/hw/actions/manager";
 import { removeKnownDevice } from "../../actions/ble";
 import { ScreenName } from "../../const";
 import SelectDevice from "../../components/SelectDevice";
-import colors from "../../colors";
 import TrackScreen from "../../analytics/TrackScreen";
 import { track } from "../../analytics";
 import LText from "../../components/LText";
@@ -194,41 +193,16 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 16,
   },
-  or: {
-    marginVertical: 30,
-  },
   title: {
     lineHeight: 27,
     fontSize: 18,
     marginVertical: 24,
-  },
-  section: {
-    fontSize: 14,
-    lineHeight: 21,
-    marginBottom: 12,
-    color: colors.grey,
-  },
-  addContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  add: {
-    marginRight: 8,
-    color: colors.live,
-  },
-  bluetoothHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "flex-start",
   },
   footerContainer: {
     flexDirection: "row",
   },
   buttonContainer: {
     flex: 1,
-  },
-  buttonMarginLeft: {
-    marginLeft: 16,
   },
 });
 

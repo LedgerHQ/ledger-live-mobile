@@ -4,9 +4,8 @@ import React, { useCallback } from "react";
 import { View, StyleSheet, FlatList, SafeAreaView } from "react-native";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useTheme } from "@react-navigation/native";
 import { makeClosedHistoryForAccounts } from "@ledgerhq/live-common/lib/compound/logic";
-import colors from "../../../colors";
 
 import { useCompoundSummaries } from "../useCompoundSummaries";
 import { flattenSortAccountsSelector } from "../../../actions/general";
@@ -18,6 +17,7 @@ import ClosedLoansRow from "./ClosedLoansRow";
 
 export default function ClosedLoans() {
   const { t } = useTranslation();
+  const { colors } = useTheme();
   const accounts = useSelector(flattenSortAccountsSelector);
   const summaries = useCompoundSummaries(accounts);
   const closedLoans = makeClosedHistoryForAccounts(summaries);
@@ -28,17 +28,24 @@ export default function ClosedLoans() {
   }, [navigation]);
 
   return (
-    <SafeAreaView style={[styles.root]}>
+    <SafeAreaView style={[styles.root, { backgroundColor: colors.lightGrey }]}>
       <TrackScreen category="Lend" name="Closed Positions" />
       <View style={styles.body}>
-        <View style={styles.rows}>
+        <View style={[styles.rows, { backgroundColor: colors.white }]}>
           <FlatList
             data={closedLoans}
             renderItem={({ item }) => <ClosedLoansRow item={item} />}
             keyExtractor={(item, index) =>
               `${item.endDate.toDateString()}${index}`
             }
-            ItemSeparatorComponent={() => <View style={styles.separator} />}
+            ItemSeparatorComponent={() => (
+              <View
+                style={[
+                  styles.separator,
+                  { backgroundColor: colors.lightGrey },
+                ]}
+              />
+            )}
             ListEmptyComponent={() => (
               <EmptyState
                 title={t("transfer.lending.closedLoans.tabTitle")}
@@ -57,16 +64,13 @@ export default function ClosedLoans() {
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: colors.lightGrey,
   },
   rows: {
-    backgroundColor: colors.white,
     borderRadius: 4,
   },
   separator: {
     width: "100%",
     height: 1,
-    backgroundColor: colors.lightGrey,
   },
   body: {
     flex: 1,

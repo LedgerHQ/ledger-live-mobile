@@ -18,8 +18,8 @@ import type {
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { BigNumber } from "bignumber.js";
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account/helpers";
+import { useTheme } from "@react-navigation/native";
 import { accountScreenSelector } from "../../../../reducers/accounts";
-import colors from "../../../../colors";
 import { ScreenName } from "../../../../const";
 import { TrackScreen } from "../../../../analytics";
 import LText from "../../../../components/LText";
@@ -44,6 +44,7 @@ type RouteParams = {
 };
 
 export default function EnableAdvanced({ navigation, route }: Props) {
+  const { colors } = useTheme();
   const { account, parentAccount } = useSelector(accountScreenSelector(route));
   invariant(
     account && account.type === "TokenAccount",
@@ -116,7 +117,7 @@ export default function EnableAdvanced({ navigation, route }: Props) {
         name="step 1 (Advanced)"
         eventProperties={{ currencyName: currency.name }}
       />
-      <SafeAreaView style={styles.root}>
+      <SafeAreaView style={[styles.root, { backgroundColor: colors.white }]}>
         <View style={styles.container}>
           <View style={styles.row}>
             <TooltipLabel
@@ -141,7 +142,7 @@ export default function EnableAdvanced({ navigation, route }: Props) {
             </View>
           </View>
           <View style={styles.row}>
-            <LText style={styles.label}>
+            <LText style={styles.label} color="grey">
               <Trans i18nKey="transfer.lending.enable.advanced.limit" />
             </LText>
             {useAllAmount ? (
@@ -156,10 +157,18 @@ export default function EnableAdvanced({ navigation, route }: Props) {
                 <LText semiBold numberOfLines={1} style={styles.limitLabel}>
                   <CurrencyUnitValue showCode unit={unit} value={amount} />
                 </LText>
-                <LText style={styles.link}>
+                <LText
+                  style={[
+                    styles.link,
+                    {
+                      textDecorationColor: colors.live,
+                    },
+                  ]}
+                  color="live"
+                >
                   <Trans i18nKey="common.edit" />{" "}
                 </LText>
-                <LText style={styles.countervalue}>
+                <LText style={styles.countervalue} color="grey">
                   <CounterValue
                     showCode
                     currency={currency}
@@ -173,7 +182,8 @@ export default function EnableAdvanced({ navigation, route }: Props) {
           </View>
           <View style={styles.row}>
             <LText
-              style={[styles.error, warning ? styles.warning : null]}
+              style={[styles.error]}
+              color={warning ? "orange" : "alert"}
               numberOfLines={2}
             >
               <TranslatedError error={error || warning} />
@@ -217,7 +227,6 @@ export default function EnableAdvanced({ navigation, route }: Props) {
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: colors.white,
   },
   container: {
     flex: 1,
@@ -253,33 +262,26 @@ const styles = StyleSheet.create({
     marginLeft: 8,
   },
   switch: { marginLeft: 8 },
-  limitLabel: { fontSize: 14, color: colors.darkBlue },
-  label: { fontSize: 13, color: colors.grey },
+  limitLabel: { fontSize: 14 },
+  label: { fontSize: 13 },
   editSection: {
     flexDirection: "row",
     flexWrap: "nowrap",
   },
   link: {
-    color: colors.live,
     textDecorationStyle: "solid",
     textDecorationLine: "underline",
-    textDecorationColor: colors.live,
     marginLeft: 8,
   },
   countervalue: {
     fontSize: 12,
-    color: colors.grey,
     position: "absolute",
     bottom: -20,
     right: 0,
   },
   error: {
     flex: 1,
-    color: colors.alert,
     fontSize: 14,
     textAlign: "right",
-  },
-  warning: {
-    color: colors.orange,
   },
 });

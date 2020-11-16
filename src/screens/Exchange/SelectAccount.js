@@ -12,8 +12,8 @@ import {
   accountWithMandatoryTokens,
   flattenAccounts,
 } from "@ledgerhq/live-common/lib/account/helpers";
+import { useTheme } from "@react-navigation/native";
 import { accountsSelector } from "../../reducers/accounts";
-import colors from "../../colors";
 import { TrackScreen } from "../../analytics";
 import LText from "../../components/LText";
 import FilteredSearchBar from "../../components/FilteredSearchBar";
@@ -37,6 +37,7 @@ type Props = {
 };
 
 export default function SelectAccount({ navigation, route }: Props) {
+  const { colors } = useTheme();
   const currency = route.params.currency;
   const accounts = useSelector(accountsSelector);
 
@@ -66,7 +67,11 @@ export default function SelectAccount({ navigation, route }: Props) {
       const { account } = result;
       return (
         <View
-          style={account.type === "Account" ? undefined : styles.tokenCardStyle}
+          style={
+            account.type === "Account"
+              ? undefined
+              : [styles.tokenCardStyle, { borderLeftColor: colors.fog }]
+          }
         >
           <AccountCard
             disabled={!result.match}
@@ -84,7 +89,7 @@ export default function SelectAccount({ navigation, route }: Props) {
         </View>
       );
     },
-    [navigation],
+    [colors.fog, navigation],
   );
 
   const elligibleAccountsForSelectedCurrency = allAccounts.filter(
@@ -129,13 +134,15 @@ export default function SelectAccount({ navigation, route }: Props) {
   if (!elligibleAccountsForSelectedCurrency.length) {
     return (
       <View style={styles.emptyStateBody}>
-        <View style={styles.iconContainer}>
+        <View
+          style={[styles.iconContainer, { backgroundColor: colors.lightLive }]}
+        >
           <InfoIcon size={22} color={colors.live} />
         </View>
         <LText semiBold style={styles.title}>
           {t("exchange.buy.emptyState.title", { currency: currency.name })}
         </LText>
-        <LText style={styles.description}>
+        <LText style={styles.description} color="smoke">
           {t("exchange.buy.emptyState.description", {
             currency: currency.name,
           })}
@@ -161,7 +168,7 @@ export default function SelectAccount({ navigation, route }: Props) {
   }
 
   return (
-    <SafeAreaView style={styles.root}>
+    <SafeAreaView style={[styles.root, { backgroundColor: colors.white }]}>
       <TrackScreen category="ReceiveFunds" name="SelectAccount" />
       <KeyboardView style={{ flex: 1 }}>
         <View style={styles.searchContainer}>
@@ -172,7 +179,7 @@ export default function SelectAccount({ navigation, route }: Props) {
             renderList={renderList}
             renderEmptySearch={() => (
               <View style={styles.emptyResults}>
-                <LText style={styles.emptyText}>
+                <LText style={styles.emptyText} color="fog">
                   <Trans i18nKey="transfer.receive.noAccount" />
                 </LText>
               </View>
@@ -193,13 +200,11 @@ const styles = StyleSheet.create({
   },
   root: {
     flex: 1,
-    backgroundColor: colors.white,
   },
   tokenCardStyle: {
     marginLeft: 26,
     paddingLeft: 7,
     borderLeftWidth: 1,
-    borderLeftColor: colors.fog,
   },
   card: {
     paddingHorizontal: 16,
@@ -220,7 +225,6 @@ const styles = StyleSheet.create({
   },
   emptyText: {
     fontSize: 16,
-    color: colors.fog,
   },
   emptyStateBody: {
     flex: 1,
@@ -232,7 +236,6 @@ const styles = StyleSheet.create({
     width: 56,
     height: 56,
     borderRadius: 50,
-    backgroundColor: colors.lightLive,
     marginBottom: 24,
     display: "flex",
     justifyContent: "center",
@@ -240,14 +243,12 @@ const styles = StyleSheet.create({
   },
   title: {
     textAlign: "center",
-
     fontSize: 16,
     marginBottom: 16,
   },
   description: {
     textAlign: "center",
     paddingHorizontal: 16,
-    color: colors.smoke,
     fontSize: 14,
   },
   buttonContainer: {
