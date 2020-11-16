@@ -174,8 +174,6 @@ export default function DeviceAction<R, H, P>({
     }
   }
 
-  console.log("status", status);
-
   if (request && device && signMessageRequested) {
     return (
       <>

@@ -40,17 +40,13 @@ export default function Connect({ route, navigation }) {
       });
     }
     if (wcContext.currentCallRequestId) {
-      console.log("abort error");
       wcContext.setCurrentCallRequestError(new Error("Aborted"));
     }
   }, [wcContext, route]);
 
-  console.log("wccontext", wcContext);
   const correctIcons = _.filter((wcContext.dappInfo || {}).icons, icon =>
     ["png", "jpg", "jpeg", "bmp", "gif"].includes(icon.split(".")[-1]),
   );
-
-  console.log("error", wcContext.error);
 
   return (
     <>

@@ -32,7 +32,6 @@ const Provider = ({ children }) => {
   const connect = ({ uri, account }) => {
     setStatus(STATUS.CONNECTING);
     setError();
-    console.log("connect");
 
     let connector;
 
@@ -72,7 +71,6 @@ const Provider = ({ children }) => {
       setDappInfo(payload.params[0].peerMeta);
       setApproveSession({
         fn: () => {
-          console.log("approve session", (new Error()).stack);
           connector.approveSession({
             accounts: [account.freshAddress],
             chainId: account.currency.ethereumLikeInfo.chainId,
@@ -109,8 +107,6 @@ const Provider = ({ children }) => {
       }
 
       const wcCallRequest = await parseCallRequest(account, payload);
-
-      console.log("call request", wcCallRequest, payload.id);
 
       if (
         wcCallRequest.type === "transaction" &&
@@ -163,7 +159,6 @@ const Provider = ({ children }) => {
       return;
     }
     if (currentCallRequestResult) {
-      console.log("aprrove");
       connector.approveRequest({
         id: currentCallRequestId,
         result: currentCallRequestResult,
@@ -191,7 +186,6 @@ const Provider = ({ children }) => {
     }
 
     const init = async () => {
-      console.log("init");
       setSession(await getWCSession());
       setInitDone(true);
     };
@@ -205,12 +199,9 @@ const Provider = ({ children }) => {
     }),
   );
   useEffect(() => {
-    console.log("session", session);
     if (account && session.session && status === STATUS.DISCONNECTED) {
-      console.log("restart session", account, session, status);
       connect({ account });
 
-      console.log("should navigate to wc page");
       navigate(NavigatorName.Base, {
         screen: ScreenName.WalletConnectConnect,
         params: {
@@ -224,7 +215,6 @@ const Provider = ({ children }) => {
     if (!initDone) {
       return;
     }
-    console.log("save session", session);
     saveWCSession(session);
   }, [session, initDone]);
 

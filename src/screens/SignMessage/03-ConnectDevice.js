@@ -22,9 +22,6 @@ const initialState = {
 };
 const createAction = connectAppExec => {
   const useHook = (reduxDevice, request) => {
-
-    console.log(request);
-
     const appState = createAppAction(connectAppExec).useHook(reduxDevice, {
       account: request.account,
     });

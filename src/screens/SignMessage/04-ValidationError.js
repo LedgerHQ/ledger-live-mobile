@@ -50,8 +50,6 @@ export default function ValidationError({ navigation, route }: Props) {
     navigation.goBack();
   }, [navigation]);
 
-  console.log(error);
-
   return (
     <SafeAreaView style={styles.root} forceInset={forceInset}>
       <TrackScreen category="SignMessage" name="ValidationError" />
