@@ -1115,6 +1115,7 @@
   },
   "settings": {
     "header": "Settings",
+    "resources": "Ledger Resources",
     "display": {
       "title": "General",
       "desc": "Configure general Ledger Live settings.",
