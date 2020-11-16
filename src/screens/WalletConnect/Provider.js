@@ -6,7 +6,7 @@ import { parseCallRequest } from "@ledgerhq/live-common/lib/walletconnect";
 import { saveWCSession, getWCSession } from "../../db";
 import { accountScreenSelector } from "../../reducers/accounts";
 import { NavigatorName, ScreenName } from "../../const";
-import { navigate } from "../../rootnavigation";
+import { navigate, navigationRef } from "../../rootnavigation";
 
 export const context = React.createContext();
 
@@ -199,7 +199,12 @@ const Provider = ({ children }) => {
     }),
   );
   useEffect(() => {
-    if (account && session.session && status === STATUS.DISCONNECTED) {
+    if (
+      account &&
+      session.session &&
+      status === STATUS.DISCONNECTED &&
+      navigationRef.current
+    ) {
       connect({ account });
 
       navigate(NavigatorName.Base, {
@@ -230,6 +235,8 @@ const Provider = ({ children }) => {
         setCurrentCallRequestError,
         dappInfo,
         approveSession: approveSession && approveSession.fn,
+        initDone,
+        hasSession: Object.keys(session).length > 0,
       }}
     >
       {children}

@@ -4,7 +4,7 @@ import "./polyfill";
 import "./live-common-setup";
 import "./implement-react-native-libcore";
 import "react-native-gesture-handler";
-import React, { Component, useCallback } from "react";
+import React, { Component, useCallback, useContext } from "react";
 import { connect, useSelector } from "react-redux";
 import { StyleSheet, View, Text } from "react-native";
 import SplashScreen from "react-native-splash-screen";
@@ -41,7 +41,9 @@ import DebugRejectSwitch from "./components/DebugRejectSwitch";
 import useAppStateListener from "./components/useAppStateListener";
 import SyncNewAccounts from "./bridge/SyncNewAccounts";
 import { OnboardingContextProvider } from "./screens/Onboarding/onboardingContext";
-import WalletConnectProvider from "./screens/WalletConnect/Provider";
+import WalletConnectProvider, {
+  context as _wcContext,
+} from "./screens/WalletConnect/Provider";
 import HookAnalytics from "./analytics/HookAnalytics";
 import HookSentry from "./components/HookSentry";
 import RootNavigator from "./components/RootNavigator";
@@ -217,36 +219,41 @@ const linking = {
 
 const DeepLinkingNavigator = ({ children }: { children: React$Node }) => {
   const hasCompletedOnboarding = useSelector(hasCompletedOnboardingSelector);
+  const wcContext = useContext(_wcContext);
+
+  const enabled =
+    hasCompletedOnboarding && wcContext.initDone && !wcContext.hasSession;
 
   const { getInitialState } = useLinking(navigationRef, {
     ...linking,
-    enabled: hasCompletedOnboarding,
     getStateFromPath(path, config) {
-      // Return a state object here
-      // You can also reuse the default logic by importing `getStateFromPath` from `@react-navigation/native`
-      const state = getStateFromPath(path, config);
-      return hasCompletedOnboarding ? state : null;
+      if (!enabled) {
+        // Our current version of react navigation does not support the enable param
+        return null;
+      }
+      return getStateFromPath(path, config);
     },
   });
 
-  /** we consider the state is ready during onboarding no need to get it from deeplinking */
-  const [isReady, setIsReady] = React.useState(!hasCompletedOnboarding);
+  const [isReady, setIsReady] = React.useState(false);
   const [initialState, setInitialState] = React.useState();
 
   React.useEffect(() => {
-    if (hasCompletedOnboarding)
-      getInitialState()
-        .catch((e) => {
-          setIsReady(true);
-        })
-        .then(state => {
-          if (state !== undefined) {
-            setInitialState(state);
-          }
+    if (!wcContext.initDone) {
+      return;
+    }
+    getInitialState()
+      .catch(() => {
+        setIsReady(true);
+      })
+      .then(state => {
+        if (state) {
+          setInitialState(state);
+        }
 
-          setIsReady(true);
-        });
-  }, [getInitialState, hasCompletedOnboarding]);
+        setIsReady(true);
+      });
+  }, [getInitialState, wcContext.initDone]);
 
   if (!isReady) {
     return null;
@@ -298,23 +305,23 @@ export default class Root extends Component<
                 <HookAnalytics store={store} />
                 <SafeAreaProvider>
                   <AuthPass>
-                    <DeepLinkingNavigator>
-                      <I18nextProvider i18n={i18n}>
-                        <LocaleProvider>
-                          <BridgeSyncProvider>
-                            <CounterValues.PollingProvider>
-                              <ButtonUseTouchable.Provider value={true}>
-                                <OnboardingContextProvider>
-                                  <WalletConnectProvider>
+                    <WalletConnectProvider>
+                      <DeepLinkingNavigator>
+                        <I18nextProvider i18n={i18n}>
+                          <LocaleProvider>
+                            <BridgeSyncProvider>
+                              <CounterValues.PollingProvider>
+                                <ButtonUseTouchable.Provider value={true}>
+                                  <OnboardingContextProvider>
                                     <App importDataString={importDataString} />
-                                  </WalletConnectProvider>
-                                </OnboardingContextProvider>
-                              </ButtonUseTouchable.Provider>
-                            </CounterValues.PollingProvider>
-                          </BridgeSyncProvider>
-                        </LocaleProvider>
-                      </I18nextProvider>
-                    </DeepLinkingNavigator>
+                                  </OnboardingContextProvider>
+                                </ButtonUseTouchable.Provider>
+                              </CounterValues.PollingProvider>
+                            </BridgeSyncProvider>
+                          </LocaleProvider>
+                        </I18nextProvider>
+                      </DeepLinkingNavigator>
+                    </WalletConnectProvider>
                   </AuthPass>
                 </SafeAreaProvider>
               </>
