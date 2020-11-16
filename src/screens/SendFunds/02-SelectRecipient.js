@@ -138,7 +138,7 @@ export default function SendSelectRecipient({ navigation, route }: Props) {
         <SyncOneAccountOnMount priority={100} accountId={account.id} />
         <KeyboardView style={{ flex: 1 }}>
           <NavigationScrollView
-            style={styles.container}
+            style={[styles.container, { flex: 1 }]}
             keyboardShouldPersistTaps="handled"
           >
             <Button
@@ -199,7 +199,7 @@ export default function SendSelectRecipient({ navigation, route }: Props) {
               </LText>
             )}
           </NavigationScrollView>
-          <View style={[styles.container, styles.containerFlexEnd]}>
+          <View style={styles.container}>
             {transaction.recipient && !(error || warning) ? (
               <View style={styles.infoBox}>
                 <InfoBox>{t("send.recipient.verifyAddress")}</InfoBox>
@@ -276,10 +276,6 @@ const styles = StyleSheet.create({
   },
   separatorText: {
     color: colors.grey,
-  },
-  containerFlexEnd: {
-    flex: 1,
-    justifyContent: "flex-end",
   },
   addressInput: {
     flex: 1,
