@@ -186,7 +186,7 @@ const Provider = ({ children }) => {
     }
 
     const init = async () => {
-      setSession(await getWCSession());
+      setSession((await getWCSession()) || {});
       setInitDone(true);
     };
 

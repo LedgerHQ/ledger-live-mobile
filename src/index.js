@@ -6,7 +6,7 @@ import "./implement-react-native-libcore";
 import "react-native-gesture-handler";
 import React, { Component, useCallback, useContext } from "react";
 import { connect, useSelector } from "react-redux";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, Linking } from "react-native";
 import SplashScreen from "react-native-splash-screen";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { I18nextProvider } from "react-i18next";
@@ -19,6 +19,7 @@ import Transport from "@ledgerhq/hw-transport";
 import { NotEnoughBalance } from "@ledgerhq/errors";
 import { log } from "@ledgerhq/logs";
 import { checkLibs } from "@ledgerhq/live-common/lib/sanityChecks";
+import _ from "lodash";
 import logger from "./logger";
 import { saveAccounts, saveBle, saveSettings, saveCountervalues } from "./db";
 import {
@@ -144,6 +145,46 @@ function App({ importDataString }: AppProps) {
     </View>
   );
 }
+
+/*
+Monkey patching Linking in order to transform wc: schemes to ledgerlive schemes in order
+to play correctly with react navigation.
+*/
+
+const fixURL = url => {
+  let NEWurl = url;
+  if (url.substr(0, 3) === "wc:") {
+    NEWurl = `ledgerlive://wc?uri=${encodeURIComponent(url)}`;
+  }
+  return NEWurl;
+};
+
+const OGgetInitialURL = Linking.getInitialURL.bind(Linking);
+Linking.getInitialURL = () => OGgetInitialURL().then(fixURL);
+
+const NEWcallbacks = [];
+const OGcallbacks = [];
+const OGaddEventListener = Linking.addEventListener.bind(Linking);
+const OGremoveEventListener = Linking.removeEventListener.bind(Linking);
+Linking.addEventListener = (evt, OGcallback) => {
+  let NEWcallback = OGcallback;
+  if (evt === "url") {
+    NEWcallback = ({ url }) => OGcallback({ url: fixURL(url) });
+    OGcallbacks.push(OGcallback);
+    NEWcallbacks.push(NEWcallback);
+  }
+  return OGaddEventListener(evt, NEWcallback);
+};
+Linking.removeEventListener = (evt, OGcallback) => {
+  let NEWcallback = OGcallback;
+  if (evt === "url") {
+    const index = _.findLastIndex(OGcallbacks, OGcallback);
+    NEWcallback = NEWcallbacks[index];
+    _.pull(NEWcallbacks, NEWcallback);
+    _.pull(OGcallbacks, OGcallback);
+  }
+  return OGremoveEventListener(evt, NEWcallback);
+};
 
 // DeepLinking
 const linking = {
