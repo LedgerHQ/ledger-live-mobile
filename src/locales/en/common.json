@@ -2738,6 +2738,7 @@
     "stepVerification": {
       "action": "Please confirm the operation on your device to sign message"
     },
-    "deeplinkingTitle": "Select an Ethereum account"
+    "deeplinkingTitle": "Select an Ethereum account",
+    "addAccount": "Add new account"
   }
 }

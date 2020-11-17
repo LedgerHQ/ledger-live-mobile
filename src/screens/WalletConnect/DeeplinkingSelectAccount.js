@@ -1,6 +1,6 @@
 /* @flow */
 import React, { Component } from "react";
-import { View, StyleSheet, FlatList } from "react-native";
+import { View, StyleSheet, FlatList, TouchableOpacity } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { createStructuredSelector } from "reselect";
 import { connect } from "react-redux";
@@ -12,17 +12,21 @@ import type {
 } from "@ledgerhq/live-common/lib/types";
 import { getAccountCurrency } from "@ledgerhq/live-common/lib/account";
 import {
+  getCryptoCurrencyById,
+} from "@ledgerhq/live-common/lib/currencies";
+import {
   flattenAccountsEnforceHideEmptyTokenSelector,
   accountsSelector,
 } from "../../reducers/accounts";
 import withEnv from "../../logic/withEnv";
 import colors from "../../colors";
-import { ScreenName } from "../../const";
+import { ScreenName, NavigatorName } from "../../const";
 import { TrackScreen } from "../../analytics";
 import LText from "../../components/LText";
 import FilteredSearchBar from "../../components/FilteredSearchBar";
 import AccountCard from "../../components/AccountCard";
 import KeyboardView from "../../components/KeyboardView";
+import PlusIcon from "../../icons/Plus";
 import { formatSearchResults } from "../../helpers/formatAccountSearchResults";
 import type { SearchResult } from "../../helpers/formatAccountSearchResults";
 
@@ -51,7 +55,27 @@ class SendFundsSelectAccount extends Component<Props, State> {
         showsVerticalScrollIndicator={false}
         keyboardDismissMode="on-drag"
         contentContainerStyle={styles.list}
+        ListFooterComponent={this.renderFooter}
       />
+    );
+  };
+
+  renderFooter = () => {
+    return (
+      <View style={styles.footerContainer}>
+        <PlusIcon size={16} color={colors.live} />
+        <TouchableOpacity
+          onPress={() => {
+            this.props.navigation.navigate(NavigatorName.AddAccounts, {
+              currency: getCryptoCurrencyById("ethereum"),
+            });
+          }}
+        >
+          <LText semiBold style={styles.addAccount}>
+            <Trans i18nKey={"walletconnect.addAccount"} />
+          </LText>
+        </TouchableOpacity>
+      </View>
     );
   };
 
@@ -120,6 +144,15 @@ const styles = StyleSheet.create({
   searchContainer: {
     paddingTop: 16,
     flex: 1,
+  },
+  footerContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingHorizontal: 16,
+  },
+  addAccount: {
+    marginLeft: 8,
+    color: colors.live,
   },
   list: {
     paddingBottom: 32,
