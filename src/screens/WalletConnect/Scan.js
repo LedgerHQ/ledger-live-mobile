@@ -4,6 +4,7 @@ import Config from "react-native-config";
 import { Clipboard } from "react-native";
 import Scanner from "../../components/Scanner";
 import { ScreenName } from "../../const";
+import { TrackScreen } from "../../analytics";
 
 type Props = {
   navigation: any,
@@ -32,7 +33,12 @@ class ScanWalletConnect extends PureComponent<Props, State> {
   render() {
     const { navigation } = this.props;
 
-    return <Scanner navigation={navigation} onResult={this.onResult} />;
+    return (
+      <>
+        <TrackScreen category="WalletConnect" screen="Scan" />
+        <Scanner navigation={navigation} onResult={this.onResult} />
+      </>
+    );
   }
 }
 

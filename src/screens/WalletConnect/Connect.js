@@ -17,6 +17,7 @@ import InfoBox from "../../components/InfoBox";
 import Circle from "../../components/Circle";
 import WarningBox from "../../components/WarningBox";
 import colors from "../../colors";
+import { TrackScreen } from "../../analytics";
 
 const DottedLine = () => {
   return (
@@ -50,6 +51,7 @@ export default function Connect({ route, navigation }) {
 
   return (
     <>
+      <TrackScreen category="WalletConnect" screen="Connect" />
       <View style={styles.container}>
         {wcContext.status === STATUS.CONNECTING && wcContext.approveSession ? (
           <>

@@ -86,7 +86,7 @@ class SendFundsSelectAccount extends Component<Props, State> {
     const { allAccounts } = this.props;
     return (
       <SafeAreaView style={styles.root} forceInset={forceInset}>
-        <TrackScreen category="SendFunds" name="SelectAccount" />
+        <TrackScreen category="WalletConnect" name="DeeplinkingSelectAccount" />
         <KeyboardView style={{ flex: 1 }}>
           <View style={styles.searchContainer}>
             <FilteredSearchBar
