@@ -5,8 +5,9 @@ import { StyleSheet } from "react-native";
 import { useSelector } from "react-redux";
 import { from } from "rxjs";
 import SafeAreaView from "react-native-safe-area-view";
-import { useTranslation } from "react-i18next";
 import { createAction as createAppAction } from "@ledgerhq/live-common/lib/hw/actions/app";
+import type { TypedMessageData } from "@ledgerhq/live-common/lib/families/ethereum/types";
+import type { MessageData } from "@ledgerhq/live-common/lib/hw/signMessage/types";
 import connectApp from "@ledgerhq/live-common/lib/hw/connectApp";
 import { withDevice } from "@ledgerhq/live-common/lib/hw/deviceAccess";
 import signMessage from "@ledgerhq/live-common/lib/hw/signMessage";
@@ -34,7 +35,6 @@ const createAction = connectAppExec => {
       let result;
       try {
         result = await withDevice(device.deviceId)(t =>
-          // $FlowFixMe (can't figure out MessageData | TypedMessageData)
           from(signMessage(t, request.message)),
         ).toPromise();
       } catch (e) {
@@ -95,23 +95,21 @@ type Props = {
 type RouteParams = {
   device: Device,
   accountId: string,
-  message: Transaction,
+  message: TypedMessageData | MessageData,
 };
 
 export default function ConnectDevice({ route, navigation }: Props) {
-  const { t } = useTranslation();
   const { account, parentAccount } = useSelector(accountScreenSelector(route));
   invariant(account, "account is required");
 
   const onResult = result => {
     if (result.error) {
-      return navigation.navigate(ScreenName.SignValidationError, {
+      navigation.navigate(ScreenName.SignValidationError, {
         ...route.params,
         error: result.error,
       });
-    }
-    if (result.signature) {
-      return navigation.navigate(ScreenName.SignValidationSuccess, {
+    } else if (result.signature) {
+      navigation.navigate(ScreenName.SignValidationSuccess, {
         ...route.params,
         signature: result.signature,
       });

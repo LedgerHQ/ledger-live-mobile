@@ -4,6 +4,7 @@ import { useTranslation, Trans } from "react-i18next";
 import { View, StyleSheet, Image } from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
 import _ from "lodash";
+import type { Account } from "@ledgerhq/live-common/lib/types";
 import LText from "../../components/LText";
 import Button from "../../components/Button";
 import { context, STATUS } from "./Provider";
@@ -29,7 +30,17 @@ const DottedLine = () => {
   );
 };
 
-export default function Connect({ route, navigation }) {
+type Props = {
+  navigation: any,
+  route: { params: RouteParams },
+};
+
+type RouteParams = {
+  defaultAccount: Account,
+  uri?: string,
+};
+
+export default function Connect({ route, navigation }: Props) {
   const { t } = useTranslation();
   const wcContext = useContext(context);
 
@@ -135,7 +146,9 @@ export default function Connect({ route, navigation }) {
         ) : wcContext.status === STATUS.ERROR ? (
           <View style={styles.centerContainer}>
             <CrossRound size={50} color={colors.alert} />
-            <LText primary style={styles.error}>{wcContext.error.message}</LText>
+            <LText primary style={styles.error}>
+              {wcContext.error?.message}
+            </LText>
           </View>
         ) : (
           <>

@@ -2,27 +2,24 @@
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import { StyleSheet, Linking } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
-import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
+import type { TypedMessageData } from "@ledgerhq/live-common/lib/families/ethereum/types";
+import type { MessageData } from "@ledgerhq/live-common/lib/hw/signMessage/types";
 import { TrackScreen } from "../../analytics";
 import colors from "../../colors";
 import ValidateError from "../../components/ValidateError";
-import { NavigatorName, ScreenName } from "../../const";
 import { urls } from "../../config/urls";
 import { context as _wcContext } from "../WalletConnect/Provider";
 
 const forceInset = { bottom: "always" };
 
 type Props = {
-  account: AccountLike,
-  parentAccount: ?Account,
   navigation: any,
   route: { params: RouteParams },
 };
 
 type RouteParams = {
   accountId: string,
-  parentId: String,
-  message: any,
+  message: TypedMessageData | Message,
   error: Error,
 };
 

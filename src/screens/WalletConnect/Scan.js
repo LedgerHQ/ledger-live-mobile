@@ -8,9 +8,12 @@ import { TrackScreen } from "../../analytics";
 
 type Props = {
   navigation: any,
+  route: { params: RouteParams },
 };
 
-type RouteParams = {};
+type RouteParams = {
+  defaultAccount: Account,
+};
 
 type State = {};
 

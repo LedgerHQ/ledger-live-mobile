@@ -2,6 +2,8 @@
 import React, { useCallback, useContext, useEffect } from "react";
 import { View, StyleSheet } from "react-native";
 import { useTranslation } from "react-i18next";
+import type { TypedMessageData } from "@ledgerhq/live-common/lib/families/ethereum/types";
+import type { MessageData } from "@ledgerhq/live-common/lib/hw/signMessage/types";
 import { TrackScreen } from "../../analytics";
 import colors from "../../colors";
 import PreventNativeBack from "../../components/PreventNativeBack";
@@ -15,7 +17,7 @@ type Props = {
 
 type RouteParams = {
   accountId: string,
-  message: any,
+  message: TypedMessageData | MessageData,
   signature: String,
 };
 

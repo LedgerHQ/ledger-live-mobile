@@ -3,6 +3,8 @@ import React, { useCallback } from "react";
 import { View, StyleSheet } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { Trans } from "react-i18next";
+import type { TypedMessageData } from "@ledgerhq/live-common/lib/families/ethereum/types";
+import type { MessageData } from "@ledgerhq/live-common/lib/hw/signMessage/types";
 import colors from "../../colors";
 import { ScreenName } from "../../const";
 import { TrackScreen } from "../../analytics";
@@ -17,7 +19,7 @@ type Props = {
 
 export type RouteParams = {
   accountId: string,
-  message: *, // TOCHANGE
+  message: MessageData | TypedMessageData,
   currentNavigation?: string,
   nextNavigation?: string,
 };
