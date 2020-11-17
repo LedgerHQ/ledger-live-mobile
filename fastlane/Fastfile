@@ -176,8 +176,6 @@ platform :ios do
 
   desc "ci: create adhoc version"
   lane :ci do |options|
-    print(ENV["GIT_REPO_URL"])
-
     export_options_method = "ad-hoc"
     code_sign_identity = "iPhone Developer"
     MY_APP_ID = ENV["APP_IDENTIFIER"]
@@ -208,7 +206,7 @@ platform :ios do
       team_id: ENV["DEVELOPER_TEAM_ID"],
       keychain_name: ENV["CI_KEYCHAIN_NAME"],
       keychain_password: ENV["CI_KEYCHAIN_PASSWORD"],
-      git_basic_authorization: ENV["TOKEN"],
+      git_bearer_authorization: ENV["TOKEN"],
       readonly: true
     )
 
