@@ -5,6 +5,7 @@ import { Trans } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { Image, View, StyleSheet } from "react-native";
 
+import { useTheme } from "@react-navigation/native";
 import { TrackScreen } from "../../../analytics";
 import { completeOnboarding } from "../../../actions/settings";
 import LText from "../../../components/LText";
@@ -23,6 +24,7 @@ type Props = {
 };
 
 export default function OnboardingStepFinish({ navigation }: Props) {
+  const { colors } = useTheme();
   const readOnlyModeEnabled = useSelector(readOnlyModeEnabledSelector);
   const dispatch = useDispatch();
   const { resetCurrentStep } = useNavigationInterceptor();
@@ -42,7 +44,7 @@ export default function OnboardingStepFinish({ navigation }: Props) {
   }
 
   return (
-    <View style={styles.wrapper}>
+    <View style={[styles.wrapper, { backgroundColor: colors.white }]}>
       <TrackScreen category="Onboarding" name="Finish" />
       <View style={styles.confettiContainer} pointerEvents="none">
         <ConfettiParty />
@@ -89,7 +91,7 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
   },
-  wrapper: { flex: 1, backgroundColor: "white" },
+  wrapper: { flex: 1 },
   buttonContainer: {
     flexGrow: 1,
   },

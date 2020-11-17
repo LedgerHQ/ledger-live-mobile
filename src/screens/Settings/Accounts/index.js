@@ -53,7 +53,7 @@ const AccountsSettings = ({ blacklistedTokenIds, showToken }: Props) => {
       <View style={styles.section}>
         <LText
           primary
-          style={[styles.sectionTitle, { backgroundColor: colors.lightGrey }]}
+          style={[styles.sectionTitle, { backgroundColor: colors.card }]}
         >
           {parentCurrency.name}
         </LText>
@@ -128,7 +128,7 @@ const AccountsSettings = ({ blacklistedTokenIds, showToken }: Props) => {
     <SectionList
       ListHeaderComponent={renderHeader}
       stickySectionHeadersEnabled
-      style={styles.root}
+      style={[styles.root, { backgroundColor: colors.white }]}
       renderItem={renderItem}
       renderSectionHeader={renderSectionHeader}
       keyExtractor={keyExtractor}
@@ -144,13 +144,11 @@ AccountsSettings.navigationOptions = {
 const styles = StyleSheet.create({
   root: {
     paddingHorizontal: 16,
-    backgroundColor: "white",
     marginBottom: 2,
     flex: 1,
   },
   section: {
     flex: 1,
-    backgroundColor: "white",
   },
   sectionTitle: {
     borderRadius: 4,

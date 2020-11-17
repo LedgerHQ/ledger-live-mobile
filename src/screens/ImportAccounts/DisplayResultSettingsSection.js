@@ -18,7 +18,7 @@ function DisplayResultSettingsSection({ checked, onSwitch }: Props) {
   return (
     <View style={styles.root}>
       <ResultSection mode="settings" />
-      <View style={[styles.row, { backgroundColor: colors.lightGrey }]}>
+      <View style={[styles.row, { backgroundColor: colors.card }]}>
         <Icon name="settings" size={20} color={colors.grey} />
         <LText style={styles.label} semiBold>
           <Trans i18nKey="account.import.result.includeGeneralSettings" />

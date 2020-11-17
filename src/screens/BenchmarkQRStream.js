@@ -83,7 +83,7 @@ class BenchmarkQRStream extends PureComponent<
     };
 
     return (
-      <View style={styles.root}>
+      <View style={[styles.root, { backgroundColor: colors.darkBlue }]}>
         <RNCamera
           barCodeTypes={[RNCamera.Constants.BarCodeType.qr]} // Do not look for barCodes other than QR
           onBarCodeRead={this.onBarCodeRead}
@@ -162,7 +162,6 @@ class BenchmarkQRStream extends PureComponent<
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: "black",
     alignItems: "center",
     justifyContent: "center",
   },
@@ -172,7 +171,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   result: {
-    color: "black",
     padding: 20,
   },
   camera: {

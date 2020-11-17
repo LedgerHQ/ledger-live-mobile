@@ -77,9 +77,10 @@ class PasswordInput extends PureComponent<Props, { isFocused: boolean }> {
             styles.input,
             getFontStyle({ semiBold: true }),
             inline && styles.inlineTextInput,
+            { color: colors.darkBlue },
           ]}
           placeholder={placeholder}
-          placeholderTextColor={error ? colors.alert : colors.fog}
+          placeholderTextColor={error ? colors.alert : colors.grey}
           returnKeyType="done"
           blurOnSubmit={false}
           onChangeText={onChange}

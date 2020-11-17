@@ -26,7 +26,7 @@ function VerifyAddressDisclaimer({ unsafe, verified, text, action }: Props) {
         styles.wrapper,
         unsafe
           ? { borderColor: colors.alert, backgroundColor: colors.lightAlert }
-          : { backgroundColor: colors.lightGrey },
+          : { backgroundColor: colors.card },
       ]}
     >
       <Image

@@ -32,7 +32,7 @@ export default function CoinifyWidgetScreen({ route }: Props) {
 
   return (
     <SafeAreaView
-      style={[styles.root, { backgroundColor: colors.lightGrey }]}
+      style={[styles.root, { backgroundColor: colors.card }]}
       forceInset={forceInset}
     >
       <CoinifyWidget

@@ -278,7 +278,7 @@ const AppsScreen = ({
         position={position}
         navigationState={{ index, routes }}
         jumpTo={jumpTo}
-        style={[styles.tabBarStyle, { backgroundColor: colors.lightGrey }]}
+        style={[styles.tabBarStyle, { backgroundColor: colors.card }]}
         indicatorStyle={[
           styles.indicatorStyle,
           { backgroundColor: colors.live },

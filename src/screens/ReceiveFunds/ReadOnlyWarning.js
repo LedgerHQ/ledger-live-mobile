@@ -13,7 +13,7 @@ type Props = { continue: () => void };
 function ReadOnlyWarning({ continue: onContinue }: Props) {
   const { colors } = useTheme();
   return (
-    <View style={[styles.root, { backgroundColor: colors.lightGrey }]}>
+    <View style={[styles.root, { backgroundColor: colors.card }]}>
       <TrackScreen category="Manager" name="ReadOnlyNanoX" />
       <View style={styles.alert}>
         <AlertTriangle size={32} color={colors.live} />

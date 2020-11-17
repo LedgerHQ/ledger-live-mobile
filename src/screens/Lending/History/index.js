@@ -65,7 +65,7 @@ export default function History() {
   }, [navigation]);
 
   return (
-    <SafeAreaView style={[styles.root, { backgroundColor: colors.lightGrey }]}>
+    <SafeAreaView style={[styles.root, { backgroundColor: colors.card }]}>
       <TrackScreen category="Lend" name="History" />
       <View style={styles.body}>
         {/** $FlowFixMe */}

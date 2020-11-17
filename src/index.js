@@ -303,10 +303,12 @@ export default class Root extends Component<
                 <SetEnvsFromSettings />
                 <HookSentry />
                 <HookAnalytics store={store} />
-                <AuthPass>
-                  <DeepLinkingNavigator>
-                    <StyledStatusBar />
-                    <SafeAreaProvider>
+
+                <DeepLinkingNavigator>
+                  <SafeAreaProvider>
+                    <AuthPass>
+                      <StyledStatusBar />
+
                       <I18nextProvider i18n={i18n}>
                         <LocaleProvider>
                           <BridgeSyncProvider>
@@ -320,9 +322,9 @@ export default class Root extends Component<
                           </BridgeSyncProvider>
                         </LocaleProvider>
                       </I18nextProvider>
-                    </SafeAreaProvider>
-                  </DeepLinkingNavigator>
-                </AuthPass>
+                    </AuthPass>
+                  </SafeAreaProvider>
+                </DeepLinkingNavigator>
               </>
             ) : (
               <LoadingApp />

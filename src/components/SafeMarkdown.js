@@ -2,10 +2,11 @@
 import React, { PureComponent } from "react";
 import { StyleSheet } from "react-native";
 import Markdown from "react-native-easy-markdown";
+import { withTheme } from "../colors";
 import LText, { getFontStyle } from "./LText";
 
-export default class SafeMarkdown extends PureComponent<
-  { markdown: string },
+class SafeMarkdown extends PureComponent<
+  { markdown: string, colors: * },
   { error: ?Error },
 > {
   state = {
@@ -17,19 +18,27 @@ export default class SafeMarkdown extends PureComponent<
   }
 
   render() {
-    const { markdown } = this.props;
+    const { markdown, colors } = this.props;
     const { error } = this.state;
     if (error) {
       return <LText style={markdownStyles.text}>{markdown}</LText>; // :(
     }
-    return <Markdown markdownStyles={markdownStyles}>{markdown}</Markdown>;
+    return (
+      <Markdown
+        markdownStyles={{
+          text: { ...markdownStyles.text, color: colors.darkBlue },
+          strong: markdownStyles.strong,
+        }}
+      >
+        {markdown}
+      </Markdown>
+    );
   }
 }
 
 const markdownStyles = StyleSheet.create({
   text: {
     ...getFontStyle(),
-
     fontSize: 14,
     textAlign: "justify",
   },
@@ -37,3 +46,5 @@ const markdownStyles = StyleSheet.create({
     ...getFontStyle({ semiBold: true }),
   },
 });
+
+export default withTheme(SafeMarkdown);

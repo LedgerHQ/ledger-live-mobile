@@ -58,7 +58,7 @@ function DeviceItem({
               styles.root,
               disabled
                 ? {
-                    backgroundColor: colors.lightGrey,
+                    backgroundColor: colors.card,
                     borderColor: "transparent",
                   }
                 : { borderColor: colors.fog },

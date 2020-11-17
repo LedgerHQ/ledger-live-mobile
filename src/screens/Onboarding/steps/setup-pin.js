@@ -63,7 +63,7 @@ class OnboardingStepSetupPin extends Component<
           onAccept={next}
           onClose={this.hideModal}
         />
-        <View style={[styles.hero, { backgroundColor: colors.lightGrey }]}>
+        <View style={[styles.hero, { backgroundColor: colors.card }]}>
           <DeviceNanoAction
             modelId={deviceModelId}
             wired={isNanoS} // tradeoff in this onboarding that we don't save the info that NanoX might be on USB^^

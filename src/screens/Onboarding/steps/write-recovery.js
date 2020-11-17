@@ -57,7 +57,7 @@ class OnboardingStepWriteRecovery extends Component<
           onAccept={next}
           onClose={this.hideModal}
         />
-        <View style={[styles.hero, { backgroundColor: colors.lightGrey }]}>
+        <View style={[styles.hero, { backgroundColor: colors.card }]}>
           <RecoveryPhrase />
         </View>
         <View style={styles.wrapper}>

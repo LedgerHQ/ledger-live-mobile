@@ -131,7 +131,7 @@ const CollapsibleList = ({
     <Animated.View
       style={[
         styles.root,
-        { height, backgroundColor: colors.lightGrey },
+        { height, backgroundColor: colors.card },
         containerStyle,
       ]}
     >

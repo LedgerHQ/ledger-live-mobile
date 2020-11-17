@@ -129,11 +129,12 @@ const FeatureInteger = ({
         />
         <TextInput
           ref={inputRef}
-          style={
+          style={[
+            { color: colors.darkBlue },
             enabled
               ? { ...styles.input, borderColor: colors.lightFog }
-              : styles.inputHidden
-          }
+              : styles.inputHidden,
+          ]}
           keyboardType="numeric"
           value={enabled ? inputValue : ""}
           onChangeText={onInputChange}

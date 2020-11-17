@@ -48,7 +48,7 @@ function Item({
       disabled={isDisabled}
       style={[
         styles.wrapper,
-        isDisabled ? { backgroundColor: colors.lightGrey } : {},
+        isDisabled ? { backgroundColor: colors.card } : {},
       ]}
     >
       <View

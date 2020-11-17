@@ -47,7 +47,7 @@ export default function Buy() {
       style={[
         styles.root,
         {
-          backgroundColor: colors.lightGrey,
+          backgroundColor: colors.card,
           paddingTop: extraStatusBarPadding,
         },
       ]}

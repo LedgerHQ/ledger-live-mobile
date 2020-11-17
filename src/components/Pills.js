@@ -66,7 +66,7 @@ function Pill({ item, first, active, onPress, isDisabled }: PillProps) {
           styles.pill,
           { borderColor: colors.fog },
           active && {
-            backgroundColor: colors.lightGrey,
+            backgroundColor: colors.card,
             borderColor: colors.fog,
           },
           first && styles.pillFirst,

@@ -67,7 +67,7 @@ export default function Overview({ route, navigation }: Props) {
       <AccountCard
         account={item}
         parentAccount={null}
-        style={[styles.card, { backgroundColor: colors.lightGrey }]}
+        style={[styles.card, { backgroundColor: colors.card }]}
       />
     </View>
   );

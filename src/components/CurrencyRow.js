@@ -37,8 +37,9 @@ class CurrencyRow extends PureComponent<Props> {
         />
         <LText
           semiBold
-          style={[styles.name, !isOK ? { color: colors.fog } : null]}
+          style={[styles.name]}
           numberOfLines={1}
+          color={!isOK ? "fog" : "darkBlue"}
         >
           {`${currency.name} (${currency.ticker})`}
         </LText>
@@ -67,7 +68,6 @@ const styles = StyleSheet.create({
     flexShrink: 1,
     marginLeft: 10,
     fontSize: 14,
-    color: "black",
   },
   currencyLabel: {
     flexGrow: 0,

@@ -157,12 +157,12 @@ export default function AccountScreen({ navigation, route }: Props) {
     makeCompoundSummaryForAccount(account, parentAccount);
 
   return (
-    <View style={[styles.root, { backgroundColor: colors.background }]}>
+    <View style={[styles.root]}>
       {analytics}
       <List
         ref={ref}
         sections={sections}
-        style={[styles.sectionList, { backgroundColor: colors.lightGrey }]}
+        style={[styles.sectionList, { backgroundColor: colors.background }]}
         contentContainerStyle={styles.contentContainer}
         ListFooterComponent={
           !completed ? (

@@ -13,7 +13,7 @@ class SyncIndicatorLoading extends Component<Props> {
     return (
       <View style={styles.root}>
         <ActivityIndicator />
-        <LText style={styles.text}>
+        <LText>
           <Trans i18nKey="sync.loading" />
         </LText>
       </View>
@@ -23,9 +23,6 @@ class SyncIndicatorLoading extends Component<Props> {
 const styles = StyleSheet.create({
   root: {
     flexDirection: "row",
-  },
-  text: {
-    color: "#000",
   },
 });
 

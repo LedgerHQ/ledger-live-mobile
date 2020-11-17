@@ -11,18 +11,21 @@ import type {
   Transaction,
 } from "@ledgerhq/live-common/lib/types";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
+import { compose } from "redux";
 import { ScreenName } from "../../const";
 import { accountScreenSelector } from "../../reducers/accounts";
 import StyledStatusBar from "../../components/StyledStatusBar";
 import CameraScreen from "../../components/CameraScreen";
 import FallBackCamera from "./FallbackCamera/Fallback";
 import getWindowDimensions from "../../logic/getWindowDimensions";
+import { withTheme } from "../../colors";
 
 type Props = {
   navigation: any,
   route: { params: RouteParams },
   account: AccountLike,
   parentAccount: ?Account,
+  colors: *,
 };
 
 type RouteParams = {
@@ -91,7 +94,7 @@ class ScanRecipient extends PureComponent<Props, State> {
 
   render() {
     const { width, height } = this.state;
-    const { navigation } = this.props;
+    const { navigation, colors } = this.props;
     const cameraRatio = 16 / 9;
     const cameraDimensions =
       width > height
@@ -99,7 +102,10 @@ class ScanRecipient extends PureComponent<Props, State> {
         : { width: height / cameraRatio, height };
 
     return (
-      <View style={styles.root} onLayout={this.setDimensions}>
+      <View
+        style={[styles.root, { backgroundColor: colors.darkBlue }]}
+        onLayout={this.setDimensions}
+      >
         <StyledStatusBar barStyle="light-content" />
         <RNCamera
           barCodeTypes={[RNCamera.Constants.BarCodeType.qr]} // Do not look for barCodes other than QR
@@ -123,12 +129,11 @@ class ScanRecipient extends PureComponent<Props, State> {
 const mapStateToProps = (state, { route }) =>
   accountScreenSelector(route)(state);
 
-export default connect(mapStateToProps)(ScanRecipient);
+export default compose(connect(mapStateToProps), withTheme)(ScanRecipient);
 
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: "black",
     alignItems: "center",
     justifyContent: "center",
   },

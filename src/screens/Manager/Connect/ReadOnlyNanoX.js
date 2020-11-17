@@ -42,7 +42,7 @@ class ReadOnlyNanoX extends PureComponent<OnboardingStepProps & { colors: * }> {
   render() {
     const { colors } = this.props;
     return (
-      <View style={[styles.root, { backgroundColor: colors.lightGrey }]}>
+      <View style={[styles.root, { backgroundColor: colors.card }]}>
         <TrackScreen category="Manager" name="ReadOnlyNanoX" />
         <View style={styles.image}>
           <DeviceNanoAction screen="empty" width={width * 0.8} />

@@ -8,8 +8,8 @@ import {
   Image,
   Vibration,
   Platform,
+  SafeAreaView,
 } from "react-native";
-import SafeAreaView from "react-native-safe-area-view";
 import * as Keychain from "react-native-keychain";
 import { PasswordIncorrectError } from "@ledgerhq/errors";
 import { compose } from "redux";
@@ -29,8 +29,6 @@ import FailBiometrics from "./FailBiometrics";
 import KeyboardBackgroundDismiss from "../../components/KeyboardBackgroundDismiss";
 import { VIBRATION_PATTERN_ERROR } from "../../constants";
 import { withTheme } from "../../colors";
-
-const forceInset = { bottom: "always" };
 
 type State = {
   passwordError: ?Error,
@@ -196,10 +194,7 @@ class AuthScreen extends PureComponent<Props, State> {
     } = this.state;
     return (
       <KeyboardBackgroundDismiss>
-        <SafeAreaView
-          style={[styles.root, { backgroundColor: colors.lightGrey }]}
-          forceInset={forceInset}
-        >
+        <SafeAreaView style={[styles.root, { backgroundColor: colors.card }]}>
           <KeyboardView>
             <View style={{ flex: 1 }} />
 

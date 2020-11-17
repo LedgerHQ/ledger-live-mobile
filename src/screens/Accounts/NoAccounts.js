@@ -9,7 +9,7 @@ type Props = { navigation: * };
 function NoAccounts({ navigation }: Props) {
   const { colors } = useTheme();
   return (
-    <View style={[styles.root, { backgroundColor: colors.lightGrey }]}>
+    <View style={[styles.root, { backgroundColor: colors.card }]}>
       <EmptyStatePortfolio showHelp={false} navigation={navigation} />
     </View>
   );

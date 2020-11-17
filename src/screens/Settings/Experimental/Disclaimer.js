@@ -14,7 +14,7 @@ const Disclaimer = () => {
     <View
       style={[
         styles.wrapper,
-        { backgroundColor: colors.lightGrey, borderColor: colors.fog },
+        { backgroundColor: colors.card, borderColor: colors.fog },
       ]}
     >
       <Image style={styles.image} source={shieldWarning} />

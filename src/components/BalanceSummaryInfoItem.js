@@ -19,7 +19,7 @@ export default function BalanceSummaryInfoItem({
   return (
     <TouchableOpacity
       onPress={onPress}
-      style={[styles.wrapper, { backgroundColor: colors.lightGrey }]}
+      style={[styles.wrapper, { backgroundColor: colors.card }]}
     >
       <View style={styles.balanceLabelContainer}>
         <LText style={styles.balanceLabel}>{title}</LText>
