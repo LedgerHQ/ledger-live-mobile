@@ -51,7 +51,8 @@ jobs:
           DEVELOPER_TEAM_ID: ${{ secrets.DEVELOPER_TEAM_ID }}
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
           TOKEN: ${{ secrets.TEAM_LIVE_ACCESS_TOKEN }}
-        run: yarn ios:ci
+        run: |
+          yarn ios:ci
       - uses: ledgerhq/actions/get-package-infos@v1.0.0
         id: post-version
       - name: upload iOS IPA
