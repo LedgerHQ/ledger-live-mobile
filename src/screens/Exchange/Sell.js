@@ -4,8 +4,7 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { useTranslation } from "react-i18next";
-import { useNavigation } from "@react-navigation/native";
-import colors from "../../colors";
+import { useNavigation, useTheme } from "@react-navigation/native";
 import { NavigatorName } from "../../const";
 import extraStatusBarPadding from "../../logic/extraStatusBarPadding";
 import TrackScreen from "../../analytics/TrackScreen";
@@ -16,12 +15,19 @@ import Button from "../../components/Button";
 const forceInset = { bottom: "always" };
 
 export default function Buy() {
+  const { colors } = useTheme();
   const { t } = useTranslation();
   const navigation = useNavigation();
 
   return (
     <SafeAreaView
-      style={[styles.root, { paddingTop: extraStatusBarPadding }]}
+      style={[
+        styles.root,
+        {
+          backgroundColor: colors.lightGrey,
+          paddingTop: extraStatusBarPadding,
+        },
+      ]}
       forceInset={forceInset}
     >
       <TrackScreen category="Sell Crypto" />
@@ -52,7 +58,6 @@ export default function Buy() {
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: colors.lightGrey,
   },
   body: {
     flex: 1,
