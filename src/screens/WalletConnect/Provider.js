@@ -17,7 +17,7 @@ export const STATUS = {
   CONNECTED: 0x03,
 };
 
-const Provider = ({ children }) => {
+const Provider = ({ children }: { children: React$Node }) => {
   const [session, setSession] = useState({});
   const [connector, setConnector] = useState();
   const [status, setStatus] = useState(STATUS.DISCONNECTED);

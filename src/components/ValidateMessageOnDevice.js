@@ -2,15 +2,15 @@
 import React from "react";
 import { View, StyleSheet, ScrollView } from "react-native";
 import { useTranslation } from "react-i18next";
-
-import colors from "../colors";
+import type { TypedMessageData } from "@ledgerhq/live-common/lib/families/ethereum/types";
+import type { MessageData } from "@ledgerhq/live-common/lib/hw/signMessage/types";
 import LText from "./LText";
 import Animation from "./Animation";
 import getDeviceAnimation from "./DeviceAction/getDeviceAnimation";
 
 type Props = {
   device: Device,
-  message: any,
+  message: TypedMessageData | MessageData,
 };
 
 export default function ValidateOnDevice({ device, message }: Props) {
@@ -68,5 +68,5 @@ const styles = StyleSheet.create({
     lineHeight: 27,
     textAlign: "center",
     marginBottom: 36,
-  }
+  },
 });

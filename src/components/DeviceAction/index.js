@@ -24,7 +24,6 @@ import {
 } from "./rendering";
 import PreventNativeBack from "../PreventNativeBack";
 import SkipLock from "../behaviour/SkipLock";
-import LText from "../LText";
 
 type Props<R, H, P> = {
   onResult: (paylaod: P) => Promise<void> | void | React$Node,
@@ -64,8 +63,6 @@ export default function DeviceAction<R, H, P>({
     initSwapError,
     initSwapResult,
     signMessageRequested,
-    signMessageError,
-    signMessageResult,
     allowOpeningGranted,
     initSellRequested,
     initSellResult,

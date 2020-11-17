@@ -6,7 +6,6 @@ import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
 import { TrackScreen } from "../../analytics";
 import colors from "../../colors";
 import ValidateError from "../../components/ValidateError";
-import { NavigatorName, ScreenName } from "../../const";
 import { urls } from "../../config/urls";
 import { context as _wcContext } from "../WalletConnect/Provider";
 

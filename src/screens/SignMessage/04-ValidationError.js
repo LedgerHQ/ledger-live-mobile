@@ -19,7 +19,7 @@ type Props = {
 
 type RouteParams = {
   accountId: string,
-  message: TypedMessageData | Message,
+  message: TypedMessageData | MessageData,
   error: Error,
 };
 

@@ -8,6 +8,11 @@ import FallbackCameraBody from "../FallbackCameraBody";
 type Props = {
   navigation: any,
   t: T,
+  route: { params: RouteParams },
+};
+
+type RouteParams = {
+  screenName: string,
 };
 
 type State = {
