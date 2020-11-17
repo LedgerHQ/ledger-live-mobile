@@ -21,7 +21,7 @@ import Circle from "../Circle";
 
 type RawProps = {
   t: (key: string, options?: { [key: string]: string }) => string,
-  colors: *,
+  colors?: *,
   theme?: "light" | "dark",
 };
 

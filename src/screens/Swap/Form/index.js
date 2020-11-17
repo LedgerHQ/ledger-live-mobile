@@ -10,7 +10,7 @@ import type { CurrenciesStatus } from "@ledgerhq/live-common/lib/exchange/swap/l
 import type {
   Exchange,
   ExchangeRate,
-} from "@ledgerhq/live-common/lib/swap/types";
+} from "@ledgerhq/live-common/lib/exchange/swap/types";
 import { useNavigation, useRoute, useTheme } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/dist/Ionicons";
 import {

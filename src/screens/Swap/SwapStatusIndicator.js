@@ -3,7 +3,7 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
 import IconAD from "react-native-vector-icons/dist/AntDesign";
-import { operationStatusList } from "@ledgerhq/live-common/lib/swap";
+import { operationStatusList } from "@ledgerhq/live-common/lib/exchange/swap";
 import { useTheme } from "@react-navigation/native";
 import IconSwap from "../../icons/Swap";
 import { rgba } from "../../colors";

@@ -6,12 +6,12 @@ import type {
   Account,
   AccountLike,
 } from "@ledgerhq/live-common/lib/types/account";
+import { useTheme } from "@react-navigation/native";
 import { ScreenName } from "../../const";
 import Swap from "./Swap";
 import History from "./History";
 import styles from "../../navigation/styles";
 import LText from "../../components/LText";
-import { useTheme } from "@react-navigation/native";
 
 type RouteParams = {
   defaultAccount: ?AccountLike,

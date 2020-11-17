@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import type { AccountLike } from "@ledgerhq/live-common/lib/types";
 import { isAccountBalanceUnconfirmed } from "@ledgerhq/live-common/lib/account";
 import { Trans } from "react-i18next";
+import { useTheme } from "@react-navigation/native";
 import { accountsSelector } from "../reducers/accounts";
 import BottomModal from "./BottomModal";
 import LText from "./LText";
@@ -13,7 +14,6 @@ import Circle from "./Circle";
 import ClockIcon from "../icons/Clock";
 import IconInfo from "../icons/Info";
 import { rgba } from "../colors";
-import { useTheme } from "@react-navigation/native";
 
 const hitSlop = {
   top: 16,
