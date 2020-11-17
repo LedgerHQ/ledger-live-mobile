@@ -136,7 +136,7 @@ export default function useActions({ account, parentAccount }: Props) {
               {
                 screen: ScreenName.WalletConnectScan,
                 params: {
-                  defaultAccount: account,
+                  accountId: account.id,
                 },
               },
             ],

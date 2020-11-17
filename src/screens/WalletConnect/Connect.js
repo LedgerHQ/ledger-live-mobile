@@ -1,10 +1,12 @@
 /* @flow */
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useTranslation, Trans } from "react-i18next";
 import { View, StyleSheet, Image } from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
 import _ from "lodash";
 import type { Account } from "@ledgerhq/live-common/lib/types";
+import { useSelector } from "react-redux";
+import { accountScreenSelector } from "../../reducers/accounts";
 import LText from "../../components/LText";
 import Button from "../../components/Button";
 import { context, STATUS } from "./Provider";
@@ -17,8 +19,10 @@ import CurrencyIcon from "../../components/CurrencyIcon";
 import InfoBox from "../../components/InfoBox";
 import Circle from "../../components/Circle";
 import WarningBox from "../../components/WarningBox";
+import HeaderRightClose from "../../components/HeaderRightClose";
 import colors from "../../colors";
 import { TrackScreen } from "../../analytics";
+import AccountHeaderTitle from "../Account/AccountHeaderTitle";
 
 const DottedLine = () => {
   return (
@@ -36,18 +40,19 @@ type Props = {
 };
 
 type RouteParams = {
-  defaultAccount: Account,
+  accountId: string,
   uri?: string,
 };
 
 export default function Connect({ route, navigation }: Props) {
   const { t } = useTranslation();
+  const { account } = useSelector(accountScreenSelector(route));
   const wcContext = useContext(context);
 
   useFocusEffect(() => {
     if (route.params.uri && wcContext.status === STATUS.DISCONNECTED) {
       wcContext.connect({
-        account: route.params.defaultAccount,
+        account,
         uri: route.params.uri,
       });
     }
@@ -55,6 +60,32 @@ export default function Connect({ route, navigation }: Props) {
       wcContext.setCurrentCallRequestError(new Error("Aborted"));
     }
   }, [wcContext, route]);
+
+  useEffect(() => {
+    const opts = {
+      headerRight: () => (
+        <HeaderRightClose
+          onClose={() => {
+            wcContext.disconnect();
+          }}
+          preferDismiss={false}
+        />
+      ),
+    };
+    if (wcContext.status === STATUS.CONNECTED) {
+      navigation.setOptions({
+        ...opts,
+        title: undefined,
+        headerTitle: () => <AccountHeaderTitle />,
+      });
+    } else {
+      navigation.setOptions({
+        ...opts,
+        title: "Wallet Connect",
+        headerTitle: undefined,
+      });
+    }
+  }, [wcContext, navigation]);
 
   const correctIcons = _.filter((wcContext.dappInfo || {}).icons, icon =>
     ["png", "jpg", "jpeg", "bmp", "gif"].includes(icon.split(".")[-1]),
@@ -94,16 +125,13 @@ export default function Connect({ route, navigation }: Props) {
             </LText>
             <View style={styles.accountContainer}>
               <View style={styles.accountTitleContainer}>
-                <CurrencyIcon
-                  size={24}
-                  currency={route.params.defaultAccount.currency}
-                />
+                <CurrencyIcon size={24} currency={account.currency} />
                 <LText semiBold primary style={styles.accountName}>
-                  {route.params.defaultAccount.name}
+                  {account.name}
                 </LText>
               </View>
               <LText primary style={styles.details}>
-                {route.params.defaultAccount.freshAddress}
+                {account.freshAddress}
               </LText>
             </View>
           </>
@@ -211,7 +239,7 @@ export default function Connect({ route, navigation }: Props) {
             title={t("walletconnect.retry")}
             onPress={() => {
               wcContext.connect({
-                account: route.params.defaultAccount,
+                account,
                 uri: route.params.uri,
               });
             }}

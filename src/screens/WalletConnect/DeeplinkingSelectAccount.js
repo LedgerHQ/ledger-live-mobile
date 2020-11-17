@@ -64,7 +64,7 @@ class SendFundsSelectAccount extends Component<Props, State> {
         style={styles.cardStyle}
         onPress={() => {
           this.props.navigation.replace(ScreenName.WalletConnectConnect, {
-            defaultAccount: account,
+            accountId: account.id,
             uri: this.props.route.params.uri,
           });
         }}

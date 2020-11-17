@@ -12,7 +12,7 @@ type Props = {
 };
 
 type RouteParams = {
-  defaultAccount: Account,
+  accountId: String,
 };
 
 type State = {};
@@ -29,7 +29,7 @@ class ScanWalletConnect extends PureComponent<Props, State> {
   onResult = (uri: string) => {
     this.props.navigation.replace(ScreenName.WalletConnectConnect, {
       uri,
-      defaultAccount: this.props.route.params.defaultAccount,
+      accountId: this.props.route.params.accountId,
     });
   };
 

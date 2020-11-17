@@ -210,7 +210,7 @@ const Provider = ({ children }: { children: React$Node }) => {
       navigate(NavigatorName.Base, {
         screen: ScreenName.WalletConnectConnect,
         params: {
-          defaultAccount: account,
+          accountId: account.id,
         },
       });
     }
