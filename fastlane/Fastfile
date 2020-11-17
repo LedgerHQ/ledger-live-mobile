@@ -174,8 +174,8 @@ platform :ios do
     clean_beta
   end
 
-  desc "create a keychain for ci and use match to get certs and provisioning profile"
-  private_lane :setup_ci do
+  desc "ci: create adhoc version"
+  lane :ci do |options|
     export_options_method = "ad-hoc"
     code_sign_identity = "iPhone Developer"
     MY_APP_ID = ENV["APP_IDENTIFIER"]
@@ -206,6 +206,7 @@ platform :ios do
       team_id: ENV["DEVELOPER_TEAM_ID"],
       keychain_name: ENV["CI_KEYCHAIN_NAME"],
       keychain_password: ENV["CI_KEYCHAIN_PASSWORD"],
+      git_basic_authorization: ENV["TOKEN"],
       readonly: true
     )
 
@@ -232,11 +233,6 @@ platform :ios do
         }
       }
     )
-  end
-
-  desc "ci: create adhoc version"
-  lane :ci do |options|
-    setup_ci
   end
 end
 
