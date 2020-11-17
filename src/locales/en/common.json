@@ -4,6 +4,7 @@
     "apply": "Apply",
     "back": "Back",
     "delete": "Delete",
+    "paste": "Paste",
     "yes": "Yes",
     "no": "No",
     "gotit": "Got it",
@@ -90,10 +91,6 @@
     "BluetoothRequired": {
       "title": "Oops, Bluetooth disabled",
       "description": "Please enable Bluetooth in your phone Settings. ({{state}} state)"
-    },
-    "BitcoinCashHardforkOct2020Warning": {
-      "title": "",
-      "description": "Bitcoin Cash is currently undergoing a hard fork without replay protection. We will temporarily interrupt the Bitcoin Cash service until the network has stabilized."
     },
     "BtcUnmatchedApp": {
       "title": "That's the wrong app",
@@ -947,6 +944,7 @@
     "send": "Send",
     "receive": "Receive",
     "buy": "Buy",
+    "sell": "Sell",
     "swap": "Swap",
     "manage": "Manage",
     "lastOperations": "Last operations",
@@ -1085,7 +1083,7 @@
   },
   "help": {
     "gettingStarted": {
-      "title": "Getting Started",
+      "title": "Getting started",
       "desc": "Start here"
     },
     "helpCenter": {
@@ -1115,6 +1113,7 @@
   },
   "settings": {
     "header": "Settings",
+    "resources": "Ledger resources",
     "display": {
       "title": "General",
       "desc": "Configure general Ledger Live settings.",
@@ -1304,7 +1303,7 @@
       }
     },
     "exchange": {
-      "title": "Buy crypto assets"
+      "title": "Buy / Sell"
     },
     "swap": {
       "title": "Swap",
@@ -1622,7 +1621,8 @@
     "recipient": {
       "scan": "Scan QR Code",
       "enterAddress": "Enter address",
-      "input": "Enter address"
+      "input": "Enter address",
+      "verifyAddress": "Kindly verify the address matches the one shared by the recipient"
     },
     "amount": {
       "available": "Total available",
@@ -1859,6 +1859,10 @@
     "confirmSwap": {
       "title": "Confirm swap operation on device",
       "alert": "Verify the Swap details on your device before sending it. The addresses are exchanged securely so you don’t have to verify them."
+    },
+    "confirmSell": {
+      "title": "Confirm sell operation on device",
+      "alert": "Verify the Sell details on your device before sending it. The addresses are exchanged securely so you don’t have to verify them."
     },
     "button": {
       "openManager": "Open Manager"
@@ -2667,6 +2671,20 @@
       "title": "Buy crypto via our partner",
       "description": "Purchase crypto assets via Coinify and receive your coins directly in your Ledger account",
       "CTAButton": "Buy now",
+      "emptyState": {
+        "title": "No {{currency}} account",
+        "description": "You need to add an account before buying {{currency}}",
+        "CTAButton": "Add account"
+      }
+    },
+    "sell": {
+      "tabTitle": "Sell",
+      "selectCurrency": "Select a currency",
+      "selectAccount": "Select an account",
+      "connectDevice": "Connect your device",
+      "title": "Sell crypto via our partner",
+      "description": "Sell crypto assets directly from your ledger using Coinify and receive fiat on your bank account",
+      "CTAButton": "Sell now",
       "emptyState": {
         "title": "No {{currency}} account",
         "description": "You need to add an account before buying {{currency}}",

@@ -12,13 +12,16 @@ import {
   useCurrenciesByMarketcap,
   listSupportedCurrencies,
 } from "@ledgerhq/live-common/lib/currencies";
+
+import type { Device } from "@ledgerhq/hw-transport/lib/Transport";
 import { track } from "../../analytics/segment";
 import { TrackScreen } from "../../analytics";
 import FilteredSearchBar from "../../components/FilteredSearchBar";
 import KeyboardView from "../../components/KeyboardView";
 import CurrencyRow from "../../components/CurrencyRow";
 import LText from "../../components/LText";
-import { supportedCurrenciesIds } from "./coinifyConfig";
+import { getSupportedCurrencies } from "./coinifyConfig";
+
 import colors from "../../colors";
 
 const SEARCH_KEYS = ["name", "ticker"];
@@ -27,7 +30,13 @@ const forceInset = { bottom: "always" };
 type Props = {
   devMode: boolean,
   navigation: any,
-  route: { params?: { currency?: string } },
+  route: {
+    params?: {
+      currency?: string,
+      mode: "buy" | "sell",
+      device?: Device,
+    },
+  },
 };
 
 const keyExtractor = currency => currency.id;
@@ -43,6 +52,8 @@ const renderEmptyList = () => (
 export default function ExchangeSelectCrypto({ navigation, route }: Props) {
   const { params } = route;
   const initialCurrencySelected = params?.currency;
+  const device = params?.device;
+  const mode = params?.mode || "buy";
 
   const cryptoCurrencies = useMemo(
     () => listSupportedCurrencies().concat(listTokens()),
@@ -52,17 +63,23 @@ export default function ExchangeSelectCrypto({ navigation, route }: Props) {
   const sortedCryptoCurrencies = useCurrenciesByMarketcap(cryptoCurrencies);
 
   const supportedCryptoCurrencies = sortedCryptoCurrencies.filter(currency =>
-    supportedCurrenciesIds.includes(currency.id),
+    getSupportedCurrencies(mode).includes(currency.id),
   );
 
   const onPressCurrency = (currency: CryptoCurrency) => {
     track("Buy Crypto Continue Button", { currencyName: currency.name });
-    navigation.navigate("ExchangeSelectAccount", { currency });
+    navigation.navigate("ExchangeSelectAccount", {
+      currency,
+      mode,
+      device,
+    });
   };
 
   const onPressToken = (token: TokenCurrency) => {
     navigation.navigate("ExchangeSelectAccount", {
       currency: token,
+      mode,
+      device,
     });
   };
 
@@ -90,7 +107,7 @@ export default function ExchangeSelectCrypto({ navigation, route }: Props) {
   return (
     <SafeAreaView style={styles.root} forceInset={forceInset}>
       <TrackScreen category="Exchange" name="SelectCrypto" />
-      <KeyboardView style={{ flex: 1 }}>
+      <KeyboardView style={styles.keybaordContainer}>
         <View style={styles.searchContainer}>
           <FilteredSearchBar
             keys={SEARCH_KEYS}
@@ -126,5 +143,8 @@ const styles = StyleSheet.create({
   },
   emptySearchText: {
     textAlign: "center",
+  },
+  keybaordContainer: {
+    flex: 1,
   },
 });
