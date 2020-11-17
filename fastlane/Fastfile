@@ -176,6 +176,8 @@ platform :ios do
 
   desc "ci: create adhoc version"
   lane :ci do |options|
+    print(ENV["GIT_REPO_URL"])
+
     export_options_method = "ad-hoc"
     code_sign_identity = "iPhone Developer"
     MY_APP_ID = ENV["APP_IDENTIFIER"]
