@@ -4,7 +4,8 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { useTranslation } from "react-i18next";
-import { useNavigation, useTheme } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
+import colors from "../../colors";
 import { NavigatorName } from "../../const";
 import extraStatusBarPadding from "../../logic/extraStatusBarPadding";
 import TrackScreen from "../../analytics/TrackScreen";
@@ -17,43 +18,30 @@ const forceInset = { bottom: "always" };
 export default function Buy() {
   const { t } = useTranslation();
   const navigation = useNavigation();
-  const { colors } = useTheme();
 
   return (
     <SafeAreaView
-      style={[
-        styles.root,
-        {
-          backgroundColor: colors.lightGrey,
-          paddingTop: extraStatusBarPadding,
-        },
-      ]}
+      style={[styles.root, { paddingTop: extraStatusBarPadding }]}
       forceInset={forceInset}
     >
-      <TrackScreen category="Buy Crypto" />
+      <TrackScreen category="Sell Crypto" />
       <View style={styles.body}>
-        <View
-          style={[styles.iconContainer, { backgroundColor: colors.lightLive }]}
-        >
+        <View style={styles.iconContainer}>
           <ExchangeIcon size={22} color={colors.live} />
         </View>
         <LText style={styles.title} semiBold>
-          {t("exchange.buy.title")}
+          {t("exchange.sell.title")}
         </LText>
-        <LText style={styles.description} color="smoke">
-          {t("exchange.buy.description")}
+        <LText style={styles.description}>
+          {t("exchange.sell.description")}
         </LText>
         <View style={styles.buttonContainer}>
           <Button
             containerStyle={styles.button}
-            event="ExchangeStartBuyFlow"
+            event="ExchangeStartSellFlow"
             type="primary"
-            title={t("exchange.buy.CTAButton")}
-            onPress={() =>
-              navigation.navigate(NavigatorName.ExchangeBuyFlow, {
-                mode: "buy",
-              })
-            }
+            title={t("exchange.sell.CTAButton")}
+            onPress={() => navigation.navigate(NavigatorName.ExchangeSellFlow)}
           />
         </View>
       </View>
@@ -64,6 +52,7 @@ export default function Buy() {
 const styles = StyleSheet.create({
   root: {
     flex: 1,
+    backgroundColor: colors.lightGrey,
   },
   body: {
     flex: 1,
@@ -76,6 +65,7 @@ const styles = StyleSheet.create({
     width: 56,
     height: 56,
     borderRadius: 50,
+    backgroundColor: colors.lightLive,
     marginBottom: 24,
     display: "flex",
     justifyContent: "center",
@@ -83,11 +73,13 @@ const styles = StyleSheet.create({
   },
   title: {
     textAlign: "center",
+    color: colors.darkBlue,
     fontSize: 16,
     marginBottom: 16,
   },
   description: {
     textAlign: "center",
+    color: colors.smoke,
     fontSize: 14,
   },
   buttonContainer: {

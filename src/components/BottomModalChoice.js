@@ -16,7 +16,7 @@ const hitSlop = {
 };
 
 type Props = {
-  onPress: ?() => void,
+  onPress: ?() => any,
   Icon: React$ComponentType<*>,
   title: string,
   description?: string,

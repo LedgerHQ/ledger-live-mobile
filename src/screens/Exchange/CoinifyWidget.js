@@ -1,8 +1,8 @@
 // @flow
-import React, { useRef, useCallback, useState, useEffect } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { WebView } from "react-native-webview";
 import querystring from "querystring";
-import { ActivityIndicator, StyleSheet, View, Linking } from "react-native";
+import { ActivityIndicator, Linking, StyleSheet, View } from "react-native";
 import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
 import {
   getAccountCurrency,
@@ -19,6 +19,7 @@ import BottomModal from "../../components/BottomModal";
 import { renderVerifyAddress } from "../../components/DeviceAction/rendering";
 import { getConfig } from "./coinifyConfig";
 import { track } from "../../analytics";
+import { DevicePart } from "./DevicePart";
 
 const action = createAction(connectApp);
 
@@ -31,6 +32,7 @@ type CoinifyWidgetConfig = {
   addressConfirmation?: boolean,
   transferOutMedia?: string,
   transferInMedia?: string,
+  confirmMessages?: *,
 };
 
 const injectedCode = `
@@ -80,6 +82,8 @@ type Props = {
   verifyAddress?: boolean,
 };
 
+let tradeId = null;
+let resolvePromise = null;
 export default function CoinifyWidget({
   mode,
   account,
@@ -94,15 +98,18 @@ export default function CoinifyWidget({
   const [isOpen, setIsOpen] = useState(false);
   const webView = useRef(null);
 
+  const currency = account ? getAccountCurrency(account) : null;
   const mainAccount = account ? getMainAccount(account, parentAccount) : null;
 
   const coinifyConfig = getConfig();
+
   const widgetConfig: CoinifyWidgetConfig = {
     fontColor: "#142533",
     primaryColor: colors.live,
     partnerId: coinifyConfig.partnerId,
+    cryptoCurrencies: currency ? currency.ticker : null,
+    address: mainAccount ? mainAccount.freshAddress : null,
     targetPage: mode,
-    addressConfirmation: true,
   };
 
   useEffect(() => {
@@ -123,14 +130,12 @@ export default function CoinifyWidget({
 
   if (mode === "buy") {
     widgetConfig.transferOutMedia = "blockchain";
-    widgetConfig.cryptoCurrencies = getAccountCurrency(account).ticker;
-    widgetConfig.address = mainAccount ? mainAccount.freshAddress : null;
+    widgetConfig.addressConfirmation = true;
   }
 
   if (mode === "sell") {
     widgetConfig.transferInMedia = "blockchain";
-    widgetConfig.cryptoCurrencies = getAccountCurrency(account).ticker;
-    widgetConfig.address = mainAccount ? mainAccount.freshAddress : null;
+    widgetConfig.confirmMessages = true;
   }
 
   if (mode === "trade-history") {
@@ -140,65 +145,128 @@ export default function CoinifyWidget({
 
   const handleMessage = useCallback(message => {
     const { type, event, context } = JSON.parse(message.nativeEvent.data);
-    if (type !== "event") return;
-    if (event === "misc.opened-external-link") {
-      if (Linking.canOpenURL(context.url)) {
-        Linking.openURL(context.url);
-      }
+
+    if (type !== "event") {
+      return;
     }
-    if (event === "trade.receive-account-changed") {
-      if (context.address === mainAccount.freshAddress) {
-        track("Coinify Confirm Buy Start", {
-          currencyName: getAccountCurrency(account).name,
+    switch (event) {
+      case "misc.opened-external-link":
+        if (Linking.canOpenURL(context.url)) {
+          Linking.openURL(context.url);
+        }
+        break;
+      case "trade.receive-account-changed":
+        if (context.address === mainAccount?.freshAddress) {
+          track("Coinify Confirm Buy Start", {
+            currencyName: account && getAccountCurrency(account).name,
+          });
+          setRequestingAction("connect");
+          setIsOpen(true);
+        } else {
+          // TODO this is a problem, it should not occur.
+        }
+        break;
+      case "trade.trade-placed":
+        track("Coinify Widget Event Trade Placed", {
+          currencyName: account && getAccountCurrency(account).name,
         });
-        setRequestingAction("connect");
-        setIsOpen(true);
-      } else {
-        // TODO this is a problem, it should not occur.
-      }
-    }
-    if (event === "trade.trade-placed") {
-      track("Coinify Widget Event Trade Placed", {
-        currencyName: getAccountCurrency(account).name,
-      });
+        break;
+      case "trade.trade-prepared":
+        if (mode === "sell" && currency) {
+          setRequestingAction("connect");
+          setIsOpen(true);
+        }
+        break;
+      case "trade.trade-created":
+        if (mode === "sell") {
+          //            setTradeId(context.id);
+          tradeId = context.id;
+          if (resolvePromise) {
+            resolvePromise(context);
+            resolvePromise = null;
+          }
+        }
+        break;
+      default:
+        break;
     }
   }, []);
 
-  const settleTrade = useCallback(
-    status => {
-      if (account && webView.current) {
+  const setTransactionId = useCallback(txId => {
+    return new Promise(resolve => {
+      resolvePromise = resolve;
+      if (webView.current) {
         webView.current.postMessage(
           JSON.stringify({
             type: "event",
-            event: "trade.receive-account-confirmed",
+            event: "settings.partner-context-changed",
             context: {
-              address: mainAccount.freshAddress,
-              status,
+              partnerContext: {
+                nonce: txId,
+              },
             },
           }),
         );
-        if (status === "accepted") {
-          track("Coinify Confirm Buy End", {
-            currencyName: getAccountCurrency(account).name,
-          });
+        webView.current.postMessage(
+          JSON.stringify({
+            type: "event",
+            event: "trade.confirm-trade-prepared",
+            context: {
+              confirmed: true,
+            },
+          }),
+        );
+      }
+    });
+  }, []);
+
+  const settleTrade = useCallback(
+    confirmed => {
+      setIsOpen(false);
+      setRequestingAction("none");
+      if (account && webView.current) {
+        if (mode === "buy") {
+          webView.current.postMessage(
+            JSON.stringify({
+              type: "event",
+              event: "trade.receive-account-confirmed",
+              context: {
+                address: mainAccount?.freshAddress,
+                status: confirmed ? "accepted" : "rejected",
+              },
+            }),
+          );
+          if (confirmed) {
+            track("Coinify Confirm Buy End", {
+              currencyName: getAccountCurrency(account).name,
+            });
+          }
+        } else {
+          webView.current.postMessage(
+            JSON.stringify({
+              type: "event",
+              event: "trade.confirm-trade-created",
+              context: {
+                confirmed,
+                transferInitiated: true,
+                tradeId,
+              },
+            }),
+          );
+          if (confirmed) {
+            track("Coinify Confirm Sell End", {
+              currencyName: getAccountCurrency(account).name,
+            });
+          }
         }
       }
     },
-    [account],
+    [account, mode],
   );
 
   const onResult = useCallback(() => {
     setRequestingAction("verify");
   }, []);
-
-  const onVerify = useCallback(
-    confirmed => {
-      setIsOpen(false);
-      settleTrade(confirmed ? "accepted" : "rejected");
-      setRequestingAction("none");
-    },
-    [settleTrade],
-  );
 
   const tokenCurrency =
     account && account.type === "TokenAccount" ? account.token : null;
@@ -234,17 +302,27 @@ export default function CoinifyWidget({
       <BottomModal id="DeviceActionModal" isOpened={isOpen}>
         <View style={styles.modalContainer}>
           {requestingAction === "connect" ? (
-            <DeviceAction
-              action={action}
-              device={device}
-              request={{ account: mainAccount, tokenCurrency }}
-              onResult={onResult}
-            />
+            mode === "buy" ? (
+              <DeviceAction
+                action={action}
+                device={device}
+                request={{ account: mainAccount, tokenCurrency }}
+                onResult={onResult}
+              />
+            ) : (
+              <DevicePart
+                account={account}
+                onResult={settleTrade}
+                device={device}
+                parentAccount={parentAccount}
+                getCoinifyContext={setTransactionId}
+              />
+            )
           ) : requestingAction === "verify" ? (
             <VerifyAddress
               account={mainAccount}
               device={device}
-              onResult={onVerify}
+              onResult={settleTrade}
             />
           ) : null}
         </View>
@@ -262,6 +340,7 @@ function VerifyAddress({
   device: Device,
   onResult: (confirmed: boolean, error?: Error) => void,
 }) {
+  const { dark } = useTheme();
   const { t } = useTranslation();
 
   const onConfirmAddress = useCallback(async () => {
@@ -287,6 +366,7 @@ function VerifyAddress({
     currencyName: getAccountCurrency(account).name,
     device,
     address: account.freshAddress,
+    theme: dark ? "dark" : "light",
   });
 }
 
