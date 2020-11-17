@@ -11,9 +11,7 @@ import type {
   AccountLikeArray,
 } from "@ledgerhq/live-common/lib/types";
 import { getAccountCurrency } from "@ledgerhq/live-common/lib/account";
-import {
-  getCryptoCurrencyById,
-} from "@ledgerhq/live-common/lib/currencies";
+import { getCryptoCurrencyById } from "@ledgerhq/live-common/lib/currencies";
 import {
   flattenAccountsEnforceHideEmptyTokenSelector,
   accountsSelector,
