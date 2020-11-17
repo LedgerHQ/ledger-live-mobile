@@ -7,6 +7,7 @@ import Icon from "react-native-vector-icons/dist/Feather";
 import FontAwesome from "react-native-vector-icons/dist/FontAwesome";
 import { getDeviceModel } from "@ledgerhq/devices";
 import { createStructuredSelector } from "reselect";
+import { compose } from "redux";
 import { hasCompletedOnboardingSelector } from "../../../reducers/settings";
 
 import type { OnboardingStepProps } from "../types";
@@ -18,15 +19,14 @@ import { withOnboardingContext } from "../onboardingContext";
 import IconImport from "../../../icons/Import";
 import IconCheck from "../../../icons/Check";
 import IconRestore from "../../../icons/History";
-import colors from "../../../colors";
 import { urls } from "../../../config/urls";
 import UpgradeToNanoXBanner from "../../../components/UpgradeToNanoXBanner";
 import StepLegacyModal from "../../../modals/StepLegacyModal";
-
-const IconPlus = () => <Icon name="plus" color={colors.live} size={16} />;
+import { withTheme } from "../../../colors";
 
 type Props = OnboardingStepProps & {
   hasCompletedOnboarding: boolean,
+  colors: *,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -70,9 +70,13 @@ class OnboardingStepGetStarted extends Component<Props, *> {
     this.setState({ modalVisible: false });
   };
 
+  IconPlus = () => (
+    <Icon name="plus" color={this.props.colors.live} size={16} />
+  );
+
   render() {
     const { modalVisible } = this.state;
-    const { deviceModelId, hasCompletedOnboarding } = this.props;
+    const { deviceModelId, hasCompletedOnboarding, colors } = this.props;
     const deviceModel = getDeviceModel(deviceModelId);
     const title = deviceModel.productName;
     const showAd = deviceModelId !== "nanoX";
@@ -90,32 +94,36 @@ class OnboardingStepGetStarted extends Component<Props, *> {
             Icon={IconImport}
             label={<Trans i18nKey="onboarding.stepGetStarted.import" />}
             onPress={this.onImport}
+            colors={colors}
           />
         ) : null}
         {deviceModelId === "nanoX" || Platform.OS === "android" ? (
           <>
             <Row
               id="initialize"
-              Icon={IconPlus}
+              Icon={this.IconPlus}
               label={<Trans i18nKey="onboarding.stepGetStarted.initialize" />}
               onPress={this.onInit}
+              colors={colors}
             />
             <Row
               id="restore"
               Icon={IconRestore}
               label={<Trans i18nKey="onboarding.stepGetStarted.restore" />}
               onPress={this.onRestore}
+              colors={colors}
             />
             <Row
               id="initialized"
               Icon={IconCheck}
               label={<Trans i18nKey="onboarding.stepGetStarted.initialized" />}
               onPress={this.onInitialized}
+              colors={colors}
             />
           </>
         ) : (
           <Touchable event="StepLegacyOpenModal" onPress={this.enableModal}>
-            <LText style={styles.description}>
+            <LText style={styles.description} color="smoke">
               <Trans i18nKey="onboarding.stepLegacy.description" />{" "}
               <FontAwesome name="info-circle" size={14} color={colors.fog} />
             </LText>
@@ -132,17 +140,18 @@ type RowProps = {
   label: string | React$Element<*>,
   onPress: () => any,
   id: string,
+  colors: *,
 };
 
 class Row extends PureComponent<RowProps> {
   render() {
-    const { onPress, label, Icon, id } = this.props;
+    const { onPress, label, Icon, id, colors } = this.props;
     return (
       <Touchable
         event="OnboardingGetStartedChoice"
         eventProperties={{ id }}
         onPress={onPress}
-        style={styles.row}
+        style={[styles.row, { borderColor: colors.fog }]}
       >
         <View style={styles.rowIcon}>
           {Icon ? <Icon size={16} color={colors.live} /> : null}
@@ -158,14 +167,7 @@ class Row extends PureComponent<RowProps> {
 const styles = StyleSheet.create({
   title: {
     fontSize: 24,
-
     marginVertical: 32,
-  },
-  subtitle: {
-    marginHorizontal: 1,
-    fontSize: 14,
-    color: colors.smoke,
-    marginBottom: 16,
   },
   extraMargin: {
     marginTop: 32,
@@ -176,7 +178,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     borderWidth: 1,
-    borderColor: colors.fog,
     borderRadius: 4,
     marginBottom: 8,
   },
@@ -193,20 +194,17 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     flexDirection: "row",
   },
-  footerText: {
-    fontSize: 14,
-    color: colors.live,
-  },
   description: {
     marginTop: 40,
     padding: 16,
     fontSize: 14,
     lineHeight: 21,
-    color: colors.smoke,
     textAlign: "center",
   },
 });
 
-export default connect(mapStateToProps)(
-  withOnboardingContext(OnboardingStepGetStarted),
-);
+export default compose(
+  connect(mapStateToProps),
+  withOnboardingContext,
+  withTheme,
+)(OnboardingStepGetStarted);

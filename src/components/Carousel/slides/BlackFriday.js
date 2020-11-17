@@ -13,7 +13,6 @@ import getWindowDimensions from "../../../logic/getWindowDimensions";
 import blackfriday from "../../../images/banners/blackfriday.png";
 import LText from "../../LText";
 import { urls } from "../../../config/urls";
-import colors from "../../../colors";
 
 const Blackfriday = () => {
   const slideWidth = getWindowDimensions().width - 32;
@@ -23,12 +22,7 @@ const Blackfriday = () => {
   return (
     <TouchableOpacity onPress={onClick}>
       <View style={[styles.wrapper, { width: slideWidth }]}>
-        <Image
-          style={styles.illustration}
-          source={blackfriday}
-          width={127}
-          height={88}
-        />
+        <Image style={styles.illustration} source={blackfriday} />
         <View>
           <LText semiBold secondary style={styles.label}>
             <Trans i18nKey={`carousel.banners.blackfriday.title`} />
@@ -47,6 +41,8 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 0,
     right: 0,
+    width: 127,
+    height: 88,
   },
   wrapper: {
     width: "100%",
@@ -66,13 +62,11 @@ const styles = StyleSheet.create({
     textTransform: "uppercase",
     letterSpacing: 1,
     opacity: 0.5,
-    color: colors.darkBlue,
     fontSize: 10,
     lineHeight: 15,
     marginRight: 100,
   },
   description: {
-    color: colors.darkBlue,
     fontSize: 13,
     lineHeight: 19,
     marginTop: 8,

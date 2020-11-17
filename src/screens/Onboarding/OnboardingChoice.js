@@ -1,11 +1,12 @@
 // @flow
 
-import React, { PureComponent } from "react";
+import React, { memo } from "react";
 import { StyleSheet, View } from "react-native";
 
+import { useTheme } from "@react-navigation/native";
 import Touchable from "../../components/Touchable";
 import LText from "../../components/LText";
-import colors, { rgba } from "../../colors";
+import { rgba } from "../../colors";
 import IconCheck from "../../icons/Check";
 
 type Props = {
@@ -16,47 +17,55 @@ type Props = {
   eventProperties?: Object,
 };
 
-class OnboardingChoice extends PureComponent<Props> {
-  render() {
-    const { onPress, children, isChecked, event, eventProperties } = this.props;
-    return (
-      <Touchable
-        event={event}
-        eventProperties={eventProperties}
-        onPress={onPress}
-        style={[styles.root, isChecked && styles.rootChecked]}
-      >
-        <View style={styles.inner}>
-          <LText
-            semiBold={isChecked}
-            style={[styles.text, isChecked && styles.textChecked]}
-          >
-            {children}
-          </LText>
+function OnboardingChoice({
+  onPress,
+  children,
+  isChecked,
+  event,
+  eventProperties,
+}: Props) {
+  const { colors } = useTheme();
+  return (
+    <Touchable
+      event={event}
+      eventProperties={eventProperties}
+      onPress={onPress}
+      style={[
+        styles.root,
+        isChecked
+          ? {
+              borderColor: colors.live,
+              backgroundColor: rgba(colors.live, 0.1),
+            }
+          : { borderColor: colors.fog },
+      ]}
+    >
+      <View style={styles.inner}>
+        <LText
+          semiBold={isChecked}
+          style={[styles.text]}
+          color={isChecked ? "live" : "grey"}
+        >
+          {children}
+        </LText>
+      </View>
+      {isChecked && (
+        <View style={styles.checkContainer}>
+          <IconCheck size={16} color={colors.live} />
         </View>
-        {isChecked && (
-          <View style={styles.checkContainer}>
-            <IconCheck size={16} color={colors.live} />
-          </View>
-        )}
-      </Touchable>
-    );
-  }
+      )}
+    </Touchable>
+  );
 }
 
 const styles = StyleSheet.create({
   root: {
     borderWidth: 1,
-    borderColor: colors.fog,
     padding: 16,
     borderRadius: 4,
     marginBottom: 8,
     flexDirection: "row",
     alignItems: "center",
-  },
-  rootChecked: {
-    borderColor: colors.live,
-    backgroundColor: rgba(colors.live, 0.1),
   },
   inner: {
     flexGrow: 1,
@@ -64,14 +73,10 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 16,
     lineHeight: 24,
-    color: colors.grey,
-  },
-  textChecked: {
-    color: colors.live,
   },
   checkContainer: {
     marginLeft: 16,
   },
 });
 
-export default OnboardingChoice;
+export default memo<Props>(OnboardingChoice);

@@ -22,7 +22,6 @@ import CurrencyInput from "../../../components/CurrencyInput";
 import CurrencyUnitValue from "../../../components/CurrencyUnitValue";
 import TranslatedError from "../../../components/TranslatedError";
 import Button from "../../../components/Button";
-import colors from "../../../colors";
 import { ScreenName } from "../../../const";
 
 type Props = {
@@ -168,14 +167,19 @@ const SwapFormAmount = ({ navigation, route }: Props) => {
           unit={fromUnit}
           value={transaction.amount}
           renderRight={
-            <LText style={[styles.currency, styles.active]} tertiary>
+            <LText
+              style={[styles.currency, styles.active]}
+              color="grey"
+              tertiary
+            >
               {fromUnit.code}
             </LText>
           }
           hasError={!hideError && !!error}
         />
         <LText
-          style={[amountError ? styles.error : styles.warning]}
+          style={[styles.error]}
+          color={amountError ? "alert" : "orange"}
           numberOfLines={2}
         >
           <TranslatedError error={(!hideError && amountError) || undefined} />
@@ -193,7 +197,7 @@ const SwapFormAmount = ({ navigation, route }: Props) => {
           editable={false}
           showAllDigits
           renderRight={
-            <LText style={styles.currency} tertiary>
+            <LText style={styles.currency} color="grey" tertiary>
               {toUnit.code}
             </LText>
           }
@@ -202,10 +206,10 @@ const SwapFormAmount = ({ navigation, route }: Props) => {
       <View style={styles.bottomWrapper}>
         <View style={styles.available}>
           <View style={styles.availableLeft}>
-            <LText>
+            <LText color="grey">
               <Trans i18nKey="transfer.swap.form.amount.available" />
             </LText>
-            <LText tertiary style={styles.availableAmount}>
+            <LText tertiary>
               <CurrencyUnitValue
                 showCode
                 unit={fromUnit}
@@ -214,7 +218,7 @@ const SwapFormAmount = ({ navigation, route }: Props) => {
             </LText>
           </View>
           <View style={styles.availableRight}>
-            <LText style={styles.maxLabel}>
+            <LText style={styles.maxLabel} color="grey">
               <Trans i18nKey="transfer.swap.form.amount.useMax" />
             </LText>
             <Switch
@@ -259,21 +263,12 @@ const styles = StyleSheet.create({
   },
   currency: {
     fontSize: 24,
-    color: colors.grey,
   },
   active: {
     fontSize: 32,
   },
   error: {
-    color: colors.alert,
     fontSize: 14,
-  },
-  warning: {
-    color: colors.orange,
-    fontSize: 14,
-  },
-  availableAmount: {
-    color: colors.darkBlue,
   },
   availableRight: {
     alignItems: "center",
@@ -316,8 +311,6 @@ const styles = StyleSheet.create({
   available: {
     flexDirection: "row",
     display: "flex",
-    fontSize: 16,
-    color: colors.grey,
     marginBottom: 16,
   },
 });

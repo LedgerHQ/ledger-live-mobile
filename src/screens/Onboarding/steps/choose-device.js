@@ -1,11 +1,11 @@
 // @flow
 
-import React, { Component, PureComponent } from "react";
+import React, { Component, memo } from "react";
 import { BackHandler, StyleSheet } from "react-native";
 import { Trans } from "react-i18next";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
-import { useNavigation, useRoute } from "@react-navigation/native";
+import { useNavigation, useRoute, useTheme } from "@react-navigation/native";
 import { TrackScreen } from "../../../analytics";
 import LText from "../../../components/LText";
 import Touchable from "../../../components/Touchable";
@@ -14,7 +14,6 @@ import { withOnboardingContext } from "../onboardingContext";
 import NanoSVertical from "../../../icons/NanoSVertical";
 import NanoXVertical from "../../../icons/NanoXVertical";
 import Blue from "../../../icons/Blue";
-import colors from "../../../colors";
 import { deviceNames } from "../../../wording";
 
 import type { OnboardingStepProps } from "../types";
@@ -24,6 +23,7 @@ import Close from "../../../icons/Close";
 import { hasCompletedOnboardingSelector } from "../../../reducers/settings";
 
 function CloseOnboarding() {
+  const { colors } = useTheme();
   const { navigate } = useNavigation();
   const route = useRoute();
 
@@ -45,6 +45,7 @@ function CloseOnboarding() {
 class OnboardingStepChooseDevice extends Component<
   OnboardingStepProps & {
     hasCompletedOnboarding: boolean,
+    route: *,
   },
 > {
   componentDidMount() {
@@ -133,25 +134,36 @@ type DeviceItemProps = {
   eventProperties: *,
 };
 
-class DeviceItem extends PureComponent<DeviceItemProps> {
-  render() {
-    const { title, desc, onPress, Icon, event, eventProperties } = this.props;
-    return (
-      <Touchable
-        onPress={onPress}
-        style={styles.deviceItem}
-        event={event}
-        eventProperties={eventProperties}
-      >
-        <Icon />
-        <LText semiBold style={styles.deviceTitle}>
-          {title}
+function DeviceItemComponent({
+  title,
+  desc,
+  onPress,
+  Icon,
+  event,
+  eventProperties,
+}: DeviceItemProps) {
+  const { colors } = useTheme();
+  return (
+    <Touchable
+      onPress={onPress}
+      style={[styles.deviceItem, { borderColor: colors.fog }]}
+      event={event}
+      eventProperties={eventProperties}
+    >
+      <Icon />
+      <LText semiBold style={styles.deviceTitle}>
+        {title}
+      </LText>
+      {desc && (
+        <LText style={styles.deviceDesc} color="grey">
+          {desc}
         </LText>
-        {desc && <LText style={styles.deviceDesc}>{desc}</LText>}
-      </Touchable>
-    );
-  }
+      )}
+    </Touchable>
+  );
 }
+
+const DeviceItem = memo<DeviceItemProps>(DeviceItemComponent);
 
 const styles = StyleSheet.create({
   title: {
@@ -165,7 +177,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderWidth: 1,
-    borderColor: colors.fog,
     marginBottom: 8,
     borderRadius: 4,
   },
@@ -181,7 +192,6 @@ const styles = StyleSheet.create({
   deviceDesc: {
     marginTop: 8,
     fontSize: 14,
-    color: colors.grey,
   },
 });
 

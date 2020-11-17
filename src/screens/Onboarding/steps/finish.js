@@ -12,7 +12,6 @@ import Button from "../../../components/Button";
 import OnboardingLayout from "../OnboardingLayout";
 import ConfettiParty from "../../../components/ConfettiParty";
 import { useNavigationInterceptor } from "../onboardingContext";
-import colors from "../../../colors";
 import { NavigatorName } from "../../../const";
 
 import { readOnlyModeEnabledSelector } from "../../../reducers/settings";
@@ -60,7 +59,7 @@ export default function OnboardingStepFinish({ navigation }: Props) {
           />
         </LText>
         {!readOnlyModeEnabled && (
-          <LText style={styles.desc}>
+          <LText style={styles.desc} color="grey">
             <Trans i18nKey="onboarding.stepFinish.desc" />
           </LText>
         )}
@@ -102,12 +101,10 @@ const styles = StyleSheet.create({
     marginTop: 24,
     marginBottom: 16,
     textAlign: "center",
-
     fontSize: 16,
   },
   desc: {
     textAlign: "center",
-    color: colors.grey,
     fontSize: 14,
     marginBottom: 32,
   },

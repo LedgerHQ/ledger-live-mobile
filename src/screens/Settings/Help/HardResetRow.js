@@ -4,7 +4,8 @@ import { Trans } from "react-i18next";
 import { createStructuredSelector } from "reselect";
 import { connect } from "react-redux";
 import { disconnect } from "@ledgerhq/live-common/lib/hw";
-import colors from "../../../colors";
+import { compose } from "redux";
+import { withTheme } from "../../../colors";
 import { knownDevicesSelector } from "../../../reducers/ble";
 import type { DeviceLike } from "../../../reducers/ble";
 import { withReboot } from "../../../context/Reboot";
@@ -17,6 +18,7 @@ import Trash from "../../../icons/Trash";
 type Props = {
   reboot: (?boolean) => *,
   knownDevices: DeviceLike[],
+  colors: *,
 };
 
 type State = {
@@ -40,6 +42,7 @@ class HardResetRow extends PureComponent<Props, State> {
 
   render() {
     const { isModalOpened } = this.state;
+    const { colors } = this.props;
 
     return (
       <>
@@ -70,8 +73,12 @@ class HardResetRow extends PureComponent<Props, State> {
   }
 }
 
-export default connect(
-  createStructuredSelector({
-    knownDevices: knownDevicesSelector,
-  }),
-)(withReboot(HardResetRow));
+export default compose(
+  connect(
+    createStructuredSelector({
+      knownDevices: knownDevicesSelector,
+    }),
+  ),
+  withReboot,
+  withTheme,
+)(HardResetRow);

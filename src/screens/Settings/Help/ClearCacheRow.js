@@ -3,8 +3,8 @@ import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { Trans } from "react-i18next";
 import { View, StyleSheet } from "react-native";
+import { compose } from "redux";
 import { cleanCache } from "../../../actions/general";
-import colors from "../../../colors";
 import SettingsRow from "../../../components/SettingsRow";
 import Warning from "../../../icons/Warning";
 import { withReboot } from "../../../context/Reboot";
@@ -13,6 +13,7 @@ import Button from "../../../components/Button";
 import Archive from "../../../icons/Archive";
 import Circle from "../../../components/Circle";
 import BottomModal from "../../../components/BottomModal";
+import { withTheme } from "../../../colors";
 
 const mapDispatchToProps = {
   cleanCache,
@@ -21,6 +22,7 @@ const mapDispatchToProps = {
 type Props = {
   cleanCache: () => void,
   reboot: (?boolean) => *,
+  colors: *,
 };
 
 type State = {
@@ -47,6 +49,7 @@ class ClearCacheRow extends PureComponent<Props, State> {
 
   render() {
     const { isModalOpened } = this.state;
+    const { colors } = this.props;
 
     return (
       <>
@@ -102,7 +105,11 @@ class ClearCacheRow extends PureComponent<Props, State> {
   }
 }
 
-export default connect(null, mapDispatchToProps)(withReboot(ClearCacheRow));
+export default compose(
+  connect(null, mapDispatchToProps),
+  withReboot,
+  withTheme,
+)(ClearCacheRow);
 
 const styles = StyleSheet.create({
   footerContainer: {

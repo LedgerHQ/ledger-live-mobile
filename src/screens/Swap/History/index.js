@@ -19,6 +19,7 @@ import getCompleteSwapHistory from "@ledgerhq/live-common/lib/swap/getCompleteSw
 import updateAccountSwapStatus from "@ledgerhq/live-common/lib/swap/updateAccountSwapStatus";
 import { mappedSwapOperationsToCSV } from "@ledgerhq/live-common/lib/swap/csvExport";
 import { operationStatusList } from "@ledgerhq/live-common/lib/swap";
+import { useTheme } from "@react-navigation/native";
 import useInterval from "../../../components/useInterval";
 import { updateAccountWithUpdater } from "../../../actions/accounts";
 import { flattenAccountsSelector } from "../../../reducers/accounts";
@@ -26,7 +27,6 @@ import OperationRow from "./OperationRow";
 import EmptyState from "./EmptyState";
 import LText from "../../../components/LText";
 import Button from "../../../components/Button";
-import colors from "../../../colors";
 import logger from "../../../logger";
 import DownloadFileIcon from "../../../icons/DownloadFile";
 import { TrackScreen } from "../../../analytics";
@@ -34,6 +34,7 @@ import { TrackScreen } from "../../../analytics";
 const AnimatedSectionList = Animated.createAnimatedComponent(SectionList);
 
 const History = () => {
+  const { colors } = useTheme();
   const { t } = useTranslation();
   const accounts = useSelector(flattenAccountsSelector);
   const dispatch = useDispatch();
@@ -116,7 +117,7 @@ const History = () => {
   };
 
   return (
-    <View style={styles.root}>
+    <View style={[styles.root, { backgroundColor: colors.white }]}>
       <TrackScreen category="Swap" name="History" />
       <AnimatedSectionList
         ref={ref}
@@ -147,7 +148,7 @@ const History = () => {
         renderItem={renderItem}
         renderSectionHeader={({ section }) => {
           return (
-            <LText semiBold style={styles.section}>
+            <LText semiBold style={styles.section} color="grey">
               {section.day.toDateString()}
             </LText>
           );
@@ -162,7 +163,6 @@ const History = () => {
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: colors.white,
   },
   header: {
     flexDirection: "column",
@@ -172,7 +172,6 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     fontSize: 14,
     lineHeight: 19,
-    color: colors.grey,
   },
   sectionList: {
     flex: 1,

@@ -3,7 +3,7 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
 import { useTranslation } from "react-i18next";
-import colors from "../../colors";
+import { useTheme } from "@react-navigation/native";
 import Touchable from "../../components/Touchable";
 import LText from "../../components/LText";
 import IconArrowLeft from "../../icons/ArrowLeft";
@@ -33,11 +33,12 @@ export default function OnboardingHeader({
   withNeedHelp,
   titleOverride,
 }: Props) {
+  const { colors } = useTheme();
   const { next, prev, mode, firstTimeOnboarding } = useNavigationInterceptor();
   const { t } = useTranslation();
 
-  const steps = getStep(mode, firstTimeOnboarding);
-  const visibleSteps = steps.filter(s => !s.isGhost);
+  const steps = firstTimeOnboarding && getStep(mode, firstTimeOnboarding);
+  const visibleSteps = steps ? steps.filter(s => !s.isGhost) : [];
   const indexInSteps = visibleSteps.findIndex(s => s.id === stepId);
   const stepMsg = t("onboarding.stepCount", {
     current: indexInSteps + 1,
@@ -54,7 +55,7 @@ export default function OnboardingHeader({
       <View style={styles.headerHeader}>
         <Touchable
           event="OnboardingBack"
-          style={styles.arrow}
+          style={[styles.arrow, { backgroundColor: colors.lightFog }]}
           onPress={prev}
           hitSlop={hitSlop}
         >
@@ -62,14 +63,14 @@ export default function OnboardingHeader({
         </Touchable>
         {withSkip && (
           <Touchable event="OnboardingSkip" onPress={next} hitSlop={hitSlop}>
-            <LText style={styles.skip} semiBold>
+            <LText style={styles.skip} semiBold color="grey">
               {t("common.skip")}
             </LText>
           </Touchable>
         )}
         {withNeedHelp && <HelpLink />}
       </View>
-      <LText semiBold style={styles.steps}>
+      <LText semiBold style={styles.steps} color="grey">
         {stepMsg}
       </LText>
       <LText secondary semiBold style={styles.title}>
@@ -88,12 +89,10 @@ const styles = StyleSheet.create({
     height: 32,
     width: 32,
     borderRadius: 16,
-    backgroundColor: colors.lightFog,
     alignItems: "center",
     justifyContent: "center",
   },
   steps: {
-    color: colors.grey,
     fontSize: 14,
   },
   title: {
@@ -107,12 +106,6 @@ const styles = StyleSheet.create({
     marginBottom: 24,
   },
   skip: {
-    color: colors.grey,
-    fontSize: 16,
-  },
-  needHelp: {
-    marginLeft: 4,
-    color: colors.live,
     fontSize: 16,
   },
 });
