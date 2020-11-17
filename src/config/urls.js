@@ -5,7 +5,8 @@ export const urls = {
   contact: "https://support.ledger.com/hc/en-us/requests/new",
   terms: "https://www.ledger.com/pages/terms-of-use-and-disclaimer",
   privacyPolicy: "https://www.ledgerwallet.com/privacy-policy",
-  buyNanoX: "https://www.ledger.com/products/ledger-nano-x",
+  buyNanoX:
+    "https://www.ledger.com/products/ledger-nano-x?utm_source=ledger_live&utm_medium=self_referral&utm_content=empty_manager_mobile",
   playstore: "https://play.google.com/store/apps/details?id=com.ledger.live",
   applestore:
     "itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=1361671700&onlyLatestVersion=true&pageNumber=0&sortOrdering=1&type=Purple+Software",
@@ -18,8 +19,6 @@ export const urls = {
     "https://support.ledger.com/hc/en-us/articles/115005197845-Manage-ERC20-tokens",
   errors: {
     PairingFailed: "https://support.ledger.com/hc/en-us/articles/360025864773",
-    BitcoinCashHardforkOct2020Warning:
-      "https://www.ledger.com/bitcoin-cash-fork-15-november-2020-what-it-means-for-you",
   },
   multipleAddresses:
     "https://support.ledger.com/hc/en-us/articles/360033802154",
@@ -52,6 +51,7 @@ export const urls = {
   },
   // Banners
   banners: {
+    blackfriday: "https://shop.ledger.com/pages/black-friday",
     backupPack:
       "https://shop.ledger.com/products/ledger-backup-pack?utm_source=ledger_live&utm_medium=self_referral&utm_content=banner_desktop=banner_desktop",
     ledgerAcademy:

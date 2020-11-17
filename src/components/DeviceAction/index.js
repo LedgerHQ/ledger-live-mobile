@@ -20,6 +20,7 @@ import {
   renderError,
   renderBootloaderStep,
   renderConfirmSwap,
+  renderConfirmSell,
 } from "./rendering";
 import PreventNativeBack from "../PreventNativeBack";
 import SkipLock from "../behaviour/SkipLock";
@@ -66,6 +67,10 @@ export default function DeviceAction<R, H, P>({
     signMessageError,
     signMessageResult,
     allowOpeningGranted,
+    initSellRequested,
+    initSellResult,
+    initSellError,
+
     // TODO: fix flow type
   } = (status: any);
 
@@ -103,6 +108,11 @@ export default function DeviceAction<R, H, P>({
   if (initSwapRequested && !initSwapResult && !initSwapError) {
     return renderConfirmSwap({ t, device: selectedDevice });
   }
+
+  if (initSellRequested && !initSellResult && !initSellError) {
+    return renderConfirmSell({ t, device: selectedDevice });
+  }
+
   if (allowOpeningRequestedWording || requestOpenApp) {
     // requestOpenApp for Nano S 1.3.1 (need to ask user to open the app.)
     const wording = allowOpeningRequestedWording || requestOpenApp;
