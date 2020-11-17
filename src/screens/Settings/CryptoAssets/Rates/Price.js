@@ -14,7 +14,6 @@ import type {
 import LText from "../../../../components/LText";
 import CurrencyUnitValue from "../../../../components/CurrencyUnitValue";
 import Placeholder from "../../../../components/Placeholder";
-import colors from "../../../../colors";
 import CounterValues from "../../../../countervalues";
 import {
   intermediaryCurrency,
@@ -112,7 +111,6 @@ const styles = StyleSheet.create({
   container: {
     alignItems: "center",
     flexDirection: "row",
-    color: colors.black,
   },
   value: {
     fontSize: 14,

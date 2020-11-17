@@ -4,6 +4,7 @@ import React, { Component, createRef } from "react";
 import { Trans } from "react-i18next";
 import { StyleSheet, View, Linking, ScrollView } from "react-native";
 
+import { compose } from "redux";
 import { TrackScreen } from "../../../analytics";
 import LText from "../../../components/LText";
 import BottomModal from "../../../components/BottomModal";
@@ -13,7 +14,7 @@ import OnboardingLayout from "../OnboardingLayout";
 import OnboardingChoice from "../OnboardingChoice";
 import { withOnboardingContext } from "../onboardingContext";
 import { Bullet } from "../../../components/BulletList";
-import colors, { rgba } from "../../../colors";
+import { rgba, withTheme } from "../../../colors";
 import { urls } from "../../../config/urls";
 import IconWarning from "../../../icons/Warning";
 import getWindowDimensions from "../../../logic/getWindowDimensions";
@@ -28,7 +29,7 @@ type SecurityChecklist = {
 };
 
 class OnboardingStepSecurityChecklist extends Component<
-  OnboardingStepProps,
+  OnboardingStepProps & { colors: * },
   SecurityChecklist,
 > {
   state = {
@@ -86,6 +87,7 @@ class OnboardingStepSecurityChecklist extends Component<
   scrollView = createRef();
 
   render() {
+    const { colors } = this.props;
     const { pinCode, recoveryPhrase } = this.state;
     const subErr =
       pinCode === false
@@ -162,7 +164,7 @@ class OnboardingStepSecurityChecklist extends Component<
               <IconWarning size={24} color={colors.alert} />
             </Circle>
           </View>
-          <LText style={styles.modalText}>
+          <LText style={styles.modalText} color="smoke">
             <Trans
               i18nKey={`onboarding.stepSecurityChecklist.${subErr}.error`}
             />
@@ -212,7 +214,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     fontSize: 14,
     lineHeight: 21,
-    color: colors.smoke,
+
     textAlign: "center",
   },
   pager: {
@@ -224,4 +226,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withOnboardingContext(OnboardingStepSecurityChecklist);
+export default compose(
+  withOnboardingContext,
+  withTheme,
+)(OnboardingStepSecurityChecklist);

@@ -16,6 +16,7 @@ import SwapFormSelectCrypto from "../../screens/Swap/Form/SelectAccount/01-Selec
 import SwapFormSelectAccount from "../../screens/Swap/Form/SelectAccount/02-SelectAccount";
 import { getStackNavigatorConfig } from "../../navigation/navigatorConfig";
 import StepHeader from "../StepHeader";
+import styles from "../../navigation/styles";
 
 export default function SwapNavigator() {
   const { t } = useTranslation();
@@ -30,6 +31,7 @@ export default function SwapNavigator() {
         name={ScreenName.SwapFormOrHistory}
         component={SwapFormOrHistory}
         options={{
+          headerStyle: styles.headerNoShadow,
           headerTitle: () => (
             <StepHeader title={t("transfer.swap.landing.header")} />
           ),

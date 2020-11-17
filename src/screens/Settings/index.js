@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import { View, StyleSheet, TouchableWithoutFeedback } from "react-native";
 import Icon from "react-native-vector-icons/dist/Feather";
 import Config from "react-native-config";
+import { useTheme } from "@react-navigation/native";
 import { NavigatorName, ScreenName } from "../../const";
 import {
   accountsSelector,
@@ -18,7 +19,6 @@ import LiveLogoIcon from "../../icons/LiveLogoIcon";
 import Atom from "../../icons/Atom";
 import Help from "../../icons/Help";
 import Display from "../../icons/Display";
-import colors from "../../colors";
 import TrackScreen from "../../analytics/TrackScreen";
 import timer from "../../timer";
 import NavigationScrollView from "../../components/NavigationScrollView";
@@ -28,6 +28,7 @@ type Props = {
 };
 
 export default function Settings({ navigation }: Props) {
+  const { colors } = useTheme();
   const { t } = useTranslation();
   const currencies = useSelector(cryptoCurrenciesSelector);
   const accounts = useSelector(accountsSelector);

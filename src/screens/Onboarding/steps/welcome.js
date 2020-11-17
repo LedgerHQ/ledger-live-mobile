@@ -4,6 +4,7 @@ import React, { Component } from "react";
 import { StyleSheet, View, Linking, Image } from "react-native";
 import { Trans } from "react-i18next";
 
+import { compose } from "redux";
 import { TrackScreen } from "../../../analytics";
 import Touchable from "../../../components/Touchable";
 import LText from "../../../components/LText";
@@ -11,11 +12,11 @@ import Button from "../../../components/Button";
 import OnboardingLayout from "../OnboardingLayout";
 import { withOnboardingContext } from "../onboardingContext";
 import IconArrowRight from "../../../icons/ArrowRight";
-import colors from "../../../colors";
 import { urls } from "../../../config/urls";
 import { deviceNames } from "../../../wording";
 import PoweredByLedger from "../../Settings/PoweredByLedger";
 import type { OnboardingStepProps } from "../types";
+import { withTheme } from "../../../colors";
 
 const logo = <Image source={require("../../../images/logo.png")} />;
 
@@ -28,6 +29,7 @@ const hitSlop = {
 
 type Props = OnboardingStepProps & {
   onWelcomed: () => void,
+  colors: *,
 };
 
 class OnboardingStepWelcome extends Component<Props> {
@@ -36,7 +38,7 @@ class OnboardingStepWelcome extends Component<Props> {
   Footer = () => <PoweredByLedger />;
 
   render() {
-    const { onWelcomed } = this.props;
+    const { onWelcomed, colors } = this.props;
     return (
       <OnboardingLayout isCentered borderedFooter={false} Footer={this.Footer}>
         <TrackScreen category="Onboarding" name="Welcome" />
@@ -44,7 +46,7 @@ class OnboardingStepWelcome extends Component<Props> {
         <LText style={styles.title} secondary semiBold>
           <Trans i18nKey="onboarding.stepWelcome.title" />
         </LText>
-        <LText style={styles.subTitle}>
+        <LText style={styles.subTitle} color="grey">
           <Trans i18nKey="onboarding.stepWelcome.desc" />
         </LText>
         <Button
@@ -54,7 +56,7 @@ class OnboardingStepWelcome extends Component<Props> {
           onPress={onWelcomed}
         />
         <View style={styles.sub}>
-          <LText style={styles.subText}>
+          <LText style={styles.subText} color="grey">
             <Trans i18nKey="onboarding.stepWelcome.noDevice" />
           </LText>
           <Touchable
@@ -63,7 +65,7 @@ class OnboardingStepWelcome extends Component<Props> {
             style={styles.buyTouch}
             hitSlop={hitSlop}
           >
-            <LText semiBold style={[styles.subText, styles.buy]}>
+            <LText semiBold style={[styles.subText, styles.buy]} color="live">
               <Trans
                 i18nKey="onboarding.stepWelcome.buy"
                 values={deviceNames.nanoX}
@@ -85,7 +87,6 @@ const styles = StyleSheet.create({
   },
   subTitle: {
     fontSize: 14,
-    color: colors.grey,
     textAlign: "center",
     marginBottom: 32,
   },
@@ -97,12 +98,9 @@ const styles = StyleSheet.create({
   },
   subText: {
     fontSize: 14,
-    color: colors.grey,
   },
-  footer: {},
   buy: {
     marginLeft: 5,
-    color: colors.live,
   },
   buyTouch: {
     flexDirection: "row",
@@ -114,4 +112,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withOnboardingContext(OnboardingStepWelcome);
+export default compose(withOnboardingContext, withTheme)(OnboardingStepWelcome);

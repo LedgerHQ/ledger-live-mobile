@@ -12,7 +12,6 @@ import LText from "../../../components/LText";
 import Button from "../../../components/Button";
 import OnboardingLayout from "../OnboardingLayout";
 import { withOnboardingContext } from "../onboardingContext";
-import colors from "../../../colors";
 import ScanIllustration from "../../../icons/ImportDesktopAccounts";
 
 import type { OnboardingStepProps } from "../types";
@@ -57,7 +56,7 @@ class OnboardingStepScanQR extends Component<Props> {
           <ScanIllustration />
         </View>
         <View>
-          <LText style={styles.title}>
+          <LText style={styles.title} color="smoke">
             <Trans i18nKey="onboarding.stepScanQR.title">
               {"text"}
               <LText style={styles.titleInside} semiBold>
@@ -83,7 +82,6 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     fontSize: 14,
     lineHeight: 24,
-    color: colors.smoke,
     textAlign: "center",
   },
   titleInside: {},

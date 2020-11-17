@@ -5,12 +5,13 @@ import { connect } from "react-redux";
 import { Trans } from "react-i18next";
 import { createStructuredSelector } from "reselect";
 import type { Currency } from "@ledgerhq/live-common/lib/types";
+import { compose } from "redux";
 import { ScreenName } from "../../../../const";
 import { pairsSelector } from "../../../../countervalues";
 import SettingsRow from "../../../../components/SettingsRow";
 import LText from "../../../../components/LText";
-import colors from "../../../../colors";
 import Price from "./Price";
+import { withTheme } from "../../../../colors";
 
 type Pair = {|
   from: Currency,
@@ -21,6 +22,7 @@ type Pair = {|
 type Props = {|
   navigation: *,
   pairs: Pair[],
+  colors: *,
 |};
 
 const mapStateToProps = createStructuredSelector({
@@ -73,7 +75,7 @@ class CurrenciesList extends PureComponent<Props> {
   keyExtractor = ({ from, to }: Pair): string => `${from.name || ""}-${to.name || ""}`;
 
   render() {
-    const { pairs } = this.props;
+    const { pairs, colors } = this.props;
 
     return (
       <FlatList
@@ -108,7 +110,10 @@ class CurrenciesList extends PureComponent<Props> {
         data={pairs}
         renderItem={this.renderItem}
         keyExtractor={this.keyExtractor}
-        contentContainerStyle={styles.root}
+        contentContainerStyle={{
+          ...styles.root,
+          backgroundColor: colors.white,
+        }}
       />
     );
   }
@@ -117,7 +122,6 @@ class CurrenciesList extends PureComponent<Props> {
 const styles = StyleSheet.create({
   root: {
     marginTop: 16,
-    backgroundColor: colors.white,
   },
   desc: {
     padding: 16,
@@ -148,4 +152,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default connect(mapStateToProps)(CurrenciesList);
+export default compose(connect(mapStateToProps), withTheme)(CurrenciesList);

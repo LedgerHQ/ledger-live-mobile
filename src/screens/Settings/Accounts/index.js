@@ -11,12 +11,12 @@ import type {
   CryptoCurrency,
   TokenCurrency,
 } from "@ledgerhq/live-common/lib/types";
+import { useTheme } from "@react-navigation/native";
 import SettingsRow from "../../../components/SettingsRow";
 import { showToken } from "../../../actions/settings";
 import { blacklistedTokenIdsSelector } from "../../../reducers/settings";
 import LText from "../../../components/LText";
 import CurrencyIcon from "../../../components/CurrencyIcon";
-import colors from "../../../colors";
 import { TrackScreen } from "../../../analytics";
 import HideEmptyTokenAccountsRow from "./HideEmptyTokenAccountsRow";
 import Close from "../../../icons/Close";
@@ -43,6 +43,7 @@ const hitSlop = {
 };
 
 const AccountsSettings = ({ blacklistedTokenIds, showToken }: Props) => {
+  const { colors } = useTheme();
   const renderSectionHeader = useCallback(
     ({
       section: { parentCurrency },
@@ -50,7 +51,10 @@ const AccountsSettings = ({ blacklistedTokenIds, showToken }: Props) => {
       section: { parentCurrency: CryptoCurrency },
     }) => (
       <View style={styles.section}>
-        <LText primary style={styles.sectionTitle}>
+        <LText
+          primary
+          style={[styles.sectionTitle, { backgroundColor: colors.lightGrey }]}
+        >
           {parentCurrency.name}
         </LText>
       </View>
@@ -149,7 +153,6 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
   },
   sectionTitle: {
-    backgroundColor: colors.lightGrey,
     borderRadius: 4,
     fontSize: 10,
     letterSpacing: 1,

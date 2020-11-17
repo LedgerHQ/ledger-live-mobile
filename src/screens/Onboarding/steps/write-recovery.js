@@ -4,20 +4,21 @@ import React, { Component } from "react";
 import { Trans } from "react-i18next";
 import { View, StyleSheet } from "react-native";
 
+import { compose } from "redux";
 import { TrackScreen } from "../../../analytics";
 import Button from "../../../components/Button";
 import RecoveryPhraseModal from "../../../modals/RecoveryPhrase";
 import LText from "../../../components/LText";
 import OnboardingLayout from "../OnboardingLayout";
 import { withOnboardingContext } from "../onboardingContext";
-import colors from "../../../colors";
 import BulletList from "../../../components/BulletList";
 import RecoveryPhrase from "../../../icons/RecoveryPhrase";
 
 import type { OnboardingStepProps } from "../types";
+import { withTheme } from "../../../colors";
 
 class OnboardingStepWriteRecovery extends Component<
-  OnboardingStepProps,
+  OnboardingStepProps & { colors: * },
   { isModalOpened: boolean },
 > {
   state = {
@@ -40,7 +41,7 @@ class OnboardingStepWriteRecovery extends Component<
   );
 
   render() {
-    const { mode, next } = this.props;
+    const { mode, next, colors } = this.props;
     const { isModalOpened } = this.state;
 
     return (
@@ -56,7 +57,7 @@ class OnboardingStepWriteRecovery extends Component<
           onAccept={next}
           onClose={this.hideModal}
         />
-        <View style={styles.hero}>
+        <View style={[styles.hero, { backgroundColor: colors.lightGrey }]}>
           <RecoveryPhrase />
         </View>
         <View style={styles.wrapper}>
@@ -69,16 +70,12 @@ class OnboardingStepWriteRecovery extends Component<
                     <Trans i18nKey="onboarding.stepWriteRecoveryRestore.step2" />,
                     <Trans i18nKey="onboarding.stepWriteRecoveryRestore.step3">
                       {"text"}
-                      <LText semiBold style={{ color: colors.darkBlue }}>
-                        bold text
-                      </LText>
+                      <LText semiBold>bold text</LText>
                       {"text"}
                     </Trans>,
                     <Trans i18nKey="onboarding.stepWriteRecoveryRestore.step4">
                       {"text"}
-                      <LText semiBold style={{ color: colors.darkBlue }}>
-                        bold text
-                      </LText>
+                      <LText semiBold>bold text</LText>
                       {"text"}
                     </Trans>,
                     <Trans i18nKey="onboarding.stepWriteRecoveryRestore.step5" />,
@@ -86,9 +83,7 @@ class OnboardingStepWriteRecovery extends Component<
                 : [
                     <Trans i18nKey="onboarding.stepWriteRecovery.step1">
                       {"text"}
-                      <LText semiBold style={{ color: colors.darkBlue }}>
-                        bold text
-                      </LText>
+                      <LText semiBold>bold text</LText>
                       {"text"}
                     </Trans>,
                     <Trans i18nKey="onboarding.stepWriteRecovery.step2" />,
@@ -105,7 +100,7 @@ class OnboardingStepWriteRecovery extends Component<
 const styles = StyleSheet.create({
   hero: {
     paddingVertical: 40,
-    backgroundColor: colors.lightGrey,
+
     alignItems: "center",
   },
   wrapper: {
@@ -113,4 +108,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withOnboardingContext(OnboardingStepWriteRecovery);
+export default compose(
+  withOnboardingContext,
+  withTheme,
+)(OnboardingStepWriteRecovery);

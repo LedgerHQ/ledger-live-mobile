@@ -5,11 +5,11 @@ import { connect } from "react-redux";
 import { Switch } from "react-native";
 import { Trans } from "react-i18next";
 import { createStructuredSelector } from "reselect";
+import { useTheme } from "@react-navigation/native";
 import SettingsRow from "../../../components/SettingsRow";
 import { setAnalytics } from "../../../actions/settings";
 import { analyticsEnabledSelector } from "../../../reducers/settings";
 import InfoModal from "../../../components/InfoModal";
-import colors from "../../../colors";
 import Track from "../../../analytics/Track";
 
 type Props = {
@@ -29,9 +29,10 @@ const mapDispatchToProps = {
   setAnalytics,
 };
 
-const IconActivity = () => (
-  <FeatherIcon name="activity" size={32} color={colors.live} />
-);
+const IconActivity = () => {
+  const { colors } = useTheme();
+  return <FeatherIcon name="activity" size={32} color={colors.live} />;
+};
 
 class AnalyticsRow extends PureComponent<Props, State> {
   state = {

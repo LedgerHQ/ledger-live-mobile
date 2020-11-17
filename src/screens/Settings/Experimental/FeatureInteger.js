@@ -10,11 +10,10 @@ import {
   Platform,
 } from "react-native";
 import { getEnvDefault } from "@ledgerhq/live-common/lib/env";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useTheme } from "@react-navigation/native";
 
 import Track from "../../../analytics/Track";
 import getFontStyle from "../../../components/LText/getFontStyle";
-import colors from "../../../colors";
 
 type Props = {
   name: *,
@@ -35,6 +34,7 @@ const FeatureInteger = ({
   minValue,
   maxValue,
 }: Props) => {
+  const { colors } = useTheme();
   const navigation = useNavigation();
   const inputRef = useRef(null);
   const constraintValue = useCallback(
@@ -129,7 +129,11 @@ const FeatureInteger = ({
         />
         <TextInput
           ref={inputRef}
-          style={enabled ? styles.input : styles.inputHidden}
+          style={
+            enabled
+              ? { ...styles.input, borderColor: colors.lightFog }
+              : styles.inputHidden
+          }
           keyboardType="numeric"
           value={enabled ? inputValue : ""}
           onChangeText={onInputChange}
@@ -153,7 +157,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     ...getFontStyle({ semiBold: true }),
     borderWidth: 1,
-    borderColor: colors.lightFog,
   },
   inputHidden: {
     display: "none",

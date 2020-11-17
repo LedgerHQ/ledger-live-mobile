@@ -11,6 +11,7 @@ import Swap from "./Swap";
 import History from "./History";
 import styles from "../../navigation/styles";
 import LText from "../../components/LText";
+import { useTheme } from "@react-navigation/native";
 
 type RouteParams = {
   defaultAccount: ?AccountLike,
@@ -24,10 +25,14 @@ type TabLabelProps = {
 
 export default ({ route }: { route: { params: RouteParams } }) => {
   const { t } = useTranslation();
+  const { colors } = useTheme();
   return (
     <Tab.Navigator
       tabBarOptions={{
         headerStyle: styles.headerNoShadow,
+        indicatorStyle: {
+          backgroundColor: colors.live,
+        },
       }}
     >
       <Tab.Screen

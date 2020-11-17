@@ -9,6 +9,7 @@ import getDeviceInfo from "@ledgerhq/live-common/lib/hw/getDeviceInfo";
 import getDeviceName from "@ledgerhq/live-common/lib/hw/getDeviceName";
 import { listApps } from "@ledgerhq/live-common/lib/apps/hw";
 import { delay } from "@ledgerhq/live-common/lib/promise";
+import { useTheme } from "@react-navigation/native";
 import logger from "../../logger";
 import TransportBLE from "../../react-native-hw-transport-ble";
 import { GENUINE_CHECK_TIMEOUT } from "../../constants";
@@ -17,7 +18,6 @@ import { installAppFirstTime } from "../../actions/settings";
 import { knownDevicesSelector } from "../../reducers/ble";
 import { hasCompletedOnboardingSelector } from "../../reducers/settings";
 import type { DeviceLike } from "../../reducers/ble";
-import colors from "../../colors";
 import RequiresBLE from "../../components/RequiresBLE";
 import PendingPairing from "./PendingPairing";
 import PendingGenuineCheck from "./PendingGenuineCheck";
@@ -230,13 +230,17 @@ class PairDevices extends Component<PairDevicesProps, State> {
 const forceInset = { bottom: "always" };
 
 export default function Screen(props: Props) {
+  const { colors } = useTheme();
   const dispatch = useDispatch();
   const knownDevices = useSelector(knownDevicesSelector);
   const hasCompletedOnboarding = useSelector(hasCompletedOnboardingSelector);
 
   return (
     <RequiresBLE>
-      <SafeAreaView forceInset={forceInset} style={styles.root}>
+      <SafeAreaView
+        forceInset={forceInset}
+        style={[styles.root, { backgroundColor: colors.white }]}
+      >
         <PairDevices
           {...props}
           knownDevices={knownDevices}
@@ -254,6 +258,5 @@ export default function Screen(props: Props) {
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: colors.white,
   },
 });

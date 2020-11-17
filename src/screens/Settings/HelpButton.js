@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { TouchableOpacity, Linking } from "react-native";
 import { useTranslation } from "react-i18next";
 import Icon from "react-native-vector-icons/dist/Feather";
+import { useTheme } from "@react-navigation/native";
 import IconQuestion from "../../icons/Question";
-import colors from "../../colors";
 import type { Props as ModalProps } from "../../components/BottomModal";
 import BottomModal from "../../components/BottomModal";
 import BottomModalChoice from "../../components/BottomModalChoice";
@@ -87,6 +87,7 @@ function CreateModal({ isOpened, onClose }: ModalProps) {
 }
 
 const HelpButton = () => {
+  const { colors } = useTheme();
   const [isOpen, setOpen] = useState(false);
   return (
     <>
