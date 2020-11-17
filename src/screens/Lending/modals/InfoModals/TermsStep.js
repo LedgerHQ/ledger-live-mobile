@@ -63,17 +63,17 @@ export default function TermsStep({ route: { params } }: Props) {
           <CheckBox isChecked={hasAcceptedTerms} />
         </TouchableOpacity>
 
-        <Touchable
-          event="Page Lend TC accepted"
-          style={styles.switchRow}
-          onPress={onTermsClick}
-        >
-          <LText style={styles.switchLabel}>
-            <Trans i18nKey="transfer.lending.terms.switchLabel">
+        <LText style={styles.switchLabel}>
+          <Trans i18nKey="transfer.lending.terms.switchLabel">
+            <Touchable
+              event="Page Lend TC accepted"
+              style={styles.switchRow}
+              onPress={onTermsClick}
+            >
               <LText semiBold style={styles.conditionsText} />
-            </Trans>
-          </LText>
-        </Touchable>
+            </Touchable>
+          </Trans>
+        </LText>
       </View>
     </BaseInfoModal>
   );
