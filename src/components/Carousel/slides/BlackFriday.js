@@ -2,33 +2,43 @@
 
 import React, { useCallback } from "react";
 import { Trans } from "react-i18next";
-import { Linking, Image, View, StyleSheet } from "react-native";
+import {
+  Linking,
+  Image,
+  View,
+  StyleSheet,
+  TouchableOpacity,
+} from "react-native";
 import getWindowDimensions from "../../../logic/getWindowDimensions";
-import academy from "../../../images/banners/academy.png";
+import blackfriday from "../../../images/banners/blackfriday.png";
 import LText from "../../LText";
-import Touchable from "../../Touchable";
 import { urls } from "../../../config/urls";
 import colors from "../../../colors";
 
-const LedgerAcademy = () => {
+const Blackfriday = () => {
   const slideWidth = getWindowDimensions().width - 32;
   const onClick = useCallback(() => {
-    Linking.openURL(urls.banners.ledgerAcademy);
+    Linking.openURL(urls.banners.blackfriday);
   }, []);
   return (
-    <Touchable event="LedgerAcademy Carousel" onPress={onClick}>
+    <TouchableOpacity onPress={onClick}>
       <View style={[styles.wrapper, { width: slideWidth }]}>
-        <Image style={styles.illustration} source={academy} />
+        <Image
+          style={styles.illustration}
+          source={blackfriday}
+          width={127}
+          height={88}
+        />
         <View>
           <LText semiBold secondary style={styles.label}>
-            <Trans i18nKey={`carousel.banners.academy.title`} />
+            <Trans i18nKey={`carousel.banners.blackfriday.title`} />
           </LText>
           <LText primary style={styles.description}>
-            <Trans i18nKey={`carousel.banners.academy.description`} />
+            <Trans i18nKey={`carousel.banners.blackfriday.description`} />
           </LText>
         </View>
       </View>
-    </Touchable>
+    </TouchableOpacity>
   );
 };
 
@@ -37,8 +47,6 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 0,
     right: 0,
-    width: 146,
-    height: 93,
   },
   wrapper: {
     width: "100%",
@@ -76,4 +84,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LedgerAcademy;
+export default Blackfriday;

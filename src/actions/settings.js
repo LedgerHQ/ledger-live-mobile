@@ -1,7 +1,7 @@
 // @flow
 
 import type { Currency } from "@ledgerhq/live-common/lib/types";
-import type { AvailableProvider } from "@ledgerhq/live-common/lib/swap/types";
+import type { AvailableProvider } from "@ledgerhq/live-common/lib/exchange/swap/types";
 
 export type CurrencySettings = {
   confirmationsNb: number,
@@ -144,4 +144,9 @@ export const setAvailableUpdate = (enabled: boolean) => ({
 export const setSwapProviders = (swapProviders?: AvailableProvider[]) => ({
   type: "SETTINGS_SET_SWAP_PROVIDERS",
   swapProviders,
+});
+
+export const setDiscreetMode = (payload: boolean) => ({
+  type: "SETTINGS_SET_DISCREET_MODE",
+  payload,
 });
