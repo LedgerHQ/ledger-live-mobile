@@ -174,21 +174,8 @@ platform :ios do
     clean_beta
   end
 
-  desc "ci: create adhoc version"
-  lane :ci do |options|
-    export_options_method = "ad-hoc"
-    code_sign_identity = "iPhone Distribution"
-    MY_APP_ID = ENV["APP_IDENTIFIER"]
-    MY_PROFILE = "match AdHoc #{ENV["APP_IDENTIFIER"]}"
-    MY_TEAM = ENV["DEVELOPER_TEAM_ID"]
-
-    settings_to_override = {
-      :BUNDLE_IDENTIFIER => MY_APP_ID,
-      :PROVISIONING_PROFILE_SPECIFIER => MY_PROFILE,
-      :DEVELOPMENT_TEAM => MY_TEAM,
-    }
-
-
+  desc "setup keychain and ci"
+  private_lane :setup_ci do
     create_keychain(
       name: ENV["CI_KEYCHAIN_NAME"],
       password: ENV["CI_KEYCHAIN_PASSWORD"],
@@ -209,6 +196,23 @@ platform :ios do
       git_basic_authorization: Base64.strict_encode64("#{ENV["GIT_REPO_USER"]}:#{ENV["TOKEN"]}"),
       readonly: true
     )
+  end
+
+  desc "ci: create adhoc version"
+  lane :ci do |options|
+    export_options_method = "ad-hoc"
+    code_sign_identity = "iPhone Distribution"
+    MY_APP_ID = ENV["APP_IDENTIFIER"]
+    MY_PROFILE = "match AdHoc #{ENV["APP_IDENTIFIER"]}"
+    MY_TEAM = ENV["DEVELOPER_TEAM_ID"]
+
+    settings_to_override = {
+      :BUNDLE_IDENTIFIER => MY_APP_ID,
+      :PROVISIONING_PROFILE_SPECIFIER => MY_PROFILE,
+      :DEVELOPMENT_TEAM => MY_TEAM,
+    }
+
+    setup_ci
 
     update_code_signing_settings(
       use_automatic_signing: false,
