@@ -98,6 +98,11 @@ const Provider = ({ children }: { children: React$Node }) => {
       disconnect();
     });
 
+    connector.on("error", () => {
+      setError(error);
+      setStatus(STATUS.ERROR);
+    });
+
     connector.on("call_request", async (error, payload) => {
       if (error) {
         // ?
@@ -247,6 +252,8 @@ const Provider = ({ children }: { children: React$Node }) => {
         approveSession: approveSession && approveSession.fn,
         initDone,
         hasSession: Object.keys(session).length > 0,
+        // eslint-disable-next-line no-underscore-dangle
+        socketReady: connector?._transport?._socket?.readyState === 1,
       }}
     >
       {children}

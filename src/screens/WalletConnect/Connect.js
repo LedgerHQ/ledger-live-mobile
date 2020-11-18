@@ -147,7 +147,10 @@ export default function Connect({ route, navigation }: Props) {
                   style={styles.logo}
                 />
                 <View style={styles.checkContainer}>
-                  <Circle bg={colors.green} size={24}>
+                  <Circle
+                    bg={wcContext.socketReady ? colors.green : colors.orange}
+                    size={24}
+                  >
                     <Check color="white" size={12} />
                   </Circle>
                 </View>
