@@ -1450,7 +1450,7 @@
         "approvedCanReduce": "You have approved <0>{{value}}</0> on this account. You can reduce the amount at a fee.",
         "approvedButNotEnough": "You have approved <0>{{value}}</0> on this account.",
         "approving": "You can deposit assets once the account approval is confirmed.",
-        "notEnough": "You must increase the limit approved on your account to lend."
+        "notEnough": "You must increase the limit approved on your account to lend more."
       },
       "howDoesLendingWork": "How does lending works",
       "dashboard": {

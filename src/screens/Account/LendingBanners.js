@@ -4,6 +4,7 @@ import { View, StyleSheet } from "react-native";
 import type { AccountLike } from "@ledgerhq/live-common/lib/types";
 import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
+import { getSupplyMax } from "@ledgerhq/live-common/lib/families/ethereum/modules/compound";
 import { Trans } from "react-i18next";
 import { getAccountCapabilities } from "@ledgerhq/live-common/lib/compound/logic";
 
@@ -86,7 +87,9 @@ export default function LendingBanners({ account }: Props) {
       compoundCapabilities.status === "ENABLING" ? (
         <Trans i18nKey="transfer.lending.banners.approving" />
       ) : !!compoundCapabilities.status &&
-        !compoundCapabilities.canSupplyMax ? (
+        !compoundCapabilities.canSupplyMax &&
+        getSupplyMax(account).eq(0) &&
+        account.spendableBalance.gt(0) ? (
         <Trans i18nKey="transfer.lending.banners.notEnough" />
       ) : null;
 
