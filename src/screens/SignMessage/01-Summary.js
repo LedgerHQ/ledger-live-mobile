@@ -1,14 +1,23 @@
 /* @flow */
 import React, { useCallback } from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, ScrollView } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { Trans } from "react-i18next";
 import type { TypedMessageData } from "@ledgerhq/live-common/lib/families/ethereum/types";
 import type { MessageData } from "@ledgerhq/live-common/lib/hw/signMessage/types";
+import {
+  getAccountCurrency,
+  getAccountName,
+} from "@ledgerhq/live-common/lib/account";
+import { useSelector } from "react-redux";
+import { accountScreenSelector } from "../../reducers/accounts";
 import colors from "../../colors";
 import { ScreenName } from "../../const";
 import { TrackScreen } from "../../analytics";
 import Button from "../../components/Button";
+import WalletIcon from "../../icons/Wallet";
+import LText from "../../components/LText";
+import ParentCurrencyIcon from "../../components/ParentCurrencyIcon";
 
 const forceInset = { bottom: "always" };
 
@@ -34,7 +43,8 @@ function SignSummary({ navigation, route: initialRoute }: Props) {
     ...initialRoute,
     params: { ...defaultParams, ...initialRoute.params },
   };
-  const { nextNavigation } = route.params;
+  const { account } = useSelector(accountScreenSelector(route));
+  const { nextNavigation, message } = route.params;
 
   const navigateToNext = useCallback(() => {
     navigation.navigate(nextNavigation, {
@@ -49,7 +59,40 @@ function SignSummary({ navigation, route: initialRoute }: Props) {
   return (
     <SafeAreaView style={styles.root} forceInset={forceInset}>
       <TrackScreen category="SignMessage" name="Summary" />
-      <View style={styles.body} />
+      <View style={styles.body}>
+        <View style={styles.fromContainer}>
+          <View style={styles.iconContainer}>
+            <WalletIcon color={colors.live} size={16} />
+          </View>
+          <View style={styles.fromInnerContainer}>
+            <LText style={styles.from}>
+              <Trans i18nKey="walletconnect.from" />
+            </LText>
+            <View style={styles.headerContainer}>
+              <View style={styles.headerIconContainer}>
+                <ParentCurrencyIcon
+                  size={18}
+                  currency={getAccountCurrency(account)}
+                />
+              </View>
+              <LText semiBold secondary numberOfLines={1} style={styles.title}>
+                {getAccountName(account)}
+              </LText>
+            </View>
+          </View>
+        </View>
+        <View style={styles.separator} />
+        <ScrollView style={styles.scrollContainer}>
+          <LText style={styles.message}>
+            <Trans i18nKey="walletconnect.message" />
+          </LText>
+          <LText semiBold>
+            {message.message.domain
+              ? JSON.stringify(message.message)
+              : message.message}
+          </LText>
+        </ScrollView>
+      </View>
       <View style={styles.footer}>
         <Button
           event="SummaryContinue"
@@ -72,6 +115,47 @@ const styles = StyleSheet.create({
   body: {
     flex: 1,
     paddingHorizontal: 16,
+  },
+  fromContainer: {
+    marginBottom: 30,
+    marginTop: 16,
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  headerContainer: {
+    flexDirection: "row",
+    marginTop: 6,
+  },
+  headerIconContainer: {
+    marginRight: 8,
+    justifyContent: "center",
+  },
+  fromInnerContainer: {
+    marginLeft: 16,
+  },
+  iconContainer: {
+    width: 34,
+    height: 34,
+    borderRadius: 34,
+    backgroundColor: colors.lightLive,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  scrollContainer: {
+    flex: 1,
+    paddingBottom: 16,
+  },
+  from: {
+    opacity: 0.5,
+  },
+  message: {
+    opacity: 0.5,
+    marginBottom: 11,
+    marginTop: 33,
+  },
+  separator: {
+    height: 1,
+    backgroundColor: colors.separator,
   },
   footer: {
     flexDirection: "column",

@@ -2727,6 +2727,8 @@
     "disconnect": "Disconnect",
     "retry": "Retry",
     "close": "Close",
+    "message": "Message",
+    "from": "From",
     "successTitle": "Message signed",
     "successDescription": "You have signed the message received from a third party application",
     "stepperHeader": {
