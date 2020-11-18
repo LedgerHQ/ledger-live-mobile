@@ -106,6 +106,16 @@ const Provider = ({ children }: { children: React$Node }) => {
         return;
       }
 
+      if (currentCallRequestId) {
+        connector.rejectRequest({
+          id: payload.id,
+          error: {
+            message: "An other request is ongoing",
+          },
+        });
+        return;
+      }
+
       const wcCallRequest = await parseCallRequest(account, payload);
 
       if (
