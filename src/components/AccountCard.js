@@ -25,6 +25,13 @@ class AccountCard extends PureComponent<Props> {
     const { onPress, account, style, disabled } = this.props;
     const currency = getAccountCurrency(account);
     const unit = getAccountUnit(account);
+
+    const availableOnCompound =
+      account.type === "TokenAccount" && !!account.compoundBalance;
+    const balance = availableOnCompound
+      ? account.spendableBalance
+      : account.balance;
+
     return (
       <Card
         onPress={!disabled ? onPress : undefined}
@@ -49,7 +56,7 @@ class AccountCard extends PureComponent<Props> {
         </View>
         <View style={styles.balanceContainer}>
           <LText semiBold style={styles.balanceNumText}>
-            <CurrencyUnitValue showCode unit={unit} value={account.balance} />
+            <CurrencyUnitValue showCode unit={unit} value={balance} />
           </LText>
         </View>
       </Card>
