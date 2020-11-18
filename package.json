@@ -1,6 +1,6 @@
 {
   "name": "ledgerlivemobile",
-  "version": "2.16.0",
+  "version": "2.17.0",
   "private": true,
   "scripts": {
     "postinstall": "./scripts/post.sh",
@@ -33,6 +33,7 @@
     "ios:internal": "bundle exec fastlane ios beta --env production",
     "preios:internal": "bundle install",
     "ios:staging": "ENVFILE=.env.staging react-native run-ios --configuration Staging",
+    "ios:ci": "bundle exec fastlane ios ci --env adhoc",
     "prettier": "prettier --write \"src/**/*.js\"",
     "lint": "eslint src",
     "flow": "flow",
@@ -58,7 +59,7 @@
     "@ledgerhq/hw-app-xrp": "5.29.0",
     "@ledgerhq/hw-transport": "5.29.0",
     "@ledgerhq/hw-transport-http": "5.29.0",
-    "@ledgerhq/live-common": "^16.0.0",
+    "@ledgerhq/live-common": "16.0.0-countervalues.1",
     "@ledgerhq/logs": "5.29.0",
     "@ledgerhq/react-native-hid": "5.29.0",
     "@ledgerhq/react-native-hw-transport-ble": "5.29.0",
