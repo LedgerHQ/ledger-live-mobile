@@ -2738,7 +2738,8 @@
       "stepRange": "Step {{currentStep}} of {{totalSteps}}"
     },
     "stepVerification": {
-      "action": "Please confirm the operation on your device to sign message"
+      "action": "Please confirm the operation on your device",
+      "accountName": "Account name",
     },
     "deeplinkingTitle": "Select an Ethereum account",
     "addAccount": "Add new account"

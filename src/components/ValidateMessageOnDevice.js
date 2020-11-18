@@ -4,6 +4,7 @@ import { View, StyleSheet, ScrollView } from "react-native";
 import { useTranslation } from "react-i18next";
 import type { TypedMessageData } from "@ledgerhq/live-common/lib/families/ethereum/types";
 import type { MessageData } from "@ledgerhq/live-common/lib/hw/signMessage/types";
+import type { AccountLike } from "@ledgerhq/live-common/lib/types";
 import LText from "./LText";
 import Animation from "./Animation";
 import getDeviceAnimation from "./DeviceAction/getDeviceAnimation";
@@ -11,9 +12,10 @@ import getDeviceAnimation from "./DeviceAction/getDeviceAnimation";
 type Props = {
   device: Device,
   message: TypedMessageData | MessageData,
+  account: AccountLike,
 };
 
-export default function ValidateOnDevice({ device, message }: Props) {
+export default function ValidateOnDevice({ device, message, account }: Props) {
   const { t } = useTranslation();
 
   return (
@@ -30,6 +32,13 @@ export default function ValidateOnDevice({ device, message }: Props) {
           {t("walletconnect.stepVerification.action")}
         </LText>
         <View style={styles.messageContainer}>
+          <LText style={styles.property}>
+            {t("walletconnect.stepVerification.accountName")}
+          </LText>
+          <LText semiBold>{account.name}</LText>
+        </View>
+        <View style={styles.messageContainer}>
+          <LText style={styles.property}>{t("walletconnect.message")}</LText>
           <LText semiBold>
             {message.message.domain
               ? JSON.stringify(message.message)
@@ -59,6 +68,11 @@ const styles = StyleSheet.create({
     padding: 12,
     backgroundColor: "#F5F5F5",
     borderRadius: 4,
+    marginTop: 2,
+  },
+  property: {
+    opacity: 0.5,
+    marginBottom: 8,
   },
   picture: {
     marginBottom: 40,

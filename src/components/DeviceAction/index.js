@@ -182,12 +182,14 @@ export default function DeviceAction<R, H, P>({
   }
 
   if (request && device && signMessageRequested) {
+    const { account } = request;
     return (
       <>
         <PreventNativeBack />
         <SkipLock />
         <ValidateMessageOnDevice
           device={device}
+          account={account}
           message={signMessageRequested}
         />
       </>
