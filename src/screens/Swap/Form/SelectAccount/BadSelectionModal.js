@@ -12,6 +12,7 @@ import type { CurrencyStatus } from "@ledgerhq/live-common/lib/exchange/swap/log
 import { ScreenName, NavigatorName } from "../../../../const";
 import Circle from "../../../../components/Circle";
 import BottomModal from "../../../../components/BottomModal";
+import { MANAGER_TABS } from "../../../Manager/Manager";
 import LText from "../../../../components/LText";
 import Button from "../../../../components/Button";
 import colors from "../../../../colors";
