@@ -22,11 +22,11 @@ import type {
 } from "@ledgerhq/live-common/lib/types";
 import { getAccountCurrency } from "@ledgerhq/live-common/lib/account/helpers";
 import Config from "react-native-config";
-import type { AvailableProvider } from "@ledgerhq/live-common/lib/swap/types";
+import type { AvailableProvider } from "@ledgerhq/live-common/lib/exchange/swap/types";
 import type { OutputSelector } from "reselect";
 import uniq from "lodash/uniq";
 
-import { isCurrencySwapSupported } from "@ledgerhq/live-common/lib/swap";
+import { isCurrencyExchangeSupported } from "@ledgerhq/live-common/lib/exchange";
 import { currencySettingsDefaults } from "../helpers/CurrencySettingsDefaults";
 import type { State } from ".";
 
@@ -87,6 +87,7 @@ export type SettingsState = {
   hasAcceptedSwapKYC: boolean,
   swapProviders?: AvailableProvider[],
   carouselVisibility: number,
+  discreetMode: boolean,
 };
 
 export const INITIAL_STATE: SettingsState = {
@@ -111,6 +112,7 @@ export const INITIAL_STATE: SettingsState = {
   hasAcceptedSwapKYC: false,
   swapProviders: [],
   carouselVisibility: 0,
+  discreetMode: false,
 };
 
 const pairHash = (from, to) => `${from.ticker}_${to.ticker}`;
@@ -284,6 +286,10 @@ const handlers: Object = {
     ...state,
     carouselVisibility: payload,
   }),
+  SETTINGS_SET_DISCREET_MODE: (state: AppState, { payload }) => ({
+    ...state,
+    discreetMode: payload,
+  }),
 };
 
 const storeSelector = (state: *): SettingsState => state.settings;
@@ -450,8 +456,11 @@ export const swapSupportedCurrenciesSelector: OutputSelector<
     .filter(isCurrencySupported);
 
   return [...cryptoCurrencies, ...tokenCurrencies].filter(
-    isCurrencySwapSupported,
+    isCurrencyExchangeSupported,
   );
 });
+
+export const discreetModeSelector = (state: State): boolean =>
+  state.settings.discreetMode === true;
 
 export default handleActions(handlers, INITIAL_STATE);
