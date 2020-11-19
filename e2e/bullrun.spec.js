@@ -77,7 +77,6 @@ type Message<T: string, P: { [key: string]: any } | typeof undefined> = {
 };
 
 type PostMessage =
-  | Message<"handshake">
   | Message<"add", { id: string, name: string }>
   | Message<"open">;
 
@@ -86,8 +85,6 @@ function onMessage(messageStr: string) {
   log(`Message\n${JSON.stringify(msg, null, 2)}`);
 
   switch (msg.type) {
-    case "handshake":
-      break;
     default:
       break;
   }
