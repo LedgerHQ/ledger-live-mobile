@@ -3,7 +3,7 @@ import React, { useCallback, useMemo, useState } from "react";
 import { SectionList, View, StyleSheet, SafeAreaView } from "react-native";
 import { useTranslation } from "react-i18next";
 import { useNavigation } from "@react-navigation/native";
-import type {AccountLike,
+import type {
   AccountLikeArray,
   Operation,
 } from "@ledgerhq/live-common/lib/types";
@@ -33,7 +33,7 @@ const useCompoundHistory = (accounts: AccountLikeArray): AccountLikeArray => {
     [accounts],
   );
   // $FlowFixMe
-  return history
+  return history;
 };
 
 function keyExtractor(item: Operation) {

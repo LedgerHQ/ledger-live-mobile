@@ -11,7 +11,6 @@ import TrackScreen from "../../../analytics/TrackScreen";
 import EmptyState from "../shared/EmptyState";
 import { ScreenName } from "../../../const";
 import ClosedLoansRow from "./ClosedLoansRow";
-import LText from "../../../components/LText"
 
 export default function ClosedLoans() {
   const { t } = useTranslation();
