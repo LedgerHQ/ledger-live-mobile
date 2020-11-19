@@ -121,7 +121,18 @@ const Provider = ({ children }: { children: React$Node }) => {
         return;
       }
 
-      const wcCallRequest = await parseCallRequest(account, payload);
+      let wcCallRequest;
+
+      try {
+        wcCallRequest = await parseCallRequest(account, payload);
+      } catch (e) {
+        connector.rejectRequest({
+          id: payload.id,
+          error: {
+            message: e.message || e,
+          },
+        });
+      }
 
       if (
         wcCallRequest.type === "transaction" &&
@@ -135,15 +146,20 @@ const Provider = ({ children }: { children: React$Node }) => {
             accountId: account.id,
           },
         });
-      }
-
-      if (wcCallRequest.type === "message") {
+      } else if (wcCallRequest.type === "message") {
         setCurrentCallRequestId(payload.id);
         navigate(NavigatorName.SignMessage, {
           screen: ScreenName.SignSummary,
           params: {
             message: wcCallRequest.data,
             accountId: account.id,
+          },
+        });
+      } else {
+        connector.rejectRequest({
+          id: payload.id,
+          error: {
+            message: "Request not supported",
           },
         });
       }
