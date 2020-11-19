@@ -3,7 +3,7 @@ import React, { useCallback, useMemo, useState } from "react";
 import { SectionList, View, StyleSheet, SafeAreaView } from "react-native";
 import { useTranslation } from "react-i18next";
 import { useNavigation } from "@react-navigation/native";
-import type {
+import type {AccountLike,
   AccountLikeArray,
   Operation,
 } from "@ledgerhq/live-common/lib/types";
@@ -18,7 +18,6 @@ import SectionHeader from "../../../components/SectionHeader";
 import NoMoreOperationFooter from "../../../components/NoMoreOperationFooter";
 import LoadingFooter from "../../../components/LoadingFooter";
 
-// $FlowFixMe
 const useCompoundHistory = (accounts: AccountLikeArray): AccountLikeArray => {
   const filterOps = (op: Operation): boolean =>
     ["REDEEM", "SUPPLY"].includes(op.type);
@@ -33,8 +32,8 @@ const useCompoundHistory = (accounts: AccountLikeArray): AccountLikeArray => {
       }),
     [accounts],
   );
-
-  return history;
+  // $FlowFixMe
+  return history
 };
 
 function keyExtractor(item: Operation) {

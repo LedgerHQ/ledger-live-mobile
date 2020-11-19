@@ -1,5 +1,5 @@
 // @flow
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import type { AccountLikeArray } from "@ledgerhq/live-common/lib/types";
 import type { CompoundAccountSummary } from "@ledgerhq/live-common/lib/compound/types";
 import { makeCompoundSummaryForAccount } from "@ledgerhq/live-common/lib/compound/logic";
@@ -23,19 +23,8 @@ const makeSummaries = (accounts: AccountLikeArray): CompoundAccountSummary[] =>
     })
     .filter(Boolean);
 
-export function useCompoundSummaries(
-  accounts: AccountLikeArray,
-): CompoundAccountSummary[] {
-  const [summaries, setSummaries] = useState(() => {
-    return makeSummaries(accounts);
-  });
-
-  useEffect(() => {
-    const newSummaries = makeSummaries(accounts);
-    if (newSummaries) {
-      setSummaries(newSummaries);
-    }
-  }, [accounts, setSummaries]);
-
-  return summaries;
+export function useCompoundSummaries(  accounts: AccountLikeArray,): CompoundAccountSummary[] {
+  return useMemo(() =>
+    makeSummaries(accounts)
+  , [accounts]);
 }
