@@ -84,17 +84,7 @@ export const ScreenName = {
   MigrateAccountsConnectDevice: "MigrateAccountsConnectDevice",
   MigrateAccountsOverview: "MigrateAccountsOverview",
   MigrateAccountsProgress: "MigrateAccountsProgress",
-  OnboardingOrNavigator: "OnboardingOrNavigator",
-  OnboardingStepChooseDevice: "OnboardingStepChooseDevice",
-  OnboardingStepFinish: "OnboardingStepFinish",
-  OnboardingStepGetStarted: "OnboardingStepGetStarted",
-  OnboardingStepPairNew: "OnboardingStepPairNew",
-  OnboardingStepPassword: "OnboardingStepPassword",
-  OnboardingStepScanQR: "OnboardingStepScanQR",
-  OnboardingStepSecurityChecklist: "OnboardingStepSecurityChecklist",
-  OnboardingStepSetupPin: "OnboardingStepSetupPin",
-  OnboardingStepShareData: "OnboardingStepShareData",
-  OnboardingStepWriteRecovery: "OnboardingStepWriteRecovery",
+
   OperationDetails: "OperationDetails",
   PairDevices: "PairDevices",
   PasswordAdd: "PasswordAdd",
@@ -225,6 +215,20 @@ export const ScreenName = {
   LendingWithdrawValidation: "Lend WithdrawValidation",
   LendingWithdrawValidationError: "Lend WithdrawValidationError",
   LendingWithdrawValidationSuccess: "Lend WithdrawValidationSuccess",
+
+  OnboardingWelcome: "OnboardingWelcome",
+  OnboardingLanguage: "OnboardingLanguage",
+  OnboardingTermsOfUse: "OnboardingTermsOfUse",
+  OnboardingDeviceSelection: "OnboardingDeviceSelection",
+  OnboardingUseCaseSelection: "OnboardingUseCaseSelection",
+
+  OnboardingSetNewDeviceInfo: "OnboardingSetNewDeviceInfo",
+  OnboardingSetNewDeviceStart: "OnboardingSetNewDeviceStart",
+
+  OnboardingImportScan: "OnboardingImportScan",
+  OnboardingImportSelectAccount: "OnboardingImportSelectAccount",
+
+  OnboardingPairDevice: "OnboardingPairDevice",
 };
 
 export const NavigatorName = {

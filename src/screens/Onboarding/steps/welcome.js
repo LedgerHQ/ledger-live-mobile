@@ -1,21 +1,17 @@
 // @flow
 
-import React, { Component } from "react";
-import { StyleSheet, View, Linking, Image } from "react-native";
+import React, { useCallback } from "react";
+import { StyleSheet, View, Linking, Image, SafeAreaView } from "react-native";
 import { Trans } from "react-i18next";
 
 import { TrackScreen } from "../../../analytics";
 import Touchable from "../../../components/Touchable";
 import LText from "../../../components/LText";
 import Button from "../../../components/Button";
-import OnboardingLayout from "../OnboardingLayout";
-import { withOnboardingContext } from "../onboardingContext";
 import IconArrowRight from "../../../icons/ArrowRight";
 import colors from "../../../colors";
 import { urls } from "../../../config/urls";
 import { deviceNames } from "../../../wording";
-import PoweredByLedger from "../../Settings/PoweredByLedger";
-import type { OnboardingStepProps } from "../types";
 
 const logo = <Image source={require("../../../images/logo.png")} />;
 
@@ -26,55 +22,47 @@ const hitSlop = {
   bottom: 16,
 };
 
-type Props = OnboardingStepProps & {
-  onWelcomed: () => void,
-};
+function OnboardingStepWelcome() {
+  const buy = useCallback(() => Linking.openURL(urls.buyNanoX), []);
+  const next = useCallback(() => {}, []);
 
-class OnboardingStepWelcome extends Component<Props> {
-  buy = () => Linking.openURL(urls.buyNanoX);
-
-  Footer = () => <PoweredByLedger />;
-
-  render() {
-    const { onWelcomed } = this.props;
-    return (
-      <OnboardingLayout isCentered borderedFooter={false} Footer={this.Footer}>
-        <TrackScreen category="Onboarding" name="Welcome" />
-        <View style={styles.logo}>{logo}</View>
-        <LText style={styles.title} secondary semiBold>
-          <Trans i18nKey="onboarding.stepWelcome.title" />
+  return (
+    <SafeAreaView>
+      <TrackScreen category="Onboarding" name="Welcome" />
+      <View style={styles.logo}>{logo}</View>
+      <LText style={styles.title} secondary semiBold>
+        <Trans i18nKey="onboarding.stepWelcome.title" />
+      </LText>
+      <LText style={styles.subTitle}>
+        <Trans i18nKey="onboarding.stepWelcome.desc" />
+      </LText>
+      <Button
+        event="OnboardingWelcomeContinue"
+        type="primary"
+        title={<Trans i18nKey="onboarding.stepWelcome.start" />}
+        onPress={next}
+      />
+      <View style={styles.sub}>
+        <LText style={styles.subText}>
+          <Trans i18nKey="onboarding.stepWelcome.noDevice" />
         </LText>
-        <LText style={styles.subTitle}>
-          <Trans i18nKey="onboarding.stepWelcome.desc" />
-        </LText>
-        <Button
-          event="OnboardingWelcomeContinue"
-          type="primary"
-          title={<Trans i18nKey="onboarding.stepWelcome.start" />}
-          onPress={onWelcomed}
-        />
-        <View style={styles.sub}>
-          <LText style={styles.subText}>
-            <Trans i18nKey="onboarding.stepWelcome.noDevice" />
+        <Touchable
+          event="WelcomeBuy"
+          onPress={buy}
+          style={styles.buyTouch}
+          hitSlop={hitSlop}
+        >
+          <LText semiBold style={[styles.subText, styles.buy]}>
+            <Trans
+              i18nKey="onboarding.stepWelcome.buy"
+              values={deviceNames.nanoX}
+            />
           </LText>
-          <Touchable
-            event="WelcomeBuy"
-            onPress={this.buy}
-            style={styles.buyTouch}
-            hitSlop={hitSlop}
-          >
-            <LText semiBold style={[styles.subText, styles.buy]}>
-              <Trans
-                i18nKey="onboarding.stepWelcome.buy"
-                values={deviceNames.nanoX}
-              />
-            </LText>
-            <IconArrowRight size={16} color={colors.live} />
-          </Touchable>
-        </View>
-      </OnboardingLayout>
-    );
-  }
+          <IconArrowRight size={16} color={colors.live} />
+        </Touchable>
+      </View>
+    </SafeAreaView>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -115,4 +103,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withOnboardingContext(OnboardingStepWelcome);
+export default OnboardingStepWelcome;
