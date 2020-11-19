@@ -22,7 +22,7 @@ const OngoingScams = () => {
   return (
     <View style={[styles.banner, { backgroundColor: colors.orange }]}>
       <RectButton style={styles.closeButton} onPress={dismiss}>
-        <CloseIcon size={16} color={colors.white} />
+        <CloseIcon size={16} color={"#fff"} />
       </RectButton>
       <RectButton
         style={styles.innerContainer}
@@ -33,15 +33,15 @@ const OngoingScams = () => {
           <AlertTriangle size={24} color={colors.orange} />
         </View>
         <View style={styles.contentContainer}>
-          <LText semiBold style={styles.description} color="white">
+          <LText semiBold style={styles.description}>
             {<Trans i18nKey="banners.ongoingScams.description" />}
           </LText>
           <View style={styles.learnMoreWrapper}>
             <ExternalLink
-              color={colors.white}
+              color={"#fff"}
               text={<Trans i18nKey="common.learnMore" />}
               ltextProps={{
-                style: [styles.learnMore, { color: colors.white }],
+                style: [styles.learnMore],
               }}
               onPress={() => () => Linking.openURL(urls.banners.ongoingScams)}
               event="LearMoreOngoingScams"
@@ -77,6 +77,7 @@ const styles = StyleSheet.create({
     fontSize: 13,
     lineHeight: 19,
     marginRight: 40,
+    color: "#fff",
   },
   closeButton: {
     position: "absolute",
@@ -99,6 +100,7 @@ const styles = StyleSheet.create({
     lineHeight: 19,
     marginRight: 2,
     textDecorationLine: "underline",
+    color: "#fff",
   },
 });
 

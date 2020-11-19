@@ -127,6 +127,13 @@ const AccountRow = ({
                 >
                   {account.name}
                 </LText>
+
+                <AccountSyncStatus
+                  {...syncState}
+                  isUpToDateAccount={upToDate}
+                />
+              </View>
+              <View style={styles.bottomRow}>
                 <LText semiBold style={styles.balanceNumText}>
                   <CurrencyUnitValue
                     showCode
@@ -134,12 +141,6 @@ const AccountRow = ({
                     value={account.balance}
                   />
                 </LText>
-              </View>
-              <View style={styles.bottomRow}>
-                <AccountSyncStatus
-                  {...syncState}
-                  isUpToDateAccount={upToDate}
-                />
                 <View style={styles.balanceCounterContainer}>
                   <CounterValue
                     showCode
@@ -289,7 +290,7 @@ const styles = StyleSheet.create({
     overflow: "visible",
   },
   rowContainer: {
-    flexDirection: "column",
+    flexDirection: "row",
     flex: 1,
   },
   subAccountIndicator: {
@@ -326,9 +327,9 @@ const styles = StyleSheet.create({
   },
   topRow: {
     marginLeft: 16,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "flex-start",
     flex: 1,
   },
   accountNameText: {
@@ -344,9 +345,9 @@ const styles = StyleSheet.create({
   },
   bottomRow: {
     marginLeft: 16,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "flex-end",
   },
   balanceCounterContainer: {
     marginLeft: 16,

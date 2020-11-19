@@ -29,9 +29,7 @@ export default function ImportAccountsNavigator() {
           ...TransparentHeaderNavigationOptions,
           headerShown: true,
           title: t("account.import.scan.title"),
-          headerRight: props => (
-            <HeaderRightClose {...props} color={colors.white} />
-          ),
+          headerRight: props => <HeaderRightClose {...props} color={"#fff"} />,
           headerLeft: null,
         }}
       />

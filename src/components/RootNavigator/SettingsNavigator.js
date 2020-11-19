@@ -20,7 +20,7 @@ import Resources from "../../screens/Settings/Resources";
 import GeneralSettings from "../../screens/Settings/General";
 import CountervalueSettings from "../../screens/Settings/General/CountervalueSettings";
 import HelpSettings from "../../screens/Settings/Help";
-import CryptoAssetsSettingsTab from "./CryptoAssetsSettingsNavigator";
+import CurrenciesList from "../../screens/Settings/CryptoAssets/Currencies/CurrenciesList";
 import CurrencySettings from "../../screens/Settings/CryptoAssets/Currencies/CurrencySettings";
 import DebugSettings, {
   DebugDevices,
@@ -28,7 +28,6 @@ import DebugSettings, {
 } from "../../screens/Settings/Debug";
 import DebugExport from "../../screens/Settings/Debug/ExportAccounts";
 import ExperimentalSettings from "../../screens/Settings/Experimental";
-import RateProviderSettings from "../../screens/Settings/CryptoAssets/Rates/RateProviderSettings";
 import RepairDevice from "../../screens/RepairDevice";
 import { getStackNavigatorConfig } from "../../navigation/navigatorConfig";
 import Button from "../Button";
@@ -93,7 +92,7 @@ export default function SettingsNavigator() {
       />
       <Stack.Screen
         name={NavigatorName.CryptoAssetsSettings}
-        component={CryptoAssetsSettingsTab}
+        component={CurrenciesList}
         options={{ title: t("settings.cryptoAssets.header") }}
       />
       <Stack.Screen
@@ -103,14 +102,6 @@ export default function SettingsNavigator() {
           title: route.params.headerTitle,
           headerRight: null,
         })}
-      />
-      <Stack.Screen
-        name={ScreenName.RateProviderSettings}
-        component={RateProviderSettings}
-        options={{
-          title: t("settings.cryptoAssets.rateProviderHeader"),
-          headerRight: null,
-        }}
       />
       <Stack.Screen
         name={ScreenName.RepairDevice}

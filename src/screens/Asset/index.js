@@ -26,7 +26,7 @@ import type { Item } from "../../components/Graph/types";
 import LText from "../../components/LText";
 import Touchable from "../../components/Touchable";
 import AssetGraphCard from "../../components/AssetGraphCard";
-import { currencyPortfolioSelectorCreator } from "../../actions/portfolio";
+import { useCurrencyPortfolio } from "../../actions/portfolio";
 import globalSyncRefreshControl from "../../components/globalSyncRefreshControl";
 import LoadingFooter from "../../components/LoadingFooter";
 import NoMoreOperationFooter from "../../components/NoMoreOperationFooter";
@@ -114,7 +114,7 @@ class Asset extends PureComponent<AssetProps, any> {
         <View style={styles.balanceContainer}>
           {items[0] ? (
             <LText style={styles.balanceText} semiBold>
-              <CurrencyUnitValue {...items[0]} />
+              <CurrencyUnitValue {...items[0]} joinFragmentsSeparator=" " />
             </LText>
           ) : null}
           {items[1] ? (
@@ -254,12 +254,11 @@ export default function Screen(props: Props) {
   );
   const counterValueCurrency = useSelector(counterValueCurrencySelector);
   const useCounterValue = useSelector(countervalueFirstSelector);
-  const portfolio = useSelector(
-    currencyPortfolioSelectorCreator({
-      currency,
-      range,
-    }),
-  );
+  const portfolio = useCurrencyPortfolio({
+    currency,
+    range,
+  });
+
   const { colors } = useTheme();
 
   return (

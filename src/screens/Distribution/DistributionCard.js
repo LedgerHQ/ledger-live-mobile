@@ -1,5 +1,5 @@
 // @flow
-import React from "react";
+import React, { useMemo } from "react";
 import { View, StyleSheet } from "react-native";
 import { BigNumber } from "bignumber.js";
 import type {
@@ -15,6 +15,7 @@ import ProgressBar from "../../components/ProgressBar";
 import CounterValue from "../../components/CounterValue";
 import CurrencyRate from "../../components/CurrencyRate";
 import ParentCurrencyIcon from "../../components/ParentCurrencyIcon";
+import { ensureContrast } from "../../colors";
 
 export type DistributionItem = {
   currency: CryptoCurrency | TokenCurrency,
@@ -32,9 +33,12 @@ export default function DistributionCard({
   item: { currency, amount, distribution },
   highlighting = false,
 }: Props) {
-  const color = getCurrencyColor(currency);
-  const percentage = Math.round(distribution * 1e4) / 1e2;
   const { colors } = useTheme();
+  const color = useMemo(
+    () => ensureContrast(getCurrencyColor(currency), colors.background),
+    [colors, currency],
+  );
+  const percentage = Math.round(distribution * 1e4) / 1e2;
 
   return (
     <View

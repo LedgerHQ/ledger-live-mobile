@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
   label: {
     textTransform: "uppercase",
     letterSpacing: 1,
-    opacity: 0.5,
+    opacity: 0.7,
     fontSize: 10,
     lineHeight: 15,
     marginRight: 100,

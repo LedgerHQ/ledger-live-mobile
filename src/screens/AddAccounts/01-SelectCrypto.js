@@ -1,5 +1,4 @@
 // @flow
-
 import React, { useMemo } from "react";
 import { Trans } from "react-i18next";
 import { StyleSheet, View, FlatList } from "react-native";
@@ -11,12 +10,11 @@ import type {
 import {
   listTokens,
   useCurrenciesByMarketcap,
+  listSupportedCurrencies,
 } from "@ledgerhq/live-common/lib/currencies";
-import useEnv from "@ledgerhq/live-common/lib/hooks/useEnv";
 
 import { useTheme } from "@react-navigation/native";
 import { ScreenName } from "../../const";
-import { listCryptoCurrencies } from "../../cryptocurrencies";
 import { TrackScreen } from "../../analytics";
 import FilteredSearchBar from "../../components/FilteredSearchBar";
 import KeyboardView from "../../components/KeyboardView";
@@ -43,10 +41,9 @@ const renderEmptyList = () => (
 
 export default function AddAccountsSelectCrypto({ navigation }: Props) {
   const { colors } = useTheme();
-  const devMode = useEnv("MANAGER_DEV_MODE");
   const cryptoCurrencies = useMemo(
-    () => listCryptoCurrencies(devMode).concat(listTokens()),
-    [devMode],
+    () => listSupportedCurrencies().concat(listTokens()),
+    [],
   );
 
   const sortedCryptoCurrencies = useCurrenciesByMarketcap(cryptoCurrencies);

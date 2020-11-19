@@ -7,7 +7,7 @@ import * as d3shape from "d3-shape";
 import Svg, { Path, G, Circle } from "react-native-svg";
 import { getCurrencyColor } from "@ledgerhq/live-common/lib/currencies";
 import type { DistributionItem } from "./DistributionCard";
-import { withTheme } from "../../colors";
+import { ensureContrast, withTheme } from "../../colors";
 
 type Props = {
   data: Array<DistributionItem>,
@@ -104,7 +104,10 @@ class RingChart extends PureComponent<Props> {
 
     const parsedItem = {
       // $FlowFixMe
-      color: getCurrencyColor(item.currency),
+      color: ensureContrast(
+        getCurrencyColor(item.currency),
+        this.props.colors.background,
+      ),
       pathData,
       endAngle: data.angle + increment,
       id: item.currency.id,
@@ -129,7 +132,7 @@ class RingChart extends PureComponent<Props> {
             {this.paths.items.map(({ pathData, color, id }, i) => (
               <Path
                 key={id}
-                stroke={colors.white}
+                stroke={colors.card}
                 strokeWidth={0.5}
                 fill={color}
                 d={

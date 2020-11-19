@@ -1,9 +1,7 @@
 // @flow
-
 import React, { useCallback, useMemo, useState } from "react";
 import { SectionList, View, StyleSheet, SafeAreaView } from "react-native";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
 import { useNavigation, useTheme } from "@react-navigation/native";
 import type {
   AccountLikeArray,
@@ -11,10 +9,8 @@ import type {
 } from "@ledgerhq/live-common/lib/types";
 import { groupAccountsOperationsByDay } from "@ledgerhq/live-common/lib/account";
 import { ScreenName } from "../../../const";
-
-import { flattenSortAccountsSelector } from "../../../actions/general";
+import { useFlattenSortAccounts } from "../../../actions/general";
 import TrackScreen from "../../../analytics/TrackScreen";
-
 import EmptyState from "../shared/EmptyState";
 import OperationRow from "../../../components/OperationRow";
 import SectionHeader from "../../../components/SectionHeader";
@@ -47,7 +43,7 @@ function keyExtractor(item: Operation) {
 export default function History() {
   const { colors } = useTheme();
   const { t } = useTranslation();
-  const accounts = useSelector(flattenSortAccountsSelector);
+  const accounts = useFlattenSortAccounts();
   const history = useCompoundHistory(accounts);
 
   const [opCount, setOpCount] = useState(50);

@@ -2,7 +2,6 @@
 import React, { memo } from "react";
 import { View, StyleSheet } from "react-native";
 
-import { useTheme } from "@react-navigation/native";
 import { rgba } from "../../colors";
 
 type Props = {
@@ -10,12 +9,11 @@ type Props = {
 };
 
 function QRCodeReactangleViewport({ viewFinderSize }: Props) {
-  const { colors } = useTheme();
   const borderStyle = { ...styles.border, borderColor: "white" };
   return (
     <View style={styles.row}>
       <View
-        style={[styles.darken, { backgroundColor: rgba(colors.darkBlue, 0.4) }]}
+        style={[styles.darken, { backgroundColor: rgba("#142533", 0.4) }]}
       />
       <View style={{ width: viewFinderSize, height: viewFinderSize }}>
         <View style={styles.innerRow}>
@@ -32,7 +30,9 @@ function QRCodeReactangleViewport({ viewFinderSize }: Props) {
           />
         </View>
       </View>
-      <View style={styles.darken} />
+      <View
+        style={[styles.darken, { backgroundColor: rgba("#142533", 0.4) }]}
+      />
     </View>
   );
 }

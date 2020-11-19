@@ -10,6 +10,7 @@ import type {
   Unit,
   AccountLike,
   Account,
+  ValueChange,
 } from "@ledgerhq/live-common/lib/types";
 import type { CompoundAccountSummary } from "@ledgerhq/live-common/lib/compound/types";
 
@@ -27,6 +28,7 @@ import CompoundAccountBodyHeader from "../Lending/Account/AccountBodyHeader";
 import perFamilyAccountHeader from "../../generated/AccountHeader";
 import perFamilyAccountBodyHeader from "../../generated/AccountBodyHeader";
 import perFamilyAccountBalanceSummaryFooter from "../../generated/AccountBalanceSummaryFooter";
+import { normalize } from "../../helpers/normalizeSize";
 
 const renderAccountSummary = (
   account,
@@ -98,7 +100,11 @@ const renderListHeaderTitle = (
         {items[0] ? (
           <View style={styles.warningWrapper}>
             <LText style={styles.balanceText} semiBold>
-              <CurrencyUnitValue {...items[0]} disableRounding />
+              <CurrencyUnitValue
+                {...items[0]}
+                disableRounding
+                joinFragmentsSeparator=" "
+              />
             </LText>
             <TransactionsPendingConfirmationWarning maybeAccount={account} />
           </View>
@@ -120,12 +126,12 @@ type Props = {
   useCounterValue: boolean,
   range: *,
   history: *,
-  countervalueChange: () => void,
-  cryptoChange: () => void,
+  countervalueChange: ValueChange,
+  cryptoChange: ValueChange,
   counterValueCurrency: Unit,
   onAccountPress: () => void,
   onSwitchAccountCurrency: () => void,
-  compoundSummary?: CompoundAccountSummary,
+  compoundSummary?: ?CompoundAccountSummary,
 };
 
 function ListHeaderComponent({
@@ -220,17 +226,17 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   balanceText: {
-    fontSize: 22,
+    fontSize: normalize(21),
     paddingBottom: 4,
     lineHeight: 24,
+    flexWrap: "wrap",
   },
   balanceSubText: {
-    fontSize: 16,
+    fontSize: normalize(16),
   },
   warningWrapper: {
     display: "flex",
     flexDirection: "row",
-    alignItems: "center",
   },
 });
 

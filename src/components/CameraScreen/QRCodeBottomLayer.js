@@ -3,7 +3,6 @@ import React, { memo } from "react";
 import { View, StyleSheet } from "react-native";
 import { Trans } from "react-i18next";
 
-import { useTheme } from "@react-navigation/native";
 import { rgba } from "../../colors";
 
 import LText from "../LText";
@@ -17,17 +16,16 @@ type Props = {
 };
 
 function QrCodeBottomLayer({ progress, viewFinderSize, liveQrCode }: Props) {
-  const { colors } = useTheme();
   return (
     <View
       style={[
         styles.darken,
-        { backgroundColor: rgba(colors.darkBlue, 0.4) },
+        { backgroundColor: rgba("#142533", 0.4) },
         styles.centered,
       ]}
     >
       <View style={styles.centered}>
-        <LText semiBold style={styles.text} color="white">
+        <LText semiBold style={styles.text}>
           <Trans
             i18nKey={
               liveQrCode

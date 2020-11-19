@@ -11,6 +11,8 @@ import CurrencyUnitValue from "./CurrencyUnitValue";
 import IconArrowUp from "../icons/ArrowUp";
 import IconArrowDown from "../icons/ArrowDown";
 
+import { normalize } from "../helpers/normalizeSize";
+
 type Props = {
   valueChange: ValueChange,
   percent?: boolean,
@@ -46,12 +48,12 @@ function Delta({ valueChange, percent, unit, style }: Props) {
 
   return (
     <View style={[styles.root, style]}>
-      {percent ? <ArrowIcon size={12} color={color} /> : null}
+      {percent ? ArrowIcon : null}
       <View style={percent ? styles.content : null}>
         <LText semiBold style={[styles.text, { color }]}>
-          {unit ? (
+          {unit && !absDelta.isZero() ? (
             <CurrencyUnitValue
-              before={`(${sign} `}
+              before={`(${sign}`}
               after={")"}
               unit={unit}
               value={absDelta}
@@ -74,7 +76,7 @@ const styles = StyleSheet.create({
     marginLeft: 5,
   },
   text: {
-    fontSize: 16,
+    fontSize: normalize(16),
   },
 });
 

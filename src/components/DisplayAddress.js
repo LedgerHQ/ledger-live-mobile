@@ -22,7 +22,7 @@ function DisplayAddress({ address, verified = false }: Props) {
           : undefined,
       ]}
     >
-      <LText numberOfLines={2} bold style={styles.text} selectable>
+      <LText bold style={styles.text} selectable>
         {address}
       </LText>
     </View>
