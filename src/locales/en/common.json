@@ -675,11 +675,20 @@
       "OnboardingStepShareData": "Analytics and bug reports"
     },
     "stepWelcome": {
-      "title": "Welcome to Ledger Live",
-      "desc": "Easily manage crypto secured by your Ledger device. Everywhere you go.",
+      "title": "Welcome to Ledger",
+      "subtitle": "Safely manage your cryptos from your smartphone.",
       "start": "Get started",
       "noDevice": "No device?",
       "buy": "Buy a {{fullDeviceName}}"
+    },
+    "stepLanguage": {
+      "title": "Select your language",
+      "cta": "Continue",
+      "en": "English",
+      "fr": "French",
+      "es": "Spanish",
+      "zh": "Chinese",
+      "ru": "Russian"
     },
     "stepGetStarted": {
       "title": "Get started",

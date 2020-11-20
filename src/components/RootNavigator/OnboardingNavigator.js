@@ -5,6 +5,10 @@ import { ScreenName, NavigatorName } from "../../const";
 import PasswordAddFlowNavigator from "./PasswordAddFlowNavigator";
 
 import OnboardingWelcome from "../../screens/Onboarding/steps/welcome";
+import OnboardingLanguage from "../../screens/Onboarding/steps/language";
+import OnboardingTerms from "../../screens/Onboarding/steps/terms";
+
+import { closableNavigationOptions } from "../../navigation/navigatorConfig";
 import styles from "../../navigation/styles";
 
 /** OnboardingLanguage: "OnboardingLanguage",
@@ -14,18 +18,32 @@ import styles from "../../navigation/styles";
 
 export default function OnboardingNavigator() {
   return (
-    <Stack.Navigator screenOptions={{ headerStyle: styles.headerNoShadow }}>
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen
         name={ScreenName.OnboardingWelcome}
         component={OnboardingWelcome}
       />
       <Stack.Screen
         name={ScreenName.OnboardingLanguage}
-        component={OnboardingWelcome}
+        component={OnboardingLanguage}
+        options={{
+          headerShown: true,
+          ...closableNavigationOptions,
+          title: null,
+          headerLeft: null,
+          headerStyle: styles.headerNoShadow,
+        }}
       />
       <Stack.Screen
         name={ScreenName.OnboardingTermsOfUse}
-        component={OnboardingWelcome}
+        component={OnboardingTerms}
+        options={{
+          headerShown: true,
+          ...closableNavigationOptions,
+          title: null,
+          headerRight: null,
+          headerStyle: styles.headerNoShadow,
+        }}
       />
       <Stack.Screen
         name={ScreenName.OnboardingDeviceSelection}
