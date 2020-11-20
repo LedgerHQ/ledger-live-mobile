@@ -53,6 +53,9 @@ jobs:
         run: echo "::set-output name=sha8::${GITHUB_SHA:0:7}"
       - name: make local version
         run: yarn version --new-version=${{ steps.version.outputs.clean }}-sha.${{ steps.slug.outputs.sha8 }}
+      - name: push APP_NAME to .env.adhoc
+        run: |
+          echo APP_NAME="Ledger Live (${{ steps.slug.outputs.sha8 }})" >> .env.adhoc
       - name: build the app
         env:
           APP_IDENTIFIER: ${{ secrets.APP_IDENTIFIER }}
