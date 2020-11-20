@@ -71,7 +71,7 @@ class EachCurrencySettings extends Component<Props, LocalState> {
     const { defaults, t, currency, colors } = this.props;
     const { value } = this.state;
     return (
-      <View style={[styles.root, { backgroundColor: colors.white }]}>
+      <View style={[styles.root, { backgroundColor: colors.background }]}>
         <TrackScreen
           category="Settings"
           name="Currency"

@@ -27,7 +27,7 @@ const MissingOrOutdatedSwapApp = ({
   const key = outdated ? "outdatedApp" : "missingApp";
 
   return (
-    <SafeAreaView style={[styles.root, { backgroundColor: colors.white }]}>
+    <SafeAreaView style={[styles.root, { backgroundColor: colors.background }]}>
       <TrackScreen category="Swap" name="MissingOrOutdatedExchangeApp" />
       <View style={styles.illustration}>
         <AppIcon size={60} icon="exchange" />

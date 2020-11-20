@@ -53,7 +53,7 @@ const SwapFormSummary = ({ navigation, route }: Props) => {
 
   return status && transaction ? (
     <SafeAreaView
-      style={[styles.root, { backgroundColor: colors.white }]}
+      style={[styles.root, { backgroundColor: colors.background }]}
       forceInset={forceInset}
     >
       <TrackScreen category="Swap" name="Summary" />

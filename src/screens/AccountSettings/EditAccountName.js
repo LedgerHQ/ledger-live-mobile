@@ -88,7 +88,7 @@ class EditAccountName extends PureComponent<Props, State> {
 
     return (
       <SafeAreaView
-        style={[styles.safeArea, { backgroundColor: colors.white }]}
+        style={[styles.safeArea, { backgroundColor: colors.background }]}
         forceInset={forceInset}
       >
         <KeyboardView style={styles.body}>
@@ -98,7 +98,7 @@ class EditAccountName extends PureComponent<Props, State> {
           >
             <TextInput
               autoFocus
-              style={styles.textInputAS}
+              style={[styles.textInputAS, { color: colors.darkBlue }]}
               defaultValue={initialAccountName}
               returnKeyType="done"
               maxLength={MAX_ACCOUNT_NAME_LENGHT}

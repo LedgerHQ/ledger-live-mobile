@@ -55,7 +55,9 @@ function StellarEditMemoValue({ navigation, route }: Props) {
 
   return (
     <SafeAreaView style={{ flex: 1 }} forceInset={forceInset}>
-      <KeyboardView style={[styles.body, { backgroundColor: colors.white }]}>
+      <KeyboardView
+        style={[styles.body, { backgroundColor: colors.background }]}
+      >
         <ScrollView
           contentContainerStyle={styles.root}
           keyboardShouldPersistTaps="always"
@@ -63,7 +65,7 @@ function StellarEditMemoValue({ navigation, route }: Props) {
           <TextInput
             allowFontScaling={false}
             autoFocus
-            style={styles.textInputAS}
+            style={[styles.textInputAS, { color: colors.darkBlue }]}
             defaultValue={memoValue ? memoValue.toString() : ""}
             keyboardType="default"
             returnKeyType="done"

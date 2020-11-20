@@ -44,7 +44,7 @@ export default function ValidationError({ navigation, route }: Props) {
   const { error, currency } = route.params;
 
   return (
-    <SafeAreaView style={[styles.root, { backgroundColor: colors.white }]}>
+    <SafeAreaView style={[styles.root, { backgroundColor: colors.background }]}>
       <TrackScreen
         category="Lend Approve"
         name="Fail"

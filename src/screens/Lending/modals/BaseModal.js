@@ -34,7 +34,7 @@ export default function BaseInfoModal({
 }: Props) {
   const { colors } = useTheme();
   return (
-    <SafeAreaView style={[styles.root, { backgroundColor: colors.white }]}>
+    <SafeAreaView style={[styles.root, { backgroundColor: colors.background }]}>
       {event && <TrackScreen category="Lend" name={event} />}
       {header}
       <View style={[styles.topSection, { backgroundColor: colors.lightFog }]}>

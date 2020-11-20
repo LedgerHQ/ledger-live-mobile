@@ -134,7 +134,7 @@ export default function SelectAccount({ navigation, route }: Props) {
   }
 
   return (
-    <SafeAreaView style={[styles.root, { backgroundColor: colors.white }]}>
+    <SafeAreaView style={[styles.root, { backgroundColor: colors.background }]}>
       <TrackScreen category="ReceiveFunds" name="SelectAccount" />
       <KeyboardView style={{ flex: 1 }}>
         <View style={styles.searchContainer}>

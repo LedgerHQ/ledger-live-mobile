@@ -231,6 +231,10 @@ export default function ActiveAccountRow({ item }: RowProps) {
       account.parentId,
       canSupply,
       canWithdraw,
+      colors.grey,
+      colors.lightFog,
+      colors.lightLive,
+      colors.live,
       currency,
       navigation,
       onCloseDrawer,
@@ -239,7 +243,10 @@ export default function ActiveAccountRow({ item }: RowProps) {
 
   return (
     <>
-      <TouchableOpacity style={styles.row} onPress={onOpenDrawer}>
+      <TouchableOpacity
+        style={[styles.row, { backgroundColor: colors.card }]}
+        onPress={onOpenDrawer}
+      >
         <CurrencyIcon radius={100} currency={token} size={32} />
         <View style={styles.currencySection}>
           <LText

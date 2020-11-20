@@ -32,7 +32,7 @@ const Landing = () => {
   );
 
   return (
-    <SafeAreaView style={[styles.root, { backgroundColor: colors.white }]}>
+    <SafeAreaView style={[styles.root, { backgroundColor: colors.background }]}>
       <TrackScreen category="Swap" name="KYC Landing" />
       <ScrollView contentContainerStyle={{ flex: 1 }}>
         <View style={styles.wrapper}>

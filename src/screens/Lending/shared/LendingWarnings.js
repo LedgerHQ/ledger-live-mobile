@@ -25,7 +25,7 @@ export default function HighFeeWarningModal() {
           })
         : setIsOpened(!HAS_BEEN_SHOWN),
     );
-  }, [navigation]);
+  }, []);
 
   const onClose = useCallback(() => {
     setIsOpened(false);

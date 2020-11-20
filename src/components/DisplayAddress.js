@@ -4,6 +4,7 @@ import { View, StyleSheet } from "react-native";
 
 import { useTheme } from "@react-navigation/native";
 import LText from "./LText/index";
+import { rgba } from "../colors";
 
 type Props = {
   address: string,
@@ -18,7 +19,10 @@ function DisplayAddress({ address, verified = false }: Props) {
         styles.container,
         { borderColor: colors.fog },
         verified
-          ? { borderColor: colors.success, backgroundColor: colors.success }
+          ? {
+              borderColor: colors.success,
+              backgroundColor: rgba(colors.success, 0.03),
+            }
           : undefined,
       ]}
     >

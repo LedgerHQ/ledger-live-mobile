@@ -65,7 +65,7 @@ export default function PortfolioHeader({
       </TouchableWithoutFeedback>
       {showDistribution && (
         <View
-          style={[styles.distributionButton, { backgroundColor: colors.white }]}
+          style={[styles.distributionButton, { backgroundColor: colors.card }]}
         >
           <Touchable
             event="DistributionCTA"

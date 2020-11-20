@@ -205,7 +205,7 @@ function DelegationSelectValidator({ navigation, route }: Props) {
   const error = status && status.errors && Object.values(status.errors)[0];
 
   return (
-    <SafeAreaView style={[styles.root, { backgroundColor: colors.white }]}>
+    <SafeAreaView style={[styles.root, { backgroundColor: colors.background }]}>
       <SelectValidatorSearchBox
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}

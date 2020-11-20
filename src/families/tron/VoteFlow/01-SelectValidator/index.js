@@ -145,7 +145,7 @@ export default function SelectValidator({ navigation, route }: Props) {
     <>
       <TrackScreen category="Vote" name="SelectValidator" />
       <SafeAreaView
-        style={[styles.root, { backgroundColor: colors.white }]}
+        style={[styles.root, { backgroundColor: colors.background }]}
         forceInset={forceInset}
       >
         <SelectValidatorSearchBox

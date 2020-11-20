@@ -11,7 +11,7 @@ import { TrackScreen } from "../../analytics";
 const NotAvailable = () => {
   const { colors } = useTheme();
   return (
-    <SafeAreaView style={[styles.root, { backgroundColor: colors.white }]}>
+    <SafeAreaView style={[styles.root, { backgroundColor: colors.background }]}>
       <TrackScreen category="Swap" name="NotAvailable" />
       <View style={styles.wrapper}>
         <Icon name={"exclamationcircleo"} color={colors.grey} size={40} />

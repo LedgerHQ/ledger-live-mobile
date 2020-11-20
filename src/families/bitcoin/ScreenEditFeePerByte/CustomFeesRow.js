@@ -131,6 +131,7 @@ class FeesRow extends Component<Props, State> {
               style={[
                 styles.textInput,
                 isSelected ? styles.textInputSelected : null,
+                { color: colors.darkBlue },
               ]}
               onFocus={this.onPress}
               onChangeText={this.onChangeText}

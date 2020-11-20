@@ -12,11 +12,13 @@ import { getCurrencyColor } from "@ledgerhq/live-common/lib/currencies";
 import LText from "./LText";
 import CounterValue from "./CounterValue";
 import CurrencyUnitValue from "./CurrencyUnitValue";
+import { ensureContrast, withTheme } from "../colors";
 
 type Props = {
   currency: CryptoCurrency | TokenCurrency,
   fontStyle?: *,
   iconSize?: number,
+  colors: *,
 };
 
 class CurrencyRate extends PureComponent<Props> {
@@ -25,10 +27,10 @@ class CurrencyRate extends PureComponent<Props> {
   };
 
   render() {
-    const { currency, fontStyle, iconSize } = this.props;
+    const { currency, fontStyle, iconSize, colors } = this.props;
     const one = new BigNumber(10 ** currency.units[0].magnitude);
     // $FlowFixMe
-    const color = getCurrencyColor(currency);
+    const color = ensureContrast(getCurrencyColor(currency), colors.background);
 
     return (
       <View style={styles.wrapper}>
@@ -60,4 +62,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CurrencyRate;
+export default withTheme(CurrencyRate);

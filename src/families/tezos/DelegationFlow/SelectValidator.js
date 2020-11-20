@@ -274,7 +274,7 @@ export default function SelectValidator({ navigation, route }: Props) {
 
   return (
     <SafeAreaView
-      style={[styles.root, { backgroundColor: colors.white }]}
+      style={[styles.root, { backgroundColor: colors.background }]}
       forceInset={forceInset}
     >
       <TrackScreen category="DelegationFlow" name="SelectValidator" />
@@ -309,7 +309,10 @@ export default function SelectValidator({ navigation, route }: Props) {
         <TextInput
           placeholder="Enter validator address"
           placeholderTextColor={colors.fog}
-          style={[styles.addressInput, error && { color: colors.alert }]}
+          style={[
+            styles.addressInput,
+            error ? { color: colors.alert } : { color: colors.darkBlue },
+          ]}
           onChangeText={onChangeText}
           onInputCleared={clear}
           value={transaction.recipient}

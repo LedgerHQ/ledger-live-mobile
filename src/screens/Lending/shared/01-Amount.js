@@ -137,7 +137,9 @@ export default function AmountScreen({
         name="step 1 (Amount)"
         eventProperties={{ currencyName: currency.name }}
       />
-      <SafeAreaView style={[styles.root, { backgroundColor: colors.white }]}>
+      <SafeAreaView
+        style={[styles.root, { backgroundColor: colors.background }]}
+      >
         <KeyboardView style={styles.container}>
           <TouchableWithoutFeedback onPress={blur}>
             <View style={styles.root}>

@@ -102,7 +102,7 @@ class SendFundsSelectAccount extends Component<Props, State> {
     const initialCurrencySelected = params?.currency;
     return (
       <SafeAreaView
-        style={[styles.root, { backgroundColor: colors.white }]}
+        style={[styles.root, { backgroundColor: colors.background }]}
         forceInset={forceInset}
       >
         <TrackScreen category="SendFunds" name="SelectAccount" />

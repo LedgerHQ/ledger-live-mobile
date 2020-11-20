@@ -52,7 +52,7 @@ export default function ValidationSuccess({ navigation, route }: Props) {
   );
 
   return (
-    <View style={[styles.root, { backgroundColor: colors.white }]}>
+    <View style={[styles.root, { backgroundColor: colors.background }]}>
       <TrackScreen category="AlgorandOptIn" name="ValidationSuccess" />
       <PreventNativeBack />
       <ValidateSuccess

@@ -65,7 +65,7 @@ export default function ValidationSuccess({ navigation, route }: Props) {
   }, [lastVotedDate, accountId, navigation, onClose]);
 
   return (
-    <View style={[styles.root, { backgroundColor: colors.white }]}>
+    <View style={[styles.root, { backgroundColor: colors.background }]}>
       <TrackScreen category="FreezeFunds" name="ValidationSuccess" />
       <PreventNativeBack />
       <ValidateSuccess

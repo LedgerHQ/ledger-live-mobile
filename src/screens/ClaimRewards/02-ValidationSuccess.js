@@ -43,7 +43,7 @@ export default function ValidationSuccess({ navigation, route }: Props) {
   }, [navigation, account, route.params.result]);
 
   return (
-    <View style={[styles.root, { backgroundColor: colors.white }]}>
+    <View style={[styles.root, { backgroundColor: colors.background }]}>
       <TrackScreen category="ClaimRewards" name="ValidationSuccess" />
       <PreventNativeBack />
       <ValidateSuccess

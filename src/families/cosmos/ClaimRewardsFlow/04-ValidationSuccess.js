@@ -46,7 +46,7 @@ export default function ValidationSuccess({ navigation, route }: Props) {
   const mode = route.params.transaction.mode;
 
   return (
-    <View style={[styles.root, { backgroundColor: colors.white }]}>
+    <View style={[styles.root, { backgroundColor: colors.background }]}>
       <TrackScreen category="CosmosClaimRewards" name="ValidationSuccess" />
       <PreventNativeBack />
       <ValidateSuccess

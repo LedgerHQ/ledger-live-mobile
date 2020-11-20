@@ -24,7 +24,7 @@ export default function ExchangeNavigator() {
       tabBarOptions={{
         headerStyle: {
           ...styles.headerNoShadow,
-          backgroundColor: colors.white,
+          backgroundColor: colors.background,
         },
         indicatorStyle: {
           backgroundColor: colors.live,

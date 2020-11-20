@@ -25,7 +25,7 @@ export default function Installing({ progress, installing }: Props) {
       {progress === 0 ? (
         <View style={{ padding: 10 }}>
           <Spinning>
-            <LiveLogo color={colors.fog} size={40} />
+            <LiveLogo color={colors.grey} size={40} />
           </Spinning>
         </View>
       ) : (

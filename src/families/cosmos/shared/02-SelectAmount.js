@@ -124,7 +124,7 @@ function DelegationAmount({ navigation, route }: Props) {
   );
 
   return (
-    <SafeAreaView style={[styles.root, { backgroundColor: colors.white }]}>
+    <SafeAreaView style={[styles.root, { backgroundColor: colors.background }]}>
       <KeyboardView>
         <View style={styles.main}>
           <CurrencyInput

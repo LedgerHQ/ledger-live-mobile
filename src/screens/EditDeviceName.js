@@ -123,7 +123,7 @@ class EditDeviceName extends PureComponent<
 
     return (
       <SafeAreaView
-        style={[styles.safearea, { backgroundColor: colors.white }]}
+        style={[styles.safearea, { backgroundColor: colors.background }]}
         forceInset={forceInset}
       >
         <TrackScreen category="EditDeviceName" />
@@ -139,7 +139,11 @@ class EditDeviceName extends PureComponent<
               blurOnSubmit={false}
               clearButtonMode="always"
               placeholder="Satoshi Nakamoto"
-              style={[getFontStyle({ semiBold: true }), styles.input]}
+              style={[
+                getFontStyle({ semiBold: true }),
+                styles.input,
+                { color: colors.darkBlue },
+              ]}
             />
             <LText style={styles.remainingText} color="grey">
               <Trans

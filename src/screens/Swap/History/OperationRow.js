@@ -30,7 +30,7 @@ const OperationRow = ({ item }: { item: MappedSwapOperation }) => {
       <View
         style={[
           styles.root,
-          { backgroundColor: colors.white, borderBottomColor: colors.lightFog },
+          { backgroundColor: colors.card, borderBottomColor: colors.lightFog },
         ]}
       >
         <SwapStatusIndicator small status={status} />

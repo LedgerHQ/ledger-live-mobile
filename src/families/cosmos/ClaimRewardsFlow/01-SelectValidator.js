@@ -98,7 +98,7 @@ function ClaimRewardsSelectValidator({ navigation, route }: Props) {
   );
 
   return (
-    <SafeAreaView style={[styles.root, { backgroundColor: colors.white }]}>
+    <SafeAreaView style={[styles.root, { backgroundColor: colors.background }]}>
       <View style={styles.main}>
         <FlatList
           style={styles.list}

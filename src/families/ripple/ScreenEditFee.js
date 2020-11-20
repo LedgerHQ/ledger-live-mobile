@@ -43,7 +43,7 @@ function RippleEditFee({ route }: Props) {
       style={[
         styles.root,
         {
-          backgroundColor: colors.white,
+          backgroundColor: colors.background,
         },
       ]}
       forceInset={forceInset}

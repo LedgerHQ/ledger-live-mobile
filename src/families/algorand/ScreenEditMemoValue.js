@@ -43,7 +43,9 @@ function AlgorandEditMemo({ navigation, route }: Props) {
 
   return (
     <SafeAreaView style={styles.root} forceInset={forceInset}>
-      <KeyboardView style={[styles.body, { backgroundColor: colors.white }]}>
+      <KeyboardView
+        style={[styles.body, { backgroundColor: colors.background }]}
+      >
         <ScrollView
           contentContainerStyle={styles.root}
           keyboardShouldPersistTaps="always"
@@ -51,7 +53,7 @@ function AlgorandEditMemo({ navigation, route }: Props) {
           <TextInput
             allowFontScaling={false}
             autoFocus
-            style={styles.textInputAS}
+            style={[styles.textInputAS, { color: colors.darkBlue }]}
             defaultValue={memo}
             keyboardType="default"
             returnKeyType="done"

@@ -63,7 +63,7 @@ const AppRow = ({
         style={[
           styles.item,
           {
-            backgroundColor: colors.white,
+            backgroundColor: colors.card,
             borderBottomColor: colors.lightFog,
           },
         ]}

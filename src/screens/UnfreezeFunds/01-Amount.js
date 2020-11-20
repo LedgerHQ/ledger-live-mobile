@@ -225,7 +225,7 @@ function UnfreezeAmountInner({ account }: InnerProps) {
               <CheckBox isChecked={resource === "BANDWIDTH"} />
             </TouchableOpacity>
             <TouchableOpacity
-              style={[styles.selectCard, { backgroundColor: colors.white }]}
+              style={[styles.selectCard, { backgroundColor: colors.card }]}
               disabled={!canUnfreezeEnergy}
               onPress={() => onChangeResource("ENERGY")}
             >

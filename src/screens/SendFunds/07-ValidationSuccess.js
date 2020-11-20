@@ -45,7 +45,7 @@ export default function ValidationSuccess({ navigation, route }: Props) {
   }, [navigation, route.params, account, parentAccount]);
 
   return (
-    <View style={[styles.root, { backgroundColor: colors.white }]}>
+    <View style={[styles.root, { backgroundColor: colors.background }]}>
       <TrackScreen category="SendFunds" name="ValidationSuccess" />
       <PreventNativeBack />
       <ValidateSuccess onClose={onClose} onViewDetails={goToOperationDetails} />

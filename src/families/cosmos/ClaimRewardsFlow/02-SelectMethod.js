@@ -163,7 +163,7 @@ function ClaimRewardsAmount({ navigation, route }: Props) {
     Object.values(status.warnings)[0];
 
   return (
-    <SafeAreaView style={[styles.root, { backgroundColor: colors.white }]}>
+    <SafeAreaView style={[styles.root, { backgroundColor: colors.background }]}>
       <View style={styles.main}>
         <ToggleButton value={mode} options={options} onChange={onChangeMode} />
         <TouchableOpacity onPress={openInfoModal} style={styles.info}>

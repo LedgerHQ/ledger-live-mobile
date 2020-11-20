@@ -14,7 +14,7 @@ type Props = {
 const ActiveAccounts = ({ summaries }: Props) => {
   const { colors } = useTheme();
   return (
-    <View style={[styles.root, { backgroundColor: colors.white }]}>
+    <View style={[styles.root, { backgroundColor: colors.background }]}>
       <FlatList
         data={summaries}
         renderItem={({ item }) => <Row item={item} />}

@@ -33,7 +33,7 @@ export default function ValidationSuccess({ navigation, route }: Props) {
   const { currency } = route.params;
 
   return (
-    <View style={[styles.root, { backgroundColor: colors.white }]}>
+    <View style={[styles.root, { backgroundColor: colors.background }]}>
       <TrackScreen
         category="Lend Approve"
         name="Success"

@@ -87,7 +87,7 @@ class FirmwareUpdateCheckId extends Component<Props, State> {
 
     return (
       <SafeAreaView
-        style={[styles.root, { backgroundColor: colors.white }]}
+        style={[styles.root, { backgroundColor: colors.background }]}
         forceInset={forceInset}
       >
         <TrackScreen category="FirmwareUpdate" name="CheckId" />
@@ -123,7 +123,7 @@ class FirmwareUpdateCheckId extends Component<Props, State> {
             {progress === 0 ? (
               <View style={{ padding: 10 }}>
                 <Spinning>
-                  <LiveLogo color={colors.fog} size={40} />
+                  <LiveLogo color={colors.grey} size={40} />
                 </Spinning>
               </View>
             ) : (

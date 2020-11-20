@@ -23,7 +23,7 @@ const Error = () => {
   const { error } = route.params;
   return (
     <SafeAreaView
-      style={[styles.root, { backgroundColor: colors.white }]}
+      style={[styles.root, { backgroundColor: colors.background }]}
       forceInset={forceInset}
     >
       <TrackScreen category="Swap" name={`SwapModalError-${error.name}`} />

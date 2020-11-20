@@ -63,7 +63,7 @@ const Swap = ({
     a => a.name === "Exchange",
   );
   return (
-    <SafeAreaView style={[styles.root, { backgroundColor: colors.white }]}>
+    <SafeAreaView style={[styles.root, { backgroundColor: colors.background }]}>
       {!hasAcceptedSwapKYC ? (
         <Landing />
       ) : !hasUpToDateProviders ? (

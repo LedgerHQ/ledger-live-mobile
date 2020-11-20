@@ -17,7 +17,7 @@ type Props = {
 function ValidateError({ error, onClose, onRetry }: Props) {
   const { colors } = useTheme();
   return (
-    <View style={[styles.root, { backgroundColor: colors.white }]}>
+    <View style={[styles.root, { backgroundColor: colors.background }]}>
       <View style={styles.container}>
         <GenericErrorView error={error} />
         <Button

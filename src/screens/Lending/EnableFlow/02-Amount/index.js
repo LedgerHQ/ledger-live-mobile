@@ -156,7 +156,9 @@ export default function SendAmount({ navigation, route }: Props) {
         eventProperties={{ currencyName: currency.name }}
       />
       <LendingWarnings />
-      <SafeAreaView style={[styles.root, { backgroundColor: colors.white }]}>
+      <SafeAreaView
+        style={[styles.root, { backgroundColor: colors.background }]}
+      >
         <View style={styles.container}>
           <LinkedIcons
             left={

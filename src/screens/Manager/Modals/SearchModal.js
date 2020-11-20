@@ -298,7 +298,7 @@ export default ({
     <>
       <Touchable
         activeOpacity={0.5}
-        style={[styles.searchBarInput, { backgroundColor: colors.card }]}
+        style={[styles.searchBarInput, { backgroundColor: colors.background }]}
         onPress={openSearchModal}
         event="ManagerAppSearchModalOpen"
         eventProperties={{ open: true }}
@@ -323,7 +323,7 @@ export default ({
         onModalHide={onModalHide}
       >
         <View style={{ height, backgroundColor: colors.card }}>
-          <View style={[styles.header, { backgroundColor: colors.white }]}>
+          <View style={[styles.header, { backgroundColor: colors.background }]}>
             <View style={[styles.searchBar, { backgroundColor: colors.card }]}>
               <View style={styles.searchBarIcon}>
                 <SearchIcon size={16} color={colors.smoke} />

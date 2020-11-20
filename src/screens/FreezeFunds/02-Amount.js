@@ -214,7 +214,7 @@ export default function FreezeAmount({ navigation, route }: Props) {
     <>
       <TrackScreen category="FreezeFunds" name="Amount" />
       <SafeAreaView
-        style={[styles.root, { backgroundColor: colors.white }]}
+        style={[styles.root, { backgroundColor: colors.background }]}
         forceInset={forceInset}
       >
         <KeyboardView style={styles.container}>

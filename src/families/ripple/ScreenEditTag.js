@@ -72,7 +72,9 @@ function RippleEditTag({ route, navigation }: Props) {
 
   return (
     <SafeAreaView style={{ flex: 1 }} forceInset={forceInset}>
-      <KeyboardView style={[styles.body, { backgroundColor: colors.white }]}>
+      <KeyboardView
+        style={[styles.body, { backgroundColor: colors.background }]}
+      >
         <NavigationScrollView
           contentContainerStyle={styles.root}
           keyboardShouldPersistTaps="always"
@@ -80,7 +82,7 @@ function RippleEditTag({ route, navigation }: Props) {
           <TextInput
             allowFontScaling={false}
             autoFocus
-            style={styles.textInputAS}
+            style={[styles.textInputAS, { color: colors.darkBlue }]}
             defaultValue={tag ? tag.toString() : ""}
             keyboardType="numeric"
             returnKeyType="done"

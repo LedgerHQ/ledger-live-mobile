@@ -11,7 +11,7 @@ export default function DebugPlayground() {
   const { colors } = useTheme();
   return (
     <NavigationScrollView>
-      <View style={[styles.root, { backgroundColor: colors.white }]}>
+      <View style={[styles.root, { backgroundColor: colors.background }]}>
         <LText tertiary>
           {
             "Convenience screen for testing purposes, please leave empty when commiting."

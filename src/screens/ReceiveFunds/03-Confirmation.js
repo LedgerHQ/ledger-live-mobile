@@ -283,7 +283,15 @@ export default function ReceiveConfirmation({ navigation, route }: Props) {
         </View>
       </NavigationScrollView>
       {verified && (
-        <View style={[styles.footer, { borderTopColor: colors.lightFog }]}>
+        <View
+          style={[
+            styles.footer,
+            {
+              borderTopColor: colors.lightFog,
+              backgroundColor: colors.background,
+            },
+          ]}
+        >
           <Button
             event="ReceiveDone"
             containerStyle={styles.button}

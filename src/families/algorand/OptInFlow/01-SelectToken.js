@@ -155,7 +155,7 @@ export default function DelegationStarted({ navigation, route }: Props) {
   );
 
   return (
-    <SafeAreaView style={[styles.root, { backgroundColor: colors.white }]}>
+    <SafeAreaView style={[styles.root, { backgroundColor: colors.background }]}>
       <TrackScreen category="DelegationFlow" name="Started" />
       <KeyboardView style={styles.keyboardView}>
         <View style={styles.searchContainer}>

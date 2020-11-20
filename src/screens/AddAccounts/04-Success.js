@@ -43,7 +43,7 @@ export default function AddAccountsSuccess({ navigation, route }: Props) {
   const currency = route.params.currency;
 
   return (
-    <View style={[styles.root, { backgroundColor: colors.white }]}>
+    <View style={[styles.root, { backgroundColor: colors.background }]}>
       <TrackScreen
         category="AddAccounts"
         name="Success"

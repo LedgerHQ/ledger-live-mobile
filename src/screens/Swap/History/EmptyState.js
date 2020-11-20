@@ -9,7 +9,7 @@ import LText from "../../../components/LText";
 const EmptyState = () => {
   const { colors } = useTheme();
   return (
-    <View style={[styles.root, { backgroundColor: colors.white }]}>
+    <View style={[styles.root, { backgroundColor: colors.background }]}>
       <LText secondary style={styles.title}>
         <Trans i18nKey="transfer.swap.history.empty.title" />
       </LText>

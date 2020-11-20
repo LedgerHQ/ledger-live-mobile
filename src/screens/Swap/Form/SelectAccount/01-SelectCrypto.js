@@ -133,7 +133,7 @@ export default function SwapFormSelectCrypto({ route, navigation }: Props) {
 
   return (
     <SafeAreaView
-      style={[styles.root, { backgroundColor: colors.white }]}
+      style={[styles.root, { backgroundColor: colors.background }]}
       forceInset={forceInset}
     >
       <TrackScreen category="Swap" name="SelectCrypto" />

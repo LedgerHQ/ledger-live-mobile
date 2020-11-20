@@ -12,6 +12,7 @@ import {
 } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import type { AssetsDistribution } from "@ledgerhq/live-common/lib/types";
+import { useTheme } from "@react-navigation/native";
 import { ScreenName } from "../../const";
 import TrackScreen from "../../analytics/TrackScreen";
 import DistributionCard from "./DistributionCard";
@@ -29,6 +30,7 @@ type Props = {
 };
 
 export default function Distribution({ navigation }: Props) {
+  const { colors } = useTheme();
   const distribution = useDistribution();
 
   const [highlight, setHighlight] = useState(-1);
@@ -58,7 +60,10 @@ export default function Distribution({ navigation }: Props) {
   );
 
   return (
-    <SafeAreaView style={styles.wrapper} forceInset={forceInset}>
+    <SafeAreaView
+      style={[styles.wrapper, { backgroundColor: colors.background }]}
+      forceInset={forceInset}
+    >
       <TrackScreen category="Distribution" />
       <Header
         distribution={distribution}
@@ -86,19 +91,21 @@ export function Header({
   highlight: number,
   onHighlightChange: (index: number) => void,
 }) {
+  const { colors } = useTheme();
   const { t } = useTranslation();
   const counterValueCurrency = useSelector(counterValueCurrencySelector);
   const size = Dimensions.get("window").width / 3;
 
   return (
     <View>
-      <View style={styles.header}>
+      <View style={[styles.header, { backgroundColor: colors.card }]}>
         <View style={[styles.chartWrapper, { height: size }]}>
           <RingChart
             size={size}
             onHighlightChange={onHighlightChange}
             highlight={highlight}
             data={distribution.list}
+            bg={colors.card}
           />
           <View style={styles.assetWrapper} pointerEvents="none">
             <LText semiBold style={[styles.assetCount, styles.assets]}>

@@ -234,7 +234,7 @@ function LendingEnableSelectAccount({ route, navigation }: Props) {
     [],
   );
   return (
-    <SafeAreaView style={[styles.root, { backgroundColor: colors.white }]}>
+    <SafeAreaView style={[styles.root, { backgroundColor: colors.background }]}>
       <TrackScreen
         category="Lend Approve"
         name="Select Account"

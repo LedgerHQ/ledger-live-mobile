@@ -44,7 +44,7 @@ export default function DistributionCard({
     <View
       style={[
         styles.root,
-        { backgroundColor: colors.white, borderColor: colors.white },
+        { backgroundColor: colors.card, borderColor: colors.background },
         highlighting ? { borderColor: color } : {},
       ]}
     >

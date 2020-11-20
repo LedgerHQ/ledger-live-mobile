@@ -8,6 +8,7 @@ import {
   getAccountCurrency,
 } from "@ledgerhq/live-common/lib/account/helpers";
 import { Trans } from "react-i18next";
+import { useTheme } from "@react-navigation/native";
 import LText from "../../../components/LText";
 import CurrencyUnitValue from "../../../components/CurrencyUnitValue";
 import CurrencyIcon from "../../../components/CurrencyIcon";
@@ -31,6 +32,7 @@ export default function ClosedLoansRow({ item }: RowProps) {
     amountSupplied,
   } = item;
   const { token } = account;
+  const { colors } = useTheme();
   const name = getAccountName(parentAccount || account);
   const accountName = getAccountName(account);
   const currency = getAccountCurrency(account);
@@ -95,7 +97,10 @@ export default function ClosedLoansRow({ item }: RowProps) {
 
   return (
     <>
-      <TouchableOpacity style={styles.row} onPress={onOpenDrawer}>
+      <TouchableOpacity
+        style={[styles.row, { backgroundColor: colors.card }]}
+        onPress={onOpenDrawer}
+      >
         <CurrencyIcon radius={100} currency={token} size={32} />
         <View style={styles.currencySection}>
           <LText

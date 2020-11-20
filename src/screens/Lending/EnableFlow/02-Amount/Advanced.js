@@ -117,7 +117,9 @@ export default function EnableAdvanced({ navigation, route }: Props) {
         name="step 1 (Advanced)"
         eventProperties={{ currencyName: currency.name }}
       />
-      <SafeAreaView style={[styles.root, { backgroundColor: colors.white }]}>
+      <SafeAreaView
+        style={[styles.root, { backgroundColor: colors.background }]}
+      >
         <View style={styles.container}>
           <View style={styles.row}>
             <TooltipLabel

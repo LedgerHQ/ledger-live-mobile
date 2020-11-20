@@ -45,8 +45,8 @@ export default function ManagerNavigator() {
         ...stackNavConfig,
         headerStyle: {
           ...styles.header,
-          backgroundColor: colors.white,
-          borderBottomColor: colors.lightFog,
+          backgroundColor: colors.background,
+          borderBottomColor: colors.background,
         },
       }}
     >

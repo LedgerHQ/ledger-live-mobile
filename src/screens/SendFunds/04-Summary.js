@@ -118,7 +118,7 @@ function SendSummary({ navigation, route: initialRoute }: Props) {
 
   return (
     <SafeAreaView
-      style={[styles.root, { backgroundColor: colors.white }]}
+      style={[styles.root, { backgroundColor: colors.background }]}
       forceInset={forceInset}
     >
       <TrackScreen category="SendFunds" name="Summary" />

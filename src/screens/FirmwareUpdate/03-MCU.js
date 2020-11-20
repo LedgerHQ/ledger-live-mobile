@@ -79,7 +79,7 @@ class FirmwareUpdateMCU extends Component<Props, State> {
 
     return (
       <SafeAreaView
-        style={[styles.root, { backgroundColor: colors.white }]}
+        style={[styles.root, { backgroundColor: colors.background }]}
         forceInset={forceInset}
       >
         <TrackScreen category="FirmwareUpdate" name="MCU" />

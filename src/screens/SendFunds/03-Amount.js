@@ -141,7 +141,7 @@ export default function SendAmount({ navigation, route }: Props) {
     <>
       <TrackScreen category="SendFunds" name="Amount" />
       <SafeAreaView
-        style={[styles.root, { backgroundColor: colors.white }]}
+        style={[styles.root, { backgroundColor: colors.background }]}
         forceInset={forceInset}
       >
         <KeyboardView style={styles.container}>

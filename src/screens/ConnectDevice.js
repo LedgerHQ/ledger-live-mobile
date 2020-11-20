@@ -70,7 +70,9 @@ export default function ConnectDevice({ route }: Props) {
   return useMemo(
     () =>
       transaction ? (
-        <SafeAreaView style={[styles.root, { backgroundColor: colors.white }]}>
+        <SafeAreaView
+          style={[styles.root, { backgroundColor: colors.background }]}
+        >
           <TrackScreen
             category={route.name.replace("ConnectDevice", "")}
             name="ConnectDevice"

@@ -66,7 +66,7 @@ export default function AddAccountsSelectDevice({ navigation, route }: Props) {
       style={[
         styles.root,
         {
-          backgroundColor: colors.white,
+          backgroundColor: colors.background,
         },
       ]}
       forceInset={forceInset}

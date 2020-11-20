@@ -298,7 +298,9 @@ class AddAccountsAccounts extends PureComponent<Props, State> {
     const supportLink = sections.map(s => s.supportLink).find(Boolean);
 
     return (
-      <SafeAreaView style={[styles.root, { backgroundColor: colors.white }]}>
+      <SafeAreaView
+        style={[styles.root, { backgroundColor: colors.background }]}
+      >
         <TrackScreen
           category="AddAccounts"
           name="Accounts"

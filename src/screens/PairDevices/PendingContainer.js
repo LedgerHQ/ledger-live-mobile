@@ -11,7 +11,7 @@ export const PendingSpinner = () => {
   const { colors } = useTheme();
   return (
     <Spinning>
-      <LiveLogo color={colors.fog} size={32} />
+      <LiveLogo color={colors.grey} size={32} />
     </Spinning>
   );
 };

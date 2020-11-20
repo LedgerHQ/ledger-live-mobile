@@ -25,7 +25,7 @@ function VoteStarted({ navigation, route }: Props) {
   }, [navigation]);
 
   return (
-    <SafeAreaView style={[styles.root, { backgroundColor: colors.white }]}>
+    <SafeAreaView style={[styles.root, { backgroundColor: colors.background }]}>
       <View style={styles.main}>
         <IlluVotes />
 

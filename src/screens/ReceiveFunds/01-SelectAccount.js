@@ -105,7 +105,7 @@ export default function ReceiveFunds({ navigation, route }: Props) {
         </View>
       );
     },
-    [navigation],
+    [colors.fog, navigation],
   );
 
   const renderList = useCallback(
@@ -130,7 +130,7 @@ export default function ReceiveFunds({ navigation, route }: Props) {
       style={[
         styles.root,
         {
-          backgroundColor: colors.white,
+          backgroundColor: colors.background,
         },
       ]}
       forceInset={forceInset}

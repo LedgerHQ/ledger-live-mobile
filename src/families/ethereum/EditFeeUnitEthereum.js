@@ -120,7 +120,7 @@ export default function EditFeeUnitEthereum({
 
   return (
     <View style={styles.root}>
-      <View style={styles.sliderContainer}>
+      <View style={[styles.sliderContainer, { backgroundColor: colors.card }]}>
         <SettingsRow
           title={t("send.fees.chooseGas")}
           desc={t("send.fees.higherFaster")}
@@ -184,7 +184,7 @@ const styles = StyleSheet.create({
   },
   sliderContainer: {
     flex: 1,
-    backgroundColor: "white",
+
     minHeight: 200,
   },
   container: {

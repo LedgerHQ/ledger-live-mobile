@@ -20,6 +20,7 @@ import CurrencyUnitValue from "../CurrencyUnitValue";
 import { accountsSelector } from "../../reducers/accounts";
 import LText from "../LText";
 import ParentCurrencyIcon from "../ParentCurrencyIcon";
+import { ensureContrast } from "../../colors";
 
 export type AccountDistributionItem = {
   account: AccountLike,
@@ -53,7 +54,7 @@ export default function Row({
     account.type !== "Account"
       ? accounts.find(a => a.id === account.parentId)
       : null;
-  const color = getCurrencyColor(currency);
+  const color = ensureContrast(getCurrencyColor(currency), colors.background);
   const percentage = Math.round(distribution * 1e4) / 1e2;
   const icon = <ParentCurrencyIcon currency={currency} size={18} />;
 
@@ -62,7 +63,7 @@ export default function Row({
       style={[
         styles.card,
         {
-          backgroundColor: colors.white,
+          backgroundColor: colors.card,
           ...Platform.select({
             android: {},
             ios: {

@@ -117,7 +117,7 @@ const History = () => {
   };
 
   return (
-    <View style={[styles.root, { backgroundColor: colors.white }]}>
+    <View style={[styles.root, { backgroundColor: colors.background }]}>
       <TrackScreen category="Swap" name="History" />
       <AnimatedSectionList
         ref={ref}

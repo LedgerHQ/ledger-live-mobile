@@ -79,7 +79,7 @@ export default function DelegationStarted({ navigation, route }: Props) {
     Object.values(status.warnings)[0];
 
   return (
-    <SafeAreaView style={[styles.root, { backgroundColor: colors.white }]}>
+    <SafeAreaView style={[styles.root, { backgroundColor: colors.background }]}>
       <NavigationScrollView
         style={styles.scroll}
         contentContainerStyle={styles.scrollContainer}

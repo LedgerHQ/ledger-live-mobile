@@ -17,7 +17,7 @@ const Connect = ({ setResult }: { setResult: (result: any) => void }) => {
   const [device, setDevice] = useState(null);
   const { colors } = useTheme();
   return (
-    <View style={[styles.root, { backgroundColor: colors.white }]}>
+    <View style={[styles.root, { backgroundColor: colors.background }]}>
       <TrackScreen category="Swap" name="ConnectDeviceListApps" />
       <LText semiBold style={styles.selectDevice}>
         <Trans i18nKey={"transfer.swap.selectDevice"} />

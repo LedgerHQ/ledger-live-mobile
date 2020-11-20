@@ -195,7 +195,7 @@ const AppsScreen = ({
                   style={[
                     styles.searchBarContainer,
                     {
-                      backgroundColor: colors.white,
+                      backgroundColor: colors.card,
                       borderColor: colors.lightFog,
                     },
                   ]}
@@ -254,7 +254,7 @@ const AppsScreen = ({
         </LText>
         {route.key === managerTabs.INSTALLED_APPS && update.length > 0 && (
           <View style={[styles.updateBadge, { backgroundColor: colors.live }]}>
-            <LText bold style={styles.updateBadgeText} color="white">
+            <LText bold style={styles.updateBadgeText}>
               {update.length}
             </LText>
           </View>
@@ -273,12 +273,12 @@ const AppsScreen = ({
       blockNavigation={blockNavigation}
       deviceInfo={deviceInfo}
     />,
-    <View style={{ backgroundColor: colors.white }}>
+    <View>
       <TabBar
         position={position}
         navigationState={{ index, routes }}
         jumpTo={jumpTo}
-        style={[styles.tabBarStyle, { backgroundColor: colors.card }]}
+        style={[styles.tabBarStyle, { backgroundColor: colors.background }]}
         indicatorStyle={[
           styles.indicatorStyle,
           { backgroundColor: colors.live },
@@ -290,14 +290,14 @@ const AppsScreen = ({
         contentContainerStyle={styles.contentContainerStyle}
         renderLabel={renderLabel}
       />
-      <View style={[styles.searchBar, { backgroundColor: colors.white }]}>
+      <View style={[styles.searchBar, { backgroundColor: colors.card }]}>
         <Animated.View
           style={[
             styles.searchBarContainer,
             {
               opacity: searchOpacity,
               zIndex: index === 0 ? 2 : -1,
-              backgroundColor: colors.white,
+              backgroundColor: colors.card,
               borderColor: colors.lightFog,
             },
           ]}
@@ -315,7 +315,7 @@ const AppsScreen = ({
             style={[
               styles.filterButton,
               {
-                backgroundColor: colors.white,
+                backgroundColor: colors.card,
                 borderColor: colors.lightFog,
               },
             ]}
@@ -369,7 +369,7 @@ const AppsScreen = ({
   ];
 
   return (
-    <SafeAreaView style={styles.root}>
+    <SafeAreaView style={[styles.root, { backgroundColor: colors.background }]}>
       <FlatList
         ref={listRef}
         onScroll={onScroll}
@@ -467,6 +467,7 @@ const styles = StyleSheet.create({
   updateBadgeText: {
     fontSize: 10,
     textAlign: "center",
+    color: "#fff",
   },
   contentContainerStyle: {
     marginTop: 16,
