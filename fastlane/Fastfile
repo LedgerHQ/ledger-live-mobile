@@ -19,7 +19,7 @@ package = load_json(json_path: "./package.json")
 lane :beta do |options|
   ensure_git_status_clean
   ensure_git_branch(
-    branch: 'develop'
+    branch: 'hotfixes/2.17.x'
   )
 
   release = options.fetch(:release, false)
