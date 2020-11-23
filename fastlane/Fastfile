@@ -104,7 +104,7 @@ platform :ios do
         export_options: {
           method: method,
           provisioningProfiles: {
-            "com.ledger.live": "ledger live"
+            "com.ledger.live": "match AppStore com.ledger.live"
           }
         }
       )
