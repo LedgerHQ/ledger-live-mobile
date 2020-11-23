@@ -7,6 +7,7 @@ import colors, { rgba } from "../../../colors";
 import BottomModal from "../../../components/BottomModal";
 import LText from "../../../components/LText";
 import Button from "../../../components/Button";
+import TrackScreen from "../../../analytics/TrackScreen";
 
 type button = {
   title: string,
@@ -50,6 +51,9 @@ class ConfirmationModal extends PureComponent<Props> {
         style={styles.confirmationModal}
         {...rest}
       >
+        {isOpened ? (
+          <TrackScreen category="LendingNoTokenAccountInfoModal" />
+        ) : null}
         {Icon && (
           <View style={styles.icon}>
             <Icon size={24} />
