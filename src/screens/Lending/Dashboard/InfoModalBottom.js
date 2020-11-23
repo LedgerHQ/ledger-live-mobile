@@ -11,7 +11,7 @@ import TrackScreen from "../../../analytics/TrackScreen";
 
 type button = {
   title: string,
-  onPress: function,
+  onPress: Function,
 };
 
 type Props = {

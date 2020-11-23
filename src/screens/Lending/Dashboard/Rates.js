@@ -25,7 +25,7 @@ const Row = ({
 }: {
   data: CurrentRate,
   accounts: AccountLikeArray,
-  onPress: function,
+  onPress: Function,
 }) => {
   const { token, supplyAPY } = data;
 
