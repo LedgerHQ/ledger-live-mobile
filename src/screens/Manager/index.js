@@ -85,11 +85,13 @@ class ChooseDevice extends Component<
   {
     showMenu: boolean,
     device?: Device,
+    result?: Object,
   },
 > {
   state = {
     showMenu: false,
     device: undefined,
+    result: undefined,
   };
 
   chosenDevice: Device;
@@ -112,15 +114,16 @@ class ChooseDevice extends Component<
   };
 
   onSelect = (result: Object) => {
-    this.setState(
-      { device: undefined },
-      () =>
-        result.result &&
-        this.props.navigation.navigate(ScreenName.ManagerMain, {
-          ...result,
-          ...this.props.route.params,
-        }),
-    );
+    this.setState({ device: undefined, result });
+  };
+
+  onModalHide = () => {
+    const { result } = this.state;
+    result?.result &&
+      this.props.navigation.navigate(ScreenName.ManagerMain, {
+        ...result,
+        ...this.props.route.params,
+      });
   };
 
   onStepEntered = (i: number, meta: Object) => {
@@ -166,6 +169,7 @@ class ChooseDevice extends Component<
           <Trans i18nKey="manager.connect" />
         </LText>
         <SelectDevice
+          autoSelectOnAdd
           onSelect={this.onSelectDevice}
           onStepEntered={this.onStepEntered}
           onBluetoothDeviceAction={this.onShowMenu}
@@ -174,6 +178,7 @@ class ChooseDevice extends Component<
           onClose={this.onSelectDevice}
           device={device}
           onResult={this.onSelect}
+          onModalHide={this.onModalHide}
           action={action}
           request={null}
         />

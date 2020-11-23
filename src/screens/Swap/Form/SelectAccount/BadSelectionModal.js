@@ -37,6 +37,7 @@ const BadSelectionModal = ({
             updateModalOpened: true,
           }
         : {
+            tab: MANAGER_TABS.CATALOG,
             searchQuery: currency
               ? currency.type === "TokenCurrency"
                 ? currency?.parentCurrency?.managerAppName
