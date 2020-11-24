@@ -6,7 +6,7 @@ import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import { getSupplyMax } from "@ledgerhq/live-common/lib/families/ethereum/modules/compound";
 import { Trans } from "react-i18next";
-import { getAccountCapabilities } from "@ledgerhq/live-common/lib/compound/logic";
+import { getAccountCapabilities, makeCompoundSummaryForAccount } from "@ledgerhq/live-common/lib/compound/logic";
 
 import { useSelector } from "react-redux";
 import { useLocale } from "../../context/Locale";
@@ -17,9 +17,10 @@ import { discreetModeSelector } from "../../reducers/settings";
 
 type Props = {
   account: AccountLike,
+  parentAccount: AccountLike,
 };
 
-export default function LendingBanners({ account }: Props) {
+export default function LendingBanners({ account, parentAccount }: Props) {
   const { locale } = useLocale();
   const discreet = useSelector(discreetModeSelector);
   const unit = getAccountUnit(account);
@@ -29,6 +30,9 @@ export default function LendingBanners({ account }: Props) {
   const compoundCapabilities = availableOnCompound
     ? getAccountCapabilities(account)
     : {};
+  const compoundSummary =
+    availableOnCompound &&
+    makeCompoundSummaryForAccount(account, parentAccount);
 
   let lendingInfoBanner = null;
 
@@ -83,13 +87,14 @@ export default function LendingBanners({ account }: Props) {
   let lendingWarningBanner = null;
 
   if (availableOnCompound) {
+    const enabledAmount = account.spendableBalance.min(getSupplyMax(account));
     const lendingWarningBannerContent =
       compoundCapabilities.status === "ENABLING" ? (
         <Trans i18nKey="transfer.lending.banners.approving" />
       ) : !!compoundCapabilities.status &&
         !compoundCapabilities.canSupplyMax &&
-        getSupplyMax(account).eq(0) &&
-        account.spendableBalance.gt(0) ? (
+        enabledAmount.gt(0) &&
+        enabledAmount.lte(compoundSummary.totalSupplied) ? (
         <Trans i18nKey="transfer.lending.banners.notEnough" />
       ) : null;
 

@@ -111,7 +111,7 @@ export default function AccountActions({ account, parentAccount }: Props) {
             containerStyle={styles.modal}
           >
             {displayedActions === "lending" && (
-              <LendingBanners account={account} />
+              <LendingBanners account={account} parentAccount={parentAccount} />
             )}
             {!!displayedActions &&
               actions[displayedActions].map((a, i) => (
