@@ -6,7 +6,10 @@ import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import { getSupplyMax } from "@ledgerhq/live-common/lib/families/ethereum/modules/compound";
 import { Trans } from "react-i18next";
-import { getAccountCapabilities, makeCompoundSummaryForAccount } from "@ledgerhq/live-common/lib/compound/logic";
+import {
+  getAccountCapabilities,
+  makeCompoundSummaryForAccount,
+} from "@ledgerhq/live-common/lib/compound/logic";
 
 import { useSelector } from "react-redux";
 import { useLocale } from "../../context/Locale";
