@@ -23,10 +23,10 @@ type Props = {
 };
 
 const iconByFamily = {
-  httpdebug: () => (
-    <Icon style={styles.specialIcon} name="terminal" size={16} />
+  httpdebug: ({ color }: { color: string }) => (
+    <Icon style={styles.specialIcon} color={color} name="terminal" size={16} />
   ),
-  usb: () => <USB />,
+  usb: ({ color }: { color: string }) => <USB color={color} />,
 };
 
 function DeviceItem({
