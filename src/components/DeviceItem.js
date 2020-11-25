@@ -100,7 +100,7 @@ function DeviceItem({
                 event="DeviceItemForget"
                 onPress={() => onBluetoothDeviceAction(deviceMeta)}
               >
-                <Ellipsis />
+                <Ellipsis color={colors.darkBlue} />
               </Touchable>
             )}
             {withArrow && !disabled ? (
