@@ -34,7 +34,7 @@ export default {
   yellow: "#ffd24a",
 
   /* DERIVATIVES */
-  lightLive: "#4b84ff19",
+  lightLive: "#eff4fe",
   lightAlert: "#ea2e490c",
   lightFog: "#EEEEEE",
   lightGrey: "#F9F9F9",

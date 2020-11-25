@@ -220,7 +220,7 @@ export const ScreenName = {
   OnboardingLanguage: "OnboardingLanguage",
   OnboardingTermsOfUse: "OnboardingTermsOfUse",
   OnboardingDeviceSelection: "OnboardingDeviceSelection",
-  OnboardingUseCaseSelection: "OnboardingUseCaseSelection",
+  OnboardingUseCase: "OnboardingUseCase",
 
   OnboardingSetNewDeviceInfo: "OnboardingSetNewDeviceInfo",
   OnboardingSetNewDeviceStart: "OnboardingSetNewDeviceStart",

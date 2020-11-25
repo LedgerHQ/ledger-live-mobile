@@ -7,14 +7,12 @@ import PasswordAddFlowNavigator from "./PasswordAddFlowNavigator";
 import OnboardingWelcome from "../../screens/Onboarding/steps/welcome";
 import OnboardingLanguage from "../../screens/Onboarding/steps/language";
 import OnboardingTerms from "../../screens/Onboarding/steps/terms";
+import OnboardingDeviceSelection from "../../screens/Onboarding/steps/deviceSelection";
+import OnboardingUseCase from "../../screens/Onboarding/steps/useCaseSelection";
+import OnboardingNewDeviceInfo from "../../screens/Onboarding/steps/newDeviceInfo";
 
 import { closableNavigationOptions } from "../../navigation/navigatorConfig";
 import styles from "../../navigation/styles";
-
-/** OnboardingLanguage: "OnboardingLanguage",
-  OnboardingTermsOfUse: "OnboardingTermsOfUse",
-  OnboardingDeviceSelection: "OnboardingDeviceSelection",
-  OnboardingUseCaseSelection: "OnboardingUseCaseSelection", */
 
 export default function OnboardingNavigator() {
   return (
@@ -30,28 +28,25 @@ export default function OnboardingNavigator() {
           headerShown: true,
           ...closableNavigationOptions,
           title: null,
-          headerLeft: null,
+          headerRight: null,
           headerStyle: styles.headerNoShadow,
         }}
       />
       <Stack.Screen
         name={ScreenName.OnboardingTermsOfUse}
         component={OnboardingTerms}
-        options={{
-          headerShown: true,
-          ...closableNavigationOptions,
-          title: null,
-          headerRight: null,
-          headerStyle: styles.headerNoShadow,
-        }}
       />
       <Stack.Screen
         name={ScreenName.OnboardingDeviceSelection}
-        component={OnboardingWelcome}
+        component={OnboardingDeviceSelection}
       />
       <Stack.Screen
-        name={ScreenName.OnboardingUseCaseSelection}
-        component={OnboardingWelcome}
+        name={ScreenName.OnboardingUseCase}
+        component={OnboardingUseCase}
+      />
+      <Stack.Screen
+        name={ScreenName.OnboardingSetNewDeviceInfo}
+        component={OnboardingNewDeviceInfo}
       />
 
       <Stack.Screen

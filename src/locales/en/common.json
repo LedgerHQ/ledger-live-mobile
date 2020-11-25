@@ -690,6 +690,66 @@
       "zh": "Chinese",
       "ru": "Russian"
     },
+    "stepSelectDevice": {
+      "title": "What’s your device?",
+      "nanoS": "Nano S",
+      "nanoX": "Nano X",
+      "blue": "Blue"
+    },
+    "stepUseCase": {
+      "title": "Hello!",
+      "or": "Or",
+      "firstUse": {
+        "title": "First time using this Nano?",
+        "label": "First use",
+        "subTitle": "Initialize a new Nano",
+        "desc": "Let’s start and set up your device!"
+      },
+      "devicePairing": {
+        "title": "Already have a recovery phrase?",
+        "label": "Device pairing",
+        "subTitle": "Connect your Nano",
+        "desc": "Your device is already set-up? Connect it to your app!"
+      },
+      "desktopSync": {
+        "label": "Desktop sync",
+        "subTitle": "Sync cryptos from your desktop app",
+        "desc": "Already got the desktop app? Sync it to manage your cryptos from your smartphone!"
+      },
+      "restoreDevice": {
+        "label": "Restore device",
+        "subTitle": "Import your recovery phrase in a new device",
+        "desc": "Use an already-existing recovery phrase to import your private keys in a new Nano!"
+      }
+    },
+    "stepNewDevice": {
+      "cta": "Let’s do this!",
+      "0": {
+        "label": "Basics",
+        "title": "Access your coins",
+        "desc": "Your coins are stored on the blockchain. You need a private key to access them and manage them."
+      },
+      "1": {
+        "label": "Basics",
+        "title": "Own your private key",
+        "desc": "Your private key is stored within your Nano and you must be the only one to own it for safety purposes."
+      },
+      "2": {
+        "label": "Basics",
+        "title": "Stay offline",
+        "desc": "Your Nano works as a cold storage hardware wallet, it means that your private key is never exposed online, even when using your app."
+      },
+      "3": {
+        "label": "Basics",
+        "title": "Validate transactions",
+        "desc": "Ledger app allows you to buy, sell, manage, exchange and earn cryptos while securing your coins. Every transaction on your cryptos will be validated with your Nano."
+      },
+      "4": {
+        "label": "Basics",
+        "title": "Let’s set up your Nano Wallet",
+        "desc": "Before using your Nano, let’s set up your Nano security."
+      }
+    },
     "stepGetStarted": {
       "title": "Get started",
       "import": "Import desktop accounts",

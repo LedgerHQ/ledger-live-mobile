@@ -51,7 +51,6 @@ type LocaleState = {
 };
 
 function getLocaleState(i18n): LocaleState {
-  console.log(i18n);
   return {
     i18n,
     t: i18n.getFixedT(),
