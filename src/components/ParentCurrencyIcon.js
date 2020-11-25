@@ -23,8 +23,8 @@ function ParentCurrencyIcon({ currency, size }: Props) {
           style={[
             styles.tokenIconWrapper,
             {
-              borderColor: colors.white,
-              backgroundColor: colors.white,
+              borderColor: colors.card,
+              backgroundColor: colors.card,
             },
           ]}
         >

@@ -190,12 +190,6 @@ const styles = StyleSheet.create({
     fontSize: 27,
   },
 
-  assets: {
-    textShadowColor: "#666",
-    textShadowOffset: { width: 0, height: 0 },
-    textShadowRadius: 3,
-  },
-
   label: {
     fontSize: 14,
   },
