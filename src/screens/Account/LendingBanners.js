@@ -33,9 +33,9 @@ export default function LendingBanners({ account, parentAccount }: Props) {
   const compoundCapabilities = availableOnCompound
     ? getAccountCapabilities(account)
     : {};
-  const compoundSummary =
-    availableOnCompound &&
-    makeCompoundSummaryForAccount(account, parentAccount);
+  const compoundSummary = availableOnCompound
+    ? makeCompoundSummaryForAccount(account, parentAccount)
+    : null;
 
   let lendingInfoBanner = null;
 
