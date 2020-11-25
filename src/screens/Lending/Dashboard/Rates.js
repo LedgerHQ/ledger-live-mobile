@@ -91,7 +91,10 @@ const Rates = ({
     token => {
       navigation.navigate(NavigatorName.ExchangeBuyFlow, {
         screen: ScreenName.ExchangeSelectAccount,
-        params: { currency: token },
+        params: {
+          currency: token,
+          mode: "buy",
+        },
       });
     },
     [navigation],
