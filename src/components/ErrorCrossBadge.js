@@ -12,9 +12,9 @@ type Props = {
 function ErrorCrossBadge({ style }: Props) {
   const { colors } = useTheme();
   return (
-    <View style={[styles.outer, { backgroundColor: colors.white }, style]}>
+    <View style={[styles.outer, { backgroundColor: colors.card }, style]}>
       <View style={[styles.inner, { backgroundColor: colors.alert }]}>
-        <Close size={14} color={colors.white} />
+        <Close size={14} color="white" />
       </View>
     </View>
   );

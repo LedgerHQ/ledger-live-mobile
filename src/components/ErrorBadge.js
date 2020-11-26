@@ -12,9 +12,9 @@ type Props = {
 function ErrorBadge({ style }: Props) {
   const { colors } = useTheme();
   return (
-    <View style={[styles.outer, { backgroundColor: colors.white }, style]}>
+    <View style={[styles.outer, { backgroundColor: colors.card }, style]}>
       <View style={[styles.inner, { backgroundColor: colors.alert }]}>
-        <Alert size={16} color={colors.white} />
+        <Alert size={16} color={"white"} />
       </View>
     </View>
   );

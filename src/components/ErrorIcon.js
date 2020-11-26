@@ -50,7 +50,7 @@ export default function ErrorIcon({ error }: Props) {
     error instanceof WrongDeviceForAccount
   ) {
     return (
-      <Rounded bg={lighten(colors.alert, 0.75)}>
+      <Rounded bg={rgba(colors.alert, 0.15)}>
         <IconNanoX color={colors.alert} height={36} width={8} />
         <ErrorBadge style={styles.badge} />
       </Rounded>
