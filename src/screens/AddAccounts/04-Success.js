@@ -93,14 +93,22 @@ function CurrencySuccess({ currency }: CurrencySuccessProps) {
     >
       <View
         style={[
-          styles.successBadge,
+          styles.outer,
           {
-            backgroundColor: colors.green,
-            borderColor: colors.white,
+            backgroundColor: colors.background,
           },
         ]}
       >
-        <IconCheck size={16} color={colors.white} />
+        <View
+          style={[
+            styles.inner,
+            {
+              backgroundColor: colors.green,
+            },
+          ]}
+        >
+          <IconCheck size={16} color="white" />
+        </View>
       </View>
       <CurrencyIcon currency={currency} size={32} />
     </View>
@@ -118,19 +126,26 @@ const styles = StyleSheet.create({
   currencySuccess: {
     width: 80,
     height: 80,
-    backgroundColor: "red",
     borderRadius: 40,
     alignItems: "center",
     justifyContent: "center",
   },
-  successBadge: {
+  outer: {
     position: "absolute",
     top: -5,
     right: -5,
-    width: 24 + 10,
-    height: 24 + 10,
-    borderRadius: (24 + 10) / 2,
-    borderWidth: 3,
+    width: 34,
+    height: 34,
+    borderRadius: 100,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  inner: {
+    width: 26,
+    height: 26,
+    borderRadius: 100,
+    flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
   },
