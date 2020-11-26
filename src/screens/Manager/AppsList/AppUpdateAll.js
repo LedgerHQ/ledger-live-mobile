@@ -14,12 +14,18 @@ type Props = {
   state: State,
   appsToUpdate: App[],
   dispatch: Action => void,
+  isModalOpened?: boolean,
 };
 
-const AppUpdateAll = ({ state, appsToUpdate, dispatch }: Props) => {
+const AppUpdateAll = ({
+  state,
+  appsToUpdate,
+  dispatch,
+  isModalOpened,
+}: Props) => {
   const { colors } = useTheme();
   const { updateAllQueue } = state;
-  const [modalOpen, setModalOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(isModalOpened);
 
   const openModal = useCallback(() => setModalOpen(true), [setModalOpen]);
   const closeModal = useCallback(() => setModalOpen(false), [setModalOpen]);

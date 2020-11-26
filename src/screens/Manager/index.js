@@ -12,6 +12,7 @@ import connectManager from "@ledgerhq/live-common/lib/hw/connectManager";
 import { createAction } from "@ledgerhq/live-common/lib/hw/actions/manager";
 import { removeKnownDevice } from "../../actions/ble";
 import { ScreenName } from "../../const";
+import type { ManagerTab } from "./Manager";
 import SelectDevice from "../../components/SelectDevice";
 import TrackScreen from "../../analytics/TrackScreen";
 import { track } from "../../analytics";
@@ -60,6 +61,7 @@ const RemoveDeviceModal = ({
 
 type RouteParams = {
   searchQuery?: string,
+  tab?: ManagerTab,
 };
 
 type Props = {
@@ -82,11 +84,13 @@ class ChooseDevice extends Component<
   {
     showMenu: boolean,
     device?: Device,
+    result?: Object,
   },
 > {
   state = {
     showMenu: false,
     device: undefined,
+    result: undefined,
   };
 
   chosenDevice: Device;
@@ -109,15 +113,16 @@ class ChooseDevice extends Component<
   };
 
   onSelect = (result: Object) => {
-    this.setState(
-      { device: undefined },
-      () =>
-        result.result &&
-        this.props.navigation.navigate(ScreenName.ManagerMain, {
-          ...result,
-          ...this.props.route.params,
-        }),
-    );
+    this.setState({ device: undefined, result });
+  };
+
+  onModalHide = () => {
+    const { result } = this.state;
+    result?.result &&
+      this.props.navigation.navigate(ScreenName.ManagerMain, {
+        ...result,
+        ...this.props.route.params,
+      });
   };
 
   onStepEntered = (i: number, meta: Object) => {
@@ -163,6 +168,7 @@ class ChooseDevice extends Component<
           <Trans i18nKey="manager.connect" />
         </LText>
         <SelectDevice
+          autoSelectOnAdd
           onSelect={this.onSelectDevice}
           onStepEntered={this.onStepEntered}
           onBluetoothDeviceAction={this.onShowMenu}
@@ -171,6 +177,7 @@ class ChooseDevice extends Component<
           onClose={this.onSelectDevice}
           device={device}
           onResult={this.onSelect}
+          onModalHide={this.onModalHide}
           action={action}
           request={null}
         />
