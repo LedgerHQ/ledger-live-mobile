@@ -222,7 +222,7 @@ const ProviderCommon = ({
     };
 
     init();
-  }, [initDone]);
+  }, [initDone, getWCSession]);
 
   const account = useAccount(session.accountId);
   useEffect(() => {
@@ -243,7 +243,7 @@ const ProviderCommon = ({
       return;
     }
     saveWCSession(session);
-  }, [session, initDone]);
+  }, [session, initDone, saveWCSession]);
 
   useEffect(() => {
     if (!session.session) {
