@@ -22,11 +22,13 @@ const ProviderCommon = ({
   useAccount,
   onMessage,
   onSessionRestarted,
+  isReady,
 }: {
   children: React$Node,
   useAccount: Function,
   onMessage: Function,
   onSessionRestarted: Function,
+  isReady: Boolean,
 }) => {
   const [session, setSession] = useState({});
   const [socketReady, setSocketReady] = useState(false);
@@ -224,7 +226,7 @@ const ProviderCommon = ({
       account &&
       session.session &&
       status === STATUS.DISCONNECTED &&
-      navigationRef.current
+      isReady
     ) {
       connect({ account });
 
@@ -327,6 +329,7 @@ const Provider = ({ children }: { children: React$Node }) => {
         });
       }}
       useAccount={useAccount}
+      isReady={!!navigationRef.current}
     >
       {children}
     </ProviderCommon>
