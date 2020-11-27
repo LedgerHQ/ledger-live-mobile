@@ -17,8 +17,19 @@ export const STATUS = {
   CONNECTED: 0x03,
 };
 
-const Provider = ({ children }: { children: React$Node }) => {
+const ProviderCommon = ({
+  children,
+  useAccount,
+  onMessage,
+  onSessionRestarted,
+}: {
+  children: React$Node,
+  useAccount: Function,
+  onMessage: Function,
+  onSessionRestarted: Function,
+}) => {
   const [session, setSession] = useState({});
+  const [socketReady, setSocketReady] = useState(false);
   const [connector, setConnector] = useState();
   const [status, setStatus] = useState(STATUS.DISCONNECTED);
   const [error, setError] = useState();
@@ -134,27 +145,10 @@ const Provider = ({ children }: { children: React$Node }) => {
         });
       }
 
-      if (
-        wcCallRequest.type === "transaction" &&
-        wcCallRequest.method === "send"
-      ) {
+      const handler = onMessage(wcCallRequest, account);
+      if (handler) {
         setCurrentCallRequestId(payload.id);
-        navigate(NavigatorName.SendFunds, {
-          screen: ScreenName.SendSummary,
-          params: {
-            transaction: wcCallRequest.data,
-            accountId: account.id,
-          },
-        });
-      } else if (wcCallRequest.type === "message") {
-        setCurrentCallRequestId(payload.id);
-        navigate(NavigatorName.SignMessage, {
-          screen: ScreenName.SignSummary,
-          params: {
-            message: wcCallRequest.data,
-            accountId: account.id,
-          },
-        });
+        handler();
       } else {
         connector.rejectRequest({
           id: payload.id,
@@ -224,11 +218,7 @@ const Provider = ({ children }: { children: React$Node }) => {
     init();
   }, [initDone]);
 
-  const { account } = useSelector(
-    accountScreenSelector({
-      params: { accountId: session.accountId },
-    }),
-  );
+  const account = useAccount(session.accountId);
   useEffect(() => {
     if (
       account &&
@@ -238,12 +228,7 @@ const Provider = ({ children }: { children: React$Node }) => {
     ) {
       connect({ account });
 
-      navigate(NavigatorName.Base, {
-        screen: ScreenName.WalletConnectConnect,
-        params: {
-          accountId: account.id,
-        },
-      });
+      onSessionRestarted(account);
     }
   });
 
@@ -253,6 +238,23 @@ const Provider = ({ children }: { children: React$Node }) => {
     }
     saveWCSession(session);
   }, [session, initDone]);
+
+  useEffect(() => {
+    if (!session) {
+      setSocketReady(false);
+      return;
+    }
+
+    const interval = setInterval(() => {
+      // eslint-disable-next-line no-underscore-dangle
+      setSocketReady(connector?._transport?._socket?.readyState === 1);
+    }, 1000);
+
+    // eslint-disable-next-line consistent-return
+    return () => {
+      clearInterval(interval);
+    };
+  }, [session, connector]);
 
   return (
     <context.Provider
@@ -268,12 +270,66 @@ const Provider = ({ children }: { children: React$Node }) => {
         approveSession: approveSession && approveSession.fn,
         initDone,
         hasSession: Object.keys(session).length > 0,
-        // eslint-disable-next-line no-underscore-dangle
-        socketReady: connector?._transport?._socket?.readyState === 1,
+        socketReady,
       }}
     >
       {children}
     </context.Provider>
+  );
+};
+
+const useAccount = accountId => {
+  const { account } = useSelector(
+    accountScreenSelector({
+      params: { accountId },
+    }),
+  );
+  return account;
+};
+
+const Provider = ({ children }: { children: React$Node }) => {
+  return (
+    <ProviderCommon
+      onMessage={(wcCallRequest, account) => {
+        if (
+          wcCallRequest.type === "transaction" &&
+          wcCallRequest.method === "send"
+        ) {
+          return () =>
+            navigate(NavigatorName.SendFunds, {
+              screen: ScreenName.SendSummary,
+              params: {
+                transaction: wcCallRequest.data,
+                accountId: account.id,
+              },
+            });
+        }
+
+        if (wcCallRequest.type === "message") {
+          return () =>
+            navigate(NavigatorName.SignMessage, {
+              screen: ScreenName.SignSummary,
+              params: {
+                message: wcCallRequest.data,
+                accountId: account.id,
+              },
+            });
+        }
+
+        return false;
+      }}
+      onSessionRestarted={account => {
+        navigate(NavigatorName.Base, {
+          screen: ScreenName.WalletConnectConnect,
+          params: {
+            accountId: account.id,
+          },
+        });
+      }}
+      useAccount={useAccount}
+    >
+      {children}
+    </ProviderCommon>
   );
 };
 
