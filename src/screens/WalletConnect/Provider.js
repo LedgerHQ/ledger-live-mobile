@@ -23,12 +23,16 @@ const ProviderCommon = ({
   onMessage,
   onSessionRestarted,
   isReady,
+  saveWCSession,
+  getWCSession,
 }: {
   children: React$Node,
   useAccount: Function,
   onMessage: Function,
   onSessionRestarted: Function,
   isReady: Boolean,
+  saveWCSession: Function,
+  getWCSession: Function,
 }) => {
   const [session, setSession] = useState({});
   const [socketReady, setSocketReady] = useState(false);
@@ -330,6 +334,8 @@ const Provider = ({ children }: { children: React$Node }) => {
       }}
       useAccount={useAccount}
       isReady={!!navigationRef.current}
+      saveWCSession={saveWCSession}
+      getWCSession={getWCSession}
     >
       {children}
     </ProviderCommon>
