@@ -20,10 +20,14 @@ type State = {};
 class ScanWalletConnect extends PureComponent<Props, State> {
   componentDidMount() {
     if (Config.MOCK_SCAN_WALLETCONNECT) {
-      setTimeout(async () => {
+      this.mockTO = setTimeout(async () => {
         this.onResult(await Clipboard.getString());
       }, 2000);
     }
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.mockTO);
   }
 
   onResult = (uri: string) => {

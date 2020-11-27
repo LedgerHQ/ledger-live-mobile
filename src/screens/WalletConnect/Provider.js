@@ -46,12 +46,12 @@ const Provider = ({ children }: { children: React$Node }) => {
               uri,
               // Required
               clientMeta: {
-                description: "LedgerLive CLI",
+                description: "LedgerLive",
                 url: "https://ledger.fr",
                 icons: [
-                  "https://avatars0.githubusercontent.com/u/9784193?s=400&v=4",
+                  "https://play-lh.googleusercontent.com/RVKjd96rcTjiAnr45Gy6Nj2kCJ4_opdU2mrop7KftfyRhPWJf5ukvUR_Gi9AtOA920I",
                 ],
-                name: "LedgerLive CLI",
+                name: "LedgerLive",
               },
             },
       );
