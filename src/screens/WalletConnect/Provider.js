@@ -240,7 +240,7 @@ const ProviderCommon = ({
   }, [session, initDone]);
 
   useEffect(() => {
-    if (!session) {
+    if (!session.session) {
       setSocketReady(false);
       return;
     }
