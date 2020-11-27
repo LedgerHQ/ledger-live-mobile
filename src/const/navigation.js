@@ -223,7 +223,7 @@ export const ScreenName = {
   OnboardingUseCase: "OnboardingUseCase",
 
   OnboardingSetNewDeviceInfo: "OnboardingSetNewDeviceInfo",
-  OnboardingSetNewDeviceStart: "OnboardingSetNewDeviceStart",
+  OnboardingSetNewDevice: "OnboardingSetNewDevice",
 
   OnboardingImportScan: "OnboardingImportScan",
   OnboardingImportSelectAccount: "OnboardingImportSelectAccount",

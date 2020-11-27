@@ -10,15 +10,11 @@ import {
   Pressable,
 } from "react-native";
 import { Trans } from "react-i18next";
-import i18next from "i18next";
 import { TabView, SceneMap } from "react-native-tab-view";
 import { TrackScreen } from "../../../analytics";
 import Button from "../../../components/Button";
 import colors from "../../../colors";
 import LText from "../../../components/LText";
-import CheckBox from "../../../components/CheckBox";
-import { useLocale } from "../../../context/Locale";
-import { localeIds } from "../../../languages";
 import { ScreenName } from "../../../const";
 import AnimatedHeaderView from "../../../components/AnimatedHeader";
 import newDeviceBg from "../assets/newDevice.png";
@@ -79,8 +75,10 @@ const routeKeys = [0, 1, 2, 3, 4].map(k => ({ key: `${k}` }));
 
 const initialLayout = { width: Dimensions.get("window").width };
 
-function OnboardingStepNewDevice({ navigation }: *) {
-  const next = useCallback(() => {}, [navigation]);
+function OnboardingStepNewDevice({ navigation, route }: *) {
+  const next = useCallback(() => {
+    navigation.navigate(ScreenName.OnboardingSetNewDevice, { ...route.params });
+  }, [navigation, route.params]);
 
   const [index, setIndex] = useState(0);
   const [routes] = useState(routeKeys);
@@ -108,7 +106,7 @@ function OnboardingStepNewDevice({ navigation }: *) {
       <SafeAreaView
         style={[styles.root, { backgroundColor: colors.lightLive }]}
       >
-        <TrackScreen category="Onboarding" name="Language" />
+        <TrackScreen category="Onboarding" name="NewDeviceInfo" />
         <TabView
           renderTabBar={() => null}
           navigationState={{ index, routes }}

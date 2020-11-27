@@ -52,7 +52,7 @@ class ConfirmationModal extends PureComponent<Props> {
       >
         {Icon && (
           <View style={styles.icon}>
-            <Icon size={24} />
+            <Icon size={24} color={colors.live} />
           </View>
         )}
         {confirmationTitle && (

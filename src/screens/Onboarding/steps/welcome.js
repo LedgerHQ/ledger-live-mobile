@@ -36,7 +36,8 @@ const hitSlop = {
 function OnboardingStepWelcome({ navigation }: *) {
   const buy = useCallback(() => Linking.openURL(urls.buyNanoX), []);
   const next = useCallback(
-    () => navigation.navigate(ScreenName.OnboardingTermsOfUse),
+    () => navigation.navigate(ScreenName.OnboardingSetNewDevice, {}),
+    // () => navigation.navigate(ScreenName.OnboardingTermsOfUse),
     [navigation],
   );
   const switchLanguage = useCallback(

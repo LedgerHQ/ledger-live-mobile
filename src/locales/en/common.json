@@ -750,6 +750,87 @@
         "desc": "Before using your Nano, let’s set up your Nano security."
       }
     },
+    "stepSetupDevice": {
+      "start": {
+        "title": "The best way to get you started:",
+        "bullets": {
+          "0": { "label": "Plan 30 minutes and take your time" },
+          "1": { "label": "Grab a pen" },
+          "2": { "label": "Stay alone and choose a safe & quiet environment" }
+        },
+        "cta": "Let’s start!",
+        "warning": {
+          "title": "Be careful",
+          "desc": "Make sure you follow instructions on this app at every step of the process.",
+          "ctaText": "Got it!"
+        }
+      },
+      "setup": {
+        "bullets": {
+          "0": {
+            "title": "Turn On",
+            "label": "Turn on your device by pressing the black button for 1 second."
+          },
+          "1": {
+            "title": "Browse ",
+            "label": "Learn how to interact with your device by pressing the button on screen."
+          },
+          "2": {
+            "title": "Validate",
+            "label": "Press both buttons simultaneously to validate a selection."
+          },
+          "3": {
+            "title": "Follow instructions",
+            "label": "Come back to the app to follow  instructions on your PIN code! "
+          }
+        },
+        "cta": "Next step"
+      },
+      "pinCode": {
+        "title": "PIN code",
+        "desc": "Your PIN code is the first layer of security. It physically secures access to your Nano and your private keys. Your PIN code must be 4 to 8 digit long.",
+        "checkboxDesc": "I understand that I must choose my PIN code by myself and keep it private",
+        "cta": "Set up PIN code"
+      },
+      "pinCodeSetup": {
+        "bullets": {
+          "0": {
+            "title": "Set up",
+            "label_0": "Press left or right button to select a digit. Press both to validate. Select ",
+            "label_1": " to confirm your PIN code. Select ",
+            "label_2": " to erase a digit"
+          },
+          "1": {
+            "title": "Confirm",
+            "label": "Re-enter PIN code"
+          }
+        },
+        "infoModal": {
+          "title": "Secure your PIN code",
+          "bullets": {
+            "0": { "label": "Always choose a PIN code by yourself." },
+            "1": {
+              "label": "Always enter your PIN code without being observed."
+            },
+            "2": { "label": "You can change your PIN code if needed. " },
+            "3": {
+              "label": "Remember that three wrong PIN code in a row will reset the device."
+            },
+            "4": {
+              "label": "Never use an easy PIN code like 0000, 123456, or 55555555."
+            },
+            "5": { "label": "Never share your PIN code with someone else." },
+            "6": {
+              "label": "Never use a PIN code you did not choose by yourself."
+            },
+            "7": {
+              "label": "Never store your PIN code on a computer or smartphone."
+            }
+          }
+        },
+        "cta": "Next step"
+      }
+    },
     "stepGetStarted": {
       "title": "Get started",
       "import": "Import desktop accounts",
