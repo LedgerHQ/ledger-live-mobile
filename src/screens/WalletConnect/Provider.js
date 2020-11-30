@@ -30,7 +30,7 @@ const ProviderCommon = ({
   useAccount: Function,
   onMessage: Function,
   onSessionRestarted: Function,
-  isReady: Boolean,
+  isReady: Function,
   saveWCSession: Function,
   getWCSession: Function,
 }) => {
@@ -230,7 +230,7 @@ const ProviderCommon = ({
       account &&
       session.session &&
       status === STATUS.DISCONNECTED &&
-      isReady
+      isReady()
     ) {
       connect({ account });
 
@@ -333,7 +333,7 @@ const Provider = ({ children }: { children: React$Node }) => {
         });
       }}
       useAccount={useAccount}
-      isReady={!!navigationRef.current}
+      isReady={() => !!navigationRef.current}
       saveWCSession={saveWCSession}
       getWCSession={getWCSession}
     >
