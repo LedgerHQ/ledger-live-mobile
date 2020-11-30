@@ -1,4 +1,5 @@
 import { Server } from "ws";
+import { delay } from "@ledgerhq/live-common/lib/promise";
 
 describe("Ledger Live Mobile", () => {
   beforeAll(() => {
@@ -14,43 +15,36 @@ describe("Ledger Live Mobile", () => {
   });
 
   test("Onboarding", async () => {
-    await element(by.id("OnboardingWelcomeContinue ")).tap();
+    await element(by.id("OnboardingWelcomeContinue")).tap();
     await element(by.id("OnboardingDeviceNanoX")).tap();
     await element(by.id("OnboardingGetStartedChoiceInitialized")).tap();
     await element(by.id("OnboardingPinYes")).tap();
     await element(by.id("OnboardingRecoveryYes")).tap();
     await element(by.id("OnboardingSecurityContinue")).tap();
     await element(by.id("PairDevice")).tap();
-    await wait(1000);
+    const deviceDavid = "Nano X de David";
     postMessage({
       type: "add",
-      payload: { id: "mock_1", name: "Nano X de David" },
+      payload: { id: "mock_1", name: deviceDavid },
     });
-    await wait(1000);
     postMessage({
       type: "add",
       payload: { id: "mock_2", name: "Nano X de Arnaud" },
     });
-    await wait(1000);
     postMessage({
       type: "add",
       payload: { id: "mock_3", name: "Nano X de Didier Duchmol" },
     });
-    await wait(1000);
-    await element(by.id("DeviceItemEnter Nano X de David")).tap();
-    await wait(1000);
+    await element(by.id(`DeviceItemEnter ${deviceDavid}`)).tap();
     postMessage({ type: "open" });
-    await wait(1000 * 20);
-    // await element(by.id("TabBarAccounts")).tap();
-    // await element(by.id("OpenAddAccountModal")).tap();
+    await element(by.id("PairDevicesContinue")).tap();
+    await element(by.id("OnboardingSkip")).tap();
+    await element(by.id("OnboardingShareDataContinue")).tap();
+    await element(by.id("OnboardingFinish")).tap();
+    await element(by.id("TermsAcceptSwitch")).tap();
+    await element(by.id("TermsConfirm")).tap();
   });
 });
-
-function wait(ms: number): Promise<void> {
-  return new Promise(res => {
-    setTimeout(res, ms);
-  });
-}
 
 function initE2EBridge(): Promise<void> {
   const port = 8099;

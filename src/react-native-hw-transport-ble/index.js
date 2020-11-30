@@ -24,6 +24,12 @@ const transport = Config.MOCK
               chainCode:
                 "0000000000000000000000000000000000000000000000000000000000000000",
             }),
+          getAppAndVersion: () =>
+            Promise.resolve({
+              name: "BOLOS",
+              version: "0.0.0",
+              flags: 0,
+            }),
         });
         return {
           id,

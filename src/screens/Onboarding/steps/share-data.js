@@ -21,6 +21,7 @@ class OnboardingStepShareData extends Component<OnboardingStepProps> {
         type="primary"
         title={<Trans i18nKey="common.continue" />}
         onPress={next}
+        testID="OnboardingShareDataContinue"
       />
     );
   };

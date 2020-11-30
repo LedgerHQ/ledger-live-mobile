@@ -48,7 +48,7 @@ class OnboardingStepWelcome extends Component<Props> {
           <Trans i18nKey="onboarding.stepWelcome.desc" />
         </LText>
         <Button
-          event="OnboardingWelcomeContinue "
+          event="OnboardingWelcomeContinue"
           type="primary"
           title={<Trans i18nKey="onboarding.stepWelcome.start" />}
           onPress={onWelcomed}

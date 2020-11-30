@@ -67,6 +67,7 @@ export default function OnboardingStepFinish({ navigation }: Props) {
         <View style={styles.buttonWrapper}>
           <Button
             event="OnboardingFinish"
+            testID="OnboardingFinish"
             type="primary"
             containerStyle={styles.buttonContainer}
             title={<Trans i18nKey="onboarding.stepFinish.cta" />}

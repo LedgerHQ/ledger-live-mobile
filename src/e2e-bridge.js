@@ -19,15 +19,12 @@ function onMessage(event: { data: mixed }) {
     typeof event.data === "string",
     "[E2E Bridge Client]: Message data must be string",
   );
-  const msg = JSON.parse(event.data);
+  const msg: Message = JSON.parse(event.data);
   invariant(msg.type, "[E2E Bridge Client]: type is missing");
 
   log(`Message\n${JSON.stringify(msg, null, 2)}`);
 
   switch (msg.type) {
-    case "handshake":
-      postMessage({ type: "handshake" });
-      break;
     case "add":
     case "open":
       e2eBridgeSubject.next(msg);
@@ -39,15 +36,9 @@ function onMessage(event: { data: mixed }) {
 
 export const e2eBridgeSubject = new Subject();
 
-type Message = HandshakeMessage;
-
-type HandshakeMessage = {
-  type: "handshake",
-};
-
-function postMessage(msg: Message) {
-  ws.send(JSON.stringify(msg));
-}
+type Message =
+  | { type: "add", payload: { id: string, name: string } }
+  | { type: "open" };
 
 function log(message: string) {
   // eslint-disable-next-line no-console
