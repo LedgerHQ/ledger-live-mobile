@@ -68,6 +68,7 @@ export default function Connect({ route, navigation }: Props) {
             wcContext.disconnect();
           }}
           preferDismiss={false}
+          skipNavigation
         />
       ),
     };
@@ -208,7 +209,6 @@ export default function Connect({ route, navigation }: Props) {
             title={t("walletconnect.reject")}
             onPress={() => {
               wcContext.disconnect();
-              navigation.goBack();
             }}
           />
           <Button
@@ -228,7 +228,6 @@ export default function Connect({ route, navigation }: Props) {
             title={t("walletconnect.disconnect")}
             onPress={() => {
               wcContext.disconnect();
-              navigation.goBack();
             }}
             IconLeft={Disconnect}
           />
@@ -252,7 +251,6 @@ export default function Connect({ route, navigation }: Props) {
             title={t("walletconnect.close")}
             onPress={() => {
               wcContext.disconnect();
-              navigation.goBack();
             }}
           />
         </View>
