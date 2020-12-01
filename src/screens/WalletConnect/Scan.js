@@ -1,11 +1,11 @@
 /* @flow */
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import Config from "react-native-config";
 import { Clipboard } from "react-native";
 import Scanner from "../../components/Scanner";
 import { ScreenName } from "../../const";
 import { TrackScreen } from "../../analytics";
-import { connect } from "./Provider";
+import { connect, context, STATUS } from "./Provider";
 
 type Props = {
   navigation: any,
@@ -17,6 +17,8 @@ type RouteParams = {
 };
 
 const ScanWalletConnect = ({ navigation, route }: Props) => {
+  const wcContext = useContext(context);
+
   useEffect(() => {
     let mockTO;
     if (Config.MOCK_SCAN_WALLETCONNECT) {
@@ -28,6 +30,9 @@ const ScanWalletConnect = ({ navigation, route }: Props) => {
   });
 
   const onResult = (uri: string) => {
+    if (wcContext.status !== STATUS.DISCONNECTED) {
+      return;
+    }
     connect(uri);
     navigation.replace(ScreenName.WalletConnectConnect, {
       uri,
