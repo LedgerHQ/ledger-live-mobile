@@ -22,6 +22,7 @@ const ProviderCommon = ({
   useAccount,
   onMessage,
   onSessionRestarted,
+  onRemoteDisconnected,
   isReady,
   saveWCSession,
   getWCSession,
@@ -30,7 +31,8 @@ const ProviderCommon = ({
   useAccount: Function,
   onMessage: Function,
   onSessionRestarted: Function,
-  isReady: Function,
+  onRemoteDisconnected: Function,
+  isReady: Boolean,
   saveWCSession: Function,
   getWCSession: Function,
 }) => {
@@ -112,6 +114,7 @@ const ProviderCommon = ({
     });
 
     connector.on("disconnect", () => {
+      onRemoteDisconnected();
       disconnect();
     });
 
@@ -177,11 +180,11 @@ const ProviderCommon = ({
       connector.killSession();
     }
 
+    setSession({});
+    setStatus(STATUS.DISCONNECTED);
     setDappInfo();
     setApproveSession();
-    setSession({});
     setError();
-    setStatus(STATUS.DISCONNECTED);
     setConnector();
   };
 
@@ -230,7 +233,7 @@ const ProviderCommon = ({
       account &&
       session.session &&
       status === STATUS.DISCONNECTED &&
-      isReady()
+      isReady
     ) {
       connect({ account });
 
@@ -294,6 +297,20 @@ const useAccount = accountId => {
 };
 
 const Provider = ({ children }: { children: React$Node }) => {
+  const [isReady, setIsReady] = useState(false);
+  useEffect(() => {
+    if (isReady) {
+      return;
+    }
+
+    const interval = setInterval(() => {
+      setIsReady(!!navigationRef.current);
+    }, 500);
+
+    // eslint-disable-next-line consistent-return
+    return () => clearInterval(interval);
+  });
+
   return (
     <ProviderCommon
       onMessage={(wcCallRequest, account) => {
@@ -332,8 +349,13 @@ const Provider = ({ children }: { children: React$Node }) => {
           },
         });
       }}
+      onRemoteDisconnected={() => {
+        navigate(NavigatorName.Base, {
+          screen: NavigatorName.Main,
+        });
+      }}
       useAccount={useAccount}
-      isReady={() => !!navigationRef.current}
+      isReady={isReady}
       saveWCSession={saveWCSession}
       getWCSession={getWCSession}
     >
