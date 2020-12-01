@@ -16,8 +16,6 @@ type RouteParams = {
   accountId: String,
 };
 
-type State = {};
-
 const ScanWalletConnect = ({ navigation, route }: Props) => {
   useEffect(() => {
     let mockTO;

@@ -5,7 +5,6 @@ import { View, StyleSheet, Image } from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
 import _ from "lodash";
 import { useSelector } from "react-redux";
-import type { Account } from "@ledgerhq/live-common/lib/types";
 import { accountScreenSelector } from "../../reducers/accounts";
 import LText from "../../components/LText";
 import Button from "../../components/Button";
