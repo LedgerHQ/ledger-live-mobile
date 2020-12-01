@@ -1,5 +1,6 @@
 /* @flow */
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import { unstable_batchedUpdates as batchUpdates } from "react-native";
 import WalletConnect from "@walletconnect/client";
 import { useSelector } from "react-redux";
 import { parseCallRequest } from "@ledgerhq/live-common/lib/walletconnect";
@@ -8,7 +9,20 @@ import { accountScreenSelector } from "../../reducers/accounts";
 import { NavigatorName, ScreenName } from "../../const";
 import { navigate, navigationRef } from "../../rootnavigation";
 
-export const context = React.createContext();
+export const context = React.createContext<{
+  connect: Function,
+  disconnect: Function,
+  status: number,
+  error?: any,
+  currentCallRequestId?: string,
+  setCurrentCallRequestResult?: Function,
+  setCurrentCallRequestError?: Function,
+  dappInfo?: any,
+  approveSession?: Function,
+  initDone: boolean,
+  hasSession: boolean,
+  socketReady: boolean,
+}>({});
 
 export const STATUS = {
   DISCONNECTED: 0x00,
@@ -26,15 +40,17 @@ const ProviderCommon = ({
   isReady,
   saveWCSession,
   getWCSession,
+  batchUpdates,
 }: {
   children: React$Node,
   useAccount: Function,
   onMessage: Function,
   onSessionRestarted: Function,
   onRemoteDisconnected: Function,
-  isReady: Boolean,
+  isReady: boolean,
   saveWCSession: Function,
   getWCSession: Function,
+  batchUpdates: Function,
 }) => {
   const [session, setSession] = useState({});
   const [socketReady, setSocketReady] = useState(false);
@@ -47,8 +63,9 @@ const ProviderCommon = ({
   const [currentCallRequestResult, setCurrentCallRequestResult] = useState();
   const [dappInfo, setDappInfo] = useState();
   const [approveSession, setApproveSession] = useState();
+  const disconnectRef = useRef();
 
-  const connect = ({ uri, account }) => {
+  const connect = ({ uri, account }: { uri?: String, account: Account }) => {
     setStatus(STATUS.CONNECTING);
     setError();
 
@@ -79,6 +96,10 @@ const ProviderCommon = ({
       setStatus(STATUS.ERROR);
       return;
     }
+    const connectorOn = connector.on.bind(connector);
+    connector.on = (event, handler) => {
+      connectorOn(event, (...args) => batchUpdates(() => handler(...args)));
+    };
 
     connector.on("session_request", (error, payload) => {
       if (error) {
@@ -114,8 +135,10 @@ const ProviderCommon = ({
     });
 
     connector.on("disconnect", () => {
-      onRemoteDisconnected();
-      disconnect();
+      if (!disconnectRef.current) {
+        return;
+      }
+      disconnectRef.current();
     });
 
     connector.on("error", () => {
@@ -180,16 +203,21 @@ const ProviderCommon = ({
       connector.killSession();
     }
 
-    setSession({});
-    setStatus(STATUS.DISCONNECTED);
-    setDappInfo();
-    setApproveSession();
-    setError();
-    setConnector();
+    if (status !== STATUS.DISCONNECTED) {
+      setSession({});
+      setDappInfo();
+      setApproveSession();
+      setError();
+      setConnector();
+      setStatus(STATUS.DISCONNECTED);
+
+      onRemoteDisconnected();
+    }
   };
+  disconnectRef.current = disconnect;
 
   useEffect(() => {
-    if (!(currentCallRequestResult || currentCallRequestError)) {
+    if (!(currentCallRequestResult || currentCallRequestError) || !connector) {
       return;
     }
     if (currentCallRequestResult) {
@@ -358,6 +386,7 @@ const Provider = ({ children }: { children: React$Node }) => {
       isReady={isReady}
       saveWCSession={saveWCSession}
       getWCSession={getWCSession}
+      batchUpdates={batchUpdates}
     >
       {children}
     </ProviderCommon>

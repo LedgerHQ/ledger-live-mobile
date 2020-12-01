@@ -49,19 +49,10 @@ export default function Connect({ route, navigation }: Props) {
   const wcContext = useContext(context);
 
   useFocusEffect(() => {
-    if (route.params.uri && wcContext.status === STATUS.DISCONNECTED) {
-      wcContext.connect({
-        account,
-        uri: route.params.uri,
-      });
-      navigation.setParams({
-        uri: null,
-      });
-    }
     if (wcContext.currentCallRequestId) {
       wcContext.setCurrentCallRequestError(new Error("Aborted"));
     }
-  }, [wcContext, route]);
+  }, [wcContext]);
 
   useEffect(() => {
     const opts = {

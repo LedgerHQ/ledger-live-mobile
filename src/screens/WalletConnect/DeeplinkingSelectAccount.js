@@ -1,5 +1,5 @@
 /* @flow */
-import React, { Component } from "react";
+import React, { Component, useContext } from "react";
 import { View, StyleSheet, FlatList, TouchableOpacity } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { createStructuredSelector } from "reselect";
@@ -27,6 +27,7 @@ import KeyboardView from "../../components/KeyboardView";
 import PlusIcon from "../../icons/Plus";
 import { formatSearchResults } from "../../helpers/formatAccountSearchResults";
 import type { SearchResult } from "../../helpers/formatAccountSearchResults";
+import { context } from "./Provider";
 
 const SEARCH_KEYS = ["name", "unit.code", "token.name", "token.ticker"];
 const forceInset = { bottom: "always" };
@@ -39,6 +40,33 @@ type Props = {
 };
 
 type State = {};
+
+type ItemProps = {
+  navigation: any,
+  route: { params?: { uri: string } },
+  item: SearchResult,
+};
+const Item = ({ navigation, route, item }: ItemProps) => {
+  const wcContext = useContext(context);
+  const { account, match } = item;
+  return (
+    <AccountCard
+      disabled={!match}
+      account={account}
+      style={styles.cardStyle}
+      onPress={() => {
+        wcContext.connect({
+          account,
+          uri: route.params.uri,
+        });
+        navigation.replace(ScreenName.WalletConnectConnect, {
+          accountId: account.id,
+          uri: route.params.uri,
+        });
+      }}
+    />
+  );
+};
 
 class SendFundsSelectAccount extends Component<Props, State> {
   renderList = items => {
@@ -77,19 +105,12 @@ class SendFundsSelectAccount extends Component<Props, State> {
     );
   };
 
-  renderItem = ({ item: result }: { item: SearchResult }) => {
-    const { account, match } = result;
+  renderItem = ({ item }: { item: SearchResult }) => {
     return (
-      <AccountCard
-        disabled={!match}
-        account={account}
-        style={styles.cardStyle}
-        onPress={() => {
-          this.props.navigation.replace(ScreenName.WalletConnectConnect, {
-            accountId: account.id,
-            uri: this.props.route.params.uri,
-          });
-        }}
+      <Item
+        item={item}
+        navigation={this.props.navigation}
+        route={this.props.route}
       />
     );
   };
