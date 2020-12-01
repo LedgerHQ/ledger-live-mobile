@@ -90,7 +90,7 @@ export default function LendingBanners({ account, parentAccount }: Props) {
   let lendingWarningBanner = null;
 
   if (availableOnCompound) {
-    const enabledAmount = account.spendableBalance.min(getSupplyMax(account));
+    const enabledAmount = account.spendableBalance.minus(getSupplyMax(account));
     const lendingWarningBannerContent =
       compoundCapabilities.status === "ENABLING" ? (
         <Trans i18nKey="transfer.lending.banners.approving" />
