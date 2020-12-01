@@ -21,7 +21,7 @@ const { interpolate, Extrapolate } = Animated;
 
 const AnimatedLText = Animated.createAnimatedComponent(LText);
 
-const height = Platform.OS === "ios" ? 174 : 134;
+const height = Platform.OS === "ios" ? 114 : 74;
 
 const hitSlop = {
   bottom: 10,
@@ -79,25 +79,19 @@ export default function AnimatedHeaderView({
   ]);
 
   const translateY = interpolate(scrollY, {
-    inputRange: [0, 140],
+    inputRange: [0, 76],
     outputRange: [0, -50],
     extrapolate: Extrapolate.CLAMP,
   });
   const translateX = interpolate(scrollY, {
-    inputRange: [0, 140],
+    inputRange: [0, 76],
     outputRange: [0, -5],
     extrapolate: Extrapolate.CLAMP,
   });
 
   const scale = interpolate(scrollY, {
-    inputRange: [0, 140],
+    inputRange: [0, 76],
     outputRange: [1, 0.8],
-    extrapolate: Extrapolate.CLAMP,
-  });
-
-  const headerHeight = interpolate(scrollY, {
-    inputRange: [0, 140],
-    outputRange: [height, height - 60],
     extrapolate: Extrapolate.CLAMP,
   });
 
@@ -105,7 +99,7 @@ export default function AnimatedHeaderView({
     <SafeAreaView
       style={[styles.root, { backgroundColor: colors.white }, style]}
     >
-      <Animated.View style={[styles.header, { height: headerHeight }]}>
+      <Animated.View style={[styles.header]}>
         <View style={styles.topHeader}>
           {hasBackButton && <BackButton navigation={navigation} />}
           <View style={styles.spacer} />
@@ -145,15 +139,21 @@ const styles = StyleSheet.create({
     paddingTop: Platform.OS === "ios" ? 84 : 40,
     height,
     flexDirection: "column",
-    overflow: "hidden",
+    overflow: "visible",
     paddingHorizontal: 24,
   },
   title: {
     fontSize: normalize(32),
     width: width - 40,
+    zIndex: 2,
   },
   buttons: {
     paddingVertical: 16,
   },
-  scrollArea: { marginTop: 16, paddingHorizontal: 24, paddingBottom: 24 },
+  scrollArea: {
+    paddingTop: 60,
+    marginTop: 16,
+    paddingHorizontal: 24,
+    paddingBottom: 24,
+  },
 });

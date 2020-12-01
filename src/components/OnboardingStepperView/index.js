@@ -122,9 +122,9 @@ export default function OnboardingStepperView({
           )}
         </View>
         <View style={styles.indicatorContainer}>
-          {scenes.map((s, i) => (
+          {scenes.map(({ id }, i) => (
             <View
-              key={i}
+              key={"indicator" + id + i}
               style={[
                 styles.sceneIndicator,
                 {

@@ -7,6 +7,7 @@ import {
   Pressable,
   Platform,
   ScrollView,
+  Linking,
 } from "react-native";
 import colors, { rgba } from "../../colors";
 import Styles from "../../navigation/styles";
@@ -73,6 +74,18 @@ export default function OnboardingInfoModal({ navigation, route }: Props) {
               <LText semiBold style={[styles.desc, { color: textColor }]}>
                 {desc}
               </LText>
+            )}
+            {link && (
+              <Pressable
+                style={styles.desc}
+                onPress={() =>
+                  Linking.canOpenURL(link.url) && Linking.openURL(link.url)
+                }
+              >
+                <LText semiBold style={[styles.link, { color: colors.live }]}>
+                  {link.label}
+                </LText>
+              </Pressable>
             )}
             {bullets && (
               <View style={styles.bulletContainer}>
@@ -189,5 +202,9 @@ const styles = StyleSheet.create({
   bulletTitle: {
     fontSize: 16,
     lineHeight: 24,
+  },
+  link: {
+    fontSize: 13,
+    marginTop: 16,
   },
 });
