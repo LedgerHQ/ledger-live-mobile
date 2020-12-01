@@ -22,9 +22,14 @@ function OnboardingStepTerms({ navigation }: *) {
   const [markdown, error, retry] = useTerms();
   const [, accept] = useTermsAccept();
   const [toggle, setToggle] = useState(false);
+  const [toggleRecoveryPhrase, setToggleRecoveryPhrase] = useState(false);
   const onSwitch = useCallback(() => {
     setToggle(!toggle);
   }, [toggle]);
+
+  const onSwitchRecoveryPhrase = useCallback(() => {
+    setToggleRecoveryPhrase(!toggleRecoveryPhrase);
+  }, [toggleRecoveryPhrase]);
 
   const next = useCallback(() => {
     accept();
@@ -40,11 +45,24 @@ function OnboardingStepTerms({ navigation }: *) {
       footer={
         <View style={styles.footer}>
           <Touchable
-            event="TermsAcceptSwitch"
-            onPress={onSwitch}
+            event="TermsAcceptSwitchRecoveryPhrase"
+            onPress={onSwitchRecoveryPhrase}
             style={styles.switchRow}
           >
-            <CheckBox isChecked={toggle} />
+            <CheckBox
+              style={styles.checkbox}
+              isChecked={toggleRecoveryPhrase}
+            />
+            <LText semiBold style={styles.switchLabel}>
+              <Trans i18nKey="Terms.switchLabelRecoveryPhrase" />
+            </LText>
+          </Touchable>
+          <Touchable
+            event="TermsAcceptSwitch"
+            onPress={onSwitch}
+            style={[styles.switchRow, styles.marginBottom]}
+          >
+            <CheckBox style={styles.checkbox} isChecked={toggle} />
             <LText semiBold style={styles.switchLabel}>
               <Trans i18nKey="Terms.switchLabel" />
             </LText>
@@ -53,7 +71,7 @@ function OnboardingStepTerms({ navigation }: *) {
           <Button
             event="TermsConfirm"
             type="primary"
-            disabled={!toggle}
+            disabled={!toggle || !toggleRecoveryPhrase}
             onPress={next}
             title={<Trans i18nKey="common.confirm" />}
           />
@@ -89,8 +107,12 @@ function OnboardingStepTerms({ navigation }: *) {
 const styles = StyleSheet.create({
   switchRow: {
     flexDirection: "row",
-    alignItems: "center",
-    marginVertical: 20,
+    alignItems: "flex-start",
+    marginTop: 12,
+    marginBottom: 12,
+  },
+  marginBottom: {
+    marginBottom: 20,
   },
   switchLabel: {
     marginLeft: 8,
@@ -111,6 +133,11 @@ const styles = StyleSheet.create({
   },
   retryButton: {
     marginTop: 16,
+  },
+  checkbox: {
+    borderRadius: 4,
+    width: 22,
+    height: 22,
   },
 });
 

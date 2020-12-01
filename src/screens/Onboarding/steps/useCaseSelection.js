@@ -25,7 +25,10 @@ const useCases = {
   firstUse: { route: ScreenName.OnboardingSetNewDeviceInfo, image: firstUse },
   devicePairing: { route: "", image: devicePairing },
   desktopSync: { route: "", image: desktopSync },
-  restoreDevice: { route: "", image: restoreDevice },
+  restoreDevice: {
+    route: ScreenName.OnboardingRecoveryPhrase,
+    image: restoreDevice,
+  },
 };
 
 function OnboardingStepUseCaseSelection({ navigation, route }: Props) {

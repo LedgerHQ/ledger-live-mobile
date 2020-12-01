@@ -2891,7 +2891,8 @@
   "Terms": {
     "title": "Terms of Use",
     "read": "Read the Terms of Use",
-    "switchLabel": "I have read and accepted the Terms & Conditions."
+    "switchLabel": "I have read and accepted the Terms & Conditions.",
+    "switchLabelRecoveryPhrase": "I understand that if I lose this recovery phrase, I will not be able to access my coins in case I lose of break my Nano."
   },
   "exchange": {
     "buy": {

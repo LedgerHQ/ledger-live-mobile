@@ -13,7 +13,7 @@ import colors from "../colors";
 
 import Styles from "../navigation/styles";
 import LText from "./LText";
-import { normalize, width } from "../helpers/normalizeSize";
+import { normalize, width, height as H } from "../helpers/normalizeSize";
 import ArrowLeft from "../icons/ArrowLeft";
 import Close from "../icons/Close";
 
@@ -118,7 +118,9 @@ export default function AnimatedHeaderView({
       </Animated.View>
       {children && (
         <Animated.ScrollView onScroll={event} style={styles.scrollArea}>
+          <View style={styles.spacerTop} />
           {children}
+          <View style={styles.spacerBottom} />
         </Animated.ScrollView>
       )}
       {footer}
@@ -141,6 +143,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     overflow: "visible",
     paddingHorizontal: 24,
+    marginBottom: 16,
   },
   title: {
     fontSize: normalize(32),
@@ -151,9 +154,8 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
   },
   scrollArea: {
-    paddingTop: 60,
-    marginTop: 16,
     paddingHorizontal: 24,
-    paddingBottom: 24,
   },
+  spacerTop: { marginTop: 60 },
+  spacerBottom: { marginTop: 24 },
 });

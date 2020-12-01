@@ -11,6 +11,7 @@ import OnboardingDeviceSelection from "../../screens/Onboarding/steps/deviceSele
 import OnboardingUseCase from "../../screens/Onboarding/steps/useCaseSelection";
 import OnboardingNewDeviceInfo from "../../screens/Onboarding/steps/newDeviceInfo";
 import OnboardingNewDevice from "../../screens/Onboarding/steps/setupDevice";
+import OnboardingRecoveryPhrase from "../../screens/Onboarding/steps/recoveryPhrase";
 import OnboardingInfoModal from "../OnboardingStepperView/OnboardingInfoModal";
 
 import { closableNavigationOptions } from "../../navigation/navigatorConfig";
@@ -54,6 +55,11 @@ export default function OnboardingNavigator() {
       <Stack.Screen
         name={ScreenName.OnboardingSetNewDevice}
         component={OnboardingNewDevice}
+      />
+
+      <Stack.Screen
+        name={ScreenName.OnboardingRecoveryPhrase}
+        component={OnboardingRecoveryPhrase}
       />
 
       <Stack.Screen

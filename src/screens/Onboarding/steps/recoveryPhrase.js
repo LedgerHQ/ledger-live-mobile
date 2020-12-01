@@ -4,11 +4,11 @@ import React, { useCallback } from "react";
 
 import OnboardingStepperView from "../../../components/OnboardingStepperView";
 
-import { setupDeviceScenes } from "../shared/infoPagesData";
+import { recoveryPhraseScenes } from "../shared/infoPagesData";
 
-const scenes = setupDeviceScenes;
+const scenes = recoveryPhraseScenes;
 
-function OnboardingStepNewDevice({ navigation, route }: *) {
+function OnboardingStepRecoveryPhrase({ navigation, route }: *) {
   const next = useCallback(() => {}, []);
 
   return (
@@ -21,4 +21,4 @@ function OnboardingStepNewDevice({ navigation, route }: *) {
   );
 }
 
-export default OnboardingStepNewDevice;
+export default OnboardingStepRecoveryPhrase;
