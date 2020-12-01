@@ -72,11 +72,11 @@ function SignSummary({ navigation, route: initialRoute }: Props) {
               <View style={styles.headerIconContainer}>
                 <ParentCurrencyIcon
                   size={18}
-                  currency={getAccountCurrency(account)}
+                  currency={account && getAccountCurrency(account)}
                 />
               </View>
-              <LText semiBold secondary numberOfLines={1} style={styles.title}>
-                {getAccountName(account)}
+              <LText semiBold secondary numberOfLines={1}>
+                {account && getAccountName(account)}
               </LText>
             </View>
           </View>

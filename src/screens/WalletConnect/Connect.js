@@ -5,10 +5,18 @@ import { View, StyleSheet, Image } from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
 import _ from "lodash";
 import { useSelector } from "react-redux";
+import type { Account } from "@ledgerhq/live-common/lib/types";
 import { accountScreenSelector } from "../../reducers/accounts";
 import LText from "../../components/LText";
 import Button from "../../components/Button";
-import { context, STATUS } from "./Provider";
+import {
+  context,
+  STATUS,
+  setCurrentCallRequestError,
+  disconnect,
+  connect,
+  approveSession,
+} from "./Provider";
 import Spinning from "../../components/Spinning";
 import BigSpinner from "../../icons/BigSpinner";
 import Disconnect from "../../icons/Disconnect";
@@ -50,16 +58,16 @@ export default function Connect({ route, navigation }: Props) {
 
   useFocusEffect(() => {
     if (wcContext.currentCallRequestId) {
-      wcContext.setCurrentCallRequestError(new Error("Aborted"));
+      setCurrentCallRequestError(new Error("Aborted"));
     }
-  }, [wcContext]);
+  }, [wcContext.currentCallRequestId]);
 
   useEffect(() => {
     const opts = {
       headerRight: () => (
         <HeaderRightClose
           onClose={() => {
-            wcContext.disconnect();
+            disconnect();
           }}
           preferDismiss={false}
           skipNavigation
@@ -89,7 +97,16 @@ export default function Connect({ route, navigation }: Props) {
     <>
       <TrackScreen category="WalletConnect" screen="Connect" />
       <View style={styles.container}>
-        {wcContext.status === STATUS.CONNECTING && wcContext.approveSession ? (
+        {!account ||
+        account.type !== "Account" ||
+        wcContext.status === STATUS.ERROR ? (
+          <View style={styles.centerContainer}>
+            <CrossRound size={50} color={colors.alert} />
+            <LText primary style={styles.error}>
+              {wcContext.error?.message || "Invalid account id"}
+            </LText>
+          </View>
+        ) : wcContext.status === STATUS.CONNECTING && wcContext.dappInfo ? (
           <>
             <View style={styles.centerContainer}>
               <View style={styles.headerContainer}>
@@ -151,7 +168,7 @@ export default function Connect({ route, navigation }: Props) {
                 </View>
               </View>
               <LText semiBold style={styles.peerName}>
-                {wcContext.dappInfo.name}
+                {wcContext.dappInfo?.name}
               </LText>
               <LText primary style={styles.details}>
                 {t("walletconnect.connected")}
@@ -161,20 +178,13 @@ export default function Connect({ route, navigation }: Props) {
               <InfoBox>
                 <Trans
                   i18nKey="walletconnect.info"
-                  values={{ name: wcContext.dappInfo.name }}
+                  values={{ name: wcContext.dappInfo?.name }}
                 />
               </InfoBox>
               <View style={styles.messagesSeparator} />
               <WarningBox>{t("walletconnect.warning")}</WarningBox>
             </View>
           </>
-        ) : wcContext.status === STATUS.ERROR ? (
-          <View style={styles.centerContainer}>
-            <CrossRound size={50} color={colors.alert} />
-            <LText primary style={styles.error}>
-              {wcContext.error?.message}
-            </LText>
-          </View>
         ) : (
           <>
             <View style={styles.centerContainer}>
@@ -195,22 +205,26 @@ export default function Connect({ route, navigation }: Props) {
           </>
         )}
       </View>
-      {wcContext.status === STATUS.CONNECTING && wcContext.approveSession ? (
+      {wcContext.status === STATUS.CONNECTING &&
+      account &&
+      wcContext.dappInfo ? (
         <View style={styles.buttonsContainer}>
           <Button
             containerStyle={styles.buttonContainer}
             type="secondary"
+            event="wc connecting reject"
             title={t("walletconnect.reject")}
             onPress={() => {
-              wcContext.disconnect();
+              disconnect();
             }}
           />
           <Button
+            event="wc connecting connect"
             containerStyle={styles.buttonContainer}
             type="primary"
             title={t("walletconnect.connect")}
             onPress={() => {
-              wcContext.approveSession();
+              approveSession(account);
             }}
           />
         </View>
@@ -218,10 +232,11 @@ export default function Connect({ route, navigation }: Props) {
         <View style={styles.buttonsContainer}>
           <Button
             containerStyle={styles.buttonContainer}
+            event="wc connected disconnect"
             type="primary"
             title={t("walletconnect.disconnect")}
             onPress={() => {
-              wcContext.disconnect();
+              disconnect();
             }}
             IconLeft={Disconnect}
           />
@@ -230,21 +245,20 @@ export default function Connect({ route, navigation }: Props) {
         <View style={styles.verticalButtonsContainer}>
           <Button
             containerStyle={styles.verticalButton}
+            event="wc error retry"
             type="primary"
             title={t("walletconnect.retry")}
             onPress={() => {
-              wcContext.connect({
-                account,
-                uri: route.params.uri,
-              });
+              connect(route.params.uri);
             }}
           />
           <Button
             containerStyle={styles.verticalButton}
+            event="wc error close"
             type="greySecondary"
             title={t("walletconnect.close")}
             onPress={() => {
-              wcContext.disconnect();
+              disconnect();
             }}
           />
         </View>

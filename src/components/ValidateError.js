@@ -11,7 +11,7 @@ import colors from "../colors";
 type Props = {
   error: Error,
   onClose: () => void,
-  onRetry: () => void,
+  onRetry: null | (() => void),
 };
 
 class ValidateError extends PureComponent<Props> {

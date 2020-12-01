@@ -1,13 +1,11 @@
 /* @flow */
-import React, { useContext, useEffect } from "react";
+import React, { useEffect } from "react";
 import Config from "react-native-config";
 import { Clipboard } from "react-native";
-import { useSelector } from "react-redux";
 import Scanner from "../../components/Scanner";
 import { ScreenName } from "../../const";
 import { TrackScreen } from "../../analytics";
-import { accountScreenSelector } from "../../reducers/accounts";
-import { context } from "./Provider";
+import { connect } from "./Provider";
 
 type Props = {
   navigation: any,
@@ -21,13 +19,6 @@ type RouteParams = {
 type State = {};
 
 const ScanWalletConnect = ({ navigation, route }: Props) => {
-  const { account } = useSelector(
-    accountScreenSelector({
-      params: { accountId: route.params.accountId },
-    }),
-  );
-  const wcContext = useContext(context);
-
   useEffect(() => {
     let mockTO;
     if (Config.MOCK_SCAN_WALLETCONNECT) {
@@ -39,10 +30,7 @@ const ScanWalletConnect = ({ navigation, route }: Props) => {
   });
 
   const onResult = (uri: string) => {
-    wcContext.connect({
-      account,
-      uri,
-    });
+    connect(uri);
     navigation.replace(ScreenName.WalletConnectConnect, {
       uri,
       accountId: route.params.accountId,
@@ -55,6 +43,6 @@ const ScanWalletConnect = ({ navigation, route }: Props) => {
       <Scanner navigation={navigation} onResult={onResult} />
     </>
   );
-}
+};
 
 export default ScanWalletConnect;

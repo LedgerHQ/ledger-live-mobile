@@ -31,6 +31,7 @@ type ButtonType =
   | "secondary"
   | "lightSecondary"
   | "darkSecondary"
+  | "greySecondary"
   | "tertiary"
   | "alert";
 

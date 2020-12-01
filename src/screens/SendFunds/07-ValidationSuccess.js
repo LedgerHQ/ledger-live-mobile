@@ -9,7 +9,10 @@ import colors from "../../colors";
 import { ScreenName } from "../../const";
 import PreventNativeBack from "../../components/PreventNativeBack";
 import ValidateSuccess from "../../components/ValidateSuccess";
-import { context as _wcContext } from "../WalletConnect/Provider";
+import {
+  context as _wcContext,
+  setCurrentCallRequestResult,
+} from "../WalletConnect/Provider";
 
 type Props = {
   navigation: any,
@@ -37,7 +40,7 @@ export default function ValidationSuccess({ navigation, route }: Props) {
         : result;
 
     if (wcContext.currentCallRequestId) {
-      wcContext.setCurrentCallRequestResult(result.hash);
+      setCurrentCallRequestResult(result.hash);
     }
   }, []);
 

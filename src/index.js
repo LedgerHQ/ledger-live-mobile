@@ -266,7 +266,7 @@ const DeepLinkingNavigator = ({ children }: { children: React$Node }) => {
   const wcContext = useContext(_wcContext);
 
   const enabled =
-    hasCompletedOnboarding && wcContext.initDone && !wcContext.hasSession;
+    hasCompletedOnboarding && wcContext.initDone && !wcContext.session.session;
 
   const { getInitialState } = useLinking(navigationRef, {
     ...linking,

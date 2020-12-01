@@ -8,7 +8,10 @@ import { TrackScreen } from "../../analytics";
 import colors from "../../colors";
 import ValidateError from "../../components/ValidateError";
 import { urls } from "../../config/urls";
-import { context as _wcContext } from "../WalletConnect/Provider";
+import {
+  context as _wcContext,
+  setCurrentCallRequestError,
+} from "../WalletConnect/Provider";
 
 const forceInset = { bottom: "always" };
 
@@ -31,7 +34,7 @@ export default function ValidationError({ navigation, route }: Props) {
   useEffect(() => {
     if (wcContext.currentCallRequestId) {
       setDisableRetry(true);
-      wcContext.setCurrentCallRequestError(error);
+      setCurrentCallRequestError(error);
     }
   }, []);
 
@@ -52,7 +55,7 @@ export default function ValidationError({ navigation, route }: Props) {
       <TrackScreen category="SignMessage" name="ValidationError" />
       <ValidateError
         error={error}
-        onRetry={!disableRetry && retry}
+        onRetry={!disableRetry ? retry : null}
         onClose={onClose}
         onContactUs={contactUs}
       />

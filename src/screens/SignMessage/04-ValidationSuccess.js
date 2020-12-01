@@ -8,7 +8,10 @@ import { TrackScreen } from "../../analytics";
 import colors from "../../colors";
 import PreventNativeBack from "../../components/PreventNativeBack";
 import ValidateSuccess from "../../components/ValidateSuccess";
-import { context as _wcContext } from "../WalletConnect/Provider";
+import {
+  context as _wcContext,
+  setCurrentCallRequestResult,
+} from "../WalletConnect/Provider";
 
 type Props = {
   navigation: any,
@@ -27,7 +30,7 @@ export default function ValidationSuccess({ navigation, route }: Props) {
 
   useEffect(() => {
     if (wcContext.currentCallRequestId) {
-      wcContext.setCurrentCallRequestResult(route.params.signature);
+      setCurrentCallRequestResult(route.params.signature);
     }
   }, []);
 
