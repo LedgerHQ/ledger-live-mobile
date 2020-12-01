@@ -829,6 +829,87 @@
           }
         },
         "cta": "Next step"
+      },
+      "recoveryPhrase": {
+        "title": "Recovery phrase",
+        "desc": "Your recovery phrase is a 24 words phrase that protects your private keys. Ledger does not keep a copy of it.",
+        "cta": "Save recovery phrase",
+        "checkboxDesc": "I understand that if I lose this recovery phrase, I will not be able to access my coins in case I lose or break my Nano."
+      },
+      "recoveryPhraseSetup": {
+        "infoModal": {
+          "title": "How does a recovery phrase work?",
+          "desc": "Your recovery phrase can be seen as a master key used by every application on your Ledger device to generate their private keys from.",
+          "desc_1": "This means that as long as your recovery phrase is the same, the calculation of the private keys will always have the same result.",
+          "link": "More on Recovery phrase operation",
+          "title_1": "What happens if I lose/break my Nano?",
+          "bullets": {
+            "0": {
+              "label": "Get a new one"
+            },
+            "1": {
+              "label": "Select “Import recovery phrase in a new device” on your Ledger app "
+            },
+            "2": {
+              "label": "Follow instructions"
+            }
+          }
+        },
+        "bullets": {
+          "0": {
+            "title": "Take your recovery sheet",
+            "label": "Grab your recovery sheet from your Nano box"
+          },
+          "1": {
+            "title": "Write down the 24 words",
+            "label": "Write Word #1 displayed on your Nano in position “1” of your recovery sheet and make sure to respect spelling and order. Then, press right on your Nano to display Word #2. Repeat for the 24 words. Press left on your Nano to check if you made mistakes."
+          },
+          "2": {
+            "title": "Re-enter Word #1...",
+            "label": "Scroll through the words until you find the exact Word #1 by pressing right button. Confirm by pressing both buttons"
+          },
+          "3": {
+            "title": "... and the next 23!"
+          }
+        },
+        "cta": "Confirm recovery phrase",
+        "nextStep": "Next step"
+      },
+      "hideRecoveryPhrase": {
+        "title": "Hide your recovery phrase",
+        "desc": "Your Recovery phrase is your only backup to recover your coins, you must keep it in a safe place.",
+        "bullets": {
+          "0": {
+            "label": "Keep it offline"
+          },
+          "1": {
+            "label": "Never show or share your 24 words to anyone. Ledger will never ask for your recovery phrase."
+          }
+        },
+        "cta": "Ok, I’m done!",
+        "infoModal": {
+          "label": "Learn how to hide it",
+          "title": "Where should I keep my Recovery phrase?",
+          "bullets": {
+            "0": {
+              "label": "In a secure place, best option being in a safe."
+            },
+            "1": {
+              "label": "<1>NEVER</1> enter your code on any computer, smartphone or other internet-connected device."
+            },
+            "2": {
+              "label": "<1>NEVER</1> share these 24 words with anyone."
+            },
+            "3": {
+              "label": "Never show or share your 24 words to anyone. Ledger will never ask for your recovery phrase."
+            }
+          }
+        },
+        "warning": {
+          "title": "Now game on!",
+          "desc": "Answer 3 simple questions to avoid common misconceptions about your wallet.",
+          "cta": "Let’s take the quiz"
+        }
       }
     },
     "stepGetStarted": {

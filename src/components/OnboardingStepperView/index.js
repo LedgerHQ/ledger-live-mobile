@@ -12,9 +12,9 @@ import {
 } from "react-native";
 import { TabView, SceneMap } from "react-native-tab-view";
 import colors from "../../colors";
+import { ScreenName } from "../../const";
 import { normalize } from "../../helpers/normalizeSize";
 import ArrowLeft from "../../icons/ArrowLeft";
-import Check from "../../icons/Check";
 import Question from "../../icons/Question";
 import Styles from "../../navigation/styles";
 
@@ -23,7 +23,6 @@ import ConfirmationModal from "../ConfirmationModal";
 import LText from "../LText";
 
 import type { SceneInfoProp } from "./OnboardingInfoModal";
-import OnboardingInfoModal from "./OnboardingInfoModal";
 
 export type OnboardingScene = {
   id: string,
@@ -69,9 +68,14 @@ export default function OnboardingStepperView({
     else setIndex(Math.max(0, index - 1));
   }, [navigation, index]);
 
-  const openInfoModal = useCallback(() => {}, []);
-
   const currentScene = useMemo(() => scenes[index], [scenes, index]);
+
+  const openInfoModal = useCallback(() => {
+    navigation.navigate(ScreenName.OnboardingInfoModal, {
+      sceneInfoProps: currentScene?.sceneInfoModalProps,
+    });
+  }, [currentScene?.sceneInfoModalProps, navigation]);
+
   const sceneColors =
     currentScene?.type === "primary"
       ? [colors.live, "#fff", "#fff", "#fff", "rgba(255,255,255,0.3)"]
@@ -92,6 +96,7 @@ export default function OnboardingStepperView({
             {...sceneProps}
             onNext={onNext}
             sceneColors={sceneColors}
+            openInfoModal={openInfoModal}
           />
         ),
       }),
@@ -107,10 +112,13 @@ export default function OnboardingStepperView({
             <ArrowLeft size={18} color={sceneColors[1]} />
           </Pressable>
           {currentScene?.sceneInfoModalProps && (
-            <OnboardingInfoModal
-              sceneInfoProps={currentScene.sceneInfoModalProps}
-              sceneColors={sceneColors}
-            />
+            <Pressable
+              hitSlop={hitSlop}
+              style={styles.buttons}
+              onPress={openInfoModal}
+            >
+              <Question size={20} color={sceneColors[1]} />
+            </Pressable>
           )}
         </View>
         <View style={styles.indicatorContainer}>
@@ -144,14 +152,21 @@ type InfoStepViewProps = {
   title?: React$Node,
   desc?: React$Node,
   image?: number,
-  bullets?: { Icon?: *, label: React$Node, title?: React$Node }[],
+  bullets?: {
+    Icon?: *,
+    label: React$Node,
+    title?: React$Node,
+    index?: number,
+  }[],
   ctaText?: React$Node,
   ctaWarningModal?: {
-    Icon: *,
+    Icon?: *,
+    image?: number,
     title: React$Node,
     desc?: React$Node,
     ctaText: React$Node,
   },
+  infoModalLink?: { label: React$Node },
   ctaWarningCheckbox?: { desc: React$Node },
 };
 
@@ -163,9 +178,15 @@ export function InfoStepView({
   ctaText,
   ctaWarningModal,
   ctaWarningCheckbox,
+  infoModalLink,
   onNext,
   sceneColors,
-}: InfoStepViewProps & { onNext: () => void, sceneColors: string[] }) {
+  openInfoModal,
+}: InfoStepViewProps & {
+  onNext: () => void,
+  sceneColors: string[],
+  openInfoModal: () => void,
+}) {
   const [primaryColor, accentColor, textColor, bulletColor] = sceneColors;
   const [isInfoModalOpen, setInfoModalOpen] = useState(false);
 
@@ -185,10 +206,12 @@ export function InfoStepView({
 
   return (
     <View style={styles.infoStepView}>
-      {image && (
+      {image ? (
         <View style={styles.imageContainer}>
           <Image style={styles.image} source={image} resizeMode="contain" />
         </View>
+      ) : (
+        <View style={styles.imagePlaceholder} />
       )}
       <ScrollView>
         {title && (
@@ -203,7 +226,7 @@ export function InfoStepView({
         )}
         {bullets && (
           <View style={styles.bulletContainer}>
-            {bullets.map(({ Icon, title, label }, i) => (
+            {bullets.map(({ Icon, title, label, index }, i) => (
               <View style={styles.bulletLine} key={i}>
                 <View
                   style={[styles.bulletIcon, { backgroundColor: bulletColor }]}
@@ -215,7 +238,7 @@ export function InfoStepView({
                       semiBold
                       style={[styles.label, { color: colors.live }]}
                     >
-                      {i + 1}
+                      {index || i + 1}
                     </LText>
                   )}
                 </View>
@@ -237,6 +260,14 @@ export function InfoStepView({
           </View>
         )}
       </ScrollView>
+      {infoModalLink && (
+        <Pressable onPress={openInfoModal} style={styles.linkContainer}>
+          <LText semiBold style={[styles.link, { color: textColor }]}>
+            {infoModalLink.label}
+          </LText>
+          <Question size={16} color={textColor} />
+        </Pressable>
+      )}
       {ctaWarningCheckbox && (
         <View style={styles.warningCheckboxContainer}>
           <CheckBox
@@ -280,6 +311,7 @@ export function InfoStepView({
           onConfirm={onConfirmInfo}
           confirmationTitle={ctaWarningModal.title}
           confirmationDesc={ctaWarningModal.desc}
+          image={ctaWarningModal.image}
           Icon={ctaWarningModal.Icon}
           confirmButtonText={ctaWarningModal.ctaText}
           hideRejectButton
@@ -346,7 +378,8 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignContent: "flex-start",
     justifyContent: "flex-start",
-    paddingLeft: 20,
+    flex: 1,
+    marginLeft: 20,
   },
   bulletTitle: {
     fontSize: 16,
@@ -367,6 +400,7 @@ const styles = StyleSheet.create({
     position: "relative",
   },
   image: { position: "absolute", width: "100%", height: "100%" },
+  imagePlaceholder: { flexBasis: 100, flexShrink: 1 },
   ctaButton: {
     height: 50,
     borderRadius: 4,
@@ -384,4 +418,16 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   sceneIndicator: { flex: 1, height: 2, marginHorizontal: 4 },
+  linkContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "flex-start",
+    marginVertical: 16,
+    marginHorizontal: 24,
+    paddingVertical: 16,
+  },
+  link: {
+    fontSize: 15,
+    paddingRight: 8,
+  },
 });

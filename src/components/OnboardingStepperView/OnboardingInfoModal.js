@@ -1,5 +1,5 @@
 // @flow
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useCallback } from "react";
 import {
   SafeAreaView,
   View,
@@ -8,17 +8,10 @@ import {
   Platform,
   ScrollView,
 } from "react-native";
-import ReactNativeModal from "react-native-modal";
 import colors, { rgba } from "../../colors";
-import { normalize } from "../../helpers/normalizeSize";
-import ArrowLeft from "../../icons/ArrowLeft";
-import Check from "../../icons/Check";
-import Question from "../../icons/Question";
 import Styles from "../../navigation/styles";
 import getWindowDimensions from "../../logic/getWindowDimensions";
 
-import CheckBox from "../CheckBox";
-import ConfirmationModal from "../ConfirmationModal";
 import LText from "../LText";
 import Close from "../../icons/Close";
 
@@ -26,7 +19,7 @@ export type SceneInfoProp = {
   title?: React$Node,
   desc?: React$Node,
   link?: { label: React$Node, url: string },
-  bullets: {
+  bullets?: {
     Icon: *,
     title?: React$Node,
     label?: React$Node,
@@ -35,8 +28,10 @@ export type SceneInfoProp = {
 };
 
 type Props = {
-  sceneColors: string[],
-  sceneInfoProps: SceneInfoProp[],
+  navigation: *,
+  route: {
+    params: { sceneInfoProps: SceneInfoProp[] },
+  },
 };
 
 const hitSlop = {
@@ -47,107 +42,87 @@ const hitSlop = {
 };
 const { height } = getWindowDimensions();
 
-export default function OnboardingInfoModal({
-  sceneColors,
-  sceneInfoProps,
-}: Props) {
-  const [isOpen, setIsOpen] = useState(false);
+export default function OnboardingInfoModal({ navigation, route }: Props) {
+  const { sceneInfoProps } = route.params;
+  const close = useCallback(() => navigation.goBack(), [navigation]);
 
-  const open = useCallback(() => setIsOpen(true), []);
-  const close = useCallback(() => setIsOpen(false), []);
-
-  const [primaryColor, accentColor, textColor, bulletColor] = sceneColors;
+  const [primaryColor, textColor, bulletColor] = [
+    "#fff",
+    colors.darkBlue,
+    colors.lightLive,
+  ];
 
   return (
-    <>
-      <Pressable hitSlop={hitSlop} style={styles.buttons} onPress={open}>
-        <Question size={20} color={accentColor} />
-      </Pressable>
-      <ReactNativeModal
-        isVisible={isOpen}
-        useNativeDriver
-        hideModalContentWhileAnimating
-        onBackButtonPress={close}
-        onBackdropPress={close}
-        coverScreen
-        style={styles.modal}
-      >
-        <SafeAreaView style={[styles.root, { backgroundColor: primaryColor }]}>
-          <View style={[styles.header]}>
-            <View style={styles.topHeader}>
-              <Pressable
-                hitSlop={hitSlop}
-                style={styles.buttons}
-                onPress={close}
-              >
-                <Close size={18} color={textColor} />
-              </Pressable>
-            </View>
-          </View>
-          <ScrollView style={styles.root}>
-            {sceneInfoProps.map(({ title, desc, link, bullets }, i) => (
-              <View key={`infoModalSection-${i}`}>
-                {title && (
-                  <LText bold style={[styles.title, { color: textColor }]}>
-                    {title}
-                  </LText>
-                )}
-                {desc && (
-                  <LText semiBold style={[styles.desc, { color: textColor }]}>
-                    {desc}
-                  </LText>
-                )}
-                {bullets && (
-                  <View style={styles.bulletContainer}>
-                    {bullets.map(({ Icon, title, label, color }, i) => (
-                      <View style={styles.bulletLine} key={i}>
-                        <View
+    <SafeAreaView style={[styles.root, { backgroundColor: primaryColor }]}>
+      <View style={[styles.header]}>
+        <View style={styles.topHeader}>
+          <Pressable hitSlop={hitSlop} style={styles.buttons} onPress={close}>
+            <Close size={18} color={textColor} />
+          </Pressable>
+        </View>
+      </View>
+      <ScrollView style={styles.root}>
+        {sceneInfoProps.map(({ title, desc, link, bullets }, i) => (
+          <View key={`infoModalSection-${i}`}>
+            {title && (
+              <LText bold style={[styles.title, { color: textColor }]}>
+                {title}
+              </LText>
+            )}
+            {desc && (
+              <LText semiBold style={[styles.desc, { color: textColor }]}>
+                {desc}
+              </LText>
+            )}
+            {bullets && (
+              <View style={styles.bulletContainer}>
+                {bullets.map(({ Icon, title, label, color }, i) => (
+                  <View style={styles.bulletLine} key={i}>
+                    <View
+                      style={[
+                        styles.bulletIcon,
+                        {
+                          backgroundColor: color
+                            ? rgba(color, 0.1)
+                            : bulletColor,
+                        },
+                      ]}
+                    >
+                      {Icon ? (
+                        <Icon size={10} color={color || colors.live} />
+                      ) : (
+                        <LText
+                          semiBold
                           style={[
-                            styles.bulletIcon,
-                            {
-                              backgroundColor: color
-                                ? rgba(color, 0.1)
-                                : bulletColor,
-                            },
+                            styles.label,
+                            { color: color || colors.live },
                           ]}
                         >
-                          {Icon ? (
-                            <Icon size={10} color={color || colors.live} />
-                          ) : (
-                            <LText
-                              semiBold
-                              style={[
-                                styles.label,
-                                { color: color || colors.live },
-                              ]}
-                            >
-                              {i + 1}
-                            </LText>
-                          )}
-                        </View>
-                        <View style={styles.bulletTextContainer}>
-                          {title && (
-                            <LText
-                              semiBold
-                              style={[styles.bulletTitle, { color: textColor }]}
-                            >
-                              {title}
-                            </LText>
-                          )}
-                          <LText style={[styles.label, { color: textColor }]}>
-                            {label}
-                          </LText>
-                        </View>
-                      </View>
-                    ))}
+                          {i + 1}
+                        </LText>
+                      )}
+                    </View>
+                    <View style={styles.bulletTextContainer}>
+                      {title && (
+                        <LText
+                          semiBold
+                          style={[styles.bulletTitle, { color: textColor }]}
+                        >
+                          {title}
+                        </LText>
+                      )}
+                      <LText style={[styles.label, { color: textColor }]}>
+                        {label}
+                      </LText>
+                    </View>
                   </View>
-                )}
+                ))}
               </View>
-            ))}
-          </ScrollView>
-        </SafeAreaView>
-      </ReactNativeModal>
-    </>
+            )}
+          </View>
+        ))}
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
@@ -171,8 +146,8 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent",
     width: "100%",
     overflow: "hidden",
-    paddingTop: Platform.OS === "ios" ? 44 : 0,
-    height: Platform.OS === "ios" ? 94 : 54,
+    paddingTop: Platform.OS === "ios" ? 84 : 40,
+    height: Platform.OS === "ios" ? 134 : 94,
     flexDirection: "column",
     paddingHorizontal: 24,
   },
@@ -205,6 +180,7 @@ const styles = StyleSheet.create({
     marginVertical: 4,
   },
   bulletTextContainer: {
+    flex: 1,
     flexDirection: "column",
     alignContent: "flex-start",
     justifyContent: "flex-start",

@@ -2,7 +2,7 @@
 
 import React, { PureComponent } from "react";
 import { Trans } from "react-i18next";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Image } from "react-native";
 
 import colors, { rgba } from "../colors";
 import BottomModal from "./BottomModal";
@@ -17,6 +17,7 @@ type Props = {|
   confirmationTitle?: React$Node,
   confirmationDesc?: React$Node,
   Icon?: React$ComponentType<*>,
+  image?: number,
   confirmButtonText?: React$Node,
   rejectButtonText?: React$Node,
   hideRejectButton?: boolean,
@@ -38,6 +39,7 @@ class ConfirmationModal extends PureComponent<Props> {
       rejectButtonText,
       onConfirm,
       Icon,
+      image,
       alert,
       hideRejectButton,
       ...rest
@@ -53,6 +55,11 @@ class ConfirmationModal extends PureComponent<Props> {
         {Icon && (
           <View style={styles.icon}>
             <Icon size={24} color={colors.live} />
+          </View>
+        )}
+        {image && (
+          <View style={styles.imageContainer}>
+            <Image style={styles.image} source={image} resizeMode="contain" />
           </View>
         )}
         {confirmationTitle && (
@@ -125,6 +132,16 @@ const styles = StyleSheet.create({
     height: 56,
     alignItems: "center",
     justifyContent: "center",
+  },
+  imageContainer: {
+    alignItems: "center",
+    justifyContent: "center",
+    height: 120,
+    marginBottom: 16,
+  },
+  image: {
+    height: "100%",
+    width: "100%",
   },
 });
 
