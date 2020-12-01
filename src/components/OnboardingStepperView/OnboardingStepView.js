@@ -11,7 +11,7 @@ import LText from "../LText";
 
 type InfoStepViewProps = {
   title?: React$Node,
-  desc?: React$Node,
+  descs?: React$Node[],
   image?: number,
   bullets?: {
     Icon?: *,
@@ -33,7 +33,7 @@ type InfoStepViewProps = {
 
 export function InfoStepView({
   title,
-  desc,
+  descs,
   image,
   bullets,
   ctaText,
@@ -80,11 +80,16 @@ export function InfoStepView({
             {title}
           </LText>
         )}
-        {desc && (
-          <LText semiBold style={[styles.desc, { color: textColor }]}>
-            {desc}
-          </LText>
-        )}
+        {descs &&
+          descs.map((d, i) => (
+            <LText
+              key={"desc" + i}
+              semiBold
+              style={[styles.desc, { color: textColor }]}
+            >
+              {d}
+            </LText>
+          ))}
         {bullets && (
           <View style={styles.bulletContainer}>
             {bullets.map(({ Icon, title, label, index }, i) => (
@@ -194,7 +199,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
   },
   label: { fontSize: 13, lineHeight: 24 },
-  desc: { paddingHorizontal: 24 },
+  desc: { paddingHorizontal: 24, marginVertical: 4 },
   bulletContainer: {
     flexDirection: "column",
     marginVertical: 8,

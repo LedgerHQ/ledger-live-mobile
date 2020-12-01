@@ -176,7 +176,7 @@ const pinCodeScenes = [
     sceneProps: {
       image: pinCodeImage,
       title: <Trans i18nKey="onboarding.stepSetupDevice.pinCode.title" />,
-      desc: <Trans i18nKey="onboarding.stepSetupDevice.pinCode.desc" />,
+      descs: [<Trans i18nKey="onboarding.stepSetupDevice.pinCode.desc" />],
       ctaText: <Trans i18nKey="onboarding.stepSetupDevice.pinCode.cta" />,
       ctaWarningCheckbox: {
         desc: (
@@ -312,7 +312,9 @@ const setupDeviceScenes: OnboardingScene[] = [
       title: (
         <Trans i18nKey="onboarding.stepSetupDevice.recoveryPhrase.title" />
       ),
-      desc: <Trans i18nKey="onboarding.stepSetupDevice.recoveryPhrase.desc" />,
+      descs: [
+        <Trans i18nKey="onboarding.stepSetupDevice.recoveryPhrase.desc" />,
+      ],
       ctaText: (
         <Trans i18nKey="onboarding.stepSetupDevice.recoveryPhrase.cta" />
       ),
@@ -389,9 +391,9 @@ const setupDeviceScenes: OnboardingScene[] = [
       title: (
         <Trans i18nKey="onboarding.stepSetupDevice.hideRecoveryPhrase.title" />
       ),
-      desc: (
-        <Trans i18nKey="onboarding.stepSetupDevice.hideRecoveryPhrase.desc" />
-      ),
+      descs: [
+        <Trans i18nKey="onboarding.stepSetupDevice.hideRecoveryPhrase.desc" />,
+      ],
       bullets: [
         {
           Icon: Check,
@@ -433,6 +435,166 @@ const setupDeviceScenes: OnboardingScene[] = [
   },
 ];
 
-const recoveryPhraseScenes = [...pinCodeScenes];
+const recoveryPhraseScenes = [
+  {
+    sceneProps: {
+      title: (
+        <Trans i18nKey="onboarding.stepRecoveryPhrase.importRecoveryPhrase.title" />
+      ),
+      descs: [
+        <Trans i18nKey="onboarding.stepRecoveryPhrase.importRecoveryPhrase.desc" />,
+        <Trans i18nKey="onboarding.stepRecoveryPhrase.importRecoveryPhrase.desc_1" />,
+      ],
+      ctaText: (
+        <Trans i18nKey="onboarding.stepRecoveryPhrase.importRecoveryPhrase.cta" />
+      ),
+      ctaWarningModal: {
+        Icon: Warning,
+        title: (
+          <Trans i18nKey="onboarding.stepRecoveryPhrase.importRecoveryPhrase.warning.title" />
+        ),
+        desc: (
+          <Trans i18nKey="onboarding.stepRecoveryPhrase.importRecoveryPhrase.warning.desc" />
+        ),
+        ctaText: (
+          <Trans i18nKey="onboarding.stepRecoveryPhrase.importRecoveryPhrase.warning.cta" />
+        ),
+      },
+    },
+    type: "primary",
+    id: "importRecoveryPhrase",
+  },
+  {
+    sceneProps: {
+      image: pinCodeImage,
+      bullets: [
+        {
+          title: (
+            <Trans i18nKey="onboarding.stepRecoveryPhrase.importRecoveryPhrase.bullets.0.title" />
+          ),
+          label: (
+            <Trans i18nKey="onboarding.stepRecoveryPhrase.importRecoveryPhrase.bullets.0.label" />
+          ),
+        },
+        {
+          title: (
+            <Trans i18nKey="onboarding.stepRecoveryPhrase.importRecoveryPhrase.bullets.1.title" />
+          ),
+          label: (
+            <Trans i18nKey="onboarding.stepRecoveryPhrase.importRecoveryPhrase.bullets.1.label" />
+          ),
+        },
+        {
+          title: (
+            <Trans i18nKey="onboarding.stepRecoveryPhrase.importRecoveryPhrase.bullets.2.title" />
+          ),
+          label: (
+            <Trans i18nKey="onboarding.stepRecoveryPhrase.importRecoveryPhrase.bullets.2.label" />
+          ),
+        },
+        {
+          title: (
+            <Trans i18nKey="onboarding.stepRecoveryPhrase.importRecoveryPhrase.bullets.3.title" />
+          ),
+          label: (
+            <Trans i18nKey="onboarding.stepRecoveryPhrase.importRecoveryPhrase.bullets.3.label" />
+          ),
+        },
+      ],
+      ctaText: (
+        <Trans i18nKey="onboarding.stepRecoveryPhrase.importRecoveryPhrase.nextStep" />
+      ),
+    },
+    type: "secondary",
+    id: "importRecoveryPhrase_1",
+  },
+  ...pinCodeScenes,
+  {
+    sceneProps: {
+      image: pinCodeImage,
+      title: (
+        <Trans i18nKey="onboarding.stepRecoveryPhrase.existingRecoveryPhrase.title" />
+      ),
+      descs: [
+        <Trans i18nKey="onboarding.stepRecoveryPhrase.existingRecoveryPhrase.desc" />,
+        <Trans i18nKey="onboarding.stepRecoveryPhrase.existingRecoveryPhrase.desc_1" />,
+      ],
+      ctaText: (
+        <Trans i18nKey="onboarding.stepRecoveryPhrase.existingRecoveryPhrase.cta" />
+      ),
+      ctaWarningCheckbox: {
+        desc: (
+          <Trans i18nKey="onboarding.stepRecoveryPhrase.existingRecoveryPhrase.checkboxDesc" />
+        ),
+      },
+    },
+    sceneInfoModalProps: recoveryPhraseInfoModalProps,
+    type: "primary",
+    id: "existingRecoveryPhrase",
+  },
+  {
+    sceneProps: {
+      image: pinCodeImage,
+      bullets: [
+        {
+          title: (
+            <Trans i18nKey="onboarding.stepRecoveryPhrase.existingRecoveryPhrase.bullets.0.title" />
+          ),
+        },
+        {
+          title: (
+            <Trans i18nKey="onboarding.stepRecoveryPhrase.existingRecoveryPhrase.bullets.1.title" />
+          ),
+          label: (
+            <Trans i18nKey="onboarding.stepRecoveryPhrase.existingRecoveryPhrase.bullets.1.label" />
+          ),
+        },
+      ],
+      ctaText: (
+        <Trans i18nKey="onboarding.stepRecoveryPhrase.existingRecoveryPhrase.nextStep" />
+      ),
+    },
+    sceneInfoModalProps: recoveryPhraseInfoModalProps,
+    type: "secondary",
+    id: "existingRecoveryPhrase_1",
+  },
+  {
+    sceneProps: {
+      image: pinCodeImage,
+      bullets: [
+        {
+          index: 3,
+          title: (
+            <Trans i18nKey="onboarding.stepRecoveryPhrase.existingRecoveryPhrase.bullets.2.title" />
+          ),
+          label: (
+            <Trans i18nKey="onboarding.stepRecoveryPhrase.existingRecoveryPhrase.bullets.2.label" />
+          ),
+        },
+        {
+          index: 4,
+          title: (
+            <Trans i18nKey="onboarding.stepRecoveryPhrase.existingRecoveryPhrase.bullets.3.title" />
+          ),
+          label: (
+            <Trans i18nKey="onboarding.stepRecoveryPhrase.existingRecoveryPhrase.bullets.3.label" />
+          ),
+        },
+        {
+          index: 5,
+          title: (
+            <Trans i18nKey="onboarding.stepRecoveryPhrase.existingRecoveryPhrase.bullets.4.title" />
+          ),
+        },
+      ],
+      ctaText: (
+        <Trans i18nKey="onboarding.stepRecoveryPhrase.existingRecoveryPhrase.nextStep" />
+      ),
+    },
+    sceneInfoModalProps: recoveryPhraseInfoModalProps,
+    type: "secondary",
+    id: "existingRecoveryPhrase_2",
+  },
+];
 
 export { setupDeviceScenes, recoveryPhraseScenes };
