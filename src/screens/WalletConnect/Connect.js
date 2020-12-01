@@ -54,6 +54,9 @@ export default function Connect({ route, navigation }: Props) {
         account,
         uri: route.params.uri,
       });
+      navigation.setParams({
+        uri: null,
+      });
     }
     if (wcContext.currentCallRequestId) {
       wcContext.setCurrentCallRequestError(new Error("Aborted"));
