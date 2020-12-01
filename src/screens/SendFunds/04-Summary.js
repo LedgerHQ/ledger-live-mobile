@@ -36,6 +36,8 @@ type Props = {
   route: { params: RouteParams },
 };
 
+const WARN_FROM_UTXO_COUNT = 50;
+
 export type RouteParams = {
   accountId: string,
   transaction: Transaction,
@@ -89,7 +91,7 @@ function SendSummary({ navigation, route: initialRoute }: Props) {
     if (!continuing) {
       return;
     }
-    const { warnings } = status;
+    const { warnings, txInputs } = status;
     if (
       Object.keys(warnings).includes("feeTooHigh") &&
       !highFeesWarningPassed
@@ -97,7 +99,11 @@ function SendSummary({ navigation, route: initialRoute }: Props) {
       setHighFeesOpen(true);
       return;
     }
-    if (account && account.operationsCount >= 50 && !utxoWarningPassed) {
+    if (
+      txInputs &&
+      txInputs.length >= WARN_FROM_UTXO_COUNT &&
+      !utxoWarningPassed
+    ) {
       const to = setTimeout(
         () => setUtxoWarningOpen(true),
         // looks like you can not open close a bottom modal
