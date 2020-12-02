@@ -17,6 +17,7 @@ import Styles from "../../navigation/styles";
 
 import type { SceneInfoProp } from "./OnboardingInfoModal";
 import { InfoStepView } from "./OnboardingStepView";
+import type { InfoStepViewProps } from "./OnboardingStepView";
 
 export type OnboardingScene = {
   id: string,
@@ -40,22 +41,23 @@ const hitSlop = {
 };
 
 const initialLayout = { width: Dimensions.get("window").width };
-const headerHeight = Platform.OS === "ios" ? 134 : 94;
+const headerHeight = 94;
 
 export default function OnboardingStepperView({
   scenes,
   navigation,
-  route,
   onFinish,
 }: Props) {
-  const next = useCallback(() => {}, [navigation, route.params]);
-
   const [index, setIndex] = useState(0);
   const [routes] = useState(scenes.map(({ id }) => ({ key: id })));
 
   const onNext = useCallback(() => {
-    setIndex(Math.min(scenes.length - 1, index + 1));
-  }, [index, scenes.length]);
+    if (index === scenes.length - 1) {
+      onFinish();
+    } else {
+      setIndex(Math.min(scenes.length - 1, index + 1));
+    }
+  }, [index, scenes.length, onFinish]);
 
   const onBack = useCallback(() => {
     if (index === 0) navigation.goBack();
@@ -156,7 +158,7 @@ const styles = StyleSheet.create({
     ...Styles.headerNoShadow,
     backgroundColor: "transparent",
     width: "100%",
-    paddingTop: Platform.OS === "ios" ? 84 : 40,
+    paddingTop: Platform.OS === "ios" ? 0 : 40,
     height: headerHeight,
     flexDirection: "column",
     overflow: "hidden",

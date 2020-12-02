@@ -230,6 +230,8 @@ export const ScreenName = {
   OnboardingImportScan: "OnboardingImportScan",
   OnboardingImportSelectAccount: "OnboardingImportSelectAccount",
 
+  OnboardingQuiz: "OnboardingQuiz",
+
   OnboardingPairDevice: "OnboardingPairDevice",
 };
 

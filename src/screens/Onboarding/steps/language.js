@@ -23,40 +23,45 @@ function OnboardingStepLanguage({ navigation }: *) {
 
   return (
     <SafeAreaView style={[styles.root, { backgroundColor: colors.white }]}>
-      <TrackScreen category="Onboarding" name="Language" />
-      <LText semiBold style={styles.title}>
-        <Trans i18nKey="onboarding.stepLanguage.title" />
-      </LText>
-      <View style={styles.localeContainer}>
-        {localeIds.map((l, index) => (
-          <TouchableOpacity
-            key={index + l}
-            onPress={() => changeLanguage(l)}
-            style={[
-              styles.localeButton,
-              {
-                borderColor: l === currentLocale ? colors.live : colors.fog,
-              },
-            ]}
-          >
-            <CheckBox isChecked={l === currentLocale} />
-            <LText semiBold style={styles.localeButtonLabel}>
-              <Trans i18nKey={`onboarding.stepLanguage.${l}`} />
-            </LText>
-          </TouchableOpacity>
-        ))}
+      <View style={[styles.wrapper]}>
+        <TrackScreen category="Onboarding" name="Language" />
+        <LText semiBold style={styles.title}>
+          <Trans i18nKey="onboarding.stepLanguage.title" />
+        </LText>
+        <View style={styles.localeContainer}>
+          {localeIds.map((l, index) => (
+            <TouchableOpacity
+              key={index + l}
+              onPress={() => changeLanguage(l)}
+              style={[
+                styles.localeButton,
+                {
+                  borderColor: l === currentLocale ? colors.live : colors.fog,
+                },
+              ]}
+            >
+              <CheckBox isChecked={l === currentLocale} />
+              <LText semiBold style={styles.localeButtonLabel}>
+                <Trans i18nKey={`onboarding.stepLanguage.${l}`} />
+              </LText>
+            </TouchableOpacity>
+          ))}
+        </View>
+        <Button
+          type="primary"
+          onPress={next}
+          title={<Trans i18nKey="onboarding.stepLanguage.cta" />}
+        />
       </View>
-      <Button
-        type="primary"
-        onPress={next}
-        title={<Trans i18nKey="onboarding.stepLanguage.cta" />}
-      />
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   root: {
+    flex: 1,
+  },
+  wrapper: {
     flex: 1,
     padding: 24,
   },

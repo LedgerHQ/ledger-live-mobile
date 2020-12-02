@@ -16,6 +16,7 @@ import OnboardingInfoModal from "../OnboardingStepperView/OnboardingInfoModal";
 
 import { closableNavigationOptions } from "../../navigation/navigatorConfig";
 import styles from "../../navigation/styles";
+import OnboardingQuiz from "../../screens/Onboarding/OnboardingQuiz";
 
 export default function OnboardingNavigator() {
   return (
@@ -70,6 +71,11 @@ export default function OnboardingNavigator() {
       <Stack.Screen
         name={NavigatorName.PasswordAddFlow}
         component={PasswordAddFlowNavigator}
+      />
+
+      <Stack.Screen
+        name={ScreenName.OnboardingQuiz}
+        component={OnboardingQuiz}
       />
     </Stack.Navigator>
   );

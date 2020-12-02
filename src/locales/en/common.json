@@ -1052,6 +1052,30 @@
     "stepScanQR": {
       "title": "Please go to <1>Settings > Accounts > Export accounts > Export</1> in the desktop app and scan the LiveQR code",
       "cta": "Scan LiveQR code"
+    },
+    "quizz": {
+      "label": "Quiz",
+      "coins": {
+        "title": "As a Ledger user, my coins are stored:",
+        "answers": {
+          "correct": "Still in the blockchain",
+          "wrong": "In my Nano wallet"
+        }
+      },
+      "recoveryPhrase": {
+        "title": "If I lose my recovery phrase...",
+        "answers": {
+          "correct": "Access to my coins is no longer safe and I need to transfer them in a secure place",
+          "wrong": "No problem, Ledger sends me a copy"
+        }
+      },
+      "privateKey": {
+        "title": "When I connect my Nano to Ledger app, my private key is...",
+        "answers": {
+          "correct": "Still offline",
+          "wrong": "Briefly connected to the Internet"
+        }
+      }
     }
   },
   "tabs": {

@@ -9,13 +9,13 @@ import CheckBox from "../CheckBox";
 import ConfirmationModal from "../ConfirmationModal";
 import LText from "../LText";
 
-type InfoStepViewProps = {
+export type InfoStepViewProps = {
   title?: React$Node,
   descs?: React$Node[],
   image?: number,
   bullets?: {
     Icon?: *,
-    label: React$Node,
+    label?: React$Node,
     title?: React$Node,
     index?: number,
   }[],
