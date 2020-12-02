@@ -106,11 +106,13 @@ class PairDevices extends Component<PairDevicesProps, State> {
           reject = error;
         });
 
+        let appsInstalled;
         listApps(transport, deviceInfo)
           .pipe(timeout(GENUINE_CHECK_TIMEOUT))
           .subscribe({
             next: e => {
               if (e.type === "result") {
+                appsInstalled = e.result && e.result.installed.length;
                 if (!hasCompletedOnboarding) {
                   const hasAnyAppInstalled =
                     e.result && e.result.installed.length > 0;
@@ -136,7 +138,12 @@ class PairDevices extends Component<PairDevicesProps, State> {
         const name = (await getDeviceName(transport)) || device.name;
         if (this.unmounted) return;
 
-        this.props.addKnownDevice({ id: device.id, name });
+        this.props.addKnownDevice({
+          id: device.id,
+          name,
+          deviceInfo,
+          appsInstalled,
+        });
         if (this.unmounted) return;
         this.setState({ status: "paired" });
       } finally {

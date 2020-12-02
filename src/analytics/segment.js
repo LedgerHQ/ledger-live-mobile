@@ -27,7 +27,13 @@ const extraProperties = store => {
   const state: State = store.getState();
   const { localeIdentifier, preferredLanguages } = Locale.constants();
   const devices = knownDevicesSelector(state);
-  const devicesVersions = devices.map(device => device.modelId);
+  const lastDevice = devices[-1];
+  const deviceInfo = lastDevice
+    ? {
+        deviceVersion: lastDevice.deviceInfo?.version,
+        appLength: lastDevice.appsInstalled,
+      }
+    : {};
 
   return {
     appVersion,
@@ -40,7 +46,7 @@ const extraProperties = store => {
     platformVersion: Platform.Version,
     sessionId,
     devicesCount: devices.length,
-    devicesVersions,
+    ...deviceInfo,
   };
 };
 
