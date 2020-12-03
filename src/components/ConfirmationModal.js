@@ -11,7 +11,7 @@ import Button from "./Button";
 
 type Props = {|
   isOpened: boolean,
-  onClose: () => void,
+  onClose?: () => void,
   onConfirm: () => *,
   onModalHide?: () => *,
   confirmationTitle?: React$Node,

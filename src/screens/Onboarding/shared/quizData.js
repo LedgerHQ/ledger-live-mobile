@@ -6,6 +6,12 @@ export default [
   {
     label: <Trans i18nKey="onboarding.quizz.label" />,
     title: <Trans i18nKey="onboarding.quizz.coins.title" />,
+    modal: {
+      success: <Trans i18nKey="onboarding.quizz.modal.success" />,
+      fail: <Trans i18nKey="onboarding.quizz.modal.fail" />,
+      text: <Trans i18nKey="onboarding.quizz.coins.modal.text" />,
+      cta: <Trans i18nKey="onboarding.quizz.coins.modal.cta" />,
+    },
     answers: [
       {
         title: <Trans i18nKey="onboarding.quizz.coins.answers.wrong" />,
@@ -20,6 +26,12 @@ export default [
   {
     label: <Trans i18nKey="onboarding.quizz.label" />,
     title: <Trans i18nKey="onboarding.quizz.recoveryPhrase.title" />,
+    modal: {
+      success: <Trans i18nKey="onboarding.quizz.modal.success" />,
+      fail: <Trans i18nKey="onboarding.quizz.modal.fail" />,
+      text: <Trans i18nKey="onboarding.quizz.recoveryPhrase.modal.text" />,
+      cta: <Trans i18nKey="onboarding.quizz.recoveryPhrase.modal.cta" />,
+    },
     answers: [
       {
         title: (
@@ -38,6 +50,12 @@ export default [
   {
     label: <Trans i18nKey="onboarding.quizz.label" />,
     title: <Trans i18nKey="onboarding.quizz.privateKey.title" />,
+    modal: {
+      success: <Trans i18nKey="onboarding.quizz.modal.success" />,
+      fail: <Trans i18nKey="onboarding.quizz.modal.fail" />,
+      text: <Trans i18nKey="onboarding.quizz.privateKey.modal.text" />,
+      cta: <Trans i18nKey="onboarding.quizz.privateKey.modal.cta" />,
+    },
     answers: [
       {
         title: <Trans i18nKey="onboarding.quizz.privateKey.answers.wrong" />,

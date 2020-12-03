@@ -1055,11 +1055,19 @@
     },
     "quizz": {
       "label": "Quiz",
+      "modal": {
+        "success": "Congrats",
+        "fail": "Incorrect!"
+      },
       "coins": {
         "title": "As a Ledger user, my coins are stored:",
         "answers": {
           "correct": "Still in the blockchain",
           "wrong": "In my Nano wallet"
+        },
+        "modal": {
+          "text": "Your coins are always stored on the blockchain. Your Nano wallet only holds your private key, which gives you access to you coins.",
+          "cta": "Next question"
         }
       },
       "recoveryPhrase": {
@@ -1067,6 +1075,10 @@
         "answers": {
           "correct": "Access to my coins is no longer safe and I need to transfer them in a secure place",
           "wrong": "No problem, Ledger sends me a copy"
+        },
+        "modal": {
+          "text": "Anyone who has access to your Recovery sheet can stole your crypto assets without knowing the PIN code of your device. Ledger doesn’t keep a copy of it.",
+          "cta": "Next question"
         }
       },
       "privateKey": {
@@ -1074,6 +1086,10 @@
         "answers": {
           "correct": "Still offline",
           "wrong": "Briefly connected to the Internet"
+        },
+        "modal": {
+          "text": "Your private key always remains offline in your Nano wallet.  Even when connected to your Nano wallet, Ledger app cannot access your private key. You will always need to physically authorize every transaction on your device.",
+          "cta": "Finish quiz"
         }
       }
     }

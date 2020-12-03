@@ -1,5 +1,6 @@
 // @flow
 import React, { useCallback, useState } from "react";
+import noop from "lodash/noop";
 import {
   StyleSheet,
   View,
@@ -8,15 +9,16 @@ import {
   TouchableOpacity,
   Pressable,
 } from "react-native";
-import { Trans } from "react-i18next";
 import { TabView, SceneMap } from "react-native-tab-view";
 import { TrackScreen } from "../../analytics";
-import Button from "../../components/Button";
+import { ScreenName } from "../../const";
 import colors from "../../colors";
 import LText from "../../components/LText";
-import { ScreenName } from "../../const";
+import ConfirmationModal from "../../components/ConfirmationModal";
 import AnimatedHeaderView from "../../components/AnimatedHeader";
 import newDeviceBg from "./assets/newDevice.png";
+import onboardingQuizzCorrectAnswer from "./assets/onboardingQuizzCorrectAnswer.png";
+import onboardingQuizzWrongAnswer from "./assets/onboardingQuizzWrongAnswer.png";
 
 import quizScenes from "./shared/quizData";
 
@@ -25,6 +27,7 @@ const InfoView = ({
   title,
   image,
   answers,
+  onPress,
 }: {
   label: React$Node,
   title: React$Node,
@@ -33,6 +36,7 @@ const InfoView = ({
     title: React$Node,
     correct: boolean,
   }[],
+  onPress: boolean => void,
 }) => (
   <View style={[styles.root]}>
     <LText style={[styles.label, { color: colors.live }]} bold>
@@ -42,11 +46,11 @@ const InfoView = ({
       {title}
     </LText>
     <View style={[styles.answerContainer]}>
-      {answers.map(({ title }, i) => (
+      {answers.map(({ title, correct }, i) => (
         <TouchableOpacity
           key={i}
           style={[styles.answer, { backgroundColor: colors.white }]}
-          onPress={() => {}}
+          onPress={() => onPress(correct)}
         >
           <LText semiBold style={[styles.answerText, { color: colors.live }]}>
             {title}
@@ -60,22 +64,7 @@ const InfoView = ({
   </View>
 );
 
-const scenes = quizScenes.reduce(
-  (sum, k, i) => ({
-    ...sum,
-    [i]: () => (
-      <InfoView
-        label={k.label}
-        title={k.title}
-        image={newDeviceBg}
-        answers={k.answers}
-      />
-    ),
-  }),
-  {},
-);
-
-const routeKeys = [0, 1, 2].map(k => ({ key: `${k}` }));
+const routeKeys = quizScenes.map((k, i) => ({ key: `${i}` }));
 
 const initialLayout = { width: Dimensions.get("window").width };
 
@@ -84,31 +73,60 @@ function OnboardingQuizz({ navigation, route }: *) {
   //   navigation.navigate(ScreenName.OnboardingSetNewDevice, { ...route.params });
   // }, [navigation, route.params]);
 
-  // const userAnswers = useState(() => {
-  //   scenes.
-  // })
-
   const [index, setIndex] = useState(0);
   const [routes] = useState(routeKeys);
 
-  const renderScene = SceneMap(scenes);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const goBack = useCallback(() => {
-    if (index > 0) {
-      setIndex(idx => idx - 1);
+  const [userAnswers, setAnswers] = useState(0);
+  const [currentAnswer, setCurrentAnswer] = useState(null);
+
+  const onClickAnswer = useCallback(correct => {
+    setAnswers(a => (correct ? a + 1 : a));
+    setCurrentAnswer(correct);
+    setIsModalOpen(true);
+  }, []);
+
+  const closeModal = useCallback(() => {
+    setIsModalOpen(false);
+  }, []);
+
+  const onModalHide = useCallback(() => {
+    if (index - 1 === quizScenes.length) {
+      return;
+      // GO TO SUCCESS / FAIL SCREEN
     }
-  }, [setIndex, index]);
+    setIndex(i => Math.min(i + 1, quizScenes.length - 1));
+  }, [index]);
 
+  const renderScene = SceneMap(
+    quizScenes.reduce(
+      (sum, k, i) => ({
+        ...sum,
+        [i]: () => (
+          <InfoView
+            label={k.label}
+            title={k.title}
+            image={newDeviceBg}
+            answers={k.answers}
+            onPress={onClickAnswer}
+          />
+        ),
+      }),
+      {},
+    ),
+  );
+
+  const currentScene = quizScenes[index];
   return (
     <>
       <AnimatedHeaderView
         style={[styles.header, { backgroundColor: colors.lightLive }]}
         title={null}
-        hasBackButton={index !== 0}
+        hasBackButton
         closeAction={() => {
           /* go to next step */
         }}
-        backAction={goBack}
         hasCloseButton
       />
       <View style={[styles.root, { backgroundColor: colors.lightLive }]}>
@@ -137,6 +155,23 @@ function OnboardingQuizz({ navigation, route }: *) {
           ))}
         </View>
       </View>
+      <ConfirmationModal
+        isOpened={isModalOpen}
+        hideRejectButton
+        image={
+          currentAnswer
+            ? onboardingQuizzCorrectAnswer
+            : onboardingQuizzWrongAnswer
+        }
+        confirmationTitle={
+          currentScene.modal[currentAnswer ? "success" : "fail"]
+        }
+        confirmationDesc={currentScene.modal.text}
+        confirmButtonText={currentScene.modal.cta}
+        onConfirm={closeModal}
+        onModalHide={onModalHide}
+        preventBackdropClick
+      />
     </>
   );
 }

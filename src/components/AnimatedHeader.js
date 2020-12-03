@@ -137,10 +137,12 @@ export default function AnimatedHeaderView({
         </AnimatedLText>
       </Animated.View>
       {children && (
-        <Animated.ScrollView onScroll={event} style={styles.scrollArea}>
-          <View style={styles.spacerTop} />
+        <Animated.ScrollView
+          onScroll={event}
+          scrollEventThrottle={10}
+          contentContainerStyle={styles.scrollArea}
+        >
           {children}
-          <View style={styles.spacerBottom} />
         </Animated.ScrollView>
       )}
       {footer}
@@ -159,7 +161,7 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent",
     width: "100%",
     paddingTop: Platform.OS === "ios" ? 0 : 40,
-    height,
+    height: Platform.OS === "ios" ? 40 : 74,
     flexDirection: "column",
     overflow: "visible",
     paddingHorizontal: 24,
@@ -169,12 +171,15 @@ const styles = StyleSheet.create({
     fontSize: normalize(32),
     width: width - 40,
     zIndex: 2,
+    lineHeight: 45,
   },
   buttons: {
     paddingVertical: 16,
   },
   scrollArea: {
     paddingHorizontal: 24,
+    paddingTop: 60,
+    paddingBottom: 24,
   },
   spacerTop: { marginTop: 60 },
   spacerBottom: { marginTop: 24 },
