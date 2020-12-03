@@ -1,7 +1,13 @@
 // @flow
 
 import React, { useCallback, useState } from "react";
-import { StyleSheet, View, Linking, ActivityIndicator } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Linking,
+  ActivityIndicator,
+  Platform,
+} from "react-native";
 import { Trans } from "react-i18next";
 import { TrackScreen } from "../../../analytics";
 import Button from "../../../components/Button";
@@ -33,9 +39,16 @@ function OnboardingStepTerms({ navigation }: *) {
 
   const next = useCallback(() => {
     accept();
-    navigation.navigate(NavigatorName.Onboarding, {
-      screen: ScreenName.OnboardingDeviceSelection,
-    });
+    if (Platform.OS === "ios") {
+      navigation.navigate(NavigatorName.Onboarding, {
+        screen: ScreenName.OnboardingUseCase,
+        deviceModelId: "nanoX",
+      });
+    } else {
+      navigation.navigate(NavigatorName.Onboarding, {
+        screen: ScreenName.OnboardingDeviceSelection,
+      });
+    }
   }, [accept, navigation]);
 
   return (

@@ -233,6 +233,7 @@ export const ScreenName = {
   OnboardingImportSelectAccount: "OnboardingImportSelectAccount",
 
   OnboardingQuiz: "OnboardingQuiz",
+  OnboardingQuizFinal: "OnboardingQuizFinal",
 
   OnboardingFinish: "OnboardingFinish",
 };

@@ -16,10 +16,11 @@ import OnboardingInfoModal from "../OnboardingStepperView/OnboardingInfoModal";
 
 import OnboardingPairNew from "../../screens/Onboarding/steps/pairNew";
 import OnboardingFinish from "../../screens/Onboarding/steps/finish";
+import OnboardingQuiz from "../../screens/Onboarding/OnboardingQuiz";
+import OnboardingQuizFinal from "../../screens/Onboarding/OnboardingQuizFinal";
 
 import { closableNavigationOptions } from "../../navigation/navigatorConfig";
 import styles from "../../navigation/styles";
-import OnboardingQuiz from "../../screens/Onboarding/OnboardingQuiz";
 
 export default function OnboardingNavigator() {
   return (
@@ -89,6 +90,11 @@ export default function OnboardingNavigator() {
       <Stack.Screen
         name={ScreenName.OnboardingQuiz}
         component={OnboardingQuiz}
+      />
+
+      <Stack.Screen
+        name={ScreenName.OnboardingQuizFinal}
+        component={OnboardingQuizFinal}
       />
     </Stack.Navigator>
   );

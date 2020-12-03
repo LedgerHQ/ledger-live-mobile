@@ -31,6 +31,8 @@ type Props = {
   navigation: *,
   route: *,
   onFinish: () => void,
+  hideStepper?: boolean,
+  hideBackButton?: boolean,
 };
 
 const hitSlop = {
@@ -47,6 +49,8 @@ export default function OnboardingStepperView({
   scenes,
   navigation,
   onFinish,
+  hideStepper,
+  hideBackButton,
 }: Props) {
   const [index, setIndex] = useState(0);
   const [routes] = useState(scenes.map(({ id }) => ({ key: id })));
@@ -104,9 +108,15 @@ export default function OnboardingStepperView({
     <SafeAreaView style={[styles.root, { backgroundColor: sceneColors[0] }]}>
       <View style={[styles.header]}>
         <View style={styles.topHeader}>
-          <Pressable hitSlop={hitSlop} style={styles.buttons} onPress={onBack}>
-            <ArrowLeft size={18} color={sceneColors[1]} />
-          </Pressable>
+          {hideBackButton ? null : (
+            <Pressable
+              hitSlop={hitSlop}
+              style={styles.buttons}
+              onPress={onBack}
+            >
+              <ArrowLeft size={18} color={sceneColors[1]} />
+            </Pressable>
+          )}
           {currentScene?.sceneInfoModalProps && (
             <Pressable
               hitSlop={hitSlop}
@@ -118,18 +128,20 @@ export default function OnboardingStepperView({
           )}
         </View>
         <View style={styles.indicatorContainer}>
-          {scenes.map(({ id }, i) => (
-            <View
-              key={"indicator" + id + i}
-              style={[
-                styles.sceneIndicator,
-                {
-                  backgroundColor:
-                    index === i ? sceneColors[1] : sceneColors[4],
-                },
-              ]}
-            />
-          ))}
+          {hideStepper
+            ? null
+            : scenes.map(({ id }, i) => (
+                <View
+                  key={"indicator" + id + i}
+                  style={[
+                    styles.sceneIndicator,
+                    {
+                      backgroundColor:
+                        index === i ? sceneColors[1] : sceneColors[4],
+                    },
+                  ]}
+                />
+              ))}
         </View>
       </View>
       <TabView

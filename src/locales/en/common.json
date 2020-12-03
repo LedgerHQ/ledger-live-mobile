@@ -1140,6 +1140,13 @@
           "text": "Your private key always remains offline in your Nano wallet.  Even when connected to your Nano wallet, Ledger app cannot access your private key. You will always need to physically authorize every transaction on your device.",
           "cta": "Finish quiz"
         }
+      },
+      "final": {
+        "successTitle": "Already a pro!",
+        "successText": "You are ready to safely manage your coins. Let’s quickly pair your device before enjoying your app freely.",
+        "failTitle": "You will soon become a pro...",
+        "failText": "Don’t worry, Ledger is here to guide you through your journey. You will soon feel extra confortable about your cryptos safety. Only one quick step left!",
+        "cta": "Lets pair my Nano"
       }
     }
   },

@@ -1,6 +1,5 @@
 // @flow
 import React, { useCallback, useState } from "react";
-import noop from "lodash/noop";
 import {
   StyleSheet,
   View,
@@ -68,11 +67,7 @@ const routeKeys = quizScenes.map((k, i) => ({ key: `${i}` }));
 
 const initialLayout = { width: Dimensions.get("window").width };
 
-function OnboardingQuizz({ navigation, route }: *) {
-  // const next = useCallback(() => {
-  //   navigation.navigate(ScreenName.OnboardingSetNewDevice, { ...route.params });
-  // }, [navigation, route.params]);
-
+function OnboardingQuizz({ navigation }: *) {
   const [index, setIndex] = useState(0);
   const [routes] = useState(routeKeys);
 
@@ -92,12 +87,14 @@ function OnboardingQuizz({ navigation, route }: *) {
   }, []);
 
   const onModalHide = useCallback(() => {
-    if (index - 1 === quizScenes.length) {
-      return;
-      // GO TO SUCCESS / FAIL SCREEN
+    if (index + 1 === quizScenes.length) {
+      navigation.navigate(ScreenName.OnboardingQuizFinal, {
+        success: userAnswers >= 2,
+      });
+    } else {
+      setIndex(i => Math.min(i + 1, quizScenes.length - 1));
     }
-    setIndex(i => Math.min(i + 1, quizScenes.length - 1));
-  }, [index]);
+  }, [index, userAnswers, navigation]);
 
   const renderScene = SceneMap(
     quizScenes.reduce(

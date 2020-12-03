@@ -22,6 +22,7 @@ type Props = {|
   rejectButtonText?: React$Node,
   hideRejectButton?: boolean,
   alert: boolean,
+  preventBackdropClick?: boolean,
 |};
 
 class ConfirmationModal extends PureComponent<Props> {

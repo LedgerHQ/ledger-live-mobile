@@ -1,11 +1,11 @@
 // @flow
 import React, { useState, useCallback } from "react";
-import { Trans, useTranslation } from "react-i18next";
+import { Trans } from "react-i18next";
 import { useDispatch } from "react-redux";
 import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import connectManager from "@ledgerhq/live-common/lib/hw/connectManager";
 import { createAction } from "@ledgerhq/live-common/lib/hw/actions/manager";
-import { Platform, View } from "react-native";
+import { Platform } from "react-native";
 import { TrackScreen } from "../../../analytics";
 import Button from "../../../components/Button";
 import SelectDevice from "../../../components/SelectDevice";
@@ -80,7 +80,6 @@ type Props = {
 
 export default function OnboardingStepPairNew({ navigation, route }: Props) {
   const { deviceModelId, next } = route.params;
-  const { t } = useTranslation();
   const dispatch = useDispatch();
   const [device, setDevice] = useState<?Device>();
 
