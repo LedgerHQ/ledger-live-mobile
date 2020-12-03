@@ -283,6 +283,7 @@ function LendingEnableSelectAccount({ route, navigation }: Props) {
                 values={{
                   number: filteredAccounts.length,
                   amount: formattedEnabledAmount,
+                  currency: currency.name,
                 }}
               />
             ) : (
