@@ -66,6 +66,7 @@ export const lightTheme = {
     black: "#000000",
     orange: "#ff7701",
     yellow: "#ffd24a",
+    separator: "#ebebeb",
 
     /* DERIVATIVES */
     lightLive: "#4b84ff19",
@@ -111,6 +112,7 @@ export const duskTheme = {
     black: "#ffffff",
     orange: "#ff7701",
     yellow: "#ffd24a",
+    separator: "#ebebeb",
 
     /* DERIVATIVES */
     lightLive: "#4b84ff19",
@@ -156,6 +158,7 @@ export const darkTheme = {
     black: "#FFFFFF",
     orange: "#ff7701",
     yellow: "#ffd24a",
+    separator: "#ebebeb",
 
     /* DERIVATIVES */
     lightLive: "#4b84ff19",

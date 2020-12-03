@@ -30,6 +30,7 @@ type ButtonType =
   | "secondary"
   | "lightSecondary"
   | "darkSecondary"
+  | "greySecondary"
   | "tertiary"
   | "alert";
 
@@ -182,6 +183,9 @@ class Button extends PureComponent<
 
       lightSecondaryContainer: { backgroundColor: "transparent" },
       lightSecondaryTitle: { color: colors.live },
+
+      greySecondaryContainer: { backgroundColor: "transparent" },
+      greySecondaryTitle: { color: colors.grey },
 
       darkSecondaryContainer: { backgroundColor: "transparent" },
       darkSecondaryTitle: { color: colors.smoke },
@@ -340,8 +344,6 @@ const styles = StyleSheet.create({
     borderWidth: 1.5,
     borderRadius: 4,
   },
-
-  // theme
 });
 
 export default ButtonWrapped;

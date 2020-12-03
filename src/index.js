@@ -4,9 +4,9 @@ import "./polyfill";
 import "./live-common-setup";
 import "./implement-react-native-libcore";
 import "react-native-gesture-handler";
-import React, { Component, useCallback } from "react";
+import React, { Component, useCallback, useContext } from "react";
 import { connect, useSelector } from "react-redux";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, Linking } from "react-native";
 import SplashScreen from "react-native-splash-screen";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { I18nextProvider } from "react-i18next";
@@ -19,6 +19,7 @@ import Transport from "@ledgerhq/hw-transport";
 import { NotEnoughBalance } from "@ledgerhq/errors";
 import { log } from "@ledgerhq/logs";
 import { checkLibs } from "@ledgerhq/live-common/lib/sanityChecks";
+import _ from "lodash";
 import { useCountervaluesExport } from "@ledgerhq/live-common/lib/countervalues/react";
 import logger from "./logger";
 import { saveAccounts, saveBle, saveSettings, saveCountervalues } from "./db";
@@ -44,12 +45,16 @@ import DebugRejectSwitch from "./components/DebugRejectSwitch";
 import useAppStateListener from "./components/useAppStateListener";
 import SyncNewAccounts from "./bridge/SyncNewAccounts";
 import { OnboardingContextProvider } from "./screens/Onboarding/onboardingContext";
+import WalletConnectProvider, {
+  context as _wcContext,
+} from "./screens/WalletConnect/Provider";
 import HookAnalytics from "./analytics/HookAnalytics";
 import HookSentry from "./components/HookSentry";
 import RootNavigator from "./components/RootNavigator";
 import SetEnvsFromSettings from "./components/SetEnvsFromSettings";
 import CounterValuesProvider from "./components/CounterValuesProvider";
 import type { State } from "./reducers";
+import { navigationRef } from "./rootnavigation";
 import { useTrackingPairIds } from "./actions/general";
 import { ScreenName, NavigatorName } from "./const";
 import { lightTheme, duskTheme, darkTheme } from "./colors";
@@ -157,6 +162,46 @@ function App({ importDataString }: AppProps) {
   );
 }
 
+/*
+Monkey patching Linking in order to transform wc: schemes to ledgerlive schemes in order
+to play correctly with react navigation.
+*/
+
+const fixURL = url => {
+  let NEWurl = url;
+  if (url.substr(0, 3) === "wc:") {
+    NEWurl = `ledgerlive://wc?uri=${encodeURIComponent(url)}`;
+  }
+  return NEWurl;
+};
+
+const OGgetInitialURL = Linking.getInitialURL.bind(Linking);
+Linking.getInitialURL = () => OGgetInitialURL().then(fixURL);
+
+const NEWcallbacks = [];
+const OGcallbacks = [];
+const OGaddEventListener = Linking.addEventListener.bind(Linking);
+const OGremoveEventListener = Linking.removeEventListener.bind(Linking);
+Linking.addEventListener = (evt, OGcallback) => {
+  let NEWcallback = OGcallback;
+  if (evt === "url") {
+    NEWcallback = ({ url }) => OGcallback({ url: fixURL(url) });
+    OGcallbacks.push(OGcallback);
+    NEWcallbacks.push(NEWcallback);
+  }
+  return OGaddEventListener(evt, NEWcallback);
+};
+Linking.removeEventListener = (evt, OGcallback) => {
+  let NEWcallback = OGcallback;
+  if (evt === "url") {
+    const index = _.findLastIndex(OGcallbacks, OGcallback);
+    NEWcallback = NEWcallbacks[index];
+    _.pull(NEWcallbacks, NEWcallback);
+    _.pull(OGcallbacks, OGcallback);
+  }
+  return OGremoveEventListener(evt, NEWcallback);
+};
+
 // DeepLinking
 const linking = {
   prefixes: ["ledgerlive://"],
@@ -165,6 +210,11 @@ const linking = {
       path: "",
       initialRouteName: NavigatorName.Main,
       screens: {
+        /**
+         * @params ?uri: string
+         * ie: "ledgerhq://wc?uri=wc:00e46b69-d0cc-4b3e-b6a2-cee442f97188@1?bridge=https%3A%2F%2Fbridge.walletconnect.org&key=91303dedf64285cbbaf9120f6e9d160a5c8aa3deb67017a3874cd272323f48ae
+         */
+        [ScreenName.WalletConnectDeeplinkingSelectAccount]: "wc",
         [NavigatorName.Main]: {
           path: "",
           /**
@@ -225,38 +275,42 @@ const linking = {
 };
 
 const DeepLinkingNavigator = ({ children }: { children: React$Node }) => {
-  const ref = React.useRef();
   const hasCompletedOnboarding = useSelector(hasCompletedOnboardingSelector);
+  const wcContext = useContext(_wcContext);
 
-  const { getInitialState } = useLinking(ref, {
+  const enabled =
+    hasCompletedOnboarding && wcContext.initDone && !wcContext.session.session;
+
+  const { getInitialState } = useLinking(navigationRef, {
     ...linking,
-    enabled: hasCompletedOnboarding,
     getStateFromPath(path, config) {
-      // Return a state object here
-      // You can also reuse the default logic by importing `getStateFromPath` from `@react-navigation/native`
-      const state = getStateFromPath(path, config);
-      return hasCompletedOnboarding ? state : null;
+      if (!enabled) {
+        // Our current version of react navigation does not support the enable param
+        return null;
+      }
+      return getStateFromPath(path, config);
     },
   });
 
-  /** we consider the state is ready during onboarding no need to get it from deeplinking */
-  const [isReady, setIsReady] = React.useState(!hasCompletedOnboarding);
+  const [isReady, setIsReady] = React.useState(false);
   const [initialState, setInitialState] = React.useState();
 
   React.useEffect(() => {
-    if (hasCompletedOnboarding)
-      getInitialState()
-        .catch(() => {
-          setIsReady(true);
-        })
-        .then(state => {
-          if (state !== undefined) {
-            setInitialState(state);
-          }
+    if (!wcContext.initDone) {
+      return;
+    }
+    getInitialState()
+      .catch(() => {
+        setIsReady(true);
+      })
+      .then(state => {
+        if (state) {
+          setInitialState(state);
+        }
 
-          setIsReady(true);
-        });
-  }, [getInitialState, hasCompletedOnboarding]);
+        setIsReady(true);
+      });
+  }, [getInitialState, wcContext.initDone]);
 
   const theme = useSelector(themeSelector);
 
@@ -268,7 +322,7 @@ const DeepLinkingNavigator = ({ children }: { children: React$Node }) => {
     <NavigationContainer
       theme={themes[theme]}
       initialState={initialState}
-      ref={ref}
+      ref={navigationRef}
     >
       {children}
     </NavigationContainer>
@@ -311,28 +365,28 @@ export default class Root extends Component<
                 <SetEnvsFromSettings />
                 <HookSentry />
                 <HookAnalytics store={store} />
-
-                <DeepLinkingNavigator>
-                  <SafeAreaProvider>
-                    <AuthPass>
-                      <StyledStatusBar />
-
-                      <I18nextProvider i18n={i18n}>
-                        <LocaleProvider>
-                          <BridgeSyncProvider>
-                            <CounterValuesProvider>
-                              <ButtonUseTouchable.Provider value={true}>
-                                <OnboardingContextProvider>
-                                  <App importDataString={importDataString} />
-                                </OnboardingContextProvider>
-                              </ButtonUseTouchable.Provider>
-                            </CounterValuesProvider>
-                          </BridgeSyncProvider>
-                        </LocaleProvider>
-                      </I18nextProvider>
-                    </AuthPass>
-                  </SafeAreaProvider>
-                </DeepLinkingNavigator>
+                <WalletConnectProvider>
+                  <DeepLinkingNavigator>
+                    <SafeAreaProvider>
+                      <AuthPass>
+                        <StyledStatusBar />
+                        <I18nextProvider i18n={i18n}>
+                          <LocaleProvider>
+                            <BridgeSyncProvider>
+                              <CounterValuesProvider>
+                                <ButtonUseTouchable.Provider value={true}>
+                                  <OnboardingContextProvider>
+                                    <App importDataString={importDataString} />
+                                  </OnboardingContextProvider>
+                                </ButtonUseTouchable.Provider>
+                              </CounterValuesProvider>
+                            </BridgeSyncProvider>
+                          </LocaleProvider>
+                        </I18nextProvider>
+                      </AuthPass>
+                    </SafeAreaProvider>
+                  </DeepLinkingNavigator>
+                </WalletConnectProvider>
               </>
             ) : (
               <LoadingApp />

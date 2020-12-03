@@ -18,7 +18,7 @@ type Props = {
   primaryButton?: React$Node,
   secondaryButton?: React$Node,
   icon?: React$Node,
-  iconColor: string,
+  iconColor?: string,
   info?: React$Node,
   onLearnMore?: () => void,
 };

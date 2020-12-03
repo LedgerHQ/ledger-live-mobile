@@ -17,9 +17,9 @@ import Animated from "react-native-reanimated";
 
 import i18next from "i18next";
 import { Trans } from "react-i18next";
+import { useTheme } from "@react-navigation/native";
 import type { ManagerTab } from "./Manager";
 
-import { useTheme } from "@react-navigation/native";
 import SearchModal from "./Modals/SearchModal";
 import AppFilter from "./AppsList/AppFilter";
 import UninstallAllButton from "./AppsList/UninstallAllButton";

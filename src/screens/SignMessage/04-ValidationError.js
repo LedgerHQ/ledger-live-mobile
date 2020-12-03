@@ -2,7 +2,8 @@
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import { StyleSheet, Linking } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
-import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
+import type { TypedMessageData } from "@ledgerhq/live-common/lib/families/ethereum/types";
+import type { MessageData } from "@ledgerhq/live-common/lib/hw/signMessage/types";
 import { useTheme } from "@react-navigation/native";
 import { TrackScreen } from "../../analytics";
 import ValidateError from "../../components/ValidateError";
@@ -15,17 +16,13 @@ import {
 const forceInset = { bottom: "always" };
 
 type Props = {
-  account: AccountLike,
-  parentAccount: ?Account,
   navigation: any,
   route: { params: RouteParams },
 };
 
 type RouteParams = {
   accountId: string,
-  parentId: String,
-  deviceId: string,
-  transaction: any,
+  message: TypedMessageData | MessageData,
   error: Error,
 };
 
@@ -56,10 +53,10 @@ export default function ValidationError({ navigation, route }: Props) {
 
   return (
     <SafeAreaView
-      style={[styles.root, { backgroundColor: colors.background }]}
+      style={[styles.root, { backgroundColor: colors.white }]}
       forceInset={forceInset}
     >
-      <TrackScreen category="SendFunds" name="ValidationError" />
+      <TrackScreen category="SignMessage" name="ValidationError" />
       <ValidateError
         error={error}
         onRetry={!disableRetry ? retry : null}

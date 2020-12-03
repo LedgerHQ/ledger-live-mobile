@@ -27,7 +27,9 @@ function CheckBox({ isChecked, disabled, onChange, style }: Props) {
     onChange(!isChecked);
   }, [isChecked, onChange]);
 
-  const body = <IconCheck size={20} color="white" />;
+  const body = (
+    <IconCheck size={20} color={!isChecked ? "transparent" : "white"} />
+  );
 
   const commonProps = {
     style: [
@@ -63,10 +65,8 @@ const styles = StyleSheet.create({
     borderRadius: 24,
   },
   rootChecked: {
-    borderWidth: 0,
-  },
-  invisible: {
-    opacity: 0,
+    borderWidth: 2,
+    borderColor: "transparent",
   },
 });
 
