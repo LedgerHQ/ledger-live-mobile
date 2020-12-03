@@ -83,12 +83,14 @@ function LendingEnableSelectAccount({ route, navigation }: Props) {
     }
   }, [currency, filteredAccounts, navigation]);
 
+  let accountsWithUnlimitedEnabledAmount = 0;
   filteredAccounts.some(({ account }) => {
     const { enabledAmount, enabledAmountIsUnlimited } =
       (account.type === "TokenAccount" && getAccountCapabilities(account)) ||
       {};
     if (enabledAmountIsUnlimited) {
       enabledTotalAmount = Infinity;
+      accountsWithUnlimitedEnabledAmount += 1;
       return true;
     }
     if (enabledAmount && enabledAmount.gt(0)) {
@@ -281,7 +283,10 @@ function LendingEnableSelectAccount({ route, navigation }: Props) {
                     : "transfer.lending.enable.selectAccount.enabledAccountsNoLimit"
                 }
                 values={{
-                  number: filteredAccounts.length,
+                  number:
+                    enabledTotalAmount < Infinity
+                      ? filteredAccounts.length
+                      : accountsWithUnlimitedEnabledAmount,
                   amount: formattedEnabledAmount,
                   currency: currency.name,
                 }}
