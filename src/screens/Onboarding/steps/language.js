@@ -1,8 +1,8 @@
 // @flow
 
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import { StyleSheet, View, SafeAreaView, TouchableOpacity } from "react-native";
-import { Trans } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import i18next from "i18next";
 import { TrackScreen } from "../../../analytics";
 import Button from "../../../components/Button";
@@ -12,14 +12,33 @@ import CheckBox from "../../../components/CheckBox";
 import { useLocale } from "../../../context/Locale";
 import { localeIds } from "../../../languages";
 import { ScreenName } from "../../../const";
+import ConfirmationModal from "../../../components/ConfirmationModal";
+import Warning from "../../../icons/Warning";
 
 function OnboardingStepLanguage({ navigation }: *) {
+  const { t } = useTranslation();
   const next = useCallback(() => {
     navigation.navigate(ScreenName.OnboardingTermsOfUse);
   }, [navigation]);
   const { locale: currentLocale } = useLocale();
 
-  const changeLanguage = useCallback(l => i18next.changeLanguage(l), []);
+  const [isInfoModalOpen, setInfoModalOpen] = useState("");
+
+  const onCloseInfoModal = useCallback(() => setInfoModalOpen(""), []);
+  const onConfirmInfo = useCallback(() => {
+    onCloseInfoModal();
+    next();
+  }, [onCloseInfoModal, next]);
+
+  const changeLanguage = useCallback(
+    l => {
+      i18next.changeLanguage(l);
+      if (l !== "en") {
+        setInfoModalOpen(l);
+      }
+    },
+    [setInfoModalOpen],
+  );
 
   return (
     <SafeAreaView style={[styles.root, { backgroundColor: colors.white }]}>
@@ -53,6 +72,27 @@ function OnboardingStepLanguage({ navigation }: *) {
           title={<Trans i18nKey="onboarding.stepLanguage.cta" />}
         />
       </View>
+      <ConfirmationModal
+        isOpened={!!isInfoModalOpen}
+        onClose={onCloseInfoModal}
+        onConfirm={onConfirmInfo}
+        confirmationTitle={
+          <Trans
+            i18nKey="onboarding.stepLanguage.warning.title"
+            values={{
+              language: t(`onboarding.stepLanguage.${isInfoModalOpen}`),
+            }}
+          />
+        }
+        confirmationDesc={
+          <Trans i18nKey="onboarding.stepLanguage.warning.desc" />
+        }
+        Icon={Warning}
+        confirmButtonText={
+          <Trans i18nKey="onboarding.stepLanguage.warning.cta" />
+        }
+        hideRejectButton
+      />
     </SafeAreaView>
   );
 }

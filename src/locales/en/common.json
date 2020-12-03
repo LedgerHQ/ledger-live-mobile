@@ -688,7 +688,12 @@
       "fr": "French",
       "es": "Spanish",
       "zh": "Chinese",
-      "ru": "Russian"
+      "ru": "Russian",
+      "warning": {
+        "title": "Get started in {{language}}",
+        "cta": "Got it!",
+        "desc": "We are introducing additional languages  in order to help your onboarding with Ledger. Please be aware that the rest of the Ledger experience is currently only available in English."
+      }
     },
     "stepSelectDevice": {
       "title": "What’s your device?",

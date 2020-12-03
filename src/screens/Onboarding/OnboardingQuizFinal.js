@@ -1,18 +1,26 @@
 // @flow
-import React from "react";
+import React, { useCallback } from "react";
 import { Trans } from "react-i18next";
-import { Image, StyleSheet } from "react-native";
 import OnboardingStepperView from "../../components/OnboardingStepperView";
+import { ScreenName } from "../../const";
 import onboardingQuizFinalIllustration from "./assets/onboardingQuizFinal.png";
 
 const OnboardingQuizFinal = ({ navigation, route }: *) => {
   const { success } = route.params;
+
+  const next = useCallback(() => {
+    navigation.navigate(ScreenName.OnboardingPairNew, {
+      ...route.params,
+      next: ScreenName.OnboardingFinish,
+    });
+  }, [navigation, route.params]);
 
   const scene = [
     {
       id: "quizFinal",
       type: "primary",
       sceneProps: {
+        image: onboardingQuizFinalIllustration,
         title: (
           <Trans
             i18nKey={`onboarding.quizz.final.${
@@ -28,13 +36,6 @@ const OnboardingQuizFinal = ({ navigation, route }: *) => {
             }`}
           />,
         ],
-        children: (
-          <Image
-            style={styles.image}
-            source={onboardingQuizFinalIllustration}
-            resizeMode="cover"
-          />
-        ),
       },
     },
   ];
@@ -44,17 +45,11 @@ const OnboardingQuizFinal = ({ navigation, route }: *) => {
       scenes={scene}
       navigation={navigation}
       route={route}
-      onFinish={() => {}}
+      onFinish={next}
       hideBackButton
       hideStepper
     />
   );
 };
-
-const styles = StyleSheet.create({
-  image: {
-    opacity: 0.5,
-  },
-});
 
 export default OnboardingQuizFinal;

@@ -36,11 +36,6 @@ const hitSlop = {
 function OnboardingStepWelcome({ navigation }: *) {
   const buy = useCallback(() => Linking.openURL(urls.buyNanoX), []);
   const next = useCallback(
-    // () => navigation.navigate(ScreenName.OnboardingTermsOfUse),
-    () => navigation.navigate(ScreenName.OnboardingQuiz),
-    [navigation],
-  );
-  const switchLanguage = useCallback(
     () => navigation.navigate(ScreenName.OnboardingLanguage),
     [navigation],
   );
@@ -52,7 +47,7 @@ function OnboardingStepWelcome({ navigation }: *) {
       <View style={styles.header}>
         <TouchableOpacity
           style={[styles.languageButton, { borderColor: colors.fog }]}
-          onPress={switchLanguage}
+          onPress={next}
         >
           <LText semiBold style={styles.languageLabel}>
             {locale}

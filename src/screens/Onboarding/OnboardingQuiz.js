@@ -67,7 +67,7 @@ const routeKeys = quizScenes.map((k, i) => ({ key: `${i}` }));
 
 const initialLayout = { width: Dimensions.get("window").width };
 
-function OnboardingQuizz({ navigation }: *) {
+function OnboardingQuizz({ navigation, route }: *) {
   const [index, setIndex] = useState(0);
   const [routes] = useState(routeKeys);
 
@@ -85,6 +85,13 @@ function OnboardingQuizz({ navigation }: *) {
   const closeModal = useCallback(() => {
     setIsModalOpen(false);
   }, []);
+
+  const skip = useCallback(() => {
+    navigation.navigate(ScreenName.OnboardingPairNew, {
+      ...route.params,
+      next: ScreenName.OnboardingFinish,
+    });
+  }, [navigation, route.params]);
 
   const onModalHide = useCallback(() => {
     if (index + 1 === quizScenes.length) {
@@ -121,9 +128,7 @@ function OnboardingQuizz({ navigation }: *) {
         style={[styles.header, { backgroundColor: colors.lightLive }]}
         title={null}
         hasBackButton
-        closeAction={() => {
-          /* go to next step */
-        }}
+        closeAction={skip}
         hasCloseButton
       />
       <View style={[styles.root, { backgroundColor: colors.lightLive }]}>
