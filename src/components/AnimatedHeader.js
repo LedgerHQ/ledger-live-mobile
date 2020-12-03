@@ -21,8 +21,6 @@ const { interpolate, Extrapolate } = Animated;
 
 const AnimatedLText = Animated.createAnimatedComponent(LText);
 
-const height = 74;
-
 const hitSlop = {
   bottom: 10,
   left: 24,
@@ -170,15 +168,15 @@ const styles = StyleSheet.create({
   title: {
     fontSize: normalize(32),
     width: width - 40,
-    zIndex: 2,
     lineHeight: 45,
+    zIndex: 2,
   },
   buttons: {
     paddingVertical: 16,
   },
   scrollArea: {
     paddingHorizontal: 24,
-    paddingTop: 60,
+    paddingTop: 50,
     paddingBottom: 24,
   },
   spacerTop: { marginTop: 60 },

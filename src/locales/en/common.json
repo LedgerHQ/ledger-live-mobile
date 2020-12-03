@@ -972,6 +972,55 @@
         "nextStep": "Next step"
       }
     },
+    "stepPairNew": {
+      "title": "Pair your Nano",
+      "desc": "This is the first time you’re setting up your Nano with your smartphone. Let’s quickly pair your device before enjoying your app freely.",
+      "cta": "Let’s pair my Nano",
+      "infoModal": {
+        "title": "Where can I find my device name?",
+        "desc": "On your device, select Settings > General > Device name.",
+        "title_1": "How to set up Bluetooth connection?",
+        "bullets": {
+          "0": {
+            "label": "Make sure Bluetooth is enabled on your smartphone and on your Ledger Nano X. Your Ledger Nano X should be on the Dashboard, its main home screen."
+          },
+          "1": {
+            "label": "<1>{{Os}}</1>: Make sure location services are enabled in your phone's settings for Ledger Live. Ledger Live never uses your location information, this is a requirement for Bluetooth on {{Os}}."
+          },
+          "2": {
+            "label": "If you have a Bluetooth pairing issue, please refer to the following article",
+            "link": "Fix connection issues."
+          }
+        }
+      },
+      "errorInfoModal": {
+        "title": "Something went wrong?",
+        "title_1": "I have an Android",
+        "title_2": "Update Android version",
+        "desc": "If you're experiencing Bluetooth issues with your Nano X, please remove the pairing and forget Nano X on your phone. Then try the pairing again.",
+        "desc_1": "It may take a while before the Bluetooth pairing request is displayed. Make sure you verify and confirm the pairing code both on your Nano X and on your phone.",
+        "desc_2": "Check in your phone's Bluetooth settings whether the Ledger Nano X is detected. If it not detected, make sure you turn on the Bluetooth on your Ledger Nano X.",
+        "desc_3": "Location services",
+        "desc_4": "If the Ledger Nano X is not detected in your mobile app when trying to pair it, please try the following solution:",
+        "desc_5": "Ledger mobile app asks you to allow location services when it's not enabled yet, but on a few phone models, this is not always properly detected. Please note that Ledger mobile app never uses your location information, this permission is simply required for Bluetooth on Android.",
+        "desc_6": "Some users have reported having fixed their connection issues by updating the Android version running on their phone to a newer one. Please check with your phone manufacturer whether an update is available.",
+        "link": "Learn more",
+        "bullets": {
+          "0": {
+            "label": "Navigate to the system options for the Ledger Live app on your Android phone."
+          },
+          "1": {
+            "label": "Allow the location to be used."
+          },
+          "2": {
+            "label": "Return to the mobile app."
+          },
+          "3": {
+            "label": "Check whether your Nano X is detected."
+          }
+        }
+      }
+    },
     "stepGetStarted": {
       "title": "Get started",
       "import": "Import desktop accounts",

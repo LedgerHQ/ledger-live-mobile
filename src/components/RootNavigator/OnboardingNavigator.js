@@ -14,6 +14,9 @@ import OnboardingNewDevice from "../../screens/Onboarding/steps/setupDevice";
 import OnboardingRecoveryPhrase from "../../screens/Onboarding/steps/recoveryPhrase";
 import OnboardingInfoModal from "../OnboardingStepperView/OnboardingInfoModal";
 
+import OnboardingPairNew from "../../screens/Onboarding/steps/pairNew";
+import OnboardingFinish from "../../screens/Onboarding/steps/finish";
+
 import { closableNavigationOptions } from "../../navigation/navigatorConfig";
 import styles from "../../navigation/styles";
 import OnboardingQuiz from "../../screens/Onboarding/OnboardingQuiz";
@@ -66,6 +69,16 @@ export default function OnboardingNavigator() {
       <Stack.Screen
         name={ScreenName.OnboardingInfoModal}
         component={OnboardingInfoModal}
+      />
+
+      <Stack.Screen
+        name={ScreenName.OnboardingPairNew}
+        component={OnboardingPairNew}
+      />
+
+      <Stack.Screen
+        name={ScreenName.OnboardingFinish}
+        component={OnboardingFinish}
       />
 
       <Stack.Screen

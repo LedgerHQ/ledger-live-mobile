@@ -227,12 +227,14 @@ export const ScreenName = {
   OnboardingInfoModal: "OnboardingInfoModal",
   OnboardingRecoveryPhrase: "OnboardingRecoveryPhrase",
 
+  OnboardingPairNew: "OnboardingPairNew",
+
   OnboardingImportScan: "OnboardingImportScan",
   OnboardingImportSelectAccount: "OnboardingImportSelectAccount",
 
   OnboardingQuiz: "OnboardingQuiz",
 
-  OnboardingPairDevice: "OnboardingPairDevice",
+  OnboardingFinish: "OnboardingFinish",
 };
 
 export const NavigatorName = {

@@ -25,6 +25,7 @@ export type SceneInfoProp = {
     title?: React$Node,
     label?: React$Node,
     color?: string,
+    link?: { label: React$Node, url: string },
   }[],
 };
 
@@ -89,47 +90,64 @@ export default function OnboardingInfoModal({ navigation, route }: Props) {
             )}
             {bullets && (
               <View style={styles.bulletContainer}>
-                {bullets.map(({ Icon, title, label, color }, i) => (
-                  <View style={styles.bulletLine} key={i}>
-                    <View
-                      style={[
-                        styles.bulletIcon,
-                        {
-                          backgroundColor: color
-                            ? rgba(color, 0.1)
-                            : bulletColor,
-                        },
-                      ]}
-                    >
-                      {Icon ? (
-                        <Icon size={10} color={color || colors.live} />
-                      ) : (
-                        <LText
-                          semiBold
-                          style={[
-                            styles.label,
-                            { color: color || colors.live },
-                          ]}
-                        >
-                          {i + 1}
+                {bullets.map(
+                  ({ Icon, title, label, color, link: bulletLink }, i) => (
+                    <View style={styles.bulletLine} key={i}>
+                      <View
+                        style={[
+                          styles.bulletIcon,
+                          {
+                            backgroundColor: color
+                              ? rgba(color, 0.1)
+                              : bulletColor,
+                          },
+                        ]}
+                      >
+                        {Icon ? (
+                          <Icon size={10} color={color || colors.live} />
+                        ) : (
+                          <LText
+                            semiBold
+                            style={[
+                              styles.label,
+                              { color: color || colors.live },
+                            ]}
+                          >
+                            {i + 1}
+                          </LText>
+                        )}
+                      </View>
+                      <View style={styles.bulletTextContainer}>
+                        {title && (
+                          <LText
+                            semiBold
+                            style={[styles.bulletTitle, { color: textColor }]}
+                          >
+                            {title}
+                          </LText>
+                        )}
+                        <LText style={[styles.label, { color: textColor }]}>
+                          {label}
                         </LText>
-                      )}
+                        {bulletLink && (
+                          <Pressable
+                            onPress={() =>
+                              Linking.canOpenURL(bulletLink.url) &&
+                              Linking.openURL(bulletLink.url)
+                            }
+                          >
+                            <LText
+                              semiBold
+                              style={[styles.label, { color: colors.live }]}
+                            >
+                              {bulletLink.label}
+                            </LText>
+                          </Pressable>
+                        )}
+                      </View>
                     </View>
-                    <View style={styles.bulletTextContainer}>
-                      {title && (
-                        <LText
-                          semiBold
-                          style={[styles.bulletTitle, { color: textColor }]}
-                        >
-                          {title}
-                        </LText>
-                      )}
-                      <LText style={[styles.label, { color: textColor }]}>
-                        {label}
-                      </LText>
-                    </View>
-                  </View>
-                ))}
+                  ),
+                )}
               </View>
             )}
           </View>
@@ -147,6 +165,7 @@ const styles = StyleSheet.create({
   },
   root: {
     flex: 1,
+    paddingBottom: 24,
   },
   topHeader: {
     flexDirection: "row",

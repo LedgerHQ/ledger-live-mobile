@@ -37,7 +37,6 @@ function OnboardingStepWelcome({ navigation }: *) {
   const buy = useCallback(() => Linking.openURL(urls.buyNanoX), []);
   const next = useCallback(
     () => navigation.navigate(ScreenName.OnboardingTermsOfUse),
-    // () => navigation.navigate(ScreenName.OnboardingQuiz),
     [navigation],
   );
   const switchLanguage = useCallback(

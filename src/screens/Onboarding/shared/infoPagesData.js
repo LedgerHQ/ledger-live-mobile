@@ -1,5 +1,6 @@
 // @flow
 import React from "react";
+import { Platform } from "react-native";
 import { Trans } from "react-i18next";
 import colors from "../../../colors";
 import type { OnboardingScene } from "../../../components/OnboardingStepperView";
@@ -164,11 +165,84 @@ const hideRecoveryPhraseInfoModalProps = [
       {
         Icon: ArrowRight,
         label: (
-          <Trans i18nKey="onboarding.stepSetupDevice.hideRecoveryPhrase.infoModal.bullets.2.label" />
+          <Trans i18nKey="onboarding.stepSetupDevice.hideRecoveryPhrase.infoModal.bullets.3.label" />
         ),
       },
     ],
   },
+];
+
+export const pairNewErrorInfoModalProps = [
+  {
+    title: <Trans i18nKey="onboarding.stepPairNew.errorInfoModal.title" />,
+    desc: <Trans i18nKey="onboarding.stepPairNew.errorInfoModal.desc" />,
+  },
+  {
+    desc: <Trans i18nKey="onboarding.stepPairNew.errorInfoModal.desc_1" />,
+  },
+  {
+    desc: <Trans i18nKey="onboarding.stepPairNew.errorInfoModal.desc_2" />,
+    link: {
+      label: <Trans i18nKey="onboarding.stepPairNew.errorInfoModal.link" />,
+      url: "",
+    },
+  },
+  ...(Platform.OS === "android"
+    ? [
+        {
+          title: (
+            <Trans i18nKey="onboarding.stepPairNew.errorInfoModal.title_1" />
+          ),
+          desc: (
+            <Trans i18nKey="onboarding.stepPairNew.errorInfoModal.desc_3" />
+          ),
+        },
+        {
+          desc: (
+            <Trans i18nKey="onboarding.stepPairNew.errorInfoModal.desc_4" />
+          ),
+          bullets: [
+            {
+              Icon: ArrowRight,
+              label: (
+                <Trans i18nKey="onboarding.stepPairNew.errorInfoModal.bullets.0.label" />
+              ),
+            },
+            {
+              Icon: ArrowRight,
+              label: (
+                <Trans i18nKey="onboarding.stepPairNew.errorInfoModal.bullets.1.label" />
+              ),
+            },
+            {
+              Icon: ArrowRight,
+              label: (
+                <Trans i18nKey="onboarding.stepPairNew.errorInfoModal.bullets.2.label" />
+              ),
+            },
+            {
+              Icon: ArrowRight,
+              label: (
+                <Trans i18nKey="onboarding.stepPairNew.errorInfoModal.bullets.3.label" />
+              ),
+            },
+          ],
+        },
+        {
+          desc: (
+            <Trans i18nKey="onboarding.stepPairNew.errorInfoModal.desc_5" />
+          ),
+        },
+        {
+          title: (
+            <Trans i18nKey="onboarding.stepPairNew.errorInfoModal.title_2" />
+          ),
+          desc: (
+            <Trans i18nKey="onboarding.stepPairNew.errorInfoModal.desc_6" />
+          ),
+        },
+      ]
+    : []),
 ];
 
 const pinCodeScenes = [

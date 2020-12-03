@@ -29,6 +29,7 @@ export type InfoStepViewProps = {
   },
   infoModalLink?: { label: React$Node },
   ctaWarningCheckbox?: { desc: React$Node },
+  children?: React$Node,
 };
 
 export function InfoStepView({
@@ -40,6 +41,7 @@ export function InfoStepView({
   ctaWarningModal,
   ctaWarningCheckbox,
   infoModalLink,
+  children,
   onNext,
   sceneColors,
   openInfoModal,
@@ -67,6 +69,9 @@ export function InfoStepView({
 
   return (
     <View style={styles.infoStepView}>
+      {children ? (
+        <View style={styles.childrenContainer}>{children}</View>
+      ) : null}
       {image ? (
         <View style={styles.imageContainer}>
           <Image style={styles.image} source={image} resizeMode="contain" />
@@ -74,7 +79,7 @@ export function InfoStepView({
       ) : (
         <View style={styles.imagePlaceholder} />
       )}
-      <ScrollView>
+      <ScrollView contentContainerStyle={styles.scrollArea}>
         {title && (
           <LText bold style={[styles.title, { color: textColor }]}>
             {title}
@@ -150,26 +155,28 @@ export function InfoStepView({
         </View>
       )}
 
-      <Pressable
-        style={[
-          styles.ctaButton,
-          {
-            backgroundColor: isDisabled ? "rgba(0,0,0,0.1)" : accentColor,
-          },
-        ]}
-        disabled={isDisabled}
-        onPress={ctaWarningModal ? onOpenInfoModal : onNext}
-      >
-        <LText
-          semiBold
+      {ctaText && (
+        <Pressable
           style={[
-            styles.ctaLabel,
-            { color: isDisabled ? "rgba(0,0,0,0.3)" : primaryColor },
+            styles.ctaButton,
+            {
+              backgroundColor: isDisabled ? "rgba(0,0,0,0.1)" : accentColor,
+            },
           ]}
+          disabled={isDisabled}
+          onPress={ctaWarningModal ? onOpenInfoModal : onNext}
         >
-          {ctaText}
-        </LText>
-      </Pressable>
+          <LText
+            semiBold
+            style={[
+              styles.ctaLabel,
+              { color: isDisabled ? "rgba(0,0,0,0.3)" : primaryColor },
+            ]}
+          >
+            {ctaText}
+          </LText>
+        </Pressable>
+      )}
       {ctaWarningModal && (
         <ConfirmationModal
           isOpened={isInfoModalOpen}
@@ -193,6 +200,10 @@ const styles = StyleSheet.create({
     paddingVertical: 24,
     flex: 1,
   },
+  childrenContainer: {
+    padding: 24,
+  },
+  scrollArea: {},
   title: {
     fontSize: normalize(32),
     marginVertical: 16,
@@ -244,7 +255,7 @@ const styles = StyleSheet.create({
     position: "relative",
   },
   image: { position: "absolute", width: "100%", height: "100%" },
-  imagePlaceholder: { flexBasis: 100, flexShrink: 1 },
+  imagePlaceholder: { flex: 1, flexShrink: 1, flexBasis: 100 },
   ctaButton: {
     height: 50,
     borderRadius: 4,

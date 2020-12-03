@@ -25,8 +25,8 @@ const deviceIds = Platform.OS === "ios" ? { nanoX } : { nanoS, nanoX, blue };
 
 function OnboardingStepDeviceSelection({ navigation }: *) {
   const next = useCallback(
-    (deviceId: string) => {
-      navigation.navigate(ScreenName.OnboardingUseCase, { device: "t" });
+    (deviceModelId: string) => {
+      navigation.navigate(ScreenName.OnboardingUseCase, { deviceModelId });
     },
     [navigation],
   );
