@@ -1021,6 +1021,27 @@
         }
       }
     },
+    "stepImportAccounts": {
+      "title": "Sync cryptos from desktop",
+      "desc": "If you already have your cryptos set-up in Ledger desktop, you can sync them and manage them from your smartphone.",
+      "cta": "I’m ready to scan",
+      "bullets": {
+        "0": {
+          "label": "On your Desktop app, select <1>Settings > Accounts > Account export</1>"
+        },
+        "1": {
+          "label": "Scan the QR code with your phone"
+        },
+        "2": {
+          "label": "Select the cryptos accounts to import"
+        }
+      },
+      "warning": {
+        "title": "Your desktop and mobile apps must be synced manually",
+        "desc": "Ledger respects your privacy and stores your data locally. If you change settings on your smartphone, you will need to do the same on your computer. And vice versa. However, your cryptos transfer are directly linked to your wallet and the blockchain.",
+        "cta": "Got it!"
+      }
+    },
     "stepGetStarted": {
       "title": "Get started",
       "import": "Import desktop accounts",

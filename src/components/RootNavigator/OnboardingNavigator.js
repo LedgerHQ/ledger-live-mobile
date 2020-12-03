@@ -15,6 +15,7 @@ import OnboardingRecoveryPhrase from "../../screens/Onboarding/steps/recoveryPhr
 import OnboardingInfoModal from "../OnboardingStepperView/OnboardingInfoModal";
 
 import OnboardingPairNew from "../../screens/Onboarding/steps/pairNew";
+import OnboardingImportAccounts from "../../screens/Onboarding/steps/importAccounts";
 import OnboardingFinish from "../../screens/Onboarding/steps/finish";
 import OnboardingQuiz from "../../screens/Onboarding/OnboardingQuiz";
 import OnboardingQuizFinal from "../../screens/Onboarding/OnboardingQuizFinal";
@@ -75,6 +76,11 @@ export default function OnboardingNavigator() {
       <Stack.Screen
         name={ScreenName.OnboardingPairNew}
         component={OnboardingPairNew}
+      />
+
+      <Stack.Screen
+        name={ScreenName.OnboardingImportAccounts}
+        component={OnboardingImportAccounts}
       />
 
       <Stack.Screen

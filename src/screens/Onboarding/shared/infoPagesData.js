@@ -671,4 +671,46 @@ const recoveryPhraseScenes = [
   },
 ];
 
-export { setupDeviceScenes, recoveryPhraseScenes };
+const importAccountsScenes = [
+  {
+    sceneProps: {
+      title: <Trans i18nKey="onboarding.stepImportAccounts.title" />,
+      descs: [<Trans i18nKey="onboarding.stepImportAccounts.desc" />],
+      ctaText: <Trans i18nKey="onboarding.stepImportAccounts.cta" />,
+      bullets: [
+        {
+          Icon: Clock,
+          label: (
+            <Trans i18nKey="onboarding.stepImportAccounts.bullets.0.label">
+              {""}
+              <LText semiBold />
+              {""}
+            </Trans>
+          ),
+        },
+        {
+          Icon: Clock,
+          label: (
+            <Trans i18nKey="onboarding.stepImportAccounts.bullets.1.label" />
+          ),
+        },
+        {
+          Icon: Check,
+          label: (
+            <Trans i18nKey="onboarding.stepImportAccounts.bullets.2.title" />
+          ),
+        },
+      ],
+      ctaWarningModal: {
+        Icon: Warning,
+        title: <Trans i18nKey="onboarding.stepImportAccounts.warning.title" />,
+        desc: <Trans i18nKey="onboarding.stepImportAccounts.warning.desc" />,
+        ctaText: <Trans i18nKey="onboarding.stepImportAccounts.warning.cta" />,
+      },
+    },
+    type: "primary",
+    id: "importRecoveryPhrase",
+  },
+];
+
+export { setupDeviceScenes, recoveryPhraseScenes, importAccountsScenes };

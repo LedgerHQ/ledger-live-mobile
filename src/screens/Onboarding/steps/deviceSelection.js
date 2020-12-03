@@ -1,21 +1,14 @@
 // @flow
 
 import React, { useCallback } from "react";
-import {
-  StyleSheet,
-  Image,
-  SafeAreaView,
-  ScrollView,
-  View,
-  Platform,
-} from "react-native";
+import { StyleSheet, Image, View, Platform } from "react-native";
 import { Trans } from "react-i18next";
 import { TrackScreen } from "../../../analytics";
 import colors from "../../../colors";
 import LText from "../../../components/LText";
-import nanoS from "../assets/nanoS_1.png";
-import nanoX from "../assets/nanoX_1.png";
-import blue from "../assets/blue_1.png";
+import nanoS from "../assets/nanoS.png";
+import nanoX from "../assets/nanoX.png";
+import blue from "../assets/blue.png";
 
 import Touchable from "../../../components/Touchable";
 import { ScreenName } from "../../../const";
@@ -49,11 +42,13 @@ function OnboardingStepDeviceSelection({ navigation }: *) {
             <Trans i18nKey={`onboarding.stepSelectDevice.${deviceId}`} />
           </LText>
           <View style={styles.imageContainer}>
-            <Image
-              style={styles.bgImage}
-              resizeMode="contain"
-              source={deviceIds[deviceId]}
-            />
+            {deviceIds[deviceId] ? (
+              <Image
+                style={styles.bgImage}
+                resizeMode="contain"
+                source={deviceIds[deviceId]}
+              />
+            ) : null}
           </View>
         </Touchable>
       ))}
