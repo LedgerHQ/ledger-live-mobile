@@ -23,8 +23,15 @@ type Props = {
 
 const useCases = {
   firstUse: { route: ScreenName.OnboardingSetNewDeviceInfo, image: firstUse },
-  devicePairing: { route: "", image: devicePairing },
-  desktopSync: { route: "", image: desktopSync },
+  devicePairing: {
+    route: ScreenName.OnboardingPairNew,
+    image: devicePairing,
+    next: ScreenName.OnboardingFinish,
+  },
+  desktopSync: {
+    route: ScreenName.OnboardingImportAccounts,
+    image: desktopSync,
+  },
   restoreDevice: {
     route: ScreenName.OnboardingRecoveryPhrase,
     image: restoreDevice,
@@ -33,8 +40,8 @@ const useCases = {
 
 function OnboardingStepUseCaseSelection({ navigation, route }: Props) {
   const next = useCallback(
-    ({ route: r }: { route: string }) => {
-      navigation.navigate(r, { ...route.params });
+    ({ route: r, next }: { route: string, next?: string }) => {
+      navigation.navigate(r, { ...route.params, next });
     },
     [navigation, route],
   );

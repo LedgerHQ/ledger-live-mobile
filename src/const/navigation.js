@@ -228,6 +228,7 @@ export const ScreenName = {
   OnboardingRecoveryPhrase: "OnboardingRecoveryPhrase",
 
   OnboardingPairNew: "OnboardingPairNew",
+  OnboardingImportAccounts: "OnboardingImportAccounts",
 
   OnboardingImportScan: "OnboardingImportScan",
   OnboardingImportSelectAccount: "OnboardingImportSelectAccount",

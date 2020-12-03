@@ -24,23 +24,22 @@ const hitSlop = {
   top: 10,
 };
 
-const ErrorHeaderInfo = () => {
-  const navigation = useNavigation();
+const ErrorHeaderInfo = ({ route, navigation }: *) => {
   const openInfoModal = useCallback(() => {
     navigation.navigate(ScreenName.OnboardingInfoModal, {
       sceneInfoProps: pairNewErrorInfoModalProps,
     });
   }, [navigation]);
 
-  return (
+  return route.params.hasError ? (
     <Pressable
       style={{ marginRight: 24 }}
       hitSlop={hitSlop}
       onPress={openInfoModal}
     >
-      <Question size={20} color={colors.darkBlue} />
+      <Question size={20} color={colors.grey} />
     </Pressable>
-  );
+  ) : null;
 };
 
 export default function BaseOnboardingNavigator() {
@@ -64,11 +63,15 @@ export default function BaseOnboardingNavigator() {
       <Stack.Screen
         name={ScreenName.PairDevices}
         component={PairDevices}
-        options={{
-          title: null,
-          headerRight: ErrorHeaderInfo,
-          headerShown: true,
-          headerStyle: styles.headerNoShadow,
+        options={({ navigation, route }) => {
+          return {
+            title: null,
+            headerRight: () => (
+              <ErrorHeaderInfo route={route} navigation={navigation} />
+            ),
+            headerShown: true,
+            headerStyle: styles.headerNoShadow,
+          };
         }}
       />
       <Stack.Screen
