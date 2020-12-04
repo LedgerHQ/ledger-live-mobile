@@ -2749,7 +2749,13 @@
   },
   "producttour": {
     "installCryptoTitle": "Install first crypto app",
-    "stepFinishedContinue": "Continue",
+    "finishedmodal": {
+      "cta": "Continue",
+      "title": "Congrats!",
+      "installcrypto": "The app is ready to use.\nNow let’s create your crypto account.",
+      "createaccount": "Your crypto account is ready to use.\nThe private key was generated and you can now manage your coins",
+      "receivecoins": "Congrats, your transaction is under way. Your coins should arrive shortly."
+    },
     "widget": {
       "title": "WELCOME TO LEDGER",
       "title2": "Ready to\nget started?",

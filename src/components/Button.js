@@ -28,6 +28,7 @@ type ButtonType =
   | "primary"
   | "lightPrimary"
   | "negativePrimary"
+  | "negative2Primary"
   | "secondary"
   | "lightSecondary"
   | "darkSecondary"
@@ -314,6 +315,9 @@ const styles = StyleSheet.create({
 
   negativePrimaryContainer: { backgroundColor: "white" },
   negativePrimaryTitle: { color: colors.live },
+
+  negative2PrimaryContainer: { backgroundColor: "white" },
+  negative2PrimaryTitle: { color: colors.darkBlue },
 
   secondaryContainer: { backgroundColor: "transparent" },
   secondaryTitle: { color: colors.grey },

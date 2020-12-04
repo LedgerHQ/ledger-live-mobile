@@ -1,19 +1,31 @@
 // @flow
 
 import React, { useContext } from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Image } from "react-native";
 import { Trans } from "react-i18next";
 import colors from "../../colors";
 import BottomModal from "../../components/BottomModal";
 import type { Props as BMProps } from "../../components/BottomModal";
 import LText from "../../components/LText";
 import Button from "../../components/Button";
-import Info from "../../icons/Info";
 import TrackScreen from "../../analytics/TrackScreen";
 import { context as _ptContext } from "./Provider";
+import ArrowRight from "../../icons/ArrowRight";
 
 type Props = BMProps & {
   onPress: Function,
+};
+
+const stepTitles = {
+  INSTALL_CRYPTO: "producttour.finishedmodal.installcrypto",
+  CREATE_ACCOUNT: "producttour.finishedmodal.createaccount",
+  RECEIVE_COINS: "producttour.finishedmodal.receivecoins",
+  /*
+  "BUY_COINS": ["CREATE_ACCOUNT"],
+  "SEND_COINS": ["CREATE_ACCOUNT"],
+  "SWAP_COINS": ["RECEIVE_COINS"],
+  CUSTOMIZE_APP: [],
+  */
 };
 
 const ProductTourStepFinishedBottomModal = ({
@@ -30,6 +42,7 @@ const ProductTourStepFinishedBottomModal = ({
       isOpened={isOpened}
       onClose={onClose}
       style={styles.confirmationModal}
+      containerStyle={styles.container}
       {...rest}
     >
       {isOpened && ptContext.currentStep ? (
@@ -38,18 +51,27 @@ const ProductTourStepFinishedBottomModal = ({
           name={ptContext.currentStep}
         />
       ) : null}
-      <View style={styles.icon}>
-        <Info size={24} color={colors.orange} />
+      <View style={{ alignItems: "center" }}>
+        <Image
+          source={require("../../images/stepfinishedcastle.png")}
+          style={styles.image}
+        />
       </View>
-      <LText style={styles.description}>Step finished</LText>
+      <LText bold style={styles.title}>
+        <Trans i18nKey="producttour.finishedmodal.title" />
+      </LText>
+      <LText style={styles.description}>
+        <Trans i18nKey={stepTitles[ptContext.currentStep]} />
+      </LText>
       <View style={styles.confirmationFooter}>
         <Button
           event={`ProductTourStepFinishedBottomModal continue ${ptContext.currentStep ||
             ""}`}
           containerStyle={styles.confirmationButton}
-          type="primary"
-          title={<Trans i18nKey="producttour.stepFinishedContinue" />}
+          type="negative2Primary"
+          title={<Trans i18nKey="producttour.finishedmodal.cta" />}
           onPress={onPress}
+          IconRight={ArrowRight}
         />
       </View>
     </BottomModal>
@@ -59,19 +81,23 @@ const ProductTourStepFinishedBottomModal = ({
 const styles = StyleSheet.create({
   confirmationModal: {
     paddingVertical: 24,
-    paddingTop: 24,
+    paddingTop: 74,
     paddingHorizontal: 16,
+    backgroundColor: colors.ledgerGreen,
+  },
+  container: {
+    backgroundColor: colors.ledgerGreen,
   },
   title: {
     textAlign: "center",
-    fontSize: 18,
-    color: colors.darkBlue,
+    fontSize: 28,
+    color: colors.white,
   },
   description: {
     marginVertical: 32,
     textAlign: "center",
     fontSize: 14,
-    color: colors.smoke,
+    color: colors.white,
   },
   confirmationFooter: {
     justifyContent: "flex-end",
@@ -91,6 +117,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginBottom: 18,
+  },
+  image: {
+    position: "absolute",
+    top: -92 - 74,
+    height: 146,
+    width: 137,
   },
 });
 
