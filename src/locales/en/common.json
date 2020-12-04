@@ -657,20 +657,6 @@
     }
   },
   "onboarding": {
-    "stepCount": "{{current}} of {{total}}",
-    "stepsTitles": {
-      "OnboardingStepChooseDevice": "Choose your device",
-      "OnboardingStepSetupPin": "Choose your PIN",
-      "OnboardingStepWriteRecovery": "Write down Recovery phrase",
-      "OnboardingStepWriteRecoveryRestore": "Enter Recovery phrase",
-      "OnboardingStepSecurityChecklist": "Security checklist",
-      "OnboardingStepPairNew": "Pair your {{fullDeviceName}}",
-      "OnboardingStepConnectNew": "Connect your device",
-      "OnboardingStepPassword": "Password lock",
-      "OnboardingStepScanQR": "Import Desktop accounts",
-      "OnboardingStepGetStarted": "Ledger Nano X",
-      "OnboardingStepShareData": "Analytics and bug reports"
-    },
     "stepWelcome": {
       "title": "Welcome to Ledger",
       "subtitle": "Safely manage your cryptos from your smartphone.",
@@ -1044,23 +1030,6 @@
         "cta": "Got it!"
       }
     },
-    "stepGetStarted": {
-      "title": "Get started",
-      "import": "Import Desktop accounts",
-      "initialize": "Initialize as a new device",
-      "restore": "Restore from a Recovery phrase",
-      "initialized": "Use initialized device"
-    },
-    "stepChooseDevice": {
-      "desktopOnly": "Desktop app only",
-      "fallbackTitle": "Import your {{oldDeviceName}} accounts",
-      "fallbackDesc": "You can import your {{oldDeviceName}} accounts from Ledger Live Desktop to check your balance on the go. To make all your transactions securely, consider upgrading to a {{fullDeviceName}}."
-    },
-    "stepLegacy": {
-      "bannerDescription": "To make all your transactions securely, consider upgrading to a {{productName}}",
-      "description": "You can import your accounts from Ledger Live Desktop to check your balance on the go.",
-      "buy": "Buy a {{productName}}"
-    },
     "stepSetupPin": {
       "step1": "Turn on your {{fullDeviceName}} and follow the instructions.",
       "step1-nanoS": "Connect your {{fullDeviceName}} to your phone using an OTG cable.",
@@ -1087,23 +1056,6 @@
         "step4": "Never use a device with a Recovery phrase or PIN already setup."
       }
     },
-    "stepWriteRecoveryRestore": {
-      "step1": "Take your Recovery sheet.",
-      "step2": "Choose the length of your Recovery phrase.",
-      "step3": "Enter the first letters of <1><1>Word #1</1></1> until suggestions are given.",
-      "step4": "Choose <1><1>Word #1</1></1> from the suggestions by pressing both buttons together.",
-      "step5": "Repeat the process for all words."
-    },
-    "stepSecurityChecklist": {
-      "pinCode": {
-        "title": "Did you choose your own PIN?",
-        "error": "To protect your assets, never use a device with a pre-installed PIN. Please contact Ledger Support if in doubt."
-      },
-      "recoveryPhrase": {
-        "title": "Did you write down your own Recovery phrase?",
-        "error": "Write down the Recovery phrase only if it is displayed on your device, to you alone. Please contact Ledger Support if in doubt."
-      }
-    },
     "stepPassword": {
       "desc": "Set a password to protect Ledger Live data on your phone.",
       "descConfigured": "Password lock enabled successfully",
@@ -1114,16 +1066,11 @@
         "step3": "Resetting Ledger Live has no impact on your crypto assets."
       }
     },
-    "stepShareData": {},
     "stepFinish": {
       "title": "Your device is ready!",
       "readOnlyTitle": "All set!",
       "desc": "Install apps on your device and manage your portfolio",
       "cta": "Open Ledger Live"
-    },
-    "stepScanQR": {
-      "title": "Please go to <1>Settings > Accounts > Export accounts > Export</1> in the Desktop app and scan the LiveQR code",
-      "cta": "Scan LiveQR code"
     },
     "quizz": {
       "label": "Quiz",
