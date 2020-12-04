@@ -2749,6 +2749,14 @@
   },
   "producttour": {
     "installCryptoTitle": "Install first crypto app",
-    "stepFinishedContinue": "Continue"
+    "stepFinishedContinue": "Continue",
+    "widget": {
+      "title": "WELCOME TO LEDGER",
+      "title2": "Ready to\nget started?",
+      "startedtitle": "PRODUCT TOUR",
+      "startedtitle2": "Only {{ count }} steps to go",
+      "cta": "Start the tour",
+      "startedcta": "Continue"
+    }
   }
 }
