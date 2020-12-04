@@ -24,6 +24,7 @@ export const ScreenName = {
   ClaimRewardsValidationSuccess: "ClaimRewardsValidationSuccess",
   ConfirmPassword: "ConfirmPassword",
   CountervalueSettings: "CountervalueSettings",
+  CryptoAssetsSettings: "CryptoAssetsSettings",
   CurrenciesList: "CurrenciesList",
   CurrencySettings: "CurrencySettings",
   DebugBLE: "DebugBLE",
@@ -109,6 +110,11 @@ export const ScreenName = {
   SendValidationError: "SendValidationError",
   SendValidationSuccess: "SendValidationSuccess",
   Settings: "Settings",
+  SignConnectDevice: "SignConnectDevice",
+  SignSelectDevice: "SignSelectDevice",
+  SignSummary: "SignSummary",
+  SignValidationError: "SignValidationError",
+  SignValidationSuccess: "SignValidationSuccess",
   StellarEditMemoType: "StellarEditMemoType",
   StellarEditMemoValue: "StellarEditMemoValue",
   Swap: "Swap",
@@ -237,6 +243,10 @@ export const ScreenName = {
   OnboardingQuizFinal: "OnboardingQuizFinal",
 
   OnboardingFinish: "OnboardingFinish",
+  WalletConnectScan: "WalletConnectScan",
+  WalletConnectConnect: "WalletConnectConnect",
+  WalletConnectDeeplinkingSelectAccount:
+    "WalletConnectDeeplinkingSelectAccount",
 };
 
 export const NavigatorName = {
@@ -270,6 +280,7 @@ export const NavigatorName = {
   ReceiveFunds: "ReceiveFunds",
   SendFunds: "SendFunds",
   Settings: "Settings",
+  SignMessage: "SignMessage",
   Swap: "Swap",
   TezosDelegationFlow: "TezosDelegationFlow",
   TronVoteFlow: "TronVoteFlow",
@@ -282,7 +293,6 @@ export const NavigatorName = {
   /* eslint-disable sort-keys */
 
   // Tab
-  CryptoAssetsSettings: "CryptoAssetsSettings",
   Main: "Main",
 
   // Root
