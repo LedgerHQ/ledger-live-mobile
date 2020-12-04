@@ -1,10 +1,9 @@
 // @flow
 
-import React, { Component } from "react";
+import React, { useState, useCallback, useRef, useEffect } from "react";
 import { StyleSheet, FlatList } from "react-native";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import { Trans } from "react-i18next";
-import { createStructuredSelector } from "reselect";
 import { Observable } from "rxjs";
 import logger from "../../logger";
 import { BLE_SCANNING_NOTHING_TIMEOUT } from "../../constants";
@@ -17,9 +16,9 @@ import ScanningHeader from "./ScanningHeader";
 
 type Props = {
   knownDevices: DeviceLike[],
-  onSelect: Device => *,
-  onError: Error => *,
-  onTimeout: () => *,
+  onSelect: (device: Device) => void,
+  onError: (error: Error) => void,
+  onTimeout: () => void,
 };
 
 type Device = {
@@ -27,103 +26,81 @@ type Device = {
   name: string,
 };
 
-type State = {
-  devices: Device[],
-};
+export default function Scanning({ onTimeout, onError, onSelect }: Props) {
+  const knownDevices = useSelector(knownDevicesSelector);
+  const [devices, setDevices] = useState<Device[]>([]);
+  const sub = useRef();
+  const timeout = useRef();
 
-class Scanning extends Component<Props, State> {
-  state = {
-    devices: [],
-  };
+  const renderItem = useCallback(
+    ({ item }) => {
+      const knownDevice = knownDevices.find(d => d.id === item.id);
+      return (
+        <DeviceItem
+          device={item}
+          deviceMeta={{
+            deviceId: item.id,
+            deviceName: item.name,
+            wired: false,
+            modelId: "nanoX",
+          }}
+          onSelect={() => onSelect(item)}
+          disabled={!!knownDevice}
+          description={
+            knownDevice ? <Trans i18nKey="PairDevices.alreadyPaired" /> : ""
+          }
+        />
+      );
+    },
+    [onSelect, knownDevices],
+  );
 
-  sub: *;
-
-  timeout: *;
-
-  componentDidMount() {
-    this.timeout = setTimeout(() => {
-      this.props.onTimeout();
-    }, BLE_SCANNING_NOTHING_TIMEOUT);
-    this.startScan();
-  }
-
-  componentWillUnmount() {
-    if (this.sub) this.sub.unsubscribe();
-    clearTimeout(this.timeout);
-  }
-
-  startScan = async () => {
-    this.sub = Observable.create(TransportBLE.listen).subscribe({
+  const startScan = useCallback(async () => {
+    sub.current = Observable.create(TransportBLE.listen).subscribe({
       next: e => {
         if (e.type === "add") {
-          clearTimeout(this.timeout);
+          clearTimeout(timeout.current);
           const device = e.descriptor;
-          this.setState(({ devices }) => ({
-            // FIXME seems like we have dup. ideally we'll remove them on the listen side!
-            devices: devices.some(i => i.id === device.id)
+          // FIXME seems like we have dup. ideally we'll remove them on the listen side!
+          setDevices(devices =>
+            devices.some(i => i.id === device.id)
               ? devices
-              : devices.concat(device),
-          }));
+              : [...devices, device],
+          );
         }
       },
       error: error => {
         logger.critical(error);
-        this.props.onError(error);
+        onError(error);
       },
     });
-  };
+  }, [onError]);
 
-  keyExtractor = (item: *) => item.id;
+  useEffect(() => {
+    timeout.current = setTimeout(() => {
+      onTimeout();
+    }, BLE_SCANNING_NOTHING_TIMEOUT);
+    startScan();
 
-  reload = async () => {
-    if (this.sub) this.sub.unsubscribe();
-    this.startScan();
-  };
+    return () => {
+      sub.current?.unsubscribe();
+      clearTimeout(timeout.current);
+    };
+  }, [onTimeout, startScan]);
 
-  renderItem = ({ item }: { item: * }) => {
-    const knownDevice = this.props.knownDevices.find(d => d.id === item.id);
-    return (
-      <DeviceItem
-        device={item}
-        deviceMeta={{
-          deviceId: item.id,
-          deviceName: item.name,
-          wired: false,
-          modelId: "nanoX",
-        }}
-        onSelect={() => this.props.onSelect(item)}
-        disabled={!!knownDevice}
-        description={
-          knownDevice ? <Trans i18nKey="PairDevices.alreadyPaired" /> : ""
-        }
+  return (
+    <>
+      <TrackScreen category="PairDevices" name="Scanning" />
+      <FlatList
+        style={styles.list}
+        data={devices}
+        renderItem={renderItem}
+        keyExtractor={item => item.id}
+        ListHeaderComponent={ScanningHeader}
       />
-    );
-  };
-
-  ListHeader = () => <ScanningHeader />;
-
-  render() {
-    const { devices } = this.state;
-    return (
-      <>
-        <TrackScreen category="PairDevices" name="Scanning" />
-        <FlatList
-          style={styles.list}
-          data={devices}
-          renderItem={this.renderItem}
-          keyExtractor={this.keyExtractor}
-          ListHeaderComponent={this.ListHeader}
-        />
-      </>
-    );
-  }
+    </>
+  );
 }
-
-export default connect(
-  createStructuredSelector({
-    knownDevices: knownDevicesSelector,
-  }),
-)(Scanning);
 
 const styles = StyleSheet.create({
   list: {
