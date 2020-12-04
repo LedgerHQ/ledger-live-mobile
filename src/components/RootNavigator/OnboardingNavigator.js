@@ -1,6 +1,9 @@
 // @flow
 import React from "react";
-import { createStackNavigator } from "@react-navigation/stack";
+import {
+  createStackNavigator,
+  CardStyleInterpolators,
+} from "@react-navigation/stack";
 import { ScreenName, NavigatorName } from "../../const";
 import PasswordAddFlowNavigator from "./PasswordAddFlowNavigator";
 
@@ -71,6 +74,9 @@ export default function OnboardingNavigator() {
       <Stack.Screen
         name={ScreenName.OnboardingInfoModal}
         component={OnboardingInfoModal}
+        options={{
+          cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS,
+        }}
       />
 
       <Stack.Screen
