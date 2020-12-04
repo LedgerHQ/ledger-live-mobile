@@ -46,6 +46,7 @@ import { OnboardingContextProvider } from "./screens/Onboarding/onboardingContex
 import WalletConnectProvider, {
   context as _wcContext,
 } from "./screens/WalletConnect/Provider";
+import ProductTourProvider from "./screens/ProductTour/Provider";
 import HookAnalytics from "./analytics/HookAnalytics";
 import HookSentry from "./components/HookSentry";
 import RootNavigator from "./components/RootNavigator";
@@ -360,7 +361,11 @@ export default class Root extends Component<
                               <CounterValuesProvider>
                                 <ButtonUseTouchable.Provider value={true}>
                                   <OnboardingContextProvider>
-                                    <App importDataString={importDataString} />
+                                    <ProductTourProvider>
+                                      <App
+                                        importDataString={importDataString}
+                                      />
+                                    </ProductTourProvider>
                                   </OnboardingContextProvider>
                                 </ButtonUseTouchable.Provider>
                               </CounterValuesProvider>

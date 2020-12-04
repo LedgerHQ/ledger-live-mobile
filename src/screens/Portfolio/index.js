@@ -36,6 +36,7 @@ import MigrateAccountsBanner from "../MigrateAccounts/Banner";
 import OngoingScams from "../../components/banners/OngoingScams";
 import RequireTerms from "../../components/RequireTerms";
 import { useScrollToTop } from "../../navigation/utils";
+import PortfolioWidget from "../ProductTour/PortfolioWidget";
 
 export { default as PortfolioTabIcon } from "./TabIcon";
 
@@ -151,6 +152,7 @@ export default function PortfolioScreen({ navigation }: Props) {
         ref={ref}
         data={[
           <OngoingScams />,
+          <PortfolioWidget navigation={navigation} />,
           ...(accounts.length > 0 && !accounts.every(isAccountEmpty)
             ? [<Carousel />]
             : []),

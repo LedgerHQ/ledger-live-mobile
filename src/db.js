@@ -42,6 +42,15 @@ export async function saveWCSession(obj: *): Promise<void> {
   await store.save("wcsession", obj);
 }
 
+export async function getTourData(): Promise<*> {
+  const wcsession = await store.get("tourdata");
+  return wcsession;
+}
+
+export async function saveTourData(obj: *): Promise<void> {
+  await store.save("tourdata", obj);
+}
+
 export const getCountervalues: typeof unsafeGetCountervalues = atomicQueue(
   unsafeGetCountervalues,
 );

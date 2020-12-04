@@ -1,5 +1,6 @@
 // @flow
 import React from "react";
+import { Pressable } from "react-native";
 import { ScreenName, NavigatorName } from "../../const";
 import Portfolio, { PortfolioTabIcon } from "../../screens/Portfolio";
 import Transfer, { TransferTabIcon } from "../../screens/Transfer";
@@ -11,6 +12,7 @@ import TabIcon from "../TabIcon";
 import colors from "../../colors";
 import AccountsIcon from "../../icons/Accounts";
 import SettingsIcon from "../../icons/Settings";
+import { dismiss as dismissTour } from "../../screens/ProductTour/Provider";
 
 import Tab from "./CustomBlockRouterNavigator";
 
@@ -78,6 +80,13 @@ export default function MainNavigator() {
           unmountOnBlur: true,
           tabBarIcon: (props: any) => (
             <TabIcon Icon={SettingsIcon} i18nKey="tabs.settings" {...props} />
+          ),
+          tabBarButton: props => (
+            <Pressable
+              {...props}
+              onLongPress={() => dismissTour(false)}
+              delayLongPress={2000}
+            />
           ),
         }}
       />
