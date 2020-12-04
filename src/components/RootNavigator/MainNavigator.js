@@ -1,5 +1,5 @@
 // @flow
-import React from "react";
+import React, { useContext } from "react";
 import { Pressable } from "react-native";
 import { ScreenName, NavigatorName } from "../../const";
 import Portfolio, { PortfolioTabIcon } from "../../screens/Portfolio";
@@ -12,11 +12,16 @@ import TabIcon from "../TabIcon";
 import colors from "../../colors";
 import AccountsIcon from "../../icons/Accounts";
 import SettingsIcon from "../../icons/Settings";
-import { dismiss as dismissTour } from "../../screens/ProductTour/Provider";
+import {
+  dismiss as dismissTour,
+  context as _ptContext,
+} from "../../screens/ProductTour/Provider";
 
 import Tab from "./CustomBlockRouterNavigator";
 
 export default function MainNavigator() {
+  const ptContext = useContext(_ptContext);
+
   return (
     <Tab.Navigator
       tabBarOptions={{
@@ -55,6 +60,7 @@ export default function MainNavigator() {
         component={ManagerNavigator}
         options={{
           tabBarIcon: (props: any) => <ManagerTabIcon {...props} />,
+          tabBarVisible: !ptContext.currentStep,
         }}
         listeners={({ navigation }) => ({
           tabPress: e => {

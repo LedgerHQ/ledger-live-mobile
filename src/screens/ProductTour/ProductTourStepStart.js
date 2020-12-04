@@ -7,7 +7,8 @@ import { View, StyleSheet, TouchableOpacity } from "react-native";
 import LText from "../../components/LText";
 import colors from "../../colors";
 import { context, STEPS, setStep } from "./Provider";
-import { ScreenName } from "../../const";
+import { ScreenName, NavigatorName } from "../../const";
+import { navigate } from "../../rootnavigation";
 
 type Props = {
   navigation: any,
@@ -17,7 +18,21 @@ const ProductTourStepStart = ({ navigation }: Props) => {
   const ptContext = useContext(context);
 
   const goTo = () => {
-    console.log(ptContext.currentStep);
+    switch (ptContext.currentStep) {
+      case "INSTALL_CRYPTO":
+        navigate(NavigatorName.Main, {
+          screen: NavigatorName.Manager,
+        });
+        break;
+      case "CREATE_ACCOUNT":
+        break;
+      case "RECEIVE_COINS":
+        break;
+      case "CUSTOMIZE_APP":
+        break;
+      default:
+        break;
+    }
   };
 
   return (

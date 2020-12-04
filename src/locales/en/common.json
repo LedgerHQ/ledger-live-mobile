@@ -2746,5 +2746,8 @@
     },
     "deeplinkingTitle": "Select an Ethereum account",
     "addAccount": "Add new account"
+  },
+  "producttour": {
+    "installCryptoTitle": "Install first crypto app"
   }
 }

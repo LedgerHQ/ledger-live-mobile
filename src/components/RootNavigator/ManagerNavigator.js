@@ -1,7 +1,10 @@
 // @flow
-import React from "react";
+import React, { useContext } from "react";
 import { TouchableOpacity, View, StyleSheet } from "react-native";
-import { createStackNavigator } from "@react-navigation/stack";
+import {
+  createStackNavigator,
+  HeaderBackButton,
+} from "@react-navigation/stack";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { ScreenName, NavigatorName } from "../../const";
@@ -16,6 +19,8 @@ import ManagerIcon from "../../icons/Manager";
 import NanoXIcon from "../../icons/TabNanoX";
 import { useIsNavLocked } from "./CustomBlockRouterNavigator";
 import colors from "../../colors";
+import { context as _ptContext } from "../../screens/ProductTour/Provider";
+import { navigate } from "../../rootnavigation";
 
 const ManagerIconWithUpate = ({
   color,
@@ -32,29 +37,62 @@ const ManagerIconWithUpate = ({
   );
 };
 
-export default function ManagerNavigator() {
+export default function ManagerNavigator({ navigation }) {
   const { t } = useTranslation();
+  const ptContext = useContext(_ptContext);
 
   return (
     <Stack.Navigator
       screenOptions={{
         ...stackNavigatorConfig,
-        headerStyle: styles.header,
+        headerStyle:
+          ptContext.currentStep === "INSTALL_CRYPTO"
+            ? { backgroundColor: colors.live }
+            : styles.header,
+        headerTitleStyle:
+          ptContext.currentStep === "INSTALL_CRYPTO"
+            ? {
+                color: colors.white,
+              }
+            : {},
+        headerTintColor:
+          ptContext.currentStep === "INSTALL_CRYPTO" ? colors.white : null,
       }}
     >
       <Stack.Screen
         name={ScreenName.Manager}
         component={Manager}
         options={{
-          title: t("manager.title"),
+          title:
+            ptContext.currentStep === "INSTALL_CRYPTO"
+              ? t("producttour.installCryptoTitle")
+              : t("manager.title"),
           headerRight: null,
           gestureEnabled: false,
+          headerLeft:
+            ptContext.currentStep === "INSTALL_CRYPTO"
+              ? props => (
+                  <HeaderBackButton
+                    {...props}
+                    onPress={() => {
+                      navigate(NavigatorName.ProductTour, {
+                        screen: ScreenName.ProductTourMenu,
+                      });
+                    }}
+                  />
+                )
+              : null,
         }}
       />
       <Stack.Screen
         name={ScreenName.ManagerMain}
         component={ManagerMain}
-        options={{ title: t("manager.appList.title") }}
+        options={{
+          title:
+            ptContext.currentStep === "INSTALL_CRYPTO"
+              ? t("producttour.installCryptoTitle")
+              : t("manager.appList.title"),
+        }}
       />
       <Stack.Screen
         name={NavigatorName.Onboarding}

@@ -1,12 +1,16 @@
 // @flow
 import React from "react";
 import { Platform } from "react-native";
-import { createStackNavigator } from "@react-navigation/stack";
+import {
+  createStackNavigator,
+  HeaderBackButton,
+} from "@react-navigation/stack";
 import { useTranslation } from "react-i18next";
-import { ScreenName } from "../../const";
+import { ScreenName, NavigatorName } from "../../const";
 import ProductTourMenu from "../../screens/ProductTour/ProductTourMenu";
 import ProductTourStepStart from "../../screens/ProductTour/ProductTourStepStart";
 import { closableStackNavigatorConfig } from "../../navigation/navigatorConfig";
+import { navigate } from "../../rootnavigation";
 
 export default function ProductTourNavigator() {
   const { t } = useTranslation();
@@ -25,6 +29,16 @@ export default function ProductTourNavigator() {
           headerShown: true,
           headerRight: null,
           headerTitle: null,
+          headerLeft: props => (
+            <HeaderBackButton
+              {...props}
+              onPress={() => {
+                navigate(NavigatorName.Main, {
+                  screen: ScreenName.Portfolio,
+                });
+              }}
+            />
+          ),
         }}
       />
       <Stack.Screen
