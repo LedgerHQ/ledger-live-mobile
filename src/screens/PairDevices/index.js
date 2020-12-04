@@ -1,6 +1,5 @@
 // @flow
-
-import React, { Component } from "react";
+import React, { useReducer, useCallback, useEffect, useRef } from "react";
 import { StyleSheet } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,9 +13,7 @@ import TransportBLE from "../../react-native-hw-transport-ble";
 import { GENUINE_CHECK_TIMEOUT } from "../../constants";
 import { addKnownDevice } from "../../actions/ble";
 import { installAppFirstTime } from "../../actions/settings";
-import { knownDevicesSelector } from "../../reducers/ble";
 import { hasCompletedOnboardingSelector } from "../../reducers/settings";
-import type { DeviceLike } from "../../reducers/ble";
 import colors from "../../colors";
 import RequiresBLE from "../../components/RequiresBLE";
 import PendingPairing from "./PendingPairing";
@@ -31,26 +28,213 @@ type Props = {
   route: { params: RouteParams },
 };
 
-type PairDevicesProps = Props & {
-  knownDevices: DeviceLike[],
-  hasCompletedOnboarding: boolean,
-  addKnownDevice: DeviceLike => void,
-  installAppFirstTime: (value: boolean) => void,
-};
-
 type RouteParams = {
   onDone?: (deviceId: string) => void,
 };
 
-type Device = {
-  id: string,
-  name: string,
+export default function PairDevices(props: Props) {
+  return (
+    <RequiresBLE>
+      <SafeAreaView forceInset={forceInset} style={styles.root}>
+        <PairDevicesInner {...props} />
+      </SafeAreaView>
+    </RequiresBLE>
+  );
+}
+
+function PairDevicesInner({ navigation, route }: Props) {
+  const hasCompletedOnboarding = useSelector(hasCompletedOnboardingSelector);
+  const dispatchRedux = useDispatch();
+
+  const [
+    { error, status, device, skipCheck, genuineAskedOnDevice, name },
+    dispatch,
+  ] = useReducer(reducer, initialState);
+
+  const unmounted = useRef(false);
+
+  useEffect(() => {
+    return () => {
+      unmounted.current = true;
+    };
+  }, []);
+
+  const onTimeout = useCallback(() => {
+    dispatch({ type: "timeout" });
+  }, [dispatch]);
+
+  const onRetry = useCallback(() => {
+    dispatch({ type: "scanning" });
+  }, [dispatch]);
+
+  const onError = useCallback(
+    (error: Error) => {
+      logger.critical(error);
+      dispatch({ type: "error", payload: error });
+    },
+    [dispatch],
+  );
+
+  const onSelect = useCallback(
+    async (device: Device) => {
+      dispatch({ type: "pairing", payload: device });
+      try {
+        const transport = await TransportBLE.open(device);
+        if (unmounted.current) return;
+        try {
+          const deviceInfo = await getDeviceInfo(transport);
+          if (__DEV__) console.log({ deviceInfo }); // eslint-disable-line no-console
+          if (unmounted.current) return;
+
+          dispatch({ type: "genuinecheck", payload: device });
+
+          await new Promise((resolve, reject) => {
+            listApps(transport, deviceInfo)
+              .pipe(timeout(GENUINE_CHECK_TIMEOUT))
+              .subscribe({
+                next: e => {
+                  if (e.type === "result") {
+                    if (!hasCompletedOnboarding) {
+                      const hasAnyAppInstalled =
+                        e.result && e.result.installed.length > 0;
+
+                      if (!hasAnyAppInstalled) {
+                        dispatchRedux(installAppFirstTime(false));
+                      }
+                    }
+
+                    return;
+                  }
+                  dispatch({
+                    type: "allowManager",
+                    payload: e.type === "allow-manager-requested",
+                  });
+                },
+                complete: () => resolve(),
+                error: e => reject(e),
+              });
+          });
+
+          if (unmounted.current) return;
+
+          const name = (await getDeviceName(transport)) || device.name;
+          if (unmounted.current) return;
+
+          dispatchRedux(addKnownDevice({ id: device.id, name }));
+          if (unmounted.current) return;
+          dispatch({ type: "paired" });
+        } finally {
+          transport.close();
+          await TransportBLE.disconnect(device.id).catch(() => {});
+          await delay(500);
+        }
+      } catch (error) {
+        if (unmounted.current) return;
+        console.warn(error);
+        onError(error);
+      }
+    },
+    [dispatch, dispatchRedux, hasCompletedOnboarding, onError],
+  );
+
+  const onBypassGenuine = useCallback(() => {
+    if (device) {
+      dispatchRedux(
+        addKnownDevice({ id: device.id, name: name || device.name }),
+      );
+      dispatch({ type: "paired" });
+    } else {
+      dispatch({ type: "scanning" });
+    }
+  }, [device, dispatchRedux, name, dispatch]);
+
+  const onDone = useCallback(
+    (deviceId: string) => {
+      navigation.goBack();
+      route.params?.onDone?.(deviceId);
+    },
+    [navigation, route],
+  );
+
+  if (error) {
+    return (
+      <RenderError
+        status={status}
+        error={error}
+        onRetry={onRetry}
+        onBypassGenuine={onBypassGenuine}
+      />
+    );
+  }
+
+  switch (status) {
+    case "scanning":
+      return (
+        <Scanning onSelect={onSelect} onError={onError} onTimeout={onTimeout} />
+      );
+    case "timedout":
+      return <ScanningTimeout onRetry={onRetry} />;
+    case "pairing":
+      return <PendingPairing />;
+    case "genuinecheck":
+      return (
+        <PendingGenuineCheck genuineAskedOnDevice={genuineAskedOnDevice} />
+      );
+    case "paired":
+      return device ? (
+        <Paired
+          deviceName={device.name}
+          deviceId={device.id}
+          genuine={!skipCheck}
+          onContinue={onDone}
+        />
+      ) : null;
+    default:
+      return null;
+  }
+}
+
+const forceInset = { bottom: "always" };
+
+const initialState: State = {
+  status: "scanning",
+  device: null,
+  name: null,
+  error: null,
+  skipCheck: false,
+  genuineAskedOnDevice: false,
 };
 
-type Status = "scanning" | "pairing" | "genuinecheck" | "paired" | "timedout";
+function reducer(state, action) {
+  switch (action.type) {
+    case "timeout":
+      return { ...state, status: "timeout" };
+    case "retry":
+      return { ...state, status: "scanning", error: null, device: null };
+    case "error":
+      return { ...state, error: action.payload };
+    case "pairing":
+      return {
+        ...state,
+        status: "pairing",
+        genuineAskedOnDevice: false,
+        device: action.payload,
+      };
+    case "genuinecheck":
+      return { ...state, status: "genuinecheck", device: action.payload };
+    case "allowManager":
+      return { ...state, genuineAskedOnDevice: action.payload };
+    case "paird":
+      return { ...state, status: "paired", error: null, skipCheck: true };
+    case "scanning":
+      return { ...state, status: "scanning", error: null, device: null };
+    default:
+      return state;
+  }
+}
 
 type State = {
-  status: Status,
+  status: "scanning" | "pairing" | "genuinecheck" | "paired" | "timedout",
   device: ?Device,
   name: ?string,
   error: ?Error,
@@ -58,193 +242,10 @@ type State = {
   genuineAskedOnDevice: boolean,
 };
 
-class PairDevices extends Component<PairDevicesProps, State> {
-  state = {
-    status: "scanning",
-    device: null,
-    name: null,
-    error: null,
-    skipCheck: false,
-    genuineAskedOnDevice: false,
-  };
-
-  unmounted = false;
-
-  componentWillUnmount() {
-    this.unmounted = true;
-  }
-
-  onTimeout = () => {
-    this.setState({ status: "timedout" });
-  };
-
-  onRetry = () => {
-    this.setState({ status: "scanning", error: null, device: null });
-  };
-
-  onError = (error: Error) => {
-    logger.critical(error);
-    this.setState({ error });
-  };
-
-  onSelect = async (device: Device) => {
-    const { hasCompletedOnboarding, installAppFirstTime } = this.props;
-    this.setState({ device, status: "pairing", genuineAskedOnDevice: false });
-    try {
-      const transport = await TransportBLE.open(device);
-      if (this.unmounted) return;
-      try {
-        const deviceInfo = await getDeviceInfo(transport);
-        if (__DEV__) console.log({ deviceInfo }); // eslint-disable-line no-console
-        if (this.unmounted) return;
-
-        this.setState({ device, status: "genuinecheck" });
-
-        await new Promise((resolve, reject) => {
-          listApps(transport, deviceInfo)
-            .pipe(timeout(GENUINE_CHECK_TIMEOUT))
-            .subscribe({
-              next: e => {
-                if (e.type === "result") {
-                  if (!hasCompletedOnboarding) {
-                    const hasAnyAppInstalled =
-                      e.result && e.result.installed.length > 0;
-
-                    if (!hasAnyAppInstalled) {
-                      installAppFirstTime(false);
-                    }
-                  }
-
-                  return;
-                }
-                this.setState({
-                  genuineAskedOnDevice: e.type === "allow-manager-requested",
-                });
-              },
-              complete: () => resolve(),
-              error: e => reject(e),
-            });
-        });
-
-        if (this.unmounted) return;
-
-        const name = (await getDeviceName(transport)) || device.name;
-        if (this.unmounted) return;
-
-        this.props.addKnownDevice({ id: device.id, name });
-        if (this.unmounted) return;
-        this.setState({ status: "paired" });
-      } finally {
-        transport.close();
-        await TransportBLE.disconnect(device.id).catch(() => {});
-        await delay(500);
-      }
-    } catch (error) {
-      if (this.unmounted) return;
-      console.warn(error);
-      this.onError(error);
-    }
-  };
-
-  onBypassGenuine = () => {
-    const { device, name } = this.state;
-    if (device) {
-      this.props.addKnownDevice({ id: device.id, name: name || device.name });
-      this.setState({ status: "paired", error: null, skipCheck: true });
-    } else {
-      this.setState({ status: "scanning", error: null, device: null });
-    }
-  };
-
-  onDone = (deviceId: string) => {
-    const { navigation, route } = this.props;
-    const onDone = route.params?.onDone;
-    navigation.goBack();
-    if (onDone) {
-      onDone(deviceId);
-    }
-  };
-
-  render() {
-    const {
-      error,
-      status,
-      device,
-      skipCheck,
-      genuineAskedOnDevice,
-    } = this.state;
-
-    if (error) {
-      return (
-        <RenderError
-          status={status}
-          error={error}
-          onRetry={this.onRetry}
-          onBypassGenuine={this.onBypassGenuine}
-        />
-      );
-    }
-
-    switch (status) {
-      case "scanning":
-        return (
-          <Scanning
-            onSelect={this.onSelect}
-            onError={this.onError}
-            onTimeout={this.onTimeout}
-          />
-        );
-
-      case "timedout":
-        return <ScanningTimeout onRetry={this.onRetry} />;
-
-      case "pairing":
-        return <PendingPairing />;
-
-      case "genuinecheck":
-        return (
-          <PendingGenuineCheck genuineAskedOnDevice={genuineAskedOnDevice} />
-        );
-
-      case "paired":
-        return device ? (
-          <Paired
-            deviceName={device.name}
-            deviceId={device.id}
-            genuine={!skipCheck}
-            onContinue={this.onDone}
-          />
-        ) : null;
-
-      default:
-        return null;
-    }
-  }
-}
-
-const forceInset = { bottom: "always" };
-
-export default function Screen(props: Props) {
-  const dispatch = useDispatch();
-  const knownDevices = useSelector(knownDevicesSelector);
-  const hasCompletedOnboarding = useSelector(hasCompletedOnboardingSelector);
-
-  return (
-    <RequiresBLE>
-      <SafeAreaView forceInset={forceInset} style={styles.root}>
-        <PairDevices
-          {...props}
-          knownDevices={knownDevices}
-          hasCompletedOnboarding={hasCompletedOnboarding}
-          addKnownDevice={(...args) => dispatch(addKnownDevice(...args))}
-          installAppFirstTime={(...args) =>
-            dispatch(installAppFirstTime(...args))
-          }
-        />
-      </SafeAreaView>
-    </RequiresBLE>
-  );
-}
+type Device = {
+  id: string,
+  name: string,
+};
 
 const styles = StyleSheet.create({
   root: {
