@@ -2748,6 +2748,7 @@
     "addAccount": "Add new account"
   },
   "producttour": {
-    "installCryptoTitle": "Install first crypto app"
+    "installCryptoTitle": "Install first crypto app",
+    "stepFinishedContinue": "Continue"
   }
 }

@@ -32,7 +32,9 @@ const reducer = (state: State, update) => {
   return {
     ...state,
     ...update,
-    completedSteps: [...state.completedSteps, ...(update.completedSteps || [])],
+    completedSteps: update.dismissed
+      ? []
+      : _.uniq([...state.completedSteps, ...(update.completedSteps || [])]),
   };
 };
 const initialState = {

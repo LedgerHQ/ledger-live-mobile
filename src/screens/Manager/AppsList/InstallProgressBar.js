@@ -1,16 +1,26 @@
-import React, { useState, useCallback, useMemo } from "react";
+import React, {
+  useState,
+  useCallback,
+  useMemo,
+  useContext,
+  useEffect,
+} from "react";
 import { StyleSheet, Linking, Platform } from "react-native";
 import { Trans } from "react-i18next";
-
 import type { State } from "@ledgerhq/live-common/lib/apps";
 import { isLiveSupportedApp } from "@ledgerhq/live-common/lib/apps/logic";
 
 import { urls } from "../../../config/urls";
-
+import { ScreenName, NavigatorName } from "../../../const";
 import colors from "../../../colors";
-import { NavigatorName } from "../../../const";
 import Styles from "../../../navigation/styles";
 import ToastBar from "../../../components/ToastBar";
+import {
+  context as _ptContext,
+  completeStep,
+} from "../../ProductTour/Provider";
+import ProductTourStepFinishedBottomModal from "../../ProductTour/ProductTourStepFinishedBottomModal";
+import { navigate } from "../../../rootnavigation";
 
 type Props = {
   state: State,
@@ -19,7 +29,9 @@ type Props = {
 };
 
 const InstallSuccessBar = ({ state, navigation, disable }: Props) => {
+  const ptContext = useContext(_ptContext);
   const [hasBeenShown, setHasBeenShown] = useState(disable);
+  const [hideProductTourModal, setHideProductTourModal] = useState(false);
   const {
     installQueue,
     uninstallQueue,
@@ -32,6 +44,19 @@ const InstallSuccessBar = ({ state, navigation, disable }: Props) => {
     navigation.navigate(NavigatorName.AddAccounts);
     setHasBeenShown(true);
   }, [navigation]);
+
+  const goToProductTourMenu = () => {
+    setHideProductTourModal(true);
+    completeStep(ptContext.currentStep);
+    navigate(NavigatorName.ProductTour, {
+      screen: ScreenName.ProductTourMenu,
+    });
+  };
+  useEffect(() => {
+    if (ptContext.currentStep !== "INSTALL_CRYPTO") {
+      setHideProductTourModal(false);
+    }
+  }, [ptContext.currentStep]);
 
   const onSupportLink = useCallback(() => {
     Linking.openURL(urls.appSupport);
@@ -63,45 +88,59 @@ const InstallSuccessBar = ({ state, navigation, disable }: Props) => {
   const onClose = useCallback(() => setHasBeenShown(true), []);
 
   return (
-    <ToastBar
-      isOpened={successInstalls.length >= 1}
-      onClose={onClose}
-      containerStyle={styles.containerStyle}
-      type={"primary"}
-      title={
-        <>
-          {hasLiveSupported ? (
-            successInstalls.length === 1 ? (
-              <Trans
-                i18nKey="manager.installSuccess.title"
-                values={{ app: successInstalls[0].name }}
-              />
+    <>
+      <ProductTourStepFinishedBottomModal
+        isOpened={
+          successInstalls.length >= 1 &&
+          ptContext.currentStep === "INSTALL_CRYPTO" &&
+          !hideProductTourModal
+        }
+        onPress={() => goToProductTourMenu()}
+        onClose={() => goToProductTourMenu()}
+      />
+      <ToastBar
+        isOpened={
+          successInstalls.length >= 1 &&
+          ptContext.currentStep !== "INSTALL_CRYPTO"
+        }
+        onClose={onClose}
+        containerStyle={styles.containerStyle}
+        type={"primary"}
+        title={
+          <>
+            {hasLiveSupported ? (
+              successInstalls.length === 1 ? (
+                <Trans
+                  i18nKey="manager.installSuccess.title"
+                  values={{ app: successInstalls[0].name }}
+                />
+              ) : (
+                <Trans i18nKey="manager.installSuccess.title_plural" />
+              )
             ) : (
-              <Trans i18nKey="manager.installSuccess.title_plural" />
-            )
-          ) : (
-            <Trans i18nKey="manager.installSuccess.notSupported" />
-          )}
-        </>
-      }
-      secondaryAction={{
-        title: <Trans i18nKey="manager.installSuccess.later" />,
-        onPress: onClose,
-      }}
-      primaryAction={
-        hasLiveSupported
-          ? {
-              title: <Trans i18nKey="manager.installSuccess.manageAccount" />,
-              useTouchable: true,
-              onPress: onAddAccount,
-              event: "ManagerAddAccount",
-            }
-          : {
-              title: <Trans i18nKey="manager.installSuccess.learnMore" />,
-              onPress: onSupportLink,
-            }
-      }
-    />
+              <Trans i18nKey="manager.installSuccess.notSupported" />
+            )}
+          </>
+        }
+        secondaryAction={{
+          title: <Trans i18nKey="manager.installSuccess.later" />,
+          onPress: onClose,
+        }}
+        primaryAction={
+          hasLiveSupported
+            ? {
+                title: <Trans i18nKey="manager.installSuccess.manageAccount" />,
+                useTouchable: true,
+                onPress: onAddAccount,
+                event: "ManagerAddAccount",
+              }
+            : {
+                title: <Trans i18nKey="manager.installSuccess.learnMore" />,
+                onPress: onSupportLink,
+              }
+        }
+      />
+    </>
   );
 };
 

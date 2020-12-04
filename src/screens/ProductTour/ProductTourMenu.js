@@ -14,13 +14,17 @@ type Props = {
   navigation: any,
 };
 
+let to;
+
 const ProductTourMenu = ({ navigation }: Props) => {
   const ptContext = useContext(context);
 
   const isAccessible = step =>
     _.every(STEPS[step], step => ptContext.completedSteps.includes(step));
+  const isComplete = step => ptContext.completedSteps.includes(step);
 
   const goTo = step => {
+    clearTimeout(to);
     setStep(step);
     navigation.navigate(ScreenName.ProductTourStepStart);
   };
@@ -29,8 +33,8 @@ const ProductTourMenu = ({ navigation }: Props) => {
   useFocusEffect(() => {
     if (ptContext.currentStep) {
       // timeout avoid ui glitch
-      const to = setTimeout(() => setStep(null), 1000);
-      return () => clearTimeout(to);
+      to = setTimeout(() => setStep(null), 1000);
+      // we don't cancel it on purpose
     }
   }, [ptContext.currentStep]);
 
@@ -44,10 +48,16 @@ const ProductTourMenu = ({ navigation }: Props) => {
         <TouchableOpacity
           key={step}
           onPress={() => goTo(step)}
-          disabled={!isAccessible(step)}
+          disabled={!isAccessible(step) || isComplete(step)}
         >
           <LText>
-            {step} ({isAccessible(step) ? "unlocked" : "locked"})
+            {step} (
+            {isComplete(step)
+              ? "done"
+              : isAccessible(step)
+              ? "unlocked"
+              : "locked"}
+            )
           </LText>
         </TouchableOpacity>
       ))}
