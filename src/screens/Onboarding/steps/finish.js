@@ -9,7 +9,6 @@ import { TrackScreen } from "../../../analytics";
 import { completeOnboarding } from "../../../actions/settings";
 import LText from "../../../components/LText";
 import Button from "../../../components/Button";
-import OnboardingLayout from "../OnboardingLayout";
 import ConfettiParty from "../../../components/ConfettiParty";
 import { useNavigationInterceptor } from "../onboardingContext";
 import colors from "../../../colors";

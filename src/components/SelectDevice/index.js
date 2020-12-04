@@ -15,7 +15,6 @@ import BluetoothEmpty from "./BluetoothEmpty";
 import USBEmpty from "./USBEmpty";
 import LText from "../LText";
 import colors from "../../colors";
-import SectionSeparator from "../SectionSeparator";
 import PairNewDeviceButton from "./PairNewDeviceButton";
 
 type Props = {
@@ -100,7 +99,7 @@ export default function SelectDevice({
   }, [knownDevices, filter]);
 
   return (
-    <View>
+    <>
       {usbOnly && withArrows ? (
         <UsbPlaceholder />
       ) : ble.length === 0 ? (
@@ -114,9 +113,13 @@ export default function SelectDevice({
       )}
       {hasUSBSection &&
         !usbOnly &&
-        (ble.length === 0 ? <ORBar /> : <USBHeader />)}
+        (ble.length === 0 ? (
+          <View style={[styles.separator, { backgroundColor: colors.live }]} />
+        ) : (
+          <USBHeader />
+        ))}
       {other.length === 0 ? <USBEmpty /> : other.map(renderItem)}
-    </View>
+    </>
   );
 }
 
@@ -141,14 +144,6 @@ const UsbPlaceholder = () => (
   </View>
 );
 
-const ORBar = () => (
-  <SectionSeparator thin style={styles.or}>
-    <LText semiBold style={{ color: colors.lightFog }}>
-      <Trans i18nKey="common.or" />
-    </LText>
-  </SectionSeparator>
-);
-
 function getAll({ knownDevices }, { devices }): Device[] {
   return [
     ...devices,
@@ -167,6 +162,11 @@ const styles = StyleSheet.create({
     lineHeight: 21,
     marginBottom: 12,
     color: colors.grey,
+  },
+  separator: {
+    width: "100%",
+    height: 1,
+    marginVertical: 24,
   },
   addContainer: {
     flexDirection: "row",

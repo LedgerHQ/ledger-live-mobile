@@ -3,7 +3,6 @@ import React, { useCallback } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useTranslation } from "react-i18next";
 import { Pressable } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 import { ScreenName, NavigatorName } from "../../const";
 import PairDevices from "../../screens/PairDevices";
 import EditDeviceName from "../../screens/EditDeviceName";

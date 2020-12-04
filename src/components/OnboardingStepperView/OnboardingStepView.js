@@ -18,6 +18,7 @@ export type InfoStepViewProps = {
     label?: React$Node,
     title?: React$Node,
     index?: number,
+    color?: string,
   }[],
   ctaText?: React$Node,
   ctaWarningModal?: {
@@ -69,68 +70,71 @@ export function InfoStepView({
 
   return (
     <View style={styles.infoStepView}>
-      {children ? (
-        <View style={styles.childrenContainer}>{children}</View>
-      ) : null}
       {image ? (
         <View style={styles.imageContainer}>
           <Image style={styles.image} source={image} resizeMode="contain" />
         </View>
+      ) : null}
+      {children ? (
+        <View style={styles.childrenContainer}>{children}</View>
       ) : (
-        <View style={styles.imagePlaceholder} />
-      )}
-      <ScrollView contentContainerStyle={styles.scrollArea}>
-        {title && (
-          <LText bold style={[styles.title, { color: textColor }]}>
-            {title}
-          </LText>
-        )}
-        {descs &&
-          descs.map((d, i) => (
-            <LText
-              key={"desc" + i}
-              semiBold
-              style={[styles.desc, { color: textColor }]}
-            >
-              {d}
+        <ScrollView contentContainerStyle={styles.scrollArea}>
+          {title && (
+            <LText bold style={[styles.title, { color: textColor }]}>
+              {title}
             </LText>
-          ))}
-        {bullets && (
-          <View style={styles.bulletContainer}>
-            {bullets.map(({ Icon, title, label, index }, i) => (
-              <View style={styles.bulletLine} key={i}>
-                <View
-                  style={[styles.bulletIcon, { backgroundColor: bulletColor }]}
-                >
-                  {Icon ? (
-                    <Icon size={10} color={colors.live} />
-                  ) : (
-                    <LText
-                      semiBold
-                      style={[styles.label, { color: colors.live }]}
-                    >
-                      {index || i + 1}
-                    </LText>
-                  )}
-                </View>
-                <View style={styles.bulletTextContainer}>
-                  {title && (
-                    <LText
-                      semiBold
-                      style={[styles.bulletTitle, { color: textColor }]}
-                    >
-                      {title}
-                    </LText>
-                  )}
-                  <LText style={[styles.label, { color: textColor }]}>
-                    {label}
-                  </LText>
-                </View>
-              </View>
+          )}
+          {descs &&
+            descs.map((d, i) => (
+              <LText
+                key={"desc" + i}
+                semiBold
+                style={[styles.desc, { color: textColor }]}
+              >
+                {d}
+              </LText>
             ))}
-          </View>
-        )}
-      </ScrollView>
+          {bullets && (
+            <View style={styles.bulletContainer}>
+              {bullets.map(({ Icon, title, label, index, color }, i) => (
+                <View style={styles.bulletLine} key={i}>
+                  <View
+                    style={[
+                      styles.bulletIcon,
+                      { backgroundColor: bulletColor },
+                    ]}
+                  >
+                    {Icon ? (
+                      <Icon size={10} color={color || colors.live} />
+                    ) : (
+                      <LText
+                        semiBold
+                        style={[styles.label, { color: colors.live }]}
+                      >
+                        {index || i + 1}
+                      </LText>
+                    )}
+                  </View>
+                  <View style={styles.bulletTextContainer}>
+                    {title && (
+                      <LText
+                        semiBold
+                        style={[styles.bulletTitle, { color: textColor }]}
+                      >
+                        {title}
+                      </LText>
+                    )}
+                    <LText style={[styles.label, { color: textColor }]}>
+                      {label}
+                    </LText>
+                  </View>
+                </View>
+              ))}
+            </View>
+          )}
+        </ScrollView>
+      )}
+
       {infoModalLink && (
         <Pressable onPress={openInfoModal} style={styles.linkContainer}>
           <LText semiBold style={[styles.link, { color: textColor }]}>
@@ -202,6 +206,7 @@ const styles = StyleSheet.create({
   },
   childrenContainer: {
     padding: 24,
+    flex: 1,
   },
   scrollArea: {},
   title: {

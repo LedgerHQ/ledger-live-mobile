@@ -3,7 +3,7 @@
 import React, { memo } from "react";
 import type { ViewStyleProp } from "react-native/Libraries/StyleSheet/StyleSheet";
 import Animated, { Easing } from "react-native-reanimated";
-import Svg, { Path, Rect } from "react-native-svg";
+import Svg, { Path } from "react-native-svg";
 import { interpolatePath } from "react-native-redash/lib/module/v1";
 
 const AnimatedPath = Animated.createAnimatedComponent(Path);
@@ -24,7 +24,6 @@ const {
   timing,
   Clock,
   Value,
-  interpolate,
 } = Animated;
 
 const clock = new Clock();

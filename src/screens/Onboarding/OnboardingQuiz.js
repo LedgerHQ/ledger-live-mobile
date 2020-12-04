@@ -9,17 +9,23 @@ import {
   Pressable,
 } from "react-native";
 import { TabView, SceneMap } from "react-native-tab-view";
+import Svg, { Ellipse } from "react-native-svg";
 import { TrackScreen } from "../../analytics";
 import { ScreenName } from "../../const";
 import colors from "../../colors";
 import LText from "../../components/LText";
 import ConfirmationModal from "../../components/ConfirmationModal";
 import AnimatedHeaderView from "../../components/AnimatedHeader";
-import newDeviceBg from "./assets/getStarted.png";
 import onboardingQuizzCorrectAnswer from "./assets/onboardingQuizzCorrectAnswer.png";
 import onboardingQuizzWrongAnswer from "./assets/onboardingQuizzWrongAnswer.png";
 
+import quizImage1 from "./assets/quizImage1.png";
+import quizImage2 from "./assets/quizImage2.png";
+import quizImage3 from "./assets/quizImage3.png";
+
 import quizScenes from "./shared/quizData";
+
+const images = [quizImage1, quizImage2, quizImage3];
 
 const InfoView = ({
   label,
@@ -111,7 +117,7 @@ function OnboardingQuizz({ navigation, route }: *) {
           <InfoView
             label={k.label}
             title={k.title}
-            image={newDeviceBg}
+            image={images[i]}
             answers={k.answers}
             onPress={onClickAnswer}
           />
@@ -141,6 +147,9 @@ function OnboardingQuizz({ navigation, route }: *) {
           initialLayout={initialLayout}
           swipeEnabled={false}
         />
+        <Svg style={styles.svg} viewBox="0 0 320 196" fill="none">
+          <Ellipse cx="165" cy="208.22" rx="507" ry="208.032" fill="#495D7F" />
+        </Svg>
         <View style={styles.dotContainer}>
           {quizScenes.map((k, i) => (
             <Pressable
@@ -197,13 +206,15 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     flex: 1,
+    marginBottom: 42,
     position: "relative",
   },
   image: {
     position: "absolute",
-    bottom: -20,
-    height: "70%",
-    width: "100%",
+    bottom: 0,
+    left: "-10%",
+    height: "50%",
+    width: "120%",
   },
   dotContainer: {
     position: "absolute",
@@ -229,6 +240,14 @@ const styles = StyleSheet.create({
   answerText: {
     textAlign: "center",
     fontSize: 16,
+  },
+  svg: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    width: "100%",
+    height: "30%",
+    zIndex: -1,
   },
 });
 

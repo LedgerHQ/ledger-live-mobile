@@ -19,6 +19,8 @@ import OnboardingStepperView from "../../../components/OnboardingStepperView";
 import ArrowRight from "../../../icons/ArrowRight";
 import LText from "../../../components/LText";
 
+import pairYourNano from "../assets/pairYourNano.png";
+
 const pairNewInfoModalProps = [
   {
     title: <Trans i18nKey="onboarding.stepPairNew.infoModal.title" />,
@@ -126,6 +128,7 @@ export default function OnboardingStepPairNew({ navigation, route }: Props) {
   const scenes = [
     {
       sceneProps: {
+        image: pairYourNano,
         title: <Trans i18nKey="onboarding.stepPairNew.title" />,
         descs: [<Trans i18nKey="onboarding.stepPairNew.desc" />],
         ctaText: <Trans i18nKey="onboarding.stepPairNew.cta" />,

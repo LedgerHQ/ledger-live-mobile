@@ -4,9 +4,6 @@ import { Platform } from "react-native";
 import { Trans } from "react-i18next";
 import colors from "../../../colors";
 import type { OnboardingScene } from "../../../components/OnboardingStepperView";
-import Clock from "../../../icons/Clock";
-import Edit from "../../../icons/Edit";
-import Warning from "../../../icons/Warning";
 
 import setupDeviceStartImage from "../assets/getStarted.png";
 import setupDeviceNanoX from "../assets/setupDeviceNanoX.png";
@@ -16,11 +13,18 @@ import recoveryPhrase from "../assets/recoveryPhrase.png";
 import recoverySheet from "../assets/recoverySheet.png";
 import hideRecoveryPhrase from "../assets/hideRecoveryPhrase.png";
 import enterWordsNanoX from "../assets/enterWordsNanoX.png";
+import importRecoveryPhrase from "../assets/importRecoveryPhrase.png";
+import syncCryptos from "../assets/syncCryptos.png";
 
 import onboardingQuizImage from "../assets/onboardingQuiz.png";
 
+import Clock from "../../../icons/Clock";
+import Edit from "../../../icons/Edit";
 import Check from "../../../icons/Check";
+import Warning from "../../../icons/Warning";
+import EyeCrossed from "../../../icons/EyeCrossed";
 import Close from "../../../icons/Close";
+import Flower from "../../../icons/Flower";
 import ArrowRight from "../../../icons/ArrowRight";
 import LText from "../../../components/LText";
 
@@ -323,7 +327,7 @@ const setupDeviceScenes: OnboardingScene[] = [
           ),
         },
         {
-          Icon: Clock,
+          Icon: Flower,
           label: (
             <Trans i18nKey="onboarding.stepSetupDevice.start.bullets.2.label" />
           ),
@@ -478,13 +482,15 @@ const setupDeviceScenes: OnboardingScene[] = [
       ],
       bullets: [
         {
-          Icon: Check,
+          Icon: Warning,
+          color: colors.alert,
           label: (
             <Trans i18nKey="onboarding.stepSetupDevice.hideRecoveryPhrase.bullets.0.label" />
           ),
         },
         {
-          Icon: Check,
+          Icon: EyeCrossed,
+          color: colors.alert,
           label: (
             <Trans i18nKey="onboarding.stepSetupDevice.hideRecoveryPhrase.bullets.1.label" />
           ),
@@ -520,6 +526,7 @@ const setupDeviceScenes: OnboardingScene[] = [
 const recoveryPhraseScenes = [
   {
     sceneProps: {
+      image: importRecoveryPhrase,
       title: (
         <Trans i18nKey="onboarding.stepRecoveryPhrase.importRecoveryPhrase.title" />
       ),
@@ -548,7 +555,7 @@ const recoveryPhraseScenes = [
   },
   {
     sceneProps: {
-      image: pinCodeImage,
+      image: enterWordsNanoX,
       bullets: [
         {
           title: (
@@ -593,7 +600,7 @@ const recoveryPhraseScenes = [
   ...pinCodeScenes,
   {
     sceneProps: {
-      image: pinCodeImage,
+      image: importRecoveryPhrase,
       title: (
         <Trans i18nKey="onboarding.stepRecoveryPhrase.existingRecoveryPhrase.title" />
       ),
@@ -616,7 +623,7 @@ const recoveryPhraseScenes = [
   },
   {
     sceneProps: {
-      image: pinCodeImage,
+      image: importRecoveryPhrase,
       bullets: [
         {
           title: (
@@ -642,7 +649,7 @@ const recoveryPhraseScenes = [
   },
   {
     sceneProps: {
-      image: pinCodeImage,
+      image: importRecoveryPhrase,
       bullets: [
         {
           index: 3,
@@ -682,6 +689,7 @@ const recoveryPhraseScenes = [
 const importAccountsScenes = [
   {
     sceneProps: {
+      image: syncCryptos,
       title: <Trans i18nKey="onboarding.stepImportAccounts.title" />,
       descs: [<Trans i18nKey="onboarding.stepImportAccounts.desc" />],
       ctaText: <Trans i18nKey="onboarding.stepImportAccounts.cta" />,

@@ -3,7 +3,8 @@ import React, { useCallback } from "react";
 import { Trans } from "react-i18next";
 import OnboardingStepperView from "../../components/OnboardingStepperView";
 import { ScreenName } from "../../const";
-import onboardingQuizFinalIllustration from "./assets/onboardingQuizFinal.png";
+import quizProSuccess from "./assets/quizPro1.png";
+import quizProFail from "./assets/quizPro2.png";
 
 const OnboardingQuizFinal = ({ navigation, route }: *) => {
   const { success } = route.params;
@@ -20,7 +21,7 @@ const OnboardingQuizFinal = ({ navigation, route }: *) => {
       id: "quizFinal",
       type: "primary",
       sceneProps: {
-        image: onboardingQuizFinalIllustration,
+        image: success ? quizProSuccess : quizProFail,
         title: (
           <Trans
             i18nKey={`onboarding.quizz.final.${

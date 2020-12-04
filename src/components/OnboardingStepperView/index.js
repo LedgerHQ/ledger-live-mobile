@@ -19,7 +19,6 @@ import type { SceneInfoProp } from "./OnboardingInfoModal";
 import { InfoStepView } from "./OnboardingStepView";
 import type { InfoStepViewProps } from "./OnboardingStepView";
 import AnimatedSvgBackground from "../AnimatedSvgBackground";
-import Animated from "react-native-reanimated";
 
 export type OnboardingScene = {
   id: string,

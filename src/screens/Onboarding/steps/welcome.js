@@ -106,12 +106,16 @@ const styles = StyleSheet.create({
   },
   header: {
     ...commonStyles.header,
-    backgroundColor: "#EFF4FE",
+    backgroundColor: "transparent",
     flexDirection: "row-reverse",
   },
   bgImage: {
     width: "100%",
-    height: "100%",
+    height: "90%",
+    position: "absolute",
+    top: -100,
+    left: 0,
+    zIndex: -1,
   },
   logo: {
     flex: 2,
