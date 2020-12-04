@@ -15,7 +15,7 @@ import colors from "../../colors";
 import LText from "../../components/LText";
 import ConfirmationModal from "../../components/ConfirmationModal";
 import AnimatedHeaderView from "../../components/AnimatedHeader";
-import newDeviceBg from "./assets/newDevice.png";
+import newDeviceBg from "./assets/getStarted.png";
 import onboardingQuizzCorrectAnswer from "./assets/onboardingQuizzCorrectAnswer.png";
 import onboardingQuizzWrongAnswer from "./assets/onboardingQuizzWrongAnswer.png";
 

@@ -8,10 +8,17 @@ import Clock from "../../../icons/Clock";
 import Edit from "../../../icons/Edit";
 import Warning from "../../../icons/Warning";
 
-import setupDeviceStartImage from "../assets/setupDeviceStart.png";
-import setupDeviceImage from "../assets/setupDevice.png";
-import pinCodeImage from "../assets/pinCode.png";
+import setupDeviceStartImage from "../assets/getStarted.png";
+import setupDeviceNanoX from "../assets/setupDeviceNanoX.png";
+import pinCodeImage from "../assets/pinCodeImage.png";
+import pinCodeNanoX from "../assets/pinCodeNanoX.png";
+import recoveryPhrase from "../assets/recoveryPhrase.png";
+import recoverySheet from "../assets/recoverySheet.png";
+import hideRecoveryPhrase from "../assets/hideRecoveryPhrase.png";
+import enterWordsNanoX from "../assets/enterWordsNanoX.png";
+
 import onboardingQuizImage from "../assets/onboardingQuiz.png";
+
 import Check from "../../../icons/Check";
 import Close from "../../../icons/Close";
 import ArrowRight from "../../../icons/ArrowRight";
@@ -264,7 +271,7 @@ const pinCodeScenes = [
   },
   {
     sceneProps: {
-      image: pinCodeImage,
+      image: pinCodeNanoX,
       bullets: [
         {
           title: (
@@ -339,7 +346,7 @@ const setupDeviceScenes: OnboardingScene[] = [
   },
   {
     sceneProps: {
-      image: setupDeviceImage,
+      image: setupDeviceNanoX,
       bullets: [
         {
           title: (
@@ -382,7 +389,7 @@ const setupDeviceScenes: OnboardingScene[] = [
   ...pinCodeScenes,
   {
     sceneProps: {
-      image: pinCodeImage,
+      image: recoveryPhrase,
       title: (
         <Trans i18nKey="onboarding.stepSetupDevice.recoveryPhrase.title" />
       ),
@@ -404,7 +411,7 @@ const setupDeviceScenes: OnboardingScene[] = [
   },
   {
     sceneProps: {
-      image: pinCodeImage,
+      image: recoverySheet,
       bullets: [
         {
           title: (
@@ -433,7 +440,7 @@ const setupDeviceScenes: OnboardingScene[] = [
   },
   {
     sceneProps: {
-      image: pinCodeImage,
+      image: enterWordsNanoX,
       bullets: [
         {
           index: 3,
@@ -462,6 +469,7 @@ const setupDeviceScenes: OnboardingScene[] = [
   },
   {
     sceneProps: {
+      image: hideRecoveryPhrase,
       title: (
         <Trans i18nKey="onboarding.stepSetupDevice.hideRecoveryPhrase.title" />
       ),

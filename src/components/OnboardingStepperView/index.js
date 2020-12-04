@@ -18,6 +18,8 @@ import Styles from "../../navigation/styles";
 import type { SceneInfoProp } from "./OnboardingInfoModal";
 import { InfoStepView } from "./OnboardingStepView";
 import type { InfoStepViewProps } from "./OnboardingStepView";
+import AnimatedSvgBackground from "../AnimatedSvgBackground";
+import Animated from "react-native-reanimated";
 
 export type OnboardingScene = {
   id: string,
@@ -78,13 +80,21 @@ export default function OnboardingStepperView({
 
   const sceneColors =
     currentScene?.type === "primary"
-      ? [colors.live, "#fff", "#fff", "#fff", "rgba(255,255,255,0.3)"]
+      ? [
+          colors.live,
+          "#fff",
+          "#fff",
+          "#fff",
+          "rgba(255,255,255,0.3)",
+          "#587ED4",
+        ]
       : [
           "#fff",
           colors.live,
           colors.darkBlue,
           colors.lightLive,
-          colors.lightLive,
+          "rgba(100, 144, 241, 0.3)",
+          "rgba(67, 133, 240, 0.08)",
         ];
 
   const renderScenes = SceneMap(
@@ -144,6 +154,7 @@ export default function OnboardingStepperView({
               ))}
         </View>
       </View>
+      <AnimatedSvgBackground style={styles.svg} color={sceneColors[5]} />
       <TabView
         renderTabBar={() => null}
         navigationState={{ index, routes }}
@@ -151,6 +162,8 @@ export default function OnboardingStepperView({
         onIndexChange={setIndex}
         initialLayout={initialLayout}
         swipeEnabled={false}
+        lazy
+        lazyPreloadDistance={1}
       />
     </SafeAreaView>
   ) : null;
@@ -185,4 +198,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   sceneIndicator: { flex: 1, height: 2, marginHorizontal: 4 },
+  svg: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "40%",
+    zIndex: -1,
+  },
 });
