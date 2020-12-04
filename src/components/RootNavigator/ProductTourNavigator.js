@@ -21,7 +21,11 @@ export default function ProductTourNavigator() {
       screenOptions={{
         ...closableStackNavigatorConfig,
         gestureEnabled: Platform.OS === "ios",
-        headerStyle: { backgroundColor: colors.live },
+        headerStyle: {
+          backgroundColor: colors.live,
+          shadowOpacity: 0,
+          borderBottomWidth: 0,
+        },
         headerTitleStyle: { color: colors.white },
         headerTintColor: colors.white,
       }}

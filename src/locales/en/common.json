@@ -2757,6 +2757,14 @@
       "startedtitle2": "Only {{ count }} steps to go",
       "cta": "Start the tour",
       "startedcta": "Continue"
+    },
+    "menu": {
+      "title": "First, let’s learn\nLedger basics"
+    },
+    "steplockedbottommodal": {
+      "title": "Locked feature",
+      "description": "You must install your first crypto to create an account",
+      "cta": "Got it!"
     }
   }
 }

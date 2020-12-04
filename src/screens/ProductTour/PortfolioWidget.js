@@ -21,10 +21,8 @@ const PortfolioWidget = () => {
   const [started, setStarted] = useState(!!ptContext.completedSteps.length);
 
   useEffect(() => {
-    if (ptContext.dismissed) {
-      setStarted(false);
-    }
-  }, [ptContext.dismissed]);
+    setStarted(!!ptContext.completedSteps.length);
+  }, [ptContext.completedSteps.length, ptContext.dismissed]);
 
   if (ptContext.dismissed) {
     return null;
