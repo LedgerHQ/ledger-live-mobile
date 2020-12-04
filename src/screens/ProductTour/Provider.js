@@ -8,11 +8,11 @@ export const STEPS = {
   CREATE_ACCOUNT: ["INSTALL_CRYPTO"],
   RECEIVE_COINS: ["CREATE_ACCOUNT"],
   /*
-  "BUY_COINS",
-  "SEND_COINS",
-  "SWAP_COINS",
+  "BUY_COINS": ["CREATE_ACCOUNT"],
+  "SEND_COINS": ["CREATE_ACCOUNT"],
+  "SWAP_COINS": ["RECEIVE_COINS"],
+  CUSTOMIZE_APP: [],
   */
-  CUSTOMIZE_APP: [], // optional
 };
 
 type State = {
