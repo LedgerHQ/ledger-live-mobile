@@ -90,15 +90,15 @@ export default function OnboardingStepPairNew({ navigation, route }: Props) {
     [navigation, next, route.params],
   );
 
-  const Footer = () =>
-    __DEV__ ? (
-      <Button
-        event="OnboardingPairSkip"
-        type="lightSecondary"
-        title="(DEV) skip this step"
-        onPress={onNext}
-      />
-    ) : null;
+  const Footer = __DEV__ ? (
+    <Button
+      style={{ marginTop: 24 }}
+      event="OnboardingPairSkip"
+      type="lightSecondary"
+      title="(DEV) skip this step"
+      onPress={onNext}
+    />
+  ) : null;
 
   const directNext = useCallback(() => {
     dispatch(setReadOnlyMode(false));
@@ -148,6 +148,7 @@ export default function OnboardingStepPairNew({ navigation, route }: Props) {
               onSelect={usbOnly ? setDevice : directNext}
               autoSelectOnAdd
             />
+            {Footer}
             <DeviceActionModal
               onClose={setDevice}
               device={device}
@@ -155,7 +156,6 @@ export default function OnboardingStepPairNew({ navigation, route }: Props) {
               action={action}
               request={null}
             />
-            {Footer}
           </>
         ),
       },

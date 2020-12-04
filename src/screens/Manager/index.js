@@ -163,7 +163,10 @@ class ChooseDevice extends Component<
     }
 
     return (
-      <NavigationScrollView style={styles.root}>
+      <NavigationScrollView
+        style={styles.root}
+        contentContainerStyle={styles.scrollContainer}
+      >
         <TrackScreen category="Manager" name="ChooseDevice" />
         <LText semiBold style={styles.title}>
           <Trans i18nKey="manager.connect" />
@@ -200,6 +203,8 @@ const styles = StyleSheet.create({
   root: {
     flex: 1,
     backgroundColor: colors.white,
+  },
+  scrollContainer: {
     paddingHorizontal: 16,
   },
   or: {

@@ -54,8 +54,9 @@ class BluetoothEmpty extends PureComponent<Props> {
 const styles = StyleSheet.create({
   imageContainer: {
     flex: 0.5,
-    minHeight: 100,
+    minHeight: 200,
     position: "relative",
+    overflow: "visible",
   },
   image: {
     position: "absolute",
