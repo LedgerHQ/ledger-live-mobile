@@ -58,7 +58,11 @@ const PortfolioWidget = () => {
           </LText>
           <LText secondary style={styles.startedtitle2} bold>
             <Trans
-              i18nKey="producttour.widget.startedtitle2"
+              i18nKey={
+                ptContext.completedSteps.length === Object.keys(STEPS).length
+                  ? "producttour.widget.startedtitlecomplete"
+                  : "producttour.widget.startedtitle2"
+              }
               values={{
                 count:
                   Object.keys(STEPS).length - ptContext.completedSteps.length,

@@ -146,7 +146,13 @@ const ProductTourMenu = ({ navigation }: Props) => {
     <>
       <View style={styles.header}>
         <LText secondary style={styles.title} bold>
-          <Trans i18nKey="producttour.menu.title" />
+          <Trans
+            i18nKey={
+              ptContext.completedSteps.length === Object.keys(STEPS).length
+                ? "producttour.menu.completedtitle"
+                : "producttour.menu.title"
+            }
+          />
         </LText>
       </View>
       <SafeAreaView style={{ flex: 1 }} forceInset={forceInset}>

@@ -2761,11 +2761,13 @@
       "title2": "Ready to\nget started?",
       "startedtitle": "PRODUCT TOUR",
       "startedtitle2": "Only {{ count }} steps to go",
+      "startedtitlecomplete": "You’re a pro!",
       "cta": "Start the tour",
       "startedcta": "Continue"
     },
     "menu": {
       "title": "First, let’s learn\nLedger basics",
+      "completedtitle": "You’re a pro!",
       "complete": "COMPLETE",
       "installcrypto": "Install\ncrypto",
       "cryptoinstalled": "Crypto\ninstalled",
