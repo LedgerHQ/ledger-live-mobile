@@ -8,15 +8,13 @@ import { Observable } from "rxjs";
 import logger from "../../logger";
 import { BLE_SCANNING_NOTHING_TIMEOUT } from "../../constants";
 import { knownDevicesSelector } from "../../reducers/ble";
-import type { DeviceLike } from "../../reducers/ble";
 import TransportBLE from "../../react-native-hw-transport-ble";
 import { TrackScreen } from "../../analytics";
 import DeviceItem from "../../components/DeviceItem";
 import ScanningHeader from "./ScanningHeader";
 
 type Props = {
-  knownDevices: DeviceLike[],
-  onSelect: (device: Device) => void,
+  onSelect: (device: Device) => Promise<void>,
   onError: (error: Error) => void,
   onTimeout: () => void,
 };
@@ -29,8 +27,6 @@ type Device = {
 export default function Scanning({ onTimeout, onError, onSelect }: Props) {
   const knownDevices = useSelector(knownDevicesSelector);
   const [devices, setDevices] = useState<Device[]>([]);
-  const sub = useRef();
-  const timeout = useRef();
 
   const renderItem = useCallback(
     ({ item }) => {
@@ -55,11 +51,15 @@ export default function Scanning({ onTimeout, onError, onSelect }: Props) {
     [onSelect, knownDevices],
   );
 
-  const startScan = useCallback(async () => {
-    sub.current = Observable.create(TransportBLE.listen).subscribe({
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      onTimeout();
+    }, BLE_SCANNING_NOTHING_TIMEOUT);
+
+    const sub = Observable.create(TransportBLE.listen).subscribe({
       next: e => {
         if (e.type === "add") {
-          clearTimeout(timeout.current);
+          clearTimeout(timeout);
           const device = e.descriptor;
           // FIXME seems like we have dup. ideally we'll remove them on the listen side!
           setDevices(devices =>
@@ -74,19 +74,12 @@ export default function Scanning({ onTimeout, onError, onSelect }: Props) {
         onError(error);
       },
     });
-  }, [onError]);
-
-  useEffect(() => {
-    timeout.current = setTimeout(() => {
-      onTimeout();
-    }, BLE_SCANNING_NOTHING_TIMEOUT);
-    startScan();
 
     return () => {
-      sub.current?.unsubscribe();
-      clearTimeout(timeout.current);
+      sub.unsubscribe();
+      clearTimeout(timeout);
     };
-  }, [onTimeout, startScan]);
+  }, [onTimeout, onError]);
 
   return (
     <>
