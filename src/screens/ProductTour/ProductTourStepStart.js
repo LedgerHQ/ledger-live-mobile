@@ -30,6 +30,9 @@ const ProductTourStepStart = ({ navigation }: Props) => {
         });
         break;
       case "RECEIVE_COINS":
+        navigate(NavigatorName.Base, {
+          screen: NavigatorName.ReceiveFunds,
+        });
         break;
       case "CUSTOMIZE_APP":
         break;

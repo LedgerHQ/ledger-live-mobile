@@ -1,6 +1,12 @@
 // @flow
 
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  useContext,
+} from "react";
 import { of } from "rxjs";
 import { delay } from "rxjs/operators";
 import { View, StyleSheet, Linking, Platform } from "react-native";
@@ -26,6 +32,7 @@ import getWindowDimensions from "../../logic/getWindowDimensions";
 import { accountScreenSelector } from "../../reducers/accounts";
 import colors from "../../colors";
 import { TrackScreen } from "../../analytics";
+import { ScreenName, NavigatorName } from "../../const";
 import PreventNativeBack from "../../components/PreventNativeBack";
 import LText from "../../components/LText/index";
 import DisplayAddress from "../../components/DisplayAddress";
@@ -46,6 +53,9 @@ import logger from "../../logger";
 import { rejectionOp } from "../../components/DebugRejectSwitch";
 import { closableStackNavigatorConfig } from "../../navigation/navigatorConfig";
 import GenericErrorView from "../../components/GenericErrorView";
+import { context as _ptContext, completeStep } from "../ProductTour/Provider";
+import ProductTourStepFinishedBottomModal from "../ProductTour/ProductTourStepFinishedBottomModal";
+import { navigate } from "../../rootnavigation";
 
 const forceInset = { bottom: "always" };
 
@@ -66,6 +76,7 @@ type RouteParams = {
 };
 
 export default function ReceiveConfirmation({ navigation, route }: Props) {
+  const ptContext = useContext(_ptContext);
   const { account, parentAccount } = useSelector(accountScreenSelector(route));
   const readOnlyModeEnabled = useSelector(readOnlyModeEnabledSelector);
 
@@ -74,6 +85,7 @@ export default function ReceiveConfirmation({ navigation, route }: Props) {
   const [onModalHide, setOnModalHide] = useState(() => {});
   const [error, setError] = useState(null);
   const [zoom, setZoom] = useState(false);
+  const [done, setDone] = useState(false);
   const [allowNavigation, setAllowNavigation] = useState(true);
   const sub = useRef();
 
@@ -126,6 +138,9 @@ export default function ReceiveConfirmation({ navigation, route }: Props) {
   }
 
   function onDone(): void {
+    if (ptContext.currentStep === "RECEIVE_COINS") {
+      return setDone(true);
+    }
     const n = navigation.dangerouslyGetParent();
     if (n) {
       n.pop();
@@ -133,6 +148,10 @@ export default function ReceiveConfirmation({ navigation, route }: Props) {
   }
 
   useEffect(() => {
+    if (ptContext.currentStep === "RECEIVE_COINS") {
+      return;
+    }
+
     if (!allowNavigation) {
       navigation.setOptions({
         headerLeft: null,
@@ -148,7 +167,7 @@ export default function ReceiveConfirmation({ navigation, route }: Props) {
       headerRight,
       gestureEnabled: Platform.OS === "ios",
     });
-  }, [allowNavigation, navigation]);
+  }, [allowNavigation, navigation, ptContext.currentStep]);
 
   useEffect(() => {
     const device = route.params.device;
@@ -161,6 +180,21 @@ export default function ReceiveConfirmation({ navigation, route }: Props) {
     }
   }, [route.params, account, parentAccount, verifyOnDevice]);
 
+  const [hideProductTourModal, setHideProductTourModal] = useState(false);
+  const goToProductTourMenu = () => {
+    setHideProductTourModal(true);
+    // $FlowFixMe
+    completeStep(ptContext.currentStep);
+    navigate(NavigatorName.ProductTour, {
+      screen: ScreenName.ProductTourMenu,
+    });
+  };
+  useEffect(() => {
+    if (ptContext.currentStep !== "CREATE_ACCOUNT") {
+      setHideProductTourModal(false);
+    }
+  }, [ptContext.currentStep]);
+
   if (!account) return null;
   const { width } = getWindowDimensions();
   const unsafe = !route.params.device?.deviceId;
@@ -170,6 +204,15 @@ export default function ReceiveConfirmation({ navigation, route }: Props) {
 
   return (
     <SafeAreaView style={styles.root} forceInset={forceInset}>
+      <ProductTourStepFinishedBottomModal
+        isOpened={
+          ptContext.currentStep === "RECEIVE_COINS" &&
+          done &&
+          !hideProductTourModal
+        }
+        onPress={() => goToProductTourMenu()}
+        onClose={() => goToProductTourMenu()}
+      />
       <TrackScreen
         category="ReceiveFunds"
         name="Confirmation"
