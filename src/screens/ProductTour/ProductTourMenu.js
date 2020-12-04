@@ -23,9 +23,18 @@ import StepLockedBottomModal from "./StepLockedBottomModal";
 const forceInset = { bottom: "always" };
 
 const stepTitles = {
-  INSTALL_CRYPTO: ["Install\ncrypto", "Crypto\ninstalled"],
-  CREATE_ACCOUNT: ["Create\naccount", "Account\ncreated"],
-  RECEIVE_COINS: ["Receive\ncoins", "Coins\nreceived"],
+  INSTALL_CRYPTO: [
+    "producttour.menu.installcrypto",
+    "producttour.menu.cryptoinstalled",
+  ],
+  CREATE_ACCOUNT: [
+    "producttour.menu.createaccount",
+    "producttour.menu.accountcreated",
+  ],
+  RECEIVE_COINS: [
+    "producttour.menu.receivecoins",
+    "producttour.menu.coinsreceived",
+  ],
   /*
   "BUY_COINS": ["CREATE_ACCOUNT"],
   "SEND_COINS": ["CREATE_ACCOUNT"],
@@ -82,7 +91,9 @@ const Step = ({
             ) : null}
           </View>
           {isComplete(step) ? (
-            <LText style={styles.completedText}>COMPLETE</LText>
+            <LText style={styles.completedText}>
+              <Trans i18nKey="producttour.menu.complete" />
+            </LText>
           ) : null}
         </View>
       ) : null}
@@ -92,7 +103,7 @@ const Step = ({
         </View>
       ) : null}
       <LText style={styles.stepTitle}>
-        {stepTitles[step][isComplete(step) ? 1 : 0]}
+        <Trans i18nKey={stepTitles[step][isComplete(step) ? 1 : 0]} />
       </LText>
       <Image
         source={require("../../images/stepcastle.png")}

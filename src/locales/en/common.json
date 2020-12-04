@@ -2759,7 +2759,14 @@
       "startedcta": "Continue"
     },
     "menu": {
-      "title": "First, let’s learn\nLedger basics"
+      "title": "First, let’s learn\nLedger basics",
+      "complete": "COMPLETE",
+      "installcrypto": "Install\ncrypto",
+      "cryptoinstalled": "Crypto\ninstalled",
+      "createaccount": "Create\naccount",
+      "accountcreated": "Account\ncreated",
+      "receivecoins": "Receive\ncoins",
+      "coinsreceived": "Coins\nreceived"
     },
     "steplockedbottommodal": {
       "title": "Locked feature",
