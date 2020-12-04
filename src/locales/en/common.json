@@ -2768,6 +2768,15 @@
       "receivecoins": "Receive\ncoins",
       "coinsreceived": "Coins\nreceived"
     },
+    "stepstart": {
+      "cta": "Let’s go",
+      "installcrypto": "Install your first\ncrypto app",
+      "installcryptodetails": "Link your Nano to the blockchain of your choice.",
+      "createaccount": "Create your first\ncrypto account",
+      "createaccountdetails": "Quickly create your first crypto account to start transactions!",
+      "receivecoins": "Receive your\nfirst coins",
+      "receivecoinsdetails": "Learn how to transfer coins from an external platform to your Ledger crypto account."
+    },
     "steplockedbottommodal": {
       "title": "Locked feature",
       "description": "You must install your first crypto to create an account",
