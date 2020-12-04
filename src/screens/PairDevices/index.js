@@ -3,7 +3,7 @@ import React, { useReducer, useCallback, useEffect, useRef } from "react";
 import { StyleSheet } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { useDispatch, useSelector } from "react-redux";
-import { timeout } from "rxjs/operators";
+import { timeout, tap } from "rxjs/operators";
 import getDeviceInfo from "@ledgerhq/live-common/lib/hw/getDeviceInfo";
 import getDeviceName from "@ledgerhq/live-common/lib/hw/getDeviceName";
 import { listApps } from "@ledgerhq/live-common/lib/apps/hw";
@@ -88,32 +88,29 @@ function PairDevicesInner({ navigation, route }: Props) {
 
           dispatch({ type: "genuinecheck", payload: device });
 
-          await new Promise((resolve, reject) => {
-            listApps(transport, deviceInfo)
-              .pipe(timeout(GENUINE_CHECK_TIMEOUT))
-              .subscribe({
-                next: e => {
-                  if (e.type === "result") {
-                    if (!hasCompletedOnboarding) {
-                      const hasAnyAppInstalled =
-                        e.result && e.result.installed.length > 0;
+          await listApps(transport, deviceInfo)
+            .pipe(
+              timeout(GENUINE_CHECK_TIMEOUT),
+              tap(e => {
+                if (e.type === "result") {
+                  if (!hasCompletedOnboarding) {
+                    const hasAnyAppInstalled =
+                      e.result && e.result.installed.length > 0;
 
-                      if (!hasAnyAppInstalled) {
-                        dispatchRedux(installAppFirstTime(false));
-                      }
+                    if (!hasAnyAppInstalled) {
+                      dispatchRedux(installAppFirstTime(false));
                     }
-
-                    return;
                   }
-                  dispatch({
-                    type: "allowManager",
-                    payload: e.type === "allow-manager-requested",
-                  });
-                },
-                complete: () => resolve(),
-                error: e => reject(e),
-              });
-          });
+
+                  return;
+                }
+                dispatch({
+                  type: "allowManager",
+                  payload: e.type === "allow-manager-requested",
+                });
+              }),
+            )
+            .toPromise();
 
           if (unmounted.current) return;
 
