@@ -5,6 +5,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { useTranslation } from "react-i18next";
 import { ScreenName } from "../../const";
 import ProductTourMenu from "../../screens/ProductTour/ProductTourMenu";
+import ProductTourStepStart from "../../screens/ProductTour/ProductTourStepStart";
 import { closableStackNavigatorConfig } from "../../navigation/navigatorConfig";
 
 export default function ProductTourNavigator() {
@@ -20,6 +21,15 @@ export default function ProductTourNavigator() {
       <Stack.Screen
         name={ScreenName.ProductTourMenu}
         component={ProductTourMenu}
+        options={{
+          headerShown: true,
+          headerRight: null,
+          headerTitle: null,
+        }}
+      />
+      <Stack.Screen
+        name={ScreenName.ProductTourStepStart}
+        component={ProductTourStepStart}
         options={{
           headerShown: true,
           headerRight: null,

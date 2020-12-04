@@ -23,7 +23,7 @@ type State = {
 };
 
 // actions
-export let setStep: (step: string) => void = () => {};
+export let setStep: (step: string | null) => void = () => {};
 export let completeStep: (step: string) => void = () => {};
 export let dismiss: (dismissed: boolean) => void = () => {};
 

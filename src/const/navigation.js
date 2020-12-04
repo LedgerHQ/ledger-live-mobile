@@ -238,6 +238,7 @@ export const ScreenName = {
     "WalletConnectDeeplinkingSelectAccount",
 
   ProductTourMenu: "ProductTourMenu",
+  ProductTourStepStart: "ProductTourStepStart",
 };
 
 export const NavigatorName = {

@@ -4,9 +4,11 @@ import React, { useContext } from "react";
 import { Trans } from "react-i18next";
 import _ from "lodash";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
+import { useFocusEffect } from "@react-navigation/native";
 import LText from "../../components/LText";
 import colors from "../../colors";
-import { context, STEPS, dismiss } from "./Provider";
+import { context, STEPS, setStep } from "./Provider";
+import { ScreenName } from "../../const";
 
 type Props = {
   navigation: any,
@@ -15,16 +17,19 @@ type Props = {
 const ProductTourMenu = ({ navigation }: Props) => {
   const ptContext = useContext(context);
 
-  if (ptContext.dismissed) {
-    return null;
-  }
-
   const isAccessible = step =>
     _.every(STEPS[step], step => ptContext.completedSteps.includes(step));
 
   const goTo = step => {
-    console.log(step);
+    setStep(step);
+    navigation.navigate(ScreenName.ProductTourStepStart);
   };
+
+  useFocusEffect(() => {
+    if (ptContext.currentStep) {
+      setStep(null);
+    }
+  }, [ptContext.currentStep]);
 
   return (
     <View style={styles.root}>
