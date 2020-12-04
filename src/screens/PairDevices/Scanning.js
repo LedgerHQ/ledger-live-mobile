@@ -1,9 +1,9 @@
 // @flow
 
-import React, { useState, useCallback, useRef, useEffect } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { StyleSheet, FlatList } from "react-native";
 import { useSelector } from "react-redux";
-import { Trans } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { Observable } from "rxjs";
 import logger from "../../logger";
 import { BLE_SCANNING_NOTHING_TIMEOUT } from "../../constants";
@@ -25,6 +25,7 @@ type Device = {
 };
 
 export default function Scanning({ onTimeout, onError, onSelect }: Props) {
+  const { t } = useTranslation();
   const knownDevices = useSelector(knownDevicesSelector);
   const [devices, setDevices] = useState<Device[]>([]);
 
@@ -42,13 +43,11 @@ export default function Scanning({ onTimeout, onError, onSelect }: Props) {
           }}
           onSelect={() => onSelect(item)}
           disabled={!!knownDevice}
-          description={
-            knownDevice ? <Trans i18nKey="PairDevices.alreadyPaired" /> : ""
-          }
+          description={knownDevice ? t("PairDevices.alreadyPaired") : ""}
         />
       );
     },
-    [onSelect, knownDevices],
+    [onSelect, knownDevices, t],
   );
 
   useEffect(() => {
