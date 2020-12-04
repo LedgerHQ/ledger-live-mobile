@@ -3,7 +3,7 @@
 import React, { useContext } from "react";
 import { Trans } from "react-i18next";
 import _ from "lodash";
-import { View, StyleSheet, TouchableOpacity, Image } from "react-native";
+import { View, StyleSheet, Image } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import LText from "../../components/LText";
 import Button from "../../components/Button";
@@ -68,7 +68,7 @@ const ProductTourStepStart = ({ navigation }: Props) => {
   };
 
   return (
-    <SafeAreaView style={styles.root}>
+    <SafeAreaView forceInset={forceInset} style={styles.root}>
       <View style={{ flex: 1 }}>
         <Image
           source={require("../../images/stepstartcastle.png")}
