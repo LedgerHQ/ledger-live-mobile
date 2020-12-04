@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useCallback } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { Trans } from "react-i18next";
 import { StyleSheet, View } from "react-native";
 import type { CryptoCurrency } from "@ledgerhq/live-common/lib/types";
@@ -13,6 +13,9 @@ import LText from "../../components/LText";
 import Button from "../../components/Button";
 import IconCheck from "../../icons/Check";
 import CurrencyIcon from "../../components/CurrencyIcon";
+import { context as _ptContext, completeStep } from "../ProductTour/Provider";
+import ProductTourStepFinishedBottomModal from "../ProductTour/ProductTourStepFinishedBottomModal";
+import { navigate } from "../../rootnavigation";
 
 type Props = {
   navigation: any,
@@ -27,6 +30,8 @@ type RouteParams = {
 const IconPlus = () => <Icon name="plus" color={colors.live} size={16} />;
 
 export default function AddAccountsSuccess({ navigation, route }: Props) {
+  const ptContext = useContext(_ptContext);
+
   const primaryCTA = useCallback(() => {
     navigation.navigate(NavigatorName.Accounts);
   }, [navigation]);
@@ -37,8 +42,30 @@ export default function AddAccountsSuccess({ navigation, route }: Props) {
 
   const currency = route.params.currency;
 
+  const [hideProductTourModal, setHideProductTourModal] = useState(false);
+  const goToProductTourMenu = () => {
+    setHideProductTourModal(true);
+    // $FlowFixMe
+    completeStep(ptContext.currentStep);
+    navigate(NavigatorName.ProductTour, {
+      screen: ScreenName.ProductTourMenu,
+    });
+  };
+  useEffect(() => {
+    if (ptContext.currentStep !== "CREATE_ACCOUNT") {
+      setHideProductTourModal(false);
+    }
+  }, [ptContext.currentStep]);
+
   return (
     <View style={styles.root}>
+      <ProductTourStepFinishedBottomModal
+        isOpened={
+          ptContext.currentStep === "CREATE_ACCOUNT" && !hideProductTourModal
+        }
+        onPress={() => goToProductTourMenu()}
+        onClose={() => goToProductTourMenu()}
+      />
       <TrackScreen
         category="AddAccounts"
         name="Success"
@@ -51,22 +78,24 @@ export default function AddAccountsSuccess({ navigation, route }: Props) {
       <LText style={styles.desc}>
         <Trans i18nKey="addAccounts.success.desc" />
       </LText>
-      <View style={styles.buttonsContainer}>
-        <Button
-          event="AddAccountsDone"
-          containerStyle={styles.button}
-          type="primary"
-          title={<Trans i18nKey="addAccounts.success.cta" />}
-          onPress={primaryCTA}
-        />
-        <Button
-          event="AddAccountsAgain"
-          IconLeft={IconPlus}
-          onPress={secondaryCTA}
-          type="lightSecondary"
-          title={<Trans i18nKey="addAccounts.success.secondaryCTA" />}
-        />
-      </View>
+      {ptContext.currentStep !== "CREATE_ACCOUNT" ? (
+        <View style={styles.buttonsContainer}>
+          <Button
+            event="AddAccountsDone"
+            containerStyle={styles.button}
+            type="primary"
+            title={<Trans i18nKey="addAccounts.success.cta" />}
+            onPress={primaryCTA}
+          />
+          <Button
+            event="AddAccountsAgain"
+            IconLeft={IconPlus}
+            onPress={secondaryCTA}
+            type="lightSecondary"
+            title={<Trans i18nKey="addAccounts.success.secondaryCTA" />}
+          />
+        </View>
+      ) : null}
     </View>
   );
 }

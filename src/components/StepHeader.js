@@ -8,14 +8,20 @@ import { scrollToTop } from "../navigation/utils";
 type Props = {
   title: React$Node,
   subtitle?: React$Node,
+  style?: any,
 };
 
-export default function StepHeader({ title, subtitle }: Props) {
+export default function StepHeader({ title, subtitle, style }: Props) {
   return (
     <TouchableWithoutFeedback onPress={scrollToTop}>
       <View style={styles.root}>
-        <LText style={styles.subtitle}>{subtitle}</LText>
-        <LText semiBold secondary numberOfLines={1} style={styles.title}>
+        <LText style={[styles.subtitle, style]}>{subtitle}</LText>
+        <LText
+          semiBold
+          secondary
+          numberOfLines={1}
+          style={[styles.title, style]}
+        >
           {title}
         </LText>
       </View>

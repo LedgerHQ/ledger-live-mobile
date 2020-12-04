@@ -7,7 +7,7 @@ import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
 import LText from "../../components/LText";
 import colors from "../../colors";
-import { context, STEPS, setStep } from "./Provider";
+import { context, STEPS, setStep, completeStep } from "./Provider";
 import { ScreenName } from "../../const";
 
 type Props = {
@@ -48,6 +48,8 @@ const ProductTourMenu = ({ navigation }: Props) => {
         <TouchableOpacity
           key={step}
           onPress={() => goTo(step)}
+          onLongPress={() => completeStep(step)}
+          delayLongPress={2000}
           disabled={!isAccessible(step) || isComplete(step)}
         >
           <LText>

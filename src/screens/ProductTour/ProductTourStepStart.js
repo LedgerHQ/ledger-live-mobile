@@ -6,8 +6,8 @@ import _ from "lodash";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
 import LText from "../../components/LText";
 import colors from "../../colors";
-import { context, STEPS, setStep } from "./Provider";
-import { ScreenName, NavigatorName } from "../../const";
+import { context } from "./Provider";
+import { NavigatorName } from "../../const";
 import { navigate } from "../../rootnavigation";
 
 type Props = {
@@ -25,6 +25,9 @@ const ProductTourStepStart = ({ navigation }: Props) => {
         });
         break;
       case "CREATE_ACCOUNT":
+        navigate(NavigatorName.Base, {
+          screen: NavigatorName.AddAccounts,
+        });
         break;
       case "RECEIVE_COINS":
         break;

@@ -1,8 +1,11 @@
 // @flow
-import React from "react";
-import { createStackNavigator } from "@react-navigation/stack";
+import React, { useContext } from "react";
+import {
+  createStackNavigator,
+  HeaderBackButton,
+} from "@react-navigation/stack";
 import { useTranslation } from "react-i18next";
-import { ScreenName } from "../../const";
+import { ScreenName, NavigatorName } from "../../const";
 import AddAccountsSelectCrypto from "../../screens/AddAccounts/01-SelectCrypto";
 import AddAccountsSelectDevice from "../../screens/AddAccounts/02-SelectDevice";
 import AddAccountsTokenCurrencyDisclaimer from "../../screens/AddAccounts/02-TokenCurrencyDisclaimer";
@@ -12,6 +15,9 @@ import AddAccountsHeaderRightClose from "../../screens/AddAccounts/AddAccountsHe
 import EditAccountName from "../../screens/AccountSettings/EditAccountName";
 import { closableStackNavigatorConfig } from "../../navigation/navigatorConfig";
 import StepHeader from "../StepHeader";
+import { context as _ptContext } from "../../screens/ProductTour/Provider";
+import { navigate } from "../../rootnavigation";
+import colors from "../../colors";
 
 type Route = {
   params: ?{ currency: * },
@@ -21,6 +27,7 @@ const totalSteps = "3";
 
 export default function AddAccountsNavigator({ route }: { route: Route }) {
   const { t } = useTranslation();
+  const ptContext = useContext(_ptContext);
   const currency = route && route.params && route.params.currency;
   const token = route && route.params && route.params.token;
   return (
@@ -35,22 +42,51 @@ export default function AddAccountsNavigator({ route }: { route: Route }) {
       }
       screenOptions={{
         ...closableStackNavigatorConfig,
-        headerRight: () => <AddAccountsHeaderRightClose />,
+        headerStyle:
+          ptContext.currentStep === "CREATE_ACCOUNT"
+            ? { backgroundColor: colors.live }
+            : {},
+        headerTitleStyle:
+          ptContext.currentStep === "CREATE_ACCOUNT"
+            ? {
+                color: colors.white,
+              }
+            : {},
+        headerTintColor:
+          ptContext.currentStep === "CREATE_ACCOUNT" ? colors.white : null,
+        headerRight: () =>
+          ptContext.currentStep === "CREATE_ACCOUNT" ? null : (
+            <AddAccountsHeaderRightClose />
+          ),
       }}
     >
       <Stack.Screen
         name={ScreenName.AddAccountsSelectCrypto}
         component={AddAccountsSelectCrypto}
         options={{
-          headerTitle: () => (
+          headerTitle: ({ style }) => (
             <StepHeader
               title={t("common.cryptoAsset")}
               subtitle={t("send.stepperHeader.stepRange", {
                 currentStep: "1",
                 totalSteps,
               })}
+              style={style}
             />
           ),
+          headerLeft:
+            ptContext.currentStep === "CREATE_ACCOUNT"
+              ? props => (
+                  <HeaderBackButton
+                    {...props}
+                    onPress={() => {
+                      navigate(NavigatorName.ProductTour, {
+                        screen: ScreenName.ProductTourMenu,
+                      });
+                    }}
+                  />
+                )
+              : null,
         }}
       />
       <Stack.Screen
@@ -58,13 +94,14 @@ export default function AddAccountsNavigator({ route }: { route: Route }) {
         component={AddAccountsSelectDevice}
         initialParams={currency ? { currency, inline: true } : undefined}
         options={{
-          headerTitle: () => (
+          headerTitle: ({ style }) => (
             <StepHeader
               title={t("common.device")}
               subtitle={t("send.stepperHeader.stepRange", {
                 currentStep: "2",
                 totalSteps,
               })}
+              style={style}
             />
           ),
         }}
@@ -73,13 +110,14 @@ export default function AddAccountsNavigator({ route }: { route: Route }) {
         name={ScreenName.AddAccountsAccounts}
         component={AddAccountsAccounts}
         options={{
-          headerTitle: () => (
+          headerTitle: ({ style }) => (
             <StepHeader
               title={t("tabs.accounts")}
               subtitle={t("send.stepperHeader.stepRange", {
                 currentStep: "3",
                 totalSteps,
               })}
+              style={style}
             />
           ),
           gestureEnabled: false,
