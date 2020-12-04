@@ -2,42 +2,47 @@
 
 import React, { useContext } from "react";
 import { Trans } from "react-i18next";
+import _ from "lodash";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
 import LText from "../../components/LText";
 import colors from "../../colors";
 import { context, STEPS, dismiss } from "./Provider";
-import { navigate } from "../../rootnavigation";
-import { NavigatorName, ScreenName } from "../../const";
 
 type Props = {
   navigation: any,
 };
 
-const PortfolioWidget = () => {
+const ProductTourMenu = ({ navigation }: Props) => {
   const ptContext = useContext(context);
 
   if (ptContext.dismissed) {
     return null;
   }
 
+  const isAccessible = step =>
+    _.every(STEPS[step], step => ptContext.completedSteps.includes(step));
+
+  const goTo = step => {
+    console.log(step);
+  };
+
   return (
     <View style={styles.root}>
       <LText secondary style={styles.title} bold>
-        PortfolioWidget ({ptContext.completedSteps.length} /{" "}
+        ProductTourMenu ({ptContext.completedSteps.length} /{" "}
         {Object.keys(STEPS).length})
       </LText>
-      <TouchableOpacity onPress={() => dismiss(true)}>
-        <LText>Dismiss</LText>
-      </TouchableOpacity>
-      <TouchableOpacity
-        onPress={() => {
-          navigate(NavigatorName.ProductTour, {
-            screen: ScreenName.ProductTourMenu,
-          });
-        }}
-      >
-        <LText>Continue</LText>
-      </TouchableOpacity>
+      {_.map(STEPS, (_, step) => (
+        <TouchableOpacity
+          key={step}
+          onPress={() => goTo(step)}
+          disabled={!isAccessible(step)}
+        >
+          <LText>
+            {step} ({isAccessible(step) ? "unlocked" : "locked"})
+          </LText>
+        </TouchableOpacity>
+      ))}
     </View>
   );
 };
@@ -53,4 +58,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default PortfolioWidget;
+export default ProductTourMenu;

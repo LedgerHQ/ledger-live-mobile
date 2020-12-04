@@ -3,15 +3,17 @@ import React, { useEffect, useReducer } from "react";
 import _ from "lodash";
 import { saveTourData, getTourData } from "../../db";
 
-export const STEPS = [
-  "INSTALL_CRYPTO",
-  "CREATE_ACCOUNT",
-  "RECEIVE_COINS",
+export const STEPS = {
+  INSTALL_CRYPTO: [],
+  CREATE_ACCOUNT: ["INSTALL_CRYPTO"],
+  RECEIVE_COINS: ["CREATE_ACCOUNT"],
+  /*
   "BUY_COINS",
   "SEND_COINS",
   "SWAP_COINS",
-  "CUSTOMIZE_APP",
-];
+  */
+  CUSTOMIZE_APP: [], // optional
+};
 
 type State = {
   completedSteps: string[],

@@ -19,6 +19,7 @@ import WalletConnectDeeplinkingSelectAccount from "../../screens/WalletConnect/D
 import FallbackCameraSend from "../FallbackCamera/FallbackCameraSend";
 import Main from "./MainNavigator";
 import ReceiveFundsNavigator from "./ReceiveFundsNavigator";
+import ProductTourNavigator from "./ProductTourNavigator";
 import SendFundsNavigator from "./SendFundsNavigator";
 import SignMessageNavigator from "./SignMessageNavigator";
 import FreezeNavigator from "./FreezeNavigator";
@@ -59,6 +60,13 @@ export default function BaseNavigator() {
         name={NavigatorName.Main}
         component={Main}
         options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name={NavigatorName.ProductTour}
+        component={ProductTourNavigator}
+        options={{
+          headerShown: false,
+        }}
       />
       <Stack.Screen
         name={NavigatorName.ReceiveFunds}

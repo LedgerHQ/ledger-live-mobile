@@ -152,7 +152,7 @@ export default function PortfolioScreen({ navigation }: Props) {
         ref={ref}
         data={[
           <OngoingScams />,
-          <PortfolioWidget navigation={navigation} />,
+          <PortfolioWidget />,
           ...(accounts.length > 0 && !accounts.every(isAccountEmpty)
             ? [<Carousel />]
             : []),

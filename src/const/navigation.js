@@ -236,6 +236,8 @@ export const ScreenName = {
   WalletConnectConnect: "WalletConnectConnect",
   WalletConnectDeeplinkingSelectAccount:
     "WalletConnectDeeplinkingSelectAccount",
+
+  ProductTourMenu: "ProductTourMenu",
 };
 
 export const NavigatorName = {
@@ -279,6 +281,7 @@ export const NavigatorName = {
   LendingEnableFlow: "LendingEnableFlow",
   LendingSupplyFlow: "LendingSupplyFlow",
   LendingWithdrawFlow: "LendingWithdrawFlow",
+  ProductTour: "ProductTour",
   /* eslint-disable sort-keys */
 
   // Tab
