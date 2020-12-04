@@ -11,6 +11,7 @@ import ProductTourMenu from "../../screens/ProductTour/ProductTourMenu";
 import ProductTourStepStart from "../../screens/ProductTour/ProductTourStepStart";
 import { closableStackNavigatorConfig } from "../../navigation/navigatorConfig";
 import { navigate } from "../../rootnavigation";
+import colors from "../../colors";
 
 export default function ProductTourNavigator() {
   const { t } = useTranslation();
@@ -20,6 +21,9 @@ export default function ProductTourNavigator() {
       screenOptions={{
         ...closableStackNavigatorConfig,
         gestureEnabled: Platform.OS === "ios",
+        headerStyle: { backgroundColor: colors.live },
+        headerTitleStyle: { color: colors.white },
+        headerTintColor: colors.white,
       }}
     >
       <Stack.Screen

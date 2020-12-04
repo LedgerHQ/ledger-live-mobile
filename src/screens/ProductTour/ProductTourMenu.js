@@ -25,9 +25,12 @@ const ProductTourMenu = ({ navigation }: Props) => {
     navigation.navigate(ScreenName.ProductTourStepStart);
   };
 
+  // eslint-disable-next-line consistent-return
   useFocusEffect(() => {
     if (ptContext.currentStep) {
-      setStep(null);
+      // timeout avoid ui glitch
+      const to = setTimeout(() => setStep(null), 1000);
+      return () => clearTimeout(to);
     }
   }, [ptContext.currentStep]);
 
