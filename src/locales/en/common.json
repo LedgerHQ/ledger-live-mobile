@@ -2760,7 +2760,8 @@
       "title": "WELCOME TO LEDGER",
       "title2": "Ready to\nget started?",
       "startedtitle": "PRODUCT TOUR",
-      "startedtitle2": "Only {{ count }} steps to go",
+      "startedtitle2": "Only {{ count }} step to go",
+      "startedtitle2_plural": "Only {{ count }} steps to go",
       "startedtitlecomplete": "You’re a pro!",
       "cta": "Start the tour",
       "startedcta": "Continue"

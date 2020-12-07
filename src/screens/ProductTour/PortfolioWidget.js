@@ -63,6 +63,9 @@ const PortfolioWidget = () => {
                 count:
                   Object.keys(STEPS).length - ptContext.completedSteps.length,
               }}
+              count={
+                Object.keys(STEPS).length - ptContext.completedSteps.length
+              }
             />
           </LText>
         </>
