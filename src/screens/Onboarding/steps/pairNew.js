@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import connectManager from "@ledgerhq/live-common/lib/hw/connectManager";
 import { createAction } from "@ledgerhq/live-common/lib/hw/actions/manager";
-import { Platform } from "react-native";
+import { Linking, Platform } from "react-native";
 import { TrackScreen } from "../../../analytics";
 import Button from "../../../components/Button";
 import SelectDevice from "../../../components/SelectDevice";
@@ -20,6 +20,8 @@ import ArrowRight from "../../../icons/ArrowRight";
 import LText from "../../../components/LText";
 
 import pairYourNano from "../assets/pairYourNano.png";
+import plugYourNano from "../assets/plugNanoS.png";
+import colors from "../../../colors";
 
 const pairNewInfoModalProps = [
   {
@@ -61,10 +63,23 @@ const pairNewInfoModalProps = [
           label: (
             <Trans i18nKey="onboarding.stepPairNew.infoModal.bullets.2.link" />
           ),
-          url: "",
+          url: "", //@TODO correct url here
         },
       },
     ],
+  },
+  {
+    title: <Trans i18nKey="onboarding.stepPairNew.infoModal.title_2" />,
+    desc: (
+      <Trans i18nKey="onboarding.stepPairNew.infoModal.desc_1">
+        {""}
+        <LText
+          onPress={() => Linking.openURL("https://www.ledger.com")} //@TODO correct URL here
+          semiBold
+          style={{ color: colors.live }}
+        />{" "}
+      </Trans>
+    ),
   },
 ];
 
@@ -128,10 +143,16 @@ export default function OnboardingStepPairNew({ navigation, route }: Props) {
   const scenes = [
     {
       sceneProps: {
-        image: pairYourNano,
-        title: <Trans i18nKey="onboarding.stepPairNew.title" />,
-        descs: [<Trans i18nKey="onboarding.stepPairNew.desc" />],
-        ctaText: <Trans i18nKey="onboarding.stepPairNew.cta" />,
+        image: deviceModelId === "nanoX" ? pairYourNano : plugYourNano,
+        title: (
+          <Trans i18nKey={`onboarding.stepPairNew.${deviceModelId}.title`} />
+        ),
+        descs: [
+          <Trans i18nKey={`onboarding.stepPairNew.${deviceModelId}.desc`} />,
+        ],
+        ctaText: (
+          <Trans i18nKey={`onboarding.stepPairNew.${deviceModelId}.cta`} />
+        ),
       },
       type: "primary",
       id: "pairNew_1",
@@ -159,7 +180,8 @@ export default function OnboardingStepPairNew({ navigation, route }: Props) {
           </>
         ),
       },
-      sceneInfoModalProps: pairNewInfoModalProps,
+      sceneInfoModalProps:
+        deviceModelId === "nanoX" ? pairNewInfoModalProps : null,
       id: "pairNew_2",
       type: "secondary",
     },

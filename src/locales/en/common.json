@@ -961,13 +961,27 @@
       }
     },
     "stepPairNew": {
-      "title": "Pair your Nano",
-      "desc": "This is the first time you’re setting up your Nano with your smartphone. Let’s quickly pair your device before enjoying your app freely.",
-      "cta": "Let’s pair my Nano",
+      "nanoX": {
+        "title": "Pair your Nano",
+        "desc": "This is the first time you’re setting up your Nano with your smartphone. Let’s quickly pair your device before enjoying your app freely.",
+        "cta": "Let’s pair my Nano"
+      },
+      "nanoS": {
+        "title": "Plug your Nano",
+        "desc": "This is the first time you’re setting up your Nano with your smartphone. Let’s quickly plug your device before enjoying your app freely.",
+        "cta": "Let’s plug my Nano"
+      },
+      "blue": {
+        "title": "Plug your Nano",
+        "desc": "This is the first time you’re setting up your Nano with your smartphone. Let’s quickly plug your device before enjoying your app freely.",
+        "cta": "Let’s plug my Nano"
+      },
       "infoModal": {
         "title": "Where can I find my device name?",
         "desc": "On your device, select Settings > General > Device name.",
         "title_1": "How to set up Bluetooth connection?",
+        "title_2": "How do I use my Nano X without Bluetooth?",
+        "desc_1": "Use an <1>OTG-cable</1> to connect your Ledger Nano X to your Android smartphone (iOS not supported). Manage your crypto with Ledger Live mobile or any other compatible (web) app.",
         "bullets": {
           "0": {
             "label": "Make sure Bluetooth is enabled on your smartphone and on your Ledger Nano X. Your Ledger Nano X should be on the Dashboard, its main home screen."

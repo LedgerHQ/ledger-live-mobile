@@ -8,16 +8,18 @@ import colors from "../../colors";
 import LText from "../LText";
 import USBIcon from "../../icons/USB";
 
-export default function USBEmpty() {
+export default function USBEmpty({ usbOnly }: { usbOnly: boolean }) {
   return (
     <View style={styles.root}>
       <View style={[styles.iconContainer, { backgroundColor: colors.white }]}>
         <USBIcon width={6} height={16} />
       </View>
       <View style={styles.textContainer}>
-        <LText semiBold style={[styles.title, { color: colors.live }]}>
-          <Trans i18nKey="SelectDevice.usb" />
-        </LText>
+        {!usbOnly && (
+          <LText semiBold style={[styles.title, { color: colors.live }]}>
+            <Trans i18nKey="SelectDevice.usb" />
+          </LText>
+        )}
         <LText semiBold style={[styles.text, { color: colors.live }]}>
           <Trans i18nKey="SelectDevice.usbLabel" />
         </LText>

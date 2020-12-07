@@ -5,7 +5,7 @@ import { View, StyleSheet, Image } from "react-native";
 import { Trans } from "react-i18next";
 import Button from "../Button";
 
-import image from "../../screens/Onboarding/assets/pinCodeNanoX.png";
+import image from "../../screens/Onboarding/assets/pairNanoX.png";
 
 import colors from "../../colors";
 import LText from "../LText";
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
   },
   image: {
     position: "absolute",
-    right: -24,
+    right: 0,
     top: -24,
     width: "110%",
     height: "100%",

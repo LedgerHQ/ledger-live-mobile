@@ -118,7 +118,11 @@ export default function SelectDevice({
         ) : (
           <USBHeader />
         ))}
-      {other.length === 0 ? <USBEmpty /> : other.map(renderItem)}
+      {other.length === 0 ? (
+        <USBEmpty usbOnly={usbOnly} />
+      ) : (
+        other.map(renderItem)
+      )}
     </>
   );
 }
@@ -139,8 +143,12 @@ const USBHeader = () => (
 
 // Fixme Use the illustration instead of the png
 const UsbPlaceholder = () => (
-  <View style={styles.usbContainer}>
-    <Image source={require("../../images/connect-nanos-mobile.png")} />
+  <View style={styles.imageContainer}>
+    <Image
+      style={styles.image}
+      resizeMode="contain"
+      source={require("../../screens/Onboarding/assets/plugNanoS.png")}
+    />
   </View>
 );
 
@@ -184,8 +192,17 @@ const styles = StyleSheet.create({
   or: {
     marginVertical: 30,
   },
-  usbContainer: {
-    alignItems: "center",
-    marginVertical: 30,
+  imageContainer: {
+    flex: 0.5,
+    minHeight: 200,
+    position: "relative",
+    overflow: "visible",
+  },
+  image: {
+    position: "absolute",
+    right: 0,
+    top: -24,
+    width: "110%",
+    height: "100%",
   },
 });

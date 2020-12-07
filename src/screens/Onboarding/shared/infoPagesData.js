@@ -111,7 +111,7 @@ const recoveryPhraseInfoModalProps = [
       label: (
         <Trans i18nKey="onboarding.stepSetupDevice.recoveryPhraseSetup.infoModal.link" />
       ),
-      url: "",
+      url: "", //@TODO correct url here
     },
   },
   {
@@ -195,7 +195,7 @@ export const pairNewErrorInfoModalProps = [
     desc: <Trans i18nKey="onboarding.stepPairNew.errorInfoModal.desc_2" />,
     link: {
       label: <Trans i18nKey="onboarding.stepPairNew.errorInfoModal.link" />,
-      url: "",
+      url: "", //@TODO correct url here
     },
   },
   ...(Platform.OS === "android"
@@ -308,7 +308,9 @@ const pinCodeScenes = [
   },
 ];
 
-const setupDeviceScenes: OnboardingScene[] = [
+const getSetupDeviceScenes: (
+  deviceModelId: "nanoS" | "nanoX" | "blue",
+) => OnboardingScene[] = deviceModelId => [
   {
     sceneProps: {
       image: setupDeviceStartImage,
@@ -348,48 +350,52 @@ const setupDeviceScenes: OnboardingScene[] = [
     type: "primary",
     id: "start",
   },
-  {
-    sceneProps: {
-      image: setupDeviceNanoX,
-      bullets: [
+  ...(deviceModelId === "nanoX"
+    ? [
         {
-          title: (
-            <Trans i18nKey="onboarding.stepSetupDevice.setup.bullets.0.title" />
-          ),
-          label: (
-            <Trans i18nKey="onboarding.stepSetupDevice.setup.bullets.0.label" />
-          ),
+          sceneProps: {
+            image: setupDeviceNanoX,
+            bullets: [
+              {
+                title: (
+                  <Trans i18nKey="onboarding.stepSetupDevice.setup.bullets.0.title" />
+                ),
+                label: (
+                  <Trans i18nKey="onboarding.stepSetupDevice.setup.bullets.0.label" />
+                ),
+              },
+              {
+                title: (
+                  <Trans i18nKey="onboarding.stepSetupDevice.setup.bullets.1.title" />
+                ),
+                label: (
+                  <Trans i18nKey="onboarding.stepSetupDevice.setup.bullets.1.label" />
+                ),
+              },
+              {
+                title: (
+                  <Trans i18nKey="onboarding.stepSetupDevice.setup.bullets.2.title" />
+                ),
+                label: (
+                  <Trans i18nKey="onboarding.stepSetupDevice.setup.bullets.2.label" />
+                ),
+              },
+              {
+                title: (
+                  <Trans i18nKey="onboarding.stepSetupDevice.setup.bullets.3.title" />
+                ),
+                label: (
+                  <Trans i18nKey="onboarding.stepSetupDevice.setup.bullets.3.label" />
+                ),
+              },
+            ],
+            ctaText: <Trans i18nKey="onboarding.stepSetupDevice.setup.cta" />,
+          },
+          type: "secondary",
+          id: "setup",
         },
-        {
-          title: (
-            <Trans i18nKey="onboarding.stepSetupDevice.setup.bullets.1.title" />
-          ),
-          label: (
-            <Trans i18nKey="onboarding.stepSetupDevice.setup.bullets.1.label" />
-          ),
-        },
-        {
-          title: (
-            <Trans i18nKey="onboarding.stepSetupDevice.setup.bullets.2.title" />
-          ),
-          label: (
-            <Trans i18nKey="onboarding.stepSetupDevice.setup.bullets.2.label" />
-          ),
-        },
-        {
-          title: (
-            <Trans i18nKey="onboarding.stepSetupDevice.setup.bullets.3.title" />
-          ),
-          label: (
-            <Trans i18nKey="onboarding.stepSetupDevice.setup.bullets.3.label" />
-          ),
-        },
-      ],
-      ctaText: <Trans i18nKey="onboarding.stepSetupDevice.setup.cta" />,
-    },
-    type: "secondary",
-    id: "setup",
-  },
+      ]
+    : []),
   ...pinCodeScenes,
   {
     sceneProps: {
@@ -729,4 +735,4 @@ const importAccountsScenes = [
   },
 ];
 
-export { setupDeviceScenes, recoveryPhraseScenes, importAccountsScenes };
+export { getSetupDeviceScenes, recoveryPhraseScenes, importAccountsScenes };

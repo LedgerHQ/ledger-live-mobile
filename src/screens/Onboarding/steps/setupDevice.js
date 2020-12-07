@@ -1,15 +1,14 @@
 // @flow
 
-import React, { useCallback } from "react";
+import React, { useCallback, useMemo } from "react";
 
 import OnboardingStepperView from "../../../components/OnboardingStepperView";
 import { ScreenName } from "../../../const";
 
-import { setupDeviceScenes } from "../shared/infoPagesData";
-
-const scenes = setupDeviceScenes;
+import { getSetupDeviceScenes } from "../shared/infoPagesData";
 
 function OnboardingStepNewDevice({ navigation, route }: *) {
+  const { deviceModelId } = route.params;
   const next = useCallback(
     () =>
       navigation.navigate(ScreenName.OnboardingQuiz, {
@@ -17,6 +16,10 @@ function OnboardingStepNewDevice({ navigation, route }: *) {
       }),
     [navigation, route.params],
   );
+
+  const scenes = useMemo(() => getSetupDeviceScenes(deviceModelId), [
+    deviceModelId,
+  ]);
 
   return (
     <OnboardingStepperView
