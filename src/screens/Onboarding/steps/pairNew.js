@@ -63,7 +63,7 @@ const pairNewInfoModalProps = [
           label: (
             <Trans i18nKey="onboarding.stepPairNew.infoModal.bullets.2.link" />
           ),
-          url: "", //@TODO correct url here
+          url: "", // @TODO correct url here
         },
       },
     ],
@@ -74,7 +74,7 @@ const pairNewInfoModalProps = [
       <Trans i18nKey="onboarding.stepPairNew.infoModal.desc_1">
         {""}
         <LText
-          onPress={() => Linking.openURL("https://www.ledger.com")} //@TODO correct URL here
+          onPress={() => Linking.openURL("https://www.ledger.com")} // @TODO correct URL here
           semiBold
           style={{ color: colors.live }}
         />{" "}
@@ -181,7 +181,7 @@ export default function OnboardingStepPairNew({ navigation, route }: Props) {
         ),
       },
       sceneInfoModalProps:
-        deviceModelId === "nanoX" ? pairNewInfoModalProps : null,
+        deviceModelId === "nanoX" ? pairNewInfoModalProps : undefined,
       id: "pairNew_2",
       type: "secondary",
     },

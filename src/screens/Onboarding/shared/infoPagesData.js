@@ -113,7 +113,7 @@ const recoveryPhraseInfoModalProps = [
       label: (
         <Trans i18nKey="onboarding.stepSetupDevice.recoveryPhraseSetup.infoModal.link" />
       ),
-      url: "", //@TODO correct url here
+      url: "", // @TODO correct url here
     },
   },
   {
@@ -197,7 +197,7 @@ export const pairNewErrorInfoModalProps = [
     desc: <Trans i18nKey="onboarding.stepPairNew.errorInfoModal.desc_2" />,
     link: {
       label: <Trans i18nKey="onboarding.stepPairNew.errorInfoModal.link" />,
-      url: "", //@TODO correct url here
+      url: "", // @TODO correct url here
     },
   },
   ...(Platform.OS === "android"
