@@ -64,7 +64,7 @@ export default function AddAccountsNavigator({ route }: { route: Route }) {
         name={ScreenName.AddAccountsSelectCrypto}
         component={AddAccountsSelectCrypto}
         options={{
-          headerTitle: ({ style }) => (
+          headerTitle: ({ style }: { style: *}) => (
             <StepHeader
               title={t("common.cryptoAsset")}
               subtitle={t("send.stepperHeader.stepRange", {
@@ -94,7 +94,7 @@ export default function AddAccountsNavigator({ route }: { route: Route }) {
         component={AddAccountsSelectDevice}
         initialParams={currency ? { currency, inline: true } : undefined}
         options={{
-          headerTitle: ({ style }) => (
+          headerTitle: ({ style }: { style: *}) => (
             <StepHeader
               title={t("common.device")}
               subtitle={t("send.stepperHeader.stepRange", {
@@ -110,7 +110,7 @@ export default function AddAccountsNavigator({ route }: { route: Route }) {
         name={ScreenName.AddAccountsAccounts}
         component={AddAccountsAccounts}
         options={{
-          headerTitle: ({ style }) => (
+          headerTitle: ({ style }: { style: *}) => (
             <StepHeader
               title={t("tabs.accounts")}
               subtitle={t("send.stepperHeader.stepRange", {

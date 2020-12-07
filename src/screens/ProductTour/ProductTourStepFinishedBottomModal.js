@@ -76,7 +76,7 @@ const ProductTourStepFinishedBottomModal = ({
       </View>
     </BottomModal>
   );
-}
+};
 
 const styles = StyleSheet.create({
   confirmationModal: {

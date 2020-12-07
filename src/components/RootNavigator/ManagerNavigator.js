@@ -37,7 +37,7 @@ const ManagerIconWithUpate = ({
   );
 };
 
-export default function ManagerNavigator({ navigation }) {
+export default function ManagerNavigator() {
   const { t } = useTranslation();
   const ptContext = useContext(_ptContext);
 

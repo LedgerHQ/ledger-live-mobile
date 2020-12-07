@@ -139,7 +139,8 @@ export default function ReceiveConfirmation({ navigation, route }: Props) {
 
   function onDone(): void {
     if (ptContext.currentStep === "RECEIVE_COINS") {
-      return setDone(true);
+      setDone(true);
+      return;
     }
     const n = navigation.dangerouslyGetParent();
     if (n) {

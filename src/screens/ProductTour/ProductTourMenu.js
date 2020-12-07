@@ -68,6 +68,7 @@ const Step = ({
           ? styles.stepAccessible
           : styles.stepLocked,
       ]}
+      // eslint-disable-next-line consistent-return
       onPress={() => {
         if (!isAccessible(step)) {
           return setStepLockedModal(true);

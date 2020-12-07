@@ -5,7 +5,6 @@ import {
   createStackNavigator,
   HeaderBackButton,
 } from "@react-navigation/stack";
-import { useTranslation } from "react-i18next";
 import { ScreenName, NavigatorName } from "../../const";
 import ProductTourMenu from "../../screens/ProductTour/ProductTourMenu";
 import ProductTourStepStart from "../../screens/ProductTour/ProductTourStepStart";
@@ -14,7 +13,6 @@ import { navigate } from "../../rootnavigation";
 import colors from "../../colors";
 
 export default function ProductTourNavigator() {
-  const { t } = useTranslation();
   return (
     <Stack.Navigator
       headerMode="float"

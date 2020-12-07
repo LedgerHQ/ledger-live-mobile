@@ -2,7 +2,6 @@
 
 import React, { useContext } from "react";
 import { Trans } from "react-i18next";
-import _ from "lodash";
 import { View, StyleSheet, Image } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import LText from "../../components/LText";
@@ -36,11 +35,7 @@ const stepTitles = {
   */
 };
 
-type Props = {
-  navigation: any,
-};
-
-const ProductTourStepStart = ({ navigation }: Props) => {
+const ProductTourStepStart = () => {
   const ptContext = useContext(context);
 
   const goTo = () => {

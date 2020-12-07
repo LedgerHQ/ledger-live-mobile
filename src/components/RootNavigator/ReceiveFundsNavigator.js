@@ -46,7 +46,7 @@ export default function ReceiveFundsNavigator() {
         name={ScreenName.ReceiveSelectAccount}
         component={ReceiveSelectAccount}
         options={{
-          headerTitle: ({ style }) => (
+          headerTitle: ({ style }: { style: * }) => (
             <StepHeader
               title={t("transfer.receive.headerTitle")}
               subtitle={t("send.stepperHeader.stepRange", {
@@ -76,7 +76,7 @@ export default function ReceiveFundsNavigator() {
         component={ReceiveConnectDevice}
         options={({ route }) => {
           return {
-            headerTitle: ({ style }) => (
+            headerTitle: ({ style }: { style: * }) => (
               <StepHeader
                 title={t(route.params?.title ?? "transfer.receive.titleDevice")}
                 subtitle={t("send.stepperHeader.stepRange", {
@@ -93,7 +93,7 @@ export default function ReceiveFundsNavigator() {
         name={ScreenName.ReceiveConfirmation}
         component={ReceiveConfirmation}
         options={{
-          headerTitle: ({ style }) => (
+          headerTitle: ({ style }: { style: * }) => (
             <StepHeader
               title={t("account.receive")}
               subtitle={t("send.stepperHeader.stepRange", {

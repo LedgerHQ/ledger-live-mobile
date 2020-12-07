@@ -12,10 +12,6 @@ import { context, STEPS, dismiss } from "./Provider";
 import { navigate } from "../../rootnavigation";
 import { NavigatorName, ScreenName } from "../../const";
 
-type Props = {
-  navigation: any,
-};
-
 const PortfolioWidget = () => {
   const ptContext = useContext(context);
   const [started, setStarted] = useState(!!ptContext.completedSteps.length);
@@ -75,6 +71,7 @@ const PortfolioWidget = () => {
       <Button
         type="negativePrimary"
         event={`start tour ${started ? "started" : ""}`}
+        // eslint-disable-next-line consistent-return
         onPress={() => {
           if (!started) {
             return setStarted(true);
