@@ -27,6 +27,8 @@ import Close from "../../../icons/Close";
 import Flower from "../../../icons/Flower";
 import ArrowRight from "../../../icons/ArrowRight";
 import LText from "../../../components/LText";
+import NanoDeviceCancelIcon from "../../../icons/NanoDeviceCancelIcon";
+import NanoDeviceCheckIcon from "../../../icons/NanoDeviceCheckIcon";
 
 const pinCodeInfoModalProps = [
   {
@@ -284,9 +286,9 @@ const pinCodeScenes = [
           label: (
             <>
               <Trans i18nKey="onboarding.stepSetupDevice.pinCodeSetup.bullets.0.label_0" />
-              <Check size={10} color={colors.live} />
+              <NanoDeviceCheckIcon size={12} color={colors.live} />
               <Trans i18nKey="onboarding.stepSetupDevice.pinCodeSetup.bullets.0.label_1" />
-              <Check size={10} color={colors.live} />
+              <NanoDeviceCancelIcon size={12} color={colors.live} />
               <Trans i18nKey="onboarding.stepSetupDevice.pinCodeSetup.bullets.0.label_2" />
             </>
           ),
