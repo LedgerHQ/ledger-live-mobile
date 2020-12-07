@@ -293,6 +293,11 @@ function LendingEnableSelectAccount({ route, navigation }: Props) {
                   amount: formattedEnabledAmount,
                   currency: currency.name,
                 }}
+                count={
+                  enabledTotalAmount < Infinity
+                    ? filteredAccounts.length
+                    : accountsWithUnlimitedEnabledAmount
+                }
               />
             ) : (
               <Trans i18nKey="transfer.lending.enable.selectAccount.noEnabledAccounts" />
