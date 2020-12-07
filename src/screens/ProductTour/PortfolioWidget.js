@@ -9,6 +9,7 @@ import ArrowRight from "../../icons/ArrowRight";
 import Close from "../../icons/Close";
 import colors from "../../colors";
 import { context, STEPS, dismiss } from "./Provider";
+import ProductTourProgressBar from "./ProductTourProgressBar";
 import { navigate } from "../../rootnavigation";
 import { NavigatorName, ScreenName } from "../../const";
 
@@ -68,6 +69,7 @@ const PortfolioWidget = () => {
               }
             />
           </LText>
+          <ProductTourProgressBar />
         </>
       ) : null}
 
@@ -91,6 +93,7 @@ const PortfolioWidget = () => {
           )
         }
         IconRight={ArrowRight}
+        containerStyle={started ? styles.startedbutton : {}}
       />
     </View>
   );
@@ -124,6 +127,9 @@ const styles = StyleSheet.create({
     color: colors.white,
     marginTop: 8,
     marginBottom: 24,
+  },
+  startedbutton: {
+    marginTop: 24,
   },
   dismiss: {
     position: "absolute",

@@ -19,6 +19,7 @@ import colors from "../../colors";
 import { context, STEPS, setStep, completeStep } from "./Provider";
 import { ScreenName } from "../../const";
 import StepLockedBottomModal from "./StepLockedBottomModal";
+import ProductTourProgressBar from "./ProductTourProgressBar";
 
 const forceInset = { bottom: "always" };
 
@@ -155,6 +156,7 @@ const ProductTourMenu = ({ navigation }: Props) => {
             }
           />
         </LText>
+        <ProductTourProgressBar />
       </View>
       <SafeAreaView style={{ flex: 1 }} forceInset={forceInset}>
         <ScrollView style={{ flex: 1 }} contentContainerStyle={styles.root}>
@@ -257,6 +259,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 28,
     color: colors.white,
+    marginBottom: 16,
   },
 });
 
