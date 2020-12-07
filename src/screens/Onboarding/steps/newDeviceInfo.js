@@ -1,10 +1,16 @@
 // @flow
 
-import React, { useCallback, useState } from "react";
-import { StyleSheet, View, Dimensions, Image, Pressable } from "react-native";
+import React, { useCallback, useEffect, useState } from "react";
+import {
+  StyleSheet,
+  View,
+  Dimensions,
+  Pressable,
+  Animated,
+  Easing,
+} from "react-native";
 import { Trans } from "react-i18next";
 import { TabView, SceneMap } from "react-native-tab-view";
-import Svg, { Ellipse } from "react-native-svg";
 import { TrackScreen } from "../../../analytics";
 import Button from "../../../components/Button";
 import colors from "../../../colors";
@@ -12,31 +18,19 @@ import LText from "../../../components/LText";
 import { ScreenName } from "../../../const";
 import AnimatedHeaderView from "../../../components/AnimatedHeader";
 
-import setupDeviceSlide1 from "../assets/setupDeviceSlide_1.png";
-import setupDeviceSlide2 from "../assets/setupDeviceSlide_2.png";
-import setupDeviceSlide3 from "../assets/setupDeviceSlide_3.png";
-import setupDeviceSlide4 from "../assets/setupDeviceSlide_4.png";
-import setupDeviceSlide5 from "../assets/setupDeviceSlide_5.png";
+import Animation from "../../../components/Animation";
 
-const images = [
-  setupDeviceSlide1,
-  setupDeviceSlide2,
-  setupDeviceSlide3,
-  setupDeviceSlide4,
-  setupDeviceSlide5,
-];
+import animations from "../assets/Set_Up_New_Device.json";
 
 const InfoView = ({
   label,
   title,
   desc,
-  image,
   onCtaPress,
 }: {
   label: React$Node,
   title: React$Node,
   desc: React$Node,
-  image: number,
   onCtaPress?: () => void,
 }) => (
   <View style={[styles.root]}>
@@ -57,9 +51,6 @@ const InfoView = ({
         />
       </View>
     )}
-    <View style={styles.imageContainer}>
-      <Image style={styles.image} source={image} resizeMode="cover" />
-    </View>
   </View>
 );
 
@@ -71,12 +62,13 @@ const scenes = [0, 1, 2, 3].reduce(
         label={<Trans i18nKey={`onboarding.stepNewDevice.${k}.label`} />}
         title={<Trans i18nKey={`onboarding.stepNewDevice.${k}.title`} />}
         desc={<Trans i18nKey={`onboarding.stepNewDevice.${k}.desc`} />}
-        image={images[k]}
       />
     ),
   }),
   {},
 );
+
+const animProgressions = [0.15, 0.35, 0.55, 0.72, 0.95];
 
 const routeKeys = [0, 1, 2, 3, 4].map(k => ({ key: `${k}` }));
 
@@ -88,7 +80,54 @@ function OnboardingStepNewDevice({ navigation, route }: *) {
   }, [navigation, route.params]);
 
   const [index, setIndex] = useState(0);
+
+  const [p] = useState(new Animated.Value(0.0));
+
   const [routes] = useState(routeKeys);
+
+  const startAnim = useCallback(
+    i => {
+      Animated.sequence([
+        // first we animate to next index
+        Animated.timing(p, {
+          toValue: animProgressions[i],
+          duration: 3000,
+          easing: Easing.linear,
+          useNativeDriver: true,
+        }),
+        // then we loop a bit backward and forward to keep animation going
+        Animated.loop(
+          Animated.sequence([
+            Animated.timing(p, {
+              toValue: animProgressions[i] - 0.05,
+              duration: 2000,
+              easing: Easing.linear,
+              useNativeDriver: true,
+            }),
+            Animated.timing(p, {
+              toValue: animProgressions[i],
+              duration: 2000,
+              easing: Easing.linear,
+              useNativeDriver: true,
+            }),
+          ]),
+        ),
+      ]).start();
+    },
+    [p],
+  );
+
+  useEffect(() => {
+    startAnim(0);
+  }, []);
+
+  const switchIndex = useCallback(
+    i => {
+      setIndex(i);
+      startAnim(i);
+    },
+    [startAnim],
+  );
 
   const renderScene = SceneMap({
     ...scenes,
@@ -97,7 +136,6 @@ function OnboardingStepNewDevice({ navigation, route }: *) {
         label={<Trans i18nKey={`onboarding.stepNewDevice.4.label`} />}
         title={<Trans i18nKey={`onboarding.stepNewDevice.4.title`} />}
         desc={<Trans i18nKey={`onboarding.stepNewDevice.4.desc`} />}
-        image={images[4]}
         onCtaPress={next}
       />
     ),
@@ -116,12 +154,19 @@ function OnboardingStepNewDevice({ navigation, route }: *) {
           renderTabBar={() => null}
           navigationState={{ index, routes }}
           renderScene={renderScene}
-          onIndexChange={setIndex}
+          onIndexChange={switchIndex}
           initialLayout={initialLayout}
         />
-        <Svg style={styles.svg} viewBox="0 0 320 196" fill="none">
-          <Ellipse cx="165" cy="208.22" rx="507" ry="208.032" fill="#495D7F" />
-        </Svg>
+        <View style={styles.svg}>
+          <Animation
+            progress={p}
+            style={{ width: "100%", height: "100%" }}
+            source={animations}
+            loop={false}
+            autoplay={false}
+          />
+        </View>
+
         <View style={styles.dotContainer}>
           {[0, 1, 2, 3, 4].map(k => (
             <Pressable
@@ -194,6 +239,8 @@ const styles = StyleSheet.create({
     left: 0,
     width: "100%",
     height: "45%",
+    alignItems: "center",
+    justifyContent: "center",
     zIndex: -1,
   },
 });
