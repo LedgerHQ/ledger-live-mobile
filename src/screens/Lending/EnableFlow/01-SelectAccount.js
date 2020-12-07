@@ -84,22 +84,25 @@ function LendingEnableSelectAccount({ route, navigation }: Props) {
   }, [currency, filteredAccounts, navigation]);
 
   let accountsWithUnlimitedEnabledAmount = 0;
-  filteredAccounts.some(({ account }) => {
+  filteredAccounts.forEach(({ account }) => {
     const { enabledAmount, enabledAmountIsUnlimited } =
       (account.type === "TokenAccount" && getAccountCapabilities(account)) ||
       {};
     if (enabledAmountIsUnlimited) {
       enabledTotalAmount = Infinity;
       accountsWithUnlimitedEnabledAmount += 1;
-      return true;
+      return;
     }
-    if (enabledAmount && enabledAmount.gt(0)) {
+    // no need to calculate enabledTotalAmount
+    if (
+      enabledAmount &&
+      enabledAmount.gt(0) &&
+      !accountsWithUnlimitedEnabledAmount
+    ) {
       enabledTotalAmount = BigNumber(enabledTotalAmount || 0).plus(
         enabledAmount,
       );
     }
-
-    return false;
   });
 
   const formattedEnabledAmount =
