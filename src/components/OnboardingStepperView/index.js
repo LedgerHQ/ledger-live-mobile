@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import { TabView, SceneMap } from "react-native-tab-view";
 import colors from "../../colors";
-import { ScreenName } from "../../const";
+import { NavigatorName, ScreenName } from "../../const";
 import ArrowLeft from "../../icons/ArrowLeft";
 import Question from "../../icons/Question";
 import Styles from "../../navigation/styles";
@@ -72,8 +72,11 @@ export default function OnboardingStepperView({
   const currentScene = useMemo(() => scenes[index], [scenes, index]);
 
   const openInfoModal = useCallback(() => {
-    navigation.navigate(ScreenName.OnboardingInfoModal, {
-      sceneInfoProps: currentScene?.sceneInfoModalProps,
+    navigation.navigate(NavigatorName.Onboarding, {
+      screen: ScreenName.OnboardingInfoModal,
+      params: {
+        sceneInfoProps: currentScene?.sceneInfoModalProps,
+      },
     });
   }, [currentScene?.sceneInfoModalProps, navigation]);
 

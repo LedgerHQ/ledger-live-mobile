@@ -23,7 +23,7 @@ const hitSlop = {
   top: 10,
 };
 
-const ErrorHeaderInfo = ({ route, navigation }: *) => {
+export const ErrorHeaderInfo = ({ route, navigation }: *) => {
   const openInfoModal = useCallback(() => {
     navigation.navigate(ScreenName.OnboardingInfoModal, {
       sceneInfoProps: pairNewErrorInfoModalProps,
