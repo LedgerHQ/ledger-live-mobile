@@ -8,11 +8,14 @@ import Question from "../../icons/Question";
 import CheckBox from "../CheckBox";
 import ConfirmationModal from "../ConfirmationModal";
 import LText from "../LText";
+import Animation from "../Animation";
 
 export type InfoStepViewProps = {
   title?: React$Node,
   descs?: React$Node[],
   image?: number,
+  lottie?: number,
+  lottieStyle?: *,
   bullets?: {
     Icon?: *,
     label?: React$Node,
@@ -37,6 +40,8 @@ export function InfoStepView({
   title,
   descs,
   image,
+  lottie,
+  lottieStyle,
   bullets,
   ctaText,
   ctaWarningModal,
@@ -73,6 +78,11 @@ export function InfoStepView({
       {image ? (
         <View style={styles.imageContainer}>
           <Image style={styles.image} source={image} resizeMode="contain" />
+        </View>
+      ) : null}
+      {lottie ? (
+        <View style={styles.lottieContainer}>
+          <Animation source={lottie} style={[styles.image, lottieStyle]} />
         </View>
       ) : null}
       {children ? (
@@ -256,7 +266,11 @@ const styles = StyleSheet.create({
   checkboxLabel: { fontSize: 13, marginLeft: 11 },
   imageContainer: {
     flex: 1,
-    minHeight: 100,
+    minHeight: 200,
+    position: "relative",
+  },
+  lottieContainer: {
+    minHeight: 200,
     position: "relative",
   },
   image: { position: "absolute", width: "100%", height: "100%" },

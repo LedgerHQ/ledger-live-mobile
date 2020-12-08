@@ -1,6 +1,6 @@
 // @flow
 import React, { useCallback, useEffect, useState } from "react";
-import { StyleSheet, View, Platform, Image } from "react-native";
+import { StyleSheet, View, Platform } from "react-native";
 import Config from "react-native-config";
 import { useSelector } from "react-redux";
 import { Trans } from "react-i18next";
@@ -14,8 +14,11 @@ import DeviceItem from "../DeviceItem";
 import BluetoothEmpty from "./BluetoothEmpty";
 import USBEmpty from "./USBEmpty";
 import LText from "../LText";
+import Animation from "../Animation";
 import colors from "../../colors";
 import PairNewDeviceButton from "./PairNewDeviceButton";
+
+import lottieUsb from "../../screens/Onboarding/assets/nanoS/plugDevice/data.json";
 
 type Props = {
   onBluetoothDeviceAction?: (device: Device) => void,
@@ -144,11 +147,7 @@ const USBHeader = () => (
 // Fixme Use the illustration instead of the png
 const UsbPlaceholder = () => (
   <View style={styles.imageContainer}>
-    <Image
-      style={styles.image}
-      resizeMode="contain"
-      source={require("../../screens/Onboarding/assets/plugNanoS.png")}
-    />
+    <Animation style={styles.image} source={lottieUsb} />
   </View>
 );
 
@@ -200,8 +199,8 @@ const styles = StyleSheet.create({
   },
   image: {
     position: "absolute",
-    right: 0,
-    top: -24,
+    right: "-5%",
+    top: 0,
     width: "110%",
     height: "100%",
   },

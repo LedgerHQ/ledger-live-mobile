@@ -6,13 +6,30 @@ import colors from "../../../colors";
 import type { OnboardingScene } from "../../../components/OnboardingStepperView";
 
 import setupDeviceStartImage from "../assets/getStarted.png";
-import setupDeviceNanoX from "../assets/setupDeviceNanoX.png";
 import pinCodeImage from "../assets/pinCodeImage.png";
-import pinCodeNanoX from "../assets/pinCodeNanoX.png";
+
 import recoveryPhrase from "../assets/recoveryPhrase.png";
 import recoverySheet from "../assets/recoverySheet.png";
 import hideRecoveryPhrase from "../assets/hideRecoveryPhrase.png";
-import enterWordsNanoX from "../assets/enterWordsNanoX.png";
+
+import pinCodeNanoX from "../assets/nanoX/pinCode/data.json";
+import pinCodeNanoS from "../assets/nanoS/pinCode/data.json";
+
+import recoverNanoX from "../assets/nanoX/recover/data.json";
+import recoverNanoS from "../assets/nanoS/recover/data.json";
+
+import confirmWordsNanoX from "../assets/nanoX/confirmWords/data.json";
+import confirmWordsNanoS from "../assets/nanoS/confirmWords/data.json";
+
+import numberOfWordsNanoX from "../assets/nanoX/numberOfWords/data.json";
+import numberOfWordsNanoS from "../assets/nanoS/numberOfWords/data.json";
+
+import powerOnNanoX from "../assets/nanoX/powerOn/data.json";
+import powerOnNanoS from "../assets/nanoS/powerOn/data.json";
+
+import powerOnRecoveryNanoX from "../assets/nanoX/powerOnRecovery/data.json";
+import powerOnRecoveryNanoS from "../assets/nanoS/powerOnRecovery/data.json";
+
 import importRecoveryPhrase from "../assets/importRecoveryPhrase.png";
 import syncCryptos from "../assets/syncCryptos.png";
 
@@ -258,7 +275,7 @@ export const pairNewErrorInfoModalProps = [
     : []),
 ];
 
-const pinCodeScenes = [
+const pinCodeScenes = deviceModelId => [
   {
     sceneProps: {
       image: pinCodeImage,
@@ -277,7 +294,9 @@ const pinCodeScenes = [
   },
   {
     sceneProps: {
-      image: pinCodeNanoX,
+      lottie: deviceModelId === "nanoX" ? pinCodeNanoX : pinCodeNanoS,
+      lottieStyle:
+        deviceModelId === "nanoX" ? { width: "110%", left: "5%" } : {},
       bullets: [
         {
           title: (
@@ -352,53 +371,53 @@ const getSetupDeviceScenes: (
     type: "primary",
     id: "start",
   },
-  ...(deviceModelId === "nanoX"
-    ? [
+  {
+    sceneProps: {
+      lottie: deviceModelId === "nanoX" ? powerOnNanoX : powerOnNanoS,
+      lottieStyle:
+        deviceModelId === "nanoX" ? { width: "110%", left: "5%" } : {},
+      bullets: [
         {
-          sceneProps: {
-            image: setupDeviceNanoX,
-            bullets: [
-              {
-                title: (
-                  <Trans i18nKey="onboarding.stepSetupDevice.setup.bullets.0.title" />
-                ),
-                label: (
-                  <Trans i18nKey="onboarding.stepSetupDevice.setup.bullets.0.label" />
-                ),
-              },
-              {
-                title: (
-                  <Trans i18nKey="onboarding.stepSetupDevice.setup.bullets.1.title" />
-                ),
-                label: (
-                  <Trans i18nKey="onboarding.stepSetupDevice.setup.bullets.1.label" />
-                ),
-              },
-              {
-                title: (
-                  <Trans i18nKey="onboarding.stepSetupDevice.setup.bullets.2.title" />
-                ),
-                label: (
-                  <Trans i18nKey="onboarding.stepSetupDevice.setup.bullets.2.label" />
-                ),
-              },
-              {
-                title: (
-                  <Trans i18nKey="onboarding.stepSetupDevice.setup.bullets.3.title" />
-                ),
-                label: (
-                  <Trans i18nKey="onboarding.stepSetupDevice.setup.bullets.3.label" />
-                ),
-              },
-            ],
-            ctaText: <Trans i18nKey="onboarding.stepSetupDevice.setup.cta" />,
-          },
-          type: "secondary",
-          id: "setup",
+          title: (
+            <Trans i18nKey="onboarding.stepSetupDevice.setup.bullets.0.title" />
+          ),
+          label: (
+            <Trans
+              i18nKey={`onboarding.stepSetupDevice.setup.bullets.0.${deviceModelId}.label`}
+            />
+          ),
         },
-      ]
-    : []),
-  ...pinCodeScenes,
+        {
+          title: (
+            <Trans i18nKey="onboarding.stepSetupDevice.setup.bullets.1.title" />
+          ),
+          label: (
+            <Trans i18nKey="onboarding.stepSetupDevice.setup.bullets.1.label" />
+          ),
+        },
+        {
+          title: (
+            <Trans i18nKey="onboarding.stepSetupDevice.setup.bullets.2.title" />
+          ),
+          label: (
+            <Trans i18nKey="onboarding.stepSetupDevice.setup.bullets.2.label" />
+          ),
+        },
+        {
+          title: (
+            <Trans i18nKey="onboarding.stepSetupDevice.setup.bullets.3.title" />
+          ),
+          label: (
+            <Trans i18nKey="onboarding.stepSetupDevice.setup.bullets.3.label" />
+          ),
+        },
+      ],
+      ctaText: <Trans i18nKey="onboarding.stepSetupDevice.setup.cta" />,
+    },
+    type: "secondary",
+    id: "setup",
+  },
+  ...pinCodeScenes(deviceModelId),
   {
     sceneProps: {
       image: recoveryPhrase,
@@ -452,7 +471,9 @@ const getSetupDeviceScenes: (
   },
   {
     sceneProps: {
-      image: enterWordsNanoX,
+      lottie: deviceModelId === "nanoX" ? recoverNanoX : recoverNanoS,
+      lottieStyle:
+        deviceModelId === "nanoX" ? { width: "110%", left: "5%" } : {},
       bullets: [
         {
           index: 3,
@@ -531,7 +552,7 @@ const getSetupDeviceScenes: (
   },
 ];
 
-const recoveryPhraseScenes = [
+const getRecoveryPhraseScenes = (deviceModelId: string) => [
   {
     sceneProps: {
       image: importRecoveryPhrase,
@@ -563,7 +584,10 @@ const recoveryPhraseScenes = [
   },
   {
     sceneProps: {
-      image: enterWordsNanoX,
+      lottie:
+        deviceModelId === "nanoX" ? powerOnRecoveryNanoX : powerOnRecoveryNanoS,
+      lottieStyle:
+        deviceModelId === "nanoX" ? { width: "110%", left: "5%" } : {},
       bullets: [
         {
           title: (
@@ -605,7 +629,7 @@ const recoveryPhraseScenes = [
     type: "secondary",
     id: "importRecoveryPhrase_1",
   },
-  ...pinCodeScenes,
+  ...pinCodeScenes(deviceModelId),
   {
     sceneProps: {
       image: importRecoveryPhrase,
@@ -631,7 +655,10 @@ const recoveryPhraseScenes = [
   },
   {
     sceneProps: {
-      image: importRecoveryPhrase,
+      lottie:
+        deviceModelId === "nanoX" ? numberOfWordsNanoX : numberOfWordsNanoS,
+      lottieStyle:
+        deviceModelId === "nanoX" ? { width: "110%", left: "5%" } : {},
       bullets: [
         {
           title: (
@@ -657,7 +684,9 @@ const recoveryPhraseScenes = [
   },
   {
     sceneProps: {
-      image: importRecoveryPhrase,
+      lottie: deviceModelId === "nanoX" ? confirmWordsNanoX : confirmWordsNanoS,
+      lottieStyle:
+        deviceModelId === "nanoX" ? { width: "110%", left: "5%" } : {},
       bullets: [
         {
           index: 3,
@@ -737,4 +766,4 @@ const importAccountsScenes = [
   },
 ];
 
-export { getSetupDeviceScenes, recoveryPhraseScenes, importAccountsScenes };
+export { getSetupDeviceScenes, getRecoveryPhraseScenes, importAccountsScenes };

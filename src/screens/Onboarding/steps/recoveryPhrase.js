@@ -1,13 +1,11 @@
 // @flow
 
-import React, { useCallback } from "react";
+import React, { useCallback, useMemo } from "react";
 
 import OnboardingStepperView from "../../../components/OnboardingStepperView";
 import { ScreenName } from "../../../const";
 
-import { recoveryPhraseScenes } from "../shared/infoPagesData";
-
-const scenes = recoveryPhraseScenes;
+import { getRecoveryPhraseScenes } from "../shared/infoPagesData";
 
 function OnboardingStepRecoveryPhrase({ navigation, route }: *) {
   const next = useCallback(() => {
@@ -16,6 +14,12 @@ function OnboardingStepRecoveryPhrase({ navigation, route }: *) {
       next: ScreenName.OnboardingFinish,
     });
   }, [navigation, route.params]);
+
+  const { deviceModelId } = route.params;
+
+  const scenes = useMemo(() => getRecoveryPhraseScenes(deviceModelId), [
+    deviceModelId,
+  ]);
 
   return (
     <OnboardingStepperView

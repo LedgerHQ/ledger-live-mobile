@@ -16,9 +16,8 @@ function OnboardingStepImportAccounts({ navigation, route }: *) {
         screen: ScreenName.ScanAccounts,
         params: {
           onFinish: () => {
-            navigation.navigate(ScreenName.OnboardingPairNew, {
+            navigation.navigate(ScreenName.OnboardingFinish, {
               ...route.params,
-              next: ScreenName.OnboardingFinish,
             });
           },
         },

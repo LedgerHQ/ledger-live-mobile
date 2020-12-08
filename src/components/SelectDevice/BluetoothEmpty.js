@@ -1,14 +1,15 @@
 // @flow
 
 import React, { PureComponent } from "react";
-import { View, StyleSheet, Image } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { Trans } from "react-i18next";
 import Button from "../Button";
 
-import image from "../../screens/Onboarding/assets/pairNanoX.png";
+import lottie from "../../screens/Onboarding/assets/nanoX/pairDevice/data.json";
 
 import colors from "../../colors";
 import LText from "../LText";
+import Animation from "../Animation";
 import Bluetooth from "../../icons/Bluetooth";
 
 type Props = {
@@ -20,7 +21,7 @@ class BluetoothEmpty extends PureComponent<Props> {
     return (
       <>
         <View style={styles.imageContainer}>
-          <Image source={image} resizeMode="contain" style={styles.image} />
+          <Animation source={lottie} style={styles.image} />
         </View>
         <View style={styles.bulletLine}>
           <View
@@ -60,8 +61,8 @@ const styles = StyleSheet.create({
   },
   image: {
     position: "absolute",
-    right: 0,
-    top: -24,
+    left: "5%",
+    top: 0,
     width: "110%",
     height: "100%",
   },

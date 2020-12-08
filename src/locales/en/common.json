@@ -757,7 +757,15 @@
         "bullets": {
           "0": {
             "title": "Turn On",
-            "label": "Turn on your device by pressing the black button for 1 second."
+            "nanoX": {
+              "label": "Turn on your device by pressing the black button for 1 second."
+            },
+            "nanoS": {
+              "label": "Turn on your device by plugging it on your phone usb port."
+            },
+            "blue": {
+              "label": "Turn on your device by plugging it on and pressing the power button."
+            }
           },
           "1": {
             "title": "Browse ",

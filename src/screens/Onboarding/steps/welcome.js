@@ -39,6 +39,7 @@ function OnboardingStepWelcome({ navigation }: *) {
     () => navigation.navigate(ScreenName.OnboardingLanguage),
     [navigation],
   );
+
   const { locale } = useLocale();
 
   return (
