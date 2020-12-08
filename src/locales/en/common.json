@@ -1315,7 +1315,7 @@
         "disclaimer": "I acknowledge that my location data will be shared with third parties for compliance purposes."
       },
       "notAvailable": {
-        "title": "Sorry. Swap feature is not available in your country."
+        "title": "Service temporarily unavailable, or not available in your country"
       },
       "pendingOperation": {
         "description": "Your Swap operation has been sent to the network for confirmation. It may take up to an hour before you receive your swapped crypto assets.",
@@ -1521,8 +1521,10 @@
           "stepRange": "Step {{currentStep}} of {{totalSteps}}"
         },
         "selectAccount": {
-          "enabledAccountsAmount": "You have {{number}} accounts that approved {{amount}}",
-          "enabledAccountsNoLimit": "You have {{number}} accounts that approved an unlimited amount of DAI",
+          "enabledAccountsAmount": "You have {{number}} account that approved {{amount}}",
+          "enabledAccountsAmount_plural": "You have {{number}} accounts that approved {{amount}}",
+          "enabledAccountsNoLimit": "You have {{number}} account that approved an unlimited amount of {{ currency }}",
+          "enabledAccountsNoLimit_plural": "You have {{number}} accounts that approved an unlimited amount of {{ currency }}",
           "noEnabledAccounts": "You need to approve an account before you can lend."
         },
         "enable": {
@@ -1600,6 +1602,11 @@
     "loading": "Searching devices..."
   },
   "send": {
+    "tooMuchUTXOBottomModal": {
+      "cta": "Continue",
+      "description": "This transaction may take long to verify and sign because the account has a significant number of coins.",
+      "title": "UTXO message"
+    },
     "highFeeModal": "Be careful, network fees are greater than <1>10%</1> of the amount. Do you want to continue?",
     "scan": {
       "title": "Scan QR code",
