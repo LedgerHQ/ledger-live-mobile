@@ -1,7 +1,7 @@
 // @flow
 
-import React, { Fragment, useCallback } from "react";
-import { StyleSheet, View, Image } from "react-native";
+import React, { Fragment, useCallback, useMemo } from "react";
+import { StyleSheet, View, Image, Platform } from "react-native";
 import { Trans } from "react-i18next";
 import { TrackScreen } from "../../../analytics";
 import colors from "../../../colors";
@@ -18,32 +18,47 @@ import { ScreenName } from "../../../const";
 
 type Props = {
   navigation: *,
-  route: { params: { deviceId: string } },
-};
-
-const useCases = {
-  firstUse: { route: ScreenName.OnboardingSetNewDeviceInfo, image: firstUse },
-  devicePairing: {
-    route: ScreenName.OnboardingPairNew,
-    image: devicePairing,
-    next: ScreenName.OnboardingFinish,
-  },
-  desktopSync: {
-    route: ScreenName.OnboardingImportAccounts,
-    image: desktopSync,
-  },
-  restoreDevice: {
-    route: ScreenName.OnboardingRecoveryPhrase,
-    image: restoreDevice,
-  },
+  route: { params: { deviceModelId: string } },
 };
 
 function OnboardingStepUseCaseSelection({ navigation, route }: Props) {
+  const { deviceModelId } = route.params;
   const next = useCallback(
     ({ route: r, next }: { route: string, next?: string }) => {
       navigation.navigate(r, { ...route.params, next });
     },
     [navigation, route],
+  );
+
+  const useCases = useMemo(
+    () =>
+      Platform.OS === "ios" && deviceModelId !== "nanoX"
+        ? {
+            desktopSync: {
+              route: ScreenName.OnboardingImportAccounts,
+              image: desktopSync,
+            },
+          }
+        : {
+            firstUse: {
+              route: ScreenName.OnboardingSetNewDeviceInfo,
+              image: firstUse,
+            },
+            devicePairing: {
+              route: ScreenName.OnboardingPairNew,
+              image: devicePairing,
+              next: ScreenName.OnboardingFinish,
+            },
+            desktopSync: {
+              route: ScreenName.OnboardingImportAccounts,
+              image: desktopSync,
+            },
+            restoreDevice: {
+              route: ScreenName.OnboardingRecoveryPhrase,
+              image: restoreDevice,
+            },
+          },
+    [],
   );
 
   return (
@@ -52,7 +67,7 @@ function OnboardingStepUseCaseSelection({ navigation, route }: Props) {
       title={<Trans i18nKey="onboarding.stepUseCase.title" />}
     >
       <TrackScreen category="Onboarding" name="UseCase" />
-      {Object.keys(useCases).map((c, index) => (
+      {Object.keys(useCases).map((c, index, arr) => (
         <Fragment key={c + index}>
           {index < 2 && (
             <LText semiBold style={styles.subTitle}>
@@ -84,7 +99,7 @@ function OnboardingStepUseCaseSelection({ navigation, route }: Props) {
               )}
             </View>
           </Touchable>
-          {index === 0 && (
+          {index === 0 && arr.length > 1 && (
             <View style={styles.separator}>
               <View style={[styles.line, { backgroundColor: colors.live }]} />
               <LText

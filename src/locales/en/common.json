@@ -700,6 +700,7 @@
         "desc": "Your device is already set-up? Connect it to your app!"
       },
       "desktopSync": {
+        "title": "Already have a recovery phrase?",
         "label": "Desktop sync",
         "subTitle": "Sync cryptos from your desktop app",
         "desc": "Already got the desktop app? Sync it to manage your cryptos from your smartphone!"
