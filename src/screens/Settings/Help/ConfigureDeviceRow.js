@@ -1,5 +1,6 @@
 /* @flow */
 import React from "react";
+import { Platform } from "react-native";
 import { Trans } from "react-i18next";
 import { useNavigation } from "@react-navigation/native";
 import { ScreenName, NavigatorName } from "../../../const";
@@ -13,12 +14,16 @@ export default function ConfigureDeviceRow() {
   function onPress() {
     setShowWelcome(false);
     setFirstTimeOnboarding(false);
-    navigate(NavigatorName.Onboarding, {
-      screen: ScreenName.OnboardingDeviceSelection,
-      params: {
-        goingBackToScreen: ScreenName.HelpSettings,
-      },
-    });
+    if (Platform.OS === "ios") {
+      navigate(NavigatorName.Onboarding, {
+        screen: ScreenName.OnboardingUseCase,
+        params: { deviceModelId: "nanoX" },
+      });
+    } else {
+      navigate(NavigatorName.Onboarding, {
+        screen: ScreenName.OnboardingDeviceSelection,
+      });
+    }
   }
 
   return (

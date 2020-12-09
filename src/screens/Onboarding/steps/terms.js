@@ -42,7 +42,7 @@ function OnboardingStepTerms({ navigation }: *) {
     if (Platform.OS === "ios") {
       navigation.navigate(NavigatorName.Onboarding, {
         screen: ScreenName.OnboardingUseCase,
-        deviceModelId: "nanoX",
+        params: { deviceModelId: "nanoX" },
       });
     } else {
       navigation.navigate(NavigatorName.Onboarding, {
