@@ -107,7 +107,7 @@ export default function OnboardingStepPairNew({ navigation, route }: Props) {
 
   const Footer = __DEV__ ? (
     <Button
-      style={{ marginTop: 24 }}
+      containerStyle={{ marginTop: 24 }}
       event="OnboardingPairSkip"
       type="lightSecondary"
       title="(DEV) skip this step"

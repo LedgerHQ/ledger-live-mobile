@@ -192,7 +192,6 @@ const styles = StyleSheet.create({
     marginVertical: 30,
   },
   imageContainer: {
-    flex: 0.5,
     minHeight: 200,
     position: "relative",
     overflow: "visible",
