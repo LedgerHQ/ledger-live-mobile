@@ -17,9 +17,39 @@ type Props = BMProps & {
 };
 
 const stepTitles = {
-  INSTALL_CRYPTO: "producttour.finishedmodal.installcrypto",
-  CREATE_ACCOUNT: "producttour.finishedmodal.createaccount",
-  RECEIVE_COINS: "producttour.finishedmodal.receivecoins",
+  INSTALL_CRYPTO: [
+    "producttour.finishedmodal.installcrypto",
+    {
+      file: require("../../images/producttour/green/installcrypto.png"),
+      size: {
+        width: 131,
+        height: 151,
+      },
+    },
+  ],
+  CREATE_ACCOUNT: [
+    "producttour.finishedmodal.createaccount",
+    {
+      file: require("../../images/producttour/blue/createaccount.png"),
+      size: {
+        width: 148,
+        height: 148,
+      },
+      offset: {
+        left: -13,
+      },
+    },
+  ],
+  RECEIVE_COINS: [
+    "producttour.finishedmodal.receivecoins",
+    {
+      file: require("../../images/producttour/blue/receivecoins.png"),
+      size: {
+        width: 149,
+        height: 160,
+      },
+    },
+  ],
   /*
   "BUY_COINS": ["CREATE_ACCOUNT"],
   "SEND_COINS": ["CREATE_ACCOUNT"],
@@ -51,17 +81,21 @@ const ProductTourStepFinishedBottomModal = ({
           name={ptContext.currentStep}
         />
       ) : null}
-      <View style={{ alignItems: "center" }}>
+      <View style={styles.imageContainer}>
         <Image
-          source={require("../../images/stepfinishedcastle.png")}
-          style={styles.image}
+          source={stepTitles[ptContext.currentStep][1]?.file}
+          style={[
+            styles.image,
+            stepTitles[ptContext.currentStep][1]?.size,
+            stepTitles[ptContext.currentStep][1]?.offset,
+          ]}
         />
       </View>
       <LText bold style={styles.title}>
         <Trans i18nKey="producttour.finishedmodal.title" />
       </LText>
       <LText style={styles.description}>
-        <Trans i18nKey={stepTitles[ptContext.currentStep]} />
+        <Trans i18nKey={stepTitles[ptContext.currentStep][0]} />
       </LText>
       <View style={styles.confirmationFooter}>
         <Button
@@ -118,11 +152,14 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginBottom: 18,
   },
+  imageContainer: {
+    alignItems: "center",
+    height: 0,
+    marginBottom: 20,
+  },
   image: {
-    position: "absolute",
+    position: "relative",
     top: -92 - 74,
-    height: 146,
-    width: 137,
   },
 });
 

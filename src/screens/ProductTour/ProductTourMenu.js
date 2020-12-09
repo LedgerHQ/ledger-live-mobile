@@ -27,14 +27,56 @@ const stepTitles = {
   INSTALL_CRYPTO: [
     "producttour.menu.installcrypto",
     "producttour.menu.cryptoinstalled",
+    {
+      files: [
+        require("../../images/producttour/blue/installcrypto.png"),
+        require("../../images/producttour/green/installcrypto.png"),
+      ],
+      size: {
+        width: 77,
+        height: 89,
+      },
+      offset: {
+        right: 10,
+        bottom: -20,
+      },
+    },
   ],
   CREATE_ACCOUNT: [
     "producttour.menu.createaccount",
     "producttour.menu.accountcreated",
+    {
+      files: [
+        require("../../images/producttour/blue/createaccount.png"),
+        require("../../images/producttour/green/createaccount.png"),
+      ],
+      size: {
+        width: 76,
+        height: 76,
+      },
+      offset: {
+        right: 9,
+        bottom: -10,
+      },
+    },
   ],
   RECEIVE_COINS: [
     "producttour.menu.receivecoins",
     "producttour.menu.coinsreceived",
+    {
+      files: [
+        require("../../images/producttour/blue/receivecoins.png"),
+        require("../../images/producttour/green/receivecoins.png"),
+      ],
+      size: {
+        width: 76,
+        height: 76,
+      },
+      offset: {
+        right: 10,
+        bottom: -20,
+      },
+    },
   ],
   /*
   "BUY_COINS": ["CREATE_ACCOUNT"],
@@ -108,8 +150,12 @@ const Step = ({
         <Trans i18nKey={stepTitles[step][isComplete(step) ? 1 : 0]} />
       </LText>
       <Image
-        source={require("../../images/stepcastle.png")}
-        style={styles.image}
+        source={stepTitles[step][2].files[isComplete(step) ? 1 : 0]}
+        style={[
+          styles.image,
+          stepTitles[step][2].size,
+          stepTitles[step][2].offset,
+        ]}
       />
     </TouchableOpacity>
   );
@@ -187,11 +233,7 @@ const ProductTourMenu = ({ navigation }: Props) => {
 
 const styles = StyleSheet.create({
   image: {
-    width: 128,
-    height: 70,
     position: "absolute",
-    bottom: 0,
-    right: 0,
   },
   checkContainer: {
     flexDirection: "row",
@@ -235,6 +277,7 @@ const styles = StyleSheet.create({
     padding: 16,
     borderRadius: 4,
     paddingBottom: 80,
+    overflow: "hidden",
   },
   stepComplete: {
     backgroundColor: colors.ledgerGreen,

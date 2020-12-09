@@ -16,18 +16,42 @@ import ArrowRight from "../../icons/ArrowRight";
 
 const forceInset = { bottom: "always" };
 
-const stepTitles = {
+const stepInfos = {
   INSTALL_CRYPTO: [
     "producttour.stepstart.installcrypto",
     "producttour.stepstart.installcryptodetails",
+    {
+      file: require("../../images/producttour/blue/installcrypto.png"),
+      size: {
+        width: 131,
+        height: 151,
+      },
+    },
   ],
   CREATE_ACCOUNT: [
     "producttour.stepstart.createaccount",
     "producttour.stepstart.createaccountdetails",
+    {
+      file: require("../../images/producttour/blue/createaccount.png"),
+      size: {
+        width: 148,
+        height: 148,
+      },
+      offset: {
+        left: -13,
+      },
+    },
   ],
   RECEIVE_COINS: [
     "producttour.stepstart.receivecoins",
     "producttour.stepstart.receivecoinsdetails",
+    {
+      file: require("../../images/producttour/blue/receivecoins.png"),
+      size: {
+        width: 149,
+        height: 160,
+      },
+    },
   ],
   /*
   "BUY_COINS": ["CREATE_ACCOUNT"],
@@ -70,17 +94,21 @@ const ProductTourStepStart = () => {
       <View style={{ flex: 1 }}>
         <AnimatedSvgBackground
           color={"#587ED4"}
-          style={[styles.svg, { height: 191 - headerHeight }]}
+          style={[styles.svg, { height: 218 - headerHeight }]}
         />
         <Image
-          source={require("../../images/stepstartcastle.png")}
-          style={styles.image}
+          source={stepInfos[ptContext.currentStep][2]?.file}
+          style={[
+            styles.image,
+            stepInfos[ptContext.currentStep][2]?.size,
+            stepInfos[ptContext.currentStep][2]?.offset,
+          ]}
         />
         <LText style={styles.title} bold>
-          <Trans i18nKey={stepTitles[ptContext.currentStep][0]} />
+          <Trans i18nKey={stepInfos[ptContext.currentStep][0]} />
         </LText>
         <LText style={styles.details}>
-          <Trans i18nKey={stepTitles[ptContext.currentStep][1]} />
+          <Trans i18nKey={stepInfos[ptContext.currentStep][1]} />
         </LText>
       </View>
       <Button
@@ -110,12 +138,9 @@ const styles = StyleSheet.create({
     color: colors.white,
   },
   image: {
-    alignSelf: "flex-end",
-    height: 177,
-    width: 320,
+    alignSelf: "center",
     marginBottom: 21,
     position: "relative",
-    right: -16,
   },
   svg: {
     position: "absolute",
