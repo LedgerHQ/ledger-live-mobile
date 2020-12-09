@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    padding: 24,
+    margin: 24,
     zIndex: 1,
   },
   buttonContainer: {
