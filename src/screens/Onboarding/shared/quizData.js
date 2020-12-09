@@ -35,15 +35,15 @@ export default [
     answers: [
       {
         title: (
-          <Trans i18nKey="onboarding.quizz.recoveryPhrase.answers.wrong" />
-        ),
-        correct: false,
-      },
-      {
-        title: (
           <Trans i18nKey="onboarding.quizz.recoveryPhrase.answers.correct" />
         ),
         correct: true,
+      },
+      {
+        title: (
+          <Trans i18nKey="onboarding.quizz.recoveryPhrase.answers.wrong" />
+        ),
+        correct: false,
       },
     ],
   },
@@ -58,12 +58,12 @@ export default [
     },
     answers: [
       {
-        title: <Trans i18nKey="onboarding.quizz.privateKey.answers.wrong" />,
-        correct: false,
-      },
-      {
         title: <Trans i18nKey="onboarding.quizz.privateKey.answers.correct" />,
         correct: true,
+      },
+      {
+        title: <Trans i18nKey="onboarding.quizz.privateKey.answers.wrong" />,
+        correct: false,
       },
     ],
   },
