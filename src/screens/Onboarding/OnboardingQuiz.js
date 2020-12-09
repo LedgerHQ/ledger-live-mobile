@@ -102,12 +102,13 @@ function OnboardingQuizz({ navigation, route }: *) {
   const onModalHide = useCallback(() => {
     if (index + 1 === quizScenes.length) {
       navigation.navigate(ScreenName.OnboardingQuizFinal, {
+        ...route.params,
         success: userAnswers >= 2,
       });
     } else {
       setIndex(i => Math.min(i + 1, quizScenes.length - 1));
     }
-  }, [index, userAnswers, navigation]);
+  }, [index, navigation, route.params, userAnswers]);
 
   const renderScene = SceneMap(
     quizScenes.reduce(
