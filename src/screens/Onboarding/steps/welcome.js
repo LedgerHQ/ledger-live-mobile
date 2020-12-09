@@ -109,6 +109,7 @@ const styles = StyleSheet.create({
     ...commonStyles.header,
     backgroundColor: "transparent",
     flexDirection: "row-reverse",
+    zIndex: 10,
   },
   bgImage: {
     width: "100%",
