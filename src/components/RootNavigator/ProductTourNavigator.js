@@ -13,17 +13,19 @@ import { navigate } from "../../rootnavigation";
 import colors from "../../colors";
 
 export default function ProductTourNavigator() {
+  const headerStyle = {
+    backgroundColor: colors.live,
+    shadowOpacity: 0,
+    borderBottomWidth: 0,
+  };
+
   return (
     <Stack.Navigator
       headerMode="float"
       screenOptions={{
         ...closableStackNavigatorConfig,
         gestureEnabled: Platform.OS === "ios",
-        headerStyle: {
-          backgroundColor: colors.live,
-          shadowOpacity: 0,
-          borderBottomWidth: 0,
-        },
+        headerStyle,
         headerTitleStyle: { color: colors.white },
         headerTintColor: colors.white,
       }}
@@ -54,6 +56,10 @@ export default function ProductTourNavigator() {
           headerShown: true,
           headerRight: null,
           headerTitle: null,
+          headerStyle: {
+            ...headerStyle,
+            backgroundColor: "#587ED4",
+          }
         }}
       />
     </Stack.Navigator>

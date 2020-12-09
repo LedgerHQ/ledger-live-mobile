@@ -4,8 +4,10 @@ import React, { useContext } from "react";
 import { Trans } from "react-i18next";
 import { View, StyleSheet, Image } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
+import { useHeaderHeight } from '@react-navigation/stack';
 import LText from "../../components/LText";
 import Button from "../../components/Button";
+import AnimatedSvgBackground from "../../components/AnimatedSvgBackground";
 import colors from "../../colors";
 import { context } from "./Provider";
 import { NavigatorName } from "../../const";
@@ -37,6 +39,7 @@ const stepTitles = {
 
 const ProductTourStepStart = () => {
   const ptContext = useContext(context);
+  const headerHeight = useHeaderHeight();
 
   const goTo = () => {
     switch (ptContext.currentStep) {
@@ -65,6 +68,10 @@ const ProductTourStepStart = () => {
   return (
     <SafeAreaView forceInset={forceInset} style={styles.root}>
       <View style={{ flex: 1 }}>
+        <AnimatedSvgBackground
+          color={"#587ED4"}
+          style={[styles.svg, { height: 191 - headerHeight }]}
+        />
         <Image
           source={require("../../images/stepstartcastle.png")}
           style={styles.image}
@@ -109,6 +116,13 @@ const styles = StyleSheet.create({
     marginBottom: 21,
     position: "relative",
     right: -16,
+  },
+  svg: {
+    position: "absolute",
+    left: -16,
+    right: -16,
+    zIndex: -1,
+    top: 0,
   },
 });
 
