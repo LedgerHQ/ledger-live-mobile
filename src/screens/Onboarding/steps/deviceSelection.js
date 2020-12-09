@@ -1,7 +1,7 @@
 // @flow
 
 import React, { useCallback } from "react";
-import { StyleSheet, Image, View, Platform } from "react-native";
+import { StyleSheet, Image, View } from "react-native";
 import { Trans } from "react-i18next";
 import { TrackScreen } from "../../../analytics";
 import colors from "../../../colors";
@@ -14,7 +14,7 @@ import Touchable from "../../../components/Touchable";
 import { ScreenName } from "../../../const";
 import AnimatedHeaderView from "../../../components/AnimatedHeader";
 
-const deviceIds = Platform.OS === "ios" ? { nanoX } : { nanoS, nanoX, blue };
+const deviceIds = { nanoS, nanoX, blue };
 
 function OnboardingStepDeviceSelection({ navigation }: *) {
   const next = useCallback(

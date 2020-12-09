@@ -39,16 +39,9 @@ function OnboardingStepTerms({ navigation }: *) {
 
   const next = useCallback(() => {
     accept();
-    if (Platform.OS === "ios") {
-      navigation.navigate(NavigatorName.Onboarding, {
-        screen: ScreenName.OnboardingUseCase,
-        params: { deviceModelId: "nanoX" },
-      });
-    } else {
-      navigation.navigate(NavigatorName.Onboarding, {
-        screen: ScreenName.OnboardingDeviceSelection,
-      });
-    }
+    navigation.navigate(NavigatorName.Onboarding, {
+      screen: ScreenName.OnboardingDeviceSelection,
+    });
   }, [accept, navigation]);
 
   return (

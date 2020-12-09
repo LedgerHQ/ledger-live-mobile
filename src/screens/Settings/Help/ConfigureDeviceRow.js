@@ -14,16 +14,9 @@ export default function ConfigureDeviceRow() {
   function onPress() {
     setShowWelcome(false);
     setFirstTimeOnboarding(false);
-    if (Platform.OS === "ios") {
-      navigate(NavigatorName.Onboarding, {
-        screen: ScreenName.OnboardingUseCase,
-        params: { deviceModelId: "nanoX" },
-      });
-    } else {
-      navigate(NavigatorName.Onboarding, {
-        screen: ScreenName.OnboardingDeviceSelection,
-      });
-    }
+    navigate(NavigatorName.Onboarding, {
+      screen: ScreenName.OnboardingDeviceSelection,
+    });
   }
 
   return (
