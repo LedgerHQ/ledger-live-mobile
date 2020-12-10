@@ -33,7 +33,7 @@ function OnboardingStepDeviceSelection({ navigation }: *) {
       {Object.keys(deviceIds).map((deviceId, index) => (
         <Touchable
           key={deviceId + index}
-          event="Onboarding SelectDevice Button"
+          event="Onboarding Device - Selection"
           eventProperties={{ deviceId }}
           style={[styles.deviceButton, { backgroundColor: colors.lightLive }]}
           onPress={() => next(deviceId)}

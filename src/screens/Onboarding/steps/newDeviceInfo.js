@@ -27,13 +27,16 @@ const InfoView = ({
   title,
   desc,
   onCtaPress,
+  index,
 }: {
   label: React$Node,
   title: React$Node,
   desc: React$Node,
   onCtaPress?: () => void,
+  index: number,
 }) => (
   <View style={[styles.root, styles.content]}>
+    <TrackScreen category="Onboarding" name={`Edu step ${index}`} />
     <LText style={[styles.label, { color: colors.live }]} bold>
       {label}
     </LText>
@@ -44,7 +47,7 @@ const InfoView = ({
     {onCtaPress && (
       <View style={styles.button}>
         <Button
-          event="Onboarding NewDevice CTA"
+          event="Onboarding - Edu completed"
           type="primary"
           title={<Trans i18nKey="onboarding.stepNewDevice.cta" />}
           onPress={onCtaPress}
@@ -62,6 +65,7 @@ const scenes = [0, 1, 2, 3].reduce(
         label={<Trans i18nKey={`onboarding.stepNewDevice.${k}.label`} />}
         title={<Trans i18nKey={`onboarding.stepNewDevice.${k}.title`} />}
         desc={<Trans i18nKey={`onboarding.stepNewDevice.${k}.desc`} />}
+        index={k + 1}
       />
     ),
   }),
@@ -91,8 +95,8 @@ function OnboardingStepNewDevice({ navigation, route }: *) {
         // first we animate to next index
         Animated.timing(p, {
           toValue: animProgressions[i],
-          duration: 3000,
-          easing: Easing.linear,
+          duration: 2000,
+          easing: Easing.out(Easing.ease),
           useNativeDriver: true,
         }),
         // then we loop a bit backward and forward to keep animation going
@@ -124,7 +128,6 @@ function OnboardingStepNewDevice({ navigation, route }: *) {
   const switchIndex = useCallback(
     i => {
       setIndex(i);
-      startAnim(i);
     },
     [startAnim],
   );
@@ -137,6 +140,7 @@ function OnboardingStepNewDevice({ navigation, route }: *) {
         title={<Trans i18nKey={`onboarding.stepNewDevice.4.title`} />}
         desc={<Trans i18nKey={`onboarding.stepNewDevice.4.desc`} />}
         onCtaPress={next}
+        index={5}
       />
     ),
   });
@@ -149,12 +153,13 @@ function OnboardingStepNewDevice({ navigation, route }: *) {
         hasBackButton
       />
       <View style={[styles.root, { backgroundColor: colors.lightLive }]}>
-        <TrackScreen category="Onboarding" name="NewDeviceInfo" />
         <TabView
           renderTabBar={() => null}
           navigationState={{ index, routes }}
           renderScene={renderScene}
           onIndexChange={switchIndex}
+          onSwipeEnd={() => startAnim(index)}
+          swipeVelocityImpact={3}
           initialLayout={initialLayout}
         />
         <View style={styles.svg}>

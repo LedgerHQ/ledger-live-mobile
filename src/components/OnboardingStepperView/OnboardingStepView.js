@@ -4,6 +4,7 @@ import { View, StyleSheet, Pressable, Image, ScrollView } from "react-native";
 import colors from "../../colors";
 import { normalize } from "../../helpers/normalizeSize";
 import Question from "../../icons/Question";
+import { TrackScreen } from "../../analytics";
 
 import CheckBox from "../CheckBox";
 import ConfirmationModal from "../ConfirmationModal";
@@ -11,6 +12,7 @@ import LText from "../LText";
 import Animation from "../Animation";
 
 export type InfoStepViewProps = {
+  trackPage?: string,
   title?: React$Node,
   descs?: React$Node[],
   image?: number,
@@ -51,6 +53,7 @@ export function InfoStepView({
   onNext,
   sceneColors,
   openInfoModal,
+  trackPage,
 }: InfoStepViewProps & {
   onNext: () => void,
   sceneColors: string[],
@@ -75,6 +78,7 @@ export function InfoStepView({
 
   return (
     <View style={styles.infoStepView}>
+      {trackPage && <TrackScreen category="Onboarding" name={trackPage} />}
       {image ? (
         <View style={styles.imageContainer}>
           <Image style={styles.image} source={image} resizeMode="contain" />

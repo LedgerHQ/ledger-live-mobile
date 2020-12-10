@@ -20,7 +20,6 @@ import Animated, {
   Easing,
   multiply,
 } from "react-native-reanimated";
-import { TrackScreen } from "../../../analytics";
 import Touchable from "../../../components/Touchable";
 import LText from "../../../components/LText";
 import Button from "../../../components/Button";
@@ -125,7 +124,6 @@ function OnboardingStepWelcome({ navigation }: *) {
 
   return (
     <SafeAreaView style={[styles.root, { backgroundColor: colors.white }]}>
-      <TrackScreen category="Onboarding" name="Welcome" />
       <View style={styles.header}>
         <TouchableOpacity
           style={[styles.languageButton, { borderColor: colors.fog }]}
@@ -183,6 +181,7 @@ function OnboardingStepWelcome({ navigation }: *) {
 
         <Button
           type="primary"
+          event="Onboarding - Start"
           onPress={next}
           title={<Trans i18nKey="onboarding.stepWelcome.start" />}
         />

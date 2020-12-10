@@ -37,25 +37,30 @@ function OnboardingStepUseCaseSelection({ navigation, route }: Props) {
             desktopSync: {
               route: ScreenName.OnboardingImportAccounts,
               image: desktopSync,
+              event: "Onboarding - Setup Import Accounts",
             },
           }
         : {
             firstUse: {
               route: ScreenName.OnboardingSetNewDeviceInfo,
               image: firstUse,
+              event: "Onboarding - Setup new",
             },
             devicePairing: {
               route: ScreenName.OnboardingPairNew,
               image: devicePairing,
               next: ScreenName.OnboardingFinish,
+              event: "Onboarding - Connect",
             },
             desktopSync: {
               route: ScreenName.OnboardingImportAccounts,
               image: desktopSync,
+              event: "Onboarding - Setup Import Accounts",
             },
             restoreDevice: {
               route: ScreenName.OnboardingRecoveryPhrase,
               image: restoreDevice,
+              event: "Onboarding - Restore",
             },
           },
     [],
@@ -75,8 +80,8 @@ function OnboardingStepUseCaseSelection({ navigation, route }: Props) {
             </LText>
           )}
           <Touchable
-            event="Onboarding UseCase Button"
-            eventProperties={{ choice: c }}
+            event={useCases[c].event}
+            eventProperties={{ deviceId: deviceModelId }}
             onPress={() => next(useCases[c])}
             style={[styles.button, { backgroundColor: colors.lightLive }]}
           >
@@ -137,7 +142,7 @@ const styles = StyleSheet.create({
     marginVertical: 8,
   },
   label: { fontSize: 10, textTransform: "uppercase" },
-  or: { marginHorizontal: 8 },
+  or: { marginHorizontal: 16 },
   subTitle: { fontSize: 16, marginVertical: 8 },
   desc: { fontSize: 13 },
   separator: {

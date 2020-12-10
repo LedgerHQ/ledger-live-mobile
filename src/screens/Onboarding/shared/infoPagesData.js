@@ -296,6 +296,7 @@ export const pairNewErrorInfoModalProps = [
 const pinCodeScenes = deviceModelId => [
   {
     sceneProps: {
+      trackPage: "Pin code step 1",
       image: pinCodeImage,
       title: <Trans i18nKey="onboarding.stepSetupDevice.pinCode.title" />,
       descs: [<Trans i18nKey="onboarding.stepSetupDevice.pinCode.desc" />],
@@ -312,6 +313,7 @@ const pinCodeScenes = deviceModelId => [
   },
   {
     sceneProps: {
+      trackPage: "Pin code step 2",
       lottie: deviceModelId === "nanoX" ? pinCodeNanoX : pinCodeNanoS,
       lottieStyle:
         deviceModelId === "nanoX" ? { width: "110%", left: "5%" } : {},
@@ -352,6 +354,7 @@ const getSetupDeviceScenes: (
 ) => OnboardingScene[] = deviceModelId => [
   {
     sceneProps: {
+      trackPage: "Get started step 1",
       image: setupDeviceStartImage,
       title: <Trans i18nKey="onboarding.stepSetupDevice.start.title" />,
       bullets: [
@@ -391,6 +394,7 @@ const getSetupDeviceScenes: (
   },
   {
     sceneProps: {
+      trackPage: "Get started step 2",
       lottie: deviceModelId === "nanoX" ? powerOnNanoX : powerOnNanoS,
       lottieStyle:
         deviceModelId === "nanoX" ? { width: "110%", left: "5%" } : {},
@@ -438,6 +442,7 @@ const getSetupDeviceScenes: (
   ...pinCodeScenes(deviceModelId),
   {
     sceneProps: {
+      trackPage: "Recovery step 1",
       image: recoveryPhrase,
       title: (
         <Trans i18nKey="onboarding.stepSetupDevice.recoveryPhrase.title" />
@@ -460,6 +465,7 @@ const getSetupDeviceScenes: (
   },
   {
     sceneProps: {
+      trackPage: "Recovery step 2",
       image: recoverySheet,
       bullets: [
         {
@@ -489,6 +495,7 @@ const getSetupDeviceScenes: (
   },
   {
     sceneProps: {
+      trackPage: "Recovery step 3",
       lottie: deviceModelId === "nanoX" ? recoverNanoX : recoverNanoS,
       lottieStyle:
         deviceModelId === "nanoX" ? { width: "110%", left: "5%" } : {},
@@ -520,6 +527,7 @@ const getSetupDeviceScenes: (
   },
   {
     sceneProps: {
+      trackPage: "Recovery step 4",
       image: hideRecoveryPhrase,
       title: (
         <Trans i18nKey="onboarding.stepSetupDevice.hideRecoveryPhrase.title" />
@@ -573,6 +581,7 @@ const getSetupDeviceScenes: (
 const getRecoveryPhraseScenes = (deviceModelId: string) => [
   {
     sceneProps: {
+      trackPage: "RecoveryPhrase step 1",
       image: importRecoveryPhrase,
       title: (
         <Trans i18nKey="onboarding.stepRecoveryPhrase.importRecoveryPhrase.title" />
@@ -602,6 +611,7 @@ const getRecoveryPhraseScenes = (deviceModelId: string) => [
   },
   {
     sceneProps: {
+      trackPage: "RecoveryPhrase step 2",
       lottie:
         deviceModelId === "nanoX" ? powerOnRecoveryNanoX : powerOnRecoveryNanoS,
       lottieStyle:
@@ -650,6 +660,7 @@ const getRecoveryPhraseScenes = (deviceModelId: string) => [
   ...pinCodeScenes(deviceModelId),
   {
     sceneProps: {
+      trackPage: "RecoveryPhrase step 3",
       image: importRecoveryPhrase,
       title: (
         <Trans i18nKey="onboarding.stepRecoveryPhrase.existingRecoveryPhrase.title" />
@@ -673,6 +684,7 @@ const getRecoveryPhraseScenes = (deviceModelId: string) => [
   },
   {
     sceneProps: {
+      trackPage: "RecoveryPhrase step 4",
       lottie:
         deviceModelId === "nanoX" ? numberOfWordsNanoX : numberOfWordsNanoS,
       lottieStyle:
@@ -701,6 +713,7 @@ const getRecoveryPhraseScenes = (deviceModelId: string) => [
     id: "existingRecoveryPhrase_1",
   },
   {
+    trackPage: "RecoveryPhrase step 5",
     sceneProps: {
       lottie: deviceModelId === "nanoX" ? confirmWordsNanoX : confirmWordsNanoS,
       lottieStyle:
@@ -744,6 +757,7 @@ const getRecoveryPhraseScenes = (deviceModelId: string) => [
 const importAccountsScenes = [
   {
     sceneProps: {
+      trackPage: "Import accounts step 1",
       image: syncCryptos,
       title: <Trans i18nKey="onboarding.stepImportAccounts.title" />,
       descs: [<Trans i18nKey="onboarding.stepImportAccounts.desc" />],

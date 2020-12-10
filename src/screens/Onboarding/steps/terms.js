@@ -69,7 +69,7 @@ function OnboardingStepTerms({ navigation }: *) {
           </Touchable>
 
           <Button
-            event="TermsConfirm"
+            event="Onboarding - ToU accepted"
             type="primary"
             disabled={!toggle || !toggleRecoveryPhrase}
             onPress={next}

@@ -788,7 +788,7 @@
       "pinCode": {
         "title": "PIN code",
         "desc": "Your PIN code is the first layer of security. It physically secures access to your Nano and your private keys. Your PIN code must be 4 to 8 digit long.",
-        "checkboxDesc": "I under0stand that I must choose my PIN code by myself and keep it private.",
+        "checkboxDesc": "I understand that I must choose my PIN code by myself and keep it private.",
         "cta": "Set up PIN code"
       },
       "pinCodeSetup": {

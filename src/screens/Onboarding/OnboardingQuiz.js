@@ -24,6 +24,7 @@ import quizImage2 from "./assets/quizImage2.png";
 import quizImage3 from "./assets/quizImage3.png";
 
 import quizScenes from "./shared/quizData";
+import Touchable from "../../components/Touchable";
 
 const images = [quizImage1, quizImage2, quizImage3];
 
@@ -33,6 +34,7 @@ const InfoView = ({
   image,
   answers,
   onPress,
+  index,
 }: {
   label: React$Node,
   title: React$Node,
@@ -42,8 +44,10 @@ const InfoView = ({
     correct: boolean,
   }[],
   onPress: boolean => void,
+  index: number,
 }) => (
   <View style={[styles.root]}>
+    <TrackScreen category="Onboarding" name={`Quizz step ${index}`} />
     <View style={styles.container}>
       <LText style={[styles.label, { color: colors.live }]} bold>
         {label}
@@ -53,15 +57,18 @@ const InfoView = ({
       </LText>
       <View style={[styles.answerContainer]}>
         {answers.map(({ title, correct }, i) => (
-          <TouchableOpacity
+          <Touchable
             key={i}
+            event={`Onboarding - Quizz step ${index} ${
+              correct ? "correct" : "false"
+            }`}
             style={[styles.answer, { backgroundColor: colors.white }]}
             onPress={() => onPress(correct)}
           >
             <LText semiBold style={[styles.answerText, { color: colors.live }]}>
               {title}
             </LText>
-          </TouchableOpacity>
+          </Touchable>
         ))}
       </View>
     </View>
@@ -124,6 +131,7 @@ function OnboardingQuizz({ navigation, route }: *) {
             image={images[i]}
             answers={k.answers}
             onPress={onClickAnswer}
+            index={i + 1}
           />
         ),
       }),
