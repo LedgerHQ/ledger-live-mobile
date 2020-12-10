@@ -44,25 +44,28 @@ const InfoView = ({
   onPress: boolean => void,
 }) => (
   <View style={[styles.root]}>
-    <LText style={[styles.label, { color: colors.live }]} bold>
-      {label}
-    </LText>
-    <LText bold style={styles.title}>
-      {title}
-    </LText>
-    <View style={[styles.answerContainer]}>
-      {answers.map(({ title, correct }, i) => (
-        <TouchableOpacity
-          key={i}
-          style={[styles.answer, { backgroundColor: colors.white }]}
-          onPress={() => onPress(correct)}
-        >
-          <LText semiBold style={[styles.answerText, { color: colors.live }]}>
-            {title}
-          </LText>
-        </TouchableOpacity>
-      ))}
+    <View style={styles.container}>
+      <LText style={[styles.label, { color: colors.live }]} bold>
+        {label}
+      </LText>
+      <LText bold style={styles.title}>
+        {title}
+      </LText>
+      <View style={[styles.answerContainer]}>
+        {answers.map(({ title, correct }, i) => (
+          <TouchableOpacity
+            key={i}
+            style={[styles.answer, { backgroundColor: colors.white }]}
+            onPress={() => onPress(correct)}
+          >
+            <LText semiBold style={[styles.answerText, { color: colors.live }]}>
+              {title}
+            </LText>
+          </TouchableOpacity>
+        ))}
+      </View>
     </View>
+
     <View style={styles.imageContainer}>
       <Image style={styles.image} source={image} resizeMode="cover" />
     </View>
@@ -193,6 +196,10 @@ const styles = StyleSheet.create({
   root: {
     flex: 1,
   },
+  container: {
+    flex: 1,
+    justifyContent: "flex-end",
+  },
   label: {
     paddingHorizontal: 24,
     textAlign: "center",
@@ -206,15 +213,15 @@ const styles = StyleSheet.create({
     marginVertical: 4,
   },
   imageContainer: {
-    flex: 1,
-    marginBottom: 42,
+    height: "45%",
     position: "relative",
+    overflow: "visible",
   },
   image: {
     position: "absolute",
-    bottom: 0,
+    bottom: -24,
     left: "-10%",
-    height: "50%",
+    height: "100%",
     width: "120%",
   },
   dotContainer: {
