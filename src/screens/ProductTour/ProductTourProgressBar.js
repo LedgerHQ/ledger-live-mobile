@@ -25,6 +25,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     height: 8,
     backgroundColor: "rgba(20, 37, 51, 0.5)",
+    overflow: "hidden",
   },
   fill: {
     borderTopLeftRadius: 4,
