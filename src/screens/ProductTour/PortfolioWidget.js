@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
   dismiss: {
     position: "absolute",
     top: 27,
-    left: 19,
+    right: 19,
   },
   image: {
     position: "absolute",
