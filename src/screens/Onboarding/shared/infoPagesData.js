@@ -169,7 +169,11 @@ const hideRecoveryPhraseInfoModalProps = [
       {
         Icon: ArrowRight,
         label: (
-          <Trans i18nKey="onboarding.stepSetupDevice.hideRecoveryPhrase.infoModal.bullets.0.label" />
+          <Trans i18nKey="onboarding.stepSetupDevice.hideRecoveryPhrase.infoModal.bullets.0.label">
+            {""}
+            <LText bold>{""}</LText>
+            {""}
+          </Trans>
         ),
       },
       {
@@ -195,7 +199,21 @@ const hideRecoveryPhraseInfoModalProps = [
       {
         Icon: ArrowRight,
         label: (
-          <Trans i18nKey="onboarding.stepSetupDevice.hideRecoveryPhrase.infoModal.bullets.3.label" />
+          <Trans i18nKey="onboarding.stepSetupDevice.hideRecoveryPhrase.infoModal.bullets.3.label">
+            {""}
+            <LText bold>{""}</LText>
+            {""}
+          </Trans>
+        ),
+      },
+      {
+        Icon: ArrowRight,
+        label: (
+          <Trans i18nKey="onboarding.stepSetupDevice.hideRecoveryPhrase.infoModal.bullets.4.label">
+            {""}
+            <LText bold>{""}</LText>
+            {""}
+          </Trans>
         ),
       },
     ],

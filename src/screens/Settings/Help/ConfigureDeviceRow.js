@@ -1,6 +1,5 @@
 /* @flow */
 import React from "react";
-import { Platform } from "react-native";
 import { Trans } from "react-i18next";
 import { useNavigation } from "@react-navigation/native";
 import { ScreenName, NavigatorName } from "../../../const";

@@ -675,7 +675,7 @@
       "warning": {
         "title": "Get started in {{language}}",
         "cta": "Got it!",
-        "desc": "We are introducing additional languages  in order to help your onboarding with Ledger. Please be aware that the rest of the Ledger experience is currently only available in English."
+        "desc": "We are introducing additional languages in order to help your onboarding with Ledger. Please be aware that the rest of the Ledger experience is currently only available in English."
       }
     },
     "stepSelectDevice": {
@@ -697,88 +697,90 @@
         "title": "Already have a recovery phrase?",
         "label": "Device pairing",
         "subTitle": "Connect your Nano",
-        "desc": "Your device is already set-up? Connect it to your app!"
+        "desc": "Your device is already setup? Connect it to the app!"
       },
       "desktopSync": {
         "title": "Already have a recovery phrase?",
         "label": "Desktop sync",
-        "subTitle": "Sync cryptos from your desktop app",
-        "desc": "Already got the desktop app? Sync it to manage your cryptos from your smartphone!"
+        "subTitle": "Sync crypto from your desktop app",
+        "desc": "Already got the desktop app? Sync it to manage your crypto from your smartphone!"
       },
       "restoreDevice": {
         "label": "Restore device",
-        "subTitle": "Import your recovery phrase in a new device",
-        "desc": "Use an already-existing recovery phrase to import your private keys in a new Nano!"
+        "subTitle": "Restore your recovery phrase on a new device",
+        "desc": "Use an existing recovery phrase to restore your private keys on a new Nano!"
       }
     },
     "stepNewDevice": {
       "cta": "Let’s do this!",
       "0": {
         "label": "Basics",
-        "title": "Access your coins",
-        "desc": "Your coins are stored on the blockchain. You need a private key to access them and manage them."
+        "title": "Access your crypto",
+        "desc": "Your crypto is stored on the blockchain. You need a private key to access theand manage them."
       },
       "1": {
         "label": "Basics",
         "title": "Own your private key",
-        "desc": "Your private key is stored within your Nano and you must be the only one to own it for safety purposes."
+        "desc": "Your private key is stored within your Nano and you must be the only one to own it to be in control of your money."
       },
       "2": {
         "label": "Basics",
         "title": "Stay offline",
-        "desc": "Your Nano works as a cold storage hardware wallet, it means that your private key is never exposed online, even when using your app."
+        "desc": "Your Nano works as a \"cold storage\" wallet. This means that it never exposes your private key online, even when using the app."
       },
       "3": {
         "label": "Basics",
         "title": "Validate transactions",
-        "desc": "Ledger app allows you to buy, sell, manage, exchange and earn cryptos while securing your coins. Every transaction on your cryptos will be validated with your Nano."
+        "desc": "Ledger Live allows you to buy, sell, manage, exchange and earn crypto while remaining protected. You will validate every crypto transaction with your Nano."
       },
       "4": {
         "label": "Basics",
-        "title": "Let’s set up your Nano Wallet",
-        "desc": "Before using your Nano, let’s set up your Nano security."
+        "title": "Let’s set up your Nano!",
+        "desc": "We'll start by setting up your Nano security."
       }
     },
     "stepSetupDevice": {
       "start": {
-        "title": "The best way to get you started:",
+        "title": "The best way to get you started",
         "bullets": {
           "0": { "label": "Plan 30 minutes and take your time" },
-          "1": { "label": "Grab a pen" },
-          "2": { "label": "Stay alone and choose a safe & quiet environment" }
+          "1": { "label": "Grab a pen to write with." },
+          "2": {
+            "label": "Stay alone, and choose a safe and quiet environment."
+          }
         },
-        "cta": "Let’s start!",
+        "cta": "OK, I’m ready!",
         "warning": {
-          "title": "Be careful",
-          "desc": "Make sure you follow instructions on this app at every step of the process.",
+          "title": "Please be careful",
+          "desc": "Make sure you follow the instructions on this app at every step of the process.",
           "ctaText": "Got it!"
         }
       },
       "setup": {
         "bullets": {
           "0": {
-            "title": "Turn On",
+            "title": "Turn on Nano",
             "nanoX": {
               "label": "Turn on your device by pressing the black button for 1 second."
             },
             "nanoS": {
-              "label": "Turn on your device by plugging it on your phone usb port."
+              "label": "Turn on your device by connecting it to the USB port of your phone."
             },
             "blue": {
-              "label": "Turn on your device by plugging it on and pressing the power button."
+              "label": "Turn on your device by connecting it to the USB port of your phone and pressing the power button."
             }
           },
           "1": {
             "title": "Browse ",
-            "label": "Learn how to interact with your device by pressing the button on screen."
+            "label": "Learn how to interact with your device by reading the on-screen instructions."
           },
           "2": {
-            "title": "Validate",
-            "label": "Press both buttons simultaneously to validate a selection."
+            "title": "Select “Set up as new device”",
+            "label": "Press both buttons simultaneously to validate the selection."
           },
           "3": {
             "title": "Follow instructions",
-            "label": "Come back to the app to follow  instructions on your PIN code! "
+            "label": "Come back here to follow instructions on your PIN code."
           }
         },
         "cta": "Next step"
@@ -786,20 +788,20 @@
       "pinCode": {
         "title": "PIN code",
         "desc": "Your PIN code is the first layer of security. It physically secures access to your Nano and your private keys. Your PIN code must be 4 to 8 digit long.",
-        "checkboxDesc": "I understand that I must choose my PIN code by myself and keep it private",
+        "checkboxDesc": "I under0stand that I must choose my PIN code by myself and keep it private.",
         "cta": "Set up PIN code"
       },
       "pinCodeSetup": {
         "bullets": {
           "0": {
-            "title": "Set up",
-            "label_0": "Press left or right button to select a digit. Press both to validate. Select ",
+            "title": "Choose PIN code",
+            "label_0": "Press the left or right button to change digits. Press both buttons to validate a digit. Select",
             "label_1": " to confirm your PIN code. Select ",
-            "label_2": " to erase a digit"
+            "label_2": " to erase a digit."
           },
           "1": {
-            "title": "Confirm",
-            "label": "Re-enter PIN code"
+            "title": "Confirm PIN code",
+            "label": "Enter your PIN code again to confirm it."
           }
         },
         "infoModal": {
@@ -807,21 +809,23 @@
           "bullets": {
             "0": { "label": "Always choose a PIN code by yourself." },
             "1": {
-              "label": "Always enter your PIN code without being observed."
+              "label": "Always enter your PIN code out of sight."
             },
-            "2": { "label": "You can change your PIN code if needed. " },
+            "2": { "label": "You can change your PIN code if needed." },
             "3": {
-              "label": "Remember that three wrong PIN code in a row will reset the device."
+              "label": "Three wrong PIN code entries in a row will reset the device."
             },
             "4": {
               "label": "Never use an easy PIN code like 0000, 123456, or 55555555."
             },
-            "5": { "label": "Never share your PIN code with someone else." },
+            "5": {
+              "label": "Never share your PIN code with someone else. Not even with Ledger."
+            },
             "6": {
-              "label": "Never use a PIN code you did not choose by yourself."
+              "label": "Never use a PIN code you did not choose yourself."
             },
             "7": {
-              "label": "Never store your PIN code on a computer or smartphone."
+              "label": "Never store your PIN code on a computer or phone."
             }
           }
         },
@@ -3061,7 +3065,8 @@
     "title": "Terms of Use",
     "read": "Read the Terms of Use",
     "switchLabel": "I have read and accepted the Terms & Conditions.",
-    "switchLabelRecoveryPhrase": "I understand that if I lose this recovery phrase, I will not be able to access my coins in case I lose of break my Nano."
+    "switchLabelRecoveryPhrase": "I understand that if I lose this recovery phrase, I will not be able to access my coins in case I lose of break my Nano.",
+    "cta": "Enter Ledger App"
   },
   "exchange": {
     "buy": {

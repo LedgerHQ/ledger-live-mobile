@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import {
   StyleSheet,
   View,
@@ -11,6 +11,15 @@ import {
 } from "react-native";
 import { Trans } from "react-i18next";
 
+import { useClock, loop } from "react-native-redash/lib/module/v1";
+import Animated, {
+  set,
+  interpolate,
+  Extrapolate,
+  useCode,
+  Easing,
+  multiply,
+} from "react-native-reanimated";
 import { TrackScreen } from "../../../analytics";
 import Touchable from "../../../components/Touchable";
 import LText from "../../../components/LText";
@@ -22,9 +31,15 @@ import { deviceNames } from "../../../wording";
 
 import commonStyles from "../styles";
 
-import welcomeLogo from "../assets/welcome.png";
+import welcomeBg from "../assets/welcomeIllu/1.png";
+import welcomeLogoLayer1 from "../assets/welcomeIllu/2.png";
+import welcomeLogoLayer2 from "../assets/welcomeIllu/3.png";
+import welcomeLogoLayer3 from "../assets/welcomeIllu/4.png";
+
 import { useLocale } from "../../../context/Locale";
 import { ScreenName } from "../../../const";
+
+const AnimatedImg = Animated.createAnimatedComponent(Image);
 
 const hitSlop = {
   top: 16,
@@ -39,6 +54,72 @@ function OnboardingStepWelcome({ navigation }: *) {
     () => navigation.navigate(ScreenName.OnboardingLanguage),
     [navigation],
   );
+
+  const [animY] = useState(new Animated.Value(0));
+
+  const clockY = useClock();
+
+  useCode(
+    () =>
+      set(
+        animY,
+        loop({
+          duration: 10000,
+          easing: Easing.inOut(Easing.ease),
+          clock: clockY,
+          boomerang: true,
+        }),
+      ),
+    [],
+  );
+
+  const [animX] = useState(new Animated.Value(0));
+
+  const clockX = useClock();
+
+  useCode(
+    () =>
+      set(
+        animX,
+        loop({
+          duration: 8000,
+          easing: Easing.inOut(Easing.ease),
+          clock: clockX,
+          boomerang: true,
+        }),
+      ),
+    [],
+  );
+
+  const translateY = interpolate(animX, {
+    inputRange: [0, 1],
+    outputRange: [-25, 5],
+    extrapolate: Extrapolate.CLAMP,
+  });
+
+  const translateX = interpolate(animY, {
+    inputRange: [0, 1],
+    outputRange: [-10, 10],
+    extrapolate: Extrapolate.CLAMP,
+  });
+
+  const translateY1 = interpolate(multiply(animX, -1), {
+    inputRange: [0, 1],
+    outputRange: [-10, 15],
+    extrapolate: Extrapolate.CLAMP,
+  });
+
+  const translateX2 = interpolate(animY, {
+    inputRange: [0, 1],
+    outputRange: [-5, 5],
+    extrapolate: Extrapolate.CLAMP,
+  });
+
+  const translateY2 = interpolate(animX, {
+    inputRange: [0, 1],
+    outputRange: [15, -20],
+    extrapolate: Extrapolate.CLAMP,
+  });
 
   const { locale } = useLocale();
 
@@ -57,7 +138,38 @@ function OnboardingStepWelcome({ navigation }: *) {
         </TouchableOpacity>
       </View>
       <View style={styles.logo}>
-        <Image style={styles.bgImage} resizeMode="cover" source={welcomeLogo} />
+        <Image style={[styles.bgImage]} resizeMode="cover" source={welcomeBg} />
+        <AnimatedImg
+          style={[
+            styles.bgImageLayer,
+            styles.bgImageLayer1,
+            { transform: [{ translateY }] },
+          ]}
+          resizeMode="contain"
+          source={welcomeLogoLayer1}
+        />
+        <AnimatedImg
+          style={[
+            styles.bgImageLayer,
+            styles.bgImageLayer2,
+            {
+              transform: [{ translateY: translateY1, translateX }],
+            },
+          ]}
+          resizeMode="contain"
+          source={welcomeLogoLayer2}
+        />
+        <AnimatedImg
+          style={[
+            styles.bgImageLayer,
+            styles.bgImageLayer3,
+            {
+              transform: [{ translateY: translateY2, translateX: translateX2 }],
+            },
+          ]}
+          resizeMode="contain"
+          source={welcomeLogoLayer3}
+        />
       </View>
       <View style={styles.bottomSection}>
         <View style={styles.titleSection}>
@@ -117,7 +229,23 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: -100,
     left: 0,
-    zIndex: -1,
+    zIndex: -10,
+  },
+  bgImageLayer: {
+    width: "105%",
+    height: "100%",
+    position: "absolute",
+    top: -150,
+    left: "-5%",
+  },
+  bgImageLayer1: {
+    zIndex: -9,
+  },
+  bgImageLayer2: {
+    zIndex: -8,
+  },
+  bgImageLayer3: {
+    zIndex: -7,
   },
   logo: {
     flex: 2,

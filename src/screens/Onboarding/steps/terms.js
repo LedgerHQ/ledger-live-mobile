@@ -1,13 +1,7 @@
 // @flow
 
 import React, { useCallback, useState } from "react";
-import {
-  StyleSheet,
-  View,
-  Linking,
-  ActivityIndicator,
-  Platform,
-} from "react-native";
+import { StyleSheet, View, Linking, ActivityIndicator } from "react-native";
 import { Trans } from "react-i18next";
 import { TrackScreen } from "../../../analytics";
 import Button from "../../../components/Button";
@@ -79,7 +73,7 @@ function OnboardingStepTerms({ navigation }: *) {
             type="primary"
             disabled={!toggle || !toggleRecoveryPhrase}
             onPress={next}
-            title={<Trans i18nKey="common.confirm" />}
+            title={<Trans i18nKey="Terms.cta" />}
           />
         </View>
       }

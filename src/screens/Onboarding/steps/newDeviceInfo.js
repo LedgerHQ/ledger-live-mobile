@@ -33,7 +33,7 @@ const InfoView = ({
   desc: React$Node,
   onCtaPress?: () => void,
 }) => (
-  <View style={[styles.root]}>
+  <View style={[styles.root, styles.content]}>
     <LText style={[styles.label, { color: colors.live }]} bold>
       {label}
     </LText>
@@ -193,6 +193,10 @@ const styles = StyleSheet.create({
   root: {
     flex: 1,
   },
+  content: {
+    justifyContent: "center",
+    paddingBottom: "45%",
+  },
   label: {
     marginTop: 24,
     paddingHorizontal: 24,
@@ -211,17 +215,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 14,
     marginBottom: 24,
-  },
-  imageContainer: {
-    flex: 1,
-    marginBottom: 42,
-    position: "relative",
-  },
-  image: {
-    position: "absolute",
-    bottom: 0,
-    height: "50%",
-    width: "100%",
   },
   button: { paddingHorizontal: 24, marginTop: 16 },
   dotContainer: {
