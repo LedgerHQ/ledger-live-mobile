@@ -4,7 +4,7 @@ import React, { useContext } from "react";
 import { Trans } from "react-i18next";
 import { View, StyleSheet, Image } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
-import { useHeaderHeight } from '@react-navigation/stack';
+import { useHeaderHeight } from "@react-navigation/stack";
 import LText from "../../components/LText";
 import Button from "../../components/Button";
 import AnimatedSvgBackground from "../../components/AnimatedSvgBackground";

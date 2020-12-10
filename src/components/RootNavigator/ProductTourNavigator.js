@@ -59,7 +59,7 @@ export default function ProductTourNavigator() {
           headerStyle: {
             ...headerStyle,
             backgroundColor: "#587ED4",
-          }
+          },
         }}
       />
     </Stack.Navigator>
