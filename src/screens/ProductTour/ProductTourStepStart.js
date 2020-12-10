@@ -127,6 +127,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     backgroundColor: colors.live,
     flex: 1,
+    paddingBottom: 24,
   },
   title: {
     fontSize: 32,
