@@ -745,9 +745,7 @@
         "bullets": {
           "0": { "label": "Plan 30 minutes and take your time" },
           "1": { "label": "Grab a pen to write with." },
-          "2": {
-            "label": "Stay alone, and choose a safe and quiet environment."
-          }
+          "2": { "label": "Stay alone, and choose a safe and quiet environment." }
         },
         "cta": "OK, I’m ready!",
         "warning": {
@@ -818,9 +816,7 @@
             "4": {
               "label": "Never use an easy PIN code like 0000, 123456, or 55555555."
             },
-            "5": {
-              "label": "Never share your PIN code with someone else. Not even with Ledger."
-            },
+            "5": { "label": "Never share your PIN code with someone else. Not even with Ledger." },
             "6": {
               "label": "Never use a PIN code you did not choose yourself."
             },
@@ -979,18 +975,18 @@
     "stepPairNew": {
       "nanoX": {
         "title": "Pair your Nano",
-        "desc": "This is the first time you’re setting up your Nano with your smartphone. Let’s quickly pair your device before enjoying your app freely.",
+        "desc": "This is the first time you’re setting up your Nano with this phone. Let’s quickly pair your device.",
         "cta": "Let’s pair my Nano"
       },
       "nanoS": {
-        "title": "Plug your Nano",
-        "desc": "This is the first time you’re setting up your Nano with your smartphone. Let’s quickly plug your device before enjoying your app freely.",
-        "cta": "Let’s plug my Nano"
+        "title": "Connect your Nano",
+        "desc": "This is the first time you’re setting up your Nano with this phone. Let’s quickly connect your device.",
+        "cta": "Let’s connect my Nano"
       },
       "blue": {
-        "title": "Plug your Nano",
-        "desc": "This is the first time you’re setting up your Nano with your smartphone. Let’s quickly plug your device before enjoying your app freely.",
-        "cta": "Let’s plug my Nano"
+        "title": "Connect your Blue",
+        "desc": "This is the first time you’re setting up your Blue with this phone. Let’s quickly connect your device.",
+        "cta": "Let’s connect my Blue"
       },
       "infoModal": {
         "title": "Where can I find my device name?",
@@ -2274,12 +2270,12 @@
     "title": "Pair new device",
     "bluetooth": {
       "title": "Connect via Bluetooth...",
-      "label": "Automatically detect your Nano"
+      "label": "Detect your Nano automatically"
     },
-    "deviceNotFoundPairNewDevice": "Pair with bluetooth",
+    "deviceNotFoundPairNewDevice": "Pair via Bluetooth",
     "headerDescription": "Please make sure your {{productName}} is unlocked with Bluetooth enabled",
-    "usb": "... or plug USB cable",
-    "usbLabel": "Plug your cable and enter your PIN Code on your device",
+    "usb": "... or connect USB cable",
+    "usbLabel": "Connect USB cable and enter your PIN Code on your device",
     "steps": {
       "connecting": {
         "title": "Connecting {{deviceName}}",
@@ -3068,7 +3064,7 @@
     "title": "Terms of Use",
     "read": "Read the Terms of Use",
     "switchLabel": "I have read and accepted the Terms & Conditions.",
-    "switchLabelRecoveryPhrase": "I understand that if I lose this recovery phrase, I will not be able to access my coins in case I lose of break my Nano.",
+    "switchLabelRecoveryPhrase": "I understand that if I lose this recovery phrase, I will not be able to access my coins in case I lose of break my Nano."
     "cta": "Enter Ledger App"
   },
   "exchange": {
