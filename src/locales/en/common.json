@@ -745,7 +745,9 @@
         "bullets": {
           "0": { "label": "Plan 30 minutes and take your time" },
           "1": { "label": "Grab a pen to write with." },
-          "2": { "label": "Stay alone, and choose a safe and quiet environment." }
+          "2": {
+            "label": "Stay alone, and choose a safe and quiet environment."
+          }
         },
         "cta": "OK, I’m ready!",
         "warning": {
@@ -816,7 +818,9 @@
             "4": {
               "label": "Never use an easy PIN code like 0000, 123456, or 55555555."
             },
-            "5": { "label": "Never share your PIN code with someone else. Not even with Ledger." },
+            "5": {
+              "label": "Never share your PIN code with someone else. Not even with Ledger."
+            },
             "6": {
               "label": "Never use a PIN code you did not choose yourself."
             },
@@ -889,7 +893,7 @@
           "title": "Where should I keep my Recovery phrase?",
           "bullets": {
             "0": {
-              "label": "<1>NEVER enter it on a computer, phone or any other device. Don't take a picture of it."
+              "label": "<1>NEVER</1> enter it on a computer, phone or any other device. Don't take a picture of it."
             },
             "1": {
               "label": "<1>NEVER</1> share your 24 words with anyone."
@@ -899,7 +903,7 @@
             },
             "3": {
               "label": "Ledger will never ask for your recovery phrase."
-            }
+            },
             "4": {
               "label": "If any person or application asks for it, assume it is a scam!"
             }
@@ -3064,7 +3068,7 @@
     "title": "Terms of Use",
     "read": "Read the Terms of Use",
     "switchLabel": "I have read and accepted the Terms & Conditions.",
-    "switchLabelRecoveryPhrase": "I understand that if I lose this recovery phrase, I will not be able to access my coins in case I lose of break my Nano."
+    "switchLabelRecoveryPhrase": "I understand that if I lose this recovery phrase, I will not be able to access my coins in case I lose of break my Nano.",
     "cta": "Enter Ledger App"
   },
   "exchange": {
