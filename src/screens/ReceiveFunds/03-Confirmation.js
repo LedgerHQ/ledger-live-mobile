@@ -320,7 +320,7 @@ export default function ReceiveConfirmation({ navigation, route }: Props) {
           />
         </View>
       </NavigationScrollView>
-      {verified && (
+      {(verified || unsafe) && (
         <View style={styles.footer}>
           <Button
             event="ReceiveDone"
