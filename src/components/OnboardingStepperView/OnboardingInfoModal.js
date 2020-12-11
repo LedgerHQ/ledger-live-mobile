@@ -16,6 +16,8 @@ import getWindowDimensions from "../../logic/getWindowDimensions";
 import LText from "../LText";
 import Close from "../../icons/Close";
 
+import { infoModalScenes } from "../../screens/Onboarding/shared/infoPagesData";
+
 export type SceneInfoProp = {
   title?: React$Node,
   desc?: React$Node,
@@ -32,7 +34,7 @@ export type SceneInfoProp = {
 type Props = {
   navigation: *,
   route: {
-    params: { sceneInfoProps: SceneInfoProp[] },
+    params: { sceneInfoKey: string },
   },
 };
 
@@ -45,7 +47,8 @@ const hitSlop = {
 const { height } = getWindowDimensions();
 
 export default function OnboardingInfoModal({ navigation, route }: Props) {
-  const { sceneInfoProps } = route.params;
+  const { sceneInfoKey } = route.params;
+  const sceneInfoProps = infoModalScenes[sceneInfoKey];
   const close = useCallback(() => navigation.goBack(), [navigation]);
 
   const [primaryColor, textColor, bulletColor] = [
@@ -54,7 +57,7 @@ export default function OnboardingInfoModal({ navigation, route }: Props) {
     colors.lightLive,
   ];
 
-  return (
+  return sceneInfoProps ? (
     <SafeAreaView style={[styles.root, { backgroundColor: primaryColor }]}>
       <View style={[styles.header]}>
         <View style={styles.topHeader}>
@@ -154,7 +157,7 @@ export default function OnboardingInfoModal({ navigation, route }: Props) {
         ))}
       </ScrollView>
     </SafeAreaView>
-  );
+  ) : null;
 }
 
 const styles = StyleSheet.create({

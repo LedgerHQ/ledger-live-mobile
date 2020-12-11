@@ -56,9 +56,7 @@ const InfoView = ({
         </View>
       )}
     </View>
-    <View style={styles.imageContainer}>
-      <Image style={styles.image} source={image} resizeMode="cover" />
-    </View>
+    <Image style={styles.image} source={image} resizeMode="cover" />
   </>
 );
 
@@ -187,16 +185,11 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   dot: { width: 8, height: 8, margin: 4, borderRadius: 8 },
-  imageContainer: {
-    height: "45%",
-    position: "relative",
-    overflow: "visible",
-  },
   image: {
     position: "absolute",
     bottom: 0,
     left: 0,
-    height: "100%",
+    height: "45%",
     width: "100%",
   },
   svg: {

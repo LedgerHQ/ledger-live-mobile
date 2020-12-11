@@ -15,7 +15,6 @@ import ArrowLeft from "../../icons/ArrowLeft";
 import Question from "../../icons/Question";
 import Styles from "../../navigation/styles";
 
-import type { SceneInfoProp } from "./OnboardingInfoModal";
 import { InfoStepView } from "./OnboardingStepView";
 import type { InfoStepViewProps } from "./OnboardingStepView";
 import AnimatedSvgBackground from "../AnimatedSvgBackground";
@@ -24,7 +23,7 @@ export type OnboardingScene = {
   id: string,
   sceneProps: InfoStepViewProps,
   type: "primary" | "secondary",
-  sceneInfoModalProps?: SceneInfoProp[],
+  sceneInfoKey?: string,
 };
 
 type Props = {
@@ -75,10 +74,10 @@ export default function OnboardingStepperView({
     navigation.navigate(NavigatorName.Onboarding, {
       screen: ScreenName.OnboardingInfoModal,
       params: {
-        sceneInfoProps: currentScene?.sceneInfoModalProps,
+        sceneInfoKey: currentScene?.sceneInfoKey,
       },
     });
-  }, [currentScene?.sceneInfoModalProps, navigation]);
+  }, [currentScene?.sceneInfoKey, navigation]);
 
   const sceneColors =
     currentScene?.type === "primary"
@@ -129,7 +128,7 @@ export default function OnboardingStepperView({
               <ArrowLeft size={18} color={sceneColors[1]} />
             </Pressable>
           )}
-          {currentScene?.sceneInfoModalProps && (
+          {currentScene?.sceneInfoKey && (
             <Pressable
               hitSlop={hitSlop}
               style={styles.buttons}

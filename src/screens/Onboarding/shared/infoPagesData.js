@@ -222,7 +222,7 @@ const hideRecoveryPhraseInfoModalProps = [
   },
 ];
 
-export const pairNewErrorInfoModalProps = [
+const pairNewErrorInfoModalProps = [
   {
     title: <Trans i18nKey="onboarding.stepPairNew.errorInfoModal.title" />,
     desc: <Trans i18nKey="onboarding.stepPairNew.errorInfoModal.desc" />,
@@ -291,6 +291,13 @@ export const pairNewErrorInfoModalProps = [
     : []),
 ];
 
+export const infoModalScenes = {
+  pinCodeInfoModalProps,
+  recoveryPhraseInfoModalProps,
+  hideRecoveryPhraseInfoModalProps,
+  pairNewErrorInfoModalProps,
+};
+
 const pinCodeScenes = deviceModelId => [
   {
     sceneProps: {
@@ -305,7 +312,7 @@ const pinCodeScenes = deviceModelId => [
         ),
       },
     },
-    sceneInfoModalProps: pinCodeInfoModalProps,
+    sceneInfoKey: "pinCodeInfoModalProps",
     type: "primary",
     id: "pinCode",
   },
@@ -342,7 +349,7 @@ const pinCodeScenes = deviceModelId => [
       ],
       ctaText: <Trans i18nKey="onboarding.stepSetupDevice.pinCodeSetup.cta" />,
     },
-    sceneInfoModalProps: pinCodeInfoModalProps,
+    sceneInfoKey: "pinCodeInfoModalProps",
     type: "secondary",
     id: "pinCodeSetup",
   },
@@ -458,7 +465,7 @@ const getSetupDeviceScenes: (
         ),
       },
     },
-    sceneInfoModalProps: recoveryPhraseInfoModalProps,
+    sceneInfoKey: "recoveryPhraseInfoModalProps",
     type: "primary",
     id: "recoveryPhrase",
   },
@@ -488,7 +495,7 @@ const getSetupDeviceScenes: (
         <Trans i18nKey="onboarding.stepSetupDevice.recoveryPhraseSetup.cta" />
       ),
     },
-    sceneInfoModalProps: recoveryPhraseInfoModalProps,
+    sceneInfoKey: "recoveryPhraseInfoModalProps",
     type: "secondary",
     id: "recoveryPhraseSetup",
   },
@@ -520,7 +527,7 @@ const getSetupDeviceScenes: (
         <Trans i18nKey="onboarding.stepSetupDevice.recoveryPhraseSetup.nextStep" />
       ),
     },
-    sceneInfoModalProps: recoveryPhraseInfoModalProps,
+    sceneInfoKey: "recoveryPhraseInfoModalProps",
     type: "secondary",
     id: "recoveryPhraseSetup_1",
   },
@@ -571,7 +578,7 @@ const getSetupDeviceScenes: (
         ),
       },
     },
-    sceneInfoModalProps: hideRecoveryPhraseInfoModalProps,
+    sceneInfoKey: "hideRecoveryPhraseInfoModalProps",
     type: "primary",
     id: "hideRecoveryPhrase",
   },
@@ -679,7 +686,7 @@ const getRecoveryPhraseScenes = (deviceModelId: string) => [
         ),
       },
     },
-    sceneInfoModalProps: recoveryPhraseInfoModalProps,
+    sceneInfoKey: "recoveryPhraseInfoModalProps",
     type: "primary",
     id: "existingRecoveryPhrase",
   },
@@ -709,7 +716,7 @@ const getRecoveryPhraseScenes = (deviceModelId: string) => [
         <Trans i18nKey="onboarding.stepRecoveryPhrase.existingRecoveryPhrase.nextStep" />
       ),
     },
-    sceneInfoModalProps: recoveryPhraseInfoModalProps,
+    sceneInfoKey: "recoveryPhraseInfoModalProps",
     type: "secondary",
     id: "existingRecoveryPhrase_1",
   },
@@ -749,7 +756,7 @@ const getRecoveryPhraseScenes = (deviceModelId: string) => [
         <Trans i18nKey="onboarding.stepRecoveryPhrase.existingRecoveryPhrase.nextStep" />
       ),
     },
-    sceneInfoModalProps: recoveryPhraseInfoModalProps,
+    sceneInfoKey: "recoveryPhraseInfoModalProps",
     type: "secondary",
     id: "existingRecoveryPhrase_2",
   },
