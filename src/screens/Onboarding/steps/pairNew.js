@@ -22,6 +22,7 @@ import LText from "../../../components/LText";
 import pairYourNano from "../assets/pairYourNano.png";
 import plugYourNano from "../assets/plugNanoS.png";
 import colors from "../../../colors";
+import { urls } from "../../../config/urls";
 
 const pairNewInfoModalProps = [
   {
@@ -63,7 +64,7 @@ const pairNewInfoModalProps = [
           label: (
             <Trans i18nKey="onboarding.stepPairNew.infoModal.bullets.2.link" />
           ),
-          url: "", // @TODO correct url here
+          url: urls.fixConnectionIssues,
         },
       },
     ],
@@ -74,7 +75,7 @@ const pairNewInfoModalProps = [
       <Trans i18nKey="onboarding.stepPairNew.infoModal.desc_1">
         {""}
         <LText
-          onPress={() => Linking.openURL("https://www.ledger.com")} // @TODO correct URL here
+          onPress={() => Linking.openURL(urls.otgCable)}
           semiBold
           style={{ color: colors.live }}
         />{" "}

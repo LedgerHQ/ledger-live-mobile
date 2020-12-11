@@ -47,6 +47,8 @@ import LText from "../../../components/LText";
 import NanoDeviceCancelIcon from "../../../icons/NanoDeviceCancelIcon";
 import NanoDeviceCheckIcon from "../../../icons/NanoDeviceCheckIcon";
 
+import { urls } from "../../../config/urls";
+
 const pinCodeInfoModalProps = [
   {
     title: (
@@ -130,7 +132,7 @@ const recoveryPhraseInfoModalProps = [
       label: (
         <Trans i18nKey="onboarding.stepSetupDevice.recoveryPhraseSetup.infoModal.link" />
       ),
-      url: "", // @TODO correct url here
+      url: urls.recoveryPhraseInfo,
     },
   },
   {
@@ -230,10 +232,6 @@ export const pairNewErrorInfoModalProps = [
   },
   {
     desc: <Trans i18nKey="onboarding.stepPairNew.errorInfoModal.desc_2" />,
-    link: {
-      label: <Trans i18nKey="onboarding.stepPairNew.errorInfoModal.link" />,
-      url: "", // @TODO correct url here
-    },
   },
   ...(Platform.OS === "android"
     ? [
@@ -324,11 +322,12 @@ const pinCodeScenes = deviceModelId => [
           ),
           label: (
             <>
-              <Trans i18nKey="onboarding.stepSetupDevice.pinCodeSetup.bullets.0.label_0" />
-              <NanoDeviceCheckIcon size={12} color={colors.live} />
-              <Trans i18nKey="onboarding.stepSetupDevice.pinCodeSetup.bullets.0.label_1" />
-              <NanoDeviceCancelIcon size={12} color={colors.live} />
-              <Trans i18nKey="onboarding.stepSetupDevice.pinCodeSetup.bullets.0.label_2" />
+              <Trans i18nKey="onboarding.stepSetupDevice.pinCodeSetup.bullets.0.label">
+                {""}
+                <NanoDeviceCheckIcon size={12} color={colors.live} />
+                <NanoDeviceCancelIcon size={12} color={colors.live} />
+                {""}
+              </Trans>
             </>
           ),
         },
@@ -622,7 +621,9 @@ const getRecoveryPhraseScenes = (deviceModelId: string) => [
             <Trans i18nKey="onboarding.stepRecoveryPhrase.importRecoveryPhrase.bullets.0.title" />
           ),
           label: (
-            <Trans i18nKey="onboarding.stepRecoveryPhrase.importRecoveryPhrase.bullets.0.label" />
+            <Trans
+              i18nKey={`onboarding.stepRecoveryPhrase.importRecoveryPhrase.bullets.0.${deviceModelId}.label`}
+            />
           ),
         },
         {
@@ -666,11 +667,11 @@ const getRecoveryPhraseScenes = (deviceModelId: string) => [
         <Trans i18nKey="onboarding.stepRecoveryPhrase.existingRecoveryPhrase.title" />
       ),
       descs: [
-        <Trans i18nKey="onboarding.stepRecoveryPhrase.existingRecoveryPhrase.desc" />,
-        <Trans i18nKey="onboarding.stepRecoveryPhrase.existingRecoveryPhrase.desc_1" />,
+        <Trans i18nKey="onboarding.stepRecoveryPhrase.existingRecoveryPhrase.paragraph1" />,
+        <Trans i18nKey="onboarding.stepRecoveryPhrase.existingRecoveryPhrase.paragraph2" />,
       ],
       ctaText: (
-        <Trans i18nKey="onboarding.stepRecoveryPhrase.existingRecoveryPhrase.cta" />
+        <Trans i18nKey="onboarding.stepRecoveryPhrase.existingRecoveryPhrase.nextStep" />
       ),
       ctaWarningCheckbox: {
         desc: (
@@ -782,7 +783,7 @@ const importAccountsScenes = [
         {
           Icon: Check,
           label: (
-            <Trans i18nKey="onboarding.stepImportAccounts.bullets.2.title" />
+            <Trans i18nKey="onboarding.stepImportAccounts.bullets.2.label" />
           ),
         },
       ],

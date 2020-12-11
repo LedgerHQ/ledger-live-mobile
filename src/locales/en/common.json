@@ -795,9 +795,7 @@
         "bullets": {
           "0": {
             "title": "Choose PIN code",
-            "label_0": "Press the left or right button to change digits. Press both buttons to validate a digit. Select ",
-            "label_1": " to confirm your PIN code. Select ",
-            "label_2": " to erase a digit."
+            "label": "Press the left or right button to change digits. Press both buttons to validate a digit. Select <1></1> to confirm your PIN code. Select <2></2> to erase a digit."
           },
           "1": {
             "title": "Confirm PIN code",
@@ -927,6 +925,7 @@
           "desc": "Importing recovery phrases from wallets other than Ledger wallets can cause a risk for your assets. Ledger cannot guarantee security integrity if importing external recovery phrases.",
           "cta": "Got it!"
         },
+        "nextStep": "Next step",
         "bullets": {
           "0": {
             "title": "Turn on Nano",
@@ -938,222 +937,221 @@
             },
             "blue": {
               "label": "Turn on your device by connecting it to the USB port of your phone and pressing the power button."
-            },
-            "1": {
-              "title": "Browse",
-              "label": "Learn how to interact with your device by reading the on-screen instructions."
-            },
-            "2": {
-              "title": "Select “Restore from recovery phrase”",
-              "label": "Press both buttons simultaneously to validate the selection."
-            },
-            "3": {
-              "title": "Follow instructions",
-              "label": "Come back here to follow instructions on your PIN code."
             }
-          },
-          "nextStep": "Next step"
-        },
-        "existingRecoveryPhrase": {
-          "title": "Enter your recovery phrase",
-          "desc": "Your recovery phrase is the secret list of words that you backed up when you first set up your wallet.",
-          "desc_1": "Ledger does not keep a copy of your recovery phrase.",
-          "checkboxDesc": "I understand that if I lose my recovery phrase, I will not be able to access my coins in case I lose access to my Nano.",
-          "bullets": {
-            "0": {
-              "title": "Grab your recovery phrase"
-            },
-            "1": {
-              "title": "Select recovery phrase length",
-              "label": "Your Recovery phrases can have 12, 18 or 24 words. You must enter all words to access your crypto."
-            },
-            "2": {
-              "title": "Enter Word #1...",
-              "label": "Enter the first letters of Word #1 by selecting them with the right or left button. Press both buttons to validate each letter."
-            },
-            "3": {
-              "title": "Validate Word #1...",
-              "label": "Choose Word #1 from the suggestions. Press both buttons to validate."
-            },
-            "4": {
-              "title": "Repeat for all words!"
-            }
-          },
-          "nextStep": "Next step"
-        }
-      },
-      "stepPairNew": {
-        "nanoX": {
-          "title": "Pair your Nano",
-          "desc": "This is the first time you’re setting up your Nano with this phone. Let’s quickly pair your device.",
-          "cta": "Let’s pair my Nano"
-        },
-        "nanoS": {
-          "title": "Connect your Nano",
-          "desc": "This is the first time you’re setting up your Nano with this phone. Let’s quickly connect your device.",
-          "cta": "Let’s connect my Nano"
-        },
-        "blue": {
-          "title": "Connect your Blue",
-          "desc": "This is the first time you’re setting up your Blue with this phone. Let’s quickly connect your device.",
-          "cta": "Let’s connect my Blue"
-        },
-        "infoModal": {
-          "title": "Where can I find my device name?",
-          "desc": "On your device, select Settings > General > Device name.",
-          "title_1": "How to set up Bluetooth connection?",
-          "title_2": "How do I use my Nano X without Bluetooth?",
-          "desc_1": "Use an <1>OTG-cable</1> to connect your Ledger Nano X to your Android smartphone (iOS not supported). Manage your crypto with Ledger Live mobile or any other compatible (web) app.",
-          "bullets": {
-            "0": {
-              "label": "Make sure Bluetooth is enabled on your smartphone and on your Ledger Nano X. Your Ledger Nano X should be on the Dashboard, its main home screen."
-            },
-            "1": {
-              "label": "<1>{{Os}}</1>: Make sure location services are enabled in your phone's settings for Ledger Live. Ledger Live never uses your location information, this is a requirement for Bluetooth on {{Os}}."
-            },
-            "2": {
-              "label": "If you have a Bluetooth pairing issue, please refer to the following article",
-              "link": "Fix connection issues."
-            }
-          }
-        },
-        "errorInfoModal": {
-          "title": "Something went wrong?",
-          "title_1": "I have an Android",
-          "title_2": "Update Android version",
-          "desc": "If you're experiencing Bluetooth issues with your Nano X, please remove the pairing and forget Nano X on your phone. Then try the pairing again.",
-          "desc_1": "It may take a while before the Bluetooth pairing request is displayed. Make sure you verify and confirm the pairing code both on your Nano X and on your phone.",
-          "desc_2": "Check in your phone's Bluetooth settings whether the Ledger Nano X is detected. If it not detected, make sure you turn on the Bluetooth on your Ledger Nano X.",
-          "desc_3": "Location services",
-          "desc_4": "If the Ledger Nano X is not detected in your mobile app when trying to pair it, please try the following solution:",
-          "desc_5": "Ledger mobile app asks you to allow location services when it's not enabled yet, but on a few phone models, this is not always properly detected. Please note that Ledger mobile app never uses your location information, this permission is simply required for Bluetooth on Android.",
-          "desc_6": "Some users have reported having fixed their connection issues by updating the Android version running on their phone to a newer one. Please check with your phone manufacturer whether an update is available.",
-          "link": "Learn more",
-          "bullets": {
-            "0": {
-              "label": "Navigate to the system options for the Ledger Live app on your Android phone."
-            },
-            "1": {
-              "label": "Allow the location to be used."
-            },
-            "2": {
-              "label": "Return to the mobile app."
-            },
-            "3": {
-              "label": "Check whether your Nano X is detected."
-            }
-          }
-        }
-      },
-      "stepImportAccounts": {
-        "title": "Sync crypto from desktop",
-        "desc": "If you already have your crypto set up in the Ledger desktop app, you can sync them to manage them from your phone.",
-        "cta": "I’m ready to scan",
-        "bullets": {
-          "0": {
-            "label": "On the Desktop app, select <1>Settings > Accounts > Account export</1>."
           },
           "1": {
-            "label": "Scan the LiveQR code with your phone."
+            "title": "Browse",
+            "label": "Learn how to interact with your device by reading the on-screen instructions."
           },
           "2": {
-            "label": "Select the crypto accounts to import."
-          }
-        },
-        "warning": {
-          "title": "Your desktop and mobile apps must be synced manually.",
-          "desc": "Ledger Live respects your privacy and stores your data locally. If you change accounts and settings on your phone, you will need to do the same on your computer, and vice versa. Your transactions stay synchronized with the blockchain.",
-          "cta": "Got it!"
-        }
-      },
-      "stepSetupPin": {
-        "step1": "Turn on your {{fullDeviceName}} and follow the instructions.",
-        "step1-nanoS": "Connect your {{fullDeviceName}} to your phone using an OTG cable.",
-        "step2": "Press both buttons together to select <1><1>Setup as a new device.</1></1>",
-        "step2-restore": "Press both buttons together to select <1><1>Restore from recovery phrase.</1></1>",
-        "step3": "Press left or right button to select a digit. Press buttons together to confirm.",
-        "step4prefix": "Select ",
-        "step4suffix1": " to confirm your PIN.",
-        "step4suffix2": " to erase last digit.",
-        "modal": {
-          "step1": "Always choose <1><1>your own</1></1> PIN",
-          "step2": "Use 8 digits for greater security",
-          "step3": "Never use a device with a PIN or recovery phrase already setup"
-        }
-      },
-      "stepWriteRecovery": {
-        "step1": "Write <1><1>Word #1</1></1> in entry 1 on a blank Recovery sheet",
-        "step2": "Press the right button and continue to write down all 24 words.",
-        "step3": "Confirm each word of your recovery phrase: select it then confirm it by pressing both buttons together.",
-        "modal": {
-          "step1": "Store your 24-word recovery phrase in a safe place, out of sight.",
-          "step2": "Make sure you are the only person to have the recovery phrase.",
-          "step3": "Ledger does not save your recovery phrase.",
-          "step4": "Never use a device with a recovery phrase or PIN already setup."
-        }
-      },
-      "stepPassword": {
-        "desc": "Set a password to protect Ledger Live data on your phone.",
-        "descConfigured": "Password lock enabled successfully",
-        "setPassword": "Set the password",
-        "modal": {
-          "step1": "Keep your password safe. Do not share it.",
-          "step2": "Keep your password safe. Losing it means resetting Ledger Live and loading the accounts again.",
-          "step3": "Resetting Ledger Live has no impact on your crypto assets."
-        }
-      },
-      "stepFinish": {
-        "title": "Your device is ready!",
-        "readOnlyTitle": "All set!",
-        "desc": "Install apps on your device and manage your portfolio",
-        "cta": "Open Ledger Live"
-      },
-      "quizz": {
-        "label": "Quiz",
-        "modal": {
-          "success": "Congrats!",
-          "fail": "Incorrect!"
-        },
-        "coins": {
-          "title": "As a Ledger user, my crypto is stored:",
-          "answers": {
-            "correct": "On the blockchain",
-            "wrong": "On my Nano"
+            "title": "Select “Restore from recovery phrase”",
+            "label": "Press both buttons simultaneously to validate the selection."
           },
-          "modal": {
-            "text": "Your crypto is always stored on the blockchain. Your hardware wallet only holds your private key, which gives you access to your crypto.",
-            "cta": "Next question"
+          "3": {
+            "title": "Follow instructions",
+            "label": "Come back here to follow instructions on your PIN code."
           }
-        },
-        "recoveryPhrase": {
-          "title": "If my recovery phrase is no longer secret and safe...",
-          "answers": {
-            "correct": "My crypto is no longer safe and I need to transfer them to a secure place",
-            "wrong": "No problem, Ledger can send me a copy"
-          },
-          "modal": {
-            "text": "Anyone who knows your recovery phrase can steal your crypto assets. \nIf you lose it, you must quickly transfer your crypto to a secure place.",
-            "cta": "Next question"
-          }
-        },
-        "privateKey": {
-          "title": "When I connect my Nano to the Ledger app, my private key is...",
-          "answers": {
-            "correct": "Still offline",
-            "wrong": "Briefly connected to the internet"
-          },
-          "modal": {
-            "text": "Your private key always remains offline in your hardware wallet. Even when connected to your Nano, the Ledger app cannot access your private key. You must physically authorize every transaction on your device.",
-            "cta": "Finish quiz"
-          }
-        },
-        "final": {
-          "successTitle": "Already a pro!",
-          "successText": "You are ready to safely manage your crypto. Only one quick step left!",
-          "failTitle": "You will soon become a pro...",
-          "failText": "Don’t worry, Ledger is here to guide you through your journey. You will soon feel extra comfortable about your crypto safety. Only one quick step left!",
-          "cta": "Let's pair my Nano"
         }
+      },
+      "existingRecoveryPhrase": {
+        "title": "Enter your recovery phrase",
+        "paragraph1": "Your recovery phrase is the secret list of words that you backed up when you first set up your wallet.",
+        "paragraph2": "Ledger does not keep a copy of your recovery phrase.",
+        "checkboxDesc": "I understand that if I lose my recovery phrase, I will not be able to access my coins in case I lose access to my Nano.",
+        "bullets": {
+          "0": {
+            "title": "Grab your recovery phrase"
+          },
+          "1": {
+            "title": "Select recovery phrase length",
+            "label": "Your Recovery phrases can have 12, 18 or 24 words. You must enter all words to access your crypto."
+          },
+          "2": {
+            "title": "Enter Word #1...",
+            "label": "Enter the first letters of Word #1 by selecting them with the right or left button. Press both buttons to validate each letter."
+          },
+          "3": {
+            "title": "Validate Word #1...",
+            "label": "Choose Word #1 from the suggestions. Press both buttons to validate."
+          },
+          "4": {
+            "title": "Repeat for all words!"
+          }
+        },
+        "nextStep": "Next step"
+      }
+    },
+    "stepPairNew": {
+      "nanoX": {
+        "title": "Pair your Nano",
+        "desc": "This is the first time you’re setting up your Nano with this phone. Let’s quickly pair your device.",
+        "cta": "Let’s pair my Nano"
+      },
+      "nanoS": {
+        "title": "Connect your Nano",
+        "desc": "This is the first time you’re setting up your Nano with this phone. Let’s quickly connect your device.",
+        "cta": "Let’s connect my Nano"
+      },
+      "blue": {
+        "title": "Connect your Blue",
+        "desc": "This is the first time you’re setting up your Blue with this phone. Let’s quickly connect your device.",
+        "cta": "Let’s connect my Blue"
+      },
+      "infoModal": {
+        "title": "Where can I find my device name?",
+        "desc": "On your device, select Settings > General > Device name.",
+        "title_1": "How to set up Bluetooth connection?",
+        "title_2": "How do I use my Nano X without Bluetooth?",
+        "desc_1": "Use an <1>OTG-cable</1> to connect your Ledger Nano X to your Android smartphone (iOS not supported). Manage your crypto with Ledger Live mobile or any other compatible (web) app.",
+        "bullets": {
+          "0": {
+            "label": "Make sure Bluetooth is enabled on your smartphone and on your Ledger Nano X. Your Ledger Nano X should be on the Dashboard, its main home screen."
+          },
+          "1": {
+            "label": "<1>{{Os}}</1>: Make sure location services are enabled in your phone's settings for Ledger Live. Ledger Live never uses your location information, this is a requirement for Bluetooth on {{Os}}."
+          },
+          "2": {
+            "label": "If you have a Bluetooth pairing issue, please refer to the following article",
+            "link": "Fix connection issues."
+          }
+        }
+      },
+      "errorInfoModal": {
+        "title": "Something went wrong?",
+        "title_1": "I have an Android",
+        "title_2": "Update Android version",
+        "desc": "If you're experiencing Bluetooth issues with your Nano X, please remove the pairing and forget Nano X on your phone. Then try the pairing again.",
+        "desc_1": "It may take a while before the Bluetooth pairing request is displayed. Make sure you verify and confirm the pairing code both on your Nano X and on your phone.",
+        "desc_2": "Check in your phone's Bluetooth settings whether the Ledger Nano X is detected. If it not detected, make sure you turn on the Bluetooth on your Ledger Nano X.",
+        "desc_3": "Location services",
+        "desc_4": "If the Ledger Nano X is not detected in your mobile app when trying to pair it, please try the following solution:",
+        "desc_5": "Ledger mobile app asks you to allow location services when it's not enabled yet, but on a few phone models, this is not always properly detected. Please note that Ledger mobile app never uses your location information, this permission is simply required for Bluetooth on Android.",
+        "desc_6": "Some users have reported having fixed their connection issues by updating the Android version running on their phone to a newer one. Please check with your phone manufacturer whether an update is available.",
+        "link": "Learn more",
+        "bullets": {
+          "0": {
+            "label": "Navigate to the system options for the Ledger Live app on your Android phone."
+          },
+          "1": {
+            "label": "Allow the location to be used."
+          },
+          "2": {
+            "label": "Return to the mobile app."
+          },
+          "3": {
+            "label": "Check whether your Nano X is detected."
+          }
+        }
+      }
+    },
+    "stepImportAccounts": {
+      "title": "Sync crypto from desktop",
+      "desc": "If you already have your crypto set up in the Ledger desktop app, you can sync them to manage them from your phone.",
+      "cta": "I’m ready to scan",
+      "bullets": {
+        "0": {
+          "label": "On the Desktop app, select <1>Settings > Accounts > Account export</1>."
+        },
+        "1": {
+          "label": "Scan the LiveQR code with your phone."
+        },
+        "2": {
+          "label": "Select the crypto accounts to import."
+        }
+      },
+      "warning": {
+        "title": "Your desktop and mobile apps must be synced manually.",
+        "desc": "Ledger Live respects your privacy and stores your data locally. If you change accounts and settings on your phone, you will need to do the same on your computer, and vice versa. Your transactions stay synchronized with the blockchain.",
+        "cta": "Got it!"
+      }
+    },
+    "stepSetupPin": {
+      "step1": "Turn on your {{fullDeviceName}} and follow the instructions.",
+      "step1-nanoS": "Connect your {{fullDeviceName}} to your phone using an OTG cable.",
+      "step2": "Press both buttons together to select <1><1>Setup as a new device.</1></1>",
+      "step2-restore": "Press both buttons together to select <1><1>Restore from recovery phrase.</1></1>",
+      "step3": "Press left or right button to select a digit. Press buttons together to confirm.",
+      "step4prefix": "Select ",
+      "step4suffix1": " to confirm your PIN.",
+      "step4suffix2": " to erase last digit.",
+      "modal": {
+        "step1": "Always choose <1><1>your own</1></1> PIN",
+        "step2": "Use 8 digits for greater security",
+        "step3": "Never use a device with a PIN or recovery phrase already setup"
+      }
+    },
+    "stepWriteRecovery": {
+      "step1": "Write <1><1>Word #1</1></1> in entry 1 on a blank Recovery sheet",
+      "step2": "Press the right button and continue to write down all 24 words.",
+      "step3": "Confirm each word of your recovery phrase: select it then confirm it by pressing both buttons together.",
+      "modal": {
+        "step1": "Store your 24-word recovery phrase in a safe place, out of sight.",
+        "step2": "Make sure you are the only person to have the recovery phrase.",
+        "step3": "Ledger does not save your recovery phrase.",
+        "step4": "Never use a device with a recovery phrase or PIN already setup."
+      }
+    },
+    "stepPassword": {
+      "desc": "Set a password to protect Ledger Live data on your phone.",
+      "descConfigured": "Password lock enabled successfully",
+      "setPassword": "Set the password",
+      "modal": {
+        "step1": "Keep your password safe. Do not share it.",
+        "step2": "Keep your password safe. Losing it means resetting Ledger Live and loading the accounts again.",
+        "step3": "Resetting Ledger Live has no impact on your crypto assets."
+      }
+    },
+    "stepFinish": {
+      "title": "Your device is ready!",
+      "readOnlyTitle": "All set!",
+      "desc": "Install apps on your device and manage your portfolio",
+      "cta": "Open Ledger Live"
+    },
+    "quizz": {
+      "label": "Quiz",
+      "modal": {
+        "success": "Congrats!",
+        "fail": "Incorrect!"
+      },
+      "coins": {
+        "title": "As a Ledger user, my crypto is stored:",
+        "answers": {
+          "correct": "On the blockchain",
+          "wrong": "On my Nano"
+        },
+        "modal": {
+          "text": "Your crypto is always stored on the blockchain. Your hardware wallet only holds your private key, which gives you access to your crypto.",
+          "cta": "Next question"
+        }
+      },
+      "recoveryPhrase": {
+        "title": "If my recovery phrase is no longer secret and safe...",
+        "answers": {
+          "correct": "My crypto is no longer safe and I need to transfer them to a secure place",
+          "wrong": "No problem, Ledger can send me a copy"
+        },
+        "modal": {
+          "text": "Anyone who knows your recovery phrase can steal your crypto assets. \nIf you lose it, you must quickly transfer your crypto to a secure place.",
+          "cta": "Next question"
+        }
+      },
+      "privateKey": {
+        "title": "When I connect my Nano to the Ledger app, my private key is...",
+        "answers": {
+          "correct": "Still offline",
+          "wrong": "Briefly connected to the internet"
+        },
+        "modal": {
+          "text": "Your private key always remains offline in your hardware wallet. Even when connected to your Nano, the Ledger app cannot access your private key. You must physically authorize every transaction on your device.",
+          "cta": "Finish quiz"
+        }
+      },
+      "final": {
+        "successTitle": "Already a pro!",
+        "successText": "You are ready to safely manage your crypto. Only one quick step left!",
+        "failTitle": "You will soon become a pro...",
+        "failText": "Don’t worry, Ledger is here to guide you through your journey. You will soon feel extra comfortable about your crypto safety. Only one quick step left!",
+        "cta": "Let's pair my Nano"
       }
     }
   },
