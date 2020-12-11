@@ -139,8 +139,6 @@ function OnboardingQuizz({ navigation, route }: *) {
         style={[styles.header, { backgroundColor: colors.lightLive }]}
         title={null}
         hasBackButton
-        closeAction={skip}
-        hasCloseButton
       />
       <View style={[styles.root, { backgroundColor: colors.lightLive }]}>
         <TrackScreen category="Onboarding" name="Quizz" />
