@@ -95,13 +95,6 @@ function OnboardingQuizz({ navigation, route }: *) {
     setIsModalOpen(false);
   }, []);
 
-  const skip = useCallback(() => {
-    navigation.navigate(ScreenName.OnboardingPairNew, {
-      ...route.params,
-      next: ScreenName.OnboardingFinish,
-    });
-  }, [navigation, route.params]);
-
   const onModalHide = useCallback(() => {
     if (index + 1 === quizScenes.length) {
       navigation.navigate(ScreenName.OnboardingQuizFinal, {
