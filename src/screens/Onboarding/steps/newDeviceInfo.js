@@ -1,16 +1,10 @@
 // @flow
 
-import React, { useCallback, useEffect, useState } from "react";
-import {
-  StyleSheet,
-  View,
-  Dimensions,
-  Pressable,
-  Animated,
-  Easing,
-} from "react-native";
+import React, { useCallback, useState } from "react";
+import { StyleSheet, View, Dimensions, Pressable, Image } from "react-native";
 import { Trans } from "react-i18next";
 import { TabView, SceneMap } from "react-native-tab-view";
+import Svg, { Ellipse } from "react-native-svg";
 import { TrackScreen } from "../../../analytics";
 import Button from "../../../components/Button";
 import colors from "../../../colors";
@@ -18,43 +12,54 @@ import LText from "../../../components/LText";
 import { ScreenName } from "../../../const";
 import AnimatedHeaderView from "../../../components/AnimatedHeader";
 
-import Animation from "../../../components/Animation";
+import image1 from "../assets/setupDeviceSlide_1.png";
+import image2 from "../assets/setupDeviceSlide_2.png";
+import image3 from "../assets/setupDeviceSlide_3.png";
+import image4 from "../assets/setupDeviceSlide_4.png";
+import image5 from "../assets/setupDeviceSlide_5.png";
 
-import animations from "../assets/Set_Up_New_Device.json";
+const images = [image1, image2, image3, image4, image5];
 
 const InfoView = ({
   label,
   title,
   desc,
   onCtaPress,
+  image,
   index,
 }: {
   label: React$Node,
   title: React$Node,
   desc: React$Node,
   onCtaPress?: () => void,
+  image: number,
   index: number,
 }) => (
-  <View style={[styles.root, styles.content]}>
-    <TrackScreen category="Onboarding" name={`Edu step ${index}`} />
-    <LText style={[styles.label, { color: colors.live }]} bold>
-      {label}
-    </LText>
-    <LText bold style={styles.title}>
-      {title}
-    </LText>
-    <LText style={styles.desc}>{desc}</LText>
-    {onCtaPress && (
-      <View style={styles.button}>
-        <Button
-          event="Onboarding - Edu completed"
-          type="primary"
-          title={<Trans i18nKey="onboarding.stepNewDevice.cta" />}
-          onPress={onCtaPress}
-        />
-      </View>
-    )}
-  </View>
+  <>
+    <View style={[styles.root, styles.content]}>
+      <TrackScreen category="Onboarding" name={`Edu step ${index}`} />
+      <LText style={[styles.label, { color: colors.live }]} bold>
+        {label}
+      </LText>
+      <LText bold style={styles.title}>
+        {title}
+      </LText>
+      <LText style={styles.desc}>{desc}</LText>
+      {onCtaPress && (
+        <View style={styles.button}>
+          <Button
+            event="Onboarding - Edu completed"
+            type="primary"
+            title={<Trans i18nKey="onboarding.stepNewDevice.cta" />}
+            onPress={onCtaPress}
+          />
+        </View>
+      )}
+    </View>
+    <View style={styles.imageContainer}>
+      <Image style={styles.image} source={image} resizeMode="cover" />
+    </View>
+  </>
 );
 
 const scenes = [0, 1, 2, 3].reduce(
@@ -66,13 +71,12 @@ const scenes = [0, 1, 2, 3].reduce(
         title={<Trans i18nKey={`onboarding.stepNewDevice.${k}.title`} />}
         desc={<Trans i18nKey={`onboarding.stepNewDevice.${k}.desc`} />}
         index={k + 1}
+        image={images[k]}
       />
     ),
   }),
   {},
 );
-
-const animProgressions = [0.15, 0.35, 0.55, 0.72, 0.95];
 
 const routeKeys = [0, 1, 2, 3, 4].map(k => ({ key: `${k}` }));
 
@@ -85,52 +89,11 @@ function OnboardingStepNewDevice({ navigation, route }: *) {
 
   const [index, setIndex] = useState(0);
 
-  const [p] = useState(new Animated.Value(0.0));
-
   const [routes] = useState(routeKeys);
 
-  const startAnim = useCallback(
-    i => {
-      Animated.sequence([
-        // first we animate to next index
-        Animated.timing(p, {
-          toValue: animProgressions[i],
-          duration: 2000,
-          easing: Easing.out(Easing.ease),
-          useNativeDriver: true,
-        }),
-        // then we loop a bit backward and forward to keep animation going
-        Animated.loop(
-          Animated.sequence([
-            Animated.timing(p, {
-              toValue: animProgressions[i] - 0.05,
-              duration: 2000,
-              easing: Easing.linear,
-              useNativeDriver: true,
-            }),
-            Animated.timing(p, {
-              toValue: animProgressions[i],
-              duration: 2000,
-              easing: Easing.linear,
-              useNativeDriver: true,
-            }),
-          ]),
-        ),
-      ]).start();
-    },
-    [p],
-  );
-
-  useEffect(() => {
-    startAnim(0);
+  const switchIndex = useCallback(i => {
+    setIndex(i);
   }, []);
-
-  const switchIndex = useCallback(
-    i => {
-      setIndex(i);
-    },
-    [startAnim],
-  );
 
   const renderScene = SceneMap({
     ...scenes,
@@ -141,6 +104,7 @@ function OnboardingStepNewDevice({ navigation, route }: *) {
         desc={<Trans i18nKey={`onboarding.stepNewDevice.4.desc`} />}
         onCtaPress={next}
         index={5}
+        image={images[4]}
       />
     ),
   });
@@ -158,20 +122,12 @@ function OnboardingStepNewDevice({ navigation, route }: *) {
           navigationState={{ index, routes }}
           renderScene={renderScene}
           onIndexChange={switchIndex}
-          onSwipeEnd={() => startAnim(index)}
           swipeVelocityImpact={3}
           initialLayout={initialLayout}
         />
-        <View style={styles.svg}>
-          <Animation
-            progress={p}
-            style={{ width: "100%", height: "100%" }}
-            source={animations}
-            loop={false}
-            autoplay={false}
-          />
-        </View>
-
+        <Svg style={styles.svg} viewBox="0 0 320 196" fill="none">
+          <Ellipse cx="165" cy="208.22" rx="507" ry="208.032" fill="#475b80" />
+        </Svg>
         <View style={styles.dotContainer}>
           {[0, 1, 2, 3, 4].map(k => (
             <Pressable
@@ -231,14 +187,24 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   dot: { width: 8, height: 8, margin: 4, borderRadius: 8 },
+  imageContainer: {
+    height: "45%",
+    position: "relative",
+    overflow: "visible",
+  },
+  image: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    height: "100%",
+    width: "100%",
+  },
   svg: {
     position: "absolute",
     bottom: 0,
     left: 0,
     width: "100%",
-    height: "45%",
-    alignItems: "center",
-    justifyContent: "center",
+    height: "30%",
     zIndex: -1,
   },
 });
