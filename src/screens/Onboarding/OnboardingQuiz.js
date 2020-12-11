@@ -1,13 +1,6 @@
 // @flow
 import React, { useCallback, useState } from "react";
-import {
-  StyleSheet,
-  View,
-  Dimensions,
-  Image,
-  TouchableOpacity,
-  Pressable,
-} from "react-native";
+import { StyleSheet, View, Dimensions, Image, Pressable } from "react-native";
 import { TabView, SceneMap } from "react-native-tab-view";
 import Svg, { Ellipse } from "react-native-svg";
 import { TrackScreen } from "../../analytics";
