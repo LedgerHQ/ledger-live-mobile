@@ -14,7 +14,6 @@ import { closableStackNavigatorConfig } from "../../navigation/navigatorConfig";
 import styles from "../../navigation/styles";
 import Question from "../../icons/Question";
 import colors from "../../colors";
-import { pairNewErrorInfoModalProps } from "../../screens/Onboarding/shared/infoPagesData";
 
 const hitSlop = {
   bottom: 10,
@@ -26,7 +25,7 @@ const hitSlop = {
 export const ErrorHeaderInfo = ({ route, navigation }: *) => {
   const openInfoModal = useCallback(() => {
     navigation.navigate(ScreenName.OnboardingInfoModal, {
-      sceneInfoProps: pairNewErrorInfoModalProps,
+      sceneInfoKey: "pairNewErrorInfoModalProps",
     });
   }, [navigation]);
 
