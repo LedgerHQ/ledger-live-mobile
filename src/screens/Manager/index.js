@@ -142,7 +142,7 @@ class ChooseDevice extends Component<
 
   componentDidMount() {
     const { readOnlyModeEnabled } = this.props;
-    this.state = { ...this.state, device: undefined };
+    this.setState(state => ({ ...state, device: undefined }));
 
     if (readOnlyModeEnabled) {
       this.props.navigation.setParams({
