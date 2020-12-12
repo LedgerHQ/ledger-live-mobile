@@ -5,7 +5,6 @@ import { StyleSheet } from "react-native";
 import { useSelector } from "react-redux";
 import SafeAreaView from "react-native-safe-area-view";
 import { createAction } from "@ledgerhq/live-common/lib/hw/signMessage";
-import { createAction as createAppAction } from "@ledgerhq/live-common/lib/hw/actions/app";
 import type { TypedMessageData } from "@ledgerhq/live-common/lib/families/ethereum/types";
 import type { MessageData } from "@ledgerhq/live-common/lib/hw/signMessage/types";
 import connectApp from "@ledgerhq/live-common/lib/hw/connectApp";
