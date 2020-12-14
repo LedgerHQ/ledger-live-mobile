@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
   },
   icon: {
     alignSelf: "center",
-    backgroundColor: rgba(colors.yellow, 0.08),
+    backgroundColor: rgba(colors.live, 0.08),
     width: 56,
     borderRadius: 28,
     height: 56,
