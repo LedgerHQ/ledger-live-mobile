@@ -49,6 +49,36 @@ import NanoDeviceCheckIcon from "../../../icons/NanoDeviceCheckIcon";
 
 import { urls } from "../../../config/urls";
 
+const lottieAnimations = {
+  nanoS: {
+    pinCode: pinCodeNanoS,
+    recover: recoverNanoS,
+    confirmWords: confirmWordsNanoS,
+    numberOfWords: numberOfWordsNanoS,
+    powerOn: powerOnNanoS,
+    powerOnRecovery: powerOnRecoveryNanoS,
+    style: {},
+  },
+  nanoX: {
+    pinCode: pinCodeNanoX,
+    recover: recoverNanoX,
+    confirmWords: confirmWordsNanoX,
+    numberOfWords: numberOfWordsNanoX,
+    powerOn: powerOnNanoX,
+    powerOnRecovery: powerOnRecoveryNanoX,
+    style: { width: "110%", left: "5%" },
+  },
+  blue: {
+    pinCode: undefined,
+    recover: undefined,
+    confirmWords: undefined,
+    numberOfWords: undefined,
+    powerOn: undefined,
+    powerOnRecovery: undefined,
+    style: {},
+  },
+};
+
 const pinCodeInfoModalProps = [
   {
     title: (
@@ -319,9 +349,8 @@ const pinCodeScenes = deviceModelId => [
   {
     sceneProps: {
       trackPage: "Pin code step 2",
-      lottie: deviceModelId === "nanoX" ? pinCodeNanoX : pinCodeNanoS,
-      lottieStyle:
-        deviceModelId === "nanoX" ? { width: "110%", left: "5%" } : {},
+      lottie: lottieAnimations[deviceModelId].pinCode,
+      lottieStyle: lottieAnimations[deviceModelId].style,
       bullets: [
         {
           title: (
@@ -401,9 +430,8 @@ const getSetupDeviceScenes: (
   {
     sceneProps: {
       trackPage: "Get started step 2",
-      lottie: deviceModelId === "nanoX" ? powerOnNanoX : powerOnNanoS,
-      lottieStyle:
-        deviceModelId === "nanoX" ? { width: "110%", left: "5%" } : {},
+      lottie: lottieAnimations[deviceModelId].powerOn,
+      lottieStyle: lottieAnimations[deviceModelId].style,
       bullets: [
         {
           title: (
@@ -502,9 +530,8 @@ const getSetupDeviceScenes: (
   {
     sceneProps: {
       trackPage: "Recovery step 3",
-      lottie: deviceModelId === "nanoX" ? recoverNanoX : recoverNanoS,
-      lottieStyle:
-        deviceModelId === "nanoX" ? { width: "110%", left: "5%" } : {},
+      lottie: lottieAnimations[deviceModelId].recover,
+      lottieStyle: lottieAnimations[deviceModelId].style,
       bullets: [
         {
           index: 3,
@@ -618,10 +645,8 @@ const getRecoveryPhraseScenes = (deviceModelId: string) => [
   {
     sceneProps: {
       trackPage: "RecoveryPhrase step 2",
-      lottie:
-        deviceModelId === "nanoX" ? powerOnRecoveryNanoX : powerOnRecoveryNanoS,
-      lottieStyle:
-        deviceModelId === "nanoX" ? { width: "110%", left: "5%" } : {},
+      lottie: lottieAnimations[deviceModelId].powerOnRecovery,
+      lottieStyle: lottieAnimations[deviceModelId].style,
       bullets: [
         {
           title: (
@@ -693,10 +718,8 @@ const getRecoveryPhraseScenes = (deviceModelId: string) => [
   {
     sceneProps: {
       trackPage: "RecoveryPhrase step 4",
-      lottie:
-        deviceModelId === "nanoX" ? numberOfWordsNanoX : numberOfWordsNanoS,
-      lottieStyle:
-        deviceModelId === "nanoX" ? { width: "110%", left: "5%" } : {},
+      lottie: lottieAnimations[deviceModelId].numberOfWords,
+      lottieStyle: lottieAnimations[deviceModelId].style,
       bullets: [
         {
           title: (
@@ -723,9 +746,8 @@ const getRecoveryPhraseScenes = (deviceModelId: string) => [
   {
     trackPage: "RecoveryPhrase step 5",
     sceneProps: {
-      lottie: deviceModelId === "nanoX" ? confirmWordsNanoX : confirmWordsNanoS,
-      lottieStyle:
-        deviceModelId === "nanoX" ? { width: "110%", left: "5%" } : {},
+      lottie: lottieAnimations[deviceModelId].confirmWords,
+      lottieStyle: lottieAnimations[deviceModelId].style,
       bullets: [
         {
           index: 3,
