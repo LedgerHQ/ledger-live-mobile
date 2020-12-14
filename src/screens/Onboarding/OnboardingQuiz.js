@@ -133,7 +133,14 @@ function OnboardingQuizz({ navigation, route }: *) {
         title={null}
         hasBackButton
       />
-      <View style={[styles.root, { backgroundColor: colors.lightLive }]}>
+      <View
+        style={[
+          styles.root,
+          {
+            backgroundColor: colors.lightLive,
+          },
+        ]}
+      >
         <TrackScreen category="Onboarding" name="Quizz" />
         <TabView
           renderTabBar={() => null}
@@ -190,7 +197,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    justifyContent: "flex-end",
+    justifyContent: "flex-start",
   },
   label: {
     paddingHorizontal: 24,
@@ -205,7 +212,7 @@ const styles = StyleSheet.create({
     marginVertical: 4,
   },
   imageContainer: {
-    height: "45%",
+    flex: 1,
     position: "relative",
     overflow: "visible",
   },
@@ -246,7 +253,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     width: "100%",
-    height: "30%",
+    height: "35%",
     zIndex: -1,
   },
 });

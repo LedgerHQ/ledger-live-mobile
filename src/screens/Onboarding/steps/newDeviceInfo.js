@@ -189,7 +189,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 0,
     left: 0,
-    height: "45%",
+    height: "50%",
     width: "100%",
   },
   svg: {
