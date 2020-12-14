@@ -6,7 +6,6 @@ import {
   View,
   Linking,
   Image,
-  SafeAreaView,
   TouchableOpacity,
 } from "react-native";
 import { Trans } from "react-i18next";
@@ -123,7 +122,7 @@ function OnboardingStepWelcome({ navigation }: *) {
   const { locale } = useLocale();
 
   return (
-    <SafeAreaView style={[styles.root, { backgroundColor: colors.white }]}>
+    <View style={[styles.root, { backgroundColor: colors.white }]}>
       <View style={styles.header}>
         <TouchableOpacity
           style={[styles.languageButton, { borderColor: colors.fog }]}
@@ -207,7 +206,7 @@ function OnboardingStepWelcome({ navigation }: *) {
           </Touchable>
         </View>
       </View>
-    </SafeAreaView>
+    </View>
   );
 }
 
