@@ -11,7 +11,6 @@ import LText from "../../../components/LText";
 import CheckBox from "../../../components/CheckBox";
 import { useLocale } from "../../../context/Locale";
 import { localeIds } from "../../../languages";
-import { ScreenName } from "../../../const";
 import ConfirmationModal from "../../../components/ConfirmationModal";
 import Warning from "../../../icons/Warning";
 
@@ -25,7 +24,7 @@ const languages = {
 
 function OnboardingStepLanguage({ navigation }: *) {
   const next = useCallback(() => {
-    navigation.navigate(ScreenName.OnboardingTermsOfUse);
+    navigation.goBack();
   }, [navigation]);
   const { locale: currentLocale } = useLocale();
 
