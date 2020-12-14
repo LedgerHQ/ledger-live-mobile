@@ -15,6 +15,14 @@ import { ScreenName } from "../../../const";
 import ConfirmationModal from "../../../components/ConfirmationModal";
 import Warning from "../../../icons/Warning";
 
+const languages = {
+  en: "English",
+  fr: "Français",
+  es: "Español",
+  zh: "中文",
+  ru: "Pусский",
+};
+
 function OnboardingStepLanguage({ navigation }: *) {
   const { t } = useTranslation();
   const next = useCallback(() => {
@@ -61,12 +69,13 @@ function OnboardingStepLanguage({ navigation }: *) {
             >
               <CheckBox isChecked={l === currentLocale} />
               <LText semiBold style={styles.localeButtonLabel}>
-                <Trans i18nKey={`onboarding.stepLanguage.${l}`} />
+                {languages[l]}
               </LText>
             </TouchableOpacity>
           ))}
         </View>
         <Button
+          event="Onboarding - Language confirm"
           type="primary"
           onPress={next}
           title={<Trans i18nKey="onboarding.stepLanguage.cta" />}

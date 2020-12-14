@@ -667,11 +667,6 @@
     "stepLanguage": {
       "title": "Select your language",
       "cta": "Continue",
-      "en": "English",
-      "fr": "Français",
-      "es": "Español",
-      "zh": "中文",
-      "ru": "Pусский",
       "warning": {
         "title": "Get started in English",
         "cta": "Got it!",
