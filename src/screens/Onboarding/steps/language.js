@@ -2,7 +2,7 @@
 
 import React, { useCallback, useState } from "react";
 import { StyleSheet, View, SafeAreaView, TouchableOpacity } from "react-native";
-import { Trans, useTranslation } from "react-i18next";
+import { Trans } from "react-i18next";
 import i18next from "i18next";
 import { TrackScreen } from "../../../analytics";
 import Button from "../../../components/Button";
@@ -24,7 +24,6 @@ const languages = {
 };
 
 function OnboardingStepLanguage({ navigation }: *) {
-  const { t } = useTranslation();
   const next = useCallback(() => {
     navigation.navigate(ScreenName.OnboardingTermsOfUse);
   }, [navigation]);
