@@ -47,7 +47,6 @@ const OnboardingQuizFinal = ({ navigation, route }: *) => {
       navigation={navigation}
       route={route}
       onFinish={next}
-      hideBackButton
       hideStepper
     />
   );
