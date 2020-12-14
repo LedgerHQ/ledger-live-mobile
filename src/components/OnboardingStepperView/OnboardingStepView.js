@@ -267,7 +267,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 24,
   },
   checkbox: { borderRadius: 4, width: 24, height: 24 },
-  checkboxLabel: { fontSize: 13, marginLeft: 11 },
+  checkboxLabel: { flex: 1, fontSize: 13, marginLeft: 11 },
   imageContainer: {
     flex: 1,
     minHeight: 200,

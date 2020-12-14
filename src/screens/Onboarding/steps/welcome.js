@@ -224,7 +224,7 @@ const styles = StyleSheet.create({
   },
   bgImage: {
     width: "100%",
-    height: "90%",
+    height: "120%",
     position: "absolute",
     top: -100,
     left: 0,
@@ -232,9 +232,9 @@ const styles = StyleSheet.create({
   },
   bgImageLayer: {
     width: "105%",
-    height: "100%",
+    height: "120%",
     position: "absolute",
-    top: -150,
+    top: -100,
     left: "-5%",
   },
   bgImageLayer1: {
@@ -247,7 +247,7 @@ const styles = StyleSheet.create({
     zIndex: -7,
   },
   logo: {
-    flex: 2,
+    flex: 1,
     padding: 0,
   },
   languageButton: {
@@ -261,7 +261,7 @@ const styles = StyleSheet.create({
   },
   languageLabel: { fontSize: 10, marginRight: 8, textTransform: "uppercase" },
   bottomSection: { flex: 1, padding: 24, justifyContent: "flex-end" },
-  titleSection: { flex: 1, justifyContent: "flex-start" },
+  titleSection: { flex: 1, justifyContent: "center" },
   title: {
     color: colors.darkBlue,
     fontSize: 28,
@@ -271,6 +271,7 @@ const styles = StyleSheet.create({
   subTitle: {
     fontSize: 13,
     color: colors.grey,
+    lineHeight: 22,
     textAlign: "center",
   },
   subTitlePadding: { paddingHorizontal: 60 },
