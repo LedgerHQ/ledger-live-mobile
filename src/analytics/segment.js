@@ -27,7 +27,7 @@ const extraProperties = store => {
   const state: State = store.getState();
   const { localeIdentifier, preferredLanguages } = Locale.constants();
   const devices = knownDevicesSelector(state);
-  const lastDevice = devices[-1];
+  const lastDevice = devices[devices.length - 1];
   const deviceInfo = lastDevice
     ? {
         deviceVersion: lastDevice.deviceInfo?.version,
@@ -113,18 +113,17 @@ export const track = (
   ) {
     return;
   }
-  if (ANALYTICS_LOGS) console.log("analytics:track", event, properties);
-  trackSubject.next({ event, properties });
+
+  const allProperties = {
+    ...extraProperties(storeInstance),
+    ...properties,
+  };
+
+  if (ANALYTICS_LOGS) console.log("analytics:track", event, allProperties);
+  trackSubject.next({ event, properties: allProperties });
 
   if (!token) return;
-  analytics.track(
-    event,
-    {
-      ...extraProperties(storeInstance),
-      ...properties,
-    },
-    { context },
-  );
+  analytics.track(event, allProperties, { context });
 };
 
 export const screen = (
