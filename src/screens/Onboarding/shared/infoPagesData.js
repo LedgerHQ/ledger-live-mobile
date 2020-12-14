@@ -584,11 +584,6 @@ const getSetupDeviceScenes: (
           ),
         },
       ],
-      infoModalLink: {
-        label: (
-          <Trans i18nKey="onboarding.stepSetupDevice.hideRecoveryPhrase.infoModal.label" />
-        ),
-      },
       ctaText: (
         <Trans i18nKey="onboarding.stepSetupDevice.hideRecoveryPhrase.cta" />
       ),
