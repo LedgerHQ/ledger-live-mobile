@@ -514,11 +514,11 @@
     "stepLanguage": {
       "title": "Selectionnez votre langue",
       "cta": "Continuer",
-      "en": "Anglais",
+      "en": "English",
       "fr": "Français",
-      "es": "Espagnol",
-      "zh": "Chinois",
-      "ru": "Russe"
+      "es": "Español",
+      "zh": "中文",
+      "ru": "Pусский"
     },
     "stepGetStarted": {
       "title": "Get started",

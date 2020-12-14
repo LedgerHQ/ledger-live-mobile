@@ -668,12 +668,12 @@
       "title": "Select your language",
       "cta": "Continue",
       "en": "English",
-      "fr": "French",
-      "es": "Spanish",
-      "zh": "Chinese",
-      "ru": "Russian",
+      "fr": "Français",
+      "es": "Español",
+      "zh": "中文",
+      "ru": "Pусский",
       "warning": {
-        "title": "Get started in {{language}}",
+        "title": "Get started in English",
         "cta": "Got it!",
         "desc": "We are introducing additional languages in order to help your onboarding with Ledger. Please be aware that the rest of the Ledger experience is currently only available in English."
       }

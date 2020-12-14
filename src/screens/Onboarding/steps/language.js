@@ -77,12 +77,7 @@ function OnboardingStepLanguage({ navigation }: *) {
         onClose={onCloseInfoModal}
         onConfirm={onConfirmInfo}
         confirmationTitle={
-          <Trans
-            i18nKey="onboarding.stepLanguage.warning.title"
-            values={{
-              language: t(`onboarding.stepLanguage.${isInfoModalOpen}`),
-            }}
-          />
+          <Trans i18nKey="onboarding.stepLanguage.warning.title" />
         }
         confirmationDesc={
           <Trans i18nKey="onboarding.stepLanguage.warning.desc" />
