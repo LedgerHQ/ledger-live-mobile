@@ -5,7 +5,6 @@ import { View, StyleSheet } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { useSelector } from "react-redux";
 import { Trans } from "react-i18next";
-import some from "lodash/some";
 import type { Transaction } from "@ledgerhq/live-common/lib/types";
 import {
   getMainAccount,
@@ -169,7 +168,7 @@ function SendSummary({ navigation, route: initialRoute }: Props) {
   const currency = getAccountCurrency(account);
   const hasNonEmptySubAccounts =
     account.type === "Account" &&
-    some(account.subAccounts, subAccount => subAccount.balance.gt(0));
+    (account.subAccounts || []).some(subAccount => subAccount.balance.gt(0));
 
   return (
     <SafeAreaView style={styles.root} forceInset={forceInset}>
