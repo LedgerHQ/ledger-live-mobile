@@ -1,5 +1,5 @@
 import { Server } from "ws";
-import { delay } from "@ledgerhq/live-common/lib/promise";
+import { E2EBridgeMessage } from "../src/e2e-bridge";
 
 describe("Ledger Live Mobile", () => {
   beforeAll(() => {
@@ -36,6 +36,10 @@ describe("Ledger Live Mobile", () => {
       payload: { id: "mock_3", name: "Nano X de Didier Duchmol" },
     });
     await element(by.id(`DeviceItemEnter ${deviceDavid}`)).tap();
+    postMessage({
+      type: "setGlobals",
+      payload: { _listInstalledApps_mock_result: [] },
+    });
     postMessage({ type: "open" });
     await element(by.id("PairDevicesContinue")).tap();
     await element(by.id("OnboardingSkip")).tap();
@@ -59,20 +63,11 @@ function initE2EBridge(): Promise<void> {
 
 let wss: Server;
 
-function postMessage(message: PostMessage) {
+function postMessage(message: E2EBridgeMessage) {
   for (const ws of wss.clients.values()) {
     ws.send(JSON.stringify(message));
   }
 }
-
-type Message<T: string, P: { [key: string]: any } | typeof undefined> = {
-  type: T,
-  payload: P,
-};
-
-type PostMessage =
-  | Message<"add", { id: string, name: string }>
-  | Message<"open">;
 
 function onMessage(messageStr: string) {
   const msg = JSON.parse(messageStr);
