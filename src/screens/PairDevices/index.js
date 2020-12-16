@@ -131,6 +131,7 @@ function PairDevicesInner({ navigation, route }: Props) {
           if (unmounted.current) return;
 
           dispatchRedux(addKnownDevice({ id: device.id, name }));
+
           if (unmounted.current) return;
           dispatch({ type: "paired" });
         } finally {
@@ -234,7 +235,7 @@ function reducer(state, action) {
       return { ...state, status: "genuinecheck", device: action.payload };
     case "allowManager":
       return { ...state, genuineAskedOnDevice: action.payload };
-    case "paird":
+    case "paired":
       return { ...state, status: "paired", error: null, skipCheck: true };
     case "scanning":
       return { ...state, status: "scanning", error: null, device: null };
