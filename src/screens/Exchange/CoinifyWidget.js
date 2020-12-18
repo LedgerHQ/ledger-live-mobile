@@ -20,6 +20,7 @@ import { getConfig } from "./coinifyConfig";
 import colors from "../../colors";
 import { track } from "../../analytics";
 import { DevicePart } from "./DevicePart";
+import SkipDeviceVerification from "./SkipDeviceVerification";
 
 const action = createAction(connectApp);
 
@@ -79,6 +80,7 @@ type Props = {
   mode: string,
   device: Device,
   verifyAddress?: boolean,
+  skipDevice?: Boolean,
 };
 
 let tradeId = null;
@@ -88,6 +90,7 @@ export default function CoinifyWidget({
   account,
   parentAccount,
   device,
+  skipDevice,
 }: Props) {
   const [requestingAction, setRequestingAction] = useState<
     "none" | "connect" | "verify",
@@ -302,13 +305,18 @@ export default function CoinifyWidget({
       />
       <BottomModal id="DeviceActionModal" isOpened={isOpen}>
         <View style={styles.modalContainer}>
-          {requestingAction === "connect" ? (
-            mode === "buy" ? (
+          {requestingAction === "connect" && mainAccount ? (
+            mode === "buy" && !skipDevice ? (
               <DeviceAction
                 action={action}
                 device={device}
                 request={{ account: mainAccount, tokenCurrency }}
                 onResult={onResult}
+              />
+            ) : mode === "buy" ? (
+              <SkipDeviceVerification
+                account={mainAccount}
+                settleTrade={settleTrade}
               />
             ) : (
               <DevicePart
@@ -319,7 +327,7 @@ export default function CoinifyWidget({
                 getCoinifyContext={setTransactionId}
               />
             )
-          ) : requestingAction === "verify" ? (
+          ) : requestingAction === "verify" && mainAccount ? (
             <VerifyAddress
               account={mainAccount}
               device={device}

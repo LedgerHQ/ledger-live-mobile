@@ -16,6 +16,7 @@ type RouteParams = {
   parentId: string,
   device: Device,
   mode: string,
+  skipDevice?: Boolean,
 };
 
 type Props = {
@@ -25,7 +26,7 @@ type Props = {
 
 export default function CoinifyWidgetScreen({ route }: Props) {
   const { parentAccount } = useSelector(accountScreenSelector(route));
-  const { account, mode, device } = route.params;
+  const { account, mode, device, skipDevice } = route.params;
 
   const forceInset = { bottom: "always" };
 
@@ -37,6 +38,7 @@ export default function CoinifyWidgetScreen({ route }: Props) {
         device={device}
         mode={mode}
         verifyAddress
+        skipDevice={skipDevice}
       />
     </SafeAreaView>
   );

@@ -3081,6 +3081,12 @@
         "title": "No {{currency}} account",
         "description": "Please add an account before buying {{currency}}.",
         "CTAButton": "Add account"
+      },
+      "skipDeviceVerification": {
+        "confirm": "Confirm",
+        "cancel": "Cancel",
+        "address": "Address for {{currency}} account",
+        "warning": "You address was not confirmed on your Ledger Device. Please verify it for security"
       }
     },
     "sell": {
