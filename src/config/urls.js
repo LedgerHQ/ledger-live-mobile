@@ -5,7 +5,7 @@ export const urls = {
     "https://support.ledgerwallet.com/hc/en-us?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=faq",
   contact:
     "https://support.ledger.com/hc/en-us/requests/new?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=contact",
-  terms: "https://github.com/LedgerHQ/ledger-live-desktop/blob/master/TERMS.md",
+  terms: "https://github.com/LedgerHQ/ledger-live-mobile/blob/master/TERMS.md",
   privacyPolicy:
     "https://shop.ledger.com/pages/privacy-policy?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=privacy",
   buyNanoX:
