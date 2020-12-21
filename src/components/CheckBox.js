@@ -33,7 +33,7 @@ export default class CheckBox extends PureComponent<Props> {
     const body = (
       <IconCheck
         size={20}
-        color={colors.white}
+        color={!isChecked ? "transparent" : colors.white}
         style={[!isChecked && styles.invisible]}
       />
     );
@@ -70,7 +70,8 @@ const styles = StyleSheet.create({
   },
   rootChecked: {
     backgroundColor: colors.live,
-    borderWidth: 0,
+    borderWidth: 2,
+    borderColor: "transparent",
   },
   invisible: {
     opacity: 0,
