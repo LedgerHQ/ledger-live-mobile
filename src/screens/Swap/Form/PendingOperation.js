@@ -54,7 +54,7 @@ const PendingOperation = () => {
         <Button
           event="SwapDone"
           type="primary"
-          title={<Trans i18nKey={"common.continue"} />}
+          title={<Trans i18nKey={"swap.pendingOperation.cta"} />}
           onPress={onComplete}
         />
       </View>
