@@ -131,6 +131,11 @@ const ProductTourStepStart = () => {
           screen: NavigatorName.ExchangeBuyFlow,
         });
         break;
+      case "SEND_COINS":
+        navigate(NavigatorName.Base, {
+          screen: NavigatorName.SendFunds,
+        });
+        break;
       case "CUSTOMIZE_APP":
         break;
       default:
@@ -140,33 +145,37 @@ const ProductTourStepStart = () => {
 
   return (
     <SafeAreaView forceInset={forceInset} style={styles.root}>
-      <View style={{ flex: 1 }}>
-        <AnimatedSvgBackground
-          color={"#587ED4"}
-          style={[styles.svg, { height: 218 - headerHeight }]}
-        />
-        <Image
-          source={stepInfos[ptContext.currentStep][2]?.file}
-          style={[
-            styles.image,
-            stepInfos[ptContext.currentStep][2]?.size,
-            stepInfos[ptContext.currentStep][2]?.offset,
-          ]}
-        />
-        <LText style={styles.title} bold>
-          <Trans i18nKey={stepInfos[ptContext.currentStep][0]} />
-        </LText>
-        <LText style={styles.details}>
-          <Trans i18nKey={stepInfos[ptContext.currentStep][1]} />
-        </LText>
-      </View>
-      <Button
-        type="negativePrimary"
-        event={`step start tour ${ptContext.currentStep}`}
-        onPress={goTo}
-        title={<Trans i18nKey="producttour.stepstart.cta" />}
-        IconRight={ArrowRight}
-      />
+      {ptContext.currentStep ? (
+        <>
+          <View style={{ flex: 1 }}>
+            <AnimatedSvgBackground
+              color={"#587ED4"}
+              style={[styles.svg, { height: 218 - headerHeight }]}
+            />
+            <Image
+              source={stepInfos[ptContext.currentStep][2]?.file}
+              style={[
+                styles.image,
+                stepInfos[ptContext.currentStep][2]?.size,
+                stepInfos[ptContext.currentStep][2]?.offset,
+              ]}
+            />
+            <LText style={styles.title} bold>
+              <Trans i18nKey={stepInfos[ptContext.currentStep][0]} />
+            </LText>
+            <LText style={styles.details}>
+              <Trans i18nKey={stepInfos[ptContext.currentStep][1]} />
+            </LText>
+          </View>
+          <Button
+            type="negativePrimary"
+            event={`step start tour ${ptContext.currentStep}`}
+            onPress={goTo}
+            title={<Trans i18nKey="producttour.stepstart.cta" />}
+            IconRight={ArrowRight}
+          />
+        </>
+      ) : null}
     </SafeAreaView>
   );
 };

@@ -1,18 +1,21 @@
 /* @flow */
-import React, { useCallback, useContext, useEffect } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { View, StyleSheet } from "react-native";
 import { useSelector } from "react-redux";
 import type { Operation } from "@ledgerhq/live-common/lib/types";
 import { accountScreenSelector } from "../../reducers/accounts";
 import { TrackScreen } from "../../analytics";
 import colors from "../../colors";
-import { ScreenName } from "../../const";
+import { ScreenName, NavigatorName } from "../../const";
 import PreventNativeBack from "../../components/PreventNativeBack";
 import ValidateSuccess from "../../components/ValidateSuccess";
 import {
   context as _wcContext,
   setCurrentCallRequestResult,
 } from "../WalletConnect/Provider";
+import { context as _ptContext, completeStep } from "../ProductTour/Provider";
+import { navigate } from "../../rootnavigation";
+import ProductTourStepFinishedBottomModal from "../ProductTour/ProductTourStepFinishedBottomModal";
 
 type Props = {
   navigation: any,
@@ -29,6 +32,7 @@ type RouteParams = {
 export default function ValidationSuccess({ navigation, route }: Props) {
   const { account, parentAccount } = useSelector(accountScreenSelector(route));
   const wcContext = useContext(_wcContext);
+  const ptContext = useContext(_ptContext);
 
   useEffect(() => {
     if (!account) return;
@@ -62,11 +66,31 @@ export default function ValidationSuccess({ navigation, route }: Props) {
     });
   }, [navigation, route.params, account, parentAccount]);
 
+  const [hideProductTourModal, setHideProductTourModal] = useState(true);
+  const goToProductTourMenu = () => {
+    // $FlowFixMe
+    completeStep(ptContext.currentStep);
+    navigate(NavigatorName.ProductTour, {
+      screen: ScreenName.ProductTourMenu,
+    });
+    setHideProductTourModal(true);
+  };
+  useEffect(() => {
+    setHideProductTourModal(ptContext.currentStep !== "SEND_COINS");
+  }, [ptContext.currentStep]);
+
   return (
     <View style={styles.root}>
       <TrackScreen category="SendFunds" name="ValidationSuccess" />
       <PreventNativeBack />
       <ValidateSuccess onClose={onClose} onViewDetails={goToOperationDetails} />
+      <ProductTourStepFinishedBottomModal
+        isOpened={
+          ptContext.currentStep === "SEND_COINS" && !hideProductTourModal
+        }
+        onPress={() => goToProductTourMenu()}
+        onClose={() => goToProductTourMenu()}
+      />
     </View>
   );
 }

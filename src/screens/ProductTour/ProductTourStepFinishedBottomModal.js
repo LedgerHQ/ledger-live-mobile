@@ -60,8 +60,17 @@ const stepTitles = {
       },
     },
   ],
+  SEND_COINS: [
+    "producttour.finishedmodal.sendcoins",
+    {
+      file: require("../../images/producttour/green/sendcoins.png"),
+      size: {
+        width: 175,
+        height: 157,
+      },
+    },
+  ],
   /*
-  "SEND_COINS": ["CREATE_ACCOUNT"],
   "SWAP_COINS": ["RECEIVE_COINS"],
   CUSTOMIZE_APP: [],
   */

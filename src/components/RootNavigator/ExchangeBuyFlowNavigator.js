@@ -1,14 +1,18 @@
 // @flow
 import React, { useContext } from "react";
-import { createStackNavigator } from "@react-navigation/stack";
+import {
+  createStackNavigator,
+  HeaderBackButton,
+} from "@react-navigation/stack";
 import { useTranslation } from "react-i18next";
-import { ScreenName } from "../../const";
+import { ScreenName, NavigatorName } from "../../const";
 import ExchangeSelectCurrency from "../../screens/Exchange/SelectCurrency";
 import ExchangeSelectAccount from "../../screens/Exchange/SelectAccount";
 import ExchangeConnectDevice from "../../screens/Exchange/ConnectDevice";
 import ExchangeCoinifyWidget from "../../screens/Exchange/CoinifyWidgetScreen";
 import { closableStackNavigatorConfig } from "../../navigation/navigatorConfig";
 import { context as _ptContext } from "../../screens/ProductTour/Provider";
+import { navigate } from "../../rootnavigation";
 import colors from "../../colors";
 
 export default function ExchangeNavigator() {
@@ -37,7 +41,22 @@ export default function ExchangeNavigator() {
       <Stack.Screen
         name={ScreenName.ExchangeSelectCurrency}
         component={ExchangeSelectCurrency}
-        options={{ title: t("exchange.buy.selectCurrency") }}
+        options={{
+          title: t("exchange.buy.selectCurrency"),
+          headerLeft:
+            ptContext.currentStep === "BUY_COINS"
+              ? props => (
+                  <HeaderBackButton
+                    {...props}
+                    onPress={() => {
+                      navigate(NavigatorName.ProductTour, {
+                        screen: ScreenName.ProductTourMenu,
+                      });
+                    }}
+                  />
+                )
+              : null,
+        }}
       />
       <Stack.Screen
         name={ScreenName.ExchangeSelectAccount}

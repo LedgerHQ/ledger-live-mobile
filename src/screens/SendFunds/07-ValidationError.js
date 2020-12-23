@@ -11,6 +11,9 @@ import {
   context as _wcContext,
   setCurrentCallRequestError,
 } from "../WalletConnect/Provider";
+import { ScreenName, NavigatorName } from "../../const";
+import { context as _ptContext, setStep } from "../ProductTour/Provider";
+import { navigate } from "../../rootnavigation";
 
 const forceInset = { bottom: "always" };
 
@@ -33,6 +36,7 @@ export default function ValidationError({ navigation, route }: Props) {
   const error = route.params.error;
   const wcContext = useContext(_wcContext);
   const [disableRetry, setDisableRetry] = useState(false);
+  const ptContext = useContext(_ptContext);
 
   useEffect(() => {
     if (wcContext.currentCallRequestId) {
@@ -42,8 +46,15 @@ export default function ValidationError({ navigation, route }: Props) {
   }, []);
 
   const onClose = useCallback(() => {
-    navigation.dangerouslyGetParent().pop();
-  }, [navigation]);
+    if (ptContext.currentStep === "SEND_COINS") {
+      navigate(NavigatorName.ProductTour, {
+        screen: ScreenName.ProductTourMenu,
+      });
+      setStep(null);
+    } else {
+      navigation.dangerouslyGetParent().pop();
+    }
+  }, [navigation, ptContext.currentStep]);
 
   const contactUs = useCallback(() => {
     Linking.openURL(urls.contact);
