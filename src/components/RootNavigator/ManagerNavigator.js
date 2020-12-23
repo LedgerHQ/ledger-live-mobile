@@ -21,6 +21,7 @@ import { useIsNavLocked } from "./CustomBlockRouterNavigator";
 import colors from "../../colors";
 import { context as _ptContext } from "../../screens/ProductTour/Provider";
 import { navigate } from "../../rootnavigation";
+import HeaderRightClose from "../HeaderRightClose";
 
 const ManagerIconWithUpate = ({
   color,
@@ -57,6 +58,24 @@ export default function ManagerNavigator() {
             : {},
         headerTintColor:
           ptContext.currentStep === "INSTALL_CRYPTO" ? colors.white : null,
+        headerRight:
+          ptContext.currentStep && ptContext.currentStep !== "INSTALL_CRYPTO"
+            ? () => (
+                <HeaderRightClose
+                  skipNavigation
+                  onClose={() => {
+                    if (ptContext.currentStep === "CREATE_ACCOUNT") {
+                      navigate(NavigatorName.Base, {
+                        screen: NavigatorName.ProductTour,
+                        params: {
+                          screen: ScreenName.ProductTourStepStart,
+                        },
+                      });
+                    }
+                  }}
+                />
+              )
+            : null,
       }}
     >
       <Stack.Screen
@@ -67,7 +86,6 @@ export default function ManagerNavigator() {
             ptContext.currentStep === "INSTALL_CRYPTO"
               ? t("producttour.installCryptoTitle")
               : t("manager.title"),
-          headerRight: null,
           gestureEnabled: false,
           headerLeft:
             ptContext.currentStep === "INSTALL_CRYPTO"
