@@ -87,38 +87,40 @@ const ProductTourStepFinishedBottomModal = ({
       {...rest}
     >
       {isOpened && ptContext.currentStep ? (
-        <TrackScreen
-          category="ProductTourStepFinishedBottomModal"
-          name={ptContext.currentStep}
-        />
+        <>
+          <TrackScreen
+            category="ProductTourStepFinishedBottomModal"
+            name={ptContext.currentStep}
+          />
+          <View style={styles.imageContainer}>
+            <Image
+              source={stepTitles[ptContext.currentStep][1]?.file}
+              style={[
+                styles.image,
+                stepTitles[ptContext.currentStep][1]?.size,
+                stepTitles[ptContext.currentStep][1]?.offset,
+              ]}
+            />
+          </View>
+          <LText bold style={styles.title}>
+            <Trans i18nKey="producttour.finishedmodal.title" />
+          </LText>
+          <LText style={styles.description}>
+            <Trans i18nKey={stepTitles[ptContext.currentStep][0]} />
+          </LText>
+          <View style={styles.confirmationFooter}>
+            <Button
+              event={`ProductTourStepFinishedBottomModal continue ${ptContext.currentStep ||
+                ""}`}
+              containerStyle={styles.confirmationButton}
+              type="negative2Primary"
+              title={<Trans i18nKey="producttour.finishedmodal.cta" />}
+              onPress={onPress}
+              IconRight={ArrowRight}
+            />
+          </View>
+        </>
       ) : null}
-      <View style={styles.imageContainer}>
-        <Image
-          source={stepTitles[ptContext.currentStep][1]?.file}
-          style={[
-            styles.image,
-            stepTitles[ptContext.currentStep][1]?.size,
-            stepTitles[ptContext.currentStep][1]?.offset,
-          ]}
-        />
-      </View>
-      <LText bold style={styles.title}>
-        <Trans i18nKey="producttour.finishedmodal.title" />
-      </LText>
-      <LText style={styles.description}>
-        <Trans i18nKey={stepTitles[ptContext.currentStep][0]} />
-      </LText>
-      <View style={styles.confirmationFooter}>
-        <Button
-          event={`ProductTourStepFinishedBottomModal continue ${ptContext.currentStep ||
-            ""}`}
-          containerStyle={styles.confirmationButton}
-          type="negative2Primary"
-          title={<Trans i18nKey="producttour.finishedmodal.cta" />}
-          onPress={onPress}
-          IconRight={ArrowRight}
-        />
-      </View>
     </BottomModal>
   );
 };
