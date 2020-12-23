@@ -1,5 +1,5 @@
 // @flow
-import React, { useMemo } from "react";
+import React, { useMemo, useContext } from "react";
 import { Trans } from "react-i18next";
 import { StyleSheet, View, FlatList } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
@@ -12,7 +12,8 @@ import {
   useCurrenciesByMarketcap,
   listSupportedCurrencies,
 } from "@ledgerhq/live-common/lib/currencies";
-
+import { useSelector } from "react-redux";
+import { accountsSelector } from "../../reducers/accounts";
 import type { Device } from "@ledgerhq/hw-transport/lib/Transport";
 import { track } from "../../analytics/segment";
 import { TrackScreen } from "../../analytics";
@@ -21,6 +22,7 @@ import KeyboardView from "../../components/KeyboardView";
 import CurrencyRow from "../../components/CurrencyRow";
 import LText from "../../components/LText";
 import { getSupportedCurrencies } from "./coinifyConfig";
+import { context as _ptContext } from "../ProductTour/Provider";
 
 import colors from "../../colors";
 
@@ -54,6 +56,8 @@ export default function ExchangeSelectCrypto({ navigation, route }: Props) {
   const initialCurrencySelected = params?.currency;
   const device = params?.device;
   const mode = params?.mode || "buy";
+  const accounts = useSelector(accountsSelector);
+  const ptContext = useContext(_ptContext);
 
   const cryptoCurrencies = useMemo(
     () => listSupportedCurrencies().concat(listTokens()),
@@ -62,8 +66,17 @@ export default function ExchangeSelectCrypto({ navigation, route }: Props) {
 
   const sortedCryptoCurrencies = useCurrenciesByMarketcap(cryptoCurrencies);
 
-  const supportedCryptoCurrencies = sortedCryptoCurrencies.filter(currency =>
-    getSupportedCurrencies(mode).includes(currency.id),
+  const supportedCryptoCurrencies = sortedCryptoCurrencies.filter(
+    currency =>
+      getSupportedCurrencies(mode).includes(currency.id) &&
+      (!ptContext.currentStep ||
+        accounts.some(
+          account =>
+            account.currency.id ===
+            (currency.type === "TokenCurrency"
+              ? currency.parentCurrency.id
+              : currency.id),
+        )),
   );
 
   const onPressCurrency = (currency: CryptoCurrency) => {
