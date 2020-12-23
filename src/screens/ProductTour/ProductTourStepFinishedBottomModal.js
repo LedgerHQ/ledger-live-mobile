@@ -30,7 +30,7 @@ const stepTitles = {
   CREATE_ACCOUNT: [
     "producttour.finishedmodal.createaccount",
     {
-      file: require("../../images/producttour/blue/createaccount.png"),
+      file: require("../../images/producttour/green/createaccount.png"),
       size: {
         width: 148,
         height: 148,
@@ -43,15 +43,24 @@ const stepTitles = {
   RECEIVE_COINS: [
     "producttour.finishedmodal.receivecoins",
     {
-      file: require("../../images/producttour/blue/receivecoins.png"),
+      file: require("../../images/producttour/green/receivecoins.png"),
       size: {
         width: 149,
         height: 160,
       },
     },
   ],
+  BUY_COINS: [
+    "producttour.finishedmodal.buycoins",
+    {
+      file: require("../../images/producttour/green/buycoins.png"),
+      size: {
+        width: 175,
+        height: 157,
+      },
+    },
+  ],
   /*
-  "BUY_COINS": ["CREATE_ACCOUNT"],
   "SEND_COINS": ["CREATE_ACCOUNT"],
   "SWAP_COINS": ["RECEIVE_COINS"],
   CUSTOMIZE_APP: [],
@@ -65,6 +74,8 @@ const ProductTourStepFinishedBottomModal = ({
   ...rest
 }: Props) => {
   const ptContext = useContext(_ptContext);
+
+  console.log("is opened", isOpened);
 
   return (
     <BottomModal

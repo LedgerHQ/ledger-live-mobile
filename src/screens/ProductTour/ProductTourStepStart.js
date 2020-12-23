@@ -126,6 +126,11 @@ const ProductTourStepStart = () => {
           screen: NavigatorName.ReceiveFunds,
         });
         break;
+      case "BUY_COINS":
+        navigate(NavigatorName.Base, {
+          screen: NavigatorName.ExchangeBuyFlow,
+        });
+        break;
       case "CUSTOMIZE_APP":
         break;
       default:
