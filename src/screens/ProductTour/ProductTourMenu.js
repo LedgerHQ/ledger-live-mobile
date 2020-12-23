@@ -78,12 +78,78 @@ const stepTitles = {
       },
     },
   ],
-  /*
-  "BUY_COINS": ["CREATE_ACCOUNT"],
-  "SEND_COINS": ["CREATE_ACCOUNT"],
-  "SWAP_COINS": ["RECEIVE_COINS"],
-  CUSTOMIZE_APP: [],
-  */
+  BUY_COINS: [
+    "producttour.menu.buycoins",
+    "producttour.menu.coinsbought",
+    {
+      files: [
+        require("../../images/producttour/blue/buycoins.png"),
+        require("../../images/producttour/green/buycoins.png"),
+      ],
+      size: {
+        width: 80,
+        height: 84,
+      },
+      offset: {
+        right: 11,
+        bottom: -4,
+      },
+    },
+  ],
+  SEND_COINS: [
+    "producttour.menu.sendcoins",
+    "producttour.menu.coinssent",
+    {
+      files: [
+        require("../../images/producttour/blue/sendcoins.png"),
+        require("../../images/producttour/green/sendcoins.png"),
+      ],
+      size: {
+        width: 102,
+        height: 76,
+      },
+      offset: {
+        right: 8,
+        bottom: -8,
+      },
+    },
+  ],
+  SWAP_COINS: [
+    "producttour.menu.swapcoins",
+    "producttour.menu.coinsswapped",
+    {
+      files: [
+        require("../../images/producttour/blue/swapcoins.png"),
+        require("../../images/producttour/green/swapcoins.png"),
+      ],
+      size: {
+        width: 86,
+        height: 75,
+      },
+      offset: {
+        right: 11,
+        bottom: -6,
+      },
+    },
+  ],
+  CUSTOMIZE_APP: [
+    "producttour.menu.customizeapp",
+    "producttour.menu.appcustomized",
+    {
+      files: [
+        require("../../images/producttour/blue/customizeapp.png"),
+        require("../../images/producttour/green/customizeapp.png"),
+      ],
+      size: {
+        width: 84,
+        height: 86,
+      },
+      offset: {
+        right: 1,
+        bottom: -21,
+      },
+    },
+  ],
 };
 
 const stepProps = {

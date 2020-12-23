@@ -3169,7 +3169,15 @@
       "createaccount": "Create\naccount",
       "accountcreated": "Account\ncreated",
       "receivecoins": "Receive\ncoins",
-      "coinsreceived": "Coins\nreceived"
+      "coinsreceived": "Coins\nreceived",
+      "buycoins": "Buy\nCoins",
+      "coinsbought": "Buy\nCoins",
+      "sendcoins": "Send\nCoins",
+      "coinssent": "Send\nCoins",
+      "swapcoins": "Swap\nCoins",
+      "coinsswapped": "Swap\nCoins",
+      "customizeapp": "Customize\nApp",
+      "appcustomized": "Customize\nApp"
     },
     "stepstart": {
       "cta": "Let’s go",
@@ -3178,7 +3186,15 @@
       "createaccount": "Create your first\ncrypto account",
       "createaccountdetails": "Quickly create your first crypto account to start transactions!",
       "receivecoins": "Receive your\nfirst coins",
-      "receivecoinsdetails": "Learn how to transfer coins from an external platform to your Ledger crypto account."
+      "receivecoinsdetails": "Learn how to transfer coins from an external platform to your Ledger crypto account.",
+      "buycoins": "Buy coins with\nCoinify",
+      "buycoinsdetails": "Purchase crypto assets via Coinify and receive your coins directly in your Ledger account",
+      "sendcoins": "Send coins",
+      "sendcoinsdetails": "Learn how to send your crypto assets from addresses controlled by your Ledger Nano to a recipient address.",
+      "swapcoins": "Swap coins",
+      "swapcoinsdetails": "Learn how to move your coins from one blockchain to another at a pre-determined rate",
+      "customizeapp": "Let’s customize\nyour experience",
+      "customizeappdetails": "...\nYour can change this at any time in your settings."
     },
     "steplockedbottommodal": {
       "title": "Locked feature",

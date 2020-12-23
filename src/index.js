@@ -160,7 +160,7 @@ to play correctly with react navigation.
 
 const fixURL = url => {
   let NEWurl = url;
-  if (url.substr(0, 3) === "wc:") {
+  if ((url || "").substr(0, 3) === "wc:") {
     NEWurl = `ledgerlive://wc?uri=${encodeURIComponent(url)}`;
   }
   return NEWurl;

@@ -53,6 +53,50 @@ const stepInfos = {
       },
     },
   ],
+  BUY_COINS: [
+    "producttour.stepstart.buycoins",
+    "producttour.stepstart.buycoinsdetails",
+    {
+      file: require("../../images/producttour/blue/buycoins.png"),
+      size: {
+        width: 152,
+        height: 160,
+      },
+    },
+  ],
+  SEND_COINS: [
+    "producttour.stepstart.sendcoins",
+    "producttour.stepstart.sendcoinsdetails",
+    {
+      file: require("../../images/producttour/blue/sendcoins.png"),
+      size: {
+        width: 216,
+        height: 161,
+      },
+    },
+  ],
+  SWAP_COINS: [
+    "producttour.stepstart.swapcoins",
+    "producttour.stepstart.swapcoinsdetails",
+    {
+      file: require("../../images/producttour/blue/swapcoins.png"),
+      size: {
+        width: 184,
+        height: 160,
+      },
+    },
+  ],
+  CUSTOMIZE_APP: [
+    "producttour.stepstart.customizeapp",
+    "producttour.stepstart.customizeappdetails",
+    {
+      file: require("../../images/producttour/blue/customizeapp.png"),
+      size: {
+        width: 156,
+        height: 160,
+      },
+    },
+  ],
   /*
   "BUY_COINS": ["CREATE_ACCOUNT"],
   "SEND_COINS": ["CREATE_ACCOUNT"],
