@@ -31,7 +31,7 @@ type Props = {
 const InstallSuccessBar = ({ state, navigation, disable }: Props) => {
   const ptContext = useContext(_ptContext);
   const [hasBeenShown, setHasBeenShown] = useState(disable);
-  const [hideProductTourModal, setHideProductTourModal] = useState(false);
+  const [hideProductTourModal, setHideProductTourModal] = useState(true);
   const {
     installQueue,
     uninstallQueue,
@@ -46,16 +46,14 @@ const InstallSuccessBar = ({ state, navigation, disable }: Props) => {
   }, [navigation]);
 
   const goToProductTourMenu = () => {
-    setHideProductTourModal(true);
     completeStep(ptContext.currentStep);
     navigate(NavigatorName.ProductTour, {
       screen: ScreenName.ProductTourMenu,
     });
+    setHideProductTourModal(true);
   };
   useEffect(() => {
-    if (ptContext.currentStep !== "INSTALL_CRYPTO") {
-      setHideProductTourModal(false);
-    }
+    setHideProductTourModal(ptContext.currentStep !== "INSTALL_CRYPTO");
   }, [ptContext.currentStep]);
 
   const onSupportLink = useCallback(() => {

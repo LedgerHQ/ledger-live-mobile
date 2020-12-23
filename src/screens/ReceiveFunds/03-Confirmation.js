@@ -181,20 +181,14 @@ export default function ReceiveConfirmation({ navigation, route }: Props) {
     }
   }, [route.params, account, parentAccount, verifyOnDevice]);
 
-  const [hideProductTourModal, setHideProductTourModal] = useState(false);
   const goToProductTourMenu = () => {
-    setHideProductTourModal(true);
     // $FlowFixMe
     completeStep(ptContext.currentStep);
     navigate(NavigatorName.ProductTour, {
       screen: ScreenName.ProductTourMenu,
     });
+    setDone(false);
   };
-  useEffect(() => {
-    if (ptContext.currentStep !== "CREATE_ACCOUNT") {
-      setHideProductTourModal(false);
-    }
-  }, [ptContext.currentStep]);
 
   if (!account) return null;
   const { width } = getWindowDimensions();
@@ -206,11 +200,7 @@ export default function ReceiveConfirmation({ navigation, route }: Props) {
   return (
     <SafeAreaView style={styles.root} forceInset={forceInset}>
       <ProductTourStepFinishedBottomModal
-        isOpened={
-          ptContext.currentStep === "RECEIVE_COINS" &&
-          done &&
-          !hideProductTourModal
-        }
+        isOpened={ptContext.currentStep === "RECEIVE_COINS" && done}
         onPress={() => goToProductTourMenu()}
         onClose={() => goToProductTourMenu()}
       />

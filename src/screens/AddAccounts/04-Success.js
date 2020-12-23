@@ -42,19 +42,17 @@ export default function AddAccountsSuccess({ navigation, route }: Props) {
 
   const currency = route.params.currency;
 
-  const [hideProductTourModal, setHideProductTourModal] = useState(false);
+  const [hideProductTourModal, setHideProductTourModal] = useState(true);
   const goToProductTourMenu = () => {
-    setHideProductTourModal(true);
     // $FlowFixMe
     completeStep(ptContext.currentStep);
     navigate(NavigatorName.ProductTour, {
       screen: ScreenName.ProductTourMenu,
     });
+    setHideProductTourModal(true);
   };
   useEffect(() => {
-    if (ptContext.currentStep !== "CREATE_ACCOUNT") {
-      setHideProductTourModal(false);
-    }
+    setHideProductTourModal(ptContext.currentStep !== "CREATE_ACCOUNT");
   }, [ptContext.currentStep]);
 
   return (
