@@ -5,10 +5,9 @@ export const urls = {
     "https://support.ledgerwallet.com/hc/en-us?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=faq",
   contact:
     "https://support.ledger.com/hc/en-us/requests/new?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=contact",
-  terms:
-    "https://www.ledger.com/pages/terms-of-use-and-disclaimer?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=terms",
+  terms: "https://github.com/LedgerHQ/ledger-live-mobile/blob/master/TERMS.md",
   privacyPolicy:
-    "https://www.ledgerwallet.com/privacy-policy?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=privacy",
+    "https://shop.ledger.com/pages/privacy-policy?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=privacy",
   buyNanoX:
     "https://www.ledger.com/products/ledger-nano-x?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=manager_emptystate",
   playstore: "https://play.google.com/store/apps/details?id=com.ledger.live",
@@ -78,8 +77,6 @@ export const urls = {
       "https://shop.ledger.com/products/ledger-backup-pack?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=banner_carousel",
     ledgerAcademy:
       "https://www.ledger.com/academy?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=banner_carousel",
-    ongoingScams:
-      "https://www.ledger.com/ongoing-phishing-campaigns?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=banner_carousel",
   },
   compound:
     "https://support.ledger.com/hc/en-us/articles/360017215099?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=compound",
@@ -87,4 +84,10 @@ export const urls = {
     "https://shop.ledger.com/pages/ledger-live-terms-of-use?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=compoundTnC",
   approvedOperation:
     "https://support.ledger.com/hc/en-us/articles/115005307809-Track-your-transaction?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=compoundTX",
+  recoveryPhraseInfo:
+    "https://www.ledger.com/academy/crypto/what-is-a-recovery-phrase",
+  fixConnectionIssues:
+    "https://support.ledger.com/hc/en-us/articles/360025864773",
+  otgCable:
+    "https://support.ledger.com/hc/en-us/articles/115005463729-OTG-Kit-adapters-for-your-Ledger-devices",
 };

@@ -141,7 +141,7 @@ class ChooseDevice extends Component<
 
   componentDidMount() {
     const { readOnlyModeEnabled } = this.props;
-    this.state = { ...this.state, device: undefined };
+    this.setState(state => ({ ...state, device: undefined }));
 
     if (readOnlyModeEnabled) {
       this.props.navigation.setParams({
@@ -162,7 +162,10 @@ class ChooseDevice extends Component<
     }
 
     return (
-      <NavigationScrollView style={styles.root}>
+      <NavigationScrollView
+        style={[styles.root]}
+        contentContainerStyle={styles.scrollContainer}
+      >
         <TrackScreen category="Manager" name="ChooseDevice" />
         <LText semiBold style={styles.title}>
           <Trans i18nKey="manager.connect" />
@@ -198,6 +201,8 @@ class ChooseDevice extends Component<
 const styles = StyleSheet.create({
   root: {
     flex: 1,
+  },
+  scrollContainer: {
     paddingHorizontal: 16,
   },
   title: {

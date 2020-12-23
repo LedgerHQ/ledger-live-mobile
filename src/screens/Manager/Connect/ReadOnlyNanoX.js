@@ -31,10 +31,9 @@ class ReadOnlyNanoX extends PureComponent<OnboardingStepProps & { colors: * }> {
     this.props.setShowWelcome(false);
     this.props.setFirstTimeOnboarding(false);
     this.props.navigation.navigate(NavigatorName.Onboarding, {
-      screen: ScreenName.OnboardingStepChooseDevice,
+      screen: ScreenName.OnboardingUseCase,
       params: {
-        goingBackToScreen: ScreenName.Manager,
-        autoJumpToNanoX: true,
+        deviceModelId: "nanoX",
       },
     });
   };

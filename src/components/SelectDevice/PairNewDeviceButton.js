@@ -18,7 +18,7 @@ export default function PairNewDeviceButton({ onPress }: Props) {
   const { colors } = useTheme();
   return (
     <Touchable event="AddDevice" onPress={onPress}>
-      <View style={[styles.root, { borderColor: colors.fog }]}>
+      <View style={[styles.root, { backgroundColor: colors.white }]}>
         <Circle bg={colors.pillActiveBackground} size={30}>
           <Icon name="plus" size={20} color={colors.pillActiveForeground} />
         </Circle>
@@ -40,9 +40,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     flexDirection: "row",
     alignItems: "center",
-
     borderRadius: 4,
-    borderWidth: 1,
   },
   text: {
     marginLeft: 15,

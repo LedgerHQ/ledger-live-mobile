@@ -35,7 +35,6 @@ import TrackScreen from "../../analytics/TrackScreen";
 import NoOpStatePortfolio from "./NoOpStatePortfolio";
 import NoOperationFooter from "../../components/NoOperationFooter";
 import MigrateAccountsBanner from "../MigrateAccounts/Banner";
-import OngoingScams from "../../components/banners/OngoingScams";
 import RequireTerms from "../../components/RequireTerms";
 import { useScrollToTop } from "../../navigation/utils";
 
@@ -161,7 +160,6 @@ export default function PortfolioScreen({ navigation }: Props) {
       <AnimatedFlatListWithRefreshControl
         ref={ref}
         data={[
-          <OngoingScams />,
           ...(accounts.length > 0 && !accounts.every(isAccountEmpty)
             ? [<Carousel />]
             : []),
