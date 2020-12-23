@@ -64,14 +64,12 @@ export default function ManagerNavigator() {
                 <HeaderRightClose
                   skipNavigation
                   onClose={() => {
-                    if (ptContext.currentStep === "CREATE_ACCOUNT") {
-                      navigate(NavigatorName.Base, {
-                        screen: NavigatorName.ProductTour,
-                        params: {
-                          screen: ScreenName.ProductTourStepStart,
-                        },
-                      });
-                    }
+                    navigate(NavigatorName.Base, {
+                      screen: NavigatorName.ProductTour,
+                      params: {
+                        screen: ScreenName.ProductTourStepStart,
+                      },
+                    });
                   }}
                 />
               )

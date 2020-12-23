@@ -1,5 +1,5 @@
 // @flow
-import React, { useCallback } from "react";
+import React, { useCallback, useState, useContext } from "react";
 import { StyleSheet, View } from "react-native";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import SafeAreaView from "react-native-safe-area-view";
@@ -9,21 +9,49 @@ import InfoBox from "../../../components/InfoBox";
 import Button from "../../../components/Button";
 import IconSwap from "../../../icons/Swap";
 import colors, { rgba } from "../../../colors";
+import {
+  context as _ptContext,
+  completeStep,
+} from "../../ProductTour/Provider";
+import ProductTourStepFinishedBottomModal from "../../ProductTour/ProductTourStepFinishedBottomModal";
+import { navigate } from "../../../rootnavigation";
+import { ScreenName, NavigatorName } from "../../../const";
 
 const forceInset = { bottom: "always" };
 
 const PendingOperation = () => {
   const navigation = useNavigation();
   const route = useRoute();
+  const ptContext = useContext(_ptContext);
+  const [done, setDone] = useState(false);
 
   const onComplete = useCallback(() => {
+    if (ptContext.currentStep === "SWAP_COINS") {
+      setDone(true);
+      return;
+    }
     navigation.dangerouslyGetParent().pop();
-  }, [navigation]);
+  }, [navigation, ptContext.currentStep]);
+
+  const goToProductTourMenu = () => {
+    if (ptContext.currentStep === "SWAP_COINS") {
+      completeStep(ptContext.currentStep);
+      navigate(NavigatorName.ProductTour, {
+        screen: ScreenName.ProductTourMenu,
+      });
+      setDone(false);
+    }
+  };
 
   const { swapId, provider } = route.params;
 
   return (
     <SafeAreaView style={styles.root} forceInset={forceInset}>
+      <ProductTourStepFinishedBottomModal
+        isOpened={ptContext.currentStep === "SWAP_COINS" && done}
+        onPress={() => goToProductTourMenu()}
+        onClose={() => goToProductTourMenu()}
+      />
       <View style={styles.wrapper}>
         <View style={styles.iconWrapper}>
           <IconSwap color={colors.live} size={20} />

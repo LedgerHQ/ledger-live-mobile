@@ -10,7 +10,7 @@ import Button from "../../components/Button";
 import AnimatedSvgBackground from "../../components/AnimatedSvgBackground";
 import colors from "../../colors";
 import { context } from "./Provider";
-import { NavigatorName } from "../../const";
+import { NavigatorName, ScreenName } from "../../const";
 import { navigate } from "../../rootnavigation";
 import ArrowRight from "../../icons/ArrowRight";
 
@@ -97,12 +97,6 @@ const stepInfos = {
       },
     },
   ],
-  /*
-  "BUY_COINS": ["CREATE_ACCOUNT"],
-  "SEND_COINS": ["CREATE_ACCOUNT"],
-  "SWAP_COINS": ["RECEIVE_COINS"],
-  CUSTOMIZE_APP: [],
-  */
 };
 
 const ProductTourStepStart = () => {
@@ -134,6 +128,11 @@ const ProductTourStepStart = () => {
       case "SEND_COINS":
         navigate(NavigatorName.Base, {
           screen: NavigatorName.SendFunds,
+        });
+        break;
+      case "SWAP_COINS":
+        navigate(NavigatorName.Base, {
+          screen: NavigatorName.Swap,
         });
         break;
       case "CUSTOMIZE_APP":

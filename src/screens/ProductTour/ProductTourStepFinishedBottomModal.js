@@ -65,13 +65,22 @@ const stepTitles = {
     {
       file: require("../../images/producttour/green/sendcoins.png"),
       size: {
-        width: 175,
-        height: 157,
+        width: 176,
+        height: 131,
+      },
+    },
+  ],
+  SWAP_COINS: [
+    "producttour.finishedmodal.swapcoins",
+    {
+      file: require("../../images/producttour/green/swapcoins.png"),
+      size: {
+        width: 184,
+        height: 160,
       },
     },
   ],
   /*
-  "SWAP_COINS": ["RECEIVE_COINS"],
   CUSTOMIZE_APP: [],
   */
 };
@@ -83,8 +92,6 @@ const ProductTourStepFinishedBottomModal = ({
   ...rest
 }: Props) => {
   const ptContext = useContext(_ptContext);
-
-  console.log("is opened", isOpened);
 
   return (
     <BottomModal

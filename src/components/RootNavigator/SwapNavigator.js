@@ -1,9 +1,12 @@
 // @flow
 
-import React from "react";
-import { createStackNavigator } from "@react-navigation/stack";
+import React, { useContext } from "react";
+import {
+  createStackNavigator,
+  HeaderBackButton,
+} from "@react-navigation/stack";
 import { useTranslation } from "react-i18next";
-import { ScreenName } from "../../const";
+import { ScreenName, NavigatorName } from "../../const";
 import SwapSummary from "../../screens/Swap/Form/Summary";
 import SwapError from "../../screens/Swap/Form/Error";
 import SwapFormAmount from "../../screens/Swap/Form/Amount";
@@ -15,17 +18,41 @@ import SwapFormSelectCrypto from "../../screens/Swap/Form/SelectAccount/01-Selec
 import SwapFormSelectAccount from "../../screens/Swap/Form/SelectAccount/02-SelectAccount";
 import { closableStackNavigatorConfig } from "../../navigation/navigatorConfig";
 import StepHeader from "../StepHeader";
+import { navigate } from "../../rootnavigation";
+import colors from "../../colors";
+import { context as _ptContext } from "../../screens/ProductTour/Provider";
 
 export default function SwapNavigator() {
   const { t } = useTranslation();
+  const ptContext = useContext(_ptContext);
   return (
-    <Stack.Navigator screenOptions={closableStackNavigatorConfig}>
+    <Stack.Navigator
+      screenOptions={{
+        ...closableStackNavigatorConfig,
+        headerStyle:
+          ptContext.currentStep === "SWAP_COINS"
+            ? { backgroundColor: colors.live }
+            : {},
+        headerTitleStyle:
+          ptContext.currentStep === "SWAP_COINS"
+            ? {
+                color: colors.white,
+              }
+            : {},
+        headerTintColor:
+          ptContext.currentStep === "SWAP_COINS" ? colors.white : null,
+        headerRight: null,
+      }}
+    >
       <Stack.Screen
         name={ScreenName.SwapFormOrHistory}
         component={SwapFormOrHistory}
         options={{
-          headerTitle: () => (
-            <StepHeader title={t("transfer.swap.landing.header")} />
+          headerTitle: ({ style }: { style: * }) => (
+            <StepHeader
+              title={t("transfer.swap.landing.header")}
+              style={style}
+            />
           ),
         }}
       />
@@ -33,15 +60,32 @@ export default function SwapNavigator() {
         name={ScreenName.SwapFormSelectCrypto}
         component={SwapFormSelectCrypto}
         options={{
-          headerTitle: () => <StepHeader title={t("transfer.swap.title")} />,
+          headerTitle: ({ style }: { style: * }) => (
+            <StepHeader title={t("transfer.swap.title")} style={style} />
+          ),
           headerRight: null,
+          headerLeft:
+            ptContext.currentStep === "SWAP_COINS"
+              ? props => (
+                  <HeaderBackButton
+                    {...props}
+                    onPress={() => {
+                      navigate(NavigatorName.ProductTour, {
+                        screen: ScreenName.ProductTourMenu,
+                      });
+                    }}
+                  />
+                )
+              : null,
         }}
       />
       <Stack.Screen
         name={ScreenName.SwapFormSelectAccount}
         component={SwapFormSelectAccount}
         options={{
-          headerTitle: () => <StepHeader title={t("transfer.swap.title")} />,
+          headerTitle: ({ style }: { style: * }) => (
+            <StepHeader title={t("transfer.swap.title")} style={style} />
+          ),
           headerRight: null,
         }}
       />
@@ -49,7 +93,9 @@ export default function SwapNavigator() {
         name={ScreenName.SwapFormAmount}
         component={SwapFormAmount}
         options={{
-          headerTitle: () => <StepHeader title={t("transfer.swap.title")} />,
+          headerTitle: ({ style }: { style: * }) => (
+            <StepHeader title={t("transfer.swap.title")} style={style} />
+          ),
           headerRight: null,
         }}
       />
@@ -57,7 +103,9 @@ export default function SwapNavigator() {
         name={ScreenName.SwapSummary}
         component={SwapSummary}
         options={{
-          headerTitle: () => <StepHeader title={t("transfer.swap.title")} />,
+          headerTitle: ({ style }: { style: * }) => (
+            <StepHeader title={t("transfer.swap.title")} style={style} />
+          ),
           headerRight: null,
         }}
       />
@@ -65,7 +113,9 @@ export default function SwapNavigator() {
         name={ScreenName.SwapError}
         component={SwapError}
         options={{
-          headerTitle: () => <StepHeader title={t("transfer.swap.title")} />,
+          headerTitle: ({ style }: { style: * }) => (
+            <StepHeader title={t("transfer.swap.title")} style={style} />
+          ),
           headerLeft: null,
         }}
       />
@@ -73,7 +123,9 @@ export default function SwapNavigator() {
         name={ScreenName.SwapPendingOperation}
         component={SwapPendingOperation}
         options={{
-          headerTitle: () => <StepHeader title={t("transfer.swap.title")} />,
+          headerTitle: ({ style }: { style: * }) => (
+            <StepHeader title={t("transfer.swap.title")} style={style} />
+          ),
           headerLeft: null,
         }}
       />
@@ -81,7 +133,9 @@ export default function SwapNavigator() {
         name={ScreenName.SwapOperationDetails}
         component={SwapOperationDetails}
         options={({ navigation }) => ({
-          headerTitle: () => <StepHeader title={t("transfer.swap.title")} />,
+          headerTitle: ({ style }: { style: * }) => (
+            <StepHeader title={t("transfer.swap.title")} style={style} />
+          ),
           headerLeft: () => <BackButton navigation={navigation} />,
           headerRight: null,
         })}
