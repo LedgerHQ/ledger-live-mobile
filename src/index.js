@@ -55,6 +55,7 @@ import type { State } from "./reducers";
 import { navigationRef } from "./rootnavigation";
 import { useTrackingPairIds } from "./actions/general";
 import { ScreenName, NavigatorName } from "./const";
+import ExperimentalHeader from "./screens/Settings/Experimental/ExperimentalHeader";
 
 checkLibs({
   NotEnoughBalance,
@@ -142,6 +143,7 @@ function App({ importDataString }: AppProps) {
   return (
     <View style={styles.root}>
       <SyncNewAccounts priority={5} />
+      <ExperimentalHeader />
 
       <RootNavigator importDataString={importDataString} />
 
