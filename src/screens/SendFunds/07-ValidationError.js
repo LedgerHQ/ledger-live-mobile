@@ -50,7 +50,6 @@ export default function ValidationError({ navigation, route }: Props) {
       navigate(NavigatorName.ProductTour, {
         screen: ScreenName.ProductTourMenu,
       });
-      setStep(null);
     } else {
       navigation.dangerouslyGetParent().pop();
     }
