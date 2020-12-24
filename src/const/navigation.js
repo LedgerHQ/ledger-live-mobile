@@ -250,6 +250,9 @@ export const ScreenName = {
 
   ProductTourMenu: "ProductTourMenu",
   ProductTourStepStart: "ProductTourStepStart",
+
+  CustomizeAppPassword: "CustomizeAppPassword",
+  CustomizeAppCountervalues: "CustomizeAppCountervalues",
 };
 
 export const NavigatorName = {
@@ -294,6 +297,7 @@ export const NavigatorName = {
   LendingSupplyFlow: "LendingSupplyFlow",
   LendingWithdrawFlow: "LendingWithdrawFlow",
   ProductTour: "ProductTour",
+  CustomizeApp: "CustomizeApp",
   /* eslint-disable sort-keys */
 
   // Tab

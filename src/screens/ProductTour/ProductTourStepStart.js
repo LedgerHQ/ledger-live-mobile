@@ -136,6 +136,9 @@ const ProductTourStepStart = () => {
         });
         break;
       case "CUSTOMIZE_APP":
+        navigate(NavigatorName.Base, {
+          screen: NavigatorName.CustomizeApp,
+        });
         break;
       default:
         break;

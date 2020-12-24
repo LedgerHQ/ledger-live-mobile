@@ -21,6 +21,7 @@ import Main from "./MainNavigator";
 import { ErrorHeaderInfo } from "./BaseOnboardingNavigator";
 import ReceiveFundsNavigator from "./ReceiveFundsNavigator";
 import ProductTourNavigator from "./ProductTourNavigator";
+import CustomizeAppNavigator from "./CustomizeAppNavigator";
 import SendFundsNavigator from "./SendFundsNavigator";
 import SignMessageNavigator from "./SignMessageNavigator";
 import FreezeNavigator from "./FreezeNavigator";
@@ -65,6 +66,13 @@ export default function BaseNavigator() {
       <Stack.Screen
         name={NavigatorName.ProductTour}
         component={ProductTourNavigator}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name={NavigatorName.CustomizeApp}
+        component={CustomizeAppNavigator}
         options={{
           headerShown: false,
         }}

@@ -80,9 +80,16 @@ const stepTitles = {
       },
     },
   ],
-  /*
-  CUSTOMIZE_APP: [],
-  */
+  CUSTOMIZE_APP: [
+    "producttour.finishedmodal.customizeapp",
+    {
+      file: require("../../images/producttour/green/customizeapp.png"),
+      size: {
+        width: 210,
+        height: 197,
+      },
+    },
+  ],
 };
 
 const ProductTourStepFinishedBottomModal = ({
