@@ -9,6 +9,7 @@ import { useTranslation } from "react-i18next";
 import { ScreenName, NavigatorName } from "../../const";
 import CustomizeAppPassword from "../../screens/CustomizeApp/Password";
 import CustomizeAppCountervalues from "../../screens/CustomizeApp/Countervalues";
+import CountervalueSettings from "../../screens/Settings/General/CountervalueSettings";
 import { closableStackNavigatorConfig } from "../../navigation/navigatorConfig";
 import StepHeader from "../StepHeader";
 import { context as _ptContext } from "../../screens/ProductTour/Provider";
@@ -86,6 +87,13 @@ export default function ReceiveFundsNavigator() {
               />
             ),
           };
+        }}
+      />
+      <Stack.Screen
+        name={ScreenName.CustomizeAppCountervalueSettings}
+        component={CountervalueSettings}
+        options={{
+          title: t("settings.display.counterValue"),
         }}
       />
     </Stack.Navigator>

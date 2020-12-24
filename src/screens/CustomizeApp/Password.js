@@ -106,6 +106,7 @@ export default function AddAccountsSuccess({ navigation, route }: Props) {
           type="primary"
           title={<Trans i18nKey="customizeapp.password.cta" />}
           onPress={primaryCTA}
+          disabled={!pass1 || pass1 !== pass2}
         />
         <Button
           event="CustomizeAppPasswordSkip"

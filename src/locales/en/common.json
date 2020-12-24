@@ -3155,7 +3155,8 @@
       "headerTitle": "Select countervalue",
       "subtitle": "Step {{ currentStep }} of {{ totalSteps }}",
       "cta": "Continue",
-      "skip": "Skip"
+      "skip": "Skip",
+      "description": "Display your prefered currency as your countervalue."
     }
   },
   "producttour": {

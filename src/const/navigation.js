@@ -253,6 +253,7 @@ export const ScreenName = {
 
   CustomizeAppPassword: "CustomizeAppPassword",
   CustomizeAppCountervalues: "CustomizeAppCountervalues",
+  CustomizeAppCountervalueSettings: "CustomizeAppCountervalueSettings",
 };
 
 export const NavigatorName = {
