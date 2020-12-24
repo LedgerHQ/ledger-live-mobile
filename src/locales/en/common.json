@@ -3146,7 +3146,10 @@
       "headerTitle": "Set a password",
       "subtitle": "Step {{ currentStep }} of {{ totalSteps }}",
       "cta": "Continue",
-      "skip": "Skip"
+      "skip": "Skip",
+      "description": "Prevent unauthorized acess to your app on your mobile, including account names, transactions and public adresses.",
+      "newPassword": "New password",
+      "confirmPassword": "Confirm password"
     },
     "countervalues": {
       "headerTitle": "Select countervalue",

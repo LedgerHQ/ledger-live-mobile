@@ -1,14 +1,19 @@
 // @flow
 
-import React, { useCallback, useContext } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import { Trans } from "react-i18next";
-import { StyleSheet, View } from "react-native";
+import * as Keychain from "react-native-keychain";
+import { useDispatch } from "react-redux";
+import { StyleSheet, View, Platform } from "react-native";
+import SafeAreaView from "react-native-safe-area-view";
 import { ScreenName } from "../../const";
 import colors from "../../colors";
 import { TrackScreen } from "../../analytics";
 import LText from "../../components/LText";
 import Button from "../../components/Button";
-import { context as _ptContext } from "../ProductTour/Provider";
+import PasswordInput from "../../components/PasswordInput";
+import IconArrowRight from "../../icons/ArrowRight";
+import { setPrivacy } from "../../actions/settings";
 
 type Props = {
   navigation: any,
@@ -18,22 +23,82 @@ type Props = {
 type RouteParams = {};
 
 export default function AddAccountsSuccess({ navigation, route }: Props) {
-  const ptContext = useContext(_ptContext);
+  const [secure1, setSecure1] = useState(true);
+  const [secure2, setSecure2] = useState(true);
+  const [pass1, setPass1] = useState("");
+  const [pass2, setPass2] = useState("");
+  const [biometricsType, setBiometricsType] = useState("");
+  const dispatch = useDispatch();
 
-  const primaryCTA = useCallback(() => {
-    navigation.navigate(ScreenName.CustomizeAppCountervalues);
-  }, [navigation]);
+  const primaryCTA = useCallback(async () => {
+    const options =
+      Platform.OS === "ios"
+        ? {}
+        : {
+            accessControl: Keychain.ACCESS_CONTROL.APPLICATION_PASSWORD,
+            rules: Keychain.SECURITY_RULES.NONE,
+          };
+    try {
+      await Keychain.setGenericPassword("ledger", pass1, options);
+      dispatch(
+        setPrivacy({
+          biometricsType,
+          biometricsEnabled: false,
+        }),
+      );
+      navigation.navigate(ScreenName.CustomizeAppCountervalues);
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.log("could not save credentials");
+    }
+  }, [biometricsType, dispatch, navigation, pass1]);
 
   const secondaryCTA = useCallback(() => {
     navigation.navigate(ScreenName.CustomizeAppCountervalues);
   }, [navigation]);
 
+  useEffect(() => {
+    Keychain.getSupportedBiometryType().then(biometricsType => {
+      if (biometricsType) setBiometricsType(biometricsType);
+    });
+  });
+
   return (
-    <View style={styles.root}>
-      <TrackScreen category="CustomizeApp" name="Password" />
-      <LText secondary semiBold style={styles.title}>
-        Password
-      </LText>
+    <SafeAreaView style={styles.root}>
+      <View style={styles.content}>
+        <TrackScreen category="CustomizeApp" name="Password" />
+        <LText secondary style={styles.description}>
+          <Trans i18nKey="customizeapp.password.description" />
+        </LText>
+        <LText secondary style={styles.inputtitle}>
+          <Trans i18nKey="customizeapp.password.newPassword" />
+        </LText>
+        <PasswordInput
+          secureTextEntry={secure1}
+          toggleSecureTextEntry={() => setSecure1(!secure1)}
+          onChange={setPass1}
+          value={pass1}
+          placeholder=""
+          onSubmit={() => {}}
+        />
+        <LText
+          secondary
+          style={[
+            styles.inputtitle,
+            pass2 && pass1 !== pass2 ? styles.invalid : {},
+          ]}
+        >
+          <Trans i18nKey="customizeapp.password.confirmPassword" />
+        </LText>
+        <PasswordInput
+          secureTextEntry={secure2}
+          toggleSecureTextEntry={() => setSecure2(!secure2)}
+          onChange={setPass2}
+          value={pass2}
+          placeholder=""
+          onSubmit={() => {}}
+        />
+      </View>
       <View>
         <Button
           event="CustomizeAppPasswordContinue"
@@ -47,9 +112,10 @@ export default function AddAccountsSuccess({ navigation, route }: Props) {
           onPress={secondaryCTA}
           type="lightSecondary"
           title={<Trans i18nKey="customizeapp.password.skip" />}
+          IconRight={() => <IconArrowRight color={colors.live} size={20} />}
         />
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -59,9 +125,21 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     backgroundColor: colors.white,
   },
-  title: {
-    marginTop: 32,
-    fontSize: 18,
+  content: {
+    flex: 1,
+  },
+  inputtitle: {
+    marginBottom: 8,
+    marginTop: 24,
+    fontSize: 13,
+    color: colors.darkBlue,
+  },
+  invalid: {
+    color: colors.alert,
+  },
+  description: {
+    marginTop: 24,
+    fontSize: 13,
     color: colors.darkBlue,
   },
   button: {
