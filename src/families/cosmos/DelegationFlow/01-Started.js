@@ -49,7 +49,7 @@ export default function DelegationStarted({ navigation, route }: Props) {
         contentContainerStyle={styles.scrollContainer}
       >
         <TrackScreen category="DelegationFlow" name="Started" />
-        <IlluRewards />
+        <IlluRewards style={styles.rewards} />
         <LText semiBold style={styles.description}>
           <Trans i18nKey="cosmos.delegation.flow.steps.starter.description" />
         </LText>
@@ -107,6 +107,10 @@ const styles = StyleSheet.create({
   root: {
     flex: 1,
     backgroundColor: colors.white,
+  },
+  rewards: {
+    height: 150,
+    width: 150,
   },
   scroll: {
     flex: 1,
