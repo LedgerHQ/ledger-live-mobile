@@ -39,6 +39,11 @@ export default function AccountActions({ account, parentAccount }: Props) {
   const mainAccount = getMainAccount(account, parentAccount);
   const decorators = perFamilyAccountActions[mainAccount.currency.family];
 
+  const balance =
+    account.type !== "ChildAccount" && account.spendableBalance
+      ? account.spendableBalance
+      : account.balance;
+
   const accountId = account.id;
   const parentId = parentAccount && parentAccount.id;
 
@@ -87,6 +92,7 @@ export default function AccountActions({ account, parentAccount }: Props) {
           parentAccount={parentAccount}
           style={[styles.btn]}
           onPress={onSend}
+          disabled={balance.lte(0)}
         />
       )}
       <ReceiveAction
