@@ -981,12 +981,12 @@
     },
     "stepPairNew": {
       "nanoX": {
-        "title": "Pair your Nano",
+        "title": "Coupler votre Nano",
         "desc": "This is the first time you’re setting up your Nano with this phone. Let’s quickly pair your device.",
         "cta": "Couplons mon Nano"
       },
       "nanoS": {
-        "title": "Connect your Nano",
+        "title": "Connectez votre Nano",
         "desc": "This is the first time you’re setting up your Nano with this phone. Let’s quickly connect your device.",
         "cta": "Let’s connect my Nano"
       },
@@ -999,8 +999,8 @@
         "title": "Where can I find my device name?",
         "desc": "On your device, select Settings > General > Device name.",
         "title_1": "How to set up Bluetooth connection?",
-        "title_2": "How do I use my Nano X without Bluetooth?",
-        "desc_1": "Use an <1>OTG-cable</1> to connect your Ledger Nano X to your Android smartphone (iOS not supported). Manage your crypto with Ledger Live mobile or any other compatible (web) app.",
+        "title_2": "Comment puis-je utiliser mon Nano X sans Bluetooth ?",
+        "desc_1": "Utilisez un câble <1>OTG</1> pour connecter votre Ledger Nano X à votre smartphone Android (iOS non pris en charge). Gérez vos cryptomonnaies avec l’application mobile Ledger Live ou toute autre application (Web) compatible.",
         "bullets": {
           "0": {
             "label": "Assurez-vous que le Bluetooth est activé sur votre smartphone et sur votre Ledger Nano X. Votre Ledger Nano X doit être sur le tableau de bord, son écran d'accueil principal."
@@ -1009,8 +1009,8 @@
             "label": "<1>{{Os}}</1>: Make sure location services are enabled in your phone's settings for Ledger Live. Ledger Live never uses your location information, this is a requirement for Bluetooth on {{Os}}."
           },
           "2": {
-            "label": "If you have a Bluetooth pairing issue, please refer to the following article",
-            "link": "Fix connection issues."
+            "label": "Si vous avez un problème de couplage Bluetooth, veuillez vous référer à l'article suivant",
+            "link": "Résoudre les problèmes de connexion."
           }
         }
       },
@@ -1997,7 +1997,7 @@
     "loading": "Sync"
   },
   "scanning": {
-    "loading": "Searching devices..."
+    "loading": "Recherche d’appareil..."
   },
   "send": {
     "tooMuchUTXOBottomModal": {
