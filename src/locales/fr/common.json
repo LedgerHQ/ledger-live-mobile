@@ -996,9 +996,9 @@
         "cta": "Let’s connect my Blue"
       },
       "infoModal": {
-        "title": "Where can I find my device name?",
-        "desc": "On your device, select Settings > General > Device name.",
-        "title_1": "How to set up Bluetooth connection?",
+        "title": "Où puis-je trouver le nom de mon appareil ?",
+        "desc": "Sur votre appareil, sélectionnez Settings > General > Device name.",
+        "title_1": "Comment configurer la connexion Bluetooth ?",
         "title_2": "Comment puis-je utiliser mon Nano X sans Bluetooth ?",
         "desc_1": "Utilisez un câble <1>OTG</1> pour connecter votre Ledger Nano X à votre smartphone Android (iOS non pris en charge). Gérez vos cryptomonnaies avec l’application mobile Ledger Live ou toute autre application (Web) compatible.",
         "bullets": {
