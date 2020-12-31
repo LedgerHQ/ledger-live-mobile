@@ -665,38 +665,38 @@
       "warning": {
         "title": "Get started in English",
         "cta": "Got it!",
-        "desc": "We are introducing additional languages in order to help your onboarding with Ledger. Please be aware that the rest of the Ledger experience is currently only available in English."
+        "desc": "Nous ajoutons des langues supplémentaires afin de faciliter vos premiers pas avec Ledger. Veuillez noter que le reste de l'expérience Ledger est actuellement uniquement disponible en anglais."
       }
     },
     "stepSelectDevice": {
-      "title": "What’s your device?",
+      "title": "Quel est votre appareil ?",
       "nanoS": "Nano S",
       "nanoX": "Nano X",
       "blue": "Blue"
     },
     "stepUseCase": {
-      "title": "Hello!",
-      "or": "Or",
+      "title": "Bonjour !",
+      "or": "Ou",
       "firstUse": {
         "title": "First time using this Nano?",
-        "label": "First use",
-        "subTitle": "Set up a new Nano",
-        "desc": "Let’s start and set up your device!"
+        "label": "Mise en service",
+        "subTitle": "Initialiser un nouveau Nano",
+        "desc": "Commençons par configurer votre appareil !"
       },
       "devicePairing": {
-        "title": "Already have a recovery phrase?",
-        "label": "Device pairing",
-        "subTitle": "Connect your Nano",
-        "desc": "Your device is already set up? Connect it to the app!"
+        "title": "Vous avez déjà une phrase secrète de récupération ?",
+        "label": "Couplage de l'appareil",
+        "subTitle": "Connectez votre Nano",
+        "desc": "Votre appareil est déjà configuré ? Connectez-le à votre application !"
       },
       "desktopSync": {
-        "title": "Already have a recovery phrase?",
-        "label": "Desktop sync",
-        "subTitle": "Sync crypto from your desktop app",
-        "desc": "Already got the desktop app? Sync it to manage your crypto from your smartphone!"
+        "title": "Vous avez déjà une phrase secrète de récupération ?",
+        "label": "Synchronisation avec un ordinateur",
+        "subTitle": "Synchronisez des cryptos à partir de Ledger pour l'ordinateur",
+        "desc": "Vous utilisez déjà l'application Ledger pour l'ordinateur ? Synchronisez-la pour gérer vos cryptomonnaies depuis votre smartphone !"
       },
       "restoreDevice": {
-        "label": "Restore device",
+        "label": "Restauration de l'appareil",
         "subTitle": "Restore your recovery phrase on a new device",
         "desc": "Use an existing recovery phrase to restore your private keys on a new Nano!"
       }
@@ -710,17 +710,17 @@
       },
       "1": {
         "label": "Basics",
-        "title": "Own your private key",
+        "title": "Détenez votre clé privée",
         "desc": "Your private key is stored within your Nano and you must be the only one to own it to be in control of your money."
       },
       "2": {
         "label": "Basics",
-        "title": "Stay offline",
+        "title": "Restez déconnecté",
         "desc": "Your Nano works as a \"cold storage\" wallet. This means that it never exposes your private key online, even when using the app."
       },
       "3": {
         "label": "Basics",
-        "title": "Validate transactions",
+        "title": "Validez les transactions",
         "desc": "Ledger Live allows you to buy, sell, manage, exchange and earn crypto while remaining protected. You will validate every crypto transaction with your Nano."
       },
       "4": {
@@ -835,10 +835,10 @@
       },
       "recoveryPhraseSetup": {
         "infoModal": {
-          "title": "How does a recovery phrase work?",
+          "title": "Comment fonctionne une phrase secrète de récupération ?",
           "desc": "Your recovery phrase works like a unique master key. Your Ledger device uses it to calculate private keys for every crypto asset you own.",
           "desc_1": "To restore access to your crypto, any wallet can calculate the same private keys from your recovery phrase.",
-          "link": "More about the recovery phrase",
+          "link": "Plus de détails sur la phrase secrète de récupération",
           "title_1": "What if I lose access to my Nano?",
           "bullets": {
             "0": {
@@ -854,7 +854,7 @@
         },
         "bullets": {
           "0": {
-            "title": "Take your Recovery sheet",
+            "title": "Prenez votre feuille de récupération",
             "label": "Grab a blank Recovery sheet, included with your Nano. Please reach out to Ledger Support if the Recovery sheet did not come blank."
           },
           "1": {
@@ -869,8 +869,8 @@
             "title": "Repeat for all words!"
           }
         },
-        "cta": "Confirm recovery phrase",
-        "nextStep": "Next step"
+        "cta": "Confirmer la phrase secrète de récupération",
+        "nextStep": "Étape suivante"
       },
       "hideRecoveryPhrase": {
         "title": "Hide your recovery phrase",
@@ -883,10 +883,10 @@
             "label": "Never share your 24 words with anyone, not even with Ledger."
           }
         },
-        "cta": "OK, I’m done!",
+        "cta": "C'est bon, j'ai fini !",
         "infoModal": {
-          "label": "Learn how to hide it",
-          "title": "Where should I keep my recovery phrase?",
+          "label": "Apprendre à la cacher",
+          "title": "Où dois-je garder ma phrase secrète de récupération ?",
           "bullets": {
             "0": {
               "label": "<1>NEVER</1> enter it on a computer, phone or any other device. Don't take a picture of it."
@@ -898,7 +898,7 @@
               "label": "<1>ALWAYS</1> store it in a secure place, out of sight."
             },
             "3": {
-              "label": "Ledger will never ask for your recovery phrase."
+              "label": "Ledger ne vous demandera jamais votre phrase secrète de récupération."
             },
             "4": {
               "label": "If any person or application asks for it, assume it is a scam!"
@@ -906,9 +906,9 @@
           }
         },
         "warning": {
-          "title": "Now game on!",
-          "desc": "Answer 3 simple questions to avoid common misconceptions about your hardware wallet.",
-          "cta": "Let’s take the quiz"
+          "title": "Testons nos connaissances !",
+          "desc": "Répondez à 3 questions simples pour éviter les idées fausses sur votre wallet physique.",
+          "cta": "Faisons le quiz"
         }
       }
     },
