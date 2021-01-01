@@ -663,8 +663,8 @@
       "title": "Selectionnez votre langue",
       "cta": "Continuer",
       "warning": {
-        "title": "Get started in English",
-        "cta": "Got it!",
+        "title": "Commencez en français",
+        "cta": "J'ai compris !",
         "desc": "Nous ajoutons des langues supplémentaires afin de faciliter vos premiers pas avec Ledger. Veuillez noter que le reste de l'expérience Ledger est actuellement uniquement disponible en anglais."
       }
     },
@@ -702,7 +702,7 @@
       }
     },
     "stepNewDevice": {
-      "cta": "Let’s do this!",
+      "cta": "C'est parti !",
       "0": {
         "label": "Basics",
         "title": "Access your crypto",
@@ -3070,7 +3070,7 @@
     "memo": "Memo"
   },
   "Terms": {
-    "title": "Terms of Use",
+    "title": "Conditions d'utilisation",
     "read": "Read the Terms of Use",
     "switchLabelPrivacy": "I have read and agree with the <1>Privacy Policy</1>",
     "switchLabel": "I have read and agree with the <1>Terms of Service</1>",
