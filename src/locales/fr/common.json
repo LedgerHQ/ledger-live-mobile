@@ -8,7 +8,7 @@
     "yes": "Oui",
     "no": "No",
     "gotit": "Got it",
-    "continue": "Continue",
+    "continue": "Continuer",
     "retry": "Retry",
     "done": "Done",
     "sortBy": "Sort by",
@@ -653,7 +653,7 @@
   },
   "onboarding": {
     "stepWelcome": {
-      "title": "Welcome to Ledger Live",
+      "title": "Bienvenue chez Ledger",
       "subtitle": "Gérez en toute sécurité vos cryptomonnaies depuis votre smartphone.",
       "start": "Commencer",
       "noDevice": "Pas encore d'appareil ?",
@@ -873,7 +873,7 @@
         "nextStep": "Étape suivante"
       },
       "hideRecoveryPhrase": {
-        "title": "Hide your recovery phrase",
+        "title": "Cachez votre phrase de récupération",
         "desc": "Your recovery phrase is your last chance to access your crypto if you cannot use your Nano. You must keep it in a safe place.",
         "bullets": {
           "0": {
@@ -1406,7 +1406,7 @@
         "noAccounts": "Nothing to import",
         "unsupported": "Unsupported",
         "settings": "App settings",
-        "includeGeneralSettings": "Import desktop settings"
+        "includeGeneralSettings": "Importer les paramètres de Ledger pour l'ordinateur"
       },
       "fallback": {
         "header": "Import account",
@@ -3074,7 +3074,7 @@
     "read": "Read the Terms of Use",
     "switchLabelPrivacy": "I have read and agree with the <1>Privacy Policy</1>",
     "switchLabel": "I have read and agree with the <1>Terms of Service</1>",
-    "cta": "Enter Ledger App"
+    "cta": "Entrer dans l'application Ledger"
   },
   "exchange": {
     "buy": {
