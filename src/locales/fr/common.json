@@ -684,13 +684,13 @@
         "desc": "Commençons par configurer votre appareil !"
       },
       "devicePairing": {
-        "title": "Vous avez déjà une phrase secrète de récupération ?",
+        "title": "Vous avez déjà une phrase de récupération ?",
         "label": "Couplage de l'appareil",
         "subTitle": "Connectez votre Nano",
         "desc": "Votre appareil est déjà configuré ? Connectez-le à votre application !"
       },
       "desktopSync": {
-        "title": "Vous avez déjà une phrase secrète de récupération ?",
+        "title": "Vous avez déjà une phrase de récupération ?",
         "label": "Synchronisation avec un ordinateur",
         "subTitle": "Synchronisez des cryptos à partir de Ledger pour l'ordinateur",
         "desc": "Vous utilisez déjà l'application Ledger pour l'ordinateur ? Synchronisez-la pour gérer vos cryptomonnaies depuis votre smartphone !"
@@ -835,10 +835,10 @@
       },
       "recoveryPhraseSetup": {
         "infoModal": {
-          "title": "Comment fonctionne une phrase secrète de récupération ?",
+          "title": "Comment fonctionne une phrase de récupération ?",
           "desc": "Your recovery phrase works like a unique master key. Your Ledger device uses it to calculate private keys for every crypto asset you own.",
           "desc_1": "To restore access to your crypto, any wallet can calculate the same private keys from your recovery phrase.",
-          "link": "Plus de détails sur la phrase secrète de récupération",
+          "link": "Plus de détails sur la phrase de récupération",
           "title_1": "What if I lose access to my Nano?",
           "bullets": {
             "0": {
@@ -869,7 +869,7 @@
             "title": "Repeat for all words!"
           }
         },
-        "cta": "Confirmer la phrase secrète de récupération",
+        "cta": "Confirmer la phrase de récupération",
         "nextStep": "Étape suivante"
       },
       "hideRecoveryPhrase": {
@@ -886,7 +886,7 @@
         "cta": "C'est bon, j'ai fini !",
         "infoModal": {
           "label": "Apprendre à la cacher",
-          "title": "Où dois-je garder ma phrase secrète de récupération ?",
+          "title": "Où dois-je garder ma phrase de récupération ?",
           "bullets": {
             "0": {
               "label": "<1>NEVER</1> enter it on a computer, phone or any other device. Don't take a picture of it."
@@ -898,7 +898,7 @@
               "label": "<1>ALWAYS</1> store it in a secure place, out of sight."
             },
             "3": {
-              "label": "Ledger ne vous demandera jamais votre phrase secrète de récupération."
+              "label": "Ledger ne vous demandera jamais votre phrase de récupération."
             },
             "4": {
               "label": "If any person or application asks for it, assume it is a scam!"
@@ -961,7 +961,7 @@
             "title": "Grab your recovery phrase"
           },
           "1": {
-            "title": "Sélectionnez la longueur de votre phrase secrète de récupération",
+            "title": "Sélectionnez la longueur de votre phrase de récupération",
             "label": "Your Recovery phrases can have 12, 18 or 24 words. You must enter all words to access your crypto."
           },
           "2": {
