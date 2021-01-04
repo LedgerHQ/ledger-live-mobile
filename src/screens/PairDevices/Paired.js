@@ -6,6 +6,7 @@ import { Trans } from "react-i18next";
 import { getDeviceModel } from "@ledgerhq/devices";
 import { useSelector } from "react-redux";
 import { useNavigation, useTheme } from "@react-navigation/native";
+import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 
 import { TrackScreen } from "../../analytics";
 import { ScreenName } from "../../const";
@@ -18,20 +19,19 @@ import NanoX from "../../icons/NanoX";
 import { deviceNameByDeviceIdSelectorCreator } from "../../reducers/ble";
 
 type Props = {
-  deviceId: string,
-  deviceName: string,
-  onContinue: (deviceId: string) => void,
+  device: Device,
+  onContinue: (device: Device) => void,
   genuine: boolean,
 };
 
 export default function Paired({
-  deviceId,
-  deviceName,
+  device,
   onContinue: onContinuewProps,
   genuine,
 }: Props) {
   const { colors } = useTheme();
   const navigation = useNavigation();
+  const { deviceId, deviceName } = device;
   const name = useSelector(deviceNameByDeviceIdSelectorCreator(deviceId));
 
   const onEdit = useCallback(() => {
@@ -42,8 +42,8 @@ export default function Paired({
   }, [navigation, deviceId, deviceName, name]);
 
   const onContinue = useCallback(() => {
-    onContinuewProps(deviceId);
-  }, [onContinuewProps, deviceId]);
+    onContinuewProps(device);
+  }, [onContinuewProps, device]);
 
   return (
     <View style={styles.root}>

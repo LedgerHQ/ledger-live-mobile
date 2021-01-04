@@ -9,7 +9,7 @@ type Props = {
   bg: string,
   floatingIcon?: React$Node,
   floatingBg?: string,
-  size: number,
+  size?: number,
 };
 
 function BluetoothDisabledIcon({
