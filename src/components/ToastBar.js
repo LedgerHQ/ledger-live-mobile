@@ -46,7 +46,7 @@ function ToastBar({
   switch (type) {
     case "primary":
       backgroundColor = colors.live;
-      color = colors.white;
+      color = "#FFF";
       break;
     case "error":
       backgroundColor = colors.alert;
