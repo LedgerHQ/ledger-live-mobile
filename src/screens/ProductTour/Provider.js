@@ -37,7 +37,7 @@ const reducer = (state: State, update) => {
 };
 const initialState = {
   completedSteps: [],
-  dismissed: false,
+  dismissed: true,
   currentStep: null,
   initDone: false,
 };

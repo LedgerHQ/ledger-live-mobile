@@ -23,6 +23,7 @@ import { NavigatorName } from "../../../const";
 
 import { readOnlyModeEnabledSelector } from "../../../reducers/settings";
 import confetti from "../assets/confetti.json";
+import { dismiss as ptDismiss } from "../../ProductTour/Provider";
 
 const logo = <Image source={require("../../../images/logo.png")} />;
 
@@ -33,7 +34,7 @@ type Props = {
 export default function OnboardingStepFinish({ navigation }: Props) {
   const readOnlyModeEnabled = useSelector(readOnlyModeEnabledSelector);
   const dispatch = useDispatch();
-  const { resetCurrentStep } = useNavigationInterceptor();
+  const { resetCurrentStep, mode } = useNavigationInterceptor();
 
   const [progress] = useState(new Animated.Value(0));
 
@@ -50,6 +51,9 @@ export default function OnboardingStepFinish({ navigation }: Props) {
   }, []);
 
   function onFinish(): void {
+    if (mode === "full") {
+      ptDismiss(false);
+    }
     dispatch(completeOnboarding());
     resetCurrentStep();
 
