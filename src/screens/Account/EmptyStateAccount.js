@@ -1,7 +1,7 @@
 /* @flow */
 import React, { PureComponent } from "react";
 import { Trans } from "react-i18next";
-import { View, Image, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
 import {
   getAccountCurrency,
@@ -15,6 +15,7 @@ import Button from "../../components/Button";
 import Receive from "../../icons/Receive";
 import Exchange from "../../icons/Exchange";
 import { isCurrencySupported } from "../Exchange/coinifyConfig";
+import EmptyStateAccountIllu from "../../images/EmptyStateAccount";
 
 import { withTheme } from "../../colors";
 
@@ -58,7 +59,10 @@ class EmptyStateAccount extends PureComponent<{
     return (
       <View style={[styles.root, { backgroundColor: colors.card }]}>
         <View style={styles.body}>
-          <Image source={require("../../images/EmptyStateAccount.png")} />
+          <View style={styles.illustration}>
+            <EmptyStateAccountIllu />
+          </View>
+
           <LText secondary semiBold style={styles.title}>
             <Trans i18nKey="account.emptyState.title" />
           </LText>
@@ -143,6 +147,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "center",
   },
+  illustration: { width: "100%", height: 60 },
   body: {
     alignItems: "center",
   },
