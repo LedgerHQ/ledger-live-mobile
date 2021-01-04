@@ -69,7 +69,7 @@ export default function ErrorIcon({ error }: Props) {
     );
   }
   return (
-    <Circle size={80} bg={lighten(colors.alert, 0.75)}>
+    <Circle size={80} bg={rgba(colors.alert, 0.15)}>
       <Close size={40} color={colors.alert} />
     </Circle>
   );
