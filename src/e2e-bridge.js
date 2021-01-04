@@ -1,6 +1,12 @@
 // @flow
 import invariant from "invariant";
 import { Subject } from "rxjs/Subject";
+import type { AccountRaw } from "@ledgerhq/live-common/lib/types";
+import { store } from "./context/LedgerStore";
+import { importSettings } from "./actions/settings";
+import { setAccounts } from "./actions/accounts";
+import { acceptTerms } from "./logic/terms";
+import accountModel from "./logic/accountModel";
 
 let ws: WebSocket;
 
@@ -14,7 +20,7 @@ export function initE2EBridge() {
   ws.onmessage = onMessage;
 }
 
-function onMessage(event: { data: mixed }) {
+async function onMessage(event: { data: mixed }) {
   invariant(
     typeof event.data === "string",
     "[E2E Bridge Client]: Message data must be string",
@@ -34,6 +40,17 @@ function onMessage(event: { data: mixed }) {
         global[k] = v;
       });
       break;
+    case "acceptTerms":
+      acceptTerms();
+      break;
+    case "importAccounts": {
+      store.dispatch(setAccounts(msg.payload.map(accountModel.decode)));
+      break;
+    }
+    case "importSettngs": {
+      store.dispatch(importSettings(msg.payload));
+      break;
+    }
     default:
       break;
   }
@@ -52,7 +69,10 @@ type E2EBridgeSubjectMessage =
 
 export type E2EBridgeMessage =
   | E2EBridgeSubjectMessage
-  | Message<"setGlobals", { [key: string]: any }>;
+  | Message<"setGlobals", { [key: string]: any }>
+  | Message<"importAccounts", { data: AccountRaw, version: number }[]>
+  | Message<"importSettngs", { [key: string]: any }>
+  | Message<"acceptTerms">;
 
 function log(message: string) {
   // eslint-disable-next-line no-console

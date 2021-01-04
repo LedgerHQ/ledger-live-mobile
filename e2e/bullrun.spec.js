@@ -1,5 +1,7 @@
+import path from "path";
+import fs from "fs";
 import { Server } from "ws";
-import { E2EBridgeMessage } from "../src/e2e-bridge";
+import type { E2EBridgeMessage } from "../src/e2e-bridge";
 
 describe("Ledger Live Mobile", () => {
   beforeAll(() => {
@@ -47,6 +49,16 @@ describe("Ledger Live Mobile", () => {
     await element(by.id("OnboardingFinish")).tap();
     await element(by.id("TermsAcceptSwitch")).tap();
     await element(by.id("TermsConfirm")).tap();
+  });
+
+  test("accounts/settings import example", async () => {
+    const f = fs.readFileSync(
+      path.resolve("e2e", "config", "1AccountBTC1AccountETH.json"),
+    );
+    const { data } = JSON.parse(f);
+    postMessage({ type: "acceptTerms" });
+    postMessage({ type: "importSettngs", payload: data.settings });
+    postMessage({ type: "importAccounts", payload: data.accounts });
   });
 });
 

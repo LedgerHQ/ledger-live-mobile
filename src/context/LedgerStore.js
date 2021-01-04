@@ -1,5 +1,4 @@
 // @flow
-
 import React, { Component } from "react";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
@@ -11,18 +10,17 @@ import { importStore as importAccounts } from "../actions/accounts";
 import { importBle } from "../actions/ble";
 import { INITIAL_STATE, supportedCountervalues } from "../reducers/settings";
 
-const createLedgerStore = () =>
-  createStore(
-    reducers,
-    undefined,
-    // $FlowFixMe
-    compose(
-      applyMiddleware(thunk),
-      typeof __REDUX_DEVTOOLS_EXTENSION__ === "function"
-        ? __REDUX_DEVTOOLS_EXTENSION__()
-        : f => f,
-    ),
-  );
+export const store = createStore(
+  reducers,
+  undefined,
+  // $FlowFixMe
+  compose(
+    applyMiddleware(thunk),
+    typeof __REDUX_DEVTOOLS_EXTENSION__ === "function"
+      ? __REDUX_DEVTOOLS_EXTENSION__()
+      : f => f,
+  ),
+);
 
 export default class LedgerStoreProvider extends Component<
   {
@@ -30,12 +28,10 @@ export default class LedgerStoreProvider extends Component<
     children: (ready: boolean, store: *) => *,
   },
   {
-    store: *,
     ready: boolean,
   },
 > {
   state = {
-    store: createLedgerStore(),
     ready: false,
   };
 
@@ -49,8 +45,6 @@ export default class LedgerStoreProvider extends Component<
   }
 
   async init() {
-    const { store } = this.state;
-
     const bleData = await getBle();
     store.dispatch(importBle(bleData));
 
@@ -76,7 +70,7 @@ export default class LedgerStoreProvider extends Component<
 
   render() {
     const { children } = this.props;
-    const { store, ready } = this.state;
+    const { ready } = this.state;
     return <Provider store={store}>{children(ready, store)}</Provider>;
   }
 }

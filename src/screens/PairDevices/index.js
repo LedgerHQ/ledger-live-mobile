@@ -3,8 +3,7 @@ import React, { useReducer, useCallback, useEffect, useRef } from "react";
 import { StyleSheet } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { useDispatch, useSelector } from "react-redux";
-import Config from "react-native-config";
-import { first, filter, timeout, tap } from "rxjs/operators";
+import { timeout, tap } from "rxjs/operators";
 import getDeviceInfo from "@ledgerhq/live-common/lib/hw/getDeviceInfo";
 import getDeviceName from "@ledgerhq/live-common/lib/hw/getDeviceName";
 import { listApps } from "@ledgerhq/live-common/lib/apps/hw";
@@ -23,7 +22,6 @@ import Paired from "./Paired";
 import Scanning from "./Scanning";
 import ScanningTimeout from "./ScanningTimeout";
 import RenderError from "./RenderError";
-import { e2eBridgeSubject } from "../../e2e-bridge";
 
 type Props = {
   navigation: any,
@@ -80,17 +78,6 @@ function PairDevicesInner({ navigation, route }: Props) {
   const onSelect = useCallback(
     async (device: Device) => {
       dispatch({ type: "pairing", payload: device });
-      // if (Config.MOCK) {
-      //   await e2eBridgeSubject
-      //     .pipe(
-      //       filter(msg => msg.type === "open"),
-      //       first(),
-      //     )
-      //     .toPromise();
-      //   if (unmounted.current) return;
-      //   const deviceInfo = await getDeviceInfo(transport);
-      //   return;
-      // }
       try {
         const transport = await TransportBLE.open(device);
         if (unmounted.current) return;
