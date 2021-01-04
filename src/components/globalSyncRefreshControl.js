@@ -15,7 +15,7 @@ type Props = {
 
 export default (ScrollListLike: any) => {
   function Inner({ forwardedRef, ...scrollListLikeProps }: Props) {
-    const { colors } = useTheme();
+    const { colors, dark } = useTheme();
     const [refreshing, setRefreshing] = useState(false);
     const setSyncBehavior = useBridgeSync();
     const { poll } = useCountervaluesPolling();
@@ -49,7 +49,7 @@ export default (ScrollListLike: any) => {
         ref={forwardedRef}
         refreshControl={
           <RefreshControl
-            progressBackgroundColor={colors.background}
+            progressBackgroundColor={dark ? colors.background : colors.card}
             colors={[colors.live]}
             tintColor={colors.live}
             refreshing={refreshing}
