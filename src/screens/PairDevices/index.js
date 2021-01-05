@@ -8,6 +8,7 @@ import { timeout } from "rxjs/operators";
 import getDeviceInfo from "@ledgerhq/live-common/lib/hw/getDeviceInfo";
 import getDeviceName from "@ledgerhq/live-common/lib/hw/getDeviceName";
 import { listApps } from "@ledgerhq/live-common/lib/apps/hw";
+import type { DeviceModelId } from "@ledgerhq/devices";
 import { delay } from "@ledgerhq/live-common/lib/promise";
 import logger from "../../logger";
 import TransportBLE from "../../react-native-hw-transport-ble";
@@ -45,6 +46,7 @@ type RouteParams = {
 type Device = {
   id: string,
   name: string,
+  modelId: DeviceModelId,
 };
 
 type Status = "scanning" | "pairing" | "genuinecheck" | "paired" | "timedout";
@@ -147,6 +149,7 @@ class PairDevices extends Component<PairDevicesProps, State> {
           name,
           deviceInfo,
           appsInstalled,
+          modelId: device.modelId,
         });
         if (this.unmounted) return;
         this.setState({ status: "paired" });

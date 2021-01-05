@@ -32,6 +32,7 @@ const extraProperties = store => {
     ? {
         deviceVersion: lastDevice.deviceInfo?.version,
         appLength: lastDevice.appsInstalled,
+        modelId: lastDevice.modelId,
       }
     : {};
 

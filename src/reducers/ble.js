@@ -2,6 +2,7 @@
 /* eslint import/no-cycle: 0 */
 import { handleActions } from "redux-actions";
 import type { DeviceInfo } from "@ledgerhq/live-common/lib/types/manager";
+import type { DeviceModelId } from "@ledgerhq/devices";
 import type { State } from ".";
 
 export type DeviceLike = {
@@ -9,6 +10,7 @@ export type DeviceLike = {
   name: string,
   deviceInfo?: DeviceInfo,
   appsInstalled?: number,
+  modelId?: DeviceModelId,
 };
 
 export type BleState = {

@@ -91,7 +91,7 @@ class Scanning extends Component<Props, State> {
           wired: false,
           modelId: "nanoX",
         }}
-        onSelect={() => this.props.onSelect(item)}
+        onSelect={() => this.props.onSelect({ ...item, modelId: "nanoX" })}
         disabled={!!knownDevice}
         description={
           knownDevice ? <Trans i18nKey="PairDevices.alreadyPaired" /> : ""
