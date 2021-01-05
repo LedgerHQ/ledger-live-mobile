@@ -678,7 +678,7 @@
       "title": "Bonjour !",
       "or": "Ou",
       "firstUse": {
-        "title": "First time using this Nano?",
+        "title": "Première utilisation de votre Nano ?",
         "label": "Mise en service",
         "subTitle": "Initialiser un nouveau Nano",
         "desc": "Commençons par configurer votre appareil !"
@@ -697,36 +697,36 @@
       },
       "restoreDevice": {
         "label": "Restauration de l'appareil",
-        "subTitle": "Restore your recovery phrase on a new device",
-        "desc": "Use an existing recovery phrase to restore your private keys on a new Nano!"
+        "subTitle": "Restaurez votre phrase de récupération sur un nouvel appareil",
+        "desc": "Utilisez une phrase de récupération existante pour restaurer vos clés privées sur un nouveau Nano !"
       }
     },
     "stepNewDevice": {
       "cta": "C'est parti !",
       "0": {
         "label": "Les bases",
-        "title": "Access your crypto",
-        "desc": "Your crypto assets are stored on the blockchain. You need a private key to access and manage them."
+        "title": "Accédez à vos cryptomonnaies",
+        "desc": "Vos cryptos sont stockés sur la blockchain. Vous avez besoin d'une clé privée pour y accéder et les gérer."
       },
       "1": {
         "label": "Les bases",
         "title": "Détenez votre clé privée",
-        "desc": "Your private key is stored within your Nano and you must be the only one to own it to be in control of your money."
+        "desc": "Votre clé privée est stockée dans votre Nano et vous devez être le seul à la détenir pour conserver le contrôle de votre argent."
       },
       "2": {
         "label": "Les bases",
         "title": "Restez déconnecté",
-        "desc": "Your Nano works as a \"cold storage\" wallet. This means that it never exposes your private key online, even when using the app."
+        "desc": "Votre Nano fonctionne comme un wallet physique de \"stockage à froid\", cela signifie que votre clé privée n’est jamais exposée en ligne, même lorsque vous utilisez l'application."
       },
       "3": {
         "label": "Les bases",
         "title": "Validez les transactions",
-        "desc": "Ledger Live allows you to buy, sell, manage, exchange and earn crypto while remaining protected. You will validate every crypto transaction with your Nano."
+        "desc": "Ledger Live vous permet d'acheter, de vendre, de gérer, d'échanger et de gagner des cryptomonnaies tout en étant protégé. Vous validerez chaque transaction sur vos cryptomonnaies avec votre Nano."
       },
       "4": {
         "label": "Les bases",
-        "title": "Let’s set up your Nano!",
-        "desc": "We'll start by setting up your Nano security."
+        "title": "Configurons votre Nano",
+        "desc": "Commençons par configurer la sécurité de votre Nano."
       }
     },
     "stepSetupDevice": {
@@ -734,16 +734,16 @@
         "title": "La solution idéale pour commencer:",
         "bullets": {
           "0": {
-            "label": "Plan 30 minutes and take your time."
+            "label": "Comptez 30 minutes, prenez votre temps !"
           },
           "1": {
-            "label": "Grab a pen to write with."
+            "label": "Prenez un stylo pour écrire."
           },
           "2": {
             "label": "Restez seul(e) et choisissez un environnement sûr et calme."
           }
         },
-        "cta": "OK, I’m ready!",
+        "cta": "OK, je suis prêt(e) !",
         "warning": {
           "title": "Soyez prudent",
           "desc": "Assurez-vous de suivre les instructions de cette application à toutes les étapes du processus.",
@@ -753,12 +753,12 @@
       "setup": {
         "bullets": {
           "0": {
-            "title": "Turn on Nano",
+            "title": "Allumer le Nano",
             "nanoX": {
               "label": "Allumez votre appareil en appuyant sur le bouton noir pendant 1 seconde."
             },
             "nanoS": {
-              "label": "Turn on your device by connecting it to the USB port of your phone."
+              "label": "Allumez votre appareil en le connectant au port USB de votre téléphone."
             },
             "blue": {
               "label": "Turn on your device by connecting it to the USB port of your phone and pressing the power button."
@@ -766,15 +766,15 @@
           },
           "1": {
             "title": "Parcourir ",
-            "label": "Learn how to interact with your device by reading the on-screen instructions."
+            "label": "Apprenez à interagir avec votre appareil en lisant les instructions à l'écran."
           },
           "2": {
-            "title": "Select “Set up as new device”",
-            "label": "Press both buttons simultaneously to validate the selection."
+            "title": "Sélectionnez \"Set up as a new device\"",
+            "label": "Appuyez simultanément sur les deux boutons pour valider la sélection."
           },
           "3": {
             "title": "Suivez les instructions",
-            "label": "Come back here to follow instructions on your PIN code."
+            "label": "Revenez ici afin de suivre les instructions relatives à votre code PIN."
           }
         },
         "cta": "Étape suivante"
@@ -788,12 +788,12 @@
       "pinCodeSetup": {
         "bullets": {
           "0": {
-            "title": "Choose PIN code",
-            "label": "Press the left or right button to change digits. Press both buttons to validate a digit. Select <1></1> to confirm your PIN code. Select <2></2> to erase a digit."
+            "title": "Choisissez un code PIN",
+            "label": "\"Appuyez sur le bouton gauche ou droit pour changer de chiffre. Appuyez sur les deux boutons pour valider un chiffre. Sélectionnez<1></1>pour confirmer votre code PIN. Sélectionnez<2></2>pour effacer un chiffre\"."
           },
           "1": {
-            "title": "Confirm PIN code",
-            "label": "Enter your PIN code again to confirm it."
+            "title": "Confirmer le code PIN",
+            "label": "Saisissez votre code PIN pour le confirmer."
           }
         },
         "infoModal": {
@@ -809,13 +809,13 @@
               "label": "Vous pouvez modifier votre code PIN ultérieurement si nécessaire."
             },
             "3": {
-              "label": "Three wrong PIN code entries in a row will reset the device."
+              "label": "Trois entrées erronées du code PIN à la suite réinitialisent l'appareil."
             },
             "4": {
               "label": "N'utilisez jamais un code PIN facile comme 0000, 123456, 55555555."
             },
             "5": {
-              "label": "Never share your PIN code with someone else. Not even with Ledger."
+              "label": "Ne donnez jamais votre code PIN à quelqu'un d'autre. Même pas à Ledger."
             },
             "6": {
               "label": "N'utilisez jamais un code PIN que vous n'avez pas choisi par vous-même."
@@ -829,17 +829,17 @@
       },
       "recoveryPhrase": {
         "title": "Phrase de récupération",
-        "desc": "Your recovery phrase is a secret list of 24 words that backs up your private keys. Your Nano generates a unique recovery phrase. Ledger does not keep a copy of it.",
+        "desc": "Votre phrase de récupération est une liste secrète de 24 mots qui sauvegarde vos clés privées. Votre Nano génère une phrase de récupération unique. \nLedger ne conserve pas de copie de celle-ci.",
         "cta": "Phrase de récupération",
-        "checkboxDesc": "I understand that if I lose this recovery phrase, I will not be able to access my crypto in case I lose access to my Nano."
+        "checkboxDesc": "Je comprends que si je perdais cette phrase de récupération, je ne serai pas en mesure d'accéder à mes cryptos au cas où je ne pourrais plus accéder à mon Nano."
       },
       "recoveryPhraseSetup": {
         "infoModal": {
           "title": "Comment fonctionne une phrase de récupération ?",
-          "desc": "Your recovery phrase works like a unique master key. Your Ledger device uses it to calculate private keys for every crypto asset you own.",
-          "desc_1": "To restore access to your crypto, any wallet can calculate the same private keys from your recovery phrase.",
+          "desc": "Votre phrase de récupération fonctionne comme une clé principale unique. Votre appareil Ledger l'utilise pour calculer les clés privées de chaque cryptoactif que vous possédez.",
+          "desc_1": "Pour récupérer l'accès à vos cryptomonnaies, n'importe quel wallet peu calculer les mêmes clés privées à partir de votre phrase de récupération.",
           "link": "Plus de détails sur la phrase de récupération",
-          "title_1": "What if I lose access to my Nano?",
+          "title_1": "Qu’arrive-t-il si je perds l'accès à mon Nano ?",
           "bullets": {
             "0": {
               "label": "Get a new hardware wallet."
