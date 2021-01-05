@@ -1,5 +1,5 @@
 /* @flow */
-import React, { useCallback, useState, useContext } from "react";
+import React, { useCallback, useState } from "react";
 import { View, StyleSheet, Linking } from "react-native";
 import uniq from "lodash/uniq";
 import { useSelector } from "react-redux";
@@ -39,7 +39,6 @@ import Modal from "./Modal";
 import Section, { styles as sectionStyles } from "./Section";
 import byFamiliesOperationDetails from "../../generated/operationDetails";
 import DefaultOperationDetailsExtra from "./Extra";
-import { context, STATUS } from "../WalletConnect/Provider";
 
 type HelpLinkProps = {
   event: string,
@@ -58,13 +57,18 @@ type Props = {
   account: AccountLike,
   parentAccount: ?Account,
   operation: Operation,
+  disableAllLinks?: Boolean,
 };
 
-export default function Content({ account, parentAccount, operation }: Props) {
+export default function Content({
+  account,
+  parentAccount,
+  operation,
+  disableAllLinks,
+}: Props) {
   const navigation = useNavigation();
   const { t } = useTranslation();
   const [isModalOpened, setIsModalOpened] = useState(false);
-  const wcContext = useContext(context);
 
   const onPress = useCallback(() => {
     navigation.navigate(NavigatorName.Accounts);
@@ -268,7 +272,7 @@ export default function Content({ account, parentAccount, operation }: Props) {
         />
       ) : null}
 
-      {wcContext.status !== STATUS.CONNECTED ? (
+      {!disableAllLinks ? (
         <Section
           title={t("operationDetails.account")}
           value={getAccountName(account)}

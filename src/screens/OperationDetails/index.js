@@ -24,6 +24,7 @@ const forceInset = { bottom: "always" };
 type RouteParams = {
   accountId: string,
   operation: Operation,
+  disableAllLinks?: Boolean,
 };
 
 type Props = {
@@ -71,6 +72,7 @@ export default function OperationDetails({ route }: Props) {
             account={account}
             parentAccount={parentAccount}
             operation={operation}
+            disableAllLinks={route.params?.disableAllLinks}
           />
         </View>
       </NavigationScrollView>
