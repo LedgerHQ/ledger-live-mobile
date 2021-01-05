@@ -3086,7 +3086,7 @@
         "confirm": "Confirm",
         "cancel": "Cancel",
         "address": "Address for {{currency}} account",
-        "warning": "You address was not confirmed on your Ledger Device. Please verify it for security"
+        "warning": "Your address was not confirmed on your Ledger device. Please verify it for security"
       }
     },
     "sell": {
