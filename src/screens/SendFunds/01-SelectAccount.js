@@ -12,7 +12,10 @@ import type {
   AccountLikeArray,
 } from "@ledgerhq/live-common/lib/types";
 
-import { isAccountEmpty } from "@ledgerhq/live-common/lib/account";
+import {
+  isAccountEmpty,
+  getAccountSpendableBalance,
+} from "@ledgerhq/live-common/lib/account";
 import {
   flattenAccountsEnforceHideEmptyTokenSelector,
   accountsSelector,
@@ -66,10 +69,7 @@ class SendFundsSelectAccount extends Component<Props, State> {
 
   renderItem = ({ item: result }: { item: SearchResult }) => {
     const { account, match } = result;
-    const balance =
-      account.type !== "ChildAccount" && account.spendableBalance
-        ? account.spendableBalance
-        : account.balance;
+    const balance = getAccountSpendableBalance(account);
     return (
       <View
         style={account.type === "Account" ? undefined : styles.tokenCardStyle}
