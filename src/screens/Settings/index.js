@@ -1,18 +1,14 @@
 /* @flow */
-import React, { useCallback, useState } from "react";
+import React, { useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, TouchableWithoutFeedback } from "react-native";
 import Icon from "react-native-vector-icons/dist/Feather";
 import Config from "react-native-config";
-import { NavigatorName, ScreenName } from "../../const";
-import {
-  accountsSelector,
-  cryptoCurrenciesSelector,
-} from "../../reducers/accounts";
+import { ScreenName } from "../../const";
+import { accountsSelector } from "../../reducers/accounts";
 import SettingsCard from "../../components/SettingsCard";
 import PoweredByLedger from "./PoweredByLedger";
-import Assets from "../../icons/Assets";
 import Accounts from "../../icons/Accounts";
 import LiveLogoIcon from "../../icons/LiveLogoIcon";
 import Atom from "../../icons/Atom";
@@ -20,6 +16,7 @@ import Help from "../../icons/Help";
 import Display from "../../icons/Display";
 import colors from "../../colors";
 import TrackScreen from "../../analytics/TrackScreen";
+import timer from "../../timer";
 import NavigationScrollView from "../../components/NavigationScrollView";
 
 type Props = {
@@ -28,16 +25,30 @@ type Props = {
 
 export default function Settings({ navigation }: Props) {
   const { t } = useTranslation();
-  const currencies = useSelector(cryptoCurrenciesSelector);
   const accounts = useSelector(accountsSelector);
 
   const [debugVisible, setDebugVisible] = useState(
     Config.FORCE_DEBUG_VISIBLE || false,
   );
+  const count = useRef(0);
+  const debugTimeout = useRef(onTimeout);
 
-  const onSetDebugVisible = useCallback(() => {
-    setDebugVisible(true);
-  }, []);
+  function onTimeout(): void {
+    timer.timeout(() => {
+      count.current = 0;
+    }, 1000);
+  }
+
+  function onDebugHiddenPress(): void {
+    if (debugTimeout) debugTimeout.current();
+    count.current++;
+    if (count.current > 6) {
+      count.current = 0;
+      setDebugVisible(!debugVisible);
+    } else {
+      onTimeout();
+    }
+  }
 
   return (
     <NavigationScrollView>
@@ -49,16 +60,6 @@ export default function Settings({ navigation }: Props) {
           icon={<Display size={16} color={colors.live} />}
           onClick={() => navigation.navigate(ScreenName.GeneralSettings)}
         />
-        {currencies.length > 0 && (
-          <SettingsCard
-            title={t("settings.cryptoAssets.title")}
-            desc={t("settings.cryptoAssets.desc")}
-            icon={<Assets size={16} color={colors.live} />}
-            onClick={() =>
-              navigation.navigate(NavigatorName.CryptoAssetsSettings)
-            }
-          />
-        )}
         {accounts.length > 0 && (
           <SettingsCard
             title={t("settings.accounts.title")}
@@ -93,7 +94,11 @@ export default function Settings({ navigation }: Props) {
             onClick={() => navigation.navigate(ScreenName.DebugSettings)}
           />
         ) : null}
-        <PoweredByLedger onTriggerDebug={onSetDebugVisible} />
+        <TouchableWithoutFeedback onPress={onDebugHiddenPress}>
+          <View>
+            <PoweredByLedger />
+          </View>
+        </TouchableWithoutFeedback>
       </View>
     </NavigationScrollView>
   );
