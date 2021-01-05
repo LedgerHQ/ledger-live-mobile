@@ -10,6 +10,7 @@ import DebugCrash from "../../screens/DebugCrash";
 import DebugHttpTransport from "../../screens/DebugHttpTransport";
 import DebugIcons from "../../screens/DebugIcons";
 import DebugLottie from "../../screens/DebugLottie.js";
+import DebugLogs from "../../screens/DebugLogs.js";
 import DebugStore from "../../screens/DebugStore";
 import DebugPlayground from "../../screens/DebugPlayground";
 import Settings from "../../screens/Settings";
@@ -187,6 +188,13 @@ export default function SettingsNavigator() {
         component={DebugHttpTransport}
         options={{
           title: "Debug Http Transport",
+        }}
+      />
+      <Stack.Screen
+        name={ScreenName.DebugLogs}
+        component={DebugLogs}
+        options={{
+          title: "Debug Logs",
         }}
       />
       <Stack.Screen
