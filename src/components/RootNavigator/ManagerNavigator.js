@@ -56,11 +56,6 @@ export default function ManagerNavigator() {
         component={ManagerMain}
         options={{ title: t("manager.appList.title") }}
       />
-      <Stack.Screen
-        name={NavigatorName.Onboarding}
-        component={OnboardingNavigator}
-        options={{ headerShown: false }}
-      />
     </Stack.Navigator>
   );
 }
