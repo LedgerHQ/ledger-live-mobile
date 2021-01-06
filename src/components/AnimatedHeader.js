@@ -115,7 +115,7 @@ export default function AnimatedHeaderView({
 
   return (
     <SafeAreaView
-      style={[styles.root, { backgroundColor: colors.white }, style]}
+      style={[styles.root, { backgroundColor: colors.background }, style]}
     >
       <Animated.View style={[styles.header]}>
         <View style={styles.topHeader}>

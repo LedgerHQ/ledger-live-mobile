@@ -17,7 +17,7 @@ function Footer({ url, urlWhatIsThis }: Props) {
     <View
       style={[
         styles.footer,
-        { borderColor: colors.lightFog, backgroundColor: colors.white },
+        { borderColor: colors.background, backgroundColor: colors.background },
       ]}
     >
       {urlWhatIsThis ? (

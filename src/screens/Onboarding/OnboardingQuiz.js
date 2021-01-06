@@ -57,7 +57,7 @@ const InfoView = ({
               event={`Onboarding - Quizz step ${index} ${
                 correct ? "correct" : "false"
               }`}
-              style={[styles.answer, { backgroundColor: colors.white }]}
+              style={[styles.answer, { backgroundColor: colors.card }]}
               onPress={() => onPress(correct)}
             >
               <LText
