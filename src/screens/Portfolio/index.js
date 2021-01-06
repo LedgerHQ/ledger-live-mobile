@@ -64,8 +64,8 @@ export default function PortfolioScreen({ navigation }: Props) {
     return item.id;
   }
 
-  const ListHeaderComponent = useCallback(() => {
-    return (
+  const ListHeaderComponent = useCallback(
+    () => (
       <>
         <GraphCardContainer
           counterValueCurrency={counterValueCurrency}
@@ -73,8 +73,9 @@ export default function PortfolioScreen({ navigation }: Props) {
           showGreeting={!accounts.every(isAccountEmpty)}
         />
       </>
-    );
-  }, [accounts, counterValueCurrency, portfolio]);
+    ),
+    [accounts, counterValueCurrency, portfolio],
+  );
 
   function ListEmptyComponent() {
     if (accounts.length === 0) {
