@@ -10,7 +10,7 @@ import Button from "../../components/Button";
 import AnimatedSvgBackground from "../../components/AnimatedSvgBackground";
 import colors from "../../colors";
 import { context } from "./Provider";
-import { NavigatorName, ScreenName } from "../../const";
+import { NavigatorName } from "../../const";
 import { navigate } from "../../rootnavigation";
 import ArrowRight from "../../icons/ArrowRight";
 

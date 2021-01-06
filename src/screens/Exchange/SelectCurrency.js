@@ -13,8 +13,8 @@ import {
   listSupportedCurrencies,
 } from "@ledgerhq/live-common/lib/currencies";
 import { useSelector } from "react-redux";
-import { accountsSelector } from "../../reducers/accounts";
 import type { Device } from "@ledgerhq/hw-transport/lib/Transport";
+import { accountsSelector } from "../../reducers/accounts";
 import { track } from "../../analytics/segment";
 import { TrackScreen } from "../../analytics";
 import FilteredSearchBar from "../../components/FilteredSearchBar";

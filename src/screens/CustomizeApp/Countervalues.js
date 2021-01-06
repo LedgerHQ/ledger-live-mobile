@@ -24,7 +24,7 @@ type Props = {
 
 type RouteParams = {};
 
-export default function Contervalues({ navigation, route }: Props) {
+export default function Contervalues({ navigation }: Props) {
   const ptContext = useContext(_ptContext);
   const supportedCV = useSelector(counterValueCurrencySelector);
 

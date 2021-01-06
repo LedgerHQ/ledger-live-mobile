@@ -22,7 +22,7 @@ type Props = {
 
 type RouteParams = {};
 
-export default function AddAccountsSuccess({ navigation, route }: Props) {
+export default function AddAccountsSuccess({ navigation }: Props) {
   const [secure1, setSecure1] = useState(true);
   const [secure2, setSecure2] = useState(true);
   const [pass1, setPass1] = useState("");

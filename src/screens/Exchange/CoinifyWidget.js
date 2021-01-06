@@ -290,7 +290,6 @@ export default function CoinifyWidget({
   function onDone(): void {
     if (ptContext.currentStep === "BUY_COINS") {
       setDone(true);
-      return;
     }
   }
 
@@ -364,7 +363,6 @@ export default function CoinifyWidget({
           ) : null}
         </View>
       </BottomModal>
-      
     </View>
   );
 }

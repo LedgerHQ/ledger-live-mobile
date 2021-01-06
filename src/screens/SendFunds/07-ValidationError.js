@@ -12,7 +12,7 @@ import {
   setCurrentCallRequestError,
 } from "../WalletConnect/Provider";
 import { ScreenName, NavigatorName } from "../../const";
-import { context as _ptContext, setStep } from "../ProductTour/Provider";
+import { context as _ptContext } from "../ProductTour/Provider";
 import { navigate } from "../../rootnavigation";
 
 const forceInset = { bottom: "always" };
