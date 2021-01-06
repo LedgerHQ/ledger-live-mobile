@@ -33,7 +33,7 @@ export default function ThemeSettingsRow() {
         alignedTop
       >
         <LText semiBold color="grey">
-          {theme}
+          <Trans i18nKey={`settings.display.themes.${theme}`} />
         </LText>
       </SettingsRow>
       <BottomModal isOpened={isOpen} onClose={onClose}>
