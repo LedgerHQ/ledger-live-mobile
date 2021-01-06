@@ -15,7 +15,7 @@ import IconNanoX from "../icons/NanoX";
 import Close from "../icons/Close";
 import ErrorBadge from "./ErrorBadge";
 import Circle from "./Circle";
-import { lighten, rgba } from "../colors";
+import { rgba } from "../colors";
 import BluetoothScanning from "./BluetoothScanning";
 import ErrorCrossBadge from "./ErrorCrossBadge";
 

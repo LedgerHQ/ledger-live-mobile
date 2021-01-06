@@ -95,7 +95,7 @@ function CurrencySuccess({ currency }: CurrencySuccessProps) {
         style={[
           styles.outer,
           {
-            backgroundColor: colors.background,
+            backgroundColor: colors.card,
           },
         ]}
       >
