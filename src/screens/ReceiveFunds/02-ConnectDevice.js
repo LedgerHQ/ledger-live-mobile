@@ -1,5 +1,11 @@
 // @flow
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+  useContext,
+} from "react";
 import { View, StyleSheet } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { useSelector } from "react-redux";
@@ -27,6 +33,7 @@ import NotSyncedWarning from "./NotSyncedWarning";
 import GenericErrorView from "../../components/GenericErrorView";
 import DeviceActionModal from "../../components/DeviceActionModal";
 import { renderVerifyAddress } from "../../components/DeviceAction/rendering";
+import { context as _ptContext } from "../ProductTour/Provider";
 
 const forceInset = { bottom: "always" };
 
@@ -46,6 +53,7 @@ const action = createAction(connectApp);
 
 export default function ConnectDevice({ navigation, route }: Props) {
   const { t } = useTranslation();
+  const ptContext = useContext(_ptContext);
   const { account, parentAccount } = useSelector(accountScreenSelector(route));
   const readOnlyModeEnabled = useSelector(readOnlyModeEnabledSelector);
   const [device, setDevice] = useState<?Device>();
@@ -134,14 +142,16 @@ export default function ConnectDevice({ navigation, route }: Props) {
       >
         <SelectDevice onSelect={setDevice} />
       </NavigationScrollView>
-      <View style={styles.footer}>
-        <Button
-          event="ReceiveWithoutDevice"
-          type="lightSecondary"
-          title={t("transfer.receive.withoutDevice")}
-          onPress={onSkipDevice}
-        />
-      </View>
+      {ptContext.currentStep !== "RECEIVE_COINS" ? (
+        <View style={styles.footer}>
+          <Button
+            event="ReceiveWithoutDevice"
+            type="lightSecondary"
+            title={t("transfer.receive.withoutDevice")}
+            onPress={onSkipDevice}
+          />
+        </View>
+      ) : null}
 
       <DeviceActionModal
         action={action}
