@@ -3198,7 +3198,10 @@
       "swapcoins": "Swap\nCoins",
       "coinsswapped": "Swap\nCoins",
       "customizeapp": "Customize\nApp",
-      "appcustomized": "Customize\nApp"
+      "appcustomized": "Customize\nApp",
+      "badgeBeginner": "BEGINNER",
+      "badgeInsider": "INSIDER",
+      "badgeMaster": "MASTER"
     },
     "stepstart": {
       "cta": "Let’s go",

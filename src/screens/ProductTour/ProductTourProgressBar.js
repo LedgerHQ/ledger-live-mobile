@@ -13,7 +13,9 @@ const PortfolioWidget = () => {
 
   return (
     <View style={styles.root}>
-      <View style={[styles.fill, { width: `${(progress * 100) / total}%` }]} />
+      <View
+        style={[styles.fill, { width: `${(progress * 100) / total || 3}%` }]}
+      />
       <View style={[styles.separator, { left: "33%", opacity }]} />
       <View style={[styles.separator, { right: "33%", opacity }]} />
     </View>

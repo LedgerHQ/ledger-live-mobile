@@ -17,6 +17,7 @@ export default function ProductTourNavigator() {
     backgroundColor: colors.live,
     shadowOpacity: 0,
     borderBottomWidth: 0,
+    elevation: 0,
   };
 
   return (

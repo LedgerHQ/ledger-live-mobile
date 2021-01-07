@@ -188,31 +188,34 @@ const Step = ({
       delayLongPress={2000}
       disabled={isComplete(step)}
     >
-      {isComplete(step) || isAccessible(step) ? (
-        <View style={styles.checkContainer}>
-          <View
-            style={[
-              styles.checkboxContainer,
-              isComplete(step) ? styles.checkboxContainerChecked : null,
-            ]}
-          >
-            {isComplete(step) ? (
+      <View style={styles.stepHeader}>
+        {!isComplete(step) ? (
+          <LText semiBold style={styles.stepNumber}>
+            {Object.keys(STEPS).indexOf(step) + 1}.
+          </LText>
+        ) : null}
+        {isComplete(step) ? (
+          <View style={styles.checkContainer}>
+            <View
+              style={[
+                styles.checkboxContainer,
+                styles.checkboxContainerChecked,
+              ]}
+            >
               <Check size={10} color={colors.ledgerGreen} />
-            ) : null}
-          </View>
-          {isComplete(step) ? (
-            <LText style={styles.completedText}>
+            </View>
+            <LText bold style={styles.completedText}>
               <Trans i18nKey="producttour.menu.complete" />
             </LText>
-          ) : null}
-        </View>
-      ) : null}
-      {!isAccessible(step) && !isComplete(step) ? (
-        <View style={styles.lockContainer}>
-          <Lock size={12} color={colors.white} />
-        </View>
-      ) : null}
-      <LText style={styles.stepTitle}>
+          </View>
+        ) : null}
+        {!isAccessible(step) && !isComplete(step) ? (
+          <View style={styles.lockContainer}>
+            <Lock size={12} color={colors.white} />
+          </View>
+        ) : null}
+      </View>
+      <LText semiBold style={styles.stepTitle}>
         <Trans i18nKey={stepTitles[step][isComplete(step) ? 1 : 0]} />
       </LText>
       <Image
@@ -269,6 +272,19 @@ const ProductTourMenu = ({ navigation }: Props) => {
           />
         </LText>
         <ProductTourProgressBar />
+        <View style={styles.badge}>
+          <LText style={styles.badgeTitle} bold>
+            <Trans
+              i18nKey={
+                ptContext.completedSteps.length <= 1
+                  ? "producttour.menu.badgeBeginner"
+                  : ptContext.completedSteps.length > 1 && ptContext.completedSteps.length <= 4
+                  ? "producttour.menu.badgeInsider"
+                  : "producttour.menu.badgeMaster"
+              }
+            />
+          </LText>
+        </View>
       </View>
       <SafeAreaView style={{ flex: 1 }} forceInset={forceInset}>
         <ScrollView style={{ flex: 1 }} contentContainerStyle={styles.root}>
@@ -298,15 +314,28 @@ const ProductTourMenu = ({ navigation }: Props) => {
 };
 
 const styles = StyleSheet.create({
+  badge: {
+    marginTop: 16,
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 4,
+    backgroundColor: colors.ledgerGreen,
+    alignSelf: "flex-start",
+  },
+  badgeTitle: {
+    color: colors.white,
+    fontSize: 10,
+  },
   image: {
     position: "absolute",
   },
   checkContainer: {
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: 16,
   },
   checkboxContainer: {
+    marginTop: 2,
+    marginBottom: 2,
     height: 16,
     width: 16,
     borderRadius: 16,
@@ -324,8 +353,11 @@ const styles = StyleSheet.create({
     color: colors.white,
     fontSize: 8,
   },
-  lockContainer: {
+  lockContainer: {},
+  stepHeader: {
     marginBottom: 20,
+    flexDirection: "row",
+    alignItems: "center",
   },
   root: {
     marginHorizontal: 12,
@@ -357,7 +389,12 @@ const styles = StyleSheet.create({
   },
   stepTitle: {
     color: colors.white,
-    fontSize: 22,
+    fontSize: 18,
+  },
+  stepNumber: {
+    color: colors.white,
+    fontSize: 16,
+    marginRight: 11,
   },
   header: {
     backgroundColor: colors.live,
