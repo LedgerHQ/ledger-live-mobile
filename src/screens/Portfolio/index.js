@@ -7,10 +7,12 @@ import Animated from "react-native-reanimated";
 import { createNativeWrapper } from "react-native-gesture-handler";
 import type { SectionBase } from "react-native/Libraries/Lists/SectionList";
 import type { Operation } from "@ledgerhq/live-common/lib/types";
+import { useFocusEffect } from "@react-navigation/native";
 import {
   groupAccountsOperationsByDay,
   isAccountEmpty,
 } from "@ledgerhq/live-common/lib/account";
+import { useRefreshAccountsOrdering } from "../../actions/general";
 import colors from "../../colors";
 import {
   accountsSelector,
@@ -54,6 +56,9 @@ export default function PortfolioScreen({ navigation }: Props) {
   const allAccounts = useSelector(flattenAccountsSelector);
   const counterValueCurrency = useSelector(counterValueCurrencySelector);
   const portfolio = usePortfolio();
+
+  const refreshAccountsOrdering = useRefreshAccountsOrdering();
+  useFocusEffect(refreshAccountsOrdering);
 
   const [opCount, setOpCount] = useState(50);
   const scrollY = useRef(new Animated.Value(0)).current;

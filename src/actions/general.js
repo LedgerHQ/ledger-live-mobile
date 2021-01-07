@@ -12,7 +12,6 @@ import {
   useCountervaluesPolling,
   useTrackingPairForAccounts,
 } from "@ledgerhq/live-common/lib/countervalues/react";
-import { pairId } from "@ledgerhq/live-common/lib/countervalues/helpers";
 import { reorderAccounts } from "../actions/accounts";
 import { accountsSelector } from "../reducers/accounts";
 import {
@@ -73,24 +72,13 @@ export function useRefreshAccountsOrdering() {
 export function useRefreshAccountsOrderingEffect({
   onMount = false,
   onUnmount = false,
-  onUpdate = false,
 }: {
   onMount?: boolean,
   onUnmount?: boolean,
-  onUpdate?: boolean,
 }) {
   const refreshAccountsOrdering = useRefreshAccountsOrdering();
 
-  const didMount = useRef(false);
   useEffect(() => {
-    if (didMount.current) {
-      if (onUpdate) {
-        refreshAccountsOrdering();
-      }
-    } else {
-      didMount.current = true;
-    }
-
     if (onMount) {
       refreshAccountsOrdering();
     }
@@ -100,7 +88,7 @@ export function useRefreshAccountsOrderingEffect({
         refreshAccountsOrdering();
       }
     };
-  }, [onMount, onUnmount, onUpdate, refreshAccountsOrdering]);
+  }, [onMount, onUnmount, refreshAccountsOrdering]);
 }
 
 export function useCleanCache() {
