@@ -278,7 +278,8 @@ const ProductTourMenu = ({ navigation }: Props) => {
               i18nKey={
                 ptContext.completedSteps.length <= 1
                   ? "producttour.menu.badgeBeginner"
-                  : ptContext.completedSteps.length > 1 && ptContext.completedSteps.length <= 4
+                  : ptContext.completedSteps.length > 1 &&
+                    ptContext.completedSteps.length <= 4
                   ? "producttour.menu.badgeInsider"
                   : "producttour.menu.badgeMaster"
               }
