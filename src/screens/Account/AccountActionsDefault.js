@@ -16,7 +16,7 @@ export const SendActionDefault = ({
 }: {
   onPress: () => void,
   style?: *,
-  disabled?: Boolean
+  disabled?: Boolean,
 }) => (
   <Button
     event="AccountSend"
