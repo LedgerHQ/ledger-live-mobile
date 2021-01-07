@@ -87,9 +87,9 @@ const PortfolioWidget = () => {
         }}
         title={
           started ? (
-            <Trans i18nKey="producttour.widget.cta" />
-          ) : (
             <Trans i18nKey="producttour.widget.startedcta" />
+          ) : (
+            <Trans i18nKey="producttour.widget.cta" />
           )
         }
         IconRight={ArrowRight}
