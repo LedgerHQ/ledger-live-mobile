@@ -362,7 +362,7 @@ const styles = StyleSheet.create({
   header: {
     backgroundColor: colors.live,
     paddingHorizontal: 16,
-    paddingTop: 50,
+    paddingTop: 20,
     paddingBottom: 43,
   },
   title: {
