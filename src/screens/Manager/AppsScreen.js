@@ -1,5 +1,12 @@
 // @flow
-import React, { useState, useCallback, useMemo, useRef, memo } from "react";
+import React, {
+  useState,
+  useCallback,
+  useMemo,
+  useRef,
+  memo,
+  useContext,
+} from "react";
 import {
   View,
   StyleSheet,
@@ -34,6 +41,8 @@ import AppsList from "./AppsList";
 import AppUpdateAll from "./AppsList/AppUpdateAll";
 
 import InstallProgressBar from "./AppsList/InstallProgressBar";
+
+import { context as _ptContext } from "../ProductTour/Provider";
 
 const { interpolate, Extrapolate } = Animated;
 const { width, height } = Dimensions.get("screen");
@@ -73,6 +82,7 @@ const AppsScreen = ({
   tab,
 }: Props) => {
   const distribution = distribute(state);
+  const ptContext = useContext(_ptContext);
 
   const listRef = useRef();
 
@@ -89,7 +99,9 @@ const AppsScreen = ({
     },
   ]);
 
-  const [appFilter, setFilter] = useState("all");
+  const [appFilter, setFilter] = useState(
+    ptContext.currentStep === "INSTALL_CRYPTO" ? "supported" : "all",
+  );
   const [sort, setSort] = useState("marketcap");
   const [order, setOrder] = useState("desc");
 
