@@ -55,7 +55,7 @@ export function InfoStepView({
   sceneColors: string[],
 }) {
   const { colors } = useTheme();
-  const [primaryColor, accentColor, textColor, bulletColor] = sceneColors;
+  const [, accentColor, textColor, bulletColor, , , buttonColor] = sceneColors;
   const [isInfoModalOpen, setInfoModalOpen] = useState(false);
 
   const onOpenInfoModal = useCallback(() => setInfoModalOpen(true), []);
@@ -187,7 +187,7 @@ export function InfoStepView({
               semiBold
               style={[
                 styles.ctaLabel,
-                { color: isDisabled ? "rgba(0,0,0,0.3)" : primaryColor },
+                { color: isDisabled ? "rgba(0,0,0,0.3)" : buttonColor },
               ]}
             >
               {ctaText}

@@ -23,7 +23,6 @@ import { deviceNames } from "../../../wording";
 import commonStyles from "../styles";
 
 import welcomeBg from "../assets/welcomeIllu/1.png";
-import welcomeBgDark from "../assets/welcomeIllu/1_dark.png";
 import welcomeLogoLayer1 from "../assets/welcomeIllu/2.png";
 import welcomeLogoLayer2 from "../assets/welcomeIllu/3.png";
 import welcomeLogoLayer3 from "../assets/welcomeIllu/4.png";
@@ -40,7 +39,7 @@ const hitSlop = {
 };
 
 function OnboardingStepWelcome({ navigation }: *) {
-  const { colors, dark } = useTheme();
+  const { colors } = useTheme();
   const buy = useCallback(() => Linking.openURL(urls.buyNanoX), []);
 
   const next = useCallback(
@@ -118,11 +117,7 @@ function OnboardingStepWelcome({ navigation }: *) {
     <View style={[styles.root, { backgroundColor: colors.white }]}>
       <View style={styles.header} />
       <View style={styles.logo}>
-        <Image
-          style={[styles.bgImage]}
-          resizeMode="cover"
-          source={dark ? welcomeBgDark : welcomeBg}
-        />
+        <Image style={[styles.bgImage]} resizeMode="cover" source={welcomeBg} />
         <AnimatedImg
           style={[
             styles.bgImageLayer,

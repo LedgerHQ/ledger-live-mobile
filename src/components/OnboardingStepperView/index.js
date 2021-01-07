@@ -89,6 +89,7 @@ export default function OnboardingStepperView({
           "#fff",
           "rgba(255,255,255,0.3)",
           "#587ED4",
+          colors.live,
         ]
       : [
           colors.card,
@@ -97,6 +98,7 @@ export default function OnboardingStepperView({
           colors.lightLive,
           "rgba(100, 144, 241, 0.3)",
           "rgba(67, 133, 240, 0.08)",
+          "#fff",
         ];
 
   const renderScenes = SceneMap(
