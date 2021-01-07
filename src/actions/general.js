@@ -2,7 +2,6 @@
 import { useMemo, useCallback, useEffect, useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  nestedSortAccounts,
   flattenSortAccounts,
   sortAccountsComparatorFromOrder,
 } from "@ledgerhq/live-common/lib/account";
@@ -11,9 +10,10 @@ import {
   useDistribution as useDistributionCommon,
   useCalculateCountervalueCallback as useCalculateCountervalueCallbackCommon,
   useCountervaluesPolling,
+  useTrackingPairForAccounts,
 } from "@ledgerhq/live-common/lib/countervalues/react";
-import { inferTrackingPairForAccounts } from "@ledgerhq/live-common/lib/countervalues/logic";
 import { pairId } from "@ledgerhq/live-common/lib/countervalues/helpers";
+import { reorderAccounts } from "../actions/accounts";
 import { accountsSelector } from "../reducers/accounts";
 import {
   counterValueCurrencySelector,
@@ -41,16 +41,6 @@ export function useSortAccountsComparator() {
   return sortAccountsComparatorFromOrder(accounts, calc);
 }
 
-export function useNestedSortAccounts() {
-  const accounts = useSelector(accountsSelector);
-  const comparator = useSortAccountsComparator();
-
-  return useMemo(() => nestedSortAccounts(accounts, comparator), [
-    accounts,
-    comparator,
-  ]);
-}
-
 export function useFlattenSortAccounts(options?: FlattenAccountsOptions) {
   const accounts = useSelector(accountsSelector);
   const comparator = useSortAccountsComparator();
@@ -62,7 +52,7 @@ export function useFlattenSortAccounts(options?: FlattenAccountsOptions) {
 }
 
 export function useRefreshAccountsOrdering() {
-  const payload = useNestedSortAccounts();
+  const comparator = useSortAccountsComparator();
   const dispatch = useDispatch();
   const [isRefreshing, setIsRefreshing] = useState(false);
 
@@ -71,12 +61,9 @@ export function useRefreshAccountsOrdering() {
     if (!isRefreshing) {
       return;
     }
-    dispatch({
-      type: "SET_ACCOUNTS",
-      payload,
-    });
+    dispatch(reorderAccounts(comparator));
     setIsRefreshing(false);
-  }, [isRefreshing, dispatch, payload]);
+  }, [isRefreshing, dispatch, comparator]);
 
   return useCallback(() => {
     setIsRefreshing(true);
@@ -141,16 +128,8 @@ export function useUserSettings() {
   );
 }
 
-export function useTrackingPairIds(): string[] {
-  const trackingPairs = useTrackingPairs();
-  return useMemo(() => trackingPairs.map(p => pairId(p)), [trackingPairs]);
-}
-
 export function useTrackingPairs() {
   const accounts = useSelector(accountsSelector);
   const countervalue = useSelector(counterValueCurrencySelector);
-  return useMemo(() => inferTrackingPairForAccounts(accounts, countervalue), [
-    accounts,
-    countervalue,
-  ]);
+  return useTrackingPairForAccounts(accounts, countervalue);
 }
