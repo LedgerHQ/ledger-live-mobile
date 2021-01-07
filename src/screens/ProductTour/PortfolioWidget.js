@@ -44,12 +44,14 @@ const PortfolioWidget = () => {
 
       {started ? (
         <>
-          <TouchableOpacity
-            style={styles.dismiss}
-            onPress={() => dismiss(true)}
-          >
-            <Close size={16} color={colors.white} />
-          </TouchableOpacity>
+          {ptContext.completedSteps.length < Object.keys(STEPS).length ? (
+            <TouchableOpacity
+              style={styles.dismiss}
+              onPress={() => dismiss(true)}
+            >
+              <Close size={16} color={colors.white} />
+            </TouchableOpacity>
+          ) : null}
           <LText style={styles.title} bold>
             <Trans i18nKey="producttour.widget.startedtitle" />
           </LText>
@@ -81,12 +83,17 @@ const PortfolioWidget = () => {
           if (!started) {
             return setStarted(true);
           }
+          if (ptContext.completedSteps.length === Object.keys(STEPS).length) {
+            return dismiss(true);
+          }
           navigate(NavigatorName.ProductTour, {
             screen: ScreenName.ProductTourMenu,
           });
         }}
         title={
-          started ? (
+          ptContext.completedSteps.length === Object.keys(STEPS).length ? (
+            <Trans i18nKey="producttour.widget.completecta" />
+          ) : started ? (
             <Trans i18nKey="producttour.widget.startedcta" />
           ) : (
             <Trans i18nKey="producttour.widget.cta" />

@@ -3180,7 +3180,8 @@
       "startedtitle2_plural": "Only {{ count }} steps to go",
       "startedtitlecomplete": "You’re a pro!",
       "cta": "Start the tour",
-      "startedcta": "Continue"
+      "startedcta": "Continue",
+      "completecta": "Complete tour"
     },
     "menu": {
       "title": "First, let’s learn\nLedger basics",
