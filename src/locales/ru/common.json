@@ -653,10 +653,10 @@
   },
   "onboarding": {
     "stepWelcome": {
-      "title": "Welcome to Ledger Live",
-      "subtitle": "Safely manage your cryptos from your smartphone.",
-      "start": "Get started",
-      "noDevice": "No device?",
+      "title": "Добро пожаловать в Ledger!",
+      "subtitle": "Управляйте криптовалютами со смартфона в полной безопасности.",
+      "start": "Настройте",
+      "noDevice": "Нет устройства Ledger?",
       "buy": "Buy a {{fullDeviceName}}"
     },
     "stepLanguage": {
@@ -665,17 +665,17 @@
       "warning": {
         "title": "Get started in English",
         "cta": "Got it!",
-        "desc": "We are introducing additional languages in order to help your onboarding with Ledger. Please be aware that the rest of the Ledger experience is currently only available in English."
+        "desc": "Для Вашего удобства процесс настройки Ledger переведен на различные языки. Внимание: остальная часть платформы пока доступна только на английском языке."
       }
     },
     "stepSelectDevice": {
-      "title": "What’s your device?",
+      "title": "Какое у вас устройство?",
       "nanoS": "Nano S",
       "nanoX": "Nano X",
       "blue": "Blue"
     },
     "stepUseCase": {
-      "title": "Hello!",
+      "title": "Здравствуйте!",
       "or": "Or",
       "firstUse": {
         "title": "First time using this Nano?",
@@ -2392,8 +2392,8 @@
       "description": "Set up Ledger Live with your Ledger Nano X to install apps, create accounts and manage  secure transactions everywhere you go.",
       "question": "Got your Ledger Nano X?",
       "button": "Start Nano X onboarding",
-      "noDevice": "No device?",
-      "buy": "Buy a Ledger Nano X"
+      "noDevice": "Нет устройства Ledger?",
+      "buy": "Купите Ledger Nano X"
     },
     "appList": {
       "title": "App catalog",
@@ -3072,11 +3072,11 @@
     "memo": "Memo"
   },
   "Terms": {
-    "title": "Terms of Use",
+    "title": "Условия пользования",
     "read": "Read the Terms of Use",
     "switchLabelPrivacy": "I have read and agree with the <1>Privacy Policy</1>",
     "switchLabel": "I have read and agree with the <1>Terms of Service</1>",
-    "cta": "Enter Ledger App"
+    "cta": "Войти в приложение Ledger"
   },
   "exchange": {
     "buy": {
