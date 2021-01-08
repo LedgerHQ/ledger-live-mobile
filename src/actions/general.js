@@ -1,5 +1,5 @@
 // @flow
-import { useMemo, useCallback, useEffect, useState, useRef } from "react";
+import { useMemo, useCallback, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   flattenSortAccounts,
