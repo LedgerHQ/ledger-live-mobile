@@ -12,7 +12,7 @@ import {
   useCountervaluesPolling,
   useTrackingPairForAccounts,
 } from "@ledgerhq/live-common/lib/countervalues/react";
-import { reorderAccounts } from "../actions/accounts";
+import { reorderAccounts } from "./accounts";
 import { accountsSelector } from "../reducers/accounts";
 import {
   counterValueCurrencySelector,
