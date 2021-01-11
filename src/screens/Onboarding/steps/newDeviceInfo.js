@@ -137,7 +137,7 @@ function OnboardingStepNewDevice({ navigation, route }: *) {
               style={[
                 styles.dot,
                 index >= k
-                  ? { backgroundColor: colors.white }
+                  ? { backgroundColor: "#FFF" }
                   : { backgroundColor: colors.translucentGrey },
               ]}
               onPress={() => setIndex(k)}

@@ -170,7 +170,7 @@ function OnboardingQuizz({ navigation, route }: *) {
               style={[
                 styles.dot,
                 index >= i
-                  ? { backgroundColor: colors.white }
+                  ? { backgroundColor: "#FFF" }
                   : { backgroundColor: colors.translucentGrey },
               ]}
             >
