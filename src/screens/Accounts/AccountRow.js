@@ -1,8 +1,7 @@
 // @flow
-import React, { useState, useCallback } from "react";
-import { View, StyleSheet, Platform } from "react-native";
+import React, { useState, useCallback, useMemo } from "react";
+import { View, StyleSheet, Platform, TouchableHighlight } from "react-native";
 import { Trans } from "react-i18next";
-import { RectButton } from "react-native-gesture-handler";
 import useEnv from "@ledgerhq/live-common/lib/hooks/useEnv";
 import { useAccountSyncState } from "@ledgerhq/live-common/lib/bridge/react";
 import {
@@ -26,6 +25,7 @@ import AccountSyncStatus from "./AccountSyncStatus";
 import Button from "../../components/Button";
 import SubAccountRow from "../../components/SubAccountRow";
 import perFamilySubAccountList from "../../generated/SubAccountList";
+import { rgba } from "../../colors";
 
 type Props = {
   account: Account,
@@ -93,6 +93,8 @@ const AccountRow = ({
 
   const hasSpecificTokenWording = specific && specific.hasSpecificTokenWording;
 
+  const underlayColor = useMemo(() => rgba(colors.darkBlue, 0.05), [colors]);
+
   return (
     <View style={styles.root}>
       <View
@@ -110,9 +112,9 @@ const AccountRow = ({
           },
         ]}
       >
-        <RectButton
+        <TouchableHighlight
           style={styles.button}
-          underlayColor={colors.grey}
+          underlayColor={underlayColor}
           onPress={onAccountPress}
         >
           <View accessible style={styles.innerContainer}>
@@ -154,7 +156,7 @@ const AccountRow = ({
               </View>
             </View>
           </View>
-        </RectButton>
+        </TouchableHighlight>
         {subAccounts.length !== 0 ? (
           <>
             <View
