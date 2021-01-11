@@ -24,7 +24,7 @@ export default function EmptyState({
 }: EmptyStateProps) {
   const { colors } = useTheme();
   return (
-    <View style={[styles.emptyStateRoot, { backgroundColor: colors.white }]}>
+    <View style={[styles.emptyStateRoot, { backgroundColor: colors.card }]}>
       <Image resizeMode="contain" style={styles.image} source={compoundImg} />
       <LText semiBold style={styles.title}>
         {title}

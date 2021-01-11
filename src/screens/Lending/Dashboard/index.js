@@ -20,7 +20,7 @@ export default function Dashboard() {
   const rates = listCurrentRates();
 
   return (
-    <SafeAreaView style={[styles.root, { backgroundColor: colors.card }]}>
+    <SafeAreaView style={[styles.root, { backgroundColor: colors.background }]}>
       <TrackScreen category="Lend" />
       <LendingWarnings />
       <ScrollView style={styles.body}>

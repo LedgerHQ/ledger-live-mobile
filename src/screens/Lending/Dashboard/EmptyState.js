@@ -11,7 +11,7 @@ import { urls } from "../../../config/urls";
 const EmptyState = () => {
   const { colors } = useTheme();
   return (
-    <View style={[styles.root, { backgroundColor: colors.background }]}>
+    <View style={[styles.root, { backgroundColor: colors.card }]}>
       <LText style={styles.title} color="grey">
         <Trans i18nKey="transfer.lending.dashboard.emptySateDescription" />
       </LText>

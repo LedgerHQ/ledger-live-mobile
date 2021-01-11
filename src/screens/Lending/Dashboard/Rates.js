@@ -40,7 +40,7 @@ const Row = ({
 
   return (
     <Touchable
-      style={[styles.row, { backgroundColor: colors.white }]}
+      style={[styles.row, { backgroundColor: colors.card }]}
       onPress={() => onPress(token)}
       event="Page Lend deposit"
       eventProperties={{ currency: token.id }}

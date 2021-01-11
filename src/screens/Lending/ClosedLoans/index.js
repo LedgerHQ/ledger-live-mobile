@@ -25,7 +25,7 @@ export default function ClosedLoans() {
   }, [navigation]);
 
   return (
-    <SafeAreaView style={[styles.root, { backgroundColor: colors.card }]}>
+    <SafeAreaView style={[styles.root, { backgroundColor: colors.background }]}>
       <TrackScreen category="Lend" name="Closed Positions" />
       <View style={styles.body}>
         <View style={[styles.rows, { backgroundColor: colors.white }]}>
