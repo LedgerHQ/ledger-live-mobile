@@ -124,9 +124,7 @@ const History = () => {
         sections={sections}
         style={styles.sectionList}
         contentContainerStyle={styles.contentContainer}
-        ListEmptyComponent={_ => {
-          return <EmptyState />;
-        }}
+        ListEmptyComponent={_ => <EmptyState />}
         refreshControl={
           <RefreshControl
             refreshing={isRefreshing}
@@ -146,13 +144,11 @@ const History = () => {
         }
         keyExtractor={({ swapId }) => swapId}
         renderItem={renderItem}
-        renderSectionHeader={({ section }) => {
-          return (
-            <LText semiBold style={styles.section} color="grey">
-              {section.day.toDateString()}
-            </LText>
-          );
-        }}
+        renderSectionHeader={({ section }) => (
+          <LText semiBold style={styles.section} color="grey">
+            {section.day.toDateString()}
+          </LText>
+        )}
         showsVerticalScrollIndicator={false}
         stickySectionHeadersEnabled={false}
       />

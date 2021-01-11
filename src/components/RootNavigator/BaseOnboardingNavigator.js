@@ -66,20 +66,18 @@ export default function BaseOnboardingNavigator() {
       <Stack.Screen
         name={ScreenName.PairDevices}
         component={PairDevices}
-        options={({ navigation, route }) => {
-          return {
-            title: null,
-            headerRight: () => (
-              <ErrorHeaderInfo
-                route={route}
-                navigation={navigation}
-                colors={colors}
-              />
-            ),
-            headerShown: true,
-            headerStyle: styles.headerNoShadow,
-          };
-        }}
+        options={({ navigation, route }) => ({
+          title: null,
+          headerRight: () => (
+            <ErrorHeaderInfo
+              route={route}
+              navigation={navigation}
+              colors={colors}
+            />
+          ),
+          headerShown: true,
+          headerStyle: styles.headerNoShadow,
+        })}
       />
       <Stack.Screen
         name={ScreenName.EditDeviceName}

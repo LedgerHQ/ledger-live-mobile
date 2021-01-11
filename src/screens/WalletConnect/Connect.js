@@ -30,15 +30,13 @@ import HeaderRightClose from "../../components/HeaderRightClose";
 import { TrackScreen } from "../../analytics";
 import AccountHeaderTitle from "../Account/AccountHeaderTitle";
 
-const DottedLine = () => {
-  return (
-    <View style={styles.dottedLineContainer}>
-      {_.map(_.range(0, 6), i => (
-        <View style={styles.dot} key={i} />
-      ))}
-    </View>
-  );
-};
+const DottedLine = () => (
+  <View style={styles.dottedLineContainer}>
+    {_.map(_.range(0, 6), i => (
+      <View style={styles.dot} key={i} />
+    ))}
+  </View>
+);
 
 type Props = {
   navigation: any,

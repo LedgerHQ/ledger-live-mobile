@@ -76,13 +76,12 @@ const SectionHeader = ({ section: { title } }: *) => (
   </View>
 );
 
-const Separator = ({ section: { footerSeparator } }: *) => {
-  return footerSeparator ? (
+const Separator = ({ section: { footerSeparator } }: *) =>
+  footerSeparator ? (
     <View style={styles.paddingLine}>
       <View style={[styles.separator, { backgroundColor: "#EEEEEE" }]} />
     </View>
   ) : null;
-};
 
 const initialFilterState = {
   filters: null,

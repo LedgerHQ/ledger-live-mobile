@@ -7,13 +7,13 @@ import Animated from "react-native-reanimated";
 import { createNativeWrapper } from "react-native-gesture-handler";
 import type { SectionBase } from "react-native/Libraries/Lists/SectionList";
 import type { Operation } from "@ledgerhq/live-common/lib/types";
+import { useFocusEffect, useTheme } from "@react-navigation/native";
 import {
   groupAccountsOperationsByDay,
   isAccountEmpty,
 } from "@ledgerhq/live-common/lib/account";
 
-import { useTheme } from "@react-navigation/native";
-
+import { useRefreshAccountsOrdering } from "../../actions/general";
 import {
   accountsSelector,
   flattenAccountsSelector,
@@ -57,6 +57,9 @@ export default function PortfolioScreen({ navigation }: Props) {
   const counterValueCurrency = useSelector(counterValueCurrencySelector);
   const portfolio = usePortfolio();
 
+  const refreshAccountsOrdering = useRefreshAccountsOrdering();
+  useFocusEffect(refreshAccountsOrdering);
+
   const [opCount, setOpCount] = useState(50);
   const scrollY = useRef(new Animated.Value(0)).current;
   const ref = useRef();
@@ -67,8 +70,8 @@ export default function PortfolioScreen({ navigation }: Props) {
     return item.id;
   }
 
-  const ListHeaderComponent = useCallback(() => {
-    return (
+  const ListHeaderComponent = useCallback(
+    () => (
       <>
         <GraphCardContainer
           counterValueCurrency={counterValueCurrency}
@@ -76,8 +79,9 @@ export default function PortfolioScreen({ navigation }: Props) {
           showGreeting={!accounts.every(isAccountEmpty)}
         />
       </>
-    );
-  }, [accounts, counterValueCurrency, portfolio]);
+    ),
+    [accounts, counterValueCurrency, portfolio],
+  );
 
   function ListEmptyComponent() {
     if (accounts.length === 0) {

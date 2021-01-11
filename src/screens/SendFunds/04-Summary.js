@@ -6,7 +6,10 @@ import SafeAreaView from "react-native-safe-area-view";
 import { useSelector } from "react-redux";
 import { Trans } from "react-i18next";
 import type { Transaction } from "@ledgerhq/live-common/lib/types";
-import { getMainAccount } from "@ledgerhq/live-common/lib/account";
+import {
+  getMainAccount,
+  getAccountCurrency,
+} from "@ledgerhq/live-common/lib/account";
 import { NotEnoughGas } from "@ledgerhq/errors";
 import { useTheme } from "@react-navigation/native";
 import { accountScreenSelector } from "../../reducers/accounts";
@@ -15,6 +18,7 @@ import { TrackScreen } from "../../analytics";
 import { useTransactionChangeFromNavigation } from "../../logic/screenTransactionHooks";
 import Button from "../../components/Button";
 import LText from "../../components/LText";
+import InfoBox from "../../components/InfoBox";
 import TranslatedError from "../../components/TranslatedError";
 import SendRowsCustom from "../../components/SendRowsCustom";
 import SendRowsFee from "../../components/SendRowsFee";
@@ -162,6 +166,10 @@ function SendSummary({ navigation, route: initialRoute }: Props) {
   const { transaction: transactionError } = errors;
   const error = status.errors[Object.keys(status.errors)[0]];
   const mainAccount = getMainAccount(account, parentAccount);
+  const currency = getAccountCurrency(account);
+  const hasNonEmptySubAccounts =
+    account.type === "Account" &&
+    (account.subAccounts || []).some(subAccount => subAccount.balance.gt(0));
 
   return (
     <SafeAreaView
@@ -170,6 +178,18 @@ function SendSummary({ navigation, route: initialRoute }: Props) {
     >
       <TrackScreen category="SendFunds" name="Summary" />
       <NavigationScrollView style={styles.body}>
+        {transaction.useAllAmount && hasNonEmptySubAccounts ? (
+          <View style={styles.infoBox}>
+            <InfoBox>
+              <Trans
+                i18nKey="send.summary.subaccountsWarning"
+                values={{
+                  currency: currency.name,
+                }}
+              />
+            </InfoBox>
+          </View>
+        ) : null}
         <SummaryFromSection account={account} parentAccount={parentAccount} />
         <VerticalConnector
           style={[styles.verticalConnector, { borderColor: colors.lightFog }]}
@@ -270,6 +290,9 @@ const styles = StyleSheet.create({
   root: {
     flex: 1,
     flexDirection: "column",
+  },
+  infoBox: {
+    marginTop: 16,
   },
   body: {
     flex: 1,

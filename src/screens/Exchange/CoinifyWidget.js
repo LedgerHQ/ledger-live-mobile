@@ -192,33 +192,35 @@ export default function CoinifyWidget({
     }
   }, []);
 
-  const setTransactionId = useCallback(txId => {
-    return new Promise(resolve => {
-      resolvePromise = resolve;
-      if (webView.current) {
-        webView.current.postMessage(
-          JSON.stringify({
-            type: "event",
-            event: "settings.partner-context-changed",
-            context: {
-              partnerContext: {
-                nonce: txId,
+  const setTransactionId = useCallback(
+    txId =>
+      new Promise(resolve => {
+        resolvePromise = resolve;
+        if (webView.current) {
+          webView.current.postMessage(
+            JSON.stringify({
+              type: "event",
+              event: "settings.partner-context-changed",
+              context: {
+                partnerContext: {
+                  nonce: txId,
+                },
               },
-            },
-          }),
-        );
-        webView.current.postMessage(
-          JSON.stringify({
-            type: "event",
-            event: "trade.confirm-trade-prepared",
-            context: {
-              confirmed: true,
-            },
-          }),
-        );
-      }
-    });
-  }, []);
+            }),
+          );
+          webView.current.postMessage(
+            JSON.stringify({
+              type: "event",
+              event: "trade.confirm-trade-prepared",
+              context: {
+                confirmed: true,
+              },
+            }),
+          );
+        }
+      }),
+    [coinifyConfig],
+  );
 
   const settleTrade = useCallback(
     confirmed => {

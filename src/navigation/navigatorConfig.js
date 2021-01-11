@@ -8,9 +8,7 @@ import styles from "./styles";
 
 export const defaultNavigationOptions = {
   headerStyle: styles.header,
-  headerTitle: (props: *) => {
-    return <HeaderTitle {...props} />;
-  },
+  headerTitle: (props: *) => <HeaderTitle {...props} />,
   headerBackTitleVisible: false,
   headerBackImage: () => <HeaderBackImage />,
   headerTitleAllowFontScaling: false,

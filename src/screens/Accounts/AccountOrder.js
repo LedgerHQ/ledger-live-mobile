@@ -19,7 +19,7 @@ export default function AccountOrder() {
     setIsOpened(false);
   }
 
-  useRefreshAccountsOrderingEffect({ onUpdate: true });
+  useRefreshAccountsOrderingEffect({ onUnmount: true });
 
   return (
     <Touchable

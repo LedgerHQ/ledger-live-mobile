@@ -4,6 +4,7 @@ import { StyleSheet, View } from "react-native";
 import { useNavigation, useRoute, useTheme } from "@react-navigation/native";
 import SafeAreaView from "react-native-safe-area-view";
 import { Trans } from "react-i18next";
+import { ScreenName } from "../../../const";
 import LText from "../../../components/LText";
 import InfoBox from "../../../components/InfoBox";
 import Button from "../../../components/Button";
@@ -18,7 +19,9 @@ const PendingOperation = () => {
   const route = useRoute();
 
   const onComplete = useCallback(() => {
-    navigation.dangerouslyGetParent().pop();
+    navigation.navigate(ScreenName.SwapFormOrHistory, {
+      screen: ScreenName.SwapHistory,
+    });
   }, [navigation]);
 
   const { swapId, provider } = route.params;
@@ -67,7 +70,7 @@ const PendingOperation = () => {
         <Button
           event="SwapDone"
           type="primary"
-          title={<Trans i18nKey={"common.continue"} />}
+          title={<Trans i18nKey={"transfer.swap.pendingOperation.cta"} />}
           onPress={onComplete}
         />
       </View>
