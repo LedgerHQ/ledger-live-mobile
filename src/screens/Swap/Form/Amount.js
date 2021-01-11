@@ -2,7 +2,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import invariant from "invariant";
 import { BigNumber } from "bignumber.js";
-import { View, Switch, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { Trans } from "react-i18next";
 import {
   getAccountUnit,
@@ -22,6 +22,7 @@ import CurrencyInput from "../../../components/CurrencyInput";
 import CurrencyUnitValue from "../../../components/CurrencyUnitValue";
 import TranslatedError from "../../../components/TranslatedError";
 import Button from "../../../components/Button";
+import Switch from "../../../components/Switch";
 import { ScreenName } from "../../../const";
 
 type Props = {

@@ -2,7 +2,6 @@
 import React, { PureComponent } from "react";
 import FeatherIcon from "react-native-vector-icons/dist/Feather";
 import { connect } from "react-redux";
-import { Switch } from "react-native";
 import { Trans } from "react-i18next";
 import { createStructuredSelector } from "reselect";
 import { useTheme } from "@react-navigation/native";
@@ -11,6 +10,7 @@ import { setAnalytics } from "../../../actions/settings";
 import { analyticsEnabledSelector } from "../../../reducers/settings";
 import InfoModal from "../../../components/InfoModal";
 import Track from "../../../analytics/Track";
+import Switch from "../../../components/Switch";
 
 type Props = {
   analyticsEnabled: boolean,

@@ -7,7 +7,6 @@ import {
   TextInput,
   View,
   ToastAndroid,
-  Switch,
   ScrollView,
 } from "react-native";
 import { v4 as uuid } from "uuid";
@@ -21,6 +20,7 @@ import { useTheme } from "@react-navigation/native";
 import LText from "../components/LText";
 import Button from "../components/Button";
 import KeyboardView from "../components/KeyboardView";
+import Switch from "../components/Switch";
 
 const logsObservable = Observable.create(o => listen(log => o.next(log))).pipe(
   shareReplay(1000),

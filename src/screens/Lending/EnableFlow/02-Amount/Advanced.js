@@ -2,13 +2,7 @@
 import invariant from "invariant";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
 import React, { useCallback } from "react";
-import {
-  StyleSheet,
-  View,
-  Switch,
-  TouchableOpacity,
-  SafeAreaView,
-} from "react-native";
+import { StyleSheet, View, TouchableOpacity, SafeAreaView } from "react-native";
 import { useSelector } from "react-redux";
 import { Trans } from "react-i18next";
 import type {
@@ -31,6 +25,7 @@ import TooltipLabel from "../../../../components/TooltipLabel";
 import CurrencyUnitValue from "../../../../components/CurrencyUnitValue";
 import CounterValue from "../../../../components/CounterValue";
 import TranslatedError from "../../../../components/TranslatedError";
+import Switch from "../../../../components/Switch";
 
 type Props = {
   navigation: any,

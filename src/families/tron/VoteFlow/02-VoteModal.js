@@ -12,8 +12,8 @@ import {
 import { Trans } from "react-i18next";
 import type { Vote } from "@ledgerhq/live-common/lib/families/tron/types";
 
-import { Switch } from "react-native-gesture-handler";
 import { useTheme } from "@react-navigation/native";
+import Switch from "../../../components/Switch";
 import BottomModal from "../../../components/BottomModal";
 import Button from "../../../components/Button";
 import LText from "../../../components/LText";

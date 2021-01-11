@@ -1,19 +1,13 @@
 // @flow
 
 import React, { useCallback, useState, useEffect, useRef } from "react";
-import {
-  Switch,
-  TextInput,
-  StyleSheet,
-  Keyboard,
-  View,
-  Platform,
-} from "react-native";
+import { TextInput, StyleSheet, Keyboard, View, Platform } from "react-native";
 import { getEnvDefault } from "@ledgerhq/live-common/lib/env";
 import { useNavigation, useTheme } from "@react-navigation/native";
 
 import Track from "../../../analytics/Track";
 import getFontStyle from "../../../components/LText/getFontStyle";
+import Switch from "../../../components/Switch";
 
 type Props = {
   name: *,
