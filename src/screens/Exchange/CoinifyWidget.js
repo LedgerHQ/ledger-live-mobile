@@ -201,8 +201,8 @@ export default function CoinifyWidget({
   }, []);
 
   const setTransactionId = useCallback(
-    txId => {
-      return new Promise(resolve => {
+    txId =>
+      new Promise(resolve => {
         resolvePromise = resolve;
         if (webView.current) {
           webView.current.postMessage(
@@ -226,8 +226,7 @@ export default function CoinifyWidget({
             }),
           );
         }
-      });
-    },
+      }),
     [coinifyConfig],
   );
 
