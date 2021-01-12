@@ -483,6 +483,7 @@ const getSetupDeviceScenes: (
       ),
       descs: [
         <Trans i18nKey="onboarding.stepSetupDevice.recoveryPhrase.desc" />,
+        <Trans i18nKey="onboarding.stepSetupDevice.recoveryPhrase.desc_1" />,
       ],
       ctaText: (
         <Trans i18nKey="onboarding.stepSetupDevice.recoveryPhrase.cta" />

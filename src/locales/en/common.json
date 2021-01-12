@@ -821,7 +821,8 @@
       },
       "recoveryPhrase": {
         "title": "Recovery phrase",
-        "desc": "Your recovery phrase is a secret list of 24 words that backs up your private keys. Your Nano generates a unique recovery phrase. Ledger does not keep a copy of it.",
+        "desc": "Your recovery phrase is a secret list of 24 words that backs up your private keys.",
+        "desc_1": "Your Nano generates a unique recovery phrase. Ledger does not keep a copy of it.",
         "cta": "Recovery phrase",
         "checkboxDesc": "I understand that if I lose this recovery phrase, I will not be able to access my crypto in case I lose access to my Nano."
       },
