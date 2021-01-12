@@ -3,6 +3,7 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 import { TrackScreen } from "../../../analytics";
 import LedgerSupportRow from "./LedgerSupportRow";
+import ProductTourRow from "./ProductTourRow";
 import ClearCacheRow from "./ClearCacheRow";
 import HardResetRow from "./HardResetRow";
 import ConfigureDeviceRow from "./ConfigureDeviceRow";
@@ -12,6 +13,7 @@ export default function HelpSettings() {
   return (
     <NavigationScrollView contentContainerStyle={styles.root}>
       <TrackScreen category="Settings" name="Help" />
+      <ProductTourRow />
       <LedgerSupportRow />
       <ConfigureDeviceRow />
       <View style={styles.container}>

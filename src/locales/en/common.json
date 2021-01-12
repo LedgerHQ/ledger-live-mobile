@@ -1589,6 +1589,8 @@
       "title": "Help",
       "header": "Help",
       "desc": "Learn more about Ledger Live or how to get help.",
+      "productTour": "Product tour",
+      "productTourDesc": "Learn how to use Live",
       "support": "Ledger Support",
       "supportDesc": "If you have a problem, get help using Ledger Live with your hardware wallet.",
       "configureDevice": "Set up a device",
