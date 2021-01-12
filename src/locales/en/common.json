@@ -851,7 +851,8 @@
           },
           "1": {
             "title": "Write down all words",
-            "label": "Write Word #1 displayed on your Nano in position 1 of your Recovery sheet. Then press right on your Nano to display Word #2 and write it down in position 2. Repeat the process for all words while carefully respecting the order and spelling. Press left on your Nano to check for any mistakes."
+            "label": "Write Word #1 displayed on your Nano in position 1 of your Recovery sheet. Then press right on your Nano to display Word #2 and write it down in position 2.",
+            "label_1": "Repeat the process for all words while carefully respecting the order and spelling. Press left on your Nano to check for any mistakes."
           },
           "2": {
             "title": "Confirm your recovery phrase",
