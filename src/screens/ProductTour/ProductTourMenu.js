@@ -196,10 +196,7 @@ const Step = ({
       {isComplete(step) ? (
         <View style={styles.checkContainer}>
           <View
-            style={[
-              styles.checkboxContainer,
-              styles.checkboxContainerChecked,
-            ]}
+            style={[styles.checkboxContainer, styles.checkboxContainerChecked]}
           >
             <Check size={10} color={colors.ledgerGreen} />
           </View>
