@@ -140,8 +140,8 @@ const styles = StyleSheet.create({
   },
   dismiss: {
     position: "absolute",
-    top: 27,
-    right: 19,
+    top: 8,
+    right: 8,
   },
   image: {
     position: "absolute",
