@@ -166,69 +166,67 @@ const Step = ({
   goTo,
   step,
   setStepLockedModal,
-}: stepProps) => {
-  return (
-    <TouchableOpacity
-      style={[
-        styles.step,
-        isComplete(step)
-          ? styles.stepComplete
-          : isAccessible(step)
-          ? styles.stepAccessible
-          : styles.stepLocked,
-      ]}
-      // eslint-disable-next-line consistent-return
-      onPress={() => {
-        if (!isAccessible(step)) {
-          return setStepLockedModal(true);
-        }
-        goTo(step);
-      }}
-      onLongPress={() => completeStep(step)}
-      delayLongPress={2000}
-      disabled={isComplete(step)}
-    >
-      <View style={styles.stepHeader}>
-        {!isComplete(step) ? (
-          <LText semiBold style={styles.stepNumber}>
-            {Object.keys(STEPS).indexOf(step) + 1}.
+}: stepProps) => (
+  <TouchableOpacity
+    style={[
+      styles.step,
+      isComplete(step)
+        ? styles.stepComplete
+        : isAccessible(step)
+        ? styles.stepAccessible
+        : styles.stepLocked,
+    ]}
+    // eslint-disable-next-line consistent-return
+    onPress={() => {
+      if (!isAccessible(step)) {
+        return setStepLockedModal(true);
+      }
+      goTo(step);
+    }}
+    onLongPress={() => completeStep(step)}
+    delayLongPress={2000}
+    disabled={isComplete(step)}
+  >
+    <View style={styles.stepHeader}>
+      {!isComplete(step) ? (
+        <LText semiBold style={styles.stepNumber}>
+          {Object.keys(STEPS).indexOf(step) + 1}.
+        </LText>
+      ) : null}
+      {isComplete(step) ? (
+        <View style={styles.checkContainer}>
+          <View
+            style={[
+              styles.checkboxContainer,
+              styles.checkboxContainerChecked,
+            ]}
+          >
+            <Check size={10} color={colors.ledgerGreen} />
+          </View>
+          <LText bold style={styles.completedText}>
+            <Trans i18nKey="producttour.menu.complete" />
           </LText>
-        ) : null}
-        {isComplete(step) ? (
-          <View style={styles.checkContainer}>
-            <View
-              style={[
-                styles.checkboxContainer,
-                styles.checkboxContainerChecked,
-              ]}
-            >
-              <Check size={10} color={colors.ledgerGreen} />
-            </View>
-            <LText bold style={styles.completedText}>
-              <Trans i18nKey="producttour.menu.complete" />
-            </LText>
-          </View>
-        ) : null}
-        {!isAccessible(step) && !isComplete(step) ? (
-          <View style={styles.lockContainer}>
-            <Lock size={12} color={colors.white} />
-          </View>
-        ) : null}
-      </View>
-      <LText semiBold style={styles.stepTitle}>
-        <Trans i18nKey={stepTitles[step][isComplete(step) ? 1 : 0]} />
-      </LText>
-      <Image
-        source={stepTitles[step][2].files[isComplete(step) ? 1 : 0]}
-        style={[
-          styles.image,
-          stepTitles[step][2].size,
-          stepTitles[step][2].offset,
-        ]}
-      />
-    </TouchableOpacity>
-  );
-};
+        </View>
+      ) : null}
+      {!isAccessible(step) && !isComplete(step) ? (
+        <View style={styles.lockContainer}>
+          <Lock size={12} color={colors.white} />
+        </View>
+      ) : null}
+    </View>
+    <LText semiBold style={styles.stepTitle}>
+      <Trans i18nKey={stepTitles[step][isComplete(step) ? 1 : 0]} />
+    </LText>
+    <Image
+      source={stepTitles[step][2].files[isComplete(step) ? 1 : 0]}
+      style={[
+        styles.image,
+        stepTitles[step][2].size,
+        stepTitles[step][2].offset,
+      ]}
+    />
+  </TouchableOpacity>
+);
 
 type Props = {
   navigation: any,

@@ -26,15 +26,13 @@ export let completeStep: (step: string) => void = () => {};
 export let dismiss: (dismissed: boolean) => void = () => {};
 
 // reducer
-const reducer = (state: State, update) => {
-  return {
-    ...state,
-    ...update,
-    completedSteps: update.dismissed
-      ? []
-      : _.uniq([...state.completedSteps, ...(update.completedSteps || [])]),
-  };
-};
+const reducer = (state: State, update) => ({
+  ...state,
+  ...update,
+  completedSteps: update.dismissed
+    ? []
+    : _.uniq([...state.completedSteps, ...(update.completedSteps || [])]),
+});
 const initialState = {
   completedSteps: [],
   dismissed: true,

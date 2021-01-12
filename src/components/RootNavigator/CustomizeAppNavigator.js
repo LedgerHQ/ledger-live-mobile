@@ -74,20 +74,18 @@ export default function ReceiveFundsNavigator() {
       <Stack.Screen
         name={ScreenName.CustomizeAppCountervalues}
         component={CustomizeAppCountervalues}
-        options={() => {
-          return {
-            headerTitle: ({ style }: { style: * }) => (
-              <StepHeader
-                title={t("customizeapp.countervalues.headerTitle")}
-                subtitle={t("customizeapp.countervalues.subtitle", {
-                  currentStep: "2",
-                  totalSteps,
-                })}
-                style={style}
-              />
-            ),
-          };
-        }}
+        options={() => ({
+          headerTitle: ({ style }: { style: * }) => (
+            <StepHeader
+              title={t("customizeapp.countervalues.headerTitle")}
+              subtitle={t("customizeapp.countervalues.subtitle", {
+                currentStep: "2",
+                totalSteps,
+              })}
+              style={style}
+            />
+          ),
+        })}
       />
       <Stack.Screen
         name={ScreenName.CustomizeAppCountervalueSettings}
