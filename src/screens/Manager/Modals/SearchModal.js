@@ -131,7 +131,7 @@ const Placeholder = ({
       </View>
     </NavigationScrollView>
   ) : (
-    <View style={[styles.noResult, { backgroundColor: colors.white }]}>
+    <View style={[styles.noResult, { backgroundColor: colors.card }]}>
       <View style={styles.noResultIcon}>
         <NoResults color={colors.fog} />
       </View>
@@ -359,7 +359,7 @@ export default ({
             </Touchable>
           </View>
           {NoResult}
-          <View style={[styles.searchList, { backgroundColor: colors.white }]}>
+          <View style={[styles.searchList, { backgroundColor: colors.card }]}>
             <VirtualizedList
               listKey="SEARCH"
               keyExtractor={keyExtractor}

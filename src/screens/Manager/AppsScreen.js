@@ -345,7 +345,7 @@ const AppsScreen = ({
               {
                 opacity: position,
                 zIndex: index === 0 ? -1 : 2,
-                backgroundColor: colors.white,
+                backgroundColor: colors.card,
                 borderColor: colors.lightFog,
               },
             ]}

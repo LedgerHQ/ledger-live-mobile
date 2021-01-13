@@ -36,7 +36,7 @@ const AppUpdateStepper = ({ state }: Props) => {
       duration={400}
       style={[
         styles.root,
-        { backgroundColor: colors.white, borderBottomColor: colors.lightFog },
+        { backgroundColor: colors.card, borderBottomColor: colors.lightFog },
       ]}
     >
       <View>

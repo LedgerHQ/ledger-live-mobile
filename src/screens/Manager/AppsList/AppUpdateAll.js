@@ -43,7 +43,7 @@ const AppUpdateAll = ({
           style={[
             styles.root,
             {
-              backgroundColor: colors.white,
+              backgroundColor: colors.card,
               borderBottomColor: colors.lightFog,
             },
           ]}

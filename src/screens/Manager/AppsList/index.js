@@ -62,7 +62,7 @@ const AppsList = ({
 
   if (!apps || apps.length <= 0)
     return (
-      <View style={[styles.renderNoResult, { backgroundColor: colors.white }]}>
+      <View style={[styles.renderNoResult, { backgroundColor: colors.card }]}>
         {renderNoResults && renderNoResults()}
       </View>
     );
