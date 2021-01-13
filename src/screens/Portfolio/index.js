@@ -136,7 +136,10 @@ export default function PortfolioScreen({ navigation }: Props) {
     accounts.length === 0 || accounts.every(isAccountEmpty);
 
   return (
-    <SafeAreaView style={[styles.root, { paddingTop: extraStatusBarPadding }]}>
+    <SafeAreaView
+      style={[styles.root, { paddingTop: extraStatusBarPadding }]}
+      testID="PortfolioScreen"
+    >
       {!showingPlaceholder ? (
         <StickyHeader
           scrollY={scrollY}

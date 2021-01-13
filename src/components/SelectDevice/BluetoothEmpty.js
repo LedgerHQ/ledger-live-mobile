@@ -17,10 +17,10 @@ class BluetoothEmpty extends PureComponent<Props> {
         <ConnectNanoXIllustration style={styles.illustration} />
         <Button
           event="PairDevice"
-          testID="PairDevice"
           type="primary"
           title={<Trans i18nKey="SelectDevice.deviceNotFoundPairNewDevice" />}
           onPress={this.props.onPairNewDevice}
+          testID="PairDevice"
         />
       </View>
     );

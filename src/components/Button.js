@@ -1,6 +1,6 @@
 /* @flow */
 
-import React, { PureComponent } from "react";
+import React, { PureComponent, useMemo } from "react";
 import { RectButton } from "react-native-gesture-handler";
 import {
   StyleSheet,
@@ -53,6 +53,7 @@ export type BaseButtonProps = {
   event: string,
   eventProperties?: Object,
   size?: number,
+  testID?: string,
 };
 
 type Props = BaseButtonProps & {
@@ -61,9 +62,7 @@ type Props = BaseButtonProps & {
 
 const ButtonWrapped = (props: BaseButtonProps) => (
   <ButtonUseTouchable.Consumer>
-    {useTouchable => (
-      <Button {...props} useTouchable={useTouchable} testID={props.event} />
-    )}
+    {useTouchable => <Button {...props} useTouchable={useTouchable} />}
   </ButtonUseTouchable.Consumer>
 );
 
@@ -228,6 +227,18 @@ class Button extends PureComponent<
       : RectButton;
     const containerSpecificProps = useTouchable ? {} : { enabled: !isDisabled };
 
+    function getTestID() {
+      if (isDisabled) return undefined;
+      if (otherProps.testID) return otherProps.testID;
+
+      switch (type) {
+        case "primary":
+          return "proceed";
+        default:
+          return otherProps.event;
+      }
+    }
+
     return (
       // $FlowFixMe
       <Container
@@ -235,6 +246,7 @@ class Button extends PureComponent<
         style={mainContainerStyle}
         {...containerSpecificProps}
         {...otherProps}
+        testID={getTestID()}
       >
         {needsBorder ? <View style={borderStyle} /> : null}
 
