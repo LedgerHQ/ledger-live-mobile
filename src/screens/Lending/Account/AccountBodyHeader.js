@@ -68,7 +68,10 @@ export default function AccountBodyHeader({
             }
             ItemSeparatorComponent={() => (
               <View
-                style={[styles.separator, { backgroundColor: colors.card }]}
+                style={[
+                  styles.separator,
+                  { backgroundColor: colors.background },
+                ]}
               />
             )}
           />

@@ -28,7 +28,7 @@ export default function ClosedLoans() {
     <SafeAreaView style={[styles.root, { backgroundColor: colors.background }]}>
       <TrackScreen category="Lend" name="Closed Positions" />
       <View style={styles.body}>
-        <View style={[styles.rows, { backgroundColor: colors.white }]}>
+        <View style={[styles.rows, { backgroundColor: colors.card }]}>
           <FlatList
             data={closedLoans}
             renderItem={({ item }) => <ClosedLoansRow item={item} />}
@@ -37,7 +37,10 @@ export default function ClosedLoans() {
             }
             ItemSeparatorComponent={() => (
               <View
-                style={[styles.separator, { backgroundColor: colors.card }]}
+                style={[
+                  styles.separator,
+                  { backgroundColor: colors.background },
+                ]}
               />
             )}
             ListEmptyComponent={() => (
