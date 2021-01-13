@@ -25,7 +25,7 @@ type Props = {
   withArrows?: boolean,
   usbOnly?: boolean,
   filter?: (transportModule: TransportModule) => boolean,
-  autoSelectOnAdd: boolean,
+  autoSelectOnAdd?: boolean,
 };
 
 export default function SelectDevice({

@@ -215,7 +215,7 @@ export default function SubAccountsList({
         style={[
           styles.card,
           {
-            backgroundColor: colors.white,
+            backgroundColor: colors.card,
             ...Platform.select({
               android: {},
               ios: {
@@ -281,7 +281,7 @@ export default function SubAccountsList({
         style={[
           styles.card,
           {
-            backgroundColor: colors.white,
+            backgroundColor: colors.card,
             ...Platform.select({
               android: {},
               ios: {

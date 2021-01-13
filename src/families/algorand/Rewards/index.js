@@ -59,7 +59,7 @@ const RewardsSection = ({ account }: Props) => {
         icon={<Info size={16} color={colors.darkBlue} />}
         onPress={onRewardsInfoClick}
       />
-      <View style={[styles.rewardSection, { backgroundColor: colors.white }]}>
+      <View style={[styles.rewardSection, { backgroundColor: colors.card }]}>
         <View style={styles.labelSection}>
           <LText semiBold style={styles.title}>
             <CurrencyUnitValue unit={unit} value={rewards} />

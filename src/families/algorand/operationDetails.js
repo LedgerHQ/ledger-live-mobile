@@ -94,7 +94,7 @@ const OperationIcon = ({
         useNativeDriver
         style={[
           styles.operationMainIcon,
-          { width: size - 2, height: size - 2, backgroundColor: colors.white },
+          { width: size - 2, height: size - 2, backgroundColor: colors.card },
         ]}
       >
         <OperationStatusIcon

@@ -1,8 +1,7 @@
 // @flow
 import invariant from "invariant";
 import React, { useCallback } from "react";
-import { StyleSheet, ScrollView } from "react-native";
-import SafeAreaView from "react-native-safe-area-view";
+import { StyleSheet, ScrollView, SafeAreaView } from "react-native";
 import { useSelector } from "react-redux";
 import type { Transaction } from "@ledgerhq/live-common/lib/types";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
@@ -16,8 +15,6 @@ import {
   connectingStep,
   accountApp,
 } from "../../../components/DeviceJob/steps";
-
-const forceInset = { bottom: "always" };
 
 type RouteParams = {
   accountId: string,
@@ -60,10 +57,7 @@ export default function ConnectDevice({ navigation, route }: Props) {
   if (!account) return null;
 
   return (
-    <SafeAreaView
-      style={[styles.root, { backgroundColor: colors.white }]}
-      forceInset={forceInset}
-    >
+    <SafeAreaView style={[styles.root, { backgroundColor: colors.white }]}>
       <ScrollView
         style={styles.scroll}
         contentContainerStyle={styles.scrollContainer}
