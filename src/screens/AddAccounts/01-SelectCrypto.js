@@ -81,7 +81,7 @@ export default function AddAccountsSelectCrypto({ navigation }: Props) {
 
   return (
     <SafeAreaView
-      style={[styles.root, { backgroundColor: colors.white }]}
+      style={[styles.root, { backgroundColor: colors.background }]}
       forceInset={forceInset}
     >
       <TrackScreen category="AddAccounts" name="SelectCrypto" />
