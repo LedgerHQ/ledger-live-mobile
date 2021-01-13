@@ -14,7 +14,7 @@ export default function DebugIcons() {
   const { colors } = useTheme();
   return (
     <SafeAreaView
-      style={[styles.root, { backgroundColor: colors.white }]}
+      style={[styles.root, { backgroundColor: colors.background }]}
       forceInset={forceInset}
     >
       <NavigationScrollView contentContainerStyle={styles.scrollView}>

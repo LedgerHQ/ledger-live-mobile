@@ -38,7 +38,7 @@ export default function FirmwareUpdateFailure({ navigation, route }: Props) {
   const error = route.params.error;
   return (
     <SafeAreaView
-      style={[styles.root, { backgroundColor: colors.white }]}
+      style={[styles.root, { backgroundColor: colors.background }]}
       forceInset={forceInset}
     >
       <TrackScreen category="FirmwareUpdate" name="Failure" />

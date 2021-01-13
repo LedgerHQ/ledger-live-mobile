@@ -36,7 +36,7 @@ function EthereumEditFee({ route }: Props) {
 
   return (
     <SafeAreaView
-      style={[styles.root, { backgroundColor: colors.white }]}
+      style={[styles.root, { backgroundColor: colors.background }]}
       forceInset={forceInset}
     >
       <KeyboardView style={styles.container}>

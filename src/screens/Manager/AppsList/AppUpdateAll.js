@@ -69,7 +69,7 @@ const AppUpdateAll = ({
             event="ManagerAppUpdateAll"
             eventProperties={{ appsList }}
           >
-            <LText semiBold style={styles.buttonText} color="white">
+            <LText semiBold style={[styles.buttonText, { color: "#FFF" }]}>
               <Trans i18nKey="AppAction.update.button" />
             </LText>
           </Touchable>

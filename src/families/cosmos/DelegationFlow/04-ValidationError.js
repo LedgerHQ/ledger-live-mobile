@@ -39,7 +39,7 @@ export default function ValidationError({ navigation, route }: Props) {
 
   return (
     <SafeAreaView
-      style={[styles.root, { backgroundColor: colors.white }]}
+      style={[styles.root, { backgroundColor: colors.background }]}
       forceInset={forceInset}
     >
       <TrackScreen category="CosmosDelegation" name="ValidationError" />

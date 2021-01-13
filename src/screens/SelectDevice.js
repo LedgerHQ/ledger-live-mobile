@@ -38,7 +38,7 @@ export default function SelectDevice({ navigation, route }: Props) {
 
   return (
     <SafeAreaView
-      style={[styles.root, { backgroundColor: colors.white }]}
+      style={[styles.root, { backgroundColor: colors.background }]}
       forceInset={forceInset}
     >
       <NavigationScrollView

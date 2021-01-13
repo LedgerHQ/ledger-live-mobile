@@ -114,7 +114,7 @@ export default function AddAccountsTokenCurrencyDisclaimer({
 
   return (
     <SafeAreaView
-      style={[styles.root, { backgroundColor: colors.white }]}
+      style={[styles.root, { backgroundColor: colors.background }]}
       forceInset={forceInset}
     >
       <View style={styles.wrapper}>
