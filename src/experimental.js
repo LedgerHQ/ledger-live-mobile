@@ -40,6 +40,13 @@ export const experimentalFeatures: Feature[] = [
     description: "Show developer and testnet apps in the Manager.",
   },
   {
+    type: "toggle",
+    name: "WALLETCONNECT",
+    title: "Wallet connect",
+    description:
+      "Link your Ledger Live Mobile decentralized applications compatible with WalletConnect",
+  },
+  {
     type: "integer",
     name: "FORCE_PROVIDER",
     title: "Manager provider",
@@ -53,13 +60,6 @@ export const experimentalFeatures: Feature[] = [
     title: "Experimental Explorers API",
     description:
       "Try an upcoming version of Ledger's blockchain explorers. Changing this setting may affect the account balance and synchronization as well as the send feature.",
-  },
-  {
-    type: "toggle",
-    name: "EXPERIMENTAL_QUIT_APP",
-    title: "Quit apps automatically",
-    description:
-      "Enabling this setting will automatically quit an application on your device when another one needs to be opened. This will make switching between apps more seamless.",
   },
 ];
 

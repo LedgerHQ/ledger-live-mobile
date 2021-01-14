@@ -1,24 +1,38 @@
 // @flow
 import React from "react";
+import { useTheme } from "@react-navigation/native";
 import { ScreenName, NavigatorName } from "../../const";
 import Portfolio, { PortfolioTabIcon } from "../../screens/Portfolio";
 import Transfer, { TransferTabIcon } from "../../screens/Transfer";
 import AccountsNavigator from "./AccountsNavigator";
 import ManagerNavigator, { ManagerTabIcon } from "./ManagerNavigator";
 import SettingsNavigator from "./SettingsNavigator";
-import styles from "../../navigation/styles";
 import TabIcon from "../TabIcon";
-import colors from "../../colors";
 import AccountsIcon from "../../icons/Accounts";
 import SettingsIcon from "../../icons/Settings";
 
 import Tab from "./CustomBlockRouterNavigator";
 
-export default function MainNavigator() {
+type RouteParams = {
+  hideTabNavigation?: boolean,
+};
+export default function MainNavigator({
+  route: { params },
+}: {
+  route: { params: RouteParams },
+}) {
+  const { colors } = useTheme();
+  const { hideTabNavigation } = params || {};
   return (
     <Tab.Navigator
       tabBarOptions={{
-        style: styles.bottomTabBar,
+        style: [
+          {
+            borderTopColor: colors.lightFog,
+            backgroundColor: colors.card,
+          },
+          hideTabNavigation ? { display: "none" } : {},
+        ],
         showLabel: false,
         activeTintColor: colors.live,
       }}
@@ -56,6 +70,22 @@ export default function MainNavigator() {
           tabBarIcon: (props: any) => <ManagerTabIcon {...props} />,
           tabBarTestID: "TabBarManager",
         }}
+        listeners={({ navigation }) => ({
+          tabPress: e => {
+            e.preventDefault();
+            // NB The default behaviour is not reset route params, leading to always having the same
+            // search query or preselected tab after the first time (ie from Swap/Sell)
+            // https://github.com/react-navigation/react-navigation/issues/6674#issuecomment-562813152
+            navigation.navigate(NavigatorName.Manager, {
+              screen: ScreenName.Manager,
+              params: {
+                tab: undefined,
+                searchQuery: undefined,
+                updateModalOpened: undefined,
+              },
+            });
+          },
+        })}
       />
       <Tab.Screen
         name={NavigatorName.Settings}

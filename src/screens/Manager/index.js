@@ -12,8 +12,8 @@ import connectManager from "@ledgerhq/live-common/lib/hw/connectManager";
 import { createAction } from "@ledgerhq/live-common/lib/hw/actions/manager";
 import { removeKnownDevice } from "../../actions/ble";
 import { ScreenName } from "../../const";
+import type { ManagerTab } from "./Manager";
 import SelectDevice from "../../components/SelectDevice";
-import colors from "../../colors";
 import TrackScreen from "../../analytics/TrackScreen";
 import { track } from "../../analytics";
 import LText from "../../components/LText";
@@ -61,6 +61,7 @@ const RemoveDeviceModal = ({
 
 type RouteParams = {
   searchQuery?: string,
+  tab?: ManagerTab,
 };
 
 type Props = {
@@ -83,11 +84,13 @@ class ChooseDevice extends Component<
   {
     showMenu: boolean,
     device?: Device,
+    result?: Object,
   },
 > {
   state = {
     showMenu: false,
     device: undefined,
+    result: undefined,
   };
 
   chosenDevice: Device;
@@ -110,15 +113,16 @@ class ChooseDevice extends Component<
   };
 
   onSelect = (result: Object) => {
-    this.setState(
-      { device: undefined },
-      () =>
-        result.result &&
-        this.props.navigation.navigate(ScreenName.ManagerMain, {
-          ...result,
-          ...this.props.route.params,
-        }),
-    );
+    this.setState({ device: undefined, result });
+  };
+
+  onModalHide = () => {
+    const { result } = this.state;
+    result?.result &&
+      this.props.navigation.navigate(ScreenName.ManagerMain, {
+        ...result,
+        ...this.props.route.params,
+      });
   };
 
   onStepEntered = (i: number, meta: Object) => {
@@ -137,7 +141,7 @@ class ChooseDevice extends Component<
 
   componentDidMount() {
     const { readOnlyModeEnabled } = this.props;
-    this.state = { ...this.state, device: undefined };
+    this.setState(state => ({ ...state, device: undefined }));
 
     if (readOnlyModeEnabled) {
       this.props.navigation.setParams({
@@ -158,12 +162,16 @@ class ChooseDevice extends Component<
     }
 
     return (
-      <NavigationScrollView style={styles.root}>
+      <NavigationScrollView
+        style={[styles.root]}
+        contentContainerStyle={styles.scrollContainer}
+      >
         <TrackScreen category="Manager" name="ChooseDevice" />
         <LText semiBold style={styles.title}>
           <Trans i18nKey="manager.connect" />
         </LText>
         <SelectDevice
+          autoSelectOnAdd
           onSelect={this.onSelectDevice}
           onStepEntered={this.onStepEntered}
           onBluetoothDeviceAction={this.onShowMenu}
@@ -172,6 +180,7 @@ class ChooseDevice extends Component<
           onClose={this.onSelectDevice}
           device={device}
           onResult={this.onSelect}
+          onModalHide={this.onModalHide}
           action={action}
           request={null}
         />
@@ -192,45 +201,20 @@ class ChooseDevice extends Component<
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: colors.white,
-    paddingHorizontal: 16,
   },
-  or: {
-    marginVertical: 30,
+  scrollContainer: {
+    paddingHorizontal: 16,
   },
   title: {
     lineHeight: 27,
     fontSize: 18,
     marginVertical: 24,
-    color: colors.darkBlue,
-  },
-  section: {
-    fontSize: 14,
-    lineHeight: 21,
-    marginBottom: 12,
-    color: colors.grey,
-  },
-  addContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  add: {
-    marginRight: 8,
-    color: colors.live,
-  },
-  bluetoothHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "flex-start",
   },
   footerContainer: {
     flexDirection: "row",
   },
   buttonContainer: {
     flex: 1,
-  },
-  buttonMarginLeft: {
-    marginLeft: 16,
   },
 });
 

@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 import { createStore, applyMiddleware, compose } from "redux";
-import { getAccounts, getSettings, getBle } from "../db";
+import { getAccounts, getCountervalues, getSettings, getBle } from "../db";
 import reducers from "../reducers";
 import { importSettings } from "../actions/settings";
 import { importStore as importAccounts } from "../actions/accounts";
@@ -25,14 +25,16 @@ export const store = createStore(
 export default class LedgerStoreProvider extends Component<
   {
     onInitFinished: () => void,
-    children: (ready: boolean, store: *) => *,
+    children: (ready: boolean, store: *, initialCountervalues: *) => *,
   },
   {
     ready: boolean,
+    initialCountervalues: *,
   },
 > {
   state = {
     ready: false,
+    initialCountervalues: undefined,
   };
 
   componentDidMount() {
@@ -63,14 +65,20 @@ export default class LedgerStoreProvider extends Component<
     const accountsData = await getAccounts();
     store.dispatch(importAccounts(accountsData));
 
-    this.setState({ ready: true }, () => {
+    const initialCountervalues = await getCountervalues();
+
+    this.setState({ ready: true, initialCountervalues }, () => {
       this.props.onInitFinished();
     });
   }
 
   render() {
     const { children } = this.props;
-    const { ready } = this.state;
-    return <Provider store={store}>{children(ready, store)}</Provider>;
+    const { ready, initialCountervalues } = this.state;
+    return (
+      <Provider store={store}>
+        {children(ready, store, initialCountervalues)}
+      </Provider>
+    );
   }
 }

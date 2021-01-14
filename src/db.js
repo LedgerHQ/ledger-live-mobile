@@ -33,6 +33,15 @@ export async function saveSettings(obj: *): Promise<void> {
   await store.save("settings", obj);
 }
 
+export async function getWCSession(): Promise<*> {
+  const wcsession = await store.get("wcsession");
+  return wcsession;
+}
+
+export async function saveWCSession(obj: *): Promise<void> {
+  await store.save("wcsession", obj);
+}
+
 export const getCountervalues: typeof unsafeGetCountervalues = atomicQueue(
   unsafeGetCountervalues,
 );
@@ -66,11 +75,10 @@ async function unsafeSaveCountervalues(
 ): Promise<void> {
   if (!changed) return;
 
-  const deletedKeys = (await getKeys(COUNTERVALUES_DB_PREFIX)).filter(k => {
-    return ![...pairIds, "status"].includes(
-      k.replace(COUNTERVALUES_DB_PREFIX, ""),
-    );
-  });
+  const deletedKeys = (await getKeys(COUNTERVALUES_DB_PREFIX)).filter(
+    k =>
+      ![...pairIds, "status"].includes(k.replace(COUNTERVALUES_DB_PREFIX, "")),
+  );
 
   const data = Object.entries(state).map(([key, val]) => [
     `${COUNTERVALUES_DB_PREFIX}${key}`,

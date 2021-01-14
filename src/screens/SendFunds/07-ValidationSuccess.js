@@ -1,14 +1,18 @@
 /* @flow */
-import React, { useCallback } from "react";
+import React, { useCallback, useContext, useEffect } from "react";
 import { View, StyleSheet } from "react-native";
 import { useSelector } from "react-redux";
 import type { Operation } from "@ledgerhq/live-common/lib/types";
+import { useTheme } from "@react-navigation/native";
 import { accountScreenSelector } from "../../reducers/accounts";
 import { TrackScreen } from "../../analytics";
-import colors from "../../colors";
 import { ScreenName } from "../../const";
 import PreventNativeBack from "../../components/PreventNativeBack";
 import ValidateSuccess from "../../components/ValidateSuccess";
+import {
+  context as _wcContext,
+  setCurrentCallRequestResult,
+} from "../WalletConnect/Provider";
 
 type Props = {
   navigation: any,
@@ -23,7 +27,23 @@ type RouteParams = {
 };
 
 export default function ValidationSuccess({ navigation, route }: Props) {
+  const { colors } = useTheme();
   const { account, parentAccount } = useSelector(accountScreenSelector(route));
+  const wcContext = useContext(_wcContext);
+
+  useEffect(() => {
+    if (!account) return;
+    let result = route.params?.result;
+    if (!result) return;
+    result =
+      result.subOperations && result.subOperations[0]
+        ? result.subOperations[0]
+        : result;
+
+    if (wcContext.currentCallRequestId) {
+      setCurrentCallRequestResult(result.hash);
+    }
+  }, []);
 
   const onClose = useCallback(() => {
     navigation.dangerouslyGetParent().pop();
@@ -44,7 +64,7 @@ export default function ValidationSuccess({ navigation, route }: Props) {
   }, [navigation, route.params, account, parentAccount]);
 
   return (
-    <View style={styles.root}>
+    <View style={[styles.root, { backgroundColor: colors.background }]}>
       <TrackScreen category="SendFunds" name="ValidationSuccess" />
       <PreventNativeBack />
       <ValidateSuccess onClose={onClose} onViewDetails={goToOperationDetails} />
@@ -55,6 +75,5 @@ export default function ValidationSuccess({ navigation, route }: Props) {
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: colors.white,
   },
 });

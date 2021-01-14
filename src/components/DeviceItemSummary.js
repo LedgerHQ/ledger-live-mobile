@@ -5,17 +5,16 @@ import { View, StyleSheet } from "react-native";
 import { useSelector } from "react-redux";
 import { Trans } from "react-i18next";
 import Icon from "react-native-vector-icons/dist/Feather";
+import { useTheme } from "@react-navigation/native";
 import { deviceNameByDeviceIdSelectorCreator } from "../reducers/ble";
 import Circle from "./Circle";
 import Touchable from "./Touchable";
 import LText from "./LText";
-import colors from "../colors";
 import IconNanoX from "../icons/NanoX";
 import Alert from "../icons/Alert";
 
 type Props = {
   deviceId: string,
-  name: string,
   genuine: boolean,
   onEdit: () => void,
 };
@@ -25,10 +24,11 @@ export default function DeviceItemSummary({
   onEdit,
   deviceId,
 }: Props) {
+  const { colors } = useTheme();
   const name = useSelector(deviceNameByDeviceIdSelectorCreator(deviceId));
 
   return (
-    <View style={styles.root}>
+    <View style={[styles.root, { borderColor: colors.fog }]}>
       <IconNanoX color={colors.darkBlue} height={36} width={8} />
       <View style={styles.content}>
         <LText bold numberOfLines={1} style={styles.deviceNameText}>
@@ -36,7 +36,7 @@ export default function DeviceItemSummary({
         </LText>
         {genuine ? (
           <View style={styles.genuine}>
-            <LText numberOfLines={1} style={styles.genuineText}>
+            <LText numberOfLines={1} style={styles.genuineText} color="smoke">
               <Trans i18nKey="DeviceItemSummary.genuine" />
               {"  "}
             </LText>
@@ -49,6 +49,7 @@ export default function DeviceItemSummary({
             <LText
               numberOfLines={1}
               style={[styles.genuineText, styles.genuineFailed]}
+              color="smoke"
             >
               <Trans i18nKey="DeviceItemSummary.genuineFailed">
                 {"Genuine check "}
@@ -62,7 +63,7 @@ export default function DeviceItemSummary({
         )}
       </View>
       <Touchable event="DeviceItemEdit" onPress={onEdit}>
-        <LText bold numberOfLines={1} style={styles.editText}>
+        <LText bold numberOfLines={1} style={styles.editText} color="live">
           <Trans i18nKey="common.rename" />
         </LText>
       </Touchable>
@@ -77,7 +78,6 @@ const styles = StyleSheet.create({
   root: {
     paddingVertical: 14,
     paddingHorizontal: 24,
-    borderColor: colors.fog,
     borderWidth: 1,
     borderRadius: 4,
     flexDirection: "row",
@@ -94,7 +94,6 @@ const styles = StyleSheet.create({
   },
   deviceNameText: {
     fontSize: 16,
-    color: colors.darkBlue,
     paddingRight: 8,
   },
   genuine: {
@@ -104,13 +103,11 @@ const styles = StyleSheet.create({
   },
   genuineText: {
     fontSize: 14,
-    color: colors.smoke,
   },
   genuineFailed: {
     marginRight: 6,
   },
   editText: {
-    color: colors.live,
     fontSize: 14,
   },
 });

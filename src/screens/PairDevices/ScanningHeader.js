@@ -7,7 +7,6 @@ import Config from "react-native-config";
 import { getDeviceModel } from "@ledgerhq/devices";
 import LText from "../../components/LText";
 import BluetoothScanning from "../../components/BluetoothScanning";
-import colors from "../../colors";
 
 type Props = {};
 
@@ -25,7 +24,7 @@ class ScanningHeader extends PureComponent<Props> {
           </LText>
         </View>
         <View style={styles.SubtitleContainer}>
-          <LText style={styles.SubtitleText}>
+          <LText style={styles.SubtitleText} color="smoke">
             <Trans
               i18nKey="PairDevices.ScanningHeader.desc"
               values={getDeviceModel("nanoX")}
@@ -48,7 +47,6 @@ const styles = StyleSheet.create({
     marginTop: 32,
   },
   TitleText: {
-    color: colors.darkBlue,
     fontSize: 18,
   },
   SubtitleContainer: {
@@ -58,6 +56,5 @@ const styles = StyleSheet.create({
   SubtitleText: {
     textAlign: "center",
     fontSize: 14,
-    color: colors.smoke,
   },
 });

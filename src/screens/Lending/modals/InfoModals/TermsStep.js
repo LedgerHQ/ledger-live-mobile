@@ -9,9 +9,8 @@ import {
 } from "react-native";
 import { Trans } from "react-i18next";
 import { useNavigation } from "@react-navigation/native";
+import { track } from "../../../../analytics";
 import BaseInfoModal from "../BaseModal";
-import colors from "../../../../colors";
-import Touchable from "../../../../components/Touchable";
 import CheckBox from "../../../../components/CheckBox";
 import LText from "../../../../components/LText";
 import termsImg from "../../../../images/lending-terms.png";
@@ -34,6 +33,7 @@ export default function TermsStep({ route: { params } }: Props) {
   );
 
   const onTermsClick = useCallback(() => {
+    track("Page Lend TC accepted");
     Linking.openURL(urls.compoundTnC);
   }, []);
 
@@ -63,17 +63,16 @@ export default function TermsStep({ route: { params } }: Props) {
           <CheckBox isChecked={hasAcceptedTerms} />
         </TouchableOpacity>
 
-        <Touchable
-          event="Page Lend TC accepted"
-          style={styles.switchRow}
-          onPress={onTermsClick}
-        >
-          <LText style={styles.switchLabel}>
-            <Trans i18nKey="transfer.lending.terms.switchLabel">
-              <LText semiBold style={styles.conditionsText} />
-            </Trans>
-          </LText>
-        </Touchable>
+        <LText style={styles.switchLabel}>
+          <Trans i18nKey="transfer.lending.terms.switchLabel">
+            <LText
+              onPress={onTermsClick}
+              semiBold
+              style={styles.conditionsText}
+              color="live"
+            />
+          </Trans>
+        </LText>
       </View>
     </BaseInfoModal>
   );
@@ -87,17 +86,17 @@ const styles = StyleSheet.create({
   },
   switchLabel: {
     marginLeft: 8,
-    color: colors.darkBlue,
     fontSize: 13,
     paddingRight: 16,
   },
   conditionsText: {
+    fontSize: 13,
     textDecorationLine: "underline",
-    color: colors.live,
   },
   footer: {
     flexDirection: "row",
     alignContent: "center",
+    alignItems: "center",
     justifyContent: "space-between",
     paddingTop: 16,
   },

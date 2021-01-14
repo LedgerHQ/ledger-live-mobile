@@ -1,7 +1,8 @@
 // @flow
-import React from "react";
+import React, { useMemo } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "@react-navigation/native";
 import { ScreenName, NavigatorName } from "../../const";
 import * as families from "../../families";
 import OperationDetails, {
@@ -13,10 +14,15 @@ import EditDeviceName from "../../screens/EditDeviceName";
 import Distribution from "../../screens/Distribution";
 import Asset, { HeaderTitle } from "../../screens/Asset";
 import ScanRecipient from "../../screens/SendFunds/ScanRecipient";
-import FallbackCameraSend from "../../screens/SendFunds/FallbackCamera/FallbackCameraSend";
+import WalletConnectScan from "../../screens/WalletConnect/Scan";
+import WalletConnectConnect from "../../screens/WalletConnect/Connect";
+import WalletConnectDeeplinkingSelectAccount from "../../screens/WalletConnect/DeeplinkingSelectAccount";
+import FallbackCameraSend from "../FallbackCamera/FallbackCameraSend";
 import Main from "./MainNavigator";
+import { ErrorHeaderInfo } from "./BaseOnboardingNavigator";
 import ReceiveFundsNavigator from "./ReceiveFundsNavigator";
 import SendFundsNavigator from "./SendFundsNavigator";
+import SignMessageNavigator from "./SignMessageNavigator";
 import FreezeNavigator from "./FreezeNavigator";
 import UnfreezeNavigator from "./UnfreezeNavigator";
 import ClaimRewardsNavigator from "./ClaimRewardsNavigator";
@@ -36,10 +42,9 @@ import LendingInfoNavigator from "./LendingInfoNavigator";
 import LendingEnableFlowNavigator from "./LendingEnableFlowNavigator";
 import LendingSupplyFlowNavigator from "./LendingSupplyFlowNavigator";
 import LendingWithdrawFlowNavigator from "./LendingWithdrawFlowNavigator";
-import { closableStackNavigatorConfig } from "../../navigation/navigatorConfig";
+import { getStackNavigatorConfig } from "../../navigation/navigatorConfig";
 import Account from "../../screens/Account";
 import TransparentHeaderNavigationOptions from "../../navigation/TransparentHeaderNavigationOptions";
-import colors from "../../colors";
 import styles from "../../navigation/styles";
 import HeaderRightClose from "../HeaderRightClose";
 import StepHeader from "../StepHeader";
@@ -48,8 +53,13 @@ import AccountHeaderRight from "../../screens/Account/AccountHeaderRight";
 
 export default function BaseNavigator() {
   const { t } = useTranslation();
+  const { colors } = useTheme();
+  const stackNavigationConfig = useMemo(
+    () => getStackNavigatorConfig(colors, true),
+    [colors],
+  );
   return (
-    <Stack.Navigator mode="modal" screenOptions={closableStackNavigatorConfig}>
+    <Stack.Navigator mode="modal" screenOptions={stackNavigationConfig}>
       <Stack.Screen
         name={NavigatorName.Main}
         component={Main}
@@ -63,6 +73,11 @@ export default function BaseNavigator() {
       <Stack.Screen
         name={NavigatorName.SendFunds}
         component={SendFundsNavigator}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name={NavigatorName.SignMessage}
+        component={SignMessageNavigator}
         options={{ headerShown: false }}
       />
       <Stack.Screen
@@ -127,7 +142,7 @@ export default function BaseNavigator() {
       <Stack.Screen
         name={NavigatorName.Exchange}
         component={ExchangeNavigator}
-        options={{ headerLeft: null }}
+        options={{ headerStyle: styles.headerNoShadow, headerLeft: null }}
       />
       <Stack.Screen
         name={NavigatorName.ExchangeBuyFlow}
@@ -190,7 +205,14 @@ export default function BaseNavigator() {
       <Stack.Screen
         name={ScreenName.PairDevices}
         component={PairDevices}
-        options={{ title: t("SelectDevice.title"), headerLeft: null }}
+        options={({ navigation, route }) => ({
+          title: null,
+          headerRight: () => (
+            <ErrorHeaderInfo route={route} navigation={navigation} />
+          ),
+          headerShown: true,
+          headerStyle: styles.headerNoShadow,
+        })}
       />
       <Stack.Screen
         name={ScreenName.EditDeviceName}
@@ -219,7 +241,7 @@ export default function BaseNavigator() {
         name={ScreenName.Distribution}
         component={Distribution}
         options={{
-          ...closableStackNavigatorConfig,
+          ...stackNavigationConfig,
           title: t("distribution.header"),
           headerLeft: null,
         }}
@@ -253,6 +275,36 @@ export default function BaseNavigator() {
             <HeaderRightClose color={colors.white} preferDismiss={false} />
           ),
           headerLeft: null,
+        }}
+      />
+      <Stack.Screen
+        name={ScreenName.WalletConnectScan}
+        component={WalletConnectScan}
+        options={{
+          ...TransparentHeaderNavigationOptions,
+          title: "Wallet Connect",
+          headerRight: () => (
+            <HeaderRightClose color={colors.white} preferDismiss={false} />
+          ),
+          headerLeft: null,
+        }}
+      />
+      <Stack.Screen
+        name={ScreenName.WalletConnectDeeplinkingSelectAccount}
+        component={WalletConnectDeeplinkingSelectAccount}
+        options={{
+          title: t("walletconnect.deeplinkingTitle"),
+          headerRight: () => <HeaderRightClose preferDismiss={false} />,
+          headerLeft: null,
+        }}
+      />
+      <Stack.Screen
+        name={ScreenName.WalletConnectConnect}
+        component={WalletConnectConnect}
+        options={{
+          title: "Wallet Connect",
+          headerLeft: null,
+          gestureEnabled: false,
         }}
       />
       <Stack.Screen

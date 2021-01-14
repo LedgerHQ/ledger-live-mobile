@@ -1,5 +1,13 @@
 name: bundle app
-on: [pull_request]
+on:
+  pull_request:
+    branches:
+      - develop
+      - master
+  push:
+    branches:
+      - develop
+      - master
 
 jobs:
   bundle-apk:
@@ -22,6 +30,9 @@ jobs:
           ban: ledgerlive
         if: github.event_name == 'pull_request'
       - uses: actions/checkout@v2
+        with:
+          ref: ${{github.event.pull_request.head.ref}}
+          repository: ${{github.event.pull_request.head.repo.full_name}}
       - uses: actions/setup-node@main
         with:
           node-version: 12.x
@@ -37,7 +48,7 @@ jobs:
         uses: ./.github/actions/change-product-name
       - name: Get short SHA
         id: slug
-        run: echo "::set-output name=sha8::${GITHUB_SHA:0:7}"
+        run: echo "::set-output name=sha8::$(git rev-parse HEAD)"
       - name: make local version
         run: yarn version --new-version=${{ steps.version.outputs.clean }}-sha.${{ steps.slug.outputs.sha8 }}
       - name: build the app
@@ -46,7 +57,7 @@ jobs:
           export ANDROID_KEYSTORE_PASS=staging
           export ANDROID_KEY_ALIAS=staging
           export ANDROID_KEY_PASS=staging
-          yarn android:apk
+          bundle exec fastlane android apk --env production
       - uses: ledgerhq/actions/get-package-infos@v1.0.0
         id: post-version
       - name: upload Android app 1/4

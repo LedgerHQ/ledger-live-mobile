@@ -1,5 +1,15 @@
 name: bundle ios
-on: pull_request_target
+on:
+  workflow_dispatch:
+    inputs:
+      owner:
+        description: 'Owner?'
+        required: true
+        default: 'LedgerHQ'
+      branch:
+        description: 'Branch?'
+        required: true
+        default: 'develop'
 
 jobs:
   bundle-ipa:
@@ -8,6 +18,7 @@ jobs:
       - name: Cancel Previous Runs
         uses: styfle/cancel-workflow-action@0.4.0
         with:
+          workflow_id: "bundle ios"
           access_token: ${{ secrets.GITHUB_TOKEN }}
       - name: Set up Ruby
         uses: actions/setup-ruby@v1
@@ -23,8 +34,8 @@ jobs:
         if: github.event_name == 'pull_request'
       - uses: actions/checkout@v2
         with:
-          ref: ${{github.event.pull_request.head.ref}}
-          repository: ${{github.event.pull_request.head.repo.full_name}}
+          ref: ${{github.event.inputs.branch}}
+          repository: ${{github.event.inputs.owner}}/ledger-live-mobile
       - uses: actions/setup-node@main
         with:
           node-version: 12.x
@@ -35,7 +46,7 @@ jobs:
       - name: get yarn cache
         id: yarn-cache
         run: echo "::set-output name=dir::$(yarn cache dir)"
-      - uses: actions/cache@v2
+      - uses: actions/cache@v2.1.3
         with:
           path: ${{ steps.yarn-cache.outputs.dir }}
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
@@ -49,13 +60,16 @@ jobs:
         uses: ./.github/actions/change-product-name
       - name: Get short SHA
         id: slug
-        run: echo "::set-output name=sha8::${GITHUB_SHA:0:7}"
+        run: echo "::set-output name=sha8::$(git rev-parse HEAD)"
       - name: make local version
         run: yarn version --new-version=${{ steps.version.outputs.clean }}-sha.${{ steps.slug.outputs.sha8 }}
+      - name: push APP_NAME to .env.adhoc
+        run: |
+          echo APP_NAME="Ledger Live (${{ steps.slug.outputs.sha8 }})" >> .env.adhoc
       - name: build the app
         env:
-          APP_NAME: "Ledger Live (${{github.event.pull_request.head.ref}})"
           APP_IDENTIFIER: ${{ secrets.APP_IDENTIFIER }}
+          SHA: ${{ steps.slug.outputs.sha8 }}
           APPLE_ID: ${{ secrets.APPLE_ID }}
           GIT_REPO_URL: ${{ secrets.GIT_REPO_URL }}
           GIT_REPO_USER: ${{ secrets.GIT_REPO_USER }}
@@ -64,7 +78,7 @@ jobs:
           CI_KEYCHAIN_PASSWORD: ${{ secrets.CI_KEYCHAIN_PASSWORD }}
           DEVELOPER_TEAM_ID: ${{ secrets.DEVELOPER_TEAM_ID }}
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
-          TOKEN: ${{ secrets.TEAM_LIVE_ACCESS_TOKEN }}
+          TOKEN: ${{ secrets.GIT_REPO_TOKEN }}
         run: |
           yarn ios:ci
       - uses: ledgerhq/actions/get-package-infos@v2.0.0

@@ -1,7 +1,5 @@
 /* @flow */
 import React, { PureComponent } from "react";
-import { StyleSheet, View } from "react-native";
-import { RNCamera } from "react-native-camera";
 import { connect } from "react-redux";
 import Config from "react-native-config";
 import { decodeURIScheme } from "@ledgerhq/live-common/lib/currencies";
@@ -13,16 +11,14 @@ import type {
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { ScreenName } from "../../const";
 import { accountScreenSelector } from "../../reducers/accounts";
-import StyledStatusBar from "../../components/StyledStatusBar";
-import CameraScreen from "../../components/CameraScreen";
-import FallBackCamera from "./FallbackCamera/Fallback";
-import getWindowDimensions from "../../logic/getWindowDimensions";
+import Scanner from "../../components/Scanner";
 
 type Props = {
   navigation: any,
   route: { params: RouteParams },
   account: AccountLike,
   parentAccount: ?Account,
+  colors: *,
 };
 
 type RouteParams = {
@@ -30,33 +26,14 @@ type RouteParams = {
   transaction: Transaction,
 };
 
-type State = {
-  width: number,
-  height: number,
-};
+type State = {};
 
 class ScanRecipient extends PureComponent<Props, State> {
-  state = {
-    ...getWindowDimensions(),
-  };
-
-  lastData: ?string = null;
-
-  frames: * = null;
-
-  completed: boolean = false;
-
   componentDidMount() {
     if (Config.MOCK_SCAN_RECIPIENT) {
       this.onResult(Config.MOCK_SCAN_RECIPIENT);
     }
   }
-
-  onBarCodeRead = ({ data }: { data: string }) => {
-    if (data) {
-      this.onResult(data);
-    }
-  };
 
   onResult = (result: string) => {
     const { account, parentAccount, route } = this.props;
@@ -83,39 +60,15 @@ class ScanRecipient extends PureComponent<Props, State> {
     });
   };
 
-  setDimensions = () => {
-    const dimensions = getWindowDimensions();
-
-    this.setState(dimensions);
-  };
-
   render() {
-    const { width, height } = this.state;
     const { navigation } = this.props;
-    const cameraRatio = 16 / 9;
-    const cameraDimensions =
-      width > height
-        ? { width, height: width / cameraRatio }
-        : { width: height / cameraRatio, height };
 
     return (
-      <View style={styles.root} onLayout={this.setDimensions}>
-        <StyledStatusBar barStyle="light-content" />
-        <RNCamera
-          barCodeTypes={[RNCamera.Constants.BarCodeType.qr]} // Do not look for barCodes other than QR
-          onBarCodeRead={this.onBarCodeRead}
-          ratio="16:9"
-          captureAudio={false}
-          style={[styles.camera, cameraDimensions]}
-          notAuthorizedView={<FallBackCamera navigation={navigation} />}
-        >
-          {({ status }) =>
-            status === "READY" ? (
-              <CameraScreen width={width} height={height} />
-            ) : null
-          }
-        </RNCamera>
-      </View>
+      <Scanner
+        navigation={navigation}
+        screenName={ScreenName.SendFunds}
+        onResult={this.onResult}
+      />
     );
   }
 }
@@ -124,16 +77,3 @@ const mapStateToProps = (state, { route }) =>
   accountScreenSelector(route)(state);
 
 export default connect(mapStateToProps)(ScanRecipient);
-
-const styles = StyleSheet.create({
-  root: {
-    flex: 1,
-    backgroundColor: "black",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  camera: {
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});

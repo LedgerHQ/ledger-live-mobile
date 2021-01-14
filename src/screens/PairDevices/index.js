@@ -8,13 +8,14 @@ import getDeviceInfo from "@ledgerhq/live-common/lib/hw/getDeviceInfo";
 import getDeviceName from "@ledgerhq/live-common/lib/hw/getDeviceName";
 import { listApps } from "@ledgerhq/live-common/lib/apps/hw";
 import { delay } from "@ledgerhq/live-common/lib/promise";
+import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
+import { useTheme } from "@react-navigation/native";
 import logger from "../../logger";
 import TransportBLE from "../../react-native-hw-transport-ble";
 import { GENUINE_CHECK_TIMEOUT } from "../../constants";
 import { addKnownDevice } from "../../actions/ble";
 import { installAppFirstTime } from "../../actions/settings";
 import { hasCompletedOnboardingSelector } from "../../reducers/settings";
-import colors from "../../colors";
 import RequiresBLE from "../../components/RequiresBLE";
 import PendingPairing from "./PendingPairing";
 import PendingGenuineCheck from "./PendingGenuineCheck";
@@ -29,13 +30,17 @@ type Props = {
 };
 
 type RouteParams = {
-  onDone?: (deviceId: string) => void,
+  onDone?: (device: Device) => void,
 };
 
 export default function PairDevices(props: Props) {
+  const { colors } = useTheme();
   return (
     <RequiresBLE>
-      <SafeAreaView forceInset={forceInset} style={styles.root}>
+      <SafeAreaView
+        forceInset={forceInset}
+        style={[styles.root, { backgroundColor: colors.white }]}
+      >
         <PairDevicesInner {...props} />
       </SafeAreaView>
     </RequiresBLE>
@@ -53,33 +58,42 @@ function PairDevicesInner({ navigation, route }: Props) {
 
   const unmounted = useRef(false);
 
-  useEffect(() => {
-    return () => {
+  useEffect(
+    () => () => {
       unmounted.current = true;
-    };
-  }, []);
+    },
+    [],
+  );
 
   const onTimeout = useCallback(() => {
     dispatch({ type: "timeout" });
   }, [dispatch]);
 
   const onRetry = useCallback(() => {
+    navigation.setParams({ hasError: false });
     dispatch({ type: "scanning" });
-  }, [dispatch]);
+  }, [dispatch, navigation]);
 
   const onError = useCallback(
     (error: Error) => {
       logger.critical(error);
+      navigation.setParams({ hasError: true });
       dispatch({ type: "error", payload: error });
     },
-    [dispatch],
+    [dispatch, navigation],
   );
 
   const onSelect = useCallback(
-    async (device: Device) => {
+    async (bleDevice: BleDevice) => {
+      const device = {
+        deviceName: bleDevice.name,
+        deviceId: bleDevice.id,
+        modelId: "nanoX",
+        wired: false,
+      };
       dispatch({ type: "pairing", payload: device });
       try {
-        const transport = await TransportBLE.open(device);
+        const transport = await TransportBLE.open(bleDevice);
         if (unmounted.current) return;
         try {
           const deviceInfo = await getDeviceInfo(transport);
@@ -114,16 +128,17 @@ function PairDevicesInner({ navigation, route }: Props) {
 
           if (unmounted.current) return;
 
-          const name = (await getDeviceName(transport)) || device.name;
+          const name =
+            (await getDeviceName(transport)) ?? device.deviceName ?? "";
           if (unmounted.current) return;
 
-          dispatchRedux(addKnownDevice({ id: device.id, name }));
+          dispatchRedux(addKnownDevice({ id: device.deviceId, name }));
 
           if (unmounted.current) return;
           dispatch({ type: "paired" });
         } finally {
           transport.close();
-          await TransportBLE.disconnect(device.id).catch(() => {});
+          await TransportBLE.disconnect(device.deviceId).catch(() => {});
           await delay(500);
         }
       } catch (error) {
@@ -136,20 +151,24 @@ function PairDevicesInner({ navigation, route }: Props) {
   );
 
   const onBypassGenuine = useCallback(() => {
+    navigation.setParams({ hasError: true });
     if (device) {
       dispatchRedux(
-        addKnownDevice({ id: device.id, name: name || device.name }),
+        addKnownDevice({
+          id: device.deviceId,
+          name: name ?? device.deviceName ?? "",
+        }),
       );
       dispatch({ type: "paired" });
     } else {
       dispatch({ type: "scanning" });
     }
-  }, [device, dispatchRedux, name, dispatch]);
+  }, [device, dispatchRedux, name, dispatch, navigation]);
 
   const onDone = useCallback(
-    (deviceId: string) => {
+    (device: Device) => {
       navigation.goBack();
-      route.params?.onDone?.(deviceId);
+      route.params?.onDone?.(device);
     },
     [navigation, route],
   );
@@ -180,12 +199,7 @@ function PairDevicesInner({ navigation, route }: Props) {
       );
     case "paired":
       return device ? (
-        <Paired
-          deviceName={device.name}
-          deviceId={device.id}
-          genuine={!skipCheck}
-          onContinue={onDone}
-        />
+        <Paired device={device} genuine={!skipCheck} onContinue={onDone} />
       ) : null;
     default:
       return null;
@@ -240,7 +254,7 @@ type State = {
   genuineAskedOnDevice: boolean,
 };
 
-type Device = {
+type BleDevice = {
   id: string,
   name: string,
 };
@@ -248,6 +262,5 @@ type Device = {
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: colors.white,
   },
 });
