@@ -2,7 +2,6 @@
 import { Server } from "ws";
 import path from "path";
 import fs from "fs";
-import { delay } from "@ledgerhq/live-common/lib/promise";
 import type { E2EBridgeMessage } from "../../src/e2e-bridge";
 import { $waitFor } from "./query";
 
@@ -41,7 +40,6 @@ export class E2EBridge {
     this.postMessage({ type: "importSettngs", payload: data.settings });
 
     if (data.accounts.length) {
-      await delay(5000);
       // TODO E2E: investigate why it fails
       await $waitFor("PortfolioSectionHeader");
       return;
