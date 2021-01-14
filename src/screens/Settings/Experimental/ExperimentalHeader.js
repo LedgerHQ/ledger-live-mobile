@@ -3,15 +3,16 @@ import React, { useState } from "react";
 import { StyleSheet } from "react-native";
 import Animated, { Extrapolate } from "react-native-reanimated";
 import { Trans } from "react-i18next";
+import { useTheme } from "@react-navigation/native";
 import useExperimental from "./useExperimental";
 import { runCollapse } from "../../../components/CollapsibleList";
-import colors from "../../../colors";
 import LText from "../../../components/LText";
 import ExperimentalIcon from "../../../icons/Experimental";
 
 const { cond, set, Clock, Value, interpolate, eq } = Animated;
 
 export default function ExperimentalHeader() {
+  const { colors } = useTheme();
   const isExperimental = useExperimental();
 
   const clock = new Clock();
