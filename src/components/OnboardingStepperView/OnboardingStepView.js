@@ -1,7 +1,7 @@
 // @flow
 import React, { useCallback, useMemo, useState } from "react";
 import { View, StyleSheet, Pressable, Image, ScrollView } from "react-native";
-import colors from "../../colors";
+import { useTheme } from "@react-navigation/native";
 import { normalize } from "../../helpers/normalizeSize";
 import { TrackScreen } from "../../analytics";
 
@@ -55,7 +55,8 @@ export function InfoStepView({
   onNext: () => void,
   sceneColors: string[],
 }) {
-  const [primaryColor, accentColor, textColor, bulletColor] = sceneColors;
+  const { colors } = useTheme();
+  const [, accentColor, textColor, bulletColor, , , buttonColor] = sceneColors;
   const [isInfoModalOpen, setInfoModalOpen] = useState(false);
 
   const onOpenInfoModal = useCallback(() => setInfoModalOpen(true), []);
@@ -198,7 +199,7 @@ export function InfoStepView({
               semiBold
               style={[
                 styles.ctaLabel,
-                { color: isDisabled ? "rgba(0,0,0,0.3)" : primaryColor },
+                { color: isDisabled ? "rgba(0,0,0,0.3)" : buttonColor },
               ]}
             >
               {ctaText}
@@ -275,6 +276,7 @@ const styles = StyleSheet.create({
     flex: 0.5,
     minHeight: 150,
     position: "relative",
+    marginTop: 24,
   },
   lottieContainer: {
     minHeight: 200,
