@@ -140,9 +140,6 @@ class Row extends PureComponent<RowProps> {
     return (
       <Touchable
         event="OnboardingGetStartedChoice"
-        testID={`OnboardingGetStartedChoice${id.replace(/^\w/, char =>
-          char.toUpperCase(),
-        )}`}
         eventProperties={{ id }}
         onPress={onPress}
         style={styles.row}

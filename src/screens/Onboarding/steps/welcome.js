@@ -13,6 +13,7 @@ import Animated, {
   Easing,
   multiply,
 } from "react-native-reanimated";
+import Config from "react-native-config";
 import { useTheme } from "@react-navigation/native";
 import Touchable from "../../../components/Touchable";
 import LText from "../../../components/LText";
@@ -56,7 +57,7 @@ function OnboardingStepWelcome({ navigation }: *) {
       set(
         animY,
         loop({
-          duration: 10000,
+          duration: !Config.MOCK ? 10000 : 0,
           easing: Easing.inOut(Easing.ease),
           clock: clockY,
           boomerang: true,
@@ -74,7 +75,7 @@ function OnboardingStepWelcome({ navigation }: *) {
       set(
         animX,
         loop({
-          duration: 8000,
+          duration: !Config.MOCK ? 8000 : 0,
           easing: Easing.inOut(Easing.ease),
           clock: clockX,
           boomerang: true,

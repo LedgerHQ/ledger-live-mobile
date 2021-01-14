@@ -43,6 +43,7 @@ function BluetoothEmpty({ onPairNewDevice }: Props) {
       </View>
       <Button
         event="PairDevice"
+        testID="PairDevice"
         type="primary"
         title={<Trans i18nKey="SelectDevice.deviceNotFoundPairNewDevice" />}
         onPress={onPairNewDevice}

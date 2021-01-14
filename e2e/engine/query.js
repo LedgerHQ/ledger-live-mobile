@@ -1,6 +1,6 @@
 // @flow
 
-export function proceed(): Promise<void> {
+export function $proceed(): Promise<void> {
   return $("proceed").tap();
 }
 
@@ -10,4 +10,12 @@ export function $(id: string) {
 
 export function $byText(text: string) {
   return element(by.text(text));
+}
+
+export function $waitFor(id: string) {
+  return expect($(id)).toBeVisible();
+}
+
+export function $tap(id: string) {
+  return $(id).tap();
 }

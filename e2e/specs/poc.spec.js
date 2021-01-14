@@ -1,18 +1,21 @@
 // @flow
-import { E2EBridge, $, proceed } from "../engine";
+import { E2EBridge, $tap, $proceed } from "../engine";
 
 describe("Mobile E2E Testing POC", () => {
   const bridge = new E2EBridge();
 
   test("Onboarding", async () => {
-    await proceed();
-    await $("OnboardingDeviceNanoX").tap();
-    await $("OnboardingGetStartedChoiceInitialized").tap();
-    await $("OnboardingPinYes").tap();
-    await $("OnboardingRecoveryYes").tap();
-    await proceed();
+    await $proceed();
+    await $tap("TermsAcceptSwitch");
+    await $tap("TermsAcceptSwitchPrivacy");
     // TODO E2E: invastigate why it matches multiple primary buttons
-    await $("PairDevice").tap();
+    await $tap("Onboarding - ToU accepted");
+    await $tap("Onboarding Device - Selection|nanoX");
+    await $tap("Onboarding - Connect|nanoX");
+    // TODO E2E: invastigate why it matches multiple primary buttons
+    await $tap("OnboardingStemPairNewContinue");
+    // TODO E2E: invastigate why it matches multiple primary buttons
+    await $tap("PairDevice");
     const deviceNames = [
       "Nano X de David",
       "Nano X de Arnaud",
@@ -21,21 +24,15 @@ describe("Mobile E2E Testing POC", () => {
     deviceNames.forEach((name, i) => {
       bridge.add(`mock_${i + 1}`, name);
     });
-    await $(`DeviceItemEnter ${deviceNames[0]}`).tap();
+    await $tap(`DeviceItemEnter ${deviceNames[0]}`);
     bridge.setInstalledApps();
     bridge.open();
     // TODO E2E: invastigate why it matches multiple primary buttons
-    await $("PairDevicesContinue").tap();
-    await $("OnboardingSkip").tap();
-    // TODO E2E: invastigate why it matches multiple primary buttons
-    await $("OnboardingShareDataContinue").tap();
-    // TODO E2E: invastigate why it matches multiple primary buttons
-    await element(by.id("OnboardingFinish")).tap();
-    await element(by.id("TermsAcceptSwitch")).tap();
-    await element(by.id("TermsConfirm")).tap();
+    await $tap("PairDevicesContinue");
+    await $tap("OnboardingFinish");
   });
 
   test("accounts/settings import example", async () => {
-    bridge.loadConfig("1AccountBTC1AccountETH", true);
+    await bridge.loadConfig("1AccountBTC1AccountETH", true);
   });
 });

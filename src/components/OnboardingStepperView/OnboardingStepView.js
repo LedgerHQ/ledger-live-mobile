@@ -44,6 +44,7 @@ export function InfoStepView({
   lottieStyle,
   bullets,
   ctaText,
+  ctaEvent = "proceed",
   ctaWarningModal,
   ctaWarningCheckbox,
   children,
@@ -182,6 +183,7 @@ export function InfoStepView({
             ]}
             disabled={isDisabled}
             onPress={ctaWarningModal ? onOpenInfoModal : onNext}
+            testID={isDisabled ? undefined : ctaEvent}
           >
             <LText
               semiBold

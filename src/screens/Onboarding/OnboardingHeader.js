@@ -61,12 +61,7 @@ export default function OnboardingHeader({
           <IconArrowLeft size={16} color={colors.grey} />
         </Touchable>
         {withSkip && (
-          <Touchable
-            event="OnboardingSkip"
-            onPress={next}
-            hitSlop={hitSlop}
-            testID="OnboardingSkip"
-          >
+          <Touchable event="OnboardingSkip" onPress={next} hitSlop={hitSlop}>
             <LText style={styles.skip} semiBold>
               {t("common.skip")}
             </LText>

@@ -85,6 +85,7 @@ function OnboardingStepTerms({ navigation }: *) {
           </Touchable>
           <Button
             event="Onboarding - ToU accepted"
+            testID="Onboarding - ToU accepted"
             type="primary"
             disabled={!toggle || !togglePrivacy}
             onPress={next}

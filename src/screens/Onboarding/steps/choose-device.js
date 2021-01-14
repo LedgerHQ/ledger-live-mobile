@@ -104,7 +104,6 @@ class OnboardingStepChooseDevice extends Component<
           title={deviceNames.nanoX.fullDeviceName}
           onPress={this.chooseNanoX}
           Icon={NanoXVertical}
-          testID="OnboardingDeviceNanoX"
         />
         <DeviceItem
           event="OnboardingDevice"

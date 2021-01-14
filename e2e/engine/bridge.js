@@ -2,7 +2,9 @@
 import { Server } from "ws";
 import path from "path";
 import fs from "fs";
+import { delay } from "@ledgerhq/live-common/lib/promise";
 import type { E2EBridgeMessage } from "../../src/e2e-bridge";
+import { $waitFor } from "./query";
 
 export class E2EBridge {
   wss: Server;
@@ -25,7 +27,7 @@ export class E2EBridge {
     });
   }
 
-  async loadConfig(fileName: string, acceptTerms = true): Promise<void> {
+  async loadConfig(fileName: string, acceptTerms?: true = true): Promise<void> {
     if (acceptTerms) {
       this.acceptTerms();
     }
@@ -34,10 +36,17 @@ export class E2EBridge {
       path.resolve("e2e", "config", `${fileName}.json`),
     );
     const { data } = JSON.parse(f);
-    this.postMessage({ type: "importSettngs", payload: data.settings });
-    this.postMessage({ type: "importAccounts", payload: data.accounts });
 
-    await expect(this.$("PortfolioScreen")).toBeVisible();
+    this.postMessage({ type: "importAccounts", payload: data.accounts });
+    this.postMessage({ type: "importSettngs", payload: data.settings });
+
+    if (data.accounts.length) {
+      await delay(5000);
+      // TODO E2E: investigate why it fails
+      await $waitFor("PortfolioSectionHeader");
+      return;
+    }
+    await $waitFor("PortfolioScreen");
   }
 
   add(id: string, name: string) {

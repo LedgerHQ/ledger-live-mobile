@@ -11,7 +11,7 @@ import {
   Animated,
   Easing,
 } from "react-native";
-
+import Config from "react-native-config";
 import { useTheme } from "@react-navigation/native";
 import { TrackScreen } from "../../../analytics";
 import { completeOnboarding } from "../../../actions/settings";
@@ -39,6 +39,7 @@ export default function OnboardingStepFinish({ navigation }: Props) {
   const [progress] = useState(new Animated.Value(0));
 
   useEffect(() => {
+    if (Config.MOCK) return;
     Animated.loop(
       Animated.timing(progress, {
         toValue: 1.0,
