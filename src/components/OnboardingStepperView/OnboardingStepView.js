@@ -135,19 +135,19 @@ export function InfoStepView({
                           )}
                         </View>
                         <View style={styles.bulletTextContainer}>
-                          {title && (
+                          {title ? (
                             <LText
                               semiBold
                               style={[styles.bulletTitle, { color: textColor }]}
                             >
                               {title}
                             </LText>
-                          )}
-                          {label && (
+                          ) : null}
+                          {label ? (
                             <LText style={[styles.label, { color: textColor }]}>
                               {label}
                             </LText>
-                          )}
+                          ) : null}
                           {labels && labels.length > 0
                             ? labels.map((l, j) => (
                                 <LText
@@ -193,7 +193,9 @@ export function InfoStepView({
               },
             ]}
             disabled={isDisabled}
-            onPress={ctaWarningModal ? onOpenInfoModal : onNext}
+            onPress={
+              isDisabled ? () => {} : ctaWarningModal ? onOpenInfoModal : onNext
+            }
           >
             <LText
               semiBold
