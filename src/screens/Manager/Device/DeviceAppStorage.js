@@ -20,6 +20,7 @@ type Props = {
 
 const DeviceAppStorage = ({
   deviceModel,
+  deviceInfo,
   distribution: {
     freeSpaceBytes,
     appsSpaceBytes,
