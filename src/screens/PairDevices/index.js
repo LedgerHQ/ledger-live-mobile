@@ -94,7 +94,7 @@ class PairDevices extends Component<PairDevicesProps, State> {
     this.setState({ error });
   };
 
-  onSelect = async (bleDevice: BleDevice) => {
+  onSelect = async (bleDevice: BleDevice, deviceMeta: *) => {
     const { hasCompletedOnboarding, installAppFirstTime } = this.props;
     const device = {
       deviceName: bleDevice.name,
@@ -158,7 +158,7 @@ class PairDevices extends Component<PairDevicesProps, State> {
           name,
           deviceInfo,
           appsInstalled,
-          modelId: device.modelId,
+          modelId: deviceMeta.modelId,
         });
         if (this.unmounted) return;
         this.setState({ status: "paired" });
