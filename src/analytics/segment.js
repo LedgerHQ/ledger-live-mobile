@@ -142,17 +142,16 @@ export const screen = (
   if (!storeInstance || !analyticsEnabledSelector(storeInstance.getState())) {
     return;
   }
+
+  const allProperties = {
+    ...extraProperties(storeInstance),
+    ...properties,
+  };
+
   if (ANALYTICS_LOGS)
-    console.log("analytics:screen", category, name, properties);
-  trackSubject.next({ event: title, properties });
+    console.log("analytics:screen", category, name, allProperties);
+  trackSubject.next({ event: title, properties: allProperties });
 
   if (!token) return;
-  analytics.track(
-    title,
-    {
-      ...extraProperties(storeInstance),
-      ...properties,
-    },
-    { context },
-  );
+  analytics.track(title, allProperties, { context });
 };
