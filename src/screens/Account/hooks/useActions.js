@@ -36,8 +36,7 @@ export default function useActions({ account, parentAccount, colors }: Props) {
   const decorators = perFamilyAccountActions[mainAccount.currency.family];
   const currency = getAccountCurrency(account);
 
-  const walletConnectAvailable =
-    currency.id === "ethereum" && getEnv("WALLETCONNECT");
+  const walletConnectAvailable = currency.id === "ethereum";
 
   const accountId = account.id;
 
