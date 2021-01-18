@@ -8,7 +8,6 @@ import {
 } from "@ledgerhq/live-common/lib/account";
 import { useSelector } from "react-redux";
 import { Trans } from "react-i18next";
-import { getEnv } from "@ledgerhq/live-common/lib/env";
 import { NavigatorName, ScreenName } from "../../../const";
 import {
   readOnlyModeEnabledSelector,
