@@ -13,8 +13,8 @@ import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import { createAction } from "@ledgerhq/live-common/lib/hw/actions/app";
 import connectApp from "@ledgerhq/live-common/lib/hw/connectApp";
 
+import { useTheme } from "@react-navigation/native";
 import { accountScreenSelector } from "../../reducers/accounts";
-import colors from "../../colors";
 import { ScreenName } from "../../const";
 import { TrackScreen } from "../../analytics";
 import SelectDevice from "../../components/SelectDevice";
@@ -42,6 +42,7 @@ type RouteParams = {
 
 export default function ConnectDevice({ navigation, route }: Props) {
   const { t } = useTranslation();
+  const { colors } = useTheme();
   const { parentAccount } = useSelector(accountScreenSelector(route));
   const readOnlyModeEnabled = useSelector(readOnlyModeEnabledSelector);
   const [device, setDevice] = useState<?Device>();
@@ -97,7 +98,10 @@ export default function ConnectDevice({ navigation, route }: Props) {
     account && account.type === "TokenAccount" && account.token;
 
   return (
-    <SafeAreaView style={styles.root} forceInset={forceInset}>
+    <SafeAreaView
+      style={[styles.root, { backgroundColor: colors.background }]}
+      forceInset={forceInset}
+    >
       <TrackScreen category="ReceiveFunds" name="ConnectDevice" />
       <NavigationScrollView
         style={styles.scroll}
@@ -131,7 +135,6 @@ export default function ConnectDevice({ navigation, route }: Props) {
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: colors.white,
   },
   bodyError: {
     flex: 1,
@@ -146,10 +149,5 @@ const styles = StyleSheet.create({
   },
   scrollContainer: {
     padding: 16,
-  },
-  footer: {
-    padding: 4,
-    borderTopWidth: 1,
-    borderTopColor: colors.lightFog,
   },
 });
