@@ -26,7 +26,7 @@ export default function() {
 }
 ```
 
-- [withTheme HOC](../src/colors.js#37)
+- [withTheme HOC](../src/colors.js#L37)
 
 ```javascript
 import React from "react";
