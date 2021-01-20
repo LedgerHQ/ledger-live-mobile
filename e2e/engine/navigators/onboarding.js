@@ -13,8 +13,7 @@ export class Onboarding {
     await $proceed();
     await $tap("TermsAcceptSwitch");
     await $tap("TermsAcceptSwitchPrivacy");
-    // TODO E2E: invastigate why it matches multiple primary buttons
-    await $tap("Onboarding - ToU accepted");
+    await $proceed();
   }
 
   async selectNano(modelId: DeviceModelId) {
@@ -30,10 +29,8 @@ export class Onboarding {
   async runAll(): Promise<void> {
     await this.connectNano("nanoX");
 
-    // TODO E2E: invastigate why it matches multiple primary buttons
     await $tap("OnboardingStemPairNewContinue");
-    // TODO E2E: invastigate why it matches multiple primary buttons
-    await $tap("PairDevice");
+    await $proceed();
     const deviceNames = [
       "Nano X de David",
       "Nano X de Arnaud",
@@ -45,8 +42,7 @@ export class Onboarding {
     await $tap(`DeviceItemEnter ${deviceNames[0]}`);
     this.bridge.setInstalledApps();
     this.bridge.open();
-    // TODO E2E: invastigate why it matches multiple primary buttons
-    await $tap("PairDevicesContinue");
+    await $proceed();
     await $tap("OnboardingFinish");
   }
 }

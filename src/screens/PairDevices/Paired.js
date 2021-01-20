@@ -82,7 +82,6 @@ export default function Paired({
           type="primary"
           title={<Trans i18nKey="PairDevices.Paired.action" />}
           onPress={onContinue}
-          testID="PairDevicesContinue"
         />
       </View>
     </View>

@@ -1,6 +1,6 @@
 /* @flow */
 
-import React, { PureComponent, useMemo } from "react";
+import React, { PureComponent } from "react";
 import { RectButton } from "react-native-gesture-handler";
 import {
   StyleSheet,
@@ -10,7 +10,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import type { ViewStyleProp } from "react-native/Libraries/StyleSheet/StyleSheet";
-import { useTheme } from "@react-navigation/native";
+import { useTheme, useIsFocused } from "@react-navigation/native";
 import LText from "./LText";
 import ButtonUseTouchable from "../context/ButtonUseTouchable";
 import { track } from "../analytics";
@@ -59,14 +59,21 @@ export type BaseButtonProps = {
 type Props = BaseButtonProps & {
   useTouchable: boolean,
   colors: *,
+  isFocused: boolean,
 };
 
 const ButtonWrapped = (props: BaseButtonProps) => {
   const { colors } = useTheme();
+  const isFocused = useIsFocused();
   return (
     <ButtonUseTouchable.Consumer>
       {useTouchable => (
-        <Button {...props} useTouchable={useTouchable} colors={colors} />
+        <Button
+          {...props}
+          useTouchable={useTouchable}
+          colors={colors}
+          isFocused={isFocused}
+        />
       )}
     </ButtonUseTouchable.Consumer>
   );
@@ -159,6 +166,7 @@ class Button extends PureComponent<
       // everything else
       containerStyle,
       colors,
+      isFocused,
       ...otherProps
     } = this.props;
 
@@ -270,7 +278,7 @@ class Button extends PureComponent<
     const containerSpecificProps = useTouchable ? {} : { enabled: !isDisabled };
 
     function getTestID() {
-      if (isDisabled) return undefined;
+      if (isDisabled || !isFocused) return undefined;
       if (otherProps.testID) return otherProps.testID;
 
       switch (type) {
