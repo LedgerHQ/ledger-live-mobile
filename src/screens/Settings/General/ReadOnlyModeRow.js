@@ -22,7 +22,7 @@ const mapDispatchToProps = {
   setReadOnlyMode,
 };
 
-class DeveloperModeRow extends PureComponent<Props> {
+class ReadOnlyModeRow extends PureComponent<Props> {
   setReadOnlyModeAndReset = async (enabled: boolean) => {
     const { setReadOnlyMode, reboot } = this.props;
     await setReadOnlyMode(enabled);
@@ -58,4 +58,4 @@ class DeveloperModeRow extends PureComponent<Props> {
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(withReboot(DeveloperModeRow));
+)(withReboot(ReadOnlyModeRow));

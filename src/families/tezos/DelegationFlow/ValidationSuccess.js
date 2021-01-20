@@ -51,14 +51,12 @@ export default function ValidationSuccess({ navigation, route }: Props) {
       <ValidateSuccess
         title={
           <Trans
-            i18nKey={"delegation.broadcastSuccessTitle." + transaction.mode}
+            i18nKey={`delegation.broadcastSuccessTitle.${transaction.mode}`}
           />
         }
         description={
           <Trans
-            i18nKey={
-              "delegation.broadcastSuccessDescription." + transaction.mode
-            }
+            i18nKey={`delegation.broadcastSuccessDescription.${transaction.mode}`}
           />
         }
         primaryButton={

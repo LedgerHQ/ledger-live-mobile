@@ -127,21 +127,19 @@ export default function ValidateOnDevice({
     status,
   });
 
-  const transRecipientWording = t(
-    `ValidateOnDevice.recipientWording.${transaction.mode || "send"}`,
-  );
+  const key = transaction.mode || "send";
+  const transRecipientWording = t(`ValidateOnDevice.recipientWording.${key}`);
   const recipientWording =
-    transRecipientWording !==
-    `ValidateOnDevice.recipientWording.${transaction.mode || "send"}`
+    transRecipientWording !== `ValidateOnDevice.recipientWording.${key}`
       ? transRecipientWording
       : t("ValidateOnDevice.recipientWording.send");
 
   const transTitleWording = t(
-    `ValidateOnDevice.title.${transaction.mode || "send"}`,
+    `ValidateOnDevice.title.${key}`,
     getDeviceModel(device.modelId),
   );
   const titleWording =
-    transTitleWording !== `ValidateOnDevice.title.${transaction.mode || "send"}`
+    transTitleWording !== `ValidateOnDevice.title.${key}`
       ? transTitleWording
       : t("ValidateOnDevice.title.send", getDeviceModel(device.modelId));
 
