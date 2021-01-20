@@ -54,15 +54,17 @@ function OnboardingStepWelcome({ navigation }: *) {
 
   useCode(
     () =>
-      set(
-        animY,
-        loop({
-          duration: !Config.MOCK ? 10000 : 0,
-          easing: Easing.inOut(Easing.ease),
-          clock: clockY,
-          boomerang: true,
-        }),
-      ),
+      !Config.MOCK
+        ? set(
+            animY,
+            loop({
+              duration: 10000,
+              easing: Easing.inOut(Easing.ease),
+              clock: clockY,
+              boomerang: true,
+            }),
+          )
+        : undefined,
     [],
   );
 
@@ -72,15 +74,17 @@ function OnboardingStepWelcome({ navigation }: *) {
 
   useCode(
     () =>
-      set(
-        animX,
-        loop({
-          duration: !Config.MOCK ? 8000 : 0,
-          easing: Easing.inOut(Easing.ease),
-          clock: clockX,
-          boomerang: true,
-        }),
-      ),
+      !Config.MOCK
+        ? set(
+            animX,
+            loop({
+              duration: 8000,
+              easing: Easing.inOut(Easing.ease),
+              clock: clockX,
+              boomerang: true,
+            }),
+          )
+        : undefined,
     [],
   );
 

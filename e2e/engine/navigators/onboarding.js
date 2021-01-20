@@ -1,6 +1,6 @@
 // @flow
 import { E2EBridge } from "../bridge";
-import { $tap, $proceed } from "../query";
+import { $tap, $proceed, $visible, $scroll } from "../helper";
 
 export class Onboarding {
   bridge: E2EBridge;
@@ -23,7 +23,14 @@ export class Onboarding {
 
   async connectNano(modelId: DeviceModelId) {
     await this.selectNano(modelId);
-    await $tap(`Onboarding - Connect|${modelId}`);
+    const id = `Onboarding - Connect|${modelId}`;
+    try {
+      await $visible(id);
+    } catch (e) {
+      await $scroll(300);
+    } finally {
+      await $tap(id);
+    }
   }
 
   async runAll(): Promise<void> {

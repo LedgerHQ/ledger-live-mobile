@@ -73,7 +73,7 @@
       "android.debug": {
         "binaryPath": "android/app/build/outputs/apk/debug/app-x86-debug.apk",
         "testBinaryPath": "android/app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk",
-        "build": "cd android && ./gradlew assembleDebug assembleAndroidTest -DtestBuildType=debug && cd ..",
+        "build": "cd android && ENVFILE=.env.mock ./gradlew assembleDebug assembleAndroidTest -DtestBuildType=debug && cd ..",
         "type": "android.emulator",
         "device": {
           "avdName": "Nexus_5X_API_29_x86"
@@ -82,7 +82,7 @@
       "android.staging": {
         "binaryPath": "android/app/build/outputs/apk/stagingRelease/app-x86-stagingRelease.apk",
         "testBinaryPath": "android/app/build/outputs/apk/androidTest/stagingRelease/app-stagingRelease-androidTest.apk",
-        "build": "cd android && ./gradlew assembleStagingRelease assembleAndroidTest -DtestBuildType=stagingRelease && cd ..",
+        "build": "cd android && ENVFILE=.env.mock ./gradlew assembleStagingRelease assembleAndroidTest -DtestBuildType=stagingRelease && cd ..",
         "type": "android.emulator",
         "device": {
           "avdName": "Nexus_5X_API_29_x86"

@@ -283,7 +283,7 @@ class Button extends PureComponent<
 
       switch (type) {
         case "primary":
-          return "proceed";
+          return "Proceed";
         default:
           return otherProps.event;
       }

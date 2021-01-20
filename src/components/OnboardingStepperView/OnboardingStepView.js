@@ -34,6 +34,7 @@ export type InfoStepViewProps = {
   },
   ctaWarningCheckbox?: { desc: React$Node },
   children?: React$Node,
+  ctaEvent?: string,
 };
 
 export function InfoStepView({
@@ -44,7 +45,7 @@ export function InfoStepView({
   lottieStyle,
   bullets,
   ctaText,
-  ctaEvent = "proceed",
+  ctaEvent = "Proceed",
   ctaWarningModal,
   ctaWarningCheckbox,
   children,

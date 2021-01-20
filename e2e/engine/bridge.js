@@ -3,7 +3,7 @@ import { Server } from "ws";
 import path from "path";
 import fs from "fs";
 import type { E2EBridgeMessage } from "../../src/e2e-bridge";
-import { $waitFor } from "./query";
+import { $visible } from "./helper";
 
 export class E2EBridge {
   wss: Server;
@@ -41,10 +41,10 @@ export class E2EBridge {
 
     if (data.accounts.length) {
       // TODO E2E: investigate why it fails
-      await $waitFor("PortfolioSectionHeader");
+      await $visible("PortfolioSectionHeader");
       return;
     }
-    await $waitFor("PortfolioScreen");
+    await $visible("PortfolioScreen");
   }
 
   add(id: string, name: string) {

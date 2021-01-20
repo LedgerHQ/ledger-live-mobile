@@ -9,7 +9,7 @@ describe("Mobile E2E Testing POC", () => {
     await nav.runAll();
   });
 
-  test("accounts/settings import example", async () => {
-    await bridge.loadConfig("1AccountBTC1AccountETH", true);
-  });
+  // test("accounts/settings import example", async () => {
+  //   await bridge.loadConfig("1AccountBTC1AccountETH", true);
+  // });
 });
