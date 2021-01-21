@@ -1,6 +1,6 @@
 // @flow
 import { E2EBridge } from "../bridge";
-import { $tap, $proceed, $visible, $scroll } from "../helper";
+import { $tap, $proceed, $visible, $scroll, $ } from "../helper";
 
 export class Onboarding {
   bridge: E2EBridge;
@@ -23,13 +23,13 @@ export class Onboarding {
 
   async connectNano(modelId: DeviceModelId) {
     await this.selectNano(modelId);
-    const id = `Onboarding - Connect|${modelId}`;
+    const el = $(`Onboarding - Connect|${modelId}`);
     try {
-      await $visible(id);
+      await $visible(el);
     } catch (e) {
       await $scroll(300);
     } finally {
-      await $tap(id);
+      await $tap(el);
     }
   }
 
@@ -38,19 +38,28 @@ export class Onboarding {
 
     await $tap("OnboardingStemPairNewContinue");
     await $proceed();
-    const deviceNames = [
-      "Nano X de David",
-      "Nano X de Arnaud",
-      "Nano X de Didier Duchmol",
-    ];
-    deviceNames.forEach((name, i) => {
-      this.bridge.add(`mock_${i + 1}`, name);
-    });
-    await $tap(`DeviceItemEnter ${deviceNames[0]}`);
+    const [david] = this.addDevices();
+    await expect($(`DeviceItemEnter ${david}`))
+      .toBeVisible()
+      .withTimeout(2000);
+    await $tap(`DeviceItemEnter ${david}`);
     this.bridge.setInstalledApps();
     this.bridge.open();
     await $proceed();
     await $tap("OnboardingFinish");
+  }
+
+  addDevices(
+    deviceNames: string[] = [
+      "Nano X de David",
+      "Nano X de Arnaud",
+      "Nano X de Didier Duchmol",
+    ],
+  ): string[] {
+    deviceNames.forEach((name, i) => {
+      this.bridge.add(`mock_${i + 1}`, name);
+    });
+    return deviceNames;
   }
 }
 

@@ -18,6 +18,7 @@ export class E2EBridge {
     });
 
     beforeEach(async () => {
+      // TODO E2E: Probably need to replace by better reloading logic
       await device.reloadReactNative();
     });
 

@@ -5,7 +5,6 @@ export function $proceed(): Promise<void> {
 }
 
 export function $(id: string) {
-  // TODO E2E: types for Detox related globals
   return element(by.id(id));
 }
 
@@ -13,14 +12,13 @@ export function $byText(text: string) {
   return element(by.text(text));
 }
 
-// TODO E2E: accept id or element
-export function $visible(id: string, percentage: number = 75) {
-  return expect($(id)).toBeVisible(percentage);
+export function $visible(q: Query, percentage: number = 75) {
+  const el = getElement(q);
+  return expect(el).toBeVisible(percentage);
 }
 
-// TODO E2E: accept id or element
-export function $tap(id: string) {
-  return $(id).tap();
+export function $tap(q: Query) {
+  return getElement(q).tap();
 }
 
 export function $scroll(
@@ -28,4 +26,12 @@ export function $scroll(
   direction: "top" | "down" | "right" | "left" = "down",
 ) {
   return $("ScrollView").scroll(offset, direction);
+}
+
+type Element = any;
+
+type Query = string | Element;
+
+function getElement(q: Query): Element {
+  return typeof q === "string" ? $(q) : q;
 }
