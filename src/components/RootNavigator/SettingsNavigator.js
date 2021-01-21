@@ -1,8 +1,9 @@
 // @flow
-import React from "react";
+import React, { useMemo } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useTranslation } from "react-i18next";
-import { ScreenName, NavigatorName } from "../../const";
+import { useTheme } from "@react-navigation/native";
+import { ScreenName } from "../../const";
 import BenchmarkQRStream from "../../screens/BenchmarkQRStream";
 import DebugBLE from "../../screens/DebugBLE";
 import DebugBLEBenchmark from "../../screens/DebugBLEBenchmark";
@@ -10,6 +11,7 @@ import DebugCrash from "../../screens/DebugCrash";
 import DebugHttpTransport from "../../screens/DebugHttpTransport";
 import DebugIcons from "../../screens/DebugIcons";
 import DebugLottie from "../../screens/DebugLottie.js";
+import DebugLogs from "../../screens/DebugLogs.js";
 import DebugStore from "../../screens/DebugStore";
 import DebugPlayground from "../../screens/DebugPlayground";
 import Settings from "../../screens/Settings";
@@ -28,16 +30,18 @@ import DebugSettings, {
 import DebugExport from "../../screens/Settings/Debug/ExportAccounts";
 import ExperimentalSettings from "../../screens/Settings/Experimental";
 import RepairDevice from "../../screens/RepairDevice";
-import { stackNavigatorConfig } from "../../navigation/navigatorConfig";
+import { getStackNavigatorConfig } from "../../navigation/navigatorConfig";
 import Button from "../Button";
-import OnboardingNavigator from "./OnboardingNavigator";
 import HelpButton from "../../screens/Settings/HelpButton";
 
 export default function SettingsNavigator() {
   const { t } = useTranslation();
-
+  const { colors } = useTheme();
+  const stackNavConfig = useMemo(() => getStackNavigatorConfig(colors), [
+    colors,
+  ]);
   return (
-    <Stack.Navigator screenOptions={stackNavigatorConfig}>
+    <Stack.Navigator screenOptions={stackNavConfig}>
       <Stack.Screen
         name={ScreenName.Settings}
         component={Settings}
@@ -190,6 +194,13 @@ export default function SettingsNavigator() {
         }}
       />
       <Stack.Screen
+        name={ScreenName.DebugLogs}
+        component={DebugLogs}
+        options={{
+          title: "Debug Logs",
+        }}
+      />
+      <Stack.Screen
         name={ScreenName.DebugIcons}
         component={DebugIcons}
         options={{
@@ -216,11 +227,6 @@ export default function SettingsNavigator() {
         options={{
           title: "Benchmark QRStream",
         }}
-      />
-      <Stack.Screen
-        name={NavigatorName.Onboarding}
-        component={OnboardingNavigator}
-        options={{ headerShown: false }}
       />
     </Stack.Navigator>
   );

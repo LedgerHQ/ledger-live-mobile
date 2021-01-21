@@ -1,7 +1,7 @@
 // @flow
 import React, { useCallback, useMemo, useState } from "react";
 import { View, StyleSheet, Pressable, Image, ScrollView } from "react-native";
-import colors from "../../colors";
+import { useTheme } from "@react-navigation/native";
 import { normalize } from "../../helpers/normalizeSize";
 import { TrackScreen } from "../../analytics";
 
@@ -20,6 +20,7 @@ export type InfoStepViewProps = {
   bullets?: {
     Icon?: *,
     label?: React$Node,
+    labels?: React$Node[],
     title?: React$Node,
     index?: number,
     color?: string,
@@ -54,7 +55,8 @@ export function InfoStepView({
   onNext: () => void,
   sceneColors: string[],
 }) {
-  const [primaryColor, accentColor, textColor, bulletColor] = sceneColors;
+  const { colors } = useTheme();
+  const [, accentColor, textColor, bulletColor, , , buttonColor] = sceneColors;
   const [isInfoModalOpen, setInfoModalOpen] = useState(false);
 
   const onOpenInfoModal = useCallback(() => setInfoModalOpen(true), []);
@@ -112,40 +114,54 @@ export function InfoStepView({
                 ))}
               {bullets && (
                 <View style={styles.bulletContainer}>
-                  {bullets.map(({ Icon, title, label, index, color }, i) => (
-                    <View style={styles.bulletLine} key={i}>
-                      <View
-                        style={[
-                          styles.bulletIcon,
-                          { backgroundColor: bulletColor },
-                        ]}
-                      >
-                        {Icon ? (
-                          <Icon size={10} color={color || colors.live} />
-                        ) : (
-                          <LText
-                            semiBold
-                            style={[styles.label, { color: colors.live }]}
-                          >
-                            {index || i + 1}
-                          </LText>
-                        )}
+                  {bullets.map(
+                    ({ Icon, title, label, labels, index, color }, i) => (
+                      <View style={styles.bulletLine} key={i}>
+                        <View
+                          style={[
+                            styles.bulletIcon,
+                            { backgroundColor: bulletColor },
+                          ]}
+                        >
+                          {Icon ? (
+                            <Icon size={10} color={color || colors.live} />
+                          ) : (
+                            <LText
+                              semiBold
+                              style={[styles.label, { color: colors.live }]}
+                            >
+                              {index || i + 1}
+                            </LText>
+                          )}
+                        </View>
+                        <View style={styles.bulletTextContainer}>
+                          {title ? (
+                            <LText
+                              semiBold
+                              style={[styles.bulletTitle, { color: textColor }]}
+                            >
+                              {title}
+                            </LText>
+                          ) : null}
+                          {label ? (
+                            <LText style={[styles.label, { color: textColor }]}>
+                              {label}
+                            </LText>
+                          ) : null}
+                          {labels && labels.length > 0
+                            ? labels.map((l, j) => (
+                                <LText
+                                  key={i + j}
+                                  style={[styles.label, { color: textColor }]}
+                                >
+                                  {l}
+                                </LText>
+                              ))
+                            : null}
+                        </View>
                       </View>
-                      <View style={styles.bulletTextContainer}>
-                        {title && (
-                          <LText
-                            semiBold
-                            style={[styles.bulletTitle, { color: textColor }]}
-                          >
-                            {title}
-                          </LText>
-                        )}
-                        <LText style={[styles.label, { color: textColor }]}>
-                          {label}
-                        </LText>
-                      </View>
-                    </View>
-                  ))}
+                    ),
+                  )}
                 </View>
               )}
             </>
@@ -177,13 +193,15 @@ export function InfoStepView({
               },
             ]}
             disabled={isDisabled}
-            onPress={ctaWarningModal ? onOpenInfoModal : onNext}
+            onPress={
+              isDisabled ? () => {} : ctaWarningModal ? onOpenInfoModal : onNext
+            }
           >
             <LText
               semiBold
               style={[
                 styles.ctaLabel,
-                { color: isDisabled ? "rgba(0,0,0,0.3)" : primaryColor },
+                { color: isDisabled ? "rgba(0,0,0,0.3)" : buttonColor },
               ]}
             >
               {ctaText}
@@ -260,6 +278,7 @@ const styles = StyleSheet.create({
     flex: 0.5,
     minHeight: 150,
     position: "relative",
+    marginTop: 24,
   },
   lottieContainer: {
     minHeight: 200,

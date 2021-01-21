@@ -3,7 +3,7 @@ import React, { useCallback } from "react";
 import { View, StyleSheet, Linking } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { Trans } from "react-i18next";
-import colors from "../../../colors";
+import { useTheme } from "@react-navigation/native";
 import { ScreenName } from "../../../const";
 import Button from "../../../components/Button";
 import LText from "../../../components/LText";
@@ -28,6 +28,7 @@ type Props = {
 };
 
 export default function DelegationStarted({ navigation, route }: Props) {
+  const { colors } = useTheme();
   const onNext = useCallback(() => {
     navigation.navigate(ScreenName.CosmosDelegationValidator, {
       ...route.params,
@@ -43,13 +44,16 @@ export default function DelegationStarted({ navigation, route }: Props) {
   }, [navigation]);
 
   return (
-    <SafeAreaView style={styles.root} forceInset={forceInset}>
+    <SafeAreaView
+      style={[styles.root, { backgroundColor: colors.background }]}
+      forceInset={forceInset}
+    >
       <NavigationScrollView
         style={styles.scroll}
         contentContainerStyle={styles.scrollContainer}
       >
         <TrackScreen category="DelegationFlow" name="Started" />
-        <IlluRewards />
+        <IlluRewards style={styles.rewards} />
         <LText semiBold style={styles.description}>
           <Trans i18nKey="cosmos.delegation.flow.steps.starter.description" />
         </LText>
@@ -60,12 +64,15 @@ export default function DelegationStarted({ navigation, route }: Props) {
             <Trans i18nKey="cosmos.delegation.flow.steps.starter.steps.1" />,
             <Trans i18nKey="cosmos.delegation.flow.steps.starter.steps.2" />,
           ].map(wording => (
-            <LText semiBold style={styles.bulletItem}>
+            <LText
+              semiBold
+              style={[styles.bulletItem, { color: colors.black }]}
+            >
               {wording}
             </LText>
           ))}
         />
-        <View style={styles.howDelegationWorks}>
+        <View style={[styles.howDelegationWorks, { borderColor: colors.live }]}>
           <ExternalLink
             event="DelegationStartedHowDelegationWorks"
             onPress={howDelegationWorks}
@@ -84,7 +91,7 @@ export default function DelegationStarted({ navigation, route }: Props) {
           />
         </View>
       </NavigationScrollView>
-      <View style={styles.footer}>
+      <View style={[styles.footer, { borderTopColor: colors.lightFog }]}>
         <Button
           event="DelegationStartedBtn"
           onPress={onNext}
@@ -106,7 +113,10 @@ export default function DelegationStarted({ navigation, route }: Props) {
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: colors.white,
+  },
+  rewards: {
+    height: 150,
+    width: 150,
   },
   scroll: {
     flex: 1,
@@ -119,29 +129,24 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 22,
     lineHeight: 33,
-    color: colors.darkBlue,
+
     paddingVertical: 16,
   },
   description: {
     fontSize: 16,
     lineHeight: 21,
-    color: colors.darkBlue,
+
     textAlign: "center",
     marginBottom: 16,
   },
   bulletItem: {
     fontSize: 14,
-    color: colors.black,
   },
   howDelegationWorks: {
     paddingVertical: 8,
     paddingHorizontal: 16,
-    borderColor: colors.live,
+
     flexDirection: "row",
-  },
-  howDelegationWorksText: {
-    color: colors.live,
-    fontSize: 14,
   },
   warning: {
     width: "100%",
@@ -154,6 +159,5 @@ const styles = StyleSheet.create({
   footer: {
     padding: 16,
     borderTopWidth: 1,
-    borderTopColor: colors.lightFog,
   },
 });
