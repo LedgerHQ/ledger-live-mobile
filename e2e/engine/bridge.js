@@ -16,15 +16,6 @@ export class E2EBridge {
       this.log(`Connection`);
       ws.on("message", this.onMessage);
     });
-
-    beforeEach(async () => {
-      // TODO E2E: Probably need to replace by better reloading logic
-      await device.reloadReactNative();
-    });
-
-    afterAll(() => {
-      this.wss.close();
-    });
   }
 
   async loadConfig(fileName: string, acceptTerms?: true = true): Promise<void> {
