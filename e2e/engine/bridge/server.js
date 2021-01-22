@@ -3,7 +3,7 @@ import { Server } from "ws";
 import path from "path";
 import fs from "fs";
 import type { E2EBridgeMessage } from "./client";
-import { $visible } from "../helper";
+import { $visible } from "../utils";
 
 export class E2EBridgeServer {
   wss: Server;

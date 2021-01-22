@@ -1,6 +1,6 @@
 // @flow
 import { E2EBridgeServer } from "../bridge/server";
-import { $tap, $proceed, $visible, $scroll, $ } from "../helper";
+import { $tap, $proceed, $, $scrollTill } from "../utils";
 
 export class Onboarding {
   bridge: E2EBridgeServer;
@@ -24,14 +24,8 @@ export class Onboarding {
   async connectNano(modelId: DeviceModelId) {
     await this.selectNano(modelId);
     const el = $(`Onboarding - Connect|${modelId}`);
-    // TODO E2E: utilize whileElement
-    try {
-      await $visible(el);
-    } catch (e) {
-      await $scroll(300);
-    } finally {
-      await $tap(el);
-    }
+    await $scrollTill(el);
+    await $tap(el);
   }
 
   async runAll(): Promise<void> {

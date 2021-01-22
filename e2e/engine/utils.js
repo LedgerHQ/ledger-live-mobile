@@ -21,11 +21,17 @@ export function $tap(q: Query) {
   return getElement(q).tap();
 }
 
-export function $scroll(
-  offset: number,
-  direction: "top" | "down" | "right" | "left" = "down",
+export function $scrollTill(
+  visibleTarget: Query,
+  scrollViewId: string = "ScrollView",
+  pixel: number = 200,
+  direction: ScrollDirection = "down",
 ) {
-  return $("ScrollView").scroll(offset, direction);
+  const targetEl = getElement(visibleTarget);
+  return waitFor(targetEl)
+    .toBeVisible()
+    .whileElement(by.id(scrollViewId))
+    .scroll(pixel, direction);
 }
 
 type Element = any;
@@ -35,3 +41,5 @@ type Query = string | Element;
 function getElement(q: Query): Element {
   return typeof q === "string" ? $(q) : q;
 }
+
+type ScrollDirection = "top" | "down" | "right" | "left";
