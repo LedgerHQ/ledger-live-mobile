@@ -3129,6 +3129,7 @@
     "reject": "Reject",
     "connect": "Connect",
     "connected": "Connected",
+    "disconnected": "Disconnected",
     "info": "You can now access the {{name}} dApp on your desktop.",
     "warning": "Sharing receive addresses from dApp is not secure. Always use Ledger Live when sharing your address to receive funds.",
     "isconnecting": "is connecting, please wait...",

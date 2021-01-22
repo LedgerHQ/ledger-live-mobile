@@ -173,7 +173,9 @@ export default function Connect({ route, navigation }: Props) {
                 {wcContext.dappInfo?.name}
               </LText>
               <LText primary style={styles.details}>
-                {t("walletconnect.connected")}
+                {wcContext.socketReady
+                  ? t("walletconnect.connected")
+                  : t("walletconnect.disconnected")}
               </LText>
             </View>
             <View style={styles.messagesContainer}>
