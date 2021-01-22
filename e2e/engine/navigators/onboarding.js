@@ -1,59 +1,69 @@
 // @flow
-import { E2EBridgeServer } from "../bridge/server";
+import * as bridge from "../bridge/server";
 import { $tap, $proceed, $, $scrollTill } from "../utils";
 
-export class Onboarding {
-  bridge: E2EBridgeServer;
+export function onboard(modelId: DeviceModelId) {
+  welcome();
+  acceptTerms();
+  selectNano(modelId);
+  connectNano(modelId);
+}
 
-  constructor(bridge: E2EBridgeServer) {
-    this.bridge = bridge;
-  }
+function welcome() {
+  it.todo("should show welcome screen");
 
-  async acceptTerms() {
+  it("should go terms screen", async () => {
     await $proceed();
+  });
+}
+
+function acceptTerms() {
+  it("should check terms and policy", async () => {
     await $tap("TermsAcceptSwitch");
     await $tap("TermsAcceptSwitchPrivacy");
-    await $proceed();
-  }
+  });
 
-  async selectNano(modelId: DeviceModelId) {
-    await this.acceptTerms();
+  it("should enter Ledger App", async () => {
+    await $proceed();
+  });
+}
+
+export async function selectNano(modelId: DeviceModelId) {
+  it(`should go connect screen for ${modelId}`, async () => {
     await $tap(`Onboarding Device - Selection|${modelId}`);
-  }
+  });
+}
 
-  async connectNano(modelId: DeviceModelId) {
-    await this.selectNano(modelId);
-    const el = $(`Onboarding - Connect|${modelId}`);
-    await $scrollTill(el);
-    await $tap(el);
-  }
-
-  async runAll(): Promise<void> {
-    await this.connectNano("nanoX");
-
-    await $tap("OnboardingStemPairNewContinue");
-    await $proceed();
-    const [david] = this.addDevices();
-    // TODO E2E: Android
-    await $tap(`DeviceItemEnter ${david}`);
-    this.bridge.setInstalledApps();
-    this.bridge.open();
-    await $proceed();
-    await $tap("OnboardingFinish");
-  }
-
-  addDevices(
-    deviceNames: string[] = [
-      "Nano X de David",
-      "Nano X de Arnaud",
-      "Nano X de Didier Duchmol",
-    ],
-  ): string[] {
-    deviceNames.forEach((name, i) => {
-      this.bridge.add(`mock_${i + 1}`, name);
+export async function connectNano(modelId: DeviceModelId) {
+  if (modelId === "nanoX") {
+    it("should pair Nano through Bluetooth", async () => {
+      const el = $(`Onboarding - Connect|${modelId}`);
+      await $scrollTill(el);
+      await $tap(el);
+      await $tap("OnboardingStemPairNewContinue");
+      await $proceed();
+      const [david] = addDevices();
+      // TODO E2E: Android
+      await $tap(`DeviceItemEnter ${david}`);
+      bridge.setInstalledApps();
+      bridge.open();
+      await $proceed();
+      await $tap("OnboardingFinish");
     });
-    return deviceNames;
   }
+}
+
+function addDevices(
+  deviceNames: string[] = [
+    "Nano X de David",
+    "Nano X de Arnaud",
+    "Nano X de Didier Duchmol",
+  ],
+): string[] {
+  deviceNames.forEach((name, i) => {
+    bridge.add(`mock_${i + 1}`, name);
+  });
+  return deviceNames;
 }
 
 type DeviceModelId = "nanoS" | "nanoX" | "blue";
