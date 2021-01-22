@@ -3,7 +3,7 @@ import { Server } from "ws";
 import path from "path";
 import fs from "fs";
 import type { E2EBridgeMessage } from "./client";
-import { $visible } from "../utils";
+import { $waitFor } from "../utils";
 
 export class E2EBridgeServer {
   wss: Server;
@@ -28,19 +28,20 @@ export class E2EBridgeServer {
     }
 
     const f = fs.readFileSync(
-      path.resolve("e2e", "config", `${fileName}.json`),
+      path.resolve("e2e", "setups", `${fileName}.json`),
     );
+    // $FlowFixMe
     const { data } = JSON.parse(f);
 
     this.postMessage({ type: "importAccounts", payload: data.accounts });
     this.postMessage({ type: "importSettngs", payload: data.settings });
 
     if (data.accounts.length) {
-      // TODO E2E: investigate why it fails
-      await $visible("PortfolioSectionHeader");
+      // TODO E2E: testID not set inside component yet
+      await $waitFor("TODO testID");
       return;
     }
-    await $visible("PortfolioScreen");
+    await $waitFor("PortfolioScreen");
   }
 
   add(id: string, name: string) {

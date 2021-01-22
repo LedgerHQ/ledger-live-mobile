@@ -1,5 +1,9 @@
 // @flow
 
+export function cleanLaunch() {
+  return device.launchApp({ delete: true });
+}
+
 export function $proceed(): Promise<void> {
   return $("Proceed").tap();
 }
@@ -12,9 +16,15 @@ export function $byText(text: string) {
   return element(by.text(text));
 }
 
-export function $visible(q: Query, percentage: number = 75) {
+export function $waitFor(
+  q: Query,
+  percentage: number = 75,
+  timeout: number = 2000,
+) {
   const el = getElement(q);
-  return expect(el).toBeVisible(percentage);
+  return waitFor(el)
+    .toBeVisible(percentage)
+    .withTimeout(timeout);
 }
 
 export function $tap(q: Query) {
