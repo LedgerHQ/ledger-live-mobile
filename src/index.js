@@ -3,11 +3,11 @@ import "../shim";
 import "./polyfill";
 import "./live-common-setup";
 import "./implement-react-native-libcore";
+import "../e2e/e2e-bridge-setup";
 import "react-native-gesture-handler";
 import React, { Component, useCallback, useContext, useMemo } from "react";
 import { connect, useSelector } from "react-redux";
 import { StyleSheet, View, Text, Linking } from "react-native";
-import Config from "react-native-config";
 import SplashScreen from "react-native-splash-screen";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { I18nextProvider } from "react-i18next";
@@ -401,8 +401,4 @@ export default class Root extends Component<
 
 if (__DEV__) {
   require("./snoopy");
-}
-
-if (Config.MOCK) {
-  import("./e2e-bridge").then(({ initE2EBridge }) => initE2EBridge());
 }

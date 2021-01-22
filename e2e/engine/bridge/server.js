@@ -2,10 +2,10 @@
 import { Server } from "ws";
 import path from "path";
 import fs from "fs";
-import type { E2EBridgeMessage } from "../../src/e2e-bridge";
-import { $visible } from "./helper";
+import type { E2EBridgeMessage } from "./client";
+import { $visible } from "../helper";
 
-export class E2EBridge {
+export class E2EBridgeServer {
   wss: Server;
 
   constructor(port?: number = 8099) {
@@ -15,6 +15,10 @@ export class E2EBridge {
     this.wss.on("connection", ws => {
       this.log(`Connection`);
       ws.on("message", this.onMessage);
+    });
+
+    afterAll(() => {
+      this.wss.close();
     });
   }
 

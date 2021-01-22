@@ -1,4 +1,4 @@
 // @flow
-export * from "./bridge";
+export * from "./bridge/server";
 export * from "./helper";
 export * from "./navigators";

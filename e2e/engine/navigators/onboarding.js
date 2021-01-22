@@ -1,11 +1,11 @@
 // @flow
-import { E2EBridge } from "../bridge";
+import { E2EBridgeServer } from "../bridge/server";
 import { $tap, $proceed, $visible, $scroll, $ } from "../helper";
 
 export class Onboarding {
-  bridge: E2EBridge;
+  bridge: E2EBridgeServer;
 
-  constructor(bridge: E2EBridge) {
+  constructor(bridge: E2EBridgeServer) {
     this.bridge = bridge;
   }
 
@@ -24,6 +24,7 @@ export class Onboarding {
   async connectNano(modelId: DeviceModelId) {
     await this.selectNano(modelId);
     const el = $(`Onboarding - Connect|${modelId}`);
+    // TODO E2E: utilize whileElement
     try {
       await $visible(el);
     } catch (e) {
@@ -39,9 +40,7 @@ export class Onboarding {
     await $tap("OnboardingStemPairNewContinue");
     await $proceed();
     const [david] = this.addDevices();
-    await expect($(`DeviceItemEnter ${david}`))
-      .toBeVisible()
-      .withTimeout(2000);
+    // TODO E2E: Android
     await $tap(`DeviceItemEnter ${david}`);
     this.bridge.setInstalledApps();
     this.bridge.open();

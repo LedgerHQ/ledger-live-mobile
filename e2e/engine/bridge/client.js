@@ -2,16 +2,16 @@
 import invariant from "invariant";
 import { Subject } from "rxjs/Subject";
 import type { AccountRaw } from "@ledgerhq/live-common/lib/types";
-import { store } from "./context/LedgerStore";
-import { importSettings } from "./actions/settings";
-import { setAccounts } from "./actions/accounts";
-import { acceptTerms } from "./logic/terms";
-import accountModel from "./logic/accountModel";
+import { store } from "../../../src/context/LedgerStore";
+import { importSettings } from "../../../src/actions/settings";
+import { setAccounts } from "../../../src/actions/accounts";
+import { acceptTerms } from "../../../src/logic/terms";
+import accountModel from "../../../src/logic/accountModel";
 
 let ws: WebSocket;
 
-export function initE2EBridge() {
-  const path = "localhost:8099";
+export function initE2EBridgeClient(port: number = 8099) {
+  const path = `localhost:${port}`;
   ws = new WebSocket(`ws://${path}`);
   ws.onopen = () => {
     log(`Connection opened on ${path}`);

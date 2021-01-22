@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import type { ViewStyleProp } from "react-native/Libraries/StyleSheet/StyleSheet";
 import { useTheme, useIsFocused } from "@react-navigation/native";
+import Config from "react-native-config";
 import LText from "./LText";
 import ButtonUseTouchable from "../context/ButtonUseTouchable";
 import { track } from "../analytics";
@@ -136,6 +137,7 @@ class Button extends PureComponent<
     } finally {
       if (isPromise) {
         clearTimeout(this.timeout);
+
         if (!this.unmounted) {
           this.setState(({ pending }) =>
             pending ? { pending: false, spinnerOn: false } : null,
@@ -256,18 +258,22 @@ class Button extends PureComponent<
 
     const titleSliderStyle = [
       styles.slider,
-      {
-        opacity: titleOpacity,
-        transform: [{ translateY: titleSliderOffset }],
-      },
+      !Config.MOCK
+        ? {
+            opacity: titleOpacity,
+            transform: [{ translateY: titleSliderOffset }],
+          }
+        : undefined,
     ];
 
     const spinnerSliderStyle = [
       styles.spinnerSlider,
-      {
-        opacity: anim,
-        transform: [{ translateY: spinnerSliderOffset }],
-      },
+      !Config.MOCK
+        ? {
+            opacity: anim,
+            transform: [{ translateY: spinnerSliderOffset }],
+          }
+        : undefined,
     ];
 
     const Container = useTouchable
@@ -321,7 +327,10 @@ class Button extends PureComponent<
         </Animated.View>
 
         <Animated.View style={spinnerSliderStyle}>
-          <ActivityIndicator color={theme.disabledTitle.color} />
+          <ActivityIndicator
+            color={theme.disabledTitle.color}
+            animating={!Config.MOCK}
+          />
         </Animated.View>
       </Container>
     );
