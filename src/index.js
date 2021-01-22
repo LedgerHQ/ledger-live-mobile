@@ -27,6 +27,7 @@ import { saveAccounts, saveBle, saveSettings, saveCountervalues } from "./db";
 import {
   exportSelector as settingsExportSelector,
   hasCompletedOnboardingSelector,
+  themeSelector,
 } from "./reducers/settings";
 import { exportSelector as accountsExportSelector } from "./reducers/accounts";
 import { exportSelector as bleSelector } from "./reducers/ble";
@@ -38,6 +39,7 @@ import LedgerStoreProvider from "./context/LedgerStore";
 import LoadingApp from "./components/LoadingApp";
 import StyledStatusBar from "./components/StyledStatusBar";
 import AnalyticsConsole from "./components/AnalyticsConsole";
+import ThemeDebug from "./components/ThemeDebug";
 import { BridgeSyncProvider } from "./bridge/BridgeSyncContext";
 import useDBSaveEffect from "./components/DBSave";
 import DebugRejectSwitch from "./components/DebugRejectSwitch";
@@ -56,6 +58,14 @@ import type { State } from "./reducers";
 import { navigationRef } from "./rootnavigation";
 import { useTrackingPairs } from "./actions/general";
 import { ScreenName, NavigatorName } from "./const";
+import ExperimentalHeader from "./screens/Settings/Experimental/ExperimentalHeader";
+import { lightTheme, duskTheme, darkTheme } from "./colors";
+
+const themes = {
+  light: lightTheme,
+  dusk: duskTheme,
+  dark: darkTheme,
+};
 
 checkLibs({
   NotEnoughBalance,
@@ -146,12 +156,14 @@ function App({ importDataString }: AppProps) {
   return (
     <View style={styles.root}>
       <SyncNewAccounts priority={5} />
+      <ExperimentalHeader />
 
       <RootNavigator importDataString={importDataString} />
 
       <DebugRejectSwitch />
 
       <AnalyticsConsole />
+      <ThemeDebug />
     </View>
   );
 }
@@ -300,12 +312,18 @@ const DeepLinkingNavigator = ({ children }: { children: React$Node }) => {
       });
   }, [getInitialState, wcContext.initDone]);
 
+  const theme = useSelector(themeSelector);
+
   if (!isReady) {
     return null;
   }
 
   return (
-    <NavigationContainer initialState={initialState} ref={navigationRef}>
+    <NavigationContainer
+      theme={themes[theme]}
+      initialState={initialState}
+      ref={navigationRef}
+    >
       {children}
     </NavigationContainer>
   );
@@ -344,14 +362,14 @@ export default class Root extends Component<
           {(ready, store, initialCountervalues) =>
             ready ? (
               <>
-                <StyledStatusBar />
                 <SetEnvsFromSettings />
                 <HookSentry />
                 <HookAnalytics store={store} />
-                <SafeAreaProvider>
-                  <AuthPass>
-                    <WalletConnectProvider>
-                      <DeepLinkingNavigator>
+                <WalletConnectProvider>
+                  <DeepLinkingNavigator>
+                    <SafeAreaProvider>
+                      <AuthPass>
+                        <StyledStatusBar />
                         <I18nextProvider i18n={i18n}>
                           <LocaleProvider>
                             <BridgeSyncProvider>
@@ -367,10 +385,10 @@ export default class Root extends Component<
                             </BridgeSyncProvider>
                           </LocaleProvider>
                         </I18nextProvider>
-                      </DeepLinkingNavigator>
-                    </WalletConnectProvider>
-                  </AuthPass>
-                </SafeAreaProvider>
+                      </AuthPass>
+                    </SafeAreaProvider>
+                  </DeepLinkingNavigator>
+                </WalletConnectProvider>
               </>
             ) : (
               <LoadingApp />
