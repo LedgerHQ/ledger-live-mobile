@@ -178,16 +178,24 @@ export default function Connect({ route, navigation }: Props) {
                   : t("walletconnect.disconnected")}
               </LText>
             </View>
-            <View style={styles.messagesContainer}>
-              <InfoBox>
-                <Trans
-                  i18nKey="walletconnect.info"
-                  values={{ name: wcContext.dappInfo?.name }}
-                />
-              </InfoBox>
-              <View style={styles.messagesSeparator} />
-              <WarningBox>{t("walletconnect.warning")}</WarningBox>
-            </View>
+            {wcContext.socketReady ? (
+              <View style={styles.messagesContainer}>
+                <InfoBox>
+                  <Trans
+                    i18nKey="walletconnect.info"
+                    values={{ name: wcContext.dappInfo?.name }}
+                  />
+                </InfoBox>
+                <View style={styles.messagesSeparator} />
+                <WarningBox>{t("walletconnect.warning")}</WarningBox>
+              </View>
+            ) : (
+              <View style={styles.messagesContainer}>
+                <WarningBox>
+                  {t("walletconnect.warningdisconnected")}
+                </WarningBox>
+              </View>
+            )}
           </>
         ) : (
           <>
