@@ -2,16 +2,13 @@
 import * as bridge from "../bridge/server";
 import { $tap, $proceed, $, $scrollTill } from "../utils";
 
-export function onboard(modelId: DeviceModelId) {
-  welcome();
+export function onboard(modelId: DeviceModelId, usecase: Usecase) {
+  getStarted();
   acceptTerms();
-  selectNano(modelId);
-  connectNano(modelId);
+  selectUsecase(modelId, usecase);
 }
 
-function welcome() {
-  it.todo("should show welcome screen");
-
+function getStarted() {
   it("should go terms screen", async () => {
     await $proceed();
   });
@@ -28,29 +25,37 @@ function acceptTerms() {
   });
 }
 
-export async function selectNano(modelId: DeviceModelId) {
+async function selectUsecase(modelId: DeviceModelId, usecase: Usecase) {
   it(`should go connect screen for ${modelId}`, async () => {
     await $tap(`Onboarding Device - Selection|${modelId}`);
   });
+
+  switch (usecase) {
+    case "connect":
+      if (modelId === "nanoX") {
+        await connectViaBluetooth(modelId);
+      }
+      break;
+    default:
+      break;
+  }
 }
 
-export async function connectNano(modelId: DeviceModelId) {
-  if (modelId === "nanoX") {
-    it("should pair Nano through Bluetooth", async () => {
-      const el = $(`Onboarding - Connect|${modelId}`);
-      await $scrollTill(el);
-      await $tap(el);
-      await $tap("OnboardingStemPairNewContinue");
-      await $proceed();
-      const [david] = addDevices();
-      // TODO E2E: Android
-      await $tap(`DeviceItemEnter ${david}`);
-      bridge.setInstalledApps();
-      bridge.open();
-      await $proceed();
-      await $tap("OnboardingFinish");
-    });
-  }
+async function connectViaBluetooth(modelId: DeviceModelId) {
+  it("should pair Nano via Bluetooth", async () => {
+    const el = $(`Onboarding - Connect|${modelId}`);
+    await $scrollTill(el);
+    await $tap(el);
+    await $tap("OnboardingStemPairNewContinue");
+    await $proceed();
+    const [david] = addDevices();
+    // TODO E2E: Android
+    await $tap(`DeviceItemEnter ${david}`);
+    bridge.setInstalledApps();
+    bridge.open();
+    await $proceed();
+    await $tap("OnboardingFinish");
+  });
 }
 
 function addDevices(
@@ -67,3 +72,5 @@ function addDevices(
 }
 
 type DeviceModelId = "nanoS" | "nanoX" | "blue";
+
+type Usecase = "newDevice" | "import" | "restore" | "connect";
