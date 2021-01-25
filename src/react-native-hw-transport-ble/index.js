@@ -9,6 +9,7 @@ const names = {};
 
 const transport = Config.MOCK
   ? makeMock({
+      // TODO E2E: This could be dynamically set in bridge/server.js
       createTransportDeviceMock: (id, name) => {
         names[id] = name;
         const apduMock = createAPDUMock({

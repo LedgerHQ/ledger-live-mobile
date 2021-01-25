@@ -58,7 +58,7 @@ async function onMessage(event: { data: mixed }) {
 
 export const e2eBridgeSubject = new Subject<E2EBridgeSubjectMessage>();
 
-type Message<T: string, P: any = {}> = {
+type Message<T: string, P = any> = {
   type: T,
   payload: P,
 };

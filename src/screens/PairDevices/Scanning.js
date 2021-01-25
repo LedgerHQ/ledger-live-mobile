@@ -5,6 +5,7 @@ import { StyleSheet, FlatList } from "react-native";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { Observable } from "rxjs";
+import type { DeviceModelId } from "@ledgerhq/devices";
 import logger from "../../logger";
 import { BLE_SCANNING_NOTHING_TIMEOUT } from "../../constants";
 import { knownDevicesSelector } from "../../reducers/ble";
@@ -14,7 +15,7 @@ import DeviceItem from "../../components/DeviceItem";
 import ScanningHeader from "./ScanningHeader";
 
 type Props = {
-  onSelect: (device: Device) => Promise<void>,
+  onSelect: (device: BleDevice, deviceMeta: *) => Promise<void>,
   onError: (error: Error) => void,
   onTimeout: () => void,
 };
@@ -32,16 +33,17 @@ export default function Scanning({ onTimeout, onError, onSelect }: Props) {
   const renderItem = useCallback(
     ({ item }) => {
       const knownDevice = knownDevices.find(d => d.id === item.id);
+      const deviceMeta = {
+        deviceId: item.id,
+        deviceName: item.name,
+        wired: false,
+        modelId: "nanoX",
+      };
       return (
         <DeviceItem
           device={item}
-          deviceMeta={{
-            deviceId: item.id,
-            deviceName: item.name,
-            wired: false,
-            modelId: "nanoX",
-          }}
-          onSelect={() => onSelect(item)}
+          deviceMeta={deviceMeta}
+          onSelect={() => onSelect(item, deviceMeta)}
           disabled={!!knownDevice}
           description={knownDevice ? t("PairDevices.alreadyPaired") : ""}
         />
@@ -100,3 +102,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
 });
+
+export type BleDevice = {
+  id: string,
+  name: string,
+  modelId: DeviceModelId,
+};

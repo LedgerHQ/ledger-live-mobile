@@ -21,6 +21,7 @@ import PendingPairing from "./PendingPairing";
 import PendingGenuineCheck from "./PendingGenuineCheck";
 import Paired from "./Paired";
 import Scanning from "./Scanning";
+import type { BleDevice } from "./Scanning";
 import ScanningTimeout from "./ScanningTimeout";
 import RenderError from "./RenderError";
 
@@ -84,7 +85,7 @@ function PairDevicesInner({ navigation, route }: Props) {
   );
 
   const onSelect = useCallback(
-    async (bleDevice: BleDevice) => {
+    async (bleDevice: BleDevice, deviceMeta: *) => {
       const device = {
         deviceName: bleDevice.name,
         deviceId: bleDevice.id,
@@ -102,11 +103,13 @@ function PairDevicesInner({ navigation, route }: Props) {
 
           dispatch({ type: "genuinecheck", payload: device });
 
+          let appsInstalled;
           await listApps(transport, deviceInfo)
             .pipe(
               timeout(GENUINE_CHECK_TIMEOUT),
               tap(e => {
                 if (e.type === "result") {
+                  appsInstalled = e.result && e.result.installed.length;
                   if (!hasCompletedOnboarding) {
                     const hasAnyAppInstalled =
                       e.result && e.result.installed.length > 0;
@@ -132,7 +135,15 @@ function PairDevicesInner({ navigation, route }: Props) {
             (await getDeviceName(transport)) ?? device.deviceName ?? "";
           if (unmounted.current) return;
 
-          dispatchRedux(addKnownDevice({ id: device.deviceId, name }));
+          dispatchRedux(
+            addKnownDevice({
+              id: device.deviceId,
+              name,
+              deviceInfo,
+              appsInstalled,
+              modelId: deviceMeta?.modelId,
+            }),
+          );
 
           if (unmounted.current) return;
           dispatch({ type: "paired" });
@@ -246,7 +257,7 @@ function reducer(state, action) {
 }
 
 type State = {
-  status: "scanning" | "pairing" | "genuinecheck" | "paired" | "timedout",
+  status: Status,
   device: ?Device,
   name: ?string,
   error: ?Error,
@@ -254,10 +265,7 @@ type State = {
   genuineAskedOnDevice: boolean,
 };
 
-type BleDevice = {
-  id: string,
-  name: string,
-};
+type Status = "scanning" | "pairing" | "genuinecheck" | "paired" | "timedout";
 
 const styles = StyleSheet.create({
   root: {

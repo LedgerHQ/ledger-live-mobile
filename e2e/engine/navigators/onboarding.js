@@ -48,7 +48,7 @@ async function connectViaBluetooth(modelId: DeviceModelId) {
     await $tap(el);
     await $tap("OnboardingStemPairNewContinue");
     await $proceed();
-    const [david] = addDevices();
+    const [david] = bridge.addDevices();
     // TODO E2E: Android
     await $tap(`DeviceItemEnter ${david}`);
     bridge.setInstalledApps();
@@ -56,19 +56,6 @@ async function connectViaBluetooth(modelId: DeviceModelId) {
     await $proceed();
     await $tap("OnboardingFinish");
   });
-}
-
-function addDevices(
-  deviceNames: string[] = [
-    "Nano X de David",
-    "Nano X de Arnaud",
-    "Nano X de Didier Duchmol",
-  ],
-): string[] {
-  deviceNames.forEach((name, i) => {
-    bridge.add(`mock_${i + 1}`, name);
-  });
-  return deviceNames;
 }
 
 type DeviceModelId = "nanoS" | "nanoX" | "blue";

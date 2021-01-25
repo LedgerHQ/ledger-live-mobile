@@ -33,18 +33,30 @@ export async function loadConfig(
   // $FlowFixMe
   const { data } = JSON.parse(f);
 
-  postMessage({ type: "importAccounts", payload: data.accounts });
   postMessage({ type: "importSettngs", payload: data.settings });
 
   if (data.accounts.length) {
+    postMessage({ type: "importAccounts", payload: data.accounts });
     await $waitFor("PortfolioAccountsList");
     return;
   }
   await $waitFor("PortfolioEmptyAccount");
 }
 
-export function add(id: string, name: string) {
-  postMessage({ type: "add", payload: { id, name } });
+export function addDevices(
+  deviceNames: string[] = [
+    "Nano X de David",
+    "Nano X de Arnaud",
+    "Nano X de Didier Duchmol",
+  ],
+): string[] {
+  deviceNames.forEach((name, i) => {
+    postMessage({
+      type: "add",
+      payload: { id: `mock_${i + 1}`, name },
+    });
+  });
+  return deviceNames;
 }
 
 export function setInstalledApps(apps: string[] = []) {
