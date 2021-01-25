@@ -37,11 +37,10 @@ export async function loadConfig(
   postMessage({ type: "importSettngs", payload: data.settings });
 
   if (data.accounts.length) {
-    // TODO E2E: testID not set inside component yet
-    await $waitFor("TODO testID");
+    await $waitFor("PortfolioAccountsList");
     return;
   }
-  await $waitFor("PortfolioScreen");
+  await $waitFor("PortfolioEmptyAccount");
 }
 
 export function add(id: string, name: string) {

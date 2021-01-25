@@ -148,7 +148,6 @@ export default function PortfolioScreen({ navigation }: Props) {
           backgroundColor: colors.background,
         },
       ]}
-      testID="PortfolioScreen"
     >
       {!showingPlaceholder ? (
         <StickyHeader
@@ -197,6 +196,9 @@ export default function PortfolioScreen({ navigation }: Props) {
         onScroll={Animated.event([
           { nativeEvent: { contentOffset: { y: scrollY } } },
         ])}
+        testID={
+          accounts.length ? "PortfolioAccountsList" : "PortfolioEmptyAccount"
+        }
       />
       <MigrateAccountsBanner />
     </SafeAreaView>

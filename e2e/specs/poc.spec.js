@@ -7,7 +7,6 @@ describe("Mobile E2E Testing Proof of Concept", () => {
     await bridge.loadConfig("onboardingcompleted", true);
   });
 
-  // TODO E2E: figure out a way to stop animation on Portfolio screen
   it("should import accounts", async () => {
     await cleanLaunch();
     await bridge.loadConfig("1AccountBTC1AccountETH", true);
