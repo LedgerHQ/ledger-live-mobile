@@ -7,6 +7,7 @@ import { importSettings } from "../../../src/actions/settings";
 import { setAccounts } from "../../../src/actions/accounts";
 import { acceptTerms } from "../../../src/logic/terms";
 import accountModel from "../../../src/logic/accountModel";
+import { navigate } from "../../../src/rootnavigation";
 
 let ws: WebSocket;
 
@@ -51,6 +52,9 @@ async function onMessage(event: { data: mixed }) {
       store.dispatch(importSettings(msg.payload));
       break;
     }
+    case "navigate":
+      navigate(msg.payload);
+      break;
     default:
       break;
   }
@@ -72,7 +76,8 @@ export type E2EBridgeMessage =
   | Message<"setGlobals", { [key: string]: any }>
   | Message<"importAccounts", { data: AccountRaw, version: number }[]>
   | Message<"importSettngs", { [key: string]: any }>
-  | Message<"acceptTerms">;
+  | Message<"acceptTerms">
+  | Message<"navigate", string>;
 
 function log(message: string) {
   // eslint-disable-next-line no-console

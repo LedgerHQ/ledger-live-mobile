@@ -4,6 +4,7 @@ import path from "path";
 import fs from "fs";
 import type { E2EBridgeMessage } from "./client";
 import { $waitFor } from "../utils";
+import { NavigatorName } from "../../../src/const";
 
 let wss: Server;
 
@@ -34,13 +35,22 @@ export async function loadConfig(
   const { data } = JSON.parse(f);
 
   postMessage({ type: "importSettngs", payload: data.settings });
+  navigate(NavigatorName.Base);
 
   if (data.accounts.length) {
     postMessage({ type: "importAccounts", payload: data.accounts });
     await $waitFor("PortfolioAccountsList");
     return;
   }
+
   await $waitFor("PortfolioEmptyAccount");
+}
+
+function navigate(name: string) {
+  postMessage({
+    type: "navigate",
+    payload: name,
+  });
 }
 
 export function addDevices(
