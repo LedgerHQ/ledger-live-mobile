@@ -9,7 +9,7 @@ import useExperimental from "./useExperimental";
 import { runCollapse } from "../../../components/CollapsibleList";
 import LText from "../../../components/LText";
 import ExperimentalIcon from "../../../icons/Experimental";
-import { rejections } from "../../../components/DebugRejectSwitch";
+import { rejections } from "../../../logic/debugReject";
 
 const { cond, set, Clock, Value, interpolate, eq, or } = Animated;
 

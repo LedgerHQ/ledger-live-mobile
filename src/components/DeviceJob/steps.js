@@ -44,7 +44,7 @@ import Spinning from "../Spinning";
 import LiveLogo from "../../icons/LiveLogoIcon";
 import Button from "../Button";
 import RoundedCurrencyIcon from "../RoundedCurrencyIcon";
-import { rejectionOp } from "../DebugRejectSwitch";
+import { rejectionOp } from "../../logic/debugReject";
 import { ScreenName } from "../../const";
 import LText from "../LText";
 
