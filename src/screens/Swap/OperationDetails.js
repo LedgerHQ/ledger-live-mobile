@@ -53,7 +53,7 @@ const OperationDetails = ({ route }: Props) => {
 
   const fromCurrency = getAccountCurrency(fromAccount);
   const toCurrency = getAccountCurrency(toAccount);
-  const statusColor = getStatusColor(status);
+  const statusColor = getStatusColor(status, colors);
   const dotStyles = { backgroundColor: statusColor };
   const textColorStyles = { color: statusColor };
 
