@@ -11,7 +11,7 @@ import LText from "../../../components/LText";
 import ExperimentalIcon from "../../../icons/Experimental";
 import { rejections } from "../../../logic/debugReject";
 
-const { cond, set, Clock, Value, interpolate, eq, or } = Animated;
+const { cond, set, Clock, Value, interpolate, eq } = Animated;
 
 export default function ExperimentalHeader() {
   const { colors } = useTheme();
@@ -19,20 +19,24 @@ export default function ExperimentalHeader() {
 
   const clock = new Clock();
   // animation Open state
-  const [openState] = useState(new Value(0));
+  const [openState] = useState(new Value(Config.MOCK ? 1 : 0));
   // animation opening anim node
   const openingAnim = cond(
-    or(eq(isExperimental, true), eq(Config.MOCK, true)),
-    [
-      // opening
-      set(openState, runCollapse(clock, openState, 1)),
-      openState,
-    ],
-    [
-      // closing
-      set(openState, runCollapse(clock, openState, 0)),
-      openState,
-    ],
+    !Config.MOCK,
+    cond(
+      eq(isExperimental, true),
+      [
+        // opening
+        set(openState, runCollapse(clock, openState, 1)),
+        openState,
+      ],
+      [
+        // closing
+        set(openState, runCollapse(clock, openState, 0)),
+        openState,
+      ],
+    ),
+    openState,
   );
 
   // interpolated height from opening anim state for list container
