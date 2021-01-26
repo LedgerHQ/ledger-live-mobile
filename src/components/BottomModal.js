@@ -9,7 +9,7 @@ import TrackScreen from "../analytics/TrackScreen";
 import StyledStatusBar from "./StyledStatusBar";
 import ButtonUseTouchable from "../context/ButtonUseTouchable";
 import getWindowDimensions from "../logic/getWindowDimensions";
-import DebugRejectSwitch from "./DebugRejectSwitch";
+import ExperimentalHeader from "../screens/Settings/Experimental/ExperimentalHeader";
 
 export type Props = {
   id?: string,
@@ -63,6 +63,7 @@ const BottomModal = ({
         hideModalContentWhileAnimating
         style={[styles.root, propStyles || {}]}
       >
+        <ExperimentalHeader />
         <View
           style={[
             styles.modal,
@@ -81,7 +82,6 @@ const BottomModal = ({
             {children}
           </View>
         </View>
-        <DebugRejectSwitch />
       </ReactNativeModal>
     </ButtonUseTouchable.Provider>
   );

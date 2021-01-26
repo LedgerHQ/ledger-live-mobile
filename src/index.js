@@ -161,8 +161,6 @@ function App({ importDataString }: AppProps) {
 
       <RootNavigator importDataString={importDataString} />
 
-      <DebugRejectSwitch />
-
       <AnalyticsConsole />
       <ThemeDebug />
     </View>

@@ -1,15 +1,17 @@
 // @flow
-import React, { useState } from "react";
-import { StyleSheet } from "react-native";
+import React, { useState, useCallback } from "react";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import Animated, { Extrapolate } from "react-native-reanimated";
 import { Trans } from "react-i18next";
 import { useTheme } from "@react-navigation/native";
+import Config from "react-native-config";
 import useExperimental from "./useExperimental";
 import { runCollapse } from "../../../components/CollapsibleList";
 import LText from "../../../components/LText";
 import ExperimentalIcon from "../../../icons/Experimental";
+import { rejections } from "../../../components/DebugRejectSwitch";
 
-const { cond, set, Clock, Value, interpolate, eq } = Animated;
+const { cond, set, Clock, Value, interpolate, eq, or } = Animated;
 
 export default function ExperimentalHeader() {
   const { colors } = useTheme();
@@ -20,7 +22,7 @@ export default function ExperimentalHeader() {
   const [openState] = useState(new Value(0));
   // animation opening anim node
   const openingAnim = cond(
-    eq(isExperimental, true),
+    or(eq(isExperimental, true), eq(Config.MOCK, true)),
     [
       // opening
       set(openState, runCollapse(clock, openState, 1)),
@@ -40,6 +42,10 @@ export default function ExperimentalHeader() {
     extrapolate: Extrapolate.CLAMP,
   });
 
+  const onPressMock = useCallback(() => {
+    rejections.next();
+  }, []);
+
   return (
     <Animated.View
       style={[styles.root, { height, backgroundColor: colors.lightLiveBg }]}
@@ -50,10 +56,22 @@ export default function ExperimentalHeader() {
           { opacity: openingAnim, backgroundColor: colors.lightLiveBg },
         ]}
       >
-        <ExperimentalIcon size={16} color={colors.live} />
-        <LText bold style={styles.label}>
-          <Trans i18nKey="settings.experimental.title" />
-        </LText>
+        {isExperimental && (
+          <>
+            <ExperimentalIcon size={16} color={colors.live} />
+            <LText bold style={styles.label}>
+              <Trans i18nKey="settings.experimental.title" />
+            </LText>
+          </>
+        )}
+
+        {Config.MOCK && (
+          <TouchableOpacity onPress={onPressMock}>
+            <LText bold style={styles.label}>
+              MOCK
+            </LText>
+          </TouchableOpacity>
+        )}
       </Animated.View>
     </Animated.View>
   );
