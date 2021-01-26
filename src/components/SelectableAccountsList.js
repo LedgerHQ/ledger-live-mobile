@@ -116,6 +116,7 @@ class SelectableAccount extends PureComponent<
     navigation: *,
     onAccountNameChange?: (name: string, changedAccount: Account) => void,
     colors: *,
+    useFullBalance?: Boolean,
   },
   { stopAnimation: boolean },
 > {
@@ -218,7 +219,11 @@ class SelectableAccount extends PureComponent<
           isDisabled && styles.selectableAccountRootDisabled,
         ]}
       >
-        <AccountCard account={account} parentAccount={null} />
+        <AccountCard
+          useFullBalance={this.props.useFullBalance}
+          account={account}
+          parentAccount={null}
+        />
         {!isDisabled && (
           <CheckBox
             onChange={this.onPress ? this.onPress : undefined}
