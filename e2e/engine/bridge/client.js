@@ -11,7 +11,7 @@ import { navigate } from "../../../src/rootnavigation";
 
 let ws: WebSocket;
 
-export function initE2EBridgeClient(port: number = 8099) {
+export function init(port: number = 8099) {
   const path = `localhost:${port}`;
   ws = new WebSocket(`ws://${path}`);
   ws.onopen = () => {
