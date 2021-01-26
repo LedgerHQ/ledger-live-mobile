@@ -1,6 +1,6 @@
 // @flow
 import * as bridge from "../bridge/server";
-import { $tap, $proceed, $, $scrollTill } from "../utils";
+import { $tap, $proceed, $, $scrollTill, $waitFor } from "../utils";
 
 export function onboard(modelId: DeviceModelId, usecase: Usecase) {
   getStarted();
@@ -50,6 +50,7 @@ async function connectViaBluetooth(modelId: DeviceModelId) {
     await $proceed();
     const [david] = bridge.addDevices();
     // TODO E2E: Android
+    await $waitFor(`DeviceItemEnter ${david}`);
     await $tap(`DeviceItemEnter ${david}`);
     bridge.setInstalledApps();
     bridge.open();
