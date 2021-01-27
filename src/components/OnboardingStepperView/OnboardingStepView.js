@@ -124,7 +124,10 @@ export function InfoStepView({
                           ]}
                         >
                           {Icon ? (
-                            <Icon size={10} color={color || colors.live} />
+                            <Icon
+                              size={10}
+                              color={color ? colors[color] : colors.live}
+                            />
                           ) : (
                             <LText
                               semiBold
