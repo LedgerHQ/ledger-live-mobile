@@ -192,7 +192,6 @@
     "metro-react-native-babel-preset": "^0.59.0",
     "prettier": "^1.19.1",
     "react-native-debugger-open": "^0.3.25",
-    "react-test-renderer": "16.13.1",
     "rn-nodeify": "^10.2.0",
     "ws": "^7.3.0",
     "yarn-deduplicate": "^2.1.1"
