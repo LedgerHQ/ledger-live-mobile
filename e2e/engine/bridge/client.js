@@ -1,4 +1,5 @@
 // @flow
+import { Platform } from "react-native";
 import invariant from "invariant";
 import { Subject } from "rxjs/Subject";
 import type { AccountRaw } from "@ledgerhq/live-common/lib/types";
@@ -12,7 +13,8 @@ import { navigate } from "../../../src/rootnavigation";
 let ws: WebSocket;
 
 export function init(port: number = 8099) {
-  const path = `localhost:${port}`;
+  const ipAddress = Platform.OS === "ios" ? "localhost" : "10.0.2.2";
+  const path = `${ipAddress}:${port}`;
   ws = new WebSocket(`ws://${path}`);
   ws.onopen = () => {
     log(`Connection opened on ${path}`);
