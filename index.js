@@ -11,7 +11,7 @@ import Config from "react-native-config";
 import App from "./src";
 import { getEnabled } from "./src/components/HookSentry";
 
-if (Config.SENTRY_DSN && !__DEV__) {
+if (Config.SENTRY_DSN && !__DEV__ && !Config.MOCK) {
   Sentry.config(Config.SENTRY_DSN, {
     handlePromiseRejection: true,
     autoBreadcrumbs: {
