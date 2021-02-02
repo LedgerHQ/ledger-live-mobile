@@ -40,7 +40,7 @@ export default function PairDevices(props: Props) {
     <RequiresBLE>
       <SafeAreaView
         forceInset={forceInset}
-        style={[styles.root, { backgroundColor: colors.white }]}
+        style={[styles.root, { backgroundColor: colors.background }]}
       >
         <PairDevicesInner {...props} />
       </SafeAreaView>
