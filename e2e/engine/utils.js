@@ -21,7 +21,7 @@ export function $byText(text: string) {
 export function $waitFor(
   q: Query,
   percentage: number = 75,
-  timeout: number = 2000,
+  timeout: number = 5000,
 ) {
   const el = getElement(q);
   return waitFor(el)
