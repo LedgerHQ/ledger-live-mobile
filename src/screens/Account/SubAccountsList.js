@@ -303,9 +303,7 @@ export default function SubAccountsList({
 
   if (
     !isToken &&
-    subAccounts.length === 0 &&
-    (parentAccount.currency.family === "tezos" || // Scoped for Tezos now, might need to change with future coins integration
-      parentAccount.currency.family === "ethereum") // added ethereum
+    subAccounts.length === 0
   ) {
     return null;
   }
