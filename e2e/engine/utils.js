@@ -18,6 +18,7 @@ export function $byText(text: string) {
   return element(by.text(text));
 }
 
+// specifing -1 as percentage would check just an existence
 export function $waitFor(
   q: Query,
   percentage: number = 75,
