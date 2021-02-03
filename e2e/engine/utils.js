@@ -24,9 +24,13 @@ export function $waitFor(
   timeout: number = 5000,
 ) {
   const el = getElement(q);
-  return waitFor(el)
-    .toBeVisible(percentage)
-    .withTimeout(timeout);
+  return percentage < 0
+    ? waitFor(el)
+        .toExist()
+        .withTimeout(timeout)
+    : waitFor(el)
+        .toBeVisible(percentage)
+        .withTimeout(timeout);
 }
 
 export function $tap(q: Query) {
