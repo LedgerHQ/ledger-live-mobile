@@ -4,8 +4,10 @@ export function cleanLaunch() {
   return device.launchApp({ delete: true });
 }
 
-export function $proceed(): Promise<void> {
-  return $("Proceed").tap();
+export async function $proceed(): Promise<void> {
+  const el = $("Proceed");
+  await $waitFor(el);
+  await el.tap();
 }
 
 export function $(id: string) {
