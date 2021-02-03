@@ -1,80 +1,77 @@
 /* @flow */
-import React, { Component } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { StyleSheet, Linking } from "react-native";
-import { SafeAreaView } from "react-navigation";
-import { connect } from "react-redux";
-import { translate } from "react-i18next";
-import type { NavigationScreenProp } from "react-navigation";
+import SafeAreaView from "react-native-safe-area-view";
 import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
-import { accountAndParentScreenSelector } from "../../reducers/accounts";
+import { useTheme } from "@react-navigation/native";
 import { TrackScreen } from "../../analytics";
-import colors from "../../colors";
 import ValidateError from "../../components/ValidateError";
 import { urls } from "../../config/urls";
+import {
+  context as _wcContext,
+  setCurrentCallRequestError,
+} from "../WalletConnect/Provider";
 
 const forceInset = { bottom: "always" };
 
 type Props = {
   account: AccountLike,
   parentAccount: ?Account,
-  navigation: NavigationScreenProp<{
-    params: {
-      accountId: string,
-      parentId: String,
-      deviceId: string,
-      transaction: *,
-      error: Error,
-    },
-  }>,
+  navigation: any,
+  route: { params: RouteParams },
 };
 
-class ValidationError extends Component<Props> {
-  static navigationOptions = {
-    header: null,
-  };
+type RouteParams = {
+  accountId: string,
+  parentId: String,
+  deviceId: string,
+  transaction: any,
+  error: Error,
+};
 
-  dismiss = () => {
-    const { navigation } = this.props;
-    if (navigation.dismiss) {
-      const dismissed = navigation.dismiss();
-      if (!dismissed) navigation.goBack();
+export default function ValidationError({ navigation, route }: Props) {
+  const { colors } = useTheme();
+  const error = route.params.error;
+  const wcContext = useContext(_wcContext);
+  const [disableRetry, setDisableRetry] = useState(false);
+
+  useEffect(() => {
+    if (wcContext.currentCallRequestId) {
+      setDisableRetry(true);
+      setCurrentCallRequestError(error);
     }
-  };
+  }, []);
 
-  contactUs = () => {
+  const onClose = useCallback(() => {
+    navigation.dangerouslyGetParent().pop();
+  }, [navigation]);
+
+  const contactUs = useCallback(() => {
     Linking.openURL(urls.contact);
-  };
+  }, []);
 
-  retry = () => {
-    const { navigation } = this.props;
+  const retry = useCallback(() => {
     navigation.goBack();
-  };
+  }, [navigation]);
 
-  render() {
-    const { navigation } = this.props;
-    const error = navigation.getParam("error");
-
-    return (
-      <SafeAreaView style={styles.root} forceInset={forceInset}>
-        <TrackScreen category="SendFunds" name="ValidationError" />
-        <ValidateError
-          error={error}
-          onRetry={this.retry}
-          onClose={this.dismiss}
-          onContactUs={this.contactUs}
-        />
-      </SafeAreaView>
-    );
-  }
+  return (
+    <SafeAreaView
+      style={[styles.root, { backgroundColor: colors.background }]}
+      forceInset={forceInset}
+    >
+      <TrackScreen category="SendFunds" name="ValidationError" />
+      <ValidateError
+        error={error}
+        onRetry={!disableRetry ? retry : null}
+        onClose={onClose}
+        onContactUs={contactUs}
+      />
+    </SafeAreaView>
+  );
 }
 
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: colors.white,
   },
 });
-
-const mapStateToProps = accountAndParentScreenSelector;
-
-export default connect(mapStateToProps)(translate()(ValidationError));

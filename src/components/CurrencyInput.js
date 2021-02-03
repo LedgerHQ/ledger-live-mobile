@@ -12,7 +12,7 @@ import clamp from "lodash/clamp";
 
 import type { Unit } from "@ledgerhq/live-common/lib/types";
 
-import colors from "../colors";
+import { withTheme } from "../colors";
 
 function format(
   unit: Unit,
@@ -36,6 +36,7 @@ type Props = {
   showAllDigits?: boolean,
   subMagnitude: number,
   allowZero: boolean,
+  renderLeft?: any,
   renderRight?: any,
   hasError?: boolean,
   hasWarning?: boolean,
@@ -43,6 +44,8 @@ type Props = {
   editable: boolean,
   placeholder?: string,
   style?: *,
+  inputStyle?: *,
+  colors: *,
 };
 
 type State = {
@@ -132,16 +135,19 @@ class CurrencyInput extends PureComponent<Props, State> {
   render() {
     const {
       style,
+      inputStyle,
       showAllDigits,
       unit,
       subMagnitude,
       isActive,
+      renderLeft,
       renderRight,
       hasError,
       hasWarning,
       autoFocus,
       editable,
       placeholder,
+      colors,
     } = this.props;
     const { displayValue } = this.state;
 
@@ -157,14 +163,21 @@ class CurrencyInput extends PureComponent<Props, State> {
 
     return (
       <View style={[styles.wrapper, style]}>
+        {renderLeft}
         <TextInput
           allowFontScaling={false}
           hitSlop={{ top: 20, bottom: 20 }}
           style={[
             styles.input,
-            hasError ? styles.error : hasWarning ? styles.warning : null,
-            editable ? {} : styles.readOnly,
+            { color: colors.darkBlue },
+            hasError
+              ? { color: colors.alert }
+              : hasWarning
+              ? { color: colors.orange }
+              : null,
+            editable ? {} : { color: colors.grey },
             { fontSize: dynamicFontSize },
+            inputStyle,
           ]}
           editable={editable}
           onChangeText={this.handleChange}
@@ -181,6 +194,7 @@ class CurrencyInput extends PureComponent<Props, State> {
               subMagnitude,
             })
           }
+          placeholderTextColor={colors.darkBlue}
           keyboardType="numeric"
           blurOnSubmit
         />
@@ -194,22 +208,13 @@ const styles = StyleSheet.create({
   wrapper: {
     flexDirection: "row",
     alignItems: "center",
+    justifyContent: "center",
   },
   input: {
     flex: 1,
-    fontFamily: "Rubik",
+    fontFamily: "Inter",
     paddingRight: 8,
-    color: colors.darkBlue,
-  },
-  readOnly: {
-    color: colors.grey,
-  },
-  error: {
-    color: colors.alert,
-  },
-  warning: {
-    color: colors.orange,
   },
 });
 
-export default CurrencyInput;
+export default withTheme(CurrencyInput);

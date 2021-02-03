@@ -1,35 +1,33 @@
 /* @flow */
-/* eslint-disable no-console */
 import React, { Component } from "react";
 import { View, StyleSheet } from "react-native";
-import { SafeAreaView } from "react-navigation";
-import type { NavigationStackProp } from "react-navigation-stack";
-import { translate, Trans } from "react-i18next";
+import SafeAreaView from "react-native-safe-area-view";
+import { Trans } from "react-i18next";
 import firmwareUpdatePrepare from "@ledgerhq/live-common/lib/hw/firmwareUpdate-prepare";
 import type { FirmwareUpdateContext } from "@ledgerhq/live-common/lib/types/manager";
 import manager from "@ledgerhq/live-common/lib/manager";
 import { TrackScreen } from "../../analytics";
 import { deviceNames } from "../../wording";
-import colors from "../../colors";
-import StepHeader from "../../components/StepHeader";
+import { ScreenName } from "../../const";
 import LText from "../../components/LText";
 import DeviceNanoAction from "../../components/DeviceNanoAction";
 import LiveLogo from "../../icons/LiveLogoIcon";
 import Spinning from "../../components/Spinning";
 import FirmwareProgress from "../../components/FirmwareProgress";
 import getWindowDimensions from "../../logic/getWindowDimensions";
+import { withTheme } from "../../colors";
 
 const forceInset = { bottom: "always" };
 
-type Navigation = NavigationStackProp<{
-  params: {
-    deviceId: string,
-    firmware: FirmwareUpdateContext,
-  },
-}>;
-
 type Props = {
-  navigation: Navigation,
+  navigation: any,
+  route: { params: RouteParams },
+  colors: *,
+};
+
+type RouteParams = {
+  deviceId: string,
+  firmware: FirmwareUpdateContext,
 };
 
 type State = {
@@ -43,29 +41,16 @@ class FirmwareUpdateCheckId extends Component<Props, State> {
     displayedOnDevice: false,
   };
 
-  static navigationOptions = {
-    headerLeft: null,
-    headerTitle: (
-      <StepHeader
-        subtitle={<Trans i18nKey="FirmwareUpdate.title" />}
-        title={<Trans i18nKey="FirmwareUpdateCheckId.title" />}
-      />
-    ),
-  };
-
   sub: *;
 
   componentDidMount() {
-    const { navigation } = this.props;
-    const deviceId = navigation.getParam("deviceId");
-    const firmware = navigation.getParam("firmware");
+    const { navigation, route } = this.props;
+    const { deviceId, firmware } = route.params || {};
 
     if (!firmware) {
       // if there is no latest firmware we'll jump to success screen
       if (navigation.replace) {
-        navigation.replace("FirmwareUpdateConfirmation", {
-          ...navigation.state.params,
-        });
+        navigation.replace(ScreenName.FirmwareUpdateConfirmation, route.params);
       }
       return;
     }
@@ -76,15 +61,13 @@ class FirmwareUpdateCheckId extends Component<Props, State> {
       },
       complete: () => {
         if (navigation.replace) {
-          navigation.replace("FirmwareUpdateMCU", {
-            ...navigation.state.params,
-          });
+          navigation.replace(ScreenName.FirmwareUpdateMCU, route.params);
         }
       },
       error: error => {
         if (navigation.replace) {
-          navigation.replace("FirmwareUpdateFailure", {
-            ...navigation.state.params,
+          navigation.replace(ScreenName.FirmwareUpdateFailure, {
+            ...route.params,
             error,
           });
         }
@@ -97,13 +80,16 @@ class FirmwareUpdateCheckId extends Component<Props, State> {
   }
 
   render() {
-    const { navigation } = this.props;
+    const { colors } = this.props;
     const { progress } = this.state;
-    const { osu } = navigation.getParam("firmware");
+    const { osu } = this.props.route.params?.firmware.osu;
     const windowWidth = getWindowDimensions().width;
 
     return (
-      <SafeAreaView style={styles.root} forceInset={forceInset}>
+      <SafeAreaView
+        style={[styles.root, { backgroundColor: colors.background }]}
+        forceInset={forceInset}
+      >
         <TrackScreen category="FirmwareUpdate" name="CheckId" />
         <View style={styles.body}>
           <View style={styles.device}>
@@ -113,23 +99,31 @@ class FirmwareUpdateCheckId extends Component<Props, State> {
               width={1.2 * windowWidth}
             />
           </View>
-          <LText style={styles.description}>
+          <LText style={styles.description} color="smoke">
             <Trans
               i18nKey="FirmwareUpdateCheckId.description"
               values={deviceNames.nanoX}
             />
           </LText>
-          <View style={[styles.idContainer, { maxWidth: windowWidth - 40 }]}>
-            <LText style={styles.id} bold>
-              {osu && manager.formatHashName(osu.hash)}
-            </LText>
+          <View
+            style={[
+              styles.idContainer,
+              { borderColor: colors.fog, maxWidth: windowWidth - 40 },
+            ]}
+          >
+            {osu &&
+              manager.formatHashName(osu.hash).map(hash => (
+                <LText key={hash} style={styles.id} bold>
+                  {hash}
+                </LText>
+              ))}
           </View>
 
           <View style={styles.footer}>
             {progress === 0 ? (
               <View style={{ padding: 10 }}>
                 <Spinning>
-                  <LiveLogo color={colors.fog} size={40} />
+                  <LiveLogo color={colors.grey} size={40} />
                 </Spinning>
               </View>
             ) : (
@@ -145,7 +139,6 @@ class FirmwareUpdateCheckId extends Component<Props, State> {
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: colors.white,
   },
   body: {
     padding: 20,
@@ -160,7 +153,6 @@ const styles = StyleSheet.create({
     position: "relative",
   },
   description: {
-    color: colors.smoke,
     fontSize: 14,
     marginVertical: 30,
   },
@@ -168,7 +160,6 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     borderWidth: 1,
     borderStyle: "dashed",
-    borderColor: colors.fog,
     paddingVertical: 10,
     paddingHorizontal: 20,
   },
@@ -177,4 +168,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default translate()(FirmwareUpdateCheckId);
+export default withTheme(FirmwareUpdateCheckId);

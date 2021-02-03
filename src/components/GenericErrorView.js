@@ -2,7 +2,6 @@
 import React, { PureComponent } from "react";
 import { View, StyleSheet } from "react-native";
 
-import colors from "../colors";
 import LText from "./LText";
 import ErrorIcon from "./ErrorIcon";
 import TranslatedError from "./TranslatedError";
@@ -33,13 +32,7 @@ class GenericErrorView extends PureComponent<{
             <ErrorIcon error={error} />
           </View>
         ) : null}
-        <LText
-          selectable
-          secondary
-          semiBold
-          style={styles.title}
-          numberOfLines={3}
-        >
+        <LText selectable semiBold style={styles.title} numberOfLines={3}>
           <TranslatedError error={titleError} />
         </LText>
         {subtitleError ? (
@@ -48,6 +41,7 @@ class GenericErrorView extends PureComponent<{
             secondary
             semiBold
             style={styles.subtitle}
+            color="alert"
             numberOfLines={3}
           >
             <TranslatedError error={subtitleError} />
@@ -55,7 +49,12 @@ class GenericErrorView extends PureComponent<{
         ) : null}
         {withDescription ? (
           <>
-            <LText selectable style={styles.description} numberOfLines={6}>
+            <LText
+              selectable
+              style={styles.description}
+              color="smoke"
+              numberOfLines={6}
+            >
               <TranslatedError error={error} field="description" />
             </LText>
             <SupportLinkError error={error} />
@@ -80,7 +79,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 40,
     lineHeight: 26,
     fontSize: 16,
-    color: colors.darkBlue,
+
     textAlign: "center",
   },
   subtitle: {
@@ -89,14 +88,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 40,
     fontSize: 14,
     lineHeight: 21,
-    color: colors.alert,
     textAlign: "center",
   },
-
   description: {
     fontSize: 14,
     lineHeight: 21,
-    color: colors.smoke,
     paddingHorizontal: 24,
     textAlign: "center",
   },

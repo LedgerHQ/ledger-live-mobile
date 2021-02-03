@@ -4,9 +4,9 @@ import React, { PureComponent } from "react";
 import { View, StyleSheet, Animated } from "react-native";
 
 import Icon from "react-native-vector-icons/dist/Feather";
+import { useTheme } from "@react-navigation/native";
 import LText from "./LText";
 import Circle from "./Circle";
-import colors from "../colors";
 
 // TODO fade in animation
 
@@ -15,7 +15,7 @@ export class Bullet extends PureComponent<{ children: *, big?: boolean }> {
     const { children, big } = this.props;
     return (
       <View style={[styles.bulletContainer, big && styles.bulletContainerBig]}>
-        <LText style={[styles.number, big && styles.numberBig]} tertiary>
+        <LText style={[styles.number, big && styles.numberBig]} color="live">
           {children}
         </LText>
       </View>
@@ -29,7 +29,7 @@ export class BulletItemText extends PureComponent<{
 }> {
   render() {
     return (
-      <LText style={[styles.text, this.props.style]}>
+      <LText style={[styles.text, this.props.style]} color="smoke">
         {this.props.children}
       </LText>
     );
@@ -40,6 +40,7 @@ export class BulletItem extends PureComponent<{
   value: React$Node | (() => React$Node),
   index: number,
   animated?: boolean,
+  itemContainerStyle?: *,
   itemStyle?: *,
   itemTextStyle?: *,
   Bullet: React$ComponentType<*>,
@@ -61,11 +62,18 @@ export class BulletItem extends PureComponent<{
   }
 
   render() {
-    const { index, value, Bullet, itemStyle, itemTextStyle } = this.props;
+    const {
+      index,
+      value,
+      Bullet,
+      itemContainerStyle,
+      itemStyle,
+      itemTextStyle,
+    } = this.props;
     const { opacity } = this;
 
     return (
-      <Animated.View style={[styles.item, { opacity }]}>
+      <Animated.View style={[styles.item, { opacity }, itemContainerStyle]}>
         <Bullet>{index + 1}</Bullet>
         <View style={itemStyle || styles.textContainer}>
           {typeof value === "function" ? (
@@ -79,30 +87,29 @@ export class BulletItem extends PureComponent<{
   }
 }
 
-export class BulletChevron extends PureComponent<{}> {
-  render() {
-    return (
-      <View style={styles.chevron}>
-        <Icon size={16} name="chevron-right" color={colors.grey} />
-      </View>
-    );
-  }
+export function BulletChevron() {
+  const { colors } = useTheme();
+  return (
+    <View style={styles.chevron}>
+      <Icon size={16} name="chevron-right" color={colors.grey} />
+    </View>
+  );
 }
 
-export class BulletGreenCheck extends PureComponent<{}> {
-  render() {
-    return (
-      <Circle size={24} bg={colors.ledgerGreen}>
-        <Icon size={16} name="check" color={colors.white} />
-      </Circle>
-    );
-  }
+export function BulletGreenCheck() {
+  const { colors } = useTheme();
+  return (
+    <Circle size={24} bg={colors.ledgerGreen}>
+      <Icon size={16} name="check" color={colors.white} />
+    </Circle>
+  );
 }
 
 class BulletList extends PureComponent<{
   list: *,
   animated?: boolean,
   Bullet: React$ComponentType<*>,
+  itemContainerStyle?: *,
   itemStyle?: *,
   style?: *,
 }> {
@@ -110,11 +117,19 @@ class BulletList extends PureComponent<{
     Bullet,
   };
   render() {
-    const { list, animated, Bullet, itemStyle, style } = this.props;
+    const {
+      list,
+      animated,
+      Bullet,
+      itemContainerStyle,
+      itemStyle,
+      style,
+    } = this.props;
     return (
       <View style={style}>
         {list.map((value, index) => (
           <BulletItem
+            itemContainerStyle={itemContainerStyle}
             itemStyle={itemStyle}
             Bullet={Bullet}
             animated={animated}
@@ -149,7 +164,6 @@ const styles = StyleSheet.create({
   },
   number: {
     fontSize: 12,
-    color: colors.live,
   },
   numberBig: {
     fontSize: 16,
@@ -161,7 +175,6 @@ const styles = StyleSheet.create({
     paddingLeft: 16,
   },
   text: {
-    color: colors.smoke,
     fontSize: 14,
     lineHeight: 21,
   },

@@ -1,80 +1,87 @@
 /* @flow */
-import React, { Component } from "react";
+import React, { useCallback, useContext, useEffect } from "react";
 import { View, StyleSheet } from "react-native";
-import { connect } from "react-redux";
-import { translate } from "react-i18next";
-import type { NavigationScreenProp } from "react-navigation";
-import type {
-  TokenAccount,
-  Account,
-  Operation,
-} from "@ledgerhq/live-common/lib/types";
-import { accountAndParentScreenSelector } from "../../reducers/accounts";
+import { useSelector } from "react-redux";
+import type { Operation } from "@ledgerhq/live-common/lib/types";
+import { useTheme } from "@react-navigation/native";
+import { accountScreenSelector } from "../../reducers/accounts";
 import { TrackScreen } from "../../analytics";
-import colors from "../../colors";
+import { ScreenName } from "../../const";
 import PreventNativeBack from "../../components/PreventNativeBack";
 import ValidateSuccess from "../../components/ValidateSuccess";
+import {
+  context as _wcContext,
+  setCurrentCallRequestResult,
+  STATUS,
+} from "../WalletConnect/Provider";
 
 type Props = {
-  account: ?(TokenAccount | Account),
-  parentAccount: ?Account,
-  navigation: NavigationScreenProp<{
-    params: {
-      accountId: string,
-      deviceId: string,
-      transaction: *,
-      result: Operation,
-    },
-  }>,
+  navigation: any,
+  route: { params: RouteParams },
 };
 
-class ValidationSuccess extends Component<Props> {
-  static navigationOptions = {
-    header: null,
-    gesturesEnabled: false,
-  };
+type RouteParams = {
+  accountId: string,
+  deviceId: string,
+  transaction: any,
+  result: Operation,
+};
 
-  dismiss = () => {
-    const { navigation } = this.props;
-    if (navigation.dismiss) {
-      const dismissed = navigation.dismiss();
-      if (!dismissed) navigation.goBack();
-    }
-  };
+export default function ValidationSuccess({ navigation, route }: Props) {
+  const { colors } = useTheme();
+  const { account, parentAccount } = useSelector(accountScreenSelector(route));
+  const wcContext = useContext(_wcContext);
 
-  goToOperationDetails = () => {
-    const { navigation, account, parentAccount } = this.props;
+  useEffect(() => {
     if (!account) return;
-    const result = navigation.getParam("result");
+    let result = route.params?.result;
     if (!result) return;
-    navigation.navigate("OperationDetails", {
+    result =
+      result.subOperations && result.subOperations[0]
+        ? result.subOperations[0]
+        : result;
+
+    if (wcContext.currentCallRequestId) {
+      setCurrentCallRequestResult(result.hash);
+    }
+  }, []);
+
+  const onClose = useCallback(() => {
+    navigation.dangerouslyGetParent().pop();
+  }, [navigation]);
+
+  const goToOperationDetails = useCallback(() => {
+    if (!account) return;
+    const result = route.params?.result;
+    if (!result) return;
+    navigation.navigate(ScreenName.OperationDetails, {
+      disableAllLinks: wcContext.status === STATUS.CONNECTED,
       accountId: account.id,
       parentId: parentAccount && parentAccount.id,
-      operation: result,
+      operation:
+        result.subOperations && result.subOperations[0]
+          ? result.subOperations[0]
+          : result,
     });
-  };
+  }, [
+    account,
+    route.params?.result,
+    navigation,
+    wcContext.status,
+    parentAccount,
+  ]);
 
-  render() {
-    return (
-      <View style={styles.root}>
-        <TrackScreen category="SendFunds" name="ValidationSuccess" />
-        <PreventNativeBack />
-        <ValidateSuccess
-          onClose={this.dismiss}
-          onViewDetails={this.goToOperationDetails}
-        />
-      </View>
-    );
-  }
+  return (
+    <View style={[styles.root, { backgroundColor: colors.background }]}>
+      <TrackScreen category="SendFunds" name="ValidationSuccess" />
+      <PreventNativeBack />
+      <ValidateSuccess onClose={onClose} onViewDetails={goToOperationDetails} />
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: colors.white,
   },
 });
-
-const mapStateToProps = accountAndParentScreenSelector;
-
-export default connect(mapStateToProps)(translate()(ValidationSuccess));

@@ -1,12 +1,14 @@
 // @flow
-import React, { PureComponent } from "react";
+import React, { memo } from "react";
 import { View, StyleSheet } from "react-native";
 import { Trans } from "react-i18next";
 
-import colors from "../colors";
+import { useTheme } from "@react-navigation/native";
+import { rgba } from "../colors";
 import CheckCircle from "../icons/CheckCircle";
 import LText from "./LText";
 import Button from "./Button";
+import InfoBox from "./InfoBox";
 
 type Props = {
   onClose?: () => void,
@@ -15,31 +17,42 @@ type Props = {
   description?: React$Node,
   primaryButton?: React$Node,
   secondaryButton?: React$Node,
+  icon?: React$Node,
+  iconColor?: string,
+  info?: React$Node,
+  onLearnMore?: () => void,
 };
 
-class ValidateSuccess extends PureComponent<Props> {
-  render() {
-    const {
-      onClose,
-      onViewDetails,
-      title,
-      description,
-      primaryButton,
-      secondaryButton,
-    } = this.props;
-    return (
-      <View style={styles.root}>
-        <View style={styles.container}>
-          <View style={styles.icon}>
-            <CheckCircle size={40} color={colors.success} />
-          </View>
-          <LText secondary semiBold style={styles.title}>
-            {title || <Trans i18nKey="send.validation.sent" />}
-          </LText>
-          <LText style={styles.message}>
-            {description || <Trans i18nKey="send.validation.confirm" />}
-          </LText>
-          {primaryButton || (
+function ValidateSuccess({
+  onClose,
+  onViewDetails,
+  title,
+  description,
+  primaryButton,
+  secondaryButton,
+  icon,
+  iconColor: initialIconColor,
+  info,
+  onLearnMore,
+}: Props) {
+  const { colors } = useTheme();
+  const iconColor = initialIconColor || colors.success;
+
+  return (
+    <View style={styles.root}>
+      <View style={styles.container}>
+        <View style={[styles.icon, { backgroundColor: rgba(iconColor, 0.2) }]}>
+          {icon || <CheckCircle size={40} color={colors.success} />}
+        </View>
+        <LText secondary semiBold style={styles.title}>
+          {title || <Trans i18nKey="send.validation.sent" />}
+        </LText>
+        <LText style={styles.message} color="smoke">
+          {description || <Trans i18nKey="send.validation.confirm" />}
+        </LText>
+        {info && <InfoBox onLearnMore={onLearnMore}>{info}</InfoBox>}
+        {primaryButton ||
+          (onViewDetails && (
             <Button
               event="SendSuccessViewDetails"
               title={<Trans i18nKey="send.validation.button.details" />}
@@ -47,8 +60,9 @@ class ValidateSuccess extends PureComponent<Props> {
               containerStyle={styles.button}
               onPress={onViewDetails}
             />
-          )}
-          {secondaryButton || (
+          ))}
+        {secondaryButton ||
+          (onClose && (
             <Button
               event="SendSuccessClose"
               title={<Trans i18nKey="common.close" />}
@@ -56,11 +70,10 @@ class ValidateSuccess extends PureComponent<Props> {
               containerStyle={styles.button}
               onPress={onClose}
             />
-          )}
-        </View>
+          ))}
       </View>
-    );
-  }
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -78,11 +91,10 @@ const styles = StyleSheet.create({
     padding: 20,
     marginBottom: 32,
     borderRadius: 46,
-    backgroundColor: colors.translucentGreen,
   },
   title: {
     fontSize: 18,
-    color: colors.darkBlue,
+
     paddingHorizontal: 16,
     paddingBottom: 16,
     textAlign: "center",
@@ -95,9 +107,9 @@ const styles = StyleSheet.create({
     fontSize: 14,
     paddingHorizontal: 16,
     marginBottom: 8,
-    color: colors.smoke,
+
     textAlign: "center",
   },
 });
 
-export default ValidateSuccess;
+export default memo<Props>(ValidateSuccess);

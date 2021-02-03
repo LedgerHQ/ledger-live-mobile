@@ -1,49 +1,48 @@
 // @flow
-import React, { Component, Fragment } from "react";
-import { View, StyleSheet } from "react-native";
-
-// $FlowFixMe
-import { SectionList, SafeAreaView } from "react-navigation";
-import { HeaderBackButton } from "react-navigation-stack";
+import React, { Component } from "react";
+import { View, StyleSheet, SectionList } from "react-native";
+import SafeAreaView from "react-native-safe-area-view";
+import { useNavigation, useTheme } from "@react-navigation/native";
+import { HeaderBackButton } from "@react-navigation/stack";
 import groupBy from "lodash/groupBy";
 import concat from "lodash/concat";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
-import type { NavigationStackProp } from "react-navigation-stack";
 import type { Account } from "@ledgerhq/live-common/lib/types";
 import type { Result } from "@ledgerhq/live-common/lib/cross";
 import type { ImportItem } from "@ledgerhq/live-common/lib/account";
 import { importAccountsMakeItems } from "@ledgerhq/live-common/lib/account";
-import { translate, Trans } from "react-i18next";
-import i18next from "i18next";
+import { Trans } from "react-i18next";
 
+import { compose } from "redux";
 import { importDesktopSettings } from "../../actions/settings";
 import { importAccounts } from "../../actions/accounts";
 import { accountsSelector } from "../../reducers/accounts";
 import { TrackScreen } from "../../analytics";
+import { NavigatorName, ScreenName } from "../../const";
 import LText from "../../components/LText";
-import colors from "../../colors";
 import Button from "../../components/Button";
 import StyledStatusBar from "../../components/StyledStatusBar";
 import DisplayResultItem from "./DisplayResultItem";
 import DisplayResultSettingsSection from "./DisplayResultSettingsSection";
 import ResultSection from "./ResultSection";
 import HeaderBackImage from "../../components/HeaderBackImage";
+import { withTheme } from "../../colors";
 
 const forceInset = { bottom: "always" };
 
-type Nav = NavigationStackProp<{
-  params: {
-    result: Result,
-    onFinish?: (NavigationStackProp<*>) => void,
-  },
-}>;
-
 type Props = {
-  navigation: Nav,
+  navigation: any,
+  route: { params: RouteParams },
   accounts: Account[],
   importAccounts: ({ items: ImportItem[], selectedAccounts: string[] }) => void,
-  importDesktopSettings: (*) => void,
+  importDesktopSettings: (settings: any) => void,
+  colors: *,
+};
+
+type RouteParams = {
+  result: Result,
+  onFinish?: () => void,
 };
 
 type State = {
@@ -53,16 +52,20 @@ type State = {
   importSettings: boolean,
 };
 
-const BackButton = ({ navigation }: { navigation: Nav }) => (
-  <HeaderBackButton
-    tintColor={colors.grey}
-    onPress={() => {
-      if (navigation.replace) navigation.replace("ScanAccounts");
-    }}
-  >
-    <HeaderBackImage />
-  </HeaderBackButton>
-);
+export function BackButton() {
+  const { colors } = useTheme();
+  const navigation = useNavigation();
+  return (
+    <HeaderBackButton
+      tintColor={colors.grey}
+      onPress={() => {
+        if (navigation.replace) navigation.replace(ScreenName.ScanAccounts);
+      }}
+    >
+      <HeaderBackImage />
+    </HeaderBackButton>
+  );
+}
 
 class DisplayResult extends Component<Props, State> {
   state = {
@@ -78,19 +81,14 @@ class DisplayResult extends Component<Props, State> {
     this.unmounted = true;
   }
 
-  static navigationOptions = ({ navigation }) => ({
-    title: i18next.t("account.import.result.title"),
-    headerLeft: <BackButton navigation={navigation} />,
-  });
-
   onRetry = () => {
     const { navigation } = this.props;
-    if (navigation.replace) navigation.replace("ScanAccounts");
+    if (navigation.replace) navigation.replace(ScreenName.ScanAccounts);
   };
 
   static getDerivedStateFromProps(nextProps: Props, prevState: State) {
     const items = importAccountsMakeItems({
-      result: nextProps.navigation.getParam("result"),
+      result: nextProps.route.params?.result,
       accounts: nextProps.accounts,
       items: prevState.items,
     });
@@ -108,24 +106,18 @@ class DisplayResult extends Component<Props, State> {
     return { items, selectedAccounts };
   }
 
-  close = () => {
-    const { navigation } = this.props;
-    // $FlowFixMe
-    navigation.dismiss();
-  };
-
   onImport = async () => {
     const { importAccounts, importDesktopSettings, navigation } = this.props;
     const { selectedAccounts, items, importSettings } = this.state;
-    const onFinish = navigation.getParam("onFinish");
+    const onFinish = this.props.route.params?.onFinish;
     this.setState({ importing: true });
     importAccounts({ items, selectedAccounts });
     if (importSettings) {
-      importDesktopSettings(navigation.getParam("result").settings);
+      importDesktopSettings(this.props.route.params?.result.settings);
     }
 
-    if (onFinish) onFinish(navigation);
-    else navigation.navigate("Accounts");
+    if (onFinish) onFinish();
+    else navigation.navigate(NavigatorName.Accounts);
   };
 
   onSwitchResultItem = (checked: boolean, account: Account) => {
@@ -181,14 +173,18 @@ class DisplayResult extends Component<Props, State> {
   keyExtractor = item => item.account.id;
 
   render() {
+    const { colors } = this.props;
     const { items } = this.state;
     const itemsGroupedByMode = groupBy(items, "mode");
 
     return (
-      <SafeAreaView forceInset={forceInset} style={styles.root}>
+      <SafeAreaView
+        forceInset={forceInset}
+        style={[styles.root, { backgroundColor: colors.background }]}
+      >
         <TrackScreen category="ImportAccounts" name="DisplayResult" />
         <StyledStatusBar />
-        <Fragment>
+        <>
           <SectionList
             style={styles.body}
             contentContainerStyle={styles.list}
@@ -218,21 +214,20 @@ class DisplayResult extends Component<Props, State> {
               onPress={this.onImport}
             />
           </View>
-        </Fragment>
+        </>
       </SafeAreaView>
     );
   }
 }
 
-export default translate()(
-  connect(
-    createStructuredSelector({ accounts: accountsSelector }),
-    {
-      importAccounts,
-      importDesktopSettings,
-    },
-  )(DisplayResult),
-);
+// $FlowFixMe
+export default compose(
+  withTheme,
+  connect(createStructuredSelector({ accounts: accountsSelector }), {
+    importAccounts,
+    importDesktopSettings,
+  }),
+)(DisplayResult);
 
 const styles = StyleSheet.create({
   root: {
@@ -241,7 +236,6 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignSelf: "stretch",
     justifyContent: "space-between",
-    backgroundColor: colors.white,
   },
   body: {
     paddingHorizontal: 12,
@@ -260,18 +254,7 @@ const styles = StyleSheet.create({
   list: {
     paddingBottom: 40,
   },
-  sectionHeaderText: {
-    backgroundColor: colors.white,
-    color: colors.grey,
-    fontSize: 14,
-    paddingTop: 10,
-    paddingBottom: 10,
-  },
   emptyNotice: {
     marginLeft: 8,
-  },
-  noAccountText: {
-    flex: 1,
-    fontSize: 16,
   },
 });

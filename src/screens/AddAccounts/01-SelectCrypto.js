@@ -1,13 +1,8 @@
 // @flow
-
 import React, { useMemo } from "react";
-import { translate, Trans } from "react-i18next";
-import { StyleSheet, View } from "react-native";
-// $FlowFixMe
-import { SafeAreaView, FlatList } from "react-navigation";
-import i18next from "i18next";
-import { compose } from "redux";
-import type { NavigationScreenProp } from "react-navigation";
+import { Trans } from "react-i18next";
+import { StyleSheet, View, FlatList } from "react-native";
+import SafeAreaView from "react-native-safe-area-view";
 import type {
   CryptoCurrency,
   TokenCurrency,
@@ -15,27 +10,23 @@ import type {
 import {
   listTokens,
   useCurrenciesByMarketcap,
+  listSupportedCurrencies,
 } from "@ledgerhq/live-common/lib/currencies";
 
-import { listCryptoCurrencies } from "../../cryptocurrencies";
+import { useTheme } from "@react-navigation/native";
+import { ScreenName } from "../../const";
 import { TrackScreen } from "../../analytics";
 import FilteredSearchBar from "../../components/FilteredSearchBar";
-import StepHeader from "../../components/StepHeader";
 import KeyboardView from "../../components/KeyboardView";
 import CurrencyRow from "../../components/CurrencyRow";
 import LText from "../../components/LText";
-
-import colors from "../../colors";
-import withEnv from "../../logic/withEnv";
 
 const SEARCH_KEYS = ["name", "ticker"];
 const forceInset = { bottom: "always" };
 
 type Props = {
   devMode: boolean,
-  navigation: NavigationScreenProp<{
-    params: {},
-  }>,
+  navigation: any,
 };
 
 const keyExtractor = currency => currency.id;
@@ -48,20 +39,21 @@ const renderEmptyList = () => (
   </View>
 );
 
-const AddAccountsSelectCrypto = ({ devMode, navigation }: Props) => {
+export default function AddAccountsSelectCrypto({ navigation }: Props) {
+  const { colors } = useTheme();
   const cryptoCurrencies = useMemo(
-    () => listCryptoCurrencies(devMode).concat(listTokens()),
-    [devMode],
+    () => listSupportedCurrencies().concat(listTokens()),
+    [],
   );
 
   const sortedCryptoCurrencies = useCurrenciesByMarketcap(cryptoCurrencies);
 
   const onPressCurrency = (currency: CryptoCurrency) => {
-    navigation.navigate("AddAccountsSelectDevice", { currency });
+    navigation.navigate(ScreenName.AddAccountsSelectDevice, { currency });
   };
 
   const onPressToken = (token: TokenCurrency) => {
-    navigation.navigate("AddAccountsTokenCurrencyDisclaimer", {
+    navigation.navigate(ScreenName.AddAccountsTokenCurrencyDisclaimer, {
       token,
     });
   };
@@ -88,7 +80,10 @@ const AddAccountsSelectCrypto = ({ devMode, navigation }: Props) => {
   );
 
   return (
-    <SafeAreaView style={styles.root} forceInset={forceInset}>
+    <SafeAreaView
+      style={[styles.root, { backgroundColor: colors.background }]}
+      forceInset={forceInset}
+    >
       <TrackScreen category="AddAccounts" name="SelectCrypto" />
       <KeyboardView style={{ flex: 1 }}>
         <View style={styles.searchContainer}>
@@ -103,24 +98,11 @@ const AddAccountsSelectCrypto = ({ devMode, navigation }: Props) => {
       </KeyboardView>
     </SafeAreaView>
   );
-};
-
-AddAccountsSelectCrypto.navigationOptions = {
-  headerTitle: (
-    <StepHeader
-      title={i18next.t("common.cryptoAsset")}
-      subtitle={i18next.t("send.stepperHeader.stepRange", {
-        currentStep: "1",
-        totalSteps: "3",
-      })}
-    />
-  ),
-};
+}
 
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: colors.white,
   },
   searchContainer: {
     paddingTop: 16,
@@ -139,10 +121,3 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
 });
-
-const enhancer = compose(
-  translate(),
-  withEnv("MANAGER_DEV_MODE", "devMode"),
-);
-
-export default enhancer(AddAccountsSelectCrypto);

@@ -1,15 +1,15 @@
 /* @flow */
 import React, { PureComponent } from "react";
 import { View, StyleSheet } from "react-native";
-import { SafeAreaView } from "react-navigation";
-import { translate } from "react-i18next";
+import SafeAreaView from "react-native-safe-area-view";
+import { withTranslation } from "react-i18next";
 import type { T } from "../../../types/common";
 import Button from "../../../components/Button";
 import LText from "../../../components/LText";
 import KeyboardView from "../../../components/KeyboardView";
 import TranslatedError from "../../../components/TranslatedError";
 import PasswordInput from "../../../components/PasswordInput";
-import colors from "../../../colors";
+import { withTheme } from "../../../colors";
 
 type Props = {
   t: T,
@@ -18,6 +18,7 @@ type Props = {
   error?: ?Error,
   placeholder: string,
   value: string,
+  colors: *,
 };
 
 type State = {
@@ -37,10 +38,21 @@ class PasswordForm extends PureComponent<Props, State> {
   };
 
   render() {
-    const { t, onChange, onSubmit, error, placeholder, value } = this.props;
+    const {
+      t,
+      onChange,
+      onSubmit,
+      error,
+      placeholder,
+      value,
+      colors,
+    } = this.props;
     const { secureTextEntry } = this.state;
     return (
-      <SafeAreaView forceInset={forceInset} style={styles.root}>
+      <SafeAreaView
+        forceInset={forceInset}
+        style={[styles.root, { backgroundColor: colors.background }]}
+      >
         <KeyboardView>
           <View style={styles.body}>
             <PasswordInput
@@ -56,7 +68,7 @@ class PasswordForm extends PureComponent<Props, State> {
             />
           </View>
           {error && (
-            <LText style={styles.errorStyle}>
+            <LText style={styles.errorStyle} color="alert">
               <TranslatedError error={error} />
             </LText>
           )}
@@ -68,7 +80,6 @@ class PasswordForm extends PureComponent<Props, State> {
               onPress={onSubmit}
               containerStyle={styles.buttonContainer}
               titleStyle={styles.buttonTitle}
-              secureTextEntry={secureTextEntry}
               disabled={!!error || value.length === 0}
             />
           </View>
@@ -78,7 +89,7 @@ class PasswordForm extends PureComponent<Props, State> {
   }
 }
 
-export default translate()(PasswordForm);
+export default withTheme(withTranslation()(PasswordForm));
 
 const styles = StyleSheet.create({
   root: {
@@ -100,7 +111,6 @@ const styles = StyleSheet.create({
     paddingBottom: 16,
   },
   errorStyle: {
-    color: colors.alert,
     marginHorizontal: 16,
     fontSize: 12,
   },

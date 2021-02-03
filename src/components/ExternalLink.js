@@ -4,28 +4,35 @@ import { StyleSheet } from "react-native";
 import LText from "./LText";
 import Touchable from "./Touchable";
 import ExternalLink from "../icons/ExternalLink";
-import colors from "../colors";
 
 type Props = {
   text: React$Node,
-  onPress: () => void | Promise<void>,
+  onPress?: () => void | Promise<void>,
   event: string,
   eventProperties?: Object,
   iconFirst?: boolean,
   ltextProps?: *,
+  color?: string,
 };
 
-const Link = ({ text, onPress, event, eventProperties, ltextProps }: Props) => (
+const Link = ({
+  text,
+  onPress,
+  event,
+  eventProperties,
+  ltextProps,
+  color = "live",
+}: Props) => (
   <Touchable
     event={event}
     eventProperties={eventProperties}
     onPress={onPress}
     style={styles.root}
   >
-    <LText bold style={styles.text} {...ltextProps}>
+    <LText semiBold style={[styles.text]} color={color} {...ltextProps}>
       {text}
     </LText>
-    <ExternalLink size={14} color={colors.live} />
+    <ExternalLink size={14} color={color} />
   </Touchable>
 );
 
@@ -36,8 +43,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   text: {
-    fontSize: 14,
-    color: colors.live,
+    fontSize: 12,
+    lineHeight: 18,
     paddingRight: 8,
   },
 });

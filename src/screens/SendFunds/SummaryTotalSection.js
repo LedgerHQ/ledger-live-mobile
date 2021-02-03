@@ -1,5 +1,5 @@
 /* @flow */
-import React, { PureComponent, Fragment } from "react";
+import React, { PureComponent } from "react";
 import { View, StyleSheet } from "react-native";
 import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
 import {
@@ -17,13 +17,13 @@ import Button from "../../components/Button";
 import Circle from "../../components/Circle";
 import Touchable from "../../components/Touchable";
 import Info from "../../icons/Info";
-
-import colors from "../../colors";
+import { withTheme } from "../../colors";
 
 type Props = {
   account: AccountLike,
   parentAccount: ?Account,
   amount: *,
+  colors: *,
 };
 
 type State = {
@@ -44,12 +44,12 @@ class SummaryTotalSection extends PureComponent<Props, State> {
   };
 
   render() {
-    const { account, amount } = this.props;
+    const { account, amount, colors } = this.props;
     const { isModalOpened } = this.state;
     const unit = getAccountUnit(account);
     const currency = getAccountCurrency(account);
     return (
-      <Fragment>
+      <>
         <SummaryRow
           title={<Trans i18nKey="send.summary.total" />}
           additionalInfo={
@@ -63,7 +63,7 @@ class SummaryTotalSection extends PureComponent<Props, State> {
             <LText semiBold style={styles.summaryValueText}>
               <CurrencyUnitValue unit={unit} value={amount} disableRounding />
             </LText>
-            <LText style={styles.summaryCounterValueText}>
+            <LText style={styles.summaryCounterValueText} color="grey">
               <CounterValue
                 value={amount}
                 currency={currency}
@@ -98,7 +98,7 @@ class SummaryTotalSection extends PureComponent<Props, State> {
             }
           />
         </BottomModal>
-      </Fragment>
+      </>
     );
   }
 }
@@ -108,16 +108,13 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "flex-end",
   },
-  title: {
-    color: colors.darkBlue,
-  },
+  title: {},
   summaryValueText: {
     fontSize: 18,
   },
   summaryCounterValueText: {
     fontSize: 14,
-    color: colors.grey,
   },
 });
 
-export default SummaryTotalSection;
+export default withTheme(SummaryTotalSection);

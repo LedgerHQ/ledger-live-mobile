@@ -1,46 +1,76 @@
 /* @flow */
-import React, { useCallback } from "react";
-import i18next from "i18next";
-import { View, StyleSheet } from "react-native";
-import { createStructuredSelector } from "reselect";
-// $FlowFixMe
-import { SafeAreaView, FlatList } from "react-navigation";
-import type { NavigationScreenProp } from "react-navigation";
-import { connect } from "react-redux";
-import { compose } from "redux";
-import { translate, Trans } from "react-i18next";
-import type {
-  Account,
-  AccountLikeArray,
-} from "@ledgerhq/live-common/lib/types";
+import React, { useCallback, useMemo } from "react";
+import { View, StyleSheet, FlatList } from "react-native";
+import SafeAreaView from "react-native-safe-area-view";
+import { useSelector } from "react-redux";
+import { Trans } from "react-i18next";
+import { useTheme } from "@react-navigation/native";
 import {
-  accountsSelector,
-  flattenAccountsSelector,
-} from "../../reducers/accounts";
-import colors from "../../colors";
+  accountWithMandatoryTokens,
+  flattenAccounts,
+} from "@ledgerhq/live-common/lib/account/helpers";
+import type {
+  CryptoCurrency,
+  TokenCurrency,
+} from "@ledgerhq/live-common/lib/types";
+import type { SearchResult } from "../../helpers/formatAccountSearchResults";
+
+import { accountsSelector } from "../../reducers/accounts";
+import { ScreenName } from "../../const";
 import { TrackScreen } from "../../analytics";
 import LText from "../../components/LText";
 import FilteredSearchBar from "../../components/FilteredSearchBar";
 import AccountCard from "../../components/AccountCard";
-import StepHeader from "../../components/StepHeader";
 import KeyboardView from "../../components/KeyboardView";
 import { formatSearchResults } from "../../helpers/formatAccountSearchResults";
-import type { SearchResult } from "../../helpers/formatAccountSearchResults";
 
 const SEARCH_KEYS = ["name", "unit.code", "token.name", "token.ticker"];
 const forceInset = { bottom: "always" };
 
-type Navigation = NavigationScreenProp<{ params: {} }>;
-
 type Props = {
-  accounts: Account[],
-  allAccounts: AccountLikeArray,
-  navigation: Navigation,
+  navigation: any,
+  route: {
+    params?: {
+      currency?: string,
+      selectedCurrency?: CryptoCurrency | TokenCurrency,
+    },
+  },
 };
 
-// type State = {};
+export default function ReceiveFunds({ navigation, route }: Props) {
+  const { colors } = useTheme();
+  const { selectedCurrency, currency: initialCurrencySelected } =
+    route.params || {};
 
-const ReceiveFunds = ({ accounts, allAccounts, navigation }: Props) => {
+  const accounts = useSelector(accountsSelector);
+  const enhancedAccounts = useMemo(() => {
+    if (selectedCurrency) {
+      const filteredAccounts = accounts.filter(
+        acc =>
+          acc.currency.id ===
+          (selectedCurrency.type === "TokenCurrency"
+            ? selectedCurrency.parentCurrency.id
+            : selectedCurrency.id),
+      );
+      if (selectedCurrency.type === "TokenCurrency") {
+        // add in the token subAccount if it does not exist
+        return flattenAccounts(
+          filteredAccounts.map(acc =>
+            accountWithMandatoryTokens(acc, [selectedCurrency]),
+          ),
+        ).filter(
+          acc =>
+            acc.type === "Account" ||
+            (acc.type === "TokenAccount" &&
+              acc.token.id === selectedCurrency.id),
+        );
+      }
+      return flattenAccounts(filteredAccounts);
+    }
+    return flattenAccounts(accounts);
+  }, [accounts, selectedCurrency]);
+  const allAccounts = enhancedAccounts;
+
   const keyExtractor = item => item.account.id;
 
   const renderItem = useCallback(
@@ -48,14 +78,24 @@ const ReceiveFunds = ({ accounts, allAccounts, navigation }: Props) => {
       const { account } = result;
       return (
         <View
-          style={account.type === "Account" ? undefined : styles.tokenCardStyle}
+          style={
+            account.type === "Account"
+              ? undefined
+              : [
+                  styles.tokenCardStyle,
+                  {
+                    borderLeftColor: colors.fog,
+                  },
+                ]
+          }
         >
           <AccountCard
             disabled={!result.match}
             account={account}
             style={styles.card}
             onPress={() => {
-              navigation.navigate("ReceiveConnectDevice", {
+              navigation.navigate(ScreenName.ReceiveConnectDevice, {
+                account,
                 accountId: account.id,
                 parentId:
                   account.type !== "Account" ? account.parentId : undefined,
@@ -65,7 +105,7 @@ const ReceiveFunds = ({ accounts, allAccounts, navigation }: Props) => {
         </View>
       );
     },
-    [navigation],
+    [colors.fog, navigation],
   );
 
   const renderList = useCallback(
@@ -86,7 +126,15 @@ const ReceiveFunds = ({ accounts, allAccounts, navigation }: Props) => {
   );
 
   return (
-    <SafeAreaView style={styles.root} forceInset={forceInset}>
+    <SafeAreaView
+      style={[
+        styles.root,
+        {
+          backgroundColor: colors.background,
+        },
+      ]}
+      forceInset={forceInset}
+    >
       <TrackScreen category="ReceiveFunds" name="SelectAccount" />
       <KeyboardView style={{ flex: 1 }}>
         <View style={styles.searchContainer}>
@@ -95,9 +143,10 @@ const ReceiveFunds = ({ accounts, allAccounts, navigation }: Props) => {
             inputWrapperStyle={styles.card}
             list={allAccounts}
             renderList={renderList}
+            initialQuery={initialCurrencySelected}
             renderEmptySearch={() => (
               <View style={styles.emptyResults}>
-                <LText style={styles.emptyText}>
+                <LText style={styles.emptyText} color="fog">
                   <Trans i18nKey="transfer.receive.noAccount" />
                 </LText>
               </View>
@@ -107,35 +156,16 @@ const ReceiveFunds = ({ accounts, allAccounts, navigation }: Props) => {
       </KeyboardView>
     </SafeAreaView>
   );
-};
-
-ReceiveFunds.navigationOptions = {
-  headerTitle: (
-    <StepHeader
-      title={i18next.t("transfer.receive.headerTitle")}
-      subtitle={i18next.t("send.stepperHeader.stepRange", {
-        currentStep: "1",
-        totalSteps: "3",
-      })}
-    />
-  ),
-};
-
-const mapStateToProps = createStructuredSelector({
-  allAccounts: flattenAccountsSelector,
-  accounts: accountsSelector,
-});
+}
 
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: colors.white,
   },
   tokenCardStyle: {
     marginLeft: 26,
     paddingLeft: 7,
     borderLeftWidth: 1,
-    borderLeftColor: colors.fog,
   },
   card: {
     paddingHorizontal: 16,
@@ -156,11 +186,5 @@ const styles = StyleSheet.create({
   },
   emptyText: {
     fontSize: 16,
-    color: colors.fog,
   },
 });
-
-export default compose(
-  connect(mapStateToProps),
-  translate(),
-)(ReceiveFunds);

@@ -2,11 +2,11 @@
 
 import React, { Component } from "react";
 import { StyleSheet, View } from "react-native";
-import { SafeAreaView } from "react-navigation";
+import SafeAreaView from "react-native-safe-area-view";
 import LottieView from "lottie-react-native";
 import Button from "../components/Button";
-import colors from "../colors";
 import LText from "../components/LText";
+import { withTheme } from "../colors";
 
 const forceInset = { bottom: "always" };
 
@@ -25,11 +25,7 @@ type State = {
   anim: ?("line" | "pairing"),
 };
 
-class DebugLottie extends Component<{}, State> {
-  static navigationOptions = {
-    title: "Debug Lottie",
-  };
-
+class DebugLottie extends Component<{ colors: * }, State> {
   state = {
     anim: null,
   };
@@ -40,8 +36,12 @@ class DebugLottie extends Component<{}, State> {
 
   render() {
     const { anim } = this.state;
+    const { colors } = this.props;
     return (
-      <SafeAreaView forceInset={forceInset} style={styles.root}>
+      <SafeAreaView
+        forceInset={forceInset}
+        style={[styles.root, { backgroundColor: colors.background }]}
+      >
         <LText secondary semiBold style={styles.title}>
           Select Animation
         </LText>
@@ -78,7 +78,6 @@ class DebugLottie extends Component<{}, State> {
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: colors.white,
   },
   anim: {
     flex: 1,
@@ -97,4 +96,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default DebugLottie;
+export default withTheme(DebugLottie);

@@ -1,31 +1,31 @@
 // @flow
 import React, { Component } from "react";
-import { View, StyleSheet, ScrollView, Dimensions } from "react-native";
-import { SafeAreaView } from "react-navigation";
-import i18next from "i18next";
-import { translate, Trans } from "react-i18next";
-import type { NavigationScreenProp } from "react-navigation";
+import { View, StyleSheet, Dimensions } from "react-native";
+import SafeAreaView from "react-native-safe-area-view";
+import { Trans } from "react-i18next";
 import firmwareUpdateRepair from "@ledgerhq/live-common/lib/hw/firmwareUpdate-repair";
 
+import { NavigatorName } from "../const";
 import logger from "../logger";
-import type { T } from "../types/common";
 import Button from "../components/Button";
 import { BulletItem } from "../components/BulletList";
 import DeviceNanoAction from "../components/DeviceNanoAction";
 import SelectDevice from "../components/SelectDevice";
 import GenericErrorView from "../components/GenericErrorView";
 import Installing from "../components/Installing";
+import NavigationScrollView from "../components/NavigationScrollView";
 
 import { connectingStep } from "../components/DeviceJob/steps";
 import { TrackScreen } from "../analytics";
-import colors from "../colors";
+import { withTheme } from "../colors";
 
 const forceInset = { bottom: "always" };
 
 type Props = {
-  navigation: NavigationScreenProp<*>,
-  t: T,
+  navigation: any,
+  colors: *,
 };
+
 type State = {
   ready: boolean,
   error: ?Error,
@@ -41,10 +41,6 @@ class RepairDevice extends Component<Props, State> {
     selected: false,
   };
 
-  static navigationOptions = {
-    title: i18next.t("RepairDevice.title"),
-  };
-
   componentDidMount() {
     if (this.sub) this.sub.unsubscribe();
   }
@@ -53,7 +49,7 @@ class RepairDevice extends Component<Props, State> {
     this.setState({ ready: true });
   };
 
-  onSelectDevice = meta => {
+  onSelectDevice = (meta: any) => {
     this.setState({ selected: true });
     this.sub = firmwareUpdateRepair(meta.deviceId).subscribe({
       next: patch => {
@@ -61,7 +57,7 @@ class RepairDevice extends Component<Props, State> {
       },
       complete: () => {
         this.props.navigation.goBack();
-        this.props.navigation.navigate("Manager");
+        this.props.navigation.navigate(NavigatorName.Manager);
       },
       error: error => {
         logger.critical(error);
@@ -70,9 +66,10 @@ class RepairDevice extends Component<Props, State> {
     });
   };
 
-  sub: *;
+  sub: any;
 
   render() {
+    const { colors } = this.props;
     const { ready, progress, error, selected } = this.state;
     const width = Dimensions.get("window").width;
 
@@ -84,7 +81,7 @@ class RepairDevice extends Component<Props, State> {
       body = <Installing progress={progress} installing="flash" />;
     } else if (ready) {
       body = (
-        <ScrollView
+        <NavigationScrollView
           style={styles.body}
           contentContainerStyle={styles.bodyContent}
         >
@@ -114,7 +111,7 @@ class RepairDevice extends Component<Props, State> {
             onPress={this.onReady}
             title={<Trans i18nKey="RepairDevice.action" />}
           />
-        </ScrollView>
+        </NavigationScrollView>
       );
     } else {
       body = (
@@ -123,7 +120,10 @@ class RepairDevice extends Component<Props, State> {
     }
 
     return (
-      <SafeAreaView forceInset={forceInset} style={styles.root}>
+      <SafeAreaView
+        forceInset={forceInset}
+        style={[styles.root, { backgroundColor: colors.background }]}
+      >
         <TrackScreen category="Settings" name="RepairDevice" />
         {body}
       </SafeAreaView>
@@ -134,7 +134,6 @@ class RepairDevice extends Component<Props, State> {
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: colors.white,
     justifyContent: "center",
   },
   body: {
@@ -153,11 +152,6 @@ const styles = StyleSheet.create({
     left: "10%",
     position: "relative",
   },
-  description: {
-    color: colors.smoke,
-    fontSize: 14,
-    marginVertical: 30,
-  },
 });
 
-export default translate()(RepairDevice);
+export default withTheme(RepairDevice);

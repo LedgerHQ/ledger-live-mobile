@@ -1,43 +1,44 @@
 // @flow
 import React, { useCallback } from "react";
-import { StyleSheet, ScrollView, View, Linking } from "react-native";
-import { SafeAreaView } from "react-navigation";
-import { translate, Trans } from "react-i18next";
-import i18next from "i18next";
-import type { NavigationScreenProp } from "react-navigation";
-import colors from "../../../colors";
+import { StyleSheet, View, Linking } from "react-native";
+import SafeAreaView from "react-native-safe-area-view";
+import { Trans } from "react-i18next";
+import { useTheme } from "@react-navigation/native";
+import { ScreenName } from "../../../const";
 import { TrackScreen } from "../../../analytics";
-import StepHeader from "../../../components/StepHeader";
 import Button from "../../../components/Button";
 import LText from "../../../components/LText";
 import ExternalLink from "../../../components/ExternalLink";
 import BulletList, { BulletGreenCheck } from "../../../components/BulletList";
+import NavigationScrollView from "../../../components/NavigationScrollView";
 import IlluStaking from "../IlluStaking";
 import { urls } from "../../../config/urls";
 
 const forceInset = { bottom: "always" };
 
 type Props = {
-  navigation: NavigationScreenProp<{
-    params: {},
-  }>,
+  navigation: any,
+  route: { params: any },
 };
 
-const DelegationStarted = ({ navigation }: Props) => {
+export default function DelegationStarted({ navigation, route }: Props) {
+  const { colors } = useTheme();
   const onNext = useCallback(() => {
-    // $FlowFixMe
-    navigation.navigate("DelegationSummary", {
-      ...navigation.state.params,
+    navigation.navigate(ScreenName.DelegationSummary, {
+      ...route.params,
     });
-  }, [navigation]);
+  }, [navigation, route.params]);
 
   const howDelegationWorks = useCallback(() => {
     Linking.openURL(urls.delegation);
   }, []);
 
   return (
-    <SafeAreaView style={styles.root} forceInset={forceInset}>
-      <ScrollView
+    <SafeAreaView
+      style={[styles.root, { backgroundColor: colors.background }]}
+      forceInset={forceInset}
+    >
+      <NavigationScrollView
         style={styles.scroll}
         contentContainerStyle={styles.scrollContainer}
       >
@@ -56,12 +57,12 @@ const DelegationStarted = ({ navigation }: Props) => {
             <Trans i18nKey="delegation.started.steps.1" />,
             <Trans i18nKey="delegation.started.steps.2" />,
           ].map(wording => (
-            <LText secondary semiBold style={styles.bulletItem}>
+            <LText secondary semiBold style={styles.bulletItem} color="black">
               {wording}
             </LText>
           ))}
         />
-        <View style={styles.howDelegationWorks}>
+        <View style={[styles.howDelegationWorks, { borderColor: colors.live }]}>
           <ExternalLink
             event="DelegationStartedHowDelegationWorks"
             onPress={howDelegationWorks}
@@ -71,7 +72,7 @@ const DelegationStarted = ({ navigation }: Props) => {
             }}
           />
         </View>
-      </ScrollView>
+      </NavigationScrollView>
       <View style={styles.footer}>
         <Button
           event="DelegationStartedBtn"
@@ -82,16 +83,11 @@ const DelegationStarted = ({ navigation }: Props) => {
       </View>
     </SafeAreaView>
   );
-};
-
-DelegationStarted.navigationOptions = {
-  headerTitle: <StepHeader title={i18next.t("delegation.started.title")} />,
-};
+}
 
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: colors.white,
   },
   scroll: {
     flex: 1,
@@ -104,19 +100,16 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 22,
     lineHeight: 33,
-    color: colors.darkBlue,
     paddingVertical: 16,
   },
   description: {
     fontSize: 14,
     lineHeight: 21,
-    color: colors.darkBlue,
     textAlign: "center",
     marginBottom: 16,
   },
   bulletItem: {
     fontSize: 14,
-    color: colors.black,
   },
   howDelegationWorks: {
     marginTop: 32,
@@ -124,16 +117,9 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     paddingHorizontal: 16,
     borderWidth: 1,
-    borderColor: colors.live,
     flexDirection: "row",
-  },
-  howDelegationWorksText: {
-    color: colors.live,
-    fontSize: 14,
   },
   footer: {
     padding: 16,
   },
 });
-
-export default translate()(DelegationStarted);

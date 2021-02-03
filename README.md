@@ -121,3 +121,8 @@ React Native integration seems pretty bleeding edge right now, so don't expect e
 - Launch it 🚀
 - Run Ledger Live Mobile in debug as usual
 - No need to enable remote debug!
+
+### Extra Docs 📄
+
+- [Deep Linking 🔗](./docs/linking.md)
+- [UI Theming 🎨](./docs/theming.md)

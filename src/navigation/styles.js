@@ -1,14 +1,11 @@
 // @flow
+import { StyleSheet, Platform } from "react-native";
 
-import { StyleSheet, Platform, StatusBar } from "react-native";
-import colors from "../colors";
-
-let headerStyle;
-let headerStyleShadow;
+let headerStyle = {};
+let headerStyleShadow = {};
 
 if (Platform.OS === "ios") {
   headerStyle = {
-    height: 48,
     borderBottomWidth: 0,
   };
   headerStyleShadow = {
@@ -19,40 +16,29 @@ if (Platform.OS === "ios") {
     },
   };
 } else {
-  const statusBarPadding = StatusBar.currentHeight;
   headerStyle = {
-    height: 48 + statusBarPadding,
-    paddingTop: statusBarPadding,
     elevation: 0,
   };
   headerStyleShadow = {
     borderBottomWidth: 1,
-    borderBottomColor: colors.lightFog,
   };
 }
 
-export default StyleSheet.create({
-  card: {
-    backgroundColor: colors.lightGrey,
-  },
-  header: {
-    backgroundColor: colors.white,
-    ...headerStyle,
-    ...headerStyleShadow,
-  },
-  headerNoShadow: {
-    backgroundColor: colors.white,
-    ...headerStyle,
-  },
-  bottomTabBar: {
-    height: 56,
-    borderTopColor: colors.lightFog,
-    backgroundColor: colors.white,
-  },
-  transparentHeader: {
-    backgroundColor: "transparent",
-    shadowOpacity: 0,
-    elevation: 0,
-  },
-  labelStyle: { fontSize: 12 },
-});
+function Styles() {
+  return StyleSheet.create({
+    header: {
+      ...headerStyle,
+      ...headerStyleShadow,
+    },
+    headerNoShadow: {
+      ...headerStyle,
+    },
+    transparentHeader: {
+      backgroundColor: "transparent",
+      shadowOpacity: 0,
+      elevation: 0,
+    },
+  });
+}
+
+export default Styles();

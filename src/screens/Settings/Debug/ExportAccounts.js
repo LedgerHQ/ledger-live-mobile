@@ -2,19 +2,18 @@
 
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
-import { StyleSheet, Dimensions } from "react-native";
+import { StyleSheet, Dimensions, View } from "react-native";
 import QRCode from "react-native-qrcode-svg";
 import VersionNumber from "react-native-version-number";
-// $FlowFixMe
-import { ScrollView } from "react-navigation";
 import { createStructuredSelector } from "reselect";
 
 import { encode } from "@ledgerhq/live-common/lib/cross";
-import { dataToFrames } from "qrloop/exporter";
+import { dataToFrames } from "qrloop";
 
 import { accountsSelector } from "../../../reducers/accounts";
 import { exportSettingsSelector } from "../../../reducers/settings";
 import LText from "../../../components/LText";
+import NavigationScrollView from "../../../components/NavigationScrollView";
 
 export type Props = {|
   accounts: *,
@@ -26,10 +25,6 @@ export type State = {|
 |};
 
 class ExportAccounts extends PureComponent<Props, State> {
-  static navigationOptions = {
-    title: "Export Accounts",
-  };
-
   state = {
     frame: 0,
   };
@@ -78,14 +73,16 @@ class ExportAccounts extends PureComponent<Props, State> {
     if (!this.chunks) return null;
 
     return (
-      <ScrollView contentContainerStyle={styles.root}>
-        <QRCode size={size} value={this.chunks[frame]} />
+      <NavigationScrollView contentContainerStyle={styles.root}>
+        <View style={styles.qrContainer}>
+          <QRCode size={size} value={this.chunks[frame]} />
+        </View>
         <LText style={styles.subText}>
           {frame + 1}
           {" / "}
           {this.chunks.length}
         </LText>
-      </ScrollView>
+      </NavigationScrollView>
     );
   }
 }
@@ -101,6 +98,10 @@ const styles = StyleSheet.create({
   root: {
     padding: 16,
     alignItems: "center",
+  },
+  qrContainer: {
+    backgroundColor: "#FFF",
+    padding: 5,
   },
   subText: {
     paddingTop: 32,

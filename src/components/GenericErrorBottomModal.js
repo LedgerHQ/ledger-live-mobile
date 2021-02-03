@@ -1,47 +1,53 @@
 /* @flow */
-import React, { PureComponent } from "react";
+import React, { memo } from "react";
 import { View, StyleSheet } from "react-native";
 
-import colors from "../colors";
+import { useTheme } from "@react-navigation/native";
 import Touchable from "./Touchable";
 import Close from "../icons/Close";
 import BottomModal from "./BottomModal";
+import type { Props as BottomModalProps } from "./BottomModal";
 import GenericErrorView from "./GenericErrorView";
 
-class GenericErrorBottomModal extends PureComponent<{
+type Props = BottomModalProps & {
   error: ?Error,
   onClose?: () => void,
   footerButtons?: React$Node,
-}> {
-  render() {
-    const { error, onClose, footerButtons, ...otherProps } = this.props;
-    return (
-      <BottomModal
-        id="ErrorModal"
-        isOpened={!!error}
-        onClose={onClose}
-        {...otherProps}
-      >
-        {error ? (
-          <View style={styles.root}>
-            <GenericErrorView error={error} />
-            {footerButtons ? (
-              <View style={styles.buttonsContainer}>{footerButtons}</View>
-            ) : null}
-            {onClose ? (
-              <Touchable
-                event="BottomModalErrorClose"
-                style={styles.close}
-                onPress={onClose}
-              >
-                <Close color={colors.fog} size={20} />
-              </Touchable>
-            ) : null}
-          </View>
-        ) : null}
-      </BottomModal>
-    );
-  }
+};
+
+function GenericErrorBottomModal({
+  error,
+  onClose,
+  footerButtons,
+  ...otherProps
+}: Props) {
+  const { colors } = useTheme();
+  return (
+    <BottomModal
+      {...otherProps}
+      id="ErrorModal"
+      isOpened={!!error}
+      onClose={onClose}
+    >
+      {error ? (
+        <View style={styles.root}>
+          <GenericErrorView error={error} />
+          {footerButtons ? (
+            <View style={styles.buttonsContainer}>{footerButtons}</View>
+          ) : null}
+          {onClose ? (
+            <Touchable
+              event="BottomModalErrorClose"
+              style={styles.close}
+              onPress={onClose}
+            >
+              <Close color={colors.fog} size={20} />
+            </Touchable>
+          ) : null}
+        </View>
+      ) : null}
+    </BottomModal>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -63,4 +69,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default GenericErrorBottomModal;
+export default memo<Props>(GenericErrorBottomModal);

@@ -1,9 +1,10 @@
 // @flow
 
-import React, { PureComponent } from "react";
+import React, { memo } from "react";
 import { StyleSheet, View } from "react-native";
 import { Trans } from "react-i18next";
 
+import { useTheme } from "@react-navigation/native";
 import BottomModal from "./BottomModal";
 import Circle from "./Circle";
 import LText from "./LText";
@@ -11,14 +12,14 @@ import Button from "./Button";
 import IconHelp from "../icons/Info";
 import IconArrowRight from "../icons/ArrowRight";
 import type { Props as ModalProps } from "./BottomModal";
-import colors, { rgba } from "../colors";
+import { rgba } from "../colors";
 
 type BulletItem = {
   key: string,
   val: React$Element<*>,
 };
 
-type Props = ModalProps & {
+type InfoModalProps = ModalProps & {
   id?: string,
   title?: string | React$Element<*>,
   desc?: string | React$Element<*>,
@@ -31,91 +32,93 @@ type Props = ModalProps & {
   confirmProps?: *,
 };
 
-class InfoModal extends PureComponent<Props> {
-  render() {
-    const {
-      isOpened,
-      onClose,
-      id,
-      title,
-      desc,
-      bullets,
-      Icon,
-      withCancel,
-      onContinue,
-      children,
-      confirmLabel,
-      confirmProps,
-      style,
-      containerStyle,
-    } = this.props;
-    return (
-      <BottomModal
-        id={id}
-        isOpened={isOpened}
-        onClose={onClose}
-        style={[styles.modal, style || {}]}
+const InfoModal = ({
+  isOpened,
+  onClose,
+  id,
+  title,
+  desc,
+  bullets,
+  Icon,
+  withCancel,
+  onContinue,
+  children,
+  confirmLabel,
+  confirmProps,
+  style,
+  containerStyle,
+}: InfoModalProps) => {
+  const { colors } = useTheme();
+  return (
+    <BottomModal
+      id={id}
+      isOpened={isOpened}
+      onClose={onClose}
+      style={[styles.modal, style || {}]}
+    >
+      <Circle bg={rgba(colors.live, 0.1)} size={56}>
+        {Icon ? <Icon /> : <IconHelp size={24} color={colors.live} />}
+      </Circle>
+      {title ? (
+        <LText style={styles.modalTitle} semiBold>
+          {title}
+        </LText>
+      ) : null}
+
+      {desc ? (
+        <LText style={styles.modalDesc} color="smoke">
+          {desc}
+        </LText>
+      ) : null}
+      {bullets ? (
+        <View style={styles.bulletsContainer}>
+          {bullets.map(b => (
+            <BulletLine key={b.key}>{b.val}</BulletLine>
+          ))}
+        </View>
+      ) : null}
+      <View
+        style={[
+          !title && !desc && !bullets ? styles.childrenContainer : null,
+          containerStyle,
+        ]}
       >
-        <Circle bg={rgba(colors.live, 0.1)} size={56}>
-          {Icon ? <Icon /> : <IconHelp size={24} color={colors.live} />}
-        </Circle>
-        {title ? (
-          <LText style={styles.modalTitle} semiBold>
-            {title}
-          </LText>
-        ) : null}
-
-        {desc ? <LText style={styles.modalDesc}>{desc}</LText> : null}
-        {bullets ? (
-          <View style={styles.bulletsContainer}>
-            {bullets.map(b => (
-              <BulletLine key={b.key}>{b.val}</BulletLine>
-            ))}
-          </View>
-        ) : null}
-        <View
-          style={[
-            !title && !desc && !bullets ? styles.childrenContainer : null,
-            containerStyle,
-          ]}
-        >
-          {children}
-        </View>
-
-        <View style={styles.footer}>
-          {withCancel ? (
-            <Button
-              event={(id || "") + "InfoModalClose"}
-              type="secondary"
-              title={<Trans i18nKey="common.cancel" />}
-              containerStyle={[styles.modalBtn, { marginRight: 16 }]}
-              onPress={onClose}
-            />
-          ) : null}
-          <Button
-            event={(id || "") + "InfoModalGotIt"}
-            type="primary"
-            title={confirmLabel || <Trans i18nKey="common.gotit" />}
-            containerStyle={styles.modalBtn}
-            onPress={onContinue || onClose}
-            {...confirmProps}
-          />
-        </View>
-      </BottomModal>
-    );
-  }
-}
-
-class BulletLine extends PureComponent<{ children: * }> {
-  render() {
-    const { children } = this.props;
-    return (
-      <View style={styles.bulletLine}>
-        <IconArrowRight size={16} color={colors.smoke} />
-        <LText style={styles.bulletLineText}>{children}</LText>
+        {children}
       </View>
-    );
-  }
+
+      <View style={styles.footer}>
+        {withCancel ? (
+          <Button
+            event={(id || "") + "InfoModalClose"}
+            type="secondary"
+            title={<Trans i18nKey="common.cancel" />}
+            containerStyle={[styles.modalBtn, styles.buttonContainerStyle]}
+            onPress={onClose}
+          />
+        ) : null}
+        <Button
+          event={(id || "") + "InfoModalGotIt"}
+          type="primary"
+          title={confirmLabel || <Trans i18nKey="common.gotit" />}
+          containerStyle={styles.modalBtn}
+          onPress={onContinue || onClose}
+          {...confirmProps}
+        />
+      </View>
+    </BottomModal>
+  );
+};
+
+function BulletLine({ children }: { children: * }) {
+  const { colors } = useTheme();
+  return (
+    <View style={styles.bulletLine}>
+      <IconArrowRight size={16} color={colors.smoke} />
+      <LText style={styles.bulletLineText} color="smoke">
+        {children}
+      </LText>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -128,11 +131,10 @@ const styles = StyleSheet.create({
     marginVertical: 16,
     fontSize: 14,
     lineHeight: 21,
-    color: colors.darkBlue,
   },
   modalDesc: {
     textAlign: "center",
-    color: colors.smoke,
+
     marginBottom: 24,
   },
   bulletsContainer: {
@@ -144,7 +146,6 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   bulletLineText: {
-    color: colors.smoke,
     marginLeft: 4,
     textAlign: "left",
   },
@@ -159,6 +160,9 @@ const styles = StyleSheet.create({
   modalBtn: {
     flex: 1,
   },
+  buttonContainerStyle: {
+    marginRight: 16,
+  },
 });
 
-export default InfoModal;
+export default memo<InfoModalProps>(InfoModal);

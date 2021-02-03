@@ -1,11 +1,14 @@
 /* @flow */
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import { View, StyleSheet } from "react-native";
-import { withNavigation } from "react-navigation";
-import { createStructuredSelector } from "reselect";
+import { useNavigation, useTheme } from "@react-navigation/native";
 import type { AccountLike, Account } from "@ledgerhq/live-common/lib/types";
-import { getMainAccount } from "@ledgerhq/live-common/lib/account";
-import { connect } from "react-redux";
+import {
+  getMainAccount,
+  getAccountSpendableBalance,
+} from "@ledgerhq/live-common/lib/account";
+import { useSelector } from "react-redux";
+import { NavigatorName, ScreenName } from "../../const";
 import { readOnlyModeEnabledSelector } from "../../reducers/settings";
 import {
   ReceiveActionDefault,
@@ -13,24 +16,33 @@ import {
 } from "./AccountActionsDefault";
 import perFamilyAccountActions from "../../generated/accountActions";
 
+import BottomModal from "../../components/BottomModal";
+import Button from "../../components/Button";
+import ChoiceButton from "../../components/ChoiceButton";
+import Transfer from "../../icons/Transfer";
+import LendingBanners from "./LendingBanners";
+import useActions from "./hooks/useActions";
+import useLendingActions from "./hooks/useLendingActions";
+
 type Props = {
   account: AccountLike,
   parentAccount: ?Account,
-  navigation: *,
-  readOnlyModeEnabled: boolean,
 };
-const mapStateToProps = createStructuredSelector({
-  readOnlyModeEnabled: readOnlyModeEnabledSelector,
-});
 
-const AccountActions = ({
-  readOnlyModeEnabled,
-  navigation,
-  account,
-  parentAccount,
-}: Props) => {
+type NavOptions = {
+  screen: string,
+  params?: { [key: string]: any },
+};
+
+export default function AccountActions({ account, parentAccount }: Props) {
+  const { colors } = useTheme();
+  const [displayedActions, setDisplayedActions] = useState();
+  const navigation = useNavigation();
+  const readOnlyModeEnabled = useSelector(readOnlyModeEnabledSelector);
   const mainAccount = getMainAccount(account, parentAccount);
   const decorators = perFamilyAccountActions[mainAccount.currency.family];
+
+  const balance = getAccountSpendableBalance(account);
 
   const accountId = account.id;
   const parentId = parentAccount && parentAccount.id;
@@ -40,19 +52,37 @@ const AccountActions = ({
   const ReceiveAction =
     (decorators && decorators.ReceiveAction) || ReceiveActionDefault;
 
+  const onNavigate = useCallback(
+    (name: string, options?: NavOptions) => {
+      setDisplayedActions();
+      navigation.navigate(name, {
+        ...options,
+        params: {
+          accountId,
+          parentId,
+          ...(options ? options.params : {}),
+        },
+      });
+    },
+    [accountId, navigation, parentId],
+  );
+
+  const actions = {
+    default: useActions({ account, parentAccount, colors }),
+    lending: useLendingActions({ account }),
+  };
+
   const onSend = useCallback(() => {
-    navigation.navigate("SendSelectRecipient", {
-      accountId,
-      parentId,
+    onNavigate(NavigatorName.SendFunds, {
+      screen: ScreenName.SendSelectRecipient,
     });
-  }, [accountId, parentId, navigation]);
+  }, [onNavigate]);
 
   const onReceive = useCallback(() => {
-    navigation.navigate("ReceiveConnectDevice", {
-      accountId,
-      parentId,
+    onNavigate(NavigatorName.ReceiveFunds, {
+      screen: ScreenName.ReceiveConnectDevice,
     });
-  }, [accountId, parentId, navigation]);
+  }, [onNavigate]);
 
   return (
     <View style={styles.root}>
@@ -60,36 +90,81 @@ const AccountActions = ({
         <SendAction
           account={account}
           parentAccount={parentAccount}
-          style={[styles.btn, styles.marginRight]}
+          style={[styles.btn]}
           onPress={onSend}
+          disabled={balance.lte(0)}
         />
       )}
       <ReceiveAction
         account={account}
         parentAccount={parentAccount}
-        style={[styles.btn, !readOnlyModeEnabled ? styles.marginLeft : null]}
+        style={[styles.btn]}
         onPress={onReceive}
       />
+      {actions.default && actions.default.length > 0 && (
+        <>
+          <Button
+            event="AccountSend"
+            type="primary"
+            IconLeft={Transfer}
+            onPress={() => setDisplayedActions("default")}
+            title={null}
+            containerStyle={styles.actionBtn}
+          />
+          <BottomModal
+            isOpened={!!displayedActions}
+            onClose={() => setDisplayedActions()}
+            containerStyle={styles.modal}
+          >
+            {displayedActions === "lending" && (
+              <LendingBanners account={account} />
+            )}
+            {!!displayedActions &&
+              actions[displayedActions].map((a, i) =>
+                a.Component ? (
+                  <a.Component key={i} />
+                ) : (
+                  <ChoiceButton
+                    key={i}
+                    onSelect={({ navigationParams, enableActions }) => {
+                      if (navigationParams) {
+                        onNavigate(...navigationParams);
+                      }
+                      if (enableActions) {
+                        setDisplayedActions(enableActions);
+                      }
+                    }}
+                    {...a}
+                  />
+                ),
+              )}
+          </BottomModal>
+        </>
+      )}
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   root: {
+    width: "100%",
     flexDirection: "row",
     paddingTop: 8,
     paddingBottom: 12,
-    paddingHorizontal: 16,
+    paddingHorizontal: 12,
+  },
+  modal: {
+    paddingTop: 16,
+    paddingHorizontal: 8,
+  },
+  actionBtn: {
+    flexBasis: 50,
+    marginHorizontal: 4,
+    paddingHorizontal: 6,
   },
   btn: {
     flex: 1,
-  },
-  marginRight: {
-    marginRight: 8,
-  },
-  marginLeft: {
-    marginLeft: 8,
+    marginHorizontal: 4,
+    paddingHorizontal: 6,
   },
 });
-
-export default withNavigation(connect(mapStateToProps)(AccountActions));

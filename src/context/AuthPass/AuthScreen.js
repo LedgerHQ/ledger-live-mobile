@@ -1,20 +1,21 @@
 // @flow
 import React, { PureComponent } from "react";
-import { translate, Trans } from "react-i18next";
+import { withTranslation, Trans } from "react-i18next";
 import {
   TouchableWithoutFeedback,
   View,
   StyleSheet,
   Image,
   Vibration,
+  Platform,
+  SafeAreaView,
 } from "react-native";
-import { SafeAreaView } from "react-navigation";
 import * as Keychain from "react-native-keychain";
 import { PasswordIncorrectError } from "@ledgerhq/errors";
+import { compose } from "redux";
 import type { T } from "../../types/common";
 import type { Privacy } from "../../reducers/settings";
 import { withReboot } from "../Reboot";
-import colors from "../../colors";
 import LText from "../../components/LText";
 import TranslatedError from "../../components/TranslatedError";
 import Button from "../../components/Button";
@@ -27,8 +28,7 @@ import KeyboardView from "../../components/KeyboardView";
 import FailBiometrics from "./FailBiometrics";
 import KeyboardBackgroundDismiss from "../../components/KeyboardBackgroundDismiss";
 import { VIBRATION_PATTERN_ERROR } from "../../constants";
-
-const forceInset = { bottom: "always" };
+import { withTheme } from "../../colors";
 
 type State = {
   passwordError: ?Error,
@@ -45,6 +45,7 @@ type Props = {
   biometricsError: ?Error,
   reboot: (?boolean) => *,
   t: T,
+  colors: *,
 };
 
 class NormalHeader extends PureComponent<{}> {
@@ -58,7 +59,7 @@ class NormalHeader extends PureComponent<{}> {
         <LText semiBold secondary style={styles.title}>
           <Trans i18nKey="auth.unlock.title" />
         </LText>
-        <LText style={styles.description}>
+        <LText style={styles.description} color="grey">
           <Trans i18nKey="auth.unlock.desc" />
         </LText>
       </View>
@@ -88,8 +89,8 @@ class FormFooter extends PureComponent<*> {
         />
       </TouchableWithoutFeedback>
     ) : (
-      <Touchable event="ForgetPassword" style={styles.forgot} onPress={onPress}>
-        <LText semiBold style={styles.link}>
+      <Touchable event="ForgetPassword" onPress={onPress}>
+        <LText semiBold style={styles.link} color="live">
           <Trans i18nKey="auth.unlock.forgotPassword" />
         </LText>
       </Touchable>
@@ -126,7 +127,15 @@ class AuthScreen extends PureComponent<Props, State> {
     const { unlock } = this.props;
     if (!password) return;
     try {
-      const credentials = await Keychain.getGenericPassword();
+      const options =
+        Platform.OS === "ios"
+          ? {}
+          : {
+              accessControl: Keychain.ACCESS_CONTROL.APPLICATION_PASSWORD,
+              rules: Keychain.SECURITY_RULES.NONE,
+            };
+
+      const credentials = await Keychain.getGenericPassword(options);
       if (id !== this.submitId) return;
       if (credentials && credentials.password === password) {
         unlock();
@@ -137,11 +146,11 @@ class AuthScreen extends PureComponent<Props, State> {
           password: "",
         });
       } else {
-        console.log("no credentials stored"); // eslint-disable-line
+        console.log("no credentials stored"); // eslint-disable-line no-console
       }
     } catch (err) {
       if (id !== this.submitId) return;
-      console.log("could not load credentials"); // eslint-disable-line
+      console.log("could not load credentials"); // eslint-disable-line no-console
       this.setState({ passwordError: err, password: "" });
     }
   };
@@ -176,7 +185,7 @@ class AuthScreen extends PureComponent<Props, State> {
   };
 
   render() {
-    const { t, privacy, biometricsError, lock } = this.props;
+    const { t, privacy, biometricsError, lock, colors } = this.props;
     const {
       passwordError,
       isModalOpened,
@@ -185,11 +194,13 @@ class AuthScreen extends PureComponent<Props, State> {
     } = this.state;
     return (
       <KeyboardBackgroundDismiss>
-        <SafeAreaView style={styles.root} forceInset={forceInset}>
+        <SafeAreaView
+          style={[styles.root, { backgroundColor: colors.background }]}
+        >
           <KeyboardView>
             <View style={{ flex: 1 }} />
 
-            <View style={styles.body}>
+            <View>
               <View style={styles.header}>
                 {biometricsError ? (
                   <FailBiometrics lock={lock} privacy={privacy} />
@@ -246,14 +257,12 @@ class AuthScreen extends PureComponent<Props, State> {
   }
 }
 
-export default translate()(withReboot(AuthScreen));
+export default compose(withTranslation(), withReboot, withTheme)(AuthScreen);
 
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: colors.lightGrey,
   },
-  body: {},
   header: {
     flexDirection: "row",
     justifyContent: "center",
@@ -267,10 +276,8 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: "center",
     marginVertical: 16,
-    color: colors.darkBlue,
   },
   description: {
-    color: colors.grey,
     textAlign: "center",
   },
   errorStyle: {
@@ -290,16 +297,7 @@ const styles = StyleSheet.create({
   footer: {
     paddingBottom: 16,
   },
-  forgot: {},
-  resetButtonBg: {
-    marginTop: 8,
-    backgroundColor: colors.alert,
-  },
-  resetButtonTitle: {
-    color: colors.white,
-  },
   link: {
-    color: colors.live,
     fontSize: 14,
     lineHeight: 21,
     marginTop: 16,

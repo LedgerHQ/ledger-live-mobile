@@ -2,7 +2,7 @@
 
 import React, { PureComponent } from "react";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
-import { SafeAreaView } from "react-navigation";
+import SafeAreaView from "react-native-safe-area-view";
 import { Subject, Observable, throwError } from "rxjs";
 import Config from "react-native-config";
 import { flatMap } from "rxjs/operators";
@@ -59,7 +59,7 @@ export default class DebugRejectSwitch extends PureComponent<{}> {
       <SafeAreaView forceInset={forceInset}>
         <TouchableOpacity onPress={this.onPress}>
           <View style={styles.root}>
-            <LText bold style={styles.text}>
+            <LText bold style={styles.text} color="white">
               {[..."STOP"].join("\n")}
             </LText>
           </View>
@@ -81,7 +81,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   text: {
-    color: "white",
     textAlign: "center",
     paddingVertical: 10,
   },

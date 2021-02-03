@@ -1,8 +1,7 @@
 // @flow
 import React, { useCallback, useState } from "react";
 import { Trans } from "react-i18next";
-import { withNavigation } from "react-navigation";
-import differenceInCalendarDays from "date-fns/difference_in_calendar_days";
+import { differenceInCalendarDays } from "date-fns";
 import { StyleSheet, Platform, View } from "react-native";
 import type { AccountLike, Account } from "@ledgerhq/live-common/lib/types";
 import {
@@ -11,7 +10,7 @@ import {
   getAccountUnit,
 } from "@ledgerhq/live-common/lib/account";
 import { useDelegation } from "@ledgerhq/live-common/lib/families/tezos/bakers";
-import colors from "../../colors";
+import { useTheme } from "@react-navigation/native";
 import Button from "../../components/Button";
 import LText from "../../components/LText";
 import CurrencyUnitValue from "../../components/CurrencyUnitValue";
@@ -25,19 +24,16 @@ const styles = StyleSheet.create({
     alignItems: "stretch",
   },
   title: {
-    color: colors.darkBlue,
     fontSize: 16,
   },
   card: {
     marginTop: 16,
     borderRadius: 4,
-    backgroundColor: colors.white,
     ...Platform.select({
       android: {
         elevation: 1,
       },
       ios: {
-        shadowColor: colors.black,
         shadowOpacity: 0.03,
         shadowRadius: 8,
         shadowOffset: {
@@ -49,7 +45,7 @@ const styles = StyleSheet.create({
   cardHead: {
     height: 72,
     padding: 16,
-    borderBottomColor: colors.lightFog,
+
     borderBottomWidth: 1,
     flexDirection: "row",
     alignItems: "center",
@@ -63,25 +59,21 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   currencyValue: {
-    color: colors.darkBlue,
     fontSize: 14,
   },
   counterValue: {
-    color: colors.grey,
     fontSize: 14,
   },
   delegatorName: {
-    color: colors.darkBlue,
     fontSize: 14,
   },
   subtitle: {
-    color: colors.grey,
     fontSize: 14,
   },
 });
 
 const OpCounterValue = ({ children }: *) => (
-  <LText tertiary numberOfLines={1} style={styles.counterValue}>
+  <LText semiBold numberOfLines={1} style={styles.counterValue} color="grey">
     {children}
   </LText>
 );
@@ -91,13 +83,14 @@ const placeholderProps = {
   containerHeight: 20,
 };
 
-const TezosAccountBodyHeader = ({
+export default function TezosAccountBodyHeader({
   account,
   parentAccount,
 }: {
   account: AccountLike,
   parentAccount: ?Account,
-}) => {
+}) {
+  const { colors } = useTheme();
   const [openedModal, setOpenedModal] = useState(false);
 
   const onModalClose = useCallback(() => {
@@ -126,9 +119,28 @@ const TezosAccountBodyHeader = ({
         <Trans i18nKey="delegation.delegation" />
       </LText>
 
-      <View style={styles.card}>
+      <View
+        style={[
+          styles.card,
+          {
+            backgroundColor: colors.card,
+            ...Platform.select({
+              android: {},
+              ios: {
+                shadowColor: colors.black,
+              },
+            }),
+          },
+        ]}
+      >
         <View
-          style={[styles.cardHead, { opacity: delegation.isPending ? 0.5 : 1 }]}
+          style={[
+            styles.cardHead,
+            {
+              borderBottomColor: colors.lightFog,
+              opacity: delegation.isPending ? 0.5 : 1,
+            },
+          ]}
         >
           <BakerImage size={40} baker={delegation.baker} />
           <View style={styles.cardHeadBody}>
@@ -136,12 +148,12 @@ const TezosAccountBodyHeader = ({
               <LText semiBold style={styles.delegatorName}>
                 {name}
               </LText>
-              <LText tertiary numberOfLines={1} style={styles.currencyValue}>
+              <LText semiBold numberOfLines={1} style={styles.currencyValue}>
                 <CurrencyUnitValue showCode unit={unit} value={amount} />
               </LText>
             </View>
             <View style={styles.row}>
-              <LText style={styles.subtitle}>
+              <LText style={styles.subtitle} color="grey">
                 {days ? (
                   <Trans
                     i18nKey="delegation.durationDays"
@@ -183,6 +195,4 @@ const TezosAccountBodyHeader = ({
       />
     </View>
   );
-};
-
-export default withNavigation(TezosAccountBodyHeader);
+}

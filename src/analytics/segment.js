@@ -1,13 +1,14 @@
 // @flow
 /* eslint-disable no-console */
 
-import uuid from "uuid/v4";
+import { v4 as uuid } from "uuid";
 import { Sentry } from "react-native-sentry";
 import Config from "react-native-config";
 import { Platform } from "react-native";
 import analytics from "@segment/analytics-react-native";
 import VersionNumber from "react-native-version-number";
 import Locale from "react-native-locale";
+import { ReplaySubject } from "rxjs";
 import {
   getAndroidArchitecture,
   getAndroidVersionCode,
@@ -26,6 +27,14 @@ const extraProperties = store => {
   const state: State = store.getState();
   const { localeIdentifier, preferredLanguages } = Locale.constants();
   const devices = knownDevicesSelector(state);
+  const lastDevice = devices[devices.length - 1];
+  const deviceInfo = lastDevice
+    ? {
+        deviceVersion: lastDevice.deviceInfo?.version,
+        appLength: lastDevice.appsInstalled,
+        modelId: lastDevice.modelId,
+      }
+    : {};
 
   return {
     appVersion,
@@ -38,7 +47,12 @@ const extraProperties = store => {
     platformVersion: Platform.Version,
     sessionId,
     devicesCount: devices.length,
+    ...deviceInfo,
   };
+};
+
+const context = {
+  ip: "0.0.0.0",
 };
 
 let storeInstance; // is the redux store. it's also used as a flag to know if analytics is on or off.
@@ -66,7 +80,7 @@ export const start = async (store: *) => {
     if (ANALYTICS_LOGS) console.log("analytics:identify", user.id);
     if (token) {
       await analytics.reset();
-      await analytics.identify(user.id, extraProperties(store));
+      await analytics.identify(user.id, extraProperties(store), { context });
     }
   }
   track("Start", extraProperties(store), true);
@@ -76,6 +90,11 @@ export const stop = () => {
   if (ANALYTICS_LOGS) console.log("analytics:stop");
   storeInstance = null;
 };
+
+export const trackSubject = new ReplaySubject<{
+  event: string,
+  properties: ?Object,
+}>(10);
 
 export const track = (
   event: string,
@@ -95,12 +114,17 @@ export const track = (
   ) {
     return;
   }
-  if (ANALYTICS_LOGS) console.log("analytics:track", event, properties);
-  if (!token) return;
-  analytics.track(event, {
+
+  const allProperties = {
     ...extraProperties(storeInstance),
     ...properties,
-  });
+  };
+
+  if (ANALYTICS_LOGS) console.log("analytics:track", event, allProperties);
+  trackSubject.next({ event, properties: allProperties });
+
+  if (!token) return;
+  analytics.track(event, allProperties, { context });
 };
 
 export const screen = (
@@ -108,7 +132,7 @@ export const screen = (
   name: ?string,
   properties: ?Object,
 ) => {
-  const title = category + (name ? " " + name : "");
+  const title = `Page ${category + (name ? ` ${name}` : "")}`;
   Sentry.captureBreadcrumb({
     message: title,
     category: "screen",
@@ -118,11 +142,16 @@ export const screen = (
   if (!storeInstance || !analyticsEnabledSelector(storeInstance.getState())) {
     return;
   }
-  if (ANALYTICS_LOGS)
-    console.log("analytics:screen", category, name, properties);
-  if (!token) return;
-  analytics.screen(title, {
+
+  const allProperties = {
     ...extraProperties(storeInstance),
     ...properties,
-  });
+  };
+
+  if (ANALYTICS_LOGS)
+    console.log("analytics:screen", category, name, allProperties);
+  trackSubject.next({ event: title, properties: allProperties });
+
+  if (!token) return;
+  analytics.track(title, allProperties, { context });
 };

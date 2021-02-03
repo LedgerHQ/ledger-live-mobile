@@ -10,11 +10,9 @@ import {
   Platform,
   Linking,
 } from "react-native";
-import i18next from "i18next";
-import { connect } from "react-redux";
-import { SafeAreaView } from "react-navigation";
-import type { NavigationScreenProp } from "react-navigation";
-import { translate, Trans } from "react-i18next";
+import { useSelector } from "react-redux";
+import SafeAreaView from "react-native-safe-area-view";
+import { useTranslation, Trans } from "react-i18next";
 import Icon from "react-native-vector-icons/dist/Feather";
 import type {
   AccountLike,
@@ -28,11 +26,11 @@ import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import type { Baker } from "@ledgerhq/live-common/lib/families/tezos/bakers";
 import { useBakers } from "@ledgerhq/live-common/lib/families/tezos/bakers";
 import whitelist from "@ledgerhq/live-common/lib/families/tezos/bakers.whitelist-default";
-import { accountAndParentScreenSelector } from "../../../reducers/accounts";
+import { useTheme } from "@react-navigation/native";
+import { accountScreenSelector } from "../../../reducers/accounts";
 import { TrackScreen } from "../../../analytics";
-import colors from "../../../colors";
+import { ScreenName } from "../../../const";
 import InfoModal from "../../../components/InfoModal";
-import StepHeader from "../../../components/StepHeader";
 import LText, { getFontStyle } from "../../../components/LText";
 import Touchable from "../../../components/Touchable";
 import Button from "../../../components/Button";
@@ -44,40 +42,40 @@ import BakerImage from "../BakerImage";
 
 const forceInset = { bottom: "always" };
 
-type Props = {
-  account: AccountLike,
-  parentAccount: ?Account,
-  navigation: NavigationScreenProp<{
-    params: {
-      accountId: string,
-      transaction: Transaction,
-      status: TransactionStatus,
-    },
-  }>,
-};
-
 const keyExtractor = baker => baker.address;
 
-const BakerHead = ({ onPressHelp }: { onPressHelp: () => void }) => (
-  <View style={styles.bakerHead}>
-    <LText style={styles.bakerHeadText} numberOfLines={1} semiBold>
-      Validator
-    </LText>
-    <View style={styles.bakerHeadContainer}>
-      <LText style={styles.bakerHeadText} numberOfLines={1} semiBold>
-        Est. Yield
-      </LText>
-      <Touchable
-        style={styles.bakerHeadInfo}
-        event="StepValidatorShowProvidedBy"
-        onPress={onPressHelp}
+const BakerHead = ({ onPressHelp }: { onPressHelp: () => void }) => {
+  const { colors } = useTheme();
+  return (
+    <View style={styles.bakerHead}>
+      <LText
+        style={styles.bakerHeadText}
+        color="smoke"
+        numberOfLines={1}
+        semiBold
       >
-        <Info color={colors.smoke} size={14} />
-      </Touchable>
+        Validator
+      </LText>
+      <View style={styles.bakerHeadContainer}>
+        <LText
+          style={styles.bakerHeadText}
+          color="smoke"
+          numberOfLines={1}
+          semiBold
+        >
+          Est. Yield
+        </LText>
+        <Touchable
+          style={styles.bakerHeadInfo}
+          event="StepValidatorShowProvidedBy"
+          onPress={onPressHelp}
+        >
+          <Info color={colors.smoke} size={14} />
+        </Touchable>
+      </View>
     </View>
-  </View>
-);
-
+  );
+};
 const BakerRow = ({
   onPress,
   baker,
@@ -85,6 +83,7 @@ const BakerRow = ({
   onPress: Baker => void,
   baker: Baker,
 }) => {
+  const { colors } = useTheme();
   const onPressT = useCallback(() => {
     onPress(baker);
   }, [baker, onPress]);
@@ -100,25 +99,36 @@ const BakerRow = ({
       <View style={styles.baker}>
         <BakerImage size={32} baker={baker} />
         {baker.capacityStatus === "full" ? (
-          <View style={styles.overdelegatedIndicator} />
+          <View
+            style={[
+              styles.overdelegatedIndicator,
+              { backgroundColor: colors.orange, borderColor: colors.white },
+            ]}
+          />
         ) : null}
         <View style={styles.bakerBody}>
           <LText numberOfLines={1} semiBold style={styles.bakerName}>
             {baker.name}
           </LText>
           {baker.capacityStatus === "full" ? (
-            <LText semiBold numberOfLines={1} style={styles.overdelegated}>
+            <LText
+              semiBold
+              numberOfLines={1}
+              style={styles.overdelegated}
+              color="orange"
+            >
               <Trans i18nKey="delegation.overdelegated" />
             </LText>
           ) : null}
         </View>
         <LText
-          tertiary
+          semiBold
           numberOfLines={1}
           style={[
             styles.bakerYield,
             baker.capacityStatus === "full" ? styles.bakerYieldFull : null,
           ]}
+          color="smoke"
         >
           {baker.nominalYield}
         </LText>
@@ -127,9 +137,28 @@ const BakerRow = ({
   );
 };
 
-const ModalIcon = () => <Icon name="user-plus" size={24} color={colors.live} />;
+const ModalIcon = () => {
+  const { colors } = useTheme();
+  return <Icon name="user-plus" size={24} color={colors.live} />;
+};
 
-const SelectValidator = ({ account, parentAccount, navigation }: Props) => {
+type Props = {
+  account: AccountLike,
+  parentAccount: ?Account,
+  navigation: any,
+  route: { params: RouteParams },
+};
+
+type RouteParams = {
+  accountId: string,
+  transaction: Transaction,
+  status: TransactionStatus,
+};
+
+export default function SelectValidator({ navigation, route }: Props) {
+  const { colors } = useTheme();
+  const { t } = useTranslation();
+  const { account, parentAccount } = useSelector(accountScreenSelector(route));
   const bakers = useBakers(whitelist);
   const [editingCustom, setEditingCustom] = useState(false);
   const [keyboardHeight, setKeyboardHeight] = useState(0);
@@ -176,10 +205,9 @@ const SelectValidator = ({ account, parentAccount, navigation }: Props) => {
     return {
       account,
       parentAccount,
-      transaction: bridge.updateTransaction(
-        navigation.getParam("transaction"),
-        { recipient: "" },
-      ),
+      transaction: bridge.updateTransaction(route.params?.transaction, {
+        recipient: "",
+      }),
     };
   });
 
@@ -203,11 +231,11 @@ const SelectValidator = ({ account, parentAccount, navigation }: Props) => {
 
   const continueCustom = useCallback(() => {
     setEditingCustom(false);
-    navigation.navigate("DelegationSummary", {
-      ...navigation.state.params,
+    navigation.navigate(ScreenName.DelegationSummary, {
+      ...route.params,
       transaction,
     });
-  }, [navigation, transaction]);
+  }, [navigation, transaction, route.params]);
 
   const enableCustomValidator = useCallback(() => {
     setEditingCustom(true);
@@ -228,16 +256,15 @@ const SelectValidator = ({ account, parentAccount, navigation }: Props) => {
   const onItemPress = useCallback(
     (baker: Baker) => {
       const bridge = getAccountBridge(account, parentAccount);
-      const transaction = bridge.updateTransaction(
-        navigation.getParam("transaction"),
-        { recipient: baker.address },
-      );
-      navigation.navigate("DelegationSummary", {
-        ...navigation.state.params,
+      const transaction = bridge.updateTransaction(route.params?.transaction, {
+        recipient: baker.address,
+      });
+      navigation.navigate(ScreenName.DelegationSummary, {
+        ...route.params,
         transaction,
       });
     },
-    [navigation, account, parentAccount],
+    [navigation, account, parentAccount, route.params],
   );
 
   const renderItem = useCallback(
@@ -246,7 +273,10 @@ const SelectValidator = ({ account, parentAccount, navigation }: Props) => {
   );
 
   return (
-    <SafeAreaView style={styles.root} forceInset={forceInset}>
+    <SafeAreaView
+      style={[styles.root, { backgroundColor: colors.background }]}
+      forceInset={forceInset}
+    >
       <TrackScreen category="DelegationFlow" name="SelectValidator" />
       <View style={styles.header}>
         {/* TODO SEARCH */}
@@ -274,12 +304,15 @@ const SelectValidator = ({ account, parentAccount, navigation }: Props) => {
           pending: bridgePending,
         }}
         style={keyboardHeight ? { marginBottom: keyboardHeight } : undefined}
-        containerStyle={{ alignSelf: "stretch" }}
+        containerStyle={styles.infoModalContainerStyle}
       >
         <TextInput
           placeholder="Enter validator address"
           placeholderTextColor={colors.fog}
-          style={[styles.addressInput, error && styles.invalidAddressInput]}
+          style={[
+            styles.addressInput,
+            error ? { color: colors.alert } : { color: colors.darkBlue },
+          ]}
           onChangeText={onChangeText}
           onInputCleared={clear}
           value={transaction.recipient}
@@ -289,7 +322,7 @@ const SelectValidator = ({ account, parentAccount, navigation }: Props) => {
         />
 
         {error && (
-          <LText style={[styles.warningBox, styles.error]}>
+          <LText style={[styles.warningBox]} color="alert">
             <TranslatedError error={error} />
           </LText>
         )}
@@ -299,16 +332,16 @@ const SelectValidator = ({ account, parentAccount, navigation }: Props) => {
         id="SelectValidatorInfos"
         isOpened={showInfos}
         onClose={hideInfos}
-        confirmLabel={i18next.t("common.close")}
+        confirmLabel={t("common.close")}
       >
         <View style={styles.providedByContainer}>
-          <LText semiBold style={styles.providedByText}>
+          <LText semiBold style={styles.providedByText} color="grey">
             <Trans i18nKey="delegation.yieldInfos" />
           </LText>
           <ExternalLink
-            text={<LText bold>MyTezosBaker</LText>}
+            text={<LText bold>Baking Bad</LText>}
             event="SelectValidatorOpen"
-            onPress={() => Linking.openURL("https://mytezosbaker.com/")}
+            onPress={() => Linking.openURL("https://baking-bad.org/")}
           />
         </View>
       </InfoModal>
@@ -323,20 +356,11 @@ const SelectValidator = ({ account, parentAccount, navigation }: Props) => {
       </View>
     </SafeAreaView>
   );
-};
-
-SelectValidator.navigationOptions = {
-  headerRight: null,
-  gesturesEnabled: false,
-  headerTitle: (
-    <StepHeader title={i18next.t("delegation.selectValidatorTitle")} />
-  ),
-};
+}
 
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: colors.white,
   },
   header: {
     padding: 16,
@@ -359,7 +383,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   bakerHeadText: {
-    color: colors.smoke,
     fontSize: 14,
   },
   bakerHeadContainer: {
@@ -381,45 +404,33 @@ const styles = StyleSheet.create({
   },
   bakerName: {
     fontSize: 14,
-    color: colors.darkBlue,
   },
   overdelegatedIndicator: {
     position: "absolute",
-    backgroundColor: colors.orange,
     width: 10,
     height: 10,
     borderRadius: 10,
     top: 34,
     left: 24,
-    borderColor: colors.white,
     borderWidth: 1,
   },
   overdelegated: {
     fontSize: 12,
-    color: colors.orange,
   },
   bakerYield: {
     fontSize: 14,
-    color: colors.smoke,
   },
   bakerYieldFull: {
     opacity: 0.5,
   },
   addressInput: {
-    color: colors.darkBlue,
     ...getFontStyle({ semiBold: true }),
     fontSize: 20,
     paddingVertical: 16,
   },
-  invalidAddressInput: {
-    color: colors.alert,
-  },
   warningBox: {
     alignSelf: "stretch",
     marginTop: 8,
-  },
-  error: {
-    color: colors.alert,
   },
   providedByContainer: {
     display: "flex",
@@ -428,10 +439,8 @@ const styles = StyleSheet.create({
   providedByText: {
     fontSize: 14,
     marginRight: 5,
-    color: colors.grey,
+  },
+  infoModalContainerStyle: {
+    alignSelf: "stretch",
   },
 });
-
-const mapStateToProps = accountAndParentScreenSelector;
-
-export default connect(mapStateToProps)(translate()(SelectValidator));

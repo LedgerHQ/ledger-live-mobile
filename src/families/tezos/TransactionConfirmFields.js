@@ -18,18 +18,28 @@ import {
 } from "@ledgerhq/live-common/lib/explorers";
 import { DataRow } from "../../components/ValidateOnDeviceDataRow";
 import LText from "../../components/LText";
-import colors from "../../colors";
 
 const styles = StyleSheet.create({
   text: {
-    color: colors.darkBlue,
     fontSize: 14,
     flex: 1,
     textAlign: "right",
   },
 });
 
-const Pre = ({
+const TezosStorageLimit = ({ transaction }: { transaction: Transaction }) => {
+  invariant(transaction.family === "tezos", "tezos transaction");
+
+  return (
+    <DataRow label="Storage Limit">
+      <LText semiBold style={styles.text}>
+        {(transaction.storageLimit || "").toString()}
+      </LText>
+    </DataRow>
+  );
+};
+
+const TezosDelegateValidator = ({
   account,
   parentAccount,
   transaction,
@@ -48,48 +58,20 @@ const Pre = ({
 
   invariant(transaction.family === "tezos", "tezos transaction");
 
-  const isDelegateOperation = transaction.mode === "delegate";
-
   return (
-    <>
-      <DataRow label="Source">
-        <LText semiBold style={styles.text}>
-          {account.type === "ChildAccount"
-            ? account.address
-            : mainAccount.freshAddress}
-        </LText>
-      </DataRow>
-      {isDelegateOperation ? (
-        <>
-          <DataRow label="Validator">
-            <LText semiBold onPress={openBaker} style={styles.text}>
-              {baker ? baker.name : shortAddressPreview(transaction.recipient)}
-            </LText>
-          </DataRow>
-          <DataRow label="Delegate">
-            <LText semiBold style={styles.text}>
-              {transaction.recipient}
-            </LText>
-          </DataRow>
-        </>
-      ) : null}
-    </>
-  );
-};
-
-const Post = ({ transaction }: { transaction: Transaction }) => {
-  invariant(transaction.family === "tezos", "tezos transaction");
-
-  return (
-    <DataRow label="Storage Limit">
-      <LText semiBold style={styles.text}>
-        {(transaction.storageLimit || "").toString()}
+    <DataRow label="Validator">
+      <LText semiBold onPress={openBaker} style={styles.text}>
+        {baker ? baker.name : shortAddressPreview(transaction.recipient)}
       </LText>
     </DataRow>
   );
 };
 
+const fieldComponents = {
+  "tezos.delegateValidator": TezosDelegateValidator,
+  "tezos.storageLimit": TezosStorageLimit,
+};
+
 export default {
-  pre: Pre,
-  post: Post,
+  fieldComponents,
 };

@@ -1,127 +1,110 @@
 /* @flow */
-import React, { PureComponent } from "react";
-import i18next from "i18next";
+import React from "react";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
-// $FlowFixMe
-import { SafeAreaView, ScrollView } from "react-navigation";
-import { connect } from "react-redux";
-import { translate } from "react-i18next";
-import type {
-  Account,
-  Operation,
-  AccountLike,
-} from "@ledgerhq/live-common/lib/types";
+import SafeAreaView from "react-native-safe-area-view";
+import { useSelector } from "react-redux";
+import type { Operation } from "@ledgerhq/live-common/lib/types";
 import {
   getDefaultExplorerView,
   getTransactionExplorer,
 } from "@ledgerhq/live-common/lib/explorers";
 import { getMainAccount } from "@ledgerhq/live-common/lib/account";
-import type { NavigationScreenProp } from "react-navigation";
+import { useTheme } from "@react-navigation/native";
 import byFamiliesOperationDetails from "../../generated/operationDetails";
-import { accountAndParentScreenSelector } from "../../reducers/accounts";
+import { accountScreenSelector } from "../../reducers/accounts";
 import { TrackScreen } from "../../analytics";
+import NavigationScrollView from "../../components/NavigationScrollView";
 import Footer from "./Footer";
 import Content from "./Content";
-import colors from "../../colors";
 import Close from "../../icons/Close";
 import ArrowLeft from "../../icons/ArrowLeft";
 
 const forceInset = { bottom: "always" };
 
-type Props = {
-  account: AccountLike,
-  parentAccount: ?Account,
-  navigation: Navigation,
+type RouteParams = {
+  accountId: string,
+  operation: Operation,
+  disableAllLinks?: Boolean,
 };
 
-type Navigation = NavigationScreenProp<{
-  params: {
-    accountId: string,
-    operation: Operation,
-  },
-}>;
+type Props = {
+  navigation: any,
+  route: { params: RouteParams },
+};
 
-const BackButton = ({ navigation }: { navigation: Navigation }) => (
-  <TouchableOpacity style={{ padding: 16 }} onPress={() => navigation.goBack()}>
-    <ArrowLeft size={18} color={colors.grey} />
-  </TouchableOpacity>
-);
+export const BackButton = ({ navigation }: { navigation: * }) => {
+  const { colors } = useTheme();
 
-const CloseButton = ({ navigation }: { navigation: Navigation }) => (
-  <TouchableOpacity
-    onPress={() => navigation.popToTop()}
-    style={{ padding: 16 }}
-  >
-    <Close size={18} color={colors.grey} />
-  </TouchableOpacity>
-);
+  return (
+    <TouchableOpacity
+      style={styles.buttons}
+      onPress={() => navigation.goBack()}
+    >
+      <ArrowLeft size={18} color={colors.grey} />
+    </TouchableOpacity>
+  );
+};
 
-class OperationDetails extends PureComponent<Props, *> {
-  static navigationOptions = ({ navigation }) => {
-    const {
-      params: { isSubOperation },
-    } = navigation.state;
+export const CloseButton = ({ navigation }: { navigation: Navigation }) => {
+  const { colors } = useTheme();
 
-    if (isSubOperation) {
-      return {
-        title: i18next.t("operationDetails.title"),
-        headerLeft: <BackButton navigation={navigation} />,
-        headerRight: <CloseButton navigation={navigation} />,
-      };
-    }
+  return (
+    <TouchableOpacity
+      // $FlowFixMe
+      onPress={() => navigation.popToTop()}
+      style={styles.buttons}
+    >
+      <Close size={18} color={colors.grey} />
+    </TouchableOpacity>
+  );
+};
 
-    return {
-      title: i18next.t("operationDetails.title"),
-      headerLeft: <BackButton navigation={navigation} />,
-      headerRight: null,
-    };
-  };
+export default function OperationDetails({ route }: Props) {
+  const { colors } = useTheme();
+  const { account, parentAccount } = useSelector(accountScreenSelector(route));
+  if (!account) return null;
+  const operation = route.params?.operation;
+  const mainAccount = getMainAccount(account, parentAccount);
+  const url = getTransactionExplorer(
+    getDefaultExplorerView(mainAccount.currency),
+    operation.hash,
+  );
+  const specific = byFamiliesOperationDetails[mainAccount.currency.family];
+  const urlWhatIsThis =
+    specific &&
+    specific.getURLWhatIsThis &&
+    specific.getURLWhatIsThis(operation);
 
-  render() {
-    const { navigation, account, parentAccount } = this.props;
-    if (!account) return null;
-    const operation = navigation.getParam("operation");
-    const mainAccount = getMainAccount(account, parentAccount);
-    const url = getTransactionExplorer(
-      getDefaultExplorerView(mainAccount.currency),
-      operation.hash,
-    );
-    const specific = byFamiliesOperationDetails[mainAccount.currency.family];
-    const urlWhatIsThis =
-      specific &&
-      specific.getURLWhatIsThis &&
-      specific.getURLWhatIsThis(operation);
-
-    return (
-      <SafeAreaView style={styles.container} forceInset={forceInset}>
-        <TrackScreen category="OperationDetails" />
-        <ScrollView>
-          <View style={styles.root}>
-            <Content
-              account={account}
-              parentAccount={parentAccount}
-              operation={operation}
-              navigation={navigation}
-            />
-          </View>
-        </ScrollView>
-        <Footer url={url} urlWhatIsThis={urlWhatIsThis} />
-      </SafeAreaView>
-    );
-  }
+  return (
+    <SafeAreaView
+      style={[styles.container, { backgroundColor: colors.background }]}
+      forceInset={forceInset}
+    >
+      <TrackScreen category="OperationDetails" />
+      <NavigationScrollView>
+        <View style={styles.root}>
+          <Content
+            account={account}
+            parentAccount={parentAccount}
+            operation={operation}
+            disableAllLinks={route.params?.disableAllLinks}
+          />
+        </View>
+      </NavigationScrollView>
+      <Footer url={url} urlWhatIsThis={urlWhatIsThis} />
+    </SafeAreaView>
+  );
 }
-
-export default connect(accountAndParentScreenSelector)(
-  translate()(OperationDetails),
-);
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.white,
   },
   root: {
     paddingTop: 24,
     paddingBottom: 64,
+  },
+  buttons: {
+    padding: 16,
   },
 });

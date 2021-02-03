@@ -1,11 +1,7 @@
 /* @flow */
 import React, { Component } from "react";
 import { View, StyleSheet } from "react-native";
-import { SafeAreaView } from "react-navigation";
 import LText from "./LText";
-import colors from "../colors";
-
-const forceInset = { bottom: "always" };
 
 export default class ModalBottomAction extends Component<{
   icon?: *,
@@ -16,7 +12,7 @@ export default class ModalBottomAction extends Component<{
   render() {
     const { icon, title, description, footer } = this.props;
     return (
-      <SafeAreaView forceInset={forceInset} style={styles.root}>
+      <View style={styles.root}>
         {icon && <View style={styles.icon}>{icon}</View>}
         {title ? (
           <LText semiBold style={styles.title}>
@@ -25,11 +21,13 @@ export default class ModalBottomAction extends Component<{
         ) : null}
         <View style={styles.body}>
           {description && (
-            <LText style={styles.description}>{description}</LText>
+            <LText style={styles.description} color="grey">
+              {description}
+            </LText>
           )}
           <View style={styles.footer}>{footer}</View>
         </View>
-      </SafeAreaView>
+      </View>
     );
   }
 }
@@ -56,7 +54,6 @@ const styles = StyleSheet.create({
     lineHeight: 21,
     textAlign: "center",
     marginBottom: 24,
-    color: colors.grey,
   },
   footer: {},
 });

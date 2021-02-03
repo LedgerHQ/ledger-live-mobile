@@ -8,30 +8,28 @@ import {
   TouchableWithoutFeedback,
 } from "react-native";
 import { connect } from "react-redux";
-import { SafeAreaView } from "react-navigation";
-import type { NavigationScreenProp } from "react-navigation";
+import SafeAreaView from "react-native-safe-area-view";
+import { compose } from "redux";
+import { ScreenName } from "../const";
 import { addKnownDevice } from "../actions/ble";
-import colors from "../colors";
 import { getFontStyle } from "../components/LText";
 import TextInput from "../components/TextInput";
 import KeyboardView from "../components/KeyboardView";
 import Button from "../components/Button";
+import { withTheme } from "../colors";
 
 const forceInset = { bottom: "always" };
 
 class DebugHttpTransport extends Component<
   {
-    navigation: NavigationScreenProp<*>,
+    navigation: *,
     addKnownDevice: (*) => void,
+    colors: *,
   },
   {
     text: string,
   },
 > {
-  static navigationOptions = {
-    title: "Debug Http Transport",
-  };
-
   state = {
     text: "",
   };
@@ -51,13 +49,22 @@ class DebugHttpTransport extends Component<
       id: `httpdebug|ws://${ip}:${port}`,
       name: ip,
     });
-    this.props.navigation.navigate("Manager");
+    this.props.navigation.navigate(ScreenName.Manager);
   };
 
   render() {
     const { text } = this.state;
+    const { colors } = this.props;
     return (
-      <SafeAreaView style={styles.root} forceInset={forceInset}>
+      <SafeAreaView
+        style={[
+          styles.root,
+          {
+            backgroundColor: colors.background,
+          },
+        ]}
+        forceInset={forceInset}
+      >
         <KeyboardView style={styles.container}>
           <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <View style={{ flex: 1 }}>
@@ -92,7 +99,6 @@ class DebugHttpTransport extends Component<
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: colors.white,
   },
   buttonContainer: {
     flex: 1,
@@ -110,9 +116,9 @@ const styles = StyleSheet.create({
   },
 });
 
-export default connect(
-  null,
-  {
+export default compose(
+  connect(null, {
     addKnownDevice,
-  },
+  }),
+  withTheme,
 )(DebugHttpTransport);

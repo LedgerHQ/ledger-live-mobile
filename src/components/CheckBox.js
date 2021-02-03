@@ -1,11 +1,10 @@
 // @flow
 
-import React, { PureComponent } from "react";
+import React, { memo, useCallback } from "react";
 import { TouchableOpacity, StyleSheet, View } from "react-native";
 
+import { useTheme } from "@react-navigation/native";
 import IconCheck from "../icons/Check";
-
-import colors from "../colors";
 
 type Props = {
   isChecked: boolean,
@@ -21,41 +20,43 @@ const checkBoxHitSlop = {
   bottom: 16,
 };
 
-export default class CheckBox extends PureComponent<Props> {
-  onPress = () => {
-    if (!this.props.onChange) return;
-    this.props.onChange(!this.props.isChecked);
+function CheckBox({ isChecked, disabled, onChange, style }: Props) {
+  const { colors } = useTheme();
+  const onPress = useCallback(() => {
+    if (!onChange) return;
+    onChange(!isChecked);
+  }, [isChecked, onChange]);
+
+  const body = (
+    <IconCheck size={20} color={!isChecked ? "transparent" : "white"} />
+  );
+
+  const commonProps = {
+    style: [
+      styles.root,
+      { borderColor: colors.fog },
+      isChecked && {
+        ...styles.rootChecked,
+        backgroundColor: colors.live,
+        borderColor: "transparent",
+      },
+      style,
+    ],
   };
 
-  render() {
-    const { isChecked, disabled, onChange, style } = this.props;
-
-    const body = (
-      <IconCheck
-        size={20}
-        color={colors.white}
-        style={[!isChecked && styles.invisible]}
-      />
+  if (onChange && !disabled) {
+    return (
+      <TouchableOpacity
+        {...commonProps}
+        onPress={onPress}
+        hitSlop={checkBoxHitSlop}
+      >
+        {isChecked ? body : null}
+      </TouchableOpacity>
     );
-
-    const commonProps = {
-      style: [styles.root, isChecked && styles.rootChecked, style],
-    };
-
-    if (onChange && !disabled) {
-      return (
-        <TouchableOpacity
-          {...commonProps}
-          onPress={this.onPress}
-          hitSlop={checkBoxHitSlop}
-        >
-          {body}
-        </TouchableOpacity>
-      );
-    }
-
-    return <View {...commonProps}>{body}</View>;
   }
+
+  return <View {...commonProps}>{body}</View>;
 }
 
 const styles = StyleSheet.create({
@@ -65,14 +66,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderWidth: 2,
-    borderColor: colors.fog,
     borderRadius: 24,
   },
   rootChecked: {
-    backgroundColor: colors.live,
-    borderWidth: 0,
-  },
-  invisible: {
-    opacity: 0,
+    borderWidth: 2,
+    borderColor: "transparent",
   },
 });
+
+export default memo<Props>(CheckBox);

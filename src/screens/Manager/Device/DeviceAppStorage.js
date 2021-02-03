@@ -5,8 +5,8 @@ import { Trans } from "react-i18next";
 
 import type { DeviceModel } from "@ledgerhq/devices";
 import type { AppsDistribution } from "@ledgerhq/live-common/lib/apps";
+import { useTheme } from "@react-navigation/native";
 import LText from "../../../components/LText";
-import colors from "../../../colors";
 
 import Warning from "../../../icons/Warning";
 import Touchable from "../../../components/Touchable";
@@ -14,11 +14,13 @@ import ByteSize from "../../../components/ByteSize";
 
 type Props = {
   deviceModel: DeviceModel,
+  deviceInfo: DeviceInfo,
   distribution: AppsDistribution,
 };
 
 const DeviceAppStorage = ({
   deviceModel,
+  deviceInfo,
   distribution: {
     freeSpaceBytes,
     appsSpaceBytes,
@@ -27,6 +29,7 @@ const DeviceAppStorage = ({
     apps,
   },
 }: Props) => {
+  const { colors } = useTheme();
   const appSizes = useMemo(
     () =>
       apps.filter(Boolean).map(({ bytes, currency, name }) => ({
@@ -51,7 +54,11 @@ const DeviceAppStorage = ({
           {shouldWarnMemory && <Warning color={colors.lightOrange} size={15} />}
           <LText bold style={[styles.storageText, storageWarnStyle]}>
             {" "}
-            <ByteSize value={freeSpaceBytes} deviceModel={deviceModel} />
+            <ByteSize
+              value={freeSpaceBytes}
+              deviceModel={deviceModel}
+              firmwareVersion={deviceInfo.version}
+            />
           </LText>
           <LText style={[styles.storageText, storageWarnStyle]}>
             {" "}
@@ -61,7 +68,11 @@ const DeviceAppStorage = ({
       </View>
       <Touchable
         activeOpacity={1}
-        style={[styles.row, styles.graphRow]}
+        style={[
+          styles.row,
+          styles.graphRow,
+          { backgroundColor: colors.lightFog },
+        ]}
         onPress={() => {}}
         event="ManagerAppDeviceGraphClick"
       >
@@ -73,6 +84,7 @@ const DeviceAppStorage = ({
               {
                 flexBasis: `${ratio}%`,
                 backgroundColor: color,
+                borderRightColor: colors.white,
               },
             ]}
           />
@@ -82,7 +94,11 @@ const DeviceAppStorage = ({
         {totalAppsBytes > 0 && (
           <>
             <LText style={styles.storageText} bold>
-              <ByteSize value={totalAppsBytes} deviceModel={deviceModel} />
+              <ByteSize
+                value={totalAppsBytes}
+                deviceModel={deviceModel}
+                firmwareVersion={deviceInfo.version}
+              />
             </LText>
             <LText style={styles.storageText}>
               {" "}
@@ -130,10 +146,6 @@ const styles = StyleSheet.create({
   infoTitle: {
     fontSize: 13,
   },
-  infoSubTitle: {
-    fontSize: 13,
-    color: colors.grey,
-  },
   graphRow: {
     flexDirection: "row",
     alignItems: "center",
@@ -141,7 +153,7 @@ const styles = StyleSheet.create({
     flexBasis: 23,
     height: 23,
     marginVertical: 16,
-    backgroundColor: colors.lightFog,
+
     borderRadius: 3,
     overflow: "hidden",
   },
@@ -157,7 +169,7 @@ const styles = StyleSheet.create({
     flexGrow: 0.005,
     flexShrink: 1,
     height: "100%",
-    borderRightColor: colors.white,
+
     borderRightWidth: StyleSheet.hairlineWidth,
   },
 });

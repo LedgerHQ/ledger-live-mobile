@@ -1,89 +1,112 @@
 // @flow
 
-import React, { Component } from "react";
-import { translate } from "react-i18next";
-import { StyleSheet, ScrollView } from "react-native";
-import { SafeAreaView } from "react-navigation";
-import type { NavigationScreenProp } from "react-navigation";
+import React, { useCallback, useEffect, useState } from "react";
+import { StyleSheet } from "react-native";
+import SafeAreaView from "react-native-safe-area-view";
 import type { CryptoCurrency } from "@ledgerhq/live-common/lib/types";
-import i18next from "i18next";
-
+import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
+import { createAction } from "@ledgerhq/live-common/lib/hw/actions/app";
+import connectApp from "@ledgerhq/live-common/lib/hw/connectApp";
+import { useTheme } from "@react-navigation/native";
 import { prepareCurrency } from "../../bridge/cache";
-import colors from "../../colors";
+import { ScreenName } from "../../const";
 import { TrackScreen } from "../../analytics";
 import SelectDevice from "../../components/SelectDevice";
-import { connectingStep, currencyApp } from "../../components/DeviceJob/steps";
-import StepHeader from "../../components/StepHeader";
+import NavigationScrollView from "../../components/NavigationScrollView";
+import DeviceActionModal from "../../components/DeviceActionModal";
 
 const forceInset = { bottom: "always" };
 
 type Props = {
-  navigation: NavigationScreenProp<{
-    params: {
-      currency: CryptoCurrency,
-    },
-  }>,
+  navigation: any,
+  route: { params: RouteParams },
 };
 
-type State = {};
+type RouteParams = {
+  currency: CryptoCurrency,
+  inline?: boolean,
+};
 
-class AddAccountsSelectDevice extends Component<Props, State> {
-  static navigationOptions = {
-    headerTitle: (
-      <StepHeader
-        title={i18next.t("common.device")}
-        subtitle={i18next.t("send.stepperHeader.stepRange", {
-          currentStep: "2",
-          totalSteps: "3",
-        })}
-      />
-    ),
-  };
+const action = createAction(connectApp);
 
-  componentDidMount() {
-    const { navigation } = this.props;
-    const currency = navigation.getParam("currency");
+export default function AddAccountsSelectDevice({ navigation, route }: Props) {
+  const { colors } = useTheme();
+  const [device, setDevice] = useState<?Device>();
+
+  const onClose = useCallback(() => {
+    setDevice();
+  }, []);
+
+  const onResult = useCallback(
+    meta => {
+      setDevice();
+      const { currency, inline } = route.params;
+      const arg = {
+        currency,
+        inline,
+        ...meta,
+      };
+      if (inline) {
+        navigation.replace(ScreenName.AddAccountsAccounts, arg);
+      } else {
+        navigation.navigate(ScreenName.AddAccountsAccounts, arg);
+      }
+    },
+    [navigation, route],
+  );
+
+  useEffect(() => {
     // load ahead of time
-    prepareCurrency(currency);
-  }
+    prepareCurrency(route.params.currency);
+  }, [route.params.currency]);
 
-  onSelectDevice = (meta: *) => {
-    const { navigation } = this.props;
-    const currency = navigation.getParam("currency");
-    navigation.navigate("AddAccountsAccounts", { currency, ...meta });
-  };
-
-  render() {
-    const { navigation } = this.props;
-    const currency = navigation.getParam("currency");
-    return (
-      <SafeAreaView style={styles.root} forceInset={forceInset}>
-        <ScrollView
-          style={styles.scroll}
-          contentContainerStyle={styles.scrollContainer}
-        >
-          <TrackScreen category="AddAccounts" name="SelectDevice" />
-          <SelectDevice
-            onSelect={this.onSelectDevice}
-            steps={[connectingStep, currencyApp(currency)]}
-          />
-        </ScrollView>
-      </SafeAreaView>
-    );
-  }
+  const currency = route.params.currency;
+  return (
+    <SafeAreaView
+      style={[
+        styles.root,
+        {
+          backgroundColor: colors.background,
+        },
+      ]}
+      forceInset={forceInset}
+    >
+      <NavigationScrollView
+        style={styles.scroll}
+        contentContainerStyle={styles.scrollContainer}
+      >
+        <TrackScreen
+          category="AddAccounts"
+          name="SelectDevice"
+          currencyName={currency.name}
+        />
+        <SelectDevice onSelect={setDevice} />
+      </NavigationScrollView>
+      <DeviceActionModal
+        action={action}
+        device={device}
+        onResult={onResult}
+        onClose={onClose}
+        request={{
+          currency:
+            currency.type === "TokenCurrency"
+              ? currency.parentCurrency
+              : currency,
+        }}
+      />
+    </SafeAreaView>
+  );
 }
 
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: colors.white,
   },
   scroll: {
     flex: 1,
+    backgroundColor: "transparent",
   },
   scrollContainer: {
     padding: 16,
   },
 });
-
-export default translate()(AddAccountsSelectDevice);

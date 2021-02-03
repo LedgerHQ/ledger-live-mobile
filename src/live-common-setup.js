@@ -10,38 +10,42 @@ import { setEnv } from "@ledgerhq/live-common/lib/env";
 import { setSupportedCurrencies } from "@ledgerhq/live-common/lib/currencies";
 import { registerTransportModule } from "@ledgerhq/live-common/lib/hw";
 import type { TransportModule } from "@ledgerhq/live-common/lib/hw";
+import { setDeviceMode } from "@ledgerhq/live-common/lib/hw/actions/app";
 import BluetoothTransport from "./react-native-hw-transport-ble";
-import "@ledgerhq/live-common/lib/load/tokens/ethereum/erc20";
 import "./experimental";
 
+setDeviceMode("polling");
+
 setSupportedCurrencies([
-  "bitcoin_cash",
-  "bitcoin_gold",
-  "bitcoin_testnet",
   "bitcoin",
-  "clubcoin",
+  "ethereum",
+  "ripple",
+  "bitcoin_cash",
+  "litecoin",
+  "tezos",
+  "stellar",
+  "tron",
+  "ethereum_classic",
   "dash",
+  "zcash",
+  "dogecoin",
   "decred",
   "digibyte",
-  "dogecoin",
-  "ethereum_classic",
-  "ethereum",
-  "hcash",
-  "tezos",
-  "komodo",
-  "litecoin",
-  "peercoin",
-  "pivx",
-  "poswallet",
   "qtum",
-  "ripple",
-  "stealthcoin",
+  "bitcoin_gold",
   "stratis",
+  "komodo",
+  "pivx",
+  "zencash",
   "vertcoin",
+  "peercoin",
   "viacoin",
   "stakenet",
-  "zcash",
-  "zencash",
+  "stealthcoin",
+  "bitcoin_testnet",
+  "ethereum_ropsten",
+  "cosmos",
+  "algorand",
 ]);
 
 if (Config.VERBOSE) {
@@ -56,7 +60,7 @@ if (Config.VERBOSE) {
 
 if (Config.BLE_LOG_LEVEL) BluetoothTransport.setLogLevel(Config.BLE_LOG_LEVEL);
 
-setEnv("FORCE_PROVIDER", Config.FORCE_PROVIDER);
+if (Config.FORCE_PROVIDER) setEnv("FORCE_PROVIDER", Config.FORCE_PROVIDER);
 
 // Add support of HID (experimental until we stabilize it)
 

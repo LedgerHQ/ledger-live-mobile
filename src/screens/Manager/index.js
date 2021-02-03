@@ -1,26 +1,19 @@
 /* @flow */
 import React, { Component } from "react";
 import { View, StyleSheet } from "react-native";
-// $FlowFixMe
-import { withNavigationFocus, ScrollView } from "react-navigation";
-import type { NavigationScreenProp } from "react-navigation";
-import { connect } from "react-redux";
-import { Trans, translate } from "react-i18next";
-import i18next from "i18next";
-import { compose } from "redux";
+import { useIsFocused } from "@react-navigation/native";
+import { useDispatch, useSelector } from "react-redux";
+import { Trans } from "react-i18next";
 import manager from "@ledgerhq/live-common/lib/manager";
 import { disconnect } from "@ledgerhq/live-common/lib/hw";
-import { createStructuredSelector } from "reselect";
+import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
+
+import connectManager from "@ledgerhq/live-common/lib/hw/connectManager";
+import { createAction } from "@ledgerhq/live-common/lib/hw/actions/manager";
 import { removeKnownDevice } from "../../actions/ble";
-import {
-  connectingStep,
-  dashboard,
-  listApps,
-  getDeviceName,
-} from "../../components/DeviceJob/steps";
+import { ScreenName } from "../../const";
+import type { ManagerTab } from "./Manager";
 import SelectDevice from "../../components/SelectDevice";
-import type { DeviceMeta } from "../../components/DeviceJob/types";
-import colors from "../../colors";
 import TrackScreen from "../../analytics/TrackScreen";
 import { track } from "../../analytics";
 import LText from "../../components/LText";
@@ -29,8 +22,12 @@ import type { DeviceLike } from "../../reducers/ble";
 import Trash from "../../icons/Trash";
 import BottomModal from "../../components/BottomModal";
 import ModalBottomAction from "../../components/ModalBottomAction";
+import NavigationScrollView from "../../components/NavigationScrollView";
 import ReadOnlyNanoX from "./Connect/ReadOnlyNanoX";
 import { readOnlyModeEnabledSelector } from "../../reducers/settings";
+import DeviceActionModal from "../../components/DeviceActionModal";
+
+const action = createAction(connectManager);
 
 const RemoveDeviceModal = ({
   onHideMenu,
@@ -38,8 +35,8 @@ const RemoveDeviceModal = ({
   open,
   deviceName,
 }: {
-  onHideMenu: () => *,
-  remove: () => *,
+  onHideMenu: () => void,
+  remove: () => Promise<void>,
   open: boolean,
   deviceName: string,
 }) => (
@@ -62,45 +59,43 @@ const RemoveDeviceModal = ({
   </BottomModal>
 );
 
-const mapStateToProps = createStructuredSelector({
-  readOnlyModeEnabled: readOnlyModeEnabledSelector,
-});
+type RouteParams = {
+  searchQuery?: string,
+  tab?: ManagerTab,
+};
+
+type Props = {
+  navigation: any,
+  knownDevices: DeviceLike[],
+  route: {
+    params: RouteParams,
+    name: string,
+  },
+};
+
+type ChooseDeviceProps = Props & {
+  isFocused: boolean,
+  readOnlyModeEnabled: boolean,
+  removeKnownDevice: string => void,
+};
 
 class ChooseDevice extends Component<
-  {
-    navigation: NavigationScreenProp<*>,
-    isFocused: boolean,
-    readOnlyModeEnabled: boolean,
-    knownDevices: DeviceLike[],
-    removeKnownDevice: string => void,
-  },
+  ChooseDeviceProps,
   {
     showMenu: boolean,
+    device?: Device,
+    result?: Object,
   },
 > {
-  static navigationOptions = ({ navigation }) => {
-    const { params } = navigation.state;
-    let key = "manager.title";
-
-    if (params) {
-      if (params.title) {
-        key = params.title;
-      }
-    }
-    const title = i18next.t(key);
-    return {
-      title,
-      headerRight: null,
-    };
-  };
-
   state = {
     showMenu: false,
+    device: undefined,
+    result: undefined,
   };
 
-  chosenDevice: DeviceMeta;
+  chosenDevice: Device;
 
-  onShowMenu = (device: DeviceMeta) => {
+  onShowMenu = (device: Device) => {
     this.chosenDevice = device;
     this.setState({ showMenu: true });
   };
@@ -109,15 +104,25 @@ class ChooseDevice extends Component<
     this.setState({ showMenu: false });
   };
 
-  onSelect = (meta: Object) => {
-    const { version, mcuVersion } = meta.deviceInfo;
-    const { navigation } = this.props;
-    track("ManagerDeviceEntered", {
-      version,
-      mcuVersion,
-    });
+  onSelectDevice = (device?: Device) => {
+    if (device)
+      track("ManagerDeviceEntered", {
+        modelId: device.modelId,
+      });
+    this.setState({ device });
+  };
 
-    navigation.navigate("ManagerMain", meta);
+  onSelect = (result: Object) => {
+    this.setState({ device: undefined, result });
+  };
+
+  onModalHide = () => {
+    const { result } = this.state;
+    result?.result &&
+      this.props.navigation.navigate(ScreenName.ManagerMain, {
+        ...result,
+        ...this.props.route.params,
+      });
   };
 
   onStepEntered = (i: number, meta: Object) => {
@@ -136,6 +141,7 @@ class ChooseDevice extends Component<
 
   componentDidMount() {
     const { readOnlyModeEnabled } = this.props;
+    this.setState(state => ({ ...state, device: undefined }));
 
     if (readOnlyModeEnabled) {
       this.props.navigation.setParams({
@@ -147,7 +153,7 @@ class ChooseDevice extends Component<
 
   render() {
     const { isFocused, readOnlyModeEnabled } = this.props;
-    const { showMenu } = this.state;
+    const { showMenu, device } = this.state;
 
     if (!isFocused) return null;
 
@@ -156,17 +162,27 @@ class ChooseDevice extends Component<
     }
 
     return (
-      <ScrollView style={styles.root}>
+      <NavigationScrollView
+        style={[styles.root]}
+        contentContainerStyle={styles.scrollContainer}
+      >
         <TrackScreen category="Manager" name="ChooseDevice" />
         <LText semiBold style={styles.title}>
           <Trans i18nKey="manager.connect" />
         </LText>
-
         <SelectDevice
-          onSelect={this.onSelect}
-          steps={[connectingStep, dashboard, listApps, getDeviceName]}
+          autoSelectOnAdd
+          onSelect={this.onSelectDevice}
           onStepEntered={this.onStepEntered}
           onBluetoothDeviceAction={this.onShowMenu}
+        />
+        <DeviceActionModal
+          onClose={this.onSelectDevice}
+          device={device}
+          onResult={this.onSelect}
+          onModalHide={this.onModalHide}
+          action={action}
+          request={null}
         />
 
         {this.chosenDevice && (
@@ -174,10 +190,10 @@ class ChooseDevice extends Component<
             onHideMenu={this.onHideMenu}
             open={showMenu}
             remove={this.remove}
-            deviceName={this.chosenDevice.deviceName}
+            deviceName={this.chosenDevice.deviceName || ""}
           />
         )}
-      </ScrollView>
+      </NavigationScrollView>
     );
   }
 }
@@ -185,36 +201,14 @@ class ChooseDevice extends Component<
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: colors.white,
-    paddingHorizontal: 16,
   },
-  or: {
-    marginVertical: 30,
+  scrollContainer: {
+    paddingHorizontal: 16,
   },
   title: {
     lineHeight: 27,
     fontSize: 18,
     marginVertical: 24,
-    color: colors.darkBlue,
-  },
-  section: {
-    fontSize: 14,
-    lineHeight: 21,
-    marginBottom: 12,
-    color: colors.grey,
-  },
-  addContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  add: {
-    marginRight: 8,
-    color: colors.live,
-  },
-  bluetoothHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "flex-start",
   },
   footerContainer: {
     flexDirection: "row",
@@ -222,15 +216,19 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flex: 1,
   },
-  buttonMarginLeft: {
-    marginLeft: 16,
-  },
 });
 
-export default compose(
-  translate(),
-  connect(
-    mapStateToProps,
-    { removeKnownDevice },
-  ),
-)(withNavigationFocus(ChooseDevice));
+export default function Screen(props: Props) {
+  const isFocused = useIsFocused();
+  const dispatch = useDispatch();
+  const readOnlyModeEnabled = useSelector(readOnlyModeEnabledSelector);
+
+  return (
+    <ChooseDevice
+      {...props}
+      isFocused={isFocused}
+      readOnlyModeEnabled={readOnlyModeEnabled}
+      removeKnownDevice={(...args) => dispatch(removeKnownDevice(...args))}
+    />
+  );
+}

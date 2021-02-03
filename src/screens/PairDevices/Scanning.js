@@ -1,9 +1,7 @@
 // @flow
 
-import React, { Component, Fragment } from "react";
-import { StyleSheet } from "react-native";
-// $FlowFixMe
-import { FlatList } from "react-navigation";
+import React, { Component } from "react";
+import { StyleSheet, FlatList } from "react-native";
 import { connect } from "react-redux";
 import { Trans } from "react-i18next";
 import { createStructuredSelector } from "reselect";
@@ -19,7 +17,7 @@ import ScanningHeader from "./ScanningHeader";
 
 type Props = {
   knownDevices: DeviceLike[],
-  onSelect: Device => *,
+  onSelect: (Device, *) => *,
   onError: Error => *,
   onTimeout: () => *,
 };
@@ -84,16 +82,17 @@ class Scanning extends Component<Props, State> {
 
   renderItem = ({ item }: { item: * }) => {
     const knownDevice = this.props.knownDevices.find(d => d.id === item.id);
+    const deviceMeta = {
+      deviceId: item.id,
+      deviceName: item.name,
+      wired: false,
+      modelId: "nanoX",
+    };
     return (
       <DeviceItem
         device={item}
-        deviceMeta={{
-          deviceId: item.id,
-          deviceName: item.name,
-          wired: false,
-          modelId: "nanoX",
-        }}
-        onSelect={() => this.props.onSelect(item)}
+        deviceMeta={deviceMeta}
+        onSelect={() => this.props.onSelect(item, deviceMeta)}
         disabled={!!knownDevice}
         description={
           knownDevice ? <Trans i18nKey="PairDevices.alreadyPaired" /> : ""
@@ -107,7 +106,7 @@ class Scanning extends Component<Props, State> {
   render() {
     const { devices } = this.state;
     return (
-      <Fragment>
+      <>
         <TrackScreen category="PairDevices" name="Scanning" />
         <FlatList
           style={styles.list}
@@ -116,7 +115,7 @@ class Scanning extends Component<Props, State> {
           keyExtractor={this.keyExtractor}
           ListHeaderComponent={this.ListHeader}
         />
-      </Fragment>
+      </>
     );
   }
 }

@@ -1,32 +1,30 @@
 /* @flow */
-/* eslint-disable no-console */
 import React, { Component } from "react";
 import { View, StyleSheet } from "react-native";
-import { SafeAreaView } from "react-navigation";
-import type { NavigationStackProp } from "react-navigation-stack";
-import { translate, Trans } from "react-i18next";
+import SafeAreaView from "react-native-safe-area-view";
+import { Trans } from "react-i18next";
 import firmwareUpdateMain from "@ledgerhq/live-common/lib/hw/firmwareUpdate-main";
 import type { FirmwareUpdateContext } from "@ledgerhq/live-common/lib/types/manager";
 import logger from "../../logger";
 import { TrackScreen } from "../../analytics";
-import colors from "../../colors";
+import { ScreenName } from "../../const";
 import DeviceNanoAction from "../../components/DeviceNanoAction";
-import StepHeader from "../../components/StepHeader";
 import { BulletItem } from "../../components/BulletList";
 import getWindowDimensions from "../../logic/getWindowDimensions";
 import Installing from "../../components/Installing";
+import { withTheme } from "../../colors";
 
 const forceInset = { bottom: "always" };
 
-type Navigation = NavigationStackProp<{
-  params: {
-    deviceId: string,
-    firmware: FirmwareUpdateContext,
-  },
-}>;
-
 type Props = {
-  navigation: Navigation,
+  navigation: any,
+  route: { params: RouteParams },
+  colors: *,
+};
+
+type RouteParams = {
+  deviceId: string,
+  firmware: FirmwareUpdateContext,
 };
 
 type State = {
@@ -35,16 +33,6 @@ type State = {
 };
 
 class FirmwareUpdateMCU extends Component<Props, State> {
-  static navigationOptions = {
-    headerLeft: null,
-    headerTitle: (
-      <StepHeader
-        subtitle={<Trans i18nKey="FirmwareUpdate.title" />}
-        title={<Trans i18nKey="FirmwareUpdateMCU.title" />}
-      />
-    ),
-  };
-
   state = {
     installing: null,
     progress: 0,
@@ -53,9 +41,8 @@ class FirmwareUpdateMCU extends Component<Props, State> {
   sub: *;
 
   async componentDidMount() {
-    const { navigation } = this.props;
-    const deviceId = navigation.getParam("deviceId");
-    const firmware = navigation.getParam("firmware");
+    const { navigation, route } = this.props;
+    const { deviceId, firmware } = this.props.route.params || {};
 
     this.sub = firmwareUpdateMain(deviceId, firmware).subscribe({
       next: patch => {
@@ -63,16 +50,17 @@ class FirmwareUpdateMCU extends Component<Props, State> {
       },
       complete: () => {
         if (navigation.replace) {
-          navigation.replace("FirmwareUpdateConfirmation", {
-            ...navigation.state.params,
-          });
+          navigation.replace(
+            ScreenName.FirmwareUpdateConfirmation,
+            route.params,
+          );
         }
       },
       error: error => {
         logger.critical(error);
         if (navigation.replace) {
-          navigation.replace("FirmwareUpdateFailure", {
-            ...navigation.state.params,
+          navigation.replace(ScreenName.FirmwareUpdateFailure, {
+            ...route.params,
             error,
           });
         }
@@ -85,11 +73,15 @@ class FirmwareUpdateMCU extends Component<Props, State> {
   }
 
   render() {
+    const { colors } = this.props;
     const { installing, progress } = this.state;
     const { width } = getWindowDimensions();
 
     return (
-      <SafeAreaView style={styles.root} forceInset={forceInset}>
+      <SafeAreaView
+        style={[styles.root, { backgroundColor: colors.background }]}
+        forceInset={forceInset}
+      >
         <TrackScreen category="FirmwareUpdate" name="MCU" />
         {installing ? (
           <Installing progress={progress} installing={installing} />
@@ -124,7 +116,6 @@ class FirmwareUpdateMCU extends Component<Props, State> {
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: colors.white,
   },
   body: {
     padding: 20,
@@ -139,11 +130,6 @@ const styles = StyleSheet.create({
     left: "10%",
     position: "relative",
   },
-  description: {
-    color: colors.smoke,
-    fontSize: 14,
-    marginVertical: 30,
-  },
 });
 
-export default translate()(FirmwareUpdateMCU);
+export default withTheme(FirmwareUpdateMCU);

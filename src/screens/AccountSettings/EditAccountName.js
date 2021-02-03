@@ -2,46 +2,46 @@
 import React, { PureComponent } from "react";
 import i18next from "i18next";
 import { View, StyleSheet } from "react-native";
-// $FlowFixMe
-import { SafeAreaView, ScrollView } from "react-navigation";
-import type { NavigationScreenProp } from "react-navigation";
+import SafeAreaView from "react-native-safe-area-view";
 import type { Account } from "@ledgerhq/live-common/lib/types";
 import { connect } from "react-redux";
+import { Trans } from "react-i18next";
 import { compose } from "redux";
-import { Trans, translate } from "react-i18next";
-import { createStructuredSelector } from "reselect";
 import { accountScreenSelector } from "../../reducers/accounts";
 import { updateAccount } from "../../actions/accounts";
 import Button from "../../components/Button";
 import TextInput from "../../components/TextInput";
 import KeyboardView from "../../components/KeyboardView";
 import { getFontStyle } from "../../components/LText";
-
-import colors from "../../colors";
+import NavigationScrollView from "../../components/NavigationScrollView";
+import { withTheme } from "../../colors";
 
 export const MAX_ACCOUNT_NAME_LENGHT = 50;
 
 const forceInset = { bottom: "always" };
 
 type Props = {
-  navigation: NavigationScreenProp<{
-    params: {
-      account: *,
-      accountId?: string,
-      accountName?: string,
-      onAccountNameChange: (string, *) => void,
-    },
-  }>,
+  navigation: any,
+  route: { params: RouteParams },
   updateAccount: Function,
   account: Account,
+  colors: *,
+};
+
+type RouteParams = {
+  account: any,
+  accountId?: string,
+  accountName?: string,
+  onAccountNameChange: (name: string, changedAccount: Account) => void,
 };
 
 type State = {
   accountName: string,
 };
-const mapStateToProps = createStructuredSelector({
-  account: accountScreenSelector,
-});
+
+const mapStateToProps = (state, { route }) =>
+  accountScreenSelector(route)(state);
+
 const mapDispatchToProps = {
   updateAccount,
 };
@@ -49,11 +49,6 @@ const mapDispatchToProps = {
 class EditAccountName extends PureComponent<Props, State> {
   state = {
     accountName: "",
-  };
-
-  static navigationOptions = {
-    title: i18next.t("account.settings.accountName.title"),
-    headerRight: null,
   };
 
   onChangeText = (accountName: string) => {
@@ -66,7 +61,7 @@ class EditAccountName extends PureComponent<Props, State> {
     const {
       onAccountNameChange,
       account: accountFromAdd,
-    } = this.props.navigation.state.params;
+    } = this.props.route.params;
 
     const isImportingAccounts = !!accountFromAdd;
     const cleanAccountName = accountName.trim();
@@ -85,22 +80,25 @@ class EditAccountName extends PureComponent<Props, State> {
   };
 
   render() {
-    const { account } = this.props;
+    const { account, colors } = this.props;
     const { accountName } = this.state;
-    const { account: accountFromAdd } = this.props.navigation.state.params;
+    const { account: accountFromAdd } = this.props.route.params;
 
     const initialAccountName = account ? account.name : accountFromAdd.name;
 
     return (
-      <SafeAreaView style={styles.safeArea} forceInset={forceInset}>
+      <SafeAreaView
+        style={[styles.safeArea, { backgroundColor: colors.background }]}
+        forceInset={forceInset}
+      >
         <KeyboardView style={styles.body}>
-          <ScrollView
+          <NavigationScrollView
             contentContainerStyle={styles.root}
             keyboardShouldPersistTaps="handled"
           >
             <TextInput
               autoFocus
-              style={styles.textInputAS}
+              style={[styles.textInputAS, { color: colors.darkBlue }]}
               defaultValue={initialAccountName}
               returnKeyType="done"
               maxLength={MAX_ACCOUNT_NAME_LENGHT}
@@ -121,19 +119,17 @@ class EditAccountName extends PureComponent<Props, State> {
                 containerStyle={styles.buttonContainer}
               />
             </View>
-          </ScrollView>
+          </NavigationScrollView>
         </KeyboardView>
       </SafeAreaView>
     );
   }
 }
 
+// $FlowFixMe
 export default compose(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps,
-  ),
-  translate(),
+  connect(mapStateToProps, mapDispatchToProps),
+  withTheme,
 )(EditAccountName);
 
 const styles = StyleSheet.create({
@@ -142,17 +138,14 @@ const styles = StyleSheet.create({
   },
   safeArea: {
     flex: 1,
-    backgroundColor: colors.white,
   },
   body: {
     flexDirection: "column",
     flex: 1,
-    backgroundColor: colors.white,
   },
   textInputAS: {
     padding: 16,
     fontSize: 20,
-    color: colors.darkBlue,
     ...getFontStyle({ semiBold: true }),
   },
   buttonContainer: {

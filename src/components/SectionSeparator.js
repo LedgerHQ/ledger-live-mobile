@@ -1,38 +1,70 @@
 /* @flow */
 
-import React, { Component } from "react";
+import React from "react";
 import { View, StyleSheet, PixelRatio } from "react-native";
-import colors from "../colors";
-import LText from "./LText";
+import Icon from "react-native-vector-icons/dist/Ionicons";
+import { useTheme } from "@react-navigation/native";
 
 type Props = {
   thin?: boolean,
   lineColor?: string,
-  text?: React$Node,
-  textStyle?: string,
+  children?: any,
+  noMargin?: boolean,
   style?: *,
 };
 
-export default class SectionSeparator extends Component<Props> {
-  render() {
-    const { thin, lineColor, text, textStyle, style } = this.props;
-    const lineStyle = [
-      styles.line,
-      thin && styles.thin,
-      lineColor && { backgroundColor: lineColor },
-    ];
-    return (
-      <View style={[styles.root, style]}>
-        <View style={lineStyle} />
-        {text && (
-          <LText semiBold style={[styles.text, textStyle]}>
-            {text}
-          </LText>
-        )}
-        <View style={lineStyle} />
-      </View>
-    );
-  }
+export const ArrowDownCircle = ({
+  size = 24,
+  big,
+}: {
+  size?: number,
+  big?: boolean,
+}) => {
+  const { colors } = useTheme();
+  return (
+    <View
+      style={[
+        styles.circle,
+        { borderColor: colors.lightFog },
+        big ? styles.arrowBig : null,
+      ]}
+    >
+      <Icon
+        name={"ios-arrow-round-down"}
+        size={big ? 32 : size}
+        color={colors.live}
+      />
+    </View>
+  );
+};
+
+export default function SectionSeparator({
+  thin,
+  lineColor,
+  children,
+  style,
+  noMargin,
+}: Props) {
+  const { colors } = useTheme();
+  const lineStyle = [
+    styles.line,
+    { backgroundColor: colors.lightFog },
+    thin && styles.thin,
+    lineColor && { backgroundColor: lineColor },
+  ];
+  return (
+    <View style={[styles.root, style]}>
+      <View style={lineStyle} />
+      {children ? (
+        <View
+          style={noMargin ? null : { ...styles.node, color: colors.lightFog }}
+        >
+          {children}
+        </View>
+      ) : null}
+      <View style={lineStyle} />
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -40,16 +72,23 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
   },
-  text: {
+  arrowBig: { width: 36, height: 36 },
+  circle: {
+    borderWidth: 1,
+    borderRadius: 100,
+    width: 30,
+    height: 30,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  node: {
     marginHorizontal: 11,
-    color: colors.fog,
   },
   line: {
-    backgroundColor: colors.fog,
-    height: 2 / PixelRatio.get(),
+    height: 4 / PixelRatio.get(),
     flexGrow: 1,
   },
   thin: {
-    height: 1 / PixelRatio.get(),
+    height: 2 / PixelRatio.get(),
   },
 });

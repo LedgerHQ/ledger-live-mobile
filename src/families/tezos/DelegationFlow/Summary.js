@@ -1,14 +1,11 @@
 /* @flow */
 import React, { useCallback, useEffect, useState } from "react";
 import { View, StyleSheet, Animated } from "react-native";
-// $FlowFixMe
-import { SafeAreaView } from "react-navigation";
-import { connect } from "react-redux";
-import { translate, Trans } from "react-i18next";
-import type { NavigationScreenProp } from "react-navigation";
+import SafeAreaView from "react-native-safe-area-view";
+import { useSelector } from "react-redux";
+import { Trans } from "react-i18next";
 import invariant from "invariant";
 import Icon from "react-native-vector-icons/dist/Feather";
-import i18next from "i18next";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import {
   getAccountCurrency,
@@ -25,16 +22,17 @@ import {
   useRandomBaker,
 } from "@ledgerhq/live-common/lib/families/tezos/bakers";
 import whitelist from "@ledgerhq/live-common/lib/families/tezos/bakers.whitelist-default";
-import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
-import { accountAndParentScreenSelector } from "../../../reducers/accounts";
-import colors, { rgba } from "../../../colors";
+import type { AccountLike } from "@ledgerhq/live-common/lib/types";
+import { useTheme } from "@react-navigation/native";
+import { accountScreenSelector } from "../../../reducers/accounts";
+import { rgba } from "../../../colors";
+import { ScreenName } from "../../../const";
 import { TrackScreen } from "../../../analytics";
 import { useTransactionChangeFromNavigation } from "../../../logic/screenTransactionHooks";
 import Button from "../../../components/Button";
 import LText from "../../../components/LText";
 import Circle from "../../../components/Circle";
 import CurrencyIcon from "../../../components/CurrencyIcon";
-import StepHeader from "../../../components/StepHeader";
 import CurrencyUnitValue from "../../../components/CurrencyUnitValue";
 import Touchable from "../../../components/Touchable";
 import VerifyAddressDisclaimer from "../../../components/VerifyAddressDisclaimer";
@@ -44,33 +42,43 @@ import BakerImage from "../BakerImage";
 const forceInset = { bottom: "always" };
 
 type Props = {
-  account: AccountLike,
-  parentAccount: ?Account,
-  navigation: NavigationScreenProp<{
-    params: {
-      mode?: "delegate" | "undelegate",
-      accountId: string,
-      parentId?: string,
-    },
-  }>,
+  navigation: any,
+  route: { params: RouteParams },
+};
+
+type RouteParams = {
+  mode?: "delegate" | "undelegate",
+  accountId: string,
+  parentId?: string,
 };
 
 const AccountBalanceTag = ({ account }: { account: AccountLike }) => {
   const unit = getAccountUnit(account);
+  const { colors } = useTheme();
   return (
-    <View style={styles.accountBalanceTag}>
-      <LText tertiary numberOfLines={1} style={styles.accountBalanceTagText}>
+    <View
+      style={[styles.accountBalanceTag, { backgroundColor: colors.lightFog }]}
+    >
+      <LText
+        semiBold
+        numberOfLines={1}
+        style={styles.accountBalanceTagText}
+        color="smoke"
+      >
         <CurrencyUnitValue showCode unit={unit} value={account.balance} />
       </LText>
     </View>
   );
 };
 
-const ChangeDelegator = () => (
-  <Circle style={styles.changeDelegator} bg={colors.live} size={26}>
-    <Icon size={13} name="edit-2" color={colors.white} />
-  </Circle>
-);
+const ChangeDelegator = () => {
+  const { colors } = useTheme();
+  return (
+    <Circle style={styles.changeDelegator} bg={colors.live} size={26}>
+      <Icon size={13} name="edit-2" color={colors.white} />
+    </Circle>
+  );
+};
 
 const Line = ({ children }: { children: React$Node }) => (
   <View style={styles.summaryLine}>{children}</View>
@@ -83,17 +91,14 @@ const Words = ({
 }: {
   children: React$Node,
   highlighted?: boolean,
-  style?: *,
+  style?: any,
 }) => (
   <LText
     numberOfLines={1}
     semiBold={!highlighted}
     bold={highlighted}
-    style={[
-      styles.summaryWords,
-      highlighted ? styles.summaryWordsHighlighted : null,
-      style,
-    ]}
+    style={[styles.summaryWords, style]}
+    color={highlighted ? "live" : "smoke"}
   >
     {children}
   </LText>
@@ -105,20 +110,37 @@ const BakerSelection = ({
 }: {
   name: string,
   readOnly?: boolean,
-}) => (
-  <View style={styles.bakerSelection}>
-    <LText bold numberOfLines={1} style={styles.bakerSelectionText}>
-      {name}
-    </LText>
-    {readOnly ? null : (
-      <View style={styles.bakerSelectionIcon}>
-        <Icon size={16} name="edit-2" color={colors.white} />
-      </View>
-    )}
-  </View>
-);
+}) => {
+  const { colors } = useTheme();
+  return (
+    <View
+      style={[
+        styles.bakerSelection,
+        { backgroundColor: rgba(colors.live, 0.2) },
+      ]}
+    >
+      <LText
+        bold
+        numberOfLines={1}
+        style={styles.bakerSelectionText}
+        color="live"
+      >
+        {name}
+      </LText>
+      {readOnly ? null : (
+        <View
+          style={[styles.bakerSelectionIcon, { backgroundColor: colors.live }]}
+        >
+          <Icon size={16} name="edit-2" color={colors.white} />
+        </View>
+      )}
+    </View>
+  );
+};
 
-const DelegationSummary = ({ account, parentAccount, navigation }: Props) => {
+export default function DelegationSummary({ navigation, route }: Props) {
+  const { colors } = useTheme();
+  const { account, parentAccount } = useSelector(accountScreenSelector(route));
   const bakers = useBakers(whitelist);
   const randomBaker = useRandomBaker(bakers);
 
@@ -143,7 +165,7 @@ const DelegationSummary = ({ account, parentAccount, navigation }: Props) => {
 
     // make sure the mode is in sync (an account changes can reset it)
     const patch: Object = {
-      mode: navigation.getParam("mode") || "delegate",
+      mode: route.params?.mode ?? "delegate",
     };
 
     // make sure that in delegate mode, a transaction recipient is set (random pick)
@@ -167,6 +189,7 @@ const DelegationSummary = ({ account, parentAccount, navigation }: Props) => {
     parentAccount,
     setTransaction,
     transaction,
+    route.params,
   ]);
 
   const [rotateAnim] = useState(() => new Animated.Value(0));
@@ -203,11 +226,11 @@ const DelegationSummary = ({ account, parentAccount, navigation }: Props) => {
 
   const onChangeDelegator = useCallback(() => {
     rotateAnim.setValue(0);
-    navigation.navigate("DelegationSelectValidator", {
-      ...navigation.state.params,
+    navigation.navigate(ScreenName.DelegationSelectValidator, {
+      ...route.params,
       transaction,
     });
-  }, [rotateAnim, navigation, transaction]);
+  }, [rotateAnim, navigation, transaction, route.params]);
 
   const delegation = useDelegation(account);
   const addr =
@@ -221,13 +244,10 @@ const DelegationSummary = ({ account, parentAccount, navigation }: Props) => {
   const accountName = getAccountName(account);
 
   // handle any edit screen changes
-  useTransactionChangeFromNavigation({
-    navigation,
-    setTransaction,
-  });
+  useTransactionChangeFromNavigation(setTransaction);
 
   const onContinue = useCallback(async () => {
-    navigation.navigate("DelegationConnectDevice", {
+    navigation.navigate(ScreenName.DelegationSelectDevice, {
       accountId: account.id,
       parentId: parentAccount && parentAccount.id,
       transaction,
@@ -236,7 +256,10 @@ const DelegationSummary = ({ account, parentAccount, navigation }: Props) => {
   }, [status, account, parentAccount, navigation, transaction]);
 
   return (
-    <SafeAreaView style={styles.root} forceInset={forceInset}>
+    <SafeAreaView
+      style={[styles.root, { backgroundColor: colors.background }]}
+      forceInset={forceInset}
+    >
       <TrackScreen category="DelegationFlow" name="Summary" />
 
       <View style={styles.body}>
@@ -256,7 +279,10 @@ const DelegationSummary = ({ account, parentAccount, navigation }: Props) => {
                 event="DelegationFlowSummaryChangeCircleBtn"
                 onPress={onChangeDelegator}
               >
-                <Circle size={70} style={styles.bakerCircle}>
+                <Circle
+                  size={70}
+                  style={[styles.bakerCircle, { borderColor: colors.grey }]}
+                >
                   <Animated.View
                     style={{
                       transform: [
@@ -359,26 +385,11 @@ const DelegationSummary = ({ account, parentAccount, navigation }: Props) => {
       </View>
     </SafeAreaView>
   );
-};
-
-DelegationSummary.navigationOptions = {
-  headerLeft: null,
-  gesturesEnabled: false,
-  headerTitle: (
-    <StepHeader
-      title={i18next.t("delegation.summaryTitle")}
-      subtitle={i18next.t("send.stepperHeader.stepRange", {
-        currentStep: "1",
-        totalSteps: "3",
-      })}
-    />
-  ),
-};
+}
 
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: colors.white,
     flexDirection: "column",
   },
   body: {
@@ -388,7 +399,6 @@ const styles = StyleSheet.create({
   },
   bakerCircle: {
     borderWidth: 1,
-    borderColor: colors.grey,
     borderStyle: "dashed",
   },
   changeDelegator: {
@@ -401,14 +411,12 @@ const styles = StyleSheet.create({
   },
   accountBalanceTag: {
     marginTop: 8,
-    backgroundColor: colors.lightFog,
     borderRadius: 4,
     padding: 4,
     alignItems: "center",
   },
   accountBalanceTagText: {
     fontSize: 11,
-    color: colors.smoke,
   },
   accountName: {
     maxWidth: 180,
@@ -426,26 +434,19 @@ const styles = StyleSheet.create({
   summaryWords: {
     marginRight: 6,
     fontSize: 18,
-    color: colors.smoke,
-  },
-  summaryWordsHighlighted: {
-    color: colors.live,
   },
   bakerSelection: {
     flexDirection: "row",
     alignItems: "center",
     borderRadius: 4,
-    backgroundColor: rgba(colors.live, 0.2),
     height: 40,
   },
   bakerSelectionText: {
     paddingHorizontal: 8,
     fontSize: 18,
-    color: colors.live,
     maxWidth: 240,
   },
   bakerSelectionIcon: {
-    backgroundColor: colors.live,
     borderTopRightRadius: 4,
     borderBottomRightRadius: 4,
     alignItems: "center",
@@ -464,26 +465,4 @@ const styles = StyleSheet.create({
     alignSelf: "stretch",
     marginTop: 12,
   },
-  termsAndPrivacy: {
-    textAlign: "center",
-    fontSize: 14,
-    lineHeight: 22,
-  },
-  error: {
-    color: colors.alert,
-    fontSize: 12,
-    marginBottom: 5,
-  },
-  verticalConnector: {
-    position: "absolute",
-    borderLeftWidth: 2,
-    borderColor: colors.lightFog,
-    height: 20,
-    top: 60,
-    left: 16,
-  },
 });
-
-export default connect(accountAndParentScreenSelector)(
-  translate()(DelegationSummary),
-);

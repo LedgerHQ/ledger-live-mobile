@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Component, PureComponent } from "react";
+import React, { Component, memo } from "react";
 import { View } from "react-native";
 import Slider from "react-native-slider";
 import { from } from "rxjs";
@@ -9,48 +9,46 @@ import * as shape from "d3-shape";
 import * as scale from "d3-scale";
 import maxBy from "lodash/maxBy";
 import Svg, { Path } from "react-native-svg";
-import type { NavigationScreenProp } from "react-navigation";
 import { withDevice } from "@ledgerhq/live-common/lib/hw/deviceAccess";
+import { useTheme } from "@react-navigation/native";
 import LText from "../components/LText";
 import TranslatedError from "../components/TranslatedError";
-import colors from "../colors";
 
-type Props = {
+type GraphProps = {
   width: number,
   height: number,
   data: number[],
 };
 
-class Graph extends PureComponent<Props> {
-  render() {
-    const { width, height, data } = this.props;
+function GraphComponent({ width, height, data }: GraphProps) {
+  const { colors } = useTheme();
+  const points = data.map((value, index) => ({ value, index }));
+  const maxY = maxBy(data, v => v);
 
-    const points = data.map((value, index) => ({ value, index }));
-    const maxY = maxBy(data, v => v);
+  const x = scale
+    .scaleLinear()
+    .range([0, width])
+    .domain([0, data.length - 1]);
 
-    const x = scale
-      .scaleLinear()
-      .range([0, width])
-      .domain([0, data.length - 1]);
+  const y = scale
+    .scaleLinear()
+    .range([height - 10, 10])
+    .domain([0, maxY]);
 
-    const y = scale
-      .scaleLinear()
-      .range([height - 10, 10])
-      .domain([0, maxY]);
+  const line = shape
+    .line()
+    .x(d => x(d.index))
+    .y(d => y(d.value))
+    .curve(shape.curveLinear)(points);
 
-    const line = shape
-      .line()
-      .x(d => x(d.index))
-      .y(d => y(d.value))
-      .curve(shape.curveLinear)(points);
-
-    return (
-      <Svg height={height} width={width}>
-        <Path d={line} stroke={colors.live} strokeWidth={4} fill="none" />
-      </Svg>
-    );
-  }
+  return (
+    <Svg height={height} width={width}>
+      <Path d={line} stroke={colors.live} strokeWidth={4} fill="none" />
+    </Svg>
+  );
 }
+
+const Graph = memo<GraphProps>(GraphComponent);
 
 const benchmark = ({ inputAPDUSize, outputAPDUSize }) => {
   const inSize = inputAPDUSize - 5;
@@ -66,15 +64,18 @@ const benchmark = ({ inputAPDUSize, outputAPDUSize }) => {
 
 const speedStatusSize = 10;
 
+type Props = {
+  navigation: any,
+  route: { params: RouteParams },
+  device: any,
+};
+
+type RouteParams = {
+  deviceId: string,
+};
+
 class DebugBLEBenchmark extends Component<
-  {
-    navigation: NavigationScreenProp<{
-      params: {
-        deviceId: string,
-      },
-    }>,
-    device: *,
-  },
+  Props,
   {
     exchangeStats: [number, number][],
     speedStats: number[],
@@ -83,13 +84,8 @@ class DebugBLEBenchmark extends Component<
     error: ?Error,
   },
 > {
-  static navigationOptions = {
-    title: "Debug BLE Benchmark",
-  };
-
   state = {
     exchangeStats: [],
-    // $FlowFixMe
     speedStats: Array(speedStatusSize).fill(0),
     inputAPDUSize: 100,
     outputAPDUSize: 100,
@@ -116,8 +112,7 @@ class DebugBLEBenchmark extends Component<
     if (this.sub) {
       this.sub.unsubscribe();
     }
-    const { navigation } = this.props;
-    const deviceId = navigation.getParam("deviceId");
+    const deviceId = this.props.route.params?.deviceId;
     this.sub = withDevice(deviceId)(t => {
       const loop = () => {
         const input = benchmark(this.state);

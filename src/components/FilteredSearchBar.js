@@ -1,23 +1,25 @@
 // @flow
-import React, { PureComponent, Fragment } from "react";
+import React, { PureComponent } from "react";
 import { StyleSheet, View, TouchableOpacity } from "react-native";
-import { translate } from "react-i18next";
-
+import { withTranslation } from "react-i18next";
+import { compose } from "redux";
 import SearchIcon from "../icons/Search";
 import Search from "./Search";
 import TextInput from "./TextInput";
 import getFontStyle from "./LText/getFontStyle";
 
-import colors from "../colors";
 import type { T } from "../types/common";
+import { withTheme } from "../colors";
 
 type Props = {
+  initialQuery?: string,
   renderList: (list: Array<*>) => React$Node,
   renderEmptySearch: () => React$Node,
   keys?: string[],
   list: Array<*>,
   inputWrapperStyle?: *,
   t: T,
+  colors: *,
 };
 
 type State = {
@@ -36,6 +38,10 @@ class FilteredSearchBar extends PureComponent<Props, State> {
   };
 
   input = React.createRef();
+
+  componentDidMount() {
+    if (this.props.initialQuery) this.onChange(this.props.initialQuery);
+  }
 
   onFocus = () => this.setState({ focused: true });
 
@@ -59,11 +65,12 @@ class FilteredSearchBar extends PureComponent<Props, State> {
       renderEmptySearch,
       inputWrapperStyle,
       t,
+      colors,
     } = this.props;
     const { query, focused } = this.state;
 
     return (
-      <Fragment>
+      <>
         <TouchableOpacity
           onPress={query ? null : this.focusInput}
           style={[styles.wrapper, inputWrapperStyle]}
@@ -81,7 +88,7 @@ class FilteredSearchBar extends PureComponent<Props, State> {
             onInputCleared={this.clear}
             placeholder={t("common.search")}
             placeholderTextColor={colors.grey}
-            style={styles.input}
+            style={[styles.input, { color: colors.darkBlue }]}
             containerStyle={styles.inputContainer}
             value={query}
             ref={this.input}
@@ -98,7 +105,7 @@ class FilteredSearchBar extends PureComponent<Props, State> {
           render={renderList}
           renderEmptySearch={renderEmptySearch}
         />
-      </Fragment>
+      </>
     );
   }
 }
@@ -116,7 +123,6 @@ const styles = StyleSheet.create({
   input: {
     flex: 1,
     fontSize: 16,
-    color: colors.darkBlue,
     paddingVertical: 0,
     ...getFontStyle({ secondary: true, semiBold: true }),
   },
@@ -125,4 +131,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default translate()(FilteredSearchBar);
+export default compose(withTranslation(), withTheme)(FilteredSearchBar);

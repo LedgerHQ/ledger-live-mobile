@@ -3,24 +3,25 @@ import React, { Component } from "react";
 import invariant from "invariant";
 import { View, StyleSheet, Linking } from "react-native";
 import type { AccountLike, Transaction } from "@ledgerhq/live-common/lib/types";
-import { Trans, translate } from "react-i18next";
+import { Trans } from "react-i18next";
 import SummaryRow from "../../screens/SendFunds/SummaryRow";
 import LText from "../../components/LText";
-
-import colors from "../../colors";
+import { ScreenName } from "../../const";
 import ExternalLink from "../../icons/ExternalLink";
 import { urls } from "../../config/urls";
+import { withTheme } from "../../colors";
 
 type Props = {
   account: AccountLike,
   transaction: Transaction,
-  navigation: *,
+  navigation: any,
+  colors: *,
 };
 
 class BitcoinFeePerByteRow extends Component<Props> {
   openFees = () => {
     const { account, navigation, transaction } = this.props;
-    navigation.navigate("BitcoinEditFeePerByte", {
+    navigation.navigate(ScreenName.BitcoinEditFeePerByte, {
       accountId: account.id,
       transaction,
     });
@@ -31,7 +32,7 @@ class BitcoinFeePerByteRow extends Component<Props> {
   };
 
   render() {
-    const { account, transaction } = this.props;
+    const { account, transaction, colors } = this.props;
     invariant(account.type === "Account", "No SubAccounts should be here.");
 
     return (
@@ -47,12 +48,16 @@ class BitcoinFeePerByteRow extends Component<Props> {
       >
         <View style={{ alignItems: "flex-end" }}>
           <View style={styles.accountContainer}>
-            <LText style={styles.valueText} tertiary>
+            <LText style={styles.valueText} semiBold>
               {`${(transaction.feePerByte || "").toString()} `}
               <Trans i18nKey="common.satPerByte" />
             </LText>
 
-            <LText style={styles.link} onPress={this.openFees}>
+            <LText
+              style={[styles.link, { textDecorationColor: colors.live }]}
+              color="live"
+              onPress={this.openFees}
+            >
               <Trans i18nKey="common.edit" />
             </LText>
           </View>
@@ -61,6 +66,7 @@ class BitcoinFeePerByteRow extends Component<Props> {
     );
   }
 }
+
 const styles = StyleSheet.create({
   accountContainer: {
     flex: 1,
@@ -69,18 +75,16 @@ const styles = StyleSheet.create({
   summaryRowText: {
     fontSize: 16,
     textAlign: "right",
-    color: colors.darkBlue,
   },
   valueText: {
     fontSize: 16,
   },
   link: {
-    color: colors.live,
     textDecorationStyle: "solid",
     textDecorationLine: "underline",
-    textDecorationColor: colors.live,
+
     marginLeft: 8,
   },
 });
 
-export default translate()(BitcoinFeePerByteRow);
+export default withTheme(BitcoinFeePerByteRow);

@@ -1,5 +1,6 @@
 // @flow
 
+import { implicitMigration } from "@ledgerhq/live-common/lib/migrations/accounts";
 import type { Account } from "@ledgerhq/live-common/lib/types";
 import accountModel from "../logic/accountModel";
 
@@ -8,10 +9,15 @@ export const importStore = (state: *) => ({
   state: {
     active:
       state && Array.isArray(state.active)
-        ? state.active.map(accountModel.decode)
+        ? implicitMigration(state.active.map(accountModel.decode))
         : [],
   },
 });
+export const reorderAccounts = (comparator: *) => (dispatch: *) =>
+  dispatch({
+    type: "REORDER_ACCOUNTS",
+    payload: { comparator },
+  });
 
 export const importAccounts = ({
   items,
