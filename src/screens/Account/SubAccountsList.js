@@ -301,10 +301,7 @@ export default function SubAccountsList({
     [onAccountPress, colors],
   );
 
-  if (
-    !isToken &&
-    subAccounts.length === 0
-  ) {
+  if (!isToken && subAccounts.length === 0) {
     return null;
   }
 
