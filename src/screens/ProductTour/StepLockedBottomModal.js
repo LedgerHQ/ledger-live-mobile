@@ -1,9 +1,9 @@
 // @flow
 
-import React, { PureComponent } from "react";
+import React, { memo } from "react";
 import { View, StyleSheet } from "react-native";
 import { Trans } from "react-i18next";
-import colors from "../../colors";
+import { useTheme } from "@react-navigation/native";
 import BottomModal from "../../components/BottomModal";
 import type { Props as BottomProps } from "../../components/BottomModal";
 import LText from "../../components/LText";
@@ -17,41 +17,37 @@ type Props = BottomProps & {
   onPress: Function,
 };
 
-class ConfirmationModal extends PureComponent<Props> {
-  render() {
-    const { isOpened, onClose, onPress, ...rest } = this.props;
-    return (
-      <BottomModal
-        id="ptsteplockedmodal"
-        isOpened={isOpened}
-        onClose={onClose}
-        style={styles.confirmationModal}
-        {...rest}
-      >
-        {isOpened ? (
-          <TrackScreen category="PT Step Locked Bottom Modal" />
-        ) : null}
-        <View style={styles.icon}>
-          <Lock size={24} color={colors.live} />
-        </View>
-        <LText secondary semiBold style={styles.title}>
-          <Trans i18nKey="producttour.steplockedbottommodal.title" />
-        </LText>
-        <LText style={styles.description}>
-          <Trans i18nKey="producttour.steplockedbottommodal.description" />
-        </LText>
-        <View style={styles.confirmationFooter}>
-          <Button
-            event="step locked button"
-            containerStyle={styles.confirmationButton}
-            type="primary"
-            title={<Trans i18nKey="producttour.steplockedbottommodal.cta" />}
-            onPress={onPress}
-          />
-        </View>
-      </BottomModal>
-    );
-  }
+function ConfirmationModal({ isOpened, onClose, onPress, ...rest }: Props) {
+  const { colors } = useTheme();
+  return (
+    <BottomModal
+      id="ptsteplockedmodal"
+      isOpened={isOpened}
+      onClose={onClose}
+      style={styles.confirmationModal}
+      {...rest}
+    >
+      {isOpened ? <TrackScreen category="PT Step Locked Bottom Modal" /> : null}
+      <View style={[styles.icon, { backgroundColor: colors.lightLive }]}>
+        <Lock size={24} color={colors.live} />
+      </View>
+      <LText secondary semiBold style={styles.title}>
+        <Trans i18nKey="producttour.steplockedbottommodal.title" />
+      </LText>
+      <LText style={styles.description} color="smoke">
+        <Trans i18nKey="producttour.steplockedbottommodal.description" />
+      </LText>
+      <View style={styles.confirmationFooter}>
+        <Button
+          event="step locked button"
+          containerStyle={styles.confirmationButton}
+          type="primary"
+          title={<Trans i18nKey="producttour.steplockedbottommodal.cta" />}
+          onPress={onPress}
+        />
+      </View>
+    </BottomModal>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -63,13 +59,11 @@ const styles = StyleSheet.create({
   title: {
     textAlign: "center",
     fontSize: 18,
-    color: colors.darkBlue,
   },
   description: {
     marginVertical: 32,
     textAlign: "center",
     fontSize: 14,
-    color: colors.smoke,
   },
   confirmationFooter: {
     justifyContent: "flex-end",
@@ -82,7 +76,6 @@ const styles = StyleSheet.create({
   },
   icon: {
     alignSelf: "center",
-    backgroundColor: colors.lightLive,
     width: 56,
     borderRadius: 28,
     height: 56,
@@ -92,4 +85,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ConfirmationModal;
+export default memo<Props>(ConfirmationModal);

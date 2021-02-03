@@ -1,16 +1,16 @@
 // @flow
-import React from "react";
+import React, { useMemo } from "react";
 import { Platform } from "react-native";
 import {
   createStackNavigator,
   HeaderBackButton,
 } from "@react-navigation/stack";
+import { useTheme } from "@react-navigation/native";
 import { ScreenName, NavigatorName } from "../../const";
 import ProductTourMenu from "../../screens/ProductTour/ProductTourMenu";
 import ProductTourStepStart from "../../screens/ProductTour/ProductTourStepStart";
-import { closableStackNavigatorConfig } from "../../navigation/navigatorConfig";
+import { getStackNavigatorConfig } from "../../navigation/navigatorConfig";
 import { navigate } from "../../rootnavigation";
-import colors from "../../colors";
 
 export default function ProductTourNavigator() {
   const headerStyle = {
@@ -20,11 +20,17 @@ export default function ProductTourNavigator() {
     elevation: 0,
   };
 
+  const { colors } = useTheme();
+  const stackNavigationConfig = useMemo(
+    () => getStackNavigatorConfig(colors, true),
+    [colors],
+  );
+
   return (
     <Stack.Navigator
       headerMode="float"
       screenOptions={{
-        ...closableStackNavigatorConfig,
+        ...stackNavigationConfig,
         gestureEnabled: Platform.OS === "ios",
         headerStyle,
         headerTitleStyle: { color: colors.white },

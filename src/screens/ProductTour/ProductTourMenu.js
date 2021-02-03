@@ -10,12 +10,11 @@ import {
   Image,
   ScrollView,
 } from "react-native";
-import { useFocusEffect } from "@react-navigation/native";
+import { useFocusEffect, useTheme } from "@react-navigation/native";
 import SafeAreaView from "react-native-safe-area-view";
 import LText from "../../components/LText";
 import Check from "../../icons/Check";
 import Lock from "../../icons/Lock";
-import colors from "../../colors";
 import { context, STEPS, setStep, completeStep } from "./Provider";
 import { ScreenName } from "../../const";
 import StepLockedBottomModal from "./StepLockedBottomModal";
@@ -166,64 +165,73 @@ const Step = ({
   goTo,
   step,
   setStepLockedModal,
-}: stepProps) => (
-  <TouchableOpacity
-    style={[
-      styles.step,
-      isComplete(step)
-        ? styles.stepComplete
-        : isAccessible(step)
-        ? styles.stepAccessible
-        : styles.stepLocked,
-    ]}
-    // eslint-disable-next-line consistent-return
-    onPress={() => {
-      if (!isAccessible(step)) {
-        return setStepLockedModal(true);
-      }
-      goTo(step);
-    }}
-    onLongPress={() => completeStep(step)}
-    delayLongPress={2000}
-    disabled={isComplete(step)}
-  >
-    <View style={styles.stepHeader}>
-      {!isComplete(step) ? (
-        <LText semiBold style={styles.stepNumber}>
-          {Object.keys(STEPS).indexOf(step) + 1}.
-        </LText>
-      ) : null}
-      {isComplete(step) ? (
-        <View style={styles.checkContainer}>
-          <View
-            style={[styles.checkboxContainer, styles.checkboxContainerChecked]}
-          >
-            <Check size={10} color={colors.ledgerGreen} />
-          </View>
-          <LText bold style={styles.completedText}>
-            <Trans i18nKey="producttour.menu.complete" />
-          </LText>
-        </View>
-      ) : null}
-      {!isAccessible(step) && !isComplete(step) ? (
-        <View style={styles.lockContainer}>
-          <Lock size={12} color={colors.white} />
-        </View>
-      ) : null}
-    </View>
-    <LText semiBold style={styles.stepTitle}>
-      <Trans i18nKey={stepTitles[step][isComplete(step) ? 1 : 0]} />
-    </LText>
-    <Image
-      source={stepTitles[step][2].files[isComplete(step) ? 1 : 0]}
+}: stepProps) => {
+  const { colors } = useTheme();
+  return (
+    <TouchableOpacity
       style={[
-        styles.image,
-        stepTitles[step][2].size,
-        stepTitles[step][2].offset,
+        styles.step,
+        isComplete(step)
+          ? { backgroundColor: colors.ledgerGreen }
+          : isAccessible(step)
+          ? { backgroundColor: colors.live }
+          : { opacity: 0.4, backgroundColor: colors.live },
       ]}
-    />
-  </TouchableOpacity>
-);
+      // eslint-disable-next-line consistent-return
+      onPress={() => {
+        if (!isAccessible(step)) {
+          return setStepLockedModal(true);
+        }
+        goTo(step);
+      }}
+      onLongPress={() => completeStep(step)}
+      delayLongPress={2000}
+      disabled={isComplete(step)}
+    >
+      <View style={styles.stepHeader}>
+        {!isComplete(step) ? (
+          <LText semiBold style={[styles.stepNumber, styles.textWhite]}>
+            {Object.keys(STEPS).indexOf(step) + 1}.
+          </LText>
+        ) : null}
+        {isComplete(step) ? (
+          <View style={styles.checkContainer}>
+            <View
+              style={[
+                styles.checkboxContainer,
+                {
+                  borderColor: colors.card,
+                  backgroundColor: colors.card,
+                },
+              ]}
+            >
+              <Check size={10} color={colors.ledgerGreen} />
+            </View>
+            <LText bold style={[styles.completedText, styles.textWhite]}>
+              <Trans i18nKey="producttour.menu.complete" />
+            </LText>
+          </View>
+        ) : null}
+        {!isAccessible(step) && !isComplete(step) ? (
+          <View style={styles.lockContainer}>
+            <Lock size={12} color={colors.white} />
+          </View>
+        ) : null}
+      </View>
+      <LText semiBold style={[styles.stepTitle, styles.textWhite]}>
+        <Trans i18nKey={stepTitles[step][isComplete(step) ? 1 : 0]} />
+      </LText>
+      <Image
+        source={stepTitles[step][2].files[isComplete(step) ? 1 : 0]}
+        style={[
+          styles.image,
+          stepTitles[step][2].size,
+          stepTitles[step][2].offset,
+        ]}
+      />
+    </TouchableOpacity>
+  );
+};
 
 type Props = {
   navigation: any,
@@ -232,6 +240,7 @@ type Props = {
 let to;
 
 const ProductTourMenu = ({ navigation }: Props) => {
+  const { colors } = useTheme();
   const ptContext = useContext(context);
   const [stepLockedModal, setStepLockedModal] = useState(false);
 
@@ -256,8 +265,8 @@ const ProductTourMenu = ({ navigation }: Props) => {
 
   return (
     <>
-      <View style={styles.header}>
-        <LText secondary style={styles.title} bold>
+      <View style={[styles.header, { backgroundColor: colors.live }]}>
+        <LText secondary style={[styles.title, styles.textWhite]} bold>
           <Trans
             i18nKey={
               ptContext.completedSteps.length === Object.keys(STEPS).length
@@ -267,8 +276,8 @@ const ProductTourMenu = ({ navigation }: Props) => {
           />
         </LText>
         <ProductTourProgressBar />
-        <View style={styles.badge}>
-          <LText style={styles.badgeTitle} bold>
+        <View style={[styles.badge, { backgroundColor: colors.ledgerGreen }]}>
+          <LText style={[styles.badgeTitle, styles.textWhite]} bold>
             <Trans
               i18nKey={
                 ptContext.completedSteps.length <= 1
@@ -315,11 +324,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     paddingVertical: 4,
     borderRadius: 4,
-    backgroundColor: colors.ledgerGreen,
+
     alignSelf: "flex-start",
   },
   badgeTitle: {
-    color: colors.white,
     fontSize: 10,
   },
   image: {
@@ -336,17 +344,11 @@ const styles = StyleSheet.create({
     width: 16,
     borderRadius: 16,
     borderWidth: 1,
-    borderColor: colors.white,
-    backgroundColor: colors.live,
     alignItems: "center",
     justifyContent: "center",
     marginRight: 4,
   },
-  checkboxContainerChecked: {
-    backgroundColor: colors.white,
-  },
   completedText: {
-    color: colors.white,
     fontSize: 8,
   },
   lockContainer: {},
@@ -373,35 +375,24 @@ const styles = StyleSheet.create({
     paddingBottom: 80,
     overflow: "hidden",
   },
-  stepComplete: {
-    backgroundColor: colors.ledgerGreen,
-  },
-  stepAccessible: {
-    backgroundColor: colors.live,
-  },
-  stepLocked: {
-    backgroundColor: colors.live,
-    opacity: 0.4,
-  },
   stepTitle: {
-    color: colors.white,
     fontSize: 18,
   },
   stepNumber: {
-    color: colors.white,
     fontSize: 16,
     marginRight: 11,
   },
   header: {
-    backgroundColor: colors.live,
     paddingHorizontal: 16,
     paddingTop: 20,
     paddingBottom: 43,
   },
   title: {
     fontSize: 28,
-    color: colors.white,
     marginBottom: 16,
+  },
+  textWhite: {
+    color: "#FFF",
   },
 });
 

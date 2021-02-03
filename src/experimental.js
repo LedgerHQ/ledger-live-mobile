@@ -40,13 +40,6 @@ export const experimentalFeatures: Feature[] = [
     description: "Show developer and testnet apps in the Manager.",
   },
   {
-    type: "toggle",
-    name: "WALLETCONNECT",
-    title: "Wallet connect",
-    description:
-      "Link your Ledger Live Mobile decentralized applications compatible with WalletConnect",
-  },
-  {
     type: "integer",
     name: "FORCE_PROVIDER",
     title: "Manager provider",
@@ -89,7 +82,7 @@ export const isReadOnly = (key: EnvName) => key in Config;
 
 export const enabledExperimentalFeatures = (): string[] =>
   // $FlowFixMe
-  experimentalFeatures.map(e => e.name).filter(k => isEnvDefault(k));
+  experimentalFeatures.map(e => e.name).filter(k => !isEnvDefault(k));
 
 (async () => {
   const envs = await getStorageEnv();

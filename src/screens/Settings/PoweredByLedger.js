@@ -1,17 +1,18 @@
 /* @flow */
+import { useTheme } from "@react-navigation/native";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { View, StyleSheet } from "react-native";
 import LText from "../../components/LText";
-import colors from "../../colors";
 import LedgerLogoRec from "../../icons/LedgerLogoRec";
 
 export default function PoweredByLedger() {
   const { t } = useTranslation();
+  const { colors } = useTheme();
 
   return (
     <View style={styles.container}>
-      <LText secondary semiBold style={styles.textStyle}>
+      <LText secondary semiBold style={styles.textStyle} color="grey">
         {t("common.poweredBy")}
       </LText>
       <View style={styles.iconStyle}>
@@ -29,7 +30,6 @@ const styles = StyleSheet.create({
   },
   textStyle: {
     justifyContent: "center",
-    color: colors.grey,
     fontSize: 12,
   },
   iconStyle: {

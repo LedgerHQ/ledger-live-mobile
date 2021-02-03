@@ -3,7 +3,7 @@
 import React, { useContext } from "react";
 import { View, StyleSheet, Image } from "react-native";
 import { Trans } from "react-i18next";
-import colors from "../../colors";
+import { useTheme } from "@react-navigation/native";
 import BottomModal from "../../components/BottomModal";
 import type { Props as BMProps } from "../../components/BottomModal";
 import LText from "../../components/LText";
@@ -98,6 +98,7 @@ const ProductTourStepFinishedBottomModal = ({
   onPress,
   ...rest
 }: Props) => {
+  const { colors } = useTheme();
   const ptContext = useContext(_ptContext);
 
   return (
@@ -105,8 +106,11 @@ const ProductTourStepFinishedBottomModal = ({
       id="ProductTourStepFinishedBottomModal"
       isOpened={isOpened}
       onClose={onClose}
-      style={styles.confirmationModal}
-      containerStyle={styles.container}
+      style={[
+        styles.confirmationModal,
+        { backgroundColor: colors.ledgerGreen },
+      ]}
+      containerStyle={{ backgroundColor: colors.ledgerGreen }}
       {...rest}
     >
       {isOpened && ptContext.currentStep ? (
@@ -125,10 +129,10 @@ const ProductTourStepFinishedBottomModal = ({
               ]}
             />
           </View>
-          <LText bold style={styles.title}>
+          <LText bold style={[styles.title, styles.textWhite]}>
             <Trans i18nKey="producttour.finishedmodal.title" />
           </LText>
-          <LText style={styles.description}>
+          <LText style={[styles.description, styles.textWhite]}>
             <Trans i18nKey={stepTitles[ptContext.currentStep][0]} />
           </LText>
           <View style={styles.confirmationFooter}>
@@ -153,21 +157,15 @@ const styles = StyleSheet.create({
     paddingVertical: 24,
     paddingTop: 74,
     paddingHorizontal: 16,
-    backgroundColor: colors.ledgerGreen,
-  },
-  container: {
-    backgroundColor: colors.ledgerGreen,
   },
   title: {
     textAlign: "center",
     fontSize: 28,
-    color: colors.white,
   },
   description: {
     marginVertical: 32,
     textAlign: "center",
     fontSize: 14,
-    color: colors.white,
   },
   confirmationFooter: {
     justifyContent: "flex-end",
@@ -178,16 +176,6 @@ const styles = StyleSheet.create({
   confirmationLastButton: {
     marginTop: 16,
   },
-  icon: {
-    alignSelf: "center",
-    backgroundColor: colors.lightOrange,
-    width: 56,
-    borderRadius: 28,
-    height: 56,
-    alignItems: "center",
-    justifyContent: "center",
-    marginBottom: 18,
-  },
   imageContainer: {
     alignItems: "center",
     height: 0,
@@ -196,6 +184,9 @@ const styles = StyleSheet.create({
   image: {
     position: "relative",
     top: -92 - 74,
+  },
+  textWhite: {
+    color: "#FFF",
   },
 });
 

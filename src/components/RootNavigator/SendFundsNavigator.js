@@ -1,9 +1,10 @@
 // @flow
-import React, { useContext } from "react";
+import React, { useContext, useMemo } from "react";
 import {
   createStackNavigator,
   HeaderBackButton,
 } from "@react-navigation/stack";
+import { useTheme } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
 import { ScreenName, NavigatorName } from "../../const";
 import SendFundsMain from "../../screens/SendFunds/01-SelectAccount";
@@ -14,21 +15,25 @@ import SelectDevice from "../../screens/SelectDevice";
 import SendConnectDevice from "../../screens/ConnectDevice";
 import SendValidationSuccess from "../../screens/SendFunds/07-ValidationSuccess";
 import SendValidationError from "../../screens/SendFunds/07-ValidationError";
-import { closableStackNavigatorConfig } from "../../navigation/navigatorConfig";
+import { getStackNavigatorConfig } from "../../navigation/navigatorConfig";
 import StepHeader from "../StepHeader";
 import { context as _ptContext } from "../../screens/ProductTour/Provider";
 import { navigate } from "../../rootnavigation";
-import colors from "../../colors";
 
 const totalSteps = "6";
 
 export default function SendFundsNavigator() {
   const { t } = useTranslation();
   const ptContext = useContext(_ptContext);
+  const { colors } = useTheme();
+  const stackNavigationConfig = useMemo(
+    () => getStackNavigatorConfig(colors, true),
+    [colors],
+  );
   return (
     <Stack.Navigator
       screenOptions={{
-        ...closableStackNavigatorConfig,
+        ...stackNavigationConfig,
         headerStyle:
           ptContext.currentStep === "SEND_COINS"
             ? { backgroundColor: colors.live }

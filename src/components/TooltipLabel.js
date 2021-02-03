@@ -1,19 +1,20 @@
 // @flow
 import React, { useCallback, useState } from "react";
 import { TouchableOpacity, StyleSheet } from "react-native";
-
+import { useTheme } from "@react-navigation/native";
+import Icon from "react-native-vector-icons/dist/FontAwesome";
 import LText from "./LText";
-import colors from "../colors";
 import BottomModal from "./BottomModal";
-import Info from "../icons/Info";
 
 type Props = {
   label: React$Node,
   tooltip: React$Node,
+  color: string,
   style?: *,
 };
 
-const TooltipLabel = ({ label, tooltip, style }: Props) => {
+const TooltipLabel = ({ label, tooltip, color = "grey", style }: Props) => {
+  const { colors } = useTheme();
   const [isOpened, setIsOpened] = useState();
   const open = useCallback(() => setIsOpened(true), []);
   const close = useCallback(() => setIsOpened(false), []);
@@ -21,8 +22,10 @@ const TooltipLabel = ({ label, tooltip, style }: Props) => {
   return (
     <>
       <TouchableOpacity style={styles.root} onPress={open}>
-        <LText style={{ ...styles.label, ...style }}>{label}</LText>
-        <Info size={13} color={colors.grey} />
+        <LText style={{ ...styles.label, ...style }} color="grey">
+          {label}
+        </LText>
+        <Icon size={13} color={colors[color]} name={"info-circle"} />
       </TouchableOpacity>
       <BottomModal isOpened={isOpened} onClose={close} style={styles.modal}>
         <LText semiBold style={styles.tooltip}>
@@ -40,7 +43,6 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 13,
-    color: colors.grey,
     marginRight: 6,
   },
   modal: { padding: 16 },

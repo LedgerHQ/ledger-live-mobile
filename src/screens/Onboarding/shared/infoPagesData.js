@@ -2,7 +2,6 @@
 import React from "react";
 import { Platform } from "react-native";
 import { Trans } from "react-i18next";
-import colors from "../../../colors";
 import type { OnboardingScene } from "../../../components/OnboardingStepperView";
 
 import setupDeviceStartImage from "../assets/getStarted.png";
@@ -90,56 +89,56 @@ const pinCodeInfoModalProps = [
         label: (
           <Trans i18nKey="onboarding.stepSetupDevice.pinCodeSetup.infoModal.bullets.0.label" />
         ),
-        color: colors.success,
+        color: "success",
       },
       {
         Icon: Check,
         label: (
           <Trans i18nKey="onboarding.stepSetupDevice.pinCodeSetup.infoModal.bullets.1.label" />
         ),
-        color: colors.success,
+        color: "success",
       },
       {
         Icon: Check,
         label: (
           <Trans i18nKey="onboarding.stepSetupDevice.pinCodeSetup.infoModal.bullets.2.label" />
         ),
-        color: colors.success,
+        color: "success",
       },
       {
         Icon: Check,
         label: (
           <Trans i18nKey="onboarding.stepSetupDevice.pinCodeSetup.infoModal.bullets.3.label" />
         ),
-        color: colors.success,
+        color: "success",
       },
       {
         Icon: Check,
         label: (
           <Trans i18nKey="onboarding.stepSetupDevice.pinCodeSetup.infoModal.bullets.4.label" />
         ),
-        color: colors.success,
+        color: "success",
       },
       {
         Icon: Close,
         label: (
           <Trans i18nKey="onboarding.stepSetupDevice.pinCodeSetup.infoModal.bullets.5.label" />
         ),
-        color: colors.alert,
+        color: "alert",
       },
       {
         Icon: Close,
         label: (
           <Trans i18nKey="onboarding.stepSetupDevice.pinCodeSetup.infoModal.bullets.6.label" />
         ),
-        color: colors.alert,
+        color: "alert",
       },
       {
         Icon: Close,
         label: (
           <Trans i18nKey="onboarding.stepSetupDevice.pinCodeSetup.infoModal.bullets.7.label" />
         ),
-        color: colors.alert,
+        color: "alert",
       },
     ],
   },
@@ -360,8 +359,8 @@ const pinCodeScenes = deviceModelId => [
             <>
               <Trans i18nKey="onboarding.stepSetupDevice.pinCodeSetup.bullets.0.label">
                 {""}
-                <NanoDeviceCheckIcon size={12} color={colors.live} />
-                <NanoDeviceCancelIcon size={12} color={colors.live} />
+                <NanoDeviceCheckIcon size={12} />
+                <NanoDeviceCancelIcon size={12} />
                 {""}
               </Trans>
             </>
@@ -483,6 +482,7 @@ const getSetupDeviceScenes: (
       ),
       descs: [
         <Trans i18nKey="onboarding.stepSetupDevice.recoveryPhrase.desc" />,
+        <Trans i18nKey="onboarding.stepSetupDevice.recoveryPhrase.desc_1" />,
       ],
       ctaText: (
         <Trans i18nKey="onboarding.stepSetupDevice.recoveryPhrase.cta" />
@@ -514,9 +514,10 @@ const getSetupDeviceScenes: (
           title: (
             <Trans i18nKey="onboarding.stepSetupDevice.recoveryPhraseSetup.bullets.1.title" />
           ),
-          label: (
-            <Trans i18nKey="onboarding.stepSetupDevice.recoveryPhraseSetup.bullets.1.label" />
-          ),
+          labels: [
+            <Trans i18nKey="onboarding.stepSetupDevice.recoveryPhraseSetup.bullets.1.label" />,
+            <Trans i18nKey="onboarding.stepSetupDevice.recoveryPhraseSetup.bullets.1.label_1" />,
+          ],
         },
       ],
       ctaText: (
@@ -571,14 +572,14 @@ const getSetupDeviceScenes: (
       bullets: [
         {
           Icon: Warning,
-          color: colors.alert,
+          color: "alert",
           label: (
             <Trans i18nKey="onboarding.stepSetupDevice.hideRecoveryPhrase.bullets.0.label" />
           ),
         },
         {
           Icon: EyeCrossed,
-          color: colors.alert,
+          color: "alert",
           label: (
             <Trans i18nKey="onboarding.stepSetupDevice.hideRecoveryPhrase.bullets.1.label" />
           ),
@@ -793,7 +794,7 @@ const importAccountsScenes = [
           label: (
             <Trans i18nKey="onboarding.stepImportAccounts.bullets.0.label">
               {""}
-              <LText semiBold />
+              <LText semiBold style={{ color: "#FFF" }} />
               {""}
             </Trans>
           ),

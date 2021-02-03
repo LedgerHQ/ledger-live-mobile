@@ -9,13 +9,13 @@ import {
   getTransactionExplorer,
 } from "@ledgerhq/live-common/lib/explorers";
 import { getMainAccount } from "@ledgerhq/live-common/lib/account";
+import { useTheme } from "@react-navigation/native";
 import byFamiliesOperationDetails from "../../generated/operationDetails";
 import { accountScreenSelector } from "../../reducers/accounts";
 import { TrackScreen } from "../../analytics";
 import NavigationScrollView from "../../components/NavigationScrollView";
 import Footer from "./Footer";
 import Content from "./Content";
-import colors from "../../colors";
 import Close from "../../icons/Close";
 import ArrowLeft from "../../icons/ArrowLeft";
 
@@ -24,6 +24,7 @@ const forceInset = { bottom: "always" };
 type RouteParams = {
   accountId: string,
   operation: Operation,
+  disableAllLinks?: Boolean,
 };
 
 type Props = {
@@ -31,23 +32,35 @@ type Props = {
   route: { params: RouteParams },
 };
 
-export const BackButton = ({ navigation }: { navigation: Navigation }) => (
-  <TouchableOpacity style={styles.buttons} onPress={() => navigation.goBack()}>
-    <ArrowLeft size={18} color={colors.grey} />
-  </TouchableOpacity>
-);
+export const BackButton = ({ navigation }: { navigation: * }) => {
+  const { colors } = useTheme();
 
-export const CloseButton = ({ navigation }: { navigation: Navigation }) => (
-  <TouchableOpacity
-    // $FlowFixMe
-    onPress={() => navigation.popToTop()}
-    style={styles.buttons}
-  >
-    <Close size={18} color={colors.grey} />
-  </TouchableOpacity>
-);
+  return (
+    <TouchableOpacity
+      style={styles.buttons}
+      onPress={() => navigation.goBack()}
+    >
+      <ArrowLeft size={18} color={colors.grey} />
+    </TouchableOpacity>
+  );
+};
+
+export const CloseButton = ({ navigation }: { navigation: Navigation }) => {
+  const { colors } = useTheme();
+
+  return (
+    <TouchableOpacity
+      // $FlowFixMe
+      onPress={() => navigation.popToTop()}
+      style={styles.buttons}
+    >
+      <Close size={18} color={colors.grey} />
+    </TouchableOpacity>
+  );
+};
 
 export default function OperationDetails({ route }: Props) {
+  const { colors } = useTheme();
   const { account, parentAccount } = useSelector(accountScreenSelector(route));
   if (!account) return null;
   const operation = route.params?.operation;
@@ -63,7 +76,10 @@ export default function OperationDetails({ route }: Props) {
     specific.getURLWhatIsThis(operation);
 
   return (
-    <SafeAreaView style={styles.container} forceInset={forceInset}>
+    <SafeAreaView
+      style={[styles.container, { backgroundColor: colors.background }]}
+      forceInset={forceInset}
+    >
       <TrackScreen category="OperationDetails" />
       <NavigationScrollView>
         <View style={styles.root}>
@@ -71,6 +87,7 @@ export default function OperationDetails({ route }: Props) {
             account={account}
             parentAccount={parentAccount}
             operation={operation}
+            disableAllLinks={route.params?.disableAllLinks}
           />
         </View>
       </NavigationScrollView>
@@ -82,7 +99,6 @@ export default function OperationDetails({ route }: Props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.white,
   },
   root: {
     paddingTop: 24,

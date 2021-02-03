@@ -6,24 +6,29 @@ import { createStructuredSelector } from "reselect";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { Trans } from "react-i18next";
+import { NotEnoughBalance } from "@ledgerhq/errors";
 import type {
   Account,
   AccountLikeArray,
 } from "@ledgerhq/live-common/lib/types";
 
-import { isAccountEmpty } from "@ledgerhq/live-common/lib/account";
+import {
+  isAccountEmpty,
+  getAccountSpendableBalance,
+} from "@ledgerhq/live-common/lib/account";
 import {
   flattenAccountsEnforceHideEmptyTokenSelector,
   accountsSelector,
 } from "../../reducers/accounts";
 import withEnv from "../../logic/withEnv";
-import colors from "../../colors";
+import { withTheme } from "../../colors";
 import { ScreenName } from "../../const";
 import { TrackScreen } from "../../analytics";
 import LText from "../../components/LText";
 import FilteredSearchBar from "../../components/FilteredSearchBar";
 import AccountCard from "../../components/AccountCard";
 import KeyboardView from "../../components/KeyboardView";
+import GenericErrorBottomModal from "../../components/GenericErrorBottomModal";
 import { formatSearchResults } from "../../helpers/formatAccountSearchResults";
 import type { SearchResult } from "../../helpers/formatAccountSearchResults";
 
@@ -35,11 +40,18 @@ type Props = {
   allAccounts: AccountLikeArray,
   navigation: any,
   route: { params?: { currency?: string } },
+  colors: *,
 };
 
-type State = {};
+type State = {
+  error: *,
+};
 
 class SendFundsSelectAccount extends Component<Props, State> {
+  state = {
+    error: null,
+  };
+
   renderList = items => {
     const { accounts } = this.props;
     const formatedList = formatSearchResults(items, accounts);
@@ -58,20 +70,34 @@ class SendFundsSelectAccount extends Component<Props, State> {
 
   renderItem = ({ item: result }: { item: SearchResult }) => {
     const { account, match } = result;
+    const balance = getAccountSpendableBalance(account);
     return (
       <View
-        style={account.type === "Account" ? undefined : styles.tokenCardStyle}
+        style={
+          account.type === "Account"
+            ? undefined
+            : [
+                styles.tokenCardStyle,
+                { borderLeftColor: this.props.colors.fog },
+              ]
+        }
       >
         <AccountCard
           disabled={!match}
           account={account}
           style={styles.cardStyle}
           onPress={() => {
-            this.props.navigation.navigate(ScreenName.SendSelectRecipient, {
-              accountId: account.id,
-              parentId:
-                account.type !== "Account" ? account.parentId : undefined,
-            });
+            if (balance.lte(0)) {
+              this.setState({
+                error: new NotEnoughBalance(),
+              });
+            } else {
+              this.props.navigation.navigate(ScreenName.SendSelectRecipient, {
+                accountId: account.id,
+                parentId:
+                  account.type !== "Account" ? account.parentId : undefined,
+              });
+            }
           }}
         />
       </View>
@@ -80,7 +106,7 @@ class SendFundsSelectAccount extends Component<Props, State> {
 
   renderEmptySearch = () => (
     <View style={styles.emptyResults}>
-      <LText style={styles.emptyText}>
+      <LText style={styles.emptyText} color="fog">
         <Trans i18nKey="transfer.receive.noAccount" />
       </LText>
     </View>
@@ -89,11 +115,14 @@ class SendFundsSelectAccount extends Component<Props, State> {
   keyExtractor = item => item.account.id;
 
   render() {
-    const { allAccounts, route } = this.props;
+    const { allAccounts, route, colors } = this.props;
     const { params } = route;
     const initialCurrencySelected = params?.currency;
     return (
-      <SafeAreaView style={styles.root} forceInset={forceInset}>
+      <SafeAreaView
+        style={[styles.root, { backgroundColor: colors.background }]}
+        forceInset={forceInset}
+      >
         <TrackScreen category="SendFunds" name="SelectAccount" />
         <KeyboardView style={{ flex: 1 }}>
           <View style={styles.searchContainer}>
@@ -107,6 +136,12 @@ class SendFundsSelectAccount extends Component<Props, State> {
             />
           </View>
         </KeyboardView>
+        {this.state.error ? (
+          <GenericErrorBottomModal
+            error={this.state.error}
+            onClose={() => this.setState({ error: null })}
+          />
+        ) : null}
       </SafeAreaView>
     );
   }
@@ -120,13 +155,11 @@ const mapStateToProps = createStructuredSelector({
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: colors.white,
   },
   tokenCardStyle: {
     marginLeft: 26,
     paddingLeft: 7,
     borderLeftWidth: 1,
-    borderLeftColor: colors.fog,
   },
   searchContainer: {
     paddingTop: 16,
@@ -143,7 +176,6 @@ const styles = StyleSheet.create({
   },
   emptyText: {
     fontSize: 16,
-    color: colors.fog,
   },
   padding: {
     paddingHorizontal: 16,
@@ -157,4 +189,5 @@ const styles = StyleSheet.create({
 export default compose(
   connect(mapStateToProps),
   withEnv("HIDE_EMPTY_TOKEN_ACCOUNTS"),
+  withTheme,
 )(SendFundsSelectAccount);

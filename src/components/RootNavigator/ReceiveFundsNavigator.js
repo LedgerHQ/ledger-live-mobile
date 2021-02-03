@@ -1,31 +1,36 @@
 // @flow
-import React, { useContext } from "react";
+import React, { useContext, useMemo } from "react";
 import { Platform } from "react-native";
 import {
   createStackNavigator,
   HeaderBackButton,
 } from "@react-navigation/stack";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "@react-navigation/native";
 import { ScreenName, NavigatorName } from "../../const";
 import ReceiveConfirmation from "../../screens/ReceiveFunds/03-Confirmation";
 import ReceiveConnectDevice from "../../screens/ReceiveFunds/02-ConnectDevice";
 import ReceiveSelectAccount from "../../screens/ReceiveFunds/01-SelectAccount";
-import { closableStackNavigatorConfig } from "../../navigation/navigatorConfig";
+import { getStackNavigatorConfig } from "../../navigation/navigatorConfig";
 import StepHeader from "../StepHeader";
 import { context as _ptContext } from "../../screens/ProductTour/Provider";
 import { navigate } from "../../rootnavigation";
-import colors from "../../colors";
 
 const totalSteps = "3";
 
 export default function ReceiveFundsNavigator() {
   const { t } = useTranslation();
   const ptContext = useContext(_ptContext);
+  const { colors } = useTheme();
+  const stackNavigationConfig = useMemo(
+    () => getStackNavigatorConfig(colors, true),
+    [colors],
+  );
   return (
     <Stack.Navigator
       headerMode="float"
       screenOptions={{
-        ...closableStackNavigatorConfig,
+        ...stackNavigationConfig,
         gestureEnabled: Platform.OS === "ios",
         headerStyle:
           ptContext.currentStep === "RECEIVE_COINS"

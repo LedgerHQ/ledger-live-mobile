@@ -4,20 +4,27 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 import IconAD from "react-native-vector-icons/dist/AntDesign";
 import { operationStatusList } from "@ledgerhq/live-common/lib/exchange/swap";
+import { useTheme } from "@react-navigation/native";
 import IconSwap from "../../icons/Swap";
-import colors, { rgba } from "../../colors";
+import { rgba } from "../../colors";
 
-export const getStatusColor = (status: string) => {
+export const getStatusColor = (
+  status: string,
+  colors: *,
+  colorKey?: boolean = false,
+) => {
+  let key = "grey";
+
   if (operationStatusList.pending.includes(status)) {
-    return colors.grey;
+    key = status === "hold" ? "orange" : "wallet";
   }
   if (operationStatusList.finishedOK.includes(status)) {
-    return colors.green;
+    key = "green";
   }
   if (operationStatusList.finishedKO.includes(status)) {
-    return colors.alert;
+    key = "alert";
   }
-  return colors.grey;
+  return colorKey ? key : colors[key];
 };
 
 const SwapStatusIndicator = ({
@@ -27,7 +34,8 @@ const SwapStatusIndicator = ({
   status: string,
   small?: boolean,
 }) => {
-  const statusColor = getStatusColor(status);
+  const { colors } = useTheme();
+  const statusColor = getStatusColor(status, colors);
   const sizeDependantStyles = {
     backgroundColor: rgba(statusColor, 0.1),
     width: small ? 38 : 54,
@@ -38,11 +46,19 @@ const SwapStatusIndicator = ({
     <View style={[styles.status, sizeDependantStyles]}>
       <IconSwap color={statusColor} size={small ? 16 : 26} />
       {operationStatusList.pending.includes(status) ? (
-        <View style={styles.pending}>
+        <View
+          style={[
+            styles.pending,
+            {
+              backgroundColor: colors.white,
+              borderColor: colors.white,
+            },
+          ]}
+        >
           <IconAD
             size={small ? 10 : 14}
             name="clockcircleo"
-            color={rgba(colors.darkBlue, 0.5)}
+            color={rgba(colors.darkBlue, 0.6)}
           />
         </View>
       ) : null}
@@ -62,8 +78,6 @@ const styles = StyleSheet.create({
     bottom: 0,
     right: 0,
     borderWidth: 2,
-    backgroundColor: "#ffffff",
-    borderColor: "#ffffff",
     borderRadius: 12,
   },
 });

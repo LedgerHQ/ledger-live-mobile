@@ -5,8 +5,8 @@ import { Trans } from "react-i18next";
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { useSelector } from "react-redux";
+import { useTheme } from "@react-navigation/native";
 import { ScreenName, NavigatorName } from "../../const";
-import colors from "../../colors";
 import { TrackScreen } from "../../analytics";
 import LText from "../../components/LText";
 import Button from "../../components/Button";
@@ -25,6 +25,7 @@ type Props = {
 type RouteParams = {};
 
 export default function Contervalues({ navigation }: Props) {
+  const { colors } = useTheme();
   const ptContext = useContext(_ptContext);
   const supportedCV = useSelector(counterValueCurrencySelector);
 
@@ -47,7 +48,7 @@ export default function Contervalues({ navigation }: Props) {
   };
 
   return (
-    <SafeAreaView style={styles.root}>
+    <SafeAreaView style={[styles.root, { backgroundColor: colors.background }]}>
       <ProductTourStepFinishedBottomModal
         isOpened={ptContext.currentStep === "CUSTOMIZE_APP" && done}
         onPress={() => goToProductTourMenu()}
@@ -59,7 +60,7 @@ export default function Contervalues({ navigation }: Props) {
           <Trans i18nKey="customizeapp.countervalues.description" />
         </LText>
         <TouchableOpacity
-          style={styles.select}
+          style={[styles.select, { borderColor: colors.live }]}
           onPress={() => {
             navigation.navigate(ScreenName.CustomizeAppCountervalueSettings);
           }}
@@ -94,7 +95,6 @@ const styles = StyleSheet.create({
   root: {
     flex: 1,
     paddingHorizontal: 20,
-    backgroundColor: colors.white,
   },
   content: {
     flex: 1,
@@ -102,7 +102,6 @@ const styles = StyleSheet.create({
   description: {
     marginTop: 24,
     fontSize: 13,
-    color: colors.darkBlue,
     marginBottom: 16,
   },
   select: {
@@ -113,11 +112,9 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     borderRadius: 4,
     borderWidth: 1,
-    borderColor: colors.live,
   },
   selectValue: {
     fontSize: 18,
-    color: colors.darkBlue,
   },
   button: {
     marginBottom: 16,

@@ -8,19 +8,20 @@ import type {
   CryptoCurrency,
   TokenCurrency,
 } from "@ledgerhq/live-common/lib/types";
+import { useTheme } from "@react-navigation/native";
 import SettingsRow from "../../../components/SettingsRow";
 import { showToken } from "../../../actions/settings";
 import { blacklistedTokenIdsSelector } from "../../../reducers/settings";
 import { cryptoCurrenciesSelector } from "../../../reducers/accounts";
 import LText from "../../../components/LText";
 import CurrencyIcon from "../../../components/CurrencyIcon";
-import colors from "../../../colors";
 import { TrackScreen } from "../../../analytics";
 import HideEmptyTokenAccountsRow from "./HideEmptyTokenAccountsRow";
 import Close from "../../../icons/Close";
 import { ScreenName } from "../../../const";
 
 export default function AccountsSettings({ navigation }: { navigation: any }) {
+  const { colors } = useTheme();
   const { t } = useTranslation();
   const blacklistedTokenIds = useSelector(blacklistedTokenIdsSelector);
   const currencies = useSelector(cryptoCurrenciesSelector);
@@ -33,12 +34,15 @@ export default function AccountsSettings({ navigation }: { navigation: any }) {
       section: { parentCurrency: CryptoCurrency },
     }) => (
       <View style={styles.section}>
-        <LText primary style={styles.sectionTitle}>
+        <LText
+          primary
+          style={[styles.sectionTitle, { backgroundColor: colors.card }]}
+        >
           {parentCurrency.name}
         </LText>
       </View>
     ),
-    [],
+    [colors],
   );
 
   const renderItem = useCallback(
@@ -49,7 +53,7 @@ export default function AccountsSettings({ navigation }: { navigation: any }) {
         </View>
         <LText style={styles.rowTitle}>{token.name}</LText>
         <TouchableOpacity
-          onPress={() => showToken(dispatch(token.id))}
+          onPress={() => dispatch(showToken(token.id))}
           style={styles.cta}
           hitSlop={hitSlop}
         >
@@ -57,7 +61,7 @@ export default function AccountsSettings({ navigation }: { navigation: any }) {
         </TouchableOpacity>
       </View>
     ),
-    [dispatch],
+    [colors, dispatch],
   );
 
   const keyExtractor = useCallback(token => token.id, []);
@@ -115,7 +119,7 @@ export default function AccountsSettings({ navigation }: { navigation: any }) {
     <SectionList
       ListHeaderComponent={renderHeader}
       stickySectionHeadersEnabled
-      style={styles.root}
+      style={[styles.root, { backgroundColor: colors.background }]}
       renderItem={renderItem}
       renderSectionHeader={renderSectionHeader}
       keyExtractor={keyExtractor}
@@ -127,16 +131,13 @@ export default function AccountsSettings({ navigation }: { navigation: any }) {
 const styles = StyleSheet.create({
   root: {
     paddingHorizontal: 16,
-    backgroundColor: "white",
     marginBottom: 2,
     flex: 1,
   },
   section: {
     flex: 1,
-    backgroundColor: "white",
   },
   sectionTitle: {
-    backgroundColor: colors.lightGrey,
     borderRadius: 4,
     fontSize: 10,
     letterSpacing: 1,

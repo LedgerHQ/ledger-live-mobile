@@ -6,8 +6,8 @@ import * as Keychain from "react-native-keychain";
 import { useDispatch } from "react-redux";
 import { StyleSheet, View, Platform } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
+import { useTheme } from "@react-navigation/native";
 import { ScreenName } from "../../const";
-import colors from "../../colors";
 import { TrackScreen } from "../../analytics";
 import LText from "../../components/LText";
 import Button from "../../components/Button";
@@ -23,6 +23,7 @@ type Props = {
 type RouteParams = {};
 
 export default function AddAccountsSuccess({ navigation }: Props) {
+  const { colors } = useTheme();
   const [secure1, setSecure1] = useState(true);
   const [secure2, setSecure2] = useState(true);
   const [pass1, setPass1] = useState("");
@@ -64,7 +65,7 @@ export default function AddAccountsSuccess({ navigation }: Props) {
   });
 
   return (
-    <SafeAreaView style={styles.root}>
+    <SafeAreaView style={[styles.root, { backgroundColor: colors.background }]}>
       <View style={styles.content}>
         <TrackScreen category="CustomizeApp" name="Password" />
         <LText secondary style={styles.description}>
@@ -83,10 +84,8 @@ export default function AddAccountsSuccess({ navigation }: Props) {
         />
         <LText
           secondary
-          style={[
-            styles.inputtitle,
-            pass2 && pass1 !== pass2 ? styles.invalid : {},
-          ]}
+          style={[styles.inputtitle]}
+          color={pass2 && pass1 !== pass2 ? "alert" : "darkBlue"}
         >
           <Trans i18nKey="customizeapp.password.confirmPassword" />
         </LText>
@@ -124,7 +123,6 @@ const styles = StyleSheet.create({
   root: {
     flex: 1,
     paddingHorizontal: 20,
-    backgroundColor: colors.white,
   },
   content: {
     flex: 1,
@@ -133,15 +131,10 @@ const styles = StyleSheet.create({
     marginBottom: 8,
     marginTop: 24,
     fontSize: 13,
-    color: colors.darkBlue,
-  },
-  invalid: {
-    color: colors.alert,
   },
   description: {
     marginTop: 24,
     fontSize: 13,
-    color: colors.darkBlue,
   },
   button: {
     marginBottom: 16,

@@ -1,10 +1,11 @@
 // @flow
 
-import React, { useContext } from "react";
+import React, { useContext, useMemo } from "react";
 import {
   createStackNavigator,
   HeaderBackButton,
 } from "@react-navigation/stack";
+import { useTheme } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
 import { ScreenName, NavigatorName } from "../../const";
 import SwapSummary from "../../screens/Swap/Form/Summary";
@@ -16,19 +17,25 @@ import { BackButton } from "../../screens/OperationDetails";
 import SwapPendingOperation from "../../screens/Swap/Form/PendingOperation";
 import SwapFormSelectCrypto from "../../screens/Swap/Form/SelectAccount/01-SelectCrypto";
 import SwapFormSelectAccount from "../../screens/Swap/Form/SelectAccount/02-SelectAccount";
-import { closableStackNavigatorConfig } from "../../navigation/navigatorConfig";
+import { getStackNavigatorConfig } from "../../navigation/navigatorConfig";
 import StepHeader from "../StepHeader";
 import { navigate } from "../../rootnavigation";
-import colors from "../../colors";
 import { context as _ptContext } from "../../screens/ProductTour/Provider";
+
+import styles from "../../navigation/styles";
 
 export default function SwapNavigator() {
   const { t } = useTranslation();
+  const { colors } = useTheme();
+  const stackNavigationConfig = useMemo(
+    () => getStackNavigatorConfig(colors, true),
+    [colors],
+  );
   const ptContext = useContext(_ptContext);
   return (
     <Stack.Navigator
       screenOptions={{
-        ...closableStackNavigatorConfig,
+        ...stackNavigationConfig,
         headerStyle:
           ptContext.currentStep === "SWAP_COINS"
             ? { backgroundColor: colors.live }
@@ -48,6 +55,7 @@ export default function SwapNavigator() {
         name={ScreenName.SwapFormOrHistory}
         component={SwapFormOrHistory}
         options={{
+          headerStyle: styles.headerNoShadow,
           headerTitle: ({ style }: { style: * }) => (
             <StepHeader
               title={t("transfer.swap.landing.header")}

@@ -1,9 +1,10 @@
 // @flow
-import React, { useContext } from "react";
+import React, { useContext, useMemo } from "react";
 import {
   createStackNavigator,
   HeaderBackButton,
 } from "@react-navigation/stack";
+import { useTheme } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
 import { ScreenName, NavigatorName } from "../../const";
 import AddAccountsSelectCrypto from "../../screens/AddAccounts/01-SelectCrypto";
@@ -13,23 +14,26 @@ import AddAccountsAccounts from "../../screens/AddAccounts/03-Accounts";
 import AddAccountsSuccess from "../../screens/AddAccounts/04-Success";
 import AddAccountsHeaderRightClose from "../../screens/AddAccounts/AddAccountsHeaderRightClose";
 import EditAccountName from "../../screens/AccountSettings/EditAccountName";
-import { closableStackNavigatorConfig } from "../../navigation/navigatorConfig";
+import { getStackNavigatorConfig } from "../../navigation/navigatorConfig";
 import StepHeader from "../StepHeader";
 import { context as _ptContext } from "../../screens/ProductTour/Provider";
 import { navigate } from "../../rootnavigation";
-import colors from "../../colors";
 
 type Route = {
-  params: ?{ currency: * },
+  params: ?{ currency: *, token?: * },
 };
 
 const totalSteps = "3";
 
 export default function AddAccountsNavigator({ route }: { route: Route }) {
+  const { colors } = useTheme();
   const { t } = useTranslation();
   const ptContext = useContext(_ptContext);
   const currency = route && route.params && route.params.currency;
   const token = route && route.params && route.params.token;
+  const stackNavConfig = useMemo(() => getStackNavigatorConfig(colors), [
+    colors,
+  ]);
   return (
     <Stack.Navigator
       headerMode="float"
@@ -41,7 +45,7 @@ export default function AddAccountsNavigator({ route }: { route: Route }) {
           : ScreenName.AddAccountsSelectCrypto
       }
       screenOptions={{
-        ...closableStackNavigatorConfig,
+        ...stackNavConfig,
         headerStyle:
           ptContext.currentStep === "CREATE_ACCOUNT"
             ? { backgroundColor: colors.live }

@@ -5,42 +5,39 @@ import { View, StyleSheet, TouchableOpacity, Platform } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import Swiper from "react-native-swiper";
 import { Trans } from "react-i18next";
+import { useTheme } from "@react-navigation/native";
 import { setCarouselVisibility } from "../../actions/settings";
 import { carouselVisibilitySelector } from "../../reducers/settings";
 import LedgerAcademy from "./slides/LedgerAcademy";
+import Valentine from "./slides/Valentine";
 import Card from "../Card";
 import LText from "../LText";
 import Button from "../Button";
 import BuyCrypto from "./slides/BuyCrypto";
 import BackupPack from "./slides/BackupPack";
-import StakeCosmos from "./slides/StakeCosmos";
-import StakeAlgo from "./slides/StakeAlgo";
-import BlackFriday from "./slides/BlackFriday";
+// import BlackFriday from "./slides/BlackFriday";
 // import Sell from "./slides/Sell";
 // import Vote from "./slides/Vote";
-import Lending from "./slides/Lending";
+// import Lending from "./slides/Lending";
 import Swap from "./slides/Swap";
 import IconClose from "../../icons/Close";
-import colors from "../../colors";
 
 export const getDefaultSlides = () => [
+  // {
+  //   id: "blackfriday",
+  //   Component: () => <BlackFriday />,
+  //   start: new Date("1 Nov 2020 00:01:00 PST"),
+  //   end: new Date("30 Nov 2020 23:59:00 PST"),
+  // },
   {
-    id: "blackfriday",
-    Component: () => <BlackFriday />,
-    start: new Date("1 Nov 2020 00:01:00 PST"),
-    end: new Date("30 Nov 2020 23:59:00 PST"),
-  },
-  {
-    id: "Lending",
-    Component: () => <Lending />,
+    id: "valentine",
+    Component: () => <Valentine />,
+    start: new Date("2 Feb 2021 00:01:00 PST"),
+    end: new Date("15 Feb 2021 23:59:00 PST"),
   },
   {
     id: "swap",
     Component: () => <Swap />,
-  },
-  {
-    id: "backupPack",
-    Component: () => <BackupPack />,
   },
   {
     id: "academy",
@@ -51,13 +48,15 @@ export const getDefaultSlides = () => [
     Component: () => <BuyCrypto />,
   },
   {
-    id: "stakeCosmos",
-    Component: () => <StakeCosmos />,
+    id: "backupPack",
+    Component: () => <BackupPack />,
   },
+  /*
   {
-    id: "stakeAlgo",
-    Component: () => <StakeAlgo />,
+    id: "Lending",
+    Component: () => <Lending />,
   },
+  */
   // TODO enable when ready
   // {
   //   id: "sell",
@@ -76,9 +75,10 @@ const hitSlop = {
   bottom: 16,
 };
 
-export const CAROUSEL_NONCE: number = 2;
+export const CAROUSEL_NONCE: number = 3;
 
 const Carousel = () => {
+  const { colors } = useTheme();
   const dispatch = useDispatch();
   const hidden = useSelector(carouselVisibilitySelector);
   const [showDismissConfirmation, setShowDismissConfirmation] = useState(false);
@@ -144,8 +144,11 @@ const Carousel = () => {
             autoplay
             autoplayTimeout={5}
             showsButtons={false}
-            dotStyle={styles.bullet}
-            activeDotStyle={[styles.bullet, { opacity: 1 }]}
+            dotStyle={[styles.bullet, { backgroundColor: colors.fog }]}
+            activeDotStyle={[
+              styles.bullet,
+              { backgroundColor: colors.fog, opacity: 1 },
+            ]}
           >
             {slides.map(({ id, Component }) => (
               <Component key={id} />
@@ -174,7 +177,6 @@ const styles = StyleSheet.create({
     height: 5,
     width: 5,
     borderRadius: 5,
-    backgroundColor: colors.fog,
     opacity: 0.5,
     margin: 4,
     marginBottom: -20,

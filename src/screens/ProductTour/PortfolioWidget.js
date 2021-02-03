@@ -3,17 +3,18 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Trans } from "react-i18next";
 import { View, StyleSheet, TouchableOpacity, Image } from "react-native";
+import { useTheme } from "@react-navigation/native";
 import LText from "../../components/LText";
 import Button from "../../components/Button";
 import ArrowRight from "../../icons/ArrowRight";
 import Close from "../../icons/Close";
-import colors from "../../colors";
 import { context, STEPS, dismiss } from "./Provider";
 import ProductTourProgressBar from "./ProductTourProgressBar";
 import { navigate } from "../../rootnavigation";
 import { NavigatorName, ScreenName } from "../../const";
 
 const PortfolioWidget = () => {
+  const { colors } = useTheme();
   const ptContext = useContext(context);
   const [started, setStarted] = useState(!!ptContext.completedSteps.length);
 
@@ -26,17 +27,23 @@ const PortfolioWidget = () => {
   }
 
   return (
-    <View style={[styles.root, ...(!started ? [styles.rootNotStarted] : [])]}>
+    <View
+      style={[
+        styles.root,
+        ...(!started ? [styles.rootNotStarted] : []),
+        { backgroundColor: colors.live },
+      ]}
+    >
       {!started ? (
         <>
           <Image
             source={require("../../images/producttourwidget.png")}
             style={styles.image}
           />
-          <LText style={styles.title} bold>
+          <LText style={styles.title} color="white" bold>
             <Trans i18nKey="producttour.widget.title" />
           </LText>
-          <LText style={styles.title2} bold>
+          <LText style={styles.title2} color="white" bold>
             <Trans i18nKey="producttour.widget.title2" />
           </LText>
         </>
@@ -52,10 +59,10 @@ const PortfolioWidget = () => {
               <Close size={16} color={colors.white} />
             </TouchableOpacity>
           ) : null}
-          <LText style={styles.title} bold>
+          <LText style={styles.title} color="white" bold>
             <Trans i18nKey="producttour.widget.startedtitle" />
           </LText>
-          <LText secondary style={styles.startedtitle2} bold>
+          <LText secondary style={styles.startedtitle2} color="white" bold>
             <Trans
               i18nKey={
                 ptContext.completedSteps.length === Object.keys(STEPS).length
@@ -109,7 +116,6 @@ const PortfolioWidget = () => {
 const styles = StyleSheet.create({
   root: {
     marginHorizontal: 16,
-    backgroundColor: colors.live,
     paddingTop: 67,
     paddingLeft: 16,
     paddingRight: 16,
@@ -121,17 +127,14 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 10,
-    color: colors.white,
   },
   title2: {
     fontSize: 28,
-    color: colors.white,
     marginTop: 8,
     marginBottom: 24,
   },
   startedtitle2: {
     fontSize: 22,
-    color: colors.white,
     marginTop: 8,
     marginBottom: 24,
   },

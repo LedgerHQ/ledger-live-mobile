@@ -20,8 +20,8 @@ import type { AccountLike } from "@ledgerhq/live-common/lib/types";
 import { createAction } from "@ledgerhq/live-common/lib/hw/actions/app";
 import connectApp from "@ledgerhq/live-common/lib/hw/connectApp";
 
+import { useTheme } from "@react-navigation/native";
 import { accountScreenSelector } from "../../reducers/accounts";
-import colors from "../../colors";
 import { ScreenName } from "../../const";
 import { TrackScreen } from "../../analytics";
 import SelectDevice from "../../components/SelectDevice";
@@ -57,6 +57,8 @@ export default function ConnectDevice({ navigation, route }: Props) {
   const { account, parentAccount } = useSelector(accountScreenSelector(route));
   const readOnlyModeEnabled = useSelector(readOnlyModeEnabledSelector);
   const [device, setDevice] = useState<?Device>();
+
+  const { colors } = useTheme();
 
   useEffect(() => {
     const readOnlyTitle = "transfer.receive.titleReadOnly";
@@ -134,7 +136,15 @@ export default function ConnectDevice({ navigation, route }: Props) {
   }
 
   return (
-    <SafeAreaView style={styles.root} forceInset={forceInset}>
+    <SafeAreaView
+      style={[
+        styles.root,
+        {
+          backgroundColor: colors.background,
+        },
+      ]}
+      forceInset={forceInset}
+    >
       <TrackScreen category="ReceiveFunds" name="ConnectDevice" />
       <NavigationScrollView
         style={styles.scroll}
@@ -143,7 +153,14 @@ export default function ConnectDevice({ navigation, route }: Props) {
         <SelectDevice onSelect={setDevice} />
       </NavigationScrollView>
       {ptContext.currentStep !== "RECEIVE_COINS" ? (
-        <View style={styles.footer}>
+        <View
+          style={[
+            styles.footer,
+            {
+              borderTopColor: colors.lightFog,
+            },
+          ]}
+        >
           <Button
             event="ReceiveWithoutDevice"
             type="lightSecondary"
@@ -167,7 +184,6 @@ export default function ConnectDevice({ navigation, route }: Props) {
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: colors.white,
   },
   bodyError: {
     flex: 1,
@@ -186,6 +202,5 @@ const styles = StyleSheet.create({
   footer: {
     padding: 4,
     borderTopWidth: 1,
-    borderTopColor: colors.lightFog,
   },
 });

@@ -2,19 +2,16 @@
 
 import React, { useContext } from "react";
 import { Trans } from "react-i18next";
-import { View, StyleSheet, Image } from "react-native";
-import SafeAreaView from "react-native-safe-area-view";
+import { View, StyleSheet, Image, SafeAreaView } from "react-native";
 import { useHeaderHeight } from "@react-navigation/stack";
+import { useTheme } from "@react-navigation/native";
 import LText from "../../components/LText";
 import Button from "../../components/Button";
 import AnimatedSvgBackground from "../../components/AnimatedSvgBackground";
-import colors from "../../colors";
 import { context } from "./Provider";
 import { NavigatorName } from "../../const";
 import { navigate } from "../../rootnavigation";
 import ArrowRight from "../../icons/ArrowRight";
-
-const forceInset = { bottom: "always" };
 
 const stepInfos = {
   INSTALL_CRYPTO: [
@@ -100,6 +97,7 @@ const stepInfos = {
 };
 
 const ProductTourStepStart = () => {
+  const { colors } = useTheme();
   const ptContext = useContext(context);
   const headerHeight = useHeaderHeight();
 
@@ -146,7 +144,7 @@ const ProductTourStepStart = () => {
   };
 
   return (
-    <SafeAreaView forceInset={forceInset} style={styles.root}>
+    <SafeAreaView style={[styles.root, { backgroundColor: colors.live }]}>
       {ptContext.currentStep ? (
         <>
           <View style={{ flex: 1 }}>
@@ -185,18 +183,18 @@ const ProductTourStepStart = () => {
 const styles = StyleSheet.create({
   root: {
     paddingHorizontal: 16,
-    backgroundColor: colors.live,
+
     flex: 1,
     paddingBottom: 24,
   },
   title: {
     fontSize: 32,
-    color: colors.white,
+    color: "#FFF",
     marginBottom: 8,
   },
   details: {
     fontSize: 16,
-    color: colors.white,
+    color: "#FFF",
   },
   image: {
     alignSelf: "center",

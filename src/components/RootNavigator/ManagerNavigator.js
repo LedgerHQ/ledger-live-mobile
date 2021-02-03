@@ -1,24 +1,23 @@
 // @flow
-import React, { useContext } from "react";
+import React, { useContext, useMemo } from "react";
 import { TouchableOpacity, View, StyleSheet } from "react-native";
+import { useTheme } from "@react-navigation/native";
 import {
   createStackNavigator,
   HeaderBackButton,
 } from "@react-navigation/stack";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { ScreenName, NavigatorName } from "../../const";
+import { NavigatorName, ScreenName } from "../../const";
 import { hasAvailableUpdateSelector } from "../../reducers/settings";
 import Manager from "../../screens/Manager";
 import ManagerMain from "../../screens/Manager/Manager";
-import OnboardingNavigator from "./OnboardingNavigator";
-import { stackNavigatorConfig } from "../../navigation/navigatorConfig";
+import { getStackNavigatorConfig } from "../../navigation/navigatorConfig";
 import styles from "../../navigation/styles";
 import ReadOnlyTab from "../ReadOnlyTab";
 import ManagerIcon from "../../icons/Manager";
 import NanoXIcon from "../../icons/TabNanoX";
 import { useIsNavLocked } from "./CustomBlockRouterNavigator";
-import colors from "../../colors";
 import { context as _ptContext } from "../../screens/ProductTour/Provider";
 import { navigate } from "../../rootnavigation";
 import HeaderRightClose from "../HeaderRightClose";
@@ -29,21 +28,28 @@ const ManagerIconWithUpate = ({
 }: {
   color: string,
   size: number,
-}) => (
-  <View style={stylesLocal.iconWrapper}>
-    <ManagerIcon size={size} color={color} />
-    <View style={stylesLocal.blueDot} />
-  </View>
-);
+}) => {
+  const { colors } = useTheme();
+  return (
+    <View style={stylesLocal.iconWrapper}>
+      <ManagerIcon size={size} color={color} />
+      <View style={[stylesLocal.blueDot, { backgroundColor: colors.live }]} />
+    </View>
+  );
+};
 
 export default function ManagerNavigator() {
   const { t } = useTranslation();
   const ptContext = useContext(_ptContext);
+  const { colors } = useTheme();
+  const stackNavConfig = useMemo(() => getStackNavigatorConfig(colors), [
+    colors,
+  ]);
 
   return (
     <Stack.Navigator
       screenOptions={{
-        ...stackNavigatorConfig,
+        ...stackNavConfig,
         headerStyle:
           ptContext.currentStep === "INSTALL_CRYPTO"
             ? { backgroundColor: colors.live }
@@ -108,11 +114,6 @@ export default function ManagerNavigator() {
               : t("manager.appList.title"),
         }}
       />
-      <Stack.Screen
-        name={NavigatorName.Onboarding}
-        component={OnboardingNavigator}
-        options={{ headerShown: false }}
-      />
     </Stack.Navigator>
   );
 }
@@ -147,7 +148,6 @@ const stylesLocal = StyleSheet.create({
     position: "absolute",
     width: 6,
     height: 6,
-    backgroundColor: colors.live,
     borderRadius: 4,
   },
   iconWrapper: {

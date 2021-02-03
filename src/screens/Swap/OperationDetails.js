@@ -15,13 +15,15 @@ import {
 import Icon from "react-native-vector-icons/dist/Ionicons";
 import { Trans } from "react-i18next";
 import { useSelector } from "react-redux";
+import { useTheme } from "@react-navigation/native";
+import Config from "react-native-config";
 import { flattenAccountsSelector } from "../../reducers/accounts";
 import CurrencyUnitValue from "../../components/CurrencyUnitValue";
 import LText from "../../components/LText";
 import SectionSeparator from "../../components/SectionSeparator";
+import TooltipLabel from "../../components/TooltipLabel";
 import CurrencyIcon from "../../components/CurrencyIcon";
 import SwapStatusIndicator, { getStatusColor } from "./SwapStatusIndicator";
-import colors from "../../colors";
 import { urls } from "../../config/urls";
 import { localeIds } from "../../languages";
 import ExternalLink from "../../icons/ExternalLink";
@@ -45,29 +47,31 @@ const OperationDetails = ({ route }: Props) => {
     operation,
   } = swapOperation;
 
+  const { colors } = useTheme();
   const accounts = useSelector(flattenAccountsSelector);
   const fromAccount = accounts.find(a => a.id === swapOperation.fromAccount.id);
   const swap = fromAccount.swapHistory.find(s => s.swapId === swapId);
-  const status = swap.status;
+  const status = Config.DEBUG_SWAP_STATUS || swap.status;
 
   const fromCurrency = getAccountCurrency(fromAccount);
   const toCurrency = getAccountCurrency(toAccount);
-  const statusColor = getStatusColor(status);
-  const dotStyles = { backgroundColor: statusColor };
-  const textColorStyles = { color: statusColor };
+  const statusColorKey = getStatusColor(status, colors, true);
+  const dotStyles = { backgroundColor: colors[statusColorKey] };
+  const textColorStyles = { color: colors[statusColorKey] };
+  const statusHasTooltip = ["refunded", "hold", "failed"].includes(status);
 
   const openProvider = useCallback(() => {
     Linking.openURL(urls.swap.providers[provider].main);
   }, [provider]);
 
   return (
-    <View style={styles.root}>
+    <View style={[styles.root, { backgroundColor: colors.background }]}>
       <ScrollView
         style={styles.scrollView}
         contentContainerStyle={styles.scrollViewContent}
       >
         <SwapStatusIndicator status={status} />
-        <LText tertiary style={styles.fromAmount}>
+        <LText tertiary style={styles.fromAmount} color="grey">
           <CurrencyUnitValue
             alwaysShowSign
             showCode
@@ -78,7 +82,7 @@ const OperationDetails = ({ route }: Props) => {
         <View style={styles.arrow}>
           <Icon name={"ios-arrow-round-forward"} size={30} color={colors.fog} />
         </View>
-        <LText tertiary style={styles.toAmount}>
+        <LText tertiary style={styles.toAmount} color={statusColorKey}>
           <CurrencyUnitValue
             alwaysShowSign
             showCode
@@ -88,28 +92,41 @@ const OperationDetails = ({ route }: Props) => {
         </LText>
         <View style={styles.statusTextWrapper}>
           <View style={[styles.statusDot, dotStyles]} />
-          <LText style={[styles.statusText, textColorStyles]}>{status}</LText>
+          {statusHasTooltip ? (
+            <TooltipLabel
+              label={status}
+              style={{ ...styles.statusText, ...textColorStyles }}
+              color={statusColorKey}
+              tooltip={
+                <Trans
+                  i18nKey={`transfer.swap.operationDetails.statusTooltips.${status}`}
+                />
+              }
+            />
+          ) : (
+            <LText style={[styles.statusText, textColorStyles]}>{status}</LText>
+          )}
         </View>
         <View style={styles.fieldsWrapper}>
-          <LText style={styles.label}>
+          <LText style={styles.label} color="grey">
             <Trans i18nKey={"transfer.swap.operationDetails.swapId"} />
           </LText>
           <LText selectable style={styles.value}>
             {swapId}
           </LText>
-          <LText style={styles.label}>
+          <LText style={styles.label} color="grey">
             <Trans i18nKey={"transfer.swap.operationDetails.provider"} />
           </LText>
           <TouchableOpacity
             style={styles.providerLinkContainer}
             onPress={openProvider}
           >
-            <LText semiBold style={styles.providerLink}>
+            <LText semiBold style={styles.providerLink} color="live">
               {provider}
             </LText>
             <ExternalLink size={11} color={colors.live} />
           </TouchableOpacity>
-          <LText style={styles.label}>
+          <LText style={styles.label} color="grey">
             <Trans i18nKey={"transfer.swap.operationDetails.date"} />
           </LText>
           <LText style={styles.value}>
@@ -124,7 +141,7 @@ const OperationDetails = ({ route }: Props) => {
 
           <SectionSeparator style={{ marginBottom: 32 }} />
 
-          <LText style={styles.label}>
+          <LText style={styles.label} color="grey">
             <Trans i18nKey={"transfer.swap.operationDetails.from"} />
           </LText>
           <View style={styles.account}>
@@ -138,7 +155,7 @@ const OperationDetails = ({ route }: Props) => {
               {getAccountName(fromAccount)}
             </LText>
           </View>
-          <LText style={styles.label}>
+          <LText style={styles.label} color="grey">
             <Trans i18nKey={"transfer.swap.operationDetails.fromAmount"} />
           </LText>
           <LText style={styles.value}>
@@ -151,7 +168,7 @@ const OperationDetails = ({ route }: Props) => {
 
           <SectionSeparator style={{ marginBottom: 32 }} />
 
-          <LText style={styles.label}>
+          <LText style={styles.label} color="grey">
             <Trans i18nKey={"transfer.swap.operationDetails.to"} />
           </LText>
           <View style={styles.account}>
@@ -165,7 +182,7 @@ const OperationDetails = ({ route }: Props) => {
               {getAccountName(toAccount)}
             </LText>
           </View>
-          <LText style={styles.label}>
+          <LText style={styles.label} color="grey">
             <Trans i18nKey={"transfer.swap.operationDetails.toAmount"} />
           </LText>
           <LText style={styles.value}>
@@ -184,8 +201,6 @@ const OperationDetails = ({ route }: Props) => {
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-
-    backgroundColor: colors.white,
   },
   scrollView: {
     flex: 1,
@@ -200,13 +215,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginBottom: 32,
   },
-
   providerLink: {
     textTransform: "capitalize",
     fontSize: 13,
     lineHeight: 22,
     textAlign: "center",
-    color: colors.live,
+
     marginRight: 6,
   },
   status: {
@@ -242,13 +256,11 @@ const styles = StyleSheet.create({
   toAmount: {
     fontSize: 20,
     lineHeight: 24,
-    color: colors.green,
   },
   fromAmount: {
     marginTop: 24,
     fontSize: 20,
     lineHeight: 24,
-    color: colors.grey,
   },
   fieldsWrapper: {
     paddingTop: 32,
@@ -257,13 +269,12 @@ const styles = StyleSheet.create({
   },
   label: {
     marginBottom: 8,
-    color: colors.grey,
+
     fontSize: 14,
     lineHeight: 19,
   },
   value: {
     marginBottom: 32,
-    color: colors.darkBlue,
     fontSize: 14,
     lineHeight: 19,
   },
@@ -275,7 +286,6 @@ const styles = StyleSheet.create({
   accountName: {
     flex: 1,
     marginLeft: 8,
-    color: colors.darkBlue,
   },
 });
 

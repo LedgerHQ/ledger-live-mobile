@@ -10,11 +10,10 @@ import {
   TouchableOpacity,
 } from "react-native";
 import type { ViewStyleProp } from "react-native/Libraries/StyleSheet/StyleSheet";
+import { useTheme } from "@react-navigation/native";
 import LText from "./LText";
 import ButtonUseTouchable from "../context/ButtonUseTouchable";
 import { track } from "../analytics";
-
-import colors from "../colors";
 
 const WAIT_TIME_BEFORE_SPINNER = 150;
 const BUTTON_HEIGHT = 48;
@@ -59,13 +58,19 @@ export type BaseButtonProps = {
 
 type Props = BaseButtonProps & {
   useTouchable: boolean,
+  colors: *,
 };
 
-const ButtonWrapped = (props: BaseButtonProps) => (
-  <ButtonUseTouchable.Consumer>
-    {useTouchable => <Button {...props} useTouchable={useTouchable} />}
-  </ButtonUseTouchable.Consumer>
-);
+const ButtonWrapped = (props: BaseButtonProps) => {
+  const { colors } = useTheme();
+  return (
+    <ButtonUseTouchable.Consumer>
+      {useTouchable => (
+        <Button {...props} useTouchable={useTouchable} colors={colors} />
+      )}
+    </ButtonUseTouchable.Consumer>
+  );
+};
 
 class Button extends PureComponent<
   Props,
@@ -153,6 +158,7 @@ class Button extends PureComponent<
       outline,
       // everything else
       containerStyle,
+      colors,
       ...otherProps
     } = this.props;
 
@@ -161,6 +167,41 @@ class Button extends PureComponent<
         "Button props 'style' must not be used. Use 'containerStyle' instead.",
       );
     }
+
+    const theme = {
+      primaryContainer: { backgroundColor: colors.live },
+      primaryTitle: { color: "white" },
+
+      lightPrimaryContainer: { backgroundColor: colors.lightLive },
+      lightPrimaryTitle: { color: colors.live },
+
+      negativePrimaryContainer: { backgroundColor: "white" },
+      negativePrimaryTitle: { color: colors.live },
+
+      secondaryContainer: { backgroundColor: "transparent" },
+      secondaryTitle: { color: colors.grey },
+      secondaryOutlineBorder: { borderColor: colors.fog },
+
+      lightSecondaryContainer: { backgroundColor: "transparent" },
+      lightSecondaryTitle: { color: colors.live },
+
+      greySecondaryContainer: { backgroundColor: "transparent" },
+      greySecondaryTitle: { color: colors.grey },
+
+      darkSecondaryContainer: { backgroundColor: "transparent" },
+      darkSecondaryTitle: { color: colors.smoke },
+      darkSecondaryOutlineBorder: { borderColor: colors.smoke },
+
+      tertiaryContainer: { backgroundColor: "transparent" },
+      tertiaryTitle: { color: colors.live },
+      tertiaryOutlineBorder: { borderColor: colors.live },
+
+      alertContainer: { backgroundColor: colors.alert },
+      alertTitle: { color: "white" },
+
+      disabledContainer: { backgroundColor: colors.lightFog },
+      disabledTitle: { color: colors.grey },
+    };
 
     const { pending, anim } = this.state;
     const isDisabled = disabled || !onPress || pending;
@@ -174,21 +215,21 @@ class Button extends PureComponent<
 
     const mainContainerStyle = [
       styles.container,
-      isDisabled ? styles.disabledContainer : styles[`${type}Container`],
+      isDisabled ? theme.disabledContainer : theme[`${type}Container`],
       containerStyle,
     ];
 
-    const borderStyle = [styles.outlineBorder, styles[`${type}OutlineBorder`]];
+    const borderStyle = [styles.outlineBorder, theme[`${type}OutlineBorder`]];
 
     const textStyle = [
       styles.title,
       titleStyle,
-      isDisabled ? styles.disabledTitle : styles[`${type}Title`],
+      isDisabled ? theme.disabledTitle : theme[`${type}Title`],
     ];
 
     const iconColor = isDisabled
-      ? styles.disabledTitle.color
-      : (styles[`${type}Title`] || {}).color;
+      ? theme.disabledTitle.color
+      : (theme[`${type}Title`] || {}).color;
 
     const titleSliderOffset = anim.interpolate({
       inputRange: [0, 1],
@@ -259,7 +300,7 @@ class Button extends PureComponent<
         </Animated.View>
 
         <Animated.View style={spinnerSliderStyle}>
-          <ActivityIndicator color={styles.disabledTitle.color} />
+          <ActivityIndicator color={theme.disabledTitle.color} />
         </Animated.View>
       </Container>
     );
@@ -304,44 +345,6 @@ const styles = StyleSheet.create({
     borderWidth: 1.5,
     borderRadius: 4,
   },
-
-  // theme
-
-  primaryContainer: { backgroundColor: colors.live },
-  primaryTitle: { color: "white" },
-
-  lightPrimaryContainer: { backgroundColor: colors.lightLive },
-  lightPrimaryTitle: { color: colors.live },
-
-  negativePrimaryContainer: { backgroundColor: "white" },
-  negativePrimaryTitle: { color: colors.live },
-
-  negative2PrimaryContainer: { backgroundColor: "white" },
-  negative2PrimaryTitle: { color: colors.darkBlue },
-
-  secondaryContainer: { backgroundColor: "transparent" },
-  secondaryTitle: { color: colors.grey },
-  secondaryOutlineBorder: { borderColor: colors.fog },
-
-  lightSecondaryContainer: { backgroundColor: "transparent" },
-  lightSecondaryTitle: { color: colors.live },
-
-  greySecondaryContainer: { backgroundColor: "transparent" },
-  greySecondaryTitle: { color: colors.grey },
-
-  darkSecondaryContainer: { backgroundColor: "transparent" },
-  darkSecondaryTitle: { color: colors.smoke },
-  darkSecondaryOutlineBorder: { borderColor: colors.smoke },
-
-  tertiaryContainer: { backgroundColor: "transparent" },
-  tertiaryTitle: { color: colors.live },
-  tertiaryOutlineBorder: { borderColor: colors.live },
-
-  alertContainer: { backgroundColor: colors.alert },
-  alertTitle: { color: "white" },
-
-  disabledContainer: { backgroundColor: colors.lightFog },
-  disabledTitle: { color: colors.grey },
 });
 
 export default ButtonWrapped;

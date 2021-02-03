@@ -1,31 +1,36 @@
 // @flow
-import React, { useContext } from "react";
+import React, { useContext, useMemo } from "react";
 import { Platform } from "react-native";
 import {
   createStackNavigator,
   HeaderBackButton,
 } from "@react-navigation/stack";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "@react-navigation/native";
 import { ScreenName, NavigatorName } from "../../const";
 import CustomizeAppPassword from "../../screens/CustomizeApp/Password";
 import CustomizeAppCountervalues from "../../screens/CustomizeApp/Countervalues";
 import CountervalueSettings from "../../screens/Settings/General/CountervalueSettings";
-import { closableStackNavigatorConfig } from "../../navigation/navigatorConfig";
+import { getStackNavigatorConfig } from "../../navigation/navigatorConfig";
 import StepHeader from "../StepHeader";
 import { context as _ptContext } from "../../screens/ProductTour/Provider";
 import { navigate } from "../../rootnavigation";
-import colors from "../../colors";
 
 const totalSteps = "2";
 
 export default function ReceiveFundsNavigator() {
   const { t } = useTranslation();
   const ptContext = useContext(_ptContext);
+  const { colors } = useTheme();
+  const stackNavigationConfig = useMemo(
+    () => getStackNavigatorConfig(colors, true),
+    [colors],
+  );
   return (
     <Stack.Navigator
       headerMode="float"
       screenOptions={{
-        ...closableStackNavigatorConfig,
+        ...stackNavigationConfig,
         gestureEnabled: Platform.OS === "ios",
         headerStyle:
           ptContext.currentStep === "CUSTOMIZE_APP"

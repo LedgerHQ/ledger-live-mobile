@@ -186,6 +186,9 @@
       "title": "Something went wrong (Error #17)",
       "description": "Please contact Ledger Support."
     },
+    "CosmosStargateFeb2021Warning": {
+      "description": "The Cosmos blockchain is planning for an on-chain update on Feb 18th. Coming Ledger Live 2.22.0 will continue supporting ATOM."
+    },
     "DeviceAppVerifyNotSupported": {
       "title": "Open Manager to update this app",
       "description": "The app verification is not supported."
@@ -515,11 +518,14 @@
     "StellarMemoRecommended": {
       "title": "A memo may be needed when sending to this recipient"
     },
+    "StratisDown2021Warning": {
+      "description": "The Stratis blockchain evolved and may no longer work correctly. Support for the original Stratis blockchain will be maintained until 16 October 2021."
+    },
     "SwapExchangeRateAmountTooLow": {
-      "title": "Amount must be higher than {{minAmountFrom}} {{unit}}"
+      "title": "Amount must be higher than {{minAmountFromFormatted}}"
     },
     "SwapExchangeRateAmountTooHigh": {
-      "title": "Amount must be lower than {{maxAmountFrom}} {{unit}}"
+      "title": "Amount must be lower than {{maxAmountFromFormatted}}"
     },
     "SwapGenericAPIError": {
       "title": "Exchange rate expired",
@@ -609,6 +615,10 @@
     "confirm": "Confirm",
     "undo": "Undo",
     "banners": {
+      "valentine": {
+        "title": "Valentine’s day",
+        "description": "Reduced fees on Buy and Sell"
+      },
       "academy": {
         "title": "Ledger Academy",
         "description": "Everything you need to know about crypto"
@@ -821,7 +831,8 @@
       },
       "recoveryPhrase": {
         "title": "Recovery phrase",
-        "desc": "Your recovery phrase is a secret list of 24 words that backs up your private keys. Your Nano generates a unique recovery phrase. Ledger does not keep a copy of it.",
+        "desc": "Your recovery phrase is a secret list of 24 words that backs up your private keys.",
+        "desc_1": "Your Nano generates a unique recovery phrase. Ledger does not keep a copy of it.",
         "cta": "Recovery phrase",
         "checkboxDesc": "I understand that if I lose this recovery phrase, I will not be able to access my crypto in case I lose access to my Nano."
       },
@@ -851,7 +862,8 @@
           },
           "1": {
             "title": "Write down all words",
-            "label": "Write Word #1 displayed on your Nano in position 1 of your Recovery sheet. Then press right on your Nano to display Word #2 and write it down in position 2. Repeat the process for all words while carefully respecting the order and spelling. Press left on your Nano to check for any mistakes."
+            "label": "Write Word #1 displayed on your Nano in position 1 of your Recovery sheet. Then press right on your Nano to display Word #2 and write it down in position 2.",
+            "label_1": "Repeat the process for all words while carefully respecting the order and spelling. Press left on your Nano to check for any mistakes."
           },
           "2": {
             "title": "Confirm your recovery phrase",
@@ -1507,6 +1519,13 @@
       "password": "Password lock",
       "passwordDesc": "Set a password to protect Ledger Live data on your phone.",
       "counterValue": "Countervalue",
+      "theme": "Theme",
+      "themeDesc": "Set the app UI theme",
+      "themes": {
+        "dark": "Dark",
+        "dusk": "Dusk",
+        "light": "Light"
+      },
       "counterValueDesc": "Choose the currency for balances and operations.",
       "exchange": "Rate provider",
       "exchangeDesc": "Set provider of exchange rate from Bitcoin to {{fiat}}",
@@ -1770,7 +1789,12 @@
         "from": "From",
         "fromAmount": "Amount sent",
         "to": "To",
-        "toAmount": "Amount to receive"
+        "toAmount": "Amount to receive",
+        "statusTooltips": {
+          "refunded": "Please contact the Swap provider with you swap ID for more details",
+          "failed": "Please contact the Swap provider with you swap ID for more details",
+          "hold": "Please contact the Swap provider with you swap ID to solve the situation"
+        }
       },
       "missingApp": {
         "title": "Please install the Exchange app on your device",
@@ -1814,7 +1838,7 @@
         "amountSuppliedTooltip": "Amount lent to the network",
         "currencyAPY": "Currency APY",
         "currencyAPYTooltip": "Yearly return rate of a deposit that’s continuously compounded",
-        "accruedInterests": "Accrued interest",
+        "accruedInterests": "Interest balance",
         "accruedInterestsTooltip": "Interest generated on your lent assets",
         "interestEarned": "Interest earned",
         "interestEarnedTooltip": "Interest you have earned after withdrawal",
@@ -1840,7 +1864,7 @@
           "account": "Account",
           "amountSupplied": "Amount deposited",
           "interestEarned": "Interest earned",
-          "status": "Status",
+          "status": "Account status",
           "EARNING": "Earning",
           "ENABLING": "Approving",
           "INACTIVE": "Inactive",
@@ -2669,6 +2693,7 @@
         "amountSubTitle": "Amount to delegate",
         "summary": "Summary",
         "verification": "Verification",
+        "selectDevice": "Select device",
         "connectDevice": "Connect device",
         "stepRange": "Step {{currentStep}} of {{totalSteps}}"
       },
@@ -3122,6 +3147,8 @@
     "reject": "Reject",
     "connect": "Connect",
     "connected": "Connected",
+    "disconnected": "Disconnected",
+    "warningdisconnected": "There is a connection problem between the dApp, WalletConnect and Ledger Live. Wait a few moments or relaunch the connection",
     "info": "You can now access the {{name}} dApp on your desktop.",
     "warning": "Sharing receive addresses from dApp is not secure. Always use Ledger Live when sharing your address to receive funds.",
     "isconnecting": "is connecting, please wait...",
@@ -3129,6 +3156,9 @@
     "retry": "Retry",
     "close": "Close",
     "message": "Message",
+    "messageHash": "Message Hash",
+    "domainHash": "Domain Hash",
+    "stringHash": "Hash",
     "from": "From",
     "successTitle": "Message signed",
     "successDescription": "You have signed the message received from a third party application",
