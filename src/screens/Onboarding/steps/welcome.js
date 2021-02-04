@@ -130,7 +130,7 @@ function OnboardingStepWelcome({ navigation }: *) {
   const { locale } = useLocale();
 
   return (
-    <View style={[styles.root, { backgroundColor: colors.white }]}>
+    <View style={[styles.root, { backgroundColor: colors.background }]}>
       <View style={styles.header}>
         <TouchableOpacity
           style={[styles.languageButton, { borderColor: colors.fog }]}
