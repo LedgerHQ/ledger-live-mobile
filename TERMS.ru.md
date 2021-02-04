@@ -1,234 +1,221 @@
-_December 10, 2019_
+# Условия использования Ledger Live
 
-RUSSIAN
+_10 ДЕКАБРЯ 2019 Г._
 
-You are about to use the Ledger Live platform. We're excited for you! Before you get on, Ledger needs you to carefully read, understand and accept our Terms of Use (the or these "Terms").
+Вы собираетесь воспользоваться платформой Ledger Live. Рады приветствовать! Прежде чем воспользоваться платформой Ledger, следует внимательно прочесть, осмыслить и принять наши Условия использования (далее — «Условия»).
 
-## Overview
+Обзор
 
-This agreement is between you ("you", "your", or "User") and Ledger SAS ("Ledger", "us", "we,'' "our", or the "Company"). By using or clicking "I agree" to any of the services provided by Ledger or its affiliates in connection with the Ledge Live software (the "Ledger Services"), you agree that you have carefully read and accept all of the below terms and conditions.
+Это соглашение заключается между вами («вы», «ваш» или «Пользователь») и компанией Ledger SAS («Ledger», «нас», «мы», «наш» или «Компания»). Воспользовавшись любым из сервисов или нажав «Я согласен(-на)» для сервиса, предоставляемого компанией Ledger или ее дочерними предприятиями в связи с программным обеспечением Ledger Live (далее — «Сервисы Ledger»), вы подтверждаете, что внимательно прочитали и принимаете все указанные ниже условия.
 
-Your use of Ledger Services is also subject to Ledger's Privacy Policy, which is available at [https://shop.ledger.com/pages/privacy-policy](https://shop.ledger.com/pages/privacy-policy).
+Использование Сервисов Ledger также регулируется Политикой конфиденциальности компании Ledger, доступной на странице [**https://shop.ledger.com/pages/privacy-policy**](https://shop.ledger.com/pages/privacy-policy).
 
-BEFORE USING THE SERVICES, PLEASE EDUCATE YOURSELF TO MAKE INFORMED DECISIONS. CRYPTO ASSETS ARE VOLATILE. THE PRICES CAN GO UP AND DOWN. CAREFULLY EVALUATE YOUR GOALS AND THE FINANCIAL RISK YOU ARE WILLING TO TAKE. PLEASE BE AWARE THAT LEDGER DOES NOT PROVIDE FINANCIAL, TAX, OR LEGAL ADVICE. DECISIONS TO PERFORM OPERATIONS INVOLVING CRYPTO ASSETS SHOULD BE TAKEN ON YOUR OWN OR RELY ON OPINIONS OF RELIABLE AND QUALIFIED EXPERTS.
+ПЕРЕД ИСПОЛЬЗОВАНИЕМ СЕРВИСОВ ИЗУЧИТЕ СООТВЕТСТВУЮЩУЮ ИНФОРМАЦИЮ ДЛЯ ПРИНЯТИЯ ОБОСНОВАННЫХ РЕШЕНИЙ. КРИПТОАКТИВЫ ВОЛАТИЛЬНЫ. ЦЕНЫ НА НИХ МОГУТ РАСТИ И ПАДАТЬ. ВНИМАТЕЛЬНО ОЦЕНИТЕ СВОИ ЦЕЛИ И ФИНАНСОВЫЙ РИСК, НА КОТОРЫЙ ВЫ ГОТОВЫ ПОЙТИ. ОБРАТИТЕ ВНИМАНИЕ: КОМПАНИЯ LEDGER НЕ ПРЕДОСТАВЛЯЕТ КОНСУЛЬТАЦИЙ ПО ФИНАНСОВЫМ, НАЛОГОВЫМ ИЛИ ЮРИДИЧЕСКИМ ВОПРОСАМ. РЕШЕНИЯ О ВЫПОЛНЕНИИ ОПЕРАЦИЙ С КРИПТОАКТИВАМИ СЛЕДУЕТ ПРИНИМАТЬ САМОСТОЯТЕЛЬНО ИЛИ НА ОСНОВАНИИ МНЕНИЯ НАДЕЖНЫХ И КВАЛИФИЦИРОВАННЫХ ЭКСПЕРТОВ.
 
-## Definitions
+Определения
 
-The following terms, when used in this Agreement, shall have the meanings described below, it being specified for the avoidance of doubt that in these definitions, reference to the singular includes a reference to the plural and vice versa, except when clearly inappropriate.
+В настоящем Договоре следующие термины будут иметь значения, определяемые ниже, причем во избежание неоднозначного толкования слова, обозначающие единственное число, включают также множественное число и наоборот, за исключением случаев, когда явно указано иное.
 
-" **Crypto Assets**"
+**Криптоактивы**
+Типы цифровых активов, которые могут передаваться посредством технологий блокчейна, включая, помимо прочего, Bitcoin, Ethereum и Ripple.
 
-means types of digital assets which can be transmitted with blockchain technologies, including but not limited to Bitcoin, Ethereum, Ripple.
+**Приложение для устройства**
+Программа, разработанная компанией Ledger или сторонними компаниями, которая добавляет определенную логическую последовательность криптографической подписи в операционную систему BOLOS от Ledger для создания транзакции в Ledger Live или стороннем приложении и позволяет подписывать различные операции на устройстве Ledger, включая, помимо прочего, трансляцию транзакций криптоактивов, аутентификацию и управление паролями.
 
-**"Device Application"**
+**Форк**
+Изменение основного протокола сети блокчейна, в результате которого создается несколько версий криптоактива, причем одна или несколько версий могут не поддерживаться Сервисами Ledger.
 
-means a software application, developed by Ledger or by third parties, which embeds a specific cryptographic signature logic within Ledger's operating system BOLOS in order to create a transaction, on Ledger Live or a third party application, and signs various operations with a Ledger Device, including but not limited to: Crypto Assets transactions broadcast, authentication, password management.
+**Устройство Ledger**
+Электронное устройство, разработанное и распространяемое компанией Ledger, обычно именуемое аппаратным кошельком, которое применяется для защиты закрытых ключей Пользователей и других секретных криптографических данных, совместимых с Ledger Live или соответствующими кошельками, а также для управления ими.
 
-" **Fork**"
+**Диспетчер Ledger Live**
+Каталог доступных для загрузки приложений для устройства, который позволяет Пользователям обновлять встроенное ПО устройства Ledger, устанавливать приложения для устройства и управлять поддерживаемыми криптоактивами.
 
-means a change to the underlying protocol of a blockchain network that results in more than one version of a Crypto Asset, the result of which may be one or more versions that are not supported on Ledger Services.
+**Материалы**
+Содержимое, документация в отношении Сервисов Ledger, а также исходный и объектный коды для всего встроенного программного обеспечения Ledger Live и устройств Ledger.
 
-**"Ledger Device"**
+**ПИН-код**
+цифровой пароль, установленный Пользователем для разблокировки устройства Ledger.
 
-means an electronic device, developed and distributed by Ledger, generally referred to as a "hardware wallet", used to manage and secure Users' Private Keys and other cryptographic secrets, compatible with Ledger Live or compatible Wallets.
+**Закрытые ключи**
+Критически важные данные, используемые для авторизации исходящих транзакций в сетях блокчейна.
 
-" **Ledger Live Manager**"
+**Сервисы**
+Один или несколько Сервисов компании Ledger или сторонних компаний.
 
-means a catalogue of Device Applications available for download, which enables Users to update their Ledger Device firmware, install Device Applications and manage supported Crypto Assets.
+**Сторонние сервисы**
+Приложения, программное обеспечение или другие материалы, размещенные, разработанные или управляемые третьей стороной, включая, помимо прочего, биржи криптовалюты, поставщиков услуг так называемого стейкинга.
 
-**"Materials"**
+**Кошелек**
+Программа, которая взаимодействует с различными сетями блокчейна для создания наборов закрытых и открытых ключей и управления ими, настройки транзакций и мониторинга их баланса.
 
-means content, Ledger Service documentation as well as source and object codes for all software embedded within Ledger Live and Ledger Devices.
+**Веб-сайт**
+Веб-сайты, принадлежащие компании Ledger и управляемые ею, включая веб-сайты интернет-магазинов и корпоративные веб-сайты, размещенные по адресу ledger.com.
 
-**"PIN"**
+**Фраза восстановления из 24 слов**
+Понятная для пользователя конфиденциальная комбинация слов, генерируемая устройствами Ledger, на основании которой создаются закрытые ключи пользователей. Они используются для создания резервных копий и восстановления доступа к криптоактивам на других устройствах Ledger или в совместимых кошельках.
 
-means the numeric password chosen by the User to unlock a Ledger Device.
+Право на использование
 
-**"Private Keys"**
+Чтобы иметь право пользоваться Сервисами, вы должны достичь 18 лет или возраста совершеннолетия, установленного в стране вашего проживания. Если вы пользуетесь нашими Сервисами от имени юридического лица, вы заверяете и гарантируете, что: (а) юридическое лицо учреждено в надлежащем порядке и осуществляет свою деятельность в соответствии с применимым законодательством юрисдикции его регистрации и (б) вы должным образом уполномочены таким юридическим лицом действовать от его имени.
 
-means a critical piece of data used to authorize outgoing transactions on blockchain networks.
+Вы можете пользоваться Сервисами только в соответствии с законодательством вашей юрисдикции. Убедитесь, что эти Условия соответствуют всем применимым законам, правилам и постановлениям.
 
-" **Services**"
+Сервисы Ledger
 
-means one or more of the Ledger Services or Third Party Services.
+Платформа Ledger Live вместе с устройствами Ledger обеспечивает удобный и безопасный способ управления приложениями на вашем устройстве, а также использования закрытых ключей, полученных на основании фразы восстановления из 24 слов.
 
-" **Third Party Services"**
+Сервисы Ledger позволяют Пользователям:
 
-refers to applications, softwares or other Materials that are hosted, developed or operated by a third party, including, but not limited to: cryptocurrency exchanges, staking service providers.
+- обновлять встроенное ПО на устройстве Ledger;
+- устанавливать приложения на устройство и удалять их с помощью диспетчера Ledger Live;
+- просматривать портфель криптоактивов;
+- получать доступ к средствам выполнения операций в различных сетях блокчейна, руководствуясь соответствующими правилами протоколов, включая, помимо прочего:
+  - отправку криптоактивов Пользователям и получение их от Пользователей специальной сети блокчейна;
+- подключаться к сторонним сервисам, чтобы получить доступ к таким сервисам, как делегирование прав на стейкинг в поддерживаемых сетях блокчейна с защитой по методу доказательства владения или покупка криптовалюты.
 
-" **Wallet**"
+Компания Ledger предоставляет некастодиальные сервисы, то есть мы не храним ваши криптоактивы и закрытые ключи и не имеем к ним доступа. Мы не отправляем и не получаем криптоактивы. Любая передача криптоактивов происходит в сетях блокчейна, а не в сети, принадлежащей компании Ledger или контролируемой ею.
 
-means a software program which interacts with various blockchain networks to generate and manage sets of private keys and public keys, configure transactions and monitor their balance.
+Ledger Live и устройства Ledger поддерживают только определенные криптоактивы. Неисчерпывающий список поддерживаемых криптоактивов и совместимых кошельков доступен [здесь](about:blank#targetText=Ledger%20Live%20supports%2022%20crypto,as%20send%20and%20receive%20them.). В этот список могут быть внесены изменения.
 
-**"Website"**
+Риск
 
-means websites owned and operated by Ledger, including the e-commerce and corporate website hosted at ledger.com
+Считается, что вы в полной мере осведомлены обо всех правовых нормах и технических ограничениях, связанных с сетями блокчейна с защитой по методу доказательства доли владения и доказательства выполнения работы, а также с Сервисами. Вы подтверждаете, что были предупреждены об описанных далее сопутствующих рисках.
 
-**"24-word Recovery Phrase"**
+**Изменения в нормативной базе.** Технологии блокчейна адаптируются к постоянным изменениям в нормативной базе и подвергаются тщательным проверкам во всем мире, включая, помимо прочего, положения по борьбе с отмыванием денег и финансовое регулирование. Вы осознаете, что определенные Сервисы (включая их доступность) могут подпадать под действие одного или нескольких нормативных требований.
 
-means a confidential combination of human readable words, generated by Ledger Devices, from which Users' Private Keys are derived. They are used to back-up and restore access to Crypto Assets on other Ledger Devices or compatible Wallets.
+**Налогообложение.** Транзакции с криптоактивами или, в более широком смысле, операции с криптоактивами, включая, помимо прочего, обмен, так называемые эйрдропы, форки и прибыль, возникающую в результате стейкинга, могут считаться налогообразующими случаями согласно законодательству, по которому происходит налогообложение. Эти правила могут быть непонятны или могут изменяться, поэтому рекомендуем обратиться к своему налоговому или финансовому консультанту, прежде чем проводить операции с криптоактивами.
 
-## Eligibility
+**Технология.** Пользователи понимают, что некоторые технологии, поддерживаемые или предоставляемые Сервисами, являются новыми, не до конца проверенными и неконтролируемыми компанией Ledger. Прогресс в области криптографии и другие технические достижения, например разработка квантовых компьютеров, могут представлять риски для сетей блокчейна, которые могут привести к краже или потере криптоактивов. Другие неблагоприятные изменения рыночных сил или технологий в целом могут поставить под угрозу работу компании Ledger в рамках настоящих Условий.
 
-To be eligible to use the Services, you must be at least 18 years old or qualify as an adult in your country of residence. If you are using our Services on behalf of a legal entity, you further represent and warrant that: (a) the legal entity is duly organized and validly existing under the applicable laws of the jurisdiction of its organization; and (b) you are duly authorized by such legal entity to act on its behalf.
+**Кибербезопасность. ** Хакеры или другие группы и организации могут пытаться препятствовать работе продуктов и информационных систем компании Ledger различными способами, включая, помимо прочего, атаки типа «отказ в обслуживании», атаки по сторонним каналам, спуфинг, смурфинг, атаки вредоносного ПО или атаки на основе алгоритма консенсуса.
 
-You can only use the Services if permitted under the laws of your jurisdiction. Please make sure that these Terms are in compliance with all laws, rules, and regulations that apply to you.
+Кроме того, могут возникнуть дополнительные риски, не предусмотренные или не определенные в настоящих Условиях. Прежде чем использовать наши Сервисы, настоятельно рекомендуется тщательно оценить, совместимы ли ваше финансовое положение и допустимый риск с таким использованием.
 
-## Ledger Services
+Во избежание неоднозначного толкования и без ограничения общего характера раздела «Ограничение ответственности», настоящим вы соглашаетесь с тем, что компания Ledger не несет ответственности за какие-либо убытки, возникшие вследствие рисков, описанных в этом разделе.
 
-Ledger Live, in connection with Ledger Devices, provides you with a convenient and secure way to manage your Device Applications as well as use Private Keys derived from your 24-word Recovery Phrase.
+Запрет на восстановление закрытых ключей
 
-The Ledger Services allow Users to:
+**Единственная резервная копия находится у вас.** Компания Ledger не имеет доступа к паролям, фразам для восстановления из 24 слов, закрытым ключам, парольным фразам, журналам транзакций, ПИН-кодам и другими учетным данным, связанным с использованием Сервисов, а также не хранит их. Мы не сможем помочь вам в восстановлении учетных данных. Вы несете исключительную ответственность за хранение своих учетных данных в безопасном месте, вдали от любопытных глаз. Любая третья сторона, знающая одну или несколько ваших фраз восстановления из 24 слов или ПИН-код, может завладеть закрытыми ключами, связанными с вашим устройством Ledger, или фразу восстановления из 24 слов.
 
-- Update the firmware of their Ledger Device
-- Install and uninstall Device Applications with the Ledger Live Manager
-- View their portfolio of Crypto Assets
-- Access the means to perform operations on various blockchain networks in accordance with their respective protocol rules, such as but not limited to:
-  - Send and receive Crypto Assets to and from Users of a dedicated blockchain network;
-- Connect with Third Party Services, to access services such as the delegation of staking rights on supported proof-of-stake blockchains or buying crypto.
+**Храните учетные данные в безопасном месте.** При настройке устройства Ledger необходимо: (а) создать и запомнить надежный ПИН-код, который не используется для других сервисов; (б) придумать фразу восстановления из 24 слов и сохранить ее в безопасном и конфиденциальном месте; (c) защитить доступ к устройству Ledger;
 
-Ledger operates non-custodial services, which means that we do not store, nor do we have access to your Crypto Assets nor your Private Keys. We do not send or receive Crypto Assets. Any Crypto Asset transfer occurs on blockchain networks and not on a network owned or controlled by Ledger.
+Допустимое применение
 
-Ledger Live and Ledger Devices are only capable of supporting certain Crypto Assets. A non-exhaustive list of supported Crypto Assets and compatible Wallets is available [here](https://support.ledger.com/hc/en-us/articles/115005304449-Supported-crypto-assets#targetText=Ledger%20Live%20supports%2022%20crypto,as%20send%20and%20receive%20them.). This list is subject to variation.
+Пользователю Сервисов Ledger предоставляется ограниченная, личная, некоммерческая, неисключительная, непередаваемая и подлежащая аннулированию лицензия на использование Сервисов Ledger. При использовании Сервисов Ledger просим соблюдать определенные основные правила.
 
-## Risk
+**Не наносить вред.** Вы соглашаетесь (i) не распространять вирусы или другой вредоносный компьютерный код через системы Ledger, (ii) не использовать программы-роботы, программы-обходчики, поисковые боты, скрейперы или другие автоматизированные средства или интерфейсы, не предоставленные нами, для доступа к Сервисам Ledger или извлечения данных, (iii) не предоставлять ложную, неточную или вводящую в заблуждение информацию и (iv) не предпринимать действий, которые могут создать необоснованную или несоизмеримо большую нагрузку на нашу инфраструктуру или инфраструктуру сторонних поставщиков.
 
-You are deemed to be fully aware of all the legal norms and technical constraints relating to the proof-of-stake and proof-of-work blockchains, and to the Services.You acknowledge that you have been warned of the following associated risks:
+**Не обходить нашу систему безопасности.** Вы обязуетесь не обходить и не предпринимать попыток обойти какие-либо меры, используемые для предотвращения или ограничения доступа к Сервисам Ledger, включая, помимо прочего, устройства Ledger, подключенные к Сервисам Ledger, другим учетным записям, информационным системам или сетям.
 
-**Regulatory changes.** Blockchain technologies are subject to continuous regulatory changes and scrutiny around the world, including but not limited to anti-money laundering and financial regulations. You acknowledge that certain Services, including their availability, could be impacted by one or more regulatory requirements.
+**Не нарушать закон.** Вы обязуетесь не нарушать законодательство при использовании Сервисов Ledger. Это касается любых местных, провинциальных, государственных, федеральных, национальных и международных законов, которые могут быть к вам применимы. Вы обязуетесь не пользоваться Сервисами Ledger для оплаты, поддержки или иного участия в любых незаконных действиях, включая, помимо прочего, мошенничество, незаконные азартные игры, отмывание денег или террористическую деятельность. Вы также соглашаетесь не одобрять и не склонять третьи стороны к участию в каких-либо действиях, запрещенных в рамках данного раздела.
 
-**Tax.** Transactions in Crypto Assets, or more generally Crypto Assets events, including but not limited to exchanges, air-drops, forks, and gains arising from staking, may be considered tax events according to the legislations under which you are subject to taxation. These rules may be unclear or subject to change, and you are therefore encouraged to consult your own tax or accounting adviser before doing Crypto Assets events.
+**Не препятствовать.** Вы обязуетесь не использовать и не предпринимать попыток использовать кошелек другого пользователя без его разрешения или не использовать Сервисы Ledger каким-либо способом, который может помешать, нарушить, отрицательно повлиять или запретить другим Пользователям полноценно работать с Сервисами Ledger или который может нарушить или ухудшить работу Сервисов Ledger, отключить их или привести к перегрузке.
 
-**Technology**. Users understand that some of the technology supported or made available through the Services are new, untested and outside of Ledger's control. Advances in cryptography, or other technical advances such as the development of quantum computers, could present risks to blockchain networks which could result in the theft or loss of Crypto Assets. Other adverse changes in market forces or in the technology, broadly construed, may prevent or compromise Ledger's performance under these Terms.
+Использование Сервисов Ledger, за исключением регламентированного настоящими Условиями, без нашего предварительного письменного разрешения строго запрещено и приведет к прекращению действия лицензии на использование Сервисов Ledger.
 
-**Cybersecurity**. Hackers or other groups or organizations may attempt to interfere with Ledger's products and information systems in several ways, including without limitation denial of service attacks, side-channel attacks, spoofing, smurfing, malware attacks, or consensus-based attacks.
+Гарантии и отказ от ответственности
 
-There may be additional risks that we have not foreseen or identified in these Terms. Before you use our Services, you are strongly encouraged to carefully assess whether your financial situation and risk tolerance is compatible with such use.
+Компания Ledger будет действовать добросовестно и на должном профессиональном уровне, чтобы предоставить вам доступ к Сервисам Ledger в соответствии с настоящими Условиями использования, но она не гарантирует, что доступ к Сервисам и их работа не будет прерываться, а также не гарантирует отсутствие задержек, сбоев, ошибок, упущений, повреждения или потери передаваемой информации. Сервисы Ledger предоставляются в существующем состоянии без гарантий любого рода, явных или подразумеваемых, в том числе без подразумеваемых гарантий в отношении пригодности для коммерческого использования, а также надежности и пригодности для конкретной цели.
 
-For the avoidance of doubt, and notwithstanding the generality of the Limitation of Liability section, you hereby agree that Ledger shall have no liability for any loss that incurs as a consequence of the risks highlighted in this section.
+Доступность Сервисов Ledger
 
-## No retrieval of Private Keys
+Мы можем изменять и обновлять Сервисы, приостанавливать их работу, временно или на неопределенный срок, для проведения каких-либо работ, включая, помимо прочего, обновление встроенного ПО и программного обеспечения, операции по техническому обслуживанию, изменения на серверах, исправление ошибок и т. д. Мы приложим все обоснованные усилия, чтобы заранее сообщить вам о каких-либо значительных нарушениях в работе Сервисов Ledger.
 
-**The only existing backup is with you.** Ledger does not have access to or store passwords, 24-word Recovery Phrase, Private Keys, passphrases, transaction history, PIN, or other credentials associated with your use of the Services. We are not in a position to help you retrieve your credentials. You are solely responsible for remembering, storing, and keeping your credentials in a secure location, away from prying eyes. Any third party with knowledge of one or more of your 24-word Recovery Phrase or PIN can gain control of the Private Keys associated with your Ledger Device or of the 24-word Recovery Phrase;
+Компания Ledger не гарантирует правильного функционирования Сервисов в случае установки или использования программ или приложений, которые несовместимы со спецификациями и техническими стандартами Сервиса.
 
-**Keep your credentials safe.** When you set your Ledger Device up, you must: (a) create and remember a strong PIN that you do not use for any other service; (b) protect and keep your 24-word Recovery Phrase secure and confidential; (c) protect access to your Ledger Device;
+Обратите внимание: если сервис Ledger недоступен или его работа приостановлена, вы всегда можете восстановить свои закрытые ключи, используя фразу восстановления из 24 слов в любом совместимом кошельке.
 
-## Acceptable Use
+Базовые протоколы блокчейна
 
-As a user of the Ledger Services, we grant you a limited, personal, non-commercial, non-exclusive, non-transferable, and revocable license to use the Ledger Services. When using Ledger Services, we ask that you follow some basic rules:
+Все транзакции, созданные с помощью Сервисов Ledger, подтверждаются и записываются в соответствующих сетях блокчейна. Такие сети представляют собой децентрализованные одноранговые сети, контролируемые независимыми сторонними организациями. Они не являются собственностью компании Ledger, не управляются и не используются ею. Мы не контролируем сети блокчейна, поэтому не можем гарантировать подтверждение и обработку транзакций, которые вы транслируете в Сервисах Ledger. Вы подтверждаете осведомленность о том, что мы не храним, не отправляем и не получаем криптоактивы, а также соглашаетесь с тем, что транзакции, которые вы выполняете с помощью Сервисов Ledger, могут быть выполнены с ошибкой или со значительной задержкой в соответствующих сетях блокчейна.
 
-**Do no harm.** You agree (i) not to distribute any virus or other harmful computer code through Ledger's systems, (ii) not to use any robot, spider, crawler, scraper or other automated means or interface not provided by us to access Ledger Services or to extract data, (iii) not to provide false, inaccurate, or misleading information, and (iv) not to take any action that may impose an unreasonable or disproportionately large load on our or any of our third party providers' infrastructure.
+В некоторых случаях протокол блокчейна определенного криптоактива может измениться, что может повлиять на его ключевые характеристики, включая, помимо прочего, доступность, имя, безопасность, оценку или способ работы. Форки могут привести к неверным направлению или репликации ответвленных криптоактивов. Во всех таких случаях компания Ledger может по своему усмотрению приостановить поддержку соответствующего криптоактива на период, который компания Ledger сочтет необходимым. В таком случае компания Ledger постарается уведомить вас заранее, если возможно. Вы должны быть осведомлены о таких событиях и принять необходимые меры.
 
-**Don't circumvent our security**. You agree not to bypass, circumvent, or attempt to bypass or circumvent any measures that we may use to prevent or restrict access to Ledger Services including, without limitation, Ledger Devices connected to Ledger Services, other accounts, information systems, or networks.
+Приложения для устройства
 
-**Don't break the law**. You agree that you will not violate any laws when using Ledger Services. This includes any local, provincial, state, federal, national, or international laws that may apply to you. You agree that you will not use Ledger Services to pay for, support, or otherwise engage in any illegal activities including, but not limited to, fraud, illegal gambling, money laundering, or terrorist activities. You further agree not to encourage or induce any third party to engage in any of the activities prohibited under this section.
+Приложения для устройства доступны для скачивания в диспетчере Ledger Live. Их можно установить, следуя нашему**[ ](about:blank)**руководству. Эти приложения могут быть разработаны компанией Ledger или любыми другими сторонними компаниями, которые могут воспользоваться открытым исходным кодом, доступным в**[ ](about:blank)**хранилище Github компании Ledger.
 
-**Don't interfere**. You agree that you will not use or attempt to use another user's Wallet without authorization, or use Ledger Services in any manner that could interfere with, disrupt, negatively affect, or inhibit other Users from fully enjoying Ledger Services, or that could damage, disable, overburden or impair the functioning of Ledger Services in any manner.
+Разработчики приложений для устройства несут ответственность за упомянутые приложения и их работу, а также за поддержку этих приложений на устройстве Ledger и в Ledger Live, если таковая предусмотрена для этих устройств. Компания Ledger может выполнять проверки кода и аудит безопасности приложений для устройства, доступных в диспетчере Ledger Live, что не является каким-либо подтверждением или гарантией отсутствия рисков, сопряженных с использованием этих приложений.
 
-Any use of Ledger Services other than as specifically authorized in these Terms, without our prior written permission, is strictly prohibited and will terminate your license to use Ledger Services.
+Компания Ledger не гарантирует, что приложения для устройства будут поддерживаться через определенное время, и оставляет за собой право на ограничение или приостановку доступа к ним со стороны Сервисов Ledger по любой причине, если это будет сочтено необходимым.
 
-## Warranties and Disclaimers
+Экспериментальные функции
 
-Ledger will use reasonable level of skill and care to ensure that Ledger Services can be accessed by you in accordance with the present Terms of Use, but there are no guarantees that access and features will not be interrupted or that there will be no delays, failures, errors, omissions, corruption or loss of transmitted information. Ledger Services are provided "as is" without any warranty of any kind, either express or implied, and in particular without implied warranties of merchantability, reliability, and fitness for a particular purpose.
+Чтобы удовлетворить запросы опытных Пользователей и создать новые функции и возможности, мы разработали ряд экспериментальных функций в Ledger Live. Эти функции могут быть незаконченными и не полностью проверенными, поэтому их использование может быть сопряжено с риском. Они могут содержать ошибки или неточности, которые могут приводить к сбоям, ошибкам и потере данных и (или) информации. Их следует рассматривать как бета-версию функций. Компания Ledger не гарантирует стабильность, полноценную техническую реализацию и долгосрочную поддержку этих функций. Неопытным Пользователям, не обладающим уверенными техническими навыками, не рекомендуется работать с этими функциями. Вы прямо подтверждаете свое согласие с тем, что используете экспериментальные функции исключительно под вашу ответственность.
 
-### Availability of Ledger Services
+Детали транзакции
 
-We may change, update or suspend the Services, temporarily or indefinitely, so as to carry out works including, but not limited to: firmware and software updates, maintenance operations, amendments to the servers, bug fixes etc. We will make reasonable efforts to give you prior notice of any significant disruption of Ledger Services.
+**Не доверять, а проверять.** Целостность программного обеспечения, особенно при наличии подключения к Интернету, проверить очень сложно. Модель обеспечения безопасности компании Ledger основана на отображении надежных данных, поэтому проверка информации на вашем устройстве Ledger имеет первостепенное значение. Перед подтверждением операции необходимо удостовериться в том, что информация, отображаемая на экране вашего портативного или настольного компьютера, верна и совпадает с информацией, отображаемой на вашем устройстве Ledger. Отправляя криптоактивы, вы несете единоличную ответственность за проверку правильности адреса получателя, суммы и размера комиссии, а также за проверку того, что эти данные совпадают на компьютере, мобильном телефоне и на экране вашего устройства Ledger. Вы также подтверждаете, что использование непроверенных адресов для получения криптоактивов осуществляется исключительно под вашу ответственность.
 
-Ledger does not guarantee the correct functioning of the Services in the event of the installation or use of programs or applications that do not conform to Service specifications and technical standards.
+Сторонние сервисы и материалы
 
-Please note that when a Ledger Service is unavailable or suspended, you can always recover your Private Keys using your 24-Recovery Phrase on any compatible Wallet.
+Ledger Live может поддерживать сторонние сервисы, ссылаться на них или предоставлять к ним доступ.
 
-### Underlying blockchain protocols
+Вы соглашаетесь с тем, что использование сторонних сервисов регулируется отдельными положениями и условиями между вами и третьей стороной, указанной в Ledger Live. Компания Ledger не несет ответственности за работу или неисправность сторонних сервисов. Вы обязаны ознакомиться с условиями и положениями третьей стороны, прежде чем использовать сторонний сервис. Некоторые сторонние сервисы могут запрашивать или требовать доступ к вашим персональным данным. Обработка таких данных должна осуществляться в соответствии с политикой конфиденциальности и рекомендованными действиями соответствующей третьей стороны.
 
-All transactions created through Ledger Services are confirmed and recorded in associated blockchain networks. Such networks are decentralized peer-to-peer networks run by independent third parties, which Ledger does not own, control or operate. We have no control over blockchain networks and, therefore, cannot and do not ensure that the transactions you broadcast on Ledger Services will be confirmed and processed. You acknowledge that we do not store, send, or receive Crypto Assets and you agree that the transactions you configure on Ledger Services may fail, or may be substantially delayed by the underlying blockchain networks.
+Сторонние сервисы могут работать некорректно с вашим программным обеспечением или устройством Ledger, и мы не всегда можем оказывать поддержку в случае проблем, вызванных сторонними сервисами. Если у вас возникли вопросы или сомнения по поводу того, как работает сторонний сервис, или если вам нужна помощь, обратитесь напрямую к соответствующей третьей стороне.
 
-On occasions, the blockchain protocol of a given Crypto Asset may change, which may have consequences on its key characteristics including but not limited to their availability, name, security, valuation or the way it operates. Forks entail that forked Crypto Assets may be misdirected or replicated. In any such events, Ledger may decide, at its discretion, to suspend support of the impacted Crypto Asset for as long as Ledger deems necessary. When it so decides, Ledger will endeavor to give you advance notice, but may not be able to. You should keep yourself apprised of such events and make all necessary arrangements.
+Рекомендуется не вводить учетные данные, пароли, закрытые ключи, парольную фразу и любые другие конфиденциальные данные в сторонних сервисах без предварительной проверки их легитимности.
 
-### Device Applications
+Мы сохраняем за собой исключительное право добавлять, изменять или аннулировать доступность любого стороннего сервиса по любой причине и без предварительного уведомления.
 
-Device Applications are available for download on Ledger Live Manager, or can be installed following our [guidelines](https://ledger.readthedocs.io/en/latest/userspace/getting_started.html) and may either be developed by Ledger, or by any willing third party, thanks to open source code available on Ledger [Github repository.](https://github.com/LedgerHQ)
+Особые правила и обязательства применимы к перечисленным далее Сервисам.
 
-Developers of Device Applications are responsible for the said applications and their performance, and for providing support for Device Applications supported on a Ledger Device and on Ledger Live. Ledger may perform code reviews and conduct security audits of Device Applications available on Ledger Live Manager, which does not constitute any kind of endorsement nor any guarantee that those applications are risk-free.
+**A. Сервис «Купить крипто»**
 
-Ledger does not warranty that Device Applications will be maintained over time and reserves the right to restrict or suspend access to them from Ledger Services for any reason for as long as deemed necessary.
+Ссылки на сервисы «Купить крипто» являются спонсируемыми ссылками. Наличие ссылки на один из Сервисов Ledger или ссылки с него не означает и не подразумевает их поддержку.
 
-### Experimental features
+**B. Делегирование прав на стейкинг**
 
-In order to accommodate advanced Users' requests and to build new features and functionalities, we have released a series of experimental features on Ledger Live. These features may not be complete and have not been fully tested, which may present heightened risks. They may contain errors or inaccuracies that could cause failures, corruption or loss of data and/or information. You can think of these features as beta features. Ledger does not guarantee the stability, functionality, or long-term support of these features. We do not recommend to use these features unless you are an advanced User with strong technical skills. You expressly acknowledge and agree that all use of the Experimental Features is at your sole risk.
+**Вознаграждения.** Вы в явной форме подтверждаете свою осведомленность о том, что делегирование прав на стейкинг оператору валидатора, указанному в Ledger Live, не дает вам никакого права запрашивать какие-либо выплаты, а лишь дает потенциальное право разделить вознаграждение, полученное валидатором. Обратите внимание, что периоды блокировки зависят от валидатора и протоколов блокчейна.
 
-## Transaction details
+**Валидаторы.** Компания Ledger оставляет за собой право в любое время изменять список указанных валидаторов без предварительного уведомления.
 
-**Do not trust. Verify.** Software integrity, especially when connected to the Internet, is very hard to verify. Ledger's security model relies on trusted display.This is why the verification of the information on your Ledger Device is paramount. Before you approve an operation, you must always double check that the information displayed on your mobile or desktop screen is correct and matches the information displayed on your Ledger Device. Upon sending Crypto Assets, you are solely responsible for verifying that the recipient address, amount and fees are correct and that they are the same on both your computer or mobile and on your Ledger Device's screen. You also acknowledge that using unverified addresses to receive Crypto Assets comes at your own risk.
+Ограничение ответственности
 
-## Third Party Services and Materials
+ВЫ В ЯВНОЙ ФОРМЕ ПОДТВЕРЖДАЕТЕ СВОЮ ОСВЕДОМЛЕННОСТЬ И ДАЕТЕ СОГЛАСИЕ НА ТО, ЧТО КОМПАНИЯ LEDGER, ЕЕ РУКОВОДИТЕЛИ И СОТРУДНИКИ НЕ НЕСУТ ОТВЕТСТВЕННОСТИ ЗА КАКИЕ-ЛИБО ПРЯМЫЕ, ОПОСРЕДОВАННЫЕ, СЛУЧАЙНЫЕ, ФАКТИЧЕСКИЕ, КОСВЕННЫЕ ИЛИ ШТРАФНЫЕ УБЫТКИ, ВКЛЮЧАЯ, ПОМИМО ПРОЧЕГО, УБЫТКИ ОТ УТРАТЫ ПРИБЫЛИ, ПОТЕРИ ДЕЛОВОЙ РЕПУТАЦИИ, ИСПОЛЬЗОВАНИЯ ДАННЫХ, ЗАТРАТ НА ЗАКУПКУ ЗАМЕНИТЕЛЕЙ ТОВАРОВ ИЛИ СЕРВИСОВ ИЛИ ПОТЕРЮ ДРУГИХ НЕМАТЕРИАЛЬНЫХ ЦЕННОСТЕЙ, ВЫЗВАННЫЕ: (I) ИСПОЛЬЗОВАНИЕМ ИЛИ НЕВОЗМОЖНОСТЬЮ ИСПОЛЬЗОВАНИЯ СЕРВИСОВ, (II) ЛЮБЫМИ ИЗМЕНЕНИЯМИ, ВНЕСЕННЫМИ В СЕРВИСЫ, ПРИОСТАНОВЛЕНИЕМ ИЛИ ОТКЛЮЧЕНИЕМ СЕРВИСОВ ИЛИ КАКОЙ-ЛИБО ИХ ЧАСТИ; (III) НЕСАНКЦИОНИРОВАННЫМ ДОСТУПОМ ИЛИ ИЗМЕНЕНИЕМ ПЕРЕДАЧ ИЛИ ДАННЫХ; (IV) УДАЛЕНИЕМ, ПОВРЕЖДЕНИЕМ ИЛИ НЕВОЗМОЖНОСТЬЮ СОХРАНИТЬ И (ИЛИ) ОТПРАВИТЬ ИЛИ ПОЛУЧИТЬ ПЕРЕДАЧИ ИЛИ ДАННЫЕ В СЕРВИСЕ ИЛИ С ЕГО ПОМОЩЬЮ; (V) ЛЮБЫМИ ДРУГИМИ ДЕЙСТВИЯМИ, СВЯЗАННЫМИ С СЕРВИСОМ.
 
-Ledger Live may incorporate, reference or provide access to Third Party Services.
+УКАЗАННЫЕ ВЫШЕ ОГРАНИЧЕНИЯ НЕ ПРИМЕНЯЮТСЯ В ОТНОШЕНИИ УБЫТКОВ, ВОЗНИКШИХ В РЕЗУЛЬТАТЕ (А) МОШЕННИЧЕСТВА, УМЫШЛЕННОГО ПРОТИВОПРАВНОГО ДЕЙСТВИЯ ИЛИ ГРУБОЙ ХАЛАТНОСТИ, УМЫШЛЕННОГО ПРОТИВОПРАВНОГО ДЕЙСТВИЯ ИЛИ МОШЕННИЧЕСТВА КОМПАНИИ LEDGER; (B) СМЕРТИ ИЛИ ТРАВМЫ.
 
-You agree that your use of Third Party Services is subject to separate terms and conditions between you and the third party identified in Ledger Live. Ledger is not responsible for any performance, or failure to perform the Third Party Services. It is your responsibility to review the third party's terms and policies before using a Third Party Service. Some Third Party Services may request or require access to your personal data. The processing of such data will be handled in accordance with the relevant Third Party's privacy policy and best practices.
+Объекты интеллектуальной собственности
 
-Third Party Services may not work appropriately with your software or Ledger Device, and we may not be able to provide support for issues caused by Third Party Services. If you have questions or concerns about how a Third Party Service operates, or need support, please contact the relevant third party directly.
+Компания Ledger уважает право на интеллектуальную собственность других лиц и просит своих Пользователей поступать так же. Вы подтверждаете свое согласие с тем, что, за исключением материалов, выпущенных или иным способом предоставленных в соответствии с общедоступными лицензионными соглашениями, открытым исходным кодом, MIT или другими незапатентованными лицензионными схемами, обычно используемыми сообществом Ledger, компания Ledger владеет всеми авторскими правами, товарными знаками, ноу-хау или любыми другими правами на объекты интеллектуальной собственности в отношении программного обеспечения, текстов, видео, аудио, иллюстраций, логотипов, макетов, а также внешнего вида Ledger Live, приложений для устройства и веб-сайта.
 
-We advise not to share any credential, password, Private Key, passphrase, or any other sensitive information with any Third Party Service without validating their legitimacy first.
+Вы можете просматривать, печатать и (или) скачивать копии патентованных материалов из Сервисов Ledger с помощью любого компьютера исключительно для личного, информационного и (или) некоммерческого использования при условии соблюдения всех положений об авторских правах и других указаний правообладателя.
 
-We retain the exclusive right to add to, modify, or cancel the availability of any such Third Party Service for any reason and without prior notice.
+Товарные знаки, знаки обслуживания и логотипы компании Ledger и других компаний, используемые в Сервисах («Товарные знаки»), являются собственностью компании Ledger или их соответствующих владельцев. Категорически запрещено использовать эти товарные знаки без нашего явно выраженного письменного разрешения или письменного разрешения третьих сторон.
 
-Specific rules and obligations apply to the following Services:
+Обратная связь
 
-1. **Buy Crypto services**
+Мы были бы очень рады получить обратную связь, комментарии, идеи и предложения по поводу улучшения Сервисов («Обратная связь»). Вы предоставляете нам неисключительную, действующую во всем мире, бессрочную, безотзывную, полностью оплаченную, не требующую лицензионных отчислений, сублицензируемую и переуступаемую лицензию на любые и все права на объекты интеллектуальной собственности, которыми вы владеете или управляете, на использование, копирование, изменение, создание производных продуктов на основе Обратной связи, а также ее использование иным образом для каких-либо целей.
 
-Links to Buy Crypto services are sponsored links. The existence of a link to or from one of Ledger Services does not represent or imply any endorsement of such services.
+Нормативно-правовое соответствие и экспортный контроль
 
-1. **Delegation of staking rights**
+Пользователи должны самостоятельно нести расходы, связанные с соблюдением всех законов, применимых к настоящим Условиям или вытекающих из них. Получая доступ к Сервисам и пользуясь ими, вы заверяете и гарантируете, что не внесены в какие-либо списки торговых или экономических санкций, такие как (среди прочего) санкционный перечень Совета Безопасности ООН, обозначенный OFAC (Управление по контролю за иностранными активами при Министерстве финансов США) как «Список граждан особых категорий и запрещенных лиц» или «Санкционный перечень» Министерства торговли США.
 
-**Rewards**. You explicitly confirm that you are aware that delegation of staking rights to a validator operator listed in Ledger Live does not grant to your benefit any right to request payment of any kind, but merely a potential right to share a reward perceived by the validator. Please note that lock-up periods depend on the validator and blockchain protocols.
+Компания Ledger оставляет за собой право выбирать рынки и юрисдикции, в которых она работает, а также может ограничивать или запрещать доступ к Сервисам Ledger в определенных странах, штатах или регионах.
 
-**Validators**. Ledger reserves the right to modify the list of referenced validators at any time without prior notice.
+Прекращение действия
 
-## Limitation of liability
+Вы можете прекратить использование Сервисов в любое время. Мы оставляем за собой право приостановить доступ к Сервисам Ledger без предварительного уведомления, если, по нашему мнению, вы нарушили настоящие Условия. В случае прекращения действия вашей лицензии на использование Сервисов Ledger ваши обязательства в рамках настоящих Условий сохраняются.
 
-YOU EXPRESSLY UNDERSTAND AND AGREE THAT LEDGER AND ITS DIRECTORS AND EMPLOYEES SHALL NOT BE LIABLE TO YOU FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL OR EXEMPLARY DAMAGES, INCLUDING, BUT NOT LIMITED TO, DAMAGES FOR LOSS OF PROFITS, GOODWILL, USE, DATA, COST OF PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES, OR OTHER INTANGIBLE LOSSES, RESULTING FROM: (I) THE USE OR INABILITY TO USE THE SERVICES (II) ANY CHANGES MADE TO THE SERVICE OR ANY SUSPENSION OR CESSATION OF THE SERVICES OR ANY PART THEREOF; (III) THE UNAUTHORIZED ACCESS TO OR ALTERATION OF YOUR TRANSMISSIONS OR DATA; (IV) THE DELETION OF, CORRUPTION OF, OR FAILURE TO STORE AND/OR SEND OR RECEIVE YOUR TRANSMISSIONS OR DATA ON OR THROUGH THE SERVICE; AND (V) ANY OTHER MATTER RELATING TO THE SERVICE.
+Доступ к вашим кошелькам после прекращения действия лицензии зависит от того, сделали ли вы надежную резервную копию закрытых ключей и адресов своего кошелька.
 
-THE ABOVE LIMITATIONS DO NOT APPLY IN RESPECT OF LOSS RESULTING FROM (A) LEDGER'S FRAUD, WILFUL MISCONDUCT OR GROSS NEGLIGENCE, WILFUL MISCONDUCT OR FRAUD; OR (B) DEATH OR PERSONAL INJURY.
+Применимое законодательство
 
-## Intellectual Property
+Эти Условия регулируются и толкуются в соответствии с законодательством Франции.
 
-Ledger respects the intellectual property of others and we ask our Users to do the same. You acknowledge and agree that, with the exception of Materials released or anyway made available pursuant to public license agreements, open source, MIT, or other non-proprietary license schemes normally used by the Ledger community, Ledger owns all copyrights, trademarks, know-how or any other intellectual property rights in respect of the software, text, video, audio, artwork, logos, layout as well as the look and feel pertaining to Ledger Live, Device Applications, and the Website.
+Любые споры, конфликты, разногласия или претензии, возникающие в результате действия настоящего Соглашения или связанные с ним, включая наличие, срок действия, толкование, исполнение, нарушение или прекращение его действия, или любой спор, связанный с внедоговорными обязательствами, возникающими в связи с ним или связанными с ним, следует передать на рассмотрение суда надлежащей юрисдикции в г. Париж (Франция) для окончательного разрешения.
 
-You may view, print and/or download a copy of proprietary Materials from Ledger Services on any single computer solely for your personal, informational and/or non-commercial use, provided you comply with all copyright and other proprietary notices.
+Обеспечение исполнения обязательств и передача прав в рамках Условий
 
-The trademarks, service marks and logos of Ledger and others used in the Services ("Trademarks") are the property of Ledger and their respective owners. It is strictly prohibited to use these Trademarks without our express written authorisation or the express written authorisation of any third parties.
+Настоящие Условия представляют собой полное и исключительное соглашение и договоренность между компанией Ledger и вами в отношении Сервисов Ledger, а также заменяют все предыдущие устные или письменные договоренности или соглашения между компанией Ledger и вами в отношении Сервисов Ledger. Если вы не в полной мере прочитали и принимаете Условия, вам не следует использовать или продолжать использовать Сервисы Ledger.
 
-## Feedback
+Мы оставляем за собой право иногда изменять, дополнять или вносить поправки в эти Условия исключительно по своему усмотрению. Мы сообщим вам о таких изменениях, предоставив измененные Условия через Ledger Live и обновив дату в заголовке «Последнее обновление» в верхней части настоящих Условий. Измененные Условия считаются вступившими в силу сразу после их размещения в Ledger Live.
 
-We welcome feedback, comments, ideas, and suggestions for improvements to the Services ("Feedback"). You grant to us a non-exclusive, worldwide, perpetual, irrevocable, fully-paid, royalty-free, sublicensable and transferable license under any and all intellectual property rights that you own or control to use, copy, modify, create derivative works based upon and otherwise exploit the Feedback for any purpose.
+Вы не можете полностью или частично передавать свои права или обязательства какой-либо третьей стороне в рамках настоящих Условий использования.
 
-## Compliance and Export Control
+Вы подтверждаете свое согласие с тем, что компания Ledger может передавать свои права и обязательства третьим сторонам в рамках настоящих Условий использования и в таком контексте предоставлять или передавать сведения, предоставленные вами во время использования Сервисов Ledger.
 
-Users shall comply, at their own expense, with all laws that apply to or result from their obligations under these Terms. By accessing and using the Services, you represent and warrant that you are not on any trade or economic sanctions lists, such as (but not limited to) the UN Security Council Sanctions list, designated as a "Specially Designated National" by OFAC (Office of Foreign Assets Control of the U.S. Treasury Department) or placed on the U.S. Commerce Department's "Denied Persons List".
-
-Ledger reserves the right to select the markets and jurisdictions where it operates and may restrict or deny access to Ledger Services in certain countries, states or territories.
-
-## Termination
-
-You may stop using the Services at any time. We reserve the right to suspend your access to Ledger Services without notice if we believe you violated these Terms. In the event of termination concerning your license to use Ledger, your obligations under these Terms will continue.
-
-Your access to your Wallets after termination will depend on whether you securely backed up your Private Keys and your Wallet address.
-
-## Applicable law
-
-These Terms will be governed by and interpreted in accordance with the laws of France.
-
-Any dispute, controversy, difference or claim arising out of or relating to this Agreement, including the existence, validity, interpretation, performance, breach or termination thereof or any dispute regarding non-contractual obligations arising out of or relating to it shall be referred to and finally resolved by the competent courts of Paris, France.
-
-## Enforcement and Assignment of Terms
-
-These Terms constitute the entire and exclusive understanding and agreement between Ledger and you regarding Ledger Services, and supersede and replace any and all prior oral or written understandings or agreements between Ledger and you regarding Ledger Services. If you do not read and accept the Terms in their entirety you should not use or continue using Ledger Services.
-
-We reserve the right to alter, amend or modify these Terms from time to time, in our sole discretion. We will provide you with notice of such changes by posting the amended Terms via Ledger Live and updating the "Last Updated" date at the top of these Terms. The amended Terms will be deemed effective immediately upon posting on Ledger Live.
-
-You may not assign your rights or obligations under these Terms of Use in whole or in part to any third party.
-
-You acknowledge and agree that Ledger may assign its rights and obligations under these Terms of Use and, in such context, share or transfer information provided by you while using Ledger Services to a third party.
-
-Would any provision of these Terms of Use or part thereof to any extent be or become invalid or unenforceable, such provision shall then be deemed separable from the remaining provisions of these Terms of Use and shall not affect or impair the validity or enforceability of the remaining provisions of these Terms of Use.
+Если какое-либо положение настоящих Условий использования или их часть становится до какой-либо степени недействительным или не имеющим законной силы, то такое положение будет считаться отделяемым от остальных положений настоящих Условий использования и не будет влиять на действительность или законную силу остальных положений настоящих Условий использования.
