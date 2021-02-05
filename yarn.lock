@@ -1209,10 +1209,10 @@
     "@ledgerhq/errors" "^5.41.0"
     events "^3.2.0"
 
-"@ledgerhq/live-common@18.3.4":
-  version "18.3.4"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-18.3.4.tgz#177d8d4c967ce1d93e29f8bcfff9d12471660234"
-  integrity sha512-MvyQJ4SkrFMKikeN0ojkrQEusT3hbq6wacckitOInXsDrLjlMpCrWzNa/Coxw7CzG51obb0jlchCrXjxyDxy+Q==
+"@ledgerhq/live-common@18.3.4-beta-stargate":
+  version "18.3.4-beta-stargate"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-18.3.4-beta-stargate.tgz#462c902597d7b727b0084453102268670cca6f6f"
+  integrity sha512-7dBsJOtIYyVoIpqjbfSCt31b2xF5CCzEhw60z47vlUbNUq1xNHgec09OtZSkUAyrd1U/46tYhoAuK4FnJKu/Tw==
   dependencies:
     "@ledgerhq/compressjs" "1.3.2"
     "@ledgerhq/cryptoassets" "5.42.1"
@@ -1246,6 +1246,7 @@
     ethereumjs-tx "^2.1.2"
     ethereumjs-util "^7.0.7"
     expect "^26.6.2"
+    https-proxy-agent "^5.0.0"
     invariant "^2.2.2"
     isomorphic-ws "^4.0.1"
     lodash "^4.17.20"
@@ -1295,10 +1296,10 @@
     rxjs "^6.6.3"
     uuid "^3.4.0"
 
-"@ledgerhq/react-native-ledger-core@4.16.3":
-  version "4.16.3"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/react-native-ledger-core/-/react-native-ledger-core-4.16.3.tgz#5199734029df9a25b77d15af2e21a98812a73b77"
-  integrity sha512-MqqkEHmYYNuElGZc0GTdKB0M0i80KHqE5fTrJivuuiVADUw9PEo9nrOXTNzGW8cA3MCP4YqhgRYyTWr4t6KD0w==
+"@ledgerhq/react-native-ledger-core@4.17.0-beta.1":
+  version "4.17.0-beta.1"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/react-native-ledger-core/-/react-native-ledger-core-4.17.0-beta.1.tgz#ad12848332f21e7c7b719cfe0985de39fefa2ef4"
+  integrity sha512-mPn2LRTmhZLTnw3YMNmS5fCzSxsUzVAPAXSX0ctXTEOMsoJaXWOqbi09fUoQdtLwVKCPrToM0zrUvOnxdzwVeg==
 
 "@ledgerhq/react-native-passcode-auth@^2.1.0":
   version "2.1.0"
