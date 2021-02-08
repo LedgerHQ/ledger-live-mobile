@@ -3258,7 +3258,8 @@
           }
         }
       }
-    }
+    },
+    "networkFees": "Network fees are automatically set by the Polkadot consensus, you won't be able to review them on your device"
   },
   "delegation": {
     "overdelegated": "Overdelegated",
@@ -3366,7 +3367,7 @@
     "validatorAddress": "Validator address",
     "rewardAmount": "Reward amount",
     "undelegatedAmount": "Undelegated amount",
-    "memo": "Memo"
+    "memo": "Memo",
   },
   "Terms": {
     "title": "Terms of Use",
