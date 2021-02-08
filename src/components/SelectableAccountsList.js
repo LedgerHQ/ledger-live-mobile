@@ -59,6 +59,7 @@ export default function SelectableAccountsList({
   index = -1,
   onAccountNameChange,
   style,
+  useFullBalance?: Boolean,
 }: Props) {
   const { colors } = useTheme();
   const navigation = useNavigation();
@@ -97,6 +98,7 @@ export default function SelectableAccountsList({
           isDisabled={isDisabled}
           onPress={onPressAccount}
           colors={colors}
+          useFullBalance={this.props.useFullBalance}
         />
       ))}
       {accounts.length === 0 && emptyState ? emptyState : null}
