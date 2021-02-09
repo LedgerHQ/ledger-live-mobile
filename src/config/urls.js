@@ -17,6 +17,8 @@ export const urls = {
     "https://support.ledgerwallet.com/hc/en-us/articles/360006535873?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=fees",
   feesEthereum:
     "https://support.ledger.com/hc/en-us/articles/115005197845?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=eth_fees",
+  feesPolkadot:
+    "https://support.ledger.com/hc/en-us/articles/360018131220?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=dot_fees",
   verifyTransactionDetails:
     "https://support.ledger.com/hc/en-us/articles/360006444193?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=tx_device_check",
   erc20:
@@ -28,6 +30,10 @@ export const urls = {
       "https://support.ledger.com/hc/en-us/articles/360012109220?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=error_syncerror",
     LedgerAPIErrorWithMessage:
       "https://status.ledger.com?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=error_apierrorwithmessage",
+    CosmosStargateFeb2021Warning:
+      "https://support.ledger.com/hc/en-us/articles/360013713840-Cosmos-ATOM-",
+    StratisDown2021Warning:
+      "https://support.ledger.com/hc/en-us/articles/115005175329",
   },
   multipleAddresses:
     "https://support.ledger.com/hc/en-us/articles/360033802154?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=ops_details_change",
@@ -57,6 +63,8 @@ export const urls = {
     "https://support.ledger.com/hc/en-us/articles/360014339340-Earn-Cosmos-staking-rewards?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=cosmos",
   algorandStaking:
     "https://support.ledger.com/hc/en-us/articles/360015897740?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=algorand",
+  polkadotStaking:
+    "https://support.ledger.com/hc/en-us/articles/360019187260?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=polkadot",
   swap: {
     info:
       "https://www.ledger.com/swap?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=swap_intro",
@@ -77,6 +85,8 @@ export const urls = {
       "https://shop.ledger.com/products/ledger-backup-pack?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=banner_carousel",
     ledgerAcademy:
       "https://www.ledger.com/academy?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=banner_carousel",
+    valentine:
+      "https://shop.ledger.com/pages/valentines-day-special-offers?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=banner_carousel",
   },
   compound:
     "https://support.ledger.com/hc/en-us/articles/360017215099?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=compound",

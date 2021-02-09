@@ -76,6 +76,7 @@ export const lightTheme = {
     lightOrange: "#FF984F",
     translucentGreen: "rgba(102, 190, 84, 0.2)",
     translucentGrey: "rgba(153, 153, 153, 0.2)",
+    lightLiveBg: "#eef0ff",
 
     errorBg: "#ff0042",
 
@@ -117,11 +118,12 @@ export const duskTheme = {
     /* DERIVATIVES */
     lightLive: "#4b84ff19",
     lightAlert: "#ea2e490c",
-    lightFog: "rgba(100,144,241, 0.1)",
+    lightFog: "#1c293c",
     lightGrey: "rgba(255,255,255, 0.05)",
     lightOrange: "#FF984F",
     translucentGreen: "rgba(102, 190, 84, 0.2)",
     translucentGrey: "rgba(153, 153, 153, 0.2)",
+    lightLiveBg: "#1d2e46",
 
     errorBg: "#ff0042",
 
@@ -163,11 +165,12 @@ export const darkTheme = {
     /* DERIVATIVES */
     lightLive: "#4b84ff19",
     lightAlert: "#ea2e490c",
-    lightFog: "rgba(100,144,241, 0.1)",
+    lightFog: "#1c202b",
     lightGrey: "rgba(255,255,255, 0.05)",
     lightOrange: "#FF984F",
     translucentGreen: "rgba(102, 190, 84, 0.2)",
     translucentGrey: "rgba(153, 153, 153, 0.2)",
+    lightLiveBg: "#222635",
 
     errorBg: "#ff0042",
 
