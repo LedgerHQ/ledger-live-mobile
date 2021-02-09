@@ -3032,6 +3032,7 @@
     "lockedBalance": "Actifs liés au staking",
     "unlockingBalance": "Actifs en cours de débloquage",
     "unlockedBalance": "Actifs déliés",
+    "networkFees": "Network fees are automatically set by the Polkadot consensus, you won't be able to review them on your device",
     "info": {
       "available": {
         "title": "DOT disponibles",
@@ -3268,8 +3269,7 @@
           }
         }
       }
-    },
-    "networkFees": "Network fees are automatically set by the Polkadot consensus, you won't be able to review them on your device"
+    }
   },
   "delegation": {
     "overdelegated": "Overdelegated",
@@ -3377,7 +3377,7 @@
     "validatorAddress": "Validator address",
     "rewardAmount": "Reward amount",
     "undelegatedAmount": "Undelegated amount",
-    "memo": "Memo",
+    "memo": "Memo"
   },
   "Terms": {
     "title": "Conditions d'utilisation",
