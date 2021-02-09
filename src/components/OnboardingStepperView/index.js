@@ -18,6 +18,7 @@ import Styles from "../../navigation/styles";
 import { InfoStepView } from "./OnboardingStepView";
 import type { InfoStepViewProps } from "./OnboardingStepView";
 import AnimatedSvgBackground from "../AnimatedSvgBackground";
+import Touchable from "../Touchable";
 
 export type OnboardingScene = {
   id: string,
@@ -131,13 +132,15 @@ export default function OnboardingStepperView({
             </Pressable>
           )}
           {currentScene?.sceneInfoKey && (
-            <Pressable
+            <Touchable
+              event={`Onboarding - ${currentScene?.sceneProps.trackPage ||
+                ""} need help`}
               hitSlop={hitSlop}
               style={styles.buttons}
               onPress={openInfoModal}
             >
               <Question size={20} color={sceneColors[1]} />
-            </Pressable>
+            </Touchable>
           )}
         </View>
         <View style={styles.indicatorContainer}>
