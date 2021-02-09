@@ -1209,10 +1209,10 @@
     "@ledgerhq/errors" "^5.43.0"
     events "^3.2.0"
 
-"@ledgerhq/live-common@18.4.0":
-  version "18.4.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-18.4.0.tgz#309d0c5893988abe972dbeaf3c1e859a76151422"
-  integrity sha512-ME6bX+/F6SDTSQmVXmr0S5i0itIp3ZlAWAcr5sa0je1sNgzK4rUwUTMbA1Pm3Me2d+Mp5lxzlQdvPhe8GTOekQ==
+"@ledgerhq/live-common@^18.5.0-stargate.0":
+  version "18.5.0-stargate.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-18.5.0-stargate.0.tgz#64124e27d91df5e8b7fa80822901919ec7df0c7f"
+  integrity sha512-tydD/f2jqFnPlQAz/IDwmA0cB3r5+Sfbnp6MHQqlUnc9nUn7RZ0qJhdTYdN77GVttNF0Ax1wqP6/lTDPUmqkjQ==
   dependencies:
     "@ledgerhq/compressjs" "1.3.2"
     "@ledgerhq/cryptoassets" "5.43.0"
@@ -1295,10 +1295,10 @@
     rxjs "^6.6.3"
     uuid "^3.4.0"
 
-"@ledgerhq/react-native-ledger-core@4.16.3":
-  version "4.16.3"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/react-native-ledger-core/-/react-native-ledger-core-4.16.3.tgz#5199734029df9a25b77d15af2e21a98812a73b77"
-  integrity sha512-MqqkEHmYYNuElGZc0GTdKB0M0i80KHqE5fTrJivuuiVADUw9PEo9nrOXTNzGW8cA3MCP4YqhgRYyTWr4t6KD0w==
+"@ledgerhq/react-native-ledger-core@4.17.0":
+  version "4.17.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/react-native-ledger-core/-/react-native-ledger-core-4.17.0.tgz#2de5d4eebea4fde0d2bef338737c7a8cf1be6d8c"
+  integrity sha512-ddXyp+c1/DucpEl6yYFwBidhjzIK0R1vwPP5Xcjl9ymPU3wULleOExIVPMkwro7G1SQcFyN2FhXjDNdzXsRptA==
 
 "@ledgerhq/react-native-passcode-auth@^2.1.0":
   version "2.1.0"
@@ -1390,6 +1390,15 @@
   dependencies:
     "@babel/runtime" "^7.12.5"
 
+"@polkadot/reactnative-identicon@0.52.1":
+  version "0.52.1"
+  resolved "https://registry.yarnpkg.com/@polkadot/reactnative-identicon/-/reactnative-identicon-0.52.1.tgz#901802e3381bd9011a4f9e543d9de00ebdc36e8d"
+  integrity sha512-cALsSFJvpmtyqdPT2EiDjaRYG1icvlv2g8fXKMZXTvxylOxTIdWxqmO1ceYCK8yFdsjJlYrBXG+EyKdyOisnjw==
+  dependencies:
+    "@babel/runtime" "^7.9.2"
+    "@polkadot/ui-shared" "0.52.1"
+    react-native-svg "^12.0.3"
+
 "@polkadot/types-known@3.6.4":
   version "3.6.4"
   resolved "https://registry.yarnpkg.com/@polkadot/types-known/-/types-known-3.6.4.tgz#765c212a7b8a9e4fa1538041911a0aa30302c5e4"
@@ -1412,6 +1421,14 @@
     "@polkadot/x-rxjs" "^5.4.4"
     "@types/bn.js" "^4.11.6"
     bn.js "^4.11.9"
+
+"@polkadot/ui-shared@0.52.1":
+  version "0.52.1"
+  resolved "https://registry.yarnpkg.com/@polkadot/ui-shared/-/ui-shared-0.52.1.tgz#255b595c2d7857b4f4f4aa767f0bafe1d15e3d1c"
+  integrity sha512-Ss49s0x5+/KXh2AlthvM8ix4D4YVUwA3XUvEBZh1tPWKsZM5PWmOwERYv5DY9tAZoUWcbo7/7iCG20bsZktONA==
+  dependencies:
+    "@babel/runtime" "^7.9.2"
+    color "^3.1.2"
 
 "@polkadot/util-crypto@^5.4.4":
   version "5.4.4"
@@ -1510,23 +1527,6 @@
   dependencies:
     "@babel/runtime" "^7.12.5"
     "@polkadot/x-global" "5.4.4"
-
-"@polkadot/reactnative-identicon@0.52.1":
-  version "0.52.1"
-  resolved "https://registry.yarnpkg.com/@polkadot/reactnative-identicon/-/reactnative-identicon-0.52.1.tgz#901802e3381bd9011a4f9e543d9de00ebdc36e8d"
-  integrity sha512-cALsSFJvpmtyqdPT2EiDjaRYG1icvlv2g8fXKMZXTvxylOxTIdWxqmO1ceYCK8yFdsjJlYrBXG+EyKdyOisnjw==
-  dependencies:
-    "@babel/runtime" "^7.9.2"
-    "@polkadot/ui-shared" "0.52.1"
-    react-native-svg "^12.0.3"
-
-"@polkadot/ui-shared@0.52.1":
-  version "0.52.1"
-  resolved "https://registry.yarnpkg.com/@polkadot/ui-shared/-/ui-shared-0.52.1.tgz#255b595c2d7857b4f4f4aa767f0bafe1d15e3d1c"
-  integrity sha512-Ss49s0x5+/KXh2AlthvM8ix4D4YVUwA3XUvEBZh1tPWKsZM5PWmOwERYv5DY9tAZoUWcbo7/7iCG20bsZktONA==
-  dependencies:
-    "@babel/runtime" "^7.9.2"
-    color "^3.1.2"
 
 "@react-native-community/art@^1.0.3", "@react-native-community/art@^1.1.2":
   version "1.1.2"
