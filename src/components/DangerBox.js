@@ -2,8 +2,8 @@
 import React from "react";
 import { Trans } from "react-i18next";
 import { StyleSheet, View, Text } from "react-native";
+import { useTheme } from "@react-navigation/native";
 import LText from "./LText";
-import colors from "../colors";
 import ShieldAlt from "../icons/ShieldAlt";
 
 type Props = {
@@ -17,15 +17,16 @@ export default function WarningBox({
   onLearnMore,
   learnMoreKey,
 }: Props) {
+  const { colors } = useTheme();
   return (
-    <View style={styles.root}>
+    <View style={[styles.root, { backgroundColor: colors.lightAlert }]}>
       <ShieldAlt color={colors.alert} size={16} />
-      <Text style={styles.content}>
+      <Text style={[styles.content, { color: colors.alert }]}>
         <LText fontSize={3}>{description}</LText>{" "}
         {onLearnMore && (
           <LText
             semiBold
-            style={styles.learnMore}
+            style={[styles.learnMore, { color: colors.alert }]}
             fontSize={3}
             onPress={onLearnMore}
           >
@@ -42,12 +43,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     paddingVertical: 8,
     paddingHorizontal: 16,
-    backgroundColor: colors.lightAlert,
     borderRadius: 4,
     alignItems: "center",
   },
   content: {
-    color: colors.alert,
     flex: 1,
     margin: 10,
     marginLeft: 16,
@@ -56,6 +55,5 @@ const styles = StyleSheet.create({
   learnMore: {
     textDecorationLine: "underline",
     marginTop: 8,
-    color: colors.alert,
   },
 });

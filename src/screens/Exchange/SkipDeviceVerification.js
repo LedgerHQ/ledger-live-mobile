@@ -5,7 +5,7 @@ import { Trans } from "react-i18next";
 import { View, StyleSheet } from "react-native";
 import type { Account } from "@ledgerhq/live-common/lib/types";
 import { getAccountCurrency } from "@ledgerhq/live-common/lib/account/helpers";
-import colors from "../../colors";
+import { useTheme } from "@react-navigation/native";
 import LText from "../../components/LText";
 import CurrencyIcon from "../../components/CurrencyIcon";
 import Button from "../../components/Button";
@@ -18,10 +18,11 @@ type Props = {
 
 const SkipDeviceVerification = ({ settleTrade, account }: Props) => {
   const currency = getAccountCurrency(account);
+  const { colors } = useTheme();
 
   return (
     <View style={styles.root}>
-      <LText style={styles.title}>
+      <LText style={[styles.title, { color: colors.darkBlue }]}>
         <Trans
           i18nKey="exchange.buy.skipDeviceVerification.address"
           values={{
@@ -76,7 +77,6 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 12,
-    color: colors.darkBlue,
     opacity: 0.5,
   },
   account: {
