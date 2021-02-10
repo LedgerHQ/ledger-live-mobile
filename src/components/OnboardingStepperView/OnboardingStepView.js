@@ -1,6 +1,12 @@
 // @flow
 import React, { useCallback, useMemo, useState } from "react";
-import { View, StyleSheet, Pressable, Image, ScrollView } from "react-native";
+import {
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+  ScrollView,
+} from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { normalize } from "../../helpers/normalizeSize";
 import { TrackScreen } from "../../analytics";
@@ -185,7 +191,7 @@ export function InfoStepView({
           </View>
         )}
         {ctaText && (
-          <Pressable
+          <TouchableOpacity
             style={[
               styles.ctaButton,
               {
@@ -206,7 +212,7 @@ export function InfoStepView({
             >
               {ctaText}
             </LText>
-          </Pressable>
+          </TouchableOpacity>
         )}
         {ctaWarningModal && (
           <ConfirmationModal
