@@ -77,7 +77,9 @@ export default function MainNavigator({
         name={NavigatorName.Manager}
         component={ManagerNavigator}
         options={{
-          tabBarIcon: (props: any) => <ManagerTabIcon {...props} />,
+          tabBarIcon: (props: any) => (
+            <ManagerTabIcon {...props} ptIds={["Porfolio-ManagerTab"]} />
+          ),
         }}
         listeners={({ navigation }) => ({
           tabPress: e => {
