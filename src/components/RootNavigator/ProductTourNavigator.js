@@ -13,18 +13,18 @@ import { getStackNavigatorConfig } from "../../navigation/navigatorConfig";
 import { navigate } from "../../rootnavigation";
 
 export default function ProductTourNavigator() {
+  const { colors } = useTheme();
+  const stackNavigationConfig = useMemo(
+    () => getStackNavigatorConfig(colors, true),
+    [colors],
+  );
+
   const headerStyle = {
     backgroundColor: colors.live,
     shadowOpacity: 0,
     borderBottomWidth: 0,
     elevation: 0,
   };
-
-  const { colors } = useTheme();
-  const stackNavigationConfig = useMemo(
-    () => getStackNavigatorConfig(colors, true),
-    [colors],
-  );
 
   return (
     <Stack.Navigator
