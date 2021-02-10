@@ -60,15 +60,12 @@ export const useProductTourOverlay = (step, holeConfig: string) => {
 
   useFocusEffect(
     useCallback(() => {
-      if (
-        ptContext.currentStep === step &&
-        !ptContext.holeConfig !== holeConfig
-      ) {
+      if (ptContext.currentStep === step) {
         enableHole(holeConfig);
       }
 
       return () => enableHole(null);
-    }, [holeConfig, ptContext.currentStep, ptContext.holeConfig, step]),
+    }, [holeConfig, ptContext.currentStep, step]),
   );
 };
 
