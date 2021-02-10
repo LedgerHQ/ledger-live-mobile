@@ -59,7 +59,7 @@ export default function PortfolioScreen({ navigation }: Props) {
   const counterValueCurrency = useSelector(counterValueCurrencySelector);
   const portfolio = usePortfolio();
 
-  useProductTourOverlay("Porfolio-AccountsTab");
+  useProductTourOverlay("INSTALL_CRYPTO", "Porfolio-AccountsTab");
 
   const refreshAccountsOrdering = useRefreshAccountsOrdering();
   useFocusEffect(refreshAccountsOrdering);

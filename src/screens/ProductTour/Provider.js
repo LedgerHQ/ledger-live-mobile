@@ -50,21 +50,20 @@ const initialState = {
 
 export const context = React.createContext<State>(initialState);
 
-export const useProductTourOverlay = (holeConfig: string) => {
+export const useProductTourOverlay = (step, holeConfig: string) => {
   const ptContext = useContext(context);
 
   useFocusEffect(
     useCallback(() => {
       if (
-        ptContext.currentStep === "INSTALL_CRYPTO" &&
+        ptContext.currentStep === step &&
         !ptContext.holeConfig !== holeConfig
       ) {
-        console.log("enable hole");
         enableHole(holeConfig);
       }
 
       return () => enableHole(null);
-    }, [holeConfig, ptContext.currentStep, ptContext.holeConfig]),
+    }, [holeConfig, ptContext.currentStep, ptContext.holeConfig, step]),
   );
 };
 
