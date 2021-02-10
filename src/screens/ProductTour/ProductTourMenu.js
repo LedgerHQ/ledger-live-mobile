@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useCallback } from "react";
 import { Trans } from "react-i18next";
 import _ from "lodash";
 import {
@@ -255,13 +255,15 @@ const ProductTourMenu = ({ navigation }: Props) => {
   };
 
   // eslint-disable-next-line consistent-return
-  useFocusEffect(() => {
-    if (ptContext.currentStep) {
-      // timeout avoid ui glitch
-      to = setTimeout(() => setStep(null), 1000);
-      // we don't cancel it on purpose
-    }
-  }, [ptContext.currentStep]);
+  useFocusEffect(
+    useCallback(() => {
+      if (ptContext.currentStep) {
+        // timeout avoid ui glitch
+        to = setTimeout(() => setStep(null), 1000);
+      }
+      return clearTimeout(to);
+    }, [ptContext.currentStep]),
+  );
 
   return (
     <>

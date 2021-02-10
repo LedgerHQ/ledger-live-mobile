@@ -89,19 +89,6 @@ export default function ManagerNavigator() {
               ? t("producttour.installCryptoTitle")
               : t("manager.title"),
           gestureEnabled: false,
-          headerLeft:
-            ptContext.currentStep === "INSTALL_CRYPTO"
-              ? props => (
-                  <HeaderBackButton
-                    {...props}
-                    onPress={() => {
-                      navigate(NavigatorName.ProductTour, {
-                        screen: ScreenName.ProductTourMenu,
-                      });
-                    }}
-                  />
-                )
-              : null,
         }}
       />
       <Stack.Screen

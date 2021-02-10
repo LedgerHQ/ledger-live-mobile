@@ -1,6 +1,7 @@
 /* @flow */
-import React, { useEffect, useReducer } from "react";
+import React, { useEffect, useReducer, useCallback, useContext } from "react";
 import _ from "lodash";
+import { useFocusEffect } from "@react-navigation/native";
 import { saveTourData, getTourData } from "../../db";
 
 export const STEPS = {
@@ -13,12 +14,16 @@ export const STEPS = {
   CUSTOMIZE_APP: [],
 };
 
+export const HOLES = {
+  "Porfolio-AccountsTab": [],
+};
+
 type State = {
   completedSteps: string[],
   dismissed: boolean,
   currentStep: string | null,
   initDone: boolean,
-  holeConfig: * | null,
+  holeConfig: string | null,
 };
 
 // actions
@@ -26,7 +31,6 @@ export let setStep: (step: string | null) => void = () => {};
 export let completeStep: (step: string) => void = () => {};
 export let dismiss: (dismissed: boolean) => void = () => {};
 export let enableHole: (holeConfig: *) => void = () => {};
-export let disableHole: (holeConfig: *) => void = () => {};
 
 // reducer
 const reducer = (state: State, update) => ({
@@ -46,6 +50,24 @@ const initialState = {
 
 export const context = React.createContext<State>(initialState);
 
+export const useProductTourOverlay = (holeConfig: string) => {
+  const ptContext = useContext(context);
+
+  useFocusEffect(
+    useCallback(() => {
+      if (
+        ptContext.currentStep === "INSTALL_CRYPTO" &&
+        !ptContext.holeConfig !== holeConfig
+      ) {
+        console.log("enable hole");
+        enableHole(holeConfig);
+      }
+
+      return () => enableHole(null);
+    }, [holeConfig, ptContext.currentStep, ptContext.holeConfig]),
+  );
+};
+
 const Provider = ({ children }: { children: React$Node }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -54,7 +76,6 @@ const Provider = ({ children }: { children: React$Node }) => {
   completeStep = step => dispatch({ completedSteps: [step] });
   dismiss = dismissed => dispatch({ dismissed });
   enableHole = holeConfig => dispatch({ holeConfig });
-  disableHole = () => dispatch({ holeConfig: null });
 
   // effects
 
@@ -69,6 +90,7 @@ const Provider = ({ children }: { children: React$Node }) => {
         initDone: true,
         currentStep: null,
         holeConfig: null,
+        holeDismissed: false,
       });
     };
 

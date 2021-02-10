@@ -38,6 +38,7 @@ import MigrateAccountsBanner from "../MigrateAccounts/Banner";
 import RequireTerms from "../../components/RequireTerms";
 import { useScrollToTop } from "../../navigation/utils";
 import PortfolioWidget from "../ProductTour/PortfolioWidget";
+import { useProductTourOverlay } from "../ProductTour/Provider";
 
 export { default as PortfolioTabIcon } from "./TabIcon";
 
@@ -57,6 +58,8 @@ export default function PortfolioScreen({ navigation }: Props) {
   const allAccounts = useSelector(flattenAccountsSelector);
   const counterValueCurrency = useSelector(counterValueCurrencySelector);
   const portfolio = usePortfolio();
+
+  useProductTourOverlay("Porfolio-AccountsTab");
 
   const refreshAccountsOrdering = useRefreshAccountsOrdering();
   useFocusEffect(refreshAccountsOrdering);
