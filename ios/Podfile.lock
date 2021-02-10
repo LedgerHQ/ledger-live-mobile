@@ -352,6 +352,8 @@ PODS:
     - React
   - RNGestureHandler (1.6.0):
     - React
+  - RNHoleView (2.0.1):
+    - React
   - RNKeychain (5.0.0):
     - React
   - RNLibLedgerCore (4.16.3):
@@ -450,6 +452,7 @@ DEPENDENCIES:
   - "RNCClipboard (from `../node_modules/@react-native-community/clipboard`)"
   - "RNCMaskedView (from `../node_modules/@react-native-community/masked-view`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
+  - RNHoleView (from `../node_modules/react-native-hole-view`)
   - RNKeychain (from `../node_modules/react-native-keychain`)
   - "RNLibLedgerCore (from `../node_modules/@ledgerhq/react-native-ledger-core`)"
   - RNOS (from `../node_modules/react-native-os`)
@@ -576,6 +579,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-community/masked-view"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
+  RNHoleView:
+    :path: "../node_modules/react-native-hole-view"
   RNKeychain:
     :path: "../node_modules/react-native-keychain"
   RNLibLedgerCore:
@@ -661,6 +666,7 @@ SPEC CHECKSUMS:
   RNCClipboard: 41d8d918092ae8e676f18adada19104fa3e68495
   RNCMaskedView: 76c40a1d41c3e2535df09246a2b5487f04de0814
   RNGestureHandler: dde546180bf24af0b5f737c8ad04b6f3fa51609a
+  RNHoleView: 3df775b8e5a19c265126f5df479c9a79d2f93ac8
   RNKeychain: 589a5504ba18b854fb8c2ba6402387b9529da959
   RNLibLedgerCore: 4574c3750d377ef7493c6e9be4344ac185de01b9
   RNOS: 6f2f9a70895bbbfbdad7196abd952e7b01d45027

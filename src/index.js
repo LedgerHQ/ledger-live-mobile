@@ -50,6 +50,7 @@ import WalletConnectProvider, {
   context as _wcContext,
 } from "./screens/WalletConnect/Provider";
 import ProductTourProvider from "./screens/ProductTour/Provider";
+import ProductTourOverlay from "./screens/ProductTour/ProductTourOverlay";
 import HookAnalytics from "./analytics/HookAnalytics";
 import HookSentry from "./components/HookSentry";
 import RootNavigator from "./components/RootNavigator";
@@ -383,6 +384,7 @@ export default class Root extends Component<
                                       <App
                                         importDataString={importDataString}
                                       />
+                                      <ProductTourOverlay />
                                     </ProductTourProvider>
                                   </OnboardingContextProvider>
                                 </ButtonUseTouchable.Provider>

@@ -1390,6 +1390,15 @@
   dependencies:
     "@babel/runtime" "^7.12.5"
 
+"@polkadot/reactnative-identicon@0.52.1":
+  version "0.52.1"
+  resolved "https://registry.yarnpkg.com/@polkadot/reactnative-identicon/-/reactnative-identicon-0.52.1.tgz#901802e3381bd9011a4f9e543d9de00ebdc36e8d"
+  integrity sha512-cALsSFJvpmtyqdPT2EiDjaRYG1icvlv2g8fXKMZXTvxylOxTIdWxqmO1ceYCK8yFdsjJlYrBXG+EyKdyOisnjw==
+  dependencies:
+    "@babel/runtime" "^7.9.2"
+    "@polkadot/ui-shared" "0.52.1"
+    react-native-svg "^12.0.3"
+
 "@polkadot/types-known@3.6.4":
   version "3.6.4"
   resolved "https://registry.yarnpkg.com/@polkadot/types-known/-/types-known-3.6.4.tgz#765c212a7b8a9e4fa1538041911a0aa30302c5e4"
@@ -1412,6 +1421,14 @@
     "@polkadot/x-rxjs" "^5.4.4"
     "@types/bn.js" "^4.11.6"
     bn.js "^4.11.9"
+
+"@polkadot/ui-shared@0.52.1":
+  version "0.52.1"
+  resolved "https://registry.yarnpkg.com/@polkadot/ui-shared/-/ui-shared-0.52.1.tgz#255b595c2d7857b4f4f4aa767f0bafe1d15e3d1c"
+  integrity sha512-Ss49s0x5+/KXh2AlthvM8ix4D4YVUwA3XUvEBZh1tPWKsZM5PWmOwERYv5DY9tAZoUWcbo7/7iCG20bsZktONA==
+  dependencies:
+    "@babel/runtime" "^7.9.2"
+    color "^3.1.2"
 
 "@polkadot/util-crypto@^5.4.4":
   version "5.4.4"
@@ -1510,23 +1527,6 @@
   dependencies:
     "@babel/runtime" "^7.12.5"
     "@polkadot/x-global" "5.4.4"
-
-"@polkadot/reactnative-identicon@0.52.1":
-  version "0.52.1"
-  resolved "https://registry.yarnpkg.com/@polkadot/reactnative-identicon/-/reactnative-identicon-0.52.1.tgz#901802e3381bd9011a4f9e543d9de00ebdc36e8d"
-  integrity sha512-cALsSFJvpmtyqdPT2EiDjaRYG1icvlv2g8fXKMZXTvxylOxTIdWxqmO1ceYCK8yFdsjJlYrBXG+EyKdyOisnjw==
-  dependencies:
-    "@babel/runtime" "^7.9.2"
-    "@polkadot/ui-shared" "0.52.1"
-    react-native-svg "^12.0.3"
-
-"@polkadot/ui-shared@0.52.1":
-  version "0.52.1"
-  resolved "https://registry.yarnpkg.com/@polkadot/ui-shared/-/ui-shared-0.52.1.tgz#255b595c2d7857b4f4f4aa767f0bafe1d15e3d1c"
-  integrity sha512-Ss49s0x5+/KXh2AlthvM8ix4D4YVUwA3XUvEBZh1tPWKsZM5PWmOwERYv5DY9tAZoUWcbo7/7iCG20bsZktONA==
-  dependencies:
-    "@babel/runtime" "^7.9.2"
-    color "^3.1.2"
 
 "@react-native-community/art@^1.0.3", "@react-native-community/art@^1.1.2":
   version "1.1.2"
@@ -9651,6 +9651,11 @@ react-native-gesture-handler@^1.6.0:
     hoist-non-react-statics "^2.3.1"
     invariant "^2.2.4"
     prop-types "^15.7.2"
+
+react-native-hole-view@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/react-native-hole-view/-/react-native-hole-view-2.0.1.tgz#43177ff71348749e18ef139a28783db47e726e3f"
+  integrity sha512-VCcTCKFOBokppR9ULZcnhnx0ByfIrdEC+zLVS4+1LTwurdLxtwyqqTJAUmu3x0vfDw2miUPlVD8UYCkZz/4gXA==
 
 react-native-iphone-x-helper@^1.3.0:
   version "1.3.0"

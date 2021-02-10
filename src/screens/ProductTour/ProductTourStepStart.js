@@ -104,33 +104,13 @@ const ProductTourStepStart = () => {
   const goTo = () => {
     switch (ptContext.currentStep) {
       case "INSTALL_CRYPTO":
-        navigate(NavigatorName.Main, {
-          screen: NavigatorName.Manager,
-        });
-        break;
       case "CREATE_ACCOUNT":
-        navigate(NavigatorName.Base, {
-          screen: NavigatorName.AddAccounts,
-        });
-        break;
       case "RECEIVE_COINS":
-        navigate(NavigatorName.Base, {
-          screen: NavigatorName.ReceiveFunds,
-        });
-        break;
       case "BUY_COINS":
-        navigate(NavigatorName.Base, {
-          screen: NavigatorName.ExchangeBuyFlow,
-        });
-        break;
       case "SEND_COINS":
-        navigate(NavigatorName.Base, {
-          screen: NavigatorName.SendFunds,
-        });
-        break;
       case "SWAP_COINS":
-        navigate(NavigatorName.Base, {
-          screen: NavigatorName.Swap,
+        navigate(NavigatorName.Main, {
+          screen: NavigatorName.Portfolio,
         });
         break;
       case "CUSTOMIZE_APP":
@@ -144,9 +124,9 @@ const ProductTourStepStart = () => {
   };
 
   return (
-    <SafeAreaView style={[styles.root, { backgroundColor: colors.live }]}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: colors.live }}>
       {ptContext.currentStep ? (
-        <>
+        <View style={styles.root}>
           <View style={{ flex: 1 }}>
             <AnimatedSvgBackground
               color={"#587ED4"}
@@ -174,7 +154,7 @@ const ProductTourStepStart = () => {
             title={<Trans i18nKey="producttour.stepstart.cta" />}
             IconRight={ArrowRight}
           />
-        </>
+        </View>
       ) : null}
     </SafeAreaView>
   );
@@ -183,7 +163,6 @@ const ProductTourStepStart = () => {
 const styles = StyleSheet.create({
   root: {
     paddingHorizontal: 16,
-
     flex: 1,
     paddingBottom: 24,
   },

@@ -18,12 +18,15 @@ type State = {
   dismissed: boolean,
   currentStep: string | null,
   initDone: boolean,
+  holeConfig: * | null,
 };
 
 // actions
 export let setStep: (step: string | null) => void = () => {};
 export let completeStep: (step: string) => void = () => {};
 export let dismiss: (dismissed: boolean) => void = () => {};
+export let enableHole: (holeConfig: *) => void = () => {};
+export let disableHole: (holeConfig: *) => void = () => {};
 
 // reducer
 const reducer = (state: State, update) => ({
@@ -38,6 +41,7 @@ const initialState = {
   dismissed: true,
   currentStep: null,
   initDone: false,
+  holeConfig: null,
 };
 
 export const context = React.createContext<State>(initialState);
@@ -49,6 +53,8 @@ const Provider = ({ children }: { children: React$Node }) => {
   setStep = currentStep => dispatch({ currentStep });
   completeStep = step => dispatch({ completedSteps: [step] });
   dismiss = dismissed => dispatch({ dismissed });
+  enableHole = holeConfig => dispatch({ holeConfig });
+  disableHole = () => dispatch({ holeConfig: null });
 
   // effects
 
@@ -61,6 +67,8 @@ const Provider = ({ children }: { children: React$Node }) => {
       dispatch({
         ...((await getTourData()) || initialState),
         initDone: true,
+        currentStep: null,
+        holeConfig: null,
       });
     };
 

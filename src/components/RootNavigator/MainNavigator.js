@@ -73,7 +73,6 @@ export default function MainNavigator({
         component={ManagerNavigator}
         options={{
           tabBarIcon: (props: any) => <ManagerTabIcon {...props} />,
-          tabBarVisible: !ptContext.currentStep,
         }}
         listeners={({ navigation }) => ({
           tabPress: e => {
