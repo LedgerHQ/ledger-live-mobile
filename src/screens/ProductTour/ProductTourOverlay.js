@@ -25,7 +25,6 @@ const PortfolioOverlay = () => {
 
   return (
     <>
-      <View style={styles.fullscreen} />
       <RNHoleView
         style={[
           styles.fullscreen,
@@ -37,6 +36,13 @@ const PortfolioOverlay = () => {
             borderRadius: 4,
           },
         ]}
+      />
+      <TouchableOpacity
+        /* android */
+        onPress={e => {
+          e.preventDefault();
+        }}
+        style={styles.fullscreen}
       />
       <TouchableOpacity
         style={styles.closeButton}

@@ -25,11 +25,7 @@ export default function TabIcon({
     <View
       style={styles.root}
       ref={ref}
-      onLayout={() => {
-        ref.current.measure((_1, _2, width, height, x, y) => {
-          reportLayout(ptIds, { width, height, x, y });
-        });
-      }}
+      onLayout={() => reportLayout(ptIds, ref)}
     >
       <Icon size={18} color={color} />
       <LText
