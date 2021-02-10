@@ -2,10 +2,10 @@
 
 import { useTheme } from "@react-navigation/native";
 import React, { useContext, useState, useEffect } from "react";
-import { View, StyleSheet, TouchableOpacity } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import { RNHoleView } from "react-native-hole-view";
 import { Trans } from "react-i18next";
-import { context, HOLES } from "./Provider";
+import { context } from "./Provider";
 import LText from "../../components/LText";
 
 const PortfolioOverlay = () => {
@@ -22,6 +22,8 @@ const PortfolioOverlay = () => {
   if (!ptContext.holeConfig || disabled === ptContext.holeConfig) {
     return null;
   }
+
+  const next = () => setDisabled(ptContext.holeConfig);
 
   return (
     <>
@@ -41,13 +43,11 @@ const PortfolioOverlay = () => {
         /* android */
         onPress={e => {
           e.preventDefault();
+          next();
         }}
         style={styles.fullscreen}
       />
-      <TouchableOpacity
-        style={styles.closeButton}
-        onPress={() => setDisabled(ptContext.holeConfig)}
-      >
+      <TouchableOpacity style={styles.closeButton} onPress={next}>
         <LText style={styles.closeText} color="white" bold>
           <Trans i18nKey="producttour.overlay.closeText" />
         </LText>
