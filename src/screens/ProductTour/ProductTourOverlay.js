@@ -31,7 +31,12 @@ const PortfolioOverlay = () => {
           styles.fullscreen,
           { backgroundColor: colors.darkBlue, opacity: 0.9 },
         ]}
-        holes={HOLES[ptContext.holeConfig]}
+        holes={[
+          {
+            ...(ptContext.layouts[ptContext.holeConfig] || {}),
+            borderRadius: 4,
+          },
+        ]}
       />
       <TouchableOpacity
         style={styles.closeButton}

@@ -14,16 +14,13 @@ export const STEPS = {
   CUSTOMIZE_APP: [],
 };
 
-export const HOLES = {
-  "Porfolio-AccountsTab": [],
-};
-
 type State = {
   completedSteps: string[],
   dismissed: boolean,
   currentStep: string | null,
   initDone: boolean,
   holeConfig: string | null,
+  layouts: *,
 };
 
 // actions
@@ -31,6 +28,7 @@ export let setStep: (step: string | null) => void = () => {};
 export let completeStep: (step: string) => void = () => {};
 export let dismiss: (dismissed: boolean) => void = () => {};
 export let enableHole: (holeConfig: *) => void = () => {};
+export let reportLayout: (ptIds: [string], layout: *) => void = () => {};
 
 // reducer
 const reducer = (state: State, update) => ({
@@ -39,6 +37,12 @@ const reducer = (state: State, update) => ({
   completedSteps: update.dismissed
     ? []
     : _.uniq([...state.completedSteps, ...(update.completedSteps || [])]),
+  layouts: update.layouts
+    ? {
+        ...state.layouts,
+        ...update.layouts,
+      }
+    : state.layouts,
 });
 const initialState = {
   completedSteps: [],
@@ -46,6 +50,7 @@ const initialState = {
   currentStep: null,
   initDone: false,
   holeConfig: null,
+  layouts: {},
 };
 
 export const context = React.createContext<State>(initialState);
@@ -75,6 +80,11 @@ const Provider = ({ children }: { children: React$Node }) => {
   completeStep = step => dispatch({ completedSteps: [step] });
   dismiss = dismissed => dispatch({ dismissed });
   enableHole = holeConfig => dispatch({ holeConfig });
+  reportLayout = (ptIds = [], layout) => {
+    ptIds.forEach(ptId => {
+      dispatch({ layouts: { [ptId]: layout } });
+    });
+  };
 
   // effects
 
@@ -89,7 +99,7 @@ const Provider = ({ children }: { children: React$Node }) => {
         initDone: true,
         currentStep: null,
         holeConfig: null,
-        holeDismissed: false,
+        layouts: {},
       });
     };
 
