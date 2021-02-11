@@ -48,7 +48,6 @@ const PortfolioOverlay = () => {
 
   useEffect(() => {
     if (!ptContext.holeConfig) {
-      console.log("disable null");
       setDisabled(null);
     }
   }, [ptContext.holeConfig]);
@@ -57,10 +56,7 @@ const PortfolioOverlay = () => {
     return null;
   }
 
-  const next = () => {
-    console.log("disable");
-    setDisabled(ptContext.holeConfig);
-  };
+  const next = () => setDisabled(ptContext.holeConfig);
 
   const config = configs[ptContext.holeConfig];
   const layout = ptContext.layouts[config.layout];

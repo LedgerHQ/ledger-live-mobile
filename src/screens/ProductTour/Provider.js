@@ -84,12 +84,8 @@ export const useProductTourOverlay = (
   useFocusEffect(
     useCallback(() => {
       if (ptContext.currentStep === step && enabled) {
-        console.log("enable", holeConfig);
         enableHole(holeConfig);
-        return () => {
-          console.log("disable", holeConfig);
-          enableHole(`-${holeConfig}`);
-        };
+        return () => enableHole(`-${holeConfig}`);
       }
 
       return () => {};
