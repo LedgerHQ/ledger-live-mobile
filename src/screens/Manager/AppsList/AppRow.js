@@ -29,6 +29,8 @@ type Props = {
   type?: string,
 };
 
+const layoutReports = ["Bitcoin"];
+
 const AppRow = ({
   app,
   state,
@@ -131,7 +133,12 @@ const AppRow = ({
         <View
           style={styles.appState}
           ref={ref}
-          onLayout={() => reportLayout(["appRow-" + type + "-" + name], ref)}
+          onLayout={() => {
+            if (!layoutReports.includes(name)) {
+              return;
+            }
+            reportLayout(["appRow-" + type + "-" + name], ref);
+          }}
         >
           <AppStateButton
             app={app}
