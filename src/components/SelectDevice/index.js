@@ -1,5 +1,5 @@
 // @flow
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState, useRef } from "react";
 import { StyleSheet, View, Platform } from "react-native";
 import Config from "react-native-config";
 import { useSelector } from "react-redux";
@@ -16,6 +16,7 @@ import USBEmpty from "./USBEmpty";
 import LText from "../LText";
 import Animation from "../Animation";
 import PairNewDeviceButton from "./PairNewDeviceButton";
+import { reportLayout } from "../../screens/ProductTour/Provider";
 
 import lottieUsb from "../../screens/Onboarding/assets/nanoS/plugDevice/data.json";
 
@@ -101,8 +102,10 @@ export default function SelectDevice({
     return () => subscription.unsubscribe();
   }, [knownDevices, filter]);
 
+  const ref = useRef();
+
   return (
-    <>
+    <View ref={ref} onLayout={() => reportLayout(["selectDevice"], ref)}>
       {usbOnly && withArrows ? (
         <UsbPlaceholder />
       ) : ble.length === 0 ? (
@@ -126,7 +129,7 @@ export default function SelectDevice({
       ) : (
         other.map(renderItem)
       )}
-    </>
+    </View>
   );
 }
 

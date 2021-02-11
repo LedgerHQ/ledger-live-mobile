@@ -3547,7 +3547,8 @@
     },
     "overlay": {
       "closeText": "Skip Tutorial",
-      "Porfolio-ManagerTab": "Go to the Manager to install\napps on your device."
+      "Porfolio-ManagerTab": "Go to the Manager to install\napps on your device.",
+      "Manager-selectDevice": "Select your device",
     }
   }
 }

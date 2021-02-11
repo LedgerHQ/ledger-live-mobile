@@ -10,6 +10,7 @@ import LText from "../../components/LText";
 
 const configs = {
   "Porfolio-ManagerTab": {
+    layout: "ManagerTab",
     arrow: require("../../images/producttour/arrow-bottomright.png"),
     text: "producttour.overlay.Porfolio-ManagerTab",
     arrowPosition: ({ x, width, y }) => ({
@@ -18,6 +19,21 @@ const configs = {
     }),
     textLayout: ({ y }) => ({
       top: y - 11 - 45 - 44,
+      left: 0,
+      right: 0,
+      textAlign: "center",
+    }),
+  },
+  "Manager-selectDevice": {
+    layout: "selectDevice",
+    arrow: require("../../images/producttour/arrow-topleft.png"),
+    text: "producttour.overlay.Manager-selectDevice",
+    arrowPosition: ({ x, y, height }) => ({
+      left: x + 110,
+      top: y + height + 23,
+    }),
+    textLayout: ({ y, height }) => ({
+      top: y + height + 23 + 45 + 22,
       left: 0,
       right: 0,
       textAlign: "center",
@@ -42,11 +58,12 @@ const PortfolioOverlay = () => {
 
   const next = () => setDisabled(ptContext.holeConfig);
 
-  const layout = ptContext.layouts[ptContext.holeConfig];
-  const arrow = configs[ptContext.holeConfig].arrow;
-  const arrowStyle = configs[ptContext.holeConfig].arrowPosition(layout);
-  const textStyle = configs[ptContext.holeConfig].textLayout(layout);
-  const text = configs[ptContext.holeConfig].text;
+  const config = configs[ptContext.holeConfig];
+  const layout = ptContext.layouts[config.layout];
+  const arrow = config.arrow;
+  const arrowStyle = config.arrowPosition(layout);
+  const textStyle = config.textLayout(layout);
+  const text = config.text;
 
   return (
     <>
@@ -57,7 +74,7 @@ const PortfolioOverlay = () => {
         ]}
         holes={[
           {
-            ...(ptContext.layouts[ptContext.holeConfig] || {}),
+            ...layout,
             borderRadius: 4,
           },
         ]}

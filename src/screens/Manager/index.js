@@ -26,6 +26,7 @@ import NavigationScrollView from "../../components/NavigationScrollView";
 import ReadOnlyNanoX from "./Connect/ReadOnlyNanoX";
 import { readOnlyModeEnabledSelector } from "../../reducers/settings";
 import DeviceActionModal from "../../components/DeviceActionModal";
+import { useProductTourOverlay } from "../ProductTour/Provider";
 
 const action = createAction(connectManager);
 
@@ -222,6 +223,8 @@ export default function Screen(props: Props) {
   const isFocused = useIsFocused();
   const dispatch = useDispatch();
   const readOnlyModeEnabled = useSelector(readOnlyModeEnabledSelector);
+
+  useProductTourOverlay("INSTALL_CRYPTO", "Manager-selectDevice");
 
   return (
     <ChooseDevice

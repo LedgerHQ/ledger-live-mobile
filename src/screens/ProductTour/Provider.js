@@ -80,7 +80,16 @@ const Provider = ({ children }: { children: React$Node }) => {
   reportLayout = (ptIds = [], ref) => {
     ref.current.measure((_1, _2, width, height, x, y) => {
       ptIds.forEach(ptId => {
-        dispatch({ layouts: { [ptId]: { width, height, x, y } } });
+        dispatch({
+          layouts: {
+            [ptId]: {
+              width: width + 10,
+              height: height + 10,
+              x: x - 5,
+              y: y - 5,
+            },
+          },
+        });
       });
     });
   };

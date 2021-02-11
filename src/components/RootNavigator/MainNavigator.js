@@ -57,7 +57,7 @@ export default function MainNavigator({
           unmountOnBlur: true,
           tabBarIcon: (props: any) => (
             <TabIcon
-              ptIds={["Porfolio-AccountsTab"]}
+              ptIds={["AccountsTab"]}
               Icon={AccountsIcon}
               i18nKey="tabs.accounts"
               {...props}
@@ -78,7 +78,7 @@ export default function MainNavigator({
         component={ManagerNavigator}
         options={{
           tabBarIcon: (props: any) => (
-            <ManagerTabIcon {...props} ptIds={["Porfolio-ManagerTab"]} />
+            <ManagerTabIcon {...props} ptIds={["ManagerTab"]} />
           ),
         }}
         listeners={({ navigation }) => ({
