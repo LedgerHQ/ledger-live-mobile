@@ -36,7 +36,7 @@ export let setStep: (step: string | null) => void = () => {};
 export let completeStep: (step: string) => void = () => {};
 export let dismiss: (dismissed: boolean) => void = () => {};
 export let enableHole: (holeConfig: *) => void = () => {};
-export let reportLayout: (ptIds: [string], ref: *) => void = () => {};
+export let reportLayout: (ptIds: [string], ref: *, extra: *) => void = () => {};
 
 // reducer
 const reducer = (state: State, update: StateUpdate) => {
@@ -101,16 +101,16 @@ const Provider = ({ children }: { children: React$Node }) => {
   completeStep = step => dispatch({ completedSteps: [step] });
   dismiss = dismissed => dispatch({ dismissed });
   enableHole = holeConfig => dispatch({ holeConfig });
-  reportLayout = (ptIds = [], ref) => {
+  reportLayout = (ptIds = [], ref, extra = {}) => {
     ref.current.measure((_1, _2, width, height, x, y) => {
       ptIds.forEach(ptId => {
         dispatch({
           layouts: {
             [ptId]: {
-              width: width + 10,
-              height: height + 10,
-              x: x - 5,
-              y: y - 5,
+              width: width + 10 + (extra.width || 0),
+              height: height + 10 + (extra.height || 0),
+              x: x - 5 + (extra.x || 0),
+              y: y - 5 + (extra.y || 0),
             },
           },
         });

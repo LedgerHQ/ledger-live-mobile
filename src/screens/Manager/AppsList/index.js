@@ -16,11 +16,10 @@ type Props = {
   setAppInstallWithDependencies: ({ app: App, dependencies: App[] }) => void,
   setAppUninstallWithDependencies: ({ dependents: App[], app: App }) => void,
   setStorageWarning: () => void,
+  type?: String,
 };
 
 const { height } = getWindowDimensions();
-
-const renderRow = ({ item }: { item: * }) => <AppRow {...item} />;
 
 const AppsList = ({
   apps,
@@ -32,9 +31,14 @@ const AppsList = ({
   setAppUninstallWithDependencies,
   setStorageWarning,
   isInstalledView,
+  type,
 }: Props) => {
   const viewHeight = active ? "auto" : height - 267;
   const { colors } = useTheme();
+  const renderRow = useCallback(
+    ({ item }: { item: * }) => <AppRow type={type} {...item} />,
+    [type],
+  );
 
   const getItem = useCallback(
     (data, index) => ({

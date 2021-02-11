@@ -1,4 +1,4 @@
-import React, { memo, useMemo, useCallback } from "react";
+import React, { memo, useMemo, useCallback, useRef } from "react";
 
 import { View, StyleSheet } from "react-native";
 
@@ -15,6 +15,7 @@ import AppIcon from "./AppIcon";
 
 import AppStateButton from "./AppStateButton";
 import ByteSize from "../../../components/ByteSize";
+import { reportLayout } from "../../ProductTour/Provider";
 
 type Props = {
   app: App,
@@ -25,6 +26,7 @@ type Props = {
   setAppUninstallWithDependencies: ({ dependents: App[], app: App }) => void,
   setStorageWarning: () => void,
   managerTabs: *,
+  type?: string,
 };
 
 const AppRow = ({
@@ -35,6 +37,7 @@ const AppRow = ({
   setAppInstallWithDependencies,
   setAppUninstallWithDependencies,
   setStorageWarning,
+  type,
 }: Props) => {
   const { name, bytes, icon, version: appVersion } = app;
   const { installed, deviceInfo } = state;
@@ -57,8 +60,10 @@ const AppRow = ({
 
   const { colors } = useTheme();
 
+  const ref = useRef();
+
   return (
-    <View style={styles.root}>
+    <View style={styles.root} key={name}>
       <View
         style={[
           styles.item,
@@ -123,16 +128,22 @@ const AppRow = ({
             />
           </LText>
         )}
-        <AppStateButton
-          app={app}
-          state={state}
-          dispatch={dispatch}
-          notEnoughMemoryToInstall={notEnoughMemoryToInstall}
-          isInstalled={!!isInstalled}
-          isInstalledView={isInstalledView}
-          setAppInstallWithDependencies={setAppInstallWithDependencies}
-          setAppUninstallWithDependencies={setAppUninstallWithDependencies}
-        />
+        <View
+          style={styles.appState}
+          ref={ref}
+          onLayout={() => reportLayout(["appRow-" + type + "-" + name], ref)}
+        >
+          <AppStateButton
+            app={app}
+            state={state}
+            dispatch={dispatch}
+            notEnoughMemoryToInstall={notEnoughMemoryToInstall}
+            isInstalled={!!isInstalled}
+            isInstalledView={isInstalledView}
+            setAppInstallWithDependencies={setAppInstallWithDependencies}
+            setAppUninstallWithDependencies={setAppUninstallWithDependencies}
+          />
+        </View>
       </View>
     </View>
   );
@@ -141,6 +152,12 @@ const AppRow = ({
 const styles = StyleSheet.create({
   root: {
     height: 64,
+  },
+  appState: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "flex-end",
   },
   item: {
     flexDirection: "row",

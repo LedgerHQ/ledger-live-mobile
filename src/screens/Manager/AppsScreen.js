@@ -41,7 +41,7 @@ import AppUpdateAll from "./AppsList/AppUpdateAll";
 
 import InstallProgressBar from "./AppsList/InstallProgressBar";
 
-import { context as _ptContext } from "../ProductTour/Provider";
+import { context as _ptContext, reportLayout } from "../ProductTour/Provider";
 
 const { interpolate, Extrapolate } = Animated;
 const { width, height } = Dimensions.get("screen");
@@ -191,6 +191,7 @@ const AppsScreen = ({
         return (
           <AppsList
             apps={catalog}
+            type="catalog"
             state={state}
             dispatch={dispatch}
             active={index === 0}
@@ -238,6 +239,7 @@ const AppsScreen = ({
             <AppsList
               isInstalledView
               apps={device}
+              type="installed"
               state={state}
               dispatch={dispatch}
               active={index === 1}
@@ -283,6 +285,8 @@ const AppsScreen = ({
     [update, managerTabs, colors.live],
   );
 
+  const ref = useRef();
+
   const elements = [
     <DeviceCard
       distribution={distribution}
@@ -292,7 +296,10 @@ const AppsScreen = ({
       blockNavigation={blockNavigation}
       deviceInfo={deviceInfo}
     />,
-    <View>
+    <View
+      ref={ref}
+      onLayout={() => reportLayout(["appsList"], ref, { height: 130 })}
+    >
       <TabBar
         position={position}
         navigationState={{ index, routes }}
