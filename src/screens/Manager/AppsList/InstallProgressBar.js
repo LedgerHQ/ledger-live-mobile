@@ -89,7 +89,7 @@ const InstallSuccessBar = ({ state, navigation, disable }: Props) => {
     <>
       <ProductTourStepFinishedBottomModal
         isOpened={
-          successInstalls.length >= 1 &&
+          recentlyInstalledApps.length >= 1 &&
           ptContext.currentStep === "INSTALL_CRYPTO" &&
           !hideProductTourModal
         }

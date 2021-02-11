@@ -9,7 +9,7 @@ import LText from "../../components/LText";
 import Button from "../../components/Button";
 import AnimatedSvgBackground from "../../components/AnimatedSvgBackground";
 import { context } from "./Provider";
-import { NavigatorName } from "../../const";
+import { NavigatorName, ScreenName } from "../../const";
 import { navigate } from "../../rootnavigation";
 import ArrowRight from "../../icons/ArrowRight";
 
@@ -110,7 +110,7 @@ const ProductTourStepStart = () => {
       case "SEND_COINS":
       case "SWAP_COINS":
         navigate(NavigatorName.Main, {
-          screen: NavigatorName.Portfolio,
+          screen: ScreenName.Portfolio,
         });
         break;
       case "CUSTOMIZE_APP":
