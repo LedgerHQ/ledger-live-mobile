@@ -15,6 +15,7 @@ import AppDependenciesModal from "./Modals/AppDependenciesModal";
 import UninstallDependenciesModal from "./Modals/UninstallDependenciesModal";
 import { useLockNavigation } from "../../components/RootNavigator/CustomBlockRouterNavigator";
 import { defaultNavigationOptions } from "../../navigation/navigatorConfig";
+import { useProductTourOverlay } from "../ProductTour/Provider";
 
 export const MANAGER_TABS = {
   CATALOG: "CATALOG",
@@ -90,6 +91,8 @@ const Manager = ({
       gestureEnabled: !blockNavigation,
     });
   }, [navigation, blockNavigation]);
+
+  useProductTourOverlay("INSTALL_CRYPTO", "Manager-managerDevice");
 
   /**
    * Resets the navigation params in order to unlock navigation

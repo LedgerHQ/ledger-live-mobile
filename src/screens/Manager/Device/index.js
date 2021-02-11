@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState, useCallback } from "react";
+import React, { memo, useEffect, useState, useCallback, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { StyleSheet, View, Image, Linking } from "react-native";
 import { Trans } from "react-i18next";
@@ -23,6 +23,7 @@ import Card from "../../../components/Card";
 
 import DeviceName from "./DeviceName";
 import { setAvailableUpdate } from "../../../actions/settings";
+import { reportLayout } from "../../ProductTour/Provider";
 
 const illustrations = {
   nanoS,
@@ -75,6 +76,8 @@ const DeviceCard = ({
 
   const isDeprecated = manager.firmwareUnsupported(deviceModel.id, deviceInfo);
 
+  const ref = useRef();
+
   return (
     <>
       <Card style={styles.card}>
@@ -118,7 +121,11 @@ const DeviceCard = ({
             </View>
           </View>
         ) : null}
-        <View style={styles.deviceSection}>
+        <View
+          style={styles.deviceSection}
+          ref={ref}
+          onLayout={() => reportLayout(["managerDevice"], ref)}
+        >
           <View style={styles.deviceImageContainer}>
             <Image
               style={styles.deviceImage}

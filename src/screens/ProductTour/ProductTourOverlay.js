@@ -39,12 +39,29 @@ const configs = {
       textAlign: "center",
     }),
   },
+  "Manager-managerDevice": {
+    layout: "managerDevice",
+    arrow: require("../../images/producttour/arrow-topleft.png"),
+    text: "producttour.overlay.Manager-managerDevice",
+    arrowPosition: ({ x, y, height }) => ({
+      left: x + 110,
+      top: y + height + 23,
+    }),
+    textLayout: ({ y, height }) => ({
+      top: y + height + 23 + 45 + 22,
+      left: 0,
+      right: 0,
+      textAlign: "center",
+    }),
+  },
 };
 
 const PortfolioOverlay = () => {
   const { colors } = useTheme();
   const [disabled, setDisabled] = useState();
   const ptContext = useContext(context);
+
+  console.log(ptContext);
 
   useEffect(() => {
     if (!ptContext.holeConfig) {
