@@ -22,6 +22,14 @@ type State = {
   holeConfig: string | null,
   layouts: *,
 };
+type StateUpdate = {
+  completedSteps?: string[],
+  dismissed?: boolean,
+  currentStep?: string | null,
+  initDone?: boolean,
+  holeConfig?: string | null,
+  layouts?: *,
+};
 
 // actions
 export let setStep: (step: string | null) => void = () => {};
@@ -31,19 +39,30 @@ export let enableHole: (holeConfig: *) => void = () => {};
 export let reportLayout: (ptIds: [string], ref: *) => void = () => {};
 
 // reducer
-const reducer = (state: State, update) => ({
-  ...state,
-  ...update,
-  completedSteps: update.dismissed
-    ? []
-    : _.uniq([...state.completedSteps, ...(update.completedSteps || [])]),
-  layouts: update.layouts
-    ? {
-        ...state.layouts,
-        ...update.layouts,
-      }
-    : state.layouts,
-});
+const reducer = (state: State, update: StateUpdate) => {
+  if (update.holeConfig && update.holeConfig.substring(0, 1) === "-") {
+    if (state.holeConfig && update.holeConfig === `-${state.holeConfig}`) {
+      // eslint-disable-next-line no-param-reassign
+      update.holeConfig = null;
+    } else {
+      // eslint-disable-next-line no-param-reassign
+      delete update.holeConfig;
+    }
+  }
+  return {
+    ...state,
+    ...update,
+    completedSteps: update.dismissed
+      ? []
+      : _.uniq([...state.completedSteps, ...(update.completedSteps || [])]),
+    layouts: update.layouts
+      ? {
+          ...state.layouts,
+          ...update.layouts,
+        }
+      : state.layouts,
+  };
+};
 const initialState = {
   completedSteps: [],
   dismissed: true,
@@ -55,17 +74,26 @@ const initialState = {
 
 export const context = React.createContext<State>(initialState);
 
-export const useProductTourOverlay = (step, holeConfig: string) => {
+export const useProductTourOverlay = (
+  step: string,
+  holeConfig: string,
+  enabled: boolean = true,
+) => {
   const ptContext = useContext(context);
 
   useFocusEffect(
     useCallback(() => {
-      if (ptContext.currentStep === step) {
+      if (ptContext.currentStep === step && enabled) {
+        console.log("enable", holeConfig);
         enableHole(holeConfig);
+        return () => {
+          console.log("disable", holeConfig);
+          enableHole(`-${holeConfig}`);
+        };
       }
 
-      return () => enableHole(null);
-    }, [holeConfig, ptContext.currentStep, step]),
+      return () => {};
+    }, [ptContext.currentStep, step, holeConfig, enabled]),
   );
 };
 
