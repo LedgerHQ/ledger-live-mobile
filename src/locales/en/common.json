@@ -3544,6 +3544,10 @@
       "title": "Locked feature",
       "description": "You must install your first crypto to create an account",
       "cta": "Got it!"
+    },
+    "overlay": {
+      "closeText": "Skip Tutorial",
+      "Porfolio-ManagerTab": "Go to the Manager to install\napps on your device."
     }
   }
 }

@@ -2,11 +2,28 @@
 
 import { useTheme } from "@react-navigation/native";
 import React, { useContext, useState, useEffect } from "react";
-import { StyleSheet, TouchableOpacity } from "react-native";
+import { StyleSheet, TouchableOpacity, Image } from "react-native";
 import { RNHoleView } from "react-native-hole-view";
 import { Trans } from "react-i18next";
 import { context } from "./Provider";
 import LText from "../../components/LText";
+
+const configs = {
+  "Porfolio-ManagerTab": {
+    arrow: require("../../images/producttour/arrow-bottomright.png"),
+    text: "producttour.overlay.Porfolio-ManagerTab",
+    arrowPosition: ({ x, width, y }) => ({
+      left: x + width / 2,
+      top: y - 11 - 45,
+    }),
+    textLayout: ({ y }) => ({
+      top: y - 11 - 45 - 44,
+      left: 0,
+      right: 0,
+      textAlign: "center",
+    }),
+  },
+};
 
 const PortfolioOverlay = () => {
   const { colors } = useTheme();
@@ -25,6 +42,12 @@ const PortfolioOverlay = () => {
 
   const next = () => setDisabled(ptContext.holeConfig);
 
+  const layout = ptContext.layouts[ptContext.holeConfig];
+  const arrow = configs[ptContext.holeConfig].arrow;
+  const arrowStyle = configs[ptContext.holeConfig].arrowPosition(layout);
+  const textStyle = configs[ptContext.holeConfig].textLayout(layout);
+  const text = configs[ptContext.holeConfig].text;
+
   return (
     <>
       <RNHoleView
@@ -39,13 +62,17 @@ const PortfolioOverlay = () => {
           },
         ]}
       />
+      <Image source={arrow} style={[arrowStyle, styles.tooltipArrow]} />
+      <LText style={[textStyle, styles.tooltipText]} color="white" bold>
+        <Trans i18nKey={text} />
+      </LText>
       <TouchableOpacity
         /* android */
         onPress={e => {
           e.preventDefault();
           next();
         }}
-        style={styles.fullscreen}
+        style={[styles.fullscreen, { backgroundColor: "transparent" }]}
       />
       <TouchableOpacity style={styles.closeButton} onPress={next}>
         <LText style={styles.closeText} color="white" bold>
@@ -79,6 +106,15 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     color: "#FFF",
     fontSize: 12,
+  },
+  tooltipArrow: {
+    width: 8.5,
+    height: 45,
+    position: "absolute",
+  },
+  tooltipText: {
+    fontSize: 16,
+    position: "absolute",
   },
 });
 
