@@ -95,6 +95,38 @@ const configs = {
       }),
     },
   ],
+  "Receive-verifyAddress": [
+    {
+      layout: "receive-shareAddress",
+      arrow: require("../../images/producttour/arrow-bottomleft.png"),
+      text: "producttour.overlay.Receive-verifyAddress-shareAddress",
+      arrowPosition: ({ x, width, y }) => ({
+        left: x + width / 2,
+        top: y - 11 - 45,
+      }),
+      textLayout: ({ y }) => ({
+        top: y - 11 - 45 - 44 - 16,
+        left: 0,
+        right: 0,
+        textAlign: "center",
+      }),
+    },
+    {
+      layout: "receive-addressDisclaimer",
+      arrow: require("../../images/producttour/arrow-bottomleft.png"),
+      text: "producttour.overlay.Receive-verifyAddress-addressDisclaimer",
+      arrowPosition: ({ x, width, y }) => ({
+        left: x + width / 2,
+        top: y - 11 - 45,
+      }),
+      textLayout: ({ y }) => ({
+        top: y - 11 - 45 - 44 - 16 * 4,
+        left: 0,
+        right: 0,
+        textAlign: "center",
+      }),
+    },
+  ],
   "AddAccounts-currencyRow-addaccount-Bitcoin": [
     {
       layout: "currencyRow-addaccount-Bitcoin",

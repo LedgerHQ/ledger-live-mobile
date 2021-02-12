@@ -37,7 +37,6 @@ import { useTheme } from "@react-navigation/native";
 import getWindowDimensions from "../../logic/getWindowDimensions";
 import { accountScreenSelector } from "../../reducers/accounts";
 import { TrackScreen } from "../../analytics";
-import { ScreenName, NavigatorName } from "../../const";
 import PreventNativeBack from "../../components/PreventNativeBack";
 import LText from "../../components/LText/index";
 import DisplayAddress from "../../components/DisplayAddress";
@@ -58,9 +57,12 @@ import logger from "../../logger";
 import { rejectionOp } from "../../components/DebugRejectSwitch";
 import { getStackNavigatorConfig } from "../../navigation/navigatorConfig";
 import GenericErrorView from "../../components/GenericErrorView";
-import { context as _ptContext, completeStep } from "../ProductTour/Provider";
-import ProductTourStepFinishedBottomModal from "../ProductTour/ProductTourStepFinishedBottomModal";
-import { navigate } from "../../rootnavigation";
+import {
+  context as _ptContext,
+  reportLayout,
+  useProductTourOverlay,
+  useProductTourFinishedModal,
+} from "../ProductTour/Provider";
 
 type Props = {
   account: ?(TokenAccount | Account),
@@ -89,9 +91,13 @@ export default function ReceiveConfirmation({ navigation, route }: Props) {
   const [onModalHide, setOnModalHide] = useState(() => {});
   const [error, setError] = useState(null);
   const [zoom, setZoom] = useState(false);
-  const [done, setDone] = useState(false);
   const [allowNavigation, setAllowNavigation] = useState(true);
   const sub = useRef();
+  const unsafe = !route.params.device?.deviceId;
+  const ref1 = useRef();
+  const ref2 = useRef();
+  useProductTourOverlay("RECEIVE_COINS", "Receive-verifyAddress");
+  useProductTourFinishedModal("RECEIVE_COINS", verified || unsafe);
 
   const verifyOnDevice = useCallback(
     async (device: Device): Promise<void> => {
@@ -142,10 +148,6 @@ export default function ReceiveConfirmation({ navigation, route }: Props) {
   }
 
   function onDone(): void {
-    if (ptContext.currentStep === "RECEIVE_COINS") {
-      setDone(true);
-      return;
-    }
     const n = navigation.dangerouslyGetParent();
     if (n) {
       n.pop();
@@ -153,10 +155,6 @@ export default function ReceiveConfirmation({ navigation, route }: Props) {
   }
 
   useEffect(() => {
-    if (ptContext.currentStep === "RECEIVE_COINS") {
-      return;
-    }
-
     if (!allowNavigation) {
       navigation.setOptions({
         headerLeft: null,
@@ -172,7 +170,7 @@ export default function ReceiveConfirmation({ navigation, route }: Props) {
       headerRight,
       gestureEnabled: Platform.OS === "ios",
     });
-  }, [allowNavigation, navigation, ptContext.currentStep, colors]);
+  }, [allowNavigation, navigation, colors]);
 
   useEffect(() => {
     const device = route.params.device;
@@ -185,29 +183,14 @@ export default function ReceiveConfirmation({ navigation, route }: Props) {
     }
   }, [route.params, account, parentAccount, verifyOnDevice]);
 
-  const goToProductTourMenu = () => {
-    // $FlowFixMe
-    completeStep(ptContext.currentStep);
-    navigate(NavigatorName.ProductTour, {
-      screen: ScreenName.ProductTourMenu,
-    });
-    setDone(false);
-  };
-
   if (!account) return null;
   const { width } = getWindowDimensions();
-  const unsafe = !route.params.device?.deviceId;
   const QRSize = Math.round(width / 1.8 - 16);
   const mainAccount = getMainAccount(account, parentAccount);
   const currency = getAccountCurrency(account);
 
   return (
     <SafeAreaView style={[styles.root, { backgroundColor: colors.background }]}>
-      <ProductTourStepFinishedBottomModal
-        isOpened={ptContext.currentStep === "RECEIVE_COINS" && done}
-        onPress={() => goToProductTourMenu()}
-        onClose={() => goToProductTourMenu()}
-      />
       <TrackScreen
         category="ReceiveFunds"
         name="Confirmation"
@@ -259,7 +242,13 @@ export default function ReceiveConfirmation({ navigation, route }: Props) {
               verified={verified}
             />
           </View>
-          <View style={styles.copyLink}>
+          <View
+            style={styles.copyLink}
+            ref={ref1}
+            onLayout={() => {
+              reportLayout(["receive-shareAddress"], ref1, { height: 10 });
+            }}
+          >
             <CopyLink
               style={styles.copyShare}
               string={mainAccount.freshAddress}
@@ -274,7 +263,13 @@ export default function ReceiveConfirmation({ navigation, route }: Props) {
             </View>
           </View>
         </View>
-        <View style={styles.bottomContainer}>
+        <View
+          style={styles.bottomContainer}
+          ref={ref2}
+          onLayout={() => {
+            reportLayout(["receive-addressDisclaimer"], ref2);
+          }}
+        >
           <VerifyAddressDisclaimer
             unsafe={unsafe}
             verified={verified}

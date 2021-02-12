@@ -106,13 +106,24 @@ export const useProductTourOverlay = (
 
   useFocusEffect(
     useCallback(() => {
-      if (ptContext.currentStep === step && enabled) {
+      if (
+        ptContext.currentStep === step &&
+        enabled &&
+        // auto kill overlay finish modal is displayed (useful on the receive flow)
+        !ptContext.finishedModal
+      ) {
         enableHole(holeConfig);
         return () => enableHole(`-${holeConfig}`);
       }
 
       return () => {};
-    }, [ptContext.currentStep, step, holeConfig, enabled]),
+    }, [
+      ptContext.currentStep,
+      ptContext.finishedModal,
+      step,
+      enabled,
+      holeConfig,
+    ]),
   );
 };
 
