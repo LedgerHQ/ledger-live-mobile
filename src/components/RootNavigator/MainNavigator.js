@@ -70,7 +70,9 @@ export default function MainNavigator({
         component={Transfer}
         options={{
           headerShown: false,
-          tabBarIcon: (props: any) => <TransferTabIcon {...props} />,
+          tabBarIcon: (props: any) => (
+            <TransferTabIcon ptIds={["TransferTab"]} {...props} />
+          ),
         }}
       />
       <Tab.Screen

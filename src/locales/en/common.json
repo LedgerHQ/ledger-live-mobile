@@ -3555,7 +3555,8 @@
       "Porfolio-AccountsTab": "Go to the Account section",
       "Accounts-headerAddAccount": "Click here to add accounts\nto your portfolio.",
       "AddAccounts-currencyRow-addaccount-Bitcoin": "Select Bitcoin in the dropdown\nlist to add Bitcoin accounts from\nyour device.",
-      "addAccount-addAccountAccountsLists": "Here’s your new account, feel\nfree to rename it by swiping to\nthe right. You can add another\naccount after your first\ntransaction."
+      "addAccount-addAccountAccountsLists": "Here’s your new account, feel\nfree to rename it by swiping to\nthe right. You can add another\naccount after your first\ntransaction.",
+      "Porfolio-TransferTab": "Click on transfer in the navigation\nand then Receive"
     }
   }
 }

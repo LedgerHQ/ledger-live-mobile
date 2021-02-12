@@ -1,20 +1,16 @@
 // @flow
 import React, { useContext, useMemo } from "react";
 import { Platform } from "react-native";
-import {
-  createStackNavigator,
-  HeaderBackButton,
-} from "@react-navigation/stack";
+import { createStackNavigator } from "@react-navigation/stack";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "@react-navigation/native";
-import { ScreenName, NavigatorName } from "../../const";
+import { ScreenName } from "../../const";
 import ReceiveConfirmation from "../../screens/ReceiveFunds/03-Confirmation";
 import ReceiveConnectDevice from "../../screens/ReceiveFunds/02-ConnectDevice";
 import ReceiveSelectAccount from "../../screens/ReceiveFunds/01-SelectAccount";
 import { getStackNavigatorConfig } from "../../navigation/navigatorConfig";
 import StepHeader from "../StepHeader";
 import { context as _ptContext } from "../../screens/ProductTour/Provider";
-import { navigate } from "../../rootnavigation";
 
 const totalSteps = "3";
 
@@ -61,19 +57,6 @@ export default function ReceiveFundsNavigator() {
               style={style}
             />
           ),
-          headerLeft:
-            ptContext.currentStep === "RECEIVE_COINS"
-              ? props => (
-                  <HeaderBackButton
-                    {...props}
-                    onPress={() => {
-                      navigate(NavigatorName.ProductTour, {
-                        screen: ScreenName.ProductTourMenu,
-                      });
-                    }}
-                  />
-                )
-              : null,
         }}
       />
       <Stack.Screen
