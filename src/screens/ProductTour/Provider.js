@@ -118,7 +118,11 @@ export const useProductTourOverlay = (
 
 export const useProductTourFinishedModal = (step: string, enabled: boolean) => {
   const ptContext = useContext(context);
-  const [disabled, setDisabled] = useState(!!enabled);
+  const [disabled, setDisabled] = useState(
+    enabled && ptContext.currentStep !== step,
+  );
+
+  console.log(step, enabled, disabled);
 
   useEffect(() => {
     if (ptContext.currentStep === null && enabled) {
@@ -147,6 +151,9 @@ const Provider = ({ children }: { children: React$Node }) => {
   enableFinishedModal = finishedModal => dispatch({ finishedModal });
   reportLayout = (ptIds = [], ref, extra = {}, mins = {}) => {
     InteractionManager.runAfterInteractions(() => {
+      if (!ref.current) {
+        return;
+      }
       ref.current.measure((_1, _2, width, height, x, y) => {
         console.log("reports", ptIds, { width, height, x, y })
         if (mins.height && height < mins.height) {

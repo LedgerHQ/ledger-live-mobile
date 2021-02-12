@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useCallback, useContext, useEffect, useState } from "react";
+import React, { useCallback, useContext } from "react";
 import { Trans } from "react-i18next";
 import { StyleSheet, View } from "react-native";
 import type { CryptoCurrency } from "@ledgerhq/live-common/lib/types";
@@ -14,9 +14,10 @@ import LText from "../../components/LText";
 import Button from "../../components/Button";
 import IconCheck from "../../icons/Check";
 import CurrencyIcon from "../../components/CurrencyIcon";
-import { context as _ptContext, completeStep } from "../ProductTour/Provider";
-import ProductTourStepFinishedBottomModal from "../ProductTour/ProductTourStepFinishedBottomModal";
-import { navigate } from "../../rootnavigation";
+import {
+  context as _ptContext,
+  useProductTourFinishedModal,
+} from "../ProductTour/Provider";
 
 type Props = {
   navigation: any,
@@ -47,28 +48,10 @@ export default function AddAccountsSuccess({ navigation, route }: Props) {
 
   const currency = route.params.currency;
 
-  const [hideProductTourModal, setHideProductTourModal] = useState(true);
-  const goToProductTourMenu = () => {
-    // $FlowFixMe
-    completeStep(ptContext.currentStep);
-    navigate(NavigatorName.ProductTour, {
-      screen: ScreenName.ProductTourMenu,
-    });
-    setHideProductTourModal(true);
-  };
-  useEffect(() => {
-    setHideProductTourModal(ptContext.currentStep !== "CREATE_ACCOUNT");
-  }, [ptContext.currentStep]);
+  useProductTourFinishedModal("CREATE_ACCOUNT", true);
 
   return (
     <View style={[styles.root, { backgroundColor: colors.background }]}>
-      <ProductTourStepFinishedBottomModal
-        isOpened={
-          ptContext.currentStep === "CREATE_ACCOUNT" && !hideProductTourModal
-        }
-        onPress={() => goToProductTourMenu()}
-        onClose={() => goToProductTourMenu()}
-      />
       <TrackScreen
         category="AddAccounts"
         name="Success"
