@@ -46,7 +46,7 @@ export let completeStep: (step: string) => void = () => {};
 export let dismiss: (dismissed: boolean) => void = () => {};
 export let enableHole: (holeConfig: *) => void = () => {};
 export let enableFinishedModal: (finishedModal: string | null) => void = () => {};
-export let reportLayout: (ptIds: [string], ref: *, extra: *) => void = () => {};
+export let reportLayout: (ptIds: [string], ref: *, extra: *, mins: *) => void = () => {};
 
 // reducer
 const reducer = (state: State, update: StateUpdate) => {
@@ -145,10 +145,13 @@ const Provider = ({ children }: { children: React$Node }) => {
   dismiss = dismissed => dispatch({ dismissed });
   enableHole = holeConfig => dispatch({ holeConfig });
   enableFinishedModal = finishedModal => dispatch({ finishedModal });
-  reportLayout = (ptIds = [], ref, extra = {}) => {
+  reportLayout = (ptIds = [], ref, extra = {}, mins = {}) => {
     InteractionManager.runAfterInteractions(() => {
       ref.current.measure((_1, _2, width, height, x, y) => {
         console.log("reports", ptIds, { width, height, x, y })
+        if (mins.height && height < mins.height) {
+          return;
+        }
         ptIds.forEach(ptId => {
           dispatch({
             layouts: {

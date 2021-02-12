@@ -37,6 +37,7 @@ import GenericErrorBottomModal from "../../components/GenericErrorBottomModal";
 import NavigationScrollView from "../../components/NavigationScrollView";
 import { prepareCurrency } from "../../bridge/cache";
 import { blacklistedTokenIdsSelector } from "../../reducers/settings";
+import { reportLayout, useProductTourOverlay } from "../ProductTour/Provider";
 
 const SectionAccounts = ({ defaultSelected, ...rest }: any) => {
   useEffect(() => {
@@ -82,6 +83,11 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = {
   replaceAccounts,
+};
+
+const AddAccountsAccountsWrapper = props => {
+  useProductTourOverlay("CREATE_ACCOUNT", "addAccount-accountsLists");
+  return <AddAccountsAccounts {...props} />;
 };
 
 class AddAccountsAccounts extends PureComponent<Props, State> {
@@ -256,6 +262,7 @@ class AddAccountsAccounts extends PureComponent<Props, State> {
   };
 
   scrollView = createRef();
+  accountsLists = createRef();
 
   render() {
     const { existingAccounts, route, colors } = this.props;
@@ -314,31 +321,43 @@ class AddAccountsAccounts extends PureComponent<Props, State> {
           ref={this.scrollView}
           onContentSizeChange={this.handleContentSizeChange}
         >
-          {sections.map(({ id, selectable, defaultSelected, data }, i) => (
-            <SectionAccounts
-              defaultSelected={defaultSelected}
-              key={id}
-              showHint={selectable && i === 0}
-              header={
-                <Trans
-                  values={{ length: data.length }}
-                  i18nKey={`addAccounts.sections.${id}.title`}
-                />
-              }
-              index={i}
-              accounts={data}
-              onAccountNameChange={
-                !selectable ? undefined : this.onAccountNameChange
-              }
-              onPressAccount={!selectable ? undefined : this.onPressAccount}
-              onSelectAll={!selectable ? undefined : this.selectAll}
-              onUnselectAll={!selectable ? undefined : this.unselectAll}
-              selectedIds={selectedIds}
-              emptyState={emptyTexts[id]}
-              isDisabled={!selectable}
-              forceSelected={id === "existing"}
-            />
-          ))}
+          <View
+            ref={this.accountsLists}
+            onLayout={() =>
+              reportLayout(
+                ["addAccountAccountsLists"],
+                this.accountsLists,
+                {},
+                { height: 15 },
+              )
+            }
+          >
+            {sections.map(({ id, selectable, defaultSelected, data }, i) => (
+              <SectionAccounts
+                defaultSelected={defaultSelected}
+                key={id}
+                showHint={selectable && i === 0}
+                header={
+                  <Trans
+                    values={{ length: data.length }}
+                    i18nKey={`addAccounts.sections.${id}.title`}
+                  />
+                }
+                index={i}
+                accounts={data}
+                onAccountNameChange={
+                  !selectable ? undefined : this.onAccountNameChange
+                }
+                onPressAccount={!selectable ? undefined : this.onPressAccount}
+                onSelectAll={!selectable ? undefined : this.selectAll}
+                onUnselectAll={!selectable ? undefined : this.unselectAll}
+                selectedIds={selectedIds}
+                emptyState={emptyTexts[id]}
+                isDisabled={!selectable}
+                forceSelected={id === "existing"}
+              />
+            ))}
+          </View>
 
           {sections.length === 0 && scanning ? (
             <LText style={styles.descText} color="smoke">
@@ -527,4 +546,4 @@ const styles = StyleSheet.create({
 export default compose(
   connect(mapStateToProps, mapDispatchToProps),
   withTheme,
-)(AddAccountsAccounts);
+)(AddAccountsAccountsWrapper);

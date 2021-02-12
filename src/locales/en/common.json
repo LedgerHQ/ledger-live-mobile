@@ -3554,7 +3554,8 @@
       "Manager-appRow-bitcoin": "Click the install button to get the\nBitcoin app. You need this app to\nmanage your Bitcoin accounts.",
       "Porfolio-AccountsTab": "Go to the Account section",
       "Accounts-headerAddAccount": "Click here to add accounts\nto your portfolio.",
-      "AddAccounts-currencyRow-addaccount-Bitcoin": "Select Bitcoin in the dropdown\nlist to add Bitcoin accounts from\nyour device."
+      "AddAccounts-currencyRow-addaccount-Bitcoin": "Select Bitcoin in the dropdown\nlist to add Bitcoin accounts from\nyour device.",
+      "addAccount-addAccountAccountsLists": "Here’s your new account, feel\nfree to rename it by swiping to\nthe right. You can add another\naccount after your first\ntransaction."
     }
   }
 }
