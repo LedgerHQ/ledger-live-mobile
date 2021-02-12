@@ -58,7 +58,7 @@
     "@ledgerhq/hw-app-xrp": "5.43.0",
     "@ledgerhq/hw-transport": "5.43.0",
     "@ledgerhq/hw-transport-http": "5.43.0",
-    "@ledgerhq/live-common": "^18.5.1",
+    "@ledgerhq/live-common": "^18.5.2",
     "@ledgerhq/logs": "5.43.0",
     "@ledgerhq/react-native-hid": "5.43.0",
     "@ledgerhq/react-native-hw-transport-ble": "5.43.0",
@@ -167,7 +167,7 @@
   },
   "devDependencies": {
     "@actions/core": "^1.2.6",
-    "@babel/core": "^7.12.13",
+    "@babel/core": "^7.12.16",
     "@babel/runtime": "^7.12.13",
     "@react-native-community/eslint-config": "^1.1.0",
     "babel-jest": "^26.6.3",
