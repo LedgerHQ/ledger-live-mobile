@@ -16,6 +16,7 @@ import MigrateAccountsBanner from "../MigrateAccounts/Banner";
 import { useScrollToTop } from "../../navigation/utils";
 import TokenContextualModal from "../Settings/Accounts/TokenContextualModal";
 import { ScreenName } from "../../const";
+import { useProductTourOverlay } from "../ProductTour/Provider";
 
 const List = globalSyncRefreshControl(FlatList);
 
@@ -29,6 +30,8 @@ export default function Accounts({ navigation, route }: Props) {
   const ref = useRef();
   useScrollToTop(ref);
   const { colors } = useTheme();
+
+  useProductTourOverlay("CREATE_ACCOUNT", "Accounts-headerAddAccount");
 
   const refreshAccountsOrdering = useRefreshAccountsOrdering();
   useFocusEffect(refreshAccountsOrdering);

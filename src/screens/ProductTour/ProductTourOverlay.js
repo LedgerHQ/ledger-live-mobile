@@ -43,6 +43,24 @@ const configs = {
       }),
     },
   ],
+  "Accounts-headerAddAccount": [
+    {
+      layout: "headerAddAccount",
+      arrow: require("../../images/producttour/arrow-topright.png"),
+      text: "producttour.overlay.Manager-headerAddAccount",
+      arrowPosition: ({ x, y, height, width }) => ({
+        left: x + width / 2,
+        top: y + height + 23,
+      }),
+      textLayout: ({ y, height }) => ({
+        top: y + height + 23 + 45 + 22,
+        left: 0,
+        right: 25,
+        textAlign: "right",
+      }),
+      cbPosition: "bottom",
+    },
+  ],
   "Manager-selectDevice": [
     {
       layout: "selectDevice",
@@ -186,7 +204,13 @@ const PortfolioOverlay = () => {
         }}
         style={[styles.fullscreen, { backgroundColor: "transparent" }]}
       />
-      <TouchableOpacity style={styles.closeButton} onPress={next}>
+      <TouchableOpacity
+        style={[
+          styles.closeButton,
+          config.cbPosition === "bottom" ? styles.cbBottom : styles.cbTop,
+        ]}
+        onPress={next}
+      >
         <LText style={styles.closeText} color="white" bold>
           <Trans i18nKey="producttour.overlay.closeText" />
         </LText>
@@ -208,10 +232,15 @@ const styles = StyleSheet.create({
     borderColor: "#FFF",
     borderWidth: 1,
     position: "absolute",
-    top: 40,
     right: 16,
     borderRadius: 4,
     zIndex: 10,
+  },
+  cbBottom: {
+    bottom: 40,
+  },
+  cbTop: {
+    top: 40,
   },
   closeText: {
     paddingVertical: 8,
