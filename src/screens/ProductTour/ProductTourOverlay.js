@@ -26,6 +26,23 @@ const configs = {
       }),
     },
   ],
+  "Porfolio-AccountsTab": [
+    {
+      layout: "AccountsTab",
+      arrow: require("../../images/producttour/arrow-bottomleft.png"),
+      text: "producttour.overlay.Porfolio-AccountsTab",
+      arrowPosition: ({ x, width, y }) => ({
+        left: x + width / 2,
+        top: y - 11 - 45,
+      }),
+      textLayout: ({ y }) => ({
+        top: y - 11 - 45 - 44,
+        left: 0,
+        right: 0,
+        textAlign: "center",
+      }),
+    },
+  ],
   "Manager-selectDevice": [
     {
       layout: "selectDevice",
