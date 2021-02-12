@@ -1,7 +1,7 @@
 // @flow
 
-import { StyleSheet } from "react-native";
-import React, { PureComponent } from "react";
+import { StyleSheet, View } from "react-native";
+import React, { PureComponent, useRef } from "react";
 import { RectButton } from "react-native-gesture-handler";
 import type {
   CryptoCurrency,
@@ -11,25 +11,39 @@ import type {
 import LText from "./LText";
 import CircleCurrencyIcon from "./CircleCurrencyIcon";
 import { withTheme } from "../colors";
+import { reportLayout } from "../screens/ProductTour/Provider";
 
 type Props = {
   currency: CryptoCurrency | TokenCurrency,
   onPress: (CryptoCurrency | TokenCurrency) => void,
   isOK?: boolean,
   style?: *,
+  type?: string,
   colors: *,
 };
 
-class CurrencyRow extends PureComponent<Props> {
-  onPress = () => {
-    this.props.onPress(this.props.currency);
+const layoutReports = ["Bitcoin"];
+
+const CurrencyRow = (props: Props) => {
+  const { currency, style, isOK = true, colors } = props;
+  const onPress = () => {
+    props.onPress(props.currency);
   };
-
-  render() {
-    const { currency, style, isOK = true, colors } = this.props;
-
-    return (
-      <RectButton style={[styles.root, style]} onPress={this.onPress}>
+  const ref = useRef();
+  return (
+    <View
+      ref={ref}
+      onLayout={() => {
+        if (!layoutReports.includes(currency.name)) {
+          return;
+        }
+        reportLayout(
+          ["currencyRow-" + (props.type || "") + "-" + currency.name],
+          ref,
+        );
+      }}
+    >
+      <RectButton style={[styles.root, style]} onPress={onPress}>
         <CircleCurrencyIcon
           size={26}
           currency={currency}
@@ -53,9 +67,9 @@ class CurrencyRow extends PureComponent<Props> {
           </LText>
         ) : null}
       </RectButton>
-    );
-  }
-}
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   root: {

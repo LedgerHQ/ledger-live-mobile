@@ -20,6 +20,7 @@ import FilteredSearchBar from "../../components/FilteredSearchBar";
 import KeyboardView from "../../components/KeyboardView";
 import CurrencyRow from "../../components/CurrencyRow";
 import LText from "../../components/LText";
+import { useProductTourOverlay } from "../ProductTour/Provider";
 
 const SEARCH_KEYS = ["name", "ticker"];
 const forceInset = { bottom: "always" };
@@ -44,6 +45,11 @@ export default function AddAccountsSelectCrypto({ navigation }: Props) {
   const cryptoCurrencies = useMemo(
     () => listSupportedCurrencies().concat(listTokens()),
     [],
+  );
+
+  useProductTourOverlay(
+    "CREATE_ACCOUNT",
+    "AddAccounts-currencyRow-addaccount-Bitcoin",
   );
 
   const sortedCryptoCurrencies = useCurrenciesByMarketcap(cryptoCurrencies);
@@ -71,7 +77,7 @@ export default function AddAccountsSelectCrypto({ navigation }: Props) {
       contentContainerStyle={styles.list}
       data={items}
       renderItem={({ item }) => (
-        <CurrencyRow currency={item} onPress={onPressItem} />
+        <CurrencyRow type="addaccount" currency={item} onPress={onPressItem} />
       )}
       keyExtractor={keyExtractor}
       showsVerticalScrollIndicator={false}

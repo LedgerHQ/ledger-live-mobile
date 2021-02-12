@@ -3553,7 +3553,8 @@
       "Manager-appsList": "You can find apps for many popular\ncrypto assets in the App catalog.\nLet’s install your first app!",
       "Manager-appRow-bitcoin": "Click the install button to get the\nBitcoin app. You need this app to\nmanage your Bitcoin accounts.",
       "Porfolio-AccountsTab": "Go to the Account section",
-      "Manager-headerAddAccount": "Click here to add accounts\nto your portfolio."
+      "Accounts-headerAddAccount": "Click here to add accounts\nto your portfolio.",
+      "AddAccounts-currencyRow-addaccount-Bitcoin": "Select Bitcoin in the dropdown\nlist to add Bitcoin accounts from\nyour device."
     }
   }
 }

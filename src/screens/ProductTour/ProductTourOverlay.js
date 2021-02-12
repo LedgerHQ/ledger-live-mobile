@@ -47,7 +47,7 @@ const configs = {
     {
       layout: "headerAddAccount",
       arrow: require("../../images/producttour/arrow-topright.png"),
-      text: "producttour.overlay.Manager-headerAddAccount",
+      text: "producttour.overlay.Accounts-headerAddAccount",
       arrowPosition: ({ x, y, height, width }) => ({
         left: x + width / 2,
         top: y + height + 23,
@@ -59,6 +59,23 @@ const configs = {
         textAlign: "right",
       }),
       cbPosition: "bottom",
+    },
+  ],
+  "AddAccounts-currencyRow-addaccount-Bitcoin": [
+    {
+      layout: "currencyRow-addaccount-Bitcoin",
+      arrow: require("../../images/producttour/arrow-topright.png"),
+      text: "producttour.overlay.AddAccounts-currencyRow-addaccount-Bitcoin",
+      arrowPosition: ({ x, y, height, width }) => ({
+        left: x + width / 2,
+        top: y + height + 23,
+      }),
+      textLayout: ({ y, height }) => ({
+        top: y + height + 23 + 45 + 22,
+        left: 0,
+        right: 0,
+        textAlign: "center",
+      }),
     },
   ],
   "Manager-selectDevice": [

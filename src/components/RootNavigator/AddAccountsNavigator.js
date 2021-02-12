@@ -58,10 +58,6 @@ export default function AddAccountsNavigator({ route }: { route: Route }) {
             : {},
         headerTintColor:
           ptContext.currentStep === "CREATE_ACCOUNT" ? colors.white : null,
-        headerRight: () =>
-          ptContext.currentStep === "CREATE_ACCOUNT" ? null : (
-            <AddAccountsHeaderRightClose />
-          ),
       }}
     >
       <Stack.Screen
@@ -78,19 +74,6 @@ export default function AddAccountsNavigator({ route }: { route: Route }) {
               style={style}
             />
           ),
-          headerLeft:
-            ptContext.currentStep === "CREATE_ACCOUNT"
-              ? props => (
-                  <HeaderBackButton
-                    {...props}
-                    onPress={() => {
-                      navigate(NavigatorName.ProductTour, {
-                        screen: ScreenName.ProductTourMenu,
-                      });
-                    }}
-                  />
-                )
-              : null,
         }}
       />
       <Stack.Screen

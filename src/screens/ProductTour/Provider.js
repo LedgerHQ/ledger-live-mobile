@@ -6,6 +6,7 @@ import React, {
   useContext,
   useState,
 } from "react";
+import { InteractionManager } from "react-native";
 import _ from "lodash";
 import { useFocusEffect } from "@react-navigation/native";
 import { saveTourData, getTourData } from "../../db";
@@ -145,17 +146,20 @@ const Provider = ({ children }: { children: React$Node }) => {
   enableHole = holeConfig => dispatch({ holeConfig });
   enableFinishedModal = finishedModal => dispatch({ finishedModal });
   reportLayout = (ptIds = [], ref, extra = {}) => {
-    ref.current.measure((_1, _2, width, height, x, y) => {
-      ptIds.forEach(ptId => {
-        dispatch({
-          layouts: {
-            [ptId]: {
-              width: width + 10 + (extra.width || 0),
-              height: height + 10 + (extra.height || 0),
-              x: x - 5 + (extra.x || 0),
-              y: y - 5 + (extra.y || 0),
+    InteractionManager.runAfterInteractions(() => {
+      ref.current.measure((_1, _2, width, height, x, y) => {
+        console.log("reports", ptIds, { width, height, x, y })
+        ptIds.forEach(ptId => {
+          dispatch({
+            layouts: {
+              [ptId]: {
+                width: width + 10 + (extra.width || 0),
+                height: height + 10 + (extra.height || 0),
+                x: x - 5 + (extra.x || 0),
+                y: y - 5 + (extra.y || 0),
+              },
             },
-          },
+          });
         });
       });
     });
