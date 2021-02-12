@@ -3548,7 +3548,7 @@
     "overlay": {
       "closeText": "Skip Tutorial",
       "Porfolio-ManagerTab": "Go to the Manager to install\napps on your device.",
-      "Manager-selectDevice": "Select your device",
+      "selectDevice": "Select your device",
       "Manager-managerDevice": "See an overview of your\nLedger hardware wallet here.",
       "Manager-appsList": "You can find apps for many popular\ncrypto assets in the App catalog.\nLet’s install your first app!",
       "Manager-appRow-bitcoin": "Click the install button to get the\nBitcoin app. You need this app to\nmanage your Bitcoin accounts.",

@@ -14,6 +14,7 @@ import { TrackScreen } from "../../analytics";
 import SelectDevice from "../../components/SelectDevice";
 import NavigationScrollView from "../../components/NavigationScrollView";
 import DeviceActionModal from "../../components/DeviceActionModal";
+import { useProductTourOverlay } from "../ProductTour/Provider";
 
 const forceInset = { bottom: "always" };
 
@@ -32,6 +33,8 @@ const action = createAction(connectApp);
 export default function AddAccountsSelectDevice({ navigation, route }: Props) {
   const { colors } = useTheme();
   const [device, setDevice] = useState<?Device>();
+
+  useProductTourOverlay("CREATE_ACCOUNT", "selectDevice");
 
   const onClose = useCallback(() => {
     setDevice();

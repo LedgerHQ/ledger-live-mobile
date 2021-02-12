@@ -78,11 +78,11 @@ const configs = {
       }),
     },
   ],
-  "Manager-selectDevice": [
+  selectDevice: [
     {
       layout: "selectDevice",
       arrow: require("../../images/producttour/arrow-topleft.png"),
-      text: "producttour.overlay.Manager-selectDevice",
+      text: "producttour.overlay.selectDevice",
       arrowPosition: ({ x, y, height }) => ({
         left: x + 110,
         top: y + height + 23,

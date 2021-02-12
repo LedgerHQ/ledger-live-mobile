@@ -224,7 +224,7 @@ export default function Screen(props: Props) {
   const dispatch = useDispatch();
   const readOnlyModeEnabled = useSelector(readOnlyModeEnabledSelector);
 
-  useProductTourOverlay("INSTALL_CRYPTO", "Manager-selectDevice");
+  useProductTourOverlay("INSTALL_CRYPTO", "selectDevice");
 
   return (
     <ChooseDevice
