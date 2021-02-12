@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useContext, useState, useCallback } from "react";
+import React, { useContext, useState } from "react";
 import { Trans } from "react-i18next";
 import _ from "lodash";
 import {
@@ -10,7 +10,7 @@ import {
   Image,
   ScrollView,
 } from "react-native";
-import { useFocusEffect, useTheme } from "@react-navigation/native";
+import { useTheme } from "@react-navigation/native";
 import SafeAreaView from "react-native-safe-area-view";
 import LText from "../../components/LText";
 import Check from "../../icons/Check";
@@ -237,8 +237,6 @@ type Props = {
   navigation: any,
 };
 
-let to;
-
 const ProductTourMenu = ({ navigation }: Props) => {
   const { colors } = useTheme();
   const ptContext = useContext(context);
@@ -249,21 +247,9 @@ const ProductTourMenu = ({ navigation }: Props) => {
   const isComplete = step => ptContext.completedSteps.includes(step);
 
   const goTo = step => {
-    clearTimeout(to);
     setStep(step);
     navigation.navigate(ScreenName.ProductTourStepStart);
   };
-
-  // eslint-disable-next-line consistent-return
-  useFocusEffect(
-    useCallback(() => {
-      if (ptContext.currentStep) {
-        // timeout avoid ui glitch
-        to = setTimeout(() => setStep(null), 1000);
-      }
-      return clearTimeout(to);
-    }, [ptContext.currentStep]),
-  );
 
   return (
     <>

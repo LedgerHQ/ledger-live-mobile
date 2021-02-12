@@ -14,6 +14,7 @@ import { InstallProgress, UninstallProgress } from "./AppInstallProgress";
 
 import Check from "../../../icons/Check";
 import LText from "../../../components/LText";
+import { useProductTourFinishedModal } from "../../ProductTour/Provider";
 
 type Props = {
   app: App,
@@ -59,6 +60,8 @@ const AppStateButton = ({
     () => installed.some(({ name, updated }) => name === app.name && !updated),
     [app.name, installed],
   );
+
+  useProductTourFinishedModal("INSTALL_CRYPTO", isInstalled);
 
   const renderAppState = () => {
     switch (true) {

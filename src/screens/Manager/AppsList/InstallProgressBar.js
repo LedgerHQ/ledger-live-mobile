@@ -1,10 +1,4 @@
-import React, {
-  useState,
-  useCallback,
-  useMemo,
-  useContext,
-  useEffect,
-} from "react";
+import React, { useState, useCallback, useMemo, useContext } from "react";
 import { Linking } from "react-native";
 import { Trans } from "react-i18next";
 import type { State } from "@ledgerhq/live-common/lib/apps";
@@ -12,14 +6,9 @@ import { isLiveSupportedApp } from "@ledgerhq/live-common/lib/apps/logic";
 
 import { useTheme } from "@react-navigation/native";
 import { urls } from "../../../config/urls";
-import { ScreenName, NavigatorName } from "../../../const";
+import { NavigatorName } from "../../../const";
 import ToastBar from "../../../components/ToastBar";
-import {
-  context as _ptContext,
-  completeStep,
-} from "../../ProductTour/Provider";
-import ProductTourStepFinishedBottomModal from "../../ProductTour/ProductTourStepFinishedBottomModal";
-import { navigate } from "../../../rootnavigation";
+import { context as _ptContext } from "../../ProductTour/Provider";
 
 type Props = {
   state: State,
@@ -31,7 +20,6 @@ const InstallSuccessBar = ({ state, navigation, disable }: Props) => {
   const ptContext = useContext(_ptContext);
   const { colors } = useTheme();
   const [hasBeenShown, setHasBeenShown] = useState(disable);
-  const [hideProductTourModal, setHideProductTourModal] = useState(true);
   const {
     installQueue,
     uninstallQueue,
@@ -44,17 +32,6 @@ const InstallSuccessBar = ({ state, navigation, disable }: Props) => {
     navigation.navigate(NavigatorName.AddAccounts);
     setHasBeenShown(true);
   }, [navigation]);
-
-  const goToProductTourMenu = () => {
-    completeStep(ptContext.currentStep);
-    navigate(NavigatorName.ProductTour, {
-      screen: ScreenName.ProductTourMenu,
-    });
-    setHideProductTourModal(true);
-  };
-  useEffect(() => {
-    setHideProductTourModal(ptContext.currentStep !== "INSTALL_CRYPTO");
-  }, [ptContext.currentStep]);
 
   const onSupportLink = useCallback(() => {
     Linking.openURL(urls.appSupport);
@@ -87,15 +64,6 @@ const InstallSuccessBar = ({ state, navigation, disable }: Props) => {
 
   return (
     <>
-      <ProductTourStepFinishedBottomModal
-        isOpened={
-          recentlyInstalledApps.length >= 1 &&
-          ptContext.currentStep === "INSTALL_CRYPTO" &&
-          !hideProductTourModal
-        }
-        onPress={() => goToProductTourMenu()}
-        onClose={() => goToProductTourMenu()}
-      />
       <ToastBar
         isOpened={
           successInstalls.length >= 1 &&

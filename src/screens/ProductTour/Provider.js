@@ -1,5 +1,11 @@
 /* @flow */
-import React, { useEffect, useReducer, useCallback, useContext } from "react";
+import React, {
+  useEffect,
+  useReducer,
+  useCallback,
+  useContext,
+  useState,
+} from "react";
 import _ from "lodash";
 import { useFocusEffect } from "@react-navigation/native";
 import { saveTourData, getTourData } from "../../db";
@@ -21,6 +27,7 @@ type State = {
   initDone: boolean,
   holeConfig: string | null,
   layouts: *,
+  finishedModal: string | null,
 };
 type StateUpdate = {
   completedSteps?: string[],
@@ -29,6 +36,7 @@ type StateUpdate = {
   initDone?: boolean,
   holeConfig?: string | null,
   layouts?: *,
+  finishedModal?: string | null,
 };
 
 // actions
@@ -36,6 +44,7 @@ export let setStep: (step: string | null) => void = () => {};
 export let completeStep: (step: string) => void = () => {};
 export let dismiss: (dismissed: boolean) => void = () => {};
 export let enableHole: (holeConfig: *) => void = () => {};
+export let enableFinishedModal: (finishedModal: string | null) => void = () => {};
 export let reportLayout: (ptIds: [string], ref: *, extra: *) => void = () => {};
 
 // reducer
@@ -48,6 +57,18 @@ const reducer = (state: State, update: StateUpdate) => {
       // eslint-disable-next-line no-param-reassign
       delete update.holeConfig;
     }
+  }
+  if (update.currentStep && update.currentStep.substring(0, 1) === "-") {
+    if (state.currentStep && update.currentStep === `-${state.currentStep}`) {
+      // eslint-disable-next-line no-param-reassign
+      update.currentStep = null;
+    } else {
+      // eslint-disable-next-line no-param-reassign
+      delete update.currentStep;
+    }
+  }
+  if (update.dismissed) {
+    update.holeConfig = null;
   }
   return {
     ...state,
@@ -70,6 +91,7 @@ const initialState = {
   initDone: false,
   holeConfig: null,
   layouts: {},
+  finishedModal: null,
 };
 
 export const context = React.createContext<State>(initialState);
@@ -93,6 +115,26 @@ export const useProductTourOverlay = (
   );
 };
 
+export const useProductTourFinishedModal = (step: string, enabled: boolean) => {
+  const ptContext = useContext(context);
+  const [disabled, setDisabled] = useState(!!enabled);
+
+  useEffect(() => {
+    if (ptContext.currentStep === null && enabled) {
+      setDisabled(true);
+    }
+    if (!enabled) {
+      setDisabled(false);
+    }
+  }, [ptContext.currentStep, enabled]);
+
+  useEffect(() => {
+    if (ptContext.currentStep === step && enabled && !disabled) {
+      enableFinishedModal(step);
+    }
+  }, [ptContext.currentStep, step, enabled, disabled]);
+};
+
 const Provider = ({ children }: { children: React$Node }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -101,6 +143,7 @@ const Provider = ({ children }: { children: React$Node }) => {
   completeStep = step => dispatch({ completedSteps: [step] });
   dismiss = dismissed => dispatch({ dismissed });
   enableHole = holeConfig => dispatch({ holeConfig });
+  enableFinishedModal = finishedModal => dispatch({ finishedModal });
   reportLayout = (ptIds = [], ref, extra = {}) => {
     ref.current.measure((_1, _2, width, height, x, y) => {
       ptIds.forEach(ptId => {
@@ -127,11 +170,9 @@ const Provider = ({ children }: { children: React$Node }) => {
 
     const init = async () => {
       dispatch({
-        ...((await getTourData()) || initialState),
+        ...initialState,
+        ...((await getTourData()) || {}),
         initDone: true,
-        currentStep: null,
-        holeConfig: null,
-        layouts: {},
       });
     };
 

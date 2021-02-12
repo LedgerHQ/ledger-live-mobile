@@ -51,6 +51,7 @@ import WalletConnectProvider, {
 } from "./screens/WalletConnect/Provider";
 import ProductTourProvider from "./screens/ProductTour/Provider";
 import ProductTourOverlay from "./screens/ProductTour/ProductTourOverlay";
+import ProductTourStepFinishedBottomModal from "./screens/ProductTour/ProductTourStepFinishedBottomModal";
 import HookAnalytics from "./analytics/HookAnalytics";
 import HookSentry from "./components/HookSentry";
 import RootNavigator from "./components/RootNavigator";
@@ -385,6 +386,7 @@ export default class Root extends Component<
                                         importDataString={importDataString}
                                       />
                                       <ProductTourOverlay />
+                                      <ProductTourStepFinishedBottomModal />
                                     </ProductTourProvider>
                                   </OnboardingContextProvider>
                                 </ButtonUseTouchable.Provider>

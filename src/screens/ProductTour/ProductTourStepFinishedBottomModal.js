@@ -1,20 +1,22 @@
 // @flow
 
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { View, StyleSheet, Image } from "react-native";
 import { Trans } from "react-i18next";
 import { useTheme } from "@react-navigation/native";
 import BottomModal from "../../components/BottomModal";
-import type { Props as BMProps } from "../../components/BottomModal";
 import LText from "../../components/LText";
 import Button from "../../components/Button";
-import TrackScreen from "../../analytics/TrackScreen";
-import { context as _ptContext } from "./Provider";
+import { screen } from "../../analytics/segment";
+import {
+  context as _ptContext,
+  enableFinishedModal,
+  completeStep,
+  setStep,
+} from "./Provider";
 import ArrowRight from "../../icons/ArrowRight";
-
-type Props = BMProps & {
-  onPress: Function,
-};
+import { ScreenName, NavigatorName } from "../../const";
+import { navigate } from "../../rootnavigation";
 
 const stepTitles = {
   INSTALL_CRYPTO: [
@@ -92,33 +94,43 @@ const stepTitles = {
   ],
 };
 
-const ProductTourStepFinishedBottomModal = ({
-  isOpened,
-  onClose,
-  onPress,
-  ...rest
-}: Props) => {
+const ProductTourStepFinishedBottomModal = () => {
   const { colors } = useTheme();
   const ptContext = useContext(_ptContext);
 
+  const isOpened =
+    ptContext.currentStep && ptContext.finishedModal === ptContext.currentStep;
+
+  const onClose = () => {
+    completeStep(ptContext.currentStep);
+    navigate(NavigatorName.ProductTour, {
+      screen: ScreenName.ProductTourMenu,
+    });
+    enableFinishedModal(null);
+    // give time to finish transition
+    setTimeout(() => {
+      setStep("-" + ptContext.currentStep);
+    }, 1000);
+  };
+
+  useEffect(() => {
+    if (isOpened) {
+      screen("ProductTourStepFinishedBottomModal", ptContext.currentStep);
+    }
+  }, [isOpened, ptContext.currentStep]);
+
   return (
     <BottomModal
-      id="ProductTourStepFinishedBottomModal"
-      isOpened={isOpened}
+      isOpened={!!isOpened}
       onClose={onClose}
       style={[
         styles.confirmationModal,
         { backgroundColor: colors.ledgerGreen },
       ]}
       containerStyle={{ backgroundColor: colors.ledgerGreen }}
-      {...rest}
     >
       {isOpened && ptContext.currentStep ? (
         <>
-          <TrackScreen
-            category="ProductTourStepFinishedBottomModal"
-            name={ptContext.currentStep}
-          />
           <View style={styles.imageContainer}>
             <Image
               source={stepTitles[ptContext.currentStep][1]?.file}
@@ -142,7 +154,7 @@ const ProductTourStepFinishedBottomModal = ({
               containerStyle={styles.confirmationButton}
               type="negative2Primary"
               title={<Trans i18nKey="producttour.finishedmodal.cta" />}
-              onPress={onPress}
+              onPress={onClose}
               IconRight={ArrowRight}
             />
           </View>
