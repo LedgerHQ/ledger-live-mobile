@@ -1,5 +1,5 @@
 /* @flow */
-import React, { useCallback, useMemo } from "react";
+import React, { useCallback, useMemo, useRef } from "react";
 import { View, StyleSheet, FlatList } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { useSelector } from "react-redux";
@@ -23,6 +23,7 @@ import FilteredSearchBar from "../../components/FilteredSearchBar";
 import AccountCard from "../../components/AccountCard";
 import KeyboardView from "../../components/KeyboardView";
 import { formatSearchResults } from "../../helpers/formatAccountSearchResults";
+import { reportLayout, useProductTourOverlay } from "../ProductTour/Provider";
 
 const SEARCH_KEYS = ["name", "unit.code", "token.name", "token.ticker"];
 const forceInset = { bottom: "always" };
@@ -108,18 +109,28 @@ export default function ReceiveFunds({ navigation, route }: Props) {
     [colors.fog, navigation],
   );
 
+  const ref = useRef();
+  useProductTourOverlay("RECEIVE_COINS", "Receive-accountsList");
+
   const renderList = useCallback(
     items => {
       const formatedList = formatSearchResults(items, accounts);
 
       return (
-        <FlatList
-          data={formatedList}
-          renderItem={renderItem}
-          keyExtractor={keyExtractor}
-          showsVerticalScrollIndicator={false}
-          keyboardDismissMode="on-drag"
-        />
+        <View
+          ref={ref}
+          onLayout={() => {
+            reportLayout(["receive-accountsList"], ref);
+          }}
+        >
+          <FlatList
+            data={formatedList}
+            renderItem={renderItem}
+            keyExtractor={keyExtractor}
+            showsVerticalScrollIndicator={false}
+            keyboardDismissMode="on-drag"
+          />
+        </View>
       );
     },
     [accounts, renderItem],
