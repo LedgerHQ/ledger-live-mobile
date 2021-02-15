@@ -94,6 +94,40 @@ const configs = {
       }),
     },
   ],
+  "Buy-SelectBitcoinCurrency": [
+    {
+      layout: "currencyRow-exchange-Bitcoin",
+      arrow: require("../../images/producttour/arrow-topright.png"),
+      text: "producttour.overlay.Buy-SelectBitcoinCurrency",
+      arrowPosition: ({ x, y, height, width }) => ({
+        left: x + width / 2,
+        top: y + height + 23,
+      }),
+      textLayout: ({ y, height }) => ({
+        top: y + height + 23 + 45 + 22,
+        left: 0,
+        right: 0,
+        textAlign: "center",
+      }),
+    },
+  ],
+  "Buy-SelectBitcoinAccount": [
+    {
+      layout: "Buy-SelectBitcoinAccount",
+      arrow: require("../../images/producttour/arrow-topright.png"),
+      text: "producttour.overlay.Buy-SelectBitcoinAccount",
+      arrowPosition: ({ x, y, height, width }) => ({
+        left: x + width / 2,
+        top: y + height + 23,
+      }),
+      textLayout: ({ y, height }) => ({
+        top: y + height + 23 + 45 + 22,
+        left: 0,
+        right: 0,
+        textAlign: "center",
+      }),
+    },
+  ],
   "Accounts-headerAddAccount": [
     {
       layout: "headerAddAccount",

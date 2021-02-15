@@ -24,7 +24,10 @@ import KeyboardView from "../../components/KeyboardView";
 import CurrencyRow from "../../components/CurrencyRow";
 import LText from "../../components/LText";
 import { getSupportedCurrencies } from "./coinifyConfig";
-import { context as _ptContext } from "../ProductTour/Provider";
+import {
+  context as _ptContext,
+  useProductTourOverlay,
+} from "../ProductTour/Provider";
 
 const SEARCH_KEYS = ["name", "ticker"];
 const forceInset = { bottom: "always" };
@@ -59,6 +62,8 @@ export default function ExchangeSelectCrypto({ navigation, route }: Props) {
   const mode = params?.mode || "buy";
   const accounts = useSelector(accountsSelector);
   const ptContext = useContext(_ptContext);
+
+  useProductTourOverlay("BUY_COINS", "Buy-SelectBitcoinCurrency");
 
   const cryptoCurrencies = useMemo(
     () => listSupportedCurrencies().concat(listTokens()),
@@ -110,7 +115,7 @@ export default function ExchangeSelectCrypto({ navigation, route }: Props) {
       contentContainerStyle={styles.list}
       data={items}
       renderItem={({ item }) => (
-        <CurrencyRow currency={item} onPress={onPressItem} />
+        <CurrencyRow type="exchange" currency={item} onPress={onPressItem} />
       )}
       keyExtractor={keyExtractor}
       showsVerticalScrollIndicator={false}
