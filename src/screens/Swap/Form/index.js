@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useCallback, useMemo } from "react";
+import React, { useCallback, useMemo, useRef } from "react";
 import { TouchableOpacity, StyleSheet, View } from "react-native";
 import { Trans } from "react-i18next";
 import { useSelector } from "react-redux";
@@ -46,6 +46,10 @@ import Button from "../../../components/Button";
 import { accountsSelector } from "../../../reducers/accounts";
 import { ScreenName } from "../../../const";
 import { TrackScreen } from "../../../analytics";
+import {
+  reportLayout,
+  useProductTourOverlay,
+} from "../../ProductTour/Provider";
 
 type SelectAccountFlowTarget = "from" | "to";
 export type SwapRouteParams = {
@@ -146,114 +150,132 @@ const Form = ({
     return fromAccount && toAccount;
   }, [exchange]);
 
+  const ref = useRef();
+  const ref2 = useRef();
+  useProductTourOverlay("SWAP_COINS", "Swap-accountFrom");
+
   return (
     <View style={styles.root}>
       <TrackScreen category="Swap" name="Form" />
       <View style={styles.top}>
-        <TouchableOpacity
-          style={styles.accountWrapper}
-          onPress={() => startSelectAccountFlow("from")}
+        <View
+          ref={ref}
+          onLayout={() => {
+            reportLayout(["swap-accountFrom"], ref);
+          }}
         >
-          <LText semiBold secondary style={styles.accountTitle} color="smoke">
-            <Trans i18nKey={"transfer.swap.form.from"} />
-          </LText>
-
-          <View style={styles.accountNameWrapper}>
-            {fromAccount ? (
-              <>
-                <CurrencyIcon size={16} currency={fromCurrency} />
-                <LText
-                  semiBold
-                  style={styles.accountName}
-                  numberOfLines={1}
-                  ellipsizeMode="middle"
-                >
-                  {getAccountName(fromAccount)}
-                </LText>
-                <View style={{ marginTop: 4, marginLeft: 8 }}>
-                  <Icon name="ios-arrow-down" size={16} color={colors.black} />
-                </View>
-              </>
-            ) : (
-              <>
-                <LText
-                  semiBold
-                  style={styles.accountName}
-                  numberOfLines={1}
-                  ellipsizeMode="middle"
-                >
-                  <Trans i18nKey={"transfer.swap.form.fromAccount"} />
-                </LText>
-                <View style={{ marginTop: 4, marginLeft: 8 }}>
-                  <Icon name="ios-arrow-down" size={16} color={colors.black} />
-                </View>
-              </>
-            )}
-          </View>
-
-          {fromAccount ? (
-            <LText style={styles.accountBalance} color="grey">
-              <Trans i18nKey={"transfer.swap.form.balance"}>
-                <CurrencyUnitValue
-                  showCode
-                  unit={getAccountUnit(fromAccount)}
-                  value={fromAccount.balance}
-                />
-              </Trans>
+          <TouchableOpacity
+            style={styles.accountWrapper}
+            onPress={() => startSelectAccountFlow("from")}
+          >
+            <LText semiBold secondary style={styles.accountTitle} color="smoke">
+              <Trans i18nKey={"transfer.swap.form.from"} />
             </LText>
-          ) : null}
-        </TouchableOpacity>
+
+            <View style={styles.accountNameWrapper}>
+              {fromAccount ? (
+                <>
+                  <CurrencyIcon size={16} currency={fromCurrency} />
+                  <LText
+                    semiBold
+                    style={styles.accountName}
+                    numberOfLines={1}
+                    ellipsizeMode="middle"
+                  >
+                    {getAccountName(fromAccount)}
+                  </LText>
+                  <View style={{ marginTop: 4, marginLeft: 8 }}>
+                    <Icon name="ios-arrow-down" size={16} color={colors.black} />
+                  </View>
+                </>
+              ) : (
+                <>
+                  <LText
+                    semiBold
+                    style={styles.accountName}
+                    numberOfLines={1}
+                    ellipsizeMode="middle"
+                  >
+                    <Trans i18nKey={"transfer.swap.form.fromAccount"} />
+                  </LText>
+                  <View style={{ marginTop: 4, marginLeft: 8 }}>
+                    <Icon name="ios-arrow-down" size={16} color={colors.black} />
+                  </View>
+                </>
+              )}
+            </View>
+
+            {fromAccount ? (
+              <LText style={styles.accountBalance} color="grey">
+                <Trans i18nKey={"transfer.swap.form.balance"}>
+                  <CurrencyUnitValue
+                    showCode
+                    unit={getAccountUnit(fromAccount)}
+                    value={fromAccount.balance}
+                  />
+                </Trans>
+              </LText>
+            ) : null}
+          </TouchableOpacity>
+        </View>
         <SectionSeparator noMargin>
           <ArrowDownCircle />
         </SectionSeparator>
-        <TouchableOpacity
-          style={styles.accountWrapper}
-          onPress={() => startSelectAccountFlow("to")}
+        <View
+          ref={ref2}
+          onLayout={() => {
+            reportLayout(["swap-accountTo"], ref2);
+          }}
         >
-          <LText semiBold secondary style={styles.accountTitle} color="smoke">
-            <Trans i18nKey={"transfer.swap.form.to"} />
-          </LText>
-
-          <View style={styles.accountNameWrapper}>
-            {toAccount ? (
-              <>
-                <CurrencyIcon size={16} currency={toCurrency} />
-                <LText
-                  semiBold
-                  style={styles.accountName}
-                  numberOfLines={1}
-                  ellipsizeMode="middle"
-                >
-                  {getAccountName(toAccount)}
-                </LText>
-                <View style={{ marginTop: 4, marginLeft: 8 }}>
-                  <Icon name="ios-arrow-down" size={16} color={colors.black} />
-                </View>
-              </>
-            ) : (
-              <>
-                <LText semiBold style={styles.accountName}>
-                  <Trans i18nKey={"transfer.swap.form.toAccount"} />
-                </LText>
-                <View style={{ marginTop: 4, marginLeft: 8 }}>
-                  <Icon name="ios-arrow-down" size={16} color={colors.black} />
-                </View>
-              </>
-            )}
-          </View>
-
-          {toAccount ? (
-            <LText style={styles.accountBalance} color="grey">
-              <Trans i18nKey={"transfer.swap.form.balance"}>
-                <CurrencyUnitValue
-                  showCode
-                  unit={getAccountUnit(toAccount)}
-                  value={toAccount.balance}
-                />
-              </Trans>
+          <TouchableOpacity
+            style={styles.accountWrapper}
+            onPress={() => startSelectAccountFlow("to")}
+          >
+            <LText semiBold secondary style={styles.accountTitle} color="smoke">
+              <Trans i18nKey={"transfer.swap.form.to"} />
             </LText>
-          ) : null}
-        </TouchableOpacity>
+
+            <View style={styles.accountNameWrapper}>
+              {toAccount ? (
+                <>
+                  <CurrencyIcon size={16} currency={toCurrency} />
+                  <LText
+                    semiBold
+                    style={styles.accountName}
+                    numberOfLines={1}
+                    ellipsizeMode="middle"
+                  >
+                    {getAccountName(toAccount)}
+                  </LText>
+                  <View style={{ marginTop: 4, marginLeft: 8 }}>
+                    <Icon name="ios-arrow-down" size={16} color={colors.black} />
+                  </View>
+                </>
+              ) : (
+                <>
+                  <LText semiBold style={styles.accountName}>
+                    <Trans i18nKey={"transfer.swap.form.toAccount"} />
+                  </LText>
+                  <View style={{ marginTop: 4, marginLeft: 8 }}>
+                    <Icon name="ios-arrow-down" size={16} color={colors.black} />
+                  </View>
+                </>
+              )}
+            </View>
+
+            {toAccount ? (
+              <LText style={styles.accountBalance} color="grey">
+                <Trans i18nKey={"transfer.swap.form.balance"}>
+                  <CurrencyUnitValue
+                    showCode
+                    unit={getAccountUnit(toAccount)}
+                    value={toAccount.balance}
+                  />
+                </Trans>
+              </LText>
+            ) : null}
+          </TouchableOpacity>
+        </View>
       </View>
       <View style={styles.buttonWrapper}>
         <Button

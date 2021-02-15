@@ -77,6 +77,38 @@ const configs = {
       }),
     },
   ],
+  "Swap-accountFrom": [
+    {
+      layout: "swap-accountFrom",
+      arrow: require("../../images/producttour/arrow-topright.png"),
+      text: "producttour.overlay.Swap-accountFrom",
+      arrowPosition: ({ x, y, height, width }) => ({
+        left: x + width / 2,
+        top: y + height + 23,
+      }),
+      textLayout: ({ y, height }) => ({
+        top: y + height + 23 + 45 + 22,
+        left: 0,
+        right: 0,
+        textAlign: "center",
+      }),
+    },
+    {
+      layout: "swap-accountTo",
+      arrow: require("../../images/producttour/arrow-bottomleft.png"),
+      text: "producttour.overlay.Swap-accountTo",
+      arrowPosition: ({ x, width, y }) => ({
+        left: x + width / 2,
+        top: y - 11 - 45,
+      }),
+      textLayout: ({ y }) => ({
+        top: y - 11 - 45 - 44 - 16,
+        left: 0,
+        right: 0,
+        textAlign: "center",
+      }),
+    },
+  ],
   "Porfolio-TransferTab-Send": [
     {
       layout: "TransferTab",
