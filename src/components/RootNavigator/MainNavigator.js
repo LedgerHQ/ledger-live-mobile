@@ -1,5 +1,5 @@
 // @flow
-import React, { useContext } from "react";
+import React from "react";
 import { Pressable } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { ScreenName, NavigatorName } from "../../const";
@@ -11,10 +11,7 @@ import SettingsNavigator from "./SettingsNavigator";
 import TabIcon from "../TabIcon";
 import AccountsIcon from "../../icons/Accounts";
 import SettingsIcon from "../../icons/Settings";
-import {
-  dismiss as dismissTour,
-  context as _ptContext,
-} from "../../screens/ProductTour/Provider";
+import { dismiss as dismissTour } from "../../screens/ProductTour/Provider";
 
 import Tab from "./CustomBlockRouterNavigator";
 
@@ -28,7 +25,6 @@ export default function MainNavigator({
 }) {
   const { colors } = useTheme();
   const { hideTabNavigation } = params || {};
-  const ptContext = useContext(_ptContext);
   return (
     <Tab.Navigator
       tabBarOptions={{

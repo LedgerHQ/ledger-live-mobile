@@ -12,7 +12,6 @@ import {
   context as _ptContext,
   enableFinishedModal,
   completeStep,
-  setStep,
 } from "./Provider";
 import ArrowRight from "../../icons/ArrowRight";
 import { ScreenName, NavigatorName } from "../../const";

@@ -1,12 +1,9 @@
 // @flow
 import React, { useContext, useMemo } from "react";
-import {
-  createStackNavigator,
-  HeaderBackButton,
-} from "@react-navigation/stack";
+import { createStackNavigator } from "@react-navigation/stack";
 import { useTheme } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
-import { ScreenName, NavigatorName } from "../../const";
+import { ScreenName } from "../../const";
 import SendFundsMain from "../../screens/SendFunds/01-SelectAccount";
 import SendSelectRecipient from "../../screens/SendFunds/02-SelectRecipient";
 import SendAmount from "../../screens/SendFunds/03-Amount";
@@ -18,7 +15,6 @@ import SendValidationError from "../../screens/SendFunds/07-ValidationError";
 import { getStackNavigatorConfig } from "../../navigation/navigatorConfig";
 import StepHeader from "../StepHeader";
 import { context as _ptContext } from "../../screens/ProductTour/Provider";
-import { navigate } from "../../rootnavigation";
 
 const totalSteps = "6";
 

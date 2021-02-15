@@ -44,10 +44,6 @@ type Props = {
   colors: *,
 };
 
-type State = {
-  error: *,
-};
-
 export const SendFundsSelectAccount = (props: Props) => {
   const [state, setState] = useState({
     error: null,

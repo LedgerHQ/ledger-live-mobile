@@ -1,13 +1,10 @@
 // @flow
 
 import React, { useContext, useMemo } from "react";
-import {
-  createStackNavigator,
-  HeaderBackButton,
-} from "@react-navigation/stack";
+import { createStackNavigator } from "@react-navigation/stack";
 import { useTheme } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
-import { ScreenName, NavigatorName } from "../../const";
+import { ScreenName } from "../../const";
 import SwapSummary from "../../screens/Swap/Form/Summary";
 import SwapError from "../../screens/Swap/Form/Error";
 import SwapFormAmount from "../../screens/Swap/Form/Amount";
@@ -19,7 +16,6 @@ import SwapFormSelectCrypto from "../../screens/Swap/Form/SelectAccount/01-Selec
 import SwapFormSelectAccount from "../../screens/Swap/Form/SelectAccount/02-SelectAccount";
 import { getStackNavigatorConfig } from "../../navigation/navigatorConfig";
 import StepHeader from "../StepHeader";
-import { navigate } from "../../rootnavigation";
 import { context as _ptContext } from "../../screens/ProductTour/Provider";
 
 import styles from "../../navigation/styles";

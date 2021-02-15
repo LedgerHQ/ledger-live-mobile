@@ -1,7 +1,7 @@
 // @flow
 
 import { StyleSheet, View } from "react-native";
-import React, { PureComponent, useRef } from "react";
+import React, { useRef } from "react";
 import { RectButton } from "react-native-gesture-handler";
 import type {
   CryptoCurrency,

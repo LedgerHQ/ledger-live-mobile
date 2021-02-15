@@ -1,19 +1,15 @@
 // @flow
 import React, { useContext, useMemo } from "react";
-import {
-  createStackNavigator,
-  HeaderBackButton,
-} from "@react-navigation/stack";
+import { createStackNavigator } from "@react-navigation/stack";
 import { useTheme } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
-import { ScreenName, NavigatorName } from "../../const";
+import { ScreenName } from "../../const";
 import ExchangeSelectCurrency from "../../screens/Exchange/SelectCurrency";
 import ExchangeSelectAccount from "../../screens/Exchange/SelectAccount";
 import ExchangeConnectDevice from "../../screens/Exchange/ConnectDevice";
 import ExchangeCoinifyWidget from "../../screens/Exchange/CoinifyWidgetScreen";
 
 import { context as _ptContext } from "../../screens/ProductTour/Provider";
-import { navigate } from "../../rootnavigation";
 import { getStackNavigatorConfig } from "../../navigation/navigatorConfig";
 import AddAccountsHeaderRightClose from "../../screens/AddAccounts/AddAccountsHeaderRightClose";
 

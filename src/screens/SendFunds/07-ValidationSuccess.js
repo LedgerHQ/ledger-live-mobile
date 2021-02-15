@@ -1,5 +1,5 @@
 /* @flow */
-import React, { useCallback, useContext, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect } from "react";
 import { View, StyleSheet } from "react-native";
 import { useSelector } from "react-redux";
 import type { Operation } from "@ledgerhq/live-common/lib/types";
@@ -14,10 +14,7 @@ import {
   setCurrentCallRequestResult,
   STATUS,
 } from "../WalletConnect/Provider";
-import {
-  context as _ptContext,
-  useProductTourFinishedModal,
-} from "../ProductTour/Provider";
+import { useProductTourFinishedModal } from "../ProductTour/Provider";
 
 type Props = {
   navigation: any,
@@ -35,7 +32,6 @@ export default function ValidationSuccess({ navigation, route }: Props) {
   const { colors } = useTheme();
   const { account, parentAccount } = useSelector(accountScreenSelector(route));
   const wcContext = useContext(_wcContext);
-  const ptContext = useContext(_ptContext);
 
   useEffect(() => {
     if (!account) return;

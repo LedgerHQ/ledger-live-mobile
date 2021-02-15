@@ -1,12 +1,6 @@
 // @flow
 
-import React, {
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-  useContext,
-} from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { of } from "rxjs";
 import { delay } from "rxjs/operators";
 import {
@@ -58,7 +52,6 @@ import { rejectionOp } from "../../components/DebugRejectSwitch";
 import { getStackNavigatorConfig } from "../../navigation/navigatorConfig";
 import GenericErrorView from "../../components/GenericErrorView";
 import {
-  context as _ptContext,
   reportLayout,
   useProductTourOverlay,
   useProductTourFinishedModal,
@@ -81,7 +74,6 @@ type RouteParams = {
 };
 
 export default function ReceiveConfirmation({ navigation, route }: Props) {
-  const ptContext = useContext(_ptContext);
   const { colors } = useTheme();
   const { account, parentAccount } = useSelector(accountScreenSelector(route));
   const readOnlyModeEnabled = useSelector(readOnlyModeEnabledSelector);

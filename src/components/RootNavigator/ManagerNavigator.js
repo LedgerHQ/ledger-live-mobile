@@ -2,13 +2,10 @@
 import React, { useContext, useMemo } from "react";
 import { TouchableOpacity, View, StyleSheet } from "react-native";
 import { useTheme } from "@react-navigation/native";
-import {
-  createStackNavigator,
-  HeaderBackButton,
-} from "@react-navigation/stack";
+import { createStackNavigator } from "@react-navigation/stack";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { NavigatorName, ScreenName } from "../../const";
+import { ScreenName } from "../../const";
 import { hasAvailableUpdateSelector } from "../../reducers/settings";
 import Manager from "../../screens/Manager";
 import ManagerMain from "../../screens/Manager/Manager";
@@ -19,8 +16,6 @@ import ManagerIcon from "../../icons/Manager";
 import NanoXIcon from "../../icons/TabNanoX";
 import { useIsNavLocked } from "./CustomBlockRouterNavigator";
 import { context as _ptContext } from "../../screens/ProductTour/Provider";
-import { navigate } from "../../rootnavigation";
-import HeaderRightClose from "../HeaderRightClose";
 
 const ManagerIconWithUpate = ({
   color,

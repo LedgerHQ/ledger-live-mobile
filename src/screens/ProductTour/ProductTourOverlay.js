@@ -471,7 +471,7 @@ const PortfolioOverlay = () => {
   const [index, setIndex] = useState(0);
   const ptContext = useContext(context);
 
-  console.log(ptContext);
+  // console.log(ptContext);
 
   useEffect(() => {
     if (disabled === ptContext.holeConfig) {
@@ -500,7 +500,7 @@ const PortfolioOverlay = () => {
 
   const config = configArray[index];
 
-  console.log(config, index);
+  // console.log(config, index);
 
   const layout = ptContext.layouts[config.layout];
 
@@ -509,7 +509,7 @@ const PortfolioOverlay = () => {
     return null;
   }
 
-  console.log(layout);
+  // console.log(layout);
 
   const arrow = config.arrow;
   const arrowStyle = config.arrowPosition(layout);

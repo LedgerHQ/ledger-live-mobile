@@ -1,11 +1,5 @@
 // @flow
-import React, {
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-  useContext,
-} from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { WebView } from "react-native-webview";
 import querystring from "querystring";
 import { ActivityIndicator, Linking, StyleSheet, View } from "react-native";
@@ -26,10 +20,7 @@ import { renderVerifyAddress } from "../../components/DeviceAction/rendering";
 import { getConfig } from "./coinifyConfig";
 import { track } from "../../analytics";
 import { DevicePart } from "./DevicePart";
-import {
-  context as _ptContext,
-  useProductTourFinishedModal,
-} from "../ProductTour/Provider";
+import { useProductTourFinishedModal } from "../ProductTour/Provider";
 import SkipDeviceVerification from "./SkipDeviceVerification";
 
 const action = createAction(connectApp);
@@ -107,7 +98,6 @@ export default function CoinifyWidget({
   const [requestingAction, setRequestingAction] = useState<
     "none" | "connect" | "verify",
   >("none");
-  const ptContext = useContext(_ptContext);
   const [firstLoadDone, setFirstLoadDone] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const webView = useRef();
