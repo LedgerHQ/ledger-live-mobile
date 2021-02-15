@@ -72,19 +72,6 @@ export default function SwapNavigator() {
             <StepHeader title={t("transfer.swap.title")} style={style} />
           ),
           headerRight: null,
-          headerLeft:
-            ptContext.currentStep === "SWAP_COINS"
-              ? props => (
-                  <HeaderBackButton
-                    {...props}
-                    onPress={() => {
-                      navigate(NavigatorName.ProductTour, {
-                        screen: ScreenName.ProductTourMenu,
-                      });
-                    }}
-                  />
-                )
-              : null,
         }}
       />
       <Stack.Screen

@@ -3569,7 +3569,8 @@
       "Send-accountsList": "Select the account to\nsend from.",
       "Send-recipient": "Paste or scan the QR code of\nthe address to send to.",
       "Send-amount": "Enter the amount you want to send.\nClick “Send Max” toggle to send\nthe entire account balance and\nempty the account",
-      "Send-fees": "You can edit the fees. A higher fee\ngets your transaction confirmed\nfaster."
+      "Send-fees": "You can edit the fees. A higher fee\ngets your transaction confirmed\nfaster.",
+      "Porfolio-TransferTab-Swap": "Click on transfer in the navigation\nand then Swap"
     }
   }
 }
