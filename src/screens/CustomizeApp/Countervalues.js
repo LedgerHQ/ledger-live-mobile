@@ -1,18 +1,16 @@
 // @flow
 
-import React, { useCallback, useContext, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { Trans } from "react-i18next";
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { useSelector } from "react-redux";
-import { useTheme } from "@react-navigation/native";
-import { ScreenName, NavigatorName } from "../../const";
+import { useTheme, useFocusEffect } from "@react-navigation/native";
+import { ScreenName } from "../../const";
 import { TrackScreen } from "../../analytics";
 import LText from "../../components/LText";
 import Button from "../../components/Button";
-import { context as _ptContext, completeStep } from "../ProductTour/Provider";
-import ProductTourStepFinishedBottomModal from "../ProductTour/ProductTourStepFinishedBottomModal";
-import { navigate } from "../../rootnavigation";
+import { useProductTourFinishedModal } from "../ProductTour/Provider";
 import IconArrowRight from "../../icons/ArrowRight";
 import IconChevron from "../../icons/Chevron";
 import { counterValueCurrencySelector } from "../../reducers/settings";
@@ -26,8 +24,10 @@ type RouteParams = {};
 
 export default function Contervalues({ navigation }: Props) {
   const { colors } = useTheme();
-  const ptContext = useContext(_ptContext);
   const supportedCV = useSelector(counterValueCurrencySelector);
+  const [done, setDone] = useState(false);
+
+  useFocusEffect(useCallback(() => setDone(false), [setDone]));
 
   const primaryCTA = useCallback(() => {
     setDone(true);
@@ -37,23 +37,10 @@ export default function Contervalues({ navigation }: Props) {
     setDone(true);
   }, []);
 
-  const [done, setDone] = useState(false);
-  const goToProductTourMenu = () => {
-    // $FlowFixMe
-    completeStep(ptContext.currentStep);
-    navigate(NavigatorName.ProductTour, {
-      screen: ScreenName.ProductTourMenu,
-    });
-    setDone(false);
-  };
+  useProductTourFinishedModal("CUSTOMIZE_APP", done);
 
   return (
     <SafeAreaView style={[styles.root, { backgroundColor: colors.background }]}>
-      <ProductTourStepFinishedBottomModal
-        isOpened={ptContext.currentStep === "CUSTOMIZE_APP" && done}
-        onPress={() => goToProductTourMenu()}
-        onClose={() => goToProductTourMenu()}
-      />
       <View style={styles.content}>
         <TrackScreen category="CustomizeApp" name="Countervalues" />
         <LText secondary style={styles.description}>
