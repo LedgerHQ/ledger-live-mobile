@@ -128,6 +128,23 @@ const configs = {
       }),
     },
   ],
+  "Send-fees": [
+    {
+      layout: "send-fees",
+      arrow: require("../../images/producttour/arrow-bottomleft.png"),
+      text: "producttour.overlay.Send-fees",
+      arrowPosition: ({ x, width, y }) => ({
+        left: x + width / 2,
+        top: y - 11 - 45,
+      }),
+      textLayout: ({ y }) => ({
+        top: y - 11 - 45 - 44 - 16,
+        left: 0,
+        right: 0,
+        textAlign: "center",
+      }),
+    },
+  ],
   "Porfolio-TransferTab-Buy": [
     {
       layout: "TransferTab",

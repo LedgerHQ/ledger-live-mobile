@@ -1,6 +1,12 @@
 /* @flow */
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
-import React, { useState, useCallback, Component, useEffect } from "react";
+import React, {
+  useState,
+  useCallback,
+  Component,
+  useEffect,
+  useRef,
+} from "react";
 import { View, StyleSheet } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { useSelector } from "react-redux";
@@ -32,6 +38,7 @@ import ConfirmationModal from "../../components/ConfirmationModal";
 import NavigationScrollView from "../../components/NavigationScrollView";
 import Info from "../../icons/Info";
 import TooMuchUTXOBottomModal from "./TooMuchUTXOBottomModal";
+import { reportLayout, useProductTourOverlay } from "../ProductTour/Provider";
 
 const forceInset = { bottom: "always" };
 
@@ -74,6 +81,8 @@ function SendSummary({ navigation, route: initialRoute }: Props) {
     account,
     parentAccount,
   }));
+  const ref = useRef();
+  useProductTourOverlay("SEND_COINS", "Send-fees");
 
   // handle any edit screen changes like fees changes
   useTransactionChangeFromNavigation(setTransaction);
@@ -212,13 +221,20 @@ function SendSummary({ navigation, route: initialRoute }: Props) {
           amount={amount}
           overrideAmountLabel={overrideAmountLabel}
         />
-        <SendRowsFee
-          account={account}
-          parentAccount={parentAccount}
-          transaction={transaction}
-          navigation={navigation}
-          route={route}
-        />
+        <View
+          ref={ref}
+          onLayout={() => {
+            reportLayout(["send-fees"], ref);
+          }}
+        >
+          <SendRowsFee
+            account={account}
+            parentAccount={parentAccount}
+            transaction={transaction}
+            navigation={navigation}
+            route={route}
+          />
+        </View>
         {error ? (
           <View style={styles.gasPriceError}>
             <View style={{ padding: 4 }}>
