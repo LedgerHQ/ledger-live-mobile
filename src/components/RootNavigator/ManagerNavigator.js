@@ -62,22 +62,6 @@ export default function ManagerNavigator() {
             : {},
         headerTintColor:
           ptContext.currentStep === "INSTALL_CRYPTO" ? colors.white : null,
-        headerRight:
-          ptContext.currentStep && ptContext.currentStep !== "INSTALL_CRYPTO"
-            ? () => (
-                <HeaderRightClose
-                  skipNavigation
-                  onClose={() => {
-                    navigate(NavigatorName.Base, {
-                      screen: NavigatorName.ProductTour,
-                      params: {
-                        screen: ScreenName.ProductTourStepStart,
-                      },
-                    });
-                  }}
-                />
-              )
-            : null,
       }}
     >
       <Stack.Screen

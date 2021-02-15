@@ -63,19 +63,6 @@ export default function SendFundsNavigator() {
               style={style}
             />
           ),
-          headerLeft:
-            ptContext.currentStep === "SEND_COINS"
-              ? props => (
-                  <HeaderBackButton
-                    {...props}
-                    onPress={() => {
-                      navigate(NavigatorName.ProductTour, {
-                        screen: ScreenName.ProductTourMenu,
-                      });
-                    }}
-                  />
-                )
-              : null,
         }}
       />
       <Stack.Screen
