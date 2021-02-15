@@ -10,11 +10,9 @@ import IconSwap from "../../../icons/Swap";
 import { rgba } from "../../../colors";
 import {
   context as _ptContext,
-  completeStep,
+  useProductTourFinishedModal,
 } from "../../ProductTour/Provider";
-import ProductTourStepFinishedBottomModal from "../../ProductTour/ProductTourStepFinishedBottomModal";
-import { navigate } from "../../../rootnavigation";
-import { ScreenName, NavigatorName } from "../../../const";
+import { ScreenName } from "../../../const";
 
 const PendingOperation = () => {
   const { colors } = useTheme();
@@ -23,35 +21,22 @@ const PendingOperation = () => {
   const ptContext = useContext(_ptContext);
   const [done, setDone] = useState(false);
 
+  const { swapId, provider } = route.params;
+
   const onComplete = useCallback(() => {
     if (ptContext.currentStep === "SWAP_COINS") {
-      setDone(true);
+      setDone(swapId);
       return;
     }
     navigation.navigate(ScreenName.SwapFormOrHistory, {
       screen: ScreenName.SwapHistory,
     });
-  }, [navigation, ptContext.currentStep]);
+  }, [navigation, ptContext.currentStep, swapId]);
 
-  const goToProductTourMenu = () => {
-    if (ptContext.currentStep === "SWAP_COINS") {
-      completeStep(ptContext.currentStep);
-      navigate(NavigatorName.ProductTour, {
-        screen: ScreenName.ProductTourMenu,
-      });
-      setDone(false);
-    }
-  };
-
-  const { swapId, provider } = route.params;
+  useProductTourFinishedModal("RECEIVE_COINS", swapId === done);
 
   return (
     <SafeAreaView style={[styles.root, { backgroundColor: colors.background }]}>
-      <ProductTourStepFinishedBottomModal
-        isOpened={ptContext.currentStep === "SWAP_COINS" && done}
-        onPress={() => goToProductTourMenu()}
-        onClose={() => goToProductTourMenu()}
-      />
       <View style={styles.wrapper}>
         <View
           style={[
