@@ -5,6 +5,7 @@ import { Trans } from "react-i18next";
 import { View, StyleSheet, Image, SafeAreaView } from "react-native";
 import { useHeaderHeight } from "@react-navigation/stack";
 import { useTheme } from "@react-navigation/native";
+import Swiper from "react-native-swiper";
 import LText from "../../components/LText";
 import Button from "../../components/Button";
 import AnimatedSvgBackground from "../../components/AnimatedSvgBackground";
@@ -16,7 +17,10 @@ import ArrowRight from "../../icons/ArrowRight";
 const stepInfos = {
   INSTALL_CRYPTO: [
     "producttour.stepstart.installcrypto",
-    "producttour.stepstart.installcryptodetails",
+    [
+      "producttour.stepstart.installcryptodetails",
+      "producttour.stepstart.installcryptodetails2",
+    ],
     {
       file: require("../../images/producttour/blue/installcrypto.png"),
       size: {
@@ -27,7 +31,10 @@ const stepInfos = {
   ],
   CREATE_ACCOUNT: [
     "producttour.stepstart.createaccount",
-    "producttour.stepstart.createaccountdetails",
+    [
+      "producttour.stepstart.createaccountdetails",
+      "producttour.stepstart.createaccountdetails2",
+    ],
     {
       file: require("../../images/producttour/blue/createaccount.png"),
       size: {
@@ -41,7 +48,10 @@ const stepInfos = {
   ],
   RECEIVE_COINS: [
     "producttour.stepstart.receivecoins",
-    "producttour.stepstart.receivecoinsdetails",
+    [
+      "producttour.stepstart.receivecoinsdetails",
+      "producttour.stepstart.receivecoinsdetails2",
+    ],
     {
       file: require("../../images/producttour/blue/receivecoins.png"),
       size: {
@@ -52,7 +62,10 @@ const stepInfos = {
   ],
   BUY_COINS: [
     "producttour.stepstart.buycoins",
-    "producttour.stepstart.buycoinsdetails",
+    [
+      "producttour.stepstart.buycoinsdetails",
+      "producttour.stepstart.buycoinsdetails2",
+    ],
     {
       file: require("../../images/producttour/blue/buycoins.png"),
       size: {
@@ -63,7 +76,10 @@ const stepInfos = {
   ],
   SEND_COINS: [
     "producttour.stepstart.sendcoins",
-    "producttour.stepstart.sendcoinsdetails",
+    [
+      "producttour.stepstart.sendcoinsdetails",
+      "producttour.stepstart.sendcoinsdetails2",
+    ],
     {
       file: require("../../images/producttour/blue/sendcoins.png"),
       size: {
@@ -74,7 +90,10 @@ const stepInfos = {
   ],
   SWAP_COINS: [
     "producttour.stepstart.swapcoins",
-    "producttour.stepstart.swapcoinsdetails",
+    [
+      "producttour.stepstart.swapcoinsdetails",
+      "producttour.stepstart.swapcoinsdetails2",
+    ],
     {
       file: require("../../images/producttour/blue/swapcoins.png"),
       size: {
@@ -85,7 +104,10 @@ const stepInfos = {
   ],
   CUSTOMIZE_APP: [
     "producttour.stepstart.customizeapp",
-    "producttour.stepstart.customizeappdetails",
+    [
+      "producttour.stepstart.customizeappdetails",
+      "producttour.stepstart.customizeappdetails2",
+    ],
     {
       file: require("../../images/producttour/blue/customizeapp.png"),
       size: {
@@ -143,9 +165,15 @@ const ProductTourStepStart = () => {
             <LText style={styles.title} bold>
               <Trans i18nKey={stepInfos[ptContext.currentStep][0]} />
             </LText>
-            <LText style={styles.details}>
-              <Trans i18nKey={stepInfos[ptContext.currentStep][1]} />
-            </LText>
+            <Swiper activeDotColor="#FFF">
+              {stepInfos[ptContext.currentStep][1].map((key) => (
+                <View key={key}>
+                  <LText style={styles.details}>
+                    <Trans i18nKey={key} />
+                  </LText>
+                </View>
+              ))}
+            </Swiper>
           </View>
           <Button
             type="negativePrimary"
