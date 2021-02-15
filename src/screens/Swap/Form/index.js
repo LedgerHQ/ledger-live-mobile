@@ -190,7 +190,11 @@ const Form = ({
                     {getAccountName(fromAccount)}
                   </LText>
                   <View style={{ marginTop: 4, marginLeft: 8 }}>
-                    <Icon name="ios-arrow-down" size={16} color={colors.black} />
+                    <Icon
+                      name="ios-arrow-down"
+                      size={16}
+                      color={colors.black}
+                    />
                   </View>
                 </>
               ) : (
@@ -204,7 +208,11 @@ const Form = ({
                     <Trans i18nKey={"transfer.swap.form.fromAccount"} />
                   </LText>
                   <View style={{ marginTop: 4, marginLeft: 8 }}>
-                    <Icon name="ios-arrow-down" size={16} color={colors.black} />
+                    <Icon
+                      name="ios-arrow-down"
+                      size={16}
+                      color={colors.black}
+                    />
                   </View>
                 </>
               )}
@@ -253,7 +261,11 @@ const Form = ({
                     {getAccountName(toAccount)}
                   </LText>
                   <View style={{ marginTop: 4, marginLeft: 8 }}>
-                    <Icon name="ios-arrow-down" size={16} color={colors.black} />
+                    <Icon
+                      name="ios-arrow-down"
+                      size={16}
+                      color={colors.black}
+                    />
                   </View>
                 </>
               ) : (
@@ -262,7 +274,11 @@ const Form = ({
                     <Trans i18nKey={"transfer.swap.form.toAccount"} />
                   </LText>
                   <View style={{ marginTop: 4, marginLeft: 8 }}>
-                    <Icon name="ios-arrow-down" size={16} color={colors.black} />
+                    <Icon
+                      name="ios-arrow-down"
+                      size={16}
+                      color={colors.black}
+                    />
                   </View>
                 </>
               )}

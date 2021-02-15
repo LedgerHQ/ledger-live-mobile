@@ -45,8 +45,15 @@ export let setStep: (step: string | null) => void = () => {};
 export let completeStep: (step: string) => void = () => {};
 export let dismiss: (dismissed: boolean) => void = () => {};
 export let enableHole: (holeConfig: *) => void = () => {};
-export let enableFinishedModal: (finishedModal: string | null) => void = () => {};
-export let reportLayout: (ptIds: [string], ref: *, extra: *, mins: *) => void = () => {};
+export let enableFinishedModal: (
+  finishedModal: string | null,
+) => void = () => {};
+export let reportLayout: (
+  ptIds: [string],
+  ref: *,
+  extra: *,
+  mins: *,
+) => void = () => {};
 
 // reducer
 const reducer = (state: State, update: StateUpdate) => {
@@ -69,6 +76,7 @@ const reducer = (state: State, update: StateUpdate) => {
     }
   }
   if (update.dismissed) {
+    // eslint-disable-next-line no-param-reassign
     update.holeConfig = null;
   }
   return {

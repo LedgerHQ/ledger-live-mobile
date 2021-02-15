@@ -166,7 +166,7 @@ const ProductTourStepStart = () => {
               <Trans i18nKey={stepInfos[ptContext.currentStep][0]} />
             </LText>
             <Swiper activeDotColor="#FFF">
-              {stepInfos[ptContext.currentStep][1].map((key) => (
+              {stepInfos[ptContext.currentStep][1].map(key => (
                 <View key={key}>
                   <LText style={styles.details}>
                     <Trans i18nKey={key} />
