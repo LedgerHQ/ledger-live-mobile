@@ -28,6 +28,7 @@ import RetryButton from "../../components/RetryButton";
 import CancelButton from "../../components/CancelButton";
 import GenericErrorBottomModal from "../../components/GenericErrorBottomModal";
 import AmountInput from "./AmountInput";
+import { useProductTourOverlay } from "../ProductTour/Provider";
 
 const forceInset = { bottom: "always" };
 
@@ -45,6 +46,8 @@ export default function SendAmount({ navigation, route }: Props) {
   const { colors } = useTheme();
   const { account, parentAccount } = useSelector(accountScreenSelector(route));
   const [maxSpendable, setMaxSpendable] = useState(null);
+
+  useProductTourOverlay("SEND_COINS", "Send-amount");
 
   const {
     transaction,
@@ -149,6 +152,7 @@ export default function SendAmount({ navigation, route }: Props) {
             <View style={styles.amountWrapper}>
               <AmountInput
                 editable={!useAllAmount}
+                type="send"
                 account={account}
                 onChange={onChange}
                 value={amount}

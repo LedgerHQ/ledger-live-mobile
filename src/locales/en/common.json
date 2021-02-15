@@ -3567,7 +3567,8 @@
       "Buy-coinify": "Follow the instructions of our\npartner to complete the\npurchase.",
       "Porfolio-TransferTab-Send": "Click on transfer in the navigation\nand then Send",
       "Send-accountsList": "Select the account to\nsend from.",
-      "Send-recipient": "Paste or scan the QR code of\nthe address to send to."
+      "Send-recipient": "Paste or scan the QR code of\nthe address to send to.",
+      "Send-amount": "Enter the amount you want to send.\nClick “Send Max” toggle to send\nthe entire account balance and\nempty the account"
     }
   }
 }

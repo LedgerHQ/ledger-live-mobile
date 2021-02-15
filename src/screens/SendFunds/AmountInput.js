@@ -1,5 +1,5 @@
 // @flow
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, useRef } from "react";
 import { View, StyleSheet } from "react-native";
 import { useSelector } from "react-redux";
 import { BigNumber } from "bignumber.js";
@@ -12,6 +12,7 @@ import LText from "../../components/LText/index";
 import CounterValuesSeparator from "./CounterValuesSeparator";
 import CurrencyInput from "../../components/CurrencyInput";
 import TranslatedError from "../../components/TranslatedError";
+import { reportLayout } from "../ProductTour/Provider";
 
 type Props = {
   account: AccountLike,
@@ -20,6 +21,7 @@ type Props = {
   error?: ?Error,
   warning?: ?Error,
   editable?: boolean,
+  type?: string,
 };
 
 export default function AmountInput({
@@ -29,6 +31,7 @@ export default function AmountInput({
   error,
   warning,
   editable,
+  type,
 }: Props) {
   const { t } = useTranslation();
   const fiatCurrency = useSelector(counterValueCurrencySelector);
@@ -43,6 +46,7 @@ export default function AmountInput({
     cryptoAmount,
   });
   const [active, setActive] = useState<"crypto" | "fiat" | "none">("none");
+  const ref = useRef();
 
   const onChangeFiatAmount = useCallback(
     (fiatAmount: BigNumber) => {
@@ -65,7 +69,15 @@ export default function AmountInput({
   const isCrypto = active === "crypto";
   return (
     <View style={styles.container}>
-      <View style={styles.wrapper}>
+      <View
+        style={styles.wrapper}
+        ref={ref}
+        onLayout={() => {
+          if (type) {
+            reportLayout([`${type}-amount`], ref);
+          }
+        }}
+      >
         <CurrencyInput
           editable={editable}
           isActive={isCrypto}
