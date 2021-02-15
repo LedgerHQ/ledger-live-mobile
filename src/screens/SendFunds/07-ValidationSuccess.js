@@ -6,7 +6,7 @@ import type { Operation } from "@ledgerhq/live-common/lib/types";
 import { useTheme } from "@react-navigation/native";
 import { accountScreenSelector } from "../../reducers/accounts";
 import { TrackScreen } from "../../analytics";
-import { ScreenName, NavigatorName } from "../../const";
+import { ScreenName } from "../../const";
 import PreventNativeBack from "../../components/PreventNativeBack";
 import ValidateSuccess from "../../components/ValidateSuccess";
 import {
@@ -14,9 +14,10 @@ import {
   setCurrentCallRequestResult,
   STATUS,
 } from "../WalletConnect/Provider";
-import { context as _ptContext, completeStep } from "../ProductTour/Provider";
-import { navigate } from "../../rootnavigation";
-import ProductTourStepFinishedBottomModal from "../ProductTour/ProductTourStepFinishedBottomModal";
+import {
+  context as _ptContext,
+  useProductTourFinishedModal,
+} from "../ProductTour/Provider";
 
 type Props = {
   navigation: any,
@@ -75,31 +76,13 @@ export default function ValidationSuccess({ navigation, route }: Props) {
     parentAccount,
   ]);
 
-  const [hideProductTourModal, setHideProductTourModal] = useState(true);
-  const goToProductTourMenu = () => {
-    // $FlowFixMe
-    completeStep(ptContext.currentStep);
-    navigate(NavigatorName.ProductTour, {
-      screen: ScreenName.ProductTourMenu,
-    });
-    setHideProductTourModal(true);
-  };
-  useEffect(() => {
-    setHideProductTourModal(ptContext.currentStep !== "SEND_COINS");
-  }, [ptContext.currentStep]);
+  useProductTourFinishedModal("SEND_COINS", !!route.params?.result);
 
   return (
     <View style={[styles.root, { backgroundColor: colors.background }]}>
       <TrackScreen category="SendFunds" name="ValidationSuccess" />
       <PreventNativeBack />
       <ValidateSuccess onClose={onClose} onViewDetails={goToOperationDetails} />
-      <ProductTourStepFinishedBottomModal
-        isOpened={
-          ptContext.currentStep === "SEND_COINS" && !hideProductTourModal
-        }
-        onPress={() => goToProductTourMenu()}
-        onClose={() => goToProductTourMenu()}
-      />
     </View>
   );
 }
