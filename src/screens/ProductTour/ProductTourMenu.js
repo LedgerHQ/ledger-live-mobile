@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useCallback } from "react";
 import { Trans } from "react-i18next";
 import _ from "lodash";
 import {
@@ -10,7 +10,7 @@ import {
   Image,
   ScrollView,
 } from "react-native";
-import { useTheme } from "@react-navigation/native";
+import { useTheme, useFocusEffect } from "@react-navigation/native";
 import SafeAreaView from "react-native-safe-area-view";
 import LText from "../../components/LText";
 import Check from "../../icons/Check";
@@ -250,6 +250,14 @@ const ProductTourMenu = ({ navigation }: Props) => {
     setStep(step);
     navigation.navigate(ScreenName.ProductTourStepStart);
   };
+
+  useFocusEffect(
+    useCallback(() => {
+      if (ptContext.currentStep) {
+        setStep("-" + ptContext.currentStep);
+      }
+    }, [ptContext.currentStep]),
+  );
 
   return (
     <>

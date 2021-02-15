@@ -107,10 +107,6 @@ const ProductTourStepFinishedBottomModal = () => {
       screen: ScreenName.ProductTourMenu,
     });
     enableFinishedModal(null);
-    // give time to finish transition
-    setTimeout(() => {
-      setStep("-" + ptContext.currentStep);
-    }, 1000);
   };
 
   useEffect(() => {
