@@ -26,10 +26,10 @@ import { renderVerifyAddress } from "../../components/DeviceAction/rendering";
 import { getConfig } from "./coinifyConfig";
 import { track } from "../../analytics";
 import { DevicePart } from "./DevicePart";
-import { context as _ptContext, completeStep } from "../ProductTour/Provider";
-import ProductTourStepFinishedBottomModal from "../ProductTour/ProductTourStepFinishedBottomModal";
-import { navigate } from "../../rootnavigation";
-import { ScreenName, NavigatorName } from "../../const";
+import {
+  context as _ptContext,
+  useProductTourFinishedModal,
+} from "../ProductTour/Provider";
 import SkipDeviceVerification from "./SkipDeviceVerification";
 
 const action = createAction(connectApp);
@@ -125,6 +125,11 @@ export default function CoinifyWidget({
     address: mainAccount ? mainAccount.freshAddress : null,
     targetPage: mode,
   };
+
+  const url = `${coinifyConfig.url}?${querystring.stringify(widgetConfig)}`;
+
+  const [done, setDone] = useState();
+  useProductTourFinishedModal("BUY_COINS", done === url);
 
   useEffect(() => {
     if (mode === "buy" && account) {
@@ -268,7 +273,7 @@ export default function CoinifyWidget({
               currencyName: getAccountCurrency(account).name,
             });
             // otherwise it interferes with the other bottom modal closing
-            setTimeout(onDone, 1000);
+            setTimeout(() => setDone(url), 1000);
           }
         } else {
           webView.current.postMessage(
@@ -300,32 +305,8 @@ export default function CoinifyWidget({
   const tokenCurrency =
     account && account.type === "TokenAccount" ? account.token : null;
 
-  const url = `${coinifyConfig.url}?${querystring.stringify(widgetConfig)}`;
-
-  const [done, setDone] = useState(false);
-  function onDone(): void {
-    if (ptContext.currentStep === "BUY_COINS") {
-      setDone(true);
-    }
-  }
-
-  const goToProductTourMenu = () => {
-    if (ptContext.currentStep === "BUY_COINS") {
-      completeStep(ptContext.currentStep);
-      navigate(NavigatorName.ProductTour, {
-        screen: ScreenName.ProductTourMenu,
-      });
-      setDone(false);
-    }
-  };
-
   return (
     <View style={[styles.root]}>
-      <ProductTourStepFinishedBottomModal
-        isOpened={ptContext.currentStep === "BUY_COINS" && done}
-        onPress={() => goToProductTourMenu()}
-        onClose={() => goToProductTourMenu()}
-      />
       <WebView
         ref={webView}
         startInLoadingState={true}
