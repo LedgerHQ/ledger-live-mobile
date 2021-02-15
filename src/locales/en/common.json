@@ -3572,7 +3572,8 @@
       "Send-fees": "You can edit the fees. A higher fee\ngets your transaction confirmed\nfaster.",
       "Porfolio-TransferTab-Swap": "Click on transfer in the navigation\nand then Swap",
       "Swap-accountFrom": "First, select the crypto and the\naccount you want to send.",
-      "Swap-accountTo": "Then, select the crypto and the\naccount you want to receive in\nreturn."
+      "Swap-accountTo": "Then, select the crypto and the\naccount you want to receive in\nreturn.",
+      "Swap-amount": "Enter how much assets you want to swap"
     }
   }
 }

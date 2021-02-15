@@ -111,6 +111,23 @@ const configs = {
       }),
     },
   ],
+  "Swap-amount": [
+    {
+      layout: "swap-amount",
+      arrow: require("../../images/producttour/arrow-topright.png"),
+      text: "producttour.overlay.Swap-amount",
+      arrowPosition: ({ x, y, height, width }) => ({
+        left: x + width / 2,
+        top: y + height + 23,
+      }),
+      textLayout: ({ y, height }) => ({
+        top: y + height + 23 + 45 + 22,
+        left: 0,
+        right: 0,
+        textAlign: "center",
+      }),
+    },
+  ],
   "Porfolio-TransferTab-Send": [
     {
       layout: "TransferTab",

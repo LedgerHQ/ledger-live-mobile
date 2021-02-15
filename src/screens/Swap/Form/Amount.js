@@ -1,5 +1,5 @@
 // @flow
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState, useRef } from "react";
 import invariant from "invariant";
 import { BigNumber } from "bignumber.js";
 import { View, StyleSheet } from "react-native";
@@ -24,6 +24,10 @@ import TranslatedError from "../../../components/TranslatedError";
 import Button from "../../../components/Button";
 import Switch from "../../../components/Switch";
 import { ScreenName } from "../../../const";
+import {
+  reportLayout,
+  useProductTourOverlay,
+} from "../../ProductTour/Provider";
 
 type Props = {
   navigation: any,
@@ -42,6 +46,9 @@ const SwapFormAmount = ({ navigation, route }: Props) => {
   const [rateExpiration, setRateExpiration] = useState(null);
   const [useAllAmount, setUseAllAmount] = useState(false);
   const [maxSpendable, setMaxSpendable] = useState(BigNumber(0));
+
+  const ref = useRef();
+  useProductTourOverlay("SWAP_COINS", "Swap-amount");
 
   const {
     status,
@@ -161,7 +168,13 @@ const SwapFormAmount = ({ navigation, route }: Props) => {
 
   return (
     <KeyboardView style={styles.container}>
-      <View style={[styles.wrapper, { backgroundColor: "red"}]}>
+      <View
+        style={styles.wrapper}
+        ref={ref}
+        onLayout={() => {
+          reportLayout(["swap-amount"], ref);
+        }}
+      >
         <CurrencyInput
           editable={!useAllAmount}
           onChange={onAmountChange}
