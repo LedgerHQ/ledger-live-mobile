@@ -3566,7 +3566,8 @@
       "Buy-SelectBitcoinAccount": "Select your account",
       "Buy-coinify": "Follow the instructions of our\npartner to complete the\npurchase.",
       "Porfolio-TransferTab-Send": "Click on transfer in the navigation\nand then Send",
-      "Send-accountsList": "Select the account to\nsend from."
+      "Send-accountsList": "Select the account to\nsend from.",
+      "Send-recipient": "Paste or scan the QR code of\nthe address to send to."
     }
   }
 }

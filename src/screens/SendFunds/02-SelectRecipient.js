@@ -29,6 +29,7 @@ import RetryButton from "../../components/RetryButton";
 import CancelButton from "../../components/CancelButton";
 import GenericErrorBottomModal from "../../components/GenericErrorBottomModal";
 import NavigationScrollView from "../../components/NavigationScrollView";
+import { reportLayout, useProductTourOverlay } from "../ProductTour/Provider";
 
 const withoutHiddenError = error =>
   error instanceof RecipientRequired ? null : error;
@@ -120,6 +121,8 @@ export default function SendSelectRecipient({ navigation, route }: Props) {
   }, [account, parentAccount, navigation, transaction]);
 
   const input = React.createRef();
+  const ref = useRef();
+  useProductTourOverlay("SEND_COINS", "Send-recipient");
 
   if (!account || !transaction) return null;
 
@@ -140,61 +143,68 @@ export default function SendSelectRecipient({ navigation, route }: Props) {
             style={[styles.container, { flex: 1 }]}
             keyboardShouldPersistTaps="handled"
           >
-            <Button
-              event="SendRecipientQR"
-              type="tertiary"
-              title={<Trans i18nKey="send.recipient.scan" />}
-              IconLeft={IconQRCode}
-              onPress={onPressScan}
-            />
-            <View style={styles.separatorContainer}>
-              <View
-                style={[
-                  styles.separatorLine,
-                  { borderBottomColor: colors.lightFog },
-                ]}
-              />
-              <LText color="grey">{<Trans i18nKey="common.or" />}</LText>
-              <View
-                style={[
-                  styles.separatorLine,
-                  { borderBottomColor: colors.lightFog },
-                ]}
-              />
-            </View>
-            <TouchableOpacity
-              style={styles.pasteContainer}
-              onPress={async () => {
-                const text = await Clipboard.getString();
-                onChangeText(text);
+            <View
+              ref={ref}
+              onLayout={() => {
+                reportLayout(["send-recipient"], ref);
               }}
             >
-              <Paste size={16} color={colors.live} />
-              <LText style={styles.pasteTitle} semiBold color="live">
-                <Trans i18nKey="common.paste" />
-              </LText>
-            </TouchableOpacity>
-            <View style={styles.inputWrapper}>
-              {/* make this a recipient component */}
-              <TextInput
-                placeholder={t("send.recipient.input")}
-                placeholderTextColor={colors.fog}
-                style={[
-                  styles.addressInput,
-                  { color: colors.darkBlue },
-                  error && { color: colors.alert },
-                  warning && { color: colors.orange },
-                ]}
-                onFocus={onRecipientFieldFocus}
-                onChangeText={onChangeText}
-                onInputCleared={clear}
-                value={transaction.recipient}
-                ref={input}
-                multiline
-                blurOnSubmit
-                autoCapitalize="none"
-                clearButtonMode="always"
+              <Button
+                event="SendRecipientQR"
+                type="tertiary"
+                title={<Trans i18nKey="send.recipient.scan" />}
+                IconLeft={IconQRCode}
+                onPress={onPressScan}
               />
+              <View style={styles.separatorContainer}>
+                <View
+                  style={[
+                    styles.separatorLine,
+                    { borderBottomColor: colors.lightFog },
+                  ]}
+                />
+                <LText color="grey">{<Trans i18nKey="common.or" />}</LText>
+                <View
+                  style={[
+                    styles.separatorLine,
+                    { borderBottomColor: colors.lightFog },
+                  ]}
+                />
+              </View>
+              <TouchableOpacity
+                style={styles.pasteContainer}
+                onPress={async () => {
+                  const text = await Clipboard.getString();
+                  onChangeText(text);
+                }}
+              >
+                <Paste size={16} color={colors.live} />
+                <LText style={styles.pasteTitle} semiBold color="live">
+                  <Trans i18nKey="common.paste" />
+                </LText>
+              </TouchableOpacity>
+              <View style={styles.inputWrapper}>
+                {/* make this a recipient component */}
+                <TextInput
+                  placeholder={t("send.recipient.input")}
+                  placeholderTextColor={colors.fog}
+                  style={[
+                    styles.addressInput,
+                    { color: colors.darkBlue },
+                    error && { color: colors.alert },
+                    warning && { color: colors.orange },
+                  ]}
+                  onFocus={onRecipientFieldFocus}
+                  onChangeText={onChangeText}
+                  onInputCleared={clear}
+                  value={transaction.recipient}
+                  ref={input}
+                  multiline
+                  blurOnSubmit
+                  autoCapitalize="none"
+                  clearButtonMode="always"
+                />
+              </View>
             </View>
             {(error || warning) && (
               <LText
