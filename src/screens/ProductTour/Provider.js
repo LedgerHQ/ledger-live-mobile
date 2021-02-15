@@ -133,7 +133,7 @@ export const useProductTourFinishedModal = (step: string, enabled: boolean) => {
     enabled && ptContext.currentStep !== step,
   );
 
-  console.log(step, enabled, disabled);
+  // console.log(step, enabled, disabled);
 
   useEffect(() => {
     if (ptContext.currentStep === null && enabled) {
@@ -166,7 +166,7 @@ const Provider = ({ children }: { children: React$Node }) => {
         return;
       }
       ref.current.measure((_1, _2, width, height, x, y) => {
-        console.log("reports", ptIds, { width, height, x, y })
+        // console.log("reports", ptIds, { width, height, x, y })
         if (mins.height && height < mins.height) {
           return;
         }
