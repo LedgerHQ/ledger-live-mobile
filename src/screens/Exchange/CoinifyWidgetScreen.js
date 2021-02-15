@@ -1,7 +1,7 @@
 // @flow
 
-import React from "react";
-import { StyleSheet } from "react-native";
+import React, { useRef } from "react";
+import { StyleSheet, View } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import type { AccountLike } from "@ledgerhq/live-common/lib/types";
 import { useSelector } from "react-redux";
@@ -10,6 +10,7 @@ import { useTheme } from "@react-navigation/native";
 import { accountScreenSelector } from "../../reducers/accounts";
 
 import CoinifyWidget from "./CoinifyWidget";
+import { reportLayout, useProductTourOverlay } from "../ProductTour/Provider";
 
 type RouteParams = {
   account: AccountLike,
@@ -31,19 +32,30 @@ export default function CoinifyWidgetScreen({ route }: Props) {
 
   const forceInset = { bottom: "always" };
 
+  const ref = useRef();
+  useProductTourOverlay("BUY_COINS", "Buy-coinify");
+
   return (
     <SafeAreaView
       style={[styles.root, { backgroundColor: colors.card }]}
       forceInset={forceInset}
     >
-      <CoinifyWidget
-        account={account}
-        parentAccount={parentAccount}
-        device={device}
-        mode={mode}
-        verifyAddress
-        skipDevice={skipDevice}
-      />
+      <View
+        style={styles.root}
+        ref={ref}
+        onLayout={() => {
+          reportLayout(["coinify-widget"], ref, { height: -300 });
+        }}
+      >
+        <CoinifyWidget
+          account={account}
+          parentAccount={parentAccount}
+          device={device}
+          mode={mode}
+          verifyAddress
+          skipDevice={skipDevice}
+        />
+      </View>
     </SafeAreaView>
   );
 }

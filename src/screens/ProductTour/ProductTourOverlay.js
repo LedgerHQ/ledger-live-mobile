@@ -128,6 +128,23 @@ const configs = {
       }),
     },
   ],
+  "Buy-coinify": [
+    {
+      layout: "coinify-widget",
+      arrow: require("../../images/producttour/arrow-topright.png"),
+      text: "producttour.overlay.Buy-coinify",
+      arrowPosition: ({ x, y, height, width }) => ({
+        left: x + width / 2,
+        top: y + height + 23,
+      }),
+      textLayout: ({ y, height }) => ({
+        top: y + height + 23 + 45 + 22,
+        left: 0,
+        right: 0,
+        textAlign: "center",
+      }),
+    },
+  ],
   "Accounts-headerAddAccount": [
     {
       layout: "headerAddAccount",

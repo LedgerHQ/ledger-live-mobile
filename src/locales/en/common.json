@@ -3563,7 +3563,8 @@
       "Porfolio-TransferTab-Buy": "Click on transfer in the navigation\nand then Buy",
       "Buy-BuyCTA": "Click Buy",
       "Buy-SelectBitcoinCurrency": "Select the crypto currency you\nwant to buy",
-      "Buy-SelectBitcoinAccount": "Select your account"
+      "Buy-SelectBitcoinAccount": "Select your account",
+      "Buy-coinify": "Follow the instructions of our\npartner to complete the\npurchase."
     }
   }
 }
