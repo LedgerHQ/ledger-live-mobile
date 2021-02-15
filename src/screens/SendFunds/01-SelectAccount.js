@@ -1,5 +1,5 @@
 /* @flow */
-import React, { Component } from "react";
+import React, { useRef, useState } from "react";
 import { View, StyleSheet, FlatList } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { createStructuredSelector } from "reselect";
@@ -31,6 +31,7 @@ import KeyboardView from "../../components/KeyboardView";
 import GenericErrorBottomModal from "../../components/GenericErrorBottomModal";
 import { formatSearchResults } from "../../helpers/formatAccountSearchResults";
 import type { SearchResult } from "../../helpers/formatAccountSearchResults";
+import { reportLayout, useProductTourOverlay } from "../ProductTour/Provider";
 
 const SEARCH_KEYS = ["name", "unit.code", "token.name", "token.ticker"];
 const forceInset = { bottom: "always" };
@@ -47,28 +48,38 @@ type State = {
   error: *,
 };
 
-class SendFundsSelectAccount extends Component<Props, State> {
-  state = {
+export const SendFundsSelectAccount = (props: Props) => {
+  const [state, setState] = useState({
     error: null,
-  };
+  });
 
-  renderList = items => {
-    const { accounts } = this.props;
+  const ref = useRef();
+  useProductTourOverlay("SEND_COINS", "Send-accountsList");
+
+  const renderList = items => {
+    const { accounts } = props;
     const formatedList = formatSearchResults(items, accounts);
 
     return (
-      <FlatList
-        data={formatedList}
-        renderItem={this.renderItem}
-        keyExtractor={this.keyExtractor}
-        showsVerticalScrollIndicator={false}
-        keyboardDismissMode="on-drag"
-        contentContainerStyle={styles.list}
-      />
+      <View
+        ref={ref}
+        onLayout={() => {
+          reportLayout(["send-accountsList"], ref);
+        }}
+      >
+        <FlatList
+          data={formatedList}
+          renderItem={renderItem}
+          keyExtractor={keyExtractor}
+          showsVerticalScrollIndicator={false}
+          keyboardDismissMode="on-drag"
+          contentContainerStyle={styles.list}
+        />
+      </View>
     );
   };
 
-  renderItem = ({ item: result }: { item: SearchResult }) => {
+  const renderItem = ({ item: result }: { item: SearchResult }) => {
     const { account, match } = result;
     const balance = getAccountSpendableBalance(account);
     return (
@@ -76,10 +87,7 @@ class SendFundsSelectAccount extends Component<Props, State> {
         style={
           account.type === "Account"
             ? undefined
-            : [
-                styles.tokenCardStyle,
-                { borderLeftColor: this.props.colors.fog },
-              ]
+            : [styles.tokenCardStyle, { borderLeftColor: props.colors.fog }]
         }
       >
         <AccountCard
@@ -88,11 +96,11 @@ class SendFundsSelectAccount extends Component<Props, State> {
           style={styles.cardStyle}
           onPress={() => {
             if (balance.lte(0)) {
-              this.setState({
+              setState({
                 error: new NotEnoughBalance(),
               });
             } else {
-              this.props.navigation.navigate(ScreenName.SendSelectRecipient, {
+              props.navigation.navigate(ScreenName.SendSelectRecipient, {
                 accountId: account.id,
                 parentId:
                   account.type !== "Account" ? account.parentId : undefined,
@@ -104,7 +112,7 @@ class SendFundsSelectAccount extends Component<Props, State> {
     );
   };
 
-  renderEmptySearch = () => (
+  const renderEmptySearch = () => (
     <View style={styles.emptyResults}>
       <LText style={styles.emptyText} color="fog">
         <Trans i18nKey="transfer.receive.noAccount" />
@@ -112,40 +120,38 @@ class SendFundsSelectAccount extends Component<Props, State> {
     </View>
   );
 
-  keyExtractor = item => item.account.id;
+  const keyExtractor = item => item.account.id;
 
-  render() {
-    const { allAccounts, route, colors } = this.props;
-    const { params } = route;
-    const initialCurrencySelected = params?.currency;
-    return (
-      <SafeAreaView
-        style={[styles.root, { backgroundColor: colors.background }]}
-        forceInset={forceInset}
-      >
-        <TrackScreen category="SendFunds" name="SelectAccount" />
-        <KeyboardView style={{ flex: 1 }}>
-          <View style={styles.searchContainer}>
-            <FilteredSearchBar
-              list={allAccounts.filter(account => !isAccountEmpty(account))}
-              inputWrapperStyle={styles.padding}
-              renderList={this.renderList}
-              renderEmptySearch={this.renderEmptySearch}
-              keys={SEARCH_KEYS}
-              initialQuery={initialCurrencySelected}
-            />
-          </View>
-        </KeyboardView>
-        {this.state.error ? (
-          <GenericErrorBottomModal
-            error={this.state.error}
-            onClose={() => this.setState({ error: null })}
+  const { allAccounts, route, colors } = props;
+  const { params } = route;
+  const initialCurrencySelected = params?.currency;
+  return (
+    <SafeAreaView
+      style={[styles.root, { backgroundColor: colors.background }]}
+      forceInset={forceInset}
+    >
+      <TrackScreen category="SendFunds" name="SelectAccount" />
+      <KeyboardView style={{ flex: 1 }}>
+        <View style={styles.searchContainer}>
+          <FilteredSearchBar
+            list={allAccounts.filter(account => !isAccountEmpty(account))}
+            inputWrapperStyle={styles.padding}
+            renderList={renderList}
+            renderEmptySearch={renderEmptySearch}
+            keys={SEARCH_KEYS}
+            initialQuery={initialCurrencySelected}
           />
-        ) : null}
-      </SafeAreaView>
-    );
-  }
-}
+        </View>
+      </KeyboardView>
+      {state.error ? (
+        <GenericErrorBottomModal
+          error={state.error}
+          onClose={() => setState({ error: null })}
+        />
+      ) : null}
+    </SafeAreaView>
+  );
+};
 
 const mapStateToProps = createStructuredSelector({
   allAccounts: flattenAccountsEnforceHideEmptyTokenSelector,

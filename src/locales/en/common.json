@@ -3565,7 +3565,8 @@
       "Buy-SelectBitcoinCurrency": "Select the crypto currency you\nwant to buy",
       "Buy-SelectBitcoinAccount": "Select your account",
       "Buy-coinify": "Follow the instructions of our\npartner to complete the\npurchase.",
-      "Porfolio-TransferTab-Send": "Click on transfer in the navigation\nand then Send"
+      "Porfolio-TransferTab-Send": "Click on transfer in the navigation\nand then Send",
+      "Send-accountsList": "Select the account to\nsend from."
     }
   }
 }
