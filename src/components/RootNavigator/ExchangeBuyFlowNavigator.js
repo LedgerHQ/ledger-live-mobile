@@ -51,19 +51,6 @@ export default function ExchangeNavigator() {
         component={ExchangeSelectCurrency}
         options={{
           title: t("exchange.buy.selectCurrency"),
-          headerLeft:
-            ptContext.currentStep === "BUY_COINS"
-              ? props => (
-                  <HeaderBackButton
-                    {...props}
-                    onPress={() => {
-                      navigate(NavigatorName.ProductTour, {
-                        screen: ScreenName.ProductTourMenu,
-                      });
-                    }}
-                  />
-                )
-              : null,
         }}
       />
       <Stack.Screen
