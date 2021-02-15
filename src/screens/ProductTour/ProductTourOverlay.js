@@ -93,6 +93,8 @@ const configs = {
         textAlign: "center",
       }),
     },
+  ],
+  "Swap-accountTo": [
     {
       layout: "swap-accountTo",
       arrow: require("../../images/producttour/arrow-bottomleft.png"),

@@ -152,7 +152,12 @@ const Form = ({
 
   const ref = useRef();
   const ref2 = useRef();
-  useProductTourOverlay("SWAP_COINS", "Swap-accountFrom");
+  useProductTourOverlay("SWAP_COINS", "Swap-accountFrom", !fromAccount);
+  useProductTourOverlay(
+    "SWAP_COINS",
+    "Swap-accountTo",
+    !!fromAccount && !toAccount,
+  );
 
   return (
     <View style={styles.root}>

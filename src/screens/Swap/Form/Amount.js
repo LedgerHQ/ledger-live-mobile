@@ -161,7 +161,7 @@ const SwapFormAmount = ({ navigation, route }: Props) => {
 
   return (
     <KeyboardView style={styles.container}>
-      <View style={styles.wrapper}>
+      <View style={[styles.wrapper, { backgroundColor: "red"}]}>
         <CurrencyInput
           editable={!useAllAmount}
           onChange={onAmountChange}
