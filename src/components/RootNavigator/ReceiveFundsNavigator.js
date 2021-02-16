@@ -1,5 +1,5 @@
 // @flow
-import React, { useContext, useMemo } from "react";
+import React, { useMemo } from "react";
 import { Platform } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useTranslation } from "react-i18next";
@@ -10,13 +10,11 @@ import ReceiveConnectDevice from "../../screens/ReceiveFunds/02-ConnectDevice";
 import ReceiveSelectAccount from "../../screens/ReceiveFunds/01-SelectAccount";
 import { getStackNavigatorConfig } from "../../navigation/navigatorConfig";
 import StepHeader from "../StepHeader";
-import { context as _ptContext } from "../../screens/ProductTour/Provider";
 
 const totalSteps = "3";
 
 export default function ReceiveFundsNavigator() {
   const { t } = useTranslation();
-  const ptContext = useContext(_ptContext);
   const { colors } = useTheme();
   const stackNavigationConfig = useMemo(
     () => getStackNavigatorConfig(colors, true),
@@ -28,18 +26,6 @@ export default function ReceiveFundsNavigator() {
       screenOptions={{
         ...stackNavigationConfig,
         gestureEnabled: Platform.OS === "ios",
-        headerStyle:
-          ptContext.currentStep === "RECEIVE_COINS"
-            ? { backgroundColor: colors.live }
-            : {},
-        headerTitleStyle:
-          ptContext.currentStep === "RECEIVE_COINS"
-            ? {
-                color: colors.white,
-              }
-            : {},
-        headerTintColor:
-          ptContext.currentStep === "RECEIVE_COINS" ? colors.white : null,
         headerRight: null,
       }}
     >

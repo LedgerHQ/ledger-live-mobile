@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useContext, useMemo } from "react";
+import React, { useMemo } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useTheme } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
@@ -16,7 +16,6 @@ import SwapFormSelectCrypto from "../../screens/Swap/Form/SelectAccount/01-Selec
 import SwapFormSelectAccount from "../../screens/Swap/Form/SelectAccount/02-SelectAccount";
 import { getStackNavigatorConfig } from "../../navigation/navigatorConfig";
 import StepHeader from "../StepHeader";
-import { context as _ptContext } from "../../screens/ProductTour/Provider";
 
 import styles from "../../navigation/styles";
 
@@ -27,23 +26,10 @@ export default function SwapNavigator() {
     () => getStackNavigatorConfig(colors, true),
     [colors],
   );
-  const ptContext = useContext(_ptContext);
   return (
     <Stack.Navigator
       screenOptions={{
         ...stackNavigationConfig,
-        headerStyle:
-          ptContext.currentStep === "SWAP_COINS"
-            ? { backgroundColor: colors.live }
-            : {},
-        headerTitleStyle:
-          ptContext.currentStep === "SWAP_COINS"
-            ? {
-                color: colors.white,
-              }
-            : {},
-        headerTintColor:
-          ptContext.currentStep === "SWAP_COINS" ? colors.white : null,
         headerRight: null,
       }}
     >

@@ -1,5 +1,5 @@
 // @flow
-import React, { useContext, useMemo } from "react";
+import React, { useMemo } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useTheme } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
@@ -12,7 +12,6 @@ import AddAccountsSuccess from "../../screens/AddAccounts/04-Success";
 import EditAccountName from "../../screens/AccountSettings/EditAccountName";
 import { getStackNavigatorConfig } from "../../navigation/navigatorConfig";
 import StepHeader from "../StepHeader";
-import { context as _ptContext } from "../../screens/ProductTour/Provider";
 
 type Route = {
   params: ?{ currency: *, token?: * },
@@ -23,7 +22,6 @@ const totalSteps = "3";
 export default function AddAccountsNavigator({ route }: { route: Route }) {
   const { colors } = useTheme();
   const { t } = useTranslation();
-  const ptContext = useContext(_ptContext);
   const currency = route && route.params && route.params.currency;
   const token = route && route.params && route.params.token;
   const stackNavConfig = useMemo(() => getStackNavigatorConfig(colors), [
@@ -41,18 +39,6 @@ export default function AddAccountsNavigator({ route }: { route: Route }) {
       }
       screenOptions={{
         ...stackNavConfig,
-        headerStyle:
-          ptContext.currentStep === "CREATE_ACCOUNT"
-            ? { backgroundColor: colors.live }
-            : {},
-        headerTitleStyle:
-          ptContext.currentStep === "CREATE_ACCOUNT"
-            ? {
-                color: colors.white,
-              }
-            : {},
-        headerTintColor:
-          ptContext.currentStep === "CREATE_ACCOUNT" ? colors.white : null,
       }}
     >
       <Stack.Screen

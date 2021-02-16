@@ -1,5 +1,5 @@
 // @flow
-import React, { useContext, useMemo } from "react";
+import React, { useMemo } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useTheme } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
@@ -8,14 +8,11 @@ import ExchangeSelectCurrency from "../../screens/Exchange/SelectCurrency";
 import ExchangeSelectAccount from "../../screens/Exchange/SelectAccount";
 import ExchangeConnectDevice from "../../screens/Exchange/ConnectDevice";
 import ExchangeCoinifyWidget from "../../screens/Exchange/CoinifyWidgetScreen";
-
-import { context as _ptContext } from "../../screens/ProductTour/Provider";
 import { getStackNavigatorConfig } from "../../navigation/navigatorConfig";
 import AddAccountsHeaderRightClose from "../../screens/AddAccounts/AddAccountsHeaderRightClose";
 
 export default function ExchangeNavigator() {
   const { t } = useTranslation();
-  const ptContext = useContext(_ptContext);
   const { colors } = useTheme();
   const stackNavigationConfig = useMemo(
     () => getStackNavigatorConfig(colors, true),
@@ -27,18 +24,6 @@ export default function ExchangeNavigator() {
       headerMode="float"
       screenOptions={{
         ...stackNavigationConfig,
-        headerStyle:
-          ptContext.currentStep === "BUY_COINS"
-            ? { backgroundColor: colors.live }
-            : {},
-        headerTitleStyle:
-          ptContext.currentStep === "BUY_COINS"
-            ? {
-                color: colors.white,
-              }
-            : {},
-        headerTintColor:
-          ptContext.currentStep === "BUY_COINS" ? colors.white : null,
         headerRight: () => <AddAccountsHeaderRightClose />,
       }}
     >

@@ -1,5 +1,5 @@
 // @flow
-import React, { useContext, useMemo } from "react";
+import React, { useMemo } from "react";
 import { TouchableOpacity, View, StyleSheet } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -10,12 +10,10 @@ import { hasAvailableUpdateSelector } from "../../reducers/settings";
 import Manager from "../../screens/Manager";
 import ManagerMain from "../../screens/Manager/Manager";
 import { getStackNavigatorConfig } from "../../navigation/navigatorConfig";
-import styles from "../../navigation/styles";
 import ReadOnlyTab from "../ReadOnlyTab";
 import ManagerIcon from "../../icons/Manager";
 import NanoXIcon from "../../icons/TabNanoX";
 import { useIsNavLocked } from "./CustomBlockRouterNavigator";
-import { context as _ptContext } from "../../screens/ProductTour/Provider";
 
 const ManagerIconWithUpate = ({
   color,
@@ -35,7 +33,6 @@ const ManagerIconWithUpate = ({
 
 export default function ManagerNavigator() {
   const { t } = useTranslation();
-  const ptContext = useContext(_ptContext);
   const { colors } = useTheme();
   const stackNavConfig = useMemo(() => getStackNavigatorConfig(colors), [
     colors,
@@ -45,28 +42,13 @@ export default function ManagerNavigator() {
     <Stack.Navigator
       screenOptions={{
         ...stackNavConfig,
-        headerStyle:
-          ptContext.currentStep === "INSTALL_CRYPTO"
-            ? { backgroundColor: colors.live }
-            : styles.header,
-        headerTitleStyle:
-          ptContext.currentStep === "INSTALL_CRYPTO"
-            ? {
-                color: colors.white,
-              }
-            : {},
-        headerTintColor:
-          ptContext.currentStep === "INSTALL_CRYPTO" ? colors.white : null,
       }}
     >
       <Stack.Screen
         name={ScreenName.Manager}
         component={Manager}
         options={{
-          title:
-            ptContext.currentStep === "INSTALL_CRYPTO"
-              ? t("producttour.installCryptoTitle")
-              : t("manager.title"),
+          title: t("manager.title"),
           gestureEnabled: false,
         }}
       />
@@ -74,10 +56,7 @@ export default function ManagerNavigator() {
         name={ScreenName.ManagerMain}
         component={ManagerMain}
         options={{
-          title:
-            ptContext.currentStep === "INSTALL_CRYPTO"
-              ? t("producttour.installCryptoTitle")
-              : t("manager.appList.title"),
+          title: t("manager.appList.title"),
         }}
       />
     </Stack.Navigator>
