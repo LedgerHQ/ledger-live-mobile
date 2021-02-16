@@ -13,17 +13,9 @@ type Props = {
   eventProperties?: Object,
   iconFirst?: boolean,
   ltextProps?: *,
-  color?: string,
 };
 
-const Link = ({
-  text,
-  onPress,
-  event,
-  eventProperties,
-  ltextProps,
-  color = "live",
-}: Props) => {
+const Link = ({ text, onPress, event, eventProperties, ltextProps }: Props) => {
   const { colors } = useTheme();
   const c = colors[color] || colors.live;
   return (

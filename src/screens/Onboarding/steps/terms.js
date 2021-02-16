@@ -18,11 +18,14 @@ import GenericErrorView from "../../../components/GenericErrorView";
 import RetryButton from "../../../components/RetryButton";
 import AnimatedHeaderView from "../../../components/AnimatedHeader";
 
+import { useLocale } from "../../../context/Locale";
+
 import { urls } from "../../../config/urls";
 
 function OnboardingStepTerms({ navigation }: *) {
   const { colors } = useTheme();
-  const [markdown, error, retry] = useTerms();
+  const { locale } = useLocale();
+  const [markdown, error, retry] = useTerms(locale);
   const [, accept] = useTermsAccept();
   const [toggle, setToggle] = useState(false);
   const [togglePrivacy, setTogglePrivacy] = useState(false);
