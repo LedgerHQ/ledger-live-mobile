@@ -3021,6 +3021,7 @@
     "lockedBalance": "Bonded balance",
     "unlockingBalance": "Unbonding balance",
     "unlockedBalance": "Unbonded balance",
+    "networkFees": "Network fees are automatically set by the Polkadot consensus, you won't be able to review them on your device",
     "info": {
       "available": {
         "title": "DOT available",
