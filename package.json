@@ -126,6 +126,7 @@
     "react-native-level-fs": "^3.0.0",
     "react-native-locale": "0.0.19",
     "react-native-modal": "^11.5.4",
+    "react-native-navigation-bar-color": "^2.0.1",
     "react-native-os": "^1.2.6",
     "react-native-progress": "^4.0.3",
     "react-native-qrcode-svg": "6.0.3",
