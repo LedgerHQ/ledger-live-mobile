@@ -1,8 +1,8 @@
 // @flow
 import React, { useMemo } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import { useTheme } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "@react-navigation/native";
 import { ScreenName } from "../../const";
 import ExchangeSelectCurrency from "../../screens/Exchange/SelectCurrency";
 import ExchangeSelectAccount from "../../screens/Exchange/SelectAccount";
@@ -18,7 +18,6 @@ export default function ExchangeNavigator() {
     () => getStackNavigatorConfig(colors, true),
     [colors],
   );
-
   return (
     <Stack.Navigator
       headerMode="float"
@@ -30,9 +29,7 @@ export default function ExchangeNavigator() {
       <Stack.Screen
         name={ScreenName.ExchangeSelectCurrency}
         component={ExchangeSelectCurrency}
-        options={{
-          title: t("exchange.buy.selectCurrency"),
-        }}
+        options={{ title: t("exchange.buy.selectCurrency") }}
       />
       <Stack.Screen
         name={ScreenName.ExchangeSelectAccount}

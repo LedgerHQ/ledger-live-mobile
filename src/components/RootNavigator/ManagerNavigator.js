@@ -10,6 +10,7 @@ import { hasAvailableUpdateSelector } from "../../reducers/settings";
 import Manager from "../../screens/Manager";
 import ManagerMain from "../../screens/Manager/Manager";
 import { getStackNavigatorConfig } from "../../navigation/navigatorConfig";
+import styles from "../../navigation/styles";
 import ReadOnlyTab from "../ReadOnlyTab";
 import ManagerIcon from "../../icons/Manager";
 import NanoXIcon from "../../icons/TabNanoX";
@@ -37,11 +38,15 @@ export default function ManagerNavigator() {
   const stackNavConfig = useMemo(() => getStackNavigatorConfig(colors), [
     colors,
   ]);
-
   return (
     <Stack.Navigator
       screenOptions={{
         ...stackNavConfig,
+        headerStyle: {
+          ...styles.header,
+          backgroundColor: colors.background,
+          borderBottomColor: colors.background,
+        },
       }}
     >
       <Stack.Screen
@@ -49,15 +54,14 @@ export default function ManagerNavigator() {
         component={Manager}
         options={{
           title: t("manager.title"),
+          headerRight: null,
           gestureEnabled: false,
         }}
       />
       <Stack.Screen
         name={ScreenName.ManagerMain}
         component={ManagerMain}
-        options={{
-          title: t("manager.appList.title"),
-        }}
+        options={{ title: t("manager.appList.title") }}
       />
     </Stack.Navigator>
   );

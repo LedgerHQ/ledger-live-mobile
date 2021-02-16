@@ -26,21 +26,19 @@ export default function ReceiveFundsNavigator() {
       screenOptions={{
         ...stackNavigationConfig,
         gestureEnabled: Platform.OS === "ios",
-        headerRight: null,
       }}
     >
       <Stack.Screen
         name={ScreenName.ReceiveSelectAccount}
         component={ReceiveSelectAccount}
         options={{
-          headerTitle: ({ style }: { style: * }) => (
+          headerTitle: () => (
             <StepHeader
               title={t("transfer.receive.headerTitle")}
               subtitle={t("send.stepperHeader.stepRange", {
                 currentStep: "1",
                 totalSteps,
               })}
-              style={style}
             />
           ),
         }}
@@ -49,14 +47,13 @@ export default function ReceiveFundsNavigator() {
         name={ScreenName.ReceiveConnectDevice}
         component={ReceiveConnectDevice}
         options={({ route }) => ({
-          headerTitle: ({ style }: { style: * }) => (
+          headerTitle: () => (
             <StepHeader
               title={t(route.params?.title ?? "transfer.receive.titleDevice")}
               subtitle={t("send.stepperHeader.stepRange", {
                 currentStep: "2",
                 totalSteps,
               })}
-              style={style}
             />
           ),
         })}
@@ -65,14 +62,13 @@ export default function ReceiveFundsNavigator() {
         name={ScreenName.ReceiveConfirmation}
         component={ReceiveConfirmation}
         options={{
-          headerTitle: ({ style }: { style: * }) => (
+          headerTitle: () => (
             <StepHeader
               title={t("account.receive")}
               subtitle={t("send.stepperHeader.stepRange", {
                 currentStep: "3",
                 totalSteps,
               })}
-              style={style}
             />
           ),
         }}

@@ -1,14 +1,15 @@
 // @flow
 import React, { useMemo } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import { useTheme } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "@react-navigation/native";
 import { ScreenName } from "../../const";
 import AddAccountsSelectCrypto from "../../screens/AddAccounts/01-SelectCrypto";
 import AddAccountsSelectDevice from "../../screens/AddAccounts/02-SelectDevice";
 import AddAccountsTokenCurrencyDisclaimer from "../../screens/AddAccounts/02-TokenCurrencyDisclaimer";
 import AddAccountsAccounts from "../../screens/AddAccounts/03-Accounts";
 import AddAccountsSuccess from "../../screens/AddAccounts/04-Success";
+import AddAccountsHeaderRightClose from "../../screens/AddAccounts/AddAccountsHeaderRightClose";
 import EditAccountName from "../../screens/AccountSettings/EditAccountName";
 import { getStackNavigatorConfig } from "../../navigation/navigatorConfig";
 import StepHeader from "../StepHeader";
@@ -39,20 +40,20 @@ export default function AddAccountsNavigator({ route }: { route: Route }) {
       }
       screenOptions={{
         ...stackNavConfig,
+        headerRight: () => <AddAccountsHeaderRightClose />,
       }}
     >
       <Stack.Screen
         name={ScreenName.AddAccountsSelectCrypto}
         component={AddAccountsSelectCrypto}
         options={{
-          headerTitle: ({ style }: { style: * }) => (
+          headerTitle: () => (
             <StepHeader
               title={t("common.cryptoAsset")}
               subtitle={t("send.stepperHeader.stepRange", {
                 currentStep: "1",
                 totalSteps,
               })}
-              style={style}
             />
           ),
         }}
@@ -62,14 +63,13 @@ export default function AddAccountsNavigator({ route }: { route: Route }) {
         component={AddAccountsSelectDevice}
         initialParams={currency ? { currency, inline: true } : undefined}
         options={{
-          headerTitle: ({ style }: { style: * }) => (
+          headerTitle: () => (
             <StepHeader
               title={t("common.device")}
               subtitle={t("send.stepperHeader.stepRange", {
                 currentStep: "2",
                 totalSteps,
               })}
-              style={style}
             />
           ),
         }}
@@ -78,14 +78,13 @@ export default function AddAccountsNavigator({ route }: { route: Route }) {
         name={ScreenName.AddAccountsAccounts}
         component={AddAccountsAccounts}
         options={{
-          headerTitle: ({ style }: { style: * }) => (
+          headerTitle: () => (
             <StepHeader
               title={t("tabs.accounts")}
               subtitle={t("send.stepperHeader.stepRange", {
                 currentStep: "3",
                 totalSteps,
               })}
-              style={style}
             />
           ),
           gestureEnabled: false,

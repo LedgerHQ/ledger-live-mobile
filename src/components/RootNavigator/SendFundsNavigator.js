@@ -1,8 +1,8 @@
 // @flow
 import React, { useMemo } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import { useTheme } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "@react-navigation/native";
 import { ScreenName } from "../../const";
 import SendFundsMain from "../../screens/SendFunds/01-SelectAccount";
 import SendSelectRecipient from "../../screens/SendFunds/02-SelectRecipient";
@@ -25,24 +25,18 @@ export default function SendFundsNavigator() {
     [colors],
   );
   return (
-    <Stack.Navigator
-      screenOptions={{
-        ...stackNavigationConfig,
-        headerRight: null,
-      }}
-    >
+    <Stack.Navigator screenOptions={stackNavigationConfig}>
       <Stack.Screen
         name={ScreenName.SendFundsMain}
         component={SendFundsMain}
         options={{
-          headerTitle: ({ style }: { style: * }) => (
+          headerTitle: () => (
             <StepHeader
               title={t("send.stepperHeader.selectAccount")}
               subtitle={t("send.stepperHeader.stepRange", {
                 currentStep: "1",
                 totalSteps,
               })}
-              style={style}
             />
           ),
         }}
@@ -51,14 +45,13 @@ export default function SendFundsNavigator() {
         name={ScreenName.SendSelectRecipient}
         component={SendSelectRecipient}
         options={{
-          headerTitle: ({ style }: { style: * }) => (
+          headerTitle: () => (
             <StepHeader
               title={t("send.stepperHeader.recipientAddress")}
               subtitle={t("send.stepperHeader.stepRange", {
                 currentStep: "2",
                 totalSteps,
               })}
-              style={style}
             />
           ),
         }}
@@ -67,14 +60,13 @@ export default function SendFundsNavigator() {
         name={ScreenName.SendAmount}
         component={SendAmount}
         options={{
-          headerTitle: ({ style }: { style: * }) => (
+          headerTitle: () => (
             <StepHeader
               title={t("send.stepperHeader.selectAmount")}
               subtitle={t("send.stepperHeader.stepRange", {
                 currentStep: "3",
                 totalSteps,
               })}
-              style={style}
             />
           ),
         }}
@@ -83,14 +75,13 @@ export default function SendFundsNavigator() {
         name={ScreenName.SendSummary}
         component={SendSummary}
         options={{
-          headerTitle: ({ style }: { style: * }) => (
+          headerTitle: () => (
             <StepHeader
               title={t("send.stepperHeader.summary")}
               subtitle={t("send.stepperHeader.stepRange", {
                 currentStep: "4",
                 totalSteps,
               })}
-              style={style}
             />
           ),
         }}
@@ -99,14 +90,13 @@ export default function SendFundsNavigator() {
         name={ScreenName.SendSelectDevice}
         component={SelectDevice}
         options={{
-          headerTitle: ({ style }: { style: * }) => (
+          headerTitle: () => (
             <StepHeader
               title={t("send.stepperHeader.selectDevice")}
               subtitle={t("send.stepperHeader.stepRange", {
                 currentStep: "5",
                 totalSteps,
               })}
-              style={style}
             />
           ),
         }}
@@ -115,14 +105,13 @@ export default function SendFundsNavigator() {
         name={ScreenName.SendConnectDevice}
         component={SendConnectDevice}
         options={{
-          headerTitle: ({ style }: { style: * }) => (
+          headerTitle: () => (
             <StepHeader
               title={t("send.stepperHeader.connectDevice")}
               subtitle={t("send.stepperHeader.stepRange", {
                 currentStep: "6",
                 totalSteps,
               })}
-              style={style}
             />
           ),
         }}
