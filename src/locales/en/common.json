@@ -381,7 +381,7 @@
     },
     "SyncError": {
       "title": "Synchronization error",
-      "description": "Some accounts could not be synchronized. Please consult our article on synchronization errors."
+      "description": "Some accounts could not be synchronized."
     },
     "TimeoutError": {
       "title": "Sorry, server took too long to respond",

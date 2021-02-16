@@ -1,6 +1,7 @@
 // @flow
 import React from "react";
 import { StyleSheet } from "react-native";
+import { useTheme } from "@react-navigation/native";
 import LText from "./LText";
 import Touchable from "./Touchable";
 import ExternalLink from "../icons/ExternalLink";
@@ -22,19 +23,23 @@ const Link = ({
   eventProperties,
   ltextProps,
   color = "live",
-}: Props) => (
-  <Touchable
-    event={event}
-    eventProperties={eventProperties}
-    onPress={onPress}
-    style={styles.root}
-  >
-    <LText semiBold style={[styles.text]} color={color} {...ltextProps}>
-      {text}
-    </LText>
-    <ExternalLink size={14} color={color} />
-  </Touchable>
-);
+}: Props) => {
+  const { colors } = useTheme();
+  const c = colors[color] || colors.live;
+  return (
+    <Touchable
+      event={event}
+      eventProperties={eventProperties}
+      onPress={onPress}
+      style={styles.root}
+    >
+      <LText semiBold style={[styles.text, { color: c }]} {...ltextProps}>
+        {text}
+      </LText>
+      <ExternalLink size={14} color={c} />
+    </Touchable>
+  );
+};
 
 const styles = StyleSheet.create({
   root: {
