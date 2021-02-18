@@ -1,14 +1,11 @@
 // @flow
 import React, { useCallback } from "react";
-import {
-  StyleSheet,
-  View,
-  TouchableWithoutFeedback,
-  Platform,
-} from "react-native";
+import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
 import { useSelector } from "react-redux";
 import { useNavigation, useTheme } from "@react-navigation/native";
 import { useGlobalSyncState } from "@ledgerhq/live-common/lib/bridge/react";
+import { useAnnouncements } from "@ledgerhq/live-common/lib/announcements/react";
+import { useLedgerStatus } from "@ledgerhq/live-common/lib/announcements/status/react";
 import { isUpToDateSelector } from "../../reducers/accounts";
 import { networkErrorSelector } from "../../reducers/appstate";
 import HeaderErrorTitle from "../../components/HeaderErrorTitle";
@@ -16,7 +13,8 @@ import HeaderSynchronizing from "../../components/HeaderSynchronizing";
 import Touchable from "../../components/Touchable";
 import Greetings from "./Greetings";
 import IconPie from "../../icons/Pie";
-import { ScreenName } from "../../const";
+import BellIcon from "../../icons/Bell";
+import { NavigatorName, ScreenName } from "../../const";
 import { scrollToTop } from "../../navigation/utils";
 
 type Props = {
@@ -33,13 +31,23 @@ export default function PortfolioHeader({
   const { colors } = useTheme();
   const navigation = useNavigation();
 
+  const { allIds, seenIds } = useAnnouncements();
+  const { incidents } = useLedgerStatus();
+
   const onDistributionButtonPress = useCallback(() => {
     navigation.navigate(ScreenName.Distribution);
+  }, [navigation]);
+
+  const onNotificationButtonPress = useCallback(() => {
+    navigation.navigate(NavigatorName.NotificationCenter);
   }, [navigation]);
 
   const isUpToDate = useSelector(isUpToDateSelector);
   const networkError = useSelector(networkErrorSelector);
   const { pending, error } = useGlobalSyncState();
+
+  const hasNotifications =
+    seenIds.length < allIds.length || incidents.length > 0;
 
   const content =
     pending && !isUpToDate ? (
@@ -64,17 +72,32 @@ export default function PortfolioHeader({
         <View style={styles.content}>{content}</View>
       </TouchableWithoutFeedback>
       {showDistribution && (
-        <View
-          style={[styles.distributionButton, { backgroundColor: colors.card }]}
-        >
+        <View style={[styles.distributionButton]}>
           <Touchable
             event="DistributionCTA"
             onPress={onDistributionButtonPress}
           >
-            <IconPie size={16} color={colors.live} />
+            <IconPie size={18} color={colors.grey} />
           </Touchable>
         </View>
       )}
+      <View style={[styles.distributionButton, styles.marginLeft]}>
+        <Touchable event="" onPress={onNotificationButtonPress}>
+          {/** @TODO set correct analytics event here */}
+          {hasNotifications && (
+            <View
+              style={[
+                styles.badge,
+                {
+                  backgroundColor: colors.alert,
+                  borderColor: colors.background,
+                },
+              ]}
+            />
+          )}
+          <BellIcon size={18} color={colors.grey} />
+        </Touchable>
+      </View>
     </View>
   );
 }
@@ -95,17 +118,16 @@ const styles = StyleSheet.create({
     height: 32,
     borderRadius: 32,
     alignSelf: "center",
-    ...Platform.select({
-      android: {
-        elevation: 1,
-      },
-      ios: {
-        shadowOpacity: 0.03,
-        shadowRadius: 8,
-        shadowOffset: {
-          height: 4,
-        },
-      },
-    }),
+  },
+  marginLeft: { marginLeft: 8 },
+  badge: {
+    width: 15,
+    height: 15,
+    borderWidth: 3,
+    borderRadius: 15,
+    position: "absolute",
+    top: -6,
+    right: -4,
+    zIndex: 2,
   },
 });

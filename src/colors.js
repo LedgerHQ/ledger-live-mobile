@@ -85,6 +85,10 @@ export const lightTheme = {
     pillActiveBackground: rgba("#6490f1", 0.1),
     pillActiveForeground: "#6490f1",
     pillActiveDisabledForeground: "#999999",
+
+    /** SNACKBAR */
+    snackBarBg: "#142533",
+    snackBarColor: "#FFF",
   },
 };
 
@@ -132,6 +136,10 @@ export const duskTheme = {
     pillActiveBackground: rgba("#6490f1", 0.1),
     pillActiveForeground: "#6490f1",
     pillActiveDisabledForeground: "#999999",
+
+    /** SNACKBAR */
+    snackBarBg: "#060d12",
+    snackBarColor: "#FFF",
   },
 };
 
@@ -179,5 +187,9 @@ export const darkTheme = {
     pillActiveBackground: rgba("#6490f1", 0.1),
     pillActiveForeground: "#6490f1",
     pillActiveDisabledForeground: "#999999",
+
+    /** SNACKBAR */
+    snackBarBg: "#000000",
+    snackBarColor: "#FFF",
   },
 };

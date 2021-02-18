@@ -22,6 +22,8 @@ import { checkLibs } from "@ledgerhq/live-common/lib/sanityChecks";
 import _ from "lodash";
 import { useCountervaluesExport } from "@ledgerhq/live-common/lib/countervalues/react";
 import { pairId } from "@ledgerhq/live-common/lib/countervalues/helpers";
+import { LedgerStatusProvider } from "@ledgerhq/live-common/lib/announcements/status/react";
+
 import logger from "./logger";
 import { saveAccounts, saveBle, saveSettings, saveCountervalues } from "./db";
 import {
@@ -60,6 +62,10 @@ import { useTrackingPairs } from "./actions/general";
 import { ScreenName, NavigatorName } from "./const";
 import ExperimentalHeader from "./screens/Settings/Experimental/ExperimentalHeader";
 import { lightTheme, duskTheme, darkTheme } from "./colors";
+import NotificationsProvider from "./screens/NotificationCenter/NotificationsProvider";
+import NotificationsPolling from "./screens/NotificationCenter/NotificationsPolling";
+import LedgerStatusPolling from "./screens/NotificationCenter/LedgerStatusPolling";
+import SnackbarContainer from "./screens/NotificationCenter/Snackbar/SnackbarContainer";
 
 const themes = {
   light: lightTheme,
@@ -378,7 +384,16 @@ export default class Root extends Component<
                               >
                                 <ButtonUseTouchable.Provider value={true}>
                                   <OnboardingContextProvider>
-                                    <App importDataString={importDataString} />
+                                    <NotificationsProvider>
+                                      <LedgerStatusProvider>
+                                        <NotificationsPolling />
+                                        <LedgerStatusPolling />
+                                        <SnackbarContainer />
+                                        <App
+                                          importDataString={importDataString}
+                                        />
+                                      </LedgerStatusProvider>
+                                    </NotificationsProvider>
                                   </OnboardingContextProvider>
                                 </ButtonUseTouchable.Provider>
                               </CounterValuesProvider>

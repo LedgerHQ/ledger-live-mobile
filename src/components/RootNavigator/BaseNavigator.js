@@ -42,6 +42,7 @@ import LendingInfoNavigator from "./LendingInfoNavigator";
 import LendingEnableFlowNavigator from "./LendingEnableFlowNavigator";
 import LendingSupplyFlowNavigator from "./LendingSupplyFlowNavigator";
 import LendingWithdrawFlowNavigator from "./LendingWithdrawFlowNavigator";
+import NotificationCenterNavigator from "./NotificationCenterNavigator";
 import { getStackNavigatorConfig } from "../../navigation/navigatorConfig";
 import Account from "../../screens/Account";
 import TransparentHeaderNavigationOptions from "../../navigation/TransparentHeaderNavigationOptions";
@@ -313,6 +314,15 @@ export default function BaseNavigator() {
         options={{
           title: t("send.scan.fallback.header"),
           headerLeft: null,
+        }}
+      />
+      <Stack.Screen
+        name={NavigatorName.NotificationCenter}
+        component={NotificationCenterNavigator}
+        options={{
+          title: t("notificationCenter.title"),
+          headerStyle: styles.headerNoShadow,
+          headerRight: null,
         }}
       />
       {Object.keys(families).map(name => {
