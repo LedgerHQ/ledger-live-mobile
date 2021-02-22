@@ -9,6 +9,7 @@ import Button from "../../../components/Button";
 import LText from "../../../components/LText";
 import CheckBox from "../../../components/CheckBox";
 import { NavigatorName, ScreenName } from "../../../const";
+import { setAnalytics } from "../../../actions/settings";
 
 import { useTerms, useTermsAccept, url } from "../../../logic/terms";
 import SafeMarkdown from "../../../components/SafeMarkdown";
@@ -21,10 +22,12 @@ import AnimatedHeaderView from "../../../components/AnimatedHeader";
 import { useLocale } from "../../../context/Locale";
 
 import { urls } from "../../../config/urls";
+import { useDispatch } from "react-redux";
 
 function OnboardingStepTerms({ navigation }: *) {
   const { colors } = useTheme();
   const { locale } = useLocale();
+  const dispatch = useDispatch();
   const [markdown, error, retry] = useTerms(locale);
   const [, accept] = useTermsAccept();
   const [toggle, setToggle] = useState(false);
@@ -39,10 +42,11 @@ function OnboardingStepTerms({ navigation }: *) {
 
   const next = useCallback(() => {
     accept();
+    dispatch(setAnalytics(true));
     navigation.navigate(NavigatorName.Onboarding, {
       screen: ScreenName.OnboardingDeviceSelection,
     });
-  }, [accept, navigation]);
+  }, [accept, dispatch, navigation]);
 
   return (
     <AnimatedHeaderView
