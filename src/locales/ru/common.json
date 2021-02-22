@@ -998,7 +998,7 @@
           },
           "1": {
             "title": "Выберите длину фразы восстановления",
-            "label": "Фраза восстановления может содержать 12, 18 или 24 слова. Для доступа к криптовалюте вы должны ввести все слова."
+            "label": "Your recovery phrase can have 12, 18 or 24 words. You must enter all words to access your crypto."
           },
           "2": {
             "title": "Введите слово №1...",
