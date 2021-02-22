@@ -998,7 +998,7 @@
           },
           "1": {
             "title": "Sélectionnez la longueur de votre phrase de récupération",
-            "label": "Votre phrase de récupération peut comporter 12, 18 ou 24 mots. Vous devez entrer tous les mots pour accéder à vos cryptomonnaies."
+            "label": "Your recovery phrase can have 12, 18 or 24 words. You must enter all words to access your crypto."
           },
           "2": {
             "title": "Saisir le mot n°1...",
