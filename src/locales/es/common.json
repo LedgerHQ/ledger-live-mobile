@@ -998,7 +998,7 @@
           },
           "1": {
             "title": "Selecciona la longitud de la frase de contraseña",
-            "label": "Tus frases de contraseña pueden tener 12, 18 o 24 palabras. Debes introducir todas las palabras para acceder a tus criptomonedas."
+            "label": "Your recovery phrase can have 12, 18 or 24 words. You must enter all words to access your crypto."
           },
           "2": {
             "title": "Introduce la palabra n.º 1...",
