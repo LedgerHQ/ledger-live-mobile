@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { normalize } from "../../helpers/normalizeSize";
-import { TrackScreen } from "../../analytics";
+import { Track } from "../../analytics";
 
 import CheckBox from "../CheckBox";
 import ConfirmationModal from "../ConfirmationModal";
@@ -41,6 +41,7 @@ export type InfoStepViewProps = {
   },
   ctaWarningCheckbox?: { desc: React$Node },
   children?: React$Node,
+  isActive?: boolean,
 };
 
 export function InfoStepView({
@@ -57,6 +58,7 @@ export function InfoStepView({
   onNext,
   sceneColors,
   trackPage,
+  isActive,
 }: InfoStepViewProps & {
   onNext: () => void,
   sceneColors: string[],
@@ -81,7 +83,9 @@ export function InfoStepView({
 
   return (
     <>
-      {trackPage && <TrackScreen category="Onboarding" name={trackPage} />}
+      {trackPage && isActive && (
+        <Track onMount event={`Page Onboarding ${trackPage}`} />
+      )}
       <ScrollView style={styles.spacer}>
         <View style={styles.infoStepView}>
           {children || (

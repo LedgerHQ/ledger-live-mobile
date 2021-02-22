@@ -111,6 +111,7 @@ export default function OnboardingStepperView({
             {...sceneProps}
             onNext={onNext}
             sceneColors={sceneColors}
+            isActive={id === currentScene.id}
           />
         ),
       }),

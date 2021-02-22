@@ -16,7 +16,7 @@ import Button from "../../../components/Button";
 import LText from "../../../components/LText";
 import CheckBox from "../../../components/CheckBox";
 import { useLocale } from "../../../context/Locale";
-import { locales } from "../../../languages";
+import { supportedLocales } from "../../../languages";
 import ConfirmationModal from "../../../components/ConfirmationModal";
 import Warning from "../../../icons/Warning";
 
@@ -60,7 +60,7 @@ function OnboardingStepLanguage({ navigation }: *) {
           <Trans i18nKey="onboarding.stepLanguage.title" />
         </LText>
         <ScrollView style={styles.localeContainer}>
-          {locales.map((l, index) => (
+          {supportedLocales.map((l, index) => (
             <TouchableOpacity
               key={index + l}
               onPress={() => changeLanguage(l)}
