@@ -9,7 +9,9 @@ import React, {
 import { InteractionManager } from "react-native";
 import _ from "lodash";
 import { useFocusEffect } from "@react-navigation/native";
+import { useSelector } from "react-redux";
 import { saveTourData, getTourData } from "../../db";
+import { hasInstalledAnyAppSelector } from "../../reducers/settings";
 
 export const STEPS = {
   INSTALL_CRYPTO: [],
@@ -161,6 +163,7 @@ export const useProductTourFinishedModal = (step: string, enabled: boolean) => {
 
 const Provider = ({ children }: { children: React$Node }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const hasInstalledAnyApp = useSelector(hasInstalledAnyAppSelector);
 
   // actions
   setStep = currentStep => dispatch({ currentStep });
@@ -197,6 +200,12 @@ const Provider = ({ children }: { children: React$Node }) => {
   // effects
 
   useEffect(() => {
+    if (state.initDone && hasInstalledAnyApp) {
+      completeStep("INSTALL_CRYPTO");
+    }
+  }, [hasInstalledAnyApp, state.initDone]);
+
+  useEffect(() => {
     if (state.initDone) {
       return;
     }
@@ -210,7 +219,8 @@ const Provider = ({ children }: { children: React$Node }) => {
     };
 
     init();
-  }, [state.initDone]);
+  }, [hasInstalledAnyApp, state.initDone]);
+
   useEffect(() => {
     if (!state.initDone) {
       return;

@@ -3,9 +3,9 @@
 import { useTheme } from "@react-navigation/native";
 import React, { useContext, useState, useEffect } from "react";
 import { StyleSheet, TouchableOpacity, Image } from "react-native";
-import { RNHoleView } from "react-native-hole-view";
+import { RNHoleView, ERNHoleViewTimingFunction } from "react-native-hole-view";
 import { Trans } from "react-i18next";
-import { context } from "./Provider";
+import { completeStep, context } from "./Provider";
 import LText from "../../components/LText";
 
 const configs = {
@@ -468,7 +468,7 @@ const configs = {
 };
 
 const PortfolioOverlay = () => {
-  const { colors } = useTheme();
+  const { colors, dark } = useTheme();
   const [disabled, setDisabled] = useState();
   const [index, setIndex] = useState(0);
   const ptContext = useContext(context);
@@ -500,6 +500,11 @@ const PortfolioOverlay = () => {
     }
   };
 
+  const skip = () => {
+    next();
+    ptContext.currentStep && completeStep(ptContext.currentStep);
+  };
+
   const config = configArray[index];
 
   // console.log(config, index);
@@ -524,7 +529,10 @@ const PortfolioOverlay = () => {
       <RNHoleView
         style={[
           styles.fullscreen,
-          { backgroundColor: colors.darkBlue, opacity: 0.9 },
+          styles.holeView,
+          {
+            backgroundColor: dark ? colors.smoke : colors.darkBlue,
+          },
         ]}
         holes={[
           {
@@ -532,9 +540,13 @@ const PortfolioOverlay = () => {
             borderRadius: 4,
           },
         ]}
+        animation={{
+          timingFunction: ERNHoleViewTimingFunction.EASE_IN_OUT,
+          duration: 200,
+        }}
       />
       <Image source={arrow} style={[arrowStyle, styles.tooltipArrow]} />
-      <LText style={[textStyle, styles.tooltipText]} color="white" bold>
+      <LText style={[textStyle, styles.tooltipText]} bold>
         <Trans i18nKey={text} />
       </LText>
       {catchClick ? (
@@ -544,7 +556,7 @@ const PortfolioOverlay = () => {
             e.preventDefault();
             next();
           }}
-          style={[styles.fullscreen, { backgroundColor: "transparent" }]}
+          style={[styles.fullscreen]}
         />
       ) : null}
       <TouchableOpacity
@@ -552,9 +564,9 @@ const PortfolioOverlay = () => {
           styles.closeButton,
           config.cbPosition === "bottom" ? styles.cbBottom : styles.cbTop,
         ]}
-        onPress={next}
+        onPress={skip}
       >
-        <LText style={styles.closeText} color="white" bold>
+        <LText style={styles.closeText} bold>
           <Trans i18nKey="producttour.overlay.closeText" />
         </LText>
       </TouchableOpacity>
@@ -569,7 +581,9 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
+    backgroundColor: "transparent",
   },
+  holeView: { opacity: 0.9 },
   closeButton: {
     backgroundColor: "transparent",
     borderColor: "#FFF",
@@ -592,13 +606,14 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
   tooltipArrow: {
-    width: 8.5,
+    width: 16,
     height: 45,
     position: "absolute",
   },
   tooltipText: {
     fontSize: 16,
     position: "absolute",
+    color: "#FFF",
   },
 });
 

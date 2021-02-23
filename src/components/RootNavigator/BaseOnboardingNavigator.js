@@ -22,7 +22,8 @@ const hitSlop = {
   top: 10,
 };
 
-export const ErrorHeaderInfo = ({ route, navigation, colors }: *) => {
+export const ErrorHeaderInfo = ({ route, navigation }: *) => {
+  const { colors } = useTheme();
   const openInfoModal = useCallback(() => {
     navigation.navigate(ScreenName.OnboardingInfoModal, {
       sceneInfoKey: "pairNewErrorInfoModalProps",
@@ -47,6 +48,7 @@ export default function BaseOnboardingNavigator() {
     () => getStackNavigatorConfig(colors, true),
     [colors],
   );
+
   return (
     <Stack.Navigator
       mode="modal"
@@ -69,11 +71,7 @@ export default function BaseOnboardingNavigator() {
         options={({ navigation, route }) => ({
           title: null,
           headerRight: () => (
-            <ErrorHeaderInfo
-              route={route}
-              navigation={navigation}
-              colors={colors}
-            />
+            <ErrorHeaderInfo route={route} navigation={navigation} />
           ),
           headerShown: true,
           headerStyle: styles.headerNoShadow,
