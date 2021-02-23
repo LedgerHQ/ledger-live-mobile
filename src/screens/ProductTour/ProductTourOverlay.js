@@ -431,6 +431,7 @@ const configs = {
         right: 0,
         textAlign: "center",
       }),
+      catchClick: true,
     },
     {
       layout: "appsList",
@@ -446,6 +447,7 @@ const configs = {
         right: 0,
         textAlign: "center",
       }),
+      catchClick: true,
     },
     {
       layout: "appRow-catalog-Bitcoin",
@@ -478,7 +480,7 @@ const PortfolioOverlay = () => {
       setIndex(0);
     }
 
-    if (!ptContext.holeConfig) {
+    if (!ptContext.holeConfig || disabled !== ptContext.holeConfig) {
       setDisabled(null);
       setIndex(0);
     }
@@ -515,6 +517,7 @@ const PortfolioOverlay = () => {
   const arrowStyle = config.arrowPosition(layout);
   const textStyle = config.textLayout(layout);
   const text = config.text;
+  const catchClick = config.catchClick;
 
   return (
     <>
@@ -534,14 +537,16 @@ const PortfolioOverlay = () => {
       <LText style={[textStyle, styles.tooltipText]} color="white" bold>
         <Trans i18nKey={text} />
       </LText>
-      <TouchableOpacity
-        /* android */
-        onPress={e => {
-          e.preventDefault();
-          next();
-        }}
-        style={[styles.fullscreen, { backgroundColor: "transparent" }]}
-      />
+      {catchClick ? (
+        <TouchableOpacity
+          /* android */
+          onPress={e => {
+            e.preventDefault();
+            next();
+          }}
+          style={[styles.fullscreen, { backgroundColor: "transparent" }]}
+        />
+      ) : null}
       <TouchableOpacity
         style={[
           styles.closeButton,
