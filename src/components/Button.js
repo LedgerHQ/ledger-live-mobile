@@ -51,7 +51,7 @@ export type BaseButtonProps = {
   disabled?: boolean,
   outline?: boolean,
   // for analytics
-  event: string,
+  event?: string,
   eventProperties?: Object,
   size?: number,
 };

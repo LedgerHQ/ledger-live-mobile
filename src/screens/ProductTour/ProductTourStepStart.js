@@ -1,11 +1,19 @@
 // @flow
 
-import React, { useContext, useState, useCallback } from "react";
+import React, { useCallback, useContext, useMemo, useState } from "react";
 import { Trans } from "react-i18next";
-import { View, StyleSheet, Image, SafeAreaView } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Image,
+  SafeAreaView,
+  TouchableOpacity,
+  Linking,
+  Dimensions,
+} from "react-native";
+import { TabView, SceneMap } from "react-native-tab-view";
 import { useHeaderHeight } from "@react-navigation/stack";
-import { useTheme, useFocusEffect } from "@react-navigation/native";
-import Swiper from "react-native-swiper";
+import { useTheme } from "@react-navigation/native";
 import LText from "../../components/LText";
 import Button from "../../components/Button";
 import AnimatedSvgBackground from "../../components/AnimatedSvgBackground";
@@ -13,13 +21,22 @@ import { context } from "./Provider";
 import { NavigatorName, ScreenName } from "../../const";
 import { navigate } from "../../rootnavigation";
 import ArrowRight from "../../icons/ArrowRight";
+import InfoCircle from "../../icons/Info";
+import { urls } from "../../config/urls";
+import { track } from "../../analytics";
 
 const stepInfos = {
   INSTALL_CRYPTO: [
     "producttour.stepstart.installcrypto",
     [
-      "producttour.stepstart.installcryptodetails",
-      "producttour.stepstart.installcryptodetails2",
+      { desc: "producttour.stepstart.installcryptodetails" },
+      {
+        desc: "producttour.stepstart.installcryptodetails2",
+        link: {
+          href: urls.productTour.app,
+          label: "producttour.stepstart.installcryptolink",
+        },
+      },
     ],
     {
       file: require("../../images/producttour/blue/installcrypto.png"),
@@ -32,8 +49,14 @@ const stepInfos = {
   CREATE_ACCOUNT: [
     "producttour.stepstart.createaccount",
     [
-      "producttour.stepstart.createaccountdetails",
-      "producttour.stepstart.createaccountdetails2",
+      { desc: "producttour.stepstart.createaccountdetails" },
+      {
+        desc: "producttour.stepstart.createaccountdetails2",
+        link: {
+          href: urls.productTour.addAccount,
+          label: "producttour.stepstart.createaccountlink",
+        },
+      },
     ],
     {
       file: require("../../images/producttour/blue/createaccount.png"),
@@ -49,8 +72,14 @@ const stepInfos = {
   RECEIVE_COINS: [
     "producttour.stepstart.receivecoins",
     [
-      "producttour.stepstart.receivecoinsdetails",
-      "producttour.stepstart.receivecoinsdetails2",
+      { desc: "producttour.stepstart.receivecoinsdetails" },
+      {
+        desc: "producttour.stepstart.receivecoinsdetails2",
+        link: {
+          href: urls.productTour.receive,
+          label: "producttour.stepstart.receivecoinslink",
+        },
+      },
     ],
     {
       file: require("../../images/producttour/blue/receivecoins.png"),
@@ -63,8 +92,14 @@ const stepInfos = {
   BUY_COINS: [
     "producttour.stepstart.buycoins",
     [
-      "producttour.stepstart.buycoinsdetails",
-      "producttour.stepstart.buycoinsdetails2",
+      { desc: "producttour.stepstart.buycoinsdetails" },
+      {
+        desc: "producttour.stepstart.buycoinsdetails2",
+        link: {
+          href: urls.productTour.buy,
+          label: "producttour.stepstart.buycoinslink",
+        },
+      },
     ],
     {
       file: require("../../images/producttour/blue/buycoins.png"),
@@ -77,8 +112,14 @@ const stepInfos = {
   SEND_COINS: [
     "producttour.stepstart.sendcoins",
     [
-      "producttour.stepstart.sendcoinsdetails",
-      "producttour.stepstart.sendcoinsdetails2",
+      { desc: "producttour.stepstart.sendcoinsdetails" },
+      {
+        desc: "producttour.stepstart.sendcoinsdetails2",
+        link: {
+          href: urls.productTour.send,
+          label: "producttour.stepstart.sendcoinslink",
+        },
+      },
     ],
     {
       file: require("../../images/producttour/blue/sendcoins.png"),
@@ -91,8 +132,14 @@ const stepInfos = {
   SWAP_COINS: [
     "producttour.stepstart.swapcoins",
     [
-      "producttour.stepstart.swapcoinsdetails",
-      "producttour.stepstart.swapcoinsdetails2",
+      { desc: "producttour.stepstart.swapcoinsdetails" },
+      {
+        desc: "producttour.stepstart.swapcoinsdetails2",
+        link: {
+          href: urls.productTour.swap,
+          label: "producttour.stepstart.swapcoinslink",
+        },
+      },
     ],
     {
       file: require("../../images/producttour/blue/swapcoins.png"),
@@ -104,10 +151,7 @@ const stepInfos = {
   ],
   CUSTOMIZE_APP: [
     "producttour.stepstart.customizeapp",
-    [
-      "producttour.stepstart.customizeappdetails",
-      "producttour.stepstart.customizeappdetails2",
-    ],
+    [{ desc: "producttour.stepstart.customizeappdetails" }],
     {
       file: require("../../images/producttour/blue/customizeapp.png"),
       size: {
@@ -118,20 +162,22 @@ const stepInfos = {
   ],
 };
 
+const initialLayout = { width: Dimensions.get("window").width };
+
 const ProductTourStepStart = () => {
   const { colors } = useTheme();
   const ptContext = useContext(context);
   const headerHeight = useHeaderHeight();
-  const [swiperKey, setSwiperKey] = useState();
-
-  // workaround bug
-  useFocusEffect(
-    useCallback(() => {
-      setSwiperKey(ptContext.currentStep);
-    }, [ptContext.currentStep]),
+  const [index, setIndex] = useState(0);
+  const scenes = useMemo(
+    () => (ptContext.currentStep ? stepInfos[ptContext.currentStep][1] : []),
+    [ptContext.currentStep],
   );
+  const routes = useMemo(() => scenes.map((v, i) => ({ key: `${i}` })), [
+    scenes,
+  ]);
 
-  const goTo = () => {
+  const goTo = useCallback(() => {
     switch (ptContext.currentStep) {
       case "INSTALL_CRYPTO":
       case "CREATE_ACCOUNT":
@@ -151,52 +197,98 @@ const ProductTourStepStart = () => {
       default:
         break;
     }
-  };
+  }, [ptContext.currentStep]);
+
+  const next = useCallback(() => {
+    if (index === scenes.length - 1) {
+      track(
+        `step start tour ${ptContext.currentStep ? ptContext.currentStep : ""}`,
+      );
+      goTo();
+    } else setIndex(index + 1);
+  }, [goTo, index, ptContext.currentStep, scenes.length]);
+
+  const renderScene = SceneMap(
+    scenes.reduce(
+      (sum, { desc, link }, i) => ({
+        ...sum,
+        [i]: () => (
+          <View>
+            {desc && (
+              <LText style={styles.details}>
+                <Trans i18nKey={desc} />
+              </LText>
+            )}
+            {link && (
+              <TouchableOpacity
+                style={styles.link}
+                onPress={() => Linking.openURL(link.href)}
+              >
+                <LText bold style={styles.linkText}>
+                  <Trans i18nKey={link.label} />
+                </LText>
+                <InfoCircle size={16} color="#FFF" />
+              </TouchableOpacity>
+            )}
+          </View>
+        ),
+      }),
+      {},
+    ),
+  );
+
+  if (!ptContext.currentStep) return null;
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: colors.live }}>
-      {ptContext.currentStep ? (
-        <View style={styles.root}>
-          <View style={{ flex: 1 }}>
-            <AnimatedSvgBackground
-              color={"#587ED4"}
-              style={[styles.svg, { height: 218 - headerHeight }]}
-            />
-            <Image
-              source={stepInfos[ptContext.currentStep][2]?.file}
-              style={[
-                styles.image,
-                stepInfos[ptContext.currentStep][2]?.size,
-                stepInfos[ptContext.currentStep][2]?.offset,
-              ]}
-            />
-            <LText style={styles.title} bold>
-              <Trans i18nKey={stepInfos[ptContext.currentStep][0]} />
-            </LText>
-            <Swiper key={swiperKey} activeDotColor="#FFF">
-              {stepInfos[ptContext.currentStep][1].map(key => (
-                <View key={key}>
-                  <LText style={styles.details}>
-                    <Trans i18nKey={key} />
-                  </LText>
-                </View>
-              ))}
-            </Swiper>
-          </View>
-          <Button
-            type="negativePrimary"
-            event={`step start tour ${ptContext.currentStep}`}
-            onPress={goTo}
-            title={<Trans i18nKey="producttour.stepstart.cta" />}
-            IconRight={ArrowRight}
+    <SafeAreaView style={[styles.container, { backgroundColor: colors.live }]}>
+      <View style={styles.root}>
+        <View style={styles.container}>
+          <AnimatedSvgBackground
+            color={"#587ED4"}
+            style={[styles.svg, { height: 218 - headerHeight }]}
           />
+          <Image
+            source={stepInfos[ptContext.currentStep][2]?.file}
+            style={[
+              styles.image,
+              stepInfos[ptContext.currentStep][2]?.size,
+              stepInfos[ptContext.currentStep][2]?.offset,
+            ]}
+          />
+          <LText style={styles.title} bold>
+            <Trans i18nKey={stepInfos[ptContext.currentStep][0]} />
+          </LText>
+          <TabView
+            renderTabBar={() => null}
+            navigationState={{ index, routes }}
+            renderScene={renderScene}
+            onIndexChange={setIndex}
+            initialLayout={initialLayout}
+          />
+          <View style={styles.dotContainer}>
+            {scenes.map((k, i) => (
+              <View
+                key={i}
+                style={[styles.dot, index === i ? {} : styles.dotInactive]}
+              >
+                <View />
+              </View>
+            ))}
+          </View>
         </View>
-      ) : null}
+        <Button
+          type="negativePrimary"
+          onPress={next}
+          title={<Trans i18nKey="producttour.stepstart.cta" />}
+          IconRight={ArrowRight}
+        />
+      </View>
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
+  container: { flex: 1 },
   root: {
     paddingHorizontal: 16,
     flex: 1,
@@ -211,6 +303,17 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "#FFF",
   },
+  link: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "flex-start",
+    marginTop: 12,
+  },
+  linkText: {
+    fontSize: 12,
+    color: "#FFF",
+    marginRight: 5,
+  },
   image: {
     alignSelf: "center",
     marginBottom: 21,
@@ -222,6 +325,25 @@ const styles = StyleSheet.create({
     right: -16,
     zIndex: -1,
     top: 0,
+  },
+  dotContainer: {
+    position: "absolute",
+    bottom: 24,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
+    zIndex: 0,
+  },
+  dot: {
+    width: 8,
+    height: 8,
+    margin: 4,
+    borderRadius: 8,
+    backgroundColor: "#FFF",
+  },
+  dotInactive: {
+    opacity: 0.2,
   },
 });
 
