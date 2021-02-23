@@ -1,10 +1,10 @@
 // @flow
 
-import React, { useContext } from "react";
+import React, { useContext, useState, useCallback } from "react";
 import { Trans } from "react-i18next";
 import { View, StyleSheet, Image, SafeAreaView } from "react-native";
 import { useHeaderHeight } from "@react-navigation/stack";
-import { useTheme } from "@react-navigation/native";
+import { useTheme, useFocusEffect } from "@react-navigation/native";
 import Swiper from "react-native-swiper";
 import LText from "../../components/LText";
 import Button from "../../components/Button";
@@ -122,6 +122,14 @@ const ProductTourStepStart = () => {
   const { colors } = useTheme();
   const ptContext = useContext(context);
   const headerHeight = useHeaderHeight();
+  const [swiperKey, setSwiperKey] = useState();
+
+  // workaround bug
+  useFocusEffect(
+    useCallback(() => {
+      setSwiperKey(ptContext.currentStep);
+    }, [ptContext.currentStep]),
+  );
 
   const goTo = () => {
     switch (ptContext.currentStep) {
@@ -165,7 +173,7 @@ const ProductTourStepStart = () => {
             <LText style={styles.title} bold>
               <Trans i18nKey={stepInfos[ptContext.currentStep][0]} />
             </LText>
-            <Swiper activeDotColor="#FFF">
+            <Swiper key={swiperKey} activeDotColor="#FFF">
               {stepInfos[ptContext.currentStep][1].map(key => (
                 <View key={key}>
                   <LText style={styles.details}>

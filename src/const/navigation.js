@@ -284,6 +284,7 @@ export const ScreenName = {
 
   CustomizeAppPassword: "CustomizeAppPassword",
   CustomizeAppCountervalues: "CustomizeAppCountervalues",
+  CustomizeAppTheme: "CustomizeAppTheme",
   CustomizeAppCountervalueSettings: "CustomizeAppCountervalueSettings",
 };
 

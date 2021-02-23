@@ -3476,6 +3476,15 @@
       "cta": "Continue",
       "skip": "Skip",
       "description": "Display your prefered currency as your countervalue."
+    },
+    "theme": {
+      "headerTitle": "Choose app theme",
+      "subtitle": "Step {{ currentStep }} of {{ totalSteps }}",
+      "cta": "Continue",
+      "skip": "Skip",
+      "dark": "Dark",
+      "dusk": "Dusk",
+      "light": "Light"
     }
   },
   "producttour": {

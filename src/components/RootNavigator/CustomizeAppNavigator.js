@@ -10,13 +10,14 @@ import { useTheme } from "@react-navigation/native";
 import { ScreenName, NavigatorName } from "../../const";
 import CustomizeAppPassword from "../../screens/CustomizeApp/Password";
 import CustomizeAppCountervalues from "../../screens/CustomizeApp/Countervalues";
+import CustomizeAppTheme from "../../screens/CustomizeApp/Theme";
 import CountervalueSettings from "../../screens/Settings/General/CountervalueSettings";
 import { getStackNavigatorConfig } from "../../navigation/navigatorConfig";
 import StepHeader from "../StepHeader";
 import { context as _ptContext } from "../../screens/ProductTour/Provider";
 import { navigate } from "../../rootnavigation";
 
-const totalSteps = "2";
+const totalSteps = "3";
 
 export default function ReceiveFundsNavigator() {
   const { t } = useTranslation();
@@ -85,6 +86,22 @@ export default function ReceiveFundsNavigator() {
               title={t("customizeapp.countervalues.headerTitle")}
               subtitle={t("customizeapp.countervalues.subtitle", {
                 currentStep: "2",
+                totalSteps,
+              })}
+              style={style}
+            />
+          ),
+        })}
+      />
+      <Stack.Screen
+        name={ScreenName.CustomizeAppTheme}
+        component={CustomizeAppTheme}
+        options={() => ({
+          headerTitle: ({ style }: { style: * }) => (
+            <StepHeader
+              title={t("customizeapp.theme.headerTitle")}
+              subtitle={t("customizeapp.theme.subtitle", {
+                currentStep: "3",
                 totalSteps,
               })}
               style={style}

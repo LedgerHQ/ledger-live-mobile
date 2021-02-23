@@ -1,16 +1,15 @@
 // @flow
 
-import React, { useCallback, useState } from "react";
+import React from "react";
 import { Trans } from "react-i18next";
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { useSelector } from "react-redux";
-import { useTheme, useFocusEffect } from "@react-navigation/native";
+import { useTheme } from "@react-navigation/native";
 import { ScreenName } from "../../const";
 import { TrackScreen } from "../../analytics";
 import LText from "../../components/LText";
 import Button from "../../components/Button";
-import { useProductTourFinishedModal } from "../ProductTour/Provider";
 import IconArrowRight from "../../icons/ArrowRight";
 import IconChevron from "../../icons/Chevron";
 import { counterValueCurrencySelector } from "../../reducers/settings";
@@ -25,19 +24,10 @@ type RouteParams = {};
 export default function Contervalues({ navigation }: Props) {
   const { colors } = useTheme();
   const supportedCV = useSelector(counterValueCurrencySelector);
-  const [done, setDone] = useState(false);
 
-  useFocusEffect(useCallback(() => setDone(false), [setDone]));
-
-  const primaryCTA = useCallback(() => {
-    setDone(true);
-  }, []);
-
-  const secondaryCTA = useCallback(() => {
-    setDone(true);
-  }, []);
-
-  useProductTourFinishedModal("CUSTOMIZE_APP", done);
+  const goToNext = () => {
+    navigation.navigate(ScreenName.CustomizeAppTheme);
+  };
 
   return (
     <SafeAreaView style={[styles.root, { backgroundColor: colors.background }]}>
@@ -64,11 +54,11 @@ export default function Contervalues({ navigation }: Props) {
           containerStyle={styles.button}
           type="primary"
           title={<Trans i18nKey="customizeapp.countervalues.cta" />}
-          onPress={primaryCTA}
+          onPress={goToNext}
         />
         <Button
           event="CustomizeAppCountervaluesSkip"
-          onPress={secondaryCTA}
+          onPress={goToNext}
           type="lightSecondary"
           title={<Trans i18nKey="customizeapp.countervalues.skip" />}
           IconRight={() => <IconArrowRight color={colors.live} size={20} />}
