@@ -14,18 +14,18 @@ import TrackScreen from "../../analytics/TrackScreen";
 type Props = BottomProps & {
   isOpened: boolean,
   onClose: () => void,
-  onPress: Function,
+  onPress: () => void,
 };
 
 function ConfirmationModal({ isOpened, onClose, onPress, ...rest }: Props) {
   const { colors } = useTheme();
   return (
     <BottomModal
+      style={styles.confirmationModal}
+      {...rest}
       id="ptsteplockedmodal"
       isOpened={isOpened}
       onClose={onClose}
-      style={styles.confirmationModal}
-      {...rest}
     >
       {isOpened ? <TrackScreen category="PT Step Locked Bottom Modal" /> : null}
       <View style={[styles.icon, { backgroundColor: colors.lightLive }]}>

@@ -28,11 +28,11 @@ const hitSlop = {
 };
 
 const BackButton = ({
-  colors,
+  color,
   navigation,
   action,
 }: {
-  colors: *,
+  color: string,
   navigation: *,
   action?: () => void,
 }) => (
@@ -41,16 +41,16 @@ const BackButton = ({
     style={styles.buttons}
     onPress={() => (action ? action() : navigation.goBack())}
   >
-    <ArrowLeft size={18} color={colors.darkBlue} />
+    <ArrowLeft size={18} color={color} />
   </Pressable>
 );
 
 const CloseButton = ({
-  colors,
+  color,
   navigation,
   action,
 }: {
-  colors: *,
+  color: string,
   navigation: *,
   action?: () => void,
 }) => (
@@ -59,7 +59,7 @@ const CloseButton = ({
     onPress={() => (action ? action() : navigation.popToTop())}
     style={styles.buttons}
   >
-    <Close size={18} color={colors.darkBlue} />
+    <Close size={18} color={color} />
   </Pressable>
 );
 
@@ -71,6 +71,7 @@ type Props = {
   closeAction?: () => void,
   children?: React$Node,
   footer?: React$Node,
+  color?: string,
   style?: *,
 };
 
@@ -83,6 +84,7 @@ export default function AnimatedHeaderView({
   children,
   footer,
   style,
+  color,
 }: Props) {
   const { colors } = useTheme();
   const navigation = useNavigation();
@@ -121,6 +123,7 @@ export default function AnimatedHeaderView({
         <View style={styles.topHeader}>
           {hasBackButton && (
             <BackButton
+              color={color || colors.darkBlue}
               colors={colors}
               navigation={navigation}
               action={backAction}
@@ -129,6 +132,7 @@ export default function AnimatedHeaderView({
           <View style={styles.spacer} />
           {hasCloseButton && (
             <CloseButton
+              color={color || colors.darkBlue}
               colors={colors}
               navigation={navigation}
               action={closeAction}
@@ -143,7 +147,10 @@ export default function AnimatedHeaderView({
             { transform: [{ translateY, translateX }, { scale }] },
           ]}
         >
-          <LText bold style={[styles.title]}>
+          <LText
+            bold
+            style={[styles.title, { color: color || colors.darkBlue }]}
+          >
             {title}
           </LText>
         </AnimatedLText>

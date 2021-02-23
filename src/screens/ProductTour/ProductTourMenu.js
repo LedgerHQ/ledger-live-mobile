@@ -2,16 +2,17 @@
 
 import React, { useContext, useState, useCallback } from "react";
 import { Trans } from "react-i18next";
-import _ from "lodash";
 import {
   View,
   StyleSheet,
   TouchableOpacity,
   Image,
   ScrollView,
+  Pressable,
+  Platform,
+  SafeAreaView,
 } from "react-native";
 import { useTheme, useFocusEffect } from "@react-navigation/native";
-import SafeAreaView from "react-native-safe-area-view";
 import LText from "../../components/LText";
 import Check from "../../icons/Check";
 import Lock from "../../icons/Lock";
@@ -19,8 +20,8 @@ import { context, STEPS, setStep, completeStep } from "./Provider";
 import { ScreenName } from "../../const";
 import StepLockedBottomModal from "./StepLockedBottomModal";
 import ProductTourProgressBar from "./ProductTourProgressBar";
-
-const forceInset = { bottom: "always" };
+import Styles from "../../navigation/styles";
+import ArrowLeft from "../../icons/ArrowLeft";
 
 const stepTitles = {
   INSTALL_CRYPTO: [
@@ -151,12 +152,12 @@ const stepTitles = {
   ],
 };
 
-const stepProps = {
-  isComplete: Function,
-  isAccessible: Function,
-  goTo: Function,
-  setStepLockedModal: Function,
-  step: String,
+type stepProps = {
+  isComplete: (*) => boolean,
+  isAccessible: (*) => boolean,
+  goTo: (*) => void,
+  setStepLockedModal: (*) => void,
+  step: string,
 };
 
 const Step = ({
@@ -243,13 +244,19 @@ const ProductTourMenu = ({ navigation }: Props) => {
   const [stepLockedModal, setStepLockedModal] = useState(false);
 
   const isAccessible = step =>
-    _.every(STEPS[step], step => ptContext.completedSteps.includes(step));
+    Object.values(STEPS[step]).every(step =>
+      ptContext.completedSteps.includes(step),
+    );
   const isComplete = step => ptContext.completedSteps.includes(step);
 
   const goTo = step => {
     setStep(step);
     navigation.navigate(ScreenName.ProductTourStepStart);
   };
+
+  const onBack = useCallback(() => {
+    navigation.goBack();
+  }, [navigation]);
 
   useFocusEffect(
     useCallback(() => {
@@ -260,17 +267,24 @@ const ProductTourMenu = ({ navigation }: Props) => {
   );
 
   return (
-    <>
+    <SafeAreaView style={styles.spacer}>
       <View style={[styles.header, { backgroundColor: colors.live }]}>
-        <LText secondary style={[styles.title, styles.textWhite]} bold>
-          <Trans
-            i18nKey={
-              ptContext.completedSteps.length === Object.keys(STEPS).length
-                ? "producttour.menu.completedtitle"
-                : "producttour.menu.title"
-            }
-          />
-        </LText>
+        <View style={styles.topHeader}>
+          <Pressable style={styles.buttons} onPress={onBack}>
+            <ArrowLeft size={18} color={"#FFF"} />
+          </Pressable>
+        </View>
+        <View style={{}}>
+          <LText bold style={[styles.title, styles.textWhite]}>
+            <Trans
+              i18nKey={
+                ptContext.completedSteps.length === Object.keys(STEPS).length
+                  ? "producttour.menu.completedtitle"
+                  : "producttour.menu.title"
+              }
+            />
+          </LText>
+        </View>
         <ProductTourProgressBar />
         <View style={[styles.badge, { backgroundColor: colors.ledgerGreen }]}>
           <LText style={[styles.badgeTitle, styles.textWhite]} bold>
@@ -287,30 +301,28 @@ const ProductTourMenu = ({ navigation }: Props) => {
           </LText>
         </View>
       </View>
-      <SafeAreaView style={{ flex: 1 }} forceInset={forceInset}>
-        <ScrollView style={{ flex: 1 }} contentContainerStyle={styles.root}>
-          {_.map(STEPS, (_, step) => (
-            <View
-              key={`${step}-${ptContext.completedSteps.length}`}
-              style={styles.stepContainer}
-            >
-              <Step
-                step={step}
-                isComplete={isComplete}
-                isAccessible={isAccessible}
-                goTo={goTo}
-                setStepLockedModal={setStepLockedModal}
-              />
-            </View>
-          ))}
-        </ScrollView>
-      </SafeAreaView>
+      <ScrollView style={styles.spacer} contentContainerStyle={styles.root}>
+        {Object.keys(STEPS).map(step => (
+          <View
+            key={`${step}-${ptContext.completedSteps.length}`}
+            style={styles.stepContainer}
+          >
+            <Step
+              step={step}
+              isComplete={isComplete}
+              isAccessible={isAccessible}
+              goTo={goTo}
+              setStepLockedModal={setStepLockedModal}
+            />
+          </View>
+        ))}
+      </ScrollView>
       <StepLockedBottomModal
         isOpened={!!stepLockedModal}
         onPress={() => setStepLockedModal(false)}
         onClose={() => setStepLockedModal(false)}
       />
-    </>
+    </SafeAreaView>
   );
 };
 
@@ -355,7 +367,7 @@ const styles = StyleSheet.create({
   },
   root: {
     marginHorizontal: 12,
-    marginTop: 12,
+    paddingVertical: 12,
     flexWrap: "wrap",
     alignContent: "stretch",
     flexDirection: "row",
@@ -378,10 +390,24 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginRight: 11,
   },
+  topHeader: {
+    flexDirection: "row",
+    alignContent: "center",
+    justifyContent: "space-between",
+  },
+  spacer: { flex: 1 },
   header: {
-    paddingHorizontal: 16,
-    paddingTop: 20,
-    paddingBottom: 43,
+    ...Styles.headerNoShadow,
+    backgroundColor: "transparent",
+    width: "100%",
+    paddingTop: Platform.OS === "ios" ? 0 : 40,
+    flexDirection: "column",
+    overflow: "hidden",
+    paddingHorizontal: 24,
+    paddingBottom: 24,
+  },
+  buttons: {
+    paddingVertical: 16,
   },
   title: {
     fontSize: 28,
