@@ -50,7 +50,7 @@ export default function Buy() {
           style={styles.buttonContainer}
           ref={ref}
           onLayout={() => {
-            reportLayout(["buy-BuyCTA"], ref);
+            reportLayout(["buy-BuyCTA"], ref, { y: 20, height: -20 });
           }}
         >
           <Button
