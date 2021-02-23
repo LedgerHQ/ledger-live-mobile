@@ -1,8 +1,7 @@
 // @flow
 
-import { StyleSheet, View } from "react-native";
-import React, { useRef } from "react";
-import { RectButton } from "react-native-gesture-handler";
+import { StyleSheet, View, TouchableHighlight } from "react-native";
+import React, { useRef, useMemo } from "react";
 import type {
   CryptoCurrency,
   TokenCurrency,
@@ -10,7 +9,7 @@ import type {
 
 import LText from "./LText";
 import CircleCurrencyIcon from "./CircleCurrencyIcon";
-import { withTheme } from "../colors";
+import { withTheme, rgba } from "../colors";
 import { reportLayout } from "../screens/ProductTour/Provider";
 
 type Props = {
@@ -30,6 +29,7 @@ const CurrencyRow = (props: Props) => {
     props.onPress(props.currency);
   };
   const ref = useRef();
+  const underlayColor = useMemo(() => rgba(colors.darkBlue, 0.05), [colors]);
   return (
     <View
       ref={ref}
@@ -43,30 +43,36 @@ const CurrencyRow = (props: Props) => {
         );
       }}
     >
-      <RectButton style={[styles.root, style]} onPress={onPress}>
-        <CircleCurrencyIcon
-          size={26}
-          currency={currency}
-          color={!isOK ? colors.lightFog : undefined}
-        />
-        <LText
-          semiBold
-          style={[styles.name]}
-          numberOfLines={1}
-          color={!isOK ? "fog" : "darkBlue"}
-        >
-          {`${currency.name} (${currency.ticker})`}
-        </LText>
-        {currency.type === "TokenCurrency" && currency.parentCurrency ? (
+      <TouchableHighlight
+        style={[style]}
+        onPress={onPress}
+        underlayColor={underlayColor}
+      >
+        <View style={styles.root}>
+          <CircleCurrencyIcon
+            size={26}
+            currency={currency}
+            color={!isOK ? colors.lightFog : undefined}
+          />
           <LText
             semiBold
-            style={[styles.currencyLabel, { borderColor: colors.grey }]}
-            color="grey"
+            style={[styles.name]}
+            numberOfLines={1}
+            color={!isOK ? "fog" : "darkBlue"}
           >
-            {currency.parentCurrency.name}
+            {`${currency.name} (${currency.ticker})`}
           </LText>
-        ) : null}
-      </RectButton>
+          {currency.type === "TokenCurrency" && currency.parentCurrency ? (
+            <LText
+              semiBold
+              style={[styles.currencyLabel, { borderColor: colors.grey }]}
+              color="grey"
+            >
+              {currency.parentCurrency.name}
+            </LText>
+          ) : null}
+        </View>
+      </TouchableHighlight>
     </View>
   );
 };
