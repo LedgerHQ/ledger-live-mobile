@@ -1,4 +1,4 @@
-import React, { useMemo, memo } from "react";
+import React, { useMemo, memo, useState, useEffect } from "react";
 import { StyleSheet, View } from "react-native";
 
 import { Trans } from "react-i18next";
@@ -61,7 +61,17 @@ const AppStateButton = ({
     [app.name, installed],
   );
 
-  useProductTourFinishedModal("INSTALL_CRYPTO", isInstalled);
+  const [ptSuccess, setPtSuccess] = useState(isInstalled ? 1 : 0);
+  useEffect(() => {
+    if (installing) {
+      setPtSuccess(0);
+    }
+    if (ptSuccess === 0 && isInstalled) {
+      setPtSuccess(2);
+    }
+  }, [installing, isInstalled, ptSuccess]);
+
+  useProductTourFinishedModal("INSTALL_CRYPTO", ptSuccess === 2);
 
   const renderAppState = () => {
     switch (true) {
