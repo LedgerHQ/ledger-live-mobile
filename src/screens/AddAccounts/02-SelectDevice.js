@@ -1,8 +1,7 @@
 // @flow
 
 import React, { useCallback, useEffect, useState } from "react";
-import { StyleSheet } from "react-native";
-import SafeAreaView from "react-native-safe-area-view";
+import { StyleSheet, SafeAreaView } from "react-native";
 import type { CryptoCurrency } from "@ledgerhq/live-common/lib/types";
 import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import { createAction } from "@ledgerhq/live-common/lib/hw/actions/app";
@@ -15,8 +14,6 @@ import SelectDevice from "../../components/SelectDevice";
 import NavigationScrollView from "../../components/NavigationScrollView";
 import DeviceActionModal from "../../components/DeviceActionModal";
 import { useProductTourOverlay } from "../ProductTour/Provider";
-
-const forceInset = { bottom: "always" };
 
 type Props = {
   navigation: any,
@@ -72,7 +69,6 @@ export default function AddAccountsSelectDevice({ navigation, route }: Props) {
           backgroundColor: colors.background,
         },
       ]}
-      forceInset={forceInset}
     >
       <NavigationScrollView
         style={styles.scroll}

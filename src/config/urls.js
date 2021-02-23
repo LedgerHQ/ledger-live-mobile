@@ -100,4 +100,18 @@ export const urls = {
     "https://support.ledger.com/hc/en-us/articles/360025864773",
   otgCable:
     "https://support.ledger.com/hc/en-us/articles/115005463729-OTG-Kit-adapters-for-your-Ledger-devices",
+  productTour: {
+    swap:
+      "https://www.ledger.com/swap?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=producttour_bluecard",
+    send:
+      "https://support.ledger.com/hc/en-us/articles/360000617934-Send-crypto-assets?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=producttour_bluecard",
+    receive:
+      "https://support.ledger.com/hc/en-us/articles/360010418413-Receive-crypto-assets?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=producttour_bluecard",
+    buy:
+      "https://www.ledger.com/buy-crypto-in-ledger-live?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=producttour_bluecard",
+    addAccount:
+      "https://support.ledger.com/hc/en-us/articles/360011454079-What-are-apps-and-accounts-?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=producttour_bluecard",
+    app:
+      "https://support.ledger.com/hc/en-us/articles/360011454079-What-are-apps-and-accounts-?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=producttour_bluecard",
+  },
 };
