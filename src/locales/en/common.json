@@ -3559,7 +3559,8 @@
       "swapcoinsdetails2": "Swapping crypto in Ledger Live takes only 3 easy steps and is fully secured by your Ledger device.",
       "swapcoinslink": "Learn more about swap",
       "customizeapp": "Let’s customize\nyour experience",
-      "customizeappdetails": "You can customize the app by changing its appearance, setting a password, and chosing your preferred currency in the settings."
+      "customizeappdetails": "You can customize the app by changing its appearance, setting a password, and chosing your preferred currency in the settings.",
+      "buymaybe": "Maybe later"
     },
     "steplockedbottommodal": {
       "title": "Locked feature",
