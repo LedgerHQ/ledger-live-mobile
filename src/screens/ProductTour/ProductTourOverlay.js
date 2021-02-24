@@ -529,7 +529,7 @@ const PortfolioOverlay = () => {
   const arrowStyle = config.arrowPosition(layout);
   const textStyle = config.textLayout(layout);
   const text = config.text;
-  const catchClick = config.catchClick;
+  // const catchClick = config.catchClick;
 
   return (
     <>
