@@ -267,8 +267,8 @@ const ProductTourMenu = ({ navigation }: Props) => {
   );
 
   return (
-    <SafeAreaView style={styles.spacer}>
-      <View style={[styles.header, { backgroundColor: colors.live }]}>
+    <SafeAreaView style={[styles.spacer, { backgroundColor: colors.live }]}>
+      <View style={[styles.header]}>
         <View style={styles.topHeader}>
           <Pressable style={styles.buttons} onPress={onBack}>
             <ArrowLeft size={18} color={"#FFF"} />
@@ -301,7 +301,10 @@ const ProductTourMenu = ({ navigation }: Props) => {
           </LText>
         </View>
       </View>
-      <ScrollView style={styles.spacer} contentContainerStyle={styles.root}>
+      <ScrollView
+        style={[styles.spacer, { backgroundColor: colors.background }]}
+        contentContainerStyle={styles.root}
+      >
         {Object.keys(STEPS).map(step => (
           <View
             key={`${step}-${ptContext.completedSteps.length}`}
