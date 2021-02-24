@@ -1,10 +1,11 @@
 /* @flow */
-import React from "react";
+import React, { useContext } from "react";
 import Touchable from "../components/Touchable";
 import TabIcon from "../components/TabIcon";
 import CreateModal from "../modals/Create";
 import TransferIcon from "../icons/Transfer";
 import { lockSubject } from "../components/RootNavigator/CustomBlockRouterNavigator";
+import { context, enableHole } from "./ProductTour/Provider";
 
 const hitSlop = {
   top: 10,
@@ -30,7 +31,11 @@ export function TransferTabIcon({
   setIsOpen,
   ...rest
 }: Props) {
+  const ptContext = useContext(context);
   function openModal() {
+    if (ptContext.holeConfig) {
+      enableHole(`-${ptContext.holeConfig}`);
+    }
     setIsOpen(true);
   }
 

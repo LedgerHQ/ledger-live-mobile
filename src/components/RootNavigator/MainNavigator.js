@@ -1,5 +1,5 @@
 // @flow
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Pressable } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { ScreenName, NavigatorName } from "../../const";
@@ -11,7 +11,11 @@ import SettingsNavigator from "./SettingsNavigator";
 import TabIcon from "../TabIcon";
 import AccountsIcon from "../../icons/Accounts";
 import SettingsIcon from "../../icons/Settings";
-import { dismiss as dismissTour } from "../../screens/ProductTour/Provider";
+import {
+  dismiss as dismissTour,
+  context,
+  enableHole,
+} from "../../screens/ProductTour/Provider";
 
 import Tab from "./CustomBlockRouterNavigator";
 
@@ -24,6 +28,7 @@ export default function MainNavigator({
   route: { params: RouteParams },
 }) {
   const { colors } = useTheme();
+  const ptContext = useContext(context);
   const { hideTabNavigation } = params || {};
   const [isOpen, setIsOpen] = useState(false);
   return (
@@ -78,6 +83,9 @@ export default function MainNavigator({
         }}
         listeners={({ navigation }) => ({
           tabPress: e => {
+            if (ptContext.holeConfig) {
+              enableHole(`-${ptContext.holeConfig}`);
+            }
             e.preventDefault();
             setIsOpen(true);
           },
