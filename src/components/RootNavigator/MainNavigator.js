@@ -1,5 +1,5 @@
 // @flow
-import React from "react";
+import React, { useState } from "react";
 import { Pressable } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { ScreenName, NavigatorName } from "../../const";
@@ -25,6 +25,7 @@ export default function MainNavigator({
 }) {
   const { colors } = useTheme();
   const { hideTabNavigation } = params || {};
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <Tab.Navigator
       tabBarOptions={{
@@ -67,9 +68,20 @@ export default function MainNavigator({
         options={{
           headerShown: false,
           tabBarIcon: (props: any) => (
-            <TransferTabIcon ptIds={["TransferTab"]} {...props} />
+            <TransferTabIcon
+              ptIds={["TransferTab"]}
+              isOpen={isOpen}
+              setIsOpen={setIsOpen}
+              {...props}
+            />
           ),
         }}
+        listeners={({ navigation }) => ({
+          tabPress: e => {
+            e.preventDefault();
+            setIsOpen(true);
+          },
+        })}
       />
       <Tab.Screen
         name={NavigatorName.Manager}
