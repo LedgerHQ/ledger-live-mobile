@@ -28,7 +28,10 @@ export function useIsNavLocked(): boolean {
 }
 
 /** use Effect to trigger lock navigation updates and callback to retrieve catched navigation actions */
-export const useLockNavigation = (when, callback = () => {}) => {
+export const useLockNavigation = (
+  when: boolean,
+  callback: any => void = () => {},
+) => {
   useEffect(() => {
     let sub;
     lockSubject.next(when);

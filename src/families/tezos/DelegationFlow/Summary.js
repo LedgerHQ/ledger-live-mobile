@@ -221,6 +221,7 @@ export default function DelegationSummary({ navigation, route }: Props) {
 
   const rotate = rotateAnim.interpolate({
     inputRange: [0, 1],
+    // $FlowFixMe
     outputRange: ["0deg", "30deg"],
   });
 

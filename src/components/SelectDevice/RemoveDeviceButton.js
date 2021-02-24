@@ -11,7 +11,13 @@ import { removeKnownDevices } from "../../actions/ble";
 import Trash from "../../icons/Trash";
 import Button from "../Button";
 
-const AnimatedSafeView = Animated.createAnimatedComponent(SafeAreaView);
+const AnimatedSafeView = Animated.createAnimatedComponent<
+  {
+    forceInset: boolean,
+    style: *,
+  },
+  {},
+>(SafeAreaView);
 
 const forceInset = { bottom: "always" };
 
@@ -51,7 +57,7 @@ class RemoveDeviceButton extends PureComponent<RemoveDeviceButtonProps> {
     }).start(this.toggleEditMode);
   };
 
-  componentDidUpdate({ show: prevShow }: RemoveDeviceButton) {
+  componentDidUpdate({ show: prevShow }: Props) {
     const { show } = this.props;
     if (show && !prevShow) {
       this.showbutton();

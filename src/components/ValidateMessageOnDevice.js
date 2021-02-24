@@ -2,6 +2,7 @@
 import React from "react";
 import { View, StyleSheet, ScrollView } from "react-native";
 import { useTranslation } from "react-i18next";
+import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import type { TypedMessageData } from "@ledgerhq/live-common/lib/families/ethereum/types";
 import type { MessageData } from "@ledgerhq/live-common/lib/hw/signMessage/types";
 import type { AccountLike } from "@ledgerhq/live-common/lib/types";
@@ -35,7 +36,7 @@ export default function ValidateOnDevice({ device, message, account }: Props) {
           <LText style={styles.property}>
             {t("walletconnect.stepVerification.accountName")}
           </LText>
-          <LText semiBold>{account.name}</LText>
+          <LText semiBold>{account && account.name ? account.name : ""}</LText>
         </View>
         {message?.hashes?.domainHash ? (
           <View style={styles.messageContainer}>

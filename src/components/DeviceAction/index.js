@@ -204,6 +204,7 @@ export default function DeviceAction<R, H, P>({
   }
 
   if (request && device && signMessageRequested) {
+    // $FlowFixMe
     const { account } = request;
     return (
       <>

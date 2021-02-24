@@ -15,7 +15,7 @@ export type Opts = {
   bg?: string,
 };
 
-export type Res = {
+export type Res = {|
   fontFamily: string,
   fontWeight:
     | "normal"
@@ -29,7 +29,7 @@ export type Res = {
     | "700"
     | "800"
     | "900",
-};
+|};
 
 /**
  * Usage:
@@ -56,6 +56,7 @@ export default function LText({
 }) {
   const { colors } = useTheme();
   return (
+    // $FlowFixMe
     <Text
       {...newProps}
       allowFontScaling={false}

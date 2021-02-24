@@ -208,7 +208,11 @@ export default function BaseNavigator() {
         options={({ navigation, route }) => ({
           title: null,
           headerRight: () => (
-            <ErrorHeaderInfo route={route} navigation={navigation} />
+            <ErrorHeaderInfo
+              route={route}
+              navigation={navigation}
+              colors={colors}
+            />
           ),
           headerShown: true,
           headerStyle: styles.headerNoShadow,

@@ -519,5 +519,6 @@ export const initSwapStep: ({
     />
   ),
 
-  run: meta => initSwap(exchange, exchangeRate, transaction, meta.deviceId),
+  run: meta =>
+    initSwap({ exchange, exchangeRate, transaction, deviceId: meta.deviceId }),
 });

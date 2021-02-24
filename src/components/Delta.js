@@ -44,11 +44,11 @@ function Delta({ valueChange, percent, unit, style }: Props) {
     ? delta.isGreaterThan(0)
       ? [colors.success, IconArrowUp, "+"]
       : [colors.alert, IconArrowDown, "-"]
-    : [colors.darkBlue, null, ""];
+    : [colors.darkBlue, () => null, ""];
 
   return (
     <View style={[styles.root, style]}>
-      {percent ? ArrowIcon : null}
+      {percent ? <ArrowIcon color={color} size={10} /> : null}
       <View style={percent ? styles.content : null}>
         <LText semiBold style={[styles.text, { color }]}>
           {unit && !absDelta.isZero() ? (
