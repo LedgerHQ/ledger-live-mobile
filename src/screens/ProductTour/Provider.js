@@ -45,6 +45,7 @@ type StateUpdate = {
 // actions
 export let setStep: (step: string | null) => void = () => {};
 export let completeStep: (step: string) => void = () => {};
+export let skipCurrentStep: () => void = () => {};
 export let dismiss: (dismissed: boolean) => void = () => {};
 export let enableHole: (holeConfig: *) => void = () => {};
 export let enableFinishedModal: (
@@ -168,6 +169,7 @@ const Provider = ({ children }: { children: React$Node }) => {
   // actions
   setStep = currentStep => dispatch({ currentStep });
   completeStep = step => dispatch({ completedSteps: [step] });
+  skipCurrentStep = () => dispatch({ currentStep: null });
   dismiss = dismissed => dispatch({ dismissed });
   enableHole = holeConfig => dispatch({ holeConfig });
   enableFinishedModal = finishedModal => dispatch({ finishedModal });

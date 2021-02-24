@@ -5,7 +5,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { StyleSheet, TouchableOpacity, Image } from "react-native";
 import { RNHoleView, ERNHoleViewTimingFunction } from "react-native-hole-view";
 import { Trans } from "react-i18next";
-import { completeStep, context } from "./Provider";
+import { skipCurrentStep, context } from "./Provider";
 import { ScreenName, NavigatorName } from "../../const";
 import { navigate } from "../../rootnavigation";
 import LText from "../../components/LText";
@@ -504,7 +504,7 @@ const PortfolioOverlay = () => {
 
   const skip = () => {
     next();
-    ptContext.currentStep && completeStep(ptContext.currentStep);
+    skipCurrentStep();
     navigate(NavigatorName.ProductTour, {
       screen: ScreenName.ProductTourMenu,
     });
