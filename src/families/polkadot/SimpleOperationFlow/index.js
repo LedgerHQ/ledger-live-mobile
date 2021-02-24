@@ -34,7 +34,7 @@ function SimpleOperationFlow() {
           title: route.params.mode
             ? t(`polkadot.simpleOperation.modes.${route.params.mode}.title`)
             : t("polkadot.simpleOperation.stepperHeader.info"),
-          headerLeft: null,
+          headerLeft: undefined,
         })}
       />
       <Stack.Screen
@@ -71,10 +71,10 @@ function SimpleOperationFlow() {
         name={ScreenName.PolkadotSimpleOperationValidationSuccess}
         component={ValidationSuccess}
         options={{
-          headerTitle: null,
+          headerTitle: undefined,
           gestureEnabled: false,
-          headerLeft: null,
-          headerRight: null,
+          headerLeft: undefined,
+          headerRight: undefined,
         }}
       />
       <Stack.Screen

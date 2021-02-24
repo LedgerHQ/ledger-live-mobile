@@ -1,6 +1,7 @@
 // @flow
 
 import React, { useCallback, useState } from "react";
+import { useDispatch } from "react-redux";
 import { StyleSheet, View, Linking, ActivityIndicator } from "react-native";
 import { Trans } from "react-i18next";
 import { useTheme } from "@react-navigation/native";

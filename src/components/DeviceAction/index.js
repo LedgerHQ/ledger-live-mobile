@@ -184,8 +184,8 @@ export default function DeviceAction<R, H, P>({
     const { account, parentAccount, status, transaction } = request;
     if (account && status && transaction) {
       navigation.setOptions({
-        headerLeft: null,
-        headerRight: null,
+        headerLeft: undefined,
+        headerRight: undefined,
         gestureEnabled: false,
       });
       return (
@@ -205,6 +205,7 @@ export default function DeviceAction<R, H, P>({
   }
 
   if (request && device && signMessageRequested) {
+    // $FlowFixMe
     const { account } = request;
     return (
       <>
@@ -258,6 +259,7 @@ const RenderOnResultCallback = ({
   onResult: (payload: *) => Promise<void> | void,
   payload: *,
 }) => {
+  // onDidMount
   useEffect(() => {
     onResult(payload);
   }, []);

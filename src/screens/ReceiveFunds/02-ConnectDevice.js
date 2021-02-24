@@ -57,7 +57,7 @@ export default function ConnectDevice({ navigation, route }: Props) {
     if (readOnlyModeEnabled && route.params?.title !== readOnlyTitle) {
       navigation.setParams({
         title: readOnlyTitle,
-        headerRight: null,
+        headerRight: undefined,
       });
     }
   }, [navigation, readOnlyModeEnabled, route.params]);

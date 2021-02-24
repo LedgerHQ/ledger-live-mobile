@@ -75,7 +75,7 @@ function UndelegationFlow() {
         name={ScreenName.CosmosUndelegationValidationError}
         component={UndelegationValidationError}
         options={{
-          headerTitle: null,
+          headerTitle: undefined,
           gestureEnabled: false,
         }}
       />
@@ -83,9 +83,9 @@ function UndelegationFlow() {
         name={ScreenName.CosmosUndelegationValidationSuccess}
         component={UndelegationValidationSuccess}
         options={{
-          headerLeft: null,
-          headerTitle: null,
-          headerRight: null,
+          headerLeft: undefined,
+          headerTitle: undefined,
+          headerRight: undefined,
           gestureEnabled: false,
         }}
       />

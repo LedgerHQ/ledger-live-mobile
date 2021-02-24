@@ -40,7 +40,7 @@ function UnbondFlow() {
               })}
             />
           ),
-          headerLeft: null,
+          headerLeft: undefined,
         }}
       />
       <Stack.Screen
@@ -77,10 +77,10 @@ function UnbondFlow() {
         name={ScreenName.PolkadotUnbondValidationSuccess}
         component={ValidationSuccess}
         options={{
-          headerTitle: null,
+          headerTitle: undefined,
           gestureEnabled: false,
-          headerLeft: null,
-          headerRight: null,
+          headerLeft: undefined,
+          headerRight: undefined,
         }}
       />
       <Stack.Screen

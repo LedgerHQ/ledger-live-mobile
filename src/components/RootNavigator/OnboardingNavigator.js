@@ -46,7 +46,7 @@ export default function OnboardingNavigator() {
           headerShown: true,
           ...stackNavigationConfig,
           title: null,
-          headerRight: null,
+          headerRight: undefined,
           headerStyle: styles.headerNoShadow,
         }}
       />

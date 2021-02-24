@@ -53,7 +53,7 @@ export default function ConnectDevice({ navigation, route }: Props) {
     if (readOnlyModeEnabled && route.params?.title !== readOnlyTitle) {
       navigation.setParams({
         title: readOnlyTitle,
-        headerRight: null,
+        headerRight: undefined,
       });
     }
   }, [navigation, readOnlyModeEnabled, route.params]);
@@ -109,7 +109,7 @@ export default function ConnectDevice({ navigation, route }: Props) {
       >
         <SelectDevice onSelect={setDevice} />
       </NavigationScrollView>
-      <View style={styles.footer}>
+      <View>
         <Button
           event="ReceiveWithoutDevice"
           type="lightSecondary"

@@ -201,6 +201,7 @@ export default function SelectValidator({ navigation, route }: Props) {
     bridgePending,
     bridgeError,
   } = useBridgeTransaction(() => {
+    if (!account) return {};
     const bridge = getAccountBridge(account, parentAccount);
     return {
       account,
@@ -211,7 +212,8 @@ export default function SelectValidator({ navigation, route }: Props) {
     };
   });
 
-  invariant(transaction, "transaction is defined");
+  invariant(account, "account is undefined");
+  invariant(transaction, "transaction is undefined");
 
   let error = bridgeError || status.errors.recipient;
 

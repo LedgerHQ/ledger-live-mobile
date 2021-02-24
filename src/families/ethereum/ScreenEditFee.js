@@ -14,7 +14,7 @@ const forceInset = { bottom: "always" };
 
 const options = {
   title: i18n.t("send.summary.gasPrice"),
-  headerLeft: null,
+  headerLeft: undefined,
 };
 
 type Props = {

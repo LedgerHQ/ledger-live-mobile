@@ -79,7 +79,7 @@ function VoteFlow() {
               })}
             />
           ),
-          headerLeft: null,
+          headerLeft: undefined,
         }}
       />
       <Stack.Screen
@@ -115,16 +115,16 @@ function VoteFlow() {
       <Stack.Screen
         name={ScreenName.VoteValidationError}
         component={VoteValidationError}
-        options={{ headerTitle: null }}
+        options={{ headerTitle: undefined }}
       />
       <Stack.Screen
         name={ScreenName.VoteValidationSuccess}
         component={VoteValidationSuccess}
         options={{
-          headerTitle: null,
+          headerTitle: undefined,
           gestureEnabled: false,
-          headerLeft: null,
-          headerRight: null,
+          headerLeft: undefined,
+          headerRight: undefined,
         }}
       />
     </Stack.Navigator>

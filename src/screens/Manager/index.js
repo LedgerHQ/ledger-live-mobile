@@ -146,7 +146,7 @@ class ChooseDevice extends Component<
     if (readOnlyModeEnabled) {
       this.props.navigation.setParams({
         title: "manager.readOnly.title",
-        headerRight: null,
+        headerRight: undefined,
       });
     }
   }

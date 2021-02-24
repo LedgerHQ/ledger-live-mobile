@@ -42,7 +42,7 @@ export default function LendingInfoNavigator() {
       screenOptions={({ navigation }) => ({
         ...stackNavigationConfig,
         title: t("transfer.lending.info.title"),
-        headerLeft: null,
+        headerLeft: undefined,
         headerRight: () => <CloseButton navigation={navigation} />,
         gestureEnabled: false,
       })}

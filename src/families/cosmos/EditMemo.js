@@ -78,7 +78,7 @@ function CosmosEditMemo({ navigation, route }: Props) {
 
 const options = {
   title: i18next.t("send.summary.memo.title"),
-  headerLeft: null,
+  headerLeft: undefined,
 };
 
 export { CosmosEditMemo as component, options };

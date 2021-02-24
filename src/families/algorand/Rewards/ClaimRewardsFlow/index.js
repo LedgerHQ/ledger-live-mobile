@@ -99,8 +99,8 @@ function ClaimRewardsFlow() {
               })}
             />
           ),
-          headerLeft: null,
-          headerRight: null,
+          headerLeft: undefined,
+          headerRight: undefined,
           gestureEnabled: false,
         }}
       />

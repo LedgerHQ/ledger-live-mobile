@@ -85,6 +85,7 @@ export default function SendSelectRecipient({ navigation, route }: Props) {
 
   const onChangeText = useCallback(
     recipient => {
+      if (!account) return;
       const bridge = getAccountBridge(account, parentAccount);
       setTransaction(bridge.updateTransaction(transaction, { recipient }));
     },
@@ -105,6 +106,7 @@ export default function SendSelectRecipient({ navigation, route }: Props) {
   const onBridgeErrorRetry = useCallback(() => {
     setBridgeErr(null);
     if (!transaction) return;
+    if (!account) return;
     const bridge = getAccountBridge(account, parentAccount);
     setTransaction(bridge.updateTransaction(transaction, {}));
   }, [setTransaction, account, parentAccount, transaction]);

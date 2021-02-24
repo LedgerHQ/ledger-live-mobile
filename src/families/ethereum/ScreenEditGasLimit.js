@@ -19,7 +19,7 @@ const forceInset = { bottom: "always" };
 
 const options = {
   title: i18n.t("send.summary.gasLimit"),
-  headerLeft: null,
+  headerLeft: undefined,
 };
 
 type RouteParams = {

@@ -78,7 +78,7 @@ function AlgorandEditMemo({ navigation, route }: Props) {
 
 const options = {
   title: i18next.t("send.summary.memo.title"),
-  headerLeft: null,
+  headerLeft: undefined,
 };
 
 export { AlgorandEditMemo as component, options };

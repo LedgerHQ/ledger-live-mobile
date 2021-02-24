@@ -71,9 +71,9 @@ export default function SignMessageNavigator() {
         name={ScreenName.SignValidationSuccess}
         component={SignValidationSuccess}
         options={{
-          headerLeft: null,
+          headerLeft: undefined,
           headerShown: false,
-          headerRight: null,
+          headerRight: undefined,
           gestureEnabled: false,
         }}
       />

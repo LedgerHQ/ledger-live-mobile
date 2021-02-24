@@ -90,7 +90,7 @@ function StellarEditMemoValue({ navigation, route }: Props) {
 
 const options = {
   title: i18next.t("send.summary.memo.value"),
-  headerLeft: null,
+  headerLeft: undefined,
 };
 
 export { StellarEditMemoValue as component, options };

@@ -107,9 +107,9 @@ function ClaimRewardsFlow() {
         name={ScreenName.CosmosClaimRewardsValidationSuccess}
         component={ClaimRewardsValidationSuccess}
         options={{
-          headerLeft: null,
-          headerRight: null,
-          headerTitle: null,
+          headerLeft: undefined,
+          headerRight: undefined,
+          headerTitle: undefined,
           gestureEnabled: false,
         }}
       />

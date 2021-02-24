@@ -102,7 +102,7 @@ export default function AddAccountsNavigator({ route }: { route: Route }) {
         component={EditAccountName}
         options={{
           title: t("account.settings.accountName.title"),
-          headerRight: null,
+          headerRight: undefined,
         }}
       />
       <Stack.Screen

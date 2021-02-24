@@ -85,6 +85,7 @@ export default function SendAmount({ navigation, route }: Props) {
   const onChange = useCallback(
     amount => {
       if (!amount.isNaN()) {
+        if (!account) return;
         const bridge = getAccountBridge(account, parentAccount);
         setTransaction(bridge.updateTransaction(transaction, { amount }));
       }
@@ -93,6 +94,7 @@ export default function SendAmount({ navigation, route }: Props) {
   );
 
   const toggleUseAllAmount = useCallback(() => {
+    if (!account) return;
     const bridge = getAccountBridge(account, parentAccount);
     if (!transaction) return;
 
@@ -105,6 +107,7 @@ export default function SendAmount({ navigation, route }: Props) {
   }, [setTransaction, account, parentAccount, transaction]);
 
   const onContinue = useCallback(() => {
+    if (!account) return;
     navigation.navigate(ScreenName.SendSummary, {
       accountId: account.id,
       parentId: parentAccount && parentAccount.id,
@@ -125,6 +128,7 @@ export default function SendAmount({ navigation, route }: Props) {
   const onBridgeErrorRetry = useCallback(() => {
     setBridgeErr(null);
     if (!transaction) return;
+    if (!account) return;
     const bridge = getAccountBridge(account, parentAccount);
     setTransaction(bridge.updateTransaction(transaction, {}));
   }, [setTransaction, account, parentAccount, transaction]);
@@ -243,8 +247,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     display: "flex",
     flexGrow: 1,
-    fontSize: 16,
-
     marginBottom: 16,
   },
   availableRight: {

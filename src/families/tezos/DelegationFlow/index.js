@@ -44,7 +44,7 @@ function DelegationFlow() {
         name={ScreenName.DelegationSummary}
         component={DelegationSummary}
         options={{
-          headerLeft: null,
+          headerLeft: undefined,
           gestureEnabled: false,
           headerTitle: () => (
             <StepHeader
@@ -61,7 +61,7 @@ function DelegationFlow() {
         name={ScreenName.DelegationSelectValidator}
         component={DelegationSelectValidator}
         options={{
-          headerRight: null,
+          headerRight: undefined,
           gestureEnabled: false,
           headerTitle: () => (
             <StepHeader title={t("delegation.selectValidatorTitle")} />
@@ -102,9 +102,9 @@ function DelegationFlow() {
         name={ScreenName.DelegationValidationSuccess}
         component={DelegationValidationSuccess}
         options={{
-          headerLeft: null,
-          headerRight: null,
-          headerTitle: null,
+          headerLeft: undefined,
+          headerRight: undefined,
+          headerTitle: undefined,
           gestureEnabled: false,
         }}
       />

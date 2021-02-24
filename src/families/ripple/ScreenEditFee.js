@@ -15,7 +15,7 @@ const forceInset = { bottom: "always" };
 
 const options = {
   title: i18n.t("send.fees.title"),
-  headerLeft: null,
+  headerLeft: undefined,
 };
 
 type Props = {

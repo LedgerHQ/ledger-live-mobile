@@ -100,7 +100,7 @@ export default function SettingsNavigator() {
         component={CurrencySettings}
         options={({ route }) => ({
           title: route.params.headerTitle,
-          headerRight: null,
+          headerRight: undefined,
         })}
       />
       <Stack.Screen
