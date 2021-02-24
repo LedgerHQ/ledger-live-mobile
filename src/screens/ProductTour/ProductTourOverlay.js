@@ -502,6 +502,7 @@ const PortfolioOverlay = () => {
     }
   };
 
+  /*
   const skip = () => {
     next();
     ptContext.currentStep && completeStep(ptContext.currentStep);
@@ -509,6 +510,7 @@ const PortfolioOverlay = () => {
       screen: ScreenName.ProductTourMenu,
     });
   };
+  */
 
   const config = configArray[index];
 
@@ -569,7 +571,7 @@ const PortfolioOverlay = () => {
           styles.closeButton,
           config.cbPosition === "bottom" ? styles.cbBottom : styles.cbTop,
         ]}
-        onPress={skip}
+        onPress={next}
       >
         <LText style={styles.closeText} bold>
           <Trans i18nKey="producttour.overlay.closeText" />

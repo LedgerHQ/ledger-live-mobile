@@ -32,6 +32,10 @@ type State = {
   layouts: *,
   finishedModal: string | null,
 };
+type Action = {
+  type: string,
+  payload: *,
+};
 type StateUpdate = {
   completedSteps?: string[],
   dismissed?: boolean,
@@ -58,41 +62,56 @@ export let reportLayout: (
 ) => void = () => {};
 
 // reducer
-const reducer = (state: State, update: StateUpdate) => {
-  if (update.holeConfig && update.holeConfig.substring(0, 1) === "-") {
-    if (state.holeConfig && update.holeConfig === `-${state.holeConfig}`) {
-      // eslint-disable-next-line no-param-reassign
-      update.holeConfig = null;
-    } else {
-      // eslint-disable-next-line no-param-reassign
-      delete update.holeConfig;
-    }
+const reducer = (state: State, action: Action) => {
+  let update: StateUpdate = {};
+  switch (action.type) {
+    case "SET_STEP":
+      if (action.payload.substring(0, 1) === "-") {
+        if (state.currentStep && action.payload === `-${state.currentStep}`) {
+          update.currentStep = null;
+        }
+      } else {
+        update.currentStep = action.payload;
+      }
+      break;
+    case "COMPLETE_STEP":
+      update.completedSteps = _.uniq([...state.completedSteps, action.payload]);
+      break;
+    case "DISMISS":
+      update.dismissed = action.payload;
+      update.completedSteps = [];
+      break;
+    case "ENABLE_HOLE":
+      if (action.payload.substring(0, 1) === "-") {
+        if (state.holeConfig && action.payload === `-${state.holeConfig}`) {
+          update.holeConfig = null;
+        }
+      } else {
+        update.holeConfig = action.payload;
+      }
+      break;
+    case "ENABLE_FINISHED_MODAL":
+      update.finishedModal = action.payload;
+      break;
+    case "LAYOUT":
+      update.layouts = {
+        ...state.layouts,
+        ...action.payload,
+      };
+      break;
+    case "INIT":
+      update = {
+        ...action.payload,
+      };
+      update.initDone = true;
+      break;
+    default:
+      break;
   }
-  if (update.currentStep && update.currentStep.substring(0, 1) === "-") {
-    if (state.currentStep && update.currentStep === `-${state.currentStep}`) {
-      // eslint-disable-next-line no-param-reassign
-      update.currentStep = null;
-    } else {
-      // eslint-disable-next-line no-param-reassign
-      delete update.currentStep;
-    }
-  }
-  if (update.dismissed) {
-    // eslint-disable-next-line no-param-reassign
-    update.holeConfig = null;
-  }
+
   return {
     ...state,
     ...update,
-    completedSteps: update.dismissed
-      ? []
-      : _.uniq([...state.completedSteps, ...(update.completedSteps || [])]),
-    layouts: update.layouts
-      ? {
-          ...state.layouts,
-          ...update.layouts,
-        }
-      : state.layouts,
   };
 };
 const initialState = {
@@ -166,11 +185,13 @@ const Provider = ({ children }: { children: React$Node }) => {
   const hasInstalledAnyApp = useSelector(hasInstalledAnyAppSelector);
 
   // actions
-  setStep = currentStep => dispatch({ currentStep });
-  completeStep = step => dispatch({ completedSteps: [step] });
-  dismiss = dismissed => dispatch({ dismissed });
-  enableHole = holeConfig => dispatch({ holeConfig });
-  enableFinishedModal = finishedModal => dispatch({ finishedModal });
+  setStep = currentStep => dispatch({ type: "SET_STEP", payload: currentStep });
+  completeStep = step => dispatch({ type: "COMPLETE_STEP", payload: step });
+  dismiss = dismissed => dispatch({ type: "DISMISS", payload: dismissed });
+  enableHole = holeConfig =>
+    dispatch({ type: "ENABLE_HOLE", payload: holeConfig });
+  enableFinishedModal = finishedModal =>
+    dispatch({ type: "ENABLE_FINISHED_MODAL", payload: finishedModal });
   reportLayout = (ptIds = [], ref, extra = {}, mins = {}) => {
     InteractionManager.runAfterInteractions(() => {
       if (!ref.current) {
@@ -183,7 +204,8 @@ const Provider = ({ children }: { children: React$Node }) => {
         }
         ptIds.forEach(ptId => {
           dispatch({
-            layouts: {
+            type: "LAYOUT",
+            payload: {
               [ptId]: {
                 width: width + 10 + (extra.width || 0),
                 height: height + 10 + (extra.height || 0),
@@ -200,10 +222,10 @@ const Provider = ({ children }: { children: React$Node }) => {
   // effects
 
   useEffect(() => {
-    if (state.initDone && hasInstalledAnyApp) {
+    if (state.initDone && hasInstalledAnyApp && !state.dismissed) {
       completeStep("INSTALL_CRYPTO");
     }
-  }, [hasInstalledAnyApp, state.initDone]);
+  }, [hasInstalledAnyApp, state.initDone, state.dismissed]);
 
   useEffect(() => {
     if (state.initDone) {
@@ -212,9 +234,11 @@ const Provider = ({ children }: { children: React$Node }) => {
 
     const init = async () => {
       dispatch({
-        ...initialState,
-        ...((await getTourData()) || {}),
-        initDone: true,
+        type: "INIT",
+        payload: {
+          ...initialState,
+          ...((await getTourData()) || {}),
+        },
       });
     };
 
