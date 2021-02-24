@@ -5,9 +5,9 @@ import React, { useContext, useState, useEffect } from "react";
 import { StyleSheet, TouchableOpacity, Image } from "react-native";
 import { RNHoleView, ERNHoleViewTimingFunction } from "react-native-hole-view";
 import { Trans } from "react-i18next";
-import { context } from "./Provider";
-// import { ScreenName, NavigatorName } from "../../const";
-// import { navigate } from "../../rootnavigation";
+import { context, setStep } from "./Provider";
+import { ScreenName, NavigatorName } from "../../const";
+import { navigate } from "../../rootnavigation";
 import LText from "../../components/LText";
 
 const configs = {
@@ -502,15 +502,12 @@ const PortfolioOverlay = () => {
     }
   };
 
-  /*
   const skip = () => {
     next();
-    skipCurrentStep();
     navigate(NavigatorName.ProductTour, {
       screen: ScreenName.ProductTourMenu,
     });
   };
-  */
 
   const config = configArray[index];
 
@@ -556,21 +553,25 @@ const PortfolioOverlay = () => {
       <LText style={[textStyle, styles.tooltipText]} bold>
         <Trans i18nKey={text} />
       </LText>
-      {/* catchClick ? (
+      {index + 1 <= configArray.length ? (
         <TouchableOpacity
-          onPress={e => {
-            e.preventDefault();
-            next();
-          }}
-          style={[styles.fullscreen]}
-        />
-        ) : null */}
+          style={[
+            styles.nextButton,
+            config.cbPosition === "bottom" ? styles.cbBottom : styles.cbTop,
+          ]}
+          onPress={next}
+        >
+          <LText style={styles.closeText} bold>
+            <Trans i18nKey="producttour.overlay.nextText" />
+          </LText>
+        </TouchableOpacity>
+      ) : null}
       <TouchableOpacity
         style={[
           styles.closeButton,
           config.cbPosition === "bottom" ? styles.cbBottom : styles.cbTop,
         ]}
-        onPress={next}
+        onPress={skip}
       >
         <LText style={styles.closeText} bold>
           <Trans i18nKey="producttour.overlay.closeText" />
@@ -596,6 +597,15 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     position: "absolute",
     right: 16,
+    borderRadius: 4,
+    zIndex: 10,
+  },
+  nextButton: {
+    backgroundColor: "transparent",
+    borderColor: "#FFF",
+    borderWidth: 1,
+    position: "absolute",
+    left: 16,
     borderRadius: 4,
     zIndex: 10,
   },

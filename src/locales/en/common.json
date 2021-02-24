@@ -3569,6 +3569,7 @@
     },
     "overlay": {
       "closeText": "Skip Tutorial",
+      "nextText": "Next",
       "Porfolio-ManagerTab": "Go to the Manager to install\napps on your device.",
       "selectDevice": "Select your device",
       "Manager-managerDevice": "See an overview of your\nLedger hardware wallet here.",
