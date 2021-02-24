@@ -5,9 +5,9 @@ import React, { useContext, useState, useEffect } from "react";
 import { StyleSheet, TouchableOpacity, Image } from "react-native";
 import { RNHoleView, ERNHoleViewTimingFunction } from "react-native-hole-view";
 import { Trans } from "react-i18next";
-import { completeStep, context } from "./Provider";
-import { ScreenName, NavigatorName } from "../../const";
-import { navigate } from "../../rootnavigation";
+import { context } from "./Provider";
+// import { ScreenName, NavigatorName } from "../../const";
+// import { navigate } from "../../rootnavigation";
 import LText from "../../components/LText";
 
 const configs = {
@@ -505,7 +505,7 @@ const PortfolioOverlay = () => {
   /*
   const skip = () => {
     next();
-    ptContext.currentStep && completeStep(ptContext.currentStep);
+    skipCurrentStep();
     navigate(NavigatorName.ProductTour, {
       screen: ScreenName.ProductTourMenu,
     });
@@ -556,16 +556,15 @@ const PortfolioOverlay = () => {
       <LText style={[textStyle, styles.tooltipText]} bold>
         <Trans i18nKey={text} />
       </LText>
-      {catchClick ? (
+      {/* catchClick ? (
         <TouchableOpacity
-          /* android */
           onPress={e => {
             e.preventDefault();
             next();
           }}
           style={[styles.fullscreen]}
         />
-      ) : null}
+        ) : null */}
       <TouchableOpacity
         style={[
           styles.closeButton,
