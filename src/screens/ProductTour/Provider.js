@@ -23,6 +23,20 @@ export const STEPS = {
   CUSTOMIZE_APP: [],
 };
 
+const ACTIONS = _.reduce(
+  [
+    "SET_STEP",
+    "COMPLETE_STEP",
+    "DISMISS",
+    "ENABLE_HOLE",
+    "ENABLE_FINISHED_MODAL",
+    "LAYOUT",
+    "INIT",
+  ],
+  (acc, step) => ({ ...acc, [step]: step }),
+  {},
+);
+
 type State = {
   completedSteps: string[],
   dismissed: boolean,
@@ -31,10 +45,6 @@ type State = {
   holeConfig: string | null,
   layouts: *,
   finishedModal: string | null,
-};
-type Action = {
-  type: string,
-  payload: *,
 };
 type StateUpdate = {
   completedSteps?: string[],
@@ -45,6 +55,43 @@ type StateUpdate = {
   layouts?: *,
   finishedModal?: string | null,
 };
+type Layout = {
+  [string]: {
+    width: Number,
+    height: Number,
+    x: Number,
+    y: Number,
+  },
+};
+type Action =
+  | {
+      type: ACTIONS.SET_STEP,
+      payload: string,
+    }
+  | {
+      type: ACTIONS.COMPLETE_STEP,
+      payload: string,
+    }
+  | {
+      type: ACTIONS.DISMISS,
+      payload: Boolean,
+    }
+  | {
+      type: ACTIONS.ENABLE_HOLE,
+      payload: string,
+    }
+  | {
+      type: ACTIONS.ENABLE_FINISHED_MODAL,
+      payload: string,
+    }
+  | {
+      type: ACTIONS.LAYOUT,
+      payload: Layout,
+    }
+  | {
+      type: ACTIONS.INIT,
+      payload: StateUpdate,
+    };
 
 // actions
 export let setStep: (step: string | null) => void = () => {};
@@ -65,7 +112,7 @@ export let reportLayout: (
 const reducer = (state: State, action: Action) => {
   let update: StateUpdate = {};
   switch (action.type) {
-    case "SET_STEP":
+    case ACTIONS.SET_STEP:
       if (action.payload.substring(0, 1) === "-") {
         if (state.currentStep && action.payload === `-${state.currentStep}`) {
           update.currentStep = null;
@@ -74,14 +121,15 @@ const reducer = (state: State, action: Action) => {
         update.currentStep = action.payload;
       }
       break;
-    case "COMPLETE_STEP":
+    case ACTIONS.COMPLETE_STEP:
       update.completedSteps = _.uniq([...state.completedSteps, action.payload]);
+      update.finishedModal = null;
       break;
-    case "DISMISS":
+    case ACTIONS.DISMISS:
       update.dismissed = action.payload;
       update.completedSteps = [];
       break;
-    case "ENABLE_HOLE":
+    case ACTIONS.ENABLE_HOLE:
       if (action.payload.substring(0, 1) === "-") {
         if (state.holeConfig && action.payload === `-${state.holeConfig}`) {
           update.holeConfig = null;
@@ -90,16 +138,16 @@ const reducer = (state: State, action: Action) => {
         update.holeConfig = action.payload;
       }
       break;
-    case "ENABLE_FINISHED_MODAL":
+    case ACTIONS.ENABLE_FINISHED_MODAL:
       update.finishedModal = action.payload;
       break;
-    case "LAYOUT":
+    case ACTIONS.LAYOUT:
       update.layouts = {
         ...state.layouts,
         ...action.payload,
       };
       break;
-    case "INIT":
+    case ACTIONS.INIT:
       update = {
         ...action.payload,
       };
@@ -185,13 +233,16 @@ const Provider = ({ children }: { children: React$Node }) => {
   const hasInstalledAnyApp = useSelector(hasInstalledAnyAppSelector);
 
   // actions
-  setStep = currentStep => dispatch({ type: "SET_STEP", payload: currentStep });
-  completeStep = step => dispatch({ type: "COMPLETE_STEP", payload: step });
-  dismiss = dismissed => dispatch({ type: "DISMISS", payload: dismissed });
-  enableHole = holeConfig =>
-    dispatch({ type: "ENABLE_HOLE", payload: holeConfig });
-  enableFinishedModal = finishedModal =>
-    dispatch({ type: "ENABLE_FINISHED_MODAL", payload: finishedModal });
+  setStep = (currentStep: string) =>
+    dispatch({ type: ACTIONS.SET_STEP, payload: currentStep });
+  completeStep = (step: string) =>
+    dispatch({ type: ACTIONS.COMPLETE_STEP, payload: step });
+  dismiss = (dismissed: Boolean) =>
+    dispatch({ type: ACTIONS.DISMISS, payload: dismissed });
+  enableHole = (holeConfig: string) =>
+    dispatch({ type: ACTIONS.ENABLE_HOLE, payload: holeConfig });
+  enableFinishedModal = (finishedModal: string) =>
+    dispatch({ type: ACTIONS.ENABLE_FINISHED_MODAL, payload: finishedModal });
   reportLayout = (ptIds = [], ref, extra = {}, mins = {}) => {
     InteractionManager.runAfterInteractions(() => {
       if (!ref.current) {
@@ -203,16 +254,17 @@ const Provider = ({ children }: { children: React$Node }) => {
           return;
         }
         ptIds.forEach(ptId => {
-          dispatch({
-            type: "LAYOUT",
-            payload: {
-              [ptId]: {
-                width: width + 10 + (extra.width || 0),
-                height: height + 10 + (extra.height || 0),
-                x: x - 5 + (extra.x || 0),
-                y: y - 5 + (extra.y || 0),
-              },
+          const layout: Layout = {
+            [ptId]: {
+              width: width + 10 + (extra.width || 0),
+              height: height + 10 + (extra.height || 0),
+              x: x - 5 + (extra.x || 0),
+              y: y - 5 + (extra.y || 0),
             },
+          };
+          dispatch({
+            type: ACTIONS.LAYOUT,
+            payload: layout,
           });
         });
       });
@@ -233,12 +285,13 @@ const Provider = ({ children }: { children: React$Node }) => {
     }
 
     const init = async () => {
+      const state: StateUpdate = {
+        ...initialState,
+        ...((await getTourData()) || {}),
+      };
       dispatch({
-        type: "INIT",
-        payload: {
-          ...initialState,
-          ...((await getTourData()) || {}),
-        },
+        type: ACTIONS.INIT,
+        payload: state,
       });
     };
 

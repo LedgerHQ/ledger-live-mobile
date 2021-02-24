@@ -101,11 +101,12 @@ const ProductTourStepFinishedBottomModal = () => {
     ptContext.currentStep && ptContext.finishedModal === ptContext.currentStep;
 
   const onClose = () => {
-    completeStep(ptContext.currentStep);
+    if (ptContext.currentStep) {
+      completeStep(ptContext.currentStep);
+    }
     navigate(NavigatorName.ProductTour, {
       screen: ScreenName.ProductTourMenu,
     });
-    enableFinishedModal(null);
   };
 
   useEffect(() => {
