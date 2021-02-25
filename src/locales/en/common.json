@@ -1773,6 +1773,16 @@
         "disclaimer": "Please take note of your Swap ID number in case you’d need assistance from {{provider}} later.",
         "cta": "See details"
       },
+      "tradeMethod": {
+        "float": "Floating rate",
+        "floatUnavailable": "Floating rate not supported for this pair",
+        "fixed": "Fixed rate",
+        "fixedUnavailable": "Fixed rate not supported for this pair",
+        "floatDesc": "Your amount could change depending on the market conditions.",
+        "fixedDesc": "Your amount will remain the same irrespective of the changes on the market. Fixed rate updates every 30 seconds",
+        "by": "By",
+        "modalTitle": "Floating or fixed rate?"
+      },
       "form": {
         "validate": "Confirm Swap transaction",
         "tab": "Exchange",
@@ -1810,6 +1820,7 @@
           "send": "Send",
           "receive": "Receive",
           "provider": "Provider",
+          "method": "Rate",
           "fees": "Max fees",
           "disclaimer": {
             "title": "Terms and conditions",

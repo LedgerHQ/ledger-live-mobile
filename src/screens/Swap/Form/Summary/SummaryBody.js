@@ -123,6 +123,16 @@ const SummaryBody = ({
             <ExternalLink size={11} color={colors.live} />
           </TouchableOpacity>
         </View>
+        <View style={[styles.row, { marginBottom: 0 }]}>
+          <LText primary style={styles.label} color="smoke">
+            <Trans i18nKey="transfer.swap.form.summary.method" />
+          </LText>
+          <LText semiBold style={styles.providerLink}>
+            <Trans
+              i18nKey={`transfer.swap.tradeMethod.${exchangeRate.tradeMethod}`}
+            />
+          </LText>
+        </View>
       </View>
     </>
   );
