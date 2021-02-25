@@ -254,7 +254,7 @@ function Button({
   const containerSpecificProps = useTouchable ? {} : { enabled: !isDisabled };
 
   function getTestID() {
-    if (isDisabled || !isFocused) return undefined;
+    if (isDisabled || !otherProps.isFocused) return undefined;
     if (otherProps.testID) return otherProps.testID;
 
     switch (type) {
