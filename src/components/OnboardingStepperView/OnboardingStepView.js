@@ -1,9 +1,15 @@
 // @flow
 import React, { useCallback, useMemo, useState } from "react";
-import { View, StyleSheet, Pressable, Image, ScrollView } from "react-native";
+import {
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+  ScrollView,
+} from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { normalize } from "../../helpers/normalizeSize";
-import { TrackScreen } from "../../analytics";
+import { Track } from "../../analytics";
 
 import CheckBox from "../CheckBox";
 import ConfirmationModal from "../ConfirmationModal";
@@ -36,6 +42,7 @@ export type InfoStepViewProps = {
   ctaWarningCheckbox?: { desc: React$Node },
   children?: React$Node,
   ctaEvent?: string,
+  isActive?: boolean,
 };
 
 export function InfoStepView({
@@ -53,6 +60,7 @@ export function InfoStepView({
   onNext,
   sceneColors,
   trackPage,
+  isActive,
 }: InfoStepViewProps & {
   onNext: () => void,
   sceneColors: string[],
@@ -77,7 +85,9 @@ export function InfoStepView({
 
   return (
     <>
-      {trackPage && <TrackScreen category="Onboarding" name={trackPage} />}
+      {trackPage && isActive && (
+        <Track onMount event={`Page Onboarding ${trackPage}`} />
+      )}
       <ScrollView style={styles.spacer}>
         <View style={styles.infoStepView}>
           {children || (
@@ -126,7 +136,10 @@ export function InfoStepView({
                           ]}
                         >
                           {Icon ? (
-                            <Icon size={10} color={color || colors.live} />
+                            <Icon
+                              size={10}
+                              color={color ? colors[color] : colors.live}
+                            />
                           ) : (
                             <LText
                               semiBold
@@ -146,7 +159,9 @@ export function InfoStepView({
                             </LText>
                           ) : null}
                           {label ? (
-                            <LText style={[styles.label, { color: textColor }]}>
+                            <LText
+                              style={[styles.bulletLabel, { color: textColor }]}
+                            >
                               {label}
                             </LText>
                           ) : null}
@@ -154,7 +169,10 @@ export function InfoStepView({
                             ? labels.map((l, j) => (
                                 <LText
                                   key={i + j}
-                                  style={[styles.label, { color: textColor }]}
+                                  style={[
+                                    styles.bulletLabel,
+                                    { color: textColor },
+                                  ]}
                                 >
                                   {l}
                                 </LText>
@@ -187,7 +205,7 @@ export function InfoStepView({
           </View>
         )}
         {ctaText && (
-          <Pressable
+          <TouchableOpacity
             style={[
               styles.ctaButton,
               {
@@ -209,7 +227,7 @@ export function InfoStepView({
             >
               {ctaText}
             </LText>
-          </Pressable>
+          </TouchableOpacity>
         )}
         {ctaWarningModal && (
           <ConfirmationModal
@@ -269,6 +287,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     lineHeight: 24,
   },
+  bulletLabel: { fontSize: 13, lineHeight: 16 },
   warningCheckboxContainer: {
     flexDirection: "row",
     alignItems: "center",

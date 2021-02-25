@@ -1,6 +1,6 @@
 // @flow
 import React, { useState, useCallback } from "react";
-import { StyleSheet, TouchableOpacity } from "react-native";
+import { StyleSheet, TouchableOpacity, Platform } from "react-native";
 import Animated, { Extrapolate } from "react-native-reanimated";
 import { Trans } from "react-i18next";
 import { useTheme } from "@react-navigation/native";
@@ -42,7 +42,7 @@ export default function ExperimentalHeader() {
   // interpolated height from opening anim state for list container
   const height = interpolate(openingAnim, {
     inputRange: [0, 1],
-    outputRange: [0, 30],
+    outputRange: [0, Platform.OS === "ios" ? 70 : 30],
     extrapolate: Extrapolate.CLAMP,
   });
 
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
   },
   container: {
     position: "absolute",
-    bottom: -38,
+    bottom: Platform.OS === "ios" ? 0 : -30,
     left: 0,
     width: "100%",
     height: 38,
