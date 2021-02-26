@@ -1,5 +1,5 @@
 // @flow
-import React, { useCallback, Suspense } from "react";
+import React, { useCallback } from "react";
 import {
   SafeAreaView,
   StyleSheet,
@@ -15,6 +15,7 @@ import { useTheme } from "@react-navigation/native";
 
 import NewsRow from "./NewsRow";
 import LText from "../../components/LText";
+import FormatDate from "../../components/FormatDate";
 
 const viewabilityConfig = {
   viewAreaCoveragePercentThreshold: 95,
@@ -22,24 +23,16 @@ const viewabilityConfig = {
 
 export default function NotificationCenter() {
   const { colors, dark } = useTheme();
-  const {
-    cache,
-    seenIds,
-    allIds,
-    error,
-    isLoading,
-    setAsSeen,
-    updateCache,
-  } = useAnnouncements();
+  const { cache, setAsSeen, updateCache } = useAnnouncements();
 
   const onViewableItemsChanged = useCallback(
     ({ viewableItems }) => {
-      const viewedItems = viewableItems
+      viewableItems
         .filter(({ item }) => item && item.uuid)
-        .map(({ item }) => item.uuid);
-      if (seenIds.length !== viewedItems.length) setAsSeen(viewedItems);
+        .map(({ item }) => item.uuid)
+        .forEach(setAsSeen);
     },
-    [setAsSeen, seenIds],
+    [setAsSeen],
   );
 
   const sections = useGroupedAnnouncements(cache).map(d => ({
@@ -54,13 +47,13 @@ export default function NotificationCenter() {
         sections={sections}
         renderItem={props => <NewsRow {...props} />}
         renderSectionHeader={({ section: { title } }) =>
-          title ? (
+          title && title instanceof Date ? (
             <LText
               style={[styles.label, { backgroundColor: colors.lightFog }]}
               semiBold
               color="grey"
             >
-              {title}
+              <FormatDate date={title} />
             </LText>
           ) : null
         }

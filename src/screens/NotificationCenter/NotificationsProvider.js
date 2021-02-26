@@ -16,16 +16,24 @@ export default function NotificationsProvider({ children }: Props) {
   const currencies = c.map(({ family }) => family);
   const onLoad = useCallback(
     () =>
-      getNotifications().then(({ announcements = [], seenIds = [] }) => ({
-        announcements,
-        seenIds,
-      })),
+      getNotifications().then(dbData => {
+        const {
+          announcements = [],
+          seenIds = [],
+          lastUpdateTime = new Date().getTime(),
+        } = dbData || {};
+        return {
+          announcements,
+          seenIds,
+          lastUpdateTime,
+        };
+      }),
     [],
   );
 
   const onSave = useCallback(
-    ({ announcements, seenIds }) =>
-      saveNotifications({ announcements, seenIds }),
+    ({ announcements, seenIds, lastUpdateTime }) =>
+      saveNotifications({ announcements, seenIds, lastUpdateTime }),
     [],
   );
 

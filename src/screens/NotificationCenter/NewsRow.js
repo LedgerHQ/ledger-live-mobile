@@ -2,7 +2,7 @@
 import React from "react";
 import { View, StyleSheet, Linking } from "react-native";
 
-import type { AnnouncementBase } from "@ledgerhq/live-common/lib/announcements/types";
+import type { Announcement } from "@ledgerhq/live-common/lib/announcements/types";
 import { useTheme } from "@react-navigation/native";
 import { Trans } from "react-i18next";
 import LText from "../../components/LText";
@@ -11,7 +11,7 @@ import Warning from "../../icons/WarningOutline";
 import ExternalLink from "../../components/ExternalLink";
 
 type Props = {
-  item: AnnouncementBase,
+  item: Announcement,
   index: number,
   style?: *,
 };

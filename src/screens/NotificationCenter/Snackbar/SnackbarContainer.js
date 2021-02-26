@@ -75,7 +75,7 @@ function SnackbarContainerComponent({ announcements, status }: Props) {
 export default function SnackbarContainer() {
   const announcementsData = useAnnouncements();
   const statusData = useLedgerStatus();
-  return announcementsData.initialized && statusData.initialized ? (
+  return statusData.initialized ? (
     <SnackbarContainerComponent
       announcements={announcementsData}
       status={statusData}
