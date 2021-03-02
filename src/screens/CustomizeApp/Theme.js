@@ -14,8 +14,6 @@ import LText from "../../components/LText";
 import { useProductTourFinishedModal } from "../ProductTour/Provider";
 import IconArrowRight from "../../icons/ArrowRight";
 
-type RouteParams = {};
-
 const themes = {
   dark: require("../../images/producttour/theme-dark.png"),
   dusk: require("../../images/producttour/theme-dusk.png"),
