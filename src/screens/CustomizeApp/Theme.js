@@ -14,11 +14,6 @@ import LText from "../../components/LText";
 import { useProductTourFinishedModal } from "../ProductTour/Provider";
 import IconArrowRight from "../../icons/ArrowRight";
 
-type Props = {
-  navigation: any,
-  route: { params: RouteParams },
-};
-
 type RouteParams = {};
 
 const themes = {

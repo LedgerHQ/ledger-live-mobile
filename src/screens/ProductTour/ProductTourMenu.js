@@ -17,11 +17,12 @@ import LText from "../../components/LText";
 import Check from "../../icons/Check";
 import Lock from "../../icons/Lock";
 import { context, STEPS, setStep, completeStep } from "./Provider";
-import { ScreenName } from "../../const";
+import { ScreenName, NavigatorName } from "../../const";
 import StepLockedBottomModal from "./StepLockedBottomModal";
 import ProductTourProgressBar from "./ProductTourProgressBar";
 import Styles from "../../navigation/styles";
 import ArrowLeft from "../../icons/ArrowLeft";
+import { navigate } from "../../rootnavigation";
 
 const stepTitles = {
   INSTALL_CRYPTO: [
@@ -255,8 +256,10 @@ const ProductTourMenu = ({ navigation }: Props) => {
   };
 
   const onBack = useCallback(() => {
-    navigation.goBack();
-  }, [navigation]);
+    navigate(NavigatorName.Main, {
+      screen: ScreenName.Portfolio,
+    });
+  }, []);
 
   useFocusEffect(
     useCallback(() => {
