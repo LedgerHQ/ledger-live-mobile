@@ -9,25 +9,45 @@ import IconHelp from "../icons/Info";
 type Props = {
   children: React$Node,
   onLearnMore?: () => any,
+  forceColor: { background: string, text: string, icon: string },
 };
 
-export default function InfoBox({ children: description, onLearnMore }: Props) {
+export default function InfoBox({
+  children: description,
+  onLearnMore,
+  forceColor = {},
+}: Props) {
   const { colors } = useTheme();
+
+  const { background, text, icon } = forceColor;
+
+  const setColor = {
+    background: background || colors.pillActiveBackground,
+    text: text || colors.darkBlue,
+    icon: icon || colors.live,
+  };
+
   return (
     <View
       style={[
         styles.root,
         {
           backgroundColor: colors.pillActiveBackground,
-          color: colors.darkBlue,
         },
       ]}
     >
-      <IconHelp color={colors.live} size={16} />
+      <IconHelp color={setColor.icon} size={16} />
       <LText style={styles.content} color="live">
-        <LText fontSize={3}>{description}</LText>{" "}
+        <LText fontSize={3} style={{ color: setColor.text }}>
+          {description}
+        </LText>{" "}
         {onLearnMore && (
-          <LText style={styles.learnMore} fontSize={3} onPress={onLearnMore}>
+          <LText
+            style={styles.learnMore}
+            color="live"
+            fontSize={3}
+            onPress={onLearnMore}
+          >
             <Trans i18nKey={"common.learnMore"} />
           </LText>
         )}

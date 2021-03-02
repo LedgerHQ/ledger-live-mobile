@@ -60,6 +60,7 @@ import { useTrackingPairs } from "./actions/general";
 import { ScreenName, NavigatorName } from "./const";
 import ExperimentalHeader from "./screens/Settings/Experimental/ExperimentalHeader";
 import { lightTheme, duskTheme, darkTheme } from "./colors";
+import NavBarColorHandler from "./components/NavBarColorHandler";
 
 const themes = {
   light: lightTheme,
@@ -175,7 +176,7 @@ to play correctly with react navigation.
 
 const fixURL = url => {
   let NEWurl = url;
-  if (url.substr(0, 3) === "wc:") {
+  if (url && url.substr(0, 3) === "wc:") {
     NEWurl = `ledgerlive://wc?uri=${encodeURIComponent(url)}`;
   }
   return NEWurl;
@@ -368,8 +369,9 @@ export default class Root extends Component<
                 <WalletConnectProvider>
                   <DeepLinkingNavigator>
                     <SafeAreaProvider>
+                      <StyledStatusBar />
+                      <NavBarColorHandler />
                       <AuthPass>
-                        <StyledStatusBar />
                         <I18nextProvider i18n={i18n}>
                           <LocaleProvider>
                             <BridgeSyncProvider>
