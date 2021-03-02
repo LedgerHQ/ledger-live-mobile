@@ -30,7 +30,7 @@ const themes = {
   "light-selected": require("../../images/producttour/theme-light-selected.png"),
 };
 
-export default function Theme({ navigation }: Props) {
+export default function Theme() {
   const { colors } = useTheme();
   const theme = useSelector(themeSelector);
   const dispatch = useDispatch();

@@ -81,7 +81,7 @@ export default function MainNavigator({
             />
           ),
         }}
-        listeners={({ navigation }) => ({
+        listeners={() => ({
           tabPress: e => {
             if (ptContext.holeConfig) {
               enableHole(`-${ptContext.holeConfig}`);

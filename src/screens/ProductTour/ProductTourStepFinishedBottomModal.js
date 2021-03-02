@@ -8,11 +8,7 @@ import BottomModal from "../../components/BottomModal";
 import LText from "../../components/LText";
 import Button from "../../components/Button";
 import { screen } from "../../analytics/segment";
-import {
-  context as _ptContext,
-  enableFinishedModal,
-  completeStep,
-} from "./Provider";
+import { context as _ptContext, completeStep } from "./Provider";
 import ArrowRight from "../../icons/ArrowRight";
 import { ScreenName, NavigatorName } from "../../const";
 import { navigate } from "../../rootnavigation";

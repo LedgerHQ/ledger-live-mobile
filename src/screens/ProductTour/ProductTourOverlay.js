@@ -5,7 +5,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { StyleSheet, TouchableOpacity, Image } from "react-native";
 import { RNHoleView, ERNHoleViewTimingFunction } from "react-native-hole-view";
 import { Trans } from "react-i18next";
-import { context, setStep } from "./Provider";
+import { context } from "./Provider";
 import { ScreenName, NavigatorName } from "../../const";
 import { navigate } from "../../rootnavigation";
 import LText from "../../components/LText";
