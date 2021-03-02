@@ -19,6 +19,7 @@ import PairNewDeviceButton from "./PairNewDeviceButton";
 import { reportLayout } from "../../screens/ProductTour/Provider";
 
 import lottieUsb from "../../screens/Onboarding/assets/nanoS/plugDevice/data.json";
+import { track } from "../../analytics";
 
 type Props = {
   onBluetoothDeviceAction?: (device: Device) => void,
@@ -41,25 +42,37 @@ export default function SelectDevice({
   const navigation = useNavigation();
   const knownDevices = useSelector(knownDevicesSelector);
 
+  const handleOnSelect = useCallback(
+    deviceInfo => {
+      const { modelId, wired } = deviceInfo;
+      track("Device selection", {
+        modelId,
+        connectionType: wired ? "USB" : "BLE",
+      });
+      onSelect(deviceInfo);
+    },
+    [onSelect],
+  );
+
   const [devices, setDevices] = useState([]);
 
   const onPairNewDevice = useCallback(() => {
     navigation.navigate(ScreenName.PairDevices, {
-      onDone: autoSelectOnAdd ? onSelect : null,
+      onDone: autoSelectOnAdd ? handleOnSelect : null,
     });
-  }, [autoSelectOnAdd, navigation, onSelect]);
+  }, [autoSelectOnAdd, navigation, handleOnSelect]);
 
   const renderItem = useCallback(
     (item: Device) => (
       <DeviceItem
         key={item.deviceId}
         deviceMeta={item}
-        onSelect={onSelect}
+        onSelect={handleOnSelect}
         withArrow={!!withArrows}
         onBluetoothDeviceAction={onBluetoothDeviceAction}
       />
     ),
-    [withArrows, onBluetoothDeviceAction, onSelect],
+    [withArrows, onBluetoothDeviceAction, handleOnSelect],
   );
 
   const all: Device[] = getAll({ knownDevices }, { devices });

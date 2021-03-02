@@ -186,9 +186,6 @@
       "title": "Something went wrong (Error #17)",
       "description": "Please contact Ledger Support."
     },
-    "CosmosStargateFeb2021Warning": {
-      "description": "The Cosmos blockchain is planning for an on-chain update on Feb 18th. Coming Ledger Live 2.22.0 will continue supporting ATOM."
-    },
     "DeviceAppVerifyNotSupported": {
       "title": "Open Manager to update this app",
       "description": "The app verification is not supported."
@@ -384,7 +381,7 @@
     },
     "SyncError": {
       "title": "Synchronization error",
-      "description": "Some accounts could not be synchronized. Please consult our article on synchronization errors."
+      "description": "Some accounts could not be synchronized."
     },
     "TimeoutError": {
       "title": "Sorry, server took too long to respond",
@@ -993,7 +990,7 @@
           },
           "1": {
             "title": "Select recovery phrase length",
-            "label": "Your Recovery phrases can have 12, 18 or 24 words. You must enter all words to access your crypto."
+            "label": "Your recovery phrase can have 12, 18 or 24 words. You must enter all words to access your crypto."
           },
           "2": {
             "title": "Enter Word #1...",
@@ -3026,6 +3023,7 @@
     "lockedBalance": "Bonded balance",
     "unlockingBalance": "Unbonding balance",
     "unlockedBalance": "Unbonded balance",
+    "networkFees": "Network fees are automatically set by the Polkadot consensus, you won't be able to review them on your device",
     "info": {
       "available": {
         "title": "DOT available",
@@ -3145,7 +3143,10 @@
         "stash": "Available balance",
         "stashDescription": "Rewards are credited to your available balance.",
         "staked": "Bonded balance",
-        "stakedDescription": "Rewards are credited to your bonded balance for compound earning."
+        "stakedDescription": "Rewards are credited to your bonded balance for compound earning.",
+        "optionTitle": "Note",
+        "optionDescription": "Once set, the option is fixed for the lifetime of this bond. If you change your mind, please read ",
+        "clickableLink": "here."
       },
       "stepperHeader": {
         "starter": "Earn rewards",

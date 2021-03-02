@@ -63,6 +63,7 @@ import { useTrackingPairs } from "./actions/general";
 import { ScreenName, NavigatorName } from "./const";
 import ExperimentalHeader from "./screens/Settings/Experimental/ExperimentalHeader";
 import { lightTheme, duskTheme, darkTheme } from "./colors";
+import NavBarColorHandler from "./components/NavBarColorHandler";
 
 const themes = {
   light: lightTheme,
@@ -372,6 +373,7 @@ export default class Root extends Component<
                   <DeepLinkingNavigator>
                     <SafeAreaProvider>
                       <StyledStatusBar />
+                      <NavBarColorHandler />
                       <AuthPass>
                         <I18nextProvider i18n={i18n}>
                           <LocaleProvider>

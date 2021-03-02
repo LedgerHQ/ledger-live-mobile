@@ -18,7 +18,7 @@ export const urls = {
   feesEthereum:
     "https://support.ledger.com/hc/en-us/articles/115005197845?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=eth_fees",
   feesPolkadot:
-    "https://support.ledger.com/hc/en-us/articles/360018131220?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=dot_fees",
+    "https://support.ledger.com/hc/en-us/articles/360016289919?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=dot_fees",
   verifyTransactionDetails:
     "https://support.ledger.com/hc/en-us/articles/360006444193?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=tx_device_check",
   erc20:
@@ -30,8 +30,6 @@ export const urls = {
       "https://support.ledger.com/hc/en-us/articles/360012109220?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=error_syncerror",
     LedgerAPIErrorWithMessage:
       "https://status.ledger.com?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=error_apierrorwithmessage",
-    CosmosStargateFeb2021Warning:
-      "https://support.ledger.com/hc/en-us/articles/360013713840-Cosmos-ATOM-",
     StratisDown2021Warning:
       "https://support.ledger.com/hc/en-us/articles/115005175329",
   },
