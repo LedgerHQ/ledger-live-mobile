@@ -4,6 +4,7 @@ import { RefreshControl } from "react-native";
 import { useBridgeSync } from "@ledgerhq/live-common/lib/bridge/react";
 import { useCountervaluesPolling } from "@ledgerhq/live-common/lib/countervalues/react";
 import { useTheme } from "@react-navigation/native";
+import { useNetInfo } from "@react-native-community/netinfo";
 import { SYNC_DELAY } from "../constants";
 
 type Props = {
@@ -15,12 +16,14 @@ type Props = {
 
 export default (ScrollListLike: any) => {
   function Inner({ forwardedRef, ...scrollListLikeProps }: Props) {
+    const { isInternetReachable, isConnected } = useNetInfo();
     const { colors, dark } = useTheme();
     const [refreshing, setRefreshing] = useState(false);
     const setSyncBehavior = useBridgeSync();
     const { poll } = useCountervaluesPolling();
 
     function onRefresh() {
+      if (!isInternetReachable || !isConnected) return;
       poll();
       setSyncBehavior({
         type: "SYNC_ALL_ACCOUNTS",

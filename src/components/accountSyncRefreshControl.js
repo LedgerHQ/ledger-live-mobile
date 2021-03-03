@@ -7,6 +7,7 @@ import {
 } from "@ledgerhq/live-common/lib/bridge/react";
 import type { Sync } from "@ledgerhq/live-common/lib/bridge/react/types";
 import { useCountervaluesPolling } from "@ledgerhq/live-common/lib/countervalues/react";
+import { useNetInfo } from "@react-native-community/netinfo";
 import { SYNC_DELAY } from "../constants";
 
 type Props = {
@@ -25,6 +26,7 @@ export default (ScrollListLike: any) => {
     forwardedRef,
     ...scrollListLikeProps
   }: Props) {
+    const { isInternetReachable, isConnected } = useNetInfo();
     const { pending: isPending } = useAccountSyncState({ accountId });
     const setSyncBehavior = useBridgeSync();
     const { poll } = useCountervaluesPolling();
@@ -32,6 +34,7 @@ export default (ScrollListLike: any) => {
     const [refreshing, setRefreshing] = useState(false);
 
     function onPress() {
+      if (!isInternetReachable || !isConnected) return;
       poll();
       setSyncBehavior({
         type: "SYNC_ONE_ACCOUNT",
