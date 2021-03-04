@@ -55,6 +55,7 @@ export default function AccountActions({ account, parentAccount }: Props) {
 
   const onNavigate = useCallback(
     (name: string, options?: NavOptions) => {
+      setNext();
       navigation.navigate(name, {
         ...options,
         params: {
@@ -86,7 +87,8 @@ export default function AccountActions({ account, parentAccount }: Props) {
 
   const goToNext = useCallback(() => {
     if (next) {
-      onNavigate(...next);
+      // workaround for bottom modal + text input autoFocus issue
+      setTimeout(() => onNavigate(...next), 0);
     }
   }, [onNavigate, next]);
 
