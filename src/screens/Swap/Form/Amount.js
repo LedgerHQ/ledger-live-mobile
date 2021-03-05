@@ -200,6 +200,14 @@ const SwapFormAmount = ({ navigation, route }: Props) => {
     },
   ];
 
+  const toValue = rate
+    ? transaction.amount
+        .times(rate.magnitudeAwareRate)
+        .minus(rate.payoutNetworkFees || 0)
+    : null;
+
+  const actualRate = toValue ? toValue.dividedBy(transaction.amount) : null;
+
   return (
     <KeyboardView style={styles.container}>
       <View style={styles.toggleWrapper}>
@@ -209,11 +217,11 @@ const SwapFormAmount = ({ navigation, route }: Props) => {
           onChange={onTradeMethodChange}
         />
       </View>
-      {rate && rateExpiration ? (
+      {actualRate && rateExpiration ? (
         <Rate
           rateExpiration={rateExpiration}
           tradeMethod={tradeMethod}
-          magnitudeAwareRate={rate.magnitudeAwareRate}
+          magnitudeAwareRate={actualRate}
           fromCurrency={fromCurrency}
           toCurrency={toCurrency}
           onRatesExpired={setRate}
@@ -249,9 +257,7 @@ const SwapFormAmount = ({ navigation, route }: Props) => {
         <CurrencyInput
           isActive={false}
           unit={toUnit}
-          value={
-            rate ? transaction.amount.times(rate.magnitudeAwareRate) : null
-          }
+          value={toValue}
           placeholder={"0"}
           editable={false}
           showAllDigits

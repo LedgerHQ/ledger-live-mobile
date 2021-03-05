@@ -36,7 +36,7 @@ const SummaryBody = ({
   const { fromAccount, toAccount } = exchange;
   const fromCurrency = getAccountCurrency(fromAccount);
   const toCurrency = getAccountCurrency(toAccount);
-  const { magnitudeAwareRate } = exchangeRate;
+  const { magnitudeAwareRate, payoutNetworkFees } = exchangeRate;
   const { amount } = status;
 
   const openProvider = useCallback(() => {
@@ -104,7 +104,9 @@ const SummaryBody = ({
             disableRounding
             showCode
             unit={getAccountUnit(toAccount)}
-            value={amount.times(magnitudeAwareRate)}
+            value={amount
+              .times(magnitudeAwareRate)
+              .minus(payoutNetworkFees || 0)}
           />
         </LText>
       </View>
