@@ -19,12 +19,17 @@ node_modules/warning/.*
 
 .*/node_modules/react-native-gesture-handler/Swipeable.js
 
+
+
 .*/TcpSocket.js
 .*/TcpServer.js
 .*/core-js/.*
 
 [untyped]
 .*/node_modules/@react-native-community/cli/.*/.*
+
+; Creates weird flow erros, ignoring for now
+.*/node_modules/@ledgerhq/react-native-hw-transport-ble/lib/BleTransport.js
 
 ; Ignore react native camera until we have defs
 .*/node_modules/react-native-camera/.*

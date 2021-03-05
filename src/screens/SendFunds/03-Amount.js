@@ -1,4 +1,5 @@
 /* @flow */
+import invariant from "invariant";
 import { BigNumber } from "bignumber.js";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
 import React, { useCallback, useState, useEffect } from "react";
@@ -82,6 +83,8 @@ export default function SendAmount({ navigation, route }: Props) {
     };
   }, [account, parentAccount, debouncedTransaction]);
 
+  invariant(account, "account is needed");
+
   const onChange = useCallback(
     amount => {
       if (!amount.isNaN()) {
@@ -107,7 +110,6 @@ export default function SendAmount({ navigation, route }: Props) {
   }, [setTransaction, account, parentAccount, transaction]);
 
   const onContinue = useCallback(() => {
-    if (!account) return;
     navigation.navigate(ScreenName.SendSummary, {
       accountId: account.id,
       parentId: parentAccount && parentAccount.id,
@@ -128,7 +130,6 @@ export default function SendAmount({ navigation, route }: Props) {
   const onBridgeErrorRetry = useCallback(() => {
     setBridgeErr(null);
     if (!transaction) return;
-    if (!account) return;
     const bridge = getAccountBridge(account, parentAccount);
     setTransaction(bridge.updateTransaction(transaction, {}));
   }, [setTransaction, account, parentAccount, transaction]);

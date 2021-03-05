@@ -251,7 +251,7 @@ export default function DeviceAction<R, H, P>({
   return null;
 }
 
-// workarround for not updating state inside scope of main function with a callback
+// work around for not updating state inside scope of main function with a callback
 const RenderOnResultCallback = ({
   onResult,
   payload,

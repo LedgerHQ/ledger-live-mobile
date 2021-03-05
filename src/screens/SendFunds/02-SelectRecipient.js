@@ -1,4 +1,5 @@
 /* @flow */
+import invariant from "invariant";
 import { RecipientRequired } from "@ledgerhq/errors";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import {
@@ -51,6 +52,7 @@ export default function SendSelectRecipient({ navigation, route }: Props) {
   const { colors } = useTheme();
   const { t } = useTranslation();
   const { account, parentAccount } = useSelector(accountScreenSelector(route));
+
   const {
     transaction,
     setTransaction,
@@ -97,6 +99,8 @@ export default function SendSelectRecipient({ navigation, route }: Props) {
 
   useEffect(() => setBridgeErr(bridgeError), [bridgeError]);
 
+  invariant(account, "account is needed ");
+
   const onBridgeErrorCancel = useCallback(() => {
     setBridgeErr(null);
     const parent = navigation.dangerouslyGetParent();
@@ -106,14 +110,11 @@ export default function SendSelectRecipient({ navigation, route }: Props) {
   const onBridgeErrorRetry = useCallback(() => {
     setBridgeErr(null);
     if (!transaction) return;
-    if (!account) return;
     const bridge = getAccountBridge(account, parentAccount);
     setTransaction(bridge.updateTransaction(transaction, {}));
   }, [setTransaction, account, parentAccount, transaction]);
 
   const onPressContinue = useCallback(async () => {
-    if (!account) return;
-
     navigation.navigate(ScreenName.SendAmount, {
       accountId: account.id,
       parentId: parentAccount && parentAccount.id,

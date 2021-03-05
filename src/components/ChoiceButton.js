@@ -26,7 +26,7 @@ const ChoiceButton = ({
   label,
   description,
   Icon,
-  extra = "",
+  extra,
   onSelect,
   navigationParams,
   enableActions,
