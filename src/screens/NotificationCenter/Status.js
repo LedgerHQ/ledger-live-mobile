@@ -10,15 +10,55 @@ import {
 import { useTheme } from "@react-navigation/native";
 import { Trans } from "react-i18next";
 
-import { useLedgerStatus } from "@ledgerhq/live-common/lib/announcements/status/react";
+import { useServiceStatus } from "@ledgerhq/live-common/lib/providers/ServiceStatusProvider";
+import type { Incident } from "@ledgerhq/live-common/lib/providers/ServiceStatusProvider/types";
 import CheckCircle from "../../icons/CheckCircle";
 import Warning from "../../icons/WarningOutline";
 import LText from "../../components/LText";
-import NewsRow from "./NewsRow";
+import ExternalLink from "../../components/ExternalLink";
 import { urls } from "../../config/urls";
 
+type Props = {
+  item: Incident,
+  index: number,
+  style?: *,
+};
+
+const IncidentRow = ({ item, style }: Props) => {
+  const { colors } = useTheme();
+  const { id, incident_updates: incidentUpdates, name, shortlink } = item;
+
+  return (
+    <View style={[styles.row, style]}>
+      <View style={styles.leftSection}>
+        <Warning size={16} color={colors.orange} />
+      </View>
+      <View style={styles.rightSection}>
+        <LText semiBold style={[styles.rowTitle, { color: colors.darkBlue }]}>
+          {name}
+        </LText>
+        {incidentUpdates &&
+          incidentUpdates.length &&
+          incidentUpdates.map(({ body }) => (
+            <LText style={[styles.text, { color: colors.grey }]}>{body}</LText>
+          ))}
+        {shortlink && (
+          <View style={styles.link}>
+            <ExternalLink
+              event="StatusLearnMore"
+              eventProperties={{ id }}
+              text={<Trans i18nKey="common.learnMore" />}
+              onPress={() => Linking.openURL(shortlink)}
+            />
+          </View>
+        )}
+      </View>
+    </View>
+  );
+};
+
 export default function NotificationCenter() {
-  const { incidents } = useLedgerStatus();
+  const { incidents } = useServiceStatus();
   const { colors } = useTheme();
 
   const onHelpPageRedirect = useCallback(() => {
@@ -39,12 +79,12 @@ export default function NotificationCenter() {
         contentContainerStyle={styles.listContainer}
         data={incidents}
         renderItem={props => (
-          <NewsRow
+          <IncidentRow
             {...props}
             style={[styles.border, { borderColor: colors.lightFog }]}
           />
         )}
-        keyExtractor={(item, index) => item.uuid + index}
+        keyExtractor={(item, index) => item.id + index}
         ItemSeparatorComponent={() => (
           <View
             style={[styles.separator, { backgroundColor: colors.lightFog }]}
@@ -91,5 +131,34 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 1,
     marginBottom: 8,
+  },
+  row: {
+    flexDirection: "row",
+    padding: 16,
+    borderRadius: 4,
+    marginBottom: 8,
+  },
+  leftSection: {
+    width: 16,
+    marginRight: 16,
+    flexDirection: "column",
+    justifyContent: "flex-start",
+    alignItems: "flex-start",
+  },
+  rightSection: {
+    flex: 1,
+    flexDirection: "column",
+    justifyContent: "flex-start",
+    alignItems: "flex-start",
+  },
+  rowTitle: {
+    fontSize: 14,
+    marginBottom: 4,
+  },
+  text: {
+    fontSize: 13,
+  },
+  link: {
+    marginTop: 16,
   },
 });

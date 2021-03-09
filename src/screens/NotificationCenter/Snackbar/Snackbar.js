@@ -5,7 +5,6 @@ import {
   StyleSheet,
   TouchableOpacity,
   TouchableHighlight,
-  Dimensions,
 } from "react-native";
 import Animated, {
   set,
@@ -13,12 +12,10 @@ import Animated, {
   Extrapolate,
   useCode,
   Easing,
-  multiply,
 } from "react-native-reanimated";
 import { useClock, timing } from "react-native-redash/lib/module/v1";
-import type { Announcement } from "@ledgerhq/live-common/lib/announcements/types";
+import type { ToastData } from "@ledgerhq/live-common/lib/providers/ToastProvider/types";
 import { useTheme } from "@react-navigation/native";
-import { Trans } from "react-i18next";
 
 import getWindowDimensions from "../../../logic/getWindowDimensions";
 import LText from "../../../components/LText";
@@ -33,10 +30,9 @@ const AnimatedTouchableOpacity = Animated.createAnimatedComponent(
 );
 
 type Props = {
-  announcement: Announcement,
-  isStatus?: boolean,
-  onPress: () => void,
-  onClose: () => void,
+  toast: ToastData,
+  onPress: (toast: ToastData) => void,
+  onClose: (toast: ToastData) => void,
 };
 
 const icons = {
@@ -44,12 +40,7 @@ const icons = {
   warning: Warning,
 };
 
-export default function Snackbar({
-  announcement,
-  isStatus,
-  onPress,
-  onClose,
-}: Props) {
+export default function Snackbar({ toast, onPress, onClose }: Props) {
   const [anim] = useState(new Animated.Value(0));
 
   const clock = useClock();
@@ -72,13 +63,16 @@ export default function Snackbar({
 
   const handleClose = useCallback(() => {
     setIsClosed(true);
-    setTimeout(onClose, 1000);
-  }, [setIsClosed, onClose]);
+    setTimeout(() => onClose(toast), 1000);
+  }, [onClose, toast]);
+
+  const handleOnPress = useCallback(() => {
+    onPress(toast);
+  }, [onPress, toast]);
 
   const { colors } = useTheme();
 
-  const { content, icon } = announcement;
-  const { title } = content;
+  const { title, type, icon } = toast;
 
   const iconColors = {
     info: colors.live,
@@ -124,7 +118,7 @@ export default function Snackbar({
           marginBottom,
         },
       ]}
-      onPress={onPress}
+      onPress={handleOnPress}
       underlayColor={colors.live}
     >
       <View style={styles.container}>
@@ -133,11 +127,7 @@ export default function Snackbar({
         </View>
         <View style={styles.rightSection}>
           <LText bold style={styles.subTitle} color="grey">
-            <Trans
-              i18nKey={`notificationCenter.${
-                isStatus ? "liveStatus" : "announcement"
-              }`}
-            />
+            {type}
           </LText>
           <LText
             semiBold

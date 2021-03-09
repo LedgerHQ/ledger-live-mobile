@@ -7,10 +7,8 @@ import {
   RefreshControl,
   View,
 } from "react-native";
-import {
-  useAnnouncements,
-  useGroupedAnnouncements,
-} from "@ledgerhq/live-common/lib/announcements/react";
+import { useAnnouncements } from "@ledgerhq/live-common/lib/providers/AnnouncementProvider";
+import { groupAnnouncements } from "@ledgerhq/live-common/lib/providers/AnnouncementProvider/helpers";
 import { useTheme } from "@react-navigation/native";
 
 import NewsRow from "./NewsRow";
@@ -23,7 +21,7 @@ const viewabilityConfig = {
 
 export default function NotificationCenter() {
   const { colors, dark } = useTheme();
-  const { cache, setAsSeen, updateCache } = useAnnouncements();
+  const { cache, setAsSeen, updateCache, allIds } = useAnnouncements();
 
   const onViewableItemsChanged = useCallback(
     ({ viewableItems }) => {
@@ -35,10 +33,12 @@ export default function NotificationCenter() {
     [setAsSeen],
   );
 
-  const sections = useGroupedAnnouncements(cache).map(d => ({
-    ...d,
-    title: d.day,
-  }));
+  const sections = groupAnnouncements(allIds.map(uuid => cache[uuid])).map(
+    d => ({
+      ...d,
+      title: d.day,
+    }),
+  );
 
   return (
     <SafeAreaView style={styles.root}>

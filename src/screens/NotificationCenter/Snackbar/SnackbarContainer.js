@@ -2,84 +2,44 @@
 import React, { useCallback } from "react";
 import { View, StyleSheet } from "react-native";
 
-import {
-  useAnnouncements,
-  useNewAnnouncements,
-} from "@ledgerhq/live-common/lib/announcements/react";
-import {
-  useLedgerStatus,
-  useNewLedgerStatus,
-} from "@ledgerhq/live-common/lib/announcements/status/react";
-import type { AnnouncementContextType } from "@ledgerhq/live-common/lib/announcements/react";
-import type { StatusContextType } from "@ledgerhq/live-common/lib/announcements/status/react";
+import { useToasts } from "@ledgerhq/live-common/lib/providers/ToastProvider/index";
+import type { ToastData } from "@ledgerhq/live-common/lib/providers/ToastProvider/types";
+
 import Snackbar from "./Snackbar";
 import * as RootNavigation from "../../../rootnavigation.js";
 import { NavigatorName, ScreenName } from "../../../const";
 
-type Props = {
-  announcements: AnnouncementContextType,
-  status: StatusContextType,
-};
+export default function SnackbarContainer() {
+  const { dismissToast, toasts } = useToasts();
 
-function SnackbarContainerComponent({ announcements, status }: Props) {
-  const [
-    newAnnouncements,
-    clearAnnouncement,
-    clearAllAnnouncements,
-  ] = useNewAnnouncements(announcements);
-  const [
-    newStatusMessages,
-    clearStatusMessage,
-    clearAllStatusmessages,
-  ] = useNewLedgerStatus(status);
+  const navigate = useCallback(
+    (toast: ToastData) => {
+      if (toast.type === "announcement") {
+        dismissToast(toast.id);
+        RootNavigation.navigate(NavigatorName.NotificationCenter, {
+          screen: ScreenName.NotificationCenterNews,
+        });
+      }
+    },
+    [dismissToast],
+  );
 
-  const navigateToNotificationCenter = useCallback(() => {
-    clearAllAnnouncements();
-    clearAllStatusmessages();
-    RootNavigation.navigate(NavigatorName.NotificationCenter, {
-      screen: ScreenName.NotificationCenterNews,
-    });
-  }, [clearAllAnnouncements, clearAllStatusmessages]);
+  const handleDismissToast = useCallback(
+    (toast: ToastData) => dismissToast(toast.id),
+    [dismissToast],
+  );
 
-  const navigateToStatusPage = useCallback(() => {
-    clearAllAnnouncements();
-    clearAllStatusmessages();
-    RootNavigation.navigate(NavigatorName.NotificationCenter, {
-      screen: ScreenName.NotificationCenterStatus,
-    });
-  }, [clearAllAnnouncements, clearAllStatusmessages]);
-
-  return (
+  return toasts && toasts.length ? (
     <View style={styles.root}>
-      {newStatusMessages.map(a => (
+      {toasts.map(a => (
         <Snackbar
-          announcement={a}
-          isStatus
-          key={a.uuid}
-          onPress={navigateToStatusPage}
-          onClose={() => clearStatusMessage(a.uuid)}
-        />
-      ))}
-      {newAnnouncements.map(a => (
-        <Snackbar
-          announcement={a}
-          key={a.uuid}
-          onPress={navigateToNotificationCenter}
-          onClose={() => clearAnnouncement(a.uuid)}
+          toast={a}
+          key={a.id}
+          onPress={navigate}
+          onClose={handleDismissToast}
         />
       ))}
     </View>
-  );
-}
-
-export default function SnackbarContainer() {
-  const announcementsData = useAnnouncements();
-  const statusData = useLedgerStatus();
-  return statusData.initialized ? (
-    <SnackbarContainerComponent
-      announcements={announcementsData}
-      status={statusData}
-    />
   ) : null;
 }
 
