@@ -13,11 +13,12 @@ import Spinning from "../Spinning";
 import BigSpinner from "../../icons/BigSpinner";
 import { lighten } from "../../colors";
 import Button from "../Button";
-import { NavigatorName } from "../../const";
+import { NavigatorName, ScreenName } from "../../const";
 import Animation from "../Animation";
 import getDeviceAnimation from "./getDeviceAnimation";
 import GenericErrorView from "../GenericErrorView";
 import Circle from "../Circle";
+import { MANAGER_TABS } from "../../screens/Manager/Manager";
 
 type RawProps = {
   t: (key: string, options?: { [key: string]: string }) => string,
@@ -280,25 +281,44 @@ export function renderError({
   t,
   error,
   onRetry,
+  managerAppName,
+  navigation,
 }: {
   ...RawProps,
   error: Error,
   onRetry?: () => void,
+  managerAppName?: string,
 }) {
   return (
     <View style={styles.wrapper}>
       <GenericErrorView error={error} withDescription withIcon />
-      {onRetry && (
+      {onRetry || managerAppName ? (
         <View style={styles.actionContainer}>
           <Button
             event="DeviceActionErrorRetry"
             type="primary"
-            title={t("common.retry")}
-            onPress={onRetry}
+            title={
+              managerAppName
+                ? t("DeviceAction.button.openManager")
+                : t("common.retry")
+            }
+            onPress={
+              managerAppName
+                ? () => {
+                    navigation.navigate(NavigatorName.Manager, {
+                      screen: ScreenName.Manager,
+                      params: {
+                        tab: MANAGER_TABS.INSTALLED_APPS,
+                        updateModalOpened: true,
+                      },
+                    });
+                  }
+                : onRetry
+            }
             containerStyle={styles.button}
           />
         </View>
-      )}
+      ) : null}
     </View>
   );
 }
