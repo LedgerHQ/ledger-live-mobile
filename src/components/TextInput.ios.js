@@ -1,6 +1,6 @@
 /* @flow */
 
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { useTheme } from "@react-navigation/native";
 import {
   View,
@@ -18,6 +18,8 @@ const TextInput = ({
   onInputCleared,
   clearButtonMode,
   value,
+  onFocus,
+  onBlur,
   ...otherProps
 }: *) => {
   const { colors, dark } = useTheme();
@@ -34,18 +36,28 @@ const TextInput = ({
     ((focused && clearButtonMode === "while-editing") ||
       clearButtonMode === "always");
 
+  const onWrappedFocus = useCallback(() => {
+    if (onFocus) onFocus();
+    setFocused(true);
+  }, [onFocus]);
+
+  const onWrappedBlur = useCallback(() => {
+    if (onBlur) onBlur();
+    setFocused(false);
+  }, [onBlur]);
+
   return (
     <View style={[styles.container, containerStyle]}>
       <ReactNativeTextInput
         ref={innerRef}
-        keyboardAppearance={dark ? "dark" : "light"}
-        allowFontScaling={false}
-        onBlur={() => setFocused(false)}
-        onFocus={() => setFocused(true)}
-        value={value}
-        {...otherProps}
-        {...flags}
         style={[style, { color: colors.darkBlue }]}
+        keyboardAppearance={dark ? "dark" : "light"}
+        {...otherProps}
+        onBlur={onWrappedFocus}
+        onFocus={onWrappedBlur}
+        value={value}
+        allowFontScaling={false}
+        {...flags}
       />
       {shouldShowClearButton ? (
         <Touchable
@@ -60,11 +72,16 @@ const TextInput = ({
   );
 };
 
-export default TextInput;
+// $FlowFixMe https://github.com/facebook/flow/pull/5920
+export default React.forwardRef((props, ref) => (
+  <TextInput innerRef={ref} {...props} />
+));
 
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
+    display: "flex",
+    width: "100%",
   },
   clearWrapper: {
     paddingHorizontal: 10,

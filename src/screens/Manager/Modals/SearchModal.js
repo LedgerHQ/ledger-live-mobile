@@ -399,7 +399,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "flex-start",
     borderRadius: 3,
-    paddingRight: Platform.OS === "ios" ? 0 : 44,
+    paddingRight: 44,
   },
   searchBarIcon: {
     flexBasis: 44,
