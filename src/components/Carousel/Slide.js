@@ -22,7 +22,7 @@ const Slide = ({
   description,
   image,
   position,
-}: Props) => {
+}: PropType) => {
   const slideWidth = getWindowDimensions().width - 32;
   const onClick = useCallback(() => {
     Linking.openURL(url);
