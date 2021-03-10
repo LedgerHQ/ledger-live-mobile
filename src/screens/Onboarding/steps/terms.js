@@ -4,11 +4,13 @@ import React, { useCallback, useState } from "react";
 import { StyleSheet, View, Linking, ActivityIndicator } from "react-native";
 import { Trans } from "react-i18next";
 import { useTheme } from "@react-navigation/native";
+import { useDispatch } from "react-redux";
 import { TrackScreen } from "../../../analytics";
 import Button from "../../../components/Button";
 import LText from "../../../components/LText";
 import CheckBox from "../../../components/CheckBox";
 import { NavigatorName, ScreenName } from "../../../const";
+import { setAnalytics } from "../../../actions/settings";
 
 import { useTerms, useTermsAccept, url } from "../../../logic/terms";
 import SafeMarkdown from "../../../components/SafeMarkdown";
@@ -18,11 +20,15 @@ import GenericErrorView from "../../../components/GenericErrorView";
 import RetryButton from "../../../components/RetryButton";
 import AnimatedHeaderView from "../../../components/AnimatedHeader";
 
+import { useLocale } from "../../../context/Locale";
+
 import { urls } from "../../../config/urls";
 
 function OnboardingStepTerms({ navigation }: *) {
   const { colors } = useTheme();
-  const [markdown, error, retry] = useTerms();
+  const { locale } = useLocale();
+  const dispatch = useDispatch();
+  const [markdown, error, retry] = useTerms(locale);
   const [, accept] = useTermsAccept();
   const [toggle, setToggle] = useState(false);
   const [togglePrivacy, setTogglePrivacy] = useState(false);
@@ -36,10 +42,11 @@ function OnboardingStepTerms({ navigation }: *) {
 
   const next = useCallback(() => {
     accept();
+    dispatch(setAnalytics(true));
     navigation.navigate(NavigatorName.Onboarding, {
       screen: ScreenName.OnboardingDeviceSelection,
     });
-  }, [accept, navigation]);
+  }, [accept, dispatch, navigation]);
 
   return (
     <AnimatedHeaderView
