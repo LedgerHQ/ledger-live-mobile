@@ -1,6 +1,6 @@
 // @flow
 
-import React, { createRef, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, StyleSheet, Platform } from "react-native";
 import ReactNativeModal from "react-native-modal";
 import type { ViewStyleProp } from "react-native/Libraries/StyleSheet/StyleSheet";
@@ -11,7 +11,7 @@ import ButtonUseTouchable from "../context/ButtonUseTouchable";
 import getWindowDimensions from "../logic/getWindowDimensions";
 import DebugRejectSwitch from "./DebugRejectSwitch";
 
-const isModalOpenedref = createRef();
+let isModalOpenedref = false;
 
 export type Props = {
   id?: string,
@@ -57,18 +57,18 @@ const BottomModal = ({
   // workarround to make sure no double modal can be opened at same time
   useEffect(
     () => () => {
-      isModalOpenedref.current = false;
+      isModalOpenedref = false;
     },
     [],
   );
 
   useEffect(() => {
-    if (!!isModalOpenedref.current && isOpened) {
+    if (!!isModalOpenedref && isOpened) {
       onClose();
     } else {
       setIsOpen(isOpened);
     }
-    isModalOpenedref.current = isOpened;
+    isModalOpenedref = isOpened;
   }, [isOpened, onClose]);
 
   return (
