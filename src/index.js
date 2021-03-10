@@ -64,6 +64,7 @@ import ExperimentalHeader from "./screens/Settings/Experimental/ExperimentalHead
 import { lightTheme, duskTheme, darkTheme } from "./colors";
 import NotificationsProvider from "./screens/NotificationCenter/NotificationsProvider";
 import SnackbarContainer from "./screens/NotificationCenter/Snackbar/SnackbarContainer";
+import NavBarColorHandler from "./components/NavBarColorHandler";
 
 const themes = {
   light: lightTheme,
@@ -373,6 +374,7 @@ export default class Root extends Component<
                   <DeepLinkingNavigator>
                     <SafeAreaProvider>
                       <StyledStatusBar />
+                      <NavBarColorHandler />
                       <AuthPass>
                         <I18nextProvider i18n={i18n}>
                           <LocaleProvider>

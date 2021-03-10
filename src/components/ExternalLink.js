@@ -13,7 +13,7 @@ type Props = {
   eventProperties?: Object,
   iconFirst?: boolean,
   ltextProps?: *,
-  color?: string,
+  color: string,
 };
 
 const Link = ({
@@ -25,6 +25,7 @@ const Link = ({
   color,
 }: Props) => {
   const { colors } = useTheme();
+  const c = colors[color] || colors.live;
   return (
     <Touchable
       event={event}
@@ -32,14 +33,10 @@ const Link = ({
       onPress={onPress}
       style={styles.root}
     >
-      <LText
-        semiBold
-        style={[styles.text, { color: color || colors.live }]}
-        {...ltextProps}
-      >
+      <LText semiBold style={[styles.text, { color: c }]} {...ltextProps}>
         {text}
       </LText>
-      <ExternalLink size={14} color={color || colors.live} />
+      <ExternalLink size={14} color={c} />
     </Touchable>
   );
 };
