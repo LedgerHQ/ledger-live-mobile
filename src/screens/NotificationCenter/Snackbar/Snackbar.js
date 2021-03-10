@@ -17,6 +17,8 @@ import { useClock, timing } from "react-native-redash/lib/module/v1";
 import type { ToastData } from "@ledgerhq/live-common/lib/providers/ToastProvider/types";
 import { useTheme } from "@react-navigation/native";
 
+import { rgba } from "../../../colors";
+
 import getWindowDimensions from "../../../logic/getWindowDimensions";
 import LText from "../../../components/LText";
 import Info from "../../../icons/Info";
@@ -119,7 +121,7 @@ export default function Snackbar({ toast, onPress, onClose }: Props) {
         },
       ]}
       onPress={handleOnPress}
-      underlayColor={colors.live}
+      underlayColor={rgba(colors.snackBarBg, 0.8)}
     >
       <View style={styles.container}>
         <View style={styles.leftSection}>

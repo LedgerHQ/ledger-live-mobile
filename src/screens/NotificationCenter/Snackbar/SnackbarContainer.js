@@ -15,13 +15,13 @@ export default function SnackbarContainer() {
   const navigate = useCallback(
     (toast: ToastData) => {
       if (toast.type === "announcement") {
-        dismissToast(toast.id);
+        toasts.forEach(({ id }) => dismissToast(id));
         RootNavigation.navigate(NavigatorName.NotificationCenter, {
           screen: ScreenName.NotificationCenterNews,
         });
       }
     },
-    [dismissToast],
+    [dismissToast, toasts],
   );
 
   const handleDismissToast = useCallback(

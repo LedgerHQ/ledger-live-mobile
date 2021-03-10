@@ -1,10 +1,10 @@
 // @flow
 import React from "react";
 import { StyleSheet } from "react-native";
+import { useTheme } from "@react-navigation/native";
 import LText from "./LText";
 import Touchable from "./Touchable";
 import ExternalLink from "../icons/ExternalLink";
-import { useTheme } from "@react-navigation/native";
 
 type Props = {
   text: React$Node,
