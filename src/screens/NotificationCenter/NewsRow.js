@@ -1,5 +1,5 @@
 // @flow
-import React from "react";
+import React, { useCallback } from "react";
 import { View, StyleSheet, Linking } from "react-native";
 
 import type { Announcement } from "@ledgerhq/live-common/lib/providers/AnnouncementProvider/types";
@@ -23,7 +23,7 @@ const icons = {
 
 export default function NewsRow({ item, style }: Props) {
   const { colors } = useTheme();
-  const { content, uuid, level, icon } = item;
+  const { content, uuid, level, icon, utm_campaign: utmCampaign } = item;
   const { title, text, link } = content;
 
   const iconColors = {
@@ -37,6 +37,13 @@ export default function NewsRow({ item, style }: Props) {
     level === "warning"
       ? { backgroundColor: colors.orange, color: "#FFF" }
       : {};
+
+  const openUrl = useCallback(() => {
+    const url = new URL(link);
+    if (utmCampaign) url.searchParams.append("utm_campaign", utmCampaign);
+
+    Linking.openURL(url.href);
+  }, [link, utmCampaign]);
 
   return (
     <View
@@ -64,7 +71,7 @@ export default function NewsRow({ item, style }: Props) {
               eventProperties={{ uuid }}
               text={link.label || <Trans i18nKey="common.learnMore" />}
               color={color}
-              onPress={() => Linking.openURL(link.href)}
+              onPress={openUrl}
             />
           </View>
         )}

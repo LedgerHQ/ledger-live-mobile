@@ -8,6 +8,7 @@ import type { Announcement } from "@ledgerhq/live-common/lib/providers/Announcem
 import { getNotifications, saveNotifications } from "../../db";
 import { useLocale } from "../../context/Locale";
 import { cryptoCurrenciesSelector } from "../../reducers/accounts";
+import { track } from "../../analytics";
 
 type Props = {
   children: React$Node,
@@ -46,6 +47,10 @@ export default function NotificationsProvider({ children }: Props) {
     (announcement: Announcement) => {
       const { uuid, content, icon } = announcement;
 
+      track("Announcement Received", {
+        uuid,
+      });
+
       pushToast({
         id: uuid,
         type: "announcement",
@@ -56,6 +61,12 @@ export default function NotificationsProvider({ children }: Props) {
     },
     [pushToast],
   );
+
+  const onAnnouncementRead = useCallback(({ uuid }) => {
+    track("Announcement Viewed", {
+      uuid,
+    });
+  }, []);
 
   return (
     <AnnouncementProvider
@@ -68,6 +79,7 @@ export default function NotificationsProvider({ children }: Props) {
       handleLoad={onLoad}
       handleSave={onSave}
       onNewAnnouncement={onNewAnnouncement}
+      onAnnouncementRead={onAnnouncementRead}
     >
       <ServiceStatusProvider autoUpdateDelay={15000}>
         {children}
