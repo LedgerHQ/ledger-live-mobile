@@ -84,7 +84,7 @@ export default function AnimatedHeaderView({
 }: Props) {
   const { colors } = useTheme();
   const navigation = useNavigation();
-  const [textHeight, setTextHeight] = useState(50);
+  const [textHeight, setTextHeight] = useState(250);
 
   const onLayoutText = useCallback(event => {
     setTextHeight(event.nativeEvent.layout.height);
