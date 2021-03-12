@@ -105,19 +105,21 @@ export default function PolkadotSimpleOperationStarted({
                 i18nKey={`polkadot.simpleOperation.modes.${mode}.description`}
               />
             </LText>
-            <View style={styles.info}>
-              <Info size={22} color={colors.live} />
-              <LText
-                semiBold
-                style={[styles.text, styles.infoText]}
-                color="live"
-                numberOfLines={3}
-              >
-                <Trans
-                  i18nKey={`polkadot.simpleOperation.modes.${mode}.info`}
-                />
-              </LText>
-            </View>
+            {!["withdrawUnbonded"].includes(mode) && (
+              <View style={styles.info}>
+                <Info size={22} color={colors.live} />
+                <LText
+                  semiBold
+                  style={[styles.text, styles.infoText]}
+                  color="live"
+                  numberOfLines={3}
+                >
+                  <Trans
+                    i18nKey={`polkadot.simpleOperation.modes.${mode}.info`}
+                  />
+                </LText>
+              </View>
+            )}
           </View>
         </View>
         <View style={styles.footer}>
