@@ -89,6 +89,7 @@ export default function SwapNavigator() {
         name={ScreenName.SwapOperationDetails}
         component={SwapOperationDetails}
         options={({ navigation }) => ({
+          ...stackNavigationConfig,
           headerTitle: () => <StepHeader title={t("transfer.swap.title")} />,
           headerLeft: () => <BackButton navigation={navigation} />,
           headerRight: undefined,

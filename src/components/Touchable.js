@@ -20,7 +20,7 @@ type Props = {
   onPress: ?() => ?Promise<any>,
   children: *,
   event: string,
-  eventProperties?: Object,
+  eventProperties?: { [key: string]: any },
   style?: *,
 };
 
