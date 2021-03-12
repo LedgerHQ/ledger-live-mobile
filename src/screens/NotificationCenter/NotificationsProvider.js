@@ -45,10 +45,11 @@ export default function NotificationsProvider({ children }: Props) {
 
   const onNewAnnouncement = useCallback(
     (announcement: Announcement) => {
-      const { uuid, content, icon } = announcement;
+      const { uuid, content, icon, utm_campaign } = announcement;
 
       track("Announcement Received", {
         uuid,
+        utm_campaign,
       });
 
       pushToast({
@@ -62,9 +63,10 @@ export default function NotificationsProvider({ children }: Props) {
     [pushToast],
   );
 
-  const onAnnouncementRead = useCallback(({ uuid }) => {
+  const onAnnouncementRead = useCallback(({ uuid, utm_campaign }) => {
     track("Announcement Viewed", {
       uuid,
+      utm_campaign,
     });
   }, []);
 

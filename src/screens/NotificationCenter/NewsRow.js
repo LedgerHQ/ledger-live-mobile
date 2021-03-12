@@ -40,7 +40,8 @@ export default function NewsRow({ item, style }: Props) {
 
   const openUrl = useCallback(() => {
     const url = new URL(link);
-    if (utmCampaign) url.searchParams.append("utm_campaign", utmCampaign);
+    url.searchParams.set("utm_medium", "announcement");
+    if (utmCampaign) url.searchParams.set("utm_campaign", utmCampaign);
 
     Linking.openURL(url.href);
   }, [link, utmCampaign]);
