@@ -64,7 +64,7 @@ function OnboardingStepUseCaseSelection({ navigation, route }: Props) {
               event: "Onboarding - Restore",
             },
           },
-    [],
+    [deviceModelId],
   );
 
   return (

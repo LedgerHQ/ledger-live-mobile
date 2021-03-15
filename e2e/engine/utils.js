@@ -35,7 +35,8 @@ export function $waitFor(
 }
 
 export function $tap(q: Query) {
-  return getElement(q).tap();
+  const el = getElement(q);
+  return el.tap();
 }
 
 export function $scrollTill(

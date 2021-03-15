@@ -43,9 +43,10 @@ async function selectUsecase(modelId: DeviceModelId, usecase: Usecase) {
 
 async function connectViaBluetooth(modelId: DeviceModelId) {
   it("should pair Nano via Bluetooth", async () => {
-    const el = $(`Onboarding - Connect|${modelId}`);
+    const onboardingConnectQuery = `Onboarding - Connect|${modelId}`;
+    const el = $(onboardingConnectQuery);
     await $scrollTill(el);
-    await $tap(el);
+    await $tap(onboardingConnectQuery);
     await $tap("OnboardingStemPairNewContinue");
     await $proceed();
     const [david] = bridge.addDevices();
