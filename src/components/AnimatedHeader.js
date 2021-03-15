@@ -1,5 +1,5 @@
 // @flow
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import {
   View,
   StyleSheet,
@@ -21,8 +21,6 @@ import ArrowLeft from "../icons/ArrowLeft";
 import Close from "../icons/Close";
 
 const { interpolate, Extrapolate } = Animated;
-
-const AnimatedLText = Animated.createAnimatedComponent(View);
 
 const hitSlop = {
   bottom: 10,
@@ -90,6 +88,11 @@ export default function AnimatedHeaderView({
 }: Props) {
   const { colors } = useTheme();
   const navigation = useNavigation();
+  const [textHeight, setTextHeight] = useState(250);
+
+  const onLayoutText = useCallback(event => {
+    setTextHeight(event.nativeEvent.layout.height);
+  }, []);
 
   const [scrollY] = useState(new Animated.Value(0));
   const isFocused = useIsFocused();
@@ -122,7 +125,12 @@ export default function AnimatedHeaderView({
     <SafeAreaView
       style={[styles.root, { backgroundColor: colors.background }, style]}
     >
-      <Animated.View style={[styles.header]}>
+      <Animated.View
+        style={[
+          styles.header,
+          { height: Platform.OS === "ios" ? textHeight : textHeight + 34 },
+        ]}
+      >
         <View style={styles.topHeader}>
           {hasBackButton && (
             <BackButton
@@ -141,17 +149,18 @@ export default function AnimatedHeaderView({
           )}
         </View>
 
-        <AnimatedLText
+        <Animated.View
           bold
           style={[
             styles.titleContainer,
             { transform: [{ translateY, translateX }, { scale }] },
           ]}
+          onLayout={onLayoutText}
         >
-          <LText bold style={[styles.title]}>
+          <LText bold style={[styles.title]} numberOfLines={4}>
             {title}
           </LText>
-        </AnimatedLText>
+        </Animated.View>
       </Animated.View>
       {children && (
         <Animated.ScrollView
@@ -179,7 +188,6 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent",
     width: "100%",
     paddingTop: Platform.OS === "ios" ? 0 : 40,
-    height: Platform.OS === "ios" ? 40 : 74,
     flexDirection: "column",
     overflow: "visible",
     paddingHorizontal: 24,
