@@ -94,6 +94,7 @@ export type SettingsState = {
   osTheme: ?string,
   carouselVisibility: number,
   discreetMode: boolean,
+  language: string,
 };
 
 export const INITIAL_STATE: SettingsState = {
@@ -121,6 +122,7 @@ export const INITIAL_STATE: SettingsState = {
   osTheme: undefined,
   carouselVisibility: 0,
   discreetMode: false,
+  language: "en",
 };
 
 const pairHash = (from, to) => `${from.ticker}_${to.ticker}`;
@@ -307,6 +309,10 @@ const handlers: Object = {
     ...state,
     discreetMode: payload,
   }),
+  SETTINGS_SET_LANGUAGE: (state: SettingsState, { payload }) => ({
+    ...state,
+    language: payload,
+  }),
 };
 
 const storeSelector = (state: *): SettingsState => state.settings;
@@ -485,3 +491,5 @@ export default handleActions(handlers, INITIAL_STATE);
 export const themeSelector = (state: State) => state.settings.theme;
 
 export const osThemeSelector = (state: State) => state.settings.osTheme;
+
+export const languageSelector = (state: State) => state.settings.language;
