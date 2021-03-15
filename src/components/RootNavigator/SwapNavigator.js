@@ -42,7 +42,6 @@ export default function SwapNavigator() {
         component={SwapFormSelectCrypto}
         options={{
           headerTitle: () => <StepHeader title={t("transfer.swap.title")} />,
-          headerRight: undefined,
         }}
       />
       <Stack.Screen
@@ -50,7 +49,6 @@ export default function SwapNavigator() {
         component={SwapFormSelectAccount}
         options={{
           headerTitle: () => <StepHeader title={t("transfer.swap.title")} />,
-          headerRight: undefined,
         }}
       />
       <Stack.Screen
@@ -58,7 +56,6 @@ export default function SwapNavigator() {
         component={SwapFormAmount}
         options={{
           headerTitle: () => <StepHeader title={t("transfer.swap.title")} />,
-          headerRight: undefined,
         }}
       />
       <Stack.Screen
@@ -66,7 +63,6 @@ export default function SwapNavigator() {
         component={SwapSummary}
         options={{
           headerTitle: () => <StepHeader title={t("transfer.swap.title")} />,
-          headerRight: undefined,
         }}
       />
       <Stack.Screen
@@ -74,7 +70,6 @@ export default function SwapNavigator() {
         component={SwapError}
         options={{
           headerTitle: () => <StepHeader title={t("transfer.swap.title")} />,
-          headerLeft: undefined,
         }}
       />
       <Stack.Screen
@@ -82,7 +77,6 @@ export default function SwapNavigator() {
         component={SwapPendingOperation}
         options={{
           headerTitle: () => <StepHeader title={t("transfer.swap.title")} />,
-          headerLeft: undefined,
         }}
       />
       <Stack.Screen
@@ -92,7 +86,6 @@ export default function SwapNavigator() {
           ...stackNavigationConfig,
           headerTitle: () => <StepHeader title={t("transfer.swap.title")} />,
           headerLeft: () => <BackButton navigation={navigation} />,
-          headerRight: undefined,
         })}
       />
     </Stack.Navigator>
