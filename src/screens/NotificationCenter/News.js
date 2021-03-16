@@ -7,13 +7,14 @@ import {
   RefreshControl,
   View,
 } from "react-native";
-import { useAnnouncements } from "@ledgerhq/live-common/lib/providers/AnnouncementProvider";
-import { groupAnnouncements } from "@ledgerhq/live-common/lib/providers/AnnouncementProvider/helpers";
+import { useAnnouncements } from "@ledgerhq/live-common/lib/notifications/AnnouncementProvider";
+import { groupAnnouncements } from "@ledgerhq/live-common/lib/notifications/AnnouncementProvider/helpers";
 import { useTheme } from "@react-navigation/native";
 
 import NewsRow from "./NewsRow";
 import LText from "../../components/LText";
 import FormatDate from "../../components/FormatDate";
+import { Trans } from "react-i18next";
 
 const viewabilityConfig = {
   viewAreaCoveragePercentThreshold: 95,
@@ -44,6 +45,7 @@ export default function NotificationCenter() {
     <SafeAreaView style={styles.root}>
       <SectionList
         style={styles.sectionList}
+        contentContainerStyle={styles.spacer}
         sections={sections}
         renderItem={props => <NewsRow {...props} />}
         renderSectionHeader={({ section: { title } }) =>
@@ -74,6 +76,16 @@ export default function NotificationCenter() {
         }
         viewabilityConfig={viewabilityConfig}
         onViewableItemsChanged={onViewableItemsChanged}
+        ListEmptyComponent={
+          <View style={styles.emptyState}>
+            <LText bold style={styles.title}>
+              <Trans i18nKey="notificationCenter.news.emptyState.title" />
+            </LText>
+            <LText style={styles.text}>
+              <Trans i18nKey="notificationCenter.news.emptyState.desc" />
+            </LText>
+          </View>
+        }
       />
     </SafeAreaView>
   );
@@ -96,5 +108,21 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 1,
     marginBottom: 8,
+  },
+  spacer: { flex: 1 },
+  emptyState: {
+    flex: 1,
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  title: {
+    fontSize: 18,
+    marginBottom: 8,
+    textAlign: "center",
+  },
+  text: {
+    fontSize: 14,
+    textAlign: "center",
   },
 });

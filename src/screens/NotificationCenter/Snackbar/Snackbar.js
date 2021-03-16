@@ -14,7 +14,7 @@ import Animated, {
   Easing,
 } from "react-native-reanimated";
 import { useClock, timing } from "react-native-redash/lib/module/v1";
-import type { ToastData } from "@ledgerhq/live-common/lib/providers/ToastProvider/types";
+import type { ToastData } from "@ledgerhq/live-common/lib/notifications/ToastProvider/types";
 import { useTheme } from "@react-navigation/native";
 
 import { rgba } from "../../../colors";

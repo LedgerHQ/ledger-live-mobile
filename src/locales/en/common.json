@@ -3464,7 +3464,11 @@
     "announcement": "Announcement",
     "liveStatus": "Ledger live status",
     "news": {
-      "title": "News"
+      "title": "News",
+      "emptyState": {
+        "title": "No news for the moment",
+        "desc": "You will find here all the news related to Ledger and Ledger live"
+      }
     },
     "status": {
       "title": "Status",

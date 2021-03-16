@@ -10,8 +10,8 @@ import {
 import { useTheme } from "@react-navigation/native";
 import { Trans } from "react-i18next";
 
-import { useServiceStatus } from "@ledgerhq/live-common/lib/providers/ServiceStatusProvider";
-import type { Incident } from "@ledgerhq/live-common/lib/providers/ServiceStatusProvider/types";
+import { useServiceStatus } from "@ledgerhq/live-common/lib/notifications/ServiceStatusProvider";
+import type { Incident } from "@ledgerhq/live-common/lib/notifications/ServiceStatusProvider/types";
 import CheckCircle from "../../icons/CheckCircle";
 import Warning from "../../icons/WarningOutline";
 import LText from "../../components/LText";

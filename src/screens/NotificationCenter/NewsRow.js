@@ -2,7 +2,7 @@
 import React, { useCallback } from "react";
 import { View, StyleSheet, Linking } from "react-native";
 
-import type { Announcement } from "@ledgerhq/live-common/lib/providers/AnnouncementProvider/types";
+import type { Announcement } from "@ledgerhq/live-common/lib/notifications/AnnouncementProvider/types";
 import { useTheme } from "@react-navigation/native";
 import { Trans } from "react-i18next";
 import LText from "../../components/LText";

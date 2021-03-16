@@ -2,8 +2,8 @@
 import React, { useCallback } from "react";
 import { View, StyleSheet } from "react-native";
 
-import { useToasts } from "@ledgerhq/live-common/lib/providers/ToastProvider/index";
-import type { ToastData } from "@ledgerhq/live-common/lib/providers/ToastProvider/types";
+import { useToasts } from "@ledgerhq/live-common/lib/notifications/ToastProvider/index";
+import type { ToastData } from "@ledgerhq/live-common/lib/notifications/ToastProvider/types";
 
 import Snackbar from "./Snackbar";
 import * as RootNavigation from "../../../rootnavigation.js";

@@ -23,7 +23,7 @@ import _ from "lodash";
 import { useCountervaluesExport } from "@ledgerhq/live-common/lib/countervalues/react";
 import { pairId } from "@ledgerhq/live-common/lib/countervalues/helpers";
 
-import { ToastProvider } from "@ledgerhq/live-common/lib/providers/ToastProvider";
+import { ToastProvider } from "@ledgerhq/live-common/lib/notifications/ToastProvider";
 import logger from "./logger";
 import { saveAccounts, saveBle, saveSettings, saveCountervalues } from "./db";
 import {

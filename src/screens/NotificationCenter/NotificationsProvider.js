@@ -1,10 +1,10 @@
 // @flow
 import React, { useCallback } from "react";
 import { useSelector } from "react-redux";
-import { AnnouncementProvider } from "@ledgerhq/live-common/lib/providers/AnnouncementProvider";
-import { ServiceStatusProvider } from "@ledgerhq/live-common/lib/providers/ServiceStatusProvider";
-import { useToasts } from "@ledgerhq/live-common/lib/providers/ToastProvider/index";
-import type { Announcement } from "@ledgerhq/live-common/lib/providers/AnnouncementProvider/types";
+import { AnnouncementProvider } from "@ledgerhq/live-common/lib/notifications/AnnouncementProvider";
+import { ServiceStatusProvider } from "@ledgerhq/live-common/lib/notifications/ServiceStatusProvider";
+import { useToasts } from "@ledgerhq/live-common/lib/notifications/ToastProvider/index";
+import type { Announcement } from "@ledgerhq/live-common/lib/notifications/AnnouncementProvider/types";
 import { getNotifications, saveNotifications } from "../../db";
 import { useLocale } from "../../context/Locale";
 import { cryptoCurrenciesSelector } from "../../reducers/accounts";
@@ -45,11 +45,11 @@ export default function NotificationsProvider({ children }: Props) {
 
   const onNewAnnouncement = useCallback(
     (announcement: Announcement) => {
-      const { uuid, content, icon, utm_campaign } = announcement;
+      const { uuid, content, icon, utm_campaign: utmCampaign } = announcement;
 
       track("Announcement Received", {
         uuid,
-        utm_campaign,
+        utm_campaign: utmCampaign,
       });
 
       pushToast({
@@ -63,12 +63,15 @@ export default function NotificationsProvider({ children }: Props) {
     [pushToast],
   );
 
-  const onAnnouncementRead = useCallback(({ uuid, utm_campaign }) => {
-    track("Announcement Viewed", {
-      uuid,
-      utm_campaign,
-    });
-  }, []);
+  const onAnnouncementRead = useCallback(
+    ({ uuid, utm_campaign: utmCampaign }) => {
+      track("Announcement Viewed", {
+        uuid,
+        utm_campaign: utmCampaign,
+      });
+    },
+    [],
+  );
 
   return (
     <AnnouncementProvider
