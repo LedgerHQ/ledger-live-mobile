@@ -11,10 +11,10 @@ import { useAnnouncements } from "@ledgerhq/live-common/lib/notifications/Announ
 import { groupAnnouncements } from "@ledgerhq/live-common/lib/notifications/AnnouncementProvider/helpers";
 import { useTheme } from "@react-navigation/native";
 
+import { Trans } from "react-i18next";
 import NewsRow from "./NewsRow";
 import LText from "../../components/LText";
 import FormatDate from "../../components/FormatDate";
-import { Trans } from "react-i18next";
 
 const viewabilityConfig = {
   viewAreaCoveragePercentThreshold: 95,
