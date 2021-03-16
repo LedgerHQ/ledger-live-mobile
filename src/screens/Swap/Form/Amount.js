@@ -20,6 +20,7 @@ import { swapSupportedCurrenciesSelector } from "../../../reducers/settings";
 import type { SwapRouteParams } from ".";
 import KeyboardView from "../../../components/KeyboardView";
 import LText from "../../../components/LText";
+import getFontStyle from "../../../components/LText/getFontStyle";
 import SectionSeparator from "../../../components/SectionSeparator";
 import CurrencyInput from "../../../components/CurrencyInput";
 import CurrencyUnitValue from "../../../components/CurrencyUnitValue";
@@ -217,27 +218,32 @@ const SwapFormAmount = ({ navigation, route }: Props) => {
           onChange={onTradeMethodChange}
         />
       </View>
-      {actualRate && rateExpiration ? (
-        <Rate
-          rateExpiration={rateExpiration}
-          tradeMethod={tradeMethod}
-          magnitudeAwareRate={actualRate}
-          fromCurrency={fromCurrency}
-          toCurrency={toCurrency}
-          onRatesExpired={setRate}
-        />
-      ) : null}
+      <View style={styles.rateWrapper}>
+        {actualRate && rateExpiration ? (
+          <Rate
+            rateExpiration={rateExpiration}
+            tradeMethod={tradeMethod}
+            magnitudeAwareRate={actualRate}
+            fromCurrency={fromCurrency}
+            toCurrency={toCurrency}
+            onRatesExpired={setRate}
+          />
+        ) : (
+          <View style={styles.ratePlaceholder} />
+        )}
+      </View>
       <View style={styles.wrapper}>
         <CurrencyInput
           editable={!useAllAmount}
           onChange={onAmountChange}
           unit={fromUnit}
           value={transaction.amount}
+          inputStyle={[styles.currency, styles.active]}
           renderRight={
             <LText
               style={[styles.currency, styles.active]}
-              color="grey"
-              tertiary
+              semiBold
+              color={useAllAmount ? "grey" : "black"}
             >
               {fromUnit.code}
             </LText>
@@ -261,8 +267,9 @@ const SwapFormAmount = ({ navigation, route }: Props) => {
           placeholder={"0"}
           editable={false}
           showAllDigits
+          inputStyle={styles.currency}
           renderRight={
-            <LText style={styles.currency} color="grey" tertiary>
+            <LText style={styles.currency} color="grey">
               {toUnit.code}
             </LText>
           }
@@ -333,11 +340,18 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     marginTop: 10,
   },
+  rateWrapper: {
+    padding: 25,
+  },
+  ratePlaceholder: {
+    height: 16,
+  },
   currency: {
-    fontSize: 24,
+    fontSize: 20,
   },
   active: {
-    fontSize: 32,
+    fontSize: 30,
+    ...getFontStyle({ semiBold: true }),
   },
   error: {
     fontSize: 14,

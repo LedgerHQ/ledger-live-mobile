@@ -4,8 +4,7 @@ import React, { useState } from "react";
 import { View, StyleSheet } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { Trans } from "react-i18next";
-import Icon from "react-native-vector-icons/dist/FontAwesome";
-import FontAwesome5Icon from "react-native-vector-icons/dist/FontAwesome5";
+import Icon from "react-native-vector-icons/FontAwesome5Pro";
 import { BigNumber } from "bignumber.js";
 import type {
   CryptoCurrency,
@@ -51,10 +50,15 @@ const Rate = ({
             />
           </View>
         ) : null}
-        <View style={styles.price}>
+        <Touchable
+          style={styles.price}
+          event="Swap trade method help"
+          onPress={() => setIsModalVisible(true)}
+        >
           <Icon
             color={colors.grey}
-            name={isModalVisible === "fixed" ? "lock" : "unlock"}
+            name={tradeMethod === "fixed" ? "lock" : "lock-open"}
+            light
           />
           <LText color={colors.grey} style={styles.price}>
             <CurrencyUnitValue
@@ -71,17 +75,9 @@ const Rate = ({
               showCode
             />
           </LText>
-        </View>
-        <Touchable
-          style={{ marginLeft: 8 }}
-          event="Swap trade method help"
-          onPress={() => setIsModalVisible(true)}
-        >
-          <FontAwesome5Icon
-            color={colors.grey}
-            name={"info-circle"}
-            size={12}
-          />
+          <View style={{ marginLeft: 8 }}>
+            <Icon color={colors.grey} name={"info-circle"} size={12} />
+          </View>
         </Touchable>
       </View>
       <BottomModal
@@ -97,8 +93,9 @@ const Rate = ({
             <Icon
               style={styles.modalIcon}
               color={colors.grey}
-              name={"lock"}
+              name={"lock-open"}
               size={24}
+              light
             />
             <View style={styles.modalDesc}>
               <LText bold>
@@ -115,6 +112,7 @@ const Rate = ({
               color={colors.grey}
               name={"lock"}
               size={24}
+              light
             />
             <View style={styles.modalDesc}>
               <LText bold>
@@ -142,10 +140,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   container: {
-    padding: 8,
     alignItems: "center",
     justifyContent: "center",
     flexDirection: "row",
+    height: 16,
   },
   price: {
     alignItems: "center",
