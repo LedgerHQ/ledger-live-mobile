@@ -32,7 +32,7 @@ function OnboardingStepUseCaseSelection({ navigation, route }: Props) {
       Platform.OS === "ios" && deviceModelId !== "nanoX"
         ? [
             {
-              key: desktopSync,
+              key: "desktopSync",
               route: ScreenName.OnboardingImportAccounts,
               image: desktopSync,
               event: "Onboarding - Setup Import Accounts",
@@ -75,51 +75,62 @@ function OnboardingStepUseCaseSelection({ navigation, route }: Props) {
       <TrackScreen category="Onboarding" name="UseCase" />
       <FlatList
         data={useCases}
-        renderItem={({ item, index }) => (
-          <Fragment key={item.key + index}>
-            {index < 2 && (
-              <LText semiBold style={styles.subTitle}>
-                <Trans i18nKey={`onboarding.stepUseCase.${item.key}.title`} />
-              </LText>
-            )}
-            <Touchable
-              event={item.event}
-              eventProperties={{ deviceId: deviceModelId }}
-              onPress={() => next(item)}
-              style={[styles.button, { backgroundColor: colors.lightLive }]}
-            >
-              <LText semiBold style={[styles.label]} color="live">
-                <Trans i18nKey={`onboarding.stepUseCase.${item.key}.label`} />
-              </LText>
-              <LText semiBold style={styles.subTitle}>
-                <Trans
-                  i18nKey={`onboarding.stepUseCase.${item.key}.subTitle`}
-                />
-              </LText>
-              <LText style={styles.desc}>
-                <Trans i18nKey={`onboarding.stepUseCase.${item.key}.desc`} />
-              </LText>
-              <View style={styles.imageContainer}>
-                {item.image && (
-                  <Image
-                    style={styles.image}
-                    resizeMode="contain"
-                    source={item.image}
-                  />
-                )}
-              </View>
-            </Touchable>
-            {index === 0 && useCases.length > 1 && (
-              <View style={styles.separator}>
-                <View style={[styles.line, { backgroundColor: colors.live }]} />
-                <LText semiBold style={[styles.label, styles.or]} color="live">
-                  <Trans i18nKey="onboarding.stepUseCase.or" />
+        renderItem={({ item, index }) => {
+          console.log({ item });
+          return (
+            <Fragment key={item.key + index}>
+              {index < 2 && (
+                <LText semiBold style={styles.subTitle}>
+                  <Trans i18nKey={`onboarding.stepUseCase.${item.key}.title`} />
                 </LText>
-                <View style={[styles.line, { backgroundColor: colors.live }]} />
-              </View>
-            )}
-          </Fragment>
-        )}
+              )}
+              <Touchable
+                event={item.event}
+                eventProperties={{ deviceId: deviceModelId }}
+                onPress={() => next(item)}
+                style={[styles.button, { backgroundColor: colors.lightLive }]}
+              >
+                <LText semiBold style={[styles.label]} color="live">
+                  <Trans i18nKey={`onboarding.stepUseCase.${item.key}.label`} />
+                </LText>
+                <LText semiBold style={styles.subTitle}>
+                  <Trans
+                    i18nKey={`onboarding.stepUseCase.${item.key}.subTitle`}
+                  />
+                </LText>
+                <LText style={styles.desc}>
+                  <Trans i18nKey={`onboarding.stepUseCase.${item.key}.desc`} />
+                </LText>
+                <View style={styles.imageContainer}>
+                  {item.image && (
+                    <Image
+                      style={styles.image}
+                      resizeMode="contain"
+                      source={item.image}
+                    />
+                  )}
+                </View>
+              </Touchable>
+              {index === 0 && useCases.length > 1 && (
+                <View style={styles.separator}>
+                  <View
+                    style={[styles.line, { backgroundColor: colors.live }]}
+                  />
+                  <LText
+                    semiBold
+                    style={[styles.label, styles.or]}
+                    color="live"
+                  >
+                    <Trans i18nKey="onboarding.stepUseCase.or" />
+                  </LText>
+                  <View
+                    style={[styles.line, { backgroundColor: colors.live }]}
+                  />
+                </View>
+              )}
+            </Fragment>
+          );
+        }}
       />
     </AnimatedHeaderView>
   );
