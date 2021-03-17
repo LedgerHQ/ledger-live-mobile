@@ -1,5 +1,5 @@
 // @flow
-import React from "react";
+import React, { useCallback } from "react";
 import { View, StyleSheet, Linking } from "react-native";
 import Icon from "react-native-vector-icons/dist/Feather";
 import { WrongDeviceForAccount, UnexpectedBootloader } from "@ledgerhq/errors";
@@ -289,6 +289,19 @@ export function renderError({
   onRetry?: () => void,
   managerAppName?: string,
 }) {
+  const onPress = useCallback(() => {
+    if (managerAppName) {
+      navigation.navigate(NavigatorName.Manager, {
+        screen: ScreenName.Manager,
+        params: {
+          tab: MANAGER_TABS.INSTALLED_APPS,
+          updateModalOpened: true,
+        },
+      });
+    } else if (onRetry) {
+      onRetry();
+    }
+  }, [managerAppName, navigation, onRetry]);
   return (
     <View style={styles.wrapper}>
       <GenericErrorView error={error} withDescription withIcon />
@@ -302,19 +315,7 @@ export function renderError({
                 ? t("DeviceAction.button.openManager")
                 : t("common.retry")
             }
-            onPress={
-              managerAppName
-                ? () => {
-                    navigation.navigate(NavigatorName.Manager, {
-                      screen: ScreenName.Manager,
-                      params: {
-                        tab: MANAGER_TABS.INSTALLED_APPS,
-                        updateModalOpened: true,
-                      },
-                    });
-                  }
-                : onRetry
-            }
+            onPress={onPress}
             containerStyle={styles.button}
           />
         </View>
