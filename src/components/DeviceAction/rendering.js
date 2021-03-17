@@ -1,5 +1,5 @@
 // @flow
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import { View, StyleSheet, Linking } from "react-native";
 import Icon from "react-native-vector-icons/dist/Feather";
 import { WrongDeviceForAccount, UnexpectedBootloader } from "@ledgerhq/errors";
@@ -213,7 +213,7 @@ export function renderAllowManager({
   );
 }
 
-export function renderAllowOpeningApp({
+const AllowOpeningApp = ({
   t,
   navigation,
   wording,
@@ -228,13 +228,15 @@ export function renderAllowOpeningApp({
   tokenContext?: ?TokenCurrency,
   isDeviceBlocker?: boolean,
   device: Device,
-}) {
-  if (isDeviceBlocker) {
-    // TODO: disable gesture, modal close, hide header buttons
-    navigation.setOptions({
-      gestureEnabled: false,
-    });
-  }
+}) => {
+  useEffect(() => {
+    if (isDeviceBlocker) {
+      // TODO: disable gesture, modal close, hide header buttons
+      navigation.setOptions({
+        gestureEnabled: false,
+      });
+    }
+  }, [isDeviceBlocker, navigation]);
 
   return (
     <View style={styles.wrapper}>
@@ -254,6 +256,35 @@ export function renderAllowOpeningApp({
         </LText>
       ) : null}
     </View>
+  );
+};
+
+export function renderAllowOpeningApp({
+  t,
+  navigation,
+  wording,
+  tokenContext,
+  isDeviceBlocker,
+  device,
+  theme,
+}: {
+  ...RawProps,
+  navigation: any,
+  wording: string,
+  tokenContext?: ?TokenCurrency,
+  isDeviceBlocker?: boolean,
+  device: Device,
+}) {
+  return (
+    <AllowOpeningApp
+      t={t}
+      navigation={navigation}
+      wording={wording}
+      tokenContext={tokenContext}
+      isDeviceBlocker={isDeviceBlocker}
+      device={device}
+      theme={theme}
+    />
   );
 }
 
