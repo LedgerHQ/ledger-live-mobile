@@ -3,7 +3,7 @@
 import React, { useState, memo, useCallback } from "react";
 import { View, StyleSheet, TouchableOpacity, Platform } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import _ from "lodash";
+import map from "lodash/map";
 import Swiper from "react-native-swiper";
 import { Trans } from "react-i18next";
 import { useTheme } from "@react-navigation/native";
@@ -98,7 +98,7 @@ const SLIDES = [
 ];
 
 export const getDefaultSlides = () =>
-  _.map(SLIDES, slide => ({
+  map(SLIDES, slide => ({
     id: slide.name,
     Component: () => (
       <Slide
