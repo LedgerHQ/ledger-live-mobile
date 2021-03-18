@@ -79,7 +79,7 @@ class GraphCard extends PureComponent<Props, State> {
             getCurrencyColor(getAccountCurrency(accounts[0])),
             colors.background,
           )
-        : undefined;
+        : "";
 
     return (
       <Card bg="card" style={styles.root}>
@@ -96,7 +96,7 @@ class GraphCard extends PureComponent<Props, State> {
           isLoading={!isAvailable}
           height={100}
           width={getWindowDimensions().width - 32}
-          color={isAvailable ? graphColor || colors.grey : colors.grey}
+          color={isAvailable ? graphColor : colors.grey}
           data={balanceHistory}
           onItemHover={this.onItemHover}
           mapValue={this.mapGraphValue}
