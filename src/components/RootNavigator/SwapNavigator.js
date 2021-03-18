@@ -82,6 +82,7 @@ export default function SwapNavigator() {
         component={SwapPendingOperation}
         options={{
           headerTitle: () => <StepHeader title={t("transfer.swap.title")} />,
+          headerLeft: null,
         }}
       />
       <Stack.Screen
