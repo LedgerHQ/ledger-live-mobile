@@ -40,7 +40,7 @@ function RebondFlow() {
               })}
             />
           ),
-          headerLeft: undefined,
+          headerLeft: null,
         }}
       />
       <Stack.Screen
@@ -77,10 +77,10 @@ function RebondFlow() {
         name={ScreenName.PolkadotRebondValidationSuccess}
         component={ValidationSuccess}
         options={{
-          headerTitle: undefined,
+          headerTitle: null,
           gestureEnabled: false,
-          headerLeft: undefined,
-          headerRight: undefined,
+          headerLeft: null,
+          headerRight: null,
         }}
       />
       <Stack.Screen

@@ -136,7 +136,7 @@ export default function ReceiveConfirmation({ navigation, route }: Props) {
   useEffect(() => {
     if (!allowNavigation) {
       navigation.setOptions({
-        headerLeft: undefined,
+        headerLeft: null,
         headerRight: () => null,
         gestureEnabled: false,
       });
@@ -145,7 +145,7 @@ export default function ReceiveConfirmation({ navigation, route }: Props) {
 
     const { headerRight } = getStackNavigatorConfig(colors, true);
     navigation.setOptions({
-      headerLeft: undefined,
+      headerLeft: null,
       headerRight,
       gestureEnabled: Platform.OS === "ios",
     });

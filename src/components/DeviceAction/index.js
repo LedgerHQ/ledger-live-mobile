@@ -184,8 +184,8 @@ export default function DeviceAction<R, H, P>({
     const { account, parentAccount, status, transaction } = request;
     if (account && status && transaction) {
       navigation.setOptions({
-        headerLeft: undefined,
-        headerRight: undefined,
+        headerLeft: null,
+        headerRight: null,
         gestureEnabled: false,
       });
       return (

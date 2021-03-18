@@ -45,6 +45,8 @@ function UndelegationFlow() {
         name={ScreenName.CosmosUndelegationSelectDevice}
         component={SelectDevice}
         options={{
+          headerLeft: null,
+          gestureEnabled: false,
           headerTitle: () => (
             <StepHeader
               title={t("cosmos.undelegation.stepperHeader.selectDevice")}
@@ -75,7 +77,7 @@ function UndelegationFlow() {
         name={ScreenName.CosmosUndelegationValidationError}
         component={UndelegationValidationError}
         options={{
-          headerTitle: undefined,
+          headerTitle: null,
           gestureEnabled: false,
         }}
       />
@@ -83,9 +85,9 @@ function UndelegationFlow() {
         name={ScreenName.CosmosUndelegationValidationSuccess}
         component={UndelegationValidationSuccess}
         options={{
-          headerLeft: undefined,
-          headerTitle: undefined,
-          headerRight: undefined,
+          headerLeft: null,
+          headerTitle: null,
+          headerRight: null,
           gestureEnabled: false,
         }}
       />

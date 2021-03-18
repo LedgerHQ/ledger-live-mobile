@@ -95,7 +95,7 @@ export default function BaseNavigator() {
         options={{
           ...stackNavigationConfig,
           headerStyle: styles.headerNoShadow,
-          headerLeft: undefined,
+          headerLeft: null,
           title: t("transfer.lending.title"),
         }}
       />
@@ -147,7 +147,7 @@ export default function BaseNavigator() {
       <Stack.Screen
         name={NavigatorName.Exchange}
         component={ExchangeNavigator}
-        options={{ headerStyle: styles.headerNoShadow, headerLeft: undefined }}
+        options={{ headerStyle: styles.headerNoShadow, headerLeft: null }}
       />
       <Stack.Screen
         name={NavigatorName.ExchangeBuyFlow}
@@ -193,7 +193,7 @@ export default function BaseNavigator() {
               />
             ),
             headerLeft: () => <BackButton navigation={navigation} />,
-            headerRight: undefined,
+            headerRight: null,
           };
         }}
       />
@@ -228,7 +228,7 @@ export default function BaseNavigator() {
         component={EditDeviceName}
         options={{
           title: t("EditDeviceName.title"),
-          headerLeft: undefined,
+          headerLeft: null,
         }}
       />
       <Stack.Screen
@@ -252,7 +252,7 @@ export default function BaseNavigator() {
         options={{
           ...stackNavigationConfig,
           title: t("distribution.header"),
-          headerLeft: undefined,
+          headerLeft: null,
         }}
       />
       <Stack.Screen
@@ -260,7 +260,7 @@ export default function BaseNavigator() {
         component={Asset}
         options={{
           headerTitle: () => <HeaderTitle />,
-          headerRight: undefined,
+          headerRight: null,
         }}
       />
       <Stack.Screen
@@ -283,7 +283,7 @@ export default function BaseNavigator() {
           headerRight: () => (
             <HeaderRightClose color={colors.white} preferDismiss={false} />
           ),
-          headerLeft: undefined,
+          headerLeft: null,
         }}
       />
       <Stack.Screen
@@ -295,7 +295,7 @@ export default function BaseNavigator() {
           headerRight: () => (
             <HeaderRightClose color={colors.white} preferDismiss={false} />
           ),
-          headerLeft: undefined,
+          headerLeft: null,
         }}
       />
       <Stack.Screen
@@ -304,7 +304,7 @@ export default function BaseNavigator() {
         options={{
           title: t("walletconnect.deeplinkingTitle"),
           headerRight: () => <HeaderRightClose preferDismiss={false} />,
-          headerLeft: undefined,
+          headerLeft: null,
         }}
       />
       <Stack.Screen
@@ -312,7 +312,7 @@ export default function BaseNavigator() {
         component={WalletConnectConnect}
         options={{
           title: "Wallet Connect",
-          headerLeft: undefined,
+          headerLeft: null,
           gestureEnabled: false,
         }}
       />
@@ -321,7 +321,7 @@ export default function BaseNavigator() {
         component={FallbackCameraSend}
         options={{
           title: t("send.scan.fallback.header"),
-          headerLeft: undefined,
+          headerLeft: null,
         }}
       />
       <Stack.Screen

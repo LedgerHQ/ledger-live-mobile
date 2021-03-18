@@ -46,7 +46,7 @@ export default function FreezeNavigator() {
               })}
             />
           ),
-          headerLeft: undefined,
+          headerLeft: null,
         }}
       />
       <Stack.Screen
@@ -83,16 +83,16 @@ export default function FreezeNavigator() {
         name={ScreenName.FreezeValidationSuccess}
         component={ValidationSuccess}
         options={{
-          headerTitle: undefined,
+          headerTitle: null,
           gestureEnabled: false,
-          headerLeft: undefined,
-          headerRight: undefined,
+          headerLeft: null,
+          headerRight: null,
         }}
       />
       <Stack.Screen
         name={ScreenName.FreezeValidationError}
         component={ValidationError}
-        options={{ headerTitle: undefined }}
+        options={{ headerTitle: null }}
       />
     </Stack.Navigator>
   );

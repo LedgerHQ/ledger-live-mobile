@@ -81,7 +81,7 @@ export default function BaseOnboardingNavigator() {
         component={EditDeviceName}
         options={{
           title: t("EditDeviceName.title"),
-          headerLeft: undefined,
+          headerLeft: null,
           headerShown: true,
         }}
       />

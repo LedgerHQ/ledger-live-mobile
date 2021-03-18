@@ -63,7 +63,7 @@ const Screen = connect(mapStateToProps)(
 
 const options = {
   title: i18next.t("send.summary.memo.type"),
-  headerLeft: undefined,
+  headerLeft: null,
 };
 
 const styles = StyleSheet.create({

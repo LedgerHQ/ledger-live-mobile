@@ -30,7 +30,7 @@ export default function ImportAccountsNavigator() {
           headerShown: true,
           title: t("account.import.scan.title"),
           headerRight: props => <HeaderRightClose {...props} color={"#fff"} />,
-          headerLeft: undefined,
+          headerLeft: null,
         }}
       />
       <Stack.Screen

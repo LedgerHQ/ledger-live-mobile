@@ -120,9 +120,9 @@ export default function SendFundsNavigator() {
         name={ScreenName.SendValidationSuccess}
         component={SendValidationSuccess}
         options={{
-          headerLeft: undefined,
+          headerLeft: null,
           headerShown: false,
-          headerRight: undefined,
+          headerRight: null,
           gestureEnabled: false,
         }}
       />

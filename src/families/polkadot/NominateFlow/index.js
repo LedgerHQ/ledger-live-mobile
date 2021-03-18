@@ -40,7 +40,7 @@ function NominateFlow() {
               })}
             />
           ),
-          headerLeft: undefined,
+          headerLeft: null,
         }}
       />
       <Stack.Screen
@@ -77,10 +77,10 @@ function NominateFlow() {
         name={ScreenName.PolkadotNominateValidationSuccess}
         component={ValidationSuccess}
         options={{
-          headerTitle: undefined,
+          headerTitle: null,
           gestureEnabled: false,
-          headerLeft: undefined,
-          headerRight: undefined,
+          headerLeft: null,
+          headerRight: null,
         }}
       />
       <Stack.Screen

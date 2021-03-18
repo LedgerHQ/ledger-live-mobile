@@ -136,9 +136,9 @@ export default function LendingEnableFlowNavigator() {
         name={ScreenName.LendingEnableValidationSuccess}
         component={LendingEnableValidationSuccess}
         options={{
-          headerLeft: undefined,
+          headerLeft: null,
           headerShown: false,
-          headerRight: undefined,
+          headerRight: null,
           gestureEnabled: false,
         }}
       />

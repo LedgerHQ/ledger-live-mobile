@@ -32,7 +32,7 @@ const uint32maxPlus1 = BigNumber(2).pow(32);
 
 const options = {
   title: i18n.t("send.summary.tag"),
-  headerLeft: undefined,
+  headerLeft: null,
 };
 
 function RippleEditTag({ route, navigation }: Props) {

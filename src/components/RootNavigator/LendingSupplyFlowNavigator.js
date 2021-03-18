@@ -88,9 +88,9 @@ export default function LendingSupplyFlowNavigator() {
         name={ScreenName.LendingSupplyValidationSuccess}
         component={LendingSupplyValidationSuccess}
         options={{
-          headerLeft: undefined,
+          headerLeft: null,
           headerShown: false,
-          headerRight: undefined,
+          headerRight: null,
           gestureSupplyd: false,
         }}
       />

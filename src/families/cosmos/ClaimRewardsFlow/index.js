@@ -69,6 +69,8 @@ function ClaimRewardsFlow() {
         name={ScreenName.CosmosClaimRewardsSelectDevice}
         component={ClaimRewardsSelectDevice}
         options={{
+          headerLeft: false,
+          gestureEnabled: false,
           headerTitle: () => (
             <StepHeader
               title={t("cosmos.claimRewards.stepperHeader.selectDevice")}
@@ -107,9 +109,9 @@ function ClaimRewardsFlow() {
         name={ScreenName.CosmosClaimRewardsValidationSuccess}
         component={ClaimRewardsValidationSuccess}
         options={{
-          headerLeft: undefined,
-          headerRight: undefined,
-          headerTitle: undefined,
+          headerLeft: null,
+          headerRight: null,
+          headerTitle: null,
           gestureEnabled: false,
         }}
       />

@@ -68,7 +68,7 @@ function DelegationFlow() {
         name={ScreenName.CosmosDelegationAmount}
         component={DelegationAmount}
         options={({ route }) => ({
-          headerRight: undefined,
+          headerRight: null,
           headerTitle: () => (
             <StepHeader
               title={
@@ -84,6 +84,8 @@ function DelegationFlow() {
         name={ScreenName.CosmosDelegationSelectDevice}
         component={SelectDevice}
         options={{
+          headerLeft: null,
+          gestureEnabled: false,
           headerTitle: () => (
             <StepHeader
               title={t("cosmos.delegation.stepperHeader.selectDevice")}
@@ -122,9 +124,9 @@ function DelegationFlow() {
         name={ScreenName.CosmosDelegationValidationSuccess}
         component={DelegationValidationSuccess}
         options={{
-          headerLeft: undefined,
-          headerRight: undefined,
-          headerTitle: undefined,
+          headerLeft: null,
+          headerRight: null,
+          headerTitle: null,
           gestureEnabled: false,
         }}
       />

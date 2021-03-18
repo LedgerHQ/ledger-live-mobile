@@ -98,8 +98,8 @@ function OptInFlow() {
               })}
             />
           ),
-          headerLeft: undefined,
-          headerRight: undefined,
+          headerLeft: null,
+          headerRight: null,
           gestureEnabled: false,
         }}
       />

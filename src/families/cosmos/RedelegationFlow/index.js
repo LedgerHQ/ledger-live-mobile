@@ -75,6 +75,8 @@ function RedelegationFlow() {
         name={ScreenName.CosmosRedelegationSelectDevice}
         component={SelectDevice}
         options={{
+          headerLeft: null,
+          gestureEnabled: false,
           headerTitle: () => (
             <StepHeader
               title={t("cosmos.redelegation.stepperHeader.selectDevice")}
@@ -113,9 +115,9 @@ function RedelegationFlow() {
         name={ScreenName.CosmosRedelegationValidationSuccess}
         component={RedelegationValidationSuccess}
         options={{
-          headerLeft: undefined,
-          headerRight: undefined,
-          headerTitle: undefined,
+          headerLeft: null,
+          headerRight: null,
+          headerTitle: null,
           gestureEnabled: false,
         }}
       />

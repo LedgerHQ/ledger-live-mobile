@@ -73,16 +73,16 @@ export default function UnfreezeNavigator() {
         name={ScreenName.UnfreezeValidationSuccess}
         component={ValidationSuccess}
         options={{
-          headerTitle: undefined,
+          headerTitle: null,
           gestureEnabled: false,
-          headerLeft: undefined,
-          headerRight: undefined,
+          headerLeft: null,
+          headerRight: null,
         }}
       />
       <Stack.Screen
         name={ScreenName.UnfreezeValidationError}
         component={ValidationError}
-        options={{ headerTitle: undefined }}
+        options={{ headerTitle: null }}
       />
     </Stack.Navigator>
   );
