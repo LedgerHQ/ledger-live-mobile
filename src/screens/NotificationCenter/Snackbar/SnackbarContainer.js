@@ -1,15 +1,18 @@
 // @flow
 import React, { useCallback } from "react";
-import { View, StyleSheet } from "react-native";
+import { StyleSheet, FlatList } from "react-native";
 
 import { useToasts } from "@ledgerhq/live-common/lib/notifications/ToastProvider/index";
 import type { ToastData } from "@ledgerhq/live-common/lib/notifications/ToastProvider/types";
 
+import { useSelector } from "react-redux";
 import Snackbar from "./Snackbar";
 import * as RootNavigation from "../../../rootnavigation.js";
 import { NavigatorName, ScreenName } from "../../../const";
+import { hasCompletedOnboardingSelector } from "../../../reducers/settings";
 
 export default function SnackbarContainer() {
+  const hasCompletedOnboarding = useSelector(hasCompletedOnboardingSelector);
   const { dismissToast, toasts } = useToasts();
 
   const navigate = useCallback(
@@ -29,17 +32,19 @@ export default function SnackbarContainer() {
     [dismissToast],
   );
 
-  return toasts && toasts.length ? (
-    <View style={styles.root}>
-      {toasts.map(a => (
+  return hasCompletedOnboarding && toasts && toasts.length ? (
+    <FlatList
+      style={styles.root}
+      data={toasts.slice(Math.max(0, toasts.length - 3))}
+      keyExtractor={item => item.id}
+      renderItem={({ item }) => (
         <Snackbar
-          toast={a}
-          key={a.id}
+          toast={item}
           onPress={navigate}
           onClose={handleDismissToast}
         />
-      ))}
-    </View>
+      )}
+    />
   ) : null;
 }
 

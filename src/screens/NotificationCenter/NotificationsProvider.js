@@ -1,5 +1,5 @@
 // @flow
-import React, { useCallback } from "react";
+import React, { useCallback, useRef } from "react";
 import { useSelector } from "react-redux";
 import { AnnouncementProvider } from "@ledgerhq/live-common/lib/notifications/AnnouncementProvider";
 import { ServiceStatusProvider } from "@ledgerhq/live-common/lib/notifications/ServiceStatusProvider";
@@ -19,6 +19,7 @@ export default function NotificationsProvider({ children }: Props) {
   const c = useSelector(cryptoCurrenciesSelector);
   const currencies = c.map(({ family }) => family);
   const { pushToast } = useToasts();
+  const initDateRef = useRef();
 
   const onLoad = useCallback(
     () =>
@@ -27,7 +28,11 @@ export default function NotificationsProvider({ children }: Props) {
           announcements = [],
           seenIds = [],
           lastUpdateTime = new Date().getTime(),
+          initDate = new Date().getTime(),
         } = dbData || {};
+
+        initDateRef.current = initDate;
+
         return {
           announcements,
           seenIds,
@@ -39,28 +44,45 @@ export default function NotificationsProvider({ children }: Props) {
 
   const onSave = useCallback(
     ({ announcements, seenIds, lastUpdateTime }) =>
-      saveNotifications({ announcements, seenIds, lastUpdateTime }),
-    [],
+      saveNotifications({
+        announcements,
+        seenIds,
+        lastUpdateTime,
+        initDate: initDateRef.current,
+      }),
+    [initDateRef],
   );
 
   const onNewAnnouncement = useCallback(
     (announcement: Announcement) => {
-      const { uuid, content, icon, utm_campaign: utmCampaign } = announcement;
+      const {
+        uuid,
+        content,
+        icon,
+        utm_campaign: utmCampaign,
+        published_at: publishedAt,
+      } = announcement;
 
       track("Announcement Received", {
         uuid,
         utm_campaign: utmCampaign,
       });
+      const publishedTime = new Date(publishedAt).getTime();
 
-      pushToast({
-        id: uuid,
-        type: "announcement",
-        title: content.title,
-        text: content.text,
-        icon,
-      });
+      if (
+        publishedTime &&
+        initDateRef.current &&
+        publishedTime > initDateRef.current
+      )
+        pushToast({
+          id: uuid,
+          type: "announcement",
+          title: content.title,
+          text: content.text,
+          icon,
+        });
     },
-    [pushToast],
+    [pushToast, initDateRef],
   );
 
   const onAnnouncementRead = useCallback(

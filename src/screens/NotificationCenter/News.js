@@ -22,13 +22,14 @@ const viewabilityConfig = {
 
 export default function NotificationCenter() {
   const { colors, dark } = useTheme();
-  const { cache, setAsSeen, updateCache, allIds } = useAnnouncements();
+  const { cache, setAsSeen, updateCache, allIds, seenIds } = useAnnouncements();
 
   const onViewableItemsChanged = useCallback(
     ({ viewableItems }) => {
       viewableItems
-        .filter(({ item }) => item && item.uuid)
-        .map(({ item }) => item.uuid)
+        .reduce((s, a) => s.concat(a.item ? a.item : a.data), [])
+        .map(({ uuid }) => uuid)
+        .filter(Boolean)
         .forEach(setAsSeen);
     },
     [setAsSeen],
@@ -45,9 +46,14 @@ export default function NotificationCenter() {
     <SafeAreaView style={styles.root}>
       <SectionList
         style={styles.sectionList}
-        contentContainerStyle={styles.spacer}
         sections={sections}
-        renderItem={props => <NewsRow {...props} />}
+        renderItem={({ item, index }) => (
+          <NewsRow
+            item={item}
+            index={index}
+            isUnread={!seenIds.includes(item.uuid)}
+          />
+        )}
         renderSectionHeader={({ section: { title } }) =>
           title && title instanceof Date ? (
             <LText
@@ -94,6 +100,7 @@ export default function NotificationCenter() {
 const styles = StyleSheet.create({
   root: { flex: 1, paddingVertical: 16 },
   sectionList: {
+    flex: 1,
     paddingHorizontal: 16,
   },
   label: {
@@ -109,7 +116,6 @@ const styles = StyleSheet.create({
     height: 1,
     marginBottom: 8,
   },
-  spacer: { flex: 1 },
   emptyState: {
     flex: 1,
     flexDirection: "column",

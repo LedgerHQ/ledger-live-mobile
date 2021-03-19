@@ -16,6 +16,7 @@ import IconPie from "../../icons/Pie";
 import BellIcon from "../../icons/Bell";
 import { NavigatorName, ScreenName } from "../../const";
 import { scrollToTop } from "../../navigation/utils";
+import LText from "../../components/LText";
 
 type Props = {
   showDistribution?: boolean,
@@ -46,8 +47,7 @@ export default function PortfolioHeader({
   const networkError = useSelector(networkErrorSelector);
   const { pending, error } = useGlobalSyncState();
 
-  const hasNotifications =
-    seenIds.length < allIds.length || incidents.length > 0;
+  const notificationsCount = allIds.length - seenIds.length + incidents.length;
 
   const content =
     pending && !isUpToDate ? (
@@ -82,9 +82,8 @@ export default function PortfolioHeader({
         </View>
       )}
       <View style={[styles.distributionButton, styles.marginLeft]}>
-        <Touchable event="" onPress={onNotificationButtonPress}>
-          {/** @TODO set correct analytics event here */}
-          {hasNotifications && (
+        <Touchable onPress={onNotificationButtonPress}>
+          {notificationsCount > 0 && (
             <View
               style={[
                 styles.badge,
@@ -93,7 +92,11 @@ export default function PortfolioHeader({
                   borderColor: colors.background,
                 },
               ]}
-            />
+            >
+              <LText bold style={styles.badgeLabel}>
+                {notificationsCount}
+              </LText>
+            </View>
           )}
           <BellIcon size={18} color={colors.grey} />
         </Touchable>
@@ -121,13 +124,16 @@ const styles = StyleSheet.create({
   },
   marginLeft: { marginLeft: 8 },
   badge: {
-    width: 15,
-    height: 15,
+    width: 20,
+    height: 20,
     borderWidth: 3,
     borderRadius: 15,
     position: "absolute",
-    top: -6,
-    right: -4,
+    alignItems: "center",
+    justifyContent: "center",
+    top: -10,
+    right: -10,
     zIndex: 2,
   },
+  badgeLabel: { fontSize: 8, color: "#FFF" },
 });

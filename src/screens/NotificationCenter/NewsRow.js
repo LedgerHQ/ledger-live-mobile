@@ -1,5 +1,5 @@
 // @flow
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import { View, StyleSheet, Linking } from "react-native";
 
 import type { Announcement } from "@ledgerhq/live-common/lib/notifications/AnnouncementProvider/types";
@@ -14,6 +14,7 @@ type Props = {
   item: Announcement,
   index: number,
   style?: *,
+  isUnread?: boolean,
 };
 
 const icons = {
@@ -21,10 +22,11 @@ const icons = {
   warning: Warning,
 };
 
-export default function NewsRow({ item, style }: Props) {
+export default function NewsRow({ item, style, isUnread }: Props) {
   const { colors } = useTheme();
   const { content, uuid, level, icon, utm_campaign: utmCampaign } = item;
   const { title, text, link } = content;
+  const [hasBeenRead] = useState(!isUnread);
 
   const iconColors = {
     info: colors.live,
@@ -47,35 +49,45 @@ export default function NewsRow({ item, style }: Props) {
   }, [link, utmCampaign]);
 
   return (
-    <View
-      style={[styles.root, style, backgroundColor ? { backgroundColor } : null]}
-    >
-      <View style={styles.leftSection}>
-        {Icon && <Icon size={16} color={color || iconColor} />}
-      </View>
-      <View style={styles.rightSection}>
-        <LText
-          semiBold
-          style={[styles.title, { color: color || colors.darkBlue }]}
-        >
-          {title}
-        </LText>
-        {text && (
-          <LText style={[styles.text, { color: color || colors.grey }]}>
-            {text}
-          </LText>
-        )}
-        {link && (
-          <View style={styles.link}>
-            <ExternalLink
-              event="NewsLearnMore"
-              eventProperties={{ uuid }}
-              text={link.label || <Trans i18nKey="common.learnMore" />}
-              color={color}
-              onPress={openUrl}
-            />
+    <View style={!hasBeenRead ? styles.unRead : null}>
+      {!hasBeenRead ? (
+        <View style={[styles.unReadBadge, { backgroundColor: colors.live }]} />
+      ) : null}
+      <View
+        style={[
+          styles.root,
+          style,
+          backgroundColor ? { backgroundColor } : null,
+        ]}
+      >
+        <View style={styles.section}>
+          <View style={styles.titleSection}>
+            {Icon && <Icon size={16} color={color || iconColor} />}
+            <LText
+              semiBold
+              style={[styles.title, { color: color || colors.darkBlue }]}
+            >
+              {title}
+            </LText>
           </View>
-        )}
+
+          {text && (
+            <LText style={[styles.text, { color: color || colors.grey }]}>
+              {text}
+            </LText>
+          )}
+          {link && (
+            <View style={styles.link}>
+              <ExternalLink
+                event="NewsLearnMore"
+                eventProperties={{ uuid }}
+                text={link.label || <Trans i18nKey="common.learnMore" />}
+                color={color}
+                onPress={openUrl}
+              />
+            </View>
+          )}
+        </View>
       </View>
     </View>
   );
@@ -88,14 +100,26 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     marginBottom: 8,
   },
-  leftSection: {
-    width: 16,
-    marginRight: 16,
-    flexDirection: "column",
-    justifyContent: "flex-start",
-    alignItems: "flex-start",
+  unRead: {
+    paddingLeft: 16,
+    position: "relative",
   },
-  rightSection: {
+  unReadBadge: {
+    position: "absolute",
+    width: 8,
+    height: 8,
+    borderRadius: 8,
+    top: "45%",
+    left: 0,
+  },
+  titleSection: {
+    flexDirection: "row",
+    alignItems: "center",
+    alignContent: "center",
+    justifyContent: "flex-start",
+    marginBottom: 4,
+  },
+  section: {
     flex: 1,
     flexDirection: "column",
     justifyContent: "flex-start",
@@ -103,7 +127,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 14,
-    marginBottom: 4,
+    marginLeft: 8,
   },
   text: {
     fontSize: 13,
