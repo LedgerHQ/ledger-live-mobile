@@ -233,40 +233,34 @@ class SelectableAccount extends PureComponent<
             useFullBalance={this.props.useFullBalance}
             account={account}
             parentAccount={null}
+            AccountSubTitle={
+              subAccountCount && !isDisabled ? (
+                <View style={[styles.subAccountCount]}>
+                  <LText
+                    semiBold
+                    style={styles.subAccountCountText}
+                    color="pillActiveForeground"
+                  >
+                    <Trans
+                      i18nKey={`selectableAccountsList.${
+                        isToken ? "tokenCount" : "subaccountCount"
+                      }`}
+                      count={subAccountCount}
+                      values={{ count: subAccountCount }}
+                    />
+                  </LText>
+                </View>
+              ) : null
+            }
           />
-          {!isDisabled && (
+          {!isDisabled ? (
             <CheckBox
               onChange={this.onPress ? this.onPress : undefined}
               isChecked={!!isSelected}
               style={styles.selectableAccountCheckbox}
             />
-          )}
+          ) : null}
         </View>
-
-        {subAccountCount && !isDisabled ? (
-          <View style={styles.subAccountCountWrapper}>
-            <View
-              style={[
-                styles.subAccountCount,
-                { backgroundColor: colors.pillActiveBackground },
-              ]}
-            >
-              <LText
-                semiBold
-                style={styles.subAccountCountText}
-                color="pillActiveForeground"
-              >
-                <Trans
-                  i18nKey={`selectableAccountsList.${
-                    isToken ? "tokenCount" : "subaccountCount"
-                  }`}
-                  count={subAccountCount}
-                  values={{ count: subAccountCount }}
-                />
-              </LText>
-            </View>
-          </View>
-        ) : null}
       </View>
     );
     if (isDisabled) return inner;
@@ -382,15 +376,8 @@ const styles = StyleSheet.create({
     paddingLeft: 0,
     paddingRight: 0,
   },
-  subAccountCountWrapper: {
-    flexDirection: "row",
-    marginLeft: 28,
-    marginTop: -16,
-    marginBottom: 8,
-  },
   subAccountCount: {
-    padding: 4,
-    borderRadius: 4,
+    marginTop: 3,
   },
   subAccountCountText: {
     fontSize: 10,
