@@ -84,8 +84,6 @@ function DelegationFlow() {
         name={ScreenName.CosmosDelegationSelectDevice}
         component={SelectDevice}
         options={{
-          headerLeft: null,
-          gestureEnabled: false,
           headerTitle: () => (
             <StepHeader
               title={t("cosmos.delegation.stepperHeader.selectDevice")}
@@ -101,6 +99,8 @@ function DelegationFlow() {
         name={ScreenName.CosmosDelegationConnectDevice}
         component={ConnectDevice}
         options={{
+          headerLeft: null,
+          gestureEnabled: false,
           headerTitle: () => (
             <StepHeader
               title={t("cosmos.delegation.stepperHeader.connectDevice")}
