@@ -228,18 +228,45 @@ class SelectableAccount extends PureComponent<
           { backgroundColor: colors.lightFog },
         ]}
       >
-        <AccountCard
-          useFullBalance={this.props.useFullBalance}
-          account={account}
-          parentAccount={null}
-        />
-        {!isDisabled && (
-          <CheckBox
-            onChange={this.onPress ? this.onPress : undefined}
-            isChecked={!!isSelected}
-            style={styles.selectableAccountCheckbox}
+        <View style={styles.accountRow}>
+          <AccountCard
+            useFullBalance={this.props.useFullBalance}
+            account={account}
+            parentAccount={null}
           />
-        )}
+          {!isDisabled && (
+            <CheckBox
+              onChange={this.onPress ? this.onPress : undefined}
+              isChecked={!!isSelected}
+              style={styles.selectableAccountCheckbox}
+            />
+          )}
+        </View>
+
+        {subAccountCount && !isDisabled ? (
+          <View style={styles.subAccountCountWrapper}>
+            <View
+              style={[
+                styles.subAccountCount,
+                { backgroundColor: colors.pillActiveBackground },
+              ]}
+            >
+              <LText
+                semiBold
+                style={styles.subAccountCountText}
+                color="pillActiveForeground"
+              >
+                <Trans
+                  i18nKey={`selectableAccountsList.${
+                    isToken ? "tokenCount" : "subaccountCount"
+                  }`}
+                  count={subAccountCount}
+                  values={{ count: subAccountCount }}
+                />
+              </LText>
+            </View>
+          </View>
+        ) : null}
       </View>
     );
     if (isDisabled) return inner;
@@ -253,30 +280,6 @@ class SelectableAccount extends PureComponent<
           renderLeftActions={this.renderLeftActions}
         >
           {inner}
-          {subAccountCount ? (
-            <View style={styles.subAccountCountWrapper}>
-              <View
-                style={[
-                  styles.subAccountCount,
-                  { backgroundColor: colors.pillActiveBackground },
-                ]}
-              >
-                <LText
-                  semiBold
-                  style={styles.subAccountCountText}
-                  color="pillActiveForeground"
-                >
-                  <Trans
-                    i18nKey={`selectableAccountsList.${
-                      isToken ? "tokenCount" : "subaccountCount"
-                    }`}
-                    count={subAccountCount}
-                    values={{ count: subAccountCount }}
-                  />
-                </LText>
-              </View>
-            </View>
-          ) : null}
           {showHint && (
             <TouchHintCircle
               stopAnimation={stopAnimation}
@@ -331,10 +334,15 @@ const styles = StyleSheet.create({
   selectableAccountRoot: {
     marginHorizontal: 16,
     marginVertical: 8,
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: "column",
+    alignItems: "flex-start",
     paddingHorizontal: 16,
     borderRadius: 4,
+  },
+  accountRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "flex-start",
   },
   selectableAccountRootDisabled: {
     opacity: 0.4,
@@ -376,8 +384,9 @@ const styles = StyleSheet.create({
   },
   subAccountCountWrapper: {
     flexDirection: "row",
-    marginLeft: 45,
-    marginTop: -11,
+    marginLeft: 28,
+    marginTop: -16,
+    marginBottom: 8,
   },
   subAccountCount: {
     padding: 4,
