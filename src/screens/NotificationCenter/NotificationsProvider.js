@@ -97,7 +97,7 @@ export default function NotificationsProvider({ children }: Props) {
 
   return (
     <AnnouncementProvider
-      autoUpdateDelay={15000}
+      autoUpdateDelay={60000}
       context={{
         language: locale,
         currencies,
@@ -108,7 +108,7 @@ export default function NotificationsProvider({ children }: Props) {
       onNewAnnouncement={onNewAnnouncement}
       onAnnouncementRead={onAnnouncementRead}
     >
-      <ServiceStatusProvider autoUpdateDelay={15000}>
+      <ServiceStatusProvider autoUpdateDelay={60000}>
         {children}
       </ServiceStatusProvider>
     </AnnouncementProvider>
