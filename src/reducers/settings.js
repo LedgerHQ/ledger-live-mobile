@@ -463,12 +463,6 @@ export const swapSupportedCurrenciesSelector: OutputSelector<
   // structure with provider -> method -> currencies will be needed or a different
   // data structure. Until then, this is provider agnostic.
   swapProviders.forEach(({ supportedCurrencies, tradeMethod }) => {
-    // FIXME mocking that ripple and stellar are not available for floating
-    // remove this before merging, if you are reviewing this, reject me.
-    supportedCurrencies = supportedCurrencies.filter(
-      id => !(tradeMethod === "float" && ["ripple", "stellar"].includes(id)),
-    );
-
     const tokenCurrencies = supportedCurrencies
       .map(findTokenById)
       .filter(Boolean)
