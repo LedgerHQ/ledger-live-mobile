@@ -89,7 +89,6 @@ export default function PortfolioHeader({
                 styles.badge,
                 {
                   backgroundColor: colors.alert,
-                  borderColor: colors.background,
                 },
               ]}
             >
@@ -124,15 +123,14 @@ const styles = StyleSheet.create({
   },
   marginLeft: { marginLeft: 8 },
   badge: {
-    width: 20,
-    height: 20,
-    borderWidth: 3,
+    width: 16,
+    height: 16,
     borderRadius: 15,
     position: "absolute",
     alignItems: "center",
     justifyContent: "center",
-    top: -10,
-    right: -10,
+    top: -8,
+    right: -8,
     zIndex: 2,
   },
   badgeLabel: { fontSize: 8, color: "#FFF" },

@@ -1,8 +1,9 @@
 // @flow
-import React from "react";
+import React, { useState } from "react";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "@react-navigation/native";
+import { useAnnouncements } from "@ledgerhq/live-common/lib/notifications/AnnouncementProvider";
 import { ScreenName } from "../../const";
 import styles from "../../navigation/styles";
 import NotificationCenterNews from "../../screens/NotificationCenter/News";
@@ -19,6 +20,8 @@ const Tab = createMaterialTopTabNavigator();
 export default function NotificationCenterNavigator() {
   const { t } = useTranslation();
   const { colors } = useTheme();
+  const { allIds, seenIds } = useAnnouncements();
+  const [notificationsCount] = useState(allIds.length - seenIds.length);
 
   return (
     <Tab.Navigator
@@ -37,7 +40,14 @@ export default function NotificationCenterNavigator() {
           tabBarLabel: ({ focused, color }: TabLabelProps) => (
             // width has to be a little bigger to accomodate the switch in size between semibold to regular
             <LText style={{ width: "110%", color }} semiBold={focused}>
-              {t("notificationCenter.news.title")}
+              {t(
+                notificationsCount > 0
+                  ? "notificationCenter.news.titleCount"
+                  : "notificationCenter.news.title",
+                {
+                  count: notificationsCount,
+                },
+              )}
             </LText>
           ),
         }}

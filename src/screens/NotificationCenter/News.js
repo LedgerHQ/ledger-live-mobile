@@ -43,62 +43,61 @@ export default function NotificationCenter() {
   );
 
   return (
-    <SafeAreaView style={styles.root}>
-      <SectionList
-        style={styles.sectionList}
-        sections={sections}
-        renderItem={({ item, index }) => (
-          <NewsRow
-            item={item}
-            index={index}
-            isUnread={!seenIds.includes(item.uuid)}
-          />
-        )}
-        renderSectionHeader={({ section: { title } }) =>
-          title && title instanceof Date ? (
-            <LText
-              style={[styles.label, { backgroundColor: colors.lightFog }]}
-              semiBold
-              color="grey"
-            >
-              <FormatDate date={title} />
-            </LText>
-          ) : null
-        }
-        keyExtractor={(item, index) => item.uuid + index}
-        ItemSeparatorComponent={() => (
-          <View
-            style={[styles.separator, { backgroundColor: colors.lightFog }]}
-          />
-        )}
-        refreshControl={
-          <RefreshControl
-            progressBackgroundColor={dark ? colors.background : colors.card}
-            colors={[colors.live]}
-            tintColor={colors.live}
-            refreshing={false}
-            onRefresh={updateCache}
-          />
-        }
-        viewabilityConfig={viewabilityConfig}
-        onViewableItemsChanged={onViewableItemsChanged}
-        ListEmptyComponent={
-          <View style={styles.emptyState}>
-            <LText bold style={styles.title}>
-              <Trans i18nKey="notificationCenter.news.emptyState.title" />
-            </LText>
-            <LText style={styles.text}>
-              <Trans i18nKey="notificationCenter.news.emptyState.desc" />
-            </LText>
-          </View>
-        }
-      />
-    </SafeAreaView>
+    <SectionList
+      style={styles.sectionList}
+      contentContainerStyle={styles.root}
+      sections={sections}
+      renderItem={({ item, index }) => (
+        <NewsRow
+          item={item}
+          index={index}
+          isUnread={!seenIds.includes(item.uuid)}
+        />
+      )}
+      renderSectionHeader={({ section: { title } }) =>
+        title && title instanceof Date ? (
+          <LText
+            style={[styles.label, { backgroundColor: colors.lightFog }]}
+            semiBold
+            color="grey"
+          >
+            <FormatDate date={title} />
+          </LText>
+        ) : null
+      }
+      keyExtractor={(item, index) => item.uuid + index}
+      ItemSeparatorComponent={() => (
+        <View
+          style={[styles.separator, { backgroundColor: colors.lightFog }]}
+        />
+      )}
+      refreshControl={
+        <RefreshControl
+          progressBackgroundColor={dark ? colors.background : colors.card}
+          colors={[colors.live]}
+          tintColor={colors.live}
+          refreshing={false}
+          onRefresh={updateCache}
+        />
+      }
+      viewabilityConfig={viewabilityConfig}
+      onViewableItemsChanged={onViewableItemsChanged}
+      ListEmptyComponent={
+        <View style={styles.emptyState}>
+          <LText bold style={styles.title}>
+            <Trans i18nKey="notificationCenter.news.emptyState.title" />
+          </LText>
+          <LText style={styles.text}>
+            <Trans i18nKey="notificationCenter.news.emptyState.desc" />
+          </LText>
+        </View>
+      }
+    />
   );
 }
 
 const styles = StyleSheet.create({
-  root: { flex: 1, paddingVertical: 16 },
+  root: { paddingVertical: 16 },
   sectionList: {
     flex: 1,
     paddingHorizontal: 16,

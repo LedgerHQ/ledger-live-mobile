@@ -3485,6 +3485,7 @@
     "liveStatus": "Ledger live status",
     "news": {
       "title": "News",
+      "titleCount": "News ({{count}})",
       "emptyState": {
         "title": "No news for the moment",
         "desc": "You will find here all the news related to Ledger and Ledger live"

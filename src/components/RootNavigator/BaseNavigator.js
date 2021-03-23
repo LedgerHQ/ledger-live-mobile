@@ -319,11 +319,12 @@ export default function BaseNavigator() {
       <Stack.Screen
         name={NavigatorName.NotificationCenter}
         component={NotificationCenterNavigator}
-        options={{
+        options={({ navigation }) => ({
           title: t("notificationCenter.title"),
           headerStyle: styles.headerNoShadow,
           headerRight: null,
-        }}
+          headerLeft: () => <CloseButton navigation={navigation} />,
+        })}
       />
       {Object.keys(families).map(name => {
         const { component, options } = families[name];
