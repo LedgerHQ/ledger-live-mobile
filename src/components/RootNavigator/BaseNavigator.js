@@ -1,6 +1,9 @@
 // @flow
 import React, { useMemo } from "react";
-import { createStackNavigator } from "@react-navigation/stack";
+import {
+  createStackNavigator,
+  CardStyleInterpolators,
+} from "@react-navigation/stack";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "@react-navigation/native";
 import { ScreenName, NavigatorName } from "../../const";
@@ -322,8 +325,9 @@ export default function BaseNavigator() {
         options={({ navigation }) => ({
           title: t("notificationCenter.title"),
           headerStyle: styles.headerNoShadow,
-          headerRight: null,
-          headerLeft: () => <CloseButton navigation={navigation} />,
+          headerLeft: null,
+          headerRight: () => <CloseButton navigation={navigation} />,
+          cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS,
         })}
       />
       {Object.keys(families).map(name => {
