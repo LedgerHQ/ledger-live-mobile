@@ -1,12 +1,6 @@
 // @flow
 import React, { useCallback } from "react";
-import {
-  SafeAreaView,
-  StyleSheet,
-  SectionList,
-  RefreshControl,
-  View,
-} from "react-native";
+import { StyleSheet, SectionList, RefreshControl, View } from "react-native";
 import { useAnnouncements } from "@ledgerhq/live-common/lib/notifications/AnnouncementProvider";
 import { groupAnnouncements } from "@ledgerhq/live-common/lib/notifications/AnnouncementProvider/helpers";
 import { useTheme } from "@react-navigation/native";
