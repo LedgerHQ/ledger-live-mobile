@@ -94,14 +94,14 @@ const Rate = ({
               style={styles.modalIcon}
               color={colors.grey}
               name={"lock-open"}
-              size={24}
+              size={20}
               light
             />
             <View style={styles.modalDesc}>
-              <LText bold>
+              <LText semiBold style={styles.methodTitle}>
                 <Trans i18nKey={"transfer.swap.tradeMethod.float"} />
               </LText>
-              <LText>
+              <LText color="grey" style={styles.method}>
                 <Trans i18nKey={"transfer.swap.tradeMethod.floatDesc"} />
               </LText>
             </View>
@@ -111,14 +111,14 @@ const Rate = ({
               style={styles.modalIcon}
               color={colors.grey}
               name={"lock"}
-              size={24}
+              size={20}
               light
             />
             <View style={styles.modalDesc}>
-              <LText bold>
+              <LText semiBold style={styles.methodTitle}>
                 <Trans i18nKey={"transfer.swap.tradeMethod.fixed"} />
               </LText>
-              <LText>
+              <LText color="grey" style={styles.method}>
                 <Trans i18nKey={"transfer.swap.tradeMethod.fixedDesc"} />
               </LText>
             </View>
@@ -157,14 +157,16 @@ const styles = StyleSheet.create({
     paddingTop: 24,
   },
   modalIcon: {
-    marginRight: 25,
+    marginRight: 10,
+    width: 34,
+    overflow: "visible",
   },
   modalMethod: {
     flexDirection: "row",
     alignItems: "center",
     display: "flex",
-    paddingRight: 32,
     padding: 16,
+    paddingRight: 32,
   },
   modalTitle: {
     fontSize: 20,
@@ -172,6 +174,14 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   modalDesc: {},
+  methodTitle: {
+    fontSize: 14,
+  },
+  method: {
+    marginTop: 8,
+    fontSize: 13,
+    lineHeight: 18,
+  },
 });
 
 export default Rate;
