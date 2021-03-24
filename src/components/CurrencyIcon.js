@@ -47,7 +47,7 @@ function CurrencyIcon({ size, currency, color, radius, bg }: Props) {
       >
         {TokenIconCurrency ? (
           <TokenIconCurrency
-            size={size * 0.55}
+            size={size * 0.8}
             color={currencyColor || currency.color}
           />
         ) : (
