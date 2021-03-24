@@ -160,7 +160,7 @@ export const darkTheme = {
     success: "#66BE54",
     darkBlue: "#FAFAFA",
     smoke: "#aaa",
-    grey: "rgba(255,255,255, 0.4)",
+    grey: "#aaa",
     fog: "#A8A8A8",
     white: "#000000",
     green: "rgb(102, 190, 84)",
