@@ -38,25 +38,34 @@ export default function NotificationCenter() {
 
   return (
     <SectionList
-      style={styles.sectionList}
+      style={[styles.sectionList, { backgroundColor: colors.background }]}
       contentContainerStyle={styles.root}
       sections={sections}
-      renderItem={({ item, index }) => (
+      stickySectionHeadersEnabled
+      renderItem={({ item, index, section }) => (
         <NewsRow
           item={item}
           index={index}
+          isLastElement={index >= section.data.length - 1}
           isUnread={!seenIds.includes(item.uuid)}
         />
       )}
       renderSectionHeader={({ section: { title } }) =>
         title && title instanceof Date ? (
-          <LText
-            style={[styles.label, { backgroundColor: colors.lightFog }]}
-            semiBold
-            color="grey"
+          <View
+            style={[
+              styles.sectionHeader,
+              { backgroundColor: colors.background },
+            ]}
           >
-            <FormatDate date={title} />
-          </LText>
+            <LText
+              style={[styles.label, { backgroundColor: colors.lightFog }]}
+              semiBold
+              color="grey"
+            >
+              <FormatDate date={title} />
+            </LText>
+          </View>
         ) : null
       }
       keyExtractor={(item, index) => item.uuid + index}
@@ -102,8 +111,8 @@ const styles = StyleSheet.create({
     lineHeight: 26,
     height: 26,
     borderRadius: 4,
-    marginBottom: 16,
   },
+  sectionHeader: { paddingTop: 16, paddingBottom: 8 },
   separator: {
     width: "100%",
     height: 1,

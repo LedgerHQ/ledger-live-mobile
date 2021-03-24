@@ -13,6 +13,7 @@ import ExternalLink from "../../components/ExternalLink";
 type Props = {
   item: Announcement,
   index: number,
+  isLastElement?: boolean,
   style?: *,
   isUnread?: boolean,
 };
@@ -22,7 +23,12 @@ const icons = {
   warning: Warning,
 };
 
-export default function NewsRow({ item, style, isUnread }: Props) {
+export default function NewsRow({
+  item,
+  style,
+  isUnread,
+  isLastElement,
+}: Props) {
   const { colors } = useTheme();
   const { content, uuid, level, icon, utm_campaign: utmCampaign } = item;
   const { title, text, link } = content;
@@ -49,7 +55,12 @@ export default function NewsRow({ item, style, isUnread }: Props) {
   }, [link, utmCampaign]);
 
   return (
-    <View style={!hasBeenRead ? styles.unRead : null}>
+    <View
+      style={[
+        !hasBeenRead ? styles.unRead : null,
+        isLastElement ? styles.marginBottom : null,
+      ]}
+    >
       {!hasBeenRead ? (
         <View style={[styles.unReadBadge, { backgroundColor: colors.live }]} />
       ) : null}
@@ -99,6 +110,9 @@ const styles = StyleSheet.create({
     padding: 16,
     borderRadius: 4,
     marginBottom: 8,
+  },
+  marginBottom: {
+    marginBottom: 32,
   },
   unRead: {
     paddingLeft: 16,
