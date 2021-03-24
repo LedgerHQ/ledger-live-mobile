@@ -1,6 +1,6 @@
 // @flow
 import React, { useCallback } from "react";
-import { StyleSheet, FlatList } from "react-native";
+import { StyleSheet, FlatList, Platform } from "react-native";
 
 import { useToasts } from "@ledgerhq/live-common/lib/notifications/ToastProvider/index";
 import type { ToastData } from "@ledgerhq/live-common/lib/notifications/ToastProvider/types";
@@ -51,7 +51,7 @@ export default function SnackbarContainer() {
 const styles = StyleSheet.create({
   root: {
     position: "absolute",
-    bottom: 50,
+    bottom: Platform.OS === "ios" ? 70 : 50,
     left: 0,
     height: "auto",
     width: "100%",
