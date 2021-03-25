@@ -12,7 +12,7 @@ import { useSelector } from "react-redux";
 import { useLocale } from "../../context/Locale";
 import LText from "../../components/LText";
 import InfoBox from "../../components/InfoBox";
-import WarningBox from "../../components/WarningBox";
+import Alert from "../../components/Alert";
 import { discreetModeSelector } from "../../reducers/settings";
 
 type Props = {
@@ -95,7 +95,7 @@ export default function LendingBanners({ account }: Props) {
     if (lendingWarningBannerContent) {
       lendingWarningBanner = (
         <View style={styles.bannerBox} key="warningBanner">
-          <WarningBox>{lendingWarningBannerContent}</WarningBox>
+          <Alert type="warning">{lendingWarningBannerContent}</Alert>
         </View>
       );
     }
