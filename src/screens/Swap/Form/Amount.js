@@ -266,7 +266,6 @@ const SwapFormAmount = ({ navigation, route }: Props) => {
           value={toValue}
           placeholder={"0"}
           editable={false}
-          showAllDigits
           inputStyle={styles.currency}
           renderRight={
             <LText style={styles.currency} color="grey">

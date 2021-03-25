@@ -1,5 +1,6 @@
 // @flow
 import React, { useCallback } from "react";
+import { BigNumber } from "bignumber.js";
 import { StyleSheet, View, TouchableOpacity, Linking } from "react-native";
 import { Trans } from "react-i18next";
 import type { TransactionStatus } from "@ledgerhq/live-common/lib/types";
@@ -14,6 +15,7 @@ import type {
 } from "@ledgerhq/live-common/lib/exchange/swap/types";
 import { useTheme } from "@react-navigation/native";
 import LText from "../../../../components/LText";
+import TooltipLabel from "../../../../components/TooltipLabel";
 import CurrencyUnitValue from "../../../../components/CurrencyUnitValue";
 import SectionSeparator, {
   ArrowDownCircle,
@@ -97,19 +99,46 @@ const SummaryBody = ({
       </View>
       <View style={styles.row}>
         <LText primary style={styles.label} color="smoke">
-          <Trans i18nKey="transfer.swap.form.summary.receive" />
+          <Trans
+            i18nKey={
+              exchangeRate.tradeMethod === "fixed"
+                ? "transfer.swap.form.summary.receive"
+                : "transfer.swap.form.summary.receiveFloat"
+            }
+          />
         </LText>
         <LText tertiary style={styles.value2}>
           <CurrencyUnitValue
             disableRounding
             showCode
             unit={getAccountUnit(toAccount)}
-            value={amount
-              .times(magnitudeAwareRate)
-              .minus(payoutNetworkFees || 0)}
+            value={amount.times(magnitudeAwareRate)}
           />
         </LText>
       </View>
+      {exchangeRate.tradeMethod === "float" ? (
+        <View style={styles.row}>
+          <TooltipLabel
+            color="smoke"
+            style={styles.labelTooltip}
+            tooltip={
+              <Trans i18nKey="transfer.swap.form.summary.payoutNetworkFeesTooltip" />
+            }
+            label={
+              <Trans i18nKey="transfer.swap.form.summary.payoutNetworkFees" />
+            }
+          />
+
+          <LText tertiary style={styles.value2}>
+            <CurrencyUnitValue
+              disableRounding
+              showCode
+              unit={getAccountUnit(toAccount)}
+              value={BigNumber(payoutNetworkFees || 0)}
+            />
+          </LText>
+        </View>
+      ) : null}
       <View style={[styles.rate, { backgroundColor: colors.lightFog }]}>
         <View style={[styles.row, { marginBottom: 0 }]}>
           <LText primary style={styles.label} color="smoke">
@@ -151,6 +180,10 @@ const styles = StyleSheet.create({
   },
   label: {
     flex: 1,
+    fontSize: 12,
+    lineHeight: 18,
+  },
+  labelTooltip: {
     fontSize: 12,
     lineHeight: 18,
   },
