@@ -272,20 +272,22 @@ export default function Nominations({ account }: Props) {
 
   if (hasExternalController(account)) {
     return (
-      <ExternalControllerUnsupportedWarning
-        address={polkadotResources?.controller}
-        onOpenExplorer={onOpenExplorer}
-        onLearnMore={onLearnMore}
-      />
+      <View style={styles.root}>
+        <ExternalControllerUnsupportedWarning
+          address={polkadotResources?.controller}
+          onOpenExplorer={onOpenExplorer}
+        />
+      </View>
     );
   }
   if (hasExternalStash(account)) {
     return (
-      <ExternalStashUnsupportedWarning
-        address={polkadotResources?.stash}
-        onOpenExplorer={onOpenExplorer}
-        onLearnMore={onLearnMore}
-      />
+      <View style={styles.root}>
+        <ExternalStashUnsupportedWarning
+          address={polkadotResources?.stash}
+          onOpenExplorer={onOpenExplorer}
+        />
+      </View>
     );
   }
 
