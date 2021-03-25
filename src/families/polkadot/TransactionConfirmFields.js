@@ -20,7 +20,6 @@ import InfoIcon from "../../icons/Info";
 import NominationInfo from "./components/NominationInfo";
 import PolkadotFeeRow from "./SendRowsFee";
 import Alert from "../../components/Alert";
-import VerifyAddressDisclaimer from "../../components/VerifyAddressDisclaimer";
 
 type FieldProps = {
   account: Account,
@@ -136,7 +135,7 @@ const Footer = ({
       </View>
       {["send", "nominate"].includes(transaction.mode) ? (
         <View style={styles.container}>
-          <VerifyAddressDisclaimer text={recipientWording} />
+          <Alert type="help">{recipientWording}</Alert>
         </View>
       ) : null}
     </>
