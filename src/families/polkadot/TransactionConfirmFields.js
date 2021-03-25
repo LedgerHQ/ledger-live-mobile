@@ -19,7 +19,7 @@ import InfoIcon from "../../icons/Info";
 
 import NominationInfo from "./components/NominationInfo";
 import PolkadotFeeRow from "./SendRowsFee";
-import InfoBox from "../../components/InfoBox";
+import Alert from "../../components/Alert";
 import VerifyAddressDisclaimer from "../../components/VerifyAddressDisclaimer";
 
 type FieldProps = {
@@ -127,21 +127,12 @@ const Footer = ({
   transaction: Transaction,
   recipientWording: string,
 }) => {
-  const { colors } = useTheme();
   const { t } = useTranslation();
 
   return (
     <>
       <View style={styles.container}>
-        <InfoBox
-          forceColor={{
-            background: colors.translucentGrey,
-            text: colors.grey,
-            icon: colors.grey,
-          }}
-        >
-          {t("polkadot.networkFees")}
-        </InfoBox>
+        <Alert type="secondary">{t("polkadot.networkFees")}</Alert>
       </View>
       {["send", "nominate"].includes(transaction.mode) ? (
         <View style={styles.container}>

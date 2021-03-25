@@ -11,7 +11,6 @@ import { getAccountCapabilities } from "@ledgerhq/live-common/lib/compound/logic
 import { useSelector } from "react-redux";
 import { useLocale } from "../../context/Locale";
 import LText from "../../components/LText";
-import InfoBox from "../../components/InfoBox";
 import Alert from "../../components/Alert";
 import { discreetModeSelector } from "../../reducers/settings";
 
@@ -75,7 +74,7 @@ export default function LendingBanners({ account }: Props) {
     if (lendingInfoBannerContent) {
       lendingInfoBanner = (
         <View style={styles.bannerBox} key="infoBanner">
-          <InfoBox>{lendingInfoBannerContent}</InfoBox>
+          <Alert type="primary">{lendingInfoBannerContent}</Alert>
         </View>
       );
     }

@@ -23,7 +23,6 @@ import Check from "../../icons/Check";
 import Exclamation from "../../icons/Exclamation";
 import CrossRound from "../../icons/CrossRound";
 import CurrencyIcon from "../../components/CurrencyIcon";
-import InfoBox from "../../components/InfoBox";
 import Circle from "../../components/Circle";
 import Alert from "../../components/Alert";
 import HeaderRightClose from "../../components/HeaderRightClose";
@@ -196,12 +195,12 @@ export default function Connect({ route, navigation }: Props) {
             </View>
             {wcContext.socketReady ? (
               <View style={styles.messagesContainer}>
-                <InfoBox>
+                <Alert type="primary">
                   <Trans
                     i18nKey="walletconnect.info"
                     values={{ name: wcContext.dappInfo?.name }}
                   />
-                </InfoBox>
+                </Alert>
                 <View style={styles.messagesSeparator} />
                 <Alert type="warning">{t("walletconnect.warning")}</Alert>
               </View>
