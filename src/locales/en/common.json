@@ -1766,6 +1766,11 @@
       "notAvailable": {
         "title": "Service temporarily unavailable, or not available in your country"
       },
+      "payoutModal": {
+        "title": "Payout fees",
+        "description":"Payout fees are not shown on the device and substracted from the amount.",
+        "cta": "Close"
+      },
       "pendingOperation": {
         "description": "Your Swap operation has been sent to the network for confirmation. It may take up to an hour before you receive your swapped crypto assets.",
         "label": "Your Swap ID:",
