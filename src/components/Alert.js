@@ -35,6 +35,7 @@ type Props = {
   type: AlertType,
   children: React$Node,
   left?: React$Node,
+  bottom?: React$Node,
   title?: string,
   vertical?: boolean,
   noIcon?: boolean,
@@ -170,6 +171,7 @@ export default function Alert({
   type = "secondary",
   children: description,
   left,
+  bottom,
   title,
   vertical,
   noIcon,
@@ -220,51 +222,57 @@ export default function Alert({
       style={[
         styles.root,
         borderColor && styles.withBorder,
-        vertical && styles.vertical,
+
         {
           backgroundColor,
           borderColor: borderColor || "transparent",
         },
       ]}
     >
-      {left || (!noIcon && icon) ? (
-        <View style={vertical ? styles.topContainer : styles.leftContainer}>
-          {left || icon}
-        </View>
-      ) : null}
-
-      <View style={vertical ? styles.verticalContent : styles.content}>
-        {title ? (
-          <LText
-            semiBold
-            style={[
-              vertical && styles.textCentered,
-              {
-                color: textColor,
-              },
-            ]}
-          >
-            {title}
-          </LText>
+      <View style={[styles.container, vertical && styles.vertical]}>
+        {left || (!noIcon && icon) ? (
+          <View style={vertical ? styles.topContainer : styles.leftContainer}>
+            {left || icon}
+          </View>
         ) : null}
-        <Text style={[vertical && styles.textCentered, { color: textColor }]}>
-          <LText style={[{ color: textColor }]} fontSize={3}>
-            {description}
-          </LText>
-          {learnMore}
-        </Text>
+
+        <View style={vertical ? styles.verticalContent : styles.content}>
+          {title ? (
+            <LText
+              semiBold
+              style={[
+                vertical && styles.textCentered,
+                {
+                  color: textColor,
+                },
+              ]}
+            >
+              {title}
+            </LText>
+          ) : null}
+          <Text style={[vertical && styles.textCentered, { color: textColor }]}>
+            <LText style={[{ color: textColor }]} fontSize={3}>
+              {description}
+            </LText>
+            {learnMore}
+          </Text>
+        </View>
       </View>
+      {bottom ? <View style={styles.bottomContainer}>{bottom}</View> : null}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   root: {
-    flexDirection: "row",
+    flexDirection: "column",
     borderRadius: 4,
-    alignItems: "center",
     paddingVertical: 16,
     paddingHorizontal: 16,
+  },
+  container: {
+    flexDirection: "row",
+    alignItems: "center",
   },
   vertical: {
     width: "100%",
@@ -279,6 +287,9 @@ const styles = StyleSheet.create({
   },
   topContainer: {
     marginBottom: 16,
+  },
+  bottomContainer: {
+    marginTop: 16,
   },
   content: {
     flex: 1,
