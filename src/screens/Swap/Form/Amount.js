@@ -239,7 +239,7 @@ const SwapFormAmount = ({ navigation, route }: Props) => {
           onChange={onAmountChange}
           unit={fromUnit}
           value={transaction.amount}
-          inputStyle={[styles.currency, styles.active]}
+          isActive
           renderRight={
             <LText
               style={[styles.currency, styles.active]}
@@ -262,7 +262,6 @@ const SwapFormAmount = ({ navigation, route }: Props) => {
       <SectionSeparator />
       <View style={styles.wrapper}>
         <CurrencyInput
-          isActive={false}
           unit={toUnit}
           value={toValue}
           placeholder={"0"}
@@ -331,7 +330,8 @@ const styles = StyleSheet.create({
   wrapper: {
     flexBasis: 80,
     flexDirection: "column",
-    justifyContent: "center",
+    justifyContent: "flex-start",
+    paddingTop: 18,
   },
   toggleWrapper: {
     alignItems: "center",
