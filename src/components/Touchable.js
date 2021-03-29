@@ -19,7 +19,7 @@ type Props = {
   // it also displays a spinner if it takes more than WAIT_TIME_BEFORE_SPINNER
   onPress: ?() => ?Promise<any>,
   children: *,
-  event: string,
+  event?: string,
   eventProperties?: { [key: string]: any },
   style?: *,
 };
