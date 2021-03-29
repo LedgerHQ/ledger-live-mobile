@@ -51,7 +51,18 @@ const SwapFormAmount = ({ navigation, route }: Props) => {
   const [useAllAmount, setUseAllAmount] = useState(false);
   const [maxSpendable, setMaxSpendable] = useState(BigNumber(0));
   const selectableCurrencies = useSelector(swapSupportedCurrenciesSelector);
-  const [tradeMethod, setTradeMethod] = useState("fixed");
+  const enabledTradeMethods = useMemo(
+    () =>
+      getEnabledTradeMethods({
+        selectableCurrencies,
+        fromCurrency,
+        toCurrency,
+      }),
+    [fromCurrency, selectableCurrencies, toCurrency],
+  );
+  const [tradeMethod, setTradeMethod] = useState(
+    enabledTradeMethods[0] || "fixed",
+  );
 
   const {
     status,
@@ -177,16 +188,6 @@ const SwapFormAmount = ({ navigation, route }: Props) => {
   const hideError =
     bridgePending ||
     (useAllAmount && amountError && amountError instanceof AmountRequired);
-
-  const enabledTradeMethods = useMemo(
-    () =>
-      getEnabledTradeMethods({
-        selectableCurrencies,
-        fromCurrency,
-        toCurrency,
-      }),
-    [fromCurrency, selectableCurrencies, toCurrency],
-  );
 
   const options = [
     {
