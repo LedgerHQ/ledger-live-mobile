@@ -2,7 +2,7 @@
 import React, { useCallback, useState } from "react";
 import { BigNumber } from "bignumber.js";
 import { StyleSheet, View, TouchableOpacity, Linking } from "react-native";
-import { useTranslation, Trans } from "react-i18next";
+import { Trans } from "react-i18next";
 import type { TransactionStatus } from "@ledgerhq/live-common/lib/types";
 import Icon from "react-native-vector-icons/dist/FontAwesome";
 import {
@@ -41,7 +41,6 @@ const SummaryBody = ({
   const toCurrency = getAccountCurrency(toAccount);
   const { magnitudeAwareRate, payoutNetworkFees } = exchangeRate;
   const { amount } = status;
-  const { t } = useTranslation();
   const [payoutFeesDrawerVisibility, setPayoutFeesDrawerVisibility] = useState(
     false,
   );
