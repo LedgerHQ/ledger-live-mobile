@@ -2176,6 +2176,12 @@
         "accurate": "Loading... ({{percentage}})",
         "inaccurate": "Loading..."
       }
+    },
+    "info": {
+      "maxSpendable": {
+        "title": "Max spendable amount",
+        "description": "The maximum spendable amount is the total balance in an account that is available to send in a transaction."
+      }
     }
   },
   "freeze": {
