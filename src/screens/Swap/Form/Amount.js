@@ -241,11 +241,7 @@ const SwapFormAmount = ({ navigation, route }: Props) => {
           value={transaction.amount}
           isActive
           renderRight={
-            <LText
-              style={[styles.currency, styles.active]}
-              semiBold
-              color={useAllAmount ? "grey" : "black"}
-            >
+            <LText style={[styles.currency, styles.active]} color={"grey"}>
               {fromUnit.code}
             </LText>
           }

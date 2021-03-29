@@ -128,7 +128,7 @@ const Confirmation = ({
       onClose={onCancel}
       style={styles.root}
     >
-      <SafeAreaView forceInset={forceInset} style={{ flex: 1}}>
+      <SafeAreaView forceInset={forceInset} style={{ flex: 1 }}>
         {signedOperation ? (
           renderLoading({ t, description: t("transfer.swap.broadcasting") })
         ) : !swapData ? (
