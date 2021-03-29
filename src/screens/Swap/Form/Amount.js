@@ -191,14 +191,14 @@ const SwapFormAmount = ({ navigation, route }: Props) => {
 
   const options = [
     {
-      value: "fixed",
-      label: <Trans i18nKey="transfer.swap.tradeMethod.fixed" />,
-      disabled: !enabledTradeMethods.includes("fixed"),
-    },
-    {
       value: "float",
       label: <Trans i18nKey="transfer.swap.tradeMethod.float" />,
       disabled: !enabledTradeMethods.includes("float"),
+    },
+    {
+      value: "fixed",
+      label: <Trans i18nKey="transfer.swap.tradeMethod.fixed" />,
+      disabled: !enabledTradeMethods.includes("fixed"),
     },
   ];
 
