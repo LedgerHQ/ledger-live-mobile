@@ -45,11 +45,13 @@ const SwapFormSummary = ({ navigation, route }: Props) => {
   }, [setAcceptedDisclaimer, setConfirmed]);
 
   const onRatesExpired = useCallback(() => {
-    reset();
-    navigation.navigate(ScreenName.SwapError, {
-      error: new SwapGenericAPIError(),
-    });
-  }, [navigation, reset]);
+    if (exchangeRate.tradeMethod === "fixed") {
+      reset();
+      navigation.navigate(ScreenName.SwapError, {
+        error: new SwapGenericAPIError(),
+      });
+    }
+  }, [exchangeRate.tradeMethod, navigation, reset]);
 
   return status && transaction ? (
     <SafeAreaView
@@ -89,17 +91,22 @@ const SwapFormSummary = ({ navigation, route }: Props) => {
         )
       ) : (
         <View style={styles.buttonWrapper}>
-          <View style={[styles.countdownTimer, { borderColor: colors.smoke }]}>
-            <IconAD size={14} name="clockcircleo" color={colors.smoke} />
-            <View style={{ marginLeft: 9 }}>
-              {rateExpiration ? (
-                <CountdownTimer
-                  end={rateExpiration}
-                  callback={onRatesExpired}
-                />
-              ) : null}
+          {exchangeRate.tradeMethod === "fixed" ? (
+            <View
+              style={[styles.countdownTimer, { borderColor: colors.smoke }]}
+            >
+              <IconAD size={14} name="clockcircleo" color={colors.smoke} />
+              <View style={{ marginLeft: 9 }}>
+                {rateExpiration ? (
+                  <CountdownTimer
+                    color={colors.smoke}
+                    end={rateExpiration}
+                    callback={onRatesExpired}
+                  />
+                ) : null}
+              </View>
             </View>
-          </View>
+          ) : null}
           <Button
             event="SwapSummaryConfirm"
             type={"primary"}

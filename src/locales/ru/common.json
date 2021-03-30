@@ -1837,9 +1837,11 @@
         "to": "To",
         "toAmount": "Amount to receive",
         "statusTooltips": {
-          "refunded": "Please contact the Swap provider with you swap ID for more details",
-          "failed": "Please contact the Swap provider with you swap ID for more details",
-          "hold": "Please contact the Swap provider with you swap ID to solve the situation"
+          "expired": "Please contact the swap provider with your swap ID for more information.",
+          "refunded": "Please contact the swap provider with your swap ID for more information.",
+          "pending": "Please wait while the swap provider is processing the transaction.",
+          "onhold": "Please contact the swap provider with your swap ID to solve the situation.",
+          "finished": "Your swap was completed successfully."
         }
       },
       "missingApp": {
@@ -1936,7 +1938,7 @@
         "label": "Lend crypto",
         "title": "Lend assets on the Compound Protocol",
         "description": "The Compound protocol allows you to lend and borrow assets on the Ethereum network. You can lend assets and earn interest directly from your Ledger acccount.",
-        "switchLabel": "I have read and agree with the <0><0>Terms of Use</0></0>."
+        "switchLabel": "Я прочитал и согласен с <0><0>Условиями использования</0></0>."
       },
       "info": {
         "title": "Lend crypto",
@@ -3400,9 +3402,9 @@
   "Terms": {
     "title": "Terms of Use",
     "read": "Read the Terms of Use",
-    "switchLabelPrivacy": "I have read and agree with the <1>Privacy Policy</1>",
+    "switchLabelPrivacy": "Подтверждаю, что прочитал(а) и принимаю <1>Политику конфиденциальности</1>",
     "switchLabel": "I have read and agree with the <1>Terms of Service</1>",
-    "cta": "Enter Ledger App"
+    "cta": "Войти в приложение Ledger"
   },
   "exchange": {
     "buy": {
