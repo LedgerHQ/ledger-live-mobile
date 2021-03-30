@@ -498,7 +498,7 @@ export const flattenedSwapSupportedCurrenciesSelector: OutputSelector<
 > = createSelector(swapSupportedCurrenciesSelector, swapSupportedCurrencies => {
   const out = [];
   for (const tradeMethod of ["fixed", "float"]) {
-    out.push(...swapSupportedCurrencies[tradeMethod]);
+    out.concat(swapSupportedCurrencies[tradeMethod] || []);
   }
   return uniq(out);
 });
