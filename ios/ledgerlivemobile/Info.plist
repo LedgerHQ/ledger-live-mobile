@@ -17,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>2.24.0</string>
+	<string>2.25.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -34,7 +34,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>231</string>
+	<string>233</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSRequiresIPhoneOS</key>
@@ -86,6 +86,10 @@
 		<string>Inter-Regular.otf</string>
 		<string>Inter-SemiBold.otf</string>
 		<string>Fontisto.ttf</string>
+		<string>FontAwesome5_Pro_Brands.ttf</string>
+		<string>FontAwesome5_Pro_Light.ttf</string>
+		<string>FontAwesome5_Pro_Regular.ttf</string>
+		<string>FontAwesome5_Pro_Solid.ttf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
@@ -97,8 +101,6 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
-	<key>UIUserInterfaceStyle</key>
-	<string>Light</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 </dict>

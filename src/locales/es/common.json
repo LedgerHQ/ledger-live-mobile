@@ -104,11 +104,11 @@
       "title": "Could not scan this QR code: auto-verification not supported by this address."
     },
     "ConnectAppTimeout": {
-      "title": "Oops, no device found",
+      "title": "Sorry, no device found",
       "description": "Please make sure your {{productName}} is unlocked with Bluetooth enabled."
     },
     "ConnectManagerTimeout": {
-      "title": "Oops, manager connection failed",
+      "title": "Sorry, Manager connection failed",
       "description": "Please make sure your {{productName}} is unlocked with Bluetooth enabled."
     },
     "ClaimRewardsFeesWarning": {
@@ -1837,9 +1837,11 @@
         "to": "To",
         "toAmount": "Amount to receive",
         "statusTooltips": {
-          "refunded": "Please contact the Swap provider with you swap ID for more details",
-          "failed": "Please contact the Swap provider with you swap ID for more details",
-          "hold": "Please contact the Swap provider with you swap ID to solve the situation"
+          "expired": "Please contact the swap provider with your swap ID for more information.",
+          "refunded": "Please contact the swap provider with your swap ID for more information.",
+          "pending": "Please wait while the swap provider is processing the transaction.",
+          "onhold": "Please contact the swap provider with your swap ID to solve the situation.",
+          "finished": "Your swap was completed successfully."
         }
       },
       "missingApp": {
@@ -1936,7 +1938,7 @@
         "label": "Lend crypto",
         "title": "Lend assets on the Compound Protocol",
         "description": "The Compound protocol allows you to lend and borrow assets on the Ethereum network. You can lend assets and earn interest directly from your Ledger acccount.",
-        "switchLabel": "I have read and agree with the <0><0>Terms of Use</0></0>."
+        "switchLabel": "Confirmo que he leído y acepto las <0><0>Condiciones de Uso</0></0>."
       },
       "info": {
         "title": "Lend crypto",
@@ -3400,9 +3402,9 @@
   "Terms": {
     "title": "Terms of Use",
     "read": "Read the Terms of Use",
-    "switchLabelPrivacy": "I have read and agree with the <1>Privacy Policy</1>",
+    "switchLabelPrivacy": "Confirmo que he leído y acepto la <1> Política de Privacidad</1>",
     "switchLabel": "I have read and agree with the <1>Terms of Service</1>",
-    "cta": "Enter Ledger App"
+    "cta": "Entra en la App Ledger"
   },
   "exchange": {
     "buy": {
@@ -3485,5 +3487,28 @@
     },
     "deeplinkingTitle": "Select an Ethereum account",
     "addAccount": "Add new account"
+  },
+  "notificationCenter": {
+    "title": "Notification center",
+    "announcement": "Announcement",
+    "liveStatus": "Ledger live status",
+    "news": {
+      "title": "News",
+      "titleCount": "News ({{count}})",
+      "emptyState": {
+        "title": "No news for the moment",
+        "desc": "You will find here all the news related to Ledger and Ledger live"
+      }
+    },
+    "status": {
+      "title": "Status",
+      "ok": {
+        "title": "Ledger Live is up and running",
+        "desc": "<0>Having trouble? Go on our </0><1>help page</1>"
+      },
+      "error": {
+        "title": "Ledger Live is experiencing issues"
+      }
+    }
   }
 }
