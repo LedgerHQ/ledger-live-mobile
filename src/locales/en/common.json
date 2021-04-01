@@ -34,6 +34,7 @@
     "today": "Today",
     "yesterday": "Yesterday",
     "upToDate": "Up to date",
+    "transactionDate": "Transaction date",
     "outdated": "Outdated",
     "satPerByte": "sat/bytes",
     "notAvailable": "Not available",
@@ -1768,7 +1769,7 @@
       },
       "payoutModal": {
         "title": "Payout fees",
-        "description":"Payout fees are not shown on the device and substracted from the amount.",
+        "description": "Payout fees are not shown on the device and substracted from the amount.",
         "cta": "Close"
       },
       "pendingOperation": {
