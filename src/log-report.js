@@ -2,18 +2,16 @@
 // @flow
 import { listen } from "@ledgerhq/logs";
 
-let logs = [];
+const logs = [];
 const logLimit = 10; // the number of latest log we want to conserve
 export default {
   logReportInit: () => {
-    listen((log) => {
+    listen(log => {
       logs.unshift(log);
       if (logs.length > logLimit) {
         logs.pop();
       }
     });
   },
-  getLogs: () => {
-    return logs;
-  }
+  getLogs: () => logs,
 };

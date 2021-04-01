@@ -39,8 +39,8 @@ export default function DebugLogs() {
   };
 
   const onDisplayLatestLogs = () => {
-    let logs = logReport.getLogs();
-    alert(logs.map((log) => (JSON.stringify(log))).join('\n'));
+    const logs = logReport.getLogs();
+    alert(logs.map(log => JSON.stringify(log)).join("\n"));
   };
 
   return (
@@ -61,7 +61,9 @@ export default function DebugLogs() {
       <ScrollView>
         <View>
           {logs.map((log, index) => (
-            <LText color="text" key={index}>{JSON.stringify(log)}</LText>
+            <LText color="text" key={index}>
+              {JSON.stringify(log)}
+            </LText>
           ))}
         </View>
       </ScrollView>
