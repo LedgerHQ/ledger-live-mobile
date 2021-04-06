@@ -56,7 +56,7 @@ class AccountCard extends PureComponent<Props> {
           currency={currency}
         />
         <View style={styles.accountName}>
-          <View>
+          <View style={styles.accountNameContainer}>
             <LText
               semiBold
               numberOfLines={1}
@@ -128,6 +128,7 @@ const styles = StyleSheet.create({
     marginLeft: 16,
     alignItems: "flex-end",
   },
+  accountNameContainer: { flexShrink: 1 },
 });
 
 export default withTheme(AccountCard);
