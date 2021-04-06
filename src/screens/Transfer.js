@@ -60,7 +60,11 @@ export function TransferTabIcon({
           {...rest}
         />
       </Touchable>
-      <CreateModal isOpened={isOpen} onClose={onModalClose} />
+      <CreateModal
+        disableDoubleCheck={true}
+        isOpened={isOpen}
+        onClose={onModalClose}
+      />
     </>
   );
 }

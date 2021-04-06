@@ -63,7 +63,7 @@ const BottomModal = ({
   );
 
   useEffect(() => {
-    if (!!isModalOpenedref && isOpened) {
+    if (!!isModalOpenedref && isOpened && !rest.disableDoubleCheck) {
       onClose();
     } else {
       setIsOpen(isOpened);

@@ -17,7 +17,11 @@ import BottomModalChoice from "../components/BottomModalChoice";
 import type { Props as ModalProps } from "../components/BottomModal";
 import { readOnlyModeEnabledSelector } from "../reducers/settings";
 
-export default function CreateModal({ isOpened, onClose }: ModalProps) {
+export default function CreateModal({
+  isOpened,
+  onClose,
+  ...rest
+}: ModalProps) {
   const navigation = useNavigation();
   const { t } = useTranslation();
 
@@ -68,7 +72,12 @@ export default function CreateModal({ isOpened, onClose }: ModalProps) {
   );
 
   return (
-    <BottomModal id="CreateModal" isOpened={isOpened} onClose={onClose}>
+    <BottomModal
+      id="CreateModal"
+      isOpened={isOpened}
+      onClose={onClose}
+      {...rest}
+    >
       <BottomModalChoice
         event="TransferSend"
         title={t("transfer.send.title")}
