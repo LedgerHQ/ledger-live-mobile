@@ -4,7 +4,6 @@ import React, { useCallback, useMemo, useRef } from "react";
 import { TouchableOpacity, StyleSheet, View } from "react-native";
 import { Trans } from "react-i18next";
 import { useSelector } from "react-redux";
-import uniq from "lodash/uniq";
 import { getCurrenciesWithStatus } from "@ledgerhq/live-common/lib/exchange/swap/logic";
 import type { CurrenciesStatus } from "@ledgerhq/live-common/lib/exchange/swap/logic";
 import type {
@@ -28,14 +27,9 @@ import type {
   Transaction,
   TransactionStatus,
 } from "@ledgerhq/live-common/lib/types";
-import {
-  isCurrencySupported,
-  findCryptoCurrencyById,
-  findTokenById,
-} from "@ledgerhq/live-common/lib/currencies";
 import type { DeviceInfo } from "@ledgerhq/live-common/lib/types/manager";
 import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
-import { isCurrencyExchangeSupported } from "@ledgerhq/live-common/lib/exchange";
+import { ScreenName } from "../../../const";
 import CurrencyUnitValue from "../../../components/CurrencyUnitValue";
 import SectionSeparator, {
   ArrowDownCircle,
@@ -43,8 +37,8 @@ import SectionSeparator, {
 import CurrencyIcon from "../../../components/CurrencyIcon";
 import LText from "../../../components/LText";
 import Button from "../../../components/Button";
-import { accountsSelector } from "../../../reducers/accounts";
-import { ScreenName } from "../../../const";
+import { flattenAccountsSelector } from "../../../reducers/accounts";
+import { flattenedSwapSupportedCurrenciesSelector } from "../../../reducers/settings";
 import { TrackScreen } from "../../../analytics";
 import {
   reportLayout,
@@ -88,18 +82,19 @@ const Form = ({
   const { result } = deviceMeta;
   const { installed: installedApps } = result;
   const route = useRoute();
-  const accounts = useSelector(accountsSelector);
-  const selectableCurrencies = useSelector(state =>
-    selectableCurrenciesSelector(state, { providers }),
+  const accounts = useSelector(flattenAccountsSelector);
+  const flattenedCurrencies = useSelector(
+    flattenedSwapSupportedCurrenciesSelector,
   );
+
   const currenciesStatus = useMemo(
     () =>
       getCurrenciesWithStatus({
         accounts,
         installedApps,
-        selectableCurrencies,
+        selectableCurrencies: flattenedCurrencies,
       }),
-    [accounts, installedApps, selectableCurrencies],
+    [accounts, installedApps, flattenedCurrencies],
   );
 
   const exchange = useMemo(
@@ -116,6 +111,8 @@ const Form = ({
   const fromCurrency = fromAccount ? getAccountCurrency(fromAccount) : null;
   const toCurrency = toAccount ? getAccountCurrency(toAccount) : null;
 
+  // FIXME it's dangerous to assume all pairs are compatible in at least one tradeMethod
+  // this will not scale well
   const startSelectAccountFlow = useCallback(
     (target: SelectAccountFlowTarget) => {
       navigate(ScreenName.SwapFormSelectCrypto, {
@@ -123,7 +120,7 @@ const Form = ({
         providers,
         installedApps,
         exchange: exchange || {},
-        selectableCurrencies,
+        selectableCurrencies: flattenedCurrencies,
         currenciesStatus,
       });
     },
@@ -132,7 +129,7 @@ const Form = ({
       providers,
       installedApps,
       exchange,
-      selectableCurrencies,
+      flattenedCurrencies,
       currenciesStatus,
     ],
   );
@@ -355,30 +352,5 @@ const styles = StyleSheet.create({
     lineHeight: 19,
   },
 });
-
-const selectableCurrenciesSelector = (state, props: { providers: any }) => {
-  const { providers } = props;
-  if (!providers) return [];
-
-  const allIds = uniq(
-    providers.reduce(
-      (ac, { supportedCurrencies }) => [...ac, ...supportedCurrencies],
-      [],
-    ),
-  );
-
-  const tokenCurrencies = allIds
-    .map(findTokenById)
-    .filter(Boolean)
-    .filter(t => !t.delisted);
-  const cryptoCurrencies = allIds
-    .map(findCryptoCurrencyById)
-    .filter(Boolean)
-    .filter(isCurrencySupported);
-
-  return [...cryptoCurrencies, ...tokenCurrencies].filter(
-    isCurrencyExchangeSupported,
-  );
-};
 
 export default Form;
