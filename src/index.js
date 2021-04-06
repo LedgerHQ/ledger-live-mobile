@@ -440,6 +440,8 @@ export default class Root extends Component<
                                           <App
                                             importDataString={importDataString}
                                           />
+                                          <ProductTourOverlay />
+                                          <ProductTourStepFinishedBottomModal />
                                         </NotificationsProvider>
                                       </ToastProvider>
                                     </ProductTourProvider>
