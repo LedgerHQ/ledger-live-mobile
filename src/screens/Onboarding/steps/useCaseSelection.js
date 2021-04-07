@@ -11,7 +11,8 @@ import desktopSync from "../assets/desktopSync.png";
 import restoreDevice from "../assets/restoreDevice.png";
 import Touchable from "../../../components/Touchable";
 import AnimatedHeaderView from "../../../components/AnimatedHeader";
-import { ScreenName } from "../../../const";
+import WarningBox from "../../../components/WarningBox";
+import { NavigatorName, ScreenName } from "../../../const";
 
 type Props = {
   navigation: *,
@@ -27,6 +28,16 @@ function OnboardingStepUseCaseSelection({ navigation, route }: Props) {
     },
     [navigation, route],
   );
+
+  const onLearnMoreWarning = useCallback(() => {
+    navigation.navigate(NavigatorName.Onboarding, {
+      screen: ScreenName.OnboardingInfoModal,
+      params: {
+        sceneInfoKey: "recoveryWarningInfoModalProps",
+      },
+    });
+  }, [navigation]);
+
   const useCases = useMemo(
     () =>
       Platform.OS === "ios" && deviceModelId !== "nanoX"
@@ -81,6 +92,13 @@ function OnboardingStepUseCaseSelection({ navigation, route }: Props) {
               <LText semiBold style={styles.subTitle}>
                 <Trans i18nKey={`onboarding.stepUseCase.${item.key}.title`} />
               </LText>
+            )}
+            {index === 1 && (
+              <View style={styles.warnbox}>
+                <WarningBox onLearnMore={onLearnMoreWarning}>
+                  <Trans i18nKey="onboarding.warning.recoveryPhrase.title" />
+                </WarningBox>
+              </View>
             )}
             <Touchable
               event={item.event}
@@ -165,6 +183,7 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
   },
+  warnbox: { marginVertical: 8 },
 });
 
 export default OnboardingStepUseCaseSelection;
