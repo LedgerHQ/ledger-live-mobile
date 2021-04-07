@@ -3,7 +3,7 @@
 import { listen } from "@ledgerhq/logs";
 
 const logs = [];
-const logLimit = 10; // the number of latest log we want to conserve
+const logLimit = 1000; // the number of latest log we want to conserve
 export default {
   logReportInit: () => {
     listen(log => {
