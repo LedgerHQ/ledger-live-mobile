@@ -320,6 +320,7 @@ export function renderError({
   onRetry?: () => void,
   managerAppName?: string,
 }) {
+  /* eslint-disable react-hooks/rules-of-hooks */
   const onPress = useCallback(() => {
     if (managerAppName) {
       navigation.navigate(NavigatorName.Manager, {
