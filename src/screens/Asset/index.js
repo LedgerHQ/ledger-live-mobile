@@ -10,10 +10,10 @@ import type {
   Account,
   Currency,
   Operation,
-  PortfolioRange,
   Unit,
 } from "@ledgerhq/live-common/lib/types";
 import { isCountervalueEnabled } from "@ledgerhq/live-common/lib/countervalues/modules";
+import type { PortfolioRange } from "@ledgerhq/live-common/lib/portfolio/v2/types";
 import React, { PureComponent, useMemo } from "react";
 import { StyleSheet, View, SectionList } from "react-native";
 import { useRoute, useTheme } from "@react-navigation/native";

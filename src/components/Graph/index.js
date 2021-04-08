@@ -22,7 +22,7 @@ type Props = {
   isInteractive: boolean,
   onItemHover?: (?Item) => void,
   mapValue: Item => number,
-  shape: string,
+  shape?: string,
 };
 
 const STROKE_WIDTH = 2;

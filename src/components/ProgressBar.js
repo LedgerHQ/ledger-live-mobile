@@ -7,10 +7,10 @@ import { useTheme } from "@react-navigation/native";
 
 type Props = {
   style?: *,
-  height: number,
-  progress: string,
+  height?: number,
+  progress: number,
   progressColor: string,
-  backgroundColor: string,
+  backgroundColor?: string,
 };
 
 function ProgressBar({
@@ -25,7 +25,7 @@ function ProgressBar({
     <View
       style={[
         styles.wrapper,
-        { height, backgroundColor: backgroundColor || colors.lightFog },
+        { height, backgroundColor: backgroundColor ?? colors.lightFog },
         style,
       ]}
     >

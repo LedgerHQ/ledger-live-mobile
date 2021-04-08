@@ -634,7 +634,8 @@
   "graph": {
     "week": "1W",
     "month": "1M",
-    "year": "1Y"
+    "year": "1Y",
+    "all": "ALL"
   },
   "carousel": {
     "title": "Close banner?",
@@ -1238,6 +1239,7 @@
     "week": "Week",
     "month": "Month",
     "year": "Year",
+    "all": "All",
     "since": {
       "day": "past day",
       "week": "past week",
@@ -1768,7 +1770,7 @@
       },
       "payoutModal": {
         "title": "Payout fees",
-        "description":"Payout fees are not shown on the device and substracted from the amount.",
+        "description": "Payout fees are not shown on the device and substracted from the amount.",
         "cta": "Close"
       },
       "pendingOperation": {
