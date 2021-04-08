@@ -1,6 +1,7 @@
 // @flow
 
 import React, { useCallback, useState } from "react";
+import { useDispatch } from "react-redux";
 import { StyleSheet, View, Linking, ActivityIndicator } from "react-native";
 import { Trans } from "react-i18next";
 import { useTheme } from "@react-navigation/native";
@@ -22,7 +23,6 @@ import AnimatedHeaderView from "../../../components/AnimatedHeader";
 import { useLocale } from "../../../context/Locale";
 
 import { urls } from "../../../config/urls";
-import { useDispatch } from "react-redux";
 
 function OnboardingStepTerms({ navigation }: *) {
   const { colors } = useTheme();
@@ -83,7 +83,9 @@ function OnboardingStepTerms({ navigation }: *) {
                 {""}
                 <LText
                   semiBold
-                  onPress={() => Linking.openURL(urls.privacyPolicy)}
+                  onPress={() =>
+                    Linking.openURL(urls.privacyPolicy[locale || "en"])
+                  }
                   color="live"
                 />
                 {""}

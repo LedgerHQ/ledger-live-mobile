@@ -50,7 +50,7 @@ export type BaseButtonProps = {
   disabled?: boolean,
   outline?: boolean,
   // for analytics
-  event: string,
+  event?: string,
   eventProperties?: Object,
   size?: number,
   pending?: boolean,
@@ -58,19 +58,13 @@ export type BaseButtonProps = {
 
 type Props = BaseButtonProps & {
   useTouchable: boolean,
-  colors: *,
 };
 
-const ButtonWrapped = (props: BaseButtonProps) => {
-  const { colors } = useTheme();
-  return (
-    <ButtonUseTouchable.Consumer>
-      {useTouchable => (
-        <Button {...props} useTouchable={useTouchable} colors={colors} />
-      )}
-    </ButtonUseTouchable.Consumer>
-  );
-};
+const ButtonWrapped = (props: BaseButtonProps) => (
+  <ButtonUseTouchable.Consumer>
+    {useTouchable => <Button {...props} useTouchable={useTouchable} />}
+  </ButtonUseTouchable.Consumer>
+);
 
 function Button({
   // required props
@@ -85,12 +79,13 @@ function Button({
   outline = true,
   // everything else
   containerStyle,
-  colors,
   event,
   eventProperties,
   pending,
+  // $FlowFixMe
   ...otherProps
 }: Props) {
+  const { colors } = useTheme();
   const [spinnerOn, setSpinnerOn] = useState();
   const [anim] = useState(new Animated.Value(0));
 
@@ -204,16 +199,19 @@ function Button({
 
   const titleSliderOffset = anim.interpolate({
     inputRange: [0, 1],
+    // $FlowFixMe
     outputRange: [0, -ANIM_OFFSET],
   });
 
   const titleOpacity = anim.interpolate({
     inputRange: [0, 1],
+    // $FlowFixMe
     outputRange: [1, 0],
   });
 
   const spinnerSliderOffset = anim.interpolate({
     inputRange: [0, 1],
+    // $FlowFixMe
     outputRange: [ANIM_OFFSET, 0],
   });
 
@@ -317,4 +315,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default memo<Props>(ButtonWrapped);
+export default memo<BaseButtonProps>(ButtonWrapped);
