@@ -48,7 +48,7 @@ export default function NewsRow({
       : {};
 
   const openUrl = useCallback(() => {
-    const url = new URL(link);
+    const url = new URL(link.href);
     url.searchParams.set("utm_medium", "announcement");
     if (utmCampaign) url.searchParams.set("utm_campaign", utmCampaign);
 
