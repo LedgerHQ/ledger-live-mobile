@@ -96,6 +96,7 @@ export default function AccountGraphCard({
         // $FlowFixMe
         data={history}
         onItemHover={setHoverItem}
+        // $FlowFixMe
         mapValue={useCounterValue ? mapCounterValue : mapCryptoValue}
       />
       <View style={styles.pillsContainer}>
@@ -103,6 +104,7 @@ export default function AccountGraphCard({
           isDisabled={!isAvailable}
           value={range}
           onChange={setTimeRange}
+          // $FlowFixMe
           items={timeRangeItems}
         />
       </View>

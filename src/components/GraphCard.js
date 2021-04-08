@@ -29,7 +29,6 @@ type Props = {
   counterValueCurrency: Currency,
   useCounterValue?: boolean,
   renderTitle?: ({ counterValueUnit: Unit, item: Item }) => React$Node,
-  colors: *,
 };
 
 export default function GraphCard({
@@ -82,6 +81,7 @@ export default function GraphCard({
           isDisabled={!isAvailable}
           value={range}
           onChange={setTimeRange}
+          // $FlowFixMe
           items={timeRangeItems}
         />
       </View>

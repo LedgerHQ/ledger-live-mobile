@@ -33,7 +33,7 @@ type Props = {
   currency: Currency,
   counterValueCurrency: Currency,
   useCounterValue?: boolean,
-  renderTitle?: ({ counterValueUnit: Unit, item: Item }) => React$Node,
+  renderTitle?: RenderTitle,
 };
 
 export default function AssetGraphCard({
@@ -84,6 +84,7 @@ export default function AssetGraphCard({
         // $FlowFixMe
         data={history}
         onItemHover={setHoverItem}
+        // $FlowFixMe
         mapValue={useCounterValue ? mapCounterValue : mapCryptoValue}
       />
       <View style={styles.pillsContainer}>
@@ -91,12 +92,20 @@ export default function AssetGraphCard({
           isDisabled={!isAvailable}
           value={range}
           onChange={setTimeRange}
+          // $FlowFixMe
           items={timeRangeItems}
         />
       </View>
     </Card>
   );
 }
+
+export type RenderTitle = ({
+  counterValueUnit: Unit,
+  item: Item,
+  cryptoCurrencyUnit: Unit,
+  useCounterValue?: boolean,
+}) => React$Node;
 
 function GraphCardHeader({
   useCounterValue,
@@ -113,7 +122,7 @@ function GraphCardHeader({
   counterValueUnit: Unit,
   to: Item,
   hoveredItem: ?Item,
-  renderTitle?: ({ counterValueUnit: Unit, item: Item }) => React$Node,
+  renderTitle?: RenderTitle,
   useCounterValue?: boolean,
   valueChange: ValueChange,
 }) {

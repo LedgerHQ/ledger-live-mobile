@@ -10,8 +10,9 @@ import type {
   Unit,
   AccountLike,
   Account,
-  ValueChange,
+  Currency,
 } from "@ledgerhq/live-common/lib/types";
+import type { ValueChange } from "@ledgerhq/live-common/lib/portfolio/v2/types";
 import type { CompoundAccountSummary } from "@ledgerhq/live-common/lib/compound/types";
 
 import LText from "../../components/LText";
@@ -62,7 +63,7 @@ const renderAccountSummary = (
 };
 
 type HeaderTitleProps = {
-  useCounterValue: boolean,
+  useCounterValue?: boolean,
   cryptoCurrencyUnit: Unit,
   counterValueUnit: Unit,
   item: Item,
@@ -129,7 +130,7 @@ type Props = {
   history: *,
   countervalueChange: ValueChange,
   cryptoChange: ValueChange,
-  counterValueCurrency: Unit,
+  counterValueCurrency: Currency,
   onAccountPress: () => void,
   onSwitchAccountCurrency: () => void,
   compoundSummary?: ?CompoundAccountSummary,
