@@ -43,7 +43,7 @@ function Delta({ valueChange, percent, unit, style }: Props) {
       ? delta > 0
         ? [colors.success, IconArrowUp, "+"]
         : [colors.alert, IconArrowDown, "-"]
-      : [colors.darkBlue, null, ""];
+      : [colors.darkBlue, () => null, ""];
 
   return (
     <View style={[styles.root, style]}>

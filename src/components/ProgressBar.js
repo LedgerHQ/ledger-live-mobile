@@ -8,7 +8,7 @@ import { useTheme } from "@react-navigation/native";
 type Props = {
   style?: *,
   height?: number,
-  progress: number,
+  progress: string | number,
   progressColor: string,
   backgroundColor?: string,
 };

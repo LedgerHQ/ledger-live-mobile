@@ -17,7 +17,7 @@ import type { Item, ItemArray } from "./types";
 type Props = {
   width: number,
   height: number,
-  data: ItemArray,
+  data?: ItemArray,
   color: string,
   isInteractive: boolean,
   onItemHover?: (?Item) => void,
