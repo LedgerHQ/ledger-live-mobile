@@ -32,6 +32,7 @@ import ConfirmationModal from "../../components/ConfirmationModal";
 import NavigationScrollView from "../../components/NavigationScrollView";
 import Info from "../../icons/Info";
 import TooMuchUTXOBottomModal from "./TooMuchUTXOBottomModal";
+import { BigNumber } from "bignumber.js";
 
 const forceInset = { bottom: "always" };
 
@@ -49,6 +50,8 @@ export type RouteParams = {
   nextNavigation?: string,
   overrideAmountLabel?: string,
   hideTotal?: boolean,
+  customGasPrice?: BigNumber,
+  customGasLimit?: BigNumber,
 };
 
 const defaultParams = {
@@ -213,6 +216,7 @@ function SendSummary({ navigation, route: initialRoute }: Props) {
           overrideAmountLabel={overrideAmountLabel}
         />
         <SendRowsFee
+          setTransaction={setTransaction}
           account={account}
           parentAccount={parentAccount}
           transaction={transaction}

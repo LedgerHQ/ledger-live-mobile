@@ -2129,6 +2129,9 @@
       "gasPrice": "Gas price",
       "maxFees": "Max fees",
       "validateGasLimit": "Validate gas limit",
+      "fees": "Fees",
+      "validateFees": "Validate Fees",
+      "customizeFees": "Customize Fees",
       "memo": {
         "title": "Memo",
         "type": "Memo type",
@@ -2156,7 +2159,7 @@
       "edit": {
         "title": "Choose unit"
       },
-      "ethTokenNetworkFees": "Network fees for ERC20 token operations are paid in ETH."
+      "networkInfo": "Choose the amount of network fees to include in the transaction. The amount of fees affects the processing speed of the transaction",
     },
     "verification": {
       "streaming": {
