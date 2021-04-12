@@ -2,20 +2,20 @@
 import React, { useState, useCallback } from "react";
 import { View, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
 import { Trans } from "react-i18next";
-import LText from "./LText";
-import { getMainAccount } from "@ledgerhq/live-common/lib/account";
+import {
+  getMainAccount,
+  getAccountUnit,
+  getAccountCurrency,
+} from "@ledgerhq/live-common/lib/account";
 import { useTheme } from "@react-navigation/native";
+import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
+import type { Transaction } from "@ledgerhq/live-common/lib/families/ethereum/types";
+import LText from "./LText";
 import SummaryRow from "../screens/SendFunds/SummaryRow";
 import CheckBox from "./CheckBox";
 import CounterValue from "./CounterValue";
 import CurrencyUnitValue from "./CurrencyUnitValue";
-import {
-  getAccountUnit,
-  getAccountCurrency,
-} from "@ledgerhq/live-common/lib/account";
 
-import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
-import type { Transaction } from "@ledgerhq/live-common/lib/families/ethereum/types";
 import SectionSeparator from "./SectionSeparator";
 import BottomModal from "./BottomModal";
 import Info from "../icons/Info";
@@ -28,6 +28,7 @@ type Props = {
   transaction: Transaction,
   onStrategySelect: Function,
   onCustomFeesPress: Function,
+  forceUnitLabel?: *,
 };
 
 const CVWrapper = ({ children }: { children: * }) => (
@@ -42,6 +43,7 @@ export default function SelectFeesStrategy({
   transaction,
   onStrategySelect,
   onCustomFeesPress,
+  forceUnitLabel,
 }: Props) {
   const { colors } = useTheme();
   const mainAccount = getMainAccount(account, undefined);
@@ -117,10 +119,11 @@ export default function SelectFeesStrategy({
                 <View style={styles.feesAmountContainer}>
                   <LText semiBold style={styles.feesAmount}>
                     <CurrencyUnitValue
-                      showCode
+                      showCode={!forceUnitLabel}
                       unit={s.unit ?? unit}
                       value={s.displayedAmount ?? s.amount}
                     />
+                    {forceUnitLabel || null}
                   </LText>
                   <CounterValue
                     currency={currency}

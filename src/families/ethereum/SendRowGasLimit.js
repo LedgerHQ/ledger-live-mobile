@@ -5,12 +5,11 @@ import { useTranslation } from "react-i18next";
 import { useNavigation, useTheme } from "@react-navigation/native";
 import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
 import type { Transaction } from "@ledgerhq/live-common/lib/families/ethereum/types";
+import { BigNumber } from "bignumber.js";
 import type { RouteParams } from "../../screens/SendFunds/04-Summary";
 import LText from "../../components/LText";
 import { ScreenName } from "../../const";
 import SummaryRow from "../../screens/SendFunds/SummaryRow";
-
-import { BigNumber } from "bignumber.js";
 
 type Props = {
   account: AccountLike,

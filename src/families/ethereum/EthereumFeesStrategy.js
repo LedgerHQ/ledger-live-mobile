@@ -1,15 +1,14 @@
 /* @flow */
 import React, { useCallback } from "react";
-import { StyleSheet } from "react-native";
 
-import SelectFeesStrategy from "../../components/SelectFeesStrategy";
-import { ScreenName } from "../../const";
 import { useFeesStrategy } from "@ledgerhq/live-common/lib/families/ethereum/react";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 
-import type { RouteParams } from "../../screens/SendFunds/04-Summary";
 import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
 import type { Transaction } from "@ledgerhq/live-common/lib/families/ethereum/types";
+import type { RouteParams } from "../../screens/SendFunds/04-Summary";
+import { ScreenName } from "../../const";
+import SelectFeesStrategy from "../../components/SelectFeesStrategy";
 
 type Props = {
   account: AccountLike,
@@ -20,7 +19,7 @@ type Props = {
   setTransaction: Function,
 };
 
-export default function EthereumFeeStrategy({
+export default function EthereumFeesStrategy({
   account,
   parentAccount,
   transaction,
@@ -53,7 +52,7 @@ export default function EthereumFeeStrategy({
         bridge.updateTransaction(transaction, {
           gasPrice: amount,
           feesStrategy: label,
-          userGasLimit: userGasLimit,
+          userGasLimit,
         }),
       );
     },
@@ -69,7 +68,15 @@ export default function EthereumFeeStrategy({
       customGasPrice,
       customGasLimit,
     });
-  }, [navigation, route.params, account.id, parentAccount, transaction]);
+  }, [
+    customGasPrice,
+    customGasLimit,
+    navigation,
+    route.params,
+    account.id,
+    parentAccount,
+    transaction,
+  ]);
 
   return (
     <>
@@ -84,5 +91,3 @@ export default function EthereumFeeStrategy({
     </>
   );
 }
-
-const styles = StyleSheet.create({});

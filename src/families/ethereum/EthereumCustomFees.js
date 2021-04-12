@@ -3,15 +3,15 @@ import React, { useState, useCallback } from "react";
 import { StyleSheet, View } from "react-native";
 import { BigNumber } from "bignumber.js";
 import invariant from "invariant";
-import { i18n } from "../../context/Locale";
 import { useSelector } from "react-redux";
 import { useTheme } from "@react-navigation/native";
+import { inferDynamicRange } from "@ledgerhq/live-common/lib/range";
+import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
+import { i18n } from "../../context/Locale";
 import { accountScreenSelector } from "../../reducers/accounts";
 import EditFeeUnitEthereum from "./EditFeeUnitEthereum";
 import SectionSeparator from "../../components/SectionSeparator";
-import { inferDynamicRange } from "@ledgerhq/live-common/lib/range";
 import Button from "../../components/Button";
-import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import EthereumGasLimit from "./SendRowGasLimit";
 
 import type { RouteParams } from "../../screens/SendFunds/04-Summary";
@@ -63,7 +63,7 @@ export default function EthereumCustomFees({ navigation, route }: Props) {
       customGasPrice: gasPrice,
       transaction: bridge.updateTransaction(transaction, {
         userGasLimit: BigNumber(gasLimit || 0),
-        gasPrice: gasPrice,
+        gasPrice,
         feesStrategy: "custom",
       }),
     });

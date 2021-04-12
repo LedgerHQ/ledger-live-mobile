@@ -1,6 +1,5 @@
 // @flow
-import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
-import React, { useMemo, useState, useCallback } from "react";
+import React, { useCallback } from "react";
 import { BigNumber } from "bignumber.js";
 import { View, StyleSheet } from "react-native";
 import { useTranslation } from "react-i18next";
@@ -77,7 +76,7 @@ export default function EditFeeUnitEthereum({
       <View style={[styles.sliderContainer, { backgroundColor: colors.card }]}>
         <View style={styles.gasPriceHeader}>
           <LText style={styles.gasPriceLabel} semiBold>
-            Gas Price
+            {t("send.summary.gasPrice")}
           </LText>
           <View
             style={[styles.gasPrice, { backgroundColor: colors.lightLive }]}
