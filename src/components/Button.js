@@ -83,6 +83,7 @@ function Button({
   event,
   eventProperties,
   pending,
+  // $FlowFixMe
   ...otherProps
 }: Props) {
   const { colors } = useTheme();
@@ -199,16 +200,19 @@ function Button({
 
   const titleSliderOffset = anim.interpolate({
     inputRange: [0, 1],
+    // $FlowFixMe
     outputRange: [0, -ANIM_OFFSET],
   });
 
   const titleOpacity = anim.interpolate({
     inputRange: [0, 1],
+    // $FlowFixMe
     outputRange: [1, 0],
   });
 
   const spinnerSliderOffset = anim.interpolate({
     inputRange: [0, 1],
+    // $FlowFixMe
     outputRange: [ANIM_OFFSET, 0],
   });
 

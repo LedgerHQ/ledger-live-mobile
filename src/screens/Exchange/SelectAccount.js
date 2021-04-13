@@ -109,7 +109,7 @@ export default function SelectAccount({ navigation, route }: Props) {
         </View>
       );
     },
-    [colors.fog, navigation],
+    [colors.fog, navigation, device, mode],
   );
 
   const elligibleAccountsForSelectedCurrency = allAccounts.filter(
@@ -121,6 +121,7 @@ export default function SelectAccount({ navigation, route }: Props) {
 
   const renderList = useCallback(
     items => {
+      // $FlowFixMe seriously WTF (60 errors just on this 😱)
       const formatedList = formatSearchResults(items, enhancedAccounts);
       return (
         <FlatList
@@ -147,7 +148,7 @@ export default function SelectAccount({ navigation, route }: Props) {
         />
       );
     },
-    [accounts, renderItem, navigation, currency, t],
+    [renderItem, navigation, currency, t, enhancedAccounts],
   );
 
   // empty state if no accounts available for this currency

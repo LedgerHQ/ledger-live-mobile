@@ -1,4 +1,5 @@
 /* @flow */
+import invariant from "invariant";
 import { BigNumber } from "bignumber.js";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
 import React, { useCallback, useState, useEffect } from "react";
@@ -85,9 +86,12 @@ export default function SendAmount({ navigation, route }: Props) {
     };
   }, [account, parentAccount, debouncedTransaction]);
 
+  invariant(account, "account is needed");
+
   const onChange = useCallback(
     amount => {
       if (!amount.isNaN()) {
+        if (!account) return;
         const bridge = getAccountBridge(account, parentAccount);
         setTransaction(bridge.updateTransaction(transaction, { amount }));
       }
@@ -96,6 +100,7 @@ export default function SendAmount({ navigation, route }: Props) {
   );
 
   const toggleUseAllAmount = useCallback(() => {
+    if (!account) return;
     const bridge = getAccountBridge(account, parentAccount);
     if (!transaction) return;
 
@@ -247,8 +252,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     display: "flex",
     flexGrow: 1,
-    fontSize: 16,
-
     marginBottom: 16,
   },
   availableRight: {

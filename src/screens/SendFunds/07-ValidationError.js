@@ -26,7 +26,7 @@ type Props = {
 
 type RouteParams = {
   accountId: string,
-  parentId: String,
+  parentId: string,
   deviceId: string,
   transaction: any,
   error: Error,
@@ -72,7 +72,7 @@ export default function ValidationError({ navigation, route }: Props) {
       <TrackScreen category="SendFunds" name="ValidationError" />
       <ValidateError
         error={error}
-        onRetry={!disableRetry ? retry : null}
+        onRetry={!disableRetry ? retry : undefined}
         onClose={onClose}
         onContactUs={contactUs}
       />

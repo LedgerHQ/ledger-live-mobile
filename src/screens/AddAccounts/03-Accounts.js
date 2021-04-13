@@ -18,6 +18,7 @@ import {
   isAccountEmpty,
   groupAddAccounts,
 } from "@ledgerhq/live-common/lib/account";
+import type { AddAccountSupportLink } from "@ledgerhq/live-common/lib/account/addAccounts";
 import { createStructuredSelector } from "reselect";
 import uniq from "lodash/uniq";
 import { Trans } from "react-i18next";
@@ -72,7 +73,10 @@ type RouteParams = {
   currency: CryptoCurrency,
   device: Device,
   inline?: boolean,
+  returnToSwap?: boolean,
 };
+
+type OwnProps = {};
 
 type Props = {
   navigation: any,
@@ -125,6 +129,7 @@ function AddAccountsAccounts({
     currency,
     device: { deviceId },
     inline,
+    returnToSwap,
   } = route.params || {};
 
   const newAccountSchemes = getPreferredNewAccountScheme(currency);
@@ -447,6 +452,7 @@ function AddAccountsAccounts({
           onContinue={importAccount}
           isDisabled={selectedIds.length === 0}
           colors={colors}
+          returnToSwap={returnToSwap}
         />
       )}
       <GenericErrorBottomModal
@@ -512,7 +518,10 @@ const AddressTypeTooltip = ({
               <Trans i18nKey={`addAccounts.addressTypeInfo.${scheme}.title`} />
             </LText>
             <LText style={styles.subtitle} color="grey">
-              <Trans i18nKey={`addAccounts.addressTypeInfo.${scheme}.desc`} />
+              <Trans
+                i18nKey={`addAccounts.addressTypeInfo.${scheme}.desc`}
+                values={{ currency: currency.name }}
+              />
             </LText>
           </View>
         ))}
@@ -539,7 +548,9 @@ class Footer extends PureComponent<{
   onRetry: () => void,
   onDone: () => void,
   isDisabled: boolean,
+  supportLink?: AddAccountSupportLink,
   colors: *,
+  returnToSwap?: boolean,
 }> {
   render() {
     const {
@@ -552,6 +563,7 @@ class Footer extends PureComponent<{
       onRetry,
       onDone,
       colors,
+      returnToSwap,
     } = this.props;
 
     return (
@@ -582,7 +594,13 @@ class Footer extends PureComponent<{
           <Button
             event="AddAccountsSelected"
             type="primary"
-            title={<Trans i18nKey="addAccounts.finalCta" />}
+            title={
+              returnToSwap ? (
+                <Trans i18nKey="addAccounts.finalCtaForSwap" />
+              ) : (
+                <Trans i18nKey="addAccounts.finalCta" />
+              )
+            }
             onPress={isDisabled ? undefined : onContinue}
           />
         )}
@@ -670,8 +688,9 @@ const styles = StyleSheet.create({
   modalRow: { marginVertical: 16 },
 });
 
-// $FlowFixMe
-export default compose(
+const m: React$ComponentType<OwnProps> = compose(
   connect(mapStateToProps, mapDispatchToProps),
   withTheme,
 )(memo<Props>(AddAccountsAccounts));
+
+export default m;

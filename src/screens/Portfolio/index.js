@@ -131,7 +131,7 @@ export default function PortfolioScreen({ navigation }: Props) {
     );
   }
 
-  function renderSectionHeader({ section }: { section: * }) {
+  function renderSectionHeader({ section }: { section: { day: Date } }) {
     return <SectionHeader section={section} />;
   }
 
@@ -178,11 +178,13 @@ export default function PortfolioScreen({ navigation }: Props) {
           <PortfolioWidget />,
           ListHeaderComponent(),
           <SectionList
+            // $FlowFixMe
             sections={sections}
             style={styles.list}
             contentContainerStyle={styles.contentContainer}
             keyExtractor={keyExtractor}
             renderItem={renderItem}
+            // $FlowFixMe
             renderSectionHeader={renderSectionHeader}
             onEndReached={onEndReached}
             stickySectionHeadersEnabled={false}

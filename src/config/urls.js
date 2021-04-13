@@ -121,7 +121,7 @@ export const urls = {
       "https://support.ledger.com/hc/en-us/articles/360011454079-What-are-apps-and-accounts-?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=producttour_bluecard",
   },
   ledgerStatus:
-    "https://status.ledger.com?utm_source=ledger_live_mobile&utm_medium=self_referral",
+    "https://support.ledger.com/hc/en-us?utm_source=ledger_live_mobile&utm_medium=self_referral",
   bitcoinAddressType:
     "https://www.ledger.com/academy/difference-between-segwit-and-native-segwit",
 };

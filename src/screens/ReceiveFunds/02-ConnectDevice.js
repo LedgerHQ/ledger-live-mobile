@@ -25,7 +25,6 @@ import { accountScreenSelector } from "../../reducers/accounts";
 import { ScreenName } from "../../const";
 import { TrackScreen } from "../../analytics";
 import SelectDevice from "../../components/SelectDevice";
-import Button from "../../components/Button";
 import NavigationScrollView from "../../components/NavigationScrollView";
 import { readOnlyModeEnabledSelector } from "../../reducers/settings";
 import ReadOnlyWarning from "./ReadOnlyWarning";
@@ -150,26 +149,14 @@ export default function ConnectDevice({ navigation, route }: Props) {
         style={styles.scroll}
         contentContainerStyle={styles.scrollContainer}
       >
-        <SelectDevice onSelect={setDevice} />
+        <SelectDevice
+          onSelect={setDevice}
+          onWithoutDevice={
+            ptContext.currentStep !== "RECEIVE_COINS" ? onSkipDevice : null
+          }
+          withoutDevice={ptContext.currentStep !== "RECEIVE_COINS"}
+        />
       </NavigationScrollView>
-      {ptContext.currentStep !== "RECEIVE_COINS" ? (
-        <View
-          style={[
-            styles.footer,
-            {
-              borderTopColor: colors.lightFog,
-            },
-          ]}
-        >
-          <Button
-            event="ReceiveWithoutDevice"
-            type="lightSecondary"
-            title={t("transfer.receive.withoutDevice")}
-            onPress={onSkipDevice}
-          />
-        </View>
-      ) : null}
-
       <DeviceActionModal
         action={action}
         device={device}
@@ -198,9 +185,5 @@ const styles = StyleSheet.create({
   },
   scrollContainer: {
     padding: 16,
-  },
-  footer: {
-    padding: 4,
-    borderTopWidth: 1,
   },
 });

@@ -30,6 +30,7 @@ export default function NewsRow({
   isLastElement,
 }: Props) {
   const { colors } = useTheme();
+  // $FlowFixMe until live-common is bumped
   const { content, uuid, level, icon, utm_campaign: utmCampaign } = item;
   const { title, text, link } = content;
   const [hasBeenRead] = useState(!isUnread);
@@ -47,10 +48,9 @@ export default function NewsRow({
       : {};
 
   const openUrl = useCallback(() => {
-    const url = new URL(link);
+    const url = new URL(link.href);
     url.searchParams.set("utm_medium", "announcement");
     if (utmCampaign) url.searchParams.set("utm_campaign", utmCampaign);
-
     Linking.openURL(url.href);
   }, [link, utmCampaign]);
 
