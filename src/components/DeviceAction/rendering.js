@@ -300,7 +300,7 @@ export function renderInWrongAppForAccount({
 }) {
   return renderError({
     t,
-    error: new WrongDeviceForAccount(null, { accountName }),
+    error: new WrongDeviceForAccount(),
     onRetry,
     colors,
     theme,
