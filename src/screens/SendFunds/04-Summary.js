@@ -33,7 +33,6 @@ import NavigationScrollView from "../../components/NavigationScrollView";
 import Info from "../../icons/Info";
 import TooMuchUTXOBottomModal from "./TooMuchUTXOBottomModal";
 import { BigNumber } from "bignumber.js";
-import { NoFeeStrategySelected } from "@ledgerhq/live-common/lib/errors";
 
 const forceInset = { bottom: "always" };
 
@@ -224,7 +223,7 @@ function SendSummary({ navigation, route: initialRoute }: Props) {
           navigation={navigation}
           route={route}
         />
-        {error && !error instanceof NoFeeStrategySelected ? (
+        {error ? (
           <View style={styles.gasPriceError}>
             <View style={{ padding: 4 }}>
               <Info size={12} color={colors.alert} />
@@ -264,11 +263,7 @@ function SendSummary({ navigation, route: initialRoute }: Props) {
             title={<Trans i18nKey="common.continue" />}
             containerStyle={styles.continueButton}
             onPress={() => setContinuing(true)}
-            disabled={
-              bridgePending ||
-              !!transactionError ||
-              error instanceof NoFeeStrategySelected
-            }
+            disabled={bridgePending || !!transactionError}
             pending={bridgePending}
           />
         )}
