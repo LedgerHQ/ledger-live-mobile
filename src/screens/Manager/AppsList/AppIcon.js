@@ -44,7 +44,9 @@ function AppIcon({ size = 38, app }: Props) {
         },
       ]}
     >
-      <IconComponent size={size} color="#FFFFFF" />
+      <View style={styles.innerContainer}>
+        <IconComponent size={size * 0.9} color="#FFFFFF" />
+      </View>
     </View>
   ) : (
     <Image
@@ -58,6 +60,14 @@ function AppIcon({ size = 38, app }: Props) {
 const styles = StyleSheet.create({
   container: {
     borderRadius: 14,
+    position: "relative",
+  },
+  innerContainer: {
+    position: "absolute",
+    top: "6%",
+    left: "6%",
+    width: "90%",
+    height: "90%",
   },
 });
 
