@@ -11,8 +11,8 @@ import desktopSync from "../assets/desktopSync.png";
 import restoreDevice from "../assets/restoreDevice.png";
 import Touchable from "../../../components/Touchable";
 import AnimatedHeaderView from "../../../components/AnimatedHeader";
-import WarningBox from "../../../components/WarningBox";
-import { NavigatorName, ScreenName } from "../../../const";
+import { ScreenName } from "../../../const";
+import RecoveryPhraseWarning from "../shared/RecoveryPhraseWarning";
 
 type Props = {
   navigation: *,
@@ -28,15 +28,6 @@ function OnboardingStepUseCaseSelection({ navigation, route }: Props) {
     },
     [navigation, route],
   );
-
-  const onLearnMoreWarning = useCallback(() => {
-    navigation.navigate(NavigatorName.Onboarding, {
-      screen: ScreenName.OnboardingInfoModal,
-      params: {
-        sceneInfoKey: "recoveryWarningInfoModalProps",
-      },
-    });
-  }, [navigation]);
 
   const useCases = useMemo(
     () =>
@@ -93,13 +84,7 @@ function OnboardingStepUseCaseSelection({ navigation, route }: Props) {
                 <Trans i18nKey={`onboarding.stepUseCase.${item.key}.title`} />
               </LText>
             )}
-            {index === 1 && (
-              <View style={styles.warnbox}>
-                <WarningBox onLearnMore={onLearnMoreWarning}>
-                  <Trans i18nKey="onboarding.warning.recoveryPhrase.title" />
-                </WarningBox>
-              </View>
-            )}
+            {index === 1 && <RecoveryPhraseWarning />}
             <Touchable
               event={item.event}
               eventProperties={{ deviceId: deviceModelId }}
@@ -183,7 +168,6 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
   },
-  warnbox: { marginVertical: 8 },
 });
 
 export default OnboardingStepUseCaseSelection;

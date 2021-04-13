@@ -46,6 +46,7 @@ import ArrowRight from "../../../icons/ArrowRight";
 import LText from "../../../components/LText";
 import NanoDeviceCancelIcon from "../../../icons/NanoDeviceCancelIcon";
 import NanoDeviceCheckIcon from "../../../icons/NanoDeviceCheckIcon";
+import RecoveryPhraseWarning from "./RecoveryPhraseWarning";
 
 import { urls } from "../../../config/urls";
 
@@ -630,6 +631,7 @@ const getRecoveryPhraseScenes = (deviceModelId: string) => [
       title: (
         <Trans i18nKey="onboarding.stepRecoveryPhrase.importRecoveryPhrase.title" />
       ),
+      warning: <RecoveryPhraseWarning />,
       descs: [
         <Trans i18nKey="onboarding.stepRecoveryPhrase.importRecoveryPhrase.desc" />,
         <Trans i18nKey="onboarding.stepRecoveryPhrase.importRecoveryPhrase.desc_1" />,
