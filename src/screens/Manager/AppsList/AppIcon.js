@@ -14,16 +14,20 @@ import { useTheme } from "@react-navigation/native";
 import { ensureContrast } from "../../../colors";
 
 type Props = {
-  app: App,
+  app?: App,
+  icon?: string,
   size: number,
 };
 
-function AppIcon({ size = 38, app }: Props) {
-  const { currencyId, icon } = app;
+function AppIcon({ size = 38, app, icon: defaultIcon = "" }: Props) {
+  const { currencyId, icon } = app || {};
 
   const { colors } = useTheme();
 
-  const uri = useMemo(() => manager.getIconUrl(icon), [icon]);
+  const uri = useMemo(() => manager.getIconUrl(icon || defaultIcon), [
+    icon,
+    defaultIcon,
+  ]);
 
   const currency = currencyId && findCryptoCurrencyById(currencyId);
   const currencyColor = useMemo(
@@ -48,13 +52,13 @@ function AppIcon({ size = 38, app }: Props) {
         <IconComponent size={size * 0.9} color="#FFFFFF" />
       </View>
     </View>
-  ) : (
+  ) : uri ? (
     <Image
       source={{ uri }}
       style={{ width: size, height: size }}
       fadeDuration={0}
     />
-  );
+  ) : null;
 }
 
 const styles = StyleSheet.create({
