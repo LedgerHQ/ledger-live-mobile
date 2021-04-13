@@ -19,7 +19,7 @@ import { accountScreenSelector } from "../../reducers/accounts";
 const forceInset = { bottom: "always" };
 
 const options = {
-  title: i18n.t("send.summary.gasLimit"),
+  title: i18n.t("send.summary.fees"),
   headerLeft: null,
 };
 
