@@ -68,7 +68,7 @@ const AppRow = ({
           },
         ]}
       >
-        <AppIcon icon={icon} />
+        <AppIcon app={app} />
         <View style={styles.labelContainer}>
           <LText numberOfLines={1} bold>
             {name}
