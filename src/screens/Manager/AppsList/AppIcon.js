@@ -10,9 +10,6 @@ import { getCryptoCurrencyIcon } from "@ledgerhq/live-common/lib/reactNative";
 
 import type { App } from "@ledgerhq/live-common/lib/types/manager";
 
-import { useTheme } from "@react-navigation/native";
-import { ensureContrast } from "../../../colors";
-
 type Props = {
   app?: App,
   icon?: string,
@@ -22,19 +19,13 @@ type Props = {
 function AppIcon({ size = 38, app, icon: defaultIcon = "" }: Props) {
   const { currencyId, icon } = app || {};
 
-  const { colors } = useTheme();
-
   const uri = useMemo(() => manager.getIconUrl(icon || defaultIcon), [
     icon,
     defaultIcon,
   ]);
 
   const currency = currencyId && findCryptoCurrencyById(currencyId);
-  const currencyColor = useMemo(
-    () =>
-      currency && ensureContrast(getCurrencyColor(currency), colors.background),
-    [colors, currency],
-  );
+  const currencyColor = getCurrencyColor(currency);
   const IconComponent = currency ? getCryptoCurrencyIcon(currency) : null;
 
   return IconComponent ? (
