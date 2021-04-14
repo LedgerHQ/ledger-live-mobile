@@ -25,7 +25,7 @@ function AppIcon({ size = 38, app, icon: defaultIcon = "" }: Props) {
   ]);
 
   const currency = currencyId && findCryptoCurrencyById(currencyId);
-  const currencyColor = getCurrencyColor(currency);
+  const currencyColor = currency && getCurrencyColor(currency);
   const IconComponent = currency ? getCryptoCurrencyIcon(currency) : null;
 
   return IconComponent ? (
