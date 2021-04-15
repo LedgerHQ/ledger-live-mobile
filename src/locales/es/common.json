@@ -104,11 +104,11 @@
       "title": "Could not scan this QR code: auto-verification not supported by this address."
     },
     "ConnectAppTimeout": {
-      "title": "Oops, no device found",
+      "title": "Sorry, no device found",
       "description": "Please make sure your {{productName}} is unlocked with Bluetooth enabled."
     },
     "ConnectManagerTimeout": {
-      "title": "Oops, manager connection failed",
+      "title": "Sorry, Manager connection failed",
       "description": "Please make sure your {{productName}} is unlocked with Bluetooth enabled."
     },
     "ClaimRewardsFeesWarning": {
@@ -543,8 +543,11 @@
     "PolkadotNoNominations": {
       "title": "You have no nominations"
     },
-    "PolkadotBondAllFundsWarning": {
-      "title": "You will not have available balance for future transactions"
+    "PolkadotAllFundsWarning": {
+      "title": "Ensure you have enough balance left for future transaction fees"
+    },
+    "PolkadotDoMaxSendInstead": {
+      "title": "Balance cannot be below 1 DOT. Send max to empty account"
     },
     "PolkadotBondMinimumAmount": {
       "title": "You must bond at least 1 DOT"
@@ -1834,9 +1837,11 @@
         "to": "To",
         "toAmount": "Amount to receive",
         "statusTooltips": {
-          "refunded": "Please contact the Swap provider with you swap ID for more details",
-          "failed": "Please contact the Swap provider with you swap ID for more details",
-          "hold": "Please contact the Swap provider with you swap ID to solve the situation"
+          "expired": "Please contact the swap provider with your swap ID for more information.",
+          "refunded": "Please contact the swap provider with your swap ID for more information.",
+          "pending": "Please wait while the swap provider is processing the transaction.",
+          "onhold": "Please contact the swap provider with your swap ID to solve the situation.",
+          "finished": "Your swap was completed successfully."
         }
       },
       "missingApp": {
@@ -1933,7 +1938,7 @@
         "label": "Lend crypto",
         "title": "Lend assets on the Compound Protocol",
         "description": "The Compound protocol allows you to lend and borrow assets on the Ethereum network. You can lend assets and earn interest directly from your Ledger acccount.",
-        "switchLabel": "I have read and agree with the <0><0>Terms of Use</0></0>."
+        "switchLabel": "Confirmo que he leído y acepto las <0><0>Condiciones de Uso</0></0>."
       },
       "info": {
         "title": "Lend crypto",
@@ -2307,6 +2312,23 @@
         "title": "Add Token",
         "disclaimer": "{{tokenName}} is a TRC20 Token.\nYou can receive tokens directly in a Tron account.",
         "learnMore": "Learn more about TRC20"
+      }
+    },
+    "showMoreChainType": "More address types",
+    "addressTypeInfo": {
+      "title": "Which address type to choose?",
+      "subtitle": "Add new account",
+      "native_segwit": {
+        "title": "Native Segwit (starting with bc1...)",
+        "desc": "Best overall. Low fees per transaction, error detection and Lightning Network support. Some wallets/exchanges may need to add support."
+      },
+      "segwit": {
+        "title": "Segwit (starting with 3...)",
+        "desc": "Higher fees per transaction than Native Segwit. Lightning support. Supported by most wallets."
+      },
+      "legacy": {
+        "title": "Legacy (starting with 1...)",
+        "desc": "Bitcoin’s original address format. Highest fees per transaction. Some wallets/exchanges still only support this type."
       }
     }
   },
@@ -3082,8 +3104,8 @@
       "oversubscribed": "Oversubscribed ({{nominatorsCount}})",
       "oversubscribedInfo": "Only the top {{maxNominatorRewardedPerValidator}} nominators with the highest bonded amount earn rewards",
       "hasPendingBondOperation": "A bond operation is still pending confirmation",
-      "externalControllerUnsupported": "<0>This stash account is controlled by another account with the address <0><0>{{address}}</0></0></0><1>Staking operations on accounts that are controlled by a different account are not supported in Ledger Live. Please use an alternative wallet such as Polkadot.js</1>",
-      "externalStashUnsupported": "<0>This account controls a stash account whose address is <0><0>{{address}}</0></0></0><1>Staking operations on separate stash accounts are not supported in Ledger Live. Please use an alternative wallet like Polkadot.js</1>",
+      "externalControllerUnsupported": "This stash account is controlled by another account with the address <0>{{address}}</0>. Staking operations on accounts that are controlled by a different account are not supported in Ledger Live. Please use an alternative wallet such as Polkadot.js",
+      "externalStashUnsupported": "This account controls a stash account whose address is <0>{{address}}</0>. Staking operations on separate stash accounts are not supported in Ledger Live. Please use an alternative wallet like Polkadot.js",
       "showInactiveNominations": "Show all nominations ({{count}})",
       "hideInactiveNominations": "Show active nominations only",
       "noActiveNominations": "There are no active nominations.",
@@ -3380,9 +3402,9 @@
   "Terms": {
     "title": "Terms of Use",
     "read": "Read the Terms of Use",
-    "switchLabelPrivacy": "I have read and agree with the <1>Privacy Policy</1>",
+    "switchLabelPrivacy": "Confirmo que he leído y acepto la <1> Política de Privacidad</1>",
     "switchLabel": "I have read and agree with the <1>Terms of Service</1>",
-    "cta": "Enter Ledger App"
+    "cta": "Entra en la App Ledger"
   },
   "exchange": {
     "buy": {
@@ -3465,5 +3487,28 @@
     },
     "deeplinkingTitle": "Select an Ethereum account",
     "addAccount": "Add new account"
+  },
+  "notificationCenter": {
+    "title": "Notification center",
+    "announcement": "Announcement",
+    "liveStatus": "Ledger live status",
+    "news": {
+      "title": "News",
+      "titleCount": "News ({{count}})",
+      "emptyState": {
+        "title": "No news for the moment",
+        "desc": "You will find here all the news related to Ledger and Ledger live"
+      }
+    },
+    "status": {
+      "title": "Status",
+      "ok": {
+        "title": "Ledger Live is up and running",
+        "desc": "<0>Having trouble? Go on our </0><1>help page</1>"
+      },
+      "error": {
+        "title": "Ledger Live is experiencing issues"
+      }
+    }
   }
 }

@@ -5,17 +5,16 @@ import { StyleSheet, FlatList } from "react-native";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { Observable } from "rxjs";
-import type { DeviceModelId } from "@ledgerhq/devices";
 import logger from "../../logger";
 import { BLE_SCANNING_NOTHING_TIMEOUT } from "../../constants";
 import { knownDevicesSelector } from "../../reducers/ble";
 import TransportBLE from "../../react-native-hw-transport-ble";
 import { TrackScreen } from "../../analytics";
-import DeviceItem from "../../components/DeviceItem";
+import DeviceItem from "../../components/SelectDevice/DeviceItem";
 import ScanningHeader from "./ScanningHeader";
 
 type Props = {
-  onSelect: (device: BleDevice, deviceMeta: *) => Promise<void>,
+  onSelect: (device: Device, deviceMeta: *) => Promise<void>,
   onError: (error: Error) => void,
   onTimeout: () => void,
 };
@@ -102,9 +101,3 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
 });
-
-export type BleDevice = {
-  id: string,
-  name: string,
-  modelId: DeviceModelId,
-};

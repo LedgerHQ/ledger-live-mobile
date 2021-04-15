@@ -12,18 +12,21 @@ const defaultHitSlop = {
   bottom: 16,
 };
 
+type Props = {
+  // when on press returns a promise,
+  // the button will toggle in a pending state and
+  // will wait the promise to complete before enabling the button again
+  // it also displays a spinner if it takes more than WAIT_TIME_BEFORE_SPINNER
+  onPress: ?() => ?Promise<any>,
+  children: *,
+  event?: string,
+  eventProperties?: { [key: string]: any },
+  style?: *,
+  testID?: string,
+};
+
 export default class Touchable extends Component<
-  {
-    // when on press returns a promise,
-    // the button will toggle in a pending state and
-    // will wait the promise to complete before enabling the button again
-    // it also displays a spinner if it takes more than WAIT_TIME_BEFORE_SPINNER
-    onPress: ?() => ?Promise<any>,
-    children: *,
-    event: string,
-    eventProperties?: Object,
-    testID?: string,
-  },
+  Props,
   {
     pending: boolean,
   },
@@ -70,6 +73,7 @@ export default class Touchable extends Component<
     const { pending } = this.state;
     const disabled = !onPress || pending;
     return (
+      // $FlowFixMe
       <TouchableOpacity
         onPress={this.onPress}
         disabled={disabled}

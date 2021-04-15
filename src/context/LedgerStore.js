@@ -10,6 +10,7 @@ import { importStore as importAccounts } from "../actions/accounts";
 import { importBle } from "../actions/ble";
 import { INITIAL_STATE, supportedCountervalues } from "../reducers/settings";
 
+// $FlowFixMe
 export const store = createStore(
   reducers,
   undefined,

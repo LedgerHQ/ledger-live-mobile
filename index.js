@@ -4,12 +4,18 @@
 // https://github.com/kmagiera/react-native-gesture-handler/issues/320#issuecomment-443815828
 import "react-native-gesture-handler";
 
+/** URL polyfill */
+// URL object `intentionally` lightweight, does not support URLSearchParams features
+// https://github.com/facebook/react-native/issues/23922
+import "react-native-url-polyfill/auto";
+
 import { AppRegistry } from "react-native";
 import { Sentry } from "react-native-sentry";
 import Config from "react-native-config";
 
 import App from "./src";
 import { getEnabled } from "./src/components/HookSentry";
+import logReport from "./src/log-report";
 
 if (Config.SENTRY_DSN && !__DEV__ && !Config.MOCK) {
   Sentry.config(Config.SENTRY_DSN, {
@@ -63,5 +69,7 @@ if (Config.DISABLE_YELLOW_BOX) {
   // $FlowFixMe
   console.disableYellowBox = true; // eslint-disable-line no-console
 }
+
+logReport.logReportInit();
 
 AppRegistry.registerComponent("ledgerlivemobile", () => App);

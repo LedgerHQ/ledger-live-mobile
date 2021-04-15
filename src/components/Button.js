@@ -1,6 +1,12 @@
 /* @flow */
 
-import React, { useEffect, useState, useCallback, memo } from "react";
+import React, {
+  useEffect,
+  useState,
+  useCallback,
+  memo,
+  useContext,
+} from "react";
 import { RectButton } from "react-native-gesture-handler";
 import {
   StyleSheet,
@@ -51,7 +57,7 @@ export type BaseButtonProps = {
   disabled?: boolean,
   outline?: boolean,
   // for analytics
-  event: string,
+  event?: string,
   eventProperties?: Object,
   size?: number,
   testID?: string,
@@ -64,22 +70,19 @@ type Props = BaseButtonProps & {
   isFocused: boolean,
 };
 
-const ButtonWrapped = (props: BaseButtonProps) => {
+function ButtonWrapped(props: BaseButtonProps) {
   const { colors } = useTheme();
   const isFocused = useIsFocused();
+  const useTouchable = useContext(ButtonUseTouchable);
   return (
-    <ButtonUseTouchable.Consumer>
-      {useTouchable => (
-        <Button
-          {...props}
-          useTouchable={useTouchable}
-          colors={colors}
-          isFocused={isFocused}
-        />
-      )}
-    </ButtonUseTouchable.Consumer>
+    <Button
+      {...props}
+      useTouchable={useTouchable}
+      colors={colors}
+      isFocused={isFocused}
+    />
   );
-};
+}
 
 function Button({
   // required props
@@ -94,12 +97,13 @@ function Button({
   outline = true,
   // everything else
   containerStyle,
-  colors,
   event,
   eventProperties,
   pending,
+  // $FlowFixMe
   ...otherProps
 }: Props) {
+  const { colors } = useTheme();
   const [spinnerOn, setSpinnerOn] = useState();
   const [anim] = useState(new Animated.Value(0));
 
@@ -213,16 +217,19 @@ function Button({
 
   const titleSliderOffset = anim.interpolate({
     inputRange: [0, 1],
+    // $FlowFixMe
     outputRange: [0, -ANIM_OFFSET],
   });
 
   const titleOpacity = anim.interpolate({
     inputRange: [0, 1],
+    // $FlowFixMe
     outputRange: [1, 0],
   });
 
   const spinnerSliderOffset = anim.interpolate({
     inputRange: [0, 1],
+    // $FlowFixMe
     outputRange: [ANIM_OFFSET, 0],
   });
 
@@ -346,4 +353,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default memo<Props>(ButtonWrapped);
+export default memo<BaseButtonProps>(ButtonWrapped);

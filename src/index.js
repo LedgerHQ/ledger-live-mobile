@@ -5,9 +5,22 @@ import "./live-common-setup";
 import "./implement-react-native-libcore";
 import "../e2e/e2e-bridge-setup";
 import "react-native-gesture-handler";
-import React, { Component, useCallback, useContext, useMemo } from "react";
-import { connect, useSelector } from "react-redux";
-import { StyleSheet, View, Text, Linking } from "react-native";
+import React, {
+  Component,
+  useCallback,
+  useContext,
+  useMemo,
+  useEffect,
+} from "react";
+import { connect, useDispatch, useSelector } from "react-redux";
+import {
+  StyleSheet,
+  View,
+  Text,
+  Linking,
+  Appearance,
+  AppState,
+} from "react-native";
 import SplashScreen from "react-native-splash-screen";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { I18nextProvider } from "react-i18next";
@@ -23,11 +36,14 @@ import { checkLibs } from "@ledgerhq/live-common/lib/sanityChecks";
 import _ from "lodash";
 import { useCountervaluesExport } from "@ledgerhq/live-common/lib/countervalues/react";
 import { pairId } from "@ledgerhq/live-common/lib/countervalues/helpers";
+
+import { ToastProvider } from "@ledgerhq/live-common/lib/notifications/ToastProvider";
 import logger from "./logger";
 import { saveAccounts, saveBle, saveSettings, saveCountervalues } from "./db";
 import {
   exportSelector as settingsExportSelector,
   hasCompletedOnboardingSelector,
+  osThemeSelector,
   themeSelector,
 } from "./reducers/settings";
 import { exportSelector as accountsExportSelector } from "./reducers/accounts";
@@ -60,7 +76,10 @@ import { useTrackingPairs } from "./actions/general";
 import { ScreenName, NavigatorName } from "./const";
 import ExperimentalHeader from "./screens/Settings/Experimental/ExperimentalHeader";
 import { lightTheme, duskTheme, darkTheme } from "./colors";
+import NotificationsProvider from "./screens/NotificationCenter/NotificationsProvider";
+import SnackbarContainer from "./screens/NotificationCenter/Snackbar/SnackbarContainer";
 import NavBarColorHandler from "./components/NavBarColorHandler";
+import { setOsTheme, setTheme } from "./actions/settings";
 
 const themes = {
   light: lightTheme,
@@ -181,12 +200,14 @@ const fixURL = url => {
 };
 
 const OGgetInitialURL = Linking.getInitialURL.bind(Linking);
+// $FlowFixMe
 Linking.getInitialURL = () => OGgetInitialURL().then(fixURL);
 
 const NEWcallbacks = [];
 const OGcallbacks = [];
 const OGaddEventListener = Linking.addEventListener.bind(Linking);
 const OGremoveEventListener = Linking.removeEventListener.bind(Linking);
+// $FlowFixMe
 Linking.addEventListener = (evt, OGcallback) => {
   let NEWcallback = OGcallback;
   if (evt === "url") {
@@ -196,6 +217,7 @@ Linking.addEventListener = (evt, OGcallback) => {
   }
   return OGaddEventListener(evt, NEWcallback);
 };
+// $FlowFixMe
 Linking.removeEventListener = (evt, OGcallback) => {
   let NEWcallback = OGcallback;
   if (evt === "url") {
@@ -274,6 +296,7 @@ const linking = {
 };
 
 const DeepLinkingNavigator = ({ children }: { children: React$Node }) => {
+  const dispatch = useDispatch();
   const hasCompletedOnboarding = useSelector(hasCompletedOnboardingSelector);
   const wcContext = useContext(_wcContext);
 
@@ -294,7 +317,7 @@ const DeepLinkingNavigator = ({ children }: { children: React$Node }) => {
   const [isReady, setIsReady] = React.useState(false);
   const [initialState, setInitialState] = React.useState();
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!wcContext.initDone) {
       return;
     }
@@ -319,6 +342,26 @@ const DeepLinkingNavigator = ({ children }: { children: React$Node }) => {
   );
 
   const theme = useSelector(themeSelector);
+  const osTheme = useSelector(osThemeSelector);
+
+  const compareOsTheme = useCallback(() => {
+    const currentOsTheme = Appearance.getColorScheme();
+    if (currentOsTheme && osTheme !== currentOsTheme) {
+      const isDark = themes[theme].dark;
+      const newTheme =
+        currentOsTheme === "dark" ? (isDark ? theme : "dusk") : "light";
+      dispatch(setTheme(newTheme));
+      dispatch(setOsTheme(currentOsTheme));
+    }
+  }, [dispatch, osTheme, theme]);
+
+  useEffect(() => {
+    compareOsTheme();
+    const osThemeChangeHandler = nextAppState =>
+      nextAppState === "active" && compareOsTheme();
+    AppState.addEventListener("change", osThemeChangeHandler);
+    return () => AppState.removeEventListener("change", osThemeChangeHandler);
+  }, [compareOsTheme]);
 
   if (!isReady) {
     return null;
@@ -388,7 +431,14 @@ export default class Root extends Component<
                               >
                                 <ButtonUseTouchable.Provider value={true}>
                                   <OnboardingContextProvider>
-                                    <App importDataString={importDataString} />
+                                    <ToastProvider>
+                                      <NotificationsProvider>
+                                        <SnackbarContainer />
+                                        <App
+                                          importDataString={importDataString}
+                                        />
+                                      </NotificationsProvider>
+                                    </ToastProvider>
                                   </OnboardingContextProvider>
                                 </ButtonUseTouchable.Provider>
                               </CounterValuesProvider>
