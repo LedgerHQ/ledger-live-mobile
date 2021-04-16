@@ -1,5 +1,6 @@
 // @flow
 import { useTranslation } from "react-i18next";
+import { Platform } from "react-native";
 
 type Props = {
   error: ?Error,
@@ -18,12 +19,21 @@ export default function TranslatedError({ error, field = "title" }: Props) {
     return null;
   }
   // $FlowFixMe
-  const arg: Object = { message: error.message, ...error };
+  const arg: Object = { message: error.message, returnObjects: true, ...error };
   if (error.name) {
-    const translation = t(`errors.${error.name}.${field}`, arg);
+    let translation = t(`errors.${error.name}.${field}`, arg);
     if (translation !== `errors.${error.name}.${field}`) {
-      // It is translated
-      return translation;
+      if ((typeof translation === "object") && ("productName" in arg)) { // it has specific translation for different device and platform
+        const platform = Platform.OS;
+        const device = arg.productName.includes("Nano S")? "nanoS" : "nanoX";
+        translation = t(`errors.${error.name}.${field}.${platform}.${device}`, arg);
+        if (translation !== `errors.${error.name}.${field}.${platform}.${device}`) {
+          return translation;
+        }
+      }
+      else if (typeof translation === "string") {
+        return translation;
+      }
     }
   }
   return t(`errors.generic.${field}`, arg);
