@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 import { useTheme } from "@react-navigation/native";
 import { inferDynamicRange } from "@ledgerhq/live-common/lib/range";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
-import { i18n } from "../../context/Locale";
+import { Trans } from "react-i18next";
 import { accountScreenSelector } from "../../reducers/accounts";
 import EditFeeUnitEthereum from "./EditFeeUnitEthereum";
 import SectionSeparator from "../../components/SectionSeparator";
@@ -22,7 +22,7 @@ type Props = {
 };
 
 const options = {
-  title: i18n.t("send.summary.fees"),
+  title: <Trans i18nKey="send.summary.fees" />,
   headerLeft: null,
 };
 

@@ -66,16 +66,14 @@ export default function BitcoinSendRowsFee({
   }, [satPerByte, setSatPerByte, navigation, account.id, transaction]);
 
   return (
-    <>
-      <SelectFeesStrategy
-        strategies={strategies}
-        onStrategySelect={onFeesSelected}
-        onCustomFeesPress={openCustomFees}
-        account={account}
-        parentAccount={parentAccount}
-        transaction={transaction}
-        forceUnitLabel={<Trans i18nKey="common.satPerByte" />}
-      />
-    </>
+    <SelectFeesStrategy
+      strategies={strategies}
+      onStrategySelect={onFeesSelected}
+      onCustomFeesPress={openCustomFees}
+      account={account}
+      parentAccount={parentAccount}
+      transaction={transaction}
+      forceUnitLabel={<Trans i18nKey="common.satPerByte" />}
+    />
   );
 }

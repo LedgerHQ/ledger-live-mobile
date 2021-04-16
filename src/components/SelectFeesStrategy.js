@@ -1,6 +1,12 @@
 /* @flow */
 import React, { useState, useCallback } from "react";
-import { View, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
+import {
+  View,
+  StyleSheet,
+  FlatList,
+  TouchableOpacity,
+  SafeAreaView,
+} from "react-native";
 import { Trans } from "react-i18next";
 import {
   getMainAccount,
@@ -57,7 +63,64 @@ export default function SelectFeesStrategy({
   );
   const closeNetworkFeeHelpModal = () => setNetworkFeeHelpOpened(false);
 
-  const isChecked = (label, transaction) => transaction.feesStrategy === label;
+  const renderItem = ({ item }) => {
+    const onPressStrategySelect = useCallback(() => {
+      onStrategySelect({
+        amount: item.amount,
+        label: item.label,
+        userGasLimit: item.userGasLimit,
+      });
+    });
+
+    return (
+      <TouchableOpacity
+        onPress={onPressStrategySelect}
+        style={[
+          styles.feeButton,
+          {
+            borderColor:
+              transaction.feesStrategy === item.label
+                ? colors.live
+                : colors.background,
+            backgroundColor:
+              transaction.feesStrategy === item.label
+                ? colors.lightLive
+                : colors.lightFog,
+          },
+        ]}
+      >
+        <View style={styles.feeStrategyContainer}>
+          <View style={styles.leftBox}>
+            <CheckBox
+              style={styles.checkbox}
+              isChecked={transaction.feesStrategy === item.label}
+            />
+            <LText semiBold style={styles.feeLabel}>
+              {item.label}
+            </LText>
+          </View>
+          <View style={styles.feesAmountContainer}>
+            <LText semiBold style={styles.feesAmount}>
+              <CurrencyUnitValue
+                showCode={!forceUnitLabel}
+                unit={item.unit ?? unit}
+                value={item.displayedAmount ?? item.amount}
+              />
+              {forceUnitLabel || null}
+            </LText>
+            <CounterValue
+              currency={currency}
+              showCode
+              value={item.displayedAmount ?? item.amount}
+              alwaysShowSign={false}
+              withPlaceholder
+              Wrapper={CVWrapper}
+            />
+          </View>
+        </View>
+      </TouchableOpacity>
+    );
+  };
 
   return (
     <>
@@ -83,69 +146,21 @@ export default function SelectFeesStrategy({
         >
           {null}
         </SummaryRow>
-        <ScrollView style={styles.strategiesContainer}>
-          {strategies.map((s, index) => (
-            <TouchableOpacity
-              key={index + s.label}
-              onPress={() => {
-                onStrategySelect({
-                  amount: s.amount,
-                  label: s.label,
-                  userGasLimit: s.userGasLimit,
-                });
-              }}
-              style={[
-                styles.feeButton,
-                {
-                  borderColor: isChecked(s.label, transaction)
-                    ? colors.live
-                    : colors.background,
-                  backgroundColor: isChecked(s.label, transaction)
-                    ? colors.lightLive
-                    : colors.lightFog,
-                },
-              ]}
-            >
-              <View style={styles.feeStrategyContainer}>
-                <View style={styles.leftBox}>
-                  <CheckBox
-                    style={styles.checkbox}
-                    isChecked={isChecked(s.label, transaction)}
-                  />
-                  <LText semiBold style={styles.feeLabel}>
-                    {s.label}
-                  </LText>
-                </View>
-                <View style={styles.feesAmountContainer}>
-                  <LText semiBold style={styles.feesAmount}>
-                    <CurrencyUnitValue
-                      showCode={!forceUnitLabel}
-                      unit={s.unit ?? unit}
-                      value={s.displayedAmount ?? s.amount}
-                    />
-                    {forceUnitLabel || null}
-                  </LText>
-                  <CounterValue
-                    currency={currency}
-                    showCode
-                    value={s.displayedAmount ?? s.amount}
-                    alwaysShowSign={false}
-                    withPlaceholder
-                    Wrapper={CVWrapper}
-                  />
-                </View>
-              </View>
-            </TouchableOpacity>
-          ))}
-        </ScrollView>
+
+        <SafeAreaView style={styles.strategiesContainer}>
+          <FlatList
+            data={strategies}
+            renderItem={renderItem}
+            keyExtractor={s => s.label}
+            extraData={transaction.feesStrategy}
+          />
+        </SafeAreaView>
         <TouchableOpacity
           style={[
             styles.customizeFeesButton,
             { backgroundColor: colors.lightLive },
           ]}
-          onPress={() => {
-            onCustomFeesPress();
-          }}
+          onPress={onCustomFeesPress}
         >
           <LText semiBold color="live">
             <Trans i18nKey="send.summary.customizeFees" />

@@ -79,15 +79,13 @@ export default function EthereumFeesStrategy({
   ]);
 
   return (
-    <>
-      <SelectFeesStrategy
-        strategies={strategies}
-        onStrategySelect={onFeesSelected}
-        onCustomFeesPress={openCustomFees}
-        account={account}
-        parentAccount={parentAccount}
-        transaction={transaction}
-      />
-    </>
+    <SelectFeesStrategy
+      strategies={strategies}
+      onStrategySelect={onFeesSelected}
+      onCustomFeesPress={openCustomFees}
+      account={account}
+      parentAccount={parentAccount}
+      transaction={transaction}
+    />
   );
 }

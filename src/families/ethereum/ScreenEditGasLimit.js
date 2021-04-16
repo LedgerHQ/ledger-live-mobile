@@ -1,7 +1,7 @@
 /* @flow */
 import { BigNumber } from "bignumber.js";
 import React, { useState, useCallback } from "react";
-import { useTranslation } from "react-i18next";
+import { useTranslation, Trans } from "react-i18next";
 import { Keyboard, StyleSheet, TextInput, View } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { useTheme } from "@react-navigation/native";
@@ -14,7 +14,7 @@ import NavigationScrollView from "../../components/NavigationScrollView";
 const forceInset = { bottom: "always" };
 
 const options = {
-  title: i18n.t("send.summary.gasLimit"),
+  title: <Trans i18nKey="send.summary.gasLimit" />,
   headerLeft: null,
 };
 

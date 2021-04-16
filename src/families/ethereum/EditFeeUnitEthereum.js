@@ -97,10 +97,10 @@ export default function EditFeeUnitEthereum({
             onChange={onChangeF}
           />
           <View style={styles.textContainer}>
-            <LText style={[styles.currencyUnitText, { color: colors.grey }]}>
+            <LText color="grey" style={styles.currencyUnitText}>
               {t("common.slow")}
             </LText>
-            <LText style={[styles.currencyUnitText, { color: colors.grey }]}>
+            <LText color="grey" style={styles.currencyUnitText}>
               {t("common.fast")}
             </LText>
           </View>

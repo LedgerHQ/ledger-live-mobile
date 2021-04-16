@@ -3,23 +3,25 @@ import { BigNumber } from "bignumber.js";
 import invariant from "invariant";
 import React, { useState, useCallback } from "react";
 import { useTranslation, Trans } from "react-i18next";
-import { Keyboard, StyleSheet, TextInput, View } from "react-native";
-import SafeAreaView from "react-native-safe-area-view";
+import {
+  Keyboard,
+  StyleSheet,
+  TextInput,
+  View,
+  SafeAreaView,
+} from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { useSelector } from "react-redux";
 import type { Transaction } from "@ledgerhq/live-common/lib/families/bitcoin/types";
-import { i18n } from "../../context/Locale";
 import Button from "../../components/Button";
 import KeyboardView from "../../components/KeyboardView";
 import NavigationScrollView from "../../components/NavigationScrollView";
 import LText from "../../components/LText";
 import { accountScreenSelector } from "../../reducers/accounts";
 
-const forceInset = { bottom: "always" };
-
 const options = {
-  title: i18n.t("send.summary.fees"),
+  title: <Trans i18nKey="send.summary.fees" />,
   headerLeft: null,
 };
 
@@ -69,7 +71,7 @@ function BitcoinEditCustomFees({ navigation, route }: Props) {
   }, [ownSatPerByte, setOwnSatPerByte, navigation, route]);
 
   return (
-    <SafeAreaView style={{ flex: 1 }} forceInset={forceInset}>
+    <SafeAreaView style={{ flex: 1 }}>
       <KeyboardView
         style={[styles.body, { backgroundColor: colors.background }]}
       >
@@ -77,7 +79,7 @@ function BitcoinEditCustomFees({ navigation, route }: Props) {
           <View style={styles.inputBox}>
             <TextInput
               autoFocus
-              style={[styles.textInputAS, { color: colors.darkBlue }]}
+              style={styles.textInputAS}
               defaultValue={satPerByte ? satPerByte.toString() : ""}
               keyboardType="numeric"
               returnKeyType="done"
