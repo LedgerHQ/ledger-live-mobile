@@ -38,6 +38,7 @@ function OnboardingStepUseCaseSelection({ navigation, route }: Props) {
               route: ScreenName.OnboardingImportAccounts,
               image: desktopSync,
               event: "Onboarding - Setup Import Accounts",
+              showRecoveryWarning: true,
             },
           ]
         : [
@@ -53,6 +54,7 @@ function OnboardingStepUseCaseSelection({ navigation, route }: Props) {
               next: ScreenName.OnboardingFinish,
               event: "Onboarding - Connect",
               key: "devicePairing",
+              showRecoveryWarning: true,
             },
             {
               route: ScreenName.OnboardingImportAccounts,
@@ -84,7 +86,7 @@ function OnboardingStepUseCaseSelection({ navigation, route }: Props) {
                 <Trans i18nKey={`onboarding.stepUseCase.${item.key}.title`} />
               </LText>
             )}
-            {index === 1 && <RecoveryPhraseWarning />}
+            {item.showRecoveryWarning && <RecoveryPhraseWarning />}
             <Touchable
               event={item.event}
               eventProperties={{ deviceId: deviceModelId }}
