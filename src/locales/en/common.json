@@ -3638,7 +3638,8 @@
       "Send-amount": "Enter the amount you want to send.\nClick “Send Max” toggle to send\nthe entire account balance and\nempty the account",
       "Send-fees": "You can edit the fees. A higher fee\ngets your transaction confirmed\nfaster.",
       "Transfer-Send": "Then click on Send",
-      "Transfer-Receive": "Then click on Receive"
+      "Transfer-Receive": "Then click on Receive",
+      "Device-Instructions": "Follow the animated instructions to connect your Ledger device."
     }
   },
   "notificationCenter": {

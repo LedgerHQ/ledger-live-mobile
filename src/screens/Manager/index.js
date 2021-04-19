@@ -1,5 +1,5 @@
 /* @flow */
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import { View, StyleSheet } from "react-native";
 import { useIsFocused } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
@@ -68,6 +68,7 @@ type RouteParams = {
 type Props = {
   navigation: any,
   knownDevices: DeviceLike[],
+  setDevice: Function,
   route: {
     params: RouteParams,
     name: string,
@@ -111,10 +112,12 @@ class ChooseDevice extends Component<
         modelId: device.modelId,
       });
     this.setState({ device });
+    this.props.setDevice(device);
   };
 
   onSelect = (result: Object) => {
     this.setState({ device: undefined, result });
+    this.props.setDevice();
   };
 
   onModalHide = () => {
@@ -143,6 +146,7 @@ class ChooseDevice extends Component<
   componentDidMount() {
     const { readOnlyModeEnabled } = this.props;
     this.setState(state => ({ ...state, device: undefined }));
+    this.props.setDevice();
 
     if (readOnlyModeEnabled) {
       this.props.navigation.setParams({
@@ -222,9 +226,11 @@ const styles = StyleSheet.create({
 export default function Screen(props: Props) {
   const isFocused = useIsFocused();
   const dispatch = useDispatch();
+  const [device, setDevice] = useState();
   const readOnlyModeEnabled = useSelector(readOnlyModeEnabledSelector);
 
-  useProductTourOverlay("INSTALL_CRYPTO", "selectDevice");
+  useProductTourOverlay("INSTALL_CRYPTO", "selectDevice", !device);
+  useProductTourOverlay("INSTALL_CRYPTO", "Device-Instructions", !!device);
 
   return (
     <ChooseDevice
@@ -232,6 +238,7 @@ export default function Screen(props: Props) {
       isFocused={isFocused}
       readOnlyModeEnabled={readOnlyModeEnabled}
       removeKnownDevice={(...args) => dispatch(removeKnownDevice(...args))}
+      setDevice={setDevice}
     />
   );
 }

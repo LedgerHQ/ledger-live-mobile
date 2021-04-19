@@ -32,7 +32,8 @@ export default function AddAccountsSelectDevice({ navigation, route }: Props) {
   const { colors } = useTheme();
   const [device, setDevice] = useState<?Device>();
 
-  useProductTourOverlay("CREATE_ACCOUNT", "selectDevice");
+  useProductTourOverlay("CREATE_ACCOUNT", "selectDevice", !device);
+  useProductTourOverlay("CREATE_ACCOUNT", "Device-Instructions", !!device);
 
   const onClose = useCallback(() => {
     setDevice();
