@@ -400,19 +400,6 @@ const PortfolioOverlay = () => {
       <LText style={[textStyle, styles.tooltipText]} bold>
         <Trans i18nKey={text} />
       </LText>
-      {index + 1 <= configArray.length ? (
-        <TouchableOpacity
-          style={[
-            styles.nextButton,
-            config.cbPosition === "bottom" ? styles.cbBottom : styles.cbTop,
-          ]}
-          onPress={next}
-        >
-          <LText style={styles.closeText} bold>
-            <Trans i18nKey="producttour.overlay.nextText" />
-          </LText>
-        </TouchableOpacity>
-      ) : null}
       <TouchableOpacity
         style={[
           styles.closeButton,
