@@ -7,6 +7,7 @@ import { timeout, tap } from "rxjs/operators";
 import getDeviceInfo from "@ledgerhq/live-common/lib/hw/getDeviceInfo";
 import getDeviceName from "@ledgerhq/live-common/lib/hw/getDeviceName";
 import { listApps } from "@ledgerhq/live-common/lib/apps/hw";
+import type { DeviceModelId } from "@ledgerhq/devices";
 import { delay } from "@ledgerhq/live-common/lib/promise";
 import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import { useTheme } from "@react-navigation/native";
@@ -16,12 +17,12 @@ import { GENUINE_CHECK_TIMEOUT } from "../../constants";
 import { addKnownDevice } from "../../actions/ble";
 import { installAppFirstTime } from "../../actions/settings";
 import { hasCompletedOnboardingSelector } from "../../reducers/settings";
+import type { DeviceLike } from "../../reducers/ble";
 import RequiresBLE from "../../components/RequiresBLE";
 import PendingPairing from "./PendingPairing";
 import PendingGenuineCheck from "./PendingGenuineCheck";
 import Paired from "./Paired";
 import Scanning from "./Scanning";
-import type { BleDevice } from "./Scanning";
 import ScanningTimeout from "./ScanningTimeout";
 import RenderError from "./RenderError";
 
@@ -30,11 +31,25 @@ type Props = {
   route: { params: RouteParams },
 };
 
-type RouteParams = {
-  onDone?: (device: Device) => void,
+type PairDevicesProps = {
+  ...Props,
+  knownDevices: DeviceLike[],
+  hasCompletedOnboarding: boolean,
+  addKnownDevice: DeviceLike => void,
+  installAppFirstTime: (value: boolean) => void,
 };
 
-export default function PairDevices(props: Props) {
+type RouteParams = {
+  onDone?: (deviceId: string) => void,
+};
+
+type BleDevice = {
+  id: string,
+  name: string,
+  modelId: DeviceModelId,
+};
+
+export default function PairDevices(props: PairDevicesProps) {
   const { colors } = useTheme();
   return (
     <RequiresBLE>
@@ -179,7 +194,7 @@ function PairDevicesInner({ navigation, route }: Props) {
   const onDone = useCallback(
     (device: Device) => {
       navigation.goBack();
-      route.params?.onDone?.(device);
+      route.params?.onDone?.(device.deviceId);
     },
     [navigation, route],
   );
@@ -198,7 +213,12 @@ function PairDevicesInner({ navigation, route }: Props) {
   switch (status) {
     case "scanning":
       return (
-        <Scanning onSelect={onSelect} onError={onError} onTimeout={onTimeout} />
+        <Scanning
+          // $FlowFixMe
+          onSelect={onSelect}
+          onError={onError}
+          onTimeout={onTimeout}
+        />
       );
     case "timedout":
       return <ScanningTimeout onRetry={onRetry} />;

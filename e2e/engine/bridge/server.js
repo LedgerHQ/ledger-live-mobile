@@ -77,7 +77,7 @@ export function setInstalledApps(apps: string[] = []) {
 }
 
 export function open() {
-  postMessage({ type: "open" });
+  postMessage({ type: "open", payload: null });
 }
 
 function onMessage(messageStr: string) {
@@ -96,7 +96,7 @@ function log(message: string) {
 }
 
 function acceptTerms() {
-  postMessage({ type: "acceptTerms" });
+  postMessage({ type: "acceptTerms", payload: null });
 }
 
 function postMessage(message: E2EBridgeMessage) {

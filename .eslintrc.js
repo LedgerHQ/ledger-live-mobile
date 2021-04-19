@@ -8,7 +8,7 @@ module.exports = {
       },
     },
   },
-  plugins: ["prettier"],
+  plugins: ["prettier", "detox"],
   rules: {
     "no-console": [
       "error",

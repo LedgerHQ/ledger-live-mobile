@@ -1,4 +1,5 @@
 // @flow
+const { device, element, by, waitFor } = require("detox");
 
 export function cleanLaunch() {
   return device.launchApp({ delete: true });

@@ -71,14 +71,14 @@ type Message<T: string, P = any> = {
 
 type E2EBridgeSubjectMessage =
   | Message<"add", { id: string, name: string }>
-  | Message<"open">;
+  | Message<"open", ?*>;
 
 export type E2EBridgeMessage =
   | E2EBridgeSubjectMessage
   | Message<"setGlobals", { [key: string]: any }>
   | Message<"importAccounts", { data: AccountRaw, version: number }[]>
   | Message<"importSettngs", { [key: string]: any }>
-  | Message<"acceptTerms">
+  | Message<"acceptTerms", ?*>
   | Message<"navigate", string>;
 
 function log(message: string) {
