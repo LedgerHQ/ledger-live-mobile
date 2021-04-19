@@ -187,6 +187,7 @@ const configs = {
       layout: "receive-shareAddress",
       arrow: require("../../images/producttour/arrow-bottomleft.png"),
       text: "producttour.overlay.Receive-verifyAddress-shareAddress",
+      catchClick: true,
       arrowPosition: ({ x, width, y }) => ({
         left: x + width / 2,
         top: y - 11 - 45,

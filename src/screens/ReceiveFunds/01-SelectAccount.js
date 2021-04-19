@@ -1,5 +1,5 @@
 /* @flow */
-import React, { useCallback, useMemo, useRef } from "react";
+import React, { useCallback, useMemo, useRef, useContext } from "react";
 import { View, StyleSheet, FlatList } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { useSelector } from "react-redux";
@@ -23,7 +23,11 @@ import FilteredSearchBar from "../../components/FilteredSearchBar";
 import AccountCard from "../../components/AccountCard";
 import KeyboardView from "../../components/KeyboardView";
 import { formatSearchResults } from "../../helpers/formatAccountSearchResults";
-import { reportLayout, useProductTourOverlay } from "../ProductTour/Provider";
+import {
+  reportLayout,
+  useProductTourOverlay,
+  context as _ptContext,
+} from "../ProductTour/Provider";
 
 const SEARCH_KEYS = ["name", "unit.code", "token.name", "token.ticker"];
 const forceInset = { bottom: "always" };
@@ -42,7 +46,7 @@ export default function ReceiveFunds({ navigation, route }: Props) {
   const { colors } = useTheme();
   const { selectedCurrency, currency: initialCurrencySelected } =
     route.params || {};
-
+  const ptContext = useContext(_ptContext);
   const accounts = useSelector(accountsSelector);
   const enhancedAccounts = useMemo(() => {
     if (selectedCurrency) {
@@ -70,7 +74,12 @@ export default function ReceiveFunds({ navigation, route }: Props) {
     }
     return flattenAccounts(accounts);
   }, [accounts, selectedCurrency]);
-  const allAccounts = enhancedAccounts;
+  const allAccounts = useMemo(() => {
+    if (ptContext.currentStep === "RECEIVE_COINS") {
+      return enhancedAccounts.filter(acc => acc?.currency?.id === "bitcoin");
+    }
+    return enhancedAccounts;
+  }, [ptContext.currentStep, enhancedAccounts]);
 
   const keyExtractor = item => item.account.id;
 
