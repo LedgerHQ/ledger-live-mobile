@@ -253,6 +253,7 @@ const configs = {
       layout: "addAccountAccountsLists",
       arrow: require("../../images/producttour/arrow-topright.png"),
       text: "producttour.overlay.addAccount-addAccountAccountsLists",
+      catchClick: true,
       arrowPosition: ({ x, y, height, width }) => ({
         left: x + width / 2,
         top: y + height + 23,

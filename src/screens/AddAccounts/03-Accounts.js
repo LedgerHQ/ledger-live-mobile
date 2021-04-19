@@ -365,75 +365,75 @@ function AddAccountsAccounts({
         ref={scrollView}
         onContentSizeChange={handleContentSizeChange}
       >
-        {sections.map(({ id, selectable, defaultSelected, data }, i) => {
-          const hasMultipleSchemes =
-            id === "creatable" &&
-            newAccountSchemes &&
-            newAccountSchemes.length > 1 &&
-            data.length > 0 &&
-            !scanning;
-          return (
-            <View
-              key={id}
-              ref={accountsLists}
-              onLayout={() =>
-                reportLayout(
-                  ["addAccountAccountsLists"],
-                  accountsLists,
-                  {},
-                  { height: 15 },
-                )
-              }
-            >
-              <SectionAccounts
-                defaultSelected={defaultSelected}
-                key={id}
-                showHint={selectable && i === 0}
-                header={
-                  <Trans
-                    values={{ length: data.length }}
-                    i18nKey={`addAccounts.sections.${id}.title`}
-                  />
-                }
-                index={i}
-                accounts={data}
-                onAccountNameChange={
-                  !selectable ? undefined : onAccountNameChange
-                }
-                onPressAccount={!selectable ? undefined : onPressAccount}
-                onSelectAll={
-                  !selectable || id === "creatable" ? undefined : selectAll
-                }
-                onUnselectAll={!selectable ? undefined : unselectAll}
-                selectedIds={selectedIds}
-                emptyState={emptyTexts[id]}
-                isDisabled={!selectable}
-                forceSelected={id === "existing"}
-                style={hasMultipleSchemes ? styles.smallMarginBottom : {}}
-              />
-              {hasMultipleSchemes ? (
-                <View style={styles.moreAddressTypesContainer}>
-                  {showAllCreatedAccounts ? (
-                    <AddressTypeTooltip
-                      accountSchemes={newAccountSchemes}
-                      currency={currency}
+        <View
+          ref={accountsLists}
+          onLayout={() =>
+            reportLayout(
+              ["addAccountAccountsLists"],
+              accountsLists,
+              {},
+              { height: 15 },
+            )
+          }
+        >
+          {sections.map(({ id, selectable, defaultSelected, data }, i) => {
+            const hasMultipleSchemes =
+              id === "creatable" &&
+              newAccountSchemes &&
+              newAccountSchemes.length > 1 &&
+              data.length > 0 &&
+              !scanning;
+            return (
+              <View key={id}>
+                <SectionAccounts
+                  defaultSelected={defaultSelected}
+                  key={id}
+                  showHint={selectable && i === 0}
+                  header={
+                    <Trans
+                      values={{ length: data.length }}
+                      i18nKey={`addAccounts.sections.${id}.title`}
                     />
-                  ) : (
-                    <Button
-                      event={"AddAccountsMoreAddressType"}
-                      type="secondary"
-                      title={<Trans i18nKey="addAccounts.showMoreChainType" />}
-                      titleStyle={styles.subtitle}
-                      onPress={viewAllCreatedAccounts}
-                      IconRight={Chevron}
-                    />
-                  )}
-                </View>
-              ) : null}
-            </View>
-          );
-        })}
-
+                  }
+                  index={i}
+                  accounts={data}
+                  onAccountNameChange={
+                    !selectable ? undefined : onAccountNameChange
+                  }
+                  onPressAccount={!selectable ? undefined : onPressAccount}
+                  onSelectAll={
+                    !selectable || id === "creatable" ? undefined : selectAll
+                  }
+                  onUnselectAll={!selectable ? undefined : unselectAll}
+                  selectedIds={selectedIds}
+                  emptyState={emptyTexts[id]}
+                  isDisabled={!selectable}
+                  forceSelected={id === "existing"}
+                  style={hasMultipleSchemes ? styles.smallMarginBottom : {}}
+                />
+                {hasMultipleSchemes ? (
+                  <View style={styles.moreAddressTypesContainer}>
+                    {showAllCreatedAccounts ? (
+                      <AddressTypeTooltip
+                        accountSchemes={newAccountSchemes}
+                        currency={currency}
+                      />
+                    ) : (
+                      <Button
+                        event={"AddAccountsMoreAddressType"}
+                        type="secondary"
+                        title={<Trans i18nKey="addAccounts.showMoreChainType" />}
+                        titleStyle={styles.subtitle}
+                        onPress={viewAllCreatedAccounts}
+                        IconRight={Chevron}
+                      />
+                    )}
+                  </View>
+                ) : null}
+              </View>
+            );
+          })}
+        </View>
         {sections.length === 0 && scanning ? (
           <LText style={styles.descText} color="smoke">
             <Trans i18nKey="addAccounts.synchronizingDesc" />
