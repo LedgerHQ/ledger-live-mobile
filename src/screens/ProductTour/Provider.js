@@ -272,12 +272,6 @@ const Provider = ({ children }: { children: React$Node }) => {
   // effects
 
   useEffect(() => {
-    if (state.initDone && hasInstalledAnyApp && !state.dismissed) {
-      completeStep("INSTALL_CRYPTO");
-    }
-  }, [hasInstalledAnyApp, state.initDone, state.dismissed]);
-
-  useEffect(() => {
     if (state.initDone) {
       return;
     }
