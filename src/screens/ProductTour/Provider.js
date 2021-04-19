@@ -176,10 +176,11 @@ export const useProductTourOverlay = (
   step: string,
   holeConfig: string,
   enabled: boolean = true,
+  useEffectFn: Function = useFocusEffect,
 ) => {
   const ptContext = useContext(context);
 
-  useFocusEffect(
+  useEffectFn(
     useCallback(() => {
       if (
         ptContext.currentStep === step &&

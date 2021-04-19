@@ -50,9 +50,10 @@ const AnimatedFlatListWithRefreshControl = createNativeWrapper(
 );
 type Props = {
   navigation: any,
+  transferOpen: Boolean,
 };
 
-export default function PortfolioScreen({ navigation }: Props) {
+export default function PortfolioScreen({ navigation, transferOpen }: Props) {
   const accounts = useSelector(accountsSelector);
   const allAccounts = useSelector(flattenAccountsSelector);
   const counterValueCurrency = useSelector(counterValueCurrencySelector);
@@ -60,8 +61,12 @@ export default function PortfolioScreen({ navigation }: Props) {
 
   useProductTourOverlay("INSTALL_CRYPTO", "Porfolio-ManagerTab");
   useProductTourOverlay("CREATE_ACCOUNT", "Porfolio-AccountsTab");
-  useProductTourOverlay("RECEIVE_COINS", "Porfolio-TransferTab");
-  useProductTourOverlay("SEND_COINS", "Porfolio-TransferTab-Send");
+  useProductTourOverlay("RECEIVE_COINS", "Porfolio-TransferTab", !transferOpen);
+  useProductTourOverlay(
+    "SEND_COINS",
+    "Porfolio-TransferTab-Send",
+    !transferOpen,
+  );
 
   const refreshAccountsOrdering = useRefreshAccountsOrdering();
   useFocusEffect(refreshAccountsOrdering);

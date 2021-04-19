@@ -79,6 +79,42 @@ const configs = {
       }),
     },
   ],
+  "Transfer-Send": [
+    {
+      layout: "modal",
+      arrow: require("../../images/producttour/arrow-bottomleft.png"),
+      text: "producttour.overlay.Transfer-Send",
+      disableSkip: true,
+      arrowPosition: ({ x, width, y }) => ({
+        left: x + width / 2,
+        top: y - 11 - 45,
+      }),
+      textLayout: ({ y }) => ({
+        top: y - 11 - 45 - 44,
+        left: 0,
+        right: 0,
+        textAlign: "center",
+      }),
+    },
+  ],
+  "Transfer-Receive": [
+    {
+      layout: "modal",
+      arrow: require("../../images/producttour/arrow-bottomleft.png"),
+      text: "producttour.overlay.Transfer-Receive",
+      disableSkip: true,
+      arrowPosition: ({ x, width, y }) => ({
+        left: x + width / 2,
+        top: y - 11 - 45,
+      }),
+      textLayout: ({ y }) => ({
+        top: y - 11 - 45 - 44,
+        left: 0,
+        right: 0,
+        textAlign: "center",
+      }),
+    },
+  ],
   "Send-accountsList": [
     {
       layout: "send-accountsList",
@@ -379,6 +415,7 @@ const PortfolioOverlay = () => {
   const textStyle = config.textLayout(layout);
   const text = config.text;
   const catchClick = config.catchClick;
+  const disableSkip = config.disableSkip;
 
   return (
     <>
@@ -408,17 +445,19 @@ const PortfolioOverlay = () => {
       {catchClick ? (
         <TouchableOpacity style={[styles.fullscreen]} onPress={next} />
       ) : null}
-      <TouchableOpacity
-        style={[
-          styles.closeButton,
-          config.cbPosition === "bottom" ? styles.cbBottom : styles.cbTop,
-        ]}
-        onPress={skip}
-      >
-        <LText style={styles.closeText} bold>
-          <Trans i18nKey="producttour.overlay.closeText" />
-        </LText>
-      </TouchableOpacity>
+      {!disableSkip ? (
+        <TouchableOpacity
+          style={[
+            styles.closeButton,
+            config.cbPosition === "bottom" ? styles.cbBottom : styles.cbTop,
+          ]}
+          onPress={skip}
+        >
+          <LText style={styles.closeText} bold>
+            <Trans i18nKey="producttour.overlay.closeText" />
+          </LText>
+        </TouchableOpacity>
+      ) : null}
     </>
   );
 };

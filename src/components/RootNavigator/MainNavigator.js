@@ -47,11 +47,12 @@ export default function MainNavigator({
     >
       <Tab.Screen
         name={ScreenName.Portfolio}
-        component={Portfolio}
         options={{
           tabBarIcon: (props: any) => <PortfolioTabIcon {...props} />,
         }}
-      />
+      >
+        {props => <Portfolio transferOpen={isOpen} {...props} />}
+      </Tab.Screen>
       <Tab.Screen
         name={NavigatorName.Accounts}
         component={AccountsNavigator}
@@ -84,7 +85,7 @@ export default function MainNavigator({
         listeners={() => ({
           tabPress: e => {
             if (ptContext.holeConfig) {
-              enableHole(`-${ptContext.holeConfig}`);
+              // enableHole(`-${ptContext.holeConfig}`);
             }
             e.preventDefault();
             setIsOpen(true);

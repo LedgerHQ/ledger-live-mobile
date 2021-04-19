@@ -1,11 +1,11 @@
 /* @flow */
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Touchable from "../components/Touchable";
 import TabIcon from "../components/TabIcon";
 import CreateModal from "../modals/Create";
 import TransferIcon from "../icons/Transfer";
 import { lockSubject } from "../components/RootNavigator/CustomBlockRouterNavigator";
-import { context, enableHole } from "./ProductTour/Provider";
+import { context, useProductTourOverlay } from "./ProductTour/Provider";
 
 const hitSlop = {
   top: 10,
@@ -34,7 +34,7 @@ export function TransferTabIcon({
   const ptContext = useContext(context);
   function openModal() {
     if (ptContext.holeConfig) {
-      enableHole(`-${ptContext.holeConfig}`);
+      // enableHole(`-${ptContext.holeConfig}`);
     }
     setIsOpen(true);
   }
@@ -42,6 +42,16 @@ export function TransferTabIcon({
   function onModalClose() {
     setIsOpen(false);
   }
+
+  const useEffectFn = effect => useEffect(effect, [isOpen, effect]);
+
+  useProductTourOverlay(
+    "RECEIVE_COINS",
+    "Transfer-Receive",
+    isOpen,
+    useEffectFn,
+  );
+  useProductTourOverlay("SEND_COINS", "Transfer-Send", isOpen, useEffectFn);
 
   return (
     <>

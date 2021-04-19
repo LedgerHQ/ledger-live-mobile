@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext, useRef } from "react";
 import { View, StyleSheet, Platform } from "react-native";
 import ReactNativeModal from "react-native-modal";
 import type { ViewStyleProp } from "react-native/Libraries/StyleSheet/StyleSheet";
@@ -10,6 +10,10 @@ import StyledStatusBar from "./StyledStatusBar";
 import ButtonUseTouchable from "../context/ButtonUseTouchable";
 import getWindowDimensions from "../logic/getWindowDimensions";
 import DebugRejectSwitch from "./DebugRejectSwitch";
+import {
+  context as _ptContext,
+  reportLayout,
+} from "../screens/ProductTour/Provider";
 
 let isModalOpenedref = false;
 
@@ -46,7 +50,9 @@ const BottomModal = ({
   ...rest
 }: Props) => {
   const { colors } = useTheme();
+  const ptContext = useContext(_ptContext);
   const [open, setIsOpen] = useState(false);
+  const ref = useRef();
   const backDropProps = preventBackdropClick
     ? {}
     : {
@@ -82,6 +88,7 @@ const BottomModal = ({
         useNativeDriver
         hideModalContentWhileAnimating
         style={[styles.root, propStyles || {}]}
+        backdropOpacity={ptContext.holeConfig ? 0 : 0.7}
       >
         <View
           style={[
@@ -89,6 +96,10 @@ const BottomModal = ({
             { backgroundColor: colors.card },
             containerStyle,
           ]}
+          ref={ref}
+          onLayout={() => {
+            reportLayout(["modal"], ref);
+          }}
         >
           <View style={style}>
             {open && id ? <TrackScreen category={id} /> : null}
