@@ -3612,6 +3612,11 @@
       "description": "You must install your first crypto to create an account",
       "cta": "Got it!"
     },
+    "startwithbitcoinbottommodal": {
+      "title": "Let’s start with Bitcoin",
+      "description": "We will show you the app while using Bitcoin as an example. You can always skip a tutorial and use the app with any other crypto after the product tour!",
+      "cta": "Continue"
+    },
     "overlay": {
       "closeText": "Skip Tutorial",
       "Porfolio-ManagerTab": "Go to the Manager to install\napps on your device.",

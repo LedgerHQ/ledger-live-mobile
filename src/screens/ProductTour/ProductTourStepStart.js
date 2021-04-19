@@ -19,7 +19,7 @@ import { useTheme } from "@react-navigation/native";
 import LText from "../../components/LText";
 import Button from "../../components/Button";
 import AnimatedSvgBackground from "../../components/AnimatedSvgBackground";
-import { completeStep, context } from "./Provider";
+import { context } from "./Provider";
 import { NavigatorName, ScreenName } from "../../const";
 import { navigate } from "../../rootnavigation";
 import ArrowRight from "../../icons/ArrowRight";
@@ -28,6 +28,7 @@ import { urls } from "../../config/urls";
 import { track } from "../../analytics";
 import ArrowLeft from "../../icons/ArrowLeft";
 import Styles from "../../navigation/styles";
+import StartWithBitcoinBottomModal from "./StartWithBitcoinBottomModal";
 
 const stepInfos = {
   INSTALL_CRYPTO: [
@@ -133,6 +134,7 @@ const ProductTourStepStart = ({ navigation }: *) => {
   const ptContext = useContext(context);
   const headerHeight = useHeaderHeight();
   const [index, setIndex] = useState(0);
+  const [modal, setModal] = useState();
   const scenes = useMemo(
     () => (ptContext.currentStep ? stepInfos[ptContext.currentStep][1] : []),
     [ptContext.currentStep],
@@ -144,6 +146,19 @@ const ProductTourStepStart = ({ navigation }: *) => {
   const goTo = useCallback(() => {
     switch (ptContext.currentStep) {
       case "INSTALL_CRYPTO":
+        setModal({
+          Component: StartWithBitcoinBottomModal,
+          props: {
+            isOpened: true,
+            onPress: () => {
+              setModal();
+              navigate(NavigatorName.Main, {
+                screen: ScreenName.Portfolio,
+              });
+            },
+          },
+        });
+        break;
       case "CREATE_ACCOUNT":
       case "RECEIVE_COINS":
       case "SEND_COINS":
@@ -207,6 +222,7 @@ const ProductTourStepStart = ({ navigation }: *) => {
 
   return (
     <SafeAreaView style={[styles.container, { backgroundColor: colors.live }]}>
+      {modal?.Component ? <modal.Component {...modal.props} /> : null}
       <AnimatedSvgBackground
         color={"#587ED4"}
         style={[styles.svg, { height: 218 - headerHeight }]}

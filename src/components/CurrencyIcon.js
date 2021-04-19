@@ -24,8 +24,11 @@ function CurrencyIcon({ size, currency, color, radius, bg }: Props) {
   const { colors } = useTheme();
   const currencyColor = useMemo(
     () =>
-      ensureContrast(color || getCurrencyColor(currency), colors.background),
-    [colors, color, currency],
+      ensureContrast(
+        color || getCurrencyColor(currency),
+        bg || colors.background,
+      ),
+    [color, currency, bg, colors.background],
   );
 
   if (currency.type === "TokenCurrency") {
