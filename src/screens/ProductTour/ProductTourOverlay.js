@@ -101,6 +101,7 @@ const configs = {
       layout: "send-recipient",
       arrow: require("../../images/producttour/arrow-topright.png"),
       text: "producttour.overlay.Send-recipient",
+      catchClick: true,
       arrowPosition: ({ x, y, height, width }) => ({
         left: x + width / 2,
         top: y + height + 23,
@@ -118,6 +119,7 @@ const configs = {
       layout: "send-amount",
       arrow: require("../../images/producttour/arrow-topright.png"),
       text: "producttour.overlay.Send-amount",
+      catchClick: true,
       arrowPosition: ({ x, y, height, width }) => ({
         left: x + width / 2,
         top: y + height + 23,
@@ -135,6 +137,7 @@ const configs = {
       layout: "send-fees",
       arrow: require("../../images/producttour/arrow-bottomleft.png"),
       text: "producttour.overlay.Send-fees",
+      catchClick: true,
       arrowPosition: ({ x, width, y }) => ({
         left: x + width / 2,
         top: y - 11 - 45,

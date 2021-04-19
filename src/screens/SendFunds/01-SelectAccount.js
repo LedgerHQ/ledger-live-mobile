@@ -1,5 +1,5 @@
 /* @flow */
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useContext, useMemo } from "react";
 import { View, StyleSheet, FlatList } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { createStructuredSelector } from "reselect";
@@ -31,7 +31,11 @@ import KeyboardView from "../../components/KeyboardView";
 import GenericErrorBottomModal from "../../components/GenericErrorBottomModal";
 import { formatSearchResults } from "../../helpers/formatAccountSearchResults";
 import type { SearchResult } from "../../helpers/formatAccountSearchResults";
-import { reportLayout, useProductTourOverlay } from "../ProductTour/Provider";
+import {
+  reportLayout,
+  useProductTourOverlay,
+  context as _ptContext,
+} from "../ProductTour/Provider";
 
 const SEARCH_KEYS = ["name", "unit.code", "token.name", "token.ticker"];
 const forceInset = { bottom: "always" };
@@ -48,6 +52,7 @@ export const SendFundsSelectAccount = (props: Props) => {
   const [state, setState] = useState({
     error: null,
   });
+  const ptContext = useContext(_ptContext);
 
   const ref = useRef();
   useProductTourOverlay("SEND_COINS", "Send-accountsList");
@@ -121,6 +126,14 @@ export const SendFundsSelectAccount = (props: Props) => {
   const { allAccounts, route, colors } = props;
   const { params } = route;
   const initialCurrencySelected = params?.currency;
+
+  const list = useMemo(() => {
+    if (ptContext.currentStep === "SEND_COINS") {
+      return allAccounts.filter(acc => acc?.currency?.id === "bitcoin");
+    }
+    return allAccounts;
+  }, [allAccounts, ptContext.currentStep]);
+
   return (
     <SafeAreaView
       style={[styles.root, { backgroundColor: colors.background }]}
@@ -130,7 +143,7 @@ export const SendFundsSelectAccount = (props: Props) => {
       <KeyboardView style={{ flex: 1 }}>
         <View style={styles.searchContainer}>
           <FilteredSearchBar
-            list={allAccounts.filter(account => !isAccountEmpty(account))}
+            list={list.filter(account => !isAccountEmpty(account))}
             inputWrapperStyle={styles.padding}
             renderList={renderList}
             renderEmptySearch={renderEmptySearch}
