@@ -3639,7 +3639,8 @@
       "Send-fees": "You can edit the fees. A higher fee\ngets your transaction confirmed\nfaster.",
       "Transfer-Send": "Then click on Send",
       "Transfer-Receive": "Then click on Receive",
-      "Device-Instructions": "Follow the animated instructions to connect your Ledger device."
+      "Device-Instructions": "Follow the animated instructions to connect your Ledger device.",
+      "Accounts-AddAccount-Modal": "Select add accounts to trigger a new search or you can add imported account from Live Desktop with a QR code"
     }
   },
   "notificationCenter": {

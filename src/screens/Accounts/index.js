@@ -23,15 +23,29 @@ const List = globalSyncRefreshControl(FlatList);
 type Props = {
   navigation: any,
   route: { params?: { currency?: string } },
+  isAddModalOpened: boolean,
 };
 
-export default function Accounts({ navigation, route }: Props) {
+export default function Accounts({
+  navigation,
+  route,
+  isAddModalOpened,
+}: Props) {
   const accounts = useSelector(accountsSelector);
   const ref = useRef();
   useScrollToTop(ref);
   const { colors } = useTheme();
 
-  useProductTourOverlay("CREATE_ACCOUNT", "Accounts-headerAddAccount");
+  useProductTourOverlay(
+    "CREATE_ACCOUNT",
+    "Accounts-headerAddAccount",
+    !isAddModalOpened,
+  );
+  useProductTourOverlay(
+    "CREATE_ACCOUNT",
+    "Accounts-AddAccount-Modal",
+    isAddModalOpened,
+  );
 
   const refreshAccountsOrdering = useRefreshAccountsOrdering();
   useFocusEffect(refreshAccountsOrdering);

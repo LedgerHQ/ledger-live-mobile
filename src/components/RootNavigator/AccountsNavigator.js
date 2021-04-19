@@ -1,5 +1,5 @@
 // @flow
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "@react-navigation/native";
@@ -18,17 +18,24 @@ export default function AccountsNavigator() {
   const stackNavConfig = useMemo(() => getStackNavigatorConfig(colors), [
     colors,
   ]);
+  const [isAddModalOpened, setIsAddModalOpened] = useState(false);
   return (
     <Stack.Navigator screenOptions={stackNavConfig}>
       <Stack.Screen
         name={ScreenName.Accounts}
-        component={Accounts}
         options={{
           title: t("accounts.title"),
           headerLeft: () => <AccountOrder />,
-          headerRight: () => <AddAccount />,
+          headerRight: () => (
+            <AddAccount
+              isAddModalOpened={isAddModalOpened}
+              setIsAddModalOpened={setIsAddModalOpened}
+            />
+          ),
         }}
-      />
+      >
+        {props => <Accounts isAddModalOpened={isAddModalOpened} {...props} />}
+      </Stack.Screen>
       <Stack.Screen
         name={ScreenName.Account}
         component={Account}

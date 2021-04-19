@@ -8,11 +8,15 @@ import Touchable from "../../components/Touchable";
 import AddAccountsModal from "../AddAccounts/AddAccountsModal";
 import { reportLayout } from "../ProductTour/Provider";
 
-export default function AddAccount() {
+export default function AddAccount({
+  isAddModalOpened,
+  setIsAddModalOpened,
+}: {
+  isAddModalOpened: boolean,
+  setIsAddModalOpened: Function,
+}) {
   const { colors } = useTheme();
   const navigation = useNavigation();
-
-  const [isAddModalOpened, setIsAddModalOpened] = useState(false);
 
   function openAddModal() {
     setIsAddModalOpened(true);

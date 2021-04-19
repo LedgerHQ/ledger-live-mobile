@@ -133,6 +133,24 @@ const configs = {
       }),
     },
   ],
+  "Accounts-AddAccount-Modal": [
+    {
+      layout: "modal",
+      arrow: require("../../images/producttour/arrow-bottomleft.png"),
+      text: "producttour.overlay.Accounts-AddAccount-Modal",
+      disableSkip: true,
+      arrowPosition: ({ x, width, y }) => ({
+        left: x + width / 2,
+        top: y - 11 - 45,
+      }),
+      textLayout: ({ y }) => ({
+        top: y - 11 - 45 - 44 - 44,
+        left: 0,
+        right: 0,
+        textAlign: "center",
+      }),
+    },
+  ],
   "Send-accountsList": [
     {
       layout: "send-accountsList",
