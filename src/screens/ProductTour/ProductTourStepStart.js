@@ -147,6 +147,10 @@ const ProductTourStepStart = ({ navigation }: *) => {
       case "CREATE_ACCOUNT":
       case "RECEIVE_COINS":
       case "SEND_COINS":
+        navigate(NavigatorName.Main, {
+          screen: ScreenName.Portfolio,
+        });
+        break;
       case "CUSTOMIZE_APP":
         navigate(NavigatorName.Base, {
           screen: NavigatorName.CustomizeApp,
