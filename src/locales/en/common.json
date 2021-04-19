@@ -3628,20 +3628,11 @@
       "Receive-accountsList": "Select your account",
       "Receive-verifyAddress-shareAddress": "First copy the address and\nshare it with the party sending\nyour crypto.",
       "Receive-verifyAddress-addressDisclaimer": "Always compare the pasted address\nwith the one on your device. You can\nonly trust the address on your\ndevice: the pasted address must be\nexactly the same.",
-      "Porfolio-TransferTab-Buy": "Click on transfer in the navigation\nand then Buy",
-      "Buy-BuyCTA": "Click Buy",
-      "Buy-SelectBitcoinCurrency": "Select the crypto currency you\nwant to buy",
-      "Buy-SelectBitcoinAccount": "Select your account",
-      "Buy-coinify": "Follow the instructions of our\npartner to complete the\npurchase.",
       "Porfolio-TransferTab-Send": "Click on transfer in the navigation\nand then Send",
       "Send-accountsList": "Select the account to\nsend from.",
       "Send-recipient": "Paste or scan the QR code of\nthe address to send to.",
       "Send-amount": "Enter the amount you want to send.\nClick “Send Max” toggle to send\nthe entire account balance and\nempty the account",
-      "Send-fees": "You can edit the fees. A higher fee\ngets your transaction confirmed\nfaster.",
-      "Porfolio-TransferTab-Swap": "Click on transfer in the navigation\nand then Swap",
-      "Swap-accountFrom": "First, select the crypto and the\naccount you want to send.",
-      "Swap-accountTo": "Then, select the crypto and the\naccount you want to receive in\nreturn.",
-      "Swap-amount": "Enter how much assets you want to swap"
+      "Send-fees": "You can edit the fees. A higher fee\ngets your transaction confirmed\nfaster."
     }
   },
   "notificationCenter": {

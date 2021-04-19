@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useRef } from "react";
+import React from "react";
 import { View, StyleSheet } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { useTranslation } from "react-i18next";
@@ -11,7 +11,6 @@ import TrackScreen from "../../analytics/TrackScreen";
 import LText from "../../components/LText";
 import ExchangeIcon from "../../icons/Exchange";
 import Button from "../../components/Button";
-import { reportLayout, useProductTourOverlay } from "../ProductTour/Provider";
 
 const forceInset = { bottom: "always" };
 
@@ -19,8 +18,6 @@ export default function Buy() {
   const { t } = useTranslation();
   const navigation = useNavigation();
   const { colors } = useTheme();
-  const ref = useRef();
-  useProductTourOverlay("BUY_COINS", "Buy-BuyCTA");
 
   return (
     <SafeAreaView
@@ -46,13 +43,7 @@ export default function Buy() {
         <LText style={styles.description} color="smoke">
           {t("exchange.buy.description")}
         </LText>
-        <View
-          style={styles.buttonContainer}
-          ref={ref}
-          onLayout={() => {
-            reportLayout(["buy-BuyCTA"], ref, { y: 20, height: -20 });
-          }}
-        >
+        <View style={styles.buttonContainer}>
           <Button
             containerStyle={styles.button}
             event="ExchangeStartBuyFlow"

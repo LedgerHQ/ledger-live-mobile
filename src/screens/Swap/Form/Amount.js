@@ -1,5 +1,5 @@
 // @flow
-import React, { useMemo, useCallback, useEffect, useState, useRef } from "react";
+import React, { useMemo, useCallback, useEffect, useState } from "react";
 import invariant from "invariant";
 import { BigNumber } from "bignumber.js";
 import { View, StyleSheet } from "react-native";
@@ -30,10 +30,6 @@ import ToggleButton from "../../../components/ToggleButton";
 import Rate from "./Rate";
 import Switch from "../../../components/Switch";
 import { ScreenName } from "../../../const";
-import {
-  reportLayout,
-  useProductTourOverlay,
-} from "../../ProductTour/Provider";
 
 type Props = {
   navigation: any,
@@ -67,9 +63,6 @@ const SwapFormAmount = ({ navigation, route }: Props) => {
   const [tradeMethod, setTradeMethod] = useState<"fixed" | "float">(
     enabledTradeMethods[0] || "fixed",
   );
-
-  const ref = useRef();
-  useProductTourOverlay("SWAP_COINS", "Swap-amount");
 
   const {
     status,
@@ -228,13 +221,7 @@ const SwapFormAmount = ({ navigation, route }: Props) => {
           onChange={onTradeMethodChange}
         />
       </View>
-      <View
-        style={styles.rateWrapper}
-        ref={ref}
-        onLayout={() => {
-          reportLayout(["swap-amount"], ref);
-        }}
-      >
+      <View style={styles.rateWrapper}>
         {actualRate && rateExpiration ? (
           <Rate
             rateExpiration={rateExpiration}

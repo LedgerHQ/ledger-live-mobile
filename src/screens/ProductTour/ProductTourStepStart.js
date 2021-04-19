@@ -93,26 +93,6 @@ const stepInfos = {
       },
     },
   ],
-  BUY_COINS: [
-    "producttour.stepstart.buycoins",
-    [
-      { desc: "producttour.stepstart.buycoinsdetails" },
-      {
-        desc: "producttour.stepstart.buycoinsdetails2",
-        link: {
-          href: urls.productTour.buy,
-          label: "producttour.stepstart.buycoinslink",
-        },
-      },
-    ],
-    {
-      file: require("../../images/producttour/blue/buycoins.png"),
-      size: {
-        width: 152,
-        height: 160,
-      },
-    },
-  ],
   SEND_COINS: [
     "producttour.stepstart.sendcoins",
     [
@@ -130,26 +110,6 @@ const stepInfos = {
       size: {
         width: 216,
         height: 161,
-      },
-    },
-  ],
-  SWAP_COINS: [
-    "producttour.stepstart.swapcoins",
-    [
-      { desc: "producttour.stepstart.swapcoinsdetails" },
-      {
-        desc: "producttour.stepstart.swapcoinsdetails2",
-        link: {
-          href: urls.productTour.swap,
-          label: "producttour.stepstart.swapcoinslink",
-        },
-      },
-    ],
-    {
-      file: require("../../images/producttour/blue/swapcoins.png"),
-      size: {
-        width: 184,
-        height: 160,
       },
     },
   ],
@@ -186,13 +146,7 @@ const ProductTourStepStart = ({ navigation }: *) => {
       case "INSTALL_CRYPTO":
       case "CREATE_ACCOUNT":
       case "RECEIVE_COINS":
-      case "BUY_COINS":
       case "SEND_COINS":
-      case "SWAP_COINS":
-        navigate(NavigatorName.Main, {
-          screen: ScreenName.Portfolio,
-        });
-        break;
       case "CUSTOMIZE_APP":
         navigate(NavigatorName.Base, {
           screen: NavigatorName.CustomizeApp,
@@ -259,19 +213,6 @@ const ProductTourStepStart = ({ navigation }: *) => {
             <ArrowLeft size={18} color={"#FFF"} />
           </Pressable>
           <View style={styles.spacer} />
-          {ptContext.currentStep === "BUY_COINS" ? (
-            <Button
-              type="primary"
-              containerStyle={styles.skipBuyButton}
-              onPress={() => {
-                ptContext.currentStep && completeStep(ptContext.currentStep);
-                navigation.navigate(NavigatorName.ProductTour, {
-                  screen: ScreenName.ProductTourMenu,
-                });
-              }}
-              title={<Trans i18nKey="producttour.stepstart.buymaybe" />}
-            />
-          ) : null}
         </View>
       </View>
       <View style={styles.root}>

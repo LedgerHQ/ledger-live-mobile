@@ -20,7 +20,6 @@ import { renderVerifyAddress } from "../../components/DeviceAction/rendering";
 import { getConfig } from "./coinifyConfig";
 import { track } from "../../analytics";
 import { DevicePart } from "./DevicePart";
-import { useProductTourFinishedModal } from "../ProductTour/Provider";
 import SkipDeviceVerification from "./SkipDeviceVerification";
 
 const action = createAction(connectApp);
@@ -117,9 +116,6 @@ export default function CoinifyWidget({
   };
 
   const url = `${coinifyConfig.url}?${querystring.stringify(widgetConfig)}`;
-
-  const [done, setDone] = useState();
-  useProductTourFinishedModal("BUY_COINS", done === url);
 
   useEffect(() => {
     if (mode === "buy" && account) {
@@ -265,8 +261,6 @@ export default function CoinifyWidget({
             track("Coinify Confirm Buy End", {
               currencyName: getAccountCurrency(account).name,
             });
-            // otherwise it interferes with the other bottom modal closing
-            setTimeout(() => setDone(url), 1000);
           }
         } else {
           webView.current.postMessage(

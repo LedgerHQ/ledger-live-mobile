@@ -79,24 +79,6 @@ const stepTitles = {
       },
     },
   ],
-  BUY_COINS: [
-    "producttour.menu.buycoins",
-    "producttour.menu.coinsbought",
-    {
-      files: [
-        require("../../images/producttour/blue/buycoins.png"),
-        require("../../images/producttour/green/buycoins.png"),
-      ],
-      size: {
-        width: 80,
-        height: 84,
-      },
-      offset: {
-        right: 11,
-        bottom: -4,
-      },
-    },
-  ],
   SEND_COINS: [
     "producttour.menu.sendcoins",
     "producttour.menu.coinssent",
@@ -112,24 +94,6 @@ const stepTitles = {
       offset: {
         right: 8,
         bottom: -8,
-      },
-    },
-  ],
-  SWAP_COINS: [
-    "producttour.menu.swapcoins",
-    "producttour.menu.coinsswapped",
-    {
-      files: [
-        require("../../images/producttour/blue/swapcoins.png"),
-        require("../../images/producttour/green/swapcoins.png"),
-      ],
-      size: {
-        width: 86,
-        height: 75,
-      },
-      offset: {
-        right: 11,
-        bottom: -6,
       },
     },
   ],

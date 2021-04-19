@@ -47,16 +47,6 @@ const stepTitles = {
       },
     },
   ],
-  BUY_COINS: [
-    "producttour.finishedmodal.buycoins",
-    {
-      file: require("../../images/producttour/green/buycoins.png"),
-      size: {
-        width: 175,
-        height: 157,
-      },
-    },
-  ],
   SEND_COINS: [
     "producttour.finishedmodal.sendcoins",
     {
@@ -64,16 +54,6 @@ const stepTitles = {
       size: {
         width: 176,
         height: 131,
-      },
-    },
-  ],
-  SWAP_COINS: [
-    "producttour.finishedmodal.swapcoins",
-    {
-      file: require("../../images/producttour/green/swapcoins.png"),
-      size: {
-        width: 184,
-        height: 160,
       },
     },
   ],

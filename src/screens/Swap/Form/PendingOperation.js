@@ -1,5 +1,5 @@
 // @flow
-import React, { useCallback, useState, useContext } from "react";
+import React, { useCallback } from "react";
 import { StyleSheet, View, SafeAreaView } from "react-native";
 import { useNavigation, useRoute, useTheme } from "@react-navigation/native";
 import { Trans } from "react-i18next";
@@ -8,32 +8,20 @@ import InfoBox from "../../../components/InfoBox";
 import Button from "../../../components/Button";
 import IconSwap from "../../../icons/Swap";
 import { rgba } from "../../../colors";
-import {
-  context as _ptContext,
-  useProductTourFinishedModal,
-} from "../../ProductTour/Provider";
 import { ScreenName } from "../../../const";
 
 const PendingOperation = () => {
   const { colors } = useTheme();
   const navigation = useNavigation();
   const route = useRoute();
-  const ptContext = useContext(_ptContext);
-  const [done, setDone] = useState(false);
 
   const { swapId, provider } = route.params;
 
   const onComplete = useCallback(() => {
-    if (ptContext.currentStep === "SWAP_COINS") {
-      setDone(swapId);
-      return;
-    }
     navigation.navigate(ScreenName.SwapFormOrHistory, {
       screen: ScreenName.SwapHistory,
     });
-  }, [navigation, ptContext.currentStep, swapId]);
-
-  useProductTourFinishedModal("RECEIVE_COINS", swapId === done);
+  }, [navigation]);
 
   return (
     <SafeAreaView style={[styles.root, { backgroundColor: colors.background }]}>

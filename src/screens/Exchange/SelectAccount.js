@@ -1,6 +1,6 @@
 /* @flow */
 
-import React, { useCallback, useMemo, useRef } from "react";
+import React, { useCallback, useMemo } from "react";
 import { View, StyleSheet, FlatList, SafeAreaView } from "react-native";
 import { Trans, useTranslation } from "react-i18next";
 import type {
@@ -63,9 +63,6 @@ export default function SelectAccount({ navigation, route }: Props) {
 
   const { t } = useTranslation();
 
-  const refbtc = useRef();
-  useProductTourOverlay("BUY_COINS", "Buy-SelectBitcoinAccount");
-
   const keyExtractor = item => item.account.id;
   const renderItem = useCallback(
     ({ item: result }: { item: SearchResult }) => {
@@ -73,12 +70,6 @@ export default function SelectAccount({ navigation, route }: Props) {
 
       return (
         <View
-          ref={refbtc}
-          onLayout={() => {
-            if (account.currency && account.currency.name === "Bitcoin") {
-              reportLayout(["Buy-SelectBitcoinAccount"], refbtc);
-            }
-          }}
           style={
             account.type === "Account"
               ? undefined

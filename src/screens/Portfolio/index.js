@@ -61,9 +61,7 @@ export default function PortfolioScreen({ navigation }: Props) {
   useProductTourOverlay("INSTALL_CRYPTO", "Porfolio-ManagerTab");
   useProductTourOverlay("CREATE_ACCOUNT", "Porfolio-AccountsTab");
   useProductTourOverlay("RECEIVE_COINS", "Porfolio-TransferTab");
-  useProductTourOverlay("BUY_COINS", "Porfolio-TransferTab-Buy");
   useProductTourOverlay("SEND_COINS", "Porfolio-TransferTab-Send");
-  useProductTourOverlay("SWAP_COINS", "Porfolio-TransferTab-Swap");
 
   const refreshAccountsOrdering = useRefreshAccountsOrdering();
   useFocusEffect(refreshAccountsOrdering);

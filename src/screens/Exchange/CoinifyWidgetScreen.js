@@ -32,21 +32,12 @@ export default function CoinifyWidgetScreen({ route }: Props) {
 
   const forceInset = { bottom: "always" };
 
-  const ref = useRef();
-  useProductTourOverlay("BUY_COINS", "Buy-coinify");
-
   return (
     <SafeAreaView
       style={[styles.root, { backgroundColor: colors.card }]}
       forceInset={forceInset}
     >
-      <View
-        style={styles.root}
-        ref={ref}
-        onLayout={() => {
-          reportLayout(["coinify-widget"], ref, { height: -300 });
-        }}
-      >
+      <View style={styles.root}>
         <CoinifyWidget
           account={account}
           parentAccount={parentAccount}

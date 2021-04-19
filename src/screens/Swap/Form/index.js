@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useCallback, useMemo, useRef } from "react";
+import React, { useCallback, useMemo } from "react";
 import { TouchableOpacity, StyleSheet, View } from "react-native";
 import { Trans } from "react-i18next";
 import { useSelector } from "react-redux";
@@ -40,10 +40,6 @@ import Button from "../../../components/Button";
 import { flattenAccountsSelector } from "../../../reducers/accounts";
 import { flattenedSwapSupportedCurrenciesSelector } from "../../../reducers/settings";
 import { TrackScreen } from "../../../analytics";
-import {
-  reportLayout,
-  useProductTourOverlay,
-} from "../../ProductTour/Provider";
 
 type SelectAccountFlowTarget = "from" | "to";
 export type SwapRouteParams = {
@@ -148,25 +144,11 @@ const Form = ({
     return fromAccount && toAccount;
   }, [exchange]);
 
-  const ref = useRef();
-  const ref2 = useRef();
-  useProductTourOverlay("SWAP_COINS", "Swap-accountFrom", !fromAccount);
-  useProductTourOverlay(
-    "SWAP_COINS",
-    "Swap-accountTo",
-    !!fromAccount && !toAccount,
-  );
-
   return (
     <View style={styles.root}>
       <TrackScreen category="Swap" name="Form" />
       <View style={styles.top}>
-        <View
-          ref={ref}
-          onLayout={() => {
-            reportLayout(["swap-accountFrom"], ref);
-          }}
-        >
+        <View>
           <TouchableOpacity
             style={styles.accountWrapper}
             onPress={() => startSelectAccountFlow("from")}
@@ -232,12 +214,7 @@ const Form = ({
         <SectionSeparator noMargin>
           <ArrowDownCircle />
         </SectionSeparator>
-        <View
-          ref={ref2}
-          onLayout={() => {
-            reportLayout(["swap-accountTo"], ref2);
-          }}
-        >
+        <View>
           <TouchableOpacity
             style={styles.accountWrapper}
             onPress={() => startSelectAccountFlow("to")}
