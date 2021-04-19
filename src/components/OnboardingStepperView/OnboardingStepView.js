@@ -19,6 +19,7 @@ import Animation from "../Animation";
 export type InfoStepViewProps = {
   trackPage?: string,
   title?: React$Node,
+  warning?: React$Node,
   descs?: React$Node[],
   image?: number,
   lottie?: number,
@@ -47,6 +48,7 @@ export type InfoStepViewProps = {
 
 export function InfoStepView({
   title,
+  warning,
   descs,
   image,
   lottie,
@@ -114,6 +116,7 @@ export function InfoStepView({
                   {title}
                 </LText>
               )}
+              {warning}
               {descs &&
                 descs.map((d, i) => (
                   <LText
