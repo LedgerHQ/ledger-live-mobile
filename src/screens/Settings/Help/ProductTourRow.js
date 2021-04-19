@@ -1,26 +1,32 @@
 /* @flow */
-import React, { PureComponent } from "react";
+import React, { useContext } from "react";
 import { Trans } from "react-i18next";
 import SettingsRow from "../../../components/SettingsRow";
-import { navigate } from "../../../rootnavigation";
-import { NavigatorName, ScreenName } from "../../../const";
+import Switch from "../../../components/Switch";
+import {
+  dismiss as dismissTour,
+  context as _ptContext,
+} from "../../ProductTour/Provider";
 
-class ProductTourRow extends PureComponent<*> {
-  render() {
-    return (
-      <SettingsRow
-        event="ProductTourRow"
-        title={<Trans i18nKey="settings.help.productTour" />}
-        desc={<Trans i18nKey="settings.help.productTourDesc" />}
-        onPress={() => {
-          navigate(NavigatorName.ProductTour, {
-            screen: ScreenName.ProductTourMenu,
-          });
+const ProductTourRow = () => {
+  const ptContext = useContext(_ptContext);
+  return (
+    <SettingsRow
+      event="ProductTourRow"
+      title={<Trans i18nKey="settings.help.productTour" />}
+      desc={<Trans i18nKey="settings.help.productTourDesc" />}
+      onPress={null}
+      alignedTop
+    >
+      <Switch
+        style={{ opacity: 0.99 }}
+        value={!ptContext.dismissed}
+        onValueChange={() => {
+          dismissTour(!ptContext.dismissed);
         }}
-        alignedTop
       />
-    );
-  }
-}
+    </SettingsRow>
+  );
+};
 
 export default ProductTourRow;
