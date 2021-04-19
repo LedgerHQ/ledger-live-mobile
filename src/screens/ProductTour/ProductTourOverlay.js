@@ -373,7 +373,7 @@ const PortfolioOverlay = () => {
   const arrowStyle = config.arrowPosition(layout);
   const textStyle = config.textLayout(layout);
   const text = config.text;
-  // const catchClick = config.catchClick;
+  const catchClick = config.catchClick;
 
   return (
     <>
@@ -400,6 +400,9 @@ const PortfolioOverlay = () => {
       <LText style={[textStyle, styles.tooltipText]} bold>
         <Trans i18nKey={text} />
       </LText>
+      {catchClick ? (
+        <TouchableOpacity style={[styles.fullscreen]} onPress={next} />
+      ) : null}
       <TouchableOpacity
         style={[
           styles.closeButton,
