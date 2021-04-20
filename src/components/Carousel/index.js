@@ -82,19 +82,6 @@ const SLIDES = [
       height: 121,
     },
   },
-  {
-    url: urls.banners.gateway,
-    name: "Gateway",
-    title: <Trans i18nKey={`carousel.banners.gateway.title`} />,
-    description: <Trans i18nKey={`carousel.banners.gateway.description`} />,
-    image: require("../../images/banners/gateway.png"),
-    position: {
-      bottom: 10,
-      right: 28,
-      width: 86,
-      height: 90,
-    },
-  },
 ];
 
 export const getDefaultSlides = () =>
