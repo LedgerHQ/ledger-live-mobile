@@ -55,6 +55,7 @@ export default function SelectFeesStrategy({
   const mainAccount = getMainAccount(account, undefined);
   const currency = getAccountCurrency(mainAccount);
   const unit = getAccountUnit(account);
+  const { feesStrategy } = transaction;
 
   const [isNetworkFeeHelpOpened, setNetworkFeeHelpOpened] = useState(false);
   const toggleNetworkFeeHelpModal = useCallback(
@@ -63,64 +64,61 @@ export default function SelectFeesStrategy({
   );
   const closeNetworkFeeHelpModal = () => setNetworkFeeHelpOpened(false);
 
-  const renderItem = ({ item }) => {
-    const onPressStrategySelect = useCallback(() => {
+  const onPressStrategySelect = useCallback(
+    (item: any) => {
       onStrategySelect({
         amount: item.amount,
-        label: item.label,
+        label: item.forceValueLabel ?? item.label,
         userGasLimit: item.userGasLimit,
       });
-    });
+    },
+    [onStrategySelect],
+  );
 
-    return (
-      <TouchableOpacity
-        onPress={onPressStrategySelect}
-        style={[
-          styles.feeButton,
-          {
-            borderColor:
-              transaction.feesStrategy === item.label
-                ? colors.live
-                : colors.background,
-            backgroundColor:
-              transaction.feesStrategy === item.label
-                ? colors.lightLive
-                : colors.lightFog,
-          },
-        ]}
-      >
-        <View style={styles.feeStrategyContainer}>
-          <View style={styles.leftBox}>
-            <CheckBox
-              style={styles.checkbox}
-              isChecked={transaction.feesStrategy === item.label}
-            />
-            <LText semiBold style={styles.feeLabel}>
-              {item.label}
-            </LText>
-          </View>
-          <View style={styles.feesAmountContainer}>
-            <LText semiBold style={styles.feesAmount}>
-              <CurrencyUnitValue
-                showCode={!forceUnitLabel}
-                unit={item.unit ?? unit}
-                value={item.displayedAmount ?? item.amount}
-              />
-              {forceUnitLabel || null}
-            </LText>
-            <CounterValue
-              currency={currency}
-              showCode
-              value={item.displayedAmount ?? item.amount}
-              alwaysShowSign={false}
-              withPlaceholder
-              Wrapper={CVWrapper}
-            />
-          </View>
+  const renderItem = ({ item }) => (
+    <TouchableOpacity
+      onPress={() => onPressStrategySelect(item)}
+      style={[
+        styles.feeButton,
+        {
+          borderColor:
+            feesStrategy === item.label ? colors.live : colors.background,
+          backgroundColor:
+            feesStrategy === item.label ? colors.lightLive : colors.lightFog,
+        },
+      ]}
+    >
+      <View style={styles.feeStrategyContainer}>
+        <View style={styles.leftBox}>
+          <CheckBox
+            style={styles.checkbox}
+            isChecked={feesStrategy === item.label}
+          />
+          <LText semiBold style={styles.feeLabel}>
+            {item.label}
+          </LText>
         </View>
-      </TouchableOpacity>
-    );
-  };
+        <View style={styles.feesAmountContainer}>
+          <LText semiBold style={styles.feesAmount}>
+            <CurrencyUnitValue
+              showCode={!forceUnitLabel}
+              unit={item.unit ?? unit}
+              value={item.displayedAmount ?? item.amount}
+            />
+            {forceUnitLabel || null}
+          </LText>
+          <CounterValue
+            currency={currency}
+            showCode
+            value={item.displayedAmount ?? item.amount}
+            alwaysShowSign={false}
+            withPlaceholder
+            Wrapper={CVWrapper}
+          />
+        </View>
+      </View>
+    </TouchableOpacity>
+  );
 
   return (
     <>
@@ -152,7 +150,7 @@ export default function SelectFeesStrategy({
             data={strategies}
             renderItem={renderItem}
             keyExtractor={s => s.label}
-            extraData={transaction.feesStrategy}
+            extraData={feesStrategy}
           />
         </SafeAreaView>
         <TouchableOpacity

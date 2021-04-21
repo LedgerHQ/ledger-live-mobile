@@ -35,6 +35,7 @@ export default function BitcoinSendRowsFee({
       ...strategies,
       {
         label: "custom",
+        forceValueLabel: null,
         amount: satPerByte,
         unit: strategies[0].unit,
       },

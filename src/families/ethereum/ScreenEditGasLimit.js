@@ -6,7 +6,6 @@ import { Keyboard, StyleSheet, TextInput, View } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { useTheme } from "@react-navigation/native";
 import type { Transaction } from "@ledgerhq/live-common/lib/families/ethereum/types";
-import { i18n } from "../../context/Locale";
 import Button from "../../components/Button";
 import KeyboardView from "../../components/KeyboardView";
 import NavigationScrollView from "../../components/NavigationScrollView";

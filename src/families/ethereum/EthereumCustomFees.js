@@ -108,7 +108,7 @@ export default function EthereumCustomFees({ navigation, route }: Props) {
         <Button
           event="EthereumSetCustomFees"
           type="primary"
-          title={i18n.t("send.summary.validateFees")}
+          title={<Trans i18nKey="send.summary.validateFees" />}
           onPress={onValidate}
         />
       </View>

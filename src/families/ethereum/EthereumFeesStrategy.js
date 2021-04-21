@@ -37,6 +37,7 @@ export default function EthereumFeesStrategy({
       })),
       {
         label: "custom",
+        forceValueLabel: null,
         amount: customGasPrice,
         displayedAmount: customGasLimit.times(customGasPrice),
         userGasLimit: customGasLimit,
