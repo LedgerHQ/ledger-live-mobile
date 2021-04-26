@@ -2,22 +2,22 @@
 
 export type ItemArray =
   | {
-      date: Date,
+      date: ?Date,
       value: number,
     }[]
   | {
-      date: Date,
+      date: ?Date,
       value: number,
       countervalue?: number,
     }[];
 
 export type Item =
   | {
-      date: Date,
+      date: ?Date,
       value: number,
     }
   | {
-      date: Date,
+      date: ?Date,
       value: number,
       countervalue: number,
     };

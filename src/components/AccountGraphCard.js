@@ -41,7 +41,12 @@ type Props = {
   countervalueAvailable: boolean,
   counterValueCurrency: Currency,
   useCounterValue?: boolean,
-  renderTitle?: ({ counterValueUnit: Unit, item: Item }) => React$Node,
+  renderTitle?: ({
+    useCounterValue?: boolean,
+    cryptoCurrencyUnit: Unit,
+    counterValueUnit: Unit,
+    item: Item,
+  }) => React$Node,
   renderAccountSummary: () => ?React$Node,
 };
 
@@ -132,7 +137,12 @@ function GraphCardHeader({
   counterValueUnit: Unit,
   to: Item,
   hoveredItem: ?Item,
-  renderTitle?: ({ counterValueUnit: Unit, item: Item }) => React$Node,
+  renderTitle?: ({
+    useCounterValue?: boolean,
+    cryptoCurrencyUnit: Unit,
+    counterValueUnit: Unit,
+    item: Item,
+  }) => React$Node,
   useCounterValue?: boolean,
   valueChange: ValueChange,
 }) {
