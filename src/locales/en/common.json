@@ -636,7 +636,8 @@
   "graph": {
     "week": "1W",
     "month": "1M",
-    "year": "1Y"
+    "year": "1Y",
+    "all": "ALL"
   },
   "carousel": {
     "title": "Close banner?",
@@ -1247,6 +1248,7 @@
     "week": "Week",
     "month": "Month",
     "year": "Year",
+    "all": "All",
     "since": {
       "day": "past day",
       "week": "past week",

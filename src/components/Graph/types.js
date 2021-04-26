@@ -1,25 +1,23 @@
 // @flow
 
-import { BigNumber } from "bignumber.js";
-
 export type ItemArray =
   | {
       date: Date,
-      value: BigNumber,
+      value: number,
     }[]
   | {
       date: Date,
-      value: BigNumber,
-      countervalue?: BigNumber,
+      value: number,
+      countervalue?: number,
     }[];
 
 export type Item =
   | {
       date: Date,
-      value: BigNumber,
+      value: number,
     }
   | {
       date: Date,
-      value: BigNumber,
-      countervalue: BigNumber,
+      value: number,
+      countervalue: number,
     };

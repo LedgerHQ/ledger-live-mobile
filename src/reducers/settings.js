@@ -22,6 +22,7 @@ import type {
 } from "@ledgerhq/live-common/lib/types";
 import { getAccountCurrency } from "@ledgerhq/live-common/lib/account/helpers";
 import Config from "react-native-config";
+import type { PortfolioRange } from "@ledgerhq/live-common/lib/portfolio/v2/types";
 import type { AvailableProvider } from "@ledgerhq/live-common/lib/exchange/swap/types";
 import type { OutputSelector } from "reselect";
 import uniq from "lodash/uniq";
@@ -50,9 +51,8 @@ export const timeRangeDaysByKey = {
   week: 7,
   month: 30,
   year: 365,
+  all: -1,
 };
-
-export type TimeRange = $Keys<typeof timeRangeDaysByKey>;
 
 export type Privacy = {
   // when we set the privacy, we also retrieve the biometricsType info
@@ -77,7 +77,7 @@ export type SettingsState = {
   pairExchanges: {
     [pair: string]: ?string,
   },
-  selectedTimeRange: TimeRange,
+  selectedTimeRange: PortfolioRange,
   orderAccounts: string,
   hasCompletedOnboarding: boolean,
   hasInstalledAnyApp: boolean,
