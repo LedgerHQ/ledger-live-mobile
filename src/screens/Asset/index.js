@@ -303,5 +303,6 @@ const styles = StyleSheet.create({
   balanceContainer: {
     marginLeft: 16,
     alignItems: "flex-start",
+    height: 44,
   },
 });

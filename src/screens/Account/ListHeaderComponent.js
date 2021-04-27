@@ -228,6 +228,7 @@ const styles = StyleSheet.create({
   },
   balanceContainer: {
     alignItems: "flex-start",
+    height: 44,
   },
   balanceText: {
     fontSize: normalize(21),
