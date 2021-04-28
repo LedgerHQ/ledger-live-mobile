@@ -1826,7 +1826,31 @@
         "header": "Swap"
       },
       "kyc": {
-        "disclaimer": "I acknowledge that my location data will be shared with third parties for compliance purposes."
+        "disclaimer": "I acknowledge that my location data will be shared with third parties for compliance purposes.",
+        "wyre": {
+          "title": "Complete your KYC",
+          "subtitle": "To Swap freely with Wyre, we need to first verify your details",
+          "form": {
+            "firstName": "First Name",
+            "lastName": "Last Name",
+            "address1": "Street Address Line 1",
+            "address2": "Street Address Line 2",
+            "city": "City",
+            "state": "State",
+            "country": "Country",
+            "zipcode": "Zip Code"
+          },
+          "placeholders": {
+            "firstName": "John",
+            "lastName": "Doe",
+            "address1": "Turk St",
+            "address2": "101",
+            "city": "San Francisco",
+            "state": "California",
+            "country": "US",
+            "zipcode": "94102"
+          }
+        }
       },
       "notAvailable": {
         "title": "Service temporarily unavailable, or not available in your country"

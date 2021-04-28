@@ -3,7 +3,6 @@ import React from "react";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "@react-navigation/native";
-
 import type {
   Account,
   AccountLike,
