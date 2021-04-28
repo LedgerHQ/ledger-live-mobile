@@ -2,28 +2,28 @@
 import React from "react";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "@react-navigation/native";
 import type {
   Account,
   AccountLike,
 } from "@ledgerhq/live-common/lib/types/account";
-import { useTheme } from "@react-navigation/native";
 import { ScreenName } from "../../const";
 import Swap from "./Swap";
 import History from "./History";
 import styles from "../../navigation/styles";
 import LText from "../../components/LText";
 
-type RouteParams = {
-  defaultAccount: ?AccountLike,
-  defaultParentAccount: ?Account,
-};
-
 type TabLabelProps = {
   focused: boolean,
   color: string,
 };
 
-export default ({ route }: { route: { params: RouteParams } }) => {
+type Props = {
+  defaultAccount: ?AccountLike,
+  defaultParentAccount: ?Account,
+};
+
+export default (props: Props) => {
   const { t } = useTranslation();
   const { colors } = useTheme();
   return (
@@ -46,7 +46,7 @@ export default ({ route }: { route: { params: RouteParams } }) => {
           ),
         }}
       >
-        {props => <Swap {...props} {...route?.params} />}
+        {_props => <Swap {..._props} {...props} />}
       </Tab.Screen>
       <Tab.Screen
         name={ScreenName.SwapHistory}

@@ -8,7 +8,7 @@ import { ScreenName } from "../../const";
 import SwapSummary from "../../screens/Swap/Form/Summary";
 import SwapError from "../../screens/Swap/Form/Error";
 import SwapFormAmount from "../../screens/Swap/Form/Amount";
-import SwapFormOrHistory from "../../screens/Swap/FormOrHistory";
+import Swap from "../../screens/Swap";
 import SwapOperationDetails from "../../screens/Swap/OperationDetails";
 import { BackButton } from "../../screens/OperationDetails";
 import SwapPendingOperation from "../../screens/Swap/Form/PendingOperation";
@@ -29,7 +29,7 @@ export default function SwapNavigator() {
     <Stack.Navigator screenOptions={stackNavigationConfig}>
       <Stack.Screen
         name={ScreenName.SwapFormOrHistory}
-        component={SwapFormOrHistory}
+        component={Swap}
         options={{
           headerStyle: styles.headerNoShadow,
           headerTitle: () => (

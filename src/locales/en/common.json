@@ -741,7 +741,6 @@
       }
     },
     "stepNewDevice": {
-      "cta": "Let’s do this!",
       "0": {
         "label": "Basics",
         "title": "Access your crypto",
@@ -766,14 +765,19 @@
         "label": "Basics",
         "title": "Let’s set up your Nano!",
         "desc": "We'll start by setting up your Nano security."
-      }
+      },
+      "cta": "Let’s do this!"
     },
     "stepSetupDevice": {
       "start": {
         "title": "The best way to get you started:",
         "bullets": {
-          "0": { "label": "Plan 30 minutes and take your time." },
-          "1": { "label": "Grab a pen to write with." },
+          "0": {
+            "label": "Plan 30 minutes and take your time."
+          },
+          "1": {
+            "label": "Grab a pen to write with."
+          },
           "2": {
             "label": "Stay alone, and choose a safe and quiet environment."
           }
@@ -834,11 +838,15 @@
         "infoModal": {
           "title": "Secure your PIN code",
           "bullets": {
-            "0": { "label": "Always choose a PIN code by yourself." },
+            "0": {
+              "label": "Always choose a PIN code by yourself."
+            },
             "1": {
               "label": "Always enter your PIN code out of sight."
             },
-            "2": { "label": "You can change your PIN code if needed." },
+            "2": {
+              "label": "You can change your PIN code if needed."
+            },
             "3": {
               "label": "Three wrong PIN code entries in a row will reset the device."
             },
@@ -1765,11 +1773,64 @@
         "whatIsSwap": "What is Swap?",
         "disclaimer": "Exchange crypto directly from your Ledger device. This service is not available in some countries, including the US."
       },
+      "providers": {
+        "title": "Choose a provider to swap your crypto",
+        "whatIsSwap": "What is Swap?",
+        "cta": "Continue",
+        "changelly": {
+          "title": "Changelly",
+          "bullet": [
+            "Centralized",
+            "Multi coins and tokens",
+            "Europe, Asia, Africa and Americas"
+          ]
+        },
+        "paraswap": {
+          "title": "Paraswap",
+          "bullet": [
+            "Defi",
+            "Ethereum and ERC20 tokens",
+            "5% Fees"
+          ]
+        },
+        "wyre": {
+          "title": "Wyre",
+          "bullet": [
+            "Centralized",
+            "Multi coins and tokens",
+            "US-only (soon Europe, Africa and Asia)"
+          ]
+        }
+      },
       "main": {
         "header": "Swap"
       },
       "kyc": {
-        "disclaimer": "I acknowledge that my location data will be shared with third parties for compliance purposes."
+        "disclaimer": "I acknowledge that my location data will be shared with third parties for compliance purposes.",
+        "wyre": {
+          "title": "Complete your KYC",
+          "subtitle": "To Swap freely with Wyre, we need to first verify your details",
+          "form": {
+            "firstName": "First Name",
+            "lastName": "Last Name",
+            "address1": "Street Address Line 1",
+            "address2": "Street Address Line 2",
+            "city": "City",
+            "state": "State",
+            "country": "Country",
+            "zipcode": "Zip Code"
+          },
+          "placeholders": {
+            "firstName": "John",
+            "lastName": "Doe",
+            "address1": "Turk St",
+            "address2": "101",
+            "city": "San Francisco",
+            "state": "California",
+            "country": "US",
+            "zipcode": "94102"
+          }
+        }
       },
       "notAvailable": {
         "title": "Service temporarily unavailable, or not available in your country"
@@ -1960,7 +2021,6 @@
         "switchLabel": "I have read and agree with the <0><0>Terms of Use</0></0>."
       },
       "info": {
-        "title": "Lend crypto",
         "1": {
           "label": "Step 1/3",
           "title": "Approving an account allows the protocol to process future loans.",
@@ -1976,7 +2036,8 @@
           "title": "Withdraw assets at any time.",
           "description": "You can withdraw your assets and earned interest at any time, partially or entirely, directly from your Ledger account.",
           "cta": "Lend now"
-        }
+        },
+        "title": "Lend crypto"
       },
       "noTokenAccount": {
         "info": {
@@ -3477,7 +3538,6 @@
       "description": "Swap crypto assets directly from your Ledger accounts with our partner."
     }
   },
-
   "walletconnect": {
     "disclaimer": "Wants to connect to the following Ethereum account through your wallet :",
     "reject": "Reject",
