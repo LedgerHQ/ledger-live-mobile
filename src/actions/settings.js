@@ -192,12 +192,11 @@ export function useTimeRange() {
     },
     [dispatch],
   );
-  const options = Object.keys(timeRangeDaysByKey).map<PortfolioRangeOption>(
-    key => ({
-      key,
-      value: t(`common:time.${key}`),
-      label: t(`common:time.${key}`),
-    }),
-  );
+  const ranges: PortfolioRange[] = ["day", "week", "month", "year", "all"];
+  const options = ranges.map<PortfolioRangeOption>(key => ({
+    key,
+    value: t(`common:time.${key}`),
+    label: t(`common:time.${key}`),
+  }));
   return [val, setter, options];
 }

@@ -1,7 +1,7 @@
 // @flow
 
 import React, { memo } from "react";
-import { View, StyleSheet, TouchableOpacity } from "react-native";
+import { View, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import LText from "./LText";
 
@@ -20,7 +20,7 @@ type Props = {
 
 function Pills({ items, value, onChange, isDisabled }: Props) {
   return (
-    <View style={styles.root}>
+    <ScrollView style={styles.root} horizontal>
       {items.map((item, i) => (
         <Pill
           key={item.key}
@@ -31,7 +31,7 @@ function Pills({ items, value, onChange, isDisabled }: Props) {
           isDisabled={isDisabled}
         />
       ))}
-    </View>
+    </ScrollView>
   );
 }
 
@@ -99,6 +99,7 @@ function Pill({ item, first, active, onPress, isDisabled }: PillProps) {
 const styles = StyleSheet.create({
   root: {
     flexDirection: "row",
+    marginHorizontal: 16,
   },
   pill: {
     borderWidth: 1.5,
