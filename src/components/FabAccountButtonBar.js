@@ -110,6 +110,16 @@ function FabAccountButtonBar({
     setIsModalInfoOpened();
   }, []);
 
+  const onChoiceSelect = useCallback(({ navigationParams, enableActions }) => {
+    if (navigationParams) {
+      setNext(navigationParams);
+      setDisplayedActions();
+    }
+    if (enableActions) {
+      setDisplayedActions(enableActions);
+    }
+  }, []);
+
   return (
     <View style={styles.root}>
       {buttons.map(
@@ -162,24 +172,11 @@ function FabAccountButtonBar({
               <LendingBanners account={account} />
             )}
             {!!displayedActions &&
-              actions[displayedActions] &&
-              actions[displayedActions].map((a, i) =>
+              actions[displayedActions]?.map((a, i) =>
                 a.Component ? (
                   <a.Component key={i} />
                 ) : (
-                  <ChoiceButton
-                    {...a}
-                    key={i}
-                    onSelect={({ navigationParams, enableActions }) => {
-                      if (navigationParams) {
-                        setNext(navigationParams);
-                        setDisplayedActions();
-                      }
-                      if (enableActions) {
-                        setDisplayedActions(enableActions);
-                      }
-                    }}
-                  />
+                  <ChoiceButton {...a} key={i} onSelect={onChoiceSelect} />
                 ),
               )}
           </BottomModal>
