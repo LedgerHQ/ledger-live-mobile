@@ -5,10 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import type { Currency } from "@ledgerhq/live-common/lib/types";
 import type { AvailableProvider } from "@ledgerhq/live-common/lib/exchange/swap/types";
 import type { PortfolioRange } from "@ledgerhq/live-common/lib/portfolio/v2/types";
-import {
-  timeRangeDaysByKey,
-  selectedTimeRangeSelector,
-} from "../reducers/settings";
+import { selectedTimeRangeSelector } from "../reducers/settings";
 
 export type CurrencySettings = {
   confirmationsNb: number,
@@ -192,12 +189,11 @@ export function useTimeRange() {
     },
     [dispatch],
   );
-  const options = Object.keys(timeRangeDaysByKey).map<PortfolioRangeOption>(
-    key => ({
-      key,
-      value: t(`common:time.${key}`),
-      label: t(`common:time.${key}`),
-    }),
-  );
+  const ranges: PortfolioRange[] = ["day", "week", "month", "year", "all"];
+  const options = ranges.map<PortfolioRangeOption>(key => ({
+    key,
+    value: t(`common:time.${key}`),
+    label: t(`common:time.${key}`),
+  }));
   return [val, setter, options];
 }
