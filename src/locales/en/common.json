@@ -1892,6 +1892,9 @@
           "title": "Your previous swaps will appear here",
           "desc": "Either you have not made any swaps yet, or Ledger Live has been reset in the meantime."
         }
+      },
+      "platform": {
+        "tab": "Platform"
       }
     },
     "lending": {
