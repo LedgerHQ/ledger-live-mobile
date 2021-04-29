@@ -1244,10 +1244,10 @@
     "mbUnit": "{{size}} Mb"
   },
   "time": {
-    "day": "Day",
-    "week": "Week",
-    "month": "Month",
-    "year": "Year",
+    "day": "1D",
+    "week": "1W",
+    "month": "1M",
+    "year": "1Y",
     "all": "All",
     "since": {
       "day": "past day",
