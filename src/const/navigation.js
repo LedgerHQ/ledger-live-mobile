@@ -120,6 +120,7 @@ export const ScreenName = {
   StellarEditMemoValue: "StellarEditMemoValue",
   Swap: "Swap",
   SwapError: "SwapError",
+  SwapPlatform: "SwapPlatform",
   SwapForm: "SwapForm",
   SwapFormAmount: "SwapFormAmount",
   SwapFormOrHistory: "SwapFormOrHistory",
