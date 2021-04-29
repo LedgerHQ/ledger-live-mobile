@@ -91,9 +91,8 @@ class Asset extends PureComponent<AssetProps, any> {
     const countervalueAvailable = isCountervalueEnabled(currency);
     const items = [
       { unit: cryptoCurrencyUnit, value: item.value },
-      countervalueAvailable && item.countervalue
-        ? { unit: counterValueUnit, value: item.countervalue }
-        : null,
+      // $FlowFixMe
+      { unit: counterValueUnit, value: item.countervalue },
     ];
     const shouldUseCounterValue = countervalueAvailable && useCounterValue;
     if (shouldUseCounterValue && item.countervalue) {
@@ -107,17 +106,13 @@ class Asset extends PureComponent<AssetProps, any> {
         onPress={countervalueAvailable ? switchCountervalueFirst : undefined}
       >
         <View style={styles.balanceContainer}>
-          {items[0] ? (
-            <LText style={styles.balanceText} semiBold>
-              <CurrencyUnitValue {...items[0]} joinFragmentsSeparator=" " />
-            </LText>
-          ) : null}
-          {items[1] ? (
-            <LText style={styles.balanceSubText} semiBold color="smoke">
-              {/* $FlowFixMe */}
-              <CurrencyUnitValue {...items[1]} />
-            </LText>
-          ) : null}
+          <LText style={styles.balanceText} semiBold>
+            <CurrencyUnitValue {...items[0]} joinFragmentsSeparator=" " />
+          </LText>
+          <LText style={styles.balanceSubText} semiBold color="smoke">
+            {/* $FlowFixMe */}
+            <CurrencyUnitValue {...items[1]} />
+          </LText>
         </View>
       </Touchable>
     );
