@@ -4,6 +4,8 @@ import React, { useCallback, useState } from "react";
 import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
 import { Trans } from "react-i18next";
 
+import type { Transaction } from "@ledgerhq/live-common/lib/families/bitcoin/types";
+
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { useFeesStrategy } from "@ledgerhq/live-common/lib/families/bitcoin/react";
 import { ScreenName } from "../../const";
@@ -14,7 +16,7 @@ type Props = {
   account: AccountLike,
   parentAccount: ?Account,
   navigation: *,
-  route: { params: RouteParams },
+  route: { params: * },
   setTransaction: Function,
 };
 
@@ -64,7 +66,7 @@ export default function BitcoinSendRowsFee({
       satPerByte,
       setSatPerByte,
     });
-  }, [satPerByte, setSatPerByte, navigation, account.id, transaction]);
+  }, [navigation, route.params, account.id, transaction, satPerByte]);
 
   return (
     <SelectFeesStrategy

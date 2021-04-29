@@ -68,7 +68,15 @@ function BitcoinEditCustomFees({ navigation, route }: Props) {
         feesStrategy: "custom",
       }),
     });
-  }, [ownSatPerByte, setOwnSatPerByte, navigation, route]);
+  }, [
+    setSatPerByte,
+    ownSatPerByte,
+    account,
+    parentAccount,
+    route.params,
+    navigation,
+    transaction,
+  ]);
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -79,7 +87,7 @@ function BitcoinEditCustomFees({ navigation, route }: Props) {
           <View style={styles.inputBox}>
             <TextInput
               autoFocus
-              style={styles.textInputAS}
+              style={[styles.textInputAS, { color: colors.darkBlue }]}
               defaultValue={satPerByte ? satPerByte.toString() : ""}
               keyboardType="numeric"
               returnKeyType="done"

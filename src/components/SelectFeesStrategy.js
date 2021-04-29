@@ -14,8 +14,11 @@ import {
   getAccountCurrency,
 } from "@ledgerhq/live-common/lib/account";
 import { useTheme } from "@react-navigation/native";
-import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
-import type { Transaction } from "@ledgerhq/live-common/lib/families/ethereum/types";
+import type {
+  Account,
+  AccountLike,
+  Transaction,
+} from "@ledgerhq/live-common/lib/types";
 import LText from "./LText";
 import SummaryRow from "../screens/SendFunds/SummaryRow";
 import CheckBox from "./CheckBox";
