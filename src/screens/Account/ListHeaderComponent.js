@@ -81,13 +81,12 @@ const renderListHeaderTitle = (
 }: HeaderTitleProps) => {
   const items = [
     { unit: cryptoCurrencyUnit, value: item.value },
-    countervalueAvailable && item.countervalue
-      ? { unit: counterValueUnit, value: item.countervalue }
-      : null,
+    // $FlowFixMe
+    { unit: counterValueUnit, value: item.countervalue },
   ];
 
   const shouldUseCounterValue = countervalueAvailable && useCounterValue;
-  if (shouldUseCounterValue && item.countervalue) {
+  if (shouldUseCounterValue) {
     items.reverse();
   }
 
@@ -98,24 +97,20 @@ const renderListHeaderTitle = (
       onPress={countervalueAvailable ? onSwitchAccountCurrency : undefined}
     >
       <View style={styles.balanceContainer}>
-        {items[0] ? (
-          <View style={styles.warningWrapper}>
-            <LText style={styles.balanceText} semiBold>
-              <CurrencyUnitValue
-                {...items[0]}
-                disableRounding
-                joinFragmentsSeparator=" "
-              />
-            </LText>
-            <TransactionsPendingConfirmationWarning maybeAccount={account} />
-          </View>
-        ) : null}
-        {items[1] ? (
-          <LText style={styles.balanceSubText} color="smoke" semiBold>
-            {/* $FlowFixMe */}
-            <CurrencyUnitValue {...items[1]} disableRounding />
+        <View style={styles.warningWrapper}>
+          <LText style={styles.balanceText} semiBold>
+            <CurrencyUnitValue
+              {...items[0]}
+              disableRounding
+              joinFragmentsSeparator=" "
+            />
           </LText>
-        ) : null}
+          <TransactionsPendingConfirmationWarning maybeAccount={account} />
+        </View>
+        <LText style={styles.balanceSubText} color="smoke" semiBold>
+          {/* $FlowFixMe */}
+          <CurrencyUnitValue {...items[1]} disableRounding />
+        </LText>
       </View>
     </Touchable>
   );
