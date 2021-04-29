@@ -110,14 +110,16 @@ export default function SelectFeesStrategy({
             />
             {forceUnitLabel || null}
           </LText>
-          <CounterValue
-            currency={currency}
-            showCode
-            value={item.displayedAmount ?? item.amount}
-            alwaysShowSign={false}
-            withPlaceholder
-            Wrapper={CVWrapper}
-          />
+          {item.displayedAmount ? (
+            <CounterValue
+              currency={currency}
+              showCode
+              value={item.displayedAmount}
+              alwaysShowSign={false}
+              withPlaceholder
+              Wrapper={CVWrapper}
+            />
+          ) : null}
         </View>
       </View>
     </TouchableOpacity>
