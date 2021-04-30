@@ -2383,7 +2383,11 @@
     },
     "button": {
       "openManager": "Open Manager"
-    }
+    },
+    "installApp": "{{appName}} App installation {{percentage}}",
+    "installAppDescription": "Please wait until the installation is finished",
+    "listApps": "Checking App dependencies",
+    "listAppsDescription": "Please wait while we make sure you have all the required apps"
   },
   "SelectDevice": {
     "title": "Pair new device",
