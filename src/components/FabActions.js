@@ -48,7 +48,18 @@ function FabAccountActions({ account, parentAccount }: FabAccountActionsProps) {
     ...(!readOnlyModeEnabled && canBeBought
       ? [
           {
-            navigationParams: [NavigatorName.ExchangeBuyFlow],
+            navigationParams: [
+              NavigatorName.ExchangeBuyFlow,
+              {
+                screen: ScreenName.ExchangeConnectDevice,
+                params: {
+                  account,
+                  mode: "buy",
+                  parentId:
+                    account.type !== "Account" ? account.parentId : undefined,
+                },
+              },
+            ],
             label: <Trans i18nKey="account.buy" />,
             Icon: Exchange,
             event: "Buy Crypto Account Button",
