@@ -108,6 +108,7 @@ export default function SelectFeesStrategy({
               unit={item.unit ?? unit}
               value={item.displayedAmount ?? item.amount}
             />
+            {forceUnitLabel ? " " : null}
             {forceUnitLabel || null}
           </LText>
           {item.displayedAmount ? (
