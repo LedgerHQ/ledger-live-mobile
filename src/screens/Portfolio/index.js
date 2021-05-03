@@ -103,7 +103,7 @@ export default function PortfolioScreen({ navigation }: Props) {
   }
 
   function StickyActions() {
-    return (
+    return accounts.length === 0 ? null : (
       <View style={styles.stickyActions}>
         <FabActions />
       </View>
