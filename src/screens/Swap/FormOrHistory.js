@@ -31,7 +31,7 @@ export default ({ route }: { route: { params: RouteParams } }) => {
   const { colors } = useTheme();
 
   // FIXME: Hardcoded for now
-  const platform = "paraswap";
+  const platform = "debug";
 
   return (
     <Tab.Navigator

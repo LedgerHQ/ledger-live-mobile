@@ -39,6 +39,8 @@ type RouteParams = {
   accountId: string,
   parentId?: string,
   title: string,
+  onSuccess?: () => void,
+  onError?: () => void,
 };
 
 const action = createAction(connectApp);

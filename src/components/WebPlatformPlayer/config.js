@@ -7,7 +7,8 @@ const DAPP_BROWSER =
 export const PlatformsConfig = {
   debug: {
     isDapp: false,
-    url: "https://iframe-dapp-browser-test.vercel.app/app/debug",
+    url:
+      "https://iframe-dapp-browser-test.vercel.app/app/debug?embed=true&t=3333",
     name: "Debugger",
     icon: null,
   },
@@ -30,14 +31,16 @@ export const getPlatformUrl = (platform: string, t?: Number) => {
     return null;
   }
 
-  const url = config.isDapp ? DAPP_BROWSER : config.url;
+  const url = new URL(config.isDapp ? DAPP_BROWSER : config.url);
 
   const params = {
     t,
     ...config.params,
   };
 
-  return `${url}?${qs.stringify(params)}`;
+  Object.keys(params).forEach(k => url.searchParams.set(k, `${params[k]}`));
+
+  return url;
 };
 
 export const getPlatformOrigin = (platform: string) => {
