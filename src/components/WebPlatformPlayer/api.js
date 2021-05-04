@@ -7,17 +7,20 @@ import { JSONRPCServer } from "json-rpc-2.0";
 import { getPlatformOrigin } from "./config";
 
 import handlers from "./handlers";
+import { useNavigation } from "@react-navigation/native";
 
 const useLedgerLiveApi = (platform: string) => {
   const targetRef: { current: null | WebView } = useRef(null);
   const dispatch = useDispatch();
   const store = useStore();
+  const navigation = useNavigation();
   const server: { current: null | JSONRPCServer } = useRef(null);
 
   const origin = getPlatformOrigin(platform);
 
   const handleMessage = useCallback(
     event => {
+      console.log(event);
       // FIXME: event isn't the same on desktop & mobile
       //if (!event.isTrusted || event.origin !== origin || !event.data) return;
       if (!event.nativeEvent.data) return;
@@ -29,7 +32,10 @@ const useLedgerLiveApi = (platform: string) => {
         server.current
           .receiveJSON(JSON.parse(event.nativeEvent.data))
           .then(jsonRPCResponse => {
-            //console.log("XXX - jsonRPCResponse: ", JSON.stringify(jsonRPCResponse));
+            console.log(
+              "XXX - jsonRPCResponse: ",
+              JSON.stringify(jsonRPCResponse),
+            );
             if (jsonRPCResponse && origin) {
               targetRef.current?.postMessage(
                 JSON.stringify(jsonRPCResponse),
@@ -44,8 +50,8 @@ const useLedgerLiveApi = (platform: string) => {
 
   const connectHandler = useCallback(
     handlerFunction => params =>
-      handlerFunction(store.getState(), dispatch, params),
-    [store, dispatch],
+      handlerFunction(store.getState(), dispatch, params, navigation),
+    [store, dispatch, navigation],
   );
 
   useEffect(() => {

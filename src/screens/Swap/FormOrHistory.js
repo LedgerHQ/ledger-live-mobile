@@ -13,6 +13,11 @@ import History from "./History";
 import styles from "../../navigation/styles";
 import LText from "../../components/LText";
 
+type TabLabelProps = {
+  focused: boolean,
+  color: string,
+};
+
 type Props = {
   defaultAccount: ?AccountLike,
   defaultParentAccount: ?Account,
