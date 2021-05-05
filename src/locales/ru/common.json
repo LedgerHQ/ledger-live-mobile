@@ -3317,8 +3317,7 @@
       "modes": {
         "withdrawUnbonded": {
           "title": "Withdraw unbonded",
-          "description": "After the 28-day unbonding period you can withdraw unbonded assets.",
-          "info": "You can then withdraw unbonded assets to your available balance."
+          "description": "Withdraw unbonded assets to your available balance."
         },
         "chill": {
           "title": "Clear nominations",
