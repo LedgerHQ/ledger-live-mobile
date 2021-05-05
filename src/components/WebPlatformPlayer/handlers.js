@@ -35,9 +35,9 @@ async function accountReceive(state, dispatch, params, navigation) {
       params: {
         account,
         onSuccess: resolve,
-        onError: () => {
+        onError: e => {
           // @TODO put in correct error text maybe
-          reject();
+          reject(e);
         },
       },
     });
@@ -55,6 +55,7 @@ async function transactionSign(state, dispatch, params, navigation) {
   });
 
   return new Promise((resolve, reject) => {
+    // @TODO replace with correct error
     if (!transaction) reject(new Error("Transaction required"));
     if (!account) reject(new Error("Account required"));
 
@@ -104,12 +105,14 @@ async function transactionBroadcast(state, dispatch, params) {
   }: { accountId: string, signedOperation: * } = params;
 
   return new Promise((resolve, reject) => {
+    // @TODO replace with correct error
     if (!signedOperation) return reject(new Error("Signed operation required"));
 
     const account = accountSelector(state, {
       accountId,
     });
 
+    // @TODO replace with correct error
     if (!account) return reject(new Error("Account required"));
 
     const parentAccount = parentAccountSelector(state, { account });

@@ -21,6 +21,7 @@ export default function SignTransactionNavigator() {
     [colors],
   );
 
+  // @TODO replace with correct error
   const listeners = ({ route }) => ({
     beforeRemove: () =>
       route.params?.onError(
