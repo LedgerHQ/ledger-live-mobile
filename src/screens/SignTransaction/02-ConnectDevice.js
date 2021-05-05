@@ -1,10 +1,9 @@
 // @flow
 import invariant from "invariant";
-import React, { useCallback, useMemo } from "react";
+import React, { useMemo } from "react";
 import { StyleSheet } from "react-native";
 import { useSelector } from "react-redux";
 import SafeAreaView from "react-native-safe-area-view";
-import { useTranslation } from "react-i18next";
 import { getMainAccount } from "@ledgerhq/live-common/lib/account";
 import type {
   Transaction,
@@ -15,11 +14,10 @@ import connectApp from "@ledgerhq/live-common/lib/hw/connectApp";
 import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
 import { useTheme } from "@react-navigation/native";
-import { accountScreenSelector } from "../reducers/accounts";
-import DeviceAction from "../components/DeviceAction";
-import { renderLoading } from "../components/DeviceAction/rendering";
-import { useSignedTxHandler } from "../logic/screenTransactionHooks";
-import { TrackScreen } from "../analytics";
+import { accountScreenSelector } from "../../reducers/accounts";
+import DeviceAction from "../../components/DeviceAction";
+import { TrackScreen } from "../../analytics";
+import { useSignedTxHandlerWithoutBroadcast } from "../../logic/screenTransactionHooks";
 
 const action = createAction(connectApp);
 
@@ -36,17 +34,16 @@ type RouteParams = {
   accountId: string,
   transaction: Transaction,
   status: TransactionStatus,
-  onSuccess?: (payload: *) => void,
-  onError?: (error: *) => void,
+  onSuccess: (payload: *) => void,
+  onError: (error: Error) => void,
 };
 
 export default function ConnectDevice({ route }: Props) {
   const { colors } = useTheme();
-  const { t } = useTranslation();
   const { account, parentAccount } = useSelector(accountScreenSelector(route));
   invariant(account, "account is required");
 
-  const { onSuccess, onError } = route.params;
+  const { onSuccess } = route.params;
 
   const mainAccount = getMainAccount(account, parentAccount);
 
@@ -58,27 +55,9 @@ export default function ConnectDevice({ route }: Props) {
   const tokenCurrency =
     account.type === "TokenAccount" ? account.token : undefined;
 
-  const handleTx = useSignedTxHandler({
-    account,
-    parentAccount,
+  const handleTx = useSignedTxHandlerWithoutBroadcast({
+    onSuccess,
   });
-
-  const onResult = useCallback(
-    payload => {
-      handleTx(payload);
-      return renderLoading({ t });
-    },
-    [handleTx, t],
-  );
-
-  const extraProps = onSuccess
-    ? {
-        onResult: onSuccess,
-        onError,
-      }
-    : {
-        renderOnResult: onResult,
-      };
 
   return useMemo(
     () =>
@@ -100,7 +79,7 @@ export default function ConnectDevice({ route }: Props) {
               tokenCurrency,
             }}
             device={route.params.device}
-            {...extraProps}
+            onResult={handleTx}
           />
         </SafeAreaView>
       ) : null,

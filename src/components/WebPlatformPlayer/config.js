@@ -1,5 +1,4 @@
 // @flow
-import qs from "qs";
 
 const DAPP_BROWSER =
   "https://iframe-dapp-browser-test.vercel.app/app/dapp-browser";
@@ -40,7 +39,7 @@ export const getPlatformUrl = (platform: string, t?: Number) => {
 
   Object.keys(params).forEach(k => url.searchParams.set(k, `${params[k]}`));
 
-  return url;
+  return url.href;
 };
 
 export const getPlatformOrigin = (platform: string) => {

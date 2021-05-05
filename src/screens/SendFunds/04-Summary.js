@@ -67,6 +67,7 @@ function SendSummary({ navigation, route: initialRoute }: Props) {
   };
   const { nextNavigation, overrideAmountLabel, hideTotal } = route.params;
   const { account, parentAccount } = useSelector(accountScreenSelector(route));
+
   const {
     transaction,
     setTransaction,

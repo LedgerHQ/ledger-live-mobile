@@ -57,7 +57,6 @@ const WebPlatformPlayer = ({ provider }: Props) => {
   }, [widgetLoaded, widgetError]);
 
   const url = getPlatformUrl(provider, loadDate);
-  //console.log("XXX - url: ", url);
 
   return !url ? (
     <Text>{"Oops no provider: " + provider}</Text>
@@ -67,17 +66,15 @@ const WebPlatformPlayer = ({ provider }: Props) => {
         // $FlowFixMe
         ref={targetRef}
         startInLoadingState={true}
-        renderLoading={() =>
-          !widgetLoaded ? (
-            <View style={styles.center}>
-              <ActivityIndicator size="large" />
-            </View>
-          ) : null
-        }
+        renderLoading={() => (
+          <View style={styles.center}>
+            <ActivityIndicator size="large" />
+          </View>
+        )}
         originWhitelist={["https://*"]}
         allowsInlineMediaPlayback
         source={{
-          uri: `${url}?${loadDate}`,
+          uri: `${url}`,
         }}
         onLoad={handleLoad}
         injectedJavaScript={injectedCode}

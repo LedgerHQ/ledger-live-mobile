@@ -63,7 +63,7 @@ type RouteParams = {
   modelId: DeviceModelId,
   wired: boolean,
   device?: Device,
-  onSuccess?: () => void,
+  onSuccess?: (address?: string) => void,
   onError?: () => void,
 };
 
@@ -98,7 +98,7 @@ export default function ReceiveConfirmation({ navigation, route }: Props) {
         complete: () => {
           setVerified(true);
           setAllowNavigation(true);
-          onSuccess && onSuccess();
+          onSuccess && onSuccess(mainAccount.freshAddress);
         },
         error: error => {
           if (error && error.name !== "UserRefusedAddress") {

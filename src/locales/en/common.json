@@ -1793,11 +1793,7 @@
         },
         "paraswap": {
           "title": "Paraswap",
-          "bullet": [
-            "Defi",
-            "Ethereum and ERC20 tokens",
-            "5% Fees"
-          ]
+          "bullet": ["Defi", "Ethereum and ERC20 tokens", "5% Fees"]
         }
       },
       "main": {
@@ -2218,6 +2214,59 @@
       "maxSpendable": {
         "title": "Max spendable amount",
         "description": "The maximum spendable amount is the total balance in an account that is available to send in a transaction."
+      }
+    }
+  },
+  "signTransaction": {
+    "stepperHeader": {
+      "summary": "Summary",
+      "selectDevice": "Select device",
+      "connectDevice": "Connect device",
+      "stepRange": "Step {{currentStep}} of {{totalSteps}}"
+    },
+    "summary": {
+      "subaccountsWarning": "You will need to refill this account with {{ currency }} in order to send the tokens of this account",
+      "tag": "Tag (Optional)",
+      "validateTag": "Validate tag",
+      "total": "Total",
+      "amount": "Amount",
+      "from": "From",
+      "to": "To",
+      "infoTotalTitle": "Total debit",
+      "infoTotalDesc": "Includes transaction amount and the selected network fees",
+      "gasLimit": "Gas limit",
+      "gasPrice": "Gas price",
+      "maxFees": "Max fees",
+      "validateGasLimit": "Validate gas limit",
+      "memo": {
+        "title": "Memo",
+        "type": "Memo type",
+        "value": "Memo value"
+      },
+      "validateMemo": "Validate memo"
+    },
+    "validation": {
+      "message": "On your device, confirm the transaction to sign it securely.",
+      "sent": "Transaction signed",
+      "amount": "Amount",
+      "fees": "Fees",
+      "confirm": "Your transaction have been signed securely."
+    },
+    "fees": {
+      "title": "Network fees",
+      "validate": "Confirm",
+      "required": "Fees are required",
+      "chooseGas": "Choose a gas price",
+      "higherFaster": "Higher gas price means a faster confirmation.",
+      "edit": {
+        "title": "Choose unit"
+      },
+      "ethTokenNetworkFees": "Network fees for ERC20 token operations are paid in ETH."
+    },
+    "verification": {
+      "streaming": {
+        "accurate": "Loading... ({{percentage}})",
+        "inaccurate": "Loading..."
       }
     }
   },

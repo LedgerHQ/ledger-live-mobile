@@ -1,3 +1,5 @@
+import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
+import { BigNumber } from "bignumber.js";
 import { NavigatorName, ScreenName } from "../../const";
 import { accountsSelector, accountSelector } from "../../reducers/accounts";
 
@@ -37,8 +39,57 @@ async function accountReceive(state, dispatch, params, navigation) {
   });
 }
 
-async function transactionSign() {
-  return Promise.resolve(true);
+async function transactionSign(state, dispatch, params, navigation) {
+  const {
+    accountId,
+    transaction,
+  }: { accountId: string, transaction: Transaction } = params;
+
+  const account = accountSelector(state, {
+    accountId,
+  });
+
+  return new Promise((resolve, reject) => {
+    if (!transaction) reject(new Error("Transaction required"));
+    if (!account) reject(new Error("Account required"));
+
+    const bridge = getAccountBridge(account);
+
+    const tx = bridge.updateTransaction(bridge.createTransaction(account), {
+      amount: BigNumber(transaction.amount),
+      data: transaction.data ? Buffer.from(transaction.data) : undefined,
+      userGasLimit: transaction.gasLimit
+        ? BigNumber(transaction.gasLimit)
+        : undefined,
+      gasLimit: transaction.gasLimit
+        ? BigNumber(transaction.gasLimit)
+        : undefined,
+      gasPrice: transaction.gasPrice
+        ? BigNumber(transaction.gasPrice)
+        : undefined,
+      family: transaction.family,
+      recipient: transaction.recipient,
+    });
+
+    navigation.navigate(NavigatorName.SignTransaction, {
+      screen: ScreenName.SignTransactionSummary,
+      params: {
+        currentNavigation: ScreenName.SignTransactionSummary,
+        nextNavigation: ScreenName.SignTransactionSelectDevice,
+        transaction: tx,
+        accountId,
+        onSuccess: ({ signedOperation, transactionSignError }) => {
+          if (transactionSignError) reject(transactionSignError);
+          else {
+            resolve(signedOperation);
+            const n = navigation.dangerouslyGetParent() || navigation;
+            n.dangerouslyGetParent().pop();
+          }
+        },
+        onError: reject,
+      },
+    });
+  });
 }
 
 async function transactionBroadcast() {

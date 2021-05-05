@@ -26,6 +26,7 @@ import { ErrorHeaderInfo } from "./BaseOnboardingNavigator";
 import ReceiveFundsNavigator from "./ReceiveFundsNavigator";
 import SendFundsNavigator from "./SendFundsNavigator";
 import SignMessageNavigator from "./SignMessageNavigator";
+import SignTransactionNavigator from "./SignTransactionNavigator";
 import FreezeNavigator from "./FreezeNavigator";
 import UnfreezeNavigator from "./UnfreezeNavigator";
 import ClaimRewardsNavigator from "./ClaimRewardsNavigator";
@@ -82,6 +83,11 @@ export default function BaseNavigator() {
       <Stack.Screen
         name={NavigatorName.SignMessage}
         component={SignMessageNavigator}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name={NavigatorName.SignTransaction}
+        component={SignTransactionNavigator}
         options={{ headerShown: false }}
       />
       <Stack.Screen

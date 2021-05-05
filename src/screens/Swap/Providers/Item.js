@@ -14,12 +14,11 @@ const Item = ({
   Icon,
   title,
   bullets,
-  kyc,
 }: {
   id: string,
   selected?: string,
   onSelect: string => void,
-  Icon: any,
+  Icon?: any,
   title: React$Node,
   bullets: Array<React$Node>,
   kyc?: boolean,
@@ -34,7 +33,7 @@ const Item = ({
         ]}
       >
         <View style={styles.head}>
-          <Icon size={32} />
+          {Icon && <Icon size={32} />}
           <LText style={styles.title} semiBold>
             {title}
           </LText>
@@ -42,9 +41,7 @@ const Item = ({
         <View style={styles.bullets}>
           <BulletList
             itemContainerStyle={styles.bullet}
-            itemStyle={{
-              paddingLeft: 6,
-            }}
+            itemStyle={styles.bulletItem}
             Bullet={BulletSmallDot}
             list={bullets.map(wording => (
               <LText
@@ -85,6 +82,9 @@ const styles = StyleSheet.create({
   },
   bulletText: {
     fontSize: 13,
+  },
+  bulletItem: {
+    paddingLeft: 6,
   },
 });
 

@@ -50,6 +50,16 @@ const Provider = ({ onContinue }: { onContinue: string => void }) => {
             t("transfer.swap.providers.changelly.bullet.2"),
           ]}
         />
+        {__DEV__ && (
+          <Item
+            rows={rows}
+            id={"debug"}
+            onSelect={setSelectedItem}
+            selected={selectedItem}
+            title={"Debug"}
+            bullets={["test app"]}
+          />
+        )}
         {/* <Item
           rows={rows}
           id={"wyre"}

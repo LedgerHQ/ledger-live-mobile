@@ -4,10 +4,10 @@ import { useStore, useDispatch } from "react-redux";
 import { WebView } from "react-native-webview";
 import { JSONRPCServer } from "json-rpc-2.0";
 
+import { useNavigation } from "@react-navigation/native";
 import { getPlatformOrigin } from "./config";
 
 import handlers from "./handlers";
-import { useNavigation } from "@react-navigation/native";
 
 const useLedgerLiveApi = (platform: string) => {
   const targetRef: { current: null | WebView } = useRef(null);
@@ -19,10 +19,10 @@ const useLedgerLiveApi = (platform: string) => {
   const origin = getPlatformOrigin(platform);
 
   const handleMessage = useCallback(
-    event => {
+    (event: { nativeEvent: { data: * } }) => {
       console.log(event);
       // FIXME: event isn't the same on desktop & mobile
-      //if (!event.isTrusted || event.origin !== origin || !event.data) return;
+      // if (!event.isTrusted || event.origin !== origin || !event.data) return;
       if (!event.nativeEvent.data) return;
 
       // prettier-ignore
@@ -58,7 +58,8 @@ const useLedgerLiveApi = (platform: string) => {
     server.current = new JSONRPCServer();
 
     for (const method in handlers) {
-      server.current?.addMethod(method, connectHandler(handlers[method]));
+      if (server.current)
+        server.current.addMethod(method, connectHandler(handlers[method]));
     }
 
     return () => {

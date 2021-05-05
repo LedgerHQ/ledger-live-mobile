@@ -225,3 +225,40 @@ export function useSignedTxHandler({
     [navigation, route, broadcast, mainAccount, dispatch],
   );
 }
+
+export function useSignedTxHandlerWithoutBroadcast({
+  onSuccess,
+}: {
+  onSuccess: (signedOp: *) => void,
+}) {
+  const navigation = useNavigation();
+  const route = useRoute();
+
+  return useCallback(
+    // TODO: fix type error
+    // $FlowFixMe
+    async ({ signedOperation, transactionSignError }) => {
+      try {
+        if (transactionSignError) {
+          throw transactionSignError;
+        }
+
+        onSuccess({ signedOperation });
+      } catch (error) {
+        if (
+          !(
+            error instanceof UserRefusedOnDevice ||
+            error instanceof TransactionRefusedOnDevice
+          )
+        ) {
+          logger.critical(error);
+        }
+        navigation.replace(
+          route.name.replace("ConnectDevice", "ValidationError"),
+          { ...route.params, error },
+        );
+      }
+    },
+    [onSuccess, navigation, route.name, route.params],
+  );
+}

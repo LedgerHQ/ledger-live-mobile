@@ -282,6 +282,11 @@ export const ScreenName = {
 
   NotificationCenterNews: "NotificationCenterNews",
   NotificationCenterStatus: "NotificationCenterStatus",
+
+  SignTransactionSummary: "SignTransactionSummary",
+  SignTransactionSelectDevice: "SignTransactionSelectDevice",
+  SignTransactionConnectDevice: "SignTransactionConnectDevice",
+  SignTransactionValidationError: "SignTransactionValidationError",
 };
 
 export const NavigatorName = {
@@ -326,6 +331,7 @@ export const NavigatorName = {
   LendingSupplyFlow: "LendingSupplyFlow",
   LendingWithdrawFlow: "LendingWithdrawFlow",
   /* eslint-disable sort-keys */
+  SignTransaction: "SignTransaction",
 
   // Polkadot
   PolkadotBondFlow: "PolkadotBondFlow",
