@@ -1,4 +1,5 @@
 /* @flow */
+import invariant from "invariant";
 import { BigNumber } from "bignumber.js";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
 import React, { useCallback, useState, useEffect } from "react";
@@ -17,6 +18,7 @@ import { useDebounce } from "@ledgerhq/live-common/lib/hooks/useDebounce";
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { useTheme } from "@react-navigation/native";
+import { getAccountCurrency } from "@ledgerhq/live-common/lib/account/helpers";
 import { accountScreenSelector } from "../../reducers/accounts";
 import { ScreenName } from "../../const";
 import { TrackScreen } from "../../analytics";
@@ -82,9 +84,12 @@ export default function SendAmount({ navigation, route }: Props) {
     };
   }, [account, parentAccount, debouncedTransaction]);
 
+  invariant(account, "account is needed");
+
   const onChange = useCallback(
     amount => {
       if (!amount.isNaN()) {
+        if (!account) return;
         const bridge = getAccountBridge(account, parentAccount);
         setTransaction(bridge.updateTransaction(transaction, { amount }));
       }
@@ -93,6 +98,7 @@ export default function SendAmount({ navigation, route }: Props) {
   );
 
   const toggleUseAllAmount = useCallback(() => {
+    if (!account) return;
     const bridge = getAccountBridge(account, parentAccount);
     if (!transaction) return;
 
@@ -136,10 +142,15 @@ export default function SendAmount({ navigation, route }: Props) {
   const { useAllAmount } = transaction;
   const { amount } = status;
   const unit = getAccountUnit(account);
+  const currency = getAccountCurrency(account);
 
   return (
     <>
-      <TrackScreen category="SendFunds" name="Amount" />
+      <TrackScreen
+        category="SendFunds"
+        name="Amount"
+        currencyName={currency.name}
+      />
       <SafeAreaView
         style={[styles.root, { backgroundColor: colors.background }]}
         forceInset={forceInset}
@@ -166,13 +177,15 @@ export default function SendAmount({ navigation, route }: Props) {
                     <LText color="grey">
                       <Trans i18nKey="send.amount.available" />
                     </LText>
-                    <LText semiBold color="grey">
-                      <CurrencyUnitValue
-                        showCode
-                        unit={unit}
-                        value={maxSpendable}
-                      />
-                    </LText>
+                    {maxSpendable && (
+                      <LText semiBold color="grey">
+                        <CurrencyUnitValue
+                          showCode
+                          unit={unit}
+                          value={maxSpendable}
+                        />
+                      </LText>
+                    )}
                   </View>
                   {typeof useAllAmount === "boolean" ? (
                     <View style={styles.availableRight}>
@@ -243,8 +256,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     display: "flex",
     flexGrow: 1,
-    fontSize: 16,
-
     marginBottom: 16,
   },
   availableRight: {

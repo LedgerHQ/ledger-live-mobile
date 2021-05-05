@@ -169,7 +169,9 @@ const Carousel = () => {
           </View>
         </View>
       ) : (
+        // $FlowFixMe
         <View style={{ height: 100 }}>
+          {/* $FlowFixMe */}
           <Swiper
             style={styles.scrollView}
             autoplay

@@ -17,7 +17,7 @@ export const ScreenName = {
   AdvancedLogs: "AdvancedLogs",
   Asset: "Asset",
   BenchmarkQRStream: "BenchmarkQRStream",
-  BitcoinEditFeePerByte: "BitcoinEditFeePerByte",
+  BitcoinEditCustomFees: "BitcoinEditCustomFees",
   ClaimRewardsConnectDevice: "ClaimRewardsConnectDevice",
   ClaimRewardsSelectDevice: "ClaimRewardsSelectDevice",
   ClaimRewardsValidationError: "ClaimRewardsValidationError",
@@ -52,7 +52,7 @@ export const ScreenName = {
   EditAccountName: "EditAccountName",
   EditAccountUnits: "EditAccountUnits",
   EditDeviceName: "EditDeviceName",
-  EthereumEditFee: "EthereumEditFee",
+  EthereumCustomFees: "EthereumCustomFees",
   EthereumEditGasLimit: "EthereumEditGasLimit",
   Exchange: "Exchange",
   ExchangeBuy: "ExchangeBuy",
@@ -278,6 +278,9 @@ export const ScreenName = {
   WalletConnectConnect: "WalletConnectConnect",
   WalletConnectDeeplinkingSelectAccount:
     "WalletConnectDeeplinkingSelectAccount",
+
+  NotificationCenterNews: "NotificationCenterNews",
+  NotificationCenterStatus: "NotificationCenterStatus",
 };
 
 export const NavigatorName = {
@@ -329,6 +332,8 @@ export const NavigatorName = {
   PolkadotRebondFlow: "PolkadotRebondFlow",
   PolkadotNominateFlow: "PolkadotNominateFlow",
   PolkadotSimpleOperationFlow: "PolkadotSimpleOperationFlow",
+
+  NotificationCenter: "NotificationCenter",
 
   // Tab
   Main: "Main",

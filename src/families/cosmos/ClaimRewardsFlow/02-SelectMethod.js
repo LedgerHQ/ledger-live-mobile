@@ -152,8 +152,11 @@ function ClaimRewardsAmount({ navigation, route }: Props) {
   }, [setInfoModalOpen]);
 
   const value = route.params.value;
-  const name = route.params.validator.name;
-  const mode = transaction.mode;
+  const name =
+    route.params.validator?.name ??
+    route.params.validator?.validatorAddress ??
+    "";
+  const mode = transaction.mode ? transaction.mode : "";
 
   const error = status.errors && Object.keys(status.errors).length > 0;
 

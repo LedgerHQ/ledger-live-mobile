@@ -1,5 +1,5 @@
 // @flow
-import React from "react";
+import React, { useEffect } from "react";
 import type {
   Action,
   Device,
@@ -26,7 +26,8 @@ import PreventNativeBack from "../PreventNativeBack";
 import SkipLock from "../behaviour/SkipLock";
 
 type Props<R, H, P> = {
-  onResult: (paylaod: P) => Promise<void> | void | React$Node,
+  onResult?: (payload: *) => Promise<void> | void,
+  renderOnResult?: (payload: P) => React$Node,
   action: Action<R, H, P>,
   request?: R,
   device: Device,
@@ -37,12 +38,14 @@ export default function DeviceAction<R, H, P>({
   request = null,
   device: selectedDevice,
   onResult,
+  renderOnResult,
 }: Props<R, H, P>) {
   const { colors, dark } = useTheme();
   const theme = dark ? "dark" : "light";
   const { t } = useTranslation();
   const navigation = useNavigation();
-  const status = action.useHook(selectedDevice, request);
+  // TODO: fix flow type
+  const status: any = action.useHook(selectedDevice, request);
   const {
     appAndVersion,
     device,
@@ -69,9 +72,10 @@ export default function DeviceAction<R, H, P>({
     initSellRequested,
     initSellResult,
     initSellError,
-
-    // TODO: fix flow type
-  } = (status: any);
+    installingApp,
+    progress,
+    listingApps,
+  } = status;
 
   if (displayUpgradeWarning && appAndVersion) {
     return renderWarningOutdated({
@@ -88,6 +92,19 @@ export default function DeviceAction<R, H, P>({
     return renderRequestQuitApp({
       t,
       device: selectedDevice,
+      colors,
+      theme,
+    });
+  }
+
+  if (installingApp) {
+    const appName = requestOpenApp;
+    return renderLoading({
+      t,
+      description: t("DeviceAction.installApp", {
+        percentage: (progress * 100).toFixed(0) + "%",
+        appName,
+      }),
       colors,
       theme,
     });
@@ -115,7 +132,15 @@ export default function DeviceAction<R, H, P>({
     });
   }
 
-  // FIXME move out of here, this shouldn't be here.
+  if (listingApps) {
+    return renderLoading({
+      t,
+      description: t("DeviceAction.listApps"),
+      colors,
+      theme,
+    });
+  }
+
   if (initSwapRequested && !initSwapResult && !initSwapError) {
     return renderConfirmSwap({ t, device: selectedDevice, colors, theme });
   }
@@ -204,6 +229,7 @@ export default function DeviceAction<R, H, P>({
   }
 
   if (request && device && signMessageRequested) {
+    // $FlowFixMe
     const { account } = request;
     return (
       <>
@@ -239,16 +265,28 @@ export default function DeviceAction<R, H, P>({
   }
 
   if (onResult) {
-    const result = onResult(payload);
-    // return null if handler doesn't return a component or it is an async function
-    // $FlowFixMe
-    if (result?.then || typeof result === "undefined") {
-      return null;
-    }
-    // otherwise, render component
-    // $FlowFixMe
-    return result;
+    return <RenderOnResultCallback onResult={onResult} payload={payload} />;
+  }
+
+  if (renderOnResult) {
+    return renderOnResult(payload);
   }
 
   return null;
 }
+
+// work around for not updating state inside scope of main function with a callback
+const RenderOnResultCallback = ({
+  onResult,
+  payload,
+}: {
+  onResult: (payload: *) => Promise<void> | void,
+  payload: *,
+}) => {
+  // onDidMount
+  useEffect(() => {
+    onResult(payload);
+  }, []);
+
+  return null;
+};

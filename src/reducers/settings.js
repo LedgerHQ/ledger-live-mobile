@@ -22,6 +22,7 @@ import type {
 } from "@ledgerhq/live-common/lib/types";
 import { getAccountCurrency } from "@ledgerhq/live-common/lib/account/helpers";
 import Config from "react-native-config";
+import type { PortfolioRange } from "@ledgerhq/live-common/lib/portfolio/v2/types";
 import type { AvailableProvider } from "@ledgerhq/live-common/lib/exchange/swap/types";
 import type { OutputSelector } from "reselect";
 import uniq from "lodash/uniq";
@@ -47,12 +48,12 @@ export type CurrencySettings = {
 };
 
 export const timeRangeDaysByKey = {
+  day: 1,
   week: 7,
   month: 30,
   year: 365,
+  all: -1,
 };
-
-export type TimeRange = $Keys<typeof timeRangeDaysByKey>;
 
 export type Privacy = {
   // when we set the privacy, we also retrieve the biometricsType info
@@ -77,7 +78,7 @@ export type SettingsState = {
   pairExchanges: {
     [pair: string]: ?string,
   },
-  selectedTimeRange: TimeRange,
+  selectedTimeRange: PortfolioRange,
   orderAccounts: string,
   hasCompletedOnboarding: boolean,
   hasInstalledAnyApp: boolean,
@@ -91,8 +92,10 @@ export type SettingsState = {
   hasAcceptedSwapKYC: boolean,
   swapProviders?: AvailableProvider[],
   theme: Theme,
+  osTheme: ?string,
   carouselVisibility: number,
   discreetMode: boolean,
+  language: string,
 };
 
 export const INITIAL_STATE: SettingsState = {
@@ -117,8 +120,10 @@ export const INITIAL_STATE: SettingsState = {
   hasAcceptedSwapKYC: false,
   swapProviders: [],
   theme: colorScheme === "dark" ? "dusk" : "light",
+  osTheme: undefined,
   carouselVisibility: 0,
   discreetMode: false,
+  language: "en",
 };
 
 const pairHash = (from, to) => `${from.ticker}_${to.ticker}`;
@@ -293,13 +298,21 @@ const handlers: Object = {
     ...state,
     theme,
   }),
-  SETTINGS_SET_CAROUSEL_VISIBILITY: (state: AppState, { payload }) => ({
+  SETTINGS_SET_OS_THEME: (state, { payload: osTheme }) => ({
+    ...state,
+    osTheme,
+  }),
+  SETTINGS_SET_CAROUSEL_VISIBILITY: (state: SettingsState, { payload }) => ({
     ...state,
     carouselVisibility: payload,
   }),
-  SETTINGS_SET_DISCREET_MODE: (state: AppState, { payload }) => ({
+  SETTINGS_SET_DISCREET_MODE: (state: SettingsState, { payload }) => ({
     ...state,
     discreetMode: payload,
+  }),
+  SETTINGS_SET_LANGUAGE: (state: SettingsState, { payload }) => ({
+    ...state,
+    language: payload,
   }),
 };
 
@@ -445,30 +458,50 @@ export const carouselVisibilitySelector = (state: State) =>
 
 export const swapSupportedCurrenciesSelector: OutputSelector<
   State,
-  { accountId: string },
-  (TokenCurrency | CryptoCurrency)[],
+  void,
+  { ["float" | "fixed"]: (TokenCurrency | CryptoCurrency)[] },
 > = createSelector(swapProvidersSelector, swapProviders => {
-  if (!swapProviders) return [];
+  if (!swapProviders) return {};
 
-  const allIds = uniq(
-    swapProviders.reduce(
-      (ac, { supportedCurrencies }) => [...ac, ...supportedCurrencies],
-      [],
-    ),
-  );
+  const swapSupportedCurrenciesByTradeMethod = {};
 
-  const tokenCurrencies = allIds
-    .map(findTokenById)
-    .filter(Boolean)
-    .filter(t => !t.delisted);
-  const cryptoCurrencies = allIds
-    .map(findCryptoCurrencyById)
-    .filter(Boolean)
-    .filter(isCurrencySupported);
+  // TODO eventually this will no longer be enough, since a pair could be from
+  // different providers and a swap will not be available. A more deeply nested
+  // structure with provider -> method -> currencies will be needed or a different
+  // data structure. Until then, this is provider agnostic.
+  // $FlowFixMe tradeMethod missing in types, remove when added.
+  swapProviders.forEach(({ supportedCurrencies, tradeMethod }) => {
+    const tokenCurrencies = supportedCurrencies
+      .map(findTokenById)
+      .filter(Boolean)
+      .filter(t => !t.delisted);
 
-  return [...cryptoCurrencies, ...tokenCurrencies].filter(
-    isCurrencyExchangeSupported,
-  );
+    const cryptoCurrencies = supportedCurrencies
+      .map(findCryptoCurrencyById)
+      .filter(Boolean)
+      .filter(isCurrencySupported);
+
+    swapSupportedCurrenciesByTradeMethod[tradeMethod] = [
+      ...cryptoCurrencies,
+      ...tokenCurrencies,
+    ].filter(isCurrencyExchangeSupported);
+  });
+
+  return swapSupportedCurrenciesByTradeMethod;
+});
+
+// NB As long as a currency exists in _any_ tradeMethod it's a valid From currency,
+// for the To currency, we need to check the pair exists in at least one of the methods
+export const flattenedSwapSupportedCurrenciesSelector: OutputSelector<
+  State,
+  void,
+  (TokenCurrency | CryptoCurrency)[],
+> = createSelector(swapSupportedCurrenciesSelector, swapSupportedCurrencies => {
+  const out = [];
+  for (const tradeMethod of ["fixed", "float"]) {
+    out.push(...(swapSupportedCurrencies[tradeMethod] || []));
+  }
+  return uniq(out);
 });
 
 export const discreetModeSelector = (state: State): boolean =>
@@ -477,3 +510,7 @@ export const discreetModeSelector = (state: State): boolean =>
 export default handleActions(handlers, INITIAL_STATE);
 
 export const themeSelector = (state: State) => state.settings.theme;
+
+export const osThemeSelector = (state: State) => state.settings.osTheme;
+
+export const languageSelector = (state: State) => state.settings.language;

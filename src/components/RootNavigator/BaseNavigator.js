@@ -1,6 +1,9 @@
 // @flow
 import React, { useMemo } from "react";
-import { createStackNavigator } from "@react-navigation/stack";
+import {
+  createStackNavigator,
+  CardStyleInterpolators,
+} from "@react-navigation/stack";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "@react-navigation/native";
 import { ScreenName, NavigatorName } from "../../const";
@@ -42,6 +45,7 @@ import LendingInfoNavigator from "./LendingInfoNavigator";
 import LendingEnableFlowNavigator from "./LendingEnableFlowNavigator";
 import LendingSupplyFlowNavigator from "./LendingSupplyFlowNavigator";
 import LendingWithdrawFlowNavigator from "./LendingWithdrawFlowNavigator";
+import NotificationCenterNavigator from "./NotificationCenterNavigator";
 import { getStackNavigatorConfig } from "../../navigation/navigatorConfig";
 import Account from "../../screens/Account";
 import TransparentHeaderNavigationOptions from "../../navigation/TransparentHeaderNavigationOptions";
@@ -89,6 +93,7 @@ export default function BaseNavigator() {
         name={NavigatorName.Lending}
         component={LendingNavigator}
         options={{
+          ...stackNavigationConfig,
           headerStyle: styles.headerNoShadow,
           headerLeft: null,
           title: t("transfer.lending.title"),
@@ -208,7 +213,11 @@ export default function BaseNavigator() {
         options={({ navigation, route }) => ({
           title: null,
           headerRight: () => (
-            <ErrorHeaderInfo route={route} navigation={navigation} />
+            <ErrorHeaderInfo
+              route={route}
+              navigation={navigation}
+              colors={colors}
+            />
           ),
           headerShown: true,
           headerStyle: styles.headerNoShadow,
@@ -314,6 +323,17 @@ export default function BaseNavigator() {
           title: t("send.scan.fallback.header"),
           headerLeft: null,
         }}
+      />
+      <Stack.Screen
+        name={NavigatorName.NotificationCenter}
+        component={NotificationCenterNavigator}
+        options={({ navigation }) => ({
+          title: t("notificationCenter.title"),
+          headerStyle: styles.headerNoShadow,
+          headerLeft: null,
+          headerRight: () => <CloseButton navigation={navigation} />,
+          cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS,
+        })}
       />
       {Object.keys(families).map(name => {
         const { component, options } = families[name];

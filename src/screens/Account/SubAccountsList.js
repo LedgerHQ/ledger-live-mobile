@@ -293,19 +293,16 @@ export default function SubAccountsList({
       >
         <SubAccountRow
           account={item}
+          parentAccount={parentAccount}
           onSubAccountLongPress={account => setAccount(account)}
           onSubAccountPress={onAccountPress}
         />
       </Card>
     ),
-    [onAccountPress, colors],
+    [onAccountPress, parentAccount, colors],
   );
 
-  if (
-    !isToken &&
-    subAccounts.length === 0 &&
-    parentAccount.currency.family === "tezos" // Scoped for Tezos now, might need to change with future coins integration
-  ) {
+  if (!isToken && subAccounts.length === 0) {
     return null;
   }
 

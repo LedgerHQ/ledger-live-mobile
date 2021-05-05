@@ -19,6 +19,7 @@ import InfoIcon from "../../icons/Info";
 
 import NominationInfo from "./components/NominationInfo";
 import PolkadotFeeRow from "./SendRowsFee";
+import Alert from "../../components/Alert";
 
 type FieldProps = {
   account: Account,
@@ -118,8 +119,32 @@ const Warning = (props: FieldProps) => (
   </>
 );
 
+const Footer = ({
+  transaction,
+  recipientWording,
+}: {
+  transaction: Transaction,
+  recipientWording: string,
+}) => {
+  const { t } = useTranslation();
+
+  return (
+    <>
+      <View style={styles.container}>
+        <Alert type="secondary">{t("polkadot.networkFees")}</Alert>
+      </View>
+      {["send", "nominate"].includes(transaction.mode) ? (
+        <View style={styles.container}>
+          <Alert type="help">{recipientWording}</Alert>
+        </View>
+      ) : null}
+    </>
+  );
+};
+
 const fieldComponents = {
   "polkadot.validators": PolkadotValidatorsField,
+  fees: null,
 };
 
 const styles = StyleSheet.create({
@@ -138,9 +163,13 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     borderStyle: "solid",
   },
+  container: {
+    padding: 16,
+  },
 });
 
 export default {
   fieldComponents,
   warning: Warning,
+  footer: Footer,
 };

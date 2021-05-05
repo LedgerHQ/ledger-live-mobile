@@ -1,13 +1,13 @@
 // @flow
-import React from "react";
-import { View, StyleSheet, Linking } from "react-native";
+import React, { useEffect } from "react";
+import { View, StyleSheet } from "react-native";
 import Icon from "react-native-vector-icons/dist/Feather";
 import { WrongDeviceForAccount, UnexpectedBootloader } from "@ledgerhq/errors";
 import type { TokenCurrency } from "@ledgerhq/live-common/lib/types";
 import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import { urls } from "../../config/urls";
 import LText from "../LText";
-import InfoBox from "../InfoBox";
+import Alert from "../Alert";
 import getWindowDimensions from "../../logic/getWindowDimensions";
 import Spinning from "../Spinning";
 import BigSpinner from "../../icons/BigSpinner";
@@ -137,10 +137,10 @@ export function renderConfirmSwap({
   device: Device,
 }) {
   return (
-    <View style={styles.wrapper}>
-      <InfoBox onLearnMore={() => Linking.openURL(urls.swap.learnMore)}>
+    <View style={[styles.wrapper, { width: "100%" }]}>
+      <Alert type="primary" learnMoreUrl={urls.swap.learnMore}>
         {t("DeviceAction.confirmSwap.alert")}
-      </InfoBox>
+      </Alert>
       <View
         style={[
           { marginTop: 16 },
@@ -168,9 +168,9 @@ export function renderConfirmSell({
 }) {
   return (
     <View style={styles.wrapper}>
-      <InfoBox onLearnMore={() => Linking.openURL(urls.swap.learnMore)}>
+      <Alert type="primary" learnMoreUrl={urls.swap.learnMore}>
         {t("DeviceAction.confirmSell.alert")}
-      </InfoBox>
+      </Alert>
       <View
         style={[
           { marginTop: 16 },
@@ -212,7 +212,7 @@ export function renderAllowManager({
   );
 }
 
-export function renderAllowOpeningApp({
+const AllowOpeningApp = ({
   t,
   navigation,
   wording,
@@ -227,13 +227,15 @@ export function renderAllowOpeningApp({
   tokenContext?: ?TokenCurrency,
   isDeviceBlocker?: boolean,
   device: Device,
-}) {
-  if (isDeviceBlocker) {
-    // TODO: disable gesture, modal close, hide header buttons
-    navigation.setOptions({
-      gestureEnabled: false,
-    });
-  }
+}) => {
+  useEffect(() => {
+    if (isDeviceBlocker) {
+      // TODO: disable gesture, modal close, hide header buttons
+      navigation.setOptions({
+        gestureEnabled: false,
+      });
+    }
+  }, [isDeviceBlocker, navigation]);
 
   return (
     <View style={styles.wrapper}>
@@ -254,22 +256,49 @@ export function renderAllowOpeningApp({
       ) : null}
     </View>
   );
+};
+
+export function renderAllowOpeningApp({
+  t,
+  navigation,
+  wording,
+  tokenContext,
+  isDeviceBlocker,
+  device,
+  theme,
+}: {
+  ...RawProps,
+  navigation: any,
+  wording: string,
+  tokenContext?: ?TokenCurrency,
+  isDeviceBlocker?: boolean,
+  device: Device,
+}) {
+  return (
+    <AllowOpeningApp
+      t={t}
+      navigation={navigation}
+      wording={wording}
+      tokenContext={tokenContext}
+      isDeviceBlocker={isDeviceBlocker}
+      device={device}
+      theme={theme}
+    />
+  );
 }
 
 export function renderInWrongAppForAccount({
   t,
   onRetry,
-  accountName,
   colors,
   theme,
 }: {
   ...RawProps,
-  accountName: string,
   onRetry?: () => void,
 }) {
   return renderError({
     t,
-    error: new WrongDeviceForAccount(null, { accountName }),
+    error: new WrongDeviceForAccount(),
     onRetry,
     colors,
     theme,
@@ -365,6 +394,7 @@ export function renderLoading({
 
 type WarningOutdatedProps = {
   ...RawProps,
+  colors: *,
   navigation: any,
   appName: string,
   passWarning: () => void,

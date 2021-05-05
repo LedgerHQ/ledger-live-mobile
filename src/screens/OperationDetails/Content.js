@@ -12,7 +12,7 @@ import type {
 } from "@ledgerhq/live-common/lib/types";
 import {
   getOperationAmountNumber,
-  getOperationConfirmationNumber,
+  isConfirmedOperation,
   getOperationConfirmationDisplayableNumber,
 } from "@ledgerhq/live-common/lib/operation";
 import {
@@ -38,6 +38,7 @@ import Modal from "./Modal";
 import Section, { styles as sectionStyles } from "./Section";
 import byFamiliesOperationDetails from "../../generated/operationDetails";
 import DefaultOperationDetailsExtra from "./Extra";
+import DoubleCounterValue from "../../components/DoubleCountervalue";
 
 type HelpLinkProps = {
   event: string,
@@ -107,7 +108,6 @@ export default function Content({
   const amount = getOperationAmountNumber(operation);
   const isNegative = amount.isNegative();
   const valueColor = isNegative ? colors.smoke : colors.green;
-  const confirmations = getOperationConfirmationNumber(operation, mainAccount);
   const confirmationsString = getOperationConfirmationDisplayableNumber(
     operation,
     mainAccount,
@@ -121,7 +121,11 @@ export default function Content({
 
   const shouldDisplayTo = uniqueRecipients.length > 0 && !!uniqueRecipients[0];
 
-  const isConfirmed = confirmations >= currencySettings.confirmationsNb;
+  const isConfirmed = isConfirmedOperation(
+    operation,
+    mainAccount,
+    currencySettings.confirmationsNb,
+  );
 
   const specific = byFamiliesOperationDetails[mainAccount.currency.family];
   const urlFeesInfo =
@@ -160,16 +164,14 @@ export default function Content({
         )}
 
         {hasFailed || amount.isZero() ? null : (
-          <LText semiBold style={styles.counterValue} color="smoke">
-            <CounterValue
-              showCode
-              alwaysShowSign
-              currency={currency}
-              value={amount}
-              date={operation.date}
-              subMagnitude={1}
-            />
-          </LText>
+          <DoubleCounterValue
+            showCode
+            alwaysShowSign
+            currency={currency}
+            value={amount}
+            date={operation.date}
+            subMagnitude={1}
+          />
         )}
 
         <View style={styles.confirmationContainer}>

@@ -11,7 +11,7 @@ import {
   FlatList,
 } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
-import type { AssetsDistribution } from "@ledgerhq/live-common/lib/types";
+import type { AssetsDistribution } from "@ledgerhq/live-common/lib/portfolio/v2/types";
 import { useTheme } from "@react-navigation/native";
 import { ScreenName } from "../../const";
 import TrackScreen from "../../analytics/TrackScreen";
@@ -108,10 +108,10 @@ export function Header({
             bg={colors.card}
           />
           <View style={styles.assetWrapper} pointerEvents="none">
-            <LText semiBold style={[styles.assetCount, styles.assets]}>
+            <LText semiBold style={[styles.assetCount]}>
               {distribution.list.length}
             </LText>
-            <LText semiBold style={styles.assets}>
+            <LText semiBold>
               {t("distribution.assets", { count: distribution.list.length })}
             </LText>
           </View>

@@ -21,6 +21,8 @@ import Close from "../../../icons/Close";
 import Trash from "../../../icons/Trash";
 import Check from "../../../icons/Check";
 
+import getFontStyle from "../../../components/LText/getFontStyle";
+
 import getWindowDimensions from "../../../logic/getWindowDimensions";
 
 const { height } = getWindowDimensions();
@@ -303,7 +305,6 @@ const styles = StyleSheet.create({
     display: "flex",
     alignItems: "flex-start",
     justifyContent: "flex-end",
-    fontSize: 16,
     paddingVertical: 8,
     marginBottom: 8,
     height: 50,
@@ -324,7 +325,7 @@ const styles = StyleSheet.create({
   },
   inputStyle: {
     flex: 1,
-    fontFamily: "Inter",
+    ...getFontStyle(),
     textAlign: "center",
 
     fontSize: 32,

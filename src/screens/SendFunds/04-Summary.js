@@ -12,13 +12,14 @@ import {
 } from "@ledgerhq/live-common/lib/account";
 import { NotEnoughGas } from "@ledgerhq/errors";
 import { useTheme } from "@react-navigation/native";
+import { BigNumber } from "bignumber.js";
 import { accountScreenSelector } from "../../reducers/accounts";
 import { ScreenName, NavigatorName } from "../../const";
 import { TrackScreen } from "../../analytics";
 import { useTransactionChangeFromNavigation } from "../../logic/screenTransactionHooks";
 import Button from "../../components/Button";
 import LText from "../../components/LText";
-import InfoBox from "../../components/InfoBox";
+import Alert from "../../components/Alert";
 import TranslatedError from "../../components/TranslatedError";
 import SendRowsCustom from "../../components/SendRowsCustom";
 import SendRowsFee from "../../components/SendRowsFee";
@@ -49,6 +50,8 @@ export type RouteParams = {
   nextNavigation?: string,
   overrideAmountLabel?: string,
   hideTotal?: boolean,
+  customGasPrice?: BigNumber,
+  customGasLimit?: BigNumber,
 };
 
 const defaultParams = {
@@ -176,18 +179,22 @@ function SendSummary({ navigation, route: initialRoute }: Props) {
       style={[styles.root, { backgroundColor: colors.background }]}
       forceInset={forceInset}
     >
-      <TrackScreen category="SendFunds" name="Summary" />
+      <TrackScreen
+        category="SendFunds"
+        name="Summary"
+        currencyName={currency.name}
+      />
       <NavigationScrollView style={styles.body}>
         {transaction.useAllAmount && hasNonEmptySubAccounts ? (
           <View style={styles.infoBox}>
-            <InfoBox>
+            <Alert type="primary">
               <Trans
                 i18nKey="send.summary.subaccountsWarning"
                 values={{
                   currency: currency.name,
                 }}
               />
-            </InfoBox>
+            </Alert>
           </View>
         ) : null}
         <SummaryFromSection account={account} parentAccount={parentAccount} />
@@ -213,6 +220,7 @@ function SendSummary({ navigation, route: initialRoute }: Props) {
           overrideAmountLabel={overrideAmountLabel}
         />
         <SendRowsFee
+          setTransaction={setTransaction}
           account={account}
           parentAccount={parentAccount}
           transaction={transaction}
