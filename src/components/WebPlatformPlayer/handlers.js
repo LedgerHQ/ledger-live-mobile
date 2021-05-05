@@ -1,7 +1,12 @@
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { BigNumber } from "bignumber.js";
 import { NavigatorName, ScreenName } from "../../const";
-import { accountsSelector, accountSelector } from "../../reducers/accounts";
+import { broadcastSignedTx } from "../../logic/screenTransactionHooks";
+import {
+  accountsSelector,
+  accountSelector,
+  parentAccountSelector,
+} from "../../reducers/accounts";
 
 async function testFail() {
   throw new Error("THIS IS A FAILURE");
@@ -92,8 +97,28 @@ async function transactionSign(state, dispatch, params, navigation) {
   });
 }
 
-async function transactionBroadcast() {
-  return Promise.resolve(true);
+async function transactionBroadcast(state, dispatch, params) {
+  const {
+    accountId,
+    signedOperation,
+  }: { accountId: string, signedOperation: * } = params;
+
+  return new Promise((resolve, reject) => {
+    if (!signedOperation) return reject(new Error("Signed operation required"));
+
+    const account = accountSelector(state, {
+      accountId,
+    });
+
+    if (!account) return reject(new Error("Account required"));
+
+    const parentAccount = parentAccountSelector(state, { account });
+
+    return broadcastSignedTx(account, parentAccount, signedOperation).then(
+      op => op.hash,
+      reject,
+    );
+  });
 }
 
 const handlers = {
