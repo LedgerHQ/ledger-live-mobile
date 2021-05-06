@@ -402,11 +402,11 @@
       "description": "Please try again. If the problem persists, please save your logs using the button below and provide them to Ledger Support."
     },
     "TransportError": {
-      "title": "Une erreur est survenue, veuillez reconnecter l’appareil.",
+      "title": "Une erreur est survenue, veuillez reconnecter l'appareil.",
       "description": "{{message}} Please try again. If the problem persists, please save your logs using the button below and provide them to Ledger Support."
     },
     "TransportStatusError": {
-      "title": "Une erreur est survenue, veuillez reconnecter l’appareil.",
+      "title": "Une erreur est survenue, veuillez reconnecter l'appareil.",
       "description": "{{message}} Please try again. If the problem persists, please save your logs using the button below and provide them to Ledger Support."
     },
     "TronNoFrozenForBandwidth": {
@@ -713,7 +713,7 @@
       }
     },
     "stepSelectDevice": {
-      "title": "Quel est votre appareil ?",
+      "title": "Quel appareil avez-vous ?",
       "nanoS": "Nano S",
       "nanoX": "Nano X",
       "blue": "Blue"
@@ -731,13 +731,13 @@
         "title": "Vous avez déjà une phrase de récupération ?",
         "label": "Couplage de l'appareil",
         "subTitle": "Connectez votre Nano",
-        "desc": "Votre appareil est déjà configuré ? Connectez-le à votre application !"
+        "desc": "Votre appareil est déjà configuré ? Connectez-le à l'application !"
       },
       "desktopSync": {
         "title": "Vous avez déjà une phrase de récupération ?",
         "label": "Synchronisation avec un ordinateur",
-        "subTitle": "Synchronisez des cryptos à partir de Ledger pour l'ordinateur",
-        "desc": "Vous utilisez déjà l'application Ledger pour l'ordinateur ? Synchronisez-la pour gérer vos cryptomonnaies depuis votre smartphone !"
+        "subTitle": "Synchronisez des cryptos à partir de Ledger pour ordinateur",
+        "desc": "Vous utilisez déjà l'appli Ledger pour ordinateur ? Synchronisez-la pour gérer vos cryptos depuis votre smartphone !"
       },
       "restoreDevice": {
         "label": "Restauration de l'appareil",
@@ -749,8 +749,8 @@
       "cta": "C'est parti !",
       "0": {
         "label": "Les bases",
-        "title": "Accédez à vos cryptomonnaies",
-        "desc": "Vos cryptos sont stockés sur la blockchain. Vous avez besoin d'une clé privée pour y accéder et les gérer."
+        "title": "Accédez à vos cryptos",
+        "desc": "Vos crypto-actifs sont stockés sur la blockchain. Vous avez besoin d'une clé privée pour y accéder et les gérer."
       },
       "1": {
         "label": "Les bases",
@@ -759,23 +759,23 @@
       },
       "2": {
         "label": "Les bases",
-        "title": "Restez déconnecté",
-        "desc": "Votre Nano fonctionne comme un wallet physique de \"stockage à froid\", cela signifie que votre clé privée n’est jamais exposée en ligne, même lorsque vous utilisez l'application."
+        "title": "Restez hors ligne",
+        "desc": "Votre Nano fonctionne comme un wallet physique de \"stockage à froid\". Cela signifie que votre clé privée n'est jamais exposée en ligne, même lorsque vous utilisez l'appli."
       },
       "3": {
         "label": "Les bases",
         "title": "Validez les transactions",
-        "desc": "Ledger Live vous permet d'acheter, de vendre, de gérer, d'échanger et de gagner des cryptomonnaies tout en étant protégé. Vous validerez chaque transaction sur vos cryptomonnaies avec votre Nano."
+        "desc": "Ledger Live vous permet d'acheter, vendre, gérer, échanger et gagner des cryptos tout en étant protégé(e). Vous validerez chaque transaction sur vos cryptos avec votre Nano."
       },
       "4": {
         "label": "Les bases",
-        "title": "Configurons votre Nano",
-        "desc": "Commençons par configurer la sécurité de votre Nano."
+        "title": "Configurons votre Nano !",
+        "desc": "Commençons par configurer les paramètres de sécurité de votre Nano."
       }
     },
     "stepSetupDevice": {
       "start": {
-        "title": "La solution idéale pour commencer:",
+        "title": "Voilà la solution idéale pour démarrer :",
         "bullets": {
           "0": {
             "label": "Comptez 30 minutes, prenez votre temps !"
@@ -789,8 +789,8 @@
         },
         "cta": "OK, je suis prêt(e) !",
         "warning": {
-          "title": "Soyez prudent",
-          "desc": "Assurez-vous de suivre les instructions de cette application à toutes les étapes du processus.",
+          "title": "Restez attentif",
+          "desc": "Assurez-vous de bien suivre les instructions de cette appli à toutes les étapes du processus.",
           "ctaText": "J'ai compris !"
         }
       },
@@ -805,19 +805,19 @@
               "label": "Allumez votre appareil en le connectant au port USB de votre téléphone."
             },
             "blue": {
-              "label": "Turn on your device by connecting it to the USB port of your phone and pressing the power button."
+              "label": "Allumez votre appareil en le connectant au port USB de votre téléphone et en appuyant sur le bouton de mise en marche."
             }
           },
           "1": {
-            "title": "Parcourir ",
+            "title": "Naviguer ",
             "label": "Apprenez à interagir avec votre appareil en lisant les instructions à l'écran."
           },
           "2": {
-            "title": "Sélectionnez \"Set up as a new device\"",
-            "label": "Appuyez simultanément sur les deux boutons pour valider la sélection."
+            "title": "Sélectionnez \"Configurer comme un nouvel appareil\"",
+            "label": "Appuyez simultanément sur les deux boutons pour valider votre choix."
           },
           "3": {
-            "title": "Suivez les instructions",
+            "title": "Suivre les instructions",
             "label": "Revenez ici afin de suivre les instructions relatives à votre code PIN."
           }
         },
@@ -825,35 +825,35 @@
       },
       "pinCode": {
         "title": "Code PIN",
-        "desc": "Votre code PIN est la première couche de sécurité. Il sécurise l'accès physique à votre Nano et à vos clés privées. Votre code PIN doit comporter 4 à 8 chiffres.",
+        "desc": "Votre code PIN est la première couche de sécurité. Il protège l'accès physique à votre Nano et à vos clés privées. Votre code PIN doit comporter 4 à 8 chiffres.",
         "checkboxDesc": "Je comprends que je dois choisir mon code PIN moi-même et le garder secret.",
         "cta": "Configurer le code PIN"
       },
       "pinCodeSetup": {
         "bullets": {
           "0": {
-            "title": "Choisissez un code PIN",
-            "label": "\"Appuyez sur le bouton gauche ou droit pour changer de chiffre. Appuyez sur les deux boutons pour valider un chiffre. Sélectionnez<1></1>pour confirmer votre code PIN. Sélectionnez<2></2>pour effacer un chiffre\"."
+            "title": "Choisir un code PIN",
+            "label": "Appuyez sur le bouton gauche ou droit pour changer le chiffre. Appuyez sur les deux boutons pour valider un chiffre. Sélectionnez<1></1>pour confirmer votre code PIN. Sélectionnez<2></2>pour effacer un chiffre."
           },
           "1": {
             "title": "Confirmer le code PIN",
-            "label": "Saisissez votre code PIN pour le confirmer."
+            "label": "Saisissez à nouveau votre code PIN pour le confirmer."
           }
         },
         "infoModal": {
-          "title": "Sécuriser votre code PIN",
+          "title": "Sécuriser son code PIN",
           "bullets": {
             "0": {
               "label": "Choisissez toujours votre code PIN par vous-même."
             },
             "1": {
-              "label": "Assurez vous de ne pas être observé quand vous entrez votre code PIN."
+              "label": "Assurez-vous de ne pas être observé quand vous entrez votre code PIN."
             },
             "2": {
               "label": "Vous pouvez modifier votre code PIN ultérieurement si nécessaire."
             },
             "3": {
-              "label": "Trois entrées erronées du code PIN à la suite réinitialisent l'appareil."
+              "label": "Trois saisies erronées du code PIN à la suite réinitialisent l'appareil."
             },
             "4": {
               "label": "N'utilisez jamais un code PIN facile comme 0000, 123456, 55555555."
@@ -865,7 +865,7 @@
               "label": "N'utilisez jamais un code PIN que vous n'avez pas choisi par vous-même."
             },
             "7": {
-              "label": "Ne stockez jamais votre code PIN sur un ordinateur ou un smartphone."
+              "label": "Ne sauvegardez jamais votre code PIN sur un ordinateur ou un smartphone."
             }
           }
         },
