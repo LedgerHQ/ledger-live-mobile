@@ -873,33 +873,33 @@
       },
       "recoveryPhrase": {
         "title": "Phrase de récupération",
-        "desc": "Votre phrase de récupération est une phrase de 24 mots qui sauvegarde vos clés privées.",
+        "desc": "Votre phrase de récupération est une liste secrète de 24 mots qui sauvegarde vos clés privées.",
         "desc_1": "Votre Nano génère une phrase de récupération unique. Ledger ne conserve pas de copie de celle-ci.",
         "cta": "Phrase de récupération",
-        "checkboxDesc": "Je comprends que si je perdais cette phrase de récupération, je ne serai pas en mesure d'accéder à mes cryptos au cas où je ne pourrais plus accéder à mon Nano."
+        "checkboxDesc": "Je comprends que si je perds cette phrase de récupération, je ne pourrais plus accéder à mes cryptos au cas où je n'ai plus accès à mon Nano."
       },
       "recoveryPhraseSetup": {
         "infoModal": {
           "title": "Comment fonctionne une phrase de récupération ?",
-          "desc": "Votre phrase de récupération fonctionne comme une clé principale unique. Votre appareil Ledger l'utilise pour calculer les clés privées de chaque cryptoactif que vous possédez.",
-          "desc_1": "Pour récupérer l'accès à vos cryptomonnaies, n'importe quel wallet peu calculer les mêmes clés privées à partir de votre phrase de récupération.",
-          "link": "Plus de détails sur la phrase de récupération",
-          "title_1": "Qu’arrive-t-il si je perds l'accès à mon Nano ?",
+          "desc": "Votre phrase de récupération fonctionne comme une clé principale unique. Votre appareil Ledger l'utilise pour calculer les clés privées de chaque crypto-actif que vous possédez.",
+          "desc_1": "Pour récupérer l'accès à vos cryptos, n'importe quel wallet peut calculer les mêmes clés privées à partir de votre phrase de récupération.",
+          "link": "En savoir plus sur la phrase de récupération",
+          "title_1": "Qu'arrive-t-il si je perds l'accès à mon Nano ?",
           "bullets": {
             "0": {
               "label": "Achetez un nouveau wallet physique."
             },
             "1": {
-              "label": "Sélectionnez “Restaurez votre phrase de récupération dans un nouvel appareil“ dans l'application Ledger."
+              "label": "Sélectionnez \"Restaurez votre phrase de récupération dans un nouvel appareil\" dans l'appli Ledger."
             },
             "2": {
-              "label": "Entrez votre phrase de récupération sur votre nouvel appareil pour récupérer l'accès à vos cryptomonnaies."
+              "label": "Entrez votre phrase de récupération sur votre nouvel appareil pour récupérer l'accès à vos cryptos."
             }
           }
         },
         "bullets": {
           "0": {
-            "title": "Prenez votre feuille de récupération",
+            "title": "Prendre la feuille de récupération",
             "label": "Prenez une feuille de récupération vierge, incluse avec votre Nano. Merci de contacter le Support Ledger si la feuille de récupération fournie n'était pas vierge."
           },
           "1": {
