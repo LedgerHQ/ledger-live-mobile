@@ -8,31 +8,33 @@ import type {
 import Providers from "./Providers";
 import FormOrHistory from "./FormOrHistory";
 import WebPlatformPlayer from "../../components/WebPlatformPlayer";
+import manifests from "./Providers/manifests";
 
 type RouteParams = {
   defaultAccount: ?AccountLike,
   defaultParentAccount: ?Account,
 };
 
-const renderProvider = (route: { params: RouteParams }, provider: string) => {
+const renderProvider = (params: RouteParams, provider: string) => {
   // TODO: may need something more robust against unknown/unsupported providers
   switch (provider) {
     case "changelly":
-      return <FormOrHistory {...route?.params} />;
+      return <FormOrHistory {...params} />;
     default:
-      return <WebPlatformPlayer provider={provider} />;
+      const manifest = manifests[provider];
+      return manifest ? <WebPlatformPlayer manifest={manifest} /> : null;
   }
 };
 
 const Swap = ({ route }: { route: { params: RouteParams } }) => {
   const [provider, setProvider] = useState();
 
-  // TODO plug in the KYC case.
+  // TODO: plug in the KYC case.
   // Maybe navigate if we need to go back
   return !provider ? (
     <Providers onContinue={setProvider} />
   ) : (
-    renderProvider(route, provider)
+    renderProvider(route?.params, provider)
   );
 };
 

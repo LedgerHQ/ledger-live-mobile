@@ -18,12 +18,23 @@ const Provider = ({ onContinue }: { onContinue: string => void }) => {
   const [selectedItem, setSelectedItem] = useState();
   const rows = false;
 
+  // TODO: auto-generate by parsing all manifests
+
   return (
     <SafeAreaView style={styles.wrapper}>
       <ScrollView style={styles.providerList}>
         <LText style={styles.title} semiBold secondary>
           <Trans i18nKey={"transfer.swap.providers.title"} />
         </LText>
+        <Item
+          rows={rows}
+          id={"debug"}
+          onSelect={setSelectedItem}
+          selected={selectedItem}
+          Icon={ParaswapIcon}
+          title={"DEBUG"}
+          bullets={[]}
+        />
         <Item
           rows={rows}
           id={"paraswap"}
