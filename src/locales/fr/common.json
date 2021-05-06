@@ -698,8 +698,8 @@
   "onboarding": {
     "stepWelcome": {
       "title": "Bienvenue chez Ledger",
-      "subtitle": "Gérez en toute sécurité vos cryptomonnaies depuis votre smartphone.",
-      "start": "Commencer",
+      "subtitle": "Gérez vos cryptos en toute sécurité depuis votre smartphone.",
+      "start": "C'est parti",
       "noDevice": "Pas encore d'appareil ?",
       "buy": "Achetez un {{fullDeviceName}}"
     },
@@ -707,7 +707,7 @@
       "title": "Select your language",
       "cta": "Continue",
       "warning": {
-        "title": "Commencez en français",
+        "title": "Commencer en anglais",
         "cta": "J'ai compris !",
         "desc": "Nous ajoutons des langues supplémentaires afin de faciliter vos premiers pas avec Ledger. Veuillez noter que le reste de l'expérience Ledger est actuellement uniquement disponible en anglais."
       }
