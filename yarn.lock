@@ -1273,10 +1273,10 @@
     "@ledgerhq/errors" "^5.50.0"
     events "^3.3.0"
 
-"@ledgerhq/live-common@19.7.5":
-  version "19.7.5"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-19.7.5.tgz#98b48314892f1deb2a4200e7ccd76c7a52d417fb"
-  integrity sha512-YfN7i9O4HWJWVfs05gstJHJcLQAWHeUQfCtt/0etAWe0azL4PPR43xt/zbRSnkYmeKZDp0zJD20fxMEu6d8xOw==
+"@ledgerhq/live-common@19.7.6":
+  version "19.7.6"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-19.7.6.tgz#6e43cb47b539f1d39e93729955cb541c4f1a91f5"
+  integrity sha512-EvxbKZqiLCqN2axjY8NWzilIoWcZcFvBnFgWNR+CNnqOHQrrw2X2r8j2g9ADU72BwmzXQdWHu9JWf2+xxLqXEQ==
   dependencies:
     "@ledgerhq/compressjs" "1.3.2"
     "@ledgerhq/cryptoassets" "5.50.0"
@@ -1366,10 +1366,10 @@
     rxjs "^6.6.7"
     uuid "^3.4.0"
 
-"@ledgerhq/react-native-ledger-core@4.18.8":
-  version "4.18.8"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/react-native-ledger-core/-/react-native-ledger-core-4.18.8.tgz#fe0339c914fb4ef9141f9e376c753bedefb0506d"
-  integrity sha512-tsHCAWRzoARm8k7OiaK5UBQtD12rVqV9dsKuG9EWA3m0pZn0IbEgJNDrztBQiCvChV1bffn3X7q5DnkYJ3YbgQ==
+"@ledgerhq/react-native-ledger-core@4.19.1":
+  version "4.19.1"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/react-native-ledger-core/-/react-native-ledger-core-4.19.1.tgz#454286e670efff9e1fd64f54038d1b63b79c34b6"
+  integrity sha512-68X3DcADqXHk2yseHtz4PH6uY5j6mKZWi7+XfPSuwGKZh3pQsYbb+IcnhUv65hj/SkdIyHPZdnNghqd9vpYF5w==
 
 "@ledgerhq/react-native-passcode-auth@^2.1.0":
   version "2.1.0"
