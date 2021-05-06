@@ -101,24 +101,24 @@ async function transactionSign(state, dispatch, params, navigation) {
 async function transactionBroadcast(state, dispatch, params) {
   const {
     accountId,
-    signedOperation,
-  }: { accountId: string, signedOperation: * } = params;
+    signedTransaction,
+  }: { accountId: string, signedTransaction: * } = params;
 
   return new Promise((resolve, reject) => {
     // @TODO replace with correct error
-    if (!signedOperation) return reject(new Error("Signed operation required"));
+    if (!signedTransaction) reject(new Error("Signed operation required"));
 
     const account = accountSelector(state, {
       accountId,
     });
 
     // @TODO replace with correct error
-    if (!account) return reject(new Error("Account required"));
+    if (!account) reject(new Error("Account required"));
 
     const parentAccount = parentAccountSelector(state, { account });
 
-    return broadcastSignedTx(account, parentAccount, signedOperation).then(
-      op => op.hash,
+    broadcastSignedTx(account, parentAccount, signedTransaction).then(
+      op => resolve(op.hash),
       reject,
     );
   });
