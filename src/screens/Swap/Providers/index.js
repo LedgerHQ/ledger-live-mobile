@@ -26,15 +26,16 @@ const Provider = ({ onContinue }: { onContinue: string => void }) => {
         <LText style={styles.title} semiBold secondary>
           <Trans i18nKey={"transfer.swap.providers.title"} />
         </LText>
-        <Item
-          rows={rows}
-          id={"debug"}
-          onSelect={setSelectedItem}
-          selected={selectedItem}
-          Icon={ParaswapIcon}
-          title={"DEBUG"}
-          bullets={[]}
-        />
+        {__DEV__ && (
+          <Item
+            rows={rows}
+            id={"debug"}
+            onSelect={setSelectedItem}
+            selected={selectedItem}
+            title={"Debug"}
+            bullets={["test app"]}
+          />
+        )}
         <Item
           rows={rows}
           id={"paraswap"}

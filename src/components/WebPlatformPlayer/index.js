@@ -6,22 +6,24 @@ import React, {
   useRef,
   useMemo,
 } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { ActivityIndicator, StyleSheet, View } from "react-native";
 import { WebView } from "react-native-webview";
+import { useNavigation } from "@react-navigation/native";
 
 import { JSONRPCRequest } from "json-rpc-2.0";
-//import { BigNumber } from "bignumber.js";
+import { BigNumber } from "bignumber.js";
 
 import type {
   SignedOperation,
   Transaction,
 } from "@ledgerhq/live-common/lib/types";
+import { getEnv } from "@ledgerhq/live-common/lib/env";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { useLedgerLiveApi } from "@ledgerhq/live-common/lib/platform/ledgerLiveAPI";
-import { useToasts } from "@ledgerhq/live-common/lib/notifications/ToastProvider";
-import { getEnv } from "@ledgerhq/live-common/lib/env";
 
+import { NavigatorName, ScreenName } from "../../const";
+import { broadcastSignedTx } from "../../logic/screenTransactionHooks";
 import { accountsSelector } from "../../reducers/accounts";
 
 import type { Manifest } from "./type";
@@ -39,13 +41,13 @@ type Props = {
 
 const WebPlatformPlayer = ({ manifest }: Props) => {
   const targetRef: { current: null | WebView } = useRef(null);
-  const dispatch = useDispatch();
   const accounts = useSelector(accountsSelector);
-  const { pushToast } = useToasts();
 
   const [loadDate, setLoadDate] = useState(Date.now());
   const [widgetLoaded, setWidgetLoaded] = useState(false);
   const [widgetError, setWidgetError] = useState(false);
+
+  const navigation = useNavigation();
 
   const listAccounts = useCallback(() => {
     console.log("XXX - handlers - listAccounts");
@@ -57,22 +59,23 @@ const WebPlatformPlayer = ({ manifest }: Props) => {
       console.log("XXX - handlers - receiveOnAccount");
       const account = accounts.find(account => account.id === accountId);
 
-      return new Promise(
-        (resolve, reject) => {},
-        /* TODO:
-        dispatch(
-          openModal("MODAL_EXCHANGE_CRYPTO_DEVICE", {
+      return new Promise((resolve, reject) => {
+        if (!account) reject();
+
+        navigation.navigate(NavigatorName.ReceiveFunds, {
+          screen: ScreenName.ReceiveConnectDevice,
+          params: {
             account,
-            parentAccount: null,
-            onResult: resolve,
-            onCancel: reject,
-            verifyAddress: true,
-          }),
-        ),
-        */
-      );
+            onSuccess: resolve,
+            onError: e => {
+              // @TODO put in correct error text maybe
+              reject(e);
+            },
+          },
+        });
+      });
     },
-    [accounts, dispatch],
+    [accounts, navigation],
   );
 
   const signTransaction = useCallback(
@@ -86,38 +89,50 @@ const WebPlatformPlayer = ({ manifest }: Props) => {
       console.log("XXX - handlers - signTransaction");
       const account = accounts.find(account => account.id === accountId);
 
-      return new Promise(
-        (resolve, reject) => {},
-        /* TODO:
-        dispatch(
-          openModal("MODAL_SIGN_TRANSACTION", {
-            transactionData: {
-              amount: new BigNumber(transaction.amount),
-              data: transaction.data
-                ? Buffer.from(transaction.data)
-                : undefined,
-              userGasLimit: transaction.gasLimit
-                ? new BigNumber(transaction.gasLimit)
-                : undefined,
-              gasLimit: transaction.gasLimit
-                ? new BigNumber(transaction.gasLimit)
-                : undefined,
-              gasPrice: transaction.gasPrice
-                ? new BigNumber(transaction.gasPrice)
-                : undefined,
-              family: transaction.family,
-              recipient: transaction.recipient,
+      return new Promise((resolve, reject) => {
+        // @TODO replace with correct error
+        if (!transaction) reject(new Error("Transaction required"));
+        if (!account) reject(new Error("Account required"));
+
+        const bridge = getAccountBridge(account);
+
+        const tx = bridge.updateTransaction(bridge.createTransaction(account), {
+          amount: BigNumber(transaction.amount),
+          data: transaction.data ? Buffer.from(transaction.data) : undefined,
+          userGasLimit: transaction.gasLimit
+            ? BigNumber(transaction.gasLimit)
+            : undefined,
+          gasLimit: transaction.gasLimit
+            ? BigNumber(transaction.gasLimit)
+            : undefined,
+          gasPrice: transaction.gasPrice
+            ? BigNumber(transaction.gasPrice)
+            : undefined,
+          family: transaction.family,
+          recipient: transaction.recipient,
+        });
+
+        navigation.navigate(NavigatorName.SignTransaction, {
+          screen: ScreenName.SignTransactionSummary,
+          params: {
+            currentNavigation: ScreenName.SignTransactionSummary,
+            nextNavigation: ScreenName.SignTransactionSelectDevice,
+            transaction: tx,
+            accountId,
+            onSuccess: ({ signedOperation, transactionSignError }) => {
+              if (transactionSignError) reject(transactionSignError);
+              else {
+                resolve(signedOperation);
+                const n = navigation.dangerouslyGetParent() || navigation;
+                n.dangerouslyGetParent().pop();
+              }
             },
-            account,
-            parentAccount: null,
-            onResult: resolve,
-            onCancel: reject,
-          }),
-        ),
-        */
-      );
+            onError: reject,
+          },
+        });
+      });
     },
-    [dispatch, accounts],
+    [accounts, navigation],
   );
 
   const broadcastTransaction = useCallback(
@@ -129,25 +144,20 @@ const WebPlatformPlayer = ({ manifest }: Props) => {
       signedTransaction: SignedOperation,
     }) => {
       console.log("XXX - handlers - broadcastTransaction");
-      const account = accounts.find(account => account.id === accountId);
+      const account = accounts.find(a => a.id === accountId);
 
-      const bridge = getAccountBridge(account);
+      return new Promise((resolve, reject) => {
+        // @TODO replace with correct error
+        if (!signedTransaction) reject(new Error("Transaction required"));
+        if (!account) reject(new Error("Account required"));
 
-      if (!getEnv("DISABLE_TRANSACTION_BROADCAST")) {
-        await bridge.broadcast({
-          account,
-          signedTransaction,
-        });
-      }
-      pushToast({
-        id: signedTransaction.operation.id,
-        type: "operation",
-        title: "Transaction sent !",
-        text: "Click here for more information",
-        icon: "info",
-        callback: () => {},
+        if (!getEnv("DISABLE_TRANSACTION_BROADCAST")) {
+          broadcastSignedTx(account, null, signedTransaction).then(
+            op => resolve(op.hash),
+            reject,
+          );
+        }
       });
-      return signedTransaction.operation;
     },
     [accounts],
   );
@@ -164,7 +174,7 @@ const WebPlatformPlayer = ({ manifest }: Props) => {
 
   const handleSend = useCallback(
     (request: JSONRPCRequest) => {
-      console.log("XXX - handleSend - request:", request);
+      //console.log("XXX - handleSend - request:", JSON.stringify(request));
       targetRef?.current?.postMessage(
         JSON.stringify(request),
         manifest.url.origin,
@@ -177,6 +187,7 @@ const WebPlatformPlayer = ({ manifest }: Props) => {
 
   const handleMessage = useCallback(
     e => {
+      //console.log("XXX - handleMessage - e:", e);
       // FIXME: event isn't the same on desktop & mobile
       //if (e.isTrusted && e.origin === manifest.url.origin && e.data) {
       if (e.nativeEvent?.data) {
