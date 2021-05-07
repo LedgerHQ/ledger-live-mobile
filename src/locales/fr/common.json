@@ -900,19 +900,19 @@
         "bullets": {
           "0": {
             "title": "Prendre la feuille de récupération",
-            "label": "Prenez une feuille de récupération vierge, incluse avec votre Nano. Merci de contacter le Support Ledger si la feuille de récupération fournie n'était pas vierge."
+            "label": "Prenez la feuille de récupération vierge incluse avec votre Nano. Contactez le Service client Ledger si la feuille de récupération fournie n'était pas vierge."
           },
           "1": {
-            "title": "Notez tous les mots",
-            "label": "Écrivez le mot n°1 affiché sur votre Nano en position « 1 » de la feuille de récupération. Ensuite, appuyez à droite sur votre Nano pour afficher le mot n°2 et écrivez le en position n°2.",
-            "label_1": "Répétez l'opération pour tous les mots en respectant scrupuleusement l'ordre et l'orthographe. Appuyez à gauche sur votre Nano pour vérifier si vous avez une erreur."
+            "title": "Noter tous les mots",
+            "label": "Écrivez le mot n°1 affiché sur votre Nano en position 1 de la feuille de récupération. Puis appuyez sur le bouton droit de votre Nano pour afficher le mot n°2 et écrivez-le en position 2.",
+            "label_1": "Répétez l'opération pour tous les mots en respectant scrupuleusement l'ordre et l'orthographe. Appuyez sur le bouton gauche de votre Nano pour vérifier et ne pas faire d'erreur."
           },
           "2": {
             "title": "Confirmer la phrase de récupération",
             "label": "Appuyez sur le bouton droit pour faire défiler les mots jusqu'à ce que vous trouviez le mot n°1. Validez en appuyant sur les deux boutons."
           },
           "3": {
-            "title": "Faites la même chose pour tous les mots !"
+            "title": "Faites pareil pour tous les mots !"
           }
         },
         "cta": "Confirmer la phrase de récupération",
