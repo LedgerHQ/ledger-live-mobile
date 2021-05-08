@@ -5,7 +5,7 @@
     "back": "Back",
     "delete": "Delete",
     "paste": "Paste",
-    "yes": "Yes",
+    "yes": "Oui",
     "no": "No",
     "gotit": "Got it",
     "continue": "Continuer",
@@ -15,24 +15,24 @@
     "signOut": "Sign out",
     "search": "Search",
     "contactUs": "Contact Ledger Support",
-    "device": "Device",
-    "cryptoAsset": "Crypto asset",
+    "device": "Appareil",
+    "cryptoAsset": "Crypto-actif",
     "skip": "Skip",
     "noCryptoFound": "No crypto assets found",
-    "needHelp": "Do you need help?",
+    "needHelp": "Besoin d'aide ?",
     "edit": "Edit",
     "editName": "Edit name",
-    "close": "Close",
-    "confirm": "Confirm",
+    "close": "Fermer",
+    "confirm": "Confirmer",
     "poweredBy": "Powered by ",
-    "received": "Received",
-    "sent": "Sent",
+    "received": "Reçu",
+    "sent": "Envoyé",
     "or": "OR",
-    "rename": "Rename",
-    "learnMore": "Learn more",
+    "rename": "Renommer",
+    "learnMore": "En savoir plus",
     "viewDetails": "View details",
-    "today": "Today",
-    "yesterday": "Yesterday",
+    "today": "Aujourd'hui",
+    "yesterday": "Hier",
     "upToDate": "Up to date",
     "transactionDate": "Transaction date",
     "outdated": "Outdated",
@@ -89,14 +89,14 @@
     },
     "AccountNameRequired": {
       "title": "An account name is needed",
-      "description": "Please enter an account name."
+      "description": "Veuillez entrer un nom de compte."
     },
     "AlgorandASANotOptInInRecipient": {
       "title": "Recipient account has not opted in the selected ASA."
     },
     "BluetoothRequired": {
-      "title": "Sorry, Bluetooth is disabled",
-      "description": "Please enable Bluetooth in your phone settings. ({{state}} state)"
+      "title": "Oups, Bluetooth désactivé",
+      "description": "Veuillez activer le Bluetooth dans les paramètres de votre téléphone. ({{state}} état)"
     },
     "BtcUnmatchedApp": {
       "title": "That's the wrong app",
@@ -217,15 +217,15 @@
     },
     "DeviceSocketFail": {
       "title": "Sorry, connection failed",
-      "description": "Please try again."
+      "description": "Veuillez réessayer."
     },
     "DeviceSocketNoBulkStatus": {
       "title": "The connection failed",
-      "description": "Please try again."
+      "description": "Veuillez réessayer."
     },
     "DeviceSocketNoHandler": {
       "title": "Sorry, connection failed",
-      "description": "Please try again."
+      "description": "Veuillez réessayer."
     },
     "DisconnectedDevice": {
       "title": "Sorry, it looks like your device was disconnected",
@@ -266,7 +266,7 @@
       "description": "Please use the Manager to uninstall all apps then check if a firmware update is available before reinstalling them."
     },
     "GenuineCheckFailed": {
-      "title": "Device authentication failed",
+      "title": "Échec de l'authentification de l'appareil",
       "description": "Something went wrong. Please try again. If the problem persists, please save your logs using the button below and provide them to Ledger Support."
     },
     "HardResetFail": {
@@ -311,7 +311,7 @@
       "description": "Please install the latest Bitcoin and Ethereum apps first."
     },
     "ManagerDeviceLocked": {
-      "title": "Your device is locked",
+      "title": "Votre appareil est verrouillé",
       "description": "Please unlock it."
     },
     "ManagerNotEnoughSpace": {
@@ -1046,66 +1046,66 @@
         "desc": "Sur votre appareil, sélectionnez Paramètres > Général > Nom de l'appareil.",
         "title_1": "Comment configurer la connexion Bluetooth ?",
         "title_2": "Comment puis-je utiliser mon Nano X sans Bluetooth ?",
-        "desc_1": "Utilisez un câble <1>OTG</1> pour connecter votre Ledger Nano X à votre smartphone Android (iOS non pris en charge). Gérez vos cryptomonnaies avec l’application mobile Ledger Live ou toute autre application (Web) compatible.",
+        "desc_1": "Utilisez un <1>câble OTG</1> pour connecter votre Ledger Nano X à votre smartphone Android (iOS non pris en charge). Gérez vos cryptos avec l'appli mobile Ledger Live ou toute autre appli (Web) compatible.",
         "bullets": {
           "0": {
-            "label": "Assurez-vous que le Bluetooth est activé sur votre smartphone et sur votre Ledger Nano X. Votre Ledger Nano X doit être sur le tableau de bord, son écran d'accueil principal."
+            "label": "Assurez-vous que le Bluetooth est activé sur votre smartphone et sur votre Ledger Nano X. Le tableau de bord (écran d'accueil principal) doit être ouvert sur votre Ledger Nano X."
           },
           "1": {
-            "label": "<1>{{Os}}</1>: assurez-vous que les services de localisation soient bien activés pour Ledger Live dans les paramètres de votre téléphone. Bien que Ledger Live n’utilise jamais vos informations de localisation, cette procédure est une exigence pour accéder au Bluetooth sur {{Os}}."
+            "label": "<1>{{Os}}</1> : assurez-vous que l'accès à votre localisation est bien accordé à Ledger Live dans les paramètres de votre téléphone. Bien que Ledger Live n'utilise jamais vos informations de localisation, c'est nécessaire pour accéder au Bluetooth sur {{Os}}."
           },
           "2": {
-            "label": "Si vous avez un problème de couplage Bluetooth, veuillez vous référer à l'article suivant",
+            "label": "Si vous avez un problème de couplage Bluetooth, veuillez consulter l'article suivant",
             "link": "Résoudre les problèmes de connexion."
           }
         }
       },
       "errorInfoModal": {
         "title": "Un problème est survenu ?",
-        "title_1": "J’ai un Android",
+        "title_1": "J'ai un Android",
         "title_2": "Mettez à jour la version d'Android",
-        "desc": "Si vous rencontrez des problèmes de Bluetooth avec votre Nano X, veuillez supprimer le couplage et oublier Nano X sur votre téléphone. Puis essayez le couplage à nouveau.",
-        "desc_1": "Cela peut prendre un certain temps avant que la demande de couplage Bluetooth ne s’affiche. Assurez-vous de vérifier et de confirmer le code de couplage à la fois sur votre Nano X et sur votre téléphone.",
-        "desc_2": "Vérifiez dans les paramètres Bluetooth de votre téléphone si le Ledger Nano X est détecté. S’il n’est pas détecté, assurez-vous d'avoir bien activé le Bluetooth sur votre Ledger Nano X.",
-        "desc_3": "Services de localisation",
-        "desc_4": "Si le Ledger Nano X n’est pas détecté dans votre application mobile lorsque vous tentez de le coupler, veuillez essayer la solution suivante :",
-        "desc_5": "L’application mobile Ledger vous demande d'autoriser les services de localisation lorsqu’ils ne sont pas encore activés, mais sur quelques modèles de téléphone, cela n’est pas toujours correctement détecté. Veuillez noter que l’application mobile Ledger n’utilise jamais vos informations de localisation, cette autorisation est simplement nécessaire pour le Bluetooth sur Android.",
-        "desc_6": "Certains utilisateurs ont signalé avoir réglé leurs problèmes de connexion en mettant à jour la version Android de leur téléphone vers une plus récente. Veuillez vérifier avec le fabricant de votre téléphone si une mise à jour est disponible.",
+        "desc": "Si vous rencontrez des problèmes de Bluetooth avec votre Nano X, veuillez supprimer le couplage et oublier le Nano X sur votre téléphone. Puis essayez à nouveau de l'appairer.",
+        "desc_1": "La demande de couplage Bluetooth peut prendre un certain temps à s'afficher. Vérifiez bien et confirmez le code de couplage à la fois sur votre Nano X et sur votre téléphone.",
+        "desc_2": "Vérifiez dans les paramètres Bluetooth de votre téléphone que le Ledger Nano X est détecté. S'il n'est pas détecté, assurez-vous d'avoir bien activé le Bluetooth sur votre Ledger Nano X.",
+        "desc_3": "Localisation",
+        "desc_4": "Si le Ledger Nano X n'est pas détecté dans votre appli mobile lorsque vous tentez de le coupler, veuillez essayer cette solution :",
+        "desc_5": "L'appli mobile Ledger vous demande d'autoriser l'accès à la localisation si ce n'est pas déjà le cas, mais sur quelques modèles de téléphone, cela n'est pas toujours bien détecté. Veuillez noter que l'appli mobile Ledger n'utilise jamais vos informations de localisation, cette autorisation étant simplement nécessaire au Bluetooth sur Android.",
+        "desc_6": "Certains utilisateurs ont signalé avoir réglé leurs problèmes de connexion en mettant à jour la version Android de leur téléphone. Veuillez vérifier auprès du fabricant de votre téléphone si une mise à jour est disponible.",
         "link": "En savoir plus",
         "bullets": {
           "0": {
-            "label": "Accédez aux options du système pour l’application Ledger Live sur votre téléphone Android."
+            "label": "Ouvrez les Paramètres pour l'appli Ledger Live sur votre téléphone Android."
           },
           "1": {
-            "label": "Autorisez l’utilisation des services de localisation."
+            "label": "Autorisez l'accès à la localisation."
           },
           "2": {
-            "label": "Retournez à l'application mobile."
+            "label": "Retournez à l'appli mobile."
           },
           "3": {
-            "label": "Vérifiez si votre Nano X est détecté."
+            "label": "Vérifiez si votre Nano X est bien détecté."
           }
         }
       }
     },
     "stepImportAccounts": {
-      "title": "Synchroniser les cryptomonnaies depuis l'ordinateur",
-      "desc": "Si vos cryptomonnaies sont déjà paramétrées dans l'application Ledger pour l'ordinateur, vous pouvez les synchroniser pour les gérer depuis votre téléphone.",
-      "cta": "Je suis prêt à scanner",
+      "title": "Synchroniser ses cryptos depuis l'ordinateur",
+      "desc": "Si vos cryptos sont déjà paramétrées dans l'appli Ledger Live ordinateur, vous pouvez les synchroniser pour les gérer depuis votre téléphone.",
+      "cta": "Je suis prêt(e) à scanner",
       "bullets": {
         "0": {
-          "label": "Sur Ledger pour l'ordinateur, sélectionnez <1>Settings > Accounts > Account export</1>."
+          "label": "Sur Ledger Live ordinateur, sélectionnez <1>Paramètres > Comptes > Exporter les comptes</1>."
         },
         "1": {
           "label": "Scannez le code LiveQR avec votre téléphone."
         },
         "2": {
-          "label": "Sélectionnez les comptes de cryptomonnaies à importer."
+          "label": "Sélectionnez les comptes de cryptos à importer."
         }
       },
       "warning": {
-        "title": "Vos applications de bureau et mobiles doivent être synchronisées manuellement.",
-        "desc": "Ledger respecte votre vie privée et stocke vos données localement. Si vous changez de compte ou de paramètres sur votre téléphone, vous devez le faire aussi sur votre ordinateur, et inversement. Vos transactions restent synchronisées avec la blockchain.",
+        "title": "Vos applis ordinateur et mobile doivent être synchronisées manuellement.",
+        "desc": "Ledger Live respecte votre vie privée et stocke vos données localement. Si vous changez les comptes ou paramètres sur votre téléphone, vous devez le faire aussi sur votre ordinateur, et inversement. Vos transactions restent synchronisées avec la blockchain.",
         "cta": "J'ai compris !"
       }
     },
@@ -1147,9 +1147,9 @@
     },
     "stepFinish": {
       "title": "Votre appareil est prêt !",
-      "readOnlyTitle": "Nous y sommes !",
+      "readOnlyTitle": "Et voilà !",
       "desc": "Install apps on your device and manage your portfolio",
-      "cta": "Ouvrez Ledger Live"
+      "cta": "Ouvrir Ledger Live"
     },
     "quizz": {
       "label": "Quiz",
@@ -1158,43 +1158,43 @@
         "fail": "Incorrect !"
       },
       "coins": {
-        "title": "En tant qu'utilisateur Ledger, mes cryptomonnaies sont stockés :",
+        "title": "En tant qu'utilisateur Ledger, mes cryptos sont stockées :",
         "answers": {
           "correct": "Sur la blockchain",
           "wrong": "Sur mon Nano"
         },
         "modal": {
-          "text": "Vos cryptomonnaies sont toujours stockés sur la blockchain. Votre wallet Nano ne détient que votre clé privée, qui vous donne accès à vos cryptomonnaies.",
+          "text": "Vos cryptos sont toujours stockées sur la blockchain. Votre wallet physique ne détient que votre clé privée, qui vous donne accès à vos cryptos.",
           "cta": "Question suivante"
         }
       },
       "recoveryPhrase": {
         "title": "Si ma phrase de récupération n'est plus en sécurité ou que quelqu'un la connaît...",
         "answers": {
-          "correct": "L'accès à mes cryptomonnaies n’est plus sécurisé et j’ai besoin de les transférer dans un endroit sûr",
-          "wrong": "Pas de problème, Ledger m’en envoie une copie"
+          "correct": "Mes cryptos ne sont plus en sécurité et je dois les transférer en lieu sûr",
+          "wrong": "Pas de souci, Ledger m'en enverra une copie"
         },
         "modal": {
-          "text": "Toute personne ayant accès à votre phrase de récupération peut voler vos crypto-actifs.\nSi vous la perdez, vous devez rapidement transférer vos cryptomonnaies vers un endroit sûr.",
+          "text": "Toute personne connaissant votre phrase de récupération peut voler vos crypto-actifs.\nSi vous la perdez, vous devez rapidement mettre vos cryptos en lieu sûr.",
           "cta": "Question suivante"
         }
       },
       "privateKey": {
-        "title": "Lorsque je connecte mon Nano à l'application Ledger, ma clé privée est...",
+        "title": "Lorsque je connecte mon Nano à l'appli Ledger, ma clé privée est...",
         "answers": {
-          "correct": "Toujours hors-ligne",
+          "correct": "Toujours hors ligne",
           "wrong": "Brièvement connectée à Internet"
         },
         "modal": {
-          "text": "Votre clé privée reste toujours hors ligne dans votre wallet physique. Même lorsque vous êtes connecté à votre Nano, l'application Ledger ne peut pas accéder à votre clé privée. Vous devez autoriser physiquement chaque transaction sur votre appareil.",
+          "text": "Votre clé privée reste toujours hors ligne dans votre wallet physique. Même connectée à votre Nano, l'appli Ledger Live ne peut pas accéder à votre clé privée. Vous devez autoriser physiquement chaque transaction sur votre appareil.",
           "cta": "Finir le quiz"
         }
       },
       "final": {
         "successTitle": "Vous êtes déjà pro !",
-        "successText": "Vous êtes prêt à gérer vos cryptomonnaies en toute sécurité. Il ne reste plus qu'une petite étape !",
-        "failTitle": "Vous allez bientôt devenir un(e) pro...",
-        "failText": "Pas d'inquiétude, Ledger est là pour vous guider. Vous allez bientôt vous sentir plus à l'aise en ce qui concerne la sécurité de vos cryptomonnaies. Il ne reste plus qu'une petite étape !",
+        "successText": "Vous êtes prêt(e) à gérer vos cryptos en toute sécurité. Plus qu'une petite étape !",
+        "failTitle": "Vous êtes sur le point de passer pro...",
+        "failText": "Pas d'inquiétude, Ledger est là pour vous guider. Vous vous sentirez bientôt parfaitement à l'aise en ce qui concerne la sécurité de vos cryptos. Plus qu'une petite étape !",
         "cta": "Étape suivante"
       }
     },
@@ -1473,7 +1473,7 @@
         "noAccounts": "Nothing to import",
         "unsupported": "Unsupported",
         "settings": "App settings",
-        "includeGeneralSettings": "Importer les paramètres de Ledger pour l'ordinateur"
+        "includeGeneralSettings": "Importer les paramètres de Ledger Live ordinateur"
       },
       "fallback": {
         "header": "Import account",
@@ -2097,7 +2097,7 @@
     "loading": "Sync"
   },
   "scanning": {
-    "loading": "Recherche d’appareil..."
+    "loading": "Recherche d'appareil..."
   },
   "send": {
     "tooMuchUTXOBottomModal": {
@@ -2409,7 +2409,7 @@
     },
     "deviceNotFoundPairNewDevice": "Add new Ledger Nano X",
     "headerDescription": "Please make sure your {{productName}} is unlocked with Bluetooth enabled",
-    "usb": "ou brancher le câble USB",
+    "usb": "... ou brancher le câble USB",
     "usbLabel": "Connect USB cable and enter your PIN Code on your device",
     "withoutDeviceHeader": "I don't have my device with me",
     "withoutDevice": "Continue without my device",
@@ -3447,7 +3447,7 @@
     "read": "Read the Terms of Use",
     "switchLabelPrivacy": "I have read and agree with the <1>Privacy Policy</1>",
     "switchLabel": "I have read and agree with the <1>Terms of Service</1>",
-    "cta": "Entrer dans l'application Ledger"
+    "cta": "Entrer dans l'appli Ledger"
   },
   "exchange": {
     "buy": {
