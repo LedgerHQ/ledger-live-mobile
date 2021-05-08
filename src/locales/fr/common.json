@@ -926,16 +926,16 @@
             "label": "Saisissez ces mots uniquement sur un wallet physique, pas sur un ordinateur ni sur un téléphone."
           },
           "1": {
-            "label": "Ne partagez jamais vos 24 mots, avec qui que ce soit. Même pas avec Ledger."
+            "label": "Ne partagez jamais vos 24 mots avec qui que ce soit. Pas même avec Ledger."
           }
         },
-        "cta": "C'est bon, j'ai fini !",
+        "cta": "OK, j'ai fini !",
         "infoModal": {
           "label": "Apprendre à la cacher",
           "title": "Où dois-je garder ma phrase de récupération ?",
           "bullets": {
             "0": {
-              "label": "<1>NE JAMAIS</1> la saisir sur un ordinateur, un smartphone ou un autre appareil. Ne la prenez pas en photo."
+              "label": "<1>NE JAMAIS</1> la saisir sur un ordinateur, smartphone ou autre appareil. Ne la prenez pas en photo."
             },
             "1": {
               "label": "<1>NE JAMAIS</1> partager vos 24 mots avec qui que ce soit."
@@ -952,7 +952,7 @@
           }
         },
         "warning": {
-          "title": "Testons nos connaissances !",
+          "title": "À vos marques, prêt, partez !",
           "desc": "Répondez à 3 questions simples pour éviter les idées fausses sur votre wallet physique.",
           "cta": "Faisons le quiz"
         }
@@ -960,13 +960,13 @@
     },
     "stepRecoveryPhrase": {
       "importRecoveryPhrase": {
-        "title": "Restaurez à partir de votre phrase de récupération",
+        "title": "Restaurer à partir de sa phrase de récupération",
         "desc": "Restaurer votre Nano à partir de votre phrase de récupération afin de restaurer, remplacer ou sauvegarder votre wallet physique Ledger.",
-        "desc_1": "Votre Nano va restaurer vos clés privées et vous pourrez accéder à vos cryptomonnaies et les gérer.",
+        "desc_1": "Votre Nano va restaurer vos clés privées et vous pourrez accéder à vos cryptos et les gérer.",
         "cta": "OK, je suis prêt(e) !",
         "warning": {
-          "title": "Nous recommandons uniquement les phrases de récupération générées par Ledger",
-          "desc": "Ledger ne peut garantir la sécurité de phrases de récupération fournies par des tiers. Nous vous recommandons de paramétrer votre Nano comme un nouvel appareil si votre phrase de récupération n'a pas été générée par Ledger.",
+          "title": "Nous ne recommandons que les phrases de récupération générées par Ledger",
+          "desc": "Ledger ne peut pas garantir la sécurité de phrases de récupération fournies par des tiers. Nous vous recommandons de paramétrer votre Nano comme un nouvel appareil si votre phrase de récupération n'a pas été générée par Ledger.",
           "cta": "J'ai compris !"
         },
         "nextStep": "Étape suivante",
@@ -974,22 +974,22 @@
           "0": {
             "title": "Allumer le Nano",
             "nanoX": {
-              "label": "Allumez votre appareil en appuyant sur le bouton noir pendant 1 seconde."
+              "label": "Allumez votre appareil en appuyant 1 seconde sur le bouton noir."
             },
             "nanoS": {
               "label": "Allumez votre appareil en le connectant au port USB de votre téléphone."
             },
             "blue": {
-              "label": "Turn on your device by connecting it to the USB port of your phone and pressing the power button."
+              "label": "Allumez votre appareil en le connectant au port USB de votre téléphone et en appuyant sur le bouton de mise en marche."
             }
           },
           "1": {
-            "title": "Parcourir",
+            "title": "Naviguer",
             "label": "Apprenez à interagir avec votre appareil en lisant les instructions à l'écran."
           },
           "2": {
-            "title": "Sélectionnez “Restore from recovery phrase”",
-            "label": "Appuyez simultanément sur les deux boutons pour valider la sélection."
+            "title": "Choisir \"Restaurer à partir d'une phrase de récupération\"",
+            "label": "Appuyez simultanément sur les deux boutons pour valider votre choix."
           },
           "3": {
             "title": "Suivre les instructions",
@@ -1001,13 +1001,13 @@
         "title": "Saisissez votre phrase de récupération",
         "paragraph1": "Votre phrase de récupération est une liste secrète de mots que vous avez mise en lieu sûr après avoir paramétré votre wallet pour la première fois.",
         "paragraph2": "Ledger ne conserve pas de copie de votre phrase de récupération.",
-        "checkboxDesc": "Je comprends que si je perdais cette phrase de récupération, je ne serai pas en mesure d'accéder à mes cryptomonnaies au cas où je ne pourrais plus accéder à mon Nano.",
+        "checkboxDesc": "Je comprends que si je perds cette phrase de récupération, je ne pourrais plus accéder à mes cryptos au cas où je n'ai plus accès à mon Nano.",
         "bullets": {
           "0": {
-            "title": "Prenez votre phrase de récupération"
+            "title": "Prendre sa phrase de récupération"
           },
           "1": {
-            "title": "Sélectionnez la longueur de votre phrase de récupération",
+            "title": "Sélectionner la longueur de sa phrase de récupération",
             "label": "Your recovery phrase can have 12, 18 or 24 words. You must enter all words to access your crypto."
           },
           "2": {
@@ -1019,7 +1019,7 @@
             "label": "Choisissez le mot n°1 parmi les suggestions. Appuyez sur les deux boutons pour valider."
           },
           "4": {
-            "title": "Faites la même chose pour tous les mots !"
+            "title": "Faites pareil pour tous les mots !"
           }
         },
         "nextStep": "Étape suivante"
@@ -1028,22 +1028,22 @@
     "stepPairNew": {
       "nanoX": {
         "title": "Coupler votre Nano",
-        "desc": "C'est la première fois que vous configurez votre Nano avec votre smartphone. Associons rapidement votre appareil.",
+        "desc": "C'est la première fois que vous configurez votre Nano sur ce smartphone. Appairons rapidement votre appareil.",
         "cta": "Couplons mon Nano"
       },
       "nanoS": {
         "title": "Connectez votre Nano",
-        "desc": "C'est la première fois que vous configurez votre Nano avec votre smartphone. Associons rapidement votre appareil.",
+        "desc": "C'est la première fois que vous configurez votre Nano sur ce smartphone. Connectons rapidement votre appareil.",
         "cta": "Connectons mon Nano"
       },
       "blue": {
         "title": "Connectez votre Blue",
-        "desc": "C'est la première fois que vous paramétrez votre Blue avec ce téléphone. Connectons rapidement votre appareil.",
+        "desc": "C'est la première fois que vous configurez votre Blue sur ce smartphone. Connectons rapidement votre appareil.",
         "cta": "Connectons mon Blue"
       },
       "infoModal": {
         "title": "Où puis-je trouver le nom de mon appareil ?",
-        "desc": "Sur votre appareil, sélectionnez Settings > General > Device name.",
+        "desc": "Sur votre appareil, sélectionnez Paramètres > Général > Nom de l'appareil.",
         "title_1": "Comment configurer la connexion Bluetooth ?",
         "title_2": "Comment puis-je utiliser mon Nano X sans Bluetooth ?",
         "desc_1": "Utilisez un câble <1>OTG</1> pour connecter votre Ledger Nano X à votre smartphone Android (iOS non pris en charge). Gérez vos cryptomonnaies avec l’application mobile Ledger Live ou toute autre application (Web) compatible.",
