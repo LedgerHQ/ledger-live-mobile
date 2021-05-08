@@ -919,8 +919,8 @@
         "nextStep": "Étape suivante"
       },
       "hideRecoveryPhrase": {
-        "title": "Cachez votre phrase de récupération",
-        "desc": "Votre phrase de récupération est votre dernière chance d'accéder à vos cryptos si vous ne pouvez plus utiliser votre Nano. Vous devez la garder dans un endroit sûr.",
+        "title": "Cacher sa phrase de récupération",
+        "desc": "Votre phrase de récupération est votre dernière chance d'accéder à vos cryptos si vous ne pouvez plus utiliser votre Nano. Vous devez la garder en lieu sûr.",
         "bullets": {
           "0": {
             "label": "Saisissez ces mots uniquement sur un wallet physique, pas sur un ordinateur ni sur un téléphone."
