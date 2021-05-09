@@ -100,7 +100,7 @@
     },
     "BtcUnmatchedApp": {
       "title": "That's the wrong app",
-      "description": "Please open the {{managerAppName}} app on your device."
+      "description": "Veuillez ouvrir l'appli {{managerAppName}} sur votre appareil."
     },
     "CantOpenDevice": {
       "title": "Échec de la connexion",
@@ -193,7 +193,7 @@
       "description": "Please save your logs using the button below and provide them to Ledger Support."
     },
     "DeviceAppVerifyNotSupported": {
-      "title": "Open Manager to update this app",
+      "title": "Ouvrez le Gestionnaire pour mettre cette appli à jour",
       "description": "Vérification de l'appli non prise en charge."
     },
     "DeviceGenuineSocketEarlyClose": {
@@ -263,7 +263,7 @@
     },
     "FirmwareOrAppUpdateRequired": {
       "title": "Firmware or app update needed",
-      "description": "Please use the Manager to uninstall all apps then check if a firmware update is available before reinstalling them."
+      "description": "Veuillez utiliser le Gestionnaire pour désinstaller toutes les applis et vérifier si une mise à jour du micrologiciel est disponible avant de les réinstaller."
     },
     "GenuineCheckFailed": {
       "title": "Échec de l'authentification de l'appareil",
@@ -299,16 +299,16 @@
       "description": "Please try again. If the problem persists, please save your logs using the button below and provide them to Ledger Support."
     },
     "ManagerAPIsFail": {
-      "title": "Sorry, Manager services are unavailable",
+      "title": "Les services du Gestionnaire ne sont pas disponibles",
       "description": "Please check the network status."
     },
     "ManagerAppAlreadyInstalled": {
       "title": "Cette appli est déjà installée",
-      "description": "Please check which apps are already installed on your device."
+      "description": "Veuillez vérifier quelles applis sont déjà installées sur votre appareil."
     },
     "ManagerAppRelyOnBTC": {
-      "title": "Bitcoin and Ethereum apps needed",
-      "description": "Please install the latest Bitcoin and Ethereum apps first."
+      "title": "Applis Bitcoin et Ethereum nécessaires",
+      "description": "Veuillez d'abord installer les dernières applis Bitcoin et Ethereum."
     },
     "ManagerDeviceLocked": {
       "title": "Votre appareil est verrouillé",
@@ -316,23 +316,23 @@
     },
     "ManagerNotEnoughSpace": {
       "title": "Not enough storage left",
-      "info": "Please uninstall some apps to free up space for the {{app}} app.",
-      "description": "Uninstalling apps has no impact on your assets."
+      "info": "Veuillez désinstaller certaines applis pour libérer de l'espace pour l'appli {{app}}.",
+      "description": "Désinstaller des applis n'a aucun impact sur vos actifs."
     },
     "ManagerQuitPage": {
       "install": {
         "title": "Installation de l'appli en cours",
-        "description": "Quitting the Manager will terminate installation.",
+        "description": "Sortir du Gestionnaire mettra fin à l'installation.",
         "stay": "Poursuivre l'installation"
       },
       "uninstall": {
         "title": "Désinstallation de l'appli en cours",
-        "description": "Quitting the Manager will terminate uninstallation.",
+        "description": "Sortir du Gestionnaire mettra fin à la désinstallation.",
         "stay": "Poursuivre la désinstallation"
       },
       "update": {
         "title": "Mise à jour de l'appli en cours",
-        "description": "Quitting the Manager will terminate update.",
+        "description": "Sortir du Gestionnaire mettra fin à la mise à jour.",
         "stay": "Continuer la mise à jour"
       },
       "quit": "Quit Manager"
@@ -350,7 +350,7 @@
       "description": "Something went wrong with the address calculation. Please try again. If the problem persists, please save your logs using the button below and provide them to Ledger Support."
     },
     "NotEnoughBalance": {
-      "title": "Sorry, insufficient funds",
+      "title": "Solde insuffisant",
       "description": "Please make sure the account has enough funds."
     },
     "NotEnoughGas": {
@@ -364,7 +364,7 @@
       "title": "Insufficient balance in the parent account"
     },
     "NotEnoughSpendableBalance": {
-      "title": "Balance cannot be below {{minimumAmount}}"
+      "title": "Le solde ne peut pas être inférieur à {{minimumAmount}}"
     },
     "NotEnoughBalanceBecauseDestinationNotCreated": {
       "title": "Minimum of {{minimalAmount}} needed to activate recipient address"
@@ -457,11 +457,11 @@
     },
     "UpdateYourApp": {
       "title": "Mise à jour de l'appli nécessaire",
-      "description": "Please uninstall then reinstall the {{managerAppName}} app in the Manager."
+      "description": "Veuillez désinstaller et réinstaller l'appli {{managerAppName}} dans le Gestionnaire."
     },
     "UserRefusedAllowManager": {
-      "title": "Manager disabled on device",
-      "description": "Please enable the Manager on your device, then try again."
+      "title": "Gestionnaire désactivé sur l'appareil",
+      "description": "Veuillez activer le Gestionnaire sur votre appareil et réessayez."
     },
     "UserRefusedAddress": {
       "title": "Receive address rejected",
@@ -1232,7 +1232,7 @@
     "summary_plural": "Your {{count}} accounts are synchronized.",
     "emptyState": {
       "noAppsTitle": "Install an app on my device",
-      "noAppsDesc": "Install apps on your device before adding accounts in Ledger Live. Go to the Manager to install apps.",
+      "noAppsDesc": "Installez des applis sur votre appareil avant d'ajouter des comptes dans Ledger Live. Allez dans le Gestionnaire pour installer des applis.",
       "noAccountsTitle": "Vous n'avez aucun compte…",
       "noAccountsDesc": "Ajoutez des comptes à votre Portefeuille.",
       "buttons": {
@@ -1408,7 +1408,7 @@
     "lastOperations": "Last operations",
     "emptyState": {
       "title": "No crypto assets yet?",
-      "desc": "Make sure the <1><0>{{managerAppName}}</0></1> app is installed and start receiving.",
+      "desc": "Assurez-vous que l'appli <1><0>{{managerAppName}}</0></1> est installée et commencez à recevoir.",
       "descWithBuy": "Make sure the <1><0>{{managerAppName}}</0></1> app is installed so you can buy or receive <3><0>{{currencyTicker}}</0></3>",
       "descToken": "Make sure the <1><0>{{managerAppName}}</0></1> app is installed and start receiving <3><0>{{currencyTicker}}</0></3> and <5><0>{{tokenType}}</0> tokens</5>",
       "buttons": {
@@ -1597,7 +1597,7 @@
       "reportErrors": "Bug reports",
       "reportErrorsDesc": "Automatically send reports to help Ledger improve its products.",
       "developerMode": "Developer mode",
-      "developerModeDesc": "Show developer apps in the Manager and enable Testnet apps.",
+      "developerModeDesc": "Afficher les applis développeur dans le Gestionnaire et autoriser les applis Testnet.",
       "analytics": "Analytics",
       "analyticsDesc": "Enable analytics to help Ledger improve user experience.",
       "analyticsModal": {
@@ -2422,7 +2422,7 @@
         }
       },
       "genuineCheck": {
-        "title": "Enable Ledger Manager on your {{productName}}"
+        "title": "Activez le Gestionnaire Ledger sur votre {{productName}}"
       },
       "genuineCheckPending": {
         "title": "Vérification de l'authenticité de l'appareil..."
@@ -2503,23 +2503,23 @@
     }
   },
   "manager": {
-    "tabTitle": "Device Manager",
-    "title": "Manager",
+    "tabTitle": "Gestionnaire de l'appareil",
+    "title": "Gestionnaire",
     "connect": "Select your device",
     "appsCatalog": "App catalog",
     "installedApps": "Installed apps",
     "noAppNeededForToken": "Install {{appName}} app for {{tokenName}}",
-    "tokenAppDisclaimer": "{{tokenName}} is an {{tokenType}} token using the {{appName}} app. To manage {{tokenName}}, <1>install the {{appName}} app</1> and send the tokens <3>to your {{appName}} account</3>.",
-    "tokenAppDisclaimerInstalled": "{{tokenName}} is an {{tokenType}} token using the {{appName}} app. To manage {{tokenName}}, <1>open the {{appName}} app</1> and send the tokens <3>to your {{appName}} account</3>.",
-    "goToAccounts": "Go to Accounts",
+    "tokenAppDisclaimer": "{{tokenName}} est un jeton {{tokenType}} qui utilise l'appli {{appName}}. Pour gérer {{tokenName}}, <1>installez l'appli {{appName}}</1> et envoyez les jetons <3>sur votre compte {{appName}}</3>.",
+    "tokenAppDisclaimerInstalled": "{{tokenName}} est un jeton {{tokenType}} qui utilise l'appli {{appName}}. Pour gérer {{tokenName}}, <1>ouvrez l'appli {{appName}}</1> et envoyez les jetons <3>sur votre compte {{appName}}</3>.",
+    "goToAccounts": "Accéder aux Comptes",
     "intallParentApp": "Install {{appName}} app",
     "readOnly": {
       "title": "Nano X",
       "description": "Configurez Ledger Live avec votre Ledger Nano X pour installer des applis, créer des comptes et effectuer des transactions sécurisées où que vous soyez.",
       "question": "Avez-vous votre Ledger Nano X ?",
-      "button": "Start Nano X setup",
+      "button": "Commencer à configurer mon Nano X",
       "noDevice": "No device?",
-      "buy": "Buy a Ledger Nano X"
+      "buy": "Achetez un Ledger Nano X"
     },
     "appList": {
       "title": "App catalog",
@@ -2528,7 +2528,7 @@
       "searchAppsCatalog": "Rechercher une appli dans le catalogue...",
       "searchAppsInstalled": "Search installed apps...",
       "noAppsInstalled": "No apps installed on your device",
-      "noAppsDescription": "Go to the App catalog to install apps",
+      "noAppsDescription": "Allez dans le catalogue pour installer des applis",
       "noResultsFound": "No results found",
       "noResultsDesc": "Please verify the spelling and try again",
       "versionNew": "(NEW{{newVersion}})"
@@ -2536,7 +2536,7 @@
     "uninstall": {
       "title": "Uninstall all",
       "subtitle": "Uninstall all apps?",
-      "description": "Uninstalling apps has no impact on your crypto assets. You can reinstall apps in the App catalog."
+      "description": "Désinstaller des applis n'a aucun impact sur vos crypto-actifs. Vous pouvez réinstaller vos applis depuis le catalogue d'applis."
     },
     "remove": {
       "title": "Remove device",
@@ -2552,9 +2552,9 @@
       "storageAvailable": "available"
     },
     "installSuccess": {
-      "title": "App installed successfully, you can now add your {{app}} accounts",
-      "title_plural": "Apps installed successfully, you can now add your accounts",
-      "notSupported": "App installed successfully, find out more about the installed apps on our website.",
+      "title": "Appli bien installée. Vous pouvez maintenant ajouter vos comptes {{app}}",
+      "title_plural": "Applis bien installées. Vous pouvez maintenant ajouter vos comptes {{app}}",
+      "notSupported": "Appli bien installée. Trouvez plus d'informations sur vos applis installées sur notre site Internet.",
       "manageAccount": "Add accounts",
       "learnMore": "Learn more",
       "later": "Do it later"
@@ -2592,7 +2592,7 @@
       "title": "{{number}} app update",
       "title_plural": "{{number}} app updates",
       "step": "Update step {{step}}:",
-      "updateWarn": "Do not quit the Manager during the update.",
+      "updateWarn": "Ne sortez pas du Gestionnaire pendant la mise à jour.",
       "progress": "Updating all...",
       "button": "Update all",
       "version": "New {{version}}",
@@ -2680,7 +2680,7 @@
   },
   "FirmwareUpdateConfirmation": {
     "title": "Firmware updated",
-    "description": "Go to Manager to reinstall apps on your device."
+    "description": "Accédez au Gestionnaire pour réinstaller des applis sur votre appareil."
   },
   "RepairDevice": {
     "title": "Repair",
@@ -3336,17 +3336,17 @@
   },
   "delegation": {
     "overdelegated": "Overdelegated",
-    "delegationSendWarnDesc": "The amount to be sent will be deducted from your delegated account.",
-    "delegationReceiveWarnDesc": "The amount received in a delegated account will be added to the total staked amount. Choose another account if you want to avoid this.",
+    "delegationSendWarnDesc": "Le montant à envoyer sera déduit de votre compte délégué.",
+    "delegationReceiveWarnDesc": "Le montant reçu sur un compte délégué sera ajouté au montant total qui est en staking. Choisissez un autre compte si vous voulez éviter cela.",
     "iDelegateMy": "I delegate my",
     "undelegateMy": "Undelegate my",
     "warnUndelegation": "Your account will be undelegated.",
-    "warnDelegation": "Delegating your voting rights does not guarantee any rewards from your validator.",
+    "warnDelegation": "Déléguer ses droits de vote ne garantit pas de recevoir des récompenses de son validateur.",
     "to": "to",
     "from": "from",
     "forAnEstYield": "for an est. yield of",
     "yieldPerYear": "{{yield}} / Year",
-    "yieldInfos": "Yield rates are provided by",
+    "yieldInfos": "Les taux de rendement sont fournis par",
     "termsAndPrivacy": "J'ai lu et j'accepte les <1>Conditions d'utilisation de Ledger Live</1> et la <3>Politique de confidentialité</3>.",
     "delegation": "Delegation",
     "viewDetails": "View details",
@@ -3366,11 +3366,11 @@
     "durationDays_plural": "{{count}} days",
     "selectValidatorTitle": "Select validator",
     "started": {
-      "title": "Earn rewards",
-      "description": "Delegate your Tezos account to a third-party validator to earn rewards securely, keeping control of your assets.",
+      "title": "Gagnez des récompenses",
+      "description": "Déléguez votre compte Tezos à un validateur tiers pour gagner des récompenses en toute sécurité tout en gardant le contrôle de vos actifs.",
       "steps": {
-        "0": "Delegated accounts remain yours.",
-        "1": "You can manage your assets at all times.",
+        "0": "Vous conservez la propriété de vos comptes délégués.",
+        "1": "Vous pouvez gérer vos actifs à tout moment.",
         "2": "Delegate securely with your Ledger device."
       },
       "cta": "Delegate to earn rewards"
@@ -3380,8 +3380,8 @@
       "undelegate": "Operation sent"
     },
     "broadcastSuccessDescription": {
-      "delegate": "Delegation transaction broadcasted successfully. You should earn your first rewards in around 40 days, depending on the validator.",
-      "undelegate": "Your account delegation will end when the operation is confirmed. You can delegate your account again at any time."
+      "delegate": "Transaction de délégation bien émise. En fonction du validateur, vous devriez recevoir vos premières récompenses sous 40 jours environ.",
+      "undelegate": "La délégation de votre compte se terminera une fois l'opération confirmée. Vous pouvez à nouveau déléguer votre compte à tout moment."
     },
     "summaryTitle": "Summary",
     "goToAccount": "Accéder aux Comptes",
@@ -3422,8 +3422,8 @@
     "votes": "Votes",
     "infoWording": {
       "freeze": "Les jetons gelés sont \"verrouillés\" pendant 3 jours.",
-      "unfreeze": "Your {{resource}} points will be reduced, and all your votes will be cancelled.",
-      "claimReward": "Rewards can be claimed every 24 hours.",
+      "unfreeze": "Vos points {{resource}} seront réduits et tous vos votes seront annulés.",
+      "claimReward": "Les récompenses peuvent être demandées toutes les 24 heures.",
       "cosmos": {
         "claimReward": "If the selected validator has pending rewards, they will automatically be claimed.",
         "redelegate": "You will have to wait 21 days for undelegated assets to return to the available balance.",
