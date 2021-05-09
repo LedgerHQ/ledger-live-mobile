@@ -270,20 +270,20 @@
       "description": "Something went wrong. Please try again. If the problem persists, please save your logs using the button below and provide them to Ledger Support."
     },
     "HardResetFail": {
-      "title": "Sorry, could not reset",
+      "title": "Échec de la réinitialisation",
       "description": "Please try again. If the problem persists, please save your logs using the button below and provide them to Ledger Support."
     },
     "InvalidAddress": {
       "title": "This is not a valid {{currencyName}} address"
     },
     "InvalidAddressBecauseDestinationIsAlsoSource": {
-      "title": "Destination and source accounts must not be the same."
+      "title": "Les comptes donneur d'ordre et bénéficiaire ne peuvent pas être identiques."
     },
     "InvalidRecipient": {
       "title": "Invalid recipient"
     },
     "LatestMCUInstalledError": {
-      "title": "Sorry, there's nothing to update",
+      "title": "Pas de mise à jour à effectuer",
       "description": "Please contact Ledger Support if you cannot use your device."
     },
     "LedgerAPIError": {
