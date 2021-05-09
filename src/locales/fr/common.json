@@ -212,7 +212,7 @@
       "title": "Veuillez choisir un nom d'appareil sans \"{{invalidCharacters}}\"."
     },
     "DeviceOnDashboardExpected": {
-      "title": "Device not on Dashboard",
+      "title": "Le Tableau de bord n'est pas affiché sur l'appareil",
       "description": "Please return to the Dashboard on your device."
     },
     "DeviceSocketFail": {
@@ -228,15 +228,15 @@
       "description": "Veuillez réessayer."
     },
     "DisconnectedDevice": {
-      "title": "Sorry, it looks like your device was disconnected",
+      "title": "Votre appareil semble avoir été déconnecté",
       "description": "Veuillez reconnecter l'appareil et réessayer."
     },
     "DisconnectedDeviceDuringOperation": {
-      "title": "Sorry, it looks like your device was disconnected",
+      "title": "Votre appareil semble avoir été déconnecté",
       "description": "Veuillez reconnecter l'appareil et réessayer."
     },
     "ETHAddressNonEIP": {
-      "title": "Auto-verification not available: carefully verify the address.",
+      "title": "Vérification automatique indisponible : vérifiez l'adresse attentivement.",
       "description": null
     },
     "EnpointConfig": {
