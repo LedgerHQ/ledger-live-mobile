@@ -253,7 +253,7 @@
     },
     "FeeEstimationFailed": {
       "title": "Sorry, fee estimation failed",
-      "description": "Try setting the fee manually (status: {{status}})."
+      "description": "Essayez de fixer les frais manuellement (statut : {{status}})."
     },
     "FeeNotLoaded": {
       "title": "Could not load fee rates"
@@ -440,7 +440,7 @@
     },
     "TronSendTrc20ToNewAccountForbidden": {
       "title": "L'envoi de TRC20 vers le nouveau compte ne l'activera pas",
-      "description": "To activate it, first send either TRX or TRC10 to the account. Then it can receive TRC20."
+      "description": "Pour l'activer, envoyez d'abord des TRX ou TRC10 sur le compte. Il pourra ensuite recevoir des TRC20."
     },
     "TronUnexpectedFees": {
       "title": "Des frais supplémentaires peuvent s'appliquer"
@@ -579,7 +579,7 @@
     "required": "Location services required",
     "open": "Open location settings",
     "disabled": "Ledger Live requires location services to pair your device through Bluethooth.",
-    "noInfos": "Ledger does not access your location information."
+    "noInfos": "Ledger n'accède pas à vos données de localisation."
   },
   "permissions": {
     "open": "Open app permissions"
@@ -595,7 +595,7 @@
   },
   "signout": {
     "confirm": "Are you sure you want to sign out?",
-    "disclaimer": "All account data will be removed from your phone.",
+    "disclaimer": "Toutes les données du compte seront supprimées de votre téléphone.",
     "action": "Sign me out"
   },
   "auth": {
@@ -603,7 +603,7 @@
       "biometrics": {
         "title": "{{biometricsType}} unlock failed",
         "description": "Enter your password to continue",
-        "authenticate": "Please authenticate with the Ledger Live app"
+        "authenticate": "Veuillez vous authentifier avec l'appli Ledger Live"
       },
       "denied": "Auth Security was not enabled because your phone failed to authenticate.",
       "title": "Authentication failed",
@@ -613,7 +613,7 @@
       }
     },
     "unlock": {
-      "biometricsTitle": "Please authenticate with the Ledger Live app",
+      "biometricsTitle": "Veuillez vous authentifier avec l'appli Ledger Live",
       "title": "Welcome back",
       "desc": "Enter your password to continue",
       "inputPlaceholder": "Type your password",
@@ -1126,11 +1126,11 @@
     },
     "stepWriteRecovery": {
       "step1": "Écrivez le <1><1>mot n°1</1></1> en position 1 sur une feuille de récupération vierge",
-      "step2": "Press the right button and continue to write down all 24 words.",
-      "step3": "Confirm each word of your recovery phrase: select it then confirm it by pressing both buttons together.",
+      "step2": "Appuyez sur le bouton droit et continuez à noter les 24 mots.",
+      "step3": "Confirmez chaque mot de votre phrase de récupération : sélectionnez-le puis confirmez en appuyant sur les deux boutons simultanément.",
       "modal": {
-        "step1": "Store your 24-word recovery phrase in a safe place, out of sight.",
-        "step2": "Make sure you are the only person to have the recovery phrase.",
+        "step1": "Conservez votre phrase de récupération de 24 mots en lieu sûr et à l'abri des regards.",
+        "step2": "Assurez-vous d'être bien la seule personne à avoir la phrase de récupération.",
         "step3": "Ledger ne sauvegarde pas votre phrase de récupération.",
         "step4": "N'utilisez jamais un appareil dont le code PIN ou phrase de récupération a déjà été configuré."
       }
@@ -1141,8 +1141,8 @@
       "setPassword": "Définir le mot de passe",
       "modal": {
         "step1": "Gardez votre mot de passe en sécurité. Ne le partagez pas.",
-        "step2": "Keep your password safe. Losing it means resetting Ledger Live and loading the accounts again.",
-        "step3": "Resetting Ledger Live has no impact on your crypto assets."
+        "step2": "Gardez votre mot de passe en sécurité. Si vous le perdrez, vous devrez réinitialiser Ledger Live et réinstaller vos comptes.",
+        "step3": "La réinitialisation de Ledger Live n'a aucun impact sur vos crypto-actifs."
       }
     },
     "stepFinish": {
@@ -1747,7 +1747,7 @@
       "titleDevice": "Connect device",
       "verifySkipped": "Your receive address was not confirmed on your Ledger device. Please verify your {{accountType}} address to stay secure.",
       "verifyPending": "Please verify that the {{currencyName}} address displayed on your device exactly matches the one displayed on your phone.",
-      "verified": "Address confirmed. Check again if you copied or scanned it.",
+      "verified": "Adresse confirmée. Si vous l'aviez copiée ou scannée, revérifiez .",
       "verifyAgain": "Revérifier",
       "noAccount": "No account found",
       "address": "Address for account",
@@ -2105,10 +2105,10 @@
       "description": "This transaction may take long to verify and sign because the account has a significant number of coins.",
       "title": "UTXO message"
     },
-    "highFeeModal": "Be careful, network fees are greater than <1>10%</1> of the amount. Do you want to continue?",
+    "highFeeModal": "Attention, les frais du réseau sont supérieurs à <1>10%</1> du montant. Voulez-vous continuer ?",
     "scan": {
       "title": "Scan QR code",
-      "descBottom": "Please center the QR code inside the square.",
+      "descBottom": "Veuillez placer le code QR au centre du carré.",
       "fallback": {
         "header": "Scan QR code",
         "title": "Enable camera",
@@ -2166,7 +2166,7 @@
       "sent": "Transaction sent",
       "amount": "Montant",
       "fees": "Frais",
-      "confirm": "Your account balance will be updated once the network confirms the transaction.",
+      "confirm": "Le solde de votre compte sera mis à jour une fois que le réseau aura confirmé la transaction.",
       "button": {
         "details": "Voir les détails",
         "retry": "Réessayer"
@@ -2202,7 +2202,7 @@
     "info": {
       "description": "Freeze TRX to earn rewards securely, keeping control of your assets.",
       "steps": {
-        "0": "Delegated assets remain yours.",
+        "0": "Vous conservez la propriété de vos actifs délégués.",
         "1": "You can unfreeze your assets after 3 days.",
         "2": "Freeze and vote securely with your Ledger device."
       },
@@ -2221,10 +2221,10 @@
       "info": "You will start earning {{resource}} once the network has confirmed the freeze. You can shortly vote for Super Representatives to also earn rewards.",
       "button": {
         "pending": "Transaction en cours de validation.",
-        "pendingDesc": "Please wait a moment before voting.",
+        "pendingDesc": "Veuillez patienter un instant avant de voter.",
         "vote": "Vote",
         "voteTimer": "0:{{time}}",
-        "later": "I will vote later",
+        "later": "Je voterai plus tard",
         "retry": "Retry"
       }
     }
@@ -2238,12 +2238,12 @@
       "stepRange": "Step {{currentStep}} of {{totalSteps}}"
     },
     "amount": {
-      "title": "Select the type of asset to unfreeze",
+      "title": "Sélectionnez le type d'actif à dégeler",
       "info": "Unfreezing will decrease your {{resource}} and will cancel all your votes.",
       "cta": "Continue"
     },
     "validation": {
-      "success": "Your assets were unfrozen successfully",
+      "success": "Vos actifs ont bien été débloqués",
       "info": "Your {{resource}} points will be decreased and all your votes will be canceled.",
       "button": {
         "done": "Done",
@@ -2258,7 +2258,7 @@
       "stepRange": "Step {{currentStep}} of {{totalSteps}}"
     },
     "validation": {
-      "success": "Your rewards were added to the available balance.",
+      "success": "Vos récompenses ont été ajoutées au solde disponible.",
       "button": {
         "done": "Done",
         "cta": "See details"
@@ -2276,7 +2276,7 @@
     "selectValidator": {},
     "castVotes": {
       "ranking": "Ranking: <0>{{rank}}</0>",
-      "nbOfVotes": "Number of votes {{amount}}",
+      "nbOfVotes": "Nombre de votes {{amount}}",
       "percentage": "Percentage",
       "estYield": "Est. yield",
       "addMoreVotes": "Add more votes",
@@ -2311,15 +2311,15 @@
         "title": "Add new account"
       },
       "imported": {
-        "title": "Accounts already in the Portfolio ({{length}})"
+        "title": "Comptes déjà présents dans le portefeuille ({{length}})"
       },
       "migrate": {
         "title": "Accounts to update"
       }
     },
     "success": {
-      "desc": "View your accounts or add other accounts",
-      "secondaryCTA": "Add other accounts",
+      "desc": "Voir ses comptes ou ajouter d'autres comptes",
+      "secondaryCTA": "Ajouter d'autres comptes",
       "cta": "Accéder aux Comptes"
     },
     "stopScanning": "Stop scanning",
@@ -2329,8 +2329,8 @@
     "finalCta": "Continue",
     "finalCtaForSwap": "Go back to Swap",
     "synchronizing": "Synchronizing",
-    "synchronizingDesc": "Your accounts are being synchronized. This can take a while...",
-    "noAccountToCreate": "Could not create <1><0>{{currencyName}}</></> account. Restart the process and sync your accounts.",
+    "synchronizingDesc": "Synchronisation de vos comptes en cours. Cela peut prendre quelques minutes...",
+    "noAccountToCreate": "Impossible de créer le compte <1><0>{{currencyName}}</></>. Recommencez et synchronisez vos comptes.",
     "cantCreateAccount": "A new account cannot be added before receiving assets on your <1><0>{{accountName}}</></> account.",
     "tokens": {
       "title": "Ajouter un jeton",
@@ -2444,14 +2444,14 @@
       },
       "receiveVerify": {
         "title": "Verify address on device",
-        "description": "Please verify that the {{currencyName}} address displayed in Ledger Live exactly matches the one displayed on your Ledger device.",
+        "description": "Veuillez vérifier que l'adresse {{currencyName}} affichée sur Ledger Live est identique à celle indiquée sur votre appareil Ledger.",
         "action": "Continue"
       },
       "getDeviceName": {
-        "title": "Press both buttons together to enable reading the device name."
+        "title": "Appuyez sur les deux boutons simultanément pour autoriser la lecture du nom de l'appareil."
       },
       "editDeviceName": {
-        "title": "Press both buttons together to enable setting the device name."
+        "title": "Appuyez sur les deux boutons simultanément pour autoriser la configuration du nom de l'appareil."
       },
       "listApps": {
         "title": "Loading..."
@@ -2466,20 +2466,20 @@
   "PairDevices": {
     "Paired": {
       "title": "Pairing successful",
-      "desc": "Your {{productName}} is ready to be used with Ledger Live.",
+      "desc": "Votre {{productName}} est prêt à être utilisé avec Ledger Live.",
       "action": "Continue"
     },
     "Pairing": {
-      "step1": "Validate if the code displayed on your phone exactly matches the one displayed on your {{productName}}.",
-      "step2": "Validate on your {{productName}} by pressing both buttons together."
+      "step1": "Validez si le code affiché sur votre téléphone est identique à celui qui apparaît sur votre {{productName}}.",
+      "step2": "Validez sur votre {{productName}} en appuyant sur les deux boutons simultanément."
     },
     "GenuineCheck": {
-      "title": "Device authentication check",
+      "title": "Échec du contrôle d'authenticité de l'appareil",
       "accept": "Please don't turn off your Nano X. Make sure you allow <1>Ledger Manager</1>."
     },
     "ScanningHeader": {
       "title": "Looking for devices",
-      "desc": "Please make sure your {{productName}} is unlocked and Bluetooth is enabled."
+      "desc": "Veuillez vous assurer que votre {{productName}} est déverrouillé et que le Bluetooth est activé."
     },
     "ScanningTimeout": {
       "title": "Aucun appareil n'a été trouvé",
@@ -2573,8 +2573,8 @@
     "install": {
       "loading": {
         "title": "Installing {{appName}}",
-        "desc": "Please wait for the {{appName}} app to be installed",
-        "button": "Installing...",
+        "desc": "Veuillez patienter pendant l'installation de l'appli {{appName}}",
+        "button": "Installation ...",
         "button_plural": "Installation... {{progressPercentage}}%"
       },
       "done": {
