@@ -262,7 +262,7 @@
       "title": "Fees are required"
     },
     "FirmwareOrAppUpdateRequired": {
-      "title": "Firmware or app update needed",
+      "title": "Mise à jour du micrologiciel ou de l'appli nécessaire",
       "description": "Veuillez utiliser le Gestionnaire pour désinstaller toutes les applis et vérifier si une mise à jour du micrologiciel est disponible avant de les réinstaller."
     },
     "GenuineCheckFailed": {
@@ -342,7 +342,7 @@
       "description": "Uninstall the Bitcoin or Ethereum app last."
     },
     "NetworkDown": {
-      "title": "Sorry, internet seems to be down",
+      "title": "Internet ne semble pas fonctionner",
       "description": "Please check your internet connection."
     },
     "NoAddressesFound": {
@@ -351,7 +351,7 @@
     },
     "NotEnoughBalance": {
       "title": "Solde insuffisant",
-      "description": "Please make sure the account has enough funds."
+      "description": "Veuillez vérifier que vous avez assez de fonds sur le compte."
     },
     "NotEnoughGas": {
       "title": "Insufficient ETH for network fee",
@@ -361,40 +361,40 @@
       "title": "Insufficient balance to delegate"
     },
     "NotEnoughBalanceInParentAccount": {
-      "title": "Insufficient balance in the parent account"
+      "title": "Solde du compte parent insuffisant"
     },
     "NotEnoughSpendableBalance": {
       "title": "Le solde ne peut pas être inférieur à {{minimumAmount}}"
     },
     "NotEnoughBalanceBecauseDestinationNotCreated": {
-      "title": "Minimum of {{minimalAmount}} needed to activate recipient address"
+      "title": "Un minimum de {{minimalAmount}} est nécessaire pour activer l'adresse du bénéficiaire"
     },
     "PairingFailed": {
       "title": "Pairing unsuccessful",
       "description": "Please try again or consult our Bluetooth troubleshooting article."
     },
     "PasswordIncorrect": {
-      "title": "Incorrect password",
+      "title": "Mot de passe incorrect",
       "description": "Veuillez réessayer."
     },
     "PasswordsDontMatch": {
-      "title": "Password does not match",
+      "title": "Mots de passe non identiques",
       "description": "Veuillez réessayer."
     },
     "SelectExchangesLoadError": {
       "title": "Unable to load",
-      "description": "Cannot load the exchanges."
+      "description": "Chargement des échanges impossible."
     },
     "SyncError": {
       "title": "Synchronization error",
       "description": "Some accounts could not be synchronized."
     },
     "TimeoutError": {
-      "title": "Sorry, server took too long to respond",
+      "title": "Le serveur a mis trop longtemps à répondre",
       "description": "Veuillez réessayer."
     },
     "TimeoutTagged": {
-      "title": "Sorry, server took too long to respond ({{tag}})",
+      "title": "Le serveur a mis trop longtemps à répondre ({{tag}})",
       "description": "Le délai d'attente est écoulé."
     },
     "TransactionRefusedOnDevice": {
@@ -426,24 +426,24 @@
     },
     "TronInvalidVoteCount": {
       "title": "Vote format is incorrect",
-      "description": "You can only vote using round numbers."
+      "description": "Vous ne pouvez voter qu'avec des nombres entiers."
     },
     "TronRewardNotAvailable": {
-      "title": "Rewards are not claimable yet",
-      "description": "Please wait 24 hours between claims."
+      "title": "Les récompenses ne peuvent pas encore être demandées",
+      "description": "Veuillez attendre 24 heures entre chaque demande."
     },
     "TronNoReward": {
-      "title": "There is no reward to be claimed"
+      "title": "Aucune récompense à demander"
     },
     "TronInvalidFreezeAmount": {
-      "title": "Amount to freeze cannot be smaller than 1"
+      "title": "Le montant à geler ne peut pas être inférieur à 1"
     },
     "TronSendTrc20ToNewAccountForbidden": {
-      "title": "Sending TRC20 to the new account will not activate it",
+      "title": "L'envoi de TRC20 vers le nouveau compte ne l'activera pas",
       "description": "To activate it, first send either TRX or TRC10 to the account. Then it can receive TRC20."
     },
     "TronUnexpectedFees": {
-      "title": "Additional fees may apply"
+      "title": "Des frais supplémentaires peuvent s'appliquer"
     },
     "TronNotEnoughTronPower": {
       "title": "Not enough votes available"
@@ -504,7 +504,7 @@
       "description": "This feature will be added at a later stage due to changes recently introduced by the Babylon update."
     },
     "RecommendUndelegation": {
-      "title": "Please undelegate the account before emptying it"
+      "title": "Veuillez interrompre la délégation du compte avant de le vider"
     },
     "RecommendSubAccountsToEmpty": {
       "title": "Please empty all subaccounts first"
@@ -570,10 +570,10 @@
     }
   },
   "bluetooth": {
-    "required": "Sorry, it looks like Bluetooth is disabled",
+    "required": "Le Bluetooth semble être désactivé",
     "locationRequiredTitle": "Location is required for Bluetooth LE",
     "locationRequiredMessage": "On Android location permission is required to list Bluetooth LE devices.",
-    "checkEnabled": "Please enable Bluetooth in your phone settings."
+    "checkEnabled": "Veuillez activer le Bluetooth dans les Paramètres de votre téléphone."
   },
   "location": {
     "required": "Location services required",
@@ -1148,7 +1148,7 @@
     "stepFinish": {
       "title": "Votre appareil est prêt !",
       "readOnlyTitle": "Et voilà !",
-      "desc": "Install apps on your device and manage your portfolio",
+      "desc": "Installez des applis sur votre appareil et gérez votre portefeuille",
       "cta": "Ouvrir Ledger Live"
     },
     "quizz": {
@@ -1200,7 +1200,7 @@
     },
     "warning": {
       "recoveryPhrase": {
-        "title": "Do not use a recovery phrase that you have not generated yourself.",
+        "title": "N'utilisez jamais une phrase de récupération que vous n'avez pas générée vous-même.",
         "desc": "Your Ledger hardware wallet’s pin code and recovery phrase should be initialized by you and only you. If you have received a device with a pre-existing seed word or an already initialized pin code do not use the product and contact our customer support.",
         "supportLink": "Contact customer support"
       }
@@ -1228,7 +1228,7 @@
       "title": "Unsynchronized balance",
       "desc": "Some transactions are not confirmed yet. These will be reflected in your balance and useable after being confirmed."
     },
-    "summary": "Here is the summary of your account",
+    "summary": "Voici le récapitulatif de votre compte",
     "summary_plural": "Your {{count}} accounts are synchronized.",
     "emptyState": {
       "noAppsTitle": "Install an app on my device",
@@ -1243,12 +1243,12 @@
     },
     "noOpState": {
       "title": "Pas encore d'opérations ?",
-      "desc": "Simply send crypto assets to your receiving address and wait for the app to sync."
+      "desc": "Il vous suffit d'envoyer des crypto-actifs à votre adresse bénéficiaire et d'attendre que l'appli se synchronise."
     }
   },
   "addAccountsModal": {
     "ctaAdd": "Ajouter des comptes",
-    "ctaImport": "Import Desktop accounts"
+    "ctaImport": "Importer les comptes de l'ordinateur"
   },
   "byteSize": {
     "bytes": "{{size}} bytes",
@@ -1306,7 +1306,7 @@
     }
   },
   "operationDetails": {
-    "title": "Operation details",
+    "title": "Détails de l'opération",
     "account": "Compte",
     "date": "Date",
     "confirmed": "Confirmed",
@@ -1337,7 +1337,7 @@
       "unfreezeAmount": "Unfreeze amount",
       "address": "Address",
       "votes": "Votes ({{number}})",
-      "votesAddress": "<0>{{votes}}</0> to <2>{{name}}</2>",
+      "votesAddress": "<0>{{votes}}</0> pour <2>{{name}}</2>",
       "validators": "Validators",
       "delegated": "Delegated ({{amount}})",
       "delegatedTo": "Delegated to",
@@ -1396,7 +1396,7 @@
     },
     "subaccounts": {
       "seeMore": "See more subaccounts",
-      "seeLess": "See fewer subaccounts"
+      "seeLess": "Voir moins de sous-comptes"
     },
     "send": "Send",
     "receive": "Receive",
@@ -1443,14 +1443,14 @@
         "title": "Supprimer le compte du portefeuille",
         "desc": "Les données enregistrées seront supprimées.",
         "confirmationTitle": "Êtes-vous sûr(e) ?",
-        "confirmationDesc": "This has no impact on your crypto assets. Existing accounts can always be added afterwards."
+        "confirmationDesc": "Cela n'a aucun impact sur vos crypto-actifs. Les comptes existants pourront toujours être à nouveau ajoutés."
       },
       "archive": {
-        "title": "Archive account",
-        "desc": "This account will be archived."
+        "title": "Archiver le compte",
+        "desc": "Ce compte sera archivé."
       },
       "advanced": {
-        "title": "Advanced logs",
+        "title": "Logs détaillés",
         "desc": ""
       }
     },
@@ -1458,7 +1458,7 @@
       "scan": {
         "title": "Scan LiveQR code",
         "descTop": {
-          "line1": "In Ledger Live Desktop, go to",
+          "line1": "Dans Ledger Live ordinateur, accédez à",
           "line2": "Settings > Accounts > Export accounts > Export"
         },
         "descBottom": "Please put the LiveQR code within the square."
@@ -1508,7 +1508,7 @@
   "accounts": {
     "title": "Accounts",
     "importNotification": {
-      "message": "Your accounts were imported successfully!"
+      "message": "Vos comptes ont bien été importés !"
     },
     "row": {
       "syncPending": "Synchronizing...",
@@ -1613,16 +1613,16 @@
         "bullet7": "Overall and page session duration",
         "bullet8": "Ledger device type and firmware"
       },
-      "technicalData": "Technical data",
+      "technicalData": "Données techniques",
       "technicalDataDesc": "Ledger will automatically collect anonymized technical data to improve user experience.",
       "technicalDataModal": {
-        "title": "Technical data",
+        "title": "Données techniques",
         "desc": "Ledger will automatically collect anonymized technical data to improve user experience.",
         "bullet1": "Anonymous unique application ID",
         "bullet2": "Ledger Live version, OS region, language and region"
       },
       "hideEmptyTokenAccounts": "Hide empty token accounts",
-      "hideEmptyTokenAccountsDesc": "Hide empty token accounts on the Accounts page."
+      "hideEmptyTokenAccountsDesc": "Cacher les comptes de jetons vides sur la page Comptes."
     },
     "currencies": {
       "header": "Devises",
@@ -1670,9 +1670,9 @@
     "help": {
       "title": "Help",
       "header": "Help",
-      "desc": "Learn more about Ledger Live or how to get help.",
+      "desc": "En savoir plus sur Ledger Live ou obtenir de l'aide.",
       "support": "Ledger Support",
-      "supportDesc": "If you have a problem, get help using Ledger Live with your hardware wallet.",
+      "supportDesc": "Si vous avez un problème, obtenez de l'aide pour utiliser Ledger Live avec votre wallet physique.",
       "configureDevice": "Set up a device",
       "configureDeviceDesc": "Set up as a new device or restore an existing device. Accounts and settings are preserved.",
       "clearCache": "Vider le cache",
@@ -2134,7 +2134,7 @@
     "amount": {
       "available": "Total available",
       "useMax": "Use max",
-      "loadingNetwork": "Loading network fees...",
+      "loadingNetwork": "Chargement des frais de réseau...",
       "noRateProvider": "Indisponible"
     },
     "summary": {
@@ -2145,7 +2145,7 @@
       "amount": "Montant",
       "from": "From",
       "to": "To",
-      "infoTotalTitle": "Total debit",
+      "infoTotalTitle": "Total débit",
       "infoTotalDesc": "Includes transaction amount and the selected network fees",
       "gasLimit": "Limite de gaz",
       "gasPrice": "Gas price",
@@ -2162,7 +2162,7 @@
       "validateMemo": "Validate memo"
     },
     "validation": {
-      "message": "On your device, confirm the transaction to sign it securely.",
+      "message": "Confirmez la transaction sur votre appareil pour la signer en toute sécurité.",
       "sent": "Transaction sent",
       "amount": "Montant",
       "fees": "Frais",
@@ -3017,11 +3017,11 @@
       "flow": {
         "steps": {
           "starter": {
-            "title": "Earn rewards",
-            "description": "Delegate TRX to a third party candidate to earn rewards. Click on continue to freeze assets and vote.",
+            "title": "Gagner des récompenses",
+            "description": "Déléguez des TRX à un candidat tiers pour gagner des récompenses. Cliquez sur Continuer pour geler les actifs et voter.",
             "bullet": {
-              "delegate": "Delegated assets remain yours.",
-              "access": "You can access your assets 3 days after freezing.",
+              "delegate": "Vous conservez la propriété de vos actifs délégués.",
+              "access": "Vous pouvez accéder à vos actifs 3 jours après les avoir gelés.",
               "ledger": "Delegate securely with your Ledger device."
             },
             "button": {
@@ -3049,11 +3049,11 @@
     "info": {
       "available": {
         "title": "TRX available",
-        "description": "This amount is disposable."
+        "description": "Ce montant est disponible."
       },
       "frozen": {
         "title": "Frozen",
-        "description": "Frozen assets are used for Tron voting. This is your total number of votes."
+        "description": "Les actifs gelés sont utilisés pour voter sur Tron. Cela représente votre nombre total de votes."
       },
       "bandwidth": {
         "title": "Bandwidth",
