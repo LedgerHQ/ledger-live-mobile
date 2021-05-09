@@ -213,7 +213,7 @@
     },
     "DeviceOnDashboardExpected": {
       "title": "Le Tableau de bord n'est pas affiché sur l'appareil",
-      "description": "Please return to the Dashboard on your device."
+      "description": "Veuillez retourner sur le Tableau de bord sur votre appareil."
     },
     "DeviceSocketFail": {
       "title": "Échec de la connexion",
@@ -449,7 +449,7 @@
       "title": "Not enough votes available"
     },
     "TronTransactionExpired": {
-      "title": "Transaction timeout expired",
+      "title": "Le délai d'attente de la transaction est écoulé",
       "description": "Les transactions doivent être signées sans les 30 secondes. Veuillez réessayer."
     },
     "TronNotEnoughEnergy": {
@@ -492,16 +492,16 @@
       "description": "Please check that your hardware wallet is set up with the recovery phrase or passphrase associated to the selected account."
     },
     "UnexpectedBootloader": {
-      "title": "Sorry, your device must not be in Bootloader mode",
+      "title": "Votre appareil ne doit pas être en mode Bootloader",
       "description": "Please restart your device without touching the buttons when the logo appears. Please try again. If the problem persists, please save your logs using the button below and provide them to Ledger Support."
     },
     "UnavailableTezosOriginatedAccountReceive": {
-      "title": "Cannot receive in subaccounts. Please select the parent account.",
+      "title": "Impossible de recevoir sur les sous-comptes. Veuillez sélectionner le compte parent.",
       "description": "If you want to receive funds, please use the parent account"
     },
     "UnavailableTezosOriginatedAccountSend": {
       "title": "Cannot send from subaccounts yet",
-      "description": "This feature will be added at a later stage due to changes recently introduced by the Babylon update."
+      "description": "Cette fonctionnalité sera ajoutée ultérieurement en raison des changements récemment introduits par la mise à jour Babylon."
     },
     "RecommendUndelegation": {
       "title": "Veuillez interrompre la délégation du compte avant de le vider"
@@ -510,7 +510,7 @@
       "title": "Please empty all subaccounts first"
     },
     "NotSupportedLegacyAddress": {
-      "title": "The legacy address format is no longer supported"
+      "title": "Le format d'adresse legacy n'est plus pris en charge"
     },
     "StellarWrongMemoFormat": {
       "title": "Memo format is wrong"
@@ -634,7 +634,7 @@
     }
   },
   "reset": {
-    "description": "Please uninstall then reinstall the app on your phone to delete Ledger Live data, including accounts and settings.",
+    "description": "Veuillez désinstaller puis réinstaller l'appli sur votre téléphone pour supprimer les données de Ledger Live, y compris de comptes et paramètres.",
     "button": "Reset"
   },
   "graph": {
@@ -960,8 +960,8 @@
     },
     "stepRecoveryPhrase": {
       "importRecoveryPhrase": {
-        "title": "Restaurer à partir de sa phrase de récupération",
-        "desc": "Restaurer votre Nano à partir de votre phrase de récupération afin de restaurer, remplacer ou sauvegarder votre wallet physique Ledger.",
+        "title": "Restaurer à partir d'une phrase de récupération",
+        "desc": "Restaurez votre Nano à partir de votre phrase de récupération afin de restaurer, remplacer ou sauvegarder votre wallet physique Ledger.",
         "desc_1": "Votre Nano va restaurer vos clés privées et vous pourrez accéder à vos cryptos et les gérer.",
         "cta": "OK, je suis prêt(e) !",
         "warning": {
@@ -1112,35 +1112,35 @@
     "stepSetupPin": {
       "step1": "Allumez votre {{fullDeviceName}} et suivez les instructions.",
       "step1-nanoS": "Connectez votre {{fullDeviceName}} à votre téléphone en utilisant un câble OTG.",
-      "step2": "Press both buttons together to select <1><1>Setup as a new device.</1></1>",
-      "step2-restore": "Press both buttons together to select <1><1>Restore from recovery phrase.</1></1>",
+      "step2": "Appuyez sur les deux boutons simultanément pour choisir <1><1>Configurer comme un nouvel appareil.</1></1>",
+      "step2-restore": "Appuyez sur les deux boutons simultanément pour choisir <1><1>Restaurer à partir d'une phrase de récupération.</1></1>",
       "step3": "Appuyez sur le bouton gauche ou droit pour choisir un chiffre. Appuyez sur les deux boutons simultanément pour confirmer.",
       "step4prefix": "Sélectionner ",
       "step4suffix1": " pour confirmer votre code PIN.",
       "step4suffix2": " pour effacer le dernier chiffre.",
       "modal": {
-        "step1": "Always choose <1><1>your own</1></1> PIN",
+        "step1": "Choisissez toujours <1><1>votre propre</1></1> code PIN",
         "step2": "Utilisez 8 chiffres pour plus de sécurité",
-        "step3": "Never use a device with a PIN or recovery phrase already setup"
+        "step3": "N'utilisez jamais un appareil dont le code PIN ou phrase de récupération a déjà été configuré"
       }
     },
     "stepWriteRecovery": {
-      "step1": "Write <1><1>Word #1</1></1> in entry 1 on a blank Recovery sheet",
+      "step1": "Écrivez le <1><1>mot n°1</1></1> en position 1 sur une feuille de récupération vierge",
       "step2": "Press the right button and continue to write down all 24 words.",
       "step3": "Confirm each word of your recovery phrase: select it then confirm it by pressing both buttons together.",
       "modal": {
         "step1": "Store your 24-word recovery phrase in a safe place, out of sight.",
         "step2": "Make sure you are the only person to have the recovery phrase.",
-        "step3": "Ledger does not save your recovery phrase.",
-        "step4": "Never use a device with a recovery phrase or PIN already setup."
+        "step3": "Ledger ne sauvegarde pas votre phrase de récupération.",
+        "step4": "N'utilisez jamais un appareil dont le code PIN ou phrase de récupération a déjà été configuré."
       }
     },
     "stepPassword": {
-      "desc": "Set a password to protect Ledger Live data on your phone.",
-      "descConfigured": "Password lock enabled successfully",
-      "setPassword": "Set the password",
+      "desc": "Définissez un mot de passe pour protéger vos données Ledger Live sur votre téléphone.",
+      "descConfigured": "Verrouillage par mot de passe bien activé",
+      "setPassword": "Définir le mot de passe",
       "modal": {
-        "step1": "Keep your password safe. Do not share it.",
+        "step1": "Gardez votre mot de passe en sécurité. Ne le partagez pas.",
         "step2": "Keep your password safe. Losing it means resetting Ledger Live and loading the accounts again.",
         "step3": "Resetting Ledger Live has no impact on your crypto assets."
       }
@@ -1605,8 +1605,8 @@
         "desc": "Enable analytics to help Ledger improve user experience",
         "bullet0": "Clicks",
         "bullet1": "In-app page visits",
-        "bullet2": "Redirect to webpage",
-        "bullet3": "Actions: send, receive, lock, etc",
+        "bullet2": "Redirection vers une page Internet",
+        "bullet3": "Actions : envoyer, recevoir, verrouiller, etc.",
         "bullet4": "End of page scroll",
         "bullet5": "App (un)installation and version",
         "bullet6": "Number of accounts, currencies and operations",
@@ -1614,10 +1614,10 @@
         "bullet8": "Ledger device type and firmware"
       },
       "technicalData": "Données techniques",
-      "technicalDataDesc": "Ledger will automatically collect anonymized technical data to improve user experience.",
+      "technicalDataDesc": "Ledger recueillera automatiquement des données techniques anonymisées afin d'améliorer l’expérience utilisateur.",
       "technicalDataModal": {
         "title": "Données techniques",
-        "desc": "Ledger will automatically collect anonymized technical data to improve user experience.",
+        "desc": "Ledger recueillera automatiquement des données techniques anonymisées afin d'améliorer l’expérience utilisateur.",
         "bullet1": "Anonymous unique application ID",
         "bullet2": "Ledger Live version, OS region, language and region"
       },
@@ -1653,9 +1653,9 @@
       }
     },
     "about": {
-      "title": "About",
+      "title": "À propos",
       "desc": "App information, terms and conditions, and privacy policy.",
-      "appDescription": "With Ledger Live, Secure, Buy, Sell, Exchange, Grow and Manage your crypto. All-in-one place.",
+      "appDescription": "Avec Ledger Live, sécurisez, achetez, vendez, échangez, faites fructifier et gérez vos cryptos. À un seul et même endroit.",
       "appVersion": "Version",
       "termsConditions": "Conditions d'utilisation",
       "termsConditionsDesc": "By using Ledger Live you are deemed to have accepted our terms and conditions.",
@@ -1674,14 +1674,14 @@
       "support": "Ledger Support",
       "supportDesc": "Si vous avez un problème, obtenez de l'aide pour utiliser Ledger Live avec votre wallet physique.",
       "configureDevice": "Set up a device",
-      "configureDeviceDesc": "Set up as a new device or restore an existing device. Accounts and settings are preserved.",
+      "configureDeviceDesc": "Configurer comme un nouvel appareil ou restaurer un appareil existant. Les comptes et paramètres sont conservés.",
       "clearCache": "Vider le cache",
-      "clearCacheDesc": "The transactions on the network will be scanned and your accounts will be recalculated.",
+      "clearCacheDesc": "Les transactions sur le réseau seront analysées et vos comptes seront recalculés.",
       "clearCacheModal": "Are you sure?",
-      "clearCacheModalDesc": "A fresh and complete scan of transactions on the network will be done. Account histories will be rebuilt and balances will be recalculated.",
+      "clearCacheModalDesc": "Une nouvelle analyse complète des transactions sur le réseau sera effectuée. L'historique des comptes sera reconstruit et les soldes seront recalculés.",
       "clearCacheButton": "Clear",
       "exportLogs": "Export logs",
-      "exportLogsDesc": "Exporting Ledger Live logs may help troubleshooting.",
+      "exportLogsDesc": "L'exportation des logs de Ledger Live peut aider à résoudre les problèmes.",
       "hardReset": "Reset Ledger Live",
       "hardResetDesc": "This has no impact on your assets. Erases all data in Ledger Live, including account data, transaction histories and settings. Use your Ledger device to reload and manage your crypto assets on an empty Ledger Live.",
       "repairDevice": "Repair your Ledger device",
@@ -1748,7 +1748,7 @@
       "verifySkipped": "Your receive address was not confirmed on your Ledger device. Please verify your {{accountType}} address to stay secure.",
       "verifyPending": "Please verify that the {{currencyName}} address displayed on your device exactly matches the one displayed on your phone.",
       "verified": "Address confirmed. Check again if you copied or scanned it.",
-      "verifyAgain": "Check again",
+      "verifyAgain": "Revérifier",
       "noAccount": "No account found",
       "address": "Address for account",
       "copyAddress": "Copier l'adresse",
@@ -2575,7 +2575,7 @@
         "title": "Installing {{appName}}",
         "desc": "Please wait for the {{appName}} app to be installed",
         "button": "Installing...",
-        "button_plural": "Installing... {{progressPercentage}}%"
+        "button_plural": "Installation... {{progressPercentage}}%"
       },
       "done": {
         "title": "Successfully installed {{appName}} on your {{productName}}",
@@ -2612,7 +2612,7 @@
       "dependency": {
         "title": "Désinstaller {{app}} et ses applications associées ?",
         "showAll": "Show apps to uninstall",
-        "description": "Apps on your device that need the {{app}} app will be uninstalled too."
+        "description": "Les applis de votre appareil qui ont besoin de l'appli {{app}} seront également désinstallées."
       },
       "continueUninstall": "Uninstall {{app}} and other apps"
     },
@@ -2634,7 +2634,7 @@
     }
   },
   "AuthenticityRow": {
-    "title": "Authentication",
+    "title": "Authentification",
     "subtitle": "Genuine"
   },
   "RemoveRow": {
@@ -2647,13 +2647,13 @@
   "FirmwareUpdateRow": {
     "title": "Firmware version {{version}} available",
     "subtitle": "Please use Ledger Live Desktop to update",
-    "action": "Update"
+    "action": "Mettre à jour"
   },
   "FirmwareUpdate": {
     "title": "Update firmware",
     "Installing": {
       "title": "{{stepName}}...",
-      "subtitle": "If requested on your device, please enter your PIN to finish the process."
+      "subtitle": "Si demandé sur votre appareil, veuillez entrer votre code PIN pour finir le processus."
     },
     "steps": {
       "osu": "Installing OSU",
@@ -2665,18 +2665,18 @@
   },
   "FirmwareUpdateReleaseNotes": {
     "introTitle": "You are about to install <1><0>firmware version {{version}}.</0></1>",
-    "introDescription1": "Please note that all the apps on your device will be deleted. You can reinstall your apps after the firmware update.",
+    "introDescription1": "Veuillez noter que toutes les applis sur votre appareil seront supprimées. Vous pouvez réinstaller vos applis après la mise à jour du micrologiciel.",
     "introDescription2": "Cela n'a pas d'impact sur vos crypto-actifs.",
     "action": "Continue update"
   },
   "FirmwareUpdateCheckId": {
     "title": "Identifier",
-    "description": "Please press both buttons together on your {{fullDeviceName}} if it displays the same identifier:"
+    "description": "Veuillez appuyer sur les deux boutons simultanément sur votre {{fullDeviceName}} si le même identifiant apparaît :"
   },
   "FirmwareUpdateMCU": {
     "title": "Restart device",
     "desc1": "Déconnectez votre appareil de votre ordinateur.",
-    "desc2": "Press and hold the left button, connect the USB cable then release the button when the Bootloader screen appears."
+    "desc2": "Maintenez le bouton gauche enfoncé, connectez le câble USB puis relâchez le bouton lorsque l'écran du Bootloader apparaît."
   },
   "FirmwareUpdateConfirmation": {
     "title": "Firmware updated",
@@ -2687,7 +2687,7 @@
     "action": "My device is ready"
   },
   "StepLegacyModal": {
-    "description": "Imported accounts synchronize with the network only, not between Mobile and Desktop versions of Ledger Live."
+    "description": "Les comptes importés se synchronisent uniquement avec le réseau, pas entre les versions Mobile et ordinateur de Ledger Live."
   },
   "algorand": {
     "token": "ASA (Assets)",
@@ -2965,7 +2965,7 @@
   },
   "tezos": {
     "AccountHeader": {
-      "title": "You can earn rewards by delegating your account",
+      "title": "Vous pouvez gagner des récompenses de staking en déléguant votre compte",
       "btn": "Earn rewards"
     }
   },
@@ -2981,7 +2981,7 @@
       "noRewards": "No rewards available",
       "votes": {
         "title": "Votes",
-        "description": "Cast your votes for one or more Representatives to start earning rewards.",
+        "description": "Votez pour un ou plusieurs représentants pour commencer à gagner des récompenses.",
         "cta": "Vote"
       },
       "rewards": {
@@ -2991,7 +2991,7 @@
       "manageVotes": "Manage votes",
       "remainingVotes": {
         "title": "You still have votes remaining",
-        "description": "Cast your remaining votes to earn more rewards."
+        "description": "Utilisez vos votes restants pour gagner encore plus de récompenses."
       },
       "flow": {
         "started": {
@@ -2999,14 +2999,14 @@
           "srOrCandidate": "SR or Candidate?",
           "description": "Vote for one or more Super Representatives to start earning rewards.",
           "button": {
-            "continue": "Cast votes"
+            "continue": "Voter"
           }
         },
         "selectValidator": {
           "sections": {
             "title": {
               "selected": "Selected",
-              "superRepresentatives": "Super Representatives",
+              "superRepresentatives": "Super-représentants",
               "candidates": "Candidates"
             }
           }
