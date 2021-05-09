@@ -303,7 +303,7 @@
       "description": "Please check the network status."
     },
     "ManagerAppAlreadyInstalled": {
-      "title": "Sorry, that's already installed",
+      "title": "Cette appli est déjà installée",
       "description": "Please check which apps are already installed on your device."
     },
     "ManagerAppRelyOnBTC": {
@@ -312,7 +312,7 @@
     },
     "ManagerDeviceLocked": {
       "title": "Votre appareil est verrouillé",
-      "description": "Please unlock it."
+      "description": "Veuillez le déverrouiller."
     },
     "ManagerNotEnoughSpace": {
       "title": "Not enough storage left",
@@ -321,24 +321,24 @@
     },
     "ManagerQuitPage": {
       "install": {
-        "title": "App installation in progress",
+        "title": "Installation de l'appli en cours",
         "description": "Quitting the Manager will terminate installation.",
-        "stay": "Continue installation"
+        "stay": "Poursuivre l'installation"
       },
       "uninstall": {
-        "title": "App uninstall in progress",
+        "title": "Désinstallation de l'appli en cours",
         "description": "Quitting the Manager will terminate uninstallation.",
         "stay": "Poursuivre la désinstallation"
       },
       "update": {
-        "title": "App update in progress",
+        "title": "Mise à jour de l'appli en cours",
         "description": "Quitting the Manager will terminate update.",
-        "stay": "Continue update"
+        "stay": "Continuer la mise à jour"
       },
       "quit": "Quit Manager"
     },
     "ManagerUninstallBTCDep": {
-      "title": "Sorry, this app is needed",
+      "title": "Cette application est nécessaire",
       "description": "Uninstall the Bitcoin or Ethereum app last."
     },
     "NetworkDown": {
@@ -346,7 +346,7 @@
       "description": "Please check your internet connection."
     },
     "NoAddressesFound": {
-      "title": "Sorry, no account was found",
+      "title": "Aucun compte trouvé",
       "description": "Something went wrong with the address calculation. Please try again. If the problem persists, please save your logs using the button below and provide them to Ledger Support."
     },
     "NotEnoughBalance": {
@@ -456,7 +456,7 @@
       "title": "Not enough Energy to send this token"
     },
     "UpdateYourApp": {
-      "title": "App update needed",
+      "title": "Mise à jour de l'appli nécessaire",
       "description": "Please uninstall then reinstall the {{managerAppName}} app in the Manager."
     },
     "UserRefusedAllowManager": {
@@ -472,12 +472,12 @@
       "description": "Vous avez annulé l'attribution du nouveau nom. Veuillez réessayer."
     },
     "UserRefusedFirmwareUpdate": {
-      "title": "Firmware update canceled on device",
+      "title": "Mise à jour du micrologiciel annulée sur l'appareil",
       "description": "You canceled the firmware update. Please try again. If the problem persists, please save your logs using the button below and provide them to Ledger Support."
     },
     "UserRefusedOnDevice": {
-      "title": "Operation canceled on device",
-      "description": "You rejected the operation on the device."
+      "title": "Opération annulée sur l'appareil",
+      "description": "Vous avez refusé l'opération sur votre appareil."
     },
     "WebsocketConnectionError": {
       "title": "Sorry, connection failed",
@@ -704,8 +704,8 @@
       "buy": "Achetez un {{fullDeviceName}}"
     },
     "stepLanguage": {
-      "title": "Select your language",
-      "cta": "Continue",
+      "title": "Choisir la langue",
+      "cta": "Continuer",
       "warning": {
         "title": "Commencer en anglais",
         "cta": "J'ai compris !",
@@ -1008,7 +1008,7 @@
           },
           "1": {
             "title": "Sélectionner la longueur de sa phrase de récupération",
-            "label": "Your recovery phrase can have 12, 18 or 24 words. You must enter all words to access your crypto."
+            "label": "Votre phrase de récupération peut comporter 12, 18 ou 24 mots. Vous devez entrer tous les mots pour accéder à vos cryptos."
           },
           "2": {
             "title": "Saisir le mot n°1...",
@@ -1114,13 +1114,13 @@
       "step1-nanoS": "Connectez votre {{fullDeviceName}} à votre téléphone en utilisant un câble OTG.",
       "step2": "Press both buttons together to select <1><1>Setup as a new device.</1></1>",
       "step2-restore": "Press both buttons together to select <1><1>Restore from recovery phrase.</1></1>",
-      "step3": "Press left or right button to select a digit. Press buttons together to confirm.",
+      "step3": "Appuyez sur le bouton gauche ou droit pour choisir un chiffre. Appuyez sur les deux boutons simultanément pour confirmer.",
       "step4prefix": "Sélectionner ",
-      "step4suffix1": " to confirm your PIN.",
-      "step4suffix2": " to erase last digit.",
+      "step4suffix1": " pour confirmer votre code PIN.",
+      "step4suffix2": " pour effacer le dernier chiffre.",
       "modal": {
         "step1": "Always choose <1><1>your own</1></1> PIN",
-        "step2": "Use 8 digits for greater security",
+        "step2": "Utilisez 8 chiffres pour plus de sécurité",
         "step3": "Never use a device with a PIN or recovery phrase already setup"
       }
     },
@@ -1217,12 +1217,12 @@
   "portfolio": {
     "totalBalance": "Total balance",
     "syncError": "Sync error",
-    "syncFailed": "Synchronization failed",
-    "syncPending": "Synchronizing...",
+    "syncFailed": "Échec de la synchronisation",
+    "syncPending": "Synchronisation...",
     "greeting": {
-      "morning": "Good morning",
-      "evening": "Good evening",
-      "afternoon": "Good afternoon"
+      "morning": "Bonjour",
+      "evening": "Bonsoir",
+      "afternoon": "Bonjour"
     },
     "transactionsPendingConfirmation": {
       "title": "Unsynchronized balance",
@@ -1233,8 +1233,8 @@
     "emptyState": {
       "noAppsTitle": "Install an app on my device",
       "noAppsDesc": "Install apps on your device before adding accounts in Ledger Live. Go to the Manager to install apps.",
-      "noAccountsTitle": "You don't have any accounts…",
-      "noAccountsDesc": "Please add accounts to your Portfolio.",
+      "noAccountsTitle": "Vous n'avez aucun compte…",
+      "noAccountsDesc": "Ajoutez des comptes à votre Portefeuille.",
       "buttons": {
         "import": "Add account",
         "manager": "Install apps",
@@ -1242,12 +1242,12 @@
       }
     },
     "noOpState": {
-      "title": "No operations yet?",
+      "title": "Pas encore d'opérations ?",
       "desc": "Simply send crypto assets to your receiving address and wait for the app to sync."
     }
   },
   "addAccountsModal": {
-    "ctaAdd": "Add accounts",
+    "ctaAdd": "Ajouter des comptes",
     "ctaImport": "Import Desktop accounts"
   },
   "byteSize": {
@@ -1307,15 +1307,15 @@
   },
   "operationDetails": {
     "title": "Operation details",
-    "account": "Account",
+    "account": "Compte",
     "date": "Date",
     "confirmed": "Confirmed",
     "notConfirmed": "Not confirmed",
     "failed": "Failed",
     "fees": "Network fees",
-    "noFees": "No fee",
-    "from": "From ({{count}})",
-    "to": "To ({{count}})",
+    "noFees": "Aucun frais",
+    "from": "De ({{count}})",
+    "to": "À ({{count}})",
     "identifier": "Transaction ID",
     "viewOperation": "View in explorer",
     "whatIsThis": "What is this operation?",
@@ -1365,7 +1365,7 @@
   },
   "operationList": {
     "noOperations": "No Operations",
-    "noMoreOperations": "No other Operations"
+    "noMoreOperations": "Aucune autre opération"
   },
   "selectableAccountsList": {
     "deselectAll": "Deselect all",
@@ -1379,10 +1379,10 @@
     "tokens": {
       "contractAddress": "Contract address",
       "viewInExplorer": "View in explorer",
-      "seeMore": "Display more Tokens",
-      "seeLess": "Display fewer Tokens",
+      "seeMore": "Afficher plus de jetons",
+      "seeLess": "Afficher moins de jetons",
       "addTokens": "Add token",
-      "howTo": "To add token accounts, you need to <0>receive funds</0> using your <1>{{currency}} address</1>.",
+      "howTo": "Pour ajouter des comptes de jetons, vous devez <0>recevoir des fonds</0> avec votre <1>adresse {{currency}}</1>.",
       "algorand": {
         "contractAddress": "Contract address",
         "viewInExplorer": "View in explorer",
@@ -1417,13 +1417,13 @@
       }
     },
     "settings": {
-      "header": "Account settings",
+      "header": "Paramètres du compte",
       "title": "Edit account",
       "advancedLogs": "Advanced logs",
       "accountName": {
         "title": "Account name",
-        "desc": "Description of the account",
-        "placeholder": "Account name"
+        "desc": "Description du compte",
+        "placeholder": "Nom du compte"
       },
       "accountUnits": {
         "title": "Edit units"
@@ -1440,9 +1440,9 @@
         "desc": "The API node to use"
       },
       "delete": {
-        "title": "Remove account from the Portfolio",
-        "desc": "Stored data will be removed.",
-        "confirmationTitle": "Are you sure?",
+        "title": "Supprimer le compte du portefeuille",
+        "desc": "Les données enregistrées seront supprimées.",
+        "confirmationTitle": "Êtes-vous sûr(e) ?",
         "confirmationDesc": "This has no impact on your crypto assets. Existing accounts can always be added afterwards."
       },
       "archive": {
@@ -1464,12 +1464,12 @@
         "descBottom": "Please put the LiveQR code within the square."
       },
       "result": {
-        "title": "Import accounts",
-        "newAccounts": "New accounts",
-        "updatedAccounts": "Updated accounts",
-        "empty": "Add a new account",
-        "descEmpty": "<0><0>No accounts</0></0> were found. Please try again or go back to Setup",
-        "alreadyImported": "Already imported",
+        "title": "Importer des comptes",
+        "newAccounts": "Nouveaux comptes",
+        "updatedAccounts": "Comptes mis à jour",
+        "empty": "Ajouter un nouveau compte",
+        "descEmpty": "<0><0>Aucun compte</0></0> trouvé. Veuillez réessayer ou retourner à la configuration",
+        "alreadyImported": "Déjà importé",
         "noAccounts": "Nothing to import",
         "unsupported": "Unsupported",
         "settings": "App settings",
@@ -1482,7 +1482,7 @@
         "buttonTitle": "Go to Settings"
       }
     },
-    "availableBalance": "Available balance",
+    "availableBalance": "Solde disponible",
     "totalSupplied": "Amount deposited",
     "tronFrozen": "Frozen",
     "bandwidth": "Bandwidth",
@@ -1534,7 +1534,7 @@
   "distribution": {
     "header": "Asset allocation",
     "list": "Asset allocation ({{count}})",
-    "assets": "asset",
+    "assets": "actif",
     "assets_plural": "assets",
     "total": "Total balance:",
     "listAccount": "Account allocation ({{count}})"
@@ -1625,7 +1625,7 @@
       "hideEmptyTokenAccountsDesc": "Hide empty token accounts on the Accounts page."
     },
     "currencies": {
-      "header": "Currencies",
+      "header": "Devises",
       "rateProvider": "Rate Provider ({{currencyTicker}}→BTC)",
       "rateProviderDesc": "Choose the provider of the rate between {{currencyTicker}} and Bitcoin.",
       "confirmationNb": "Number of confirmations",
@@ -1657,12 +1657,12 @@
       "desc": "App information, terms and conditions, and privacy policy.",
       "appDescription": "With Ledger Live, Secure, Buy, Sell, Exchange, Grow and Manage your crypto. All-in-one place.",
       "appVersion": "Version",
-      "termsConditions": "Terms and conditions",
+      "termsConditions": "Conditions d'utilisation",
       "termsConditionsDesc": "By using Ledger Live you are deemed to have accepted our terms and conditions.",
-      "privacyPolicy": "Privacy policy",
-      "privacyPolicyDesc": "See what personal data are collected, why and how they are used.",
+      "privacyPolicy": "Politique de confidentialité",
+      "privacyPolicyDesc": "Découvrez les données personnelles que nous collectons, à quelles fins et comment nous les utilisons.",
       "liveReview": {
-        "title": "Rate the app!",
+        "title": "Notez l'appli !",
         "ios": "Review in the App Store",
         "android": "Review in the Google Play store"
       }
@@ -2118,7 +2118,7 @@
     },
     "stepperHeader": {
       "selectAccount": "Account to debit",
-      "recipientAddress": "Recipient address",
+      "recipientAddress": "Adresse du bénéficiaire",
       "selectAmount": "Amount",
       "summary": "Summary",
       "selectDevice": "Select device",
@@ -2164,17 +2164,17 @@
     "validation": {
       "message": "On your device, confirm the transaction to sign it securely.",
       "sent": "Transaction sent",
-      "amount": "Amount",
-      "fees": "Fees",
+      "amount": "Montant",
+      "fees": "Frais",
       "confirm": "Your account balance will be updated once the network confirms the transaction.",
       "button": {
-        "details": "View details",
-        "retry": "Retry"
+        "details": "Voir les détails",
+        "retry": "Réessayer"
       }
     },
     "fees": {
       "title": "Network fees",
-      "validate": "Confirm",
+      "validate": "Confirmer",
       "required": "Fees are required",
       "chooseGas": "Choose a gas price",
       "higherFaster": "Higher gas price means a faster confirmation.",
@@ -2196,7 +2196,7 @@
       "selectAmount": "Freeze",
       "summary": "Summary",
       "selectDevice": "Select device",
-      "connectDevice": "Connect device",
+      "connectDevice": "Connecter l'appareil",
       "stepRange": "Step {{currentStep}} of {{totalSteps}}"
     },
     "info": {
