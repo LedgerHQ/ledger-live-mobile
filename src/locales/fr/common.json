@@ -103,7 +103,7 @@
       "description": "Please open the {{managerAppName}} app on your device."
     },
     "CantOpenDevice": {
-      "title": "Sorry, connection failed",
+      "title": "Échec de la connexion",
       "description": "Your Ledger device must be unlocked and in range to use Bluetooth."
     },
     "CantScanQRCode": {
@@ -194,7 +194,7 @@
     },
     "DeviceAppVerifyNotSupported": {
       "title": "Open Manager to update this app",
-      "description": "The app verification is not supported."
+      "description": "Vérification de l'appli non prise en charge."
     },
     "DeviceGenuineSocketEarlyClose": {
       "title": "Sorry, try again (genuine-close)",
@@ -202,21 +202,21 @@
     },
     "DeviceHalted": {
       "title": "Please restart your Ledger device and retry",
-      "description": "An unexpected error occurred. Please try again."
+      "description": "Une erreur inattendue s'est produite. Veuillez réessayer."
     },
     "DeviceNotGenuine": {
-      "title": "Device possibly not genuine",
+      "title": "L'appareil peut ne pas être authentique",
       "description": "Please save your logs using the button below and provide them to Ledger Support."
     },
     "DeviceNameInvalid": {
-      "title": "Please name the device without '{{invalidCharacters}}'."
+      "title": "Veuillez choisir un nom d'appareil sans \"{{invalidCharacters}}\"."
     },
     "DeviceOnDashboardExpected": {
       "title": "Device not on Dashboard",
       "description": "Please return to the Dashboard on your device."
     },
     "DeviceSocketFail": {
-      "title": "Sorry, connection failed",
+      "title": "Échec de la connexion",
       "description": "Veuillez réessayer."
     },
     "DeviceSocketNoBulkStatus": {
@@ -224,16 +224,16 @@
       "description": "Veuillez réessayer."
     },
     "DeviceSocketNoHandler": {
-      "title": "Sorry, connection failed",
+      "title": "Échec de la connexion",
       "description": "Veuillez réessayer."
     },
     "DisconnectedDevice": {
       "title": "Sorry, it looks like your device was disconnected",
-      "description": "Please reconnect and try again."
+      "description": "Veuillez reconnecter l'appareil et réessayer."
     },
     "DisconnectedDeviceDuringOperation": {
       "title": "Sorry, it looks like your device was disconnected",
-      "description": "Please reconnect and try again."
+      "description": "Veuillez reconnecter l'appareil et réessayer."
     },
     "ETHAddressNonEIP": {
       "title": "Auto-verification not available: carefully verify the address.",
@@ -328,7 +328,7 @@
       "uninstall": {
         "title": "App uninstall in progress",
         "description": "Quitting the Manager will terminate uninstallation.",
-        "stay": "Continue uninstallation"
+        "stay": "Poursuivre la désinstallation"
       },
       "update": {
         "title": "App update in progress",
@@ -375,11 +375,11 @@
     },
     "PasswordIncorrect": {
       "title": "Incorrect password",
-      "description": "Please try again."
+      "description": "Veuillez réessayer."
     },
     "PasswordsDontMatch": {
       "title": "Password does not match",
-      "description": "Please try again."
+      "description": "Veuillez réessayer."
     },
     "SelectExchangesLoadError": {
       "title": "Unable to load",
@@ -391,11 +391,11 @@
     },
     "TimeoutError": {
       "title": "Sorry, server took too long to respond",
-      "description": "Please try again."
+      "description": "Veuillez réessayer."
     },
     "TimeoutTagged": {
       "title": "Sorry, server took too long to respond ({{tag}})",
-      "description": "Timeout occurred."
+      "description": "Le délai d'attente est écoulé."
     },
     "TransactionRefusedOnDevice": {
       "title": "Transaction refused on device",
@@ -450,7 +450,7 @@
     },
     "TronTransactionExpired": {
       "title": "Transaction timeout expired",
-      "description": "Transactions must be signed within 30 seconds. Please try again."
+      "description": "Les transactions doivent être signées sans les 30 secondes. Veuillez réessayer."
     },
     "TronNotEnoughEnergy": {
       "title": "Not enough Energy to send this token"
@@ -469,7 +469,7 @@
     },
     "UserRefusedDeviceNameChange": {
       "title": "Rename canceled on device",
-      "description": "You canceled the rename. Please try again."
+      "description": "Vous avez annulé l'attribution du nouveau nom. Veuillez réessayer."
     },
     "UserRefusedFirmwareUpdate": {
       "title": "Firmware update canceled on device",
@@ -481,11 +481,11 @@
     },
     "WebsocketConnectionError": {
       "title": "Sorry, connection failed",
-      "description": "Please try again with a better network connection (websocket error)."
+      "description": "Veuillez réessayer avec une meilleure connexion réseau (erreur WebSocket)."
     },
     "WebsocketConnectionFailed": {
       "title": "Sorry, connection failed",
-      "description": "Please try again with a better network connection (websocket failed)."
+      "description": "Veuillez réessayer avec une meilleure connexion réseau (erreur WebSocket)."
     },
     "WrongDeviceForAccount": {
       "title": "Something went wrong",
@@ -1675,7 +1675,7 @@
       "supportDesc": "If you have a problem, get help using Ledger Live with your hardware wallet.",
       "configureDevice": "Set up a device",
       "configureDeviceDesc": "Set up as a new device or restore an existing device. Accounts and settings are preserved.",
-      "clearCache": "Clear cache",
+      "clearCache": "Vider le cache",
       "clearCacheDesc": "The transactions on the network will be scanned and your accounts will be recalculated.",
       "clearCacheModal": "Are you sure?",
       "clearCacheModalDesc": "A fresh and complete scan of transactions on the network will be done. Account histories will be rebuilt and balances will be recalculated.",
@@ -1751,22 +1751,22 @@
       "verifyAgain": "Check again",
       "noAccount": "No account found",
       "address": "Address for account",
-      "copyAddress": "Copy address",
-      "shareAddress": "Share address",
-      "addressCopied": "Address copied!",
+      "copyAddress": "Copier l'adresse",
+      "shareAddress": "Partager l'adresse",
+      "addressCopied": "Adresse copiée !",
       "notSynced": {
-        "text": "Synchronizing",
+        "text": "Synchronisation",
         "desc": "This may take a moment if you have many transactions or if you have a slow internet connection."
       },
       "readOnly": {
-        "title": "Receive",
+        "title": "Recevoir",
         "text": "Please be careful",
         "desc": "You are about to view an address which was not verified. Verify addresses on your device to stay secure.",
         "verify": "The address of {{accountType}} was not verified. Verify addresses on your device to stay secure."
       }
     },
     "exchange": {
-      "title": "Buy / Sell"
+      "title": "Achat / Vente"
     },
     "swap": {
       "title": "Swap",
@@ -2122,11 +2122,11 @@
       "selectAmount": "Amount",
       "summary": "Summary",
       "selectDevice": "Select device",
-      "connectDevice": "Connect device",
+      "connectDevice": "Connecter l'appareil",
       "stepRange": "Step {{currentStep}} of {{totalSteps}}"
     },
     "recipient": {
-      "scan": "Scan QR code",
+      "scan": "Scanner le code QR",
       "enterAddress": "Enter address",
       "input": "Enter address",
       "verifyAddress": "Please verify the address matches the one shared by the recipient."
@@ -2135,22 +2135,22 @@
       "available": "Total available",
       "useMax": "Use max",
       "loadingNetwork": "Loading network fees...",
-      "noRateProvider": "Not available"
+      "noRateProvider": "Indisponible"
     },
     "summary": {
       "subaccountsWarning": "You will need to refill this account with {{ currency }} in order to send the tokens of this account",
       "tag": "Tag (Optional)",
       "validateTag": "Validate tag",
       "total": "Total",
-      "amount": "Amount",
+      "amount": "Montant",
       "from": "From",
       "to": "To",
       "infoTotalTitle": "Total debit",
       "infoTotalDesc": "Includes transaction amount and the selected network fees",
-      "gasLimit": "Gas limit",
+      "gasLimit": "Limite de gaz",
       "gasPrice": "Gas price",
       "maxFees": "Max fees",
-      "validateGasLimit": "Validate gas limit",
+      "validateGasLimit": "Valider la limite de gaz",
       "fees": "Fees",
       "validateFees": "Validate Fees",
       "customizeFees": "Customize Fees",
@@ -2215,12 +2215,12 @@
       "infoLabel": "Bandwidth or Energy"
     },
     "validation": {
-      "message": "Always verify that your device displays the address exactly as it was originally given to you.",
+      "message": "Vérifiez toujours que l'adresse affichée sur votre appareil est identique à celle qui vous a été donnée.",
       "success": "Assets frozen",
       "amount": "Amount",
       "info": "You will start earning {{resource}} once the network has confirmed the freeze. You can shortly vote for Super Representatives to also earn rewards.",
       "button": {
-        "pending": "Transaction is being validated.",
+        "pending": "Transaction en cours de validation.",
         "pendingDesc": "Please wait a moment before voting.",
         "vote": "Vote",
         "voteTimer": "0:{{time}}",
@@ -2234,7 +2234,7 @@
       "selectAmount": "Unfreeze",
       "summary": "Summary",
       "selectDevice": "Select device",
-      "connectDevice": "Connect device",
+      "connectDevice": "Connecter l'appareil",
       "stepRange": "Step {{currentStep}} of {{totalSteps}}"
     },
     "amount": {
@@ -2254,7 +2254,7 @@
   "claimReward": {
     "stepperHeader": {
       "selectDevice": "Select device",
-      "connectDevice": "Connect device",
+      "connectDevice": "Connecter l'appareil",
       "stepRange": "Step {{currentStep}} of {{totalSteps}}"
     },
     "validation": {
@@ -2270,7 +2270,7 @@
       "selectValidator": "Cast votes",
       "castVote": "My votes",
       "selectDevice": "Select device",
-      "connectDevice": "Connect device",
+      "connectDevice": "Connecter l'appareil",
       "stepRange": "Step {{currentStep}} of {{totalSteps}}"
     },
     "selectValidator": {},
@@ -2288,7 +2288,7 @@
       "allVotesUsed": "All votes used"
     },
     "validation": {
-      "message": "Always verify that your device displays the address exactly as it was originally given to you.",
+      "message": "Vérifiez toujours que l'adresse affichée sur votre appareil est identique à celle qui vous a été donnée.",
       "success": "Your votes were cast successfully",
       "info": "",
       "button": {}
@@ -2300,9 +2300,9 @@
     },
     "quitConfirmation": {
       "title": "Cancel add account",
-      "desc": "Are you sure you want to cancel adding accounts?"
+      "desc": "Voulez-vous vraiment annuler l'ajout de comptes ?"
     },
-    "imported": "Accounts added successfully",
+    "imported": "Comptes bien ajoutés",
     "sections": {
       "importable": {
         "title": "Add existing account"
@@ -2320,7 +2320,7 @@
     "success": {
       "desc": "View your accounts or add other accounts",
       "secondaryCTA": "Add other accounts",
-      "cta": "Go to Accounts"
+      "cta": "Accéder aux Comptes"
     },
     "stopScanning": "Stop scanning",
     "retryScanning": "Retry scanning",
@@ -2333,21 +2333,21 @@
     "noAccountToCreate": "Could not create <1><0>{{currencyName}}</></> account. Restart the process and sync your accounts.",
     "cantCreateAccount": "A new account cannot be added before receiving assets on your <1><0>{{accountName}}</></> account.",
     "tokens": {
-      "title": "Add token",
+      "title": "Ajouter un jeton",
       "createParentCurrencyAccount": "Add {{parrentCurrencyName}} account",
       "erc20": {
-        "title": "Add token",
-        "disclaimer": "{{tokenName}} is an ERC20 Token.\nYou can receive tokens directly in an Ethereum account.",
+        "title": "Ajouter un jeton",
+        "disclaimer": "{{tokenName}} est un jeton ERC20.\nVous pouvez recevoir des jetons directement sur un compte Ethereum.",
         "learnMore": "Learn more about ERC20"
       },
       "trc10": {
         "title": "Add Token",
-        "disclaimer": "{{tokenName}} is a TRC10 Token.\nYou can receive tokens directly in a Tron account.",
+        "disclaimer": "{{tokenName}} est un jeton TRC10.\nVous pouvez recevoir des jetons directement sur un compte Tron.",
         "learnMore": "Learn more about TRC10"
       },
       "trc20": {
         "title": "Add Token",
-        "disclaimer": "{{tokenName}} is a TRC20 Token.\nYou can receive tokens directly in a Tron account.",
+        "disclaimer": "{{tokenName}} est un jeton TRC20.\nVous pouvez recevoir des jetons directement sur un compte Tron.",
         "learnMore": "Learn more about TRC20"
       }
     },
@@ -2425,10 +2425,10 @@
         "title": "Enable Ledger Manager on your {{productName}}"
       },
       "genuineCheckPending": {
-        "title": "Checking if the device is genuine..."
+        "title": "Vérification de l'authenticité de l'appareil..."
       },
       "dashboard": {
-        "title": "Return to the Dashboard on your {{productName}}"
+        "title": "Retournez sur le Tableau de bord de votre {{productName}}"
       },
       "currencyApp": {
         "title": "Open the {{managerAppName}} app on your {{productName}}",
@@ -2482,8 +2482,8 @@
       "desc": "Please make sure your {{productName}} is unlocked and Bluetooth is enabled."
     },
     "ScanningTimeout": {
-      "title": "Sorry, no device was found",
-      "desc": "Please make sure your {{productName}} is unlocked and Bluetooth is enabled."
+      "title": "Aucun appareil n'a été trouvé",
+      "desc": "Veuillez vous assurer que votre {{productName}} est déverrouillé et que le Bluetooth est activé."
     },
     "bypassGenuine": "Use anyway",
     "alreadyPaired": "Already paired"
@@ -2493,7 +2493,7 @@
     "genuineFailed": "Device authentication <1><0>failed</0></1>"
   },
   "DeviceNameRow": {
-    "title": "Name",
+    "title": "Nom",
     "action": "Get device name"
   },
   "RemoveDevice": {
@@ -2515,17 +2515,17 @@
     "intallParentApp": "Install {{appName}} app",
     "readOnly": {
       "title": "Nano X",
-      "description": "Setup Ledger Live with your Ledger Nano X to install apps, create accounts and make secure transactions wherever you go.",
-      "question": "Do you have your Ledger Nano X?",
+      "description": "Configurez Ledger Live avec votre Ledger Nano X pour installer des applis, créer des comptes et effectuer des transactions sécurisées où que vous soyez.",
+      "question": "Avez-vous votre Ledger Nano X ?",
       "button": "Start Nano X setup",
       "noDevice": "No device?",
       "buy": "Buy a Ledger Nano X"
     },
     "appList": {
       "title": "App catalog",
-      "loading": "Loading apps...",
+      "loading": "Chargement des applis...",
       "noApps": "No apps found",
-      "searchAppsCatalog": "Search app in catalogue...",
+      "searchAppsCatalog": "Rechercher une appli dans le catalogue...",
       "searchAppsInstalled": "Search installed apps...",
       "noAppsInstalled": "No apps installed on your device",
       "noAppsDescription": "Go to the App catalog to install apps",
@@ -2546,7 +2546,7 @@
     "storage": {
       "title": "Storage",
       "used": "Used",
-      "genuine": "Your device is genuine",
+      "genuine": "Votre appareil est authentique",
       "appsInstalled": "<0>{{number}}</0> app installed",
       "appsInstalled_plural": "<0>{{number}}</0> apps installed",
       "storageAvailable": "available"
@@ -2579,12 +2579,12 @@
       },
       "done": {
         "title": "Successfully installed {{appName}} on your {{productName}}",
-        "accounts": "Go to Accounts"
+        "accounts": "Accéder aux Comptes"
       },
       "dependency": {
-        "title": "{{dependency}} app is needed",
-        "description_one": "The {{dependency}} app will also be installed because the {{app}} app uses it.",
-        "description_two": "Please press Continue to install the {{app}} and {{dependency}} apps."
+        "title": "L'appli {{dependency}} est requise",
+        "description_one": "L'appli {{dependency}} sera également installée car elle est requise pour l'appli {{app}}.",
+        "description_two": "Il vous suffit d'appuyer sur Continuer pour installer les applis {{app}} et {{dependency}}."
       },
       "continueInstall": "Install apps"
     },
@@ -2610,7 +2610,7 @@
         "title": "Successfully uninstalled {{appName}} on your {{productName}}"
       },
       "dependency": {
-        "title": "Uninstall {{app}} and related apps?",
+        "title": "Désinstaller {{app}} et ses applications associées ?",
         "showAll": "Show apps to uninstall",
         "description": "Apps on your device that need the {{app}} app will be uninstalled too."
       },
@@ -2666,7 +2666,7 @@
   "FirmwareUpdateReleaseNotes": {
     "introTitle": "You are about to install <1><0>firmware version {{version}}.</0></1>",
     "introDescription1": "Please note that all the apps on your device will be deleted. You can reinstall your apps after the firmware update.",
-    "introDescription2": "This has no impact on your crypto assets.",
+    "introDescription2": "Cela n'a pas d'impact sur vos crypto-actifs.",
     "action": "Continue update"
   },
   "FirmwareUpdateCheckId": {
@@ -2675,7 +2675,7 @@
   },
   "FirmwareUpdateMCU": {
     "title": "Restart device",
-    "desc1": "Disconnect your device from your computer.",
+    "desc1": "Déconnectez votre appareil de votre ordinateur.",
     "desc2": "Press and hold the left button, connect the USB cable then release the button when the Bootloader screen appears."
   },
   "FirmwareUpdateConfirmation": {
@@ -3347,7 +3347,7 @@
     "forAnEstYield": "for an est. yield of",
     "yieldPerYear": "{{yield}} / Year",
     "yieldInfos": "Yield rates are provided by",
-    "termsAndPrivacy": "I have read and I accept the <1>Ledger Live Terms of Use</1> and <3>Privacy Policy</3>.",
+    "termsAndPrivacy": "J'ai lu et j'accepte les <1>Conditions d'utilisation de Ledger Live</1> et la <3>Politique de confidentialité</3>.",
     "delegation": "Delegation",
     "viewDetails": "View details",
     "validator": "Validator",
@@ -3384,7 +3384,7 @@
       "undelegate": "Your account delegation will end when the operation is confirmed. You can delegate your account again at any time."
     },
     "summaryTitle": "Summary",
-    "goToAccount": "Go to Accounts",
+    "goToAccount": "Accéder aux Comptes",
     "howDelegationWorks": "How delegation works",
     "actions": {
       "redelegate": "Redelegate",
@@ -3395,19 +3395,19 @@
   "ValidateOnDevice": {
     "title": {
       "send": "Please confirm the operation on your {{productName}} to send it",
-      "freeze": "On your device, please confirm to finalize the operation",
-      "unfreeze": "On your device, please confirm to finalize the operation",
-      "claimReward": "On your device, please confirm to finalize the operation",
-      "vote": "On your device, please confirm to finalize the operation",
+      "freeze": "Veuillez confirmer sur votre appareil pour finaliser l'opération",
+      "unfreeze": "Veuillez confirmer sur votre appareil pour finaliser l'opération",
+      "claimReward": "Veuillez confirmer sur votre appareil pour finaliser l'opération",
+      "vote": "Veuillez confirmer sur votre appareil pour finaliser l'opération",
       "delegate": "On your device, please confirm to finalize the operation",
       "redelegate": "On your device, please confirm to finalize the operation",
       "undelegate": "On your device, please confirm to finalize the operation"
     },
-    "warning": "Always verify the address displayed your device exactly matches the one given to you by the {{recipientWording}}",
+    "warning": "Vérifiez toujours que l'adresse affichée sur votre appareil est identique à celle donnée par {{recipientWording}}",
     "recipientWording": {
-      "send": "Always verify the address displayed your device exactly matches the one given to you by the recipient",
-      "delegate": "Always verify that your device displays the address exactly as provided by the validator",
-      "undelegate": "Always verify that your device displays the address exactly as provided by the validator",
+      "send": "Vérifiez toujours que l'adresse affichée sur votre appareil est identique à celle donnée par le bénéficiaire",
+      "delegate": "Vérifiez toujours que l'adresse affichée sur votre appareil est identique à celle donnée par le validateur",
+      "undelegate": "Vérifiez toujours que l'adresse affichée sur votre appareil est identique à celle donnée par le validateur",
       "freeze": "Always verify that your device displays the address exactly as provided",
       "unfreeze": "Always verify that your device displays the address exactly as provided",
       "claimReward": "Always verify that your device displays the address exactly as provided",
@@ -3421,7 +3421,7 @@
     "name": "Name",
     "votes": "Votes",
     "infoWording": {
-      "freeze": "Frozen tokens are locked for a period of 3 days.",
+      "freeze": "Les jetons gelés sont \"verrouillés\" pendant 3 jours.",
       "unfreeze": "Your {{resource}} points will be reduced, and all your votes will be cancelled.",
       "claimReward": "Rewards can be claimed every 24 hours.",
       "cosmos": {
