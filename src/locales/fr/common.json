@@ -12,7 +12,7 @@
     "retry": "Retry",
     "done": "Done",
     "sortBy": "Sort by",
-    "signOut": "Sign out",
+    "signOut": "Déconnexion",
     "search": "Search",
     "contactUs": "Contact Ledger Support",
     "device": "Appareil",
@@ -88,7 +88,7 @@
       "description": "Please wait for the operation to go through."
     },
     "AccountNameRequired": {
-      "title": "An account name is needed",
+      "title": "Un nom de compte est requis",
       "description": "Veuillez entrer un nom de compte."
     },
     "AlgorandASANotOptInInRecipient": {
@@ -220,7 +220,7 @@
       "description": "Veuillez réessayer."
     },
     "DeviceSocketNoBulkStatus": {
-      "title": "The connection failed",
+      "title": "Échec de la connexion",
       "description": "Veuillez réessayer."
     },
     "DeviceSocketNoHandler": {
