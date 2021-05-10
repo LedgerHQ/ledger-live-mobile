@@ -16,7 +16,10 @@ import { JSONRPCRequest } from "json-rpc-2.0";
 import type { SignedOperation } from "@ledgerhq/live-common/lib/types";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
-import { listCryptoCurrencies } from "@ledgerhq/live-common/lib/currencies/index";
+import {
+  listCryptoCurrencies,
+  findCryptoCurrencyById,
+} from "@ledgerhq/live-common/lib/currencies/index";
 
 import type { RawPlatformTransaction } from "@ledgerhq/live-common/lib/platform/rawTypes";
 import { useJSONRPCServer } from "@ledgerhq/live-common/lib/platform/JSONRPCServer";
@@ -51,58 +54,108 @@ const WebPlatformPlayer = ({ manifest }: Props) => {
   const accounts = useSelector(accountsSelector);
   const currencies = useMemo(() => listCryptoCurrencies(), []);
 
+  // eslint-disable-next-line no-unused-vars
   const [loadDate, setLoadDate] = useState(Date.now());
   const [widgetLoaded, setWidgetLoaded] = useState(false);
   const [widgetError, setWidgetError] = useState(false);
 
   const navigation = useNavigation();
 
-  const listAccounts = useCallback(() => {
-    console.log("XXX - handlers - listAccounts");
-    return accounts.map(account =>
-      serializePlatformAccount(accountToPlatformAccount(account)),
-    );
-  }, [accounts]);
+  const listAccounts = useCallback(
+    () =>
+      accounts.map(account =>
+        serializePlatformAccount(accountToPlatformAccount(account)),
+      ),
+    [accounts],
+  );
 
-  const listCurrencies = useCallback(() => {
-    console.log("XXX - handlers - listCurrencies");
-    return currencies.map(currencyToPlatformCurrency);
-  }, [currencies]);
+  const listCurrencies = useCallback(
+    () => currencies.map(currencyToPlatformCurrency),
+    [currencies],
+  );
 
   const requestAccount = useCallback(
     ({
-      currencies,
+      currencies: currencyIds = [],
       allowAddAccount,
     }: {
       currencies?: string[],
       allowAddAccount?: boolean,
-    }) => {
-      return new Promise(
-        (resolve, reject) => {
-          /* TODO: */
-        },
-        /*
-        dispatch(
-          openModal("MODAL_REQUEST_ACCOUNT", {
-            currencies,
-            allowAddAccount,
-            onResult: resolve,
-            onCancel: reject,
-          }),
-        ),
-        */
-      );
-    },
-    [],
+    }) =>
+      new Promise((resolve, reject) => {
+        // handle no curencies selected case
+        const cryptoCurrencies =
+          currencyIds.length > 0 ? currencyIds : currencies.map(({ id }) => id);
+
+        const foundAccounts =
+          cryptoCurrencies && cryptoCurrencies.length
+            ? accounts.filter(a => cryptoCurrencies.includes(a.currency.id))
+            : accounts;
+
+        // @TODO replace with correct error
+        if (foundAccounts.length <= 0 && !allowAddAccount) {
+          reject(new Error("No accounts found matching request"));
+          return;
+        }
+
+        // if single account found return it
+        if (foundAccounts.length === 1 && !allowAddAccount) {
+          resolve(foundAccounts[0]);
+          return;
+        }
+
+        // list of queried cryptoCurrencies with one or more accounts -> used in case of not allowAddAccount and multiple accounts selectable
+        const currenciesDiff = allowAddAccount
+          ? cryptoCurrencies
+          : foundAccounts
+              .map(a => a.currency.id)
+              .filter(
+                (c, i, arr) =>
+                  cryptoCurrencies.includes(c) && i === arr.indexOf(c),
+              );
+
+        // if single currency available redirect to select account directly
+        if (currenciesDiff.length === 1) {
+          const currency = findCryptoCurrencyById(currenciesDiff[0]);
+          if (!currency) {
+            // @TODO replace with correct error
+            reject(new Error("Currency not found"));
+            return;
+          }
+          navigation.navigate(NavigatorName.RequestAccount, {
+            screen: ScreenName.RequestAccountsSelectAccount,
+            params: {
+              currencies: currenciesDiff,
+              currency,
+              allowAddAccount,
+              onSuccess: resolve,
+              onError: reject,
+            },
+          });
+        } else {
+          navigation.navigate(NavigatorName.RequestAccount, {
+            screen: ScreenName.RequestAccountsSelectCrypto,
+            params: {
+              currencies: currenciesDiff,
+              allowAddAccount,
+              onSuccess: resolve,
+              onError: reject,
+            },
+          });
+        }
+      }),
+    [accounts, currencies, navigation],
   );
 
   const receiveOnAccount = useCallback(
     ({ accountId }: { accountId: string }) => {
-      console.log("XXX - handlers - receiveOnAccount");
       const account = accounts.find(account => account.id === accountId);
 
       return new Promise((resolve, reject) => {
-        if (!account) reject();
+        if (!account) {
+          reject();
+          return;
+        }
 
         navigation.navigate(NavigatorName.ReceiveFunds, {
           screen: ScreenName.ReceiveConnectDevice,
@@ -128,23 +181,28 @@ const WebPlatformPlayer = ({ manifest }: Props) => {
       accountId: string,
       transaction: RawPlatformTransaction,
     }) => {
-      console.log("XXX - handlers - signTransaction:", transaction);
       const platformTransaction = deserializePlatformTransaction(transaction);
       const account = accounts.find(account => account.id === accountId);
 
       return new Promise((resolve, reject) => {
         // @TODO replace with correct error
-        if (!transaction) reject(new Error("Transaction required"));
-        if (!account) reject(new Error("Account required"));
+        if (!transaction) {
+          reject(new Error("Transaction required"));
+          return;
+        }
+        if (!account) {
+          reject(new Error("Account required"));
+          return;
+        }
 
         const bridge = getAccountBridge(account);
 
         const tx = bridge.updateTransaction(bridge.createTransaction(account), {
           amount: platformTransaction.amount,
-          data: platformTransaction.data,
-          userGasLimit: platformTransaction.gasLimit,
-          gasLimit: platformTransaction.gasLimit,
-          gasPrice: platformTransaction.gasPrice,
+          data: platformTransaction?.data && undefined,
+          userGasLimit: platformTransaction?.gasLimit && undefined,
+          gasLimit: platformTransaction?.gasLimit && undefined,
+          gasPrice: platformTransaction?.gasPrice && undefined,
           family: platformTransaction.family,
           recipient: platformTransaction.recipient,
           feesStrategy: "custom",
@@ -181,13 +239,18 @@ const WebPlatformPlayer = ({ manifest }: Props) => {
       accountId: string,
       signedTransaction: SignedOperation,
     }) => {
-      console.log("XXX - handlers - broadcastTransaction");
       const account = accounts.find(a => a.id === accountId);
 
       return new Promise((resolve, reject) => {
         // @TODO replace with correct error
-        if (!signedTransaction) reject(new Error("Transaction required"));
-        if (!account) reject(new Error("Account required"));
+        if (!signedTransaction) {
+          reject(new Error("Transaction required"));
+          return;
+        }
+        if (!account) {
+          reject(new Error("Account required"));
+          return;
+        }
 
         if (!getEnv("DISABLE_TRANSACTION_BROADCAST")) {
           broadcastSignedTx(account, null, signedTransaction).then(
@@ -221,7 +284,6 @@ const WebPlatformPlayer = ({ manifest }: Props) => {
 
   const handleSend = useCallback(
     (request: JSONRPCRequest) => {
-      //console.log("XXX - handleSend - request:", JSON.stringify(request));
       targetRef?.current?.postMessage(
         JSON.stringify(request),
         manifest.url.origin,
@@ -234,15 +296,13 @@ const WebPlatformPlayer = ({ manifest }: Props) => {
 
   const handleMessage = useCallback(
     e => {
-      //console.log("XXX - handleMessage - e:", e);
-
       // FIXME: event isn't the same on desktop & mobile
-      //if (e.isTrusted && e.origin === manifest.url.origin && e.data) {
+      // if (e.isTrusted && e.origin === manifest.url.origin && e.data) {
       if (e.nativeEvent?.data) {
         receive(JSON.parse(e.nativeEvent.data));
       }
     },
-    [manifest, receive],
+    [receive],
   );
 
   const handleLoad = useCallback(() => {
@@ -251,13 +311,15 @@ const WebPlatformPlayer = ({ manifest }: Props) => {
   }, []);
 
   useEffect(() => {
+    let timeout;
     if (!widgetLoaded) {
-      const timeout = setTimeout(() => {
+      timeout = setTimeout(() => {
         setWidgetError(true);
       }, 3000);
-
-      return () => clearTimeout(timeout);
     }
+    return () => {
+      if (timeout) clearTimeout(timeout);
+    };
   }, [widgetLoaded, widgetError]);
 
   return (
@@ -285,7 +347,7 @@ const WebPlatformPlayer = ({ manifest }: Props) => {
         style={styles.webview}
         androidHardwareAccelerationDisabled
       />
-      {/* TODO: bottom bar here*/}
+      {/* TODO: bottom bar here */}
     </View>
   );
 };

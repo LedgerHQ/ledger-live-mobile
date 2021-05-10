@@ -2270,6 +2270,16 @@
       }
     }
   },
+  "requestAccount": {
+    "stepperHeader": {
+      "selectCrypto": "Select crypto",
+      "selectAccount": "Select account",
+      "stepRange": "Step {{currentStep}} of {{totalSteps}}"
+    },
+    "selectAccount": {
+      "addAccount": "Add {{currency}} account"
+    }
+  },
   "freeze": {
     "stepperHeader": {
       "info": "Earn rewards",

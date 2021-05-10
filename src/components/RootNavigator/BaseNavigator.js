@@ -55,6 +55,7 @@ import HeaderRightClose from "../HeaderRightClose";
 import StepHeader from "../StepHeader";
 import AccountHeaderTitle from "../../screens/Account/AccountHeaderTitle";
 import AccountHeaderRight from "../../screens/Account/AccountHeaderRight";
+import RequestAccountNavigator from "./RequestAccountNavigator";
 
 export default function BaseNavigator() {
   const { t } = useTranslation();
@@ -144,6 +145,25 @@ export default function BaseNavigator() {
         name={NavigatorName.AddAccounts}
         component={AddAccountsNavigator}
         options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name={NavigatorName.RequestAccount}
+        component={RequestAccountNavigator}
+        options={{
+          headerShown: false,
+        }}
+        listeners={({ route }) => ({
+          beforeRemove: () => {
+            const onError =
+              route.params?.onError || route.params?.params?.onError;
+            // @TODO replace with correct error
+            if (onError && typeof onError === "function")
+              onError(
+                route.params.error ||
+                  new Error("Request account interrupted by user"),
+              );
+          },
+        })}
       />
       <Stack.Screen
         name={NavigatorName.FirmwareUpdate}

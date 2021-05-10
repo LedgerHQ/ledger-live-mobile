@@ -20,9 +20,10 @@ const renderProvider = (params: RouteParams, provider: string) => {
   switch (provider) {
     case "changelly":
       return <FormOrHistory {...params} />;
-    default:
+    default: {
       const manifest = manifests[provider];
       return manifest ? <WebPlatformPlayer manifest={manifest} /> : null;
+    }
   }
 };
 
