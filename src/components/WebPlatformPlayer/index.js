@@ -7,9 +7,14 @@ import React, {
   useMemo,
 } from "react";
 import { useSelector } from "react-redux";
-import { ActivityIndicator, StyleSheet, View } from "react-native";
+import {
+  ActivityIndicator,
+  StyleSheet,
+  View,
+  TouchableOpacity,
+} from "react-native";
 import { WebView } from "react-native-webview";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useTheme } from "@react-navigation/native";
 
 import { JSONRPCRequest } from "json-rpc-2.0";
 
@@ -35,6 +40,7 @@ import {
 import { NavigatorName, ScreenName } from "../../const";
 import { broadcastSignedTx } from "../../logic/screenTransactionHooks";
 import { accountsSelector } from "../../reducers/accounts";
+import UpdateIcon from "../../icons/Update";
 
 import type { Manifest } from "./type";
 
@@ -310,6 +316,11 @@ const WebPlatformPlayer = ({ manifest }: Props) => {
     setWidgetLoaded(true);
   }, []);
 
+  const handleReload = useCallback(() => {
+    setLoadDate(Date.now());
+    setWidgetLoaded(false);
+  }, []);
+
   useEffect(() => {
     let timeout;
     if (!widgetLoaded) {
@@ -347,10 +358,26 @@ const WebPlatformPlayer = ({ manifest }: Props) => {
         style={styles.webview}
         androidHardwareAccelerationDisabled
       />
-      {/* TODO: bottom bar here */}
+      <Footer onReload={handleReload} />
     </View>
   );
 };
+
+function Footer({ onReload }: { onReload: Function }) {
+  const { colors } = useTheme();
+  return (
+    <View
+      style={[
+        styles.footer,
+        { borderColor: colors.lightFog, backgroundColor: colors.background },
+      ]}
+    >
+      <TouchableOpacity onPress={onReload}>
+        <UpdateIcon size={24} color={colors.grey} />
+      </TouchableOpacity>
+    </View>
+  );
+}
 
 const styles = StyleSheet.create({
   root: {
@@ -374,6 +401,11 @@ const styles = StyleSheet.create({
     flex: 0,
     width: "100%",
     height: "100%",
+  },
+  footer: {
+    borderTopWidth: 1,
+    padding: 16,
+    alignItems: "flex-end",
   },
 });
 
