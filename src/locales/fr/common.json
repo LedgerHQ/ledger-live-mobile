@@ -256,7 +256,7 @@
       "description": "Essayez de fixer les frais manuellement (statut : {{status}})."
     },
     "FeeNotLoaded": {
-      "title": "Could not load fee rates"
+      "title": "Échec du chargement des taux de frais"
     },
     "FeeRequired": {
       "title": "Fees are required"
@@ -288,7 +288,7 @@
     },
     "LedgerAPIError": {
       "title": "Sorry, try again (API HTTP {{status}})",
-      "description": "Unsuccessful calls to the Ledger API server. Please try again."
+      "description": "Échec de la communication avec le serveur API de Ledger. Veuillez réessayer."
     },
     "LedgerAPIErrorWithMessage": {
       "title": "{{message}}",
@@ -411,15 +411,15 @@
     },
     "TronNoFrozenForBandwidth": {
       "title": "No assets to unfreeze",
-      "description": "You don't have Bandwidth assets to unfreeze."
+      "description": "Vous n'avez pas d'actifs de bande passante à dégeler."
     },
     "TronNoFrozenForEnergy": {
       "title": "No assets to unfreeze",
-      "description": "You don't have Energy assets to unfreeze."
+      "description": "Vous n'avez pas d'actifs d'énergie à dégeler."
     },
     "TronUnfreezeNotExpired": {
       "title": "Unfreeze is not available yet",
-      "description": "Please wait 3 days after your last Freeze operation."
+      "description": "Veuillez patienter 3 jours après votre dernière opération de gel."
     },
     "TronVoteRequired": {
       "title": "At least 1 vote is needed"
@@ -519,7 +519,7 @@
       "title": "Please disable multisign to send {{currencyName}}"
     },
     "StellarMemoRecommended": {
-      "title": "A memo may be needed when sending to this recipient"
+      "title": "Un mémo peut être nécessaire lors de l'envoi à ce bénéficiaire"
     },
     "StratisDown2021Warning": {
       "description": "The Stratis blockchain evolved and may no longer work correctly. Support for the original Stratis blockchain will be maintained until 16 October 2021."
@@ -1262,10 +1262,10 @@
     "year": "1Y",
     "all": "All",
     "since": {
-      "day": "past day",
-      "week": "past week",
-      "month": "past month",
-      "year": "past year"
+      "day": "hier",
+      "week": "semaine dernière",
+      "month": "mois dernier",
+      "year": "année dernière"
     }
   },
   "orderOption": {
@@ -1426,11 +1426,11 @@
         "placeholder": "Nom du compte"
       },
       "accountUnits": {
-        "title": "Edit units"
+        "title": "Modifier les unités"
       },
       "unit": {
         "title": "Unit",
-        "desc": "Choose the unit to be displayed."
+        "desc": "Choisir l'unité à afficher."
       },
       "currency": {
         "title": "Currency"
@@ -1461,7 +1461,7 @@
           "line1": "Dans Ledger Live ordinateur, accédez à",
           "line2": "Settings > Accounts > Export accounts > Export"
         },
-        "descBottom": "Please put the LiveQR code within the square."
+        "descBottom": "Veuillez placer le code QR Live dans le carré."
       },
       "result": {
         "title": "Importer des comptes",
@@ -1478,7 +1478,7 @@
       "fallback": {
         "header": "Import account",
         "title": "Enable camera",
-        "desc": "Please enable Camera in Settings to scan QR codes.",
+        "desc": "Veuillez autoriser l'utilisation de l'appareil photo dans les Paramètres pour scanner les codes QR.",
         "buttonTitle": "Go to Settings"
       }
     },
@@ -1580,7 +1580,7 @@
       "language": "Display language",
       "languageDesc": "Set the language displayed in Ledger Live.",
       "password": "Password lock",
-      "passwordDesc": "Set a password to protect Ledger Live data on your phone.",
+      "passwordDesc": "Définissez un mot de passe pour protéger vos données Ledger Live sur votre téléphone.",
       "counterValue": "Countervalue",
       "theme": "Theme",
       "themeDesc": "Set the app UI theme",
@@ -1589,20 +1589,20 @@
         "dusk": "Dusk",
         "light": "Light"
       },
-      "counterValueDesc": "Choose the currency for balances and operations.",
+      "counterValueDesc": "Choisissez une devise pour votre solde et vos opérations.",
       "exchange": "Rate provider",
       "exchangeDesc": "Set provider of exchange rate from Bitcoin to {{fiat}}",
       "stock": "Regional market indicator",
-      "stockDesc": "Choose Western to display market increases in green or Eastern to display them in red.",
+      "stockDesc": "Choisissez Ouest pour afficher les augmentations du marché en vert ou Est pour les afficher en rouge.",
       "reportErrors": "Bug reports",
-      "reportErrorsDesc": "Automatically send reports to help Ledger improve its products.",
+      "reportErrorsDesc": "Envoyer automatiquement des rapports pour aider Ledger à améliorer ses produits.",
       "developerMode": "Developer mode",
       "developerModeDesc": "Afficher les applis développeur dans le Gestionnaire et autoriser les applis Testnet.",
       "analytics": "Analytics",
-      "analyticsDesc": "Enable analytics to help Ledger improve user experience.",
+      "analyticsDesc": "Autoriser les statistiques pour aider Ledger à améliorer l'expérience utilisateur.",
       "analyticsModal": {
         "title": "Share analytics",
-        "desc": "Enable analytics to help Ledger improve user experience",
+        "desc": "Autoriser les statistiques pour aider Ledger à améliorer l'expérience utilisateur",
         "bullet0": "Clicks",
         "bullet1": "In-app page visits",
         "bullet2": "Redirection vers une page Internet",
@@ -1629,7 +1629,7 @@
       "rateProvider": "Rate Provider ({{currencyTicker}}→BTC)",
       "rateProviderDesc": "Choose the provider of the rate between {{currencyTicker}} and Bitcoin.",
       "confirmationNb": "Number of confirmations",
-      "confirmationNbDesc": "Set the number of network confirmations for transactions to be approved.",
+      "confirmationNbDesc": "Définissez le nombre de confirmations réseau pour la validation des transactions.",
       "currencySettingsTitle": "{{currencyName}} Settings",
       "placeholder": "No settings for this asset"
     },
@@ -1640,10 +1640,10 @@
       "hideTokenCTA": "Hide token",
       "showContractCTA": "Show contract",
       "blacklistedTokens": "Hidden token list",
-      "blacklistedTokensDesc": "You can hide tokens by going to the accounts list then long-pressing on the token and selecting 'Hide token'.",
+      "blacklistedTokensDesc": "Vous pouvez masquer les jetons en vous rendant sur votre liste de comptes, puis en faisant un appui long sur le jeton et sélectionnant \"Cacher le jeton\".",
       "blacklistedTokensModal": {
         "title": "Hide token",
-        "desc": "This action will hide all <1><0>{tokenName}</0></1> accounts, you can show them again using <3>Settings > Accounts</3>.",
+        "desc": "Cette action masquera tous les comptes <1><0>{tokenName}</0></1>. Vous pouvez restaurer leur visibilité à tout moment dans <3>Paramètres > Comptes</3>.",
         "confirm": "Hide token"
       },
       "cryptoAssets": {
@@ -1683,14 +1683,14 @@
       "exportLogs": "Export logs",
       "exportLogsDesc": "L'exportation des logs de Ledger Live peut aider à résoudre les problèmes.",
       "hardReset": "Reset Ledger Live",
-      "hardResetDesc": "This has no impact on your assets. Erases all data in Ledger Live, including account data, transaction histories and settings. Use your Ledger device to reload and manage your crypto assets on an empty Ledger Live.",
+      "hardResetDesc": "Cela n'a aucun impact sur vos actifs. Toutes les données de Ledger Live, y compris les données du compte, l'historique des transactions et les paramètres seront effacées. Utilisez votre appareil Ledger pour recharger et gérer vos crypto-actifs sur un Ledger Live vierge.",
       "repairDevice": "Repair your Ledger device",
-      "repairDeviceDesc": "If you have an issue updating your device and cannot resume updates, you can try this to repair your device."
+      "repairDeviceDesc": "Si vous rencontrez un problème lors de la mise à jour de votre appareil et ne pouvez pas reprendre les mises à jour, essayez cela pour réparer votre appareil."
     },
     "experimental": {
       "title": "Experimental features",
-      "desc": "Try out the Experimental features and let us know what you think.",
-      "disclaimer": "These are Experimental features provided on an \"as is\" basis for our community of tech enthusiasts. They may change, break or be removed at any time. By enabling them, you agree to use them at your own risk."
+      "desc": "Essayez les Fonctionnalités expérimentales et donnez-nous votre avis.",
+      "disclaimer": "Il s'agit de Fonctionnalités expérimentales fournies \"telles quelles\" pour notre communauté de passionné(e)s de tech. Elles peuvent changer, casser ou être retirées à tout moment. En les activant, vous acceptez de les utiliser en toute connaissance de cause."
     }
   },
   "migrateAccounts": {
@@ -1698,7 +1698,7 @@
     "overview": {
       "headerTitle": "Account update",
       "title": "Ledger Live accounts update",
-      "subtitle": "New features in Ledger Live means your accounts need to be updated",
+      "subtitle": "Avec les nouvelles fonctionnalités disponibles dans Ledger Live, vos comptes doivent être mis à jour",
       "notice": "{{accountCount}} account could not be updated. Please connect the device associated to the account below.",
       "notice_plural": "{{accountCount}} accounts could not be updated. Please connect the device associated to the accounts below.",
       "currency": "1 {{currency}} account needs to be updated",
@@ -1710,7 +1710,7 @@
       "headerTitle": "Updating accounts",
       "pending": {
         "title": "{{currency}} update in progress",
-        "subtitle": "Please wait for your account to be updated."
+        "subtitle": "Veuillez patienter pendant la mise à jour de votre compte."
       },
       "notice": {
         "title": "{{currency}} update incomplete",
@@ -1720,7 +1720,7 @@
       },
       "done": {
         "title": "{{currency}} update complete",
-        "subtitle": "Congratulations, your {{currency}} accounts were updated successfully.",
+        "subtitle": "Félicitations, vos comptes {{currency}} ont bien été mis à jour.",
         "cta": "Continue",
         "ctaNextCurrency": "Continue with {{currency}}",
         "ctaDone": "Done"
@@ -1745,8 +1745,8 @@
       "titleReadOnly": "Unverified address",
       "headerTitle": "Crypto asset",
       "titleDevice": "Connect device",
-      "verifySkipped": "Your receive address was not confirmed on your Ledger device. Please verify your {{accountType}} address to stay secure.",
-      "verifyPending": "Please verify that the {{currencyName}} address displayed on your device exactly matches the one displayed on your phone.",
+      "verifySkipped": "Votre adresse de bénéficiaire n'a pas été confirmée sur votre appareil Ledger. Veuillez vérifier votre adresse {{accountType}} pour une sécurité optimale.",
+      "verifyPending": "Veuillez vérifier que l'adresse {{currencyName}} affichée sur votre appareil est identique à celle indiquée sur votre téléphone.",
       "verified": "Adresse confirmée. Si vous l'aviez copiée ou scannée, revérifiez .",
       "verifyAgain": "Revérifier",
       "noAccount": "No account found",
@@ -1756,13 +1756,13 @@
       "addressCopied": "Adresse copiée !",
       "notSynced": {
         "text": "Synchronisation",
-        "desc": "This may take a moment if you have many transactions or if you have a slow internet connection."
+        "desc": "Cela peut prendre quelques instants si vous avez beaucoup de transactions ou une connexion Internet lente."
       },
       "readOnly": {
         "title": "Recevoir",
         "text": "Please be careful",
-        "desc": "You are about to view an address which was not verified. Verify addresses on your device to stay secure.",
-        "verify": "The address of {{accountType}} was not verified. Verify addresses on your device to stay secure."
+        "desc": "Vous êtes sur le point de voir une adresse qui n'a pas été vérifiée. Vérifiez les adresses sur votre appareil pour une sécurité optimale.",
+        "verify": "L'adresse de {{accountType}} n'a pas été vérifiée. Vérifiez les adresses sur votre appareil pour une sécurité optimale."
       }
     },
     "exchange": {
@@ -2112,7 +2112,7 @@
       "fallback": {
         "header": "Scan QR code",
         "title": "Enable camera",
-        "desc": "Please enable Camera in Settings to scan QR codes.",
+        "desc": "Veuillez autoriser l'utilisation de l'appareil photo dans les Paramètres pour scanner les codes QR.",
         "buttonTitle": "Go to Settings"
       }
     },
@@ -2140,7 +2140,7 @@
     "summary": {
       "subaccountsWarning": "You will need to refill this account with {{ currency }} in order to send the tokens of this account",
       "tag": "Tag (Optional)",
-      "validateTag": "Validate tag",
+      "validateTag": "Valider le tag",
       "total": "Total",
       "amount": "Montant",
       "from": "From",
@@ -2177,9 +2177,9 @@
       "validate": "Confirmer",
       "required": "Fees are required",
       "chooseGas": "Choose a gas price",
-      "higherFaster": "Higher gas price means a faster confirmation.",
+      "higherFaster": "Un prix de gaz plus élevé se traduit par une confirmation plus rapide.",
       "edit": {
-        "title": "Choose unit"
+        "title": "Choisir une unité"
       },
       "networkInfo": "Choose the amount of network fees to include in the transaction. The amount of fees affects the processing speed of the transaction"
     },
@@ -2200,7 +2200,7 @@
       "stepRange": "Step {{currentStep}} of {{totalSteps}}"
     },
     "info": {
-      "description": "Freeze TRX to earn rewards securely, keeping control of your assets.",
+      "description": "Gelez des TRX pour gagner des récompenses en toute sécurité et en gardant le contrôle de vos actifs.",
       "steps": {
         "0": "Vous conservez la propriété de vos actifs délégués.",
         "1": "You can unfreeze your assets after 3 days.",
@@ -2212,7 +2212,7 @@
     "amount": {
       "available": "Total available",
       "noRateProvider": "Not available",
-      "infoLabel": "Bandwidth or Energy"
+      "infoLabel": "Bande passante ou énergie"
     },
     "validation": {
       "message": "Vérifiez toujours que l'adresse affichée sur votre appareil est identique à celle qui vous a été donnée.",
@@ -3035,11 +3035,11 @@
       "title": "Manage Tron Power",
       "freeze": {
         "title": "Freeze",
-        "description": "Freeze TRX to earn Bandwidth or Energy. You can also vote for Super Representatives."
+        "description": "Gelez des TRX pour gagner de la bande passante ou de l'énergie. Vous pourrez également voter pour les super-représentants."
       },
       "unfreeze": {
         "title": "Unfreeze",
-        "description": "Unfreeze TRX to add them back to your available balance. You will no longer earn rewards."
+        "description": "Dégelez des TRX pour les libérer vers votre solde disponible. Vous ne gagnerez plus de récompenses."
       },
       "vote": {
         "title": "Vote",
@@ -3057,15 +3057,15 @@
       },
       "bandwidth": {
         "title": "Bandwidth",
-        "description": "Bandwidth points are used to make transactions instead of paying TRX network fees. Choose Bandwidth to increase your daily free transactions."
+        "description": "Les points de bande passante sont utilisés pour effectuer des transactions sans payer de TRX en frais de réseau. Choisissez Bande passante pour plus de transactions quotidiennes gratuites."
       },
       "energy": {
         "title": "Energy",
-        "description": "Energy points are required to execute smart contracts. If you don't run smart contracts, there is no need to have rewards in Energy points."
+        "description": "Les points d'énergie sont requis pour exécuter des contrats intelligents. Si vous n'exécutez aucun contrat intelligent, il n'est pas nécessaire de gagner vos récompenses en points d'énergie."
       },
       "claimRewards": {
         "title": "Voting rewards",
-        "description": "The TRX generated as rewards during block production can be claimed every 24 hours."
+        "description": "Les TRX générés en récompenses lors de la production de blocs peuvent être demandés toutes les 24 heures."
       },
       "superRepresentative": {
         "title": "Super Representatives (SR)",
@@ -3080,7 +3080,7 @@
   "stellar": {
     "memo": {
       "title": "Memo",
-      "warning": "When using a Memo, carefully verify the type with the recipient."
+      "warning": "Lorsque vous utilisez un mémo, vérifiez bien le type à utiliser auprès du bénéficiaire."
     },
     "memoType": {
       "MEMO_TEXT": "Memo Text",
