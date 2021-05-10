@@ -14,7 +14,7 @@
     "sortBy": "Sort by",
     "signOut": "Déconnexion",
     "search": "Search",
-    "contactUs": "Contact Ledger Support",
+    "contactUs": "Contacter le Service client Ledger",
     "device": "Appareil",
     "cryptoAsset": "Crypto-actif",
     "skip": "Skip",
@@ -104,10 +104,10 @@
     },
     "CantOpenDevice": {
       "title": "Échec de la connexion",
-      "description": "Your Ledger device must be unlocked and in range to use Bluetooth."
+      "description": "Votre Ledger doit être déverrouillé et à portée pour utiliser le Bluetooth."
     },
     "CantScanQRCode": {
-      "title": "Could not scan this QR code: auto-verification not supported by this address."
+      "title": "Échec du scan de ce code QR : cette adresse ne prend pas en charge la vérification automatique."
     },
     "ConnectAppTimeout": {
       "title": "Sorry, no device found",
@@ -245,7 +245,7 @@
     },
     "Touch ID Error": {
       "title": "Biometric authentication failed",
-      "description": "Please use your password or reset the app."
+      "description": "Veuillez utiliser votre mot de passe ou réinitialiser l'appli."
     },
     "Error": {
       "title": "{{message}}",
@@ -284,7 +284,7 @@
     },
     "LatestMCUInstalledError": {
       "title": "Pas de mise à jour à effectuer",
-      "description": "Please contact Ledger Support if you cannot use your device."
+      "description": "Veuillez contacter le Service client Ledger si vous ne pouvez pas utiliser votre appareil."
     },
     "LedgerAPIError": {
       "title": "Sorry, try again (API HTTP {{status}})",
@@ -371,7 +371,7 @@
     },
     "PairingFailed": {
       "title": "Pairing unsuccessful",
-      "description": "Please try again or consult our Bluetooth troubleshooting article."
+      "description": "Veuillez réessayer ou consultez notre article de dépannage Bluetooth."
     },
     "PasswordIncorrect": {
       "title": "Mot de passe incorrect",
@@ -572,13 +572,13 @@
   "bluetooth": {
     "required": "Le Bluetooth semble être désactivé",
     "locationRequiredTitle": "Location is required for Bluetooth LE",
-    "locationRequiredMessage": "On Android location permission is required to list Bluetooth LE devices.",
+    "locationRequiredMessage": "Sur Android, il faut activer l'autorisation de localisation pour lister les appareils Bluetooth LE.",
     "checkEnabled": "Veuillez activer le Bluetooth dans les Paramètres de votre téléphone."
   },
   "location": {
-    "required": "Location services required",
+    "required": "Localisation requise",
     "open": "Open location settings",
-    "disabled": "Ledger Live requires location services to pair your device through Bluethooth.",
+    "disabled": "Ledger Live a besoin de la localisation pour coupler votre appareil en Bluetooth.",
     "noInfos": "Ledger n'accède pas à vos données de localisation."
   },
   "permissions": {
@@ -1201,8 +1201,8 @@
     "warning": {
       "recoveryPhrase": {
         "title": "N'utilisez jamais une phrase de récupération que vous n'avez pas générée vous-même.",
-        "desc": "Your Ledger hardware wallet’s pin code and recovery phrase should be initialized by you and only you. If you have received a device with a pre-existing seed word or an already initialized pin code do not use the product and contact our customer support.",
-        "supportLink": "Contact customer support"
+        "desc": "La configuration du code PIN et de la phrase de récupération de votre wallet Ledger doit absolument n'être faite que par vous. Si vous avez reçu un appareil avec une phrase de récupération déjà existante ou un code PIN déjà configuré, n'utilisez pas l'appareil et contactez notre service client.",
+        "supportLink": "Contacter le service client"
       }
     }
   },
@@ -1316,7 +1316,7 @@
     "noFees": "Aucun frais",
     "from": "De ({{count}})",
     "to": "À ({{count}})",
-    "identifier": "Transaction ID",
+    "identifier": "Numéro de transaction",
     "viewOperation": "View in explorer",
     "whatIsThis": "What is this operation?",
     "seeAll": "See all",
@@ -3073,7 +3073,7 @@
       },
       "candidates": {
         "title": "Candidates",
-        "description": "127 individuals elected through voting by the entire token-holder community. Votes are sampled every 6 hours."
+        "description": "127 personnes élues par le vote de la communauté des détenteurs de jetons. Les votes sont extraits toutes les 6 heures."
       }
     }
   },
