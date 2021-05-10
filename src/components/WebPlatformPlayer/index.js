@@ -12,15 +12,22 @@ import { WebView } from "react-native-webview";
 import { useNavigation } from "@react-navigation/native";
 
 import { JSONRPCRequest } from "json-rpc-2.0";
-import { BigNumber } from "bignumber.js";
 
-import type {
-  SignedOperation,
-  Transaction,
-} from "@ledgerhq/live-common/lib/types";
+import type { SignedOperation } from "@ledgerhq/live-common/lib/types";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
-import { useLedgerLiveApi } from "@ledgerhq/live-common/lib/platform/ledgerLiveAPI";
+import { listCryptoCurrencies } from "@ledgerhq/live-common/lib/currencies/index";
+
+import type { RawPlatformTransaction } from "@ledgerhq/live-common/lib/platform/rawTypes";
+import { useJSONRPCServer } from "@ledgerhq/live-common/lib/platform/JSONRPCServer";
+import {
+  accountToPlatformAccount,
+  currencyToPlatformCurrency,
+} from "@ledgerhq/live-common/lib/platform/converters";
+import {
+  serializePlatformAccount,
+  deserializePlatformTransaction,
+} from "@ledgerhq/live-common/lib/platform/serializers";
 
 import { NavigatorName, ScreenName } from "../../const";
 import { broadcastSignedTx } from "../../logic/screenTransactionHooks";
@@ -42,6 +49,7 @@ type Props = {
 const WebPlatformPlayer = ({ manifest }: Props) => {
   const targetRef: { current: null | WebView } = useRef(null);
   const accounts = useSelector(accountsSelector);
+  const currencies = useMemo(() => listCryptoCurrencies(), []);
 
   const [loadDate, setLoadDate] = useState(Date.now());
   const [widgetLoaded, setWidgetLoaded] = useState(false);
@@ -51,8 +59,42 @@ const WebPlatformPlayer = ({ manifest }: Props) => {
 
   const listAccounts = useCallback(() => {
     console.log("XXX - handlers - listAccounts");
-    return accounts;
-  }, []);
+    return accounts.map(account =>
+      serializePlatformAccount(accountToPlatformAccount(account)),
+    );
+  }, [accounts]);
+
+  const listCurrencies = useCallback(() => {
+    console.log("XXX - handlers - listCurrencies");
+    return currencies.map(currencyToPlatformCurrency);
+  }, [currencies]);
+
+  const requestAccount = useCallback(
+    ({
+      currencies,
+      allowAddAccount,
+    }: {
+      currencies?: string[],
+      allowAddAccount?: boolean,
+    }) => {
+      return new Promise(
+        (resolve, reject) => {
+          /* TODO: */
+        },
+        /*
+        dispatch(
+          openModal("MODAL_REQUEST_ACCOUNT", {
+            currencies,
+            allowAddAccount,
+            onResult: resolve,
+            onCancel: reject,
+          }),
+        ),
+        */
+      );
+    },
+    [],
+  );
 
   const receiveOnAccount = useCallback(
     ({ accountId }: { accountId: string }) => {
@@ -84,9 +126,10 @@ const WebPlatformPlayer = ({ manifest }: Props) => {
       transaction,
     }: {
       accountId: string,
-      transaction: Transaction,
+      transaction: RawPlatformTransaction,
     }) => {
-      console.log("XXX - handlers - signTransaction");
+      console.log("XXX - handlers - signTransaction:", transaction);
+      const platformTransaction = deserializePlatformTransaction(transaction);
       const account = accounts.find(account => account.id === accountId);
 
       return new Promise((resolve, reject) => {
@@ -97,19 +140,14 @@ const WebPlatformPlayer = ({ manifest }: Props) => {
         const bridge = getAccountBridge(account);
 
         const tx = bridge.updateTransaction(bridge.createTransaction(account), {
-          amount: BigNumber(transaction.amount),
-          data: transaction.data ? Buffer.from(transaction.data) : undefined,
-          userGasLimit: transaction.gasLimit
-            ? BigNumber(transaction.gasLimit)
-            : undefined,
-          gasLimit: transaction.gasLimit
-            ? BigNumber(transaction.gasLimit)
-            : undefined,
-          gasPrice: transaction.gasPrice
-            ? BigNumber(transaction.gasPrice)
-            : undefined,
-          family: transaction.family,
-          recipient: transaction.recipient,
+          amount: platformTransaction.amount,
+          data: platformTransaction.data,
+          userGasLimit: platformTransaction.gasLimit,
+          gasLimit: platformTransaction.gasLimit,
+          gasPrice: platformTransaction.gasPrice,
+          family: platformTransaction.family,
+          recipient: platformTransaction.recipient,
+          feesStrategy: "custom",
         });
 
         navigation.navigate(NavigatorName.SignTransaction, {
@@ -165,11 +203,20 @@ const WebPlatformPlayer = ({ manifest }: Props) => {
   const handlers = useMemo(
     () => ({
       "account.list": listAccounts,
+      "currency.list": listCurrencies,
+      "account.request": requestAccount,
       "account.receive": receiveOnAccount,
       "transaction.sign": signTransaction,
       "transaction.broadcast": broadcastTransaction,
     }),
-    [listAccounts, receiveOnAccount, signTransaction, broadcastTransaction],
+    [
+      listAccounts,
+      listCurrencies,
+      requestAccount,
+      receiveOnAccount,
+      signTransaction,
+      broadcastTransaction,
+    ],
   );
 
   const handleSend = useCallback(
@@ -183,11 +230,12 @@ const WebPlatformPlayer = ({ manifest }: Props) => {
     [manifest],
   );
 
-  const [receive] = useLedgerLiveApi(handlers, handleSend);
+  const [receive] = useJSONRPCServer(handlers, handleSend);
 
   const handleMessage = useCallback(
     e => {
       //console.log("XXX - handleMessage - e:", e);
+
       // FIXME: event isn't the same on desktop & mobile
       //if (e.isTrusted && e.origin === manifest.url.origin && e.data) {
       if (e.nativeEvent?.data) {

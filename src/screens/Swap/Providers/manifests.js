@@ -10,7 +10,7 @@ export default {
   paraswap: {
     name: "paraswap",
     url: new URL(
-      `https://iframe-dapp-browser-test.vercel.app/app/dapp-browser?url=https://paraswap-ui-ledger.herokuapp.com/?embed=true`,
+      `https://iframe-dapp-browser-test.vercel.app/app/dapp-browser?url=${encodeURIComponent("https://paraswap-ui-ledger.herokuapp.com/?embed=true",)}`,
     ),
   },
 };
