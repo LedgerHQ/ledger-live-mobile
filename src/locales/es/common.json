@@ -73,14 +73,14 @@
       "seconds_plural": "{{time}} seconds ago",
       "minutes": "hace un minuto",
       "minutes_plural": "hace {{time}} minutos",
-      "hours": "one hour ago",
-      "hours_plural": "{{time}} hours ago",
-      "days": "yesterday",
-      "days_plural": "{{time}} days ago"
+      "hours": ".",
+      "hours_plural": ".",
+      "days": ".",
+      "days_plural": "."
     },
-    "seeMore": "See more",
-    "moreInfo": "More info",
-    "buyEth": "Buy Ethereum"
+    "seeMore": ".",
+    "moreInfo": ".",
+    "buyEth": "."
   },
   "errors": {
     "AccountAwaitingSendPendingOperations": {
@@ -92,18 +92,18 @@
       "description": "Please enter an account name."
     },
     "AlgorandASANotOptInInRecipient": {
-      "title": "Recipient account has not opted in the selected ASA."
+      "title": "."
     },
     "BluetoothRequired": {
       "title": "Sorry, Bluetooth is disabled",
       "description": "Please enable Bluetooth in your phone settings. ({{state}} state)"
     },
     "BtcUnmatchedApp": {
-      "title": "That's the wrong app",
+      "title": ".",
       "description": "Please open the {{managerAppName}} app on your device."
     },
     "CantOpenDevice": {
-      "title": "Sorry, connection failed",
+      "title": ".",
       "description": "Your Ledger device must be unlocked and in range to use Bluetooth."
     },
     "CantScanQRCode": {
@@ -125,39 +125,39 @@
       "title": "You cannot reduce the amount approved while having an active deposit."
     },
     "CosmosBroadcastCodeInternal": {
-      "title": "Something went wrong (Error #1)",
+      "title": ".",
       "description": "Please save your logs using the button below and provide them to Ledger Support."
     },
     "CosmosBroadcastCodeTxDecode": {
-      "title": "Something went wrong (Error #2)",
+      "title": ".",
       "description": "Please save your logs using the button below and provide them to Ledger Support."
     },
     "CosmosBroadcastCodeInvalidSequence": {
-      "title": "Invalid sequence",
+      "title": ".",
       "description": "Please try again."
     },
     "CosmosBroadcastCodeUnauthorized": {
-      "title": "Unauthorized signature",
+      "title": ".",
       "description": "This account is not authorized to sign this transaction."
     },
     "CosmosBroadcastCodeInsufficientFunds": {
-      "title": "Insufficient funds",
+      "title": ".",
       "description": "Please make sure the account has enough funds."
     },
     "CosmosBroadcastCodeUnknownRequest": {
-      "title": "Something went wrong (Error #6)",
+      "title": ".",
       "description": "Please save your logs using the button below and provide them to Ledger Support."
     },
     "CosmosBroadcastCodeInvalidAddress": {
-      "title": "Invalid address",
+      "title": ".",
       "description": "Please check the address and try again."
     },
     "CosmosBroadcastCodeInvalidPubKey": {
-      "title": "Something went wrong (Error #8)",
+      "title": ".",
       "description": "Please save your logs using the button below and provide them to Ledger Support."
     },
     "CosmosBroadcastCodeUnknownAddress": {
-      "title": "Unknown address",
+      "title": ".",
       "description": "Please check the address and try again."
     },
     "CosmosBroadcastCodeInsufficientCoins": {
@@ -165,31 +165,31 @@
       "description": "Please increase the funds on the account."
     },
     "CosmosBroadcastCodeInvalidCoins": {
-      "title": "Something went wrong (Error #11)",
+      "title": ".",
       "description": "Please save your logs using the button below and provide them to Ledger Support."
     },
     "CosmosBroadcastCodeOutOfGas": {
-      "title": "Something went wrong (Error #12)",
+      "title": ".",
       "description": "Please save your logs using the button below and provide them to Ledger Support."
     },
     "CosmosBroadcastCodeMemoTooLarge": {
-      "title": "The Memo field is too long",
+      "title": ".",
       "description": "Please reduce the size of the memo text and try again."
     },
     "CosmosBroadcastCodeInsufficientFee": {
-      "title": "Something went wrong (Error #14)",
+      "title": ".",
       "description": "Please save your logs using the button below and provide them to Ledger Support."
     },
     "CosmosBroadcastCodeTooManySignatures": {
-      "title": "Something went wrong (Error #15)",
+      "title": ".",
       "description": "Please save your logs using the button below and provide them to Ledger Support."
     },
     "CosmosBroadcastCodeGasOverflow": {
-      "title": "Something went wrong (Error #16)",
+      "title": ".",
       "description": "Please save your logs using the button below and provide them to Ledger Support."
     },
     "CosmosBroadcastCodeNoSignatures": {
-      "title": "Something went wrong (Error #17)",
+      "title": ".",
       "description": "Please save your logs using the button below and provide them to Ledger Support."
     },
     "DeviceAppVerifyNotSupported": {
@@ -197,11 +197,11 @@
       "description": "The app verification is not supported."
     },
     "DeviceGenuineSocketEarlyClose": {
-      "title": "Sorry, try again (genuine-close)",
+      "title": ".",
       "description": null
     },
     "DeviceHalted": {
-      "title": "Please restart your Ledger device and retry",
+      "title": ".",
       "description": "An unexpected error occurred. Please try again."
     },
     "DeviceNotGenuine": {
@@ -240,26 +240,26 @@
       "description": null
     },
     "EnpointConfig": {
-      "title": "Invalid endpoint",
+      "title": ".",
       "description": "Please enter a valid endpoint."
     },
     "Touch ID Error": {
-      "title": "Biometric authentication failed",
+      "title": ".",
       "description": "Please use your password or reset the app."
     },
     "Error": {
-      "title": "{{message}}",
+      "title": ".",
       "description": "Something went wrong. Please retry. If the problem persists, please save your logs using the button below and provide them to Ledger Support."
     },
     "FeeEstimationFailed": {
-      "title": "Sorry, fee estimation failed",
+      "title": ".",
       "description": "Try setting the fee manually (status: {{status}})."
     },
     "FeeNotLoaded": {
       "title": "Could not load fee rates"
     },
     "FeeRequired": {
-      "title": "Fees are required"
+      "title": "."
     },
     "FirmwareOrAppUpdateRequired": {
       "title": "Firmware or app update needed",
@@ -274,33 +274,33 @@
       "description": "Please try again. If the problem persists, please save your logs using the button below and provide them to Ledger Support."
     },
     "InvalidAddress": {
-      "title": "This is not a valid {{currencyName}} address"
+      "title": "."
     },
     "InvalidAddressBecauseDestinationIsAlsoSource": {
       "title": "Destination and source accounts must not be the same."
     },
     "InvalidRecipient": {
-      "title": "Invalid recipient"
+      "title": "."
     },
     "LatestMCUInstalledError": {
       "title": "Sorry, there's nothing to update",
       "description": "Please contact Ledger Support if you cannot use your device."
     },
     "LedgerAPIError": {
-      "title": "Sorry, try again (API HTTP {{status}})",
+      "title": ".",
       "description": "Unsuccessful calls to the Ledger API server. Please try again."
     },
     "LedgerAPIErrorWithMessage": {
-      "title": "{{message}}",
+      "title": ".",
       "description": "Please try again. If the problem persists, please save your logs using the button below and provide them to Ledger Support."
     },
     "LedgerAPINotAvailable": {
-      "title": "Sorry, {{currencyName}} services unavailable",
+      "title": ".",
       "description": "Please try again. If the problem persists, please save your logs using the button below and provide them to Ledger Support."
     },
     "ManagerAPIsFail": {
       "title": "Sorry, Manager services are unavailable",
-      "description": "Please check the network status."
+      "description": "."
     },
     "ManagerAppAlreadyInstalled": {
       "title": "Sorry, that's already installed",
@@ -315,7 +315,7 @@
       "description": "Please unlock it."
     },
     "ManagerNotEnoughSpace": {
-      "title": "Not enough storage left",
+      "title": ".",
       "info": "Please uninstall some apps to free up space for the {{app}} app.",
       "description": "Uninstalling apps has no impact on your assets."
     },
@@ -335,15 +335,15 @@
         "description": "Quitting the Manager will terminate update.",
         "stay": "Continue update"
       },
-      "quit": "Quit Manager"
+      "quit": "."
     },
     "ManagerUninstallBTCDep": {
       "title": "Sorry, this app is needed",
-      "description": "Uninstall the Bitcoin or Ethereum app last."
+      "description": "."
     },
     "NetworkDown": {
       "title": "Sorry, internet seems to be down",
-      "description": "Please check your internet connection."
+      "description": "."
     },
     "NoAddressesFound": {
       "title": "Sorry, no account was found",
@@ -354,11 +354,11 @@
       "description": "Please make sure the account has enough funds."
     },
     "NotEnoughGas": {
-      "title": "Insufficient ETH for network fee",
-      "description": "Please send some ETH to your account to pay for ERC20 token transactions."
+      "title": ".",
+      "description": "."
     },
     "NotEnoughBalanceToDelegate": {
-      "title": "Insufficient balance to delegate"
+      "title": "."
     },
     "NotEnoughBalanceInParentAccount": {
       "title": "Insufficient balance in the parent account"
@@ -370,7 +370,7 @@
       "title": "Minimum of {{minimalAmount}} needed to activate recipient address"
     },
     "PairingFailed": {
-      "title": "Pairing unsuccessful",
+      "title": ".",
       "description": "Please try again or consult our Bluetooth troubleshooting article."
     },
     "PasswordIncorrect": {
@@ -382,11 +382,11 @@
       "description": "Please try again."
     },
     "SelectExchangesLoadError": {
-      "title": "Unable to load",
+      "title": ".",
       "description": "Cannot load the exchanges."
     },
     "SyncError": {
-      "title": "Synchronization error",
+      "title": ".",
       "description": "Some accounts could not be synchronized."
     },
     "TimeoutError": {
@@ -398,27 +398,27 @@
       "description": "Timeout occurred."
     },
     "TransactionRefusedOnDevice": {
-      "title": "Transaction refused on device",
+      "title": ".",
       "description": "Please try again. If the problem persists, please save your logs using the button below and provide them to Ledger Support."
     },
     "TransportError": {
-      "title": "Something went wrong. Please reconnect your device.",
+      "title": ".",
       "description": "{{message}} Please try again. If the problem persists, please save your logs using the button below and provide them to Ledger Support."
     },
     "TransportStatusError": {
-      "title": "Something went wrong. Please reconnect your device.",
+      "title": ".",
       "description": "{{message}} Please try again. If the problem persists, please save your logs using the button below and provide them to Ledger Support."
     },
     "TronNoFrozenForBandwidth": {
-      "title": "No assets to unfreeze",
+      "title": ".",
       "description": "You don't have Bandwidth assets to unfreeze."
     },
     "TronNoFrozenForEnergy": {
-      "title": "No assets to unfreeze",
+      "title": ".",
       "description": "You don't have Energy assets to unfreeze."
     },
     "TronUnfreezeNotExpired": {
-      "title": "Unfreeze is not available yet",
+      "title": ".",
       "description": "Please wait 3 days after your last Freeze operation."
     },
     "TronVoteRequired": {
