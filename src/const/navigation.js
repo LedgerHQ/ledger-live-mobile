@@ -292,6 +292,7 @@ export const NavigatorName = {
   AddAccounts: "AddAccounts",
   Exchange: "Exchange",
   ExchangeBuyFlow: "ExchangeBuyFlow",
+  ExchangeBuyFlowWyre: "ExchangeBuyFlowWyre",
   ExchangeSellFlow: "ExchangeSellFlow",
   Base: "Base",
   BaseOnboarding: "BaseOnboarding",

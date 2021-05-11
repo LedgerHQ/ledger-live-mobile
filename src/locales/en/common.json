@@ -3447,7 +3447,7 @@
       "selectCurrency": "Select a currency",
       "selectAccount": "Select an account",
       "connectDevice": "Connect your device",
-      "title": "Buy crypto via our partner",
+      "title": "Choose a provider to buy crypto",
       "description": "Purchase crypto assets via Coinify and receive them directly in your Ledger account.",
       "CTAButton": "Buy now",
       "emptyState": {
@@ -3460,6 +3460,18 @@
         "cancel": "Cancel",
         "address": "Address for {{currency}} account",
         "warning": "Your address was not confirmed on your Ledger device. Please verify it for security"
+      },
+      "wyre": {
+        "bullet1": "Only bank account from",
+        "bullet2": "USD, GBP, EUR & 11 others supported",
+        "bullet3": "ACH transfer",
+        "bullet4": "0.75% fees"
+      },
+      "coinify": {
+        "bullet1": "Available for all bank accounts",
+        "bullet2": "EUR, USD, GBP & 32 others supported",
+        "bullet3": "SEPA payment, credit or debit card",
+        "bullet4": "1.5% / 4.25% fees"
       }
     },
     "sell": {

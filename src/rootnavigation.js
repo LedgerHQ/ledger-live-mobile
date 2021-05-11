@@ -5,8 +5,11 @@ export const navigationRef = React.createRef();
 export const isReadyRef = React.createRef();
 
 export function navigate(name, params) {
+  console.log("navigation ref", navigationRef);
   if (isReadyRef.current && navigationRef.current) {
     // Perform navigation if the app has mounted
-    navigationRef.current.navigate(name, params);
+    setTimeout(() => {
+      navigationRef.current.navigate(name, params);
+    }, 200);
   }
 }
