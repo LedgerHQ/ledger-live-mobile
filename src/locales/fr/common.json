@@ -847,7 +847,7 @@
               "label": "Choisissez toujours votre code PIN par vous-même."
             },
             "1": {
-              "label": "Assurez-vous de ne pas être observé quand vous entrez votre code PIN."
+              "label": "Entrez toujours votre code PIN à l'abri des regards."
             },
             "2": {
               "label": "Vous pouvez modifier votre code PIN ultérieurement si nécessaire."
@@ -862,7 +862,7 @@
               "label": "Ne donnez jamais votre code PIN à quelqu'un d'autre. Même pas à Ledger."
             },
             "6": {
-              "label": "N'utilisez jamais un code PIN que vous n'avez pas choisi par vous-même."
+              "label": "N'utilisez jamais un code PIN que vous n'avez pas choisi vous-même."
             },
             "7": {
               "label": "Ne sauvegardez jamais votre code PIN sur un ordinateur ou un smartphone."
