@@ -43,6 +43,7 @@ import { accountsSelector } from "../../reducers/accounts";
 import UpdateIcon from "../../icons/Update";
 
 import type { Manifest } from "./type";
+import Color from "color";
 
 const injectedCode = `
   window.postMessage = event => {
@@ -134,7 +135,10 @@ const WebPlatformPlayer = ({ manifest }: Props) => {
               currencies: currenciesDiff,
               currency,
               allowAddAccount,
-              onSuccess: resolve,
+              onSuccess: account =>
+                resolve(
+                  serializePlatformAccount(accountToPlatformAccount(account)),
+                ),
               onError: reject,
             },
           });
@@ -144,6 +148,7 @@ const WebPlatformPlayer = ({ manifest }: Props) => {
             params: {
               currencies: currenciesDiff,
               allowAddAccount,
+              // TODO: serialize?
               onSuccess: resolve,
               onError: reject,
             },
@@ -333,6 +338,13 @@ const WebPlatformPlayer = ({ manifest }: Props) => {
     };
   }, [widgetLoaded, widgetError]);
 
+  const {
+    colors: { background, text },
+  } = useTheme();
+
+  const bgColorHex = useMemo(() => new Color(background).hex(), [background]);
+  const textColorHex = useMemo(() => new Color(text).hex(), [text]);
+
   return (
     <View style={[styles.root]}>
       <WebView
@@ -346,7 +358,8 @@ const WebPlatformPlayer = ({ manifest }: Props) => {
         originWhitelist={["https://*"]}
         allowsInlineMediaPlayback
         source={{
-          uri: `${manifest.url.toString()}&${loadDate}`,
+          //uri: `${manifest.url.toString()}&${loadDate}`,
+          uri: `${manifest.url.toString()}&backgroundColor=${bgColorHex}&textColor=${textColorHex}&${loadDate}`,
         }}
         onLoad={handleLoad}
         injectedJavaScript={injectedCode}
@@ -358,26 +371,9 @@ const WebPlatformPlayer = ({ manifest }: Props) => {
         style={styles.webview}
         androidHardwareAccelerationDisabled
       />
-      <Footer onReload={handleReload} />
     </View>
   );
 };
-
-function Footer({ onReload }: { onReload: Function }) {
-  const { colors } = useTheme();
-  return (
-    <View
-      style={[
-        styles.footer,
-        { borderColor: colors.lightFog, backgroundColor: colors.background },
-      ]}
-    >
-      <TouchableOpacity onPress={onReload}>
-        <UpdateIcon size={24} color={colors.grey} />
-      </TouchableOpacity>
-    </View>
-  );
-}
 
 const styles = StyleSheet.create({
   root: {
@@ -401,11 +397,6 @@ const styles = StyleSheet.create({
     flex: 0,
     width: "100%",
     height: "100%",
-  },
-  footer: {
-    borderTopWidth: 1,
-    padding: 16,
-    alignItems: "flex-end",
   },
 });
 
