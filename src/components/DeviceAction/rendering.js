@@ -1,5 +1,5 @@
 // @flow
-import React, { useCallback, useEffect } from "react";
+import React, { useEffect } from "react";
 import { View, StyleSheet, Linking } from "react-native";
 import Icon from "react-native-vector-icons/dist/Feather";
 import { WrongDeviceForAccount, UnexpectedBootloader } from "@ledgerhq/errors";
@@ -320,8 +320,7 @@ export function renderError({
   onRetry?: () => void,
   managerAppName?: string,
 }) {
-  /* eslint-disable react-hooks/rules-of-hooks */
-  const onPress = useCallback(() => {
+  const onPress = () => {
     if (managerAppName) {
       navigation.navigate(NavigatorName.Manager, {
         screen: ScreenName.Manager,
@@ -333,7 +332,7 @@ export function renderError({
     } else if (onRetry) {
       onRetry();
     }
-  }, [managerAppName, navigation, onRetry]);
+  };
   return (
     <View style={styles.wrapper}>
       <GenericErrorView error={error} withDescription withIcon />
