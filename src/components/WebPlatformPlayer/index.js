@@ -37,13 +37,13 @@ import {
   deserializePlatformTransaction,
 } from "@ledgerhq/live-common/lib/platform/serializers";
 
+import Color from "color";
 import { NavigatorName, ScreenName } from "../../const";
 import { broadcastSignedTx } from "../../logic/screenTransactionHooks";
 import { accountsSelector } from "../../reducers/accounts";
 import UpdateIcon from "../../icons/Update";
 
 import type { Manifest } from "./type";
-import Color from "color";
 
 const injectedCode = `
   window.postMessage = event => {
@@ -57,6 +57,7 @@ type Props = {
 };
 
 const WebPlatformPlayer = ({ manifest }: Props) => {
+  const theme = useTheme();
   const targetRef: { current: null | WebView } = useRef(null);
   const accounts = useSelector(accountsSelector);
   const currencies = useMemo(() => listCryptoCurrencies(), []);
@@ -338,12 +339,18 @@ const WebPlatformPlayer = ({ manifest }: Props) => {
     };
   }, [widgetLoaded, widgetError]);
 
-  const {
-    colors: { background, text },
-  } = useTheme();
+  const uri = useMemo(() => {
+    const url = new URL(manifest.url.toString());
 
-  const bgColorHex = useMemo(() => new Color(background).hex(), [background]);
-  const textColorHex = useMemo(() => new Color(text).hex(), [text]);
+    url.searchParams.set(
+      "backgroundColor",
+      new Color(theme.colors.background).hex(),
+    );
+    url.searchParams.set("textColor", new Color(theme.colors.text).hex());
+    url.searchParams.set("loadDate", loadDate.valueOf().toString());
+
+    return url;
+  }, [manifest.url, loadDate, theme]);
 
   return (
     <View style={[styles.root]}>
@@ -358,8 +365,7 @@ const WebPlatformPlayer = ({ manifest }: Props) => {
         originWhitelist={["https://*"]}
         allowsInlineMediaPlayback
         source={{
-          //uri: `${manifest.url.toString()}&${loadDate}`,
-          uri: `${manifest.url.toString()}&backgroundColor=${bgColorHex}&textColor=${textColorHex}&${loadDate}`,
+          uri: uri.toString(),
         }}
         onLoad={handleLoad}
         injectedJavaScript={injectedCode}
