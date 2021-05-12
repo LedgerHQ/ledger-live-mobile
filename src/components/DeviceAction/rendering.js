@@ -314,6 +314,7 @@ export function renderError({
   navigation,
 }: {
   ...RawProps,
+  navigation: any,
   error: Error,
   onRetry?: () => void,
   managerAppName?: string,
