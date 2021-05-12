@@ -9,7 +9,7 @@ import { useTheme } from "@react-navigation/native";
 import LText from "../../components/LText";
 import CurrencyIcon from "../../components/CurrencyIcon";
 import Button from "../../components/Button";
-import DangerBox from "../../components/DangerBox";
+import Alert from "../../components/Alert";
 
 type Props = {
   settleTrade: Function,
@@ -36,14 +36,19 @@ const SkipDeviceVerification = ({ settleTrade, account }: Props) => {
           {account.name}
         </LText>
       </View>
-      <View style={styles.addressContainer}>
+      <View
+        style={[
+          styles.addressContainer,
+          { backgroundColor: colors.background, borderColor: colors.fog },
+        ]}
+      >
         <LText style={styles.address} semiBold>
           {account.freshAddress}
         </LText>
       </View>
-      <DangerBox>
+      <Alert type="danger">
         <Trans i18nKey="exchange.buy.skipDeviceVerification.warning" />
-      </DangerBox>
+      </Alert>
       <View style={styles.confirmationFooter}>
         <Button
           event="SkipDeviceModalCancel"

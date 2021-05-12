@@ -13,7 +13,7 @@ type Props = {
   eventProperties?: Object,
   iconFirst?: boolean,
   ltextProps?: *,
-  color: string,
+  color?: string,
 };
 
 const Link = ({
@@ -25,7 +25,7 @@ const Link = ({
   color,
 }: Props) => {
   const { colors } = useTheme();
-  const c = colors[color] || colors.live;
+  const c = color || colors.live;
   return (
     <Touchable
       event={event}

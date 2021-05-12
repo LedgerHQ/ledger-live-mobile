@@ -72,6 +72,9 @@ export default function DeviceAction<R, H, P>({
     initSellRequested,
     initSellResult,
     initSellError,
+    installingApp,
+    progress,
+    listingApps,
   } = status;
 
   if (displayUpgradeWarning && appAndVersion) {
@@ -89,6 +92,19 @@ export default function DeviceAction<R, H, P>({
     return renderRequestQuitApp({
       t,
       device: selectedDevice,
+      colors,
+      theme,
+    });
+  }
+
+  if (installingApp) {
+    const appName = requestOpenApp;
+    return renderLoading({
+      t,
+      description: t("DeviceAction.installApp", {
+        percentage: (progress * 100).toFixed(0) + "%",
+        appName,
+      }),
       colors,
       theme,
     });
@@ -116,7 +132,15 @@ export default function DeviceAction<R, H, P>({
     });
   }
 
-  // FIXME move out of here, this shouldn't be here.
+  if (listingApps) {
+    return renderLoading({
+      t,
+      description: t("DeviceAction.listApps"),
+      colors,
+      theme,
+    });
+  }
+
   if (initSwapRequested && !initSwapResult && !initSwapError) {
     return renderConfirmSwap({ t, device: selectedDevice, colors, theme });
   }
@@ -208,6 +232,7 @@ export default function DeviceAction<R, H, P>({
   }
 
   if (request && device && signMessageRequested) {
+    // $FlowFixMe
     const { account } = request;
     return (
       <>
@@ -253,7 +278,7 @@ export default function DeviceAction<R, H, P>({
   return null;
 }
 
-// workarround for not updating state inside scope of main function with a callback
+// work around for not updating state inside scope of main function with a callback
 const RenderOnResultCallback = ({
   onResult,
   payload,
@@ -261,6 +286,7 @@ const RenderOnResultCallback = ({
   onResult: (payload: *) => Promise<void> | void,
   payload: *,
 }) => {
+  // onDidMount
   useEffect(() => {
     onResult(payload);
   }, []);

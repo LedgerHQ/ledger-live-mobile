@@ -19,7 +19,6 @@ import { accountScreenSelector } from "../../reducers/accounts";
 import { ScreenName } from "../../const";
 import { TrackScreen } from "../../analytics";
 import SelectDevice from "../../components/SelectDevice";
-import Button from "../../components/Button";
 import NavigationScrollView from "../../components/NavigationScrollView";
 import { readOnlyModeEnabledSelector } from "../../reducers/settings";
 import ReadOnlyWarning from "./ReadOnlyWarning";
@@ -114,6 +113,7 @@ export default function ConnectDevice({ navigation, route }: Props) {
   }
 
   const mainAccount = getMainAccount(account, parentAccount);
+  const currency = getAccountCurrency(account);
   const tokenCurrency =
     account && account.type === "TokenAccount" && account.token;
 
@@ -137,29 +137,21 @@ export default function ConnectDevice({ navigation, route }: Props) {
       ]}
       forceInset={forceInset}
     >
-      <TrackScreen category="ReceiveFunds" name="ConnectDevice" />
+      <TrackScreen
+        category="ReceiveFunds"
+        name="ConnectDevice"
+        currencyName={currency.name}
+      />
       <NavigationScrollView
         style={styles.scroll}
         contentContainerStyle={styles.scrollContainer}
       >
-        <SelectDevice onSelect={setDevice} />
-      </NavigationScrollView>
-      <View
-        style={[
-          styles.footer,
-          {
-            borderTopColor: colors.lightFog,
-          },
-        ]}
-      >
-        <Button
-          event="ReceiveWithoutDevice"
-          type="lightSecondary"
-          title={t("transfer.receive.withoutDevice")}
-          onPress={onSkipDevice}
+        <SelectDevice
+          onSelect={setDevice}
+          onWithoutDevice={onSkipDevice}
+          withoutDevice
         />
-      </View>
-
+      </NavigationScrollView>
       <DeviceActionModal
         action={action}
         device={device}
@@ -188,9 +180,5 @@ const styles = StyleSheet.create({
   },
   scrollContainer: {
     padding: 16,
-  },
-  footer: {
-    padding: 4,
-    borderTopWidth: 1,
   },
 });
