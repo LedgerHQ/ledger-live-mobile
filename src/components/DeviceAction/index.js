@@ -111,11 +111,13 @@ export default function DeviceAction<R, H, P>({
   }
 
   if (requiresAppInstallation) {
-    const { appName } = requiresAppInstallation;
+    const { appName, appNames: maybeAppNames } = requiresAppInstallation;
+    const appNames = maybeAppNames?.length ? maybeAppNames : [appName];
+
     return renderRequiresAppInstallation({
       t,
       navigation,
-      appName,
+      appNames,
       colors,
       theme,
     });
