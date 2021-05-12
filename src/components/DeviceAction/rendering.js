@@ -314,13 +314,13 @@ export function renderError({
   navigation,
 }: {
   ...RawProps,
-  navigation: any,
+  navigation?: any,
   error: Error,
   onRetry?: () => void,
   managerAppName?: string,
 }) {
   const onPress = () => {
-    if (managerAppName) {
+    if (managerAppName && navigation) {
       navigation.navigate(NavigatorName.Manager, {
         screen: ScreenName.Manager,
         params: {
