@@ -699,7 +699,7 @@
     "stepWelcome": {
       "title": "Bienvenue chez Ledger",
       "subtitle": "Gérez vos cryptos en toute sécurité depuis votre smartphone.",
-      "start": "C'est parti",
+      "start": "Commencer",
       "noDevice": "Pas encore d'appareil ?",
       "buy": "Achetez un {{fullDeviceName}}"
     },
@@ -1029,12 +1029,12 @@
       "nanoX": {
         "title": "Coupler votre Nano",
         "desc": "C'est la première fois que vous configurez votre Nano sur ce smartphone. Appairons rapidement votre appareil.",
-        "cta": "Couplons mon Nano"
+        "cta": "Coupler mon Nano"
       },
       "nanoS": {
         "title": "Connectez votre Nano",
         "desc": "C'est la première fois que vous configurez votre Nano sur ce smartphone. Connectons rapidement votre appareil.",
-        "cta": "Connectons mon Nano"
+        "cta": "Connecter mon Nano"
       },
       "blue": {
         "title": "Connectez votre Blue",
