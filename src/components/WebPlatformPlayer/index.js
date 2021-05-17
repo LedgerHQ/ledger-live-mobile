@@ -37,7 +37,6 @@ import {
   deserializePlatformTransaction,
 } from "@ledgerhq/live-common/lib/platform/serializers";
 
-import Color from "color";
 import { NavigatorName, ScreenName } from "../../const";
 import { broadcastSignedTx } from "../../logic/screenTransactionHooks";
 import { accountsSelector } from "../../reducers/accounts";
@@ -83,7 +82,6 @@ const WebPlatformPlayer = ({ route }: { route: { params: Props } }) => {
   const currencies = useMemo(() => listCryptoCurrencies(), []);
   const theme = useTheme();
 
-  // eslint-disable-next-line no-unused-vars
   const [loadDate, setLoadDate] = useState(Date.now());
   const [widgetLoaded, setWidgetLoaded] = useState(false);
   const [widgetError, setWidgetError] = useState(false);
@@ -99,6 +97,7 @@ const WebPlatformPlayer = ({ route }: { route: { params: Props } }) => {
   );
 
   const listCurrencies = useCallback(
+    // TODO: use type ListCurrenciesParams from LedgerLiveApiSdk
     () => currencies.map(currencyToPlatformCurrency),
     [currencies],
   );
@@ -107,7 +106,9 @@ const WebPlatformPlayer = ({ route }: { route: { params: Props } }) => {
     ({
       currencies: currencyIds = [],
       allowAddAccount,
-    }: {
+    }: // TODO: use type RequestAccountParams from LedgerLiveApiSdk
+    //}: RequestAccountParams) =>
+    {
       currencies?: string[],
       allowAddAccount?: boolean,
     }) =>
@@ -210,9 +211,13 @@ const WebPlatformPlayer = ({ route }: { route: { params: Props } }) => {
     ({
       accountId,
       transaction,
-    }: {
+      params = {},
+    }: // TODO: use type SignTransactionParams from LedgerLiveApiSdk
+    //}: SignTransactionParams) => {
+    {
       accountId: string,
       transaction: RawPlatformTransaction,
+      params: any,
     }) => {
       const platformTransaction = deserializePlatformTransaction(transaction);
       const account = accounts.find(account => account.id === accountId);
@@ -248,6 +253,7 @@ const WebPlatformPlayer = ({ route }: { route: { params: Props } }) => {
             nextNavigation: ScreenName.SignTransactionSelectDevice,
             transaction: tx,
             accountId,
+            appName: params.useApp,
             onSuccess: ({ signedOperation, transactionSignError }) => {
               if (transactionSignError) reject(transactionSignError);
               else {
@@ -368,19 +374,6 @@ const WebPlatformPlayer = ({ route }: { route: { params: Props } }) => {
     };
   }, [widgetLoaded, widgetError]);
 
-  const uri = useMemo(() => {
-    const url = new URL(manifest.url.toString());
-
-    url.searchParams.set(
-      "backgroundColor",
-      new Color(theme.colors.background).hex(),
-    );
-    url.searchParams.set("textColor", new Color(theme.colors.text).hex());
-    url.searchParams.set("loadDate", loadDate.valueOf().toString());
-
-    return url;
-  }, [manifest.url, loadDate, theme]);
-
   return (
     <View style={[styles.root]}>
       <WebView
@@ -394,7 +387,7 @@ const WebPlatformPlayer = ({ route }: { route: { params: Props } }) => {
         originWhitelist={["https://*"]}
         allowsInlineMediaPlayback
         source={{
-          uri: uri.toString(),
+          uri: `${manifest.url.toString()}&${loadDate}`,
         }}
         onLoad={handleLoad}
         injectedJavaScript={injectedCode}

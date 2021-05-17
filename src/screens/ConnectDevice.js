@@ -36,6 +36,7 @@ type RouteParams = {
   accountId: string,
   transaction: Transaction,
   status: TransactionStatus,
+  appName?: string,
   onSuccess?: (payload: *) => void,
   onError?: (error: *) => void,
 };
@@ -46,7 +47,7 @@ export default function ConnectDevice({ route }: Props) {
   const { account, parentAccount } = useSelector(accountScreenSelector(route));
   invariant(account, "account is required");
 
-  const { onSuccess, onError } = route.params;
+  const { appName, onSuccess, onError } = route.params;
 
   const mainAccount = getMainAccount(account, parentAccount);
 
@@ -95,6 +96,7 @@ export default function ConnectDevice({ route }: Props) {
             request={{
               account,
               parentAccount,
+              appName,
               transaction,
               status,
               tokenCurrency,

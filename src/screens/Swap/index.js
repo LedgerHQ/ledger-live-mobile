@@ -16,7 +16,7 @@ import ChangellyIcon from "../../icons/swap/Changelly";
 import ParaswapIcon from "../../icons/swap/Paraswap";
 
 import Item from "./ProviderListItem";
-import manifests from "./manifests";
+import useManifests from "./manifests";
 
 type RouteParams = {
   defaultAccount: ?AccountLike,
@@ -28,6 +28,7 @@ const SwapProviders = ({ route }: { route: { params: RouteParams } }) => {
   const [selectedItem, setSelectedItem] = useState();
   const { t } = useTranslation();
   const navigation = useNavigation();
+  const manifests = useManifests();
   const rows = false;
 
   const onContinue = useCallback(

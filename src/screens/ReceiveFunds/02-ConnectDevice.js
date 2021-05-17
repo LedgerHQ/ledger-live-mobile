@@ -39,6 +39,7 @@ type RouteParams = {
   accountId: string,
   parentId?: string,
   title: string,
+  appName?: string,
   onSuccess?: () => void,
   onError?: () => void,
 };
@@ -160,6 +161,7 @@ export default function ConnectDevice({ navigation, route }: Props) {
         renderOnResult={onResult}
         onClose={onClose}
         request={{ account: mainAccount, tokenCurrency }}
+        appName={route.params.appName}
       />
     </SafeAreaView>
   );

@@ -52,6 +52,7 @@ export type RouteParams = {
   hideTotal?: boolean,
   customGasPrice?: BigNumber,
   customGasLimit?: BigNumber,
+  appName?: string,
 };
 
 const defaultParams = {
