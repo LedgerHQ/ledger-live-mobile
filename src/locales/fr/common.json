@@ -708,7 +708,7 @@
       "cta": "Continuer",
       "warning": {
         "title": "Commencer en anglais",
-        "cta": "J'ai compris !",
+        "cta": "Compris !",
         "desc": "Nous ajoutons des langues supplémentaires afin de faciliter vos premiers pas avec Ledger. Veuillez noter que le reste de l'expérience Ledger est actuellement uniquement disponible en anglais."
       }
     },
@@ -791,7 +791,7 @@
         "warning": {
           "title": "Restez attentif",
           "desc": "Assurez-vous de bien suivre les instructions de cette appli à toutes les étapes du processus.",
-          "ctaText": "J'ai compris !"
+          "ctaText": "Compris !"
         }
       },
       "setup": {
@@ -967,7 +967,7 @@
         "warning": {
           "title": "Nous ne recommandons que les phrases de récupération générées par Ledger",
           "desc": "Ledger ne peut pas garantir la sécurité de phrases de récupération fournies par des tiers. Nous vous recommandons de paramétrer votre Nano comme un nouvel appareil si votre phrase de récupération n'a pas été générée par Ledger.",
-          "cta": "J'ai compris !"
+          "cta": "Compris !"
         },
         "nextStep": "Étape suivante",
         "bullets": {
@@ -1106,7 +1106,7 @@
       "warning": {
         "title": "Vos applis ordinateur et mobile doivent être synchronisées manuellement.",
         "desc": "Ledger Live respecte votre vie privée et stocke vos données localement. Si vous changez les comptes ou paramètres sur votre téléphone, vous devez le faire aussi sur votre ordinateur, et inversement. Vos transactions restent synchronisées avec la blockchain.",
-        "cta": "J'ai compris !"
+        "cta": "Compris !"
       }
     },
     "stepSetupPin": {
