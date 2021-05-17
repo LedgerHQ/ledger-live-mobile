@@ -4,12 +4,13 @@ import { StyleSheet, View } from "react-native";
 import { useNavigation, useRoute, useTheme } from "@react-navigation/native";
 import SafeAreaView from "react-native-safe-area-view";
 import { Trans } from "react-i18next";
-import { ScreenName } from "../../../const";
-import LText from "../../../components/LText";
-import Alert from "../../../components/Alert";
-import Button from "../../../components/Button";
-import IconSwap from "../../../icons/Swap";
-import { rgba } from "../../../colors";
+
+import { ScreenName } from "../../../../const";
+import LText from "../../../../components/LText";
+import Alert from "../../../../components/Alert";
+import Button from "../../../../components/Button";
+import IconSwap from "../../../../icons/Swap";
+import { rgba } from "../../../../colors";
 
 const forceInset = { bottom: "always" };
 

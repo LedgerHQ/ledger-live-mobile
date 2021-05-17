@@ -3,27 +3,31 @@ import React from "react";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "@react-navigation/native";
+
 import type {
   Account,
   AccountLike,
 } from "@ledgerhq/live-common/lib/types/account";
-import { ScreenName } from "../../const";
+
+import { ScreenName } from "../../../const";
+import styles from "../../../navigation/styles";
+import LText from "../../../components/LText";
+
 import Swap from "./Swap";
 import History from "./History";
-import styles from "../../navigation/styles";
-import LText from "../../components/LText";
 
 type TabLabelProps = {
   focused: boolean,
   color: string,
 };
 
-type Props = {
+type RouteParams = {
   defaultAccount: ?AccountLike,
   defaultParentAccount: ?Account,
 };
 
-export default (props: Props) => {
+const SwapFormOrHistory = ({ route }: { route: { params: RouteParams } }) => {
+  const { params: routeParams } = route;
   const { t } = useTranslation();
   const { colors } = useTheme();
 
@@ -47,7 +51,7 @@ export default (props: Props) => {
           ),
         }}
       >
-        {_props => <Swap {..._props} {...props} />}
+        {_props => <Swap {..._props} {...routeParams} />}
       </Tab.Screen>
       <Tab.Screen
         name={ScreenName.SwapHistory}
@@ -66,3 +70,5 @@ export default (props: Props) => {
 };
 
 const Tab = createMaterialTopTabNavigator();
+
+export default SwapFormOrHistory;

@@ -1,20 +1,22 @@
 // @flow
 import React, { useCallback } from "react";
 import { StyleSheet } from "react-native";
-import { Trans } from "react-i18next";
 import Icon from "react-native-vector-icons/dist/AntDesign";
+import { Trans } from "react-i18next";
 import { useNavigation, useTheme } from "@react-navigation/native";
+
 import type {
   CryptoCurrency,
   TokenCurrency,
 } from "@ledgerhq/live-common/lib/types";
 import type { CurrencyStatus } from "@ledgerhq/live-common/lib/exchange/swap/logic";
-import { ScreenName, NavigatorName } from "../../../../const";
-import Circle from "../../../../components/Circle";
-import BottomModal from "../../../../components/BottomModal";
-import { MANAGER_TABS } from "../../../Manager/Manager";
-import LText from "../../../../components/LText";
-import Button from "../../../../components/Button";
+
+import { ScreenName, NavigatorName } from "../../../../../const";
+import Circle from "../../../../../components/Circle";
+import BottomModal from "../../../../../components/BottomModal";
+import { MANAGER_TABS } from "../../../../Manager/Manager";
+import LText from "../../../../../components/LText";
+import Button from "../../../../../components/Button";
 
 const BadSelectionModal = ({
   currency,

@@ -1,4 +1,9 @@
 import React, { useCallback } from "react";
+import Icon from "react-native-vector-icons/dist/Ionicons";
+import { Trans } from "react-i18next";
+import { useSelector } from "react-redux";
+import { useTheme } from "@react-navigation/native";
+import Config from "react-native-config";
 import {
   ScrollView,
   StyleSheet,
@@ -6,27 +11,25 @@ import {
   Linking,
   TouchableOpacity,
 } from "react-native";
+
 import type { MappedSwapOperation } from "@ledgerhq/live-common/lib/exchange/swap/types";
 import {
   getAccountName,
   getAccountUnit,
   getAccountCurrency,
 } from "@ledgerhq/live-common/lib/account/helpers";
-import Icon from "react-native-vector-icons/dist/Ionicons";
-import { Trans } from "react-i18next";
-import { useSelector } from "react-redux";
-import { useTheme } from "@react-navigation/native";
-import Config from "react-native-config";
-import { flattenAccountsSelector } from "../../reducers/accounts";
-import CurrencyUnitValue from "../../components/CurrencyUnitValue";
-import LText from "../../components/LText";
-import SectionSeparator from "../../components/SectionSeparator";
-import TooltipLabel from "../../components/TooltipLabel";
-import CurrencyIcon from "../../components/CurrencyIcon";
+
+import { flattenAccountsSelector } from "../../../reducers/accounts";
+import CurrencyUnitValue from "../../../components/CurrencyUnitValue";
+import LText from "../../../components/LText";
+import SectionSeparator from "../../../components/SectionSeparator";
+import TooltipLabel from "../../../components/TooltipLabel";
+import CurrencyIcon from "../../../components/CurrencyIcon";
+import { urls } from "../../../config/urls";
+import { localeIds } from "../../../languages";
+import ExternalLink from "../../../icons/ExternalLink";
+
 import SwapStatusIndicator, { getStatusColor } from "./SwapStatusIndicator";
-import { urls } from "../../config/urls";
-import { localeIds } from "../../languages";
-import ExternalLink from "../../icons/ExternalLink";
 
 type Props = {
   route: {

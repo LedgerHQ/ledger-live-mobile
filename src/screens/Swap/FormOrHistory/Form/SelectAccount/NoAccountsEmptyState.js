@@ -3,11 +3,13 @@ import React, { useCallback } from "react";
 import { View, StyleSheet } from "react-native";
 import { Trans } from "react-i18next";
 import { useNavigation, useTheme } from "@react-navigation/native";
+
 import type { Currency } from "@ledgerhq/live-common/lib/types";
-import InfoIcon from "../../../../icons/Info";
-import LText from "../../../../components/LText";
-import Button from "../../../../components/Button";
-import { NavigatorName } from "../../../../const";
+
+import InfoIcon from "../../../../../icons/Info";
+import LText from "../../../../../components/LText";
+import Button from "../../../../../components/Button";
+import { NavigatorName } from "../../../../../const";
 
 const NoAccountsEmptyState = ({
   selectedCurrency,

@@ -1,10 +1,12 @@
 // @flow
 import React, { useMemo, useCallback, useEffect, useState } from "react";
-import invariant from "invariant";
-import { BigNumber } from "bignumber.js";
 import { View, StyleSheet } from "react-native";
 import { Trans } from "react-i18next";
 import { useSelector } from "react-redux";
+
+import invariant from "invariant";
+import { BigNumber } from "bignumber.js";
+
 import {
   getAccountUnit,
   getAccountCurrency,
@@ -16,20 +18,22 @@ import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTran
 import { AmountRequired, NotEnoughBalance } from "@ledgerhq/errors";
 import { getEnabledTradeMethods } from "@ledgerhq/live-common/lib/exchange/swap/logic";
 import { getExchangeRates } from "@ledgerhq/live-common/lib/exchange/swap";
-import { swapSupportedCurrenciesSelector } from "../../../reducers/settings";
-import type { SwapRouteParams } from ".";
-import KeyboardView from "../../../components/KeyboardView";
-import LText from "../../../components/LText";
-import getFontStyle from "../../../components/LText/getFontStyle";
-import SectionSeparator from "../../../components/SectionSeparator";
-import CurrencyInput from "../../../components/CurrencyInput";
-import CurrencyUnitValue from "../../../components/CurrencyUnitValue";
-import TranslatedError from "../../../components/TranslatedError";
-import Button from "../../../components/Button";
-import ToggleButton from "../../../components/ToggleButton";
+
+import { swapSupportedCurrenciesSelector } from "../../../../reducers/settings";
+import KeyboardView from "../../../../components/KeyboardView";
+import LText from "../../../../components/LText";
+import getFontStyle from "../../../../components/LText/getFontStyle";
+import SectionSeparator from "../../../../components/SectionSeparator";
+import CurrencyInput from "../../../../components/CurrencyInput";
+import CurrencyUnitValue from "../../../../components/CurrencyUnitValue";
+import TranslatedError from "../../../../components/TranslatedError";
+import Button from "../../../../components/Button";
+import ToggleButton from "../../../../components/ToggleButton";
+import Switch from "../../../../components/Switch";
+import { ScreenName } from "../../../../const";
+
 import Rate from "./Rate";
-import Switch from "../../../components/Switch";
-import { ScreenName } from "../../../const";
+import type { SwapRouteParams } from ".";
 
 type Props = {
   navigation: any,

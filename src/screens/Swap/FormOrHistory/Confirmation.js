@@ -1,8 +1,11 @@
 // @flow
 
 import React, { useCallback, useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { StyleSheet, View } from "react-native";
 import { useTranslation } from "react-i18next";
+import { useNavigation } from "@react-navigation/native";
+
 import type {
   Transaction,
   TransactionStatus,
@@ -16,20 +19,19 @@ import { createAction } from "@ledgerhq/live-common/lib/hw/actions/transaction";
 import { createAction as initSwapCreateAction } from "@ledgerhq/live-common/lib/hw/actions/initSwap";
 import initSwap from "@ledgerhq/live-common/lib/exchange/swap/initSwap";
 import connectApp from "@ledgerhq/live-common/lib/hw/connectApp";
-import { useDispatch } from "react-redux";
+import addToSwapHistory from "@ledgerhq/live-common/lib/exchange/swap/addToSwapHistory";
 import {
   addPendingOperation,
   getMainAccount,
 } from "@ledgerhq/live-common/lib/account";
-import addToSwapHistory from "@ledgerhq/live-common/lib/exchange/swap/addToSwapHistory";
-import { useNavigation } from "@react-navigation/native";
-import { renderLoading } from "../../components/DeviceAction/rendering";
-import { ScreenName } from "../../const";
-import { updateAccountWithUpdater } from "../../actions/accounts";
-import DeviceAction from "../../components/DeviceAction";
-import BottomModal from "../../components/BottomModal";
-import ModalBottomAction from "../../components/ModalBottomAction";
-import { useBroadcast } from "../../components/useBroadcast";
+
+import { renderLoading } from "../../../components/DeviceAction/rendering";
+import { ScreenName } from "../../../const";
+import { updateAccountWithUpdater } from "../../../actions/accounts";
+import DeviceAction from "../../../components/DeviceAction";
+import BottomModal from "../../../components/BottomModal";
+import ModalBottomAction from "../../../components/ModalBottomAction";
+import { useBroadcast } from "../../../components/useBroadcast";
 
 import type { DeviceMeta } from "./Form";
 

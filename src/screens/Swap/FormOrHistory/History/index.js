@@ -16,20 +16,23 @@ import { useSelector, useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import Share from "react-native-share";
 import { useTheme } from "@react-navigation/native";
+
 import getCompleteSwapHistory from "@ledgerhq/live-common/lib/exchange/swap/getCompleteSwapHistory";
 import updateAccountSwapStatus from "@ledgerhq/live-common/lib/exchange/swap/updateAccountSwapStatus";
 import { mappedSwapOperationsToCSV } from "@ledgerhq/live-common/lib/exchange/swap/csvExport";
 import { operationStatusList } from "@ledgerhq/live-common/lib/exchange/swap";
-import useInterval from "../../../components/useInterval";
-import { updateAccountWithUpdater } from "../../../actions/accounts";
-import { flattenAccountsSelector } from "../../../reducers/accounts";
+
+import useInterval from "../../../../components/useInterval";
+import { updateAccountWithUpdater } from "../../../../actions/accounts";
+import { flattenAccountsSelector } from "../../../../reducers/accounts";
+import LText from "../../../../components/LText";
+import Button from "../../../../components/Button";
+import logger from "../../../../logger";
+import DownloadFileIcon from "../../../../icons/DownloadFile";
+import { TrackScreen } from "../../../../analytics";
+
 import OperationRow from "./OperationRow";
 import EmptyState from "./EmptyState";
-import LText from "../../../components/LText";
-import Button from "../../../components/Button";
-import logger from "../../../logger";
-import DownloadFileIcon from "../../../icons/DownloadFile";
-import { TrackScreen } from "../../../analytics";
 
 const AnimatedSectionList = Animated.createAnimatedComponent(SectionList);
 

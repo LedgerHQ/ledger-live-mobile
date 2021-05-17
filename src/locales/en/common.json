@@ -1770,6 +1770,7 @@
     },
     "swap": {
       "title": "Swap",
+      "paraswap": "Paraswap",
       "selectDevice": "Select your device",
       "broadcasting": "Broadcasting swap",
       "loadingFees": "Loading network fees...",

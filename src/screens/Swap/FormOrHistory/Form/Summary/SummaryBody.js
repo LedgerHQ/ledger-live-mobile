@@ -1,30 +1,32 @@
 // @flow
 import React, { useCallback, useState } from "react";
-import { BigNumber } from "bignumber.js";
 import { StyleSheet, View, TouchableOpacity, Linking } from "react-native";
-import { Trans } from "react-i18next";
-import type { TransactionStatus } from "@ledgerhq/live-common/lib/types";
+import { useTheme } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/dist/FontAwesome";
+import { Trans } from "react-i18next";
+
+import { BigNumber } from "bignumber.js";
+
+import type { TransactionStatus } from "@ledgerhq/live-common/lib/types";
+import type {
+  Exchange,
+  ExchangeRate,
+} from "@ledgerhq/live-common/lib/exchange/swap/types";
 import {
   getAccountName,
   getAccountUnit,
   getAccountCurrency,
 } from "@ledgerhq/live-common/lib/account/helpers";
-import type {
-  Exchange,
-  ExchangeRate,
-} from "@ledgerhq/live-common/lib/exchange/swap/types";
-import { useTheme } from "@react-navigation/native";
-import LText from "../../../../components/LText";
-import CurrencyUnitValue from "../../../../components/CurrencyUnitValue";
-import InfoModal from "../../../../components/InfoModal";
+
+import LText from "../../../../../components/LText";
+import CurrencyUnitValue from "../../../../../components/CurrencyUnitValue";
+import InfoModal from "../../../../../components/InfoModal";
 import SectionSeparator, {
   ArrowDownCircle,
-} from "../../../../components/SectionSeparator";
-import CurrencyIcon from "../../../../components/CurrencyIcon";
-import ExternalLink from "../../../../icons/ExternalLink";
-
-import { urls } from "../../../../config/urls";
+} from "../../../../../components/SectionSeparator";
+import CurrencyIcon from "../../../../../components/CurrencyIcon";
+import ExternalLink from "../../../../../icons/ExternalLink";
+import { urls } from "../../../../../config/urls";
 
 const SummaryBody = ({
   status,

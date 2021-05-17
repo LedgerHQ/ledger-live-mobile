@@ -4,7 +4,8 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 import { Trans } from "react-i18next";
 import { useTheme } from "@react-navigation/native";
-import LText from "../../../components/LText";
+
+import LText from "../../../../components/LText";
 
 const EmptyState = () => {
   const { colors } = useTheme();

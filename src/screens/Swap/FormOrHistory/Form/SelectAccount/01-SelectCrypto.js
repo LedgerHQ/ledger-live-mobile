@@ -1,24 +1,27 @@
 // @flow
 
 import React, { useCallback, useState } from "react";
-import { Trans } from "react-i18next";
 import { StyleSheet, View, FlatList } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
+import { Trans } from "react-i18next";
+import { useTheme } from "@react-navigation/native";
+
 import type {
   CryptoCurrency,
   TokenCurrency,
 } from "@ledgerhq/live-common/lib/types";
 import { useCurrenciesByMarketcap } from "@ledgerhq/live-common/lib/currencies";
 import { getAccountCurrency } from "@ledgerhq/live-common/lib/account";
-import { useTheme } from "@react-navigation/native";
+
+import { ScreenName } from "../../../../../const";
+import { TrackScreen } from "../../../../../analytics";
+import FilteredSearchBar from "../../../../../components/FilteredSearchBar";
+import KeyboardView from "../../../../../components/KeyboardView";
+import CurrencyRow from "../../../../../components/CurrencyRow";
+import LText from "../../../../../components/LText";
+
 import type { SwapRouteParams } from "..";
 import BadSelectionModal from "./BadSelectionModal";
-import { ScreenName } from "../../../../const";
-import { TrackScreen } from "../../../../analytics";
-import FilteredSearchBar from "../../../../components/FilteredSearchBar";
-import KeyboardView from "../../../../components/KeyboardView";
-import CurrencyRow from "../../../../components/CurrencyRow";
-import LText from "../../../../components/LText";
 
 const SEARCH_KEYS = ["name", "ticker"];
 const forceInset = { bottom: "always" };

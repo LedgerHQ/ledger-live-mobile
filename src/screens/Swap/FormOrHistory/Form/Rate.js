@@ -5,17 +5,20 @@ import { View, StyleSheet } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { Trans } from "react-i18next";
 import Icon from "react-native-vector-icons/FontAwesome5Pro";
+
 import { BigNumber } from "bignumber.js";
+
 import type {
   CryptoCurrency,
   TokenCurrency,
 } from "@ledgerhq/live-common/lib/types";
-import ClockIcon from "../../../icons/Clock";
-import CurrencyUnitValue from "../../../components/CurrencyUnitValue";
-import CountdownTimer from "../../../components/CountdownTimer";
-import LText from "../../../components/LText";
-import BottomModal from "../../../components/BottomModal";
-import Touchable from "../../../components/Touchable";
+
+import ClockIcon from "../../../../icons/Clock";
+import CurrencyUnitValue from "../../../../components/CurrencyUnitValue";
+import CountdownTimer from "../../../../components/CountdownTimer";
+import LText from "../../../../components/LText";
+import BottomModal from "../../../../components/BottomModal";
+import Touchable from "../../../../components/Touchable";
 
 const Rate = ({
   rateExpiration,

@@ -4,10 +4,10 @@ import React from "react";
 import { useTheme } from "@react-navigation/native";
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 
-import LText from "../../../components/LText";
-import BulletList, { BulletSmallDot } from "../../../components/BulletList";
+import LText from "../../components/LText";
+import BulletList, { BulletSmallDot } from "../../components/BulletList";
 
-const Item = ({
+const ProviderListItem = ({
   id,
   selected,
   onSelect,
@@ -88,4 +88,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Item;
+export default ProviderListItem;

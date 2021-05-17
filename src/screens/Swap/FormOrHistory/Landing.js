@@ -13,14 +13,15 @@ import {
 } from "react-native";
 import { useDispatch } from "react-redux";
 import { useTheme } from "@react-navigation/native";
-import Button from "../../components/Button";
-import LText from "../../components/LText";
-import CheckBox from "../../components/CheckBox";
-import swapIllustration from "../../images/swap.png";
-import { setHasAcceptedSwapKYC } from "../../actions/settings";
-import { TrackScreen } from "../../analytics";
-import ExternalLink from "../../icons/ExternalLink";
-import { urls } from "../../config/urls";
+
+import Button from "../../../components/Button";
+import LText from "../../../components/LText";
+import CheckBox from "../../../components/CheckBox";
+import swapIllustration from "../../../images/swap.png";
+import { setHasAcceptedSwapKYC } from "../../../actions/settings";
+import { TrackScreen } from "../../../analytics";
+import ExternalLink from "../../../icons/ExternalLink";
+import { urls } from "../../../config/urls";
 
 const Landing = () => {
   const { colors } = useTheme();

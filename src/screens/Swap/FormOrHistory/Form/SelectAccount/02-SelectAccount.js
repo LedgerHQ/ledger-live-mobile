@@ -2,28 +2,31 @@
 
 import React, { useCallback, useMemo } from "react";
 import { View, StyleSheet, FlatList, SafeAreaView } from "react-native";
+import { useSelector } from "react-redux";
 import { Trans } from "react-i18next";
+import { useTheme } from "@react-navigation/native";
+
 import type {
   Account,
   AccountLikeArray,
 } from "@ledgerhq/live-common/lib/types";
-import { useSelector } from "react-redux";
 import {
   accountWithMandatoryTokens,
   flattenAccounts,
 } from "@ledgerhq/live-common/lib/account/helpers";
-import { useTheme } from "@react-navigation/native";
-import type { SwapRouteParams } from "..";
-import { accountsSelector } from "../../../../reducers/accounts";
+
+import type { SearchResult } from "../../../../../helpers/formatAccountSearchResults";
+import { accountsSelector } from "../../../../../reducers/accounts";
 import NoAccountsEmptyState from "./NoAccountsEmptyState";
-import { TrackScreen } from "../../../../analytics";
-import LText from "../../../../components/LText";
-import FilteredSearchBar from "../../../../components/FilteredSearchBar";
-import AccountCard from "../../../../components/AccountCard";
-import KeyboardView from "../../../../components/KeyboardView";
-import { formatSearchResults } from "../../../../helpers/formatAccountSearchResults";
-import type { SearchResult } from "../../../../helpers/formatAccountSearchResults";
-import { ScreenName } from "../../../../const";
+import { TrackScreen } from "../../../../../analytics";
+import LText from "../../../../../components/LText";
+import FilteredSearchBar from "../../../../../components/FilteredSearchBar";
+import AccountCard from "../../../../../components/AccountCard";
+import KeyboardView from "../../../../../components/KeyboardView";
+import { formatSearchResults } from "../../../../../helpers/formatAccountSearchResults";
+import { ScreenName } from "../../../../../const";
+
+import type { SwapRouteParams } from "..";
 
 const SEARCH_KEYS = ["name", "unit.code", "token.name", "token.ticker"];
 

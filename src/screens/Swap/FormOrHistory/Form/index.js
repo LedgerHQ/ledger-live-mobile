@@ -1,44 +1,46 @@
 // @flow
 
 import React, { useCallback, useMemo } from "react";
-
 import { TouchableOpacity, StyleSheet, View } from "react-native";
 import { Trans } from "react-i18next";
 import { useSelector } from "react-redux";
-import type { CurrenciesStatus } from "@ledgerhq/live-common/lib/exchange/swap/logic";
-import type {
-  Exchange,
-  ExchangeRate,
-} from "@ledgerhq/live-common/lib/exchange/swap/types";
 import { useNavigation, useRoute, useTheme } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/dist/Ionicons";
-import {
-  getAccountUnit,
-  getAccountCurrency,
-  getAccountName,
-} from "@ledgerhq/live-common/lib/account";
-import type {
-  Account,
-  AccountLike,
-} from "@ledgerhq/live-common/lib/types/account";
+
 import type {
   CryptoCurrency,
   TokenCurrency,
   Transaction,
   TransactionStatus,
 } from "@ledgerhq/live-common/lib/types";
+import type {
+  Account,
+  AccountLike,
+} from "@ledgerhq/live-common/lib/types/account";
+import type {
+  Exchange,
+  ExchangeRate,
+} from "@ledgerhq/live-common/lib/exchange/swap/types";
+import type { CurrenciesStatus } from "@ledgerhq/live-common/lib/exchange/swap/logic";
 import type { DeviceInfo } from "@ledgerhq/live-common/lib/types/manager";
 import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
-import { ScreenName } from "../../../const";
-import CurrencyUnitValue from "../../../components/CurrencyUnitValue";
+
+import {
+  getAccountUnit,
+  getAccountCurrency,
+  getAccountName,
+} from "@ledgerhq/live-common/lib/account";
+
+import { ScreenName } from "../../../../const";
+import CurrencyUnitValue from "../../../../components/CurrencyUnitValue";
 import SectionSeparator, {
   ArrowDownCircle,
-} from "../../../components/SectionSeparator";
-import CurrencyIcon from "../../../components/CurrencyIcon";
-import LText from "../../../components/LText";
-import Button from "../../../components/Button";
-import { flattenedSwapSupportedCurrenciesSelector } from "../../../reducers/settings";
-import { TrackScreen } from "../../../analytics";
+} from "../../../../components/SectionSeparator";
+import CurrencyIcon from "../../../../components/CurrencyIcon";
+import LText from "../../../../components/LText";
+import Button from "../../../../components/Button";
+import { flattenedSwapSupportedCurrenciesSelector } from "../../../../reducers/settings";
+import { TrackScreen } from "../../../../analytics";
 
 type SelectAccountFlowTarget = "from" | "to";
 export type SwapRouteParams = {
