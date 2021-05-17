@@ -167,7 +167,7 @@ export default function TezosAccountBodyHeader({
 
               <CounterValue
                 showCode
-                date={delegation.operation.date}
+                date={new Date(Date.now())}
                 currency={currency}
                 value={amount}
                 withPlaceholder
