@@ -40,10 +40,10 @@ export default function SwapNavigator() {
       <Stack.Screen
         name={ScreenName.SwapDapp}
         component={WebPlatformPlayer}
-        options={{
+        options={({ route }) => ({
           headerStyle: styles.headerNoShadow,
-          title: t("transfer.swap.paraswap"), // FIXME: hardcoded paraswap for now
-        }}
+          title: route.params.manifest?.name,
+        })}
       />
       <Stack.Screen
         name={ScreenName.SwapFormOrHistory}
