@@ -724,7 +724,7 @@
       "firstUse": {
         "title": "Première utilisation de votre Nano ?",
         "label": "Mise en service",
-        "subTitle": "Initialiser un nouveau Nano",
+        "subTitle": "Configurer un nouveau Nano",
         "desc": "Commençons par configurer votre appareil !"
       },
       "devicePairing": {
