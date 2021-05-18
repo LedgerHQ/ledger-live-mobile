@@ -129,11 +129,15 @@ const WebPlatformPlayer = ({ route }: { route: { params: Props } }) => {
           return;
         }
 
-        // if single account found return it
-        if (foundAccounts.length === 1 && !allowAddAccount) {
-          resolve(foundAccounts[0]);
-          return;
-        }
+        // // if single account found return it
+        // if (foundAccounts.length === 1 && !allowAddAccount) {
+        //   resolve(
+        //     serializePlatformAccount(
+        //       accountToPlatformAccount(foundAccounts[0]),
+        //     ),
+        //   );
+        //   return;
+        // }
 
         // list of queried cryptoCurrencies with one or more accounts -> used in case of not allowAddAccount and multiple accounts selectable
         const currenciesDiff = allowAddAccount
@@ -172,8 +176,10 @@ const WebPlatformPlayer = ({ route }: { route: { params: Props } }) => {
             params: {
               currencies: currenciesDiff,
               allowAddAccount,
-              // TODO: serialize?
-              onSuccess: resolve,
+              onSuccess: account =>
+                resolve(
+                  serializePlatformAccount(accountToPlatformAccount(account)),
+                ),
               onError: reject,
             },
           });
