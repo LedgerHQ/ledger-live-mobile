@@ -15,6 +15,7 @@ import {
 } from "react-native";
 import { WebView } from "react-native-webview";
 import { useNavigation, useTheme } from "@react-navigation/native";
+import Color from "color";
 
 import { JSONRPCRequest } from "json-rpc-2.0";
 
@@ -107,7 +108,7 @@ const WebPlatformPlayer = ({ route }: { route: { params: Props } }) => {
       currencies: currencyIds = [],
       allowAddAccount,
     }: // TODO: use type RequestAccountParams from LedgerLiveApiSdk
-    //}: RequestAccountParams) =>
+    // }: RequestAccountParams) =>
     {
       currencies?: string[],
       allowAddAccount?: boolean,
@@ -211,7 +212,7 @@ const WebPlatformPlayer = ({ route }: { route: { params: Props } }) => {
       transaction,
       params = {},
     }: // TODO: use type SignTransactionParams from LedgerLiveApiSdk
-    //}: SignTransactionParams) => {
+    // }: SignTransactionParams) => {
     {
       accountId: string,
       transaction: RawPlatformTransaction,
@@ -372,6 +373,19 @@ const WebPlatformPlayer = ({ route }: { route: { params: Props } }) => {
     };
   }, [widgetLoaded, widgetError]);
 
+  const uri = useMemo(() => {
+    const url = new URL(manifest.url.toString());
+
+    url.searchParams.set(
+      "backgroundColor",
+      new Color(theme.colors.background).hex(),
+    );
+    url.searchParams.set("textColor", new Color(theme.colors.text).hex());
+    url.searchParams.set("loadDate", loadDate.valueOf().toString());
+
+    return url;
+  }, [manifest.url, loadDate, theme]);
+
   return (
     <View style={[styles.root]}>
       <WebView
@@ -385,7 +399,7 @@ const WebPlatformPlayer = ({ route }: { route: { params: Props } }) => {
         originWhitelist={["https://*"]}
         allowsInlineMediaPlayback
         source={{
-          uri: `${manifest.url.toString()}&${loadDate}`,
+          uri: uri.toString(),
         }}
         onLoad={handleLoad}
         injectedJavaScript={injectedCode}
