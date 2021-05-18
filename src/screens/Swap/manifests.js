@@ -12,9 +12,10 @@ const useManifests = () => {
     const paraswapUrl = new URL(`http://localhost:3000/app/dapp-browser`);
     paraswapUrl.searchParams.set(
       "url",
-      "https://paraswap-dapp-pr-851.herokuapp.com/?embed=true&referer=ledger",
+      "https://paraswap-ui-ledger.herokuapp.com/?embed=true&referer=ledger",
     );
-    paraswapUrl.searchParams.set("nanoApp", "Paraswap");
+    // TODO: uncomment me after ledger.js is updated
+    // paraswapUrl.searchParams.set("nanoApp", "Paraswap");
     paraswapUrl.searchParams.set("dappName", "paraswap");
     paraswapUrl.searchParams.set(
       "backgroundColor",
