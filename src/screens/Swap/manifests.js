@@ -7,11 +7,12 @@ import ParaswapIcon from "../../icons/swap/Paraswap";
 
 const useManifests = () => {
   const theme = useTheme();
-  const allManifests = useMemo(() => {
+
+  return useMemo(() => {
     const paraswapUrl = new URL(`http://localhost:3000/app/dapp-browser`);
     paraswapUrl.searchParams.set(
       "url",
-      "https://paraswap-dapp-pr-851.herokuapp.com/?embed=true",
+      "https://paraswap-dapp-pr-851.herokuapp.com/?embed=true&referer=ledger",
     );
     paraswapUrl.searchParams.set("nanoApp", "Paraswap");
     paraswapUrl.searchParams.set("dappName", "paraswap");
@@ -41,8 +42,6 @@ const useManifests = () => {
 
     return manifests;
   }, [theme]);
-
-  return allManifests;
 };
 
 export default useManifests;
