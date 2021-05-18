@@ -57,6 +57,7 @@ import StepHeader from "../StepHeader";
 import AccountHeaderTitle from "../../screens/Account/AccountHeaderTitle";
 import AccountHeaderRight from "../../screens/Account/AccountHeaderRight";
 import RequestAccountNavigator from "./RequestAccountNavigator";
+import VerifyAccount from "../../screens/VerifyAccount";
 
 export default function BaseNavigator() {
   const { t } = useTranslation();
@@ -163,6 +164,23 @@ export default function BaseNavigator() {
                 route.params.error ||
                   new Error("Request account interrupted by user"),
               );
+          },
+        })}
+      />
+      <Stack.Screen
+        name={ScreenName.VerifyAccount}
+        component={VerifyAccount}
+        options={{
+          headerLeft: null,
+          title: t("transfer.receive.headerTitle"),
+        }}
+        listeners={({ route }) => ({
+          beforeRemove: () => {
+            const onClose =
+              route.params?.onClose || route.params?.params?.onClose;
+            if (onClose && typeof onClose === "function") {
+              onClose();
+            }
           },
         })}
       />

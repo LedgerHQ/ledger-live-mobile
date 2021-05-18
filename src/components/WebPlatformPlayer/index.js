@@ -191,15 +191,13 @@ const WebPlatformPlayer = ({ route }: { route: { params: Props } }) => {
           return;
         }
 
-        navigation.navigate(NavigatorName.ReceiveFunds, {
-          screen: ScreenName.ReceiveConnectDevice,
-          params: {
-            account,
-            onSuccess: resolve,
-            onError: e => {
-              // @TODO put in correct error text maybe
-              reject(e);
-            },
+        navigation.navigate(ScreenName.VerifyAccount, {
+          account,
+          onSuccess: account => resolve(account.freshAddress),
+          onClose: () => reject(new Error("User cancelled")),
+          onError: e => {
+            // @TODO put in correct error text maybe
+            reject(e);
           },
         });
       });
@@ -360,7 +358,7 @@ const WebPlatformPlayer = ({ route }: { route: { params: Props } }) => {
         <ReloadButton onReload={handleReload} loading={!widgetLoaded} />
       ),
     });
-  }, [navigation, widgetLoaded]);
+  }, [navigation, widgetLoaded, handleReload]);
 
   useEffect(() => {
     let timeout;

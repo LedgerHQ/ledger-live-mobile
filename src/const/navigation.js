@@ -292,6 +292,8 @@ export const ScreenName = {
 
   RequestAccountsSelectCrypto: "RequestAccountsSelectCrypto",
   RequestAccountsSelectAccount: "RequestAccountsSelectAccount",
+
+  VerifyAccount: "VerifyAccount",
 };
 
 export const NavigatorName = {
