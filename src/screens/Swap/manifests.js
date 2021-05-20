@@ -12,8 +12,7 @@ const useManifests = () =>
       "url",
       "https://paraswap-ui-ledger.herokuapp.com/?embed=true&referer=ledger",
     );
-    // TODO: uncomment me after ledger.js is updated
-    // paraswapUrl.searchParams.set("nanoApp", "Paraswap");
+    paraswapUrl.searchParams.set("nanoApp", "Paraswap");
     paraswapUrl.searchParams.set("dappName", "paraswap");
 
     const manifests = {
