@@ -43,6 +43,7 @@ const SwapFormSummary = ({ navigation, route }: Props) => {
   const reset = useCallback(() => {
     setConfirmed(false);
     setAcceptedDisclaimer(false);
+    setDeviceMeta(null);
   }, [setAcceptedDisclaimer, setConfirmed]);
 
   const onRatesExpired = useCallback(() => {

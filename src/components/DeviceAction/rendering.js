@@ -72,7 +72,12 @@ export function renderRequiresAppInstallation({
           event="DeviceActionRequiresAppInstallationOpenManager"
           type="primary"
           title={t("DeviceAction.button.openManager")}
-          onPress={() => navigation.navigate(NavigatorName.Manager)}
+          onPress={() =>
+            navigation.navigate(NavigatorName.Manager, {
+              screen: ScreenName.Manager,
+              params: { searchQuery: appNamesCSV },
+            })
+          }
           containerStyle={styles.button}
         />
       </View>
