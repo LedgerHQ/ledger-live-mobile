@@ -45,13 +45,6 @@ import UpdateIcon from "../../icons/Update";
 
 import type { Manifest } from "./type";
 
-const injectedCode = `
-  window.postMessage = event => {
-    window.ReactNativeWebView.postMessage(event);
-  }
-  true;
-`;
-
 type Props = {
   manifest: Manifest,
 };
@@ -408,7 +401,6 @@ const WebPlatformPlayer = ({ route }: { route: { params: Props } }) => {
           uri: uri.toString(),
         }}
         onLoad={handleLoad}
-        injectedJavaScript={injectedCode}
         onMessage={handleMessage}
         mediaPlaybackRequiresUserAction={false}
         scalesPageToFitmediaPlaybackRequiresUserAction
