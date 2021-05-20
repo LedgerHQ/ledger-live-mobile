@@ -256,7 +256,7 @@ export default function DelegationDetailsModal({
           <LText semiBold style={styles.counterValue} color="grey">
             <CounterValue
               showCode
-              date={new Date(Date.now())}
+              date={new Date()}
               currency={currency}
               value={amount}
             />
