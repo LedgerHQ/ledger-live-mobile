@@ -233,15 +233,16 @@ const WebPlatformPlayer = ({ route }: { route: { params: Props } }) => {
 
         const bridge = getAccountBridge(account);
 
-        const tx = bridge.updateTransaction(bridge.createTransaction(account), {
-          amount: platformTransaction.amount,
-          data: platformTransaction?.data && undefined,
-          userGasLimit: platformTransaction?.gasLimit && undefined,
-          gasLimit: platformTransaction?.gasLimit && undefined,
-          gasPrice: platformTransaction?.gasPrice && undefined,
-          family: platformTransaction.family,
-          recipient: platformTransaction.recipient,
+        const t = bridge.createTransaction(account);
+        const { recipient, ...txData } = platformTransaction;
+        const t2 = bridge.updateTransaction(t, {
+          recipient,
           feesStrategy: "custom",
+        });
+
+        const tx = bridge.updateTransaction(t2, {
+          ...txData,
+          userGasLimit: txData.gasLimit,
         });
 
         navigation.navigate(NavigatorName.SignTransaction, {
