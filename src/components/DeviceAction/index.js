@@ -27,6 +27,7 @@ import SkipLock from "../behaviour/SkipLock";
 
 type Props<R, H, P> = {
   onResult?: (payload: *) => Promise<void> | void,
+  onError?: (payload: *) => Promise<void> | void,
   renderOnResult?: (payload: P) => React$Node,
   action: Action<R, H, P>,
   request?: R,
@@ -38,6 +39,7 @@ export default function DeviceAction<R, H, P>({
   request = null,
   device: selectedDevice,
   onResult,
+  onError,
   renderOnResult,
 }: Props<R, H, P>) {
   const { colors, dark } = useTheme();
@@ -178,6 +180,7 @@ export default function DeviceAction<R, H, P>({
   }
 
   if (!isLoading && error) {
+    onError && onError(error);
     return renderError({
       t,
       navigation,
