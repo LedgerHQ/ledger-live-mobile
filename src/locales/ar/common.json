@@ -1,11 +1,11 @@
 {
   "common": {
-    "cancel": "Cancel",
+    "cancel": "إلغاء",
     "apply": "Apply",
     "back": "Back",
     "delete": "Delete",
     "paste": "Paste",
-    "yes": "Yes",
+    "yes": "نعم",
     "no": "No",
     "gotit": "Got it",
     "continue": "Continue",
