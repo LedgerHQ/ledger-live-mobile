@@ -66,7 +66,7 @@ type RouteParams = {
 };
 
 export default function ReceiveConfirmation({ navigation, route }: Props) {
-  const { colors } = useTheme();
+  const { colors, dark } = useTheme();
   const { account, parentAccount } = useSelector(accountScreenSelector(route));
   const readOnlyModeEnabled = useSelector(readOnlyModeEnabledSelector);
 
@@ -179,6 +179,7 @@ export default function ReceiveConfirmation({ navigation, route }: Props) {
         name="Confirmation"
         unsafe={unsafe}
         verified={verified}
+        currencyName={currency.name}
       />
       {allowNavigation ? null : (
         <>
@@ -198,7 +199,11 @@ export default function ReceiveConfirmation({ navigation, route }: Props) {
               </View>
             ) : (
               <View
-                style={[styles.qrWrapper, { borderColor: colors.lightFog }]}
+                style={[
+                  styles.qrWrapper,
+                  { borderColor: colors.lightFog },
+                  dark ? { backgroundColor: "white" } : {},
+                ]}
               >
                 <QRCode
                   size={QRSize}
