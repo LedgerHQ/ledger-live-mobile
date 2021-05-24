@@ -578,7 +578,7 @@
   "location": {
     "required": "Location services required",
     "open": "Open location settings",
-    "disabled": "Ledger Live requires location services to pair your device through Bluethooth.",
+    "disabled": "Ledger Live requires location services to pair your device through Bluetooth.",
     "noInfos": "Ledger does not access your location information."
   },
   "permissions": {
@@ -1896,6 +1896,7 @@
     },
     "lending": {
       "title": "Lend crypto",
+      "titleTransferTab": "Lend",
       "actionTitle": "Lend",
       "accountActions": {
         "approve": "Approve",
@@ -2179,6 +2180,12 @@
       "streaming": {
         "accurate": "Loading... ({{percentage}})",
         "inaccurate": "Loading..."
+      }
+    },
+    "info": {
+      "maxSpendable": {
+        "title": "Max spendable amount",
+        "description": "The maximum spendable amount is the total balance in an account that is available to send in a transaction."
       }
     }
   },
