@@ -8,6 +8,10 @@ import {
 } from "react-native";
 import type { MappedSwapOperation } from "@ledgerhq/live-common/lib/exchange/swap/types";
 import {
+  getDefaultExplorerView,
+  getTransactionExplorer,
+} from "@ledgerhq/live-common/lib/explorers";
+import {
   getAccountName,
   getAccountUnit,
   getAccountCurrency,
@@ -27,6 +31,7 @@ import SwapStatusIndicator, { getStatusColor } from "./SwapStatusIndicator";
 import { urls } from "../../config/urls";
 import { localeIds } from "../../languages";
 import ExternalLink from "../../icons/ExternalLink";
+import Footer from "../OperationDetails/Footer";
 
 type Props = {
   route: {
@@ -58,6 +63,13 @@ const OperationDetails = ({ route }: Props) => {
   const statusColorKey = getStatusColor(status, colors, true);
   const dotStyles = { backgroundColor: colors[statusColorKey] };
   const textColorStyles = { color: colors[statusColorKey] };
+
+  const url =
+    fromCurrency.type === "CryptoCurrency" &&
+    getTransactionExplorer(
+      getDefaultExplorerView(fromCurrency),
+      operation.hash,
+    );
 
   const openProvider = useCallback(() => {
     Linking.openURL(urls.swap.providers[provider].main);
@@ -189,6 +201,7 @@ const OperationDetails = ({ route }: Props) => {
           </LText>
         </View>
       </ScrollView>
+      {url ? <Footer url={url} /> : null}
     </View>
   );
 };
