@@ -3,10 +3,10 @@
 export default {
   debug: {
     name: "debugger",
-    url: new URL("https://iframe-dapp-browser-test.vercel.app/app/debug"),
+    url: new URL("https://ledger-live-platform-apps.vercel.app/app/debug"),
   },
   wyre: {
     name: "wyre",
-    url: new URL("https://iframe-dapp-browser-test.vercel.app/app/wyre"),
+    url: new URL("https://ledger-live-platform-apps.vercel.app/app/wyre"),
   },
 };
