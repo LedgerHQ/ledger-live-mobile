@@ -12,140 +12,140 @@
     "retry": "Повторить",
     "done": "Готово",
     "sortBy": "Сортировать по",
-    "signOut": "Sign out",
-    "search": "Search",
-    "contactUs": "Contact Ledger Support",
-    "device": "Device",
+    "signOut": "Выйти",
+    "search": "Поиск",
+    "contactUs": "Связаться с поддержкой Ledger",
+    "device": "Устройство",
     "cryptoAsset": "Криптоактивы",
-    "skip": "Skip",
+    "skip": "Пропустить",
     "noCryptoFound": "Криптоактивы не найдены",
     "needHelp": "Нужна помощь?",
-    "edit": "Edit",
-    "editName": "Edit name",
-    "close": "Close",
-    "confirm": "Confirm",
-    "poweredBy": "Powered by ",
-    "received": "Received",
-    "sent": "Sent",
-    "or": "OR",
-    "rename": "Rename",
-    "learnMore": "Learn more",
+    "edit": "Редактировать",
+    "editName": "Изменить название",
+    "close": "Закрыть",
+    "confirm": "Подтвердить",
+    "poweredBy": "Работает на ",
+    "received": "Входящие",
+    "sent": "Отправленные",
+    "or": "ИЛИ",
+    "rename": "Переименовать",
+    "learnMore": "Подробнее",
     "viewDetails": "View details",
-    "today": "Today",
-    "yesterday": "Yesterday",
-    "upToDate": "Up to date",
-    "transactionDate": "Transaction date",
+    "today": "Сегодня",
+    "yesterday": "Вчера",
+    "upToDate": "Последняя версия",
+    "transactionDate": "Дата транзакции",
     "outdated": "Outdated",
-    "satPerByte": "sat/bytes",
-    "notAvailable": "Not available",
-    "import": "Import",
+    "satPerByte": "сатоши/байт",
+    "notAvailable": "Недоступно",
+    "import": "Импортировать",
     "bluetooth": "Bluetooth",
     "usb": "USB",
     "add": "Add",
-    "slow": "slow",
-    "fast": "fast",
+    "slow": "медленно",
+    "fast": "быстро",
     "token": "Токен",
     "token_plural": "Токены",
     "subaccount": "Subaccount",
     "subaccount_plural": "Subaccounts",
-    "forgetDevice": "Remove device",
-    "help": "Help",
+    "forgetDevice": "Удалить устройство",
+    "help": "Помощь",
     "saveLogs": "Save logs",
     "sync": {
-      "ago": "Synchronized {{time}}"
+      "ago": "Синхронизировано {{time}}"
     },
-    "update": "Update available",
-    "install": "Install",
-    "installed": "Installed",
-    "uninstall": "Uninstall",
+    "update": "Доступно обновление",
+    "install": "Установить",
+    "installed": "Установлено",
+    "uninstall": "Удалить",
     "fromNow": {
-      "seconds": "in one second",
-      "seconds_plural": "in {{time}} seconds",
-      "minutes": "in one minute",
-      "minutes_plural": "in {{time}} minutes",
-      "hours": "in one hour",
-      "hours_plural": "in {{time}} hours",
-      "days": "in one day",
-      "days_plural": "in {{time}} days"
+      "seconds": "через секунду",
+      "seconds_plural": "через {{time}} сек.",
+      "minutes": "через минуту",
+      "minutes_plural": "через {{time}} мин.",
+      "hours": "через час",
+      "hours_plural": "через {{time}} ч.",
+      "days": "через 1 день",
+      "days_plural": "через {{time}} дн."
     },
     "timeAgo": {
-      "seconds": "one second ago",
-      "seconds_plural": "{{time}} seconds ago",
-      "minutes": "one minute ago",
-      "minutes_plural": "{{time}} minutes ago",
-      "hours": "one hour ago",
-      "hours_plural": "{{time}} hours ago",
-      "days": "yesterday",
-      "days_plural": "{{time}} days ago"
+      "seconds": "секунду назад",
+      "seconds_plural": "{{time}} сек. назад",
+      "minutes": "минуту назад",
+      "minutes_plural": "{{time}} мин. назад",
+      "hours": "час назад",
+      "hours_plural": "{{time}} ч. назад",
+      "days": "вчера",
+      "days_plural": "{{time}} дн. назад"
     },
-    "seeMore": "See more",
-    "moreInfo": "More info",
-    "buyEth": "Buy Ethereum"
+    "seeMore": "Показать больше",
+    "moreInfo": "Подробнее",
+    "buyEth": "Купить Эфириум"
   },
   "errors": {
     "AccountAwaitingSendPendingOperations": {
-      "title": "There is a pending operation for this account",
-      "description": "Please wait for the operation to go through."
+      "title": "На этом счёте имеется операция в ожидании",
+      "description": "Дождитесь завершения операции."
     },
     "AccountNameRequired": {
-      "title": "An account name is needed",
-      "description": "Please enter an account name."
+      "title": "Необходимо указать название счёта",
+      "description": "Укажите название счёта."
     },
     "AlgorandASANotOptInInRecipient": {
       "title": "Recipient account has not opted in the selected ASA."
     },
     "BluetoothRequired": {
-      "title": "Sorry, Bluetooth is disabled",
-      "description": "Please enable Bluetooth in your phone settings. ({{state}} state)"
+      "title": "Извините, Bluetooth отключён",
+      "description": "Пожалуйста, включите Bluetooth в настройках телефона. (статус {{state}})"
     },
     "BtcUnmatchedApp": {
-      "title": "That's the wrong app",
-      "description": "Please open the {{managerAppName}} app on your device."
+      "title": "Это не то приложение",
+      "description": "Пожалуйста, откройте приложение {{managerAppName}} на вашем устройстве."
     },
     "CantOpenDevice": {
-      "title": "Sorry, connection failed",
-      "description": "Your Ledger device must be unlocked and in range to use Bluetooth."
+      "title": "Произошёл сбой подключения",
+      "description": "Устройство Ledger должно быть разблокировано, и находиться в радиусе Bluetooth."
     },
     "CantScanQRCode": {
-      "title": "Could not scan this QR code: auto-verification not supported by this address."
+      "title": "Не удалось отсканировать QR-код: данный адрес не поддерживает автоматическую проверку."
     },
     "ConnectAppTimeout": {
-      "title": "Sorry, no device found",
-      "description": "Please make sure your {{productName}} is unlocked with Bluetooth enabled."
+      "title": "К сожалению, устройство не найдено",
+      "description": "Убедитесь, что {{productName}} разблокирован и Bluetooth включён."
     },
     "ConnectManagerTimeout": {
       "title": "Sorry, Manager connection failed",
-      "description": "Please make sure your {{productName}} is unlocked with Bluetooth enabled."
+      "description": "Убедитесь, что {{productName}} разблокирован и Bluetooth включён."
     },
     "ClaimRewardsFeesWarning": {
       "title": "The rewards are smaller than the estimated fees to claim them.",
       "description": ""
     },
     "CompoundLowerAllowanceOfActiveAccountError": {
-      "title": "You cannot reduce the amount approved while having an active deposit."
+      "title": "Вы не можете уменьшить подтверждённую сумму, пока у вас имеется активная транзакция для пополнения."
     },
     "CosmosBroadcastCodeInternal": {
-      "title": "Something went wrong (Error #1)",
+      "title": "Что-то пошло не так (ошибка №1)",
       "description": "Please save your logs using the button below and provide them to Ledger Support."
     },
     "CosmosBroadcastCodeTxDecode": {
-      "title": "Something went wrong (Error #2)",
+      "title": "Что-то пошло не так (ошибка №2)",
       "description": "Please save your logs using the button below and provide them to Ledger Support."
     },
     "CosmosBroadcastCodeInvalidSequence": {
-      "title": "Invalid sequence",
-      "description": "Please try again."
+      "title": "Некорректная последовательность",
+      "description": "Пожалуйста, попробуйте ещё раз."
     },
     "CosmosBroadcastCodeUnauthorized": {
       "title": "Unauthorized signature",
       "description": "This account is not authorized to sign this transaction."
     },
     "CosmosBroadcastCodeInsufficientFunds": {
-      "title": "Insufficient funds",
-      "description": "Please make sure the account has enough funds."
+      "title": "Недостаточно средств",
+      "description": "Пожалуйста, убедитесь, что на счёте достаточно средств."
     },
     "CosmosBroadcastCodeUnknownRequest": {
-      "title": "Something went wrong (Error #6)",
+      "title": "Что-то пошло не так (ошибка №6)",
       "description": "Please save your logs using the button below and provide them to Ledger Support."
     },
     "CosmosBroadcastCodeInvalidAddress": {
@@ -153,11 +153,11 @@
       "description": "Please check the address and try again."
     },
     "CosmosBroadcastCodeInvalidPubKey": {
-      "title": "Something went wrong (Error #8)",
+      "title": "Что-то пошло не так (ошибка №8)",
       "description": "Please save your logs using the button below and provide them to Ledger Support."
     },
     "CosmosBroadcastCodeUnknownAddress": {
-      "title": "Unknown address",
+      "title": "Неизвестный адрес",
       "description": "Please check the address and try again."
     },
     "CosmosBroadcastCodeInsufficientCoins": {
