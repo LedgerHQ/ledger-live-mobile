@@ -399,11 +399,11 @@
     },
     "TransportError": {
       "title": "Something went wrong. Please reconnect your device.",
-      "description": "{{message}} Пожалуйста, попробуйте ещё раз. Если проблема не уходит, пожалуйста, сохраните и отправьте их в Поддержки Ledger."
+      "description": "{{message}} Пожалуйста, попробуйте ещё раз. Если проблема не уходит, пожалуйста, сохраните логи и отправьте их в Поддержку Ledger."
     },
     "TransportStatusError": {
       "title": "Произошла ошибка. Подключите устройство ещё раз.",
-      "description": "{{message}} Please try again. If the problem persists, please save your logs using the button below and provide them to Ledger Support."
+      "description": "{{message}} Пожалуйста, попробуйте ещё раз. Если проблема не уходит, пожалуйста, сохраните логи и отправьте их в Поддержку Ledger."
     },
     "TronNoFrozenForBandwidth": {
       "title": "No assets to unfreeze",
@@ -418,15 +418,15 @@
       "description": "Please wait 3 days after your last Freeze operation."
     },
     "TronVoteRequired": {
-      "title": "At least 1 vote is needed"
+      "title": "Требуется как минимум 1 голос"
     },
     "TronInvalidVoteCount": {
-      "title": "Vote format is incorrect",
-      "description": "You can only vote using round numbers."
+      "title": "Неверный формат голоса",
+      "description": "Вы можете голосовать только целыми числами."
     },
     "TronRewardNotAvailable": {
-      "title": "Rewards are not claimable yet",
-      "description": "Please wait 24 hours between claims."
+      "title": "Вознаграждение пока нельзя запросить",
+      "description": "Между запросами должно пройти 24 часа."
     },
     "TronNoReward": {
       "title": "There is no reward to be claimed"
@@ -435,7 +435,7 @@
       "title": "Amount to freeze cannot be smaller than 1"
     },
     "TronSendTrc20ToNewAccountForbidden": {
-      "title": "Sending TRC20 to the new account will not activate it",
+      "title": "Отправка TRC20 на новый счёт не активирует его",
       "description": "To activate it, first send either TRX or TRC10 to the account. Then it can receive TRC20."
     },
     "TronUnexpectedFees": {
