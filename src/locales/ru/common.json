@@ -30,7 +30,7 @@
     "or": "ИЛИ",
     "rename": "Переименовать",
     "learnMore": "Подробнее",
-    "viewDetails": "View details",
+    "viewDetails": "Подробнее",
     "today": "Сегодня",
     "yesterday": "Вчера",
     "upToDate": "Последняя версия",
@@ -41,7 +41,7 @@
     "import": "Импортировать",
     "bluetooth": "Bluetooth",
     "usb": "USB",
-    "add": "Add",
+    "add": "Добавить",
     "slow": "медленно",
     "fast": "быстро",
     "token": "Токен",
@@ -216,7 +216,7 @@
       "description": "Please return to the Dashboard on your device."
     },
     "DeviceSocketFail": {
-      "title": "Sorry, connection failed",
+      "title": "Произошёл сбой подключения",
       "description": "Пожалуйста, попробуйте ещё раз."
     },
     "DeviceSocketNoBulkStatus": {
@@ -228,12 +228,12 @@
       "description": "Пожалуйста, попробуйте ещё раз."
     },
     "DisconnectedDevice": {
-      "title": "Sorry, it looks like your device was disconnected",
-      "description": "Please reconnect and try again."
+      "title": "Похоже, ваше устройство было отключено",
+      "description": "Пожалуйста, переподключитесь и повторите попытку."
     },
     "DisconnectedDeviceDuringOperation": {
-      "title": "Sorry, it looks like your device was disconnected",
-      "description": "Please reconnect and try again."
+      "title": "Похоже, ваше устройство было отключено",
+      "description": "Пожалуйста, переподключитесь и повторите попытку."
     },
     "ETHAddressNonEIP": {
       "title": "Auto-verification not available: carefully verify the address.",
