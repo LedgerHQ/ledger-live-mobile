@@ -406,7 +406,7 @@
       "description": "{{message}} Пожалуйста, попробуйте ещё раз. Если проблема не уходит, пожалуйста, сохраните логи и отправьте их в Поддержку Ledger."
     },
     "TronNoFrozenForBandwidth": {
-      "title": "No assets to unfreeze",
+      "title": "Нет активов для разблокировки",
       "description": "You don't have Bandwidth assets to unfreeze."
     },
     "TronNoFrozenForEnergy": {
@@ -537,7 +537,7 @@
       "title": "Некоторые из выбранных адресов не являются валидаторами"
     },
     "PolkadotLowBondedBalance": {
-      "title": "All bonded assets will be unbonded if < 1 DOT"
+      "title": "Все заблокированные активы будут разблокированы при балансе <1 DOT"
     },
     "PolkadotNoUnlockedBalance": {
       "title": "У вас нет высвобождённых активов"
@@ -549,10 +549,10 @@
       "title": "Убедитесь, что вашего баланса достаточно, чтобы покрыть потенциальные комиссии"
     },
     "PolkadotDoMaxSendInstead": {
-      "title": "Balance cannot be below 1 DOT. Send max to empty account"
+      "title": "Баланс не может быть ниже 1 DOT. Переведите максимальную сумму на пустой счёт"
     },
     "PolkadotBondMinimumAmount": {
-      "title": "You must bond at least 1 DOT"
+      "title": "Вы должны заблокировать как минимум 1 DOT"
     },
     "PolkadotMaxUnbonding": {
       "title": "You have exceeded the unbond limit"
@@ -1125,19 +1125,19 @@
       }
     },
     "stepWriteRecovery": {
-      "step1": "Write <1><1>Word #1</1></1> in entry 1 on a blank Recovery sheet",
-      "step2": "Press the right button and continue to write down all 24 words.",
-      "step3": "Confirm each word of your recovery phrase: select it then confirm it by pressing both buttons together.",
+      "step1": "Запишите <1><1>слово №1</1></1> в позицию 1 на пустом листе восстановления",
+      "step2": "Нажмите правую кнопку, чтобы продолжить, и таким же образом запишите все 24 слова.",
+      "step3": "Подтвердите каждое слово вашей фразы восстановления: выберите его, затем подтвердите его, нажав обе кнопки одновременно.",
       "modal": {
-        "step1": "Store your 24-word recovery phrase in a safe place, out of sight.",
-        "step2": "Make sure you are the only person to have the recovery phrase.",
-        "step3": "Ledger does not save your recovery phrase.",
-        "step4": "Never use a device with a recovery phrase or PIN already setup."
+        "step1": "Храните фразу восстановления из 24 слов в надёжном месте, где её никто не увидит.",
+        "step2": "Убедитесь, что никто кроме вас не знает фразу восстановления.",
+        "step3": "Компания Ledger не хранит копию вашей фразы восстановления.",
+        "step4": "Никогда не используйте устройство с уже установленными фразой восстановления или ПИН-кодом."
       }
     },
     "stepPassword": {
-      "desc": "Set a password to protect Ledger Live data on your phone.",
-      "descConfigured": "Password lock enabled successfully",
+      "desc": "Установите пароль для защиты данных Ledger Live на вашем телефоне.",
+      "descConfigured": "Блокировка паролем включена",
       "setPassword": "Установить пароль",
       "modal": {
         "step1": "Храните пароль в безопасности. Не рассказывайте его никому.",
@@ -1232,7 +1232,7 @@
     "summary_plural": "Ваши счета в количестве {{count}} синхронизированы.",
     "emptyState": {
       "noAppsTitle": "Установить приложение на моё устройство",
-      "noAppsDesc": "Install apps on your device before adding accounts in Ledger Live. Go to the Manager to install apps.",
+      "noAppsDesc": "Установите приложения на устройство перед тем, как добавить счета в Ledger Live. Для установки приложений перейдите в Диспетчер.",
       "noAccountsTitle": "У вас ещё нет счетов…",
       "noAccountsDesc": "Пожалуйста, добавьте счета в портфель.",
       "buttons": {
@@ -1354,9 +1354,9 @@
       "memo": "Примечание",
       "assetId": "ID актива",
       "rewards": "Заработанное вознаграждение",
-      "bondedAmount": "Bonded Amount",
+      "bondedAmount": "Заблокированная сумма",
       "unbondedAmount": "Разблокированная сумма",
-      "withdrawUnbondedAmount": "Withdraw Unbonded Amount",
+      "withdrawUnbondedAmount": "Вывести разблокированную сумму",
       "palletMethod": "Метод",
       "transferAmount": "Сумма перевода",
       "validatorsCount": "Валидаторов: ({{number}})"
@@ -1604,10 +1604,10 @@
         "title": "Делиться аналитикой",
         "desc": "Включите аналитику, чтобы помочь компании Ledger улучшить пользовательский интерфейс",
         "bullet0": "Клики",
-        "bullet1": "In-app page visits",
+        "bullet1": "Просмотры страницы в приложении",
         "bullet2": "Перенаправление на веб-страницу",
         "bullet3": "Действия: отправка, получение, блокировка и т. п.",
-        "bullet4": "End of page scroll",
+        "bullet4": "Конец страницы",
         "bullet5": "Установка/удаление приложения и его версий",
         "bullet6": "Количество счетов, валют и операций",
         "bullet7": "Общая продолжительность сеанса и время на странице",
