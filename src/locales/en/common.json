@@ -239,10 +239,6 @@
       "title": "Auto-verification not available: carefully verify the address.",
       "description": null
     },
-    "EnpointConfig": {
-      "title": "Invalid endpoint",
-      "description": "Please enter a valid endpoint."
-    },
     "Touch ID Error": {
       "title": "Biometric authentication failed",
       "description": "Please use your password or reset the app."
@@ -655,23 +651,27 @@
       },
       "academy": {
         "title": "Ledger Academy",
-        "description": "Everything you need to know about crypto"
+        "description": "Everything you need to\nknow about crypto"
       },
       "stakeCosmos": {
         "title": "Stake COSMOS",
         "description": "Delegate your ATOM earn rewards today."
       },
+      "polkastake": {
+        "title": "POLKADOT STAKING",
+        "description": "Stake, secure and\nmanage your DOT with\nLedger Live"
+      },
       "backupPack": {
         "title": "Back-up pack",
-        "description": "Secure your assets with a Nano X and Nano S."
+        "description": "A Nano X and a Nano S\nfor optimal protection"
       },
       "buyCrypto": {
         "title": "Buy Crypto",
-        "description": "Buy cryptocurrencies from Ledger Live."
+        "description": "Buy crypto on\nLedger Live"
       },
       "swap": {
         "title": "Swap crypto",
-        "description": "Securely exchange one crypto for another."
+        "description": "Securely exchange one\ncrypto for another"
       },
       "algorand": {
         "title": "Algorand",
@@ -1987,7 +1987,7 @@
       },
       "noTokenAccount": {
         "info": {
-          "title": "You don’t have {{ name }} account.",
+          "title": "You don’t have a {{ name }} account.",
           "description": "In order to deposit funds and lend crypto you need a {{ name }} account. Please Receive funds on your Ethereum address."
         },
         "buttons": {
@@ -2180,6 +2180,12 @@
       "streaming": {
         "accurate": "Loading... ({{percentage}})",
         "inaccurate": "Loading..."
+      }
+    },
+    "info": {
+      "maxSpendable": {
+        "title": "Max spendable amount",
+        "description": "The maximum spendable amount is the total balance in an account that is available to send in a transaction."
       }
     }
   },
@@ -2374,6 +2380,7 @@
     "outdatedDesc": "An important update is available for the {{appName}} application on your device. Please go to the Manager to update it.",
     "quitApp": "Quit the application on your device",
     "appNotInstalled": "Please install the {{appName}} app",
+    "appNotInstalled_plural": "Please install the {{appName}} apps",
     "verifyAddress": {
       "title": "Verify address on device",
       "description": "Please verify that the {{currencyName}} address to be shown in Ledger Live matches the one on your Ledger device."
