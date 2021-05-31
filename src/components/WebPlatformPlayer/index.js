@@ -12,6 +12,7 @@ import {
   StyleSheet,
   View,
   TouchableOpacity,
+  SafeAreaView,
 } from "react-native";
 import { WebView } from "react-native-webview";
 import { useNavigation, useTheme } from "@react-navigation/native";
@@ -378,7 +379,7 @@ const WebPlatformPlayer = ({ route }: { route: { params: Props } }) => {
 
     url.searchParams.set(
       "backgroundColor",
-      new Color(theme.colors.background).hex(),
+      new Color(theme.colors.card).hex(),
     );
     url.searchParams.set("textColor", new Color(theme.colors.text).hex());
     url.searchParams.set("loadDate", loadDate.valueOf().toString());
@@ -387,7 +388,7 @@ const WebPlatformPlayer = ({ route }: { route: { params: Props } }) => {
   }, [manifest.url, loadDate, theme]);
 
   return (
-    <View style={[styles.root]}>
+    <SafeAreaView style={[styles.root]}>
       <WebView
         ref={targetRef}
         startInLoadingState={true}
@@ -410,7 +411,7 @@ const WebPlatformPlayer = ({ route }: { route: { params: Props } }) => {
         style={styles.webview}
         androidHardwareAccelerationDisabled
       />
-    </View>
+    </SafeAreaView>
   );
 };
 
