@@ -445,11 +445,11 @@
       "title": "Недостаточно голосов"
     },
     "TronTransactionExpired": {
-      "title": "Transaction timeout expired",
-      "description": "Transactions must be signed within 30 seconds. Please try again."
+      "title": "Время ожидания транзакции истекло",
+      "description": "Транзакции должны быть подписаны в течение 30 секунд. Пожалуйста, попробуйте ещё раз."
     },
     "TronNotEnoughEnergy": {
-      "title": "Not enough Energy to send this token"
+      "title": "Недостаточно Энергии для отправки этого токена"
     },
     "UpdateYourApp": {
       "title": "Необходимо обновить приложения",
@@ -464,7 +464,7 @@
       "description": "Вы отклонили адрес. В случае сомнений, пожалуйста, сохраните логи и отправьте их в Поддержку Ledger."
     },
     "UserRefusedDeviceNameChange": {
-      "title": "Rename canceled on device",
+      "title": "Переименование отменено на устройстве",
       "description": "Вы отменили переименование. Пожалуйста, попробуйте ещё раз."
     },
     "UserRefusedFirmwareUpdate": {
@@ -477,11 +477,11 @@
     },
     "WebsocketConnectionError": {
       "title": "Произошёл сбой подключения",
-      "description": "Please try again with a better network connection (websocket error)."
+      "description": "Попробуйте ещё раз, когда соединение будет восстановлено (ошибка websocket)."
     },
     "WebsocketConnectionFailed": {
       "title": "Произошёл сбой подключения",
-      "description": "Please try again with a better network connection (websocket failed)."
+      "description": "Попробуйте ещё раз, когда соединение будет восстановлено (ошибка websocket)."
     },
     "WrongDeviceForAccount": {
       "title": "Что-то пошло не так",
@@ -492,15 +492,15 @@
       "description": "Перезагрузите устройство, и не трогайте кнопки, когда появится логотип. Пожалуйста, попробуйте ещё раз. Если проблема не ушла, то сохраните логи и отправьте их в Поддержку Ledger."
     },
     "UnavailableTezosOriginatedAccountReceive": {
-      "title": "Cannot receive in subaccounts. Please select the parent account.",
-      "description": "If you want to receive funds, please use the parent account"
+      "title": "Нельзя получать платежи на субсчет. Пожалуйста, укажите основной счёт.",
+      "description": "Если вы хотите получить средства, пожалуйста, используйте основной счёт"
     },
     "UnavailableTezosOriginatedAccountSend": {
-      "title": "Cannot send from subaccounts yet",
-      "description": "This feature will be added at a later stage due to changes recently introduced by the Babylon update."
+      "title": "Нельзя делать переводы из субсчетов",
+      "description": "Эта функция будет добавлена на более позднем этапе ввиду изменений в обновлении Babylon."
     },
     "RecommendUndelegation": {
-      "title": "Please undelegate the account before emptying it"
+      "title": "Пожалуйста, отзовите делегированные средства со счёта перед тем, как опустошить его"
     },
     "RecommendSubAccountsToEmpty": {
       "title": "Пожалуйста, сначала обнулите все субсчета"
@@ -515,10 +515,10 @@
       "title": "Пожалуйста, отключите мультиподписи, чтобы отправить {{currencyName}}"
     },
     "StellarMemoRecommended": {
-      "title": "A memo may be needed when sending to this recipient"
+      "title": "При отправке этому получателю может потребоваться примечание"
     },
     "StratisDown2021Warning": {
-      "description": "The Stratis blockchain evolved and may no longer work correctly. Support for the original Stratis blockchain will be maintained until 16 October 2021."
+      "description": "Блокчейн Stratis претерпел изменения и может работать некорректно. Исходный блокчейн Stratis будет поддерживаться до 16 октября 2021 г."
     },
     "SwapExchangeRateAmountTooLow": {
       "title": "Amount must be higher than {{minAmountFromFormatted}}"
@@ -558,7 +558,7 @@
       "title": "You have exceeded the unbond limit"
     },
     "PolkadotValidatorsRequired": {
-      "title": "You must select at least one validator"
+      "title": "Вы должны выбрать хотя бы одного валидатора"
     },
     "generic": {
       "title": "{{message}}",
@@ -568,7 +568,7 @@
   "bluetooth": {
     "required": "Похоже, Bluetooth отключён",
     "locationRequiredTitle": "Для Bluetooth LE необходимо включить функцию геолокации",
-    "locationRequiredMessage": "On Android location permission is required to list Bluetooth LE devices.",
+    "locationRequiredMessage": "Для вывода списка устройств Bluetooth LE на Android-устройствах потребуется разрешить функцию геолокации.",
     "checkEnabled": "Пожалуйста, включите Bluetooth в настройках телефона."
   },
   "location": {
@@ -601,7 +601,7 @@
         "description": "Чтобы продолжить, введите пароль",
         "authenticate": "Пожалуйста, авторизуйтесь с помощью Ledger Live"
       },
-      "denied": "Auth Security was not enabled because your phone failed to authenticate.",
+      "denied": "Аутентификация не включена, так как ваш телефон не смог авторизоваться.",
       "title": "Ошибка аутентификации",
       "buttons": {
         "tryAgain": "Попробуйте ещё раз",
@@ -655,7 +655,7 @@
       },
       "stakeCosmos": {
         "title": "Стейкинг COSMOS",
-        "description": "Delegate your ATOM earn rewards today."
+        "description": "Делегируйте ATOM и получайте вознаграждения уже сегодня."
       },
       "polkastake": {
         "title": "POLKADOT STAKING",
@@ -675,7 +675,7 @@
       },
       "algorand": {
         "title": "Algorand",
-        "description": "Earn ALGO rewards with each transaction."
+        "description": "Получайте вознаграждение в ALGO за каждую транзакцию."
       },
       "sell": {
         "title": "Продавайте криптовалюту",
@@ -691,7 +691,7 @@
       },
       "blackfriday": {
         "title": "ЧЁРНАЯ ПЯТНИЦА",
-        "description": "Enjoy 40% off with promo code BLACKFRIDAY20"
+        "description": "Скидка 40% с промокодом BLACKFRIDAY20"
       }
     }
   },
@@ -1008,7 +1008,7 @@
           },
           "1": {
             "title": "Укажите длину фразы восстановления",
-            "label": "Your recovery phrase can have 12, 18 or 24 words. You must enter all words to access your crypto."
+            "label": "Фраза восстановления может содержать 12, 18 или 24 слова. Для доступа к криптовалюте вы должны ввести все слова."
           },
           "2": {
             "title": "Введите слово №1...",
@@ -1112,16 +1112,16 @@
     "stepSetupPin": {
       "step1": "Включите {{fullDeviceName}} и следуйте инструкциям.",
       "step1-nanoS": "Подключите {{fullDeviceName}} к телефону с помощью кабеля OTG.",
-      "step2": "Press both buttons together to select <1><1>Setup as a new device.</1></1>",
-      "step2-restore": "Press both buttons together to select <1><1>Restore from recovery phrase.</1></1>",
-      "step3": "Press left or right button to select a digit. Press buttons together to confirm.",
+      "step2": "Нажмите обе кнопки одновременно, чтобы выбрать пункт <1><1>Настроить как новое устройство</1></1> (Setup as a new device).",
+      "step2-restore": "Нажмите обе кнопки одновременно, чтобы выбрать пункт <1><1>Использовать фразу восстановления</1></1> (Restore from recovery phrase).",
+      "step3": "Для выбора цифры нажимайте левую или правую кнопку. Для подтверждения нажмите обе кнопки.",
       "step4prefix": "Выбрать",
       "step4suffix1": " чтобы подтвердит ПИН-код.",
       "step4suffix2": " чтобы стереть последнюю цифру.",
       "modal": {
         "step1": "Всегда устанавливайте ПИН-код <1><1>самостоятельно</1></1>",
         "step2": "Для лучшей безопасности используйте 8 цифр",
-        "step3": "Never use a device with a PIN or recovery phrase already setup"
+        "step3": "Никогда не используйте устройство с уже установленными фразой восстановления или ПИН-кодом"
       }
     },
     "stepWriteRecovery": {
@@ -1234,7 +1234,7 @@
       "noAppsTitle": "Установить приложение на моё устройство",
       "noAppsDesc": "Install apps on your device before adding accounts in Ledger Live. Go to the Manager to install apps.",
       "noAccountsTitle": "У вас ещё нет счетов…",
-      "noAccountsDesc": "Please add accounts to your Portfolio.",
+      "noAccountsDesc": "Пожалуйста, добавьте счета в портфель.",
       "buttons": {
         "import": "Добавить счёт",
         "manager": "Установка приложений",
@@ -1242,7 +1242,7 @@
       }
     },
     "noOpState": {
-      "title": "No operations yet?",
+      "title": "Ещё не проводили операции?",
       "desc": "Просто отправьте криптоактивы на получателю и дождитесь синхронизации приложения."
     }
   },
@@ -1296,17 +1296,17 @@
       "SUPPLY": "Депонировано",
       "REDEEM": "Выведено",
       "APPROVE": "Включено",
-      "BOND": "Bond",
-      "UNBOND": "Unbond",
+      "BOND": "Заблокировать",
+      "UNBOND": "Разблокировать",
       "REWARD_PAYOUT": "Вознаграждение",
       "SLASH": "Slash",
-      "WITHDRAW_UNBONDED": "Unbonded Withdrawal",
+      "WITHDRAW_UNBONDED": "Вывод разблокированных средств",
       "NOMINATE": "Голосование",
       "CHILL": "Очистить голоса"
     }
   },
   "operationDetails": {
-    "title": "Operation details",
+    "title": "Сведения об операции",
     "account": "Счёт",
     "date": "Дата",
     "confirmed": "Подтверждена",
@@ -1324,11 +1324,11 @@
     "viewInExplorer": "Просмотреть в Обозревателе блоков",
     "sending": "Идет отправка...",
     "receiving": "Получение...",
-    "tokenOperations": "Token operations",
+    "tokenOperations": "Операции по токену",
     "subAccountOperations": "Операции с субсчетами",
     "internalOperations": "Внутренние операции",
     "tokenModal": {
-      "desc": "This operation is related to the following token operations"
+      "desc": "Эта операция относится к следующим операциям токена"
     },
     "details": "{{ currency }}: сведения",
     "extra": {
@@ -1355,7 +1355,7 @@
       "assetId": "ID актива",
       "rewards": "Заработанное вознаграждение",
       "bondedAmount": "Bonded Amount",
-      "unbondedAmount": "Unbonded Amount",
+      "unbondedAmount": "Разблокированная сумма",
       "withdrawUnbondedAmount": "Withdraw Unbonded Amount",
       "palletMethod": "Метод",
       "transferAmount": "Сумма перевода",
@@ -1382,7 +1382,7 @@
       "seeMore": "Показать больше токенов",
       "seeLess": "Показать меньше токенов",
       "addTokens": "Добавить токен",
-      "howTo": "To add token accounts, you need to <0>receive funds</0> using your <1>{{currency}} address</1>.",
+      "howTo": "Чтобы добавить счета для токенов, вам нужно <0>получить средства</0>, используя <1>адрес для {{currency}}</1>.",
       "algorand": {
         "contractAddress": "Адрес контракта",
         "viewInExplorer": "Просмотреть в Обозревателе блоков",
@@ -1488,10 +1488,10 @@
     "bandwidth": "Пропускная способность",
     "energy": "Энергия",
     "delegatedAssets": "Делегированные активы",
-    "undelegating": "Undelegating",
+    "undelegating": "Отзыв средств",
     "delegation": {
-      "sectionLabel": "Delegation(s)",
-      "addDelegation": "Add delegation",
+      "sectionLabel": "Делегирование",
+      "addDelegation": "Добавить делегирование",
       "info": {
         "title": "Получайте вознаграждение",
         "cta": "Получайте вознаграждение"
