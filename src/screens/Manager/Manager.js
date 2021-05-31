@@ -1,10 +1,9 @@
 import React, { useState, useCallback, useEffect, memo } from "react";
 import { CommonActions } from "@react-navigation/native";
-
 import type { DeviceInfo } from "@ledgerhq/live-common/lib/types/manager";
 import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import type { ListAppsResult } from "@ledgerhq/live-common/lib/apps/types";
-
+import { SyncSkipUnderPriority } from "@ledgerhq/live-common/lib/bridge/react";
 import { useApps } from "./shared";
 import AppsScreen from "./AppsScreen";
 import GenericErrorBottomModal from "../../components/GenericErrorBottomModal";
@@ -133,6 +132,7 @@ const Manager = ({
         deviceVersion={deviceInfo.version}
         appLength={result ? result.installed.length : 0}
       />
+      <SyncSkipUnderPriority priority={100} />
       <AppsScreen
         state={state}
         dispatch={dispatch}
