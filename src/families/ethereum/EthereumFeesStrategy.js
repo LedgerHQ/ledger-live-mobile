@@ -1,11 +1,12 @@
 /* @flow */
-import React, { useCallback } from "react";
+import React, { useCallback, useState, useMemo, useEffect } from "react";
 
 import { useFeesStrategy } from "@ledgerhq/live-common/lib/families/ethereum/react";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 
 import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
 import type { Transaction } from "@ledgerhq/live-common/lib/families/ethereum/types";
+import { getGasLimit } from "@ledgerhq/live-common/lib/families/ethereum/transaction";
 import type { RouteParams } from "../../screens/SendFunds/04-Summary";
 import { ScreenName } from "../../const";
 import SelectFeesStrategy from "../../components/SelectFeesStrategy";
@@ -19,6 +20,21 @@ type Props = {
   setTransaction: Function,
 };
 
+const getCustomStrategy = transaction => {
+  if (transaction.feesStrategy === "custom") {
+    return {
+      label: "custom",
+      forceValueLabel: null,
+      amount: transaction.gasPrice,
+      displayedAmount: transaction.gasPrice.multipliedBy(getGasLimit(transaction)),
+      userGasLimit: getGasLimit(transaction),
+    };
+  }
+
+  return null;
+};
+
+
 export default function EthereumFeesStrategy({
   account,
   parentAccount,
@@ -27,33 +43,29 @@ export default function EthereumFeesStrategy({
   navigation,
   route,
 }: Props) {
-  let strategies = useFeesStrategy(transaction);
-  const { customGasPrice, customGasLimit } = route.params;
-  if (customGasPrice && customGasLimit) {
-    strategies = [
-      ...strategies.map(s => ({
-        ...s,
-        userGasLimit: transaction.estimatedGasLimit,
-      })),
-      {
-        label: "custom",
-        forceValueLabel: null,
-        amount: customGasPrice,
-        displayedAmount: customGasLimit.times(customGasPrice),
-        userGasLimit: customGasLimit,
-      },
-    ];
-  }
+  const defaultStrategies = useFeesStrategy(transaction);
+  const [customStrategy, setCustomStrategy] = useState(getCustomStrategy(transaction));
+  const strategies = useMemo(
+    () => (customStrategy ? [...defaultStrategies, customStrategy] : defaultStrategies),
+    [defaultStrategies, customStrategy],
+  );
+
+  useEffect(() => {
+    const newCustomStrategy = getCustomStrategy(transaction);
+    if (newCustomStrategy) {
+      setCustomStrategy(newCustomStrategy);
+    }
+  }, [transaction, setCustomStrategy]);
 
   const onFeesSelected = useCallback(
     ({ amount, label, userGasLimit }) => {
       const bridge = getAccountBridge(account, parentAccount);
-
+      
       setTransaction(
         bridge.updateTransaction(transaction, {
           gasPrice: amount,
           feesStrategy: label,
-          userGasLimit,
+          userGasLimit: userGasLimit || transaction.userGasLimit,
         }),
       );
     },
@@ -66,12 +78,8 @@ export default function EthereumFeesStrategy({
       accountId: account.id,
       parentId: parentAccount && parentAccount.id,
       transaction,
-      customGasPrice,
-      customGasLimit,
     });
   }, [
-    customGasPrice,
-    customGasLimit,
     navigation,
     route.params,
     account.id,

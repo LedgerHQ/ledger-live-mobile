@@ -50,8 +50,6 @@ export type RouteParams = {
   nextNavigation?: string,
   overrideAmountLabel?: string,
   hideTotal?: boolean,
-  customGasPrice?: BigNumber,
-  customGasLimit?: BigNumber,
   appName?: string,
 };
 
