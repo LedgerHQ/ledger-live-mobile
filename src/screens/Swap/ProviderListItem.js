@@ -38,21 +38,23 @@ const ProviderListItem = ({
             {title}
           </LText>
         </View>
-        <View style={styles.bullets}>
-          <BulletList
-            itemContainerStyle={styles.bullet}
-            itemStyle={styles.bulletItem}
-            Bullet={BulletSmallDot}
-            list={bullets.map(wording => (
-              <LText
-                style={[styles.bulletText, { color: colors.smoke }]}
-                semiBold
-              >
-                {wording}
-              </LText>
-            ))}
-          />
-        </View>
+        {bullets && !!bullets.length && 
+          <View style={styles.bullets}>
+            <BulletList
+              itemContainerStyle={styles.bullet}
+              itemStyle={styles.bulletItem}
+              Bullet={BulletSmallDot}
+              list={bullets.map(wording => (
+                <LText
+                  style={[styles.bulletText, { color: colors.smoke }]}
+                  semiBold
+                >
+                  {wording}
+                </LText>
+              ))}
+            />
+          </View>
+        }
       </View>
     </TouchableOpacity>
   );

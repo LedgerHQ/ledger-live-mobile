@@ -1,8 +1,6 @@
 // @flow
 import { useMemo } from "react";
 
-import ParaswapIcon from "../../icons/swap/Paraswap";
-
 const useManifests = () =>
   useMemo(() => {
     const paraswapUrl = new URL(
@@ -23,8 +21,6 @@ const useManifests = () =>
       paraswap: {
         name: "ParaSwap",
         url: paraswapUrl,
-        // $FlowFixMe
-        icon: ParaswapIcon,
       },
     };
 

@@ -1772,21 +1772,21 @@
         "whatIsSwap": "What is Buy?",
         "cta": "Continue",
         "coinify": {
-          "title": "Coinify",
-          "bullet": [
-            "Available for all bank accounts",
-            "EUR, USD, GBP & 32 others supported",
-            "SEPA payment, credit or debit card",
-            "1.5% / 4.25% fees"
+          "bullets": [
+            "Available in 130+ countries",
+            "EUR, USD, GBP and 32 others",
+            "SEPA & Faster Payments",
+            "Local US wire transfers",
+            "Credit and debit cards"
           ]
         },
         "wyre": {
-          "title": "Wyre",
-          "bullet": [
-            "Only bank account from 🇺🇸",
-            "USD, GBP, EUR & 11 others supported",
+          "bullets": [
+            "Only 🇺🇸 bank account",
+            "USD support only",
+            "20+ crypto supported",
             "ACH transfer",
-            "0.75% fees"
+            "No credit & debit cards"
           ]
         }
       }
@@ -1808,16 +1808,18 @@
         "whatIsSwap": "What is Swap?",
         "cta": "Continue",
         "changelly": {
-          "title": "Changelly",
-          "bullet": [
-            "Centralized",
-            "Multi coins and tokens",
-            "Europe, Asia, Africa and Americas"
+          "bullets": [
+            "BTC, ETH, USDT and 50+ others",
+            "Multi-currency",
+            "Centralized"
           ]
         },
         "paraswap": {
-          "title": "Paraswap",
-          "bullet": ["Defi", "Ethereum and ERC20 tokens", "5% Fees"]
+          "bullets": [
+            "Connect to 30+ DEXs (Uniswap, SushiSwap,...)",
+            "Ethereum & ERC20 tokens",
+            "Decentralized & Trustless"
+          ]
         }
       },
       "main": {

@@ -11,9 +11,8 @@ import type { AccountLike, Account } from "@ledgerhq/live-common/lib/types";
 import { ScreenName } from "../../const";
 import Button from "../../components/Button";
 import LText from "../../components/LText";
-// import WyreIcon from "../../../icons/swap/Wyre";
-import ChangellyIcon from "../../icons/swap/Changelly";
-import WyreIcon from "../../icons/swap/Wyre";
+import IconCoinify from "../../icons/providers/Coinify";
+import IconWyre from "../../icons/providers/Wyre";
 
 import Item from "./ProviderListItem";
 import manifests from "./manifests";
@@ -22,6 +21,21 @@ type RouteParams = {
   defaultAccount: ?AccountLike,
   defaultParentAccount: ?Account,
 };
+
+const PROVIDERS = [
+  {
+    provider: "wyre",
+    name: "Wyre",
+    Icon: IconWyre,
+    isDapp: true,
+  },
+  {
+    provider: "coinify",
+    name: "Coinify",
+    Icon: IconCoinify,
+    isDapp: false,
+  },
+];
 
 const ExchangeProviders = ({ route }: { route: { params: RouteParams } }) => {
   const { params: routeParams } = route;
@@ -32,22 +46,18 @@ const ExchangeProviders = ({ route }: { route: { params: RouteParams } }) => {
 
   const onContinue = useCallback(
     (provider: string) => {
-      // TODO: may need something more robust against unknown/unsupported providers
-      switch (provider) {
-        case "coinify":
-          navigation.navigate(ScreenName.Exchange, routeParams);
-          break;
-        default: {
-          const manifest = manifests[provider];
-          navigation.navigate(ScreenName.ExchangeDapp, { manifest });
-          break;
-        }
+      const conf = PROVIDERS.find(p => p.provider === provider);
+      if (!conf) return;
+
+      if (conf.isDapp) {
+        const manifest = manifests[conf.provider];
+        navigation.navigate(ScreenName.ExchangeDapp, { manifest });
+      } else {
+        navigation.navigate(ScreenName.Exchange, routeParams);
       }
     },
     [routeParams, navigation],
   );
-
-  // TODO: auto-generate by parsing all manifests
 
   return (
     <SafeAreaView style={styles.wrapper}>
@@ -55,44 +65,26 @@ const ExchangeProviders = ({ route }: { route: { params: RouteParams } }) => {
         <LText style={styles.title} semiBold secondary>
           <Trans i18nKey={"transfer.exchange.providers.title"} />
         </LText>
-        {__DEV__ && (
-          <Item
-            rows={rows}
-            id={"debug"}
-            onSelect={setSelectedItem}
-            selected={selectedItem}
-            title={"Debug"}
-            bullets={["test app"]}
-          />
-        )}
-        <Item
-          rows={rows}
-          id={"wyre"}
-          onSelect={setSelectedItem}
-          selected={selectedItem}
-          Icon={WyreIcon}
-          title={t("transfer.exchange.providers.wyre.title")}
-          bullets={[
-            t("transfer.exchange.providers.wyre.bullet.0"),
-            t("transfer.exchange.providers.wyre.bullet.1"),
-            t("transfer.exchange.providers.wyre.bullet.2"),
-            t("transfer.exchange.providers.wyre.bullet.3"),
-          ]}
-        />
-        <Item
-          rows={rows}
-          id={"coinify"}
-          onSelect={setSelectedItem}
-          selected={selectedItem}
-          Icon={ChangellyIcon}
-          title={t("transfer.exchange.providers.coinify.title")}
-          bullets={[
-            t("transfer.exchange.providers.coinify.bullet.0"),
-            t("transfer.exchange.providers.coinify.bullet.1"),
-            t("transfer.exchange.providers.coinify.bullet.2"),
-            t("transfer.exchange.providers.coinify.bullet.3"),
-          ]}
-        />
+        {PROVIDERS.map(p => {
+            const bullets = t(`transfer.exchange.providers.${p.provider}.bullets`, {
+              joinArrays: ";",
+              defaultValue: "",
+            })
+              .split(";")
+              .filter(Boolean);
+
+            return (
+              <Item
+                key={p.provider}
+                id={p.provider}
+                onSelect={setSelectedItem}
+                selected={selectedItem}
+                Icon={p.Icon}
+                title={p.name}
+                bullets={bullets}
+              />
+            )
+        })}
       </ScrollView>
       <View style={styles.footer}>
         <Button

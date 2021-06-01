@@ -11,9 +11,9 @@ import type { AccountLike, Account } from "@ledgerhq/live-common/lib/types";
 import { ScreenName } from "../../const";
 import Button from "../../components/Button";
 import LText from "../../components/LText";
-// import WyreIcon from "../../../icons/swap/Wyre";
-import ChangellyIcon from "../../icons/swap/Changelly";
-import ParaswapIcon from "../../icons/swap/Paraswap";
+// import IconWyre from "../../../icons/providers/Wyre";
+import IconChangelly from "../../icons/providers/Changelly";
+import IconParaswap from "../../icons/providers/Paraswap";
 
 import Item from "./ProviderListItem";
 import useManifests from "./manifests";
@@ -23,32 +23,61 @@ type RouteParams = {
   defaultParentAccount: ?Account,
 };
 
+const PROVIDERS = [
+  // {
+  //   provider: "wyre",
+  //   name: "Wyre",
+  //   isDapp: false,
+  //   Icon: IconWyre,
+  //   kycRequired: true,
+  // },
+  {
+    provider: "paraswap",
+    name: "ParaSwap",
+    isDapp: true,
+    Icon: IconParaswap,
+    kycRequired: false,
+  },
+  {
+    provider: "changelly",
+    name: "Changelly",
+    isDapp: false,
+    Icon: IconChangelly,
+    kycRequired: false,
+  },
+];
+
+if (__DEV__) {
+  PROVIDERS.push({
+    provider: "debug",
+    name: "Debugger",
+    isDapp: true,
+    kycRequired: false,
+  });
+}
+
 const SwapProviders = ({ route }: { route: { params: RouteParams } }) => {
   const { params: routeParams } = route;
   const [selectedItem, setSelectedItem] = useState();
   const { t } = useTranslation();
   const navigation = useNavigation();
   const manifests = useManifests();
-  const rows = false;
 
   const onContinue = useCallback(
     (provider: string) => {
-      // TODO: may need something more robust against unknown/unsupported providers
-      switch (provider) {
-        case "changelly":
-          navigation.navigate(ScreenName.SwapFormOrHistory, routeParams);
-          break;
-        default: {
-          const manifest = manifests[provider];
-          navigation.navigate(ScreenName.SwapDapp, { manifest });
-          break;
-        }
+      const conf = PROVIDERS.find(p => p.provider === provider);
+      if (!conf) return;
+
+      if (conf.isDapp) {
+        const manifest = manifests[conf.provider];
+        navigation.navigate(ScreenName.SwapDapp, { manifest });
+      } else {
+        // TODO: do the Wyre provider logic
+        navigation.navigate(ScreenName.SwapFormOrHistory, routeParams);
       }
     },
     [routeParams, navigation],
   );
-
-  // TODO: auto-generate by parsing all manifests
 
   return (
     <SafeAreaView style={styles.wrapper}>
@@ -56,58 +85,27 @@ const SwapProviders = ({ route }: { route: { params: RouteParams } }) => {
         <LText style={styles.title} semiBold secondary>
           <Trans i18nKey={"transfer.swap.providers.title"} />
         </LText>
-        {__DEV__ && (
-          <Item
-            rows={rows}
-            id={"debug"}
-            onSelect={setSelectedItem}
-            selected={selectedItem}
-            title={"Debug"}
-            bullets={["test app"]}
-          />
-        )}
-        <Item
-          rows={rows}
-          id={"paraswap"}
-          onSelect={setSelectedItem}
-          selected={selectedItem}
-          Icon={ParaswapIcon}
-          title={t("transfer.swap.providers.paraswap.title")}
-          bullets={[
-            t("transfer.swap.providers.paraswap.bullet.0"),
-            t("transfer.swap.providers.paraswap.bullet.1"),
-            t("transfer.swap.providers.paraswap.bullet.2"),
-          ]}
-        />
-        <Item
-          rows={rows}
-          id={"changelly"}
-          onSelect={setSelectedItem}
-          selected={selectedItem}
-          Icon={ChangellyIcon}
-          title={t("transfer.swap.providers.changelly.title")}
-          bullets={[
-            t("transfer.swap.providers.changelly.bullet.0"),
-            t("transfer.swap.providers.changelly.bullet.1"),
-            t("transfer.swap.providers.changelly.bullet.2"),
-          ]}
-        />
-        {/*
-        <Item
-          rows={rows}
-          id={"wyre"}
-          onSelect={setSelectedItem}
-          selected={selectedItem}
-          //Icon={WyreIcon}
-          kyc
-          title={t("transfer.swap.providers.wyre.title")}
-          bullets={[
-            t("transfer.swap.providers.wyre.bullet.0"),
-            t("transfer.swap.providers.wyre.bullet.1"),
-            t("transfer.swap.providers.wyre.bullet.2"),
-          ]}
-        />
-        */}
+        {PROVIDERS.map(p => {
+            const bullets = t(`transfer.swap.providers.${p.provider}.bullets`, {
+              joinArrays: ";",
+              defaultValue: "",
+            })
+              .split(";")
+              .filter(Boolean);
+
+            return (
+              <Item
+                key={p.provider}
+                id={p.provider}
+                onSelect={setSelectedItem}
+                selected={selectedItem}
+                Icon={p.Icon}
+                title={p.name}
+                bullets={bullets}
+                kyc={p.kycRequired}
+              />
+            )
+        })}
       </ScrollView>
       <View style={styles.footer}>
         <Button
