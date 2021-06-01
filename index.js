@@ -13,9 +13,12 @@ import { AppRegistry } from "react-native";
 import { Sentry } from "react-native-sentry";
 import Config from "react-native-config";
 
+import { enableScreens } from "react-native-screens";
 import App from "./src";
 import { getEnabled } from "./src/components/HookSentry";
 import logReport from "./src/log-report";
+
+enableScreens(true);
 
 if (Config.SENTRY_DSN && !__DEV__ && !Config.MOCK) {
   Sentry.config(Config.SENTRY_DSN, {
