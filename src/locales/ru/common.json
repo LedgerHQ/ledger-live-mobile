@@ -137,7 +137,7 @@
       "description": "Пожалуйста, попробуйте ещё раз."
     },
     "CosmosBroadcastCodeUnauthorized": {
-      "title": "Unauthorized signature",
+      "title": "Неавторизованная подпись",
       "description": "Этот счёт не может подписать данную транзакцию."
     },
     "CosmosBroadcastCodeInsufficientFunds": {
@@ -252,7 +252,7 @@
       "description": "Попробуйте установить комиссию вручную (статус: {{status}})."
     },
     "FeeNotLoaded": {
-      "title": "Could not load fee rates"
+      "title": "Не удалось загрузить ставки комиссии"
     },
     "FeeRequired": {
       "title": "Необходимо указать комиссию"
@@ -347,11 +347,11 @@
     },
     "NotEnoughBalance": {
       "title": "Кажется, у вас недостаточно средств",
-      "description": "Please make sure the account has enough funds."
+      "description": "Пожалуйста, убедитесь, что на счёте достаточно средств."
     },
     "NotEnoughGas": {
       "title": "Недостаточно ETH для оплаты комиссии сети",
-      "description": "Please send some ETH to your account to pay for ERC20 token transactions."
+      "description": "Пожалуйста, пополните свой счёт ETH для оплаты транзакций в токенах ERC20."
     },
     "NotEnoughBalanceToDelegate": {
       "title": "Недостаточный баланс для делегирования"
@@ -360,10 +360,10 @@
       "title": "Недостаточный баланс на основном счёте"
     },
     "NotEnoughSpendableBalance": {
-      "title": "Balance cannot be below {{minimumAmount}}"
+      "title": "Баланс не может быть ниже {{minimumAmount}}"
     },
     "NotEnoughBalanceBecauseDestinationNotCreated": {
-      "title": "Minimum of {{minimalAmount}} needed to activate recipient address"
+      "title": "Для активации адреса получателя необходимо минимум {{minimalAmount}}"
     },
     "PairingFailed": {
       "title": "Не удалось подключить устройство",
@@ -390,7 +390,7 @@
       "description": "Пожалуйста, попробуйте ещё раз."
     },
     "TimeoutTagged": {
-      "title": "Sorry, server took too long to respond ({{tag}})",
+      "title": "Извините, время ожидания ответа сервера истекло ({{tag}})",
       "description": "Время ожидания истекло."
     },
     "TransactionRefusedOnDevice": {
@@ -406,16 +406,16 @@
       "description": "{{message}} Пожалуйста, попробуйте ещё раз. Если проблема не уходит, пожалуйста, сохраните логи и отправьте их в Поддержку Ledger."
     },
     "TronNoFrozenForBandwidth": {
-      "title": "Нет активов для разблокировки",
-      "description": "You don't have Bandwidth assets to unfreeze."
+      "title": "Нет активов для разморозки",
+      "description": "У вас недостаточно очков Пропускной способности (Bandwidth) для разморозки."
     },
     "TronNoFrozenForEnergy": {
-      "title": "No assets to unfreeze",
-      "description": "You don't have Energy assets to unfreeze."
+      "title": "Нет активов для разморозки",
+      "description": "У вас недостаточно Энергии (Energy) для разморозки."
     },
     "TronUnfreezeNotExpired": {
-      "title": "Unfreeze is not available yet",
-      "description": "Please wait 3 days after your last Freeze operation."
+      "title": "Функция разморозки пока недоступна",
+      "description": "С последней заморозки активов должно пройти 3 дня."
     },
     "TronVoteRequired": {
       "title": "Требуется как минимум 1 голос"
@@ -429,14 +429,14 @@
       "description": "Между запросами должно пройти 24 часа."
     },
     "TronNoReward": {
-      "title": "There is no reward to be claimed"
+      "title": "Нет вознаграждения, которое можно запросить"
     },
     "TronInvalidFreezeAmount": {
-      "title": "Amount to freeze cannot be smaller than 1"
+      "title": "Сумма для заморозки должна быть не меньше 1"
     },
     "TronSendTrc20ToNewAccountForbidden": {
       "title": "Отправка TRC20 на новый счёт не активирует его",
-      "description": "To activate it, first send either TRX or TRC10 to the account. Then it can receive TRC20."
+      "description": "Для активации сначала отправьте TRX или TRC10 на счёт, после чего вы сможете получать TRC20."
     },
     "TronUnexpectedFees": {
       "title": "Могут взиматься дополнительные сборы"
@@ -449,7 +449,7 @@
       "description": "Транзакции должны быть подписаны в течение 30 секунд. Пожалуйста, попробуйте ещё раз."
     },
     "TronNotEnoughEnergy": {
-      "title": "Недостаточно Энергии для отправки этого токена"
+      "title": "Недостаточно Энергии (Energy) для отправки этого токена"
     },
     "UpdateYourApp": {
       "title": "Необходимо обновить приложения",
@@ -488,7 +488,7 @@
       "description": "Пожалуйста, убедитесь, что ваш аппаратный кошелёк настроен с помощью фразы восстановления, привязанной к выбранному счёту."
     },
     "UnexpectedBootloader": {
-      "title": "Sorry, your device must not be in Bootloader mode",
+      "title": "Устройство не должно быть в режиме Bootloader",
       "description": "Перезагрузите устройство, и не трогайте кнопки, когда появится логотип. Пожалуйста, попробуйте ещё раз. Если проблема не ушла, то сохраните логи и отправьте их в Поддержку Ledger."
     },
     "UnavailableTezosOriginatedAccountReceive": {
@@ -521,17 +521,17 @@
       "description": "Блокчейн Stratis претерпел изменения и может работать некорректно. Исходный блокчейн Stratis будет поддерживаться до 16 октября 2021 г."
     },
     "SwapExchangeRateAmountTooLow": {
-      "title": "Amount must be higher than {{minAmountFromFormatted}}"
+      "title": "Сумма должна быть больше {{minAmountFromFormatted}}"
     },
     "SwapExchangeRateAmountTooHigh": {
-      "title": "Amount must be lower than {{maxAmountFromFormatted}}"
+      "title": "Сумма должна быть меньше {{maxAmountFromFormatted}}"
     },
     "SwapGenericAPIError": {
       "title": "Этот курс больше не актуален",
       "description": "Вы должны подтвердить обмен до конца отсчёта времени. Обменный курс действует лишь ограниченный период времени."
     },
     "PolkadotElectionClosed": {
-      "title": "Validators election must be closed"
+      "title": "Выбор валидаторов должен быть закрыт"
     },
     "PolkadotNotValidator": {
       "title": "Некоторые из выбранных адресов не являются валидаторами"
@@ -555,7 +555,7 @@
       "title": "Вы должны заблокировать как минимум 1 DOT"
     },
     "PolkadotMaxUnbonding": {
-      "title": "You have exceeded the unbond limit"
+      "title": "Вы превысили лимит по разблокировке"
     },
     "PolkadotValidatorsRequired": {
       "title": "Вы должны выбрать хотя бы одного валидатора"
@@ -1201,7 +1201,7 @@
     "warning": {
       "recoveryPhrase": {
         "title": "Не используйте фразу восстановления, которую кто-то создал за вас.",
-        "desc": "Your Ledger hardware wallet’s pin code and recovery phrase should be initialized by you and only you. If you have received a device with a pre-existing seed word or an already initialized pin code do not use the product and contact our customer support.",
+        "desc": "Вы должны самостоятельно создать ПИН-код и получить фразу восстановления для вашего аппаратного кошелька Ledger. Если вы получили устройство с уже установленной фразой восстановления или ПИН-кодом, не пользуйтесь им и свяжитесь с нашей службой поддержки.",
         "supportLink": "Обратитесь в Поддержку"
       }
     }
@@ -1334,7 +1334,7 @@
     "extra": {
       "resource": "Resource",
       "frozenAmount": "Замороженная сумма",
-      "unfreezeAmount": "Разморозить средства",
+      "unfreezeAmount": "Сумма для разморозки",
       "address": "Адрес",
       "votes": "Голосов: ({{number}})",
       "votesAddress": "<0>{{votes}}</0> для <2>{{name}}</2>",
@@ -1485,7 +1485,7 @@
     "availableBalance": "Доступный баланс",
     "totalSupplied": "Сумма пополнения",
     "tronFrozen": "Заморожено",
-    "bandwidth": "Пропускная способность",
+    "bandwidth": "Пропускная способность (Bandwidth)",
     "energy": "Энергия",
     "delegatedAssets": "Делегированные активы",
     "undelegating": "Отзыв средств",
@@ -1593,7 +1593,7 @@
       "exchange": "Источник обменных курсов",
       "exchangeDesc": "Выбор поставщика обменного курса Биткойна к {{fiat}}",
       "stock": "Regional market indicator",
-      "stockDesc": "Choose Western to display market increases in green or Eastern to display them in red.",
+      "stockDesc": "Выберите «Западный», чтобы рост рыночной стоимости отображался синим цветом, либо «Восточный», чтобы рост рыночной стоимости отображался красным цветом.",
       "reportErrors": "Отчёты об ошибках",
       "reportErrorsDesc": "Отправлять сообщения об ошибках компании Ledger автоматически для их последующего исправления.",
       "developerMode": "Режим разработчика",
