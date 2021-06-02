@@ -42,7 +42,6 @@ const ExchangeProviders = ({ route }: { route: { params: RouteParams } }) => {
   const [selectedItem, setSelectedItem] = useState();
   const { t } = useTranslation();
   const navigation = useNavigation();
-  const rows = false;
 
   const onContinue = useCallback(
     (provider: string) => {
@@ -66,24 +65,27 @@ const ExchangeProviders = ({ route }: { route: { params: RouteParams } }) => {
           <Trans i18nKey={"transfer.exchange.providers.title"} />
         </LText>
         {PROVIDERS.map(p => {
-            const bullets = t(`transfer.exchange.providers.${p.provider}.bullets`, {
+          const bullets = t(
+            `transfer.exchange.providers.${p.provider}.bullets`,
+            {
               joinArrays: ";",
               defaultValue: "",
-            })
-              .split(";")
-              .filter(Boolean);
+            },
+          )
+            .split(";")
+            .filter(Boolean);
 
-            return (
-              <Item
-                key={p.provider}
-                id={p.provider}
-                onSelect={setSelectedItem}
-                selected={selectedItem}
-                Icon={p.Icon}
-                title={p.name}
-                bullets={bullets}
-              />
-            )
+          return (
+            <Item
+              key={p.provider}
+              id={p.provider}
+              onSelect={setSelectedItem}
+              selected={selectedItem}
+              Icon={p.Icon}
+              title={p.name}
+              bullets={bullets}
+            />
+          );
         })}
       </ScrollView>
       <View style={styles.footer}>

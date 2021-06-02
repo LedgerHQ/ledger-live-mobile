@@ -1,7 +1,7 @@
 // @flow
 
 import React from "react";
-import Svg, { G, Defs, Path, Rect, ClipPath } from "react-native-svg";
+import Svg, { Path } from "react-native-svg";
 
 const Coinify = ({ size }: { size: number }) => (
   <Svg viewBox="0 0 32 32" height={size} width={size}>

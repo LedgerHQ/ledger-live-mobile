@@ -38,7 +38,7 @@ const ProviderListItem = ({
             {title}
           </LText>
         </View>
-        {bullets && !!bullets.length && 
+        {bullets && !!bullets.length && (
           <View style={styles.bullets}>
             <BulletList
               itemContainerStyle={styles.bullet}
@@ -54,7 +54,7 @@ const ProviderListItem = ({
               ))}
             />
           </View>
-        }
+        )}
       </View>
     </TouchableOpacity>
   );

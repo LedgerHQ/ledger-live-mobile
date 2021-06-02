@@ -17,6 +17,7 @@ import Button from "../../components/Button";
 import EthereumGasLimit from "./SendRowGasLimit";
 
 import type { RouteParams } from "../../screens/SendFunds/04-Summary";
+
 type Props = {
   navigation: any,
   route: { params: RouteParams },
@@ -48,9 +49,7 @@ export default function EthereumCustomFees({ navigation, route }: Props) {
     transaction.gasPrice || range.initial,
   );
 
-  const [gasLimit, setGasLimit] = useState(
-    getGasLimit(transaction)
-  );
+  const [gasLimit, setGasLimit] = useState(getGasLimit(transaction));
 
   const onValidate = useCallback(() => {
     const bridge = getAccountBridge(account, parentAccount);

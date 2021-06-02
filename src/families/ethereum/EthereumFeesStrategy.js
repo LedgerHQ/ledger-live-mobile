@@ -26,14 +26,15 @@ const getCustomStrategy = transaction => {
       label: "custom",
       forceValueLabel: null,
       amount: transaction.gasPrice,
-      displayedAmount: transaction.gasPrice.multipliedBy(getGasLimit(transaction)),
+      displayedAmount: transaction.gasPrice.multipliedBy(
+        getGasLimit(transaction),
+      ),
       userGasLimit: getGasLimit(transaction),
     };
   }
 
   return null;
 };
-
 
 export default function EthereumFeesStrategy({
   account,
@@ -44,9 +45,14 @@ export default function EthereumFeesStrategy({
   route,
 }: Props) {
   const defaultStrategies = useFeesStrategy(transaction);
-  const [customStrategy, setCustomStrategy] = useState(getCustomStrategy(transaction));
+  const [customStrategy, setCustomStrategy] = useState(
+    getCustomStrategy(transaction),
+  );
   const strategies = useMemo(
-    () => (customStrategy ? [...defaultStrategies, customStrategy] : defaultStrategies),
+    () =>
+      customStrategy
+        ? [...defaultStrategies, customStrategy]
+        : defaultStrategies,
     [defaultStrategies, customStrategy],
   );
 
@@ -60,12 +66,12 @@ export default function EthereumFeesStrategy({
   const onFeesSelected = useCallback(
     ({ amount, label, userGasLimit }) => {
       const bridge = getAccountBridge(account, parentAccount);
-      
+
       setTransaction(
         bridge.updateTransaction(transaction, {
           gasPrice: amount,
           feesStrategy: label,
-          userGasLimit: userGasLimit || transaction.userGasLimit,
+          userGasLimit: userGasLimit || transaction.userGasLimit,
         }),
       );
     },
@@ -79,13 +85,7 @@ export default function EthereumFeesStrategy({
       parentId: parentAccount && parentAccount.id,
       transaction,
     });
-  }, [
-    navigation,
-    route.params,
-    account.id,
-    parentAccount,
-    transaction,
-  ]);
+  }, [navigation, route.params, account.id, parentAccount, transaction]);
 
   return (
     <SelectFeesStrategy
