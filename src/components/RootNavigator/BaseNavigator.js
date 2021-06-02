@@ -156,6 +156,11 @@ export default function BaseNavigator() {
         }}
         listeners={({ route }) => ({
           beforeRemove: () => {
+            /**
+              react-navigation workaround try to fetch params from current route params
+              or fallback to child navigator route params
+              since this listener is on top of another navigator
+            */
             const onError =
               route.params?.onError || route.params?.params?.onError;
             // @TODO replace with correct error
