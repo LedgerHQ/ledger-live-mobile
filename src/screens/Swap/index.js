@@ -53,6 +53,7 @@ if (__DEV__) {
     name: "Debugger",
     isDapp: true,
     kycRequired: false,
+    Icon: null,
   });
 }
 
@@ -86,12 +87,14 @@ const SwapProviders = ({ route }: { route: { params: RouteParams } }) => {
           <Trans i18nKey={"transfer.swap.providers.title"} />
         </LText>
         {PROVIDERS.map(p => {
-          const bullets = t(`transfer.swap.providers.${p.provider}.bullets`, {
-            joinArrays: ";",
-            defaultValue: "",
-          })
-            .split(";")
-            .filter(Boolean);
+          const bullets = [
+            t(`transfer.swap.providers.${p.provider}.bullets`, {
+              joinArrays: ";",
+              defaultValue: "",
+            })
+              .split(";")
+              .filter(Boolean),
+          ];
 
           return (
             <Item
