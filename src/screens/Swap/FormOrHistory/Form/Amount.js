@@ -2,7 +2,6 @@
 import React, { useMemo, useCallback, useEffect, useState } from "react";
 import { View, StyleSheet } from "react-native";
 import { Trans } from "react-i18next";
-import { useSelector } from "react-redux";
 
 import invariant from "invariant";
 import { BigNumber } from "bignumber.js";
@@ -16,10 +15,9 @@ import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { getAbandonSeedAddress } from "@ledgerhq/live-common/lib/currencies";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
 import { AmountRequired, NotEnoughBalance } from "@ledgerhq/errors";
-import { getEnabledTradeMethods } from "@ledgerhq/live-common/lib/exchange/swap/logic";
+import { getEnabledTradingMethods } from "@ledgerhq/live-common/lib/exchange/swap/logic";
 import { getExchangeRates } from "@ledgerhq/live-common/lib/exchange/swap";
 
-import { swapSupportedCurrenciesSelector } from "../../../../reducers/settings";
 import KeyboardView from "../../../../components/KeyboardView";
 import LText from "../../../../components/LText";
 import getFontStyle from "../../../../components/LText/getFontStyle";
@@ -43,7 +41,7 @@ type Props = {
 };
 
 const SwapFormAmount = ({ navigation, route }: Props) => {
-  const { exchange } = route.params;
+  const { exchange, providers, provider } = route.params;
   const { fromAccount, fromParentAccount, toAccount } = exchange;
   const fromCurrency = getAccountCurrency(fromAccount);
   const toCurrency = getAccountCurrency(toAccount);
@@ -54,15 +52,15 @@ const SwapFormAmount = ({ navigation, route }: Props) => {
   const [rateExpiration, setRateExpiration] = useState(null);
   const [useAllAmount, setUseAllAmount] = useState(false);
   const [maxSpendable, setMaxSpendable] = useState(BigNumber(0));
-  const selectableCurrencies = useSelector(swapSupportedCurrenciesSelector);
   const enabledTradeMethods = useMemo(
     () =>
-      getEnabledTradeMethods({
-        selectableCurrencies,
+      getEnabledTradingMethods({
+        providers,
+        provider,
         fromCurrency,
         toCurrency,
       }),
-    [fromCurrency, selectableCurrencies, toCurrency],
+    [fromCurrency, provider, providers, toCurrency],
   );
   const [tradeMethod, setTradeMethod] = useState<"fixed" | "float">(
     enabledTradeMethods[0] || "fixed",

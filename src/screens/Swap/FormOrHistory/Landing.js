@@ -18,7 +18,7 @@ import Button from "../../../components/Button";
 import LText from "../../../components/LText";
 import CheckBox from "../../../components/CheckBox";
 import swapIllustration from "../../../images/swap.png";
-import { setHasAcceptedSwapKYC } from "../../../actions/settings";
+import { setSwapHasAcceptedIPSharing } from "../../../actions/settings";
 import { TrackScreen } from "../../../analytics";
 import ExternalLink from "../../../icons/ExternalLink";
 import { urls } from "../../../config/urls";
@@ -27,8 +27,8 @@ const Landing = () => {
   const { colors } = useTheme();
   const [isChecked, setIsChecked] = useState(false);
   const dispatch = useDispatch();
-  const onAcceptSwapKYC = useCallback(
-    () => dispatch(setHasAcceptedSwapKYC(true)),
+  const onAcceptIPSharing = useCallback(
+    () => dispatch(setSwapHasAcceptedIPSharing(true)),
     [dispatch],
   );
 
@@ -69,7 +69,7 @@ const Landing = () => {
           type={"primary"}
           title={<Trans i18nKey="common.continue" />}
           disabled={!isChecked}
-          onPress={onAcceptSwapKYC}
+          onPress={onAcceptIPSharing}
         />
       </View>
     </SafeAreaView>

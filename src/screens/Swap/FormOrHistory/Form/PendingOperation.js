@@ -20,8 +20,8 @@ const PendingOperation = () => {
   const route = useRoute();
 
   const onComplete = useCallback(() => {
-    navigation.navigate(ScreenName.SwapFormOrHistory, {
-      screen: ScreenName.SwapHistory,
+    navigation.navigate(ScreenName.SwapProviders, {
+      screen: ScreenName.SwapProviders,
     });
   }, [navigation]);
 

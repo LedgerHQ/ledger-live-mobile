@@ -86,6 +86,14 @@ export default function SwapNavigator() {
         }}
       />
       <Stack.Screen
+        name={ScreenName.SwapKYC}
+        component={SwapKYC}
+        options={{
+          headerTitle: () => <StepHeader title={t("transfer.swap.title")} />,
+          headerRight: null,
+        }}
+      />
+      <Stack.Screen
         name={ScreenName.SwapError}
         component={SwapError}
         options={{

@@ -75,7 +75,7 @@ function FabAccountActions({ account, parentAccount }: FabAccountActionsProps) {
             navigationParams: [
               NavigatorName.Swap,
               {
-                screen: ScreenName.SwapFormOrHistory,
+                screen: ScreenName.Swap,
                 params: {
                   defaultAccount: account,
                   defaultParentAccount: parentAccount,

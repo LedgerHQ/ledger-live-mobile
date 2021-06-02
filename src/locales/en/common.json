@@ -1807,6 +1807,14 @@
         "title": "Choose a provider to swap your crypto",
         "whatIsSwap": "What is Swap?",
         "cta": "Continue",
+        "kyc": {
+          "status": {
+            "required": "KYC Required",
+            "pending": "KYC Pending",
+            "approved": "KYC Approved!",
+            "closed": "KYC Rejected"
+          }
+        },
         "changelly": {
           "bullets": [
             "BTC, ETH, USDT and 50+ others",
@@ -1829,7 +1837,19 @@
         "disclaimer": "I acknowledge that my location data will be shared with third parties for compliance purposes.",
         "wyre": {
           "title": "Complete your KYC",
-          "subtitle": "To Swap freely with Wyre, we need to first verify your details",
+          "subtitle": "Your information is collected by LEDGER on behalf of and transferred to WYRE for KYC purposes. For more information, please check our Privacy Policy",
+          "pending": {
+            "cta": "Continue",
+            "title": "KYC submitted for approval",
+            "subtitle": "Your KYC has been submitted and is pending approval.",
+            "link": "Learn more about KYC"
+          },
+          "closed": {
+            "cta": "Reset KYC",
+            "title": "KYC application rejected",
+            "subtitle": "Wyre rejected the data you provided for KYC purposes",
+            "link": "Learn more about KYC"
+          },
           "form": {
             "firstName": "First Name",
             "lastName": "Last Name",
@@ -1838,17 +1858,14 @@
             "city": "City",
             "state": "State",
             "country": "Country",
-            "zipcode": "Zip Code"
-          },
-          "placeholders": {
-            "firstName": "John",
-            "lastName": "Doe",
-            "address1": "Turk St",
-            "address2": "101",
-            "city": "San Francisco",
-            "state": "California",
-            "country": "US",
-            "zipcode": "94102"
+            "zipcode": "Zip Code",
+            "firstNamePlaceholder": "Enter your first name",
+            "lastNamePlaceholder": "Enter your last name",
+            "address1Placeholder": "Eg. 13, Maple street", 
+            "address2Placeholder": "Eg. 13, Maple street", 
+            "cityPlaceholder": "Eg. San José", 
+            "zipcodePlaceholder": "Enter your 5 digit Zip code",
+            "statePlaceholder": "Choose state" 
           }
         }
       },

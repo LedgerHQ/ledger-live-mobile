@@ -9,13 +9,21 @@ import Item from "./Item";
 import Button from "../../../components/Button";
 import LText from "../../../components/LText";
 
-// import WyreIcon from "../../../icons/swap/Wyre";
-import ChangellyIcon from "../../../icons/swap/Changelly";
-import ParaswapIcon from "../../../icons/swap/Paraswap";
+import IconChangelly from "../../../icons/swap/Changelly";
+import IconParaswap from "../../../icons/swap/Paraswap";
+import IconWyre from "../../../icons/swap/Wyre";
 
-const Provider = ({ onContinue }: { onContinue: string => void }) => {
+const Providers = ({
+  setProvider,
+  providers,
+}: {
+  setProvider: string => void,
+  providers: { [string]: any },
+}) => {
   const { t } = useTranslation();
   const [selectedItem, setSelectedItem] = useState();
+  // const availableProviders = providers.map(p => p.provider);
+  const availableProviders = ["wyre"];
   const rows = false;
 
   return (
@@ -29,7 +37,7 @@ const Provider = ({ onContinue }: { onContinue: string => void }) => {
           id={"paraswap"}
           onSelect={setSelectedItem}
           selected={selectedItem}
-          Icon={ParaswapIcon}
+          Icon={IconParaswap}
           title={t("transfer.swap.providers.paraswap.title")}
           bullets={[
             t("transfer.swap.providers.paraswap.bullet.0"),
@@ -37,42 +45,59 @@ const Provider = ({ onContinue }: { onContinue: string => void }) => {
             t("transfer.swap.providers.paraswap.bullet.2"),
           ]}
         />
-        <Item
-          rows={rows}
-          id={"changelly"}
-          onSelect={setSelectedItem}
-          selected={selectedItem}
-          Icon={ChangellyIcon}
-          title={t("transfer.swap.providers.changelly.title")}
-          bullets={[
-            t("transfer.swap.providers.changelly.bullet.0"),
-            t("transfer.swap.providers.changelly.bullet.1"),
-            t("transfer.swap.providers.changelly.bullet.2"),
-          ]}
-        />
-        {/* <Item
-          rows={rows}
-          id={"wyre"}
-          onSelect={setSelectedItem}
-          selected={selectedItem}
-          Icon={WyreIcon}
-          kyc
-          title={t("transfer.swap.providers.wyre.title")}
-          bullets={[
-            t("transfer.swap.providers.wyre.bullet.0"),
-            t("transfer.swap.providers.wyre.bullet.1"),
-            t("transfer.swap.providers.wyre.bullet.2"),
-          ]}
-        /> */}
+        {availableProviders.includes("changelly") ? (
+          <Item
+            rows={rows}
+            id={"changelly"}
+            onSelect={setSelectedItem}
+            selected={selectedItem}
+            Icon={IconChangelly}
+            title={t("transfer.swap.providers.changelly.title")}
+            bullets={[
+              t("transfer.swap.providers.changelly.bullet.0"),
+              t("transfer.swap.providers.changelly.bullet.1"),
+              t("transfer.swap.providers.changelly.bullet.2"),
+            ]}
+          />
+        ) : availableProviders.includes("wyre") ? (
+          <Item
+            rows={rows}
+            id={"wyre"}
+            onSelect={setSelectedItem}
+            selected={selectedItem}
+            Icon={IconWyre}
+            kyc
+            title={t("transfer.swap.providers.wyre.title")}
+            bullets={[
+              t("transfer.swap.providers.wyre.bullet.0"),
+              t("transfer.swap.providers.wyre.bullet.1"),
+              t("transfer.swap.providers.wyre.bullet.2"),
+            ]}
+          />
+        ) : (
+          <Item
+            rows={rows}
+            id={"changelly"}
+            onSelect={setSelectedItem}
+            selected={selectedItem}
+            Icon={IconChangelly}
+            title={t("transfer.swap.providers.changelly.title")}
+            bullets={[
+              t("transfer.swap.providers.changelly.bullet.0"),
+              t("transfer.swap.providers.changelly.bullet.1"),
+              t("transfer.swap.providers.changelly.bullet.2"),
+            ]}
+          />
+        )}
       </ScrollView>
       <View style={styles.footer}>
         <Button
           type={"primary"}
           title={t("transfer.swap.providers.cta")}
           onPress={() => {
-            selectedItem && onContinue(selectedItem);
+            selectedItem && setProvider(selectedItem);
           }}
-          disabled={!selectedItem}
+          disabled={!selectedItem || selectedItem === "paraswap"}
         />
       </View>
     </SafeAreaView>
@@ -97,4 +122,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Provider;
+export default Providers;

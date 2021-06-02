@@ -91,7 +91,9 @@ const handlers: Object = {
   BLACKLIST_TOKEN: (
     state: AccountsState,
     { payload: tokenId }: { payload: string },
-  ) => ({ active: state.active.map(a => withoutToken(a, tokenId)) }),
+  ) => ({
+    active: state.active.map(a => withoutToken(a, tokenId)),
+  }),
 
   DANGEROUSLY_OVERRIDE_STATE: (state: AccountsState): AccountsState => ({
     ...state,
