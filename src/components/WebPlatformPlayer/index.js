@@ -80,7 +80,6 @@ const WebPlatformPlayer = ({ route }: { route: { params: Props } }) => {
 
   const [loadDate, setLoadDate] = useState(Date.now());
   const [widgetLoaded, setWidgetLoaded] = useState(false);
-  const [widgetError, setWidgetError] = useState(false);
 
   const navigation = useNavigation();
 
@@ -346,7 +345,6 @@ const WebPlatformPlayer = ({ route }: { route: { params: Props } }) => {
   );
 
   const handleLoad = useCallback(() => {
-    setWidgetError(false);
     setWidgetLoaded(true);
   }, []);
 
@@ -362,18 +360,6 @@ const WebPlatformPlayer = ({ route }: { route: { params: Props } }) => {
       ),
     });
   }, [navigation, widgetLoaded, handleReload]);
-
-  useEffect(() => {
-    let timeout;
-    if (!widgetLoaded) {
-      timeout = setTimeout(() => {
-        setWidgetError(true);
-      }, 3000);
-    }
-    return () => {
-      if (timeout) clearTimeout(timeout);
-    };
-  }, [widgetLoaded, widgetError]);
 
   const uri = useMemo(() => {
     const url = new URL(manifest.url.toString());
