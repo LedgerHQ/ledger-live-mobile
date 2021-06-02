@@ -5,13 +5,7 @@ import Button from "./Button";
 
 class CancelButton extends Component<*> {
   render() {
-    return (
-      <Button
-        type="secondary"
-        title={<Trans i18nKey="common.cancel" />}
-        {...this.props}
-      />
-    );
+    return <Button type="secondary" title={<Trans i18nKey="common.cancel" />} {...this.props} />;
   }
 }
 

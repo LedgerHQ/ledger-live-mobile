@@ -79,14 +79,8 @@ export default function DebugSettings({ navigation: { navigate } }: any) {
   return (
     <NavigationScrollView contentContainerStyle={styles.root}>
       <TrackScreen category="Settings" name="Debug" />
-      <SettingsRow
-        title="Mock & Test"
-        onPress={() => navigate(ScreenName.DebugMocks)}
-      />
-      <SettingsRow
-        title="Debug Devices"
-        onPress={() => navigate(ScreenName.DebugDevices)}
-      />
+      <SettingsRow title="Mock & Test" onPress={() => navigate(ScreenName.DebugMocks)} />
+      <SettingsRow title="Debug Devices" onPress={() => navigate(ScreenName.DebugDevices)} />
       <SettingsRow
         title="Export accounts (LiveQR)"
         onPress={() => navigate(ScreenName.DebugExport)}

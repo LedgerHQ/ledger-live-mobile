@@ -1,10 +1,6 @@
 // @flow
 import React, { useEffect, useState } from "react";
-import {
-  useNavigationBuilder,
-  createNavigatorFactory,
-  TabRouter,
-} from "@react-navigation/native";
+import { useNavigationBuilder, createNavigatorFactory, TabRouter } from "@react-navigation/native";
 import { BottomTabView } from "@react-navigation/bottom-tabs";
 import { BehaviorSubject } from "rxjs";
 
@@ -28,10 +24,7 @@ export function useIsNavLocked(): boolean {
 }
 
 /** use Effect to trigger lock navigation updates and callback to retrieve catched navigation actions */
-export const useLockNavigation = (
-  when: boolean,
-  callback: (...args: any[]) => void = () => {},
-) => {
+export const useLockNavigation = (when: boolean, callback: (...args: any[]) => void = () => {}) => {
   useEffect(() => {
     let sub;
     lockSubject.next(when);
@@ -54,12 +47,7 @@ const Router = options => {
       const result = router.getStateForAction(state, action, options);
 
       /** if action is of type NAVIGATE, not forced and the navigation is locked we catch the action and return the current state without changes */
-      if (
-        !action.force &&
-        lockSubject.getValue() &&
-        result != null &&
-        action.type === "NAVIGATE"
-      ) {
+      if (!action.force && lockSubject.getValue() && result != null && action.type === "NAVIGATE") {
         // we catch the action in order to programatically dispatch somewhere else in a confirmation modal per instance
         actionSubject.next(action);
         // Returning the current state means that the action has been handled, but we don't have a new state
@@ -89,12 +77,7 @@ function BottomTabNavigator({
   });
 
   return (
-    <BottomTabView
-      {...rest}
-      state={state}
-      navigation={navigation}
-      descriptors={descriptors}
-    />
+    <BottomTabView {...rest} state={state} navigation={navigation} descriptors={descriptors} />
   );
 }
 

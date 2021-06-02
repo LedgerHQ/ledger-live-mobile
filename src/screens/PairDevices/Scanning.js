@@ -63,9 +63,7 @@ export default function Scanning({ onTimeout, onError, onSelect }: Props) {
           const device = e.descriptor;
           // FIXME seems like we have dup. ideally we'll remove them on the listen side!
           setDevices(devices =>
-            devices.some(i => i.id === device.id)
-              ? devices
-              : [...devices, device],
+            devices.some(i => i.id === device.id) ? devices : [...devices, device],
           );
         }
       },

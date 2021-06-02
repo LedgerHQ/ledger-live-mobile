@@ -9,10 +9,7 @@ import type {
   PolkadotValidator,
 } from "@ledgerhq/live-common/lib/families/polkadot/types";
 import type { Account } from "@ledgerhq/live-common/lib/types";
-import {
-  getAccountCurrency,
-  getAccountUnit,
-} from "@ledgerhq/live-common/lib/account";
+import { getAccountCurrency, getAccountUnit } from "@ledgerhq/live-common/lib/account";
 
 import { useTheme } from "@react-navigation/native";
 import CurrencyUnitValue from "../../../components/CurrencyUnitValue";
@@ -51,9 +48,7 @@ export default function NominationRow({
       style={[
         styles.row,
         styles.wrapper,
-        !isLast
-          ? { ...styles.borderBottom, borderBottomColor: colors.lightGrey }
-          : undefined,
+        !isLast ? { ...styles.borderBottom, borderBottomColor: colors.lightGrey } : undefined,
       ]}
       onPress={() => onPress(nomination)}
     >

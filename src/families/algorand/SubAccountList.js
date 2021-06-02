@@ -38,9 +38,7 @@ const ReceiveButton = ({ accountId }: { accountId: string }) => {
 const Placeholder = ({ accountId }: { accountId: string }) => {
   const { colors } = useTheme();
   const navigation = useNavigation();
-  const { account } = useSelector(
-    accountScreenSelector({ params: { accountId } }),
-  );
+  const { account } = useSelector(accountScreenSelector({ params: { accountId } }));
   const onReceiveClick = useCallback(() => {
     navigation.navigate(NavigatorName.AlgorandOptInFlow, {
       screen: ScreenName.AlgorandOptInSelectToken,
@@ -57,10 +55,7 @@ const Placeholder = ({ accountId }: { accountId: string }) => {
     <View style={[styles.placeholder, { borderColor: colors.fog }]}>
       <View style={styles.placeholderText}>
         <LText style={styles.description}>
-          <Trans
-            i18nKey={`account.tokens.algorand.howTo`}
-            values={{ currency: "algorand" }}
-          />
+          <Trans i18nKey={`account.tokens.algorand.howTo`} values={{ currency: "algorand" }} />
         </LText>
       </View>
       <View style={[styles.howAsaWorks, { borderColor: colors.live }]}>
@@ -77,9 +72,7 @@ const Placeholder = ({ accountId }: { accountId: string }) => {
       <Button
         event="AccountReceiveASA"
         type="primary"
-        IconLeft={() => (
-          <IconPlus size={16} color={disabled ? colors.grey : colors.live} />
-        )}
+        IconLeft={() => <IconPlus size={16} color={disabled ? colors.grey : colors.live} />}
         onPress={onReceiveClick}
         title={<Trans i18nKey="account.tokens.algorand.addAsa" />}
         disabled={disabled}

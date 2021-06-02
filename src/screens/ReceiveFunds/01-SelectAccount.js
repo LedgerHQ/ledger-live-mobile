@@ -9,10 +9,7 @@ import {
   accountWithMandatoryTokens,
   flattenAccounts,
 } from "@ledgerhq/live-common/lib/account/helpers";
-import type {
-  CryptoCurrency,
-  TokenCurrency,
-} from "@ledgerhq/live-common/lib/types";
+import type { CryptoCurrency, TokenCurrency } from "@ledgerhq/live-common/lib/types";
 import type { SearchResult } from "../../helpers/formatAccountSearchResults";
 
 import { accountsSelector } from "../../reducers/accounts";
@@ -39,8 +36,7 @@ type Props = {
 
 export default function ReceiveFunds({ navigation, route }: Props) {
   const { colors } = useTheme();
-  const { selectedCurrency, currency: initialCurrencySelected } =
-    route.params || {};
+  const { selectedCurrency, currency: initialCurrencySelected } = route.params || {};
 
   const accounts = useSelector(accountsSelector);
   const enhancedAccounts = useMemo(() => {
@@ -55,14 +51,11 @@ export default function ReceiveFunds({ navigation, route }: Props) {
       if (selectedCurrency.type === "TokenCurrency") {
         // add in the token subAccount if it does not exist
         return flattenAccounts(
-          filteredAccounts.map(acc =>
-            accountWithMandatoryTokens(acc, [selectedCurrency]),
-          ),
+          filteredAccounts.map(acc => accountWithMandatoryTokens(acc, [selectedCurrency])),
         ).filter(
           acc =>
             acc.type === "Account" ||
-            (acc.type === "TokenAccount" &&
-              acc.token.id === selectedCurrency.id),
+            (acc.type === "TokenAccount" && acc.token.id === selectedCurrency.id),
         );
       }
       return flattenAccounts(filteredAccounts);
@@ -97,8 +90,7 @@ export default function ReceiveFunds({ navigation, route }: Props) {
               navigation.navigate(ScreenName.ReceiveConnectDevice, {
                 account,
                 accountId: account.id,
-                parentId:
-                  account.type !== "Account" ? account.parentId : undefined,
+                parentId: account.type !== "Account" ? account.parentId : undefined,
               });
             }}
           />

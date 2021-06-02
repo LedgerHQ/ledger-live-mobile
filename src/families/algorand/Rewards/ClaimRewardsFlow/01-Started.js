@@ -5,10 +5,7 @@ import { View, StyleSheet, SafeAreaView } from "react-native";
 import { Trans } from "react-i18next";
 import { useSelector } from "react-redux";
 
-import {
-  getAccountUnit,
-  getMainAccount,
-} from "@ledgerhq/live-common/lib/account/helpers";
+import { getAccountUnit, getMainAccount } from "@ledgerhq/live-common/lib/account/helpers";
 import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies/formatCurrencyUnit";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
@@ -42,10 +39,7 @@ export default function DelegationStarted({ navigation, route }: Props) {
   const mainAccount = getMainAccount(account, undefined);
   const bridge = getAccountBridge(mainAccount, undefined);
 
-  invariant(
-    mainAccount && mainAccount.algorandResources,
-    "algorand Account required",
-  );
+  invariant(mainAccount && mainAccount.algorandResources, "algorand Account required");
   const { rewards } = mainAccount.algorandResources;
 
   const unit = getAccountUnit(mainAccount);
@@ -74,16 +68,11 @@ export default function DelegationStarted({ navigation, route }: Props) {
   }, [navigation, route.params, transaction]);
 
   const warning =
-    status.warnings &&
-    Object.keys(status.warnings).length > 0 &&
-    Object.values(status.warnings)[0];
+    status.warnings && Object.keys(status.warnings).length > 0 && Object.values(status.warnings)[0];
 
   return (
     <SafeAreaView style={[styles.root, { backgroundColor: colors.background }]}>
-      <NavigationScrollView
-        style={styles.scroll}
-        contentContainerStyle={styles.scrollContainer}
-      >
+      <NavigationScrollView style={styles.scroll} contentContainerStyle={styles.scrollContainer}>
         <TrackScreen category="DelegationFlow" name="Started" />
         <IlluRewards />
         <LText semiBold style={styles.description}>
@@ -102,13 +91,7 @@ export default function DelegationStarted({ navigation, route }: Props) {
       <View style={[styles.footer, { borderTopColor: colors.lightFog }]}>
         {warning && warning instanceof Error ? (
           <View style={styles.warningSection}>
-            <LText
-              selectable
-              secondary
-              semiBold
-              style={styles.warningText}
-              color="alert"
-            >
+            <LText selectable secondary semiBold style={styles.warningText} color="alert">
               <TranslatedError error={warning} />
             </LText>
           </View>
@@ -116,9 +99,7 @@ export default function DelegationStarted({ navigation, route }: Props) {
         <Button
           event="DelegationStartedBtn"
           onPress={onNext}
-          title={
-            <Trans i18nKey="algorand.claimRewards.flow.steps.starter.cta" />
-          }
+          title={<Trans i18nKey="algorand.claimRewards.flow.steps.starter.cta" />}
           type="primary"
         />
       </View>

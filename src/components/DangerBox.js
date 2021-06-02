@@ -12,11 +12,7 @@ type Props = {
   learnMoreKey?: string,
 };
 
-export default function WarningBox({
-  children: description,
-  onLearnMore,
-  learnMoreKey,
-}: Props) {
+export default function WarningBox({ children: description, onLearnMore, learnMoreKey }: Props) {
   const { colors } = useTheme();
   return (
     <View style={[styles.root, { backgroundColor: colors.lightAlert }]}>

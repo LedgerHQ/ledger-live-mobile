@@ -28,11 +28,7 @@ export default function SelectValidatorSearchBox({
           maxLength={50}
           onChangeText={setSearchQuery}
           clearButtonMode="always"
-          style={[
-            styles.searchBarText,
-            styles.searchBarInput,
-            { color: colors.smoke },
-          ]}
+          style={[styles.searchBarText, styles.searchBarInput, { color: colors.smoke }]}
           placeholder={t("common.search")}
           placeholderTextColor={colors.smoke}
           onInputCleared={() => setSearchQuery("")}

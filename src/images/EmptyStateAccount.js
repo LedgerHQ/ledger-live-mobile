@@ -8,11 +8,7 @@ export default function EmptystateAccount() {
   return (
     <Svg viewBox="0 0 400 90">
       <G fill="none" fillRule="evenodd">
-        <G
-          fill={colors.darkBlue}
-          opacity=".30000001"
-          transform="translate(5 3)"
-        >
+        <G fill={colors.darkBlue} opacity=".30000001" transform="translate(5 3)">
           <Path
             fillOpacity=".16"
             stroke={colors.lightFog}
@@ -20,11 +16,7 @@ export default function EmptystateAccount() {
             d="M15.5 67.5V74c0 1.9329966 1.5670034 3.5 3.5 3.5h350c1.932997 0 3.5-1.5670034 3.5-3.5v-6.5h-357z"
           />
         </G>
-        <G
-          fill={colors.darkBlue}
-          opacity=".60000002"
-          transform="translate(5 3)"
-        >
+        <G fill={colors.darkBlue} opacity=".60000002" transform="translate(5 3)">
           <Path
             fillOpacity=".16"
             stroke={colors.lightFog}

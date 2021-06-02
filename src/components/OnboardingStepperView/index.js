@@ -83,15 +83,7 @@ export default function OnboardingStepperView({
 
   const sceneColors =
     currentScene?.type === "primary"
-      ? [
-          colors.live,
-          "#fff",
-          "#fff",
-          "#fff",
-          "rgba(255,255,255,0.3)",
-          "#587ED4",
-          colors.live,
-        ]
+      ? [colors.live, "#fff", "#fff", "#fff", "rgba(255,255,255,0.3)", "#587ED4", colors.live]
       : [
           colors.card,
           colors.live,
@@ -124,18 +116,13 @@ export default function OnboardingStepperView({
       <View style={[styles.header]}>
         <View style={styles.topHeader}>
           {hideBackButton ? null : (
-            <TouchableOpacity
-              hitSlop={hitSlop}
-              style={styles.buttons}
-              onPress={onBack}
-            >
+            <TouchableOpacity hitSlop={hitSlop} style={styles.buttons} onPress={onBack}>
               <ArrowLeft size={18} color={sceneColors[1]} />
             </TouchableOpacity>
           )}
           {currentScene?.sceneInfoKey && (
             <Touchable
-              event={`Onboarding - ${currentScene?.sceneProps.trackPage ||
-                ""} need help`}
+              event={`Onboarding - ${currentScene?.sceneProps.trackPage || ""} need help`}
               hitSlop={hitSlop}
               style={styles.buttons}
               onPress={openInfoModal}
@@ -153,8 +140,7 @@ export default function OnboardingStepperView({
                   style={[
                     styles.sceneIndicator,
                     {
-                      backgroundColor:
-                        index === i ? sceneColors[1] : sceneColors[4],
+                      backgroundColor: index === i ? sceneColors[1] : sceneColors[4],
                     },
                   ]}
                 />

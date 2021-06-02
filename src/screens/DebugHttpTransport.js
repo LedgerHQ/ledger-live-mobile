@@ -1,12 +1,7 @@
 // @flow
 
 import React, { Component } from "react";
-import {
-  StyleSheet,
-  View,
-  Keyboard,
-  TouchableWithoutFeedback,
-} from "react-native";
+import { StyleSheet, View, Keyboard, TouchableWithoutFeedback } from "react-native";
 import { connect } from "react-redux";
 import SafeAreaView from "react-native-safe-area-view";
 import { compose } from "redux";
@@ -44,9 +39,7 @@ class DebugHttpTransport extends Component<
   };
 
   onAdd = () => {
-    const m = this.state.text
-      .trim()
-      .match(/^((?:[0-9]{1,3}\.){3}[0-9]{1,3})(:([0-9]+))?/);
+    const m = this.state.text.trim().match(/^((?:[0-9]{1,3}\.){3}[0-9]{1,3})(:([0-9]+))?/);
     if (!m) return;
     let [, ip, , port] = m; // eslint-disable-line prefer-const
     if (!port) port = 8435;

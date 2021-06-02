@@ -6,10 +6,7 @@ import { View, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { useSelector } from "react-redux";
 import { Trans } from "react-i18next";
-import type {
-  Vote,
-  Transaction,
-} from "@ledgerhq/live-common/lib/families/tron/types";
+import type { Vote, Transaction } from "@ledgerhq/live-common/lib/families/tron/types";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import {
   useTronSuperRepresentatives,
@@ -52,30 +49,26 @@ export default function VoteCast({ route, navigation }: Props) {
   invariant(tronResources, "tron resources required");
   const { tronPower } = tronResources;
 
-  const {
-    transaction,
-    status,
-    setTransaction,
-    bridgeError,
-    bridgePending,
-  } = useBridgeTransaction(() => {
-    const tx = route.params.transaction;
+  const { transaction, status, setTransaction, bridgeError, bridgePending } = useBridgeTransaction(
+    () => {
+      const tx = route.params.transaction;
 
-    if (!tx) {
-      const t = bridge.createTransaction(account);
-      const { votes } = tronResources;
+      if (!tx) {
+        const t = bridge.createTransaction(account);
+        const { votes } = tronResources;
 
-      return {
-        account,
-        transaction: bridge.updateTransaction(t, {
-          mode: "vote",
-          votes,
-        }),
-      };
-    }
+        return {
+          account,
+          transaction: bridge.updateTransaction(t, {
+            mode: "vote",
+            votes,
+          }),
+        };
+      }
 
-    return { account, transaction: tx };
-  });
+      return { account, transaction: tx };
+    },
+  );
 
   invariant(transaction, "transaction must be defined");
   invariant(transaction.family === "tron", "transaction tron");
@@ -232,10 +225,7 @@ export default function VoteCast({ route, navigation }: Props) {
               </>
             ) : (
               <LText style={styles.availableAmount} color="grey">
-                <Trans
-                  i18nKey="vote.castVotes.votesRemaining"
-                  values={{ total: votesRemaining }}
-                >
+                <Trans i18nKey="vote.castVotes.votesRemaining" values={{ total: votesRemaining }}>
                   <LText semiBold style={styles.availableAmount}>
                     text
                   </LText>
@@ -273,10 +263,7 @@ export default function VoteCast({ route, navigation }: Props) {
         onClose={onBridgeErrorRetry}
         footerButtons={
           <>
-            <CancelButton
-              containerStyle={styles.button}
-              onPress={onBridgeErrorCancel}
-            />
+            <CancelButton containerStyle={styles.button} onPress={onBridgeErrorCancel} />
             <RetryButton
               containerStyle={[styles.button, styles.buttonRight]}
               onPress={onBridgeErrorRetry}

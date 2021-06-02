@@ -6,17 +6,7 @@ import type { ViewStyleProp } from "react-native/Libraries/StyleSheet/StyleSheet
 import Animated, { Easing } from "react-native-reanimated";
 import { useTheme } from "@react-navigation/native";
 
-const {
-  cond,
-  set,
-  block,
-  startClock,
-  stopClock,
-  timing,
-  Clock,
-  Value,
-  interpolate,
-} = Animated;
+const { cond, set, block, startClock, stopClock, timing, Clock, Value, interpolate } = Animated;
 
 const clock = new Clock();
 
@@ -66,12 +56,7 @@ type Props = {
   style?: ViewStyleProp,
 };
 
-const InfiniteProgressBar = ({
-  style,
-  height,
-  progressColor,
-  backgroundColor,
-}: Props) => {
+const InfiniteProgressBar = ({ style, height, progressColor, backgroundColor }: Props) => {
   const { colors } = useTheme();
 
   const scaleX = interpolate(progress, {

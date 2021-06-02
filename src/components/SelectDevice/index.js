@@ -101,9 +101,7 @@ export default function SelectDevice({
               deviceId: e.id,
               deviceName: e.name || "",
               modelId:
-                (e.deviceModel && e.deviceModel.id) ||
-                Config.FALLBACK_DEVICE_MODEL_ID ||
-                "nanoX",
+                (e.deviceModel && e.deviceModel.id) || Config.FALLBACK_DEVICE_MODEL_ID || "nanoX",
               wired: e.id.startsWith("httpdebug|")
                 ? Config.FALLBACK_DEVICE_WIRED === "YES"
                 : e.id.startsWith("usb|"),
@@ -143,11 +141,7 @@ export default function SelectDevice({
         ) : (
           <USBHeader />
         ))}
-      {other.length === 0 ? (
-        <USBEmpty usbOnly={usbOnly} />
-      ) : (
-        other.map(renderItem)
-      )}
+      {other.length === 0 ? <USBEmpty usbOnly={usbOnly} /> : other.map(renderItem)}
       {onWithoutDevice && (
         <View>
           <WithoutDeviceHeader />

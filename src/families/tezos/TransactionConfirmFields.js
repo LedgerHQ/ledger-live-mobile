@@ -2,20 +2,10 @@
 import invariant from "invariant";
 import React, { useCallback } from "react";
 import { Linking, StyleSheet } from "react-native";
-import type {
-  AccountLike,
-  Account,
-  Transaction,
-} from "@ledgerhq/live-common/lib/types";
+import type { AccountLike, Account, Transaction } from "@ledgerhq/live-common/lib/types";
 import { useBaker } from "@ledgerhq/live-common/lib/families/tezos/bakers";
-import {
-  shortAddressPreview,
-  getMainAccount,
-} from "@ledgerhq/live-common/lib/account";
-import {
-  getDefaultExplorerView,
-  getAddressExplorer,
-} from "@ledgerhq/live-common/lib/explorers";
+import { shortAddressPreview, getMainAccount } from "@ledgerhq/live-common/lib/account";
+import { getDefaultExplorerView, getAddressExplorer } from "@ledgerhq/live-common/lib/explorers";
 import { DataRow } from "../../components/ValidateOnDeviceDataRow";
 import LText from "../../components/LText";
 

@@ -1,10 +1,5 @@
 import React, { memo, useState, useCallback } from "react";
-import {
-  StyleSheet,
-  View,
-  TouchableWithoutFeedback,
-  FlatList,
-} from "react-native";
+import { StyleSheet, View, TouchableWithoutFeedback, FlatList } from "react-native";
 import Animated, { Easing } from "react-native-reanimated";
 import { useTheme } from "@react-navigation/native";
 import LText from "./LText";
@@ -128,18 +123,10 @@ const CollapsibleList = ({
   const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
 
   return (
-    <Animated.View
-      style={[
-        styles.root,
-        { height, backgroundColor: colors.card },
-        containerStyle,
-      ]}
-    >
+    <Animated.View style={[styles.root, { height, backgroundColor: colors.card }, containerStyle]}>
       <TouchableWithoutFeedback onPress={onPress}>
         <View style={styles.toggleButton}>
-          <Animated.View
-            style={[styles.chevronIcon, { transform: [{ rotateZ }] }]}
-          >
+          <Animated.View style={[styles.chevronIcon, { transform: [{ rotateZ }] }]}>
             <Chevron size={10} color={colors.live} />
           </Animated.View>
           <LText style={styles.toggleButtonText} color="live">

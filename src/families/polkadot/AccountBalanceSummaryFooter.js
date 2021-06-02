@@ -35,18 +35,12 @@ function AccountBalanceSummaryFooter({ account }: Props) {
     setInfoName(undefined);
   }, []);
 
-  const onPressInfoCreator = useCallback(
-    (infoName: InfoName) => () => setInfoName(infoName),
-    [],
-  );
+  const onPressInfoCreator = useCallback((infoName: InfoName) => () => setInfoName(infoName), []);
 
   const { spendableBalance, polkadotResources } = account;
 
-  const {
-    lockedBalance: _lockedBalance,
-    unlockingBalance: _unlockingBalance,
-    unlockedBalance,
-  } = polkadotResources || {};
+  const { lockedBalance: _lockedBalance, unlockingBalance: _unlockingBalance, unlockedBalance } =
+    polkadotResources || {};
 
   const unit = getAccountUnit(account);
 
@@ -73,51 +67,27 @@ function AccountBalanceSummaryFooter({ account }: Props) {
       <InfoItem
         title={t("account.availableBalance")}
         onPress={onPressInfoCreator("available")}
-        value={
-          <CurrencyUnitValue
-            unit={unit}
-            value={spendableBalance}
-            disableRounding
-          />
-        }
+        value={<CurrencyUnitValue unit={unit} value={spendableBalance} disableRounding />}
       />
       {lockedBalance.gt(0) && (
         <InfoItem
           title={t("polkadot.lockedBalance")}
           onPress={onPressInfoCreator("locked")}
-          value={
-            <CurrencyUnitValue
-              unit={unit}
-              value={lockedBalance}
-              disableRounding
-            />
-          }
+          value={<CurrencyUnitValue unit={unit} value={lockedBalance} disableRounding />}
         />
       )}
       {unlockingBalance.gt(0) && (
         <InfoItem
           title={t("polkadot.unlockingBalance")}
           onPress={onPressInfoCreator("unlocking")}
-          value={
-            <CurrencyUnitValue
-              unit={unit}
-              value={unlockingBalance}
-              disableRounding
-            />
-          }
+          value={<CurrencyUnitValue unit={unit} value={unlockingBalance} disableRounding />}
         />
       )}
       {unlockedBalance.gt(0) && (
         <InfoItem
           title={t("polkadot.unlockedBalance")}
           onPress={onPressInfoCreator("unlocked")}
-          value={
-            <CurrencyUnitValue
-              unit={unit}
-              value={unlockedBalance}
-              disableRounding
-            />
-          }
+          value={<CurrencyUnitValue unit={unit} value={unlockedBalance} disableRounding />}
         />
       )}
     </ScrollView>

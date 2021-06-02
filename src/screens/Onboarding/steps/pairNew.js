@@ -10,10 +10,7 @@ import { TrackScreen } from "../../../analytics";
 import Button from "../../../components/Button";
 import SelectDevice from "../../../components/SelectDevice";
 import DeviceActionModal from "../../../components/DeviceActionModal";
-import {
-  installAppFirstTime,
-  setReadOnlyMode,
-} from "../../../actions/settings";
+import { installAppFirstTime, setReadOnlyMode } from "../../../actions/settings";
 
 import OnboardingStepperView from "../../../components/OnboardingStepperView";
 import ArrowRight from "../../../icons/ArrowRight";
@@ -33,9 +30,7 @@ const pairNewInfoModalProps = [
     bullets: [
       {
         Icon: ArrowRight,
-        label: (
-          <Trans i18nKey="onboarding.stepPairNew.infoModal.bullets.0.label" />
-        ),
+        label: <Trans i18nKey="onboarding.stepPairNew.infoModal.bullets.0.label" />,
       },
       ...(Platform.OS === "android"
         ? [
@@ -56,13 +51,9 @@ const pairNewInfoModalProps = [
         : []),
       {
         Icon: ArrowRight,
-        label: (
-          <Trans i18nKey="onboarding.stepPairNew.infoModal.bullets.2.label" />
-        ),
+        label: <Trans i18nKey="onboarding.stepPairNew.infoModal.bullets.2.label" />,
         link: {
-          label: (
-            <Trans i18nKey="onboarding.stepPairNew.infoModal.bullets.2.link" />
-          ),
+          label: <Trans i18nKey="onboarding.stepPairNew.infoModal.bullets.2.link" />,
           url: urls.fixConnectionIssues,
         },
       },
@@ -73,11 +64,7 @@ const pairNewInfoModalProps = [
     desc: (
       <Trans i18nKey="onboarding.stepPairNew.infoModal.desc_1">
         {""}
-        <LText
-          onPress={() => Linking.openURL(urls.otgCable)}
-          semiBold
-          color="live"
-        />{" "}
+        <LText onPress={() => Linking.openURL(urls.otgCable)} semiBold color="live" />{" "}
       </Trans>
     ),
   },
@@ -100,10 +87,11 @@ export default function OnboardingStepPairNew({ navigation, route }: Props) {
   const dispatch = useDispatch();
   const [device, setDevice] = useState<?Device>();
 
-  const onNext = useCallback(
-    () => navigation.navigate(next, { ...route.params }),
-    [navigation, next, route.params],
-  );
+  const onNext = useCallback(() => navigation.navigate(next, { ...route.params }), [
+    navigation,
+    next,
+    route.params,
+  ]);
 
   const Footer = __DEV__ ? (
     <Button
@@ -125,9 +113,7 @@ export default function OnboardingStepPairNew({ navigation, route }: Props) {
       /** if list apps succeed we update settings with state of apps installed */
       if (info) {
         const hasAnyAppinstalled =
-          info.result &&
-          info.result.installed &&
-          info.result.installed.length > 0;
+          info.result && info.result.installed && info.result.installed.length > 0;
 
         dispatch(installAppFirstTime(hasAnyAppinstalled));
         setDevice();
@@ -144,15 +130,9 @@ export default function OnboardingStepPairNew({ navigation, route }: Props) {
     {
       sceneProps: {
         image: deviceModelId === "nanoX" ? pairYourNano : plugYourNano,
-        title: (
-          <Trans i18nKey={`onboarding.stepPairNew.${deviceModelId}.title`} />
-        ),
-        descs: [
-          <Trans i18nKey={`onboarding.stepPairNew.${deviceModelId}.desc`} />,
-        ],
-        ctaText: (
-          <Trans i18nKey={`onboarding.stepPairNew.${deviceModelId}.cta`} />
-        ),
+        title: <Trans i18nKey={`onboarding.stepPairNew.${deviceModelId}.title`} />,
+        descs: [<Trans i18nKey={`onboarding.stepPairNew.${deviceModelId}.desc`} />],
+        ctaText: <Trans i18nKey={`onboarding.stepPairNew.${deviceModelId}.cta`} />,
         ctaEvent: "OnboardingStemPairNewContinue",
       },
       type: "primary",
@@ -181,8 +161,7 @@ export default function OnboardingStepPairNew({ navigation, route }: Props) {
           </>
         ),
       },
-      sceneInfoModalProps:
-        deviceModelId === "nanoX" ? pairNewInfoModalProps : undefined,
+      sceneInfoModalProps: deviceModelId === "nanoX" ? pairNewInfoModalProps : undefined,
       id: "pairNew_2",
       type: "secondary",
     },

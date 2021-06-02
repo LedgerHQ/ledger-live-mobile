@@ -29,22 +29,13 @@ export default function RootNavigator({ importDataString }: Props) {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       {data ? (
-        <Stack.Screen
-          name={NavigatorName.ImportAccounts}
-          component={ImportAccountsNavigator}
-        />
+        <Stack.Screen name={NavigatorName.ImportAccounts} component={ImportAccountsNavigator} />
       ) : goToOnboarding ? (
-        <Stack.Screen
-          name={NavigatorName.BaseOnboarding}
-          component={BaseOnboardingNavigator}
-        />
+        <Stack.Screen name={NavigatorName.BaseOnboarding} component={BaseOnboardingNavigator} />
       ) : null}
       <Stack.Screen name={NavigatorName.Base} component={BaseNavigator} />
       {hasCompletedOnboarding ? (
-        <Stack.Screen
-          name={NavigatorName.BaseOnboarding}
-          component={BaseOnboardingNavigator}
-        />
+        <Stack.Screen name={NavigatorName.BaseOnboarding} component={BaseOnboardingNavigator} />
       ) : null}
     </Stack.Navigator>
   );

@@ -1,12 +1,6 @@
 /* @flow */
 import React, { useState, useCallback } from "react";
-import {
-  View,
-  StyleSheet,
-  FlatList,
-  TouchableOpacity,
-  SafeAreaView,
-} from "react-native";
+import { View, StyleSheet, FlatList, TouchableOpacity, SafeAreaView } from "react-native";
 import { Trans } from "react-i18next";
 import {
   getMainAccount,
@@ -14,11 +8,7 @@ import {
   getAccountCurrency,
 } from "@ledgerhq/live-common/lib/account";
 import { useTheme } from "@react-navigation/native";
-import type {
-  Account,
-  AccountLike,
-  Transaction,
-} from "@ledgerhq/live-common/lib/types";
+import type { Account, AccountLike, Transaction } from "@ledgerhq/live-common/lib/types";
 import LText from "./LText";
 import SummaryRow from "../screens/SendFunds/SummaryRow";
 import CheckBox from "./CheckBox";
@@ -85,19 +75,14 @@ export default function SelectFeesStrategy({
       style={[
         styles.feeButton,
         {
-          borderColor:
-            feesStrategy === item.label ? colors.live : colors.background,
-          backgroundColor:
-            feesStrategy === item.label ? colors.lightLive : colors.lightFog,
+          borderColor: feesStrategy === item.label ? colors.live : colors.background,
+          backgroundColor: feesStrategy === item.label ? colors.lightLive : colors.lightFog,
         },
       ]}
     >
       <View style={styles.feeStrategyContainer}>
         <View style={styles.leftBox}>
-          <CheckBox
-            style={styles.checkbox}
-            isChecked={feesStrategy === item.label}
-          />
+          <CheckBox style={styles.checkbox} isChecked={feesStrategy === item.label} />
           <LText semiBold style={styles.feeLabel}>
             {item.label}
           </LText>
@@ -161,10 +146,7 @@ export default function SelectFeesStrategy({
           />
         </SafeAreaView>
         <TouchableOpacity
-          style={[
-            styles.customizeFeesButton,
-            { backgroundColor: colors.lightLive },
-          ]}
+          style={[styles.customizeFeesButton, { backgroundColor: colors.lightLive }]}
           onPress={onCustomFeesPress}
         >
           <LText semiBold color="live">

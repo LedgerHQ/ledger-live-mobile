@@ -38,10 +38,7 @@ export default function ValidationSuccess({ navigation, route }: Props) {
     if (!account) return;
     let result = route.params?.result;
     if (!result) return;
-    result =
-      result.subOperations && result.subOperations[0]
-        ? result.subOperations[0]
-        : result;
+    result = result.subOperations && result.subOperations[0] ? result.subOperations[0] : result;
 
     if (wcContext.currentCallRequestId) {
       setCurrentCallRequestResult(result.hash);
@@ -60,26 +57,13 @@ export default function ValidationSuccess({ navigation, route }: Props) {
       disableAllLinks: wcContext.status === STATUS.CONNECTED,
       accountId: account.id,
       parentId: parentAccount && parentAccount.id,
-      operation:
-        result.subOperations && result.subOperations[0]
-          ? result.subOperations[0]
-          : result,
+      operation: result.subOperations && result.subOperations[0] ? result.subOperations[0] : result,
     });
-  }, [
-    account,
-    route.params?.result,
-    navigation,
-    wcContext.status,
-    parentAccount,
-  ]);
+  }, [account, route.params?.result, navigation, wcContext.status, parentAccount]);
 
   return (
     <View style={[styles.root, { backgroundColor: colors.background }]}>
-      <TrackScreen
-        category="SendFunds"
-        name="ValidationSuccess"
-        currencyName={currency?.name}
-      />
+      <TrackScreen category="SendFunds" name="ValidationSuccess" currencyName={currency?.name} />
       <PreventNativeBack />
       <ValidateSuccess onClose={onClose} onViewDetails={goToOperationDetails} />
     </View>

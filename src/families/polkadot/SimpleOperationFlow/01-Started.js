@@ -40,10 +40,7 @@ function getStatusError(status, type = "errors"): ?Error {
   return firstKey ? status[type][firstKey] : null;
 }
 
-export default function PolkadotSimpleOperationStarted({
-  navigation,
-  route,
-}: Props) {
+export default function PolkadotSimpleOperationStarted({ navigation, route }: Props) {
   const { colors } = useTheme();
   const { mode } = route.params;
   const { account, parentAccount } = useSelector(accountScreenSelector(route));
@@ -57,21 +54,17 @@ export default function PolkadotSimpleOperationStarted({
 
   invariant(polkadotResources, "polkadotResources required");
 
-  const {
-    transaction,
-    setTransaction,
-    status,
-    bridgePending,
-    bridgeError,
-  } = useBridgeTransaction(() => {
-    const t = bridge.createTransaction(mainAccount);
+  const { transaction, setTransaction, status, bridgePending, bridgeError } = useBridgeTransaction(
+    () => {
+      const t = bridge.createTransaction(mainAccount);
 
-    const transaction = bridge.updateTransaction(t, {
-      mode,
-    });
+      const transaction = bridge.updateTransaction(t, {
+        mode,
+      });
 
-    return { account: mainAccount, transaction };
-  });
+      return { account: mainAccount, transaction };
+    },
+  );
 
   const onContinue = useCallback(() => {
     navigation.navigate(ScreenName.PolkadotSimpleOperationSelectDevice, {
@@ -101,21 +94,12 @@ export default function PolkadotSimpleOperationStarted({
           <TrackScreen category="SimpleOperationFlow" name="Started" />
           <View style={styles.content}>
             <LText secondary style={styles.description}>
-              <Trans
-                i18nKey={`polkadot.simpleOperation.modes.${mode}.description`}
-              />
+              <Trans i18nKey={`polkadot.simpleOperation.modes.${mode}.description`} />
             </LText>
             <View style={styles.info}>
               <Info size={22} color={colors.live} />
-              <LText
-                semiBold
-                style={[styles.text, styles.infoText]}
-                color="live"
-                numberOfLines={3}
-              >
-                <Trans
-                  i18nKey={`polkadot.simpleOperation.modes.${mode}.info`}
-                />
+              <LText semiBold style={[styles.text, styles.infoText]} color="live" numberOfLines={3}>
+                <Trans i18nKey={`polkadot.simpleOperation.modes.${mode}.info`} />
               </LText>
             </View>
           </View>
@@ -132,22 +116,12 @@ export default function PolkadotSimpleOperationStarted({
               <TranslatedError error={error || warning} />
             </LText>
           )}
-          <SendRowsFee
-            account={account}
-            parentAccount={parentAccount}
-            transaction={transaction}
-          />
+          <SendRowsFee account={account} parentAccount={parentAccount} transaction={transaction} />
           <Button
             event="PolkadotSimpleOperationContinue"
             type="primary"
             title={
-              <Trans
-                i18nKey={
-                  !bridgePending
-                    ? "common.continue"
-                    : "send.amount.loadingNetwork"
-                }
-              />
+              <Trans i18nKey={!bridgePending ? "common.continue" : "send.amount.loadingNetwork"} />
             }
             onPress={onContinue}
             disabled={!!error || bridgePending}

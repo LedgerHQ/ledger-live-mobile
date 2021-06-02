@@ -8,11 +8,7 @@ import { useTheme } from "@react-navigation/native";
 import IconSwap from "../../icons/Swap";
 import { rgba } from "../../colors";
 
-export const getStatusColor = (
-  status: string,
-  colors: *,
-  colorKey?: boolean = false,
-) => {
+export const getStatusColor = (status: string, colors: *, colorKey?: boolean = false) => {
   let key = "grey";
 
   if (operationStatusList.pending.includes(status)) {
@@ -27,13 +23,7 @@ export const getStatusColor = (
   return colorKey ? key : colors[key];
 };
 
-const SwapStatusIndicator = ({
-  status,
-  small,
-}: {
-  status: string,
-  small?: boolean,
-}) => {
+const SwapStatusIndicator = ({ status, small }: { status: string, small?: boolean }) => {
   const { colors } = useTheme();
   const statusColor = getStatusColor(status, colors);
   const sizeDependantStyles = {
@@ -55,11 +45,7 @@ const SwapStatusIndicator = ({
             },
           ]}
         >
-          <IconAD
-            size={small ? 10 : 14}
-            name="clockcircleo"
-            color={rgba(colors.darkBlue, 0.6)}
-          />
+          <IconAD size={small ? 10 : 14} name="clockcircleo" color={rgba(colors.darkBlue, 0.6)} />
         </View>
       ) : null}
     </View>

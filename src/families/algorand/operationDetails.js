@@ -2,11 +2,7 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
 import { useTranslation } from "react-i18next";
-import type {
-  Account,
-  OperationType,
-  Operation,
-} from "@ledgerhq/live-common/lib/types";
+import type { Account, OperationType, Operation } from "@ledgerhq/live-common/lib/types";
 import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies/formatCurrencyUnit";
 import { BigNumber } from "bignumber.js";
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account/helpers";
@@ -44,20 +40,12 @@ function OperationDetailsExtra({ extra, account }: Props) {
   return (
     <>
       {formattedRewards && (
-        <Section
-          title={t("operationDetails.extra.rewards")}
-          value={formattedRewards}
-        />
+        <Section title={t("operationDetails.extra.rewards")} value={formattedRewards} />
       )}
       {extra.assetId && (
-        <Section
-          title={t("operationDetails.extra.assetId")}
-          value={extra.assetId}
-        />
+        <Section title={t("operationDetails.extra.assetId")} value={extra.assetId} />
       )}
-      {extra.memo && (
-        <Section title={t("operationDetails.extra.memo")} value={extra.memo} />
-      )}
+      {extra.memo && <Section title={t("operationDetails.extra.memo")} value={extra.memo} />}
     </>
   );
 }
@@ -97,12 +85,7 @@ const OperationIcon = ({
           { width: size - 2, height: size - 2, backgroundColor: colors.card },
         ]}
       >
-        <OperationStatusIcon
-          confirmed={confirmed}
-          type={type}
-          failed={hasFailed}
-          size={size}
-        />
+        <OperationStatusIcon confirmed={confirmed} type={type} failed={hasFailed} size={size} />
       </Animatable.View>
       <Animatable.View
         animation={anim(size)}
@@ -110,21 +93,11 @@ const OperationIcon = ({
         useNativeDriver
         style={styles.operationSecondaryIcon}
       >
-        <OperationStatusIcon
-          confirmed={confirmed}
-          type={"REWARD"}
-          failed={hasFailed}
-          size={size}
-        />
+        <OperationStatusIcon confirmed={confirmed} type={"REWARD"} failed={hasFailed} size={size} />
       </Animatable.View>
     </View>
   ) : (
-    <OperationStatusIcon
-      confirmed={confirmed}
-      type={type}
-      failed={hasFailed}
-      size={size}
-    />
+    <OperationStatusIcon confirmed={confirmed} type={type} failed={hasFailed} size={size} />
   );
 };
 

@@ -21,20 +21,9 @@ type Props = {
 
 function Item({ item, selected, disabled, onSelect, onClick }: Props) {
   const { colors } = useTheme();
-  const {
-    identity,
-    address,
-    commission,
-    nominatorsCount,
-    isOversubscribed,
-    isElected,
-  } = item;
+  const { identity, address, commission, nominatorsCount, isOversubscribed, isElected } = item;
 
-  const onPress = useCallback(() => onSelect(item, selected), [
-    onSelect,
-    item,
-    selected,
-  ]);
+  const onPress = useCallback(() => onSelect(item, selected), [onSelect, item, selected]);
 
   const isDisabled = disabled && !selected;
 
@@ -43,12 +32,7 @@ function Item({ item, selected, disabled, onSelect, onClick }: Props) {
     [commission],
   );
   return (
-    <View
-      style={[
-        styles.wrapper,
-        isDisabled ? { backgroundColor: colors.lightGrey } : {},
-      ]}
-    >
+    <View style={[styles.wrapper, isDisabled ? { backgroundColor: colors.lightGrey } : {}]}>
       <Touchable
         style={[styles.iconWrapper]}
         onPress={() => onClick(address)}
@@ -77,20 +61,11 @@ function Item({ item, selected, disabled, onSelect, onClick }: Props) {
         </Touchable>
 
         {isElected ? (
-          <LText
-            style={[styles.valueLabel]}
-            color={isOversubscribed ? "orange" : "grey"}
-          >
+          <LText style={[styles.valueLabel]} color={isOversubscribed ? "orange" : "grey"}>
             {isOversubscribed ? (
-              <Trans
-                i18nKey="polkadot.nomination.oversubscribed"
-                values={{ nominatorsCount }}
-              />
+              <Trans i18nKey="polkadot.nomination.oversubscribed" values={{ nominatorsCount }} />
             ) : (
-              <Trans
-                i18nKey="polkadot.nomination.nominatorsCount"
-                values={{ nominatorsCount }}
-              />
+              <Trans i18nKey="polkadot.nomination.nominatorsCount" values={{ nominatorsCount }} />
             )}
           </LText>
         ) : (

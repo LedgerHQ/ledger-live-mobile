@@ -7,10 +7,7 @@ import { useNavigation, useTheme } from "@react-navigation/native";
 
 import type { Account } from "@ledgerhq/live-common/lib/types";
 
-import {
-  getAccountUnit,
-  getAccountCurrency,
-} from "@ledgerhq/live-common/lib/account";
+import { getAccountUnit, getAccountCurrency } from "@ledgerhq/live-common/lib/account";
 import AccountSectionLabel from "../../../components/AccountSectionLabel";
 import Info from "../../../icons/Info";
 import LText from "../../../components/LText";
@@ -25,10 +22,7 @@ type Props = {
 
 const RewardsSection = ({ account }: Props) => {
   const { colors } = useTheme();
-  invariant(
-    account && account.algorandResources,
-    "algorand resources required",
-  );
+  invariant(account && account.algorandResources, "algorand resources required");
   const { rewards } = account.algorandResources;
 
   const currency = getAccountCurrency(account);

@@ -26,12 +26,7 @@ function OnboardingStepImportAccounts({ navigation, route }: *) {
   );
 
   return (
-    <OnboardingStepperView
-      scenes={scenes}
-      navigation={navigation}
-      route={route}
-      onFinish={next}
-    />
+    <OnboardingStepperView scenes={scenes} navigation={navigation} route={route} onFinish={next} />
   );
 }
 

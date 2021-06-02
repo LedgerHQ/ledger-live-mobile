@@ -61,7 +61,5 @@ export default (ScrollListLike: any) => {
   }
 
   // $FlowFixMe
-  return React.forwardRef((props, ref) => (
-    <Inner {...props} forwardedRef={ref} />
-  ));
+  return React.forwardRef((props, ref) => <Inner {...props} forwardedRef={ref} />);
 };

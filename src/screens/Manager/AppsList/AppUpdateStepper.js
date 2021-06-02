@@ -34,10 +34,7 @@ const AppUpdateStepper = ({ state }: Props) => {
       animation="fadeIn"
       useNativeDriver
       duration={400}
-      style={[
-        styles.root,
-        { backgroundColor: colors.card, borderBottomColor: colors.lightFog },
-      ]}
+      style={[styles.root, { backgroundColor: colors.card, borderBottomColor: colors.lightFog }]}
     >
       <View>
         <LText bold style={styles.stepperText} color="live">
@@ -59,11 +56,7 @@ const AppUpdateStepper = ({ state }: Props) => {
             <Trans i18nKey="AppAction.update.progress" />
           </LText>
           <View style={styles.progressBar}>
-            <ProgressBar
-              height={6}
-              progress={updateProgress * 100}
-              progressColor={colors.live}
-            />
+            <ProgressBar height={6} progress={updateProgress * 100} progressColor={colors.live} />
           </View>
         </View>
       </View>

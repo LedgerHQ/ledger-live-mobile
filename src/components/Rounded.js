@@ -11,9 +11,7 @@ type Props = {
 class Rounded extends PureComponent<Props> {
   render() {
     const { bg, children } = this.props;
-    return (
-      <View style={[styles.root, { backgroundColor: bg }]}>{children}</View>
-    );
+    return <View style={[styles.root, { backgroundColor: bg }]}>{children}</View>;
   }
 }
 

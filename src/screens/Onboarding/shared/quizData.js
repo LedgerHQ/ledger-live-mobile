@@ -34,15 +34,11 @@ export default [
     },
     answers: [
       {
-        title: (
-          <Trans i18nKey="onboarding.quizz.recoveryPhrase.answers.correct" />
-        ),
+        title: <Trans i18nKey="onboarding.quizz.recoveryPhrase.answers.correct" />,
         correct: true,
       },
       {
-        title: (
-          <Trans i18nKey="onboarding.quizz.recoveryPhrase.answers.wrong" />
-        ),
+        title: <Trans i18nKey="onboarding.quizz.recoveryPhrase.answers.wrong" />,
         correct: false,
       },
     ],

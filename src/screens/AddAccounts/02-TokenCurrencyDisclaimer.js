@@ -28,10 +28,7 @@ type Props = {
   route: { params: RouteParams },
 };
 
-export default function AddAccountsTokenCurrencyDisclaimer({
-  navigation,
-  route,
-}: Props) {
+export default function AddAccountsTokenCurrencyDisclaimer({ navigation, route }: Props) {
   const { colors } = useTheme();
   const { t } = useTranslation();
   const accounts = useSelector(accountsSelector);

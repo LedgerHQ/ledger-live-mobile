@@ -12,13 +12,7 @@ type Props = {
   size?: number,
 };
 
-function BluetoothDisabledIcon({
-  children,
-  bg,
-  floatingIcon,
-  floatingBg,
-  size = 80,
-}: Props) {
+function BluetoothDisabledIcon({ children, bg, floatingIcon, floatingBg, size = 80 }: Props) {
   const { colors } = useTheme();
   return (
     <View style={styles.root}>

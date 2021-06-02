@@ -26,10 +26,7 @@ const Landing = () => {
   const { colors } = useTheme();
   const [isChecked, setIsChecked] = useState(false);
   const dispatch = useDispatch();
-  const onAcceptSwapKYC = useCallback(
-    () => dispatch(setHasAcceptedSwapKYC(true)),
-    [dispatch],
-  );
+  const onAcceptSwapKYC = useCallback(() => dispatch(setHasAcceptedSwapKYC(true)), [dispatch]);
 
   return (
     <SafeAreaView style={[styles.root, { backgroundColor: colors.background }]}>

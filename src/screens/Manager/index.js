@@ -162,10 +162,7 @@ class ChooseDevice extends Component<
     }
 
     return (
-      <NavigationScrollView
-        style={[styles.root]}
-        contentContainerStyle={styles.scrollContainer}
-      >
+      <NavigationScrollView style={[styles.root]} contentContainerStyle={styles.scrollContainer}>
         <TrackScreen category="Manager" name="ChooseDevice" />
         <LText semiBold style={styles.title}>
           <Trans i18nKey="manager.connect" />

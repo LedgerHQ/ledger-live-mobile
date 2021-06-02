@@ -24,11 +24,7 @@ type Props = {
   genuine: boolean,
 };
 
-export default function Paired({
-  device,
-  onContinue: onContinuewProps,
-  genuine,
-}: Props) {
+export default function Paired({ device, onContinue: onContinuewProps, genuine }: Props) {
   const { colors } = useTheme();
   const navigation = useNavigation();
   const { deviceId, deviceName } = device;
@@ -57,23 +53,13 @@ export default function Paired({
           <NanoX size={48} color={colors.live} />
         </InfoIcon>
         <LText secondary semiBold style={styles.title}>
-          <Trans
-            i18nKey="PairDevices.Paired.title"
-            values={getDeviceModel("nanoX")}
-          />
+          <Trans i18nKey="PairDevices.Paired.title" values={getDeviceModel("nanoX")} />
         </LText>
         <LText style={styles.description} color="smoke">
-          <Trans
-            i18nKey="PairDevices.Paired.desc"
-            values={getDeviceModel("nanoX")}
-          />
+          <Trans i18nKey="PairDevices.Paired.desc" values={getDeviceModel("nanoX")} />
         </LText>
         <View style={styles.fullContainer}>
-          <DeviceItemSummary
-            deviceId={deviceId}
-            genuine={genuine}
-            onEdit={onEdit}
-          />
+          <DeviceItemSummary deviceId={deviceId} genuine={genuine} onEdit={onEdit} />
         </View>
       </View>
       <View style={styles.fullContainer}>

@@ -7,10 +7,7 @@ import Slider from "react-native-slider";
 import { useTheme } from "@react-navigation/native";
 import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
 import type { Transaction } from "@ledgerhq/live-common/lib/families/ethereum/types";
-import {
-  reverseRangeIndex,
-  projectRangeIndex,
-} from "@ledgerhq/live-common/lib/range";
+import { reverseRangeIndex, projectRangeIndex } from "@ledgerhq/live-common/lib/range";
 import { getMainAccount } from "@ledgerhq/live-common/lib/account";
 import LText from "../../components/LText";
 import CurrencyUnitValue from "../../components/CurrencyUnitValue";
@@ -18,10 +15,7 @@ import CurrencyUnitValue from "../../components/CurrencyUnitValue";
 const GasSlider = React.memo(({ value, onChange, range }: *) => {
   const { colors } = useTheme();
   const index = reverseRangeIndex(range, value);
-  const setValueIndex = useCallback(
-    i => onChange(projectRangeIndex(range, i)),
-    [range, onChange],
-  );
+  const setValueIndex = useCallback(i => onChange(projectRangeIndex(range, i)), [range, onChange]);
 
   return (
     <Slider
@@ -78,24 +72,14 @@ export default function EditFeeUnitEthereum({
           <LText style={styles.gasPriceLabel} semiBold>
             {t("send.summary.gasPrice")}
           </LText>
-          <View
-            style={[styles.gasPrice, { backgroundColor: colors.lightLive }]}
-          >
+          <View style={[styles.gasPrice, { backgroundColor: colors.lightLive }]}>
             <LText style={[styles.currencyUnitText, { color: colors.live }]}>
-              <CurrencyUnitValue
-                unit={feeCustomUnit || mainAccount.unit}
-                value={gasPrice}
-              />
+              <CurrencyUnitValue unit={feeCustomUnit || mainAccount.unit} value={gasPrice} />
             </LText>
           </View>
         </View>
         <View style={styles.container}>
-          <GasSlider
-            defaultGas={serverGas}
-            value={gasPrice}
-            range={range}
-            onChange={onChangeF}
-          />
+          <GasSlider defaultGas={serverGas} value={gasPrice} range={range} onChange={onChangeF} />
           <View style={styles.textContainer}>
             <LText color="grey" style={styles.currencyUnitText}>
               {t("common.slow")}

@@ -3,10 +3,7 @@ import React, { useMemo } from "react";
 import { Trans } from "react-i18next";
 import { StyleSheet, View, FlatList } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
-import type {
-  CryptoCurrency,
-  TokenCurrency,
-} from "@ledgerhq/live-common/lib/types";
+import type { CryptoCurrency, TokenCurrency } from "@ledgerhq/live-common/lib/types";
 import {
   listTokens,
   useCurrenciesByMarketcap,
@@ -55,10 +52,7 @@ export default function ExchangeSelectCrypto({ navigation, route }: Props) {
   const device = params?.device;
   const mode = params?.mode || "buy";
 
-  const cryptoCurrencies = useMemo(
-    () => listSupportedCurrencies().concat(listTokens()),
-    [],
-  );
+  const cryptoCurrencies = useMemo(() => listSupportedCurrencies().concat(listTokens()), []);
 
   const sortedCryptoCurrencies = useCurrenciesByMarketcap(cryptoCurrencies);
 
@@ -95,9 +89,7 @@ export default function ExchangeSelectCrypto({ navigation, route }: Props) {
     <FlatList
       contentContainerStyle={styles.list}
       data={items}
-      renderItem={({ item }) => (
-        <CurrencyRow currency={item} onPress={onPressItem} />
-      )}
+      renderItem={({ item }) => <CurrencyRow currency={item} onPress={onPressItem} />}
       keyExtractor={keyExtractor}
       showsVerticalScrollIndicator={false}
       keyboardDismissMode="on-drag"

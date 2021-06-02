@@ -28,9 +28,7 @@ function Delta({ valueChange, percent, unit, style }: Props) {
   }
 
   const delta =
-    percent && valueChange.percentage
-      ? valueChange.percentage * 100
-      : valueChange.value;
+    percent && valueChange.percentage ? valueChange.percentage * 100 : valueChange.value;
 
   if (Number.isNaN(delta)) {
     return null;
@@ -51,12 +49,7 @@ function Delta({ valueChange, percent, unit, style }: Props) {
       <View style={percent ? styles.content : null}>
         <LText semiBold style={[styles.text, { color }]}>
           {unit && absDelta !== 0 ? (
-            <CurrencyUnitValue
-              before={`(${sign}`}
-              after={")"}
-              unit={unit}
-              value={absDelta}
-            />
+            <CurrencyUnitValue before={`(${sign}`} after={")"} unit={unit} value={absDelta} />
           ) : percent ? (
             `${absDelta.toFixed(0)}%`
           ) : null}

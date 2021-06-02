@@ -1,17 +1,5 @@
-import React, {
-  useCallback,
-  useRef,
-  useEffect,
-  useState,
-  useMemo,
-} from "react";
-import {
-  StyleSheet,
-  View,
-  Animated,
-  SectionList,
-  RefreshControl,
-} from "react-native";
+import React, { useCallback, useRef, useEffect, useState, useMemo } from "react";
+import { StyleSheet, View, Animated, SectionList, RefreshControl } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import Share from "react-native-share";
@@ -55,9 +43,7 @@ const History = () => {
   const updateSwapStatus = useCallback(() => {
     let cancelled = false;
     async function fetchUpdatedSwapStatus() {
-      const updatedAccounts = await Promise.all(
-        accounts.map(updateAccountSwapStatus),
-      );
+      const updatedAccounts = await Promise.all(accounts.map(updateAccountSwapStatus));
       if (!cancelled) {
         updatedAccounts.filter(Boolean).forEach(account => {
           dispatch(updateAccountWithUpdater(account.id, _ => account));
@@ -89,9 +75,7 @@ const History = () => {
     }
   }, 10000);
 
-  const renderItem = ({ item }: { item: Operation }) => (
-    <OperationRow item={item} />
-  );
+  const renderItem = ({ item }: { item: Operation }) => <OperationRow item={item} />;
 
   const exportSwapHistory = async () => {
     const mapped = await mappedSwapOperationsToCSV(sections);
@@ -126,10 +110,7 @@ const History = () => {
         contentContainerStyle={styles.contentContainer}
         ListEmptyComponent={_ => <EmptyState />}
         refreshControl={
-          <RefreshControl
-            refreshing={isRefreshing}
-            onRefresh={() => setIsRefreshing(true)}
-          />
+          <RefreshControl refreshing={isRefreshing} onRefresh={() => setIsRefreshing(true)} />
         }
         ListHeaderComponent={
           sections.length && (

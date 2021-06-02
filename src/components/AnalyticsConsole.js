@@ -23,9 +23,7 @@ const AnalyticsConsole = () => {
       {items.map(item => (
         <View style={styles.item} key={item.id}>
           <Text style={styles.eventName}>{item.event}</Text>
-          <Text>
-            {item.properties ? JSON.stringify(item.properties) : null}
-          </Text>
+          <Text>{item.properties ? JSON.stringify(item.properties) : null}</Text>
         </View>
       ))}
     </View>

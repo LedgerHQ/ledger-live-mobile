@@ -32,12 +32,7 @@ export default function AmountInput({
 }: Props) {
   const { t } = useTranslation();
   const fiatCurrency = useSelector(counterValueCurrencySelector);
-  const {
-    cryptoUnit,
-    fiatAmount,
-    fiatUnit,
-    calculateCryptoAmount,
-  } = useSendAmount({
+  const { cryptoUnit, fiatAmount, fiatUnit, calculateCryptoAmount } = useSendAmount({
     account,
     fiatCurrency,
     cryptoAmount,
@@ -74,11 +69,7 @@ export default function AmountInput({
           unit={cryptoUnit}
           value={cryptoAmount}
           renderRight={
-            <LText
-              style={[styles.currency, isCrypto ? styles.active : null]}
-              semiBold
-              color="grey"
-            >
+            <LText style={[styles.currency, isCrypto ? styles.active : null]} semiBold color="grey">
               {cryptoUnit.code}
             </LText>
           }
@@ -101,9 +92,7 @@ export default function AmountInput({
           onChange={onChangeFiatAmount}
           unit={fiatUnit}
           value={cryptoAmount ? fiatAmount : null}
-          placeholder={
-            !fiatAmount ? t("send.amount.noRateProvider") : undefined
-          }
+          placeholder={!fiatAmount ? t("send.amount.noRateProvider") : undefined}
           editable={!!fiatAmount && editable}
           showAllDigits
           renderRight={

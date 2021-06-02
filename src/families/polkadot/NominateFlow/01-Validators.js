@@ -1,13 +1,7 @@
 // @flow
 import invariant from "invariant";
 import React, { useCallback, useState, useMemo } from "react";
-import {
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  SectionList,
-  Linking,
-} from "react-native";
+import { View, StyleSheet, TouchableOpacity, SectionList, Linking } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { Trans, useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
@@ -20,10 +14,7 @@ import type {
 } from "@ledgerhq/live-common/lib/families/polkadot/types";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { getMainAccount } from "@ledgerhq/live-common/lib/account";
-import {
-  getDefaultExplorerView,
-  getAddressExplorer,
-} from "@ledgerhq/live-common/lib/explorers";
+import { getDefaultExplorerView, getAddressExplorer } from "@ledgerhq/live-common/lib/explorers";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
 import { MAX_NOMINATIONS } from "@ledgerhq/live-common/lib/families/polkadot/logic";
 import { PolkadotValidatorsRequired } from "@ledgerhq/live-common/lib/families/polkadot/errors";
@@ -76,46 +67,35 @@ function NominateSelectValidator({ navigation, route }: Props) {
 
   invariant(polkadotResources, "polkadotResources required");
 
-  const {
-    transaction,
-    setTransaction,
-    status,
-    bridgePending,
-    bridgeError,
-  } = useBridgeTransaction(() => {
-    const tx = route.params.transaction;
+  const { transaction, setTransaction, status, bridgePending, bridgeError } = useBridgeTransaction(
+    () => {
+      const tx = route.params.transaction;
 
-    if (!tx) {
-      const t = bridge.createTransaction(mainAccount);
+      if (!tx) {
+        const t = bridge.createTransaction(mainAccount);
 
-      const initialValidators = (
-        mainAccount.polkadotResources?.nominations || []
-      )
-        .filter(nomination => !!nomination.status)
-        .map(nomination => nomination.address);
+        const initialValidators = (mainAccount.polkadotResources?.nominations || [])
+          .filter(nomination => !!nomination.status)
+          .map(nomination => nomination.address);
 
-      return {
-        account,
-        transaction: bridge.updateTransaction(t, {
-          mode: "nominate",
-          validators: initialValidators,
-        }),
-      };
-    }
+        return {
+          account,
+          transaction: bridge.updateTransaction(t, {
+            mode: "nominate",
+            validators: initialValidators,
+          }),
+        };
+      }
 
-    return { account, transaction: tx };
-  });
-
-  invariant(
-    transaction && transaction.validators,
-    "transaction and validators required",
+      return { account, transaction: tx };
+    },
   );
+
+  invariant(transaction && transaction.validators, "transaction and validators required");
 
   const [searchQuery, setSearchQuery] = useState("");
 
-  const validators = useMemo(() => transaction.validators || [], [
-    transaction.validators,
-  ]);
+  const validators = useMemo(() => transaction.validators || [], [transaction.validators]);
 
   const nominations = useMemo(() => polkadotResources.nominations || [], [
     polkadotResources.nominations,
@@ -131,23 +111,16 @@ function NominateSelectValidator({ navigation, route }: Props) {
   );
 
   const { staking, validators: polkadotValidators } = usePolkadotPreloadData();
-  const maxNominatorRewardedPerValidator =
-    staking?.maxNominatorRewardedPerValidator || 300;
+  const maxNominatorRewardedPerValidator = staking?.maxNominatorRewardedPerValidator || 300;
 
-  const sorted = useSortedValidators(
-    searchQuery,
-    polkadotValidators,
-    nominations,
-  );
+  const sorted = useSortedValidators(searchQuery, polkadotValidators, nominations);
 
   const sections = useMemo(
     () =>
       sorted
         .reduce(
           (data, validator) => {
-            const isNominated = nominations.some(
-              n => n.address === validator.address,
-            );
+            const isNominated = nominations.some(n => n.address === validator.address);
             if (isNominated) {
               data[0].data.push(validator);
             } else if (validator.isElected) {
@@ -159,21 +132,15 @@ function NominateSelectValidator({ navigation, route }: Props) {
           },
           [
             {
-              title: (
-                <Trans i18nKey="polkadot.nominate.steps.validators.myNominations" />
-              ),
+              title: <Trans i18nKey="polkadot.nominate.steps.validators.myNominations" />,
               data: [],
             },
             {
-              title: (
-                <Trans i18nKey="polkadot.nominate.steps.validators.electedValidators" />
-              ),
+              title: <Trans i18nKey="polkadot.nominate.steps.validators.electedValidators" />,
               data: [],
             },
             {
-              title: (
-                <Trans i18nKey="polkadot.nominate.steps.validators.waitingValidators" />
-              ),
+              title: <Trans i18nKey="polkadot.nominate.steps.validators.waitingValidators" />,
               data: [],
             },
           ],
@@ -207,10 +174,7 @@ function NominateSelectValidator({ navigation, route }: Props) {
 
   const onOpenExplorer = useCallback(
     (address: string) => {
-      const url = getAddressExplorer(
-        getDefaultExplorerView(mainAccount.currency),
-        address,
-      );
+      const url = getAddressExplorer(getDefaultExplorerView(mainAccount.currency), address);
       if (url) Linking.openURL(url);
     },
     [mainAccount.currency],
@@ -249,13 +213,7 @@ function NominateSelectValidator({ navigation, route }: Props) {
             validator: drawerValidator,
           })
         : [],
-    [
-      drawerValidator,
-      t,
-      account,
-      maxNominatorRewardedPerValidator,
-      onOpenExplorer,
-    ],
+    [drawerValidator, t, account, maxNominatorRewardedPerValidator, onOpenExplorer],
   );
 
   const renderItem = useCallback(
@@ -281,8 +239,7 @@ function NominateSelectValidator({ navigation, route }: Props) {
   const warning = getFirstStatusError(status, "warnings");
   const maxSelected = validators.length === MAX_NOMINATIONS;
   const maybeChill = error instanceof PolkadotValidatorsRequired;
-  const ignoreError =
-    error instanceof PolkadotValidatorsRequired && !nominations.length; // Do not show error on first nominate
+  const ignoreError = error instanceof PolkadotValidatorsRequired && !nominations.length; // Do not show error on first nominate
 
   return (
     <SafeAreaView style={[styles.root, { backgroundColor: colors.background }]}>
@@ -305,10 +262,7 @@ function NominateSelectValidator({ navigation, route }: Props) {
           />
         </Alert>
       ) : null}
-      <SelectValidatorSearchBox
-        searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery}
-      />
+      <SelectValidatorSearchBox searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
       {sections.length <= 0 && (
         <View style={styles.noResult}>
           <LText style={styles.textCenter}>
@@ -327,20 +281,14 @@ function NominateSelectValidator({ navigation, route }: Props) {
         renderItem={renderItem}
         stickySectionHeadersEnabled
         renderSectionHeader={({ section: { title } }) => (
-          <LText
-            style={[styles.header, { backgroundColor: colors.lightFog }]}
-            color="grey"
-          >
+          <LText style={[styles.header, { backgroundColor: colors.lightFog }]} color="grey">
             {title}
           </LText>
         )}
       />
 
       <View
-        style={[
-          styles.footer,
-          { borderTopColor: colors.lightFog, backgroundColor: colors.card },
-        ]}
+        style={[styles.footer, { borderTopColor: colors.lightFog, backgroundColor: colors.card }]}
       >
         <View style={styles.paddingBottom}>
           <View style={styles.labelContainer}>
@@ -377,23 +325,13 @@ function NominateSelectValidator({ navigation, route }: Props) {
             )}
           </View>
         </View>
-        <SendRowsFee
-          account={account}
-          parentAccount={parentAccount}
-          transaction={transaction}
-        />
+        <SendRowsFee account={account} parentAccount={parentAccount} transaction={transaction} />
         <Button
           disabled={!!error || bridgePending}
           event="PolkadotNominateSelectValidatorsContinue"
           onPress={onNext}
           title={
-            <Trans
-              i18nKey={
-                !bridgePending
-                  ? "common.continue"
-                  : "send.amount.loadingNetwork"
-              }
-            />
+            <Trans i18nKey={!bridgePending ? "common.continue" : "send.amount.loadingNetwork"} />
           }
           type="primary"
         />

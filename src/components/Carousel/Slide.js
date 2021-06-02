@@ -15,14 +15,7 @@ type PropType = {
   position: *,
 };
 
-const Slide = ({
-  url,
-  name,
-  title,
-  description,
-  image,
-  position,
-}: PropType) => {
+const Slide = ({ url, name, title, description, image, position }: PropType) => {
   const slideWidth = getWindowDimensions().width - 32;
   const onClick = useCallback(() => {
     Linking.openURL(url);

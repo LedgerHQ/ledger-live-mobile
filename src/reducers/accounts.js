@@ -54,10 +54,7 @@ const handlers: Object = {
     }),
   }),
 
-  SET_ACCOUNTS: (
-    state: AccountsState,
-    { payload }: { payload: Account[] },
-  ) => ({
+  SET_ACCOUNTS: (state: AccountsState, { payload }: { payload: Account[] }) => ({
     active: payload,
   }),
 
@@ -88,10 +85,9 @@ const handlers: Object = {
     active: state.active.map(clearAccount),
   }),
 
-  BLACKLIST_TOKEN: (
-    state: AccountsState,
-    { payload: tokenId }: { payload: string },
-  ) => ({ active: state.active.map(a => withoutToken(a, tokenId)) }),
+  BLACKLIST_TOKEN: (state: AccountsState, { payload: tokenId }: { payload: string }) => ({
+    active: state.active.map(a => withoutToken(a, tokenId)),
+  }),
 
   DANGEROUSLY_OVERRIDE_STATE: (state: AccountsState): AccountsState => ({
     ...state,
@@ -110,28 +106,20 @@ export const migratableAccountsSelector = (s: *): Account[] =>
   s.accounts.active.filter(canBeMigrated);
 
 // $FlowFixMe
-export const flattenAccountsSelector = createSelector(
-  accountsSelector,
-  flattenAccounts,
-);
+export const flattenAccountsSelector = createSelector(accountsSelector, flattenAccounts);
 
 // $FlowFixMe
 export const flattenAccountsEnforceHideEmptyTokenSelector = createSelector(
   accountsSelector,
-  accounts =>
-    flattenAccounts(accounts, { enforceHideEmptyTokenAccounts: true }),
+  accounts => flattenAccounts(accounts, { enforceHideEmptyTokenAccounts: true }),
 );
 
 // $FlowFixMe
-export const accountsCountSelector = createSelector(
-  accountsSelector,
-  acc => acc.length,
-);
+export const accountsCountSelector = createSelector(accountsSelector, acc => acc.length);
 
 // $FlowFixMe
-export const someAccountsNeedMigrationSelector = createSelector(
-  accountsSelector,
-  accounts => accounts.some(canBeMigrated),
+export const someAccountsNeedMigrationSelector = createSelector(accountsSelector, accounts =>
+  accounts.some(canBeMigrated),
 );
 
 // $FlowFixMe
@@ -142,12 +130,8 @@ export const currenciesSelector = createSelector(accountsSelector, accounts =>
 );
 
 // $FlowFixMe
-export const cryptoCurrenciesSelector = createSelector(
-  accountsSelector,
-  accounts =>
-    uniq(accounts.map(a => a.currency)).sort((a, b) =>
-      a.name.localeCompare(b.name),
-    ),
+export const cryptoCurrenciesSelector = createSelector(accountsSelector, accounts =>
+  uniq(accounts.map(a => a.currency)).sort((a, b) => a.name.localeCompare(b.name)),
 );
 
 // $FlowFixMe
@@ -166,8 +150,7 @@ export const parentAccountSelector = createSelector(
 
 export const accountScreenSelector = (route: any) => (state: any) => {
   const { accountId, parentId } = route.params;
-  const parentAccount: ?Account =
-    parentId && accountSelector(state, { accountId: parentId });
+  const parentAccount: ?Account = parentId && accountSelector(state, { accountId: parentId });
   let account: ?AccountLike = route.params.account;
 
   if (!account) {
@@ -201,17 +184,14 @@ export const subAccountByCurrencyOrderedSelector: OutputSelector<
     return flatAccounts
       .filter(
         (account: AccountLike) =>
-          (account.type === "TokenAccount"
-            ? account.token.id
-            : account.currency.id) === currency.id,
+          (account.type === "TokenAccount" ? account.token.id : account.currency.id) ===
+          currency.id,
       )
       .map((account: AccountLike) => ({
         account,
         parentAccount:
           account.type === "TokenAccount" && account.parentId
-            ? accounts.find(
-                fa => fa.type === "Account" && fa.id === account.parentId,
-              )
+            ? accounts.find(fa => fa.type === "Account" && fa.id === account.parentId)
             : {},
       }))
       .sort((a: { account: AccountLike }, b: { account: AccountLike }) =>
@@ -224,9 +204,7 @@ export const subAccountByCurrencyOrderedSelector: OutputSelector<
   },
 );
 
-export const subAccountByCurrencyOrderedScreenSelector = (route: any) => (
-  state: any,
-) => {
+export const subAccountByCurrencyOrderedScreenSelector = (route: any) => (state: any) => {
   const currency = route?.params?.currency || {};
   if (!currency) return [];
   return subAccountByCurrencyOrderedSelector(state, { currency });

@@ -3,10 +3,7 @@ import React, { PureComponent } from "react";
 import { TextInput, StyleSheet, View, Dimensions } from "react-native";
 import { BigNumber } from "bignumber.js";
 
-import {
-  formatCurrencyUnit,
-  sanitizeValueString,
-} from "@ledgerhq/live-common/lib/currencies";
+import { formatCurrencyUnit, sanitizeValueString } from "@ledgerhq/live-common/lib/currencies";
 import noop from "lodash/noop";
 import clamp from "lodash/clamp";
 
@@ -15,11 +12,7 @@ import type { Unit } from "@ledgerhq/live-common/lib/types";
 import getFontStyle from "./LText/getFontStyle";
 import { withTheme } from "../colors";
 
-function format(
-  unit: Unit,
-  value: BigNumber,
-  { isFocused, showAllDigits, subMagnitude },
-) {
+function format(unit: Unit, value: BigNumber, { isFocused, showAllDigits, subMagnitude }) {
   return formatCurrencyUnit(unit, value, {
     useGrouping: !isFocused,
     disableRounding: true,
@@ -155,11 +148,7 @@ class CurrencyInput extends PureComponent<Props, State> {
     // calculating an approximative font size
     const screenWidth = Dimensions.get("window").width * 0.75;
     const dynamicFontSize = Math.round(
-      clamp(
-        Math.sqrt((screenWidth * 32) / displayValue.length),
-        8,
-        isActive ? 32 : 24,
-      ),
+      clamp(Math.sqrt((screenWidth * 32) / displayValue.length), 8, isActive ? 32 : 24),
     );
 
     return (
@@ -171,11 +160,7 @@ class CurrencyInput extends PureComponent<Props, State> {
           style={[
             styles.input,
             { color: colors.darkBlue },
-            hasError
-              ? { color: colors.alert }
-              : hasWarning
-              ? { color: colors.orange }
-              : null,
+            hasError ? { color: colors.alert } : hasWarning ? { color: colors.orange } : null,
             editable ? {} : { color: colors.grey },
             { fontSize: dynamicFontSize },
             inputStyle,

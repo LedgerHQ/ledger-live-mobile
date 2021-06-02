@@ -41,10 +41,7 @@ export default function FreezeInfo({ navigation, route }: Props) {
       style={[styles.root, { backgroundColor: colors.background }]}
       forceInset={forceInset}
     >
-      <ScrollView
-        style={styles.scroll}
-        contentContainerStyle={styles.scrollContainer}
-      >
+      <ScrollView style={styles.scroll} contentContainerStyle={styles.scrollContainer}>
         <TrackScreen category="FreezeFlow" name="Info" />
         <IlluRewards />
         <LText secondary style={styles.description}>

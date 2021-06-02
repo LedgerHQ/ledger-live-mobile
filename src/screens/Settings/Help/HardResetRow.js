@@ -47,15 +47,8 @@ export default function HardResetRow() {
         }
         onPress={onPress}
       />
-      <BottomModal
-        id="HardResetModal"
-        isOpened={isModalOpened}
-        onClose={onRequestClose}
-      >
-        <HardResetModal
-          onRequestClose={onRequestClose}
-          onHardReset={onHardReset}
-        />
+      <BottomModal id="HardResetModal" isOpened={isModalOpened} onClose={onRequestClose}>
+        <HardResetModal onRequestClose={onRequestClose} onHardReset={onHardReset} />
       </BottomModal>
     </>
   );

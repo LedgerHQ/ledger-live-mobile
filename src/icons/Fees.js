@@ -3,13 +3,7 @@ import React from "react";
 import Svg, { Path } from "react-native-svg";
 import { useTheme } from "@react-navigation/native";
 
-export default function Redelegate({
-  size = 24,
-  color,
-}: {
-  size?: number,
-  color?: string,
-}) {
+export default function Redelegate({ size = 24, color }: { size?: number, color?: string }) {
   const { colors } = useTheme();
   const c = color || colors.darkBlue;
   return (

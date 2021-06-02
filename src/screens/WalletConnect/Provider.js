@@ -35,10 +35,7 @@ const Provider = ({ children }: { children: React$Node }) => {
     // $FlowFixMe
     <ProviderCommon
       onMessage={(wcCallRequest, account) => {
-        if (
-          wcCallRequest.type === "transaction" &&
-          wcCallRequest.method === "send"
-        ) {
+        if (wcCallRequest.type === "transaction" && wcCallRequest.method === "send") {
           return () =>
             navigate(NavigatorName.SendFunds, {
               screen: ScreenName.SendSummary,

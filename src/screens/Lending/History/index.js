@@ -3,11 +3,7 @@ import React, { useCallback, useMemo, useState } from "react";
 import { SectionList, View, StyleSheet, SafeAreaView } from "react-native";
 import { useTranslation } from "react-i18next";
 import { useNavigation, useTheme } from "@react-navigation/native";
-import type {
-  Account,
-  AccountLikeArray,
-  Operation,
-} from "@ledgerhq/live-common/lib/types";
+import type { Account, AccountLikeArray, Operation } from "@ledgerhq/live-common/lib/types";
 import { groupAccountsOperationsByDay } from "@ledgerhq/live-common/lib/account";
 import { ScreenName } from "../../../const";
 import { useFlattenSortAccounts } from "../../../actions/general";
@@ -19,8 +15,7 @@ import NoMoreOperationFooter from "../../../components/NoMoreOperationFooter";
 import LoadingFooter from "../../../components/LoadingFooter";
 
 const useCompoundHistory = (accounts: AccountLikeArray): AccountLikeArray => {
-  const filterOps = (op: Operation): boolean =>
-    ["REDEEM", "SUPPLY"].includes(op.type);
+  const filterOps = (op: Operation): boolean => ["REDEEM", "SUPPLY"].includes(op.type);
   const history = useMemo(
     () =>
       accounts.map(acc => {
@@ -67,9 +62,7 @@ export default function History() {
         {/** $FlowFixMe */}
         <SectionList
           sections={sections}
-          renderSectionHeader={({ section }: { section: * }) => (
-            <SectionHeader section={section} />
-          )}
+          renderSectionHeader={({ section }: { section: * }) => <SectionHeader section={section} />}
           renderItem={({
             item,
             index,
@@ -109,11 +102,7 @@ export default function History() {
             />
           )}
           ListFooterComponent={
-            !completed ? (
-              <LoadingFooter />
-            ) : sections.length ? (
-              <NoMoreOperationFooter />
-            ) : null
+            !completed ? <LoadingFooter /> : sections.length ? <NoMoreOperationFooter /> : null
           }
           onEndReached={onEndReached}
         />

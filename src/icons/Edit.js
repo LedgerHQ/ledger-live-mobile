@@ -15,14 +15,7 @@ export default function Edit({ size = 16, color }: Props) {
         stroke={color}
         strokeWidth="1.2"
       />
-      <Line
-        x1="8.06062"
-        y1="1.75756"
-        x2="10.2424"
-        y2="3.93938"
-        stroke={color}
-        stroke-width="1.2"
-      />
+      <Line x1="8.06062" y1="1.75756" x2="10.2424" y2="3.93938" stroke={color} stroke-width="1.2" />
     </Svg>
   );
 }

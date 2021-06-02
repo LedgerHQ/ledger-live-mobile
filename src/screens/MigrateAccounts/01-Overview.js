@@ -30,10 +30,7 @@ export default function Overview({ route, navigation }: Props) {
   const currencyIds = useMemo(
     () =>
       migratableAccounts
-        .reduce(
-          (c, a) => (c.includes(a.currency.id) ? c : [...c, a.currency.id]),
-          [],
-        )
+        .reduce((c, a) => (c.includes(a.currency.id) ? c : [...c, a.currency.id]), [])
         .sort(),
     [migratableAccounts],
   );
@@ -95,9 +92,7 @@ export default function Overview({ route, navigation }: Props) {
       </LText>
       <LText style={styles.subtitle} color="smoke">
         <Trans
-          i18nKey={`migrateAccounts.overview.${
-            showNotice ? "notice" : "subtitle"
-          }`}
+          i18nKey={`migrateAccounts.overview.${showNotice ? "notice" : "subtitle"}`}
           values={{ accountCount: migratableAccounts.length }}
         />
       </LText>
@@ -118,11 +113,7 @@ export default function Overview({ route, navigation }: Props) {
           event="StartOrContinueMigration"
           type="primary"
           title={
-            <Trans
-              i18nKey={`migrateAccounts.overview.${
-                showNotice ? "continue" : "start"
-              }`}
-            />
+            <Trans i18nKey={`migrateAccounts.overview.${showNotice ? "continue" : "start"}`} />
           }
           onPress={startMigration}
         />

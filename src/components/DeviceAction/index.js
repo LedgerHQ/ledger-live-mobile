@@ -1,9 +1,6 @@
 // @flow
 import React, { useEffect } from "react";
-import type {
-  Action,
-  Device,
-} from "@ledgerhq/live-common/lib/hw/actions/types";
+import type { Action, Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import { useTranslation } from "react-i18next";
 import { useNavigation, useTheme } from "@react-navigation/native";
 import ValidateOnDevice from "../ValidateOnDevice";
@@ -185,8 +182,7 @@ export default function DeviceAction<R, H, P>({
       t,
       navigation,
       error,
-      managerAppName:
-        error.name === "UpdateYourApp" ? error.managerAppName : undefined,
+      managerAppName: error.name === "UpdateYourApp" ? error.managerAppName : undefined,
       onRetry,
       colors,
       theme,
@@ -243,11 +239,7 @@ export default function DeviceAction<R, H, P>({
       <>
         <PreventNativeBack />
         <SkipLock />
-        <ValidateMessageOnDevice
-          device={device}
-          account={account}
-          message={signMessageRequested}
-        />
+        <ValidateMessageOnDevice device={device} account={account} message={signMessageRequested} />
       </>
     );
   }

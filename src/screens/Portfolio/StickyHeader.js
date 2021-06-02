@@ -15,11 +15,7 @@ type Props = {
   scrollY: any,
 };
 
-export default function StickyHeader({
-  scrollY,
-  counterValueCurrency,
-  portfolio,
-}: Props) {
+export default function StickyHeader({ scrollY, counterValueCurrency, portfolio }: Props) {
   const isUpToDate = useSelector(isUpToDateSelector);
   const networkError = useSelector(networkErrorSelector);
   const globalSyncState = useGlobalSyncState();
@@ -30,11 +26,7 @@ export default function StickyHeader({
       portfolio={portfolio}
       counterValueCurrency={counterValueCurrency}
       pending={globalSyncState.pending && !isUpToDate}
-      error={
-        isUpToDate || !globalSyncState.error
-          ? null
-          : networkError || globalSyncState.error
-      }
+      error={isUpToDate || !globalSyncState.error ? null : networkError || globalSyncState.error}
     />
   );
 }

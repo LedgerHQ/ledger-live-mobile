@@ -9,10 +9,7 @@ import type {
   Transaction,
   TransactionStatus,
 } from "@ledgerhq/live-common/lib/types";
-import {
-  getMainAccount,
-  getAccountUnit,
-} from "@ledgerhq/live-common/lib/account";
+import { getMainAccount, getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 
 import { getDeviceTransactionConfig } from "@ledgerhq/live-common/lib/transaction";
@@ -37,12 +34,7 @@ export type FieldComponentProps = {
 
 export type FieldComponent = React$ComponentType<FieldComponentProps>;
 
-function AmountField({
-  account,
-  parentAccount,
-  status,
-  field,
-}: FieldComponentProps) {
+function AmountField({ account, parentAccount, status, field }: FieldComponentProps) {
   let unit;
   if (account.type === "TokenAccount") {
     unit = getAccountUnit(account);
@@ -50,27 +42,14 @@ function AmountField({
     const mainAccount = getMainAccount(account, parentAccount);
     unit = getAccountUnit(mainAccount);
   }
-  return (
-    <DataRowUnitValue label={field.label} unit={unit} value={status.amount} />
-  );
+  return <DataRowUnitValue label={field.label} unit={unit} value={status.amount} />;
 }
 
-function FeesField({
-  account,
-  parentAccount,
-  status,
-  field,
-}: FieldComponentProps) {
+function FeesField({ account, parentAccount, status, field }: FieldComponentProps) {
   const mainAccount = getMainAccount(account, parentAccount);
   const { estimatedFees } = status;
   const feesUnit = getAccountUnit(mainAccount);
-  return (
-    <DataRowUnitValue
-      label={field.label}
-      unit={feesUnit}
-      value={estimatedFees}
-    />
-  );
+  return <DataRowUnitValue label={field.label} unit={feesUnit} value={estimatedFees} />;
 }
 
 function AddressField({ field }: FieldComponentProps) {
@@ -132,8 +111,7 @@ export default function ValidateOnDevice({
     `ValidateOnDevice.recipientWording.${transaction.mode || "send"}`,
   );
   const recipientWording =
-    transRecipientWording !==
-    `ValidateOnDevice.recipientWording.${transaction.mode || "send"}`
+    transRecipientWording !== `ValidateOnDevice.recipientWording.${transaction.mode || "send"}`
       ? transRecipientWording
       : t("ValidateOnDevice.recipientWording.send");
 
@@ -151,9 +129,7 @@ export default function ValidateOnDevice({
       <ScrollView style={styles.scrollContainer}>
         <View style={styles.innerContainer}>
           <View style={styles.picture}>
-            <Animation
-              source={getDeviceAnimation({ device, key: "validate", theme })}
-            />
+            <Animation source={getDeviceAnimation({ device, key: "validate", theme })} />
           </View>
           {Title ? (
             <Title

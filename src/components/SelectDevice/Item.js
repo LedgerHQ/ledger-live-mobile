@@ -37,18 +37,12 @@ function Item({
   return (
     <View style={styles.outer}>
       <View style={styles.inner}>
-        <Touchable
-          event={event}
-          onPress={disabled ? undefined : onPress}
-          testID={testID}
-        >
+        <Touchable event={event} onPress={disabled ? undefined : onPress} testID={testID}>
           <View
             style={[
               styles.root,
               disabled && styles.disabled,
-              disabled
-                ? { backgroundColor: colors.card }
-                : { borderColor: colors.fog },
+              disabled ? { backgroundColor: colors.card } : { borderColor: colors.fog },
             ]}
           >
             {icon && <View style={styles.iconWrapper}>{icon}</View>}
@@ -77,10 +71,7 @@ function Item({
               </Touchable>
             )}
             {withArrow && !disabled ? (
-              <IconArrowRight
-                size={16}
-                color={primary ? colors.live : colors.grey}
-              />
+              <IconArrowRight size={16} color={primary ? colors.live : colors.grey} />
             ) : null}
           </View>
         </Touchable>

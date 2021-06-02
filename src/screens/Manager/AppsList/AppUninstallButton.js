@@ -17,12 +17,7 @@ type Props = {
   setAppUninstallWithDependencies: ({ dependents: App[], app: App }) => void,
 };
 
-const AppUninstallButton = ({
-  app,
-  state,
-  dispatch,
-  setAppUninstallWithDependencies,
-}: Props) => {
+const AppUninstallButton = ({ app, state, dispatch, setAppUninstallWithDependencies }: Props) => {
   const { colors } = useTheme();
   const { name } = app;
 
@@ -43,10 +38,7 @@ const AppUninstallButton = ({
       eventProperties={{ appName: name }}
       disabled={state.updateAllQueue.length > 0}
     >
-      <Trash
-        size={18}
-        color={state.updateAllQueue.length > 0 ? colors.fog : colors.grey}
-      />
+      <Trash size={18} color={state.updateAllQueue.length > 0 ? colors.fog : colors.grey} />
     </Touchable>
   );
 };

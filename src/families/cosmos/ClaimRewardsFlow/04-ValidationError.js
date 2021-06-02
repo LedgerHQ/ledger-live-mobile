@@ -43,12 +43,7 @@ export default function ValidationError({ navigation, route }: Props) {
       forceInset={forceInset}
     >
       <TrackScreen category="CosmosClaimRewards" name="ValidationError" />
-      <ValidateError
-        error={error}
-        onRetry={retry}
-        onClose={onClose}
-        onContactUs={contactUs}
-      />
+      <ValidateError error={error} onRetry={retry} onClose={onClose} onContactUs={contactUs} />
     </SafeAreaView>
   );
 }

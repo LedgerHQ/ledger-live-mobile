@@ -38,10 +38,7 @@ export default function DelegationStarted({ navigation, route }: Props) {
       style={[styles.root, { backgroundColor: colors.background }]}
       forceInset={forceInset}
     >
-      <NavigationScrollView
-        style={styles.scroll}
-        contentContainerStyle={styles.scrollContainer}
-      >
+      <NavigationScrollView style={styles.scroll} contentContainerStyle={styles.scrollContainer}>
         <TrackScreen category="DelegationFlow" name="Started" />
         <IlluStaking />
         <LText semiBold style={styles.title}>

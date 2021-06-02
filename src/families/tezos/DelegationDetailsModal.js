@@ -229,11 +229,7 @@ export default function DelegationDetailsModal({
       style={styles.modal}
     >
       <View style={styles.root}>
-        <Touchable
-          event="DelegationDetailsModalClose"
-          style={styles.close}
-          onPress={onClose}
-        >
+        <Touchable event="DelegationDetailsModalClose" style={styles.close} onPress={onClose}>
           <Circle size={32} bg={colors.lightFog}>
             <Close size={16} color={colors.grey} />
           </Circle>
@@ -266,11 +262,7 @@ export default function DelegationDetailsModal({
         <NavigationScrollView style={{ height }}>
           {baker ? (
             <Property label={<Trans i18nKey="delegation.validator" />}>
-              <LText
-                semiBold
-                style={styles.propertyValueText}
-                numberOfLines={1}
-              >
+              <LText semiBold style={styles.propertyValueText} numberOfLines={1}>
                 {baker.name}
               </LText>
             </Property>
@@ -301,21 +293,14 @@ export default function DelegationDetailsModal({
           <Property label={<Trans i18nKey="delegation.duration" />}>
             <LText semiBold style={styles.propertyValueText}>
               {days ? (
-                <Trans
-                  i18nKey="delegation.durationDays"
-                  count={days}
-                  values={{ count: days }}
-                />
+                <Trans i18nKey="delegation.durationDays" count={days} values={{ count: days }} />
               ) : (
                 <Trans i18nKey="delegation.durationDays0" />
               )}
             </LText>
           </Property>
           <Property last label={<Trans i18nKey="delegation.transactionID" />}>
-            <Touchable
-              event="DelegationDetailsOpenTx"
-              onPress={onOpenTransaction}
-            >
+            <Touchable event="DelegationDetailsOpenTx" onPress={onOpenTransaction}>
               <LText
                 semiBold
                 style={[styles.propertyValueText]}

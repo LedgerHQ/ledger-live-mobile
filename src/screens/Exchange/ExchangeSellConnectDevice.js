@@ -21,9 +21,7 @@ export default function Buy() {
     deviceMeta => {
       if (!deviceMeta) return;
 
-      const exchangeApp = deviceMeta?.result?.installed.find(
-        a => a.name === "Exchange",
-      );
+      const exchangeApp = deviceMeta?.result?.installed.find(a => a.name === "Exchange");
 
       setState({
         deviceMeta,

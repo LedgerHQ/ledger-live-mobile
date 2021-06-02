@@ -14,13 +14,7 @@ function HeaderSynchronizing() {
       <Spinning>
         <LiveLogo size={16} color={colors.grey} />
       </Spinning>
-      <LText
-        secondary
-        style={styles.title}
-        color="grey"
-        semiBold
-        numberOfLines={1}
-      >
+      <LText secondary style={styles.title} color="grey" semiBold numberOfLines={1}>
         <Trans i18nKey="portfolio.syncPending" />
       </LText>
     </View>

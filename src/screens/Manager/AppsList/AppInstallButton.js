@@ -61,9 +61,7 @@ export default function AppInstallButton({
 
   return (
     <Button
-      disabled={
-        !canInstall || notEnoughMemoryToInstall || updateAllQueue.length > 0
-      }
+      disabled={!canInstall || notEnoughMemoryToInstall || updateAllQueue.length > 0}
       useTouchable
       type={canUpdate ? "tertiary" : "lightPrimary"}
       outline={!canUpdate}

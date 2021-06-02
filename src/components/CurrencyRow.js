@@ -3,10 +3,7 @@
 import { StyleSheet } from "react-native";
 import React, { PureComponent } from "react";
 import { RectButton } from "react-native-gesture-handler";
-import type {
-  CryptoCurrency,
-  TokenCurrency,
-} from "@ledgerhq/live-common/lib/types";
+import type { CryptoCurrency, TokenCurrency } from "@ledgerhq/live-common/lib/types";
 
 import LText from "./LText";
 import CircleCurrencyIcon from "./CircleCurrencyIcon";
@@ -35,20 +32,11 @@ class CurrencyRow extends PureComponent<Props> {
           currency={currency}
           color={!isOK ? colors.lightFog : undefined}
         />
-        <LText
-          semiBold
-          style={[styles.name]}
-          numberOfLines={1}
-          color={!isOK ? "fog" : "darkBlue"}
-        >
+        <LText semiBold style={[styles.name]} numberOfLines={1} color={!isOK ? "fog" : "darkBlue"}>
           {`${currency.name} (${currency.ticker})`}
         </LText>
         {currency.type === "TokenCurrency" && currency.parentCurrency ? (
-          <LText
-            semiBold
-            style={[styles.currencyLabel, { borderColor: colors.grey }]}
-            color="grey"
-          >
+          <LText semiBold style={[styles.currencyLabel, { borderColor: colors.grey }]} color="grey">
             {currency.parentCurrency.name}
           </LText>
         ) : null}

@@ -45,16 +45,11 @@ export const connectingStep: Step = {
           )
         }
         title={
-          <Trans
-            i18nKey="SelectDevice.steps.connecting.title"
-            values={inferWordingValues(meta)}
-          />
+          <Trans i18nKey="SelectDevice.steps.connecting.title" values={inferWordingValues(meta)} />
         }
         description={
           <Trans
-            i18nKey={`SelectDevice.steps.connecting.description.${
-              !usbOnly ? "ble" : "usb"
-            }`}
+            i18nKey={`SelectDevice.steps.connecting.description.${!usbOnly ? "ble" : "usb"}`}
             values={inferWordingValues(meta)}
           />
         }
@@ -63,9 +58,7 @@ export const connectingStep: Step = {
   },
   run: meta =>
     // $FlowFixMe
-    withDevice(meta.deviceId)(() => from([meta])).pipe(
-      rejectionOp(() => new CantOpenDevice()),
-    ),
+    withDevice(meta.deviceId)(() => from([meta])).pipe(rejectionOp(() => new CantOpenDevice())),
 };
 
 export const accountApp: Account => Step = account => ({
@@ -79,17 +72,9 @@ export const accountApp: Account => Step = account => ({
     return (
       <RenderStep
         icon={<RoundedCurrencyIcon currency={account.currency} size={32} />}
-        title={
-          <Trans
-            i18nKey="SelectDevice.steps.accountApp.title"
-            values={wordingValues}
-          />
-        }
+        title={<Trans i18nKey="SelectDevice.steps.accountApp.title" values={wordingValues} />}
         description={
-          <Trans
-            i18nKey="SelectDevice.steps.accountApp.description"
-            values={wordingValues}
-          />
+          <Trans i18nKey="SelectDevice.steps.accountApp.description" values={wordingValues} />
         }
       />
     );

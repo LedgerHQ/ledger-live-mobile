@@ -9,11 +9,7 @@ import LText from "../../../../components/LText";
 import Button from "../../../../components/Button";
 import { NavigatorName } from "../../../../const";
 
-const NoAccountsEmptyState = ({
-  selectedCurrency,
-}: {
-  selectedCurrency: Currency,
-}) => {
+const NoAccountsEmptyState = ({ selectedCurrency }: { selectedCurrency: Currency }) => {
   const { colors } = useTheme();
   const { navigate } = useNavigation();
   const onAddAccount = useCallback(
@@ -29,9 +25,7 @@ const NoAccountsEmptyState = ({
 
   return (
     <View style={styles.emptyStateBody}>
-      <View
-        style={[styles.iconContainer, { backgroundColor: colors.lightLive }]}
-      >
+      <View style={[styles.iconContainer, { backgroundColor: colors.lightLive }]}>
         <InfoIcon size={22} color={colors.live} />
       </View>
       <LText semiBold style={styles.title}>

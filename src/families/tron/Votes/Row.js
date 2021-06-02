@@ -22,14 +22,7 @@ type Props = {
   isSR: boolean,
 };
 
-const Row = ({
-  validator,
-  address,
-  amount,
-  duration,
-  explorerView,
-  isSR,
-}: Props) => {
+const Row = ({ validator, address, amount, duration, explorerView, isSR }: Props) => {
   const { colors } = useTheme();
   const srURL = explorerView && getAddressExplorer(explorerView, address);
 
@@ -43,9 +36,7 @@ const Row = ({
         <View
           style={[
             styles.icon,
-            !isSR
-              ? { backgroundColor: colors.lightFog }
-              : { backgroundColor: colors.lightLive },
+            !isSR ? { backgroundColor: colors.lightFog } : { backgroundColor: colors.lightLive },
           ]}
         >
           {isSR ? (

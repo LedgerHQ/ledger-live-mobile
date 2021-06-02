@@ -60,14 +60,9 @@ const SkipDeviceVerification = ({ settleTrade, account }: Props) => {
 
         <Button
           event="SkipDeviceModalConfirm"
-          containerStyle={[
-            styles.confirmationButton,
-            styles.confirmationLastButton,
-          ]}
+          containerStyle={[styles.confirmationButton, styles.confirmationLastButton]}
           type={"primary"}
-          title={
-            <Trans i18nKey="exchange.buy.skipDeviceVerification.confirm" />
-          }
+          title={<Trans i18nKey="exchange.buy.skipDeviceVerification.confirm" />}
           onPress={() => settleTrade(true)}
         />
       </View>

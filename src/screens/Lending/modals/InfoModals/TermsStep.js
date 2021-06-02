@@ -1,12 +1,6 @@
 // $flow
 import React, { useCallback, useState } from "react";
-import {
-  View,
-  StyleSheet,
-  Image,
-  Linking,
-  TouchableOpacity,
-} from "react-native";
+import { View, StyleSheet, Image, Linking, TouchableOpacity } from "react-native";
 import { Trans } from "react-i18next";
 import { useNavigation } from "@react-navigation/native";
 import { track } from "../../../../analytics";
@@ -27,10 +21,10 @@ export default function TermsStep({ route: { params } }: Props) {
   const navigation = useNavigation();
   const [hasAcceptedTerms, setHasAcceptedTerms] = useState(false);
 
-  const onTogleAcceptedTerms = useCallback(
-    () => setHasAcceptedTerms(!hasAcceptedTerms),
-    [hasAcceptedTerms, setHasAcceptedTerms],
-  );
+  const onTogleAcceptedTerms = useCallback(() => setHasAcceptedTerms(!hasAcceptedTerms), [
+    hasAcceptedTerms,
+    setHasAcceptedTerms,
+  ]);
 
   const onTermsClick = useCallback(() => {
     track("Page Lend TC accepted");
@@ -39,9 +33,7 @@ export default function TermsStep({ route: { params } }: Props) {
 
   const onNext = useCallback(() => {
     if (hasAcceptedTerms)
-      acceptLendingTerms().then(() =>
-        navigation.push(ScreenName.LendingInfo1, params),
-      );
+      acceptLendingTerms().then(() => navigation.push(ScreenName.LendingInfo1, params));
   }, [hasAcceptedTerms, navigation, params]);
 
   return (
@@ -65,12 +57,7 @@ export default function TermsStep({ route: { params } }: Props) {
 
         <LText style={styles.switchLabel}>
           <Trans i18nKey="transfer.lending.terms.switchLabel">
-            <LText
-              onPress={onTermsClick}
-              semiBold
-              style={styles.conditionsText}
-              color="live"
-            />
+            <LText onPress={onTermsClick} semiBold style={styles.conditionsText} color="live" />
           </Trans>
         </LText>
       </View>

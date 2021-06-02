@@ -29,9 +29,7 @@ export default function EditFreeUnit({ account, field }: Props) {
   const { t } = useTranslation();
   const fieldByFamily = useFieldByFamily(field);
 
-  const [fee, setFee] = useState<BigNumber | null | typeof undefined>(
-    fieldByFamily,
-  );
+  const [fee, setFee] = useState<BigNumber | null | typeof undefined>(fieldByFamily);
   const [isModalOpened, setIsModalOpened] = useState(false);
   const [isValid, setIsValid] = useState(true);
   const [transaction, setTransaction] = useState(route.params?.transaction);
@@ -82,11 +80,7 @@ export default function EditFreeUnit({ account, field }: Props) {
             value={fee}
             onChange={onChange}
           />
-          <Touchable
-            event="EditFeeUnitOpen"
-            onPress={onPress}
-            style={styles.unitContainer}
-          >
+          <Touchable event="EditFeeUnitOpen" onPress={onPress} style={styles.unitContainer}>
             <View style={styles.unitSelectRow}>
               <LText secondary semiBold style={styles.unitStyle}>
                 {feeCustomUnit.code}
@@ -108,11 +102,7 @@ export default function EditFreeUnit({ account, field }: Props) {
           />
         </View>
       </View>
-      <BottomModal
-        id="EditFeeUnitModal"
-        isOpened={isModalOpened}
-        onClose={onRequestClose}
-      >
+      <BottomModal id="EditFeeUnitModal" isOpened={isModalOpened} onClose={onRequestClose}>
         <View style={styles.editFeesUnitsModalTitleRow}>
           <LText secondary semiBold style={styles.editFeesUnitModalTitle}>
             {t("send.fees.edit.title")}
@@ -137,10 +127,7 @@ export default function EditFreeUnit({ account, field }: Props) {
                 updateTransaction(item);
               }}
             >
-              <SettingsRow
-                title={item.code}
-                selected={feeCustomUnit === item}
-              />
+              <SettingsRow title={item.code} selected={feeCustomUnit === item} />
             </Touchable>
           )}
         >

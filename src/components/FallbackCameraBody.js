@@ -13,16 +13,9 @@ type Props = {
   buttonTitle: string,
   onPress: () => void,
 };
-function FallbackCameraBody({
-  title,
-  description,
-  buttonTitle,
-  onPress,
-}: Props) {
+function FallbackCameraBody({ title, description, buttonTitle, onPress }: Props) {
   const { colors } = useTheme();
-  const IconSettings = () => (
-    <Icon name="settings" size={16} color={colors.white} />
-  );
+  const IconSettings = () => <Icon name="settings" size={16} color={colors.white} />;
   return (
     <View style={styles.root}>
       <View style={styles.body}>

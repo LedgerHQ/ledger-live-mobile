@@ -42,10 +42,7 @@ function UpgradeToNanoXBanner({ action }: Props) {
           hitSlop={hitSlop}
         >
           <LText semiBold style={[styles.subText]} color="live">
-            <Trans
-              i18nKey="onboarding.stepLegacy.buy"
-              values={getDeviceModel("nanoX")}
-            />
+            <Trans i18nKey="onboarding.stepLegacy.buy" values={getDeviceModel("nanoX")} />
           </LText>
           <IconArrowRight size={16} color={colors.live} />
         </Touchable>

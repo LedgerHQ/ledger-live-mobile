@@ -6,8 +6,7 @@ import { getAccountDelegationSync } from "@ledgerhq/live-common/lib/families/tez
 
 const getExtraSendActionParams = ({ account }: { account: AccountLike }) => {
   const delegation = getAccountDelegationSync(account);
-  const sendShouldWarnDelegation =
-    delegation && delegation.sendShouldWarnDelegation;
+  const sendShouldWarnDelegation = delegation && delegation.sendShouldWarnDelegation;
 
   return sendShouldWarnDelegation
     ? {
@@ -22,8 +21,7 @@ const getExtraSendActionParams = ({ account }: { account: AccountLike }) => {
 
 const getExtraReceiveActionParams = ({ account }: { account: AccountLike }) => {
   const delegation = getAccountDelegationSync(account);
-  const sendShouldWarnDelegation =
-    delegation && delegation.receiveShouldWarnDelegation;
+  const sendShouldWarnDelegation = delegation && delegation.receiveShouldWarnDelegation;
 
   return sendShouldWarnDelegation
     ? {

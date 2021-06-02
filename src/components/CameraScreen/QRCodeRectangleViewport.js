@@ -12,9 +12,7 @@ function QRCodeReactangleViewport({ viewFinderSize }: Props) {
   const borderStyle = { ...styles.border, borderColor: "white" };
   return (
     <View style={styles.row}>
-      <View
-        style={[styles.darken, { backgroundColor: rgba("#142533", 0.4) }]}
-      />
+      <View style={[styles.darken, { backgroundColor: rgba("#142533", 0.4) }]} />
       <View style={{ width: viewFinderSize, height: viewFinderSize }}>
         <View style={styles.innerRow}>
           <View style={[borderStyle, styles.borderLeft, styles.borderTop]} />
@@ -25,14 +23,10 @@ function QRCodeReactangleViewport({ viewFinderSize }: Props) {
         <View style={styles.innerRow}>
           <View style={[borderStyle, styles.borderLeft, styles.borderBottom]} />
           <View style={borderStyle} />
-          <View
-            style={[borderStyle, styles.borderRight, styles.borderBottom]}
-          />
+          <View style={[borderStyle, styles.borderRight, styles.borderBottom]} />
         </View>
       </View>
-      <View
-        style={[styles.darken, { backgroundColor: rgba("#142533", 0.4) }]}
-      />
+      <View style={[styles.darken, { backgroundColor: rgba("#142533", 0.4) }]} />
     </View>
   );
 }

@@ -20,10 +20,7 @@ const totalSteps = "6";
 export default function SendFundsNavigator() {
   const { t } = useTranslation();
   const { colors } = useTheme();
-  const stackNavigationConfig = useMemo(
-    () => getStackNavigatorConfig(colors, true),
-    [colors],
-  );
+  const stackNavigationConfig = useMemo(() => getStackNavigatorConfig(colors, true), [colors]);
   return (
     <Stack.Navigator screenOptions={stackNavigationConfig}>
       <Stack.Screen

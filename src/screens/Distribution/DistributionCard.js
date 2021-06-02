@@ -1,10 +1,7 @@
 // @flow
 import React, { useMemo } from "react";
 import { View, StyleSheet } from "react-native";
-import type {
-  CryptoCurrency,
-  TokenCurrency,
-} from "@ledgerhq/live-common/lib/types/currencies";
+import type { CryptoCurrency, TokenCurrency } from "@ledgerhq/live-common/lib/types/currencies";
 import { getCurrencyColor } from "@ledgerhq/live-common/lib/currencies";
 
 import { useTheme } from "@react-navigation/native";
@@ -33,10 +30,10 @@ export default function DistributionCard({
   highlighting = false,
 }: Props) {
   const { colors } = useTheme();
-  const color = useMemo(
-    () => ensureContrast(getCurrencyColor(currency), colors.background),
-    [colors, currency],
-  );
+  const color = useMemo(() => ensureContrast(getCurrencyColor(currency), colors.background), [
+    colors,
+    currency,
+  ]);
   const percentage = Math.round(distribution * 1e4) / 1e2;
 
   return (
@@ -70,20 +67,12 @@ export default function DistributionCard({
             <View style={styles.rateRow}>
               <CurrencyRate currency={currency} />
               <LText semiBold style={styles.counterValue} color="grey">
-                <CounterValue
-                  currency={currency}
-                  value={amount}
-                  joinFragmentsSeparator=" "
-                />
+                <CounterValue currency={currency} value={amount} joinFragmentsSeparator=" " />
               </LText>
             </View>
             <View style={styles.distributionRow}>
               <ProgressBar progress={percentage} progressColor={color} />
-              <LText
-                semiBold
-                style={styles.percentage}
-                color="smoke"
-              >{`${percentage}%`}</LText>
+              <LText semiBold style={styles.percentage} color="smoke">{`${percentage}%`}</LText>
             </View>
           </>
         ) : null}

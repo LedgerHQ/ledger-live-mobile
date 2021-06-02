@@ -23,19 +23,11 @@ const OnboardingQuizFinal = ({ navigation, route }: *) => {
       sceneProps: {
         image: success ? quizProSuccess : quizProFail,
         title: (
-          <Trans
-            i18nKey={`onboarding.quizz.final.${
-              success ? "successTitle" : "failTitle"
-            }`}
-          />
+          <Trans i18nKey={`onboarding.quizz.final.${success ? "successTitle" : "failTitle"}`} />
         ),
         ctaText: <Trans i18nKey="onboarding.quizz.final.cta" />,
         descs: [
-          <Trans
-            i18nKey={`onboarding.quizz.final.${
-              success ? "successText" : "failText"
-            }`}
-          />,
+          <Trans i18nKey={`onboarding.quizz.final.${success ? "successText" : "failText"}`} />,
         ],
       },
     },

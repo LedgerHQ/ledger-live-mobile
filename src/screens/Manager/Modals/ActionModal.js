@@ -15,13 +15,7 @@ type Props = {
   ...
 };
 
-const ActionModal = ({
-  isOpened,
-  onClose,
-  children,
-  actions = [],
-  ...rest
-}: Props) => (
+const ActionModal = ({ isOpened, onClose, children, actions = [], ...rest }: Props) => (
   <BottomModal
     {...rest}
     isOpened={isOpened}

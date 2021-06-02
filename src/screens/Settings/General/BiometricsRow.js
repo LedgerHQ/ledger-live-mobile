@@ -42,10 +42,7 @@ export default function BiometricsRow({ iconLeft }: Props) {
     error => {
       setValidationPending(false);
       setBiometricsEnabled(val => !val);
-      Alert.alert(
-        t("auth.failed.title"),
-        `${t("auth.failed.denied")}\n${String(error || "")}`,
-      );
+      Alert.alert(t("auth.failed.title"), `${t("auth.failed.denied")}\n${String(error || "")}`);
     },
     [t],
   );

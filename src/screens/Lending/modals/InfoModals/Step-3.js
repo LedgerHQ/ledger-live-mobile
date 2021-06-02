@@ -29,11 +29,7 @@ export default function LendingInfoStep3({ route: { params } }: Props) {
         badgeLabel={<Trans i18nKey="transfer.lending.info.3.label" />}
         illustration={
           <View style={styles.imageContainer}>
-            <Image
-              style={styles.image}
-              resizeMode="contain"
-              source={termsImg}
-            />
+            <Image style={styles.image} resizeMode="contain" source={termsImg} />
           </View>
         }
         ctaLabel={<Trans i18nKey="transfer.lending.info.3.cta" />}

@@ -38,10 +38,7 @@ function usePollingManager() {
 
   useEffect(() => {
     function handleChange(nextAppState) {
-      setIsActive(
-        appState.current.match(/inactive|background/) &&
-          nextAppState === "active",
-      );
+      setIsActive(appState.current.match(/inactive|background/) && nextAppState === "active");
 
       appState.current = nextAppState;
     }

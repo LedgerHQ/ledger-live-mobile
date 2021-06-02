@@ -60,24 +60,15 @@ export default function SendAmount({ navigation, route }: Props) {
   const { colors } = useTheme();
   const { account, parentAccount } = useSelector(accountScreenSelector(route));
   const [maxSpendable, setMaxSpendable] = useState(null);
-  const {
-    modalInfos,
-    modalInfoName,
-    openInfoModal,
-    closeInfoModal,
-  } = useModalInfo();
+  const { modalInfos, modalInfoName, openInfoModal, closeInfoModal } = useModalInfo();
 
-  const {
-    transaction,
-    setTransaction,
-    status,
-    bridgePending,
-    bridgeError,
-  } = useBridgeTransaction(() => ({
-    transaction: route.params.transaction,
-    account,
-    parentAccount,
-  }));
+  const { transaction, setTransaction, status, bridgePending, bridgeError } = useBridgeTransaction(
+    () => ({
+      transaction: route.params.transaction,
+      account,
+      parentAccount,
+    }),
+  );
 
   const debouncedTransaction = useDebounce(transaction, 500);
 
@@ -165,11 +156,7 @@ export default function SendAmount({ navigation, route }: Props) {
 
   return (
     <>
-      <TrackScreen
-        category="SendFunds"
-        name="Amount"
-        currencyName={currency.name}
-      />
+      <TrackScreen category="SendFunds" name="Amount" currencyName={currency.name} />
       <SafeAreaView
         style={[styles.root, { backgroundColor: colors.background }]}
         forceInset={forceInset}
@@ -204,11 +191,7 @@ export default function SendAmount({ navigation, route }: Props) {
                       </LText>
                       {maxSpendable && (
                         <LText semiBold color="grey">
-                          <CurrencyUnitValue
-                            showCode
-                            unit={unit}
-                            value={maxSpendable}
-                          />
+                          <CurrencyUnitValue showCode unit={unit} value={maxSpendable} />
                         </LText>
                       )}
                     </View>
@@ -232,11 +215,7 @@ export default function SendAmount({ navigation, route }: Props) {
                     type="primary"
                     title={
                       <Trans
-                        i18nKey={
-                          !bridgePending
-                            ? "common.continue"
-                            : "send.amount.loadingNetwork"
-                        }
+                        i18nKey={!bridgePending ? "common.continue" : "send.amount.loadingNetwork"}
                       />
                     }
                     onPress={onContinue}
@@ -260,10 +239,7 @@ export default function SendAmount({ navigation, route }: Props) {
         onClose={onBridgeErrorRetry}
         footerButtons={
           <>
-            <CancelButton
-              containerStyle={styles.button}
-              onPress={onBridgeErrorCancel}
-            />
+            <CancelButton containerStyle={styles.button} onPress={onBridgeErrorCancel} />
             <RetryButton
               containerStyle={[styles.button, styles.buttonRight]}
               onPress={onBridgeErrorRetry}
@@ -285,10 +261,7 @@ function useModalInfo(): {
   const { t } = useTranslation();
   const [modalInfoName, setModalInfoName] = useState(null);
 
-  const onMaxSpendableLearnMore = useCallback(
-    () => Linking.openURL(urls.maxSpendable),
-    [],
-  );
+  const onMaxSpendableLearnMore = useCallback(() => Linking.openURL(urls.maxSpendable), []);
 
   return {
     openInfoModal: (infoName: ModalInfoName) => setModalInfoName(infoName),

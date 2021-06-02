@@ -32,12 +32,7 @@ const PendingOperation = () => {
       forceInset={forceInset}
     >
       <View style={styles.wrapper}>
-        <View
-          style={[
-            styles.iconWrapper,
-            { backgroundColor: rgba(colors.live, 0.1) },
-          ]}
-        >
+        <View style={[styles.iconWrapper, { backgroundColor: rgba(colors.live, 0.1) }]}>
           <IconSwap color={colors.live} size={20} />
         </View>
         <LText secondary style={styles.title}>
@@ -47,11 +42,7 @@ const PendingOperation = () => {
           <LText style={styles.swapLabel} color="grey">
             <Trans i18nKey={"transfer.swap.pendingOperation.label"} />
           </LText>
-          <LText
-            selectable
-            tertiary
-            style={[styles.swapID, { backgroundColor: colors.lightFog }]}
-          >
+          <LText selectable tertiary style={[styles.swapID, { backgroundColor: colors.lightFog }]}>
             {swapId}
           </LText>
         </View>
@@ -60,10 +51,7 @@ const PendingOperation = () => {
         </LText>
 
         <Alert type="primary">
-          <Trans
-            i18nKey={"transfer.swap.pendingOperation.disclaimer"}
-            values={{ provider }}
-          />
+          <Trans i18nKey={"transfer.swap.pendingOperation.disclaimer"} values={{ provider }} />
         </Alert>
       </View>
       <View style={styles.continueWrapper}>

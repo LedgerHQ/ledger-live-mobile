@@ -72,10 +72,7 @@ function OnboardingStepUseCaseSelection({ navigation, route }: Props) {
     [deviceModelId],
   );
   return (
-    <AnimatedHeaderView
-      hasBackButton
-      title={<Trans i18nKey="onboarding.stepUseCase.title" />}
-    >
+    <AnimatedHeaderView hasBackButton title={<Trans i18nKey="onboarding.stepUseCase.title" />}>
       <TrackScreen category="Onboarding" name="UseCase" />
       <FlatList
         data={useCases}
@@ -98,20 +95,14 @@ function OnboardingStepUseCaseSelection({ navigation, route }: Props) {
                 <Trans i18nKey={`onboarding.stepUseCase.${item.key}.label`} />
               </LText>
               <LText semiBold style={styles.subTitle}>
-                <Trans
-                  i18nKey={`onboarding.stepUseCase.${item.key}.subTitle`}
-                />
+                <Trans i18nKey={`onboarding.stepUseCase.${item.key}.subTitle`} />
               </LText>
               <LText style={styles.desc}>
                 <Trans i18nKey={`onboarding.stepUseCase.${item.key}.desc`} />
               </LText>
               <View style={styles.imageContainer}>
                 {item.image && (
-                  <Image
-                    style={styles.image}
-                    resizeMode="contain"
-                    source={item.image}
-                  />
+                  <Image style={styles.image} resizeMode="contain" source={item.image} />
                 )}
               </View>
             </Touchable>

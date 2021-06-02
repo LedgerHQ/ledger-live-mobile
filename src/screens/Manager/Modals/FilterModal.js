@@ -196,11 +196,7 @@ const FilterModalComponent = ({
   ];
 
   return (
-    <ActionModal
-      isOpened={isOpened}
-      onClose={onFilter}
-      actions={onFilterActions}
-    >
+    <ActionModal isOpened={isOpened} onClose={onFilter} actions={onFilterActions}>
       <SectionList
         style={styles.list}
         sections={filterSections}

@@ -5,16 +5,10 @@ import React, { useCallback } from "react";
 import { StyleSheet, View, TouchableOpacity, SafeAreaView } from "react-native";
 import { useSelector } from "react-redux";
 import { Trans, useTranslation } from "react-i18next";
-import type {
-  Transaction,
-  TokenCurrency,
-} from "@ledgerhq/live-common/lib/types";
+import type { Transaction, TokenCurrency } from "@ledgerhq/live-common/lib/types";
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
-import {
-  findCompoundToken,
-  formatCurrencyUnit,
-} from "@ledgerhq/live-common/lib/currencies";
+import { findCompoundToken, formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
 import { useTheme } from "@react-navigation/native";
 import { accountScreenSelector } from "../../../../reducers/accounts";
 import { rgba } from "../../../../colors";
@@ -53,37 +47,30 @@ export default function SendAmount({ navigation, route }: Props) {
   const discreet = useSelector(discreetModeSelector);
   const { currency, transaction: tx } = route.params;
   const { account, parentAccount } = useSelector(accountScreenSelector(route));
-  invariant(
-    account && account.type === "TokenAccount",
-    "token account required",
+  invariant(account && account.type === "TokenAccount", "token account required");
+
+  const { transaction, setTransaction, status, bridgePending, bridgeError } = useBridgeTransaction(
+    () => {
+      const bridge = getAccountBridge(account, parentAccount);
+      const ctoken = findCompoundToken(account.token);
+
+      // $FlowFixMe
+      const t = bridge.createTransaction(account);
+
+      const transaction =
+        tx ||
+        bridge.updateTransaction(t, {
+          recipient: ctoken?.contractAddress || "",
+          mode: "erc20.approve",
+          useAllAmount: true,
+          gasPrice: null,
+          userGasLimit: null,
+          subAccountId: account.id,
+        });
+
+      return { account, parentAccount, transaction };
+    },
   );
-
-  const {
-    transaction,
-    setTransaction,
-    status,
-    bridgePending,
-    bridgeError,
-  } = useBridgeTransaction(() => {
-    const bridge = getAccountBridge(account, parentAccount);
-    const ctoken = findCompoundToken(account.token);
-
-    // $FlowFixMe
-    const t = bridge.createTransaction(account);
-
-    const transaction =
-      tx ||
-      bridge.updateTransaction(t, {
-        recipient: ctoken?.contractAddress || "",
-        mode: "erc20.approve",
-        useAllAmount: true,
-        gasPrice: null,
-        userGasLimit: null,
-        subAccountId: account.id,
-      });
-
-    return { account, parentAccount, transaction };
-  });
 
   invariant(transaction, "transaction required");
 
@@ -156,9 +143,7 @@ export default function SendAmount({ navigation, route }: Props) {
         eventProperties={{ currencyName: currency.name }}
       />
       <LendingWarnings />
-      <SafeAreaView
-        style={[styles.root, { backgroundColor: colors.background }]}
-      >
+      <SafeAreaView style={[styles.root, { backgroundColor: colors.background }]}>
         <View style={styles.container}>
           <LinkedIcons
             left={
@@ -175,11 +160,7 @@ export default function SendAmount({ navigation, route }: Props) {
                   semiBold
                   numberOfLines={1}
                 >
-                  <CurrencyUnitValue
-                    showCode
-                    unit={unit}
-                    value={spendableBalance}
-                  />
+                  <CurrencyUnitValue showCode unit={unit} value={spendableBalance} />
                 </LText>
               </View>
             }
@@ -212,10 +193,7 @@ export default function SendAmount({ navigation, route }: Props) {
               <LText
                 numberOfLines={1}
                 semiBold
-                style={[
-                  styles.liveLabel,
-                  { backgroundColor: colors.lightLive },
-                ]}
+                style={[styles.liveLabel, { backgroundColor: colors.lightLive }]}
                 color="live"
               />
             </Trans>
@@ -249,10 +227,7 @@ export default function SendAmount({ navigation, route }: Props) {
         onClose={onBridgeErrorRetry}
         footerButtons={
           <>
-            <CancelButton
-              containerStyle={styles.button}
-              onPress={onBridgeErrorCancel}
-            />
+            <CancelButton containerStyle={styles.button} onPress={onBridgeErrorCancel} />
             <RetryButton
               containerStyle={[styles.button, styles.buttonRight]}
               onPress={onBridgeErrorRetry}

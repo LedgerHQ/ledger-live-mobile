@@ -56,9 +56,7 @@ class ConfirmationModal extends PureComponent<Props> {
         {...rest}
       >
         {Icon && (
-          <View
-            style={[styles.icon, { backgroundColor: rgba(colors.live, 0.08) }]}
-          >
+          <View style={[styles.icon, { backgroundColor: rgba(colors.live, 0.08) }]}>
             <Icon size={24} color={colors.live} />
           </View>
         )}
@@ -90,10 +88,7 @@ class ConfirmationModal extends PureComponent<Props> {
 
           <Button
             event="ConfirmationModalConfirm"
-            containerStyle={[
-              styles.confirmationButton,
-              styles.confirmationLastButton,
-            ]}
+            containerStyle={[styles.confirmationButton, styles.confirmationLastButton]}
             type={alert ? "alert" : "primary"}
             title={confirmButtonText || <Trans i18nKey="common.confirm" />}
             onPress={onConfirm}

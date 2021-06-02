@@ -17,12 +17,7 @@ type Props = {
   isModalOpened?: boolean,
 };
 
-const AppUpdateAll = ({
-  state,
-  appsToUpdate,
-  dispatch,
-  isModalOpened,
-}: Props) => {
+const AppUpdateAll = ({ state, appsToUpdate, dispatch, isModalOpened }: Props) => {
   const { colors } = useTheme();
   const { updateAllQueue } = state;
   const [modalOpen, setModalOpen] = useState(isModalOpened);

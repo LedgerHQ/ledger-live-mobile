@@ -34,10 +34,7 @@ import type { State } from ".";
 const bitcoin = getCryptoCurrencyById("bitcoin");
 const ethereum = getCryptoCurrencyById("ethereum");
 export const possibleIntermediaries = [bitcoin, ethereum];
-export const supportedCountervalues = [
-  ...listSupportedFiats(),
-  ...possibleIntermediaries,
-];
+export const supportedCountervalues = [...listSupportedFiats(), ...possibleIntermediaries];
 export const intermediaryCurrency = (from: Currency, _to: Currency) => {
   if (from === ethereum || from.type === "TokenCurrency") return ethereum;
   return bitcoin;
@@ -136,16 +133,12 @@ const handlers: Object = {
   SETTINGS_IMPORT_DESKTOP: (state: SettingsState, { settings }) => {
     const { developerModeEnabled, ...rest } = settings;
 
-    if (developerModeEnabled !== undefined)
-      setEnvUnsafe("MANAGER_DEV_MODE", developerModeEnabled);
+    if (developerModeEnabled !== undefined) setEnvUnsafe("MANAGER_DEV_MODE", developerModeEnabled);
 
     return {
       ...state,
       ...rest,
-      currenciesSettings: merge(
-        state.currenciesSettings,
-        settings.currenciesSettings,
-      ),
+      currenciesSettings: merge(state.currenciesSettings, settings.currenciesSettings),
     };
   },
   UPDATE_CURRENCY_SETTINGS: (
@@ -176,10 +169,7 @@ const handlers: Object = {
     privacy: null,
   }),
 
-  SETTINGS_SET_REPORT_ERRORS: (
-    state: SettingsState,
-    { reportErrorsEnabled },
-  ) => ({
+  SETTINGS_SET_REPORT_ERRORS: (state: SettingsState, { reportErrorsEnabled }) => ({
     ...state,
     reportErrorsEnabled,
   }),
@@ -189,10 +179,7 @@ const handlers: Object = {
     analyticsEnabled,
   }),
 
-  SETTINGS_SET_HAS_ACCEPTED_SWAP_KYC: (
-    state: SettingsState,
-    { hasAcceptedSwapKYC },
-  ) => ({
+  SETTINGS_SET_HAS_ACCEPTED_SWAP_KYC: (state: SettingsState, { hasAcceptedSwapKYC }) => ({
     ...state,
     hasAcceptedSwapKYC,
   }),
@@ -228,10 +215,7 @@ const handlers: Object = {
     return copy;
   },
 
-  SETTINGS_SET_SELECTED_TIME_RANGE: (
-    state,
-    { payload: selectedTimeRange },
-  ) => ({
+  SETTINGS_SET_SELECTED_TIME_RANGE: (state, { payload: selectedTimeRange }) => ({
     ...state,
     selectedTimeRange,
   }),
@@ -329,8 +313,7 @@ export const counterValueCurrencySelector = createSelector(
   counterValueCurrencyLocalSelector,
 );
 
-const counterValueExchangeLocalSelector = (s: SettingsState) =>
-  s.counterValueExchange;
+const counterValueExchangeLocalSelector = (s: SettingsState) => s.counterValueExchange;
 
 // $FlowFixMe
 export const counterValueExchangeSelector = createSelector(
@@ -341,18 +324,13 @@ export const counterValueExchangeSelector = createSelector(
 const defaultCurrencySettingsForCurrency: Currency => CurrencySettings = crypto => {
   const defaults = currencySettingsDefaults(crypto);
   return {
-    confirmationsNb: defaults.confirmationsNb
-      ? defaults.confirmationsNb.def
-      : 0,
+    confirmationsNb: defaults.confirmationsNb ? defaults.confirmationsNb.def : 0,
     exchange: null,
   };
 };
 
 // DEPRECATED
-export const currencySettingsSelector = (
-  state: State,
-  { currency }: { currency: Currency },
-) => ({
+export const currencySettingsSelector = (state: State, { currency }: { currency: Currency }) => ({
   ...defaultCurrencySettingsForCurrency(currency),
   ...state.settings.currenciesSettings[currency.ticker],
 });
@@ -367,10 +345,7 @@ export const reportErrorsEnabledSelector = createSelector(
 );
 
 // $FlowFixMe
-export const analyticsEnabledSelector = createSelector(
-  storeSelector,
-  s => s.analyticsEnabled,
-);
+export const analyticsEnabledSelector = createSelector(storeSelector, s => s.analyticsEnabled);
 
 // $FlowFixMe
 export const experimentalUSBEnabledSelector = createSelector(
@@ -378,10 +353,8 @@ export const experimentalUSBEnabledSelector = createSelector(
   s => s.experimentalUSBEnabled,
 );
 
-export const currencySettingsForAccountSelector = (
-  s: *,
-  { account }: { account: AccountLike },
-) => currencySettingsSelector(s, { currency: getAccountCurrency(account) });
+export const currencySettingsForAccountSelector = (s: *, { account }: { account: AccountLike }) =>
+  currencySettingsSelector(s, { currency: getAccountCurrency(account) });
 
 export const exchangeSettingsForPairSelector = (
   state: State,
@@ -398,29 +371,23 @@ export const confirmationsNbForCurrencySelector = (
   return defs.confirmationsNb ? defs.confirmationsNb.def : 0;
 };
 
-export const selectedTimeRangeSelector = (state: State) =>
-  state.settings.selectedTimeRange;
+export const selectedTimeRangeSelector = (state: State) => state.settings.selectedTimeRange;
 
-export const orderAccountsSelector = (state: State) =>
-  state.settings.orderAccounts;
+export const orderAccountsSelector = (state: State) => state.settings.orderAccounts;
 
 export const hasCompletedOnboardingSelector = (state: State) =>
   state.settings.hasCompletedOnboarding;
 
-export const hasAcceptedSwapKYCSelector = (state: State) =>
-  state.settings.hasAcceptedSwapKYC;
+export const hasAcceptedSwapKYCSelector = (state: State) => state.settings.hasAcceptedSwapKYC;
 
-export const hasInstalledAnyAppSelector = (state: State) =>
-  state.settings.hasInstalledAnyApp;
+export const hasInstalledAnyAppSelector = (state: State) => state.settings.hasInstalledAnyApp;
 
-export const countervalueFirstSelector = (state: State) =>
-  state.settings.countervalueFirst;
+export const countervalueFirstSelector = (state: State) => state.settings.countervalueFirst;
 
 export const readOnlyModeEnabledSelector = (state: State) =>
   Platform.OS !== "android" && state.settings.readOnlyModeEnabled;
 
-export const blacklistedTokenIdsSelector = (state: State) =>
-  state.settings.blacklistedTokenIds;
+export const blacklistedTokenIdsSelector = (state: State) => state.settings.blacklistedTokenIds;
 
 // $FlowFixMe
 export const exportSettingsSelector = createSelector(
@@ -428,12 +395,7 @@ export const exportSettingsSelector = createSelector(
   () => getEnv("MANAGER_DEV_MODE"),
   state => state.settings.currenciesSettings,
   state => state.settings.pairExchanges,
-  (
-    counterValueCurrency,
-    developerModeEnabled,
-    currenciesSettings,
-    pairExchanges,
-  ) => ({
+  (counterValueCurrency, developerModeEnabled, currenciesSettings, pairExchanges) => ({
     counterValue: counterValueCurrency.ticker,
     currenciesSettings,
     pairExchanges,
@@ -444,17 +406,13 @@ export const exportSettingsSelector = createSelector(
 export const hideEmptyTokenAccountsEnabledSelector = (state: State) =>
   state.settings.hideEmptyTokenAccounts;
 
-export const dismissedBannersSelector = (state: State) =>
-  state.settings.dismissedBanners;
+export const dismissedBannersSelector = (state: State) => state.settings.dismissedBanners;
 
-export const hasAvailableUpdateSelector = (state: State) =>
-  state.settings.hasAvailableUpdate;
+export const hasAvailableUpdateSelector = (state: State) => state.settings.hasAvailableUpdate;
 
-export const swapProvidersSelector = (state: State) =>
-  state.settings.swapProviders;
+export const swapProvidersSelector = (state: State) => state.settings.swapProviders;
 
-export const carouselVisibilitySelector = (state: State) =>
-  state.settings.carouselVisibility;
+export const carouselVisibilitySelector = (state: State) => state.settings.carouselVisibility;
 
 export const swapSupportedCurrenciesSelector: OutputSelector<
   State,
@@ -504,8 +462,7 @@ export const flattenedSwapSupportedCurrenciesSelector: OutputSelector<
   return uniq(out);
 });
 
-export const discreetModeSelector = (state: State): boolean =>
-  state.settings.discreetMode === true;
+export const discreetModeSelector = (state: State): boolean => state.settings.discreetMode === true;
 
 export default handleActions(handlers, INITIAL_STATE);
 

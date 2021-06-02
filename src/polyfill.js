@@ -40,11 +40,7 @@ function setupDirtyHackToHandleLibcoreDoubleCallback() {
   const { ErrorUtils } = global;
   ErrorUtils.setGlobalHandler((e, isFatal) => {
     try {
-      if (
-        e.message.match(
-          /only one callback may be registered to a function in a native module/,
-        )
-      ) {
+      if (e.message.match(/only one callback may be registered to a function in a native module/)) {
         return;
       }
       const ExceptionsManager = require("../node_modules/react-native/Libraries/Core/ExceptionsManager.js");

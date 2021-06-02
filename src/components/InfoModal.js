@@ -50,12 +50,7 @@ const InfoModal = ({
 }: InfoModalProps) => {
   const { colors } = useTheme();
   return (
-    <BottomModal
-      id={id}
-      isOpened={isOpened}
-      onClose={onClose}
-      style={[styles.modal, style || {}]}
-    >
+    <BottomModal id={id} isOpened={isOpened} onClose={onClose} style={[styles.modal, style || {}]}>
       <Circle bg={rgba(colors.live, 0.1)} size={56}>
         {Icon ? <Icon /> : <IconHelp size={24} color={colors.live} />}
       </Circle>
@@ -77,12 +72,7 @@ const InfoModal = ({
           ))}
         </View>
       ) : null}
-      <View
-        style={[
-          !title && !desc && !bullets ? styles.childrenContainer : null,
-          containerStyle,
-        ]}
-      >
+      <View style={[!title && !desc && !bullets ? styles.childrenContainer : null, containerStyle]}>
         {children}
       </View>
 

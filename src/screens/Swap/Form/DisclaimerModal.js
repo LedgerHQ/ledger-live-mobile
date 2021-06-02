@@ -22,12 +22,7 @@ const DisclaimerModal = ({
 }) => {
   const { colors } = useTheme();
   return (
-    <BottomModal
-      id="SwapDisclaimerModal"
-      isOpened={true}
-      onClose={undefined}
-      style={styles.root}
-    >
+    <BottomModal id="SwapDisclaimerModal" isOpened={true} onClose={undefined} style={styles.root}>
       <Circle bg={colors.pillActiveBackground} size={40}>
         <Icon name="exclamationcircleo" color={colors.live} size={22} />
       </Circle>
@@ -35,10 +30,7 @@ const DisclaimerModal = ({
         <Trans i18nKey={"transfer.swap.form.summary.disclaimer.title"} />
       </LText>
       <LText style={styles.desc} color="smoke">
-        <Trans
-          i18nKey={"transfer.swap.form.summary.disclaimer.desc"}
-          values={{ provider }}
-        />
+        <Trans i18nKey={"transfer.swap.form.summary.disclaimer.desc"} values={{ provider }} />
       </LText>
       <ExternalLink
         text={<Trans i18nKey="transfer.swap.form.summary.disclaimer.tos" />}
@@ -50,9 +42,7 @@ const DisclaimerModal = ({
         onPress={onContinue}
         type={"primary"}
         event={"SwapAcceptSummaryDisclaimer"}
-        title={
-          <Trans i18nKey={`transfer.swap.form.summary.disclaimer.accept`} />
-        }
+        title={<Trans i18nKey={`transfer.swap.form.summary.disclaimer.accept`} />}
       />
       <Button
         containerStyle={styles.button}
@@ -60,9 +50,7 @@ const DisclaimerModal = ({
         onPress={onClose}
         type={"secondary"}
         event={"SwaprejectSummaryDisclaimer"}
-        title={
-          <Trans i18nKey={`transfer.swap.form.summary.disclaimer.reject`} />
-        }
+        title={<Trans i18nKey={`transfer.swap.form.summary.disclaimer.reject`} />}
       />
     </BottomModal>
   );

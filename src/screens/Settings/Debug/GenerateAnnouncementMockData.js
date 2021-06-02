@@ -6,11 +6,7 @@ import { useAnnouncements } from "@ledgerhq/live-common/lib/notifications/Announ
 
 import SettingsRow from "../../../components/SettingsRow";
 
-export default function AddMockAnnouncementButton({
-  title,
-}: {
-  title: string,
-}) {
+export default function AddMockAnnouncementButton({ title }: { title: string }) {
   const { updateCache } = useAnnouncements();
   return getEnv("MOCK") ? (
     <SettingsRow

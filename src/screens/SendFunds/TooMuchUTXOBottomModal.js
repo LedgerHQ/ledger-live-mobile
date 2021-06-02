@@ -26,9 +26,7 @@ function ConfirmationModal({ isOpened, onClose, onPress, ...rest }: Props) {
       onClose={onClose}
       style={styles.confirmationModal}
     >
-      {isOpened ? (
-        <TrackScreen category="LendingNoTokenAccountInfoModal" />
-      ) : null}
+      {isOpened ? <TrackScreen category="LendingNoTokenAccountInfoModal" /> : null}
       <View style={[styles.icon, { backgroundColor: colors.lightOrange }]}>
         <Info size={24} color={colors.orange} />
       </View>

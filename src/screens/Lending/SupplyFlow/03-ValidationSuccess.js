@@ -41,10 +41,7 @@ export default function ValidationSuccess({ navigation, route }: Props) {
     navigation.navigate(ScreenName.OperationDetails, {
       accountId: account.id,
       parentId: parentAccount && parentAccount.id,
-      operation:
-        result.subOperations && result.subOperations[0]
-          ? result.subOperations[0]
-          : result,
+      operation: result.subOperations && result.subOperations[0] ? result.subOperations[0] : result,
     });
   }, [account, route.params?.result, navigation, parentAccount]);
 
@@ -60,9 +57,7 @@ export default function ValidationSuccess({ navigation, route }: Props) {
       <PreventNativeBack />
       <ValidateSuccess
         title={<Trans i18nKey="transfer.lending.supply.validation.success" />}
-        description={
-          <Trans i18nKey="transfer.lending.supply.validation.info" />
-        }
+        description={<Trans i18nKey="transfer.lending.supply.validation.info" />}
         info={<Trans i18nKey="transfer.lending.supply.validation.extraInfo" />}
         onLearnMore={() => {
           Linking.openURL(urls.approvedOperation);

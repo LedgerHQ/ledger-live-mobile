@@ -30,10 +30,7 @@ export default function StellarMemoValueRow({ account, transaction }: Props) {
   return (
     <View>
       {!memoType || !memoValue ? (
-        <SummaryRow
-          title={<Trans i18nKey="stellar.memo.title" />}
-          onPress={editMemo}
-        >
+        <SummaryRow title={<Trans i18nKey="stellar.memo.title" />} onPress={editMemo}>
           <LText
             style={[
               styles.link,
@@ -49,9 +46,7 @@ export default function StellarMemoValueRow({ account, transaction }: Props) {
         </SummaryRow>
       ) : (
         <SummaryRow
-          title={
-            <Trans i18nKey={`stellar.memoType.${memoType || "NO_MEMO"}`} />
-          }
+          title={<Trans i18nKey={`stellar.memoType.${memoType || "NO_MEMO"}`} />}
           onPress={editMemo}
         >
           <LText semiBold style={styles.tagText} onPress={editMemo}>

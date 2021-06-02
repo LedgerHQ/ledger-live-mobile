@@ -46,11 +46,7 @@ class Spinning extends Component<Props> {
       outputRange: clockwise ? ["0deg", "360deg"] : ["360deg", "0deg"],
     });
 
-    return (
-      <Animated.View style={{ transform: [{ rotate }] }}>
-        {children}
-      </Animated.View>
-    );
+    return <Animated.View style={{ transform: [{ rotate }] }}>{children}</Animated.View>;
   }
 }
 

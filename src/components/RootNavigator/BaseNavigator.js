@@ -1,17 +1,11 @@
 // @flow
 import React, { useMemo } from "react";
-import {
-  createStackNavigator,
-  CardStyleInterpolators,
-} from "@react-navigation/stack";
+import { createStackNavigator, CardStyleInterpolators } from "@react-navigation/stack";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "@react-navigation/native";
 import { ScreenName, NavigatorName } from "../../const";
 import * as families from "../../families";
-import OperationDetails, {
-  BackButton,
-  CloseButton,
-} from "../../screens/OperationDetails";
+import OperationDetails, { BackButton, CloseButton } from "../../screens/OperationDetails";
 import PairDevices from "../../screens/PairDevices";
 import EditDeviceName from "../../screens/EditDeviceName";
 import Distribution from "../../screens/Distribution";
@@ -58,17 +52,10 @@ import AccountHeaderRight from "../../screens/Account/AccountHeaderRight";
 export default function BaseNavigator() {
   const { t } = useTranslation();
   const { colors } = useTheme();
-  const stackNavigationConfig = useMemo(
-    () => getStackNavigatorConfig(colors, true),
-    [colors],
-  );
+  const stackNavigationConfig = useMemo(() => getStackNavigatorConfig(colors, true), [colors]);
   return (
     <Stack.Navigator mode="modal" screenOptions={stackNavigationConfig}>
-      <Stack.Screen
-        name={NavigatorName.Main}
-        component={Main}
-        options={{ headerShown: false }}
-      />
+      <Stack.Screen name={NavigatorName.Main} component={Main} options={{ headerShown: false }} />
       <Stack.Screen
         name={NavigatorName.ReceiveFunds}
         component={ReceiveFundsNavigator}
@@ -213,11 +200,7 @@ export default function BaseNavigator() {
         options={({ navigation, route }) => ({
           title: null,
           headerRight: () => (
-            <ErrorHeaderInfo
-              route={route}
-              navigation={navigation}
-              colors={colors}
-            />
+            <ErrorHeaderInfo route={route} navigation={navigation} colors={colors} />
           ),
           headerShown: true,
           headerStyle: styles.headerNoShadow,
@@ -267,9 +250,7 @@ export default function BaseNavigator() {
         name={ScreenName.Account}
         component={Account}
         options={({ route, navigation }) => ({
-          headerLeft: () => (
-            <BackButton navigation={navigation} route={route} />
-          ),
+          headerLeft: () => <BackButton navigation={navigation} route={route} />,
           headerTitle: () => <AccountHeaderTitle />,
           headerRight: () => <AccountHeaderRight />,
         })}
@@ -280,9 +261,7 @@ export default function BaseNavigator() {
         options={{
           ...TransparentHeaderNavigationOptions,
           title: t("send.scan.title"),
-          headerRight: () => (
-            <HeaderRightClose color={colors.white} preferDismiss={false} />
-          ),
+          headerRight: () => <HeaderRightClose color={colors.white} preferDismiss={false} />,
           headerLeft: null,
         }}
       />
@@ -292,9 +271,7 @@ export default function BaseNavigator() {
         options={{
           ...TransparentHeaderNavigationOptions,
           title: "Wallet Connect",
-          headerRight: () => (
-            <HeaderRightClose color={colors.white} preferDismiss={false} />
-          ),
+          headerRight: () => <HeaderRightClose color={colors.white} preferDismiss={false} />,
           headerLeft: null,
         }}
       />
@@ -337,14 +314,7 @@ export default function BaseNavigator() {
       />
       {Object.keys(families).map(name => {
         const { component, options } = families[name];
-        return (
-          <Stack.Screen
-            key={name}
-            name={name}
-            component={component}
-            options={options}
-          />
-        );
+        return <Stack.Screen key={name} name={name} component={component} options={options} />;
       })}
     </Stack.Navigator>
   );

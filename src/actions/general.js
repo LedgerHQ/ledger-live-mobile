@@ -14,10 +14,7 @@ import {
 import { useDistribution as useDistributionCommon } from "@ledgerhq/live-common/lib/portfolio/v2/react";
 import { reorderAccounts } from "./accounts";
 import { accountsSelector } from "../reducers/accounts";
-import {
-  counterValueCurrencySelector,
-  orderAccountsSelector,
-} from "../reducers/settings";
+import { counterValueCurrencySelector, orderAccountsSelector } from "../reducers/settings";
 import { clearBridgeCache } from "../bridge/cache";
 import clearLibcore from "../helpers/clearLibcore";
 import { flushAll } from "../components/DBSave";

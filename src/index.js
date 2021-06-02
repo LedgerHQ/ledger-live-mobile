@@ -5,30 +5,13 @@ import "./live-common-setup";
 import "./implement-react-native-libcore";
 import "../e2e/e2e-bridge-setup";
 import "react-native-gesture-handler";
-import React, {
-  Component,
-  useCallback,
-  useContext,
-  useMemo,
-  useEffect,
-} from "react";
+import React, { Component, useCallback, useContext, useMemo, useEffect } from "react";
 import { connect, useDispatch, useSelector } from "react-redux";
-import {
-  StyleSheet,
-  View,
-  Text,
-  Linking,
-  Appearance,
-  AppState,
-} from "react-native";
+import { StyleSheet, View, Text, Linking, Appearance, AppState } from "react-native";
 import SplashScreen from "react-native-splash-screen";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { I18nextProvider } from "react-i18next";
-import {
-  useLinking,
-  NavigationContainer,
-  getStateFromPath,
-} from "@react-navigation/native";
+import { useLinking, NavigationContainer, getStateFromPath } from "@react-navigation/native";
 import Transport from "@ledgerhq/hw-transport";
 import { NotEnoughBalance } from "@ledgerhq/errors";
 import { log } from "@ledgerhq/logs";
@@ -62,9 +45,7 @@ import useDBSaveEffect from "./components/DBSave";
 import useAppStateListener from "./components/useAppStateListener";
 import SyncNewAccounts from "./bridge/SyncNewAccounts";
 import { OnboardingContextProvider } from "./screens/Onboarding/onboardingContext";
-import WalletConnectProvider, {
-  context as _wcContext,
-} from "./screens/WalletConnect/Provider";
+import WalletConnectProvider, { context as _wcContext } from "./screens/WalletConnect/Provider";
 import HookAnalytics from "./analytics/HookAnalytics";
 import HookSentry from "./components/HookSentry";
 import RootNavigator from "./components/RootNavigator";
@@ -115,10 +96,7 @@ type AppProps = {
 function App({ importDataString }: AppProps) {
   useAppStateListener();
 
-  const getSettingsChanged = useCallback(
-    (a, b) => a.settings !== b.settings,
-    [],
-  );
+  const getSettingsChanged = useCallback((a, b) => a.settings !== b.settings, []);
 
   const getAccountsChanged = useCallback((oldState: State, newState: State): ?{
     changed: string[],
@@ -138,9 +116,7 @@ function App({ importDataString }: AppProps) {
 
   const rawState = useCountervaluesExport();
   const trackingPairs = useTrackingPairs();
-  const pairIds = useMemo(() => trackingPairs.map(p => pairId(p)), [
-    trackingPairs,
-  ]);
+  const pairIds = useMemo(() => trackingPairs.map(p => pairId(p)), [trackingPairs]);
 
   useDBSaveEffect({
     save: saveCountervalues,
@@ -309,8 +285,7 @@ const DeepLinkingNavigator = ({ children }: { children: React$Node }) => {
   const hasCompletedOnboarding = useSelector(hasCompletedOnboardingSelector);
   const wcContext = useContext(_wcContext);
 
-  const enabled =
-    hasCompletedOnboarding && wcContext.initDone && !wcContext.session.session;
+  const enabled = hasCompletedOnboarding && wcContext.initDone && !wcContext.session.session;
 
   const { getInitialState } = useLinking(navigationRef, {
     ...linking,
@@ -357,8 +332,7 @@ const DeepLinkingNavigator = ({ children }: { children: React$Node }) => {
     const currentOsTheme = Appearance.getColorScheme();
     if (currentOsTheme && osTheme !== currentOsTheme) {
       const isDark = themes[theme].dark;
-      const newTheme =
-        currentOsTheme === "dark" ? (isDark ? theme : "dusk") : "light";
+      const newTheme = currentOsTheme === "dark" ? (isDark ? theme : "dusk") : "light";
       dispatch(setTheme(newTheme));
       dispatch(setOsTheme(currentOsTheme));
     }
@@ -366,8 +340,7 @@ const DeepLinkingNavigator = ({ children }: { children: React$Node }) => {
 
   useEffect(() => {
     compareOsTheme();
-    const osThemeChangeHandler = nextAppState =>
-      nextAppState === "active" && compareOsTheme();
+    const osThemeChangeHandler = nextAppState => nextAppState === "active" && compareOsTheme();
     AppState.addEventListener("change", osThemeChangeHandler);
     return () => AppState.removeEventListener("change", osThemeChangeHandler);
   }, [compareOsTheme]);
@@ -390,10 +363,7 @@ const DeepLinkingNavigator = ({ children }: { children: React$Node }) => {
   );
 };
 
-export default class Root extends Component<
-  { importDataString?: string },
-  { appState: * },
-> {
+export default class Root extends Component<{ importDataString?: string }, { appState: * }> {
   initTimeout: *;
 
   componentWillUnmount() {
@@ -435,17 +405,13 @@ export default class Root extends Component<
                         <I18nextProvider i18n={i18n}>
                           <LocaleProvider>
                             <BridgeSyncProvider>
-                              <CounterValuesProvider
-                                initialState={initialCountervalues}
-                              >
+                              <CounterValuesProvider initialState={initialCountervalues}>
                                 <ButtonUseTouchable.Provider value={true}>
                                   <OnboardingContextProvider>
                                     <ToastProvider>
                                       <NotificationsProvider>
                                         <SnackbarContainer />
-                                        <App
-                                          importDataString={importDataString}
-                                        />
+                                        <App importDataString={importDataString} />
                                       </NotificationsProvider>
                                     </ToastProvider>
                                   </OnboardingContextProvider>

@@ -69,15 +69,11 @@ function AppDependenciesModal({
         <>
           <View style={styles.imageSection}>
             <AppIcon style={styles.appIcons} app={app} />
-            <View
-              style={[styles.separator, { borderColor: colors.lightLive }]}
-            />
+            <View style={[styles.separator, { borderColor: colors.lightLive }]} />
             <InfoIcon bg={colors.lightLive} size={30}>
               <LinkIcon color={colors.live} />
             </InfoIcon>
-            <View
-              style={[styles.separator, { borderColor: colors.lightLive }]}
-            />
+            <View style={[styles.separator, { borderColor: colors.lightLive }]} />
             <AppIcon style={styles.appIcons} app={dependencies[0]} />
           </View>
           <View style={styles.infoRow}>

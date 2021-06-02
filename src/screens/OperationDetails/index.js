@@ -36,10 +36,7 @@ export const BackButton = ({ navigation }: { navigation: * }) => {
   const { colors } = useTheme();
 
   return (
-    <TouchableOpacity
-      style={styles.buttons}
-      onPress={() => navigation.goBack()}
-    >
+    <TouchableOpacity style={styles.buttons} onPress={() => navigation.goBack()}>
       <ArrowLeft size={18} color={colors.grey} />
     </TouchableOpacity>
   );
@@ -65,15 +62,10 @@ export default function OperationDetails({ route }: Props) {
   if (!account) return null;
   const operation = route.params?.operation;
   const mainAccount = getMainAccount(account, parentAccount);
-  const url = getTransactionExplorer(
-    getDefaultExplorerView(mainAccount.currency),
-    operation.hash,
-  );
+  const url = getTransactionExplorer(getDefaultExplorerView(mainAccount.currency), operation.hash);
   const specific = byFamiliesOperationDetails[mainAccount.currency.family];
   const urlWhatIsThis =
-    specific &&
-    specific.getURLWhatIsThis &&
-    specific.getURLWhatIsThis(operation);
+    specific && specific.getURLWhatIsThis && specific.getURLWhatIsThis(operation);
 
   return (
     <SafeAreaView

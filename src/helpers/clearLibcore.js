@@ -1,9 +1,6 @@
 // @flow
 
-import {
-  afterLibcoreGC,
-  reset,
-} from "@ledgerhq/live-common/lib/libcore/access";
+import { afterLibcoreGC, reset } from "@ledgerhq/live-common/lib/libcore/access";
 import { delay } from "@ledgerhq/live-common/lib/promise";
 
 export default (job?: () => Promise<any>) =>

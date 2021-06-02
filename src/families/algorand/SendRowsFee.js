@@ -4,10 +4,7 @@ import { View, StyleSheet, Linking } from "react-native";
 import type { AccountLike, Account } from "@ledgerhq/live-common/lib/types";
 import { Trans } from "react-i18next";
 import type { Transaction } from "@ledgerhq/live-common/lib/families/algorand/types";
-import {
-  getAccountUnit,
-  getAccountCurrency,
-} from "@ledgerhq/live-common/lib/account";
+import { getAccountUnit, getAccountCurrency } from "@ledgerhq/live-common/lib/account";
 import { getMainAccount } from "@ledgerhq/live-common/lib/account/helpers";
 import { useTheme } from "@react-navigation/native";
 import SummaryRow from "../../screens/SendFunds/SummaryRow";
@@ -24,11 +21,7 @@ type Props = {
   navigation: *,
 };
 
-export default function AlgorandFeeRow({
-  account,
-  parentAccount,
-  transaction,
-}: Props) {
+export default function AlgorandFeeRow({ account, parentAccount, transaction }: Props) {
   const { colors } = useTheme();
   const extraInfoFees = useCallback(() => {
     Linking.openURL(urls.feesMoreInfo);
@@ -58,9 +51,7 @@ export default function AlgorandFeeRow({
           ) : null}
         </View>
         <LText style={styles.countervalue} color="grey">
-          {fees ? (
-            <CounterValue before="≈ " value={fees} currency={currency} />
-          ) : null}
+          {fees ? <CounterValue before="≈ " value={fees} currency={currency} /> : null}
         </LText>
       </View>
     </SummaryRow>

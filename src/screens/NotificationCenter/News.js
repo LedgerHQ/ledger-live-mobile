@@ -29,12 +29,10 @@ export default function NotificationCenter() {
     [setAsSeen],
   );
 
-  const sections = groupAnnouncements(allIds.map(uuid => cache[uuid])).map(
-    d => ({
-      ...d,
-      title: d.day,
-    }),
-  );
+  const sections = groupAnnouncements(allIds.map(uuid => cache[uuid])).map(d => ({
+    ...d,
+    title: d.day,
+  }));
 
   return (
     <SectionList
@@ -52,12 +50,7 @@ export default function NotificationCenter() {
       )}
       renderSectionHeader={({ section: { title } }) =>
         title && title instanceof Date ? (
-          <View
-            style={[
-              styles.sectionHeader,
-              { backgroundColor: colors.background },
-            ]}
-          >
+          <View style={[styles.sectionHeader, { backgroundColor: colors.background }]}>
             <LText
               style={[styles.label, { backgroundColor: colors.lightFog }]}
               semiBold
@@ -70,9 +63,7 @@ export default function NotificationCenter() {
       }
       keyExtractor={(item, index) => item.uuid + index}
       ItemSeparatorComponent={() => (
-        <View
-          style={[styles.separator, { backgroundColor: colors.lightFog }]}
-        />
+        <View style={[styles.separator, { backgroundColor: colors.lightFog }]} />
       )}
       refreshControl={
         <RefreshControl

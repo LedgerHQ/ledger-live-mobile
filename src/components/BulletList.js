@@ -62,14 +62,7 @@ export class BulletItem extends PureComponent<{
   }
 
   render() {
-    const {
-      index,
-      value,
-      Bullet,
-      itemContainerStyle,
-      itemStyle,
-      itemTextStyle,
-    } = this.props;
+    const { index, value, Bullet, itemContainerStyle, itemStyle, itemTextStyle } = this.props;
     const { opacity } = this;
 
     return (
@@ -117,14 +110,7 @@ class BulletList extends PureComponent<{
     Bullet,
   };
   render() {
-    const {
-      list,
-      animated,
-      Bullet,
-      itemContainerStyle,
-      itemStyle,
-      style,
-    } = this.props;
+    const { list, animated, Bullet, itemContainerStyle, itemStyle, style } = this.props;
     return (
       <View style={style}>
         {list.map((value, index) => (

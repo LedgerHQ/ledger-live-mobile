@@ -81,22 +81,16 @@ export default function SettingsRow({
       eventProperties={eventProperties}
     >
       {iconLeft && (
-        <View style={[styles.iconLeft, centeredIcon && styles.centeredIcon]}>
-          {iconLeft}
-        </View>
+        <View style={[styles.iconLeft, centeredIcon && styles.centeredIcon]}>{iconLeft}</View>
       )}
       <View style={[styles.textBlock, { marginLeft: iconLeft ? 0 : 16 }]}>
         {title$}
         {desc && !noTextDesc && (
-          <LText style={[styles.description, { color: colors.grey }]}>
-            {desc}
-          </LText>
+          <LText style={[styles.description, { color: colors.grey }]}>{desc}</LText>
         )}
         {desc && noTextDesc && desc}
       </View>
-      <View
-        style={[styles.rightBlock, alignedTop && styles.rightBlockTopPadded]}
-      >
+      <View style={[styles.rightBlock, alignedTop && styles.rightBlockTopPadded]}>
         {children}
         {arrowRight ? (
           <View style={styles.iconRightContainer}>

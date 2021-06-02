@@ -21,11 +21,7 @@ function FirmwareProgress({ progress, size }: Props) {
       thickness={progress ? 4 : 0}
       size={size}
       strokeCap="round"
-      textStyle={[
-        styles.progressText,
-        { color: colors.live },
-        getFontStyle({ semiBold: true }),
-      ]}
+      textStyle={[styles.progressText, { color: colors.live }, getFontStyle({ semiBold: true })]}
     />
   );
 }

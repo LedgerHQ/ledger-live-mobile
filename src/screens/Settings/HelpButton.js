@@ -9,10 +9,7 @@ const HelpButton = () => {
   const { colors } = useTheme();
   return (
     <>
-      <TouchableOpacity
-        style={{ marginRight: 16 }}
-        onPress={() => navigate(ScreenName.Resources)}
-      >
+      <TouchableOpacity style={{ marginRight: 16 }} onPress={() => navigate(ScreenName.Resources)}>
         <IconQuestion size={18} color={colors.grey} />
       </TouchableOpacity>
     </>

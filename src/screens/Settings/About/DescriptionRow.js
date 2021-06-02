@@ -10,10 +10,7 @@ function DescriptionRow() {
     <View style={styles.descriptionContainer}>
       <Image source={require("../../../images/logo_small.png")} />
       <LText style={styles.description} color="smoke">
-        <Trans
-          i18nKey="settings.about.appDescription"
-          values={deviceNames.nanoX}
-        />
+        <Trans i18nKey="settings.about.appDescription" values={deviceNames.nanoX} />
       </LText>
     </View>
   );

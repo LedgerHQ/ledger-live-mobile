@@ -3,10 +3,7 @@ import React, { PureComponent } from "react";
 import { Trans } from "react-i18next";
 import { View, StyleSheet } from "react-native";
 import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
-import {
-  getAccountCurrency,
-  getMainAccount,
-} from "@ledgerhq/live-common/lib/account";
+import { getAccountCurrency, getMainAccount } from "@ledgerhq/live-common/lib/account";
 import { listTokenTypesForCryptoCurrency } from "@ledgerhq/live-common/lib/currencies";
 import { ScreenName, NavigatorName } from "../../const";
 
@@ -51,8 +48,7 @@ class EmptyStateAccount extends PureComponent<{
     const { account, parentAccount, colors } = this.props;
     const mainAccount = getMainAccount(account, parentAccount);
     const hasSubAccounts = Array.isArray(mainAccount.subAccounts);
-    const isToken =
-      listTokenTypesForCryptoCurrency(mainAccount.currency).length > 0;
+    const isToken = listTokenTypesForCryptoCurrency(mainAccount.currency).length > 0;
     const currency = getAccountCurrency(account);
     const canBeBought = isCurrencySupported(currency, "buy");
 
@@ -81,9 +77,7 @@ class EmptyStateAccount extends PureComponent<{
                 <LText semiBold color="darkBlue">
                   {account &&
                     account.currency &&
-                    listTokenTypesForCryptoCurrency(mainAccount.currency).join(
-                      ", ",
-                    )}
+                    listTokenTypesForCryptoCurrency(mainAccount.currency).join(", ")}
                   {"tokens"}
                 </LText>
               </Trans>
@@ -112,9 +106,7 @@ class EmptyStateAccount extends PureComponent<{
             <Button
               event="AccountEmptyStateReceive"
               type="primary"
-              title={
-                <Trans i18nKey="account.emptyState.buttons.receiveFunds" />
-              }
+              title={<Trans i18nKey="account.emptyState.buttons.receiveFunds" />}
               onPress={this.goToReceiveFunds}
               IconLeft={Receive}
             />

@@ -180,32 +180,18 @@ export default function Alert({
   learnMoreKey,
   learnMoreIsInternal = false,
 }: Props) {
-  const {
-    backgroundColor,
-    textColor,
-    borderColor = null,
-    icon,
-  } = useAlertStyle(type, vertical);
+  const { backgroundColor, textColor, borderColor = null, icon } = useAlertStyle(type, vertical);
 
   const hasLearnMore = !!onLearnMore || !!learnMoreUrl;
   const handleLearnMore = useCallback(
-    () =>
-      onLearnMore
-        ? onLearnMore()
-        : learnMoreUrl
-        ? Linking.openURL(learnMoreUrl)
-        : undefined,
+    () => (onLearnMore ? onLearnMore() : learnMoreUrl ? Linking.openURL(learnMoreUrl) : undefined),
     [onLearnMore, learnMoreUrl],
   );
 
   const learnMore = hasLearnMore && (
     <Text onPress={handleLearnMore}>
       {" "}
-      <LText
-        semiBold
-        style={[styles.learnMore, { color: textColor }]}
-        fontSize={3}
-      >
+      <LText semiBold style={[styles.learnMore, { color: textColor }]} fontSize={3}>
         <Trans i18nKey={learnMoreKey || "common.learnMore"} />
       </LText>
       {!learnMoreIsInternal && (
@@ -230,9 +216,7 @@ export default function Alert({
     >
       <View style={[styles.container, vertical && styles.vertical]}>
         {left || (!noIcon && icon) ? (
-          <View style={vertical ? styles.topContainer : styles.leftContainer}>
-            {left || icon}
-          </View>
+          <View style={vertical ? styles.topContainer : styles.leftContainer}>{left || icon}</View>
         ) : null}
 
         <View style={vertical ? styles.verticalContent : styles.content}>

@@ -27,10 +27,9 @@ export default function SnackbarContainer() {
     [dismissToast, toasts],
   );
 
-  const handleDismissToast = useCallback(
-    (toast: ToastData) => dismissToast(toast.id),
-    [dismissToast],
-  );
+  const handleDismissToast = useCallback((toast: ToastData) => dismissToast(toast.id), [
+    dismissToast,
+  ]);
 
   return hasCompletedOnboarding && toasts && toasts.length ? (
     <FlatList
@@ -38,11 +37,7 @@ export default function SnackbarContainer() {
       data={toasts.slice(Math.max(0, toasts.length - 3))}
       keyExtractor={item => item.id}
       renderItem={({ item }) => (
-        <Snackbar
-          toast={item}
-          onPress={navigate}
-          onClose={handleDismissToast}
-        />
+        <Snackbar toast={item} onPress={navigate} onClose={handleDismissToast} />
       )}
     />
   ) : null;

@@ -28,9 +28,7 @@ export default function HeaderRightClose({
   const { colors } = useTheme();
   const navigation = useNavigation();
 
-  const [isConfirmationModalOpened, setIsConfirmationModalOpened] = useState(
-    false,
-  );
+  const [isConfirmationModalOpened, setIsConfirmationModalOpened] = useState(false);
   const [onModalHide, setOnModalHide] = useState();
 
   function close(): void {
@@ -74,11 +72,7 @@ export default function HeaderRightClose({
   }
 
   return (
-    <Touchable
-      event="HeaderRightClose"
-      onPress={onPress}
-      style={styles.wrapper}
-    >
+    <Touchable event="HeaderRightClose" onPress={onPress} style={styles.wrapper}>
       <CloseIcon size={18} color={color || colors.grey} />
       {withConfirmation && (
         <ConfirmationModal

@@ -13,15 +13,7 @@ export function useFieldByFamily(field: string): ?BigNumber {
 export function useEditTxFeeByFamily() {
   const transaction = useRoute().params?.transaction;
 
-  return ({
-    account,
-    field,
-    fee,
-  }: {
-    account: Account,
-    field: string,
-    fee: ?BigNumber,
-  }) => {
+  return ({ account, field, fee }: { account: Account, field: string, fee: ?BigNumber }) => {
     const bridge = getAccountBridge(account);
     return bridge.updateTransaction(transaction, { [field]: fee });
   };

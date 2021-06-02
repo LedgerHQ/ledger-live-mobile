@@ -52,10 +52,7 @@ export default function ValidationSuccess({ navigation, route }: Props) {
         onViewDetails={goToOperationDetails}
         title={<Trans i18nKey="unfreeze.validation.success" />}
         description={
-          <Trans
-            i18nKey="unfreeze.validation.info"
-            values={{ resource: resource.toLowerCase() }}
-          />
+          <Trans i18nKey="unfreeze.validation.info" values={{ resource: resource.toLowerCase() }} />
         }
       />
     </View>

@@ -9,10 +9,7 @@ import analytics from "@segment/analytics-react-native";
 import VersionNumber from "react-native-version-number";
 import Locale from "react-native-locale";
 import { ReplaySubject } from "rxjs";
-import {
-  getAndroidArchitecture,
-  getAndroidVersionCode,
-} from "../logic/cleanBuildVersion";
+import { getAndroidArchitecture, getAndroidVersionCode } from "../logic/cleanBuildVersion";
 import getOrCreateUser from "../user";
 import { analyticsEnabledSelector } from "../reducers/settings";
 import { knownDevicesSelector } from "../reducers/ble";
@@ -20,8 +17,7 @@ import type { State } from "../reducers";
 
 const sessionId = uuid();
 
-const appVersion = `${VersionNumber.appVersion ||
-  ""} (${VersionNumber.buildVersion || ""})`;
+const appVersion = `${VersionNumber.appVersion || ""} (${VersionNumber.buildVersion || ""})`;
 
 const { ANALYTICS_LOGS, ANALYTICS_TOKEN } = Config;
 
@@ -96,11 +92,7 @@ export const trackSubject = new ReplaySubject<{
   properties: ?Object,
 }>(10);
 
-export const track = (
-  event: string,
-  properties: ?Object,
-  mandatory: ?boolean,
-) => {
+export const track = (event: string, properties: ?Object, mandatory: ?boolean) => {
   Sentry.captureBreadcrumb({
     message: event,
     category: "track",
@@ -108,10 +100,7 @@ export const track = (
     level: "debug",
   });
 
-  if (
-    !storeInstance ||
-    (!mandatory && !analyticsEnabledSelector(storeInstance.getState()))
-  ) {
+  if (!storeInstance || (!mandatory && !analyticsEnabledSelector(storeInstance.getState()))) {
     return;
   }
 
@@ -127,11 +116,7 @@ export const track = (
   analytics.track(event, allProperties, { context });
 };
 
-export const screen = (
-  category: string,
-  name: ?string,
-  properties: ?Object,
-) => {
+export const screen = (category: string, name: ?string, properties: ?Object) => {
   const title = `Page ${category + (name ? ` ${name}` : "")}`;
   Sentry.captureBreadcrumb({
     message: title,
@@ -148,8 +133,7 @@ export const screen = (
     ...properties,
   };
 
-  if (ANALYTICS_LOGS)
-    console.log("analytics:screen", category, name, allProperties);
+  if (ANALYTICS_LOGS) console.log("analytics:screen", category, name, allProperties);
   trackSubject.next({ event: title, properties: allProperties });
 
   if (!token) return;

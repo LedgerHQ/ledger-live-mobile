@@ -55,9 +55,7 @@ function DelegationAmount({ navigation, route }: Props) {
   const bridge = getAccountBridge(account, undefined);
   const unit = getAccountUnit(account);
 
-  const initialValue = useMemo(() => route?.params?.value ?? BigNumber(0), [
-    route,
-  ]);
+  const initialValue = useMemo(() => route?.params?.value ?? BigNumber(0), [route]);
 
   const redelegatedBalance = route?.params?.redelegatedBalance ?? BigNumber(0);
   const mode = route?.params?.mode ?? "delegation";
@@ -79,9 +77,7 @@ function DelegationAmount({ navigation, route }: Props) {
     const validators = tx.validators;
     const validatorAddress = route.params.validator.validatorAddress;
 
-    const i = validators.findIndex(
-      ({ address }) => address === validatorAddress,
-    );
+    const i = validators.findIndex(({ address }) => address === validatorAddress);
 
     if (i >= 0) {
       validators[i].amount = value;
@@ -90,9 +86,7 @@ function DelegationAmount({ navigation, route }: Props) {
     }
 
     const filteredValidators =
-      tx.mode === "delegate"
-        ? validators.filter(v => !v.amount.eq(0))
-        : validators;
+      tx.mode === "delegate" ? validators.filter(v => !v.amount.eq(0)) : validators;
 
     const transaction = bridge.updateTransaction(tx, {
       validators: filteredValidators,
@@ -117,9 +111,7 @@ function DelegationAmount({ navigation, route }: Props) {
 
   const error = useMemo(
     () =>
-      max.lt(0) ||
-      value.lt(min) ||
-      (route.params.transaction.mode === "redelegate" && value.eq(0)),
+      max.lt(0) || value.lt(min) || (route.params.transaction.mode === "redelegate" && value.eq(0)),
     [value, max, min, route.params.transaction],
   );
 
@@ -153,10 +145,7 @@ function DelegationAmount({ navigation, route }: Props) {
                   setValue(v);
                 }}
               >
-                <LText
-                  style={[styles.ratioLabel]}
-                  color={value.eq(v) ? "white" : "grey"}
-                >
+                <LText style={[styles.ratioLabel]} color={value.eq(v) ? "white" : "grey"}>
                   {label}
                 </LText>
               </TouchableOpacity>
@@ -195,9 +184,7 @@ function DelegationAmount({ navigation, route }: Props) {
             <View style={styles.labelContainer}>
               <Check size={16} color={colors.success} />
               <LText style={[styles.assetsRemaining]} color="success">
-                <Trans
-                  i18nKey={`cosmos.${mode}.flow.steps.amount.allAssetsUsed`}
-                />
+                <Trans i18nKey={`cosmos.${mode}.flow.steps.amount.allAssetsUsed`} />
               </LText>
             </View>
           )}
@@ -223,13 +210,9 @@ function DelegationAmount({ navigation, route }: Props) {
                 <Trans
                   i18nKey="cosmos.redelegation.flow.steps.amount.newRedelegatedBalance"
                   values={{
-                    amount: formatCurrencyUnit(
-                      unit,
-                      redelegatedBalance.plus(value),
-                      {
-                        showCode: true,
-                      },
-                    ),
+                    amount: formatCurrencyUnit(unit, redelegatedBalance.plus(value), {
+                      showCode: true,
+                    }),
                     name: route.params.validator?.name ?? "",
                   }}
                 >

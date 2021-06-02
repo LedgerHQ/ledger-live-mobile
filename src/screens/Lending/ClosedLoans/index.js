@@ -32,16 +32,9 @@ export default function ClosedLoans() {
           <FlatList
             data={closedLoans}
             renderItem={({ item }) => <ClosedLoansRow item={item} />}
-            keyExtractor={(item, index) =>
-              `${item.endDate.toDateString()}${index}`
-            }
+            keyExtractor={(item, index) => `${item.endDate.toDateString()}${index}`}
             ItemSeparatorComponent={() => (
-              <View
-                style={[
-                  styles.separator,
-                  { backgroundColor: colors.background },
-                ]}
-              />
+              <View style={[styles.separator, { backgroundColor: colors.background }]} />
             )}
             ListEmptyComponent={() => (
               <EmptyState

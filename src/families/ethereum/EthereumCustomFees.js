@@ -37,15 +37,12 @@ export default function EthereumCustomFees({ navigation, route }: Props) {
   invariant(transaction.family === "ethereum", "not ethereum family");
   invariant(account, "no account found");
 
-  const networkGasPrice =
-    transaction.networkInfo && transaction.networkInfo.gasPrice;
+  const networkGasPrice = transaction.networkInfo && transaction.networkInfo.gasPrice;
   if (!lastNetworkGasPrice && networkGasPrice) {
     lastNetworkGasPrice = networkGasPrice;
   }
   const range = networkGasPrice || lastNetworkGasPrice || fallbackGasPrice;
-  const [gasPrice, setGasPrice] = useState(
-    customGasPrice || transaction.gasPrice || range.initial,
-  );
+  const [gasPrice, setGasPrice] = useState(customGasPrice || transaction.gasPrice || range.initial);
 
   const [gasLimit, setGasLimit] = useState(
     customGasLimit || transaction.userGasLimit || transaction.estimatedGasLimit,
@@ -67,16 +64,7 @@ export default function EthereumCustomFees({ navigation, route }: Props) {
         feesStrategy: "custom",
       }),
     });
-  }, [
-    account,
-    gasLimit,
-    navigation,
-    parentAccount,
-    route.params,
-    transaction,
-    gasLimit,
-    gasPrice,
-  ]);
+  }, [account, gasLimit, navigation, parentAccount, route.params, transaction, gasLimit, gasPrice]);
 
   return (
     <View style={styles.root}>

@@ -11,11 +11,7 @@ import {
   getAccountUnit,
 } from "@ledgerhq/live-common/lib/account";
 
-import type {
-  Account,
-  Operation,
-  AccountLike,
-} from "@ledgerhq/live-common/lib/types";
+import type { Account, Operation, AccountLike } from "@ledgerhq/live-common/lib/types";
 
 import debounce from "lodash/debounce";
 import LText from "./LText";
@@ -81,16 +77,10 @@ export default function OperationRow({
       : null;
 
     const SpecificAmountCell =
-      specific && specific.amountCell
-        ? specific.amountCell[operation.type]
-        : null;
+      specific && specific.amountCell ? specific.amountCell[operation.type] : null;
 
     return SpecificAmountCell ? (
-      <SpecificAmountCell
-        operation={operation}
-        unit={unit}
-        currency={currency}
-      />
+      <SpecificAmountCell operation={operation} unit={unit} currency={currency} />
     ) : null;
   }, [account, parentAccount, operation]);
 
@@ -132,21 +122,14 @@ export default function OperationRow({
 
         <View style={[styles.wrapper, isOptimistic ? styles.optimistic : null]}>
           <View style={styles.bodyLeft}>
-            <LText
-              numberOfLines={1}
-              semiBold
-              style={[styles.bodyLeft, styles.topRow]}
-            >
+            <LText numberOfLines={1} semiBold style={[styles.bodyLeft, styles.topRow]}>
               {multipleAccounts ? getAccountName(account) : text}
             </LText>
 
             {isOptimistic ? (
               <View style={styles.optimisticRow}>
                 {spinner}
-                <LText
-                  numberOfLines={1}
-                  style={[styles.bodyLeft, styles.bottomRow]}
-                >
+                <LText numberOfLines={1} style={[styles.bodyLeft, styles.bottomRow]}>
                   <Trans
                     i18nKey={
                       amount.isNegative()
@@ -173,12 +156,7 @@ export default function OperationRow({
                 color={valueColor}
                 style={[styles.bodyRight, styles.topRow]}
               >
-                <CurrencyUnitValue
-                  showCode
-                  unit={unit}
-                  value={amount}
-                  alwaysShowSign
-                />
+                <CurrencyUnitValue showCode unit={unit} value={amount} alwaysShowSign />
               </LText>
               <CounterValue
                 showCode

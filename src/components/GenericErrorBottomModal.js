@@ -15,32 +15,16 @@ type Props = BottomModalProps & {
   footerButtons?: React$Node,
 };
 
-function GenericErrorBottomModal({
-  error,
-  onClose,
-  footerButtons,
-  ...otherProps
-}: Props) {
+function GenericErrorBottomModal({ error, onClose, footerButtons, ...otherProps }: Props) {
   const { colors } = useTheme();
   return (
-    <BottomModal
-      {...otherProps}
-      id="ErrorModal"
-      isOpened={!!error}
-      onClose={onClose}
-    >
+    <BottomModal {...otherProps} id="ErrorModal" isOpened={!!error} onClose={onClose}>
       {error ? (
         <View style={styles.root}>
           <GenericErrorView error={error} />
-          {footerButtons ? (
-            <View style={styles.buttonsContainer}>{footerButtons}</View>
-          ) : null}
+          {footerButtons ? <View style={styles.buttonsContainer}>{footerButtons}</View> : null}
           {onClose ? (
-            <Touchable
-              event="BottomModalErrorClose"
-              style={styles.close}
-              onPress={onClose}
-            >
+            <Touchable event="BottomModalErrorClose" style={styles.close} onPress={onClose}>
               <Close color={colors.fog} size={20} />
             </Touchable>
           ) : null}

@@ -19,12 +19,7 @@ type Props = {
 export default function StepLegacyModal({ isOpened, onClose }: Props) {
   const { colors } = useTheme();
   return (
-    <BottomModal
-      id="StepLegacyModal"
-      style={styles.root}
-      isOpened={isOpened}
-      onClose={onClose}
-    >
+    <BottomModal id="StepLegacyModal" style={styles.root} isOpened={isOpened} onClose={onClose}>
       <Circle bg={rgba(colors.live, 0.1)} size={56}>
         <IconInfo size={24} color={colors.live} />
       </Circle>

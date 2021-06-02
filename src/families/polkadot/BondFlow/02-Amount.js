@@ -19,10 +19,7 @@ import { useTheme } from "@react-navigation/native";
 
 import type { Transaction } from "@ledgerhq/live-common/lib/types";
 import { useDebounce } from "@ledgerhq/live-common/lib/hooks/useDebounce";
-import {
-  getAccountUnit,
-  getMainAccount,
-} from "@ledgerhq/live-common/lib/account";
+import { getAccountUnit, getMainAccount } from "@ledgerhq/live-common/lib/account";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { isFirstBond } from "@ledgerhq/live-common/lib/families/polkadot/logic";
 
@@ -58,15 +55,11 @@ const options = [
 const infoModalData = [
   {
     title: <Trans i18nKey="polkadot.bond.rewardDestination.stash" />,
-    description: (
-      <Trans i18nKey="polkadot.bond.rewardDestination.stashDescription" />
-    ),
+    description: <Trans i18nKey="polkadot.bond.rewardDestination.stashDescription" />,
   },
   {
     title: <Trans i18nKey="polkadot.bond.rewardDestination.staked" />,
-    description: (
-      <Trans i18nKey="polkadot.bond.rewardDestination.stakedDescription" />
-    ),
+    description: <Trans i18nKey="polkadot.bond.rewardDestination.stakedDescription" />,
   },
   {
     title: <Trans i18nKey="polkadot.bond.rewardDestination.optionTitle" />,
@@ -102,23 +95,19 @@ export default function PolkadotBondAmount({ navigation, route }: Props) {
   const [maxSpendable, setMaxSpendable] = useState(null);
   const [infoModalOpen, setInfoModalOpen] = useState();
 
-  const {
-    transaction,
-    setTransaction,
-    status,
-    bridgePending,
-    bridgeError,
-  } = useBridgeTransaction(() => {
-    const t = bridge.createTransaction(mainAccount);
+  const { transaction, setTransaction, status, bridgePending, bridgeError } = useBridgeTransaction(
+    () => {
+      const t = bridge.createTransaction(mainAccount);
 
-    const transaction = bridge.updateTransaction(t, {
-      mode: "bond",
-      recipient: mainAccount.freshAddress,
-      rewardDestination: "Stash",
-    });
+      const transaction = bridge.updateTransaction(t, {
+        mode: "bond",
+        recipient: mainAccount.freshAddress,
+        rewardDestination: "Stash",
+      });
 
-    return { account: mainAccount, transaction };
-  });
+      return { account: mainAccount, transaction };
+    },
+  );
 
   const debouncedTransaction = useDebounce(transaction, 500);
 
@@ -185,9 +174,7 @@ export default function PolkadotBondAmount({ navigation, route }: Props) {
 
   const onChangeRewardDestination = useCallback(
     (rewardDestination: string) => {
-      setTransaction(
-        bridge.updateTransaction(transaction, { rewardDestination }),
-      );
+      setTransaction(bridge.updateTransaction(transaction, { rewardDestination }));
     },
     [bridge, transaction, setTransaction],
   );
@@ -201,19 +188,14 @@ export default function PolkadotBondAmount({ navigation, route }: Props) {
   const rewardDestination = transaction.rewardDestination || "";
   const firstBond = isFirstBond(mainAccount);
 
-  const error =
-    amount.eq(0) || bridgePending
-      ? null
-      : getFirstStatusError(status, "errors");
+  const error = amount.eq(0) || bridgePending ? null : getFirstStatusError(status, "errors");
   const warning = getFirstStatusError(status, "warnings");
   const hasErrors = hasStatusError(status);
 
   return (
     <>
       <TrackScreen category="BondFlow" name="Amount" />
-      <SafeAreaView
-        style={[styles.root, { backgroundColor: colors.background }]}
-      >
+      <SafeAreaView style={[styles.root, { backgroundColor: colors.background }]}>
         <KeyboardView style={styles.container}>
           {firstBond ? (
             <View style={styles.topContainer}>
@@ -274,11 +256,7 @@ export default function PolkadotBondAmount({ navigation, route }: Props) {
                     </LText>
                     <LText semiBold>
                       {maxSpendable ? (
-                        <CurrencyUnitValue
-                          showCode
-                          unit={unit}
-                          value={maxSpendable}
-                        />
+                        <CurrencyUnitValue showCode unit={unit} value={maxSpendable} />
                       ) : (
                         "-"
                       )}
@@ -308,11 +286,7 @@ export default function PolkadotBondAmount({ navigation, route }: Props) {
                     type="primary"
                     title={
                       <Trans
-                        i18nKey={
-                          !bridgePending
-                            ? "common.continue"
-                            : "send.amount.loadingNetwork"
-                        }
+                        i18nKey={!bridgePending ? "common.continue" : "send.amount.loadingNetwork"}
                       />
                     }
                     onPress={onContinue}
@@ -325,11 +299,7 @@ export default function PolkadotBondAmount({ navigation, route }: Props) {
         </KeyboardView>
       </SafeAreaView>
 
-      <InfoModal
-        isOpened={!!infoModalOpen}
-        onClose={closeInfoModal}
-        data={infoModalData}
-      />
+      <InfoModal isOpened={!!infoModalOpen} onClose={closeInfoModal} data={infoModalData} />
 
       <FlowErrorBottomModal
         navigation={navigation}

@@ -33,11 +33,7 @@ class FallBackCameraScreen extends PureComponent<Props, State> {
   handleAppStateChange = nextAppState => {
     const { appState, openSettingsPressed } = this.state;
     const { navigation } = this.props;
-    if (
-      appState.match(/inactive|background/) &&
-      nextAppState === "active" &&
-      openSettingsPressed
-    ) {
+    if (appState.match(/inactive|background/) && nextAppState === "active" && openSettingsPressed) {
       navigation.replace(ScreenName.ScanAccounts);
     }
     this.setState({ appState: nextAppState });

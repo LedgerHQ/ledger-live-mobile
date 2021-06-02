@@ -36,8 +36,6 @@ const styles = StyleSheet.create({
   externalLinkContainer: { marginHorizontal: 10 },
 });
 
-const MemoTermsConditionsRow: React$ComponentType<{}> = memo(
-  TermsConditionsRow,
-);
+const MemoTermsConditionsRow: React$ComponentType<{}> = memo(TermsConditionsRow);
 
 export default MemoTermsConditionsRow;

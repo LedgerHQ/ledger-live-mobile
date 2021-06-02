@@ -17,22 +17,10 @@ type Props = {
 
 function QrCodeBottomLayer({ progress, viewFinderSize, liveQrCode }: Props) {
   return (
-    <View
-      style={[
-        styles.darken,
-        { backgroundColor: rgba("#142533", 0.4) },
-        styles.centered,
-      ]}
-    >
+    <View style={[styles.darken, { backgroundColor: rgba("#142533", 0.4) }, styles.centered]}>
       <View style={styles.centered}>
         <LText semiBold style={styles.text}>
-          <Trans
-            i18nKey={
-              liveQrCode
-                ? "account.import.scan.descBottom"
-                : "send.scan.descBottom"
-            }
-          />
+          <Trans i18nKey={liveQrCode ? "account.import.scan.descBottom" : "send.scan.descBottom"} />
         </LText>
       </View>
       <QrCodeProgressBar viewFinderSize={viewFinderSize} progress={progress} />

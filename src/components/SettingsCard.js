@@ -17,10 +17,7 @@ export default function SettingsCard({ title, desc, icon, onClick }: Props) {
   const { colors } = useTheme();
 
   return (
-    <Card
-      onPress={onClick}
-      style={[styles.cardStyle, { backgroundColor: colors.card }]}
-    >
+    <Card onPress={onClick} style={[styles.cardStyle, { backgroundColor: colors.card }]}>
       <Circle bg={colors.lightLive} size={32}>
         {icon}
       </Circle>

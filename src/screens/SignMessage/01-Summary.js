@@ -5,10 +5,7 @@ import SafeAreaView from "react-native-safe-area-view";
 import { Trans } from "react-i18next";
 import type { TypedMessageData } from "@ledgerhq/live-common/lib/families/ethereum/types";
 import type { MessageData } from "@ledgerhq/live-common/lib/hw/signMessage/types";
-import {
-  getAccountCurrency,
-  getAccountName,
-} from "@ledgerhq/live-common/lib/account";
+import { getAccountCurrency, getAccountName } from "@ledgerhq/live-common/lib/account";
 import { useSelector } from "react-redux";
 import { useTheme } from "@react-navigation/native";
 import { accountScreenSelector } from "../../reducers/accounts";
@@ -65,12 +62,7 @@ function SignSummary({ navigation, route: initialRoute }: Props) {
       <TrackScreen category="SignMessage" name="Summary" />
       <View style={styles.body}>
         <View style={styles.fromContainer}>
-          <View
-            style={[
-              styles.iconContainer,
-              { backgroundColor: colors.lightLive },
-            ]}
-          >
+          <View style={[styles.iconContainer, { backgroundColor: colors.lightLive }]}>
             <WalletIcon color={colors.live} size={16} />
           </View>
           <View style={styles.fromInnerContainer}>
@@ -79,10 +71,7 @@ function SignSummary({ navigation, route: initialRoute }: Props) {
             </LText>
             <View style={styles.headerContainer}>
               <View style={styles.headerIconContainer}>
-                <ParentCurrencyIcon
-                  size={18}
-                  currency={account && getAccountCurrency(account)}
-                />
+                <ParentCurrencyIcon size={18} currency={account && getAccountCurrency(account)} />
               </View>
               <LText semiBold secondary numberOfLines={1}>
                 {account && getAccountName(account)}
@@ -90,17 +79,13 @@ function SignSummary({ navigation, route: initialRoute }: Props) {
             </View>
           </View>
         </View>
-        <View
-          style={[styles.separator, { backgroundColor: colors.separator }]}
-        />
+        <View style={[styles.separator, { backgroundColor: colors.separator }]} />
         <ScrollView style={styles.scrollContainer}>
           <LText style={styles.message}>
             <Trans i18nKey="walletconnect.message" />
           </LText>
           <LText semiBold>
-            {message.message.domain
-              ? JSON.stringify(message.message)
-              : message.message}
+            {message.message.domain ? JSON.stringify(message.message) : message.message}
           </LText>
         </ScrollView>
       </View>

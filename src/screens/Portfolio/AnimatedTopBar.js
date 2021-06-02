@@ -1,12 +1,7 @@
 // @flow
 
 import React, { useState } from "react";
-import {
-  StyleSheet,
-  View,
-  TouchableWithoutFeedback,
-  Platform,
-} from "react-native";
+import { StyleSheet, View, TouchableWithoutFeedback, Platform } from "react-native";
 import Animated from "react-native-reanimated";
 import type AnimatedValue from "react-native/Libraries/Animated/src/nodes/AnimatedValue";
 import { useSafeArea } from "react-native-safe-area-context";
@@ -60,10 +55,7 @@ export default function AnimatedTopBar({
     [isShown],
   );
 
-  const contentStyle = [
-    styles.content,
-    { height: Platform.OS === "ios" ? top + 56 : 56 },
-  ];
+  const contentStyle = [styles.content, { height: Platform.OS === "ios" ? top + 56 : 56 }];
 
   return (
     <Animated.View

@@ -4,10 +4,7 @@ import React, { useCallback, useState } from "react";
 import { Trans } from "react-i18next";
 import { StyleSheet, View, FlatList } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
-import type {
-  CryptoCurrency,
-  TokenCurrency,
-} from "@ledgerhq/live-common/lib/types";
+import type { CryptoCurrency, TokenCurrency } from "@ledgerhq/live-common/lib/types";
 import { useCurrenciesByMarketcap } from "@ledgerhq/live-common/lib/currencies";
 import { getAccountCurrency } from "@ledgerhq/live-common/lib/account";
 import { useTheme } from "@react-navigation/native";
@@ -51,24 +48,17 @@ export default function SwapFormSelectCrypto({ route, navigation }: Props) {
   const [badSelection, setBadSelection] = useState(null);
   const maybeFilteredCurrencies =
     !isFrom && exchange.fromAccount
-      ? selectableCurrencies.filter(
-          c => c !== getAccountCurrency(exchange.fromAccount),
-        )
+      ? selectableCurrencies.filter(c => c !== getAccountCurrency(exchange.fromAccount))
       : selectableCurrencies;
-  const sortedCryptoCurrencies = useCurrenciesByMarketcap(
-    maybeFilteredCurrencies,
-  );
-  const clearBadSelection = useCallback(() => setBadSelection(null), [
-    setBadSelection,
-  ]);
+  const sortedCryptoCurrencies = useCurrenciesByMarketcap(maybeFilteredCurrencies);
+  const clearBadSelection = useCallback(() => setBadSelection(null), [setBadSelection]);
 
   const onPressItem = useCallback(
     (currencyOrToken: CryptoCurrency | TokenCurrency) => {
       if (target === "from") {
         // NB Clear toAccount only if it will collide with the selected currency
         const toAccount =
-          exchange.toAccount &&
-          getAccountCurrency(exchange.toAccount).id === currencyOrToken.id
+          exchange.toAccount && getAccountCurrency(exchange.toAccount).id === currencyOrToken.id
             ? undefined
             : exchange.toAccount;
 
@@ -100,9 +90,7 @@ export default function SwapFormSelectCrypto({ route, navigation }: Props) {
       <FlatList
         contentContainerStyle={styles.list}
         data={items}
-        renderItem={({ item }) => (
-          <CurrencyRow isOK currency={item} onPress={onPressItem} />
-        )}
+        renderItem={({ item }) => <CurrencyRow isOK currency={item} onPress={onPressItem} />}
         keyExtractor={keyExtractor}
         showsVerticalScrollIndicator={false}
         keyboardDismissMode="on-drag"

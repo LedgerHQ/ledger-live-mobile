@@ -5,12 +5,7 @@ import Svg, { Path, G, Rect } from "react-native-svg";
 
 export default function PortfolioNoOpIllustration() {
   return (
-    <Svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="256"
-      height="66"
-      viewBox="0 0 256 66"
-    >
+    <Svg xmlns="http://www.w3.org/2000/svg" width="256" height="66" viewBox="0 0 256 66">
       <G fill="none" fillRule="evenodd">
         <Path
           fill="#F9F9F9"
@@ -29,42 +24,10 @@ export default function PortfolioNoOpIllustration() {
           rx="4"
         />
         <G opacity=".6" transform="translate(14 14)">
-          <Rect
-            width="56"
-            height="2"
-            x="170"
-            y="8"
-            fill="#999"
-            fillRule="nonzero"
-            rx="1"
-          />
-          <Rect
-            width="56"
-            height="2"
-            x="38"
-            y="8"
-            fill="#999"
-            fillRule="nonzero"
-            rx="1"
-          />
-          <Rect
-            width="40"
-            height="2"
-            x="186"
-            y="18"
-            fill="#D8D8D8"
-            fillRule="nonzero"
-            rx="1"
-          />
-          <Rect
-            width="40"
-            height="2"
-            x="38"
-            y="18"
-            fill="#D8D8D8"
-            fillRule="nonzero"
-            rx="1"
-          />
+          <Rect width="56" height="2" x="170" y="8" fill="#999" fillRule="nonzero" rx="1" />
+          <Rect width="56" height="2" x="38" y="8" fill="#999" fillRule="nonzero" rx="1" />
+          <Rect width="40" height="2" x="186" y="18" fill="#D8D8D8" fillRule="nonzero" rx="1" />
+          <Rect width="40" height="2" x="38" y="18" fill="#D8D8D8" fillRule="nonzero" rx="1" />
           <G fill="#66BE54" opacity=".2">
             <Rect width="28" height="28" rx="14" />
           </G>

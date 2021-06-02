@@ -41,9 +41,7 @@ export default function Accounts({ navigation, route }: Props) {
   useEffect(() => {
     if (params) {
       if (params.currency) {
-        const account = accounts.find(
-          ({ currency }) => currency.family === params.currency,
-        );
+        const account = accounts.find(({ currency }) => currency.family === params.currency);
 
         if (account) {
           // reset params so when we come back the redirection doesn't loop

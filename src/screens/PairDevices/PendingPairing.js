@@ -26,14 +26,8 @@ class PendingPairing extends PureComponent<*> {
           <BulletList
             animated
             list={[
-              <Trans
-                i18nKey="PairDevices.Pairing.step1"
-                values={deviceWording}
-              />,
-              <Trans
-                i18nKey="PairDevices.Pairing.step2"
-                values={deviceWording}
-              />,
+              <Trans i18nKey="PairDevices.Pairing.step1" values={deviceWording} />,
+              <Trans i18nKey="PairDevices.Pairing.step2" values={deviceWording} />,
             ]}
           />
         </View>

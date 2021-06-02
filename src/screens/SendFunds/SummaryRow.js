@@ -18,14 +18,7 @@ type State = {};
 
 class SummaryRow extends Component<Props, State> {
   render(): React$Node {
-    const {
-      title,
-      children,
-      titleProps,
-      additionalInfo,
-      onPress,
-      event,
-    } = this.props;
+    const { title, children, titleProps, additionalInfo, onPress, event } = this.props;
     const titleContainer = (
       <View style={styles.titleContainer}>
         <LText style={[styles.title]} color="grey" {...titleProps}>

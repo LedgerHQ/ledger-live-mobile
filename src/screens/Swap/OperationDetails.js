@@ -1,11 +1,5 @@
 import React, { useCallback } from "react";
-import {
-  ScrollView,
-  StyleSheet,
-  View,
-  Linking,
-  TouchableOpacity,
-} from "react-native";
+import { ScrollView, StyleSheet, View, Linking, TouchableOpacity } from "react-native";
 import type { MappedSwapOperation } from "@ledgerhq/live-common/lib/exchange/swap/types";
 import {
   getAccountName,
@@ -38,14 +32,7 @@ type Props = {
 
 const OperationDetails = ({ route }: Props) => {
   const { swapOperation } = route.params;
-  const {
-    swapId,
-    provider,
-    toAccount,
-    fromAmount,
-    toAmount,
-    operation,
-  } = swapOperation;
+  const { swapId, provider, toAccount, fromAmount, toAmount, operation } = swapOperation;
 
   const { colors } = useTheme();
   const accounts = useSelector(flattenAccountsSelector);
@@ -65,10 +52,7 @@ const OperationDetails = ({ route }: Props) => {
 
   return (
     <View style={[styles.root, { backgroundColor: colors.background }]}>
-      <ScrollView
-        style={styles.scrollView}
-        contentContainerStyle={styles.scrollViewContent}
-      >
+      <ScrollView style={styles.scrollView} contentContainerStyle={styles.scrollViewContent}>
         <SwapStatusIndicator status={status} />
         <LText tertiary style={styles.fromAmount} color="grey">
           <CurrencyUnitValue
@@ -95,11 +79,7 @@ const OperationDetails = ({ route }: Props) => {
             label={status}
             style={{ ...styles.statusText, ...textColorStyles }}
             color={statusColorKey}
-            tooltip={
-              <Trans
-                i18nKey={`transfer.swap.operationDetails.statusTooltips.${status}`}
-              />
-            }
+            tooltip={<Trans i18nKey={`transfer.swap.operationDetails.statusTooltips.${status}`} />}
           />
         </View>
         <View style={styles.fieldsWrapper}>
@@ -112,10 +92,7 @@ const OperationDetails = ({ route }: Props) => {
           <LText style={styles.label} color="grey">
             <Trans i18nKey={"transfer.swap.operationDetails.provider"} />
           </LText>
-          <TouchableOpacity
-            style={styles.providerLinkContainer}
-            onPress={openProvider}
-          >
+          <TouchableOpacity style={styles.providerLinkContainer} onPress={openProvider}>
             <LText semiBold style={styles.providerLink} color="live">
               {provider}
             </LText>
@@ -141,12 +118,7 @@ const OperationDetails = ({ route }: Props) => {
           </LText>
           <View style={styles.account}>
             <CurrencyIcon size={16} currency={fromCurrency} />
-            <LText
-              numberOfLines={1}
-              ellipsizeMode="middle"
-              semiBold
-              style={styles.accountName}
-            >
+            <LText numberOfLines={1} ellipsizeMode="middle" semiBold style={styles.accountName}>
               {getAccountName(fromAccount)}
             </LText>
           </View>
@@ -154,11 +126,7 @@ const OperationDetails = ({ route }: Props) => {
             <Trans i18nKey={"transfer.swap.operationDetails.fromAmount"} />
           </LText>
           <LText style={styles.value}>
-            <CurrencyUnitValue
-              showCode
-              unit={getAccountUnit(fromAccount)}
-              value={fromAmount}
-            />
+            <CurrencyUnitValue showCode unit={getAccountUnit(fromAccount)} value={fromAmount} />
           </LText>
 
           <SectionSeparator style={{ marginBottom: 32 }} />
@@ -168,12 +136,7 @@ const OperationDetails = ({ route }: Props) => {
           </LText>
           <View style={styles.account}>
             <CurrencyIcon size={16} currency={toCurrency} />
-            <LText
-              numberOfLines={1}
-              ellipsizeMode="middle"
-              semiBold
-              style={styles.accountName}
-            >
+            <LText numberOfLines={1} ellipsizeMode="middle" semiBold style={styles.accountName}>
               {getAccountName(toAccount)}
             </LText>
           </View>
@@ -181,11 +144,7 @@ const OperationDetails = ({ route }: Props) => {
             <Trans i18nKey={"transfer.swap.operationDetails.toAmount"} />
           </LText>
           <LText style={styles.value}>
-            <CurrencyUnitValue
-              showCode
-              unit={getAccountUnit(toAccount)}
-              value={toAmount}
-            />
+            <CurrencyUnitValue showCode unit={getAccountUnit(toAccount)} value={toAmount} />
           </LText>
         </View>
       </ScrollView>

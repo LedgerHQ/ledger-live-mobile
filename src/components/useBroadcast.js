@@ -17,10 +17,7 @@ type SignTransactionArgs = {
   parentAccount: ?Account,
 };
 
-export const useBroadcast = ({
-  account,
-  parentAccount,
-}: SignTransactionArgs) => {
+export const useBroadcast = ({ account, parentAccount }: SignTransactionArgs) => {
   const broadcast = useCallback(
     async (signedOperation: SignedOperation): Promise<Operation> => {
       invariant(account, "account not present");

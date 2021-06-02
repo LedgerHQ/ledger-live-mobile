@@ -88,22 +88,18 @@ export default function FreezeAmount({ navigation, route }: Props) {
 
   const [infoModalOpen, setInfoModalOpen] = useState();
 
-  const {
-    transaction,
-    setTransaction,
-    status,
-    bridgePending,
-    bridgeError,
-  } = useBridgeTransaction(() => {
-    const t = bridge.createTransaction(account);
+  const { transaction, setTransaction, status, bridgePending, bridgeError } = useBridgeTransaction(
+    () => {
+      const t = bridge.createTransaction(account);
 
-    const transaction = bridge.updateTransaction(t, {
-      mode: "freeze",
-      resource: "BANDWIDTH",
-    });
+      const transaction = bridge.updateTransaction(t, {
+        mode: "freeze",
+        resource: "BANDWIDTH",
+      });
 
-    return { account, transaction };
-  });
+      return { account, transaction };
+    },
+  );
 
   const onChange = useCallback(
     (amount, keepRatio) => {
@@ -219,11 +215,7 @@ export default function FreezeAmount({ navigation, route }: Props) {
       >
         <KeyboardView style={styles.container}>
           <View style={styles.topContainer}>
-            <ToggleButton
-              value={resource}
-              options={options}
-              onChange={onChangeResource}
-            />
+            <ToggleButton value={resource} options={options} onChange={onChangeResource} />
           </View>
           <TouchableWithoutFeedback onPress={blur}>
             <View style={styles.root}>
@@ -246,11 +238,7 @@ export default function FreezeAmount({ navigation, route }: Props) {
                   hasError={!!error}
                   hasWarning={!!warning}
                 />
-                <LText
-                  style={[styles.error]}
-                  color={error ? "alert" : "orange"}
-                  numberOfLines={2}
-                >
+                <LText style={[styles.error]} color={error ? "alert" : "orange"} numberOfLines={2}>
                   <TranslatedError error={error || warning} />
                 </LText>
               </View>
@@ -289,10 +277,7 @@ export default function FreezeAmount({ navigation, route }: Props) {
                     <CurrencyUnitValue
                       showCode
                       unit={unit}
-                      value={getDecimalPart(
-                        account.spendableBalance,
-                        defaultUnit.magnitude,
-                      )}
+                      value={getDecimalPart(account.spendableBalance, defaultUnit.magnitude)}
                     />
                   </LText>
                 </View>
@@ -312,21 +297,14 @@ export default function FreezeAmount({ navigation, route }: Props) {
         </KeyboardView>
       </SafeAreaView>
 
-      <InfoModal
-        isOpened={!!infoModalOpen}
-        onClose={closeInfoModal}
-        data={infoModalData}
-      />
+      <InfoModal isOpened={!!infoModalOpen} onClose={closeInfoModal} data={infoModalData} />
 
       <GenericErrorBottomModal
         error={bridgeErr}
         onClose={onBridgeErrorRetry}
         footerButtons={
           <>
-            <CancelButton
-              containerStyle={styles.button}
-              onPress={onBridgeErrorCancel}
-            />
+            <CancelButton containerStyle={styles.button} onPress={onBridgeErrorCancel} />
             <RetryButton
               containerStyle={[styles.button, styles.buttonRight]}
               onPress={onBridgeErrorRetry}

@@ -33,9 +33,7 @@ type Props = {
   item: AccountDistributionItem,
 };
 
-export default function Row({
-  item: { currency, distribution, account, amount },
-}: Props) {
+export default function Row({ item: { currency, distribution, account, amount } }: Props) {
   const accounts = useSelector(accountsSelector);
   const navigation = useNavigation();
   const { colors } = useTheme();
@@ -51,9 +49,7 @@ export default function Row({
   );
 
   const parentAccount =
-    account.type !== "Account"
-      ? accounts.find(a => a.id === account.parentId)
-      : null;
+    account.type !== "Account" ? accounts.find(a => a.id === account.parentId) : null;
   const color = ensureContrast(getCurrencyColor(currency), colors.background);
   const percentage = Math.round(distribution * 1e4) / 1e2;
   const icon = <ParentCurrencyIcon currency={currency} size={18} />;
@@ -77,11 +73,7 @@ export default function Row({
       {icon}
       <View style={styles.content}>
         <View style={styles.row}>
-          <LText
-            numberOfLines={1}
-            semiBold
-            style={[styles.darkBlue, styles.bodyLeft]}
-          >
+          <LText numberOfLines={1} semiBold style={[styles.darkBlue, styles.bodyLeft]}>
             {getAccountName(account)}
           </LText>
           <LText semiBold style={[styles.darkBlue, styles.bodyRight]}>
@@ -107,10 +99,7 @@ export default function Row({
               ]}
             />
           </View>
-          <LText
-            semiBold
-            style={styles.percentageText}
-          >{`${percentage}%`}</LText>
+          <LText semiBold style={styles.percentageText}>{`${percentage}%`}</LText>
         </View>
       </View>
     </RectButton>

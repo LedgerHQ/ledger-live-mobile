@@ -24,16 +24,11 @@ function BluetoothEmpty({ onPairNewDevice }: Props) {
         <Animation source={lottie} style={styles.image} />
       </View>
       <View style={styles.bulletLine}>
-        <View
-          style={[styles.bulletIcon, { backgroundColor: colors.lightLive }]}
-        >
+        <View style={[styles.bulletIcon, { backgroundColor: colors.lightLive }]}>
           <Bluetooth size={10} color={colors.live} />
         </View>
         <View style={styles.bulletTextContainer}>
-          <LText
-            semiBold
-            style={[styles.bulletTitle, { color: colors.darkBlue }]}
-          >
+          <LText semiBold style={[styles.bulletTitle, { color: colors.darkBlue }]}>
             <Trans i18nKey="SelectDevice.bluetooth.title" />
           </LText>
           <LText style={[styles.label, { color: colors.darkBlue }]}>

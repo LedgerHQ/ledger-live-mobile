@@ -27,11 +27,7 @@ type Props = {
   onClose: () => void,
 };
 
-const UninstallDependenciesModal = ({
-  appUninstallWithDependencies,
-  dispatch,
-  onClose,
-}: Props) => {
+const UninstallDependenciesModal = ({ appUninstallWithDependencies, dispatch, onClose }: Props) => {
   const { colors } = useTheme();
   const { app, dependents = [] } = appUninstallWithDependencies || {};
   const { name } = app || {};
@@ -59,12 +55,7 @@ const UninstallDependenciesModal = ({
   const modalActions = useMemo(
     () => [
       {
-        title: (
-          <Trans
-            i18nKey="AppAction.uninstall.continueUninstall"
-            values={{ app: name }}
-          />
-        ),
+        title: <Trans i18nKey="AppAction.uninstall.continueUninstall" values={{ app: name }} />,
         onPress: unInstallApp,
         type: "alert",
         event: "ManagerAppDepsUninstallConfirm",
@@ -91,16 +82,10 @@ const UninstallDependenciesModal = ({
           </View>
           <View style={styles.infoRow}>
             <LText style={[styles.warnText, styles.title]} bold>
-              <Trans
-                i18nKey="AppAction.uninstall.dependency.title"
-                values={{ app: name }}
-              />
+              <Trans i18nKey="AppAction.uninstall.dependency.title" values={{ app: name }} />
             </LText>
             <LText style={styles.warnText} color="grey">
-              <Trans
-                i18nKey="AppAction.uninstall.dependency.description"
-                values={{ app: name }}
-              />
+              <Trans i18nKey="AppAction.uninstall.dependency.description" values={{ app: name }} />
             </LText>
             <LText style={styles.warnText} color="grey">
               <Trans i18nKey="manager.uninstall.description" />
@@ -113,8 +98,7 @@ const UninstallDependenciesModal = ({
               renderItem={renderDepLine}
               itemHeight={LINE_HEIGHT}
               containerStyle={{
-                maxHeight:
-                  LIST_HEIGHT - (LIST_HEIGHT % LINE_HEIGHT) - LINE_HEIGHT / 2, // max height available but still cutting the list mid items for UX
+                maxHeight: LIST_HEIGHT - (LIST_HEIGHT % LINE_HEIGHT) - LINE_HEIGHT / 2, // max height available but still cutting the list mid items for UX
               }}
             />
           </View>

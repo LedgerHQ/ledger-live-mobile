@@ -21,17 +21,10 @@ const AnalyticsConsoleRow = () => {
       alignedTop
     >
       <Track
-        event={
-          analyticsConsoleVisibility
-            ? "EnableAnalyticsConsole"
-            : "DisableAnalyticsConsole"
-        }
+        event={analyticsConsoleVisibility ? "EnableAnalyticsConsole" : "DisableAnalyticsConsole"}
         onUpdate
       />
-      <Switch
-        value={analyticsConsoleVisibility}
-        onValueChange={toggleAnalyticsConsole}
-      />
+      <Switch value={analyticsConsoleVisibility} onValueChange={toggleAnalyticsConsole} />
     </SettingsRow>
   );
 };

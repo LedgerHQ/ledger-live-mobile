@@ -8,10 +8,7 @@ import { useTheme } from "@react-navigation/native";
 import { TrackScreen } from "../../analytics";
 import PreventNativeBack from "../../components/PreventNativeBack";
 import ValidateSuccess from "../../components/ValidateSuccess";
-import {
-  context as _wcContext,
-  setCurrentCallRequestResult,
-} from "../WalletConnect/Provider";
+import { context as _wcContext, setCurrentCallRequestResult } from "../WalletConnect/Provider";
 
 type Props = {
   navigation: any,

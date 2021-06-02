@@ -1,12 +1,6 @@
 // @flow
 import React, { useCallback } from "react";
-import {
-  Linking,
-  SafeAreaView,
-  StyleSheet,
-  View,
-  FlatList,
-} from "react-native";
+import { Linking, SafeAreaView, StyleSheet, View, FlatList } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { Trans } from "react-i18next";
 
@@ -80,16 +74,11 @@ export default function NotificationCenter() {
         style={{ flex: 1 }}
         data={incidents}
         renderItem={props => (
-          <IncidentRow
-            {...props}
-            style={[styles.border, { borderColor: colors.lightFog }]}
-          />
+          <IncidentRow {...props} style={[styles.border, { borderColor: colors.lightFog }]} />
         )}
         keyExtractor={(item, index) => item.id + index}
         ItemSeparatorComponent={() => (
-          <View
-            style={[styles.separator, { backgroundColor: colors.lightFog }]}
-          />
+          <View style={[styles.separator, { backgroundColor: colors.lightFog }]} />
         )}
         ListEmptyComponent={
           <View style={styles.container}>

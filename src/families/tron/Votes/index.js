@@ -4,10 +4,7 @@ import { View, TouchableOpacity, StyleSheet } from "react-native";
 import { useNavigation, useTheme } from "@react-navigation/native";
 import { Trans, useTranslation } from "react-i18next";
 import { BigNumber } from "bignumber.js";
-import {
-  getAccountUnit,
-  getAccountCurrency,
-} from "@ledgerhq/live-common/lib/account/helpers";
+import { getAccountUnit, getAccountCurrency } from "@ledgerhq/live-common/lib/account/helpers";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import {
@@ -62,9 +59,7 @@ const Delegation = ({ account, parentAccount }: Props) => {
     [colors.darkBlue],
   );
 
-  const lastDate = lastVotedDate ? (
-    <DateFromNow date={lastVotedDate.valueOf()} />
-  ) : null;
+  const lastDate = lastVotedDate ? <DateFromNow date={lastVotedDate.valueOf()} /> : null;
 
   const currency = getAccountCurrency(account);
   const unit = getAccountUnit(account);
@@ -74,8 +69,7 @@ const Delegation = ({ account, parentAccount }: Props) => {
 
   const { spendableBalance, tronResources } = account;
 
-  const canFreeze =
-    spendableBalance && spendableBalance.gt(MIN_TRANSACTION_AMOUNT);
+  const canFreeze = spendableBalance && spendableBalance.gt(MIN_TRANSACTION_AMOUNT);
 
   const { votes, tronPower, unwithdrawnReward } = tronResources || {};
 
@@ -83,14 +77,9 @@ const Delegation = ({ account, parentAccount }: Props) => {
 
   const formattedVotes = formatVotes(votes, superRepresentatives);
 
-  const totalVotesUsed = votes.reduce(
-    (sum, { voteCount }) => sum + voteCount,
-    0,
-  );
+  const totalVotesUsed = votes.reduce((sum, { voteCount }) => sum + voteCount, 0);
 
-  const openRewardsInfoModal = useCallback(() => setRewardsInfoModal(true), [
-    setRewardsInfoModal,
-  ]);
+  const openRewardsInfoModal = useCallback(() => setRewardsInfoModal(true), [setRewardsInfoModal]);
 
   const closeRewardsInfoModal = useCallback(() => setRewardsInfoModal(false), [
     setRewardsInfoModal,
@@ -141,9 +130,7 @@ const Delegation = ({ account, parentAccount }: Props) => {
   }, [navigation, accountId, parentId]);
 
   const onDelegate = useCallback(() => {
-    const screenName = lastVotedDate
-      ? ScreenName.VoteSelectValidator
-      : ScreenName.VoteStarted;
+    const screenName = lastVotedDate ? ScreenName.VoteSelectValidator : ScreenName.VoteStarted;
     navigation.navigate(NavigatorName.TronVoteFlow, {
       screen: screenName,
       params: {
@@ -169,22 +156,14 @@ const Delegation = ({ account, parentAccount }: Props) => {
             icon={<Info size={16} color={colors.darkBlue} />}
             onPress={openRewardsInfoModal}
           />
-          <View
-            style={[styles.rewardSection, { backgroundColor: colors.card }]}
-          >
+          <View style={[styles.rewardSection, { backgroundColor: colors.card }]}>
             <View style={styles.labelSection}>
               <LText semiBold style={styles.title}>
-                <CurrencyUnitValue
-                  unit={unit}
-                  value={formattedUnwidthDrawnReward}
-                />
+                <CurrencyUnitValue unit={unit} value={formattedUnwidthDrawnReward} />
               </LText>
               <LText semiBold style={styles.subtitle} color="grey">
                 {currency && (
-                  <CounterValue
-                    currency={currency}
-                    value={formattedUnwidthDrawnReward}
-                  />
+                  <CounterValue currency={currency} value={formattedUnwidthDrawnReward} />
                 )}
               </LText>
             </View>
@@ -203,26 +182,18 @@ const Delegation = ({ account, parentAccount }: Props) => {
         formattedVotes.length > 0 ? (
           <>
             <Header count={formattedVotes.length} onPress={onManageVotes} />
-            <View
-              style={[
-                styles.container,
-                styles.noPadding,
-                { backgroundColor: colors.card },
-              ]}
-            >
-              {formattedVotes.map(
-                ({ validator, address, voteCount, isSR }, index) => (
-                  <Row
-                    key={index}
-                    validator={validator}
-                    address={address}
-                    amount={voteCount}
-                    duration={lastDate}
-                    explorerView={explorerView}
-                    isSR={isSR}
-                  />
-                ),
-              )}
+            <View style={[styles.container, styles.noPadding, { backgroundColor: colors.card }]}>
+              {formattedVotes.map(({ validator, address, voteCount, isSR }, index) => (
+                <Row
+                  key={index}
+                  validator={validator}
+                  address={address}
+                  amount={voteCount}
+                  duration={lastDate}
+                  explorerView={explorerView}
+                  isSR={isSR}
+                />
+              ))}
               {percentVotesUsed < 1 && (
                 <View style={[styles.container]}>
                   <TouchableOpacity
@@ -235,10 +206,7 @@ const Delegation = ({ account, parentAccount }: Props) => {
                       backgroundColor={colors.fog}
                     />
                     <View style={styles.warnSection}>
-                      <LText
-                        semiBold
-                        style={[styles.warnText, styles.warnTitle]}
-                      >
+                      <LText semiBold style={[styles.warnText, styles.warnTitle]}>
                         <Trans i18nKey="tron.voting.remainingVotes.title" />
                       </LText>
                       <LText style={styles.warnText} color="live">

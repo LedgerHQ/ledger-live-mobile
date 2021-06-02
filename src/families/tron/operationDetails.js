@@ -5,21 +5,13 @@ import { StyleSheet, Linking } from "react-native";
 import { Trans, useTranslation } from "react-i18next";
 import { BigNumber } from "bignumber.js";
 import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
-import {
-  getDefaultExplorerView,
-  getAddressExplorer,
-} from "@ledgerhq/live-common/lib/explorers";
+import { getDefaultExplorerView, getAddressExplorer } from "@ledgerhq/live-common/lib/explorers";
 import {
   formatVotes,
   useTronSuperRepresentatives,
 } from "@ledgerhq/live-common/lib/families/tron/react";
 import type { Vote } from "@ledgerhq/live-common/lib/families/tron/types";
-import type {
-  Account,
-  Operation,
-  Currency,
-  Unit,
-} from "@ledgerhq/live-common/lib/types";
+import type { Account, Operation, Currency, Unit } from "@ledgerhq/live-common/lib/types";
 import { useSelector } from "react-redux";
 import LText from "../../components/LText";
 import CurrencyUnitValue from "../../components/CurrencyUnitValue";
@@ -43,11 +35,7 @@ type OperationDetailsExtraProps = {
   account: Account,
 };
 
-function OperationDetailsExtra({
-  extra,
-  type,
-  account,
-}: OperationDetailsExtraProps) {
+function OperationDetailsExtra({ extra, type, account }: OperationDetailsExtraProps) {
   const { t } = useTranslation();
   const discreet = useSelector(discreetModeSelector);
 
@@ -59,30 +47,18 @@ function OperationDetailsExtra({
       return <OperationDetailsVotes votes={votes} account={account} />;
     }
     case "FREEZE": {
-      const value = formatCurrencyUnit(
-        account.unit,
-        BigNumber(extra.frozenAmount),
-        { showCode: true, discreet },
-      );
-      return (
-        <Section
-          title={t("operationDetails.extra.frozenAmount")}
-          value={value}
-        />
-      );
+      const value = formatCurrencyUnit(account.unit, BigNumber(extra.frozenAmount), {
+        showCode: true,
+        discreet,
+      });
+      return <Section title={t("operationDetails.extra.frozenAmount")} value={value} />;
     }
     case "UNFREEZE": {
-      const value = formatCurrencyUnit(
-        account.unit,
-        BigNumber(extra.unfreezeAmount),
-        { showCode: true, discreet },
-      );
-      return (
-        <Section
-          title={t("operationDetails.extra.unfreezeAmount")}
-          value={value}
-        />
-      );
+      const value = formatCurrencyUnit(account.unit, BigNumber(extra.unfreezeAmount), {
+        showCode: true,
+        discreet,
+      });
+      return <Section title={t("operationDetails.extra.unfreezeAmount")} value={value} />;
     }
     default:
       return null;
@@ -94,29 +70,21 @@ type OperationsDetailsVotesProps = {
   account: Account,
 };
 
-function OperationDetailsVotes({
-  votes,
-  account,
-}: OperationsDetailsVotesProps) {
+function OperationDetailsVotes({ votes, account }: OperationsDetailsVotesProps) {
   const { t } = useTranslation();
   const sp = useTronSuperRepresentatives();
   const formattedVotes = formatVotes(votes, sp);
 
   const redirectAddressCreator = useCallback(
     address => () => {
-      const url = getAddressExplorer(
-        getDefaultExplorerView(account.currency),
-        address,
-      );
+      const url = getAddressExplorer(getDefaultExplorerView(account.currency), address);
       if (url) Linking.openURL(url);
     },
     [account],
   );
 
   return (
-    <Section
-      title={t("operationDetails.extra.votes", { number: votes.length })}
-    >
+    <Section title={t("operationDetails.extra.votes", { number: votes.length })}>
       {formattedVotes &&
         formattedVotes.map(({ address, voteCount, validator }, i) => (
           <DelegationInfo
@@ -137,21 +105,11 @@ type Props = {
   unit: Unit,
 };
 
-const AmountCell = ({
-  amount,
-  unit,
-  currency,
-  operation,
-}: Props & { amount: BigNumber }) =>
+const AmountCell = ({ amount, unit, currency, operation }: Props & { amount: BigNumber }) =>
   !amount.isZero() ? (
     <>
       <LText semiBold numberOfLines={1} style={styles.topText}>
-        <CurrencyUnitValue
-          showCode
-          unit={unit}
-          value={amount}
-          alwaysShowSign={false}
-        />
+        <CurrencyUnitValue showCode unit={unit} value={amount} alwaysShowSign={false} />
       </LText>
 
       <LText numberOfLines={1} style={styles.amountText} color="grey">
@@ -168,33 +126,15 @@ const AmountCell = ({
   ) : null;
 
 const FreezeAmountCell = ({ operation, currency, unit }: Props) => {
-  const amount = new BigNumber(
-    operation.extra ? operation.extra.frozenAmount : 0,
-  );
+  const amount = new BigNumber(operation.extra ? operation.extra.frozenAmount : 0);
 
-  return (
-    <AmountCell
-      amount={amount}
-      operation={operation}
-      currency={currency}
-      unit={unit}
-    />
-  );
+  return <AmountCell amount={amount} operation={operation} currency={currency} unit={unit} />;
 };
 
 const UnfreezeAmountCell = ({ operation, currency, unit }: Props) => {
-  const amount = new BigNumber(
-    operation.extra ? operation.extra.unfreezeAmount : 0,
-  );
+  const amount = new BigNumber(operation.extra ? operation.extra.unfreezeAmount : 0);
 
-  return (
-    <AmountCell
-      amount={amount}
-      operation={operation}
-      currency={currency}
-      unit={unit}
-    />
-  );
+  return <AmountCell amount={amount} operation={operation} currency={currency} unit={unit} />;
 };
 
 const VoteAmountCell = ({ operation }: Props) => {
@@ -205,10 +145,7 @@ const VoteAmountCell = ({ operation }: Props) => {
 
   return amount > 0 ? (
     <LText numberOfLines={1} semiBold style={[styles.topText, styles.voteText]}>
-      <Trans
-        i18nKey={"operationDetails.extra.votes"}
-        values={{ number: amount }}
-      />
+      <Trans i18nKey={"operationDetails.extra.votes"} values={{ number: amount }} />
     </LText>
   ) : null;
 };

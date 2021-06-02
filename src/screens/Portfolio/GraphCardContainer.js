@@ -20,8 +20,7 @@ const GraphCardContainer = ({
 }) => {
   const currencies = useSelector(currenciesSelector);
 
-  const showDistribution =
-    portfolio.balanceHistory[portfolio.balanceHistory.length - 1].value > 0;
+  const showDistribution = portfolio.balanceHistory[portfolio.balanceHistory.length - 1].value > 0;
   return (
     <View>
       <Header
@@ -33,10 +32,7 @@ const GraphCardContainer = ({
       <CurrencyDownStatusAlert currencies={currencies} />
 
       {showGreeting && (
-        <GraphCard
-          counterValueCurrency={counterValueCurrency}
-          portfolio={portfolio}
-        />
+        <GraphCard counterValueCurrency={counterValueCurrency} portfolio={portfolio} />
       )}
     </View>
   );

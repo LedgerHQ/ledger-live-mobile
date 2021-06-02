@@ -2,14 +2,7 @@
 
 import React, { PureComponent, useCallback } from "react";
 import { Trans } from "react-i18next";
-import {
-  Animated,
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  PanResponder,
-  FlatList,
-} from "react-native";
+import { Animated, View, StyleSheet, TouchableOpacity, PanResponder, FlatList } from "react-native";
 import { useNavigation, useTheme } from "@react-navigation/native";
 import { listTokenTypesForCryptoCurrency } from "@ledgerhq/live-common/lib/currencies";
 import type { Account } from "@ledgerhq/live-common/lib/types";
@@ -152,11 +145,7 @@ class SelectableAccount extends PureComponent<
 
     return (
       <Animated.View
-        style={[
-          styles.leftAction,
-          { transform: [{ translateX }] },
-          { marginLeft: 12 },
-        ]}
+        style={[styles.leftAction, { transform: [{ translateX }] }, { marginLeft: 12 }]}
       >
         <Button
           event="EditAccountNameFromSlideAction"
@@ -183,10 +172,7 @@ class SelectableAccount extends PureComponent<
     swipedAccountSubject.subscribe(msg => {
       const { row, list } = msg;
       this.setState({ stopAnimation: true });
-      if (
-        this.swipeableRow &&
-        (row !== this.props.rowIndex || list !== this.props.listIndex)
-      ) {
+      if (this.swipeableRow && (row !== this.props.rowIndex || list !== this.props.listIndex)) {
         this.swipeableRow.close();
       }
     });
@@ -217,8 +203,7 @@ class SelectableAccount extends PureComponent<
     const { showHint, isDisabled, isSelected, account, colors } = this.props;
     const { stopAnimation } = this.state;
     const subAccountCount = account.subAccounts && account.subAccounts.length;
-    const isToken =
-      listTokenTypesForCryptoCurrency(account.currency).length > 0;
+    const isToken = listTokenTypesForCryptoCurrency(account.currency).length > 0;
 
     const inner = (
       <View
@@ -236,11 +221,7 @@ class SelectableAccount extends PureComponent<
             AccountSubTitle={
               subAccountCount && !isDisabled ? (
                 <View style={[styles.subAccountCount]}>
-                  <LText
-                    semiBold
-                    style={styles.subAccountCountText}
-                    color="pillActiveForeground"
-                  >
+                  <LText semiBold style={styles.subAccountCountText} color="pillActiveForeground">
                     <Trans
                       i18nKey={`selectableAccountsList.${
                         isToken ? "tokenCount" : "subaccountCount"

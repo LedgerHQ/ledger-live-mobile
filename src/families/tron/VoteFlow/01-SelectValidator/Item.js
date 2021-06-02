@@ -26,19 +26,15 @@ type Props = {
   selected: boolean,
 };
 
-function Item({
-  item,
-  selected,
-  disabled,
-  onSelectSuperRepresentative,
-}: Props) {
+function Item({ item, selected, disabled, onSelectSuperRepresentative }: Props) {
   const { colors } = useTheme();
   const { sr, isSR, rank, address } = item;
 
-  const onSelect = useCallback(
-    () => onSelectSuperRepresentative(item, selected),
-    [onSelectSuperRepresentative, item, selected],
-  );
+  const onSelect = useCallback(() => onSelectSuperRepresentative(item, selected), [
+    onSelectSuperRepresentative,
+    item,
+    selected,
+  ]);
 
   const isDisabled = !selected && disabled;
 
@@ -46,24 +42,15 @@ function Item({
     <TouchableOpacity
       onPress={onSelect}
       disabled={isDisabled}
-      style={[
-        styles.wrapper,
-        isDisabled ? { backgroundColor: colors.card } : {},
-      ]}
+      style={[styles.wrapper, isDisabled ? { backgroundColor: colors.card } : {}]}
     >
       <View
         style={[
           styles.iconWrapper,
-          !isSR
-            ? { backgroundColor: colors.lightFog }
-            : { backgroundColor: colors.lightLive },
+          !isSR ? { backgroundColor: colors.lightFog } : { backgroundColor: colors.lightLive },
         ]}
       >
-        {isSR ? (
-          <Trophy size={16} color={colors.live} />
-        ) : (
-          <Medal size={16} color={colors.grey} />
-        )}
+        {isSR ? <Trophy size={16} color={colors.live} /> : <Medal size={16} color={colors.grey} />}
       </View>
 
       <View style={styles.nameWrapper}>

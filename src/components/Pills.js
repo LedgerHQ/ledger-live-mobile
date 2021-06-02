@@ -20,11 +20,7 @@ type Props = {
 
 function Pills({ items, value, onChange, isDisabled }: Props) {
   return (
-    <ScrollView
-      style={styles.root}
-      horizontal
-      showsHorizontalScrollIndicator={false}
-    >
+    <ScrollView style={styles.root} horizontal showsHorizontalScrollIndicator={false}>
       {items.map((item, i) => (
         <Pill
           key={item.key}

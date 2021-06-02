@@ -42,9 +42,6 @@ class ReportErrorsRow extends PureComponent<Props> {
   }
 }
 
-const m: React$ComponentType<{}> = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(ReportErrorsRow);
+const m: React$ComponentType<{}> = connect(mapStateToProps, mapDispatchToProps)(ReportErrorsRow);
 
 export default m;

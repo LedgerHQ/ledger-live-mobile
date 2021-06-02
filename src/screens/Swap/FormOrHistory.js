@@ -2,10 +2,7 @@
 import React from "react";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { useTranslation } from "react-i18next";
-import type {
-  Account,
-  AccountLike,
-} from "@ledgerhq/live-common/lib/types/account";
+import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types/account";
 import { useTheme } from "@react-navigation/native";
 import { ScreenName } from "../../const";
 import Swap from "./Swap";

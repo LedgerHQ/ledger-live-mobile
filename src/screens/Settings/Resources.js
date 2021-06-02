@@ -19,10 +19,7 @@ const Resources = () => {
 
   return (
     <NavigationScrollView
-      contentContainerStyle={[
-        styles.root,
-        { backgroundColor: colors.background },
-      ]}
+      contentContainerStyle={[styles.root, { backgroundColor: colors.background }]}
     >
       <BottomModalChoice
         event="GettingStarted"
@@ -83,9 +80,7 @@ const Resources = () => {
         title={t("help.status.title")}
         description={t("help.status.desc")}
         onPress={() => Linking.openURL("https://status.ledger.com")}
-        Icon={({ size, color }) => (
-          <Icon name="activity" color={color} size={size} />
-        )}
+        Icon={({ size, color }) => <Icon name="activity" color={color} size={size} />}
       />
     </NavigationScrollView>
   );

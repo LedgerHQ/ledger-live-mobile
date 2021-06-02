@@ -5,10 +5,7 @@ import React, { useCallback } from "react";
 import { StyleSheet, View, TouchableOpacity, SafeAreaView } from "react-native";
 import { useSelector } from "react-redux";
 import { Trans } from "react-i18next";
-import type {
-  Transaction,
-  TokenCurrency,
-} from "@ledgerhq/live-common/lib/types";
+import type { Transaction, TokenCurrency } from "@ledgerhq/live-common/lib/types";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { BigNumber } from "bignumber.js";
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account/helpers";
@@ -41,22 +38,15 @@ type RouteParams = {
 export default function EnableAdvanced({ navigation, route }: Props) {
   const { colors } = useTheme();
   const { account, parentAccount } = useSelector(accountScreenSelector(route));
-  invariant(
-    account && account.type === "TokenAccount",
-    "token account required",
-  );
+  invariant(account && account.type === "TokenAccount", "token account required");
   const bridge = getAccountBridge(account, parentAccount);
-  const {
-    transaction,
-    setTransaction,
-    status,
-    bridgePending,
-    bridgeError,
-  } = useBridgeTransaction(() => ({
-    transaction: route.params.transaction,
-    account,
-    parentAccount,
-  }));
+  const { transaction, setTransaction, status, bridgePending, bridgeError } = useBridgeTransaction(
+    () => ({
+      transaction: route.params.transaction,
+      account,
+      parentAccount,
+    }),
+  );
 
   invariant(transaction, "transaction required");
 
@@ -112,18 +102,12 @@ export default function EnableAdvanced({ navigation, route }: Props) {
         name="step 1 (Advanced)"
         eventProperties={{ currencyName: currency.name }}
       />
-      <SafeAreaView
-        style={[styles.root, { backgroundColor: colors.background }]}
-      >
+      <SafeAreaView style={[styles.root, { backgroundColor: colors.background }]}>
         <View style={styles.container}>
           <View style={styles.row}>
             <TooltipLabel
-              label={
-                <Trans i18nKey="transfer.lending.enable.advanced.amountLabel" />
-              }
-              tooltip={
-                <Trans i18nKey="transfer.lending.enable.advanced.amountLabelTooltip" />
-              }
+              label={<Trans i18nKey="transfer.lending.enable.advanced.amountLabel" />}
+              tooltip={<Trans i18nKey="transfer.lending.enable.advanced.amountLabelTooltip" />}
             />
             <View style={styles.limitRow}>
               {!useAllAmount && (
@@ -147,10 +131,7 @@ export default function EnableAdvanced({ navigation, route }: Props) {
                 <Trans i18nKey="transfer.lending.enable.advanced.noLimit" />
               </LText>
             ) : (
-              <TouchableOpacity
-                style={styles.editSection}
-                onPress={onEditAmount}
-              >
+              <TouchableOpacity style={styles.editSection} onPress={onEditAmount}>
                 <LText semiBold numberOfLines={1} style={styles.limitLabel}>
                   <CurrencyUnitValue showCode unit={unit} value={amount} />
                 </LText>
@@ -178,11 +159,7 @@ export default function EnableAdvanced({ navigation, route }: Props) {
             )}
           </View>
           <View style={styles.row}>
-            <LText
-              style={[styles.error]}
-              color={warning ? "orange" : "alert"}
-              numberOfLines={2}
-            >
+            <LText style={[styles.error]} color={warning ? "orange" : "alert"} numberOfLines={2}>
               <TranslatedError error={error || warning} />
             </LText>
           </View>
@@ -206,10 +183,7 @@ export default function EnableAdvanced({ navigation, route }: Props) {
         onClose={onBridgeErrorRetry}
         footerButtons={
           <>
-            <CancelButton
-              containerStyle={styles.button}
-              onPress={onBridgeErrorCancel}
-            />
+            <CancelButton containerStyle={styles.button} onPress={onBridgeErrorCancel} />
             <RetryButton
               containerStyle={[styles.button, styles.buttonRight]}
               onPress={onBridgeErrorRetry}

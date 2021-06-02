@@ -1,17 +1,7 @@
 // @flow
 import React, { useState, useCallback } from "react";
-import {
-  View,
-  StyleSheet,
-  Platform,
-  SafeAreaView,
-  TouchableOpacity,
-} from "react-native";
-import {
-  useNavigation,
-  useTheme,
-  useIsFocused,
-} from "@react-navigation/native";
+import { View, StyleSheet, Platform, SafeAreaView, TouchableOpacity } from "react-native";
+import { useNavigation, useTheme, useIsFocused } from "@react-navigation/native";
 import Animated from "react-native-reanimated";
 
 import Styles from "../navigation/styles";
@@ -122,39 +112,23 @@ export default function AnimatedHeaderView({
   });
 
   return (
-    <SafeAreaView
-      style={[styles.root, { backgroundColor: colors.background }, style]}
-    >
+    <SafeAreaView style={[styles.root, { backgroundColor: colors.background }, style]}>
       <Animated.View
-        style={[
-          styles.header,
-          { height: Platform.OS === "ios" ? textHeight : textHeight + 34 },
-        ]}
+        style={[styles.header, { height: Platform.OS === "ios" ? textHeight : textHeight + 34 }]}
       >
         <View style={styles.topHeader}>
           {hasBackButton && (
-            <BackButton
-              colors={colors}
-              navigation={navigation}
-              action={backAction}
-            />
+            <BackButton colors={colors} navigation={navigation} action={backAction} />
           )}
           <View style={styles.spacer} />
           {hasCloseButton && (
-            <CloseButton
-              colors={colors}
-              navigation={navigation}
-              action={closeAction}
-            />
+            <CloseButton colors={colors} navigation={navigation} action={closeAction} />
           )}
         </View>
 
         <Animated.View
           bold
-          style={[
-            styles.titleContainer,
-            { transform: [{ translateY, translateX }, { scale }] },
-          ]}
+          style={[styles.titleContainer, { transform: [{ translateY, translateX }, { scale }] }]}
           onLayout={onLayoutText}
         >
           <LText bold style={[styles.title]} numberOfLines={4}>

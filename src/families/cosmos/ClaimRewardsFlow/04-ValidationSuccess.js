@@ -59,9 +59,7 @@ export default function ValidationSuccess({ navigation, route }: Props) {
             }`}
           />
         }
-        description={
-          <Trans i18nKey="cosmos.claimRewards.flow.steps.verification.success.text" />
-        }
+        description={<Trans i18nKey="cosmos.claimRewards.flow.steps.verification.success.text" />}
       />
     </View>
   );

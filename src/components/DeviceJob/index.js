@@ -9,15 +9,10 @@ import StepRunnerModal from "./StepRunnerModal";
 import type { Step } from "./types";
 import type { DeviceNames } from "../../screens/Onboarding/types";
 
-const runStep = (
-  step: Step,
-  meta: Object,
-  onDoneO: Observable<*>,
-): Observable<Object> => step.run(meta, onDoneO);
+const runStep = (step: Step, meta: Object, onDoneO: Observable<*>): Observable<Object> =>
+  step.run(meta, onDoneO);
 
-type StepEvent =
-  | { type: "step", step: number, meta: Object }
-  | { type: "meta", meta: Object };
+type StepEvent = { type: "step", step: number, meta: Object } | { type: "meta", meta: Object };
 
 const chainSteps = (
   steps: Step[],
@@ -139,28 +134,26 @@ class DeviceJob extends Component<
       meta,
     });
 
-    this.sub = chainSteps(this.props.steps, meta, this.onDoneSubject).subscribe(
-      {
-        complete: () => {
-          this.debouncedSetStepIndex.cancel();
-          this.setState({ meta: null }, () => {
-            this.props.onDone(meta);
-          });
-        },
-        next: e => {
-          meta = e.meta;
-          this.setState({ meta }); // refresh the UI
-          if (e.type === "step") {
-            this.debouncedSetStepIndex(e.step);
-            const { onStepEntered } = this.props;
-            if (onStepEntered) onStepEntered(e.step, e.meta);
-          }
-        },
-        error: error => {
-          this.setState({ error });
-        },
+    this.sub = chainSteps(this.props.steps, meta, this.onDoneSubject).subscribe({
+      complete: () => {
+        this.debouncedSetStepIndex.cancel();
+        this.setState({ meta: null }, () => {
+          this.props.onDone(meta);
+        });
       },
-    );
+      next: e => {
+        meta = e.meta;
+        this.setState({ meta }); // refresh the UI
+        if (e.type === "step") {
+          this.debouncedSetStepIndex(e.step);
+          const { onStepEntered } = this.props;
+          if (onStepEntered) onStepEntered(e.step, e.meta);
+        }
+      },
+      error: error => {
+        this.setState({ error });
+      },
+    });
   };
 
   onRetry = () => {

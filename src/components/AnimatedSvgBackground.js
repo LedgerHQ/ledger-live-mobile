@@ -16,16 +16,7 @@ const paths = [
   "M0 241L17.8667 236.215C35.4667 231.43 71.2 221.859 106.667 220.264C142.133 218.669 177.867 225.05 213.333 223.454C248.8 221.859 284.533 212.289 302.133 207.504L320 202.719V0H302.133C284.533 0 248.8 0 213.333 0C177.867 0 142.133 0 106.667 0C71.2 0 35.4667 0 17.8667 0H0V241Z",
 ];
 
-const {
-  cond,
-  set,
-  block,
-  startClock,
-  stopClock,
-  timing,
-  Clock,
-  Value,
-} = Animated;
+const { cond, set, block, startClock, stopClock, timing, Clock, Value } = Animated;
 
 const clock = new Clock();
 const runProgression = () => {

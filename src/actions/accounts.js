@@ -47,15 +47,9 @@ export const setAccounts = (accounts: Account[]) => ({
   },
 });
 
-export type UpdateAccountWithUpdater = (
-  accountId: string,
-  (Account) => Account,
-) => *;
+export type UpdateAccountWithUpdater = (accountId: string, (Account) => Account) => *;
 
-export const updateAccountWithUpdater: UpdateAccountWithUpdater = (
-  accountId,
-  updater,
-) => ({
+export const updateAccountWithUpdater: UpdateAccountWithUpdater = (accountId, updater) => ({
   type: "UPDATE_ACCOUNT",
   accountId,
   updater,

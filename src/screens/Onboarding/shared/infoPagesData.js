@@ -95,9 +95,7 @@ const recoveryWarningInfoModalProps = [
 
 const pinCodeInfoModalProps = [
   {
-    title: (
-      <Trans i18nKey="onboarding.stepSetupDevice.pinCodeSetup.infoModal.title" />
-    ),
+    title: <Trans i18nKey="onboarding.stepSetupDevice.pinCodeSetup.infoModal.title" />,
     bullets: [
       {
         Icon: Check,
@@ -161,28 +159,18 @@ const pinCodeInfoModalProps = [
 
 const recoveryPhraseInfoModalProps = [
   {
-    title: (
-      <Trans i18nKey="onboarding.stepSetupDevice.recoveryPhraseSetup.infoModal.title" />
-    ),
-    desc: (
-      <Trans i18nKey="onboarding.stepSetupDevice.recoveryPhraseSetup.infoModal.desc" />
-    ),
+    title: <Trans i18nKey="onboarding.stepSetupDevice.recoveryPhraseSetup.infoModal.title" />,
+    desc: <Trans i18nKey="onboarding.stepSetupDevice.recoveryPhraseSetup.infoModal.desc" />,
   },
   {
-    desc: (
-      <Trans i18nKey="onboarding.stepSetupDevice.recoveryPhraseSetup.infoModal.desc_1" />
-    ),
+    desc: <Trans i18nKey="onboarding.stepSetupDevice.recoveryPhraseSetup.infoModal.desc_1" />,
     link: {
-      label: (
-        <Trans i18nKey="onboarding.stepSetupDevice.recoveryPhraseSetup.infoModal.link" />
-      ),
+      label: <Trans i18nKey="onboarding.stepSetupDevice.recoveryPhraseSetup.infoModal.link" />,
       url: urls.recoveryPhraseInfo,
     },
   },
   {
-    title: (
-      <Trans i18nKey="onboarding.stepSetupDevice.recoveryPhraseSetup.infoModal.title_1" />
-    ),
+    title: <Trans i18nKey="onboarding.stepSetupDevice.recoveryPhraseSetup.infoModal.title_1" />,
     bullets: [
       {
         Icon: ArrowRight,
@@ -208,9 +196,7 @@ const recoveryPhraseInfoModalProps = [
 
 const hideRecoveryPhraseInfoModalProps = [
   {
-    title: (
-      <Trans i18nKey="onboarding.stepSetupDevice.hideRecoveryPhrase.infoModal.title" />
-    ),
+    title: <Trans i18nKey="onboarding.stepSetupDevice.hideRecoveryPhrase.infoModal.title" />,
     bullets: [
       {
         Icon: ArrowRight,
@@ -280,56 +266,36 @@ const pairNewErrorInfoModalProps = [
   ...(Platform.OS === "android"
     ? [
         {
-          title: (
-            <Trans i18nKey="onboarding.stepPairNew.errorInfoModal.title_1" />
-          ),
-          desc: (
-            <Trans i18nKey="onboarding.stepPairNew.errorInfoModal.desc_3" />
-          ),
+          title: <Trans i18nKey="onboarding.stepPairNew.errorInfoModal.title_1" />,
+          desc: <Trans i18nKey="onboarding.stepPairNew.errorInfoModal.desc_3" />,
         },
         {
-          desc: (
-            <Trans i18nKey="onboarding.stepPairNew.errorInfoModal.desc_4" />
-          ),
+          desc: <Trans i18nKey="onboarding.stepPairNew.errorInfoModal.desc_4" />,
           bullets: [
             {
               Icon: ArrowRight,
-              label: (
-                <Trans i18nKey="onboarding.stepPairNew.errorInfoModal.bullets.0.label" />
-              ),
+              label: <Trans i18nKey="onboarding.stepPairNew.errorInfoModal.bullets.0.label" />,
             },
             {
               Icon: ArrowRight,
-              label: (
-                <Trans i18nKey="onboarding.stepPairNew.errorInfoModal.bullets.1.label" />
-              ),
+              label: <Trans i18nKey="onboarding.stepPairNew.errorInfoModal.bullets.1.label" />,
             },
             {
               Icon: ArrowRight,
-              label: (
-                <Trans i18nKey="onboarding.stepPairNew.errorInfoModal.bullets.2.label" />
-              ),
+              label: <Trans i18nKey="onboarding.stepPairNew.errorInfoModal.bullets.2.label" />,
             },
             {
               Icon: ArrowRight,
-              label: (
-                <Trans i18nKey="onboarding.stepPairNew.errorInfoModal.bullets.3.label" />
-              ),
+              label: <Trans i18nKey="onboarding.stepPairNew.errorInfoModal.bullets.3.label" />,
             },
           ],
         },
         {
-          desc: (
-            <Trans i18nKey="onboarding.stepPairNew.errorInfoModal.desc_5" />
-          ),
+          desc: <Trans i18nKey="onboarding.stepPairNew.errorInfoModal.desc_5" />,
         },
         {
-          title: (
-            <Trans i18nKey="onboarding.stepPairNew.errorInfoModal.title_2" />
-          ),
-          desc: (
-            <Trans i18nKey="onboarding.stepPairNew.errorInfoModal.desc_6" />
-          ),
+          title: <Trans i18nKey="onboarding.stepPairNew.errorInfoModal.title_2" />,
+          desc: <Trans i18nKey="onboarding.stepPairNew.errorInfoModal.desc_6" />,
         },
       ]
     : []),
@@ -352,9 +318,7 @@ const pinCodeScenes = deviceModelId => [
       descs: [<Trans i18nKey="onboarding.stepSetupDevice.pinCode.desc" />],
       ctaText: <Trans i18nKey="onboarding.stepSetupDevice.pinCode.cta" />,
       ctaWarningCheckbox: {
-        desc: (
-          <Trans i18nKey="onboarding.stepSetupDevice.pinCode.checkboxDesc" />
-        ),
+        desc: <Trans i18nKey="onboarding.stepSetupDevice.pinCode.checkboxDesc" />,
       },
     },
     sceneInfoKey: "pinCodeInfoModalProps",
@@ -368,9 +332,7 @@ const pinCodeScenes = deviceModelId => [
       lottieStyle: lottieAnimations[deviceModelId].style,
       bullets: [
         {
-          title: (
-            <Trans i18nKey="onboarding.stepSetupDevice.pinCodeSetup.bullets.0.title" />
-          ),
+          title: <Trans i18nKey="onboarding.stepSetupDevice.pinCodeSetup.bullets.0.title" />,
           label: (
             <>
               <Trans i18nKey="onboarding.stepSetupDevice.pinCodeSetup.bullets.0.label">
@@ -383,12 +345,8 @@ const pinCodeScenes = deviceModelId => [
           ),
         },
         {
-          title: (
-            <Trans i18nKey="onboarding.stepSetupDevice.pinCodeSetup.bullets.1.title" />
-          ),
-          label: (
-            <Trans i18nKey="onboarding.stepSetupDevice.pinCodeSetup.bullets.1.label" />
-          ),
+          title: <Trans i18nKey="onboarding.stepSetupDevice.pinCodeSetup.bullets.1.title" />,
+          label: <Trans i18nKey="onboarding.stepSetupDevice.pinCodeSetup.bullets.1.label" />,
         },
       ],
       ctaText: <Trans i18nKey="onboarding.stepSetupDevice.pinCodeSetup.cta" />,
@@ -410,33 +368,23 @@ const getSetupDeviceScenes: (
       bullets: [
         {
           Icon: Clock,
-          label: (
-            <Trans i18nKey="onboarding.stepSetupDevice.start.bullets.0.label" />
-          ),
+          label: <Trans i18nKey="onboarding.stepSetupDevice.start.bullets.0.label" />,
         },
         {
           Icon: Edit,
-          label: (
-            <Trans i18nKey="onboarding.stepSetupDevice.start.bullets.1.label" />
-          ),
+          label: <Trans i18nKey="onboarding.stepSetupDevice.start.bullets.1.label" />,
         },
         {
           Icon: Flower,
-          label: (
-            <Trans i18nKey="onboarding.stepSetupDevice.start.bullets.2.label" />
-          ),
+          label: <Trans i18nKey="onboarding.stepSetupDevice.start.bullets.2.label" />,
         },
       ],
       ctaText: <Trans i18nKey="onboarding.stepSetupDevice.start.cta" />,
       ctaWarningModal: {
         Icon: Warning,
-        title: (
-          <Trans i18nKey="onboarding.stepSetupDevice.start.warning.title" />
-        ),
+        title: <Trans i18nKey="onboarding.stepSetupDevice.start.warning.title" />,
         desc: <Trans i18nKey="onboarding.stepSetupDevice.start.warning.desc" />,
-        ctaText: (
-          <Trans i18nKey="onboarding.stepSetupDevice.start.warning.ctaText" />
-        ),
+        ctaText: <Trans i18nKey="onboarding.stepSetupDevice.start.warning.ctaText" />,
       },
     },
     type: "primary",
@@ -449,38 +397,22 @@ const getSetupDeviceScenes: (
       lottieStyle: lottieAnimations[deviceModelId].style,
       bullets: [
         {
-          title: (
-            <Trans i18nKey="onboarding.stepSetupDevice.setup.bullets.0.title" />
-          ),
+          title: <Trans i18nKey="onboarding.stepSetupDevice.setup.bullets.0.title" />,
           label: (
-            <Trans
-              i18nKey={`onboarding.stepSetupDevice.setup.bullets.0.${deviceModelId}.label`}
-            />
+            <Trans i18nKey={`onboarding.stepSetupDevice.setup.bullets.0.${deviceModelId}.label`} />
           ),
         },
         {
-          title: (
-            <Trans i18nKey="onboarding.stepSetupDevice.setup.bullets.1.title" />
-          ),
-          label: (
-            <Trans i18nKey="onboarding.stepSetupDevice.setup.bullets.1.label" />
-          ),
+          title: <Trans i18nKey="onboarding.stepSetupDevice.setup.bullets.1.title" />,
+          label: <Trans i18nKey="onboarding.stepSetupDevice.setup.bullets.1.label" />,
         },
         {
-          title: (
-            <Trans i18nKey="onboarding.stepSetupDevice.setup.bullets.2.title" />
-          ),
-          label: (
-            <Trans i18nKey="onboarding.stepSetupDevice.setup.bullets.2.label" />
-          ),
+          title: <Trans i18nKey="onboarding.stepSetupDevice.setup.bullets.2.title" />,
+          label: <Trans i18nKey="onboarding.stepSetupDevice.setup.bullets.2.label" />,
         },
         {
-          title: (
-            <Trans i18nKey="onboarding.stepSetupDevice.setup.bullets.3.title" />
-          ),
-          label: (
-            <Trans i18nKey="onboarding.stepSetupDevice.setup.bullets.3.label" />
-          ),
+          title: <Trans i18nKey="onboarding.stepSetupDevice.setup.bullets.3.title" />,
+          label: <Trans i18nKey="onboarding.stepSetupDevice.setup.bullets.3.label" />,
         },
       ],
       ctaText: <Trans i18nKey="onboarding.stepSetupDevice.setup.cta" />,
@@ -493,20 +425,14 @@ const getSetupDeviceScenes: (
     sceneProps: {
       trackPage: "Recovery step 1",
       image: recoveryPhrase,
-      title: (
-        <Trans i18nKey="onboarding.stepSetupDevice.recoveryPhrase.title" />
-      ),
+      title: <Trans i18nKey="onboarding.stepSetupDevice.recoveryPhrase.title" />,
       descs: [
         <Trans i18nKey="onboarding.stepSetupDevice.recoveryPhrase.desc" />,
         <Trans i18nKey="onboarding.stepSetupDevice.recoveryPhrase.desc_1" />,
       ],
-      ctaText: (
-        <Trans i18nKey="onboarding.stepSetupDevice.recoveryPhrase.cta" />
-      ),
+      ctaText: <Trans i18nKey="onboarding.stepSetupDevice.recoveryPhrase.cta" />,
       ctaWarningCheckbox: {
-        desc: (
-          <Trans i18nKey="onboarding.stepSetupDevice.recoveryPhrase.checkboxDesc" />
-        ),
+        desc: <Trans i18nKey="onboarding.stepSetupDevice.recoveryPhrase.checkboxDesc" />,
       },
     },
     sceneInfoKey: "recoveryPhraseInfoModalProps",
@@ -519,26 +445,18 @@ const getSetupDeviceScenes: (
       image: recoverySheet,
       bullets: [
         {
-          title: (
-            <Trans i18nKey="onboarding.stepSetupDevice.recoveryPhraseSetup.bullets.0.title" />
-          ),
-          label: (
-            <Trans i18nKey="onboarding.stepSetupDevice.recoveryPhraseSetup.bullets.0.label" />
-          ),
+          title: <Trans i18nKey="onboarding.stepSetupDevice.recoveryPhraseSetup.bullets.0.title" />,
+          label: <Trans i18nKey="onboarding.stepSetupDevice.recoveryPhraseSetup.bullets.0.label" />,
         },
         {
-          title: (
-            <Trans i18nKey="onboarding.stepSetupDevice.recoveryPhraseSetup.bullets.1.title" />
-          ),
+          title: <Trans i18nKey="onboarding.stepSetupDevice.recoveryPhraseSetup.bullets.1.title" />,
           labels: [
             <Trans i18nKey="onboarding.stepSetupDevice.recoveryPhraseSetup.bullets.1.label" />,
             <Trans i18nKey="onboarding.stepSetupDevice.recoveryPhraseSetup.bullets.1.label_1" />,
           ],
         },
       ],
-      ctaText: (
-        <Trans i18nKey="onboarding.stepSetupDevice.recoveryPhraseSetup.cta" />
-      ),
+      ctaText: <Trans i18nKey="onboarding.stepSetupDevice.recoveryPhraseSetup.cta" />,
     },
     sceneInfoKey: "recoveryPhraseInfoModalProps",
     type: "secondary",
@@ -552,24 +470,16 @@ const getSetupDeviceScenes: (
       bullets: [
         {
           index: 3,
-          title: (
-            <Trans i18nKey="onboarding.stepSetupDevice.recoveryPhraseSetup.bullets.2.title" />
-          ),
-          label: (
-            <Trans i18nKey="onboarding.stepSetupDevice.recoveryPhraseSetup.bullets.2.label" />
-          ),
+          title: <Trans i18nKey="onboarding.stepSetupDevice.recoveryPhraseSetup.bullets.2.title" />,
+          label: <Trans i18nKey="onboarding.stepSetupDevice.recoveryPhraseSetup.bullets.2.label" />,
         },
         {
           index: 4,
-          title: (
-            <Trans i18nKey="onboarding.stepSetupDevice.recoveryPhraseSetup.bullets.3.title" />
-          ),
+          title: <Trans i18nKey="onboarding.stepSetupDevice.recoveryPhraseSetup.bullets.3.title" />,
           label: "",
         },
       ],
-      ctaText: (
-        <Trans i18nKey="onboarding.stepSetupDevice.recoveryPhraseSetup.nextStep" />
-      ),
+      ctaText: <Trans i18nKey="onboarding.stepSetupDevice.recoveryPhraseSetup.nextStep" />,
     },
     sceneInfoKey: "recoveryPhraseInfoModalProps",
     type: "secondary",
@@ -579,42 +489,26 @@ const getSetupDeviceScenes: (
     sceneProps: {
       trackPage: "Recovery step 4",
       image: hideRecoveryPhrase,
-      title: (
-        <Trans i18nKey="onboarding.stepSetupDevice.hideRecoveryPhrase.title" />
-      ),
-      descs: [
-        <Trans i18nKey="onboarding.stepSetupDevice.hideRecoveryPhrase.desc" />,
-      ],
+      title: <Trans i18nKey="onboarding.stepSetupDevice.hideRecoveryPhrase.title" />,
+      descs: [<Trans i18nKey="onboarding.stepSetupDevice.hideRecoveryPhrase.desc" />],
       bullets: [
         {
           Icon: Warning,
           color: "alert",
-          label: (
-            <Trans i18nKey="onboarding.stepSetupDevice.hideRecoveryPhrase.bullets.0.label" />
-          ),
+          label: <Trans i18nKey="onboarding.stepSetupDevice.hideRecoveryPhrase.bullets.0.label" />,
         },
         {
           Icon: EyeCrossed,
           color: "alert",
-          label: (
-            <Trans i18nKey="onboarding.stepSetupDevice.hideRecoveryPhrase.bullets.1.label" />
-          ),
+          label: <Trans i18nKey="onboarding.stepSetupDevice.hideRecoveryPhrase.bullets.1.label" />,
         },
       ],
-      ctaText: (
-        <Trans i18nKey="onboarding.stepSetupDevice.hideRecoveryPhrase.cta" />
-      ),
+      ctaText: <Trans i18nKey="onboarding.stepSetupDevice.hideRecoveryPhrase.cta" />,
       ctaWarningModal: {
         image: onboardingQuizImage,
-        title: (
-          <Trans i18nKey="onboarding.stepSetupDevice.hideRecoveryPhrase.warning.title" />
-        ),
-        desc: (
-          <Trans i18nKey="onboarding.stepSetupDevice.hideRecoveryPhrase.warning.desc" />
-        ),
-        ctaText: (
-          <Trans i18nKey="onboarding.stepSetupDevice.hideRecoveryPhrase.warning.cta" />
-        ),
+        title: <Trans i18nKey="onboarding.stepSetupDevice.hideRecoveryPhrase.warning.title" />,
+        desc: <Trans i18nKey="onboarding.stepSetupDevice.hideRecoveryPhrase.warning.desc" />,
+        ctaText: <Trans i18nKey="onboarding.stepSetupDevice.hideRecoveryPhrase.warning.cta" />,
       },
     },
     sceneInfoKey: "hideRecoveryPhraseInfoModalProps",
@@ -628,28 +522,18 @@ const getRecoveryPhraseScenes = (deviceModelId: string) => [
     sceneProps: {
       trackPage: "RecoveryPhrase step 1",
       image: importRecoveryPhrase,
-      title: (
-        <Trans i18nKey="onboarding.stepRecoveryPhrase.importRecoveryPhrase.title" />
-      ),
+      title: <Trans i18nKey="onboarding.stepRecoveryPhrase.importRecoveryPhrase.title" />,
       warning: <RecoveryPhraseWarning />,
       descs: [
         <Trans i18nKey="onboarding.stepRecoveryPhrase.importRecoveryPhrase.desc" />,
         <Trans i18nKey="onboarding.stepRecoveryPhrase.importRecoveryPhrase.desc_1" />,
       ],
-      ctaText: (
-        <Trans i18nKey="onboarding.stepRecoveryPhrase.importRecoveryPhrase.cta" />
-      ),
+      ctaText: <Trans i18nKey="onboarding.stepRecoveryPhrase.importRecoveryPhrase.cta" />,
       ctaWarningModal: {
         Icon: Warning,
-        title: (
-          <Trans i18nKey="onboarding.stepRecoveryPhrase.importRecoveryPhrase.warning.title" />
-        ),
-        desc: (
-          <Trans i18nKey="onboarding.stepRecoveryPhrase.importRecoveryPhrase.warning.desc" />
-        ),
-        ctaText: (
-          <Trans i18nKey="onboarding.stepRecoveryPhrase.importRecoveryPhrase.warning.cta" />
-        ),
+        title: <Trans i18nKey="onboarding.stepRecoveryPhrase.importRecoveryPhrase.warning.title" />,
+        desc: <Trans i18nKey="onboarding.stepRecoveryPhrase.importRecoveryPhrase.warning.desc" />,
+        ctaText: <Trans i18nKey="onboarding.stepRecoveryPhrase.importRecoveryPhrase.warning.cta" />,
       },
     },
     type: "primary",
@@ -696,9 +580,7 @@ const getRecoveryPhraseScenes = (deviceModelId: string) => [
           ),
         },
       ],
-      ctaText: (
-        <Trans i18nKey="onboarding.stepRecoveryPhrase.importRecoveryPhrase.nextStep" />
-      ),
+      ctaText: <Trans i18nKey="onboarding.stepRecoveryPhrase.importRecoveryPhrase.nextStep" />,
     },
     type: "secondary",
     id: "importRecoveryPhrase_1",
@@ -708,20 +590,14 @@ const getRecoveryPhraseScenes = (deviceModelId: string) => [
     sceneProps: {
       trackPage: "RecoveryPhrase step 3",
       image: importRecoveryPhrase,
-      title: (
-        <Trans i18nKey="onboarding.stepRecoveryPhrase.existingRecoveryPhrase.title" />
-      ),
+      title: <Trans i18nKey="onboarding.stepRecoveryPhrase.existingRecoveryPhrase.title" />,
       descs: [
         <Trans i18nKey="onboarding.stepRecoveryPhrase.existingRecoveryPhrase.paragraph1" />,
         <Trans i18nKey="onboarding.stepRecoveryPhrase.existingRecoveryPhrase.paragraph2" />,
       ],
-      ctaText: (
-        <Trans i18nKey="onboarding.stepRecoveryPhrase.existingRecoveryPhrase.nextStep" />
-      ),
+      ctaText: <Trans i18nKey="onboarding.stepRecoveryPhrase.existingRecoveryPhrase.nextStep" />,
       ctaWarningCheckbox: {
-        desc: (
-          <Trans i18nKey="onboarding.stepRecoveryPhrase.existingRecoveryPhrase.checkboxDesc" />
-        ),
+        desc: <Trans i18nKey="onboarding.stepRecoveryPhrase.existingRecoveryPhrase.checkboxDesc" />,
       },
     },
     sceneInfoKey: "recoveryPhraseInfoModalProps",
@@ -748,9 +624,7 @@ const getRecoveryPhraseScenes = (deviceModelId: string) => [
           ),
         },
       ],
-      ctaText: (
-        <Trans i18nKey="onboarding.stepRecoveryPhrase.existingRecoveryPhrase.nextStep" />
-      ),
+      ctaText: <Trans i18nKey="onboarding.stepRecoveryPhrase.existingRecoveryPhrase.nextStep" />,
     },
     sceneInfoKey: "recoveryPhraseInfoModalProps",
     type: "secondary",
@@ -787,9 +661,7 @@ const getRecoveryPhraseScenes = (deviceModelId: string) => [
           ),
         },
       ],
-      ctaText: (
-        <Trans i18nKey="onboarding.stepRecoveryPhrase.existingRecoveryPhrase.nextStep" />
-      ),
+      ctaText: <Trans i18nKey="onboarding.stepRecoveryPhrase.existingRecoveryPhrase.nextStep" />,
     },
     sceneInfoKey: "recoveryPhraseInfoModalProps",
     type: "secondary",
@@ -818,15 +690,11 @@ const importAccountsScenes = [
         },
         {
           Icon: Clock,
-          label: (
-            <Trans i18nKey="onboarding.stepImportAccounts.bullets.1.label" />
-          ),
+          label: <Trans i18nKey="onboarding.stepImportAccounts.bullets.1.label" />,
         },
         {
           Icon: Check,
-          label: (
-            <Trans i18nKey="onboarding.stepImportAccounts.bullets.2.label" />
-          ),
+          label: <Trans i18nKey="onboarding.stepImportAccounts.bullets.2.label" />,
         },
       ],
       ctaWarningModal: {

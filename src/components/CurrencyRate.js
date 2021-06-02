@@ -4,10 +4,7 @@ import React, { PureComponent } from "react";
 import { View, StyleSheet } from "react-native";
 import Icon from "react-native-vector-icons/dist/Feather";
 import { BigNumber } from "bignumber.js";
-import type {
-  CryptoCurrency,
-  TokenCurrency,
-} from "@ledgerhq/live-common/lib/types/currencies";
+import type { CryptoCurrency, TokenCurrency } from "@ledgerhq/live-common/lib/types/currencies";
 import { getCurrencyColor } from "@ledgerhq/live-common/lib/currencies";
 import LText from "./LText";
 import CounterValue from "./CounterValue";
@@ -35,12 +32,7 @@ class CurrencyRate extends PureComponent<Props> {
     return (
       <View style={styles.wrapper}>
         <Icon name="activity" color={color} size={iconSize} />
-        <LText
-          numberOfLines={1}
-          semiBold
-          style={[styles.text, fontStyle]}
-          color="grey"
-        >
+        <LText numberOfLines={1} semiBold style={[styles.text, fontStyle]} color="grey">
           <CurrencyUnitValue unit={currency.units[0]} value={one} />
           {" = "}
           <CounterValue currency={currency} value={one} />

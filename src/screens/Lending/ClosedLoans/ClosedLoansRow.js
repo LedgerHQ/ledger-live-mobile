@@ -3,10 +3,7 @@
 import React, { useCallback, useState, useMemo } from "react";
 import { TouchableOpacity, View, StyleSheet } from "react-native";
 import type { ClosedLoanHistory } from "@ledgerhq/live-common/lib/compound/types";
-import {
-  getAccountName,
-  getAccountCurrency,
-} from "@ledgerhq/live-common/lib/account/helpers";
+import { getAccountName, getAccountCurrency } from "@ledgerhq/live-common/lib/account/helpers";
 import { Trans } from "react-i18next";
 import { useTheme } from "@react-navigation/native";
 import LText from "../../../components/LText";
@@ -24,13 +21,7 @@ type RowProps = {
 };
 
 export default function ClosedLoansRow({ item }: RowProps) {
-  const {
-    account,
-    parentAccount,
-    endDate,
-    interestsEarned,
-    amountSupplied,
-  } = item;
+  const { account, parentAccount, endDate, interestsEarned, amountSupplied } = item;
   const { token } = account;
   const { colors } = useTheme();
   const name = getAccountName(parentAccount || account);
@@ -48,47 +39,29 @@ export default function ClosedLoansRow({ item }: RowProps) {
   const data = useMemo(
     () => [
       {
-        label: (
-          <Trans i18nKey="transfer.lending.dashboard.activeAccount.account" />
-        ),
+        label: <Trans i18nKey="transfer.lending.dashboard.activeAccount.account" />,
         Component: <LText semiBold>{name}</LText>,
       },
       {
-        label: (
-          <Trans i18nKey="transfer.lending.dashboard.activeAccount.amountRedeemed" />
-        ),
+        label: <Trans i18nKey="transfer.lending.dashboard.activeAccount.amountRedeemed" />,
         Component: (
           <LText semiBold>
-            <CurrencyUnitValue
-              unit={token.units[0]}
-              value={totalRedeemed}
-              showCode
-            />
+            <CurrencyUnitValue unit={token.units[0]} value={totalRedeemed} showCode />
           </LText>
         ),
       },
       {
-        label: (
-          <Trans i18nKey="transfer.lending.dashboard.activeAccount.interestEarned" />
-        ),
+        label: <Trans i18nKey="transfer.lending.dashboard.activeAccount.interestEarned" />,
         Component: (
           <LText semiBold>
-            <CurrencyUnitValue
-              unit={token.units[0]}
-              value={interestsEarned}
-              showCode
-            />
+            <CurrencyUnitValue unit={token.units[0]} value={interestsEarned} showCode />
           </LText>
         ),
       },
       {
-        label: (
-          <Trans i18nKey="transfer.lending.dashboard.activeAccount.endDate" />
-        ),
+        label: <Trans i18nKey="transfer.lending.dashboard.activeAccount.endDate" />,
         Component: (
-          <LText semiBold>
-            {endDate.toLocaleDateString(locale, { dateStyle: "long" })}
-          </LText>
+          <LText semiBold>{endDate.toLocaleDateString(locale, { dateStyle: "long" })}</LText>
         ),
       },
     ],
@@ -103,12 +76,7 @@ export default function ClosedLoansRow({ item }: RowProps) {
       >
         <CurrencyIcon radius={100} currency={token} size={32} />
         <View style={styles.currencySection}>
-          <LText
-            numberOfLines={1}
-            semiBold
-            style={styles.subTitle}
-            color="grey"
-          >
+          <LText numberOfLines={1} semiBold style={styles.subTitle} color="grey">
             {name}
           </LText>
           <LText numberOfLines={1} semiBold style={styles.title}>
@@ -117,11 +85,7 @@ export default function ClosedLoansRow({ item }: RowProps) {
         </View>
         <View style={[styles.currencySection, styles.alignEnd]}>
           <LText semiBold>
-            <CurrencyUnitValue
-              unit={token.units[0]}
-              value={amountSupplied}
-              showCode
-            />
+            <CurrencyUnitValue unit={token.units[0]} value={amountSupplied} showCode />
           </LText>
           <LText style={styles.subTitle} color="grey">
             <CounterValue

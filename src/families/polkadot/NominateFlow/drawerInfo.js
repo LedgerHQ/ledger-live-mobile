@@ -1,10 +1,7 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
 
-import {
-  getAccountCurrency,
-  getAccountUnit,
-} from "@ledgerhq/live-common/lib/account";
+import { getAccountCurrency, getAccountUnit } from "@ledgerhq/live-common/lib/account";
 
 import { useTheme } from "@react-navigation/native";
 import Touchable from "../../../components/Touchable";
@@ -15,10 +12,7 @@ import ExternalLink from "../../../icons/ExternalLink";
 
 import NominationDrawer from "../components/NominationDrawer";
 
-type NominationDrawerData = $PropertyType<
-  ElementProps<typeof NominationDrawer>,
-  "data",
->;
+type NominationDrawerData = $PropertyType<ElementProps<typeof NominationDrawer>, "data">;
 
 export function getDrawerInfo({
   t,
@@ -42,12 +36,7 @@ export function getDrawerInfo({
           {
             label: t("delegation.validator"),
             Component: (
-              <LText
-                numberOfLines={1}
-                semiBold
-                ellipsizeMode="middle"
-                style={styles.valueText}
-              >
+              <LText numberOfLines={1} semiBold ellipsizeMode="middle" style={styles.valueText}>
                 {validator.identity}
               </LText>
             ),
@@ -99,12 +88,7 @@ export function getDrawerInfo({
           {
             label: t("polkadot.nomination.commission"),
             Component: (
-              <LText
-                numberOfLines={1}
-                semiBold
-                ellipsizeMode="middle"
-                style={styles.valueText}
-              >
+              <LText numberOfLines={1} semiBold ellipsizeMode="middle" style={styles.valueText}>
                 {formattedCommission}
               </LText>
             ),
@@ -144,23 +128,14 @@ export function getDrawerInfo({
           {
             label: t("polkadot.nomination.totalStake"),
             Component: (
-              <LText
-                numberOfLines={1}
-                semiBold
-                ellipsizeMode="middle"
-                style={styles.valueText}
-              >
+              <LText numberOfLines={1} semiBold ellipsizeMode="middle" style={styles.valueText}>
                 <View style={styles.column}>
                   <LText semiBold>
                     <CurrencyUnitValue value={totalStake} unit={unit} />
                   </LText>
                   {totalStake ? (
                     <LText style={styles.valueCounterValue} color="grey">
-                      <CounterValue
-                        currency={currency}
-                        value={totalStake}
-                        withPlaceholder
-                      />
+                      <CounterValue currency={currency} value={totalStake} withPlaceholder />
                     </LText>
                   ) : null}
                 </View>

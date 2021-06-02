@@ -14,10 +14,7 @@ import { concat, from } from "rxjs";
 import { ignoreElements } from "rxjs/operators";
 import { connect } from "react-redux";
 import { compose } from "redux";
-import {
-  isAccountEmpty,
-  groupAddAccounts,
-} from "@ledgerhq/live-common/lib/account";
+import { isAccountEmpty, groupAddAccounts } from "@ledgerhq/live-common/lib/account";
 import type { AddAccountSupportLink } from "@ledgerhq/live-common/lib/account/addAccounts";
 import { createStructuredSelector } from "reselect";
 import uniq from "lodash/uniq";
@@ -130,9 +127,7 @@ function AddAccountsAccounts({
 
   const newAccountSchemes = getPreferredNewAccountScheme(currency);
 
-  const preferedNewAccountScheme = getDefaultPreferredNewAccountScheme(
-    currency,
-  );
+  const preferedNewAccountScheme = getDefaultPreferredNewAccountScheme(currency);
 
   const preferredNewAccountSchemes = useMemo(
     () => (preferedNewAccountScheme ? [preferedNewAccountScheme] : undefined),
@@ -146,12 +141,8 @@ function AddAccountsAccounts({
 
   useEffect(() => {
     if (latestScannedAccount) {
-      const hasAlreadyBeenScanned = scannedAccounts.some(
-        a => latestScannedAccount.id === a.id,
-      );
-      const hasAlreadyBeenImported = existingAccounts.some(
-        a => latestScannedAccount.id === a.id,
-      );
+      const hasAlreadyBeenScanned = scannedAccounts.some(a => latestScannedAccount.id === a.id);
+      const hasAlreadyBeenImported = existingAccounts.some(a => latestScannedAccount.id === a.id);
       const isNewAccount = isAccountEmpty(latestScannedAccount);
       if (!isNewAccount && !hasAlreadyBeenImported) {
         setOnlyNewAccounts(false);
@@ -250,9 +241,7 @@ function AddAccountsAccounts({
 
   const unselectAll = useCallback(
     (accounts: Account[]) => {
-      setSelectedIds(
-        selectedIds.filter(id => !accounts.find(a => a.id === id)),
-      );
+      setSelectedIds(selectedIds.filter(id => !accounts.find(a => a.id === id)));
     },
     [selectedIds],
   );
@@ -268,14 +257,7 @@ function AddAccountsAccounts({
     } else if (navigation.replace) {
       navigation.replace(ScreenName.AddAccountsSuccess, { currency });
     }
-  }, [
-    currency,
-    inline,
-    navigation,
-    replaceAccounts,
-    scannedAccounts,
-    selectedIds,
-  ]);
+  }, [currency, inline, navigation, replaceAccounts, scannedAccounts, selectedIds]);
 
   const onCancel = useCallback(() => {
     setError(null);
@@ -288,10 +270,7 @@ function AddAccountsAccounts({
     }
   }, [cancelled, navigation]);
 
-  const viewAllCreatedAccounts = useCallback(
-    () => setShowAllCreatedAccounts(true),
-    [],
-  );
+  const viewAllCreatedAccounts = useCallback(() => setShowAllCreatedAccounts(true), []);
 
   const onAccountNameChange = useCallback(
     (name: string, changedAccount: Account) => {
@@ -308,9 +287,7 @@ function AddAccountsAccounts({
     () =>
       groupAddAccounts(existingAccounts, scannedAccounts, {
         scanning,
-        preferredNewAccountSchemes: showAllCreatedAccounts
-          ? undefined
-          : preferredNewAccountSchemes,
+        preferredNewAccountSchemes: showAllCreatedAccounts ? undefined : preferredNewAccountSchemes,
       }),
     [
       existingAccounts,
@@ -348,11 +325,7 @@ function AddAccountsAccounts({
 
   return (
     <SafeAreaView style={[styles.root, { backgroundColor: colors.background }]}>
-      <TrackScreen
-        category="AddAccounts"
-        name="Accounts"
-        currencyName={currency.name}
-      />
+      <TrackScreen category="AddAccounts" name="Accounts" currencyName={currency.name} />
       <PreventNativeBack />
       <NavigationScrollView
         style={styles.inner}
@@ -382,13 +355,9 @@ function AddAccountsAccounts({
                 }
                 index={i}
                 accounts={data}
-                onAccountNameChange={
-                  !selectable ? undefined : onAccountNameChange
-                }
+                onAccountNameChange={!selectable ? undefined : onAccountNameChange}
                 onPressAccount={!selectable ? undefined : onPressAccount}
-                onSelectAll={
-                  !selectable || id === "creatable" ? undefined : selectAll
-                }
+                onSelectAll={!selectable || id === "creatable" ? undefined : selectAll}
                 onUnselectAll={!selectable ? undefined : unselectAll}
                 selectedIds={selectedIds}
                 emptyState={emptyTexts[id]}
@@ -399,10 +368,7 @@ function AddAccountsAccounts({
               {hasMultipleSchemes ? (
                 <View style={styles.moreAddressTypesContainer}>
                   {showAllCreatedAccounts ? (
-                    <AddressTypeTooltip
-                      accountSchemes={newAccountSchemes}
-                      currency={currency}
-                    />
+                    <AddressTypeTooltip accountSchemes={newAccountSchemes} currency={currency} />
                   ) : (
                     <Button
                       event={"AddAccountsMoreAddressType"}

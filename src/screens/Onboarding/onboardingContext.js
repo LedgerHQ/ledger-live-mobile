@@ -1,16 +1,7 @@
 // @flow
 
-import React, {
-  createContext,
-  PureComponent,
-  useContext,
-  useEffect,
-} from "react";
-import {
-  useIsFocused,
-  useNavigation,
-  useRoute,
-} from "@react-navigation/native";
+import React, { createContext, PureComponent, useContext, useEffect } from "react";
+import { useIsFocused, useNavigation, useRoute } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
 
 import getStep from "./steps";
@@ -42,8 +33,7 @@ const INITIAL_CONTEXT: $Shape<OnboardingContextType> = {
 // $FlowFixMe
 const OnboardingContext = createContext(INITIAL_CONTEXT);
 
-const getStepForState = state =>
-  getStep(state.mode, !!state.firstTimeOnboarding);
+const getStepForState = state => getStep(state.mode, !!state.firstTimeOnboarding);
 
 // Provide each step screen a set of props used
 // in various ways: display the total number of steps,

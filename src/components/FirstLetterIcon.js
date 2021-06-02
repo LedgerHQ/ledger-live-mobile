@@ -37,10 +37,7 @@ const FirstLetterIcon = ({
         round ? { borderRadius: size / 2 } : undefined,
       ]}
     >
-      <LText
-        semiBold
-        style={[{ lineHeight: size }, styles.label, { fontSize }, labelStyle]}
-      >
+      <LText semiBold style={[{ lineHeight: size }, styles.label, { fontSize }, labelStyle]}>
         {text}
       </LText>
     </View>

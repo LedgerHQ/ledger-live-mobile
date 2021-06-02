@@ -48,10 +48,7 @@ export default function DelegationStarted({ navigation, route }: Props) {
       style={[styles.root, { backgroundColor: colors.background }]}
       forceInset={forceInset}
     >
-      <NavigationScrollView
-        style={styles.scroll}
-        contentContainerStyle={styles.scrollContainer}
-      >
+      <NavigationScrollView style={styles.scroll} contentContainerStyle={styles.scrollContainer}>
         <TrackScreen category="DelegationFlow" name="Started" />
         <IlluRewards style={styles.rewards} />
         <LText semiBold style={styles.description}>
@@ -64,10 +61,7 @@ export default function DelegationStarted({ navigation, route }: Props) {
             <Trans i18nKey="cosmos.delegation.flow.steps.starter.steps.1" />,
             <Trans i18nKey="cosmos.delegation.flow.steps.starter.steps.2" />,
           ].map(wording => (
-            <LText
-              semiBold
-              style={[styles.bulletItem, { color: colors.black }]}
-            >
+            <LText semiBold style={[styles.bulletItem, { color: colors.black }]}>
               {wording}
             </LText>
           ))}

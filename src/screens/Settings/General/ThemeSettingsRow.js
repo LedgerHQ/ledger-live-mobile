@@ -46,10 +46,7 @@ export default function ThemeSettingsRow() {
               onPress={selectTheme(t)}
               style={[styles.button]}
             >
-              <LText
-                {...(theme === t ? { semiBold: true } : {})}
-                style={[styles.buttonLabel]}
-              >
+              <LText {...(theme === t ? { semiBold: true } : {})} style={[styles.buttonLabel]}>
                 {t}
               </LText>
               {theme === t && <Check size={16} color={colors.live} />}

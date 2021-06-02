@@ -25,11 +25,7 @@ type Props = {
   showGreeting: boolean,
 };
 
-export default function PortfolioHeader({
-  nbAccounts,
-  showGreeting,
-  showDistribution,
-}: Props) {
+export default function PortfolioHeader({ nbAccounts, showGreeting, showDistribution }: Props) {
   const { colors } = useTheme();
   const navigation = useNavigation();
 
@@ -60,11 +56,7 @@ export default function PortfolioHeader({
     pending && !isUpToDate ? (
       <HeaderSynchronizing />
     ) : error ? (
-      <HeaderErrorTitle
-        withDescription
-        withDetail
-        error={networkError || error}
-      />
+      <HeaderErrorTitle withDescription withDetail error={networkError || error} />
     ) : showGreeting ? (
       <Greetings nbAccounts={nbAccounts} />
     ) : null;
@@ -80,10 +72,7 @@ export default function PortfolioHeader({
       </TouchableWithoutFeedback>
       {showDistribution && (
         <View style={[styles.distributionButton]}>
-          <Touchable
-            event="DistributionCTA"
-            onPress={onDistributionButtonPress}
-          >
+          <Touchable event="DistributionCTA" onPress={onDistributionButtonPress}>
             <IconPie size={18} color={colors.grey} />
           </Touchable>
         </View>

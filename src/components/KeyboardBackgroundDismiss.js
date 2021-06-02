@@ -12,10 +12,7 @@ class KeyboardBackgroundDismiss extends PureComponent<Props> {
 
   componentWillMount() {
     if (Platform.OS === "android") {
-      this.keyboardDidHideListener = Keyboard.addListener(
-        "keyboardDidHide",
-        Keyboard.dismiss,
-      );
+      this.keyboardDidHideListener = Keyboard.addListener("keyboardDidHide", Keyboard.dismiss);
     }
   }
 
@@ -28,9 +25,7 @@ class KeyboardBackgroundDismiss extends PureComponent<Props> {
   render() {
     const { children } = this.props;
     return (
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        {children}
-      </TouchableWithoutFeedback>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>{children}</TouchableWithoutFeedback>
     );
   }
 }

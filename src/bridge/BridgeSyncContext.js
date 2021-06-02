@@ -15,8 +15,7 @@ export const BridgeSyncProvider = ({ children }: { children: React$Node }) => {
   const blacklistedTokenIds = useSelector(blacklistedTokenIdsSelector);
   const dispatch = useDispatch();
   const updateAccount = useCallback(
-    (accountId, updater) =>
-      dispatch(updateAccountWithUpdater(accountId, updater)),
+    (accountId, updater) => dispatch(updateAccountWithUpdater(accountId, updater)),
     [dispatch],
   );
 

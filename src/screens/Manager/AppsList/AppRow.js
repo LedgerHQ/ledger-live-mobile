@@ -39,21 +39,14 @@ const AppRow = ({
   const { name, bytes, version: appVersion } = app;
   const { installed, deviceInfo } = state;
 
-  const isInstalled = useMemo(() => installed.find(i => i.name === name), [
-    installed,
-    name,
-  ]);
+  const isInstalled = useMemo(() => installed.find(i => i.name === name), [installed, name]);
 
   const version = (isInstalled && isInstalled.version) || appVersion;
-  const availableVersion =
-    (isInstalled && isInstalled.availableVersion) || appVersion;
+  const availableVersion = (isInstalled && isInstalled.availableVersion) || appVersion;
 
   const notEnoughMemoryToInstall = useNotEnoughMemoryToInstall(state, name);
 
-  const onSizePress = useCallback(() => setStorageWarning(name), [
-    setStorageWarning,
-    name,
-  ]);
+  const onSizePress = useCallback(() => setStorageWarning(name), [setStorageWarning, name]);
 
   const { colors } = useTheme();
 
@@ -79,8 +72,7 @@ const AppRow = ({
               <Trans
                 i18nKey="manager.appList.versionNew"
                 values={{
-                  newVersion:
-                    availableVersion !== version ? ` ${availableVersion}` : "",
+                  newVersion: availableVersion !== version ? ` ${availableVersion}` : "",
                 }}
               />
             )}

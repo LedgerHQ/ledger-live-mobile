@@ -30,10 +30,7 @@ type Props = {
 type LocalState = {
   value: number,
 };
-const mapStateToProps = (
-  state: State,
-  props: { navigation: *, currencyId: string, route: * },
-) => {
+const mapStateToProps = (state: State, props: { navigation: *, currencyId: string, route: * }) => {
   const currency = getCryptoCurrencyById(props.route.params.currencyId);
   return {
     confirmationsNb: confirmationsNbForCurrencySelector(state, { currency }),
@@ -72,11 +69,7 @@ class EachCurrencySettings extends Component<Props, LocalState> {
     const { value } = this.state;
     return (
       <View style={[styles.root, { backgroundColor: colors.background }]}>
-        <TrackScreen
-          category="Settings"
-          name="Currency"
-          currency={currency.id}
-        />
+        <TrackScreen category="Settings" name="Currency" currency={currency.id} />
         {defaults.confirmationsNb ? (
           <View style={styles.sliderContainer}>
             <SettingsRow
@@ -88,10 +81,7 @@ class EachCurrencySettings extends Component<Props, LocalState> {
             >
               <LText
                 semiBold
-                style={[
-                  styles.confirmationNbValue,
-                  { color: colors.live, marginLeft: 8 },
-                ]}
+                style={[styles.confirmationNbValue, { color: colors.live, marginLeft: 8 }]}
               >
                 {value}
               </LText>
@@ -108,16 +98,10 @@ class EachCurrencySettings extends Component<Props, LocalState> {
                 onSlidingComplete={this.updateSettings}
               />
               <View style={styles.textContainer}>
-                <LText
-                  semiBold
-                  style={[styles.confirmationNbValue, { color: colors.grey }]}
-                >
+                <LText semiBold style={[styles.confirmationNbValue, { color: colors.grey }]}>
                   {defaults.confirmationsNb.min}
                 </LText>
-                <LText
-                  semiBold
-                  style={[styles.confirmationNbValue, { color: colors.grey }]}
-                >
+                <LText semiBold style={[styles.confirmationNbValue, { color: colors.grey }]}>
                   {defaults.confirmationsNb.max}
                 </LText>
               </View>
@@ -181,11 +165,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export function CustomCurrencyHeader({
-  currency,
-}: {
-  currency: CryptoCurrency,
-}) {
+export function CustomCurrencyHeader({ currency }: { currency: CryptoCurrency }) {
   const { t } = useTranslation();
   return (
     <View style={{ flexDirection: "row" }}>

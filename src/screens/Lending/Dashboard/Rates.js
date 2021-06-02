@@ -53,11 +53,7 @@ const Row = ({
           {token.ticker}
         </LText>
         <LText style={styles.subTitle} color="grey">
-          <CurrencyUnitValue
-            unit={token.units[0]}
-            value={totalBalance}
-            showCode
-          />
+          <CurrencyUnitValue unit={token.units[0]} value={totalBalance} showCode />
         </LText>
       </View>
       <LText
@@ -70,22 +66,13 @@ const Row = ({
         ]}
         color="live"
       >
-        <Trans
-          i18nKey="transfer.lending.dashboard.apy"
-          values={{ value: supplyAPY }}
-        />
+        <Trans i18nKey="transfer.lending.dashboard.apy" values={{ value: supplyAPY }} />
       </LText>
     </Touchable>
   );
 };
 
-const Rates = ({
-  rates,
-  accounts,
-}: {
-  rates: CurrentRate[],
-  accounts: AccountLikeArray,
-}) => {
+const Rates = ({ rates, accounts }: { rates: CurrentRate[], accounts: AccountLikeArray }) => {
   const navigation = useNavigation();
   const [modalOpen, setModalOpen] = useState();
 
@@ -113,12 +100,7 @@ const Rates = ({
 
   const CheckIfCanNavigate = useCallback(
     token => {
-      if (
-        _.find(
-          accounts,
-          account => account.token && account.token.id === token.id,
-        )
-      ) {
+      if (_.find(accounts, account => account.token && account.token.id === token.id)) {
         return navigateToEnableFlow(token);
       }
       return setModalOpen(token);
@@ -126,8 +108,7 @@ const Rates = ({
     [accounts, navigateToEnableFlow],
   );
 
-  const selectedTokenCanBuy =
-    modalOpen && getSupportedCurrencies("buy").includes(modalOpen.id);
+  const selectedTokenCanBuy = modalOpen && getSupportedCurrencies("buy").includes(modalOpen.id);
 
   const buttons = [];
   if (selectedTokenCanBuy) {
@@ -189,10 +170,7 @@ const Rates = ({
             }}
           />
         }
-        Icon={
-          modalOpen &&
-          (() => <CurrencyIcon radius={100} currency={modalOpen} size={54} />)
-        }
+        Icon={modalOpen && (() => <CurrencyIcon radius={100} currency={modalOpen} size={54} />)}
         buttons={buttons}
       />
     </View>

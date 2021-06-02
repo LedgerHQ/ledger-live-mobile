@@ -9,10 +9,7 @@ import { getAccountCurrency } from "@ledgerhq/live-common/lib/account/helpers";
 import { TrackScreen } from "../../analytics";
 import ValidateError from "../../components/ValidateError";
 import { urls } from "../../config/urls";
-import {
-  context as _wcContext,
-  setCurrentCallRequestError,
-} from "../WalletConnect/Provider";
+import { context as _wcContext, setCurrentCallRequestError } from "../WalletConnect/Provider";
 import { accountScreenSelector } from "../../reducers/accounts";
 
 const forceInset = { bottom: "always" };
@@ -64,11 +61,7 @@ export default function ValidationError({ navigation, route }: Props) {
       style={[styles.root, { backgroundColor: colors.background }]}
       forceInset={forceInset}
     >
-      <TrackScreen
-        category="SendFunds"
-        name="ValidationError"
-        currencyName={currency?.name}
-      />
+      <TrackScreen category="SendFunds" name="ValidationError" currencyName={currency?.name} />
       <ValidateError
         error={error}
         onRetry={!disableRetry ? retry : undefined}

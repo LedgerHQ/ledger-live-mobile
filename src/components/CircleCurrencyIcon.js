@@ -2,10 +2,7 @@
 
 import React, { memo } from "react";
 import { View, StyleSheet } from "react-native";
-import {
-  getCryptoCurrencyIcon,
-  getTokenCurrencyIcon,
-} from "@ledgerhq/live-common/lib/reactNative";
+import { getCryptoCurrencyIcon, getTokenCurrencyIcon } from "@ledgerhq/live-common/lib/reactNative";
 import { getCurrencyColor } from "@ledgerhq/live-common/lib/currencies";
 
 import { useTheme } from "@react-navigation/native";
@@ -26,8 +23,7 @@ function CircleCurrencyIcon({ size, currency, color }: Props) {
     color || rgba(getCurrencyColor(currency), isToken ? 1 : 1),
     colors.background,
   );
-  const initialBackgroundColor =
-    color || rgba(getCurrencyColor(currency), isToken ? 1 : 1);
+  const initialBackgroundColor = color || rgba(getCurrencyColor(currency), isToken ? 1 : 1);
   const backgroundColor =
     initialBackgroundColor !== backgroundColorContrast
       ? backgroundColorContrast
@@ -39,9 +35,7 @@ function CircleCurrencyIcon({ size, currency, color }: Props) {
     ? getCryptoCurrencyIcon(currency)
     : getTokenCurrencyIcon(currency);
   return (
-    <View
-      style={[styles.wrapper, { backgroundColor, width: size, height: size }]}
-    >
+    <View style={[styles.wrapper, { backgroundColor, width: size, height: size }]}>
       {MaybeIconComponent ? (
         <MaybeIconComponent size={size} color={c} />
       ) : (

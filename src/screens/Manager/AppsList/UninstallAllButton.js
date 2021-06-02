@@ -37,11 +37,7 @@ const UninstallAllButton = ({ onUninstallAll }: Props) => {
           <Trans i18nKey="manager.uninstall.title" />
         </LText>
       </Touchable>
-      <UninstallAllModal
-        isOpened={isOpened}
-        onClose={closeModal}
-        onConfirm={onConfirm}
-      />
+      <UninstallAllModal isOpened={isOpened} onClose={closeModal} onConfirm={onConfirm} />
     </>
   );
 };

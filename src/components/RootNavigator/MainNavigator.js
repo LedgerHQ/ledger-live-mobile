@@ -16,11 +16,7 @@ import Tab from "./CustomBlockRouterNavigator";
 type RouteParams = {
   hideTabNavigation?: boolean,
 };
-export default function MainNavigator({
-  route: { params },
-}: {
-  route: { params: RouteParams },
-}) {
+export default function MainNavigator({ route: { params } }: { route: { params: RouteParams } }) {
   const { colors } = useTheme();
   const { hideTabNavigation } = params || {};
   return (

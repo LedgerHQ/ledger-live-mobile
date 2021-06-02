@@ -72,12 +72,7 @@ class Confetti extends PureComponent<
           top: `${(100 * initialYPercent).toFixed(0)}%`,
           opacity,
           transformOrigin: "center center",
-          transform: [
-            { translateX },
-            { translateY },
-            { scale: initialScale },
-            { rotate },
-          ],
+          transform: [{ translateX }, { translateY }, { scale: initialScale }, { rotate }],
         }}
       >
         <Shape style={{ rotate: initialRotation }} />

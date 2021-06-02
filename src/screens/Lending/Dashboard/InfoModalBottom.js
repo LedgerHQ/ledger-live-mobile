@@ -53,16 +53,9 @@ class ConfirmationModal extends PureComponent<Props> {
         onClose={onClose}
         style={styles.confirmationModal}
       >
-        {isOpened ? (
-          <TrackScreen category="LendingNoTokenAccountInfoModal" />
-        ) : null}
+        {isOpened ? <TrackScreen category="LendingNoTokenAccountInfoModal" /> : null}
         {Icon && (
-          <View
-            style={[
-              styles.icon,
-              { backgroundColor: rgba(colors.yellow, 0.08) },
-            ]}
-          >
+          <View style={[styles.icon, { backgroundColor: rgba(colors.yellow, 0.08) }]}>
             <Icon size={24} />
           </View>
         )}
@@ -86,10 +79,7 @@ class ConfirmationModal extends PureComponent<Props> {
 
           {buttons[1] ? (
             <Button
-              containerStyle={[
-                styles.confirmationButton,
-                styles.confirmationLastButton,
-              ]}
+              containerStyle={[styles.confirmationButton, styles.confirmationLastButton]}
               type="secondary"
               title={buttons[1].title}
               onPress={buttons[1].onPress}

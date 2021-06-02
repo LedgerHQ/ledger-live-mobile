@@ -34,10 +34,7 @@ const TransactionsPendingConfirmationWarning = ({
   accounts = maybeAccount ? [maybeAccount] : accounts;
   return accounts.some(isAccountBalanceUnconfirmed) ? (
     <View style={styles.wrapper}>
-      <TouchableOpacity
-        hitSlop={hitSlop}
-        onPress={() => setIsModalOpened(true)}
-      >
+      <TouchableOpacity hitSlop={hitSlop} onPress={() => setIsModalOpened(true)}>
         <ClockIcon color={colors.grey} size={12} />
       </TouchableOpacity>
       <BottomModal

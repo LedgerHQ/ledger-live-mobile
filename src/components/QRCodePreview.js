@@ -30,11 +30,7 @@ export default class QRCodePreview extends Component<{
     }
     return (
       <View style={styles.root}>
-        <QRCode
-          size={size}
-          value={value}
-          logo={require("../images/qrledger.jpg")}
-        />
+        <QRCode size={size} value={value} logo={require("../images/qrledger.jpg")} />
       </View>
     );
   }

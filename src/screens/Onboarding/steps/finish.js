@@ -3,14 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { Trans } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  Image,
-  View,
-  StyleSheet,
-  SafeAreaView,
-  Animated,
-  Easing,
-} from "react-native";
+import { Image, View, StyleSheet, SafeAreaView, Animated, Easing } from "react-native";
 import Config from "react-native-config";
 import { useTheme } from "@react-navigation/native";
 import { TrackScreen } from "../../../analytics";
@@ -79,14 +72,8 @@ export default function OnboardingStepFinish({ navigation }: Props) {
           loop={false}
         />
       </View>
-      <View
-        style={[styles.confettiContainer, { zIndex: 2 }]}
-        pointerEvents="none"
-      >
-        <Animation
-          style={{ width: "130%", height: "130%" }}
-          source={confetti}
-        />
+      <View style={[styles.confettiContainer, { zIndex: 2 }]} pointerEvents="none">
+        <Animation style={{ width: "130%", height: "130%" }} source={confetti} />
       </View>
       <SafeAreaView style={styles.wrapper}>
         <TrackScreen category="Onboarding" name="Finish" />

@@ -45,21 +45,13 @@ type Props = {
   parentAccount?: Account,
 };
 
-function FabAccountButtonBar({
-  buttons,
-  actions,
-  account,
-  parentAccount,
-}: Props) {
+function FabAccountButtonBar({ buttons, actions, account, parentAccount }: Props) {
   const { colors } = useTheme();
   const navigation = useNavigation();
   const [next, setNext] = useState();
   const [displayedActions, setDisplayedActions] = useState();
 
-  const [
-    infoModalProps,
-    setInfoModalProps,
-  ] = useState<?ActionButtonEventProps>();
+  const [infoModalProps, setInfoModalProps] = useState<?ActionButtonEventProps>();
   const [isModalInfoOpened, setIsModalInfoOpened] = useState();
 
   const onNavigate = useCallback(
@@ -122,28 +114,21 @@ function FabAccountButtonBar({
 
   return (
     <View style={styles.root}>
-      {buttons.map(
-        (
-          { label, Icon, event, eventProperties, Component, ...rest },
-          index,
-        ) => (
-          <Button
-            title={label}
-            IconLeft={Icon}
-            event={event}
-            eventProperties={eventProperties}
-            containerStyle={[styles.button, styles.dropShadow]}
-            type="primary"
-            onPress={() => onPress(rest)}
-            key={index}
-          />
-        ),
-      )}
+      {buttons.map(({ label, Icon, event, eventProperties, Component, ...rest }, index) => (
+        <Button
+          title={label}
+          IconLeft={Icon}
+          event={event}
+          eventProperties={eventProperties}
+          containerStyle={[styles.button, styles.dropShadow]}
+          type="primary"
+          onPress={() => onPress(rest)}
+          key={index}
+        />
+      ))}
       {isModalInfoOpened && infoModalProps && (
         <InfoModal
-          {...(infoModalProps.confirmModalProps
-            ? infoModalProps.confirmModalProps
-            : {})}
+          {...(infoModalProps.confirmModalProps ? infoModalProps.confirmModalProps : {})}
           onContinue={onContinue}
           onClose={onClose}
           isOpened={!!isModalInfoOpened}
@@ -153,11 +138,7 @@ function FabAccountButtonBar({
       {actions && actions.default.length > 0 && (
         <>
           <TouchableOpacity
-            style={[
-              styles.moreButton,
-              styles.dropShadow,
-              { backgroundColor: colors.live },
-            ]}
+            style={[styles.moreButton, styles.dropShadow, { backgroundColor: colors.live }]}
             onPress={() => setDisplayedActions("default")}
           >
             <Ellipsis color="white" size={16} />
@@ -168,9 +149,7 @@ function FabAccountButtonBar({
             onModalHide={() => goToNext()}
             containerStyle={styles.modal}
           >
-            {displayedActions === "lending" && account && (
-              <LendingBanners account={account} />
-            )}
+            {displayedActions === "lending" && account && <LendingBanners account={account} />}
             {!!displayedActions &&
               actions[displayedActions]?.map((a, i) =>
                 a.Component ? (

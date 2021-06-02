@@ -8,10 +8,7 @@ import { useTheme } from "@react-navigation/native";
 import { TrackScreen } from "../../analytics";
 import ValidateError from "../../components/ValidateError";
 import { urls } from "../../config/urls";
-import {
-  context as _wcContext,
-  setCurrentCallRequestError,
-} from "../WalletConnect/Provider";
+import { context as _wcContext, setCurrentCallRequestError } from "../WalletConnect/Provider";
 
 const forceInset = { bottom: "always" };
 

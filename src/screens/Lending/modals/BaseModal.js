@@ -37,9 +37,7 @@ export default function BaseInfoModal({
     <SafeAreaView style={[styles.root, { backgroundColor: colors.background }]}>
       {event && <TrackScreen category="Lend" name={event} />}
       {header}
-      <View style={[styles.topSection, { backgroundColor: colors.lightFog }]}>
-        {illustration}
-      </View>
+      <View style={[styles.topSection, { backgroundColor: colors.lightFog }]}>{illustration}</View>
       <ScrollView style={styles.bottomSection}>
         <View style={styles.row}>
           <LText
@@ -64,12 +62,7 @@ export default function BaseInfoModal({
       </ScrollView>
       <View style={styles.ctaSection}>
         {children && <View style={styles.childrenContainer}>{children}</View>}
-        <Button
-          type="primary"
-          disabled={disabled}
-          onPress={onNext}
-          title={ctaLabel}
-        />
+        <Button type="primary" disabled={disabled} onPress={onNext} title={ctaLabel} />
       </View>
     </SafeAreaView>
   );

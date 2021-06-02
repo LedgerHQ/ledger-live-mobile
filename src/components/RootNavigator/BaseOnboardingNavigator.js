@@ -31,11 +31,7 @@ export const ErrorHeaderInfo = ({ route, navigation }: *) => {
   }, [navigation]);
 
   return route.params.hasError ? (
-    <TouchableOpacity
-      style={{ marginRight: 24 }}
-      hitSlop={hitSlop}
-      onPress={openInfoModal}
-    >
+    <TouchableOpacity style={{ marginRight: 24 }} hitSlop={hitSlop} onPress={openInfoModal}>
       <Question size={20} color={colors.grey} />
     </TouchableOpacity>
   ) : null;
@@ -44,10 +40,7 @@ export const ErrorHeaderInfo = ({ route, navigation }: *) => {
 export default function BaseOnboardingNavigator() {
   const { t } = useTranslation();
   const { colors } = useTheme();
-  const stackNavigationConfig = useMemo(
-    () => getStackNavigatorConfig(colors, true),
-    [colors],
-  );
+  const stackNavigationConfig = useMemo(() => getStackNavigatorConfig(colors, true), [colors]);
   return (
     <Stack.Navigator
       mode="modal"
@@ -56,22 +49,14 @@ export default function BaseOnboardingNavigator() {
         headerShown: false,
       }}
     >
-      <Stack.Screen
-        name={NavigatorName.Onboarding}
-        component={OnboardingNavigator}
-      />
-      <Stack.Screen
-        name={NavigatorName.ImportAccounts}
-        component={ImportAccountsNavigator}
-      />
+      <Stack.Screen name={NavigatorName.Onboarding} component={OnboardingNavigator} />
+      <Stack.Screen name={NavigatorName.ImportAccounts} component={ImportAccountsNavigator} />
       <Stack.Screen
         name={ScreenName.PairDevices}
         component={PairDevices}
         options={({ navigation, route }) => ({
           title: null,
-          headerRight: () => (
-            <ErrorHeaderInfo route={route} navigation={navigation} />
-          ),
+          headerRight: () => <ErrorHeaderInfo route={route} navigation={navigation} />,
           headerShown: true,
           headerStyle: styles.headerNoShadow,
         })}
@@ -85,10 +70,7 @@ export default function BaseOnboardingNavigator() {
           headerShown: true,
         }}
       />
-      <Stack.Screen
-        name={NavigatorName.PasswordAddFlow}
-        component={PasswordAddFlowNavigator}
-      />
+      <Stack.Screen name={NavigatorName.PasswordAddFlow} component={PasswordAddFlowNavigator} />
       <Stack.Screen
         name={NavigatorName.PasswordModifyFlow}
         component={PasswordModifyFlowNavigator}

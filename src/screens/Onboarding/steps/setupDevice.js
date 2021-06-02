@@ -17,17 +17,10 @@ function OnboardingStepNewDevice({ navigation, route }: *) {
     [navigation, route.params],
   );
 
-  const scenes = useMemo(() => getSetupDeviceScenes(deviceModelId), [
-    deviceModelId,
-  ]);
+  const scenes = useMemo(() => getSetupDeviceScenes(deviceModelId), [deviceModelId]);
 
   return (
-    <OnboardingStepperView
-      scenes={scenes}
-      navigation={navigation}
-      route={route}
-      onFinish={next}
-    />
+    <OnboardingStepperView scenes={scenes} navigation={navigation} route={route} onFinish={next} />
   );
 }
 

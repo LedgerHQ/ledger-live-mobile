@@ -10,10 +10,7 @@ import LText from "../components/LText";
 
 export default function DebugLogs() {
   const [logs, setLogs] = useState([]);
-  const prependToLogs = useCallback(
-    log => setLogs(currentLogs => [log, ...currentLogs]),
-    [],
-  );
+  const prependToLogs = useCallback(log => setLogs(currentLogs => [log, ...currentLogs]), []);
 
   useEffect(() => listen(prependToLogs), [prependToLogs]);
   const onExport = async () => {

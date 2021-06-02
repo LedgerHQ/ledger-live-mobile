@@ -10,27 +10,16 @@ type Props = {
   RightComponent?: React$Node,
 };
 
-export default function AccountSectionLabel({
-  name,
-  icon,
-  onPress,
-  RightComponent,
-}: Props) {
+export default function AccountSectionLabel({ name, icon, onPress, RightComponent }: Props) {
   return (
-    <TouchableOpacity
-      style={styles.container}
-      onPress={onPress}
-      disabled={!onPress}
-    >
+    <TouchableOpacity style={styles.container} onPress={onPress} disabled={!onPress}>
       <View style={styles.label}>
         <LText semiBold style={styles.labelText}>
           {name}
         </LText>
         {icon}
       </View>
-      {!!RightComponent && (
-        <View style={styles.rightWrapper}>{RightComponent}</View>
-      )}
+      {!!RightComponent && <View style={styles.rightWrapper}>{RightComponent}</View>}
     </TouchableOpacity>
   );
 }

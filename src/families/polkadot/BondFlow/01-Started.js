@@ -1,12 +1,6 @@
 // @flow
 import React, { useCallback } from "react";
-import {
-  StyleSheet,
-  ScrollView,
-  View,
-  Linking,
-  SafeAreaView,
-} from "react-native";
+import { StyleSheet, ScrollView, View, Linking, SafeAreaView } from "react-native";
 import { Trans } from "react-i18next";
 import { useTheme } from "@react-navigation/native";
 import { ScreenName } from "../../../const";
@@ -42,10 +36,7 @@ export default function PolkadotBondStarted({ navigation, route }: Props) {
 
   return (
     <SafeAreaView style={[styles.root, { backgroundColor: colors.background }]}>
-      <ScrollView
-        style={styles.scroll}
-        contentContainerStyle={styles.scrollContainer}
-      >
+      <ScrollView style={styles.scroll} contentContainerStyle={styles.scrollContainer}>
         <TrackScreen category="BondFlow" name="Started" />
         <IlluRewards />
         <LText secondary style={styles.description}>

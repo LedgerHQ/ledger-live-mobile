@@ -2,11 +2,7 @@
 import Config from "react-native-config";
 import AsyncStorage from "@react-native-community/async-storage";
 import { concatMap } from "rxjs/operators";
-import {
-  setEnvUnsafe,
-  isEnvDefault,
-  changes,
-} from "@ledgerhq/live-common/lib/env";
+import { setEnvUnsafe, isEnvDefault, changes } from "@ledgerhq/live-common/lib/env";
 import type { EnvName } from "@ledgerhq/live-common/lib/env";
 
 import logger from "./logger";
@@ -110,7 +106,5 @@ export const enabledExperimentalFeatures = (): string[] =>
     }
   };
 
-  changes
-    .pipe(concatMap(({ name, value }) => saveEnvs(name, value)))
-    .subscribe();
+  changes.pipe(concatMap(({ name, value }) => saveEnvs(name, value))).subscribe();
 })();

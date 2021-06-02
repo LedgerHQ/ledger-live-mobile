@@ -15,9 +15,7 @@ export default function Banner() {
   const { colors } = useTheme();
   const navigation = useNavigation();
 
-  const someAccountsNeedMigration = useSelector(
-    someAccountsNeedMigrationSelector,
-  );
+  const someAccountsNeedMigration = useSelector(someAccountsNeedMigrationSelector);
 
   const navigateToAccountMigration = useCallback(() => {
     navigation.navigate(NavigatorName.MigrateAccountsFlow);

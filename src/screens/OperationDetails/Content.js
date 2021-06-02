@@ -5,11 +5,7 @@ import uniq from "lodash/uniq";
 import { useSelector } from "react-redux";
 import { Trans, useTranslation } from "react-i18next";
 import { useNavigation, useTheme } from "@react-navigation/native";
-import type {
-  Account,
-  Operation,
-  AccountLike,
-} from "@ledgerhq/live-common/lib/types";
+import type { Account, Operation, AccountLike } from "@ledgerhq/live-common/lib/types";
 import {
   getOperationAmountNumber,
   isConfirmedOperation,
@@ -64,12 +60,7 @@ type Props = {
   disableAllLinks?: Boolean,
 };
 
-export default function Content({
-  account,
-  parentAccount,
-  operation,
-  disableAllLinks,
-}: Props) {
+export default function Content({ account, parentAccount, operation, disableAllLinks }: Props) {
   const { colors } = useTheme();
   const navigation = useNavigation();
   const { t } = useTranslation();
@@ -108,10 +99,7 @@ export default function Content({
   const amount = getOperationAmountNumber(operation);
   const isNegative = amount.isNegative();
   const valueColor = isNegative ? colors.smoke : colors.green;
-  const confirmationsString = getOperationConfirmationDisplayableNumber(
-    operation,
-    mainAccount,
-  );
+  const confirmationsString = getOperationConfirmationDisplayableNumber(operation, mainAccount);
   const uniqueSenders = uniq(operation.senders);
   const uniqueRecipients = uniq(operation.recipients);
   const { extra, type } = operation;
@@ -128,8 +116,7 @@ export default function Content({
   );
 
   const specific = byFamiliesOperationDetails[mainAccount.currency.family];
-  const urlFeesInfo =
-    specific && specific.getURLFeesInfo && specific.getURLFeesInfo(operation);
+  const urlFeesInfo = specific && specific.getURLFeesInfo && specific.getURLFeesInfo(operation);
   const Extra =
     specific && specific.OperationDetailsExtra
       ? specific.OperationDetailsExtra
@@ -192,10 +179,7 @@ export default function Content({
               <Trans i18nKey="operationDetails.failed" />
             </LText>
           ) : isConfirmed ? (
-            <LText
-              semiBold
-              style={[styles.confirmation, { color: colors.green }]}
-            >
+            <LText semiBold style={[styles.confirmation, { color: colors.green }]}>
               <Trans i18nKey="operationDetails.confirmed" />{" "}
               {confirmationsString && `(${confirmationsString})`}
             </LText>
@@ -221,19 +205,13 @@ export default function Content({
               />
             </LText>
             {isToken ? (
-              <Touchable
-                style={styles.info}
-                onPress={onPressInfo}
-                event="TokenOperationsInfo"
-              >
+              <Touchable style={styles.info} onPress={onPressInfo} event="TokenOperationsInfo">
                 <Info size={12} color={colors.grey} />
               </Touchable>
             ) : null}
           </View>
           {subOperations.map((op, i) => {
-            const opAccount = (account.subAccounts || []).find(
-              acc => acc.id === op.accountId,
-            );
+            const opAccount = (account.subAccounts || []).find(acc => acc.id === op.accountId);
 
             if (!opAccount) return null;
 
@@ -254,10 +232,7 @@ export default function Content({
 
       {internalOperations.length > 0 && account.type === "Account" && (
         <>
-          <Section
-            title={t("operationDetails.internalOperations")}
-            style={styles.infoContainer}
-          />
+          <Section title={t("operationDetails.internalOperations")} style={styles.infoContainer} />
           {internalOperations.map((op, i) => (
             <OperationRow
               key={op.id}
@@ -317,11 +292,7 @@ export default function Content({
           {operation.fee ? (
             <View style={styles.feeValueContainer}>
               <LText style={sectionStyles.value} semiBold>
-                <CurrencyUnitValue
-                  showCode
-                  unit={parentUnit}
-                  value={operation.fee}
-                />
+                <CurrencyUnitValue showCode unit={parentUnit} value={operation.fee} />
               </LText>
               <LText style={styles.feeCounterValue} color="smoke" semiBold>
                 ≈
@@ -345,10 +316,7 @@ export default function Content({
         </Section>
       ) : null}
 
-      <Section
-        title={t("operationDetails.identifier")}
-        value={operation.hash}
-      />
+      <Section title={t("operationDetails.identifier")} value={operation.hash} />
 
       <View style={sectionStyles.wrapper}>
         <DataList
@@ -381,9 +349,7 @@ export default function Content({
                   <HelpLink
                     event="MultipleAddressesSupport"
                     onPress={() => Linking.openURL(urls.multipleAddresses)}
-                    title={
-                      <Trans i18nKey="operationDetails.multipleAddresses" />
-                    }
+                    title={<Trans i18nKey="operationDetails.multipleAddresses" />}
                   />
                 </View>
               ) : null
@@ -394,11 +360,7 @@ export default function Content({
 
       <Extra extra={extra} type={type} account={account} />
 
-      <Modal
-        isOpened={isModalOpened}
-        onClose={onModalClose}
-        currency={currency}
-      />
+      <Modal isOpened={isModalOpened} onClose={onModalClose} currency={currency} />
     </>
   );
 }

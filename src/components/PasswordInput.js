@@ -98,11 +98,7 @@ class PasswordInput extends PureComponent<Props, { isFocused: boolean }> {
             style={styles.iconInput}
             onPress={toggleSecureTextEntry}
           >
-            <Icon
-              name="eye"
-              size={16}
-              color={inline ? colors.grey : colors.fog}
-            />
+            <Icon name="eye" size={16} color={inline ? colors.grey : colors.fog} />
           </Touchable>
         ) : (
           <Touchable
@@ -110,11 +106,7 @@ class PasswordInput extends PureComponent<Props, { isFocused: boolean }> {
             style={styles.iconInput}
             onPress={toggleSecureTextEntry}
           >
-            <Icon
-              name="eye-off"
-              size={16}
-              color={inline ? colors.grey : colors.fog}
-            />
+            <Icon name="eye-off" size={16} color={inline ? colors.grey : colors.fog} />
           </Touchable>
         )}
       </View>

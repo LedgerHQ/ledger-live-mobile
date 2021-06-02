@@ -9,10 +9,7 @@ import { useSelector } from "react-redux";
 import type { Transaction } from "@ledgerhq/live-common/lib/families/cosmos/types";
 
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
-import {
-  getMainAccount,
-  getAccountUnit,
-} from "@ledgerhq/live-common/lib/account";
+import { getMainAccount, getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
 
 import {
@@ -68,10 +65,7 @@ function RedelegationSelectValidator({ navigation, route }: Props) {
     };
   });
 
-  invariant(
-    transaction && transaction.cosmosSourceValidator,
-    "transaction src validator required",
-  );
+  invariant(transaction && transaction.cosmosSourceValidator, "transaction src validator required");
 
   const unit = getAccountUnit(account);
 
@@ -82,8 +76,7 @@ function RedelegationSelectValidator({ navigation, route }: Props) {
   const validatorSrc = useMemo(
     () =>
       validators.find(
-        ({ validatorAddress }) =>
-          validatorAddress === transaction.cosmosSourceValidator,
+        ({ validatorAddress }) => validatorAddress === transaction.cosmosSourceValidator,
       ),
     [validators, transaction.cosmosSourceValidator],
   );
@@ -93,8 +86,7 @@ function RedelegationSelectValidator({ navigation, route }: Props) {
   const srcDelegation = useMemo(
     () =>
       delegations.find(
-        ({ validatorAddress }) =>
-          validatorAddress === transaction.cosmosSourceValidator,
+        ({ validatorAddress }) => validatorAddress === transaction.cosmosSourceValidator,
       ),
     [delegations, transaction.cosmosSourceValidator],
   );
@@ -107,16 +99,12 @@ function RedelegationSelectValidator({ navigation, route }: Props) {
     () =>
       SR.reduce(
         (data, validator) => {
-          if (
-            validator.validator.validatorAddress ===
-            transaction?.cosmosSourceValidator
-          )
+          if (validator.validator.validatorAddress === transaction?.cosmosSourceValidator)
             return data;
 
           if (
             delegations.some(
-              ({ validatorAddress }) =>
-                validatorAddress === validator.validator.validatorAddress,
+              ({ validatorAddress }) => validatorAddress === validator.validator.validatorAddress,
             )
           )
             data[0].data.push(validator);
@@ -125,15 +113,11 @@ function RedelegationSelectValidator({ navigation, route }: Props) {
         },
         [
           {
-            title: (
-              <Trans i18nKey="cosmos.redelegation.flow.steps.validator.myDelegations" />
-            ),
+            title: <Trans i18nKey="cosmos.redelegation.flow.steps.validator.myDelegations" />,
             data: [],
           },
           {
-            title: (
-              <Trans i18nKey="cosmos.redelegation.flow.steps.validator.validators" />
-            ),
+            title: <Trans i18nKey="cosmos.redelegation.flow.steps.validator.validators" />,
             data: [],
           },
         ],
@@ -160,8 +144,7 @@ function RedelegationSelectValidator({ navigation, route }: Props) {
   const renderItem = useCallback(
     ({ item }) => {
       const val = delegations.find(
-        ({ validatorAddress }) =>
-          validatorAddress === item.validator.validatorAddress,
+        ({ validatorAddress }) => validatorAddress === item.validator.validatorAddress,
       );
       const disabled = (!val || val.amount.lte(0)) && max.lte(0);
       return (
@@ -180,10 +163,7 @@ function RedelegationSelectValidator({ navigation, route }: Props) {
 
   return (
     <SafeAreaView style={[styles.root, { backgroundColor: colors.background }]}>
-      <SelectValidatorSearchBox
-        searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery}
-      />
+      <SelectValidatorSearchBox searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
       {sections.length <= 0 && (
         <View style={styles.noResult}>
           <LText>
@@ -201,10 +181,7 @@ function RedelegationSelectValidator({ navigation, route }: Props) {
         keyExtractor={(item, index) => item + index}
         renderItem={renderItem}
         renderSectionHeader={({ section: { title } }) => (
-          <LText
-            style={[styles.header, { backgroundColor: colors.lightFog }]}
-            color="grey"
-          >
+          <LText style={[styles.header, { backgroundColor: colors.lightFog }]} color="grey">
             {title}
           </LText>
         )}

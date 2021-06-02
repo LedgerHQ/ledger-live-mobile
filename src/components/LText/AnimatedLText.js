@@ -18,10 +18,7 @@ export default class AnimatedLText extends Component<*> {
   render() {
     const { bold, semiBold, secondary, style, ...newProps } = this.props;
     return (
-      <Animated.Text
-        {...newProps}
-        style={[style, getFontStyle({ bold, semiBold, secondary })]}
-      />
+      <Animated.Text {...newProps} style={[style, getFontStyle({ bold, semiBold, secondary })]} />
     );
   }
 }

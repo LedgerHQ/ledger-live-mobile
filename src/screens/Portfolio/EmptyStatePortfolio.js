@@ -22,27 +22,19 @@ function EmptyStatePortfolio({ navigation, showHelp = true }: Props) {
   const hasInstalledAnyApp = useSelector(hasInstalledAnyAppSelector);
   const [isAddModalOpened, setAddModalOpened] = useState(false);
 
-  const openAddModal = useCallback(() => setAddModalOpened(true), [
-    setAddModalOpened,
-  ]);
+  const openAddModal = useCallback(() => setAddModalOpened(true), [setAddModalOpened]);
 
-  const closeAddModal = useCallback(() => setAddModalOpened(false), [
-    setAddModalOpened,
-  ]);
+  const closeAddModal = useCallback(() => setAddModalOpened(false), [setAddModalOpened]);
 
-  const navigateToManager = useCallback(
-    () => navigation.navigate(ScreenName.Manager),
-    [navigation],
-  );
+  const navigateToManager = useCallback(() => navigation.navigate(ScreenName.Manager), [
+    navigation,
+  ]);
 
   return (
     <>
       {showHelp ? (
         <View style={styles.help}>
-          <HelpLink
-            url={hasInstalledAnyApp ? urls.addAccount : urls.goToManager}
-            color="grey"
-          />
+          <HelpLink url={hasInstalledAnyApp ? urls.addAccount : urls.goToManager} color="grey" />
         </View>
       ) : null}
       <View style={styles.root}>
@@ -69,18 +61,14 @@ function EmptyStatePortfolio({ navigation, showHelp = true }: Props) {
                 <Button
                   event="PortfolioEmptyToImport"
                   type={"primary"}
-                  title={
-                    <Trans i18nKey="portfolio.emptyState.buttons.import" />
-                  }
+                  title={<Trans i18nKey="portfolio.emptyState.buttons.import" />}
                   onPress={openAddModal}
                   containerStyle={[styles.primaryCTA]}
                 />
                 <Button
                   event="PortfolioEmptyToManager"
                   type={"lightSecondary"}
-                  title={
-                    <Trans i18nKey="portfolio.emptyState.buttons.managerSecondary" />
-                  }
+                  title={<Trans i18nKey="portfolio.emptyState.buttons.managerSecondary" />}
                   onPress={navigateToManager}
                 />
               </>

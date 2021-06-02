@@ -8,11 +8,7 @@ type Props = {
   bgColor?: string,
 };
 
-export default function Warning({
-  size = 16,
-  color,
-  bgColor = "white",
-}: Props) {
+export default function Warning({ size = 16, color, bgColor = "white" }: Props) {
   return (
     <Svg width={size} height={size} viewBox="0 0 15 16" fill="none">
       <Path

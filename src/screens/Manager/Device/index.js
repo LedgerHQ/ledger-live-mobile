@@ -81,32 +81,15 @@ const DeviceCard = ({
         {firmware ? (
           <View style={styles.firmwareBanner}>
             <LText primary semiBold style={styles.firmwareBannerText}>
-              <Trans
-                i18nKey="manager.firmware.latest"
-                values={{ version: firmware.final.name }}
-              />
+              <Trans i18nKey="manager.firmware.latest" values={{ version: firmware.final.name }} />
             </LText>
             <View style={styles.firmwareBannerCTA}>
-              <Button
-                type="primary"
-                title={<Trans i18nKey="common.moreInfo" />}
-                onPress={open}
-              />
+              <Button type="primary" title={<Trans i18nKey="common.moreInfo" />} onPress={open} />
             </View>
           </View>
         ) : isDeprecated ? (
-          <View
-            style={[
-              styles.firmwareBanner,
-              { backgroundColor: colors.lightLive },
-            ]}
-          >
-            <LText
-              primary
-              semiBold
-              style={styles.firmwareBannerText}
-              color="live"
-            >
+          <View style={[styles.firmwareBanner, { backgroundColor: colors.lightLive }]}>
+            <LText primary semiBold style={styles.firmwareBannerText} color="live">
               <Trans i18nKey="manager.firmware.outdated" />
             </LText>
             <View style={styles.firmwareBannerCTA}>
@@ -150,9 +133,7 @@ const DeviceCard = ({
             </View>
           </View>
         </View>
-        <View
-          style={[styles.separator, { backgroundColor: colors.lightFog }]}
-        />
+        <View style={[styles.separator, { backgroundColor: colors.lightFog }]} />
         <View style={styles.storageSection}>
           <DeviceAppStorage
             distribution={distribution}

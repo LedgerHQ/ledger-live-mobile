@@ -45,10 +45,7 @@ export default function ErrorIcon({ error }: Props) {
     return <BluetoothScanning isError />;
   }
 
-  if (
-    error instanceof CantOpenDevice ||
-    error instanceof WrongDeviceForAccount
-  ) {
+  if (error instanceof CantOpenDevice || error instanceof WrongDeviceForAccount) {
     return (
       <Rounded bg={rgba(colors.alert, 0.15)}>
         <IconNanoX color={colors.alert} height={36} width={8} />
@@ -60,11 +57,7 @@ export default function ErrorIcon({ error }: Props) {
   if (error instanceof SwapGenericAPIError) {
     return (
       <Circle size={80} bg={rgba(colors.darkBlue, 0.05)}>
-        <IconAD
-          size={40}
-          name="clockcircleo"
-          color={rgba(colors.darkBlue, 0.5)}
-        />
+        <IconAD size={40} name="clockcircleo" color={rgba(colors.darkBlue, 0.5)} />
       </Circle>
     );
   }

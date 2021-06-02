@@ -44,9 +44,7 @@ export default function ValidationSuccess({ navigation, route }: Props) {
         icon={<UpdateIcon size={24} color={colors.live} />}
         iconColor={colors.live}
         title={<Trans i18nKey="transfer.lending.enable.validation.success" />}
-        description={
-          <Trans i18nKey="transfer.lending.enable.validation.info" />
-        }
+        description={<Trans i18nKey="transfer.lending.enable.validation.info" />}
         info={<Trans i18nKey="transfer.lending.enable.validation.extraInfo" />}
         onLearnMore={() => {
           Linking.openURL(urls.approvedOperation);

@@ -23,10 +23,7 @@ import CountervalueSettings from "../../screens/Settings/General/CountervalueSet
 import HelpSettings from "../../screens/Settings/Help";
 import CurrenciesList from "../../screens/Settings/CryptoAssets/Currencies/CurrenciesList";
 import CurrencySettings from "../../screens/Settings/CryptoAssets/Currencies/CurrencySettings";
-import DebugSettings, {
-  DebugDevices,
-  DebugMocks,
-} from "../../screens/Settings/Debug";
+import DebugSettings, { DebugDevices, DebugMocks } from "../../screens/Settings/Debug";
 import DebugExport from "../../screens/Settings/Debug/ExportAccounts";
 import ExperimentalSettings from "../../screens/Settings/Experimental";
 import RepairDevice from "../../screens/RepairDevice";
@@ -37,9 +34,7 @@ import HelpButton from "../../screens/Settings/HelpButton";
 export default function SettingsNavigator() {
   const { t } = useTranslation();
   const { colors } = useTheme();
-  const stackNavConfig = useMemo(() => getStackNavigatorConfig(colors), [
-    colors,
-  ]);
+  const stackNavConfig = useMemo(() => getStackNavigatorConfig(colors), [colors]);
   return (
     <Stack.Navigator screenOptions={stackNavConfig}>
       <Stack.Screen

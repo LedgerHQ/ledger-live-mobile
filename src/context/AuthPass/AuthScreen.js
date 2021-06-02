@@ -56,10 +56,7 @@ class NormalHeader extends PureComponent<{}> {
   render() {
     return (
       <View>
-        <Image
-          style={styles.logo}
-          source={require("../../images/logo_small.png")}
-        />
+        <Image style={styles.logo} source={require("../../images/logo_small.png")} />
         <LText semiBold secondary style={styles.title}>
           <Trans i18nKey="auth.unlock.title" />
         </LText>
@@ -73,13 +70,7 @@ class NormalHeader extends PureComponent<{}> {
 
 class FormFooter extends PureComponent<*> {
   render() {
-    const {
-      inputFocused,
-      passwordEmpty,
-      onSubmit,
-      passwordError,
-      onPress,
-    } = this.props;
+    const { inputFocused, passwordEmpty, onSubmit, passwordError, onPress } = this.props;
     return inputFocused ? (
       <TouchableWithoutFeedback>
         <Button
@@ -190,17 +181,10 @@ class AuthScreen extends PureComponent<Props, State> {
 
   render() {
     const { t, privacy, biometricsError, lock, colors } = this.props;
-    const {
-      passwordError,
-      isModalOpened,
-      secureTextEntry,
-      passwordFocused,
-    } = this.state;
+    const { passwordError, isModalOpened, secureTextEntry, passwordFocused } = this.state;
     return (
       <KeyboardBackgroundDismiss>
-        <SafeAreaView
-          style={[styles.root, { backgroundColor: colors.background }]}
-        >
+        <SafeAreaView style={[styles.root, { backgroundColor: colors.background }]}>
           <KeyboardView>
             <View style={{ flex: 1 }} />
 
@@ -250,10 +234,7 @@ class AuthScreen extends PureComponent<Props, State> {
             </View>
           )}
           <BottomModal isOpened={isModalOpened} onClose={this.onRequestClose}>
-            <HardResetModal
-              onRequestClose={this.onRequestClose}
-              onHardReset={this.onHardReset}
-            />
+            <HardResetModal onRequestClose={this.onRequestClose} onHardReset={this.onHardReset} />
           </BottomModal>
         </SafeAreaView>
       </KeyboardBackgroundDismiss>

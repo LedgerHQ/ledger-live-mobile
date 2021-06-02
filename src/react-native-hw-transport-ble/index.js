@@ -22,8 +22,7 @@ const transport = Config.MOCK
             Promise.resolve({
               publicKey: "00000000000000000000",
               address: "11111111111111111111111111111",
-              chainCode:
-                "0000000000000000000000000000000000000000000000000000000000000000",
+              chainCode: "0000000000000000000000000000000000000000000000000000000000000000",
             }),
           getAppAndVersion: () =>
             Promise.resolve({

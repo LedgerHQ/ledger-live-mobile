@@ -1,12 +1,6 @@
 // @flow
 import React, { useCallback, useMemo, useState } from "react";
-import {
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  Image,
-  ScrollView,
-} from "react-native";
+import { View, StyleSheet, TouchableOpacity, Image, ScrollView } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { normalize } from "../../helpers/normalizeSize";
 import { Track } from "../../analytics";
@@ -80,35 +74,26 @@ export function InfoStepView({
 
   const [hasValidatedCheckbox, setHasValidatedCheckbox] = useState(false);
 
-  const isDisabled = useMemo(
-    () => !!ctaWarningCheckbox && !hasValidatedCheckbox,
-    [ctaWarningCheckbox, hasValidatedCheckbox],
-  );
+  const isDisabled = useMemo(() => !!ctaWarningCheckbox && !hasValidatedCheckbox, [
+    ctaWarningCheckbox,
+    hasValidatedCheckbox,
+  ]);
 
   return (
     <>
-      {trackPage && isActive && (
-        <Track onMount event={`Page Onboarding ${trackPage}`} />
-      )}
+      {trackPage && isActive && <Track onMount event={`Page Onboarding ${trackPage}`} />}
       <ScrollView style={styles.spacer}>
         <View style={styles.infoStepView}>
           {children || (
             <>
               {image ? (
                 <View style={styles.imageContainer}>
-                  <Image
-                    style={styles.image}
-                    source={image}
-                    resizeMode="contain"
-                  />
+                  <Image style={styles.image} source={image} resizeMode="contain" />
                 </View>
               ) : null}
               {lottie ? (
                 <View style={styles.lottieContainer}>
-                  <Animation
-                    source={lottie}
-                    style={[styles.image, lottieStyle]}
-                  />
+                  <Animation source={lottie} style={[styles.image, lottieStyle]} />
                 </View>
               ) : null}
               {title && (
@@ -119,72 +104,42 @@ export function InfoStepView({
               {warning}
               {descs &&
                 descs.map((d, i) => (
-                  <LText
-                    key={"desc" + i}
-                    semiBold
-                    style={[styles.desc, { color: textColor }]}
-                  >
+                  <LText key={"desc" + i} semiBold style={[styles.desc, { color: textColor }]}>
                     {d}
                   </LText>
                 ))}
               {bullets && (
                 <View style={styles.bulletContainer}>
-                  {bullets.map(
-                    ({ Icon, title, label, labels, index, color }, i) => (
-                      <View style={styles.bulletLine} key={i}>
-                        <View
-                          style={[
-                            styles.bulletIcon,
-                            { backgroundColor: bulletColor },
-                          ]}
-                        >
-                          {Icon ? (
-                            <Icon
-                              size={10}
-                              color={color ? colors[color] : colors.live}
-                            />
-                          ) : (
-                            <LText
-                              semiBold
-                              style={[styles.label, { color: colors.live }]}
-                            >
-                              {index || i + 1}
-                            </LText>
-                          )}
-                        </View>
-                        <View style={styles.bulletTextContainer}>
-                          {title ? (
-                            <LText
-                              semiBold
-                              style={[styles.bulletTitle, { color: textColor }]}
-                            >
-                              {title}
-                            </LText>
-                          ) : null}
-                          {label ? (
-                            <LText
-                              style={[styles.bulletLabel, { color: textColor }]}
-                            >
-                              {label}
-                            </LText>
-                          ) : null}
-                          {labels && labels.length > 0
-                            ? labels.map((l, j) => (
-                                <LText
-                                  key={i + j}
-                                  style={[
-                                    styles.bulletLabel,
-                                    { color: textColor },
-                                  ]}
-                                >
-                                  {l}
-                                </LText>
-                              ))
-                            : null}
-                        </View>
+                  {bullets.map(({ Icon, title, label, labels, index, color }, i) => (
+                    <View style={styles.bulletLine} key={i}>
+                      <View style={[styles.bulletIcon, { backgroundColor: bulletColor }]}>
+                        {Icon ? (
+                          <Icon size={10} color={color ? colors[color] : colors.live} />
+                        ) : (
+                          <LText semiBold style={[styles.label, { color: colors.live }]}>
+                            {index || i + 1}
+                          </LText>
+                        )}
                       </View>
-                    ),
-                  )}
+                      <View style={styles.bulletTextContainer}>
+                        {title ? (
+                          <LText semiBold style={[styles.bulletTitle, { color: textColor }]}>
+                            {title}
+                          </LText>
+                        ) : null}
+                        {label ? (
+                          <LText style={[styles.bulletLabel, { color: textColor }]}>{label}</LText>
+                        ) : null}
+                        {labels && labels.length > 0
+                          ? labels.map((l, j) => (
+                              <LText key={i + j} style={[styles.bulletLabel, { color: textColor }]}>
+                                {l}
+                              </LText>
+                            ))
+                          : null}
+                      </View>
+                    </View>
+                  ))}
                 </View>
               )}
             </>
@@ -216,17 +171,12 @@ export function InfoStepView({
               },
             ]}
             disabled={isDisabled}
-            onPress={
-              isDisabled ? () => {} : ctaWarningModal ? onOpenInfoModal : onNext
-            }
+            onPress={isDisabled ? () => {} : ctaWarningModal ? onOpenInfoModal : onNext}
             testID={isDisabled ? undefined : ctaEvent}
           >
             <LText
               semiBold
-              style={[
-                styles.ctaLabel,
-                { color: isDisabled ? "rgba(0,0,0,0.3)" : buttonColor },
-              ]}
+              style={[styles.ctaLabel, { color: isDisabled ? "rgba(0,0,0,0.3)" : buttonColor }]}
             >
               {ctaText}
             </LText>

@@ -2,10 +2,7 @@
 import React, { useCallback } from "react";
 import { StyleSheet } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
-import type {
-  Transaction,
-  TransactionStatus,
-} from "@ledgerhq/live-common/lib/types";
+import type { Transaction, TransactionStatus } from "@ledgerhq/live-common/lib/types";
 import { useTheme } from "@react-navigation/native";
 import { TrackScreen } from "../analytics";
 import SelectDeviceComp from "../components/SelectDevice";
@@ -41,14 +38,8 @@ export default function SelectDevice({ navigation, route }: Props) {
       style={[styles.root, { backgroundColor: colors.background }]}
       forceInset={forceInset}
     >
-      <NavigationScrollView
-        style={styles.scroll}
-        contentContainerStyle={styles.scrollContainer}
-      >
-        <TrackScreen
-          category={route.name.replace("SelectDevice", "")}
-          name="SelectDevice"
-        />
+      <NavigationScrollView style={styles.scroll} contentContainerStyle={styles.scrollContainer}>
+        <TrackScreen category={route.name.replace("SelectDevice", "")} name="SelectDevice" />
         <SelectDeviceComp onSelect={onSelect} />
       </NavigationScrollView>
     </SafeAreaView>

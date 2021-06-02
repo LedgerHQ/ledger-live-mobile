@@ -4,10 +4,7 @@ import { StyleSheet, Linking, View } from "react-native";
 import { Trans } from "react-i18next";
 import SafeAreaView from "react-native-safe-area-view";
 import Icon from "react-native-vector-icons/dist/Feather";
-import type {
-  TokenAccount,
-  TokenCurrency,
-} from "@ledgerhq/live-common/lib/types";
+import type { TokenAccount, TokenCurrency } from "@ledgerhq/live-common/lib/types";
 import { shortAddressPreview } from "@ledgerhq/live-common/lib/account/helpers";
 
 import { useTheme } from "@react-navigation/native";

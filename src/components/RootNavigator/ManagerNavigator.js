@@ -16,13 +16,7 @@ import ManagerIcon from "../../icons/Manager";
 import NanoXIcon from "../../icons/TabNanoX";
 import { useIsNavLocked } from "./CustomBlockRouterNavigator";
 
-const ManagerIconWithUpate = ({
-  color,
-  size,
-}: {
-  color: string,
-  size: number,
-}) => {
+const ManagerIconWithUpate = ({ color, size }: { color: string, size: number }) => {
   const { colors } = useTheme();
   return (
     <View style={stylesLocal.iconWrapper}>
@@ -35,9 +29,7 @@ const ManagerIconWithUpate = ({
 export default function ManagerNavigator() {
   const { t } = useTranslation();
   const { colors } = useTheme();
-  const stackNavConfig = useMemo(() => getStackNavigatorConfig(colors), [
-    colors,
-  ]);
+  const stackNavConfig = useMemo(() => getStackNavigatorConfig(colors), [colors]);
   return (
     <Stack.Navigator
       screenOptions={{

@@ -16,12 +16,7 @@ type EmptyStateProps = {
   onClick?: () => void,
 };
 
-export default function EmptyState({
-  title,
-  description,
-  buttonLabel,
-  onClick,
-}: EmptyStateProps) {
+export default function EmptyState({ title, description, buttonLabel, onClick }: EmptyStateProps) {
   const { colors } = useTheme();
   return (
     <View style={[styles.emptyStateRoot, { backgroundColor: colors.card }]}>

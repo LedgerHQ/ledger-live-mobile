@@ -11,10 +11,7 @@ import { accountScreenSelector } from "../../../reducers/accounts";
 import { ScreenName } from "../../../const";
 import { TrackScreen } from "../../../analytics";
 import SelectDevice from "../../../components/SelectDevice";
-import {
-  connectingStep,
-  accountApp,
-} from "../../../components/DeviceJob/steps";
+import { connectingStep, accountApp } from "../../../components/DeviceJob/steps";
 
 type RouteParams = {
   accountId: string,
@@ -30,10 +27,7 @@ export default function ConnectDevice({ navigation, route }: Props) {
   const { colors } = useTheme();
   const { account } = useSelector(accountScreenSelector(route));
 
-  invariant(
-    account && account.algorandResources,
-    "account and algorand resources required",
-  );
+  invariant(account && account.algorandResources, "account and algorand resources required");
 
   const mainAccount = getMainAccount(account, undefined);
 
@@ -58,15 +52,9 @@ export default function ConnectDevice({ navigation, route }: Props) {
 
   return (
     <SafeAreaView style={[styles.root, { backgroundColor: colors.background }]}>
-      <ScrollView
-        style={styles.scroll}
-        contentContainerStyle={styles.scrollContainer}
-      >
+      <ScrollView style={styles.scroll} contentContainerStyle={styles.scrollContainer}>
         <TrackScreen category="AlgorandOptIn" name="ConnectDevice" />
-        <SelectDevice
-          onSelect={onSelectDevice}
-          steps={[connectingStep, accountApp(mainAccount)]}
-        />
+        <SelectDevice onSelect={onSelectDevice} steps={[connectingStep, accountApp(mainAccount)]} />
       </ScrollView>
     </SafeAreaView>
   );

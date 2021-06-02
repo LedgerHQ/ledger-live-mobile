@@ -58,13 +58,7 @@ export default function AccountDelegationInfo({
             <ExternalLink size={11} color={colors.live} />
           </TouchableOpacity>
         </View>
-        <Button
-          type="primary"
-          disabled={disabled}
-          onPress={onPress}
-          title={ctaTitle}
-          event=""
-        />
+        <Button type="primary" disabled={disabled} onPress={onPress} title={ctaTitle} event="" />
       </View>
     </View>
   );

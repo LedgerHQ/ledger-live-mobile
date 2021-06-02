@@ -13,11 +13,7 @@ type Props = {
   learnMoreKey?: string,
 };
 
-export default function WarningBox({
-  children: description,
-  onLearnMore,
-  learnMoreKey,
-}: Props) {
+export default function WarningBox({ children: description, onLearnMore, learnMoreKey }: Props) {
   const { colors, dark } = useTheme();
   const [backgroundColor, color] = dark
     ? [colors.orange, "#FFF"]
@@ -38,12 +34,7 @@ export default function WarningBox({
           {description}
         </LText>{" "}
         {onLearnMore && (
-          <LText
-            semiBold
-            style={[styles.learnMore, { color }]}
-            fontSize={3}
-            onPress={onLearnMore}
-          >
+          <LText semiBold style={[styles.learnMore, { color }]} fontSize={3} onPress={onLearnMore}>
             <Trans i18nKey={learnMoreKey || "common.learnMore"} />
           </LText>
         )}

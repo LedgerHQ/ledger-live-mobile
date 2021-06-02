@@ -3,10 +3,7 @@
 import React, { useCallback, useMemo } from "react";
 import { View, StyleSheet, FlatList, SafeAreaView } from "react-native";
 import { Trans } from "react-i18next";
-import type {
-  Account,
-  AccountLikeArray,
-} from "@ledgerhq/live-common/lib/types";
+import type { Account, AccountLikeArray } from "@ledgerhq/live-common/lib/types";
 import { useSelector } from "react-redux";
 import {
   accountWithMandatoryTokens,
@@ -48,9 +45,7 @@ export default function SelectAccount({ navigation, route }: Props) {
           : selectedCurrency.id),
     );
     if (selectedCurrency.type === "TokenCurrency") {
-      return filteredAccounts.map(acc =>
-        accountWithMandatoryTokens(acc, [selectedCurrency]),
-      );
+      return filteredAccounts.map(acc => accountWithMandatoryTokens(acc, [selectedCurrency]));
     }
     return filteredAccounts;
   }, [accounts, selectedCurrency]);
@@ -64,9 +59,7 @@ export default function SelectAccount({ navigation, route }: Props) {
     ({ item: result }: { item: SearchResult }) => {
       const { account } = result;
       const parentAccount =
-        account.type === "TokenAccount"
-          ? accounts.find(a => a.id === account.parentId)
-          : null;
+        account.type === "TokenAccount" ? accounts.find(a => a.id === account.parentId) : null;
       const accountParams = isFrom
         ? {
             fromAccount: account,
@@ -108,9 +101,8 @@ export default function SelectAccount({ navigation, route }: Props) {
   const elligibleAccountsForSelectedCurrency = allAccounts.filter(
     account =>
       (isFrom ? account.balance.gt(0) : true) &&
-      (account.type === "TokenAccount"
-        ? account.token.id
-        : account.currency.id) === selectedCurrency.id,
+      (account.type === "TokenAccount" ? account.token.id : account.currency.id) ===
+        selectedCurrency.id,
   );
 
   const renderList = useCallback(

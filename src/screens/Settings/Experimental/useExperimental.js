@@ -5,9 +5,7 @@ import { changes } from "@ledgerhq/live-common/lib/env";
 import { enabledExperimentalFeatures } from "../../../experimental";
 
 const useExperimental = (): boolean => {
-  const [state, setState] = useState(
-    () => enabledExperimentalFeatures().length > 0,
-  );
+  const [state, setState] = useState(() => enabledExperimentalFeatures().length > 0);
 
   useEffect(() => {
     const sub = changes.subscribe(() => {

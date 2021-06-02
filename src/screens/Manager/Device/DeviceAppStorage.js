@@ -21,13 +21,7 @@ type Props = {
 const DeviceAppStorage = ({
   deviceModel,
   deviceInfo,
-  distribution: {
-    freeSpaceBytes,
-    appsSpaceBytes,
-    shouldWarnMemory,
-    totalAppsBytes,
-    apps,
-  },
+  distribution: { freeSpaceBytes, appsSpaceBytes, shouldWarnMemory, totalAppsBytes, apps },
 }: Props) => {
   const { colors } = useTheme();
   const appSizes = useMemo(
@@ -68,11 +62,7 @@ const DeviceAppStorage = ({
       </View>
       <Touchable
         activeOpacity={1}
-        style={[
-          styles.row,
-          styles.graphRow,
-          { backgroundColor: colors.lightFog },
-        ]}
+        style={[styles.row, styles.graphRow, { backgroundColor: colors.lightFog }]}
         onPress={() => {}}
         event="ManagerAppDeviceGraphClick"
       >

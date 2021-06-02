@@ -2,14 +2,7 @@
 import React, { useState, useRef, useCallback } from "react";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import {
-  TouchableOpacity,
-  View,
-  StyleSheet,
-  Platform,
-  Dimensions,
-  FlatList,
-} from "react-native";
+import { TouchableOpacity, View, StyleSheet, Platform, Dimensions, FlatList } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import type { AssetsDistribution } from "@ledgerhq/live-common/lib/portfolio/v2/types";
 import { useTheme } from "@react-navigation/native";
@@ -111,9 +104,7 @@ export function Header({
             <LText semiBold style={[styles.assetCount]}>
               {distribution.list.length}
             </LText>
-            <LText semiBold>
-              {t("distribution.assets", { count: distribution.list.length })}
-            </LText>
+            <LText semiBold>{t("distribution.assets", { count: distribution.list.length })}</LText>
           </View>
         </View>
         <View style={styles.total}>
@@ -121,10 +112,7 @@ export function Header({
             {t("distribution.total")}
           </LText>
           <LText semiBold style={styles.amount}>
-            <CurrencyUnitValue
-              unit={counterValueCurrency.units[0]}
-              value={distribution.sum}
-            />
+            <CurrencyUnitValue unit={counterValueCurrency.units[0]} value={distribution.sum} />
           </LText>
         </View>
       </View>

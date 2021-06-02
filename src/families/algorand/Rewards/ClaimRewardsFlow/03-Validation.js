@@ -4,10 +4,7 @@ import { View, StyleSheet, ActivityIndicator } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import SafeAreaView from "react-native-safe-area-view";
 import invariant from "invariant";
-import type {
-  Transaction,
-  TransactionStatus,
-} from "@ledgerhq/live-common/lib/types";
+import type { Transaction, TransactionStatus } from "@ledgerhq/live-common/lib/types";
 import type { DeviceModelId } from "@ledgerhq/devices";
 import { useTheme } from "@react-navigation/native";
 import { useSignWithDevice } from "../../../../logic/screenTransactionHooks";
@@ -45,8 +42,7 @@ export default function Validation({ navigation, route }: Props) {
     account,
     parentAccount: undefined,
     navigation,
-    updateAccountWithUpdater: (...args) =>
-      dispatch(updateAccountWithUpdater(...args)),
+    updateAccountWithUpdater: (...args) => dispatch(updateAccountWithUpdater(...args)),
   });
 
   const { status, transaction, modelId, wired, deviceId } = route.params;
@@ -65,11 +61,7 @@ export default function Validation({ navigation, route }: Props) {
       style={[styles.root, { backgroundColor: colors.background }]}
       forceInset={forceInset}
     >
-      <TrackScreen
-        category="AlgorandClaimRewards"
-        name="Validation"
-        signed={signed}
-      />
+      <TrackScreen category="AlgorandClaimRewards" name="Validation" signed={signed} />
       {signing && (
         <>
           <PreventNativeBack />

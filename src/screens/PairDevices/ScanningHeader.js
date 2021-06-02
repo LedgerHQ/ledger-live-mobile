@@ -17,18 +17,12 @@ class ScanningHeader extends PureComponent<Props> {
         <BluetoothScanning isAnimated={!Config.MOCK} />
         <View style={styles.TitleContainer}>
           <LText secondary semiBold style={styles.TitleText}>
-            <Trans
-              i18nKey="PairDevices.ScanningHeader.title"
-              values={getDeviceModel("nanoX")}
-            />
+            <Trans i18nKey="PairDevices.ScanningHeader.title" values={getDeviceModel("nanoX")} />
           </LText>
         </View>
         <View style={styles.SubtitleContainer}>
           <LText style={styles.SubtitleText} color="smoke">
-            <Trans
-              i18nKey="PairDevices.ScanningHeader.desc"
-              values={getDeviceModel("nanoX")}
-            />
+            <Trans i18nKey="PairDevices.ScanningHeader.desc" values={getDeviceModel("nanoX")} />
           </LText>
         </View>
       </View>

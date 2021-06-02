@@ -3,11 +3,7 @@ import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import Config from "react-native-config";
 import { decodeURIScheme } from "@ledgerhq/live-common/lib/currencies";
-import type {
-  Account,
-  AccountLike,
-  Transaction,
-} from "@ledgerhq/live-common/lib/types";
+import type { Account, AccountLike, Transaction } from "@ledgerhq/live-common/lib/types";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { ScreenName } from "../../const";
 import { accountScreenSelector } from "../../reducers/accounts";
@@ -72,8 +68,7 @@ class ScanRecipient extends PureComponent<Props, State> {
   }
 }
 
-const mapStateToProps = (state, { route }) =>
-  accountScreenSelector(route)(state);
+const mapStateToProps = (state, { route }) => accountScreenSelector(route)(state);
 
 const m: React$ComponentType<{}> = connect(mapStateToProps)(ScanRecipient);
 

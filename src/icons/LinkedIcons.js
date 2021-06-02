@@ -46,9 +46,7 @@ const LinkedIcons = ({ left, right, center, color: c }: Props) => {
       <View style={[styles.smallDot, { backgroundColor: rgba(color, 0.1) }]} />
       <View style={[styles.smallDot, { backgroundColor: rgba(color, 0.2) }]} />
       <View style={[styles.smallDot, { backgroundColor: rgba(color, 0.3) }]} />
-      <View style={[styles.dot, { backgroundColor: rgba(color, 0.3) }]}>
-        {center}
-      </View>
+      <View style={[styles.dot, { backgroundColor: rgba(color, 0.3) }]}>{center}</View>
       <View style={[styles.smallDot, { backgroundColor: rgba(color, 0.8) }]} />
       <View style={[styles.smallDot, { backgroundColor: rgba(color, 0.9) }]} />
       <View style={[styles.smallDot, { backgroundColor: color }]} />

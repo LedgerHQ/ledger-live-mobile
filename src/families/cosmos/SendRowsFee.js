@@ -4,10 +4,7 @@ import { View, StyleSheet, Linking } from "react-native";
 import type { AccountLike } from "@ledgerhq/live-common/lib/types";
 import { Trans } from "react-i18next";
 import type { Transaction } from "@ledgerhq/live-common/lib/families/cosmos/types";
-import {
-  getAccountUnit,
-  getAccountCurrency,
-} from "@ledgerhq/live-common/lib/account";
+import { getAccountUnit, getAccountCurrency } from "@ledgerhq/live-common/lib/account";
 import { useTheme } from "@react-navigation/native";
 import SummaryRow from "../../screens/SendFunds/SummaryRow";
 import LText from "../../components/LText";
@@ -50,9 +47,7 @@ export default function CosmosFeeRow({ account, transaction }: Props) {
           ) : null}
         </View>
         <LText style={styles.countervalue} color="grey">
-          {fees ? (
-            <CounterValue before="≈ " value={fees} currency={currency} />
-          ) : null}
+          {fees ? <CounterValue before="≈ " value={fees} currency={currency} /> : null}
         </LText>
       </View>
     </SummaryRow>

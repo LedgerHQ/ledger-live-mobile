@@ -52,10 +52,7 @@ export default function ConnectDevice({ navigation, route }: Props) {
       forceInset={forceInset}
     >
       <TrackScreen category="MigrateAccount" name="ConnectDevice" />
-      <NavigationScrollView
-        style={styles.scroll}
-        contentContainerStyle={styles.scrollContainer}
-      >
+      <NavigationScrollView style={styles.scroll} contentContainerStyle={styles.scrollContainer}>
         <SelectDevice onSelect={setDevice} autoSelectOnAdd />
       </NavigationScrollView>
       <DeviceActionModal

@@ -14,12 +14,7 @@ import getWindowDimensions from "../logic/getWindowDimensions";
 
 const { width } = getWindowDimensions();
 const ConnectNanoXIllustration = props => (
-  <Svg
-    width={width * 0.7}
-    height={((width * 0.7) / 194) * 149}
-    viewBox="0 0 194 149"
-    {...props}
-  >
+  <Svg width={width * 0.7} height={((width * 0.7) / 194) * 149} viewBox="0 0 194 149" {...props}>
     <Defs>
       <Path
         id="prefix__a"
@@ -27,13 +22,7 @@ const ConnectNanoXIllustration = props => (
       />
       <Ellipse id="prefix__d" cx={9.11} cy={8.875} rx={4.282} ry={4.317} />
       <Ellipse id="prefix__f" cx={48.258} cy={13.316} rx={4.282} ry={4.317} />
-      <LinearGradient
-        id="prefix__h"
-        x1="50%"
-        x2="50%"
-        y1="100.845%"
-        y2="2.104%"
-      >
+      <LinearGradient id="prefix__h" x1="50%" x2="50%" y1="100.845%" y2="2.104%">
         <Stop offset="0%" stopColor="#165EDB" />
         <Stop offset="100%" stopColor="#99B9FF" />
       </LinearGradient>
@@ -175,19 +164,8 @@ const ConnectNanoXIllustration = props => (
             d="M16.3 8.814l-.86 2.132a.366.366 0 0 1-.477.202l-1.525-.617a.366.366 0 0 1-.202-.476l1.118-2.767c.045-.112.1-.218.161-.317a1.645 1.645 0 0 1 2.671-.262l.003.001.12.135a7.397 7.397 0 0 1 1.172 1.81 1.19 1.19 0 0 0-.909-.63 1.189 1.189 0 0 0-1.272.789z"
           />
         </G>
-        <Ellipse
-          cx={23.057}
-          cy={88.423}
-          fill="#3A3A3A"
-          fillRule="nonzero"
-          rx={3.074}
-          ry={3.096}
-        />
-        <G
-          fill="#3A3A3A"
-          fillRule="nonzero"
-          transform="translate(18.253 3.096)"
-        >
+        <Ellipse cx={23.057} cy={88.423} fill="#3A3A3A" fillRule="nonzero" rx={3.074} ry={3.096} />
+        <G fill="#3A3A3A" fillRule="nonzero" transform="translate(18.253 3.096)">
           <Ellipse cx={0.769} cy={0.774} rx={1} ry={1} />
           <Rect width={6.148} height={1} x={3.459} y={0.387} rx={0.385} />
         </G>
@@ -236,25 +214,13 @@ const ConnectNanoXIllustration = props => (
       />
       <G stroke="#6490F1" strokeLinecap="round" strokeWidth={1.35}>
         <Path d="M122.845 47.813a9.032 9.032 0 0 0-9.032 9.032" />
-        <Path
-          d="M122.845 43.297c-7.482 0-13.548 6.066-13.548 13.548"
-          opacity={0.5}
-        />
-        <Path
-          d="M123.484 38.516c-10.476 0-18.968 8.492-18.968 18.968"
-          opacity={0.1}
-        />
+        <Path d="M122.845 43.297c-7.482 0-13.548 6.066-13.548 13.548" opacity={0.5} />
+        <Path d="M123.484 38.516c-10.476 0-18.968 8.492-18.968 18.968" opacity={0.1} />
       </G>
       <G stroke="#6490F1" strokeLinecap="round" strokeWidth={1.35}>
         <Path d="M69.187 19.845a9.032 9.032 0 0 0-9.032-9.032" />
-        <Path
-          d="M73.703 19.845c0-7.482-6.066-13.548-13.548-13.548"
-          opacity={0.5}
-        />
-        <Path
-          d="M78.484 20.484c0-10.476-8.492-18.968-18.968-18.968"
-          opacity={0.1}
-        />
+        <Path d="M73.703 19.845c0-7.482-6.066-13.548-13.548-13.548" opacity={0.5} />
+        <Path d="M78.484 20.484c0-10.476-8.492-18.968-18.968-18.968" opacity={0.1} />
       </G>
     </G>
   </Svg>

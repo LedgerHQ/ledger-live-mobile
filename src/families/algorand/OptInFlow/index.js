@@ -20,10 +20,7 @@ import OptInValidationSuccess from "./03-ValidationSuccess";
 function OptInFlow() {
   const { t } = useTranslation();
   const { colors } = useTheme();
-  const stackNavigationConfig = useMemo(
-    () => getStackNavigatorConfig(colors, true),
-    [colors],
-  );
+  const stackNavigationConfig = useMemo(() => getStackNavigatorConfig(colors, true), [colors]);
 
   return (
     <Stack.Navigator

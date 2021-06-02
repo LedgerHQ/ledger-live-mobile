@@ -26,9 +26,7 @@ export default function LendingBanners({ account }: Props) {
   invariant(account.type === "TokenAccount", "account must be a TokenAccount");
 
   const availableOnCompound = !!account.compoundBalance;
-  const compoundCapabilities = availableOnCompound
-    ? getAccountCapabilities(account)
-    : {};
+  const compoundCapabilities = availableOnCompound ? getAccountCapabilities(account) : {};
 
   let lendingInfoBanner = null;
 
@@ -86,8 +84,7 @@ export default function LendingBanners({ account }: Props) {
     const lendingWarningBannerContent =
       compoundCapabilities.status === "ENABLING" ? (
         <Trans i18nKey="transfer.lending.banners.approving" />
-      ) : !!compoundCapabilities.status &&
-        !compoundCapabilities.canSupplyMax ? (
+      ) : !!compoundCapabilities.status && !compoundCapabilities.canSupplyMax ? (
         <Trans i18nKey="transfer.lending.banners.notEnough" />
       ) : null;
 

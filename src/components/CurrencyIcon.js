@@ -2,10 +2,7 @@
 
 import React, { memo, useMemo } from "react";
 import { View, StyleSheet } from "react-native";
-import {
-  getCryptoCurrencyIcon,
-  getTokenCurrencyIcon,
-} from "@ledgerhq/live-common/lib/reactNative";
+import { getCryptoCurrencyIcon, getTokenCurrencyIcon } from "@ledgerhq/live-common/lib/reactNative";
 import { getCurrencyColor } from "@ledgerhq/live-common/lib/currencies";
 
 import { useTheme } from "@react-navigation/native";
@@ -23,8 +20,7 @@ type Props = {
 function CurrencyIcon({ size, currency, color, radius, bg }: Props) {
   const { colors } = useTheme();
   const currencyColor = useMemo(
-    () =>
-      ensureContrast(color || getCurrencyColor(currency), colors.background),
+    () => ensureContrast(color || getCurrencyColor(currency), colors.background),
     [colors, color, currency],
   );
 
@@ -34,22 +30,14 @@ function CurrencyIcon({ size, currency, color, radius, bg }: Props) {
       width: size,
       height: size,
     };
-    const TokenIconCurrency =
-      getTokenCurrencyIcon && getTokenCurrencyIcon(currency);
+    const TokenIconCurrency = getTokenCurrencyIcon && getTokenCurrencyIcon(currency);
 
     return (
       <View
-        style={[
-          styles.tokenCurrencyIcon,
-          dynamicStyle,
-          radius ? { borderRadius: radius } : null,
-        ]}
+        style={[styles.tokenCurrencyIcon, dynamicStyle, radius ? { borderRadius: radius } : null]}
       >
         {TokenIconCurrency ? (
-          <TokenIconCurrency
-            size={size}
-            color={currencyColor || currency.color}
-          />
+          <TokenIconCurrency size={size} color={currencyColor || currency.color} />
         ) : (
           <LText semiBold style={{ color: currencyColor, fontSize: size / 2 }}>
             {currency.ticker[0]}
@@ -69,9 +57,7 @@ function CurrencyIcon({ size, currency, color, radius, bg }: Props) {
           radius ? { borderRadius: radius } : null,
         ]}
       >
-        <LText style={{ fontSize: Math.floor(size / 3) }}>
-          {currency.ticker}
-        </LText>
+        <LText style={{ fontSize: Math.floor(size / 3) }}>{currency.ticker}</LText>
       </View>
     );
   }

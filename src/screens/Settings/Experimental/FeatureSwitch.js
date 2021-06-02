@@ -36,10 +36,7 @@ export default class FeatureSwitch extends PureComponent<Props, State> {
     const { checked } = this.state;
     return (
       <>
-        <Track
-          onUpdate
-          event={checked ? `${name}Enabled` : `${name}Disabled`}
-        />
+        <Track onUpdate event={checked ? `${name}Enabled` : `${name}Disabled`} />
         <Switch
           disabled={readOnly}
           onValueChange={readOnly ? null : this.onChange}

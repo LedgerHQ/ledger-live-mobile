@@ -16,16 +16,10 @@ type Props = {
   liveQrCode?: boolean,
 };
 
-export default function CameraScreen({
-  width,
-  height,
-  progress,
-  liveQrCode,
-}: Props) {
+export default function CameraScreen({ width, height, progress, liveQrCode }: Props) {
   // Make the viewfinder borders 2/3 of the screen shortest border
   const viewFinderSize = (width > height ? height : width) * (2 / 3);
-  const wrapperStyle =
-    width > height ? { height, alignSelf: "stretch" } : { width, flexGrow: 1 };
+  const wrapperStyle = width > height ? { height, alignSelf: "stretch" } : { width, flexGrow: 1 };
 
   return (
     <View style={wrapperStyle}>

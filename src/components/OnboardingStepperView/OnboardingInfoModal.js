@@ -53,127 +53,88 @@ export default function OnboardingInfoModal({ navigation, route }: Props) {
   const sceneInfoProps = infoModalScenes[sceneInfoKey];
   const close = useCallback(() => navigation.goBack(), [navigation]);
 
-  const [primaryColor, textColor, bulletColor] = [
-    colors.card,
-    colors.darkBlue,
-    colors.lightLive,
-  ];
+  const [primaryColor, textColor, bulletColor] = [colors.card, colors.darkBlue, colors.lightLive];
 
   return sceneInfoProps ? (
     <SafeAreaView style={[styles.root, { backgroundColor: primaryColor }]}>
       <View style={[styles.header]}>
         <View style={styles.topHeader}>
-          <TouchableOpacity
-            hitSlop={hitSlop}
-            style={styles.buttons}
-            onPress={close}
-          >
+          <TouchableOpacity hitSlop={hitSlop} style={styles.buttons} onPress={close}>
             <Close size={18} color={textColor} />
           </TouchableOpacity>
         </View>
       </View>
       <ScrollView style={styles.root}>
-        {sceneInfoProps.map(
-          ({ Icon, iconColor, title, desc, link, bullets }, i) => (
-            <View key={`infoModalSection-${i}`}>
-              {Icon && (
-                <View style={styles.iconContainer}>
-                  <Icon
-                    size={56}
-                    color={iconColor ? colors[iconColor] : colors.live}
-                  />
-                </View>
-              )}
-              {title && (
-                <LText bold style={[styles.title, { color: textColor }]}>
-                  {title}
+        {sceneInfoProps.map(({ Icon, iconColor, title, desc, link, bullets }, i) => (
+          <View key={`infoModalSection-${i}`}>
+            {Icon && (
+              <View style={styles.iconContainer}>
+                <Icon size={56} color={iconColor ? colors[iconColor] : colors.live} />
+              </View>
+            )}
+            {title && (
+              <LText bold style={[styles.title, { color: textColor }]}>
+                {title}
+              </LText>
+            )}
+            {desc && <LText style={[styles.desc, { color: textColor }]}>{desc}</LText>}
+            {link && (
+              <TouchableOpacity
+                style={styles.desc}
+                onPress={() => {
+                  Linking.canOpenURL(link.url) && Linking.openURL(link.url);
+                }}
+              >
+                <LText semiBold style={[styles.link, { color: colors.live }]}>
+                  {link.label}
                 </LText>
-              )}
-              {desc && (
-                <LText style={[styles.desc, { color: textColor }]}>
-                  {desc}
-                </LText>
-              )}
-              {link && (
-                <TouchableOpacity
-                  style={styles.desc}
-                  onPress={() => {
-                    Linking.canOpenURL(link.url) && Linking.openURL(link.url);
-                  }}
-                >
-                  <LText semiBold style={[styles.link, { color: colors.live }]}>
-                    {link.label}
-                  </LText>
-                </TouchableOpacity>
-              )}
-              {bullets && (
-                <View style={styles.bulletContainer}>
-                  {bullets.map(
-                    ({ Icon, title, label, color, link: bulletLink }, i) => (
-                      <View style={styles.bulletLine} key={i}>
-                        <View
-                          style={[
-                            styles.bulletIcon,
-                            {
-                              backgroundColor: color
-                                ? rgba(colors[color], 0.1)
-                                : bulletColor,
-                            },
-                          ]}
+              </TouchableOpacity>
+            )}
+            {bullets && (
+              <View style={styles.bulletContainer}>
+                {bullets.map(({ Icon, title, label, color, link: bulletLink }, i) => (
+                  <View style={styles.bulletLine} key={i}>
+                    <View
+                      style={[
+                        styles.bulletIcon,
+                        {
+                          backgroundColor: color ? rgba(colors[color], 0.1) : bulletColor,
+                        },
+                      ]}
+                    >
+                      {Icon ? (
+                        <Icon size={10} color={color ? colors[color] : colors.live} />
+                      ) : (
+                        <LText semiBold style={[styles.label]} color={color || "live"}>
+                          {i + 1}
+                        </LText>
+                      )}
+                    </View>
+                    <View style={styles.bulletTextContainer}>
+                      {title && (
+                        <LText semiBold style={[styles.bulletTitle, { color: textColor }]}>
+                          {title}
+                        </LText>
+                      )}
+                      <LText style={[styles.bulletLabel, { color: textColor }]}>{label}</LText>
+                      {bulletLink && (
+                        <TouchableOpacity
+                          onPress={() => {
+                            Linking.canOpenURL(bulletLink.url) && Linking.openURL(bulletLink.url);
+                          }}
                         >
-                          {Icon ? (
-                            <Icon
-                              size={10}
-                              color={color ? colors[color] : colors.live}
-                            />
-                          ) : (
-                            <LText
-                              semiBold
-                              style={[styles.label]}
-                              color={color || "live"}
-                            >
-                              {i + 1}
-                            </LText>
-                          )}
-                        </View>
-                        <View style={styles.bulletTextContainer}>
-                          {title && (
-                            <LText
-                              semiBold
-                              style={[styles.bulletTitle, { color: textColor }]}
-                            >
-                              {title}
-                            </LText>
-                          )}
-                          <LText
-                            style={[styles.bulletLabel, { color: textColor }]}
-                          >
-                            {label}
+                          <LText semiBold style={[styles.label, { color: colors.live }]}>
+                            {bulletLink.label}
                           </LText>
-                          {bulletLink && (
-                            <TouchableOpacity
-                              onPress={() => {
-                                Linking.canOpenURL(bulletLink.url) &&
-                                  Linking.openURL(bulletLink.url);
-                              }}
-                            >
-                              <LText
-                                semiBold
-                                style={[styles.label, { color: colors.live }]}
-                              >
-                                {bulletLink.label}
-                              </LText>
-                            </TouchableOpacity>
-                          )}
-                        </View>
-                      </View>
-                    ),
-                  )}
-                </View>
-              )}
-            </View>
-          ),
-        )}
+                        </TouchableOpacity>
+                      )}
+                    </View>
+                  </View>
+                ))}
+              </View>
+            )}
+          </View>
+        ))}
       </ScrollView>
     </SafeAreaView>
   ) : null;

@@ -25,8 +25,7 @@ export type Props = {|
 
 function Modal({ isOpened, onClose, currency }: Props) {
   const { colors } = useTheme();
-  const tokenType =
-    currency.type === "TokenCurrency" ? currency.tokenType : "erc20";
+  const tokenType = currency.type === "TokenCurrency" ? currency.tokenType : "erc20";
   return (
     <BottomModal id="TokenOperationsInfo" isOpened={isOpened} onClose={onClose}>
       <SafeAreaView forceInset={forceInset} style={styles.modal}>
@@ -49,9 +48,7 @@ function Modal({ isOpened, onClose, currency }: Props) {
             type="primary"
             title={<Trans i18nKey="common.learnMore" />}
             containerStyle={[styles.modalBtn, styles.learnMore]}
-            onPress={() =>
-              Linking.openURL(urls.supportLinkByTokenType[tokenType])
-            }
+            onPress={() => Linking.openURL(urls.supportLinkByTokenType[tokenType])}
           />
         </View>
       </SafeAreaView>

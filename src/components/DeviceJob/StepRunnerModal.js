@@ -44,13 +44,7 @@ export default function SelectDeviceConnectModal({
           Footer={step.ErrorFooter || ErrorFooterGeneric}
         />
       ) : meta ? (
-        <step.Body
-          meta={meta}
-          step={step}
-          onDone={onStepDone}
-          onClose={onClose}
-          colors={colors}
-        />
+        <step.Body meta={meta} step={step} onDone={onStepDone} onClose={onClose} colors={colors} />
       ) : null}
       <Touchable event="DeviceJobClose" style={styles.close} onPress={onClose}>
         <Close color={colors.fog} size={20} />

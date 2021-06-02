@@ -27,26 +27,19 @@ const getActions = ({ account }: { account: Account }) => {
 
   const accountId = account.id;
 
-  const { unlockedBalance, lockedBalance, nominations } =
-    account.polkadotResources || {};
+  const { unlockedBalance, lockedBalance, nominations } = account.polkadotResources || {};
 
-  const electionOpen =
-    staking?.electionClosed !== undefined ? !staking?.electionClosed : false;
+  const electionOpen = staking?.electionClosed !== undefined ? !staking?.electionClosed : false;
   const hasUnlockedBalance = unlockedBalance && unlockedBalance.gt(0);
   const hasBondedBalance = lockedBalance && lockedBalance.gt(0);
   const hasPendingBondOperation = hasPendingOperationType(account, "BOND");
-  const hasPendingWithdrawUnbondedOperation = hasPendingOperationType(
-    account,
-    "WITHDRAW_UNBONDED",
-  );
+  const hasPendingWithdrawUnbondedOperation = hasPendingOperationType(account, "WITHDRAW_UNBONDED");
 
   const nominationEnabled = !electionOpen && canNominate(account);
-  const chillEnabled =
-    !electionOpen && canNominate(account) && nominations?.length;
+  const chillEnabled = !electionOpen && canNominate(account) && nominations?.length;
   const bondingEnabled =
     !electionOpen &&
-    ((!hasBondedBalance && !hasPendingBondOperation) ||
-      (hasBondedBalance && canBond(account)));
+    ((!hasBondedBalance && !hasPendingBondOperation) || (hasBondedBalance && canBond(account)));
   const unbondingEnabled = !electionOpen && canUnbond(account);
   const withdrawEnabled =
     !electionOpen && hasUnlockedBalance && !hasPendingWithdrawUnbondedOperation;
@@ -92,9 +85,7 @@ const getActions = ({ account }: { account: Account }) => {
         },
       ],
       label: <Trans i18nKey="polkadot.manage.withdrawUnbonded.title" />,
-      description: (
-        <Trans i18nKey="polkadot.manage.withdrawUnbonded.description" />
-      ),
+      description: <Trans i18nKey="polkadot.manage.withdrawUnbonded.description" />,
       Icon: WithdrawUnbondedIcon,
     },
     {

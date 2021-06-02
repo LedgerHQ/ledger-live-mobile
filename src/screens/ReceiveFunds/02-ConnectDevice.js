@@ -61,10 +61,10 @@ export default function ConnectDevice({ navigation, route }: Props) {
     }
   }, [navigation, readOnlyModeEnabled, route.params]);
 
-  const error = useMemo(
-    () => (account ? getReceiveFlowError(account, parentAccount) : null),
-    [account, parentAccount],
-  );
+  const error = useMemo(() => (account ? getReceiveFlowError(account, parentAccount) : null), [
+    account,
+    parentAccount,
+  ]);
 
   const onResult = useCallback(
     payload => {
@@ -114,17 +114,14 @@ export default function ConnectDevice({ navigation, route }: Props) {
 
   const mainAccount = getMainAccount(account, parentAccount);
   const currency = getAccountCurrency(account);
-  const tokenCurrency =
-    account && account.type === "TokenAccount" && account.token;
+  const tokenCurrency = account && account.type === "TokenAccount" && account.token;
 
   if (readOnlyModeEnabled) {
     return <ReadOnlyWarning continue={onSkipDevice} />;
   }
 
   if (!mainAccount.freshAddress) {
-    return (
-      <NotSyncedWarning continue={onSkipDevice} accountId={mainAccount.id} />
-    );
+    return <NotSyncedWarning continue={onSkipDevice} accountId={mainAccount.id} />;
   }
 
   return (
@@ -137,20 +134,9 @@ export default function ConnectDevice({ navigation, route }: Props) {
       ]}
       forceInset={forceInset}
     >
-      <TrackScreen
-        category="ReceiveFunds"
-        name="ConnectDevice"
-        currencyName={currency.name}
-      />
-      <NavigationScrollView
-        style={styles.scroll}
-        contentContainerStyle={styles.scrollContainer}
-      >
-        <SelectDevice
-          onSelect={setDevice}
-          onWithoutDevice={onSkipDevice}
-          withoutDevice
-        />
+      <TrackScreen category="ReceiveFunds" name="ConnectDevice" currencyName={currency.name} />
+      <NavigationScrollView style={styles.scroll} contentContainerStyle={styles.scrollContainer}>
+        <SelectDevice onSelect={setDevice} onWithoutDevice={onSkipDevice} withoutDevice />
       </NavigationScrollView>
       <DeviceActionModal
         action={action}

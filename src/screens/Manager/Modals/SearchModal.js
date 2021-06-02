@@ -34,13 +34,7 @@ type PlaceholderProps = {
   apps: App[],
 };
 
-const Placeholder = ({
-  query,
-  addAccount,
-  onInstall,
-  installed,
-  apps,
-}: PlaceholderProps) => {
+const Placeholder = ({ query, addAccount, onInstall, installed, apps }: PlaceholderProps) => {
   const { colors } = useTheme();
   const found = useMemo(
     () =>
@@ -62,16 +56,11 @@ const Placeholder = ({
 
   const parent = useMemo(
     () =>
-      found &&
-      found.parentCurrency &&
-      apps.find(({ name }) => name === found.parentCurrency.name),
+      found && found.parentCurrency && apps.find(({ name }) => name === found.parentCurrency.name),
     [found, apps],
   );
 
-  const install = useCallback(() => parent && onInstall(parent.name), [
-    parent,
-    onInstall,
-  ]);
+  const install = useCallback(() => parent && onInstall(parent.name), [parent, onInstall]);
 
   return found && parent ? (
     <NavigationScrollView>
@@ -113,12 +102,7 @@ const Placeholder = ({
               type="primary"
               onPress={install}
               containerStyle={styles.placeholderButton}
-              title={
-                <Trans
-                  i18nKey="manager.intallParentApp"
-                  values={{ appName: parent.name }}
-                />
-              }
+              title={<Trans i18nKey="manager.intallParentApp" values={{ appName: parent.name }} />}
             />
           )}
           <Button
@@ -198,12 +182,7 @@ export default ({
   const onModalHide = useCallback(() => {
     if (depInstall) setAppInstallWithDependencies(depInstall);
     else if (depUninstall) setAppUninstallWithDependencies(depUninstall);
-  }, [
-    depInstall,
-    depUninstall,
-    setAppInstallWithDependencies,
-    setAppUninstallWithDependencies,
-  ]);
+  }, [depInstall, depUninstall, setAppInstallWithDependencies, setAppUninstallWithDependencies]);
 
   const clear = useCallback(() => setQuery(""), [setQuery]);
 
@@ -216,11 +195,10 @@ export default ({
     [query],
   );
 
-  const sortedApps: Array<App> = useSortedFilteredApps(
-    apps || state.apps,
-    filterOptions,
-    { type: "marketcap", order: "desc" },
-  );
+  const sortedApps: Array<App> = useSortedFilteredApps(apps || state.apps, filterOptions, {
+    type: "marketcap",
+    order: "desc",
+  });
 
   const addAccount = useCallback(() => {
     navigation.navigate(NavigatorName.AddAccounts);
@@ -249,14 +227,7 @@ export default ({
           apps={state.apps}
         />
       ),
-    [
-      addAccount,
-      onInstall,
-      query,
-      sortedApps.length,
-      state.apps,
-      state.installed,
-    ],
+    [addAccount, onInstall, query, sortedApps.length, state.apps, state.installed],
   );
 
   const renderRow = useCallback(
@@ -335,11 +306,7 @@ export default ({
                 maxLength={50}
                 onChangeText={setQuery}
                 clearButtonMode="always"
-                style={[
-                  styles.searchBarText,
-                  styles.searchBarInput,
-                  { color: colors.smoke },
-                ]}
+                style={[styles.searchBarText, styles.searchBarInput, { color: colors.smoke }]}
                 placeholder={placeholder}
                 placeholderTextColor={colors.smoke}
                 onInputCleared={clear}

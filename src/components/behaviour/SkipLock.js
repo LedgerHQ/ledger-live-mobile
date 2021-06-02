@@ -39,7 +39,5 @@ export default function SkipLock(props: any) {
   const isFocused = useIsFocused();
   const setEnabled = useContext(SkipLockContext);
 
-  return (
-    <SkipLockClass {...props} isFocused={isFocused} setEnabled={setEnabled} />
-  );
+  return <SkipLockClass {...props} isFocused={isFocused} setEnabled={setEnabled} />;
 }

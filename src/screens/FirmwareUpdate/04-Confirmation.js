@@ -35,9 +35,7 @@ export default function FirmwareUpdateConfirmation({ navigation }: Props) {
       <View style={styles.body}>
         <GenericSuccessView
           title={<Trans i18nKey="FirmwareUpdateConfirmation.title" />}
-          description={
-            <Trans i18nKey="FirmwareUpdateConfirmation.description" />
-          }
+          description={<Trans i18nKey="FirmwareUpdateConfirmation.description" />}
         />
         <Button
           event="FirmwareUpdateDone"

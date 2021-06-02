@@ -59,14 +59,10 @@ class Scanner extends PureComponent<Props, State> {
           ratio="16:9"
           captureAudio={false}
           style={[styles.camera, cameraDimensions]}
-          notAuthorizedView={
-            <FallBackCamera navigation={navigation} screenName={screenName} />
-          }
+          notAuthorizedView={<FallBackCamera navigation={navigation} screenName={screenName} />}
         >
           {({ status }) =>
-            status === "READY" ? (
-              <CameraScreen width={width} height={height} />
-            ) : null
+            status === "READY" ? <CameraScreen width={width} height={height} /> : null
           }
         </RNCamera>
       </View>

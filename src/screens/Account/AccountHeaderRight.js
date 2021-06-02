@@ -39,11 +39,7 @@ export default function AccountHeaderRight() {
             <Icon name="ellipsis-h" size={20} color={colors.grey} />
           </View>
         </Touchable>
-        <TokenContextualModal
-          account={account}
-          isOpened={isOpened}
-          onClose={closeModal}
-        />
+        <TokenContextualModal account={account} isOpened={isOpened} onClose={closeModal} />
       </>
     );
   }

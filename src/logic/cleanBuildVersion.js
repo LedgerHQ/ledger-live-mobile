@@ -20,15 +20,13 @@ export const getAndroidVersionCode = (buildVersion?: ?string) => {
   const buildVersionNumber = parseInt(buildVersion, 10);
   if (!buildVersionNumber) return "";
 
-  return Platform.OS === "android" && buildVersionNumber
-    ? buildVersionNumber % mega
-    : buildVersion;
+  return Platform.OS === "android" && buildVersionNumber ? buildVersionNumber % mega : buildVersion;
 };
 
 export default (buildVersion?: ?string) => {
   if (Platform.OS === "android" && buildVersion) {
-    return `${getAndroidArchitecture(buildVersion) ||
-      ""} ${getAndroidVersionCode(buildVersion) || ""}`;
+    return `${getAndroidArchitecture(buildVersion) || ""} ${getAndroidVersionCode(buildVersion) ||
+      ""}`;
   }
   return buildVersion;
 };

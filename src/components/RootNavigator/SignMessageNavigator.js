@@ -17,9 +17,7 @@ const totalSteps = "3";
 export default function SignMessageNavigator() {
   const { t } = useTranslation();
   const { colors } = useTheme();
-  const stackNavConfig = useMemo(() => getStackNavigatorConfig(colors, true), [
-    colors,
-  ]);
+  const stackNavConfig = useMemo(() => getStackNavigatorConfig(colors, true), [colors]);
   return (
     <Stack.Navigator screenOptions={stackNavConfig}>
       <Stack.Screen

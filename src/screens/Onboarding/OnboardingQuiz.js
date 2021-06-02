@@ -1,12 +1,6 @@
 // @flow
 import React, { useCallback, useState } from "react";
-import {
-  StyleSheet,
-  View,
-  Dimensions,
-  Image,
-  TouchableOpacity,
-} from "react-native";
+import { StyleSheet, View, Dimensions, Image, TouchableOpacity } from "react-native";
 import { TabView, SceneMap } from "react-native-tab-view";
 import Svg, { Ellipse } from "react-native-svg";
 import { useTheme } from "@react-navigation/native";
@@ -60,16 +54,11 @@ const InfoView = ({
           {answers.map(({ title, correct }, i) => (
             <Touchable
               key={i}
-              event={`Onboarding - Quizz step ${index} ${
-                correct ? "correct" : "false"
-              }`}
+              event={`Onboarding - Quizz step ${index} ${correct ? "correct" : "false"}`}
               style={[styles.answer, { backgroundColor: colors.lightLive }]}
               onPress={() => onPress(correct)}
             >
-              <LText
-                semiBold
-                style={[styles.answerText, { color: colors.live }]}
-              >
+              <LText semiBold style={[styles.answerText, { color: colors.live }]}>
                 {title}
               </LText>
             </Touchable>
@@ -161,12 +150,7 @@ function OnboardingQuizz({ navigation, route }: *) {
           initialLayout={initialLayout}
           swipeEnabled={false}
         />
-        <Svg
-          pointerEvents="none"
-          style={styles.svg}
-          viewBox="0 0 320 196"
-          fill="none"
-        >
+        <Svg pointerEvents="none" style={styles.svg} viewBox="0 0 320 196" fill="none">
           <Ellipse cx="165" cy="208.22" rx="507" ry="208.032" fill="#495D7F" />
         </Svg>
         <View style={styles.dotContainer}>
@@ -188,14 +172,8 @@ function OnboardingQuizz({ navigation, route }: *) {
       <ConfirmationModal
         isOpened={isModalOpen}
         hideRejectButton
-        image={
-          currentAnswer
-            ? onboardingQuizzCorrectAnswer
-            : onboardingQuizzWrongAnswer
-        }
-        confirmationTitle={
-          currentScene.modal[currentAnswer ? "success" : "fail"]
-        }
+        image={currentAnswer ? onboardingQuizzCorrectAnswer : onboardingQuizzWrongAnswer}
+        confirmationTitle={currentScene.modal[currentAnswer ? "success" : "fail"]}
         confirmationDesc={currentScene.modal.text}
         confirmButtonText={currentScene.modal.cta}
         onConfirm={closeModal}

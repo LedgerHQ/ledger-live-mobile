@@ -179,8 +179,7 @@ export const ScreenName = {
   AlgorandClaimRewardsConnectDevice: "AlgorandClaimRewardsConnectDevice",
   AlgorandClaimRewardsValidation: "AlgorandClaimRewardsValidation",
   AlgorandClaimRewardsValidationError: "AlgorandClaimRewardsValidationError",
-  AlgorandClaimRewardsValidationSuccess:
-    "AlgorandClaimRewardsValidationSuccess",
+  AlgorandClaimRewardsValidationSuccess: "AlgorandClaimRewardsValidationSuccess",
   AlgorandOptInSelectToken: "AlgorandOptInSelectToken",
   AlgorandOptInSelectDevice: "AlgorandOptInSelectDevice",
   AlgorandOptInConnectDevice: "AlgorandOptInConnectDevice",
@@ -213,10 +212,8 @@ export const ScreenName = {
   PolkadotSimpleOperationStarted: "PolkadotSimpleOperationStarted",
   PolkadotSimpleOperationSelectDevice: "PolkadotSimpleOperationSelectDevice",
   PolkadotSimpleOperationConnectDevice: "PolkadotSimpleOperationConnectDevice",
-  PolkadotSimpleOperationValidationError:
-    "PolkadotSimpleOperationValidationError",
-  PolkadotSimpleOperationValidationSuccess:
-    "PolkadotSimpleOperationValidationSuccess",
+  PolkadotSimpleOperationValidationError: "PolkadotSimpleOperationValidationError",
+  PolkadotSimpleOperationValidationSuccess: "PolkadotSimpleOperationValidationSuccess",
 
   LendingDashboard: "LendingDashboard",
   LendingClosedLoans: "LendingClosedLoans",
@@ -276,8 +273,7 @@ export const ScreenName = {
   OnboardingFinish: "OnboardingFinish",
   WalletConnectScan: "WalletConnectScan",
   WalletConnectConnect: "WalletConnectConnect",
-  WalletConnectDeeplinkingSelectAccount:
-    "WalletConnectDeeplinkingSelectAccount",
+  WalletConnectDeeplinkingSelectAccount: "WalletConnectDeeplinkingSelectAccount",
 
   NotificationCenterNews: "NotificationCenterNews",
   NotificationCenterStatus: "NotificationCenterStatus",

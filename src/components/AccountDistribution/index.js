@@ -8,16 +8,9 @@ import type { Account } from "@ledgerhq/live-common/lib/types";
 import LText from "../LText";
 import Row from "./Row";
 
-export default function AccountDistribution({
-  accounts,
-}: {
-  accounts: Account[],
-}) {
+export default function AccountDistribution({ accounts }: { accounts: Account[] }) {
   const { t } = useTranslation();
-  const total = accounts.reduce(
-    (total, a) => total.plus(a.balance),
-    BigNumber(0),
-  );
+  const total = accounts.reduce((total, a) => total.plus(a.balance), BigNumber(0));
   const accountDistribution = useMemo(
     () =>
       accounts.map(a => ({

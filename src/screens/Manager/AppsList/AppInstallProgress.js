@@ -19,29 +19,16 @@ type InstallProgressProps = {
   updating: boolean,
 };
 
-export const InstallProgress = ({
-  state,
-  name,
-  installing,
-  updating,
-}: InstallProgressProps) => {
+export const InstallProgress = ({ state, name, installing, updating }: InstallProgressProps) => {
   const { colors } = useTheme();
   const progress = useAppInstallProgress(state, name);
 
   return (
     <View style={styles.progressContainer}>
       <View style={styles.progressLabel}>
-        <LText
-          semiBold
-          numberOfLines={1}
-          style={[styles.appStateText, { color: colors.live }]}
-        >
+        <LText semiBold numberOfLines={1} style={[styles.appStateText, { color: colors.live }]}>
           <Trans
-            i18nKey={
-              updating
-                ? "AppAction.update.loading"
-                : "AppAction.install.loading.button"
-            }
+            i18nKey={updating ? "AppAction.update.loading" : "AppAction.install.loading.button"}
           />
         </LText>
       </View>
@@ -64,20 +51,12 @@ export const UninstallProgress = ({ uninstalling }: UninstallProgressProps) => {
   return (
     <View style={styles.progressContainer}>
       <View style={styles.progressLabel}>
-        <LText
-          semiBold
-          numberOfLines={1}
-          style={[styles.appStateText, { color: colors.live }]}
-        >
+        <LText semiBold numberOfLines={1} style={[styles.appStateText, { color: colors.live }]}>
           <Trans i18nKey="AppAction.uninstall.loading.button" />
         </LText>
       </View>
       {uninstalling ? (
-        <InfiniteProgressBar
-          progressColor={colors.live}
-          style={styles.progressBar}
-          height={6}
-        />
+        <InfiniteProgressBar progressColor={colors.live} style={styles.progressBar} height={6} />
       ) : (
         <ProgressBar
           progressColor={colors.live}

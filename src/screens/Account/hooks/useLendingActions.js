@@ -16,8 +16,7 @@ type Props = {
 export default function AccountActions({ account }: Props) {
   const currency = getAccountCurrency(account);
 
-  const availableOnCompound =
-    account.type === "TokenAccount" && !!account.compoundBalance;
+  const availableOnCompound = account.type === "TokenAccount" && !!account.compoundBalance;
   const compoundCapabilities = availableOnCompound
     ? account.type === "TokenAccount" && getAccountCapabilities(account)
     : {};

@@ -28,31 +28,11 @@ export default function DebugIcons() {
         <DeviceNanoAction width={250} wired />
 
         <DeviceNanoAction width={250} modelId="nanoS" />
-        <DeviceNanoAction
-          width={250}
-          modelId="nanoS"
-          error={new Error("wahtevr")}
-        />
-        <DeviceNanoAction
-          width={250}
-          modelId="nanoS"
-          error={new UserRefusedAddress()}
-        />
-        <DeviceNanoAction
-          width={250}
-          modelId="nanoS"
-          wired
-          action="accept"
-          screen="validation"
-        />
+        <DeviceNanoAction width={250} modelId="nanoS" error={new Error("wahtevr")} />
+        <DeviceNanoAction width={250} modelId="nanoS" error={new UserRefusedAddress()} />
+        <DeviceNanoAction width={250} modelId="nanoS" wired action="accept" screen="validation" />
         <DeviceNanoAction width={250} modelId="nanoS" wired action="left" />
-        <DeviceNanoAction
-          width={250}
-          modelId="nanoS"
-          wired
-          screen="home"
-          action="accept"
-        />
+        <DeviceNanoAction width={250} modelId="nanoS" wired screen="home" action="accept" />
         <DeviceNanoAction width={250} modelId="nanoS" wired screen="pin" />
       </NavigationScrollView>
     </SafeAreaView>

@@ -51,11 +51,7 @@ const ChoiceButton = ({
       </View>
 
       <View style={styles.buttonLabelContainer}>
-        <LText
-          style={[styles.buttonLabel]}
-          color={disabled ? "grey" : "darkBlue"}
-          semiBold
-        >
+        <LText style={[styles.buttonLabel]} color={disabled ? "grey" : "darkBlue"} semiBold>
           {label}
         </LText>
         {description && (

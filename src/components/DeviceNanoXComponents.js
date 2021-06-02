@@ -2,16 +2,7 @@
 
 import { useTheme } from "@react-navigation/native";
 import React from "react";
-import {
-  Defs,
-  Rect,
-  LinearGradient,
-  Stop,
-  G,
-  Path,
-  Circle,
-  Mask,
-} from "react-native-svg";
+import { Defs, Rect, LinearGradient, Stop, G, Path, Circle, Mask } from "react-native-svg";
 
 export const LeftHint = () => {
   const { colors } = useTheme();
@@ -67,13 +58,7 @@ export const RightHint = () => {
   );
 };
 
-export const Hints = ({
-  action,
-  color,
-}: {
-  action: "accept" | "left",
-  color: string,
-}) => (
+export const Hints = ({ action, color }: { action: "accept" | "left", color: string }) => (
   <>
     <Defs>
       <LinearGradient id="hints" x1="50%" x2="50%" y1="0%" y2="100%">
@@ -194,13 +179,7 @@ export const HomeScreen = ({ color }: { color: string }) => (
   </EmptyScreen>
 );
 
-export const ErrorScreen = ({
-  color,
-  rejected = false,
-}: {
-  color: string,
-  rejected?: boolean,
-}) => {
+export const ErrorScreen = ({ color, rejected = false }: { color: string, rejected?: boolean }) => {
   const { colors } = useTheme();
   return (
     <>

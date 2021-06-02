@@ -6,15 +6,9 @@ import { getProviders } from "@ledgerhq/live-common/lib/exchange/swap";
 import { SwapNoAvailableProviders } from "@ledgerhq/live-common/lib/errors";
 import { useSelector, useDispatch } from "react-redux";
 import SafeAreaView from "react-native-safe-area-view";
-import type {
-  Account,
-  AccountLike,
-} from "@ledgerhq/live-common/lib/types/account";
+import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types/account";
 import { useTheme } from "@react-navigation/native";
-import {
-  hasAcceptedSwapKYCSelector,
-  swapProvidersSelector,
-} from "../../reducers/settings";
+import { hasAcceptedSwapKYCSelector, swapProvidersSelector } from "../../reducers/settings";
 import { setSwapProviders } from "../../actions/settings";
 import Landing from "./Landing";
 import NotAvailable from "./NotAvailable";
@@ -38,9 +32,7 @@ const Swap = ({
       getProviders().then(maybeProviders => {
         dispatch(
           setSwapProviders(
-            maybeProviders instanceof SwapNoAvailableProviders
-              ? []
-              : maybeProviders,
+            maybeProviders instanceof SwapNoAvailableProviders ? [] : maybeProviders,
           ),
         );
         setHasUpToDateProviders(true);

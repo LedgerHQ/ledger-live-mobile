@@ -43,15 +43,11 @@ class TechnicalDataRow extends PureComponent<Props, State> {
           bullets={[
             {
               key: "bullet1",
-              val: (
-                <Trans i18nKey="settings.display.technicalDataModal.bullet1" />
-              ),
+              val: <Trans i18nKey="settings.display.technicalDataModal.bullet1" />,
             },
             {
               key: "bullet2",
-              val: (
-                <Trans i18nKey="settings.display.technicalDataModal.bullet2" />
-              ),
+              val: <Trans i18nKey="settings.display.technicalDataModal.bullet2" />,
             },
           ]}
         />

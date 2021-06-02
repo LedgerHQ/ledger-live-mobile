@@ -30,8 +30,7 @@ export default function CurrencyUnitValue({
 }: Props) {
   const { locale } = useLocale();
   const discreet = useSelector(discreetModeSelector);
-  const value =
-    valueProp instanceof BigNumber ? valueProp : BigNumber(valueProp);
+  const value = valueProp instanceof BigNumber ? valueProp : BigNumber(valueProp);
 
   return (
     before +

@@ -99,8 +99,7 @@ registerTransportModule({
 let DebugHttpProxy;
 const httpdebug: TransportModule = {
   id: "httpdebug",
-  open: id =>
-    id.startsWith("httpdebug|") ? DebugHttpProxy.open(id.slice(10)) : null,
+  open: id => (id.startsWith("httpdebug|") ? DebugHttpProxy.open(id.slice(10)) : null),
   disconnect: id =>
     id.startsWith("httpdebug|")
       ? Promise.resolve() // nothing to do

@@ -16,13 +16,7 @@ const PhoneBle = () => {
           strokeWidth={1.602}
           d="M15.023 40.085l10.015-8.638L19.664 26v20l5.374-5.447-10.015-8.638"
         />
-        <Ellipse
-          strokeWidth={1.099}
-          cx={20.531}
-          cy={64.5}
-          rx={2.504}
-          ry={2.5}
-        />
+        <Ellipse strokeWidth={1.099} cx={20.531} cy={64.5} rx={2.504} ry={2.5} />
       </G>
     </Svg>
   );

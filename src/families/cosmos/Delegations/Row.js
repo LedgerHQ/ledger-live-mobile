@@ -20,12 +20,7 @@ type Props = {
   isLast?: boolean,
 };
 
-export default function DelegationRow({
-  delegation,
-  currency,
-  onPress,
-  isLast = false,
-}: Props) {
+export default function DelegationRow({ delegation, currency, onPress, isLast = false }: Props) {
   const { colors } = useTheme();
   const { t } = useTranslation();
   const { validator, validatorAddress, formattedAmount, amount } = delegation;
@@ -36,9 +31,7 @@ export default function DelegationRow({
         styles.row,
         styles.wrapper,
         { backgroundColor: colors.card },
-        !isLast
-          ? { ...styles.borderBottom, borderBottomColor: colors.lightGrey }
-          : undefined,
+        !isLast ? { ...styles.borderBottom, borderBottomColor: colors.lightGrey } : undefined,
       ]}
       onPress={() => onPress(delegation)}
     >

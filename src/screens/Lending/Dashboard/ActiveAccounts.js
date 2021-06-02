@@ -20,9 +20,7 @@ const ActiveAccounts = ({ summaries }: Props) => {
         renderItem={({ item }) => <Row item={item} />}
         keyExtractor={(item, index) => item.account.id + index}
         ItemSeparatorComponent={() => (
-          <View
-            style={[styles.separator, { backgroundColor: colors.background }]}
-          />
+          <View style={[styles.separator, { backgroundColor: colors.background }]} />
         )}
         ListEmptyComponent={() => <EmptyState />}
       />

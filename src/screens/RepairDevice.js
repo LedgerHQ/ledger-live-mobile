@@ -81,25 +81,16 @@ class RepairDevice extends Component<Props, State> {
       body = <Installing progress={progress} installing="flash" />;
     } else if (ready) {
       body = (
-        <NavigationScrollView
-          style={styles.body}
-          contentContainerStyle={styles.bodyContent}
-        >
+        <NavigationScrollView style={styles.body} contentContainerStyle={styles.bodyContent}>
           <View style={styles.step}>
-            <BulletItem
-              index={0}
-              value={<Trans i18nKey="FirmwareUpdateMCU.desc1" />}
-            />
+            <BulletItem index={0} value={<Trans i18nKey="FirmwareUpdateMCU.desc1" />} />
             <View style={styles.device}>
               <DeviceNanoAction width={1.2 * width} />
             </View>
           </View>
 
           <View style={styles.step}>
-            <BulletItem
-              index={1}
-              value={<Trans i18nKey="FirmwareUpdateMCU.desc2" />}
-            />
+            <BulletItem index={1} value={<Trans i18nKey="FirmwareUpdateMCU.desc2" />} />
             <View style={styles.device}>
               <DeviceNanoAction action="left" width={1.2 * width} />
             </View>
@@ -114,9 +105,7 @@ class RepairDevice extends Component<Props, State> {
         </NavigationScrollView>
       );
     } else {
-      body = (
-        <SelectDevice onSelect={this.onSelectDevice} steps={[connectingStep]} />
-      );
+      body = <SelectDevice onSelect={this.onSelectDevice} steps={[connectingStep]} />;
     }
 
     return (

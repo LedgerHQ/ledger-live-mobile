@@ -5,10 +5,7 @@ import Markdown from "react-native-easy-markdown";
 import { withTheme } from "../colors";
 import LText, { getFontStyle } from "./LText";
 
-class SafeMarkdown extends PureComponent<
-  { markdown: string, colors: * },
-  { error: ?Error },
-> {
+class SafeMarkdown extends PureComponent<{ markdown: string, colors: * }, { error: ?Error }> {
   state = {
     error: null,
   };

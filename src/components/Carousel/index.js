@@ -128,10 +128,7 @@ const Carousel = () => {
   const onDismiss = useCallback(() => setShowDismissConfirmation(true), []);
 
   const onUndo = useCallback(() => setShowDismissConfirmation(false), []);
-  const onConfirm = useCallback(
-    () => dispatch(setCarouselVisibility(CAROUSEL_NONCE)),
-    [dispatch],
-  );
+  const onConfirm = useCallback(() => dispatch(setCarouselVisibility(CAROUSEL_NONCE)), [dispatch]);
 
   if (!slides.length || hidden >= CAROUSEL_NONCE) {
     // No slides or dismissed, no problem
@@ -178,20 +175,13 @@ const Carousel = () => {
             autoplayTimeout={5}
             showsButtons={false}
             dotStyle={[styles.bullet, { backgroundColor: colors.fog }]}
-            activeDotStyle={[
-              styles.bullet,
-              { backgroundColor: colors.fog, opacity: 1 },
-            ]}
+            activeDotStyle={[styles.bullet, { backgroundColor: colors.fog, opacity: 1 }]}
           >
             {slides.map(({ id, Component }) => (
               <Component key={id} />
             ))}
           </Swiper>
-          <TouchableOpacity
-            style={styles.dismissCarousel}
-            hitSlop={hitSlop}
-            onPress={onDismiss}
-          >
+          <TouchableOpacity style={styles.dismissCarousel} hitSlop={hitSlop} onPress={onDismiss}>
             <IconClose color={colors.smoke} size={16} />
           </TouchableOpacity>
         </View>

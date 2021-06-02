@@ -26,20 +26,11 @@ type RawProps = {
   theme?: "light" | "dark",
 };
 
-export function renderRequestQuitApp({
-  t,
-  device,
-  theme,
-}: {
-  ...RawProps,
-  device: Device,
-}) {
+export function renderRequestQuitApp({ t, device, theme }: { ...RawProps, device: Device }) {
   return (
     <View style={styles.wrapper}>
       <View style={styles.animationContainer}>
-        <Animation
-          source={getDeviceAnimation({ device, key: "quitApp", theme })}
-        />
+        <Animation source={getDeviceAnimation({ device, key: "quitApp", theme })} />
       </View>
       <LText style={styles.text} semiBold>
         {t("DeviceAction.quitApp")}
@@ -107,9 +98,7 @@ export function renderVerifyAddress({
           device.modelId !== "blue" ? styles.verifyAddress : undefined,
         ]}
       >
-        <Animation
-          source={getDeviceAnimation({ device, key: "validate", theme })}
-        />
+        <Animation source={getDeviceAnimation({ device, key: "validate", theme })} />
       </View>
       <LText style={[styles.text, styles.title]} semiBold>
         {t("DeviceAction.verifyAddress.title")}
@@ -139,14 +128,7 @@ export function renderVerifyAddress({
   );
 }
 
-export function renderConfirmSwap({
-  t,
-  device,
-  theme,
-}: {
-  ...RawProps,
-  device: Device,
-}) {
+export function renderConfirmSwap({ t, device, theme }: { ...RawProps, device: Device }) {
   return (
     <View style={[styles.wrapper, { width: "100%" }]}>
       <Alert type="primary" learnMoreUrl={urls.swap.learnMore}>
@@ -159,9 +141,7 @@ export function renderConfirmSwap({
           device.modelId !== "blue" ? styles.verifyAddress : undefined,
         ]}
       >
-        <Animation
-          source={getDeviceAnimation({ device, key: "validate", theme })}
-        />
+        <Animation source={getDeviceAnimation({ device, key: "validate", theme })} />
       </View>
       <LText style={[styles.text, styles.title]} semiBold>
         {t("DeviceAction.confirmSwap.title")}
@@ -170,13 +150,7 @@ export function renderConfirmSwap({
   );
 }
 
-export function renderConfirmSell({
-  t,
-  device,
-}: {
-  ...RawProps,
-  device: Device,
-}) {
+export function renderConfirmSell({ t, device }: { ...RawProps, device: Device }) {
   return (
     <View style={styles.wrapper}>
       <Alert type="primary" learnMoreUrl={urls.swap.learnMore}>
@@ -212,9 +186,7 @@ export function renderAllowManager({
   return (
     <View style={styles.wrapper}>
       <View style={styles.animationContainer}>
-        <Animation
-          source={getDeviceAnimation({ device, key: "allowManager", theme })}
-        />
+        <Animation source={getDeviceAnimation({ device, key: "allowManager", theme })} />
       </View>
       <LText style={styles.text} semiBold>
         {t("DeviceAction.allowManagerPermission", { wording })}
@@ -251,9 +223,7 @@ const AllowOpeningApp = ({
   return (
     <View style={styles.wrapper}>
       <View style={styles.animationContainer}>
-        <Animation
-          source={getDeviceAnimation({ device, key: "openApp", theme })}
-        />
+        <Animation source={getDeviceAnimation({ device, key: "openApp", theme })} />
       </View>
       <LText style={styles.text} semiBold>
         {t("DeviceAction.allowAppPermission", { wording })}
@@ -350,11 +320,7 @@ export function renderError({
           <Button
             event="DeviceActionErrorRetry"
             type="primary"
-            title={
-              managerAppName
-                ? t("DeviceAction.button.openManager")
-                : t("common.retry")
-            }
+            title={managerAppName ? t("DeviceAction.button.openManager") : t("common.retry")}
             onPress={onPress}
             containerStyle={styles.button}
           />
@@ -403,13 +369,7 @@ export function renderConnectYourDevice({
   );
 }
 
-export function renderLoading({
-  t,
-  description,
-}: {
-  ...RawProps,
-  description?: string,
-}) {
+export function renderLoading({ t, description }: { ...RawProps, description?: string }) {
   return (
     <View style={styles.wrapper}>
       <View style={styles.spinnerContainer}>

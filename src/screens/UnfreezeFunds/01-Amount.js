@@ -8,10 +8,7 @@ import { useSelector } from "react-redux";
 import { Trans } from "react-i18next";
 import { useNavigation, useTheme } from "@react-navigation/native";
 import type { Account, Transaction } from "@ledgerhq/live-common/lib/types";
-import {
-  getMainAccount,
-  getAccountUnit,
-} from "@ledgerhq/live-common/lib/account";
+import { getMainAccount, getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
 import { accountScreenSelector } from "../../reducers/accounts";
@@ -48,8 +45,7 @@ const getUnfreezeData = (
   } = tronResources || {};
 
   /** ! expiredAt should always be set with the amount if not this will disable the field by default ! */
-  const { amount: bandwidthAmount, expiredAt: bandwidthExpiredAt } =
-    bandwidth || {};
+  const { amount: bandwidthAmount, expiredAt: bandwidthExpiredAt } = bandwidth || {};
   // eslint-disable-next-line no-underscore-dangle
   const _bandwidthExpiredAt = +new Date(bandwidthExpiredAt);
 
@@ -58,12 +54,10 @@ const getUnfreezeData = (
   const _energyExpiredAt = +new Date(energyExpiredAt);
 
   const unfreezeBandwidth = BigNumber(bandwidthAmount || 0);
-  const canUnfreezeBandwidth =
-    unfreezeBandwidth.gt(0) && Date.now() > _bandwidthExpiredAt;
+  const canUnfreezeBandwidth = unfreezeBandwidth.gt(0) && Date.now() > _bandwidthExpiredAt;
 
   const unfreezeEnergy = BigNumber(energyAmount || 0);
-  const canUnfreezeEnergy =
-    unfreezeEnergy.gt(0) && Date.now() > _energyExpiredAt;
+  const canUnfreezeEnergy = unfreezeEnergy.gt(0) && Date.now() > _energyExpiredAt;
 
   return {
     unfreezeBandwidth,
@@ -88,9 +82,7 @@ type RouteParams = {
 };
 
 export default function UnfreezeAmount({ route }: Props) {
-  const { account: accountLike, parentAccount } = useSelector(
-    accountScreenSelector(route),
-  );
+  const { account: accountLike, parentAccount } = useSelector(accountScreenSelector(route));
   if (!accountLike) {
     return null;
   }
@@ -120,25 +112,20 @@ function UnfreezeAmountInner({ account }: InnerProps) {
     energyExpiredAt,
   } = useMemo(() => getUnfreezeData(account), [account]);
 
-  const {
-    transaction,
-    setTransaction,
-    status,
-    bridgePending,
-    bridgeError,
-  } = useBridgeTransaction(() => {
-    const t = bridge.createTransaction(account);
+  const { transaction, setTransaction, status, bridgePending, bridgeError } = useBridgeTransaction(
+    () => {
+      const t = bridge.createTransaction(account);
 
-    const transaction = bridge.updateTransaction(t, {
-      mode: "unfreeze",
-      resource: canUnfreezeBandwidth ? "BANDWIDTH" : "ENERGY",
-    });
+      const transaction = bridge.updateTransaction(t, {
+        mode: "unfreeze",
+        resource: canUnfreezeBandwidth ? "BANDWIDTH" : "ENERGY",
+      });
 
-    return { account, transaction };
-  });
+      return { account, transaction };
+    },
+  );
 
-  const resource =
-    transaction && transaction.resource ? transaction.resource : "";
+  const resource = transaction && transaction.resource ? transaction.resource : "";
 
   const onContinue = useCallback(() => {
     navigation.navigate(ScreenName.UnfreezeSelectDevice, {
@@ -195,15 +182,9 @@ function UnfreezeAmountInner({ account }: InnerProps) {
               disabled={!canUnfreezeBandwidth}
               onPress={() => onChangeResource("BANDWIDTH")}
             >
-              <Bandwidth
-                size={16}
-                color={!canUnfreezeBandwidth ? colors.grey : colors.darkBlue}
-              />
+              <Bandwidth size={16} color={!canUnfreezeBandwidth ? colors.grey : colors.darkBlue} />
               <View style={styles.selectCardLabelContainer}>
-                <LText
-                  semiBold
-                  color={!canUnfreezeBandwidth ? "grey" : "darkBlue"}
-                >
+                <LText semiBold color={!canUnfreezeBandwidth ? "grey" : "darkBlue"}>
                   <Trans i18nKey="account.bandwidth" />
                 </LText>
                 {unfreezeBandwidth.gt(0) && !canUnfreezeBandwidth ? (
@@ -229,24 +210,13 @@ function UnfreezeAmountInner({ account }: InnerProps) {
               disabled={!canUnfreezeEnergy}
               onPress={() => onChangeResource("ENERGY")}
             >
-              <Bolt
-                size={16}
-                color={!canUnfreezeEnergy ? colors.grey : colors.darkBlue}
-              />
+              <Bolt size={16} color={!canUnfreezeEnergy ? colors.grey : colors.darkBlue} />
               <View style={styles.selectCardLabelContainer}>
-                <LText
-                  semiBold
-                  color={!canUnfreezeEnergy ? "grey" : "darkBlue"}
-                >
+                <LText semiBold color={!canUnfreezeEnergy ? "grey" : "darkBlue"}>
                   <Trans i18nKey="account.energy" />
                 </LText>
                 {unfreezeEnergy.gt(0) && !canUnfreezeEnergy ? (
-                  <View
-                    style={[
-                      styles.timeWarn,
-                      { backgroundColor: colors.lightFog },
-                    ]}
-                  >
+                  <View style={[styles.timeWarn, { backgroundColor: colors.lightFog }]}>
                     <ClockIcon color={colors.grey} size={12} />
                     <LText style={styles.timeLabel} semiBold color="grey">
                       <DateFromNow date={+energyExpiredAt} />
@@ -264,12 +234,7 @@ function UnfreezeAmountInner({ account }: InnerProps) {
               <CheckBox isChecked={resource === "ENERGY"} />
             </TouchableOpacity>
 
-            <View
-              style={[
-                styles.infoSection,
-                { backgroundColor: colors.lightLive },
-              ]}
-            >
+            <View style={[styles.infoSection, { backgroundColor: colors.lightLive }]}>
               <Info size={16} color={colors.live} />
               <LText style={styles.infoText} numberOfLines={3} color="live">
                 <Trans
@@ -279,11 +244,7 @@ function UnfreezeAmountInner({ account }: InnerProps) {
               </LText>
             </View>
 
-            <LText
-              style={[styles.error]}
-              numberOfLines={2}
-              color={error ? "alert" : "orange"}
-            >
+            <LText style={[styles.error]} numberOfLines={2} color={error ? "alert" : "orange"}>
               <TranslatedError error={error || warning} />
             </LText>
           </View>
@@ -308,10 +269,7 @@ function UnfreezeAmountInner({ account }: InnerProps) {
         onClose={onBridgeErrorRetry}
         footerButtons={
           <>
-            <CancelButton
-              containerStyle={styles.button}
-              onPress={onBridgeErrorCancel}
-            />
+            <CancelButton containerStyle={styles.button} onPress={onBridgeErrorCancel} />
             <RetryButton
               containerStyle={[styles.button, styles.buttonRight]}
               onPress={onBridgeErrorRetry}

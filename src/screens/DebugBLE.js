@@ -1,14 +1,7 @@
 // @flow
 
 import React, { Component, memo } from "react";
-import {
-  FlatList,
-  StyleSheet,
-  TextInput,
-  View,
-  ToastAndroid,
-  ScrollView,
-} from "react-native";
+import { FlatList, StyleSheet, TextInput, View, ToastAndroid, ScrollView } from "react-native";
 import { v4 as uuid } from "uuid";
 import { from, Observable } from "rxjs";
 import { listen } from "@ledgerhq/logs";
@@ -22,9 +15,7 @@ import Button from "../components/Button";
 import KeyboardView from "../components/KeyboardView";
 import Switch from "../components/Switch";
 
-const logsObservable = Observable.create(o => listen(log => o.next(log))).pipe(
-  shareReplay(1000),
-);
+const logsObservable = Observable.create(o => listen(log => o.next(log))).pipe(shareReplay(1000));
 
 logsObservable.subscribe();
 
@@ -103,9 +94,7 @@ class DebugBLE extends Component<
 
   componentDidMount() {
     this.sub = logsObservable.pipe(bufferTime(200)).subscribe(buffer => {
-      this.setState(({ logs }) =>
-        buffer.length === 0 ? null : { logs: logs.concat(buffer) },
-      );
+      this.setState(({ logs }) => (buffer.length === 0 ? null : { logs: logs.concat(buffer) }));
     });
   }
 
@@ -177,19 +166,14 @@ class DebugBLE extends Component<
     const deviceId = this.props.route.params?.deviceId;
     const choices = ["Balanced", "High", "LowPower"];
     const nextPriority =
-      choices[
-        (choices.indexOf(this.currentConnectionPriority) + 1) % choices.length
-      ];
+      choices[(choices.indexOf(this.currentConnectionPriority) + 1) % choices.length];
     this.currentConnectionPriority = nextPriority;
     try {
       await withDevice(deviceId)(t =>
         // $FlowFixMe bro i know
         from(t.requestConnectionPriority(nextPriority)),
       ).toPromise();
-      ToastAndroid.show(
-        "connection priority set to " + nextPriority,
-        ToastAndroid.SHORT,
-      );
+      ToastAndroid.show("connection priority set to " + nextPriority, ToastAndroid.SHORT);
     } catch (error) {
       this.addError(error, "changePrio");
     }
@@ -249,20 +233,13 @@ class DebugBLE extends Component<
             }}
             selectTextOnFocus
             placeholder={useBLEframe ? "BLE frame here" : "APDU here"}
-            onChangeText={
-              useBLEframe ? this.onBLEframeChange : this.onAPDUChange
-            }
+            onChangeText={useBLEframe ? this.onBLEframeChange : this.onAPDUChange}
             value={useBLEframe ? this.state.bleframe : this.state.apdu}
             autoCapitalize="characters"
             autoCorrect={false}
             onSubmitEditing={this.send}
           />
-          <Button
-            type="lightSecondary"
-            event="DebugBLESend"
-            title="Send"
-            onPress={this.send}
-          />
+          <Button type="lightSecondary" event="DebugBLESend" title="Send" onPress={this.send} />
           <Switch value={useBLEframe} onValueChange={this.onBleFrameChange} />
         </View>
         <LText style={{ fontSize: 10, margin: 8 }}>{deviceId}</LText>

@@ -14,13 +14,8 @@ import { getStackNavigatorConfig } from "../../navigation/navigatorConfig";
 export default function AccountSettingsNavigator() {
   const { colors } = useTheme();
   const { t } = useTranslation();
-  const stackNavConfig = useMemo(() => getStackNavigatorConfig(colors), [
-    colors,
-  ]);
-  const closableNavconfig = useMemo(
-    () => getStackNavigatorConfig(colors, true),
-    [colors],
-  );
+  const stackNavConfig = useMemo(() => getStackNavigatorConfig(colors), [colors]);
+  const closableNavconfig = useMemo(() => getStackNavigatorConfig(colors, true), [colors]);
   return (
     <Stack.Navigator screenOptions={stackNavConfig}>
       <Stack.Screen
@@ -52,10 +47,7 @@ export default function AccountSettingsNavigator() {
           title: t("account.settings.advanced.title"),
         }}
       />
-      <Stack.Screen
-        name={ScreenName.AccountCurrencySettings}
-        component={CurrencySettings}
-      />
+      <Stack.Screen name={ScreenName.AccountCurrencySettings} component={CurrencySettings} />
     </Stack.Navigator>
   );
 }

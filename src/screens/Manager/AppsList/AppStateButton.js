@@ -40,20 +40,11 @@ const AppStateButton = ({
   const { installed, installQueue, uninstallQueue, updateAllQueue } = state;
   const { name } = app;
 
-  const installing = useMemo(() => installQueue.includes(name), [
-    installQueue,
-    name,
-  ]);
+  const installing = useMemo(() => installQueue.includes(name), [installQueue, name]);
 
-  const updating = useMemo(() => updateAllQueue.includes(name), [
-    updateAllQueue,
-    name,
-  ]);
+  const updating = useMemo(() => updateAllQueue.includes(name), [updateAllQueue, name]);
 
-  const uninstalling = useMemo(() => uninstallQueue.includes(name), [
-    uninstallQueue,
-    name,
-  ]);
+  const uninstalling = useMemo(() => uninstallQueue.includes(name), [uninstallQueue, name]);
 
   const canUpdate = useMemo(
     () => installed.some(({ name, updated }) => name === app.name && !updated),
@@ -85,12 +76,7 @@ const AppStateButton = ({
       case canUpdate:
         return (
           <View style={styles.installedLabel}>
-            <LText
-              semiBold
-              style={[styles.appStateText, styles.updateText]}
-              color="grey"
-              multiline
-            >
+            <LText semiBold style={[styles.appStateText, styles.updateText]} color="grey" multiline>
               <Trans i18nKey="AppAction.update.buttonAction" />
             </LText>
           </View>

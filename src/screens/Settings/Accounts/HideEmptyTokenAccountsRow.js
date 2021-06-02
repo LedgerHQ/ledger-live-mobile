@@ -19,11 +19,7 @@ const mapDispatchToProps = {
 
 class HideEmptyTokenAccountsRow extends PureComponent<Props> {
   render() {
-    const {
-      hideEmptyTokenAccountsEnabled,
-      setHideEmptyTokenAccounts,
-      ...props
-    } = this.props;
+    const { hideEmptyTokenAccountsEnabled, setHideEmptyTokenAccounts, ...props } = this.props;
     return (
       <SettingsRow
         {...props}

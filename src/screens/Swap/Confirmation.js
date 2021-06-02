@@ -3,23 +3,14 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { useTranslation } from "react-i18next";
-import type {
-  Transaction,
-  TransactionStatus,
-} from "@ledgerhq/live-common/lib/types";
-import type {
-  Exchange,
-  ExchangeRate,
-} from "@ledgerhq/live-common/lib/exchange/swap/types";
+import type { Transaction, TransactionStatus } from "@ledgerhq/live-common/lib/types";
+import type { Exchange, ExchangeRate } from "@ledgerhq/live-common/lib/exchange/swap/types";
 import { createAction } from "@ledgerhq/live-common/lib/hw/actions/transaction";
 import { createAction as initSwapCreateAction } from "@ledgerhq/live-common/lib/hw/actions/initSwap";
 import initSwap from "@ledgerhq/live-common/lib/exchange/swap/initSwap";
 import connectApp from "@ledgerhq/live-common/lib/hw/connectApp";
 import { useDispatch } from "react-redux";
-import {
-  addPendingOperation,
-  getMainAccount,
-} from "@ledgerhq/live-common/lib/account";
+import { addPendingOperation, getMainAccount } from "@ledgerhq/live-common/lib/account";
 import addToSwapHistory from "@ledgerhq/live-common/lib/exchange/swap/addToSwapHistory";
 import { useNavigation } from "@react-navigation/native";
 import { renderLoading } from "../../components/DeviceAction/rendering";
@@ -62,9 +53,7 @@ const Confirmation = ({
     parentAccount: fromParentAccount,
   });
   const tokenCurrency =
-    fromAccount && fromAccount.type === "TokenAccount"
-      ? fromAccount.token
-      : null;
+    fromAccount && fromAccount.type === "TokenAccount" ? fromAccount.token : null;
   const navigation = useNavigation();
 
   const onComplete = useCallback(
@@ -92,15 +81,7 @@ const Confirmation = ({
         provider: exchangeRate.provider,
       });
     },
-    [
-      dispatch,
-      exchange,
-      exchangeRate,
-      fromAccount,
-      fromParentAccount,
-      navigation,
-      transaction,
-    ],
+    [dispatch, exchange, exchangeRate, fromAccount, fromParentAccount, navigation, transaction],
   );
 
   useEffect(() => {

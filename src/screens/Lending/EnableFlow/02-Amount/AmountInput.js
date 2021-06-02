@@ -2,19 +2,10 @@
 import invariant from "invariant";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
 import React, { useCallback } from "react";
-import {
-  View,
-  StyleSheet,
-  TouchableWithoutFeedback,
-  Keyboard,
-  SafeAreaView,
-} from "react-native";
+import { View, StyleSheet, TouchableWithoutFeedback, Keyboard, SafeAreaView } from "react-native";
 import { useSelector } from "react-redux";
 import { Trans } from "react-i18next";
-import type {
-  Transaction,
-  TokenCurrency,
-} from "@ledgerhq/live-common/lib/types";
+import type { Transaction, TokenCurrency } from "@ledgerhq/live-common/lib/types";
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { useTheme } from "@react-navigation/native";
@@ -45,23 +36,16 @@ export default function SendAmount({ navigation, route }: Props) {
   const { colors } = useTheme();
   const { currency } = route.params;
   const { account, parentAccount } = useSelector(accountScreenSelector(route));
-  invariant(
-    account && account.type === "TokenAccount",
-    "token account required",
-  );
+  invariant(account && account.type === "TokenAccount", "token account required");
   const bridge = getAccountBridge(account, parentAccount);
 
-  const {
-    transaction,
-    setTransaction,
-    status,
-    bridgePending,
-    bridgeError,
-  } = useBridgeTransaction(() => ({
-    transaction: route.params.transaction,
-    account,
-    parentAccount,
-  }));
+  const { transaction, setTransaction, status, bridgePending, bridgeError } = useBridgeTransaction(
+    () => ({
+      transaction: route.params.transaction,
+      account,
+      parentAccount,
+    }),
+  );
 
   const onChange = useCallback(
     amount => {
@@ -107,9 +91,7 @@ export default function SendAmount({ navigation, route }: Props) {
         name="step 1 (Amount)"
         eventProperties={{ currencyName: currency.name }}
       />
-      <SafeAreaView
-        style={[styles.root, { backgroundColor: colors.background }]}
-      >
+      <SafeAreaView style={[styles.root, { backgroundColor: colors.background }]}>
         <KeyboardView style={styles.container}>
           <TouchableWithoutFeedback onPress={blur}>
             <View style={styles.amountWrapper}>
@@ -130,11 +112,7 @@ export default function SendAmount({ navigation, route }: Props) {
                       <Trans i18nKey="transfer.lending.enable.amount.totalAvailable" />
                     </LText>
                     <LText semiBold>
-                      <CurrencyUnitValue
-                        showCode
-                        unit={unit}
-                        value={spendableBalance}
-                      />
+                      <CurrencyUnitValue showCode unit={unit} value={spendableBalance} />
                     </LText>
                   </View>
                 </View>
@@ -144,11 +122,7 @@ export default function SendAmount({ navigation, route }: Props) {
                     type="primary"
                     title={
                       <Trans
-                        i18nKey={
-                          !bridgePending
-                            ? "common.continue"
-                            : "send.amount.loadingNetwork"
-                        }
+                        i18nKey={!bridgePending ? "common.continue" : "send.amount.loadingNetwork"}
                       />
                     }
                     onPress={onContinue}
@@ -166,10 +140,7 @@ export default function SendAmount({ navigation, route }: Props) {
         onClose={onBridgeErrorRetry}
         footerButtons={
           <>
-            <CancelButton
-              containerStyle={styles.button}
-              onPress={onBridgeErrorCancel}
-            />
+            <CancelButton containerStyle={styles.button} onPress={onBridgeErrorCancel} />
             <RetryButton
               containerStyle={[styles.button, styles.buttonRight]}
               onPress={onBridgeErrorRetry}

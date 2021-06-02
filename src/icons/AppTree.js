@@ -13,12 +13,7 @@ export default function AppTree({ size = 150, color, icon }: Props) {
   const uri = manager.getIconUrl(icon);
 
   return (
-    <Svg
-      width={size}
-      height={size * (108 / 163)}
-      viewBox="0 0 163 108"
-      fill="none"
-    >
+    <Svg width={size} height={size * (108 / 163)} viewBox="0 0 163 108" fill="none">
       <G opacity="0.25">
         <Image x="141" y="86" width="22" height="22" rx="6.94737" href={uri} />
       </G>

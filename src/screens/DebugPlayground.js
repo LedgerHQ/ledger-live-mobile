@@ -13,17 +13,9 @@ export default function DebugPlayground() {
     <NavigationScrollView>
       <View style={[styles.root, { backgroundColor: colors.background }]}>
         <LText tertiary>
-          {
-            "Convenience screen for testing purposes, please leave empty when commiting."
-          }
+          {"Convenience screen for testing purposes, please leave empty when commiting."}
         </LText>
-        <Button
-          mt={2}
-          type={"primary"}
-          event={""}
-          onPress={undefined}
-          title={"Action"}
-        />
+        <Button mt={2} type={"primary"} event={""} onPress={undefined} title={"Action"} />
       </View>
     </NavigationScrollView>
   );

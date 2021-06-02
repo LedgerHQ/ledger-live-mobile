@@ -37,15 +37,7 @@ type Props = {
   votes: Vote[],
 };
 
-const VoteModal = ({
-  vote,
-  name,
-  tronPower,
-  onChange,
-  onClose,
-  onRemove,
-  votes,
-}: Props) => {
+const VoteModal = ({ vote, name, tronPower, onChange, onClose, onRemove, votes }: Props) => {
   const { colors } = useTheme();
   const { address, voteCount } = vote || {};
 
@@ -57,9 +49,7 @@ const VoteModal = ({
 
   const { current: votesAvailable } = useRef(
     tronPower -
-      votes
-        .filter(v => v.address !== address)
-        .reduce((sum, { voteCount }) => sum + voteCount, 0),
+      votes.filter(v => v.address !== address).reduce((sum, { voteCount }) => sum + voteCount, 0),
   );
 
   const focusInput = useCallback(() => {
@@ -79,10 +69,11 @@ const VoteModal = ({
     setUseAllAmount(!useAllAmount);
   }, [handleChange, useAllAmount, votesAvailable]);
 
-  const onContinue = useCallback(
-    () => onChange({ address, voteCount: value }),
-    [address, onChange, value],
-  );
+  const onContinue = useCallback(() => onChange({ address, voteCount: value }), [
+    address,
+    onChange,
+    value,
+  ]);
 
   const remove = useCallback(() => onRemove(vote), [onRemove, vote]);
 
@@ -94,12 +85,7 @@ const VoteModal = ({
   const error = value <= 0 || value > votesAvailable;
 
   return (
-    <BottomModal
-      isOpened={!!vote}
-      onClose={onClose}
-      coverScreen
-      onModalShow={focusInput}
-    >
+    <BottomModal isOpened={!!vote} onClose={onClose} coverScreen onModalShow={focusInput}>
       <SafeAreaView>
         <KeyboardAvoidingView
           style={styles.rootKeyboard}
@@ -142,15 +128,11 @@ const VoteModal = ({
               placeholder="0"
             />
           </View>
-          <View
-            style={[styles.bottomWrapper, { borderTopColor: colors.lightGrey }]}
-          >
+          <View style={[styles.bottomWrapper, { borderTopColor: colors.lightGrey }]}>
             <View style={[styles.availableRow, styles.row]}>
               <View style={styles.available}>
                 {error && value <= 0 ? (
-                  <LText
-                    style={[styles.availableAmount, { color: colors.alert }]}
-                  >
+                  <LText style={[styles.availableAmount, { color: colors.alert }]}>
                     <Trans i18nKey="vote.castVotes.votesRequired" />
                   </LText>
                 ) : null}
@@ -169,13 +151,7 @@ const VoteModal = ({
                       i18nKey="vote.castVotes.maxVotesAvailable"
                       values={{ total: votesAvailable }}
                     >
-                      <LText
-                        semiBold
-                        style={[
-                          styles.availableAmount,
-                          { color: colors.alert },
-                        ]}
-                      >
+                      <LText semiBold style={[styles.availableAmount, { color: colors.alert }]}>
                         text
                       </LText>
                     </Trans>

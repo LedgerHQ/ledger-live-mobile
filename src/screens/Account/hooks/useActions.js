@@ -37,8 +37,7 @@ export default function useActions({ account, parentAccount, colors }: Props) {
 
   const accountId = account.id;
 
-  const availableOnCompound =
-    account.type === "TokenAccount" && !!account.compoundBalance;
+  const availableOnCompound = account.type === "TokenAccount" && !!account.compoundBalance;
 
   const canBeSold = isCurrencySupported(currency, "sell");
 
@@ -116,12 +115,7 @@ export default function useActions({ account, parentAccount, colors }: Props) {
       ? [
           {
             Component: () => (
-              <View
-                style={[
-                  styles.separator,
-                  { backgroundColor: colors.separator },
-                ]}
-              />
+              <View style={[styles.separator, { backgroundColor: colors.separator }]} />
             ),
           },
           {
@@ -146,10 +140,7 @@ export default function useActions({ account, parentAccount, colors }: Props) {
           {
             enableActions: "lending",
             label: (
-              <Trans
-                i18nKey="transfer.lending.actionTitle"
-                values={{ currency: currency?.name }}
-              />
+              <Trans i18nKey="transfer.lending.actionTitle" values={{ currency: currency?.name }} />
             ),
             Icon: Lending,
             event: "Lend Crypto Account Button",

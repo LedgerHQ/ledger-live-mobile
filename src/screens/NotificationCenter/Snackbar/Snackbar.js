@@ -1,18 +1,7 @@
 // @flow
 import React, { useState, useCallback } from "react";
-import {
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  TouchableHighlight,
-} from "react-native";
-import Animated, {
-  set,
-  interpolate,
-  Extrapolate,
-  useCode,
-  Easing,
-} from "react-native-reanimated";
+import { View, StyleSheet, TouchableOpacity, TouchableHighlight } from "react-native";
+import Animated, { set, interpolate, Extrapolate, useCode, Easing } from "react-native-reanimated";
 import { useClock, timing } from "react-native-redash/lib/module/v1";
 import type { ToastData } from "@ledgerhq/live-common/lib/notifications/ToastProvider/types";
 import { useTheme } from "@react-navigation/native";
@@ -27,9 +16,7 @@ import Close from "../../../icons/Close";
 
 const { width } = getWindowDimensions();
 
-const AnimatedTouchableOpacity = Animated.createAnimatedComponent(
-  TouchableHighlight,
-);
+const AnimatedTouchableOpacity = Animated.createAnimatedComponent(TouchableHighlight);
 
 type Props = {
   toast: ToastData,
@@ -124,17 +111,12 @@ export default function Snackbar({ toast, onPress, onClose }: Props) {
       underlayColor={rgba(colors.snackBarBg, 0.8)}
     >
       <View style={styles.container}>
-        <View style={styles.leftSection}>
-          {Icon && <Icon size={17} color={iconColor} />}
-        </View>
+        <View style={styles.leftSection}>{Icon && <Icon size={17} color={iconColor} />}</View>
         <View style={styles.rightSection}>
           <LText bold style={styles.subTitle} color="grey">
             {type}
           </LText>
-          <LText
-            semiBold
-            style={[styles.title, { color: colors.snackBarColor }]}
-          >
+          <LText semiBold style={[styles.title, { color: colors.snackBarColor }]}>
             {title}
           </LText>
         </View>

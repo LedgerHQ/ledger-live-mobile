@@ -6,11 +6,7 @@ import { useServiceStatus } from "@ledgerhq/live-common/lib/notifications/Servic
 import Switch from "../../../components/Switch";
 import SettingsRow from "../../../components/SettingsRow";
 
-export default function ToggleMockServiceStatusButton({
-  title,
-}: {
-  title: string,
-}) {
+export default function ToggleMockServiceStatusButton({ title }: { title: string }) {
   const { updateData, incidents } = useServiceStatus();
   return getEnv("MOCK") ? (
     <SettingsRow title={title} onPress={null}>

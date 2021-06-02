@@ -56,9 +56,7 @@ export default function CreateModal({ isOpened, onClose }: ModalProps) {
       }),
     [onNavigate],
   );
-  const onExchange = useCallback(() => onNavigate(ScreenName.Exchange), [
-    onNavigate,
-  ]);
+  const onExchange = useCallback(() => onNavigate(ScreenName.Exchange), [onNavigate]);
   const onLending = useCallback(
     () =>
       onNavigate(NavigatorName.Lending, {

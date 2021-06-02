@@ -4,16 +4,9 @@ import { View, StyleSheet, Platform, TouchableHighlight } from "react-native";
 import { Trans } from "react-i18next";
 import useEnv from "@ledgerhq/live-common/lib/hooks/useEnv";
 import { useAccountSyncState } from "@ledgerhq/live-common/lib/bridge/react";
-import {
-  listSubAccounts,
-  isUpToDateAccount,
-} from "@ledgerhq/live-common/lib/account";
+import { listSubAccounts, isUpToDateAccount } from "@ledgerhq/live-common/lib/account";
 import { listTokenTypesForCryptoCurrency } from "@ledgerhq/live-common/lib/currencies";
-import type {
-  Account,
-  SubAccount,
-  TokenAccount,
-} from "@ledgerhq/live-common/lib/types";
+import type { Account, SubAccount, TokenAccount } from "@ledgerhq/live-common/lib/types";
 import Icon from "react-native-vector-icons/dist/FontAwesome";
 import { useTheme } from "@react-navigation/native";
 import { getTagDerivationMode } from "@ledgerhq/live-common/lib/derivation";
@@ -44,12 +37,7 @@ const placeholderProps = {
 const TICK_W = 6;
 const TICK_H = 20;
 
-const AccountRow = ({
-  navigation,
-  account,
-  accountId,
-  onSetAccount,
-}: Props) => {
+const AccountRow = ({ navigation, account, accountId, onSetAccount }: Props) => {
   // makes it refresh if this changes
   useEnv("HIDE_EMPTY_TOKEN_ACCOUNTS");
   const { colors } = useTheme();
@@ -85,9 +73,7 @@ const AccountRow = ({
 
   const isToken = listTokenTypesForCryptoCurrency(account.currency).length > 0;
 
-  const onSubAccountLongPress = useCallback(account => onSetAccount(account), [
-    onSetAccount,
-  ]);
+  const onSubAccountLongPress = useCallback(account => onSetAccount(account), [onSetAccount]);
 
   const family = account.currency.family;
   const specific = perFamilySubAccountList[family];
@@ -130,40 +116,25 @@ const AccountRow = ({
                 <LText
                   semiBold
                   numberOfLines={1}
-                  style={[
-                    styles.accountNameText,
-                    tag ? styles.accountNameTextWithTag : {},
-                  ]}
+                  style={[styles.accountNameText, tag ? styles.accountNameTextWithTag : {}]}
                   color="darkBlue"
                 >
                   {account.name}
                 </LText>
 
                 {tag && (
-                  <View
-                    style={[
-                      styles.badgeContainer,
-                      { borderColor: colors.grey },
-                    ]}
-                  >
+                  <View style={[styles.badgeContainer, { borderColor: colors.grey }]}>
                     <LText semiBold style={styles.badgeLabel} color="grey">
                       {tag}
                     </LText>
                   </View>
                 )}
 
-                <AccountSyncStatus
-                  {...syncState}
-                  isUpToDateAccount={upToDate}
-                />
+                <AccountSyncStatus {...syncState} isUpToDateAccount={upToDate} />
               </View>
               <View style={styles.bottomRow}>
                 <LText semiBold style={styles.balanceNumText}>
-                  <CurrencyUnitValue
-                    showCode
-                    unit={account.unit}
-                    value={account.balance}
-                  />
+                  <CurrencyUnitValue showCode unit={account.unit} value={account.balance} />
                 </LText>
                 <View style={styles.balanceCounterContainer}>
                   <CounterValue
@@ -201,12 +172,7 @@ const AccountRow = ({
                 />
               ))}
             </View>
-            <View
-              style={[
-                styles.subAccountButton,
-                { borderTopColor: colors.lightFog },
-              ]}
-            >
+            <View style={[styles.subAccountButton, { borderTopColor: colors.lightFog }]}>
               <Button
                 type="lightSecondary"
                 event="expandSubAccountList"

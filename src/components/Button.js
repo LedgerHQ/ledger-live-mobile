@@ -1,20 +1,8 @@
 /* @flow */
 
-import React, {
-  useEffect,
-  useState,
-  useCallback,
-  memo,
-  useContext,
-} from "react";
+import React, { useEffect, useState, useCallback, memo, useContext } from "react";
 import { RectButton } from "react-native-gesture-handler";
-import {
-  StyleSheet,
-  ActivityIndicator,
-  View,
-  Animated,
-  TouchableOpacity,
-} from "react-native";
+import { StyleSheet, ActivityIndicator, View, Animated, TouchableOpacity } from "react-native";
 import type { ViewStyleProp } from "react-native/Libraries/StyleSheet/StyleSheet";
 import { useTheme, useIsFocused } from "@react-navigation/native";
 import Config from "react-native-config";
@@ -74,14 +62,7 @@ function ButtonWrapped(props: BaseButtonProps) {
   const { colors } = useTheme();
   const isFocused = useIsFocused();
   const useTouchable = useContext(ButtonUseTouchable);
-  return (
-    <Button
-      {...props}
-      useTouchable={useTouchable}
-      colors={colors}
-      isFocused={isFocused}
-    />
-  );
+  return <Button {...props} useTouchable={useTouchable} colors={colors} isFocused={isFocused} />;
 }
 
 function Button({
@@ -150,9 +131,7 @@ function Button({
   }, [event, eventProperties, onPress]);
 
   if (__DEV__ && "style" in otherProps) {
-    console.warn(
-      "Button props 'style' must not be used. Use 'containerStyle' instead.",
-    );
+    console.warn("Button props 'style' must not be used. Use 'containerStyle' instead.");
   }
 
   const theme = {
@@ -211,9 +190,7 @@ function Button({
     isDisabled ? theme.disabledTitle : theme[`${type}Title`],
   ];
 
-  const iconColor = isDisabled
-    ? theme.disabledTitle.color
-    : (theme[`${type}Title`] || {}).color;
+  const iconColor = isDisabled ? theme.disabledTitle.color : (theme[`${type}Title`] || {}).color;
 
   const titleSliderOffset = anim.interpolate({
     inputRange: [0, 1],
@@ -253,11 +230,7 @@ function Button({
       : undefined,
   ];
 
-  const Container = useTouchable
-    ? disabled
-      ? View
-      : TouchableOpacity
-    : RectButton;
+  const Container = useTouchable ? (disabled ? View : TouchableOpacity) : RectButton;
   const containerSpecificProps = useTouchable ? {} : { enabled: !isDisabled };
 
   function getTestID() {
@@ -304,10 +277,7 @@ function Button({
       </Animated.View>
 
       <Animated.View style={spinnerSliderStyle}>
-        <ActivityIndicator
-          color={theme.disabledTitle.color}
-          animating={!Config.MOCK}
-        />
+        <ActivityIndicator color={theme.disabledTitle.color} animating={!Config.MOCK} />
       </Animated.View>
     </Container>
   );

@@ -11,9 +11,7 @@ import {
 import StepHeader from "../../../components/StepHeader";
 import { ScreenName } from "../../../const";
 import VoteStarted from "./Started";
-import VoteSelectValidator, {
-  SelectValidatorHeaderLeft,
-} from "./01-SelectValidator";
+import VoteSelectValidator, { SelectValidatorHeaderLeft } from "./01-SelectValidator";
 import VoteCast from "./02-VoteCast";
 import VoteSelectDevice from "../../../screens/SelectDevice";
 import VoteConnectDevice from "../../../screens/ConnectDevice";
@@ -25,10 +23,7 @@ const totalSteps = "4";
 function VoteFlow() {
   const { t } = useTranslation();
   const { colors } = useTheme();
-  const stackNavigationConfig = useMemo(
-    () => getStackNavigatorConfig(colors, true),
-    [colors],
-  );
+  const stackNavigationConfig = useMemo(() => getStackNavigatorConfig(colors, true), [colors]);
   return (
     <Stack.Navigator
       screenOptions={{

@@ -15,11 +15,7 @@ type Props = {
   style?: any,
 };
 
-export default function BalanceHeader({
-  portfolio,
-  counterValueCurrency,
-  style,
-}: Props) {
+export default function BalanceHeader({ portfolio, counterValueCurrency, style }: Props) {
   return (
     <View style={[styles.content, style]}>
       <LText secondary color="grey" semiBold style={styles.labelText}>
@@ -29,9 +25,7 @@ export default function BalanceHeader({
       <LText semiBold style={styles.balanceText}>
         <CurrencyUnitValue
           unit={counterValueCurrency.units[0]}
-          value={
-            portfolio.balanceHistory[portfolio.balanceHistory.length - 1].value
-          }
+          value={portfolio.balanceHistory[portfolio.balanceHistory.length - 1].value}
         />
       </LText>
     </View>

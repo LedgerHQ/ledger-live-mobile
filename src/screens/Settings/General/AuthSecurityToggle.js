@@ -29,11 +29,7 @@ export default function AuthSecurityToggle() {
         desc={<Trans i18nKey="settings.display.passwordDesc" />}
         alignedTop
       >
-        <Switch
-          style={{ opacity: 0.99 }}
-          value={!!privacy}
-          onValueChange={onValueChange}
-        />
+        <Switch style={{ opacity: 0.99 }} value={!!privacy} onValueChange={onValueChange} />
       </SettingsRow>
       {privacy ? <BiometricsRow /> : null}
     </>

@@ -104,10 +104,7 @@ class RingChart extends PureComponent<Props> {
 
     const parsedItem = {
       // $FlowFixMe
-      color: ensureContrast(
-        getCurrencyColor(item.currency),
-        this.props.colors.background,
-      ),
+      color: ensureContrast(getCurrencyColor(item.currency), this.props.colors.background),
       pathData,
       endAngle: data.angle + increment,
       id: item.currency.id,
@@ -135,11 +132,7 @@ class RingChart extends PureComponent<Props> {
                 stroke={colors.card}
                 strokeWidth={0.5}
                 fill={color}
-                d={
-                  i === highlight
-                    ? this.paths.highlightedItems[i].pathData
-                    : pathData
-                }
+                d={i === highlight ? this.paths.highlightedItems[i].pathData : pathData}
               />
             ))}
             <Circle cx={0} cy={0} r="26" fill={bg} />

@@ -5,35 +5,20 @@ import { Trans } from "react-i18next";
 import { Image, View, StyleSheet } from "react-native";
 import BottomModal from "../components/BottomModal";
 import Button from "../components/Button";
-import BulletList, {
-  BulletChevron,
-  BulletItemText,
-} from "../components/BulletList";
+import BulletList, { BulletChevron, BulletItemText } from "../components/BulletList";
 import LText from "../components/LText";
 
 type Props = { onClose: any, isOpened: any, onAccept: () => void };
 
-export default function PinModal({
-  isOpened,
-  onClose,
-  onAccept = () => {},
-}: Props) {
+export default function PinModal({ isOpened, onClose, onAccept = () => {} }: Props) {
   const accept = useCallback(() => {
     onClose();
     onAccept();
   }, [onClose, onAccept]);
 
   return (
-    <BottomModal
-      id="PinModal"
-      style={styles.root}
-      isOpened={isOpened}
-      onClose={onClose}
-    >
-      <Image
-        style={styles.image}
-        source={require("../images/shield-red.png")}
-      />
+    <BottomModal id="PinModal" style={styles.root} isOpened={isOpened} onClose={onClose}>
+      <Image style={styles.image} source={require("../images/shield-red.png")} />
       <View style={styles.wrapper}>
         <BulletList
           Bullet={BulletChevron}

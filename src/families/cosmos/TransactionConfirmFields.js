@@ -32,18 +32,11 @@ function CosmosDelegateValidatorsField({ account, transaction }: FieldProps) {
 
   const unit = getAccountUnit(account);
   const { validators } = useCosmosPreloadData();
-  const mappedDelegations = mapDelegationInfo(
-    transaction.validators,
-    validators,
-    unit,
-  );
+  const mappedDelegations = mapDelegationInfo(transaction.validators, validators, unit);
 
   return (
     <>
-      <HeaderRow
-        label={t("ValidateOnDevice.name")}
-        value={t("ValidateOnDevice.amount")}
-      />
+      <HeaderRow label={t("ValidateOnDevice.name")} value={t("ValidateOnDevice.amount")} />
       {mappedDelegations.map(({ validator, address, formattedAmount }) => (
         <ValidatorField
           address={address}
@@ -57,16 +50,9 @@ function CosmosDelegateValidatorsField({ account, transaction }: FieldProps) {
 
 function CosmosValidatorNameField({ field, transaction: tx }: FieldProps) {
   const { validators } = useCosmosPreloadData();
-  const validator = validators.find(
-    v => v.validatorAddress === tx.validators[0].address,
-  );
+  const validator = validators.find(v => v.validatorAddress === tx.validators[0].address);
 
-  return (
-    <TextValueField
-      label={field.label}
-      value={validator?.name ?? tx.validators[0].address}
-    />
-  );
+  return <TextValueField label={field.label} value={validator?.name ?? tx.validators[0].address} />;
 }
 
 function CosmosSourceValidatorNameField({
@@ -77,16 +63,9 @@ function CosmosSourceValidatorNameField({
   if (!cosmosSourceValidator) {
     return null;
   }
-  const validator = validators.find(
-    v => v.validatorAddress === cosmosSourceValidator,
-  );
+  const validator = validators.find(v => v.validatorAddress === cosmosSourceValidator);
 
-  return (
-    <TextValueField
-      label={field.label}
-      value={validator?.name ?? cosmosSourceValidator}
-    />
-  );
+  return <TextValueField label={field.label} value={validator?.name ?? cosmosSourceValidator} />;
 }
 
 function Warning({ transaction }: FieldProps) {
@@ -102,12 +81,7 @@ function Warning({ transaction }: FieldProps) {
       return (
         <DataRow>
           <Info size={22} color={colors.live} />
-          <LText
-            semiBold
-            style={[styles.text, styles.infoText]}
-            color="live"
-            numberOfLines={3}
-          >
+          <LText semiBold style={[styles.text, styles.infoText]} color="live" numberOfLines={3}>
             {t(`ValidateOnDevice.infoWording.cosmos.${transaction.mode}`)}
           </LText>
         </DataRow>

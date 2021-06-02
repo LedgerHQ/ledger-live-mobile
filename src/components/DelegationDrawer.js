@@ -4,10 +4,7 @@ import React from "react";
 import type { ComponentType } from "react";
 import { View, StyleSheet, ScrollView } from "react-native";
 import type { ViewStyleProp } from "react-native/Libraries/StyleSheet/StyleSheet";
-import {
-  getAccountCurrency,
-  getAccountUnit,
-} from "@ledgerhq/live-common/lib/account";
+import { getAccountCurrency, getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import { getCurrencyColor } from "@ledgerhq/live-common/lib/currencies";
 import type { AccountLike } from "@ledgerhq/live-common/lib/types";
 // TODO move to component
@@ -61,18 +58,9 @@ export default function DelegationDrawer({
   const iconWidth = normalize(64);
 
   return (
-    <BottomModal
-      id="InfoModal"
-      style={styles.modal}
-      isOpened={isOpen}
-      onClose={onClose}
-    >
+    <BottomModal id="InfoModal" style={styles.modal} isOpened={isOpen} onClose={onClose}>
       <View style={styles.root}>
-        <Touchable
-          event="DelegationDetailsModalClose"
-          onPress={onClose}
-          style={styles.closeButton}
-        >
+        <Touchable event="DelegationDetailsModalClose" onPress={onClose} style={styles.closeButton}>
           <Circle size={iconWidth / 2} bg={colors.lightFog}>
             <Close />
           </Circle>
@@ -82,11 +70,7 @@ export default function DelegationDrawer({
           left={
             icon || (
               <Circle size={iconWidth} bg={rgba(color, 0.2)}>
-                <CurrencyIcon
-                  size={iconWidth / 2}
-                  currency={currency}
-                  bg={"rgba(0,0,0,0)"}
-                />
+                <CurrencyIcon size={iconWidth / 2} currency={currency} bg={"rgba(0,0,0,0)"} />
               </Circle>
             )
           }
@@ -111,16 +95,9 @@ export default function DelegationDrawer({
           </LText>
         </View>
 
-        <ScrollView
-          style={styles.scrollSection}
-          showsVerticalScrollIndicator={true}
-        >
+        <ScrollView style={styles.scrollSection} showsVerticalScrollIndicator={true}>
           {data.map((field, i) => (
-            <DataField
-              {...field}
-              key={"data-" + i}
-              isLast={i === data.length - 1}
-            />
+            <DataField {...field} key={"data-" + i} isLast={i === data.length - 1} />
           ))}
         </ScrollView>
 
@@ -155,12 +132,7 @@ function DataField({ label, Component, isLast }: DataFieldProps) {
       ]}
     >
       <View>
-        <LText
-          numberOfLines={1}
-          semiBold
-          style={styles.labelText}
-          color="smoke"
-        >
+        <LText numberOfLines={1} semiBold style={styles.labelText} color="smoke">
           {label}
         </LText>
       </View>
@@ -185,14 +157,7 @@ export type IconProps = {
   bg?: string,
 };
 
-function ActionButton({
-  label,
-  Icon,
-  event,
-  eventProperties,
-  onPress,
-  disabled,
-}: Action) {
+function ActionButton({ label, Icon, event, eventProperties, onPress, disabled }: Action) {
   return (
     <Touchable
       disabled={disabled}
@@ -202,11 +167,7 @@ function ActionButton({
       onPress={onPress}
     >
       <Icon size={48} style={styles.actionIcon} />
-      <LText
-        semiBold
-        style={[styles.actionText]}
-        color={disabled ? "grey" : "darkBlue"}
-      >
+      <LText semiBold style={[styles.actionText]} color={disabled ? "grey" : "darkBlue"}>
         {label}
       </LText>
     </Touchable>

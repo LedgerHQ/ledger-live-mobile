@@ -7,15 +7,9 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 import { Trans } from "react-i18next";
 import { NotEnoughBalance } from "@ledgerhq/errors";
-import type {
-  Account,
-  AccountLikeArray,
-} from "@ledgerhq/live-common/lib/types";
+import type { Account, AccountLikeArray } from "@ledgerhq/live-common/lib/types";
 
-import {
-  isAccountEmpty,
-  getAccountSpendableBalance,
-} from "@ledgerhq/live-common/lib/account";
+import { isAccountEmpty, getAccountSpendableBalance } from "@ledgerhq/live-common/lib/account";
 import {
   flattenAccountsEnforceHideEmptyTokenSelector,
   accountsSelector,
@@ -76,10 +70,7 @@ class SendFundsSelectAccount extends Component<Props, State> {
         style={
           account.type === "Account"
             ? undefined
-            : [
-                styles.tokenCardStyle,
-                { borderLeftColor: this.props.colors.fog },
-              ]
+            : [styles.tokenCardStyle, { borderLeftColor: this.props.colors.fog }]
         }
       >
         <AccountCard
@@ -94,8 +85,7 @@ class SendFundsSelectAccount extends Component<Props, State> {
             } else {
               this.props.navigation.navigate(ScreenName.SendSelectRecipient, {
                 accountId: account.id,
-                parentId:
-                  account.type !== "Account" ? account.parentId : undefined,
+                parentId: account.type !== "Account" ? account.parentId : undefined,
               });
             }
           }}

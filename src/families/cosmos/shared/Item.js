@@ -27,20 +27,11 @@ type Props = {
   delegatedValue?: BigNumber,
 };
 
-function Item({
-  item,
-  value,
-  disabled,
-  onSelect,
-  unit,
-  showVal = true,
-  delegatedValue,
-}: Props) {
+function Item({ item, value, disabled, onSelect, unit, showVal = true, delegatedValue }: Props) {
   const { colors } = useTheme();
   const { rank, validator } = item;
 
-  const { validatorAddress, estimatedYearlyRewardsRate, name } =
-    validator || {};
+  const { validatorAddress, estimatedYearlyRewardsRate, name } = validator || {};
 
   const select = useCallback(() => validator && onSelect(validator, value), [
     onSelect,
@@ -51,11 +42,7 @@ function Item({
   const isDisabled = (!value || value.gt(0)) && disabled;
 
   return (
-    <TouchableOpacity
-      onPress={select}
-      disabled={isDisabled}
-      style={[styles.wrapper]}
-    >
+    <TouchableOpacity onPress={select} disabled={isDisabled} style={[styles.wrapper]}>
       <View style={[styles.iconWrapper, { backgroundColor: colors.lightLive }]}>
         <FirstLetterIcon
           style={isDisabled ? { backgroundColor: colors.lightFog } : {}}
@@ -83,30 +70,14 @@ function Item({
       <View style={styles.value}>
         {(showVal || value) && (
           <View style={styles.valueContainer}>
-            <LText
-              semiBold
-              style={[styles.valueLabel]}
-              color={isDisabled ? "grey" : "darkBlue"}
-            >
-              {value ? (
-                <CurrencyUnitValue value={value} unit={unit} showCode={false} />
-              ) : (
-                "0"
-              )}
+            <LText semiBold style={[styles.valueLabel]} color={isDisabled ? "grey" : "darkBlue"}>
+              {value ? <CurrencyUnitValue value={value} unit={unit} showCode={false} /> : "0"}
             </LText>
 
             {delegatedValue && delegatedValue.gt(0) ? (
-              <LText
-                style={[styles.valueLabel, styles.subText]}
-                color="grey"
-                numberOfLines={1}
-              >
+              <LText style={[styles.valueLabel, styles.subText]} color="grey" numberOfLines={1}>
                 <Trans i18nKey="cosmos.delegation.flow.steps.validator.currentAmount">
-                  <CurrencyUnitValue
-                    value={delegatedValue}
-                    unit={unit}
-                    showCode={false}
-                  />
+                  <CurrencyUnitValue value={delegatedValue} unit={unit} showCode={false} />
                 </Trans>
               </LText>
             ) : null}

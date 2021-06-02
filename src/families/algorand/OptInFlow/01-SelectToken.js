@@ -1,13 +1,7 @@
 // @flow
 import invariant from "invariant";
 import React, { useCallback, useState } from "react";
-import {
-  View,
-  StyleSheet,
-  SafeAreaView,
-  FlatList,
-  TouchableOpacity,
-} from "react-native";
+import { View, StyleSheet, SafeAreaView, FlatList, TouchableOpacity } from "react-native";
 import { Trans, useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 
@@ -17,10 +11,7 @@ import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTran
 import { listTokensForCryptoCurrency } from "@ledgerhq/live-common/lib/currencies";
 import { extractTokenId } from "@ledgerhq/live-common/lib/families/algorand/tokens";
 
-import type {
-  TokenCurrency,
-  SubAccount,
-} from "@ledgerhq/live-common/lib/types";
+import type { TokenCurrency, SubAccount } from "@ledgerhq/live-common/lib/types";
 
 import { useTheme } from "@react-navigation/native";
 import { ScreenName } from "../../../const";
@@ -48,18 +39,9 @@ const Row = ({
   const { colors } = useTheme();
   const tokenId = extractTokenId(item.id);
   return (
-    <TouchableOpacity
-      style={[styles.row]}
-      onPress={disabled ? onDisabledPress : onPress}
-    >
-      <FirstLetterIcon
-        label={item.name}
-        labelStyle={disabled ? { color: colors.grey } : {}}
-      />
-      <LText
-        semiBold
-        style={[styles.name, disabled ? { color: colors.grey } : {}]}
-      >
+    <TouchableOpacity style={[styles.row]} onPress={disabled ? onDisabledPress : onPress}>
+      <FirstLetterIcon label={item.name} labelStyle={disabled ? { color: colors.grey } : {}} />
+      <LText semiBold style={[styles.name, disabled ? { color: colors.grey } : {}]}>
         {item.name}
       </LText>
       <LText style={styles.ticker} color="grey">
@@ -98,10 +80,7 @@ export default function DelegationStarted({ navigation, route }: Props) {
   const mainAccount = getMainAccount(account);
   const bridge = getAccountBridge(mainAccount);
 
-  invariant(
-    mainAccount && mainAccount.algorandResources,
-    "algorand Account required",
-  );
+  invariant(mainAccount && mainAccount.algorandResources, "algorand Account required");
 
   const { transaction } = useBridgeTransaction(() => {
     const t = bridge.createTransaction(mainAccount);
@@ -130,12 +109,8 @@ export default function DelegationStarted({ navigation, route }: Props) {
 
   const [infoModalOpen, setInfoModalOpen] = useState(false);
 
-  const openModal = useCallback(token => setInfoModalOpen(token), [
-    setInfoModalOpen,
-  ]);
-  const closeModal = useCallback(() => setInfoModalOpen(false), [
-    setInfoModalOpen,
-  ]);
+  const openModal = useCallback(token => setInfoModalOpen(token), [setInfoModalOpen]);
+  const closeModal = useCallback(() => setInfoModalOpen(false), [setInfoModalOpen]);
 
   const renderList = useCallback(
     list => (
@@ -146,9 +121,7 @@ export default function DelegationStarted({ navigation, route }: Props) {
             item={item}
             disabled={subAccounts.some(
               (sub: SubAccount) =>
-                sub.type === "TokenAccount" &&
-                sub.token &&
-                sub.token.id === item.id,
+                sub.type === "TokenAccount" && sub.token && sub.token.id === item.id,
             )}
             onPress={() => onNext(item.id)}
             onDisabledPress={() => openModal(item.name)}
@@ -184,9 +157,7 @@ export default function DelegationStarted({ navigation, route }: Props) {
           </View>
           <View style={styles.infoRow}>
             <LText style={[styles.warnText, styles.title]} semiBold>
-              <Trans
-                i18nKey={`algorand.optIn.flow.steps.selectToken.warning.title`}
-              />
+              <Trans i18nKey={`algorand.optIn.flow.steps.selectToken.warning.title`} />
             </LText>
             <LText style={styles.warnText} color="grey">
               <Trans

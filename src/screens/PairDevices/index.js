@@ -67,10 +67,10 @@ function PairDevicesInner({ navigation, route }: Props) {
   const hasCompletedOnboarding = useSelector(hasCompletedOnboardingSelector);
   const dispatchRedux = useDispatch();
 
-  const [
-    { error, status, device, skipCheck, genuineAskedOnDevice, name },
-    dispatch,
-  ] = useReducer(reducer, initialState);
+  const [{ error, status, device, skipCheck, genuineAskedOnDevice, name }, dispatch] = useReducer(
+    reducer,
+    initialState,
+  );
 
   const unmounted = useRef(false);
 
@@ -126,8 +126,7 @@ function PairDevicesInner({ navigation, route }: Props) {
                 if (e.type === "result") {
                   appsInstalled = e.result && e.result.installed.length;
                   if (!hasCompletedOnboarding) {
-                    const hasAnyAppInstalled =
-                      e.result && e.result.installed.length > 0;
+                    const hasAnyAppInstalled = e.result && e.result.installed.length > 0;
 
                     if (!hasAnyAppInstalled) {
                       dispatchRedux(installAppFirstTime(false));
@@ -146,8 +145,7 @@ function PairDevicesInner({ navigation, route }: Props) {
 
           if (unmounted.current) return;
 
-          const name =
-            (await getDeviceName(transport)) ?? device.deviceName ?? "";
+          const name = (await getDeviceName(transport)) ?? device.deviceName ?? "";
           if (unmounted.current) return;
 
           dispatchRedux(
@@ -225,13 +223,9 @@ function PairDevicesInner({ navigation, route }: Props) {
     case "pairing":
       return <PendingPairing />;
     case "genuinecheck":
-      return (
-        <PendingGenuineCheck genuineAskedOnDevice={genuineAskedOnDevice} />
-      );
+      return <PendingGenuineCheck genuineAskedOnDevice={genuineAskedOnDevice} />;
     case "paired":
-      return device ? (
-        <Paired device={device} genuine={!skipCheck} onContinue={onDone} />
-      ) : null;
+      return device ? <Paired device={device} genuine={!skipCheck} onContinue={onDone} /> : null;
     default:
       return null;
   }

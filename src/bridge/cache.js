@@ -7,9 +7,7 @@ import type { CryptoCurrency } from "@ledgerhq/live-common/lib/types";
 
 export async function clearBridgeCache() {
   const keys = await AsyncStorage.getAllKeys();
-  await AsyncStorage.multiRemove(
-    keys.filter(k => k.startsWith("bridgeproxypreload")),
-  );
+  await AsyncStorage.multiRemove(keys.filter(k => k.startsWith("bridgeproxypreload")));
 }
 
 function currencyCacheId(currency) {
@@ -25,9 +23,7 @@ export async function setCurrencyCache(currency: CryptoCurrency, data: mixed) {
   }
 }
 
-export async function getCurrencyCache(
-  currency: CryptoCurrency,
-): Promise<mixed> {
+export async function getCurrencyCache(currency: CryptoCurrency): Promise<mixed> {
   const res = await AsyncStorage.getItem(currencyCacheId(currency));
   if (res) {
     try {

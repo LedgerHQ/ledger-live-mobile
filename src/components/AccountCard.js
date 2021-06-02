@@ -1,15 +1,9 @@
 // @flow
-import {
-  getAccountName,
-  getAccountSpendableBalance,
-} from "@ledgerhq/live-common/lib/account";
+import { getAccountName, getAccountSpendableBalance } from "@ledgerhq/live-common/lib/account";
 import React, { PureComponent } from "react";
 import { View, StyleSheet } from "react-native";
 import type { AccountLike } from "@ledgerhq/live-common/lib/types";
-import {
-  getAccountCurrency,
-  getAccountUnit,
-} from "@ledgerhq/live-common/lib/account/helpers";
+import { getAccountCurrency, getAccountUnit } from "@ledgerhq/live-common/lib/account/helpers";
 import { getTagDerivationMode } from "@ledgerhq/live-common/lib/derivation";
 import Card from "./Card";
 import CurrencyIcon from "./CurrencyIcon";
@@ -47,15 +41,8 @@ class AccountCard extends PureComponent<Props> {
       getTagDerivationMode(currency, account.derivationMode);
 
     return (
-      <Card
-        onPress={!disabled ? onPress : undefined}
-        style={[styles.card, style]}
-      >
-        <CurrencyIcon
-          color={disabled ? colors.grey : undefined}
-          size={20}
-          currency={currency}
-        />
+      <Card onPress={!disabled ? onPress : undefined} style={[styles.card, style]}>
+        <CurrencyIcon color={disabled ? colors.grey : undefined} size={20} currency={currency} />
         <View style={styles.accountName}>
           <View>
             <LText
@@ -82,11 +69,7 @@ class AccountCard extends PureComponent<Props> {
             <CurrencyUnitValue
               showCode
               unit={unit}
-              value={
-                useFullBalance
-                  ? account.balance
-                  : getAccountSpendableBalance(account)
-              }
+              value={useFullBalance ? account.balance : getAccountSpendableBalance(account)}
             />
           </LText>
         </View>

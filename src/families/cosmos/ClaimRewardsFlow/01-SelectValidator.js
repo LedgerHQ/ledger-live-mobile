@@ -8,10 +8,7 @@ import { useSelector } from "react-redux";
 import type { Transaction } from "@ledgerhq/live-common/lib/families/cosmos/types";
 
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
-import {
-  getMainAccount,
-  getAccountUnit,
-} from "@ledgerhq/live-common/lib/account";
+import { getMainAccount, getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
 
 import { useCosmosMappedDelegations } from "@ledgerhq/live-common/lib/families/cosmos/react";
@@ -58,10 +55,7 @@ function ClaimRewardsSelectValidator({ navigation, route }: Props) {
     };
   });
 
-  invariant(
-    transaction && transaction.validators,
-    "transaction and validators required",
-  );
+  invariant(transaction && transaction.validators, "transaction and validators required");
 
   const unit = getAccountUnit(account);
 

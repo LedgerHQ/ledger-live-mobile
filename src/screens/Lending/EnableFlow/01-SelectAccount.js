@@ -61,12 +61,9 @@ function LendingEnableSelectAccount({ route, navigation }: Props) {
   const discreet = useSelector(discreetModeSelector);
 
   let enabledTotalAmount = null;
-  const accounts = useSelector(
-    subAccountByCurrencyOrderedScreenSelector(route),
-  );
+  const accounts = useSelector(subAccountByCurrencyOrderedScreenSelector(route));
   const filteredAccounts = accounts.filter(
-    ({ account }) =>
-      account.type === "TokenAccount" && !isAccountEmpty(account),
+    ({ account }) => account.type === "TokenAccount" && !isAccountEmpty(account),
   );
 
   useEffect(() => {
@@ -82,22 +79,15 @@ function LendingEnableSelectAccount({ route, navigation }: Props) {
   let accountsWithUnlimitedEnabledAmount = 0;
   filteredAccounts.forEach(({ account }) => {
     const { enabledAmount, enabledAmountIsUnlimited } =
-      (account.type === "TokenAccount" && getAccountCapabilities(account)) ||
-      {};
+      (account.type === "TokenAccount" && getAccountCapabilities(account)) || {};
     if (enabledAmountIsUnlimited) {
       enabledTotalAmount = Infinity;
       accountsWithUnlimitedEnabledAmount += 1;
       return;
     }
     // no need to calculate enabledTotalAmount
-    if (
-      enabledAmount &&
-      enabledAmount.gt(0) &&
-      !accountsWithUnlimitedEnabledAmount
-    ) {
-      enabledTotalAmount = BigNumber(enabledTotalAmount || 0).plus(
-        enabledAmount,
-      );
+    if (enabledAmount && enabledAmount.gt(0) && !accountsWithUnlimitedEnabledAmount) {
+      enabledTotalAmount = BigNumber(enabledTotalAmount || 0).plus(enabledAmount);
     }
   });
 
@@ -111,10 +101,7 @@ function LendingEnableSelectAccount({ route, navigation }: Props) {
 
   const [approveInfoModalOpen, setApproveInfoModalOpen] = useState(false);
 
-  const closeApproveInfoModal = useCallback(
-    () => setApproveInfoModalOpen(false),
-    [],
-  );
+  const closeApproveInfoModal = useCallback(() => setApproveInfoModalOpen(false), []);
   const redirectToEnableFlow = useCallback(() => {
     const n = navigation.dangerouslyGetParent() || navigation;
     n.push(ScreenName.LendingEnableAmount, { ...approveInfoModalOpen });
@@ -133,17 +120,12 @@ function LendingEnableSelectAccount({ route, navigation }: Props) {
   );
 
   const renderItem = useCallback(
-    ({
-      item: result,
-    }: {
-      item: { account: AccountLike, parentAccount?: Account },
-    }) => {
+    ({ item: result }: { item: { account: AccountLike, parentAccount?: Account } }) => {
       const { account, parentAccount } = result;
 
       const currency = getAccountCurrency(account);
       const unit = getAccountUnit(account);
-      const capabilities =
-        account.type === "TokenAccount" && getAccountCapabilities(account);
+      const capabilities = account.type === "TokenAccount" && getAccountCapabilities(account);
       const name = getAccountName(parentAccount || account);
       const isEnabled =
         capabilities &&
@@ -163,18 +145,12 @@ function LendingEnableSelectAccount({ route, navigation }: Props) {
               isEnabled
                 ? redirectToSupplyFlow({
                     accountId: account.id,
-                    parentId:
-                      account.type !== "Account"
-                        ? account.parentId
-                        : parentAccount?.id,
+                    parentId: account.type !== "Account" ? account.parentId : parentAccount?.id,
                     currency,
                   })
                 : setApproveInfoModalOpen({
                     accountId: account.id,
-                    parentId:
-                      account.type !== "Account"
-                        ? account.parentId
-                        : parentAccount?.id,
+                    parentId: account.type !== "Account" ? account.parentId : parentAccount?.id,
                     currency,
                   });
             }}
@@ -192,11 +168,7 @@ function LendingEnableSelectAccount({ route, navigation }: Props) {
             </View>
             <View style={styles.balanceContainer}>
               <LText semiBold style={styles.balanceNumText} color="grey">
-                <CurrencyUnitValue
-                  showCode
-                  unit={unit}
-                  value={account.balance}
-                />
+                <CurrencyUnitValue showCode unit={unit} value={account.balance} />
               </LText>
               {isEnabled && <CheckCircle size={16} color={colors.success} />}
             </View>
@@ -242,12 +214,8 @@ function LendingEnableSelectAccount({ route, navigation }: Props) {
         isOpened={!!approveInfoModalOpen}
         onClose={closeApproveInfoModal}
         onConfirm={redirectToEnableFlow}
-        confirmationTitle={
-          <Trans i18nKey="transfer.lending.enable.info.title" />
-        }
-        confirmationDesc={
-          <Trans i18nKey="transfer.lending.enable.info.description" />
-        }
+        confirmationTitle={<Trans i18nKey="transfer.lending.enable.info.title" />}
+        confirmationDesc={<Trans i18nKey="transfer.lending.enable.info.description" />}
         confirmButtonText={<Trans i18nKey="transfer.lending.enable.info.cta" />}
         Icon={() => (
           <Circle size={56} bg={rgba(colors.live, 0.2)}>
@@ -267,10 +235,7 @@ function LendingEnableSelectAccount({ route, navigation }: Props) {
           />
         </View>
         <View style={styles.infoSection}>
-          <Alert
-            type="primary"
-            learnMoreUrl={!enabledTotalAmount ? urls.compound : undefined}
-          >
+          <Alert type="primary" learnMoreUrl={!enabledTotalAmount ? urls.compound : undefined}>
             {enabledTotalAmount ? (
               <Trans
                 i18nKey={

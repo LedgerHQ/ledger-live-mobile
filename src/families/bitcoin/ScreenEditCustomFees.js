@@ -3,13 +3,7 @@ import { BigNumber } from "bignumber.js";
 import invariant from "invariant";
 import React, { useState, useCallback } from "react";
 import { useTranslation, Trans } from "react-i18next";
-import {
-  Keyboard,
-  StyleSheet,
-  TextInput,
-  View,
-  SafeAreaView,
-} from "react-native";
+import { Keyboard, StyleSheet, TextInput, View, SafeAreaView } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { useSelector } from "react-redux";
@@ -68,21 +62,11 @@ function BitcoinEditCustomFees({ navigation, route }: Props) {
         feesStrategy: "custom",
       }),
     });
-  }, [
-    setSatPerByte,
-    ownSatPerByte,
-    account,
-    parentAccount,
-    route.params,
-    navigation,
-    transaction,
-  ]);
+  }, [setSatPerByte, ownSatPerByte, account, parentAccount, route.params, navigation, transaction]);
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <KeyboardView
-        style={[styles.body, { backgroundColor: colors.background }]}
-      >
+      <KeyboardView style={[styles.body, { backgroundColor: colors.background }]}>
         <NavigationScrollView contentContainerStyle={styles.root}>
           <View style={styles.inputBox}>
             <TextInput

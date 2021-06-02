@@ -2,10 +2,7 @@
 import React, { PureComponent } from "react";
 import { View, StyleSheet } from "react-native";
 import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
-import {
-  getAccountUnit,
-  getAccountCurrency,
-} from "@ledgerhq/live-common/lib/account";
+import { getAccountUnit, getAccountCurrency } from "@ledgerhq/live-common/lib/account";
 import { Trans } from "react-i18next";
 import SummaryRow from "./SummaryRow";
 import CounterValue from "../../components/CounterValue";
@@ -64,20 +61,11 @@ class SummaryTotalSection extends PureComponent<Props, State> {
               <CurrencyUnitValue unit={unit} value={amount} disableRounding />
             </LText>
             <LText style={styles.summaryCounterValueText} color="grey">
-              <CounterValue
-                value={amount}
-                currency={currency}
-                showCode
-                before="≈ "
-              />
+              <CounterValue value={amount} currency={currency} showCode before="≈ " />
             </LText>
           </View>
         </SummaryRow>
-        <BottomModal
-          id="SummaryTotalModal"
-          isOpened={isModalOpened}
-          onClose={this.onRequestClose}
-        >
+        <BottomModal id="SummaryTotalModal" isOpened={isModalOpened} onClose={this.onRequestClose}>
           <ModalBottomAction
             title={<Trans i18nKey="send.summary.infoTotalTitle" />}
             icon={

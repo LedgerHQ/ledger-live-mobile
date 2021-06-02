@@ -20,16 +20,9 @@ type Props = {
   compoundSummary: CompoundAccountSummary,
 };
 
-type InfoName =
-  | "amountSupplied"
-  | "currencyAPY"
-  | "accruedInterests"
-  | "interestEarned";
+type InfoName = "amountSupplied" | "currencyAPY" | "accruedInterests" | "interestEarned";
 
-export default function AccountBalanceSummaryFooter({
-  account,
-  compoundSummary,
-}: Props) {
+export default function AccountBalanceSummaryFooter({ account, compoundSummary }: Props) {
   const { t } = useTranslation();
   const { colors } = useTheme();
 
@@ -41,8 +34,7 @@ export default function AccountBalanceSummaryFooter({
     setInfoName(undefined);
   }, []);
 
-  const onPressInfoCreator = (infoName: InfoName) => () =>
-    setInfoName(infoName);
+  const onPressInfoCreator = (infoName: InfoName) => () => setInfoName(infoName);
 
   const rates = listCurrentRates();
   const ctoken = findCompoundToken(account.token);
@@ -92,13 +84,7 @@ export default function AccountBalanceSummaryFooter({
       />
       <InfoItem
         title={t("transfer.lending.account.amountSupplied")}
-        value={
-          <CurrencyUnitValue
-            unit={unit}
-            value={totalSupplied}
-            disableRounding
-          />
-        }
+        value={<CurrencyUnitValue unit={unit} value={totalSupplied} disableRounding />}
         onPress={onPressInfoCreator("amountSupplied")}
       />
       <InfoItem
@@ -108,24 +94,12 @@ export default function AccountBalanceSummaryFooter({
       />
       <InfoItem
         title={t("transfer.lending.account.accruedInterests")}
-        value={
-          <CurrencyUnitValue
-            unit={unit}
-            value={accruedInterests}
-            disableRounding
-          />
-        }
+        value={<CurrencyUnitValue unit={unit} value={accruedInterests} disableRounding />}
         onPress={onPressInfoCreator("accruedInterests")}
       />
       <InfoItem
         title={t("transfer.lending.account.interestEarned")}
-        value={
-          <CurrencyUnitValue
-            unit={unit}
-            value={allTimeEarned}
-            disableRounding
-          />
-        }
+        value={<CurrencyUnitValue unit={unit} value={allTimeEarned} disableRounding />}
         onPress={onPressInfoCreator("interestEarned")}
       />
     </ScrollView>

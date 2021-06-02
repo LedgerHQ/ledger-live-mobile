@@ -55,11 +55,7 @@ export default function EditAccountUnits({ navigation, route }: Props) {
                 onPressItem(item);
               }}
             >
-              <SettingsRow
-                title={item.code}
-                selected={account.unit.code === item.code}
-                compact
-              />
+              <SettingsRow title={item.code} selected={account.unit.code === item.code} compact />
             </Touchable>
           )}
         >

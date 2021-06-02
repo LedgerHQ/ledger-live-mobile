@@ -52,9 +52,7 @@ export default function ValidationSuccess({ navigation, route }: Props) {
 
   const goToVote = useCallback(() => {
     onClose();
-    const screenName = lastVotedDate
-      ? ScreenName.VoteSelectValidator
-      : ScreenName.VoteStarted;
+    const screenName = lastVotedDate ? ScreenName.VoteSelectValidator : ScreenName.VoteStarted;
     navigation.navigate(NavigatorName.TronVoteFlow, {
       screen: screenName,
       params: {
@@ -73,10 +71,7 @@ export default function ValidationSuccess({ navigation, route }: Props) {
         onViewDetails={goToVote}
         title={<Trans i18nKey="freeze.validation.success" />}
         description={
-          <Trans
-            i18nKey="freeze.validation.info"
-            values={{ resource: resource.toLowerCase() }}
-          />
+          <Trans i18nKey="freeze.validation.info" values={{ resource: resource.toLowerCase() }} />
         }
         primaryButton={
           <>
@@ -94,10 +89,7 @@ export default function ValidationSuccess({ navigation, route }: Props) {
               event="FreezeSuccessVote"
               title={
                 time > 0 ? (
-                  <Trans
-                    i18nKey="freeze.validation.button.voteTimer"
-                    values={{ time }}
-                  />
+                  <Trans i18nKey="freeze.validation.button.voteTimer" values={{ time }} />
                 ) : (
                   <Trans i18nKey="freeze.validation.button.vote" />
                 )

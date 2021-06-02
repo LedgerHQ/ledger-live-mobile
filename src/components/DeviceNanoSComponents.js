@@ -2,16 +2,7 @@
 
 import { useTheme } from "@react-navigation/native";
 import React from "react";
-import {
-  Defs,
-  Rect,
-  LinearGradient,
-  Stop,
-  G,
-  Path,
-  Circle,
-  Mask,
-} from "react-native-svg";
+import { Defs, Rect, LinearGradient, Stop, G, Path, Circle, Mask } from "react-native-svg";
 
 export const LeftHint = ({ color }: { color: string }) => (
   <G transform="translate(22 -38)">
@@ -25,14 +16,7 @@ export const LeftHint = ({ color }: { color: string }) => (
       strokeOpacity=".6"
       strokeWidth=".531"
     />
-    <Circle
-      cx="5"
-      cy="36"
-      r="2"
-      fill={color}
-      stroke={color}
-      stroke-width=".8"
-    />
+    <Circle cx="5" cy="36" r="2" fill={color} stroke={color} stroke-width=".8" />
     <Path fill="url(#hints)" fill-rule="nonzero" d="M5.5 34h-1V0h1z" />
   </G>
 );
@@ -54,13 +38,7 @@ export const RightHint = ({ color }: { color: string }) => (
   </G>
 );
 
-export const Hints = ({
-  action,
-  color,
-}: {
-  action: "accept" | "left",
-  color: string,
-}) => (
+export const Hints = ({ action, color }: { action: "accept" | "left", color: string }) => (
   <>
     <Defs>
       <LinearGradient id="hints" x1="50%" x2="50%" y1="0%" y2="100%">
@@ -146,13 +124,7 @@ export const HomeScreen = ({ color }: { color: string }) => (
   </G>
 );
 
-export const ErrorScreen = ({
-  color,
-  rejected = false,
-}: {
-  color: string,
-  rejected?: boolean,
-}) => {
+export const ErrorScreen = ({ color, rejected = false }: { color: string, rejected?: boolean }) => {
   const { colors } = useTheme();
   return (
     <>

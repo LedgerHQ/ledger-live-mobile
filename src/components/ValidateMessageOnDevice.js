@@ -24,25 +24,17 @@ export default function ValidateOnDevice({ device, message, account }: Props) {
       <ScrollView style={styles.scrollContainer}>
         <View style={styles.innerContainer}>
           <View style={styles.picture}>
-            <Animation
-              source={getDeviceAnimation({ device, key: "validate" })}
-            />
+            <Animation source={getDeviceAnimation({ device, key: "validate" })} />
           </View>
         </View>
-        <LText style={styles.action}>
-          {t("walletconnect.stepVerification.action")}
-        </LText>
+        <LText style={styles.action}>{t("walletconnect.stepVerification.action")}</LText>
         <View style={styles.messageContainer}>
-          <LText style={styles.property}>
-            {t("walletconnect.stepVerification.accountName")}
-          </LText>
+          <LText style={styles.property}>{t("walletconnect.stepVerification.accountName")}</LText>
           <LText semiBold>{account && account.name ? account.name : ""}</LText>
         </View>
         {message && message.hashes && message.hashes.domainHash ? (
           <View style={styles.messageContainer}>
-            <LText style={styles.property}>
-              {t("walletconnect.domainHash")}
-            </LText>
+            <LText style={styles.property}>{t("walletconnect.domainHash")}</LText>
             <LText semiBold>
               {message && message.hashes && message.hashes.domainHash
                 ? message.hashes.domainHash
@@ -52,9 +44,7 @@ export default function ValidateOnDevice({ device, message, account }: Props) {
         ) : null}
         {message && message.hashes && message.hashes.messageHash ? (
           <View style={styles.messageContainer}>
-            <LText style={styles.property}>
-              {t("walletconnect.messageHash")}
-            </LText>
+            <LText style={styles.property}>{t("walletconnect.messageHash")}</LText>
             <LText semiBold>
               {message && message.hashes && message.hashes.messageHash
                 ? message.hashes.messageHash
@@ -64,9 +54,7 @@ export default function ValidateOnDevice({ device, message, account }: Props) {
         ) : null}
         {message && message.hashes && message.hashes.stringHash ? (
           <View style={styles.messageContainer}>
-            <LText style={styles.property}>
-              {t("walletconnect.stringHash")}
-            </LText>
+            <LText style={styles.property}>{t("walletconnect.stringHash")}</LText>
             <LText semiBold>
               {message && message.hashes && message.hashes.stringHash
                 ? message.hashes.stringHash
@@ -77,9 +65,7 @@ export default function ValidateOnDevice({ device, message, account }: Props) {
         <View style={styles.messageContainer}>
           <LText style={styles.property}>{t("walletconnect.message")}</LText>
           <LText semiBold>
-            {message.message.domain
-              ? JSON.stringify(message.message)
-              : message.message}
+            {message.message.domain ? JSON.stringify(message.message) : message.message}
           </LText>
         </View>
       </ScrollView>

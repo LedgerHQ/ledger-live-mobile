@@ -26,10 +26,7 @@ type RouteParams = {
   firmware: FirmwareUpdateContext,
 };
 
-export default function FirmwareUpdateReleaseNotes({
-  navigation,
-  route,
-}: Props) {
+export default function FirmwareUpdateReleaseNotes({ navigation, route }: Props) {
   const { colors } = useTheme();
   const onNext = useCallback(() => {
     navigation.navigate(ScreenName.FirmwareUpdateCheckId, route.params);
@@ -45,15 +42,9 @@ export default function FirmwareUpdateReleaseNotes({
       forceInset={forceInset}
     >
       <TrackScreen category="FirmwareUpdate" name="ReleaseNotes" />
-      <NavigationScrollView
-        style={styles.body}
-        contentContainerStyle={styles.content}
-      >
+      <NavigationScrollView style={styles.body} contentContainerStyle={styles.content}>
         <LText style={styles.intro}>
-          <Trans
-            i18nKey="FirmwareUpdateReleaseNotes.introTitle"
-            values={{ version }}
-          >
+          <Trans i18nKey="FirmwareUpdateReleaseNotes.introTitle" values={{ version }}>
             {"You are about to install "}
             <LText semiBold>firmware version {version}.</LText>
           </Trans>
@@ -64,9 +55,7 @@ export default function FirmwareUpdateReleaseNotes({
           </LText>
         </LText>
         {osu.notes ? (
-          <View
-            style={[styles.markdownSection, { borderColor: colors.lightFog }]}
-          >
+          <View style={[styles.markdownSection, { borderColor: colors.lightFog }]}>
             <SafeMarkdown markdown={osu.notes} />
           </View>
         ) : null}

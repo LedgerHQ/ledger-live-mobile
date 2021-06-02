@@ -5,11 +5,7 @@ import { ScrollView } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { useScrollToTop } from "../navigation/utils";
 
-export default function NavigationScrollView({
-  children,
-  style,
-  ...scrollViewProps
-}: any) {
+export default function NavigationScrollView({ children, style, ...scrollViewProps }: any) {
   const ref = useRef();
   useScrollToTop(ref);
   const { colors } = useTheme();

@@ -1,10 +1,7 @@
 /* @flow */
 import { connect } from "react-redux";
 import { setCountervalue } from "../../../actions/settings";
-import {
-  counterValueCurrencySelector,
-  supportedCountervalues,
-} from "../../../reducers/settings";
+import { counterValueCurrencySelector, supportedCountervalues } from "../../../reducers/settings";
 import type { State } from "../../../reducers";
 import makeGenericSelectScreen from "../../makeGenericSelectScreen";
 

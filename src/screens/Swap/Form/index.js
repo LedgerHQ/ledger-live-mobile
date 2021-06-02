@@ -6,10 +6,7 @@ import { TouchableOpacity, StyleSheet, View } from "react-native";
 import { Trans } from "react-i18next";
 import { useSelector } from "react-redux";
 import type { CurrenciesStatus } from "@ledgerhq/live-common/lib/exchange/swap/logic";
-import type {
-  Exchange,
-  ExchangeRate,
-} from "@ledgerhq/live-common/lib/exchange/swap/types";
+import type { Exchange, ExchangeRate } from "@ledgerhq/live-common/lib/exchange/swap/types";
 import { useNavigation, useRoute, useTheme } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/dist/Ionicons";
 import {
@@ -17,10 +14,7 @@ import {
   getAccountCurrency,
   getAccountName,
 } from "@ledgerhq/live-common/lib/account";
-import type {
-  Account,
-  AccountLike,
-} from "@ledgerhq/live-common/lib/types/account";
+import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types/account";
 import type {
   CryptoCurrency,
   TokenCurrency,
@@ -31,9 +25,7 @@ import type { DeviceInfo } from "@ledgerhq/live-common/lib/types/manager";
 import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import { ScreenName } from "../../../const";
 import CurrencyUnitValue from "../../../components/CurrencyUnitValue";
-import SectionSeparator, {
-  ArrowDownCircle,
-} from "../../../components/SectionSeparator";
+import SectionSeparator, { ArrowDownCircle } from "../../../components/SectionSeparator";
 import CurrencyIcon from "../../../components/CurrencyIcon";
 import LText from "../../../components/LText";
 import Button from "../../../components/Button";
@@ -73,17 +65,13 @@ const Form = ({
   const { colors } = useTheme();
   const { navigate } = useNavigation();
   const route = useRoute();
-  const flattenedCurrencies = useSelector(
-    flattenedSwapSupportedCurrenciesSelector,
-  );
+  const flattenedCurrencies = useSelector(flattenedSwapSupportedCurrenciesSelector);
 
   const exchange = useMemo(
     () =>
       route.params?.exchange || {
         fromAccount: defaultAccount?.balance.gt(0) ? defaultAccount : undefined,
-        fromParentAccount: defaultAccount?.balance.gt(0)
-          ? defaultParentAccount
-          : undefined,
+        fromParentAccount: defaultAccount?.balance.gt(0) ? defaultParentAccount : undefined,
       },
     [defaultAccount, defaultParentAccount, route.params],
   );
@@ -133,12 +121,7 @@ const Form = ({
             {fromAccount ? (
               <>
                 <CurrencyIcon size={16} currency={fromCurrency} />
-                <LText
-                  semiBold
-                  style={styles.accountName}
-                  numberOfLines={1}
-                  ellipsizeMode="middle"
-                >
+                <LText semiBold style={styles.accountName} numberOfLines={1} ellipsizeMode="middle">
                   {getAccountName(fromAccount)}
                 </LText>
                 <View style={{ marginTop: 4, marginLeft: 8 }}>
@@ -147,12 +130,7 @@ const Form = ({
               </>
             ) : (
               <>
-                <LText
-                  semiBold
-                  style={styles.accountName}
-                  numberOfLines={1}
-                  ellipsizeMode="middle"
-                >
+                <LText semiBold style={styles.accountName} numberOfLines={1} ellipsizeMode="middle">
                   <Trans i18nKey={"transfer.swap.form.fromAccount"} />
                 </LText>
                 <View style={{ marginTop: 4, marginLeft: 8 }}>
@@ -189,12 +167,7 @@ const Form = ({
             {toAccount ? (
               <>
                 <CurrencyIcon size={16} currency={toCurrency} />
-                <LText
-                  semiBold
-                  style={styles.accountName}
-                  numberOfLines={1}
-                  ellipsizeMode="middle"
-                >
+                <LText semiBold style={styles.accountName} numberOfLines={1} ellipsizeMode="middle">
                   {getAccountName(toAccount)}
                 </LText>
                 <View style={{ marginTop: 4, marginLeft: 8 }}>

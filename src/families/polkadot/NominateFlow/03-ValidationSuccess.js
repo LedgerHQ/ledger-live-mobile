@@ -61,12 +61,8 @@ export default function ValidationSuccess({ navigation, route }: Props) {
       <ValidateSuccess
         onClose={onClose}
         onViewDetails={goToOperationDetails}
-        title={
-          <Trans i18nKey="polkadot.nominate.steps.validation.success.title" />
-        }
-        description={
-          <Trans i18nKey="polkadot.nominate.steps.validation.success.description" />
-        }
+        title={<Trans i18nKey="polkadot.nominate.steps.validation.success.title" />}
+        description={<Trans i18nKey="polkadot.nominate.steps.validation.success.description" />}
       />
     </View>
   );

@@ -23,9 +23,7 @@ import { TransactionRefusedOnDevice } from "@ledgerhq/live-common/lib/errors";
 import { updateAccountWithUpdater } from "../actions/accounts";
 import logger from "../logger";
 
-export const useTransactionChangeFromNavigation = (
-  setTransaction: Transaction => void,
-) => {
+export const useTransactionChangeFromNavigation = (setTransaction: Transaction => void) => {
   const route = useRoute();
   const navigationTransaction = route.params?.transaction;
   const navigationTxRef = useRef(navigationTransaction);
@@ -118,14 +116,7 @@ export const useSignWithDevice = ({
           });
         },
       });
-  }, [
-    context,
-    account,
-    navigation,
-    parentAccount,
-    updateAccountWithUpdater,
-    route.params,
-  ]);
+  }, [context, account, navigation, parentAccount, updateAccountWithUpdater, route.params]);
 
   useEffect(() => {
     signWithDevice();
@@ -195,13 +186,10 @@ export function useSignedTxHandler({
         }
 
         const operation = await broadcast(signedOperation);
-        navigation.replace(
-          route.name.replace("ConnectDevice", "ValidationSuccess"),
-          {
-            ...route.params,
-            result: operation,
-          },
-        );
+        navigation.replace(route.name.replace("ConnectDevice", "ValidationSuccess"), {
+          ...route.params,
+          result: operation,
+        });
         dispatch(
           updateAccountWithUpdater(mainAccount.id, account =>
             addPendingOperation(account, operation),
@@ -209,17 +197,14 @@ export function useSignedTxHandler({
         );
       } catch (error) {
         if (
-          !(
-            error instanceof UserRefusedOnDevice ||
-            error instanceof TransactionRefusedOnDevice
-          )
+          !(error instanceof UserRefusedOnDevice || error instanceof TransactionRefusedOnDevice)
         ) {
           logger.critical(error);
         }
-        navigation.replace(
-          route.name.replace("ConnectDevice", "ValidationError"),
-          { ...route.params, error },
-        );
+        navigation.replace(route.name.replace("ConnectDevice", "ValidationError"), {
+          ...route.params,
+          error,
+        });
       }
     },
     [navigation, route, broadcast, mainAccount, dispatch],

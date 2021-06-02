@@ -1,15 +1,8 @@
 // @flow
 
 import React, { useCallback, useMemo, useState } from "react";
-import {
-  getMainAccount,
-  getAccountCurrency,
-} from "@ledgerhq/live-common/lib/account";
-import type {
-  AccountLike,
-  Account,
-  Transaction,
-} from "@ledgerhq/live-common/lib/types";
+import { getMainAccount, getAccountCurrency } from "@ledgerhq/live-common/lib/account";
+import type { AccountLike, Account, Transaction } from "@ledgerhq/live-common/lib/types";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { parseCurrencyUnit } from "@ledgerhq/live-common/lib/currencies/index";
 import { createAction as initSellCreateAction } from "@ledgerhq/live-common/lib/hw/actions/initSell";
@@ -26,11 +19,7 @@ import DeviceAction from "../../components/DeviceAction";
 import { useBroadcast } from "../../components/useBroadcast";
 import { renderError } from "../../components/DeviceAction/rendering";
 
-const initSellExec = ({
-  deviceId,
-}: {
-  deviceId: string,
-}): Observable<SellRequestEvent> =>
+const initSellExec = ({ deviceId }: { deviceId: string }): Observable<SellRequestEvent> =>
   withDevice(deviceId)(transport => from(getTransactionId(transport)));
 
 const action = createAction(connectApp);
@@ -73,17 +62,10 @@ type Props = {
   onResult: (bool?: boolean) => void,
 };
 
-export function DevicePart({
-  account,
-  parentAccount,
-  getCoinifyContext,
-  device,
-  onResult,
-}: Props) {
+export function DevicePart({ account, parentAccount, getCoinifyContext, device, onResult }: Props) {
   const { t } = useTranslation();
 
-  const tokenCurrency =
-    account && account.type === "TokenAccount" ? account.token : null;
+  const tokenCurrency = account && account.type === "TokenAccount" ? account.token : null;
   const [sellData, setSellData] = useState(null);
   const [error, setError] = useState(null);
   const broadcast = useBroadcast({ account, parentAccount });
@@ -99,10 +81,7 @@ export function DevicePart({
       const t1 = bridge.createTransaction(mainAccount);
 
       const t2 = bridge.updateTransaction(t1, {
-        amount: parseCurrencyUnit(
-          mainCurrency.units[0],
-          coinifyContext.inAmount.toString(10),
-        ),
+        amount: parseCurrencyUnit(mainCurrency.units[0], coinifyContext.inAmount.toString(10)),
         recipient: coinifyContext.transferIn.details.account,
       });
       const t3 = await bridge.prepareTransaction(mainAccount, t2);

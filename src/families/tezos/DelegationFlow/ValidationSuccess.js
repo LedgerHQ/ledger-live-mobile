@@ -53,17 +53,9 @@ export default function ValidationSuccess({ navigation, route }: Props) {
       <ValidateSuccess
         onClose={onClose}
         onViewDetails={goToOperationDetails}
-        title={
-          <Trans
-            i18nKey={"delegation.broadcastSuccessTitle." + transaction.mode}
-          />
-        }
+        title={<Trans i18nKey={"delegation.broadcastSuccessTitle." + transaction.mode} />}
         description={
-          <Trans
-            i18nKey={
-              "delegation.broadcastSuccessDescription." + transaction.mode
-            }
-          />
+          <Trans i18nKey={"delegation.broadcastSuccessDescription." + transaction.mode} />
         }
       />
     </View>

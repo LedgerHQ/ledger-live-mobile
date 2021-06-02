@@ -31,8 +31,6 @@ class SetEnvsFromSettings extends PureComponent<{
   }
 }
 
-const m: React$ComponentType<{}> = connect(mapStateToProps)(
-  SetEnvsFromSettings,
-);
+const m: React$ComponentType<{}> = connect(mapStateToProps)(SetEnvsFromSettings);
 
 export default m;

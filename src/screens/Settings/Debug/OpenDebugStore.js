@@ -8,9 +8,6 @@ export default function OpenDebugStore() {
   const navigation = useNavigation();
 
   return (
-    <SettingsRow
-      title="Debug store"
-      onPress={() => navigation.navigate(ScreenName.DebugStore)}
-    />
+    <SettingsRow title="Debug store" onPress={() => navigation.navigate(ScreenName.DebugStore)} />
   );
 }

@@ -17,11 +17,6 @@ const styles = StyleSheet.create({
 export default () => {
   const { colors } = useTheme();
   return (
-    <View
-      style={[
-        styles.root,
-        { backgroundColor: colors.live, borderColor: colors.white },
-      ]}
-    />
+    <View style={[styles.root, { backgroundColor: colors.live, borderColor: colors.white }]} />
   );
 };

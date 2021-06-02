@@ -3,10 +3,7 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { View, StyleSheet } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { useSelector } from "react-redux";
-import {
-  getMainAccount,
-  getReceiveFlowError,
-} from "@ledgerhq/live-common/lib/account";
+import { getMainAccount, getReceiveFlowError } from "@ledgerhq/live-common/lib/account";
 import type { AccountLike } from "@ledgerhq/live-common/lib/types/account";
 import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import { createAction } from "@ledgerhq/live-common/lib/hw/actions/app";
@@ -55,10 +52,10 @@ export default function ConnectDevice({ navigation, route }: Props) {
     }
   }, [navigation, readOnlyModeEnabled, route.params]);
 
-  const error = useMemo(
-    () => (account ? getReceiveFlowError(account, parentAccount) : null),
-    [account, parentAccount],
-  );
+  const error = useMemo(() => (account ? getReceiveFlowError(account, parentAccount) : null), [
+    account,
+    parentAccount,
+  ]);
 
   const onResult = useCallback(
     payload => {
@@ -97,8 +94,7 @@ export default function ConnectDevice({ navigation, route }: Props) {
   }
 
   const mainAccount = getMainAccount(account, parentAccount);
-  const tokenCurrency =
-    account && account.type === "TokenAccount" && account.token;
+  const tokenCurrency = account && account.type === "TokenAccount" && account.token;
 
   return (
     <SafeAreaView
@@ -106,15 +102,8 @@ export default function ConnectDevice({ navigation, route }: Props) {
       forceInset={forceInset}
     >
       <TrackScreen category="ReceiveFunds" name="ConnectDevice" />
-      <NavigationScrollView
-        style={styles.scroll}
-        contentContainerStyle={styles.scrollContainer}
-      >
-        <SelectDevice
-          onSelect={setDevice}
-          onWithoutDevice={onSkipDevice}
-          withoutDevice
-        />
+      <NavigationScrollView style={styles.scroll} contentContainerStyle={styles.scrollContainer}>
+        <SelectDevice onSelect={setDevice} onWithoutDevice={onSkipDevice} withoutDevice />
       </NavigationScrollView>
       <DeviceActionModal
         action={action}

@@ -13,13 +13,7 @@ type Props = {
   backgroundColor?: string,
 };
 
-function ProgressBar({
-  style,
-  height,
-  backgroundColor,
-  progressColor,
-  progress,
-}: Props) {
+function ProgressBar({ style, height, backgroundColor, progressColor, progress }: Props) {
   const { colors } = useTheme();
   return (
     <View

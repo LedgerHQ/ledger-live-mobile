@@ -60,11 +60,7 @@ class AnalyticsRow extends PureComponent<Props, State> {
           onHelpPress={this.onOpen}
           alignedTop
         >
-          <Switch
-            style={{ opacity: 0.99 }}
-            value={analyticsEnabled}
-            onValueChange={setAnalytics}
-          />
+          <Switch style={{ opacity: 0.99 }} value={analyticsEnabled} onValueChange={setAnalytics} />
         </SettingsRow>
         <InfoModal
           id="AnalyticsModal"
@@ -117,9 +113,6 @@ class AnalyticsRow extends PureComponent<Props, State> {
   }
 }
 
-const m: React$ComponentType<{}> = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(AnalyticsRow);
+const m: React$ComponentType<{}> = connect(mapStateToProps, mapDispatchToProps)(AnalyticsRow);
 
 export default m;

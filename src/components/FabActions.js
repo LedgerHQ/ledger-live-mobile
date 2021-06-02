@@ -37,9 +37,7 @@ function FabAccountActions({ account, parentAccount }: FabAccountActionsProps) {
   const { colors } = useTheme();
 
   const currency = getAccountCurrency(account);
-  const availableOnSwap = useSelector(state =>
-    flattenedSwapSupportedCurrenciesSelector(state),
-  );
+  const availableOnSwap = useSelector(state => flattenedSwapSupportedCurrenciesSelector(state));
   const readOnlyModeEnabled = useSelector(readOnlyModeEnabledSelector);
 
   const canBeBought = isCurrencySupported(currency, "buy");
@@ -55,8 +53,7 @@ function FabAccountActions({ account, parentAccount }: FabAccountActionsProps) {
                 params: {
                   account,
                   mode: "buy",
-                  parentId:
-                    account.type !== "Account" ? account.parentId : undefined,
+                  parentId: account.type !== "Account" ? account.parentId : undefined,
                 },
               },
             ],
@@ -83,10 +80,7 @@ function FabAccountActions({ account, parentAccount }: FabAccountActionsProps) {
               },
             ],
             label: (
-              <Trans
-                i18nKey="transfer.swap.main.header"
-                values={{ currency: currency.name }}
-              />
+              <Trans i18nKey="transfer.swap.main.header" values={{ currency: currency.name }} />
             ),
             Icon: Swap,
             event: "Swap Crypto Account Button",
@@ -118,20 +112,14 @@ function FabActions({ account, parentAccount }: Props) {
   const readOnlyModeEnabled = useSelector(readOnlyModeEnabledSelector);
   const accountsCount = useSelector(accountsCountSelector);
 
-  if (account)
-    return (
-      <FabAccountActions account={account} parentAccount={parentAccount} />
-    );
+  if (account) return <FabAccountActions account={account} parentAccount={parentAccount} />;
 
   const actions = [
     {
       event: "TransferExchange",
       label: <Trans i18nKey="exchange.buy.tabTitle" />,
       Icon: Exchange,
-      navigationParams: [
-        NavigatorName.Exchange,
-        { screen: ScreenName.ExchangeBuy },
-      ],
+      navigationParams: [NavigatorName.Exchange, { screen: ScreenName.ExchangeBuy }],
     },
     ...(accountsCount > 0 && !readOnlyModeEnabled
       ? [

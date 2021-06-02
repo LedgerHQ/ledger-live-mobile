@@ -2,14 +2,7 @@
 
 import invariant from "invariant";
 import React, { useState, useCallback, useEffect } from "react";
-import {
-  View,
-  StyleSheet,
-  FlatList,
-  Keyboard,
-  Platform,
-  Linking,
-} from "react-native";
+import { View, StyleSheet, FlatList, Keyboard, Platform, Linking } from "react-native";
 import { useSelector } from "react-redux";
 import SafeAreaView from "react-native-safe-area-view";
 import { useTranslation, Trans } from "react-i18next";
@@ -48,21 +41,11 @@ const BakerHead = ({ onPressHelp }: { onPressHelp: () => void }) => {
   const { colors } = useTheme();
   return (
     <View style={styles.bakerHead}>
-      <LText
-        style={styles.bakerHeadText}
-        color="smoke"
-        numberOfLines={1}
-        semiBold
-      >
+      <LText style={styles.bakerHeadText} color="smoke" numberOfLines={1} semiBold>
         Validator
       </LText>
       <View style={styles.bakerHeadContainer}>
-        <LText
-          style={styles.bakerHeadText}
-          color="smoke"
-          numberOfLines={1}
-          semiBold
-        >
+        <LText style={styles.bakerHeadText} color="smoke" numberOfLines={1} semiBold>
           Est. Yield
         </LText>
         <Touchable
@@ -76,13 +59,7 @@ const BakerHead = ({ onPressHelp }: { onPressHelp: () => void }) => {
     </View>
   );
 };
-const BakerRow = ({
-  onPress,
-  baker,
-}: {
-  onPress: Baker => void,
-  baker: Baker,
-}) => {
+const BakerRow = ({ onPress, baker }: { onPress: Baker => void, baker: Baker }) => {
   const { colors } = useTheme();
   const onPressT = useCallback(() => {
     onPress(baker);
@@ -111,12 +88,7 @@ const BakerRow = ({
             {baker.name}
           </LText>
           {baker.capacityStatus === "full" ? (
-            <LText
-              semiBold
-              numberOfLines={1}
-              style={styles.overdelegated}
-              color="orange"
-            >
+            <LText semiBold numberOfLines={1} style={styles.overdelegated} color="orange">
               <Trans i18nKey="delegation.overdelegated" />
             </LText>
           ) : null}
@@ -178,14 +150,8 @@ export default function SelectValidator({ navigation, route }: Props) {
     // The platform changing during runtime seems... unlikely
     // eslint-disable-next-line react-hooks/rules-of-hooks
     useEffect(() => {
-      const keyboardDidShowListener = Keyboard.addListener(
-        "keyboardDidShow",
-        keyboardDidShow,
-      );
-      const keyboardDidHideListener = Keyboard.addListener(
-        "keyboardDidHide",
-        keyboardDidHide,
-      );
+      const keyboardDidShowListener = Keyboard.addListener("keyboardDidShow", keyboardDidShow);
+      const keyboardDidHideListener = Keyboard.addListener("keyboardDidHide", keyboardDidHide);
 
       return () => {
         keyboardDidShowListener.remove();
@@ -196,22 +162,18 @@ export default function SelectValidator({ navigation, route }: Props) {
 
   invariant(account, "account is undefined");
 
-  const {
-    transaction,
-    setTransaction,
-    status,
-    bridgePending,
-    bridgeError,
-  } = useBridgeTransaction(() => {
-    const bridge = getAccountBridge(account, parentAccount);
-    return {
-      account,
-      parentAccount,
-      transaction: bridge.updateTransaction(route.params?.transaction, {
-        recipient: "",
-      }),
-    };
-  });
+  const { transaction, setTransaction, status, bridgePending, bridgeError } = useBridgeTransaction(
+    () => {
+      const bridge = getAccountBridge(account, parentAccount);
+      return {
+        account,
+        parentAccount,
+        transaction: bridge.updateTransaction(route.params?.transaction, {
+          recipient: "",
+        }),
+      };
+    },
+  );
 
   invariant(transaction, "transaction is undefined");
 
@@ -269,10 +231,9 @@ export default function SelectValidator({ navigation, route }: Props) {
     [navigation, account, parentAccount, route.params],
   );
 
-  const renderItem = useCallback(
-    ({ item }) => <BakerRow baker={item} onPress={onItemPress} />,
-    [onItemPress],
-  );
+  const renderItem = useCallback(({ item }) => <BakerRow baker={item} onPress={onItemPress} />, [
+    onItemPress,
+  ]);
 
   return (
     <SafeAreaView

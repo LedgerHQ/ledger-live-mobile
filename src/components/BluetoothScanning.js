@@ -77,10 +77,7 @@ class LeftRightDots extends PureComponent<
     return (
       <View style={styles.dots}>
         {opacities.map((opacity, i) => (
-          <Animated.View
-            key={i}
-            style={[styles.dot, { backgroundColor: color, opacity }]}
-          />
+          <Animated.View key={i} style={[styles.dot, { backgroundColor: color, opacity }]} />
         ))}
       </View>
     );
@@ -93,10 +90,7 @@ function BluetoothScanning({ isAnimated, isError }: Props) {
     <View style={styles.root}>
       <View style={styles.body}>
         <PhoneBle />
-        <LeftRightDots
-          isAnimated={isAnimated}
-          color={isError ? colors.alert : colors.live}
-        />
+        <LeftRightDots isAnimated={isAnimated} color={isError ? colors.alert : colors.live} />
         <DeviceNanoMedium />
         {isError && (
           <View style={styles.errorContainer}>

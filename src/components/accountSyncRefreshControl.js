@@ -2,10 +2,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { RefreshControl } from "react-native";
 import { useTheme } from "@react-navigation/native";
-import {
-  useBridgeSync,
-  useAccountSyncState,
-} from "@ledgerhq/live-common/lib/bridge/react";
+import { useBridgeSync, useAccountSyncState } from "@ledgerhq/live-common/lib/bridge/react";
 import type { Sync } from "@ledgerhq/live-common/lib/bridge/react/types";
 import { useCountervaluesPolling } from "@ledgerhq/live-common/lib/countervalues/react";
 import { SYNC_DELAY } from "../constants";
@@ -19,13 +16,7 @@ type Props = {
 };
 
 export default (ScrollListLike: any) => {
-  function Inner({
-    accountId,
-    error,
-    isError,
-    forwardedRef,
-    ...scrollListLikeProps
-  }: Props) {
+  function Inner({ accountId, error, isError, forwardedRef, ...scrollListLikeProps }: Props) {
     const { pending: isPending } = useAccountSyncState({ accountId });
     const { colors, dark } = useTheme();
     const setSyncBehavior = useBridgeSync();
@@ -58,9 +49,7 @@ export default (ScrollListLike: any) => {
       };
     }, [refreshing]);
 
-    const isUserClick = useMemo(() => Date.now() - lastClickTime < 1000, [
-      lastClickTime,
-    ]);
+    const isUserClick = useMemo(() => Date.now() - lastClickTime < 1000, [lastClickTime]);
     const isLoading = (isPending && isUserClick) || refreshing;
 
     return (
@@ -81,7 +70,5 @@ export default (ScrollListLike: any) => {
   }
 
   // $FlowFixMe
-  return React.forwardRef((prop, ref) => (
-    <Inner {...prop} forwardedRef={ref} />
-  ));
+  return React.forwardRef((prop, ref) => <Inner {...prop} forwardedRef={ref} />);
 };

@@ -51,9 +51,7 @@ export async function saveNotifications(obj: *): Promise<void> {
   await store.save("notifications", obj);
 }
 
-export const getCountervalues: typeof unsafeGetCountervalues = atomicQueue(
-  unsafeGetCountervalues,
-);
+export const getCountervalues: typeof unsafeGetCountervalues = atomicQueue(unsafeGetCountervalues);
 
 export const saveCountervalues: typeof unsafeSaveCountervalues = atomicQueue(
   unsafeSaveCountervalues,
@@ -85,14 +83,10 @@ async function unsafeSaveCountervalues(
   if (!changed) return;
 
   const deletedKeys = (await getKeys(COUNTERVALUES_DB_PREFIX)).filter(
-    k =>
-      ![...pairIds, "status"].includes(k.replace(COUNTERVALUES_DB_PREFIX, "")),
+    k => ![...pairIds, "status"].includes(k.replace(COUNTERVALUES_DB_PREFIX, "")),
   );
 
-  const data = Object.entries(state).map(([key, val]) => [
-    `${COUNTERVALUES_DB_PREFIX}${key}`,
-    val,
-  ]);
+  const data = Object.entries(state).map(([key, val]) => [`${COUNTERVALUES_DB_PREFIX}${key}`, val]);
 
   await store.save(data);
 
@@ -157,17 +151,12 @@ async function unsafeSaveAccounts(
   const currentAccountKeys = onlyAccountsKeys(keys);
 
   /** format data for DB persist */
-  const dbData = newAccounts.map(({ data }) => [
-    formatAccountDBKey(data.id),
-    { data, version: 1 },
-  ]);
+  const dbData = newAccounts.map(({ data }) => [formatAccountDBKey(data.id), { data, version: 1 }]);
 
   /** Find current DB accounts keys diff with app state to remove them */
   const deletedKeys =
     currentAccountKeys && currentAccountKeys.length
-      ? currentAccountKeys.filter(key =>
-          dbData.every(([accountKey]) => accountKey !== key),
-        )
+      ? currentAccountKeys.filter(key => dbData.every(([accountKey]) => accountKey !== key))
       : [];
 
   // we only save those who effectively changed
@@ -195,13 +184,9 @@ async function unsafeSaveAccounts(
   );
 }
 
-export const getAccounts: typeof unsafeGetAccounts = atomicQueue(
-  unsafeGetAccounts,
-);
+export const getAccounts: typeof unsafeGetAccounts = atomicQueue(unsafeGetAccounts);
 
-export const saveAccounts: typeof unsafeSaveAccounts = atomicQueue(
-  unsafeSaveAccounts,
-);
+export const saveAccounts: typeof unsafeSaveAccounts = atomicQueue(unsafeSaveAccounts);
 
 async function migrateAccountsIfNecessary(): Promise<void> {
   const keys = await store.keys();

@@ -48,10 +48,7 @@ export default (opts: Opts) => {
         .subscribe(msg => {
           observer.next({
             type: msg.type,
-            descriptor: createTransportDeviceMock(
-              msg.payload.id,
-              msg.payload.name,
-            ),
+            descriptor: createTransportDeviceMock(msg.payload.id, msg.payload.name),
           });
         });
     }
@@ -64,9 +61,7 @@ export default (opts: Opts) => {
         )
         .toPromise();
       return new BluetoothTransportMock(
-        typeof device === "string"
-          ? createTransportDeviceMock(device, "")
-          : device,
+        typeof device === "string" ? createTransportDeviceMock(device, "") : device,
       );
     }
 

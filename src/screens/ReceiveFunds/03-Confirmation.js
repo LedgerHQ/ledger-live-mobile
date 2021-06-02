@@ -9,11 +9,7 @@ import { useSelector } from "react-redux";
 import QRCode from "react-native-qrcode-svg";
 import { Trans } from "react-i18next";
 import ReactNativeModal from "react-native-modal";
-import type {
-  Account,
-  TokenAccount,
-  AccountLike,
-} from "@ledgerhq/live-common/lib/types";
+import type { Account, TokenAccount, AccountLike } from "@ledgerhq/live-common/lib/types";
 import {
   getMainAccount,
   getAccountCurrency,
@@ -187,10 +183,7 @@ export default function ReceiveConfirmation({ navigation, route }: Props) {
           <SkipLock />
         </>
       )}
-      <NavigationScrollView
-        style={{ flex: 1 }}
-        contentContainerStyle={styles.root}
-      >
+      <NavigationScrollView style={{ flex: 1 }} contentContainerStyle={styles.root}>
         <View style={styles.container}>
           <Touchable event="QRZoom" onPress={onZoom}>
             {width < 350 ? (
@@ -205,11 +198,7 @@ export default function ReceiveConfirmation({ navigation, route }: Props) {
                   dark ? { backgroundColor: "white" } : {},
                 ]}
               >
-                <QRCode
-                  size={QRSize}
-                  value={mainAccount.freshAddress}
-                  ecl="H"
-                />
+                <QRCode size={QRSize} value={mainAccount.freshAddress} ecl="H" />
               </View>
             )}
           </Touchable>
@@ -225,10 +214,7 @@ export default function ReceiveConfirmation({ navigation, route }: Props) {
             </LText>
           </View>
           <View style={styles.address}>
-            <DisplayAddress
-              address={mainAccount.freshAddress}
-              verified={verified}
-            />
+            <DisplayAddress address={mainAccount.freshAddress} verified={verified} />
           </View>
           <View style={styles.copyLink}>
             <CopyLink
@@ -332,11 +318,7 @@ export default function ReceiveConfirmation({ navigation, route }: Props) {
             </View>
           </View>
         ) : null}
-        <Touchable
-          event="ReceiveClose"
-          style={styles.close}
-          onPress={onModalClose}
-        >
+        <Touchable event="ReceiveClose" style={styles.close} onPress={onModalClose}>
           <Close color={colors.fog} size={20} />
         </Touchable>
       </BottomModal>

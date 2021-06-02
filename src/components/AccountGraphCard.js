@@ -2,15 +2,8 @@
 import React, { useState, useCallback } from "react";
 import { useTheme } from "@react-navigation/native";
 import { View, StyleSheet, Platform } from "react-native";
-import type {
-  Unit,
-  Currency,
-  AccountLike,
-} from "@ledgerhq/live-common/lib/types";
-import {
-  getAccountCurrency,
-  getAccountUnit,
-} from "@ledgerhq/live-common/lib/account";
+import type { Unit, Currency, AccountLike } from "@ledgerhq/live-common/lib/types";
+import { getAccountCurrency, getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import { getCurrencyColor } from "@ledgerhq/live-common/lib/currencies";
 import type {
   ValueChange,
@@ -65,19 +58,13 @@ export default function AccountGraphCard({
   const [hoveredItem, setHoverItem] = useState<?Item>();
   const [, setTimeRange, timeRangeItems] = useTimeRange();
   const mapCryptoValue = useCallback(d => d.value || 0, []);
-  const mapCounterValue = useCallback(
-    d => (d.countervalue ? d.countervalue : 0),
-    [],
-  );
+  const mapCounterValue = useCallback(d => (d.countervalue ? d.countervalue : 0), []);
 
   const isAvailable = !useCounterValue || countervalueAvailable;
 
   const currency = getAccountCurrency(account);
   const unit = getAccountUnit(account);
-  const graphColor = ensureContrast(
-    getCurrencyColor(currency),
-    colors.background,
-  );
+  const graphColor = ensureContrast(getCurrencyColor(currency), colors.background);
 
   return (
     <Card style={styles.root}>
@@ -113,9 +100,7 @@ export default function AccountGraphCard({
           items={timeRangeItems}
         />
       </View>
-      {renderAccountSummary && (
-        <View style={styles.accountSummary}>{renderAccountSummary()}</View>
-      )}
+      {renderAccountSummary && <View style={styles.accountSummary}>{renderAccountSummary()}</View>}
     </Card>
   );
 }
@@ -172,11 +157,7 @@ function GraphCardHeader({
         <View style={styles.subtitleContainer}>
           {isLoading ? (
             <>
-              <Placeholder
-                width={50}
-                containerHeight={19}
-                style={{ marginRight: 10 }}
-              />
+              <Placeholder width={50} containerHeight={19} style={{ marginRight: 10 }} />
               <Placeholder width={50} containerHeight={19} />
             </>
           ) : hoveredItem && hoveredItem.date ? (
@@ -185,11 +166,7 @@ function GraphCardHeader({
             </LText>
           ) : valueChange ? (
             <View style={styles.delta}>
-              <Delta
-                percent
-                valueChange={valueChange}
-                style={styles.deltaPercent}
-              />
+              <Delta percent valueChange={valueChange} style={styles.deltaPercent} />
               <Delta valueChange={valueChange} unit={unit} />
             </View>
           ) : null}

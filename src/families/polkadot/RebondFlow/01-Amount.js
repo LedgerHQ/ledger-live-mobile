@@ -17,10 +17,7 @@ import { useTheme } from "@react-navigation/native";
 
 import type { Transaction } from "@ledgerhq/live-common/lib/types";
 import { useDebounce } from "@ledgerhq/live-common/lib/hooks/useDebounce";
-import {
-  getAccountUnit,
-  getMainAccount,
-} from "@ledgerhq/live-common/lib/account";
+import { getAccountUnit, getMainAccount } from "@ledgerhq/live-common/lib/account";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 
 import { accountScreenSelector } from "../../../reducers/accounts";
@@ -57,21 +54,17 @@ export default function PolkadotRebondAmount({ navigation, route }: Props) {
 
   const [maxSpendable, setMaxSpendable] = useState(null);
 
-  const {
-    transaction,
-    setTransaction,
-    status,
-    bridgePending,
-    bridgeError,
-  } = useBridgeTransaction(() => {
-    const t = bridge.createTransaction(mainAccount);
+  const { transaction, setTransaction, status, bridgePending, bridgeError } = useBridgeTransaction(
+    () => {
+      const t = bridge.createTransaction(mainAccount);
 
-    const transaction = bridge.updateTransaction(t, {
-      mode: "rebond",
-    });
+      const transaction = bridge.updateTransaction(t, {
+        mode: "rebond",
+      });
 
-    return { account: mainAccount, transaction };
-  });
+      return { account: mainAccount, transaction };
+    },
+  );
 
   const debouncedTransaction = useDebounce(transaction, 500);
 
@@ -134,10 +127,7 @@ export default function PolkadotRebondAmount({ navigation, route }: Props) {
   const { amount } = status;
   const unit = getAccountUnit(account);
 
-  const error =
-    amount.eq(0) || bridgePending
-      ? null
-      : getFirstStatusError(status, "errors");
+  const error = amount.eq(0) || bridgePending ? null : getFirstStatusError(status, "errors");
   const warning = getFirstStatusError(status, "warnings");
   const hasErrors = hasStatusError(status);
 
@@ -197,11 +187,7 @@ export default function PolkadotRebondAmount({ navigation, route }: Props) {
                     </LText>
                     <LText semiBold>
                       {maxSpendable ? (
-                        <CurrencyUnitValue
-                          showCode
-                          unit={unit}
-                          value={maxSpendable}
-                        />
+                        <CurrencyUnitValue showCode unit={unit} value={maxSpendable} />
                       ) : (
                         "-"
                       )}
@@ -231,11 +217,7 @@ export default function PolkadotRebondAmount({ navigation, route }: Props) {
                     type="primary"
                     title={
                       <Trans
-                        i18nKey={
-                          !bridgePending
-                            ? "common.continue"
-                            : "send.amount.loadingNetwork"
-                        }
+                        i18nKey={!bridgePending ? "common.continue" : "send.amount.loadingNetwork"}
                       />
                     }
                     onPress={onContinue}

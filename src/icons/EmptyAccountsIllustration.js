@@ -24,30 +24,9 @@ export default function EmptyAccountsIllustration() {
           rx="4"
         />
         <G fillRule="nonzero" opacity=".6" transform="translate(16 26)">
-          <Rect
-            width="67.375"
-            height="2"
-            x="156.625"
-            y="6"
-            fill="#999"
-            rx="1"
-          />
-          <Rect
-            width="40.25"
-            height="2"
-            x="183.75"
-            y="16"
-            fill="#D8D8D8"
-            rx="1"
-          />
-          <Rect
-            width="56.897"
-            height="2"
-            x="30.897"
-            y="11"
-            fill="#999"
-            rx="1"
-          />
+          <Rect width="67.375" height="2" x="156.625" y="6" fill="#999" rx="1" />
+          <Rect width="40.25" height="2" x="183.75" y="16" fill="#D8D8D8" rx="1" />
+          <Rect width="56.897" height="2" x="30.897" y="11" fill="#999" rx="1" />
           <Circle cx="12" cy="12" r="12" fill="#999" />
         </G>
       </G>

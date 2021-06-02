@@ -28,9 +28,7 @@ export default function Settings({ navigation }: Props) {
   const { t } = useTranslation();
   const accounts = useSelector(accountsSelector);
 
-  const [debugVisible, setDebugVisible] = useState(
-    Config.FORCE_DEBUG_VISIBLE || false,
-  );
+  const [debugVisible, setDebugVisible] = useState(Config.FORCE_DEBUG_VISIBLE || false);
   const count = useRef(0);
   const debugTimeout = useRef(onTimeout);
 

@@ -50,18 +50,12 @@ export default function AssetGraphCard({
   const [hoveredItem, setHoverItem] = useState<?Item>();
   const [, setTimeRange, timeRangeItems] = useTimeRange();
   const mapCryptoValue = useCallback(d => d.value || 0, []);
-  const mapCounterValue = useCallback(
-    d => (d.countervalue ? d.countervalue : 0),
-    [],
-  );
+  const mapCounterValue = useCallback(d => (d.countervalue ? d.countervalue : 0), []);
 
   const isAvailable = !useCounterValue || countervalueAvailable;
 
   const unit = currency.units[0];
-  const graphColor = ensureContrast(
-    getCurrencyColor(currency),
-    colors.background,
-  );
+  const graphColor = ensureContrast(getCurrencyColor(currency), colors.background);
 
   return (
     <Card style={styles.root}>
@@ -149,11 +143,7 @@ function GraphCardHeader({
         <View style={styles.subtitleContainer}>
           {isLoading ? (
             <>
-              <Placeholder
-                width={50}
-                containerHeight={19}
-                style={{ marginRight: 10 }}
-              />
+              <Placeholder width={50} containerHeight={19} style={{ marginRight: 10 }} />
               <Placeholder width={50} containerHeight={19} />
             </>
           ) : hoveredItem ? (
@@ -162,11 +152,7 @@ function GraphCardHeader({
             </LText>
           ) : valueChange ? (
             <View style={styles.delta}>
-              <Delta
-                percent
-                valueChange={valueChange}
-                style={styles.deltaPercent}
-              />
+              <Delta percent valueChange={valueChange} style={styles.deltaPercent} />
               <Delta valueChange={valueChange} unit={unit} />
             </View>
           ) : (

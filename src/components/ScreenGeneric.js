@@ -10,12 +10,7 @@ type Props<T> = {
   extraData?: T,
 };
 
-function ScreenGeneric<T>({
-  children,
-  Header,
-  onPressHeader,
-  extraData,
-}: Props<T>) {
+function ScreenGeneric<T>({ children, Header, onPressHeader, extraData }: Props<T>) {
   const { colors } = useTheme();
   return (
     <View style={styles.container}>

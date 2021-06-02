@@ -3,10 +3,7 @@
 import React, { useCallback, useState, useMemo } from "react";
 import { TouchableOpacity, View, StyleSheet } from "react-native";
 import type { CompoundAccountSummary } from "@ledgerhq/live-common/lib/compound/types";
-import {
-  getAccountName,
-  getAccountCurrency,
-} from "@ledgerhq/live-common/lib/account/helpers";
+import { getAccountName, getAccountCurrency } from "@ledgerhq/live-common/lib/account/helpers";
 import { getAccountCapabilities } from "@ledgerhq/live-common/lib/compound/logic";
 import { useNavigation, useTheme } from "@react-navigation/native";
 import { Trans } from "react-i18next";
@@ -30,13 +27,7 @@ type RowProps = {
 export default function ActiveAccountRow({ item }: RowProps) {
   const { colors } = useTheme();
   const navigation = useNavigation();
-  const {
-    account,
-    parentAccount,
-    totalSupplied,
-    accruedInterests,
-    status,
-  } = item;
+  const { account, parentAccount, totalSupplied, accruedInterests, status } = item;
   const { token } = account;
   const name = getAccountName(parentAccount || account);
   const accountName = getAccountName(account);
@@ -73,45 +64,29 @@ export default function ActiveAccountRow({ item }: RowProps) {
   const data = useMemo(
     () => [
       {
-        label: (
-          <Trans i18nKey="transfer.lending.dashboard.activeAccount.account" />
-        ),
+        label: <Trans i18nKey="transfer.lending.dashboard.activeAccount.account" />,
         Component: <LText semiBold>{name}</LText>,
       },
       {
-        label: (
-          <Trans i18nKey="transfer.lending.dashboard.activeAccount.amountSupplied" />
-        ),
+        label: <Trans i18nKey="transfer.lending.dashboard.activeAccount.amountSupplied" />,
         Component: (
           <LText semiBold>
-            <CurrencyUnitValue
-              unit={token.units[0]}
-              value={totalSupplied}
-              showCode
-            />
+            <CurrencyUnitValue unit={token.units[0]} value={totalSupplied} showCode />
           </LText>
         ),
       },
       {
-        label: (
-          <Trans i18nKey="transfer.lending.dashboard.activeAccount.interestEarned" />
-        ),
+        label: <Trans i18nKey="transfer.lending.dashboard.activeAccount.interestEarned" />,
         Component: (
           <LText semiBold>
-            <CurrencyUnitValue
-              unit={token.units[0]}
-              value={accruedInterests}
-              showCode
-            />
+            <CurrencyUnitValue unit={token.units[0]} value={accruedInterests} showCode />
           </LText>
         ),
       },
       ...(status
         ? [
             {
-              label: (
-                <Trans i18nKey="transfer.lending.dashboard.activeAccount.status" />
-              ),
+              label: <Trans i18nKey="transfer.lending.dashboard.activeAccount.status" />,
               Component: (
                 <LText
                   semiBold
@@ -121,9 +96,7 @@ export default function ActiveAccountRow({ item }: RowProps) {
                     statusStyles[status],
                   ]}
                 >
-                  <Trans
-                    i18nKey={`transfer.lending.dashboard.activeAccount.${status}`}
-                  />
+                  <Trans i18nKey={`transfer.lending.dashboard.activeAccount.${status}`} />
                 </LText>
               ),
             },
@@ -145,9 +118,7 @@ export default function ActiveAccountRow({ item }: RowProps) {
   const actions = useMemo(
     () => [
       {
-        label: (
-          <Trans i18nKey="transfer.lending.dashboard.activeAccount.approve" />
-        ),
+        label: <Trans i18nKey="transfer.lending.dashboard.activeAccount.approve" />,
         Icon: (props: *) => (
           <Circle {...props} bg={colors.lightLive}>
             <Plus size={24} color={colors.live} />
@@ -169,14 +140,9 @@ export default function ActiveAccountRow({ item }: RowProps) {
         },
       },
       {
-        label: (
-          <Trans i18nKey="transfer.lending.dashboard.activeAccount.supply" />
-        ),
+        label: <Trans i18nKey="transfer.lending.dashboard.activeAccount.supply" />,
         Icon: (props: *) => (
-          <Circle
-            {...props}
-            bg={!canSupply ? colors.lightFog : colors.lightLive}
-          >
+          <Circle {...props} bg={!canSupply ? colors.lightFog : colors.lightLive}>
             <Supply size={24} color={!canSupply ? colors.grey : colors.live} />
           </Circle>
         ),
@@ -196,18 +162,10 @@ export default function ActiveAccountRow({ item }: RowProps) {
         },
       },
       {
-        label: (
-          <Trans i18nKey="transfer.lending.dashboard.activeAccount.withdraw" />
-        ),
+        label: <Trans i18nKey="transfer.lending.dashboard.activeAccount.withdraw" />,
         Icon: (props: *) => (
-          <Circle
-            {...props}
-            bg={!canWithdraw ? colors.lightFog : colors.lightLive}
-          >
-            <Withdraw
-              size={24}
-              color={!canWithdraw ? colors.grey : colors.live}
-            />
+          <Circle {...props} bg={!canWithdraw ? colors.lightFog : colors.lightLive}>
+            <Withdraw size={24} color={!canWithdraw ? colors.grey : colors.live} />
           </Circle>
         ),
         event: "Lend Withdraw Manage ActiveAccounts",
@@ -249,12 +207,7 @@ export default function ActiveAccountRow({ item }: RowProps) {
       >
         <CurrencyIcon radius={100} currency={token} size={32} />
         <View style={styles.currencySection}>
-          <LText
-            numberOfLines={1}
-            semiBold
-            style={styles.subTitle}
-            color="grey"
-          >
+          <LText numberOfLines={1} semiBold style={styles.subTitle} color="grey">
             {name}
           </LText>
           <LText numberOfLines={1} semiBold style={styles.title}>
@@ -263,11 +216,7 @@ export default function ActiveAccountRow({ item }: RowProps) {
         </View>
         <View style={[styles.currencySection, styles.alignEnd]}>
           <LText semiBold>
-            <CurrencyUnitValue
-              unit={token.units[0]}
-              value={totalSupplied}
-              showCode
-            />
+            <CurrencyUnitValue unit={token.units[0]} value={totalSupplied} showCode />
           </LText>
           <LText style={styles.subTitle} color="grey">
             <CounterValue

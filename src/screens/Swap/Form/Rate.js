@@ -6,10 +6,7 @@ import { useTheme } from "@react-navigation/native";
 import { Trans } from "react-i18next";
 import Icon from "react-native-vector-icons/FontAwesome5Pro";
 import { BigNumber } from "bignumber.js";
-import type {
-  CryptoCurrency,
-  TokenCurrency,
-} from "@ledgerhq/live-common/lib/types";
+import type { CryptoCurrency, TokenCurrency } from "@ledgerhq/live-common/lib/types";
 import ClockIcon from "../../../icons/Clock";
 import CurrencyUnitValue from "../../../components/CurrencyUnitValue";
 import CountdownTimer from "../../../components/CountdownTimer";
@@ -43,11 +40,7 @@ const Rate = ({
             <View style={{ marginRight: 8 }}>
               <ClockIcon color={colors.grey} size={12} />
             </View>
-            <CountdownTimer
-              color={colors.grey}
-              end={rateExpiration}
-              callback={onRatesExpired}
-            />
+            <CountdownTimer color={colors.grey} end={rateExpiration} callback={onRatesExpired} />
           </View>
         ) : null}
         <Touchable
@@ -55,11 +48,7 @@ const Rate = ({
           event="Swap trade method help"
           onPress={() => setIsModalVisible(true)}
         >
-          <Icon
-            color={colors.grey}
-            name={tradeMethod === "fixed" ? "lock" : "lock-open"}
-            light
-          />
+          <Icon color={colors.grey} name={tradeMethod === "fixed" ? "lock" : "lock-open"} light />
           <LText color={colors.grey} style={styles.price}>
             <CurrencyUnitValue
               value={BigNumber(10).pow(fromCurrency.units[0].magnitude)}
@@ -90,13 +79,7 @@ const Rate = ({
             <Trans i18nKey={"transfer.swap.tradeMethod.modalTitle"} />
           </LText>
           <View style={styles.modalMethod}>
-            <Icon
-              style={styles.modalIcon}
-              color={colors.grey}
-              name={"lock-open"}
-              size={20}
-              light
-            />
+            <Icon style={styles.modalIcon} color={colors.grey} name={"lock-open"} size={20} light />
             <View style={styles.modalDesc}>
               <LText semiBold style={styles.methodTitle}>
                 <Trans i18nKey={"transfer.swap.tradeMethod.float"} />
@@ -107,13 +90,7 @@ const Rate = ({
             </View>
           </View>
           <View style={styles.modalMethod}>
-            <Icon
-              style={styles.modalIcon}
-              color={colors.grey}
-              name={"lock"}
-              size={20}
-              light
-            />
+            <Icon style={styles.modalIcon} color={colors.grey} name={"lock"} size={20} light />
             <View style={styles.modalDesc}>
               <LText semiBold style={styles.methodTitle}>
                 <Trans i18nKey={"transfer.swap.tradeMethod.fixed"} />

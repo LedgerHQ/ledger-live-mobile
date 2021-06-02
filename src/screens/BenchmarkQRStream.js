@@ -62,10 +62,7 @@ class BenchmarkQRStream extends PureComponent<
         ? { width, height: width / cameraRatio }
         : { width: height / cameraRatio, height };
     const viewFinderSize = (width > height ? height : width) * (2 / 3);
-    const wrapperStyle =
-      width > height
-        ? { height, alignSelf: "stretch" }
-        : { width, flexGrow: 1 };
+    const wrapperStyle = width > height ? { height, alignSelf: "stretch" } : { width, flexGrow: 1 };
 
     if (end) {
       return (
@@ -102,43 +99,17 @@ class BenchmarkQRStream extends PureComponent<
 
                 <View style={styles.row}>
                   <View style={[darkenStyle]} />
-                  <View
-                    style={{ width: viewFinderSize, height: viewFinderSize }}
-                  >
+                  <View style={{ width: viewFinderSize, height: viewFinderSize }}>
                     <View style={styles.innerRow}>
-                      <View
-                        style={[
-                          styles.border,
-                          styles.borderLeft,
-                          styles.borderTop,
-                        ]}
-                      />
+                      <View style={[styles.border, styles.borderLeft, styles.borderTop]} />
                       <View style={styles.border} />
-                      <View
-                        style={[
-                          styles.border,
-                          styles.borderRight,
-                          styles.borderTop,
-                        ]}
-                      />
+                      <View style={[styles.border, styles.borderRight, styles.borderTop]} />
                     </View>
                     <View style={styles.innerRow} />
                     <View style={styles.innerRow}>
-                      <View
-                        style={[
-                          styles.border,
-                          styles.borderLeft,
-                          styles.borderBottom,
-                        ]}
-                      />
+                      <View style={[styles.border, styles.borderLeft, styles.borderBottom]} />
                       <View style={styles.border} />
-                      <View
-                        style={[
-                          styles.border,
-                          styles.borderRight,
-                          styles.borderBottom,
-                        ]}
-                      />
+                      <View style={[styles.border, styles.borderRight, styles.borderBottom]} />
                     </View>
                   </View>
                   <View style={[darkenStyle]} />

@@ -54,20 +54,12 @@ function OnboardingStepTerms({ navigation }: *) {
       title={<Trans i18nKey="Terms.title" />}
       footer={
         <View style={[styles.footer, { borderTopColor: colors.lightFog }]}>
-          <Touchable
-            event="TermsAcceptSwitch"
-            onPress={onSwitch}
-            style={[styles.switchRow]}
-          >
+          <Touchable event="TermsAcceptSwitch" onPress={onSwitch} style={[styles.switchRow]}>
             <CheckBox style={styles.checkbox} isChecked={toggle} />
             <LText semiBold style={styles.switchLabel}>
               <Trans i18nKey="Terms.switchLabel">
                 {""}
-                <LText
-                  semiBold
-                  onPress={() => Linking.openURL(urls.terms)}
-                  color="live"
-                />
+                <LText semiBold onPress={() => Linking.openURL(urls.terms)} color="live" />
                 {""}
               </Trans>
             </LText>
@@ -83,9 +75,7 @@ function OnboardingStepTerms({ navigation }: *) {
                 {""}
                 <LText
                   semiBold
-                  onPress={() =>
-                    Linking.openURL(urls.privacyPolicy[locale || "en"])
-                  }
+                  onPress={() => Linking.openURL(urls.privacyPolicy[locale || "en"])}
                   color="live"
                 />
                 {""}
@@ -107,11 +97,7 @@ function OnboardingStepTerms({ navigation }: *) {
         <SafeMarkdown markdown={markdown} />
       ) : error ? (
         <View>
-          <GenericErrorView
-            error={error}
-            withIcon={false}
-            withDescription={false}
-          />
+          <GenericErrorView error={error} withIcon={false} withDescription={false} />
           <ExternalLink
             text={<Trans i18nKey="Terms.read" />}
             onPress={() => Linking.openURL(url)}

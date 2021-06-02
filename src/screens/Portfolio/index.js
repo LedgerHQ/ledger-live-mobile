@@ -1,28 +1,16 @@
 // @flow
 import React, { useRef, useState, useCallback } from "react";
 import { useSelector } from "react-redux";
-import {
-  StyleSheet,
-  SectionList,
-  FlatList,
-  SafeAreaView,
-  View,
-} from "react-native";
+import { StyleSheet, SectionList, FlatList, SafeAreaView, View } from "react-native";
 import Animated, { interpolate } from "react-native-reanimated";
 import { createNativeWrapper } from "react-native-gesture-handler";
 import type { SectionBase } from "react-native/Libraries/Lists/SectionList";
 import type { Operation } from "@ledgerhq/live-common/lib/types";
 import { useFocusEffect, useTheme } from "@react-navigation/native";
-import {
-  groupAccountsOperationsByDay,
-  isAccountEmpty,
-} from "@ledgerhq/live-common/lib/account";
+import { groupAccountsOperationsByDay, isAccountEmpty } from "@ledgerhq/live-common/lib/account";
 
 import { useRefreshAccountsOrdering } from "../../actions/general";
-import {
-  accountsSelector,
-  flattenAccountsSelector,
-} from "../../reducers/accounts";
+import { accountsSelector, flattenAccountsSelector } from "../../reducers/accounts";
 import { counterValueCurrencySelector } from "../../reducers/settings";
 import { usePortfolio } from "../../actions/portfolio";
 import SectionHeader from "../../components/SectionHeader";
@@ -112,12 +100,7 @@ export default function PortfolioScreen({ navigation }: Props) {
 
     return accounts.length === 0 ? null : (
       <View style={[styles.stickyActions]}>
-        <Animated.View
-          style={[
-            styles.styckyActionsInner,
-            { transform: [{ translateY: top }] },
-          ]}
-        >
+        <Animated.View style={[styles.styckyActionsInner, { transform: [{ translateY: top }] }]}>
           <FabActions />
         </Animated.View>
       </View>
@@ -135,9 +118,7 @@ export default function PortfolioScreen({ navigation }: Props) {
   }) {
     const account = allAccounts.find(a => a.id === item.accountId);
     const parentAccount =
-      account && account.type !== "Account"
-        ? accounts.find(a => a.id === account.parentId)
-        : null;
+      account && account.type !== "Account" ? accounts.find(a => a.id === account.parentId) : null;
 
     if (!account) return null;
 
@@ -165,8 +146,7 @@ export default function PortfolioScreen({ navigation }: Props) {
     withSubAccounts: true,
   });
 
-  const showingPlaceholder =
-    accounts.length === 0 || accounts.every(isAccountEmpty);
+  const showingPlaceholder = accounts.length === 0 || accounts.every(isAccountEmpty);
 
   return (
     <SafeAreaView
@@ -193,9 +173,7 @@ export default function PortfolioScreen({ navigation }: Props) {
       <AnimatedFlatListWithRefreshControl
         ref={ref}
         data={[
-          ...(accounts.length > 0 && !accounts.every(isAccountEmpty)
-            ? [<Carousel />]
-            : []),
+          ...(accounts.length > 0 && !accounts.every(isAccountEmpty) ? [<Carousel />] : []),
           ListHeaderComponent(),
           StickyActions(),
           <SectionList
@@ -236,9 +214,7 @@ export default function PortfolioScreen({ navigation }: Props) {
           ],
           { useNativeDriver: true },
         )}
-        testID={
-          accounts.length ? "PortfolioAccountsList" : "PortfolioEmptyAccount"
-        }
+        testID={accounts.length ? "PortfolioAccountsList" : "PortfolioEmptyAccount"}
       />
       <MigrateAccountsBanner />
     </SafeAreaView>

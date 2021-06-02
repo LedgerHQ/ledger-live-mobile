@@ -4,10 +4,7 @@ import { useTranslation } from "react-i18next";
 import { useSelector, useDispatch } from "react-redux";
 import { TouchableOpacity, View, StyleSheet, SectionList } from "react-native";
 import { findTokenById } from "@ledgerhq/live-common/lib/currencies";
-import type {
-  CryptoCurrency,
-  TokenCurrency,
-} from "@ledgerhq/live-common/lib/types";
+import type { CryptoCurrency, TokenCurrency } from "@ledgerhq/live-common/lib/types";
 import { useTheme } from "@react-navigation/native";
 import SettingsRow from "../../../components/SettingsRow";
 import { showToken } from "../../../actions/settings";
@@ -28,16 +25,9 @@ export default function AccountsSettings({ navigation }: { navigation: any }) {
   const dispatch = useDispatch();
 
   const renderSectionHeader = useCallback(
-    ({
-      section: { parentCurrency },
-    }: {
-      section: { parentCurrency: CryptoCurrency },
-    }) => (
+    ({ section: { parentCurrency } }: { section: { parentCurrency: CryptoCurrency } }) => (
       <View style={styles.section}>
-        <LText
-          primary
-          style={[styles.sectionTitle, { backgroundColor: colors.card }]}
-        >
+        <LText primary style={[styles.sectionTitle, { backgroundColor: colors.card }]}>
           {parentCurrency.name}
         </LText>
       </View>

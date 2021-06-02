@@ -1,13 +1,7 @@
 // @flow
 
 import React, { useCallback, useState } from "react";
-import {
-  StyleSheet,
-  View,
-  Linking,
-  Image,
-  TouchableOpacity,
-} from "react-native";
+import { StyleSheet, View, Linking, Image, TouchableOpacity } from "react-native";
 import { Trans } from "react-i18next";
 
 import { useClock, loop } from "react-native-redash/lib/module/v1";
@@ -52,15 +46,13 @@ function OnboardingStepWelcome({ navigation }: *) {
   const { colors } = useTheme();
   const buy = useCallback(() => Linking.openURL(urls.buyNanoX), []);
 
-  const next = useCallback(
-    () => navigation.navigate(ScreenName.OnboardingTermsOfUse),
-    [navigation],
-  );
+  const next = useCallback(() => navigation.navigate(ScreenName.OnboardingTermsOfUse), [
+    navigation,
+  ]);
 
-  const onLanguageSelect = useCallback(
-    () => navigation.navigate(ScreenName.OnboardingLanguage),
-    [navigation],
-  );
+  const onLanguageSelect = useCallback(() => navigation.navigate(ScreenName.OnboardingLanguage), [
+    navigation,
+  ]);
 
   const [animY] = useState(new Animated.Value(0));
 
@@ -150,11 +142,7 @@ function OnboardingStepWelcome({ navigation }: *) {
       <View style={styles.logo}>
         <Image style={[styles.bgImage]} resizeMode="cover" source={welcomeBg} />
         <AnimatedImg
-          style={[
-            styles.bgImageLayer,
-            styles.bgImageLayer1,
-            { transform: [{ translateY }] },
-          ]}
+          style={[styles.bgImageLayer, styles.bgImageLayer1, { transform: [{ translateY }] }]}
           resizeMode="contain"
           source={welcomeLogoLayer1}
         />
@@ -201,17 +189,9 @@ function OnboardingStepWelcome({ navigation }: *) {
           <LText style={styles.subTitle} color="grey">
             <Trans i18nKey="onboarding.stepWelcome.noDevice" />
           </LText>
-          <Touchable
-            event="WelcomeBuy"
-            onPress={buy}
-            style={styles.buyTouch}
-            hitSlop={hitSlop}
-          >
+          <Touchable event="WelcomeBuy" onPress={buy} style={styles.buyTouch} hitSlop={hitSlop}>
             <LText semiBold style={[styles.subTitle, styles.buy]} color="live">
-              <Trans
-                i18nKey="onboarding.stepWelcome.buy"
-                values={deviceNames.nanoX}
-              />
+              <Trans i18nKey="onboarding.stepWelcome.buy" values={deviceNames.nanoX} />
             </LText>
           </Touchable>
         </View>

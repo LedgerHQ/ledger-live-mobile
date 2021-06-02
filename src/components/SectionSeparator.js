@@ -13,38 +13,16 @@ type Props = {
   style?: *,
 };
 
-export const ArrowDownCircle = ({
-  size = 24,
-  big,
-}: {
-  size?: number,
-  big?: boolean,
-}) => {
+export const ArrowDownCircle = ({ size = 24, big }: { size?: number, big?: boolean }) => {
   const { colors } = useTheme();
   return (
-    <View
-      style={[
-        styles.circle,
-        { borderColor: colors.lightFog },
-        big ? styles.arrowBig : null,
-      ]}
-    >
-      <Icon
-        name={"ios-arrow-round-down"}
-        size={big ? 32 : size}
-        color={colors.live}
-      />
+    <View style={[styles.circle, { borderColor: colors.lightFog }, big ? styles.arrowBig : null]}>
+      <Icon name={"ios-arrow-round-down"} size={big ? 32 : size} color={colors.live} />
     </View>
   );
 };
 
-export default function SectionSeparator({
-  thin,
-  lineColor,
-  children,
-  style,
-  noMargin,
-}: Props) {
+export default function SectionSeparator({ thin, lineColor, children, style, noMargin }: Props) {
   const { colors } = useTheme();
   const lineStyle = [
     styles.line,
@@ -55,9 +33,7 @@ export default function SectionSeparator({
   return (
     <View style={[styles.root, style]}>
       <View style={lineStyle} />
-      {children ? (
-        <View style={noMargin ? null : styles.node}>{children}</View>
-      ) : null}
+      {children ? <View style={noMargin ? null : styles.node}>{children}</View> : null}
       <View style={lineStyle} />
     </View>
   );

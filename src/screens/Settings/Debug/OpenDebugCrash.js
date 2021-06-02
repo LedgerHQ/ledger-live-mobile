@@ -8,9 +8,6 @@ export default function OpenDebugCrash() {
   const navigation = useNavigation();
 
   return (
-    <SettingsRow
-      title="Debug crash"
-      onPress={() => navigation.navigate(ScreenName.DebugCrash)}
-    />
+    <SettingsRow title="Debug crash" onPress={() => navigation.navigate(ScreenName.DebugCrash)} />
   );
 }

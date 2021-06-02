@@ -60,10 +60,7 @@ export default function EthereumGasLimit({
             </LText>
           )}
           <LText
-            style={[
-              styles.link,
-              { color: colors.live, textDecorationColor: colors.live },
-            ]}
+            style={[styles.link, { color: colors.live, textDecorationColor: colors.live }]}
             onPress={editGasLimit}
           >
             {t("common.edit")}

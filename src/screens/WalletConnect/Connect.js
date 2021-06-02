@@ -33,10 +33,7 @@ import { rgba } from "../../colors";
 const DottedLine = ({ colors }: { colors: * }) => (
   <View style={styles.dottedLineContainer}>
     {_.map(_.range(0, 6), i => (
-      <View
-        style={[styles.dot, { backgroundColor: rgba(colors.darkBlue, 0.2) }]}
-        key={i}
-      />
+      <View style={[styles.dot, { backgroundColor: rgba(colors.darkBlue, 0.2) }]} key={i} />
     ))}
   </View>
 );
@@ -105,9 +102,7 @@ export default function Connect({ route, navigation }: Props) {
           },
         ]}
       >
-        {!account ||
-        account.type !== "Account" ||
-        wcContext.status === STATUS.ERROR ? (
+        {!account || account.type !== "Account" || wcContext.status === STATUS.ERROR ? (
           <View style={styles.centerContainer}>
             <CrossRound size={50} color={colors.alert} />
             <LText primary style={styles.error}>
@@ -127,10 +122,7 @@ export default function Connect({ route, navigation }: Props) {
                   style={styles.logo}
                 />
                 <DottedLine colors={colors} />
-                <Image
-                  source={require("../../images/logo_small.png")}
-                  style={styles.logo}
-                />
+                <Image source={require("../../images/logo_small.png")} style={styles.logo} />
               </View>
               <LText semiBold style={styles.peerName}>
                 {wcContext.dappInfo.name}
@@ -142,12 +134,7 @@ export default function Connect({ route, navigation }: Props) {
             <LText primary style={[styles.details, styles.infos]}>
               {t("walletconnect.disclaimer")}
             </LText>
-            <View
-              style={[
-                styles.accountContainer,
-                { borderColor: rgba(colors.darkBlue, 0.1) },
-              ]}
-            >
+            <View style={[styles.accountContainer, { borderColor: rgba(colors.darkBlue, 0.1) }]}>
               <View style={styles.accountTitleContainer}>
                 <CurrencyIcon size={24} currency={account.currency} />
                 <LText semiBold primary style={styles.accountName}>
@@ -172,10 +159,7 @@ export default function Connect({ route, navigation }: Props) {
                   style={styles.logo}
                 />
                 <View style={styles.checkContainer}>
-                  <Circle
-                    bg={wcContext.socketReady ? colors.green : colors.orange}
-                    size={24}
-                  >
+                  <Circle bg={wcContext.socketReady ? colors.green : colors.orange} size={24}>
                     {wcContext.socketReady ? (
                       <Check color="white" size={12} />
                     ) : (
@@ -196,19 +180,14 @@ export default function Connect({ route, navigation }: Props) {
             {wcContext.socketReady ? (
               <View style={styles.messagesContainer}>
                 <Alert type="primary">
-                  <Trans
-                    i18nKey="walletconnect.info"
-                    values={{ name: wcContext.dappInfo?.name }}
-                  />
+                  <Trans i18nKey="walletconnect.info" values={{ name: wcContext.dappInfo?.name }} />
                 </Alert>
                 <View style={styles.messagesSeparator} />
                 <Alert type="warning">{t("walletconnect.warning")}</Alert>
               </View>
             ) : (
               <View style={styles.messagesContainer}>
-                <Alert type="warning">
-                  {t("walletconnect.warningdisconnected")}
-                </Alert>
+                <Alert type="warning">{t("walletconnect.warningdisconnected")}</Alert>
               </View>
             )}
           </>
@@ -232,9 +211,7 @@ export default function Connect({ route, navigation }: Props) {
           </>
         )}
       </View>
-      {wcContext.status === STATUS.CONNECTING &&
-      account &&
-      wcContext.dappInfo ? (
+      {wcContext.status === STATUS.CONNECTING && account && wcContext.dappInfo ? (
         <View style={styles.buttonsContainer}>
           <Button
             containerStyle={styles.buttonContainer}
@@ -256,12 +233,7 @@ export default function Connect({ route, navigation }: Props) {
           />
         </View>
       ) : wcContext.status === STATUS.CONNECTED ? (
-        <View
-          style={[
-            styles.buttonsContainer,
-            { backgroundColor: colors.background },
-          ]}
-        >
+        <View style={[styles.buttonsContainer, { backgroundColor: colors.background }]}>
           <Button
             containerStyle={styles.buttonContainer}
             event="wc connected disconnect"

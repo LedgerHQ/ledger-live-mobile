@@ -15,11 +15,7 @@ type Props = {
   compoundSummary: CompoundAccountSummary,
 };
 
-export default function AccountBodyHeader({
-  account,
-  parentAccount,
-  compoundSummary,
-}: Props) {
+export default function AccountBodyHeader({ account, parentAccount, compoundSummary }: Props) {
   const { colors } = useTheme();
   const { closed, opened } = compoundSummary;
 
@@ -36,9 +32,7 @@ export default function AccountBodyHeader({
           <LText semiBold style={styles.title}>
             <Trans i18nKey="transfer.lending.account.openLoans" />
           </LText>
-          <View
-            style={[styles.container, { backgroundColor: colors.background }]}
-          >
+          <View style={[styles.container, { backgroundColor: colors.background }]}>
             {opened.map((item, index) => (
               <ActiveAccountRow
                 // $FlowFixMe
@@ -65,16 +59,9 @@ export default function AccountBodyHeader({
             style={[styles.container, { backgroundColor: colors.background }]}
             data={closed}
             renderItem={renderClosedRow}
-            keyExtractor={(item, index) =>
-              `ClosedLoans-${item.endDate.toDateString()}${index}`
-            }
+            keyExtractor={(item, index) => `ClosedLoans-${item.endDate.toDateString()}${index}`}
             ItemSeparatorComponent={() => (
-              <View
-                style={[
-                  styles.separator,
-                  { backgroundColor: colors.background },
-                ]}
-              />
+              <View style={[styles.separator, { backgroundColor: colors.background }]} />
             )}
           />
         </>

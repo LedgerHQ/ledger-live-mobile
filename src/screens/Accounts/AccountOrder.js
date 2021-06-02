@@ -22,11 +22,7 @@ export default function AccountOrder() {
   useRefreshAccountsOrderingEffect({ onUnmount: true });
 
   return (
-    <Touchable
-      event="AccountOrderOpen"
-      style={{ marginHorizontal: 16 }}
-      onPress={onPress}
-    >
+    <Touchable event="AccountOrderOpen" style={{ marginHorizontal: 16 }} onPress={onPress}>
       <Icon name="sliders" color={colors.grey} size={20} />
       <AccountOrderModal isOpened={isOpened} onClose={onClose} />
     </Touchable>

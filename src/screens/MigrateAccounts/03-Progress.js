@@ -3,10 +3,7 @@
 import { migrateAccounts } from "@ledgerhq/live-common/lib/account";
 import { getCurrencyBridge } from "@ledgerhq/live-common/lib/bridge";
 import { getCryptoCurrencyById } from "@ledgerhq/live-common/lib/currencies";
-import type {
-  ScanAccountEvent,
-  Account,
-} from "@ledgerhq/live-common/lib/types";
+import type { ScanAccountEvent, Account } from "@ledgerhq/live-common/lib/types";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Trans } from "react-i18next";
 import { StyleSheet, View } from "react-native";
@@ -22,10 +19,7 @@ import RoundedCurrencyIcon from "../../components/RoundedCurrencyIcon";
 import TranslatedError from "../../components/TranslatedError";
 import logger from "../../logger";
 import extraStatusBarPadding from "../../logic/extraStatusBarPadding";
-import {
-  accountsSelector,
-  migratableAccountsSelector,
-} from "../../reducers/accounts";
+import { accountsSelector, migratableAccountsSelector } from "../../reducers/accounts";
 import { blacklistedTokenIdsSelector } from "../../reducers/settings";
 
 const forceInset = { bottom: "always" };
@@ -43,10 +37,7 @@ export default function Progress({ navigation, route }: Props) {
   const migratableAccounts = useSelector(migratableAccountsSelector);
   const currencyIds = useSelector(state =>
     migratableAccountsSelector(state)
-      .reduce(
-        (c, a) => (c.includes(a.currency.id) ? c : [...c, a.currency.id]),
-        [],
-      )
+      .reduce((c, a) => (c.includes(a.currency.id) ? c : [...c, a.currency.id]), [])
       .sort(),
   );
   const dispatch = useDispatch();
@@ -59,9 +50,7 @@ export default function Progress({ navigation, route }: Props) {
   const { currency, device } = route.params || {};
 
   const noticeAwareStatus =
-    status === "done" && prevAccountCount.current === migratableAccounts.length
-      ? "notice"
-      : status;
+    status === "done" && prevAccountCount.current === migratableAccounts.length ? "notice" : status;
 
   const finishedWithDevice =
     migratableAccounts.length &&
@@ -114,20 +103,10 @@ export default function Progress({ navigation, route }: Props) {
     unsub();
     scanSubscription.current = getCurrencyBridge(currency)
       .scanAccounts({ currency, deviceId, syncConfig })
-      .pipe(
-        reduce(
-          (all: Account[], event: ScanAccountEvent) =>
-            all.concat(event.account),
-          [],
-        ),
-      )
+      .pipe(reduce((all: Account[], event: ScanAccountEvent) => all.concat(event.account), []))
       .subscribe({
         next: scannedAccounts => {
-          dispatch(
-            setAccounts(
-              migrateAccounts({ scannedAccounts, existingAccounts: accounts }),
-            ),
-          );
+          dispatch(setAccounts(migrateAccounts({ scannedAccounts, existingAccounts: accounts })));
           setStatus("done");
         },
         error: err => {
@@ -155,11 +134,7 @@ export default function Progress({ navigation, route }: Props) {
       ]}
     >
       <View style={styles.content}>
-        <RoundedCurrencyIcon
-          currency={currency}
-          size={32}
-          extra={noticeAwareStatus}
-        />
+        <RoundedCurrencyIcon currency={currency} size={32} extra={noticeAwareStatus} />
         <LText style={styles.title} semiBold>
           {status === "error" ? (
             <TranslatedError error={error} field="title" />

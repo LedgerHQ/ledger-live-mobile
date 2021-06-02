@@ -109,9 +109,7 @@ function DoubleCounterValue({
             />
           </LText>
         </View>
-        <View
-          style={[styles.separator, { backgroundColor: colors.lightFog }]}
-        />
+        <View style={[styles.separator, { backgroundColor: colors.lightFog }]} />
         <View style={styles.row}>
           <View style={styles.column}>
             <LText bold style={styles.title}>

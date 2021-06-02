@@ -97,9 +97,7 @@ class DisplayResult extends Component<Props, State> {
       // select all by default
       selectedAccounts = items.reduce(
         (acc, cur) =>
-          cur.mode !== "id" && cur.mode !== "unsupported"
-            ? concat(acc, cur.account.id)
-            : acc,
+          cur.mode !== "id" && cur.mode !== "unsupported" ? concat(acc, cur.account.id) : acc,
         [],
       );
     }
@@ -143,9 +141,7 @@ class DisplayResult extends Component<Props, State> {
     />
   );
 
-  renderSectionHeader = ({ section: { mode } }) => (
-    <ResultSection mode={mode} />
-  );
+  renderSectionHeader = ({ section: { mode } }) => <ResultSection mode={mode} />;
 
   onSwitchSettings = importSettings => this.setState({ importSettings });
 
@@ -162,9 +158,7 @@ class DisplayResult extends Component<Props, State> {
       <LText style={styles.emptyNotice}>
         <Trans i18nKey="account.import.result.descEmpty">
           <LText semiBold>No accounts</LText>
-          {
-            "found on your desktop app, please try again or continue the onboarding."
-          }
+          {"found on your desktop app, please try again or continue the onboarding."}
         </Trans>
       </LText>
     </View>

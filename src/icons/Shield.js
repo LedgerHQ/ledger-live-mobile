@@ -15,10 +15,6 @@ export default ({ size = 16, color }: Props) => (
       stroke={color}
       strokeWidth="1.5"
     />
-    <Path
-      d="M7.53711 11.4091L10.5123 14.3843L16.4627 8.4339"
-      stroke={color}
-      strokeWidth="1.5"
-    />
+    <Path d="M7.53711 11.4091L10.5123 14.3843L16.4627 8.4339" stroke={color} strokeWidth="1.5" />
   </Svg>
 );

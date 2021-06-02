@@ -13,7 +13,5 @@ export default ({
   navigation: any,
 }) => {
   const C = perFamily[account.currency.family];
-  return C ? (
-    <C transaction={transaction} account={account} navigation={navigation} />
-  ) : null;
+  return C ? <C transaction={transaction} account={account} navigation={navigation} /> : null;
 };

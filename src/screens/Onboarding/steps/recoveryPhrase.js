@@ -17,17 +17,10 @@ function OnboardingStepRecoveryPhrase({ navigation, route }: *) {
 
   const { deviceModelId } = route.params;
 
-  const scenes = useMemo(() => getRecoveryPhraseScenes(deviceModelId), [
-    deviceModelId,
-  ]);
+  const scenes = useMemo(() => getRecoveryPhraseScenes(deviceModelId), [deviceModelId]);
 
   return (
-    <OnboardingStepperView
-      scenes={scenes}
-      navigation={navigation}
-      route={route}
-      onFinish={next}
-    />
+    <OnboardingStepperView scenes={scenes} navigation={navigation} route={route} onFinish={next} />
   );
 }
 

@@ -24,28 +24,19 @@ const getActions = ({ account, colors }: { account: Account, colors: * }) => {
 
   const {
     spendableBalance,
-    tronResources: {
-      tronPower,
-      frozen: { bandwidth, energy } = {},
-      frozen,
-    } = {},
+    tronResources: { tronPower, frozen: { bandwidth, energy } = {}, frozen } = {},
   } = account;
 
   const accountId = account.id;
 
-  const canFreeze =
-    spendableBalance && spendableBalance.gt(MIN_TRANSACTION_AMOUNT);
+  const canFreeze = spendableBalance && spendableBalance.gt(MIN_TRANSACTION_AMOUNT);
 
   const timeToUnfreezeBandwidth =
     bandwidth && bandwidth.expiredAt ? +bandwidth.expiredAt : Infinity;
 
-  const timeToUnfreezeEnergy =
-    energy && energy.expiredAt ? +energy.expiredAt : Infinity;
+  const timeToUnfreezeEnergy = energy && energy.expiredAt ? +energy.expiredAt : Infinity;
 
-  const effectiveTimeToUnfreeze = Math.min(
-    timeToUnfreezeBandwidth,
-    timeToUnfreezeEnergy,
-  );
+  const effectiveTimeToUnfreeze = Math.min(timeToUnfreezeBandwidth, timeToUnfreezeEnergy);
 
   const canUnfreeze =
     frozen &&

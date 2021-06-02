@@ -57,11 +57,7 @@ export function DataRow({
   return (
     <View style={[styles.dataRow, { backgroundColor: colors.background }]}>
       {label ? (
-        <LText
-          numberOfLines={numberOfLines ?? 1}
-          style={styles.dataRowLabel}
-          color="grey"
-        >
+        <LText numberOfLines={numberOfLines ?? 1} style={styles.dataRowLabel} color="grey">
           {label}
         </LText>
       ) : null}
@@ -82,11 +78,7 @@ export function TextValueField({
   const { colors } = useTheme();
   return (
     <View style={[styles.dataRow, { backgroundColor: colors.background }]}>
-      <LText
-        numberOfLines={numberOfLines}
-        style={styles.dataRowLabel}
-        color="grey"
-      >
+      <LText numberOfLines={numberOfLines} style={styles.dataRowLabel} color="grey">
         {label}
       </LText>
       <LText numberOfLines={numberOfLines} style={styles.dataRowValue}>
@@ -146,11 +138,7 @@ export function DataColumn({
   return (
     <View style={[styles.dataColumn, { backgroundColor: colors.background }]}>
       {label ? (
-        <LText
-          numberOfLines={numberOfLines ?? 1}
-          style={styles.dataRowLabel}
-          color="grey"
-        >
+        <LText numberOfLines={numberOfLines ?? 1} style={styles.dataRowLabel} color="grey">
           {label}
         </LText>
       ) : null}

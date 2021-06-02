@@ -15,10 +15,7 @@ function Footer({ url, urlWhatIsThis }: Props) {
   const { colors } = useTheme();
   return (
     <View
-      style={[
-        styles.footer,
-        { borderColor: colors.lightFog, backgroundColor: colors.background },
-      ]}
+      style={[styles.footer, { borderColor: colors.lightFog, backgroundColor: colors.background }]}
     >
       {urlWhatIsThis ? (
         <Button

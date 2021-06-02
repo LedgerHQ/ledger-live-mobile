@@ -20,13 +20,7 @@ type Props = {
 const InstallSuccessBar = ({ state, navigation, disable }: Props) => {
   const { colors } = useTheme();
   const [hasBeenShown, setHasBeenShown] = useState(disable);
-  const {
-    installQueue,
-    uninstallQueue,
-    recentlyInstalledApps,
-    appByName,
-    installed,
-  } = state;
+  const { installQueue, uninstallQueue, recentlyInstalledApps, appByName, installed } = state;
 
   const onAddAccount = useCallback(() => {
     navigation.navigate(NavigatorName.AddAccounts);
@@ -55,10 +49,9 @@ const InstallSuccessBar = ({ state, navigation, disable }: Props) => {
     ],
   );
 
-  const hasLiveSupported = useMemo(
-    () => successInstalls.find(isLiveSupportedApp),
-    [successInstalls],
-  );
+  const hasLiveSupported = useMemo(() => successInstalls.find(isLiveSupportedApp), [
+    successInstalls,
+  ]);
 
   const onClose = useCallback(() => setHasBeenShown(true), []);
 

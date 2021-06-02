@@ -27,13 +27,7 @@ type Props = {
 };
 
 const SwapFormSummary = ({ navigation, route }: Props) => {
-  const {
-    exchange,
-    exchangeRate,
-    transaction,
-    status,
-    rateExpiration,
-  } = route.params;
+  const { exchange, exchangeRate, transaction, status, rateExpiration } = route.params;
 
   const { colors } = useTheme();
 
@@ -71,11 +65,7 @@ const SwapFormSummary = ({ navigation, route }: Props) => {
     >
       <TrackScreen category="Swap" name="Summary" />
       {!showDeviceConnect ? (
-        <SummaryBody
-          exchange={exchange}
-          exchangeRate={exchangeRate}
-          status={status}
-        />
+        <SummaryBody exchange={exchange} exchangeRate={exchangeRate} status={status} />
       ) : (
         <Connect setResult={setDeviceMeta} />
       )}
@@ -107,9 +97,7 @@ const SwapFormSummary = ({ navigation, route }: Props) => {
       ) : !showDeviceConnect ? (
         <View style={styles.buttonWrapper}>
           {exchangeRate.tradeMethod === "fixed" ? (
-            <View
-              style={[styles.countdownTimer, { borderColor: colors.smoke }]}
-            >
+            <View style={[styles.countdownTimer, { borderColor: colors.smoke }]}>
               <IconAD size={14} name="clockcircleo" color={colors.smoke} />
               <View style={{ marginLeft: 9 }}>
                 {rateExpiration ? (

@@ -51,14 +51,9 @@ export default function ExperimentalHeader() {
   }, []);
 
   return (
-    <Animated.View
-      style={[styles.root, { height, backgroundColor: colors.lightLiveBg }]}
-    >
+    <Animated.View style={[styles.root, { height, backgroundColor: colors.lightLiveBg }]}>
       <Animated.View
-        style={[
-          styles.container,
-          { opacity: openingAnim, backgroundColor: colors.lightLiveBg },
-        ]}
+        style={[styles.container, { opacity: openingAnim, backgroundColor: colors.lightLiveBg }]}
       >
         {isExperimental && (
           <>

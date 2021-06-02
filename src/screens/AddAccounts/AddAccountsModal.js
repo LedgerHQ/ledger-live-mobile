@@ -18,11 +18,7 @@ type Props = {
   onClose: () => void,
 };
 
-export default function AddAccountsModal({
-  navigation,
-  onClose,
-  isOpened,
-}: Props) {
+export default function AddAccountsModal({ navigation, onClose, isOpened }: Props) {
   const { colors } = useTheme();
   const { t } = useTranslation();
   const readOnlyModeEnabled = useSelector(readOnlyModeEnabledSelector);

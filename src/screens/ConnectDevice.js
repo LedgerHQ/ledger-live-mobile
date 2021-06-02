@@ -6,10 +6,7 @@ import { useSelector } from "react-redux";
 import SafeAreaView from "react-native-safe-area-view";
 import { useTranslation } from "react-i18next";
 import { getMainAccount } from "@ledgerhq/live-common/lib/account";
-import type {
-  Transaction,
-  TransactionStatus,
-} from "@ledgerhq/live-common/lib/types";
+import type { Transaction, TransactionStatus } from "@ledgerhq/live-common/lib/types";
 import { createAction } from "@ledgerhq/live-common/lib/hw/actions/transaction";
 import connectApp from "@ledgerhq/live-common/lib/hw/connectApp";
 import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
@@ -51,8 +48,7 @@ export default function ConnectDevice({ route }: Props) {
     transaction: route.params.transaction,
   }));
 
-  const tokenCurrency =
-    account.type === "TokenAccount" ? account.token : undefined;
+  const tokenCurrency = account.type === "TokenAccount" ? account.token : undefined;
 
   const handleTx = useSignedTxHandler({
     account,
@@ -70,13 +66,8 @@ export default function ConnectDevice({ route }: Props) {
   return useMemo(
     () =>
       transaction ? (
-        <SafeAreaView
-          style={[styles.root, { backgroundColor: colors.background }]}
-        >
-          <TrackScreen
-            category={route.name.replace("ConnectDevice", "")}
-            name="ConnectDevice"
-          />
+        <SafeAreaView style={[styles.root, { backgroundColor: colors.background }]}>
+          <TrackScreen category={route.name.replace("ConnectDevice", "")} name="ConnectDevice" />
           <DeviceAction
             action={action}
             request={{

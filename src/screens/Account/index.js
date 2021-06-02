@@ -131,15 +131,7 @@ function AccountScreenInner({
   );
 
   const renderItem = useCallback(
-    ({
-      item,
-      index,
-      section,
-    }: {
-      item: Operation,
-      index: number,
-      section: SectionBase<any>,
-    }) => {
+    ({ item, index, section }: { item: Operation, index: number, section: SectionBase<any> }) => {
       if (!account) return null;
 
       return (
@@ -169,9 +161,7 @@ function AccountScreenInner({
   });
 
   const compoundCapabilities =
-    account.type === "TokenAccount" &&
-    !!account.compoundBalance &&
-    getAccountCapabilities(account);
+    account.type === "TokenAccount" && !!account.compoundBalance && getAccountCapabilities(account);
 
   const compoundSummary =
     compoundCapabilities?.status && account.type === "TokenAccount"

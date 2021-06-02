@@ -2,10 +2,7 @@
 import React, { memo, useMemo } from "react";
 import { Image, View, StyleSheet } from "react-native";
 import manager from "@ledgerhq/live-common/lib/manager";
-import {
-  findCryptoCurrencyById,
-  getCurrencyColor,
-} from "@ledgerhq/live-common/lib/currencies";
+import { findCryptoCurrencyById, getCurrencyColor } from "@ledgerhq/live-common/lib/currencies";
 import { getCryptoCurrencyIcon } from "@ledgerhq/live-common/lib/reactNative";
 
 import type { App } from "@ledgerhq/live-common/lib/types/manager";
@@ -19,10 +16,7 @@ type Props = {
 function AppIcon({ size = 38, app, icon: defaultIcon = "" }: Props) {
   const { currencyId, icon } = app || {};
 
-  const uri = useMemo(() => manager.getIconUrl(icon || defaultIcon), [
-    icon,
-    defaultIcon,
-  ]);
+  const uri = useMemo(() => manager.getIconUrl(icon || defaultIcon), [icon, defaultIcon]);
 
   const currency = currencyId && findCryptoCurrencyById(currencyId);
   const currencyColor = currency && getCurrencyColor(currency);
@@ -44,11 +38,7 @@ function AppIcon({ size = 38, app, icon: defaultIcon = "" }: Props) {
       </View>
     </View>
   ) : uri ? (
-    <Image
-      source={{ uri }}
-      style={{ width: size, height: size }}
-      fadeDuration={0}
-    />
+    <Image source={{ uri }} style={{ width: size, height: size }} fadeDuration={0} />
   ) : null;
 }
 

@@ -1,12 +1,6 @@
 // @flow
 import React, { useState, useCallback, useMemo, useRef, memo } from "react";
-import {
-  View,
-  StyleSheet,
-  Dimensions,
-  FlatList,
-  SafeAreaView,
-} from "react-native";
+import { View, StyleSheet, Dimensions, FlatList, SafeAreaView } from "react-native";
 import { distribute } from "@ledgerhq/live-common/lib/apps";
 import type { Action, State } from "@ledgerhq/live-common/lib/apps";
 import type { App } from "@ledgerhq/live-common/lib/types/manager";
@@ -102,10 +96,7 @@ const AppsScreen = ({
 
   const [scrollY, setScrollY] = useState(0);
 
-  const onScroll = useCallback(
-    evt => setScrollY(evt.nativeEvent.contentOffset.y),
-    [setScrollY],
-  );
+  const onScroll = useCallback(evt => setScrollY(evt.nativeEvent.contentOffset.y), [setScrollY]);
 
   const scrollToTop = useCallback(() => {
     if (scrollY > 280)
@@ -135,9 +126,7 @@ const AppsScreen = ({
     [managerTabs.CATALOG, managerTabs.INSTALLED_APPS, scrollToTop],
   );
 
-  const onUninstallAll = useCallback(() => dispatch({ type: "wipe" }), [
-    dispatch,
-  ]);
+  const onUninstallAll = useCallback(() => dispatch({ type: "wipe" }), [dispatch]);
 
   const sortOptions = useMemo(
     () => ({
@@ -241,13 +230,7 @@ const AppsScreen = ({
   };
 
   const renderLabel = useCallback(
-    ({
-      route,
-      color,
-    }: {
-      route: { title: string, key: string },
-      color: string,
-    }) => (
+    ({ route, color }: { route: { title: string, key: string }, color: string }) => (
       <View style={styles.labelStyle}>
         <LText
           bold
@@ -285,10 +268,7 @@ const AppsScreen = ({
         navigationState={{ index, routes }}
         jumpTo={jumpTo}
         style={[styles.tabBarStyle, { backgroundColor: colors.background }]}
-        indicatorStyle={[
-          styles.indicatorStyle,
-          { backgroundColor: colors.live },
-        ]}
+        indicatorStyle={[styles.indicatorStyle, { backgroundColor: colors.live }]}
         tabStyle={styles.tabStyle}
         activeColor={colors.darkBlue}
         inactiveColor={colors.grey}

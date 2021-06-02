@@ -7,18 +7,14 @@ export const rejections: Subject<void> = new Subject();
 const defaultErrorCreator = () => new Error("DebugRejectSwitch");
 
 // usage: observable.pipe(rejectionOp())
-export const rejectionOp = (createError: () => Error = defaultErrorCreator) => <
-  T,
->(
+export const rejectionOp = (createError: () => Error = defaultErrorCreator) => <T>(
   observable: Observable<T>,
 ): Observable<T> =>
   !Config.MOCK
     ? observable
     : Observable.create(o => {
         const s = observable.subscribe(o);
-        const s2 = rejections
-          .pipe(flatMap(() => throwError(createError())))
-          .subscribe(o);
+        const s2 = rejections.pipe(flatMap(() => throwError(createError()))).subscribe(o);
         return () => {
           s.unsubscribe();
           s2.unsubscribe();

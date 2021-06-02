@@ -50,10 +50,7 @@ class FirmwareUpdateMCU extends Component<Props, State> {
       },
       complete: () => {
         if (navigation.replace) {
-          navigation.replace(
-            ScreenName.FirmwareUpdateConfirmation,
-            route.params,
-          );
+          navigation.replace(ScreenName.FirmwareUpdateConfirmation, route.params);
         }
       },
       error: error => {
@@ -88,20 +85,14 @@ class FirmwareUpdateMCU extends Component<Props, State> {
         ) : (
           <View style={styles.body}>
             <View style={styles.step}>
-              <BulletItem
-                index={0}
-                value={<Trans i18nKey="FirmwareUpdateMCU.desc1" />}
-              />
+              <BulletItem index={0} value={<Trans i18nKey="FirmwareUpdateMCU.desc1" />} />
               <View style={styles.device}>
                 <DeviceNanoAction width={1.2 * width} />
               </View>
             </View>
 
             <View style={styles.step}>
-              <BulletItem
-                index={1}
-                value={<Trans i18nKey="FirmwareUpdateMCU.desc2" />}
-              />
+              <BulletItem index={1} value={<Trans i18nKey="FirmwareUpdateMCU.desc2" />} />
               <View style={styles.device}>
                 <DeviceNanoAction action="left" width={1.2 * width} />
               </View>

@@ -50,14 +50,8 @@ export default function ValidationSuccess({ navigation, route }: Props) {
       <ValidateSuccess
         onClose={onClose}
         onViewDetails={goToOperationDetails}
-        title={
-          <Trans
-            i18nKey={`algorand.claimRewards.flow.steps.verification.success.title`}
-          />
-        }
-        description={
-          <Trans i18nKey="algorand.claimRewards.flow.steps.verification.success.text" />
-        }
+        title={<Trans i18nKey={`algorand.claimRewards.flow.steps.verification.success.title`} />}
+        description={<Trans i18nKey="algorand.claimRewards.flow.steps.verification.success.text" />}
       />
     </View>
   );

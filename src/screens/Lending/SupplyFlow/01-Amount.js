@@ -26,37 +26,30 @@ type RouteParams = {
 
 export default function SupplyAmount({ navigation, route }: Props) {
   const { account, parentAccount } = useSelector(accountScreenSelector(route));
-  invariant(
-    account && account.type === "TokenAccount",
-    "token account required",
-  );
+  invariant(account && account.type === "TokenAccount", "token account required");
 
   const max = useSupplyMax(account);
 
-  const {
-    transaction,
-    setTransaction,
-    status,
-    bridgePending,
-    bridgeError,
-  } = useBridgeTransaction(() => {
-    const bridge = getAccountBridge(account, parentAccount);
-    const ctoken = findCompoundToken(account.token);
+  const { transaction, setTransaction, status, bridgePending, bridgeError } = useBridgeTransaction(
+    () => {
+      const bridge = getAccountBridge(account, parentAccount);
+      const ctoken = findCompoundToken(account.token);
 
-    // $FlowFixMe
-    const t = bridge.createTransaction(account);
+      // $FlowFixMe
+      const t = bridge.createTransaction(account);
 
-    const transaction = bridge.updateTransaction(t, {
-      recipient: ctoken?.contractAddress || "",
-      mode: "compound.supply",
-      subAccountId: account.id,
-      amount: max,
-      gasPrice: null,
-      userGasLimit: null,
-    });
+      const transaction = bridge.updateTransaction(t, {
+        recipient: ctoken?.contractAddress || "",
+        mode: "compound.supply",
+        subAccountId: account.id,
+        amount: max,
+        gasPrice: null,
+        userGasLimit: null,
+      });
 
-    return { account, parentAccount, transaction };
-  });
+      return { account, parentAccount, transaction };
+    },
+  );
 
   invariant(transaction, "transaction required");
 

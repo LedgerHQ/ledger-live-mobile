@@ -21,10 +21,7 @@ import styles from "../../navigation/styles";
 export default function SwapNavigator() {
   const { t } = useTranslation();
   const { colors } = useTheme();
-  const stackNavigationConfig = useMemo(
-    () => getStackNavigatorConfig(colors, true),
-    [colors],
-  );
+  const stackNavigationConfig = useMemo(() => getStackNavigatorConfig(colors, true), [colors]);
   return (
     <Stack.Navigator screenOptions={stackNavigationConfig}>
       <Stack.Screen
@@ -32,9 +29,7 @@ export default function SwapNavigator() {
         component={SwapFormOrHistory}
         options={{
           headerStyle: styles.headerNoShadow,
-          headerTitle: () => (
-            <StepHeader title={t("transfer.swap.landing.header")} />
-          ),
+          headerTitle: () => <StepHeader title={t("transfer.swap.landing.header")} />,
         }}
       />
       <Stack.Screen

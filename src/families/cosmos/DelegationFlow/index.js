@@ -23,10 +23,7 @@ const totalSteps = "3";
 function DelegationFlow() {
   const { t } = useTranslation();
   const { colors } = useTheme();
-  const stackNavigationConfig = useMemo(
-    () => getStackNavigatorConfig(colors, true),
-    [colors],
-  );
+  const stackNavigationConfig = useMemo(() => getStackNavigatorConfig(colors, true), [colors]);
   return (
     <Stack.Navigator
       screenOptions={{
@@ -71,10 +68,7 @@ function DelegationFlow() {
           headerRight: null,
           headerTitle: () => (
             <StepHeader
-              title={
-                route.params.validator?.name ??
-                route.params.validator.validatorAddress
-              }
+              title={route.params.validator?.name ?? route.params.validator.validatorAddress}
               subtitle={t("cosmos.delegation.stepperHeader.amountSubTitle")}
             />
           ),

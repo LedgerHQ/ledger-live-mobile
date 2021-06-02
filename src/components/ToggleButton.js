@@ -5,17 +5,7 @@ import Animated, { Easing } from "react-native-reanimated";
 import { useTheme } from "@react-navigation/native";
 import LText from "./LText";
 
-const {
-  cond,
-  set,
-  block,
-  clockRunning,
-  startClock,
-  timing,
-  Clock,
-  Value,
-  interpolate,
-} = Animated;
+const { cond, set, block, clockRunning, startClock, timing, Clock, Value, interpolate } = Animated;
 
 /**
  * @param {Animated.Clock} clock animation clock
@@ -106,17 +96,8 @@ const ToggleButton = ({ value, options, onChange }: Props) => {
   };
 
   return (
-    <View
-      style={[styles.mainContainer, { borderColor: colors.live }]}
-      onLayout={onLayout}
-    >
-      <Animated.View
-        style={[
-          styles.indicator,
-          { backgroundColor: colors.live },
-          indicatorStyle,
-        ]}
-      />
+    <View style={[styles.mainContainer, { borderColor: colors.live }]} onLayout={onLayout}>
+      <Animated.View style={[styles.indicator, { backgroundColor: colors.live }, indicatorStyle]} />
       <View style={styles.container}>
         {options.map(({ value, label, disabled }, index) => (
           <TouchableOpacity
@@ -131,10 +112,7 @@ const ToggleButton = ({ value, options, onChange }: Props) => {
           >
             <LText
               semiBold
-              style={[
-                styles.label,
-                disabled ? { color: colors.fog } : undefined,
-              ]}
+              style={[styles.label, disabled ? { color: colors.fog } : undefined]}
               color={activeIndex === index ? "white" : "live"}
               active={activeIndex === index}
             >

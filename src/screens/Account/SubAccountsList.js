@@ -7,11 +7,7 @@ import { Platform, StyleSheet, View, FlatList } from "react-native";
 import Icon from "react-native-vector-icons/dist/FontAwesome";
 import MaterialIcon from "react-native-vector-icons/dist/MaterialIcons";
 import { useNavigation, useTheme } from "@react-navigation/native";
-import type {
-  Account,
-  SubAccount,
-  TokenAccount,
-} from "@ledgerhq/live-common/lib/types";
+import type { Account, SubAccount, TokenAccount } from "@ledgerhq/live-common/lib/types";
 import useEnv from "@ledgerhq/live-common/lib/hooks/useEnv";
 import { listSubAccounts } from "@ledgerhq/live-common/lib/account";
 import { listTokenTypesForCryptoCurrency } from "@ledgerhq/live-common/lib/currencies";
@@ -145,9 +141,7 @@ export default function SubAccountsList({
               type="lightSecondary"
               event="AccountReceiveToken"
               title={<Trans i18nKey="account.tokens.addTokens" />}
-              IconLeft={() => (
-                <MaterialIcon color={colors.live} name="add" size={20} />
-              )}
+              IconLeft={() => <MaterialIcon color={colors.live} name="add" size={20} />}
               onPress={navigateToReceiveConnectDevice}
               size={14}
             />
@@ -173,10 +167,7 @@ export default function SubAccountsList({
       return Placeholder ? (
         <Placeholder accountId={accountId} />
       ) : (
-        <Touchable
-          event="AccountReceiveSubAccount"
-          onPress={navigateToReceiveConnectDevice}
-        >
+        <Touchable event="AccountReceiveSubAccount" onPress={navigateToReceiveConnectDevice}>
           <View
             style={[
               styles.footer,
@@ -189,9 +180,7 @@ export default function SubAccountsList({
             <View style={styles.footerText}>
               <LText style={{ fontSize: 16 }}>
                 <Trans
-                  i18nKey={`account.tokens${
-                    hasSpecificTokenWording ? `.${family}` : ""
-                  }.howTo`}
+                  i18nKey={`account.tokens${hasSpecificTokenWording ? `.${family}` : ""}.howTo`}
                   values={{ currency: parentAccount.currency.family }}
                 >
                   <LText semiBold>text</LText>
@@ -250,11 +239,7 @@ export default function SubAccountsList({
             />
           }
           IconRight={() => (
-            <Icon
-              color={colors.live}
-              name={isCollapsed ? "angle-down" : "angle-up"}
-              size={16}
-            />
+            <Icon color={colors.live} name={isCollapsed ? "angle-down" : "angle-up"} size={16} />
           )}
           onPress={onToggle}
           size={13}
@@ -315,11 +300,7 @@ export default function SubAccountsList({
         ListHeaderComponent={renderHeader}
         ListFooterComponent={renderFooter}
       />
-      <TokenContextualModal
-        onClose={() => setAccount()}
-        isOpened={!!account}
-        account={account}
-      />
+      <TokenContextualModal onClose={() => setAccount()} isOpened={!!account} account={account} />
     </View>
   );
 }

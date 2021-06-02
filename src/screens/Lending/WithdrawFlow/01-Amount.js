@@ -6,10 +6,7 @@ import React, { useCallback } from "react";
 import { useSelector } from "react-redux";
 import { makeCompoundSummaryForAccount } from "@ledgerhq/live-common/lib/compound/logic";
 import type { TokenCurrency } from "@ledgerhq/live-common/lib/types";
-import {
-  findCompoundToken,
-  formatCurrencyUnit,
-} from "@ledgerhq/live-common/lib/currencies";
+import { findCompoundToken, formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account/helpers";
 import { accountScreenSelector } from "../../../reducers/accounts";
@@ -31,10 +28,7 @@ type RouteParams = {
 
 export default function WithdrawAmount({ navigation, route }: Props) {
   const { account, parentAccount } = useSelector(accountScreenSelector(route));
-  invariant(
-    account && account.type === "TokenAccount",
-    "token account required",
-  );
+  invariant(account && account.type === "TokenAccount", "token account required");
 
   const capabilities = makeCompoundSummaryForAccount(account, parentAccount);
   const max = capabilities?.totalSupplied ?? BigNumber(0);
@@ -43,28 +37,24 @@ export default function WithdrawAmount({ navigation, route }: Props) {
   const unit = getAccountUnit(account);
   const tokenUnit = ctoken?.units[0];
 
-  const {
-    transaction,
-    setTransaction,
-    status,
-    bridgePending,
-    bridgeError,
-  } = useBridgeTransaction(() => {
-    // $FlowFixMe
-    const t = bridge.createTransaction(account);
+  const { transaction, setTransaction, status, bridgePending, bridgeError } = useBridgeTransaction(
+    () => {
+      // $FlowFixMe
+      const t = bridge.createTransaction(account);
 
-    const transaction = bridge.updateTransaction(t, {
-      recipient: ctoken?.contractAddress || "",
-      mode: "compound.withdraw",
-      useAllAmount: true,
-      amount: max,
-      subAccountId: account.id,
-      gasPrice: null,
-      userGasLimit: null,
-    });
+      const transaction = bridge.updateTransaction(t, {
+        recipient: ctoken?.contractAddress || "",
+        mode: "compound.withdraw",
+        useAllAmount: true,
+        amount: max,
+        subAccountId: account.id,
+        gasPrice: null,
+        userGasLimit: null,
+      });
 
-    return { account, parentAccount, transaction };
-  });
+      return { account, parentAccount, transaction };
+    },
+  );
 
   invariant(transaction, "transaction required");
 
@@ -83,15 +73,11 @@ export default function WithdrawAmount({ navigation, route }: Props) {
   const onContinue = useCallback(() => {
     const formattedAmount =
       status.amount &&
-      formatCurrencyUnit(
-        transaction.useAllAmount && tokenUnit ? tokenUnit : unit,
-        status.amount,
-        {
-          showAllDigits: false,
-          disableRounding: false,
-          showCode: true,
-        },
-      );
+      formatCurrencyUnit(transaction.useAllAmount && tokenUnit ? tokenUnit : unit, status.amount, {
+        showAllDigits: false,
+        disableRounding: false,
+        showCode: true,
+      });
     navigation.navigate(ScreenName.LendingWithdrawSummary, {
       ...route.params,
       accountId: account.id,

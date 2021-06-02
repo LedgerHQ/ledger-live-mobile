@@ -2,15 +2,8 @@
 import React, { useCallback } from "react";
 import { Linking } from "react-native";
 import { useTranslation } from "react-i18next";
-import {
-  getDefaultExplorerView,
-  getAddressExplorer,
-} from "@ledgerhq/live-common/lib/explorers";
-import type {
-  Account,
-  OperationType,
-  Operation,
-} from "@ledgerhq/live-common/lib/types";
+import { getDefaultExplorerView, getAddressExplorer } from "@ledgerhq/live-common/lib/explorers";
+import type { Account, OperationType, Operation } from "@ledgerhq/live-common/lib/types";
 import { useCosmosPreloadData } from "@ledgerhq/live-common/lib/families/cosmos/react";
 import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies/formatCurrencyUnit";
 import { BigNumber } from "bignumber.js";
@@ -27,9 +20,7 @@ function getURLFeesInfo(op: Operation): ?string {
 }
 
 function getURLWhatIsThis(op: Operation): ?string {
-  return op.type !== "IN" && op.type !== "OUT"
-    ? urls.cosmosStakingRewards
-    : undefined;
+  return op.type !== "IN" && op.type !== "OUT" ? urls.cosmosStakingRewards : undefined;
 }
 
 type Props = {
@@ -50,10 +41,7 @@ function OperationDetailsExtra({ extra, type, account }: Props) {
 
   const redirectAddressCreator = useCallback(
     address => () => {
-      const url = getAddressExplorer(
-        getDefaultExplorerView(account.currency),
-        address,
-      );
+      const url = getAddressExplorer(getDefaultExplorerView(account.currency), address);
       if (url) Linking.openURL(url);
     },
     [account],
@@ -72,31 +60,20 @@ function OperationDetailsExtra({ extra, type, account }: Props) {
         v => v.validatorAddress === validator.address,
       );
 
-      const formattedAmount = formatCurrencyUnit(
-        unit,
-        BigNumber(validator.amount),
-        {
-          disableRounding: true,
-          alwaysShowSign: false,
-          showCode: true,
-          discreet,
-        },
-      );
+      const formattedAmount = formatCurrencyUnit(unit, BigNumber(validator.amount), {
+        disableRounding: true,
+        alwaysShowSign: false,
+        showCode: true,
+        discreet,
+      });
 
       ret = (
         <>
           <Section
             title={t("operationDetails.extra.delegatedTo")}
-            value={
-              formattedValidator?.name ??
-              formattedValidator?.validatorAddress ??
-              ""
-            }
+            value={formattedValidator?.name ?? formattedValidator?.validatorAddress ?? ""}
           />
-          <Section
-            title={t("operationDetails.extra.delegatedAmount")}
-            value={formattedAmount}
-          />
+          <Section title={t("operationDetails.extra.delegatedAmount")} value={formattedAmount} />
         </>
       );
       break;
@@ -111,16 +88,12 @@ function OperationDetailsExtra({ extra, type, account }: Props) {
         v => v.validatorAddress === validator.address,
       );
 
-      const formattedAmount = formatCurrencyUnit(
-        unit,
-        BigNumber(validator.amount),
-        {
-          disableRounding: true,
-          alwaysShowSign: false,
-          showCode: true,
-          discreet,
-        },
-      );
+      const formattedAmount = formatCurrencyUnit(unit, BigNumber(validator.amount), {
+        disableRounding: true,
+        alwaysShowSign: false,
+        showCode: true,
+        discreet,
+      });
 
       ret = (
         <>
@@ -131,18 +104,14 @@ function OperationDetailsExtra({ extra, type, account }: Props) {
               redirectAddressCreator(validator.address);
             }}
           />
-          <Section
-            title={t("operationDetails.extra.undelegatedAmount")}
-            value={formattedAmount}
-          />
+          <Section title={t("operationDetails.extra.undelegatedAmount")} value={formattedAmount} />
         </>
       );
       break;
     }
     case "REDELEGATE": {
       const { cosmosSourceValidator, validators } = extra;
-      if (!validators || validators.length <= 0 || !cosmosSourceValidator)
-        break;
+      if (!validators || validators.length <= 0 || !cosmosSourceValidator) break;
 
       const validator = extra.validators[0];
 
@@ -154,43 +123,30 @@ function OperationDetailsExtra({ extra, type, account }: Props) {
         v => v.validatorAddress === cosmosSourceValidator,
       );
 
-      const formattedAmount = formatCurrencyUnit(
-        unit,
-        BigNumber(validator.amount),
-        {
-          disableRounding: true,
-          alwaysShowSign: false,
-          showCode: true,
-          discreet,
-        },
-      );
+      const formattedAmount = formatCurrencyUnit(unit, BigNumber(validator.amount), {
+        disableRounding: true,
+        alwaysShowSign: false,
+        showCode: true,
+        discreet,
+      });
 
       ret = (
         <>
           <Section
             title={t("operationDetails.extra.redelegatedFrom")}
-            value={
-              formattedSourceValidator
-                ? formattedSourceValidator.name
-                : cosmosSourceValidator
-            }
+            value={formattedSourceValidator ? formattedSourceValidator.name : cosmosSourceValidator}
             onPress={() => {
               redirectAddressCreator(cosmosSourceValidator);
             }}
           />
           <Section
             title={t("operationDetails.extra.redelegatedTo")}
-            value={
-              formattedValidator ? formattedValidator.name : validator.address
-            }
+            value={formattedValidator ? formattedValidator.name : validator.address}
             onPress={() => {
               redirectAddressCreator(validator.address);
             }}
           />
-          <Section
-            title={t("operationDetails.extra.redelegatedAmount")}
-            value={formattedAmount}
-          />
+          <Section title={t("operationDetails.extra.redelegatedAmount")} value={formattedAmount} />
         </>
       );
       break;
@@ -225,9 +181,7 @@ function OperationDetailsExtra({ extra, type, account }: Props) {
   return (
     <>
       {ret}
-      {extra.memo && (
-        <Section title={t("operationDetails.extra.memo")} value={extra.memo} />
-      )}
+      {extra.memo && <Section title={t("operationDetails.extra.memo")} value={extra.memo} />}
     </>
   );
 }

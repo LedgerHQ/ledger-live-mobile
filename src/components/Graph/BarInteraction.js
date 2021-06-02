@@ -4,11 +4,7 @@ import React, { Component } from "react";
 import * as array from "d3-array";
 import { View } from "react-native";
 import Svg, { G } from "react-native-svg";
-import {
-  PanGestureHandler,
-  State,
-  LongPressGestureHandler,
-} from "react-native-gesture-handler";
+import { PanGestureHandler, State, LongPressGestureHandler } from "react-native-gesture-handler";
 import type { Item, ItemArray } from "./types";
 import Bar from "./Bar";
 
@@ -66,10 +62,7 @@ export default class BarInteraction extends Component<
         barVisible: true,
         ...r,
       });
-    } else if (
-      nativeEvent.state === State.END ||
-      nativeEvent.state === State.CANCELLED
-    ) {
+    } else if (nativeEvent.state === State.END || nativeEvent.state === State.CANCELLED) {
       const { onItemHover } = this.props;
       if (onItemHover) onItemHover(null);
       this.setState({
@@ -82,10 +75,7 @@ export default class BarInteraction extends Component<
     const r = this.collectHovered(e.nativeEvent.x);
     if (!r) return;
     this.setState(oldState => {
-      if (
-        oldState.barOffsetX === r.barOffsetX &&
-        oldState.barOffsetY === r.barOffsetY
-      ) {
+      if (oldState.barOffsetX === r.barOffsetX && oldState.barOffsetY === r.barOffsetY) {
         return null; // do not setState if the position have not changed.
       }
       return r;

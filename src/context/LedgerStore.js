@@ -17,9 +17,7 @@ export const store = createStore(
   // $FlowFixMe
   compose(
     applyMiddleware(thunk),
-    typeof __REDUX_DEVTOOLS_EXTENSION__ === "function"
-      ? __REDUX_DEVTOOLS_EXTENSION__()
-      : f => f,
+    typeof __REDUX_DEVTOOLS_EXTENSION__ === "function" ? __REDUX_DEVTOOLS_EXTENSION__() : f => f,
   ),
 );
 
@@ -55,9 +53,7 @@ export default class LedgerStoreProvider extends Component<
     if (
       settingsData &&
       settingsData.counterValue &&
-      !supportedCountervalues.find(
-        ({ ticker }) => ticker === settingsData.counterValue,
-      )
+      !supportedCountervalues.find(({ ticker }) => ticker === settingsData.counterValue)
     ) {
       settingsData.counterValue = INITIAL_STATE.counterValue;
     }
@@ -76,10 +72,6 @@ export default class LedgerStoreProvider extends Component<
   render() {
     const { children } = this.props;
     const { ready, initialCountervalues } = this.state;
-    return (
-      <Provider store={store}>
-        {children(ready, store, initialCountervalues)}
-      </Provider>
-    );
+    return <Provider store={store}>{children(ready, store, initialCountervalues)}</Provider>;
   }
 }

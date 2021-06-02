@@ -24,14 +24,7 @@ type Props = {
   eventProperties?: Object,
 };
 
-function BottomModalChoice({
-  Icon,
-  title,
-  description,
-  onPress,
-  event,
-  eventProperties,
-}: Props) {
+function BottomModalChoice({ Icon, title, description, onPress, event, eventProperties }: Props) {
   const { colors } = useTheme();
 
   return (
@@ -61,13 +54,7 @@ function BottomModalChoice({
 
 export default memo<Props>(BottomModalChoice);
 
-function IconWrapper({
-  Icon,
-  color,
-}: {
-  Icon: React$ComponentType<*>,
-  color: string,
-}) {
+function IconWrapper({ Icon, color }: { Icon: React$ComponentType<*>, color: string }) {
   const iconWrapperBg = rgba(color, 0.1);
   return (
     <View style={[styles.iconWrapper, { backgroundColor: iconWrapperBg }]}>

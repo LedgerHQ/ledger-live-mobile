@@ -69,15 +69,8 @@ export default function AddAccountsSelectDevice({ navigation, route }: Props) {
         },
       ]}
     >
-      <NavigationScrollView
-        style={styles.scroll}
-        contentContainerStyle={styles.scrollContainer}
-      >
-        <TrackScreen
-          category="AddAccounts"
-          name="SelectDevice"
-          currencyName={currency.name}
-        />
+      <NavigationScrollView style={styles.scroll} contentContainerStyle={styles.scrollContainer}>
+        <TrackScreen category="AddAccounts" name="SelectDevice" currencyName={currency.name} />
         <SelectDevice onSelect={setDevice} />
       </NavigationScrollView>
       <DeviceActionModal
@@ -86,10 +79,7 @@ export default function AddAccountsSelectDevice({ navigation, route }: Props) {
         onResult={onResult}
         onClose={onClose}
         request={{
-          currency:
-            currency.type === "TokenCurrency"
-              ? currency.parentCurrency
-              : currency,
+          currency: currency.type === "TokenCurrency" ? currency.parentCurrency : currency,
         }}
       />
     </SafeAreaView>

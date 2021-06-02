@@ -2,16 +2,8 @@
 
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import {
-  isAccountEmpty,
-  getMainAccount,
-} from "@ledgerhq/live-common/lib/account";
-import type {
-  Unit,
-  AccountLike,
-  Account,
-  Currency,
-} from "@ledgerhq/live-common/lib/types";
+import { isAccountEmpty, getMainAccount } from "@ledgerhq/live-common/lib/account";
+import type { Unit, AccountLike, Account, Currency } from "@ledgerhq/live-common/lib/types";
 import type { ValueChange } from "@ledgerhq/live-common/lib/portfolio/v2/types";
 import type { CompoundAccountSummary } from "@ledgerhq/live-common/lib/compound/types";
 
@@ -31,11 +23,7 @@ import perFamilyAccountBalanceSummaryFooter from "../../generated/AccountBalance
 import { normalize } from "../../helpers/normalizeSize";
 import FabActions from "../../components/FabActions";
 
-const renderAccountSummary = (
-  account,
-  parentAccount,
-  compoundSummary,
-) => () => {
+const renderAccountSummary = (account, parentAccount, compoundSummary) => () => {
   const mainAccount = getMainAccount(account, parentAccount);
   const AccountBalanceSummaryFooter =
     perFamilyAccountBalanceSummaryFooter[mainAccount.currency.family];
@@ -44,21 +32,12 @@ const renderAccountSummary = (
 
   if (compoundSummary && account.type === "TokenAccount") {
     footers.push(
-      <CompoundSummary
-        key="compoundSummary"
-        account={account}
-        compoundSummary={compoundSummary}
-      />,
+      <CompoundSummary key="compoundSummary" account={account} compoundSummary={compoundSummary} />,
     );
   }
 
   if (AccountBalanceSummaryFooter)
-    footers.push(
-      <AccountBalanceSummaryFooter
-        account={account}
-        key="accountbalancesummary"
-      />,
-    );
+    footers.push(<AccountBalanceSummaryFooter account={account} key="accountbalancesummary" />);
   return footers;
 };
 
@@ -69,11 +48,7 @@ type HeaderTitleProps = {
   item: Item,
 };
 
-const renderListHeaderTitle = (
-  account,
-  countervalueAvailable,
-  onSwitchAccountCurrency,
-) => ({
+const renderListHeaderTitle = (account, countervalueAvailable, onSwitchAccountCurrency) => ({
   useCounterValue,
   cryptoCurrencyUnit,
   counterValueUnit,
@@ -99,11 +74,7 @@ const renderListHeaderTitle = (
       <View style={styles.balanceContainer}>
         <View style={styles.warningWrapper}>
           <LText style={styles.balanceText} semiBold>
-            <CurrencyUnitValue
-              {...items[0]}
-              disableRounding
-              joinFragmentsSeparator=" "
-            />
+            <CurrencyUnitValue {...items[0]} disableRounding joinFragmentsSeparator=" " />
           </LText>
           <TransactionsPendingConfirmationWarning maybeAccount={account} />
         </View>
@@ -152,8 +123,7 @@ export function getListHeaderComponents({
   listHeaderComponents: React$Node[],
   stickyHeaderIndices?: number[],
 } {
-  if (!account)
-    return { listHeaderComponents: [], stickyHeaderIndices: undefined };
+  if (!account) return { listHeaderComponents: [], stickyHeaderIndices: undefined };
 
   const mainAccount = getMainAccount(account, parentAccount);
 
@@ -161,8 +131,7 @@ export function getListHeaderComponents({
   const shouldUseCounterValue = countervalueAvailable && useCounterValue;
 
   const AccountHeader = perFamilyAccountHeader[mainAccount.currency.family];
-  const AccountBodyHeader =
-    perFamilyAccountBodyHeader[mainAccount.currency.family];
+  const AccountBodyHeader = perFamilyAccountBodyHeader[mainAccount.currency.family];
 
   return {
     listHeaderComponents: [
@@ -179,9 +148,7 @@ export function getListHeaderComponents({
               range={range}
               history={history}
               useCounterValue={shouldUseCounterValue}
-              valueChange={
-                shouldUseCounterValue ? countervalueChange : cryptoChange
-              }
+              valueChange={shouldUseCounterValue ? countervalueChange : cryptoChange}
               countervalueAvailable={countervalueAvailable}
               counterValueCurrency={counterValueCurrency}
               renderTitle={renderListHeaderTitle(
@@ -189,11 +156,7 @@ export function getListHeaderComponents({
                 countervalueAvailable,
                 onSwitchAccountCurrency,
               )}
-              renderAccountSummary={renderAccountSummary(
-                account,
-                parentAccount,
-                compoundSummary,
-              )}
+              renderAccountSummary={renderAccountSummary(account, parentAccount, compoundSummary)}
             />,
           ]),
 
@@ -206,12 +169,7 @@ export function getListHeaderComponents({
         : []),
 
       ...(!empty && AccountBodyHeader
-        ? [
-            <AccountBodyHeader
-              account={account}
-              parentAccount={parentAccount}
-            />,
-          ]
+        ? [<AccountBodyHeader account={account} parentAccount={parentAccount} />]
         : []),
       ...(!empty && account.type === "Account" && account.subAccounts
         ? [
@@ -224,10 +182,7 @@ export function getListHeaderComponents({
             />,
           ]
         : []),
-      ...(compoundSummary &&
-      account &&
-      account.type === "TokenAccount" &&
-      parentAccount
+      ...(compoundSummary && account && account.type === "TokenAccount" && parentAccount
         ? [
             <CompoundAccountBodyHeader
               account={account}

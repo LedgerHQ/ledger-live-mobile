@@ -33,9 +33,7 @@ function StellarEditMemoValue({ navigation, route }: Props) {
   const { account } = useSelector(accountScreenSelector(route));
   invariant(account, "account is required");
 
-  const [memoValue, setMemoValue] = useState(
-    route.params.transaction.memoValue,
-  );
+  const [memoValue, setMemoValue] = useState(route.params.transaction.memoValue);
 
   const onChangeMemoValue = useCallback((str: string) => {
     setMemoValue(str);
@@ -55,13 +53,8 @@ function StellarEditMemoValue({ navigation, route }: Props) {
 
   return (
     <SafeAreaView style={{ flex: 1 }} forceInset={forceInset}>
-      <KeyboardView
-        style={[styles.body, { backgroundColor: colors.background }]}
-      >
-        <ScrollView
-          contentContainerStyle={styles.root}
-          keyboardShouldPersistTaps="always"
-        >
+      <KeyboardView style={[styles.body, { backgroundColor: colors.background }]}>
+        <ScrollView contentContainerStyle={styles.root} keyboardShouldPersistTaps="always">
           <TextInput
             allowFontScaling={false}
             autoFocus

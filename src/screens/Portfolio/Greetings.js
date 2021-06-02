@@ -9,10 +9,7 @@ const getCurrentGreetings = () => {
   const localTimeHour = new Date().getHours();
   const afternoonBreakpoint = 12;
   const eveningBreakpoint = 17;
-  if (
-    localTimeHour >= afternoonBreakpoint &&
-    localTimeHour < eveningBreakpoint
-  ) {
+  if (localTimeHour >= afternoonBreakpoint && localTimeHour < eveningBreakpoint) {
     return "portfolio.greeting.afternoon";
   }
   if (localTimeHour >= eveningBreakpoint) {
@@ -31,19 +28,8 @@ class Greetings extends PureComponent<{
         <LText secondary color="darkBlue" style={styles.title} bold>
           {<Trans i18nKey={getCurrentGreetings()} />}
         </LText>
-        <LText
-          secondary
-          color="grey"
-          style={styles.description}
-          numberOfLines={2}
-        >
-          {
-            <Trans
-              i18nKey="portfolio.summary"
-              count={nbAccounts}
-              values={{ count: nbAccounts }}
-            />
-          }
+        <LText secondary color="grey" style={styles.description} numberOfLines={2}>
+          {<Trans i18nKey="portfolio.summary" count={nbAccounts} values={{ count: nbAccounts }} />}
         </LText>
       </View>
     );

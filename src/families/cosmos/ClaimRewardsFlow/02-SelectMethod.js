@@ -37,34 +37,24 @@ import TranslatedError from "../../../components/TranslatedError";
 const options = [
   {
     value: "claimRewardCompound",
-    label: (
-      <Trans i18nKey="cosmos.claimRewards.flow.steps.method.claimRewardCompound" />
-    ),
+    label: <Trans i18nKey="cosmos.claimRewards.flow.steps.method.claimRewardCompound" />,
   },
   {
     value: "claimReward",
-    label: (
-      <Trans i18nKey="cosmos.claimRewards.flow.steps.method.claimReward" />
-    ),
+    label: <Trans i18nKey="cosmos.claimRewards.flow.steps.method.claimReward" />,
   },
 ];
 
 const infoModalData = [
   {
-    title: (
-      <Trans i18nKey="cosmos.claimRewards.flow.steps.method.claimRewardCompound" />
-    ),
+    title: <Trans i18nKey="cosmos.claimRewards.flow.steps.method.claimRewardCompound" />,
     description: (
       <Trans i18nKey="cosmos.claimRewards.flow.steps.method.claimRewardCompoundTooltip" />
     ),
   },
   {
-    title: (
-      <Trans i18nKey="cosmos.claimRewards.flow.steps.method.claimReward" />
-    ),
-    description: (
-      <Trans i18nKey="cosmos.claimRewards.flow.steps.method.claimRewardTooltip" />
-    ),
+    title: <Trans i18nKey="cosmos.claimRewards.flow.steps.method.claimReward" />,
+    description: <Trans i18nKey="cosmos.claimRewards.flow.steps.method.claimRewardTooltip" />,
   },
 ];
 
@@ -84,42 +74,37 @@ function ClaimRewardsAmount({ navigation, route }: Props) {
   const { colors } = useTheme();
   const { account } = useSelector(accountScreenSelector(route));
 
-  invariant(
-    account && account.cosmosResources,
-    "account and cosmos transaction required",
-  );
+  invariant(account && account.cosmosResources, "account and cosmos transaction required");
 
   const bridge = getAccountBridge(account, undefined);
   const mainAccount = getMainAccount(account, undefined);
   const unit = getAccountUnit(mainAccount);
   const currency = getAccountCurrency(mainAccount);
 
-  const { transaction, status, updateTransaction } = useBridgeTransaction(
-    () => {
-      const tx = route.params.transaction;
+  const { transaction, status, updateTransaction } = useBridgeTransaction(() => {
+    const tx = route.params.transaction;
 
-      if (!tx) {
-        const t = bridge.createTransaction(mainAccount);
+    if (!tx) {
+      const t = bridge.createTransaction(mainAccount);
 
-        return {
-          account,
-          transaction: bridge.updateTransaction(t, {
-            mode: "claimReward",
-            validators: [
-              {
-                address: route.params.validator.validatorAddress,
-                amount: route.params.value,
-              },
-            ],
-            /** @TODO remove this once the bridge handles it */
-            recipient: mainAccount.freshAddress,
-          }),
-        };
-      }
+      return {
+        account,
+        transaction: bridge.updateTransaction(t, {
+          mode: "claimReward",
+          validators: [
+            {
+              address: route.params.validator.validatorAddress,
+              amount: route.params.value,
+            },
+          ],
+          /** @TODO remove this once the bridge handles it */
+          recipient: mainAccount.freshAddress,
+        }),
+      };
+    }
 
-      return { account, transaction: tx };
-    },
-  );
+    return { account, transaction: tx };
+  });
 
   invariant(transaction, "transaction required");
 
@@ -152,21 +137,14 @@ function ClaimRewardsAmount({ navigation, route }: Props) {
   }, [setInfoModalOpen]);
 
   const value = route.params.value;
-  const name =
-    route.params.validator?.name ??
-    route.params.validator?.validatorAddress ??
-    "";
+  const name = route.params.validator?.name ?? route.params.validator?.validatorAddress ?? "";
   const mode = transaction.mode ? transaction.mode : "";
 
   const error =
-    status.errors &&
-    Object.keys(status.errors).length > 0 &&
-    Object.values(status.errors)[0];
+    status.errors && Object.keys(status.errors).length > 0 && Object.values(status.errors)[0];
 
   const warning =
-    status.warnings &&
-    Object.keys(status.warnings).length > 0 &&
-    Object.values(status.warnings)[0];
+    status.warnings && Object.keys(status.warnings).length > 0 && Object.values(status.warnings)[0];
 
   return (
     <SafeAreaView style={[styles.root, { backgroundColor: colors.background }]}>
@@ -187,12 +165,7 @@ function ClaimRewardsAmount({ navigation, route }: Props) {
             <CurrencyUnitValue unit={unit} value={value} showCode />
           </LText>
           <LText semiBold style={styles.subLabel} color="grey">
-            <CounterValue
-              currency={currency}
-              showCode
-              value={value}
-              withPlaceholder
-            />
+            <CounterValue currency={currency} showCode value={value} withPlaceholder />
           </LText>
         </View>
         <View style={styles.sectionLabel}>
@@ -208,9 +181,7 @@ function ClaimRewardsAmount({ navigation, route }: Props) {
         </View>
         <View style={styles.sectionLabel}>
           <LText style={styles.desc}>
-            <Trans
-              i18nKey={`cosmos.claimRewards.flow.steps.method.${mode}Info`}
-            />
+            <Trans i18nKey={`cosmos.claimRewards.flow.steps.method.${mode}Info`} />
           </LText>
         </View>
         <View style={styles.spacer} />
@@ -218,23 +189,11 @@ function ClaimRewardsAmount({ navigation, route }: Props) {
       <View style={[styles.footer, { backgroundColor: colors.background }]}>
         <View style={styles.warningSection}>
           {error && error instanceof Error ? (
-            <LText
-              selectable
-              secondary
-              semiBold
-              style={styles.warning}
-              color="alert"
-            >
+            <LText selectable secondary semiBold style={styles.warning} color="alert">
               <TranslatedError error={error} />
             </LText>
           ) : warning && warning instanceof Error ? (
-            <LText
-              selectable
-              secondary
-              semiBold
-              style={styles.warning}
-              color="alert"
-            >
+            <LText selectable secondary semiBold style={styles.warning} color="alert">
               <TranslatedError error={warning} />
             </LText>
           ) : null}
@@ -247,11 +206,7 @@ function ClaimRewardsAmount({ navigation, route }: Props) {
           type="primary"
         />
       </View>
-      <InfoModal
-        isOpened={!!infoModalOpen}
-        onClose={closeInfoModal}
-        data={infoModalData}
-      />
+      <InfoModal isOpened={!!infoModalOpen} onClose={closeInfoModal} data={infoModalData} />
     </SafeAreaView>
   );
 }

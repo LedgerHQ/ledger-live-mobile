@@ -9,9 +9,7 @@ import Button from "../../../../components/Button";
 import LText from "../../../../components/LText";
 
 import ExternalLink from "../../../../components/ExternalLink";
-import BulletList, {
-  BulletGreenCheck,
-} from "../../../../components/BulletList";
+import BulletList, { BulletGreenCheck } from "../../../../components/BulletList";
 import NavigationScrollView from "../../../../components/NavigationScrollView";
 import IlluRewards from "../../../../icons/images/Rewards";
 import { urls } from "../../../../config/urls";
@@ -47,10 +45,7 @@ export default function ClaimRewardsStarted({ navigation, route }: Props) {
       style={[styles.root, { backgroundColor: colors.background }]}
       forceInset={forceInset}
     >
-      <NavigationScrollView
-        style={styles.scroll}
-        contentContainerStyle={styles.scrollContainer}
-      >
+      <NavigationScrollView style={styles.scroll} contentContainerStyle={styles.scrollContainer}>
         <TrackScreen category="ClaimRewardsFlow" name="Started" />
         <IlluRewards />
         <LText semiBold style={styles.description}>
@@ -68,15 +63,11 @@ export default function ClaimRewardsStarted({ navigation, route }: Props) {
             </LText>
           ))}
         />
-        <View
-          style={[styles.howClaimRewardsWorks, { borderColor: colors.live }]}
-        >
+        <View style={[styles.howClaimRewardsWorks, { borderColor: colors.live }]}>
           <ExternalLink
             event="AlgorandHowRewardsWork"
             onPress={howClaimRewardsWorks}
-            text={
-              <Trans i18nKey="algorand.claimRewards.flow.steps.info.howItWorks" />
-            }
+            text={<Trans i18nKey="algorand.claimRewards.flow.steps.info.howItWorks" />}
             ltextProps={{
               secondary: true,
             }}
@@ -87,9 +78,7 @@ export default function ClaimRewardsStarted({ navigation, route }: Props) {
         <Button
           event="ClaimRewardsStartedBtn"
           onPress={onNext}
-          title={
-            <Trans i18nKey="algorand.claimRewards.flow.steps.starter.cta" />
-          }
+          title={<Trans i18nKey="algorand.claimRewards.flow.steps.starter.cta" />}
           type="primary"
         />
       </View>

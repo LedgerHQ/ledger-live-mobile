@@ -4,10 +4,7 @@ import { StyleSheet } from "react-native";
 import { Trans } from "react-i18next";
 import Icon from "react-native-vector-icons/dist/AntDesign";
 import { useNavigation, useTheme } from "@react-navigation/native";
-import type {
-  CryptoCurrency,
-  TokenCurrency,
-} from "@ledgerhq/live-common/lib/types";
+import type { CryptoCurrency, TokenCurrency } from "@ledgerhq/live-common/lib/types";
 import type { CurrencyStatus } from "@ledgerhq/live-common/lib/exchange/swap/logic";
 import { ScreenName, NavigatorName } from "../../../../const";
 import Circle from "../../../../components/Circle";

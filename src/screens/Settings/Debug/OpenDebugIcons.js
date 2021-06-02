@@ -8,9 +8,6 @@ export default function OpenDebugIcons() {
   const navigation = useNavigation();
 
   return (
-    <SettingsRow
-      title="Debug icons"
-      onPress={() => navigation.navigate(ScreenName.DebugIcons)}
-    />
+    <SettingsRow title="Debug icons" onPress={() => navigation.navigate(ScreenName.DebugIcons)} />
   );
 }

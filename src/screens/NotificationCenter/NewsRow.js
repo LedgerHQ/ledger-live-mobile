@@ -23,12 +23,7 @@ const icons = {
   warning: Warning,
 };
 
-export default function NewsRow({
-  item,
-  style,
-  isUnread,
-  isLastElement,
-}: Props) {
+export default function NewsRow({ item, style, isUnread, isLastElement }: Props) {
   const { colors } = useTheme();
   // $FlowFixMe until live-common is bumped
   const { content, uuid, level, icon, utm_campaign: utmCampaign } = item;
@@ -43,9 +38,7 @@ export default function NewsRow({
   const Icon = icon && icons[icon];
   const iconColor = icon && iconColors[icon];
   const { backgroundColor, color } =
-    level === "warning"
-      ? { backgroundColor: colors.orange, color: "#FFF" }
-      : {};
+    level === "warning" ? { backgroundColor: colors.orange, color: "#FFF" } : {};
 
   const openUrl = useCallback(() => {
     const url = new URL(link.href);
@@ -55,38 +48,20 @@ export default function NewsRow({
   }, [link, utmCampaign]);
 
   return (
-    <View
-      style={[
-        !hasBeenRead ? styles.unRead : null,
-        isLastElement ? styles.marginBottom : null,
-      ]}
-    >
+    <View style={[!hasBeenRead ? styles.unRead : null, isLastElement ? styles.marginBottom : null]}>
       {!hasBeenRead ? (
         <View style={[styles.unReadBadge, { backgroundColor: colors.live }]} />
       ) : null}
-      <View
-        style={[
-          styles.root,
-          style,
-          backgroundColor ? { backgroundColor } : null,
-        ]}
-      >
+      <View style={[styles.root, style, backgroundColor ? { backgroundColor } : null]}>
         <View style={styles.section}>
           <View style={styles.titleSection}>
             {Icon && <Icon size={16} color={color || iconColor} />}
-            <LText
-              semiBold
-              style={[styles.title, { color: color || colors.darkBlue }]}
-            >
+            <LText semiBold style={[styles.title, { color: color || colors.darkBlue }]}>
               {title}
             </LText>
           </View>
 
-          {text && (
-            <LText style={[styles.text, { color: color || colors.grey }]}>
-              {text}
-            </LText>
-          )}
+          {text && <LText style={[styles.text, { color: color || colors.grey }]}>{text}</LText>}
           {link && (
             <View style={styles.link}>
               <ExternalLink

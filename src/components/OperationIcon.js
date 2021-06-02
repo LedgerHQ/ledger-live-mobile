@@ -49,9 +49,7 @@ class OperationIcon extends PureComponent<Props> {
       : null;
 
     const SpecificOperationStatusIcon =
-      specific && specific.operationStatusIcon
-        ? specific.operationStatusIcon[type]
-        : null;
+      specific && specific.operationStatusIcon ? specific.operationStatusIcon[type] : null;
 
     return SpecificOperationStatusIcon ? (
       <SpecificOperationStatusIcon
@@ -62,12 +60,7 @@ class OperationIcon extends PureComponent<Props> {
         size={size}
       />
     ) : (
-      <OperationStatusIcon
-        confirmed={confirmed}
-        type={type}
-        failed={hasFailed}
-        size={size}
-      />
+      <OperationStatusIcon confirmed={confirmed} type={type} failed={hasFailed} size={size} />
     );
   }
 }
@@ -82,9 +75,7 @@ const m: React$ComponentType<OwnProps> = connect((state, props) => {
   const confirmations = blockHeight ? mainAccount.blockHeight - blockHeight : 0;
   return {
     type,
-    confirmed:
-      confirmations >=
-      currencySettingsForAccountSelector(state, props).confirmationsNb,
+    confirmed: confirmations >= currencySettingsForAccountSelector(state, props).confirmationsNb,
   };
 })(OperationIcon);
 

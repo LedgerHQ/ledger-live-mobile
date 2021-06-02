@@ -6,12 +6,7 @@ import {
   groupAccountsOperationsByDay,
   isAccountEmpty,
 } from "@ledgerhq/live-common/lib/account";
-import type {
-  Account,
-  Currency,
-  Operation,
-  Unit,
-} from "@ledgerhq/live-common/lib/types";
+import type { Account, Currency, Operation, Unit } from "@ledgerhq/live-common/lib/types";
 import { isCountervalueEnabled } from "@ledgerhq/live-common/lib/countervalues/modules";
 import type { PortfolioRange } from "@ledgerhq/live-common/lib/portfolio/v2/types";
 import React, { PureComponent, useMemo } from "react";
@@ -134,24 +129,17 @@ class Asset extends PureComponent<AssetProps, any> {
           range={range}
           history={portfolio.history}
           useCounterValue={useCounterValue}
-          valueChange={
-            useCounterValue ? portfolio.valueChange : portfolio.cryptoChange
-          }
+          valueChange={useCounterValue ? portfolio.valueChange : portfolio.cryptoChange}
           countervalueAvailable={portfolio.countervalueAvailable}
           counterValueCurrency={counterValueCurrency}
           renderTitle={this.renderListHeaderTitle}
         />
-        <AccountDistribution
-          accounts={accounts}
-          counterValueCurrency={counterValueCurrency}
-        />
+        <AccountDistribution accounts={accounts} counterValueCurrency={counterValueCurrency} />
       </View>
     );
   };
 
-  renderSectionHeader = ({ section }: { section: * }) => (
-    <SectionHeader section={section} />
-  );
+  renderSectionHeader = ({ section }: { section: * }) => <SectionHeader section={section} />;
 
   renderItem = ({
     item,
@@ -263,9 +251,7 @@ export default function Screen(props: Props) {
       counterValueCurrency={counterValueCurrency}
       useCounterValue={useCounterValue}
       portfolio={portfolio}
-      switchCountervalueFirst={(...args) =>
-        dispatch(switchCountervalueFirst(...args))
-      }
+      switchCountervalueFirst={(...args) => dispatch(switchCountervalueFirst(...args))}
       colors={colors}
     />
   );

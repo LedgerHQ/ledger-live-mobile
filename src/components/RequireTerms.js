@@ -2,13 +2,7 @@
 
 import React, { useCallback, useState } from "react";
 import { Trans } from "react-i18next";
-import {
-  StyleSheet,
-  View,
-  ScrollView,
-  Linking,
-  ActivityIndicator,
-} from "react-native";
+import { StyleSheet, View, ScrollView, Linking, ActivityIndicator } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { useTerms, useTermsAccept, url } from "../logic/terms";
 import getWindowDimensions from "../logic/getWindowDimensions";
@@ -93,11 +87,7 @@ const RequireTermsModal = () => {
             <SafeMarkdown markdown={markdown} />
           ) : error ? (
             <View>
-              <GenericErrorView
-                error={error}
-                withIcon={false}
-                withDescription={false}
-              />
+              <GenericErrorView error={error} withIcon={false} withDescription={false} />
               <ExternalLink
                 text={<Trans i18nKey="Terms.read" />}
                 onPress={() => Linking.openURL(url)}
@@ -113,11 +103,7 @@ const RequireTermsModal = () => {
         </ScrollView>
 
         <View style={[styles.footer, { borderTopColor: colors.lightFog }]}>
-          <Touchable
-            event="TermsAcceptSwitch"
-            onPress={onSwitch}
-            style={styles.switchRow}
-          >
+          <Touchable event="TermsAcceptSwitch" onPress={onSwitch} style={styles.switchRow}>
             <CheckBox isChecked={toggle} />
             <LText semiBold style={styles.switchLabel}>
               <Trans i18nKey="Terms.switchLabel" />
@@ -139,13 +125,7 @@ const RequireTermsModal = () => {
 
 export default RequireTermsModal;
 
-export const TermModals = ({
-  isOpened,
-  close,
-}: {
-  isOpened: boolean,
-  close: () => void,
-}) => {
+export const TermModals = ({ isOpened, close }: { isOpened: boolean, close: () => void }) => {
   const { colors } = useTheme();
   const { locale } = useLocale();
   const [markdown, error, retry] = useTerms(locale);
@@ -156,12 +136,7 @@ export const TermModals = ({
   }, [close]);
 
   return (
-    <BottomModal
-      id="TermsModal"
-      isOpened={isOpened}
-      style={styles.modal}
-      preventBackdropClick
-    >
+    <BottomModal id="TermsModal" isOpened={isOpened} style={styles.modal} preventBackdropClick>
       <View style={styles.root}>
         <View style={styles.header}>
           <LText semiBold style={styles.title}>
@@ -174,11 +149,7 @@ export const TermModals = ({
             <SafeMarkdown markdown={markdown} />
           ) : error ? (
             <View>
-              <GenericErrorView
-                error={error}
-                withIcon={false}
-                withDescription={false}
-              />
+              <GenericErrorView error={error} withIcon={false} withDescription={false} />
               <ExternalLink
                 text={<Trans i18nKey="Terms.read" />}
                 onPress={() => Linking.openURL(url)}
@@ -193,13 +164,7 @@ export const TermModals = ({
           )}
         </ScrollView>
 
-        <View
-          style={[
-            styles.footer,
-            { borderTopColor: colors.lightFog },
-            styles.footerClose,
-          ]}
-        >
+        <View style={[styles.footer, { borderTopColor: colors.lightFog }, styles.footerClose]}>
           <Button
             event="TermsClose"
             type="primary"

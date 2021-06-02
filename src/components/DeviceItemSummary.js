@@ -19,11 +19,7 @@ type Props = {
   onEdit: () => void,
 };
 
-export default function DeviceItemSummary({
-  genuine,
-  onEdit,
-  deviceId,
-}: Props) {
+export default function DeviceItemSummary({ genuine, onEdit, deviceId }: Props) {
   const { colors } = useTheme();
   const name = useSelector(deviceNameByDeviceIdSelectorCreator(deviceId));
 

@@ -31,10 +31,7 @@ function ScanningTimeout({ onRetry }: Props) {
           <Trans i18nKey="PairDevices.ScanningTimeout.title" />
         </LText>
         <LText style={styles.SubtitleText} color="smoke">
-          <Trans
-            i18nKey="PairDevices.ScanningTimeout.desc"
-            values={getDeviceModel("nanoX")}
-          />
+          <Trans i18nKey="PairDevices.ScanningTimeout.desc" values={getDeviceModel("nanoX")} />
         </LText>
 
         <View style={styles.buttonContainer}>

@@ -2,12 +2,7 @@
 import React, { PureComponent } from "react";
 import { StyleSheet, View } from "react-native";
 import { RNCamera } from "react-native-camera";
-import {
-  parseFramesReducer,
-  framesToData,
-  areFramesComplete,
-  progressOfFrames,
-} from "qrloop";
+import { parseFramesReducer, framesToData, areFramesComplete, progressOfFrames } from "qrloop";
 import { decode } from "@ledgerhq/live-common/lib/cross";
 
 import { TrackScreen } from "../../analytics";
@@ -124,12 +119,7 @@ class Scan extends PureComponent<
         >
           {({ status }) =>
             status === "READY" ? (
-              <CameraScreen
-                liveQrCode
-                width={width}
-                height={height}
-                progress={progress}
-              />
+              <CameraScreen liveQrCode width={width} height={height} progress={progress} />
             ) : null
           }
         </RNCamera>

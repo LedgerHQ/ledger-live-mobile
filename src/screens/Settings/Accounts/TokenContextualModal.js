@@ -73,9 +73,7 @@ const TokenContextualModal = ({
   if (!isOpened || !account) return null;
 
   const mainAccount = account ? getMainAccount(account, parentAccount) : null;
-  const explorerView = mainAccount
-    ? getDefaultExplorerView(mainAccount.currency)
-    : null;
+  const explorerView = mainAccount ? getDefaultExplorerView(mainAccount.currency) : null;
   const url = explorerView
     ? getAccountContractExplorer(explorerView, account, parentAccount)
     : null;
@@ -101,11 +99,7 @@ const TokenContextualModal = ({
       ) : null}
 
       {showContract && url ? (
-        <TokenContractAddress
-          token={account.token}
-          onClose={onCloseModal}
-          url={url || ""}
-        />
+        <TokenContractAddress token={account.token} onClose={onCloseModal} url={url || ""} />
       ) : showConfirmation ? (
         <View style={styles.body}>
           <LText style={styles.confirmationDesc} color="smoke">
@@ -126,14 +120,9 @@ const TokenContextualModal = ({
             />
             <Button
               event="ConfirmationModalConfirm"
-              containerStyle={[
-                styles.confirmationButton,
-                styles.confirmationLastButton,
-              ]}
+              containerStyle={[styles.confirmationButton, styles.confirmationLastButton]}
               type={"primary"}
-              title={
-                <Trans i18nKey="settings.accounts.blacklistedTokensModal.confirm" />
-              }
+              title={<Trans i18nKey="settings.accounts.blacklistedTokensModal.confirm" />}
               onPress={onBlacklistToken}
             />
           </View>

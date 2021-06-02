@@ -56,9 +56,7 @@ const CollapsibleList = ({
                 renderItem(item, i, i === collapsedItems.length - 1),
               )}
             </View>
-            <View
-              style={[styles.showMore, { borderTopColor: colors.lightGrey }]}
-            >
+            <View style={[styles.showMore, { borderTopColor: colors.lightGrey }]}>
               <Button
                 type="lightSecondary"
                 event="CollapsedListShowMore"

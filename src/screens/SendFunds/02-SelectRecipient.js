@@ -32,8 +32,7 @@ import CancelButton from "../../components/CancelButton";
 import GenericErrorBottomModal from "../../components/GenericErrorBottomModal";
 import NavigationScrollView from "../../components/NavigationScrollView";
 
-const withoutHiddenError = error =>
-  error instanceof RecipientRequired ? null : error;
+const withoutHiddenError = error => (error instanceof RecipientRequired ? null : error);
 
 const forceInset = { bottom: "always" };
 
@@ -66,10 +65,7 @@ export default function SendSelectRecipient({ navigation, route }: Props) {
   const initialTransaction = useRef(transaction);
   const navigationTransaction = route.params?.transaction;
   useEffect(() => {
-    if (
-      initialTransaction.current !== navigationTransaction &&
-      navigationTransaction
-    ) {
+    if (initialTransaction.current !== navigationTransaction && navigationTransaction) {
       setTransaction(navigationTransaction);
     }
   }, [setTransaction, navigationTransaction]);
@@ -138,11 +134,7 @@ export default function SendSelectRecipient({ navigation, route }: Props) {
         style={[styles.root, { backgroundColor: colors.background }]}
         forceInset={forceInset}
       >
-        <TrackScreen
-          category="SendFunds"
-          name="SelectRecipient"
-          currencyName={currency.name}
-        />
+        <TrackScreen category="SendFunds" name="SelectRecipient" currencyName={currency.name} />
         <SyncSkipUnderPriority priority={100} />
         <SyncOneAccountOnMount priority={100} accountId={account.id} />
         <KeyboardView style={{ flex: 1 }}>
@@ -158,19 +150,9 @@ export default function SendSelectRecipient({ navigation, route }: Props) {
               onPress={onPressScan}
             />
             <View style={styles.separatorContainer}>
-              <View
-                style={[
-                  styles.separatorLine,
-                  { borderBottomColor: colors.lightFog },
-                ]}
-              />
+              <View style={[styles.separatorLine, { borderBottomColor: colors.lightFog }]} />
               <LText color="grey">{<Trans i18nKey="common.or" />}</LText>
-              <View
-                style={[
-                  styles.separatorLine,
-                  { borderBottomColor: colors.lightFog },
-                ]}
-              />
+              <View style={[styles.separatorLine, { borderBottomColor: colors.lightFog }]} />
             </View>
             <TouchableOpacity
               style={styles.pasteContainer}
@@ -219,9 +201,7 @@ export default function SendSelectRecipient({ navigation, route }: Props) {
           <View style={styles.container}>
             {transaction.recipient && !(error || warning) ? (
               <View style={styles.infoBox}>
-                <Alert type="primary">
-                  {t("send.recipient.verifyAddress")}
-                </Alert>
+                <Alert type="primary">{t("send.recipient.verifyAddress")}</Alert>
               </View>
             ) : null}
             <Button
@@ -241,10 +221,7 @@ export default function SendSelectRecipient({ navigation, route }: Props) {
         onClose={onBridgeErrorRetry}
         footerButtons={
           <>
-            <CancelButton
-              containerStyle={styles.button}
-              onPress={onBridgeErrorCancel}
-            />
+            <CancelButton containerStyle={styles.button} onPress={onBridgeErrorCancel} />
             <RetryButton
               containerStyle={[styles.button, styles.buttonRight]}
               onPress={onBridgeErrorRetry}

@@ -31,8 +31,7 @@ function AccountBalanceSummaryFooter({ account }: Props) {
   const [infoName, setInfoName] = useState<InfoName | typeof undefined>();
   const infoCandidates = useInfoCandidates();
 
-  const { energy: formattedEnergy, bandwidth, tronPower } =
-    account.tronResources || {};
+  const { energy: formattedEnergy, bandwidth, tronPower } = account.tronResources || {};
 
   const { freeUsed, freeLimit, gainedUsed, gainedLimit } = bandwidth || {};
 
@@ -51,10 +50,7 @@ function AccountBalanceSummaryFooter({ account }: Props) {
     setInfoName(undefined);
   }, []);
 
-  const onPressInfoCreator = useCallback(
-    (infoName: InfoName) => () => setInfoName(infoName),
-    [],
-  );
+  const onPressInfoCreator = useCallback((infoName: InfoName) => () => setInfoName(infoName), []);
 
   return (
     <ScrollView
@@ -76,9 +72,7 @@ function AccountBalanceSummaryFooter({ account }: Props) {
       <InfoItem
         title={t("account.availableBalance")}
         onPress={onPressInfoCreator("available")}
-        value={
-          <CurrencyUnitValue unit={unit} value={account.spendableBalance} />
-        }
+        value={<CurrencyUnitValue unit={unit} value={account.spendableBalance} />}
       />
       <InfoItem
         title={t("account.tronFrozen")}

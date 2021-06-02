@@ -66,15 +66,7 @@ class FilteredSearchBar extends PureComponent<Props, State> {
   };
 
   render() {
-    const {
-      keys,
-      renderList,
-      list,
-      renderEmptySearch,
-      inputWrapperStyle,
-      t,
-      colors,
-    } = this.props;
+    const { keys, renderList, list, renderEmptySearch, inputWrapperStyle, t, colors } = this.props;
     const { query, focused } = this.state;
 
     return (
@@ -84,10 +76,7 @@ class FilteredSearchBar extends PureComponent<Props, State> {
           style={[styles.wrapper, inputWrapperStyle]}
         >
           <View style={styles.iconContainer}>
-            <SearchIcon
-              size={20}
-              color={focused ? colors.darkBlue : colors.grey}
-            />
+            <SearchIcon size={20} color={focused ? colors.darkBlue : colors.grey} />
           </View>
           <TextInput
             onBlur={this.onBlur}
@@ -141,9 +130,6 @@ const styles = StyleSheet.create({
 });
 
 // $FlowFixMe
-const m: React$ComponentType<OwnProps> = compose(
-  withTranslation(),
-  withTheme,
-)(FilteredSearchBar);
+const m: React$ComponentType<OwnProps> = compose(withTranslation(), withTheme)(FilteredSearchBar);
 
 export default m;

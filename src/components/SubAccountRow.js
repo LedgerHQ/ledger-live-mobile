@@ -6,16 +6,8 @@ import {
 } from "@ledgerhq/live-common/lib/account";
 import React, { memo } from "react";
 import { View, StyleSheet } from "react-native";
-import {
-  RectButton,
-  LongPressGestureHandler,
-  State,
-} from "react-native-gesture-handler";
-import type {
-  SubAccount,
-  TokenAccount,
-  Account,
-} from "@ledgerhq/live-common/lib/types";
+import { RectButton, LongPressGestureHandler, State } from "react-native-gesture-handler";
+import type { SubAccount, TokenAccount, Account } from "@ledgerhq/live-common/lib/types";
 import { createStructuredSelector } from "reselect";
 import { connect } from "react-redux";
 import { useTheme } from "@react-navigation/native";

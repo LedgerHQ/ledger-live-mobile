@@ -78,10 +78,7 @@ class AuthPass extends PureComponent<Props, State> {
     ) {
       this.lock();
       this.appInBg = Date.now();
-    } else if (
-      nextAppState === "background" ||
-      this.state.appState === "active"
-    ) {
+    } else if (nextAppState === "background" || this.state.appState === "active") {
       this.appInBg = Date.now();
     }
     this.setState({ appState: nextAppState });
@@ -151,11 +148,7 @@ class AuthPass extends PureComponent<Props, State> {
         </>
       );
     }
-    return (
-      <SkipLockContext.Provider value={setEnabled}>
-        {children}
-      </SkipLockContext.Provider>
-    );
+    return <SkipLockContext.Provider value={setEnabled}>{children}</SkipLockContext.Provider>;
   }
 }
 

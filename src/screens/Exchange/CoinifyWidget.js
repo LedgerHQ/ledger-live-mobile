@@ -4,10 +4,7 @@ import { WebView } from "react-native-webview";
 import querystring from "querystring";
 import { ActivityIndicator, Linking, StyleSheet, View } from "react-native";
 import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
-import {
-  getAccountCurrency,
-  getMainAccount,
-} from "@ledgerhq/live-common/lib/account/helpers";
+import { getAccountCurrency, getMainAccount } from "@ledgerhq/live-common/lib/account/helpers";
 import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import { createAction } from "@ledgerhq/live-common/lib/hw/actions/app";
 import connectApp from "@ledgerhq/live-common/lib/hw/connectApp";
@@ -85,18 +82,10 @@ type Props = {
 };
 
 let resolvePromise = null;
-export default function CoinifyWidget({
-  mode,
-  account,
-  parentAccount,
-  device,
-  skipDevice,
-}: Props) {
+export default function CoinifyWidget({ mode, account, parentAccount, device, skipDevice }: Props) {
   const tradeId = useRef(null);
   const { colors } = useTheme();
-  const [requestingAction, setRequestingAction] = useState<
-    "none" | "connect" | "verify",
-  >("none");
+  const [requestingAction, setRequestingAction] = useState<"none" | "connect" | "verify">("none");
   const [firstLoadDone, setFirstLoadDone] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const webView = useRef();
@@ -287,8 +276,7 @@ export default function CoinifyWidget({
     setRequestingAction("verify");
   }, []);
 
-  const tokenCurrency =
-    account && account.type === "TokenAccount" ? account.token : null;
+  const tokenCurrency = account && account.type === "TokenAccount" ? account.token : null;
 
   const url = `${coinifyConfig.url}?${querystring.stringify(widgetConfig)}`;
 
@@ -331,10 +319,7 @@ export default function CoinifyWidget({
                 onResult={onResult}
               />
             ) : mode === "buy" ? (
-              <SkipDeviceVerification
-                account={mainAccount}
-                settleTrade={settleTrade}
-              />
+              <SkipDeviceVerification account={mainAccount} settleTrade={settleTrade} />
             ) : account ? (
               <DevicePart
                 account={account}
@@ -345,11 +330,7 @@ export default function CoinifyWidget({
               />
             ) : null
           ) : requestingAction === "verify" && mainAccount ? (
-            <VerifyAddress
-              account={mainAccount}
-              device={device}
-              onResult={settleTrade}
-            />
+            <VerifyAddress account={mainAccount} device={device} onResult={settleTrade} />
           ) : null}
         </View>
       </BottomModal>

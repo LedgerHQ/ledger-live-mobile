@@ -10,10 +10,7 @@ import {
   getAccountUnit,
   getMainAccount,
 } from "@ledgerhq/live-common/lib/account";
-import {
-  getDefaultExplorerView,
-  getAddressExplorer,
-} from "@ledgerhq/live-common/lib/explorers";
+import { getDefaultExplorerView, getAddressExplorer } from "@ledgerhq/live-common/lib/explorers";
 import {
   useCosmosMappedDelegations,
   useCosmosPreloadData,
@@ -63,9 +60,7 @@ function Delegations({ account }: Props) {
   const { colors } = useTheme();
   const { t } = useTranslation();
   const mainAccount = getMainAccount(account);
-  const delegations: CosmosMappedDelegation[] = useCosmosMappedDelegations(
-    mainAccount,
-  );
+  const delegations: CosmosMappedDelegation[] = useCosmosMappedDelegations(mainAccount);
 
   const currency = getAccountCurrency(mainAccount);
   const unit = getAccountUnit(mainAccount);
@@ -158,10 +153,7 @@ function Delegations({ account }: Props) {
 
   const onOpenExplorer = useCallback(
     (address: string) => {
-      const url = getAddressExplorer(
-        getDefaultExplorerView(account.currency),
-        address,
-      );
+      const url = getAddressExplorer(getDefaultExplorerView(account.currency), address);
       if (url) Linking.openURL(url);
     },
     [account.currency],
@@ -242,11 +234,7 @@ function Delegations({ account }: Props) {
                 {
                   label: t("cosmos.delegation.drawer.rewards"),
                   Component: (
-                    <LText
-                      numberOfLines={1}
-                      semiBold
-                      style={[styles.valueText]}
-                    >
+                    <LText numberOfLines={1} semiBold style={[styles.valueText]}>
                       {delegation.formattedPendingRewards ?? ""}
                     </LText>
                   ),
@@ -259,9 +247,7 @@ function Delegations({ account }: Props) {
                   label: t("cosmos.delegation.drawer.completionDate"),
                   Component: (
                     <LText numberOfLines={1} semiBold>
-                      <DateFromNow
-                        date={new Date(undelegation.completionDate).getTime()}
-                      />
+                      <DateFromNow date={new Date(undelegation.completionDate).getTime()} />
                     </LText>
                   ),
                 },
@@ -273,9 +259,7 @@ function Delegations({ account }: Props) {
                   label: t("cosmos.delegation.drawer.redelegatedFrom"),
                   Component: (
                     <Touchable
-                      onPress={() =>
-                        onOpenExplorer(redelegation.validatorSrcAddress)
-                      }
+                      onPress={() => onOpenExplorer(redelegation.validatorSrcAddress)}
                       event="DelegationOpenExplorer"
                     >
                       <LText
@@ -294,9 +278,7 @@ function Delegations({ account }: Props) {
                   label: t("cosmos.delegation.drawer.completionDate"),
                   Component: (
                     <LText numberOfLines={1} semiBold>
-                      <DateFromNow
-                        date={new Date(redelegation.completionDate).getTime()}
-                      />
+                      <DateFromNow date={new Date(redelegation.completionDate).getTime()} />
                     </LText>
                   ),
                 },
@@ -308,9 +290,7 @@ function Delegations({ account }: Props) {
 
   const actions = useMemo<DelegationDrawerActions>(() => {
     const rewardsDisabled =
-      !delegation ||
-      !delegation.pendingRewards ||
-      delegation.pendingRewards.isZero();
+      !delegation || !delegation.pendingRewards || delegation.pendingRewards.isZero();
 
     const redelegateEnabled = delegation && canRedelegate(account, delegation);
 
@@ -321,13 +301,8 @@ function Delegations({ account }: Props) {
           {
             label: t("delegation.actions.redelegate"),
             Icon: (props: IconProps) => (
-              <Circle
-                {...props}
-                bg={!redelegateEnabled ? colors.lightFog : colors.fog}
-              >
-                <RedelegateIcon
-                  color={!redelegateEnabled ? colors.grey : undefined}
-                />
+              <Circle {...props} bg={!redelegateEnabled ? colors.lightFog : colors.fog}>
+                <RedelegateIcon color={!redelegateEnabled ? colors.grey : undefined} />
               </Circle>
             ),
             disabled: !redelegateEnabled,
@@ -337,15 +312,8 @@ function Delegations({ account }: Props) {
           {
             label: t("delegation.actions.collectRewards"),
             Icon: (props: IconProps) => (
-              <Circle
-                {...props}
-                bg={
-                  rewardsDisabled ? colors.lightFog : rgba(colors.yellow, 0.2)
-                }
-              >
-                <ClaimRewardIcon
-                  color={rewardsDisabled ? colors.grey : undefined}
-                />
+              <Circle {...props} bg={rewardsDisabled ? colors.lightFog : rgba(colors.yellow, 0.2)}>
+                <ClaimRewardIcon color={rewardsDisabled ? colors.grey : undefined} />
               </Circle>
             ),
             disabled: rewardsDisabled,
@@ -357,15 +325,9 @@ function Delegations({ account }: Props) {
             Icon: (props: IconProps) => (
               <Circle
                 {...props}
-                bg={
-                  !undelegationEnabled
-                    ? colors.lightFog
-                    : rgba(colors.alert, 0.2)
-                }
+                bg={!undelegationEnabled ? colors.lightFog : rgba(colors.alert, 0.2)}
               >
-                <UndelegateIcon
-                  color={!undelegationEnabled ? colors.grey : undefined}
-                />
+                <UndelegateIcon color={!undelegationEnabled ? colors.grey : undefined} />
               </Circle>
             ),
             disabled: !undelegationEnabled,
@@ -403,19 +365,13 @@ function Delegations({ account }: Props) {
       {totalRewardsAvailable.gt(0) && (
         <>
           <AccountSectionLabel name={t("account.claimReward.sectionLabel")} />
-          <View
-            style={[styles.rewardsWrapper, { backgroundColor: colors.card }]}
-          >
+          <View style={[styles.rewardsWrapper, { backgroundColor: colors.card }]}>
             <View style={styles.column}>
               <LText semiBold style={styles.label}>
                 <CurrencyUnitValue value={totalRewardsAvailable} unit={unit} />
               </LText>
               <LText semiBold style={styles.subLabel} color="grey">
-                <CounterValue
-                  currency={currency}
-                  value={totalRewardsAvailable}
-                  withPlaceholder
-                />
+                <CounterValue currency={currency} value={totalRewardsAvailable} withPlaceholder />
               </LText>
             </View>
             <Button
@@ -445,19 +401,13 @@ function Delegations({ account }: Props) {
           <AccountSectionLabel
             name={t("account.delegation.sectionLabel")}
             RightComponent={
-              <DelegationLabelRight
-                disabled={delegationDisabled}
-                onPress={onDelegate}
-              />
+              <DelegationLabelRight disabled={delegationDisabled} onPress={onDelegate} />
             }
           />
           {delegations.map((d, i) => (
             <View
               key={d.validatorAddress}
-              style={[
-                styles.delegationsWrapper,
-                { backgroundColor: colors.card },
-              ]}
+              style={[styles.delegationsWrapper, { backgroundColor: colors.card }]}
             >
               <DelegationRow
                 delegation={d}
@@ -476,10 +426,7 @@ function Delegations({ account }: Props) {
           {undelegations.map((d, i) => (
             <View
               key={d.validatorAddress}
-              style={[
-                styles.delegationsWrapper,
-                { backgroundColor: colors.card },
-              ]}
+              style={[styles.delegationsWrapper, { backgroundColor: colors.card }]}
             >
               <DelegationRow
                 delegation={d}

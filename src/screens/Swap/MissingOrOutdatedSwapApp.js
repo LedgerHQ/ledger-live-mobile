@@ -11,11 +11,7 @@ import LText from "../../components/LText";
 import AppIcon from "../Manager/AppsList/AppIcon";
 import { TrackScreen } from "../../analytics";
 
-const MissingOrOutdatedSwapApp = ({
-  outdated = false,
-}: {
-  outdated?: boolean,
-}) => {
+const MissingOrOutdatedSwapApp = ({ outdated = false }: { outdated?: boolean }) => {
   const { colors } = useTheme();
   const { navigate } = useNavigation();
   const onPress = () => {

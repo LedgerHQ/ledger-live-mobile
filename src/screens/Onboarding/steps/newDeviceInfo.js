@@ -1,13 +1,7 @@
 // @flow
 
 import React, { useCallback, useState } from "react";
-import {
-  StyleSheet,
-  View,
-  Dimensions,
-  TouchableOpacity,
-  Image,
-} from "react-native";
+import { StyleSheet, View, Dimensions, TouchableOpacity, Image } from "react-native";
 import { Trans } from "react-i18next";
 import { TabView, SceneMap } from "react-native-tab-view";
 import Svg, { Ellipse } from "react-native-svg";

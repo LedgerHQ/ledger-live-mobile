@@ -4,10 +4,7 @@ import { View, StyleSheet, Platform } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { getAccountCurrency } from "@ledgerhq/live-common/lib/account";
 import type { Currency, Unit } from "@ledgerhq/live-common/lib/types";
-import type {
-  Portfolio,
-  ValueChange,
-} from "@ledgerhq/live-common/lib/portfolio/v2/types";
+import type { Portfolio, ValueChange } from "@ledgerhq/live-common/lib/portfolio/v2/types";
 import { getCurrencyColor } from "@ledgerhq/live-common/lib/currencies/color";
 import { ensureContrast } from "../colors";
 import { useTimeRange } from "../actions/settings";
@@ -31,11 +28,7 @@ type Props = {
   renderTitle?: ({ counterValueUnit: Unit, item: Item }) => React$Node,
 };
 
-export default function GraphCard({
-  portfolio,
-  renderTitle,
-  counterValueCurrency,
-}: Props) {
+export default function GraphCard({ portfolio, renderTitle, counterValueCurrency }: Props) {
   const [hoveredItem, setHoverItem] = useState<?Item>();
   const [, setTimeRange, timeRangeItems] = useTimeRange();
   const { colors } = useTheme();
@@ -50,10 +43,7 @@ export default function GraphCard({
 
   const graphColor =
     accounts.length === 1
-      ? ensureContrast(
-          getCurrencyColor(getAccountCurrency(accounts[0])),
-          colors.background,
-        )
+      ? ensureContrast(getCurrencyColor(getAccountCurrency(accounts[0])), colors.background)
       : "";
 
   return (
@@ -126,11 +116,7 @@ function GraphCardHeader({
         <View style={styles.subtitleContainer}>
           {isLoading ? (
             <>
-              <Placeholder
-                width={50}
-                containerHeight={19}
-                style={{ marginRight: 10 }}
-              />
+              <Placeholder width={50} containerHeight={19} style={{ marginRight: 10 }} />
               <Placeholder width={50} containerHeight={19} />
             </>
           ) : hoveredItem ? (
@@ -139,11 +125,7 @@ function GraphCardHeader({
             </LText>
           ) : (
             <View style={styles.delta}>
-              <Delta
-                percent
-                valueChange={valueChange}
-                style={styles.deltaPercent}
-              />
+              <Delta percent valueChange={valueChange} style={styles.deltaPercent} />
               <Delta valueChange={valueChange} unit={unit} />
             </View>
           )}

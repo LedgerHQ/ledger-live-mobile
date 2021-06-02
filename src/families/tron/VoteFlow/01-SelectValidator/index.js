@@ -78,11 +78,7 @@ export default function SelectValidator({ navigation, route }: Props) {
 
   const { votes } = transaction;
 
-  const sortedSuperRepresentatives = useSortedSr(
-    searchQuery,
-    superRepresentatives,
-    votes || [],
-  );
+  const sortedSuperRepresentatives = useSortedSr(searchQuery, superRepresentatives, votes || []);
 
   const onSelectSuperRepresentative = useCallback(
     ({ address }, selected) => {
@@ -114,21 +110,11 @@ export default function SelectValidator({ navigation, route }: Props) {
       accountId: account.id,
       transaction: tx,
     });
-  }, [
-    account,
-    navigation,
-    transaction,
-    tronPower,
-    bridge,
-    route.params.fromStep2,
-  ]);
+  }, [account, navigation, transaction, tronPower, bridge, route.params.fromStep2]);
 
   const remainingCount = SR_MAX_VOTES - votes.length;
 
-  const disabled = useMemo(
-    () => votes.length === 0 || votes.length > SR_MAX_VOTES,
-    [votes],
-  );
+  const disabled = useMemo(() => votes.length === 0 || votes.length > SR_MAX_VOTES, [votes]);
 
   const renderItem = useCallback(
     ({ item }) => (
@@ -149,10 +135,7 @@ export default function SelectValidator({ navigation, route }: Props) {
         style={[styles.root, { backgroundColor: colors.background }]}
         forceInset={forceInset}
       >
-        <SelectValidatorSearchBox
-          searchQuery={searchQuery}
-          setSearchQuery={setSearchQuery}
-        />
+        <SelectValidatorSearchBox searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
         <FlatList
           keyExtractor={({ address }) => address}
           initialNumToRender={SR_THRESHOLD}
@@ -181,9 +164,7 @@ export function SelectValidatorHeaderLeft() {
     {
       Icon: () => <Trophy size={18} color={colors.live} />,
       title: <Trans i18nKey="tron.info.superRepresentative.title" />,
-      description: (
-        <Trans i18nKey="tron.info.superRepresentative.description" />
-      ),
+      description: <Trans i18nKey="tron.info.superRepresentative.description" />,
     },
     {
       Icon: () => <Medal size={18} color={colors.grey} />,
@@ -197,11 +178,7 @@ export function SelectValidatorHeaderLeft() {
       <TouchableOpacity style={styles.headerButton} onPress={openInfoModal}>
         <Info size={16} color={colors.grey} />
       </TouchableOpacity>
-      <InfoModal
-        isOpened={!!infoModalOpen}
-        onClose={closeInfoModal}
-        data={infoModalData}
-      />
+      <InfoModal isOpened={!!infoModalOpen} onClose={closeInfoModal} data={infoModalData} />
     </>
   );
 }

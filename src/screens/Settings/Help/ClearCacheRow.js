@@ -47,11 +47,7 @@ export default function ClearCacheRow() {
         }
         onPress={onPress}
       />
-      <BottomModal
-        id="ClearCacheRow"
-        isOpened={isModalOpened}
-        onClose={onRequestClose}
-      >
+      <BottomModal id="ClearCacheRow" isOpened={isModalOpened} onClose={onRequestClose}>
         <ModalBottomAction
           title={null}
           icon={
@@ -73,10 +69,7 @@ export default function ClearCacheRow() {
                 type="primary"
                 title={t("settings.help.clearCacheButton")}
                 onPress={onClearCache}
-                containerStyle={[
-                  styles.buttonContainer,
-                  styles.buttonMarginLeft,
-                ]}
+                containerStyle={[styles.buttonContainer, styles.buttonMarginLeft]}
                 event="DoClearCache"
               />
             </View>

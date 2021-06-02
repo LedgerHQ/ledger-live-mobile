@@ -3,10 +3,7 @@ import React, { useCallback, memo, useRef, useEffect } from "react";
 import { View, StyleSheet, TouchableOpacity, Animated } from "react-native";
 import { Trans } from "react-i18next";
 
-import type {
-  Vote,
-  SuperRepresentative,
-} from "@ledgerhq/live-common/lib/families/tron/types";
+import type { Vote, SuperRepresentative } from "@ledgerhq/live-common/lib/families/tron/types";
 
 import Swipeable from "react-native-gesture-handler/Swipeable";
 import * as Animatable from "react-native-animatable";
@@ -23,13 +20,7 @@ import Edit from "../../../icons/Edit";
 
 const { width } = getWindowDimensions();
 
-const RightAction = ({
-  dragX,
-  onRemove,
-}: {
-  dragX: *,
-  onRemove: () => void,
-}) => {
+const RightAction = ({ dragX, onRemove }: { dragX: *, onRemove: () => void }) => {
   const { colors } = useTheme();
   const scale = dragX.interpolate({
     inputRange: [-57, -56, -16, 0],
@@ -69,14 +60,7 @@ type VoteRowProps = {
   openIndex: number,
 };
 
-const VoteRow = ({
-  vote,
-  onEdit,
-  onRemove,
-  index,
-  onOpen,
-  openIndex,
-}: VoteRowProps) => {
+const VoteRow = ({ vote, onEdit, onRemove, index, onOpen, openIndex }: VoteRowProps) => {
   const { colors } = useTheme();
   const rowRef = useRef();
   const swipeRef = useRef();
@@ -90,8 +74,7 @@ const VoteRow = ({
         if (swipeRef.current && swipeRef.current.openRight) {
           swipeRef.current.openRight();
           setTimeout(() => {
-            if (swipeRef.current && swipeRef.current.close)
-              swipeRef.current.close();
+            if (swipeRef.current && swipeRef.current.close) swipeRef.current.close();
           }, 1000);
         }
       }, 400);
@@ -105,25 +88,17 @@ const VoteRow = ({
   ]);
 
   useEffect(() => {
-    if (openIndex !== index && swipeRef.current && swipeRef.current.close)
-      swipeRef.current.close();
+    if (openIndex !== index && swipeRef.current && swipeRef.current.close) swipeRef.current.close();
   }, [index, openIndex, swipeRef]);
 
   const removeVoteAnimStart = useCallback(() => {
     if (rowRef && rowRef.current && rowRef.current.transitionTo)
-      rowRef.current.transitionTo(
-        { opacity: 0, height: 0, marginVertical: 0 },
-        400,
-      );
+      rowRef.current.transitionTo({ opacity: 0, height: 0, marginVertical: 0 }, 400);
     else removeVote();
   }, [rowRef, removeVote]);
 
   return (
-    <Animatable.View
-      style={styles.root}
-      ref={rowRef}
-      onTransitionEnd={removeVote}
-    >
+    <Animatable.View style={styles.root} ref={rowRef} onTransitionEnd={removeVote}>
       <Swipeable
         ref={swipeRef}
         friction={2}
@@ -136,10 +111,7 @@ const VoteRow = ({
       >
         <TouchableOpacity
           activeOpacity={0.8}
-          style={[
-            styles.srRow,
-            { backgroundColor: colors.card, borderColor: colors.lightFog },
-          ]}
+          style={[styles.srRow, { backgroundColor: colors.card, borderColor: colors.lightFog }]}
           onPress={() => onEdit({ address, voteCount }, name || address)}
         >
           <View style={styles.row}>

@@ -24,11 +24,7 @@ class DeviceNanoAction extends PureComponent<Props> {
   render() {
     const { modelId, ...rest } = this.props;
 
-    return modelId === "nanoX" ? (
-      <DeviceNanoXAction {...rest} />
-    ) : (
-      <DeviceNanoSAction {...rest} />
-    );
+    return modelId === "nanoX" ? <DeviceNanoXAction {...rest} /> : <DeviceNanoSAction {...rest} />;
   }
 }
 

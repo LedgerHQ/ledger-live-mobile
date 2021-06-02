@@ -64,12 +64,7 @@ const SwapFormAmount = ({ navigation, route }: Props) => {
     enabledTradeMethods[0] || "fixed",
   );
 
-  const {
-    status,
-    transaction,
-    setTransaction,
-    bridgePending,
-  } = useBridgeTransaction(() => ({
+  const { status, transaction, setTransaction, bridgePending } = useBridgeTransaction(() => ({
     account: fromAccount,
     parentAccount: fromParentAccount,
   }));
@@ -86,9 +81,7 @@ const SwapFormAmount = ({ navigation, route }: Props) => {
     amount => {
       if (!amount.eq(transaction.amount)) {
         const bridge = getAccountBridge(fromAccount, fromParentAccount);
-        const fromCurrency = getAccountCurrency(
-          getMainAccount(fromAccount, fromParentAccount),
-        );
+        const fromCurrency = getAccountCurrency(getMainAccount(fromAccount, fromParentAccount));
         setTransaction(
           bridge.updateTransaction(transaction, {
             amount,
@@ -165,15 +158,7 @@ const SwapFormAmount = ({ navigation, route }: Props) => {
       status,
       rateExpiration,
     });
-  }, [
-    navigation,
-    route.params,
-    exchange,
-    rate,
-    transaction,
-    status,
-    rateExpiration,
-  ]);
+  }, [navigation, route.params, exchange, rate, transaction, status, rateExpiration]);
 
   const toggleSendMax = useCallback(() => {
     const newUseAllAmount = !useAllAmount;
@@ -185,11 +170,9 @@ const SwapFormAmount = ({ navigation, route }: Props) => {
   const canContinue = !bridgePending && !hasErrors && rate;
 
   const amountError =
-    transaction.amount.gt(0) &&
-    (error || status.errors?.gasPrice || status.errors?.amount);
+    transaction.amount.gt(0) && (error || status.errors?.gasPrice || status.errors?.amount);
   const hideError =
-    bridgePending ||
-    (useAllAmount && amountError && amountError instanceof AmountRequired);
+    bridgePending || (useAllAmount && amountError && amountError instanceof AmountRequired);
 
   const options = [
     {
@@ -205,9 +188,7 @@ const SwapFormAmount = ({ navigation, route }: Props) => {
   ];
 
   const toValue = rate
-    ? transaction.amount
-        .times(rate.magnitudeAwareRate)
-        .minus(rate.payoutNetworkFees || 0)
+    ? transaction.amount.times(rate.magnitudeAwareRate).minus(rate.payoutNetworkFees || 0)
     : null;
 
   const actualRate = toValue ? toValue.dividedBy(transaction.amount) : null;
@@ -215,11 +196,7 @@ const SwapFormAmount = ({ navigation, route }: Props) => {
   return (
     <KeyboardView style={styles.container}>
       <View style={styles.toggleWrapper}>
-        <ToggleButton
-          value={tradeMethod}
-          options={options}
-          onChange={onTradeMethodChange}
-        />
+        <ToggleButton value={tradeMethod} options={options} onChange={onTradeMethodChange} />
       </View>
       <View style={styles.rateWrapper}>
         {actualRate && rateExpiration ? (
@@ -249,11 +226,7 @@ const SwapFormAmount = ({ navigation, route }: Props) => {
           }
           hasError={!hideError && !!error}
         />
-        <LText
-          style={[styles.error]}
-          color={amountError ? "alert" : "orange"}
-          numberOfLines={2}
-        >
+        <LText style={[styles.error]} color={amountError ? "alert" : "orange"} numberOfLines={2}>
           <TranslatedError error={(!hideError && amountError) || undefined} />
         </LText>
       </View>
@@ -279,11 +252,7 @@ const SwapFormAmount = ({ navigation, route }: Props) => {
               <Trans i18nKey="transfer.swap.form.amount.available" />
             </LText>
             <LText tertiary>
-              <CurrencyUnitValue
-                showCode
-                unit={fromUnit}
-                value={maxSpendable}
-              />
+              <CurrencyUnitValue showCode unit={fromUnit} value={maxSpendable} />
             </LText>
           </View>
           <View style={styles.availableRight}>
@@ -304,13 +273,7 @@ const SwapFormAmount = ({ navigation, route }: Props) => {
             type="primary"
             disabled={!canContinue}
             title={
-              <Trans
-                i18nKey={
-                  bridgePending
-                    ? "transfer.swap.loadingFees"
-                    : "common.continue"
-                }
-              />
+              <Trans i18nKey={bridgePending ? "transfer.swap.loadingFees" : "common.continue"} />
             }
             onPress={onContinue}
           />

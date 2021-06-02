@@ -1,12 +1,7 @@
 /* @flow */
 
 import React, { PureComponent } from "react";
-import {
-  View,
-  TextInput as ReactNativeTextInput,
-  StyleSheet,
-  PixelRatio,
-} from "react-native";
+import { View, TextInput as ReactNativeTextInput, StyleSheet, PixelRatio } from "react-native";
 import Icon from "react-native-vector-icons/dist/Ionicons";
 import { useTheme } from "@react-navigation/native";
 import Touchable from "./Touchable";
@@ -92,9 +87,7 @@ class TextInput extends PureComponent<*, State> {
       flags.keyboardType = "visible-password";
     }
     const shouldShowClearButton =
-      !!value &&
-      ((focused && clearButtonMode === "while-editing") ||
-        clearButtonMode === "always");
+      !!value && ((focused && clearButtonMode === "while-editing") || clearButtonMode === "always");
     // {...otherProps} needs to come first to allow an override.
 
     // Preprocess the font size to override system scaling
@@ -111,19 +104,12 @@ class TextInput extends PureComponent<*, State> {
       <View style={[styles.container, containerStyle]}>
         <ReactNativeTextInput
           ref={innerRef}
-          style={[
-            { flex: 1, color: colors.darkBlue },
-            style,
-            overrideFontScaling,
-            dynamicHeight,
-          ]}
+          style={[{ flex: 1, color: colors.darkBlue }, style, overrideFontScaling, dynamicHeight]}
           {...otherProps}
           onBlur={this.onBlur}
           onFocus={this.onFocus}
           onChangeText={this.onChangeText}
-          onContentSizeChange={
-            dynamicHeight.height ? this.onContentSizeChange : undefined
-          }
+          onContentSizeChange={dynamicHeight.height ? this.onContentSizeChange : undefined}
           autoFocus={focused}
           value={value}
           allowFontScaling={false}

@@ -12,12 +12,7 @@ type Props = {
   onPress: (address: string) => void,
 };
 
-export default function DelegationInfo({
-  address,
-  name,
-  formattedAmount,
-  onPress,
-}: Props) {
+export default function DelegationInfo({ address, name, formattedAmount, onPress }: Props) {
   const { colors } = useTheme();
   return (
     <View style={[styles.wrapper, { borderLeftColor: colors.fog }]}>

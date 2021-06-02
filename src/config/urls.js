@@ -38,8 +38,7 @@ export const urls = {
       "https://support.ledger.com/hc/en-us/articles/360012109220?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=error_syncerror",
     LedgerAPIErrorWithMessage:
       "https://status.ledger.com?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=error_apierrorwithmessage",
-    StratisDown2021Warning:
-      "https://support.ledger.com/hc/en-us/articles/115005175329",
+    StratisDown2021Warning: "https://support.ledger.com/hc/en-us/articles/115005175329",
   },
   multipleAddresses:
     "https://support.ledger.com/hc/en-us/articles/360033802154?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=ops_details_change",
@@ -102,16 +101,13 @@ export const urls = {
     "https://shop.ledger.com/pages/ledger-live-terms-of-use?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=compoundTnC",
   approvedOperation:
     "https://support.ledger.com/hc/en-us/articles/115005307809-Track-your-transaction?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=compoundTX",
-  recoveryPhraseInfo:
-    "https://www.ledger.com/academy/crypto/what-is-a-recovery-phrase",
-  fixConnectionIssues:
-    "https://support.ledger.com/hc/en-us/articles/360025864773",
+  recoveryPhraseInfo: "https://www.ledger.com/academy/crypto/what-is-a-recovery-phrase",
+  fixConnectionIssues: "https://support.ledger.com/hc/en-us/articles/360025864773",
   otgCable:
     "https://support.ledger.com/hc/en-us/articles/115005463729-OTG-Kit-adapters-for-your-Ledger-devices",
   ledgerStatus:
     "https://support.ledger.com/hc/en-us?utm_source=ledger_live_mobile&utm_medium=self_referral",
-  bitcoinAddressType:
-    "https://www.ledger.com/academy/difference-between-segwit-and-native-segwit",
+  bitcoinAddressType: "https://www.ledger.com/academy/difference-between-segwit-and-native-segwit",
   supportPage:
     "https://support.ledgerwallet.com/hc/en-us?utm_source=ledger_live_mobile&utm_medium=self_referral",
   maxSpendable:

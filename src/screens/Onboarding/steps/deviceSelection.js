@@ -26,10 +26,7 @@ function OnboardingStepDeviceSelection({ navigation }: *) {
   );
 
   return (
-    <AnimatedHeaderView
-      hasBackButton
-      title={<Trans i18nKey="onboarding.stepSelectDevice.title" />}
-    >
+    <AnimatedHeaderView hasBackButton title={<Trans i18nKey="onboarding.stepSelectDevice.title" />}>
       <TrackScreen category="Onboarding" name="SelectDevice" />
       {Object.keys(deviceIds).map((deviceId, index) => (
         <Touchable
@@ -45,11 +42,7 @@ function OnboardingStepDeviceSelection({ navigation }: *) {
           </LText>
           <View style={styles.imageContainer}>
             {deviceIds[deviceId] ? (
-              <Image
-                style={styles.bgImage}
-                resizeMode="contain"
-                source={deviceIds[deviceId]}
-              />
+              <Image style={styles.bgImage} resizeMode="contain" source={deviceIds[deviceId]} />
             ) : null}
           </View>
         </Touchable>

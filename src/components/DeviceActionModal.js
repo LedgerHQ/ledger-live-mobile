@@ -54,11 +54,7 @@ export default function DeviceActionModal({
           }
         />
       )}
-      <Touchable
-        event="DeviceActionModalClose"
-        style={styles.close}
-        onPress={onClose}
-      >
+      <Touchable event="DeviceActionModalClose" style={styles.close} onPress={onClose}>
         <Close color={colors.fog} size={20} />
       </Touchable>
     </BottomModal>

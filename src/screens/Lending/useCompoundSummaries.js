@@ -24,8 +24,6 @@ const makeSummaries = (accounts: AccountLikeArray): CompoundAccountSummary[] =>
     })
     .filter(Boolean);
 
-export function useCompoundSummaries(
-  accounts: AccountLikeArray,
-): CompoundAccountSummary[] {
+export function useCompoundSummaries(accounts: AccountLikeArray): CompoundAccountSummary[] {
   return useMemo(() => makeSummaries(accounts), [accounts]);
 }

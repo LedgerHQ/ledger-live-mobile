@@ -57,12 +57,7 @@ function RenderError({ error, status, onBypassGenuine, onRetry }: Props) {
     <View style={styles.root}>
       <TrackScreen category="PairDevices" name="Error" />
       <View style={styles.body}>
-        <GenericErrorView
-          error={error}
-          outerError={outerError}
-          withDescription
-          withIcon
-        />
+        <GenericErrorView error={error} outerError={outerError} withDescription withIcon />
         <View style={styles.buttonContainer}>
           <Button
             event="PairDevicesRetry"

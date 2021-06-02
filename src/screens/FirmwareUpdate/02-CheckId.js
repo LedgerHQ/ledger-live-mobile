@@ -93,23 +93,13 @@ class FirmwareUpdateCheckId extends Component<Props, State> {
         <TrackScreen category="FirmwareUpdate" name="CheckId" />
         <View style={styles.body}>
           <View style={styles.device}>
-            <DeviceNanoAction
-              action="accept"
-              screen="validation"
-              width={1.2 * windowWidth}
-            />
+            <DeviceNanoAction action="accept" screen="validation" width={1.2 * windowWidth} />
           </View>
           <LText style={styles.description} color="smoke">
-            <Trans
-              i18nKey="FirmwareUpdateCheckId.description"
-              values={deviceNames.nanoX}
-            />
+            <Trans i18nKey="FirmwareUpdateCheckId.description" values={deviceNames.nanoX} />
           </LText>
           <View
-            style={[
-              styles.idContainer,
-              { borderColor: colors.fog, maxWidth: windowWidth - 40 },
-            ]}
+            style={[styles.idContainer, { borderColor: colors.fog, maxWidth: windowWidth - 40 }]}
           >
             {osu &&
               manager.formatHashName(osu.hash).map(hash => (

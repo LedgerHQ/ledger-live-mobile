@@ -26,9 +26,7 @@ export default function AddAccountsNavigator({ route }: { route: Route }) {
   const currency = route && route.params && route.params.currency;
   const token = route && route.params && route.params.token;
   const returnToSwap = route && route.params && route.params.returnToSwap;
-  const stackNavConfig = useMemo(() => getStackNavigatorConfig(colors), [
-    colors,
-  ]);
+  const stackNavConfig = useMemo(() => getStackNavigatorConfig(colors), [colors]);
   return (
     <Stack.Navigator
       headerMode="float"
@@ -62,9 +60,7 @@ export default function AddAccountsNavigator({ route }: { route: Route }) {
       <Stack.Screen
         name={ScreenName.AddAccountsSelectDevice}
         component={AddAccountsSelectDevice}
-        initialParams={
-          currency ? { currency, inline: true, returnToSwap } : undefined
-        }
+        initialParams={currency ? { currency, inline: true, returnToSwap } : undefined}
         options={{
           headerTitle: () => (
             <StepHeader

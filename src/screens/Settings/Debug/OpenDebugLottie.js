@@ -8,9 +8,6 @@ export default function OpenLottie() {
   const navigation = useNavigation();
 
   return (
-    <SettingsRow
-      title="Debug Lottie"
-      onPress={() => navigation.navigate(ScreenName.DebugLottie)}
-    />
+    <SettingsRow title="Debug Lottie" onPress={() => navigation.navigate(ScreenName.DebugLottie)} />
   );
 }

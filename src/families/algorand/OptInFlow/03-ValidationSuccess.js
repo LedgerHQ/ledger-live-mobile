@@ -47,9 +47,7 @@ export default function ValidationSuccess({ navigation, route }: Props) {
 
   const token = useMemo(() => {
     const options =
-      account && account.type === "Account"
-        ? listTokensForCryptoCurrency(account.currency)
-        : [];
+      account && account.type === "Account" ? listTokensForCryptoCurrency(account.currency) : [];
     return options.find(({ id }) => id === transaction.assetId);
   }, [account, transaction]);
 

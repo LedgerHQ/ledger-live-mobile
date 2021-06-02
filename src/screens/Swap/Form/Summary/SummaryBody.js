@@ -10,17 +10,12 @@ import {
   getAccountUnit,
   getAccountCurrency,
 } from "@ledgerhq/live-common/lib/account/helpers";
-import type {
-  Exchange,
-  ExchangeRate,
-} from "@ledgerhq/live-common/lib/exchange/swap/types";
+import type { Exchange, ExchangeRate } from "@ledgerhq/live-common/lib/exchange/swap/types";
 import { useTheme } from "@react-navigation/native";
 import LText from "../../../../components/LText";
 import CurrencyUnitValue from "../../../../components/CurrencyUnitValue";
 import InfoModal from "../../../../components/InfoModal";
-import SectionSeparator, {
-  ArrowDownCircle,
-} from "../../../../components/SectionSeparator";
+import SectionSeparator, { ArrowDownCircle } from "../../../../components/SectionSeparator";
 import CurrencyIcon from "../../../../components/CurrencyIcon";
 import ExternalLink from "../../../../icons/ExternalLink";
 
@@ -41,9 +36,7 @@ const SummaryBody = ({
   const toCurrency = getAccountCurrency(toAccount);
   const { magnitudeAwareRate, payoutNetworkFees } = exchangeRate;
   const { amount } = status;
-  const [payoutFeesDrawerVisibility, setPayoutFeesDrawerVisibility] = useState(
-    false,
-  );
+  const [payoutFeesDrawerVisibility, setPayoutFeesDrawerVisibility] = useState(false);
   const openProvider = useCallback(() => {
     Linking.openURL(urls.swap.providers[exchangeRate.provider].main);
   }, [exchangeRate.provider]);
@@ -56,12 +49,7 @@ const SummaryBody = ({
         </LText>
         <View style={styles.accountNameWrapper}>
           <CurrencyIcon size={16} currency={fromCurrency} />
-          <LText
-            numberOfLines={1}
-            ellipsizeMode="middle"
-            semiBold
-            style={styles.value}
-          >
+          <LText numberOfLines={1} ellipsizeMode="middle" semiBold style={styles.value}>
             {getAccountName(fromAccount)}
           </LText>
         </View>
@@ -90,12 +78,7 @@ const SummaryBody = ({
         </LText>
         <View style={styles.accountNameWrapper}>
           <CurrencyIcon size={16} currency={toCurrency} />
-          <LText
-            numberOfLines={1}
-            ellipsizeMode="middle"
-            semiBold
-            style={styles.value}
-          >
+          <LText numberOfLines={1} ellipsizeMode="middle" semiBold style={styles.value}>
             {getAccountName(toAccount)}
           </LText>
         </View>
@@ -125,10 +108,7 @@ const SummaryBody = ({
             onPress={() => setPayoutFeesDrawerVisibility(true)}
             style={{ flexDirection: "row", alignItems: "center" }}
           >
-            <LText
-              style={{ ...styles.label, flex: 0, marginRight: 4 }}
-              color="smoke"
-            >
+            <LText style={{ ...styles.label, flex: 0, marginRight: 4 }} color="smoke">
               <Trans i18nKey="transfer.swap.form.summary.payoutNetworkFees" />
             </LText>
             <Icon size={13} color={colors.smoke} name={"info-circle"} />
@@ -148,10 +128,7 @@ const SummaryBody = ({
           <LText primary style={styles.label} color="smoke">
             <Trans i18nKey="transfer.swap.form.summary.provider" />
           </LText>
-          <TouchableOpacity
-            style={styles.providerLinkContainer}
-            onPress={openProvider}
-          >
+          <TouchableOpacity style={styles.providerLinkContainer} onPress={openProvider}>
             <LText semiBold style={styles.providerLink} color="live">
               {exchangeRate.provider}
             </LText>
@@ -163,9 +140,7 @@ const SummaryBody = ({
             <Trans i18nKey="transfer.swap.form.summary.method" />
           </LText>
           <LText semiBold style={styles.providerLink}>
-            <Trans
-              i18nKey={`transfer.swap.tradeMethod.${exchangeRate.tradeMethod}`}
-            />
+            <Trans i18nKey={`transfer.swap.tradeMethod.${exchangeRate.tradeMethod}`} />
           </LText>
         </View>
       </View>

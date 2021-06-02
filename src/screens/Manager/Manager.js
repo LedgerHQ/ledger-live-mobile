@@ -63,14 +63,9 @@ const Manager = ({
   /** storage warning modal state */
   const [storageWarning, setStorageWarning] = useState(null);
   /** install app with dependencies modal state */
-  const [appInstallWithDependencies, setAppInstallWithDependencies] = useState(
-    null,
-  );
+  const [appInstallWithDependencies, setAppInstallWithDependencies] = useState(null);
   /** uninstall app with dependencies modal state */
-  const [
-    appUninstallWithDependencies,
-    setAppUninstallWithDependencies,
-  ] = useState(null);
+  const [appUninstallWithDependencies, setAppUninstallWithDependencies] = useState(null);
 
   /** open error modal each time a new error appears in state.currentError */
   useEffect(() => {
@@ -84,9 +79,7 @@ const Manager = ({
 
   useEffect(() => {
     navigation.setOptions({
-      headerBackImage: blockNavigation
-        ? () => null
-        : defaultNavigationOptions.headerBackImage,
+      headerBackImage: blockNavigation ? () => null : defaultNavigationOptions.headerBackImage,
       gestureEnabled: !blockNavigation,
     });
   }, [navigation, blockNavigation]);
@@ -97,10 +90,7 @@ const Manager = ({
    */
   const quitManager = useCallback(() => {
     navigation.dispatch({
-      ...CommonActions.navigate(
-        quitManagerAction.payload.name,
-        quitManagerAction.payload.params,
-      ),
+      ...CommonActions.navigate(quitManagerAction.payload.name, quitManagerAction.payload.params),
       force: true, // custom navigation option to force redirect
     });
     setQuitManagerAction(null);
@@ -120,9 +110,7 @@ const Manager = ({
     setQuitManagerAction,
   ]);
 
-  const resetStorageWarning = useCallback(() => setStorageWarning(null), [
-    setStorageWarning,
-  ]);
+  const resetStorageWarning = useCallback(() => setStorageWarning(null), [setStorageWarning]);
 
   return (
     <>
@@ -157,10 +145,7 @@ const Manager = ({
         installQueue={installQueue}
         uninstallQueue={uninstallQueue}
       />
-      <StorageWarningModal
-        warning={storageWarning}
-        onClose={resetStorageWarning}
-      />
+      <StorageWarningModal warning={storageWarning} onClose={resetStorageWarning} />
       <AppDependenciesModal
         appInstallWithDependencies={appInstallWithDependencies}
         onClose={resetAppInstallWithDependencies}

@@ -32,10 +32,7 @@ export default function CoinifyWidgetScreen({ route }: Props) {
   const forceInset = { bottom: "always" };
 
   return (
-    <SafeAreaView
-      style={[styles.root, { backgroundColor: colors.card }]}
-      forceInset={forceInset}
-    >
+    <SafeAreaView style={[styles.root, { backgroundColor: colors.card }]} forceInset={forceInset}>
       <CoinifyWidget
         account={account}
         parentAccount={parentAccount}

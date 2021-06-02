@@ -4,10 +4,7 @@ import { View, StyleSheet, Linking } from "react-native";
 import type { AccountLike, Transaction } from "@ledgerhq/live-common/lib/types";
 import { Trans } from "react-i18next";
 
-import {
-  getAccountUnit,
-  getAccountCurrency,
-} from "@ledgerhq/live-common/lib/account";
+import { getAccountUnit, getAccountCurrency } from "@ledgerhq/live-common/lib/account";
 import { useTheme } from "@react-navigation/native";
 import SummaryRow from "../../screens/SendFunds/SummaryRow";
 import LText from "../../components/LText";
@@ -46,11 +43,7 @@ export default function PolkadotFeeRow({ account, transaction }: Props) {
           {fees ? <CurrencyUnitValue unit={unit} value={fees} /> : " "}
         </LText>
         <LText style={styles.countervalue} color="grey">
-          {fees ? (
-            <CounterValue before="≈ " value={fees} currency={currency} />
-          ) : (
-            " "
-          )}
+          {fees ? <CounterValue before="≈ " value={fees} currency={currency} /> : " "}
         </LText>
       </View>
     </SummaryRow>

@@ -13,18 +13,9 @@ const ThemeDebug = () => {
   };
   return render ? (
     <View style={styles.root}>
-      <Text
-        style={[styles.button, { backgroundColor: "#fff" }]}
-        onPress={selectTheme("light")}
-      />
-      <Text
-        style={[styles.button, { backgroundColor: "#182532" }]}
-        onPress={selectTheme("dusk")}
-      />
-      <Text
-        style={[styles.button, { backgroundColor: "#1C1D1F" }]}
-        onPress={selectTheme("dark")}
-      />
+      <Text style={[styles.button, { backgroundColor: "#fff" }]} onPress={selectTheme("light")} />
+      <Text style={[styles.button, { backgroundColor: "#182532" }]} onPress={selectTheme("dusk")} />
+      <Text style={[styles.button, { backgroundColor: "#1C1D1F" }]} onPress={selectTheme("dark")} />
     </View>
   ) : null;
 };

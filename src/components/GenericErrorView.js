@@ -79,12 +79,7 @@ class GenericErrorView extends PureComponent<{
         ) : null}
         {withDescription ? (
           <>
-            <LText
-              selectable
-              style={styles.description}
-              color="smoke"
-              numberOfLines={6}
-            >
+            <LText selectable style={styles.description} color="smoke" numberOfLines={6}>
               <TranslatedError error={error} field="description" />
             </LText>
             <SupportLinkError error={error} />

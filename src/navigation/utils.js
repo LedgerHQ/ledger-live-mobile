@@ -1,16 +1,11 @@
 import { useEffect } from "react";
 import { ScrollView } from "react-native";
 import { Subject } from "rxjs/Subject";
-import {
-  useIsFocused,
-  useScrollToTop as useNativeScrollToTop,
-} from "@react-navigation/native";
+import { useIsFocused, useScrollToTop as useNativeScrollToTop } from "@react-navigation/native";
 
 const scrollSubject = new Subject();
 
-export function useScrollToTop(
-  ref: React.MutableRefObject<ScrollView | undefined>,
-) {
+export function useScrollToTop(ref: React.MutableRefObject<ScrollView | undefined>) {
   const isFocused = useIsFocused();
 
   useNativeScrollToTop(ref);

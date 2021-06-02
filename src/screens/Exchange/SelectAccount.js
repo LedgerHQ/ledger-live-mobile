@@ -3,10 +3,7 @@
 import React, { useCallback, useMemo } from "react";
 import { View, StyleSheet, FlatList, SafeAreaView } from "react-native";
 import { Trans, useTranslation } from "react-i18next";
-import type {
-  Account,
-  AccountLikeArray,
-} from "@ledgerhq/live-common/lib/types";
+import type { Account, AccountLikeArray } from "@ledgerhq/live-common/lib/types";
 import { useSelector } from "react-redux";
 import {
   accountWithMandatoryTokens,
@@ -46,14 +43,10 @@ export default function SelectAccount({ navigation, route }: Props) {
     const filteredAccounts = accounts.filter(
       acc =>
         acc.currency.id ===
-        (currency.type === "TokenCurrency"
-          ? currency.parentCurrency.id
-          : currency.id),
+        (currency.type === "TokenCurrency" ? currency.parentCurrency.id : currency.id),
     );
     if (currency.type === "TokenCurrency") {
-      return filteredAccounts.map(acc =>
-        accountWithMandatoryTokens(acc, [currency]),
-      );
+      return filteredAccounts.map(acc => accountWithMandatoryTokens(acc, [currency]));
     }
     return filteredAccounts;
   }, [accounts, currency]);
@@ -83,8 +76,7 @@ export default function SelectAccount({ navigation, route }: Props) {
                 navigation.navigate("ExchangeConnectDevice", {
                   account,
                   mode,
-                  parentId:
-                    account.type !== "Account" ? account.parentId : undefined,
+                  parentId: account.type !== "Account" ? account.parentId : undefined,
                 });
               } else {
                 navigation.navigate(ScreenName.ExchangeCoinifyWidget, {
@@ -103,9 +95,7 @@ export default function SelectAccount({ navigation, route }: Props) {
 
   const elligibleAccountsForSelectedCurrency = allAccounts.filter(
     account =>
-      (account.type === "TokenAccount"
-        ? account.token.id
-        : account.currency.id) === currency.id,
+      (account.type === "TokenAccount" ? account.token.id : account.currency.id) === currency.id,
   );
 
   const renderList = useCallback(
@@ -144,9 +134,7 @@ export default function SelectAccount({ navigation, route }: Props) {
   if (!elligibleAccountsForSelectedCurrency.length) {
     return (
       <View style={styles.emptyStateBody}>
-        <View
-          style={[styles.iconContainer, { backgroundColor: colors.lightLive }]}
-        >
+        <View style={[styles.iconContainer, { backgroundColor: colors.lightLive }]}>
           <InfoIcon size={22} color={colors.live} />
         </View>
         <LText semiBold style={styles.title}>
@@ -166,9 +154,7 @@ export default function SelectAccount({ navigation, route }: Props) {
             onPress={() =>
               navigation.navigate(
                 NavigatorName.AddAccounts,
-                currency.type === "TokenCurrency"
-                  ? { token: currency }
-                  : { currency },
+                currency.type === "TokenCurrency" ? { token: currency } : { currency },
               )
             }
           />

@@ -40,12 +40,7 @@ export default function DeviceNameRow({
 
   return (
     <View style={styles.root}>
-      <LText
-        bold
-        numberOfLines={1}
-        ellipsizeMode="tail"
-        style={styles.deviceName}
-      >
+      <LText bold numberOfLines={1} ellipsizeMode="tail" style={styles.deviceName}>
         {savedName || initialDeviceName || productName}
       </LText>
       {id !== "nanoS" && (

@@ -1,11 +1,7 @@
 /* @flow */
 import React, { useCallback } from "react";
 import { StyleSheet, Linking, SafeAreaView } from "react-native";
-import type {
-  Account,
-  AccountLike,
-  TokenCurrency,
-} from "@ledgerhq/live-common/lib/types";
+import type { Account, AccountLike, TokenCurrency } from "@ledgerhq/live-common/lib/types";
 import { useTheme } from "@react-navigation/native";
 import { TrackScreen } from "../../../analytics";
 import ValidateError from "../../../components/ValidateError";
@@ -50,12 +46,7 @@ export default function ValidationError({ navigation, route }: Props) {
         name="Fail"
         eventProperties={{ currencyName: currency?.name }}
       />
-      <ValidateError
-        error={error}
-        onRetry={retry}
-        onClose={onClose}
-        onContactUs={contactUs}
-      />
+      <ValidateError error={error} onRetry={retry} onClose={onClose} onContactUs={contactUs} />
     </SafeAreaView>
   );
 }

@@ -84,19 +84,11 @@ const BottomModal = ({
         style={[styles.root, propStyles || {}]}
       >
         <ExperimentalHeader />
-        <View
-          style={[
-            styles.modal,
-            { backgroundColor: colors.card },
-            containerStyle,
-          ]}
-        >
+        <View style={[styles.modal, { backgroundColor: colors.card }, containerStyle]}>
           <View style={style}>
             {open && id ? <TrackScreen category={id} /> : null}
             <StyledStatusBar
-              backgroundColor={
-                Platform.OS === "android" ? "rgba(0,0,0,0.7)" : "transparent"
-              }
+              backgroundColor={Platform.OS === "android" ? "rgba(0,0,0,0.7)" : "transparent"}
               barStyle="light-content"
             />
             {children}

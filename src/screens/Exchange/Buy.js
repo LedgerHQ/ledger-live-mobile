@@ -33,9 +33,7 @@ export default function Buy() {
     >
       <TrackScreen category="Buy Crypto" />
       <View style={styles.body}>
-        <View
-          style={[styles.iconContainer, { backgroundColor: colors.lightLive }]}
-        >
+        <View style={[styles.iconContainer, { backgroundColor: colors.lightLive }]}>
           <ExchangeIcon size={22} color={colors.live} />
         </View>
         <LText style={styles.title} semiBold>

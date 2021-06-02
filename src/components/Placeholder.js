@@ -13,19 +13,8 @@ type Props = {
 function Placeholder({ width, containerHeight, style }: Props) {
   const { colors } = useTheme();
   return (
-    <View
-      style={[
-        styles.root,
-        containerHeight ? { height: containerHeight } : null,
-      ]}
-    >
-      <View
-        style={[
-          styles.inner,
-          { width: width || 100, backgroundColor: colors.fog },
-          style,
-        ]}
-      />
+    <View style={[styles.root, containerHeight ? { height: containerHeight } : null]}>
+      <View style={[styles.inner, { width: width || 100, backgroundColor: colors.fog }, style]} />
     </View>
   );
 }

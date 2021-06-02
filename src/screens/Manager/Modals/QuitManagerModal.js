@@ -28,11 +28,7 @@ const QuitManagerModal = ({
 
   const actionRunning = useMemo(
     () =>
-      installQueue.length > 0
-        ? uninstallQueue.length > 0
-          ? "update"
-          : "install"
-        : "uninstall",
+      installQueue.length > 0 ? (uninstallQueue.length > 0 ? "update" : "install") : "uninstall",
     [uninstallQueue.length, installQueue.length],
   );
 
@@ -48,9 +44,7 @@ const QuitManagerModal = ({
           <Trans i18nKey={`errors.ManagerQuitPage.${actionRunning}.title`} />
         </LText>
         <LText style={styles.warnText} color="grey">
-          <Trans
-            i18nKey={`errors.ManagerQuitPage.${actionRunning}.description`}
-          />
+          <Trans i18nKey={`errors.ManagerQuitPage.${actionRunning}.description`} />
         </LText>
       </View>
       <View style={styles.buttonRow}>
@@ -65,9 +59,7 @@ const QuitManagerModal = ({
         />
         <Button
           containerStyle={[styles.button, styles.buttonMargin]}
-          title={
-            <Trans i18nKey={`errors.ManagerQuitPage.${actionRunning}.stay`} />
-          }
+          title={<Trans i18nKey={`errors.ManagerQuitPage.${actionRunning}.stay`} />}
           useTouchable
           onPress={onClose}
           type={"primary"}

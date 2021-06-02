@@ -8,9 +8,6 @@ export default function OpenDebugLogs() {
   const navigation = useNavigation();
 
   return (
-    <SettingsRow
-      title="Debug logs"
-      onPress={() => navigation.navigate(ScreenName.DebugLogs)}
-    />
+    <SettingsRow title="Debug logs" onPress={() => navigation.navigate(ScreenName.DebugLogs)} />
   );
 }

@@ -18,12 +18,7 @@ const OperationDetailsExtra = ({ extra, type }: OperationDetailsExtraProps) => {
   return (type === "REDEEM" || type === "SUPPLY"
     ? entries.filter(key => !["compoundValue", "rate"].includes(key))
     : entries
-  ).map(key => (
-    <Section
-      title={t(`operationDetails.extra.${key}`)}
-      value={`${extra[key]}`}
-    />
-  ));
+  ).map(key => <Section title={t(`operationDetails.extra.${key}`)} value={`${extra[key]}`} />);
 };
 
 export default {

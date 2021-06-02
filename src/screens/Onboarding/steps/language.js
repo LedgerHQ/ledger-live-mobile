@@ -1,13 +1,7 @@
 // @flow
 
 import React, { useCallback, useState } from "react";
-import {
-  StyleSheet,
-  View,
-  SafeAreaView,
-  TouchableOpacity,
-  ScrollView,
-} from "react-native";
+import { StyleSheet, View, SafeAreaView, TouchableOpacity, ScrollView } from "react-native";
 import { Trans } from "react-i18next";
 import i18next from "i18next";
 import { useTheme } from "@react-navigation/native";
@@ -89,16 +83,10 @@ function OnboardingStepLanguage({ navigation }: *) {
         isOpened={!!isInfoModalOpen}
         onClose={onCloseInfoModal}
         onConfirm={onConfirmInfo}
-        confirmationTitle={
-          <Trans i18nKey="onboarding.stepLanguage.warning.title" />
-        }
-        confirmationDesc={
-          <Trans i18nKey="onboarding.stepLanguage.warning.desc" />
-        }
+        confirmationTitle={<Trans i18nKey="onboarding.stepLanguage.warning.title" />}
+        confirmationDesc={<Trans i18nKey="onboarding.stepLanguage.warning.desc" />}
         Icon={Warning}
-        confirmButtonText={
-          <Trans i18nKey="onboarding.stepLanguage.warning.cta" />
-        }
+        confirmButtonText={<Trans i18nKey="onboarding.stepLanguage.warning.cta" />}
         hideRejectButton
       />
     </SafeAreaView>

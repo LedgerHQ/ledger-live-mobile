@@ -41,15 +41,10 @@ class DeveloperModeRow extends PureComponent<Props> {
         alignedTop
       >
         <Track
-          event={
-            readOnlyModeEnabled ? "EnableReadOnlyMode" : "DisableReadOnlyMode"
-          }
+          event={readOnlyModeEnabled ? "EnableReadOnlyMode" : "DisableReadOnlyMode"}
           onUpdate
         />
-        <Switch
-          value={readOnlyModeEnabled}
-          onValueChange={this.setReadOnlyModeAndReset}
-        />
+        <Switch value={readOnlyModeEnabled} onValueChange={this.setReadOnlyModeAndReset} />
       </SettingsRow>
     );
   }

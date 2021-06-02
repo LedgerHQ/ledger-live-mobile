@@ -69,17 +69,9 @@ function ToastBar({
       style={[styles.root, { backgroundColor: colors.background }]}
     >
       <View
-        style={[
-          styles.toast,
-          containerStyle,
-          { borderColor: colors.lightFog, backgroundColor },
-        ]}
+        style={[styles.toast, containerStyle, { borderColor: colors.lightFog, backgroundColor }]}
       >
-        <TouchableOpacity
-          style={[styles.closeButton]}
-          onPress={onClose}
-          activeOpacity={0.5}
-        >
+        <TouchableOpacity style={[styles.closeButton]} onPress={onClose} activeOpacity={0.5}>
           <Close size={16} color={color} />
         </TouchableOpacity>
         <View style={styles.storageRow}>

@@ -7,10 +7,7 @@ import { useTranslation } from "react-i18next";
 import type { Account } from "@ledgerhq/live-common/lib/types";
 import type { Transaction } from "@ledgerhq/live-common/lib/families/polkadot/types";
 import { usePolkadotPreloadData } from "@ledgerhq/live-common/lib/families/polkadot/react";
-import {
-  getDefaultExplorerView,
-  getAddressExplorer,
-} from "@ledgerhq/live-common/lib/explorers";
+import { getDefaultExplorerView, getAddressExplorer } from "@ledgerhq/live-common/lib/explorers";
 
 import { useTheme } from "@react-navigation/native";
 import LText from "../../components/LText";
@@ -45,10 +42,7 @@ function PolkadotValidatorsField({ account, transaction, field }: FieldProps) {
 
   const redirectAddressCreator = useCallback(
     address => () => {
-      const url = getAddressExplorer(
-        getDefaultExplorerView(account.currency),
-        address,
-      );
+      const url = getAddressExplorer(getDefaultExplorerView(account.currency), address);
       if (url) Linking.openURL(url);
     },
     [account],
@@ -83,12 +77,7 @@ const Info = ({ transaction }: FieldProps) => {
       return (
         <DataRow>
           <InfoIcon size={22} color={colors.live} />
-          <LText
-            semiBold
-            style={[styles.text, styles.infoText]}
-            color="live"
-            numberOfLines={3}
-          >
+          <LText semiBold style={[styles.text, styles.infoText]} color="live" numberOfLines={3}>
             {t(`polkadot.${transaction.mode}.steps.confirm.info`)}
           </LText>
         </DataRow>
@@ -102,10 +91,7 @@ const EstimatedFees = ({ account, transaction }: FieldProps) => {
   const { colors } = useTheme();
   return (
     <View
-      style={[
-        styles.feesWrapper,
-        { borderColor: colors.grey, backgroundColor: colors.lightGrey },
-      ]}
+      style={[styles.feesWrapper, { borderColor: colors.grey, backgroundColor: colors.lightGrey }]}
     >
       <PolkadotFeeRow account={account} transaction={transaction} />
     </View>

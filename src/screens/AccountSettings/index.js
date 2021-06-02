@@ -32,8 +32,7 @@ type State = {
   isModalOpened: boolean,
 };
 
-const mapStateToProps = (state, { route }) =>
-  accountScreenSelector(route)(state);
+const mapStateToProps = (state, { route }) => accountScreenSelector(route)(state);
 
 const mapDispatchToProps = {
   deleteAccount,
@@ -69,20 +68,13 @@ class AccountSettings extends PureComponent<Props, State> {
         <View style={styles.sectionRow}>
           <AccountNameRow account={account} navigation={navigation} />
           <AccountUnitsRow account={account} navigation={navigation} />
-          <AccountCurrencyRow
-            currency={account.currency}
-            navigation={navigation}
-          />
+          <AccountCurrencyRow currency={account.currency} navigation={navigation} />
           <AccountAdvancedLogsRow account={account} navigation={navigation} />
         </View>
         <View style={styles.sectionRow}>
           <DeleteAccountRow onPress={this.onPress} />
         </View>
-        <BottomModal
-          id="DeleteAccountModal"
-          isOpened={isModalOpened}
-          onClose={this.onRequestClose}
-        >
+        <BottomModal id="DeleteAccountModal" isOpened={isModalOpened} onClose={this.onRequestClose}>
           <DeleteAccountModal
             onRequestClose={this.onRequestClose}
             deleteAccount={this.deleteAccount}

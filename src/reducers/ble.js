@@ -23,9 +23,7 @@ const initialState: BleState = {
 
 const handlers: Object = {
   BLE_ADD_DEVICE: (state: BleState, { device }: { device: DeviceLike }) => ({
-    knownDevices: state.knownDevices
-      .filter(d => d.id !== device.id)
-      .concat({ ...device }),
+    knownDevices: state.knownDevices.filter(d => d.id !== device.id).concat({ ...device }),
   }),
 
   BLE_REMOVE_DEVICE: (state: BleState, { deviceId }: { deviceId: string }) => ({
@@ -45,9 +43,7 @@ const handlers: Object = {
     state: BleState,
     { deviceId, name }: { deviceId: string, name: string },
   ) => ({
-    knownDevices: state.knownDevices.map(d =>
-      d.id === deviceId ? { ...d, name } : d,
-    ),
+    knownDevices: state.knownDevices.map(d => (d.id === deviceId ? { ...d, name } : d)),
   }),
 };
 
@@ -56,9 +52,7 @@ export const exportSelector = (s: State) => s.ble;
 
 export const knownDevicesSelector = (s: State) => s.ble.knownDevices;
 
-export const deviceNameByDeviceIdSelectorCreator = (deviceId: string) => (
-  s: State,
-) => {
+export const deviceNameByDeviceIdSelectorCreator = (deviceId: string) => (s: State) => {
   const d = s.ble.knownDevices.find(d => d.id === deviceId);
   return d ? d.name : "";
 };

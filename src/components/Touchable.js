@@ -62,14 +62,7 @@ export default class Touchable extends Component<
   };
 
   render() {
-    const {
-      onPress,
-      children,
-      event,
-      eventProperties,
-      testID,
-      ...rest
-    } = this.props;
+    const { onPress, children, event, eventProperties, testID, ...rest } = this.props;
     const { pending } = this.state;
     const disabled = !onPress || pending;
     return (

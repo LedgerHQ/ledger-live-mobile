@@ -10,17 +10,10 @@ type Props = {
   value: React$Node,
 };
 
-export default function BalanceSummaryInfoItem({
-  onPress,
-  title,
-  value,
-}: Props) {
+export default function BalanceSummaryInfoItem({ onPress, title, value }: Props) {
   const { colors } = useTheme();
   return (
-    <TouchableOpacity
-      onPress={onPress}
-      style={[styles.wrapper, { backgroundColor: colors.card }]}
-    >
+    <TouchableOpacity onPress={onPress} style={[styles.wrapper, { backgroundColor: colors.card }]}>
       <View style={styles.balanceLabelContainer}>
         <LText style={styles.balanceLabel}>{title}</LText>
         {onPress && <Info size={12} color={colors.grey} />}

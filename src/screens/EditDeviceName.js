@@ -79,9 +79,7 @@ class EditDeviceName extends PureComponent<
     this.setState(prevState => {
       const invalidCharacters = prevState.name.replace(/[\x00-\x7F]*/g, "");
       return {
-        error: invalidCharacters
-          ? new DeviceNameInvalid("", { invalidCharacters })
-          : undefined,
+        error: invalidCharacters ? new DeviceNameInvalid("", { invalidCharacters }) : undefined,
       };
     });
   };
@@ -141,17 +139,10 @@ class EditDeviceName extends PureComponent<
               blurOnSubmit={false}
               clearButtonMode="always"
               placeholder="Satoshi Nakamoto"
-              style={[
-                getFontStyle({ semiBold: true }),
-                styles.input,
-                { color: colors.darkBlue },
-              ]}
+              style={[getFontStyle({ semiBold: true }), styles.input, { color: colors.darkBlue }]}
             />
             <LText style={styles.remainingText} color="grey">
-              <Trans
-                i18nKey="EditDeviceName.charactersRemaining"
-                values={{ remainingCount }}
-              />
+              <Trans i18nKey="EditDeviceName.charactersRemaining" values={{ remainingCount }} />
             </LText>
           </View>
           <View style={styles.footer}>

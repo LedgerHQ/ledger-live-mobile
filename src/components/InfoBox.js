@@ -12,11 +12,7 @@ type Props = {
   forceColor?: { background: string, text: string, icon: string },
 };
 
-export default function InfoBox({
-  children: description,
-  onLearnMore,
-  forceColor = {},
-}: Props) {
+export default function InfoBox({ children: description, onLearnMore, forceColor = {} }: Props) {
   const { colors } = useTheme();
 
   const { background, text, icon } = forceColor;

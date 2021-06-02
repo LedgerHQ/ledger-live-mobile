@@ -12,10 +12,7 @@ import {
 import { useSelector } from "react-redux";
 import { Trans, useTranslation } from "react-i18next";
 import invariant from "invariant";
-import type {
-  Transaction,
-  TokenCurrency,
-} from "@ledgerhq/live-common/lib/types";
+import type { Transaction, TokenCurrency } from "@ledgerhq/live-common/lib/types";
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { useSupplyMaxChoiceButtons } from "@ledgerhq/live-common/lib/compound/react";
@@ -137,9 +134,7 @@ export default function AmountScreen({
         name="step 1 (Amount)"
         eventProperties={{ currencyName: currency.name }}
       />
-      <SafeAreaView
-        style={[styles.root, { backgroundColor: colors.background }]}
-      >
+      <SafeAreaView style={[styles.root, { backgroundColor: colors.background }]}>
         <KeyboardView style={styles.container}>
           <TouchableWithoutFeedback onPress={blur}>
             <View style={styles.root}>
@@ -156,16 +151,10 @@ export default function AmountScreen({
                   hasError={!!error}
                   hasWarning={!!warning}
                   placeholder={
-                    useAllAmount
-                      ? t("transfer.lending.supply.amount.placeholderMax")
-                      : undefined
+                    useAllAmount ? t("transfer.lending.supply.amount.placeholderMax") : undefined
                   }
                 />
-                <LText
-                  style={[styles.error]}
-                  color={error ? "alert" : "orange"}
-                  numberOfLines={2}
-                >
+                <LText style={[styles.error]} color={error ? "alert" : "orange"} numberOfLines={2}>
                   <TranslatedError error={error || warning} />
                 </LText>
               </View>
@@ -200,11 +189,7 @@ export default function AmountScreen({
                   {onChangeSendMax ? (
                     <>
                       <View style={styles.availableLeft}>
-                        <LText
-                          semiBold
-                          style={styles.availableAmount}
-                          color="grey"
-                        >
+                        <LText semiBold style={styles.availableAmount} color="grey">
                           <Trans i18nKey="transfer.lending.supply.amount.totalAvailable" />
                         </LText>
                         <LText semiBold color="grey">
@@ -224,11 +209,7 @@ export default function AmountScreen({
                     </>
                   ) : (
                     <>
-                      <LText
-                        semiBold
-                        style={styles.availableAmount}
-                        color="grey"
-                      >
+                      <LText semiBold style={styles.availableAmount} color="grey">
                         <Trans i18nKey="transfer.lending.supply.amount.totalAvailable" />
                       </LText>
                       <LText semiBold color="grey">
@@ -257,10 +238,7 @@ export default function AmountScreen({
         onClose={onBridgeErrorRetry}
         footerButtons={
           <>
-            <CancelButton
-              containerStyle={styles.button}
-              onPress={onBridgeErrorCancel}
-            />
+            <CancelButton containerStyle={styles.button} onPress={onBridgeErrorCancel} />
             <RetryButton
               containerStyle={[styles.button, styles.buttonRight]}
               onPress={onBridgeErrorRetry}

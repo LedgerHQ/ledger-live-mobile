@@ -39,8 +39,7 @@ type State = {
   accountName: string,
 };
 
-const mapStateToProps = (state, { route }) =>
-  accountScreenSelector(route)(state);
+const mapStateToProps = (state, { route }) => accountScreenSelector(route)(state);
 
 const mapDispatchToProps = {
   updateAccount,
@@ -58,10 +57,7 @@ class EditAccountName extends PureComponent<Props, State> {
   onNameEndEditing = () => {
     const { updateAccount, account, navigation } = this.props;
     const { accountName } = this.state;
-    const {
-      onAccountNameChange,
-      account: accountFromAdd,
-    } = this.props.route.params;
+    const { onAccountNameChange, account: accountFromAdd } = this.props.route.params;
 
     const isImportingAccounts = !!accountFromAdd;
     const cleanAccountName = accountName.trim();
@@ -105,9 +101,7 @@ class EditAccountName extends PureComponent<Props, State> {
               onChangeText={accountName => this.setState({ accountName })}
               onSubmitEditing={this.onNameEndEditing}
               clearButtonMode="while-editing"
-              placeholder={i18next.t(
-                "account.settings.accountName.placeholder",
-              )}
+              placeholder={i18next.t("account.settings.accountName.placeholder")}
             />
             <View style={styles.flex}>
               <Button

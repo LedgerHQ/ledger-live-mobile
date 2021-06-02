@@ -22,12 +22,7 @@ class PendingGenuineCheck extends PureComponent<{
         <TrackScreen category="PairDevices" name="PendingGenuineCheck" />
         {genuineAskedOnDevice ? (
           <View style={styles.nano}>
-            <DeviceNanoAction
-              modelId="nanoX"
-              action="accept"
-              screen="validation"
-              width={width}
-            />
+            <DeviceNanoAction modelId="nanoX" action="accept" screen="validation" width={width} />
           </View>
         ) : (
           <PendingSpinner />

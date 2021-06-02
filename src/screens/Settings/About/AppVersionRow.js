@@ -10,13 +10,9 @@ import LText from "../../../components/LText";
 class AppVersionRow extends PureComponent<*> {
   render() {
     const { appVersion, buildVersion } = VersionNumber;
-    const version = `${appVersion || ""} (${cleanBuildVersion(buildVersion) ||
-      ""})`;
+    const version = `${appVersion || ""} (${cleanBuildVersion(buildVersion) || ""})`;
     return (
-      <SettingsRow
-        event="AppVersionRow"
-        title={<Trans i18nKey="settings.about.appVersion" />}
-      >
+      <SettingsRow event="AppVersionRow" title={<Trans i18nKey="settings.about.appVersion" />}>
         <View style={styles.inner}>
           <LText semiBold style={styles.versionText} color="grey">
             {version}

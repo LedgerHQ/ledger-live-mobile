@@ -6,10 +6,7 @@ import SafeAreaView from "react-native-safe-area-view";
 import { useSelector } from "react-redux";
 import { Trans } from "react-i18next";
 import type { Transaction } from "@ledgerhq/live-common/lib/types";
-import {
-  getMainAccount,
-  getAccountCurrency,
-} from "@ledgerhq/live-common/lib/account";
+import { getMainAccount, getAccountCurrency } from "@ledgerhq/live-common/lib/account";
 import { NotEnoughGas } from "@ledgerhq/errors";
 import { useTheme } from "@react-navigation/native";
 import { BigNumber } from "bignumber.js";
@@ -67,12 +64,7 @@ function SendSummary({ navigation, route: initialRoute }: Props) {
   };
   const { nextNavigation, overrideAmountLabel, hideTotal } = route.params;
   const { account, parentAccount } = useSelector(accountScreenSelector(route));
-  const {
-    transaction,
-    setTransaction,
-    status,
-    bridgePending,
-  } = useBridgeTransaction(() => ({
+  const { transaction, setTransaction, status, bridgePending } = useBridgeTransaction(() => ({
     transaction: route.params.transaction,
     account,
     parentAccount,
@@ -100,18 +92,11 @@ function SendSummary({ navigation, route: initialRoute }: Props) {
       return;
     }
     const { warnings, txInputs } = status;
-    if (
-      Object.keys(warnings).includes("feeTooHigh") &&
-      !highFeesWarningPassed
-    ) {
+    if (Object.keys(warnings).includes("feeTooHigh") && !highFeesWarningPassed) {
       setHighFeesOpen(true);
       return;
     }
-    if (
-      txInputs &&
-      txInputs.length >= WARN_FROM_UTXO_COUNT &&
-      !utxoWarningPassed
-    ) {
+    if (txInputs && txInputs.length >= WARN_FROM_UTXO_COUNT && !utxoWarningPassed) {
       const to = setTimeout(
         () => setUtxoWarningOpen(true),
         // looks like you can not open close a bottom modal
@@ -125,14 +110,7 @@ function SendSummary({ navigation, route: initialRoute }: Props) {
     setUtxoWarningPassed(false);
     setHighFeesWarningPassed(false);
     navigateToNext();
-  }, [
-    status,
-    continuing,
-    highFeesWarningPassed,
-    account,
-    utxoWarningPassed,
-    navigateToNext,
-  ]);
+  }, [status, continuing, highFeesWarningPassed, account, utxoWarningPassed, navigateToNext]);
 
   const onPassUtxoWarning = useCallback(() => {
     setUtxoWarningOpen(false);
@@ -179,11 +157,7 @@ function SendSummary({ navigation, route: initialRoute }: Props) {
       style={[styles.root, { backgroundColor: colors.background }]}
       forceInset={forceInset}
     >
-      <TrackScreen
-        category="SendFunds"
-        name="Summary"
-        currencyName={currency.name}
-      />
+      <TrackScreen category="SendFunds" name="Summary" currencyName={currency.name} />
       <NavigationScrollView style={styles.body}>
         {transaction.useAllAmount && hasNonEmptySubAccounts ? (
           <View style={styles.infoBox}>
@@ -198,20 +172,14 @@ function SendSummary({ navigation, route: initialRoute }: Props) {
           </View>
         ) : null}
         <SummaryFromSection account={account} parentAccount={parentAccount} />
-        <VerticalConnector
-          style={[styles.verticalConnector, { borderColor: colors.lightFog }]}
-        />
+        <VerticalConnector style={[styles.verticalConnector, { borderColor: colors.lightFog }]} />
         <SummaryToSection recipient={transaction.recipient} />
         {status.warnings.recipient ? (
           <LText style={styles.warning} color="orange">
             <TranslatedError error={status.warnings.recipient} />
           </LText>
         ) : null}
-        <SendRowsCustom
-          transaction={transaction}
-          account={mainAccount}
-          navigation={navigation}
-        />
+        <SendRowsCustom transaction={transaction} account={mainAccount} navigation={navigation} />
         <SectionSeparator lineColor={colors.lightFog} />
         <SummaryAmountSection
           account={account}

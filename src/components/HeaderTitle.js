@@ -7,12 +7,7 @@ import { scrollToTop } from "../navigation/utils";
 export default function HeaderTitle({ style, ...newProps }: *) {
   return (
     <TouchableWithoutFeedback onPress={scrollToTop}>
-      <LText
-        {...newProps}
-        secondary
-        semiBold
-        style={[styleSheet.root, style]}
-      />
+      <LText {...newProps} secondary semiBold style={[styleSheet.root, style]} />
     </TouchableWithoutFeedback>
   );
 }

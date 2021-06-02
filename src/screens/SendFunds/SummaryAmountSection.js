@@ -3,10 +3,7 @@ import React, { PureComponent } from "react";
 import { View, StyleSheet } from "react-native";
 import { Trans } from "react-i18next";
 import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
-import {
-  getAccountUnit,
-  getAccountCurrency,
-} from "@ledgerhq/live-common/lib/account/helpers";
+import { getAccountUnit, getAccountCurrency } from "@ledgerhq/live-common/lib/account/helpers";
 import SummaryRow from "./SummaryRow";
 import CurrencyUnitValue from "../../components/CurrencyUnitValue";
 import CounterValue from "../../components/CounterValue";
@@ -36,12 +33,7 @@ export default class SummaryAmountSection extends PureComponent<Props> {
                 <CurrencyUnitValue unit={unit} value={amount} disableRounding />
               </LText>
               <LText style={styles.counterValueText} color="grey" semiBold>
-                <CounterValue
-                  before="≈ "
-                  value={amount}
-                  currency={currency}
-                  showCode
-                />
+                <CounterValue before="≈ " value={amount} currency={currency} showCode />
               </LText>
             </>
           )}

@@ -15,10 +15,7 @@ const totalSteps = "3";
 
 export default function MigrateAccountsFlowNavigator() {
   const { colors } = useTheme();
-  const stackNavigationConfig = useMemo(
-    () => getStackNavigatorConfig(colors, true),
-    [colors],
-  );
+  const stackNavigationConfig = useMemo(() => getStackNavigatorConfig(colors, true), [colors]);
   return (
     <Stack.Navigator
       screenOptions={{
@@ -52,9 +49,7 @@ export default function MigrateAccountsFlowNavigator() {
         options={{
           headerTitle: () => (
             <StepHeader
-              title={
-                <Trans i18nKey="migrateAccounts.connectDevice.headerTitle" />
-              }
+              title={<Trans i18nKey="migrateAccounts.connectDevice.headerTitle" />}
               subtitle={
                 <Trans
                   i18nKey="send.stepperHeader.stepRange"

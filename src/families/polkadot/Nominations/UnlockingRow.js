@@ -4,10 +4,7 @@ import isBefore from "date-fns/isBefore";
 import React, { useMemo } from "react";
 import { View, StyleSheet } from "react-native";
 import type { Account } from "@ledgerhq/live-common/lib/types";
-import {
-  getAccountCurrency,
-  getAccountUnit,
-} from "@ledgerhq/live-common/lib/account";
+import { getAccountCurrency, getAccountUnit } from "@ledgerhq/live-common/lib/account";
 
 import { useTheme } from "@react-navigation/native";
 import CurrencyUnitValue from "../../../components/CurrencyUnitValue";
@@ -47,9 +44,7 @@ export default function UnlockingRow({
       style={[
         styles.row,
         styles.wrapper,
-        !isLast
-          ? { ...styles.borderBottom, borderBottomColor: colors.lightGrey }
-          : undefined,
+        !isLast ? { ...styles.borderBottom, borderBottomColor: colors.lightGrey } : undefined,
       ]}
     >
       <View style={styles.valueWrapper}>

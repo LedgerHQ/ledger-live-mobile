@@ -43,21 +43,9 @@ class CopyLink extends PureComponent<Props, State> {
     const { style, children, replacement, colors } = this.props;
     const { copied } = this.state;
     return (
-      <Touchable
-        event="CopyLink"
-        style={[styles.linkContainer, style]}
-        onPress={this.onPress}
-      >
-        <Icon
-          name="copy"
-          size={16}
-          color={copied ? colors.grey : colors.live}
-        />
-        <LText
-          style={[styles.linkText]}
-          color={copied ? "grey" : "live"}
-          semiBold
-        >
+      <Touchable event="CopyLink" style={[styles.linkContainer, style]} onPress={this.onPress}>
+        <Icon name="copy" size={16} color={copied ? colors.grey : colors.live} />
+        <LText style={[styles.linkText]} color={copied ? "grey" : "live"} semiBold>
           {copied && replacement ? replacement : children}
         </LText>
       </Touchable>

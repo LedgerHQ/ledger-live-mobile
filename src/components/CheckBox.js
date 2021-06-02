@@ -27,9 +27,7 @@ function CheckBox({ isChecked, disabled, onChange, style }: Props) {
     onChange(!isChecked);
   }, [isChecked, onChange]);
 
-  const body = (
-    <IconCheck size={16} color={!isChecked ? "transparent" : "white"} />
-  );
+  const body = <IconCheck size={16} color={!isChecked ? "transparent" : "white"} />;
 
   const commonProps = {
     style: [
@@ -46,11 +44,7 @@ function CheckBox({ isChecked, disabled, onChange, style }: Props) {
 
   if (onChange && !disabled) {
     return (
-      <TouchableOpacity
-        {...commonProps}
-        onPress={onPress}
-        hitSlop={checkBoxHitSlop}
-      >
+      <TouchableOpacity {...commonProps} onPress={onPress} hitSlop={checkBoxHitSlop}>
         {isChecked ? body : null}
       </TouchableOpacity>
     );

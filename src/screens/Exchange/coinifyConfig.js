@@ -1,9 +1,6 @@
 // @flow
 import Config from "react-native-config";
-import type {
-  CryptoCurrency,
-  TokenCurrency,
-} from "@ledgerhq/live-common/lib/types/currencies";
+import type { CryptoCurrency, TokenCurrency } from "@ledgerhq/live-common/lib/types/currencies";
 
 const supportedCurrenciesIds = {
   buy: [
@@ -43,5 +40,4 @@ export const isCurrencySupported = (
   mode: "buy" | "sell" = "buy",
 ) => supportedCurrenciesIds[mode].includes(currency.id);
 
-export const getConfig = () =>
-  Config.COINIFY_SANDBOX ? config.sandbox : config.production;
+export const getConfig = () => (Config.COINIFY_SANDBOX ? config.sandbox : config.production);

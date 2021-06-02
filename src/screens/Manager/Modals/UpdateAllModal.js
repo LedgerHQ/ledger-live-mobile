@@ -21,14 +21,7 @@ type Props = {
   state: State,
 };
 
-const UpdateAllModal = ({
-  isOpened,
-  apps,
-  installed,
-  onClose,
-  onConfirm,
-  state,
-}: Props) => {
+const UpdateAllModal = ({ isOpened, apps, installed, onClose, onConfirm, state }: Props) => {
   const { colors } = useTheme();
   const { deviceInfo } = state;
 
@@ -65,8 +58,7 @@ const UpdateAllModal = ({
       item: App & { installed: ?InstalledItem },
     }) => {
       const version = (installed && installed.version) || appVersion;
-      const availableVersion =
-        (installed && installed.availableVersion) || appVersion;
+      const availableVersion = (installed && installed.availableVersion) || appVersion;
 
       return (
         <View style={[styles.appLine, { borderBottomColor: colors.lightFog }]}>
@@ -74,16 +66,12 @@ const UpdateAllModal = ({
           <LText semiBold style={styles.appName}>
             {name}
           </LText>
-          <LText
-            style={[styles.appLineText, styles.appLineVersion]}
-            color="grey"
-          >
+          <LText style={[styles.appLineText, styles.appLineVersion]} color="grey">
             {version}{" "}
             <Trans
               i18nKey="manager.appList.versionNew"
               values={{
-                newVersion:
-                  availableVersion !== version ? ` ${availableVersion}` : "",
+                newVersion: availableVersion !== version ? ` ${availableVersion}` : "",
               }}
             />
           </LText>
