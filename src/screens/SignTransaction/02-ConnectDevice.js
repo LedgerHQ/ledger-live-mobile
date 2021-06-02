@@ -1,6 +1,6 @@
 // @flow
 import invariant from "invariant";
-import React, { useMemo } from "react";
+import React, { memo } from "react";
 import { StyleSheet } from "react-native";
 import { useSelector } from "react-redux";
 import SafeAreaView from "react-native-safe-area-view";
@@ -39,7 +39,7 @@ type RouteParams = {
   onError: (error: Error) => void,
 };
 
-export default function ConnectDevice({ route }: Props) {
+function ConnectDevice({ route }: Props) {
   const { colors } = useTheme();
   const { account, parentAccount } = useSelector(accountScreenSelector(route));
   invariant(account, "account is required");
@@ -60,35 +60,27 @@ export default function ConnectDevice({ route }: Props) {
     onSuccess,
   });
 
-  return useMemo(
-    () =>
-      transaction ? (
-        <SafeAreaView
-          style={[styles.root, { backgroundColor: colors.background }]}
-        >
-          <TrackScreen
-            category={route.name.replace("ConnectDevice", "")}
-            name="ConnectDevice"
-          />
-          <DeviceAction
-            action={action}
-            request={{
-              account,
-              parentAccount,
-              appName,
-              transaction,
-              status,
-              tokenCurrency,
-            }}
-            device={route.params.device}
-            onResult={handleTx}
-          />
-        </SafeAreaView>
-      ) : null,
-    // prevent rerendering caused by optimistic update (i.e. exclude account related deps)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [status, transaction, tokenCurrency],
-  );
+  return transaction ? (
+    <SafeAreaView style={[styles.root, { backgroundColor: colors.background }]}>
+      <TrackScreen
+        category={route.name.replace("ConnectDevice", "")}
+        name="ConnectDevice"
+      />
+      <DeviceAction
+        action={action}
+        request={{
+          account,
+          parentAccount,
+          appName,
+          transaction,
+          status,
+          tokenCurrency,
+        }}
+        device={route.params.device}
+        onResult={handleTx}
+      />
+    </SafeAreaView>
+  ) : null;
 }
 
 const styles = StyleSheet.create({
@@ -97,3 +89,5 @@ const styles = StyleSheet.create({
     padding: 16,
   },
 });
+
+export default memo<Props>(ConnectDevice);

@@ -5,7 +5,6 @@ import React, {
   useEffect,
   useRef,
   useMemo,
-  useLayoutEffect,
 } from "react";
 import { useSelector } from "react-redux";
 import {
@@ -353,7 +352,7 @@ const WebPlatformPlayer = ({ route }: { route: { params: Props } }) => {
     setWidgetLoaded(false);
   }, []);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     navigation.setOptions({
       headerRight: () => (
         <ReloadButton onReload={handleReload} loading={!widgetLoaded} />
