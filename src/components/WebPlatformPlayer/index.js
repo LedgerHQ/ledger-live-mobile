@@ -5,6 +5,7 @@ import React, {
   useEffect,
   useRef,
   useMemo,
+  useLayoutEffect,
 } from "react";
 import { useSelector } from "react-redux";
 import {
@@ -354,7 +355,7 @@ const WebPlatformPlayer = ({ route }: { route: { params: Props } }) => {
     setWidgetLoaded(false);
   }, []);
 
-  React.useLayoutEffect(() => {
+  useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
         <ReloadButton onReload={handleReload} loading={!widgetLoaded} />
@@ -377,10 +378,7 @@ const WebPlatformPlayer = ({ route }: { route: { params: Props } }) => {
   const uri = useMemo(() => {
     const url = new URL(manifest.url.toString());
 
-    url.searchParams.set(
-      "backgroundColor",
-      new Color(theme.colors.card).hex(),
-    );
+    url.searchParams.set("backgroundColor", new Color(theme.colors.card).hex());
     url.searchParams.set("textColor", new Color(theme.colors.text).hex());
     url.searchParams.set("loadDate", loadDate.valueOf().toString());
 

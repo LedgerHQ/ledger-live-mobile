@@ -1,6 +1,7 @@
 // @flow
 import { useMemo } from "react";
 
+// TODO: use proper manifests instead of static one here
 const useManifests = () =>
   useMemo(() => {
     const paraswapUrl = new URL(

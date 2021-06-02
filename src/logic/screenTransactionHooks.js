@@ -173,22 +173,8 @@ export const broadcastSignedTx = async (
 // TODO move to live-common
 function useBroadcast({ account, parentAccount }: SignTransactionArgs) {
   return useCallback(
-    async (signedOperation: SignedOperation): Promise<Operation> => {
-      invariant(account, "account not present");
-      const mainAccount = getMainAccount(account, parentAccount);
-      const bridge = getAccountBridge(account, parentAccount);
-
-      if (getEnv("DISABLE_TRANSACTION_BROADCAST")) {
-        return Promise.resolve(signedOperation.operation);
-      }
-
-      return execAndWaitAtLeast(3000, () =>
-        bridge.broadcast({
-          account: mainAccount,
-          signedOperation,
-        }),
-      );
-    },
+    async (signedOperation: SignedOperation): Promise<Operation> =>
+      broadcastSignedTx(account, parentAccount, signedOperation),
     [account, parentAccount],
   );
 }
