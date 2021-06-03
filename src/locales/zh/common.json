@@ -64,80 +64,80 @@
       "minutes": "在 1 分钟内",
       "minutes_plural": "在 {{time}} 分钟内",
       "hours": "一小时内",
-      "hours_plural": "in {{time}} hours",
-      "days": "in one day",
-      "days_plural": "in {{time}} days"
+      "hours_plural": "在 {{time}} 小时内",
+      "days": "在 1 天内",
+      "days_plural": "在 {{time}} 天内"
     },
     "timeAgo": {
-      "seconds": "one second ago",
-      "seconds_plural": "{{time}} seconds ago",
-      "minutes": "one minute ago",
-      "minutes_plural": "{{time}} minutes ago",
-      "hours": "one hour ago",
-      "hours_plural": "{{time}} hours ago",
-      "days": "yesterday",
-      "days_plural": "{{time}} days ago"
+      "seconds": "1 秒前",
+      "seconds_plural": "{{time}} 秒前",
+      "minutes": "1 分钟前",
+      "minutes_plural": "{{time}} 分钟前",
+      "hours": "1 小时前",
+      "hours_plural": "{{time}} 小时前",
+      "days": "昨天",
+      "days_plural": "{{time}} 天前"
     },
-    "seeMore": "See more",
-    "moreInfo": "More info",
-    "buyEth": "Buy Ethereum"
+    "seeMore": "查看更多",
+    "moreInfo": "更多信息",
+    "buyEth": "购买以太坊"
   },
   "errors": {
     "AccountAwaitingSendPendingOperations": {
-      "title": "There is a pending operation for this account",
-      "description": "Please wait for the operation to go through."
+      "title": "此账户有一个待处理的操作",
+      "description": "请等待操作完成。"
     },
     "AccountNameRequired": {
-      "title": "An account name is needed",
-      "description": "Please enter an account name."
+      "title": "需要一个账户名",
+      "description": "请输入账户名。"
     },
     "AlgorandASANotOptInInRecipient": {
-      "title": "Recipient account has not opted in the selected ASA."
+      "title": "收币人账户没有选择加入所选的 ASA。"
     },
     "BluetoothRequired": {
-      "title": "Sorry, Bluetooth is disabled",
-      "description": "Please enable Bluetooth in your phone settings. ({{state}} state)"
+      "title": "抱歉，蓝牙已禁用",
+      "description": "请在您的手机设置中启用蓝牙。({{state}} 状态)"
     },
     "BtcUnmatchedApp": {
-      "title": "That's the wrong app",
-      "description": "Please open the {{managerAppName}} app on your device."
+      "title": "这是错误的应用程序",
+      "description": "请打开您设备上的 {{managerAppName}} 应用程序。"
     },
     "CantOpenDevice": {
-      "title": "Sorry, connection failed",
-      "description": "Your Ledger device must be unlocked and in range to use Bluetooth."
+      "title": "抱歉，连接失败",
+      "description": "您的 Ledger 设备必须解锁并在范围内才能使用蓝牙。"
     },
     "CantScanQRCode": {
-      "title": "Could not scan this QR code: auto-verification not supported by this address."
+      "title": "无法扫描此二维码：此地址不支持自动验证。"
     },
     "ConnectAppTimeout": {
-      "title": "Sorry, no device found",
-      "description": "Please make sure your {{productName}} is unlocked with Bluetooth enabled."
+      "title": "抱歉，未找到设备",
+      "description": "请确保您的 {{productName}} 已解锁，同时已启用蓝牙。"
     },
     "ConnectManagerTimeout": {
-      "title": "Sorry, Manager connection failed",
-      "description": "Please make sure your {{productName}} is unlocked with Bluetooth enabled."
+      "title": "抱歉，管理器连接失败",
+      "description": "请确保您的 {{productName}} 已解锁，同时已启用蓝牙。"
     },
     "ClaimRewardsFeesWarning": {
-      "title": "The rewards are smaller than the estimated fees to claim them.",
+      "title": "奖励少于领取奖金的估算费用。",
       "description": ""
     },
     "CompoundLowerAllowanceOfActiveAccountError": {
-      "title": "You cannot reduce the amount approved while having an active deposit."
+      "title": "您不能在有活动存款时减少已批准的金额。"
     },
     "CosmosBroadcastCodeInternal": {
-      "title": "Something went wrong (Error #1)",
-      "description": "Please save your logs using the button below and provide them to Ledger Support."
+      "title": "出了点问题 (错误 #1)",
+      "description": "请使用下面的按钮保存您的日志，并将其提供给 Ledger 支持人员。"
     },
     "CosmosBroadcastCodeTxDecode": {
-      "title": "Something went wrong (Error #2)",
-      "description": "Please save your logs using the button below and provide them to Ledger Support."
+      "title": "出了点问题 (错误 #2)",
+      "description": "请使用下面的按钮保存您的日志，并将其提供给 Ledger 支持人员。"
     },
     "CosmosBroadcastCodeInvalidSequence": {
-      "title": "Invalid sequence",
-      "description": "Please try again."
+      "title": "无效序列",
+      "description": "请重试。"
     },
     "CosmosBroadcastCodeUnauthorized": {
-      "title": "Unauthorized signature",
+      "title": "未经授权的签名",
       "description": "此账户无权签署此交易。"
     },
     "CosmosBroadcastCodeInsufficientFunds": {
@@ -177,118 +177,118 @@
       "description": "请缩减 Memo 文本大小并再次尝试。"
     },
     "CosmosBroadcastCodeInsufficientFee": {
-      "title": "Something went wrong (Error #14)",
-      "description": "Please save your logs using the button below and provide them to Ledger Support."
+      "title": "出了点问题 (错误 #14)",
+      "description": "请使用下面的按钮保存您的日志，并将其提供给 Ledger 支持人员。"
     },
     "CosmosBroadcastCodeTooManySignatures": {
-      "title": "Something went wrong (Error #15)",
-      "description": "Please save your logs using the button below and provide them to Ledger Support."
+      "title": "出了点问题 (错误 #15)",
+      "description": "请使用下面的按钮保存您的日志，并将其提供给 Ledger 支持人员。"
     },
     "CosmosBroadcastCodeGasOverflow": {
-      "title": "Something went wrong (Error #16)",
-      "description": "Please save your logs using the button below and provide them to Ledger Support."
+      "title": "出了点问题 (错误 #16)",
+      "description": "请使用下面的按钮保存您的日志，并将其提供给 Ledger 支持人员。"
     },
     "CosmosBroadcastCodeNoSignatures": {
-      "title": "Something went wrong (Error #17)",
-      "description": "Please save your logs using the button below and provide them to Ledger Support."
+      "title": "出了点问题 (错误 #17)",
+      "description": "请使用下面的按钮保存您的日志，并将其提供给 Ledger 支持人员。"
     },
     "DeviceAppVerifyNotSupported": {
-      "title": "Open Manager to update this app",
-      "description": "The app verification is not supported."
+      "title": "打开管理器以更新此应用程序",
+      "description": "不支持该应用程序的验证。"
     },
     "DeviceGenuineSocketEarlyClose": {
-      "title": "Sorry, try again (genuine-close)",
+      "title": "抱歉，请重试 (正版-关闭)",
       "description": null
     },
     "DeviceHalted": {
-      "title": "Please restart your Ledger device and retry",
-      "description": "An unexpected error occurred. Please try again."
+      "title": "请重启您的 Ledger 设备并重试",
+      "description": "发生意外错误。请重试。"
     },
     "DeviceNotGenuine": {
-      "title": "Device possibly not genuine",
-      "description": "Please save your logs using the button below and provide them to Ledger Support."
+      "title": "设备可能不是正版",
+      "description": "请使用下面的按钮保存您的日志，并将其提供给 Ledger 支持人员。"
     },
     "DeviceNameInvalid": {
-      "title": "Please name the device without '{{invalidCharacters}}'."
+      "title": "请为设备命名，不可使用“{{invalidCharacters}}”。"
     },
     "DeviceOnDashboardExpected": {
-      "title": "Device not on Dashboard",
-      "description": "Please return to the Dashboard on your device."
+      "title": "设备不在功能面板上",
+      "description": "请返回设备的功能面板。"
     },
     "DeviceSocketFail": {
-      "title": "Sorry, connection failed",
-      "description": "Please try again."
+      "title": "抱歉，连接失败",
+      "description": "请再次尝试。"
     },
     "DeviceSocketNoBulkStatus": {
-      "title": "The connection failed",
-      "description": "Please try again."
+      "title": "连接失败",
+      "description": "请重试。"
     },
     "DeviceSocketNoHandler": {
-      "title": "Sorry, connection failed",
-      "description": "Please try again."
+      "title": "抱歉，连接失败",
+      "description": "请重试。"
     },
     "DisconnectedDevice": {
-      "title": "Sorry, it looks like your device was disconnected",
-      "description": "Please reconnect and try again."
+      "title": "抱歉，您的设备似乎已断开连接",
+      "description": "请重新连接并重试。"
     },
     "DisconnectedDeviceDuringOperation": {
-      "title": "Sorry, it looks like your device was disconnected",
-      "description": "Please reconnect and try again."
+      "title": "抱歉，您的设备似乎已断开连接",
+      "description": "请重新连接并重试。"
     },
     "ETHAddressNonEIP": {
-      "title": "Auto-verification not available: carefully verify the address.",
+      "title": "无法自动验证。请仔细核对该地址。",
       "description": null
     },
     "Touch ID Error": {
-      "title": "Biometric authentication failed",
-      "description": "Please use your password or reset the app."
+      "title": "生物特征认证失败",
+      "description": "请使用您的密码或重置应用程序。"
     },
     "Error": {
       "title": "{{message}}",
-      "description": "Something went wrong. Please retry. If the problem persists, please save your logs using the button below and provide them to Ledger Support."
+      "description": "出错了。请重试。如果问题依旧存在，请使用下面的按钮保存您的日志，并将其提供给 Ledger 技术人员。"
     },
     "FeeEstimationFailed": {
-      "title": "Sorry, fee estimation failed",
-      "description": "Try setting the fee manually (status: {{status}})."
+      "title": "抱歉，费用估算失败",
+      "description": "请尝试手动设置费用 (状态：{{status}})"
     },
     "FeeNotLoaded": {
-      "title": "Could not load fee rates"
+      "title": "无法加载费率"
     },
     "FeeRequired": {
-      "title": "Fees are required"
+      "title": "需要费用"
     },
     "FirmwareOrAppUpdateRequired": {
-      "title": "Firmware or app update needed",
-      "description": "Please use the Manager to uninstall all apps then check if a firmware update is available before reinstalling them."
+      "title": "需要更新固件或应用程序",
+      "description": "请使用管理器卸载所有的应用程序，且在重新安装应用程序之前检查是否有可用的固件更新。"
     },
     "GenuineCheckFailed": {
-      "title": "Device authentication failed",
-      "description": "Something went wrong. Please try again. If the problem persists, please save your logs using the button below and provide them to Ledger Support."
+      "title": "设备验证失败",
+      "description": "出错了。请重试。如果问题依旧存在，请使用下面的按钮保存您的日志，并将其提供给 Ledger 技术支持。"
     },
     "HardResetFail": {
-      "title": "Sorry, could not reset",
-      "description": "Please try again. If the problem persists, please save your logs using the button below and provide them to Ledger Support."
+      "title": "抱歉，无法重置",
+      "description": "请重试。如果问题依旧存在，请使用下方按钮保存日志，并将其发送给 Ledger 技术支持。"
     },
     "InvalidAddress": {
-      "title": "This is not a valid {{currencyName}} address"
+      "title": "该{{currencyName}} 地址无效"
     },
     "InvalidAddressBecauseDestinationIsAlsoSource": {
-      "title": "Destination and source accounts must not be the same."
+      "title": "目标账户和源账户不能相同。"
     },
     "InvalidRecipient": {
-      "title": "Invalid recipient"
+      "title": "无效的接收方"
     },
     "LatestMCUInstalledError": {
-      "title": "Sorry, there's nothing to update",
-      "description": "Please contact Ledger Support if you cannot use your device."
+      "title": "对不起，没有可更新的内容",
+      "description": "如果设备无法使用，请联系 Ledger 技术支持。"
     },
     "LedgerAPIError": {
-      "title": "Sorry, try again (API HTTP {{status}})",
-      "description": "Unsuccessful calls to the Ledger API server. Please try again."
+      "title": "抱歉，请重试 (API HTTP {{status}})",
+      "description": "呼叫 Ledger API 服务器失败。请重试。"
     },
     "LedgerAPIErrorWithMessage": {
       "title": "{{message}}",
-      "description": "Please try again. If the problem persists, please save your logs using the button below and provide them to Ledger Support."
+      "description": "出错了。请重试。如果问题依旧存在，请使用下面的按钮保存您的日志，并将其提供给 Ledger 技术支持。"
     },
     "LedgerAPINotAvailable": {
       "title": "Sorry, {{currencyName}} services unavailable",
