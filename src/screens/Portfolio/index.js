@@ -211,9 +211,10 @@ export default function PortfolioScreen({ navigation }: Props) {
   const [highlight, setHighlight] = useState(-1);
   const flatListRef = useRef();
   let distribution = useDistribution();
+  const maxDistributionToDisplay = 3;
   distribution = {
     ...distribution,
-    list: distribution.list.slice(0, 3),
+    list: distribution.list.slice(0, maxDistributionToDisplay),
   };
   const onDistributionButtonPress = useCallback(() => {
     navigation.navigate(ScreenName.Distribution);
