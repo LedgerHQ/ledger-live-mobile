@@ -1808,6 +1808,7 @@
         "whatIsSwap": "What is Swap?",
         "cta": "Continue",
         "kyc": {
+          "notAvailable": "Unavailable in your location",
           "status": {
             "required": "KYC Required",
             "pending": "KYC Pending",

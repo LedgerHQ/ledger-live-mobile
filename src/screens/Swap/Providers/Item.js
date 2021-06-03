@@ -11,6 +11,7 @@ import { rgba } from "../../../colors";
 import { swapKYCSelector } from "../../../reducers/settings";
 import { setSwapKYCStatus } from "../../../actions/settings";
 import IconInfo from "../../../icons/Info";
+import IconCloseCircle from "../../../icons/CloseCircle";
 import LText from "../../../components/LText";
 import BulletList, { BulletSmallDot } from "../../../components/BulletList";
 
@@ -22,6 +23,7 @@ const Item = ({
   title,
   bullets,
   kyc,
+  notAvailable,
 }: {
   id: string,
   selected?: string,
@@ -30,6 +32,7 @@ const Item = ({
   title: React$Node,
   bullets: Array<React$Node>,
   kyc?: boolean,
+  notAvailable?: boolean,
 }) => {
   const { colors } = useTheme();
   const swapKYC = useSelector(swapKYCSelector);
@@ -68,10 +71,15 @@ const Item = ({
     }[status] || colors.red;
 
   return (
-    <TouchableOpacity onPress={() => onSelect(id)}>
+    <TouchableOpacity onPress={() => onSelect(id)} disabled={notAvailable}>
       <View
         style={[
           styles.wrapper,
+          {
+            backgroundColor: notAvailable
+              ? rgba(colors.fog, 0.2)
+              : colors.white,
+          },
           { borderColor: selected === id ? colors.live : colors.fog },
         ]}
       >
@@ -82,7 +90,19 @@ const Item = ({
               {title}
             </LText>
           </View>
-          {kyc ? (
+          {notAvailable ? (
+            <View
+              style={[
+                styles.headRight,
+                { backgroundColor: rgba(colors.alert, 0.1) },
+              ]}
+            >
+              <LText style={[styles.status, { color: colors.alert }]} semiBold>
+                <Trans i18nKey={`transfer.swap.providers.kyc.notAvailable`} />
+              </LText>
+              <IconCloseCircle color={colors.alert} size={16} />
+            </View>
+          ) : kyc ? (
             <View
               style={[
                 styles.headRight,

@@ -22,9 +22,8 @@ const Providers = ({
 }) => {
   const { t } = useTranslation();
   const [selectedItem, setSelectedItem] = useState();
-  // const availableProviders = providers.map(p => p.provider);
-  const availableProviders = ["wyre"];
-  const rows = false;
+  const availableProviders = providers.map(p => p.provider);
+  const noCentralizedProviders = !availableProviders.length;
 
   return (
     <SafeAreaView style={styles.wrapper}>
@@ -33,7 +32,6 @@ const Providers = ({
           <Trans i18nKey={"transfer.swap.providers.title"} />
         </LText>
         <Item
-          rows={rows}
           id={"paraswap"}
           onSelect={setSelectedItem}
           selected={selectedItem}
@@ -45,14 +43,14 @@ const Providers = ({
             t("transfer.swap.providers.paraswap.bullet.2"),
           ]}
         />
-        {availableProviders.includes("changelly") ? (
+        {noCentralizedProviders || availableProviders.includes("changelly") ? (
           <Item
-            rows={rows}
             id={"changelly"}
             onSelect={setSelectedItem}
             selected={selectedItem}
             Icon={IconChangelly}
             title={t("transfer.swap.providers.changelly.title")}
+            notAvailable={noCentralizedProviders}
             bullets={[
               t("transfer.swap.providers.changelly.bullet.0"),
               t("transfer.swap.providers.changelly.bullet.1"),
@@ -61,7 +59,6 @@ const Providers = ({
           />
         ) : availableProviders.includes("wyre") ? (
           <Item
-            rows={rows}
             id={"wyre"}
             onSelect={setSelectedItem}
             selected={selectedItem}
@@ -74,21 +71,7 @@ const Providers = ({
               t("transfer.swap.providers.wyre.bullet.2"),
             ]}
           />
-        ) : (
-          <Item
-            rows={rows}
-            id={"changelly"}
-            onSelect={setSelectedItem}
-            selected={selectedItem}
-            Icon={IconChangelly}
-            title={t("transfer.swap.providers.changelly.title")}
-            bullets={[
-              t("transfer.swap.providers.changelly.bullet.0"),
-              t("transfer.swap.providers.changelly.bullet.1"),
-              t("transfer.swap.providers.changelly.bullet.2"),
-            ]}
-          />
-        )}
+        ) : null}
       </ScrollView>
       <View style={styles.footer}>
         <Button
