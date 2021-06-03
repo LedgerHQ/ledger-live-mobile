@@ -20,7 +20,7 @@ const ProviderListItem = ({
   onSelect: string => void,
   Icon?: any,
   title: React$Node,
-  bullets: Array<React$Node>,
+  bullets: string[],
   kyc?: boolean,
 }) => {
   const { colors } = useTheme();

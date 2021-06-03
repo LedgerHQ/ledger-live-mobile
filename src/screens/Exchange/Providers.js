@@ -65,14 +65,15 @@ const ExchangeProviders = ({ route }: { route: { params: RouteParams } }) => {
           <Trans i18nKey={"transfer.exchange.providers.title"} />
         </LText>
         {PROVIDERS.map(p => {
-          const bullets = [
-            t(`transfer.exchange.providers.${p.provider}.bullets`, {
+          const bullets = t(
+            `transfer.exchange.providers.${p.provider}.bullets`,
+            {
               joinArrays: ";",
               defaultValue: "",
-            })
-              .split(";")
-              .filter(Boolean),
-          ];
+            },
+          )
+            .split(";")
+            .filter(Boolean);
 
           return (
             <Item
