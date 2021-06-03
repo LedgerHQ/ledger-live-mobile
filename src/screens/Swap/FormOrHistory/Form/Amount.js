@@ -6,6 +6,7 @@ import { Trans } from "react-i18next";
 import invariant from "invariant";
 import { BigNumber } from "bignumber.js";
 
+import { useSelector } from "react-redux";
 import {
   getAccountUnit,
   getAccountCurrency,
@@ -17,7 +18,8 @@ import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTran
 import { AmountRequired, NotEnoughBalance } from "@ledgerhq/errors";
 import { getEnabledTradingMethods } from "@ledgerhq/live-common/lib/exchange/swap/logic";
 import { getExchangeRates } from "@ledgerhq/live-common/lib/exchange/swap";
-
+import { swapKYCSelector } from "../../../../reducers/settings";
+import type { SwapRouteParams } from ".";
 import KeyboardView from "../../../../components/KeyboardView";
 import LText from "../../../../components/LText";
 import getFontStyle from "../../../../components/LText/getFontStyle";
@@ -29,9 +31,7 @@ import Button from "../../../../components/Button";
 import ToggleButton from "../../../../components/ToggleButton";
 import Switch from "../../../../components/Switch";
 import { ScreenName } from "../../../../const";
-
 import Rate from "./Rate";
-import type { SwapRouteParams } from ".";
 
 type Props = {
   navigation: any,
@@ -43,6 +43,10 @@ type Props = {
 const SwapFormAmount = ({ navigation, route }: Props) => {
   const { exchange, providers, provider } = route.params;
   const { fromAccount, fromParentAccount, toAccount } = exchange;
+
+  const swapKYC = useSelector(swapKYCSelector);
+  const providerKYC = swapKYC[provider];
+
   const fromCurrency = getAccountCurrency(fromAccount);
   const toCurrency = getAccountCurrency(toAccount);
   const fromUnit = getAccountUnit(fromAccount);
@@ -134,10 +138,16 @@ const SwapFormAmount = ({ navigation, route }: Props) => {
     let ignore = false;
     async function getRates() {
       try {
-        const rates = await getExchangeRates(exchange, transaction);
+        const rates = await getExchangeRates(
+          exchange,
+          transaction,
+          providerKYC?.id,
+        );
         if (ignore) return;
-        let rate = rates.find(rate => rate.tradeMethod === tradeMethod);
-        rate = rate || rates.find(rate => !rate.tradeMethod); // Fixme, we need the trademethod even on error
+        const rate = rates.find(
+          rate =>
+            rate.tradeMethod === tradeMethod && rate.provider === provider,
+        );
         if (rate?.error) {
           setError(rate.error);
         } else {
@@ -156,7 +166,17 @@ const SwapFormAmount = ({ navigation, route }: Props) => {
     return () => {
       ignore = true;
     };
-  }, [exchange, fromAccount, toAccount, error, transaction, tradeMethod, rate]);
+  }, [
+    exchange,
+    fromAccount,
+    toAccount,
+    error,
+    transaction,
+    tradeMethod,
+    rate,
+    providerKYC?.id,
+    provider,
+  ]);
 
   const onContinue = useCallback(() => {
     navigation.navigate(ScreenName.SwapSummary, {
