@@ -452,16 +452,16 @@
       "title": "没有足够能量发送该代币"
     },
     "UpdateYourApp": {
-      "title": "App update needed",
-      "description": "Please uninstall then reinstall the {{managerAppName}} app in the Manager."
+      "title": "需要更新应用程序",
+      "description": "请通过管理器卸载并重新安装 {{managerAppName}} 应用程序。"
     },
     "UserRefusedAllowManager": {
-      "title": "Manager disabled on device",
-      "description": "Please enable the Manager on your device, then try again."
+      "title": "设备端管理器已禁用",
+      "description": "请在您的设备上启用管理器，然后重试。"
     },
     "UserRefusedAddress": {
-      "title": "Receive address rejected",
-      "description": "You rejected the address. If in doubt, please save your logs using the button below and provide them to Ledger Support."
+      "title": "接收地址被拒",
+      "description": "您拒绝了该地址。如有疑问，请使用下面的按钮保存您的日志，并将其提供给 Ledger 技术支持。"
     },
     "UserRefusedDeviceNameChange": {
       "title": "Rename canceled on device",
@@ -605,57 +605,57 @@
       "title": "验证失败",
       "buttons": {
         "tryAgain": "再次尝试",
-        "reset": "Reset"
+        "reset": "重置"
       }
     },
     "unlock": {
-      "biometricsTitle": "Please authenticate with the Ledger Live app",
-      "title": "Welcome back",
-      "desc": "Enter your password to continue",
-      "inputPlaceholder": "Type your password",
-      "login": "Log in",
-      "forgotPassword": "I lost my password"
+      "biometricsTitle": "请使用 Ledger Live 应用程序验证身份",
+      "title": "欢迎回来",
+      "desc": "输入您的密码以继续",
+      "inputPlaceholder": "输入您的密码",
+      "login": "登录",
+      "forgotPassword": "密码丢失"
     },
     "addPassword": {
-      "placeholder": "Choose your password",
-      "title": "Password Lock"
+      "placeholder": "选择您的密码",
+      "title": "密码锁"
     },
     "confirmPassword": {
-      "title": "Confirm Password",
-      "placeholder": "Confirm your password"
+      "title": "确认密码",
+      "placeholder": "确认您的密码"
     },
     "enableBiometrics": {
       "title": "{{biometricsType}}",
-      "desc": "Unlock with {{biometricsType}}"
+      "desc": "使用 {{biometricsType}} 解锁"
     }
   },
   "reset": {
-    "description": "Please uninstall then reinstall the app on your phone to delete Ledger Live data, including accounts and settings.",
-    "button": "Reset"
+    "description": "请在手机上卸载并重新安装应用程序以删除 Ledger Live 数据，包括账户和设置参数）。",
+    "button": "重置"
   },
   "graph": {
-    "week": "1W",
-    "month": "1M",
-    "year": "1Y",
-    "all": "ALL"
+    "week": "1 周",
+    "month": "1 月",
+    "year": "1 年",
+    "all": "全部"
   },
   "carousel": {
-    "title": "Close banner?",
-    "description": "We'll inform you of any new announcements.",
-    "confirm": "Confirm",
-    "undo": "Undo",
+    "title": "关闭横幅？",
+    "description": "如有任何新通告，我们都会通知您。",
+    "confirm": "确认",
+    "undo": "撤消",
     "banners": {
       "valentine": {
-        "title": "Valentine’s day",
-        "description": "Reduced fees on Buy and Sell"
+        "title": "情人节",
+        "description": "已降低的买入和卖出费用"
       },
       "academy": {
-        "title": "Ledger Academy",
+        "title": "Ledger 学院",
         "description": "Everything you need to\nknow about crypto"
       },
       "stakeCosmos": {
-        "title": "Stake COSMOS",
-        "description": "Delegate your ATOM earn rewards today."
+        "title": "权益质押 (Stake) COSMOS",
+        "description": "将 ATOM 委托出去，今天就赚取奖励。"
       },
       "polkastake": {
         "title": "POLKADOT STAKING",
@@ -2816,7 +2816,7 @@
       "flow": {
         "steps": {
           "starter": {
-            "description": "Delegate your ATOM to earn rewards securely, keeping control of your assets.",
+            "description": "将您的 ATOM 币委托出去从而安全地赚取奖励，同时依旧掌控您的资产。",
             "steps": {
               "0": "Delegated assets remain yours.",
               "1": "You will have to wait 21 days for the undelegation to complete.",
