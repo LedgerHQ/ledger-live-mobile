@@ -291,115 +291,115 @@
       "description": "出错了。请重试。如果问题依旧存在，请使用下面的按钮保存您的日志，并将其提供给 Ledger 技术支持。"
     },
     "LedgerAPINotAvailable": {
-      "title": "Sorry, {{currencyName}} services unavailable",
-      "description": "Please try again. If the problem persists, please save your logs using the button below and provide them to Ledger Support."
+      "title": "抱歉，{{currencyName}} 服务不可用",
+      "description": "请重试。如果问题依旧存在，请使用下面的按钮保存您的日志，并将其提供给 Ledger 技术支持。"
     },
     "ManagerAPIsFail": {
-      "title": "Sorry, Manager services are unavailable",
-      "description": "Please check the network status."
+      "title": "抱歉，管理器服务不可用",
+      "description": "请检查网络状态。"
     },
     "ManagerAppAlreadyInstalled": {
-      "title": "Sorry, that's already installed",
-      "description": "Please check which apps are already installed on your device."
+      "title": "对不起，该应用程序已安装",
+      "description": "请检查您的设备上已经安装了哪些应用程序。"
     },
     "ManagerAppRelyOnBTC": {
-      "title": "Bitcoin and Ethereum apps needed",
-      "description": "Please install the latest Bitcoin and Ethereum apps first."
+      "title": "需要安装比特币和以太坊应用程序",
+      "description": "请先安装最新版本的比特币和以太坊应用程序。"
     },
     "ManagerDeviceLocked": {
-      "title": "Your device is locked",
-      "description": "Please unlock it."
+      "title": "您的设备已经锁定",
+      "description": "请将设备解锁。"
     },
     "ManagerNotEnoughSpace": {
-      "title": "Not enough storage left",
-      "info": "Please uninstall some apps to free up space for the {{app}} app.",
-      "description": "Uninstalling apps has no impact on your assets."
+      "title": "存储空间不足",
+      "info": "请卸载一些应用程序，释放空间并安装 {{app}} 应用程序。",
+      "description": "卸载应用程序并不会影响您的资产。"
     },
     "ManagerQuitPage": {
       "install": {
-        "title": "App installation in progress",
-        "description": "Quitting the Manager will terminate installation.",
-        "stay": "Continue installation"
+        "title": "应用程序正在安装",
+        "description": "退出管理器会终止安装。",
+        "stay": "继续安装"
       },
       "uninstall": {
-        "title": "App uninstall in progress",
-        "description": "Quitting the Manager will terminate uninstallation.",
-        "stay": "Continue uninstallation"
+        "title": "应用程序正在卸载",
+        "description": "退出管理器会终止卸载。",
+        "stay": "继续卸载"
       },
       "update": {
-        "title": "App update in progress",
-        "description": "Quitting the Manager will terminate update.",
-        "stay": "Continue update"
+        "title": "应用程序正在更新",
+        "description": "退出管理器会终止更新。",
+        "stay": "继续更新"
       },
-      "quit": "Quit Manager"
+      "quit": "退出管理器"
     },
     "ManagerUninstallBTCDep": {
-      "title": "Sorry, this app is needed",
-      "description": "Uninstall the Bitcoin or Ethereum app last."
+      "title": "抱歉，此应用程序是必需的",
+      "description": "最后卸载比特币或以太坊应用程序。"
     },
     "NetworkDown": {
-      "title": "Sorry, internet seems to be down",
-      "description": "Please check your internet connection."
+      "title": "抱歉，网络连接似乎已断开",
+      "description": "请检查您的网络连接。"
     },
     "NoAddressesFound": {
-      "title": "Sorry, no account was found",
-      "description": "Something went wrong with the address calculation. Please try again. If the problem persists, please save your logs using the button below and provide them to Ledger Support."
+      "title": "抱歉，没有找到账户",
+      "description": "地址计算出错。请重试。如果问题依旧存在，请使用下面的按钮保存您的日志，并将其提供给 Ledger 技术支持。"
     },
     "NotEnoughBalance": {
-      "title": "Sorry, insufficient funds",
-      "description": "Please make sure the account has enough funds."
+      "title": "抱歉，资金不足",
+      "description": "请确保该账户资金充足。"
     },
     "NotEnoughGas": {
-      "title": "Insufficient ETH for network fee",
-      "description": "Please send some ETH to your account to pay for ERC20 token transactions."
+      "title": "以太币 ETH 不足以支付网络费用",
+      "description": "请向您的账户发送一些以太币 ETH 以支付 ERC20 代币交易。"
     },
     "NotEnoughBalanceToDelegate": {
-      "title": "Insufficient balance to delegate"
+      "title": "余额不足，无法委托"
     },
     "NotEnoughBalanceInParentAccount": {
-      "title": "Insufficient balance in the parent account"
+      "title": "主账户余额不足"
     },
     "NotEnoughSpendableBalance": {
-      "title": "Balance cannot be below {{minimumAmount}}"
+      "title": "余额不能少于 {{minimumAmount}}"
     },
     "NotEnoughBalanceBecauseDestinationNotCreated": {
-      "title": "Minimum of {{minimalAmount}} needed to activate recipient address"
+      "title": "激活接收方地址最少需要 {{minimalAmount}}"
     },
     "PairingFailed": {
-      "title": "Pairing unsuccessful",
-      "description": "Please try again or consult our Bluetooth troubleshooting article."
+      "title": "配对不成功",
+      "description": "请重试或参阅我们的蓝牙故障排除文章。"
     },
     "PasswordIncorrect": {
-      "title": "Incorrect password",
-      "description": "Please try again."
+      "title": "密码错误",
+      "description": "请重试。"
     },
     "PasswordsDontMatch": {
-      "title": "Password does not match",
-      "description": "Please try again."
+      "title": "密码不匹配",
+      "description": "请重试。"
     },
     "SelectExchangesLoadError": {
-      "title": "Unable to load",
-      "description": "Cannot load the exchanges."
+      "title": "无法加载",
+      "description": "无法加载这些交易所。"
     },
     "SyncError": {
-      "title": "Synchronization error",
-      "description": "Some accounts could not be synchronized."
+      "title": "同步错误",
+      "description": "某些账户无法被同步。"
     },
     "TimeoutError": {
-      "title": "Sorry, server took too long to respond",
-      "description": "Please try again."
+      "title": "抱歉，服务器响应超时",
+      "description": "请重试。"
     },
     "TimeoutTagged": {
-      "title": "Sorry, server took too long to respond ({{tag}})",
-      "description": "Timeout occurred."
+      "title": "抱歉，服务器响应超时 ({{tag}})",
+      "description": "出现超时。"
     },
     "TransactionRefusedOnDevice": {
-      "title": "Transaction refused on device",
-      "description": "Please try again. If the problem persists, please save your logs using the button below and provide them to Ledger Support."
+      "title": "交易被设备端拒绝",
+      "description": "请重试。如果问题依旧存在，请使用下面的按钮保存您的日志，并将其提供给 Ledger 技术支持。"
     },
     "TransportError": {
-      "title": "Something went wrong. Please reconnect your device.",
-      "description": "{{message}} Please try again. If the problem persists, please save your logs using the button below and provide them to Ledger Support."
+      "title": "出错了。请重新连接您的设备。",
+      "description": "{{message}} 请重试。如果问题依旧存在，请使用下面的按钮保存您的日志，并将其提供给 Ledger 技术支持。"
     },
     "TransportStatusError": {
       "title": "Something went wrong. Please reconnect your device.",
@@ -411,45 +411,45 @@
     },
     "TronNoFrozenForEnergy": {
       "title": "No assets to unfreeze",
-      "description": "You don't have Energy assets to unfreeze."
+      "description": "您没有可解冻的能量资产。"
     },
     "TronUnfreezeNotExpired": {
-      "title": "Unfreeze is not available yet",
-      "description": "Please wait 3 days after your last Freeze operation."
+      "title": "暂时无法解冻",
+      "description": "上次解冻操作后，需要等待 3 天。"
     },
     "TronVoteRequired": {
-      "title": "At least 1 vote is needed"
+      "title": "最少需要 1 张选票"
     },
     "TronInvalidVoteCount": {
-      "title": "Vote format is incorrect",
-      "description": "You can only vote using round numbers."
+      "title": "选票格式不正确",
+      "description": "仅可使用整数投票。"
     },
     "TronRewardNotAvailable": {
-      "title": "Rewards are not claimable yet",
-      "description": "Please wait 24 hours between claims."
+      "title": "奖励尚不能申领。",
+      "description": "两次申领需间隔 24 小时。"
     },
     "TronNoReward": {
-      "title": "There is no reward to be claimed"
+      "title": "没有可申领的奖励"
     },
     "TronInvalidFreezeAmount": {
-      "title": "Amount to freeze cannot be smaller than 1"
+      "title": "要冻结的数额不可小于 1"
     },
     "TronSendTrc20ToNewAccountForbidden": {
-      "title": "Sending TRC20 to the new account will not activate it",
-      "description": "To activate it, first send either TRX or TRC10 to the account. Then it can receive TRC20."
+      "title": "发送 TRC20 到新账户并不会将其激活",
+      "description": "若要将其激活，首先发送 TRX 或 TRC10 至该账户。随后它便能接收 TRC20 。"
     },
     "TronUnexpectedFees": {
-      "title": "Additional fees may apply"
+      "title": "可能会收取额外费用"
     },
     "TronNotEnoughTronPower": {
-      "title": "Not enough votes available"
+      "title": "可用票数不足"
     },
     "TronTransactionExpired": {
-      "title": "Transaction timeout expired",
-      "description": "Transactions must be signed within 30 seconds. Please try again."
+      "title": "交易超时过期",
+      "description": "必须在 30 秒内签署交易。请重试。"
     },
     "TronNotEnoughEnergy": {
-      "title": "Not enough Energy to send this token"
+      "title": "没有足够能量发送该代币"
     },
     "UpdateYourApp": {
       "title": "App update needed",
