@@ -31,7 +31,6 @@ import { counterValueCurrencySelector } from "../../reducers/settings";
 import { usePortfolio } from "../../actions/portfolio";
 import SectionHeader from "../../components/SectionHeader";
 import NoMoreOperationFooter from "../../components/NoMoreOperationFooter";
-import LoadingFooter from "../../components/LoadingFooter";
 import OperationRow from "../../components/OperationRow";
 import globalSyncRefreshControl from "../../components/globalSyncRefreshControl";
 
@@ -76,7 +75,6 @@ export default function PortfolioScreen({ navigation }: Props) {
   const refreshAccountsOrdering = useRefreshAccountsOrdering();
   useFocusEffect(refreshAccountsOrdering);
 
-  const [opCount, setOpCount] = useState(50);
   const scrollY = useRef(new Animated.Value(0)).current;
   const ref = useRef();
   useScrollToTop(ref);
@@ -165,40 +163,12 @@ export default function PortfolioScreen({ navigation }: Props) {
     return <SectionHeader section={section} />;
   }
 
-  function onEndReached() {
-    setOpCount(opCount + 50);
-  }
+  const { sections, completed } = groupAccountsOperationsByDay(accounts, {
+    count: 5,
+    withSubAccounts: true,
+  });
 
-  const { sections: sectionsAll, completed } = groupAccountsOperationsByDay(
-    accounts,
-    {
-      count: opCount,
-      withSubAccounts: true,
-    },
-  );
-  const maxOperationsToDisplay = 10;
-  const { sections, nb, total } = sectionsAll.reduce(
-    ({ nb, sections, total }, section) => {
-      if (nb >= maxOperationsToDisplay) {
-        return { nb, sections, total: total + section.data.length };
-      }
-      const left = maxOperationsToDisplay - nb;
-      const taken = section.data.slice(0, left);
-      return {
-        nb: nb + taken.length,
-        total: total + section.data.length,
-        sections: [
-          ...sections,
-          {
-            ...section,
-            data: taken,
-          },
-        ],
-      };
-    },
-    { nb: 0, total: 0, sections: [] },
-  );
-  const canSeeMoreSection = total > nb;
+  const canSeeMoreSection = !completed;
   const onTransactionButtonPress = useCallback(() => {
     navigation.navigate(ScreenName.PortfolioOperationHistory);
   }, [navigation]);
@@ -262,12 +232,14 @@ export default function PortfolioScreen({ navigation }: Props) {
                     distribution={distribution}
                     setHighlight={setHighlight}
                   />
-                  <Button
-                    event="View Distribution"
-                    type="primary"
-                    title={t("common.seeAll")}
-                    onPress={onDistributionButtonPress}
-                  />
+                  <View style={styles.seeMoreBtn}>
+                    <Button
+                      event="View Distribution"
+                      type="lightPrimary"
+                      title={t("common.seeAll")}
+                      onPress={onDistributionButtonPress}
+                    />
+                  </View>
                 </View>,
               ]
             : []),
@@ -280,21 +252,20 @@ export default function PortfolioScreen({ navigation }: Props) {
             renderItem={renderItem}
             // $FlowFixMe
             renderSectionHeader={renderSectionHeader}
-            onEndReached={onEndReached}
             stickySectionHeadersEnabled={false}
             ListFooterComponent={
-              !completed ? (
-                <LoadingFooter />
-              ) : accounts.every(isAccountEmpty) ? null : sections.length &&
+              accounts.every(isAccountEmpty) ? null : sections.length &&
                 !canSeeMoreSection ? (
                 <NoMoreOperationFooter />
               ) : sections.length && canSeeMoreSection ? (
-                <Button
-                  event="View Transactions"
-                  type="primary"
-                  title={t("common.seeAll")}
-                  onPress={onTransactionButtonPress}
-                />
+                <View style={styles.seeMoreBtn}>
+                  <Button
+                    event="View Transactions"
+                    type="lightPrimary"
+                    title={t("common.seeAll")}
+                    onPress={onTransactionButtonPress}
+                  />
+                </View>
               ) : (
                 <NoOperationFooter />
               )
@@ -360,4 +331,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
   },
   styckyActionsInner: { height: 56 },
+  seeMoreBtn: {
+    margin: 16,
+  },
 });
