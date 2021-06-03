@@ -651,7 +651,7 @@
       },
       "academy": {
         "title": "Ledger Academy",
-        "description": "Everything you need to\nknow about crypto"
+        "description": "Tout ce qu'il faut savoir sur les cryptos"
       },
       "stakeCosmos": {
         "title": "Stake COSMOS",
@@ -659,19 +659,19 @@
       },
       "polkastake": {
         "title": "STAKING DE POLKADOT",
-        "description": "Stake, secure and\nmanage your DOT with\nLedger Live"
+        "description": "Stakez, sécurisez et gérez vos DOT grâce à Ledger Live"
       },
       "backupPack": {
         "title": "Back-up pack",
-        "description": "A Nano X and a Nano S\nfor optimal protection"
+        "description": "Une protection optimale avec un Nano X et un Nano S"
       },
       "buyCrypto": {
         "title": "Buy Crypto",
-        "description": "Buy crypto on\nLedger Live"
+        "description": "Achetez des cryptos sur Ledger Live"
       },
       "swap": {
         "title": "Swap crypto",
-        "description": "Securely exchange one\ncrypto for another"
+        "description": "Échangez en toute sécurité une crypto contre une autre"
       },
       "algorand": {
         "title": "Algorand",
@@ -1768,32 +1768,32 @@
     "exchange": {
       "title": "Achat / Vente",
       "providers": {
-        "title": "Choose a provider to buy crypto",
-        "whatIsSwap": "What is Buy?",
+        "title": "Choisir un prestataire pour acheter des cryptos",
+        "whatIsSwap": "Qu'est-ce que l'Achat ?",
         "cta": "Continuer",
         "coinify": {
           "bullets": [
             "Disponible dans plus de 130 pays",
-            "EUR, USD, GBP and 32 others",
-            "SEPA & Faster Payments",
-            "Local US wire transfers",
-            "Credit and debit cards"
+            "EUR, USD, GBP et 32 autres",
+            "Virements SEPA et plus rapides",
+            "Virements bancaires US locaux",
+            "Cartes de crédit et débit"
           ]
         },
         "wyre": {
           "bullets": [
-            "Only 🇺🇸 bank account",
-            "USD support only",
-            "20+ crypto supported",
-            "ACH transfer",
-            "No credit & debit cards"
+            "Compte bancaire 🇺🇸 uniquement",
+            "Prise en charge en USD uniquement",
+            "Plus de 20 cryptos prises en charge",
+            "Virement ACH",
+            "Pas de cartes de crédit ou débit"
           ]
         }
       }
     },
     "swap": {
       "title": "Swap",
-      "paraswap": "Paraswap",
+      "paraswap": "ParaSwap",
       "selectDevice": "Select your device",
       "broadcasting": "Broadcasting swap",
       "loadingFees": "Loading network fees...",
@@ -1804,21 +1804,21 @@
         "disclaimer": "Exchange crypto directly from your Ledger device. This service is not available in some countries, including the US."
       },
       "providers": {
-        "title": "Choose a provider to swap your crypto",
-        "whatIsSwap": "What is Swap?",
+        "title": "Choisir un prestataire pour échanger ses cryptos",
+        "whatIsSwap": "Qu'est-ce que le Swap ?",
         "cta": "Continuer",
         "changelly": {
           "bullets": [
-            "BTC, ETH, USDT and 50+ others",
-            "Multi-currency",
-            "Centralized"
+            "BTC, ETH, USDT et plus de 50 autres",
+            "Multidevises",
+            "Centralisé"
           ]
         },
         "paraswap": {
           "bullets": [
-            "Connect to 30+ DEXs (Uniswap, SushiSwap,...)",
-            "Ethereum & ERC20 tokens",
-            "Decentralized & Trustless"
+            "Connexion avec plus de 30 DEX (Uniswap, SushiSwap, etc.)",
+            "Jetons Ethereum et ERC-20",
+            "Décentralisé et sans confiance"
           ]
         }
       },
@@ -1945,7 +1945,7 @@
         }
       },
       "platform": {
-        "tab": "Platform"
+        "tab": "Plateforme"
       }
     },
     "lending": {
@@ -2041,7 +2041,7 @@
       },
       "noTokenAccount": {
         "info": {
-          "title": "You don’t have a {{ name }} account.",
+          "title": "Vous n'avez pas de compte {{ name }}.",
           "description": "In order to deposit funds and lend crypto you need a {{ name }} account. Please Receive funds on your Ethereum address."
         },
         "buttons": {
@@ -2245,12 +2245,12 @@
   },
   "requestAccount": {
     "stepperHeader": {
-      "selectCrypto": "Select crypto",
-      "selectAccount": "Select account",
-      "stepRange": "Step {{currentStep}} of {{totalSteps}}"
+      "selectCrypto": "Sélectionner une crypto",
+      "selectAccount": "Sélectionner un compte",
+      "stepRange": "Étape {{currentStep}} sur {{totalSteps}}"
     },
     "selectAccount": {
-      "addAccount": "Add {{currency}} account"
+      "addAccount": "Ajouter un compte en {{currency}}"
     }
   },
   "freeze": {
@@ -2444,7 +2444,7 @@
     "outdatedDesc": "An important update is available for the {{appName}} application on your device. Please go to the Manager to update it.",
     "quitApp": "Quit the application on your device",
     "appNotInstalled": "Please install the {{appName}} app",
-    "appNotInstalled_plural": "Please install the {{appName}} apps",
+    "appNotInstalled_plural": "Installez les applis {{appName}}",
     "verifyAddress": {
       "title": "Verify address on device",
       "description": "Please verify that the {{currencyName}} address to be shown in Ledger Live matches the one on your Ledger device."
