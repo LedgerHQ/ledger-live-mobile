@@ -402,15 +402,15 @@
       "description": "{{message}} 请重试。如果问题依旧存在，请使用下面的按钮保存您的日志，并将其提供给 Ledger 技术支持。"
     },
     "TransportStatusError": {
-      "title": "Something went wrong. Please reconnect your device.",
-      "description": "{{message}} Please try again. If the problem persists, please save your logs using the button below and provide them to Ledger Support."
+      "title": "出错了。请重新连接您的设备。",
+      "description": "{{message}} 请重试。如果问题依旧存在，请使用下面的按钮保存您的日志，并将其提供给 Ledger 技术支持。"
     },
     "TronNoFrozenForBandwidth": {
-      "title": "No assets to unfreeze",
-      "description": "You don't have Bandwidth assets to unfreeze."
+      "title": "没有可解冻的资产",
+      "description": "您没有可解冻的带宽资产。"
     },
     "TronNoFrozenForEnergy": {
-      "title": "No assets to unfreeze",
+      "title": "没有可解冻的资产",
       "description": "您没有可解冻的能量资产。"
     },
     "TronUnfreezeNotExpired": {
@@ -572,39 +572,39 @@
     "checkEnabled": "Please enable Bluetooth in your phone settings."
   },
   "location": {
-    "required": "Location services required",
-    "open": "Open location settings",
-    "disabled": "Ledger Live requires location services to pair your device through Bluetooth.",
-    "noInfos": "Ledger does not access your location information."
+    "required": "需要定位服务",
+    "open": "打开定位设置选项",
+    "disabled": "Ledger Live 需要定位服务才能通过蓝牙配对您的设备。",
+    "noInfos": "Ledger 并不会获取您的位置信息。"
   },
   "permissions": {
-    "open": "Open app permissions"
+    "open": "打开应用程序权限"
   },
   "fees": {
     "speed": {
-      "high": "High",
-      "standard": "Standard",
-      "low": "Low",
-      "custom": "Custom",
-      "blockCount": "{{blockCount}} blocks"
+      "high": "高",
+      "standard": "标准",
+      "low": "低",
+      "custom": "自定义",
+      "blockCount": "{{blockCount}}个区块"
     }
   },
   "signout": {
-    "confirm": "Are you sure you want to sign out?",
-    "disclaimer": "All account data will be removed from your phone.",
-    "action": "Sign me out"
+    "confirm": "您确定要退出吗？",
+    "disclaimer": "您手机上的所有账户数据都将被删除。",
+    "action": "退出"
   },
   "auth": {
     "failed": {
       "biometrics": {
-        "title": "{{biometricsType}} unlock failed",
-        "description": "Enter your password to continue",
-        "authenticate": "Please authenticate with the Ledger Live app"
+        "title": "{{biometricsType}} 解锁失败",
+        "description": "输入您的密码以继续",
+        "authenticate": "请使用 Ledger Live 应用程序验证身份"
       },
-      "denied": "Auth Security was not enabled because your phone failed to authenticate.",
-      "title": "Authentication failed",
+      "denied": "手机身份验证失败，无法启动安全认证。",
+      "title": "验证失败",
       "buttons": {
-        "tryAgain": "Try again",
+        "tryAgain": "再次尝试",
         "reset": "Reset"
       }
     },
