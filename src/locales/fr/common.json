@@ -658,7 +658,7 @@
         "description": "Delegate your ATOM earn rewards today."
       },
       "polkastake": {
-        "title": "POLKADOT STAKING",
+        "title": "STAKING DE POLKADOT",
         "description": "Stake, secure and\nmanage your DOT with\nLedger Live"
       },
       "backupPack": {
@@ -1770,10 +1770,10 @@
       "providers": {
         "title": "Choose a provider to buy crypto",
         "whatIsSwap": "What is Buy?",
-        "cta": "Continue",
+        "cta": "Continuer",
         "coinify": {
           "bullets": [
-            "Available in 130+ countries",
+            "Disponible dans plus de 130 pays",
             "EUR, USD, GBP and 32 others",
             "SEPA & Faster Payments",
             "Local US wire transfers",
@@ -1806,7 +1806,7 @@
       "providers": {
         "title": "Choose a provider to swap your crypto",
         "whatIsSwap": "What is Swap?",
-        "cta": "Continue",
+        "cta": "Continuer",
         "changelly": {
           "bullets": [
             "BTC, ETH, USDT and 50+ others",
