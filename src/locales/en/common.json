@@ -1526,6 +1526,7 @@
   "distribution": {
     "header": "Asset allocation",
     "list": "Asset allocation ({{count}})",
+    "seeAll": "See all",
     "assets": "asset",
     "assets_plural": "assets",
     "total": "Total balance:",

@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import Animated, { interpolate } from "react-native-reanimated";
 import { createNativeWrapper } from "react-native-gesture-handler";
+import { useTranslation } from "react-i18next";
 import type { SectionBase } from "react-native/Libraries/Lists/SectionList";
 import type { Operation } from "@ledgerhq/live-common/lib/types";
 import { useFocusEffect, useTheme } from "@react-navigation/native";
@@ -18,7 +19,10 @@ import {
   isAccountEmpty,
 } from "@ledgerhq/live-common/lib/account";
 
-import { useRefreshAccountsOrdering } from "../../actions/general";
+import {
+  useRefreshAccountsOrdering,
+  useDistribution,
+} from "../../actions/general";
 import {
   accountsSelector,
   flattenAccountsSelector,
@@ -32,7 +36,9 @@ import OperationRow from "../../components/OperationRow";
 import globalSyncRefreshControl from "../../components/globalSyncRefreshControl";
 
 import GraphCardContainer from "./GraphCardContainer";
+import { DistributionList } from "../Distribution";
 import Carousel from "../../components/Carousel";
+import Button from "../../components/Button";
 import StickyHeader from "./StickyHeader";
 import EmptyStatePortfolio from "./EmptyStatePortfolio";
 import extraStatusBarPadding from "../../logic/extraStatusBarPadding";
@@ -42,8 +48,10 @@ import NoOperationFooter from "../../components/NoOperationFooter";
 import MigrateAccountsBanner from "../MigrateAccounts/Banner";
 import RequireTerms from "../../components/RequireTerms";
 import { useScrollToTop } from "../../navigation/utils";
+import { ScreenName } from "../../const";
 
 import FabActions from "../../components/FabActions";
+import LText from "../../components/LText";
 
 export { default as PortfolioTabIcon } from "./TabIcon";
 
@@ -63,6 +71,7 @@ export default function PortfolioScreen({ navigation }: Props) {
   const allAccounts = useSelector(flattenAccountsSelector);
   const counterValueCurrency = useSelector(counterValueCurrencySelector);
   const portfolio = usePortfolio();
+  const { t } = useTranslation();
 
   const refreshAccountsOrdering = useRefreshAccountsOrdering();
   useFocusEffect(refreshAccountsOrdering);
@@ -168,6 +177,19 @@ export default function PortfolioScreen({ navigation }: Props) {
   const showingPlaceholder =
     accounts.length === 0 || accounts.every(isAccountEmpty);
 
+  const showDistribution =
+    portfolio.balanceHistory[portfolio.balanceHistory.length - 1].value > 0;
+  const [highlight, setHighlight] = useState(-1);
+  const flatListRef = useRef();
+  let distribution = useDistribution();
+  distribution = {
+    ...distribution,
+    list: distribution.list.slice(0, 3),
+  };
+  const onDistributionButtonPress = useCallback(() => {
+    navigation.navigate(ScreenName.Distribution);
+  }, [navigation]);
+
   return (
     <SafeAreaView
       style={[
@@ -198,6 +220,27 @@ export default function PortfolioScreen({ navigation }: Props) {
             : []),
           ListHeaderComponent(),
           StickyActions(),
+          ...(showDistribution
+            ? [
+                <View style={styles.distrib}>
+                  <LText bold secondary style={styles.distributionTitle}>
+                    {t("distribution.header")}
+                  </LText>
+                  <DistributionList
+                    flatListRef={flatListRef}
+                    highlight={highlight}
+                    distribution={distribution}
+                    setHighlight={setHighlight}
+                  />
+                  <Button
+                    event="View Distribution"
+                    type="primary"
+                    title={t("distribution.seeAll")}
+                    onPress={onDistributionButtonPress}
+                  />
+                </View>,
+              ]
+            : []),
           <SectionList
             // $FlowFixMe
             sections={sections}
@@ -253,9 +296,19 @@ const styles = StyleSheet.create({
     position: "relative",
     flex: 1,
   },
+  distrib: {
+    marginTop: -56,
+  },
+  distributionTitle: {
+    fontSize: 16,
+    lineHeight: 24,
+
+    marginLeft: 16,
+    marginTop: 8,
+    marginBottom: 8,
+  },
   list: {
     flex: 1,
-    marginTop: -56,
   },
   contentContainer: {
     flexGrow: 1,
