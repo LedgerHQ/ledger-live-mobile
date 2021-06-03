@@ -1775,18 +1775,18 @@
           "bullets": [
             "Disponible dans plus de 130 pays",
             "EUR, USD, GBP et 32 autres",
-            "Virements SEPA et plus rapides",
-            "Virements bancaires US locaux",
-            "Cartes de crédit et débit"
+            "Virements SEPA et Faster Payments",
+            "Virements bancaires locaux aux USA",
+            "Cartes de crédit et de débit"
           ]
         },
         "wyre": {
           "bullets": [
             "Compte bancaire 🇺🇸 uniquement",
-            "Prise en charge en USD uniquement",
+            "Prise en charge du dollar américain uniquement",
             "Plus de 20 cryptos prises en charge",
             "Virement ACH",
-            "Pas de cartes de crédit ou débit"
+            "Pas de cartes de crédit ou de débit"
           ]
         }
       }
@@ -1804,7 +1804,7 @@
         "disclaimer": "Exchange crypto directly from your Ledger device. This service is not available in some countries, including the US."
       },
       "providers": {
-        "title": "Choisir un prestataire pour échanger ses cryptos",
+        "title": "Choisir un prestataire pour acheter des cryptos",
         "whatIsSwap": "Qu'est-ce que le Swap ?",
         "cta": "Continuer",
         "changelly": {
@@ -1816,8 +1816,8 @@
         },
         "paraswap": {
           "bullets": [
-            "Connexion avec plus de 30 DEX (Uniswap, SushiSwap, etc.)",
-            "Jetons Ethereum et ERC-20",
+            "Connectez-vous à plus de 30 DEX (Uniswap, SushiSwap,...)",
+            "Ethereum et jetons ERC-20",
             "Décentralisé et sans confiance"
           ]
         }
