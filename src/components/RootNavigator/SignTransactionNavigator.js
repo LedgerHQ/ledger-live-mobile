@@ -37,8 +37,8 @@ export default function SignTransactionNavigator() {
         options={{
           headerTitle: () => (
             <StepHeader
-              title={t("signTransaction.stepperHeader.summary")}
-              subtitle={t("signTransaction.stepperHeader.stepRange", {
+              title={t("send.stepperHeader.summary")}
+              subtitle={t("send.stepperHeader.stepRange", {
                 currentStep: "1",
                 totalSteps,
               })}
@@ -53,8 +53,8 @@ export default function SignTransactionNavigator() {
         options={{
           headerTitle: () => (
             <StepHeader
-              title={t("signTransaction.stepperHeader.selectDevice")}
-              subtitle={t("signTransaction.stepperHeader.stepRange", {
+              title={t("send.stepperHeader.selectDevice")}
+              subtitle={t("send.stepperHeader.stepRange", {
                 currentStep: "2",
                 totalSteps,
               })}
@@ -69,8 +69,8 @@ export default function SignTransactionNavigator() {
         options={{
           headerTitle: () => (
             <StepHeader
-              title={t("signTransaction.stepperHeader.connectDevice")}
-              subtitle={t("signTransaction.stepperHeader.stepRange", {
+              title={t("send.stepperHeader.connectDevice")}
+              subtitle={t("send.stepperHeader.stepRange", {
                 currentStep: "2",
                 totalSteps,
               })}
