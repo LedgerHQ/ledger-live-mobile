@@ -2,11 +2,11 @@
 
 export default {
   debug: {
-    name: "debugger",
+    name: "Debugger",
     url: new URL("https://ledger-live-platform-apps.vercel.app/app/debug"),
   },
   wyre: {
-    name: "wyre",
+    name: "Wyre",
     url: new URL("https://ledger-live-platform-apps.vercel.app/app/wyre"),
   },
 };
