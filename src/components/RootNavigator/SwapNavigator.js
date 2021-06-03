@@ -9,6 +9,8 @@ import SwapSummary from "../../screens/Swap/FormOrHistory/Form/Summary";
 import SwapError from "../../screens/Swap/FormOrHistory/Form/Error";
 import SwapFormAmount from "../../screens/Swap/FormOrHistory/Form/Amount";
 import SwapProviders from "../../screens/Swap";
+import SwapKYC from "../../screens/Swap/KYC";
+import SwapKYCStates from "../../screens/Swap/KYC/StateSelect";
 import SwapFormOrHistory from "../../screens/Swap/FormOrHistory";
 import SwapOperationDetails from "../../screens/Swap/FormOrHistory/OperationDetails";
 import { BackButton } from "../../screens/OperationDetails";
@@ -90,6 +92,16 @@ export default function SwapNavigator() {
         component={SwapKYC}
         options={{
           headerTitle: () => <StepHeader title={t("transfer.swap.title")} />,
+          headerRight: null,
+        }}
+      />
+      <Stack.Screen
+        name={ScreenName.SwapKYCStates}
+        component={SwapKYCStates}
+        options={{
+          headerTitle: () => (
+            <StepHeader title={t("transfer.swap.kyc.states")} />
+          ),
           headerRight: null,
         }}
       />

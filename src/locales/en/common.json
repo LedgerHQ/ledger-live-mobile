@@ -1867,7 +1867,8 @@
             "zipcodePlaceholder": "Enter your 5 digit Zip code",
             "statePlaceholder": "Choose state" 
           }
-        }
+        },
+        "states": "Select your state"
       },
       "notAvailable": {
         "title": "Service temporarily unavailable, or not available in your country"

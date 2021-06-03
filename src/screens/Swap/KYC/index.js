@@ -1,7 +1,13 @@
 // @flow
 
 import React, { useCallback, useMemo, useState } from "react";
-import { View, ScrollView, StyleSheet, TextInput } from "react-native";
+import {
+  View,
+  TouchableOpacity,
+  ScrollView,
+  StyleSheet,
+  TextInput,
+} from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { useTranslation, Trans } from "react-i18next";
 import { useNavigation, useTheme } from "@react-navigation/native";
@@ -12,6 +18,7 @@ import {
   // USStates,
 } from "@ledgerhq/live-common/lib/exchange/swap";
 import type { KYCData } from "@ledgerhq/live-common/lib/exchange/swap/types";
+import { ScreenName } from "../../../const";
 
 import IconWyre from "../../../icons/swap/Wyre";
 import LText from "../../../components/LText";
@@ -25,15 +32,11 @@ const KYC = () => {
   const { t } = useTranslation();
   const [errors, setErrors] = useState({});
   const [isLoading, setLoading] = useState(false);
-  const { goBack } = useNavigation();
+  const { navigate, goBack } = useNavigation();
   const swapKYC = useSelector(swapKYCSelector);
   const dispatch = useDispatch();
   const { colors } = useTheme();
 
-  // const stateOptions = Object.entries(USStates).map(([value, label]) => ({
-  //   value,
-  //   label,
-  // }));
   const countryOptions = Object.entries(countries).map(([value, label]) => ({
     value,
     label,
@@ -45,8 +48,8 @@ const KYC = () => {
   const [street1, setStreet1] = useState("");
   const [street2, setStreet2] = useState("");
   const [city, setCity] = useState("");
-  const [state, setState] = useState("Iowa");
-  const [country, setCountry] = useState(countryOptions[0]);
+  const [state, setState] = useState({});
+  const [country] = useState(countryOptions[0]); // TODO
   const [postalCode, setPostalCode] = useState("");
 
   const kycData: KYCData = useMemo(
@@ -57,13 +60,17 @@ const KYC = () => {
         street1,
         street2,
         city,
-        state,
+        state: state?.value,
         country: country?.value,
         postalCode,
       },
     }),
     [city, country, firstName, lastName, postalCode, state, street1, street2],
   );
+
+  const onSelectState = useCallback(() => {
+    navigate(ScreenName.SwapKYCStates, { onStateSelect: setState });
+  }, [navigate]);
 
   const onSubmitKYCData = useCallback(() => {
     let cancelled = false;
@@ -88,7 +95,7 @@ const KYC = () => {
     firstName &&
     lastName &&
     street1 &&
-    state &&
+    state?.value &&
     country &&
     postalCode;
 
@@ -178,14 +185,17 @@ const KYC = () => {
                 <LText style={styles.label} color={"smoke"}>
                   <Trans i18nKey={"transfer.swap.kyc.wyre.form.state"} />
                 </LText>
-                <LText
-                  style={[
-                    styles.input,
-                    { color: state ? color : borderColor, borderColor },
-                  ]}
-                >
-                  {state || t("transfer.swap.kyc.wyre.form.statePlaceholder")}
-                </LText>
+                <TouchableOpacity onPress={onSelectState}>
+                  <LText
+                    style={[
+                      styles.input,
+                      { color: state ? color : borderColor, borderColor },
+                    ]}
+                  >
+                    {state?.value ||
+                      t("transfer.swap.kyc.wyre.form.statePlaceholder")}
+                  </LText>
+                </TouchableOpacity>
                 <LText style={styles.label} color={"smoke"}>
                   <Trans i18nKey={"transfer.swap.kyc.wyre.form.country"} />
                 </LText>

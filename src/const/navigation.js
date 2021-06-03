@@ -130,6 +130,7 @@ export const ScreenName = {
   SwapFormSelectCrypto: "SwapFormSelectCrypto",
   SwapHistory: "SwapHistory",
   SwapKYC: "SwapKYC",
+  SwapKYCStates: "SwapKYCStates",
   SwapOperationDetails: "SwapOperationDetails",
   SwapPendingOperation: "SwapPendingOperation",
   SwapSummary: "SwapSummary",
