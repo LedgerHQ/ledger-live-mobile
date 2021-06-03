@@ -2,6 +2,7 @@
   "common": {
     "cancel": "Cancel",
     "apply": "Apply",
+    "seeAll": "See all",
     "back": "Back",
     "delete": "Delete",
     "paste": "Paste",
@@ -1526,7 +1527,6 @@
   "distribution": {
     "header": "Asset allocation",
     "list": "Asset allocation ({{count}})",
-    "seeAll": "See all",
     "assets": "asset",
     "assets_plural": "assets",
     "total": "Total balance:",

@@ -169,10 +169,39 @@ export default function PortfolioScreen({ navigation }: Props) {
     setOpCount(opCount + 50);
   }
 
-  const { sections, completed } = groupAccountsOperationsByDay(accounts, {
-    count: opCount,
-    withSubAccounts: true,
-  });
+  const { sections: sectionsAll, completed } = groupAccountsOperationsByDay(
+    accounts,
+    {
+      count: opCount,
+      withSubAccounts: true,
+    },
+  );
+  const maxOperationsToDisplay = 10;
+  const { sections, nb, total } = sectionsAll.reduce(
+    ({ nb, sections, total }, section) => {
+      if (nb >= maxOperationsToDisplay) {
+        return { nb, sections, total: total + section.data.length };
+      }
+      const left = maxOperationsToDisplay - nb;
+      const taken = section.data.slice(0, left);
+      return {
+        nb: nb + taken.length,
+        total: total + section.data.length,
+        sections: [
+          ...sections,
+          {
+            ...section,
+            data: taken,
+          },
+        ],
+      };
+    },
+    { nb: 0, total: 0, sections: [] },
+  );
+  const canSeeMoreSection = total > nb;
+  const onTransactionButtonPress = useCallback(() => {
+    navigation.navigate(ScreenName.PortfolioOperationHistory);
+  }, [navigation]);
 
   const showingPlaceholder =
     accounts.length === 0 || accounts.every(isAccountEmpty);
@@ -235,7 +264,7 @@ export default function PortfolioScreen({ navigation }: Props) {
                   <Button
                     event="View Distribution"
                     type="primary"
-                    title={t("distribution.seeAll")}
+                    title={t("common.seeAll")}
                     onPress={onDistributionButtonPress}
                   />
                 </View>,
@@ -255,8 +284,16 @@ export default function PortfolioScreen({ navigation }: Props) {
             ListFooterComponent={
               !completed ? (
                 <LoadingFooter />
-              ) : accounts.every(isAccountEmpty) ? null : sections.length ? (
+              ) : accounts.every(isAccountEmpty) ? null : sections.length &&
+                !canSeeMoreSection ? (
                 <NoMoreOperationFooter />
+              ) : sections.length && canSeeMoreSection ? (
+                <Button
+                  event="View Transactions"
+                  type="primary"
+                  title={t("common.seeAll")}
+                  onPress={onTransactionButtonPress}
+                />
               ) : (
                 <NoOperationFooter />
               )
