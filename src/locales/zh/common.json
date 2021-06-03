@@ -29,41 +29,41 @@
     "sent": "已发送",
     "or": "或者",
     "rename": "重命名",
-    "learnMore": "Learn more",
-    "viewDetails": "View details",
-    "today": "Today",
-    "yesterday": "Yesterday",
-    "upToDate": "Up to date",
-    "transactionDate": "Transaction date",
-    "outdated": "Outdated",
-    "satPerByte": "sat/bytes",
-    "notAvailable": "Not available",
-    "import": "Import",
-    "bluetooth": "Bluetooth",
+    "learnMore": "了解更多",
+    "viewDetails": "查看详情",
+    "today": "今天",
+    "yesterday": "昨天",
+    "upToDate": "最新",
+    "transactionDate": "交易日期",
+    "outdated": "已过期",
+    "satPerByte": "聪/字节",
+    "notAvailable": "不可用",
+    "import": "导入",
+    "bluetooth": "蓝牙",
     "usb": "USB",
-    "add": "Add",
-    "slow": "slow",
-    "fast": "fast",
-    "token": "Token",
-    "token_plural": "Tokens",
-    "subaccount": "Subaccount",
-    "subaccount_plural": "Subaccounts",
-    "forgetDevice": "Remove device",
-    "help": "Help",
-    "saveLogs": "Save logs",
+    "add": "添加",
+    "slow": "慢",
+    "fast": "快",
+    "token": "代币",
+    "token_plural": "代币",
+    "subaccount": "子账户",
+    "subaccount_plural": "子帐户",
+    "forgetDevice": "移除设备",
+    "help": "帮助",
+    "saveLogs": "保存日志",
     "sync": {
-      "ago": "Synchronized {{time}}"
+      "ago": "已同步 {{time}}"
     },
-    "update": "Update available",
-    "install": "Install",
-    "installed": "Installed",
-    "uninstall": "Uninstall",
+    "update": "可用更新",
+    "install": "安装",
+    "installed": "已安装",
+    "uninstall": "卸载",
     "fromNow": {
-      "seconds": "in one second",
-      "seconds_plural": "in {{time}} seconds",
-      "minutes": "in one minute",
-      "minutes_plural": "in {{time}} minutes",
-      "hours": "in one hour",
+      "seconds": "在 1 秒内",
+      "seconds_plural": "在 {{time}} 秒内",
+      "minutes": "在 1 分钟内",
+      "minutes_plural": "在 {{time}} 分钟内",
+      "hours": "一小时内",
       "hours_plural": "in {{time}} hours",
       "days": "in one day",
       "days_plural": "in {{time}} days"
@@ -138,43 +138,43 @@
     },
     "CosmosBroadcastCodeUnauthorized": {
       "title": "Unauthorized signature",
-      "description": "This account is not authorized to sign this transaction."
+      "description": "此账户无权签署此交易。"
     },
     "CosmosBroadcastCodeInsufficientFunds": {
-      "title": "Insufficient funds",
-      "description": "Please make sure the account has enough funds."
+      "title": "资金不足",
+      "description": "请确保账户有足够的资金。"
     },
     "CosmosBroadcastCodeUnknownRequest": {
-      "title": "Something went wrong (Error #6)",
-      "description": "Please save your logs using the button below and provide them to Ledger Support."
+      "title": "出了点问题 (错误 #6)",
+      "description": "请使用下面的按钮保存您的日志，并将其提供给 Ledger 支持人员。"
     },
     "CosmosBroadcastCodeInvalidAddress": {
-      "title": "Invalid address",
-      "description": "Please check the address and try again."
+      "title": "地址无效",
+      "description": "请检查地址，然后重试。"
     },
     "CosmosBroadcastCodeInvalidPubKey": {
-      "title": "Something went wrong (Error #8)",
-      "description": "Please save your logs using the button below and provide them to Ledger Support."
+      "title": "出了点问题 (错误 #8)",
+      "description": "请使用下面的按钮保存您的日志，并将其提供给 Ledger 支持人员。"
     },
     "CosmosBroadcastCodeUnknownAddress": {
-      "title": "Unknown address",
-      "description": "Please check the address and try again."
+      "title": "未知地址",
+      "description": "请检查地址，然后重试。"
     },
     "CosmosBroadcastCodeInsufficientCoins": {
-      "title": "Insufficient funds",
-      "description": "Please increase the funds on the account."
+      "title": "资金不足",
+      "description": "请增加账户上的资金。"
     },
     "CosmosBroadcastCodeInvalidCoins": {
-      "title": "Something went wrong (Error #11)",
-      "description": "Please save your logs using the button below and provide them to Ledger Support."
+      "title": "出了点问题 (错误 #11)",
+      "description": "请使用下面的按钮保存您的日志，并将其提供给 Ledger 支持人员。"
     },
     "CosmosBroadcastCodeOutOfGas": {
-      "title": "Something went wrong (Error #12)",
-      "description": "Please save your logs using the button below and provide them to Ledger Support."
+      "title": "出了点问题 (错误 #12)",
+      "description": "请使用下面的按钮保存您的日志，并将其提供给 Ledger 支持人员。"
     },
     "CosmosBroadcastCodeMemoTooLarge": {
-      "title": "The Memo field is too long",
-      "description": "Please reduce the size of the memo text and try again."
+      "title": "Memo 字段过长",
+      "description": "请缩减 Memo 文本大小并再次尝试。"
     },
     "CosmosBroadcastCodeInsufficientFee": {
       "title": "Something went wrong (Error #14)",
