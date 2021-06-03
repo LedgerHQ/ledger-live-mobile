@@ -5,11 +5,11 @@ import { StyleSheet, ScrollView, View, Linking } from "react-native";
 import { Trans } from "react-i18next";
 import SafeAreaView from "react-native-safe-area-view";
 import { useNavigation, useTheme } from "@react-navigation/native";
-
 import { getEnv } from "@ledgerhq/live-common/lib/env";
 import { useCatalog } from "@ledgerhq/live-common/lib/platform/CatalogProvider";
 import type { AccountLike, Account } from "@ledgerhq/live-common/lib/types";
 
+import TrackScreen from "../../analytics/TrackScreen";
 import { urls } from "../../config/urls";
 import { ScreenName } from "../../const";
 import LText from "../../components/LText";
@@ -71,6 +71,7 @@ const PlatformCatalog = ({ route }: { route: { params: RouteParams } }) => {
         },
       ]}
     >
+      <TrackScreen category="Platform" name="Catalog" />
       <LText style={styles.title} semiBold secondary>
         <Trans i18nKey={"platform.catalog.title"} />
       </LText>
