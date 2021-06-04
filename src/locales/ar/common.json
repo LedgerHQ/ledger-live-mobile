@@ -875,12 +875,12 @@
         "title": "Recovery phrase",
         "desc": "Your recovery phrase is a secret list of 24 words that backs up your private keys.",
         "desc_1": "Your Nano generates a unique recovery phrase. Ledger does not keep a copy of it.",
-        "cta": "Recovery phrase",
+        "cta": "عبارة الاسترداد",
         "checkboxDesc": "I understand that if I lose this recovery phrase, I will not be able to access my crypto in case I lose access to my Nano."
       },
       "recoveryPhraseSetup": {
         "infoModal": {
-          "title": "How does a recovery phrase work?",
+          "title": "كيف تعمل عبارة الاسترداد؟",
           "desc": "Your recovery phrase works like a unique master key. Your Ledger device uses it to calculate private keys for every crypto asset you own.",
           "desc_1": "To restore access to your crypto, any wallet can calculate the same private keys from your recovery phrase.",
           "link": "More about the recovery phrase",
