@@ -226,6 +226,6 @@ const styles = StyleSheet.create({
   seeMoreBtn: {
     marginHorizontal: 16,
     marginTop: 16,
-    marginBottom: 24,
+    marginBottom: 32,
   },
 });
