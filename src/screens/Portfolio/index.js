@@ -1,37 +1,20 @@
 // @flow
-import React, { useRef, useState, useCallback } from "react";
+import React, { useRef, useCallback } from "react";
 import { useSelector } from "react-redux";
-import {
-  StyleSheet,
-  SectionList,
-  FlatList,
-  SafeAreaView,
-  View,
-} from "react-native";
+import { StyleSheet, FlatList, SafeAreaView, View } from "react-native";
 import Animated, { interpolate } from "react-native-reanimated";
 import { createNativeWrapper } from "react-native-gesture-handler";
 import { useTranslation } from "react-i18next";
-import type { SectionBase } from "react-native/Libraries/Lists/SectionList";
-import type { Operation } from "@ledgerhq/live-common/lib/types";
 import { useFocusEffect, useTheme } from "@react-navigation/native";
-import {
-  groupAccountsOperationsByDay,
-  isAccountEmpty,
-} from "@ledgerhq/live-common/lib/account";
+import { isAccountEmpty } from "@ledgerhq/live-common/lib/account";
 
 import {
   useRefreshAccountsOrdering,
   useDistribution,
 } from "../../actions/general";
-import {
-  accountsSelector,
-  flattenAccountsSelector,
-} from "../../reducers/accounts";
+import { accountsSelector } from "../../reducers/accounts";
 import { counterValueCurrencySelector } from "../../reducers/settings";
 import { usePortfolio } from "../../actions/portfolio";
-import SectionHeader from "../../components/SectionHeader";
-import NoMoreOperationFooter from "../../components/NoMoreOperationFooter";
-import OperationRow from "../../components/OperationRow";
 import globalSyncRefreshControl from "../../components/globalSyncRefreshControl";
 
 import GraphCardContainer from "./GraphCardContainer";
@@ -39,15 +22,13 @@ import { DistributionList } from "../Distribution";
 import Carousel from "../../components/Carousel";
 import Button from "../../components/Button";
 import StickyHeader from "./StickyHeader";
-import EmptyStatePortfolio from "./EmptyStatePortfolio";
 import extraStatusBarPadding from "../../logic/extraStatusBarPadding";
 import TrackScreen from "../../analytics/TrackScreen";
-import NoOpStatePortfolio from "./NoOpStatePortfolio";
-import NoOperationFooter from "../../components/NoOperationFooter";
 import MigrateAccountsBanner from "../MigrateAccounts/Banner";
 import RequireTerms from "../../components/RequireTerms";
 import { useScrollToTop } from "../../navigation/utils";
 import { ScreenName } from "../../const";
+import { PortfolioHistoryList } from "./PortfolioHistory";
 
 import FabActions from "../../components/FabActions";
 import LText from "../../components/LText";
@@ -67,7 +48,6 @@ type Props = {
 
 export default function PortfolioScreen({ navigation }: Props) {
   const accounts = useSelector(accountsSelector);
-  const allAccounts = useSelector(flattenAccountsSelector);
   const counterValueCurrency = useSelector(counterValueCurrencySelector);
   const portfolio = usePortfolio();
   const { t } = useTranslation();
@@ -79,10 +59,6 @@ export default function PortfolioScreen({ navigation }: Props) {
   const ref = useRef();
   useScrollToTop(ref);
   const { colors } = useTheme();
-
-  function keyExtractor(item: Operation) {
-    return item.id;
-  }
 
   const ListHeaderComponent = useCallback(
     () => (
@@ -96,18 +72,6 @@ export default function PortfolioScreen({ navigation }: Props) {
     ),
     [accounts, counterValueCurrency, portfolio],
   );
-
-  function ListEmptyComponent() {
-    if (accounts.length === 0) {
-      return <EmptyStatePortfolio navigation={navigation} />;
-    }
-
-    if (accounts.every(isAccountEmpty)) {
-      return <NoOpStatePortfolio />;
-    }
-
-    return null;
-  }
 
   function StickyActions() {
     const offset = 410;
@@ -131,54 +95,12 @@ export default function PortfolioScreen({ navigation }: Props) {
     );
   }
 
-  function renderItem({
-    item,
-    index,
-    section,
-  }: {
-    item: Operation,
-    index: number,
-    section: SectionBase<*>,
-  }) {
-    const account = allAccounts.find(a => a.id === item.accountId);
-    const parentAccount =
-      account && account.type !== "Account"
-        ? accounts.find(a => a.id === account.parentId)
-        : null;
-
-    if (!account) return null;
-
-    return (
-      <OperationRow
-        operation={item}
-        parentAccount={parentAccount}
-        account={account}
-        multipleAccounts
-        isLast={section.data.length - 1 === index}
-      />
-    );
-  }
-
-  function renderSectionHeader({ section }: { section: { day: Date } }) {
-    return <SectionHeader section={section} />;
-  }
-
-  const { sections, completed } = groupAccountsOperationsByDay(accounts, {
-    count: 5,
-    withSubAccounts: true,
-  });
-
-  const canSeeMoreSection = !completed;
-  const onTransactionButtonPress = useCallback(() => {
-    navigation.navigate(ScreenName.PortfolioOperationHistory);
-  }, [navigation]);
-
   const showingPlaceholder =
     accounts.length === 0 || accounts.every(isAccountEmpty);
 
   const showDistribution =
     portfolio.balanceHistory[portfolio.balanceHistory.length - 1].value > 0;
-  const [highlight, setHighlight] = useState(-1);
+
   const flatListRef = useRef();
   let distribution = useDistribution();
   const maxDistributionToDisplay = 3;
@@ -189,6 +111,14 @@ export default function PortfolioScreen({ navigation }: Props) {
   const onDistributionButtonPress = useCallback(() => {
     navigation.navigate(ScreenName.Distribution);
   }, [navigation]);
+
+  const onDistributionCardPress = useCallback(
+    (i, item) =>
+      navigation.navigate(ScreenName.Asset, {
+        currency: item.currency,
+      }),
+    [navigation],
+  );
 
   return (
     <SafeAreaView
@@ -228,9 +158,8 @@ export default function PortfolioScreen({ navigation }: Props) {
                   </LText>
                   <DistributionList
                     flatListRef={flatListRef}
-                    highlight={highlight}
                     distribution={distribution}
-                    setHighlight={setHighlight}
+                    setHighlight={onDistributionCardPress}
                   />
                   <View style={styles.seeMoreBtn}>
                     <Button
@@ -243,35 +172,7 @@ export default function PortfolioScreen({ navigation }: Props) {
                 </View>,
               ]
             : []),
-          <SectionList
-            // $FlowFixMe
-            sections={sections}
-            style={styles.list}
-            contentContainerStyle={styles.contentContainer}
-            keyExtractor={keyExtractor}
-            renderItem={renderItem}
-            // $FlowFixMe
-            renderSectionHeader={renderSectionHeader}
-            stickySectionHeadersEnabled={false}
-            ListFooterComponent={
-              accounts.every(isAccountEmpty) ? null : sections.length &&
-                !canSeeMoreSection ? (
-                <NoMoreOperationFooter />
-              ) : sections.length && canSeeMoreSection ? (
-                <View style={styles.seeMoreBtn}>
-                  <Button
-                    event="View Transactions"
-                    type="lightPrimary"
-                    title={t("common.seeAll")}
-                    onPress={onTransactionButtonPress}
-                  />
-                </View>
-              ) : (
-                <NoOperationFooter />
-              )
-            }
-            ListEmptyComponent={ListEmptyComponent}
-          />,
+          <PortfolioHistoryList navigation={navigation} />,
         ]}
         style={styles.inner}
         renderItem={({ item }) => item}
@@ -311,18 +212,9 @@ const styles = StyleSheet.create({
   distributionTitle: {
     fontSize: 16,
     lineHeight: 24,
-
-    marginLeft: 16,
+    paddingHorizontal: 16,
     marginTop: 8,
     marginBottom: 8,
-  },
-  list: {
-    flex: 1,
-  },
-  contentContainer: {
-    flexGrow: 1,
-    paddingTop: 16,
-    paddingBottom: 64,
   },
   stickyActions: {
     height: 110,
@@ -332,6 +224,8 @@ const styles = StyleSheet.create({
   },
   styckyActionsInner: { height: 56 },
   seeMoreBtn: {
-    margin: 16,
+    marginHorizontal: 16,
+    marginTop: 16,
+    marginBottom: 24,
   },
 });

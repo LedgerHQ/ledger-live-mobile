@@ -1,13 +1,14 @@
 // @flow
-import React, { memo, useState } from "react";
-import { useTranslation } from "react-i18next";
-import { SectionList, StyleSheet } from "react-native";
+import React, { memo, useState, useCallback } from "react";
+import { SectionList, StyleSheet, View } from "react-native";
 import { useSelector } from "react-redux";
 import { useFocusEffect } from "@react-navigation/native";
-
+import type { SectionBase } from "react-native/Libraries/Lists/SectionList";
+import type { Operation } from "@ledgerhq/live-common/lib/types";
 import { groupAccountsOperationsByDay } from "@ledgerhq/live-common/lib/account/groupOperations";
 import { isAccountEmpty } from "@ledgerhq/live-common/lib/account/helpers";
 
+import { Trans } from "react-i18next";
 import { useRefreshAccountsOrdering } from "../../actions/general";
 import {
   accountsSelector,
@@ -22,20 +23,24 @@ import NoOpStatePortfolio from "./NoOpStatePortfolio";
 import OperationRow from "../../components/OperationRow";
 import SectionHeader from "../../components/SectionHeader";
 import LoadingFooter from "../../components/LoadingFooter";
+import Button from "../../components/Button";
+import { ScreenName } from "../../const";
 
 type Props = {
   navigation: any,
 };
-function PortfolioHistory({ navigation }: Props) {
+
+export function PortfolioHistoryList({
+  onEndReached,
+  opCount = 10,
+  navigation,
+}: {
+  onEndReached?: () => void,
+  opCount?: number,
+  navigation: any,
+}) {
   const accounts = useSelector(accountsSelector);
   const allAccounts = useSelector(flattenAccountsSelector);
-  const { t } = useTranslation();
-
-  const [opCount, setOpCount] = useState(50);
-
-  function onEndReached() {
-    setOpCount(opCount + 50);
-  }
 
   const refreshAccountsOrdering = useRefreshAccountsOrdering();
   useFocusEffect(refreshAccountsOrdering);
@@ -93,6 +98,10 @@ function PortfolioHistory({ navigation }: Props) {
     return <SectionHeader section={section} />;
   }
 
+  const onTransactionButtonPress = useCallback(() => {
+    navigation.navigate(ScreenName.PortfolioOperationHistory);
+  }, [navigation]);
+
   return (
     <SectionList
       // $FlowFixMe
@@ -107,7 +116,18 @@ function PortfolioHistory({ navigation }: Props) {
       onEndReached={onEndReached}
       ListFooterComponent={
         !completed ? (
-          <LoadingFooter />
+          !onEndReached ? (
+            <View style={styles.seeMoreBtn}>
+              <Button
+                event="View Transactions"
+                type="lightPrimary"
+                title={<Trans i18nKey="common.seeAll" />}
+                onPress={onTransactionButtonPress}
+              />
+            </View>
+          ) : (
+            <LoadingFooter />
+          )
         ) : accounts.every(isAccountEmpty) ? null : sections.length ? (
           <NoMoreOperationFooter />
         ) : (
@@ -119,25 +139,23 @@ function PortfolioHistory({ navigation }: Props) {
   );
 }
 
-const styles = StyleSheet.create({
-  root: {
-    flex: 1,
-  },
-  inner: {
-    position: "relative",
-    flex: 1,
-  },
-  distrib: {
-    marginTop: -56,
-  },
-  distributionTitle: {
-    fontSize: 16,
-    lineHeight: 24,
+function PortfolioHistory({ navigation }: Props) {
+  const [opCount, setOpCount] = useState(50);
 
-    marginLeft: 16,
-    marginTop: 8,
-    marginBottom: 8,
-  },
+  function onEndReached() {
+    setOpCount(opCount + 50);
+  }
+
+  return (
+    <PortfolioHistoryList
+      navigation={navigation}
+      opCount={opCount}
+      onEndReached={onEndReached}
+    />
+  );
+}
+
+const styles = StyleSheet.create({
   list: {
     flex: 1,
   },
@@ -146,13 +164,9 @@ const styles = StyleSheet.create({
     paddingTop: 16,
     paddingBottom: 64,
   },
-  stickyActions: {
-    height: 110,
-    width: "100%",
-    alignContent: "flex-start",
-    justifyContent: "flex-start",
+  seeMoreBtn: {
+    margin: 16,
   },
-  styckyActionsInner: { height: 56 },
 });
 
 export default memo<Props>(PortfolioHistory);

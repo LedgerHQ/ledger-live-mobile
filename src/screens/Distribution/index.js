@@ -26,7 +26,7 @@ import { useDistribution } from "../../actions/general";
 const forceInset = { bottom: "always" };
 
 type ListProps = {
-  highlight: number,
+  highlight?: number,
   setHighlight: Function,
   flatListRef: Function,
   distribution: any,
@@ -43,7 +43,7 @@ export const DistributionList = ({
   const renderItem = useCallback(
     ({ item, index }: { item: DistributionItem, index: number }) => (
       <TouchableOpacity
-        onPress={() => setHighlight(index)}
+        onPress={() => setHighlight(index, item)}
         onLongPress={() =>
           navigation.navigate(ScreenName.Asset, {
             currency: item.currency,
