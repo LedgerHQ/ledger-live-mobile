@@ -537,28 +537,28 @@
       "title": "已选的某些地址并非验证器"
     },
     "PolkadotLowBondedBalance": {
-      "title": "All bonded assets will be unbonded if < 1 DOT"
+      "title": "如果小于 1 DOT，所有绑定的资产都将被解绑"
     },
     "PolkadotNoUnlockedBalance": {
-      "title": "You have no unbonded assets"
+      "title": "您没有已解绑的资产"
     },
     "PolkadotNoNominations": {
-      "title": "You have no nominations"
+      "title": "您没有提名"
     },
     "PolkadotAllFundsWarning": {
-      "title": "Ensure you have enough balance left for future transaction fees"
+      "title": "确保您留有足够的余额，以便缴纳未来的交易费"
     },
     "PolkadotDoMaxSendInstead": {
-      "title": "Balance cannot be below 1 DOT. Send max to empty account"
+      "title": "余额不能少于 1 DOT。发送最大值以清空账户"
     },
     "PolkadotBondMinimumAmount": {
-      "title": "You must bond at least 1 DOT"
+      "title": "您必须绑定至少 1 DOT"
     },
     "PolkadotMaxUnbonding": {
-      "title": "You have exceeded the unbond limit"
+      "title": "您已超过了解绑限额"
     },
     "PolkadotValidatorsRequired": {
-      "title": "You must select at least one validator"
+      "title": "您必须至少选择一个验证器"
     },
     "generic": {
       "title": "{{message}}",
@@ -566,10 +566,10 @@
     }
   },
   "bluetooth": {
-    "required": "Sorry, it looks like Bluetooth is disabled",
-    "locationRequiredTitle": "Location is required for Bluetooth LE",
-    "locationRequiredMessage": "On Android location permission is required to list Bluetooth LE devices.",
-    "checkEnabled": "Please enable Bluetooth in your phone settings."
+    "required": "抱歉，蓝牙似乎被禁用了",
+    "locationRequiredTitle": "Bluetooth LE 需要定位",
+    "locationRequiredMessage": "Android 系统需要开启定位许可，从而显示 Bluetooth LE 设备列表。",
+    "checkEnabled": "请在您手机的设置中启用蓝牙。"
   },
   "location": {
     "required": "需要定位服务",
@@ -662,23 +662,23 @@
         "description": "Stake, secure and\nmanage your DOT with\nLedger Live"
       },
       "backupPack": {
-        "title": "Back-up pack",
+        "title": "备份包",
         "description": "A Nano X and a Nano S\nfor optimal protection"
       },
       "buyCrypto": {
-        "title": "Buy Crypto",
+        "title": "购买加密资产",
         "description": "Buy crypto on\nLedger Live"
       },
       "swap": {
-        "title": "Swap crypto",
+        "title": "交换加密货币",
         "description": "Securely exchange one\ncrypto for another"
       },
       "algorand": {
         "title": "Algorand",
-        "description": "Earn ALGO rewards with each transaction."
+        "description": "通过每笔交易赚取 ALGO 奖励"
       },
       "sell": {
-        "title": "Sell crypto",
+        "title": "卖出加密货币",
         "description": "Sell Bitcoin directly from Ledger Live."
       },
       "vote": {
@@ -686,8 +686,8 @@
         "description": "Vote directly from your Ledger Wallet."
       },
       "lending": {
-        "title": "Lend crypto",
-        "description": "Lend asset on the Compound Protocol"
+        "title": "借出加密货币",
+        "description": "Compound协议上借出资产"
       },
       "blackfriday": {
         "title": "黑色星期五",
@@ -747,31 +747,31 @@
     },
     "stepNewDevice": {
       "0": {
-        "label": "Basics",
-        "title": "Access your crypto",
-        "desc": "Your crypto assets are stored on the blockchain. You need a private key to access and manage them."
+        "label": "基础知识",
+        "title": "访问您的加密资产",
+        "desc": "您的加密资产存放在区块链中。您需要使用私钥来访问并管理它们。"
       },
       "1": {
-        "label": "Basics",
-        "title": "Own your private key",
-        "desc": "Your private key is stored within your Nano and you must be the only one to own it to be in control of your money."
+        "label": "基础知识",
+        "title": "保管好您的私钥",
+        "desc": "您的私钥就存放在您的 Nano 中。它必须为您所独有，这样您才能掌控自己的金钱。"
       },
       "2": {
-        "label": "Basics",
-        "title": "Stay offline",
-        "desc": "Your Nano works as a \"cold storage\" wallet. This means that it never exposes your private key online, even when using the app."
+        "label": "基础知识",
+        "title": "保持离线状态",
+        "desc": "您的 Nano 就像是一个“冷存储”钱包。也就是说，它永远不会把您的私钥暴露在线上，即便是在使用我们的应用程序时。"
       },
       "3": {
-        "label": "Basics",
-        "title": "Validate transactions",
+        "label": "基础知识",
+        "title": "验证交易",
         "desc": "Ledger Live allows you to buy, sell, manage, exchange and earn crypto while remaining protected. You will validate every crypto transaction with your Nano."
       },
       "4": {
-        "label": "Basics",
-        "title": "Let’s set up your Nano!",
-        "desc": "We'll start by setting up your Nano security."
+        "label": "基础知识",
+        "title": "让我们设置您的 Nano 吧！",
+        "desc": "首先要设置 Nano 的安全性。"
       },
-      "cta": "Let’s do this!"
+      "cta": "动手吧！"
     },
     "stepSetupDevice": {
       "start": {
@@ -787,9 +787,9 @@
             "label": "Stay alone, and choose a safe and quiet environment."
           }
         },
-        "cta": "OK, I’m ready!",
+        "cta": "好的，我一切就绪！",
         "warning": {
-          "title": "Please be careful",
+          "title": "请多加小心",
           "desc": "Make sure you follow the instructions on this app at every step of the process.",
           "ctaText": "Got it!"
         }
@@ -3518,7 +3518,7 @@
       "selectCurrency": "Select a currency",
       "selectAccount": "Select an account",
       "connectDevice": "Connect your device",
-      "title": "Buy crypto via our partner",
+      "title": "通过我们的合作伙伴买入加密货币",
       "description": "Purchase crypto assets via Coinify and receive them directly in your Ledger account.",
       "CTAButton": "Buy now",
       "emptyState": {
@@ -3553,7 +3553,7 @@
   },
   "banner": {
     "exchangeBuyCrypto": {
-      "title": "BUY CRYPTO",
+      "title": "买入加密货币",
       "description": "Purchase crypto assets via Coinify and receive them directly in your Ledger account."
     },
     "swap": {
