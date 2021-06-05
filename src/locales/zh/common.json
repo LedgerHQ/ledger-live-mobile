@@ -679,15 +679,15 @@
       },
       "sell": {
         "title": "卖出加密货币",
-        "description": "Sell Bitcoin directly from Ledger Live."
+        "description": "从 Ledger Live 直接卖出比特币。"
       },
       "vote": {
         "title": "Vote with your ledger",
-        "description": "Vote directly from your Ledger Wallet."
+        "description": "直接通过您的 Ledger 钱包投票。"
       },
       "lending": {
         "title": "借出加密货币",
-        "description": "Compound协议上借出资产"
+        "description": "按照复利协议贷出资产"
       },
       "blackfriday": {
         "title": "黑色星期五",
@@ -701,48 +701,48 @@
       "subtitle": "通过您的手机来安全管理您的加密资产。",
       "start": "即刻开始",
       "noDevice": "没有设备？",
-      "buy": "Buy a {{fullDeviceName}}"
+      "buy": "购买一个 {{fullDeviceName}}"
     },
     "stepLanguage": {
-      "title": "Select your language",
-      "cta": "Continue",
+      "title": "选择您的语言",
+      "cta": "继续",
       "warning": {
-        "title": "Get started in English",
-        "cta": "Got it!",
+        "title": "以英语开始",
+        "cta": "知道了！",
         "desc": "We are introducing additional languages in order to help your onboarding with Ledger. Please be aware that the rest of the Ledger experience is currently only available in English."
       }
     },
     "stepSelectDevice": {
-      "title": "What’s your device?",
+      "title": "您使用的是哪种设备？",
       "nanoS": "Nano S",
       "nanoX": "Nano X",
       "blue": "Blue"
     },
     "stepUseCase": {
-      "title": "Hello!",
-      "or": "Or",
+      "title": "您好！",
+      "or": "或者",
       "firstUse": {
-        "title": "First time using this Nano?",
-        "label": "First use",
-        "subTitle": "Set up a new Nano",
-        "desc": "Let’s start and set up your device!"
+        "title": "首次使用此 Nano？",
+        "label": "首次使用",
+        "subTitle": "设置一个新 Nano",
+        "desc": "让我们开始设置您的设备吧！"
       },
       "devicePairing": {
-        "title": "Already have a recovery phrase?",
-        "label": "Device pairing",
-        "subTitle": "Connect your Nano",
-        "desc": "Your device is already set up? Connect it to the app!"
+        "title": "已经有了恢复短语？",
+        "label": "设备配对",
+        "subTitle": "连接您的 Nano",
+        "desc": "设备已经设置好了？将其连接到应用程序！"
       },
       "desktopSync": {
-        "title": "Already have a recovery phrase?",
-        "label": "Desktop sync",
-        "subTitle": "Sync crypto from your desktop app",
-        "desc": "Already got the desktop app? Sync it to manage your crypto from your smartphone!"
+        "title": "已经有了恢复短语？",
+        "label": "桌面同步",
+        "subTitle": "通过您的桌面应用程序同步加密资产",
+        "desc": "已经安装了桌面应用程序？将它同步到您的智能手机上来管理您的加密资产。"
       },
       "restoreDevice": {
-        "label": "Restore device",
-        "subTitle": "Restore your recovery phrase on a new device",
-        "desc": "Use an existing recovery phrase to restore your private keys on a new Nano!"
+        "label": "还原设备",
+        "subTitle": "在新设备上还原您的恢复短语",
+        "desc": "在新的 Nano 设备上使用现有的恢复短语来还原您的私钥！"
       }
     },
     "stepNewDevice": {
@@ -764,7 +764,7 @@
       "3": {
         "label": "基础知识",
         "title": "验证交易",
-        "desc": "Ledger Live allows you to buy, sell, manage, exchange and earn crypto while remaining protected. You will validate every crypto transaction with your Nano."
+        "desc": "Ledger Live 在确保您的安全性的同时，允许您买入、卖出、管理、交易并赚取加密货币。您将使用您的 Nano 对每一笔交易进行验证。"
       },
       "4": {
         "label": "基础知识",
@@ -775,41 +775,41 @@
     },
     "stepSetupDevice": {
       "start": {
-        "title": "The best way to get you started:",
+        "title": "最佳的开始方式：",
         "bullets": {
           "0": {
-            "label": "Plan 30 minutes and take your time."
+            "label": "抽出 30 分钟来做计划。"
           },
           "1": {
-            "label": "Grab a pen to write with."
+            "label": "拿支笔来书写记录。"
           },
           "2": {
-            "label": "Stay alone, and choose a safe and quiet environment."
+            "label": "选择一个安全又安静的地方独处。"
           }
         },
         "cta": "好的，我一切就绪！",
         "warning": {
           "title": "请多加小心",
           "desc": "Make sure you follow the instructions on this app at every step of the process.",
-          "ctaText": "Got it!"
+          "ctaText": "知道了！"
         }
       },
       "setup": {
         "bullets": {
           "0": {
-            "title": "Turn on Nano",
+            "title": "启动 Nano",
             "nanoX": {
-              "label": "Turn on your device by pressing the black button for 1 second."
+              "label": "按住黑色按钮 1 秒钟来启动您的设备。"
             },
             "nanoS": {
-              "label": "Turn on your device by connecting it to the USB port of your phone."
+              "label": "通过连接到手机的 USB 端口来启动您的设备。"
             },
             "blue": {
-              "label": "Turn on your device by connecting it to the USB port of your phone and pressing the power button."
+              "label": "通过连接到您手机的 USB 端口并按电源按钮来启动您的设备。"
             }
           },
           "1": {
-            "title": "Browse ",
+            "title": "浏览 ",
             "label": "Learn how to interact with your device by reading the on-screen instructions."
           },
           "2": {
@@ -817,43 +817,43 @@
             "label": "Press both buttons simultaneously to validate the selection."
           },
           "3": {
-            "title": "Follow instructions",
+            "title": "按指示操作",
             "label": "Come back here to follow instructions on your PIN code."
           }
         },
-        "cta": "Next step"
+        "cta": "下一步"
       },
       "pinCode": {
-        "title": "PIN code",
+        "title": "识别码",
         "desc": "Your PIN code is the first layer of security. It physically secures access to your Nano and your private keys. Your PIN code must be 4 to 8 digits long.",
         "checkboxDesc": "I understand that I must choose my PIN code by myself and keep it private.",
-        "cta": "Set up PIN code"
+        "cta": "设置识别码"
       },
       "pinCodeSetup": {
         "bullets": {
           "0": {
-            "title": "Choose PIN code",
+            "title": "选择识别码",
             "label": "Press the left or right button to change digits. Press both buttons to validate a digit. Select <1></1> to confirm your PIN code. Select <2></2> to erase a digit."
           },
           "1": {
-            "title": "Confirm PIN code",
-            "label": "Enter your PIN code again to confirm it."
+            "title": "确认识别码",
+            "label": "再次输入您的识别码以完成确认。"
           }
         },
         "infoModal": {
-          "title": "Secure your PIN code",
+          "title": "妥善保管您的识别码",
           "bullets": {
             "0": {
-              "label": "Always choose a PIN code by yourself."
+              "label": "总是亲自选择识别码。"
             },
             "1": {
-              "label": "Always enter your PIN code out of sight."
+              "label": "总是避开他人的视线输入识别码。"
             },
             "2": {
-              "label": "You can change your PIN code if needed."
+              "label": "如有需要，您可以更改自己的识别码。"
             },
             "3": {
-              "label": "Three wrong PIN code entries in a row will reset the device."
+              "label": "连续三次输入错误的识别码会导致设备重置。"
             },
             "4": {
               "label": "Never use an easy PIN code like 0000, 123456, or 55555555."
@@ -869,25 +869,25 @@
             }
           }
         },
-        "cta": "Next step"
+        "cta": "下一步"
       },
       "recoveryPhrase": {
-        "title": "Recovery phrase",
-        "desc": "Your recovery phrase is a secret list of 24 words that backs up your private keys.",
-        "desc_1": "Your Nano generates a unique recovery phrase. Ledger does not keep a copy of it.",
-        "cta": "Recovery phrase",
+        "title": "恢复短语",
+        "desc": "您的恢复短语是备份您私人密钥的一个24词组成的秘密列表。",
+        "desc_1": "Nano 为您生成一个独有的恢复短语。Ledger 不会保存其副本。",
+        "cta": "恢复短语",
         "checkboxDesc": "I understand that if I lose this recovery phrase, I will not be able to access my crypto in case I lose access to my Nano."
       },
       "recoveryPhraseSetup": {
         "infoModal": {
-          "title": "How does a recovery phrase work?",
+          "title": "恢复短语的作用是什么？",
           "desc": "Your recovery phrase works like a unique master key. Your Ledger device uses it to calculate private keys for every crypto asset you own.",
           "desc_1": "To restore access to your crypto, any wallet can calculate the same private keys from your recovery phrase.",
-          "link": "More about the recovery phrase",
+          "link": "有关恢复短语的更多详情",
           "title_1": "What if I lose access to my Nano?",
           "bullets": {
             "0": {
-              "label": "Get a new hardware wallet."
+              "label": "获得一个新的硬件钱包。"
             },
             "1": {
               "label": "Select “Restore recovery phrase on a new device” in the Ledger app."
@@ -916,10 +916,10 @@
           }
         },
         "cta": "Confirm recovery phrase",
-        "nextStep": "Next step"
+        "nextStep": "下一步"
       },
       "hideRecoveryPhrase": {
-        "title": "Hide your recovery phrase",
+        "title": "保管好您的恢复短语",
         "desc": "Your recovery phrase is your last chance to access your crypto if you cannot use your Nano. You must keep it in a safe place.",
         "bullets": {
           "0": {
@@ -929,10 +929,10 @@
             "label": "Never share your 24 words with anyone, not even with Ledger."
           }
         },
-        "cta": "OK, I’m done!",
+        "cta": "好的，我完成了！",
         "infoModal": {
-          "label": "Learn how to hide it",
-          "title": "Where should I keep my recovery phrase?",
+          "label": "了解如何保管您的恢复短语",
+          "title": "我应该将恢复短语保存在哪里？",
           "bullets": {
             "0": {
               "label": "<1>NEVER</1> enter it on a computer, phone or any other device. Don't take a picture of it."
@@ -963,7 +963,7 @@
         "title": "Restore from recovery phrase",
         "desc": "Restore your Nano from your recovery phrase to restore, replace or back up your Ledger hardware wallet.",
         "desc_1": "Your Nano will restore your private keys and you will be able to access and manage your crypto.",
-        "cta": "OK, I’m ready!",
+        "cta": "好的，我一切就绪！",
         "warning": {
           "title": "We recommend Ledger recovery phrases only",
           "desc": "Ledger cannot guarantee the security of external recovery phrases. We recommend setting up your Nano as a new device if your recovery phrase was not generated by a Ledger.",
@@ -2016,15 +2016,15 @@
       },
       "terms": {
         "label": "Lend crypto",
-        "title": "Lend assets on the Compound Protocol",
-        "description": "The Compound protocol allows you to lend and borrow assets on the Ethereum network. You can lend assets and earn interest directly from your Ledger acccount.",
+        "title": "按照复利协议贷出资产",
+        "description": "复利协议允许您在以太坊网络上贷出或借入资产。您可以直接通过您的 Ledger 账户贷出资产并赚取利息。",
         "switchLabel": "I have read and agree with the <0><0>Terms of Use</0></0>."
       },
       "info": {
         "1": {
           "label": "Step 1/3",
           "title": "Approving an account allows the protocol to process future loans.",
-          "description": "You need to authorize the Compound smart contract to transfer up to a certain amount of assets to the protocol. Enabling an account gives permission to the protocol to process future loans."
+          "description": "您需要授权复利智能合约将一定数额的资产转移到该协议中。启用一个账户授予该协议处理未来贷款的权限。"
         },
         "2": {
           "label": "Step 2/3",
