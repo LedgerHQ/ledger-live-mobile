@@ -651,27 +651,27 @@
       },
       "academy": {
         "title": "Ledger 学院",
-        "description": "Everything you need to\nknow about crypto"
+        "description": "所有您需要了解的\n关于加密货币的一切"
       },
       "stakeCosmos": {
         "title": "权益质押 (Stake) COSMOS",
         "description": "将 ATOM 委托出去，今天就赚取奖励。"
       },
       "polkastake": {
-        "title": "POLKADOT STAKING",
-        "description": "Stake, secure and\nmanage your DOT with\nLedger Live"
+        "title": "波卡质押",
+        "description": "通过 Ledger Live\n质押、保护以及\n管理您的 DOT"
       },
       "backupPack": {
         "title": "备份包",
-        "description": "A Nano X and a Nano S\nfor optimal protection"
+        "description": "一个 Nano X 和一个 Nano S\n提供的最佳保护"
       },
       "buyCrypto": {
         "title": "购买加密资产",
-        "description": "Buy crypto on\nLedger Live"
+        "description": "通过 Ledger Live 购买加密货币"
       },
       "swap": {
         "title": "交换加密货币",
-        "description": "Securely exchange one\ncrypto for another"
+        "description": "安全地在加密货币\n之间进行交易"
       },
       "algorand": {
         "title": "Algorand",
@@ -682,7 +682,7 @@
         "description": "从 Ledger Live 直接卖出比特币。"
       },
       "vote": {
-        "title": "Vote with your ledger",
+        "title": "通过您的 Ledger 投票",
         "description": "直接通过您的 Ledger 钱包投票。"
       },
       "lending": {
@@ -1251,7 +1251,7 @@
     "ctaImport": "Import Desktop accounts"
   },
   "byteSize": {
-    "bytes": "{{size}} bytes",
+    "bytes": "{{size}} 字节",
     "kbUnit": "{{size}} Kb",
     "mbUnit": "{{size}} Mb"
   },
@@ -1770,23 +1770,23 @@
       "providers": {
         "title": "选择一个购买加密货币的供应商",
         "whatIsSwap": "什么是购买？",
-        "cta": "Continue",
+        "cta": "继续",
         "coinify": {
           "bullets": [
-            "Available in 130+ countries",
-            "EUR, USD, GBP and 32 others",
+            "在 130 多个国家可用",
+            "欧元、美元、英镑以及其它32种",
             "SEPA & Faster Payments",
-            "Local US wire transfers",
-            "Credit and debit cards"
+            "美国本地电汇",
+            "信用卡和借记卡"
           ]
         },
         "wyre": {
           "bullets": [
-            "Only 🇺🇸 bank account",
-            "USD support only",
-            "20+ crypto supported",
-            "ACH transfer",
-            "No credit & debit cards"
+            "仅美国银行账户",
+            "仅支持美元",
+            "已支持20余种加密货币",
+            "ACH 转账",
+            "无信用卡和借记卡"
           ]
         }
       }
@@ -1804,14 +1804,14 @@
         "disclaimer": "Exchange crypto directly from your Ledger device. This service is not available in some countries, including the US."
       },
       "providers": {
-        "title": "Choose a provider to swap your crypto",
+        "title": "选择一个购买加密货币的供应商",
         "whatIsSwap": "What is Swap?",
-        "cta": "Continue",
+        "cta": "继续",
         "changelly": {
           "bullets": [
-            "BTC, ETH, USDT and 50+ others",
+            "比特币、以太币、泰达币以及50余个其他币种",
             "Multi-currency",
-            "Centralized"
+            "中心化的"
           ]
         },
         "paraswap": {
@@ -1945,7 +1945,7 @@
         }
       },
       "platform": {
-        "tab": "Platform"
+        "tab": "平台"
       }
     },
     "lending": {
@@ -2041,7 +2041,7 @@
       },
       "noTokenAccount": {
         "info": {
-          "title": "You don’t have a {{ name }} account.",
+          "title": "您没有一个 {{ name }} 帐户。",
           "description": "In order to deposit funds and lend crypto you need a {{ name }} account. Please Receive funds on your Ethereum address."
         },
         "buttons": {
@@ -2245,12 +2245,12 @@
   },
   "requestAccount": {
     "stepperHeader": {
-      "selectCrypto": "Select crypto",
-      "selectAccount": "Select account",
-      "stepRange": "Step {{currentStep}} of {{totalSteps}}"
+      "selectCrypto": "选择加密货币",
+      "selectAccount": "选择账户",
+      "stepRange": "步骤 {{currentStep}} 之 {{totalSteps}}"
     },
     "selectAccount": {
-      "addAccount": "Add {{currency}} account"
+      "addAccount": "添加 {{currency}} 账户"
     }
   },
   "freeze": {
