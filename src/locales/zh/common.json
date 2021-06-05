@@ -469,22 +469,22 @@
     },
     "UserRefusedFirmwareUpdate": {
       "title": "设备端取消了固件更新",
-      "description": "You canceled the firmware update. Please try again. If the problem persists, please save your logs using the button below and provide them to Ledger Support."
+      "description": "您取消了固件更新。请重试。如果问题依旧存在，请使用下面的按钮保存您的日志，并将其提供给 Ledger 客服。"
     },
     "UserRefusedOnDevice": {
-      "title": "Operation canceled on device",
-      "description": "You rejected the operation on the device."
+      "title": "设备端取消了操作",
+      "description": "您在设备端拒绝了该操作。"
     },
     "WebsocketConnectionError": {
-      "title": "Sorry, connection failed",
-      "description": "Please try again with a better network connection (websocket error)."
+      "title": "抱歉，连接失败",
+      "description": "请改善网络连接并再次尝试 (websocket 错误)"
     },
     "WebsocketConnectionFailed": {
-      "title": "Sorry, connection failed",
-      "description": "Please try again with a better network connection (websocket failed)."
+      "title": "抱歉，连接失败",
+      "description": "请改善网络连接并再次尝试 (websocket 错误)"
     },
     "WrongDeviceForAccount": {
-      "title": "Something went wrong",
+      "title": "出错了",
       "description": "Please check that your hardware wallet is set up with the recovery phrase or passphrase associated to the selected account."
     },
     "UnexpectedBootloader": {
@@ -562,7 +562,7 @@
     },
     "generic": {
       "title": "{{message}}",
-      "description": "Something went wrong. Please try again. If the problem persists, please save your logs using the button below and provide them to Ledger Support."
+      "description": "出错了。请重试。如果问题依旧存在，请使用下面的按钮保存您的日志，并将其提供给 Ledger 技术支持。"
     }
   },
   "bluetooth": {
@@ -1061,7 +1061,7 @@
         }
       },
       "errorInfoModal": {
-        "title": "Something went wrong?",
+        "title": "出错了？",
         "title_1": "I have an Android",
         "title_2": "Update Android version",
         "desc": "If you're experiencing Bluetooth issues with your Nano X, please remove the pairing and forget Nano X on your phone. Then try the pairing again.",
