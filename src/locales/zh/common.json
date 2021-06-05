@@ -1056,14 +1056,14 @@
           },
           "2": {
             "label": "If you have a Bluetooth pairing issue, please refer to the following article",
-            "link": "Fix connection issues."
+            "link": "解决连接问题。"
           }
         }
       },
       "errorInfoModal": {
         "title": "出错了？",
-        "title_1": "I have an Android",
-        "title_2": "Update Android version",
+        "title_1": "我用的是 Android 安卓系统",
+        "title_2": "更新 Android 安卓版本",
         "desc": "If you're experiencing Bluetooth issues with your Nano X, please remove the pairing and forget Nano X on your phone. Then try the pairing again.",
         "desc_1": "It may take a while before the Bluetooth pairing request is displayed. Make sure you verify and confirm the pairing code both on your Nano X and on your phone.",
         "desc_2": "Check in your phone's Bluetooth settings whether the Ledger Nano X is detected. If it not detected, make sure you turn on the Bluetooth on your Ledger Nano X.",
@@ -1247,7 +1247,7 @@
     }
   },
   "addAccountsModal": {
-    "ctaAdd": "Add accounts",
+    "ctaAdd": "添加账户",
     "ctaImport": "Import Desktop accounts"
   },
   "byteSize": {
@@ -1256,10 +1256,10 @@
     "mbUnit": "{{size}} Mb"
   },
   "time": {
-    "day": "1D",
-    "week": "1W",
-    "month": "1M",
-    "year": "1Y",
+    "day": "1 天",
+    "week": "1 周",
+    "month": "1 月",
+    "year": "1 年",
     "all": "All",
     "since": {
       "day": "past day",
@@ -1279,26 +1279,26 @@
   "operations": {
     "types": {
       "IN": "Received",
-      "OUT": "Sent",
-      "CREATE": "Created",
-      "REVEAL": "Revealed",
-      "DELEGATE": "Delegated",
-      "UNDELEGATE": "Undelegated",
-      "REDELEGATE": "Redelegated",
-      "VOTE": "Voted",
-      "FREEZE": "Frozen",
-      "UNFREEZE": "Unfrozen",
-      "REWARD": "Claimed reward",
-      "FEES": "Fees",
-      "OPT_IN": "Opt in",
-      "OPT_OUT": "Opt out",
-      "CLOSE_ACCOUNT": "Close account",
-      "SUPPLY": "Deposited",
-      "REDEEM": "Withdrawn",
-      "APPROVE": "Enabled",
-      "BOND": "Bond",
-      "UNBOND": "Unbond",
-      "REWARD_PAYOUT": "Reward",
+      "OUT": "已发送",
+      "CREATE": "已创建",
+      "REVEAL": "已显示",
+      "DELEGATE": "已委托",
+      "UNDELEGATE": "已解除委托",
+      "REDELEGATE": "重新委托",
+      "VOTE": "已投票",
+      "FREEZE": "已冻结",
+      "UNFREEZE": "已解冻",
+      "REWARD": "已申领的奖励",
+      "FEES": "费用",
+      "OPT_IN": "选择加入",
+      "OPT_OUT": "选择退出",
+      "CLOSE_ACCOUNT": "关闭账户",
+      "SUPPLY": "已存",
+      "REDEEM": "已提取",
+      "APPROVE": "已启用",
+      "BOND": "绑定",
+      "UNBOND": "解绑",
+      "REWARD_PAYOUT": "奖励",
       "SLASH": "Slash",
       "WITHDRAW_UNBONDED": "Unbonded Withdrawal",
       "NOMINATE": "Nomination",
@@ -1307,26 +1307,26 @@
   },
   "operationDetails": {
     "title": "Operation details",
-    "account": "Account",
-    "date": "Date",
-    "confirmed": "Confirmed",
-    "notConfirmed": "Not confirmed",
-    "failed": "Failed",
-    "fees": "Network fees",
-    "noFees": "No fee",
-    "from": "From ({{count}})",
-    "to": "To ({{count}})",
-    "identifier": "Transaction ID",
-    "viewOperation": "View in explorer",
-    "whatIsThis": "What is this operation?",
-    "seeAll": "See all",
-    "seeLess": "See less",
-    "viewInExplorer": "View in explorer",
-    "sending": "Sending...",
-    "receiving": "Receiving...",
-    "tokenOperations": "Token operations",
-    "subAccountOperations": "Subaccount operations",
-    "internalOperations": "Internal operations",
+    "account": "账户",
+    "date": "日期",
+    "confirmed": "已确认",
+    "notConfirmed": "未确认",
+    "failed": "已失败",
+    "fees": "网络费用",
+    "noFees": "无费用",
+    "from": "从 ({{count}})",
+    "to": "到 ({{count}})",
+    "identifier": "交易 ID",
+    "viewOperation": "在浏览器中查看",
+    "whatIsThis": "这是什么操作？",
+    "seeAll": "显示全部",
+    "seeLess": "显示更少",
+    "viewInExplorer": "在浏览器中查看",
+    "sending": "发送中……",
+    "receiving": "接收中……",
+    "tokenOperations": "代币操作",
+    "subAccountOperations": "子账户操作",
+    "internalOperations": "内部操作",
     "tokenModal": {
       "desc": "This operation is related to the following token operations"
     },
@@ -1379,89 +1379,89 @@
     "tokens": {
       "contractAddress": "Contract address",
       "viewInExplorer": "View in explorer",
-      "seeMore": "Display more Tokens",
-      "seeLess": "Display fewer Tokens",
-      "addTokens": "Add token",
-      "howTo": "To add token accounts, you need to <0>receive funds</0> using your <1>{{currency}} address</1>.",
+      "seeMore": "显示更多代币",
+      "seeLess": "显示更少代币",
+      "addTokens": "添加代币",
+      "howTo": "要添加代币帐户，您需要使用您的 <1>{{currency}} 地址</1> <0>接收资金</0>。",
       "algorand": {
-        "contractAddress": "Contract address",
-        "viewInExplorer": "View in explorer",
-        "seeMore": "See more ASA",
-        "seeLess": "See less ASA",
-        "addTokens": "Add ASA",
-        "howTo": "You can add assets to your Algorand account.",
-        "addAsa": "Add ASA (Asset)",
-        "howAsaWorks": "How ASA (asset) works?"
+        "contractAddress": "合约地址",
+        "viewInExplorer": "在浏览器中查看",
+        "seeMore": "显示更多 ASA",
+        "seeLess": "显示更少 ASA",
+        "addTokens": "添加 ASA",
+        "howTo": "您可以将资产添加到您的 Algorand 账户。",
+        "addAsa": "添加 ASA (资产)",
+        "howAsaWorks": "ASA (资产) 如何运作？"
       }
     },
     "subaccounts": {
-      "seeMore": "See more subaccounts",
-      "seeLess": "See fewer subaccounts"
+      "seeMore": "显示更多子账户",
+      "seeLess": "显示更少子账户"
     },
-    "send": "Send",
-    "receive": "Receive",
-    "buy": "Buy",
+    "send": "发送",
+    "receive": "接收",
+    "buy": "买入",
     "walletconnect": "WalletConnect",
-    "sell": "Sell",
-    "swap": "Swap",
-    "manage": "Manage",
-    "lastOperations": "Last operations",
+    "sell": "卖出",
+    "swap": "交换",
+    "manage": "管理",
+    "lastOperations": "最后操作",
     "emptyState": {
-      "title": "No crypto assets yet?",
+      "title": "还没有加密资产？",
       "desc": "Make sure the <1><0>{{managerAppName}}</0></1> app is installed and start receiving.",
       "descWithBuy": "Make sure the <1><0>{{managerAppName}}</0></1> app is installed so you can buy or receive <3><0>{{currencyTicker}}</0></3>",
       "descToken": "Make sure the <1><0>{{managerAppName}}</0></1> app is installed and start receiving <3><0>{{currencyTicker}}</0></3> and <5><0>{{tokenType}}</0> tokens</5>",
       "buttons": {
-        "receiveFunds": "Receive",
-        "buyCrypto": "Buy"
+        "receiveFunds": "接收",
+        "buyCrypto": "买入"
       }
     },
     "settings": {
-      "header": "Account settings",
-      "title": "Edit account",
-      "advancedLogs": "Advanced logs",
+      "header": "账户设置",
+      "title": "编辑账户",
+      "advancedLogs": "高级日志",
       "accountName": {
-        "title": "Account name",
-        "desc": "Description of the account",
-        "placeholder": "Account name"
+        "title": "账户名",
+        "desc": "账户描述",
+        "placeholder": "账户名"
       },
       "accountUnits": {
-        "title": "Edit units"
+        "title": "编辑单位"
       },
       "unit": {
-        "title": "Unit",
-        "desc": "Choose the unit to be displayed."
+        "title": "单位",
+        "desc": "选择想要显示的单位。"
       },
       "currency": {
-        "title": "Currency"
+        "title": "币种"
       },
       "endpointConfig": {
-        "title": "Node",
-        "desc": "The API node to use"
+        "title": "节点",
+        "desc": "要使用的 API 节点"
       },
       "delete": {
         "title": "从资产组合中删除账户",
-        "desc": "Stored data will be removed.",
-        "confirmationTitle": "Are you sure?",
+        "desc": "储存的数据将被删除。",
+        "confirmationTitle": "您确定吗？",
         "confirmationDesc": "This has no impact on your crypto assets. Existing accounts can always be added afterwards."
       },
       "archive": {
-        "title": "Archive account",
-        "desc": "This account will be archived."
+        "title": "存档账户",
+        "desc": "该账户将会被存档。"
       },
       "advanced": {
-        "title": "Advanced logs",
+        "title": "高级日志",
         "desc": ""
       }
     },
     "import": {
       "scan": {
-        "title": "Scan LiveQR code",
+        "title": "扫描 LiveQR 码",
         "descTop": {
-          "line1": "In Ledger Live Desktop, go to",
-          "line2": "Settings > Accounts > Export accounts > Export"
+          "line1": "通过 Ledger Live 桌面应用程序，前往",
+          "line2": "设置 > 账户 > 导出账户 > 导出"
         },
-        "descBottom": "Please put the LiveQR code within the square."
+        "descBottom": "请将 LiveQR 码放在方框内。"
       },
       "result": {
         "title": "Import accounts",
@@ -1527,67 +1527,67 @@
         "showTokens": "Show {{length}} ASA",
         "showTokens_plural": "Show {{length}} ASA",
         "hideTokens": "Hide ASA",
-        "hideTokens_plural": "Hide ASA"
+        "hideTokens_plural": "隐藏 ASA"
       }
     }
   },
   "distribution": {
-    "header": "Asset allocation",
-    "list": "Asset allocation ({{count}})",
-    "assets": "asset",
-    "assets_plural": "assets",
-    "total": "Total balance:",
+    "header": "资产配置",
+    "list": "资产配置 ({{count}})",
+    "assets": "资产",
+    "assets_plural": "多种资产",
+    "total": "总余额：",
     "listAccount": "Account allocation ({{count}})"
   },
   "help": {
     "gettingStarted": {
-      "title": "Getting started",
-      "desc": "Start here"
+      "title": "新手指南",
+      "desc": "从这里开始"
     },
     "helpCenter": {
       "title": "Ledger 客服",
-      "desc": "Get help"
+      "desc": "获得帮助"
     },
     "ledgerAcademy": {
-      "title": "Ledger Academy",
-      "desc": "Learn about crypto"
+      "title": "Ledger 学院",
+      "desc": "了解加密货币"
     },
     "facebook": {
-      "title": "Facebook",
-      "desc": "Like our page"
+      "title": "Facebook（脸书）",
+      "desc": "点赞我们的页面"
     },
     "twitter": {
-      "title": "Twitter",
-      "desc": "Follow us"
+      "title": "Twitter（推特）",
+      "desc": "关注我们"
     },
     "github": {
       "title": "Github",
       "desc": "Review our code"
     },
     "status": {
-      "title": "Ledger Status",
-      "desc": "Check our system status"
+      "title": "Ledger 状态",
+      "desc": "查看我们的系统状态"
     }
   },
   "settings": {
-    "header": "Settings",
-    "resources": "Ledger resources",
+    "header": "设置",
+    "resources": "Ledger 资源",
     "display": {
-      "title": "General",
-      "desc": "Configure general Ledger Live settings.",
-      "carousel": "Carousel visibility",
+      "title": "常规",
+      "desc": "配置 Ledger Live 常规设置。",
+      "carousel": "轮播可见性",
       "carouselDesc": "启用资产组合的轮播可见",
-      "language": "Display language",
-      "languageDesc": "Set the language displayed in Ledger Live.",
-      "password": "Password lock",
-      "passwordDesc": "Set a password to protect Ledger Live data on your phone.",
-      "counterValue": "Countervalue",
-      "theme": "Theme",
-      "themeDesc": "Set the app UI theme",
+      "language": "显示语言",
+      "languageDesc": "设置 Ledger Live 显示的语言。",
+      "password": "密码锁",
+      "passwordDesc": "设置一个密码来保护您手机上的 Ledger Live 数据。",
+      "counterValue": "对价",
+      "theme": "主题",
+      "themeDesc": "设置用户界面主题",
       "themes": {
-        "dark": "Dark",
-        "dusk": "Dusk",
-        "light": "Light"
+        "dark": "暗色",
+        "dusk": "昏黄",
+        "light": "亮色"
       },
       "counterValueDesc": "Choose the currency for balances and operations.",
       "exchange": "Rate provider",
@@ -1768,8 +1768,8 @@
     "exchange": {
       "title": "Buy / Sell",
       "providers": {
-        "title": "Choose a provider to buy crypto",
-        "whatIsSwap": "What is Buy?",
+        "title": "选择一个购买加密货币的供应商",
+        "whatIsSwap": "什么是购买？",
         "cta": "Continue",
         "coinify": {
           "bullets": [
@@ -3373,7 +3373,7 @@
       "modes": {
         "withdrawUnbonded": {
           "title": "Withdraw unbonded",
-          "description": "Withdraw unbonded assets to your available balance."
+          "description": "将已解绑的资产提取到您的可用余额中。"
         },
         "chill": {
           "title": "Clear nominations",
