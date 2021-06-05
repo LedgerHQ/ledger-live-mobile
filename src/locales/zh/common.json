@@ -485,56 +485,56 @@
     },
     "WrongDeviceForAccount": {
       "title": "出错了",
-      "description": "Please check that your hardware wallet is set up with the recovery phrase or passphrase associated to the selected account."
+      "description": "请检查您的硬件钱包是否设置了与所选账户关联的恢复短语或密码短语。"
     },
     "UnexpectedBootloader": {
-      "title": "Sorry, your device must not be in Bootloader mode",
-      "description": "Please restart your device without touching the buttons when the logo appears. Please try again. If the problem persists, please save your logs using the button below and provide them to Ledger Support."
+      "title": "对不起，您的设备不能处于引导加载 (Bootloader) 模式",
+      "description": "请重启设备，图标显示时不要碰触任何按钮。请重试。如果问题依旧存在，请使用下面的按钮保存您的日志，并将其提供给 Ledger 客服。"
     },
     "UnavailableTezosOriginatedAccountReceive": {
-      "title": "Cannot receive in subaccounts. Please select the parent account.",
-      "description": "If you want to receive funds, please use the parent account"
+      "title": "无法用子账户接收。请选择主账户。",
+      "description": "如果想要接收资金，请使用主账户"
     },
     "UnavailableTezosOriginatedAccountSend": {
-      "title": "Cannot send from subaccounts yet",
-      "description": "This feature will be added at a later stage due to changes recently introduced by the Babylon update."
+      "title": "尚无法从子帐户发送",
+      "description": "由于近期 Babylon 更新而引入的变化，此功能将在稍后阶段被添加。"
     },
     "RecommendUndelegation": {
-      "title": "Please undelegate the account before emptying it"
+      "title": "请在清空帐户之前解除委托"
     },
     "RecommendSubAccountsToEmpty": {
-      "title": "Please empty all subaccounts first"
+      "title": "请先清空所有子账户"
     },
     "NotSupportedLegacyAddress": {
-      "title": "The legacy address format is no longer supported"
+      "title": "不再支持这种传统地址格式"
     },
     "StellarWrongMemoFormat": {
-      "title": "Memo format is wrong"
+      "title": "Memo 格式错误"
     },
     "SourceHasMultiSign": {
-      "title": "Please disable multisign to send {{currencyName}}"
+      "title": "请禁用多重签名以发送 {{currencyName}}"
     },
     "StellarMemoRecommended": {
-      "title": "A memo may be needed when sending to this recipient"
+      "title": "发送到该接收方时需要添加 memo"
     },
     "StratisDown2021Warning": {
-      "description": "The Stratis blockchain evolved and may no longer work correctly. Support for the original Stratis blockchain will be maintained until 16 October 2021."
+      "description": "Stratis 区块链已经进化，可能无法正确工作。对原有 Stratis 区块链的技术支持，将会持续到 2021 年 10 月 16 日。"
     },
     "SwapExchangeRateAmountTooLow": {
-      "title": "Amount must be higher than {{minAmountFromFormatted}}"
+      "title": "金额必须高于 {{minAmountFromFormatted}}"
     },
     "SwapExchangeRateAmountTooHigh": {
-      "title": "Amount must be lower than {{maxAmountFromFormatted}}"
+      "title": "金额必须低于 {{maxAmountFromFormatted}}"
     },
     "SwapGenericAPIError": {
-      "title": "Exchange rate expired",
-      "description": "You must confirm the swap before the timer runs out. The exchange rate remains valid for a fixed duration."
+      "title": "汇率过期",
+      "description": "您必须在计时结束之前确认交换。汇率的有效期有限。"
     },
     "PolkadotElectionClosed": {
-      "title": "Validators election must be closed"
+      "title": "必须关闭验证器选举"
     },
     "PolkadotNotValidator": {
-      "title": "Some selected addresses are not validators"
+      "title": "已选的某些地址并非验证器"
     },
     "PolkadotLowBondedBalance": {
       "title": "All bonded assets will be unbonded if < 1 DOT"
@@ -690,17 +690,17 @@
         "description": "Lend asset on the Compound Protocol"
       },
       "blackfriday": {
-        "title": "BLACK FRIDAY",
-        "description": "Enjoy 40% off with promo code BLACKFRIDAY20"
+        "title": "黑色星期五",
+        "description": "使用促销码 BLACKFRIDAY20 享受 40% 折扣"
       }
     }
   },
   "onboarding": {
     "stepWelcome": {
-      "title": "Welcome to Ledger",
-      "subtitle": "Safely manage your cryptos from your smartphone.",
-      "start": "Get started",
-      "noDevice": "No device?",
+      "title": "欢迎使用 Ledger",
+      "subtitle": "通过您的手机来安全管理您的加密资产。",
+      "start": "即刻开始",
+      "noDevice": "没有设备？",
       "buy": "Buy a {{fullDeviceName}}"
     },
     "stepLanguage": {
