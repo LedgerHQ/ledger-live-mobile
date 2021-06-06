@@ -1260,20 +1260,20 @@
     "week": "1 周",
     "month": "1 月",
     "year": "1 年",
-    "all": "All",
+    "all": "全部",
     "since": {
-      "day": "past day",
-      "week": "past week",
-      "month": "past month",
-      "year": "past year"
+      "day": "昨天",
+      "week": "过去一周",
+      "month": "过去一个月",
+      "year": "过去一年"
     }
   },
   "orderOption": {
     "choices": {
-      "name|asc": "Name A-Z",
-      "name|desc": "Name Z-A",
-      "balance|asc": "Lowest Balance",
-      "balance|desc": "Highest Balance"
+      "name|asc": "名称 A-Z",
+      "name|desc": "名称 Z-A",
+      "balance|asc": "最低余额",
+      "balance|desc": "最高余额"
     }
   },
   "operations": {
@@ -1333,52 +1333,52 @@
     "details": "{{ currency }} details",
     "extra": {
       "resource": "Resource",
-      "frozenAmount": "Frozen amount",
-      "unfreezeAmount": "Unfreeze amount",
-      "address": "Address",
-      "votes": "Votes ({{number}})",
-      "votesAddress": "<0>{{votes}}</0> to <2>{{name}}</2>",
-      "validators": "Validators",
-      "delegated": "Delegated ({{amount}})",
-      "delegatedTo": "Delegated to",
-      "delegatedAmount": "Delegated amount",
-      "redelegated": "Redelegated ({{amount}})",
-      "redelegatedFrom": "Redelegated from",
-      "redelegatedTo": "Redelegated to",
-      "redelegatedAmount": "Redelegated amount",
-      "undelegated": "Undelegated ({{amount}})",
-      "undelegatedFrom": "Undelegated from",
-      "undelegatedAmount": "Undelegated amount",
-      "rewardFrom": "Reward from",
-      "rewardAmount": "Amount collected",
-      "memo": "Memo",
-      "assetId": "Asset ID",
-      "rewards": "Earned rewards",
-      "bondedAmount": "Bonded Amount",
-      "unbondedAmount": "Unbonded Amount",
-      "withdrawUnbondedAmount": "Withdraw Unbonded Amount",
-      "palletMethod": "Method",
-      "transferAmount": "Transfer Amount",
-      "validatorsCount": "Validators ({{number}})"
+      "frozenAmount": "已冻结金额",
+      "unfreezeAmount": "解冻金额",
+      "address": "地址",
+      "votes": "票数 ({{number}})",
+      "votesAddress": "<0>{{votes}}</0> 投给 <2>{{name}}</2>",
+      "validators": "验证器",
+      "delegated": "已委托 ({{amount}})",
+      "delegatedTo": "已委托给",
+      "delegatedAmount": "已委托金额",
+      "redelegated": "已重新委托 ({{amount}})",
+      "redelegatedFrom": "已重新委托自",
+      "redelegatedTo": "已重新委托至",
+      "redelegatedAmount": "已重新委托金额",
+      "undelegated": "已解除委托 ({{amount}})",
+      "undelegatedFrom": "已解除对后者的委托",
+      "undelegatedAmount": "已解除委托的金额",
+      "rewardFrom": "奖励来源",
+      "rewardAmount": "已收集的金额",
+      "memo": "Memo 标签",
+      "assetId": "资产 ID",
+      "rewards": "已赚取的奖励",
+      "bondedAmount": "已绑定数额",
+      "unbondedAmount": "已解绑数额",
+      "withdrawUnbondedAmount": "提取已解绑的数额",
+      "palletMethod": "方法",
+      "transferAmount": "转账数额",
+      "validatorsCount": "验证器 ({{number}})"
     },
-    "multipleAddresses": "Why multiple addresses?"
+    "multipleAddresses": "为什么有多个地址？"
   },
   "operationList": {
-    "noOperations": "No Operations",
-    "noMoreOperations": "No other Operations"
+    "noOperations": "不作操作",
+    "noMoreOperations": "无其他操作"
   },
   "selectableAccountsList": {
-    "deselectAll": "Deselect all",
-    "selectAll": "Select all",
-    "tokenCount": "+1 token",
-    "tokenCount_plural": "+{{count}} tokens",
-    "subaccountCount": "+1 subaccount",
-    "subaccountCount_plural": "+{{count}} subaccounts"
+    "deselectAll": "取消全选",
+    "selectAll": "全选",
+    "tokenCount": "+1 枚代币",
+    "tokenCount_plural": "+{{count}} 枚代币",
+    "subaccountCount": "+1 个子账户",
+    "subaccountCount_plural": "+{{count}} 个子账户"
   },
   "account": {
     "tokens": {
-      "contractAddress": "Contract address",
-      "viewInExplorer": "View in explorer",
+      "contractAddress": "合约地址",
+      "viewInExplorer": "在浏览器中查看",
       "seeMore": "显示更多代币",
       "seeLess": "显示更少代币",
       "addTokens": "添加代币",
@@ -1464,42 +1464,42 @@
         "descBottom": "请将 LiveQR 码放在方框内。"
       },
       "result": {
-        "title": "Import accounts",
-        "newAccounts": "New accounts",
-        "updatedAccounts": "Updated accounts",
-        "empty": "Add a new account",
-        "descEmpty": "<0><0>No accounts</0></0> were found. Please try again or go back to Setup",
-        "alreadyImported": "Already imported",
-        "noAccounts": "Nothing to import",
-        "unsupported": "Unsupported",
-        "settings": "App settings",
-        "includeGeneralSettings": "Import Desktop settings"
+        "title": "导入账户",
+        "newAccounts": "新账户",
+        "updatedAccounts": "已更新的账户",
+        "empty": "添加新账户",
+        "descEmpty": "<0><0>没有找到账户</0></0>。请重试或返回设置选项",
+        "alreadyImported": "已经导入",
+        "noAccounts": "没有可导入的账户",
+        "unsupported": "不支持",
+        "settings": "应用程序设置",
+        "includeGeneralSettings": "导入桌面应用程序设置"
       },
       "fallback": {
-        "header": "Import account",
-        "title": "Enable camera",
-        "desc": "Please enable Camera in Settings to scan QR codes.",
-        "buttonTitle": "Go to Settings"
+        "header": "导入账户",
+        "title": "启用摄像头",
+        "desc": "请在设置中启用摄像头以便扫描二维码。",
+        "buttonTitle": "前往设置选项"
       }
     },
-    "availableBalance": "Available balance",
-    "totalSupplied": "Amount deposited",
-    "tronFrozen": "Frozen",
-    "bandwidth": "Bandwidth",
-    "energy": "Energy",
-    "delegatedAssets": "Delegated assets",
-    "undelegating": "Undelegating",
+    "availableBalance": "可用余额",
+    "totalSupplied": "已存金额",
+    "tronFrozen": "已冻结",
+    "bandwidth": "带宽",
+    "energy": "能量",
+    "delegatedAssets": "已委托的资产",
+    "undelegating": "解除委托中",
     "delegation": {
-      "sectionLabel": "Delegation(s)",
-      "addDelegation": "Add delegation",
+      "sectionLabel": "委托",
+      "addDelegation": "添加委托",
       "info": {
-        "title": "Earn rewards",
-        "cta": "Earn rewards"
+        "title": "赚取奖励",
+        "cta": "赚取奖励"
       }
     },
     "claimReward": {
-      "sectionLabel": "Rewards",
-      "cta": "Claim"
+      "sectionLabel": "奖励",
+      "cta": "申领"
     },
     "undelegation": {
       "sectionLabel": "Undelegation(s)"
@@ -2202,11 +2202,11 @@
       "validateFees": "Validate Fees",
       "customizeFees": "Customize Fees",
       "memo": {
-        "title": "Memo",
-        "type": "Memo type",
-        "value": "Memo value"
+        "title": "Memo 标签",
+        "type": "Memo 类型",
+        "value": "Memo 价值"
       },
-      "validateMemo": "Validate memo"
+      "validateMemo": "验证 Memo"
     },
     "validation": {
       "message": "On your device, confirm the transaction to sign it securely.",
@@ -3143,15 +3143,15 @@
   },
   "stellar": {
     "memo": {
-      "title": "Memo",
-      "warning": "When using a Memo, carefully verify the type with the recipient."
+      "title": "Memo 标签",
+      "warning": "当使用 Memo 标签时，请仔细核对接收方的类型。"
     },
     "memoType": {
-      "MEMO_TEXT": "Memo Text",
-      "NO_MEMO": "No Memo",
-      "MEMO_ID": "Memo ID",
-      "MEMO_HASH": "Memo Hash",
-      "MEMO_RETURN": "Memo Return"
+      "MEMO_TEXT": "Memo 文本",
+      "NO_MEMO": "无 Memo 标签",
+      "MEMO_ID": "Memo 标签 ID",
+      "MEMO_HASH": "Memo Hash 标签哈希",
+      "MEMO_RETURN": "Memo 返回"
     }
   },
   "polkadot": {
@@ -3408,28 +3408,28 @@
     "to": "to",
     "from": "from",
     "forAnEstYield": "for an est. yield of",
-    "yieldPerYear": "{{yield}} / Year",
-    "yieldInfos": "Yield rates are provided by",
+    "yieldPerYear": "{{yield}} / 年",
+    "yieldInfos": "收益率提供方",
     "termsAndPrivacy": "I have read and I accept the <1>Ledger Live Terms of Use</1> and <3>Privacy Policy</3>.",
-    "delegation": "Delegation",
-    "viewDetails": "View details",
-    "validator": "Validator",
-    "validatorAddress": "Validator address",
-    "delegatedAccount": "Delegated account",
-    "duration": "Duration",
-    "transactionID": "Transaction ID",
-    "receive": "Receive more",
-    "changeValidator": "Change validator",
-    "endDelegation": "End delegation",
-    "durationForDays0": "Just now",
-    "durationForDays": "For a day",
-    "durationForDays_plural": "For {{count}} days",
-    "durationDays0": "Just now",
-    "durationDays": "1 day",
-    "durationDays_plural": "{{count}} days",
-    "selectValidatorTitle": "Select validator",
+    "delegation": "委托",
+    "viewDetails": "查看详情",
+    "validator": "验证器",
+    "validatorAddress": "验证器地址",
+    "delegatedAccount": "已委托账户",
+    "duration": "持续时间",
+    "transactionID": "交易 ID",
+    "receive": "接收更多",
+    "changeValidator": "更换验证器",
+    "endDelegation": "结束委托",
+    "durationForDays0": "就是现在",
+    "durationForDays": "一天",
+    "durationForDays_plural": "{{count}} 天",
+    "durationDays0": "就是现在",
+    "durationDays": "1 天",
+    "durationDays_plural": "{{count}} 天",
+    "selectValidatorTitle": "选择验证器",
     "started": {
-      "title": "Earn rewards",
+      "title": "赚取奖励",
       "description": "Delegate your Tezos account to a third-party validator to earn rewards securely, keeping control of your assets.",
       "steps": {
         "0": "Delegated accounts remain yours.",
@@ -3446,13 +3446,13 @@
       "delegate": "Delegation transaction broadcasted successfully. You should earn your first rewards in around 40 days, depending on the validator.",
       "undelegate": "Your account delegation will end when the operation is confirmed. You can delegate your account again at any time."
     },
-    "summaryTitle": "Summary",
-    "goToAccount": "Go to Accounts",
-    "howDelegationWorks": "How delegation works",
+    "summaryTitle": "概要",
+    "goToAccount": "前往账户",
+    "howDelegationWorks": "委托机制是如何运作的",
     "actions": {
-      "redelegate": "Redelegate",
-      "collectRewards": "Collect rewards",
-      "undelegate": "Undelegate"
+      "redelegate": "重新委托",
+      "collectRewards": "收集奖励",
+      "undelegate": "解除委托"
     }
   },
   "ValidateOnDevice": {
@@ -3503,43 +3503,43 @@
     "validatorAddress": "Validator address",
     "rewardAmount": "Reward amount",
     "undelegatedAmount": "Undelegated amount",
-    "memo": "Memo"
+    "memo": "Memo 标签"
   },
   "Terms": {
     "title": "Terms of Use",
     "read": "Read the Terms of Use",
     "switchLabelPrivacy": "I have read and agree with the <1>Privacy Policy</1>",
     "switchLabel": "I have read and agree with the <1>Terms of Service</1>",
-    "cta": "Enter Ledger App"
+    "cta": "进入 Ledger 应用程序"
   },
   "exchange": {
     "buy": {
-      "tabTitle": "Buy",
-      "selectCurrency": "Select a currency",
-      "selectAccount": "Select an account",
-      "connectDevice": "Connect your device",
+      "tabTitle": "买入",
+      "selectCurrency": "选择一种货币",
+      "selectAccount": "选择一个账户",
+      "connectDevice": "连接您的设备",
       "title": "通过我们的合作伙伴买入加密货币",
-      "description": "Purchase crypto assets via Coinify and receive them directly in your Ledger account.",
-      "CTAButton": "Buy now",
+      "description": "通过 Coinify 购买加密资产并直接使用您的 Ledger 账户接收。",
+      "CTAButton": "立即买入",
       "emptyState": {
-        "title": "No {{currency}} account",
-        "description": "Please add an account before buying {{currency}}.",
-        "CTAButton": "Add account"
+        "title": "没有 {{currency}} 账户",
+        "description": "买入 {{currency}} 之前请先添加一个账户。",
+        "CTAButton": "添加账户"
       },
       "skipDeviceVerification": {
-        "confirm": "Confirm",
-        "cancel": "Cancel",
-        "address": "Address for {{currency}} account",
-        "warning": "Your address was not confirmed on your Ledger device. Please verify it for security"
+        "confirm": "确认",
+        "cancel": "取消",
+        "address": "{{currency}} 账户地址",
+        "warning": "未在 Ledger 设备上确认您的地址。请核对地址以确保安全"
       }
     },
     "sell": {
-      "tabTitle": "Sell",
-      "selectCurrency": "Select a currency",
-      "selectAccount": "Select an account",
-      "connectDevice": "Connect your device",
-      "title": "Sell crypto via our partner",
-      "description": "Sell crypto assets directly from your Ledger account via Coinify and receive fiat in your bank account.",
+      "tabTitle": "卖出",
+      "selectCurrency": "选择一种货币",
+      "selectAccount": "选择一个账户",
+      "connectDevice": "连接您的设备",
+      "title": "通过我们的合作伙伴卖出加密资产",
+      "description": "直接从您的 Ledger 帐户通过 Coinify 卖出加密资产，并在您的银行帐户中接收 FIAT 法币。",
       "CTAButton": "Sell now",
       "emptyState": {
         "title": "No {{currency}} account",
