@@ -1628,17 +1628,17 @@
       "header": "Currencies",
       "rateProvider": "Rate Provider ({{currencyTicker}}→BTC)",
       "rateProviderDesc": "Choose the provider of the rate between {{currencyTicker}} and Bitcoin.",
-      "confirmationNb": "Number of confirmations",
+      "confirmationNb": "Количество подтверждений",
       "confirmationNbDesc": "Set the number of network confirmations for transactions to be approved.",
-      "currencySettingsTitle": "{{currencyName}} Settings",
+      "currencySettingsTitle": "Настройки {{currencyName}}",
       "placeholder": "No settings for this asset"
     },
     "accounts": {
-      "header": "Accounts",
-      "title": "Accounts",
+      "header": "Счета",
+      "title": "Счета",
       "desc": "Manage assets display in the app.",
-      "hideTokenCTA": "Hide token",
-      "showContractCTA": "Show contract",
+      "hideTokenCTA": "Скрыть токен",
+      "showContractCTA": "Показать контракт",
       "blacklistedTokens": "Hidden token list",
       "blacklistedTokensDesc": "You can hide tokens by going to the accounts list then long-pressing on the token and selecting 'Hide token'.",
       "blacklistedTokensModal": {
