@@ -1067,7 +1067,7 @@
         "desc": "If you're experiencing Bluetooth issues with your Nano X, please remove the pairing and forget Nano X on your phone. Then try the pairing again.",
         "desc_1": "It may take a while before the Bluetooth pairing request is displayed. Make sure you verify and confirm the pairing code both on your Nano X and on your phone.",
         "desc_2": "Check in your phone's Bluetooth settings whether the Ledger Nano X is detected. If it not detected, make sure you turn on the Bluetooth on your Ledger Nano X.",
-        "desc_3": "Location services",
+        "desc_3": "定位服务",
         "desc_4": "If the Ledger Nano X is not detected in your mobile app when trying to pair it, please try the following solution:",
         "desc_5": "Ledger mobile app asks you to allow location services when it's not enabled yet, but on a few phone models, this is not always properly detected. Please note that Ledger mobile app never uses your location information, this permission is simply required for Bluetooth on Android.",
         "desc_6": "Some users have reported having fixed their connection issues by updating the Android version running on their phone to a newer one. Please check with your phone manufacturer whether an update is available.",
