@@ -1391,19 +1391,19 @@
         "addTokens": "Добавить ASA",
         "howTo": "Вы можете добавить активы на свой счёт в Algorand.",
         "addAsa": "Добавить ASA (активы)",
-        "howAsaWorks": "How ASA (asset) works?"
+        "howAsaWorks": "Как работает ASA (актив)?"
       }
     },
     "subaccounts": {
-      "seeMore": "See more subaccounts",
-      "seeLess": "See fewer subaccounts"
+      "seeMore": "Показать больше субсчетов",
+      "seeLess": "Показать меньше субсчетов"
     },
-    "send": "Send",
-    "receive": "Receive",
-    "buy": "Buy",
+    "send": "Отправить",
+    "receive": "Получить",
+    "buy": "Купить",
     "walletconnect": "WalletConnect",
-    "sell": "Sell",
-    "swap": "Swap",
+    "sell": "Продать",
+    "swap": "Обменять",
     "manage": "Manage",
     "lastOperations": "Last operations",
     "emptyState": {
