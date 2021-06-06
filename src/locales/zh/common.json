@@ -3509,7 +3509,7 @@
     "title": "Terms of Use",
     "read": "Read the Terms of Use",
     "switchLabelPrivacy": "I have read and agree with the <1>Privacy Policy</1>",
-    "switchLabel": "I have read and agree with the <1>Terms of Service</1>",
+    "switchLabel": "我已阅读并同意 <1>服务条款</1>",
     "cta": "进入 Ledger 应用程序"
   },
   "exchange": {
