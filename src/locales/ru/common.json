@@ -2222,18 +2222,18 @@
     "fees": {
       "title": "Комиссия сети",
       "validate": "Подтвердить",
-      "required": "Fees are required",
-      "chooseGas": "Choose a gas price",
-      "higherFaster": "Higher gas price means a faster confirmation.",
+      "required": "Необходимо указать комиссию",
+      "chooseGas": "Выберите цену газа",
+      "higherFaster": "Повышение цены газа ускорит подтверждение.",
       "edit": {
-        "title": "Choose unit"
+        "title": "Выберите единицу измерения"
       },
       "networkInfo": "Choose the amount of network fees to include in the transaction. The amount of fees affects the processing speed of the transaction"
     },
     "verification": {
       "streaming": {
-        "accurate": "Loading... ({{percentage}})",
-        "inaccurate": "Loading..."
+        "accurate": "Загружаем... ({{percentage}})",
+        "inaccurate": "Загружаем..."
       }
     },
     "info": {
@@ -2332,91 +2332,91 @@
     "stepperHeader": {
       "selectValidator": "Cast votes",
       "castVote": "My votes",
-      "selectDevice": "Select device",
-      "connectDevice": "Connect device",
-      "stepRange": "Step {{currentStep}} of {{totalSteps}}"
+      "selectDevice": "Выберите устройство",
+      "connectDevice": "Подключение устройства",
+      "stepRange": "Шаг {{currentStep}}/{{totalSteps}}"
     },
     "selectValidator": {},
     "castVotes": {
-      "ranking": "Ranking: <0>{{rank}}</0>",
-      "nbOfVotes": "Number of votes {{amount}}",
-      "percentage": "Percentage",
-      "estYield": "Est. yield",
-      "addMoreVotes": "Add more votes",
-      "votesRemaining": "Votes remaining: <0>{{total}}</0>",
-      "maxVotesAvailable": "Max votes available: <0>{{total}}</0>",
-      "voteFor": "Vote for",
-      "validateVotes": "Validate votes",
-      "votesRequired": "Votes required ",
-      "allVotesUsed": "All votes used"
+      "ranking": "Рейтинг: <0>{{rank}}</0>",
+      "nbOfVotes": "Количество голосов: {{amount}}",
+      "percentage": "Процент",
+      "estYield": "Ориент. доход",
+      "addMoreVotes": "Добавить голоса",
+      "votesRemaining": "Осталось голосов: <0>{{total}}</0>",
+      "maxVotesAvailable": "Макс. доступное количество голосов: <0>{{total}}</0>",
+      "voteFor": "Голосовать за",
+      "validateVotes": "Подтвердить голоса",
+      "votesRequired": "Требуются голоса",
+      "allVotesUsed": "Использованы все голоса"
     },
     "validation": {
-      "message": "Always verify that your device displays the address exactly as it was originally given to you.",
-      "success": "Your votes were cast successfully",
+      "message": "Обязательно проверяйте соответствие адреса на экране устройстве и адреса, который изначально был вам предоставлен.",
+      "success": "Ваши голоса успешно отданы",
       "info": "",
       "button": {}
     }
   },
   "addAccounts": {
     "supportLinks": {
-      "segwit_or_native_segwit": "Segwit or Native segwit?"
+      "segwit_or_native_segwit": "Segwit или Native segwit?"
     },
     "quitConfirmation": {
-      "title": "Cancel add account",
-      "desc": "Are you sure you want to cancel adding accounts?"
+      "title": "Отменить добавление счёта",
+      "desc": "Уверены, что не хотите добавить счета?"
     },
-    "imported": "Accounts added successfully",
+    "imported": "Счета добавлены",
     "sections": {
       "importable": {
-        "title": "Add existing account"
+        "title": "Добавить существующий счёт"
       },
       "creatable": {
-        "title": "Add new account"
+        "title": "Добавить новый счёт"
       },
       "imported": {
-        "title": "Accounts already in the Portfolio ({{length}})"
+        "title": "Счета уже в Портфеле ({{length}})"
       },
       "migrate": {
-        "title": "Accounts to update"
+        "title": "Счета, которые будут обновлены"
       }
     },
     "success": {
-      "desc": "View your accounts or add other accounts",
-      "secondaryCTA": "Add other accounts",
-      "cta": "Go to Accounts"
+      "desc": "Просмотрите счета или добавьте новые",
+      "secondaryCTA": "Добавить другие счета",
+      "cta": "Перейти к Счетам"
     },
-    "stopScanning": "Stop scanning",
-    "retryScanning": "Retry scanning",
-    "retry": "Retry",
-    "done": "Done",
-    "finalCta": "Continue",
-    "finalCtaForSwap": "Go back to Swap",
-    "synchronizing": "Synchronizing",
-    "synchronizingDesc": "Your accounts are being synchronized. This can take a while...",
-    "noAccountToCreate": "Could not create <1><0>{{currencyName}}</></> account. Restart the process and sync your accounts.",
-    "cantCreateAccount": "A new account cannot be added before receiving assets on your <1><0>{{accountName}}</></> account.",
+    "stopScanning": "Остановить сканирование",
+    "retryScanning": "Повторить сканирование",
+    "retry": "Повторить",
+    "done": "Готово",
+    "finalCta": "Продолжить",
+    "finalCtaForSwap": "Вернуться к Обмену",
+    "synchronizing": "Синхронизируем",
+    "synchronizingDesc": "Синхронизируем счета. Это может занять некоторое время...",
+    "noAccountToCreate": "Не удалось создать счёт <1><0>{{currencyName}}</></>. Перезапустите процедуру и синхронизируйте счета.",
+    "cantCreateAccount": "Невозможно добавить новый счёт, пока вы не получите активы на счёт <1><0>{{accountName}}</></>.",
     "tokens": {
-      "title": "Add token",
-      "createParentCurrencyAccount": "Add {{parrentCurrencyName}} account",
+      "title": "Добавить токен",
+      "createParentCurrencyAccount": "Добавить счёт {{parrentCurrencyName}}",
       "erc20": {
-        "title": "Add token",
-        "disclaimer": "{{tokenName}} is an ERC20 Token.\nYou can receive tokens directly in an Ethereum account.",
-        "learnMore": "Learn more about ERC20"
+        "title": "Добавить токен",
+        "disclaimer": "{{tokenName}} – это ERC20-токен.\nПолучать токены можно непосредственно на счёт в сети Эфириума.",
+        "learnMore": "Подробнее об ERC20"
       },
       "trc10": {
-        "title": "Add Token",
-        "disclaimer": "{{tokenName}} is a TRC10 Token.\nYou can receive tokens directly in a Tron account.",
-        "learnMore": "Learn more about TRC10"
+        "title": "Добавить токен",
+        "disclaimer": "{{tokenName}} – это токен TRC10.\nПолучать токены можно непосредственно на счёт в сети Tron.",
+        "learnMore": "Подробнее о TRC20"
       },
       "trc20": {
-        "title": "Add Token",
-        "disclaimer": "{{tokenName}} is a TRC20 Token.\nYou can receive tokens directly in a Tron account.",
-        "learnMore": "Learn more about TRC20"
+        "title": "Добавить токен",
+        "disclaimer": "{{tokenName}} – это токен TRC20.\nПолучать токены можно непосредственно на счёт в сети Tron.",
+        "learnMore": "Подробнее о TRC20"
       }
     },
-    "showMoreChainType": "More address types",
+    "showMoreChainType": "Дополнительные типы адресов",
     "addressTypeInfo": {
-      "title": "Which address type to choose?",
+      "title": "Какой тип адреса выбрать?",
       "subtitle": "Add new account",
       "native_segwit": {
         "title": "Native Segwit",
@@ -2518,88 +2518,88 @@
         "title": "Press both buttons together to enable setting the device name."
       },
       "listApps": {
-        "title": "Loading..."
+        "title": "Загружаем..."
       }
     }
   },
   "EditDeviceName": {
-    "title": "Rename device",
-    "charactersRemaining": "{{remainingCount}} characters remaining",
-    "action": "Confirm"
+    "title": "Переименовать устройство",
+    "charactersRemaining": "Осталось символов: {{remainingCount}}",
+    "action": "Подтвердить"
   },
   "PairDevices": {
     "Paired": {
-      "title": "Pairing successful",
-      "desc": "Your {{productName}} is ready to be used with Ledger Live.",
-      "action": "Continue"
+      "title": "Сопряжение выполнено",
+      "desc": "Устройство {{productName}} готово к использованию в Ledger Live.",
+      "action": "Продолжить"
     },
     "Pairing": {
-      "step1": "Validate if the code displayed on your phone exactly matches the one displayed on your {{productName}}.",
-      "step2": "Validate on your {{productName}} by pressing both buttons together."
+      "step1": "Подтвердите, что код на экране телефорна в точности совпадает с кодом на экране {{productName}}.",
+      "step2": "Подтвердите это на {{productName}}, нажав обе кнопки одновременно."
     },
     "GenuineCheck": {
-      "title": "Device authentication check",
-      "accept": "Please don't turn off your Nano X. Make sure you allow <1>Ledger Manager</1>."
+      "title": "Проверка подлинности устройства",
+      "accept": "Не выключайте Nano X и включите <1>Диспетчер Ledger</1>."
     },
     "ScanningHeader": {
-      "title": "Looking for devices",
-      "desc": "Please make sure your {{productName}} is unlocked and Bluetooth is enabled."
+      "title": "Поиск устройств",
+      "desc": "Обязательно разблокируйте {{productName}} и включите Bluetooth."
     },
     "ScanningTimeout": {
-      "title": "Sorry, no device was found",
-      "desc": "Please make sure your {{productName}} is unlocked and Bluetooth is enabled."
+      "title": "Извините, устройства не найдены",
+      "desc": "Обязательно разблокируйте {{productName}} и включите Bluetooth."
     },
-    "bypassGenuine": "Use anyway",
-    "alreadyPaired": "Already paired"
+    "bypassGenuine": "Все равно использовать",
+    "alreadyPaired": "Уже сопряжено"
   },
   "DeviceItemSummary": {
-    "genuine": "Your device is genuine",
-    "genuineFailed": "Device authentication <1><0>failed</0></1>"
+    "genuine": "Устройство подлинное",
+    "genuineFailed": "При проверке подлинности устройства <1><0>произошёл сбой</0></1>"
   },
   "DeviceNameRow": {
-    "title": "Name",
-    "action": "Get device name"
+    "title": "Название",
+    "action": "Получить название устройства"
   },
   "RemoveDevice": {
     "button": {
-      "title": "Remove {{nbDevices}} device",
-      "title_plural": "Remove {{nbDevices}} devices"
+      "title": "Удалить устройство {{nbDevices}}",
+      "title_plural": "Удалить устройства {{nbDevices}}"
     }
   },
   "manager": {
-    "tabTitle": "Device Manager",
-    "title": "Manager",
-    "connect": "Select your device",
-    "appsCatalog": "App catalog",
-    "installedApps": "Installed apps",
+    "tabTitle": "Диспетчер устройств",
+    "title": "Диспетчер",
+    "connect": "Выберите устройство",
+    "appsCatalog": "Каталог приложений",
+    "installedApps": "Установленные приложения",
     "noAppNeededForToken": "Install {{appName}} app for {{tokenName}}",
-    "tokenAppDisclaimer": "{{tokenName}} is an {{tokenType}} token using the {{appName}} app. To manage {{tokenName}}, <1>install the {{appName}} app</1> and send the tokens <3>to your {{appName}} account</3>.",
-    "tokenAppDisclaimerInstalled": "{{tokenName}} is an {{tokenType}} token using the {{appName}} app. To manage {{tokenName}}, <1>open the {{appName}} app</1> and send the tokens <3>to your {{appName}} account</3>.",
-    "goToAccounts": "Go to Accounts",
-    "intallParentApp": "Install {{appName}} app",
+    "tokenAppDisclaimer": "{{tokenName}} — это токен {{tokenType}}, который использует приложение {{appName}}. Для управления {{tokenName}} <1>необходимо установить приложение {{appName}}</1> и отправить токены <3>на счёт {{appName}}</3>.",
+    "tokenAppDisclaimerInstalled": "{{tokenName}} — это токен {{tokenType}}, который использует приложение {{appName}}. Для управления {{tokenName}} <1>необходимо открыть приложение {{appName}}</1> и отправить токены <3>на счёт {{appName}}</3>.",
+    "goToAccounts": "Перейти к Счетам",
+    "intallParentApp": "Установить приложение {{appName}}",
     "readOnly": {
       "title": "Nano X",
-      "description": "Setup Ledger Live with your Ledger Nano X to install apps, create accounts and make secure transactions wherever you go.",
-      "question": "Do you have your Ledger Nano X?",
-      "button": "Start Nano X setup",
-      "noDevice": "No device?",
-      "buy": "Buy a Ledger Nano X"
+      "description": "Настройте Ledger Live вместе с Ledger Nano X, чтобы устанавливать приложения, создавать счета и совершать безопасные транзакции, где бы вы ни находились.",
+      "question": "У вас есть Ledger Nano X?",
+      "button": "Настроить Nano X",
+      "noDevice": "Ещё нет устройства?",
+      "buy": "Купите Ledger Nano X"
     },
     "appList": {
-      "title": "App catalog",
-      "loading": "Loading apps...",
-      "noApps": "No apps found",
-      "searchAppsCatalog": "Search app in catalogue...",
-      "searchAppsInstalled": "Search installed apps...",
-      "noAppsInstalled": "No apps installed on your device",
-      "noAppsDescription": "Go to the App catalog to install apps",
-      "noResultsFound": "No results found",
-      "noResultsDesc": "Please verify the spelling and try again",
-      "versionNew": "(NEW{{newVersion}})"
+      "title": "Каталог приложений",
+      "loading": "Загружаем приложения...",
+      "noApps": "Приложения не найдены",
+      "searchAppsCatalog": "Поиск приложения в каталоге...",
+      "searchAppsInstalled": "Поиск установленных приложений...",
+      "noAppsInstalled": "На устройстве нет установленных приложений",
+      "noAppsDescription": "Чтобы установить приложения, перейдите в Каталог приложений",
+      "noResultsFound": "Ничего не найдено",
+      "noResultsDesc": "Проверьте орфографию и повторите попытку",
+      "versionNew": "(НОВИНКА {{newVersion}})"
     },
     "uninstall": {
-      "title": "Uninstall all",
-      "subtitle": "Uninstall all apps?",
+      "title": "Удалить все",
+      "subtitle": "Удалить все приложения?",
       "description": "Uninstalling apps has no impact on your crypto assets. You can reinstall apps in the App catalog."
     },
     "remove": {
@@ -2681,94 +2681,94 @@
       "continueUninstall": "Uninstall {{app}} and other apps"
     },
     "filter": {
-      "title": "Show",
-      "all": "All",
-      "installed": "Apps",
-      "not_installed": "Not installed",
-      "supported": "Live supported",
-      "updatable": "Updatable",
-      "apply": "Apply"
+      "title": "Показать",
+      "all": "Все",
+      "installed": "Приложения",
+      "not_installed": "Не установленные",
+      "supported": "С поддержкой Live",
+      "updatable": "Обновляемые",
+      "apply": "Применить"
     },
     "sort": {
-      "title": "Sort by",
-      "default": "Default",
-      "name_asc": "Name A-Z",
-      "name_desc": "Name Z-A",
-      "marketcap_desc": "Market cap"
+      "title": "Сортировать по",
+      "default": "По умолчанию",
+      "name_asc": "Название А-Я",
+      "name_desc": "Название Я-А",
+      "marketcap_desc": "Рыночная капитализация"
     }
   },
   "AuthenticityRow": {
-    "title": "Authentication",
-    "subtitle": "Genuine"
+    "title": "Проверка подлинности",
+    "subtitle": "Подлинное"
   },
   "RemoveRow": {
-    "title": "Remove device"
+    "title": "Удалить устройство"
   },
   "FirmwareVersionRow": {
-    "title": "Firmware version",
-    "subtitle": "Firmware {{version}}"
+    "title": "Версия прошивки",
+    "subtitle": "Версия прошивки {{version}}"
   },
   "FirmwareUpdateRow": {
-    "title": "Firmware version {{version}} available",
-    "subtitle": "Please use Ledger Live Desktop to update",
-    "action": "Update"
+    "title": "Доступна новая прошивка {{version}}",
+    "subtitle": "Для обновления используйте настольное приложение Ledger Live",
+    "action": "Обновить"
   },
   "FirmwareUpdate": {
-    "title": "Update firmware",
+    "title": "Обновить прошивку",
     "Installing": {
       "title": "{{stepName}}...",
-      "subtitle": "If requested on your device, please enter your PIN to finish the process."
+      "subtitle": "Введите PIN-код для завершения, если это необходимо на вашем устройстве."
     },
     "steps": {
-      "osu": "Installing OSU",
-      "flash-mcu": "MCU updating",
+      "osu": "Устанавливаем обновление ОС",
+      "flash-mcu": "Обновление микроконтроллера",
       "flash-bootloader": "Bootloader updating",
-      "flash": "Flashing your device",
-      "firmware": "Firmware updating"
+      "flash": "Перепрошивка устройства",
+      "firmware": "Обновляем прошивку"
     }
   },
   "FirmwareUpdateReleaseNotes": {
-    "introTitle": "You are about to install <1><0>firmware version {{version}}.</0></1>",
+    "introTitle": "Вы собираетесь установить <1><0>прошивку версии {{version}}</0></1>.",
     "introDescription1": "Please note that all the apps on your device will be deleted. You can reinstall your apps after the firmware update.",
     "introDescription2": "This has no impact on your crypto assets.",
-    "action": "Continue update"
+    "action": "Продолжить обновление"
   },
   "FirmwareUpdateCheckId": {
-    "title": "Identifier",
+    "title": "Идентификатор",
     "description": "Please press both buttons together on your {{fullDeviceName}} if it displays the same identifier:"
   },
   "FirmwareUpdateMCU": {
-    "title": "Restart device",
-    "desc1": "Disconnect your device from your computer.",
+    "title": "Перезагрузите устройство",
+    "desc1": "Отключите устройство от компьютера.",
     "desc2": "Press and hold the left button, connect the USB cable then release the button when the Bootloader screen appears."
   },
   "FirmwareUpdateConfirmation": {
-    "title": "Firmware updated",
-    "description": "Go to Manager to reinstall apps on your device."
+    "title": "Прошивка обновлена",
+    "description": "Чтобы переустановить приложения на устройстве, перейдите в Диспетчер."
   },
   "RepairDevice": {
     "title": "Repair",
-    "action": "My device is ready"
+    "action": "Устройство готово к работе"
   },
   "StepLegacyModal": {
-    "description": "Imported accounts synchronize with the network only, not between Mobile and Desktop versions of Ledger Live."
+    "description": "Импортированные счета синхронизируются только с сетью. Настольная и мобильная версии Ledger Live не синхронизируются между собой."
   },
   "algorand": {
-    "token": "ASA (Assets)",
+    "token": "ASA (активы)",
     "claimRewards": {
-      "title": "Rewards",
-      "button": "Claim",
+      "title": "Вознаграждения",
+      "button": "Запросить",
       "stepperHeader": {
-        "info": "Earn rewards",
-        "starter": "Rewards",
-        "connectDevice": "Connect device",
-        "verification": "Verification",
-        "stepRange": "Step {{currentStep}} of {{totalSteps}}"
+        "info": "Получайте вознаграждение",
+        "starter": "Вознаграждения",
+        "connectDevice": "Подключение устройства",
+        "verification": "Проверка",
+        "stepRange": "Шаг {{currentStep}}/{{totalSteps}}"
       },
       "flow": {
         "steps": {
           "info": {
-            "description": "Delegate your Algo to earn rewards while keeping full security and control on your assets.",
+            "description": "Делегируйте Algo, чтобы получать вознаграждения без угроз безопасности и продолжать контролировать активы.",
             "steps": {
               "0": "A minimum balance of 1 Algo is required to receive rewards.",
               "1": "Increase the account’s balance to increase rewards.",
@@ -2858,53 +2858,53 @@
       "undelegate": "Undelegate",
       "redelegate": "Redelegate",
       "reward": "Claim rewards",
-      "estYield": "Est. yield",
+      "estYield": "Ориент. доход",
       "stepperHeader": {
-        "starter": "Earn rewards",
-        "validator": "Delegate assets",
-        "amountSubTitle": "Amount to delegate",
-        "summary": "Summary",
-        "verification": "Verification",
-        "selectDevice": "Select device",
-        "connectDevice": "Connect device",
-        "stepRange": "Step {{currentStep}} of {{totalSteps}}"
+        "starter": "Получайте вознаграждение",
+        "validator": "Делегируйте активы",
+        "amountSubTitle": "Сумма для делегирования",
+        "summary": "Сводка",
+        "verification": "Проверка",
+        "selectDevice": "Выберите устройство",
+        "connectDevice": "Подключение устройства",
+        "stepRange": "Шаг {{currentStep}}/{{totalSteps}}"
       },
       "flow": {
         "steps": {
           "starter": {
-            "description": "Delegate your ATOM to earn rewards securely, keeping control of your assets.",
+            "description": "Делегируйте ATOM, чтобы получать вознаграждения без угроз безопасности и продолжать контролировать активы.",
             "steps": {
-              "0": "Delegated assets remain yours.",
-              "1": "You will have to wait 21 days for the undelegation to complete.",
-              "2": "Delegate securely with your Ledger device."
+              "0": "Делегированные активы остаются в вашей собственности.",
+              "1": "Отмена делегирования занимает 21 день.",
+              "2": "Устройство Ledger позволяет вам безопасно делегировать активы."
             },
             "warning": {
               "description": "Choose your validator wisely: Part of your delegated assets may be irrevocably lost if the validator does not behave appropriately."
             },
-            "cta": "Continue"
+            "cta": "Продолжить"
           },
           "validator": {
-            "validators": "Validators",
-            "myDelegations": "My delegations",
-            "cta": "Continue",
-            "estYield": "Est. yield: {{amount}}",
-            "totalAvailable": "Total available: <0>{{amount}}</0>",
-            "allAssetsUsed": "All assets used",
-            "noResultsFound": "No validator found for <0>{{search}}</0>",
+            "validators": "Валидаторы",
+            "myDelegations": "Мои делегирования",
+            "cta": "Продолжить",
+            "estYield": "Ориент. доход: {{amount}}",
+            "totalAvailable": "Всего доступно: <0>{{amount}}</0>",
+            "allAssetsUsed": "Использованы все активы",
+            "noResultsFound": "Валидатор для <0>{{search}}</0> не найден",
             "currentAmount": "(+ <0>{{amount}}</0>)"
           },
           "amount": {
-            "assetsRemaining": "Assets remaining: <0>{{amount}}</0>",
-            "allAssetsUsed": "All assets used",
-            "minAmount": "Minimum amount: <0>{{min}}</0>",
-            "incorrectAmount": "Maximum amount: <0>{{max}}</0>",
-            "cta": "Continue"
+            "assetsRemaining": "Осталось активов: <0>{{amount}}</0>",
+            "allAssetsUsed": "Использованы все активы",
+            "minAmount": "Мин. сумма: <0>{{min}}</0>",
+            "incorrectAmount": "Макс. сумма: <0>{{max}}</0>",
+            "cta": "Продолжить"
           },
           "verification": {
             "success": {
-              "title": "You have successfully delegated your assets",
-              "text": "Your account balance will be updated once the network confirms the transaction.",
-              "cta": "View details"
+              "title": "Вы успешно делегировали активы",
+              "text": "Баланс будет обновлён после подтверждения транзакции в сети.",
+              "cta": "Подробнее"
             },
             "pending": {
               "title": "Broadcasting transaction..."
@@ -2914,32 +2914,32 @@
         }
       },
       "drawer": {
-        "status": "Status",
-        "rewards": "Rewards",
-        "active": "Active",
-        "inactive": "Inactive",
-        "completionDate": "Completion date",
+        "status": "Состояние",
+        "rewards": "Вознаграждения",
+        "active": "Активно",
+        "inactive": "Неактивно",
+        "completionDate": "Дата окончания",
         "redelegatedFrom": "Redelegated from"
       }
     },
     "redelegation": {
-      "estYield": "est. yield",
+      "estYield": "ориент. доход",
       "stepperHeader": {
-        "validator": "Choose new validator",
-        "amountSubTitle": "Amount to redelegate",
+        "validator": "Выберите нового валидатора",
+        "amountSubTitle": "Сумма для повторного делегирования",
         "amountTitle": "{{from}} → {{to}}",
-        "summary": "Summary",
-        "selectDevice": "Select device",
-        "connectDevice": "Connect device",
-        "stepRange": "Step {{currentStep}} of {{totalSteps}}"
+        "summary": "Сводка",
+        "selectDevice": "Выберите устройство",
+        "connectDevice": "Подключение устройства",
+        "stepRange": "Шаг {{currentStep}}/{{totalSteps}}"
       },
       "flow": {
         "steps": {
           "validator": {
-            "validators": "Validators",
-            "myDelegations": "My delegations",
-            "cta": "Continue",
-            "estYield": "Est. yield: {{amount}}",
+            "validators": "Валидаторы",
+            "myDelegations": "Мои делегирования",
+            "cta": "Продолжить",
+            "estYield": "Ориент. доход: {{amount}}",
             "totalAvailable": "Total available: <0>{{amount}}</0>",
             "allAssetsUsed": "All assets used",
             "noResultsFound": "No validator found for <0>{{search}}</0>"
