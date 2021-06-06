@@ -1404,75 +1404,75 @@
     "walletconnect": "WalletConnect",
     "sell": "Продать",
     "swap": "Обменять",
-    "manage": "Manage",
-    "lastOperations": "Last operations",
+    "manage": "Управление",
+    "lastOperations": "Последние операции",
     "emptyState": {
-      "title": "No crypto assets yet?",
-      "desc": "Make sure the <1><0>{{managerAppName}}</0></1> app is installed and start receiving.",
-      "descWithBuy": "Make sure the <1><0>{{managerAppName}}</0></1> app is installed so you can buy or receive <3><0>{{currencyTicker}}</0></3>",
-      "descToken": "Make sure the <1><0>{{managerAppName}}</0></1> app is installed and start receiving <3><0>{{currencyTicker}}</0></3> and <5><0>{{tokenType}}</0> tokens</5>",
+      "title": "Ещё нет криптоактивов?",
+      "desc": "Убедитесь, что приложение <1><0>{{managerAppName}}</0></1> установлено, и начните получать средства.",
+      "descWithBuy": "Чтобы покупать или принимать <3><0>{{currencyTicker}}</0></3>, убедитесь, что приложение <1><0>{{managerAppName}}</0></1> установлено",
+      "descToken": "Убедитесь, что приложение <1><0>{{managerAppName}}</0></1> установлено, и начните принимать <3><0>{{ticker}}</0></3> и <5> <0>токены {{tokenList}}</0></5>",
       "buttons": {
-        "receiveFunds": "Receive",
-        "buyCrypto": "Buy"
+        "receiveFunds": "Получить",
+        "buyCrypto": "Купить"
       }
     },
     "settings": {
-      "header": "Account settings",
-      "title": "Edit account",
-      "advancedLogs": "Advanced logs",
+      "header": "Настройки счёта",
+      "title": "Редактировать счёт",
+      "advancedLogs": "Расширенные логи",
       "accountName": {
-        "title": "Account name",
-        "desc": "Description of the account",
-        "placeholder": "Account name"
+        "title": "Название счёта",
+        "desc": "Описание счёта",
+        "placeholder": "Название счёта"
       },
       "accountUnits": {
-        "title": "Edit units"
+        "title": "Редактировать единицы"
       },
       "unit": {
-        "title": "Unit",
-        "desc": "Choose the unit to be displayed."
+        "title": "Единица учёта",
+        "desc": "Выберите единицу отображения."
       },
       "currency": {
-        "title": "Currency"
+        "title": "Валюта"
       },
       "endpointConfig": {
-        "title": "Node",
+        "title": "Нода (узел)",
         "desc": "The API node to use"
       },
       "delete": {
-        "title": "Remove account from the Portfolio",
-        "desc": "Stored data will be removed.",
-        "confirmationTitle": "Are you sure?",
-        "confirmationDesc": "This has no impact on your crypto assets. Existing accounts can always be added afterwards."
+        "title": "Удалить счёт из Портфеля",
+        "desc": "Сохранённые данные будут удалены.",
+        "confirmationTitle": "Вы уверены?",
+        "confirmationDesc": "Криптоактивы не буду затронуты. Существующие счета всегда можно добавить позже."
       },
       "archive": {
-        "title": "Archive account",
-        "desc": "This account will be archived."
+        "title": "Архивировать счёт",
+        "desc": "Счёт будет заархивирован."
       },
       "advanced": {
-        "title": "Advanced logs",
+        "title": "Расширенные логи",
         "desc": ""
       }
     },
     "import": {
       "scan": {
-        "title": "Scan LiveQR code",
+        "title": "Сканировать LiveQR-код",
         "descTop": {
-          "line1": "In Ledger Live Desktop, go to",
-          "line2": "Settings > Accounts > Export accounts > Export"
+          "line1": "В настольном приложении Ledger Live перейдите в",
+          "line2": "Настойки > Счета > Экспортировать счета > Экспортировать (Settings > Accounts > Export accounts > Export)"
         },
-        "descBottom": "Please put the LiveQR code within the square."
+        "descBottom": "Поместите LiveQR-код в квадратную рамку."
       },
       "result": {
-        "title": "Import accounts",
-        "newAccounts": "New accounts",
-        "updatedAccounts": "Updated accounts",
-        "empty": "Add a new account",
-        "descEmpty": "<0><0>No accounts</0></0> were found. Please try again or go back to Setup",
-        "alreadyImported": "Already imported",
-        "noAccounts": "Nothing to import",
-        "unsupported": "Unsupported",
-        "settings": "App settings",
+        "title": "Импорт счетов",
+        "newAccounts": "Новые счета",
+        "updatedAccounts": "Обновлённые счета",
+        "empty": "Добавить новый счёт",
+        "descEmpty": "<0><0>Счета</0></0> не найдены. Повторите попытку или вернитесь к настройкам.",
+        "alreadyImported": "Уже импортировано",
+        "noAccounts": "Нечего импортировать",
+        "unsupported": "Не поддерживается",
+        "settings": "Настройки приложения",
         "includeGeneralSettings": "Импорт настроек настольного приложения"
       },
       "fallback": {
@@ -1679,87 +1679,87 @@
       "clearCacheDesc": "The transactions on the network will be scanned and your accounts will be recalculated.",
       "clearCacheModal": "Are you sure?",
       "clearCacheModalDesc": "A fresh and complete scan of transactions on the network will be done. Account histories will be rebuilt and balances will be recalculated.",
-      "clearCacheButton": "Clear",
-      "exportLogs": "Export logs",
-      "exportLogsDesc": "Exporting Ledger Live logs may help troubleshooting.",
-      "hardReset": "Reset Ledger Live",
-      "hardResetDesc": "This has no impact on your assets. Erases all data in Ledger Live, including account data, transaction histories and settings. Use your Ledger device to reload and manage your crypto assets on an empty Ledger Live.",
+      "clearCacheButton": "Очистить",
+      "exportLogs": "Экспортировать логи",
+      "exportLogsDesc": "Экспорт логов Ledger Live может помочь в устранении неполадок.",
+      "hardReset": "Сбросить Ledger Live до исходного состояния",
+      "hardResetDesc": "Это действие не затрагивает активы и позволяет удалить все данные в Ledger Live, включая данные счетов, историю транзакций и настройки. Используйте устройство Ledger для перезагрузки криптоактивов и управления ими в Ledger Live с исходными настройками.",
       "repairDevice": "Repair your Ledger device",
-      "repairDeviceDesc": "If you have an issue updating your device and cannot resume updates, you can try this to repair your device."
+      "repairDeviceDesc": "Если при обновлении устройства возникла проблема и вы не можете продолжить обновление, воспользуйтесь этой функцией для устранения неполадок."
     },
     "experimental": {
       "title": "Экспериментальные функции",
       "desc": "Попробуйте экспериментальные функции и скажите нам, что вы думаете.",
-      "disclaimer": "These are Experimental features provided on an \"as is\" basis for our community of tech enthusiasts. They may change, break or be removed at any time. By enabling them, you agree to use them at your own risk."
+      "disclaimer": "Это Экспериментальные функции, предоставляемые на условиях «как есть» для нашего сообщества технических энтузиастов. Эти функции могут быть изменены, заблокированы или удалены в любое время. Активируя их, вы принимаете на себя все риски использования."
     }
   },
   "migrateAccounts": {
-    "banner": "Ledger Live accounts update",
+    "banner": "Обновление счетов Ledger Live",
     "overview": {
-      "headerTitle": "Account update",
-      "title": "Ledger Live accounts update",
-      "subtitle": "New features in Ledger Live means your accounts need to be updated",
-      "notice": "{{accountCount}} account could not be updated. Please connect the device associated to the account below.",
-      "notice_plural": "{{accountCount}} accounts could not be updated. Please connect the device associated to the accounts below.",
-      "currency": "1 {{currency}} account needs to be updated",
-      "currency_plural": "{{count}} {{currency}} accounts need to be updated",
-      "start": "Start update",
-      "continue": "Continue update"
+      "headerTitle": "Обновление счета",
+      "title": "Обновление счетов Ledger Live",
+      "subtitle": "Из-за регулярного внедрения новых функций в Ledger Live счета необходимо постоянно обновлять.",
+      "notice": "Невозможно обновить счёт {{accountCount}}. Подключите устройство, связанное с указанным ниже счётом.",
+      "notice_plural": "Невозможно обновить счета {{accountCount}}. Подключите устройство, связанное с указанными ниже счетами.",
+      "currency": "Необходимо обновить 1 счёт {{currency}}",
+      "currency_plural": "Счетов {{currency}}, которые требуют обновления: {{count}}",
+      "start": "Начать обновление",
+      "continue": "Продолжить обновление"
     },
     "progress": {
-      "headerTitle": "Updating accounts",
+      "headerTitle": "Обновление счетов",
       "pending": {
-        "title": "{{currency}} update in progress",
-        "subtitle": "Please wait for your account to be updated."
+        "title": "Выполняется обновление {{currency}}",
+        "subtitle": "Выполняется обновление счёта. Пожалуйста, подождите."
       },
       "notice": {
-        "title": "{{currency}} update incomplete",
-        "subtitle": "No {{currency}} accounts could be updated using this device.",
-        "cta": "Continue",
-        "ctaNextCurrency": "Continue with {{currency}}"
+        "title": "Обновление {{currency}} не завершено",
+        "subtitle": "Не удалось выполнить обновление счетов {{currency}}, на этом устройстве.",
+        "cta": "Продолжить",
+        "ctaNextCurrency": "Продолжить работу с {{currency}}"
       },
       "done": {
-        "title": "{{currency}} update complete",
-        "subtitle": "Congratulations, your {{currency}} accounts were updated successfully.",
-        "cta": "Continue",
-        "ctaNextCurrency": "Continue with {{currency}}",
-        "ctaDone": "Done"
+        "title": "Обновление {{currency}} завершено",
+        "subtitle": "Поздравляем, счета {{currency}} обновлены.",
+        "cta": "Продолжить",
+        "ctaNextCurrency": "Продолжить работу с {{currency}}",
+        "ctaDone": "Готово"
       },
       "error": {
-        "cta": "Retry"
+        "cta": "Повторить"
       }
     },
     "connectDevice": {
-      "headerTitle": "Connect device"
+      "headerTitle": "Подключение устройства"
     }
   },
   "transfer": {
     "send": {
-      "title": "Send"
+      "title": "Отправить"
     },
     "fees": {
-      "title": "Edit fees"
+      "title": "Изменить комиссию"
     },
     "receive": {
-      "title": "Receive",
-      "titleReadOnly": "Unverified address",
-      "headerTitle": "Crypto asset",
-      "titleDevice": "Connect device",
-      "verifySkipped": "Your receive address was not confirmed on your Ledger device. Please verify your {{accountType}} address to stay secure.",
-      "verifyPending": "Please verify that the {{currencyName}} address displayed on your device exactly matches the one displayed on your phone.",
-      "verified": "Address confirmed. Check again if you copied or scanned it.",
-      "verifyAgain": "Check again",
-      "noAccount": "No account found",
-      "address": "Address for account",
-      "copyAddress": "Copy address",
-      "shareAddress": "Share address",
-      "addressCopied": "Address copied!",
+      "title": "Получить",
+      "titleReadOnly": "Неподтверждённый адрес",
+      "headerTitle": "Криптоактив",
+      "titleDevice": "Подключение устройства",
+      "verifySkipped": "Адрес получения не подтверждён на устройстве Ledger. В целях безопасности подтвердите адрес {{accountType}}.",
+      "verifyPending": "Подтвердите, что адрес {{currencyName}} на экране устройства в точности совпадает с адресом на экране телефоне.",
+      "verified": "Адрес подтверждён. Если вы скопировали или отсканировали адрес, проверьте его ещё раз.",
+      "verifyAgain": "Проверить ещё раз",
+      "noAccount": "Счета не найдены",
+      "address": "Адрес счёта",
+      "copyAddress": "Копировать адрес",
+      "shareAddress": "Поделиться адресом",
+      "addressCopied": "Адрес скопирован!",
       "notSynced": {
-        "text": "Synchronizing",
-        "desc": "This may take a moment if you have many transactions or if you have a slow internet connection."
+        "text": "Синхронизируем",
+        "desc": "При большой очереди транзакций или медленного интернета это может занять некоторое время."
       },
       "readOnly": {
-        "title": "Receive",
+        "title": "Получить",
         "text": "Please be careful",
         "desc": "You are about to view an address which was not verified. Verify addresses on your device to stay secure.",
         "verify": "The address of {{accountType}} was not verified. Verify addresses on your device to stay secure."
@@ -1879,22 +1879,22 @@
           "cta": "Close"
         },
         "outdatedApp": {
-          "title": "App update available",
+          "title": "Доступно обновление приложения",
           "desc": "You need to update the {{appName}} app.",
-          "cta": "Go to Manager",
-          "close": "Close"
+          "cta": "Перейти в Диспетчер",
+          "close": "Закрыть"
         },
         "summary": {
-          "from": "From",
-          "to": "To",
-          "send": "Send",
-          "payoutNetworkFees": "Payout fees",
-          "payoutNetworkFeesTooltip": "This amount will not be shown on your device",
-          "receive": "Amount",
+          "from": "С",
+          "to": "В",
+          "send": "Отправить",
+          "payoutNetworkFees": "Комиссия за выплату",
+          "payoutNetworkFeesTooltip": "Эта сумма не будет отображаться на устройстве",
+          "receive": "Сумма",
           "receiveFloat": "Amount to receive before service fees",
-          "provider": "Provider",
-          "method": "Rate",
-          "fees": "Max fees",
+          "provider": "Поставщик",
+          "method": "Курс",
+          "fees": "Макс. комиссия",
           "disclaimer": {
             "title": "Terms and conditions",
             "desc": "By clicking “Accept”,  I acknowledge and accept that this service is exclusively governed by {{provider}}'s Terms & Conditions.",
