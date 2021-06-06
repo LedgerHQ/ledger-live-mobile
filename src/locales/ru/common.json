@@ -1639,16 +1639,16 @@
       "desc": "Manage assets display in the app.",
       "hideTokenCTA": "Скрыть токен",
       "showContractCTA": "Показать контракт",
-      "blacklistedTokens": "Hidden token list",
+      "blacklistedTokens": "Скрыть список токенов",
       "blacklistedTokensDesc": "You can hide tokens by going to the accounts list then long-pressing on the token and selecting 'Hide token'.",
       "blacklistedTokensModal": {
-        "title": "Hide token",
+        "title": "Скрыть токен",
         "desc": "This action will hide all <1><0>{tokenName}</0></1> accounts, you can show them again using <3>Settings > Accounts</3>.",
-        "confirm": "Hide token"
+        "confirm": "Скрыть токен"
       },
       "cryptoAssets": {
-        "header": "Crypto assets",
-        "title": "Crypto assets",
+        "header": "Криптоактивы",
+        "title": "Криптоактивы",
         "desc": "Select a crypto assets to edit its settings."
       }
     },
@@ -1656,28 +1656,28 @@
       "title": "About",
       "desc": "App information, terms and conditions, and privacy policy.",
       "appDescription": "With Ledger Live, Secure, Buy, Sell, Exchange, Grow and Manage your crypto. All-in-one place.",
-      "appVersion": "Version",
-      "termsConditions": "Terms and conditions",
+      "appVersion": "Версия",
+      "termsConditions": "Условия и положения",
       "termsConditionsDesc": "By using Ledger Live you are deemed to have accepted our terms and conditions.",
-      "privacyPolicy": "Privacy policy",
-      "privacyPolicyDesc": "See what personal data are collected, why and how they are used.",
+      "privacyPolicy": "Политика конфиденциальности",
+      "privacyPolicyDesc": "Узнайте, какие персональные данные мы собираем, и ознакомьтесь со способами и целями обработки.",
       "liveReview": {
-        "title": "Rate the app!",
-        "ios": "Review in the App Store",
-        "android": "Review in the Google Play store"
+        "title": "Оценить приложение!",
+        "ios": "Просмотреть в App Store",
+        "android": "Просмотреть в Google Play"
       }
     },
     "help": {
-      "title": "Help",
-      "header": "Help",
+      "title": "Помощь",
+      "header": "Помощь",
       "desc": "Learn more about Ledger Live or how to get help.",
-      "support": "Ledger Support",
+      "support": "Служба поддержки Ledger",
       "supportDesc": "If you have a problem, get help using Ledger Live with your hardware wallet.",
-      "configureDevice": "Set up a device",
-      "configureDeviceDesc": "Set up as a new device or restore an existing device. Accounts and settings are preserved.",
-      "clearCache": "Clear cache",
+      "configureDevice": "Настроить устройство",
+      "configureDeviceDesc": "Настройка как нового устройства, либо восстановление существующего устройства. Счета и настройки сохраняются.",
+      "clearCache": "Очистить кэш",
       "clearCacheDesc": "The transactions on the network will be scanned and your accounts will be recalculated.",
-      "clearCacheModal": "Are you sure?",
+      "clearCacheModal": "Вы уверены?",
       "clearCacheModalDesc": "A fresh and complete scan of transactions on the network will be done. Account histories will be rebuilt and balances will be recalculated.",
       "clearCacheButton": "Очистить",
       "exportLogs": "Экспортировать логи",
@@ -1766,7 +1766,7 @@
       }
     },
     "exchange": {
-      "title": "Buy / Sell",
+      "title": "Покупка / Продажа",
       "providers": {
         "title": "Choose a provider to buy crypto",
         "whatIsSwap": "What is Buy?",
@@ -1792,16 +1792,16 @@
       }
     },
     "swap": {
-      "title": "Swap",
+      "title": "Обмен",
       "paraswap": "Paraswap",
-      "selectDevice": "Select your device",
+      "selectDevice": "Выберите устройство",
       "broadcasting": "Broadcasting swap",
       "loadingFees": "Loading network fees...",
       "landing": {
-        "header": "Swap",
-        "title": "Welcome to Swap",
-        "whatIsSwap": "What is Swap?",
-        "disclaimer": "Exchange crypto directly from your Ledger device. This service is not available in some countries, including the US."
+        "header": "Обмен криптоактивов",
+        "title": "Добро пожаловать в Обмен криптоактивов",
+        "whatIsSwap": "Что такое обмен криптоактивов (Swap)?",
+        "disclaimer": "Криптовалюту можно менять непосредственно на устройстве Ledger. Эта услуга недоступна в США и некоторых других странах."
       },
       "providers": {
         "title": "Choose a provider to swap your crypto",
@@ -1823,64 +1823,64 @@
         }
       },
       "main": {
-        "header": "Swap"
+        "header": "Обмен криптоактивов"
       },
       "kyc": {
-        "disclaimer": "I acknowledge that my location data will be shared with third parties for compliance purposes."
+        "disclaimer": "Я даю согласие на передачу данных о моём местоположении третьим лицам в целях соблюдения комплаенса."
       },
       "notAvailable": {
-        "title": "Service temporarily unavailable, or not available in your country"
+        "title": "Услуга временно недоступна или недоступна в вашей стране"
       },
       "payoutModal": {
         "title": "Payout fees",
         "description": "Payout fees are not shown on the device and substracted from the amount.",
-        "cta": "Close"
+        "cta": "Закрыть"
       },
       "pendingOperation": {
-        "description": "Your Swap operation has been sent to the network for confirmation. It may take up to an hour before you receive your swapped crypto assets.",
-        "label": "Your Swap ID:",
-        "title": "Pending operation",
-        "disclaimer": "Please take note of your Swap ID number in case you’d need assistance from {{provider}} later.",
-        "cta": "See details"
+        "description": "Операция обмена отправлена в сеть для подтверждения. Может пройти около часа, прежде чем вы получите конвертированные криптоактивы.",
+        "label": "ID обмена:",
+        "title": "Операция в ожидании",
+        "disclaimer": "Сохраните ID обмена на случай, если потребуется помощь от {{provider}}.",
+        "cta": "Подробности"
       },
       "tradeMethod": {
-        "float": "Floating rate",
+        "float": "Плавающий курс",
         "floatUnavailable": "Floating rate not supported for this pair",
-        "fixed": "Fixed rate",
+        "fixed": "Фиксированный курс",
         "fixedUnavailable": "Fixed rate not supported for this pair",
-        "floatDesc": "Your amount could change depending on the market conditions.",
-        "fixedDesc": "Your amount will remain the same irrespective of the changes on the market. Fixed rate updates every 30 seconds",
+        "floatDesc": "Сумма может измениться в зависимости от состояния рынка.",
+        "fixedDesc": "Сумма останется неизменной, независимо от состояния рынка. Фиксированный курс обновляется каждые 30 сек",
         "by": "By",
-        "modalTitle": "Floating or fixed rate?"
+        "modalTitle": "Плавающий или фиксированный курс?"
       },
       "form": {
-        "validate": "Confirm Swap transaction",
-        "tab": "Exchange",
-        "button": "Continue",
-        "from": "From",
-        "to": "To",
-        "balance": "Balance <0>123</0>",
-        "fromAccount": "Select account",
-        "toAccount": "Select account",
+        "validate": "Подтвердить обмен",
+        "tab": "Обменять",
+        "button": "Продолжить",
+        "from": "Из",
+        "to": "Куда",
+        "balance": "Баланс <0>123</0>",
+        "fromAccount": "Выберите счёт",
+        "toAccount": "Выберите счёт",
         "amount": {
           "useMax": "Use max",
-          "available": "Total available"
+          "available": "Доступная сумма"
         },
         "noApp": {
-          "title": "{{appName}} app not installed",
+          "title": "Приложение {{appName}} не установлено",
           "desc": "Please go to Manager to install the {{appName}} app.",
-          "cta": "Go to Manager",
-          "close": "Close"
+          "cta": "Перейти в Диспетчер",
+          "close": "Закрыть"
         },
         "noAccounts": {
-          "title": "No {{ticker}} to swap",
-          "desc": "Your {{currencyName}} accounts have no balance to swap.",
-          "addAccountCta": "Add Account",
-          "cta": "Close"
+          "title": "Нет {{ticker}} для обмена",
+          "desc": "На счетах {{currencyName}} нет активов для обмена.",
+          "addAccountCta": "Добавить счёт",
+          "cta": "Закрыть"
         },
         "outdatedApp": {
           "title": "Доступно обновление приложения",
-          "desc": "You need to update the {{appName}} app.",
+          "desc": "Необходимо обновить приложение {{appName}}.",
           "cta": "Перейти в Диспетчер",
           "close": "Закрыть"
         },
@@ -1896,38 +1896,38 @@
           "method": "Курс",
           "fees": "Макс. комиссия",
           "disclaimer": {
-            "title": "Terms and conditions",
-            "desc": "By clicking “Accept”,  I acknowledge and accept that this service is exclusively governed by {{provider}}'s Terms & Conditions.",
-            "tos": "Terms & conditions",
-            "accept": "Accept",
-            "reject": "Close"
+            "title": "Условия и положения",
+            "desc": "Нажимая кнопку «Принять», я признаю и соглашаюсь с тем, что эта услуга регулируется исключительно Условиями и положениями {{provider}}.",
+            "tos": "Условия и положения",
+            "accept": "Принять",
+            "reject": "Закрыть"
           }
         }
       },
       "operationDetails": {
-        "swapId": "Swap ID",
-        "provider": "Provider",
-        "date": "Date",
-        "from": "From",
-        "fromAmount": "Amount sent",
-        "to": "To",
-        "toAmount": "Amount to receive",
+        "swapId": "ID обмена",
+        "provider": "Поставщик услуг",
+        "date": "Дата",
+        "from": "Из",
+        "fromAmount": "Отправленная сумма",
+        "to": "Куда",
+        "toAmount": "Сумма к получению",
         "statusTooltips": {
-          "expired": "Please contact the swap provider with your swap ID for more information.",
-          "refunded": "Please contact the swap provider with your swap ID for more information.",
-          "pending": "Please wait while the swap provider is processing the transaction.",
-          "onhold": "Please contact the swap provider with your swap ID to solve the situation.",
-          "finished": "Your swap was completed successfully."
+          "expired": "Для получения дополнительной информации обратитесь к поставщику услуг обмена и сообщите ID операции.",
+          "refunded": "Для получения дополнительной информации обратитесь к поставщику услуг обмена и сообщите ID операции.",
+          "pending": "Подождите, поставщик услуг обмена обрабатывает транзакцию.",
+          "onhold": "Чтобы решить эту проблему, обратитесь к поставщику услуг обмена и сообщите ID операции.",
+          "finished": "Обмен успешно произведён."
         }
       },
       "missingApp": {
-        "title": "Please install the Exchange app on your device",
-        "description": "Go to manager and install Exchange app to swap assets",
-        "button": "Go to Manager"
+        "title": "Установите приложение Exchange на устройство",
+        "description": "Чтобы установить приложение Exchange для обмена активов, перейдите в Диспетчер",
+        "button": "Перейти в Диспетчер"
       },
       "outdatedApp": {
-        "title": "Please update the Exchange app on your device",
-        "description": "Go to manager and update Exchange app to swap assets",
+        "title": "Обновите приложение Exchange на устройстве",
+        "description": "Чтобы обновить приложение Exchange для обмена активов, перейдите в Диспетчер",
         "button": "Go to Manager"
       },
       "emptyState": {
@@ -1951,140 +1951,140 @@
     "lending": {
       "title": "Lend crypto",
       "titleTransferTab": "Lend",
-      "actionTitle": "Lend",
+      "actionTitle": "Кредитование",
       "accountActions": {
         "approve": "Approve",
-        "supply": "Supply",
+        "supply": "Предоставить",
         "withdraw": "Withdraw"
       },
       "highFees": {
-        "title": "High fees on Ethereum",
-        "description": "Due to congestion on the Ethereum network, you may experience high fees when issuing transactions."
+        "title": "Высокие комиссии в сети Ethereum",
+        "description": "Из-за перегруженности сети Ethereum за обработку транзакций могут взиматься большие комиссии."
       },
       "account": {
-        "amountSupplied": "Amount deposited",
-        "amountSuppliedTooltip": "Amount lent to the network",
-        "currencyAPY": "Currency APY",
-        "currencyAPYTooltip": "Yearly return rate of a deposit that’s continuously compounded",
+        "amountSupplied": "Сумма депозита",
+        "amountSuppliedTooltip": "Сумма, кредитованная в сеть",
+        "currencyAPY": "Доходность валюты за год",
+        "currencyAPYTooltip": "Годовая процентная доходность депозита с постоянной капитализацией",
         "accruedInterests": "Interest balance",
-        "accruedInterestsTooltip": "Interest generated on your lent assets",
-        "interestEarned": "Interest earned",
-        "interestEarnedTooltip": "Interest you have earned after withdrawal",
-        "openLoans": "Open loans",
-        "closedLoans": "Closed loans"
+        "accruedInterestsTooltip": "Доход с вашего займа",
+        "interestEarned": "Начисленная прибыль",
+        "interestEarnedTooltip": "Полученный доход после вывода средств",
+        "openLoans": "Активные займы",
+        "closedLoans": "Закрытые займы"
       },
       "banners": {
-        "needApproval": "You need to approve this account before being able to lend assets.",
-        "fullyApproved": "You have fully approved this account. You can reduce the amount at a fee.",
+        "needApproval": "До займа активов необходимо утвердить этот счёт.",
+        "fullyApproved": "Этот счёт полностью утвержден. Сумму можно уменьшить за дополнительную плату.",
         "approvedCanReduce": "You have approved <0>{{value}}</0> on this account. You can reduce the amount at a fee.",
         "approvedButNotEnough": "You have approved <0>{{value}}</0> on this account.",
         "approving": "You can deposit assets once the account approval is confirmed.",
         "notEnough": "You must increase the limit approved on your account to lend."
       },
-      "howDoesLendingWork": "How does lending works",
+      "howDoesLendingWork": "Как работает кредитование",
       "dashboard": {
-        "tabTitle": "Dashboard",
-        "assetsTitle": "Assets to lend",
-        "accountsTitle": "Approved accounts",
-        "emptySateDescription": "You can lend assets directly from your Ethereum accounts and earn interest.",
-        "apy": "{{value}} APY",
+        "tabTitle": "Консоль",
+        "assetsTitle": "Активы для кредитования",
+        "accountsTitle": "Подтверждённые счета",
+        "emptySateDescription": "Вы можете давать активы в кредит непосредственно со счетов Ethereum и получать проценты.",
+        "apy": "Годовая доходность: {{value}}",
         "activeAccount": {
-          "account": "Account",
-          "amountSupplied": "Amount deposited",
-          "interestEarned": "Interest earned",
+          "account": "Счёт",
+          "amountSupplied": "Сумма депозита",
+          "interestEarned": "Начисленная прибыль",
           "status": "Account status",
-          "EARNING": "Earning",
-          "ENABLING": "Approving",
-          "INACTIVE": "Inactive",
-          "SUPPLYING": "Supplying",
-          "approve": "Approve",
-          "supply": "Supply",
-          "withdraw": "Withdraw",
-          "amountRedeemed": "Amount withdrawn",
-          "endDate": "End date"
+          "EARNING": "Зарабатывает",
+          "ENABLING": "На утверждении",
+          "INACTIVE": "Неактивный",
+          "SUPPLYING": "Предоставляется",
+          "approve": "Утвердить",
+          "supply": "Предоставить",
+          "withdraw": "Вывести",
+          "amountRedeemed": "Выведенная сумма",
+          "endDate": "Дате окончания"
         }
       },
       "closedLoans": {
-        "tabTitle": "Closed loans",
-        "description": "View all your withdrawn loans and the interest you have earned.",
-        "cta": "Lend asset"
+        "tabTitle": "Закрытые займы",
+        "description": "Просмотреть все выведенные суммы и начисленные проценты.",
+        "cta": "Кредитование активов"
       },
       "history": {
-        "tabTitle": "History",
-        "description": "View the history of all your loan transactions.",
-        "cta": "Lend asset"
+        "tabTitle": "История",
+        "description": "История всех ваших сделок по займам.",
+        "cta": "Кредитуйте в криптоактивах"
       },
       "terms": {
-        "label": "Lend crypto",
-        "title": "Lend assets on the Compound Protocol",
-        "description": "The Compound protocol allows you to lend and borrow assets on the Ethereum network. You can lend assets and earn interest directly from your Ledger acccount.",
+        "label": "Кредиты в криптовалюте",
+        "title": "Одалживайте активы в протоколе Compound",
+        "description": "Протокол Compound позволяет выдавать займы и брать кредиты в криптовалюте в сети Ethereum. Вы можете депонировать активы и зарабатывать доход прямо в вашем Ledger.",
         "switchLabel": "Я прочитал(-а) и соглашаюсь с <0><0>Условиями использования</0><0>."
       },
       "info": {
         "1": {
-          "label": "Step 1/3",
-          "title": "Approving an account allows the protocol to process future loans.",
-          "description": "You need to authorize the Compound smart contract to transfer up to a certain amount of assets to the protocol. Enabling an account gives permission to the protocol to process future loans."
+          "label": "Шаг 1/3",
+          "title": "Утвержденные счета позволяют протоколу обрабатывать будущие займы.",
+          "description": "Вам необходимо предоставить разрешение смарт-контракту Compound на перевод определённого количества активов через протокол. Подтверждение счёта даёт разрешение на обработку будущих займов."
         },
         "2": {
-          "label": "Step 2/3",
-          "title": "Deposit assets to earn interest.",
-          "description": "Once an account is approved, you can select the amount of assets you want to lend and issue a transaction to the protocol. Interest accrue immediately after the transaction is confirmed."
+          "label": "Шаг 2/3",
+          "title": "Внесите активы, чтобы получать доход.",
+          "description": "После утверждения счёта, вы можете указать количество активов, которые хотите дать взаймы и отправить транзакцию в протокол. Проценты будут начисляться сразу после подтверждения транзакции."
         },
         "3": {
-          "label": "Step 3/3",
-          "title": "Withdraw assets at any time.",
-          "description": "You can withdraw your assets and earned interest at any time, partially or entirely, directly from your Ledger account.",
+          "label": "Шаг 3/3",
+          "title": "Выводите активы в любое время.",
+          "description": "Вы можете вывести активы и заработанный доход в любое время, частично или полностью прямо со счёта Ledger.",
           "cta": "Lend now"
         },
-        "title": "Lend crypto"
+        "title": "Кредиты в криптовалюте"
       },
       "noTokenAccount": {
         "info": {
           "title": "You don’t have a {{ name }} account.",
-          "description": "In order to deposit funds and lend crypto you need a {{ name }} account. Please Receive funds on your Ethereum address."
+          "description": "Чтобы внести деньги и предоставить займ в криптовалюте, потребуется счёт {{ name }}. Получите средства на свой Ethereum-адрес."
         },
         "buttons": {
-          "receive": "Receive {{ name }}",
-          "buy": "Buy {{ name }}"
+          "receive": "Получить {{ name }}",
+          "buy": "Купить {{ name }}"
         }
       },
       "enable": {
         "info": {
-          "title": "This account is not approved",
-          "description": "You need to approve an account before being able to lend this asset.",
-          "cta": "Approve Account"
+          "title": "Этот счёт не утвержден",
+          "description": "Чтобы предоставить этот актив в кредит, необходимо утвердить счёт.",
+          "cta": "Утвердить счёт"
         },
         "stepperHeader": {
-          "selectAccount": "Choose an account",
-          "enable": "Approve",
-          "advanced": "Advanced",
-          "amount": "Enter amount",
-          "summary": "Summary",
-          "selectDevice": "Select Device",
-          "connectDevice": "Connect Device",
-          "stepRange": "Step {{currentStep}} of {{totalSteps}}"
+          "selectAccount": "Выберите счёт",
+          "enable": "Утвердить",
+          "advanced": "Дополнительно",
+          "amount": "Ввести сумму",
+          "summary": "Сводка",
+          "selectDevice": "Выбор устройства",
+          "connectDevice": "Подключение устройства",
+          "stepRange": "Шаг {{currentStep}}/{{totalSteps}}"
         },
         "selectAccount": {
-          "enabledAccountsAmount": "You have {{number}} account that approved {{amount}}",
-          "enabledAccountsAmount_plural": "You have {{number}} accounts that approved {{amount}}",
-          "enabledAccountsNoLimit": "You have {{number}} account that approved an unlimited amount of {{ currency }}",
-          "enabledAccountsNoLimit_plural": "You have {{number}} accounts that approved an unlimited amount of {{ currency }}",
-          "noEnabledAccounts": "You need to approve an account before you can lend."
+          "enabledAccountsAmount": "У вас {{number}} счёт с утверждённой суммой {{amount}}",
+          "enabledAccountsAmount_plural": "Количество счетов с утверждённой суммой {{amount}}: {{number}}",
+          "enabledAccountsNoLimit": "У вас {{number}} счёт с утверждённой неограниченной суммой в {{ currency }}",
+          "enabledAccountsNoLimit_plural": "Количество счетов с утверждённой неограниченной суммой в {{ currency }}: {{number}}",
+          "noEnabledAccounts": "Чтобы предоставить кредит, необходимо утвердить счёт."
         },
         "enable": {
           "summary": "<0>I grant the </0><1>{{contractName}}</1><0> smart contract access to my </0><1>{{accountName}}</1><0> account for a </0><1>{{amount}}</1><0> amount</0>",
-          "limit": "limited {{amount}}",
-          "noLimit": "no limit {{assetName}}",
-          "contractName": "Compound {{currencyName}}",
-          "advanced": "Advanced"
+          "limit": "Лимит: {{amount}}",
+          "noLimit": "{{assetName}} без лимита",
+          "contractName": "{{currencyName}} в Compound",
+          "advanced": "Дополнительно"
         },
         "advanced": {
-          "amountLabel": "Amount to approve",
-          "amountLabelTooltip": "This limits the amount available to the smart contract.",
-          "limit": "Limit",
-          "limited": "Limited",
-          "noLimit": "No Limit"
+          "amountLabel": "Сумма для утверждения",
+          "amountLabelTooltip": "Эта опция ограничивает сумму, доступную для смарт-контракта.",
+          "limit": "Лимит",
+          "limited": "С лимитом",
+          "noLimit": "Без лимита"
         },
         "amount": {
           "totalAvailable": "Total available"
@@ -2165,63 +2165,63 @@
     },
     "stepperHeader": {
       "selectAccount": "Account to debit",
-      "recipientAddress": "Recipient address",
-      "selectAmount": "Amount",
-      "summary": "Summary",
-      "selectDevice": "Select device",
-      "connectDevice": "Connect device",
-      "stepRange": "Step {{currentStep}} of {{totalSteps}}"
+      "recipientAddress": "Адрес получателя",
+      "selectAmount": "Сумма",
+      "summary": "Сводка",
+      "selectDevice": "Выбор устройства",
+      "connectDevice": "Подключение устройства",
+      "stepRange": "Шаг {{currentStep}}/{{totalSteps}}"
     },
     "recipient": {
-      "scan": "Scan QR code",
-      "enterAddress": "Enter address",
-      "input": "Enter address",
-      "verifyAddress": "Please verify the address matches the one shared by the recipient."
+      "scan": "Сканировать QR-код",
+      "enterAddress": "Введите адрес",
+      "input": "Ввести адрес",
+      "verifyAddress": "Убедитесь, что адрес совпадает с адресом, предоставленным получателем."
     },
     "amount": {
-      "available": "Total available",
+      "available": "Доступная сумма",
       "useMax": "Use max",
       "loadingNetwork": "Loading network fees...",
-      "noRateProvider": "Not available"
+      "noRateProvider": "Недоступно"
     },
     "summary": {
-      "subaccountsWarning": "You will need to refill this account with {{ currency }} in order to send the tokens of this account",
-      "tag": "Tag (Optional)",
-      "validateTag": "Validate tag",
-      "total": "Total",
-      "amount": "Amount",
-      "from": "From",
-      "to": "To",
+      "subaccountsWarning": "Чтобы отправлять токены с этого счета, вам нужно пополнить его за {{ currency }}",
+      "tag": "Тег (опционально)",
+      "validateTag": "Подтвердить тег",
+      "total": "Итого",
+      "amount": "Сумма",
+      "from": "Из",
+      "to": "Куда",
       "infoTotalTitle": "Total debit",
-      "infoTotalDesc": "Includes transaction amount and the selected network fees",
-      "gasLimit": "Gas limit",
-      "gasPrice": "Gas price",
-      "maxFees": "Max fees",
-      "validateGasLimit": "Validate gas limit",
-      "fees": "Fees",
-      "validateFees": "Validate Fees",
-      "customizeFees": "Customize Fees",
+      "infoTotalDesc": "Включает сумму транзакции и комиссию выбранной сети",
+      "gasLimit": "Лимит газа",
+      "gasPrice": "Цена газа",
+      "maxFees": "Макс. комиссия",
+      "validateGasLimit": "Подтвердить лимит газа",
+      "fees": "Комиссия",
+      "validateFees": "Подтвердить комиссию",
+      "customizeFees": "Указать комиссию",
       "memo": {
         "title": "Memo",
-        "type": "Memo type",
-        "value": "Memo value"
+        "type": "Тип примечания",
+        "value": "Содержание примечания"
       },
-      "validateMemo": "Validate memo"
+      "validateMemo": "Подтвердить примечание"
     },
     "validation": {
-      "message": "On your device, confirm the transaction to sign it securely.",
-      "sent": "Transaction sent",
-      "amount": "Amount",
-      "fees": "Fees",
-      "confirm": "Your account balance will be updated once the network confirms the transaction.",
+      "message": "Чтобы безопасно подписать транзакцию, подтвердите её на устройстве.",
+      "sent": "Транзакция отправлена",
+      "amount": "Сумма",
+      "fees": "Комиссия",
+      "confirm": "Баланс будет обновлён после подтверждения транзакции в сети.",
       "button": {
-        "details": "View details",
-        "retry": "Retry"
+        "details": "Подробнее",
+        "retry": "Повторить"
       }
     },
     "fees": {
-      "title": "Network fees",
-      "validate": "Confirm",
+      "title": "Комиссия сети",
+      "validate": "Подтвердить",
       "required": "Fees are required",
       "chooseGas": "Choose a gas price",
       "higherFaster": "Higher gas price means a faster confirmation.",
