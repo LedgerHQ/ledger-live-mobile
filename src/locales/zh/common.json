@@ -824,20 +824,20 @@
         "cta": "下一步"
       },
       "pinCode": {
-        "title": "识别码",
-        "desc": "Your PIN code is the first layer of security. It physically secures access to your Nano and your private keys. Your PIN code must be 4 to 8 digits long.",
+        "title": "PIN 识别密码",
+        "desc": "您的 PIN 个人识别密码是第一层安全保护措施。它能从物理层面保证您安全地访问自己的私钥和 Nano。您的 PIN 个人识别密码的长度必须为 4 至 8 位数。",
         "checkboxDesc": "I understand that I must choose my PIN code by myself and keep it private.",
-        "cta": "设置识别码"
+        "cta": "设置 PIN 识别密码"
       },
       "pinCodeSetup": {
         "bullets": {
           "0": {
-            "title": "选择识别码",
+            "title": "选择 PIN 识别密码",
             "label": "Press the left or right button to change digits. Press both buttons to validate a digit. Select <1></1> to confirm your PIN code. Select <2></2> to erase a digit."
           },
           "1": {
-            "title": "确认识别码",
-            "label": "再次输入您的识别码以完成确认。"
+            "title": "确认 PIN 识别密码",
+            "label": "再次输入您的 PIN 识别密码以确认。"
           }
         },
         "infoModal": {
@@ -859,10 +859,10 @@
               "label": "Never use an easy PIN code like 0000, 123456, or 55555555."
             },
             "5": {
-              "label": "Never share your PIN code with someone else. Not even with Ledger."
+              "label": "切勿将您的PIN识别密码告诉他人。即使是 Ledger 的相关人员也不能除外。"
             },
             "6": {
-              "label": "Never use a PIN code you did not choose yourself."
+              "label": "切勿使用非您本人选择的 PIN 识别密码。"
             },
             "7": {
               "label": "切勿将您的识别码保存在电脑或手机上。"
