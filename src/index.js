@@ -394,7 +394,7 @@ const DeepLinkingNavigator = ({ children }: { children: React$Node }) => {
 
 export default class Root extends Component<
   { importDataString?: string },
-  { appState: * },
+  { user: * },
 > {
   initTimeout: *;
 
@@ -407,9 +407,16 @@ export default class Root extends Component<
     throw e;
   }
 
-  onInitFinished = async () => {
-    const { user } = await getOrCreateUser();
-    setEnv("USER_ID", user.id);
+  componentDidMount() {
+    getOrCreateUser().then(({ user, created }) => {
+      setEnv("USER_ID", user.id);
+      this.setState({
+        user: { user, created },
+      });
+    });
+  }
+
+  onInitFinished = () => {
     this.initTimeout = setTimeout(() => SplashScreen.hide(), 300);
   };
 
@@ -425,11 +432,11 @@ export default class Root extends Component<
       <RebootProvider onRebootStart={this.onRebootStart}>
         <LedgerStoreProvider onInitFinished={this.onInitFinished}>
           {(ready, store, initialCountervalues) =>
-            ready ? (
+            ready && this.state.user ? (
               <>
                 <SetEnvsFromSettings />
                 <HookSentry />
-                <HookAnalytics store={store} />
+                <HookAnalytics store={store} user={this.state.user} />
                 <WalletConnectProvider>
                   <DeepLinkingNavigator>
                     <SafeAreaProvider>

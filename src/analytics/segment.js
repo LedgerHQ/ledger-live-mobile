@@ -61,7 +61,7 @@ let storeInstance; // is the redux store. it's also used as a flag to know if an
 
 const token = __DEV__ ? null : ANALYTICS_TOKEN;
 
-export const start = async (store: *) => {
+export const start = async (store: *, { user, created }: *) => {
   if (token) {
     await analytics.setup(token, {
       android: {
@@ -74,7 +74,6 @@ export const start = async (store: *) => {
     });
   }
 
-  const { user, created } = await getOrCreateUser();
   storeInstance = store;
   if (created) {
     if (ANALYTICS_LOGS) console.log("analytics:identify", user.id);
