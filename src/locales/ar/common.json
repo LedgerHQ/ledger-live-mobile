@@ -19,7 +19,7 @@
     "cryptoAsset": "Crypto asset",
     "skip": "تخطي",
     "noCryptoFound": "لم يتم العثور على أي أصول مشفرة",
-    "needHelp": "Do you need help?",
+    "needHelp": "هل تحتاج إلى مساعدة؟",
     "edit": "Edit",
     "editName": "Edit name",
     "close": "إغلاق",
@@ -42,14 +42,14 @@
     "bluetooth": "Bluetooth",
     "usb": "USB",
     "add": "أضف",
-    "slow": "slow",
-    "fast": "fast",
+    "slow": "بطىء",
+    "fast": "سريع",
     "token": "Token",
     "token_plural": "Tokens",
     "subaccount": "Subaccount",
     "subaccount_plural": "Subaccounts",
     "forgetDevice": "Remove device",
-    "help": "Help",
+    "help": "مساعدة",
     "saveLogs": "Save logs",
     "sync": {
       "ago": "Synchronized {{time}}"
@@ -103,7 +103,7 @@
       "description": "Please open the {{managerAppName}} app on your device."
     },
     "CantOpenDevice": {
-      "title": "Sorry, connection failed",
+      "title": "عذراً، فشل الاتصال",
       "description": "Your Ledger device must be unlocked and in range to use Bluetooth."
     },
     "CantScanQRCode": {
@@ -114,7 +114,7 @@
       "description": "Please make sure your {{productName}} is unlocked with Bluetooth enabled."
     },
     "ConnectManagerTimeout": {
-      "title": "Sorry, Manager connection failed",
+      "title": "عذرًا، فشل الاتصال بالمدير",
       "description": "Please make sure your {{productName}} is unlocked with Bluetooth enabled."
     },
     "ClaimRewardsFeesWarning": {
@@ -134,7 +134,7 @@
     },
     "CosmosBroadcastCodeInvalidSequence": {
       "title": "Invalid sequence",
-      "description": "Please try again."
+      "description": "يرجى إعادة المحاولة."
     },
     "CosmosBroadcastCodeUnauthorized": {
       "title": "Unauthorized signature",
@@ -216,24 +216,24 @@
       "description": "Please return to the Dashboard on your device."
     },
     "DeviceSocketFail": {
-      "title": "Sorry, connection failed",
-      "description": "Please try again."
+      "title": "عذراً، فشل الاتصال",
+      "description": "يرجى إعادة المحاولة."
     },
     "DeviceSocketNoBulkStatus": {
       "title": "The connection failed",
-      "description": "Please try again."
+      "description": "يرجى إعادة المحاولة."
     },
     "DeviceSocketNoHandler": {
-      "title": "Sorry, connection failed",
-      "description": "Please try again."
+      "title": "عذرًا، فشل الاتصال",
+      "description": "يرجى إعادة المحاولة."
     },
     "DisconnectedDevice": {
       "title": "Sorry, it looks like your device was disconnected",
-      "description": "Please reconnect and try again."
+      "description": "يرجى إعادة الاتصال و المحاولة مرة أخرى."
     },
     "DisconnectedDeviceDuringOperation": {
       "title": "Sorry, it looks like your device was disconnected",
-      "description": "Please reconnect and try again."
+      "description": "يرجى إعادة الاتصال و المحاولة مرة أخرى."
     },
     "ETHAddressNonEIP": {
       "title": "التحقق التلقائي غير متوفر: تحقق بعناية من العنوان.",
@@ -283,7 +283,7 @@
       "description": "الرجاء الاتصال بدعم ليدجر إذا كنت لا تستطيع استخدام جهازك."
     },
     "LedgerAPIError": {
-      "title": "Sorry, try again (API HTTP {{status}})",
+      "title": "عذراً، أعد المحاولة مرة أخرى (API HTTP {{status}})",
       "description": "Unsuccessful calls to the Ledger API server. Please try again."
     },
     "LedgerAPIErrorWithMessage": {
@@ -334,7 +334,7 @@
       "quit": "Quit Manager"
     },
     "ManagerUninstallBTCDep": {
-      "title": "Sorry, this app is needed",
+      "title": "عفوًا، هذا التطبيق مطلوب",
       "description": "Uninstall the Bitcoin or Ethereum app last."
     },
     "NetworkDown": {
@@ -371,11 +371,11 @@
     },
     "PasswordIncorrect": {
       "title": "Incorrect password",
-      "description": "Please try again."
+      "description": "يرجى إعادة المحاولة."
     },
     "PasswordsDontMatch": {
       "title": "Password does not match",
-      "description": "Please try again."
+      "description": "يرجى إعادة المحاولة."
     },
     "SelectExchangesLoadError": {
       "title": "Unable to load",
@@ -387,7 +387,7 @@
     },
     "TimeoutError": {
       "title": "Sorry, server took too long to respond",
-      "description": "Please try again."
+      "description": "يرجى إعادة المحاولة."
     },
     "TimeoutTagged": {
       "title": "Sorry, server took too long to respond ({{tag}})",
@@ -476,11 +476,11 @@
       "description": "You rejected the operation on the device."
     },
     "WebsocketConnectionError": {
-      "title": "Sorry, connection failed",
+      "title": "عذراً، فشل الاتصال",
       "description": "Please try again with a better network connection (websocket error)."
     },
     "WebsocketConnectionFailed": {
-      "title": "Sorry, connection failed",
+      "title": "عذراً، فشل الاتصال",
       "description": "Please try again with a better network connection (websocket failed)."
     },
     "WrongDeviceForAccount": {
@@ -604,7 +604,7 @@
       "denied": "Auth Security was not enabled because your phone failed to authenticate.",
       "title": "Authentication failed",
       "buttons": {
-        "tryAgain": "Try again",
+        "tryAgain": "أعد المحاولة",
         "reset": "Reset"
       }
     },
@@ -613,7 +613,7 @@
       "title": "Welcome back",
       "desc": "أدخل كلمة المرور الخاصة بك للمتابعة",
       "inputPlaceholder": "Type your password",
-      "login": "Log in",
+      "login": "تسجيل دخول",
       "forgotPassword": "I lost my password"
     },
     "addPassword": {
@@ -646,8 +646,8 @@
     "undo": "Undo",
     "banners": {
       "valentine": {
-        "title": "Valentine’s day",
-        "description": "Reduced fees on Buy and Sell"
+        "title": "عيد الحب",
+        "description": "تخفيض الرسوم على الشراء والبيع"
       },
       "academy": {
         "title": "Ledger Academy",
@@ -728,13 +728,13 @@
         "desc": "Let’s start and set up your device!"
       },
       "devicePairing": {
-        "title": "Already have a recovery phrase?",
+        "title": "لديك بالفعل عبارة استرداد؟",
         "label": "Device pairing",
         "subTitle": "Connect your Nano",
         "desc": "Your device is already set up? Connect it to the app!"
       },
       "desktopSync": {
-        "title": "Already have a recovery phrase?",
+        "title": "لديك بالفعل عبارة استرداد؟",
         "label": "Desktop sync",
         "subTitle": "Sync crypto from your desktop app",
         "desc": "Already got the desktop app? Sync it to manage your crypto from your smartphone!"
@@ -787,7 +787,7 @@
             "label": "Stay alone, and choose a safe and quiet environment."
           }
         },
-        "cta": "OK, I’m ready!",
+        "cta": "حسنًا، أنا مستعد!",
         "warning": {
           "title": "Please be careful",
           "desc": "Make sure you follow the instructions on this app at every step of the process.",
@@ -872,7 +872,7 @@
         "cta": "Next step"
       },
       "recoveryPhrase": {
-        "title": "Recovery phrase",
+        "title": "عبارة الاسترداد",
         "desc": "Your recovery phrase is a secret list of 24 words that backs up your private keys.",
         "desc_1": "Your Nano generates a unique recovery phrase. Ledger does not keep a copy of it.",
         "cta": "عبارة الاسترداد",
@@ -908,14 +908,14 @@
             "label_1": "Repeat the process for all words while carefully respecting the order and spelling. Press left on your Nano to check for any mistakes."
           },
           "2": {
-            "title": "Confirm your recovery phrase",
+            "title": "تأكيد عبارة الاسترداد الخاصة بك",
             "label": "Scroll through the words until you find Word #1 by pressing the right button. Validate by pressing both buttons."
           },
           "3": {
             "title": "Repeat for all words!"
           }
         },
-        "cta": "Confirm recovery phrase",
+        "cta": "تأكيد عبارة الاسترداد",
         "nextStep": "الخطوة التالية"
       },
       "hideRecoveryPhrase": {
@@ -963,7 +963,7 @@
         "title": "Restore from recovery phrase",
         "desc": "Restore your Nano from your recovery phrase to restore, replace or back up your Ledger hardware wallet.",
         "desc_1": "Your Nano will restore your private keys and you will be able to access and manage your crypto.",
-        "cta": "OK, I’m ready!",
+        "cta": "حسنًا، أنا مستعد!",
         "warning": {
           "title": "We recommend Ledger recovery phrases only",
           "desc": "Ledger cannot guarantee the security of external recovery phrases. We recommend setting up your Nano as a new device if your recovery phrase was not generated by a Ledger.",
@@ -998,7 +998,7 @@
         }
       },
       "existingRecoveryPhrase": {
-        "title": "Enter your recovery phrase",
+        "title": "أدخل عبارة الاسترداد الخاصة بك",
         "paragraph1": "Your recovery phrase is the secret list of words that you backed up when you first set up your wallet.",
         "paragraph2": "Ledger does not keep a copy of your recovery phrase.",
         "checkboxDesc": "I understand that if I lose my recovery phrase, I will not be able to access my crypto in case I lose access to my Nano.",
@@ -1091,7 +1091,7 @@
     "stepImportAccounts": {
       "title": "Sync crypto from desktop",
       "desc": "If you already have your crypto set up in the Ledger desktop app, you can sync them to manage them from your phone.",
-      "cta": "I’m ready to scan",
+      "cta": "أنا مستعد لإجراء المسح الضوئي",
       "bullets": {
         "0": {
           "label": "On the Desktop app, select <1>Settings > Accounts > Account export</1>."
@@ -1131,7 +1131,7 @@
       "modal": {
         "step1": "Store your 24-word recovery phrase in a safe place, out of sight.",
         "step2": "Make sure you are the only person to have the recovery phrase.",
-        "step3": "Ledger does not save your recovery phrase.",
+        "step3": "لا يحفظ ليدجر عبارة الاسترداد الخاصة بك.",
         "step4": "Never use a device with a recovery phrase or PIN already setup."
       }
     },
@@ -1542,23 +1542,23 @@
   "help": {
     "gettingStarted": {
       "title": "Getting started",
-      "desc": "Start here"
+      "desc": "ابدأ هنا"
     },
     "helpCenter": {
-      "title": "Ledger Support",
-      "desc": "Get help"
+      "title": "دعم ليدجر",
+      "desc": "الحصول على المساعدة"
     },
     "ledgerAcademy": {
-      "title": "Ledger Academy",
+      "title": "أكاديمية ليدجر",
       "desc": "Learn about crypto"
     },
     "facebook": {
-      "title": "Facebook",
-      "desc": "Like our page"
+      "title": "فيس بوك",
+      "desc": "ضع إعجاب على صفحتنا"
     },
     "twitter": {
-      "title": "Twitter",
-      "desc": "Follow us"
+      "title": "تويتر",
+      "desc": "تابعنا"
     },
     "github": {
       "title": "Github",
@@ -1668,16 +1668,16 @@
       }
     },
     "help": {
-      "title": "Help",
-      "header": "Help",
-      "desc": "Learn more about Ledger Live or how to get help.",
-      "support": "Ledger Support",
+      "title": "مساعدة",
+      "header": "مساعدة",
+      "desc": "تعرف أكثر على ليدجر لايف أو كيفية الحصول على المساعدة.",
+      "support": "دعم ليدجر",
       "supportDesc": "If you have a problem, get help using Ledger Live with your hardware wallet.",
       "configureDevice": "Set up a device",
       "configureDeviceDesc": "Set up as a new device or restore an existing device. Accounts and settings are preserved.",
       "clearCache": "Clear cache",
       "clearCacheDesc": "The transactions on the network will be scanned and your accounts will be recalculated.",
-      "clearCacheModal": "Are you sure?",
+      "clearCacheModal": "هل أنت متأكد؟",
       "clearCacheModalDesc": "A fresh and complete scan of transactions on the network will be done. Account histories will be rebuilt and balances will be recalculated.",
       "clearCacheButton": "Clear",
       "exportLogs": "Export logs",
@@ -1756,7 +1756,7 @@
       "addressCopied": "Address copied!",
       "notSynced": {
         "text": "Synchronizing",
-        "desc": "This may take a moment if you have many transactions or if you have a slow internet connection."
+        "desc": "قد يستغرق هذا بعض الوقت إذا كان لديك العديد من المعاملات أو إذا كان اتصالك بالإنترنت بطيئاً."
       },
       "readOnly": {
         "title": "Receive",
