@@ -12,7 +12,7 @@ import { ScreenName } from "../../../const";
 import styles from "../../../navigation/styles";
 import LText from "../../../components/LText";
 
-import Swap from "./Swap";
+import Form from "./Form";
 import History from "./History";
 
 type TabLabelProps = {
@@ -23,6 +23,8 @@ type TabLabelProps = {
 type RouteParams = {
   defaultAccount: ?AccountLike,
   defaultParentAccount: ?Account,
+  providers: any,
+  provider: string,
 };
 
 const SwapFormOrHistory = ({ route }: { route: { params: RouteParams } }) => {
@@ -50,7 +52,7 @@ const SwapFormOrHistory = ({ route }: { route: { params: RouteParams } }) => {
           ),
         }}
       >
-        {_props => <Swap {..._props} {...routeParams} />}
+        {_props => <Form {..._props} {...routeParams} />}
       </Tab.Screen>
       <Tab.Screen
         name={ScreenName.SwapHistory}

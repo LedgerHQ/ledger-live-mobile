@@ -1829,6 +1829,13 @@
             "Ethereum & ERC20 tokens",
             "Decentralized & Trustless"
           ]
+        },
+        "wyre": {
+          "bullets": [
+            "US-only (soon Europe, Africa and Asia)",
+            "Multi coins and tokens",
+            "Centralized"
+          ]
         }
       },
       "main": {
@@ -1843,6 +1850,12 @@
             "cta": "Continue",
             "title": "KYC submitted for approval",
             "subtitle": "Your KYC has been submitted and is pending approval.",
+            "link": "Learn more about KYC"
+          },
+          "approved": {
+            "cta": "Continue",
+            "title": "KYC approved!",
+            "subtitle": "Your KYC has been submitted and has been approved.",
             "link": "Learn more about KYC"
           },
           "closed": {

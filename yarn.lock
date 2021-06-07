@@ -1613,10 +1613,10 @@
     "@ledgerhq/errors" "^5.50.0"
     events "^3.3.0"
 
-"@ledgerhq/live-common@19.11.2":
-  version "19.11.2"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-19.11.2.tgz#0ce2bb5f011de0b8ba82af8ce59acb2e581819ff"
-  integrity sha512-8Vt5/rRSW80mK2Yv70pB4Lzf6BM5oo9aY18sIsjVnIga3bW/1CqKv75kH4Y6U17hlgaOEqd4bWyBBRHTr5FyCg==
+"@ledgerhq/live-common@19.11.4-wyre.0":
+  version "19.11.4-wyre.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-19.11.4-wyre.0.tgz#c2aa74ca3fd84d78bb61d8316e6c12691d4a25d0"
+  integrity sha512-bRe37JOVCJSpKaXy2h9lJ2qlhzXOQLNbFbFnl+JwErWLEJ03Ii6WPjL7lpOAWXSDvIhXd1z9mwdFpiwuuSIrdQ==
   dependencies:
     "@ledgerhq/compressjs" "1.3.2"
     "@ledgerhq/cryptoassets" "5"

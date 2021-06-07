@@ -1,143 +1,114 @@
 // @flow
 
-import React, { useState, useCallback } from "react";
-import { StyleSheet, View, ScrollView } from "react-native";
-import { Trans, useTranslation } from "react-i18next";
+import React, { useCallback, useState, useEffect } from "react";
+import { StyleSheet, View, ActivityIndicator } from "react-native";
+import { useSelector, useDispatch } from "react-redux";
 import SafeAreaView from "react-native-safe-area-view";
-import { useNavigation } from "@react-navigation/native";
+import { useTheme, useNavigation } from "@react-navigation/native";
+import { getProviders } from "@ledgerhq/live-common/lib/exchange/swap";
+import { getSwapSelectableCurrencies } from "@ledgerhq/live-common/lib/exchange/swap/logic";
+import Config from "react-native-config";
 
-import type { AccountLike, Account } from "@ledgerhq/live-common/lib/types";
-
-import { ScreenName } from "../../const";
-import Button from "../../components/Button";
-import LText from "../../components/LText";
-// import IconWyre from "../../../icons/providers/Wyre";
-import IconChangelly from "../../icons/providers/Changelly";
-import IconParaswap from "../../icons/providers/Paraswap";
-
-import Item from "./ProviderListItem";
+import {
+  swapKYCSelector,
+  swapHasAcceptedIPSharingSelector,
+} from "../../reducers/settings";
+import { setSwapSelectableCurrencies } from "../../actions/settings";
 import useManifests from "./manifests";
+import Landing from "./FormOrHistory/Landing";
+import Providers from "./Providers";
+import { ScreenName } from "../../const";
 
-type RouteParams = {
-  defaultAccount: ?AccountLike,
-  defaultParentAccount: ?Account,
-};
+const initialSwapProviders = ["paraswap"]; // Nb manifest?
 
-const PROVIDERS = [
-  // {
-  //   provider: "wyre",
-  //   name: "Wyre",
-  //   isDapp: false,
-  //   Icon: IconWyre,
-  //   kycRequired: true,
-  // },
-  {
-    provider: "paraswap",
-    name: "ParaSwap",
-    isDapp: true,
-    Icon: IconParaswap,
-    kycRequired: false,
-  },
-  {
-    provider: "changelly",
-    name: "Changelly",
-    isDapp: false,
-    Icon: IconChangelly,
-    kycRequired: false,
-  },
-];
-
-if (__DEV__) {
-  PROVIDERS.push({
-    provider: "debug",
-    name: "Debugger",
-    isDapp: true,
-    kycRequired: false,
-    Icon: null,
-  });
-}
-
-const SwapProviders = ({ route }: { route: { params: RouteParams } }) => {
-  const { params: routeParams } = route;
-  const [selectedItem, setSelectedItem] = useState();
-  const { t } = useTranslation();
-  const navigation = useNavigation();
+const SwapEntrypoint = () => {
+  const { colors } = useTheme();
+  const dispatch = useDispatch();
   const manifests = useManifests();
+  const swapKYC = useSelector(swapKYCSelector);
+  const hasAcceptedIPSharing = useSelector(swapHasAcceptedIPSharingSelector);
+  const { navigate } = useNavigation();
+
+  const [providers, setProviders] = useState<any>();
+  const [enabledProviders, setEnabledProviders] = useState<any>();
+
+  useEffect(() => {
+    if (hasAcceptedIPSharing) {
+      getProviders().then((providers: any) => {
+        // TODO consider simplifying this before merge.
+        // FIXME I can't make flow happy here with the provider type
+        dispatch(
+          setSwapSelectableCurrencies(getSwapSelectableCurrencies(providers)),
+        );
+        let enabledProviders = [...initialSwapProviders];
+        const disabledProviders = Config.SWAP_DISABLED_PROVIDERS || "";
+        providers.forEach(({ provider }) => {
+          if (!disabledProviders.includes(provider))
+            enabledProviders.push(provider);
+        });
+        if (
+          enabledProviders.includes("wyre") &&
+          enabledProviders.includes("changelly")
+        ) {
+          enabledProviders = enabledProviders.filter(p => p !== "wyre");
+        }
+        if (__DEV__ && Config.DEBUG_PLATFORM) enabledProviders.push("debug");
+
+        setEnabledProviders(enabledProviders);
+        setProviders(providers);
+      });
+    }
+  }, [dispatch, hasAcceptedIPSharing, providers]);
 
   const onContinue = useCallback(
-    (provider: string) => {
-      const conf = PROVIDERS.find(p => p.provider === provider);
-      if (!conf) return;
-
-      if (conf.isDapp) {
-        const manifest = manifests[conf.provider];
-        navigation.navigate(ScreenName.SwapDapp, { manifest });
+    (provider: string, isDapp: boolean) => {
+      const showWyreKYC =
+        provider === "wyre" && swapKYC?.wyre?.status !== "approved";
+      if (showWyreKYC) {
+        navigate(ScreenName.SwapKYC, { provider });
+      } else if (isDapp && manifests[provider]) {
+        const manifest = manifests[provider];
+        navigate(ScreenName.SwapDapp, { manifest });
       } else {
-        // TODO: do the Wyre provider logic
-        navigation.navigate(ScreenName.SwapFormOrHistory, routeParams);
+        // FIXME we are losing the defaultCurrency/app?
+        navigate(ScreenName.SwapFormOrHistory, { providers, provider });
       }
     },
-    [routeParams, navigation],
+    [manifests, navigate, providers, swapKYC],
   );
 
   return (
-    <SafeAreaView style={styles.wrapper}>
-      <ScrollView style={styles.providerList}>
-        <LText style={styles.title} semiBold secondary>
-          <Trans i18nKey={"transfer.swap.providers.title"} />
-        </LText>
-        {PROVIDERS.map(p => {
-          const bullets = t(`transfer.swap.providers.${p.provider}.bullets`, {
-            joinArrays: ";",
-            defaultValue: "",
-          })
-            .split(";")
-            .filter(Boolean);
-
-          return (
-            <Item
-              key={p.provider}
-              id={p.provider}
-              onSelect={setSelectedItem}
-              selected={selectedItem}
-              Icon={p.Icon}
-              title={p.name}
-              bullets={bullets}
-              kyc={p.kycRequired}
-            />
-          );
-        })}
-      </ScrollView>
-      <View style={styles.footer}>
-        <Button
-          type={"primary"}
-          title={t("transfer.swap.providers.cta")}
-          onPress={() => {
-            selectedItem && onContinue(selectedItem);
-          }}
-          disabled={!selectedItem}
-        />
-      </View>
+    <SafeAreaView style={[styles.root, { backgroundColor: colors.background }]}>
+      {!hasAcceptedIPSharing ? (
+        <Landing />
+      ) : !enabledProviders ? (
+        <View style={styles.loading}>
+          <ActivityIndicator />
+        </View>
+      ) : (
+        <Providers onContinue={onContinue} providers={enabledProviders} />
+      )}
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  wrapper: {
+  root: {
     flex: 1,
   },
-  title: {
-    fontSize: 18,
-    lineHeight: 22,
-    textAlign: "center",
-    marginVertical: 24,
+  loading: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
   },
-  providerList: {
-    paddingHorizontal: 16,
+  selectDevice: {
+    fontSize: 15,
+    lineHeight: 20,
+    marginBottom: 20,
   },
-  footer: {
-    padding: 16,
+  debugText: {
+    marginBottom: 10,
   },
 });
 
-export default SwapProviders;
+export default SwapEntrypoint;
