@@ -197,7 +197,7 @@
       "description": "不支持该应用程序的验证。"
     },
     "DeviceGenuineSocketEarlyClose": {
-      "title": "抱歉，请重试 (正版-关闭)",
+      "title": "抱歉，请重试 (genuine-close)",
       "description": null
     },
     "DeviceHalted": {
@@ -865,7 +865,7 @@
               "label": "Never use a PIN code you did not choose yourself."
             },
             "7": {
-              "label": "Never store your PIN code on a computer or phone."
+              "label": "切勿将您的识别码保存在电脑或手机上。"
             }
           }
         },
@@ -988,8 +988,8 @@
             "label": "Learn how to interact with your device by reading the on-screen instructions."
           },
           "2": {
-            "title": "Select “Restore from recovery phrase”",
-            "label": "Press both buttons simultaneously to validate the selection."
+            "title": "选择“通过恢复短语进行还原”",
+            "label": "同时按下两个按钮以激活该选项。"
           },
           "3": {
             "title": "按指示操作",
@@ -1000,7 +1000,7 @@
       "existingRecoveryPhrase": {
         "title": "输入您的恢复短语",
         "paragraph1": "Your recovery phrase is the secret list of words that you backed up when you first set up your wallet.",
-        "paragraph2": "Ledger does not keep a copy of your recovery phrase.",
+        "paragraph2": "Ledger 不会保存您恢复短语的副本。",
         "checkboxDesc": "I understand that if I lose my recovery phrase, I will not be able to access my crypto in case I lose access to my Nano.",
         "bullets": {
           "0": {
@@ -1043,7 +1043,7 @@
       },
       "infoModal": {
         "title": "在哪里可以找到我的设备名？",
-        "desc": "On your device, select Settings > General > Device name.",
+        "desc": "在您的设备上，选择设置 > 通用 > 设备名。",
         "title_1": "如何设置蓝牙连接？",
         "title_2": "如何在没有蓝牙的情况下使用我的 Nano X？",
         "desc_1": "Use an <1>OTG-cable</1> to connect your Ledger Nano X to your Android smartphone (iOS not supported). Manage your crypto with Ledger Live mobile or any other compatible (web) app.",
@@ -1120,7 +1120,7 @@
       "step4suffix2": "删除末位数字。",
       "modal": {
         "step1": "Always choose <1><1>your own</1></1> PIN",
-        "step2": "Use 8 digits for greater security",
+        "step2": "使用 8 位数以确保更高的安全性",
         "step3": "Never use a device with a PIN or recovery phrase already setup"
       }
     },
@@ -1137,7 +1137,7 @@
     },
     "stepPassword": {
       "desc": "Set a password to protect Ledger Live data on your phone.",
-      "descConfigured": "Password lock enabled successfully",
+      "descConfigured": "成功启用密码锁",
       "setPassword": "设置密码",
       "modal": {
         "step1": "妥善保管您的密码。切勿告诉他人。",
@@ -1515,8 +1515,8 @@
       "upToDate": "已同步",
       "error": "错误",
       "queued": "等待",
-      "showTokens": "Show {{length}} token",
-      "showTokens_plural": "Show {{length}} tokens",
+      "showTokens": "显示 {{length}} 一种代币",
+      "showTokens_plural": "显示 {{length}} 多种代币",
       "showSubAccounts": "Show {{length}} subaccount",
       "showSubAccounts_plural": "Show {{length}} subaccounts",
       "hideTokens": "隐藏一种代币",
@@ -1592,7 +1592,7 @@
       "counterValueDesc": "Choose the currency for balances and operations.",
       "exchange": "兑换率提供商",
       "exchangeDesc": "Set provider of exchange rate from Bitcoin to {{fiat}}",
-      "stock": "Regional market indicator",
+      "stock": "区域性市场指标",
       "stockDesc": "Choose Western to display market increases in green or Eastern to display them in red.",
       "reportErrors": "漏洞报告",
       "reportErrorsDesc": "Automatically send reports to help Ledger improve its products.",
@@ -1649,7 +1649,7 @@
       "cryptoAssets": {
         "header": "加密资产",
         "title": "加密资产",
-        "desc": "Select a crypto assets to edit its settings."
+        "desc": "选择一种加密资产以编辑其设置。"
       }
     },
     "about": {
@@ -1748,19 +1748,19 @@
       "verifySkipped": "Your receive address was not confirmed on your Ledger device. Please verify your {{accountType}} address to stay secure.",
       "verifyPending": "Please verify that the {{currencyName}} address displayed on your device exactly matches the one displayed on your phone.",
       "verified": "Address confirmed. Check again if you copied or scanned it.",
-      "verifyAgain": "Check again",
-      "noAccount": "No account found",
-      "address": "Address for account",
-      "copyAddress": "Copy address",
-      "shareAddress": "Share address",
-      "addressCopied": "Address copied!",
+      "verifyAgain": "再次检查",
+      "noAccount": "未能找到账户",
+      "address": "账户地址",
+      "copyAddress": "复制地址",
+      "shareAddress": "分享地址",
+      "addressCopied": "地址已复制！",
       "notSynced": {
         "text": "正在同步",
-        "desc": "This may take a moment if you have many transactions or if you have a slow internet connection."
+        "desc": "如果您有多笔交易或者您的网速偏慢，可能需要多花费一些时间。"
       },
       "readOnly": {
-        "title": "Receive",
-        "text": "Please be careful",
+        "title": "接收",
+        "text": "请多加小心",
         "desc": "You are about to view an address which was not verified. Verify addresses on your device to stay secure.",
         "verify": "The address of {{accountType}} was not verified. Verify addresses on your device to stay secure."
       }
@@ -1793,14 +1793,14 @@
     },
     "swap": {
       "title": "Swap",
-      "paraswap": "Paraswap",
-      "selectDevice": "Select your device",
+      "paraswap": "ParaSwap",
+      "selectDevice": "选择您的设备",
       "broadcasting": "Broadcasting swap",
       "loadingFees": "Loading network fees...",
       "landing": {
         "header": "Swap",
-        "title": "Welcome to Swap",
-        "whatIsSwap": "What is Swap?",
+        "title": "欢迎使用 Swap 兑换",
+        "whatIsSwap": "什么是 Swap 兑换？",
         "disclaimer": "Exchange crypto directly from your Ledger device. This service is not available in some countries, including the US."
       },
       "providers": {
@@ -1810,20 +1810,20 @@
         "changelly": {
           "bullets": [
             "比特币、以太币、泰达币以及50余个其他币种",
-            "Multi-currency",
+            "多币种",
             "中心化的"
           ]
         },
         "paraswap": {
           "bullets": [
             "Connect to 30+ DEXs (Uniswap, SushiSwap,...)",
-            "Ethereum & ERC20 tokens",
-            "Decentralized & Trustless"
+            "以太坊 和 ERC20 代币",
+            "去中心化与无需信任"
           ]
         }
       },
       "main": {
-        "header": "Swap"
+        "header": "Swap 兑换"
       },
       "kyc": {
         "disclaimer": "I acknowledge that my location data will be shared with third parties for compliance purposes."
@@ -1832,34 +1832,34 @@
         "title": "Service temporarily unavailable, or not available in your country"
       },
       "payoutModal": {
-        "title": "Payout fees",
+        "title": "支出费用",
         "description": "Payout fees are not shown on the device and substracted from the amount.",
         "cta": "关闭"
       },
       "pendingOperation": {
         "description": "Your Swap operation has been sent to the network for confirmation. It may take up to an hour before you receive your swapped crypto assets.",
-        "label": "Your Swap ID:",
-        "title": "Pending operation",
+        "label": "您的 Swap ID：",
+        "title": "待处理操作",
         "disclaimer": "Please take note of your Swap ID number in case you’d need assistance from {{provider}} later.",
         "cta": "查看详情"
       },
       "tradeMethod": {
-        "float": "Floating rate",
+        "float": "浮动兑换率",
         "floatUnavailable": "Floating rate not supported for this pair",
-        "fixed": "Fixed rate",
-        "fixedUnavailable": "Fixed rate not supported for this pair",
-        "floatDesc": "Your amount could change depending on the market conditions.",
-        "fixedDesc": "Your amount will remain the same irrespective of the changes on the market. Fixed rate updates every 30 seconds",
+        "fixed": "固定兑换率",
+        "fixedUnavailable": "两者的兑换不支持固定兑换率",
+        "floatDesc": "您的数额会根据市场条件而变动。",
+        "fixedDesc": "您的金额会保持不变无论市场行情如何变化。固定兑换率每 30 秒更新一次",
         "by": "根据",
         "modalTitle": "浮动或固定费率？"
       },
       "form": {
-        "validate": "Confirm Swap transaction",
-        "tab": "Exchange",
+        "validate": "确认兑换交易",
+        "tab": "兑换",
         "button": "继续",
-        "from": "From",
-        "to": "To",
-        "balance": "Balance <0>123</0>",
+        "from": "从",
+        "to": "到",
+        "balance": "余额 <0>123</0>",
         "fromAccount": "选择账户",
         "toAccount": "选择账户",
         "amount": {
@@ -1873,44 +1873,44 @@
           "close": "关闭"
         },
         "noAccounts": {
-          "title": "No {{ticker}} to swap",
+          "title": "没有可兑换的 {{ticker}}",
           "desc": "Your {{currencyName}} accounts have no balance to swap.",
-          "addAccountCta": "Add Account",
+          "addAccountCta": "添加账户",
           "cta": "关闭"
         },
         "outdatedApp": {
-          "title": "App update available",
-          "desc": "You need to update the {{appName}} app.",
-          "cta": "Go to Manager",
+          "title": "应用程序更新可用",
+          "desc": "您需要更新 {{appName}} 应用程序。",
+          "cta": "前往管理器",
           "close": "关闭"
         },
         "summary": {
-          "from": "From",
-          "to": "To",
-          "send": "Send",
-          "payoutNetworkFees": "Payout fees",
+          "from": "从",
+          "to": "到",
+          "send": "发送",
+          "payoutNetworkFees": "支出费用",
           "payoutNetworkFeesTooltip": "This amount will not be shown on your device",
           "receive": "数额",
           "receiveFloat": "Amount to receive before service fees",
-          "provider": "Provider",
+          "provider": "提供方",
           "method": "费率",
-          "fees": "Max fees",
+          "fees": "最大费用",
           "disclaimer": {
-            "title": "Terms and conditions",
+            "title": "条款和条件",
             "desc": "By clicking “Accept”,  I acknowledge and accept that this service is exclusively governed by {{provider}}'s Terms & Conditions.",
-            "tos": "Terms & conditions",
-            "accept": "Accept",
+            "tos": "条款和条件",
+            "accept": "接受",
             "reject": "关闭"
           }
         }
       },
       "operationDetails": {
-        "swapId": "Swap ID",
-        "provider": "Provider",
-        "date": "Date",
-        "from": "From",
+        "swapId": "Swap 兑换 ID",
+        "provider": "提供方",
+        "date": "日期",
+        "from": "从",
         "fromAmount": "已发送数额",
-        "to": "To",
+        "to": "到",
         "toAmount": "待收数额",
         "statusTooltips": {
           "expired": "Please contact the swap provider with your swap ID for more information.",
@@ -1921,17 +1921,17 @@
         }
       },
       "missingApp": {
-        "title": "Please install the Exchange app on your device",
+        "title": "请在您的设备上安装 Exchange 应用程序",
         "description": "Go to manager and install Exchange app to swap assets",
         "button": "Go to Manager"
       },
       "outdatedApp": {
         "title": "Please update the Exchange app on your device",
-        "description": "Go to manager and update Exchange app to swap assets",
-        "button": "Go to Manager"
+        "description": "前往管理器并更新 Exchange 应用程序以兑换资产",
+        "button": "前往管理器"
       },
       "emptyState": {
-        "title": "No {{currency}} account",
+        "title": "没有 {{currency}} 账户",
         "description": "You need to add an account before swapping {{currency}}",
         "CTAButton": "添加账户"
       },
@@ -1989,19 +1989,19 @@
         "emptySateDescription": "You can lend assets directly from your Ethereum accounts and earn interest.",
         "apy": "{{value}} APY",
         "activeAccount": {
-          "account": "Account",
-          "amountSupplied": "Amount deposited",
-          "interestEarned": "Interest earned",
-          "status": "Account status",
-          "EARNING": "Earning",
-          "ENABLING": "Approving",
-          "INACTIVE": "Inactive",
-          "SUPPLYING": "Supplying",
-          "approve": "Approve",
-          "supply": "Supply",
+          "account": "账户",
+          "amountSupplied": "已存数额",
+          "interestEarned": "已赚取的利息",
+          "status": "账户状态",
+          "EARNING": "收益",
+          "ENABLING": "正在批准",
+          "INACTIVE": "不活跃",
+          "SUPPLYING": "正在供应",
+          "approve": "批准",
+          "supply": "供给",
           "withdraw": "提取",
-          "amountRedeemed": "Amount withdrawn",
-          "endDate": "End date"
+          "amountRedeemed": "已提取数额",
+          "endDate": "结束日期"
         }
       },
       "closedLoans": {
@@ -2018,7 +2018,7 @@
         "label": "Lend crypto",
         "title": "按照复利协议贷出资产",
         "description": "复利协议允许您在以太坊网络上贷出或借入资产。您可以直接通过您的 Ledger 账户贷出资产并赚取利息。",
-        "switchLabel": "I have read and agree with the <0><0>Terms of Use</0></0>."
+        "switchLabel": "我已阅读并同意该 <0><0>使用条款</0></0>。"
       },
       "info": {
         "1": {
@@ -2028,12 +2028,12 @@
         },
         "2": {
           "label": "步骤 2/3",
-          "title": "Deposit assets to earn interest.",
+          "title": "存入资产以赚取利息。",
           "description": "Once an account is approved, you can select the amount of assets you want to lend and issue a transaction to the protocol. Interest accrue immediately after the transaction is confirmed."
         },
         "3": {
           "label": "步骤 3/3",
-          "title": "Withdraw assets at any time.",
+          "title": "随时提取资产。",
           "description": "You can withdraw your assets and earned interest at any time, partially or entirely, directly from your Ledger account.",
           "cta": "Lend now"
         },
@@ -2045,24 +2045,24 @@
           "description": "In order to deposit funds and lend crypto you need a {{ name }} account. Please Receive funds on your Ethereum address."
         },
         "buttons": {
-          "receive": "Receive {{ name }}",
+          "receive": "接收 {{ name }}",
           "buy": "Buy {{ name }}"
         }
       },
       "enable": {
         "info": {
-          "title": "This account is not approved",
+          "title": "该账户未经批准",
           "description": "You need to approve an account before being able to lend this asset.",
-          "cta": "Approve Account"
+          "cta": "批准账户"
         },
         "stepperHeader": {
-          "selectAccount": "Choose an account",
-          "enable": "Approve",
-          "advanced": "Advanced",
-          "amount": "Enter amount",
+          "selectAccount": "选择一个账户",
+          "enable": "批准",
+          "advanced": "高级",
+          "amount": "输入数额",
           "summary": "概要",
-          "selectDevice": "Select Device",
-          "connectDevice": "Connect Device",
+          "selectDevice": "选择设备",
+          "connectDevice": "连接设备",
           "stepRange": "Step {{currentStep}} of {{totalSteps}}"
         },
         "selectAccount": {
@@ -2074,20 +2074,20 @@
         },
         "enable": {
           "summary": "<0>I grant the </0><1>{{contractName}}</1><0> smart contract access to my </0><1>{{accountName}}</1><0> account for a </0><1>{{amount}}</1><0> amount</0>",
-          "limit": "limited {{amount}}",
-          "noLimit": "no limit {{assetName}}",
+          "limit": "已限额 {{amount}}",
+          "noLimit": "无限额 {{assetName}}",
           "contractName": "Compound {{currencyName}}",
-          "advanced": "Advanced"
+          "advanced": "高级"
         },
         "advanced": {
-          "amountLabel": "Amount to approve",
+          "amountLabel": "要批准的额度",
           "amountLabelTooltip": "This limits the amount available to the smart contract.",
           "limit": "Limit",
           "limited": "Limited",
           "noLimit": "No Limit"
         },
         "amount": {
-          "totalAvailable": "Total available"
+          "totalAvailable": "可用总额"
         },
         "validation": {
           "success": "Operation sent successfully",
@@ -2107,7 +2107,7 @@
           "stepRange": "Step {{currentStep}} of {{totalSteps}}"
         },
         "amount": {
-          "totalAvailable": "Available balance",
+          "totalAvailable": "可用余额",
           "placeholderMax": "提取最大额度"
         },
         "validation": {
@@ -2179,7 +2179,7 @@
       "verifyAddress": "Please verify the address matches the one shared by the recipient."
     },
     "amount": {
-      "available": "Total available",
+      "available": "可用总额",
       "useMax": "Use max",
       "loadingNetwork": "Loading network fees...",
       "noRateProvider": "Not available"
@@ -2188,10 +2188,10 @@
       "subaccountsWarning": "You will need to refill this account with {{ currency }} in order to send the tokens of this account",
       "tag": "Tag (Optional)",
       "validateTag": "Validate tag",
-      "total": "Total",
+      "total": "总计",
       "amount": "数额",
-      "from": "From",
-      "to": "To",
+      "from": "从",
+      "to": "到",
       "infoTotalTitle": "总借记",
       "infoTotalDesc": "Includes transaction amount and the selected network fees",
       "gasLimit": "Gas limit",
@@ -2239,7 +2239,7 @@
     "info": {
       "maxSpendable": {
         "title": "Max spendable amount",
-        "description": "The maximum spendable amount is the total balance in an account that is available to send in a transaction."
+        "description": "最大可支出金额指的是一个账户可通过一个交易发送的总余额。"
       }
     }
   },
@@ -2273,7 +2273,7 @@
       "cta": "继续"
     },
     "amount": {
-      "available": "Total available",
+      "available": "可用总额",
       "noRateProvider": "Not available",
       "infoLabel": "Bandwidth or Energy"
     },
@@ -2344,7 +2344,7 @@
       "estYield": "Est. yield",
       "addMoreVotes": "Add more votes",
       "votesRemaining": "Votes remaining: <0>{{total}}</0>",
-      "maxVotesAvailable": "Max votes available: <0>{{total}}</0>",
+      "maxVotesAvailable": "最大可用票数：<0>{{total}}</0>",
       "voteFor": "Vote for",
       "validateVotes": "Validate votes",
       "votesRequired": "Votes required ",
@@ -2385,7 +2385,7 @@
       "secondaryCTA": "Add other accounts",
       "cta": "Go to Accounts"
     },
-    "stopScanning": "Stop scanning",
+    "stopScanning": "停止扫描",
     "retryScanning": "重试扫描",
     "retry": "重试",
     "done": "完成",
@@ -2396,20 +2396,20 @@
     "noAccountToCreate": "Could not create <1><0>{{currencyName}}</></> account. Restart the process and sync your accounts.",
     "cantCreateAccount": "A new account cannot be added before receiving assets on your <1><0>{{accountName}}</></> account.",
     "tokens": {
-      "title": "Add token",
+      "title": "添加代币",
       "createParentCurrencyAccount": "Add {{parrentCurrencyName}} account",
       "erc20": {
-        "title": "Add token",
+        "title": "添加代币",
         "disclaimer": "{{tokenName}} is an ERC20 Token.\nYou can receive tokens directly in an Ethereum account.",
         "learnMore": "Learn more about ERC20"
       },
       "trc10": {
-        "title": "Add Token",
+        "title": "添加代币",
         "disclaimer": "{{tokenName}} is a TRC10 Token.\nYou can receive tokens directly in a Tron account.",
         "learnMore": "Learn more about TRC10"
       },
       "trc20": {
-        "title": "Add Token",
+        "title": "添加代币",
         "disclaimer": "{{tokenName}} is a TRC20 Token.\nYou can receive tokens directly in a Tron account.",
         "learnMore": "Learn more about TRC20"
       }
@@ -2434,7 +2434,7 @@
   },
   "DeviceAction": {
     "allowAppPermission": "Open the {{wording}} app on your device",
-    "allowAppPermissionSubtitleToken": "to manage your {{token}} tokens",
+    "allowAppPermissionSubtitleToken": "管理个人 {{token}} 代币",
     "allowManagerPermission": "Allow {{wording}} on your device",
     "loading": "Loading...",
     "turnOnAndUnlockDevice": "Turn on and unlock your device",
@@ -2468,8 +2468,8 @@
   "SelectDevice": {
     "title": "Pair new device",
     "bluetooth": {
-      "title": "Connect via Bluetooth...",
-      "label": "Detect your Nano automatically"
+      "title": "通过蓝牙连接……",
+      "label": "自动检测您的 Nano"
     },
     "deviceNotFoundPairNewDevice": "Add new Ledger Nano X",
     "headerDescription": "Please make sure your {{productName}} is unlocked with Bluetooth enabled",
@@ -2507,7 +2507,7 @@
         "description": ""
       },
       "receiveVerify": {
-        "title": "Verify address on device",
+        "title": "在设备上验证地址",
         "description": "Please verify that the {{currencyName}} address displayed in Ledger Live exactly matches the one displayed on your Ledger device.",
         "action": "继续"
       },
@@ -2572,7 +2572,7 @@
     "connect": "Select your device",
     "appsCatalog": "App catalog",
     "installedApps": "Installed apps",
-    "noAppNeededForToken": "Install {{appName}} app for {{tokenName}}",
+    "noAppNeededForToken": "为 {{tokenName}} 安装 {{appName}} 应用程序",
     "tokenAppDisclaimer": "{{tokenName}} is an {{tokenType}} token using the {{appName}} app. To manage {{tokenName}}, <1>install the {{appName}} app</1> and send the tokens <3>to your {{appName}} account</3>.",
     "tokenAppDisclaimerInstalled": "{{tokenName}} is an {{tokenType}} token using the {{appName}} app. To manage {{tokenName}}, <1>open the {{appName}} app</1> and send the tokens <3>to your {{appName}} account</3>.",
     "goToAccounts": "Go to Accounts",
@@ -2608,7 +2608,7 @@
       "button": "Remove"
     },
     "storage": {
-      "title": "Storage",
+      "title": "存储",
       "used": "Used",
       "genuine": "Your device is genuine",
       "appsInstalled": "<0>{{number}}</0> app installed",
@@ -2775,7 +2775,7 @@
               "2": "Perform a transaction to or from the account to claim rewards."
             },
             "howItWorks": "How rewards work",
-            "cta": "Receive Algo"
+            "cta": "接收 Algo"
           },
           "starter": {
             "title": "Congratulations! You earned {{amount}}. Continue to claim your rewards.",
@@ -2888,7 +2888,7 @@
             "myDelegations": "My delegations",
             "cta": "继续",
             "estYield": "Est. yield: {{amount}}",
-            "totalAvailable": "Total available: <0>{{amount}}</0>",
+            "totalAvailable": "可用总额：<0>{{amount}}</0>",
             "allAssetsUsed": "All assets used",
             "noResultsFound": "No validator found for <0>{{search}}</0>",
             "currentAmount": "(+ <0>{{amount}}</0>)"
@@ -2919,7 +2919,7 @@
         "active": "Active",
         "inactive": "Inactive",
         "completionDate": "Completion date",
-        "redelegatedFrom": "Redelegated from"
+        "redelegatedFrom": "已重新委托自"
       }
     },
     "redelegation": {
@@ -2936,11 +2936,11 @@
       "flow": {
         "steps": {
           "validator": {
-            "validators": "Validators",
+            "validators": "验证器",
             "myDelegations": "My delegations",
             "cta": "继续",
             "estYield": "Est. yield: {{amount}}",
-            "totalAvailable": "Total available: <0>{{amount}}</0>",
+            "totalAvailable": "可用总额：<0>{{amount}}</0>",
             "allAssetsUsed": "All assets used",
             "noResultsFound": "No validator found for <0>{{search}}</0>"
           },
@@ -3406,7 +3406,7 @@
     "warnUndelegation": "Your account will be undelegated.",
     "warnDelegation": "Delegating your voting rights does not guarantee any rewards from your validator.",
     "to": "to",
-    "from": "from",
+    "from": "从",
     "forAnEstYield": "for an est. yield of",
     "yieldPerYear": "{{yield}} / 年",
     "yieldInfos": "收益率提供方",
@@ -3496,7 +3496,7 @@
     },
     "amount": "数额",
     "account": "Account",
-    "from": "From",
+    "from": "从",
     "to": "To",
     "redelegationAmount": "Redelegated amount",
     "gas": "Gas",
@@ -3578,7 +3578,7 @@
     "messageHash": "Message Hash",
     "domainHash": "Domain Hash",
     "stringHash": "Hash",
-    "from": "From",
+    "from": "从",
     "successTitle": "Message signed",
     "successDescription": "You have signed the message received from a third party application",
     "stepperHeader": {
