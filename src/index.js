@@ -40,6 +40,7 @@ import { pairId } from "@ledgerhq/live-common/lib/countervalues/helpers";
 import { ToastProvider } from "@ledgerhq/live-common/lib/notifications/ToastProvider";
 import logger from "./logger";
 import { saveAccounts, saveBle, saveSettings, saveCountervalues } from "./db";
+import getOrCreateUser from "./user";
 import {
   exportSelector as settingsExportSelector,
   hasCompletedOnboardingSelector,
@@ -80,6 +81,7 @@ import NotificationsProvider from "./screens/NotificationCenter/NotificationsPro
 import SnackbarContainer from "./screens/NotificationCenter/Snackbar/SnackbarContainer";
 import NavBarColorHandler from "./components/NavBarColorHandler";
 import { setOsTheme, setTheme } from "./actions/settings";
+import { setEnv } from "@ledgerhq/live-common/lib/env";
 
 const themes = {
   light: lightTheme,
@@ -405,7 +407,9 @@ export default class Root extends Component<
     throw e;
   }
 
-  onInitFinished = () => {
+  onInitFinished = async () => {
+    const { user } = await getOrCreateUser();
+    setEnv("USER_ID", user.id);
     this.initTimeout = setTimeout(() => SplashScreen.hide(), 300);
   };
 
