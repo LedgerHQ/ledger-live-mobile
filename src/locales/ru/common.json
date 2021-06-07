@@ -92,7 +92,7 @@
       "description": "Укажите название счёта."
     },
     "AlgorandASANotOptInInRecipient": {
-      "title": "Recipient account has not opted in the selected ASA."
+      "title": "В указанном ASA не выбран счёт получателя."
     },
     "BluetoothRequired": {
       "title": "Извините, Bluetooth отключён",
@@ -1649,7 +1649,7 @@
       "cryptoAssets": {
         "header": "Криптоактивы",
         "title": "Криптоактивы",
-        "desc": "Select a crypto assets to edit its settings."
+        "desc": "Выберите криптоактив, чтобы изменить его настройки."
       }
     },
     "about": {
@@ -1676,9 +1676,9 @@
       "configureDevice": "Настроить устройство",
       "configureDeviceDesc": "Настройка как нового устройства, либо восстановление существующего устройства. Счета и настройки сохраняются.",
       "clearCache": "Очистить кэш",
-      "clearCacheDesc": "The transactions on the network will be scanned and your accounts will be recalculated.",
+      "clearCacheDesc": "Мы заново просканируем транзакции в сети и проведём переучёт ваших счета.",
       "clearCacheModal": "Вы уверены?",
-      "clearCacheModalDesc": "A fresh and complete scan of transactions on the network will be done. Account histories will be rebuilt and balances will be recalculated.",
+      "clearCacheModalDesc": "Мы повторим полное сканирование транзакций в сети. История будет восстановлена, а средства на балансе будут пересчитаны.",
       "clearCacheButton": "Очистить",
       "exportLogs": "Экспортировать логи",
       "exportLogsDesc": "Экспорт логов Ledger Live может помочь в устранении неполадок.",
@@ -1832,7 +1832,7 @@
         "title": "Услуга временно недоступна или недоступна в вашей стране"
       },
       "payoutModal": {
-        "title": "Payout fees",
+        "title": "Комиссия за выплату",
         "description": "Payout fees are not shown on the device and substracted from the amount.",
         "cta": "Закрыть"
       },
@@ -1847,7 +1847,7 @@
         "float": "Плавающий курс",
         "floatUnavailable": "Floating rate not supported for this pair",
         "fixed": "Фиксированный курс",
-        "fixedUnavailable": "Fixed rate not supported for this pair",
+        "fixedUnavailable": "Для этой пары фиксированный курс не поддерживается",
         "floatDesc": "Сумма может измениться в зависимости от состояния рынка.",
         "fixedDesc": "Сумма останется неизменной, независимо от состояния рынка. Фиксированный курс обновляется каждые 30 сек",
         "by": "By",
@@ -1868,7 +1868,7 @@
         },
         "noApp": {
           "title": "Приложение {{appName}} не установлено",
-          "desc": "Please go to Manager to install the {{appName}} app.",
+          "desc": "Чтобы установить {{appName}}, перейдите в Диспетчер.",
           "cta": "Перейти в Диспетчер",
           "close": "Закрыть"
         },
@@ -1891,7 +1891,7 @@
           "payoutNetworkFees": "Комиссия за выплату",
           "payoutNetworkFeesTooltip": "Эта сумма не будет отображаться на устройстве",
           "receive": "Сумма",
-          "receiveFloat": "Amount to receive before service fees",
+          "receiveFloat": "Сумма к получению до вычета комиссии за обслуживание",
           "provider": "Поставщик",
           "method": "Курс",
           "fees": "Макс. комиссия",
@@ -1931,16 +1931,16 @@
         "button": "Перейти в Диспетчер"
       },
       "emptyState": {
-        "title": "No {{currency}} account",
-        "description": "You need to add an account before swapping {{currency}}",
-        "CTAButton": "Add account"
+        "title": "Нет счёта {{currency}}",
+        "description": "Необходимо добавить счёт перед обменом {{currency}}",
+        "CTAButton": "Добавить счёт"
       },
       "history": {
-        "tab": "History",
-        "exportButton": "Export operations",
-        "exportFilename": "Swap operations",
+        "tab": "История",
+        "exportButton": "Экспортировать историю транзакций",
+        "exportFilename": "Экспортировать историю обменов",
         "empty": {
-          "title": "Your previous swaps will appear here",
+          "title": "Здесь будет показана история обменных операций",
           "desc": "Either you have not made any swaps yet, or Ledger Live has been reset in the meantime."
         }
       },
@@ -1949,13 +1949,13 @@
       }
     },
     "lending": {
-      "title": "Lend crypto",
-      "titleTransferTab": "Lend",
+      "title": "Кредиты в криптовалюте",
+      "titleTransferTab": "Кредитование",
       "actionTitle": "Кредитование",
       "accountActions": {
-        "approve": "Approve",
+        "approve": "Утвердить",
         "supply": "Предоставить",
-        "withdraw": "Withdraw"
+        "withdraw": "Отозвать"
       },
       "highFees": {
         "title": "Высокие комиссии в сети Ethereum",
@@ -2035,7 +2035,7 @@
           "label": "Шаг 3/3",
           "title": "Выводите активы в любое время.",
           "description": "Вы можете вывести активы и заработанный доход в любое время, частично или полностью прямо со счёта Ledger.",
-          "cta": "Lend now"
+          "cta": "Начать кредитовать"
         },
         "title": "Кредиты в криптовалюте"
       },
@@ -2090,9 +2090,9 @@
           "totalAvailable": "Доступная сумма"
         },
         "validation": {
-          "success": "Operation sent successfully",
-          "info": "The approval was sent to the network for confirmation. You’ll be able to issue loans once it is confirmed.",
-          "extraInfo": "Transactions can take some time to be displayed in an explorer and to be confirmed.",
+          "success": "Транзакция отправлена",
+          "info": "Утверждение отправлено в сеть для подтверждения. После этого вы сможете начать выдавать займы.",
+          "extraInfo": "Может потребоваться некоторое время, пока транзакции будут подтверждены и добавлены в сеть.",
           "button": {
             "done": "Закрыть"
           }
@@ -2111,9 +2111,9 @@
           "placeholderMax": "Вывести всё"
         },
         "validation": {
-          "success": "Deposit sent successfully",
+          "success": "Депозит успешно внесён",
           "info": "Проценты будут начисляться сразу после того, как ваш депозит получит подтверждение сети.",
-          "extraInfo": "Transactions can take some time to be displayed in an explorer and to be confirmed.",
+          "extraInfo": "Может потребоваться некоторое время, пока транзакции будут подтверждены и добавлены в сеть.",
           "button": {
             "done": "Готово",
             "cta": "Подробнее"
@@ -2129,8 +2129,8 @@
           "stepRange": "Шаг {{currentStep}}/{{totalSteps}}"
         },
         "validation": {
-          "success": "Withdrawal sent successfully",
-          "info": "Your assets will be available once the network has confirmed the withdrawal.",
+          "success": "Вы успешно вывели средства",
+          "info": "Активы станут доступны после того, как транзакция получит подтверждение сети.",
           "button": {
             "done": "Готово",
             "cta": "Подробнее"
@@ -2140,8 +2140,8 @@
     }
   },
   "sync": {
-    "error": "Sync Error",
-    "loading": "Sync"
+    "error": "Сбой синхронизации",
+    "loading": "Синхронизируем"
   },
   "scanning": {
     "loading": "Поиск устройств..."
@@ -2159,7 +2159,7 @@
       "fallback": {
         "header": "Сканируйте QR-код",
         "title": "Разрешить доступ к камере",
-        "desc": "Please enable Camera in Settings to scan QR codes.",
+        "desc": "Чтобы отсканировать QR-код, разрешите доступ к камере в настройках.",
         "buttonTitle": "Перейти в Настройки"
       }
     },
@@ -2265,9 +2265,9 @@
     "info": {
       "description": "Заморозьте TRX, чтобы безопасно получать вознаграждения, не теряя контроль над активами.",
       "steps": {
-        "0": "Delegated assets remain yours.",
-        "1": "You can unfreeze your assets after 3 days.",
-        "2": "Freeze and vote securely with your Ledger device."
+        "0": "Делегированные активы остаются в вашей собственности.",
+        "1": "Вы можете разморозить активы через 3 дня.",
+        "2": "Заморозьте средства и безопасно голосуйте прямо на устройстве Ledger."
       },
       "howVotingWorks": "Как работает голосование",
       "cta": "Продолжить"
@@ -2278,12 +2278,12 @@
       "infoLabel": "Пропускная способность или Энергия"
     },
     "validation": {
-      "message": "Always verify that your device displays the address exactly as it was originally given to you.",
+      "message": "Обязательно проверяйте соответствие адреса на экране устройства адресу, который был вам предоставлен.",
       "success": "Активы заморожены",
       "amount": "Кол-во",
       "info": "Начисление {{resource}} начнётся после подтверждения заморозки сетью. Скоро вы сможете голосовать за суперпредставителей, чтобы получать вознаграждения.",
       "button": {
-        "pending": "Transaction is being validated.",
+        "pending": "Выполняется подтверждение транзакции.",
         "pendingDesc": "Please wait a moment before voting.",
         "vote": "Голосовать",
         "voteTimer": "0:{{time}}",
@@ -2301,12 +2301,12 @@
       "stepRange": "Шаг {{currentStep}}/{{totalSteps}}"
     },
     "amount": {
-      "title": "Select the type of asset to unfreeze",
-      "info": "Unfreezing will decrease your {{resource}} and will cancel all your votes.",
+      "title": "Выберите тип актива, который хотите разморозить",
+      "info": "Разморозка приведёт к уменьшению {{resource}} и аннулированию голосов.",
       "cta": "Продолжить"
     },
     "validation": {
-      "success": "Your assets were unfrozen successfully",
+      "success": "Активы успешно разморожены",
       "info": "Your {{resource}} points will be decreased and all your votes will be canceled.",
       "button": {
         "done": "Готово",
@@ -2722,7 +2722,7 @@
     "steps": {
       "osu": "Устанавливаем обновление ОС",
       "flash-mcu": "Обновление микроконтроллера",
-      "flash-bootloader": "Bootloader updating",
+      "flash-bootloader": "Обновление Bootloader",
       "flash": "Перепрошивка устройства",
       "firmware": "Обновляем прошивку"
     }
@@ -2740,7 +2740,7 @@
   "FirmwareUpdateMCU": {
     "title": "Перезагрузите устройство",
     "desc1": "Отключите устройство от компьютера.",
-    "desc2": "Press and hold the left button, connect the USB cable then release the button when the Bootloader screen appears."
+    "desc2": "Нажмите и удерживайте левую кнопку, подключите USB-кабель и отпустите кнопку после появления окна Bootloader."
   },
   "FirmwareUpdateConfirmation": {
     "title": "Прошивка обновлена",
@@ -2834,30 +2834,30 @@
         "description": "This amount is disposable."
       },
       "delegated": {
-        "title": "Delegated assets",
-        "description": "Delegated assets are used for Cosmos voting. This is your total number of votes."
+        "title": "Делегированные активы",
+        "description": "Делегированные активы используются в процессе голосования Cosmos. Это общее количество ваших голосов."
       },
       "undelegating": {
-        "title": "Undelegating",
-        "description": "Undelegated assets are in a timelock of 21 days, before being available."
+        "title": "Отзыв делегированных средств",
+        "description": "Отозванные активы блокируются на 21 день, прежде чем вы сможете их получить."
       },
       "delegationUnavailable": {
-        "title": "Delegation unavailable",
-        "description": "Not enough available balance in your account to start a new delegation."
+        "title": "Делегирование недоступно",
+        "description": "Доступных средств на счету недостаточно для нового делегирования."
       }
     },
     "delegation": {
       "delegationEarn": "You can earn ATOM rewards by delegating your assets.",
-      "info": "How Delegation works",
-      "claimRewards": "Claim rewards",
+      "info": "Как работает делегирование",
+      "claimRewards": "Получить вознаграждения",
       "claimAvailableRewards": "Получить {{amount}}",
-      "header": "Delegation(s)",
+      "header": "Делегирования",
       "Amount": "Сумма",
-      "noRewards": "No rewards available",
+      "noRewards": "Нет доступных вознаграждений",
       "delegate": "Делегировать",
       "undelegate": "Отозвать",
       "redelegate": "Переделегировать",
-      "reward": "Claim rewards",
+      "reward": "Получить вознаграждение",
       "estYield": "Ориент. доход",
       "stepperHeader": {
         "starter": "Получайте вознаграждение",
@@ -3069,7 +3069,7 @@
         "selectValidator": {
           "sections": {
             "title": {
-              "selected": "Selected",
+              "selected": "Выбрано",
               "superRepresentatives": "Суперпредставители",
               "candidates": "Кандидаты"
             }
@@ -3116,7 +3116,7 @@
         "description": "This amount is disposable."
       },
       "frozen": {
-        "title": "Frozen",
+        "title": "Заморожено",
         "description": "Замороженные активы используются в процессе голосования Tron. Это общее количество ваших голосов."
       },
       "bandwidth": {
@@ -3144,14 +3144,14 @@
   "stellar": {
     "memo": {
       "title": "Memo",
-      "warning": "When using a Memo, carefully verify the type with the recipient."
+      "warning": "При использовании Memo необходимо тщательно проверять соответствие типа с получателем."
     },
     "memoType": {
       "MEMO_TEXT": "Текст заметки",
       "NO_MEMO": "Без примечания",
       "MEMO_ID": "Memo ID",
-      "MEMO_HASH": "Memo Hash",
-      "MEMO_RETURN": "Memo Return"
+      "MEMO_HASH": "Хэш Memo",
+      "MEMO_RETURN": "Возврат Memo"
     }
   },
   "polkadot": {
@@ -3191,19 +3191,19 @@
       "header": "Nominations",
       "nominate": "Nominate",
       "chill": "Clear nominations",
-      "status": "Status",
-      "totalStake": "Total Stake",
+      "status": "Состояние",
+      "totalStake": "Общая доля",
       "amount": "Заблокированная сумма",
-      "commission": "Commission",
-      "active": "Active",
-      "activeInfo": "This validator is elected and is collecting rewards on your bonded assets.",
-      "inactive": "Inactive",
-      "inactiveInfo": "This validator is elected but is not collecting rewards on your bonded assets.",
-      "waiting": "Unelected",
-      "waitingInfo": "This validator is not elected, therefore is not collecting rewards.",
-      "notValidator": "Not a validator",
-      "notValidatorInfo": "This address is no longer a validator",
-      "elected": "Elected",
+      "commission": "Комиссия",
+      "active": "Активно",
+      "activeInfo": "Этот валидатор выбран вами и накапливает вознаграждения за ваши заблокированные активы.",
+      "inactive": "Неактивно",
+      "inactiveInfo": "Этот валидатор выбран вами, но не собирает вознаграждения за ваши заблокированные активы.",
+      "waiting": "Не выбран",
+      "waitingInfo": "Этот валидатор не был выбран, поэтому не получает вознаграждения.",
+      "notValidator": "Это не валидатор",
+      "notValidatorInfo": "Этот адрес больше не является валидатором",
+      "elected": "Выбран",
       "electedInfo": "This validator is elected and is collecting rewards for its nominators.",
       "nominators": "Nominators",
       "nominatorsCount": "{{nominatorsCount}} nominators",
@@ -3400,17 +3400,17 @@
   "delegation": {
     "overdelegated": "Overdelegated",
     "delegationSendWarnDesc": "The amount to be sent will be deducted from your delegated account.",
-    "delegationReceiveWarnDesc": "The amount received in a delegated account will be added to the total staked amount. Choose another account if you want to avoid this.",
-    "iDelegateMy": "I delegate my",
-    "undelegateMy": "Undelegate my",
-    "warnUndelegation": "Your account will be undelegated.",
+    "delegationReceiveWarnDesc": "Сумма, зачисленная на делегированный счёт, будет добавлена к общей стейкированной сумме. Чтобы избежать этого, выберите другой счёт.",
+    "iDelegateMy": "Я делегирую свои",
+    "undelegateMy": "Отозвать мои",
+    "warnUndelegation": "Ваш счёт будет отозван.",
     "warnDelegation": "Delegating your voting rights does not guarantee any rewards from your validator.",
-    "to": "to",
+    "to": "куда",
     "from": "откуда",
-    "forAnEstYield": "for an est. yield of",
-    "yieldPerYear": "{{yield}} / Year",
-    "yieldInfos": "Yield rates are provided by",
-    "termsAndPrivacy": "I have read and I accept the <1>Ledger Live Terms of Use</1> and <3>Privacy Policy</3>.",
+    "forAnEstYield": "для ориент. дохода",
+    "yieldPerYear": "{{yield}} в год",
+    "yieldInfos": "Ставки доходности предоставлены",
+    "termsAndPrivacy": "Я прочитал(-а) и принимаю <1>Условия использования Ledger Live</1> и <3>Политику конфиденциальности</3>.",
     "delegation": "Делегирование",
     "viewDetails": "Подробнее",
     "validator": "Валидатор",
@@ -3444,7 +3444,7 @@
     },
     "broadcastSuccessDescription": {
       "delegate": "Delegation transaction broadcasted successfully. You should earn your first rewards in around 40 days, depending on the validator.",
-      "undelegate": "Your account delegation will end when the operation is confirmed. You can delegate your account again at any time."
+      "undelegate": "Делегирование счёта завершится после подтверждения операции. Повторное делегирование счёта можно выполнить в любой момент."
     },
     "summaryTitle": "Сводка",
     "goToAccount": "Перейти к Счетам",
@@ -3457,7 +3457,7 @@
   },
   "ValidateOnDevice": {
     "title": {
-      "send": "Please confirm the operation on your {{productName}} to send it",
+      "send": "Чтобы отправить операцию, подтвердите её на {{productName}}",
       "freeze": "Чтобы завершить операцию, подтвердите её на устройстве",
       "unfreeze": "Чтобы завершить операцию, подтвердите её на устройстве",
       "claimReward": "Чтобы завершить операцию, подтвердите её на устройстве",
@@ -3490,97 +3490,97 @@
       "cosmos": {
         "claimReward": "Вознаграждения будут получены автоматически при их наличии у валидатора.",
         "redelegate": "Возврат отозванных активов на баланс счёта осуществляется в течение 21 дня.",
-        "undelegate": "You will have to wait 21 days for undelegated assets to return to the available balance."
+        "undelegate": "Возврат отозванных активов на баланс счёта осуществляется в течение 21 дня."
       },
       "lending": "Проверяйте данные операции на устройстве перед отправкой."
     },
     "amount": "Кол-во",
-    "account": "Account",
+    "account": "Счёт",
     "from": "Откуда",
-    "to": "To",
-    "redelegationAmount": "Redelegated amount",
-    "gas": "Gas",
-    "validatorAddress": "Validator address",
-    "rewardAmount": "Reward amount",
-    "undelegatedAmount": "Undelegated amount",
+    "to": "Куда",
+    "redelegationAmount": "Переделегированная сумма",
+    "gas": "Газ",
+    "validatorAddress": "Адрес валидатора",
+    "rewardAmount": "Сумма вознаграждения",
+    "undelegatedAmount": "Отозванная сумма",
     "memo": "Memo"
   },
   "Terms": {
-    "title": "Terms of Use",
-    "read": "Read the Terms of Use",
+    "title": "Условия использования",
+    "read": "Прочитать Условия использования",
     "switchLabelPrivacy": "Подтверждаю, что прочитал(-а) и принимаю <1>Политику конфиденциальности</1>",
-    "switchLabel": "I have read and agree with the <1>Terms of Service</1>",
+    "switchLabel": "Я прочитал(-а) и принимаю <1>Условия использования</1>",
     "cta": "Перейти в приложение Ledger"
   },
   "exchange": {
     "buy": {
-      "tabTitle": "Buy",
-      "selectCurrency": "Select a currency",
-      "selectAccount": "Select an account",
+      "tabTitle": "Покупка",
+      "selectCurrency": "Выберите валюту",
+      "selectAccount": "Выберите счёт",
       "connectDevice": "Подключите устройство",
-      "title": "Buy crypto via our partner",
-      "description": "Purchase crypto assets via Coinify and receive them directly in your Ledger account.",
-      "CTAButton": "Buy now",
+      "title": "Покупка криптовалюты через нашего партнёра",
+      "description": "Покупайте криптоактивы через Coinify и получайте их непосредственно на счёт в Ledger.",
+      "CTAButton": "Купить сейчас",
       "emptyState": {
-        "title": "No {{currency}} account",
-        "description": "Please add an account before buying {{currency}}.",
-        "CTAButton": "Add account"
+        "title": "Нет счёта {{currency}}",
+        "description": "Добавьте счёт перед покупкой {{currency}}.",
+        "CTAButton": "Добавить счёт"
       },
       "skipDeviceVerification": {
-        "confirm": "Confirm",
-        "cancel": "Cancel",
-        "address": "Address for {{currency}} account",
-        "warning": "Your address was not confirmed on your Ledger device. Please verify it for security"
+        "confirm": "Подтвердить",
+        "cancel": "Отменить",
+        "address": "Адрес счёта {{currency}}",
+        "warning": "Адрес не утверждён на устройстве Ledger. В целях безопасности вам нужно утвердить его"
       }
     },
     "sell": {
-      "tabTitle": "Sell",
-      "selectCurrency": "Select a currency",
-      "selectAccount": "Select an account",
+      "tabTitle": "Продажа",
+      "selectCurrency": "Выберите валюту",
+      "selectAccount": "Выберите счёт",
       "connectDevice": "Подключите устройство",
-      "title": "Sell crypto via our partner",
-      "description": "Sell crypto assets directly from your Ledger account via Coinify and receive fiat in your bank account.",
-      "CTAButton": "Sell now",
+      "title": "Продажа криптовалюты через нашего партнёра",
+      "description": "Продавайте криптоактивы непосредственно со счёта Ledger через Coinify и получайте фиатные деньги на банковский счёт.",
+      "CTAButton": "Продать сейчас",
       "emptyState": {
-        "title": "No {{currency}} account",
-        "description": "You need to add an account before you can sell {{currency}}.",
-        "CTAButton": "Add account"
+        "title": "Нет счёта {{currency}}",
+        "description": "Необходимо добавить счёт перед продажей {{currency}}.",
+        "CTAButton": "Добавить счёт"
       }
     },
     "history": {
-      "tabTitle": "History"
+      "tabTitle": "История"
     }
   },
   "banner": {
     "exchangeBuyCrypto": {
-      "title": "BUY CRYPTO",
-      "description": "Purchase crypto assets via Coinify and receive them directly in your Ledger account."
+      "title": "КУПИТЬ КРИПТОВАЛЮТУ",
+      "description": "Приобретайте криптоактивы через Coinify и получайте их прямо на свой счёт в Ledger."
     },
     "swap": {
-      "title": "SWAP CRYPTO",
-      "description": "Swap crypto assets directly from your Ledger accounts with our partner."
+      "title": "ОБМЕНЯТЬ КРИПТОВАЛЮТУ",
+      "description": "Обменивать криптоактивы можно непосредственно на счетах Ledger благодаря нашему партнёру."
     }
   },
   "walletconnect": {
-    "disclaimer": "Wants to connect to the following Ethereum account through your wallet :",
-    "reject": "Reject",
-    "connect": "Connect",
-    "connected": "Connected",
-    "disconnected": "Disconnected",
-    "warningdisconnected": "There is a connection problem between the dApp, WalletConnect and Ledger Live. Wait a few moments or relaunch the connection",
-    "info": "You can now access the {{name}} dApp on your desktop.",
-    "warning": "Sharing receive addresses from dApp is not secure. Always use Ledger Live when sharing your address to receive funds.",
+    "disclaimer": "Хочет подключиться к указанному счёту Ethereum через ваш кошелёк:",
+    "reject": "Отклонить",
+    "connect": "Подключить",
+    "connected": "Подключено",
+    "disconnected": "Отключено",
+    "warningdisconnected": "Проблема с подключением между dApp, WalletConnect и Ledger Live. Подождите несколько секунд или попробуйте подключиться заново",
+    "info": "Теперь dApp {{name}} доступно в настольном приложении.",
+    "warning": "Совместное использование адресов, полученных в dApp, несёт риск безопасности. Обязательно используйте Ledger Live при отправке адреса для получения средств.",
     "isconnecting": "подключается. Пожалуйста, подождите...",
     "disconnect": "Отключить",
     "retry": "Повторить",
     "close": "Закрыть",
     "message": "Сообщение",
-    "messageHash": "Message Hash",
-    "domainHash": "Domain Hash",
+    "messageHash": "Хэш сообщения",
+    "domainHash": "Хэш домена",
     "stringHash": "Хэш",
     "from": "Откуда",
-    "successTitle": "Message signed",
-    "successDescription": "You have signed the message received from a third party application",
+    "successTitle": "Сообщение подписано",
+    "successDescription": "Вы подписали сообщение от стороннего приложения",
     "stepperHeader": {
       "summary": "Сводка",
       "selectDevice": "Выбор устройства",
@@ -3588,32 +3588,32 @@
       "stepRange": "Шаг {{currentStep}}/{{totalSteps}}"
     },
     "stepVerification": {
-      "action": "Please confirm the operation on your device",
-      "accountName": "Account name"
+      "action": "Подтвердите операцию на устройстве.",
+      "accountName": "Название счёта"
     },
-    "deeplinkingTitle": "Select an Ethereum account",
-    "addAccount": "Add new account"
+    "deeplinkingTitle": "Выберите счёт Ethereum",
+    "addAccount": "Добавить новый счёт"
   },
   "notificationCenter": {
-    "title": "Notification center",
-    "announcement": "Announcement",
-    "liveStatus": "Ledger live status",
+    "title": "Центр уведомлений",
+    "announcement": "Объявление",
+    "liveStatus": "Состояние Ledger Live",
     "news": {
-      "title": "News",
-      "titleCount": "News ({{count}})",
+      "title": "Новости",
+      "titleCount": "Новостей: {{count}}",
       "emptyState": {
-        "title": "No news for the moment",
-        "desc": "You will find here all the news related to Ledger and Ledger live"
+        "title": "На данный момент новостей нет",
+        "desc": "Здесь вы можете просматривать все новости о Ledger и Ledger Live"
       }
     },
     "status": {
-      "title": "Status",
+      "title": "Состояние",
       "ok": {
-        "title": "Ledger Live is up and running",
-        "desc": "<0>Having trouble? Go on our </0><1>help page</1>"
+        "title": "Приложение Ledger Live запущено и работает",
+        "desc": "<0>Возникли проблемы? Просмотрите </0><1>страницу помощи</1>"
       },
       "error": {
-        "title": "Ledger Live is experiencing issues"
+        "title": "В приложении Ledger Live возникли проблемы"
       }
     }
   }
