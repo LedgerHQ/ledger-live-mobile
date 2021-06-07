@@ -818,7 +818,7 @@
           },
           "3": {
             "title": "按指示操作",
-            "label": "返回此处以按照识别码的说明操作。"
+            "label": "Come back here to follow instructions on your PIN code."
           }
         },
         "cta": "下一步"
@@ -826,14 +826,14 @@
       "pinCode": {
         "title": "PIN 识别密码",
         "desc": "您的 PIN 个人识别密码是第一层安全保护措施。它能从物理层面保证您安全地访问自己的私钥和 Nano。您的 PIN 个人识别密码的长度必须为 4 至 8 位数。",
-        "checkboxDesc": "I understand that I must choose my PIN code by myself and keep it private.",
+        "checkboxDesc": "我明白我必须亲自选择自己的 PIN 个人识别密码并将其隐秘保管。",
         "cta": "设置 PIN 识别密码"
       },
       "pinCodeSetup": {
         "bullets": {
           "0": {
             "title": "选择 PIN 识别密码",
-            "label": "Press the left or right button to change digits. Press both buttons to validate a digit. Select <1></1> to confirm your PIN code. Select <2></2> to erase a digit."
+            "label": "按压左边或右边的按钮来更改数字。同时按下两个按钮来确认选中的数字。选择 <1></1> 以确认您的 PIN 识别密码。选择 <2></2> 来删除一个数字。"
           },
           "1": {
             "title": "确认 PIN 识别密码",
@@ -841,22 +841,22 @@
           }
         },
         "infoModal": {
-          "title": "妥善保管您的识别码",
+          "title": "妥善保管您的 PIN 识别密码",
           "bullets": {
             "0": {
-              "label": "总是亲自选择识别码。"
+              "label": "总是亲自选择 PIN 识别密码。"
             },
             "1": {
-              "label": "总是避开他人的视线输入识别码。"
+              "label": "总是避开他人的视线输入 PIN 识别密码。"
             },
             "2": {
-              "label": "如有需要，您可以更改自己的识别码。"
+              "label": "如有需要，您可以更改自己的 PIN 识别密码。"
             },
             "3": {
-              "label": "连续三次输入错误的识别码会导致设备重置。"
+              "label": "连续三次输入错误的 PIN 识别密码会导致设备重置。"
             },
             "4": {
-              "label": "Never use an easy PIN code like 0000, 123456, or 55555555."
+              "label": "切勿使用过于简单的 PIN 识别密码，例如 0000、123456 或 55555555。"
             },
             "5": {
               "label": "切勿将您的PIN识别密码告诉他人。即使是 Ledger 的相关人员也不能除外。"
@@ -865,7 +865,7 @@
               "label": "切勿使用非您本人选择的 PIN 识别密码。"
             },
             "7": {
-              "label": "切勿将您的识别码保存在电脑或手机上。"
+              "label": "切勿将您的 PIN 识别密码保存在电脑或手机上。"
             }
           }
         },
@@ -944,7 +944,7 @@
               "label": "<1>ALWAYS</1> store it in a secure place, out of sight."
             },
             "3": {
-              "label": "Ledger will never ask for your recovery phrase."
+              "label": "Ledger 从来不会要求您提供恢复短语。"
             },
             "4": {
               "label": "If any person or application asks for it, assume it is a scam!"
@@ -993,7 +993,7 @@
           },
           "3": {
             "title": "按指示操作",
-            "label": "返回此处以按照识别码的说明操作。"
+            "label": "Come back here to follow instructions on your PIN code."
           }
         }
       },
@@ -1100,11 +1100,11 @@
           "label": "使用您的手机扫描 LiveQR 码。"
         },
         "2": {
-          "label": "Select the crypto accounts to import."
+          "label": "选择需要导入的加密资产账户。"
         }
       },
       "warning": {
-        "title": "Your desktop and mobile apps must be synced manually.",
+        "title": "必须手动完成桌面应用程序和手机应用程序的同步。",
         "desc": "Ledger Live respects your privacy and stores your data locally. If you change accounts and settings on your phone, you will need to do the same on your computer, and vice versa. Your transactions stay synchronized with the blockchain.",
         "cta": "知道了！"
       }
@@ -1116,10 +1116,10 @@
       "step2-restore": "Press both buttons together to select <1><1>Restore from recovery phrase.</1></1>",
       "step3": "Press left or right button to select a digit. Press buttons together to confirm.",
       "step4prefix": "选取",
-      "step4suffix1": "确认您的识别码。",
+      "step4suffix1": " 确认您的 PIN 识别密码。",
       "step4suffix2": "删除末位数字。",
       "modal": {
-        "step1": "Always choose <1><1>your own</1></1> PIN",
+        "step1": "总是 <1><1>亲自</1></1> 选择自己的 PIN 识别密码",
         "step2": "使用 8 位数以确保更高的安全性",
         "step3": "Never use a device with a PIN or recovery phrase already setup"
       }
@@ -1131,12 +1131,12 @@
       "modal": {
         "step1": "Store your 24-word recovery phrase in a safe place, out of sight.",
         "step2": "Make sure you are the only person to have the recovery phrase.",
-        "step3": "Ledger does not save your recovery phrase.",
+        "step3": "Ledger 并不保存您的恢复短语。",
         "step4": "Never use a device with a recovery phrase or PIN already setup."
       }
     },
     "stepPassword": {
-      "desc": "Set a password to protect Ledger Live data on your phone.",
+      "desc": "在您的手机上设置一个密码来保护 Ledger Live 的数据。",
       "descConfigured": "成功启用密码锁",
       "setPassword": "设置密码",
       "modal": {
@@ -1172,7 +1172,7 @@
         "title": "If my recovery phrase is no longer secret and safe...",
         "answers": {
           "correct": "My crypto is no longer safe and I need to transfer them to a secure place",
-          "wrong": "No problem, Ledger can send me a copy"
+          "wrong": "没有问题，Ledger可以向我发送一份副本"
         },
         "modal": {
           "text": "Anyone who knows your recovery phrase can steal your crypto assets. \nIf you lose it, you must quickly transfer your crypto to a secure place.",
@@ -1183,7 +1183,7 @@
         "title": "When I connect my Nano to the Ledger app, my private key is...",
         "answers": {
           "correct": "依旧处于离线状态",
-          "wrong": "Briefly connected to the internet"
+          "wrong": "已短暂连接到网络"
         },
         "modal": {
           "text": "Your private key always remains offline in your hardware wallet. Even when connected to your Nano, the Ledger app cannot access your private key. You must physically authorize every transaction on your device.",
@@ -1228,7 +1228,7 @@
       "title": "非同步的余额",
       "desc": "Some transactions are not confirmed yet. These will be reflected in your balance and useable after being confirmed."
     },
-    "summary": "Here is the summary of your account",
+    "summary": "这是您的账户概览",
     "summary_plural": "您的 {{count}} 账户已同步。",
     "emptyState": {
       "noAppsTitle": "在我的设备上安装应用程序",
@@ -1332,7 +1332,7 @@
     },
     "details": "{{ currency }} details",
     "extra": {
-      "resource": "Resource",
+      "resource": "资源",
       "frozenAmount": "已冻结数额",
       "unfreezeAmount": "解冻数额",
       "address": "地址",
@@ -1636,7 +1636,7 @@
     "accounts": {
       "header": "账户",
       "title": "账户",
-      "desc": "Manage assets display in the app.",
+      "desc": "管理应用程序中显示的资产。",
       "hideTokenCTA": "隐藏代币",
       "showContractCTA": "显示合约",
       "blacklistedTokens": "隐藏代币列表",
@@ -1657,7 +1657,7 @@
       "desc": "App information, terms and conditions, and privacy policy.",
       "appDescription": "With Ledger Live, Secure, Buy, Sell, Exchange, Grow and Manage your crypto. All-in-one place.",
       "appVersion": "版本",
-      "termsConditions": "Terms and conditions",
+      "termsConditions": "条款和条件",
       "termsConditionsDesc": "By using Ledger Live you are deemed to have accepted our terms and conditions.",
       "privacyPolicy": "隐私政策",
       "privacyPolicyDesc": "See what personal data are collected, why and how they are used.",
@@ -1730,7 +1730,7 @@
       }
     },
     "connectDevice": {
-      "headerTitle": "Connect device"
+      "headerTitle": "连接设备"
     }
   },
   "transfer": {
@@ -1766,7 +1766,7 @@
       }
     },
     "exchange": {
-      "title": "Buy / Sell",
+      "title": "买入 / 卖出",
       "providers": {
         "title": "选择一个购买加密货币的供应商",
         "whatIsSwap": "什么是购买？",
@@ -1949,12 +1949,12 @@
       }
     },
     "lending": {
-      "title": "Lend crypto",
-      "titleTransferTab": "Lend",
-      "actionTitle": "Lend",
+      "title": "贷出加密货币",
+      "titleTransferTab": "贷出",
+      "actionTitle": "贷出",
       "accountActions": {
-        "approve": "Approve",
-        "supply": "Supply",
+        "approve": "批准",
+        "supply": "供给",
         "withdraw": "提取"
       },
       "highFees": {
@@ -1963,13 +1963,13 @@
       },
       "account": {
         "amountSupplied": "已存数额",
-        "amountSuppliedTooltip": "Amount lent to the network",
+        "amountSuppliedTooltip": "向网络贷出的数额",
         "currencyAPY": "Currency APY",
         "currencyAPYTooltip": "Yearly return rate of a deposit that’s continuously compounded",
         "accruedInterests": "利息余额",
         "accruedInterestsTooltip": "Interest generated on your lent assets",
-        "interestEarned": "Interest earned",
-        "interestEarnedTooltip": "Interest you have earned after withdrawal",
+        "interestEarned": "已赚取的利息",
+        "interestEarnedTooltip": "提取后您赚取的利息",
         "openLoans": "Open loans",
         "closedLoans": "已关闭的借贷"
       },
@@ -2007,15 +2007,15 @@
       "closedLoans": {
         "tabTitle": "已关闭的借贷",
         "description": "View all your withdrawn loans and the interest you have earned.",
-        "cta": "Lend asset"
+        "cta": "贷出资产"
       },
       "history": {
         "tabTitle": "历史记录",
         "description": "View the history of all your loan transactions.",
-        "cta": "Lend asset"
+        "cta": "贷出资产"
       },
       "terms": {
-        "label": "Lend crypto",
+        "label": "贷出加密货币",
         "title": "按照复利协议贷出资产",
         "description": "复利协议允许您在以太坊网络上贷出或借入资产。您可以直接通过您的 Ledger 账户贷出资产并赚取利息。",
         "switchLabel": "我已阅读并同意该 <0><0>使用条款</0></0>。"
@@ -2035,9 +2035,9 @@
           "label": "步骤 3/3",
           "title": "随时提取资产。",
           "description": "You can withdraw your assets and earned interest at any time, partially or entirely, directly from your Ledger account.",
-          "cta": "Lend now"
+          "cta": "立即贷出"
         },
-        "title": "Lend crypto"
+        "title": "贷出加密货币"
       },
       "noTokenAccount": {
         "info": {
@@ -2046,7 +2046,7 @@
         },
         "buttons": {
           "receive": "接收 {{ name }}",
-          "buy": "Buy {{ name }}"
+          "buy": "买入 {{ name }}"
         }
       },
       "enable": {
@@ -2082,15 +2082,15 @@
         "advanced": {
           "amountLabel": "要批准的额度",
           "amountLabelTooltip": "This limits the amount available to the smart contract.",
-          "limit": "Limit",
-          "limited": "Limited",
-          "noLimit": "No Limit"
+          "limit": "限额",
+          "limited": "已限额",
+          "noLimit": "无限额"
         },
         "amount": {
           "totalAvailable": "可用总额"
         },
         "validation": {
-          "success": "Operation sent successfully",
+          "success": "操作已成功发送",
           "info": "The approval was sent to the network for confirmation. You’ll be able to issue loans once it is confirmed.",
           "extraInfo": "Transactions can take some time to be displayed in an explorer and to be confirmed.",
           "button": {
@@ -2100,10 +2100,10 @@
       },
       "supply": {
         "stepperHeader": {
-          "amount": "Supply",
+          "amount": "供给",
           "summary": "概要",
-          "selectDevice": "Select Device",
-          "connectDevice": "Connect Device",
+          "selectDevice": "选择设备",
+          "connectDevice": "连接设备",
           "stepRange": "Step {{currentStep}} of {{totalSteps}}"
         },
         "amount": {
@@ -2111,12 +2111,12 @@
           "placeholderMax": "提取最大额度"
         },
         "validation": {
-          "success": "Deposit sent successfully",
+          "success": "存款已成功发送",
           "info": "You will start earning interest once the network has confirmed the deposit.",
           "extraInfo": "Transactions can take some time to be displayed in an explorer and to be confirmed.",
           "button": {
             "done": "完成",
-            "cta": "View details"
+            "cta": "查看详情"
           }
         }
       },
@@ -2144,13 +2144,13 @@
     "loading": "同步"
   },
   "scanning": {
-    "loading": "Searching devices..."
+    "loading": "正在搜索设备…"
   },
   "send": {
     "tooMuchUTXOBottomModal": {
       "cta": "继续",
       "description": "This transaction may take long to verify and sign because the account has a significant number of coins.",
-      "title": "UTXO message"
+      "title": "UTXO 消息"
     },
     "highFeeModal": "Be careful, network fees are greater than <1>10%</1> of the amount. Do you want to continue?",
     "scan": {
@@ -2164,18 +2164,18 @@
       }
     },
     "stepperHeader": {
-      "selectAccount": "Account to debit",
-      "recipientAddress": "Recipient address",
+      "selectAccount": "要借记的帐户",
+      "recipientAddress": "接收方地址",
       "selectAmount": "数额",
       "summary": "概要",
-      "selectDevice": "Select device",
-      "connectDevice": "Connect device",
+      "selectDevice": "选择设备",
+      "connectDevice": "连接设备",
       "stepRange": "Step {{currentStep}} of {{totalSteps}}"
     },
     "recipient": {
-      "scan": "Scan QR code",
-      "enterAddress": "Enter address",
-      "input": "Enter address",
+      "scan": "扫描二维码",
+      "enterAddress": "输入地址",
+      "input": "输入地址",
       "verifyAddress": "Please verify the address matches the one shared by the recipient."
     },
     "amount": {
@@ -2187,17 +2187,17 @@
     "summary": {
       "subaccountsWarning": "You will need to refill this account with {{ currency }} in order to send the tokens of this account",
       "tag": "Tag (Optional)",
-      "validateTag": "Validate tag",
+      "validateTag": "验证标签",
       "total": "总计",
       "amount": "数额",
       "from": "从",
       "to": "到",
       "infoTotalTitle": "总借记",
       "infoTotalDesc": "Includes transaction amount and the selected network fees",
-      "gasLimit": "Gas limit",
-      "gasPrice": "Gas price",
-      "maxFees": "Max fees",
-      "validateGasLimit": "Validate gas limit",
+      "gasLimit": "Gas 限值",
+      "gasPrice": "Gas 价格",
+      "maxFees": "最大费用",
+      "validateGasLimit": "验证 Gas 限值",
       "fees": "费用",
       "validateFees": "验证费用",
       "customizeFees": "自定义费用",
@@ -2210,30 +2210,30 @@
     },
     "validation": {
       "message": "On your device, confirm the transaction to sign it securely.",
-      "sent": "Transaction sent",
+      "sent": "交易已发送",
       "amount": "数额",
-      "fees": "Fees",
+      "fees": "费用",
       "confirm": "Your account balance will be updated once the network confirms the transaction.",
       "button": {
-        "details": "View details",
+        "details": "查看详情",
         "retry": "重试"
       }
     },
     "fees": {
-      "title": "Network fees",
-      "validate": "Confirm",
-      "required": "Fees are required",
-      "chooseGas": "Choose a gas price",
+      "title": "网络费用",
+      "validate": "确认",
+      "required": "需要费用",
+      "chooseGas": "选择 gas 价格",
       "higherFaster": "Higher gas price means a faster confirmation.",
       "edit": {
-        "title": "Choose unit"
+        "title": "选择单位"
       },
       "networkInfo": "Choose the amount of network fees to include in the transaction. The amount of fees affects the processing speed of the transaction"
     },
     "verification": {
       "streaming": {
-        "accurate": "Loading... ({{percentage}})",
-        "inaccurate": "Loading..."
+        "accurate": "加载中…… ({{percentage}})",
+        "inaccurate": "正在加载……"
       }
     },
     "info": {
@@ -2255,11 +2255,11 @@
   },
   "freeze": {
     "stepperHeader": {
-      "info": "Earn rewards",
-      "selectAmount": "Freeze",
+      "info": "赚取奖励",
+      "selectAmount": "冻结",
       "summary": "概要",
-      "selectDevice": "Select device",
-      "connectDevice": "Connect device",
+      "selectDevice": "选择设备",
+      "connectDevice": "连接设备",
       "stepRange": "Step {{currentStep}} of {{totalSteps}}"
     },
     "info": {
@@ -2274,8 +2274,8 @@
     },
     "amount": {
       "available": "可用总额",
-      "noRateProvider": "Not available",
-      "infoLabel": "Bandwidth or Energy"
+      "noRateProvider": "不可用",
+      "infoLabel": "带宽或能量"
     },
     "validation": {
       "message": "Always verify that your device displays the address exactly as it was originally given to you.",
@@ -2285,23 +2285,23 @@
       "button": {
         "pending": "Transaction is being validated.",
         "pendingDesc": "Please wait a moment before voting.",
-        "vote": "Vote",
+        "vote": "投票",
         "voteTimer": "0:{{time}}",
-        "later": "I will vote later",
+        "later": "我稍后再投票",
         "retry": "重试"
       }
     }
   },
   "unfreeze": {
     "stepperHeader": {
-      "selectAmount": "Unfreeze",
+      "selectAmount": "解冻",
       "summary": "概要",
-      "selectDevice": "Select device",
-      "connectDevice": "Connect device",
+      "selectDevice": "选择设备",
+      "connectDevice": "连接设备",
       "stepRange": "Step {{currentStep}} of {{totalSteps}}"
     },
     "amount": {
-      "title": "Select the type of asset to unfreeze",
+      "title": "选择要解冻的资产类型",
       "info": "Unfreezing will decrease your {{resource}} and will cancel all your votes.",
       "cta": "继续"
     },
@@ -2310,21 +2310,21 @@
       "info": "Your {{resource}} points will be decreased and all your votes will be canceled.",
       "button": {
         "done": "完成",
-        "cta": "See details"
+        "cta": "查看详情"
       }
     }
   },
   "claimReward": {
     "stepperHeader": {
-      "selectDevice": "Select device",
-      "connectDevice": "Connect device",
+      "selectDevice": "选择设备",
+      "connectDevice": "连接设备",
       "stepRange": "Step {{currentStep}} of {{totalSteps}}"
     },
     "validation": {
-      "success": "Your rewards were added to the available balance.",
+      "success": "您的奖励已经添加到可用余额中。",
       "button": {
         "done": "完成",
-        "cta": "See details"
+        "cta": "查看详情"
       }
     }
   },
@@ -2383,7 +2383,7 @@
     "success": {
       "desc": "View your accounts or add other accounts",
       "secondaryCTA": "Add other accounts",
-      "cta": "Go to Accounts"
+      "cta": "前往账户"
     },
     "stopScanning": "停止扫描",
     "retryScanning": "重试扫描",
@@ -2417,7 +2417,7 @@
     "showMoreChainType": "More address types",
     "addressTypeInfo": {
       "title": "Which address type to choose?",
-      "subtitle": "Add new account",
+      "subtitle": "添加新账户",
       "native_segwit": {
         "title": "Native Segwit",
         "desc": "Best overall. Low fees per transaction, error detection and Lightning Network support. Some wallets/exchanges may need to add support."
@@ -2436,50 +2436,50 @@
     "allowAppPermission": "Open the {{wording}} app on your device",
     "allowAppPermissionSubtitleToken": "管理个人 {{token}} 代币",
     "allowManagerPermission": "Allow {{wording}} on your device",
-    "loading": "Loading...",
-    "turnOnAndUnlockDevice": "Turn on and unlock your device",
-    "connectAndUnlockDevice": "Connect and unlock your device",
-    "unlockDevice": "Unlock your device",
+    "loading": "正在加载……",
+    "turnOnAndUnlockDevice": "启动并解锁您的设备",
+    "connectAndUnlockDevice": "连接并解锁您的设备",
+    "unlockDevice": "解锁您的设备",
     "outdated": "应用程序版本过期",
     "outdatedDesc": "An important update is available for the {{appName}} application on your device. Please go to the Manager to update it.",
-    "quitApp": "Quit the application on your device",
+    "quitApp": "在设备上退出该应用程序",
     "appNotInstalled": "Please install the {{appName}} app",
     "appNotInstalled_plural": "Please install the {{appName}} apps",
     "verifyAddress": {
-      "title": "Verify address on device",
+      "title": "在设备上验证地址",
       "description": "Please verify that the {{currencyName}} address to be shown in Ledger Live matches the one on your Ledger device."
     },
     "confirmSwap": {
-      "title": "Confirm swap operation on device",
+      "title": "在设备上确认兑换操作",
       "alert": "Verify the Swap details on your device before sending it. The addresses are exchanged securely so you don’t have to verify them."
     },
     "confirmSell": {
-      "title": "Confirm sell operation on device",
+      "title": "在设备上确认卖出操作",
       "alert": "Verify the Sell details on your device before sending it. The addresses are exchanged securely so you don’t have to verify them."
     },
     "button": {
-      "openManager": "Open Manager"
+      "openManager": "打开管理器"
     },
-    "installApp": "{{appName}} App installation {{percentage}}",
-    "installAppDescription": "Please wait until the installation is finished",
+    "installApp": "{{appName}} 应用程序安装 {{percentage}}",
+    "installAppDescription": "请耐心等待，直至安装完成",
     "listApps": "Checking App dependencies",
     "listAppsDescription": "Please wait while we make sure you have all the required apps"
   },
   "SelectDevice": {
-    "title": "Pair new device",
+    "title": "配对新设备",
     "bluetooth": {
       "title": "通过蓝牙连接……",
       "label": "自动检测您的 Nano"
     },
-    "deviceNotFoundPairNewDevice": "Add new Ledger Nano X",
+    "deviceNotFoundPairNewDevice": "添加新的 Ledger Nano X",
     "headerDescription": "Please make sure your {{productName}} is unlocked with Bluetooth enabled",
-    "usb": "... or connect USB cable",
+    "usb": "……或连接 USB 数据线",
     "usbLabel": "Connect USB cable and enter your PIN Code on your device",
-    "withoutDeviceHeader": "I don't have my device with me",
-    "withoutDevice": "Continue without my device",
+    "withoutDeviceHeader": "设备不在我身边",
+    "withoutDevice": "在不使用我的设备的情况下继续",
     "steps": {
       "connecting": {
-        "title": "Connecting {{deviceName}}",
+        "title": "正在连接 {{deviceName}}",
         "description": {
           "ble": "Please make sure your {{productName}} is unlocked and within range",
           "usb": "Please make sure your {{productName}} is unlocked"
@@ -2498,8 +2498,8 @@
         "title": "Open the {{managerAppName}} app on your {{productName}}",
         "description": "",
         "footer": {
-          "appInstalled": "You don't have the app installed",
-          "goManager": "Go to the Manager"
+          "appInstalled": "您尚未安装该应用程序",
+          "goManager": "前往管理器"
         }
       },
       "accountApp": {
@@ -2518,18 +2518,18 @@
         "title": "Press both buttons together to enable setting the device name."
       },
       "listApps": {
-        "title": "Loading..."
+        "title": "正在加载……"
       }
     }
   },
   "EditDeviceName": {
     "title": "Rename device",
     "charactersRemaining": "{{remainingCount}} characters remaining",
-    "action": "Confirm"
+    "action": "确认"
   },
   "PairDevices": {
     "Paired": {
-      "title": "Pairing successful",
+      "title": "配对成功",
       "desc": "Your {{productName}} is ready to be used with Ledger Live.",
       "action": "继续"
     },
@@ -2550,78 +2550,78 @@
       "desc": "Please make sure your {{productName}} is unlocked and Bluetooth is enabled."
     },
     "bypassGenuine": "Use anyway",
-    "alreadyPaired": "Already paired"
+    "alreadyPaired": "已配对"
   },
   "DeviceItemSummary": {
     "genuine": "您的设备是正版的",
     "genuineFailed": "设备验证 <1><0>失败</0></1>"
   },
   "DeviceNameRow": {
-    "title": "Name",
-    "action": "Get device name"
+    "title": "名称",
+    "action": "获取设备名"
   },
   "RemoveDevice": {
     "button": {
-      "title": "Remove {{nbDevices}} device",
-      "title_plural": "Remove {{nbDevices}} devices"
+      "title": "删除 {{nbDevices}} 设备",
+      "title_plural": "删除 {{nbDevices}} 设备"
     }
   },
   "manager": {
-    "tabTitle": "Device Manager",
-    "title": "Manager",
-    "connect": "Select your device",
-    "appsCatalog": "App catalog",
-    "installedApps": "Installed apps",
+    "tabTitle": "设备管理器",
+    "title": "管理器",
+    "connect": "选择您的设备",
+    "appsCatalog": "应用程序目录",
+    "installedApps": "已安装的应用程序",
     "noAppNeededForToken": "为 {{tokenName}} 安装 {{appName}} 应用程序",
     "tokenAppDisclaimer": "{{tokenName}} is an {{tokenType}} token using the {{appName}} app. To manage {{tokenName}}, <1>install the {{appName}} app</1> and send the tokens <3>to your {{appName}} account</3>.",
     "tokenAppDisclaimerInstalled": "{{tokenName}} is an {{tokenType}} token using the {{appName}} app. To manage {{tokenName}}, <1>open the {{appName}} app</1> and send the tokens <3>to your {{appName}} account</3>.",
-    "goToAccounts": "Go to Accounts",
-    "intallParentApp": "Install {{appName}} app",
+    "goToAccounts": "前往账户",
+    "intallParentApp": "安装 {{appName}} 应用程序",
     "readOnly": {
       "title": "Nano X",
-      "description": "Setup Ledger Live with your Ledger Nano X to install apps, create accounts and make secure transactions wherever you go.",
-      "question": "Do you have your Ledger Nano X?",
-      "button": "Start Nano X setup",
-      "noDevice": "No device?",
-      "buy": "Buy a Ledger Nano X"
+      "description": "使用您的 Ledger Nano X 设置 Ledger Live，从而安装应用程序、创建账户并且随时随地进行安全交易。",
+      "question": "您是否有您的 Ledger Nano X？",
+      "button": "开始设置 Nano X",
+      "noDevice": "没有设备？",
+      "buy": "购买一个 Ledger Nano X"
     },
     "appList": {
-      "title": "App catalog",
-      "loading": "Loading apps...",
-      "noApps": "No apps found",
-      "searchAppsCatalog": "Search app in catalogue...",
-      "searchAppsInstalled": "Search installed apps...",
-      "noAppsInstalled": "No apps installed on your device",
-      "noAppsDescription": "Go to the App catalog to install apps",
-      "noResultsFound": "No results found",
-      "noResultsDesc": "Please verify the spelling and try again",
+      "title": "应用程序目录",
+      "loading": "正在加载应用程序……",
+      "noApps": "未找到应用程序",
+      "searchAppsCatalog": "在目录中搜索应用程序……",
+      "searchAppsInstalled": "搜索已安装的应用程序……",
+      "noAppsInstalled": "设备未安装相关应用程序",
+      "noAppsDescription": "请前往应用程序目录，安装相关应用程序",
+      "noResultsFound": "搜索无结果",
+      "noResultsDesc": "请检查拼写后重试。",
       "versionNew": "（新版本{{newVersion}}）"
     },
     "uninstall": {
-      "title": "Uninstall all",
-      "subtitle": "Uninstall all apps?",
-      "description": "Uninstalling apps has no impact on your crypto assets. You can reinstall apps in the App catalog."
+      "title": "卸载全部",
+      "subtitle": "卸载全部应用程序？",
+      "description": "卸载应用程序并不会影响您的加密资产。您可以通过应用程序目录来重新安装应用程序。"
     },
     "remove": {
-      "title": "Remove device",
-      "description": "Are you sure? You can add your {{productName}} again at any time.",
-      "button": "Remove"
+      "title": "删除设备",
+      "description": "您确定吗？您随时可以再次添加您的 {{productName}}。",
+      "button": "删除"
     },
     "storage": {
       "title": "存储",
-      "used": "Used",
-      "genuine": "Your device is genuine",
+      "used": "已用",
+      "genuine": "您的设备是正版的",
       "appsInstalled": "<0>{{number}}</0> app installed",
       "appsInstalled_plural": "<0>{{number}}</0> apps installed",
-      "storageAvailable": "available"
+      "storageAvailable": "可用"
     },
     "installSuccess": {
       "title": "App installed successfully, you can now add your {{app}} accounts",
       "title_plural": "Apps installed successfully, you can now add your accounts",
       "notSupported": "App installed successfully, find out more about the installed apps on our website.",
-      "manageAccount": "Add accounts",
-      "learnMore": "Learn more",
-      "later": "Do it later"
+      "manageAccount": "添加账户",
+      "learnMore": "了解更多信息",
+      "later": "以后再说"
     },
     "firmware": {
       "latest": "固件版本 {{version}} 可用",
@@ -2699,10 +2699,10 @@
   },
   "AuthenticityRow": {
     "title": "Authentication",
-    "subtitle": "Genuine"
+    "subtitle": "正版"
   },
   "RemoveRow": {
-    "title": "Remove device"
+    "title": "删除设备"
   },
   "FirmwareVersionRow": {
     "title": "固件版本",
@@ -2710,35 +2710,35 @@
   },
   "FirmwareUpdateRow": {
     "title": "固件版本{{version}}可用",
-    "subtitle": "Please use Ledger Live Desktop to update",
-    "action": "Update"
+    "subtitle": "请使用 Ledger Live 桌面应用程序更新",
+    "action": "更新"
   },
   "FirmwareUpdate": {
-    "title": "Update firmware",
+    "title": "更新固件",
     "Installing": {
-      "title": "{{stepName}}...",
+      "title": "{{stepName}}……",
       "subtitle": "If requested on your device, please enter your PIN to finish the process."
     },
     "steps": {
-      "osu": "Installing OSU",
-      "flash-mcu": "MCU updating",
-      "flash-bootloader": "Bootloader updating",
+      "osu": "正在安装 OSU",
+      "flash-mcu": "MCU 正在更新",
+      "flash-bootloader": "Bootloader 正在更新",
       "flash": "Flashing your device",
-      "firmware": "Firmware updating"
+      "firmware": "固件正在更新"
     }
   },
   "FirmwareUpdateReleaseNotes": {
     "introTitle": "You are about to install <1><0>firmware version {{version}}.</0></1>",
     "introDescription1": "Please note that all the apps on your device will be deleted. You can reinstall your apps after the firmware update.",
-    "introDescription2": "This has no impact on your crypto assets.",
+    "introDescription2": "该操作不会影响您的加密资产。",
     "action": "继续更新"
   },
   "FirmwareUpdateCheckId": {
-    "title": "Identifier",
-    "description": "Please press both buttons together on your {{fullDeviceName}} if it displays the same identifier:"
+    "title": "标识符",
+    "description": "如果您的 {{fullDeviceName}} 上显示了同样的标识符，请同时按下两个按钮："
   },
   "FirmwareUpdateMCU": {
-    "title": "Restart device",
+    "title": "重启设备",
     "desc1": "Disconnect your device from your computer.",
     "desc2": "Press and hold the left button, connect the USB cable then release the button when the Bootloader screen appears."
   },
