@@ -818,7 +818,7 @@
           },
           "3": {
             "title": "按指示操作",
-            "label": "Come back here to follow instructions on your PIN code."
+            "label": "返回此处以按照 PIN 识别密码的说明操作。"
           }
         },
         "cta": "下一步"
@@ -1233,7 +1233,7 @@
     "emptyState": {
       "noAppsTitle": "在我的设备上安装应用程序",
       "noAppsDesc": "Install apps on your device before adding accounts in Ledger Live. Go to the Manager to install apps.",
-      "noAccountsTitle": "You don't have any accounts…",
+      "noAccountsTitle": "您没有任何账户…",
       "noAccountsDesc": "请添加账户到您的资产组合。",
       "buttons": {
         "import": "添加账户",
@@ -1301,8 +1301,8 @@
       "REWARD_PAYOUT": "奖励",
       "SLASH": "Slash",
       "WITHDRAW_UNBONDED": "Unbonded Withdrawal",
-      "NOMINATE": "Nomination",
-      "CHILL": "Clear nominations"
+      "NOMINATE": "提名",
+      "CHILL": "清除提名"
     }
   },
   "operationDetails": {
@@ -1502,7 +1502,7 @@
       "cta": "申领"
     },
     "undelegation": {
-      "sectionLabel": "Undelegation(s)"
+      "sectionLabel": "解除委托"
     }
   },
   "accounts": {
@@ -1517,15 +1517,15 @@
       "queued": "等待",
       "showTokens": "显示 {{length}} 一种代币",
       "showTokens_plural": "显示 {{length}} 多种代币",
-      "showSubAccounts": "Show {{length}} subaccount",
-      "showSubAccounts_plural": "Show {{length}} subaccounts",
+      "showSubAccounts": "显示 {{length}} 一个子账户",
+      "showSubAccounts_plural": "显示 {{length}} 多个子账户",
       "hideTokens": "隐藏一种代币",
       "hideTokens_plural": "隐藏多种代币",
       "hideSubAccounts": "隐藏一个子账户",
       "hideSubAccounts_plural": "隐藏多个子账户",
       "algorand": {
-        "showTokens": "Show {{length}} ASA",
-        "showTokens_plural": "Show {{length}} ASA",
+        "showTokens": "显示 {{length}} ASA",
+        "showTokens_plural": "显示 {{length}} ASA",
         "hideTokens": "隐藏 ASA",
         "hideTokens_plural": "隐藏 ASA"
       }
@@ -1614,24 +1614,24 @@
         "bullet8": "Ledger 设备类型和固件"
       },
       "technicalData": "技术数据",
-      "technicalDataDesc": "Ledger will automatically collect anonymized technical data to improve user experience.",
+      "technicalDataDesc": "Ledger 会自动收集匿名技术数据用于改善用户体验。",
       "technicalDataModal": {
         "title": "技术数据",
-        "desc": "Ledger will automatically collect anonymized technical data to improve user experience.",
-        "bullet1": "Anonymous unique application ID",
-        "bullet2": "Ledger Live version, OS region, language and region"
+        "desc": "Ledger 会自动收集匿名技术数据用于改善用户体验。",
+        "bullet1": "匿名唯一的应用程序 ID",
+        "bullet2": "Ledger Live 版本、操作系统区域、语言和地区"
       },
       "hideEmptyTokenAccounts": "隐藏空的代币帐户",
       "hideEmptyTokenAccountsDesc": "在账户页面隐藏空的代币帐户。"
     },
     "currencies": {
       "header": "币种",
-      "rateProvider": "Rate Provider ({{currencyTicker}}→BTC)",
+      "rateProvider": "兑换率提供方 ({{currencyTicker}}→BTC)",
       "rateProviderDesc": "Choose the provider of the rate between {{currencyTicker}} and Bitcoin.",
       "confirmationNb": "确认数量",
       "confirmationNbDesc": "Set the number of network confirmations for transactions to be approved.",
       "currencySettingsTitle": "{{currencyName}} 设置",
-      "placeholder": "No settings for this asset"
+      "placeholder": "没有此资产的设置"
     },
     "accounts": {
       "header": "账户",
@@ -2739,30 +2739,30 @@
   },
   "FirmwareUpdateMCU": {
     "title": "重启设备",
-    "desc1": "Disconnect your device from your computer.",
+    "desc1": "断开设备和电脑的连接。",
     "desc2": "Press and hold the left button, connect the USB cable then release the button when the Bootloader screen appears."
   },
   "FirmwareUpdateConfirmation": {
-    "title": "Firmware updated",
-    "description": "Go to Manager to reinstall apps on your device."
+    "title": "固件已更新",
+    "description": "前往管理器重新安装您设备上的应用程序。"
   },
   "RepairDevice": {
-    "title": "Repair",
-    "action": "My device is ready"
+    "title": "修复",
+    "action": "我的设备已经就绪"
   },
   "StepLegacyModal": {
     "description": "Imported accounts synchronize with the network only, not between Mobile and Desktop versions of Ledger Live."
   },
   "algorand": {
-    "token": "ASA (Assets)",
+    "token": "ASA (资产)",
     "claimRewards": {
-      "title": "Rewards",
-      "button": "Claim",
+      "title": "奖励",
+      "button": "申领",
       "stepperHeader": {
-        "info": "Earn rewards",
-        "starter": "Rewards",
-        "connectDevice": "Connect device",
-        "verification": "Verification",
+        "info": "赚取奖励",
+        "starter": "奖励",
+        "connectDevice": "连接设备",
+        "verification": "验证",
         "stepRange": "Step {{currentStep}} of {{totalSteps}}"
       },
       "flow": {
@@ -2785,23 +2785,23 @@
           },
           "verification": {
             "success": {
-              "title": "Rewards successfully claimed!",
-              "text": "Your rewards were added to your available balance.",
-              "cta": "Go to account"
+              "title": "已成功申领奖励！",
+              "text": "您的奖励已经添加进您的可用余额中。",
+              "cta": "前往账户"
             },
             "pending": {
-              "title": "Broadcasting transaction..."
+              "title": "播送交易……"
             },
-            "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
+            "broadcastError": "您的交易可能已失败。请在几分钟后查看并在确保您的交易的确没有通过后，才再次重试。"
           }
         }
       }
     },
     "optIn": {
       "stepperHeader": {
-        "selectToken": "Add ASA (Asset)",
-        "connectDevice": "Connect device",
-        "verification": "Verification",
+        "selectToken": "添加 ASA (资产)",
+        "connectDevice": "连接设备",
+        "verification": "验证",
         "stepRange": "Step {{currentStep}} of {{totalSteps}}"
       },
       "flow": {
@@ -2884,18 +2884,18 @@
             "cta": "继续"
           },
           "validator": {
-            "validators": "Validators",
-            "myDelegations": "My delegations",
+            "validators": "验证器",
+            "myDelegations": "我的委托",
             "cta": "继续",
-            "estYield": "Est. yield: {{amount}}",
+            "estYield": "预估收益：{{amount}}",
             "totalAvailable": "可用总额：<0>{{amount}}</0>",
-            "allAssetsUsed": "All assets used",
+            "allAssetsUsed": "已使用所有资产",
             "noResultsFound": "No validator found for <0>{{search}}</0>",
             "currentAmount": "(+ <0>{{amount}}</0>)"
           },
           "amount": {
             "assetsRemaining": "Assets remaining: <0>{{amount}}</0>",
-            "allAssetsUsed": "All assets used",
+            "allAssetsUsed": "已使用所有资产",
             "minAmount": "Minimum amount: <0>{{min}}</0>",
             "incorrectAmount": "Maximum amount: <0>{{max}}</0>",
             "cta": "继续"
@@ -2904,7 +2904,7 @@
             "success": {
               "title": "You have successfully delegated your assets",
               "text": "Your account balance will be updated once the network confirms the transaction.",
-              "cta": "View details"
+              "cta": "查看详情"
             },
             "pending": {
               "title": "Broadcasting transaction..."
@@ -2914,35 +2914,35 @@
         }
       },
       "drawer": {
-        "status": "Status",
-        "rewards": "Rewards",
-        "active": "Active",
-        "inactive": "Inactive",
-        "completionDate": "Completion date",
+        "status": "状态",
+        "rewards": "奖励",
+        "active": "活跃",
+        "inactive": "不活跃",
+        "completionDate": "完成日期",
         "redelegatedFrom": "已重新委托自"
       }
     },
     "redelegation": {
-      "estYield": "est. yield",
+      "estYield": "预估收益",
       "stepperHeader": {
-        "validator": "Choose new validator",
-        "amountSubTitle": "Amount to redelegate",
+        "validator": "选择新的验证器",
+        "amountSubTitle": "要重新委托的数额",
         "amountTitle": "{{from}} → {{to}}",
         "summary": "概要",
-        "selectDevice": "Select device",
-        "connectDevice": "Connect device",
+        "selectDevice": "选择设备",
+        "connectDevice": "连接设备",
         "stepRange": "Step {{currentStep}} of {{totalSteps}}"
       },
       "flow": {
         "steps": {
           "validator": {
             "validators": "验证器",
-            "myDelegations": "My delegations",
+            "myDelegations": "我的委托",
             "cta": "继续",
-            "estYield": "Est. yield: {{amount}}",
+            "estYield": "预估收益：{{amount}}",
             "totalAvailable": "可用总额：<0>{{amount}}</0>",
-            "allAssetsUsed": "All assets used",
-            "noResultsFound": "No validator found for <0>{{search}}</0>"
+            "allAssetsUsed": "已使用所有资产",
+            "noResultsFound": "搜索 <0>{{search}}</0> 未找到验证器"
           },
           "amount": {
             "newRedelegatedBalance": "New total for <0>{{name}}</0> after operation: <0>{{amount}}</0>"
@@ -2951,22 +2951,22 @@
             "success": {
               "title": "You have successfully redelegated your assets",
               "text": "Your account balance will be updated when the network confirms the transaction.",
-              "cta": "View details"
+              "cta": "查看详情"
             },
             "pending": {
-              "title": "Broadcasting transaction..."
+              "title": "播送交易……"
             },
-            "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+            "broadcastError": "您的交易可能已失败。请稍候片刻并在重试之前查看交易记录。"
           }
         }
       }
     },
     "undelegation": {
       "stepperHeader": {
-        "amountSubTitle": "Amount to undelegate",
+        "amountSubTitle": "要解除委托的数额",
         "summary": "概要",
-        "selectDevice": "Select device",
-        "connectDevice": "Connect device",
+        "selectDevice": "选择设备",
+        "connectDevice": "连接设备",
         "stepRange": "Step {{currentStep}} of {{totalSteps}}"
       },
       "flow": {
@@ -2978,22 +2978,22 @@
             "success": {
               "title": "You have successfully undelegated your assets",
               "text": "Your account balance will be updated when the network confirms the transaction.",
-              "cta": "View details"
+              "cta": "查看详情"
             },
             "pending": {
-              "title": "Broadcasting transaction..."
+              "title": "播送交易……"
             },
-            "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+            "broadcastError": "您的交易可能已失败。请稍候片刻并在重试之前查看交易记录。"
           }
         }
       }
     },
     "claimRewards": {
       "stepperHeader": {
-        "validator": "Select reward to collect",
-        "method": "Claim rewards",
+        "validator": "选择要收集的奖励",
+        "method": "申领奖励",
         "summary": "概要",
-        "selectDevice": "Select device",
+        "selectDevice": "选择设备",
         "connectDevice": "Connect device",
         "stepRange": "Step {{currentStep}} of {{totalSteps}}"
       },
@@ -3063,15 +3063,15 @@
           "srOrCandidate": "SR or Candidate?",
           "description": "Vote for one or more Super Representatives to start earning rewards.",
           "button": {
-            "continue": "Cast votes"
+            "continue": "将票投出"
           }
         },
         "selectValidator": {
           "sections": {
             "title": {
-              "selected": "Selected",
-              "superRepresentatives": "Super Representatives",
-              "candidates": "Candidates"
+              "selected": "已选",
+              "superRepresentatives": "超级代表",
+              "candidates": "候选人"
             }
           }
         }
@@ -3081,7 +3081,7 @@
       "flow": {
         "steps": {
           "starter": {
-            "title": "Earn rewards",
+            "title": "赚取奖励",
             "description": "Delegate TRX to a third party candidate to earn rewards. Click on continue to freeze assets and vote.",
             "bullet": {
               "delegate": "Delegated assets remain yours.",
@@ -3098,37 +3098,37 @@
     "manage": {
       "title": "Manage Tron Power",
       "freeze": {
-        "title": "Freeze",
+        "title": "冻结",
         "description": "Freeze TRX to earn Bandwidth or Energy. You can also vote for Super Representatives."
       },
       "unfreeze": {
-        "title": "Unfreeze",
+        "title": "解冻",
         "description": "Unfreeze TRX to add them back to your available balance. You will no longer earn rewards."
       },
       "vote": {
-        "title": "Vote",
+        "title": "投票",
         "description": "Cast votes for Super Representatives to earn rewards."
       }
     },
     "info": {
       "available": {
-        "title": "TRX available",
+        "title": "TRX 可用",
         "description": "This amount is disposable."
       },
       "frozen": {
-        "title": "Frozen",
+        "title": "已冻结",
         "description": "Frozen assets are used for Tron voting. This is your total number of votes."
       },
       "bandwidth": {
-        "title": "Bandwidth",
+        "title": "带宽",
         "description": "Bandwidth points are used to make transactions instead of paying TRX network fees. Choose Bandwidth to increase your daily free transactions."
       },
       "energy": {
-        "title": "Energy",
+        "title": "能量",
         "description": "Energy points are required to execute smart contracts. If you don't run smart contracts, there is no need to have rewards in Energy points."
       },
       "claimRewards": {
-        "title": "Voting rewards",
+        "title": "投票奖励",
         "description": "The TRX generated as rewards during block production can be claimed every 24 hours."
       },
       "superRepresentative": {
@@ -3136,7 +3136,7 @@
         "description": "Super Representatives play a key role in governing the TRON community by ensuring basic functions, e.g. block generation and bookkeeping."
       },
       "candidates": {
-        "title": "Candidates",
+        "title": "候选人",
         "description": "127 individuals elected through voting by the entire token-holder community. Votes are sampled every 6 hours."
       }
     }
@@ -3161,19 +3161,19 @@
     "networkFees": "Network fees are automatically set by the Polkadot consensus, you won't be able to review them on your device",
     "info": {
       "available": {
-        "title": "DOT available",
-        "description": "This amount can be sent anytime."
+        "title": "DOT 可用",
+        "description": "该数额可被随时发送。"
       },
       "locked": {
-        "title": "Bonded assets",
+        "title": "已绑定资产",
         "description": "Assets must be bonded to nominated validators before earning rewards."
       },
       "unlocking": {
-        "title": "Unbonding assets",
+        "title": "正在解绑资产",
         "description": "Unbonding assets stay locked for 28 days before they can be withdrawn."
       },
       "unlocked": {
-        "title": "Unbonded assets",
+        "title": "已解绑资产",
         "description": "Unbonded assets can now be moved using the withdraw operation."
       },
       "electionOpen": {
@@ -3183,7 +3183,7 @@
     },
     "nomination": {
       "emptyState": {
-        "title": "Earn rewards",
+        "title": "赚取奖励",
         "description": "You can earn rewards by bonding assets and then nominating your validator(s).",
         "info": "How nominations work",
         "cta": "Earn rewards"
@@ -3220,18 +3220,18 @@
       "hideAllUnlockings": "Hide unbonding amounts"
     },
     "unlockings": {
-      "header": "Unbonding",
+      "header": "正在解绑",
       "withdrawUnbonded": "Withdraw Unbonded",
-      "rebond": "Rebond"
+      "rebond": "重新绑定"
     },
     "manage": {
-      "title": "Manage assets",
+      "title": "管理资产",
       "bond": {
-        "title": "Bond",
+        "title": "绑定",
         "description": "To earn rewards, first bond an amount. Then you must nominate your validator(s)."
       },
       "unbond": {
-        "title": "Unbond",
+        "title": "解绑",
         "description": "To make a bonded amount available again, first you need to unbond it. You can withdraw it after the 28-day unbonding period."
       },
       "withdrawUnbonded": {
@@ -3239,26 +3239,26 @@
         "description": "To retrieve an unbonded amount back to the available balance, you need to withdraw it manually."
       },
       "nominate": {
-        "title": "Nominate",
+        "title": "提名",
         "description": "Choose up to 16 validators. Ensure nominations are Active to earn rewards."
       },
       "chill": {
-        "title": "Clear nominations",
+        "title": "清除提名",
         "description": "Remove all nominations. You will stop earning rewards. Your bonded amount remains bonded."
       }
     },
     "nominate": {
       "stepperHeader": {
-        "validators": "Validators to nominate",
-        "selectDevice": "Select device",
-        "connectDevice": "Connect device",
+        "validators": "要提名的验证器",
+        "selectDevice": "选择设备",
+        "connectDevice": "连接设备",
         "stepRange": "Step {{currentStep}} of {{totalSteps}}"
       },
       "steps": {
         "validators": {
-          "myNominations": "My nominations",
-          "electedValidators": "Elected validators",
-          "waitingValidators": "Unelected validators",
+          "myNominations": "我的提名",
+          "electedValidators": "当选的验证器",
+          "waitingValidators": "未当选的验证器",
           "noResultsFound": "No validators found for <0>{{search}}</0>",
           "selected": "{{selected}} out of {{total}} selected",
           "notValidatorsRemoved": "You have nominated {{count}} addresses who are no longer validators. They will automatically be removed from your nominate transaction.",
@@ -3274,20 +3274,20 @@
     },
     "bond": {
       "rewardDestination": {
-        "label": "Reward Destination",
+        "label": "奖励目的地",
         "stash": "Available balance",
         "stashDescription": "Rewards are credited to your available balance.",
         "staked": "Bonded balance",
         "stakedDescription": "Rewards are credited to your bonded balance for compound earning.",
-        "optionTitle": "Note",
+        "optionTitle": "备注",
         "optionDescription": "Once set, the option is fixed for the lifetime of this bond. If you change your mind, please read ",
-        "clickableLink": "here."
+        "clickableLink": "此处。"
       },
       "stepperHeader": {
-        "starter": "Earn rewards",
-        "amount": "Amount to bond",
-        "selectDevice": "Select device",
-        "connectDevice": "Connect device",
+        "starter": "赚取奖励",
+        "amount": "要绑定的数额",
+        "selectDevice": "选择设备",
+        "connectDevice": "连接设备",
         "stepRange": "Step {{currentStep}} of {{totalSteps}}"
       },
       "steps": {
@@ -3298,49 +3298,49 @@
             "Nominate using your Ledger device",
             "Assets will be available again, 28 days after unbonding"
           ],
-          "help": "How nominations work",
+          "help": "提名机制如何运作",
           "warning": "Choose your validators wisely: part of your bonded assets may be irrevocably lost if a validator does not behave appropriately."
         },
         "amount": {
-          "availableLabel": "Available",
-          "maxLabel": "Max"
+          "availableLabel": "可用",
+          "maxLabel": "最多"
         },
         "confirm": {
           "info": "Bonded assets can be unbonded at any time, but unbonding takes 28 days."
         },
         "validation": {
           "success": {
-            "title": "Assets successfully bonded",
+            "title": "资产已成功绑定",
             "description": "You can nominate validators once the network has confirmed the transaction.",
             "descriptionNominate": "You will be able to nominate validators once the network has confirmed your transaction.",
-            "nominate": "Nominate",
-            "later": "Nominate later"
+            "nominate": "提名",
+            "later": "稍后提名"
           },
           "pending": {
-            "title": "Transaction awaiting confirmation",
-            "description": "You have to wait a moment before nominating"
+            "title": "交易正待确认",
+            "description": "您必须稍候片刻才能提名"
           }
         }
       }
     },
     "rebond": {
       "stepperHeader": {
-        "amount": "Amount to rebond",
-        "selectDevice": "Select device",
-        "connectDevice": "Connect device",
+        "amount": "要重新绑定的数额",
+        "selectDevice": "选择设备",
+        "connectDevice": "连接设备",
         "stepRange": "Step {{currentStep}} of {{totalSteps}}"
       },
       "steps": {
         "amount": {
-          "availableLabel": "Unbonding",
-          "maxLabel": "Max"
+          "availableLabel": "正在解绑",
+          "maxLabel": "最多"
         },
         "confirm": {
           "info": "Rebonded assets are immediately added to the bonded amount."
         },
         "validation": {
           "success": {
-            "title": "Assets successfully rebonded",
+            "title": "资产已重新绑定成功",
             "description": "Your account balance will update once the network has confirmed the transaction."
           }
         }
@@ -3348,15 +3348,15 @@
     },
     "unbond": {
       "stepperHeader": {
-        "amount": "Amount to unbond",
-        "selectDevice": "Select device",
-        "connectDevice": "Connect device",
+        "amount": "要解绑的数额",
+        "selectDevice": "选择设备",
+        "connectDevice": "连接设备",
         "stepRange": "Step {{currentStep}} of {{totalSteps}}"
       },
       "steps": {
         "amount": {
-          "availableLabel": "Bonded",
-          "maxLabel": "Max"
+          "availableLabel": "已绑定",
+          "maxLabel": "最多"
         },
         "confirm": {
           "info": "Unbonded assets can be withdrawn after the 28-day unbonding period."
@@ -3376,15 +3376,15 @@
           "description": "将已解绑的资产提取到您的可用余额中。"
         },
         "chill": {
-          "title": "Clear nominations",
-          "description": "Clears all nominations and stops earning rewards.",
+          "title": "清除提名",
+          "description": "清除所有提名并停止赚取奖励。",
           "info": "Bonded assets will remain bonded. If you unbond them, they will be available after 28 days."
         }
       },
       "stepperHeader": {
-        "info": "Info",
-        "selectDevice": "Select device",
-        "connectDevice": "Connect device",
+        "info": "信息",
+        "selectDevice": "选择设备",
+        "connectDevice": "连接设备",
         "stepRange": "Step {{currentStep}} of {{totalSteps}}"
       },
       "steps": {
@@ -3398,16 +3398,16 @@
     }
   },
   "delegation": {
-    "overdelegated": "Overdelegated",
+    "overdelegated": "过度委托",
     "delegationSendWarnDesc": "The amount to be sent will be deducted from your delegated account.",
     "delegationReceiveWarnDesc": "The amount received in a delegated account will be added to the total staked amount. Choose another account if you want to avoid this.",
-    "iDelegateMy": "I delegate my",
-    "undelegateMy": "Undelegate my",
-    "warnUndelegation": "Your account will be undelegated.",
+    "iDelegateMy": "我委托我的",
+    "undelegateMy": "我解除委托我的",
+    "warnUndelegation": "您的账户将被解除委托。",
     "warnDelegation": "Delegating your voting rights does not guarantee any rewards from your validator.",
-    "to": "to",
+    "to": "到",
     "from": "从",
-    "forAnEstYield": "for an est. yield of",
+    "forAnEstYield": "以获得预估收益",
     "yieldPerYear": "{{yield}} / 年",
     "yieldInfos": "收益率提供方",
     "termsAndPrivacy": "I have read and I accept the <1>Ledger Live Terms of Use</1> and <3>Privacy Policy</3>.",
@@ -3457,14 +3457,14 @@
   },
   "ValidateOnDevice": {
     "title": {
-      "send": "Please confirm the operation on your {{productName}} to send it",
-      "freeze": "On your device, please confirm to finalize the operation",
-      "unfreeze": "On your device, please confirm to finalize the operation",
-      "claimReward": "On your device, please confirm to finalize the operation",
-      "vote": "On your device, please confirm to finalize the operation",
-      "delegate": "On your device, please confirm to finalize the operation",
-      "redelegate": "On your device, please confirm to finalize the operation",
-      "undelegate": "On your device, please confirm to finalize the operation"
+      "send": "请在您的 {{productName}} 上确认该操作以将其发送出去",
+      "freeze": "请在您的设备上确认，以便完成该操作",
+      "unfreeze": "请在您的设备上确认，以便完成该操作",
+      "claimReward": "请在您的设备上确认，以便完成该操作",
+      "vote": "请在您的设备上确认，以便完成该操作",
+      "delegate": "请在您的设备上确认，以便完成该操作",
+      "redelegate": "请在您的设备上确认，以便完成该操作",
+      "undelegate": "请在您的设备上确认，以便完成该操作"
     },
     "warning": "Always verify the address displayed your device exactly matches the one given to you by the {{recipientWording}}",
     "recipientWording": {
@@ -3481,12 +3481,12 @@
       "compound.supply": "Verify the deposit details on your device before sending it.",
       "compound.withdraw": "Verify the withdrawal details on your device before sending it."
     },
-    "name": "Name",
-    "votes": "Votes",
+    "name": "名称",
+    "votes": "选票",
     "infoWording": {
-      "freeze": "Frozen tokens are locked for a period of 3 days.",
+      "freeze": "冻结的代币会有 3 天的锁定期。",
       "unfreeze": "Your {{resource}} points will be reduced, and all your votes will be cancelled.",
-      "claimReward": "Rewards can be claimed every 24 hours.",
+      "claimReward": "每 24 小时可申领一次奖励。",
       "cosmos": {
         "claimReward": "If the selected validator has pending rewards, they will automatically be claimed.",
         "redelegate": "You will have to wait 21 days for undelegated assets to return to the available balance.",
@@ -3495,20 +3495,20 @@
       "lending": "Verify the operation details on your device before sending it."
     },
     "amount": "数额",
-    "account": "Account",
+    "account": "账户",
     "from": "从",
-    "to": "To",
-    "redelegationAmount": "Redelegated amount",
+    "to": "到",
+    "redelegationAmount": "已重新委托数额",
     "gas": "Gas",
-    "validatorAddress": "Validator address",
-    "rewardAmount": "Reward amount",
-    "undelegatedAmount": "Undelegated amount",
+    "validatorAddress": "验证器地址",
+    "rewardAmount": "奖励金额",
+    "undelegatedAmount": "已解除委托金额",
     "memo": "Memo 标签"
   },
   "Terms": {
-    "title": "Terms of Use",
-    "read": "Read the Terms of Use",
-    "switchLabelPrivacy": "I have read and agree with the <1>Privacy Policy</1>",
+    "title": "使用条款",
+    "read": "阅读使用条款",
+    "switchLabelPrivacy": "我已经阅读并同意该<1>隐私政策</1>",
     "switchLabel": "我已阅读并同意 <1>服务条款</1>",
     "cta": "进入 Ledger 应用程序"
   },
@@ -3540,11 +3540,11 @@
       "connectDevice": "连接您的设备",
       "title": "通过我们的合作伙伴卖出加密资产",
       "description": "直接从您的 Ledger 帐户通过 Coinify 卖出加密资产，并在您的银行帐户中接收 FIAT 法币。",
-      "CTAButton": "Sell now",
+      "CTAButton": "立即卖出",
       "emptyState": {
-        "title": "No {{currency}} account",
+        "title": "没有 {{currency}} 账户",
         "description": "You need to add an account before you can sell {{currency}}.",
-        "CTAButton": "Add account"
+        "CTAButton": "添加账户"
       }
     },
     "history": {
@@ -3563,57 +3563,57 @@
   },
   "walletconnect": {
     "disclaimer": "Wants to connect to the following Ethereum account through your wallet :",
-    "reject": "Reject",
-    "connect": "Connect",
-    "connected": "Connected",
-    "disconnected": "Disconnected",
+    "reject": "拒绝",
+    "connect": "连接",
+    "connected": "已连接",
+    "disconnected": "已断开连接",
     "warningdisconnected": "There is a connection problem between the dApp, WalletConnect and Ledger Live. Wait a few moments or relaunch the connection",
     "info": "You can now access the {{name}} dApp on your desktop.",
     "warning": "Sharing receive addresses from dApp is not secure. Always use Ledger Live when sharing your address to receive funds.",
-    "isconnecting": "is connecting, please wait...",
-    "disconnect": "Disconnect",
+    "isconnecting": "正在连接，请稍候……",
+    "disconnect": "断开连接",
     "retry": "重试",
     "close": "关闭",
-    "message": "Message",
+    "message": "消息",
     "messageHash": "Message Hash",
     "domainHash": "Domain Hash",
     "stringHash": "Hash",
     "from": "从",
-    "successTitle": "Message signed",
+    "successTitle": "消息已签名",
     "successDescription": "You have signed the message received from a third party application",
     "stepperHeader": {
       "summary": "概要",
-      "selectDevice": "Select Device",
-      "connectDevice": "Connect Device",
+      "selectDevice": "选择设备",
+      "connectDevice": "连接设备",
       "stepRange": "Step {{currentStep}} of {{totalSteps}}"
     },
     "stepVerification": {
-      "action": "Please confirm the operation on your device",
-      "accountName": "Account name"
+      "action": "请在您的设备上确认该操作",
+      "accountName": "账户名"
     },
-    "deeplinkingTitle": "Select an Ethereum account",
-    "addAccount": "Add new account"
+    "deeplinkingTitle": "选择一个以太坊账户",
+    "addAccount": "添加新账户"
   },
   "notificationCenter": {
-    "title": "Notification center",
-    "announcement": "Announcement",
-    "liveStatus": "Ledger live status",
+    "title": "通知中心",
+    "announcement": "公告",
+    "liveStatus": "Ledger live 状态",
     "news": {
-      "title": "News",
-      "titleCount": "News ({{count}})",
+      "title": "新闻",
+      "titleCount": "新闻 ({{count}})",
       "emptyState": {
-        "title": "No news for the moment",
-        "desc": "You will find here all the news related to Ledger and Ledger live"
+        "title": "目前没有新闻",
+        "desc": "您将在这里找到与 Ledger 和 Ledger Live 相关的所有新闻"
       }
     },
     "status": {
-      "title": "Status",
+      "title": "状态",
       "ok": {
-        "title": "Ledger Live is up and running",
-        "desc": "<0>Having trouble? Go on our </0><1>help page</1>"
+        "title": "Ledger Live 已开启并正在运行",
+        "desc": "<0>遇到问题？请前往我们的 </0><1>帮助页面</1>"
       },
       "error": {
-        "title": "Ledger Live is experiencing issues"
+        "title": "Ledger Live 正遇到问题"
       }
     }
   }
