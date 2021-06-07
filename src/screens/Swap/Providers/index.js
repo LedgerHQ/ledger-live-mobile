@@ -98,9 +98,14 @@ const Providers = ({
           />
         ))}
         {noCentralizedProviders ? (
-          <LText style={styles.title} semiBold secondary>
-            {"NO CENTRALIZED"}
-          </LText>
+          <Item
+            key="changelly"
+            id="changelly"
+            title="Changelly"
+            bullets={getBullets("changelly")}
+            icon={<IconChangelly size={32} />}
+            disabled
+          />
         ) : null}
       </ScrollView>
       <View style={styles.footer}>

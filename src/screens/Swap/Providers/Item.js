@@ -22,14 +22,16 @@ const ProviderListItem = ({
   title,
   bullets,
   kyc,
+  disabled,
 }: {
   id: string,
   selected?: string,
-  onSelect: string => void,
+  onSelect?: string => void,
   icon?: any,
   title: React$Node,
   bullets: string[],
   kyc?: boolean,
+  disabled?: boolean,
 }) => {
   const { colors } = useTheme();
   const swapKYC = useSelector(swapKYCSelector);
@@ -53,7 +55,6 @@ const ProviderListItem = ({
   }, [dispatch, id, providerKYC]);
 
   useEffect(() => {
-    console.log({ bullets });
     if (providerKYC && providerKYC.status !== "approved") {
       onUpdateKYCStatus();
     }
@@ -69,7 +70,10 @@ const ProviderListItem = ({
     }[status] || colors.red;
 
   return (
-    <TouchableOpacity onPress={() => onSelect(id)}>
+    <TouchableOpacity
+      disabled={!onSelect}
+      onPress={() => onSelect && onSelect(id)}
+    >
       <View
         style={[
           styles.wrapper,
@@ -82,7 +86,14 @@ const ProviderListItem = ({
             {title}
           </LText>
 
-          {kyc ? (
+          {disabled ? (
+            <View style={[styles.headRight, { backgroundColor: colors.fog }]}>
+              <LText style={[styles.status, { color: KYCColor }]} semiBold>
+                <Trans i18nKey={"transfer.swap.providers.kyc.notAvailable"} />
+              </LText>
+              <IconInfo color={colors.smoke} size={14} />
+            </View>
+          ) : kyc ? (
             <View
               style={[
                 styles.headRight,
@@ -156,7 +167,7 @@ const styles = StyleSheet.create({
   headRight: {
     flexDirection: "row",
     alignItems: "center",
-    borderRadius: 8,
+    borderRadius: 4,
     paddingVertical: 5,
     paddingHorizontal: 10,
   },
