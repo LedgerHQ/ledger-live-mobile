@@ -49,9 +49,9 @@ function FabAccountActions({ account, parentAccount }: FabAccountActionsProps) {
       ? [
           {
             navigationParams: [
-              NavigatorName.ExchangeBuyFlow,
+              NavigatorName.Base,
               {
-                screen: ScreenName.ExchangeConnectDevice,
+                screen: NavigatorName.ExchangeProviders,
                 params: {
                   account,
                   mode: "buy",
@@ -129,8 +129,8 @@ function FabActions({ account, parentAccount }: Props) {
       label: <Trans i18nKey="exchange.buy.tabTitle" />,
       Icon: Exchange,
       navigationParams: [
-        NavigatorName.Exchange,
-        { screen: ScreenName.ExchangeBuy },
+        NavigatorName.Base,
+        { screen: NavigatorName.ExchangeProviders },
       ],
     },
     ...(accountsCount > 0 && !readOnlyModeEnabled
