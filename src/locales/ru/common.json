@@ -651,23 +651,23 @@
       },
       "academy": {
         "title": "Ledger Academy",
-        "description": "Everything you need to\nknow about crypto"
+        "description": "Всё что нужно знать \nо криптовалюте"
       },
       "stakeCosmos": {
         "title": "Стейкинг COSMOS",
         "description": "Делегируйте ATOM и получайте вознаграждения уже сегодня."
       },
       "polkastake": {
-        "title": "POLKADOT STAKING",
+        "title": "СТЕЙКИНГ POLKADOT",
         "description": "Stake, secure and\nmanage your DOT with\nLedger Live"
       },
       "backupPack": {
         "title": "Резервный набор",
-        "description": "A Nano X and a Nano S\nfor optimal protection"
+        "description": "Nano X и Nano S\nдля оптимальной защиты"
       },
       "buyCrypto": {
         "title": "Покупайте криптовалюту",
-        "description": "Buy crypto on\nLedger Live"
+        "description": "Покупайте крипту\nв Ledger Live"
       },
       "swap": {
         "title": "Меняйте криптовалюту",
@@ -1770,30 +1770,30 @@
       "providers": {
         "title": "Choose a provider to buy crypto",
         "whatIsSwap": "What is Buy?",
-        "cta": "Continue",
+        "cta": "Продолжить",
         "coinify": {
           "bullets": [
-            "Available in 130+ countries",
-            "EUR, USD, GBP and 32 others",
-            "SEPA & Faster Payments",
-            "Local US wire transfers",
-            "Credit and debit cards"
+            "Доступно в 130+ странах",
+            "EUR, USD, GBP и 32 других",
+            "SEPA и более быстрые платежи",
+            "Местные переводы по США",
+            "Кредитные и дебетовые карты"
           ]
         },
         "wyre": {
           "bullets": [
-            "Only 🇺🇸 bank account",
-            "USD support only",
-            "20+ crypto supported",
-            "ACH transfer",
-            "No credit & debit cards"
+            "Только банковский счёт 🇺🇸",
+            "Поддерживается только USD",
+            "Поддерживается 20+ криптовалют",
+            "ACH-переводы",
+            "Кредитные и дебетовые карты не поддерживаются"
           ]
         }
       }
     },
     "swap": {
       "title": "Обмен",
-      "paraswap": "Paraswap",
+      "paraswap": "ParaSwap",
       "selectDevice": "Выберите устройство",
       "broadcasting": "Broadcasting swap",
       "loadingFees": "Загружаем комиссию сети...",
@@ -1804,21 +1804,21 @@
         "disclaimer": "Криптовалюту можно менять непосредственно на устройстве Ledger. Эта услуга недоступна в США и некоторых других странах."
       },
       "providers": {
-        "title": "Choose a provider to swap your crypto",
-        "whatIsSwap": "What is Swap?",
-        "cta": "Continue",
+        "title": "Выберите поставщика услуг для обмена криптовалюты",
+        "whatIsSwap": "Что такое Swap (обмен криптоактивов)?",
+        "cta": "Продолжить",
         "changelly": {
           "bullets": [
-            "BTC, ETH, USDT and 50+ others",
-            "Multi-currency",
-            "Centralized"
+            "BTC, ETH, USDT и 50+ других",
+            "Мультивалютная поддержка",
+            "Централизована"
           ]
         },
         "paraswap": {
           "bullets": [
-            "Connect to 30+ DEXs (Uniswap, SushiSwap,...)",
-            "Ethereum & ERC20 tokens",
-            "Decentralized & Trustless"
+            "Подключайте к 30+ DEX-биржам (Uniswap, SushiSwap,...)",
+            "Ethereum и ERC20-токены",
+            "Децентрализованная система без доверия"
           ]
         }
       },
@@ -1945,7 +1945,7 @@
         }
       },
       "platform": {
-        "tab": "Platform"
+        "tab": "Платформа"
       }
     },
     "lending": {
@@ -2041,7 +2041,7 @@
       },
       "noTokenAccount": {
         "info": {
-          "title": "You don’t have a {{ name }} account.",
+          "title": "У вас нет счёта {{ name }}.",
           "description": "Чтобы внести деньги и предоставить займ в криптовалюте, потребуется счёт {{ name }}. Получите средства на свой Ethereum-адрес."
         },
         "buttons": {
@@ -2245,12 +2245,12 @@
   },
   "requestAccount": {
     "stepperHeader": {
-      "selectCrypto": "Select crypto",
-      "selectAccount": "Select account",
-      "stepRange": "Step {{currentStep}} of {{totalSteps}}"
+      "selectCrypto": "Выберите криптовалюту",
+      "selectAccount": "Выберите счёт",
+      "stepRange": "Шаг {{currentStep}} из {{totalSteps}}"
     },
     "selectAccount": {
-      "addAccount": "Add {{currency}} account"
+      "addAccount": "Добавить счёт {{currency}}"
     }
   },
   "freeze": {
@@ -2423,7 +2423,7 @@
         "desc": "Лучший вариант. Низкие комиссии, обнаружение ошибок и поддержка Lightning Network. Для некоторых кошельков/бирж может потребоваться установка дополнительной поддержки."
       },
       "segwit": {
-        "title": "Segwit",
+        "title": "SegWit",
         "desc": "Комиссии выше, чем в Native Segwit. Поддержка Lightning. Поддерживается большинством кошельков."
       },
       "legacy": {
@@ -2444,7 +2444,7 @@
     "outdatedDesc": "Для приложения {{appName}} на вашем устройстве появилось важное обновление. Чтобы установить обновления, перейдите в Диспетчер.",
     "quitApp": "Выйдите из приложения на устройстве",
     "appNotInstalled": "Установите приложение {{appName}}",
-    "appNotInstalled_plural": "Please install the {{appName}} apps",
+    "appNotInstalled_plural": "Пожалуйста, установите приложения {{appName}}",
     "verifyAddress": {
       "title": "Подтвердите адрес на устройстве",
       "description": "Убедитесь, что адрес {{currencyName}} в Ledger Live в точности совпадает с адресом на экране устройства Ledger."
@@ -2481,7 +2481,7 @@
       "connecting": {
         "title": "Подключение {{deviceName}}",
         "description": {
-          "ble": "Please make sure your {{productName}} is unlocked and within range",
+          "ble": "Обязательно разблокируйте {{productName}} и убедитесь в том, что устройство находится в радиусе",
           "usb": "Обязательно разблокируйте {{productName}}"
         }
       },
@@ -2790,7 +2790,7 @@
               "cta": "Перейти к Счёту"
             },
             "pending": {
-              "title": "Broadcasting transaction..."
+              "title": "Трансляция транзакции..."
             },
             "broadcastError": "Возможно, во время осуществления транзакции произошла ошибка. Чтобы убедиться в этом, проверьте состояние через несколько минут, прежде чем попытаться снова."
           }
@@ -2819,7 +2819,7 @@
               "cta": "Подробнее"
             },
             "pending": {
-              "title": "Broadcasting transaction..."
+              "title": "Трансляция транзакции..."
             },
             "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
           }
@@ -2907,7 +2907,7 @@
               "cta": "Подробнее"
             },
             "pending": {
-              "title": "Broadcasting transaction..."
+              "title": "Трансляция транзакции..."
             },
             "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
           }
@@ -2954,7 +2954,7 @@
               "cta": "Подробнее"
             },
             "pending": {
-              "title": "Broadcasting transaction..."
+              "title": "Трансляция транзакции..."
             },
             "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
           }
@@ -2976,12 +2976,12 @@
           },
           "verification": {
             "success": {
-              "title": "You have successfully undelegated your assets",
+              "title": "Вы успешно отозвали делегированные активы",
               "text": "Баланс обновится после подтверждения транзакции в сети.",
               "cta": "Просмотреть сведения"
             },
             "pending": {
-              "title": "Broadcasting transaction..."
+              "title": "Трансляция транзакции..."
             },
             "broadcastError": "Вероятно, во время осуществления транзакции произошла ошибка. Проверьте историю транзакций через несколько минут, прежде чем повторить попытку."
           }
@@ -3002,7 +3002,7 @@
           "method": {
             "youEarned": "Вы заработали",
             "byDelegationAssetsTo": "за делегирование активов",
-            "claimReward": "Cash in",
+            "claimReward": "Получить",
             "claimRewardCompound": "Compound",
             "claimRewardInfo": "Они будут получены прямо сейчас и добавлены к доступным средствам.",
             "claimRewardCompoundInfo": "Они будут получены прямо сейчас и автоматически делегированы тому же валидатору.",
@@ -3019,7 +3019,7 @@
               "cta": "Подробнее"
             },
             "pending": {
-              "title": "Broadcasting transaction..."
+              "title": "Трансляция транзакции..."
             },
             "broadcastError": "Вероятно, во время осуществления транзакции произошла ошибка. Проверьте историю транзакций через несколько минут, прежде чем повторить попытку."
           }
@@ -3096,14 +3096,14 @@
       }
     },
     "manage": {
-      "title": "Manage Tron Power",
+      "title": "Право голоса Tron Power",
       "freeze": {
         "title": "Заморозить",
-        "description": "Freeze TRX to earn Bandwidth or Energy. You can also vote for Super Representatives."
+        "description": "Заморозьте токены TRX и зарабатывайте Пропускную способность (Bandwidth) или Энергию (Energy). Вы также можете голосовать за Суперпредставителей."
       },
       "unfreeze": {
         "title": "Разморозить",
-        "description": "Unfreeze TRX to add them back to your available balance. You will no longer earn rewards."
+        "description": "Чтобы снова добавить токены TRX на баланс, разморозьте их. Однако так вы больше не сможете зарабатывать вознаграждения."
       },
       "vote": {
         "title": "Голосовать",
@@ -3112,8 +3112,8 @@
     },
     "info": {
       "available": {
-        "title": "TRX available",
-        "description": "This amount is disposable."
+        "title": "Доступные токены TRX",
+        "description": "Это сумма токенов в вашем распоряжении."
       },
       "frozen": {
         "title": "Заморожено",
@@ -3129,15 +3129,15 @@
       },
       "claimRewards": {
         "title": "Вознаграждения за голосование",
-        "description": "The TRX generated as rewards during block production can be claimed every 24 hours."
+        "description": "TRX, сгенерированные в качестве вознаграждений в процессе создания блоков, можно запрашивать каждые 24 часа."
       },
       "superRepresentative": {
         "title": "Суперпредставители",
-        "description": "Super Representatives play a key role in governing the TRON community by ensuring basic functions, e.g. block generation and bookkeeping."
+        "description": "Суперпредставители исполняют ключевую роль в управлении сообществом TRON, обеспечивая основные функции. Например, они отвечают за генерирование блоков и бухгалтерский учёт."
       },
       "candidates": {
         "title": "Кандидаты",
-        "description": "127 individuals elected through voting by the entire token-holder community. Votes are sampled every 6 hours."
+        "description": "127 человек, избранных путём голосования всем сообществом держателей токенов. Выборка голосов производится каждые шесть часов."
       }
     }
   },
@@ -3161,36 +3161,36 @@
     "networkFees": "Поскольку комиссия устанавливается протоколом Polkadot автоматически, из будет невозможно просмотреть на устройстве",
     "info": {
       "available": {
-        "title": "DOT available",
-        "description": "This amount can be sent anytime."
+        "title": "Доступные токены DOT",
+        "description": "Эту сумму можно отправить в любое время."
       },
       "locked": {
         "title": "Заблокированные средства",
-        "description": "Assets must be bonded to nominated validators before earning rewards."
+        "description": "Чтобы получать вознаграждения, вы должны заблокировать активы для назначения валидаторов."
       },
       "unlocking": {
         "title": "Разблокировка активов",
-        "description": "Unbonding assets stay locked for 28 days before they can be withdrawn."
+        "description": "При разблокировке активов вы не сможете пользоваться ими ещё 28 дней. Только после этого их можно будет вывести."
       },
       "unlocked": {
         "title": "Разблокированные активы",
-        "description": "Unbonded assets can now be moved using the withdraw operation."
+        "description": "Теперь разблокированные средства можно вывести."
       },
       "electionOpen": {
-        "title": "Validators election ongoing",
-        "description": "The election of new validators is currently ongoing. As such, staking operations are not available for 15 minutes at most."
+        "title": "Идёт подбор валидаторов",
+        "description": "Сейчас идёт подбор новых валидаторов. Следовательно, операции в стейкинга доступны не более 15 минут."
       }
     },
     "nomination": {
       "emptyState": {
         "title": "Получайте вознаграждение",
-        "description": "You can earn rewards by bonding assets and then nominating your validator(s).",
-        "info": "How nominations work",
+        "description": "Вы можете получать вознаграждения, блокируя активы, а затем назначая своего(-их) валидатора(-ов).",
+        "info": "Как работают назначения",
         "cta": "Получить вознаграждения"
       },
-      "header": "Nominations",
-      "nominate": "Nominate",
-      "chill": "Clear nominations",
+      "header": "Назначения",
+      "nominate": "Назначить",
+      "chill": "Отменить назначения",
       "status": "Состояние",
       "totalStake": "Общая доля",
       "amount": "Заблокированная сумма",
@@ -3204,12 +3204,12 @@
       "notValidator": "Это не валидатор",
       "notValidatorInfo": "Этот адрес больше не является валидатором",
       "elected": "Выбран",
-      "electedInfo": "This validator is elected and is collecting rewards for its nominators.",
-      "nominators": "Nominators",
-      "nominatorsCount": "{{nominatorsCount}} nominators",
-      "nominatorsInfo": "This validator is currently elected by {{count}} nominators.",
-      "oversubscribed": "Oversubscribed ({{nominatorsCount}})",
-      "oversubscribedInfo": "Only the top {{maxNominatorRewardedPerValidator}} nominators with the highest bonded amount earn rewards",
+      "electedInfo": "Этот валидатор выбран и получает вознаграждения для номинаторов.",
+      "nominators": "Номинаторы",
+      "nominatorsCount": "Номинаторов: {{nominatorsCount}}",
+      "nominatorsInfo": "Этого валидатора уже выбрали {{count}} номинанта(-ов).",
+      "oversubscribed": "Превышение лимита голосов ({{nominatorsCount}})",
+      "oversubscribedInfo": "Вознаграждения получают только лучшие номинаторы {{maxNominatorRewardedPerValidator}} с наибольшей заблокированной суммой",
       "hasPendingBondOperation": "Блокировка средств ожидает подтверждения",
       "externalControllerUnsupported": "This stash account is controlled by another account with the address <0>{{address}}</0>. Staking operations on accounts that are controlled by a different account are not supported in Ledger Live. Please use an alternative wallet such as Polkadot.js",
       "externalStashUnsupported": "This account controls a stash account whose address is <0>{{address}}</0>. Staking operations on separate stash accounts are not supported in Ledger Live. Please use an alternative wallet like Polkadot.js",
@@ -3239,24 +3239,24 @@
         "description": "To retrieve an unbonded amount back to the available balance, you need to withdraw it manually."
       },
       "nominate": {
-        "title": "Nominate",
+        "title": "Назначить",
         "description": "Выберите до 16 валидаторов. Убедитесь, что назначения активны, чтобы получать вознаграждения."
       },
       "chill": {
-        "title": "Clear nominations",
-        "description": "Remove all nominations. You will stop earning rewards. Your bonded amount remains bonded."
+        "title": "Отменить назначения",
+        "description": "Удалить все назначения. Вы перестанете получать вознаграждения. Ваша заблокированная сумма останется заблокированной."
       }
     },
     "nominate": {
       "stepperHeader": {
-        "validators": "Validators to nominate",
+        "validators": "Валидаторы для назначения",
         "selectDevice": "Выбор устройства",
         "connectDevice": "Подключение устройства",
         "stepRange": "Шаг {{currentStep}}/{{totalSteps}}"
       },
       "steps": {
         "validators": {
-          "myNominations": "My nominations",
+          "myNominations": "Мои назначения",
           "electedValidators": "Выбранные валидаторы",
           "waitingValidators": "Невыбранные валидаторы",
           "noResultsFound": "No validators found for <0>{{search}}</0>",
@@ -3373,7 +3373,7 @@
       "modes": {
         "withdrawUnbonded": {
           "title": "Вывести разблокированную сумму",
-          "description": "Withdraw unbonded assets to your available balance."
+          "description": "Выводите незаблокированные средства на свой баланс."
         },
         "chill": {
           "title": "Clear nominations",
