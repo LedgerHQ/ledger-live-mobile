@@ -659,7 +659,7 @@
       },
       "polkastake": {
         "title": "СТЕЙКИНГ POLKADOT",
-        "description": "Stake, secure and\nmanage your DOT with\nLedger Live"
+        "description": "Безопасно стейкируйте\nи управляйте токенами DOT\nв Ledger Live"
       },
       "backupPack": {
         "title": "Резервный набор",
@@ -671,7 +671,7 @@
       },
       "swap": {
         "title": "Меняйте криптовалюту",
-        "description": "Securely exchange one\ncrypto for another"
+        "description": "Безопасный обмен одной\nкриптовалюты на другую"
       },
       "algorand": {
         "title": "Algorand",
@@ -1768,8 +1768,8 @@
     "exchange": {
       "title": "Покупка / Продажа",
       "providers": {
-        "title": "Choose a provider to buy crypto",
-        "whatIsSwap": "What is Buy?",
+        "title": "Выберите поставщика услуг для покупки криптовалюты",
+        "whatIsSwap": "Что такое Покупка?",
         "cta": "Продолжить",
         "coinify": {
           "bullets": [
@@ -1976,8 +1976,8 @@
       "banners": {
         "needApproval": "До займа активов необходимо утвердить этот счёт.",
         "fullyApproved": "Этот счёт полностью утвержден. Сумму можно уменьшить за дополнительную плату.",
-        "approvedCanReduce": "You have approved <0>{{value}}</0> on this account. You can reduce the amount at a fee.",
-        "approvedButNotEnough": "You have approved <0>{{value}}</0> on this account.",
+        "approvedCanReduce": "Вы одобрили <0>{{value}}</0> для данного счёта. Сумму можно уменьшить с дополнительной комиссией.",
+        "approvedButNotEnough": "Вы одобрили <0>{{value}}</0> для данного счёта.",
         "approving": "You can deposit assets once the account approval is confirmed.",
         "notEnough": "You must increase the limit approved on your account to lend."
       },
@@ -2307,7 +2307,7 @@
     },
     "validation": {
       "success": "Активы успешно разморожены",
-      "info": "Your {{resource}} points will be decreased and all your votes will be canceled.",
+      "info": "Очки {{resource}} сократятся, а голоса будут аннулированы.",
       "button": {
         "done": "Готово",
         "cta": "Подробности"
@@ -2321,7 +2321,7 @@
       "stepRange": "Шаг {{currentStep}}/{{totalSteps}}"
     },
     "validation": {
-      "success": "Your rewards were added to the available balance.",
+      "success": "Вознаграждения добавлены к вашему балансу.",
       "button": {
         "done": "Готово",
         "cta": "Подробности"
@@ -2437,7 +2437,7 @@
     "allowAppPermissionSubtitleToken": "для управления токенами {{token}}",
     "allowManagerPermission": "Разрешить использование {{wording}} на устройстве",
     "loading": "Загружаем...",
-    "turnOnAndUnlockDevice": "Turn on and unlock your device",
+    "turnOnAndUnlockDevice": "Включите и разблокируйте устройство.",
     "connectAndUnlockDevice": "Подключите и разблокируйте устройство",
     "unlockDevice": "Разблокируйте устройство",
     "outdated": "Версия приложения устарела",
@@ -2770,7 +2770,7 @@
           "info": {
             "description": "Делегируйте Algo, чтобы получать вознаграждения без угроз безопасности и продолжать контролировать активы.",
             "steps": {
-              "0": "A minimum balance of 1 Algo is required to receive rewards.",
+              "0": "Чтобы получать вознаграждение требуется не менее 1 токена Algo.",
               "1": "Наращивайте баланс счёта, чтобы увеличить вознаграждения.",
               "2": "Чтобы получить вознаграждения, осуществите входящую или исходящую транзакцию."
             },
@@ -2780,7 +2780,7 @@
           "starter": {
             "title": "Поздравляем! Вы заработали {{amount}}. Продолжайте получать вознаграждения.",
             "howItWorks": "Как работают вознаграждения",
-            "warning": "You will be prompted to generate an empty transaction to your account. This will add your current rewards to your balance at the minimal cost of the transaction fees.",
+            "warning": "Вам будет предложено создать пустую транзакцию на ваш счёт. Так вознаграждения будут начисляться на ваш баланс с минимальными комиссиями за транзакции.",
             "cta": "Продолжить"
           },
           "verification": {
@@ -2792,7 +2792,7 @@
             "pending": {
               "title": "Трансляция транзакции..."
             },
-            "broadcastError": "Возможно, во время осуществления транзакции произошла ошибка. Чтобы убедиться в этом, проверьте состояние через несколько минут, прежде чем попытаться снова."
+            "broadcastError": "Вероятно, при обработке транзакции произошла ошибка. Чтобы убедиться в этом, проверьте её статус спустя несколько минут, прежде чем попробовать снова."
           }
         }
       }
@@ -2809,19 +2809,19 @@
           "selectToken": {
             "warning": {
               "title": "Актив уже добавлен",
-              "description": "You already have {{token}} asset in your Algorand account."
+              "description": "На счету Algorand уже есть {{token}}."
             }
           },
           "verification": {
             "success": {
-              "title": "{{token}} asset successfully added!",
-              "text": "You can now receive and send {{token}} assets on your Algorand account.",
+              "title": "Актив {{token}} добавлен!",
+              "text": "Теперь вы можете получать и отправлять активы {{token}} на счёт Algorand.",
               "cta": "Подробнее"
             },
             "pending": {
               "title": "Трансляция транзакции..."
             },
-            "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
+            "broadcastError": "Вероятно, при обработке транзакции произошла ошибка. Чтобы убедиться в этом, проверьте её статус спустя несколько минут, прежде чем попробовать снова."
           }
         }
       }
@@ -2830,8 +2830,8 @@
   "cosmos": {
     "info": {
       "available": {
-        "title": "ATOM available",
-        "description": "This amount is disposable."
+        "title": "Доступные токены ATOM",
+        "description": "Это сумма токенов в вашем распоряжении."
       },
       "delegated": {
         "title": "Делегированные активы",
@@ -2847,7 +2847,7 @@
       }
     },
     "delegation": {
-      "delegationEarn": "You can earn ATOM rewards by delegating your assets.",
+      "delegationEarn": "Вы можете зарабатывать вознаграждения в токенах ATOM, делегируя активы.",
       "info": "Как работает делегирование",
       "claimRewards": "Получить вознаграждения",
       "claimAvailableRewards": "Получить {{amount}}",
@@ -2879,7 +2879,7 @@
               "2": "Устройство Ledger позволяет вам безопасно делегировать активы."
             },
             "warning": {
-              "description": "Choose your validator wisely: Part of your delegated assets may be irrevocably lost if the validator does not behave appropriately."
+              "description": "Выбирайте валидатора с умом. Часть делегированных активов может быть безвозвратно утеряна, если валидатор поведёт себя недобросовестно."
             },
             "cta": "Продолжить"
           },
@@ -2909,7 +2909,7 @@
             "pending": {
               "title": "Трансляция транзакции..."
             },
-            "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+            "broadcastError": "Вероятно, при обработке транзакции произошла ошибка. Проверьте историю транзакций через несколько минут, прежде чем попробовать снова."
           }
         }
       },
@@ -2945,18 +2945,18 @@
             "noResultsFound": "Не найден валидатор для <0>{{search}}</0>"
           },
           "amount": {
-            "newRedelegatedBalance": "New total for <0>{{name}}</0> after operation: <0>{{amount}}</0>"
+            "newRedelegatedBalance": "Обновлённая сумма <0>{{name}}</0> после операции: <0>{{amount}}</0>"
           },
           "verification": {
             "success": {
-              "title": "You have successfully redelegated your assets",
+              "title": "Ваши активы успешно передегированы",
               "text": "Баланс обновится после подтверждения транзакции в сети.",
               "cta": "Подробнее"
             },
             "pending": {
               "title": "Трансляция транзакции..."
             },
-            "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+            "broadcastError": "Вероятно, при обработке транзакции произошла ошибка. Проверьте историю транзакций через несколько минут, прежде чем попробовать снова."
           }
         }
       }
@@ -2983,7 +2983,7 @@
             "pending": {
               "title": "Трансляция транзакции..."
             },
-            "broadcastError": "Вероятно, во время осуществления транзакции произошла ошибка. Проверьте историю транзакций через несколько минут, прежде чем повторить попытку."
+            "broadcastError": "Вероятно, при обработке транзакции произошла ошибка. Проверьте историю транзакций через несколько минут, прежде чем попробовать снова."
           }
         }
       }
@@ -3021,7 +3021,7 @@
             "pending": {
               "title": "Трансляция транзакции..."
             },
-            "broadcastError": "Вероятно, во время осуществления транзакции произошла ошибка. Проверьте историю транзакций через несколько минут, прежде чем повторить попытку."
+            "broadcastError": "Вероятно, при обработке транзакции произошла ошибка. Проверьте историю транзакций через несколько минут, прежде чем попробовать снова."
           }
         }
       }
@@ -3213,11 +3213,11 @@
       "hasPendingBondOperation": "Блокировка средств ожидает подтверждения",
       "externalControllerUnsupported": "This stash account is controlled by another account with the address <0>{{address}}</0>. Staking operations on accounts that are controlled by a different account are not supported in Ledger Live. Please use an alternative wallet such as Polkadot.js",
       "externalStashUnsupported": "This account controls a stash account whose address is <0>{{address}}</0>. Staking operations on separate stash accounts are not supported in Ledger Live. Please use an alternative wallet like Polkadot.js",
-      "showInactiveNominations": "Show all nominations ({{count}})",
-      "hideInactiveNominations": "Show active nominations only",
-      "noActiveNominations": "There are no active nominations.",
-      "showAllUnlockings": "Show all unbonding amounts ({{count}})",
-      "hideAllUnlockings": "Hide unbonding amounts"
+      "showInactiveNominations": "Показать всех номинаторов ({{count}})",
+      "hideInactiveNominations": "Показать только активных номинаторов",
+      "noActiveNominations": "Нет активных номинаторов.",
+      "showAllUnlockings": "Показать все разблокируемые средства ({{count}})",
+      "hideAllUnlockings": "Скрыть разблокируемые суммы"
     },
     "unlockings": {
       "header": "Разблокировка",
@@ -3232,11 +3232,11 @@
       },
       "unbond": {
         "title": "Разблокировать",
-        "description": "To make a bonded amount available again, first you need to unbond it. You can withdraw it after the 28-day unbonding period."
+        "description": "Чтобы снова получить доступ к заблокированной сумме, разблокируйте её. Вы сможете вывести средства по прошествии 28 дней после блокировки."
       },
       "withdrawUnbonded": {
         "title": "Вывести разблокированную сумму",
-        "description": "To retrieve an unbonded amount back to the available balance, you need to withdraw it manually."
+        "description": "Чтобы вернуть разблокированные средства на баланс, необходимо вывести эту сумму вручную."
       },
       "nominate": {
         "title": "Назначить",
@@ -3259,14 +3259,14 @@
           "myNominations": "Мои назначения",
           "electedValidators": "Выбранные валидаторы",
           "waitingValidators": "Невыбранные валидаторы",
-          "noResultsFound": "No validators found for <0>{{search}}</0>",
-          "selected": "{{selected}} out of {{total}} selected",
-          "notValidatorsRemoved": "You have nominated {{count}} addresses who are no longer validators. They will automatically be removed from your nominate transaction.",
-          "maybeChill": "Clear nominations instead"
+          "noResultsFound": "Валидаторы по запросу <0>{{search}}</0> не найдены",
+          "selected": "Выбрано {{selected}} из {{total}}",
+          "notValidatorsRemoved": "Вы назначили {{count}} адресов, которые больше не являются валидаторами. Они будут автоматически удалены из вашей назначающей транзакции.",
+          "maybeChill": "Также можно отозвать назначения"
         },
         "validation": {
           "success": {
-            "title": "You have successfully nominated validators",
+            "title": "Вы успешно назначили валидаторов",
             "description": "Вы начнете получать вознаграждения, когда ваши активы будут связаны с выбранным(-и) вами валидатором(-ами)."
           }
         }
@@ -3278,7 +3278,7 @@
         "stash": "Доступный баланс",
         "stashDescription": "Вознаграждения добавлены к доступным средствам.",
         "staked": "Заблокированная сумма",
-        "stakedDescription": "Rewards are credited to your bonded balance for compound earning.",
+        "stakedDescription": "Вознаграждения зачислены на счёт с заблокированными средствами для получения дальнейшего вознаграждения.",
         "optionTitle": "Примечание",
         "optionDescription": "Once set, the option is fixed for the lifetime of this bond. If you change your mind, please read ",
         "clickableLink": "здесь."
@@ -3292,33 +3292,33 @@
       },
       "steps": {
         "starter": {
-          "description": "You may earn rewards by bonding your assets and then nominate your validators.",
+          "description": "Вы можете получать вознаграждения, блокируя свои активы, а затем назначая валидаторов.",
           "bullet": [
-            "You keep ownership of bonded assets",
-            "Nominate using your Ledger device",
-            "Assets will be available again, 28 days after unbonding"
+            "Заблокированные активы остаются в вашей собственности",
+            "Назначайте валидаторов на устройстве Ledger",
+            "Доступ к активам будет возобновлён по истечении 28 дней после разблокировки"
           ],
-          "help": "How nominations work",
-          "warning": "Choose your validators wisely: part of your bonded assets may be irrevocably lost if a validator does not behave appropriately."
+          "help": "Как работают назначения",
+          "warning": "Выбирайте валидатора с умом. Часть заблокированных активов может быть безвозвратно утеряна, если валидатор поведёт себя недобросовестно."
         },
         "amount": {
           "availableLabel": "Доступно",
           "maxLabel": "Макс."
         },
         "confirm": {
-          "info": "Bonded assets can be unbonded at any time, but unbonding takes 28 days."
+          "info": "Блокированные активы можно разблокировать в любой момент, но этот процесс занимает 28 дней."
         },
         "validation": {
           "success": {
             "title": "Активы успешно заблокированы",
-            "description": "You can nominate validators once the network has confirmed the transaction.",
-            "descriptionNominate": "You will be able to nominate validators once the network has confirmed your transaction.",
-            "nominate": "Nominate",
-            "later": "Nominate later"
+            "description": "Вы можете назначить валидаторов после того, как транзакция будет подтверждена сетью.",
+            "descriptionNominate": "Вы сможете назначить валидаторов после того, как транзакция будет подтверждена сетью.",
+            "nominate": "Назначить",
+            "later": "Назначить позже"
           },
           "pending": {
             "title": "Транзакция ожидает подтверждения",
-            "description": "You have to wait a moment before nominating"
+            "description": "Назначение может занять некоторое время"
           }
         }
       }
@@ -3336,7 +3336,7 @@
           "maxLabel": "Макс."
         },
         "confirm": {
-          "info": "Rebonded assets are immediately added to the bonded amount."
+          "info": "Повторно заблокированные активы мгновенно добавляются к блокированной сумме."
         },
         "validation": {
           "success": {
@@ -3364,7 +3364,7 @@
         "validation": {
           "success": {
             "title": "Транзакция для разблокировки успешно отправлена",
-            "description": "Unbonded assets can be withdrawn after 28 days."
+            "description": "Разблокированные активы можно будет вывести по истечении 28 дней."
           }
         }
       }
@@ -3376,9 +3376,9 @@
           "description": "Выводите незаблокированные средства на свой баланс."
         },
         "chill": {
-          "title": "Clear nominations",
-          "description": "Clears all nominations and stops earning rewards.",
-          "info": "Bonded assets will remain bonded. If you unbond them, they will be available after 28 days."
+          "title": "Отменить назначения",
+          "description": "Это действие отменяет все назначения и останавливает получение вознаграждений.",
+          "info": "Блокированные активы останутся заблокированными. Если их разблокировать, доступ к ним будет восстановлен только спустя 28 дней."
         }
       },
       "stepperHeader": {
@@ -3391,20 +3391,20 @@
         "validation": {
           "success": {
             "title": "Транзакция отправлена",
-            "description": "You will see your operation in history once the network has confirmed the transaction."
+            "description": "Операция будет отражена в истории после подтверждения транзакции в сети."
           }
         }
       }
     }
   },
   "delegation": {
-    "overdelegated": "Overdelegated",
-    "delegationSendWarnDesc": "The amount to be sent will be deducted from your delegated account.",
+    "overdelegated": "Превышение лимита делегирования",
+    "delegationSendWarnDesc": "Отправляемая сумма будет вычтена из делегированного счета.",
     "delegationReceiveWarnDesc": "Сумма, зачисленная на делегированный счёт, будет добавлена к общей стейкированной сумме. Чтобы избежать этого, выберите другой счёт.",
     "iDelegateMy": "Я делегирую свои",
     "undelegateMy": "Отозвать мои",
     "warnUndelegation": "Ваш счёт будет отозван.",
-    "warnDelegation": "Delegating your voting rights does not guarantee any rewards from your validator.",
+    "warnDelegation": "Делегирование ваших прав голоса не гарантирует вознаграждений от вашего валидатора.",
     "to": "куда",
     "from": "откуда",
     "forAnEstYield": "для ориент. дохода",
@@ -3443,7 +3443,7 @@
       "undelegate": "Операция отправлена"
     },
     "broadcastSuccessDescription": {
-      "delegate": "Delegation transaction broadcasted successfully. You should earn your first rewards in around 40 days, depending on the validator.",
+      "delegate": "Транзакция для делегирования успешно транслирована в сеть. Срок получения вознаграждений зависит от валидатора и составляет приблизительно 40 дней.",
       "undelegate": "Делегирование счёта завершится после подтверждения операции. Повторное делегирование счёта можно выполнить в любой момент."
     },
     "summaryTitle": "Сводка",
