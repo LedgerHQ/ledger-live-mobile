@@ -1792,20 +1792,20 @@
       }
     },
     "swap": {
-      "title": "Swap",
+      "title": "Swap (掉期)",
       "paraswap": "ParaSwap",
       "selectDevice": "选择您的设备",
       "broadcasting": "播送兑换",
       "loadingFees": "正在加载网络费用...",
       "landing": {
-        "header": "Swap",
+        "header": "Swap (掉期)",
         "title": "欢迎使用 Swap 兑换",
         "whatIsSwap": "什么是 Swap 兑换？",
         "disclaimer": "Exchange crypto directly from your Ledger device. This service is not available in some countries, including the US."
       },
       "providers": {
         "title": "选择一个购买加密货币的供应商",
-        "whatIsSwap": "What is Swap?",
+        "whatIsSwap": "什么是 Swap（掉期）？",
         "cta": "继续",
         "changelly": {
           "bullets": [
@@ -1816,7 +1816,7 @@
         },
         "paraswap": {
           "bullets": [
-            "Connect to 30+ DEXs (Uniswap, SushiSwap,...)",
+            "连接到 30 + DEXs (Uniswap, SushiSwap,...)",
             "以太坊 和 ERC20 代币",
             "去中心化与无需信任"
           ]
@@ -1837,10 +1837,10 @@
         "cta": "关闭"
       },
       "pendingOperation": {
-        "description": "Your Swap operation has been sent to the network for confirmation. It may take up to an hour before you receive your swapped crypto assets.",
+        "description": "您的 Swap 掉期操作已经发送到网络上确认。最多一个小时后，您就可以收到被掉期交易的加密资产。",
         "label": "您的 Swap ID：",
         "title": "待处理操作",
-        "disclaimer": "Please take note of your Swap ID number in case you’d need assistance from {{provider}} later.",
+        "disclaimer": "请记下您的 Swap ID 掉期号码，以便今后有需要时从 {{provider}} 处获得帮助。",
         "cta": "查看详情"
       },
       "tradeMethod": {
@@ -1874,7 +1874,7 @@
         },
         "noAccounts": {
           "title": "没有可兑换的 {{ticker}}",
-          "desc": "Your {{currencyName}} accounts have no balance to swap.",
+          "desc": "您的 {{currencyName}} 账户没有余额可掉期。",
           "addAccountCta": "添加账户",
           "cta": "关闭"
         },
@@ -1913,11 +1913,11 @@
         "to": "到",
         "toAmount": "待收数额",
         "statusTooltips": {
-          "expired": "Please contact the swap provider with your swap ID for more information.",
-          "refunded": "Please contact the swap provider with your swap ID for more information.",
-          "pending": "Please wait while the swap provider is processing the transaction.",
+          "expired": "请使用您的 Swap ID 掉期号码联系掉期服务提供方以了解更多详情。",
+          "refunded": "请使用您的 Swap ID 掉期号码联系掉期服务提供方以了解更多详情。",
+          "pending": "请稍候片刻，掉期提供方正在处理该交易。",
           "onhold": "Please contact the swap provider with your swap ID to solve the situation.",
-          "finished": "Your swap was completed successfully."
+          "finished": "您的掉期已成功完成"
         }
       },
       "missingApp": {
@@ -2390,7 +2390,7 @@
     "retry": "重试",
     "done": "完成",
     "finalCta": "继续",
-    "finalCtaForSwap": "Go back to Swap",
+    "finalCtaForSwap": "返回到 Swap 掉期",
     "synchronizing": "正在同步",
     "synchronizingDesc": "Your accounts are being synchronized. This can take a while...",
     "noAccountToCreate": "Could not create <1><0>{{currencyName}}</></> account. Restart the process and sync your accounts.",
@@ -3214,7 +3214,7 @@
       "externalControllerUnsupported": "This stash account is controlled by another account with the address <0>{{address}}</0>. Staking operations on accounts that are controlled by a different account are not supported in Ledger Live. Please use an alternative wallet such as Polkadot.js",
       "externalStashUnsupported": "This account controls a stash account whose address is <0>{{address}}</0>. Staking operations on separate stash accounts are not supported in Ledger Live. Please use an alternative wallet like Polkadot.js",
       "showInactiveNominations": "Show all nominations ({{count}})",
-      "hideInactiveNominations": "Show active nominations only",
+      "hideInactiveNominations": "仅显示活跃状态的提名",
       "noActiveNominations": "There are no active nominations.",
       "showAllUnlockings": "Show all unbonding amounts ({{count}})",
       "hideAllUnlockings": "Hide unbonding amounts"
@@ -3432,11 +3432,11 @@
       "title": "赚取奖励",
       "description": "Delegate your Tezos account to a third-party validator to earn rewards securely, keeping control of your assets.",
       "steps": {
-        "0": "Delegated accounts remain yours.",
+        "0": "委托出去的账户依旧为您所有。",
         "1": "You can manage your assets at all times.",
         "2": "Delegate securely with your Ledger device."
       },
-      "cta": "Delegate to earn rewards"
+      "cta": "委托以便赚取奖励"
     },
     "broadcastSuccessTitle": {
       "delegate": "委托已发送",
@@ -3557,7 +3557,7 @@
       "description": "Purchase crypto assets via Coinify and receive them directly in your Ledger account."
     },
     "swap": {
-      "title": "SWAP CRYPTO",
+      "title": "掉期交易加密资产",
       "description": "Swap crypto assets directly from your Ledger accounts with our partner."
     }
   },
