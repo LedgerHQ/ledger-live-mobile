@@ -13,7 +13,6 @@ import {
   getAndroidArchitecture,
   getAndroidVersionCode,
 } from "../logic/cleanBuildVersion";
-import getOrCreateUser from "../user";
 import { analyticsEnabledSelector } from "../reducers/settings";
 import { knownDevicesSelector } from "../reducers/ble";
 import type { State } from "../reducers";

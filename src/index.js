@@ -38,6 +38,7 @@ import { useCountervaluesExport } from "@ledgerhq/live-common/lib/countervalues/
 import { pairId } from "@ledgerhq/live-common/lib/countervalues/helpers";
 
 import { ToastProvider } from "@ledgerhq/live-common/lib/notifications/ToastProvider";
+import { setEnv } from "@ledgerhq/live-common/lib/env";
 import logger from "./logger";
 import { saveAccounts, saveBle, saveSettings, saveCountervalues } from "./db";
 import getOrCreateUser from "./user";
@@ -81,7 +82,6 @@ import NotificationsProvider from "./screens/NotificationCenter/NotificationsPro
 import SnackbarContainer from "./screens/NotificationCenter/Snackbar/SnackbarContainer";
 import NavBarColorHandler from "./components/NavBarColorHandler";
 import { setOsTheme, setTheme } from "./actions/settings";
-import { setEnv } from "@ledgerhq/live-common/lib/env";
 
 const themes = {
   light: lightTheme,
