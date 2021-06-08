@@ -1330,7 +1330,7 @@
     "tokenModal": {
       "desc": "This operation is related to the following token operations"
     },
-    "details": "{{ currency }} details",
+    "details": "{{ currency }} 详情",
     "extra": {
       "resource": "资源",
       "frozenAmount": "已冻结数额",
@@ -1795,8 +1795,8 @@
       "title": "Swap",
       "paraswap": "ParaSwap",
       "selectDevice": "选择您的设备",
-      "broadcasting": "Broadcasting swap",
-      "loadingFees": "Loading network fees...",
+      "broadcasting": "播送兑换",
+      "loadingFees": "正在加载网络费用...",
       "landing": {
         "header": "Swap",
         "title": "欢迎使用 Swap 兑换",
@@ -1923,7 +1923,7 @@
       "missingApp": {
         "title": "请在您的设备上安装 Exchange 应用程序",
         "description": "Go to manager and install Exchange app to swap assets",
-        "button": "Go to Manager"
+        "button": "前往管理器"
       },
       "outdatedApp": {
         "title": "Please update the Exchange app on your device",
@@ -1938,9 +1938,9 @@
       "history": {
         "tab": "历史记录",
         "exportButton": "导出操作",
-        "exportFilename": "Swap operations",
+        "exportFilename": "Swap 兑换操作",
         "empty": {
-          "title": "Your previous swaps will appear here",
+          "title": "您之前的兑换会显示在这里",
           "desc": "Either you have not made any swaps yet, or Ledger Live has been reset in the meantime."
         }
       },
@@ -1964,7 +1964,7 @@
       "account": {
         "amountSupplied": "已存数额",
         "amountSuppliedTooltip": "向网络贷出的数额",
-        "currencyAPY": "Currency APY",
+        "currencyAPY": "货币年利率 APY",
         "currencyAPYTooltip": "Yearly return rate of a deposit that’s continuously compounded",
         "accruedInterests": "利息余额",
         "accruedInterestsTooltip": "Interest generated on your lent assets",
@@ -1981,13 +1981,13 @@
         "approving": "You can deposit assets once the account approval is confirmed.",
         "notEnough": "You must increase the limit approved on your account to lend."
       },
-      "howDoesLendingWork": "How does lending works",
+      "howDoesLendingWork": "贷出模式如何运作",
       "dashboard": {
         "tabTitle": "功能面板",
-        "assetsTitle": "Assets to lend",
-        "accountsTitle": "Approved accounts",
+        "assetsTitle": "要贷出的资产",
+        "accountsTitle": "已批准的账户",
         "emptySateDescription": "You can lend assets directly from your Ethereum accounts and earn interest.",
-        "apy": "{{value}} APY",
+        "apy": "{{value}} APY 年利率",
         "activeAccount": {
           "account": "账户",
           "amountSupplied": "已存数额",
@@ -2011,7 +2011,7 @@
       },
       "history": {
         "tabTitle": "历史记录",
-        "description": "View the history of all your loan transactions.",
+        "description": "查看您所有贷款交易的历史记录。",
         "cta": "贷出资产"
       },
       "terms": {
@@ -2066,8 +2066,8 @@
           "stepRange": "Step {{currentStep}} of {{totalSteps}}"
         },
         "selectAccount": {
-          "enabledAccountsAmount": "You have {{number}} account that approved {{amount}}",
-          "enabledAccountsAmount_plural": "You have {{number}} accounts that approved {{amount}}",
+          "enabledAccountsAmount": "您有 {{number}} 个账户已批准 {{amount}}",
+          "enabledAccountsAmount_plural": "您有 {{number}} 个账户已批准 {{amount}}",
           "enabledAccountsNoLimit": "You have {{number}} account that approved an unlimited amount of {{ currency }}",
           "enabledAccountsNoLimit_plural": "You have {{number}} accounts that approved an unlimited amount of {{ currency }}",
           "noEnabledAccounts": "You need to approve an account before you can lend."
@@ -2330,24 +2330,24 @@
   },
   "vote": {
     "stepperHeader": {
-      "selectValidator": "Cast votes",
-      "castVote": "My votes",
-      "selectDevice": "Select device",
-      "connectDevice": "Connect device",
+      "selectValidator": "将票投出",
+      "castVote": "我的选票",
+      "selectDevice": "选择设备",
+      "connectDevice": "连接设备",
       "stepRange": "Step {{currentStep}} of {{totalSteps}}"
     },
     "selectValidator": {},
     "castVotes": {
-      "ranking": "Ranking: <0>{{rank}}</0>",
-      "nbOfVotes": "Number of votes {{amount}}",
-      "percentage": "Percentage",
-      "estYield": "Est. yield",
-      "addMoreVotes": "Add more votes",
-      "votesRemaining": "Votes remaining: <0>{{total}}</0>",
+      "ranking": "排名：<0>{{rank}}</0>",
+      "nbOfVotes": "票数 {{amount}}",
+      "percentage": "百分比",
+      "estYield": "预估收益",
+      "addMoreVotes": "添加更多选票",
+      "votesRemaining": "剩余票数：<0>{{total}}</0>",
       "maxVotesAvailable": "最大可用票数：<0>{{total}}</0>",
-      "voteFor": "Vote for",
+      "voteFor": "投票对象",
       "validateVotes": "Validate votes",
-      "votesRequired": "Votes required ",
+      "votesRequired": "所需票数 ",
       "allVotesUsed": "All votes used"
     },
     "validation": {
@@ -2397,7 +2397,7 @@
     "cantCreateAccount": "A new account cannot be added before receiving assets on your <1><0>{{accountName}}</></> account.",
     "tokens": {
       "title": "添加代币",
-      "createParentCurrencyAccount": "Add {{parrentCurrencyName}} account",
+      "createParentCurrencyAccount": "添加 {{parrentCurrencyName}} 账户",
       "erc20": {
         "title": "添加代币",
         "disclaimer": "{{tokenName}} is an ERC20 Token.\nYou can receive tokens directly in an Ethereum account.",
@@ -2411,7 +2411,7 @@
       "trc20": {
         "title": "添加代币",
         "disclaimer": "{{tokenName}} is a TRC20 Token.\nYou can receive tokens directly in a Tron account.",
-        "learnMore": "Learn more about TRC20"
+        "learnMore": "了解关于 TRC20 的更多详情"
       }
     },
     "showMoreChainType": "More address types",
@@ -2443,8 +2443,8 @@
     "outdated": "应用程序版本过期",
     "outdatedDesc": "An important update is available for the {{appName}} application on your device. Please go to the Manager to update it.",
     "quitApp": "在设备上退出该应用程序",
-    "appNotInstalled": "Please install the {{appName}} app",
-    "appNotInstalled_plural": "Please install the {{appName}} apps",
+    "appNotInstalled": "请安装 {{appName}} 应用程序",
+    "appNotInstalled_plural": "请安装 {{appName}} 应用程序",
     "verifyAddress": {
       "title": "在设备上验证地址",
       "description": "Please verify that the {{currencyName}} address to be shown in Ledger Live matches the one on your Ledger device."
@@ -2462,7 +2462,7 @@
     },
     "installApp": "{{appName}} 应用程序安装 {{percentage}}",
     "installAppDescription": "请耐心等待，直至安装完成",
-    "listApps": "Checking App dependencies",
+    "listApps": "查看应用程序关联程序",
     "listAppsDescription": "Please wait while we make sure you have all the required apps"
   },
   "SelectDevice": {
@@ -2489,10 +2489,10 @@
         "title": "Enable Ledger Manager on your {{productName}}"
       },
       "genuineCheckPending": {
-        "title": "Checking if the device is genuine..."
+        "title": "正在检查该设备是否为正版……"
       },
       "dashboard": {
-        "title": "Return to the Dashboard on your {{productName}}"
+        "title": "返回您 {{productName}} 的功能面板"
       },
       "currencyApp": {
         "title": "Open the {{managerAppName}} app on your {{productName}}",
@@ -2523,7 +2523,7 @@
     }
   },
   "EditDeviceName": {
-    "title": "Rename device",
+    "title": "重命名设备",
     "charactersRemaining": "{{remainingCount}} characters remaining",
     "action": "确认"
   },
@@ -2546,7 +2546,7 @@
       "desc": "Please make sure your {{productName}} is unlocked and Bluetooth is enabled."
     },
     "ScanningTimeout": {
-      "title": "Sorry, no device was found",
+      "title": "抱歉，未找到设备",
       "desc": "Please make sure your {{productName}} is unlocked and Bluetooth is enabled."
     },
     "bypassGenuine": "Use anyway",
@@ -2994,7 +2994,7 @@
         "method": "申领奖励",
         "summary": "概要",
         "selectDevice": "选择设备",
-        "connectDevice": "Connect device",
+        "connectDevice": "连接设备",
         "stepRange": "Step {{currentStep}} of {{totalSteps}}"
       },
       "flow": {
@@ -3275,7 +3275,7 @@
     "bond": {
       "rewardDestination": {
         "label": "奖励目的地",
-        "stash": "Available balance",
+        "stash": "可用余额",
         "stashDescription": "Rewards are credited to your available balance.",
         "staked": "Bonded balance",
         "stakedDescription": "Rewards are credited to your bonded balance for compound earning.",
@@ -3390,7 +3390,7 @@
       "steps": {
         "validation": {
           "success": {
-            "title": "Transaction sent successfully",
+            "title": "已成功发送交易",
             "description": "You will see your operation in history once the network has confirmed the transaction."
           }
         }
@@ -3439,8 +3439,8 @@
       "cta": "Delegate to earn rewards"
     },
     "broadcastSuccessTitle": {
-      "delegate": "Delegation sent",
-      "undelegate": "Operation sent"
+      "delegate": "委托已发送",
+      "undelegate": "操作已发送"
     },
     "broadcastSuccessDescription": {
       "delegate": "Delegation transaction broadcasted successfully. You should earn your first rewards in around 40 days, depending on the validator.",
