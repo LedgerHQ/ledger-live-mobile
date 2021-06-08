@@ -1,10 +1,10 @@
-import React, { useState, useCallback, useEffect, memo } from "react";
+import React, { useState, useCallback, useEffect, memo, useMemo } from "react";
 import { CommonActions } from "@react-navigation/native";
-
 import type { DeviceInfo } from "@ledgerhq/live-common/lib/types/manager";
 import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import type { ListAppsResult } from "@ledgerhq/live-common/lib/apps/types";
-
+import { predictOptimisticState } from "@ledgerhq/live-common/lib/apps";
+import { SyncSkipUnderPriority } from "@ledgerhq/live-common/lib/bridge/react";
 import { useApps } from "./shared";
 import AppsScreen from "./AppsScreen";
 import GenericErrorBottomModal from "../../components/GenericErrorBottomModal";
@@ -56,6 +56,8 @@ const Manager = ({
 
   const { apps, currentError, installQueue, uninstallQueue } = state;
   const blockNavigation = installQueue.length + uninstallQueue.length > 0;
+
+  const optimisticState = useMemo(() => predictOptimisticState(state), [state]);
 
   const [quitManagerAction, setQuitManagerAction] = useState(false);
 
@@ -144,6 +146,7 @@ const Manager = ({
         deviceVersion={deviceInfo.version}
         appLength={result ? result.installed.length : 0}
       />
+      <SyncSkipUnderPriority priority={100} />
       <AppsScreen
         state={state}
         dispatch={dispatch}
@@ -158,6 +161,7 @@ const Manager = ({
         deviceInfo={deviceInfo}
         searchQuery={searchQuery}
         updateModalOpened={updateModalOpened}
+        optimisticState={optimisticState}
         tab={tab}
       />
       <GenericErrorBottomModal error={error} onClose={closeErrorModal} />
