@@ -985,7 +985,7 @@
           },
           "1": {
             "title": "浏览",
-            "label": "Learn how to interact with your device by reading the on-screen instructions."
+            "label": "阅读屏幕上的说明以了解如何使用您的设备。"
           },
           "2": {
             "title": "选择“通过恢复短语进行还原”",
@@ -999,7 +999,7 @@
       },
       "existingRecoveryPhrase": {
         "title": "输入您的恢复短语",
-        "paragraph1": "Your recovery phrase is the secret list of words that you backed up when you first set up your wallet.",
+        "paragraph1": "您的恢复短语是您在首次设置钱包时备份下来的那份秘密单词列表。",
         "paragraph2": "Ledger 不会保存您恢复短语的副本。",
         "checkboxDesc": "I understand that if I lose my recovery phrase, I will not be able to access my crypto in case I lose access to my Nano.",
         "bullets": {
@@ -1121,7 +1121,7 @@
       "modal": {
         "step1": "总是 <1><1>亲自</1></1> 选择自己的 PIN 识别密码",
         "step2": "使用 8 位数以确保更高的安全性",
-        "step3": "Never use a device with a PIN or recovery phrase already setup"
+        "step3": "切勿使用已经设置好 PIN 识别密码或恢复短语的设备"
       }
     },
     "stepWriteRecovery": {
@@ -1130,7 +1130,7 @@
       "step3": "Confirm each word of your recovery phrase: select it then confirm it by pressing both buttons together.",
       "modal": {
         "step1": "Store your 24-word recovery phrase in a safe place, out of sight.",
-        "step2": "Make sure you are the only person to have the recovery phrase.",
+        "step2": "确保您是唯一拥有该恢复短语的人。",
         "step3": "Ledger 并不保存您的恢复短语。",
         "step4": "Never use a device with a recovery phrase or PIN already setup."
       }
@@ -1141,8 +1141,8 @@
       "setPassword": "设置密码",
       "modal": {
         "step1": "妥善保管您的密码。切勿告诉他人。",
-        "step2": "Keep your password safe. Losing it means resetting Ledger Live and loading the accounts again.",
-        "step3": "Resetting Ledger Live has no impact on your crypto assets."
+        "step2": "妥善保管您的密码。如果丢失密码，则意味着需要重置 Ledger Live 并重新加载账户信息。",
+        "step3": "重置 Ledger Live 不会影响您的加密资产。"
       }
     },
     "stepFinish": {
@@ -1164,14 +1164,14 @@
           "wrong": "我的 Nano 上"
         },
         "modal": {
-          "text": "Your crypto is always stored on the blockchain. Your hardware wallet only holds your private key, which gives you access to your crypto.",
+          "text": "您的加密资产一直都存放在区块链中。您的硬件钱包只是持有能够让您访问个人加密资产的私钥。",
           "cta": "下一题"
         }
       },
       "recoveryPhrase": {
-        "title": "If my recovery phrase is no longer secret and safe...",
+        "title": "如果我的恢复短语不再安全或已被泄密……",
         "answers": {
-          "correct": "My crypto is no longer safe and I need to transfer them to a secure place",
+          "correct": "我的加密资产不再安全，我需要将其转移到安全的地方",
           "wrong": "没有问题，Ledger可以向我发送一份副本"
         },
         "modal": {
@@ -1300,7 +1300,7 @@
       "UNBOND": "解绑",
       "REWARD_PAYOUT": "奖励",
       "SLASH": "Slash",
-      "WITHDRAW_UNBONDED": "Unbonded Withdrawal",
+      "WITHDRAW_UNBONDED": "提取已解绑资产",
       "NOMINATE": "提名",
       "CHILL": "清除提名"
     }
@@ -1889,7 +1889,7 @@
           "to": "到",
           "send": "发送",
           "payoutNetworkFees": "支出费用",
-          "payoutNetworkFeesTooltip": "This amount will not be shown on your device",
+          "payoutNetworkFeesTooltip": "该数额不会在您的设备上显示",
           "receive": "数额",
           "receiveFloat": "Amount to receive before service fees",
           "provider": "提供方",
@@ -2063,7 +2063,7 @@
           "summary": "概要",
           "selectDevice": "选择设备",
           "connectDevice": "连接设备",
-          "stepRange": "Step {{currentStep}} of {{totalSteps}}"
+          "stepRange": "步骤 {{currentStep}} 之 {{totalSteps}}"
         },
         "selectAccount": {
           "enabledAccountsAmount": "您有 {{number}} 个账户已批准 {{amount}}",
@@ -2104,7 +2104,7 @@
           "summary": "概要",
           "selectDevice": "选择设备",
           "connectDevice": "连接设备",
-          "stepRange": "Step {{currentStep}} of {{totalSteps}}"
+          "stepRange": "步骤 {{currentStep}} 之 {{totalSteps}}"
         },
         "amount": {
           "totalAvailable": "可用余额",
@@ -2126,7 +2126,7 @@
           "summary": "概要",
           "selectDevice": "选择设备",
           "connectDevice": "连接设备",
-          "stepRange": "Step {{currentStep}} of {{totalSteps}}"
+          "stepRange": "步骤 {{currentStep}} 之 {{totalSteps}}"
         },
         "validation": {
           "success": "Withdrawal sent successfully",
@@ -2170,7 +2170,7 @@
       "summary": "概要",
       "selectDevice": "选择设备",
       "connectDevice": "连接设备",
-      "stepRange": "Step {{currentStep}} of {{totalSteps}}"
+      "stepRange": "步骤 {{currentStep}} 之 {{totalSteps}}"
     },
     "recipient": {
       "scan": "扫描二维码",
@@ -2238,7 +2238,7 @@
     },
     "info": {
       "maxSpendable": {
-        "title": "Max spendable amount",
+        "title": "最大可支出数额",
         "description": "最大可支出金额指的是一个账户可通过一个交易发送的总余额。"
       }
     }
@@ -2260,7 +2260,7 @@
       "summary": "概要",
       "selectDevice": "选择设备",
       "connectDevice": "连接设备",
-      "stepRange": "Step {{currentStep}} of {{totalSteps}}"
+      "stepRange": "步骤 {{currentStep}} 之 {{totalSteps}}"
     },
     "info": {
       "description": "Freeze TRX to earn rewards securely, keeping control of your assets.",
@@ -2298,7 +2298,7 @@
       "summary": "概要",
       "selectDevice": "选择设备",
       "connectDevice": "连接设备",
-      "stepRange": "Step {{currentStep}} of {{totalSteps}}"
+      "stepRange": "步骤 {{currentStep}} 之 {{totalSteps}}"
     },
     "amount": {
       "title": "选择要解冻的资产类型",
@@ -2318,7 +2318,7 @@
     "stepperHeader": {
       "selectDevice": "选择设备",
       "connectDevice": "连接设备",
-      "stepRange": "Step {{currentStep}} of {{totalSteps}}"
+      "stepRange": "步骤 {{currentStep}} 之 {{totalSteps}}"
     },
     "validation": {
       "success": "您的奖励已经添加到可用余额中。",
@@ -2334,7 +2334,7 @@
       "castVote": "我的选票",
       "selectDevice": "选择设备",
       "connectDevice": "连接设备",
-      "stepRange": "Step {{currentStep}} of {{totalSteps}}"
+      "stepRange": "步骤 {{currentStep}} 之 {{totalSteps}}"
     },
     "selectValidator": {},
     "castVotes": {
@@ -2655,7 +2655,7 @@
     "update": {
       "title": "{{number}} app update",
       "title_plural": "{{number}} app updates",
-      "step": "Update step {{step}}:",
+      "step": "更新步骤 {{step}}：",
       "updateWarn": "Do not quit the Manager during the update.",
       "progress": "Updating all...",
       "button": "Update all",
@@ -2763,7 +2763,7 @@
         "starter": "奖励",
         "connectDevice": "连接设备",
         "verification": "验证",
-        "stepRange": "Step {{currentStep}} of {{totalSteps}}"
+        "stepRange": "步骤 {{currentStep}} 之 {{totalSteps}}"
       },
       "flow": {
         "steps": {
@@ -2802,7 +2802,7 @@
         "selectToken": "添加 ASA (资产)",
         "connectDevice": "连接设备",
         "verification": "验证",
-        "stepRange": "Step {{currentStep}} of {{totalSteps}}"
+        "stepRange": "步骤 {{currentStep}} 之 {{totalSteps}}"
       },
       "flow": {
         "steps": {
@@ -2831,7 +2831,7 @@
     "info": {
       "available": {
         "title": "ATOM available",
-        "description": "This amount is disposable."
+        "description": "该数额可自由支配。"
       },
       "delegated": {
         "title": "Delegated assets",
@@ -2867,7 +2867,7 @@
         "verification": "Verification",
         "selectDevice": "Select device",
         "connectDevice": "Connect device",
-        "stepRange": "Step {{currentStep}} of {{totalSteps}}"
+        "stepRange": "步骤 {{currentStep}} 之 {{totalSteps}}"
       },
       "flow": {
         "steps": {
@@ -2896,8 +2896,8 @@
           "amount": {
             "assetsRemaining": "Assets remaining: <0>{{amount}}</0>",
             "allAssetsUsed": "已使用所有资产",
-            "minAmount": "Minimum amount: <0>{{min}}</0>",
-            "incorrectAmount": "Maximum amount: <0>{{max}}</0>",
+            "minAmount": "最小数额：<0>{{min}}</0>",
+            "incorrectAmount": "最大数额：<0>{{max}}</0>",
             "cta": "继续"
           },
           "verification": {
@@ -2931,7 +2931,7 @@
         "summary": "概要",
         "selectDevice": "选择设备",
         "connectDevice": "连接设备",
-        "stepRange": "Step {{currentStep}} of {{totalSteps}}"
+        "stepRange": "步骤 {{currentStep}} 之 {{totalSteps}}"
       },
       "flow": {
         "steps": {
@@ -2967,7 +2967,7 @@
         "summary": "概要",
         "selectDevice": "选择设备",
         "connectDevice": "连接设备",
-        "stepRange": "Step {{currentStep}} of {{totalSteps}}"
+        "stepRange": "步骤 {{currentStep}} 之 {{totalSteps}}"
       },
       "flow": {
         "steps": {
@@ -2995,7 +2995,7 @@
         "summary": "概要",
         "selectDevice": "选择设备",
         "connectDevice": "连接设备",
-        "stepRange": "Step {{currentStep}} of {{totalSteps}}"
+        "stepRange": "步骤 {{currentStep}} 之 {{totalSteps}}"
       },
       "flow": {
         "steps": {
@@ -3008,7 +3008,7 @@
             "claimRewardCompoundInfo": "They will be claimed now and automatically delegated to the same validator.",
             "compoundOrCashIn": "Compound or Cash in?",
             "claimRewardTooltip": "Rewards will be added to the available balance",
-            "claimRewardCompoundTooltip": "Rewards will be added to the delegated amount",
+            "claimRewardCompoundTooltip": "奖励将被添加至已委托的数额",
             "cta": "继续"
           },
           "verification": {
@@ -3113,7 +3113,7 @@
     "info": {
       "available": {
         "title": "TRX 可用",
-        "description": "This amount is disposable."
+        "description": "该数额可自由支配。"
       },
       "frozen": {
         "title": "已冻结",
@@ -3157,7 +3157,7 @@
   "polkadot": {
     "lockedBalance": "Bonded balance",
     "unlockingBalance": "Unbonding balance",
-    "unlockedBalance": "Unbonded balance",
+    "unlockedBalance": "已解绑余额",
     "networkFees": "Network fees are automatically set by the Polkadot consensus, you won't be able to review them on your device",
     "info": {
       "available": {
@@ -3174,7 +3174,7 @@
       },
       "unlocked": {
         "title": "已解绑资产",
-        "description": "Unbonded assets can now be moved using the withdraw operation."
+        "description": "现在可使用提取操作转移已解绑的资产。"
       },
       "electionOpen": {
         "title": "Validators election ongoing",
@@ -3209,34 +3209,34 @@
       "nominatorsCount": "{{nominatorsCount}} nominators",
       "nominatorsInfo": "This validator is currently elected by {{count}} nominators.",
       "oversubscribed": "Oversubscribed ({{nominatorsCount}})",
-      "oversubscribedInfo": "Only the top {{maxNominatorRewardedPerValidator}} nominators with the highest bonded amount earn rewards",
+      "oversubscribedInfo": "只有绑定数额最高的顶层 {{maxNominatorRewardedPerValidator}} 提名者才可赚取奖励",
       "hasPendingBondOperation": "A bond operation is still pending confirmation",
       "externalControllerUnsupported": "This stash account is controlled by another account with the address <0>{{address}}</0>. Staking operations on accounts that are controlled by a different account are not supported in Ledger Live. Please use an alternative wallet such as Polkadot.js",
       "externalStashUnsupported": "This account controls a stash account whose address is <0>{{address}}</0>. Staking operations on separate stash accounts are not supported in Ledger Live. Please use an alternative wallet like Polkadot.js",
       "showInactiveNominations": "Show all nominations ({{count}})",
       "hideInactiveNominations": "仅显示活跃状态的提名",
       "noActiveNominations": "There are no active nominations.",
-      "showAllUnlockings": "Show all unbonding amounts ({{count}})",
-      "hideAllUnlockings": "Hide unbonding amounts"
+      "showAllUnlockings": "显示所有正在解绑的数额 ({{count}})",
+      "hideAllUnlockings": "隐藏正在解绑的数额"
     },
     "unlockings": {
       "header": "正在解绑",
-      "withdrawUnbonded": "Withdraw Unbonded",
+      "withdrawUnbonded": "提取已解绑资产",
       "rebond": "重新绑定"
     },
     "manage": {
       "title": "管理资产",
       "bond": {
         "title": "绑定",
-        "description": "To earn rewards, first bond an amount. Then you must nominate your validator(s)."
+        "description": "要赚取奖励，首先要绑定一定数额。其次，必须提名您的某个或多个验证器。"
       },
       "unbond": {
         "title": "解绑",
-        "description": "To make a bonded amount available again, first you need to unbond it. You can withdraw it after the 28-day unbonding period."
+        "description": "要让绑定的数额重新可用，首先需要将其解绑。经过 28 天的解绑期后即可将其提取。"
       },
       "withdrawUnbonded": {
-        "title": "Withdraw Unbonded",
-        "description": "To retrieve an unbonded amount back to the available balance, you need to withdraw it manually."
+        "title": "提取已解绑资产",
+        "description": "要将已解绑的数额返还到可用余额中，需要您手动进行提取操作。"
       },
       "nominate": {
         "title": "提名",
@@ -3244,7 +3244,7 @@
       },
       "chill": {
         "title": "清除提名",
-        "description": "Remove all nominations. You will stop earning rewards. Your bonded amount remains bonded."
+        "description": "删除所有的提名对象。您将停止赚取奖励。而您绑定的金额依旧会处于绑定状态。"
       }
     },
     "nominate": {
@@ -3252,7 +3252,7 @@
         "validators": "要提名的验证器",
         "selectDevice": "选择设备",
         "connectDevice": "连接设备",
-        "stepRange": "Step {{currentStep}} of {{totalSteps}}"
+        "stepRange": "步骤 {{currentStep}} 之 {{totalSteps}}"
       },
       "steps": {
         "validators": {
@@ -3288,7 +3288,7 @@
         "amount": "要绑定的数额",
         "selectDevice": "选择设备",
         "connectDevice": "连接设备",
-        "stepRange": "Step {{currentStep}} of {{totalSteps}}"
+        "stepRange": "步骤 {{currentStep}} 之 {{totalSteps}}"
       },
       "steps": {
         "starter": {
@@ -3306,7 +3306,7 @@
           "maxLabel": "最多"
         },
         "confirm": {
-          "info": "Bonded assets can be unbonded at any time, but unbonding takes 28 days."
+          "info": "已绑定的资产可随时被解绑，不过需要 28 天的解绑期。"
         },
         "validation": {
           "success": {
@@ -3328,7 +3328,7 @@
         "amount": "要重新绑定的数额",
         "selectDevice": "选择设备",
         "connectDevice": "连接设备",
-        "stepRange": "Step {{currentStep}} of {{totalSteps}}"
+        "stepRange": "步骤 {{currentStep}} 之 {{totalSteps}}"
       },
       "steps": {
         "amount": {
@@ -3351,7 +3351,7 @@
         "amount": "要解绑的数额",
         "selectDevice": "选择设备",
         "connectDevice": "连接设备",
-        "stepRange": "Step {{currentStep}} of {{totalSteps}}"
+        "stepRange": "步骤 {{currentStep}} 之 {{totalSteps}}"
       },
       "steps": {
         "amount": {
@@ -3359,12 +3359,12 @@
           "maxLabel": "最多"
         },
         "confirm": {
-          "info": "Unbonded assets can be withdrawn after the 28-day unbonding period."
+          "info": "经过 28 天的解绑期后即可提取已解绑的资产。"
         },
         "validation": {
           "success": {
             "title": "Unbond transaction sent successfully",
-            "description": "Unbonded assets can be withdrawn after 28 days."
+            "description": "28 天后即可提取已解绑的资产。"
           }
         }
       }
@@ -3372,7 +3372,7 @@
     "simpleOperation": {
       "modes": {
         "withdrawUnbonded": {
-          "title": "Withdraw unbonded",
+          "title": "提取已解绑资产",
           "description": "将已解绑的资产提取到您的可用余额中。"
         },
         "chill": {
@@ -3385,7 +3385,7 @@
         "info": "信息",
         "selectDevice": "选择设备",
         "connectDevice": "连接设备",
-        "stepRange": "Step {{currentStep}} of {{totalSteps}}"
+        "stepRange": "步骤 {{currentStep}} 之 {{totalSteps}}"
       },
       "steps": {
         "validation": {
@@ -3433,8 +3433,8 @@
       "description": "Delegate your Tezos account to a third-party validator to earn rewards securely, keeping control of your assets.",
       "steps": {
         "0": "委托出去的账户依旧为您所有。",
-        "1": "You can manage your assets at all times.",
-        "2": "Delegate securely with your Ledger device."
+        "1": "您可以随时管理您的资产。",
+        "2": "使用您的 Ledger 设备安全地进行委托。"
       },
       "cta": "委托以便赚取奖励"
     },
@@ -3585,7 +3585,7 @@
       "summary": "概要",
       "selectDevice": "选择设备",
       "connectDevice": "连接设备",
-      "stepRange": "Step {{currentStep}} of {{totalSteps}}"
+      "stepRange": "步骤 {{currentStep}} 之 {{totalSteps}}"
     },
     "stepVerification": {
       "action": "请在您的设备上确认该操作",
