@@ -1419,7 +1419,7 @@
     "settings": {
       "header": "Account settings",
       "title": "Edit account",
-      "advancedLogs": "Advanced logs",
+      "advancedLogs": "سجلات متقدمة",
       "accountName": {
         "title": "Account name",
         "desc": "Description of the account",
@@ -1450,7 +1450,7 @@
         "desc": "This account will be archived."
       },
       "advanced": {
-        "title": "Advanced logs",
+        "title": "سجلات متقدمة",
         "desc": ""
       }
     },
@@ -2058,7 +2058,7 @@
         "stepperHeader": {
           "selectAccount": "Choose an account",
           "enable": "Approve",
-          "advanced": "Advanced",
+          "advanced": "متقدم",
           "amount": "Enter amount",
           "summary": "Summary",
           "selectDevice": "Select Device",
@@ -2077,14 +2077,14 @@
           "limit": "limited {{amount}}",
           "noLimit": "no limit {{assetName}}",
           "contractName": "Compound {{currencyName}}",
-          "advanced": "Advanced"
+          "advanced": "متقدم"
         },
         "advanced": {
-          "amountLabel": "Amount to approve",
-          "amountLabelTooltip": "This limits the amount available to the smart contract.",
-          "limit": "Limit",
-          "limited": "Limited",
-          "noLimit": "No Limit"
+          "amountLabel": "المبلغ المطلوب الموافقة عليه",
+          "amountLabelTooltip": "هذا يحد من المبلغ المتاح للعقد الذكي.",
+          "limit": "الحد",
+          "limited": "محدود",
+          "noLimit": "بدون حد"
         },
         "amount": {
           "totalAvailable": "Total available"
