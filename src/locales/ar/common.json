@@ -2,7 +2,7 @@
   "common": {
     "cancel": "إلغاء",
     "apply": "Apply",
-    "back": "Back",
+    "back": "عودة",
     "delete": "حذف",
     "paste": "Paste",
     "yes": "نعم",
@@ -59,14 +59,14 @@
     "installed": "Installed",
     "uninstall": "Uninstall",
     "fromNow": {
-      "seconds": "in one second",
-      "seconds_plural": "in {{time}} seconds",
-      "minutes": "in one minute",
-      "minutes_plural": "in {{time}} minutes",
-      "hours": "in one hour",
-      "hours_plural": "in {{time}} hours",
-      "days": "in one day",
-      "days_plural": "in {{time}} days"
+      "seconds": "خلال ثانية واحدة",
+      "seconds_plural": "خلال {{time}} ثواني",
+      "minutes": "خلال دقيقة واحدة",
+      "minutes_plural": "خلال {{time}} دقائق",
+      "hours": "خلال ساعة واحدة",
+      "hours_plural": "خلال {{time}} ساعات",
+      "days": "خلال يوم واحد",
+      "days_plural": "خلال {{time}} أيام"
     },
     "timeAgo": {
       "seconds": "one second ago",
@@ -521,10 +521,10 @@
       "description": "The Stratis blockchain evolved and may no longer work correctly. Support for the original Stratis blockchain will be maintained until 16 October 2021."
     },
     "SwapExchangeRateAmountTooLow": {
-      "title": "Amount must be higher than {{minAmountFromFormatted}}"
+      "title": "يجب أن يزيد المبلغ عن {{minAmountFromFormatted}}"
     },
     "SwapExchangeRateAmountTooHigh": {
-      "title": "Amount must be lower than {{maxAmountFromFormatted}}"
+      "title": "يجب أن يقل المبلغ عن {{maxAmountFromFormatted}}"
     },
     "SwapGenericAPIError": {
       "title": "Exchange rate expired",
@@ -610,7 +610,7 @@
     },
     "unlock": {
       "biometricsTitle": "Please authenticate with the Ledger Live app",
-      "title": "Welcome back",
+      "title": "مرحباً بك مجددًا",
       "desc": "أدخل كلمة المرور الخاصة بك للمتابعة",
       "inputPlaceholder": "Type your password",
       "login": "تسجيل دخول",
@@ -670,7 +670,7 @@
         "description": "Buy crypto on\nLedger Live"
       },
       "swap": {
-        "title": "Swap crypto",
+        "title": "مبادلة العملات المشفرة",
         "description": "Securely exchange one\ncrypto for another"
       },
       "algorand": {
@@ -679,7 +679,7 @@
       },
       "sell": {
         "title": "Sell crypto",
-        "description": "Sell Bitcoin directly from Ledger Live."
+        "description": "بيع بيتكوين مباشرة من ليدجر لايف."
       },
       "vote": {
         "title": "Vote with your ledger",
@@ -1208,7 +1208,7 @@
   },
   "tabs": {
     "portfolio": "Portfolio",
-    "accounts": "Accounts",
+    "accounts": "الحسابات",
     "transfer": "Transfer",
     "manager": "المدير",
     "settings": "Settings",
@@ -1307,14 +1307,14 @@
   },
   "operationDetails": {
     "title": "Operation details",
-    "account": "Account",
+    "account": "الحساب",
     "date": "التاريخ",
     "confirmed": "تم التأكيد",
     "notConfirmed": "لم يتم التأكيد",
     "failed": "Failed",
     "fees": "Network fees",
     "noFees": "No fee",
-    "from": "From ({{count}})",
+    "from": "من ({{count}})",
     "to": "To ({{count}})",
     "identifier": "Transaction ID",
     "viewOperation": "View in explorer",
@@ -1349,7 +1349,7 @@
       "undelegated": "Undelegated ({{amount}})",
       "undelegatedFrom": "Undelegated from",
       "undelegatedAmount": "Undelegated amount",
-      "rewardFrom": "Reward from",
+      "rewardFrom": "مكافأة من",
       "rewardAmount": "Amount collected",
       "memo": "Memo",
       "assetId": "Asset ID",
@@ -1403,7 +1403,7 @@
     "buy": "شراء",
     "walletconnect": "WalletConnect",
     "sell": "بيع",
-    "swap": "Swap",
+    "swap": "مبادلة",
     "manage": "Manage",
     "lastOperations": "Last operations",
     "emptyState": {
@@ -1418,12 +1418,12 @@
     },
     "settings": {
       "header": "Account settings",
-      "title": "Edit account",
+      "title": "تعديل الحساب",
       "advancedLogs": "سجلات متقدمة",
       "accountName": {
         "title": "Account name",
         "desc": "Description of the account",
-        "placeholder": "Account name"
+        "placeholder": "اسم الحساب"
       },
       "accountUnits": {
         "title": "Edit units"
@@ -1465,8 +1465,8 @@
       },
       "result": {
         "title": "Import accounts",
-        "newAccounts": "New accounts",
-        "updatedAccounts": "Updated accounts",
+        "newAccounts": "الحسابات الجديدة",
+        "updatedAccounts": "الحسابات المحدثة",
         "empty": "إضافة حساب جديد",
         "descEmpty": "<0><0>No accounts</0></0> were found. Please try again or go back to Setup",
         "alreadyImported": "Already imported",
@@ -1792,15 +1792,15 @@
       }
     },
     "swap": {
-      "title": "Swap",
+      "title": "مبادلة",
       "paraswap": "Paraswap",
       "selectDevice": "Select your device",
       "broadcasting": "Broadcasting swap",
       "loadingFees": "Loading network fees...",
       "landing": {
-        "header": "Swap",
-        "title": "Welcome to Swap",
-        "whatIsSwap": "What is Swap?",
+        "header": "مبادلة",
+        "title": "مرحبًا بك في المبادلة",
+        "whatIsSwap": "ما هي المبادلة؟",
         "disclaimer": "Exchange crypto directly from your Ledger device. This service is not available in some countries, including the US."
       },
       "providers": {
@@ -1823,7 +1823,7 @@
         }
       },
       "main": {
-        "header": "Swap"
+        "header": "مبادلة"
       },
       "kyc": {
         "disclaimer": "I acknowledge that my location data will be shared with third parties for compliance purposes."
@@ -1857,10 +1857,10 @@
         "validate": "Confirm Swap transaction",
         "tab": "Exchange",
         "button": "متابعة",
-        "from": "From",
+        "from": "من",
         "to": "To",
         "balance": "Balance <0>123</0>",
-        "fromAccount": "Select account",
+        "fromAccount": "اختيار الحساب",
         "toAccount": "Select account",
         "amount": {
           "useMax": "Use max",
@@ -1885,7 +1885,7 @@
           "close": "إغلاق"
         },
         "summary": {
-          "from": "From",
+          "from": "من",
           "to": "To",
           "send": "Send",
           "payoutNetworkFees": "Payout fees",
@@ -1905,11 +1905,11 @@
         }
       },
       "operationDetails": {
-        "swapId": "Swap ID",
+        "swapId": "معرّف المبادلة",
         "provider": "Provider",
         "date": "Date",
-        "from": "From",
-        "fromAmount": "Amount sent",
+        "from": "من",
+        "fromAmount": "المبلغ المرسل",
         "to": "To",
         "toAmount": "Amount to receive",
         "statusTooltips": {
@@ -1938,9 +1938,9 @@
       "history": {
         "tab": "History",
         "exportButton": "Export operations",
-        "exportFilename": "Swap operations",
+        "exportFilename": "عمليات المبادلة",
         "empty": {
-          "title": "Your previous swaps will appear here",
+          "title": "ستظهر مبادلاتك السابقة هنا",
           "desc": "Either you have not made any swaps yet, or Ledger Live has been reset in the meantime."
         }
       },
@@ -1979,7 +1979,7 @@
         "approvedCanReduce": "You have approved <0>{{value}}</0> on this account. You can reduce the amount at a fee.",
         "approvedButNotEnough": "You have approved <0>{{value}}</0> on this account.",
         "approving": "You can deposit assets once the account approval is confirmed.",
-        "notEnough": "You must increase the limit approved on your account to lend."
+        "notEnough": "يتعيّن عليك زيادة الحد الأقصى الموافق عليه في حسابك للإقراض."
       },
       "howDoesLendingWork": "How does lending works",
       "dashboard": {
@@ -2068,14 +2068,14 @@
         "selectAccount": {
           "enabledAccountsAmount": "You have {{number}} account that approved {{amount}}",
           "enabledAccountsAmount_plural": "You have {{number}} accounts that approved {{amount}}",
-          "enabledAccountsNoLimit": "You have {{number}} account that approved an unlimited amount of {{ currency }}",
-          "enabledAccountsNoLimit_plural": "You have {{number}} accounts that approved an unlimited amount of {{ currency }}",
+          "enabledAccountsNoLimit": "لديك {{number}} حساب قام بالموافقة علي كمية غير محدودة من {{ currency }}",
+          "enabledAccountsNoLimit_plural": "لديك {{number}} الحسابات قامت بالموافقة علي كمية غير محدودة من {{ currency }}",
           "noEnabledAccounts": "You need to approve an account before you can lend."
         },
         "enable": {
           "summary": "<0>I grant the </0><1>{{contractName}}</1><0> smart contract access to my </0><1>{{accountName}}</1><0> account for a </0><1>{{amount}}</1><0> amount</0>",
-          "limit": "limited {{amount}}",
-          "noLimit": "no limit {{assetName}}",
+          "limit": "{{amount}} محدودة",
+          "noLimit": "{{assetName}} غير محدود",
           "contractName": "Compound {{currencyName}}",
           "advanced": "متقدم"
         },
@@ -2190,14 +2190,14 @@
       "validateTag": "Validate tag",
       "total": "Total",
       "amount": "Amount",
-      "from": "From",
+      "from": "من",
       "to": "To",
       "infoTotalTitle": "Total debit",
       "infoTotalDesc": "Includes transaction amount and the selected network fees",
-      "gasLimit": "Gas limit",
+      "gasLimit": "حد الغاز",
       "gasPrice": "Gas price",
       "maxFees": "Max fees",
-      "validateGasLimit": "Validate gas limit",
+      "validateGasLimit": "التحقق من حد الغاز",
       "fees": "Fees",
       "validateFees": "Validate Fees",
       "customizeFees": "Customize Fees",
@@ -2390,7 +2390,7 @@
     "retry": "إعادة المحاولة",
     "done": "تم",
     "finalCta": "متابعة",
-    "finalCtaForSwap": "Go back to Swap",
+    "finalCtaForSwap": "رجوع إلى المبادلة",
     "synchronizing": "Synchronizing",
     "synchronizingDesc": "Your accounts are being synchronized. This can take a while...",
     "noAccountToCreate": "Could not create <1><0>{{currencyName}}</></> account. Restart the process and sync your accounts.",
@@ -2927,7 +2927,7 @@
       "stepperHeader": {
         "validator": "Choose new validator",
         "amountSubTitle": "Amount to redelegate",
-        "amountTitle": "{{from}} → {{to}}",
+        "amountTitle": "{{from}} ← {{to}}",
         "summary": "Summary",
         "selectDevice": "Select device",
         "connectDevice": "Connect device",
@@ -3406,7 +3406,7 @@
     "warnUndelegation": "Your account will be undelegated.",
     "warnDelegation": "Delegating your voting rights does not guarantee any rewards from your validator.",
     "to": "to",
-    "from": "from",
+    "from": "من",
     "forAnEstYield": "for an est. yield of",
     "yieldPerYear": "{{yield}} / Year",
     "yieldInfos": "Yield rates are provided by",
@@ -3496,7 +3496,7 @@
     },
     "amount": "Amount",
     "account": "Account",
-    "from": "From",
+    "from": "من",
     "to": "To",
     "redelegationAmount": "Redelegated amount",
     "gas": "Gas",
@@ -3557,8 +3557,8 @@
       "description": "Purchase crypto assets via Coinify and receive them directly in your Ledger account."
     },
     "swap": {
-      "title": "SWAP CRYPTO",
-      "description": "Swap crypto assets directly from your Ledger accounts with our partner."
+      "title": "مبادلة العملات المشفرة",
+      "description": "قم بمقايضة الأصول المشفرة مباشرةً من حسابات ليدجر الخاصة بك مع شريكنا."
     }
   },
   "walletconnect": {
@@ -3578,7 +3578,7 @@
     "messageHash": "Message Hash",
     "domainHash": "Domain Hash",
     "stringHash": "Hash",
-    "from": "From",
+    "from": "من",
     "successTitle": "Message signed",
     "successDescription": "You have signed the message received from a third party application",
     "stepperHeader": {
