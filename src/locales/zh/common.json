@@ -2306,8 +2306,8 @@
       "cta": "继续"
     },
     "validation": {
-      "success": "Your assets were unfrozen successfully",
-      "info": "Your {{resource}} points will be decreased and all your votes will be canceled.",
+      "success": "您的资产已成功解冻",
+      "info": "您的 {{resource}} 点数将被减少，且您的全部投票也将被取消。",
       "button": {
         "done": "完成",
         "cta": "查看详情"
@@ -2352,18 +2352,18 @@
     },
     "validation": {
       "message": "Always verify that your device displays the address exactly as it was originally given to you.",
-      "success": "Your votes were cast successfully",
+      "success": "您的选票已成功投出",
       "info": "",
       "button": {}
     }
   },
   "addAccounts": {
     "supportLinks": {
-      "segwit_or_native_segwit": "Segwit or Native segwit?"
+      "segwit_or_native_segwit": "Segwit 或 Native Segwit 地址格式？"
     },
     "quitConfirmation": {
       "title": "取消添加账户",
-      "desc": "Are you sure you want to cancel adding accounts?"
+      "desc": "您确定要取消添加账户？"
     },
     "imported": "账户已成功添加",
     "sections": {
@@ -2419,21 +2419,21 @@
       "title": "选择哪种地址类型？",
       "subtitle": "添加新账户",
       "native_segwit": {
-        "title": "Native Segwit",
+        "title": "Native Segwit 地址格式",
         "desc": "Best overall. Low fees per transaction, error detection and Lightning Network support. Some wallets/exchanges may need to add support."
       },
       "segwit": {
-        "title": "Segwit",
+        "title": "Segwit 地址格式",
         "desc": "Higher fees per transaction than Native Segwit. Lightning support. Supported by most wallets."
       },
       "legacy": {
-        "title": "Legacy",
+        "title": "Legacy 地址格式",
         "desc": "{{currency}}’s original address format. Highest fees per transaction. Some wallets/exchanges still only support this type."
       }
     }
   },
   "DeviceAction": {
-    "allowAppPermission": "Open the {{wording}} app on your device",
+    "allowAppPermission": "在您的设备上打开 {{wording}} 应用程序",
     "allowAppPermissionSubtitleToken": "管理个人 {{token}} 代币",
     "allowManagerPermission": "允许 {{wording}} 在您的设备上运行",
     "loading": "正在加载……",
@@ -2447,11 +2447,11 @@
     "appNotInstalled_plural": "请安装 {{appName}} 应用程序",
     "verifyAddress": {
       "title": "在设备上验证地址",
-      "description": "Please verify that the {{currencyName}} address to be shown in Ledger Live matches the one on your Ledger device."
+      "description": "请验证这个将要在 Ledger Live 上显示的 {{currencyName}} 地址与您的 Ledger 设备上显示的地址一致。"
     },
     "confirmSwap": {
       "title": "在设备上确认兑换操作",
-      "alert": "Verify the Swap details on your device before sending it. The addresses are exchanged securely so you don’t have to verify them."
+      "alert": "发送之前请验证 Swap 掉期详情。地址会被安全地交换因此您不必对其进行验证。"
     },
     "confirmSell": {
       "title": "在设备上确认卖出操作",
@@ -2843,7 +2843,7 @@
       },
       "delegationUnavailable": {
         "title": "委托不可用",
-        "description": "Not enough available balance in your account to start a new delegation."
+        "description": "您的账户中没有足够的可用余额来开始新的委托。"
       }
     },
     "delegation": {
@@ -2879,7 +2879,7 @@
               "2": "使用您的 Ledger 设备安全地进行委托。"
             },
             "warning": {
-              "description": "Choose your validator wisely: Part of your delegated assets may be irrevocably lost if the validator does not behave appropriately."
+              "description": "请明智地选择验证器：如果验证器表现不当，您可能会不可挽回地损失部分委托资产。"
             },
             "cta": "继续"
           },
@@ -2890,7 +2890,7 @@
             "estYield": "预估收益：{{amount}}",
             "totalAvailable": "可用总额：<0>{{amount}}</0>",
             "allAssetsUsed": "已使用所有资产",
-            "noResultsFound": "No validator found for <0>{{search}}</0>",
+            "noResultsFound": "未能找到 <0>{{search}}</0> 验证器",
             "currentAmount": "(+ <0>{{amount}}</0>)"
           },
           "amount": {
@@ -3042,7 +3042,7 @@
       "title": "申领奖励",
       "header": "票数（{{total}}）",
       "Amount": "数额",
-      "noRewards": "No rewards available",
+      "noRewards": "没有奖励可用",
       "votes": {
         "title": "选票",
         "description": "Cast your votes for one or more Representatives to start earning rewards.",
@@ -3054,13 +3054,13 @@
       },
       "manageVotes": "管理选票",
       "remainingVotes": {
-        "title": "You still have votes remaining",
+        "title": "您仍有剩余选票",
         "description": "Cast your remaining votes to earn more rewards."
       },
       "flow": {
         "started": {
           "title": "投票",
-          "srOrCandidate": "SR or Candidate?",
+          "srOrCandidate": "SR 超级代表或候选人？",
           "description": "Vote for one or more Super Representatives to start earning rewards.",
           "button": {
             "continue": "将票投出"
@@ -3084,7 +3084,7 @@
             "title": "赚取奖励",
             "description": "Delegate TRX to a third party candidate to earn rewards. Click on continue to freeze assets and vote.",
             "bullet": {
-              "delegate": "Delegated assets remain yours.",
+              "delegate": "委托出去的资产依旧为您所有。",
               "access": "You can access your assets 3 days after freezing.",
               "ledger": "Delegate securely with your Ledger device."
             },
@@ -3132,7 +3132,7 @@
         "description": "The TRX generated as rewards during block production can be claimed every 24 hours."
       },
       "superRepresentative": {
-        "title": "Super Representatives (SR)",
+        "title": "超级代表 (SR)",
         "description": "Super Representatives play a key role in governing the TRON community by ensuring basic functions, e.g. block generation and bookkeeping."
       },
       "candidates": {
@@ -3155,7 +3155,7 @@
     }
   },
   "polkadot": {
-    "lockedBalance": "Bonded balance",
+    "lockedBalance": "已绑定余额",
     "unlockingBalance": "正在解绑余额",
     "unlockedBalance": "已解绑余额",
     "networkFees": "Network fees are automatically set by the Polkadot consensus, you won't be able to review them on your device",
@@ -3202,20 +3202,20 @@
       "waiting": "落选",
       "waitingInfo": "This validator is not elected, therefore is not collecting rewards.",
       "notValidator": "并非验证器",
-      "notValidatorInfo": "This address is no longer a validator",
+      "notValidatorInfo": "该地址不再是一个验证器",
       "elected": "当选",
       "electedInfo": "This validator is elected and is collecting rewards for its nominators.",
       "nominators": "提名者",
-      "nominatorsCount": "{{nominatorsCount}} nominators",
+      "nominatorsCount": "{{nominatorsCount}}位提名者",
       "nominatorsInfo": "This validator is currently elected by {{count}} nominators.",
       "oversubscribed": "Oversubscribed ({{nominatorsCount}})",
       "oversubscribedInfo": "只有绑定数额最高的顶层 {{maxNominatorRewardedPerValidator}} 提名者才可赚取奖励",
       "hasPendingBondOperation": "A bond operation is still pending confirmation",
       "externalControllerUnsupported": "This stash account is controlled by another account with the address <0>{{address}}</0>. Staking operations on accounts that are controlled by a different account are not supported in Ledger Live. Please use an alternative wallet such as Polkadot.js",
       "externalStashUnsupported": "This account controls a stash account whose address is <0>{{address}}</0>. Staking operations on separate stash accounts are not supported in Ledger Live. Please use an alternative wallet like Polkadot.js",
-      "showInactiveNominations": "Show all nominations ({{count}})",
+      "showInactiveNominations": "显示所有提名 ({{count}})",
       "hideInactiveNominations": "仅显示活跃状态的提名",
-      "noActiveNominations": "There are no active nominations.",
+      "noActiveNominations": "没有活跃状态的提名。",
       "showAllUnlockings": "显示所有正在解绑的数额 ({{count}})",
       "hideAllUnlockings": "隐藏正在解绑的数额"
     },
@@ -3259,14 +3259,14 @@
           "myNominations": "我的提名",
           "electedValidators": "当选的验证器",
           "waitingValidators": "未当选的验证器",
-          "noResultsFound": "No validators found for <0>{{search}}</0>",
-          "selected": "{{selected}} out of {{total}} selected",
+          "noResultsFound": "未能找到 <0>{{search}}</0> 验证器",
+          "selected": "{{total}} 中已选中了 {{selected}} 个",
           "notValidatorsRemoved": "You have nominated {{count}} addresses who are no longer validators. They will automatically be removed from your nominate transaction.",
-          "maybeChill": "Clear nominations instead"
+          "maybeChill": "转而清除提名"
         },
         "validation": {
           "success": {
-            "title": "You have successfully nominated validators",
+            "title": "您已成功提名验证器。",
             "description": "You will start earning rewards when your assets are bonded to your elected validator(s)."
           }
         }
@@ -3363,7 +3363,7 @@
         },
         "validation": {
           "success": {
-            "title": "Unbond transaction sent successfully",
+            "title": "已成功发送解绑交易",
             "description": "28 天后即可提取已解绑的资产。"
           }
         }
@@ -3466,33 +3466,33 @@
       "redelegate": "请在您的设备上确认，以便完成该操作",
       "undelegate": "请在您的设备上确认，以便完成该操作"
     },
-    "warning": "Always verify the address displayed your device exactly matches the one given to you by the {{recipientWording}}",
+    "warning": "每次都要核对您设备上显示的地址与 {{recipientWording}} 所提供的完全一致",
     "recipientWording": {
-      "send": "Always verify the address displayed your device exactly matches the one given to you by the recipient",
-      "delegate": "Always verify that your device displays the address exactly as provided by the validator",
-      "undelegate": "Always verify that your device displays the address exactly as provided by the validator",
-      "freeze": "Always verify that your device displays the address exactly as provided",
-      "unfreeze": "Always verify that your device displays the address exactly as provided",
-      "claimReward": "Always verify that your device displays the address exactly as provided",
-      "vote": "Always verify that your device displays the address exactly as provided",
+      "send": "每次都要核对您设备上显示的地址与接收方所提供给您的完全一致",
+      "delegate": "每次都要核对您设备上显示的地址与验证器所提供的地址完全一致",
+      "undelegate": "每次都要核对您设备上显示的地址与验证器所提供的地址完全一致",
+      "freeze": "每次都要核对您设备上显示的地址与所提供的完全一致",
+      "unfreeze": "每次都要核对您设备上显示的地址与所提供的完全一致",
+      "claimReward": "每次都要核对您设备上显示的地址与所提供的完全一致",
+      "vote": "每次都要核对您设备上显示的地址与所提供的完全一致",
       "erc20": {
-        "approve": "Verify the operation details on your device before sending it."
+        "approve": "发送之前，请在您的设备上核对操作详情。"
       },
-      "compound.supply": "Verify the deposit details on your device before sending it.",
-      "compound.withdraw": "Verify the withdrawal details on your device before sending it."
+      "compound.supply": "发送之前，请在您的设备上核对存入详情。",
+      "compound.withdraw": "发送之前，请在您的设备上核对提取详情。"
     },
     "name": "名称",
     "votes": "选票",
     "infoWording": {
       "freeze": "冻结的代币会有 3 天的锁定期。",
-      "unfreeze": "Your {{resource}} points will be reduced, and all your votes will be cancelled.",
+      "unfreeze": "您的 {{resource}} 点数将被减少，且您的全部投票也将被取消。",
       "claimReward": "每 24 小时可申领一次奖励。",
       "cosmos": {
-        "claimReward": "If the selected validator has pending rewards, they will automatically be claimed.",
-        "redelegate": "You will have to wait 21 days for undelegated assets to return to the available balance.",
-        "undelegate": "You will have to wait 21 days for undelegated assets to return to the available balance."
+        "claimReward": "如果已选的验证器有待领取的奖励，它们将被自动申领。",
+        "redelegate": "资产解除委托后，需要等待 21 天才能返还到可用余额。",
+        "undelegate": "资产解除委托后，需要等待 21 天才能返还到可用余额。"
       },
-      "lending": "Verify the operation details on your device before sending it."
+      "lending": "发送之前，请在您的设备上核对操作详情。"
     },
     "amount": "数额",
     "account": "账户",
@@ -3543,7 +3543,7 @@
       "CTAButton": "立即卖出",
       "emptyState": {
         "title": "没有 {{currency}} 账户",
-        "description": "You need to add an account before you can sell {{currency}}.",
+        "description": "您需要添加一个账户才能卖出 {{currency}}。",
         "CTAButton": "添加账户"
       }
     },
@@ -3554,33 +3554,33 @@
   "banner": {
     "exchangeBuyCrypto": {
       "title": "买入加密货币",
-      "description": "Purchase crypto assets via Coinify and receive them directly in your Ledger account."
+      "description": "通过 Coinify 购买加密资产并直接在您的 Ledger 账户中接收这些资产。"
     },
     "swap": {
       "title": "掉期交易加密资产",
-      "description": "Swap crypto assets directly from your Ledger accounts with our partner."
+      "description": "从您的 Ledger 账户中与我们的合作伙伴直接对加密资产进行 Swap 掉期交易。"
     }
   },
   "walletconnect": {
-    "disclaimer": "Wants to connect to the following Ethereum account through your wallet :",
+    "disclaimer": "想要通过您的钱包连接到以下以太坊账户：",
     "reject": "拒绝",
     "connect": "连接",
     "connected": "已连接",
     "disconnected": "已断开连接",
-    "warningdisconnected": "There is a connection problem between the dApp, WalletConnect and Ledger Live. Wait a few moments or relaunch the connection",
-    "info": "You can now access the {{name}} dApp on your desktop.",
-    "warning": "Sharing receive addresses from dApp is not secure. Always use Ledger Live when sharing your address to receive funds.",
+    "warningdisconnected": "在 dApp、WalletConnect 和 Ledger Live 之间出现了连接问题。请稍候片刻或重新发起连接",
+    "info": "您现在可以在您的桌面应用程序上访问 {{name}} dApp 去中心化应用。",
+    "warning": "通过 dApp（去中心化应用）分享接收地址并不安全。在分享地址以接收资金时，要一直使用 Ledger Live。",
     "isconnecting": "正在连接，请稍候……",
     "disconnect": "断开连接",
     "retry": "重试",
     "close": "关闭",
     "message": "消息",
-    "messageHash": "Message Hash",
-    "domainHash": "Domain Hash",
-    "stringHash": "Hash",
+    "messageHash": "Message Hash 消息哈希字符串",
+    "domainHash": "Domain Hash 域名哈希字符串",
+    "stringHash": "Hash 哈希字符串",
     "from": "从",
     "successTitle": "消息已签名",
-    "successDescription": "You have signed the message received from a third party application",
+    "successDescription": "您已经签署了从第三方应用程序接收到的消息",
     "stepperHeader": {
       "summary": "概要",
       "selectDevice": "选择设备",
