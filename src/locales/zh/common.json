@@ -974,13 +974,13 @@
           "0": {
             "title": "启动 Nano",
             "nanoX": {
-              "label": "Turn on your device by pressing the black button for 1 second."
+              "label": "按住黑色按钮 1 秒钟来启动您的设备。"
             },
             "nanoS": {
-              "label": "Turn on your device by connecting it to the USB port of your phone."
+              "label": "通过连接到手机的 USB 端口来启动您的设备。"
             },
             "blue": {
-              "label": "Turn on your device by connecting it to the USB port of your phone and pressing the power button."
+              "label": "通过连接设备到您手机的 USB 端口并按电源按钮来启动您的设备。"
             }
           },
           "1": {
@@ -993,7 +993,7 @@
           },
           "3": {
             "title": "按指示操作",
-            "label": "Come back here to follow instructions on your PIN code."
+            "label": "返回此处以按照 PIN 识别密码的说明操作。"
           }
         }
       },
@@ -1001,14 +1001,14 @@
         "title": "输入您的恢复短语",
         "paragraph1": "您的恢复短语是您在首次设置钱包时备份下来的那份秘密单词列表。",
         "paragraph2": "Ledger 不会保存您恢复短语的副本。",
-        "checkboxDesc": "I understand that if I lose my recovery phrase, I will not be able to access my crypto in case I lose access to my Nano.",
+        "checkboxDesc": "我明白：如果我丢失了自己的恢复短语，那么一旦我的 Nano 无法使用，也就意味着我将无法访问自己的加密资产。",
         "bullets": {
           "0": {
             "title": "拿出您的恢复短语"
           },
           "1": {
             "title": "选择恢复短语的长度",
-            "label": "Your recovery phrase can have 12, 18 or 24 words. You must enter all words to access your crypto."
+            "label": "恢复短语可能拥有 12、18 或 24 个词。您必须输入所有的词才能访问您的加密资产。"
           },
           "2": {
             "title": "输入第 1 个词……",
@@ -1129,7 +1129,7 @@
       "step2": "Press the right button and continue to write down all 24 words.",
       "step3": "Confirm each word of your recovery phrase: select it then confirm it by pressing both buttons together.",
       "modal": {
-        "step1": "Store your 24-word recovery phrase in a safe place, out of sight.",
+        "step1": "将您的 24 词恢复短语存放在安全、隐秘的地方。",
         "step2": "确保您是唯一拥有该恢复短语的人。",
         "step3": "Ledger 并不保存您的恢复短语。",
         "step4": "Never use a device with a recovery phrase or PIN already setup."
@@ -1232,7 +1232,7 @@
     "summary_plural": "您的 {{count}} 账户已同步。",
     "emptyState": {
       "noAppsTitle": "在我的设备上安装应用程序",
-      "noAppsDesc": "Install apps on your device before adding accounts in Ledger Live. Go to the Manager to install apps.",
+      "noAppsDesc": "在 Ledger Live 上添加账户之前，请先安装相关应用程序。前往管理器安装应用程序。",
       "noAccountsTitle": "您没有任何账户…",
       "noAccountsDesc": "请添加账户到您的资产组合。",
       "buttons": {
@@ -2751,7 +2751,7 @@
     "action": "我的设备已经就绪"
   },
   "StepLegacyModal": {
-    "description": "Imported accounts synchronize with the network only, not between Mobile and Desktop versions of Ledger Live."
+    "description": "导入的账户只能和网络同步，不能在 Ledger Live 的手机版和桌面版之间同步。"
   },
   "algorand": {
     "token": "ASA (资产)",
@@ -3001,7 +3001,7 @@
         "steps": {
           "method": {
             "youEarned": "您赚取了",
-            "byDelegationAssetsTo": "by delegating assets to",
+            "byDelegationAssetsTo": "通过将资产委托给",
             "claimReward": "兑现",
             "claimRewardCompound": "Compound（按复利协议）",
             "claimRewardInfo": "They will be claimed now and added to your available balance.",
@@ -3133,7 +3133,7 @@
       },
       "superRepresentative": {
         "title": "超级代表 (SR)",
-        "description": "Super Representatives play a key role in governing the TRON community by ensuring basic functions, e.g. block generation and bookkeeping."
+        "description": "超级代表在 TRON 波场区块链社区的治理中发挥着重要作用，能够确保基本功能的运作，例如确保区块生成和记账。"
       },
       "candidates": {
         "title": "候选人",
@@ -3204,13 +3204,13 @@
       "notValidator": "并非验证器",
       "notValidatorInfo": "该地址不再是一个验证器",
       "elected": "当选",
-      "electedInfo": "This validator is elected and is collecting rewards for its nominators.",
+      "electedInfo": "该验证器当选，正在为它的提名人收集奖励。",
       "nominators": "提名者",
       "nominatorsCount": "{{nominatorsCount}}位提名者",
-      "nominatorsInfo": "This validator is currently elected by {{count}} nominators.",
+      "nominatorsInfo": "在 {{count}} 位提名者的提名下，该验证器目前当选。",
       "oversubscribed": "超额订购 ({{nominatorsCount}})",
       "oversubscribedInfo": "只有绑定数额最高的顶层 {{maxNominatorRewardedPerValidator}} 提名者才可赚取奖励",
-      "hasPendingBondOperation": "A bond operation is still pending confirmation",
+      "hasPendingBondOperation": "绑定操作仍在等待确认",
       "externalControllerUnsupported": "This stash account is controlled by another account with the address <0>{{address}}</0>. Staking operations on accounts that are controlled by a different account are not supported in Ledger Live. Please use an alternative wallet such as Polkadot.js",
       "externalStashUnsupported": "This account controls a stash account whose address is <0>{{address}}</0>. Staking operations on separate stash accounts are not supported in Ledger Live. Please use an alternative wallet like Polkadot.js",
       "showInactiveNominations": "显示所有提名 ({{count}})",
@@ -3240,7 +3240,7 @@
       },
       "nominate": {
         "title": "提名",
-        "description": "Choose up to 16 validators. Ensure nominations are Active to earn rewards."
+        "description": "最多可选择 16 个验证器。确保您的提名对象处于活跃状态，以便赚取奖励。"
       },
       "chill": {
         "title": "清除提名",
@@ -3261,13 +3261,13 @@
           "waitingValidators": "未当选的验证器",
           "noResultsFound": "未能找到 <0>{{search}}</0> 验证器",
           "selected": "{{total}} 中已选中了 {{selected}} 个",
-          "notValidatorsRemoved": "You have nominated {{count}} addresses who are no longer validators. They will automatically be removed from your nominate transaction.",
+          "notValidatorsRemoved": "您提名的 {{count}} 个地址已经不再是验证器。它们将从您的提名中被自动删除。",
           "maybeChill": "转而清除提名"
         },
         "validation": {
           "success": {
             "title": "您已成功提名验证器。",
-            "description": "You will start earning rewards when your assets are bonded to your elected validator(s)."
+            "description": "当您的资产被绑定至您的 (某个或多个) 当选验证器时，您便将开始赚取奖励。"
           }
         }
       }
@@ -3276,11 +3276,11 @@
       "rewardDestination": {
         "label": "奖励目的地",
         "stash": "可用余额",
-        "stashDescription": "Rewards are credited to your available balance.",
+        "stashDescription": "奖励被记入您的可用余额。",
         "staked": "已绑定余额",
-        "stakedDescription": "Rewards are credited to your bonded balance for compound earning.",
+        "stakedDescription": "奖励被记入您的已绑定余额，以便赚取复利。",
         "optionTitle": "备注",
-        "optionDescription": "Once set, the option is fixed for the lifetime of this bond. If you change your mind, please read ",
+        "optionDescription": "一旦设定，在此绑定周期内的期权就固定不变。如需更改，请参阅 ",
         "clickableLink": "此处。"
       },
       "stepperHeader": {
@@ -3292,14 +3292,14 @@
       },
       "steps": {
         "starter": {
-          "description": "You may earn rewards by bonding your assets and then nominate your validators.",
+          "description": "您可通过绑定资产并提名验证器来赚取奖励。",
           "bullet": [
             "你保有对已绑定资产的所有权",
             "使用您的 Ledger 设备进行提名",
-            "Assets will be available again, 28 days after unbonding"
+            "经过 28 天的解绑期后，资产将会再次可用"
           ],
           "help": "提名机制如何运作",
-          "warning": "Choose your validators wisely: part of your bonded assets may be irrevocably lost if a validator does not behave appropriately."
+          "warning": "请明智地选择验证器：如果验证器表现不当，您可能会不可挽回地损失部分委托资产。"
         },
         "amount": {
           "availableLabel": "可用",
@@ -3311,8 +3311,8 @@
         "validation": {
           "success": {
             "title": "资产已成功绑定",
-            "description": "You can nominate validators once the network has confirmed the transaction.",
-            "descriptionNominate": "You will be able to nominate validators once the network has confirmed your transaction.",
+            "description": "一旦网络确认该交易，您就可以提名验证器。",
+            "descriptionNominate": "一旦网络确认您的交易，您就可以提名验证器。",
             "nominate": "提名",
             "later": "稍后提名"
           },
@@ -3336,7 +3336,7 @@
           "maxLabel": "最多"
         },
         "confirm": {
-          "info": "Rebonded assets are immediately added to the bonded amount."
+          "info": "重新绑定的资产会立刻添加到已绑定数额中。"
         },
         "validation": {
           "success": {
@@ -3410,7 +3410,7 @@
     "forAnEstYield": "以获得预估收益",
     "yieldPerYear": "{{yield}} / 年",
     "yieldInfos": "收益率提供方",
-    "termsAndPrivacy": "I have read and I accept the <1>Ledger Live Terms of Use</1> and <3>Privacy Policy</3>.",
+    "termsAndPrivacy": "我已阅读并接受 <1> Ledger Live 使用条款</1> 和 <3>隐私政策</3>。",
     "delegation": "委托",
     "viewDetails": "查看详情",
     "validator": "验证器",
@@ -3430,7 +3430,7 @@
     "selectValidatorTitle": "选择验证器",
     "started": {
       "title": "赚取奖励",
-      "description": "Delegate your Tezos account to a third-party validator to earn rewards securely, keeping control of your assets.",
+      "description": "将您的 Tezos 账户委托给第三方验证器，从而安全地赚取奖励并依旧掌控您的资产。",
       "steps": {
         "0": "委托出去的账户依旧为您所有。",
         "1": "您可以随时管理您的资产。",
@@ -3443,8 +3443,8 @@
       "undelegate": "操作已发送"
     },
     "broadcastSuccessDescription": {
-      "delegate": "Delegation transaction broadcasted successfully. You should earn your first rewards in around 40 days, depending on the validator.",
-      "undelegate": "Your account delegation will end when the operation is confirmed. You can delegate your account again at any time."
+      "delegate": "委托交易已经成功播送。取决于该验证器的情况，您在约 40 天后应可赚取第一笔奖励。",
+      "undelegate": "操作一经确认，您的账户就会结束委托。您随时可以再次委托您的账户。"
     },
     "summaryTitle": "概要",
     "goToAccount": "前往账户",
@@ -3499,7 +3499,7 @@
     "from": "从",
     "to": "到",
     "redelegationAmount": "已重新委托数额",
-    "gas": "Gas",
+    "gas": "Gas 矿工费",
     "validatorAddress": "验证器地址",
     "rewardAmount": "奖励金额",
     "undelegatedAmount": "已解除委托金额",
