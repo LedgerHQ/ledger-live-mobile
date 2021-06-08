@@ -881,7 +881,7 @@
       "recoveryPhraseSetup": {
         "infoModal": {
           "title": "恢复短语的作用是什么？",
-          "desc": "Your recovery phrase works like a unique master key. Your Ledger device uses it to calculate private keys for every crypto asset you own.",
+          "desc": "您的恢复短语就像是一把独一无二的主密钥。您的 Ledger 设备使用它来为您所拥有的每一种加密资产计算私钥。",
           "desc_1": "To restore access to your crypto, any wallet can calculate the same private keys from your recovery phrase.",
           "link": "有关恢复短语的更多详情",
           "title_1": "如果我的 Nano 无法使用了该怎么办？",
@@ -1180,13 +1180,13 @@
         }
       },
       "privateKey": {
-        "title": "When I connect my Nano to the Ledger app, my private key is...",
+        "title": "当我将我的 Nano 连接到 Ledger 应用程序上，我的私钥是……",
         "answers": {
           "correct": "依旧处于离线状态",
           "wrong": "已短暂连接到网络"
         },
         "modal": {
-          "text": "Your private key always remains offline in your hardware wallet. Even when connected to your Nano, the Ledger app cannot access your private key. You must physically authorize every transaction on your device.",
+          "text": "您私钥会一直在您的硬件钱包中保持离线状态。即便将硬件钱包连接到 Ledger 应用程序上，Ledger 应用程序也无法获取您的私钥。您必须在您的设备上手动授权每一笔交易。",
           "cta": "完成测验"
         }
       },
@@ -1194,7 +1194,7 @@
         "successTitle": "已经是位高手！",
         "successText": "您已准备好安全的管理您的加密资产了。只剩下最后一小步！",
         "failTitle": "距成为高手仅一步之遥……",
-        "failText": "Don’t worry, Ledger is here to guide you through your journey. You will soon feel extra comfortable about your crypto safety. Only one quick step left!",
+        "failText": "别担心，Ledger 会为您的操作提供指导。很快，您就会对自己加密资产的安全性感到格外舒心。只剩下最后一小步！",
         "cta": "下一步"
       }
     },
@@ -1226,7 +1226,7 @@
     },
     "transactionsPendingConfirmation": {
       "title": "非同步的余额",
-      "desc": "Some transactions are not confirmed yet. These will be reflected in your balance and useable after being confirmed."
+      "desc": "有些交易尚未确认。此类交易会体现在您的余额上，一经确认即可使用。"
     },
     "summary": "这是您的账户概览",
     "summary_plural": "您的 {{count}} 账户已同步。",
@@ -1299,7 +1299,7 @@
       "BOND": "绑定",
       "UNBOND": "解绑",
       "REWARD_PAYOUT": "奖励",
-      "SLASH": "Slash",
+      "SLASH": "Slash 削减惩罚机制",
       "WITHDRAW_UNBONDED": "提取已解绑资产",
       "NOMINATE": "提名",
       "CHILL": "清除提名"
@@ -1328,7 +1328,7 @@
     "subAccountOperations": "子账户操作",
     "internalOperations": "内部操作",
     "tokenModal": {
-      "desc": "This operation is related to the following token operations"
+      "desc": "该操作与以下代币操作有关"
     },
     "details": "{{ currency }} 详情",
     "extra": {
@@ -1964,7 +1964,7 @@
       "account": {
         "amountSupplied": "已存数额",
         "amountSuppliedTooltip": "向网络贷出的数额",
-        "currencyAPY": "货币年利率 APY",
+        "currencyAPY": "货币的年收益率 APY",
         "currencyAPYTooltip": "存款的年度回报率为连续复利模式",
         "accruedInterests": "利息余额",
         "accruedInterestsTooltip": "贷出资产产生的利息",
@@ -1987,7 +1987,7 @@
         "assetsTitle": "要贷出的资产",
         "accountsTitle": "已批准的账户",
         "emptySateDescription": "You can lend assets directly from your Ethereum accounts and earn interest.",
-        "apy": "{{value}} APY 年利率",
+        "apy": "{{value}} 年收益率 APY",
         "activeAccount": {
           "account": "账户",
           "amountSupplied": "已存数额",
