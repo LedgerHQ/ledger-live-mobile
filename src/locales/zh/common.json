@@ -2346,7 +2346,7 @@
       "votesRemaining": "剩余票数：<0>{{total}}</0>",
       "maxVotesAvailable": "最大可用票数：<0>{{total}}</0>",
       "voteFor": "投票对象",
-      "validateVotes": "Validate votes",
+      "validateVotes": "验证票数",
       "votesRequired": "所需票数 ",
       "allVotesUsed": "All votes used"
     },
@@ -2362,27 +2362,27 @@
       "segwit_or_native_segwit": "Segwit or Native segwit?"
     },
     "quitConfirmation": {
-      "title": "Cancel add account",
+      "title": "取消添加账户",
       "desc": "Are you sure you want to cancel adding accounts?"
     },
-    "imported": "Accounts added successfully",
+    "imported": "账户已成功添加",
     "sections": {
       "importable": {
-        "title": "Add existing account"
+        "title": "添加现有账户"
       },
       "creatable": {
-        "title": "Add new account"
+        "title": "添加新账户"
       },
       "imported": {
         "title": "已经在资产组合中的账户 ({{length}})"
       },
       "migrate": {
-        "title": "Accounts to update"
+        "title": "需要更新的账户"
       }
     },
     "success": {
-      "desc": "View your accounts or add other accounts",
-      "secondaryCTA": "Add other accounts",
+      "desc": "查看您的账户或添加其他账户",
+      "secondaryCTA": "添加其他账户",
       "cta": "前往账户"
     },
     "stopScanning": "停止扫描",
@@ -2392,31 +2392,31 @@
     "finalCta": "继续",
     "finalCtaForSwap": "返回到 Swap 掉期",
     "synchronizing": "正在同步",
-    "synchronizingDesc": "Your accounts are being synchronized. This can take a while...",
-    "noAccountToCreate": "Could not create <1><0>{{currencyName}}</></> account. Restart the process and sync your accounts.",
-    "cantCreateAccount": "A new account cannot be added before receiving assets on your <1><0>{{accountName}}</></> account.",
+    "synchronizingDesc": "您的账户正在同步。请耐心等候……",
+    "noAccountToCreate": "无法创建 <1><0>{{currencyName}}</></> 账户。重新开始该流程并同步您的账户。",
+    "cantCreateAccount": "首先需要用您的 <1><0>{{accountName}}</></> 账户接收资产，否则无法添加新账户。",
     "tokens": {
       "title": "添加代币",
       "createParentCurrencyAccount": "添加 {{parrentCurrencyName}} 账户",
       "erc20": {
         "title": "添加代币",
-        "disclaimer": "{{tokenName}} is an ERC20 Token.\nYou can receive tokens directly in an Ethereum account.",
-        "learnMore": "Learn more about ERC20"
+        "disclaimer": "{{tokenName}} 为 ERC20 代币。\n您可以直接通过以太坊账户接收代币。",
+        "learnMore": "了解关于 ERC20 的更多详情"
       },
       "trc10": {
         "title": "添加代币",
-        "disclaimer": "{{tokenName}} is a TRC10 Token.\nYou can receive tokens directly in a Tron account.",
-        "learnMore": "Learn more about TRC10"
+        "disclaimer": "{{tokenName}} 为 TRC10 代币。\n您可以直接通过 Tron 波场账户接收代币。",
+        "learnMore": "了解关于 TRC10 的更多详情"
       },
       "trc20": {
         "title": "添加代币",
-        "disclaimer": "{{tokenName}} is a TRC20 Token.\nYou can receive tokens directly in a Tron account.",
+        "disclaimer": "{{tokenName}} 为 TRC20 代币。\n您可以直接通过 Tron 波场账户接收代币。",
         "learnMore": "了解关于 TRC20 的更多详情"
       }
     },
-    "showMoreChainType": "More address types",
+    "showMoreChainType": "更多地址类型",
     "addressTypeInfo": {
-      "title": "Which address type to choose?",
+      "title": "选择哪种地址类型？",
       "subtitle": "添加新账户",
       "native_segwit": {
         "title": "Native Segwit",
@@ -2435,13 +2435,13 @@
   "DeviceAction": {
     "allowAppPermission": "Open the {{wording}} app on your device",
     "allowAppPermissionSubtitleToken": "管理个人 {{token}} 代币",
-    "allowManagerPermission": "Allow {{wording}} on your device",
+    "allowManagerPermission": "允许 {{wording}} 在您的设备上运行",
     "loading": "正在加载……",
     "turnOnAndUnlockDevice": "启动并解锁您的设备",
     "connectAndUnlockDevice": "连接并解锁您的设备",
     "unlockDevice": "解锁您的设备",
     "outdated": "应用程序版本过期",
-    "outdatedDesc": "An important update is available for the {{appName}} application on your device. Please go to the Manager to update it.",
+    "outdatedDesc": "您设备上的 {{appName}} 应用程序有可用的重要更新。请前往管理器对其进行更新。",
     "quitApp": "在设备上退出该应用程序",
     "appNotInstalled": "请安装 {{appName}} 应用程序",
     "appNotInstalled_plural": "请安装 {{appName}} 应用程序",
@@ -2549,7 +2549,7 @@
       "title": "抱歉，未找到设备",
       "desc": "Please make sure your {{productName}} is unlocked and Bluetooth is enabled."
     },
-    "bypassGenuine": "Use anyway",
+    "bypassGenuine": "无论如何也要使用",
     "alreadyPaired": "已配对"
   },
   "DeviceItemSummary": {
@@ -2611,14 +2611,14 @@
       "title": "存储",
       "used": "已用",
       "genuine": "您的设备是正版的",
-      "appsInstalled": "<0>{{number}}</0> app installed",
-      "appsInstalled_plural": "<0>{{number}}</0> apps installed",
+      "appsInstalled": "<0>{{number}}</0> 个应用程序已安装",
+      "appsInstalled_plural": "<0>{{number}}</0> 个应用程序已安装",
       "storageAvailable": "可用"
     },
     "installSuccess": {
-      "title": "App installed successfully, you can now add your {{app}} accounts",
-      "title_plural": "Apps installed successfully, you can now add your accounts",
-      "notSupported": "App installed successfully, find out more about the installed apps on our website.",
+      "title": "应用程序已成功安装，现在您可以添加您的 {{app}} 账户",
+      "title_plural": "应用程序已成功安装，现在您可以添加您的账户",
+      "notSupported": "应用程序已成功安装，访问我们的网站来了解关于这些已安装应用的更多信息。",
       "manageAccount": "添加账户",
       "learnMore": "了解更多信息",
       "later": "以后再说"
@@ -2631,74 +2631,74 @@
     }
   },
   "ManagerDevice": {
-    "title": "Device"
+    "title": "设备"
   },
   "AppAction": {
     "install": {
       "loading": {
-        "title": "Installing {{appName}}",
-        "desc": "Please wait for the {{appName}} app to be installed",
-        "button": "Installing...",
-        "button_plural": "Installing... {{progressPercentage}}%"
+        "title": "正在安装 {{appName}}",
+        "desc": "请等待 {{appName}} 应用程序完成安装",
+        "button": "正在安装……",
+        "button_plural": "正在安装…… {{progressPercentage}}%"
       },
       "done": {
         "title": "{{appName}} 已成功安装到您的 {{productName}} 上",
         "accounts": "前往账户"
       },
       "dependency": {
-        "title": "{{dependency}} app is needed",
+        "title": "需要安装 {{dependency}} 应用程序",
         "description_one": "The {{dependency}} app will also be installed because the {{app}} app uses it.",
         "description_two": "Please press Continue to install the {{app}} and {{dependency}} apps."
       },
       "continueInstall": "安装应用程序"
     },
     "update": {
-      "title": "{{number}} app update",
-      "title_plural": "{{number}} app updates",
+      "title": "{{number}} 个应用程序更新",
+      "title_plural": "{{number}} 个应用程序更新",
       "step": "更新步骤 {{step}}：",
       "updateWarn": "Do not quit the Manager during the update.",
-      "progress": "Updating all...",
-      "button": "Update all",
+      "progress": "正在更新全部……",
+      "button": "全部更新",
       "version": "新版本{{version}}",
-      "buttonAction": "Update available",
-      "buttonModal": "Update all apps",
-      "loading": "Updating...",
-      "titleModal": "Updates available"
+      "buttonAction": "有可用的更新",
+      "buttonModal": "更新所有应用程序",
+      "loading": "正在更新……",
+      "titleModal": "有可用的更新"
     },
     "uninstall": {
       "loading": {
-        "title": "Uninstalling {{appName}}",
-        "button": "Uninstalling..."
+        "title": "正在卸载 {{appName}}",
+        "button": "正在卸载……"
       },
       "done": {
         "title": "已成功将 {{appName}} 从您的 {{productName}} 上卸载"
       },
       "dependency": {
-        "title": "Uninstall {{app}} and related apps?",
-        "showAll": "Show apps to uninstall",
+        "title": "卸载 {{app}} 及其相关应用程序？",
+        "showAll": "显示待卸载的应用程序",
         "description": "Apps on your device that need the {{app}} app will be uninstalled too."
       },
       "continueUninstall": "Uninstall {{app}} and other apps"
     },
     "filter": {
-      "title": "Show",
-      "all": "All",
-      "installed": "Apps",
-      "not_installed": "Not installed",
-      "supported": "Live supported",
-      "updatable": "Updatable",
-      "apply": "Apply"
+      "title": "显示",
+      "all": "全部",
+      "installed": "应用程序",
+      "not_installed": "未安装",
+      "supported": "Live 在线支持",
+      "updatable": "可更新的",
+      "apply": "应用"
     },
     "sort": {
       "title": "Sort by",
-      "default": "Default",
-      "name_asc": "Name A-Z",
-      "name_desc": "Name Z-A",
-      "marketcap_desc": "Market cap"
+      "default": "默认",
+      "name_asc": "名称 A-Z",
+      "name_desc": "名称 Z-A",
+      "marketcap_desc": "市值"
     }
   },
   "AuthenticityRow": {
-    "title": "Authentication",
+    "title": "验证",
     "subtitle": "正版"
   },
   "RemoveRow": {
@@ -2774,12 +2774,12 @@
               "1": "Increase the account’s balance to increase rewards.",
               "2": "Perform a transaction to or from the account to claim rewards."
             },
-            "howItWorks": "How rewards work",
+            "howItWorks": "奖励机制如何运作",
             "cta": "接收 Algo"
           },
           "starter": {
-            "title": "Congratulations! You earned {{amount}}. Continue to claim your rewards.",
-            "howItWorks": "How rewards work",
+            "title": "恭喜！您赚取了 {{amount}}。点击继续以申领您的奖励。",
+            "howItWorks": "奖励机制如何运作",
             "warning": "You will be prompted to generate an empty transaction to your account. This will add your current rewards to your balance at the minimal cost of the transaction fees.",
             "cta": "继续"
           },
@@ -2808,18 +2808,18 @@
         "steps": {
           "selectToken": {
             "warning": {
-              "title": "Asset already added",
+              "title": "资产已添加",
               "description": "You already have {{token}} asset in your Algorand account."
             }
           },
           "verification": {
             "success": {
-              "title": "{{token}} asset successfully added!",
+              "title": "已成功添加 {{token}} 资产！",
               "text": "You can now receive and send {{token}} assets on your Algorand account.",
-              "cta": "View details"
+              "cta": "查看详情"
             },
             "pending": {
-              "title": "Broadcasting transaction..."
+              "title": "播送交易……"
             },
             "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
           }
@@ -2830,43 +2830,43 @@
   "cosmos": {
     "info": {
       "available": {
-        "title": "ATOM available",
+        "title": "ATOM 可用",
         "description": "该数额可自由支配。"
       },
       "delegated": {
-        "title": "Delegated assets",
-        "description": "Delegated assets are used for Cosmos voting. This is your total number of votes."
+        "title": "已委托资产",
+        "description": "已委托的资产被用于 Cosmos 投票。这是您的总票数。"
       },
       "undelegating": {
-        "title": "Undelegating",
+        "title": "正在解除委托",
         "description": "Undelegated assets are in a timelock of 21 days, before being available."
       },
       "delegationUnavailable": {
-        "title": "Delegation unavailable",
+        "title": "委托不可用",
         "description": "Not enough available balance in your account to start a new delegation."
       }
     },
     "delegation": {
       "delegationEarn": "You can earn ATOM rewards by delegating your assets.",
-      "info": "How Delegation works",
-      "claimRewards": "Claim rewards",
-      "claimAvailableRewards": "Claim {{amount}}",
-      "header": "Delegation(s)",
+      "info": "委托机制如何运作",
+      "claimRewards": "申领奖励",
+      "claimAvailableRewards": "申领 {{amount}}",
+      "header": "委托",
       "Amount": "数额",
-      "noRewards": "No rewards available",
-      "delegate": "Delegate",
-      "undelegate": "Undelegate",
-      "redelegate": "Redelegate",
-      "reward": "Claim rewards",
-      "estYield": "Est. yield",
+      "noRewards": "没有奖励可用",
+      "delegate": "委托",
+      "undelegate": "解除委托",
+      "redelegate": "重新委托",
+      "reward": "申领奖励",
+      "estYield": "预估收益",
       "stepperHeader": {
-        "starter": "Earn rewards",
-        "validator": "Delegate assets",
+        "starter": "赚取奖励",
+        "validator": "委托资产",
         "amountSubTitle": "要委托的数额",
         "summary": "概要",
-        "verification": "Verification",
-        "selectDevice": "Select device",
-        "connectDevice": "Connect device",
+        "verification": "验证",
+        "selectDevice": "选择设备",
+        "connectDevice": "连接设备",
         "stepRange": "步骤 {{currentStep}} 之 {{totalSteps}}"
       },
       "flow": {
@@ -2874,9 +2874,9 @@
           "starter": {
             "description": "将您的 ATOM 币委托出去从而安全地赚取奖励，同时依旧掌控您的资产。",
             "steps": {
-              "0": "Delegated assets remain yours.",
-              "1": "You will have to wait 21 days for the undelegation to complete.",
-              "2": "Delegate securely with your Ledger device."
+              "0": "委托出去的资产依旧为您所有。",
+              "1": "你需要等待 21 天才能完成解除委托流程。",
+              "2": "使用您的 Ledger 设备安全地进行委托。"
             },
             "warning": {
               "description": "Choose your validator wisely: Part of your delegated assets may be irrevocably lost if the validator does not behave appropriately."
@@ -2894,7 +2894,7 @@
             "currentAmount": "(+ <0>{{amount}}</0>)"
           },
           "amount": {
-            "assetsRemaining": "Assets remaining: <0>{{amount}}</0>",
+            "assetsRemaining": "剩余资产：<0>{{amount}}</0>",
             "allAssetsUsed": "已使用所有资产",
             "minAmount": "最小数额：<0>{{min}}</0>",
             "incorrectAmount": "最大数额：<0>{{max}}</0>",
@@ -2902,12 +2902,12 @@
           },
           "verification": {
             "success": {
-              "title": "You have successfully delegated your assets",
+              "title": "您的资产已成功委托。",
               "text": "Your account balance will be updated once the network confirms the transaction.",
               "cta": "查看详情"
             },
             "pending": {
-              "title": "Broadcasting transaction..."
+              "title": "播送交易……"
             },
             "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
           }
@@ -2972,7 +2972,7 @@
       "flow": {
         "steps": {
           "amount": {
-            "allAssetsUsed": "All assets undelegated"
+            "allAssetsUsed": "所有资产都已解除委托"
           },
           "verification": {
             "success": {
@@ -3000,13 +3000,13 @@
       "flow": {
         "steps": {
           "method": {
-            "youEarned": "You earned",
+            "youEarned": "您赚取了",
             "byDelegationAssetsTo": "by delegating assets to",
-            "claimReward": "Cash in",
-            "claimRewardCompound": "Compound",
+            "claimReward": "兑现",
+            "claimRewardCompound": "Compound（按复利协议）",
             "claimRewardInfo": "They will be claimed now and added to your available balance.",
             "claimRewardCompoundInfo": "They will be claimed now and automatically delegated to the same validator.",
-            "compoundOrCashIn": "Compound or Cash in?",
+            "compoundOrCashIn": "复利或兑现？",
             "claimRewardTooltip": "Rewards will be added to the available balance",
             "claimRewardCompoundTooltip": "奖励将被添加至已委托的数额",
             "cta": "继续"
@@ -3016,12 +3016,12 @@
               "title": "You have successfully claimed your rewards. They were added to your available balance.",
               "titleCompound": "Your rewards were delegated to the same validator.",
               "text": "Your account balance will be updated when the network confirms the transaction.",
-              "cta": "View details"
+              "cta": "查看详情"
             },
             "pending": {
-              "title": "Broadcasting transaction..."
+              "title": "播送交易……"
             },
-            "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+            "broadcastError": "您的交易可能已失败。请稍候片刻并在重试之前查看交易记录。"
           }
         }
       }
@@ -3029,7 +3029,7 @@
   },
   "tezos": {
     "AccountHeader": {
-      "title": "You can earn rewards by delegating your account",
+      "title": "您可以通过将您的账户委托出去，从而赚取奖励",
       "btn": "赚取奖励"
     }
   },
@@ -3040,7 +3040,7 @@
       "howItWorks": "如何投票",
       "startEarning": "赚取奖励",
       "title": "申领奖励",
-      "header": "Votes ({{total}})",
+      "header": "票数（{{total}}）",
       "Amount": "数额",
       "noRewards": "No rewards available",
       "votes": {
@@ -3096,7 +3096,7 @@
       }
     },
     "manage": {
-      "title": "Manage Tron Power",
+      "title": "管理 Tron Power 波场能量",
       "freeze": {
         "title": "冻结",
         "description": "Freeze TRX to earn Bandwidth or Energy. You can also vote for Super Representatives."
@@ -3156,7 +3156,7 @@
   },
   "polkadot": {
     "lockedBalance": "Bonded balance",
-    "unlockingBalance": "Unbonding balance",
+    "unlockingBalance": "正在解绑余额",
     "unlockedBalance": "已解绑余额",
     "networkFees": "Network fees are automatically set by the Polkadot consensus, you won't be able to review them on your device",
     "info": {
@@ -3177,7 +3177,7 @@
         "description": "现在可使用提取操作转移已解绑的资产。"
       },
       "electionOpen": {
-        "title": "Validators election ongoing",
+        "title": "正在推选验证器",
         "description": "The election of new validators is currently ongoing. As such, staking operations are not available for 15 minutes at most."
       }
     },
@@ -3185,14 +3185,14 @@
       "emptyState": {
         "title": "赚取奖励",
         "description": "You can earn rewards by bonding assets and then nominating your validator(s).",
-        "info": "How nominations work",
-        "cta": "Earn rewards"
+        "info": "提名机制如何运作",
+        "cta": "赚取奖励"
       },
-      "header": "Nominations",
-      "nominate": "Nominate",
-      "chill": "Clear nominations",
-      "status": "Status",
-      "totalStake": "Total Stake",
+      "header": "提名名单",
+      "nominate": "提名",
+      "chill": "清除提名",
+      "status": "状态",
+      "totalStake": "质押总额",
       "amount": "已绑定数额",
       "commission": "佣金",
       "active": "活跃",
@@ -3277,7 +3277,7 @@
         "label": "奖励目的地",
         "stash": "可用余额",
         "stashDescription": "Rewards are credited to your available balance.",
-        "staked": "Bonded balance",
+        "staked": "已绑定余额",
         "stakedDescription": "Rewards are credited to your bonded balance for compound earning.",
         "optionTitle": "备注",
         "optionDescription": "Once set, the option is fixed for the lifetime of this bond. If you change your mind, please read ",
