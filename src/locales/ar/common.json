@@ -228,11 +228,11 @@
       "description": "يرجى إعادة المحاولة."
     },
     "DisconnectedDevice": {
-      "title": "Sorry, it looks like your device was disconnected",
+      "title": "عذراً، يبدو أنه قد انقطع الاتصال عن جهازك",
       "description": "يرجى إعادة الاتصال و المحاولة مرة أخرى."
     },
     "DisconnectedDeviceDuringOperation": {
-      "title": "Sorry, it looks like your device was disconnected",
+      "title": "عذراً، يبدو أنه قد انقطع الاتصال عن جهازك",
       "description": "يرجى إعادة الاتصال و المحاولة مرة أخرى."
     },
     "ETHAddressNonEIP": {
@@ -583,9 +583,9 @@
   "fees": {
     "speed": {
       "high": "High",
-      "standard": "Standard",
+      "standard": "اعتيادية",
       "low": "Low",
-      "custom": "Custom",
+      "custom": "مُخصّص",
       "blockCount": "{{blockCount}} blocks"
     }
   },
@@ -686,7 +686,7 @@
         "description": "Vote directly from your Ledger Wallet."
       },
       "lending": {
-        "title": "Lend crypto",
+        "title": "إقراض العملات المشفرة",
         "description": "Lend asset on the Compound Protocol"
       },
       "blackfriday": {
@@ -1202,7 +1202,7 @@
       "recoveryPhrase": {
         "title": "Do not use a recovery phrase that you have not generated yourself.",
         "desc": "Your Ledger hardware wallet’s pin code and recovery phrase should be initialized by you and only you. If you have received a device with a pre-existing seed word or an already initialized pin code do not use the product and contact our customer support.",
-        "supportLink": "Contact customer support"
+        "supportLink": "الاتصال بقسم دعم ليدجر"
       }
     }
   },
@@ -1949,9 +1949,9 @@
       }
     },
     "lending": {
-      "title": "Lend crypto",
-      "titleTransferTab": "Lend",
-      "actionTitle": "Lend",
+      "title": "إقراض العملات المشفرة",
+      "titleTransferTab": "إقراض",
+      "actionTitle": "إقراض",
       "accountActions": {
         "approve": "Approve",
         "supply": "Supply",
@@ -1974,17 +1974,17 @@
         "closedLoans": "القروض المغلقة"
       },
       "banners": {
-        "needApproval": "You need to approve this account before being able to lend assets.",
+        "needApproval": "يتعين عليك الموافقة على هذا الحساب قبل أن تكون قادراً على إقراض الأصول.",
         "fullyApproved": "You have fully approved this account. You can reduce the amount at a fee.",
         "approvedCanReduce": "You have approved <0>{{value}}</0> on this account. You can reduce the amount at a fee.",
         "approvedButNotEnough": "You have approved <0>{{value}}</0> on this account.",
         "approving": "You can deposit assets once the account approval is confirmed.",
         "notEnough": "يتعيّن عليك زيادة الحد الأقصى الموافق عليه في حسابك للإقراض."
       },
-      "howDoesLendingWork": "How does lending works",
+      "howDoesLendingWork": "كيف يعمل الإقراض",
       "dashboard": {
         "tabTitle": "Dashboard",
-        "assetsTitle": "Assets to lend",
+        "assetsTitle": "أصول للإقراض",
         "accountsTitle": "Approved accounts",
         "emptySateDescription": "You can lend assets directly from your Ethereum accounts and earn interest.",
         "apy": "{{value}} APY",
@@ -2007,15 +2007,15 @@
       "closedLoans": {
         "tabTitle": "القروض المغلقة",
         "description": "View all your withdrawn loans and the interest you have earned.",
-        "cta": "Lend asset"
+        "cta": "إقراض أصل"
       },
       "history": {
         "tabTitle": "History",
         "description": "View the history of all your loan transactions.",
-        "cta": "Lend asset"
+        "cta": "إقراض أصل"
       },
       "terms": {
-        "label": "Lend crypto",
+        "label": "إقراض العملات المشفرة",
         "title": "Lend assets on the Compound Protocol",
         "description": "The Compound protocol allows you to lend and borrow assets on the Ethereum network. You can lend assets and earn interest directly from your Ledger acccount.",
         "switchLabel": "I have read and agree with the <0><0>Terms of Use</0></0>."
@@ -2035,14 +2035,14 @@
           "label": "Step 3/3",
           "title": "Withdraw assets at any time.",
           "description": "You can withdraw your assets and earned interest at any time, partially or entirely, directly from your Ledger account.",
-          "cta": "Lend now"
+          "cta": "إقراض الآن"
         },
-        "title": "Lend crypto"
+        "title": "إقراض العملات المشفرة"
       },
       "noTokenAccount": {
         "info": {
           "title": "ليس لديك حساب {{ name }}.",
-          "description": "In order to deposit funds and lend crypto you need a {{ name }} account. Please Receive funds on your Ethereum address."
+          "description": "لإيداع الأموال وإقراض العملات المشفرة، فأنت بحاجة إلى حساب {{ name }}. يرجى تلقي الأموال على عنوان إيثيروم الخاص بك."
         },
         "buttons": {
           "receive": "Receive {{ name }}",
@@ -2052,7 +2052,7 @@
       "enable": {
         "info": {
           "title": "This account is not approved",
-          "description": "You need to approve an account before being able to lend this asset.",
+          "description": "تحتاج إلى الموافقة على حساب قبل أن تتمكن من إقراض هذا الأصل.",
           "cta": "الموافقة على الحساب"
         },
         "stepperHeader": {
@@ -2070,7 +2070,7 @@
           "enabledAccountsAmount_plural": "You have {{number}} accounts that approved {{amount}}",
           "enabledAccountsNoLimit": "لديك {{number}} حساب قام بالموافقة علي كمية غير محدودة من {{ currency }}",
           "enabledAccountsNoLimit_plural": "لديك {{number}} الحسابات قامت بالموافقة علي كمية غير محدودة من {{ currency }}",
-          "noEnabledAccounts": "You need to approve an account before you can lend."
+          "noEnabledAccounts": "تحتاج إلى الموافقة على حساب قبل أن تتمكن من الإقراض."
         },
         "enable": {
           "summary": "<0>I grant the </0><1>{{contractName}}</1><0> smart contract access to my </0><1>{{accountName}}</1><0> account for a </0><1>{{amount}}</1><0> amount</0>",
@@ -2200,7 +2200,7 @@
       "validateGasLimit": "التحقق من حد الغاز",
       "fees": "Fees",
       "validateFees": "Validate Fees",
-      "customizeFees": "Customize Fees",
+      "customizeFees": "تخصيص الرسوم",
       "memo": {
         "title": "Memo",
         "type": "Memo type",
@@ -2909,7 +2909,7 @@
             "pending": {
               "title": "Broadcasting transaction..."
             },
-            "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+            "broadcastError": "يحتمل أن تكون معاملتك قد فشلت. يُرجى الانتظار لحظة ثم تحقق من سجل المعاملات قبل المحاولة مرة أخرى."
           }
         }
       },
@@ -2956,7 +2956,7 @@
             "pending": {
               "title": "Broadcasting transaction..."
             },
-            "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+            "broadcastError": "يحتمل أن تكون معاملتك قد فشلت. يُرجى الانتظار لحظة ثم تحقق من سجل المعاملات قبل المحاولة مرة أخرى."
           }
         }
       }
@@ -2983,7 +2983,7 @@
             "pending": {
               "title": "Broadcasting transaction..."
             },
-            "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+            "broadcastError": "يحتمل أن تكون معاملتك قد فشلت. يُرجى الانتظار لحظة ثم تحقق من سجل المعاملات قبل المحاولة مرة أخرى."
           }
         }
       }
@@ -3021,7 +3021,7 @@
             "pending": {
               "title": "Broadcasting transaction..."
             },
-            "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+            "broadcastError": "يحتمل أن تكون معاملتك قد فشلت. يُرجى الانتظار لحظة ثم تحقق من سجل المعاملات قبل المحاولة مرة أخرى."
           }
         }
       }
@@ -3566,12 +3566,12 @@
     "reject": "Reject",
     "connect": "Connect",
     "connected": "Connected",
-    "disconnected": "Disconnected",
+    "disconnected": "تم قطع الاتصال",
     "warningdisconnected": "There is a connection problem between the dApp, WalletConnect and Ledger Live. Wait a few moments or relaunch the connection",
     "info": "You can now access the {{name}} dApp on your desktop.",
     "warning": "Sharing receive addresses from dApp is not secure. Always use Ledger Live when sharing your address to receive funds.",
     "isconnecting": "is connecting, please wait...",
-    "disconnect": "Disconnect",
+    "disconnect": "قطع الاتصال",
     "retry": "إعادة المحاولة",
     "close": "إغلاق",
     "message": "Message",
