@@ -709,7 +709,7 @@
       "warning": {
         "title": "以英语开始",
         "cta": "知道了！",
-        "desc": "We are introducing additional languages in order to help your onboarding with Ledger. Please be aware that the rest of the Ledger experience is currently only available in English."
+        "desc": "为了让大家更好地使用 Ledger，我们正在推出其他语言版本。需要注意的是，Ledger 其他功能目前只有英语版可用。"
       }
     },
     "stepSelectDevice": {
@@ -810,7 +810,7 @@
           },
           "1": {
             "title": "浏览 ",
-            "label": "Learn how to interact with your device by reading the on-screen instructions."
+            "label": "阅读屏幕上的说明，了解如何使用您的设备。"
           },
           "2": {
             "title": "选择 “设置为新设备”",
@@ -876,7 +876,7 @@
         "desc": "您的恢复短语是备份您私人密钥的一个24词组成的秘密列表。",
         "desc_1": "Nano 为您生成一个独有的恢复短语。Ledger 不会保存其副本。",
         "cta": "恢复短语",
-        "checkboxDesc": "I understand that if I lose this recovery phrase, I will not be able to access my crypto in case I lose access to my Nano."
+        "checkboxDesc": "我明白：如果我丢失了自己的恢复短语，那么一旦我的 Nano 无法使用，也就意味着我无法访问自己的加密资产。"
       },
       "recoveryPhraseSetup": {
         "infoModal": {
@@ -920,13 +920,13 @@
       },
       "hideRecoveryPhrase": {
         "title": "保管好您的恢复短语",
-        "desc": "Your recovery phrase is your last chance to access your crypto if you cannot use your Nano. You must keep it in a safe place.",
+        "desc": "如果您的 Nano 无法使用，恢复短语是您访问自己资产的最后机会。因此，您必须将它存放在安全的地方。",
         "bullets": {
           "0": {
-            "label": "Enter these words on a hardware wallet only, never on computers or phones."
+            "label": "仅可在硬件钱包上输入这些词，永远不要在电脑或手机上输入。"
           },
           "1": {
-            "label": "Never share your 24 words with anyone, not even with Ledger."
+            "label": "永远不要将您的 24 个助记词告诉别人，Ledger 也不例外。"
           }
         },
         "cta": "好的，我完成了！",
@@ -935,19 +935,19 @@
           "title": "我应该将恢复短语保存在哪里？",
           "bullets": {
             "0": {
-              "label": "<1>NEVER</1> enter it on a computer, phone or any other device. Don't take a picture of it."
+              "label": "<1>切勿</1>在电脑、手机或其他设备上保存您的恢复短语。也不要以图片形式保存。"
             },
             "1": {
-              "label": "<1>NEVER</1> share your 24 words with anyone."
+              "label": "<1>切勿</1>将您的 24 个助记词告诉任何人。"
             },
             "2": {
-              "label": "<1>ALWAYS</1> store it in a secure place, out of sight."
+              "label": "<1>总是</1>将其保管在隐秘、安全的地方。"
             },
             "3": {
               "label": "Ledger 从来不会要求您提供恢复短语。"
             },
             "4": {
-              "label": "If any person or application asks for it, assume it is a scam!"
+              "label": "如果任何个人或应用程序要求您提供恢复短语，请将其视为骗局！"
             }
           }
         },
@@ -1643,7 +1643,7 @@
       "blacklistedTokensDesc": "You can hide tokens by going to the accounts list then long-pressing on the token and selecting 'Hide token'.",
       "blacklistedTokensModal": {
         "title": "隐藏代币",
-        "desc": "This action will hide all <1><0>{tokenName}</0></1> accounts, you can show them again using <3>Settings > Accounts</3>.",
+        "desc": "该操作会隐藏所有的<1><0>{tokenName}</0></1>账户，您可以通过<3>Settings (设置) > Accounts (账户)</3>重新恢复显示。",
         "confirm": "隐藏代币"
       },
       "cryptoAssets": {
@@ -2717,7 +2717,7 @@
     "title": "更新固件",
     "Installing": {
       "title": "{{stepName}}……",
-      "subtitle": "If requested on your device, please enter your PIN to finish the process."
+      "subtitle": "如果设备要求，请输入您的 PIN 识别密码完成该流程。"
     },
     "steps": {
       "osu": "正在安装 OSU",
@@ -3030,36 +3030,36 @@
   "tezos": {
     "AccountHeader": {
       "title": "You can earn rewards by delegating your account",
-      "btn": "Earn rewards"
+      "btn": "赚取奖励"
     }
   },
   "tron": {
     "voting": {
-      "earnRewars": "Earn rewards",
+      "earnRewars": "赚取奖励",
       "delegationEarn": "You can now earn rewards by freezing and voting.",
-      "howItWorks": "How voting works",
-      "startEarning": "Earn rewards",
-      "title": "Claim rewards",
+      "howItWorks": "如何投票",
+      "startEarning": "赚取奖励",
+      "title": "申领奖励",
       "header": "Votes ({{total}})",
       "Amount": "数额",
       "noRewards": "No rewards available",
       "votes": {
-        "title": "Votes",
+        "title": "选票",
         "description": "Cast your votes for one or more Representatives to start earning rewards.",
-        "cta": "Vote"
+        "cta": "投票"
       },
       "rewards": {
-        "title": "Voting rewards",
-        "button": "Claim"
+        "title": "投票奖励",
+        "button": "申领"
       },
-      "manageVotes": "Manage votes",
+      "manageVotes": "管理选票",
       "remainingVotes": {
         "title": "You still have votes remaining",
         "description": "Cast your remaining votes to earn more rewards."
       },
       "flow": {
         "started": {
-          "title": "Vote",
+          "title": "投票",
           "srOrCandidate": "SR or Candidate?",
           "description": "Vote for one or more Super Representatives to start earning rewards.",
           "button": {
@@ -3193,19 +3193,19 @@
       "chill": "Clear nominations",
       "status": "Status",
       "totalStake": "Total Stake",
-      "amount": "Bonded Amount",
-      "commission": "Commission",
-      "active": "Active",
+      "amount": "已绑定数额",
+      "commission": "佣金",
+      "active": "活跃",
       "activeInfo": "This validator is elected and is collecting rewards on your bonded assets.",
-      "inactive": "Inactive",
+      "inactive": "不活跃",
       "inactiveInfo": "This validator is elected but is not collecting rewards on your bonded assets.",
-      "waiting": "Unelected",
+      "waiting": "落选",
       "waitingInfo": "This validator is not elected, therefore is not collecting rewards.",
-      "notValidator": "Not a validator",
+      "notValidator": "并非验证器",
       "notValidatorInfo": "This address is no longer a validator",
-      "elected": "Elected",
+      "elected": "当选",
       "electedInfo": "This validator is elected and is collecting rewards for its nominators.",
-      "nominators": "Nominators",
+      "nominators": "提名者",
       "nominatorsCount": "{{nominatorsCount}} nominators",
       "nominatorsInfo": "This validator is currently elected by {{count}} nominators.",
       "oversubscribed": "Oversubscribed ({{nominatorsCount}})",
