@@ -1443,7 +1443,7 @@
         "title": "从资产组合中删除账户",
         "desc": "储存的数据将被删除。",
         "confirmationTitle": "您确定吗？",
-        "confirmationDesc": "This has no impact on your crypto assets. Existing accounts can always be added afterwards."
+        "confirmationDesc": "这么做不会影响您的加密资产。以后可随时添加现有账户。"
       },
       "archive": {
         "title": "存档账户",
@@ -1562,7 +1562,7 @@
     },
     "github": {
       "title": "Github",
-      "desc": "Review our code"
+      "desc": "查看我们的代码"
     },
     "status": {
       "title": "Ledger 状态",
@@ -1589,9 +1589,9 @@
         "dusk": "昏黄",
         "light": "亮色"
       },
-      "counterValueDesc": "Choose the currency for balances and operations.",
+      "counterValueDesc": "选择要查看余额和进行操作的币种",
       "exchange": "兑换率提供商",
-      "exchangeDesc": "Set provider of exchange rate from Bitcoin to {{fiat}}",
+      "exchangeDesc": "设置 比特币 到 {{fiat}} 的汇率提供方",
       "stock": "区域性市场指标",
       "stockDesc": "Choose Western to display market increases in green or Eastern to display them in red.",
       "reportErrors": "漏洞报告",
@@ -1868,7 +1868,7 @@
         },
         "noApp": {
           "title": "未安装 {{appName}} 应用程序",
-          "desc": "Please go to Manager to install the {{appName}} app.",
+          "desc": "请前往管理器以安装 {{appName}} 应用程序。",
           "cta": "前往管理器",
           "close": "关闭"
         },
@@ -1965,9 +1965,9 @@
         "amountSupplied": "已存数额",
         "amountSuppliedTooltip": "向网络贷出的数额",
         "currencyAPY": "货币年利率 APY",
-        "currencyAPYTooltip": "Yearly return rate of a deposit that’s continuously compounded",
+        "currencyAPYTooltip": "存款的年度回报率为连续复利模式",
         "accruedInterests": "利息余额",
-        "accruedInterestsTooltip": "Interest generated on your lent assets",
+        "accruedInterestsTooltip": "贷出资产产生的利息",
         "interestEarned": "已赚取的利息",
         "interestEarnedTooltip": "提取后您赚取的利息",
         "openLoans": "Open loans",
@@ -2076,7 +2076,7 @@
           "summary": "<0>I grant the </0><1>{{contractName}}</1><0> smart contract access to my </0><1>{{accountName}}</1><0> account for a </0><1>{{amount}}</1><0> amount</0>",
           "limit": "已限额 {{amount}}",
           "noLimit": "无限额 {{assetName}}",
-          "contractName": "Compound {{currencyName}}",
+          "contractName": "Compound 复利 {{currencyName}}",
           "advanced": "高级"
         },
         "advanced": {
@@ -2129,7 +2129,7 @@
           "stepRange": "步骤 {{currentStep}} 之 {{totalSteps}}"
         },
         "validation": {
-          "success": "Withdrawal sent successfully",
+          "success": "提款已成功发送",
           "info": "Your assets will be available once the network has confirmed the withdrawal.",
           "button": {
             "done": "完成",
@@ -2180,13 +2180,13 @@
     },
     "amount": {
       "available": "可用总额",
-      "useMax": "Use max",
-      "loadingNetwork": "Loading network fees...",
-      "noRateProvider": "Not available"
+      "useMax": "使用最大值",
+      "loadingNetwork": "正在加载网络费用...",
+      "noRateProvider": "不可用"
     },
     "summary": {
       "subaccountsWarning": "You will need to refill this account with {{ currency }} in order to send the tokens of this account",
-      "tag": "Tag (Optional)",
+      "tag": "标签 (可选)",
       "validateTag": "验证标签",
       "total": "总计",
       "amount": "数额",
@@ -2265,11 +2265,11 @@
     "info": {
       "description": "Freeze TRX to earn rewards securely, keeping control of your assets.",
       "steps": {
-        "0": "Delegated assets remain yours.",
+        "0": "委托出去的资产依旧为您所有。",
         "1": "You can unfreeze your assets after 3 days.",
         "2": "Freeze and vote securely with your Ledger device."
       },
-      "howVotingWorks": "How voting works",
+      "howVotingWorks": "如何投票",
       "cta": "继续"
     },
     "amount": {
@@ -2279,12 +2279,12 @@
     },
     "validation": {
       "message": "Always verify that your device displays the address exactly as it was originally given to you.",
-      "success": "Assets frozen",
+      "success": "已冻结资产",
       "amount": "数额",
       "info": "You will start earning {{resource}} once the network has confirmed the freeze. You can shortly vote for Super Representatives to also earn rewards.",
       "button": {
         "pending": "Transaction is being validated.",
-        "pendingDesc": "Please wait a moment before voting.",
+        "pendingDesc": "投票前请稍等片刻。",
         "vote": "投票",
         "voteTimer": "0:{{time}}",
         "later": "我稍后再投票",
@@ -2302,7 +2302,7 @@
     },
     "amount": {
       "title": "选择要解冻的资产类型",
-      "info": "Unfreezing will decrease your {{resource}} and will cancel all your votes.",
+      "info": "解冻会减少您的 {{resource}} 并会取消您的全部投票。",
       "cta": "继续"
     },
     "validation": {
@@ -2455,7 +2455,7 @@
     },
     "confirmSell": {
       "title": "在设备上确认卖出操作",
-      "alert": "Verify the Sell details on your device before sending it. The addresses are exchanged securely so you don’t have to verify them."
+      "alert": "发送之前请验证卖出详情。地址会被安全地交换因此您不必对其进行验证。"
     },
     "button": {
       "openManager": "打开管理器"
@@ -2463,7 +2463,7 @@
     "installApp": "{{appName}} 应用程序安装 {{percentage}}",
     "installAppDescription": "请耐心等待，直至安装完成",
     "listApps": "查看应用程序关联程序",
-    "listAppsDescription": "Please wait while we make sure you have all the required apps"
+    "listAppsDescription": "请等待，正在确认您是否安装了所有必需的应用程序"
   },
   "SelectDevice": {
     "title": "配对新设备",
@@ -2472,9 +2472,9 @@
       "label": "自动检测您的 Nano"
     },
     "deviceNotFoundPairNewDevice": "添加新的 Ledger Nano X",
-    "headerDescription": "Please make sure your {{productName}} is unlocked with Bluetooth enabled",
+    "headerDescription": "请确保您的 {{productName}} 处于解锁状态并已开启蓝牙",
     "usb": "……或连接 USB 数据线",
-    "usbLabel": "Connect USB cable and enter your PIN Code on your device",
+    "usbLabel": "连接 USB 数据线并在您的设备上输入您的 PIN 识别密码",
     "withoutDeviceHeader": "设备不在我身边",
     "withoutDevice": "在不使用我的设备的情况下继续",
     "steps": {
@@ -2538,16 +2538,16 @@
       "step2": "Validate on your {{productName}} by pressing both buttons together."
     },
     "GenuineCheck": {
-      "title": "Device authentication check",
-      "accept": "Please don't turn off your Nano X. Make sure you allow <1>Ledger Manager</1>."
+      "title": "设备验证查验",
+      "accept": "请勿关闭您的 Nano X。确保允许 <1> Ledger 管理器</1> 运行。"
     },
     "ScanningHeader": {
-      "title": "Looking for devices",
-      "desc": "Please make sure your {{productName}} is unlocked and Bluetooth is enabled."
+      "title": "正在寻找设备",
+      "desc": "请确保您的 {{productName}} 处于解锁状态并已开启蓝牙。"
     },
     "ScanningTimeout": {
       "title": "抱歉，未找到设备",
-      "desc": "Please make sure your {{productName}} is unlocked and Bluetooth is enabled."
+      "desc": "请确保您的 {{productName}} 处于解锁状态并已开启蓝牙。"
     },
     "bypassGenuine": "无论如何也要使用",
     "alreadyPaired": "已配对"
@@ -2626,8 +2626,8 @@
     "firmware": {
       "latest": "固件版本 {{version}} 可用",
       "outdated": "设备固件版本太旧而无法更新。请联系 Ledger 客服以获取替代版本。",
-      "modalTitle": "Firmware update only available on Ledger Live Desktop",
-      "modalDesc": "Please download Ledger Live on your computer to update the device firmware."
+      "modalTitle": "仅可通过 Ledger Live 桌面应用程序更新固件",
+      "modalDesc": "请在您的电脑上下载 Ledger Live，从而更新设备固件。"
     }
   },
   "ManagerDevice": {
@@ -2656,7 +2656,7 @@
       "title": "{{number}} 个应用程序更新",
       "title_plural": "{{number}} 个应用程序更新",
       "step": "更新步骤 {{step}}：",
-      "updateWarn": "Do not quit the Manager during the update.",
+      "updateWarn": "更新期间，请勿退出管理器。",
       "progress": "正在更新全部……",
       "button": "全部更新",
       "version": "新版本{{version}}",
@@ -2678,7 +2678,7 @@
         "showAll": "显示待卸载的应用程序",
         "description": "Apps on your device that need the {{app}} app will be uninstalled too."
       },
-      "continueUninstall": "Uninstall {{app}} and other apps"
+      "continueUninstall": "卸载 {{app}} 以及其他应用程序"
     },
     "filter": {
       "title": "显示",
@@ -2690,7 +2690,7 @@
       "apply": "应用"
     },
     "sort": {
-      "title": "Sort by",
+      "title": "排序方式",
       "default": "默认",
       "name_asc": "名称 A-Z",
       "name_desc": "名称 Z-A",
@@ -3158,7 +3158,7 @@
     "lockedBalance": "已绑定余额",
     "unlockingBalance": "正在解绑余额",
     "unlockedBalance": "已解绑余额",
-    "networkFees": "Network fees are automatically set by the Polkadot consensus, you won't be able to review them on your device",
+    "networkFees": "网络费用由 Polkadot 波卡共识协议自动设定，您无法在自己的设备上查看它们。",
     "info": {
       "available": {
         "title": "DOT 可用",
@@ -3208,7 +3208,7 @@
       "nominators": "提名者",
       "nominatorsCount": "{{nominatorsCount}}位提名者",
       "nominatorsInfo": "This validator is currently elected by {{count}} nominators.",
-      "oversubscribed": "Oversubscribed ({{nominatorsCount}})",
+      "oversubscribed": "超额订购 ({{nominatorsCount}})",
       "oversubscribedInfo": "只有绑定数额最高的顶层 {{maxNominatorRewardedPerValidator}} 提名者才可赚取奖励",
       "hasPendingBondOperation": "A bond operation is still pending confirmation",
       "externalControllerUnsupported": "This stash account is controlled by another account with the address <0>{{address}}</0>. Staking operations on accounts that are controlled by a different account are not supported in Ledger Live. Please use an alternative wallet such as Polkadot.js",
@@ -3294,8 +3294,8 @@
         "starter": {
           "description": "You may earn rewards by bonding your assets and then nominate your validators.",
           "bullet": [
-            "You keep ownership of bonded assets",
-            "Nominate using your Ledger device",
+            "你保有对已绑定资产的所有权",
+            "使用您的 Ledger 设备进行提名",
             "Assets will be available again, 28 days after unbonding"
           ],
           "help": "提名机制如何运作",
@@ -3341,7 +3341,7 @@
         "validation": {
           "success": {
             "title": "资产已重新绑定成功",
-            "description": "Your account balance will update once the network has confirmed the transaction."
+            "description": "一旦网络确认该交易，就会更新您的账户余额。"
           }
         }
       }
@@ -3378,7 +3378,7 @@
         "chill": {
           "title": "清除提名",
           "description": "清除所有提名并停止赚取奖励。",
-          "info": "Bonded assets will remain bonded. If you unbond them, they will be available after 28 days."
+          "info": "已绑定的资产将会保持绑定状态。若您将其解绑，那么它们将在 28 天后可用。"
         }
       },
       "stepperHeader": {
@@ -3391,7 +3391,7 @@
         "validation": {
           "success": {
             "title": "已成功发送交易",
-            "description": "You will see your operation in history once the network has confirmed the transaction."
+            "description": "该交易一经网络确认，您就可以在历史记录中查看到您的操作。"
           }
         }
       }
@@ -3399,12 +3399,12 @@
   },
   "delegation": {
     "overdelegated": "过度委托",
-    "delegationSendWarnDesc": "The amount to be sent will be deducted from your delegated account.",
-    "delegationReceiveWarnDesc": "The amount received in a delegated account will be added to the total staked amount. Choose another account if you want to avoid this.",
+    "delegationSendWarnDesc": "发送的数额会从您的委托账户中扣除。",
+    "delegationReceiveWarnDesc": "已委托账户收到的数额会被添加到总的质押数额中。若要避免此情况则请选择另一个账户。",
     "iDelegateMy": "我委托我的",
     "undelegateMy": "我解除委托我的",
     "warnUndelegation": "您的账户将被解除委托。",
-    "warnDelegation": "Delegating your voting rights does not guarantee any rewards from your validator.",
+    "warnDelegation": "将您的投票权委托出去并不能保证从您的验证器获得任何奖励。",
     "to": "到",
     "from": "从",
     "forAnEstYield": "以获得预估收益",
