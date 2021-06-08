@@ -1421,8 +1421,8 @@
       "title": "تعديل الحساب",
       "advancedLogs": "سجلات متقدمة",
       "accountName": {
-        "title": "Account name",
-        "desc": "Description of the account",
+        "title": "اسم الحساب",
+        "desc": "وصف الحساب",
         "placeholder": "اسم الحساب"
       },
       "accountUnits": {
@@ -1506,7 +1506,7 @@
     }
   },
   "accounts": {
-    "title": "Accounts",
+    "title": "حسابات",
     "importNotification": {
       "message": "Your accounts were imported successfully!"
     },
@@ -1634,8 +1634,8 @@
       "placeholder": "No settings for this asset"
     },
     "accounts": {
-      "header": "Accounts",
-      "title": "Accounts",
+      "header": "حسابات",
+      "title": "حسابات",
       "desc": "Manage assets display in the app.",
       "hideTokenCTA": "Hide token",
       "showContractCTA": "Show contract",
@@ -1875,7 +1875,7 @@
         "noAccounts": {
           "title": "No {{ticker}} to swap",
           "desc": "Your {{currencyName}} accounts have no balance to swap.",
-          "addAccountCta": "Add Account",
+          "addAccountCta": "إنشاء حساب",
           "cta": "إغلاق"
         },
         "outdatedApp": {
