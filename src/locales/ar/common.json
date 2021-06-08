@@ -39,7 +39,7 @@
     "satPerByte": "sat/bytes",
     "notAvailable": "غير متاح",
     "import": "Import",
-    "bluetooth": "Bluetooth",
+    "bluetooth": "بلوتوث",
     "usb": "USB",
     "add": "أضف",
     "slow": "بطىء",
@@ -142,7 +142,7 @@
     },
     "CosmosBroadcastCodeInsufficientFunds": {
       "title": "Insufficient funds",
-      "description": "Please make sure the account has enough funds."
+      "description": "يرجى التأكد من وجود أرصدة مالية كافية في الحساب."
     },
     "CosmosBroadcastCodeUnknownRequest": {
       "title": "Something went wrong (Error #6)",
@@ -1861,7 +1861,7 @@
         "to": "To",
         "balance": "Balance <0>123</0>",
         "fromAccount": "اختيار الحساب",
-        "toAccount": "Select account",
+        "toAccount": "اختيار الحساب",
         "amount": {
           "useMax": "Use max",
           "available": "Total available"
@@ -1989,7 +1989,7 @@
         "emptySateDescription": "You can lend assets directly from your Ethereum accounts and earn interest.",
         "apy": "{{value}} APY",
         "activeAccount": {
-          "account": "Account",
+          "account": "حساب",
           "amountSupplied": "Amount deposited",
           "interestEarned": "Interest earned",
           "status": "Account status",
@@ -2041,7 +2041,7 @@
       },
       "noTokenAccount": {
         "info": {
-          "title": "You don’t have a {{ name }} account.",
+          "title": "ليس لديك حساب {{ name }}.",
           "description": "In order to deposit funds and lend crypto you need a {{ name }} account. Please Receive funds on your Ethereum address."
         },
         "buttons": {
@@ -2053,10 +2053,10 @@
         "info": {
           "title": "This account is not approved",
           "description": "You need to approve an account before being able to lend this asset.",
-          "cta": "Approve Account"
+          "cta": "الموافقة على الحساب"
         },
         "stepperHeader": {
-          "selectAccount": "Choose an account",
+          "selectAccount": "اختر حسابًا",
           "enable": "Approve",
           "advanced": "متقدم",
           "amount": "Enter amount",
@@ -2250,7 +2250,7 @@
       "stepRange": "Step {{currentStep}} of {{totalSteps}}"
     },
     "selectAccount": {
-      "addAccount": "Add {{currency}} account"
+      "addAccount": "أضف حساب {{currency}}"
     }
   },
   "freeze": {
@@ -3495,7 +3495,7 @@
       "lending": "Verify the operation details on your device before sending it."
     },
     "amount": "Amount",
-    "account": "Account",
+    "account": "الحساب",
     "from": "من",
     "to": "To",
     "redelegationAmount": "Redelegated amount",
@@ -3516,7 +3516,7 @@
     "buy": {
       "tabTitle": "Buy",
       "selectCurrency": "Select a currency",
-      "selectAccount": "Select an account",
+      "selectAccount": "اختيار حساب",
       "connectDevice": "Connect your device",
       "title": "Buy crypto via our partner",
       "description": "Purchase crypto assets via Coinify and receive them directly in your Ledger account.",
@@ -3536,7 +3536,7 @@
     "sell": {
       "tabTitle": "Sell",
       "selectCurrency": "Select a currency",
-      "selectAccount": "Select an account",
+      "selectAccount": "اختيار حساب",
       "connectDevice": "Connect your device",
       "title": "Sell crypto via our partner",
       "description": "Sell crypto assets directly from your Ledger account via Coinify and receive fiat in your bank account.",
@@ -3589,9 +3589,9 @@
     },
     "stepVerification": {
       "action": "يرجى تأكيد العملية على جهازك",
-      "accountName": "Account name"
+      "accountName": "اسم الحساب"
     },
-    "deeplinkingTitle": "Select an Ethereum account",
+    "deeplinkingTitle": "اختيار حساب إيثريوم",
     "addAccount": "إضافة حساب جديد"
   },
   "notificationCenter": {
