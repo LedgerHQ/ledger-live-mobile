@@ -1,7 +1,7 @@
 {
   "common": {
     "cancel": "إلغاء",
-    "apply": "Apply",
+    "apply": "تطبيق",
     "back": "عودة",
     "delete": "حذف",
     "paste": "Paste",
@@ -16,7 +16,7 @@
     "search": "بحث",
     "contactUs": "الاتصال بدعم ليدجر",
     "device": "الجهاز",
-    "cryptoAsset": "Crypto asset",
+    "cryptoAsset": "أصل مشفر",
     "skip": "تخطي",
     "noCryptoFound": "لم يتم العثور على أي أصول مشفرة",
     "needHelp": "هل تحتاج إلى مساعدة؟",
@@ -107,7 +107,7 @@
       "description": "Your Ledger device must be unlocked and in range to use Bluetooth."
     },
     "CantScanQRCode": {
-      "title": "Could not scan this QR code: auto-verification not supported by this address."
+      "title": "تعذر إجراء المسح الضوئي لرمز QR: التحقق التلقائي غير معتمد لهذا العنوان."
     },
     "ConnectAppTimeout": {
       "title": "عفوًا، لم يتم العثور على أي جهاز",
@@ -126,11 +126,11 @@
     },
     "CosmosBroadcastCodeInternal": {
       "title": "Something went wrong (Error #1)",
-      "description": "Please save your logs using the button below and provide them to Ledger Support."
+      "description": "يرجى حفظ سجلاتك باستخدام الزر أدناه وتقديمها إلى فريق دعم ليدجر (Ledger)."
     },
     "CosmosBroadcastCodeTxDecode": {
       "title": "Something went wrong (Error #2)",
-      "description": "Please save your logs using the button below and provide them to Ledger Support."
+      "description": "يرجى حفظ سجلاتك باستخدام الزر أدناه وتقديمها إلى فريق دعم ليدجر (Ledger)."
     },
     "CosmosBroadcastCodeInvalidSequence": {
       "title": "Invalid sequence",
@@ -146,19 +146,19 @@
     },
     "CosmosBroadcastCodeUnknownRequest": {
       "title": "Something went wrong (Error #6)",
-      "description": "Please save your logs using the button below and provide them to Ledger Support."
+      "description": "يرجى حفظ سجلاتك باستخدام الزر أدناه وتقديمها إلى فريق دعم ليدجر (Ledger)."
     },
     "CosmosBroadcastCodeInvalidAddress": {
-      "title": "Invalid address",
-      "description": "من فضلك تحقق من العنوان وحاول مرة أخرى."
+      "title": "عنوان غير صحيح",
+      "description": "يرجى التحقق من العنوان والمحاولة مرة أخرى."
     },
     "CosmosBroadcastCodeInvalidPubKey": {
       "title": "Something went wrong (Error #8)",
-      "description": "Please save your logs using the button below and provide them to Ledger Support."
+      "description": "يرجى حفظ سجلاتك باستخدام الزر أدناه وتقديمها إلى فريق دعم ليدجر (Ledger)."
     },
     "CosmosBroadcastCodeUnknownAddress": {
       "title": "عنوان غير معروف",
-      "description": "من فضلك تحقق من العنوان وحاول مرة أخرى."
+      "description": "يرجى التحقق من العنوان والمحاولة مرة أخرى."
     },
     "CosmosBroadcastCodeInsufficientCoins": {
       "title": "Insufficient funds",
@@ -166,11 +166,11 @@
     },
     "CosmosBroadcastCodeInvalidCoins": {
       "title": "Something went wrong (Error #11)",
-      "description": "Please save your logs using the button below and provide them to Ledger Support."
+      "description": "يرجى حفظ سجلاتك باستخدام الزر أدناه وتقديمها إلى فريق دعم ليدجر (Ledger)."
     },
     "CosmosBroadcastCodeOutOfGas": {
       "title": "Something went wrong (Error #12)",
-      "description": "Please save your logs using the button below and provide them to Ledger Support."
+      "description": "يرجى حفظ سجلاتك باستخدام الزر أدناه وتقديمها إلى فريق دعم ليدجر (Ledger)."
     },
     "CosmosBroadcastCodeMemoTooLarge": {
       "title": "The Memo field is too long",
@@ -178,19 +178,19 @@
     },
     "CosmosBroadcastCodeInsufficientFee": {
       "title": "Something went wrong (Error #14)",
-      "description": "Please save your logs using the button below and provide them to Ledger Support."
+      "description": "يرجى حفظ سجلاتك باستخدام الزر أدناه وتقديمها إلى فريق دعم ليدجر (Ledger)."
     },
     "CosmosBroadcastCodeTooManySignatures": {
       "title": "Something went wrong (Error #15)",
-      "description": "Please save your logs using the button below and provide them to Ledger Support."
+      "description": "يرجى حفظ سجلاتك باستخدام الزر أدناه وتقديمها إلى فريق دعم ليدجر (Ledger)."
     },
     "CosmosBroadcastCodeGasOverflow": {
       "title": "Something went wrong (Error #16)",
-      "description": "Please save your logs using the button below and provide them to Ledger Support."
+      "description": "يرجى حفظ سجلاتك باستخدام الزر أدناه وتقديمها إلى فريق دعم ليدجر (Ledger)."
     },
     "CosmosBroadcastCodeNoSignatures": {
       "title": "Something went wrong (Error #17)",
-      "description": "Please save your logs using the button below and provide them to Ledger Support."
+      "description": "يرجى حفظ سجلاتك باستخدام الزر أدناه وتقديمها إلى فريق دعم ليدجر (Ledger)."
     },
     "DeviceAppVerifyNotSupported": {
       "title": "Open Manager to update this app",
@@ -206,7 +206,7 @@
     },
     "DeviceNotGenuine": {
       "title": "من الوارد ألا يكون الجهاز أصليًا",
-      "description": "Please save your logs using the button below and provide them to Ledger Support."
+      "description": "يرجى حفظ سجلاتك باستخدام الزر أدناه وتقديمها إلى فريق دعم ليدجر (Ledger)."
     },
     "DeviceNameInvalid": {
       "title": "يرجى تسمية الجهاز دون استخدام  '{{invalidCharacters}}'."
@@ -236,7 +236,7 @@
       "description": "يرجى إعادة الاتصال و المحاولة مرة أخرى."
     },
     "ETHAddressNonEIP": {
-      "title": "التحقق التلقائي غير متوفر: تحقق بعناية من العنوان.",
+      "title": "التحقق التلقائي غير متاح: تحقق بعناية من العنوان.",
       "description": null
     },
     "Touch ID Error": {
@@ -245,7 +245,7 @@
     },
     "Error": {
       "title": "{{message}}",
-      "description": "حدث خطأ ما. يرجى إعادة المحاولة. إذا استمرت المشكلة، يرجى حفظ سجلاتك باستخدام الزر أدناه وتقديمها إلى فريق دعم Ledger."
+      "description": "حدث خطأ ما. يرجى إعادة المحاولة. إذا استمرت المشكلة، يرجى حفظ سجلاتك باستخدام الزر أدناه وتقديمها إلى فريق دعم ليدجر (Ledger)."
     },
     "FeeEstimationFailed": {
       "title": "Sorry, fee estimation failed",
@@ -263,14 +263,14 @@
     },
     "GenuineCheckFailed": {
       "title": "فشل توثيق الجهاز",
-      "description": "Something went wrong. Please try again. If the problem persists, please save your logs using the button below and provide them to Ledger Support."
+      "description": "حدث خطأ ما. يرجى إعادة المحاولة. إذا استمرت المشكلة، يرجى حفظ سجلاتك باستخدام الزر أدناه وتقديمها إلى فريق دعم ليدجر (Ledger)."
     },
     "HardResetFail": {
       "title": "Sorry, could not reset",
-      "description": "Please try again. If the problem persists, please save your logs using the button below and provide them to Ledger Support."
+      "description": "يرجى إعادة المحاولة. إذا استمرت المشكلة، يرجى حفظ سجلاتك باستخدام الزر أدناه وتقديمها إلى فريق دعم ليدجر (Ledger)."
     },
     "InvalidAddress": {
-      "title": "This is not a valid {{currencyName}} address"
+      "title": "هذا ليس عنوان {{currencyName}} صحيح"
     },
     "InvalidAddressBecauseDestinationIsAlsoSource": {
       "title": "Destination and source accounts must not be the same."
@@ -288,11 +288,11 @@
     },
     "LedgerAPIErrorWithMessage": {
       "title": "{{message}}",
-      "description": "Please try again. If the problem persists, please save your logs using the button below and provide them to Ledger Support."
+      "description": "يرجى إعادة المحاولة. إذا استمرت المشكلة، يرجى حفظ سجلاتك باستخدام الزر أدناه وتقديمها إلى فريق دعم ليدجر (Ledger)."
     },
     "LedgerAPINotAvailable": {
       "title": "Sorry, {{currencyName}} services unavailable",
-      "description": "Please try again. If the problem persists, please save your logs using the button below and provide them to Ledger Support."
+      "description": "يرجى إعادة المحاولة. إذا استمرت المشكلة، يرجى حفظ سجلاتك باستخدام الزر أدناه وتقديمها إلى فريق دعم ليدجر (Ledger)."
     },
     "ManagerAPIsFail": {
       "title": "Sorry, Manager services are unavailable",
@@ -343,7 +343,7 @@
     },
     "NoAddressesFound": {
       "title": "عفوًا، لم يتم العثور على أي حساب",
-      "description": "Something went wrong with the address calculation. Please try again. If the problem persists, please save your logs using the button below and provide them to Ledger Support."
+      "description": "حدث خطأ ما في حساب العنوان. يرجى إعادة المحاولة. إذا استمرت المشكلة، يرجى حفظ سجلاتك باستخدام الزر أدناه وتقديمها إلى فريق دعم ليدجر (Ledger)."
     },
     "NotEnoughBalance": {
       "title": "Sorry, insufficient funds",
@@ -395,15 +395,15 @@
     },
     "TransactionRefusedOnDevice": {
       "title": "تم رفض المعاملة على الجهاز",
-      "description": "Please try again. If the problem persists, please save your logs using the button below and provide them to Ledger Support."
+      "description": "يرجى إعادة المحاولة. إذا استمرت المشكلة، يرجى حفظ سجلاتك باستخدام الزر أدناه وتقديمها إلى فريق دعم ليدجر (Ledger)."
     },
     "TransportError": {
       "title": "حدث خطأ ما. يُرجى إعادة الاتصال بالجهاز.",
-      "description": "{{message}} Please try again. If the problem persists, please save your logs using the button below and provide them to Ledger Support."
+      "description": "{{message}} يرجى إعادة المحاولة. إذا استمرت المشكلة، يرجى حفظ سجلاتك باستخدام الزر أدناه وتقديمها إلى فريق دعم ليدجر (Ledger)."
     },
     "TransportStatusError": {
       "title": "حدث خطأ ما. يُرجى إعادة الاتصال بالجهاز.",
-      "description": "{{message}} Please try again. If the problem persists, please save your logs using the button below and provide them to Ledger Support."
+      "description": "{{message}} يرجى إعادة المحاولة. إذا استمرت المشكلة، يرجى حفظ سجلاتك باستخدام الزر أدناه وتقديمها إلى فريق دعم ليدجر (Ledger)."
     },
     "TronNoFrozenForBandwidth": {
       "title": "No assets to unfreeze",
@@ -461,7 +461,7 @@
     },
     "UserRefusedAddress": {
       "title": "Receive address rejected",
-      "description": "You rejected the address. If in doubt, please save your logs using the button below and provide them to Ledger Support."
+      "description": "قمت برفض العنوان. في حالة الشك، يرجى حفظ سجلاتك باستخدام الزر أدناه وتقديمها إلى فريق دعم ليدجر (Ledger)."
     },
     "UserRefusedDeviceNameChange": {
       "title": "تم إلغاء إعادة التسمية على الجهاز",
@@ -562,7 +562,7 @@
     },
     "generic": {
       "title": "{{message}}",
-      "description": "Something went wrong. Please try again. If the problem persists, please save your logs using the button below and provide them to Ledger Support."
+      "description": "حدث خطأ ما. يرجى إعادة المحاولة. إذا استمرت المشكلة، يرجى حفظ سجلاتك باستخدام الزر أدناه وتقديمها إلى فريق دعم ليدجر (Ledger)."
     }
   },
   "bluetooth": {
@@ -749,7 +749,7 @@
       "0": {
         "label": "Basics",
         "title": "Access your crypto",
-        "desc": "Your crypto assets are stored on the blockchain. You need a private key to access and manage them."
+        "desc": "يتم تخزين الأصول المشفرة الخاصة بك على البلوك تشين. أنت بحاجة إلى مفتاح خاص للوصول إليها وإدارتها."
       },
       "1": {
         "label": "Basics",
@@ -881,7 +881,7 @@
       "recoveryPhraseSetup": {
         "infoModal": {
           "title": "كيف تعمل عبارة الاسترداد؟",
-          "desc": "Your recovery phrase works like a unique master key. Your Ledger device uses it to calculate private keys for every crypto asset you own.",
+          "desc": "عبارة الاسترداد الخاصة بك تعمل كمفتاح رئيسي فريد؛ حيث يستخدمها جهاز لديجر (Ledger) الخاص بك لحساب المفاتيح الخاصة لكل أصل مشفر تملكه.",
           "desc_1": "To restore access to your crypto, any wallet can calculate the same private keys from your recovery phrase.",
           "link": "More about the recovery phrase",
           "title_1": "What if I lose access to my Nano?",
@@ -893,7 +893,7 @@
               "label": "اختار \"استعادة عبارة الاسترداد على جهاز جديد\" في تطبيق ليدجر (Ledger)."
             },
             "2": {
-              "label": "Enter your recovery phrase on your new device to restore access to your crypto."
+              "label": "أدخل عبارة الاسترداد على جهازك الجديد لاستعادة الوصول إلى أصولك المشفرة."
             }
           }
         },
@@ -2687,7 +2687,7 @@
       "not_installed": "Not installed",
       "supported": "Live supported",
       "updatable": "Updatable",
-      "apply": "Apply"
+      "apply": "تطبيق"
     },
     "sort": {
       "title": "الفرز حسب",
