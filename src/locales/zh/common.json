@@ -1074,7 +1074,7 @@
         "link": "了解更多信息",
         "bullets": {
           "0": {
-            "label": "Navigate to the system options for the Ledger Live app on your Android phone."
+            "label": "进入您 Android 手机 Ledger Live 应用程序的系统选项。"
           },
           "1": {
             "label": "允许使用定位服务。"
@@ -1126,13 +1126,13 @@
     },
     "stepWriteRecovery": {
       "step1": "Write <1><1>Word #1</1></1> in entry 1 on a blank Recovery sheet",
-      "step2": "Press the right button and continue to write down all 24 words.",
-      "step3": "Confirm each word of your recovery phrase: select it then confirm it by pressing both buttons together.",
+      "step2": "按右边按钮继续，写下所有的 24 个词。",
+      "step3": "确认您恢复短语中的每一个词：选中后，同时按下两个按钮对其进行确认。",
       "modal": {
         "step1": "将您的 24 词恢复短语存放在安全、隐秘的地方。",
         "step2": "确保您是唯一拥有该恢复短语的人。",
         "step3": "Ledger 并不保存您的恢复短语。",
-        "step4": "Never use a device with a recovery phrase or PIN already setup."
+        "step4": "切勿使用已经设置好恢复短语和 PIN 识别密码的设备。"
       }
     },
     "stepPassword": {
@@ -1175,7 +1175,7 @@
           "wrong": "没有问题，Ledger可以向我发送一份副本"
         },
         "modal": {
-          "text": "Anyone who knows your recovery phrase can steal your crypto assets. \nIf you lose it, you must quickly transfer your crypto to a secure place.",
+          "text": "任何知道您恢复短语的人都能盗取您的加密资产。\n如果您将其丢失，必须尽快将您的加密资产转移到安全的地方。",
           "cta": "下一题"
         }
       },
@@ -1201,7 +1201,7 @@
     "warning": {
       "recoveryPhrase": {
         "title": "请勿使用非您本人生成的恢复短语。",
-        "desc": "Your Ledger hardware wallet’s pin code and recovery phrase should be initialized by you and only you. If you have received a device with a pre-existing seed word or an already initialized pin code do not use the product and contact our customer support.",
+        "desc": "您的 Ledger 硬件钱包的 PIN 识别密码和恢复短语应该由您本人单独完成初始化操作。如果您收到的设备含有一个已经存在的种子词或一个已经初始化的 PIN 识别密码，那么请勿使用该产品，并请联系我们的客服。",
         "supportLink": "联系客服"
       }
     }
@@ -1408,9 +1408,9 @@
     "lastOperations": "最后操作",
     "emptyState": {
       "title": "还没有加密资产？",
-      "desc": "Make sure the <1><0>{{managerAppName}}</0></1> app is installed and start receiving.",
-      "descWithBuy": "Make sure the <1><0>{{managerAppName}}</0></1> app is installed so you can buy or receive <3><0>{{currencyTicker}}</0></3>",
-      "descToken": "Make sure the <1><0>{{managerAppName}}</0></1> app is installed and start receiving <3><0>{{currencyTicker}}</0></3> and <5><0>{{tokenType}}</0> tokens</5>",
+      "desc": "确保已经安装 <1><0>{{managerAppName}}</0></1> 应用程序，然后开始接收加密资产。",
+      "descWithBuy": "确保已经安装 <1><0>{{managerAppName}}</0></1> 应用程序，以便买入或接收 <3><0>{{currencyTicker}}</0></3>",
+      "descToken": "确保已经安装 <1><0>{{managerAppName}}</0></1> 应用程序，以便开始接收 <3><0>{{currencyTicker}}</0></3> 和 <5><0>{{tokenType}}</0> 代币</5>",
       "buttons": {
         "receiveFunds": "接收",
         "buyCrypto": "买入"
@@ -1595,7 +1595,7 @@
       "stock": "区域性市场指标",
       "stockDesc": "Choose Western to display market increases in green or Eastern to display them in red.",
       "reportErrors": "漏洞报告",
-      "reportErrorsDesc": "Automatically send reports to help Ledger improve its products.",
+      "reportErrorsDesc": "自动发送报告来帮助 Ledger 改进其产品。",
       "developerMode": "开发者模式",
       "developerModeDesc": "在管理器中显示开发者应用程序并启用 Testnet 测试网应用程序。",
       "analytics": "数据分析",
@@ -1627,9 +1627,9 @@
     "currencies": {
       "header": "币种",
       "rateProvider": "兑换率提供方 ({{currencyTicker}}→BTC)",
-      "rateProviderDesc": "Choose the provider of the rate between {{currencyTicker}} and Bitcoin.",
+      "rateProviderDesc": "选择 {{currencyTicker}} 和 比特币 的汇率提供方。",
       "confirmationNb": "确认数量",
-      "confirmationNbDesc": "Set the number of network confirmations for transactions to be approved.",
+      "confirmationNbDesc": "设置待批准交易的网络确认数量。",
       "currencySettingsTitle": "{{currencyName}} 设置",
       "placeholder": "没有此资产的设置"
     },
@@ -1640,7 +1640,7 @@
       "hideTokenCTA": "隐藏代币",
       "showContractCTA": "显示合约",
       "blacklistedTokens": "隐藏代币列表",
-      "blacklistedTokensDesc": "You can hide tokens by going to the accounts list then long-pressing on the token and selecting 'Hide token'.",
+      "blacklistedTokensDesc": "进入账户列表，长按某种代币，然后选择“隐藏代币”，就可以隐藏该代币。",
       "blacklistedTokensModal": {
         "title": "隐藏代币",
         "desc": "该操作会隐藏所有的<1><0>{tokenName}</0></1>账户，您可以通过<3>Settings (设置) > Accounts (账户)</3>重新恢复显示。",
@@ -1699,8 +1699,8 @@
       "headerTitle": "账户更新",
       "title": "Ledger Live 账户更新",
       "subtitle": "一旦 Ledger Live 推出新功能，就意味着您的账户需要更新",
-      "notice": "{{accountCount}} account could not be updated. Please connect the device associated to the account below.",
-      "notice_plural": "{{accountCount}} accounts could not be updated. Please connect the device associated to the accounts below.",
+      "notice": "{{accountCount}} 账户无法更新。请连接与下方账户关联的设备。",
+      "notice_plural": "{{accountCount}} 账户无法更新。请连接与下方账户关联的设备。",
       "currency": "1 个 {{currency}} 账户需要更新",
       "currency_plural": "{{count}} 个 {{currency}} 账户需要更新",
       "start": "开始更新",
@@ -1714,7 +1714,7 @@
       },
       "notice": {
         "title": "{{currency}} 更新不完全",
-        "subtitle": "No {{currency}} accounts could be updated using this device.",
+        "subtitle": "使用该设备，无法为 {{currency}} 账户更新。",
         "cta": "继续",
         "ctaNextCurrency": "继续使用 {{currency}}"
       },
@@ -1801,7 +1801,7 @@
         "header": "Swap (掉期)",
         "title": "欢迎使用 Swap 兑换",
         "whatIsSwap": "什么是 Swap 兑换？",
-        "disclaimer": "Exchange crypto directly from your Ledger device. This service is not available in some countries, including the US."
+        "disclaimer": "通过您的 Ledger 设备直接兑换加密货币。该服务在一些国家（包括美国）不可用。"
       },
       "providers": {
         "title": "选择一个购买加密货币的供应商",
@@ -1833,7 +1833,7 @@
       },
       "payoutModal": {
         "title": "支出费用",
-        "description": "Payout fees are not shown on the device and substracted from the amount.",
+        "description": "支出费用不显示在设备上并被从该数额中扣除。",
         "cta": "关闭"
       },
       "pendingOperation": {
@@ -1891,7 +1891,7 @@
           "payoutNetworkFees": "支出费用",
           "payoutNetworkFeesTooltip": "该数额不会在您的设备上显示",
           "receive": "数额",
-          "receiveFloat": "Amount to receive before service fees",
+          "receiveFloat": "服务费之前收到的数额",
           "provider": "提供方",
           "method": "费率",
           "fees": "最大费用",
@@ -1916,7 +1916,7 @@
           "expired": "请使用您的 Swap ID 掉期号码联系掉期服务提供方以了解更多详情。",
           "refunded": "请使用您的 Swap ID 掉期号码联系掉期服务提供方以了解更多详情。",
           "pending": "请稍候片刻，掉期提供方正在处理该交易。",
-          "onhold": "Please contact the swap provider with your swap ID to solve the situation.",
+          "onhold": "请使用您的 Swap ID 联系掉期服务提供方以解决这一情况。",
           "finished": "您的掉期已成功完成"
         }
       },
@@ -2006,7 +2006,7 @@
       },
       "closedLoans": {
         "tabTitle": "已关闭的借贷",
-        "description": "View all your withdrawn loans and the interest you have earned.",
+        "description": "查看所有已提取的贷款以及所赚取的利息。",
         "cta": "贷出资产"
       },
       "history": {
@@ -2130,7 +2130,7 @@
         },
         "validation": {
           "success": "提款已成功发送",
-          "info": "Your assets will be available once the network has confirmed the withdrawal.",
+          "info": "提取一经网络确认，您的资产就会处于可用状态。",
           "button": {
             "done": "完成",
             "cta": "查看详情"
@@ -2149,7 +2149,7 @@
   "send": {
     "tooMuchUTXOBottomModal": {
       "cta": "继续",
-      "description": "This transaction may take long to verify and sign because the account has a significant number of coins.",
+      "description": "由于该账户持有大量硬币，本次交易可能需要花费较长时间来验证和签署。",
       "title": "UTXO 消息"
     },
     "highFeeModal": "请注意，网络费用超过该数额的 <1>10%</1>。是否要继续？",
@@ -2176,7 +2176,7 @@
       "scan": "扫描二维码",
       "enterAddress": "输入地址",
       "input": "输入地址",
-      "verifyAddress": "Please verify the address matches the one shared by the recipient."
+      "verifyAddress": "请验证该地址与接收方所提供的一致。"
     },
     "amount": {
       "available": "可用总额",
@@ -2481,8 +2481,8 @@
       "connecting": {
         "title": "正在连接 {{deviceName}}",
         "description": {
-          "ble": "Please make sure your {{productName}} is unlocked and within range",
-          "usb": "Please make sure your {{productName}} is unlocked"
+          "ble": "请确保您的 {{productName}} 处于解锁状态并在范围内",
+          "usb": "请确保您的 {{productName}} 处于解锁状态"
         }
       },
       "genuineCheck": {
