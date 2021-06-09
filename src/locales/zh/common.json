@@ -1654,13 +1654,13 @@
     },
     "about": {
       "title": "关于",
-      "desc": "App information, terms and conditions, and privacy policy.",
-      "appDescription": "With Ledger Live, Secure, Buy, Sell, Exchange, Grow and Manage your crypto. All-in-one place.",
+      "desc": "应用程序信息、条款和条件、以及隐私政策。",
+      "appDescription": "使用 Ledger Live，保护您的加密资产，执行买入、卖出、交易、增长和管理操作。为您提供一站式服务。",
       "appVersion": "版本",
       "termsConditions": "条款和条件",
-      "termsConditionsDesc": "By using Ledger Live you are deemed to have accepted our terms and conditions.",
+      "termsConditionsDesc": "使用 Ledger Live 即表示您已接受我们的条款和条件。",
       "privacyPolicy": "隐私政策",
-      "privacyPolicyDesc": "See what personal data are collected, why and how they are used.",
+      "privacyPolicyDesc": "查看我们会收集哪些个人资料以及收集的原因和用途。",
       "liveReview": {
         "title": "为应用程序打分！",
         "ios": "在 App Store（应用商店）内评论",
@@ -1690,7 +1690,7 @@
     "experimental": {
       "title": "实验性功能",
       "desc": "尝试一下实验性功能，让我们知道您的想法。",
-      "disclaimer": "These are Experimental features provided on an \"as is\" basis for our community of tech enthusiasts. They may change, break or be removed at any time. By enabling them, you agree to use them at your own risk."
+      "disclaimer": "这些是我们以“按现状”为基准提供的实验性功能，以供我们的专业爱好者社区测试。这些功能随时可能会更改、中断或删除。启用这些功能，意味着您同意自行承担使用过程中的风险。"
     }
   },
   "migrateAccounts": {
@@ -1761,8 +1761,8 @@
       "readOnly": {
         "title": "接收",
         "text": "请多加小心",
-        "desc": "You are about to view an address which was not verified. Verify addresses on your device to stay secure.",
-        "verify": "The address of {{accountType}} was not verified. Verify addresses on your device to stay secure."
+        "desc": "您即将查看一个未经验证的地址。请在设备上验证地址，以确保安全。",
+        "verify": "{{accountType}} 的地址未经验证。请在设备上验证地址，以确保安全。"
       }
     },
     "exchange": {
@@ -1775,7 +1775,7 @@
           "bullets": [
             "在 130 多个国家可用",
             "欧元、美元、英镑以及其它32种",
-            "SEPA & Faster Payments",
+            "SEPA 与 快速付款",
             "美国本地电汇",
             "信用卡和借记卡"
           ]
@@ -1922,17 +1922,17 @@
       },
       "missingApp": {
         "title": "请在您的设备上安装 Exchange 应用程序",
-        "description": "Go to manager and install Exchange app to swap assets",
+        "description": "前往管理器并安装 Exchange 应用程序以进行资产的掉期交易",
         "button": "前往管理器"
       },
       "outdatedApp": {
-        "title": "Please update the Exchange app on your device",
+        "title": "请更新您设备上的 Exchange 应用程序",
         "description": "前往管理器并更新 Exchange 应用程序以兑换资产",
         "button": "前往管理器"
       },
       "emptyState": {
         "title": "没有 {{currency}} 账户",
-        "description": "You need to add an account before swapping {{currency}}",
+        "description": "掉期 {{currency}} 之前，您需要添加一个账户",
         "CTAButton": "添加账户"
       },
       "history": {
@@ -1941,7 +1941,7 @@
         "exportFilename": "Swap 兑换操作",
         "empty": {
           "title": "您之前的兑换会显示在这里",
-          "desc": "Either you have not made any swaps yet, or Ledger Live has been reset in the meantime."
+          "desc": "要么您还未进行过任何掉期，亦或 Ledger Live 在此期间被重置了 。"
         }
       },
       "platform": {
@@ -1958,8 +1958,8 @@
         "withdraw": "提取"
       },
       "highFees": {
-        "title": "High fees on Ethereum",
-        "description": "Due to congestion on the Ethereum network, you may experience high fees when issuing transactions."
+        "title": "以太坊费用高",
+        "description": "由于以太坊网络的拥堵，在发起交易时您可能会面临高昂的费用。"
       },
       "account": {
         "amountSupplied": "已存数额",
@@ -1970,7 +1970,7 @@
         "accruedInterestsTooltip": "贷出资产产生的利息",
         "interestEarned": "已赚取的利息",
         "interestEarnedTooltip": "提取后您赚取的利息",
-        "openLoans": "Open loans",
+        "openLoans": "开放借贷",
         "closedLoans": "已关闭的借贷"
       },
       "banners": {
@@ -2185,7 +2185,7 @@
       "noRateProvider": "不可用"
     },
     "summary": {
-      "subaccountsWarning": "You will need to refill this account with {{ currency }} in order to send the tokens of this account",
+      "subaccountsWarning": "您需要向此账户充值 {{ currency }} 才能发送此账户的代币",
       "tag": "标签 (可选)",
       "validateTag": "验证标签",
       "total": "总计",
@@ -2515,7 +2515,7 @@
         "title": "Press both buttons together to enable reading the device name."
       },
       "editDeviceName": {
-        "title": "Press both buttons together to enable setting the device name."
+        "title": "同时按下两个按钮来设置设备名。"
       },
       "listApps": {
         "title": "正在加载……"
@@ -2530,12 +2530,12 @@
   "PairDevices": {
     "Paired": {
       "title": "配对成功",
-      "desc": "Your {{productName}} is ready to be used with Ledger Live.",
+      "desc": "您的 {{productName}} 已经可以配合 Ledger Live 使用。",
       "action": "继续"
     },
     "Pairing": {
-      "step1": "Validate if the code displayed on your phone exactly matches the one displayed on your {{productName}}.",
-      "step2": "Validate on your {{productName}} by pressing both buttons together."
+      "step1": "核对您手机上显示的代码，确保其和您 {{productName}} 上显示的代码完全一致。",
+      "step2": "在您的 {{productName}} 上同时按下两个按钮来进行验证。"
     },
     "GenuineCheck": {
       "title": "设备验证查验",
@@ -2573,8 +2573,8 @@
     "appsCatalog": "应用程序目录",
     "installedApps": "已安装的应用程序",
     "noAppNeededForToken": "为 {{tokenName}} 安装 {{appName}} 应用程序",
-    "tokenAppDisclaimer": "{{tokenName}} is an {{tokenType}} token using the {{appName}} app. To manage {{tokenName}}, <1>install the {{appName}} app</1> and send the tokens <3>to your {{appName}} account</3>.",
-    "tokenAppDisclaimerInstalled": "{{tokenName}} is an {{tokenType}} token using the {{appName}} app. To manage {{tokenName}}, <1>open the {{appName}} app</1> and send the tokens <3>to your {{appName}} account</3>.",
+    "tokenAppDisclaimer": "{{tokenName}} 是使用 {{appName}} 应用程序的 {{tokenType}} 代币。要管理 {{tokenName}}，<1>安装 {{appName}} 应用程序</1> 并发送代币 <3>到您的 {{appName}} 账户</3>。",
+    "tokenAppDisclaimerInstalled": "{{tokenName}} 是使用 {{appName}} 应用程序的 {{tokenType}} 代币。要管理 {{tokenName}}，<1>打开 {{appName}} 应用程序</1> 并发送代币 <3>到您的 {{appName}} 账户</3>。",
     "goToAccounts": "前往账户",
     "intallParentApp": "安装 {{appName}} 应用程序",
     "readOnly": {
@@ -2647,8 +2647,8 @@
       },
       "dependency": {
         "title": "需要安装 {{dependency}} 应用程序",
-        "description_one": "The {{dependency}} app will also be installed because the {{app}} app uses it.",
-        "description_two": "Please press Continue to install the {{app}} and {{dependency}} apps."
+        "description_one": "同样需要安装 {{dependency}} 应用程序，因为 {{app}} 应用程序需要用到该程序。",
+        "description_two": "请按继续按钮来安装 {{app}} 和 {{dependency}} 应用程序。"
       },
       "continueInstall": "安装应用程序"
     },
@@ -2729,7 +2729,7 @@
   },
   "FirmwareUpdateReleaseNotes": {
     "introTitle": "您将要安装 <1><0>固件版本 {{version}}。</0></1>",
-    "introDescription1": "Please note that all the apps on your device will be deleted. You can reinstall your apps after the firmware update.",
+    "introDescription1": "请注意，您设备上的所有应用程序都会被删除。您可以在固件更新后重新安装这些应用程序。",
     "introDescription2": "该操作不会影响您的加密资产。",
     "action": "继续更新"
   },
@@ -2740,7 +2740,7 @@
   "FirmwareUpdateMCU": {
     "title": "重启设备",
     "desc1": "断开设备和电脑的连接。",
-    "desc2": "Press and hold the left button, connect the USB cable then release the button when the Bootloader screen appears."
+    "desc2": "长按左边按钮，连接上 USB 线，等出现 Bootloader 屏幕后，松开按钮。"
   },
   "FirmwareUpdateConfirmation": {
     "title": "固件已更新",
@@ -2768,11 +2768,11 @@
       "flow": {
         "steps": {
           "info": {
-            "description": "Delegate your Algo to earn rewards while keeping full security and control on your assets.",
+            "description": "将您的 Algo 币委托出去赚取奖励，而资产依然会绝对安全并处于您的掌控之中。",
             "steps": {
-              "0": "A minimum balance of 1 Algo is required to receive rewards.",
+              "0": "想要接收奖励，至少要有 1 Algo 的余额。",
               "1": "通过增加账户的余额来增加奖励。",
-              "2": "Perform a transaction to or from the account to claim rewards."
+              "2": "通过该账户进行一次交易，从而申领奖励。"
             },
             "howItWorks": "奖励机制如何运作",
             "cta": "接收 Algo"
@@ -2780,7 +2780,7 @@
           "starter": {
             "title": "恭喜！您赚取了 {{amount}}。点击继续以申领您的奖励。",
             "howItWorks": "奖励机制如何运作",
-            "warning": "You will be prompted to generate an empty transaction to your account. This will add your current rewards to your balance at the minimal cost of the transaction fees.",
+            "warning": "您将根据提示向您的账户发出空白交易。通过这种操作，能够以最低的交易费将目前奖励添加到您的余额中。",
             "cta": "继续"
           },
           "verification": {
@@ -2809,19 +2809,19 @@
           "selectToken": {
             "warning": {
               "title": "资产已添加",
-              "description": "You already have {{token}} asset in your Algorand account."
+              "description": "您的 Algorand 账户中已经拥有 {{token}} 资产。"
             }
           },
           "verification": {
             "success": {
               "title": "已成功添加 {{token}} 资产！",
-              "text": "You can now receive and send {{token}} assets on your Algorand account.",
+              "text": "您现在可以通过您的 Algorand 账户接收和发送 {{token}} 资产。",
               "cta": "查看详情"
             },
             "pending": {
               "title": "播送交易……"
             },
-            "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
+            "broadcastError": "您的交易可能已失败。请等待几分钟后再次查看，如果确认交易未成功，则再次尝试。"
           }
         }
       }
@@ -2839,7 +2839,7 @@
       },
       "undelegating": {
         "title": "正在解除委托",
-        "description": "Undelegated assets are in a timelock of 21 days, before being available."
+        "description": "解除委托的资产会有 21 天的时间锁，之后才可用。"
       },
       "delegationUnavailable": {
         "title": "委托不可用",
@@ -2847,7 +2847,7 @@
       }
     },
     "delegation": {
-      "delegationEarn": "You can earn ATOM rewards by delegating your assets.",
+      "delegationEarn": "您可以通过委托资产赚取 ATOM 奖励。",
       "info": "委托机制如何运作",
       "claimRewards": "申领奖励",
       "claimAvailableRewards": "申领 {{amount}}",
@@ -2903,13 +2903,13 @@
           "verification": {
             "success": {
               "title": "您的资产已成功委托。",
-              "text": "Your account balance will be updated once the network confirms the transaction.",
+              "text": "交易一经网络确认，您的账户余额就会更新。",
               "cta": "查看详情"
             },
             "pending": {
               "title": "播送交易……"
             },
-            "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+            "broadcastError": "您的交易可能已失败。请稍候片刻并在重试之前查看交易记录。"
           }
         }
       },
@@ -2945,12 +2945,12 @@
             "noResultsFound": "搜索 <0>{{search}}</0> 未找到验证器"
           },
           "amount": {
-            "newRedelegatedBalance": "New total for <0>{{name}}</0> after operation: <0>{{amount}}</0>"
+            "newRedelegatedBalance": "操作后，<0>{{name}}</0> 的新总额：<0>{{amount}}</0>"
           },
           "verification": {
             "success": {
-              "title": "You have successfully redelegated your assets",
-              "text": "Your account balance will be updated when the network confirms the transaction.",
+              "title": "您的资产已经重新委托",
+              "text": "该交易一经网络确认，就会更新您的账户余额。",
               "cta": "查看详情"
             },
             "pending": {
@@ -2976,8 +2976,8 @@
           },
           "verification": {
             "success": {
-              "title": "You have successfully undelegated your assets",
-              "text": "Your account balance will be updated when the network confirms the transaction.",
+              "title": "您已经将资产成功解除委托",
+              "text": "该交易一经网络确认，就会更新您的账户余额。",
               "cta": "查看详情"
             },
             "pending": {
@@ -3004,8 +3004,8 @@
             "byDelegationAssetsTo": "通过将资产委托给",
             "claimReward": "兑现",
             "claimRewardCompound": "Compound（按复利协议）",
-            "claimRewardInfo": "They will be claimed now and added to your available balance.",
-            "claimRewardCompoundInfo": "They will be claimed now and automatically delegated to the same validator.",
+            "claimRewardInfo": "它们现在将被申领并被添加到您的可用余额。",
+            "claimRewardCompoundInfo": "它们现在将被申领并被自动委托给同一个验证器。",
             "compoundOrCashIn": "复利或兑现？",
             "claimRewardTooltip": "奖励将被添加至可用余额",
             "claimRewardCompoundTooltip": "奖励将被添加至已委托的数额",
@@ -3117,7 +3117,7 @@
       },
       "frozen": {
         "title": "已冻结",
-        "description": "Frozen assets are used for Tron voting. This is your total number of votes."
+        "description": "冻结资产用来为 Tron 投票。这是您的总票数。"
       },
       "bandwidth": {
         "title": "带宽",
@@ -3137,7 +3137,7 @@
       },
       "candidates": {
         "title": "候选人",
-        "description": "127 individuals elected through voting by the entire token-holder community. Votes are sampled every 6 hours."
+        "description": "由整个代币持有者社区推选出的 127 名个人。投票每 6 个小时抽样一次。"
       }
     }
   },
@@ -3170,7 +3170,7 @@
       },
       "unlocking": {
         "title": "正在解绑资产",
-        "description": "Unbonding assets stay locked for 28 days before they can be withdrawn."
+        "description": "正在解绑的资产会有 28 天的锁定期，然后才可提取。"
       },
       "unlocked": {
         "title": "已解绑资产",
