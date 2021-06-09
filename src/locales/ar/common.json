@@ -1142,7 +1142,7 @@
       "modal": {
         "step1": "Keep your password safe. Do not share it.",
         "step2": "Keep your password safe. Losing it means resetting Ledger Live and loading the accounts again.",
-        "step3": "Resetting Ledger Live has no impact on your crypto assets."
+        "step3": "إعادة تعيين ليدجر لايف (Ledger Live) ليس له تأثير على الأصول المشفرة الخاصة بك."
       }
     },
     "stepFinish": {
@@ -1175,7 +1175,7 @@
           "wrong": "No problem, Ledger can send me a copy"
         },
         "modal": {
-          "text": "Anyone who knows your recovery phrase can steal your crypto assets. \nIf you lose it, you must quickly transfer your crypto to a secure place.",
+          "text": "يمكن لأي شخص يعرف عبارة الاسترداد الخاصة بك أن يقوم بسرقة الأصول المشفرة الخاصة بك.\nإذا فقدت هذه العبارة، يجب عليك نقل أصولك المشفرة بسرعة إلى مكان آمن.",
           "cta": "Next question"
         }
       },
@@ -1243,7 +1243,7 @@
     },
     "noOpState": {
       "title": "No operations yet?",
-      "desc": "Simply send crypto assets to your receiving address and wait for the app to sync."
+      "desc": "ببساطة إرسل الأصول المشفرة إلى عنوان الاستلام الخاص بك وانتظر حتى يقوم التطبيق بالمزامنة."
     }
   },
   "addAccountsModal": {
@@ -1407,7 +1407,7 @@
     "manage": "Manage",
     "lastOperations": "Last operations",
     "emptyState": {
-      "title": "No crypto assets yet?",
+      "title": "لا توجد أصول مشفرة بعد؟",
       "desc": "Make sure the <1><0>{{managerAppName}}</0></1> app is installed and start receiving.",
       "descWithBuy": "Make sure the <1><0>{{managerAppName}}</0></1> app is installed so you can buy or receive <3><0>{{currencyTicker}}</0></3>",
       "descToken": "Make sure the <1><0>{{managerAppName}}</0></1> app is installed and start receiving <3><0>{{currencyTicker}}</0></3> and <5><0>{{tokenType}}</0> tokens</5>",
@@ -1443,7 +1443,7 @@
         "title": "Remove account from the Portfolio",
         "desc": "ستتم إزالة البيانات المخزنة.",
         "confirmationTitle": "هل أنت متأكد؟",
-        "confirmationDesc": "This has no impact on your crypto assets. Existing accounts can always be added afterwards."
+        "confirmationDesc": "لن يؤثر ذلك على الأصول المشفرة الخاصة بك. من الممكن دائمًا إضافة الحسابات الموجودة فيما بعد."
       },
       "archive": {
         "title": "Archive account",
@@ -1647,9 +1647,9 @@
         "confirm": "Hide token"
       },
       "cryptoAssets": {
-        "header": "Crypto assets",
-        "title": "Crypto assets",
-        "desc": "Select a crypto assets to edit its settings."
+        "header": "الأصول المشفرة",
+        "title": "الأصول المشفرة",
+        "desc": "اختار أحد الأصول المشفرة لتعديل إعداداتها."
       }
     },
     "about": {
@@ -1743,7 +1743,7 @@
     "receive": {
       "title": "Receive",
       "titleReadOnly": "Unverified address",
-      "headerTitle": "Crypto asset",
+      "headerTitle": "أصل مشفر",
       "titleDevice": "توصيل الجهاز",
       "verifySkipped": "Your receive address was not confirmed on your Ledger device. Please verify your {{accountType}} address to stay secure.",
       "verifyPending": "Please verify that the {{currencyName}} address displayed on your device exactly matches the one displayed on your phone.",
@@ -1837,7 +1837,7 @@
         "cta": "إغلاق"
       },
       "pendingOperation": {
-        "description": "Your Swap operation has been sent to the network for confirmation. It may take up to an hour before you receive your swapped crypto assets.",
+        "description": "لقد تم إرسال عملية المبادلة الخاصة بك إلى الشبكة لتأكيدها. قد يستغرق ذلك مدة تصل إلى ساعة قبل استلام الأصول المشفرة الخاصة بك التي تمت مبادلتها.",
         "label": "Your Swap ID:",
         "title": "Pending operation",
         "disclaimer": "Please take note of your Swap ID number in case you’d need assistance from {{provider}} later.",
@@ -2730,7 +2730,7 @@
   "FirmwareUpdateReleaseNotes": {
     "introTitle": "You are about to install <1><0>firmware version {{version}}.</0></1>",
     "introDescription1": "Please note that all the apps on your device will be deleted. You can reinstall your apps after the firmware update.",
-    "introDescription2": "This has no impact on your crypto assets.",
+    "introDescription2": "ليس لذلك أي تأثير على الأصول المشفرة الخاصة بك.",
     "action": "متابعة التحديث"
   },
   "FirmwareUpdateCheckId": {
@@ -3519,7 +3519,7 @@
       "selectAccount": "اختيار حساب",
       "connectDevice": "توصيل جهازك",
       "title": "Buy crypto via our partner",
-      "description": "Purchase crypto assets via Coinify and receive them directly in your Ledger account.",
+      "description": "قم بشراء الأصول المشفرة من خلال Coinify واستلمها مباشرة في حساب ليدجر (Ledger) الخاص بك.",
       "CTAButton": "Buy now",
       "emptyState": {
         "title": "No {{currency}} account",
@@ -3539,7 +3539,7 @@
       "selectAccount": "اختيار حساب",
       "connectDevice": "توصيل جهازك",
       "title": "Sell crypto via our partner",
-      "description": "Sell crypto assets directly from your Ledger account via Coinify and receive fiat in your bank account.",
+      "description": "قم ببيع الأصول المشفرة مباشرة من حساب ليدجر (Ledger) الخاص بك عبر Coinify واستلم نقودًا فعلية في حسابك المصرفي.",
       "CTAButton": "Sell now",
       "emptyState": {
         "title": "No {{currency}} account",
@@ -3554,7 +3554,7 @@
   "banner": {
     "exchangeBuyCrypto": {
       "title": "BUY CRYPTO",
-      "description": "Purchase crypto assets via Coinify and receive them directly in your Ledger account."
+      "description": "قم بشراء الأصول المشفرة من خلال Coinify واستلمها مباشرة في حساب ليدجر (Ledger) الخاص بك."
     },
     "swap": {
       "title": "مبادلة العملات المشفرة",
