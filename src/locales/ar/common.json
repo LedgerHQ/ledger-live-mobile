@@ -2059,15 +2059,15 @@
           "selectAccount": "اختر حسابًا",
           "enable": "Approve",
           "advanced": "متقدم",
-          "amount": "Enter amount",
+          "amount": "أدخل المبلغ",
           "summary": "Summary",
           "selectDevice": "Select Device",
           "connectDevice": "Connect Device",
           "stepRange": "Step {{currentStep}} of {{totalSteps}}"
         },
         "selectAccount": {
-          "enabledAccountsAmount": "You have {{number}} account that approved {{amount}}",
-          "enabledAccountsAmount_plural": "You have {{number}} accounts that approved {{amount}}",
+          "enabledAccountsAmount": "لديك {{number}} حساب وافق على {{amount}}",
+          "enabledAccountsAmount_plural": "لديك {{number}} حسابات وافقت على {{amount}}",
           "enabledAccountsNoLimit": "لديك {{number}} حساب قام بالموافقة علي كمية غير محدودة من {{ currency }}",
           "enabledAccountsNoLimit_plural": "لديك {{number}} الحسابات قامت بالموافقة علي كمية غير محدودة من {{ currency }}",
           "noEnabledAccounts": "تحتاج إلى الموافقة على حساب قبل أن تتمكن من الإقراض."
@@ -2152,7 +2152,7 @@
       "description": "This transaction may take long to verify and sign because the account has a significant number of coins.",
       "title": "UTXO message"
     },
-    "highFeeModal": "Be careful, network fees are greater than <1>10%</1> of the amount. Do you want to continue?",
+    "highFeeModal": "كن حذرًا، رسوم الشبكة تتعدى <1>10%</1> من المبلغ. هل تريد المتابعة؟",
     "scan": {
       "title": "Scan QR code",
       "descBottom": "Please center the QR code inside the square.",
@@ -2166,7 +2166,7 @@
     "stepperHeader": {
       "selectAccount": "Account to debit",
       "recipientAddress": "عنوان المستلم",
-      "selectAmount": "Amount",
+      "selectAmount": "المبلغ",
       "summary": "Summary",
       "selectDevice": "Select device",
       "connectDevice": "Connect device",
@@ -2189,11 +2189,11 @@
       "tag": "Tag (Optional)",
       "validateTag": "Validate tag",
       "total": "Total",
-      "amount": "Amount",
+      "amount": "المبلغ",
       "from": "من",
       "to": "To",
       "infoTotalTitle": "Total debit",
-      "infoTotalDesc": "Includes transaction amount and the selected network fees",
+      "infoTotalDesc": "يشمل مبلغ المعاملة ورسوم الشبكة المحددة",
       "gasLimit": "حد الغاز",
       "gasPrice": "Gas price",
       "maxFees": "Max fees",
@@ -2211,7 +2211,7 @@
     "validation": {
       "message": "On your device, confirm the transaction to sign it securely.",
       "sent": "Transaction sent",
-      "amount": "Amount",
+      "amount": "المبلغ",
       "fees": "Fees",
       "confirm": "سيتم تحديث رصيد حسابك بمجرد تأكيد الشبكة للمعاملة.",
       "button": {
@@ -2228,7 +2228,7 @@
       "edit": {
         "title": "Choose unit"
       },
-      "networkInfo": "Choose the amount of network fees to include in the transaction. The amount of fees affects the processing speed of the transaction"
+      "networkInfo": "اختر مبلغ رسوم الشبكة المراد تضمينها في المعاملة. يؤثر مبلغ الرسوم على السرعة التي تتم بها المعاملة"
     },
     "verification": {
       "streaming": {
@@ -2238,8 +2238,8 @@
     },
     "info": {
       "maxSpendable": {
-        "title": "Max spendable amount",
-        "description": "The maximum spendable amount is the total balance in an account that is available to send in a transaction."
+        "title": "المبلغ الأقصى القابل للإنفاق",
+        "description": "الحد الأقصى للمبلغ القابل للإنفاق هو إجمالي الرصيد المتاح في الحساب لإرسال المعاملة."
       }
     }
   },
@@ -2280,7 +2280,7 @@
     "validation": {
       "message": "Always verify that your device displays the address exactly as it was originally given to you.",
       "success": "Assets frozen",
-      "amount": "Amount",
+      "amount": "المبلغ",
       "info": "You will start earning {{resource}} once the network has confirmed the freeze. You can shortly vote for Super Representatives to also earn rewards.",
       "button": {
         "pending": "Transaction is being validated.",
@@ -2339,7 +2339,7 @@
     "selectValidator": {},
     "castVotes": {
       "ranking": "Ranking: <0>{{rank}}</0>",
-      "nbOfVotes": "Number of votes {{amount}}",
+      "nbOfVotes": "عدد الأصوات {{amount}}",
       "percentage": "Percentage",
       "estYield": "Est. yield",
       "addMoreVotes": "Add more votes",
@@ -2778,7 +2778,7 @@
             "cta": "Receive Algo"
           },
           "starter": {
-            "title": "Congratulations! You earned {{amount}}. Continue to claim your rewards.",
+            "title": "تهانينا! لقد كسبت {{amount}}. قم بالمتابعة للمطالبة بمكافآتك.",
             "howItWorks": "How rewards work",
             "warning": "You will be prompted to generate an empty transaction to your account. This will add your current rewards to your balance at the minimal cost of the transaction fees.",
             "cta": "متابعة"
@@ -2831,7 +2831,7 @@
     "info": {
       "available": {
         "title": "ATOM available",
-        "description": "This amount is disposable."
+        "description": "هذا المبلغ قابل للتصرف."
       },
       "delegated": {
         "title": "Delegated assets",
@@ -2850,9 +2850,9 @@
       "delegationEarn": "You can earn ATOM rewards by delegating your assets.",
       "info": "How Delegation works",
       "claimRewards": "Claim rewards",
-      "claimAvailableRewards": "Claim {{amount}}",
+      "claimAvailableRewards": "المطالبة ب {{amount}}",
       "header": "Delegation(s)",
-      "Amount": "Amount",
+      "Amount": "المبلغ",
       "noRewards": "No rewards available",
       "delegate": "Delegate",
       "undelegate": "Undelegate",
@@ -2862,7 +2862,7 @@
       "stepperHeader": {
         "starter": "Earn rewards",
         "validator": "Delegate assets",
-        "amountSubTitle": "Amount to delegate",
+        "amountSubTitle": "المبلغ المراد تفويضه",
         "summary": "Summary",
         "verification": "Verification",
         "selectDevice": "Select device",
@@ -2888,16 +2888,16 @@
             "myDelegations": "My delegations",
             "cta": "متابعة",
             "estYield": "Est. yield: {{amount}}",
-            "totalAvailable": "Total available: <0>{{amount}}</0>",
+            "totalAvailable": "الإجمالي المتاح: <0>{{amount}}</0>",
             "allAssetsUsed": "All assets used",
             "noResultsFound": "لم يتم العثور على مدقق لـ <0>{{search}}</0>",
-            "currentAmount": "(+ <0>{{amount}}</0>)"
+            "currentAmount": "(+<0>{{amount}}</0>)"
           },
           "amount": {
-            "assetsRemaining": "Assets remaining: <0>{{amount}}</0>",
+            "assetsRemaining": "الأصول المتبقية: <0>{{amount}}</0>",
             "allAssetsUsed": "All assets used",
-            "minAmount": "Minimum amount: <0>{{min}}</0>",
-            "incorrectAmount": "Maximum amount: <0>{{max}}</0>",
+            "minAmount": "الحد الأدنى للمبلغ: <0>{{min}}</0>",
+            "incorrectAmount": "الحد الأقصى للمبلغ: <0>{{max}}</0>",
             "cta": "متابعة"
           },
           "verification": {
@@ -2926,7 +2926,7 @@
       "estYield": "est. yield",
       "stepperHeader": {
         "validator": "Choose new validator",
-        "amountSubTitle": "Amount to redelegate",
+        "amountSubTitle": "المبلغ المراد إعادة تفويضه",
         "amountTitle": "{{from}} ← {{to}}",
         "summary": "Summary",
         "selectDevice": "Select device",
@@ -2945,7 +2945,7 @@
             "noResultsFound": "لم يتم العثور على مدقق لـ <0>{{search}}</0>"
           },
           "amount": {
-            "newRedelegatedBalance": "New total for <0>{{name}}</0> after operation: <0>{{amount}}</0>"
+            "newRedelegatedBalance": "الإجمالي الجديد لـ <0>{{name}}</0> بعد العملية: <0>{{amount}}</0>"
           },
           "verification": {
             "success": {
@@ -2963,7 +2963,7 @@
     },
     "undelegation": {
       "stepperHeader": {
-        "amountSubTitle": "Amount to undelegate",
+        "amountSubTitle": "المبلغ المراد إلغاء تفويضه",
         "summary": "Summary",
         "selectDevice": "Select device",
         "connectDevice": "Connect device",
@@ -3008,7 +3008,7 @@
             "claimRewardCompoundInfo": "They will be claimed now and automatically delegated to the same validator.",
             "compoundOrCashIn": "Compound or Cash in?",
             "claimRewardTooltip": "Rewards will be added to the available balance",
-            "claimRewardCompoundTooltip": "Rewards will be added to the delegated amount",
+            "claimRewardCompoundTooltip": "سيتم إضافة المكافآت إلى المبلغ المفوض",
             "cta": "متابعة"
           },
           "verification": {
@@ -3041,7 +3041,7 @@
       "startEarning": "Earn rewards",
       "title": "Claim rewards",
       "header": "Votes ({{total}})",
-      "Amount": "Amount",
+      "Amount": "المبلغ",
       "noRewards": "No rewards available",
       "votes": {
         "title": "Votes",
@@ -3113,7 +3113,7 @@
     "info": {
       "available": {
         "title": "TRX available",
-        "description": "This amount is disposable."
+        "description": "هذا المبلغ قابل للتصرف."
       },
       "frozen": {
         "title": "Frozen",
@@ -3162,7 +3162,7 @@
     "info": {
       "available": {
         "title": "DOT available",
-        "description": "This amount can be sent anytime."
+        "description": "يمكن إرسال هذا المبلغ في أي وقت."
       },
       "locked": {
         "title": "Bonded assets",
@@ -3193,7 +3193,7 @@
       "chill": "Clear nominations",
       "status": "Status",
       "totalStake": "Total Stake",
-      "amount": "Bonded Amount",
+      "amount": "المبلغ المقيد",
       "commission": "Commission",
       "active": "Active",
       "activeInfo": "This validator is elected and is collecting rewards on your bonded assets.",
@@ -3216,8 +3216,8 @@
       "showInactiveNominations": "Show all nominations ({{count}})",
       "hideInactiveNominations": "Show active nominations only",
       "noActiveNominations": "There are no active nominations.",
-      "showAllUnlockings": "Show all unbonding amounts ({{count}})",
-      "hideAllUnlockings": "Hide unbonding amounts"
+      "showAllUnlockings": "إظهار كل مبالغ إلغاء التقيد ({{count}})",
+      "hideAllUnlockings": "إخفاء مبالغ إلغاء التقيد"
     },
     "unlockings": {
       "header": "Unbonding",
@@ -3228,15 +3228,15 @@
       "title": "Manage assets",
       "bond": {
         "title": "Bond",
-        "description": "To earn rewards, first bond an amount. Then you must nominate your validator(s)."
+        "description": "لكسب المكافآت، قم أولاً بتقيد مبلغ. ثم يجب عليك ترشيح مدقق (مدققين) لك."
       },
       "unbond": {
         "title": "Unbond",
-        "description": "To make a bonded amount available again, first you need to unbond it. You can withdraw it after the 28-day unbonding period."
+        "description": "لإتاحة مبلغ مقيد مرة أخرى، سيكون عليك إلغاء تقيده أولاً. يمكنك سحبه بعد انقضاء فترة إلغاء التقيد الممتدة لفترة 28 يومًا."
       },
       "withdrawUnbonded": {
         "title": "Withdraw Unbonded",
-        "description": "To retrieve an unbonded amount back to the available balance, you need to withdraw it manually."
+        "description": "لإرجاع مبلغ تم إلغاء تقيده إلى الرصيد المتاح، سيكون عليك سحبه يدويًا."
       },
       "nominate": {
         "title": "Nominate",
@@ -3285,7 +3285,7 @@
       },
       "stepperHeader": {
         "starter": "Earn rewards",
-        "amount": "Amount to bond",
+        "amount": "المبلغ المراد تقيده",
         "selectDevice": "Select device",
         "connectDevice": "Connect device",
         "stepRange": "Step {{currentStep}} of {{totalSteps}}"
@@ -3325,7 +3325,7 @@
     },
     "rebond": {
       "stepperHeader": {
-        "amount": "Amount to rebond",
+        "amount": "المبلغ المراد إعادة تقيده",
         "selectDevice": "Select device",
         "connectDevice": "Connect device",
         "stepRange": "Step {{currentStep}} of {{totalSteps}}"
@@ -3336,7 +3336,7 @@
           "maxLabel": "Max"
         },
         "confirm": {
-          "info": "Rebonded assets are immediately added to the bonded amount."
+          "info": "تتم إضافة الأصول المعاد قيدها على الفور إلى المبلغ المقيد."
         },
         "validation": {
           "success": {
@@ -3348,7 +3348,7 @@
     },
     "unbond": {
       "stepperHeader": {
-        "amount": "Amount to unbond",
+        "amount": "المبلغ المراد إلغاء تقيده",
         "selectDevice": "Select device",
         "connectDevice": "Connect device",
         "stepRange": "Step {{currentStep}} of {{totalSteps}}"
@@ -3399,7 +3399,7 @@
   },
   "delegation": {
     "overdelegated": "Overdelegated",
-    "delegationSendWarnDesc": "The amount to be sent will be deducted from your delegated account.",
+    "delegationSendWarnDesc": "سيتم خصم المبلغ المراد إرساله من حسابك المفوض.",
     "delegationReceiveWarnDesc": "The amount received in a delegated account will be added to the total staked amount. Choose another account if you want to avoid this.",
     "iDelegateMy": "I delegate my",
     "undelegateMy": "Undelegate my",
@@ -3494,15 +3494,15 @@
       },
       "lending": "Verify the operation details on your device before sending it."
     },
-    "amount": "Amount",
+    "amount": "المبلغ",
     "account": "الحساب",
     "from": "من",
     "to": "To",
-    "redelegationAmount": "Redelegated amount",
+    "redelegationAmount": "المبلغ المعاد تفويضه",
     "gas": "Gas",
     "validatorAddress": "Validator address",
-    "rewardAmount": "Reward amount",
-    "undelegatedAmount": "Undelegated amount",
+    "rewardAmount": "مبلغ المكافأة",
+    "undelegatedAmount": "المبلغ غير المفوض",
     "memo": "Memo"
   },
   "Terms": {
