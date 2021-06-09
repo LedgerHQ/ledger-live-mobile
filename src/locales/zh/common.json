@@ -1674,22 +1674,22 @@
       "support": "Ledger 客服",
       "supportDesc": "如果遇到问题，使用硬件钱包通过 Ledger Live 获取帮助。",
       "configureDevice": "设置设备",
-      "configureDeviceDesc": "Set up as a new device or restore an existing device. Accounts and settings are preserved.",
+      "configureDeviceDesc": "设置为新设备或还原现有设备。保留账户和设置信息。",
       "clearCache": "清除缓存",
-      "clearCacheDesc": "The transactions on the network will be scanned and your accounts will be recalculated.",
+      "clearCacheDesc": "网络上的交易将被扫描，您的账户将被重新计算。",
       "clearCacheModal": "您确定吗？",
       "clearCacheModalDesc": "会重新对网络上的交易进行完整扫描。会重建账户历史记录、重新计算账户余额。",
       "clearCacheButton": "清除",
       "exportLogs": "导出日志",
-      "exportLogsDesc": "Exporting Ledger Live logs may help troubleshooting.",
+      "exportLogsDesc": "导出 Ledger Live 日志或许有助于解决问题。",
       "hardReset": "重置 Ledger Live",
-      "hardResetDesc": "This has no impact on your assets. Erases all data in Ledger Live, including account data, transaction histories and settings. Use your Ledger device to reload and manage your crypto assets on an empty Ledger Live.",
+      "hardResetDesc": "重置不会影响您的资产。清除 Ledger Live 中的所有数据，包括账户数据、交易历史记录和设置信息。使用您的 Ledger 设备，在清空的 Ledger Live 上重新加载并管理您的加密资产。",
       "repairDevice": "修复您的 Ledger 设备",
-      "repairDeviceDesc": "If you have an issue updating your device and cannot resume updates, you can try this to repair your device."
+      "repairDeviceDesc": "如果更新设备时遇到问题，且无法继续完成更新，您可以尝试修复您的设备。"
     },
     "experimental": {
       "title": "实验性功能",
-      "desc": "Try out the Experimental features and let us know what you think.",
+      "desc": "尝试一下实验性功能，让我们知道您的想法。",
       "disclaimer": "These are Experimental features provided on an \"as is\" basis for our community of tech enthusiasts. They may change, break or be removed at any time. By enabling them, you agree to use them at your own risk."
     }
   },
@@ -1745,9 +1745,9 @@
       "titleReadOnly": "未经验证的地址",
       "headerTitle": "加密资产",
       "titleDevice": "连接设备",
-      "verifySkipped": "Your receive address was not confirmed on your Ledger device. Please verify your {{accountType}} address to stay secure.",
-      "verifyPending": "Please verify that the {{currencyName}} address displayed on your device exactly matches the one displayed on your phone.",
-      "verified": "Address confirmed. Check again if you copied or scanned it.",
+      "verifySkipped": "您的接收地址没有经过您的 Ledger 设备确认。请验证您的 {{accountType}} 地址以确保安全。",
+      "verifyPending": "请核对您设备上显示的 {{currencyName}} 地址，确保其和您手机上显示的地址完全一致。",
+      "verified": "地址已确认。如果您进行了复制或扫描，则请再次检查。",
       "verifyAgain": "再次检查",
       "noAccount": "未能找到账户",
       "address": "账户地址",
@@ -2723,7 +2723,7 @@
       "osu": "正在安装 OSU",
       "flash-mcu": "MCU 正在更新",
       "flash-bootloader": "Bootloader 正在更新",
-      "flash": "Flashing your device",
+      "flash": "正在刷机",
       "firmware": "固件正在更新"
     }
   },
@@ -3013,9 +3013,9 @@
           },
           "verification": {
             "success": {
-              "title": "You have successfully claimed your rewards. They were added to your available balance.",
-              "titleCompound": "Your rewards were delegated to the same validator.",
-              "text": "Your account balance will be updated when the network confirms the transaction.",
+              "title": "您已成功申领您的奖励。已将其添加到您的可用余额。",
+              "titleCompound": "您的奖励已委托给同一个验证器。",
+              "text": "该交易一经网络确认，就会更新您的账户余额。",
               "cta": "查看详情"
             },
             "pending": {
@@ -3045,7 +3045,7 @@
       "noRewards": "没有奖励可用",
       "votes": {
         "title": "选票",
-        "description": "Cast your votes for one or more Representatives to start earning rewards.",
+        "description": "将您的选票投给一名或多名代表，从而开始赚取奖励。",
         "cta": "投票"
       },
       "rewards": {
@@ -3061,7 +3061,7 @@
         "started": {
           "title": "投票",
           "srOrCandidate": "SR 超级代表或候选人？",
-          "description": "Vote for one or more Super Representatives to start earning rewards.",
+          "description": "为一个或多个超级代表投票，从而开始获得奖励。",
           "button": {
             "continue": "将票投出"
           }
@@ -3082,7 +3082,7 @@
         "steps": {
           "starter": {
             "title": "赚取奖励",
-            "description": "Delegate TRX to a third party candidate to earn rewards. Click on continue to freeze assets and vote.",
+            "description": "将 TRX 委托给第三方候选人从而赚取奖励。点击继续按钮以冻结资产并投票。",
             "bullet": {
               "delegate": "委托出去的资产依旧为您所有。",
               "access": "您可以在冻结 3 天后访问您的资产。",
@@ -3099,11 +3099,11 @@
       "title": "管理 Tron Power 波场能量",
       "freeze": {
         "title": "冻结",
-        "description": "Freeze TRX to earn Bandwidth or Energy. You can also vote for Super Representatives."
+        "description": "冻结 TRX 以赚取带宽或能量。您也可以为超级代表投票。"
       },
       "unfreeze": {
         "title": "解冻",
-        "description": "Unfreeze TRX to add them back to your available balance. You will no longer earn rewards."
+        "description": "解冻 TRX 以重新将其添加到您的可用余额。您将不再赚取奖励。"
       },
       "vote": {
         "title": "投票",
@@ -3178,13 +3178,13 @@
       },
       "electionOpen": {
         "title": "正在推选验证器",
-        "description": "The election of new validators is currently ongoing. As such, staking operations are not available for 15 minutes at most."
+        "description": "正在推选新的验证器。因此，最多 15 分钟后方可进行权益质押操作。"
       }
     },
     "nomination": {
       "emptyState": {
         "title": "赚取奖励",
-        "description": "You can earn rewards by bonding assets and then nominating your validator(s).",
+        "description": "您可以通过绑定资产并随后提名您的（某个或多个）验证器来赚取奖励。",
         "info": "提名机制如何运作",
         "cta": "赚取奖励"
       },
@@ -3196,9 +3196,9 @@
       "amount": "已绑定数额",
       "commission": "佣金",
       "active": "活跃",
-      "activeInfo": "This validator is elected and is collecting rewards on your bonded assets.",
+      "activeInfo": "该验证器已当选，并正在为您绑定的资产收集奖励。",
       "inactive": "不活跃",
-      "inactiveInfo": "This validator is elected but is not collecting rewards on your bonded assets.",
+      "inactiveInfo": "该验证器已当选，但是并没有为您绑定的资产收集奖励。",
       "waiting": "落选",
       "waitingInfo": "该验证器落选，因此无法收集奖励。",
       "notValidator": "并非验证器",
@@ -3211,8 +3211,8 @@
       "oversubscribed": "超额订购 ({{nominatorsCount}})",
       "oversubscribedInfo": "只有绑定数额最高的顶层 {{maxNominatorRewardedPerValidator}} 提名者才可赚取奖励",
       "hasPendingBondOperation": "绑定操作仍在等待确认",
-      "externalControllerUnsupported": "This stash account is controlled by another account with the address <0>{{address}}</0>. Staking operations on accounts that are controlled by a different account are not supported in Ledger Live. Please use an alternative wallet such as Polkadot.js",
-      "externalStashUnsupported": "This account controls a stash account whose address is <0>{{address}}</0>. Staking operations on separate stash accounts are not supported in Ledger Live. Please use an alternative wallet like Polkadot.js",
+      "externalControllerUnsupported": "该存储账户由地址为 <0>{{address}}</0> 的另一账户所控制。如果相关账户由另一账户控制，Ledger Live 则不支持此类账户的权益质押操作。请使用 Polkadot.js 之类的替代性钱包",
+      "externalStashUnsupported": "该账户控制着一个地址为 <0>{{address}}</0> 的存储账户。Ledger Live 不支持在一个单独的存储账户上的权益质押操作。请使用 Polkadot.js 之类的替代性钱包",
       "showInactiveNominations": "显示所有提名 ({{count}})",
       "hideInactiveNominations": "仅显示活跃状态的提名",
       "noActiveNominations": "没有活跃状态的提名。",
