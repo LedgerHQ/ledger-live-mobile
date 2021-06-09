@@ -122,7 +122,7 @@
       "description": ""
     },
     "CompoundLowerAllowanceOfActiveAccountError": {
-      "title": "You cannot reduce the amount approved while having an active deposit."
+      "title": "لا يمكنك تقليل المبلغ الموافق عليه عند وجود إيداع نشط."
     },
     "CosmosBroadcastCodeInternal": {
       "title": "Something went wrong (Error #1)",
@@ -432,7 +432,7 @@
       "title": "There is no reward to be claimed"
     },
     "TronInvalidFreezeAmount": {
-      "title": "Amount to freeze cannot be smaller than 1"
+      "title": "مبلغ التجميد لا يمكن أن يكون أصغر من 1"
     },
     "TronSendTrc20ToNewAccountForbidden": {
       "title": "Sending TRC20 to the new account will not activate it",
@@ -1333,32 +1333,32 @@
     "details": "{{ currency }} details",
     "extra": {
       "resource": "Resource",
-      "frozenAmount": "Frozen amount",
-      "unfreezeAmount": "Unfreeze amount",
+      "frozenAmount": "المبلغ المجمد",
+      "unfreezeAmount": "إزالة تجميد المبلغ",
       "address": "عنوان",
       "votes": "Votes ({{number}})",
       "votesAddress": "<0>{{votes}}</0> to <2>{{name}}</2>",
       "validators": "Validators",
-      "delegated": "Delegated ({{amount}})",
+      "delegated": "تفويض ({{amount}})",
       "delegatedTo": "Delegated to",
-      "delegatedAmount": "Delegated amount",
-      "redelegated": "Redelegated ({{amount}})",
+      "delegatedAmount": "المبلغ المفوض",
+      "redelegated": "إعادة تفويض ({{amount}})",
       "redelegatedFrom": "Redelegated from",
       "redelegatedTo": "Redelegated to",
-      "redelegatedAmount": "Redelegated amount",
-      "undelegated": "Undelegated ({{amount}})",
+      "redelegatedAmount": "المبلغ المعاد تفويضه",
+      "undelegated": "غير مفوّض ({{amount}})",
       "undelegatedFrom": "Undelegated from",
-      "undelegatedAmount": "Undelegated amount",
+      "undelegatedAmount": "المبلغ غير مفوّض",
       "rewardFrom": "مكافأة من",
-      "rewardAmount": "Amount collected",
+      "rewardAmount": "المبلغ المحصل",
       "memo": "Memo",
       "assetId": "Asset ID",
       "rewards": "Earned rewards",
-      "bondedAmount": "Bonded Amount",
-      "unbondedAmount": "Unbonded Amount",
-      "withdrawUnbondedAmount": "Withdraw Unbonded Amount",
+      "bondedAmount": "المبلغ المقيد",
+      "unbondedAmount": "المبلغ الغير مقيد",
+      "withdrawUnbondedAmount": "سحب المبلغ الغير مقيد",
       "palletMethod": "Method",
-      "transferAmount": "Transfer Amount",
+      "transferAmount": "مبلغ التحويل",
       "validatorsCount": "Validators ({{number}})"
     },
     "multipleAddresses": "لماذا عناوين متعددة؟"
@@ -1483,7 +1483,7 @@
       }
     },
     "availableBalance": "Available balance",
-    "totalSupplied": "Amount deposited",
+    "totalSupplied": "المبلغ المودع",
     "tronFrozen": "Frozen",
     "bandwidth": "Bandwidth",
     "energy": "Energy",
@@ -1848,8 +1848,8 @@
         "floatUnavailable": "Floating rate not supported for this pair",
         "fixed": "Fixed rate",
         "fixedUnavailable": "Fixed rate not supported for this pair",
-        "floatDesc": "Your amount could change depending on the market conditions.",
-        "fixedDesc": "Your amount will remain the same irrespective of the changes on the market. Fixed rate updates every 30 seconds",
+        "floatDesc": "قد يتغير المبلغ الخاص بك تبعًا لظروف السوق.",
+        "fixedDesc": "سيظل المبلغ الخاص بك كما هو بغض النظر عن التغييرات في السوق. يتم تحديث السعر الثابت كل 30 ثانية",
         "by": "By",
         "modalTitle": "Floating or fixed rate?"
       },
@@ -1889,9 +1889,9 @@
           "to": "To",
           "send": "Send",
           "payoutNetworkFees": "Payout fees",
-          "payoutNetworkFeesTooltip": "This amount will not be shown on your device",
-          "receive": "Amount",
-          "receiveFloat": "Amount to receive before service fees",
+          "payoutNetworkFeesTooltip": "هذا المبلغ لن يظهر على جهازك",
+          "receive": "المبلغ",
+          "receiveFloat": "المبلغ المراد استلامه قبل رسوم الخدمة",
           "provider": "Provider",
           "method": "Rate",
           "fees": "Max fees",
@@ -1911,7 +1911,7 @@
         "from": "من",
         "fromAmount": "المبلغ المرسل",
         "to": "To",
-        "toAmount": "Amount to receive",
+        "toAmount": "المبلغ المراد استلامه",
         "statusTooltips": {
           "expired": "Please contact the swap provider with your swap ID for more information.",
           "refunded": "Please contact the swap provider with your swap ID for more information.",
@@ -1962,8 +1962,8 @@
         "description": "Due to congestion on the Ethereum network, you may experience high fees when issuing transactions."
       },
       "account": {
-        "amountSupplied": "Amount deposited",
-        "amountSuppliedTooltip": "Amount lent to the network",
+        "amountSupplied": "المبلغ المودع",
+        "amountSuppliedTooltip": "المبلغ الذي تم إقراضه للشبكة",
         "currencyAPY": "Currency APY",
         "currencyAPYTooltip": "Yearly return rate of a deposit that’s continuously compounded",
         "accruedInterests": "Interest balance",
@@ -1975,8 +1975,8 @@
       },
       "banners": {
         "needApproval": "يتعين عليك الموافقة على هذا الحساب قبل أن تكون قادراً على إقراض الأصول.",
-        "fullyApproved": "You have fully approved this account. You can reduce the amount at a fee.",
-        "approvedCanReduce": "You have approved <0>{{value}}</0> on this account. You can reduce the amount at a fee.",
+        "fullyApproved": "لقد وافقت بالكامل على هذا الحساب. يمكنك تخفيض المبلغ مقابل رسوم.",
+        "approvedCanReduce": "لقد وافقت على <0>{{value}}</0> على هذا الحساب. يمكنك تخفيض المبلغ مقابل رسوم.",
         "approvedButNotEnough": "You have approved <0>{{value}}</0> on this account.",
         "approving": "You can deposit assets once the account approval is confirmed.",
         "notEnough": "يتعيّن عليك زيادة الحد الأقصى الموافق عليه في حسابك للإقراض."
@@ -1990,7 +1990,7 @@
         "apy": "{{value}} APY",
         "activeAccount": {
           "account": "حساب",
-          "amountSupplied": "Amount deposited",
+          "amountSupplied": "المبلغ المودع",
           "interestEarned": "Interest earned",
           "status": "Account status",
           "EARNING": "Earning",
@@ -2000,7 +2000,7 @@
           "approve": "Approve",
           "supply": "Supply",
           "withdraw": "Withdraw",
-          "amountRedeemed": "Amount withdrawn",
+          "amountRedeemed": "المبلغ المسحوب",
           "endDate": "End date"
         }
       },
