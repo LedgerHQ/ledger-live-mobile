@@ -1816,7 +1816,7 @@
         },
         "paraswap": {
           "bullets": [
-            "Подключайте к 30+ DEX-биржам (Uniswap, SushiSwap,...)",
+            "Подключение к 30+ DEX-биржам (Uniswap, SushiSwap,...)",
             "Ethereum и ERC20-токены",
             "Децентрализованная система без доверия"
           ]
@@ -1845,7 +1845,7 @@
       },
       "tradeMethod": {
         "float": "Плавающий курс",
-        "floatUnavailable": "Floating rate not supported for this pair",
+        "floatUnavailable": "Для этой пары плавающий курс не поддерживается",
         "fixed": "Фиксированный курс",
         "fixedUnavailable": "Для этой пары фиксированный курс не поддерживается",
         "floatDesc": "Сумма может измениться в зависимости от состояния рынка.",
