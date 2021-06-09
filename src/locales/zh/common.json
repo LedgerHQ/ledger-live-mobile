@@ -882,7 +882,7 @@
         "infoModal": {
           "title": "恢复短语的作用是什么？",
           "desc": "您的恢复短语就像是一把独一无二的主密钥。您的 Ledger 设备使用它来为您所拥有的每一种加密资产计算私钥。",
-          "desc_1": "To restore access to your crypto, any wallet can calculate the same private keys from your recovery phrase.",
+          "desc_1": "为了恢复对您加密资产的访问，任何钱包都能通过您的恢复短语算出同样的私钥。",
           "link": "有关恢复短语的更多详情",
           "title_1": "如果我的 Nano 无法使用了该怎么办？",
           "bullets": {
@@ -890,10 +890,10 @@
               "label": "获得一个新的硬件钱包。"
             },
             "1": {
-              "label": "Select “Restore recovery phrase on a new device” in the Ledger app."
+              "label": "在 Ledger 应用程序中选择“在新设备上还原恢复短语”"
             },
             "2": {
-              "label": "Enter your recovery phrase on your new device to restore access to your crypto."
+              "label": "在您的新设备上输入您的恢复短语从而恢复对您加密资产的访问。"
             }
           }
         },
@@ -904,7 +904,7 @@
           },
           "1": {
             "title": "写下所有的恢复词",
-            "label": "Write Word #1 displayed on your Nano in position 1 of your Recovery sheet. Then press right on your Nano to display Word #2 and write it down in position 2.",
+            "label": "在恢复表的位置 1 写下 Nano 上显示的第 1 个词。然后在您的 Nano 设备上按右键显示第 2 个词，并将其写在位置 2。",
             "label_1": "Repeat the process for all words while carefully respecting the order and spelling. Press left on your Nano to check for any mistakes."
           },
           "2": {
@@ -1701,8 +1701,8 @@
       "subtitle": "一旦 Ledger Live 推出新功能，就意味着您的账户需要更新",
       "notice": "{{accountCount}} account could not be updated. Please connect the device associated to the account below.",
       "notice_plural": "{{accountCount}} accounts could not be updated. Please connect the device associated to the accounts below.",
-      "currency": "1 {{currency}} account needs to be updated",
-      "currency_plural": "{{count}} {{currency}} accounts need to be updated",
+      "currency": "1 个 {{currency}} 账户需要更新",
+      "currency_plural": "{{count}} 个 {{currency}} 账户需要更新",
       "start": "开始更新",
       "continue": "继续更新"
     },
@@ -1845,7 +1845,7 @@
       },
       "tradeMethod": {
         "float": "浮动兑换率",
-        "floatUnavailable": "Floating rate not supported for this pair",
+        "floatUnavailable": "两者的掉期不支持浮动汇率",
         "fixed": "固定兑换率",
         "fixedUnavailable": "两者的兑换不支持固定兑换率",
         "floatDesc": "您的数额会根据市场条件而变动。",
@@ -2193,7 +2193,7 @@
       "from": "从",
       "to": "到",
       "infoTotalTitle": "总借记",
-      "infoTotalDesc": "Includes transaction amount and the selected network fees",
+      "infoTotalDesc": "包含交易数额以及所选的网络费用",
       "gasLimit": "Gas 限值",
       "gasPrice": "Gas 价格",
       "maxFees": "最大费用",
@@ -2209,11 +2209,11 @@
       "validateMemo": "验证 Memo"
     },
     "validation": {
-      "message": "On your device, confirm the transaction to sign it securely.",
+      "message": "在您的设备上，确认该交易以安全地将其签署。",
       "sent": "交易已发送",
       "amount": "数额",
       "fees": "费用",
-      "confirm": "Your account balance will be updated once the network confirms the transaction.",
+      "confirm": "交易一经网络确认，您的账户余额就会更新。",
       "button": {
         "details": "查看详情",
         "retry": "重试"
@@ -2224,7 +2224,7 @@
       "validate": "确认",
       "required": "需要费用",
       "chooseGas": "选择 gas 价格",
-      "higherFaster": "Higher gas price means a faster confirmation.",
+      "higherFaster": "较高的 gas 矿工费价格意味着更加快速地确认。",
       "edit": {
         "title": "选择单位"
       },
@@ -2266,8 +2266,8 @@
       "description": "Freeze TRX to earn rewards securely, keeping control of your assets.",
       "steps": {
         "0": "委托出去的资产依旧为您所有。",
-        "1": "You can unfreeze your assets after 3 days.",
-        "2": "Freeze and vote securely with your Ledger device."
+        "1": "3 天后您可以解冻您的资产。",
+        "2": "使用您的 Ledger 设备安全冻结资产并投票。"
       },
       "howVotingWorks": "如何投票",
       "cta": "继续"
@@ -2283,7 +2283,7 @@
       "amount": "数额",
       "info": "You will start earning {{resource}} once the network has confirmed the freeze. You can shortly vote for Super Representatives to also earn rewards.",
       "button": {
-        "pending": "Transaction is being validated.",
+        "pending": "交易正在验证。",
         "pendingDesc": "投票前请稍等片刻。",
         "vote": "投票",
         "voteTimer": "0:{{time}}",
@@ -2348,7 +2348,7 @@
       "voteFor": "投票对象",
       "validateVotes": "验证票数",
       "votesRequired": "所需票数 ",
-      "allVotesUsed": "All votes used"
+      "allVotesUsed": "已用所有选票"
     },
     "validation": {
       "message": "Always verify that your device displays the address exactly as it was originally given to you.",
@@ -2486,7 +2486,7 @@
         }
       },
       "genuineCheck": {
-        "title": "Enable Ledger Manager on your {{productName}}"
+        "title": "在您的 {{productName}} 上开启 Ledger 管理器"
       },
       "genuineCheckPending": {
         "title": "正在检查该设备是否为正版……"
@@ -2524,7 +2524,7 @@
   },
   "EditDeviceName": {
     "title": "重命名设备",
-    "charactersRemaining": "{{remainingCount}} characters remaining",
+    "charactersRemaining": "剩余 {{remainingCount}} 个字符",
     "action": "确认"
   },
   "PairDevices": {
@@ -2676,7 +2676,7 @@
       "dependency": {
         "title": "卸载 {{app}} 及其相关应用程序？",
         "showAll": "显示待卸载的应用程序",
-        "description": "Apps on your device that need the {{app}} app will be uninstalled too."
+        "description": "您设备上需要用到 {{app}} 的应用程序也将被卸载。"
       },
       "continueUninstall": "卸载 {{app}} 以及其他应用程序"
     },
@@ -2728,7 +2728,7 @@
     }
   },
   "FirmwareUpdateReleaseNotes": {
-    "introTitle": "You are about to install <1><0>firmware version {{version}}.</0></1>",
+    "introTitle": "您将要安装 <1><0>固件版本 {{version}}。</0></1>",
     "introDescription1": "Please note that all the apps on your device will be deleted. You can reinstall your apps after the firmware update.",
     "introDescription2": "该操作不会影响您的加密资产。",
     "action": "继续更新"
@@ -2771,7 +2771,7 @@
             "description": "Delegate your Algo to earn rewards while keeping full security and control on your assets.",
             "steps": {
               "0": "A minimum balance of 1 Algo is required to receive rewards.",
-              "1": "Increase the account’s balance to increase rewards.",
+              "1": "通过增加账户的余额来增加奖励。",
               "2": "Perform a transaction to or from the account to claim rewards."
             },
             "howItWorks": "奖励机制如何运作",
@@ -3007,7 +3007,7 @@
             "claimRewardInfo": "They will be claimed now and added to your available balance.",
             "claimRewardCompoundInfo": "They will be claimed now and automatically delegated to the same validator.",
             "compoundOrCashIn": "复利或兑现？",
-            "claimRewardTooltip": "Rewards will be added to the available balance",
+            "claimRewardTooltip": "奖励将被添加至可用余额",
             "claimRewardCompoundTooltip": "奖励将被添加至已委托的数额",
             "cta": "继续"
           },
@@ -3036,7 +3036,7 @@
   "tron": {
     "voting": {
       "earnRewars": "赚取奖励",
-      "delegationEarn": "You can now earn rewards by freezing and voting.",
+      "delegationEarn": "您现在可以通过冻结资产和投票来赚取奖励。",
       "howItWorks": "如何投票",
       "startEarning": "赚取奖励",
       "title": "申领奖励",
@@ -3055,7 +3055,7 @@
       "manageVotes": "管理选票",
       "remainingVotes": {
         "title": "您仍有剩余选票",
-        "description": "Cast your remaining votes to earn more rewards."
+        "description": "投出您的剩余选票来赚取更多奖励。"
       },
       "flow": {
         "started": {
@@ -3085,8 +3085,8 @@
             "description": "Delegate TRX to a third party candidate to earn rewards. Click on continue to freeze assets and vote.",
             "bullet": {
               "delegate": "委托出去的资产依旧为您所有。",
-              "access": "You can access your assets 3 days after freezing.",
-              "ledger": "Delegate securely with your Ledger device."
+              "access": "您可以在冻结 3 天后访问您的资产。",
+              "ledger": "使用您的 Ledger 设备安全地进行委托。"
             },
             "button": {
               "cta": "继续"
@@ -3107,7 +3107,7 @@
       },
       "vote": {
         "title": "投票",
-        "description": "Cast votes for Super Representatives to earn rewards."
+        "description": "为超级代表投票以赚取奖励。"
       }
     },
     "info": {
@@ -3121,15 +3121,15 @@
       },
       "bandwidth": {
         "title": "带宽",
-        "description": "Bandwidth points are used to make transactions instead of paying TRX network fees. Choose Bandwidth to increase your daily free transactions."
+        "description": "Bandwidth points 带宽点数是被用来在做交易时取代支付 TRX 波场区块链网络费用的。选用带宽来提高您的日均免费交易量。"
       },
       "energy": {
         "title": "能量",
-        "description": "Energy points are required to execute smart contracts. If you don't run smart contracts, there is no need to have rewards in Energy points."
+        "description": "Energy points 能量点数是在执行智能合约时所必需的。如果您并不运行智能合约，则不需要获得能量点数类型的奖励。"
       },
       "claimRewards": {
         "title": "投票奖励",
-        "description": "The TRX generated as rewards during block production can be claimed every 24 hours."
+        "description": "在区块生产期间生成的 TRX 奖励，每 24 小时可申领一次。"
       },
       "superRepresentative": {
         "title": "超级代表 (SR)",
@@ -3166,7 +3166,7 @@
       },
       "locked": {
         "title": "已绑定资产",
-        "description": "Assets must be bonded to nominated validators before earning rewards."
+        "description": "必须将资产绑定到提名的验证器才能赚取奖励。"
       },
       "unlocking": {
         "title": "正在解绑资产",
@@ -3200,7 +3200,7 @@
       "inactive": "不活跃",
       "inactiveInfo": "This validator is elected but is not collecting rewards on your bonded assets.",
       "waiting": "落选",
-      "waitingInfo": "This validator is not elected, therefore is not collecting rewards.",
+      "waitingInfo": "该验证器落选，因此无法收集奖励。",
       "notValidator": "并非验证器",
       "notValidatorInfo": "该地址不再是一个验证器",
       "elected": "当选",
