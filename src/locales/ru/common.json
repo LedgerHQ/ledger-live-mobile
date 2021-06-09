@@ -1955,7 +1955,7 @@
       "accountActions": {
         "approve": "Утвердить",
         "supply": "Предоставить",
-        "withdraw": "Отозвать"
+        "withdraw": "Вывести"
       },
       "highFees": {
         "title": "Высокие комиссии в сети Ethereum",
