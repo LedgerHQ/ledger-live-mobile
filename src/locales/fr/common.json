@@ -1343,8 +1343,8 @@
       "delegatedTo": "Délégué à",
       "delegatedAmount": "Montant délégué",
       "redelegated": "Redélégué ({{amount}})",
-      "redelegatedFrom": "Redélégué de",
-      "redelegatedTo": "Redélégué à",
+      "redelegatedFrom": "Redéléguée de",
+      "redelegatedTo": "Redéléguée à",
       "redelegatedAmount": "Montant redélégué",
       "undelegated": "Délégation interrompue ({{amount}})",
       "undelegatedFrom": "Délégation interrompue de",
@@ -1698,7 +1698,7 @@
     "overview": {
       "headerTitle": "Mise à jour du compte",
       "title": "Mise à jour des comptes Ledger Live",
-      "subtitle": "De nouvelles fonctionnalités sont disponibles dans Ledger Live : vos comptes doivent être mis à jour.",
+      "subtitle": "Mettez vos comptes à jour pour bénéficier des nouvelles fonctionnalités de Ledger Live.",
       "notice": "Impossible de mettre à jour {{accountCount}} compte. Veuillez connecter l'appareil associé au compte ci-dessous.",
       "notice_plural": "Impossible de mettre à jour {{accountCount}} comptes. Veuillez connecter l'appareil associé aux comptes ci-dessous.",
       "currency": "Mise à jour nécessaire pour 1 compte {{currency}}",
@@ -1766,7 +1766,7 @@
       }
     },
     "exchange": {
-      "title": "Achat / Vente",
+      "title": "Acheter / Vendre",
       "providers": {
         "title": "Choisir un prestataire pour acheter des cryptos",
         "whatIsSwap": "Qu'est-ce que l'Achat ?",
@@ -1949,7 +1949,7 @@
       }
     },
     "lending": {
-      "title": "Prêter des cryptos",
+      "title": "Prêter",
       "titleTransferTab": "Prêter",
       "actionTitle": "Prêter",
       "accountActions": {
@@ -2495,7 +2495,7 @@
         "title": "Retourner sur le tableau de bord (écran d'accueil) du {{productName}}"
       },
       "currencyApp": {
-        "title": "Ouvrez l'application {{managerAppName}} sur votre {{productName}}",
+        "title": "Ouvrez l'application {{managerAppName}} sur votre {{productName}}.",
         "description": "",
         "footer": {
           "appInstalled": "Application non installée.",
@@ -2503,7 +2503,7 @@
         }
       },
       "accountApp": {
-        "title": "Ouvrez l'application {{managerAppName}} sur votre {{productName}}",
+        "title": "Ouvrez l'application {{managerAppName}} sur votre {{productName}}.",
         "description": ""
       },
       "receiveVerify": {
@@ -2592,7 +2592,7 @@
       "searchAppsCatalog": "Rechercher une application dans le catalogue",
       "searchAppsInstalled": "Rechercher les applications installées...",
       "noAppsInstalled": "Aucune application installée sur votre appareil",
-      "noAppsDescription": "Allez dans le catalogue pour installer des applications",
+      "noAppsDescription": "Aller dans le catalogue pour installer des applications",
       "noResultsFound": "Aucun résultat",
       "noResultsDesc": "Merci de vérifier l'orthographe et réessayer",
       "versionNew": "(NOUVELLE {{newVersion}})"
