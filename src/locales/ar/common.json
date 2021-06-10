@@ -351,7 +351,7 @@
     },
     "NotEnoughGas": {
       "title": "Insufficient ETH for network fee",
-      "description": "Please send some ETH to your account to pay for ERC20 token transactions."
+      "description": "يرجى إرسال بعض الETH إلى حسابك لسداد قيمة معاملات رمز ال ERC20."
     },
     "NotEnoughBalanceToDelegate": {
       "title": "Insufficient balance to delegate"
@@ -1324,11 +1324,11 @@
     "viewInExplorer": "View in explorer",
     "sending": "Sending...",
     "receiving": "Receiving...",
-    "tokenOperations": "Token operations",
+    "tokenOperations": "عمليات رمز التوكن",
     "subAccountOperations": "Subaccount operations",
     "internalOperations": "Internal operations",
     "tokenModal": {
-      "desc": "This operation is related to the following token operations"
+      "desc": "هذه العملية مرتبطة بعمليات رمز التوكن التالية"
     },
     "details": "{{ currency }} details",
     "extra": {
@@ -1370,8 +1370,8 @@
   "selectableAccountsList": {
     "deselectAll": "Deselect all",
     "selectAll": "Select all",
-    "tokenCount": "+1 رمز",
-    "tokenCount_plural": "+ {{count}} من الرموز",
+    "tokenCount": "+1 رمز توكن",
+    "tokenCount_plural": "+ {{count}} من رموز التوكن",
     "subaccountCount": "+1 subaccount",
     "subaccountCount_plural": "+{{count}} subaccounts"
   },
@@ -1379,10 +1379,10 @@
     "tokens": {
       "contractAddress": "عنوان العَقد",
       "viewInExplorer": "View in explorer",
-      "seeMore": "عرض المزيد من الرموز",
-      "seeLess": "عرض عدد أقل من الرموز",
-      "addTokens": "إضافة رمز",
-      "howTo": "To add token accounts, you need to <0>receive funds</0> using your <1>{{currency}} address</1>.",
+      "seeMore": "عرض المزيد من رموز التوكن",
+      "seeLess": "عرض عدد أقل من رموز التوكن",
+      "addTokens": "إضافة رمز توكن",
+      "howTo": "لإضافة حسابات توكن، سيكون عليك <0>تلقي الأموال</0> باستخدام <1>{{currency}} عنوان</1> الخاص بك.",
       "algorand": {
         "contractAddress": "عنوان العَقد",
         "viewInExplorer": "View in explorer",
@@ -1410,7 +1410,7 @@
       "title": "لا توجد أصول مشفرة بعد؟",
       "desc": "Make sure the <1><0>{{managerAppName}}</0></1> app is installed and start receiving.",
       "descWithBuy": "Make sure the <1><0>{{managerAppName}}</0></1> app is installed so you can buy or receive <3><0>{{currencyTicker}}</0></3>",
-      "descToken": "Make sure the <1><0>{{managerAppName}}</0></1> app is installed and start receiving <3><0>{{currencyTicker}}</0></3> and <5><0>{{tokenType}}</0> tokens</5>",
+      "descToken": "تأكد من تثبيت تطبيق <1><0>{{managerAppName}}</0></1> وابدأ تلقي <3><0>{{currencyTicker}}</0></3> و <5><0>{{tokenType}}</0> رموز التوكن</5>",
       "buttons": {
         "receiveFunds": "Receive",
         "buyCrypto": "شراء"
@@ -1515,12 +1515,12 @@
       "upToDate": "Synchronized",
       "error": "Error",
       "queued": "Awaiting",
-      "showTokens": "عرض رمز {{length}}",
-      "showTokens_plural": "عرض رموز {{length}}",
+      "showTokens": "عرض {{length}} رمز توكن",
+      "showTokens_plural": "عرض {{length}} رموز التوكن",
       "showSubAccounts": "عرض حساب فرعي {{length}}",
       "showSubAccounts_plural": "عرض حسابات فرعية {{length}}",
-      "hideTokens": "Hide token",
-      "hideTokens_plural": "Hide tokens",
+      "hideTokens": "إخفاء رمز التوكن",
+      "hideTokens_plural": "إخفاء رموز التوكن",
       "hideSubAccounts": "Hide subaccount",
       "hideSubAccounts_plural": "Hide subaccounts",
       "algorand": {
@@ -1621,8 +1621,8 @@
         "bullet1": "Anonymous unique application ID",
         "bullet2": "Ledger Live version, OS region, language and region"
       },
-      "hideEmptyTokenAccounts": "Hide empty token accounts",
-      "hideEmptyTokenAccountsDesc": "Hide empty token accounts on the Accounts page."
+      "hideEmptyTokenAccounts": "إخفاء حسابات رموز التوكن الفارغة",
+      "hideEmptyTokenAccountsDesc": "إخفاء حسابات رموز التوكن الفارغة في صفحة الحسابات."
     },
     "currencies": {
       "header": "Currencies",
@@ -1637,14 +1637,14 @@
       "header": "حسابات",
       "title": "حسابات",
       "desc": "Manage assets display in the app.",
-      "hideTokenCTA": "Hide token",
+      "hideTokenCTA": "إخفاء رمز التوكن",
       "showContractCTA": "عرض العقد",
-      "blacklistedTokens": "Hidden token list",
-      "blacklistedTokensDesc": "You can hide tokens by going to the accounts list then long-pressing on the token and selecting 'Hide token'.",
+      "blacklistedTokens": "قائمة رموز التوكن المخفية",
+      "blacklistedTokensDesc": "يمكنك إخفاء رموز التوكن من خلال الانتقال إلى قائمة الحسابات ثم الضغط لفترة طويلة على رمز التوكن واختيار \"إخفاء رمز التوكن\".",
       "blacklistedTokensModal": {
-        "title": "Hide token",
+        "title": "إخفاء رمز التوكن",
         "desc": "سيخفي هذا الإجراء جميع حسابات <1><0>{tokenName}</0></1>، ويمكنك إظهارها مرة أخرى باستخدام <3>الإعدادات > الحسابات</3>.",
-        "confirm": "Hide token"
+        "confirm": "إخفاء رمز التوكن"
       },
       "cryptoAssets": {
         "header": "الأصول المشفرة",
@@ -2185,7 +2185,7 @@
       "noRateProvider": "Not available"
     },
     "summary": {
-      "subaccountsWarning": "You will need to refill this account with {{ currency }} in order to send the tokens of this account",
+      "subaccountsWarning": "ستحتاج إلى إعادة شحن هذا الحساب بعملة {{ currency }} لتستطيع إرسال رموز التوكن لهذا الحساب",
       "tag": "Tag (Optional)",
       "validateTag": "Validate tag",
       "total": "Total",
@@ -2396,21 +2396,21 @@
     "noAccountToCreate": "Could not create <1><0>{{currencyName}}</></> account. Restart the process and sync your accounts.",
     "cantCreateAccount": "A new account cannot be added before receiving assets on your <1><0>{{accountName}}</></> account.",
     "tokens": {
-      "title": "Add token",
+      "title": "إضافة رمز توكن",
       "createParentCurrencyAccount": "Add {{parrentCurrencyName}} account",
       "erc20": {
-        "title": "Add token",
-        "disclaimer": "{{tokenName}} is an ERC20 Token.\nYou can receive tokens directly in an Ethereum account.",
+        "title": "إضافة رمز توكن",
+        "disclaimer": "{{tokenName}} هو رمز توكن خاص بـ ERC20.\nيمكنك تلقي رموز التوكن مباشرة في حساب إيثريوم.",
         "learnMore": "Learn more about ERC20"
       },
       "trc10": {
-        "title": "Add Token",
-        "disclaimer": "{{tokenName}} is a TRC10 Token.\nYou can receive tokens directly in a Tron account.",
+        "title": "إضافة رمز توكن",
+        "disclaimer": "{{tokenName}} هو رمز توكن خاص بـ TRC10.\nيمكنك تلقي رموز التوكن مباشرة في حساب ترون.",
         "learnMore": "Learn more about TRC10"
       },
       "trc20": {
-        "title": "Add Token",
-        "disclaimer": "{{tokenName}} is a TRC20 Token.\nYou can receive tokens directly in a Tron account.",
+        "title": "إضافة رمز توكن",
+        "disclaimer": "{{tokenName}} هو رمز توكن خاص بـ TRC20.\nيمكنك تلقي رموز التوكن مباشرة في حساب ترون.",
         "learnMore": "Learn more about TRC20"
       }
     },
@@ -2434,7 +2434,7 @@
   },
   "DeviceAction": {
     "allowAppPermission": "Open the {{wording}} app on your device",
-    "allowAppPermissionSubtitleToken": "to manage your {{token}} tokens",
+    "allowAppPermissionSubtitleToken": "لإدارة رموز توكن {{token}} الخاصة بك",
     "allowManagerPermission": "Allow {{wording}} on your device",
     "loading": "Loading...",
     "turnOnAndUnlockDevice": "Turn on and unlock your device",
@@ -2572,9 +2572,9 @@
     "connect": "اختار جهازك",
     "appsCatalog": "App catalog",
     "installedApps": "Installed apps",
-    "noAppNeededForToken": "Install {{appName}} app for {{tokenName}}",
-    "tokenAppDisclaimer": "{{tokenName}} is an {{tokenType}} token using the {{appName}} app. To manage {{tokenName}}, <1>install the {{appName}} app</1> and send the tokens <3>to your {{appName}} account</3>.",
-    "tokenAppDisclaimerInstalled": "{{tokenName}} is an {{tokenType}} token using the {{appName}} app. To manage {{tokenName}}, <1>open the {{appName}} app</1> and send the tokens <3>to your {{appName}} account</3>.",
+    "noAppNeededForToken": "تثبيت تطبيق {{appName}} لـ {{tokenName}}",
+    "tokenAppDisclaimer": "{{tokenName}} هو رمز توكن {{tokenType}} باستخدام تطبيق {{appName}}. لإدارة {{tokenName}}، قم <1>بتثبيت تطبيق {{appName}}</1> وأرسل رموز التوكن <3>إلى حسابك على {{appName}}</3>.",
+    "tokenAppDisclaimerInstalled": "{{tokenName}} هو رمز توكن {{tokenType}} باستخدام تطبيق {{appName}}. لإدارة {{tokenName}}، <1>افتح تطبيق {{appName}}</1> وأرسل رموز التوكن <3>إلى حسابك على {{appName}}</3>.",
     "goToAccounts": "Go to Accounts",
     "intallParentApp": "Install {{appName}} app",
     "readOnly": {
@@ -2809,13 +2809,13 @@
           "selectToken": {
             "warning": {
               "title": "Asset already added",
-              "description": "You already have {{token}} asset in your Algorand account."
+              "description": "لديك بالفعل أصل {{token}} في حسابك الAlgorand."
             }
           },
           "verification": {
             "success": {
-              "title": "{{token}} asset successfully added!",
-              "text": "You can now receive and send {{token}} assets on your Algorand account.",
+              "title": "تمت إضافة أصل {{token}} بنجاح!",
+              "text": "يمكنك الآن استلام وإرسال أصول {{token}} إلى حسابك الAlgorand.",
               "cta": "عرض التفاصيل"
             },
             "pending": {
@@ -3137,7 +3137,7 @@
       },
       "candidates": {
         "title": "Candidates",
-        "description": "127 individuals elected through voting by the entire token-holder community. Votes are sampled every 6 hours."
+        "description": "تم انتخاب 127 فردًا من خلال التصويت من قبل مجتمع حاملي رموز التوكن بأكمله. يتم أخذ عينات من الأصوات كل 6 ساعات."
       }
     }
   },
@@ -3484,7 +3484,7 @@
     "name": "Name",
     "votes": "Votes",
     "infoWording": {
-      "freeze": "Frozen tokens are locked for a period of 3 days.",
+      "freeze": "يتم قفل رموز التوكن المجمدة لمدة 3 أيام.",
       "unfreeze": "Your {{resource}} points will be reduced, and all your votes will be cancelled.",
       "claimReward": "Rewards can be claimed every 24 hours.",
       "cosmos": {
