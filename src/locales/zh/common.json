@@ -2462,7 +2462,7 @@
     },
     "installApp": "{{appName}} 应用程序安装 {{percentage}}",
     "installAppDescription": "请耐心等待，直至安装完成",
-    "listApps": "查看应用程序关联程序",
+    "listApps": "正在检查应用程序依存关系",
     "listAppsDescription": "请等待，正在确认您是否安装了所有必需的应用程序"
   },
   "SelectDevice": {
