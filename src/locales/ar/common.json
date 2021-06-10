@@ -74,66 +74,66 @@
       "minutes": "منذ دقيقة",
       "minutes_plural": "منذ {{time}} دقائق",
       "hours": "منذ ساعة واحدة",
-      "hours_plural": "{{time}} hours ago",
+      "hours_plural": "منذ {{time}} ساعات",
       "days": "أمس",
-      "days_plural": "{{time}} days ago"
+      "days_plural": "منذ {{time}} أيام"
     },
     "seeMore": "رؤية المزيد",
-    "moreInfo": "More info",
-    "buyEth": "Buy Ethereum"
+    "moreInfo": "مزيد من المعلومات",
+    "buyEth": "شراء إثيريوم"
   },
   "errors": {
     "AccountAwaitingSendPendingOperations": {
-      "title": "There is a pending operation for this account",
-      "description": "Please wait for the operation to go through."
+      "title": "هناك عملية معلقة لهذا الحساب",
+      "description": "يرجى الانتظار حتى تكتمل العملية."
     },
     "AccountNameRequired": {
-      "title": "An account name is needed",
-      "description": "Please enter an account name."
+      "title": "اسم الحساب مطلوب",
+      "description": "يرجى إدخال اسم الحساب."
     },
     "AlgorandASANotOptInInRecipient": {
       "title": "Recipient account has not opted in the selected ASA."
     },
     "BluetoothRequired": {
-      "title": "Sorry, Bluetooth is disabled",
-      "description": "Please enable Bluetooth in your phone settings. ({{state}} state)"
+      "title": "عذراً، تم تعطيل البلوتوث",
+      "description": "يرجى تفعيل البلوتوث في إعدادات هاتفك. (حالة {{state}})"
     },
     "BtcUnmatchedApp": {
-      "title": "That's the wrong app",
-      "description": "Please open the {{managerAppName}} app on your device."
+      "title": "هذا التطبيق الخطأ",
+      "description": "يرجى فتح تطبيق {{managerAppName}} على جهازك."
     },
     "CantOpenDevice": {
       "title": "عذراً، فشل الاتصال",
-      "description": "Your Ledger device must be unlocked and in range to use Bluetooth."
+      "description": "يجب إلغاء قفل جهاز ليدجر الخاص بك كما يجب أن يكون ضمن النطاق المخصص لاستخدام خاصية البلوتوث."
     },
     "CantScanQRCode": {
       "title": "تعذر إجراء المسح الضوئي لرمز QR: التحقق التلقائي غير معتمد لهذا العنوان."
     },
     "ConnectAppTimeout": {
       "title": "عفوًا، لم يتم العثور على أي جهاز",
-      "description": "Please make sure your {{productName}} is unlocked with Bluetooth enabled."
+      "description": "يرجى التأكد من إلغاء قفل جهاز {{productName}} الخاص بك مع تمكين خاصية البلوتوث."
     },
     "ConnectManagerTimeout": {
       "title": "عذرًا، فشل الاتصال بالمدير",
-      "description": "Please make sure your {{productName}} is unlocked with Bluetooth enabled."
+      "description": "يرجى التأكد من إلغاء قفل جهاز {{productName}} الخاص بك مع تمكين خاصية البلوتوث."
     },
     "ClaimRewardsFeesWarning": {
-      "title": "The rewards are smaller than the estimated fees to claim them.",
+      "title": "المكافآت أصغر من الرسوم المقدرة للمطالبة بهم.",
       "description": ""
     },
     "CompoundLowerAllowanceOfActiveAccountError": {
       "title": "لا يمكنك تقليل المبلغ الموافق عليه عند وجود إيداع نشط."
     },
     "CosmosBroadcastCodeInternal": {
-      "title": "Something went wrong (Error #1)",
+      "title": "حدث خطأ ما (الخطأ #1)",
       "description": "يرجى حفظ سجلاتك باستخدام الزر أدناه وتقديمها إلى فريق دعم ليدجر (Ledger)."
     },
     "CosmosBroadcastCodeTxDecode": {
-      "title": "Something went wrong (Error #2)",
+      "title": "حدث خطأ ما (الخطأ #2)",
       "description": "يرجى حفظ سجلاتك باستخدام الزر أدناه وتقديمها إلى فريق دعم ليدجر (Ledger)."
     },
     "CosmosBroadcastCodeInvalidSequence": {
-      "title": "Invalid sequence",
+      "title": "تسلسل غير صالح",
       "description": "يرجى إعادة المحاولة."
     },
     "CosmosBroadcastCodeUnauthorized": {
@@ -141,11 +141,11 @@
       "description": "This account is not authorized to sign this transaction."
     },
     "CosmosBroadcastCodeInsufficientFunds": {
-      "title": "Insufficient funds",
+      "title": "الأرصدة المالية غير كافية",
       "description": "يرجى التأكد من وجود أرصدة مالية كافية في الحساب."
     },
     "CosmosBroadcastCodeUnknownRequest": {
-      "title": "Something went wrong (Error #6)",
+      "title": "حدث خطأ ما (الخطأ #6)",
       "description": "يرجى حفظ سجلاتك باستخدام الزر أدناه وتقديمها إلى فريق دعم ليدجر (Ledger)."
     },
     "CosmosBroadcastCodeInvalidAddress": {
@@ -153,7 +153,7 @@
       "description": "يرجى التحقق من العنوان والمحاولة مرة أخرى."
     },
     "CosmosBroadcastCodeInvalidPubKey": {
-      "title": "Something went wrong (Error #8)",
+      "title": "حدث خطأ ما (الخطأ #8)",
       "description": "يرجى حفظ سجلاتك باستخدام الزر أدناه وتقديمها إلى فريق دعم ليدجر (Ledger)."
     },
     "CosmosBroadcastCodeUnknownAddress": {
@@ -161,40 +161,40 @@
       "description": "يرجى التحقق من العنوان والمحاولة مرة أخرى."
     },
     "CosmosBroadcastCodeInsufficientCoins": {
-      "title": "Insufficient funds",
-      "description": "Please increase the funds on the account."
+      "title": "الأرصدة المالية غير كافية",
+      "description": "يرجى زيادة الأرصدة المالية في الحساب."
     },
     "CosmosBroadcastCodeInvalidCoins": {
-      "title": "Something went wrong (Error #11)",
+      "title": "حدث خطأ ما (الخطأ #11)",
       "description": "يرجى حفظ سجلاتك باستخدام الزر أدناه وتقديمها إلى فريق دعم ليدجر (Ledger)."
     },
     "CosmosBroadcastCodeOutOfGas": {
-      "title": "Something went wrong (Error #12)",
+      "title": "حدث خطأ ما (الخطأ #12)",
       "description": "يرجى حفظ سجلاتك باستخدام الزر أدناه وتقديمها إلى فريق دعم ليدجر (Ledger)."
     },
     "CosmosBroadcastCodeMemoTooLarge": {
-      "title": "The Memo field is too long",
-      "description": "Please reduce the size of the memo text and try again."
+      "title": "حقل الملاحظة أطول من المسموح",
+      "description": "يرجى تقليل حجم نص الملاحظة وإعادة المحاولة مرة أخرى."
     },
     "CosmosBroadcastCodeInsufficientFee": {
-      "title": "Something went wrong (Error #14)",
+      "title": "حدث خطأ ما (الخطأ #14)",
       "description": "يرجى حفظ سجلاتك باستخدام الزر أدناه وتقديمها إلى فريق دعم ليدجر (Ledger)."
     },
     "CosmosBroadcastCodeTooManySignatures": {
-      "title": "Something went wrong (Error #15)",
+      "title": "حدث خطأ ما (الخطأ #15)",
       "description": "يرجى حفظ سجلاتك باستخدام الزر أدناه وتقديمها إلى فريق دعم ليدجر (Ledger)."
     },
     "CosmosBroadcastCodeGasOverflow": {
-      "title": "Something went wrong (Error #16)",
+      "title": "حدث خطأ ما (الخطأ #16)",
       "description": "يرجى حفظ سجلاتك باستخدام الزر أدناه وتقديمها إلى فريق دعم ليدجر (Ledger)."
     },
     "CosmosBroadcastCodeNoSignatures": {
-      "title": "Something went wrong (Error #17)",
+      "title": "حدث خطأ ما (الخطأ #17)",
       "description": "يرجى حفظ سجلاتك باستخدام الزر أدناه وتقديمها إلى فريق دعم ليدجر (Ledger)."
     },
     "DeviceAppVerifyNotSupported": {
-      "title": "Open Manager to update this app",
-      "description": "The app verification is not supported."
+      "title": "افتح المدير لتحديث هذا التطبيق",
+      "description": "التحقق من التطبيق غير مدعوم."
     },
     "DeviceGenuineSocketEarlyClose": {
       "title": "عفوًا، أعد المحاولة مرة أخرى (genuine-close)",
@@ -202,7 +202,7 @@
     },
     "DeviceHalted": {
       "title": "يرجى إعادة تشغيل جهاز ليدجر الخاص بك وإعادة المحاولة",
-      "description": "An unexpected error occurred. Please try again."
+      "description": "حدث خطأ غير متوقع. يرجى إعادة المحاولة مرة أخرى."
     },
     "DeviceNotGenuine": {
       "title": "من الوارد ألا يكون الجهاز أصليًا",
@@ -212,8 +212,8 @@
       "title": "يرجى تسمية الجهاز دون استخدام  '{{invalidCharacters}}'."
     },
     "DeviceOnDashboardExpected": {
-      "title": "Device not on Dashboard",
-      "description": "Please return to the Dashboard on your device."
+      "title": "الجهاز غير موجود في لوحات المعلومات",
+      "description": "يرجى العودة إلى لوحات المعلومات على جهازك."
     },
     "DeviceSocketFail": {
       "title": "عذراً، فشل الاتصال",
@@ -241,21 +241,21 @@
     },
     "Touch ID Error": {
       "title": "Biometric authentication failed",
-      "description": "Please use your password or reset the app."
+      "description": "يرجى استخدام كلمة مرورك أو إعادة تعيين التطبيق."
     },
     "Error": {
       "title": "{{message}}",
       "description": "حدث خطأ ما. يرجى إعادة المحاولة. إذا استمرت المشكلة، يرجى حفظ سجلاتك باستخدام الزر أدناه وتقديمها إلى فريق دعم ليدجر (Ledger)."
     },
     "FeeEstimationFailed": {
-      "title": "Sorry, fee estimation failed",
-      "description": "Try setting the fee manually (status: {{status}})."
+      "title": "عذراً، فشل تقدير الرسوم",
+      "description": "حاول تعيين الرسوم يدوياً (الحالة: {{status}})."
     },
     "FeeNotLoaded": {
-      "title": "Could not load fee rates"
+      "title": "تعذر تحميل معدلات الرسوم"
     },
     "FeeRequired": {
-      "title": "Fees are required"
+      "title": "الرسوم مطلوبة"
     },
     "FirmwareOrAppUpdateRequired": {
       "title": "Firmware or app update needed",
@@ -266,49 +266,49 @@
       "description": "حدث خطأ ما. يرجى إعادة المحاولة. إذا استمرت المشكلة، يرجى حفظ سجلاتك باستخدام الزر أدناه وتقديمها إلى فريق دعم ليدجر (Ledger)."
     },
     "HardResetFail": {
-      "title": "Sorry, could not reset",
+      "title": "عفواً، تعذر إعادة التعيين",
       "description": "يرجى إعادة المحاولة. إذا استمرت المشكلة، يرجى حفظ سجلاتك باستخدام الزر أدناه وتقديمها إلى فريق دعم ليدجر (Ledger)."
     },
     "InvalidAddress": {
       "title": "هذا ليس عنوان {{currencyName}} صحيح"
     },
     "InvalidAddressBecauseDestinationIsAlsoSource": {
-      "title": "Destination and source accounts must not be the same."
+      "title": "يجب ألا تكون حسابات الوجهة وحسابات المصدر هي نفسها."
     },
     "InvalidRecipient": {
-      "title": "Invalid recipient"
+      "title": "مستلم غير صحيح"
     },
     "LatestMCUInstalledError": {
-      "title": "Sorry, there's nothing to update",
+      "title": "عذراً، لا يوجد شيء للتحديث",
       "description": "الرجاء الاتصال بدعم ليدجر إذا كنت لا تستطيع استخدام جهازك."
     },
     "LedgerAPIError": {
       "title": "عذراً، أعد المحاولة مرة أخرى (API HTTP {{status}})",
-      "description": "Unsuccessful calls to the Ledger API server. Please try again."
+      "description": "مكالمات غير ناجحة إلى خادم Ledger API، يرجى المحاولة مرة أخرى."
     },
     "LedgerAPIErrorWithMessage": {
       "title": "{{message}}",
       "description": "يرجى إعادة المحاولة. إذا استمرت المشكلة، يرجى حفظ سجلاتك باستخدام الزر أدناه وتقديمها إلى فريق دعم ليدجر (Ledger)."
     },
     "LedgerAPINotAvailable": {
-      "title": "Sorry, {{currencyName}} services unavailable",
+      "title": "عذراً، خدمات {{currencyName}} غير متوفرة",
       "description": "يرجى إعادة المحاولة. إذا استمرت المشكلة، يرجى حفظ سجلاتك باستخدام الزر أدناه وتقديمها إلى فريق دعم ليدجر (Ledger)."
     },
     "ManagerAPIsFail": {
-      "title": "Sorry, Manager services are unavailable",
-      "description": "Please check the network status."
+      "title": "عذراً، خدمات المدير غير متوفرة",
+      "description": "يرجي التحقق من حالة الشبكة."
     },
     "ManagerAppAlreadyInstalled": {
       "title": "عذراً، هذا مثبت بالفعل",
       "description": "يرجى التحقق أي التطبيقات المثبتة بالفعل على جهازك."
     },
     "ManagerAppRelyOnBTC": {
-      "title": "Bitcoin and Ethereum apps needed",
+      "title": "تحتاج تطبيقات البيتكوين و الإيثيريوم",
       "description": "يرجى تثبيت أحدث تطبيقات بيتكوين وإثيريوم أولاً."
     },
     "ManagerDeviceLocked": {
       "title": "جهازك مقفل",
-      "description": "Please unlock it."
+      "description": "يرجى إلغاء قفله."
     },
     "ManagerNotEnoughSpace": {
       "title": "لم يتبقى مساحة تخزين كافية",
@@ -327,18 +327,18 @@
         "stay": "متابعة إلغاء التثبيت"
       },
       "update": {
-        "title": "App update in progress",
-        "description": "Quitting the Manager will terminate update.",
+        "title": "جاري تحديث التطبيق",
+        "description": "سيؤدي الخروج من المدير إلى إنهاء عملية التحديث.",
         "stay": "متابعة التحديث"
       },
-      "quit": "Quit Manager"
+      "quit": "الخروج من المدير"
     },
     "ManagerUninstallBTCDep": {
       "title": "عفوًا، هذا التطبيق مطلوب",
       "description": "إلغاء تثبيت تطبيق بيتكوين أو إيثيريوم في النهاية."
     },
     "NetworkDown": {
-      "title": "Sorry, internet seems to be down",
+      "title": "عفوًا، يبدو أن الاتصال بالإنترنت مقطوع",
       "description": "يرجى التحقق من اتصالك بالإنترنت."
     },
     "NoAddressesFound": {
@@ -346,52 +346,52 @@
       "description": "حدث خطأ ما في حساب العنوان. يرجى إعادة المحاولة. إذا استمرت المشكلة، يرجى حفظ سجلاتك باستخدام الزر أدناه وتقديمها إلى فريق دعم ليدجر (Ledger)."
     },
     "NotEnoughBalance": {
-      "title": "Sorry, insufficient funds",
+      "title": "عفوًا، الأرصدة المالية غير كافية",
       "description": "يرجى التأكد من وجود أرصدة مالية كافية في الحساب."
     },
     "NotEnoughGas": {
-      "title": "Insufficient ETH for network fee",
+      "title": "رصيد غير كافٍ من ETH لتغطية رسوم الشبكة",
       "description": "يرجى إرسال بعض الETH إلى حسابك لسداد قيمة معاملات رمز ال ERC20."
     },
     "NotEnoughBalanceToDelegate": {
-      "title": "Insufficient balance to delegate"
+      "title": "رصيد غير كافٍ للتفويض"
     },
     "NotEnoughBalanceInParentAccount": {
-      "title": "Insufficient balance in the parent account"
+      "title": "رصيد غير كافٍ في الحساب الرئيسي"
     },
     "NotEnoughSpendableBalance": {
       "title": "لا يمكن للحساب أن يقل عن {{minimumAmount}}"
     },
     "NotEnoughBalanceBecauseDestinationNotCreated": {
-      "title": "Minimum of {{minimalAmount}} needed to activate recipient address"
+      "title": "يلزم توفير حد أدنى لا يقل عن {{minimalAmount}} لتفعيل عنوان المتلقي"
     },
     "PairingFailed": {
-      "title": "Pairing unsuccessful",
-      "description": "Please try again or consult our Bluetooth troubleshooting article."
+      "title": "لم يتم إجراء الإقران بنجاح",
+      "description": "يرجى إعادة المحاولة مرة أخرى أو مراجعة المقال الذي نقدمه حول استكشاف وحل مشكلات البلوتوث."
     },
     "PasswordIncorrect": {
-      "title": "Incorrect password",
+      "title": "كلمة مرور غير صحيحة",
       "description": "يرجى إعادة المحاولة."
     },
     "PasswordsDontMatch": {
-      "title": "Password does not match",
+      "title": "كلمة المرور غير مطابقة",
       "description": "يرجى إعادة المحاولة."
     },
     "SelectExchangesLoadError": {
-      "title": "Unable to load",
+      "title": "غير قادر على التحميل",
       "description": "Cannot load the exchanges."
     },
     "SyncError": {
-      "title": "Synchronization error",
+      "title": "خطأ في المزامنة",
       "description": "تعذرت مزامنة بعض الحسابات"
     },
     "TimeoutError": {
-      "title": "Sorry, server took too long to respond",
+      "title": "عفوًا، استغرق خادم البيانات وقتًا أطول من اللازم ليستجيب",
       "description": "يرجى إعادة المحاولة."
     },
     "TimeoutTagged": {
-      "title": "Sorry, server took too long to respond ({{tag}})",
-      "description": "Timeout occurred."
+      "title": "عفوًا، استغرق خادم البيانات وقتًا أطول من اللازم ليستجيب ({{tag}})",
+      "description": "انقضت مهلة الانتظار."
     },
     "TransactionRefusedOnDevice": {
       "title": "تم رفض المعاملة على الجهاز",
@@ -406,37 +406,37 @@
       "description": "{{message}} يرجى إعادة المحاولة. إذا استمرت المشكلة، يرجى حفظ سجلاتك باستخدام الزر أدناه وتقديمها إلى فريق دعم ليدجر (Ledger)."
     },
     "TronNoFrozenForBandwidth": {
-      "title": "No assets to unfreeze",
+      "title": "لا توجد أصول لإلغاء تجميدها",
       "description": "You don't have Bandwidth assets to unfreeze."
     },
     "TronNoFrozenForEnergy": {
-      "title": "No assets to unfreeze",
+      "title": "لا توجد أصول لإلغاء تجميدها",
       "description": "You don't have Energy assets to unfreeze."
     },
     "TronUnfreezeNotExpired": {
-      "title": "Unfreeze is not available yet",
-      "description": "Please wait 3 days after your last Freeze operation."
+      "title": "إلغاء التجميد غير متوفر بعد",
+      "description": "يرجى الانتظار 3 أيام بعد آخر عملية تجميد لديك."
     },
     "TronVoteRequired": {
-      "title": "At least 1 vote is needed"
+      "title": "مطلوب على الأقل صوت واحد"
     },
     "TronInvalidVoteCount": {
       "title": "Vote format is incorrect",
       "description": "You can only vote using round numbers."
     },
     "TronRewardNotAvailable": {
-      "title": "Rewards are not claimable yet",
-      "description": "Please wait 24 hours between claims."
+      "title": "المكافأة غير قابلة للمطالبة بها بعد",
+      "description": "يرجى الانتظار 24 ساعة بين المطالبات."
     },
     "TronNoReward": {
-      "title": "There is no reward to be claimed"
+      "title": "لا توجد مكافأة يمكن المطالبة بها"
     },
     "TronInvalidFreezeAmount": {
       "title": "مبلغ التجميد لا يمكن أن يكون أصغر من 1"
     },
     "TronSendTrc20ToNewAccountForbidden": {
       "title": "Sending TRC20 to the new account will not activate it",
-      "description": "To activate it, first send either TRX or TRC10 to the account. Then it can receive TRC20."
+      "description": "لتفعيله، قم أولاً بإرسال إما TRX أو TRC10 إلى الحساب. وسيتمكن بعدها من تلقي TRC20."
     },
     "TronUnexpectedFees": {
       "title": "يمكن تطبيق رسوم إضافية"
@@ -460,7 +460,7 @@
       "description": "يرجى تمكين المدير على جهازك، ثم حاول مرة أخرى."
     },
     "UserRefusedAddress": {
-      "title": "Receive address rejected",
+      "title": "تم رفض عنوان الاستقبال",
       "description": "قمت برفض العنوان. في حالة الشك، يرجى حفظ سجلاتك باستخدام الزر أدناه وتقديمها إلى فريق دعم ليدجر (Ledger)."
     },
     "UserRefusedDeviceNameChange": {
@@ -484,7 +484,7 @@
       "description": "يرجى المحاولة مرة أخرى مع اتصال أفضل بالشبكة (فشل websocket)."
     },
     "WrongDeviceForAccount": {
-      "title": "Something went wrong",
+      "title": "حدث خطأ ما",
       "description": "Please check that your hardware wallet is set up with the recovery phrase or passphrase associated to the selected account."
     },
     "UnexpectedBootloader": {
@@ -493,7 +493,7 @@
     },
     "UnavailableTezosOriginatedAccountReceive": {
       "title": "لا يمكن الاستلام في حسابات فرعية. يرجى إختيار الحساب الرئيسي.",
-      "description": "If you want to receive funds, please use the parent account"
+      "description": "إذا كنت تريد تلقي الأرصدة المالية، فيرجى استخدام الحساب الرئيسي."
     },
     "UnavailableTezosOriginatedAccountSend": {
       "title": "لا يمكن الإرسال من الحسابات الفرعية بعد",
@@ -546,7 +546,7 @@
       "title": "You have no nominations"
     },
     "PolkadotAllFundsWarning": {
-      "title": "Ensure you have enough balance left for future transaction fees"
+      "title": "تأكد من وجود رصيد كافٍ متبقٍ لتغطية رسوم المعاملات المستقبلية"
     },
     "PolkadotDoMaxSendInstead": {
       "title": "Balance cannot be below 1 DOT. Send max to empty account"
@@ -597,7 +597,7 @@
   "auth": {
     "failed": {
       "biometrics": {
-        "title": "{{biometricsType}} unlock failed",
+        "title": "فشل إلغاء قفل {{biometricsType}}",
         "description": "أدخل كلمة المرور الخاصة بك للمتابعة",
         "authenticate": "Please authenticate with the Ledger Live app"
       },
@@ -612,9 +612,9 @@
       "biometricsTitle": "Please authenticate with the Ledger Live app",
       "title": "مرحباً بك مجددًا",
       "desc": "أدخل كلمة المرور الخاصة بك للمتابعة",
-      "inputPlaceholder": "Type your password",
+      "inputPlaceholder": "اكتب كلمة مرورك",
       "login": "تسجيل دخول",
-      "forgotPassword": "I lost my password"
+      "forgotPassword": "نسيت كلمة المرور"
     },
     "addPassword": {
       "placeholder": "Choose your password",
@@ -626,7 +626,7 @@
     },
     "enableBiometrics": {
       "title": "{{biometricsType}}",
-      "desc": "Unlock with {{biometricsType}}"
+      "desc": "فتح باستخدام {{biometricsType}}"
     }
   },
   "reset": {
@@ -883,7 +883,7 @@
           "title": "كيف تعمل عبارة الاسترداد؟",
           "desc": "عبارة الاسترداد الخاصة بك تعمل كمفتاح رئيسي فريد؛ حيث يستخدمها جهاز لديجر (Ledger) الخاص بك لحساب المفاتيح الخاصة لكل أصل مشفر تملكه.",
           "desc_1": "لاستعادة الوصول إلى الأصل المشفر الخاص بك، يمكن لأي محفظة أن تقوم بحساب نفس المفاتيح الخاصة من عبارة الاسترداد الخاصة بك.",
-          "link": "More about the recovery phrase",
+          "link": "مزيد من المعلومات عن عبارة الاسترداد",
           "title_1": "ماذا لو فقدت الوصول إلى جهاز Nano الخاص بي؟",
           "bullets": {
             "0": {
@@ -1061,7 +1061,7 @@
         }
       },
       "errorInfoModal": {
-        "title": "Something went wrong?",
+        "title": "حدث خطأ ما؟",
         "title_1": "I have an Android",
         "title_2": "Update Android version",
         "desc": "إذا كنت تواجه مشاكل في خاصية البلوتوث مع جهاز Nano X الخاص بك، فيرجى إزالة الاقتران ونسيان جهاز Nano X على هاتفك. ثم حاول الاقتران مرة أخرى.",
@@ -1256,7 +1256,7 @@
     "mbUnit": "{{size}} ميجابايت"
   },
   "time": {
-    "day": "1D",
+    "day": "1يوم",
     "week": "1W",
     "month": "1M",
     "year": "1Y",
@@ -1288,7 +1288,7 @@
       "VOTE": "Voted",
       "FREEZE": "Frozen",
       "UNFREEZE": "Unfrozen",
-      "REWARD": "Claimed reward",
+      "REWARD": "المكافأة التي تمت المطالبة بها",
       "FEES": "الرسوم",
       "OPT_IN": "Opt in",
       "OPT_OUT": "Opt out",
@@ -1298,7 +1298,7 @@
       "APPROVE": "Enabled",
       "BOND": "Bond",
       "UNBOND": "Unbond",
-      "REWARD_PAYOUT": "Reward",
+      "REWARD_PAYOUT": "مُكافأة",
       "SLASH": "Slash",
       "WITHDRAW_UNBONDED": "Unbonded Withdrawal",
       "NOMINATE": "Nomination",
@@ -1353,7 +1353,7 @@
       "rewardAmount": "المبلغ المحصل",
       "memo": "Memo",
       "assetId": "Asset ID",
-      "rewards": "Earned rewards",
+      "rewards": "المكافآت المكتسبة",
       "bondedAmount": "المبلغ المقيد",
       "unbondedAmount": "المبلغ الغير مقيد",
       "withdrawUnbondedAmount": "سحب المبلغ الغير مقيد",
@@ -1399,7 +1399,7 @@
       "seeLess": "عرض عدد أقل من الحسابات الفرعية"
     },
     "send": "إرسال",
-    "receive": "Receive",
+    "receive": "تلقي",
     "buy": "شراء",
     "walletconnect": "WalletConnect",
     "sell": "بيع",
@@ -1412,7 +1412,7 @@
       "descWithBuy": "تأكد من تثبيت تطبيق <1><0>{{managerAppName}}</0></1> حتى تتمكن من شراء أو تلقي <3><0>{{currencyTicker}}</0></3>",
       "descToken": "تأكد من تثبيت تطبيق <1><0>{{managerAppName}}</0></1> وابدأ تلقي <3><0>{{currencyTicker}}</0></3> و <5><0>{{tokenType}}</0> رموز التوكن</5>",
       "buttons": {
-        "receiveFunds": "Receive",
+        "receiveFunds": "تلقي",
         "buyCrypto": "شراء"
       }
     },
@@ -1498,7 +1498,7 @@
       }
     },
     "claimReward": {
-      "sectionLabel": "Rewards",
+      "sectionLabel": "المكافآت",
       "cta": "Claim"
     },
     "undelegation": {
@@ -1606,7 +1606,7 @@
         "bullet0": "Clicks",
         "bullet1": "In-app page visits",
         "bullet2": "Redirect to webpage",
-        "bullet3": "Actions: send, receive, lock, etc",
+        "bullet3": "الإجراءات: الإرسال والاستلام والقفل وما إلى ذلك",
         "bullet4": "End of page scroll",
         "bullet5": "تثبيت التطبيقات وإلغاؤها والإصدار",
         "bullet6": "Number of accounts, currencies and operations",
@@ -1741,28 +1741,28 @@
       "title": "Edit fees"
     },
     "receive": {
-      "title": "Receive",
-      "titleReadOnly": "Unverified address",
+      "title": "تلقي",
+      "titleReadOnly": "عنوان لم يتم التحقق منه",
       "headerTitle": "أصل مشفر",
       "titleDevice": "توصيل الجهاز",
       "verifySkipped": "لم يتم تأكيد عنوانك للاستلام على جهاز ليدجر الخاص بك. يرجى التحقق من عنوان {{accountType}} لتظل آمنًا.",
-      "verifyPending": "Please verify that the {{currencyName}} address displayed on your device exactly matches the one displayed on your phone.",
+      "verifyPending": "يرجى التحقق من أن عنوان {{currencyName}} المعروض على جهازك يتطابق تمامًا مع العنوان المعروض على هاتفك.",
       "verified": "تم تأكيد العنوان. تحقق مرة أخرى إذا قمت بنسخه أو إجراء مسح ضوئي له.",
-      "verifyAgain": "Check again",
-      "noAccount": "No account found",
-      "address": "Address for account",
-      "copyAddress": "Copy address",
-      "shareAddress": "Share address",
-      "addressCopied": "Address copied!",
+      "verifyAgain": "تحقق مرةً اخرى",
+      "noAccount": "لم يتم العثور على حساب",
+      "address": "عنوان الحساب",
+      "copyAddress": "نسخ العنوان",
+      "shareAddress": "عنوان المشاركة",
+      "addressCopied": "تم نسخ العنوان!",
       "notSynced": {
-        "text": "Synchronizing",
+        "text": "تتم المزامنة",
         "desc": "قد يستغرق هذا بعض الوقت إذا كان لديك العديد من المعاملات أو إذا كان اتصالك بالإنترنت بطيئاً."
       },
       "readOnly": {
-        "title": "Receive",
-        "text": "Please be careful",
-        "desc": "You are about to view an address which was not verified. Verify addresses on your device to stay secure.",
-        "verify": "The address of {{accountType}} was not verified. Verify addresses on your device to stay secure."
+        "title": "تلقي",
+        "text": "يرجى توخي الحذر",
+        "desc": "أنت على وشك أن تشاهد عنوان لم يتم التحقق منه. تحقق من العناوين على جهازك لتظل آمنًا.",
+        "verify": "لم يتم التحقق من عنوان {{accountType}}. تحقق من العناوين على جهازك لتظل آمنًا."
       }
     },
     "exchange": {
@@ -1983,7 +1983,7 @@
       },
       "howDoesLendingWork": "كيف يعمل الإقراض",
       "dashboard": {
-        "tabTitle": "Dashboard",
+        "tabTitle": "لوحة المعلومات",
         "assetsTitle": "أصول للإقراض",
         "accountsTitle": "Approved accounts",
         "emptySateDescription": "You can lend assets directly from your Ethereum accounts and earn interest.",
@@ -2045,7 +2045,7 @@
           "description": "لإيداع الأموال وإقراض العملات المشفرة، فأنت بحاجة إلى حساب {{ name }}. يرجى تلقي الأموال على عنوان إيثيروم الخاص بك."
         },
         "buttons": {
-          "receive": "Receive {{ name }}",
+          "receive": "تلقي {{ name }}",
           "buy": "Buy {{ name }}"
         }
       },
@@ -2321,7 +2321,7 @@
       "stepRange": "خطوة {{currentStep}} من {{totalSteps}}"
     },
     "validation": {
-      "success": "Your rewards were added to the available balance.",
+      "success": "تمت إضافة مكافآتك إلى الرصيد المتاح.",
       "button": {
         "done": "تم",
         "cta": "رؤية التفاصيل"
@@ -2437,9 +2437,9 @@
     "allowAppPermissionSubtitleToken": "لإدارة رموز توكن {{token}} الخاصة بك",
     "allowManagerPermission": "Allow {{wording}} on your device",
     "loading": "Loading...",
-    "turnOnAndUnlockDevice": "Turn on and unlock your device",
+    "turnOnAndUnlockDevice": "قم بتشغيل جهازك وإلغاء قفله",
     "connectAndUnlockDevice": "قم بتوصيل جهازك وإلغاء قفله",
-    "unlockDevice": "Unlock your device",
+    "unlockDevice": "إلغاء قفل جهازك",
     "outdated": "إصدار التطبيق قديم",
     "outdatedDesc": "يوجد تحديث هام لتطبيق {{appName}} على جهازك. يُرجى الذهاب إلى المدير لتحديثه.",
     "quitApp": "Quit the application on your device",
@@ -2472,7 +2472,7 @@
       "label": "اكتشاف جهاز Nano الخاص بك تلقائيًا"
     },
     "deviceNotFoundPairNewDevice": "إضافة جهاز ليدجر Nano X جديد",
-    "headerDescription": "Please make sure your {{productName}} is unlocked with Bluetooth enabled",
+    "headerDescription": "يرجى التأكد من إلغاء قفل جهاز {{productName}} الخاص بك مع تمكين خاصية بلوتوث",
     "usb": "... أو قم بالتوصيل عبر كابل USB",
     "usbLabel": "قم بتوصيل كابل USB وأدخل رمز الPIN على جهازك",
     "withoutDeviceHeader": "I don't have my device with me",
@@ -2481,8 +2481,8 @@
       "connecting": {
         "title": "جاري توصيل {{deviceName}}",
         "description": {
-          "ble": "Please make sure your {{productName}} is unlocked and within range",
-          "usb": "Please make sure your {{productName}} is unlocked"
+          "ble": "يرجى التأكد من إلغاء قفل جهاز {{productName}} مع إبقائه ضمن النطاق",
+          "usb": "يرجى التأكد من إلغاء قفل جهاز {{productName}} الخاص بك"
         }
       },
       "genuineCheck": {
@@ -2492,7 +2492,7 @@
         "title": "Checking if the device is genuine..."
       },
       "dashboard": {
-        "title": "Return to the Dashboard on your {{productName}}"
+        "title": "العودة إلى لوحة المعلومات في {{productName}}"
       },
       "currencyApp": {
         "title": "Open the {{managerAppName}} app on your {{productName}}",
@@ -2507,8 +2507,8 @@
         "description": ""
       },
       "receiveVerify": {
-        "title": "Verify address on device",
-        "description": "Please verify that the {{currencyName}} address displayed in Ledger Live exactly matches the one displayed on your Ledger device.",
+        "title": "تحقق من العنوان على الجهاز",
+        "description": "يرجى التحقق من أن العنوان {{currencyName}} المعروض في Ledger Live يطابق تمامًا العنوان المعروض على جهاز ليدجر الخاص بك.",
         "action": "متابعة"
       },
       "getDeviceName": {
@@ -2543,11 +2543,11 @@
     },
     "ScanningHeader": {
       "title": "Looking for devices",
-      "desc": "Please make sure your {{productName}} is unlocked and Bluetooth is enabled."
+      "desc": "يرجى التأكد من إلغاء قفل جهاز {{productName}} الخاص بك مع تمكين خاصية البلوتوث."
     },
     "ScanningTimeout": {
       "title": "Sorry, no device was found",
-      "desc": "Please make sure your {{productName}} is unlocked and Bluetooth is enabled."
+      "desc": "يرجى التأكد من إلغاء قفل جهاز {{productName}} الخاص بك مع تمكين خاصية البلوتوث."
     },
     "bypassGenuine": "Use anyway",
     "alreadyPaired": "Already paired"
@@ -2756,11 +2756,11 @@
   "algorand": {
     "token": "ASA (Assets)",
     "claimRewards": {
-      "title": "Rewards",
+      "title": "المكافآت",
       "button": "Claim",
       "stepperHeader": {
-        "info": "Earn rewards",
-        "starter": "Rewards",
+        "info": "اكسب المكافآت",
+        "starter": "المكافآت",
         "connectDevice": "توصيل الجهاز",
         "verification": "Verification",
         "stepRange": "خطوة {{currentStep}} من {{totalSteps}}"
@@ -2768,25 +2768,25 @@
       "flow": {
         "steps": {
           "info": {
-            "description": "Delegate your Algo to earn rewards while keeping full security and control on your assets.",
+            "description": "قم بتفويض Algo الخاص بك لكسب المكافآت مع الحفاظ على الأمان الكامل والتحكم في أصولك.",
             "steps": {
-              "0": "A minimum balance of 1 Algo is required to receive rewards.",
-              "1": "Increase the account’s balance to increase rewards.",
-              "2": "Perform a transaction to or from the account to claim rewards."
+              "0": "مطلوب رصيد لا يقل عن 1 Algo لتلقي المكافآت.",
+              "1": "قم بزيادة رصيد الحساب لزيادة المكافآت.",
+              "2": "قم بتنفيذ معاملة من أو إلى الحساب للحصول على مكافآت."
             },
-            "howItWorks": "How rewards work",
-            "cta": "Receive Algo"
+            "howItWorks": "كيف تعمل المكافآت",
+            "cta": "تلقي Algo"
           },
           "starter": {
             "title": "تهانينا! لقد كسبت {{amount}}. قم بالمتابعة للمطالبة بمكافآتك.",
-            "howItWorks": "How rewards work",
+            "howItWorks": "كيف تعمل المكافآت",
             "warning": "You will be prompted to generate an empty transaction to your account. This will add your current rewards to your balance at the minimal cost of the transaction fees.",
             "cta": "متابعة"
           },
           "verification": {
             "success": {
-              "title": "Rewards successfully claimed!",
-              "text": "Your rewards were added to your available balance.",
+              "title": "تمت المطالبة بالمكافآت بنجاح!",
+              "text": "تمت إضافة مكافآتك إلى رصيدك المتاح.",
               "cta": "Go to account"
             },
             "pending": {
@@ -2849,15 +2849,15 @@
     "delegation": {
       "delegationEarn": "You can earn ATOM rewards by delegating your assets.",
       "info": "How Delegation works",
-      "claimRewards": "Claim rewards",
+      "claimRewards": "المطالبة بالمكافآت",
       "claimAvailableRewards": "المطالبة ب {{amount}}",
       "header": "Delegation(s)",
       "Amount": "المبلغ",
-      "noRewards": "No rewards available",
+      "noRewards": "لا توجد مكافآت متاحة",
       "delegate": "Delegate",
       "undelegate": "Undelegate",
       "redelegate": "Redelegate",
-      "reward": "Claim rewards",
+      "reward": "المطالبة بالمكافآت",
       "estYield": "Est. yield",
       "stepperHeader": {
         "starter": "Earn rewards",
@@ -2915,7 +2915,7 @@
       },
       "drawer": {
         "status": "Status",
-        "rewards": "Rewards",
+        "rewards": "المكافآت",
         "active": "Active",
         "inactive": "Inactive",
         "completionDate": "Completion date",
@@ -2990,8 +2990,8 @@
     },
     "claimRewards": {
       "stepperHeader": {
-        "validator": "Select reward to collect",
-        "method": "Claim rewards",
+        "validator": "اختر المكافأة التي ستحصل عليها",
+        "method": "المطالبة بالمكافآت",
         "summary": "Summary",
         "selectDevice": "اختار جهاز",
         "connectDevice": "توصيل الجهاز",
@@ -3007,7 +3007,7 @@
             "claimRewardInfo": "They will be claimed now and added to your available balance.",
             "claimRewardCompoundInfo": "They will be claimed now and automatically delegated to the same validator.",
             "compoundOrCashIn": "Compound or Cash in?",
-            "claimRewardTooltip": "Rewards will be added to the available balance",
+            "claimRewardTooltip": "سيتم إضافة المكافآت إلى الرصيد المتاح",
             "claimRewardCompoundTooltip": "سيتم إضافة المكافآت إلى المبلغ المفوض",
             "cta": "متابعة"
           },
@@ -3418,15 +3418,15 @@
     "delegatedAccount": "Delegated account",
     "duration": "Duration",
     "transactionID": "Transaction ID",
-    "receive": "Receive more",
+    "receive": "تلقي المزيد",
     "changeValidator": "تغيير المدقق",
     "endDelegation": "End delegation",
-    "durationForDays0": "Just now",
-    "durationForDays": "For a day",
-    "durationForDays_plural": "For {{count}} days",
-    "durationDays0": "Just now",
-    "durationDays": "1 day",
-    "durationDays_plural": "{{count}} days",
+    "durationForDays0": "للتو",
+    "durationForDays": "ليوم واحد",
+    "durationForDays_plural": "لمدة {{count}} أيام",
+    "durationDays0": "للتو",
+    "durationDays": "1 يوم",
+    "durationDays_plural": "{{count}} أيام",
     "selectValidatorTitle": "اختار المدقق",
     "started": {
       "title": "Earn rewards",
@@ -3569,7 +3569,7 @@
     "disconnected": "تم قطع الاتصال",
     "warningdisconnected": "هناك مشكلة في الاتصال بين dApp وWalletConnect وليدجر لايف (Ledger Live). انتظر بضع لحظات أو أعد تشغيل الاتصال",
     "info": "You can now access the {{name}} dApp on your desktop.",
-    "warning": "Sharing receive addresses from dApp is not secure. Always use Ledger Live when sharing your address to receive funds.",
+    "warning": "مشاركة عناوين التلقى من dApp غير آمنة. استخدم دائمًا Ledger Live عند مشاركة عنوانك لتلقي الأموال.",
     "isconnecting": "يجري الاتصال، يرجى الانتظار...",
     "disconnect": "قطع الاتصال",
     "retry": "إعادة المحاولة",
