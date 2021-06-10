@@ -18,7 +18,7 @@ import type { Privacy } from "../../reducers/settings";
 import { withReboot } from "../Reboot";
 import LText from "../../components/LText";
 import TranslatedError from "../../components/TranslatedError";
-import { Button } from "../../components/Button";
+import { BaseButton } from "../../components/Button";
 import PoweredByLedger from "../../screens/Settings/PoweredByLedger";
 import BottomModal from "../../components/BottomModal";
 import HardResetModal from "../../components/HardResetModal";
@@ -82,7 +82,7 @@ class FormFooter extends PureComponent<*> {
     } = this.props;
     return inputFocused ? (
       <TouchableWithoutFeedback>
-        <Button
+        <BaseButton
           event="SubmitUnlock"
           title={<Trans i18nKey="auth.unlock.login" />}
           type="primary"
