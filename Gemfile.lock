@@ -272,6 +272,7 @@ DEPENDENCIES
   fastlane
   fastlane-plugin-load_json
   fastlane-plugin-versioning_android
+  rake (= 13.0.3)
 
 BUNDLED WITH
    2.2.3
