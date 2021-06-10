@@ -363,7 +363,7 @@
       "title": "Le solde ne peut pas être inférieur à {{minimumAmount}}."
     },
     "NotEnoughBalanceBecauseDestinationNotCreated": {
-      "title": "Un minimum de {{minimalAmount}} est nécessaire pour activer l'adresse du bénéficiaire"
+      "title": "Un minimum de {{minimalAmount}} est nécessaire pour activer l'adresse du bénéficiaire."
     },
     "PairingFailed": {
       "title": "Échec du couplage",
@@ -2263,7 +2263,7 @@
       "stepRange": "Étape {{currentStep}} sur {{totalSteps}}"
     },
     "info": {
-      "description": "Gelez des TRX pour gagner des récompenses en toute sécurité en gardant le contrôle de vos actifs.",
+      "description": "Gelez vos TRX pour gagner des récompenses en toute sécurité en gardant le contrôle de vos actifs.",
       "steps": {
         "0": "Vous conservez la propriété de vos actifs délégués.",
         "1": "Vous pouvez dégeler vos actifs après 3 jours.",
@@ -2650,7 +2650,7 @@
         "description_one": "L'application {{dependency}} sera également installée car elle est requise pour l'application {{app}}.",
         "description_two": "Merci d'appuyer sur Continuer pour installer les applications {{app}} et {{dependency}}."
       },
-      "continueInstall": "Installer des applications"
+      "continueInstall": "Installer les applications"
     },
     "update": {
       "title": "{{number}} mise à jour d'application ",
@@ -2685,7 +2685,7 @@
       "all": "Toutes",
       "installed": "Applications",
       "not_installed": "Non installée",
-      "supported": "Prise en charge par Live",
+      "supported": "Prise en charge par Ledger Live",
       "updatable": "Mise à jour possible",
       "apply": "Appliquer"
     },
