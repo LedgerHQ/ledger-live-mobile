@@ -1141,7 +1141,7 @@
       "setPassword": "Définir le mot de passe",
       "modal": {
         "step1": "Gardez votre mot de passe en sécurité. Ne le partagez pas.",
-        "step2": "Gardez votre mot de passe en sécurité. Si vous le perdrez, vous devrez réinitialiser Ledger Live et réinstaller vos comptes.",
+        "step2": "Gardez votre mot de passe en sécurité. Si vous le perdez, vous devrez réinitialiser Ledger Live et réinstaller vos comptes.",
         "step3": "La réinitialisation de Ledger Live n'a pas d'effet sur vos crypto-actifs."
       }
     },
