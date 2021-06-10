@@ -1566,7 +1566,7 @@
     },
     "status": {
       "title": "Statut de Ledger",
-      "desc": "Vérifiez l'état de notre système"
+      "desc": "Vérifiez l'état de notre système."
     }
   },
   "settings": {
@@ -1892,7 +1892,7 @@
           "payoutNetworkFeesTooltip": "Ce montant n'apparaîtra pas sur votre appareil.",
           "receive": "Montant",
           "receiveFloat": "Montant à recevoir avant les frais de service",
-          "provider": "Fournisseur",
+          "provider": "Prestataire",
           "method": "Taux",
           "fees": "Frais maximaux",
           "disclaimer": {
@@ -1905,8 +1905,8 @@
         }
       },
       "operationDetails": {
-        "swapId": "Identifiant de Swap",
-        "provider": "Fournisseur",
+        "swapId": "Identifiant du Swap",
+        "provider": "Prestataire",
         "date": "Date",
         "from": "De",
         "fromAmount": "Montant envoyé",
@@ -1965,7 +1965,7 @@
         "amountSupplied": "Montant déposé",
         "amountSuppliedTooltip": "Montant prêté sur le réseau",
         "currencyAPY": "APY de la devise",
-        "currencyAPYTooltip": "Rendement annuel et composé d'un dépôt",
+        "currencyAPYTooltip": "Rendement annuel d'un dépôt sans cesse capitalisé",
         "accruedInterests": "Solde des intérêts",
         "accruedInterestsTooltip": "Intérêts produits par vos actifs prêtés",
         "interestEarned": "Intérêts gagnés",
@@ -2017,7 +2017,7 @@
       "terms": {
         "label": "Prêter des cryptos",
         "title": "Prêter vos actifs sur le protocole Compound",
-        "description": "Le protocole Compound vous permet de prêter et d'emprunter des actifs sur le réseau Ethereum. Vous pouvez prêter des actifs et gagner des intérêts directement depuis votre compte Ledger.",
+        "description": "Le protocole Compound vous permet de prêter et d'emprunter des actifs sur le réseau Ethereum. Vous pouvez prêter vos actifs et gagner des intérêts directement depuis votre compte Ledger.",
         "switchLabel": "J'ai lu et j'accepte les <0><0>Conditions d'utilisation</0></0>."
       },
       "info": {
@@ -2073,7 +2073,7 @@
           "noEnabledAccounts": "Vous devez approuver un compte avant de pouvoir prêter des actifs."
         },
         "enable": {
-          "summary": "<0>J'autorise le contrat intelligent </0><1>{{contractName}}</1><0> d'accéder à mon compte </0><1>{{accountName}}</1><0> pour un montant de</0><1>{{amount}}</1>.",
+          "summary": "<0>J'autorise le contrat intelligent </0><1>{{contractName}}</1><0> à accéder à mon compte </0><1>{{accountName}}</1><0> pour un montant de</0><1>{{amount}}</1>.",
           "limit": "limité : {{amount}}",
           "noLimit": "{{assetName}} sans limite",
           "contractName": "Compound {{currencyName}}",
