@@ -531,7 +531,7 @@
       "description": "يجب عليك تأكيد المبادلة قبل انتهاء مدة العداد. يبقى سعر الصرف ساري المفعول لمدة محددة."
     },
     "PolkadotElectionClosed": {
-      "title": "Validators election must be closed"
+      "title": "يجب إغلاق باب انتخاب المدققين"
     },
     "PolkadotNotValidator": {
       "title": "Some selected addresses are not validators"
@@ -558,7 +558,7 @@
       "title": "You have exceeded the unbond limit"
     },
     "PolkadotValidatorsRequired": {
-      "title": "You must select at least one validator"
+      "title": "يجب عليك تحديد مدقق واحد على الأقل"
     },
     "generic": {
       "title": "{{message}}",
@@ -1068,7 +1068,7 @@
         "desc_1": "قد يستغرق الأمر بعض الوقت قبل عرض طلب اقران بلوتوث. احرص على التحقق من كود الاقران وقم بالتأكيد عليه على كل من جهاز Nano X وهاتفك.",
         "desc_2": "تحقق من إعدادات البلوتوث بهاتفك لمعرفة ما إذا تم اكتشاف جهاز ليدجر Nano X أم لا. إذا لم يتم اكتشافه، فتأكد من تشغيل خاصية البلوتوث على ليدجر Nano X.",
         "desc_3": "Location services",
-        "desc_4": "If the Ledger Nano X is not detected in your mobile app when trying to pair it, please try the following solution:",
+        "desc_4": "إذا لم يتم اكتشاف ليدجر Nano X في تطبيق الجوّال لديك عند محاولة إقرانه، فيرجى تجربة الحل التالي:",
         "desc_5": "Ledger mobile app asks you to allow location services when it's not enabled yet, but on a few phone models, this is not always properly detected. Please note that Ledger mobile app never uses your location information, this permission is simply required for Bluetooth on Android.",
         "desc_6": "Some users have reported having fixed their connection issues by updating the Android version running on their phone to a newer one. Please check with your phone manufacturer whether an update is available.",
         "link": "معرفة المزيد",
@@ -1083,7 +1083,7 @@
             "label": "Return to the mobile app."
           },
           "3": {
-            "label": "Check whether your Nano X is detected."
+            "label": "تحقق مما إذا كان قد تم اكتشاف جهاز Nano X الخاص بك."
           }
         }
       }
@@ -1161,7 +1161,7 @@
         "title": "As a Ledger user, my crypto is stored:",
         "answers": {
           "correct": "On the blockchain",
-          "wrong": "على جهاز نانو الخاص بي"
+          "wrong": "على جهاز Nano الخاص بي"
         },
         "modal": {
           "text": "Your crypto is always stored on the blockchain. Your hardware wallet only holds your private key, which gives you access to your crypto.",
@@ -1180,13 +1180,13 @@
         }
       },
       "privateKey": {
-        "title": "When I connect my Nano to the Ledger app, my private key is...",
+        "title": "عندما أقوم بتوصيل جهاز Nano الخاص بي بتطبيق ليدجر، فإن مفتاحي الخاص هو...",
         "answers": {
           "correct": "Still offline",
           "wrong": "اتصال وجيز بالإنترنت"
         },
         "modal": {
-          "text": "Your private key always remains offline in your hardware wallet. Even when connected to your Nano, the Ledger app cannot access your private key. You must physically authorize every transaction on your device.",
+          "text": "يظل مفتاحك الخاص دائمًا في وضع عدم الاتصال في محفظة جهازك. حتى عندما يتصل تطبيق ليدجر بجهاز Nano الخاص بك، فلا يمكنه الوصول إلى مفتاحك الخاص. يجب عليك أن تقوم بتفويض كل معاملة على جهازك يدويًا.",
           "cta": "Finish quiz"
         }
       },
@@ -1225,14 +1225,14 @@
       "afternoon": "مساء الخير"
     },
     "transactionsPendingConfirmation": {
-      "title": "Unsynchronized balance",
+      "title": "رصيد غير متزامن",
       "desc": "لم يتم تأكيد بعض المعاملات بعد. ستظهر هذه في رصيدك ويمكن استخدامها بعد تأكيدها."
     },
     "summary": "Here is the summary of your account",
     "summary_plural": "تمت مزامنة حساباتك ({{count}}).",
     "emptyState": {
       "noAppsTitle": "تثبيت تطبيق على جهازي",
-      "noAppsDesc": "قم بتثبيت التطبيقات على جهازك قبل إضافة حسابات في ليدجر لايف(Ledger Live). انتقل إلى المدير لتثبيت التطبيقات.",
+      "noAppsDesc": "قم بتثبيت التطبيقات على جهازك قبل إضافة حسابات في Ledger Live. انتقل إلى المدير لتثبيت التطبيقات.",
       "noAccountsTitle": "You don't have any accounts…",
       "noAccountsDesc": "Please add accounts to your Portfolio.",
       "buttons": {
@@ -1338,7 +1338,7 @@
       "address": "عنوان",
       "votes": "Votes ({{number}})",
       "votesAddress": "<0>{{votes}}</0> to <2>{{name}}</2>",
-      "validators": "Validators",
+      "validators": "المدققون",
       "delegated": "تفويض ({{amount}})",
       "delegatedTo": "Delegated to",
       "delegatedAmount": "المبلغ المفوض",
@@ -1359,7 +1359,7 @@
       "withdrawUnbondedAmount": "سحب المبلغ الغير مقيد",
       "palletMethod": "Method",
       "transferAmount": "مبلغ التحويل",
-      "validatorsCount": "Validators ({{number}})"
+      "validatorsCount": "({{number}}) مدققين"
     },
     "multipleAddresses": "لماذا عناوين متعددة؟"
   },
@@ -1869,7 +1869,7 @@
         "noApp": {
           "title": "التطبيق {{appName}} غير مثبت",
           "desc": "يرجى الانتقال إلى المدير لتثبيت تطبيق {{appName}}.",
-          "cta": "Go to Manager",
+          "cta": "الانتقال إلى المدير",
           "close": "إغلاق"
         },
         "noAccounts": {
@@ -1881,7 +1881,7 @@
         "outdatedApp": {
           "title": "App update available",
           "desc": "You need to update the {{appName}} app.",
-          "cta": "Go to Manager",
+          "cta": "الانتقال إلى المدير",
           "close": "إغلاق"
         },
         "summary": {
@@ -1923,12 +1923,12 @@
       "missingApp": {
         "title": "يُرجى تثبيت تطبيق Exchange على جهازك",
         "description": "انتقل إلى المدير وقم بتثبيت تطبيق Exchange لمبادلة الأصول",
-        "button": "Go to Manager"
+        "button": "الانتقال إلى المدير"
       },
       "outdatedApp": {
         "title": "Please update the Exchange app on your device",
-        "description": "Go to manager and update Exchange app to swap assets",
-        "button": "Go to Manager"
+        "description": "انتقل إلى المدير وقم بتحديث تطبيق Exchange لمبادلة الأصول",
+        "button": "الانتقال إلى المدير"
       },
       "emptyState": {
         "title": "No {{currency}} account",
@@ -1936,12 +1936,12 @@
         "CTAButton": "إضافة حساب"
       },
       "history": {
-        "tab": "History",
+        "tab": "السجل",
         "exportButton": "Export operations",
         "exportFilename": "عمليات المبادلة",
         "empty": {
           "title": "ستظهر مبادلاتك السابقة هنا",
-          "desc": "Either you have not made any swaps yet, or Ledger Live has been reset in the meantime."
+          "desc": "إما أنك لم تقم بأي مبادلات حتى الآن، أو تمت إعادة تعيين Ledger Live في الوقت الحالي."
         }
       },
       "platform": {
@@ -2010,8 +2010,8 @@
         "cta": "إقراض أصل"
       },
       "history": {
-        "tabTitle": "History",
-        "description": "View the history of all your loan transactions.",
+        "tabTitle": "السجل",
+        "description": "عرض سجل جميع المعاملات الخاصة بقروضك.",
         "cta": "إقراض أصل"
       },
       "terms": {
@@ -2441,7 +2441,7 @@
     "connectAndUnlockDevice": "قم بتوصيل جهازك وإلغاء قفله",
     "unlockDevice": "Unlock your device",
     "outdated": "App version outdated",
-    "outdatedDesc": "An important update is available for the {{appName}} application on your device. Please go to the Manager to update it.",
+    "outdatedDesc": "يوجد تحديث هام لتطبيق {{appName}} على جهازك. يُرجى الذهاب إلى المدير لتحديثه.",
     "quitApp": "Quit the application on your device",
     "appNotInstalled": "يُرجى تثبيت تطبيق {{appName}}",
     "appNotInstalled_plural": "الرجاء تثبيت تطبيقات {{appName}}",
@@ -2451,11 +2451,11 @@
     },
     "confirmSwap": {
       "title": "تأكيد عملية المبادلة على الجهاز",
-      "alert": "Verify the Swap details on your device before sending it. The addresses are exchanged securely so you don’t have to verify them."
+      "alert": "تحقق من تفاصيل المبادلة على جهازك قبل إرسالها. يتم تبادل العناوين بشكل آمن حتى لا تضطر إلى التحقق منها."
     },
     "confirmSell": {
       "title": "تأكيد عملية المبادلة على الجهاز",
-      "alert": "Verify the Sell details on your device before sending it. The addresses are exchanged securely so you don’t have to verify them."
+      "alert": "تحقق من تفاصيل البيع على جهازك قبل إرسالها. يتم تبادل العناوين بشكل آمن حتى لا تضطر إلى التحقق منها."
     },
     "button": {
       "openManager": "Open Manager"
@@ -2469,9 +2469,9 @@
     "title": "Pair new device",
     "bluetooth": {
       "title": "الاتصال عبر البلوتوث...",
-      "label": "Detect your Nano automatically"
+      "label": "اكتشاف جهاز Nano الخاص بك تلقائيًا"
     },
-    "deviceNotFoundPairNewDevice": "Add new Ledger Nano X",
+    "deviceNotFoundPairNewDevice": "إضافة جهاز ليدجر Nano X جديد",
     "headerDescription": "Please make sure your {{productName}} is unlocked with Bluetooth enabled",
     "usb": "... أو قم بالتوصيل عبر كابل USB",
     "usbLabel": "قم بتوصيل كابل USB وأدخل رمز الPIN على جهازك",
@@ -2499,7 +2499,7 @@
         "description": "",
         "footer": {
           "appInstalled": "التطبيق ليس مثبتًا لديك",
-          "goManager": "Go to the Manager"
+          "goManager": "الانتقال إلى المدير"
         }
       },
       "accountApp": {
@@ -2539,7 +2539,7 @@
     },
     "GenuineCheck": {
       "title": "Device authentication check",
-      "accept": "Please don't turn off your Nano X. Make sure you allow <1>Ledger Manager</1>."
+      "accept": "يرجى عدم إيقاف تشغيل Nano X. تأكد من أنك تسمح ب <1>مدير ليدجر</1>."
     },
     "ScanningHeader": {
       "title": "Looking for devices",
@@ -2575,15 +2575,15 @@
     "noAppNeededForToken": "تثبيت تطبيق {{appName}} لـ {{tokenName}}",
     "tokenAppDisclaimer": "{{tokenName}} هو رمز توكن {{tokenType}} باستخدام تطبيق {{appName}}. لإدارة {{tokenName}}، قم <1>بتثبيت تطبيق {{appName}}</1> وأرسل رموز التوكن <3>إلى حسابك على {{appName}}</3>.",
     "tokenAppDisclaimerInstalled": "{{tokenName}} هو رمز توكن {{tokenType}} باستخدام تطبيق {{appName}}. لإدارة {{tokenName}}، <1>افتح تطبيق {{appName}}</1> وأرسل رموز التوكن <3>إلى حسابك على {{appName}}</3>.",
-    "goToAccounts": "Go to Accounts",
+    "goToAccounts": "الذهاب إلى الحسابات",
     "intallParentApp": "تثبيت تطبيق {{appName}}",
     "readOnly": {
       "title": "Nano X",
-      "description": "Setup Ledger Live with your Ledger Nano X to install apps, create accounts and make secure transactions wherever you go.",
-      "question": "Do you have your Ledger Nano X?",
-      "button": "Start Nano X setup",
-      "noDevice": "No device?",
-      "buy": "Buy a Ledger Nano X"
+      "description": "قم بإعداد Ledger Live باستخدام جهاز ليدجر Nano X لتثبيت التطبيقات وإنشاء حسابات وإجراء معاملات آمنة أينما ذهبت.",
+      "question": "هل لديك جهاز ليدجر Nano X الخاص بك؟",
+      "button": "بدء إعداد جهاز Nano X",
+      "noDevice": "ليس لديك جهاز؟",
+      "buy": "شراء جهاز ليدجر Nano X"
     },
     "appList": {
       "title": "App catalog",
@@ -2592,7 +2592,7 @@
       "searchAppsCatalog": "ابحث عن التطبيق في القائمة...",
       "searchAppsInstalled": "البحث في التطبيقات المثبتة...",
       "noAppsInstalled": "لا توجد تطبيقات مثبتة على جهازك",
-      "noAppsDescription": "Go to the App catalog to install apps",
+      "noAppsDescription": "الذهاب إلى كتالوج التطبيق لتثبيت التطبيقات",
       "noResultsFound": "No results found",
       "noResultsDesc": "Please verify the spelling and try again",
       "versionNew": "(NEW{{newVersion}})"
@@ -2884,7 +2884,7 @@
             "cta": "متابعة"
           },
           "validator": {
-            "validators": "Validators",
+            "validators": "المدققون",
             "myDelegations": "My delegations",
             "cta": "متابعة",
             "estYield": "Est. yield: {{amount}}",
@@ -2925,7 +2925,7 @@
     "redelegation": {
       "estYield": "est. yield",
       "stepperHeader": {
-        "validator": "Choose new validator",
+        "validator": "اختر مدققًا جديدًا",
         "amountSubTitle": "المبلغ المراد إعادة تفويضه",
         "amountTitle": "{{from}} ← {{to}}",
         "summary": "Summary",
@@ -2936,7 +2936,7 @@
       "flow": {
         "steps": {
           "validator": {
-            "validators": "Validators",
+            "validators": "المدققون",
             "myDelegations": "My delegations",
             "cta": "متابعة",
             "estYield": "Est. yield: {{amount}}",
@@ -3201,8 +3201,8 @@
       "inactiveInfo": "This validator is elected but is not collecting rewards on your bonded assets.",
       "waiting": "Unelected",
       "waitingInfo": "This validator is not elected, therefore is not collecting rewards.",
-      "notValidator": "Not a validator",
-      "notValidatorInfo": "This address is no longer a validator",
+      "notValidator": "ليس مدققًا",
+      "notValidatorInfo": "لم يعد هذا العنوان مدققًا",
       "elected": "Elected",
       "electedInfo": "This validator is elected and is collecting rewards for its nominators.",
       "nominators": "Nominators",
@@ -3249,7 +3249,7 @@
     },
     "nominate": {
       "stepperHeader": {
-        "validators": "Validators to nominate",
+        "validators": "المدققون المراد ترشيحهم",
         "selectDevice": "اختار جهاز",
         "connectDevice": "توصيل الجهاز",
         "stepRange": "خطوة {{currentStep}} من {{totalSteps}}"
@@ -3257,11 +3257,11 @@
       "steps": {
         "validators": {
           "myNominations": "My nominations",
-          "electedValidators": "Elected validators",
-          "waitingValidators": "Unelected validators",
+          "electedValidators": "المدققون المنتخبون",
+          "waitingValidators": "المدققون غير المنتخبين",
           "noResultsFound": "لم يتم العثور على مدققين لـ <0>{{search}}</0>",
           "selected": "{{selected}} out of {{total}} selected",
-          "notValidatorsRemoved": "You have nominated {{count}} addresses who are no longer validators. They will automatically be removed from your nominate transaction.",
+          "notValidatorsRemoved": "قمت بترشيح {{count}} من العناوين التي لم تعد مدققين. وستتم إزالتها تلقائيًا من معاملة الترشيح الخاصة بك.",
           "maybeChill": "Clear nominations instead"
         },
         "validation": {
@@ -3391,7 +3391,7 @@
         "validation": {
           "success": {
             "title": "Transaction sent successfully",
-            "description": "You will see your operation in history once the network has confirmed the transaction."
+            "description": "سترى عمليتك في السجل بمجرد تأكيد الشبكة للمعاملة."
           }
         }
       }
@@ -3413,13 +3413,13 @@
     "termsAndPrivacy": "I have read and I accept the <1>Ledger Live Terms of Use</1> and <3>Privacy Policy</3>.",
     "delegation": "Delegation",
     "viewDetails": "عرض التفاصيل",
-    "validator": "Validator",
-    "validatorAddress": "Validator address",
+    "validator": "المدقق",
+    "validatorAddress": "عنوان المدقق",
     "delegatedAccount": "Delegated account",
     "duration": "Duration",
     "transactionID": "Transaction ID",
     "receive": "Receive more",
-    "changeValidator": "Change validator",
+    "changeValidator": "تغيير المدقق",
     "endDelegation": "End delegation",
     "durationForDays0": "Just now",
     "durationForDays": "For a day",
@@ -3427,7 +3427,7 @@
     "durationDays0": "Just now",
     "durationDays": "1 day",
     "durationDays_plural": "{{count}} days",
-    "selectValidatorTitle": "Select validator",
+    "selectValidatorTitle": "اختار المدقق",
     "started": {
       "title": "Earn rewards",
       "description": "Delegate your Tezos account to a third-party validator to earn rewards securely, keeping control of your assets.",
@@ -3444,7 +3444,7 @@
     },
     "broadcastSuccessDescription": {
       "delegate": "Delegation transaction broadcasted successfully. You should earn your first rewards in around 40 days, depending on the validator.",
-      "undelegate": "Your account delegation will end when the operation is confirmed. You can delegate your account again at any time."
+      "undelegate": "سينتهي تفويض حسابك عند تأكيد العملية. يمكنك تفويض حسابك مرة أخرى في أي وقت."
     },
     "summaryTitle": "Summary",
     "goToAccount": "Go to Accounts",
@@ -3500,7 +3500,7 @@
     "to": "To",
     "redelegationAmount": "المبلغ المعاد تفويضه",
     "gas": "Gas",
-    "validatorAddress": "Validator address",
+    "validatorAddress": "عنوان المدقق",
     "rewardAmount": "مبلغ المكافأة",
     "undelegatedAmount": "المبلغ غير المفوض",
     "memo": "Memo"
@@ -3548,7 +3548,7 @@
       }
     },
     "history": {
-      "tabTitle": "History"
+      "tabTitle": "السجل"
     }
   },
   "banner": {
