@@ -614,7 +614,7 @@
       "desc": "Entrez votre mot de passe pour continuer.",
       "inputPlaceholder": "Saisissez votre mot de passe.",
       "login": "Se connecter",
-      "forgotPassword": "Mot de passe perdu"
+      "forgotPassword": "Mot de passe oublié"
     },
     "addPassword": {
       "placeholder": "Choisissez votre mot de passe.",
