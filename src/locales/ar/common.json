@@ -1515,17 +1515,17 @@
       "upToDate": "Synchronized",
       "error": "Error",
       "queued": "Awaiting",
-      "showTokens": "Show {{length}} token",
-      "showTokens_plural": "Show {{length}} tokens",
-      "showSubAccounts": "Show {{length}} subaccount",
-      "showSubAccounts_plural": "Show {{length}} subaccounts",
+      "showTokens": "عرض رمز {{length}}",
+      "showTokens_plural": "عرض رموز {{length}}",
+      "showSubAccounts": "عرض حساب فرعي {{length}}",
+      "showSubAccounts_plural": "عرض حسابات فرعية {{length}}",
       "hideTokens": "Hide token",
       "hideTokens_plural": "Hide tokens",
       "hideSubAccounts": "Hide subaccount",
       "hideSubAccounts_plural": "Hide subaccounts",
       "algorand": {
-        "showTokens": "Show {{length}} ASA",
-        "showTokens_plural": "Show {{length}} ASA",
+        "showTokens": "عرض {{length}}‏ ASA",
+        "showTokens_plural": "عرض {{length}}‏ ASA",
         "hideTokens": "Hide ASA",
         "hideTokens_plural": "Hide ASA"
       }
@@ -1597,7 +1597,7 @@
       "reportErrors": "Bug reports",
       "reportErrorsDesc": "Automatically send reports to help Ledger improve its products.",
       "developerMode": "Developer mode",
-      "developerModeDesc": "Show developer apps in the Manager and enable Testnet apps.",
+      "developerModeDesc": "اعرض تطبيقات المطور في المدير وقم بتمكين تطبيقات Testnet.",
       "analytics": "Analytics",
       "analyticsDesc": "Enable analytics to help Ledger improve user experience.",
       "analyticsModal": {
@@ -1638,12 +1638,12 @@
       "title": "حسابات",
       "desc": "Manage assets display in the app.",
       "hideTokenCTA": "Hide token",
-      "showContractCTA": "Show contract",
+      "showContractCTA": "عرض العقد",
       "blacklistedTokens": "Hidden token list",
       "blacklistedTokensDesc": "You can hide tokens by going to the accounts list then long-pressing on the token and selecting 'Hide token'.",
       "blacklistedTokensModal": {
         "title": "Hide token",
-        "desc": "This action will hide all <1><0>{tokenName}</0></1> accounts, you can show them again using <3>Settings > Accounts</3>.",
+        "desc": "سيخفي هذا الإجراء جميع حسابات <1><0>{tokenName}</0></1>، ويمكنك إظهارها مرة أخرى باستخدام <3>الإعدادات > الحسابات</3>.",
         "confirm": "Hide token"
       },
       "cryptoAssets": {
@@ -1811,14 +1811,14 @@
           "bullets": [
             "BTC, ETH, USDT and 50+ others",
             "Multi-currency",
-            "Centralized"
+            "مركزي"
           ]
         },
         "paraswap": {
           "bullets": [
             "Connect to 30+ DEXs (Uniswap, SushiSwap,...)",
             "Ethereum & ERC20 tokens",
-            "Decentralized & Trustless"
+            "لا مركزي و بدون ثقة"
           ]
         }
       },
@@ -1833,7 +1833,7 @@
       },
       "payoutModal": {
         "title": "Payout fees",
-        "description": "Payout fees are not shown on the device and substracted from the amount.",
+        "description": "لا تعرض رسوم الدفع على الجهاز ويتم خصمها من المبلغ.",
         "cta": "إغلاق"
       },
       "pendingOperation": {
@@ -2447,7 +2447,7 @@
     "appNotInstalled_plural": "Please install the {{appName}} apps",
     "verifyAddress": {
       "title": "Verify address on device",
-      "description": "Please verify that the {{currencyName}} address to be shown in Ledger Live matches the one on your Ledger device."
+      "description": "يرجى التحقق من أن العنوان {{currencyName}} الذي سيتم عرضه في ليدجر لايف يطابق العنوان الموجود على جهاز ليدجر الخاص بك."
     },
     "confirmSwap": {
       "title": "Confirm swap operation on device",
@@ -2675,13 +2675,13 @@
       },
       "dependency": {
         "title": "Uninstall {{app}} and related apps?",
-        "showAll": "Show apps to uninstall",
+        "showAll": "عرض التطبيقات المراد إلغاء تثبيتها",
         "description": "Apps on your device that need the {{app}} app will be uninstalled too."
       },
       "continueUninstall": "Uninstall {{app}} and other apps"
     },
     "filter": {
-      "title": "Show",
+      "title": "عرض",
       "all": "All",
       "installed": "Apps",
       "not_installed": "Not installed",
@@ -3213,10 +3213,10 @@
       "hasPendingBondOperation": "A bond operation is still pending confirmation",
       "externalControllerUnsupported": "This stash account is controlled by another account with the address <0>{{address}}</0>. Staking operations on accounts that are controlled by a different account are not supported in Ledger Live. Please use an alternative wallet such as Polkadot.js",
       "externalStashUnsupported": "This account controls a stash account whose address is <0>{{address}}</0>. Staking operations on separate stash accounts are not supported in Ledger Live. Please use an alternative wallet like Polkadot.js",
-      "showInactiveNominations": "Show all nominations ({{count}})",
-      "hideInactiveNominations": "Show active nominations only",
+      "showInactiveNominations": "عرض كل الترشيحات ({{count}})",
+      "hideInactiveNominations": "عرض الترشيحات النشطة فقط",
       "noActiveNominations": "There are no active nominations.",
-      "showAllUnlockings": "إظهار كل مبالغ إلغاء التقيد ({{count}})",
+      "showAllUnlockings": "عرض كل مبالغ إلغاء التقيد ({{count}})",
       "hideAllUnlockings": "إخفاء مبالغ إلغاء التقيد"
     },
     "unlockings": {
