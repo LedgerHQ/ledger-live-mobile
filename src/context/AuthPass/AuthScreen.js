@@ -18,7 +18,7 @@ import type { Privacy } from "../../reducers/settings";
 import { withReboot } from "../Reboot";
 import LText from "../../components/LText";
 import TranslatedError from "../../components/TranslatedError";
-import Button from "../../components/Button";
+import { Button } from "../../components/Button";
 import PoweredByLedger from "../../screens/Settings/PoweredByLedger";
 import BottomModal from "../../components/BottomModal";
 import HardResetModal from "../../components/HardResetModal";
