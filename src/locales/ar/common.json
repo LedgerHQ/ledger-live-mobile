@@ -528,7 +528,7 @@
     },
     "SwapGenericAPIError": {
       "title": "Exchange rate expired",
-      "description": "You must confirm the swap before the timer runs out. The exchange rate remains valid for a fixed duration."
+      "description": "يجب عليك تأكيد المبادلة قبل انتهاء مدة العداد. يبقى سعر الصرف ساري المفعول لمدة محددة."
     },
     "PolkadotElectionClosed": {
       "title": "Validators election must be closed"
@@ -825,7 +825,7 @@
       },
       "pinCode": {
         "title": "PIN code",
-        "desc": "Your PIN code is the first layer of security. It physically secures access to your Nano and your private keys. Your PIN code must be 4 to 8 digits long.",
+        "desc": "رمز الPIN الخاص بك هو الطبقة الأولى من الأمان. وهو يؤمن فعليًا الوصول إلى جهاز Nano الخاص بك ومفاتيحك الخاصة. يجب أن يتكون رمز الPIN الخاص بك من 4 إلى 8 أرقام.",
         "checkboxDesc": "I understand that I must choose my PIN code by myself and keep it private.",
         "cta": "Set up PIN code"
       },
@@ -833,11 +833,11 @@
         "bullets": {
           "0": {
             "title": "Choose PIN code",
-            "label": "Press the left or right button to change digits. Press both buttons to validate a digit. Select <1></1> to confirm your PIN code. Select <2></2> to erase a digit."
+            "label": "اضغط على الزر الأيسر أو الأيمن لتغيير الأرقام. اضغط على كلا الزرين للتحقق من صحة أحد الأرقام. إختار <1></1> لتأكيد رمز الPIN الخاص بك. إختار <2></2> لمسح أحد الأرقام."
           },
           "1": {
-            "title": "Confirm PIN code",
-            "label": "Enter your PIN code again to confirm it."
+            "title": "تأكيد رمز الPIN",
+            "label": "أدخل رمز الPIN الخاص بك مرة أخرى لتأكيده."
           }
         },
         "infoModal": {
@@ -874,9 +874,9 @@
       "recoveryPhrase": {
         "title": "عبارة الاسترداد",
         "desc": "Your recovery phrase is a secret list of 24 words that backs up your private keys.",
-        "desc_1": "Your Nano generates a unique recovery phrase. Ledger does not keep a copy of it.",
+        "desc_1": "يولد جهاز Nano الخاص بك عبارة استرداد فريدة. لا تحتفظ ليدجر بنسخة منها.",
         "cta": "عبارة الاسترداد",
-        "checkboxDesc": "I understand that if I lose this recovery phrase, I will not be able to access my crypto in case I lose access to my Nano."
+        "checkboxDesc": "أفهم أنني إذا فقدت عبارة الاسترداد هذه فلن أتمكن من الوصول إلى الأصول المشفرة الخاصة بي في حالة أن فقدت الوصول إلى جهاز Nano الخاص بي."
       },
       "recoveryPhraseSetup": {
         "infoModal": {
@@ -884,7 +884,7 @@
           "desc": "عبارة الاسترداد الخاصة بك تعمل كمفتاح رئيسي فريد؛ حيث يستخدمها جهاز لديجر (Ledger) الخاص بك لحساب المفاتيح الخاصة لكل أصل مشفر تملكه.",
           "desc_1": "To restore access to your crypto, any wallet can calculate the same private keys from your recovery phrase.",
           "link": "More about the recovery phrase",
-          "title_1": "What if I lose access to my Nano?",
+          "title_1": "ماذا لو فقدت الوصول إلى جهاز Nano الخاص بي؟",
           "bullets": {
             "0": {
               "label": "احصل على محفظة أجهزة جديدة."
@@ -900,12 +900,12 @@
         "bullets": {
           "0": {
             "title": "Take your Recovery sheet",
-            "label": "Grab a blank Recovery sheet, included with your Nano. Please reach out to Ledger Support if the Recovery sheet did not come blank."
+            "label": "احصل على صفحة استرداد فارغة، والتي أتت مرفقة مع جهاز Nano الخاص بك. يرجى التواصل مع دعم ليدجر إذا لم تكن صفحة الاسترداد أتتك فارغة."
           },
           "1": {
             "title": "Write down all words",
-            "label": "Write Word #1 displayed on your Nano in position 1 of your Recovery sheet. Then press right on your Nano to display Word #2 and write it down in position 2.",
-            "label_1": "Repeat the process for all words while carefully respecting the order and spelling. Press left on your Nano to check for any mistakes."
+            "label": "اكتب الكلمة رقم #1 المعروضة على جهاز Nano الخاص بك في الموضع 1 من صفحة الاسترداد. ثم اضغط يمينًا على جهاز نانو لعرض الكلمة رقم#2 واكتبها في الموضع 2.",
+            "label_1": "كرر العملية لجميع الكلمات مع احترام الترتيب والتهجئة بعناية. اضغط على اليسار على جهاز Nano الخاص بك للتحقق من وجود أي أخطاء."
           },
           "2": {
             "title": "تأكيد عبارة الاسترداد الخاصة بك",
@@ -920,7 +920,7 @@
       },
       "hideRecoveryPhrase": {
         "title": "إخفاء عبارة الاسترداد الخاصة بك",
-        "desc": "Your recovery phrase is your last chance to access your crypto if you cannot use your Nano. You must keep it in a safe place.",
+        "desc": "عبارة الاسترداد الخاصة بك هي فرصتك الأخيرة للوصول إلى أصولك المشفرة، إذا لم تتمكن من استخدام جهاز Nano الخاص بك. يجب عليك الاحتفاظ بها في مكان آمن.",
         "bullets": {
           "0": {
             "label": "Enter these words on a hardware wallet only, never on computers or phones."
@@ -961,8 +961,8 @@
     "stepRecoveryPhrase": {
       "importRecoveryPhrase": {
         "title": "Restore from recovery phrase",
-        "desc": "Restore your Nano from your recovery phrase to restore, replace or back up your Ledger hardware wallet.",
-        "desc_1": "Your Nano will restore your private keys and you will be able to access and manage your crypto.",
+        "desc": "قم باستعادة جهاز Nano الخاص بك من عبارة الاسترداد الخاصة بك لاستعادة أو استبدال أو عمل نسخة احتياطية من محفظة ليدجر للأجهزة الخاصة بك.",
+        "desc_1": "سيستعيد جهاز Nano مفاتيحك الخاصة وستكون قادرًا على الوصول إالي وإدارة أوصلك المشفرة.",
         "cta": "حسنًا، أنا مستعد!",
         "warning": {
           "title": "We recommend Ledger recovery phrases only",
@@ -972,7 +972,7 @@
         "nextStep": "الخطوة التالية",
         "bullets": {
           "0": {
-            "title": "Turn on Nano",
+            "title": "قم بتشغيل Nano",
             "nanoX": {
               "label": "قم بتشغيل جهازك بالضغط على الزر الأسود لمدة ثانية واحدة."
             },
@@ -1001,7 +1001,7 @@
         "title": "أدخل عبارة الاسترداد الخاصة بك",
         "paragraph1": "Your recovery phrase is the secret list of words that you backed up when you first set up your wallet.",
         "paragraph2": "Ledger does not keep a copy of your recovery phrase.",
-        "checkboxDesc": "I understand that if I lose my recovery phrase, I will not be able to access my crypto in case I lose access to my Nano.",
+        "checkboxDesc": "أفهم أنني إذا فقدت عبارة الاسترداد الخاصة بي فلن أتمكن من الوصول إلى الأصول المشفرة الخاصة بي في حالة أن فقدت الوصول إلى جهاز نانو Nano الخاص بي.",
         "bullets": {
           "0": {
             "title": "Grab your recovery phrase"
@@ -1045,11 +1045,11 @@
         "title": "أين يمكنني العثور على اسم جهازي؟",
         "desc": "على جهازك، اختار الإعدادات> عام > اسم الجهاز.",
         "title_1": "كيفية إعداد اتصال البلوتوث؟",
-        "title_2": "How do I use my Nano X without Bluetooth?",
-        "desc_1": "Use an <1>OTG-cable</1> to connect your Ledger Nano X to your Android smartphone (iOS not supported). Manage your crypto with Ledger Live mobile or any other compatible (web) app.",
+        "title_2": "كيف يمكنني استخدام جهاز Nano X الخاص بي بدون خاصية البلوتوث؟",
+        "desc_1": "استخدم <1>كبل</1> OTG لتوصيل ليدجر Nano X بهاتفك الذكي الذي يعمل بنظام Android (iOS غير مدعوم). قم بإدارة أصولك المشفرة باستخدام تطبيق ليدجر لايف للجوّال أو أي تطبيق (ويب) آخر متوافق.",
         "bullets": {
           "0": {
-            "label": "Make sure Bluetooth is enabled on your smartphone and on your Ledger Nano X. Your Ledger Nano X should be on the Dashboard, its main home screen."
+            "label": "تأكد من تمكين خاصية البلوتوث على هاتفك الذكي وعلى جهاز ليدجر Nano X الخاص بك. يجب أن يكون جهاز ليدجر Nano X الخاص بك على لوحة المعلومات، شاشته الرئيسية."
           },
           "1": {
             "label": "<1>{{Os}}</1>: Make sure location services are enabled in your phone's settings for Ledger Live. Ledger Live never uses your location information, this is a requirement for Bluetooth on {{Os}}."
@@ -1064,9 +1064,9 @@
         "title": "Something went wrong?",
         "title_1": "I have an Android",
         "title_2": "Update Android version",
-        "desc": "If you're experiencing Bluetooth issues with your Nano X, please remove the pairing and forget Nano X on your phone. Then try the pairing again.",
-        "desc_1": "It may take a while before the Bluetooth pairing request is displayed. Make sure you verify and confirm the pairing code both on your Nano X and on your phone.",
-        "desc_2": "Check in your phone's Bluetooth settings whether the Ledger Nano X is detected. If it not detected, make sure you turn on the Bluetooth on your Ledger Nano X.",
+        "desc": "إذا كنت تواجه مشاكل في خاصية البلوتوث مع جهاز Nano X الخاص بك، فيرجى إزالة الاقتران ونسيان جهاز Nano X على هاتفك. ثم حاول الاقتران مرة أخرى.",
+        "desc_1": "قد يستغرق الأمر بعض الوقت قبل عرض طلب اقران بلوتوث. احرص على التحقق من كود الاقران وقم بالتأكيد عليه على كل من جهاز Nano X وهاتفك.",
+        "desc_2": "تحقق من إعدادات البلوتوث بهاتفك لمعرفة ما إذا تم اكتشاف جهاز ليدجر Nano X أم لا. إذا لم يتم اكتشافه، فتأكد من تشغيل خاصية البلوتوث على ليدجر Nano X.",
         "desc_3": "Location services",
         "desc_4": "If the Ledger Nano X is not detected in your mobile app when trying to pair it, please try the following solution:",
         "desc_5": "Ledger mobile app asks you to allow location services when it's not enabled yet, but on a few phone models, this is not always properly detected. Please note that Ledger mobile app never uses your location information, this permission is simply required for Bluetooth on Android.",
@@ -1114,9 +1114,9 @@
       "step1-nanoS": "قم بتوصيل {{fullDeviceName}} بهاتفك باستخدام كابل OTG.",
       "step2": "اضغط على الزرين معًا لإختيار <1><1>الإعداد كجهاز جديد.</1></1>",
       "step2-restore": "Press both buttons together to select <1><1>Restore from recovery phrase.</1></1>",
-      "step3": "Press left or right button to select a digit. Press buttons together to confirm.",
+      "step3": "اضغط على الزر الأيسر أو الأيمن لتحديد رقم. اضغط الزرين معًا للتأكيد.",
       "step4prefix": "Select ",
-      "step4suffix1": " to confirm your PIN.",
+      "step4suffix1": " لتأكيد رقم التعريف الشخصي PIN الخاص بك.",
       "step4suffix2": " to erase last digit.",
       "modal": {
         "step1": "Always choose <1><1>your own</1></1> PIN",
@@ -1127,7 +1127,7 @@
     "stepWriteRecovery": {
       "step1": "Write <1><1>Word #1</1></1> in entry 1 on a blank Recovery sheet",
       "step2": "اضغط على الزر الأيمن واستمر في تدوين كل الكلمات الأربع والعشرين (24).",
-      "step3": "Confirm each word of your recovery phrase: select it then confirm it by pressing both buttons together.",
+      "step3": "قم بتأكيد كل كلمة من عبارة الاسترداد: إختارها ثم أكدها بالضغط على الزرين معًا.",
       "modal": {
         "step1": "Store your 24-word recovery phrase in a safe place, out of sight.",
         "step2": "Make sure you are the only person to have the recovery phrase.",
@@ -1317,11 +1317,11 @@
     "from": "من ({{count}})",
     "to": "To ({{count}})",
     "identifier": "Transaction ID",
-    "viewOperation": "View in explorer",
+    "viewOperation": "عرض في المتصفح",
     "whatIsThis": "What is this operation?",
     "seeAll": "See all",
     "seeLess": "See less",
-    "viewInExplorer": "View in explorer",
+    "viewInExplorer": "عرض في المتصفح",
     "sending": "Sending...",
     "receiving": "Receiving...",
     "tokenOperations": "عمليات رمز التوكن",
@@ -1629,7 +1629,7 @@
       "rateProvider": "Rate Provider ({{currencyTicker}}→BTC)",
       "rateProviderDesc": "Choose the provider of the rate between {{currencyTicker}} and Bitcoin.",
       "confirmationNb": "عدد التأكيدات",
-      "confirmationNbDesc": "Set the number of network confirmations for transactions to be approved.",
+      "confirmationNbDesc": "قم بتعيين عدد تأكيدات الشبكة للمعاملات التي ستتم الموافقة عليها.",
       "currencySettingsTitle": "{{currencyName}} Settings",
       "placeholder": "No settings for this asset"
     },
@@ -1745,9 +1745,9 @@
       "titleReadOnly": "Unverified address",
       "headerTitle": "أصل مشفر",
       "titleDevice": "توصيل الجهاز",
-      "verifySkipped": "Your receive address was not confirmed on your Ledger device. Please verify your {{accountType}} address to stay secure.",
+      "verifySkipped": "لم يتم تأكيد عنوانك للاستلام على جهاز ليدجر الخاص بك. يرجى التحقق من عنوان {{accountType}} لتظل آمنًا.",
       "verifyPending": "Please verify that the {{currencyName}} address displayed on your device exactly matches the one displayed on your phone.",
-      "verified": "Address confirmed. Check again if you copied or scanned it.",
+      "verified": "تم تأكيد العنوان. تحقق مرة أخرى إذا قمت بنسخه أو إجراء مسح ضوئي له.",
       "verifyAgain": "Check again",
       "noAccount": "No account found",
       "address": "Address for account",
@@ -1854,7 +1854,7 @@
         "modalTitle": "Floating or fixed rate?"
       },
       "form": {
-        "validate": "Confirm Swap transaction",
+        "validate": "تأكيد معاملة المبادلة",
         "tab": "Exchange",
         "button": "متابعة",
         "from": "من",
@@ -1978,7 +1978,7 @@
         "fullyApproved": "لقد وافقت بالكامل على هذا الحساب. يمكنك تخفيض المبلغ مقابل رسوم.",
         "approvedCanReduce": "لقد وافقت على <0>{{value}}</0> على هذا الحساب. يمكنك تخفيض المبلغ مقابل رسوم.",
         "approvedButNotEnough": "You have approved <0>{{value}}</0> on this account.",
-        "approving": "You can deposit assets once the account approval is confirmed.",
+        "approving": "يمكنك إيداع الأصول بمجرد تأكيد الموافقة على الحساب.",
         "notEnough": "يتعيّن عليك زيادة الحد الأقصى الموافق عليه في حسابك للإقراض."
       },
       "howDoesLendingWork": "كيف يعمل الإقراض",
@@ -2029,7 +2029,7 @@
         "2": {
           "label": "الخطوة 2‏/3",
           "title": "Deposit assets to earn interest.",
-          "description": "Once an account is approved, you can select the amount of assets you want to lend and issue a transaction to the protocol. Interest accrue immediately after the transaction is confirmed."
+          "description": "بمجرد الموافقة على الحساب، يمكنك إختيار عدد الأصول التي تريد إقراضها وإصدار معاملة للبروتوكول. تتراكم الفائدة مباشرةً بعد تأكيد الصفقة."
         },
         "3": {
           "label": "الخطوة 3‏/3",
@@ -2091,8 +2091,8 @@
         },
         "validation": {
           "success": "Operation sent successfully",
-          "info": "The approval was sent to the network for confirmation. You’ll be able to issue loans once it is confirmed.",
-          "extraInfo": "Transactions can take some time to be displayed in an explorer and to be confirmed.",
+          "info": "تم إرسال الموافقة إلى الشبكة لتأكيدها. ستتمكن من إصدار القروض بمجرد تأكيدها.",
+          "extraInfo": "يمكن أن تستغرق المعاملات بعض الوقت حتى يتم عرضها في المتصفح ويتم تأكيدها.",
           "button": {
             "done": "إغلاق"
           }
@@ -2112,8 +2112,8 @@
         },
         "validation": {
           "success": "Deposit sent successfully",
-          "info": "You will start earning interest once the network has confirmed the deposit.",
-          "extraInfo": "Transactions can take some time to be displayed in an explorer and to be confirmed.",
+          "info": "سوف تبدأ في كسب فائدة بمجرد أن تقوم الشبكة بتأكيد الإيداع.",
+          "extraInfo": "يمكن أن تستغرق المعاملات بعض الوقت حتى يتم عرضها في المتصفح ويتم تأكيدها.",
           "button": {
             "done": "تم",
             "cta": "عرض التفاصيل"
@@ -2130,7 +2130,7 @@
         },
         "validation": {
           "success": "Withdrawal sent successfully",
-          "info": "Your assets will be available once the network has confirmed the withdrawal.",
+          "info": "ستكون أصولك متاحة بمجرد قيام الشبكة بتأكيد السحب.",
           "button": {
             "done": "تم",
             "cta": "عرض التفاصيل"
@@ -2209,7 +2209,7 @@
       "validateMemo": "Validate memo"
     },
     "validation": {
-      "message": "On your device, confirm the transaction to sign it securely.",
+      "message": "قم بتأكيد المعاملة على جهازك للتوقيع عليها بشكل آمن.",
       "sent": "Transaction sent",
       "amount": "المبلغ",
       "fees": "Fees",
@@ -2450,11 +2450,11 @@
       "description": "يرجى التحقق من أن العنوان {{currencyName}} الذي سيتم عرضه في ليدجر لايف يطابق العنوان الموجود على جهاز ليدجر الخاص بك."
     },
     "confirmSwap": {
-      "title": "Confirm swap operation on device",
+      "title": "تأكيد عملية المبادلة على الجهاز",
       "alert": "Verify the Swap details on your device before sending it. The addresses are exchanged securely so you don’t have to verify them."
     },
     "confirmSell": {
-      "title": "Confirm sell operation on device",
+      "title": "تأكيد عملية المبادلة على الجهاز",
       "alert": "Verify the Sell details on your device before sending it. The addresses are exchanged securely so you don’t have to verify them."
     },
     "button": {
