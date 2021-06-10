@@ -1593,7 +1593,7 @@
       "exchange": "Fournisseur du taux de change",
       "exchangeDesc": "Changez le fournisseur de taux de change de bitcoin à {{fiat}}",
       "stock": "Indicateur de marché régional",
-      "stockDesc": "Choisissez Western pour afficher les augmentations du marché en vert ou Eastern pour les afficher en rouge.",
+      "stockDesc": "Choisissez Western pour afficher les hausses du marché en vert ou Eastern pour les afficher en rouge.",
       "reportErrors": "Rapports de bugs",
       "reportErrorsDesc": "Envoyer automatiquement des rapports pour aider Ledger à améliorer ses produits.",
       "developerMode": "Mode développeur",
@@ -3137,7 +3137,7 @@
       },
       "candidates": {
         "title": "Candidats",
-        "description": "127 personnes élues par le vote de la communauté des détenteurs de jetons. Les votes sont extraits toutes les 6 heures."
+        "description": "127 personnes élues par le vote de la communauté des détenteurs de jetons. Les votes sont mis à jour toutes les 6 heures."
       }
     }
   },
