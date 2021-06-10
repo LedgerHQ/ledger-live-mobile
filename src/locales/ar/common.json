@@ -50,9 +50,9 @@
     "subaccount_plural": "حسابات فرعية",
     "forgetDevice": "إزالة الجهاز",
     "help": "مساعدة",
-    "saveLogs": "Save logs",
+    "saveLogs": "حفظ السجلات",
     "sync": {
-      "ago": "Synchronized {{time}}"
+      "ago": "مزامنة {{time}}"
     },
     "update": "Update available",
     "install": "تثبيت",
@@ -383,7 +383,7 @@
     },
     "SyncError": {
       "title": "Synchronization error",
-      "description": "Some accounts could not be synchronized."
+      "description": "تعذرت مزامنة بعض الحسابات"
     },
     "TimeoutError": {
       "title": "Sorry, server took too long to respond",
@@ -1229,7 +1229,7 @@
       "desc": "لم يتم تأكيد بعض المعاملات بعد. ستظهر هذه في رصيدك ويمكن استخدامها بعد تأكيدها."
     },
     "summary": "Here is the summary of your account",
-    "summary_plural": "Your {{count}} accounts are synchronized.",
+    "summary_plural": "تمت مزامنة حساباتك ({{count}}).",
     "emptyState": {
       "noAppsTitle": "تثبيت تطبيق على جهازي",
       "noAppsDesc": "قم بتثبيت التطبيقات على جهازك قبل إضافة حسابات في ليدجر لايف(Ledger Live). انتقل إلى المدير لتثبيت التطبيقات.",
@@ -1512,7 +1512,7 @@
     },
     "row": {
       "syncPending": "Synchronizing...",
-      "upToDate": "Synchronized",
+      "upToDate": "متزامن",
       "error": "Error",
       "queued": "Awaiting",
       "showTokens": "عرض {{length}} رمز توكن",
@@ -2392,7 +2392,7 @@
     "finalCta": "متابعة",
     "finalCtaForSwap": "رجوع إلى المبادلة",
     "synchronizing": "Synchronizing",
-    "synchronizingDesc": "Your accounts are being synchronized. This can take a while...",
+    "synchronizingDesc": "تتم مزامنة حساباتك. قد يستغرق ذلك بعض الوقت...",
     "noAccountToCreate": "Could not create <1><0>{{currencyName}}</></> account. Restart the process and sync your accounts.",
     "cantCreateAccount": "A new account cannot be added before receiving assets on your <1><0>{{accountName}}</></> account.",
     "tokens": {
