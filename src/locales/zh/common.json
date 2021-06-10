@@ -1541,7 +1541,7 @@
   },
   "help": {
     "gettingStarted": {
-      "title": "新手指南",
+      "title": "快速入门",
       "desc": "从这里开始"
     },
     "helpCenter": {
@@ -1554,7 +1554,7 @@
     },
     "facebook": {
       "title": "Facebook（脸书）",
-      "desc": "点赞我们的页面"
+      "desc": "为我们的页面点赞"
     },
     "twitter": {
       "title": "Twitter（推特）",
@@ -1954,7 +1954,7 @@
       "actionTitle": "贷出",
       "accountActions": {
         "approve": "批准",
-        "supply": "供给",
+        "supply": "供应",
         "withdraw": "提取"
       },
       "highFees": {
@@ -1998,7 +1998,7 @@
           "INACTIVE": "不活跃",
           "SUPPLYING": "正在供应",
           "approve": "批准",
-          "supply": "供给",
+          "supply": "供应",
           "withdraw": "提取",
           "amountRedeemed": "已提取数额",
           "endDate": "结束日期"
@@ -2016,15 +2016,15 @@
       },
       "terms": {
         "label": "贷出加密货币",
-        "title": "按照复利协议贷出资产",
-        "description": "复利协议允许您在以太坊网络上贷出或借入资产。您可以直接通过您的 Ledger 账户贷出资产并赚取利息。",
+        "title": "按照 Compound 复利协议借出资产",
+        "description": "Compound 复利协议允许您在以太坊网络上贷出或借入资产。您可以直接通过您的 Ledger 账户贷出资产并赚取利息。",
         "switchLabel": "我已阅读并同意该 <0><0>使用条款</0></0>。"
       },
       "info": {
         "1": {
           "label": "步骤 1/3",
           "title": "批准一个账户即允许该协议处理账户的后续借贷。",
-          "description": "您需要授权复利智能合约将一定数额的资产转移到该协议中。启用一个账户授予该协议处理未来贷款的权限。"
+          "description": "您需要授权 Compound 复利智能合约将一定数额的资产转移到该协议中。启用一个账户授予该协议处理未来贷款的权限。"
         },
         "2": {
           "label": "步骤 2/3",
@@ -2100,7 +2100,7 @@
       },
       "supply": {
         "stepperHeader": {
-          "amount": "供给",
+          "amount": "供应",
           "summary": "概要",
           "selectDevice": "选择设备",
           "connectDevice": "连接设备",
