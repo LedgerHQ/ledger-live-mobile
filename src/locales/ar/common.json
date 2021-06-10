@@ -46,8 +46,8 @@
     "fast": "سريع",
     "token": "رمز",
     "token_plural": "رموز",
-    "subaccount": "Subaccount",
-    "subaccount_plural": "Subaccounts",
+    "subaccount": "حساب فرعي",
+    "subaccount_plural": "حسابات فرعية",
     "forgetDevice": "إزالة الجهاز",
     "help": "مساعدة",
     "saveLogs": "Save logs",
@@ -55,9 +55,9 @@
       "ago": "Synchronized {{time}}"
     },
     "update": "Update available",
-    "install": "Install",
-    "installed": "Installed",
-    "uninstall": "Uninstall",
+    "install": "تثبيت",
+    "installed": "تم التثبيت",
+    "uninstall": "إلغاء التثبيت",
     "fromNow": {
       "seconds": "خلال ثانية واحدة",
       "seconds_plural": "خلال {{time}} ثواني",
@@ -220,7 +220,7 @@
       "description": "يرجى إعادة المحاولة."
     },
     "DeviceSocketNoBulkStatus": {
-      "title": "The connection failed",
+      "title": "فشل الإتصال",
       "description": "يرجى إعادة المحاولة."
     },
     "DeviceSocketNoHandler": {
@@ -299,12 +299,12 @@
       "description": "Please check the network status."
     },
     "ManagerAppAlreadyInstalled": {
-      "title": "Sorry, that's already installed",
-      "description": "Please check which apps are already installed on your device."
+      "title": "عذراً، هذا مثبت بالفعل",
+      "description": "يرجى التحقق أي التطبيقات المثبتة بالفعل على جهازك."
     },
     "ManagerAppRelyOnBTC": {
       "title": "Bitcoin and Ethereum apps needed",
-      "description": "Please install the latest Bitcoin and Ethereum apps first."
+      "description": "يرجى تثبيت أحدث تطبيقات بيتكوين وإثيريوم أولاً."
     },
     "ManagerDeviceLocked": {
       "title": "جهازك مقفل",
@@ -312,19 +312,19 @@
     },
     "ManagerNotEnoughSpace": {
       "title": "لم يتبقى مساحة تخزين كافية",
-      "info": "Please uninstall some apps to free up space for the {{app}} app.",
-      "description": "Uninstalling apps has no impact on your assets."
+      "info": "يرجى إلغاء تثبيت بعض التطبيقات لتحرير مساحة لتطبيق {{app}}.",
+      "description": "إلغاء تثبيت التطبيقات ليس له تأثير على الأصول الخاصة بك."
     },
     "ManagerQuitPage": {
       "install": {
-        "title": "App installation in progress",
-        "description": "Quitting the Manager will terminate installation.",
-        "stay": "Continue installation"
+        "title": "جاري تثبيت التطبيق",
+        "description": "الخروج من المدير سينهي التثبيت.",
+        "stay": "متابعة التثبيت"
       },
       "uninstall": {
-        "title": "App uninstall in progress",
-        "description": "Quitting the Manager will terminate uninstallation.",
-        "stay": "Continue uninstallation"
+        "title": "جاري إلغاء تثبيت التطبيق",
+        "description": "الخروج من المدير سينهي عملية إلغاء التثبيت.",
+        "stay": "متابعة إلغاء التثبيت"
       },
       "update": {
         "title": "App update in progress",
@@ -335,11 +335,11 @@
     },
     "ManagerUninstallBTCDep": {
       "title": "عفوًا، هذا التطبيق مطلوب",
-      "description": "Uninstall the Bitcoin or Ethereum app last."
+      "description": "إلغاء تثبيت تطبيق بيتكوين أو إيثيريوم في النهاية."
     },
     "NetworkDown": {
       "title": "Sorry, internet seems to be down",
-      "description": "Please check your internet connection."
+      "description": "يرجى التحقق من اتصالك بالإنترنت."
     },
     "NoAddressesFound": {
       "title": "عفوًا، لم يتم العثور على أي حساب",
@@ -453,7 +453,7 @@
     },
     "UpdateYourApp": {
       "title": "App update needed",
-      "description": "Please uninstall then reinstall the {{managerAppName}} app in the Manager."
+      "description": "يرجى إلغاء التثبيت ثم إعادة تثبيت تطبيق {{managerAppName}} في المدير."
     },
     "UserRefusedAllowManager": {
       "title": "تم تعطيل المدير على الجهاز",
@@ -477,11 +477,11 @@
     },
     "WebsocketConnectionError": {
       "title": "عذراً، فشل الاتصال",
-      "description": "Please try again with a better network connection (websocket error)."
+      "description": "يرجى المحاولة مرة أخرى مع اتصال أفضل بالشبكة (خطأ websocket)."
     },
     "WebsocketConnectionFailed": {
       "title": "عذراً، فشل الاتصال",
-      "description": "Please try again with a better network connection (websocket failed)."
+      "description": "يرجى المحاولة مرة أخرى مع اتصال أفضل بالشبكة (فشل websocket)."
     },
     "WrongDeviceForAccount": {
       "title": "Something went wrong",
@@ -492,18 +492,18 @@
       "description": "يرجى إعادة تشغيل جهازك دون لمس الأزرار عند ظهور الشعار. يرجى إعادة المحاولة مرة أخرى. إذا استمرت المشكلة، يرجى حفظ السجلات الخاصة بك باستخدام الزر أدناه وتقديمها إلى قسم دعم ليدجر."
     },
     "UnavailableTezosOriginatedAccountReceive": {
-      "title": "Cannot receive in subaccounts. Please select the parent account.",
+      "title": "لا يمكن الاستلام في حسابات فرعية. يرجى إختيار الحساب الرئيسي.",
       "description": "If you want to receive funds, please use the parent account"
     },
     "UnavailableTezosOriginatedAccountSend": {
-      "title": "Cannot send from subaccounts yet",
+      "title": "لا يمكن الإرسال من الحسابات الفرعية بعد",
       "description": "This feature will be added at a later stage due to changes recently introduced by the Babylon update."
     },
     "RecommendUndelegation": {
       "title": "Please undelegate the account before emptying it"
     },
     "RecommendSubAccountsToEmpty": {
-      "title": "Please empty all subaccounts first"
+      "title": "يرجى إفراغ جميع الحسابات الفرعية أولاً"
     },
     "NotSupportedLegacyAddress": {
       "title": "The legacy address format is no longer supported"
@@ -630,7 +630,7 @@
     }
   },
   "reset": {
-    "description": "Please uninstall then reinstall the app on your phone to delete Ledger Live data, including accounts and settings.",
+    "description": "يرجى إلغاء تثبيت التطبيق ثم إعادة تثبيته على هاتفك لحذف بيانات ليدجر لايف (Ledger Live)، بما في ذلك الحسابات والإعدادات.",
     "button": "Reset"
   },
   "graph": {
@@ -1044,7 +1044,7 @@
       "infoModal": {
         "title": "أين يمكنني العثور على اسم جهازي؟",
         "desc": "على جهازك، اختار الإعدادات> عام > اسم الجهاز.",
-        "title_1": "How to set up Bluetooth connection?",
+        "title_1": "كيفية إعداد اتصال البلوتوث؟",
         "title_2": "How do I use my Nano X without Bluetooth?",
         "desc_1": "Use an <1>OTG-cable</1> to connect your Ledger Nano X to your Android smartphone (iOS not supported). Manage your crypto with Ledger Live mobile or any other compatible (web) app.",
         "bullets": {
@@ -1056,7 +1056,7 @@
           },
           "2": {
             "label": "If you have a Bluetooth pairing issue, please refer to the following article",
-            "link": "Fix connection issues."
+            "link": "إصلاح مشاكل الاتصال."
           }
         }
       },
@@ -1183,7 +1183,7 @@
         "title": "When I connect my Nano to the Ledger app, my private key is...",
         "answers": {
           "correct": "Still offline",
-          "wrong": "Briefly connected to the internet"
+          "wrong": "اتصال وجيز بالإنترنت"
         },
         "modal": {
           "text": "Your private key always remains offline in your hardware wallet. Even when connected to your Nano, the Ledger app cannot access your private key. You must physically authorize every transaction on your device.",
@@ -1231,14 +1231,14 @@
     "summary": "Here is the summary of your account",
     "summary_plural": "Your {{count}} accounts are synchronized.",
     "emptyState": {
-      "noAppsTitle": "Install an app on my device",
-      "noAppsDesc": "Install apps on your device before adding accounts in Ledger Live. Go to the Manager to install apps.",
+      "noAppsTitle": "تثبيت تطبيق على جهازي",
+      "noAppsDesc": "قم بتثبيت التطبيقات على جهازك قبل إضافة حسابات في ليدجر لايف(Ledger Live). انتقل إلى المدير لتثبيت التطبيقات.",
       "noAccountsTitle": "You don't have any accounts…",
       "noAccountsDesc": "Please add accounts to your Portfolio.",
       "buttons": {
         "import": "إضافة حساب",
-        "manager": "Install apps",
-        "managerSecondary": "Install apps on my device"
+        "manager": "تثبيت التطبيقات",
+        "managerSecondary": "تثبيت تطبيقات على جهازي"
       }
     },
     "noOpState": {
@@ -1325,7 +1325,7 @@
     "sending": "Sending...",
     "receiving": "Receiving...",
     "tokenOperations": "عمليات رمز التوكن",
-    "subAccountOperations": "Subaccount operations",
+    "subAccountOperations": "عمليات الحساب الفرعي",
     "internalOperations": "Internal operations",
     "tokenModal": {
       "desc": "هذه العملية مرتبطة بعمليات رمز التوكن التالية"
@@ -1372,8 +1372,8 @@
     "selectAll": "Select all",
     "tokenCount": "+1 رمز توكن",
     "tokenCount_plural": "+ {{count}} من رموز التوكن",
-    "subaccountCount": "+1 subaccount",
-    "subaccountCount_plural": "+{{count}} subaccounts"
+    "subaccountCount": "+1 حساب فرعي",
+    "subaccountCount_plural": "+{{count}} حسابات فرعية"
   },
   "account": {
     "tokens": {
@@ -1395,8 +1395,8 @@
       }
     },
     "subaccounts": {
-      "seeMore": "See more subaccounts",
-      "seeLess": "See fewer subaccounts"
+      "seeMore": "عرض المزيد من الحسابات الفرعية",
+      "seeLess": "عرض عدد أقل من الحسابات الفرعية"
     },
     "send": "إرسال",
     "receive": "Receive",
@@ -1408,8 +1408,8 @@
     "lastOperations": "Last operations",
     "emptyState": {
       "title": "لا توجد أصول مشفرة بعد؟",
-      "desc": "Make sure the <1><0>{{managerAppName}}</0></1> app is installed and start receiving.",
-      "descWithBuy": "Make sure the <1><0>{{managerAppName}}</0></1> app is installed so you can buy or receive <3><0>{{currencyTicker}}</0></3>",
+      "desc": "تأكد من تثبيت تطبيق <1><0>{{managerAppName}}</0></1> وابدأ في الاستلام.",
+      "descWithBuy": "تأكد من تثبيت تطبيق <1><0>{{managerAppName}}</0></1> حتى تتمكن من شراء أو تلقي <3><0>{{currencyTicker}}</0></3>",
       "descToken": "تأكد من تثبيت تطبيق <1><0>{{managerAppName}}</0></1> وابدأ تلقي <3><0>{{currencyTicker}}</0></3> و <5><0>{{tokenType}}</0> رموز التوكن</5>",
       "buttons": {
         "receiveFunds": "Receive",
@@ -1521,8 +1521,8 @@
       "showSubAccounts_plural": "عرض حسابات فرعية {{length}}",
       "hideTokens": "إخفاء رمز التوكن",
       "hideTokens_plural": "إخفاء رموز التوكن",
-      "hideSubAccounts": "Hide subaccount",
-      "hideSubAccounts_plural": "Hide subaccounts",
+      "hideSubAccounts": "إخفاء الحساب الفرعي",
+      "hideSubAccounts_plural": "إخفاء الحسابات الفرعية",
       "algorand": {
         "showTokens": "عرض {{length}}‏ ASA",
         "showTokens_plural": "عرض {{length}}‏ ASA",
@@ -1608,7 +1608,7 @@
         "bullet2": "Redirect to webpage",
         "bullet3": "Actions: send, receive, lock, etc",
         "bullet4": "End of page scroll",
-        "bullet5": "App (un)installation and version",
+        "bullet5": "تثبيت التطبيقات وإلغاؤها والإصدار",
         "bullet6": "Number of accounts, currencies and operations",
         "bullet7": "Overall and page session duration",
         "bullet8": "Ledger device type and firmware"
@@ -1699,8 +1699,8 @@
       "headerTitle": "Account update",
       "title": "Ledger Live accounts update",
       "subtitle": "New features in Ledger Live means your accounts need to be updated",
-      "notice": "{{accountCount}} account could not be updated. Please connect the device associated to the account below.",
-      "notice_plural": "{{accountCount}} accounts could not be updated. Please connect the device associated to the accounts below.",
+      "notice": "تعذّر تحديث حسات {{accountCount}}. يُرجى توصيل الجهاز المرتبط بالحساب أدناه.",
+      "notice_plural": "تعذّر تحديث حسابات {{accountCount}}. يُرجى توصيل الجهاز المرتبط بالحساب أدناه.",
       "currency": "1 {{currency}} account needs to be updated",
       "currency_plural": "{{count}} {{currency}} accounts need to be updated",
       "start": "Start update",
@@ -1816,7 +1816,7 @@
         },
         "paraswap": {
           "bullets": [
-            "Connect to 30+ DEXs (Uniswap, SushiSwap,...)",
+            "الاتصال بـ 30+ DEXs (Uniswap, SushiSwap,...)",
             "Ethereum & ERC20 tokens",
             "لا مركزي و بدون ثقة"
           ]
@@ -1867,8 +1867,8 @@
           "available": "Total available"
         },
         "noApp": {
-          "title": "{{appName}} app not installed",
-          "desc": "Please go to Manager to install the {{appName}} app.",
+          "title": "التطبيق {{appName}} غير مثبت",
+          "desc": "يرجى الانتقال إلى المدير لتثبيت تطبيق {{appName}}.",
           "cta": "Go to Manager",
           "close": "إغلاق"
         },
@@ -1921,8 +1921,8 @@
         }
       },
       "missingApp": {
-        "title": "Please install the Exchange app on your device",
-        "description": "Go to manager and install Exchange app to swap assets",
+        "title": "يُرجى تثبيت تطبيق Exchange على جهازك",
+        "description": "انتقل إلى المدير وقم بتثبيت تطبيق Exchange لمبادلة الأصول",
         "button": "Go to Manager"
       },
       "outdatedApp": {
@@ -2401,17 +2401,17 @@
       "erc20": {
         "title": "إضافة رمز توكن",
         "disclaimer": "{{tokenName}} هو رمز توكن خاص بـ ERC20.\nيمكنك تلقي رموز التوكن مباشرة في حساب إيثريوم.",
-        "learnMore": "Learn more about ERC20"
+        "learnMore": "معرفة المزيد عن ERC20"
       },
       "trc10": {
         "title": "إضافة رمز توكن",
         "disclaimer": "{{tokenName}} هو رمز توكن خاص بـ TRC10.\nيمكنك تلقي رموز التوكن مباشرة في حساب ترون.",
-        "learnMore": "Learn more about TRC10"
+        "learnMore": "معرفة المزيد عن TRC10"
       },
       "trc20": {
         "title": "إضافة رمز توكن",
         "disclaimer": "{{tokenName}} هو رمز توكن خاص بـ TRC20.\nيمكنك تلقي رموز التوكن مباشرة في حساب ترون.",
-        "learnMore": "Learn more about TRC20"
+        "learnMore": "معرفة المزيد عن TRC20"
       }
     },
     "showMoreChainType": "More address types",
@@ -2438,13 +2438,13 @@
     "allowManagerPermission": "Allow {{wording}} on your device",
     "loading": "Loading...",
     "turnOnAndUnlockDevice": "Turn on and unlock your device",
-    "connectAndUnlockDevice": "Connect and unlock your device",
+    "connectAndUnlockDevice": "قم بتوصيل جهازك وإلغاء قفله",
     "unlockDevice": "Unlock your device",
     "outdated": "App version outdated",
     "outdatedDesc": "An important update is available for the {{appName}} application on your device. Please go to the Manager to update it.",
     "quitApp": "Quit the application on your device",
-    "appNotInstalled": "Please install the {{appName}} app",
-    "appNotInstalled_plural": "Please install the {{appName}} apps",
+    "appNotInstalled": "يُرجى تثبيت تطبيق {{appName}}",
+    "appNotInstalled_plural": "الرجاء تثبيت تطبيقات {{appName}}",
     "verifyAddress": {
       "title": "Verify address on device",
       "description": "يرجى التحقق من أن العنوان {{currencyName}} الذي سيتم عرضه في ليدجر لايف يطابق العنوان الموجود على جهاز ليدجر الخاص بك."
@@ -2460,15 +2460,15 @@
     "button": {
       "openManager": "Open Manager"
     },
-    "installApp": "{{appName}} App installation {{percentage}}",
-    "installAppDescription": "Please wait until the installation is finished",
+    "installApp": "تم إنجاز {{percentage}} من تثبيت تطبيق {{appName}} ",
+    "installAppDescription": "يُرجى الانتظار حتى الانتهاء من التثبيت",
     "listApps": "Checking App dependencies",
     "listAppsDescription": "Please wait while we make sure you have all the required apps"
   },
   "SelectDevice": {
     "title": "Pair new device",
     "bluetooth": {
-      "title": "Connect via Bluetooth...",
+      "title": "الاتصال عبر البلوتوث...",
       "label": "Detect your Nano automatically"
     },
     "deviceNotFoundPairNewDevice": "Add new Ledger Nano X",
@@ -2498,7 +2498,7 @@
         "title": "Open the {{managerAppName}} app on your {{productName}}",
         "description": "",
         "footer": {
-          "appInstalled": "You don't have the app installed",
+          "appInstalled": "التطبيق ليس مثبتًا لديك",
           "goManager": "Go to the Manager"
         }
       },
@@ -2571,12 +2571,12 @@
     "title": "Manager",
     "connect": "اختار جهازك",
     "appsCatalog": "App catalog",
-    "installedApps": "Installed apps",
+    "installedApps": "التطبيقات المثبتة",
     "noAppNeededForToken": "تثبيت تطبيق {{appName}} لـ {{tokenName}}",
     "tokenAppDisclaimer": "{{tokenName}} هو رمز توكن {{tokenType}} باستخدام تطبيق {{appName}}. لإدارة {{tokenName}}، قم <1>بتثبيت تطبيق {{appName}}</1> وأرسل رموز التوكن <3>إلى حسابك على {{appName}}</3>.",
     "tokenAppDisclaimerInstalled": "{{tokenName}} هو رمز توكن {{tokenType}} باستخدام تطبيق {{appName}}. لإدارة {{tokenName}}، <1>افتح تطبيق {{appName}}</1> وأرسل رموز التوكن <3>إلى حسابك على {{appName}}</3>.",
     "goToAccounts": "Go to Accounts",
-    "intallParentApp": "Install {{appName}} app",
+    "intallParentApp": "تثبيت تطبيق {{appName}}",
     "readOnly": {
       "title": "Nano X",
       "description": "Setup Ledger Live with your Ledger Nano X to install apps, create accounts and make secure transactions wherever you go.",
@@ -2590,16 +2590,16 @@
       "loading": "Loading apps...",
       "noApps": "No apps found",
       "searchAppsCatalog": "ابحث عن التطبيق في القائمة...",
-      "searchAppsInstalled": "Search installed apps...",
-      "noAppsInstalled": "No apps installed on your device",
+      "searchAppsInstalled": "البحث في التطبيقات المثبتة...",
+      "noAppsInstalled": "لا توجد تطبيقات مثبتة على جهازك",
       "noAppsDescription": "Go to the App catalog to install apps",
       "noResultsFound": "No results found",
       "noResultsDesc": "Please verify the spelling and try again",
       "versionNew": "(NEW{{newVersion}})"
     },
     "uninstall": {
-      "title": "Uninstall all",
-      "subtitle": "Uninstall all apps?",
+      "title": "إلغاء تثبيت الكل",
+      "subtitle": "إلغاء تثبيت كل التطبيقات؟",
       "description": "Uninstalling apps has no impact on your crypto assets. You can reinstall apps in the App catalog."
     },
     "remove": {
@@ -2611,16 +2611,16 @@
       "title": "Storage",
       "used": "Used",
       "genuine": "Your device is genuine",
-      "appsInstalled": "<0>{{number}}</0> app installed",
-      "appsInstalled_plural": "<0>{{number}}</0> apps installed",
+      "appsInstalled": "تم تثبيت تطبيق <0>{{number}}</0>",
+      "appsInstalled_plural": "<0>{{number}}</0> من التطبيقات مثبتة",
       "storageAvailable": "available"
     },
     "installSuccess": {
-      "title": "App installed successfully, you can now add your {{app}} accounts",
-      "title_plural": "Apps installed successfully, you can now add your accounts",
-      "notSupported": "App installed successfully, find out more about the installed apps on our website.",
+      "title": "تم تثبيت التطبيق بنجاح، يمكنك الآن إضافة حسابات {{app}} الخاصة بك",
+      "title_plural": "تم تثبيت التطبيقات بنجاح، يمكنك الآن إضافة حساباتك",
+      "notSupported": "تم تثبيت التطبيق بنجاح، تعرف على المزيد حول التطبيقات المثبتة على موقعنا الإلكتروني.",
       "manageAccount": "إضافة حساب",
-      "learnMore": "Learn more",
+      "learnMore": "معرفة المزيد",
       "later": "Do it later"
     },
     "firmware": {
@@ -2636,21 +2636,21 @@
   "AppAction": {
     "install": {
       "loading": {
-        "title": "Installing {{appName}}",
-        "desc": "Please wait for the {{appName}} app to be installed",
-        "button": "Installing...",
-        "button_plural": "Installing... {{progressPercentage}}%"
+        "title": "جاري تثبيت {{appName}}",
+        "desc": "يرجى الانتظار حتى يتم تثبيت تطبيق {{appName}}",
+        "button": "جاري التثبيت...",
+        "button_plural": "جاري التثبيت... {{progressPercentage}}%"
       },
       "done": {
-        "title": "Successfully installed {{appName}} on your {{productName}}",
+        "title": "تم تثبيت {{appName}} بنجاح على {{productName}} الخاص بك",
         "accounts": "Go to Accounts"
       },
       "dependency": {
         "title": "{{dependency}} app is needed",
-        "description_one": "The {{dependency}} app will also be installed because the {{app}} app uses it.",
-        "description_two": "Please press Continue to install the {{app}} and {{dependency}} apps."
+        "description_one": "سيتم أيضًا تثبيت تطبيق {{dependency}} لأن تطبيق {{app}} يستخدمه.",
+        "description_two": "يرجى الضغط على \"متابعة\" لتثبيت تطبيقات {{app}} و {{dependency}} ."
       },
-      "continueInstall": "Install apps"
+      "continueInstall": "تثبيت التطبيقات"
     },
     "update": {
       "title": "{{number}} app update",
@@ -2667,24 +2667,24 @@
     },
     "uninstall": {
       "loading": {
-        "title": "Uninstalling {{appName}}",
-        "button": "Uninstalling..."
+        "title": "إلغاء تثبيت {{appName}}",
+        "button": "جاري إلغاء التثبيت..."
       },
       "done": {
-        "title": "Successfully uninstalled {{appName}} on your {{productName}}"
+        "title": "تم بنجاح إلغاء تثبيت {{appName}} على {{productName}} الخاص بك"
       },
       "dependency": {
-        "title": "Uninstall {{app}} and related apps?",
+        "title": "هل تريد إلغاء تثبيت {{app}} والتطبيقات ذات الصلة؟",
         "showAll": "عرض التطبيقات المراد إلغاء تثبيتها",
-        "description": "Apps on your device that need the {{app}} app will be uninstalled too."
+        "description": "سيتم أيضًا إلغاء تثبيت التطبيقات الموجودة على جهازك التي تحتاج إلى تطبيق {{app}}."
       },
-      "continueUninstall": "Uninstall {{app}} and other apps"
+      "continueUninstall": "إلغاء تثبيت {{app}} والتطبيقات الأخرى"
     },
     "filter": {
       "title": "عرض",
       "all": "All",
       "installed": "Apps",
-      "not_installed": "Not installed",
+      "not_installed": "غير مثبت",
       "supported": "Live supported",
       "updatable": "Updatable",
       "apply": "تطبيق"
@@ -2720,7 +2720,7 @@
       "subtitle": "If requested on your device, please enter your PIN to finish the process."
     },
     "steps": {
-      "osu": "Installing OSU",
+      "osu": "جاري تثبيت OSU",
       "flash-mcu": "MCU updating",
       "flash-bootloader": "Bootloader updating",
       "flash": "Flashing your device",
@@ -2744,7 +2744,7 @@
   },
   "FirmwareUpdateConfirmation": {
     "title": "Firmware updated",
-    "description": "Go to Manager to reinstall apps on your device."
+    "description": "انتقل إلى المدير لإعادة تثبيت التطبيقات على جهازك."
   },
   "RepairDevice": {
     "title": "Repair",
@@ -3562,15 +3562,15 @@
     }
   },
   "walletconnect": {
-    "disclaimer": "Wants to connect to the following Ethereum account through your wallet :",
+    "disclaimer": "يريد الاتصال بحساب إيثريوم التالي من خلال محفظتك:",
     "reject": "Reject",
-    "connect": "Connect",
-    "connected": "Connected",
+    "connect": "اتصال",
+    "connected": "متصل",
     "disconnected": "تم قطع الاتصال",
-    "warningdisconnected": "There is a connection problem between the dApp, WalletConnect and Ledger Live. Wait a few moments or relaunch the connection",
+    "warningdisconnected": "هناك مشكلة في الاتصال بين dApp وWalletConnect وليدجر لايف (Ledger Live). انتظر بضع لحظات أو أعد تشغيل الاتصال",
     "info": "You can now access the {{name}} dApp on your desktop.",
     "warning": "Sharing receive addresses from dApp is not secure. Always use Ledger Live when sharing your address to receive funds.",
-    "isconnecting": "is connecting, please wait...",
+    "isconnecting": "يجري الاتصال، يرجى الانتظار...",
     "disconnect": "قطع الاتصال",
     "retry": "إعادة المحاولة",
     "close": "إغلاق",
