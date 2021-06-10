@@ -4,10 +4,10 @@
     "apply": "تطبيق",
     "back": "عودة",
     "delete": "حذف",
-    "paste": "Paste",
+    "paste": "لصق",
     "yes": "نعم",
     "no": "لا",
-    "gotit": "Got it",
+    "gotit": "فهمت ذلك",
     "continue": "متابعة",
     "retry": "إعادة المحاولة",
     "done": "تم",
@@ -24,21 +24,21 @@
     "editName": "تعديل الاسم",
     "close": "إغلاق",
     "confirm": "تأكيد",
-    "poweredBy": "Powered by ",
+    "poweredBy": "مدعوم من ",
     "received": "تم الإستلام",
     "sent": "مُرسل",
-    "or": "OR",
+    "or": "أو",
     "rename": "إعادة تسمية",
     "learnMore": "معرفة المزيد",
     "viewDetails": "عرض التفاصيل",
     "today": "اليوم",
     "yesterday": "أمس",
-    "upToDate": "Up to date",
-    "transactionDate": "Transaction date",
-    "outdated": "Outdated",
-    "satPerByte": "sat/bytes",
+    "upToDate": "حتى الآن",
+    "transactionDate": "تاريخ المعاملة",
+    "outdated": "قديم",
+    "satPerByte": "ساتوشي/بايت",
     "notAvailable": "غير متاح",
-    "import": "Import",
+    "import": "استيراد",
     "bluetooth": "بلوتوث",
     "usb": "USB",
     "add": "أضف",
@@ -54,7 +54,7 @@
     "sync": {
       "ago": "مزامنة {{time}}"
     },
-    "update": "Update available",
+    "update": "متوفر تحديث",
     "install": "تثبيت",
     "installed": "تم التثبيت",
     "uninstall": "إلغاء التثبيت",
@@ -69,16 +69,16 @@
       "days_plural": "خلال {{time}} أيام"
     },
     "timeAgo": {
-      "seconds": "one second ago",
-      "seconds_plural": "{{time}} seconds ago",
-      "minutes": "one minute ago",
-      "minutes_plural": "{{time}} minutes ago",
-      "hours": "one hour ago",
+      "seconds": "منذ ثانية واحدة",
+      "seconds_plural": "منذ {{time}} ثانية",
+      "minutes": "منذ دقيقة",
+      "minutes_plural": "منذ {{time}} دقائق",
+      "hours": "منذ ساعة واحدة",
       "hours_plural": "{{time}} hours ago",
       "days": "أمس",
       "days_plural": "{{time}} days ago"
     },
-    "seeMore": "See more",
+    "seeMore": "رؤية المزيد",
     "moreInfo": "More info",
     "buyEth": "Buy Ethereum"
   },
@@ -791,7 +791,7 @@
         "warning": {
           "title": "Please be careful",
           "desc": "تأكد من اتباع التعليمات على هذا التطبيق في كل خطوة من العملية.",
-          "ctaText": "Got it!"
+          "ctaText": "فهمت ذلك!"
         }
       },
       "setup": {
@@ -882,7 +882,7 @@
         "infoModal": {
           "title": "كيف تعمل عبارة الاسترداد؟",
           "desc": "عبارة الاسترداد الخاصة بك تعمل كمفتاح رئيسي فريد؛ حيث يستخدمها جهاز لديجر (Ledger) الخاص بك لحساب المفاتيح الخاصة لكل أصل مشفر تملكه.",
-          "desc_1": "To restore access to your crypto, any wallet can calculate the same private keys from your recovery phrase.",
+          "desc_1": "لاستعادة الوصول إلى الأصل المشفر الخاص بك، يمكن لأي محفظة أن تقوم بحساب نفس المفاتيح الخاصة من عبارة الاسترداد الخاصة بك.",
           "link": "More about the recovery phrase",
           "title_1": "ماذا لو فقدت الوصول إلى جهاز Nano الخاص بي؟",
           "bullets": {
@@ -960,14 +960,14 @@
     },
     "stepRecoveryPhrase": {
       "importRecoveryPhrase": {
-        "title": "Restore from recovery phrase",
+        "title": "الاستعادة من عبارة الاسترداد",
         "desc": "قم باستعادة جهاز Nano الخاص بك من عبارة الاسترداد الخاصة بك لاستعادة أو استبدال أو عمل نسخة احتياطية من محفظة ليدجر للأجهزة الخاصة بك.",
         "desc_1": "سيستعيد جهاز Nano مفاتيحك الخاصة وستكون قادرًا على الوصول إالي وإدارة أوصلك المشفرة.",
         "cta": "حسنًا، أنا مستعد!",
         "warning": {
-          "title": "We recommend Ledger recovery phrases only",
+          "title": "نوصي باستخدام عبارات استرداد ليدجر فقط",
           "desc": "لا يضمن ليدجر أمان عبارات الاسترداد الخارجية. نحن نوصي بإعداد جهاز Nano الخاص بك كجهاز جديد إذا لم يتم إنشاء عبارة الاسترداد الخاصة بك بواسطة ليدجر.",
-          "cta": "Got it!"
+          "cta": "فهمت!"
         },
         "nextStep": "الخطوة التالية",
         "bullets": {
@@ -988,7 +988,7 @@
             "label": "تعرف على كيفية التفاعل مع جهازك من خلال قراءة التعليمات التي تظهر على الشاشة."
           },
           "2": {
-            "title": "Select “Restore from recovery phrase”",
+            "title": "اختار \"الاستعادة من عبارة الاسترداد\"",
             "label": "Press both buttons simultaneously to validate the selection."
           },
           "3": {
@@ -1100,20 +1100,20 @@
           "label": "Scan the LiveQR code with your phone."
         },
         "2": {
-          "label": "Select the crypto accounts to import."
+          "label": "إختار حسابات التشفير المراد استيرادها."
         }
       },
       "warning": {
         "title": "Your desktop and mobile apps must be synced manually.",
         "desc": "Ledger Live respects your privacy and stores your data locally. If you change accounts and settings on your phone, you will need to do the same on your computer, and vice versa. Your transactions stay synchronized with the blockchain.",
-        "cta": "Got it!"
+        "cta": "فهمت!"
       }
     },
     "stepSetupPin": {
       "step1": "قم بتشغيل {{fullDeviceName}} واتبع التعليمات.",
       "step1-nanoS": "قم بتوصيل {{fullDeviceName}} بهاتفك باستخدام كابل OTG.",
       "step2": "اضغط على الزرين معًا لإختيار <1><1>الإعداد كجهاز جديد.</1></1>",
-      "step2-restore": "Press both buttons together to select <1><1>Restore from recovery phrase.</1></1>",
+      "step2-restore": "اضغط على كلا الزرين معًا لتحديد <1><1>الاستعادة من عبارة الاسترداد.</1></1>",
       "step3": "اضغط على الزر الأيسر أو الأيمن لتحديد رقم. اضغط الزرين معًا للتأكيد.",
       "step4prefix": "Select ",
       "step4suffix1": " لتأكيد رقم التعريف الشخصي PIN الخاص بك.",
@@ -1248,7 +1248,7 @@
   },
   "addAccountsModal": {
     "ctaAdd": "إضافة حساب",
-    "ctaImport": "Import Desktop accounts"
+    "ctaImport": "استيراد حسابات سطح المكتب"
   },
   "byteSize": {
     "bytes": "{{size}} بايت",
@@ -1319,8 +1319,8 @@
     "identifier": "Transaction ID",
     "viewOperation": "عرض في المتصفح",
     "whatIsThis": "What is this operation?",
-    "seeAll": "See all",
-    "seeLess": "See less",
+    "seeAll": "رؤية الكل",
+    "seeLess": "رؤية أقل",
     "viewInExplorer": "عرض في المتصفح",
     "sending": "Sending...",
     "receiving": "Receiving...",
@@ -1386,7 +1386,7 @@
       "algorand": {
         "contractAddress": "عنوان العَقد",
         "viewInExplorer": "View in explorer",
-        "seeMore": "See more ASA",
+        "seeMore": "رؤية المزيد من ASA",
         "seeLess": "See less ASA",
         "addTokens": "Add ASA",
         "howTo": "You can add assets to your Algorand account.",
@@ -1464,22 +1464,22 @@
         "descBottom": "Please put the LiveQR code within the square."
       },
       "result": {
-        "title": "Import accounts",
+        "title": "استيراد الحسابات",
         "newAccounts": "الحسابات الجديدة",
         "updatedAccounts": "الحسابات المحدثة",
         "empty": "إضافة حساب جديد",
         "descEmpty": "<0><0>No accounts</0></0> were found. Please try again or go back to Setup",
-        "alreadyImported": "Already imported",
-        "noAccounts": "Nothing to import",
-        "unsupported": "Unsupported",
-        "settings": "App settings",
-        "includeGeneralSettings": "Import Desktop settings"
+        "alreadyImported": "تم الاستيراد بالفعل",
+        "noAccounts": "لا شيء لاستيراده",
+        "unsupported": "غير مدعوم",
+        "settings": "إعدادات التطبيقات",
+        "includeGeneralSettings": "استيراد إعدادات سطح المكتب"
       },
       "fallback": {
-        "header": "Import account",
-        "title": "Enable camera",
-        "desc": "Please enable Camera in Settings to scan QR codes.",
-        "buttonTitle": "Go to Settings"
+        "header": "استيراد الحساب",
+        "title": "تمكين الكاميرا",
+        "desc": "يرجى تمكين الكاميرا في الإعدادات لإجراء المسح الضوئي لرموز QR.",
+        "buttonTitle": "انتقل إلى الاعدادات"
       }
     },
     "availableBalance": "Available balance",
@@ -1508,7 +1508,7 @@
   "accounts": {
     "title": "حسابات",
     "importNotification": {
-      "message": "Your accounts were imported successfully!"
+      "message": "تم استيراد حساباتك بنجاح!"
     },
     "row": {
       "syncPending": "Synchronizing...",
@@ -1841,7 +1841,7 @@
         "label": "Your Swap ID:",
         "title": "Pending operation",
         "disclaimer": "Please take note of your Swap ID number in case you’d need assistance from {{provider}} later.",
-        "cta": "See details"
+        "cta": "رؤية التفاصيل"
       },
       "tradeMethod": {
         "float": "Floating rate",
@@ -1879,8 +1879,8 @@
           "cta": "إغلاق"
         },
         "outdatedApp": {
-          "title": "App update available",
-          "desc": "You need to update the {{appName}} app.",
+          "title": "يتاح تحديث للتطبيق",
+          "desc": "تحتاج إلى تحديث تطبيق {{appName}}.",
           "cta": "الانتقال إلى المدير",
           "close": "إغلاق"
         },
@@ -2283,7 +2283,7 @@
       "amount": "المبلغ",
       "info": "You will start earning {{resource}} once the network has confirmed the freeze. You can shortly vote for Super Representatives to also earn rewards.",
       "button": {
-        "pending": "Transaction is being validated.",
+        "pending": "يتم التحقق من صحة المعاملة.",
         "pendingDesc": "Please wait a moment before voting.",
         "vote": "Vote",
         "voteTimer": "0:{{time}}",
@@ -2310,7 +2310,7 @@
       "info": "Your {{resource}} points will be decreased and all your votes will be canceled.",
       "button": {
         "done": "تم",
-        "cta": "See details"
+        "cta": "رؤية التفاصيل"
       }
     }
   },
@@ -2324,7 +2324,7 @@
       "success": "Your rewards were added to the available balance.",
       "button": {
         "done": "تم",
-        "cta": "See details"
+        "cta": "رؤية التفاصيل"
       }
     }
   },
@@ -2368,7 +2368,7 @@
     "imported": "تمت إضافة الحسابات بنجاح",
     "sections": {
       "importable": {
-        "title": "Add existing account"
+        "title": "إضافة حساب موجود"
       },
       "creatable": {
         "title": "إضافة حساب جديد"
@@ -2440,7 +2440,7 @@
     "turnOnAndUnlockDevice": "Turn on and unlock your device",
     "connectAndUnlockDevice": "قم بتوصيل جهازك وإلغاء قفله",
     "unlockDevice": "Unlock your device",
-    "outdated": "App version outdated",
+    "outdated": "إصدار التطبيق قديم",
     "outdatedDesc": "يوجد تحديث هام لتطبيق {{appName}} على جهازك. يُرجى الذهاب إلى المدير لتحديثه.",
     "quitApp": "Quit the application on your device",
     "appNotInstalled": "يُرجى تثبيت تطبيق {{appName}}",
@@ -2660,10 +2660,10 @@
       "progress": "Updating all...",
       "button": "Update all",
       "version": "New {{version}}",
-      "buttonAction": "Update available",
+      "buttonAction": "متوفر تحديث",
       "buttonModal": "Update all apps",
       "loading": "Updating...",
-      "titleModal": "Updates available"
+      "titleModal": "التحديثات المتاحة"
     },
     "uninstall": {
       "loading": {
@@ -2751,7 +2751,7 @@
     "action": "My device is ready"
   },
   "StepLegacyModal": {
-    "description": "Imported accounts synchronize with the network only, not between Mobile and Desktop versions of Ledger Live."
+    "description": "تتم مزامنة الحسابات المستوردة مع الشبكة فقط، وليس بين إصدارات الجوّال وسطح المكتب من Ledger Live."
   },
   "algorand": {
     "token": "ASA (Assets)",
