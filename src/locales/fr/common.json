@@ -96,7 +96,7 @@
     },
     "BluetoothRequired": {
       "title": "Bluetooth désactivé",
-      "description": "Activez le Bluetooth dans les paramètres de votre téléphone. (État {{state}})"
+      "description": "Activez le Bluetooth dans les paramètres de votre téléphone (état {{state}})."
     },
     "BtcUnmatchedApp": {
       "title": "Mauvaise application",
@@ -249,7 +249,7 @@
     },
     "FeeEstimationFailed": {
       "title": "Échec de l'estimation des frais",
-      "description": "Essayez de fixer les frais manuellement (statut : {{status}})."
+      "description": "Essayez de définir les frais manuellement (statut : {{status}})."
     },
     "FeeNotLoaded": {
       "title": "Échec du chargement des frais"
@@ -1840,7 +1840,7 @@
         "description": "Votre opération de Swap a été envoyée au réseau pour confirmation. Cela peut prendre jusqu'à une heure avant que vous ne receviez vos crypto-actifs échangés.",
         "label": "Identifiant de votre Swap :",
         "title": "Opération en attente",
-        "disclaimer": "Notez bien l'identifiant de votre Swap au cas où vous auriez besoin de l'aide de {{provider}} plus tard.",
+        "disclaimer": "Notez bien l'identifiant de votre Swap au cas où vous auriez besoin de l'aide de {{provider}} ultérieurement.",
         "cta": "Voir les détails"
       },
       "tradeMethod": {
@@ -2433,7 +2433,7 @@
     }
   },
   "DeviceAction": {
-    "allowAppPermission": "Ouvrez l'application {{wording}} sur votre appareil",
+    "allowAppPermission": "Ouvrez l'application {{wording}} sur votre appareil.",
     "allowAppPermissionSubtitleToken": "pour gérer vos jetons {{token}}",
     "allowManagerPermission": "Autoriser {{wording}} sur l'appareil",
     "loading": "Chargement...",
