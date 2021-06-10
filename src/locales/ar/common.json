@@ -20,18 +20,18 @@
     "skip": "تخطي",
     "noCryptoFound": "لم يتم العثور على أي أصول مشفرة",
     "needHelp": "هل تحتاج إلى مساعدة؟",
-    "edit": "Edit",
-    "editName": "Edit name",
+    "edit": "تعديل",
+    "editName": "تعديل الاسم",
     "close": "إغلاق",
     "confirm": "تأكيد",
     "poweredBy": "Powered by ",
     "received": "تم الإستلام",
-    "sent": "Sent",
+    "sent": "مُرسل",
     "or": "OR",
-    "rename": "Rename",
-    "learnMore": "Learn more",
-    "viewDetails": "View details",
-    "today": "Today",
+    "rename": "إعادة تسمية",
+    "learnMore": "معرفة المزيد",
+    "viewDetails": "عرض التفاصيل",
+    "today": "اليوم",
     "yesterday": "أمس",
     "upToDate": "Up to date",
     "transactionDate": "Transaction date",
@@ -44,8 +44,8 @@
     "add": "أضف",
     "slow": "بطىء",
     "fast": "سريع",
-    "token": "Token",
-    "token_plural": "Tokens",
+    "token": "رمز",
+    "token_plural": "رموز",
     "subaccount": "Subaccount",
     "subaccount_plural": "Subaccounts",
     "forgetDevice": "إزالة الجهاز",
@@ -655,7 +655,7 @@
       },
       "stakeCosmos": {
         "title": "Stake COSMOS",
-        "description": "Delegate your ATOM earn rewards today."
+        "description": "قم بتفويض مكاسب مكافآت ATOM اليوم."
       },
       "polkastake": {
         "title": "POLKADOT STAKING",
@@ -1370,8 +1370,8 @@
   "selectableAccountsList": {
     "deselectAll": "Deselect all",
     "selectAll": "Select all",
-    "tokenCount": "+1 token",
-    "tokenCount_plural": "+{{count}} tokens",
+    "tokenCount": "+1 رمز",
+    "tokenCount_plural": "+ {{count}} من الرموز",
     "subaccountCount": "+1 subaccount",
     "subaccountCount_plural": "+{{count}} subaccounts"
   },
@@ -1379,9 +1379,9 @@
     "tokens": {
       "contractAddress": "عنوان العَقد",
       "viewInExplorer": "View in explorer",
-      "seeMore": "Display more Tokens",
-      "seeLess": "Display fewer Tokens",
-      "addTokens": "Add token",
+      "seeMore": "عرض المزيد من الرموز",
+      "seeLess": "عرض عدد أقل من الرموز",
+      "addTokens": "إضافة رمز",
       "howTo": "To add token accounts, you need to <0>receive funds</0> using your <1>{{currency}} address</1>.",
       "algorand": {
         "contractAddress": "عنوان العَقد",
@@ -1436,8 +1436,8 @@
         "title": "Currency"
       },
       "endpointConfig": {
-        "title": "Node",
-        "desc": "The API node to use"
+        "title": "عقدة",
+        "desc": "عقدة API المراد استخدامها"
       },
       "delete": {
         "title": "Remove account from the Portfolio",
@@ -2116,7 +2116,7 @@
           "extraInfo": "Transactions can take some time to be displayed in an explorer and to be confirmed.",
           "button": {
             "done": "تم",
-            "cta": "View details"
+            "cta": "عرض التفاصيل"
           }
         }
       },
@@ -2133,7 +2133,7 @@
           "info": "Your assets will be available once the network has confirmed the withdrawal.",
           "button": {
             "done": "تم",
-            "cta": "View details"
+            "cta": "عرض التفاصيل"
           }
         }
       }
@@ -2215,7 +2215,7 @@
       "fees": "Fees",
       "confirm": "سيتم تحديث رصيد حسابك بمجرد تأكيد الشبكة للمعاملة.",
       "button": {
-        "details": "View details",
+        "details": "عرض التفاصيل",
         "retry": "إعادة المحاولة"
       }
     },
@@ -2473,7 +2473,7 @@
     },
     "deviceNotFoundPairNewDevice": "Add new Ledger Nano X",
     "headerDescription": "Please make sure your {{productName}} is unlocked with Bluetooth enabled",
-    "usb": "... or connect USB cable",
+    "usb": "... أو قم بالتوصيل عبر كابل USB",
     "usbLabel": "قم بتوصيل كابل USB وأدخل رمز الPIN على جهازك",
     "withoutDeviceHeader": "I don't have my device with me",
     "withoutDevice": "المتابعة بدون جهازي",
@@ -2740,7 +2740,7 @@
   "FirmwareUpdateMCU": {
     "title": "Restart device",
     "desc1": "افصل جهازك عن جهاز الكمبيوتر الخاص بك.",
-    "desc2": "Press and hold the left button, connect the USB cable then release the button when the Bootloader screen appears."
+    "desc2": "اضغط و استمر في الضغط على الزر الأيسر، وقم بتوصيل كبل الUSB ثم قم بتحرير الزر عندما تظهر شاشة Bootloader."
   },
   "FirmwareUpdateConfirmation": {
     "title": "Firmware updated",
@@ -2816,7 +2816,7 @@
             "success": {
               "title": "{{token}} asset successfully added!",
               "text": "You can now receive and send {{token}} assets on your Algorand account.",
-              "cta": "View details"
+              "cta": "عرض التفاصيل"
             },
             "pending": {
               "title": "Broadcasting transaction..."
@@ -2904,7 +2904,7 @@
             "success": {
               "title": "You have successfully delegated your assets",
               "text": "سيتم تحديث رصيد حسابك بمجرد تأكيد الشبكة للمعاملة.",
-              "cta": "View details"
+              "cta": "عرض التفاصيل"
             },
             "pending": {
               "title": "Broadcasting transaction..."
@@ -2951,7 +2951,7 @@
             "success": {
               "title": "You have successfully redelegated your assets",
               "text": "سيتم تحديث رصيد حسابك عندما تؤكد الشبكة المعاملة.",
-              "cta": "View details"
+              "cta": "عرض التفاصيل"
             },
             "pending": {
               "title": "Broadcasting transaction..."
@@ -2978,7 +2978,7 @@
             "success": {
               "title": "You have successfully undelegated your assets",
               "text": "سيتم تحديث رصيد حسابك عندما تؤكد الشبكة المعاملة.",
-              "cta": "View details"
+              "cta": "عرض التفاصيل"
             },
             "pending": {
               "title": "Broadcasting transaction..."
@@ -3016,7 +3016,7 @@
               "title": "You have successfully claimed your rewards. They were added to your available balance.",
               "titleCompound": "Your rewards were delegated to the same validator.",
               "text": "سيتم تحديث رصيد حسابك عندما تؤكد الشبكة المعاملة.",
-              "cta": "View details"
+              "cta": "عرض التفاصيل"
             },
             "pending": {
               "title": "Broadcasting transaction..."
@@ -3412,7 +3412,7 @@
     "yieldInfos": "Yield rates are provided by",
     "termsAndPrivacy": "I have read and I accept the <1>Ledger Live Terms of Use</1> and <3>Privacy Policy</3>.",
     "delegation": "Delegation",
-    "viewDetails": "View details",
+    "viewDetails": "عرض التفاصيل",
     "validator": "Validator",
     "validatorAddress": "Validator address",
     "delegatedAccount": "Delegated account",
