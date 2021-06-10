@@ -1408,7 +1408,7 @@
     "lastOperations": "最后操作",
     "emptyState": {
       "title": "还没有加密资产？",
-      "desc": "确保已经安装 <1><0>{{managerAppName}}</0></1> 应用程序，然后开始接收加密资产。",
+      "desc": "确保已安装 <1><0>{{managerAppName}}</0></1> 应用程序并开始接收。",
       "descWithBuy": "确保已经安装 <1><0>{{managerAppName}}</0></1> 应用程序，以便买入或接收 <3><0>{{currencyTicker}}</0></3>",
       "descToken": "确保已经安装 <1><0>{{managerAppName}}</0></1> 应用程序，以便开始接收 <3><0>{{currencyTicker}}</0></3> 和 <5><0>{{tokenType}}</0> 代币</5>",
       "buttons": {
@@ -1590,7 +1590,7 @@
         "light": "亮色"
       },
       "counterValueDesc": "选择要查看余额和进行操作的币种",
-      "exchange": "兑换率提供商",
+      "exchange": "汇率提供方",
       "exchangeDesc": "设置 比特币 到 {{fiat}} 的汇率提供方",
       "stock": "区域性市场指标",
       "stockDesc": "选择西方以绿色来显示市场增长；或选择东方以红色来显示市场增长。",
