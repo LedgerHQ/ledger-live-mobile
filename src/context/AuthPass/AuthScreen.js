@@ -79,6 +79,7 @@ class FormFooter extends PureComponent<*> {
       onSubmit,
       passwordError,
       onPress,
+      colors,
     } = this.props;
     return inputFocused ? (
       <TouchableWithoutFeedback>
@@ -90,6 +91,9 @@ class FormFooter extends PureComponent<*> {
           containerStyle={styles.buttonContainer}
           titleStyle={styles.buttonTitle}
           disabled={passwordError || passwordEmpty}
+          isFocused
+          useTouchable
+          colors={colors}
         />
       </TouchableWithoutFeedback>
     ) : (
@@ -239,6 +243,7 @@ class AuthScreen extends PureComponent<Props, State> {
                 passwordError={passwordError}
                 passwordEmpty={!this.state.password}
                 onPress={this.onPress}
+                colors={colors}
               />
             </View>
 
