@@ -1226,7 +1226,7 @@
     },
     "transactionsPendingConfirmation": {
       "title": "非同步的余额",
-      "desc": "有些交易尚未确认。此类交易会体现在您的余额上，一经确认即可使用。"
+      "desc": "有些交易尚未确认。这些交易将反映在您的余额中，并在确认后可用。"
     },
     "summary": "这是您的账户概览",
     "summary_plural": "您的 {{count}} 账户已同步。",
