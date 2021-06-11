@@ -709,7 +709,7 @@
       "warning": {
         "title": "ابدأ باللغة الإنجليزية",
         "cta": "فهمت ذلك!",
-        "desc": "نحن نعمل على تقديم لغات إضافية لمساعدتك في بدء استخدام Ledger. يرجى العلم أن الجزء المتبقي من تجربة ليدجر متاحة حاليًا باللغة الإنجليزية فقط."
+        "desc": "نحن نعمل على تقديم لغات إضافية لمساعدتك في بدء استخدام Ledger. يرجى العلم أن الجزء المتبقي من تجربة ليدجر متاح حاليًا باللغة الإنجليزية فقط."
       }
     },
     "stepSelectDevice": {
@@ -1845,9 +1845,9 @@
       },
       "tradeMethod": {
         "float": "Floating rate",
-        "floatUnavailable": "Floating rate not supported for this pair",
+        "floatUnavailable": "المعدل المتغير غير مدعوم لهذا الثنائي",
         "fixed": "Fixed rate",
-        "fixedUnavailable": "Fixed rate not supported for this pair",
+        "fixedUnavailable": "المعدل الثابت غير مدعوم لهذا الثنائي",
         "floatDesc": "قد يتغير المبلغ الخاص بك تبعًا لظروف السوق.",
         "fixedDesc": "سيظل المبلغ الخاص بك كما هو بغض النظر عن التغييرات في السوق. يتم تحديث السعر الثابت كل 30 ثانية",
         "by": "By",
