@@ -137,8 +137,8 @@
       "description": "يرجى إعادة المحاولة."
     },
     "CosmosBroadcastCodeUnauthorized": {
-      "title": "Unauthorized signature",
-      "description": "This account is not authorized to sign this transaction."
+      "title": "توقيع غير مؤذَن به",
+      "description": "هذا الحساب غير مؤذَن له بالتوقيع على هذه المعاملة."
     },
     "CosmosBroadcastCodeInsufficientFunds": {
       "title": "الأرصدة المالية غير كافية",
@@ -568,7 +568,7 @@
   "bluetooth": {
     "required": "عذرًا، يبدو أن خاصية البلوتوث معطلة",
     "locationRequiredTitle": "الموقع مطلوب لخدمة Bluetooth LE",
-    "locationRequiredMessage": "مطلوب إذن موقع على أندرويد لعرض قائمة أجهزة Bluetooth LE.",
+    "locationRequiredMessage": "مطلوب تصريح المَوقع على أندرويد لعرض قائمة أجهزة Bluetooth LE.",
     "checkEnabled": "يرجى تمكين خاصية البلوتوث في إعدادات هاتفك."
   },
   "location": {
@@ -578,7 +578,7 @@
     "noInfos": "Ledger لا تستخدم معلومات موقعك."
   },
   "permissions": {
-    "open": "Open app permissions"
+    "open": "فتح تصريحات التطبيق"
   },
   "fees": {
     "speed": {
@@ -1069,7 +1069,7 @@
         "desc_2": "تحقق من إعدادات البلوتوث بهاتفك لمعرفة ما إذا تم اكتشاف جهاز ليدجر Nano X أم لا. إذا لم يتم اكتشافه، فتأكد من تشغيل خاصية البلوتوث على ليدجر Nano X.",
         "desc_3": "خدمات الموقع",
         "desc_4": "إذا لم يتم اكتشاف ليدجر Nano X في تطبيق الجوّال لديك عند محاولة إقرانه، فيرجى تجربة الحل التالي:",
-        "desc_5": "يطلب منك تطبيق ليدجر للجوّال السماح باستخدام خدمات الموقع عندما لم يتم تمكينها بعد، ولكن في بعض موديلات الهواتف، لا يتم اكتشاف ذلك دائمًا بشكل صحيح. يرجى ملاحظة أن تطبيق ليدجر للجوال لا يستخدم أبدًا معلومات موقعك، فهذا الإذن مطلوب ببساطة لخاصية البلوتوث على أندرويد.",
+        "desc_5": "يطلب منك تطبيق ليدجر للجوّال السماح باستخدام خدمات الموقع عندما لم يتم تمكينها بعد، ولكن في بعض موديلات الهواتف، لا يتم اكتشاف ذلك دائمًا بشكل صحيح. يرجى ملاحظة أن تطبيق ليدجر للجوال لا يستخدم أبدًا معلومات موقعك، فهذا التصريح مطلوب ببساطة لخاصية البلوتوث على أندرويد.",
         "desc_6": "أبلغ بعض المستخدمين عن إصلاح مشكلات الاتصال الخاصة بهم عن طريق تحديث إصدار أندرويد الذي يعمل على هواتفهم إلى إصدار أحدث. يرجى مراجعة الشركة المصنعة لهاتفك لمعرفة ما إذا كان هناك تحديث متوفر.",
         "link": "معرفة المزيد",
         "bullets": {
@@ -1541,7 +1541,7 @@
   },
   "help": {
     "gettingStarted": {
-      "title": "Getting started",
+      "title": "لنبدأ",
       "desc": "ابدأ هنا"
     },
     "helpCenter": {
@@ -2024,7 +2024,7 @@
         "1": {
           "label": "الخطوة 1‏/3",
           "title": "الموافقة على الحساب تسمح للبروتوكول بمباشرة القروض المستقبلية.",
-          "description": "You need to authorize the Compound smart contract to transfer up to a certain amount of assets to the protocol. Enabling an account gives permission to the protocol to process future loans."
+          "description": "يتعين عليك أن تأذن لعقد Compound الذكي تحويل كمية معينة من الأصول إلى البروتوكول. تمكين الحساب يعطي تصريح للبروتوكول بمباشرة القروض المستقبلية."
         },
         "2": {
           "label": "الخطوة 2‏/3",
@@ -2433,9 +2433,9 @@
     }
   },
   "DeviceAction": {
-    "allowAppPermission": "Open the {{wording}} app on your device",
+    "allowAppPermission": "افتح تطبيق {{wording}} على جهازك",
     "allowAppPermissionSubtitleToken": "لإدارة رموز توكن {{token}} الخاصة بك",
-    "allowManagerPermission": "Allow {{wording}} on your device",
+    "allowManagerPermission": "السماح بــ {{wording}} على جهازك",
     "loading": "Loading...",
     "turnOnAndUnlockDevice": "قم بتشغيل جهازك وإلغاء قفله",
     "connectAndUnlockDevice": "قم بتوصيل جهازك وإلغاء قفله",
@@ -3059,11 +3059,11 @@
       },
       "flow": {
         "started": {
-          "title": "Vote",
-          "srOrCandidate": "SR or Candidate?",
-          "description": "Vote for one or more Super Representatives to start earning rewards.",
+          "title": "تصويت",
+          "srOrCandidate": "ممثل مميز أم مرشح؟",
+          "description": "صوّت لواحد أو أكثر من الممثلين المميزين للبدء في كسب المكافآت.",
           "button": {
-            "continue": "Cast votes"
+            "continue": "الإدلاء بالأصوات"
           }
         },
         "selectValidator": {
@@ -3430,11 +3430,11 @@
     "selectValidatorTitle": "اختار المدقق",
     "started": {
       "title": "اكسب المكافآت",
-      "description": "Delegate your Tezos account to a third-party validator to earn rewards securely, keeping control of your assets.",
+      "description": "قم بتفويض حساب Tezos الخاص بك إلى مدقق خارجي لكسب المكافآت بشكل آمن، مع الاحتفاظ بالسيطرة على أصولك.",
       "steps": {
-        "0": "Delegated accounts remain yours.",
-        "1": "You can manage your assets at all times.",
-        "2": "Delegate securely with your Ledger device."
+        "0": "تظل الحسابات المفوضة ملكًا لك.",
+        "1": "يمكنك إدارة أصولك في جميع الأوقات.",
+        "2": "قم بإجراء التفويض بشكل آمن بجهاز ليدجر الخاص بك."
       },
       "cta": "قم بالتفويض لكسب المكافآت"
     },
