@@ -679,7 +679,7 @@
       },
       "sell": {
         "title": "Vendre des cryptos",
-        "description": "Vendez des bitcoins sans sortir de Ledger Live."
+        "description": "Vendez vos bitcoins sans sortir de Ledger Live."
       },
       "vote": {
         "title": "Voter avec son Ledger",
@@ -1358,7 +1358,7 @@
       "unbondedAmount": "Montant délié",
       "withdrawUnbondedAmount": "Retirer le montant délié",
       "palletMethod": "Méthode",
-      "transferAmount": "Montant du transfert",
+      "transferAmount": "Montant transféré",
       "validatorsCount": "Validateurs ({{number}})"
     },
     "multipleAddresses": "Pourquoi plusieurs adresses ?"
@@ -1891,7 +1891,7 @@
           "payoutNetworkFees": "Frais de réception",
           "payoutNetworkFeesTooltip": "Ce montant n'apparaîtra pas sur votre appareil.",
           "receive": "Montant",
-          "receiveFloat": "Montant à recevoir avant les frais de service",
+          "receiveFloat": "Montant à recevoir sans les frais de service",
           "provider": "Prestataire",
           "method": "Taux",
           "fees": "Frais maximaux",
