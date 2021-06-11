@@ -379,7 +379,7 @@
     },
     "SelectExchangesLoadError": {
       "title": "غير قادر على التحميل",
-      "description": "Cannot load the exchanges."
+      "description": "لا يمكن تحميل التداولات."
     },
     "SyncError": {
       "title": "خطأ في المزامنة",
@@ -411,7 +411,7 @@
     },
     "TronNoFrozenForEnergy": {
       "title": "لا توجد أصول لإلغاء تجميدها",
-      "description": "You don't have Energy assets to unfreeze."
+      "description": "ليس لديك أصول الطاقة لإلغاء تجميدها."
     },
     "TronUnfreezeNotExpired": {
       "title": "إلغاء التجميد غير متوفر بعد",
@@ -422,7 +422,7 @@
     },
     "TronInvalidVoteCount": {
       "title": "Vote format is incorrect",
-      "description": "You can only vote using round numbers."
+      "description": "يمكنك التصويت فقط باستخدام أرقام كاملة."
     },
     "TronRewardNotAvailable": {
       "title": "المكافأة غير قابلة للمطالبة بها بعد",
@@ -435,24 +435,24 @@
       "title": "مبلغ التجميد لا يمكن أن يكون أصغر من 1"
     },
     "TronSendTrc20ToNewAccountForbidden": {
-      "title": "Sending TRC20 to the new account will not activate it",
+      "title": "لن يؤدي إرسال TRC20 إلى الحساب الجديد إلى تفعيله",
       "description": "لتفعيله، قم أولاً بإرسال إما TRX أو TRC10 إلى الحساب. وسيتمكن بعدها من تلقي TRC20."
     },
     "TronUnexpectedFees": {
       "title": "يمكن تطبيق رسوم إضافية"
     },
     "TronNotEnoughTronPower": {
-      "title": "Not enough votes available"
+      "title": "لا توجد أصوات كافية"
     },
     "TronTransactionExpired": {
-      "title": "Transaction timeout expired",
-      "description": "Transactions must be signed within 30 seconds. Please try again."
+      "title": "انتهت مهلة المعاملة",
+      "description": "يجب توقيع المعاملات في غضون 30 ثانية. يرجى المحاولة مرة أخرى."
     },
     "TronNotEnoughEnergy": {
       "title": "لم تتبقى طاقة كافية لإرسال هذا الرمز"
     },
     "UpdateYourApp": {
-      "title": "App update needed",
+      "title": "مطلوب تحديث التطبيق",
       "description": "يرجى إلغاء التثبيت ثم إعادة تثبيت تطبيق {{managerAppName}} في المدير."
     },
     "UserRefusedAllowManager": {
@@ -485,7 +485,7 @@
     },
     "WrongDeviceForAccount": {
       "title": "حدث خطأ ما",
-      "description": "Please check that your hardware wallet is set up with the recovery phrase or passphrase associated to the selected account."
+      "description": "يرجى التحقق من أن محفظت الأجهزة الخاصة بك قد تم إعدادها بعبارة الاسترداد أو عبارة المرور المرتبطة بالحساب المحدد."
     },
     "UnexpectedBootloader": {
       "title": "عذراً، يجب ألا يكون جهازك في وضع Bootloader",
@@ -500,7 +500,7 @@
       "description": "This feature will be added at a later stage due to changes recently introduced by the Babylon update."
     },
     "RecommendUndelegation": {
-      "title": "Please undelegate the account before emptying it"
+      "title": "يرجى إلغاء تفويض الحساب قبل إفراغه"
     },
     "RecommendSubAccountsToEmpty": {
       "title": "يرجى إفراغ جميع الحسابات الفرعية أولاً"
@@ -512,13 +512,13 @@
       "title": "Memo format is wrong"
     },
     "SourceHasMultiSign": {
-      "title": "Please disable multisign to send {{currencyName}}"
+      "title": "يرجى تعطيل خاصية التوقيع المتعدد لإرسال {{currencyName}}"
     },
     "StellarMemoRecommended": {
       "title": "A memo may be needed when sending to this recipient"
     },
     "StratisDown2021Warning": {
-      "description": "The Stratis blockchain evolved and may no longer work correctly. Support for the original Stratis blockchain will be maintained until 16 October 2021."
+      "description": "لقد تطورت بلوك تشين Stratis ومن الوارد ألا تعمل بشكل صحيح. سيتم الحفاظ على دعم بلوك تشين Stratis الأصلية حتى 16 أكتوبر 2021."
     },
     "SwapExchangeRateAmountTooLow": {
       "title": "يجب أن يزيد المبلغ عن {{minAmountFromFormatted}}"
@@ -527,14 +527,14 @@
       "title": "يجب أن يقل المبلغ عن {{maxAmountFromFormatted}}"
     },
     "SwapGenericAPIError": {
-      "title": "Exchange rate expired",
+      "title": "انتهت صلاحية معدل الصرف",
       "description": "يجب عليك تأكيد المبادلة قبل انتهاء مدة العداد. يبقى سعر الصرف ساري المفعول لمدة محددة."
     },
     "PolkadotElectionClosed": {
       "title": "يجب إغلاق باب انتخاب المدققين"
     },
     "PolkadotNotValidator": {
-      "title": "Some selected addresses are not validators"
+      "title": "بعض العناوين المختارة ليست مدققين"
     },
     "PolkadotLowBondedBalance": {
       "title": "All bonded assets will be unbonded if < 1 DOT"
@@ -543,7 +543,7 @@
       "title": "You have no unbonded assets"
     },
     "PolkadotNoNominations": {
-      "title": "You have no nominations"
+      "title": "ليس لديك ترشيحات"
     },
     "PolkadotAllFundsWarning": {
       "title": "تأكد من وجود رصيد كافٍ متبقٍ لتغطية رسوم المعاملات المستقبلية"
@@ -566,27 +566,27 @@
     }
   },
   "bluetooth": {
-    "required": "Sorry, it looks like Bluetooth is disabled",
-    "locationRequiredTitle": "Location is required for Bluetooth LE",
-    "locationRequiredMessage": "On Android location permission is required to list Bluetooth LE devices.",
-    "checkEnabled": "Please enable Bluetooth in your phone settings."
+    "required": "عذرًا، يبدو أن خاصية البلوتوث معطلة",
+    "locationRequiredTitle": "الموقع مطلوب لخدمة Bluetooth LE",
+    "locationRequiredMessage": "مطلوب إذن موقع على Android لعرض قائمة أجهزة Bluetooth LE.",
+    "checkEnabled": "يرجى تمكين خاصية البلوتوث في إعدادات هاتفك."
   },
   "location": {
-    "required": "Location services required",
-    "open": "Open location settings",
+    "required": "خدمات الموقع مطلوبة",
+    "open": "فتح إعدادات الموقع",
     "disabled": "يتطلب ليدجر لايف خدمات الموقع لإقران جهازك عبر خاصية البلوتوث.",
-    "noInfos": "Ledger does not access your location information."
+    "noInfos": "Ledger لا تصل إلى معلومات موقعك."
   },
   "permissions": {
     "open": "Open app permissions"
   },
   "fees": {
     "speed": {
-      "high": "High",
+      "high": "مرتفعة",
       "standard": "اعتيادية",
-      "low": "Low",
+      "low": "منخفضة",
       "custom": "مُخصّص",
-      "blockCount": "{{blockCount}} blocks"
+      "blockCount": "{{blockCount}} كتل"
     }
   },
   "signout": {
@@ -599,17 +599,17 @@
       "biometrics": {
         "title": "فشل إلغاء قفل {{biometricsType}}",
         "description": "أدخل كلمة المرور الخاصة بك للمتابعة",
-        "authenticate": "Please authenticate with the Ledger Live app"
+        "authenticate": "يرجى التوثيق باستخدام تطبيق Ledger Live"
       },
-      "denied": "Auth Security was not enabled because your phone failed to authenticate.",
-      "title": "Authentication failed",
+      "denied": "تمكين أمان التوثيق لم يتم لأن هاتفك لم يتمكن من التوثيق.",
+      "title": "فشل التوثيق",
       "buttons": {
         "tryAgain": "أعد المحاولة",
-        "reset": "Reset"
+        "reset": "إعادة تعيين"
       }
     },
     "unlock": {
-      "biometricsTitle": "Please authenticate with the Ledger Live app",
+      "biometricsTitle": "يرجى التوثيق باستخدام تطبيق Ledger Live",
       "title": "مرحباً بك مجددًا",
       "desc": "أدخل كلمة المرور الخاصة بك للمتابعة",
       "inputPlaceholder": "اكتب كلمة مرورك",
@@ -617,8 +617,8 @@
       "forgotPassword": "نسيت كلمة المرور"
     },
     "addPassword": {
-      "placeholder": "Choose your password",
-      "title": "Password Lock"
+      "placeholder": "اختار كلمة مرورك",
+      "title": "قفل كلمة المرور"
     },
     "confirmPassword": {
       "title": "تأكيد كلمة المرور",
@@ -631,7 +631,7 @@
   },
   "reset": {
     "description": "يرجى إلغاء تثبيت التطبيق ثم إعادة تثبيته على هاتفك لحذف بيانات ليدجر لايف (Ledger Live)، بما في ذلك الحسابات والإعدادات.",
-    "button": "Reset"
+    "button": "إعادة تعيين"
   },
   "graph": {
     "week": "1W",
@@ -1141,7 +1141,7 @@
       "setPassword": "Set the password",
       "modal": {
         "step1": "Keep your password safe. Do not share it.",
-        "step2": "Keep your password safe. Losing it means resetting Ledger Live and loading the accounts again.",
+        "step2": "حافظ على كلمة مرورك آمنة. فقدانها قد يعني إعادة تعيين Ledger Live وإضافة الحسابات من جديد.",
         "step3": "إعادة تعيين ليدجر لايف (Ledger Live) ليس له تأثير على الأصول المشفرة الخاصة بك."
       }
     },
@@ -1228,7 +1228,7 @@
       "title": "رصيد غير متزامن",
       "desc": "لم يتم تأكيد بعض المعاملات بعد. ستظهر هذه في رصيدك ويمكن استخدامها بعد تأكيدها."
     },
-    "summary": "Here is the summary of your account",
+    "summary": "إليك ملخص لحساباتك",
     "summary_plural": "تمت مزامنة حساباتك ({{count}}).",
     "emptyState": {
       "noAppsTitle": "تثبيت تطبيق على جهازي",
@@ -1657,8 +1657,8 @@
       "desc": "App information, terms and conditions, and privacy policy.",
       "appDescription": "With Ledger Live, Secure, Buy, Sell, Exchange, Grow and Manage your crypto. All-in-one place.",
       "appVersion": "Version",
-      "termsConditions": "Terms and conditions",
-      "termsConditionsDesc": "By using Ledger Live you are deemed to have accepted our terms and conditions.",
+      "termsConditions": "الأحكام والشروط",
+      "termsConditionsDesc": "باستخدام Ledger Live، يُعتبر أنك قد قبلت الشروط والأحكام الخاصة بنا.",
       "privacyPolicy": "Privacy policy",
       "privacyPolicyDesc": "See what personal data are collected, why and how they are used.",
       "liveReview": {
@@ -1682,8 +1682,8 @@
       "clearCacheButton": "Clear",
       "exportLogs": "Export logs",
       "exportLogsDesc": "Exporting Ledger Live logs may help troubleshooting.",
-      "hardReset": "Reset Ledger Live",
-      "hardResetDesc": "This has no impact on your assets. Erases all data in Ledger Live, including account data, transaction histories and settings. Use your Ledger device to reload and manage your crypto assets on an empty Ledger Live.",
+      "hardReset": "إعادة تعيين Ledger Live",
+      "hardResetDesc": "ليس لهذا الأمر أي تأثير على الأصول الخاصة بك. فهو يمحو جميع البيانات في Ledger Live، بما في ذلك بيانات الحساب والإعدادات وسجلات المعاملات. استخدم جهاز ليدجر الخاص بك لإعادة تحميل وإدارة الأصول المشفرة الخاصة بك على Ledger Live فارغ.",
       "repairDevice": "Repair your Ledger device",
       "repairDeviceDesc": "If you have an issue updating your device and cannot resume updates, you can try this to repair your device."
     },
@@ -1766,27 +1766,27 @@
       }
     },
     "exchange": {
-      "title": "Buy / Sell",
+      "title": "شراء / بيع",
       "providers": {
         "title": "Choose a provider to buy crypto",
-        "whatIsSwap": "What is Buy?",
+        "whatIsSwap": "ما هو الشراء؟",
         "cta": "متابعة",
         "coinify": {
           "bullets": [
-            "Available in 130+ countries",
-            "EUR, USD, GBP and 32 others",
+            "متاح في 130+ بلد",
+            "يورو، دولار أمريكي، جنيه استرليني و32 آخرون",
             "SEPA & Faster Payments",
-            "Local US wire transfers",
-            "Credit and debit cards"
+            "التحويلات البرقية المحلية للولايات المتحدة",
+            "بطاقات الائتمان وبطاقات الخصم"
           ]
         },
         "wyre": {
           "bullets": [
-            "Only 🇺🇸 bank account",
-            "USD support only",
-            "20+ crypto supported",
-            "ACH transfer",
-            "No credit & debit cards"
+            "حساب بنكي 🇺🇸 فقط",
+            "دعم دولار أمريكي فقط",
+            "20+ عملات مشفرة مدعومة",
+            "تحويل ACH",
+            "لا توجد بطاقات ائتمان أو خصم"
           ]
         }
       }
@@ -1886,17 +1886,17 @@
         },
         "summary": {
           "from": "من",
-          "to": "To",
-          "send": "Send",
-          "payoutNetworkFees": "Payout fees",
+          "to": "إلى",
+          "send": "إرسال",
+          "payoutNetworkFees": "رسوم الدفع",
           "payoutNetworkFeesTooltip": "هذا المبلغ لن يظهر على جهازك",
           "receive": "المبلغ",
           "receiveFloat": "المبلغ المراد استلامه قبل رسوم الخدمة",
           "provider": "Provider",
-          "method": "Rate",
-          "fees": "Max fees",
+          "method": "معدل",
+          "fees": "الحد الأقصى للرسوم",
           "disclaimer": {
-            "title": "Terms and conditions",
+            "title": "الأحكام والشروط",
             "desc": "By clicking “Accept”,  I acknowledge and accept that this service is exclusively governed by {{provider}}'s Terms & Conditions.",
             "tos": "Terms & conditions",
             "accept": "Accept",
@@ -1958,8 +1958,8 @@
         "withdraw": "Withdraw"
       },
       "highFees": {
-        "title": "High fees on Ethereum",
-        "description": "Due to congestion on the Ethereum network, you may experience high fees when issuing transactions."
+        "title": "رسوم مرتفعة على إيثريوم",
+        "description": "بسبب الازدحام على شبكة إيثريوم، قد تواجه رسومًا مرتفعة عند إصدار المعاملات."
       },
       "account": {
         "amountSupplied": "المبلغ المودع",
@@ -2018,7 +2018,7 @@
         "label": "إقراض العملات المشفرة",
         "title": "Lend assets on the Compound Protocol",
         "description": "The Compound protocol allows you to lend and borrow assets on the Ethereum network. You can lend assets and earn interest directly from your Ledger acccount.",
-        "switchLabel": "I have read and agree with the <0><0>Terms of Use</0></0>."
+        "switchLabel": "لقد قرأت ووافقت على <0><0>شروط الاستخدام</0></0>."
       },
       "info": {
         "1": {
@@ -2224,7 +2224,7 @@
       "validate": "تأكيد",
       "required": "Fees are required",
       "chooseGas": "Choose a gas price",
-      "higherFaster": "Higher gas price means a faster confirmation.",
+      "higherFaster": "ارتفاع سعر الغاز يعني تأكيدًا أسرع.",
       "edit": {
         "title": "Choose unit"
       },
@@ -3002,10 +3002,10 @@
           "method": {
             "youEarned": "لقد كسبت",
             "byDelegationAssetsTo": "من خلال تفويض الأصول إلى",
-            "claimReward": "Cash in",
+            "claimReward": "تحصيل",
             "claimRewardCompound": "مُجمع",
-            "claimRewardInfo": "They will be claimed now and added to your available balance.",
-            "claimRewardCompoundInfo": "They will be claimed now and automatically delegated to the same validator.",
+            "claimRewardInfo": "ستتم المطالبة بهم الآن وإضافتهم إلى رصيدك المتاح.",
+            "claimRewardCompoundInfo": "ستتم المطالبة بهم الآن وتفويضهم تلقائيًا إلى نفس المدقق.",
             "compoundOrCashIn": "مجمع أم تحصيل؟",
             "claimRewardTooltip": "سيتم إضافة المكافآت إلى الرصيد المتاح",
             "claimRewardCompoundTooltip": "سيتم إضافة المكافآت إلى المبلغ المفوض",
@@ -3019,7 +3019,7 @@
               "cta": "عرض التفاصيل"
             },
             "pending": {
-              "title": "Broadcasting transaction..."
+              "title": "يتم بث المعاملة..."
             },
             "broadcastError": "يحتمل أن تكون معاملتك قد فشلت. يُرجى الانتظار لحظة ثم تحقق من سجل المعاملات قبل المحاولة مرة أخرى."
           }
@@ -3050,7 +3050,7 @@
       },
       "rewards": {
         "title": "مكافآت التصويت",
-        "button": "Claim"
+        "button": "مطالبة"
       },
       "manageVotes": "Manage votes",
       "remainingVotes": {
@@ -3410,7 +3410,7 @@
     "forAnEstYield": "for an est. yield of",
     "yieldPerYear": "{{yield}} / Year",
     "yieldInfos": "Yield rates are provided by",
-    "termsAndPrivacy": "I have read and I accept the <1>Ledger Live Terms of Use</1> and <3>Privacy Policy</3>.",
+    "termsAndPrivacy": "لقد قرأت ووافقت على <1>شروط استخدام ليدجر لايف</1> و <3> سياسة الخصوصية</3>.",
     "delegation": "Delegation",
     "viewDetails": "عرض التفاصيل",
     "validator": "المدقق",
@@ -3506,44 +3506,44 @@
     "memo": "Memo"
   },
   "Terms": {
-    "title": "Terms of Use",
-    "read": "Read the Terms of Use",
-    "switchLabelPrivacy": "I have read and agree with the <1>Privacy Policy</1>",
-    "switchLabel": "I have read and agree with the <1>Terms of Service</1>",
-    "cta": "Enter Ledger App"
+    "title": "شروط الاستخدام",
+    "read": "قراءة شروط الاستخدام",
+    "switchLabelPrivacy": "لقد قرأت ووافقت على <1>سياسة الخصوصية</1>",
+    "switchLabel": "لقد قرأت ووافقت على <1>شروط الخدمة</1>",
+    "cta": "دخول تطبيق Ledger"
   },
   "exchange": {
     "buy": {
-      "tabTitle": "Buy",
-      "selectCurrency": "Select a currency",
+      "tabTitle": "شراء",
+      "selectCurrency": "اختار عملة",
       "selectAccount": "اختيار حساب",
       "connectDevice": "توصيل جهازك",
-      "title": "Buy crypto via our partner",
+      "title": "إشتري العملات المشفرة عن طريق شريكنا",
       "description": "قم بشراء الأصول المشفرة من خلال Coinify واستلمها مباشرة في حساب ليدجر (Ledger) الخاص بك.",
-      "CTAButton": "Buy now",
+      "CTAButton": "اشتري الان",
       "emptyState": {
-        "title": "No {{currency}} account",
-        "description": "Please add an account before buying {{currency}}.",
+        "title": "لا يوجد حساب {{currency}}",
+        "description": "يرجى إضافة حساب قبل شراء {{currency}}.",
         "CTAButton": "إضافة حساب"
       },
       "skipDeviceVerification": {
         "confirm": "تأكيد",
         "cancel": "إلغاء",
-        "address": "Address for {{currency}} account",
+        "address": "عنوان حساب {{currency}}",
         "warning": "لم يتم تأكيد عنوانك على جهاز ليدجر الخاص بك. يرجى التحقق منه حرصاً على الأمان"
       }
     },
     "sell": {
-      "tabTitle": "Sell",
-      "selectCurrency": "Select a currency",
+      "tabTitle": "بيع",
+      "selectCurrency": "اختار عملة",
       "selectAccount": "اختيار حساب",
       "connectDevice": "توصيل جهازك",
-      "title": "Sell crypto via our partner",
+      "title": "بيع العملات المشفرة عن طريق شريكنا",
       "description": "قم ببيع الأصول المشفرة مباشرة من حساب ليدجر (Ledger) الخاص بك عبر Coinify واستلم نقودًا فعلية في حسابك المصرفي.",
-      "CTAButton": "Sell now",
+      "CTAButton": "بيع الآن",
       "emptyState": {
-        "title": "No {{currency}} account",
-        "description": "You need to add an account before you can sell {{currency}}.",
+        "title": "لا يوجد حساب {{currency}}",
+        "description": "تحتاج إلى إضافة حساب قبل أن تتمكن من بيع {{currency}}.",
         "CTAButton": "إضافة حساب"
       }
     },
@@ -3553,7 +3553,7 @@
   },
   "banner": {
     "exchangeBuyCrypto": {
-      "title": "BUY CRYPTO",
+      "title": "شراء أصول مشفرة",
       "description": "قم بشراء الأصول المشفرة من خلال Coinify واستلمها مباشرة في حساب ليدجر (Ledger) الخاص بك."
     },
     "swap": {
