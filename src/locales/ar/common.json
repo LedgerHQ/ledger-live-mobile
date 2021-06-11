@@ -258,8 +258,8 @@
       "title": "الرسوم مطلوبة"
     },
     "FirmwareOrAppUpdateRequired": {
-      "title": "Firmware or app update needed",
-      "description": "Please use the Manager to uninstall all apps then check if a firmware update is available before reinstalling them."
+      "title": "يلزم تحديث البرنامج الثابت أو للتطبيق",
+      "description": "يرجى استخدام المدير لإلغاء تثبيت جميع التطبيقات، ثم تحقق مما إذا كان تحديث البرنامج الثابت متاحًا قبل إعادة تثبيتهم مرة أخرى."
     },
     "GenuineCheckFailed": {
       "title": "فشل توثيق الجهاز",
@@ -468,8 +468,8 @@
       "description": "قمت بإلغاء إعادة التسمية. يرجى المحاولة مرة أخرى."
     },
     "UserRefusedFirmwareUpdate": {
-      "title": "Firmware update canceled on device",
-      "description": "You canceled the firmware update. Please try again. If the problem persists, please save your logs using the button below and provide them to Ledger Support."
+      "title": "تم إلغاء تحديث البرنامج الثابت على الجهاز",
+      "description": "قمت بإلغاء تحديث البرنامج الثابت. يرجى إعادة المحاولة. إذا استمرت المشكلة، يرجى حفظ سجلاتك باستخدام الزر أدناه وتقديمها إلى فريق دعم ليدجر (Ledger)."
     },
     "UserRefusedOnDevice": {
       "title": "تم إلغاء العملية على الجهاز",
@@ -1611,7 +1611,7 @@
         "bullet5": "تثبيت التطبيقات وإلغاؤها والإصدار",
         "bullet6": "Number of accounts, currencies and operations",
         "bullet7": "Overall and page session duration",
-        "bullet8": "Ledger device type and firmware"
+        "bullet8": "نوع جهاز ليدجر والبرامج الثابتة"
       },
       "technicalData": "Technical data",
       "technicalDataDesc": "Ledger will automatically collect anonymized technical data to improve user experience.",
@@ -2624,10 +2624,10 @@
       "later": "Do it later"
     },
     "firmware": {
-      "latest": "Firmware version {{version}} is available",
-      "outdated": "Device firmware version too old to be updated. Please contact Ledger Support for a replacement.",
-      "modalTitle": "Firmware update only available on Ledger Live Desktop",
-      "modalDesc": "Please download Ledger Live on your computer to update the device firmware."
+      "latest": "الإصدار {{version}} من البرنامج الثابت متوفر",
+      "outdated": "إصدار البرنامج الثابت للجهاز قديم للغاية مما يعيق تحديثه. اتصل بدعم ليدجر (Ledger) للحصول على بديل.",
+      "modalTitle": "تحديث البرنامج الثابت متاح فقط على Ledger Live لسطح المكتب",
+      "modalDesc": "يرجى تنزيل تطبيق Ledger Live على جهاز الكمبيوتر الخاص بك لتحديث البرنامج الثابت للجهاز."
     }
   },
   "ManagerDevice": {
@@ -2705,37 +2705,37 @@
     "title": "Remove device"
   },
   "FirmwareVersionRow": {
-    "title": "Firmware version",
-    "subtitle": "Firmware {{version}}"
+    "title": "إصدار البرنامج الثابت",
+    "subtitle": "البرنامج الثابت {{version}}"
   },
   "FirmwareUpdateRow": {
-    "title": "Firmware version {{version}} available",
-    "subtitle": "Please use Ledger Live Desktop to update",
-    "action": "Update"
+    "title": "إصدار البرنامج الثابت {{version}} متاح",
+    "subtitle": "يرجى استخدام Ledger Live لسطح المكتب للتحديث",
+    "action": "تحديث"
   },
   "FirmwareUpdate": {
-    "title": "Update firmware",
+    "title": "تحديث البرنامج الثابت",
     "Installing": {
       "title": "{{stepName}} ...",
-      "subtitle": "If requested on your device, please enter your PIN to finish the process."
+      "subtitle": "إذا طُلب منك على جهازك، يرجى إدخال رقم الPIN الخاص بك لإنهاء العملية."
     },
     "steps": {
       "osu": "جاري تثبيت OSU",
-      "flash-mcu": "MCU updating",
-      "flash-bootloader": "Bootloader updating",
-      "flash": "Flashing your device",
-      "firmware": "Firmware updating"
+      "flash-mcu": "جاري تحديث MCU",
+      "flash-bootloader": "جاري تحديث Bootloader",
+      "flash": "قم بإعادة ضبط نسخة نظام التشغيل على جهازك",
+      "firmware": "جاري تحديث البرنامج الثابت"
     }
   },
   "FirmwareUpdateReleaseNotes": {
-    "introTitle": "You are about to install <1><0>firmware version {{version}}.</0></1>",
-    "introDescription1": "Please note that all the apps on your device will be deleted. You can reinstall your apps after the firmware update.",
+    "introTitle": "أنت على وشك تثبيت <1><0>الإصدار {{version}}‏ من البرنامج الثابت.</0></1>",
+    "introDescription1": "يرجى ملاحظة أنه سيتم حذف جميع التطبيقات الموجودة على جهازك. يمكنك إعادة تثبيت تطبيقاتك بعد تحديث البرنامج الثابت.",
     "introDescription2": "ليس لذلك أي تأثير على الأصول المشفرة الخاصة بك.",
     "action": "متابعة التحديث"
   },
   "FirmwareUpdateCheckId": {
-    "title": "Identifier",
-    "description": "Please press both buttons together on your {{fullDeviceName}} if it displays the same identifier:"
+    "title": "المُعرّف",
+    "description": "يرجى الضغط على الزرين معًا على جهاز {{fullDeviceName}} الخاص بك إذا كان يعرض نفس المُعرّف:"
   },
   "FirmwareUpdateMCU": {
     "title": "إعادة تشغيل الجهاز",
@@ -2743,7 +2743,7 @@
     "desc2": "اضغط و استمر في الضغط على الزر الأيسر، وقم بتوصيل كبل الUSB ثم قم بتحرير الزر عندما تظهر شاشة Bootloader."
   },
   "FirmwareUpdateConfirmation": {
-    "title": "Firmware updated",
+    "title": "تم تحديث البرنامج الثابت",
     "description": "انتقل إلى المدير لإعادة تثبيت التطبيقات على جهازك."
   },
   "RepairDevice": {
