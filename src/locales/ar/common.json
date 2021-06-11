@@ -568,7 +568,7 @@
   "bluetooth": {
     "required": "عذرًا، يبدو أن خاصية البلوتوث معطلة",
     "locationRequiredTitle": "الموقع مطلوب لخدمة Bluetooth LE",
-    "locationRequiredMessage": "مطلوب إذن موقع على Android لعرض قائمة أجهزة Bluetooth LE.",
+    "locationRequiredMessage": "مطلوب إذن موقع على أندرويد لعرض قائمة أجهزة Bluetooth LE.",
     "checkEnabled": "يرجى تمكين خاصية البلوتوث في إعدادات هاتفك."
   },
   "location": {
@@ -709,7 +709,7 @@
       "warning": {
         "title": "ابدأ باللغة الإنجليزية",
         "cta": "فهمت ذلك!",
-        "desc": "We are introducing additional languages in order to help your onboarding with Ledger. Please be aware that the rest of the Ledger experience is currently only available in English."
+        "desc": "نحن نعمل على تقديم لغات إضافية لمساعدتك في بدء استخدام Ledger. يرجى العلم أن الجزء المتبقي من تجربة ليدجر متاحة حاليًا باللغة الإنجليزية فقط."
       }
     },
     "stepSelectDevice": {
@@ -771,7 +771,7 @@
         "title": "لنعد جهاز Nano الخاص بك!",
         "desc": "سنبدأ بإعداد أمان جهاز Nano الخاص بك."
       },
-      "cta": "Let’s do this!"
+      "cta": "هيا بنا!"
     },
     "stepSetupDevice": {
       "start": {
@@ -781,15 +781,15 @@
             "label": "قم بتخطيط 30 دقيقة وخذ وقتك."
           },
           "1": {
-            "label": "Grab a pen to write with."
+            "label": "احصل على قلم للكتابة به."
           },
           "2": {
-            "label": "Stay alone, and choose a safe and quiet environment."
+            "label": "كن بمفردك، واختار بيئة آمنة وهادئة."
           }
         },
         "cta": "حسنًا، أنا مستعد!",
         "warning": {
-          "title": "Please be careful",
+          "title": "يرجى توخي الحذر",
           "desc": "تأكد من اتباع التعليمات على هذا التطبيق في كل خطوة من العملية.",
           "ctaText": "فهمت ذلك!"
         }
@@ -814,25 +814,25 @@
           },
           "2": {
             "title": "اختار \"إعداد كجهاز جديد\"",
-            "label": "Press both buttons simultaneously to validate the selection."
+            "label": "اضغط على كلا الزرين في وقت واحد للتحقق من الاختيار."
           },
           "3": {
-            "title": "Follow instructions",
-            "label": "Come back here to follow instructions on your PIN code."
+            "title": "اتبع التعليمات",
+            "label": "عد إلى هنا لاتباع التعليمات الموجودة على رمز الPIN الخاص بك."
           }
         },
         "cta": "الخطوة التالية"
       },
       "pinCode": {
-        "title": "PIN code",
+        "title": "كود الPIN",
         "desc": "رمز الPIN الخاص بك هو الطبقة الأولى من الأمان. وهو يؤمن فعليًا الوصول إلى جهاز Nano الخاص بك ومفاتيحك الخاصة. يجب أن يتكون رمز الPIN الخاص بك من 4 إلى 8 أرقام.",
-        "checkboxDesc": "I understand that I must choose my PIN code by myself and keep it private.",
-        "cta": "Set up PIN code"
+        "checkboxDesc": "أفهم أنه يجب علي اختيار رمز الPIN الخاص بي بنفسي وإبقاؤه سريًا.",
+        "cta": "إعداد رمز الPIN"
       },
       "pinCodeSetup": {
         "bullets": {
           "0": {
-            "title": "Choose PIN code",
+            "title": "اختيار رمز الPIN",
             "label": "اضغط على الزر الأيسر أو الأيمن لتغيير الأرقام. اضغط على كلا الزرين للتحقق من صحة أحد الأرقام. إختار <1></1> لتأكيد رمز الPIN الخاص بك. إختار <2></2> لمسح أحد الأرقام."
           },
           "1": {
@@ -841,31 +841,31 @@
           }
         },
         "infoModal": {
-          "title": "Secure your PIN code",
+          "title": "تأمين رمز الPIN الخاص بك",
           "bullets": {
             "0": {
-              "label": "Always choose a PIN code by yourself."
+              "label": "اختار دائمًا رمز الPIN بنفسك."
             },
             "1": {
-              "label": "Always enter your PIN code out of sight."
+              "label": "قم دائمًا بإدخال رمز الPIN الخاص بك بعيدًا عن الأنظار."
             },
             "2": {
-              "label": "You can change your PIN code if needed."
+              "label": "يمكنك تغيير رمز الPIN الخاص بك في حالة الحاجة إلى ذلك."
             },
             "3": {
               "label": "إذا تكرر إدخال رمز الPIN بشكل غير صحيح لثلاث مرات متتالية، سوف يعيد تعيين الجهاز."
             },
             "4": {
-              "label": "Never use an easy PIN code like 0000, 123456, or 55555555."
+              "label": "لا تستخدم أبدًا رمز PIN سهلاً مثل 0000 أو 123456 أو 55555555."
             },
             "5": {
-              "label": "Never share your PIN code with someone else. Not even with Ledger."
+              "label": "امتنع نهائيًا عن مشاركة رمز الPIN مع أي شخص آخر. ولا حتى مع Ledger."
             },
             "6": {
-              "label": "Never use a PIN code you did not choose yourself."
+              "label": "لا تستخدم أبدًا رمز PIN لم تختره بنفسك."
             },
             "7": {
-              "label": "Never store your PIN code on a computer or phone."
+              "label": "لا تقم أبدًا بتخزين رمز الPIN الخاص بك على جهاز كمبيوتر أو هاتف."
             }
           }
         },
@@ -873,7 +873,7 @@
       },
       "recoveryPhrase": {
         "title": "عبارة الاسترداد",
-        "desc": "Your recovery phrase is a secret list of 24 words that backs up your private keys.",
+        "desc": "عبارة الاسترداد الخاصة بك هي قائمة سرية من 24 كلمة تدعم مفاتيحك الخاصة.",
         "desc_1": "يولد جهاز Nano الخاص بك عبارة استرداد فريدة. لا تحتفظ ليدجر بنسخة منها.",
         "cta": "عبارة الاسترداد",
         "checkboxDesc": "أفهم أنني إذا فقدت عبارة الاسترداد هذه فلن أتمكن من الوصول إلى الأصول المشفرة الخاصة بي في حالة أن فقدت الوصول إلى جهاز Nano الخاص بي."
@@ -899,20 +899,20 @@
         },
         "bullets": {
           "0": {
-            "title": "Take your Recovery sheet",
+            "title": "خذ نشرة الاسترداد الخاصة بك",
             "label": "احصل على صفحة استرداد فارغة، والتي أتت مرفقة مع جهاز Nano الخاص بك. يرجى التواصل مع دعم ليدجر إذا لم تكن صفحة الاسترداد أتتك فارغة."
           },
           "1": {
-            "title": "Write down all words",
+            "title": "اكتب كل الكلمات",
             "label": "اكتب الكلمة رقم #1 المعروضة على جهاز Nano الخاص بك في الموضع 1 من صفحة الاسترداد. ثم اضغط يمينًا على جهاز نانو لعرض الكلمة رقم#2 واكتبها في الموضع 2.",
             "label_1": "كرر العملية لجميع الكلمات مع احترام الترتيب والتهجئة بعناية. اضغط على اليسار على جهاز Nano الخاص بك للتحقق من وجود أي أخطاء."
           },
           "2": {
             "title": "تأكيد عبارة الاسترداد الخاصة بك",
-            "label": "Scroll through the words until you find Word #1 by pressing the right button. Validate by pressing both buttons."
+            "label": "قم بالتمرير خلال الكلمات حتى تجد الكلمة رقم 1 بالضغط على الزر الأيمن. تحقق من صحتها من خلال الضغط على كلا الزرين."
           },
           "3": {
-            "title": "Repeat for all words!"
+            "title": "كرر الخطوات لجميع الكلمات!"
           }
         },
         "cta": "تأكيد عبارة الاسترداد",
@@ -923,38 +923,38 @@
         "desc": "عبارة الاسترداد الخاصة بك هي فرصتك الأخيرة للوصول إلى أصولك المشفرة، إذا لم تتمكن من استخدام جهاز Nano الخاص بك. يجب عليك الاحتفاظ بها في مكان آمن.",
         "bullets": {
           "0": {
-            "label": "Enter these words on a hardware wallet only, never on computers or phones."
+            "label": "أدخل هذه الكلمات في محفظة الأجهزة فقط، وامتنع نهائيًا عن إدخالها على أجهزة الكمبيوتر أو الهواتف."
           },
           "1": {
-            "label": "Never share your 24 words with anyone, not even with Ledger."
+            "label": "لا تشارك أبدًا كلماتك الـ24 مع أي شخص، ولا حتى مع Ledger."
           }
         },
         "cta": "حسنًا، لقد انتهيت!",
         "infoModal": {
-          "label": "Learn how to hide it",
+          "label": "تعلم كيف تقوم بإخفائها",
           "title": "أين ينبغي أن أحتفظ بعبارة الاسترداد الخاصة بي؟",
           "bullets": {
             "0": {
               "label": "امتنع <1>نهائيًا</1> عن إدخالها على جهاز كمبيوتر أو هاتف أو أي جهاز آخر. لا تقم بتصويرها."
             },
             "1": {
-              "label": "<1>NEVER</1> share your 24 words with anyone."
+              "label": "امتنع <1>نهائيًا</1> عن مشاركة كلماتك الـ 24 مع أي شخص."
             },
             "2": {
-              "label": "<1>ALWAYS</1> store it in a secure place, out of sight."
+              "label": "قم بحفظها <1>دائمًا</1> في مكان آمن بعيدًا عن الأنظار."
             },
             "3": {
-              "label": "Ledger will never ask for your recovery phrase."
+              "label": "لن تطلب Ledger أبدًا عبارة الاسترداد الخاصة بك."
             },
             "4": {
-              "label": "If any person or application asks for it, assume it is a scam!"
+              "label": "إذا طلب منك أي شخص أو تطبيق تقديمها، فعليك أن تفترض أنها عملية احتيال!"
             }
           }
         },
         "warning": {
-          "title": "Now game on!",
-          "desc": "Answer 3 simple questions to avoid common misconceptions about your hardware wallet.",
-          "cta": "Let’s take the quiz"
+          "title": "لنختبر معلوماتك!",
+          "desc": "أجب عن 3 أسئلة بسيطة لتجنب المفاهيم الخاطئة الشائعة حول محفظتك للأجهزة.",
+          "cta": "لنجري الاختبار"
         }
       }
     },
@@ -989,37 +989,37 @@
           },
           "2": {
             "title": "اختار \"الاستعادة من عبارة الاسترداد\"",
-            "label": "Press both buttons simultaneously to validate the selection."
+            "label": "اضغط على كلا الزرين في وقت واحد للتحقق من الاختيار."
           },
           "3": {
-            "title": "Follow instructions",
-            "label": "Come back here to follow instructions on your PIN code."
+            "title": "اتبع التعليمات",
+            "label": "عد إلى هنا لاتباع التعليمات الموجودة على رمز الPIN الخاص بك."
           }
         }
       },
       "existingRecoveryPhrase": {
         "title": "أدخل عبارة الاسترداد الخاصة بك",
-        "paragraph1": "Your recovery phrase is the secret list of words that you backed up when you first set up your wallet.",
-        "paragraph2": "Ledger does not keep a copy of your recovery phrase.",
+        "paragraph1": "عبارة الاسترداد الخاصة بك هي القائمة السرية من الكلمات التي قمت بنسخها احتياطيًا عند إعداد محفظتك لأول مرة.",
+        "paragraph2": "لا تحتفظ Ledger بنسخة من عبارة الاسترداد الخاص بك.",
         "checkboxDesc": "أفهم أنني إذا فقدت عبارة الاسترداد الخاصة بي فلن أتمكن من الوصول إلى الأصول المشفرة الخاصة بي في حالة أن فقدت الوصول إلى جهاز نانو Nano الخاص بي.",
         "bullets": {
           "0": {
-            "title": "Grab your recovery phrase"
+            "title": "جهز عبارة الاسترداد الخاصة بك"
           },
           "1": {
-            "title": "Select recovery phrase length",
-            "label": "Your recovery phrase can have 12, 18 or 24 words. You must enter all words to access your crypto."
+            "title": "حدد طول عبارة الاسترداد",
+            "label": "يمكن أن تحتوي عبارة الاسترداد الخاصة بك على 12 أو 18 أو 24 كلمة. ويجب عليك إدخال كل الكلمات للوصول إلى أصولك المشفرة."
           },
           "2": {
-            "title": "Enter Word #1...",
-            "label": "Enter the first letters of Word #1 by selecting them with the right or left button. Press both buttons to validate each letter."
+            "title": "أدخل الكلمة رقم 1...",
+            "label": "أدخل الأحرف الأولى من الكلمة رقم 1 عن طريق اختيارها بالزر الأيمن أو اليسار. اضغط على الزرين للتحقق من كل حرف."
           },
           "3": {
-            "title": "Validate Word #1...",
-            "label": "Choose Word #1 from the suggestions. Press both buttons to validate."
+            "title": "تحقق من الكلمة رقم 1...",
+            "label": "اختار الكلمة رقم 1 من بين الاقتراحات. اضغط على كلا الزرين للتحقق منها."
           },
           "4": {
-            "title": "Repeat for all words!"
+            "title": "كرر الخطوات مع جميع الكلمات!"
           }
         },
         "nextStep": "الخطوة التالية"
@@ -1037,9 +1037,9 @@
         "cta": "لنقم بتوصيل جهاز Nano الخاص بي"
       },
       "blue": {
-        "title": "Connect your Blue",
+        "title": "قم بتوصيل جهاز Blue الخاص بك",
         "desc": "هذه هي المرة الأولى التي تستخدم فيها هذا الهاتف لإعداد Blue الخاص بك. لنقوم بتوصيل جهازك سريعاً.",
-        "cta": "Let’s connect my Blue"
+        "cta": "لنقم بتوصيل جهاز Blue الخاص بي"
       },
       "infoModal": {
         "title": "أين يمكنني العثور على اسم جهازي؟",
@@ -1052,35 +1052,35 @@
             "label": "تأكد من تمكين خاصية البلوتوث على هاتفك الذكي وعلى جهاز ليدجر Nano X الخاص بك. يجب أن يكون جهاز ليدجر Nano X الخاص بك على لوحة المعلومات، شاشته الرئيسية."
           },
           "1": {
-            "label": "<1>{{Os}}</1>: Make sure location services are enabled in your phone's settings for Ledger Live. Ledger Live never uses your location information, this is a requirement for Bluetooth on {{Os}}."
+            "label": "<1>{{Os}}</1>: تأكد من تمكين خدمات الموقع في إعدادات هاتفك لتطبيق Ledger Live. لا يستخدم Ledger Live معلومات موقعك مطلقًا، هذا مطلب لاستخدام البلوتوث على {{Os}}."
           },
           "2": {
-            "label": "If you have a Bluetooth pairing issue, please refer to the following article",
+            "label": "إذا كانت لديك مشكلة في اقتران البلوتوث، فيرجى الرجوع إلى المقالة التالية",
             "link": "إصلاح مشاكل الاتصال."
           }
         }
       },
       "errorInfoModal": {
         "title": "حدث خطأ ما؟",
-        "title_1": "I have an Android",
-        "title_2": "Update Android version",
+        "title_1": "لدي أندرويد",
+        "title_2": "تحديث إصدار أندرويد",
         "desc": "إذا كنت تواجه مشاكل في خاصية البلوتوث مع جهاز Nano X الخاص بك، فيرجى إزالة الاقتران ونسيان جهاز Nano X على هاتفك. ثم حاول الاقتران مرة أخرى.",
         "desc_1": "قد يستغرق الأمر بعض الوقت قبل عرض طلب اقران بلوتوث. احرص على التحقق من كود الاقران وقم بالتأكيد عليه على كل من جهاز Nano X وهاتفك.",
         "desc_2": "تحقق من إعدادات البلوتوث بهاتفك لمعرفة ما إذا تم اكتشاف جهاز ليدجر Nano X أم لا. إذا لم يتم اكتشافه، فتأكد من تشغيل خاصية البلوتوث على ليدجر Nano X.",
-        "desc_3": "Location services",
+        "desc_3": "خدمات الموقع",
         "desc_4": "إذا لم يتم اكتشاف ليدجر Nano X في تطبيق الجوّال لديك عند محاولة إقرانه، فيرجى تجربة الحل التالي:",
-        "desc_5": "Ledger mobile app asks you to allow location services when it's not enabled yet, but on a few phone models, this is not always properly detected. Please note that Ledger mobile app never uses your location information, this permission is simply required for Bluetooth on Android.",
-        "desc_6": "Some users have reported having fixed their connection issues by updating the Android version running on their phone to a newer one. Please check with your phone manufacturer whether an update is available.",
+        "desc_5": "يطلب منك تطبيق ليدجر للجوّال السماح باستخدام خدمات الموقع عندما لم يتم تمكينها بعد، ولكن في بعض موديلات الهواتف، لا يتم اكتشاف ذلك دائمًا بشكل صحيح. يرجى ملاحظة أن تطبيق ليدجر للجوال لا يستخدم أبدًا معلومات موقعك، فهذا الإذن مطلوب ببساطة لخاصية البلوتوث على أندرويد.",
+        "desc_6": "أبلغ بعض المستخدمين عن إصلاح مشكلات الاتصال الخاصة بهم عن طريق تحديث إصدار أندرويد الذي يعمل على هواتفهم إلى إصدار أحدث. يرجى مراجعة الشركة المصنعة لهاتفك لمعرفة ما إذا كان هناك تحديث متوفر.",
         "link": "معرفة المزيد",
         "bullets": {
           "0": {
-            "label": "Navigate to the system options for the Ledger Live app on your Android phone."
+            "label": "انتقل إلى خيارات النظام لتطبيق Ledger Live على هاتفك الأندرويد."
           },
           "1": {
-            "label": "Allow the location to be used."
+            "label": "السماح باستخدام الموقع."
           },
           "2": {
-            "label": "Return to the mobile app."
+            "label": "العودة إلى تطبيق الجوال"
           },
           "3": {
             "label": "تحقق مما إذا كان قد تم اكتشاف جهاز Nano X الخاص بك."
@@ -1089,23 +1089,23 @@
       }
     },
     "stepImportAccounts": {
-      "title": "Sync crypto from desktop",
-      "desc": "If you already have your crypto set up in the Ledger desktop app, you can sync them to manage them from your phone.",
+      "title": "مزامنة العملات المشفرة من سطح المكتب",
+      "desc": "إذا كنت قد قمت بالفعل بإعداد أصولك المشفرة في تطبيق ليدجر لسطح المكتب، فيمكنك مزامنة التطبيق لإدارة تلك الأصول من هاتفك.",
       "cta": "أنا مستعد لإجراء المسح الضوئي",
       "bullets": {
         "0": {
-          "label": "On the Desktop app, select <1>Settings > Accounts > Account export</1>."
+          "label": "في تطبيق سطح المكتب، حدد <1> إعدادات > حسابات > تصدير الحساب</1>."
         },
         "1": {
-          "label": "Scan the LiveQR code with your phone."
+          "label": "قم بإجراء مسح ضوئي لرمز LiveQR بهاتفك."
         },
         "2": {
           "label": "إختار حسابات التشفير المراد استيرادها."
         }
       },
       "warning": {
-        "title": "Your desktop and mobile apps must be synced manually.",
-        "desc": "Ledger Live respects your privacy and stores your data locally. If you change accounts and settings on your phone, you will need to do the same on your computer, and vice versa. Your transactions stay synchronized with the blockchain.",
+        "title": "يجب مزامنة تطبيقات سطح المكتب والجوال يدويًا.",
+        "desc": "يحترم ليدجر لايف خصوصيتك ويخزن بياناتك محليًا. إذا قمت بتغيير الحسابات والإعدادات على هاتفك، فستحتاج إلى القيام بنفس الشيء على جهاز الكمبيوتر الخاص بك، والعكس صحيح. تظل معاملاتك متزامنة مع البلوك تشين.",
         "cta": "فهمت!"
       }
     },
@@ -1115,61 +1115,61 @@
       "step2": "اضغط على الزرين معًا لإختيار <1><1>الإعداد كجهاز جديد.</1></1>",
       "step2-restore": "اضغط على كلا الزرين معًا لتحديد <1><1>الاستعادة من عبارة الاسترداد.</1></1>",
       "step3": "اضغط على الزر الأيسر أو الأيمن لتحديد رقم. اضغط الزرين معًا للتأكيد.",
-      "step4prefix": "Select ",
+      "step4prefix": "اختار ",
       "step4suffix1": " لتأكيد رقم التعريف الشخصي PIN الخاص بك.",
-      "step4suffix2": " to erase last digit.",
+      "step4suffix2": " لمحو الرقم الأخير.",
       "modal": {
-        "step1": "Always choose <1><1>your own</1></1> PIN",
-        "step2": "Use 8 digits for greater security",
+        "step1": "دائمًا اختار <1><1>بنفسك</1></1> رمز الPIN",
+        "step2": "استخدم 8 أرقام للمزيد من الأمان",
         "step3": "لا تستخدم أبدًا جهازًا به رمز PIN أو عبارة استرداد تم إعدادها بالفعل"
       }
     },
     "stepWriteRecovery": {
-      "step1": "Write <1><1>Word #1</1></1> in entry 1 on a blank Recovery sheet",
+      "step1": "اكتب <1><1>الكلمة رقم 1</1></1> في حقل الإدخال رقم 1 في صفحة استرداد فارغة",
       "step2": "اضغط على الزر الأيمن واستمر في تدوين كل الكلمات الأربع والعشرين (24).",
       "step3": "قم بتأكيد كل كلمة من عبارة الاسترداد: إختارها ثم أكدها بالضغط على الزرين معًا.",
       "modal": {
-        "step1": "Store your 24-word recovery phrase in a safe place, out of sight.",
-        "step2": "Make sure you are the only person to have the recovery phrase.",
+        "step1": "احفظ عبارة الاسترداد المكونة من 24 كلمة في مكان آمن بعيدًا عن الأنظار.",
+        "step2": "تأكد من أنك الشخص الوحيد الذي لديه عبارة الاسترداد.",
         "step3": "لا يحفظ ليدجر عبارة الاسترداد الخاصة بك.",
         "step4": "لا تستخدم أبدًا جهازًا به عبارة استرداد أو رمز PIN مُعد بالفعل."
       }
     },
     "stepPassword": {
-      "desc": "Set a password to protect Ledger Live data on your phone.",
-      "descConfigured": "Password lock enabled successfully",
-      "setPassword": "Set the password",
+      "desc": "قم بتعيين كلمة مرور لحماية بيانات Ledger Live على هاتفك.",
+      "descConfigured": "تم تفعيل قفل كلمة المرور بنجاح",
+      "setPassword": "تعيين كلمة المرور",
       "modal": {
-        "step1": "Keep your password safe. Do not share it.",
+        "step1": "حافظ على كلمة مرورك بأمان. امتنع عن مشاركتها.",
         "step2": "حافظ على كلمة مرورك آمنة. فقدانها قد يعني إعادة تعيين Ledger Live وإضافة الحسابات من جديد.",
         "step3": "إعادة تعيين ليدجر لايف (Ledger Live) ليس له تأثير على الأصول المشفرة الخاصة بك."
       }
     },
     "stepFinish": {
       "title": "جهازك مستعد!",
-      "readOnlyTitle": "All set!",
+      "readOnlyTitle": "اكتمل الإعداد!",
       "desc": "Install apps on your device and manage your portfolio",
-      "cta": "Open Ledger Live"
+      "cta": "افتح Ledger Live"
     },
     "quizz": {
-      "label": "Quiz",
+      "label": "اختبار قصير",
       "modal": {
-        "success": "Congrats!",
+        "success": "تهانينا!",
         "fail": "غير صحيح!"
       },
       "coins": {
-        "title": "As a Ledger user, my crypto is stored:",
+        "title": "كمستخدم ليدجر، يتم تخزين الأصول المشفرة الخاصة بي:",
         "answers": {
-          "correct": "On the blockchain",
+          "correct": "على البلوك تشين (سلسلة الكتل)",
           "wrong": "على جهاز Nano الخاص بي"
         },
         "modal": {
-          "text": "Your crypto is always stored on the blockchain. Your hardware wallet only holds your private key, which gives you access to your crypto.",
+          "text": "يتم تخزين أصولك المشفرة دائمًا على البلوك تشين. وتحتوي محفظتك للأجهزة على مفتاحك الخاص فقط، و التي تتيح لك الوصول إلى أصولك المشفرة.",
           "cta": "السؤال التالي"
         }
       },
       "recoveryPhrase": {
-        "title": "If my recovery phrase is no longer secret and safe...",
+        "title": "إذا لم تعد عبارة الاسترداد الخاصة بي سرية وآمنة...",
         "answers": {
           "correct": "My crypto is no longer safe and I need to transfer them to a secure place",
           "wrong": "No problem, Ledger can send me a copy"
@@ -1664,7 +1664,7 @@
       "liveReview": {
         "title": "Rate the app!",
         "ios": "Review in the App Store",
-        "android": "Review in the Google Play store"
+        "android": "مراجعة في سوق جوجل بلاي"
       }
     },
     "help": {
