@@ -634,64 +634,64 @@
     "button": "إعادة تعيين"
   },
   "graph": {
-    "week": "1W",
-    "month": "1M",
-    "year": "1Y",
-    "all": "ALL"
+    "week": "1 أسبوع",
+    "month": "1 شهر",
+    "year": "1 سنة",
+    "all": "كل"
   },
   "carousel": {
     "title": "إغلاق الشعار؟",
-    "description": "We'll inform you of any new announcements.",
+    "description": "سوف نبلغكم بأي إعلانات جديدة.",
     "confirm": "تأكيد",
-    "undo": "Undo",
+    "undo": "تراجع",
     "banners": {
       "valentine": {
         "title": "عيد الحب",
         "description": "تخفيض الرسوم على الشراء والبيع"
       },
       "academy": {
-        "title": "Ledger Academy",
-        "description": "Everything you need to\nknow about crypto"
+        "title": "أكاديمية ليدجر",
+        "description": "كل ما تحتاج معرفته حول العملات المشفرة"
       },
       "stakeCosmos": {
-        "title": "Stake COSMOS",
+        "title": "رهن COSMOS",
         "description": "قم بتفويض مكاسب مكافآت ATOM اليوم."
       },
       "polkastake": {
-        "title": "POLKADOT STAKING",
-        "description": "Stake, secure and\nmanage your DOT with\nLedger Live"
+        "title": "رهن POLKADOT",
+        "description": "إرهن، أمّن و\nقم بإدارة DOT مع\nLedger Live الخاص بك"
       },
       "backupPack": {
-        "title": "Back-up pack",
+        "title": "حزمة النسخ الاحتياطي",
         "description": "Nano X و Nano S\nلتوفير الحماية المثلى"
       },
       "buyCrypto": {
-        "title": "Buy Crypto",
-        "description": "Buy crypto on\nLedger Live"
+        "title": "شراء العملات المشفرة",
+        "description": "شراء العملات المشفرة على Ledger Live"
       },
       "swap": {
         "title": "مبادلة العملات المشفرة",
-        "description": "Securely exchange one\ncrypto for another"
+        "description": "استبدل عملة مشفرة\n بأخرى بأمان"
       },
       "algorand": {
         "title": "Algorand",
         "description": "إكسب مكافآت ALGO مع كل معاملة."
       },
       "sell": {
-        "title": "Sell crypto",
+        "title": "بيع العملات المشفرة",
         "description": "بيع بيتكوين مباشرة من ليدجر لايف."
       },
       "vote": {
-        "title": "Vote with your ledger",
-        "description": "Vote directly from your Ledger Wallet."
+        "title": "صوّت من خلال Ledger الخاص بك",
+        "description": "صوّت مباشرة من محفظة Ledger الخاصة بك."
       },
       "lending": {
         "title": "إقراض العملات المشفرة",
-        "description": "Lend asset on the Compound Protocol"
+        "description": "قم بإقراض الأصول على البروتوكول المُجمع"
       },
       "blackfriday": {
-        "title": "BLACK FRIDAY",
-        "description": "Enjoy 40% off with promo code BLACKFRIDAY20"
+        "title": "الجمعة السوداء",
+        "description": "استمتع بتخفيض 40% مع رمز الخصم BLACKFRIDAY20"
       }
     }
   },
@@ -853,7 +853,7 @@
               "label": "You can change your PIN code if needed."
             },
             "3": {
-              "label": "إدخال رمز ال PIN بشكل غير صحيح لثلاث مرات متتالية سوف يعيد تشغيل الجهاز."
+              "label": "إذا تكرر إدخال رمز الPIN بشكل غير صحيح لثلاث مرات متتالية، سوف يعيد تعيين الجهاز."
             },
             "4": {
               "label": "Never use an easy PIN code like 0000, 123456, or 55555555."
@@ -1385,13 +1385,13 @@
       "howTo": "لإضافة حسابات توكن، سيكون عليك <0>تلقي الأموال</0> باستخدام <1>{{currency}} عنوان</1> الخاص بك.",
       "algorand": {
         "contractAddress": "عنوان العَقد",
-        "viewInExplorer": "View in explorer",
-        "seeMore": "رؤية المزيد من ASA",
-        "seeLess": "See less ASA",
-        "addTokens": "Add ASA",
-        "howTo": "You can add assets to your Algorand account.",
-        "addAsa": "Add ASA (Asset)",
-        "howAsaWorks": "How ASA (asset) works?"
+        "viewInExplorer": "مشاهدة في المتصفح",
+        "seeMore": "رؤية ASA أكثر",
+        "seeLess": "رؤية ASA أقل",
+        "addTokens": "إضافة ASA",
+        "howTo": "يمكنك إضافة أصول إلى حساب Algorand الخاص بك.",
+        "addAsa": "إضافة ASA (أصل)",
+        "howAsaWorks": "كيف يعمل ASA (أصل)؟"
       }
     },
     "subaccounts": {
@@ -1526,8 +1526,8 @@
       "algorand": {
         "showTokens": "عرض {{length}}‏ ASA",
         "showTokens_plural": "عرض {{length}}‏ ASA",
-        "hideTokens": "Hide ASA",
-        "hideTokens_plural": "Hide ASA"
+        "hideTokens": "إخفاء ASA",
+        "hideTokens_plural": "إخفاء ASA"
       }
     }
   },
@@ -2754,7 +2754,7 @@
     "description": "تتم مزامنة الحسابات المستوردة مع الشبكة فقط، وليس بين إصدارات الجوّال وسطح المكتب من Ledger Live."
   },
   "algorand": {
-    "token": "ASA (Assets)",
+    "token": "ASA (أصول)",
     "claimRewards": {
       "title": "المكافآت",
       "button": "مطالبة",
@@ -2799,9 +2799,9 @@
     },
     "optIn": {
       "stepperHeader": {
-        "selectToken": "Add ASA (Asset)",
+        "selectToken": "إضافة ASA (أصل)",
         "connectDevice": "توصيل الجهاز",
-        "verification": "Verification",
+        "verification": "التحقق",
         "stepRange": "خطوة {{currentStep}} من {{totalSteps}}"
       },
       "flow": {
@@ -2819,9 +2819,9 @@
               "cta": "عرض التفاصيل"
             },
             "pending": {
-              "title": "Broadcasting transaction..."
+              "title": "يتم بث المعاملة..."
             },
-            "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
+            "broadcastError": "من الوارد أن تكون معاملتك قد فشلت. يرجى التحقق مرة أخرى في غضون بضع دقائق للتأكد من عدم إتمام معاملتك قبل المحاولة مرة أخرى."
           }
         }
       }
@@ -3192,7 +3192,7 @@
       "nominate": "Nominate",
       "chill": "Clear nominations",
       "status": "Status",
-      "totalStake": "Total Stake",
+      "totalStake": "إجمالي الرهن",
       "amount": "المبلغ المقيد",
       "commission": "Commission",
       "active": "Active",
@@ -3400,7 +3400,7 @@
   "delegation": {
     "overdelegated": "Overdelegated",
     "delegationSendWarnDesc": "سيتم خصم المبلغ المراد إرساله من حسابك المفوض.",
-    "delegationReceiveWarnDesc": "The amount received in a delegated account will be added to the total staked amount. Choose another account if you want to avoid this.",
+    "delegationReceiveWarnDesc": "المبلغ المتلقى في الحساب المفوض سيتم إضافته إلى إجمالي المبلغ المرهون. اختر حسابًا آخر إذا كنت تريد تجنب ذلك.",
     "iDelegateMy": "I delegate my",
     "undelegateMy": "Undelegate my",
     "warnUndelegation": "Your account will be undelegated.",
