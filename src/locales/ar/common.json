@@ -675,7 +675,7 @@
       },
       "algorand": {
         "title": "Algorand",
-        "description": "Earn ALGO rewards with each transaction."
+        "description": "إكسب مكافآت ALGO مع كل معاملة."
       },
       "sell": {
         "title": "Sell crypto",
@@ -1493,8 +1493,8 @@
       "sectionLabel": "Delegation(s)",
       "addDelegation": "Add delegation",
       "info": {
-        "title": "Earn rewards",
-        "cta": "Earn rewards"
+        "title": "اكسب المكافآت",
+        "cta": "اكسب المكافآت"
       }
     },
     "claimReward": {
@@ -2255,7 +2255,7 @@
   },
   "freeze": {
     "stepperHeader": {
-      "info": "Earn rewards",
+      "info": "اكسب المكافآت",
       "selectAmount": "Freeze",
       "summary": "Summary",
       "selectDevice": "اختار جهاز",
@@ -2263,7 +2263,7 @@
       "stepRange": "خطوة {{currentStep}} من {{totalSteps}}"
     },
     "info": {
-      "description": "Freeze TRX to earn rewards securely, keeping control of your assets.",
+      "description": "قم بتجميد TRX لكسب المكافآت بشكل آمن، مع الحفاظ على قدرتك على التحكم في أصولك.",
       "steps": {
         "0": "Delegated assets remain yours.",
         "1": "You can unfreeze your assets after 3 days.",
@@ -2860,7 +2860,7 @@
       "reward": "المطالبة بالمكافآت",
       "estYield": "Est. yield",
       "stepperHeader": {
-        "starter": "Earn rewards",
+        "starter": "اكسب المكافآت",
         "validator": "Delegate assets",
         "amountSubTitle": "المبلغ المراد تفويضه",
         "summary": "Summary",
@@ -3000,21 +3000,21 @@
       "flow": {
         "steps": {
           "method": {
-            "youEarned": "You earned",
+            "youEarned": "لقد كسبت",
             "byDelegationAssetsTo": "by delegating assets to",
             "claimReward": "Cash in",
-            "claimRewardCompound": "Compound",
+            "claimRewardCompound": "مُجمع",
             "claimRewardInfo": "They will be claimed now and added to your available balance.",
             "claimRewardCompoundInfo": "They will be claimed now and automatically delegated to the same validator.",
-            "compoundOrCashIn": "Compound or Cash in?",
+            "compoundOrCashIn": "مجمع أم تحصيل؟",
             "claimRewardTooltip": "سيتم إضافة المكافآت إلى الرصيد المتاح",
             "claimRewardCompoundTooltip": "سيتم إضافة المكافآت إلى المبلغ المفوض",
             "cta": "متابعة"
           },
           "verification": {
             "success": {
-              "title": "You have successfully claimed your rewards. They were added to your available balance.",
-              "titleCompound": "Your rewards were delegated to the same validator.",
+              "title": "لقد طالبت بمكافآتك بنجاح. تمت إضافتها إلى رصيدك المتاح.",
+              "titleCompound": "تم تفويض مكافآتك إلى نفس المدقق.",
               "text": "سيتم تحديث رصيد حسابك عندما تؤكد الشبكة المعاملة.",
               "cta": "عرض التفاصيل"
             },
@@ -3030,26 +3030,26 @@
   "tezos": {
     "AccountHeader": {
       "title": "You can earn rewards by delegating your account",
-      "btn": "Earn rewards"
+      "btn": "اكسب المكافآت"
     }
   },
   "tron": {
     "voting": {
-      "earnRewars": "Earn rewards",
-      "delegationEarn": "You can now earn rewards by freezing and voting.",
+      "earnRewars": "اكسب المكافآت",
+      "delegationEarn": "يمكنك الآن كسب مكافآت من خلال التجميد والتصويت.",
       "howItWorks": "How voting works",
-      "startEarning": "Earn rewards",
+      "startEarning": "اكسب المكافآت",
       "title": "Claim rewards",
       "header": "Votes ({{total}})",
       "Amount": "المبلغ",
-      "noRewards": "No rewards available",
+      "noRewards": "لا توجد مكافآت متاحة",
       "votes": {
         "title": "Votes",
         "description": "Cast your votes for one or more Representatives to start earning rewards.",
         "cta": "Vote"
       },
       "rewards": {
-        "title": "Voting rewards",
+        "title": "مكافآت التصويت",
         "button": "Claim"
       },
       "manageVotes": "Manage votes",
@@ -3081,7 +3081,7 @@
       "flow": {
         "steps": {
           "starter": {
-            "title": "Earn rewards",
+            "title": "اكسب المكافآت",
             "description": "Delegate TRX to a third party candidate to earn rewards. Click on continue to freeze assets and vote.",
             "bullet": {
               "delegate": "Delegated assets remain yours.",
@@ -3128,8 +3128,8 @@
         "description": "Energy points are required to execute smart contracts. If you don't run smart contracts, there is no need to have rewards in Energy points."
       },
       "claimRewards": {
-        "title": "Voting rewards",
-        "description": "The TRX generated as rewards during block production can be claimed every 24 hours."
+        "title": "مكافآت التصويت",
+        "description": "يمكن المطالبة كل 24 ساعة ب TRX الذي تم إنشاؤه كمكافآت أثناء إنتاج الكتل."
       },
       "superRepresentative": {
         "title": "Super Representatives (SR)",
@@ -3183,10 +3183,10 @@
     },
     "nomination": {
       "emptyState": {
-        "title": "Earn rewards",
+        "title": "اكسب المكافآت",
         "description": "You can earn rewards by bonding assets and then nominating your validator(s).",
         "info": "How nominations work",
-        "cta": "Earn rewards"
+        "cta": "اكسب المكافآت"
       },
       "header": "Nominations",
       "nominate": "Nominate",
@@ -3274,9 +3274,9 @@
     },
     "bond": {
       "rewardDestination": {
-        "label": "Reward Destination",
+        "label": "وجهة المكافأة",
         "stash": "Available balance",
-        "stashDescription": "Rewards are credited to your available balance.",
+        "stashDescription": "يتم إيداع المكافآت في رصيدك المتاح.",
         "staked": "Bonded balance",
         "stakedDescription": "Rewards are credited to your bonded balance for compound earning.",
         "optionTitle": "Note",
@@ -3284,7 +3284,7 @@
         "clickableLink": "here."
       },
       "stepperHeader": {
-        "starter": "Earn rewards",
+        "starter": "اكسب المكافآت",
         "amount": "المبلغ المراد تقيده",
         "selectDevice": "اختار جهاز",
         "connectDevice": "توصيل الجهاز",
@@ -3429,14 +3429,14 @@
     "durationDays_plural": "{{count}} أيام",
     "selectValidatorTitle": "اختار المدقق",
     "started": {
-      "title": "Earn rewards",
+      "title": "اكسب المكافآت",
       "description": "Delegate your Tezos account to a third-party validator to earn rewards securely, keeping control of your assets.",
       "steps": {
         "0": "Delegated accounts remain yours.",
         "1": "You can manage your assets at all times.",
         "2": "Delegate securely with your Ledger device."
       },
-      "cta": "Delegate to earn rewards"
+      "cta": "قم بالتفويض لكسب المكافآت"
     },
     "broadcastSuccessTitle": {
       "delegate": "Delegation sent",
@@ -3451,7 +3451,7 @@
     "howDelegationWorks": "How delegation works",
     "actions": {
       "redelegate": "Redelegate",
-      "collectRewards": "Collect rewards",
+      "collectRewards": "الحصول على المكافآت",
       "undelegate": "Undelegate"
     }
   },
@@ -3486,9 +3486,9 @@
     "infoWording": {
       "freeze": "يتم قفل رموز التوكن المجمدة لمدة 3 أيام.",
       "unfreeze": "Your {{resource}} points will be reduced, and all your votes will be cancelled.",
-      "claimReward": "Rewards can be claimed every 24 hours.",
+      "claimReward": "يمكن المطالبة بالمكافآت كل 24 ساعة.",
       "cosmos": {
-        "claimReward": "If the selected validator has pending rewards, they will automatically be claimed.",
+        "claimReward": "إذا كان المدقق المحدد لديه مكافآت معلقة، فسيتم الحصول عليها تلقائيًا.",
         "redelegate": "You will have to wait 21 days for undelegated assets to return to the available balance.",
         "undelegate": "You will have to wait 21 days for undelegated assets to return to the available balance."
       },
