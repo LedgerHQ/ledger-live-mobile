@@ -2785,7 +2785,7 @@
           },
           "verification": {
             "success": {
-              "title": "Récompenses bien demandées.",
+              "title": "Récompenses bien demandées",
               "text": "Vos récompenses ont été ajoutées à votre solde disponible.",
               "cta": "Accéder au compte"
             },
@@ -3348,7 +3348,7 @@
     },
     "unbond": {
       "stepperHeader": {
-        "amount": "Montant à relier",
+        "amount": "Montant à délier",
         "selectDevice": "Sélectionner l'appareil",
         "connectDevice": "Connecter l'appareil",
         "stepRange": "Étape {{currentStep}} sur {{totalSteps}}"
@@ -3376,7 +3376,7 @@
           "description": "Retirez les actifs déliés vers votre solde disponible."
         },
         "chill": {
-          "title": "Retirer les nominations",
+          "title": "Enlever les nominations",
           "description": "Efface toutes les nominations et récompenses.",
           "info": "Les actifs liés restent liés. Si vous les délier, ils seront disponibles après 28 jours."
         }
