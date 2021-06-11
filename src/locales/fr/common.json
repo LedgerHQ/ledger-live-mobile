@@ -350,7 +350,7 @@
       "description": "Vérifiez que ce compte a des fonds suffisants."
     },
     "NotEnoughGas": {
-      "title": "ETH insuffisants pour couvrir les frais de transaction",
+      "title": "ETH insuffisants pour couvrir les frais de réseau",
       "description": "Envoyez des ETH sur votre compte pour régler vos transactions de jetons ERC-20."
     },
     "NotEnoughBalanceToDelegate": {
@@ -457,7 +457,7 @@
     },
     "UserRefusedAllowManager": {
       "title": "Gestionnaire désactivé sur l'appareil",
-      "description": "Activez le Manager (Gestionnaire) sur votre appareil et réessayez."
+      "description": "Activez le \"Manager\" (Gestionnaire) sur votre appareil et réessayez."
     },
     "UserRefusedAddress": {
       "title": "Adresse de bénéficiaire rejetée",
@@ -709,7 +709,7 @@
       "warning": {
         "title": "Commencer en anglais",
         "cta": "Compris",
-        "desc": "Nous ajoutons des langues supplémentaires afin de faciliter vos premiers pas avec Ledger. Le reste de l'expérience Ledger est actuellement uniquement disponible en anglais."
+        "desc": "Nous ajoutons des langues supplémentaires afin de faciliter vos premiers pas avec Ledger. L'expérience Ledger sera bientôt entièrement disponible dans plusieurs langues."
       }
     },
     "stepSelectDevice": {
@@ -1094,7 +1094,7 @@
       "cta": "Je suis prêt(e) à scanner",
       "bullets": {
         "0": {
-          "label": "Sur Ledger Live ordinateur, sélectionnez <1>Paramètres > Comptes > Exporter les comptes</1>."
+          "label": "Sur Ledger Live ordinateur, allez dans <1>Paramètres > Comptes > Exporter les comptes</1>."
         },
         "1": {
           "label": "Scannez le code QR avec votre téléphone."
@@ -2539,7 +2539,7 @@
     },
     "GenuineCheck": {
       "title": "Vérification de l'authenticité de l'appareil",
-      "accept": "N'éteignez pas votre Nano X. Assurez-vous d'autoriser le <1>\"Ledger Manager\"</1> (Gestionnaire Ledger)."
+      "accept": "N'éteignez pas votre Nano X. Assurez-vous d'autoriser le <1>\"Ledger Manager\"</1> (Gestionnaire)."
     },
     "ScanningHeader": {
       "title": "Recherche d'appareils",
@@ -3595,7 +3595,7 @@
     "addAccount": "Ajouter un nouveau compte"
   },
   "notificationCenter": {
-    "title": "Centre de notifications",
+    "title": "Fil d'informations",
     "announcement": "Annonces",
     "liveStatus": "Statut de Ledger Live",
     "news": {
