@@ -280,7 +280,7 @@
     },
     "LatestMCUInstalledError": {
       "title": "Pas de mise à jour disponible",
-      "description": "Contactez l'Assistance Ledger si vous ne pouvez pas utiliser votre appareil."
+      "description": "Si vous ne pouvez pas utiliser votre appareil, contactez l'Assistance Ledger."
     },
     "LedgerAPIError": {
       "title": "Veuillez réessayer (API HTTP {{status}})",
@@ -528,7 +528,7 @@
     },
     "SwapGenericAPIError": {
       "title": "Taux de change expiré",
-      "description": "Vous devez confirmer le swap avant que le temps limite ne soit écoulé. Le taux de change reste valide pendant une durée fixe."
+      "description": "Vous devez confirmer le Swap avant que le temps limite ne soit écoulé. Le taux de change reste valide pendant une durée fixe."
     },
     "PolkadotElectionClosed": {
       "title": "L'élection du validateur doit être fermée."
@@ -833,7 +833,7 @@
         "bullets": {
           "0": {
             "title": "Choisir un code PIN",
-            "label": "Appuyez sur le bouton gauche ou droit pour changer le chiffre. Appuyez sur les deux boutons pour valider un chiffre. Sélectionnez<1></1>pour confirmer votre code PIN. Sélectionnez<2></2>pour effacer un chiffre."
+            "label": "Appuyez sur le bouton gauche ou droit pour changer le chiffre. Appuyez sur les deux boutons pour valider un chiffre. Sélectionnez <1></1>pour confirmer votre code PIN. Sélectionnez <2></2>pour effacer un chiffre."
           },
           "1": {
             "title": "Confirmer le code PIN",
