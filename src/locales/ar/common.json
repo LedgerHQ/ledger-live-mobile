@@ -2757,12 +2757,12 @@
     "token": "ASA (Assets)",
     "claimRewards": {
       "title": "المكافآت",
-      "button": "Claim",
+      "button": "مطالبة",
       "stepperHeader": {
         "info": "اكسب المكافآت",
         "starter": "المكافآت",
         "connectDevice": "توصيل الجهاز",
-        "verification": "Verification",
+        "verification": "التحقق",
         "stepRange": "خطوة {{currentStep}} من {{totalSteps}}"
       },
       "flow": {
@@ -2787,12 +2787,12 @@
             "success": {
               "title": "تمت المطالبة بالمكافآت بنجاح!",
               "text": "تمت إضافة مكافآتك إلى رصيدك المتاح.",
-              "cta": "Go to account"
+              "cta": "الذهاب إلى الحساب"
             },
             "pending": {
-              "title": "Broadcasting transaction..."
+              "title": "يتم بث المعاملة..."
             },
-            "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
+            "broadcastError": "من الوارد أن تكون معاملتك قد فشلت. يرجى التحقق مرة أخرى بعد بضع دقائق للتأكد أن معاملتك بالفعل لم تكتمل قبل المحاولة مرة أخرى."
           }
         }
       }
@@ -2992,7 +2992,7 @@
       "stepperHeader": {
         "validator": "اختر المكافأة التي ستحصل عليها",
         "method": "المطالبة بالمكافآت",
-        "summary": "Summary",
+        "summary": "الملخص",
         "selectDevice": "اختار جهاز",
         "connectDevice": "توصيل الجهاز",
         "stepRange": "خطوة {{currentStep}} من {{totalSteps}}"
@@ -3001,7 +3001,7 @@
         "steps": {
           "method": {
             "youEarned": "لقد كسبت",
-            "byDelegationAssetsTo": "by delegating assets to",
+            "byDelegationAssetsTo": "من خلال تفويض الأصول إلى",
             "claimReward": "Cash in",
             "claimRewardCompound": "مُجمع",
             "claimRewardInfo": "They will be claimed now and added to your available balance.",
