@@ -722,7 +722,7 @@
       "title": "Bonjour",
       "or": "Ou",
       "firstUse": {
-        "title": "Première utilisation de votre Nano ?",
+        "title": "Vous n'avez jamais utilisé votre Nano ?",
         "label": "Initialisation",
         "subTitle": "Configurer un nouveau Nano",
         "desc": "Commencez par configurer votre nouvel appareil."
@@ -859,7 +859,7 @@
               "label": "N'utilisez jamais un code PIN facile comme 0000, 123456 ou 55555555."
             },
             "5": {
-              "label": "Ne partagez jamais votre code PIN avec qui que ce soit. Même pas Ledger."
+              "label": "Ne partagez jamais votre code PIN avec qui que ce soit. Pas même Ledger."
             },
             "6": {
               "label": "N'utilisez jamais un code PIN que vous n'avez pas choisi vous-même."
@@ -926,7 +926,7 @@
             "label": "Saisissez ces mots uniquement sur un wallet physique, pas sur un ordinateur ni sur un téléphone."
           },
           "1": {
-            "label": "Ne partagez jamais vos 24 mots avec qui que ce soit. Même pas Ledger."
+            "label": "Ne partagez jamais vos 24 mots avec qui que ce soit. Pas même Ledger."
           }
         },
         "cta": "Compris",
@@ -965,7 +965,7 @@
         "desc_1": "Votre Nano va restaurer vos clés privées pour vous permettre d'accéder à vos cryptos et de les gérer.",
         "cta": "Je suis prêt(e)",
         "warning": {
-          "title": "N'utilisez que les phrases de récupération générées par un appareil Ledger",
+          "title": "N'utilisez que les phrases de récupération générées par un appareil Ledger.",
           "desc": "Ledger ne peut pas garantir la sécurité des phrases de récupération fournies par des tiers. Si votre phrase de récupération n'a pas été générée par un appareil Ledger, nous recommandons de configurer votre Nano comme un nouvel appareil.",
           "cta": "Compris"
         },
@@ -985,10 +985,10 @@
           },
           "1": {
             "title": "Naviguer",
-            "label": "Apprenez à interagir avec votre appareil en lisant les instructions à l'écran."
+            "label": "Apprenez à interagir avec votre appareil. Lisez les instructions à l'écran. Utilisez les boutons gauche et droit pour naviguer."
           },
           "2": {
-            "title": "Choisir \"Restore from recovery phrase\".",
+            "title": "Choisir \"Restore from recovery phrase\"",
             "label": "Sélectionnez \"Restore from recovery phrase\" (Restaurer à partir d'une phrase de récupération). Appuyez simultanément sur les deux boutons pour valider."
           },
           "3": {
@@ -2479,7 +2479,7 @@
     "withoutDevice": "Continuer sans mon appareil",
     "steps": {
       "connecting": {
-        "title": "Connexion à {{deviceName}}",
+        "title": "Connexion d'un {{deviceName}}",
         "description": {
           "ble": "Assurez-vous que votre {{productName}} est déverrouillé et à proximité.",
           "usb": "Assurez-vous que votre {{productName}} est déverrouillé."
@@ -3377,8 +3377,8 @@
         },
         "chill": {
           "title": "Enlever les nominations",
-          "description": "Efface toutes les nominations et récompenses.",
-          "info": "Les actifs liés restent liés. Si vous les délier, ils seront disponibles après 28 jours."
+          "description": "Efface toutes les nominations et met fin au gain de récompenses.",
+          "info": "Les actifs liés restent liés. Si vous les déliez, ils seront disponibles après 28 jours."
         }
       },
       "stepperHeader": {
