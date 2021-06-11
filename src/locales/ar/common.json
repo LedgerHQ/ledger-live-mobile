@@ -407,7 +407,7 @@
     },
     "TronNoFrozenForBandwidth": {
       "title": "لا توجد أصول لإلغاء تجميدها",
-      "description": "You don't have Bandwidth assets to unfreeze."
+      "description": "ليس لديك أصول النطاق الترددي (Bandwidth) لإلغاء تجميدها."
     },
     "TronNoFrozenForEnergy": {
       "title": "لا توجد أصول لإلغاء تجميدها",
@@ -1171,36 +1171,36 @@
       "recoveryPhrase": {
         "title": "إذا لم تعد عبارة الاسترداد الخاصة بي سرية وآمنة...",
         "answers": {
-          "correct": "My crypto is no longer safe and I need to transfer them to a secure place",
-          "wrong": "No problem, Ledger can send me a copy"
+          "correct": "لم تعد أصولي المشفرة آمنة وأحتاج إلى نقلها إلى مكان آمن",
+          "wrong": "لا مشكلة، يمكن لليدجر أن يرسل إلي نسخة"
         },
         "modal": {
           "text": "يمكن لأي شخص يعرف عبارة الاسترداد الخاصة بك أن يقوم بسرقة الأصول المشفرة الخاصة بك.\nإذا فقدت هذه العبارة، يجب عليك نقل أصولك المشفرة بسرعة إلى مكان آمن.",
-          "cta": "Next question"
+          "cta": "السؤال التالي"
         }
       },
       "privateKey": {
         "title": "عندما أقوم بتوصيل جهاز Nano الخاص بي بتطبيق ليدجر، فإن مفتاحي الخاص هو...",
         "answers": {
-          "correct": "Still offline",
+          "correct": "لا يزال غير متصل",
           "wrong": "اتصال وجيز بالإنترنت"
         },
         "modal": {
           "text": "يظل مفتاحك الخاص دائمًا في وضع عدم الاتصال في محفظة جهازك. حتى عندما يتصل تطبيق ليدجر بجهاز Nano الخاص بك، فلا يمكنه الوصول إلى مفتاحك الخاص. يجب عليك أن تقوم بتفويض كل معاملة على جهازك يدويًا.",
-          "cta": "Finish quiz"
+          "cta": "إنهاء الاختبار"
         }
       },
       "final": {
         "successTitle": "أصبحت محترفًا بالفعل!",
         "successText": "أنت جاهز لإدارة أصولك المشفرة بأمان. لم يتبق أمامك سوى خطوة واحدة سريعة!",
         "failTitle": "ستصبح محترفًا قريبًا...",
-        "failText": "Don’t worry, Ledger is here to guide you through your journey. You will soon feel extra comfortable about your crypto safety. Only one quick step left!",
+        "failText": "لا تقلق، ليدجر هنا لإرشادك خلال رحلتك. ستشعر قريبًا براحة إضافية بشأن أمان أصولك المشفرة. لم يتبقى سوى خطوة واحدة سريعة!",
         "cta": "الخطوة التالية"
       }
     },
     "warning": {
       "recoveryPhrase": {
-        "title": "Do not use a recovery phrase that you have not generated yourself.",
+        "title": "لا تستخدم عبارة استرداد لم تقم بإنشائها بنفسك.",
         "desc": "Your Ledger hardware wallet’s pin code and recovery phrase should be initialized by you and only you. If you have received a device with a pre-existing seed word or an already initialized pin code do not use the product and contact our customer support.",
         "supportLink": "الاتصال بقسم دعم ليدجر"
       }
@@ -1209,16 +1209,16 @@
   "tabs": {
     "portfolio": "Portfolio",
     "accounts": "الحسابات",
-    "transfer": "Transfer",
+    "transfer": "تحويل",
     "manager": "المدير",
-    "settings": "Settings",
+    "settings": "إعدادات",
     "nanoX": "Nano X"
   },
   "portfolio": {
-    "totalBalance": "Total balance",
-    "syncError": "Sync error",
-    "syncFailed": "Synchronization failed",
-    "syncPending": "Synchronizing...",
+    "totalBalance": "إجمالي الرصيد",
+    "syncError": "خطأ في المزامنة",
+    "syncFailed": "فشلت المزامنة",
+    "syncPending": "تتم المزامنة...",
     "greeting": {
       "morning": "صباح الخير",
       "evening": "مساء الخير",
@@ -1233,7 +1233,7 @@
     "emptyState": {
       "noAppsTitle": "تثبيت تطبيق على جهازي",
       "noAppsDesc": "قم بتثبيت التطبيقات على جهازك قبل إضافة حسابات في Ledger Live. انتقل إلى المدير لتثبيت التطبيقات.",
-      "noAccountsTitle": "You don't have any accounts…",
+      "noAccountsTitle": "ليس لديك أي حسابات...",
       "noAccountsDesc": "Please add accounts to your Portfolio.",
       "buttons": {
         "import": "إضافة حساب",
@@ -1242,7 +1242,7 @@
       }
     },
     "noOpState": {
-      "title": "No operations yet?",
+      "title": "لا توجد أي عمليات بعد؟",
       "desc": "ببساطة إرسل الأصول المشفرة إلى عنوان الاستلام الخاص بك وانتظر حتى يقوم التطبيق بالمزامنة."
     }
   },
@@ -1257,15 +1257,15 @@
   },
   "time": {
     "day": "1يوم",
-    "week": "1W",
-    "month": "1M",
-    "year": "1Y",
-    "all": "All",
+    "week": "1 أسبوع",
+    "month": "1 شهر",
+    "year": "1 سنة",
+    "all": "الكل",
     "since": {
-      "day": "past day",
-      "week": "past week",
-      "month": "past month",
-      "year": "past year"
+      "day": "اليوم السابق",
+      "week": "الأسبوع السابق",
+      "month": "الشهر السابق",
+      "year": "العام السابق"
     }
   },
   "orderOption": {
@@ -1485,7 +1485,7 @@
     "availableBalance": "Available balance",
     "totalSupplied": "المبلغ المودع",
     "tronFrozen": "Frozen",
-    "bandwidth": "Bandwidth",
+    "bandwidth": "النطاق الترددي (Bandwidth)",
     "energy": "Energy",
     "delegatedAssets": "Delegated assets",
     "undelegating": "Undelegating",
@@ -2275,7 +2275,7 @@
     "amount": {
       "available": "Total available",
       "noRateProvider": "Not available",
-      "infoLabel": "Bandwidth or Energy"
+      "infoLabel": "النطاق الترددي أم الطاقة"
     },
     "validation": {
       "message": "Always verify that your device displays the address exactly as it was originally given to you.",
@@ -3099,7 +3099,7 @@
       "title": "Manage Tron Power",
       "freeze": {
         "title": "Freeze",
-        "description": "Freeze TRX to earn Bandwidth or Energy. You can also vote for Super Representatives."
+        "description": "قم بتجميد TRX لكسب نطاق ترددي (Bandwidth) أو طاقة (Energy). يمكنك أيضًا التصويت لصالح الممثلين المتميزين."
       },
       "unfreeze": {
         "title": "Unfreeze",
@@ -3120,8 +3120,8 @@
         "description": "Frozen assets are used for Tron voting. This is your total number of votes."
       },
       "bandwidth": {
-        "title": "Bandwidth",
-        "description": "Bandwidth points are used to make transactions instead of paying TRX network fees. Choose Bandwidth to increase your daily free transactions."
+        "title": "النطاق الترددي",
+        "description": "تُستخدم نقاط النطاق الترددي (Bandwidth) لإجراء المعاملات بدلاً من دفع رسوم شبكة TRX. اختر النطاق الترددي لزيادة معاملاتك اليومية المجانية."
       },
       "energy": {
         "title": "Energy",
