@@ -899,12 +899,12 @@
         },
         "bullets": {
           "0": {
-            "title": "خذ نشرة الاسترداد الخاصة بك",
-            "label": "احصل على صفحة استرداد فارغة، والتي أتت مرفقة مع جهاز Nano الخاص بك. يرجى التواصل مع دعم ليدجر إذا لم تكن صفحة الاسترداد أتتك فارغة."
+            "title": "خذ ورقة الاسترداد الخاصة بك",
+            "label": "احصل على ورقة استرداد فارغة، والتي أتت مرفقة مع جهاز Nano الخاص بك. يرجى التواصل مع دعم ليدجر إذا لم تكن صفحة الاسترداد أتتك فارغة."
           },
           "1": {
             "title": "اكتب كل الكلمات",
-            "label": "اكتب الكلمة رقم #1 المعروضة على جهاز Nano الخاص بك في الموضع 1 من صفحة الاسترداد. ثم اضغط يمينًا على جهاز نانو لعرض الكلمة رقم#2 واكتبها في الموضع 2.",
+            "label": "اكتب الكلمة رقم #1 المعروضة على جهاز Nano الخاص بك في الموضع 1 من ورقة الاسترداد. ثم اضغط يمينًا على جهاز نانو لعرض الكلمة رقم#2 واكتبها في الموضع 2.",
             "label_1": "كرر العملية لجميع الكلمات مع احترام الترتيب والتهجئة بعناية. اضغط على اليسار على جهاز Nano الخاص بك للتحقق من وجود أي أخطاء."
           },
           "2": {
@@ -1125,7 +1125,7 @@
       }
     },
     "stepWriteRecovery": {
-      "step1": "اكتب <1><1>الكلمة رقم 1</1></1> في حقل الإدخال رقم 1 في صفحة استرداد فارغة",
+      "step1": "اكتب <1><1>الكلمة رقم 1</1></1> في حقل الإدخال رقم 1 في ورقة استرداد فارغة",
       "step2": "اضغط على الزر الأيمن واستمر في تدوين كل الكلمات الأربع والعشرين (24).",
       "step3": "قم بتأكيد كل كلمة من عبارة الاسترداد: إختارها ثم أكدها بالضغط على الزرين معًا.",
       "modal": {
@@ -1311,7 +1311,7 @@
     "date": "التاريخ",
     "confirmed": "تم التأكيد",
     "notConfirmed": "لم يتم التأكيد",
-    "failed": "فشل",
+    "failed": "فشلت",
     "fees": "رسوم الشبكة",
     "noFees": "لا توجد رسوم",
     "from": "من ({{count}})",
@@ -1703,7 +1703,7 @@
       "notice_plural": "تعذّر تحديث حسابات {{accountCount}}. يُرجى توصيل الجهاز المرتبط بالحساب أدناه.",
       "currency": "1 {{currency}} account needs to be updated",
       "currency_plural": "{{count}} {{currency}} accounts need to be updated",
-      "start": "Start update",
+      "start": "بدء التحديث",
       "continue": "متابعة التحديث"
     },
     "progress": {
@@ -2281,7 +2281,7 @@
       "message": "Always verify that your device displays the address exactly as it was originally given to you.",
       "success": "Assets frozen",
       "amount": "المبلغ",
-      "info": "You will start earning {{resource}} once the network has confirmed the freeze. You can shortly vote for Super Representatives to also earn rewards.",
+      "info": "ستبدأ في كسب {{resource}} بمجرد تأكيد الشبكة للتجميد. يمكنك قريبًا التصويت للممثلين الممتازين للحصول على مكافآت أيضًا.",
       "button": {
         "pending": "يتم التحقق من صحة المعاملة.",
         "pendingDesc": "Please wait a moment before voting.",
@@ -2393,7 +2393,7 @@
     "finalCtaForSwap": "رجوع إلى المبادلة",
     "synchronizing": "Synchronizing",
     "synchronizingDesc": "تتم مزامنة حساباتك. قد يستغرق ذلك بعض الوقت...",
-    "noAccountToCreate": "Could not create <1><0>{{currencyName}}</></> account. Restart the process and sync your accounts.",
+    "noAccountToCreate": "تعذر إنشاء حساب <1><0>{{currencyName}}</></>. أعد تشغيل العملية وقم بمزامنة حساباتك.",
     "cantCreateAccount": "A new account cannot be added before receiving assets on your <1><0>{{accountName}}</></> account.",
     "tokens": {
       "title": "إضافة رمز توكن",
@@ -2538,7 +2538,7 @@
       "step2": "Validate on your {{productName}} by pressing both buttons together."
     },
     "GenuineCheck": {
-      "title": "Device authentication check",
+      "title": "إختبار توثيق الجهاز",
       "accept": "يرجى عدم إيقاف تشغيل Nano X. تأكد من أنك تسمح ب <1>مدير ليدجر</1>."
     },
     "ScanningHeader": {
@@ -2554,7 +2554,7 @@
   },
   "DeviceItemSummary": {
     "genuine": "Your device is genuine",
-    "genuineFailed": "Device authentication <1><0>failed</0></1>"
+    "genuineFailed": "توثيق الجهاز <1><0>فشل</0></1>"
   },
   "DeviceNameRow": {
     "title": "Name",
@@ -2698,7 +2698,7 @@
     }
   },
   "AuthenticityRow": {
-    "title": "Authentication",
+    "title": "توثيق",
     "subtitle": "Genuine"
   },
   "RemoveRow": {
@@ -2738,7 +2738,7 @@
     "description": "Please press both buttons together on your {{fullDeviceName}} if it displays the same identifier:"
   },
   "FirmwareUpdateMCU": {
-    "title": "Restart device",
+    "title": "إعادة تشغيل الجهاز",
     "desc1": "افصل جهازك عن جهاز الكمبيوتر الخاص بك.",
     "desc2": "اضغط و استمر في الضغط على الزر الأيسر، وقم بتوصيل كبل الUSB ثم قم بتحرير الزر عندما تظهر شاشة Bootloader."
   },
@@ -2872,11 +2872,11 @@
       "flow": {
         "steps": {
           "starter": {
-            "description": "Delegate your ATOM to earn rewards securely, keeping control of your assets.",
+            "description": "قم بتفويض ATOM لكسب المكافآت بشكل آمن، مع الاحتفاظ بالسيطرة على أصولك.",
             "steps": {
-              "0": "Delegated assets remain yours.",
-              "1": "You will have to wait 21 days for the undelegation to complete.",
-              "2": "Delegate securely with your Ledger device."
+              "0": "الأصول المفوضة تظل ملكك.",
+              "1": "سيتعين عليك الانتظار 21 يومًا حتى يكتمل إلغاء التفويض.",
+              "2": "قم بإجراء التفويض بشكل آمن بجهاز ليدجر الخاص بك."
             },
             "warning": {
               "description": "Choose your validator wisely: Part of your delegated assets may be irrevocably lost if the validator does not behave appropriately."
@@ -3045,7 +3045,7 @@
       "noRewards": "لا توجد مكافآت متاحة",
       "votes": {
         "title": "Votes",
-        "description": "Cast your votes for one or more Representatives to start earning rewards.",
+        "description": "قم بالإدلاء بأصواتك لممثل واحد أو أكثر للبدء في كسب المكافآت.",
         "cta": "Vote"
       },
       "rewards": {
@@ -3082,11 +3082,11 @@
         "steps": {
           "starter": {
             "title": "اكسب المكافآت",
-            "description": "Delegate TRX to a third party candidate to earn rewards. Click on continue to freeze assets and vote.",
+            "description": "قم بتفويض TRX إلى مرشح طرف خارجي لكسب المكافآت. انقر فوق \"متابعة\" لتجميد الأصول والتصويت.",
             "bullet": {
-              "delegate": "Delegated assets remain yours.",
-              "access": "You can access your assets 3 days after freezing.",
-              "ledger": "Delegate securely with your Ledger device."
+              "delegate": "الأصول المفوضة تظل ملكك.",
+              "access": "يمكنك الوصول إلى الأصول الخاصة بك بعد 3 أيام من التجميد.",
+              "ledger": "قم بإجراء التفويض بشكل آمن بجهاز ليدجر الخاص بك."
             },
             "button": {
               "cta": "متابعة"
@@ -3267,7 +3267,7 @@
         "validation": {
           "success": {
             "title": "You have successfully nominated validators",
-            "description": "You will start earning rewards when your assets are bonded to your elected validator(s)."
+            "description": "ستبدأ في كسب المكافآت عندما يتم ربط الأصول الخاصة بك بالمدقق (المدققين) الذين قمت باختيارهم."
           }
         }
       }
