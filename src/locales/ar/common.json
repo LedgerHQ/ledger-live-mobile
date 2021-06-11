@@ -421,7 +421,7 @@
       "title": "مطلوب على الأقل صوت واحد"
     },
     "TronInvalidVoteCount": {
-      "title": "Vote format is incorrect",
+      "title": "صيغة التصويت غير صحيحة",
       "description": "يمكنك التصويت فقط باستخدام أرقام كاملة."
     },
     "TronRewardNotAvailable": {
@@ -506,16 +506,16 @@
       "title": "يرجى إفراغ جميع الحسابات الفرعية أولاً"
     },
     "NotSupportedLegacyAddress": {
-      "title": "The legacy address format is no longer supported"
+      "title": "صيغة العنوان القديمة لم تعد مدعومة"
     },
     "StellarWrongMemoFormat": {
-      "title": "Memo format is wrong"
+      "title": "صيغة الملاحظة خاطئة"
     },
     "SourceHasMultiSign": {
       "title": "يرجى تعطيل خاصية التوقيع المتعدد لإرسال {{currencyName}}"
     },
     "StellarMemoRecommended": {
-      "title": "A memo may be needed when sending to this recipient"
+      "title": "قد يلزم إضافة ملاحظة عند الإرسال إلى هذا المستلم"
     },
     "StratisDown2021Warning": {
       "description": "لقد تطورت بلوك تشين Stratis ومن الوارد ألا تعمل بشكل صحيح. سيتم الحفاظ على دعم بلوك تشين Stratis الأصلية حتى 16 أكتوبر 2021."
@@ -575,7 +575,7 @@
     "required": "خدمات الموقع مطلوبة",
     "open": "فتح إعدادات الموقع",
     "disabled": "يتطلب ليدجر لايف خدمات الموقع لإقران جهازك عبر خاصية البلوتوث.",
-    "noInfos": "Ledger لا تصل إلى معلومات موقعك."
+    "noInfos": "Ledger لا تستخدم معلومات موقعك."
   },
   "permissions": {
     "open": "Open app permissions"
@@ -1270,88 +1270,88 @@
   },
   "orderOption": {
     "choices": {
-      "name|asc": "Name A-Z",
-      "name|desc": "Name Z-A",
-      "balance|asc": "Lowest Balance",
-      "balance|desc": "Highest Balance"
+      "name|asc": "الاسم A-Z",
+      "name|desc": "الاسم Z-A",
+      "balance|asc": "أقل رصيد",
+      "balance|desc": "أعلى رصيد"
     }
   },
   "operations": {
     "types": {
-      "IN": "تم الإستلام",
-      "OUT": "Sent",
-      "CREATE": "Created",
-      "REVEAL": "Revealed",
-      "DELEGATE": "Delegated",
-      "UNDELEGATE": "Undelegated",
-      "REDELEGATE": "Redelegated",
-      "VOTE": "Voted",
-      "FREEZE": "Frozen",
-      "UNFREEZE": "Unfrozen",
+      "IN": "تم التلقي",
+      "OUT": "أرسلت",
+      "CREATE": "تمّ انشاؤه",
+      "REVEAL": "كشف",
+      "DELEGATE": "تم التفويض",
+      "UNDELEGATE": "تم إلغاء التفويض",
+      "REDELEGATE": "تمت إعادة التفويض",
+      "VOTE": "تم التصويت",
+      "FREEZE": "تم التجميد",
+      "UNFREEZE": "تمت إزالة التجميد",
       "REWARD": "المكافأة التي تمت المطالبة بها",
       "FEES": "الرسوم",
-      "OPT_IN": "Opt in",
-      "OPT_OUT": "Opt out",
+      "OPT_IN": "الإشتراك",
+      "OPT_OUT": "إلغاء الإشتراك",
       "CLOSE_ACCOUNT": "إغلاق الحساب",
-      "SUPPLY": "Deposited",
-      "REDEEM": "Withdrawn",
-      "APPROVE": "Enabled",
+      "SUPPLY": "تم الإيداع",
+      "REDEEM": "مسحوب",
+      "APPROVE": "ممكن",
       "BOND": "Bond",
       "UNBOND": "Unbond",
       "REWARD_PAYOUT": "مُكافأة",
-      "SLASH": "Slash",
+      "SLASH": "تغريم",
       "WITHDRAW_UNBONDED": "Unbonded Withdrawal",
-      "NOMINATE": "Nomination",
-      "CHILL": "Clear nominations"
+      "NOMINATE": "ترشيح",
+      "CHILL": "مسح الترشيحات"
     }
   },
   "operationDetails": {
-    "title": "Operation details",
+    "title": "تفاصيل العملية",
     "account": "الحساب",
     "date": "التاريخ",
     "confirmed": "تم التأكيد",
     "notConfirmed": "لم يتم التأكيد",
-    "failed": "Failed",
-    "fees": "Network fees",
-    "noFees": "No fee",
+    "failed": "فشل",
+    "fees": "رسوم الشبكة",
+    "noFees": "لا توجد رسوم",
     "from": "من ({{count}})",
-    "to": "To ({{count}})",
-    "identifier": "Transaction ID",
+    "to": "إلى ({{count}})",
+    "identifier": "معرف المعاملة",
     "viewOperation": "عرض في المتصفح",
-    "whatIsThis": "What is this operation?",
+    "whatIsThis": "ما هذه العملية؟",
     "seeAll": "رؤية الكل",
     "seeLess": "رؤية أقل",
     "viewInExplorer": "عرض في المتصفح",
-    "sending": "Sending...",
-    "receiving": "Receiving...",
+    "sending": "جاري الإرسال...",
+    "receiving": "جاري التلقي...",
     "tokenOperations": "عمليات رمز التوكن",
     "subAccountOperations": "عمليات الحساب الفرعي",
-    "internalOperations": "Internal operations",
+    "internalOperations": "العمليات الداخلية",
     "tokenModal": {
       "desc": "هذه العملية مرتبطة بعمليات رمز التوكن التالية"
     },
-    "details": "{{ currency }} details",
+    "details": "تفاصيل {{ currency }}",
     "extra": {
-      "resource": "Resource",
+      "resource": "مورد",
       "frozenAmount": "المبلغ المجمد",
       "unfreezeAmount": "إزالة تجميد المبلغ",
       "address": "عنوان",
-      "votes": "Votes ({{number}})",
-      "votesAddress": "<0>{{votes}}</0> to <2>{{name}}</2>",
+      "votes": "({{number}}) أصوات",
+      "votesAddress": "<0>{{votes}}</0> إلى <2>{{name}}</2>",
       "validators": "المدققون",
       "delegated": "تفويض ({{amount}})",
-      "delegatedTo": "Delegated to",
+      "delegatedTo": "تم التفويض إلى",
       "delegatedAmount": "المبلغ المفوض",
       "redelegated": "إعادة تفويض ({{amount}})",
-      "redelegatedFrom": "Redelegated from",
-      "redelegatedTo": "Redelegated to",
+      "redelegatedFrom": "تمت إعادة التفويض من",
+      "redelegatedTo": "تمت إعادة التفويض إلى",
       "redelegatedAmount": "المبلغ المعاد تفويضه",
       "undelegated": "غير مفوّض ({{amount}})",
-      "undelegatedFrom": "Undelegated from",
+      "undelegatedFrom": "تم إالغاء التفويض من",
       "undelegatedAmount": "المبلغ غير مفوّض",
       "rewardFrom": "مكافأة من",
       "rewardAmount": "المبلغ المحصل",
-      "memo": "Memo",
+      "memo": "ملاحظة",
       "assetId": "Asset ID",
       "rewards": "المكافآت المكتسبة",
       "bondedAmount": "المبلغ المقيد",
@@ -1654,7 +1654,7 @@
     },
     "about": {
       "title": "About",
-      "desc": "App information, terms and conditions, and privacy policy.",
+      "desc": "معلومات التطبيق، والشروط والأحكام، وسياسة الخصوصية.",
       "appDescription": "With Ledger Live, Secure, Buy, Sell, Exchange, Grow and Manage your crypto. All-in-one place.",
       "appVersion": "Version",
       "termsConditions": "الأحكام والشروط",
@@ -1913,8 +1913,8 @@
         "to": "To",
         "toAmount": "المبلغ المراد استلامه",
         "statusTooltips": {
-          "expired": "Please contact the swap provider with your swap ID for more information.",
-          "refunded": "Please contact the swap provider with your swap ID for more information.",
+          "expired": "يرجى الاتصال بمزود المبادلة باستخدام معرف مبادلتك للمزيد من المعلومات.",
+          "refunded": "يرجى الاتصال بمزود المبادلة باستخدام معرف مبادلتك للمزيد من المعلومات.",
           "pending": "Please wait while the swap provider is processing the transaction.",
           "onhold": "Please contact the swap provider with your swap ID to solve the situation.",
           "finished": "Your swap was completed successfully."
@@ -1937,7 +1937,7 @@
       },
       "history": {
         "tab": "السجل",
-        "exportButton": "Export operations",
+        "exportButton": "تصدير العمليات",
         "exportFilename": "عمليات المبادلة",
         "empty": {
           "title": "ستظهر مبادلاتك السابقة هنا",
@@ -1977,7 +1977,7 @@
         "needApproval": "يتعين عليك الموافقة على هذا الحساب قبل أن تكون قادراً على إقراض الأصول.",
         "fullyApproved": "لقد وافقت بالكامل على هذا الحساب. يمكنك تخفيض المبلغ مقابل رسوم.",
         "approvedCanReduce": "لقد وافقت على <0>{{value}}</0> على هذا الحساب. يمكنك تخفيض المبلغ مقابل رسوم.",
-        "approvedButNotEnough": "You have approved <0>{{value}}</0> on this account.",
+        "approvedButNotEnough": "لقد وافقت على <0>{{value}}</0> في هذا الحساب.",
         "approving": "يمكنك إيداع الأصول بمجرد تأكيد الموافقة على الحساب.",
         "notEnough": "يتعيّن عليك زيادة الحد الأقصى الموافق عليه في حسابك للإقراض."
       },
@@ -1985,7 +1985,7 @@
       "dashboard": {
         "tabTitle": "لوحة المعلومات",
         "assetsTitle": "أصول للإقراض",
-        "accountsTitle": "Approved accounts",
+        "accountsTitle": "الحسابات المعتمدة",
         "emptySateDescription": "You can lend assets directly from your Ethereum accounts and earn interest.",
         "apy": "{{value}} APY",
         "activeAccount": {
@@ -2051,7 +2051,7 @@
       },
       "enable": {
         "info": {
-          "title": "This account is not approved",
+          "title": "هذا الحساب غير معتمد",
           "description": "تحتاج إلى الموافقة على حساب قبل أن تتمكن من إقراض هذا الأصل.",
           "cta": "الموافقة على الحساب"
         },
@@ -2202,11 +2202,11 @@
       "validateFees": "Validate Fees",
       "customizeFees": "تخصيص الرسوم",
       "memo": {
-        "title": "Memo",
-        "type": "Memo type",
-        "value": "Memo value"
+        "title": "الملاحظة",
+        "type": "نوع الملاحظة",
+        "value": "قيمة الملاحظة"
       },
-      "validateMemo": "Validate memo"
+      "validateMemo": "تحقق من الملاحظة"
     },
     "validation": {
       "message": "قم بتأكيد المعاملة على جهازك للتوقيع عليها بشكل آمن.",
@@ -2428,7 +2428,7 @@
       },
       "legacy": {
         "title": "Legacy",
-        "desc": "{{currency}}’s original address format. Highest fees per transaction. Some wallets/exchanges still only support this type."
+        "desc": "صيغة العنوان الأصلي لعملة {{currency}}. أعلى رسوم لكل معاملة. لا تزال بعض المحافظ/عمليات التبادل تدعم هذا النوع فقط."
       }
     }
   },
@@ -3143,15 +3143,15 @@
   },
   "stellar": {
     "memo": {
-      "title": "Memo",
-      "warning": "When using a Memo, carefully verify the type with the recipient."
+      "title": "الملاحظة",
+      "warning": "عند استخدام الملاحظة، تحقق بعناية من النوع مع المستلم."
     },
     "memoType": {
-      "MEMO_TEXT": "Memo Text",
-      "NO_MEMO": "No Memo",
-      "MEMO_ID": "Memo ID",
-      "MEMO_HASH": "Memo Hash",
-      "MEMO_RETURN": "Memo Return"
+      "MEMO_TEXT": "نص الملاحظة",
+      "NO_MEMO": "لا توجد ملاحظة",
+      "MEMO_ID": "مُعرّف الملاحظة",
+      "MEMO_HASH": "رمز تجزئة الملاحظة",
+      "MEMO_RETURN": "إرجاع الملاحظة"
     }
   },
   "polkadot": {
@@ -3503,7 +3503,7 @@
     "validatorAddress": "عنوان المدقق",
     "rewardAmount": "مبلغ المكافأة",
     "undelegatedAmount": "المبلغ غير المفوض",
-    "memo": "Memo"
+    "memo": "الملاحظة"
   },
   "Terms": {
     "title": "شروط الاستخدام",
