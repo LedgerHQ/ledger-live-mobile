@@ -47,7 +47,7 @@
     "token": "代币",
     "token_plural": "代币",
     "subaccount": "子账户",
-    "subaccount_plural": "子帐户",
+    "subaccount_plural": "子账户",
     "forgetDevice": "移除设备",
     "help": "帮助",
     "saveLogs": "保存日志",
@@ -496,7 +496,7 @@
       "description": "如果想要接收资金，请使用主账户"
     },
     "UnavailableTezosOriginatedAccountSend": {
-      "title": "尚无法从子帐户发送",
+      "title": "尚无法从子账户发送",
       "description": "由于近期 Babylon 更新而引入的变化，此功能将在稍后阶段被添加。"
     },
     "RecommendUndelegation": {
@@ -699,7 +699,7 @@
     "stepWelcome": {
       "title": "欢迎使用 Ledger",
       "subtitle": "通过您的手机来安全管理您的加密资产。",
-      "start": "即刻开始",
+      "start": "快速入门",
       "noDevice": "没有设备？",
       "buy": "购买一个 {{fullDeviceName}}"
     },
@@ -1071,7 +1071,7 @@
         "desc_4": "配对时，如果您的手机应用程序无法检测到 Ledger Nano X，请尝试以下解决方案：",
         "desc_5": "如果定位服务未启用，Ledger 手机应用程序会要求您允许定位服务，但是有几款手机并不能很好地检测到这点。请注意 Ledger 手机应用程序永远不会使用您的位置信息，获得该许可只是为了使用 Android 系统的蓝牙功能。",
         "desc_6": "一些用户表示，将手机的 Android 系统版本更新后，解决了连接问题。请查询您的手机供应商是否有可用的更新。",
-        "link": "了解更多信息",
+        "link": "了解更多",
         "bullets": {
           "0": {
             "label": "进入您 Android 手机 Ledger Live 应用程序的系统选项。"
@@ -2620,7 +2620,7 @@
       "title_plural": "应用程序已成功安装，现在您可以添加您的账户",
       "notSupported": "应用程序已成功安装，访问我们的网站来了解关于这些已安装应用的更多信息。",
       "manageAccount": "添加账户",
-      "learnMore": "了解更多信息",
+      "learnMore": "了解更多",
       "later": "以后再说"
     },
     "firmware": {
@@ -3609,7 +3609,7 @@
     "status": {
       "title": "状态",
       "ok": {
-        "title": "Ledger Live 已开启并正在运行",
+        "title": "Ledger Live 已启动并正在运行",
         "desc": "<0>遇到问题？请前往我们的 </0><1>帮助页面</1>"
       },
       "error": {
