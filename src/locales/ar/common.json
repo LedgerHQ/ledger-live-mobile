@@ -1468,7 +1468,7 @@
         "newAccounts": "الحسابات الجديدة",
         "updatedAccounts": "الحسابات المحدثة",
         "empty": "إضافة حساب جديد",
-        "descEmpty": "<0><0>No accounts</0></0> were found. Please try again or go back to Setup",
+        "descEmpty": "لم يتم العثور على <0><0>أي حسابات</0></0>. يرجى المحاولة مرة أخرى أو العودة إلى الإعداد",
         "alreadyImported": "تم الاستيراد بالفعل",
         "noAccounts": "لا شيء لاستيراده",
         "unsupported": "غير مدعوم",
@@ -1482,7 +1482,7 @@
         "buttonTitle": "انتقل إلى الاعدادات"
       }
     },
-    "availableBalance": "Available balance",
+    "availableBalance": "الرصيد المتاح",
     "totalSupplied": "المبلغ المودع",
     "tronFrozen": "Frozen",
     "bandwidth": "النطاق الترددي (Bandwidth)",
@@ -1768,7 +1768,7 @@
     "exchange": {
       "title": "شراء / بيع",
       "providers": {
-        "title": "Choose a provider to buy crypto",
+        "title": "اختر مزود لمبادلة العملات المشفرة",
         "whatIsSwap": "ما هو الشراء؟",
         "cta": "متابعة",
         "coinify": {
@@ -1804,13 +1804,13 @@
         "disclaimer": "Exchange crypto directly from your Ledger device. This service is not available in some countries, including the US."
       },
       "providers": {
-        "title": "Choose a provider to swap your crypto",
-        "whatIsSwap": "What is Swap?",
+        "title": "اختر مزود لمبادلة العملات المشفرة",
+        "whatIsSwap": "ما هي المبادلة؟",
         "cta": "متابعة",
         "changelly": {
           "bullets": [
-            "BTC, ETH, USDT and 50+ others",
-            "Multi-currency",
+            "BTC, ETH, USDT و 50+ آخرىن",
+            "متعدد العملات",
             "مركزي"
           ]
         },
@@ -1915,7 +1915,7 @@
         "statusTooltips": {
           "expired": "يرجى الاتصال بمزود المبادلة باستخدام معرف مبادلتك للمزيد من المعلومات.",
           "refunded": "يرجى الاتصال بمزود المبادلة باستخدام معرف مبادلتك للمزيد من المعلومات.",
-          "pending": "Please wait while the swap provider is processing the transaction.",
+          "pending": "يُرجى الانتظار بينما يقوم مزود المبادلة بمباشرة المعاملة.",
           "onhold": "Please contact the swap provider with your swap ID to solve the situation.",
           "finished": "Your swap was completed successfully."
         }
@@ -1945,7 +1945,7 @@
         }
       },
       "platform": {
-        "tab": "Platform"
+        "tab": "منصة"
       }
     },
     "lending": {
@@ -2023,7 +2023,7 @@
       "info": {
         "1": {
           "label": "الخطوة 1‏/3",
-          "title": "Approving an account allows the protocol to process future loans.",
+          "title": "الموافقة على الحساب تسمح للبروتوكول بمباشرة القروض المستقبلية.",
           "description": "You need to authorize the Compound smart contract to transfer up to a certain amount of assets to the protocol. Enabling an account gives permission to the protocol to process future loans."
         },
         "2": {
@@ -2107,7 +2107,7 @@
           "stepRange": "خطوة {{currentStep}} من {{totalSteps}}"
         },
         "amount": {
-          "totalAvailable": "Available balance",
+          "totalAvailable": "الرصيد المتاح",
           "placeholderMax": "Withdraw Max"
         },
         "validation": {
@@ -2245,8 +2245,8 @@
   },
   "requestAccount": {
     "stepperHeader": {
-      "selectCrypto": "Select crypto",
-      "selectAccount": "Select account",
+      "selectCrypto": "إختار العملات المشفرة",
+      "selectAccount": "اختار الحساب",
       "stepRange": "خطوة {{currentStep}} من {{totalSteps}}"
     },
     "selectAccount": {
@@ -2419,11 +2419,11 @@
       "title": "Which address type to choose?",
       "subtitle": "إضافة حساب جديد",
       "native_segwit": {
-        "title": "Native Segwit",
+        "title": "Native SegWit",
         "desc": "Best overall. Low fees per transaction, error detection and Lightning Network support. Some wallets/exchanges may need to add support."
       },
       "segwit": {
-        "title": "Segwit",
+        "title": "SegWit",
         "desc": "Higher fees per transaction than Native Segwit. Lightning support. Supported by most wallets."
       },
       "legacy": {
@@ -2843,7 +2843,7 @@
       },
       "delegationUnavailable": {
         "title": "Delegation unavailable",
-        "description": "Not enough available balance in your account to start a new delegation."
+        "description": "لا يتوفر رصيد كافٍ في حسابك لبدء تفويض جديد."
       }
     },
     "delegation": {
@@ -3275,7 +3275,7 @@
     "bond": {
       "rewardDestination": {
         "label": "وجهة المكافأة",
-        "stash": "Available balance",
+        "stash": "الرصيد المتاح",
         "stashDescription": "يتم إيداع المكافآت في رصيدك المتاح.",
         "staked": "Bonded balance",
         "stakedDescription": "Rewards are credited to your bonded balance for compound earning.",
