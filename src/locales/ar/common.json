@@ -1172,10 +1172,10 @@
         "title": "إذا لم تعد عبارة الاسترداد الخاصة بي سرية وآمنة...",
         "answers": {
           "correct": "لم تعد أصولي المشفرة آمنة وأحتاج إلى نقلها إلى مكان آمن",
-          "wrong": "لا مشكلة، يمكن لليدجر أن يرسل إلي نسخة"
+          "wrong": "ليست مشكلة، يمكن لليدجر أن يرسل إلي نسخة"
         },
         "modal": {
-          "text": "يمكن لأي شخص يعرف عبارة الاسترداد الخاصة بك أن يقوم بسرقة الأصول المشفرة الخاصة بك.\nإذا فقدت هذه العبارة، يجب عليك نقل أصولك المشفرة بسرعة إلى مكان آمن.",
+          "text": "يمكن لأي شخص يعرف عبارة الاسترداد الخاصة بك أن يقوم بسرقة الأصول المشفرة الخاصة بك. \nإذا فقدت هذه العبارة، يجب عليك نقل أصولك المشفرة بسرعة إلى مكان آمن.",
           "cta": "السؤال التالي"
         }
       },
@@ -1487,11 +1487,11 @@
     "tronFrozen": "Frozen",
     "bandwidth": "النطاق الترددي (Bandwidth)",
     "energy": "طاقة",
-    "delegatedAssets": "Delegated assets",
-    "undelegating": "Undelegating",
+    "delegatedAssets": "الأصول المفوضة",
+    "undelegating": "إلغاء التفويض",
     "delegation": {
-      "sectionLabel": "Delegation(s)",
-      "addDelegation": "Add delegation",
+      "sectionLabel": "التفويض (التفويضات)",
+      "addDelegation": "إضافة تفويض",
       "info": {
         "title": "اكسب المكافآت",
         "cta": "اكسب المكافآت"
@@ -1499,10 +1499,10 @@
     },
     "claimReward": {
       "sectionLabel": "المكافآت",
-      "cta": "Claim"
+      "cta": "مطالبة"
     },
     "undelegation": {
-      "sectionLabel": "Undelegation(s)"
+      "sectionLabel": "إلغاء التفويض (إالغاء التفويضات)"
     }
   },
   "accounts": {
@@ -1511,10 +1511,10 @@
       "message": "تم استيراد حساباتك بنجاح!"
     },
     "row": {
-      "syncPending": "Synchronizing...",
+      "syncPending": "تتم المزامنة...",
       "upToDate": "متزامن",
-      "error": "Error",
-      "queued": "Awaiting",
+      "error": "خطأ",
+      "queued": "قيد الانتظار",
       "showTokens": "عرض {{length}} رمز توكن",
       "showTokens_plural": "عرض {{length}} رموز التوكن",
       "showSubAccounts": "عرض حساب فرعي {{length}}",
@@ -1532,12 +1532,12 @@
     }
   },
   "distribution": {
-    "header": "Asset allocation",
-    "list": "Asset allocation ({{count}})",
-    "assets": "asset",
-    "assets_plural": "assets",
-    "total": "Total balance:",
-    "listAccount": "Account allocation ({{count}})"
+    "header": "تخصيص الأصول",
+    "list": "تخصيص الأصول ({{count}})",
+    "assets": "أصل",
+    "assets_plural": "أصول",
+    "total": "الرصيد الإجمالي:",
+    "listAccount": "تخصيص الحساب ({{count}})"
   },
   "help": {
     "gettingStarted": {
@@ -1550,7 +1550,7 @@
     },
     "ledgerAcademy": {
       "title": "أكاديمية ليدجر",
-      "desc": "Learn about crypto"
+      "desc": "تعرف على المزيد حول الأصول المشفرة"
     },
     "facebook": {
       "title": "فيس بوك",
@@ -1562,7 +1562,7 @@
     },
     "github": {
       "title": "Github",
-      "desc": "Review our code"
+      "desc": "مراجعة الكود الخاص بنا"
     },
     "status": {
       "title": "حالة Ledger",
@@ -1570,73 +1570,73 @@
     }
   },
   "settings": {
-    "header": "Settings",
-    "resources": "Ledger resources",
+    "header": "الإعدادات",
+    "resources": "موارد ليدجر",
     "display": {
-      "title": "General",
-      "desc": "Configure general Ledger Live settings.",
+      "title": "عامة",
+      "desc": "تكوين إعدادات Ledger Live العامة.",
       "carousel": "Carousel visibility",
       "carouselDesc": "Enable visibility of the carousel on Portfolio",
-      "language": "Display language",
-      "languageDesc": "Set the language displayed in Ledger Live.",
-      "password": "Password lock",
-      "passwordDesc": "Set a password to protect Ledger Live data on your phone.",
+      "language": "لغة البرنامج",
+      "languageDesc": "قم بتعيين اللغة المستخدمة في Ledger Live.",
+      "password": "قفل كلمة المرور",
+      "passwordDesc": "قم بتعيين كلمة مرور لحماية بيانات Ledger Live على هاتفك.",
       "counterValue": "Countervalue",
-      "theme": "Theme",
-      "themeDesc": "Set the app UI theme",
+      "theme": "السمة",
+      "themeDesc": "قم بتعيين السمة لواجهة مستخدم التطبيق",
       "themes": {
-        "dark": "Dark",
-        "dusk": "Dusk",
-        "light": "Light"
+        "dark": "داكن",
+        "dusk": "غسق",
+        "light": "فاتح"
       },
-      "counterValueDesc": "Choose the currency for balances and operations.",
-      "exchange": "Rate provider",
-      "exchangeDesc": "Set provider of exchange rate from Bitcoin to {{fiat}}",
-      "stock": "Regional market indicator",
-      "stockDesc": "Choose Western to display market increases in green or Eastern to display them in red.",
-      "reportErrors": "Bug reports",
-      "reportErrorsDesc": "Automatically send reports to help Ledger improve its products.",
-      "developerMode": "Developer mode",
+      "counterValueDesc": "اختر العملة للأرصدة والعمليات.",
+      "exchange": "مزود السعر",
+      "exchangeDesc": "قم بتعيين مزود معدل الصرف من بيتكوين إلى {{fiat}}",
+      "stock": "مؤشر السوق الإقليمي",
+      "stockDesc": "اختر \"غربي\" لعرض زيادات السوق باللون الأخضر أو ​​\"شرقي\" لعرضها باللون الأحمر.",
+      "reportErrors": "تقارير الخلل",
+      "reportErrorsDesc": "إرسال التقارير تلقائيًا لمساعدة ليدجر في تحسين منتجاتها.",
+      "developerMode": "وضع المطور",
       "developerModeDesc": "اعرض تطبيقات المطور في المدير وقم بتمكين تطبيقات Testnet.",
-      "analytics": "Analytics",
-      "analyticsDesc": "Enable analytics to help Ledger improve user experience.",
+      "analytics": "التحليلات",
+      "analyticsDesc": "قم بتمكين التحليلات لمساعدة ليدجر على تحسين تجربة المستخدم.",
       "analyticsModal": {
-        "title": "Share analytics",
-        "desc": "Enable analytics to help Ledger improve user experience",
-        "bullet0": "Clicks",
-        "bullet1": "In-app page visits",
-        "bullet2": "Redirect to webpage",
+        "title": "مشاركة التحليلات",
+        "desc": "قم بتمكين التحليلات لمساعدة ليدجر على تحسين تجربة المستخدم",
+        "bullet0": "النقرات",
+        "bullet1": "زيارات الصفحة داخل التطبيق",
+        "bullet2": "إعادة التوجيه إلى صفحة الويب",
         "bullet3": "الإجراءات: الإرسال والاستلام والقفل وما إلى ذلك",
-        "bullet4": "End of page scroll",
+        "bullet4": "التحريك إلى نهاية الصفحة",
         "bullet5": "تثبيت التطبيقات وإلغاؤها والإصدار",
-        "bullet6": "Number of accounts, currencies and operations",
-        "bullet7": "Overall and page session duration",
+        "bullet6": "عدد الحسابات والعملات والعمليات",
+        "bullet7": "المدة الإجمالية ومدى جلسات الزيارة للصفحة",
         "bullet8": "نوع جهاز ليدجر والبرامج الثابتة"
       },
-      "technicalData": "Technical data",
-      "technicalDataDesc": "Ledger will automatically collect anonymized technical data to improve user experience.",
+      "technicalData": "البيانات التقنية",
+      "technicalDataDesc": "ستقوم ليدجر تلقائيًا بجمع بيانات فنية مجهولة المصدر لتحسين تجربة المستخدم.",
       "technicalDataModal": {
-        "title": "Technical data",
-        "desc": "Ledger will automatically collect anonymized technical data to improve user experience.",
-        "bullet1": "Anonymous unique application ID",
-        "bullet2": "Ledger Live version, OS region, language and region"
+        "title": "البيانات التقنية",
+        "desc": "ستقوم ليدجر تلقائيًا بجمع بيانات فنية مجهولة المصدر لتحسين تجربة المستخدم.",
+        "bullet1": "معرف تطبيق فريد ومجهول",
+        "bullet2": "إصدار Ledger Live، ومنطقة نظام التشغيل، واللغة والمنطقة"
       },
       "hideEmptyTokenAccounts": "إخفاء حسابات رموز التوكن الفارغة",
       "hideEmptyTokenAccountsDesc": "إخفاء حسابات رموز التوكن الفارغة في صفحة الحسابات."
     },
     "currencies": {
-      "header": "Currencies",
-      "rateProvider": "Rate Provider ({{currencyTicker}}→BTC)",
-      "rateProviderDesc": "Choose the provider of the rate between {{currencyTicker}} and Bitcoin.",
+      "header": "العملات",
+      "rateProvider": "مزود السعر ({{currencyTicker}}‏ ← BTC)",
+      "rateProviderDesc": "اختر مزود السعر من بين {{currencyTicker}} وبيتكوين.",
       "confirmationNb": "عدد التأكيدات",
       "confirmationNbDesc": "قم بتعيين عدد تأكيدات الشبكة للمعاملات التي ستتم الموافقة عليها.",
-      "currencySettingsTitle": "{{currencyName}} Settings",
-      "placeholder": "No settings for this asset"
+      "currencySettingsTitle": "إعدادات {{currencyName}}",
+      "placeholder": "لا توجد إعدادات لهذا الأصل"
     },
     "accounts": {
       "header": "حسابات",
       "title": "حسابات",
-      "desc": "Manage assets display in the app.",
+      "desc": "إدارة عرض الأصول في التطبيق.",
       "hideTokenCTA": "إخفاء رمز التوكن",
       "showContractCTA": "عرض العقد",
       "blacklistedTokens": "قائمة رموز التوكن المخفية",
@@ -1655,14 +1655,14 @@
     "about": {
       "title": "About",
       "desc": "معلومات التطبيق، والشروط والأحكام، وسياسة الخصوصية.",
-      "appDescription": "With Ledger Live, Secure, Buy, Sell, Exchange, Grow and Manage your crypto. All-in-one place.",
-      "appVersion": "Version",
+      "appDescription": "مع Ledger Live، قم بتأمين وشراء وبيع وتبادل وتنمية وإدارة أصولك المشفرة. كل ذلك من مكان واحد.",
+      "appVersion": "الإصدار",
       "termsConditions": "الأحكام والشروط",
       "termsConditionsDesc": "باستخدام Ledger Live، يُعتبر أنك قد قبلت الشروط والأحكام الخاصة بنا.",
-      "privacyPolicy": "Privacy policy",
-      "privacyPolicyDesc": "See what personal data are collected, why and how they are used.",
+      "privacyPolicy": "سياسة الخصوصية",
+      "privacyPolicyDesc": "تعرف على البيانات الشخصية التي يتم جمعها ولماذا وكيف يتم استخدامها.",
       "liveReview": {
-        "title": "Rate the app!",
+        "title": "قم بتقييم التطبيق!",
         "ios": "Review in the App Store",
         "android": "مراجعة في سوق جوجل بلاي"
       }
@@ -1672,19 +1672,19 @@
       "header": "مساعدة",
       "desc": "تعرف أكثر على ليدجر لايف أو كيفية الحصول على المساعدة.",
       "support": "دعم ليدجر",
-      "supportDesc": "If you have a problem, get help using Ledger Live with your hardware wallet.",
+      "supportDesc": "إذا كانت لديك مشكلة، فاحصل على المساعدة لاستخدام Ledger Live مع محفظتك للأجهزة.",
       "configureDevice": "إعداد جهاز",
       "configureDeviceDesc": "إعداد كجهاز جديد أو استعادة جهاز موجود. يتم الاحتفاظ بالحسابات والإعدادات.",
-      "clearCache": "Clear cache",
-      "clearCacheDesc": "The transactions on the network will be scanned and your accounts will be recalculated.",
+      "clearCache": "حذف الذاكرة المؤقتة",
+      "clearCacheDesc": "سيتم فحص المعاملات على الشبكة وستتم إعادة حساب حساباتك.",
       "clearCacheModal": "هل أنت متأكد؟",
-      "clearCacheModalDesc": "A fresh and complete scan of transactions on the network will be done. Account histories will be rebuilt and balances will be recalculated.",
-      "clearCacheButton": "Clear",
-      "exportLogs": "Export logs",
-      "exportLogsDesc": "Exporting Ledger Live logs may help troubleshooting.",
+      "clearCacheModalDesc": "سيتم إجراء فحص جديد وكامل للمعاملات على الشبكة. كما سيتم إعادة بناء سجلات الحسابات وإعادة حساب الأرصدة.",
+      "clearCacheButton": "حذف",
+      "exportLogs": "تصدير السجلات",
+      "exportLogsDesc": "قد يساعد تصدير سجلات Ledger Live في استكشاف الأخطاء وإصلاحها.",
       "hardReset": "إعادة تعيين Ledger Live",
       "hardResetDesc": "ليس لهذا الأمر أي تأثير على الأصول الخاصة بك. فهو يمحو جميع البيانات في Ledger Live، بما في ذلك بيانات الحساب والإعدادات وسجلات المعاملات. استخدم جهاز ليدجر الخاص بك لإعادة تحميل وإدارة الأصول المشفرة الخاصة بك على Ledger Live فارغ.",
-      "repairDevice": "Repair your Ledger device",
+      "repairDevice": "إصلاح جهاز ليدجر الخاص بك",
       "repairDeviceDesc": "If you have an issue updating your device and cannot resume updates, you can try this to repair your device."
     },
     "experimental": {
@@ -1719,7 +1719,7 @@
         "ctaNextCurrency": "المتابعة مع {{currency}}"
       },
       "done": {
-        "title": "{{currency}} update complete",
+        "title": "اكتمل تحديث {{currency}}",
         "subtitle": "Congratulations, your {{currency}} accounts were updated successfully.",
         "cta": "متابعة",
         "ctaNextCurrency": "المتابعة مع {{currency}}",
@@ -1735,7 +1735,7 @@
   },
   "transfer": {
     "send": {
-      "title": "Send"
+      "title": "إرسال"
     },
     "fees": {
       "title": "Edit fees"
@@ -3466,9 +3466,9 @@
       "redelegate": "يرجى التأكيد على جهازك لإنهاء العملية",
       "undelegate": "يرجى التأكيد على جهازك لإنهاء العملية"
     },
-    "warning": "Always verify the address displayed your device exactly matches the one given to you by the {{recipientWording}}",
+    "warning": "تحقق دائمًا من أن العنوان المعروض لجهازك يطابق تمامًا العنوان المقدم لك من {{recipientWording}}",
     "recipientWording": {
-      "send": "Always verify the address displayed your device exactly matches the one given to you by the recipient",
+      "send": "تحقق دائمًا من أن العنوان المعروض على جهازك يطابق تمامًا العنوان الذي قدمه لك المستلم",
       "delegate": "Always verify that your device displays the address exactly as provided by the validator",
       "undelegate": "Always verify that your device displays the address exactly as provided by the validator",
       "freeze": "Always verify that your device displays the address exactly as provided",
@@ -3478,7 +3478,7 @@
       "erc20": {
         "approve": "Verify the operation details on your device before sending it."
       },
-      "compound.supply": "Verify the deposit details on your device before sending it.",
+      "compound.supply": "تحقق من تفاصيل الإيداع على جهازك قبل إرساله.",
       "compound.withdraw": "Verify the withdrawal details on your device before sending it."
     },
     "name": "Name",
