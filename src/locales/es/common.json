@@ -1011,11 +1011,11 @@
             "label": "Tus frases de recuperación pueden tener 12, 18 o 24 palabras. Debes ingresar todas las palabras para acceder a tus criptos."
           },
           "2": {
-            "title": "Ingresa la palabra 1...",
+            "title": "Enter Word #1...",
             "label": "Ingresa las primeras letras de la palabra 1, seleccionándolas con el botón derecho o izquierdo. Presiona ambos botones para confirmar cada letra."
           },
           "3": {
-            "title": "Confirma la palabra 1...",
+            "title": "Confirma la Word #1...",
             "label": "Elige la palabra 1 de entre las sugeridas. Presiona ambos botones para validarla."
           },
           "4": {
