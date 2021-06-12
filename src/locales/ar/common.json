@@ -92,7 +92,7 @@
       "description": "يرجى إدخال اسم الحساب."
     },
     "AlgorandASANotOptInInRecipient": {
-      "title": "Recipient account has not opted in the selected ASA."
+      "title": "حساب المستلم لم ينضم إلى ASA الذي تم إختياره."
     },
     "BluetoothRequired": {
       "title": "عذراً، تم تعطيل البلوتوث",
@@ -1290,8 +1290,8 @@
       "UNFREEZE": "تمت إزالة التجميد",
       "REWARD": "المكافأة التي تمت المطالبة بها",
       "FEES": "الرسوم",
-      "OPT_IN": "الإشتراك",
-      "OPT_OUT": "إلغاء الإشتراك",
+      "OPT_IN": "الانضمام",
+      "OPT_OUT": "إلغاء الانضمام",
       "CLOSE_ACCOUNT": "إغلاق الحساب",
       "SUPPLY": "تم الإيداع",
       "REDEEM": "مسحوب",
