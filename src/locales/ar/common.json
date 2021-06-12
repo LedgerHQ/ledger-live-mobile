@@ -1565,8 +1565,8 @@
       "desc": "Review our code"
     },
     "status": {
-      "title": "Ledger Status",
-      "desc": "Check our system status"
+      "title": "حالة Ledger",
+      "desc": "تحقق من حالة نظامنا"
     }
   },
   "settings": {
@@ -1992,7 +1992,7 @@
           "account": "حساب",
           "amountSupplied": "المبلغ المودع",
           "interestEarned": "Interest earned",
-          "status": "Account status",
+          "status": "حالة الحساب",
           "EARNING": "Earning",
           "ENABLING": "Approving",
           "INACTIVE": "Inactive",
@@ -2033,7 +2033,7 @@
         },
         "3": {
           "label": "الخطوة 3‏/3",
-          "title": "Withdraw assets at any time.",
+          "title": "قم بسحب الأصول في أي وقت.",
           "description": "You can withdraw your assets and earned interest at any time, partially or entirely, directly from your Ledger account.",
           "cta": "إقراض الآن"
         },
@@ -2192,7 +2192,7 @@
       "amount": "المبلغ",
       "from": "من",
       "to": "To",
-      "infoTotalTitle": "Total debit",
+      "infoTotalTitle": "إجمالي الخصم",
       "infoTotalDesc": "يشمل مبلغ المعاملة ورسوم الشبكة المحددة",
       "gasLimit": "حد الغاز",
       "gasPrice": "Gas price",
@@ -2210,7 +2210,7 @@
     },
     "validation": {
       "message": "قم بتأكيد المعاملة على جهازك للتوقيع عليها بشكل آمن.",
-      "sent": "Transaction sent",
+      "sent": "تم إرسال المعاملة",
       "amount": "المبلغ",
       "fees": "Fees",
       "confirm": "سيتم تحديث رصيد حسابك بمجرد تأكيد الشبكة للمعاملة.",
@@ -2265,11 +2265,11 @@
     "info": {
       "description": "قم بتجميد TRX لكسب المكافآت بشكل آمن، مع الحفاظ على قدرتك على التحكم في أصولك.",
       "steps": {
-        "0": "Delegated assets remain yours.",
+        "0": "الأصول المفوضة تظل ملكك.",
         "1": "You can unfreeze your assets after 3 days.",
         "2": "Freeze and vote securely with your Ledger device."
       },
-      "howVotingWorks": "How voting works",
+      "howVotingWorks": "كيف يعمل التصويت",
       "cta": "متابعة"
     },
     "amount": {
@@ -2302,7 +2302,7 @@
     },
     "amount": {
       "title": "Select the type of asset to unfreeze",
-      "info": "Unfreezing will decrease your {{resource}} and will cancel all your votes.",
+      "info": "إزالة التجميد ستقلل {{resource}} الخاص بك وستلغي كل تصويتك.",
       "cta": "متابعة"
     },
     "validation": {
@@ -2341,7 +2341,7 @@
       "ranking": "Ranking: <0>{{rank}}</0>",
       "nbOfVotes": "عدد الأصوات {{amount}}",
       "percentage": "Percentage",
-      "estYield": "Est. yield",
+      "estYield": "العائد التقديري",
       "addMoreVotes": "Add more votes",
       "votesRemaining": "Votes remaining: <0>{{total}}</0>",
       "maxVotesAvailable": "الحد الأقصى من الأصوات المتاحة: <0>{{total}}</0>",
@@ -2427,7 +2427,7 @@
         "desc": "Higher fees per transaction than Native Segwit. Lightning support. Supported by most wallets."
       },
       "legacy": {
-        "title": "Legacy",
+        "title": "قديم",
         "desc": "صيغة العنوان الأصلي لعملة {{currency}}. أعلى رسوم لكل معاملة. لا تزال بعض المحافظ/عمليات التبادل تدعم هذا النوع فقط."
       }
     }
@@ -2830,25 +2830,25 @@
   "cosmos": {
     "info": {
       "available": {
-        "title": "ATOM available",
+        "title": "ATOM متاح",
         "description": "هذا المبلغ قابل للتصرف."
       },
       "delegated": {
-        "title": "Delegated assets",
+        "title": "الأصول المفوضة",
         "description": "Delegated assets are used for Cosmos voting. This is your total number of votes."
       },
       "undelegating": {
-        "title": "Undelegating",
+        "title": "إلغاء التفويض",
         "description": "Undelegated assets are in a timelock of 21 days, before being available."
       },
       "delegationUnavailable": {
-        "title": "Delegation unavailable",
+        "title": "التفويض غير متوفر",
         "description": "لا يتوفر رصيد كافٍ في حسابك لبدء تفويض جديد."
       }
     },
     "delegation": {
       "delegationEarn": "You can earn ATOM rewards by delegating your assets.",
-      "info": "How Delegation works",
+      "info": "كيف يعمل التفويض",
       "claimRewards": "المطالبة بالمكافآت",
       "claimAvailableRewards": "المطالبة ب {{amount}}",
       "header": "Delegation(s)",
@@ -2858,7 +2858,7 @@
       "undelegate": "Undelegate",
       "redelegate": "Redelegate",
       "reward": "المطالبة بالمكافآت",
-      "estYield": "Est. yield",
+      "estYield": "العائد التقديري",
       "stepperHeader": {
         "starter": "اكسب المكافآت",
         "validator": "Delegate assets",
@@ -2887,7 +2887,7 @@
             "validators": "المدققون",
             "myDelegations": "My delegations",
             "cta": "متابعة",
-            "estYield": "Est. yield: {{amount}}",
+            "estYield": "العائد التقديري: {{amount}}",
             "totalAvailable": "الإجمالي المتاح: <0>{{amount}}</0>",
             "allAssetsUsed": "All assets used",
             "noResultsFound": "لم يتم العثور على مدقق لـ <0>{{search}}</0>",
@@ -2914,7 +2914,7 @@
         }
       },
       "drawer": {
-        "status": "Status",
+        "status": "الحالة",
         "rewards": "المكافآت",
         "active": "Active",
         "inactive": "Inactive",
@@ -2923,7 +2923,7 @@
       }
     },
     "redelegation": {
-      "estYield": "est. yield",
+      "estYield": "العائد التقديري",
       "stepperHeader": {
         "validator": "اختر مدققًا جديدًا",
         "amountSubTitle": "المبلغ المراد إعادة تفويضه",
@@ -2939,7 +2939,7 @@
             "validators": "المدققون",
             "myDelegations": "My delegations",
             "cta": "متابعة",
-            "estYield": "Est. yield: {{amount}}",
+            "estYield": "العائد التقديري: {{amount}}",
             "totalAvailable": "Total available: <0>{{amount}}</0>",
             "allAssetsUsed": "All assets used",
             "noResultsFound": "لم يتم العثور على مدقق لـ <0>{{search}}</0>"
@@ -3112,12 +3112,12 @@
     },
     "info": {
       "available": {
-        "title": "TRX available",
+        "title": "TRX متاح",
         "description": "هذا المبلغ قابل للتصرف."
       },
       "frozen": {
-        "title": "Frozen",
-        "description": "Frozen assets are used for Tron voting. This is your total number of votes."
+        "title": "تم التجميد",
+        "description": "تُستخدم الأصول المجمدة في عملية تصويت ترون. هذا هو العدد الإجمالي للأصوات الخاصة بك."
       },
       "bandwidth": {
         "title": "النطاق الترددي",
@@ -3125,18 +3125,18 @@
       },
       "energy": {
         "title": "الطاقة",
-        "description": "Energy points are required to execute smart contracts. If you don't run smart contracts, there is no need to have rewards in Energy points."
+        "description": "نقاط الطاقة مطلوبة لتنفيذ العقود الذكية. إذا كنت لا تقم بتشغيل العقود الذكية، فأنت لست بحاجة المكافآت في صورة طاقة."
       },
       "claimRewards": {
         "title": "مكافآت التصويت",
         "description": "يمكن المطالبة كل 24 ساعة ب TRX الذي تم إنشاؤه كمكافآت أثناء إنتاج الكتل."
       },
       "superRepresentative": {
-        "title": "Super Representatives (SR)",
-        "description": "Super Representatives play a key role in governing the TRON community by ensuring basic functions, e.g. block generation and bookkeeping."
+        "title": "الممثلون المميزون (SR)",
+        "description": "يلعب الممثلون المميزون دورًا رئيسيًا في إدارة مجتمع ترون عن طريق ضمان الوظائف الأساسية، مثل إنشاء الكتل وحفظ الدفاتر."
       },
       "candidates": {
-        "title": "Candidates",
+        "title": "المرشحون",
         "description": "تم انتخاب 127 فردًا من خلال التصويت من قبل مجتمع حاملي رموز التوكن بأكمله. يتم أخذ عينات من الأصوات كل 6 ساعات."
       }
     }
@@ -3161,20 +3161,20 @@
     "networkFees": "Network fees are automatically set by the Polkadot consensus, you won't be able to review them on your device",
     "info": {
       "available": {
-        "title": "DOT available",
+        "title": "DOT متاح",
         "description": "يمكن إرسال هذا المبلغ في أي وقت."
       },
       "locked": {
-        "title": "Bonded assets",
-        "description": "Assets must be bonded to nominated validators before earning rewards."
+        "title": "الأصول المقيدة",
+        "description": "يجب تقيد الأصول بالمدققين المعينين قبل كسب مكافآت."
       },
       "unlocking": {
         "title": "Unbonding assets",
-        "description": "Unbonding assets stay locked for 28 days before they can be withdrawn."
+        "description": "تظل الأصول غير المقيدة مغلقة لمدة 28 يومًا قبل أن يتسنى سحبها."
       },
       "unlocked": {
         "title": "Unbonded assets",
-        "description": "Unbonded assets can now be moved using the withdraw operation."
+        "description": "يمكن الآن نقل الأصول غير المقيدة باستخدام عملية السحب."
       },
       "electionOpen": {
         "title": "Validators election ongoing",
@@ -3191,20 +3191,20 @@
       "header": "Nominations",
       "nominate": "Nominate",
       "chill": "Clear nominations",
-      "status": "Status",
+      "status": "الحالة",
       "totalStake": "إجمالي الرهن",
       "amount": "المبلغ المقيد",
       "commission": "Commission",
       "active": "Active",
-      "activeInfo": "This validator is elected and is collecting rewards on your bonded assets.",
+      "activeInfo": "هذا المدقق تم إنتخابه و يقوم بجمع المكافآت على أصولك المقيدة.",
       "inactive": "Inactive",
-      "inactiveInfo": "This validator is elected but is not collecting rewards on your bonded assets.",
+      "inactiveInfo": "هذا المدقق تم إنتخابه و لكن لا يجمع المكافآت على أصولك المقيدة.",
       "waiting": "Unelected",
-      "waitingInfo": "This validator is not elected, therefore is not collecting rewards.",
+      "waitingInfo": "هذا المدقق غير منتخب، ولذلك لا يجمع المكافآت.",
       "notValidator": "ليس مدققًا",
       "notValidatorInfo": "لم يعد هذا العنوان مدققًا",
       "elected": "Elected",
-      "electedInfo": "This validator is elected and is collecting rewards for its nominators.",
+      "electedInfo": "هذا المدقق تم إنتخابه و يقوم بجمع المكافآت لمرشحيه.",
       "nominators": "Nominators",
       "nominatorsCount": "{{nominatorsCount}} nominators",
       "nominatorsInfo": "This validator is currently elected by {{count}} nominators.",
@@ -3382,7 +3382,7 @@
         }
       },
       "stepperHeader": {
-        "info": "Info",
+        "info": "معلومات",
         "selectDevice": "اختار جهاز",
         "connectDevice": "توصيل الجهاز",
         "stepRange": "خطوة {{currentStep}} من {{totalSteps}}"
@@ -3390,7 +3390,7 @@
       "steps": {
         "validation": {
           "success": {
-            "title": "Transaction sent successfully",
+            "title": "تم إرسال المعاملة بنجاح",
             "description": "سترى عمليتك في السجل بمجرد تأكيد الشبكة للمعاملة."
           }
         }
@@ -3407,7 +3407,7 @@
     "warnDelegation": "Delegating your voting rights does not guarantee any rewards from your validator.",
     "to": "to",
     "from": "من",
-    "forAnEstYield": "for an est. yield of",
+    "forAnEstYield": "للحصول على عائد تقديري بقيمة",
     "yieldPerYear": "{{yield}} / Year",
     "yieldInfos": "Yield rates are provided by",
     "termsAndPrivacy": "لقد قرأت ووافقت على <1>شروط استخدام ليدجر لايف</1> و <3> سياسة الخصوصية</3>.",
@@ -3417,7 +3417,7 @@
     "validatorAddress": "عنوان المدقق",
     "delegatedAccount": "Delegated account",
     "duration": "Duration",
-    "transactionID": "Transaction ID",
+    "transactionID": "معرف المعاملة",
     "receive": "تلقي المزيد",
     "changeValidator": "تغيير المدقق",
     "endDelegation": "End delegation",
@@ -3597,7 +3597,7 @@
   "notificationCenter": {
     "title": "Notification center",
     "announcement": "Announcement",
-    "liveStatus": "Ledger live status",
+    "liveStatus": "حالة Ledger Live",
     "news": {
       "title": "News",
       "titleCount": "News ({{count}})",
@@ -3607,7 +3607,7 @@
       }
     },
     "status": {
-      "title": "Status",
+      "title": "الحالة",
       "ok": {
         "title": "Ledger Live is up and running",
         "desc": "<0>Having trouble? Go on our </0><1>help page</1>"
