@@ -125,11 +125,11 @@
       "title": "您不能在有活动存款时减少已批准的金额。"
     },
     "CosmosBroadcastCodeInternal": {
-      "title": "出了点问题 (错误 #1)",
+      "title": "出了点问题 (Error #1)",
       "description": "请使用下面的按钮保存您的日志，并将其提供给 Ledger 客服。"
     },
     "CosmosBroadcastCodeTxDecode": {
-      "title": "出了点问题 (错误 #2)",
+      "title": "出了点问题 (Error #2)",
       "description": "请使用下面的按钮保存您的日志，并将其提供给 Ledger 客服。"
     },
     "CosmosBroadcastCodeInvalidSequence": {
@@ -145,7 +145,7 @@
       "description": "请确保账户有足够的资金。"
     },
     "CosmosBroadcastCodeUnknownRequest": {
-      "title": "出了点问题 (错误 #6)",
+      "title": "出了点问题 (Error #6)",
       "description": "请使用下面的按钮保存您的日志，并将其提供给 Ledger 客服。"
     },
     "CosmosBroadcastCodeInvalidAddress": {
@@ -153,7 +153,7 @@
       "description": "请检查地址，然后重试。"
     },
     "CosmosBroadcastCodeInvalidPubKey": {
-      "title": "出了点问题 (错误 #8)",
+      "title": "出了点问题 (Error #8)",
       "description": "请使用下面的按钮保存您的日志，并将其提供给 Ledger 客服。"
     },
     "CosmosBroadcastCodeUnknownAddress": {
@@ -165,11 +165,11 @@
       "description": "请增加账户上的资金。"
     },
     "CosmosBroadcastCodeInvalidCoins": {
-      "title": "出了点问题 (错误 #11)",
+      "title": "出了点问题 (Error #11)",
       "description": "请使用下面的按钮保存您的日志，并将其提供给 Ledger 客服。"
     },
     "CosmosBroadcastCodeOutOfGas": {
-      "title": "出了点问题 (错误 #12)",
+      "title": "出了点问题 (Error #12)",
       "description": "请使用下面的按钮保存您的日志，并将其提供给 Ledger 客服。"
     },
     "CosmosBroadcastCodeMemoTooLarge": {
@@ -177,19 +177,19 @@
       "description": "请缩减 Memo 文本大小并再次尝试。"
     },
     "CosmosBroadcastCodeInsufficientFee": {
-      "title": "出了点问题 (错误 #14)",
+      "title": "出了点问题 (Error #14)",
       "description": "请使用下面的按钮保存您的日志，并将其提供给 Ledger 客服。"
     },
     "CosmosBroadcastCodeTooManySignatures": {
-      "title": "出了点问题 (错误 #15)",
+      "title": "出了点问题 (Error #15)",
       "description": "请使用下面的按钮保存您的日志，并将其提供给 Ledger 客服。"
     },
     "CosmosBroadcastCodeGasOverflow": {
-      "title": "出了点问题 (错误 #16)",
+      "title": "出了点问题 (Error #16)",
       "description": "请使用下面的按钮保存您的日志，并将其提供给 Ledger 客服。"
     },
     "CosmosBroadcastCodeNoSignatures": {
-      "title": "出了点问题 (错误 #17)",
+      "title": "出了点问题 (Error #17)",
       "description": "请使用下面的按钮保存您的日志，并将其提供给 Ledger 客服。"
     },
     "DeviceAppVerifyNotSupported": {
@@ -2197,7 +2197,7 @@
       "gasLimit": "Gas 限值",
       "gasPrice": "Gas 价格",
       "maxFees": "最大费用",
-      "validateGasLimit": "验证 Gas 限值",
+      "validateGasLimit": "验证 gas 限值",
       "fees": "费用",
       "validateFees": "验证费用",
       "customizeFees": "自定义费用",
@@ -2224,7 +2224,7 @@
       "validate": "确认",
       "required": "需要费用",
       "chooseGas": "选择 gas 价格",
-      "higherFaster": "较高的 gas 矿工费价格意味着更加快速地确认。",
+      "higherFaster": "较高的 gas （矿工费）价格意味着更加快速地确认。",
       "edit": {
         "title": "选择单位"
       },
@@ -3499,7 +3499,7 @@
     "from": "来自",
     "to": "到",
     "redelegationAmount": "已重新委托数额",
-    "gas": "Gas 矿工费",
+    "gas": "Gas",
     "validatorAddress": "验证器地址",
     "rewardAmount": "奖励金额",
     "undelegatedAmount": "已解除委托金额",
