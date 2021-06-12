@@ -1486,7 +1486,7 @@
     "totalSupplied": "المبلغ المودع",
     "tronFrozen": "Frozen",
     "bandwidth": "النطاق الترددي (Bandwidth)",
-    "energy": "Energy",
+    "energy": "طاقة",
     "delegatedAssets": "Delegated assets",
     "undelegating": "Undelegating",
     "delegation": {
@@ -1863,7 +1863,7 @@
         "fromAccount": "اختيار الحساب",
         "toAccount": "اختيار الحساب",
         "amount": {
-          "useMax": "Use max",
+          "useMax": "استخدم الحد الأقصى",
           "available": "Total available"
         },
         "noApp": {
@@ -2108,7 +2108,7 @@
         },
         "amount": {
           "totalAvailable": "الرصيد المتاح",
-          "placeholderMax": "Withdraw Max"
+          "placeholderMax": "سحب الحد الأقصى"
         },
         "validation": {
           "success": "Deposit sent successfully",
@@ -2180,7 +2180,7 @@
     },
     "amount": {
       "available": "Total available",
-      "useMax": "Use max",
+      "useMax": "استخدم الحد الأقصى",
       "loadingNetwork": "Loading network fees...",
       "noRateProvider": "Not available"
     },
@@ -2196,7 +2196,7 @@
       "infoTotalDesc": "يشمل مبلغ المعاملة ورسوم الشبكة المحددة",
       "gasLimit": "حد الغاز",
       "gasPrice": "Gas price",
-      "maxFees": "Max fees",
+      "maxFees": "الحد الأقصى للرسوم",
       "validateGasLimit": "التحقق من حد الغاز",
       "fees": "Fees",
       "validateFees": "Validate Fees",
@@ -2344,7 +2344,7 @@
       "estYield": "Est. yield",
       "addMoreVotes": "Add more votes",
       "votesRemaining": "Votes remaining: <0>{{total}}</0>",
-      "maxVotesAvailable": "Max votes available: <0>{{total}}</0>",
+      "maxVotesAvailable": "الحد الأقصى من الأصوات المتاحة: <0>{{total}}</0>",
       "voteFor": "Vote for",
       "validateVotes": "Validate votes",
       "votesRequired": "Votes required ",
@@ -3124,7 +3124,7 @@
         "description": "تُستخدم نقاط النطاق الترددي (Bandwidth) لإجراء المعاملات بدلاً من دفع رسوم شبكة TRX. اختر النطاق الترددي لزيادة معاملاتك اليومية المجانية."
       },
       "energy": {
-        "title": "Energy",
+        "title": "الطاقة",
         "description": "Energy points are required to execute smart contracts. If you don't run smart contracts, there is no need to have rewards in Energy points."
       },
       "claimRewards": {
@@ -3209,7 +3209,7 @@
       "nominatorsCount": "{{nominatorsCount}} nominators",
       "nominatorsInfo": "This validator is currently elected by {{count}} nominators.",
       "oversubscribed": "Oversubscribed ({{nominatorsCount}})",
-      "oversubscribedInfo": "Only the top {{maxNominatorRewardedPerValidator}} nominators with the highest bonded amount earn rewards",
+      "oversubscribedInfo": "أعلى {{maxNominatorRewardedPerValidator}} مرشحين مع أعلى مبلغ مقيد فقط هم من يحصلون على مكافآت",
       "hasPendingBondOperation": "A bond operation is still pending confirmation",
       "externalControllerUnsupported": "This stash account is controlled by another account with the address <0>{{address}}</0>. Staking operations on accounts that are controlled by a different account are not supported in Ledger Live. Please use an alternative wallet such as Polkadot.js",
       "externalStashUnsupported": "This account controls a stash account whose address is <0>{{address}}</0>. Staking operations on separate stash accounts are not supported in Ledger Live. Please use an alternative wallet like Polkadot.js",
@@ -3303,7 +3303,7 @@
         },
         "amount": {
           "availableLabel": "Available",
-          "maxLabel": "Max"
+          "maxLabel": "الحد الأقصى"
         },
         "confirm": {
           "info": "Bonded assets can be unbonded at any time, but unbonding takes 28 days."
@@ -3333,7 +3333,7 @@
       "steps": {
         "amount": {
           "availableLabel": "Unbonding",
-          "maxLabel": "Max"
+          "maxLabel": "الحد الأقصى"
         },
         "confirm": {
           "info": "تتم إضافة الأصول المعاد قيدها على الفور إلى المبلغ المقيد."
@@ -3356,7 +3356,7 @@
       "steps": {
         "amount": {
           "availableLabel": "Bonded",
-          "maxLabel": "Max"
+          "maxLabel": "الحد الأقصى"
         },
         "confirm": {
           "info": "Unbonded assets can be withdrawn after the 28-day unbonding period."
