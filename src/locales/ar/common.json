@@ -497,7 +497,7 @@
     },
     "UnavailableTezosOriginatedAccountSend": {
       "title": "لا يمكن الإرسال من الحسابات الفرعية بعد",
-      "description": "This feature will be added at a later stage due to changes recently introduced by the Babylon update."
+      "description": "ستتم إضافة هذه الميزة في مرحلة لاحقة بسبب التغييرات التي يتم تقديمها من خلال تحديث Babylon."
     },
     "RecommendUndelegation": {
       "title": "يرجى إلغاء تفويض الحساب قبل إفراغه"
@@ -537,10 +537,10 @@
       "title": "بعض العناوين المختارة ليست مدققين"
     },
     "PolkadotLowBondedBalance": {
-      "title": "All bonded assets will be unbonded if < 1 DOT"
+      "title": "سيتم إلغاء تقيد جميع الأصول المقيدة إذا كانت أقل من 1 DOT"
     },
     "PolkadotNoUnlockedBalance": {
-      "title": "You have no unbonded assets"
+      "title": "ليس لديك أصول غير مقيدة"
     },
     "PolkadotNoNominations": {
       "title": "ليس لديك ترشيحات"
@@ -549,13 +549,13 @@
       "title": "تأكد من وجود رصيد كافٍ متبقٍ لتغطية رسوم المعاملات المستقبلية"
     },
     "PolkadotDoMaxSendInstead": {
-      "title": "Balance cannot be below 1 DOT. Send max to empty account"
+      "title": "لا يمكن أن يقل الرصيد عن 1 DOT. إرسل الحد الأقصى لتفريغ الحساب"
     },
     "PolkadotBondMinimumAmount": {
-      "title": "You must bond at least 1 DOT"
+      "title": "يجب عليك تقيد 1 DOT على الأقل"
     },
     "PolkadotMaxUnbonding": {
-      "title": "You have exceeded the unbond limit"
+      "title": "لقد تجاوزت الحد المسموح به لإلغاء التقيد"
     },
     "PolkadotValidatorsRequired": {
       "title": "يجب عليك تحديد مدقق واحد على الأقل"
@@ -1148,7 +1148,7 @@
     "stepFinish": {
       "title": "جهازك مستعد!",
       "readOnlyTitle": "اكتمل الإعداد!",
-      "desc": "Install apps on your device and manage your portfolio",
+      "desc": "قم بتثبيت التطبيقات على جهازك وإدارة حافظتك",
       "cta": "افتح Ledger Live"
     },
     "quizz": {
@@ -1201,13 +1201,13 @@
     "warning": {
       "recoveryPhrase": {
         "title": "لا تستخدم عبارة استرداد لم تقم بإنشائها بنفسك.",
-        "desc": "Your Ledger hardware wallet’s pin code and recovery phrase should be initialized by you and only you. If you have received a device with a pre-existing seed word or an already initialized pin code do not use the product and contact our customer support.",
+        "desc": "ينبغي أن تقوم بنفسك وبنفسك فقط ببدء إنشاء رمز الPIN وعبارة الاسترداد بمحفظة ليدجر للأجهزة الخاصة بك. إذا تلقيت جهازًا به الكلمة الأولية موجودة مسبقًا أو رمز الPIN مهيأً بالفعل، فلا تستخدم المنتج واتصل بدعم العملاء لدينا.",
         "supportLink": "الاتصال بقسم دعم ليدجر"
       }
     }
   },
   "tabs": {
-    "portfolio": "Portfolio",
+    "portfolio": "الحافظة",
     "accounts": "الحسابات",
     "transfer": "تحويل",
     "manager": "المدير",
@@ -1234,7 +1234,7 @@
       "noAppsTitle": "تثبيت تطبيق على جهازي",
       "noAppsDesc": "قم بتثبيت التطبيقات على جهازك قبل إضافة حسابات في Ledger Live. انتقل إلى المدير لتثبيت التطبيقات.",
       "noAccountsTitle": "ليس لديك أي حسابات...",
-      "noAccountsDesc": "Please add accounts to your Portfolio.",
+      "noAccountsDesc": "يرجى إضافة حسابات إلى حافظتك.",
       "buttons": {
         "import": "إضافة حساب",
         "manager": "تثبيت التطبيقات",
@@ -1296,11 +1296,11 @@
       "SUPPLY": "تم الإيداع",
       "REDEEM": "مسحوب",
       "APPROVE": "ممكن",
-      "BOND": "Bond",
-      "UNBOND": "Unbond",
+      "BOND": "تقيد",
+      "UNBOND": "إلغاء التقيد",
       "REWARD_PAYOUT": "مُكافأة",
       "SLASH": "تغريم",
-      "WITHDRAW_UNBONDED": "Unbonded Withdrawal",
+      "WITHDRAW_UNBONDED": "سحب الأصول الغير مقيدة",
       "NOMINATE": "ترشيح",
       "CHILL": "مسح الترشيحات"
     }
@@ -1352,24 +1352,24 @@
       "rewardFrom": "مكافأة من",
       "rewardAmount": "المبلغ المحصل",
       "memo": "ملاحظة",
-      "assetId": "Asset ID",
+      "assetId": "معرّف الأصل",
       "rewards": "المكافآت المكتسبة",
       "bondedAmount": "المبلغ المقيد",
       "unbondedAmount": "المبلغ الغير مقيد",
       "withdrawUnbondedAmount": "سحب المبلغ الغير مقيد",
-      "palletMethod": "Method",
+      "palletMethod": "الطريقة",
       "transferAmount": "مبلغ التحويل",
       "validatorsCount": "({{number}}) مدققين"
     },
     "multipleAddresses": "لماذا عناوين متعددة؟"
   },
   "operationList": {
-    "noOperations": "No Operations",
-    "noMoreOperations": "No other Operations"
+    "noOperations": "لا توجد عمليات",
+    "noMoreOperations": "لا توجد عمليات أخرى"
   },
   "selectableAccountsList": {
-    "deselectAll": "Deselect all",
-    "selectAll": "Select all",
+    "deselectAll": "إلغاء تحديد الكل",
+    "selectAll": "تحديد الكل",
     "tokenCount": "+1 رمز توكن",
     "tokenCount_plural": "+ {{count}} من رموز التوكن",
     "subaccountCount": "+1 حساب فرعي",
@@ -1378,7 +1378,7 @@
   "account": {
     "tokens": {
       "contractAddress": "عنوان العَقد",
-      "viewInExplorer": "View in explorer",
+      "viewInExplorer": "مشاهدة في المتصفح",
       "seeMore": "عرض المزيد من رموز التوكن",
       "seeLess": "عرض عدد أقل من رموز التوكن",
       "addTokens": "إضافة رمز توكن",
@@ -1404,8 +1404,8 @@
     "walletconnect": "WalletConnect",
     "sell": "بيع",
     "swap": "مبادلة",
-    "manage": "Manage",
-    "lastOperations": "Last operations",
+    "manage": "إدارة",
+    "lastOperations": "العمليات الأخيرة",
     "emptyState": {
       "title": "لا توجد أصول مشفرة بعد؟",
       "desc": "تأكد من تثبيت تطبيق <1><0>{{managerAppName}}</0></1> وابدأ في الاستلام.",
@@ -1417,7 +1417,7 @@
       }
     },
     "settings": {
-      "header": "Account settings",
+      "header": "إعدادات الحساب",
       "title": "تعديل الحساب",
       "advancedLogs": "سجلات متقدمة",
       "accountName": {
@@ -1426,28 +1426,28 @@
         "placeholder": "اسم الحساب"
       },
       "accountUnits": {
-        "title": "Edit units"
+        "title": "تعديل الوحدات"
       },
       "unit": {
-        "title": "Unit",
-        "desc": "Choose the unit to be displayed."
+        "title": "وحدة",
+        "desc": "اختار الوحدة المراد عرضها."
       },
       "currency": {
-        "title": "Currency"
+        "title": "العملة"
       },
       "endpointConfig": {
         "title": "عقدة",
         "desc": "عقدة API المراد استخدامها"
       },
       "delete": {
-        "title": "Remove account from the Portfolio",
+        "title": "إزالة الحساب من الحافظة",
         "desc": "ستتم إزالة البيانات المخزنة.",
         "confirmationTitle": "هل أنت متأكد؟",
         "confirmationDesc": "لن يؤثر ذلك على الأصول المشفرة الخاصة بك. من الممكن دائمًا إضافة الحسابات الموجودة فيما بعد."
       },
       "archive": {
-        "title": "Archive account",
-        "desc": "This account will be archived."
+        "title": "أرشفة الحساب",
+        "desc": "سيتم أرشفة هذا الحساب."
       },
       "advanced": {
         "title": "سجلات متقدمة",
@@ -1456,12 +1456,12 @@
     },
     "import": {
       "scan": {
-        "title": "Scan LiveQR code",
+        "title": "إجراء مسح ضوئي لرمز LiveQR",
         "descTop": {
-          "line1": "In Ledger Live Desktop, go to",
-          "line2": "Settings > Accounts > Export accounts > Export"
+          "line1": "في Ledger Live لسطح المكتب، انتقل إلى",
+          "line2": "إعدادات > حسابات > تصدير الحسابات > تصدير"
         },
-        "descBottom": "Please put the LiveQR code within the square."
+        "descBottom": "يرجى وضع رمز LiveQR داخل المربع."
       },
       "result": {
         "title": "استيراد الحسابات",
@@ -1484,7 +1484,7 @@
     },
     "availableBalance": "الرصيد المتاح",
     "totalSupplied": "المبلغ المودع",
-    "tronFrozen": "Frozen",
+    "tronFrozen": "تم التجميد",
     "bandwidth": "النطاق الترددي (Bandwidth)",
     "energy": "طاقة",
     "delegatedAssets": "الأصول المفوضة",
@@ -1575,13 +1575,13 @@
     "display": {
       "title": "عامة",
       "desc": "تكوين إعدادات Ledger Live العامة.",
-      "carousel": "Carousel visibility",
-      "carouselDesc": "Enable visibility of the carousel on Portfolio",
+      "carousel": "مشاهدة كشريط دوّار",
+      "carouselDesc": "تمكين المشاهدة كشريط دوّار في الحافظة",
       "language": "لغة البرنامج",
       "languageDesc": "قم بتعيين اللغة المستخدمة في Ledger Live.",
       "password": "قفل كلمة المرور",
       "passwordDesc": "قم بتعيين كلمة مرور لحماية بيانات Ledger Live على هاتفك.",
-      "counterValue": "Countervalue",
+      "counterValue": "القيمة المقابلة",
       "theme": "السمة",
       "themeDesc": "قم بتعيين السمة لواجهة مستخدم التطبيق",
       "themes": {
@@ -1653,7 +1653,7 @@
       }
     },
     "about": {
-      "title": "About",
+      "title": "حول",
       "desc": "معلومات التطبيق، والشروط والأحكام، وسياسة الخصوصية.",
       "appDescription": "مع Ledger Live، قم بتأمين وشراء وبيع وتبادل وتنمية وإدارة أصولك المشفرة. كل ذلك من مكان واحد.",
       "appVersion": "الإصدار",
@@ -1685,42 +1685,42 @@
       "hardReset": "إعادة تعيين Ledger Live",
       "hardResetDesc": "ليس لهذا الأمر أي تأثير على الأصول الخاصة بك. فهو يمحو جميع البيانات في Ledger Live، بما في ذلك بيانات الحساب والإعدادات وسجلات المعاملات. استخدم جهاز ليدجر الخاص بك لإعادة تحميل وإدارة الأصول المشفرة الخاصة بك على Ledger Live فارغ.",
       "repairDevice": "إصلاح جهاز ليدجر الخاص بك",
-      "repairDeviceDesc": "If you have an issue updating your device and cannot resume updates, you can try this to repair your device."
+      "repairDeviceDesc": "إذا كانت لديك مشكلة في تحديث جهازك ولا يمكنك استئناف التحديثات، يمكنك محاولة ذلك لإصلاح جهازك."
     },
     "experimental": {
-      "title": "Experimental features",
+      "title": "الميزات التجريبية",
       "desc": "Try out the Experimental features and let us know what you think.",
-      "disclaimer": "These are Experimental features provided on an \"as is\" basis for our community of tech enthusiasts. They may change, break or be removed at any time. By enabling them, you agree to use them at your own risk."
+      "disclaimer": "هذه ميزات تجريبية نقدمها \"كما هي\" لمجتمعنا من المهتمين بالتكنولوجيا. من الممكن أن يتم تغيير هذه الميزات أو تعطيلها أو إزالتها في أي وقت. من خلال تمكينها، فإنك توافق على استخدامها على مسؤوليتك الخاصة."
     }
   },
   "migrateAccounts": {
-    "banner": "Ledger Live accounts update",
+    "banner": "تحديث حسابات Ledger Live",
     "overview": {
-      "headerTitle": "Account update",
-      "title": "Ledger Live accounts update",
+      "headerTitle": "تحديث الحساب",
+      "title": "تحديث حسابات Ledger Live",
       "subtitle": "New features in Ledger Live means your accounts need to be updated",
       "notice": "تعذّر تحديث حسات {{accountCount}}. يُرجى توصيل الجهاز المرتبط بالحساب أدناه.",
       "notice_plural": "تعذّر تحديث حسابات {{accountCount}}. يُرجى توصيل الجهاز المرتبط بالحساب أدناه.",
-      "currency": "1 {{currency}} account needs to be updated",
-      "currency_plural": "{{count}} {{currency}} accounts need to be updated",
+      "currency": "يحتاج حساب {{currency}} واحد إلى التحديث",
+      "currency_plural": "تحتاج {{count}} حسابات {{currency}} إلى التحديث",
       "start": "بدء التحديث",
       "continue": "متابعة التحديث"
     },
     "progress": {
-      "headerTitle": "Updating accounts",
+      "headerTitle": "تحديث الحسابات",
       "pending": {
-        "title": "{{currency}} update in progress",
-        "subtitle": "Please wait for your account to be updated."
+        "title": "جاري تحديث {{currency}}",
+        "subtitle": "يرجى الانتظار حتى يتم تحديث حسابك."
       },
       "notice": {
-        "title": "{{currency}} update incomplete",
-        "subtitle": "No {{currency}} accounts could be updated using this device.",
+        "title": "لم يكتمل تحديث {{currency}}",
+        "subtitle": "لا يمكن تحديث أي حسابات {{currency}} باستخدام هذا الجهاز.",
         "cta": "متابعة",
         "ctaNextCurrency": "المتابعة مع {{currency}}"
       },
       "done": {
         "title": "اكتمل تحديث {{currency}}",
-        "subtitle": "Congratulations, your {{currency}} accounts were updated successfully.",
+        "subtitle": "تهانينا، تم تحديث حساباتك بعملة {{currency}} بنجاح.",
         "cta": "متابعة",
         "ctaNextCurrency": "المتابعة مع {{currency}}",
         "ctaDone": "تم"
@@ -1738,7 +1738,7 @@
       "title": "إرسال"
     },
     "fees": {
-      "title": "Edit fees"
+      "title": "تعديل الرسوم"
     },
     "receive": {
       "title": "تلقي",
@@ -1775,7 +1775,7 @@
           "bullets": [
             "متاح في 130+ بلد",
             "يورو، دولار أمريكي، جنيه استرليني و32 آخرون",
-            "SEPA & Faster Payments",
+            "SEPA والمدفوعات السريعة",
             "التحويلات البرقية المحلية للولايات المتحدة",
             "بطاقات الائتمان وبطاقات الخصم"
           ]
@@ -1795,13 +1795,13 @@
       "title": "مبادلة",
       "paraswap": "Paraswap",
       "selectDevice": "اختار جهازك",
-      "broadcasting": "Broadcasting swap",
-      "loadingFees": "Loading network fees...",
+      "broadcasting": "بث المبادلة",
+      "loadingFees": "تحميل رسوم الشبكة ...",
       "landing": {
         "header": "مبادلة",
         "title": "مرحبًا بك في المبادلة",
         "whatIsSwap": "ما هي المبادلة؟",
-        "disclaimer": "Exchange crypto directly from your Ledger device. This service is not available in some countries, including the US."
+        "disclaimer": "بادل الأصول المشفرة مباشرةً من جهاز ليدجر الخاص بك. هذه الخدمة غير متوفرة في بعض البلدان، بما فيها الولايات المتحدة."
       },
       "providers": {
         "title": "اختر مزود لمبادلة العملات المشفرة",
@@ -1817,7 +1817,7 @@
         "paraswap": {
           "bullets": [
             "الاتصال بـ 30+ DEXs (Uniswap, SushiSwap,...)",
-            "Ethereum & ERC20 tokens",
+            "رموز التوكن إيثيريوم و ERC20",
             "لا مركزي و بدون ثقة"
           ]
         }
@@ -1826,45 +1826,45 @@
         "header": "مبادلة"
       },
       "kyc": {
-        "disclaimer": "I acknowledge that my location data will be shared with third parties for compliance purposes."
+        "disclaimer": "أقر بأنه ستتم مشاركة بيانات الموقع الخاصة بي مع أطراف خارجية لأغراض الامتثال."
       },
       "notAvailable": {
-        "title": "Service temporarily unavailable, or not available in your country"
+        "title": "الخدمة غير متوفرة مؤقتًا أو غير متوفرة في بلدك"
       },
       "payoutModal": {
-        "title": "Payout fees",
+        "title": "رسوم الدفع",
         "description": "لا تعرض رسوم الدفع على الجهاز ويتم خصمها من المبلغ.",
         "cta": "إغلاق"
       },
       "pendingOperation": {
         "description": "لقد تم إرسال عملية المبادلة الخاصة بك إلى الشبكة لتأكيدها. قد يستغرق ذلك مدة تصل إلى ساعة قبل استلام الأصول المشفرة الخاصة بك التي تمت مبادلتها.",
-        "label": "Your Swap ID:",
-        "title": "Pending operation",
-        "disclaimer": "Please take note of your Swap ID number in case you’d need assistance from {{provider}} later.",
+        "label": "معرّف التبادل الخاص بك:",
+        "title": "عملية معلقة",
+        "disclaimer": "يرجى حفظ معرّف التبادل الخاص بك في حال كنت بحاجة إلى مساعدة من {{provider}} لاحقًا.",
         "cta": "رؤية التفاصيل"
       },
       "tradeMethod": {
-        "float": "Floating rate",
+        "float": "معدل متغير",
         "floatUnavailable": "المعدل المتغير غير مدعوم لهذا الثنائي",
-        "fixed": "Fixed rate",
+        "fixed": "معدل ثابت",
         "fixedUnavailable": "المعدل الثابت غير مدعوم لهذا الثنائي",
         "floatDesc": "قد يتغير المبلغ الخاص بك تبعًا لظروف السوق.",
         "fixedDesc": "سيظل المبلغ الخاص بك كما هو بغض النظر عن التغييرات في السوق. يتم تحديث السعر الثابت كل 30 ثانية",
-        "by": "By",
-        "modalTitle": "Floating or fixed rate?"
+        "by": "بواسطة",
+        "modalTitle": "معدل عائم أم ثابت؟"
       },
       "form": {
         "validate": "تأكيد معاملة المبادلة",
-        "tab": "Exchange",
+        "tab": "تداول",
         "button": "متابعة",
         "from": "من",
-        "to": "To",
-        "balance": "Balance <0>123</0>",
+        "to": "إلى",
+        "balance": "الرصيد <0>123</0>",
         "fromAccount": "اختيار الحساب",
         "toAccount": "اختيار الحساب",
         "amount": {
           "useMax": "استخدم الحد الأقصى",
-          "available": "Total available"
+          "available": "إجمالي المتاح"
         },
         "noApp": {
           "title": "التطبيق {{appName}} غير مثبت",
@@ -1892,32 +1892,32 @@
           "payoutNetworkFeesTooltip": "هذا المبلغ لن يظهر على جهازك",
           "receive": "المبلغ",
           "receiveFloat": "المبلغ المراد استلامه قبل رسوم الخدمة",
-          "provider": "Provider",
+          "provider": "المزود",
           "method": "معدل",
           "fees": "الحد الأقصى للرسوم",
           "disclaimer": {
             "title": "الأحكام والشروط",
-            "desc": "By clicking “Accept”,  I acknowledge and accept that this service is exclusively governed by {{provider}}'s Terms & Conditions.",
-            "tos": "Terms & conditions",
-            "accept": "Accept",
+            "desc": "بالضغط على \"أقبل\"، أسلم وأقبل بأن هذه الخدمة تدار حصريًا من قبل شروط و أحكام {{provider}}.",
+            "tos": "الشروط والأحكام",
+            "accept": "قبول",
             "reject": "إغلاق"
           }
         }
       },
       "operationDetails": {
         "swapId": "معرّف المبادلة",
-        "provider": "Provider",
-        "date": "Date",
+        "provider": "المزود",
+        "date": "التاريخ",
         "from": "من",
         "fromAmount": "المبلغ المرسل",
-        "to": "To",
+        "to": "إلى",
         "toAmount": "المبلغ المراد استلامه",
         "statusTooltips": {
           "expired": "يرجى الاتصال بمزود المبادلة باستخدام معرف مبادلتك للمزيد من المعلومات.",
           "refunded": "يرجى الاتصال بمزود المبادلة باستخدام معرف مبادلتك للمزيد من المعلومات.",
           "pending": "يُرجى الانتظار بينما يقوم مزود المبادلة بمباشرة المعاملة.",
-          "onhold": "Please contact the swap provider with your swap ID to solve the situation.",
-          "finished": "Your swap was completed successfully."
+          "onhold": "يرجى الاتصال بمزود المبادلة باستخدام معرف مبادلتك لحل المشكلة.",
+          "finished": "تم تنفيذ مبادلتك بنجاح."
         }
       },
       "missingApp": {
@@ -1926,12 +1926,12 @@
         "button": "الانتقال إلى المدير"
       },
       "outdatedApp": {
-        "title": "Please update the Exchange app on your device",
+        "title": "يُرجى ترقية تطبيق Exchange على جهازك",
         "description": "انتقل إلى المدير وقم بتحديث تطبيق Exchange لمبادلة الأصول",
         "button": "الانتقال إلى المدير"
       },
       "emptyState": {
-        "title": "No {{currency}} account",
+        "title": "لا يوجد حساب {{currency}}",
         "description": "You need to add an account before swapping {{currency}}",
         "CTAButton": "إضافة حساب"
       },
@@ -1953,9 +1953,9 @@
       "titleTransferTab": "إقراض",
       "actionTitle": "إقراض",
       "accountActions": {
-        "approve": "Approve",
-        "supply": "Supply",
-        "withdraw": "Withdraw"
+        "approve": "موافقة",
+        "supply": "توريد",
+        "withdraw": "سحب"
       },
       "highFees": {
         "title": "رسوم مرتفعة على إيثريوم",
@@ -1964,13 +1964,13 @@
       "account": {
         "amountSupplied": "المبلغ المودع",
         "amountSuppliedTooltip": "المبلغ الذي تم إقراضه للشبكة",
-        "currencyAPY": "Currency APY",
-        "currencyAPYTooltip": "Yearly return rate of a deposit that’s continuously compounded",
+        "currencyAPY": "مردود العملة المئوي السنوي",
+        "currencyAPYTooltip": "معدل العائد السنوي للوديعة المركبة باستمرار",
         "accruedInterests": "Interest balance",
         "accruedInterestsTooltip": "Interest generated on your lent assets",
         "interestEarned": "Interest earned",
         "interestEarnedTooltip": "Interest you have earned after withdrawal",
-        "openLoans": "Open loans",
+        "openLoans": "القروض المفتوحة",
         "closedLoans": "القروض المغلقة"
       },
       "banners": {
@@ -1987,7 +1987,7 @@
         "assetsTitle": "أصول للإقراض",
         "accountsTitle": "الحسابات المعتمدة",
         "emptySateDescription": "You can lend assets directly from your Ethereum accounts and earn interest.",
-        "apy": "{{value}} APY",
+        "apy": "{{value}} مردود مئوي سنوي",
         "activeAccount": {
           "account": "حساب",
           "amountSupplied": "المبلغ المودع",
@@ -2006,7 +2006,7 @@
       },
       "closedLoans": {
         "tabTitle": "القروض المغلقة",
-        "description": "View all your withdrawn loans and the interest you have earned.",
+        "description": "اعرض جميع قروضك المسحوبة والفائدة التي حصلت عليها.",
         "cta": "إقراض أصل"
       },
       "history": {
@@ -2060,7 +2060,7 @@
           "enable": "Approve",
           "advanced": "متقدم",
           "amount": "أدخل المبلغ",
-          "summary": "Summary",
+          "summary": "ملخص",
           "selectDevice": "اختار جهاز",
           "connectDevice": "توصيل الجهاز",
           "stepRange": "خطوة {{currentStep}} من {{totalSteps}}"
@@ -2087,7 +2087,7 @@
           "noLimit": "بدون حد"
         },
         "amount": {
-          "totalAvailable": "Total available"
+          "totalAvailable": "إجمالي المتاح"
         },
         "validation": {
           "success": "Operation sent successfully",
@@ -2101,7 +2101,7 @@
       "supply": {
         "stepperHeader": {
           "amount": "Supply",
-          "summary": "Summary",
+          "summary": "ملخص",
           "selectDevice": "اختار جهاز",
           "connectDevice": "توصيل الجهاز",
           "stepRange": "خطوة {{currentStep}} من {{totalSteps}}"
@@ -2123,7 +2123,7 @@
       "withdraw": {
         "stepperHeader": {
           "amount": "Withdraw",
-          "summary": "Summary",
+          "summary": "ملخص",
           "selectDevice": "اختار جهاز",
           "connectDevice": "توصيل الجهاز",
           "stepRange": "خطوة {{currentStep}} من {{totalSteps}}"
@@ -2167,7 +2167,7 @@
       "selectAccount": "Account to debit",
       "recipientAddress": "عنوان المستلم",
       "selectAmount": "المبلغ",
-      "summary": "Summary",
+      "summary": "ملخص",
       "selectDevice": "اختار جهاز",
       "connectDevice": "توصيل الجهاز",
       "stepRange": "خطوة {{currentStep}} من {{totalSteps}}"
@@ -2179,27 +2179,27 @@
       "verifyAddress": "Please verify the address matches the one shared by the recipient."
     },
     "amount": {
-      "available": "Total available",
+      "available": "إجمالي المتاح",
       "useMax": "استخدم الحد الأقصى",
-      "loadingNetwork": "Loading network fees...",
+      "loadingNetwork": "جاري تحميل رسوم الشبكة...",
       "noRateProvider": "Not available"
     },
     "summary": {
       "subaccountsWarning": "ستحتاج إلى إعادة شحن هذا الحساب بعملة {{ currency }} لتستطيع إرسال رموز التوكن لهذا الحساب",
-      "tag": "Tag (Optional)",
-      "validateTag": "Validate tag",
-      "total": "Total",
+      "tag": "علامة (اختيارية)",
+      "validateTag": "التحقق من العلامة",
+      "total": "الإجمالي",
       "amount": "المبلغ",
       "from": "من",
-      "to": "To",
+      "to": "إلى",
       "infoTotalTitle": "إجمالي الخصم",
       "infoTotalDesc": "يشمل مبلغ المعاملة ورسوم الشبكة المحددة",
       "gasLimit": "حد الغاز",
-      "gasPrice": "Gas price",
+      "gasPrice": "سعر الغاز",
       "maxFees": "الحد الأقصى للرسوم",
       "validateGasLimit": "التحقق من حد الغاز",
-      "fees": "Fees",
-      "validateFees": "Validate Fees",
+      "fees": "الرسوم",
+      "validateFees": "التحقق من الرسوم",
       "customizeFees": "تخصيص الرسوم",
       "memo": {
         "title": "الملاحظة",
@@ -2212,7 +2212,7 @@
       "message": "قم بتأكيد المعاملة على جهازك للتوقيع عليها بشكل آمن.",
       "sent": "تم إرسال المعاملة",
       "amount": "المبلغ",
-      "fees": "Fees",
+      "fees": "الرسوم",
       "confirm": "سيتم تحديث رصيد حسابك بمجرد تأكيد الشبكة للمعاملة.",
       "button": {
         "details": "عرض التفاصيل",
@@ -2220,13 +2220,13 @@
       }
     },
     "fees": {
-      "title": "Network fees",
+      "title": "رسوم الشبكة",
       "validate": "تأكيد",
-      "required": "Fees are required",
-      "chooseGas": "Choose a gas price",
+      "required": "مطلوب رسوم",
+      "chooseGas": "اختار سعر الغاز",
       "higherFaster": "ارتفاع سعر الغاز يعني تأكيدًا أسرع.",
       "edit": {
-        "title": "Choose unit"
+        "title": "اختار الوحدة"
       },
       "networkInfo": "اختر مبلغ رسوم الشبكة المراد تضمينها في المعاملة. يؤثر مبلغ الرسوم على السرعة التي تتم بها المعاملة"
     },
@@ -2256,8 +2256,8 @@
   "freeze": {
     "stepperHeader": {
       "info": "اكسب المكافآت",
-      "selectAmount": "Freeze",
-      "summary": "Summary",
+      "selectAmount": "تجميد",
+      "summary": "ملخص",
       "selectDevice": "اختار جهاز",
       "connectDevice": "توصيل الجهاز",
       "stepRange": "خطوة {{currentStep}} من {{totalSteps}}"
@@ -2266,48 +2266,48 @@
       "description": "قم بتجميد TRX لكسب المكافآت بشكل آمن، مع الحفاظ على قدرتك على التحكم في أصولك.",
       "steps": {
         "0": "الأصول المفوضة تظل ملكك.",
-        "1": "You can unfreeze your assets after 3 days.",
-        "2": "Freeze and vote securely with your Ledger device."
+        "1": "يمكنك إزالة تجميد أصولك بعد 3 أيام.",
+        "2": "قم بالتجميد والتصويت بشكل آمن باستخدام جهازك من ليدجر."
       },
       "howVotingWorks": "كيف يعمل التصويت",
       "cta": "متابعة"
     },
     "amount": {
-      "available": "Total available",
-      "noRateProvider": "Not available",
+      "available": "إجمالي المتاح",
+      "noRateProvider": "غير متاح",
       "infoLabel": "النطاق الترددي أم الطاقة"
     },
     "validation": {
-      "message": "Always verify that your device displays the address exactly as it was originally given to you.",
-      "success": "Assets frozen",
+      "message": "تحقق دائمًا من أن جهازك يعرض العنوان تمامًا كما تم إعطاؤه لك في الأصل.",
+      "success": "تم تجميد الأصول",
       "amount": "المبلغ",
       "info": "ستبدأ في كسب {{resource}} بمجرد تأكيد الشبكة للتجميد. يمكنك قريبًا التصويت للممثلين الممتازين للحصول على مكافآت أيضًا.",
       "button": {
         "pending": "يتم التحقق من صحة المعاملة.",
-        "pendingDesc": "Please wait a moment before voting.",
-        "vote": "Vote",
+        "pendingDesc": "من فضلك انتظر لحظة قبل التصويت.",
+        "vote": "تصويت",
         "voteTimer": "0:{{time}}",
-        "later": "I will vote later",
+        "later": "سأصوت لاحقا",
         "retry": "إعادة المحاولة"
       }
     }
   },
   "unfreeze": {
     "stepperHeader": {
-      "selectAmount": "Unfreeze",
-      "summary": "Summary",
+      "selectAmount": "إزالة التجميد",
+      "summary": "ملخص",
       "selectDevice": "اختار جهاز",
       "connectDevice": "توصيل الجهاز",
       "stepRange": "خطوة {{currentStep}} من {{totalSteps}}"
     },
     "amount": {
-      "title": "Select the type of asset to unfreeze",
+      "title": "حدد نوع الأصل المطلوب إزالة تجميده",
       "info": "إزالة التجميد ستقلل {{resource}} الخاص بك وستلغي كل تصويتك.",
       "cta": "متابعة"
     },
     "validation": {
-      "success": "Your assets were unfrozen successfully",
-      "info": "Your {{resource}} points will be decreased and all your votes will be canceled.",
+      "success": "تم إلغاء تجميد أصولك بنجاح",
+      "info": "سيتم خفض نقاطك في {{resource}} وإلغاء جميع أصواتك.",
       "button": {
         "done": "تم",
         "cta": "رؤية التفاصيل"
@@ -2416,7 +2416,7 @@
     },
     "showMoreChainType": "More address types",
     "addressTypeInfo": {
-      "title": "Which address type to choose?",
+      "title": "أي نوع عنوان تختار؟",
       "subtitle": "إضافة حساب جديد",
       "native_segwit": {
         "title": "Native SegWit",
@@ -2553,7 +2553,7 @@
     "alreadyPaired": "Already paired"
   },
   "DeviceItemSummary": {
-    "genuine": "Your device is genuine",
+    "genuine": "جهازك أصلي",
     "genuineFailed": "توثيق الجهاز <1><0>فشل</0></1>"
   },
   "DeviceNameRow": {
@@ -2780,7 +2780,7 @@
           "starter": {
             "title": "تهانينا! لقد كسبت {{amount}}. قم بالمتابعة للمطالبة بمكافآتك.",
             "howItWorks": "كيف تعمل المكافآت",
-            "warning": "You will be prompted to generate an empty transaction to your account. This will add your current rewards to your balance at the minimal cost of the transaction fees.",
+            "warning": "سيتم حثك على إنشاء معاملة فارغة إلى حسابك. سيؤدي هذا إلى إضافة المكافآت الحالية إلى رصيدك بأدنى تكلفة لرسوم المعاملة.",
             "cta": "متابعة"
           },
           "verification": {
@@ -2863,7 +2863,7 @@
         "starter": "اكسب المكافآت",
         "validator": "Delegate assets",
         "amountSubTitle": "المبلغ المراد تفويضه",
-        "summary": "Summary",
+        "summary": "ملخص",
         "verification": "Verification",
         "selectDevice": "اختار جهاز",
         "connectDevice": "توصيل الجهاز",
@@ -2879,7 +2879,7 @@
               "2": "قم بإجراء التفويض بشكل آمن بجهاز ليدجر الخاص بك."
             },
             "warning": {
-              "description": "Choose your validator wisely: Part of your delegated assets may be irrevocably lost if the validator does not behave appropriately."
+              "description": "كن حريصًا في اختيار المدقق الذي تعتمد عليه؛ فقد يتم فقدان جزء من أصولك المفوضة بشكل لا رجعة فيه إذا لم يتصرف المدقق بشكل مناسب."
             },
             "cta": "متابعة"
           },
@@ -2918,8 +2918,8 @@
         "rewards": "المكافآت",
         "active": "Active",
         "inactive": "Inactive",
-        "completionDate": "Completion date",
-        "redelegatedFrom": "Redelegated from"
+        "completionDate": "تاريخ الإكمال",
+        "redelegatedFrom": "تمت إعادة التفويض من"
       }
     },
     "redelegation": {
@@ -2928,7 +2928,7 @@
         "validator": "اختر مدققًا جديدًا",
         "amountSubTitle": "المبلغ المراد إعادة تفويضه",
         "amountTitle": "{{from}} ← {{to}}",
-        "summary": "Summary",
+        "summary": "ملخص",
         "selectDevice": "اختار جهاز",
         "connectDevice": "توصيل الجهاز",
         "stepRange": "خطوة {{currentStep}} من {{totalSteps}}"
@@ -2937,11 +2937,11 @@
         "steps": {
           "validator": {
             "validators": "المدققون",
-            "myDelegations": "My delegations",
+            "myDelegations": "تفويضاتي",
             "cta": "متابعة",
             "estYield": "العائد التقديري: {{amount}}",
-            "totalAvailable": "Total available: <0>{{amount}}</0>",
-            "allAssetsUsed": "All assets used",
+            "totalAvailable": "الإجمالي المتاح: <0>{{amount}}</0>",
+            "allAssetsUsed": "جميع الأصول المستخدمة",
             "noResultsFound": "لم يتم العثور على مدقق لـ <0>{{search}}</0>"
           },
           "amount": {
@@ -2949,12 +2949,12 @@
           },
           "verification": {
             "success": {
-              "title": "You have successfully redelegated your assets",
+              "title": "لقد قمت بإعادة تفويض أصولك بنجاح",
               "text": "سيتم تحديث رصيد حسابك عندما تؤكد الشبكة المعاملة.",
               "cta": "عرض التفاصيل"
             },
             "pending": {
-              "title": "Broadcasting transaction..."
+              "title": "يتم بث المعاملة..."
             },
             "broadcastError": "يحتمل أن تكون معاملتك قد فشلت. يُرجى الانتظار لحظة ثم تحقق من سجل المعاملات قبل المحاولة مرة أخرى."
           }
@@ -2964,7 +2964,7 @@
     "undelegation": {
       "stepperHeader": {
         "amountSubTitle": "المبلغ المراد إلغاء تفويضه",
-        "summary": "Summary",
+        "summary": "ملخص",
         "selectDevice": "اختار جهاز",
         "connectDevice": "توصيل الجهاز",
         "stepRange": "خطوة {{currentStep}} من {{totalSteps}}"
@@ -3098,12 +3098,12 @@
     "manage": {
       "title": "Manage Tron Power",
       "freeze": {
-        "title": "Freeze",
+        "title": "تجميد",
         "description": "قم بتجميد TRX لكسب نطاق ترددي (Bandwidth) أو طاقة (Energy). يمكنك أيضًا التصويت لصالح الممثلين المتميزين."
       },
       "unfreeze": {
-        "title": "Unfreeze",
-        "description": "Unfreeze TRX to add them back to your available balance. You will no longer earn rewards."
+        "title": "إزالة التجميد",
+        "description": "قم بإزالة تجميد TRX لإعادتهم مرة أخرى إلى رصيدك المتاح. لن تحصل بعد الآن على مكافآت."
       },
       "vote": {
         "title": "Vote",
@@ -3158,7 +3158,7 @@
     "lockedBalance": "Bonded balance",
     "unlockingBalance": "Unbonding balance",
     "unlockedBalance": "Unbonded balance",
-    "networkFees": "Network fees are automatically set by the Polkadot consensus, you won't be able to review them on your device",
+    "networkFees": "يتم تعيين رسوم الشبكة تلقائيًا عن طريق بروتوكول إجماع Polkadot، لن تتمكن من مراجعتها على جهازك",
     "info": {
       "available": {
         "title": "DOT متاح",
@@ -3184,67 +3184,67 @@
     "nomination": {
       "emptyState": {
         "title": "اكسب المكافآت",
-        "description": "You can earn rewards by bonding assets and then nominating your validator(s).",
+        "description": "يمكنك كسب المكافآت عن طريق تقيد الأصول ثم تعيين المدقق (المدققين) الخاص بك.",
         "info": "How nominations work",
         "cta": "اكسب المكافآت"
       },
-      "header": "Nominations",
-      "nominate": "Nominate",
-      "chill": "Clear nominations",
+      "header": "الترشيحات",
+      "nominate": "ترشيح",
+      "chill": "حذف الترشيحات",
       "status": "الحالة",
       "totalStake": "إجمالي الرهن",
       "amount": "المبلغ المقيد",
-      "commission": "Commission",
-      "active": "Active",
+      "commission": "العمولة",
+      "active": "مفعل",
       "activeInfo": "هذا المدقق تم إنتخابه و يقوم بجمع المكافآت على أصولك المقيدة.",
-      "inactive": "Inactive",
+      "inactive": "غير مفعل",
       "inactiveInfo": "هذا المدقق تم إنتخابه و لكن لا يجمع المكافآت على أصولك المقيدة.",
-      "waiting": "Unelected",
+      "waiting": "غير منتخب",
       "waitingInfo": "هذا المدقق غير منتخب، ولذلك لا يجمع المكافآت.",
       "notValidator": "ليس مدققًا",
       "notValidatorInfo": "لم يعد هذا العنوان مدققًا",
-      "elected": "Elected",
+      "elected": "منتخب",
       "electedInfo": "هذا المدقق تم إنتخابه و يقوم بجمع المكافآت لمرشحيه.",
-      "nominators": "Nominators",
-      "nominatorsCount": "{{nominatorsCount}} nominators",
-      "nominatorsInfo": "This validator is currently elected by {{count}} nominators.",
-      "oversubscribed": "Oversubscribed ({{nominatorsCount}})",
+      "nominators": "المرشحون",
+      "nominatorsCount": "{{nominatorsCount}} مرشحين",
+      "nominatorsInfo": "هذا المدقق تم ترشيحه حالياً من قبل {{count}} مرشحين.",
+      "oversubscribed": "({{nominatorsCount}}) تجاوز حد الاشتراك",
       "oversubscribedInfo": "أعلى {{maxNominatorRewardedPerValidator}} مرشحين مع أعلى مبلغ مقيد فقط هم من يحصلون على مكافآت",
-      "hasPendingBondOperation": "A bond operation is still pending confirmation",
-      "externalControllerUnsupported": "This stash account is controlled by another account with the address <0>{{address}}</0>. Staking operations on accounts that are controlled by a different account are not supported in Ledger Live. Please use an alternative wallet such as Polkadot.js",
-      "externalStashUnsupported": "This account controls a stash account whose address is <0>{{address}}</0>. Staking operations on separate stash accounts are not supported in Ledger Live. Please use an alternative wallet like Polkadot.js",
+      "hasPendingBondOperation": "لا تزال عملية التقيد في انتظار التأكيد",
+      "externalControllerUnsupported": "حساب التخزين هذا يخضع لسيطرة حساب آخر عنوانه <0>{{address}}</0>. عمليات الرهن على الحسابات الخاضعة لسيطرة حساب مختلف غير معتمدة في ليدجر لايف (Ledger Live). يرجى استخدام محفظة مختلفة مثل Polkadot.js",
+      "externalStashUnsupported": "هذا الحساب يتحكم في حساب تخزين عنوانه <0>{{address}}</0>. عمليات الرهن على حسابات تخزين منفصلةغير مدعومة في ليدجر لايف (Ledger Live). يرجى استخدام محفظة بديلة مثل Polkadot.js",
       "showInactiveNominations": "عرض كل الترشيحات ({{count}})",
       "hideInactiveNominations": "عرض الترشيحات النشطة فقط",
-      "noActiveNominations": "There are no active nominations.",
+      "noActiveNominations": "لا توجد ترشيحات مفعلة.",
       "showAllUnlockings": "عرض كل مبالغ إلغاء التقيد ({{count}})",
       "hideAllUnlockings": "إخفاء مبالغ إلغاء التقيد"
     },
     "unlockings": {
-      "header": "Unbonding",
-      "withdrawUnbonded": "Withdraw Unbonded",
-      "rebond": "Rebond"
+      "header": "إلغاء التقيد",
+      "withdrawUnbonded": "سحب المبلغ الغير مقيد",
+      "rebond": "إعادة التقيد"
     },
     "manage": {
-      "title": "Manage assets",
+      "title": "إدارة الأصول",
       "bond": {
-        "title": "Bond",
+        "title": "تقيد",
         "description": "لكسب المكافآت، قم أولاً بتقيد مبلغ. ثم يجب عليك ترشيح مدقق (مدققين) لك."
       },
       "unbond": {
-        "title": "Unbond",
+        "title": "إلغاء التقيد",
         "description": "لإتاحة مبلغ مقيد مرة أخرى، سيكون عليك إلغاء تقيده أولاً. يمكنك سحبه بعد انقضاء فترة إلغاء التقيد الممتدة لفترة 28 يومًا."
       },
       "withdrawUnbonded": {
-        "title": "Withdraw Unbonded",
+        "title": "سحب المبلغ الغير مقيد",
         "description": "لإرجاع مبلغ تم إلغاء تقيده إلى الرصيد المتاح، سيكون عليك سحبه يدويًا."
       },
       "nominate": {
-        "title": "Nominate",
-        "description": "Choose up to 16 validators. Ensure nominations are Active to earn rewards."
+        "title": "ترشيح",
+        "description": "اختر ما يصل إلى 16 مدققًا. تأكد من أن الترشيحات في الوضع \"المفعل\" لكسب المكافآت."
       },
       "chill": {
-        "title": "Clear nominations",
-        "description": "Remove all nominations. You will stop earning rewards. Your bonded amount remains bonded."
+        "title": "حذف الترشيحات",
+        "description": "إزالة كل الترشيحات. سوف تتوقف عن كسب المكافآت. سيبقى تقيد المبلغ الذي قمت بتقيده."
       }
     },
     "nominate": {
@@ -3256,17 +3256,17 @@
       },
       "steps": {
         "validators": {
-          "myNominations": "My nominations",
+          "myNominations": "ترشيحاتي",
           "electedValidators": "المدققون المنتخبون",
           "waitingValidators": "المدققون غير المنتخبين",
           "noResultsFound": "لم يتم العثور على مدققين لـ <0>{{search}}</0>",
-          "selected": "{{selected}} out of {{total}} selected",
+          "selected": "تم إختيار {{selected}} من إجمالي {{total}}",
           "notValidatorsRemoved": "قمت بترشيح {{count}} من العناوين التي لم تعد مدققين. وستتم إزالتها تلقائيًا من معاملة الترشيح الخاصة بك.",
-          "maybeChill": "Clear nominations instead"
+          "maybeChill": "حذف الترشيحات بدلاً من ذلك"
         },
         "validation": {
           "success": {
-            "title": "You have successfully nominated validators",
+            "title": "قمت بترشيح المدققين بنجاح",
             "description": "ستبدأ في كسب المكافآت عندما يتم ربط الأصول الخاصة بك بالمدقق (المدققين) الذين قمت باختيارهم."
           }
         }
@@ -3277,11 +3277,11 @@
         "label": "وجهة المكافأة",
         "stash": "الرصيد المتاح",
         "stashDescription": "يتم إيداع المكافآت في رصيدك المتاح.",
-        "staked": "Bonded balance",
-        "stakedDescription": "Rewards are credited to your bonded balance for compound earning.",
-        "optionTitle": "Note",
-        "optionDescription": "Once set, the option is fixed for the lifetime of this bond. If you change your mind, please read ",
-        "clickableLink": "here."
+        "staked": "الرصيد المقيد",
+        "stakedDescription": "يتم إيداع المكافآت في رصيدك المقيد لاحتساب المكاسب المجمعة.",
+        "optionTitle": "ملاحظة",
+        "optionDescription": "فور أن يتم تعيين هذا الخيار، فإنه يظل ثابتًا طوال فترة عمر هذا التقيد. إذا قمت بتغير رأيك، فيرجى قراءة ",
+        "clickableLink": "هنا."
       },
       "stepperHeader": {
         "starter": "اكسب المكافآت",
@@ -3292,33 +3292,33 @@
       },
       "steps": {
         "starter": {
-          "description": "You may earn rewards by bonding your assets and then nominate your validators.",
+          "description": "يمكنك كسب المكافآت عن طريق تقيد الأصول الخاصة بك ثم تعيين المدققين الخاصين بك.",
           "bullet": [
-            "You keep ownership of bonded assets",
-            "Nominate using your Ledger device",
-            "Assets will be available again, 28 days after unbonding"
+            "أنت تحتفظ بملكية الأصول المقيدة",
+            "الترشيح باستخدام جهاز ليدجر الخاص بك",
+            "ستكون الأصول متاحة مرة أخرى بعد 28 يومًا من إلغاء التقيد"
           ],
-          "help": "How nominations work",
-          "warning": "Choose your validators wisely: part of your bonded assets may be irrevocably lost if a validator does not behave appropriately."
+          "help": "كيف تعمل الترشيحات",
+          "warning": "كن حريصًا في اختيار المدققين الذي تعتمد عليه؛ فقد يتم فقدان جزء من أصولك المقيدة بشكل لا رجعة فيه إذا لم يتصرف المدقق بشكل مناسب."
         },
         "amount": {
-          "availableLabel": "Available",
+          "availableLabel": "متاح",
           "maxLabel": "الحد الأقصى"
         },
         "confirm": {
-          "info": "Bonded assets can be unbonded at any time, but unbonding takes 28 days."
+          "info": "يمكن إلغاء تقيد الأصول في أي وقت، ولكن عملية إلغاء التقيد تستغرق فترة 28 يومًا."
         },
         "validation": {
           "success": {
-            "title": "Assets successfully bonded",
+            "title": "تم تقيد الأصول بنجاح",
             "description": "يمكنك ترشيح المدققين فور أن تؤكد الشبكة على المعاملة.",
             "descriptionNominate": "سوف تتمكن من ترشيح المدققين فور أن تؤكد الشبكة على معاملتك.",
-            "nominate": "Nominate",
-            "later": "Nominate later"
+            "nominate": "ترشيح",
+            "later": "الترشيح في وقتٍ لاحق"
           },
           "pending": {
             "title": "المعاملة في انتظار التأكيد",
-            "description": "You have to wait a moment before nominating"
+            "description": "سيكون عليك الانتظار لفترة قصيرة قبل الترشيح"
           }
         }
       }
@@ -3332,7 +3332,7 @@
       },
       "steps": {
         "amount": {
-          "availableLabel": "Unbonding",
+          "availableLabel": "إلغاء التقيد",
           "maxLabel": "الحد الأقصى"
         },
         "confirm": {
@@ -3340,7 +3340,7 @@
         },
         "validation": {
           "success": {
-            "title": "Assets successfully rebonded",
+            "title": "تمت إعادة تقيد الأصول بنجاح",
             "description": "سيتم تحديث رصيد حسابك فور أن تؤكد الشبكة على المعاملة."
           }
         }
@@ -3355,16 +3355,16 @@
       },
       "steps": {
         "amount": {
-          "availableLabel": "Bonded",
+          "availableLabel": "تم تقيده",
           "maxLabel": "الحد الأقصى"
         },
         "confirm": {
-          "info": "Unbonded assets can be withdrawn after the 28-day unbonding period."
+          "info": "يمكن سحب الأصول بعد إلغاء تقيدها وذلك بعد انقضاء مدة إلغاء التقيد الممتدة لفترة 28 يومًا."
         },
         "validation": {
           "success": {
-            "title": "Unbond transaction sent successfully",
-            "description": "Unbonded assets can be withdrawn after 28 days."
+            "title": "تم إرسال معاملة إلغاء التقيد بنجاح",
+            "description": "يمكن سحب الأصول التي تم إلغاء تقيدها بعد 28 يومًا."
           }
         }
       }
@@ -3372,13 +3372,13 @@
     "simpleOperation": {
       "modes": {
         "withdrawUnbonded": {
-          "title": "Withdraw unbonded",
-          "description": "Withdraw unbonded assets to your available balance."
+          "title": "سحب المبلغ الغير مقيد",
+          "description": "سحب الأصول التي تم إلغاء تقيدها إلى رصيدك المتوفر."
         },
         "chill": {
-          "title": "Clear nominations",
-          "description": "Clears all nominations and stops earning rewards.",
-          "info": "Bonded assets will remain bonded. If you unbond them, they will be available after 28 days."
+          "title": "حذف الترشيحات",
+          "description": "يقوم بحذف جميع الترشيحات وإيقاف كسب المكافآت.",
+          "info": "ستظل الأصول المقيدة على حالتها. إذا قمت بإلغاء تقيدها، فسوف تصبح متاحة بعد فترة 28 يومًا."
         }
       },
       "stepperHeader": {
@@ -3402,25 +3402,25 @@
     "delegationSendWarnDesc": "سيتم خصم المبلغ المراد إرساله من حسابك المفوض.",
     "delegationReceiveWarnDesc": "المبلغ المتلقى في الحساب المفوض سيتم إضافته إلى إجمالي المبلغ المرهون. اختر حسابًا آخر إذا كنت تريد تجنب ذلك.",
     "iDelegateMy": "I delegate my",
-    "undelegateMy": "Undelegate my",
-    "warnUndelegation": "Your account will be undelegated.",
-    "warnDelegation": "Delegating your voting rights does not guarantee any rewards from your validator.",
-    "to": "to",
+    "undelegateMy": "إلغاء تفويضي",
+    "warnUndelegation": "سيتم إلغاء تفويض حسابك.",
+    "warnDelegation": "تفويض حقوق التصويت الخاصة بك لا يضمن لك الحصول على أي مكافآت من المدقق الذي تختاره.",
+    "to": "إلى",
     "from": "من",
     "forAnEstYield": "للحصول على عائد تقديري بقيمة",
-    "yieldPerYear": "{{yield}} / Year",
-    "yieldInfos": "Yield rates are provided by",
+    "yieldPerYear": "{{yield}} / السنة",
+    "yieldInfos": "يتم تقديم معدلات العائد من قبل",
     "termsAndPrivacy": "لقد قرأت ووافقت على <1>شروط استخدام ليدجر لايف</1> و <3> سياسة الخصوصية</3>.",
-    "delegation": "Delegation",
+    "delegation": "تفويض",
     "viewDetails": "عرض التفاصيل",
     "validator": "المدقق",
     "validatorAddress": "عنوان المدقق",
-    "delegatedAccount": "Delegated account",
-    "duration": "Duration",
+    "delegatedAccount": "الحساب المفوض",
+    "duration": "المدة",
     "transactionID": "معرف المعاملة",
     "receive": "تلقي المزيد",
     "changeValidator": "تغيير المدقق",
-    "endDelegation": "End delegation",
+    "endDelegation": "إنهاء التفويض",
     "durationForDays0": "للتو",
     "durationForDays": "ليوم واحد",
     "durationForDays_plural": "لمدة {{count}} أيام",
@@ -3439,20 +3439,20 @@
       "cta": "قم بالتفويض لكسب المكافآت"
     },
     "broadcastSuccessTitle": {
-      "delegate": "Delegation sent",
-      "undelegate": "Operation sent"
+      "delegate": "تم إرسال التفويض",
+      "undelegate": "تم إرسال العملية"
     },
     "broadcastSuccessDescription": {
-      "delegate": "Delegation transaction broadcasted successfully. You should earn your first rewards in around 40 days, depending on the validator.",
+      "delegate": "تم بث معاملة التفويض بنجاح. من المفترض أن تكسب مكافآتك الأولى في غضون 40 يومًا تقريبًا، وذلك معتمداً على المدقق.",
       "undelegate": "سينتهي تفويض حسابك عند تأكيد العملية. يمكنك تفويض حسابك مرة أخرى في أي وقت."
     },
-    "summaryTitle": "Summary",
-    "goToAccount": "Go to Accounts",
-    "howDelegationWorks": "How delegation works",
+    "summaryTitle": "ملخص",
+    "goToAccount": "الذهاب إلى الحسابات",
+    "howDelegationWorks": "كيف يعمل التفويض",
     "actions": {
-      "redelegate": "Redelegate",
+      "redelegate": "إعادة التفويض",
       "collectRewards": "الحصول على المكافآت",
-      "undelegate": "Undelegate"
+      "undelegate": "إلغاء التفويض"
     }
   },
   "ValidateOnDevice": {
@@ -3469,37 +3469,37 @@
     "warning": "تحقق دائمًا من أن العنوان المعروض لجهازك يطابق تمامًا العنوان المقدم لك من {{recipientWording}}",
     "recipientWording": {
       "send": "تحقق دائمًا من أن العنوان المعروض على جهازك يطابق تمامًا العنوان الذي قدمه لك المستلم",
-      "delegate": "Always verify that your device displays the address exactly as provided by the validator",
-      "undelegate": "Always verify that your device displays the address exactly as provided by the validator",
-      "freeze": "Always verify that your device displays the address exactly as provided",
-      "unfreeze": "Always verify that your device displays the address exactly as provided",
-      "claimReward": "Always verify that your device displays the address exactly as provided",
-      "vote": "Always verify that your device displays the address exactly as provided",
+      "delegate": "تحقق دائمًا من أن جهازك يعرض العنوان بشكل مطابق لما قدمه لك المدقق",
+      "undelegate": "تحقق دائمًا من أن جهازك يعرض العنوان بشكل مطابق لما قدمه لك المدقق",
+      "freeze": "تحقق دائمًا من أن جهازك يعرض العنوان بشكل مطابق لما تم تقديمه إليك",
+      "unfreeze": "تحقق دائمًا من أن جهازك يعرض العنوان بشكل مطابق لما تم تقديمه إليك",
+      "claimReward": "تحقق دائمًا من أن جهازك يعرض العنوان بشكل مطابق لما تم تقديمه إليك",
+      "vote": "تحقق دائمًا من أن جهازك يعرض العنوان بشكل مطابق لما تم تقديمه إليك",
       "erc20": {
-        "approve": "Verify the operation details on your device before sending it."
+        "approve": "تحقق من تفاصيل العملية على جهازك قبل إرسالها."
       },
       "compound.supply": "تحقق من تفاصيل الإيداع على جهازك قبل إرساله.",
-      "compound.withdraw": "Verify the withdrawal details on your device before sending it."
+      "compound.withdraw": "تحقق من تفاصيل السحب على جهازك قبل إرساله."
     },
-    "name": "Name",
-    "votes": "Votes",
+    "name": "الاسم",
+    "votes": "الأصوات",
     "infoWording": {
       "freeze": "يتم قفل رموز التوكن المجمدة لمدة 3 أيام.",
-      "unfreeze": "Your {{resource}} points will be reduced, and all your votes will be cancelled.",
+      "unfreeze": "سيتم خفض نقاطك في {{resource}} وإلغاء جميع أصواتك.",
       "claimReward": "يمكن المطالبة بالمكافآت كل 24 ساعة.",
       "cosmos": {
         "claimReward": "إذا كان المدقق المحدد لديه مكافآت معلقة، فسيتم الحصول عليها تلقائيًا.",
-        "redelegate": "You will have to wait 21 days for undelegated assets to return to the available balance.",
-        "undelegate": "You will have to wait 21 days for undelegated assets to return to the available balance."
+        "redelegate": "سيتعين عليك الانتظار 21 يومًا حتى تعود الأصول غير المفوضة إلى الرصيد المتاح.",
+        "undelegate": "سيتعين عليك الانتظار 21 يومًا حتى تعود الأصول غير المفوضة إلى الرصيد المتاح."
       },
-      "lending": "Verify the operation details on your device before sending it."
+      "lending": "تحقق من تفاصيل العملية على جهازك قبل إرسالها."
     },
     "amount": "المبلغ",
     "account": "الحساب",
     "from": "من",
-    "to": "To",
+    "to": "إلى",
     "redelegationAmount": "المبلغ المعاد تفويضه",
-    "gas": "Gas",
+    "gas": "غاز",
     "validatorAddress": "عنوان المدقق",
     "rewardAmount": "مبلغ المكافأة",
     "undelegatedAmount": "المبلغ غير المفوض",
@@ -3563,26 +3563,26 @@
   },
   "walletconnect": {
     "disclaimer": "يريد الاتصال بحساب إيثريوم التالي من خلال محفظتك:",
-    "reject": "Reject",
+    "reject": "رفض",
     "connect": "اتصال",
     "connected": "متصل",
     "disconnected": "تم قطع الاتصال",
     "warningdisconnected": "هناك مشكلة في الاتصال بين dApp وWalletConnect وليدجر لايف (Ledger Live). انتظر بضع لحظات أو أعد تشغيل الاتصال",
-    "info": "You can now access the {{name}} dApp on your desktop.",
+    "info": "يمكنك الآن الوصول إلى تطبيق {{name}} على سطح المكتب.",
     "warning": "مشاركة عناوين التلقى من dApp غير آمنة. استخدم دائمًا Ledger Live عند مشاركة عنوانك لتلقي الأموال.",
     "isconnecting": "يجري الاتصال، يرجى الانتظار...",
     "disconnect": "قطع الاتصال",
     "retry": "إعادة المحاولة",
     "close": "إغلاق",
-    "message": "Message",
-    "messageHash": "Message Hash",
+    "message": "رسالة",
+    "messageHash": "رمز تجزئة الرسالة",
     "domainHash": "Domain Hash",
     "stringHash": "Hash",
     "from": "من",
-    "successTitle": "Message signed",
-    "successDescription": "You have signed the message received from a third party application",
+    "successTitle": "تم توقيع الرسالة",
+    "successDescription": "لقد وقعت على الرسالة المستلمة من تطبيق لجهة خارجية",
     "stepperHeader": {
-      "summary": "Summary",
+      "summary": "ملخص",
       "selectDevice": "اختار جهاز",
       "connectDevice": "توصيل الجهاز",
       "stepRange": "خطوة {{currentStep}} من {{totalSteps}}"
@@ -3599,21 +3599,21 @@
     "announcement": "Announcement",
     "liveStatus": "حالة Ledger Live",
     "news": {
-      "title": "News",
-      "titleCount": "News ({{count}})",
+      "title": "أخبار",
+      "titleCount": "أخبار ({{count}})",
       "emptyState": {
-        "title": "No news for the moment",
-        "desc": "You will find here all the news related to Ledger and Ledger live"
+        "title": "لا توجد أخبار حاليًا",
+        "desc": "ستجد هنا جميع الأخبار المتعلقة بنظام Ledger وLedger Live"
       }
     },
     "status": {
       "title": "الحالة",
       "ok": {
-        "title": "Ledger Live is up and running",
-        "desc": "<0>Having trouble? Go on our </0><1>help page</1>"
+        "title": "Ledger Live في وضع التشغيل",
+        "desc": "<0>هل تواجه مشاكل؟ انتقل إلى </0><1>صفحة المساعدة</1>"
       },
       "error": {
-        "title": "Ledger Live is experiencing issues"
+        "title": "Ledger Live يواجه مشاكل"
       }
     }
   }
