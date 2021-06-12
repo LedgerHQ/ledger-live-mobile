@@ -456,7 +456,7 @@
       "description": "请通过管理器卸载并重新安装 {{managerAppName}} 应用程序。"
     },
     "UserRefusedAllowManager": {
-      "title": "设备端管理器已禁用",
+      "title": "Manager（管理器）已被在设备上禁用",
       "description": "请在您的设备上启用管理器，然后重试。"
     },
     "UserRefusedAddress": {
@@ -813,7 +813,7 @@
             "label": "阅读屏幕上的说明，了解如何使用您的设备。"
           },
           "2": {
-            "title": "选择 “设置为新设备”",
+            "title": "选择 “Set up as new device” (设置为新设备)",
             "label": "同时按下两个按钮以激活该选项。"
           },
           "3": {
@@ -890,7 +890,7 @@
               "label": "获得一个新的硬件钱包。"
             },
             "1": {
-              "label": "在 Ledger 应用程序中选择“在新设备上还原恢复短语”"
+              "label": "在 Ledger 应用程序中选择 “Restore recovery phrase on a new device” (在新设备上还原恢复短语)"
             },
             "2": {
               "label": "在您的新设备上输入您的恢复短语从而恢复对您加密资产的访问。"
@@ -909,7 +909,7 @@
           },
           "2": {
             "title": "确认您的恢复短语",
-            "label": "按右边按钮，让光标滚动并移到第 1 个词上。核对后同时按下两个按钮进行确认。"
+            "label": "按右边按钮，让光标滚动并移到 Word #1 第一个词上。核对后同时按下两个按钮进行确认。"
           },
           "3": {
             "title": "重复操作以确认所有单词！"
@@ -988,7 +988,7 @@
             "label": "阅读屏幕上的说明以了解如何使用您的设备。"
           },
           "2": {
-            "title": "选择“通过恢复短语进行还原”",
+            "title": "选择 “Restore from recovery phrase” (通过恢复短语进行还原)",
             "label": "同时按下两个按钮以激活该选项。"
           },
           "3": {
@@ -1011,11 +1011,11 @@
             "label": "您的恢复短语可以有12、18或24个助记词。您必须输入所有的词才能访问您的加密资产。"
           },
           "2": {
-            "title": "输入第 1 个词……",
-            "label": "使用左边或右边的按钮，输入第一个词 Word #1 的首字母。选中字母后，同时按下两个按钮确认，依次验证每个字母。"
+            "title": "输入 Word #1 第一个词……",
+            "label": "使用左边或右边的按钮，输入 Word #1 第一个词的首字母。选中字母后，同时按下两个按钮确认，依次验证每个字母。"
           },
           "3": {
-            "title": "确认第 1 个词……",
+            "title": "确认 Word #1 第一个词……",
             "label": "从提示中选中 Word #1 第一个词。同时按下两个按钮予以确认。"
           },
           "4": {
@@ -1043,7 +1043,7 @@
       },
       "infoModal": {
         "title": "在哪里可以找到我的设备名？",
-        "desc": "在您的设备上，选择设置 > 通用 > 设备名。",
+        "desc": "在您的设备上，选择 \"Settings > General > Device name\" (设置 > 通用 > 设备名)。",
         "title_1": "如何设置蓝牙连接？",
         "title_2": "如何在没有蓝牙的情况下使用我的 Nano X？",
         "desc_1": "使用 <1> OTG-数据线</1> 将您的 Ledger Nano X 连接到您的 Android 安卓智能手机上 (不支持 iOS 系统)。使用 Ledger Live 手机版或其他兼容的 (web 网络) 应用程序来管理您的加密资产。",
@@ -1112,8 +1112,8 @@
     "stepSetupPin": {
       "step1": "启动您的 {{fullDeviceName}} 并按照说明操作。",
       "step1-nanoS": "使用 OTG 数据线来将您的 {{fullDeviceName}} 连接到您的手机上。",
-      "step2": "同时按下两个按钮，以选择 <1><1>设置为新设备。</1></1>",
-      "step2-restore": "同时按下两个按钮，以选择 <1><1>通过恢复短语进行还原。</1></1>",
+      "step2": "同时按下两个按钮，以选择 <1><1>Setup as a new device.</1></1> (设置为新设备)",
+      "step2-restore": "同时按下两个按钮以选择 <1><1>Restore from recovery phrase.</1></1> (通过恢复短语进行还原)",
       "step3": "按左边或右边的按钮以选择数位。同时按下两个按钮以确认。",
       "step4prefix": "选取",
       "step4suffix1": " 确认您的 PIN 识别密码。",
@@ -1125,7 +1125,7 @@
       }
     },
     "stepWriteRecovery": {
-      "step1": "在空白恢复表的第 1 栏写下 Word #1 <1><1> 第 1 个词 </1></1>",
+      "step1": "在空白恢复表的第 1 栏写下 <1><1>Word #1</1></1> 第一个词",
       "step2": "按右边按钮继续，写下所有的 24 个词。",
       "step3": "确认您恢复短语中的每一个词：选中后，同时按下两个按钮对其进行确认。",
       "modal": {
@@ -1232,7 +1232,7 @@
     "summary_plural": "您的 {{count}} 账户已同步。",
     "emptyState": {
       "noAppsTitle": "在我的设备上安装应用程序",
-      "noAppsDesc": "在 Ledger Live 上添加账户之前，请先安装相关应用程序。前往管理器安装应用程序。",
+      "noAppsDesc": "在 Ledger Live 上添加账户之前，请先安装相关应用程序。前往 Manager（管理器）安装应用程序。",
       "noAccountsTitle": "您没有任何账户…",
       "noAccountsDesc": "请添加账户到您的资产组合。",
       "buttons": {
@@ -2486,7 +2486,7 @@
         }
       },
       "genuineCheck": {
-        "title": "在您的 {{productName}} 上开启 Ledger 管理器"
+        "title": "在您的 {{productName}} 上开启 Ledger Manager（管理器）"
       },
       "genuineCheckPending": {
         "title": "正在检查该设备是否为正版……"
@@ -2539,7 +2539,7 @@
     },
     "GenuineCheck": {
       "title": "设备验证查验",
-      "accept": "请勿关闭您的 Nano X。确保允许 <1> Ledger 管理器</1> 运行。"
+      "accept": "请勿关闭您的 Nano X。确保允许 <1>Ledger Manager</1>（管理器）运行。"
     },
     "ScanningHeader": {
       "title": "正在寻找设备",
