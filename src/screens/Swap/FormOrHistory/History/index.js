@@ -123,16 +123,21 @@ const History = () => {
   return (
     <View style={[styles.root, { backgroundColor: colors.background }]}>
       <TrackScreen category="Swap" name="History" />
-      <View
-        style={[
-          styles.alertWrapper,
-          { backgroundColor: colors.white, borderColor: colors.lightFog },
-        ]}
-      >
-        <Alert type="primary" horizontal>
-          <Trans i18nKey="transfer.swap.history.disclaimer" />
-        </Alert>
-      </View>
+      {sections.length ? (
+        <View
+          style={[
+            styles.alertWrapper,
+            {
+              backgroundColor: colors.white,
+              borderColor: colors.lightFog,
+            },
+          ]}
+        >
+          <Alert type="primary" horizontal>
+            <Trans i18nKey="transfer.swap.history.disclaimer" />
+          </Alert>
+        </View>
+      ) : null}
       <AnimatedSectionList
         ref={ref}
         sections={sections}
