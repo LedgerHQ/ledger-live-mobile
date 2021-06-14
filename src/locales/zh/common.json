@@ -3597,13 +3597,13 @@
   "notificationCenter": {
     "title": "通知中心",
     "announcement": "公告",
-    "liveStatus": "Ledger live 状态",
+    "liveStatus": "Ledger Live status",
     "news": {
       "title": "新闻",
       "titleCount": "新闻 ({{count}})",
       "emptyState": {
         "title": "目前没有新闻",
-        "desc": "您将在这里找到与 Ledger 和 Ledger Live 相关的所有新闻"
+        "desc": "You will find here all the news related to Ledger and Ledger Live"
       }
     },
     "status": {
