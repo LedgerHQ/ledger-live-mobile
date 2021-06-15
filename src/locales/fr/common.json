@@ -457,7 +457,7 @@
     },
     "UserRefusedAllowManager": {
       "title": "Gestionnaire désactivé sur l'appareil",
-      "description": "Activez le \"Manager\" (Gestionnaire) sur votre appareil et réessayez."
+      "description": "Please allow the Manager on your device, then try again."
     },
     "UserRefusedAddress": {
       "title": "Adresse de bénéficiaire rejetée",
