@@ -457,7 +457,7 @@
     },
     "UserRefusedAllowManager": {
       "title": "Диспетчер был отклонён на устройстве",
-      "description": "Пожалуйста, разрешите использование Диспетчера на устройстве, а затем повторите попытку."
+      "description": "Please allow the Manager on your device, then try again."
     },
     "UserRefusedAddress": {
       "title": "Адрес получателя отклонён",
