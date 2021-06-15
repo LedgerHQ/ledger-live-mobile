@@ -274,7 +274,7 @@ const linking = {
              * @params ?currency: string
              * ie: "ledgerhq://receive?currency=bitcoin" will open the prefilled search account in the receive flow
              */
-            [ScreenName.SwapProviders]: "swap",
+            [ScreenName.SwapFormOrHistory]: "swap",
           },
         },
         [NavigatorName.SendFunds]: {

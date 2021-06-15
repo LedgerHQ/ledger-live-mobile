@@ -120,7 +120,6 @@ export const ScreenName = {
   SignValidationSuccess: "SignValidationSuccess",
   StellarEditMemoType: "StellarEditMemoType",
   StellarEditMemoValue: "StellarEditMemoValue",
-  SwapProviders: "SwapProviders",
   SwapError: "SwapError",
   SwapDapp: "SwapDapp",
   SwapFormOrHistory: "SwapFormOrHistory",

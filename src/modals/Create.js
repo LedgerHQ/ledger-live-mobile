@@ -52,7 +52,7 @@ export default function CreateModal({ isOpened, onClose }: ModalProps) {
   const onSwap = useCallback(
     () =>
       onNavigate(NavigatorName.Swap, {
-        screen: ScreenName.SwapProviders,
+        screen: ScreenName.SwapFormOrHistory,
       }),
     [onNavigate],
   );

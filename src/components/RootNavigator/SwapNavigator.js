@@ -8,7 +8,6 @@ import { ScreenName } from "../../const";
 import SwapSummary from "../../screens/Swap/FormOrHistory/Form/Summary";
 import SwapError from "../../screens/Swap/FormOrHistory/Form/Error";
 import SwapFormAmount from "../../screens/Swap/FormOrHistory/Form/Amount";
-import SwapProviders from "../../screens/Swap";
 import SwapKYC from "../../screens/Swap/KYC";
 import SwapKYCStates from "../../screens/Swap/KYC/StateSelect";
 import SwapFormOrHistory from "../../screens/Swap/FormOrHistory";
@@ -20,7 +19,6 @@ import SwapFormSelectAccount from "../../screens/Swap/FormOrHistory/Form/SelectA
 import { getStackNavigatorConfig } from "../../navigation/navigatorConfig";
 import styles from "../../navigation/styles";
 import StepHeader from "../StepHeader";
-import WebPlatformPlayer from "../WebPlatformPlayer";
 
 export default function SwapNavigator() {
   const { t } = useTranslation();
@@ -31,22 +29,6 @@ export default function SwapNavigator() {
   );
   return (
     <Stack.Navigator screenOptions={stackNavigationConfig}>
-      <Stack.Screen
-        name={ScreenName.SwapProviders}
-        component={SwapProviders}
-        options={{
-          headerStyle: styles.headerNoShadow,
-          title: t("transfer.swap.landing.header"),
-        }}
-      />
-      <Stack.Screen
-        name={ScreenName.SwapDapp}
-        component={WebPlatformPlayer}
-        options={({ route }) => ({
-          headerStyle: styles.headerNoShadow,
-          title: route.params.manifest?.name,
-        })}
-      />
       <Stack.Screen
         name={ScreenName.SwapFormOrHistory}
         component={SwapFormOrHistory}
