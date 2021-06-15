@@ -457,7 +457,7 @@
     },
     "UserRefusedAllowManager": {
       "title": "تم تعطيل المدير (Manager) على الجهاز",
-      "description": "يرجى تمكين المدير (Manager) على جهازك، ثم حاول مرة أخرى."
+      "description": "Please allow the Manager on your device, then try again."
     },
     "UserRefusedAddress": {
       "title": "تم رفض عنوان الاستقبال",
