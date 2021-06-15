@@ -17,7 +17,7 @@ const Swap = () => {
   const onClick = useCallback(
     () =>
       navigation.navigate(NavigatorName.Swap, {
-        screen: ScreenName.SwapProviders,
+        screen: ScreenName.SwapFormOrHistory,
       }),
     [navigation],
   );
