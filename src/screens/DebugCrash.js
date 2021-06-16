@@ -6,7 +6,6 @@ import { Sentry } from "react-native-sentry";
 
 import Button from "../components/Button";
 import GenericErrorView from "../components/GenericErrorView";
-import BottomModal from "../components/GenericErrorView";
 
 class DebugBLE extends Component<
   {

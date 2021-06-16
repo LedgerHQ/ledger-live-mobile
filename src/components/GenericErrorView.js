@@ -14,7 +14,6 @@ import logReport from "../log-report";
 import Button from "./Button";
 import DownloadFileIcon from "../icons/DownloadFile";
 import cleanBuildVersion from "../logic/cleanBuildVersion";
-import { localeIds } from "../languages";
 
 class GenericErrorView extends PureComponent<{
   error: Error,
