@@ -109,7 +109,7 @@ export default function NotificationsProvider({ children }: Props) {
       onNewAnnouncement={onNewAnnouncement}
       onAnnouncementRead={onAnnouncementRead}
     >
-      <ServiceStatusProvider autoUpdateDelay={60000}>
+      <ServiceStatusProvider context={{ currencies }} autoUpdateDelay={60000}>
         {children}
       </ServiceStatusProvider>
     </AnnouncementProvider>
