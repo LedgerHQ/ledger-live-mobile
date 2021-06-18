@@ -1937,6 +1937,7 @@
       },
       "history": {
         "tab": "历史记录",
+        "disclaimer": "Your swap mobile transactions are not synchronized with Ledger Live Desktop",
         "exportButton": "导出操作",
         "exportFilename": "Swap 掉期交易操作",
         "empty": {
