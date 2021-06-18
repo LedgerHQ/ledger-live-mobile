@@ -277,6 +277,10 @@ export const ScreenName = {
   OnboardingQuizFinal: "OnboardingQuizFinal",
 
   OnboardingFinish: "OnboardingFinish",
+
+  PlatformCatalog: "PlatformCatalog",
+  PlatformApp: "PlatformApp",
+
   WalletConnectScan: "WalletConnectScan",
   WalletConnectConnect: "WalletConnectConnect",
   WalletConnectDeeplinkingSelectAccount:
@@ -325,6 +329,7 @@ export const NavigatorName = {
   Onboarding: "Onboarding",
   PasswordAddFlow: "PasswordAddFlow",
   PasswordModifyFlow: "PasswordModifyFlow",
+  Platform: "Platform",
   ReceiveFunds: "ReceiveFunds",
   SendFunds: "SendFunds",
   Settings: "Settings",

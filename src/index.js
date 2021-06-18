@@ -38,6 +38,7 @@ import { useCountervaluesExport } from "@ledgerhq/live-common/lib/countervalues/
 import { pairId } from "@ledgerhq/live-common/lib/countervalues/helpers";
 
 import { ToastProvider } from "@ledgerhq/live-common/lib/notifications/ToastProvider";
+import PlatformCatalogProvider from "@ledgerhq/live-common/lib/platform/CatalogProvider";
 import logger from "./logger";
 import { saveAccounts, saveBle, saveSettings, saveCountervalues } from "./db";
 import {
@@ -427,36 +428,38 @@ export default class Root extends Component<
                 <HookSentry />
                 <HookAnalytics store={store} />
                 <WalletConnectProvider>
-                  <DeepLinkingNavigator>
-                    <SafeAreaProvider>
-                      <StyledStatusBar />
-                      <NavBarColorHandler />
-                      <AuthPass>
-                        <I18nextProvider i18n={i18n}>
-                          <LocaleProvider>
-                            <BridgeSyncProvider>
-                              <CounterValuesProvider
-                                initialState={initialCountervalues}
-                              >
-                                <ButtonUseTouchable.Provider value={true}>
-                                  <OnboardingContextProvider>
-                                    <ToastProvider>
-                                      <NotificationsProvider>
-                                        <SnackbarContainer />
-                                        <App
-                                          importDataString={importDataString}
-                                        />
-                                      </NotificationsProvider>
-                                    </ToastProvider>
-                                  </OnboardingContextProvider>
-                                </ButtonUseTouchable.Provider>
-                              </CounterValuesProvider>
-                            </BridgeSyncProvider>
-                          </LocaleProvider>
-                        </I18nextProvider>
-                      </AuthPass>
-                    </SafeAreaProvider>
-                  </DeepLinkingNavigator>
+                  <PlatformCatalogProvider>
+                    <DeepLinkingNavigator>
+                      <SafeAreaProvider>
+                        <StyledStatusBar />
+                        <NavBarColorHandler />
+                        <AuthPass>
+                          <I18nextProvider i18n={i18n}>
+                            <LocaleProvider>
+                              <BridgeSyncProvider>
+                                <CounterValuesProvider
+                                  initialState={initialCountervalues}
+                                >
+                                  <ButtonUseTouchable.Provider value={true}>
+                                    <OnboardingContextProvider>
+                                      <ToastProvider>
+                                        <NotificationsProvider>
+                                          <SnackbarContainer />
+                                          <App
+                                            importDataString={importDataString}
+                                          />
+                                        </NotificationsProvider>
+                                      </ToastProvider>
+                                    </OnboardingContextProvider>
+                                  </ButtonUseTouchable.Provider>
+                                </CounterValuesProvider>
+                              </BridgeSyncProvider>
+                            </LocaleProvider>
+                          </I18nextProvider>
+                        </AuthPass>
+                      </SafeAreaProvider>
+                    </DeepLinkingNavigator>
+                  </PlatformCatalogProvider>
                 </WalletConnectProvider>
               </>
             ) : (

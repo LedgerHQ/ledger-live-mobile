@@ -1212,6 +1212,7 @@
     "transfer": "Transfer",
     "manager": "Manager",
     "settings": "Settings",
+    "platform": "Browse",
     "nanoX": "Nano X"
   },
   "portfolio": {
@@ -3614,6 +3615,23 @@
       },
       "error": {
         "title": "Ledger Live is experiencing issues"
+      }
+    }
+  },
+  "platform": {
+    "catalog": {
+      "title": "Browse",
+      "banner": {
+        "title": "Introducing Ledger Live catalog!",
+        "description": "You can now use other providers in Ledger Live, starting with ParaSwap and Wyre."
+      },
+      "pollCTA": {
+        "title": "Poll",
+        "description": "Which service do you want to see in Ledger Live?"
+      },
+      "developerCTA": {
+        "title": "For Developers",
+        "description": "All the information you need to integrate your applications on Ledger Live."
       }
     }
   }
