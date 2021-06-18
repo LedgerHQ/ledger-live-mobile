@@ -1937,6 +1937,7 @@
       },
       "history": {
         "tab": "السجل",
+        "disclaimer": "Your swap mobile transactions are not synchronized with Ledger Live Desktop",
         "exportButton": "تصدير العمليات",
         "exportFilename": "عمليات المبادلة",
         "empty": {
