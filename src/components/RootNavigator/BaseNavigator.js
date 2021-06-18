@@ -34,7 +34,6 @@ import AddAccountsNavigator from "./AddAccountsNavigator";
 import ExchangeBuyFlowNavigator from "./ExchangeBuyFlowNavigator";
 import ExchangeSellFlowNavigator from "./ExchangeSellFlowNavigator";
 import ExchangeNavigator from "./ExchangeNavigator";
-import ExchangeProvidersNavigator from "./ExchangeProvidersNavigator";
 import FirmwareUpdateNavigator from "./FirmwareUpdateNavigator";
 import AccountSettingsNavigator from "./AccountSettingsNavigator";
 import ImportAccountsNavigator from "./ImportAccountsNavigator";
@@ -192,11 +191,6 @@ export default function BaseNavigator() {
       <Stack.Screen
         name={NavigatorName.FirmwareUpdate}
         component={FirmwareUpdateNavigator}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name={NavigatorName.ExchangeProviders}
-        component={ExchangeProvidersNavigator}
         options={{ headerShown: false }}
       />
       <Stack.Screen
