@@ -8,9 +8,6 @@ import {
   getCryptoCurrencyById,
   getFiatCurrencyByTicker,
   listSupportedFiats,
-  isCurrencySupported,
-  findCryptoCurrencyById,
-  findTokenById,
 } from "@ledgerhq/live-common/lib/currencies";
 import { getEnv, setEnvUnsafe } from "@ledgerhq/live-common/lib/env";
 import { createSelector } from "reselect";
@@ -18,16 +15,10 @@ import type {
   CryptoCurrency,
   Currency,
   AccountLike,
-  TokenCurrency,
 } from "@ledgerhq/live-common/lib/types";
 import { getAccountCurrency } from "@ledgerhq/live-common/lib/account/helpers";
 import Config from "react-native-config";
 import type { PortfolioRange } from "@ledgerhq/live-common/lib/portfolio/v2/types";
-import type { AvailableProvider } from "@ledgerhq/live-common/lib/exchange/swap/types";
-import type { OutputSelector } from "reselect";
-import uniq from "lodash/uniq";
-
-import { isCurrencyExchangeSupported } from "@ledgerhq/live-common/lib/exchange";
 import { currencySettingsDefaults } from "../helpers/CurrencySettingsDefaults";
 import type { State } from ".";
 
@@ -346,7 +337,9 @@ const handlers: Object = {
     ...state,
     swap: {
       ...state.swap,
-      acceptedProviders: [...(state.swap?.acceptedProviders || []), payload],
+      acceptedProviders: [
+        ...new Set([...(state.swap?.acceptedProviders || []), payload]),
+      ],
     },
   }),
 };
