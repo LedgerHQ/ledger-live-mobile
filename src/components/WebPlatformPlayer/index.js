@@ -14,6 +14,7 @@ import {
   TouchableOpacity,
   SafeAreaView,
 } from "react-native";
+
 import { WebView } from "react-native-webview";
 import { useNavigation, useTheme } from "@react-navigation/native";
 import Color from "color";
@@ -27,6 +28,7 @@ import {
   listCryptoCurrencies,
   findCryptoCurrencyById,
 } from "@ledgerhq/live-common/lib/currencies/index";
+import type { AppManifest } from "@ledgerhq/live-common/lib/platform/types";
 
 import type { RawPlatformTransaction } from "@ledgerhq/live-common/lib/platform/rawTypes";
 import { useJSONRPCServer } from "@ledgerhq/live-common/lib/platform/JSONRPCServer";
@@ -44,10 +46,8 @@ import { broadcastSignedTx } from "../../logic/screenTransactionHooks";
 import { accountsSelector } from "../../reducers/accounts";
 import UpdateIcon from "../../icons/Update";
 
-import type { Manifest } from "./type";
-
 type Props = {
-  manifest: Manifest,
+  manifest: AppManifest,
 };
 
 const ReloadButton = ({
@@ -70,8 +70,7 @@ const ReloadButton = ({
   );
 };
 
-const WebPlatformPlayer = ({ route }: { route: { params: Props } }) => {
-  const manifest = route.params.manifest;
+const WebPlatformPlayer = ({ manifest }: Props) => {
   const targetRef: { current: null | WebView } = useRef(null);
   const accounts = useSelector(accountsSelector);
   const currencies = useMemo(() => listCryptoCurrencies(), []);
@@ -79,6 +78,16 @@ const WebPlatformPlayer = ({ route }: { route: { params: Props } }) => {
 
   const [loadDate, setLoadDate] = useState(Date.now());
   const [widgetLoaded, setWidgetLoaded] = useState(false);
+
+  const uri = useMemo(() => {
+    const url = new URL(manifest.url);
+
+    url.searchParams.set("backgroundColor", new Color(theme.colors.card).hex());
+    url.searchParams.set("textColor", new Color(theme.colors.text).hex());
+    url.searchParams.set("loadDate", loadDate.valueOf().toString());
+
+    return url;
+  }, [manifest.url, loadDate, theme]);
 
   const navigation = useNavigation();
 
@@ -360,16 +369,6 @@ const WebPlatformPlayer = ({ route }: { route: { params: Props } }) => {
     });
   }, [navigation, widgetLoaded, handleReload]);
 
-  const uri = useMemo(() => {
-    const url = new URL(manifest.url.toString());
-
-    url.searchParams.set("backgroundColor", new Color(theme.colors.card).hex());
-    url.searchParams.set("textColor", new Color(theme.colors.text).hex());
-    url.searchParams.set("loadDate", loadDate.valueOf().toString());
-
-    return url;
-  }, [manifest.url, loadDate, theme]);
-
   return (
     <SafeAreaView style={[styles.root]}>
       <WebView
@@ -380,7 +379,7 @@ const WebPlatformPlayer = ({ route }: { route: { params: Props } }) => {
             <ActivityIndicator size="large" />
           </View>
         )}
-        originWhitelist={["https://*"]}
+        originWhitelist={manifest.domains}
         allowsInlineMediaPlayback
         source={{
           uri: uri.toString(),

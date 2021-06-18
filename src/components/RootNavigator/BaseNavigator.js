@@ -23,6 +23,7 @@ import WalletConnectDeeplinkingSelectAccount from "../../screens/WalletConnect/D
 import FallbackCameraSend from "../FallbackCamera/FallbackCameraSend";
 import Main from "./MainNavigator";
 import { ErrorHeaderInfo } from "./BaseOnboardingNavigator";
+import SettingsNavigator from "./SettingsNavigator";
 import ReceiveFundsNavigator from "./ReceiveFundsNavigator";
 import SendFundsNavigator from "./SendFundsNavigator";
 import SignMessageNavigator from "./SignMessageNavigator";
@@ -57,6 +58,7 @@ import AccountHeaderTitle from "../../screens/Account/AccountHeaderTitle";
 import AccountHeaderRight from "../../screens/Account/AccountHeaderRight";
 import RequestAccountNavigator from "./RequestAccountNavigator";
 import VerifyAccount from "../../screens/VerifyAccount";
+import PlatformApp from "../../screens/Platform/App";
 
 export default function BaseNavigator() {
   const { t } = useTranslation();
@@ -73,6 +75,11 @@ export default function BaseNavigator() {
         options={{ headerShown: false }}
       />
       <Stack.Screen
+        name={NavigatorName.Settings}
+        component={SettingsNavigator}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
         name={NavigatorName.ReceiveFunds}
         component={ReceiveFundsNavigator}
         options={{ headerShown: false }}
@@ -81,6 +88,14 @@ export default function BaseNavigator() {
         name={NavigatorName.SendFunds}
         component={SendFundsNavigator}
         options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name={ScreenName.PlatformApp}
+        component={PlatformApp}
+        options={({ route }) => ({
+          headerStyle: styles.headerNoShadow,
+          title: route.params.name,
+        })}
       />
       <Stack.Screen
         name={NavigatorName.SignMessage}
