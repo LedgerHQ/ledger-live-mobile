@@ -1837,10 +1837,10 @@
         "cta": "إغلاق"
       },
       "pendingOperation": {
-        "description": "لقد تم إرسال عملية المبادلة الخاصة بك إلى الشبكة لتأكيدها. قد يستغرق ذلك مدة تصل إلى ساعة قبل استلام الأصول المشفرة الخاصة بك التي تمت مبادلتها.",
+        "description": "Your Swap operation has been sent to the network for confirmation. It may take up to an hour before you receive your {{targetCurrency}}.",
         "label": "معرّف التبادل الخاص بك:",
-        "title": "عملية معلقة",
-        "disclaimer": "يرجى حفظ معرّف التبادل الخاص بك في حال كنت بحاجة إلى مساعدة من {{provider}} لاحقًا.",
+        "title": "Swap broadcast successfully ",
+        "disclaimer": "Take note of your Swap ID number in case you’d need assistance from {{provider}} support.",
         "cta": "رؤية التفاصيل"
       },
       "tradeMethod": {
