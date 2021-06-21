@@ -1,4 +1,4 @@
-/ @flow
+// @flow
 import React, { useCallback, useState } from "react";
 import { StyleSheet } from "react-native";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
