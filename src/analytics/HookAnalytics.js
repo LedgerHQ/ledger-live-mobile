@@ -1,7 +1,7 @@
 import { useEffect, useState, useCallback } from "react";
 import { start } from "./segment";
 
-const HookAnalytics = ({ store }: { store: * }, user: *) => {
+const HookAnalytics = ({ store, user }: { store: *, user: * }) => {
   const [analyticsStarted, setAnalyticsStarted] = useState(false);
 
   const sync = useCallback(() => {
