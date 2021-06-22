@@ -30,7 +30,7 @@ const PlatformCatalog = ({ route }: { route: { params: RouteParams } }) => {
   const { colors } = useTheme();
   const navigation = useNavigation();
   const appBranches = useMemo(() => {
-    const branches = ["stable"];
+    const branches = ["stable", "soon", "experimental"];
 
     // TODO: add experimental setting
 
@@ -41,7 +41,7 @@ const PlatformCatalog = ({ route }: { route: { params: RouteParams } }) => {
     return branches;
   }, []);
 
-  const { apps } = useCatalog(appBranches);
+  const { apps } = useCatalog("mobile", appBranches);
 
   const handlePressCard = useCallback(
     (manifest: AppManifest) => {

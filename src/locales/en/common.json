@@ -3575,9 +3575,14 @@
   "platform": {
     "catalog": {
       "title": "Browse",
+      "branch": {
+        "soon": "coming soon",
+        "experimental": "experimental",
+        "debug": "debug"
+      },
       "banner": {
-        "title": "Introducing Ledger Live catalog!",
-        "description": "You can now use other providers in Ledger Live, starting with ParaSwap and Wyre."
+        "title": "Explore our crypto services catalogue",
+        "description": "Unlock a new world of crypto possibilities. One secure access to all our smart services – DeFi apps, NFTs and more to come."
       },
       "pollCTA": {
         "title": "Poll",
