@@ -1,7 +1,7 @@
 // @flow
 import React from "react";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
-import { toggleMockIncident } from "@ledgerhq/live-common/lib/notifications/ServiceStatusProvider/api/api.mock";
+import { toggleMockIncident } from "@ledgerhq/live-common/lib/__tests__/test-helpers/serviceStatus";
 import { useServiceStatus } from "@ledgerhq/live-common/lib/notifications/ServiceStatusProvider";
 import Switch from "../../../components/Switch";
 import SettingsRow from "../../../components/SettingsRow";
