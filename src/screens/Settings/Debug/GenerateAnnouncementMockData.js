@@ -1,8 +1,8 @@
 // @flow
 import React from "react";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
-import { addMockAnnouncement } from "@ledgerhq/live-common/lib/__tests__/test-helpers/announcements";
 import { useAnnouncements } from "@ledgerhq/live-common/lib/notifications/AnnouncementProvider";
+import { addMockAnnouncement } from "./__mocks__/announcements";
 
 import SettingsRow from "../../../components/SettingsRow";
 
