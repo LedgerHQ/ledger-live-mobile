@@ -116,7 +116,6 @@ const Form = ({
   }, [navigate, route.params]);
 
   const onParaswapCta = useCallback(() => {
-    // TODO Test this
     navigate(ScreenName.PlatformApp, {
       platform: "paraswap",
       name: "ParaSwap",
@@ -134,7 +133,9 @@ const Form = ({
     <View style={styles.root}>
       <TrackScreen category="Swap" name="Form" />
       <Alert
+        id="transfer.swap.form.paraswapCta"
         type="hint"
+        closeable={true}
         learnMoreKey="common.checkItOut"
         onLearnMore={onParaswapCta}
       >
