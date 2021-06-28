@@ -6,7 +6,6 @@ import { Trans, useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { useNavigation, useRoute, useTheme } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/dist/Ionicons";
-import Alert from "../../../../components/Alert";
 
 import type {
   CryptoCurrency,
@@ -33,6 +32,7 @@ import {
 } from "@ledgerhq/live-common/lib/account";
 
 import { ScreenName } from "../../../../const";
+import Alert from "../../../../components/Alert";
 import CurrencyUnitValue from "../../../../components/CurrencyUnitValue";
 import SectionSeparator, {
   ArrowDownCircle,
@@ -135,7 +135,7 @@ const Form = ({
       <Alert
         id="transfer.swap.form.paraswapCta"
         type="hint"
-        closeable={true}
+        closeable
         learnMoreKey="common.checkItOut"
         onLearnMore={onParaswapCta}
       >

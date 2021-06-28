@@ -1,5 +1,5 @@
 // @flow
-import React, { useCallback } from "react";
+import React, { useCallback, useMemo } from "react";
 import { Trans } from "react-i18next";
 import {
   TouchableOpacity,
@@ -246,8 +246,13 @@ export default function Alert({
     }
   }, [id, dispatch]);
 
+  const isDismissed = useMemo(() => dismissedBanners.includes(id), [
+    dismissedBanners,
+    id,
+  ]);
+
   return (
-    !dismissedBanners.includes(id) && (
+    !isDismissed && (
       <View
         style={[
           styles.root,
