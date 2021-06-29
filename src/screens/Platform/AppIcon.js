@@ -47,7 +47,7 @@ function AppIcon({ size = 48, name, icon, isDisabled }: Props) {
                 styles.disabledTopLayer,
                 { width: size, height: size },
               ]}
-              fadeDuration={10000}
+              fadeDuration={200}
               onLoad={handleImageLoad}
             />
             <Image
@@ -57,7 +57,7 @@ function AppIcon({ size = 48, name, icon, isDisabled }: Props) {
                 styles.disabledBottomLayer,
                 { width: size, height: size, tintColor: colors.fog },
               ]}
-              fadeDuration={10000}
+              fadeDuration={200}
               onLoad={handleImageLoad}
             />
           </>
@@ -65,7 +65,7 @@ function AppIcon({ size = 48, name, icon, isDisabled }: Props) {
           <Image
             source={{ uri: icon }}
             style={[styles.image, { width: size, height: size }]}
-            fadeDuration={10000}
+            fadeDuration={200}
             onLoad={handleImageLoad}
           />
         ))}
