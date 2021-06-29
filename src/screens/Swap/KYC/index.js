@@ -9,6 +9,7 @@ import {
   TextInput,
 } from "react-native";
 
+import TextInputMask from "react-native-text-input-mask";
 import { useSelector, useDispatch } from "react-redux";
 import { useTranslation, Trans } from "react-i18next";
 import { useNavigation, useTheme } from "@react-navigation/native";
@@ -42,11 +43,12 @@ const KYC = () => {
   // TODO Might need a better setup if this form gets more complicated
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [dateOfBirth, setDateOfBirth] = useState(new Date());
   const [street1, setStreet1] = useState("");
   const [street2, setStreet2] = useState("");
   const [city, setCity] = useState("");
   const [state, setState] = useState({});
-  const [country] = useState(countryOptions[0]); // TODO
+  const [country, setCountry] = useState(countryOptions[0]);
   const [postalCode, setPostalCode] = useState("");
 
   const kycData: KYCData = useMemo(
@@ -60,9 +62,20 @@ const KYC = () => {
         state: state?.value,
         country: country?.value,
         postalCode,
+        dateOfBirth,
       },
     }),
-    [city, country, firstName, lastName, postalCode, state, street1, street2],
+    [
+      city,
+      country?.value,
+      dateOfBirth,
+      firstName,
+      lastName,
+      postalCode,
+      state,
+      street1,
+      street2,
+    ],
   );
 
   const onSelectState = useCallback(() => {
@@ -93,6 +106,7 @@ const KYC = () => {
     lastName &&
     street1 &&
     state?.value &&
+    dateOfBirth &&
     country &&
     postalCode;
 
@@ -141,6 +155,14 @@ const KYC = () => {
                     "transfer.swap.kyc.wyre.form.lastNamePlaceholder",
                   )}
                   maxLength={30}
+                />
+                <LText style={styles.label} color={"smoke"}>
+                  <Trans i18nKey={"transfer.swap.kyc.wyre.form.dateOfBirth"} />
+                </LText>
+                <TextInputMask
+                  style={[styles.input, { color, borderColor }]}
+                  onChangeText={f => setDateOfBirth(f)}
+                  mask="1111/11/11"
                 />
                 <LText style={styles.label} color={"smoke"}>
                   <Trans i18nKey={"transfer.swap.kyc.wyre.form.address1"} />

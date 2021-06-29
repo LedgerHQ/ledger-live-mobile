@@ -10576,6 +10576,11 @@ react-native-tcp@^4.0.0:
     process "^0.11.9"
     util "^0.10.3"
 
+react-native-text-input-mask@^3.1.4:
+  version "3.1.4"
+  resolved "https://registry.yarnpkg.com/react-native-text-input-mask/-/react-native-text-input-mask-3.1.4.tgz#9b09d97a910ce8c24024d6187256b07c73e173ac"
+  integrity sha512-XhTPL1/Pv0kyuH8TMJGaxfnq5su9e+4G2PLngiismZ4xbP8+W/1ZEH4KQJQV+QkE2I5Oi+lPJXB2E47s60/OBA==
+
 react-native-udp@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/react-native-udp/-/react-native-udp-3.1.0.tgz#d2cc0aa6dbc431868e74bc7c60130c93c8568002"

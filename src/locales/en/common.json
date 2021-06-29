@@ -1867,6 +1867,7 @@
           "form": {
             "firstName": "First Name",
             "lastName": "Last Name",
+            "dateOfBirth": "Date of birth",
             "address1": "Street Address Line 1",
             "address2": "Street Address Line 2",
             "city": "City",
@@ -1876,6 +1877,7 @@
             "firstNamePlaceholder": "Enter your first name",
             "lastNamePlaceholder": "Enter your last name",
             "address1Placeholder": "Eg. 13, Maple street", 
+            "dateOfBirthPlaceholder": "Enter your date of birth", 
             "address2Placeholder": "Eg. 13, Maple street", 
             "cityPlaceholder": "Eg. San José", 
             "zipcodePlaceholder": "Enter your 5 digit Zip code",
