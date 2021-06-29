@@ -9,7 +9,6 @@ import TrackScreen from "../analytics/TrackScreen";
 import StyledStatusBar from "./StyledStatusBar";
 import ButtonUseTouchable from "../context/ButtonUseTouchable";
 import getWindowDimensions from "../logic/getWindowDimensions";
-import DebugRejectSwitch from "./DebugRejectSwitch";
 
 let isModalOpenedref = false;
 
@@ -101,7 +100,6 @@ const BottomModal = ({
             {children}
           </View>
         </View>
-        <DebugRejectSwitch />
       </ReactNativeModal>
     </ButtonUseTouchable.Provider>
   );
