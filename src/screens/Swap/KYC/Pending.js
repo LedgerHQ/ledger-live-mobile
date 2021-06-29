@@ -1,12 +1,14 @@
 // @flow
-import React, { useCallback } from "react";
+import React, { useEffect, useCallback } from "react";
 import { StyleSheet, View } from "react-native";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useTheme } from "@react-navigation/native";
 import SafeAreaView from "react-native-safe-area-view";
 import { Trans } from "react-i18next";
-
+import { getKYCStatus } from "@ledgerhq/live-common/lib/exchange/swap";
+import { swapKYCSelector } from "../../../reducers/settings";
 import { setSwapKYCStatus } from "../../../actions/settings";
+
 import LText from "../../../components/LText";
 import Button from "../../../components/Button";
 import IconCheck from "../../../icons/Check";
@@ -22,9 +24,40 @@ const Pending = ({
   onContinue: () => void,
   status?: string,
 }) => {
+  // FIXME if we ever have dynamic KYC fields, or more than one provider with KYC, backend to provide the fields
+  const swapKYC = useSelector(swapKYCSelector);
+  const dispatch = useDispatch();
+  const providerKYC = swapKYC.wyre;
+
+  const onUpdateKYCStatus = useCallback(() => {
+    let cancelled = false;
+    async function updateKYCStatus() {
+      if (!providerKYC?.id) return;
+      const res = await getKYCStatus("wyre", providerKYC.id);
+      if (cancelled || res?.status === providerKYC?.status) return;
+      dispatch(
+        setSwapKYCStatus({
+          provider: "wyre",
+          id: res?.id,
+          status: res?.status,
+        }),
+      );
+    }
+    updateKYCStatus();
+    return () => {
+      cancelled = true;
+    };
+  }, [dispatch, providerKYC]);
+
+  useEffect(() => {
+    // Fixme Again, relying on provider specific status wording.
+    if (providerKYC && providerKYC.status !== "approved") {
+      onUpdateKYCStatus();
+    }
+  }, [onUpdateKYCStatus, providerKYC]);
+
   const { colors } = useTheme();
   const rejected = status === "closed";
-  const dispatch = useDispatch();
 
   const onResetKYC = useCallback(() => {
     dispatch(setSwapKYCStatus({ provider: "wyre" }));
@@ -61,14 +94,16 @@ const Pending = ({
           <Trans i18nKey={`transfer.swap.kyc.wyre.${status}.subtitle`} />
         </LText>
       </View>
-      <View style={styles.continueWrapper}>
-        <Button
-          event="SwapDone"
-          type="primary"
-          title={<Trans i18nKey={`transfer.swap.kyc.wyre.${status}.cta`} />}
-          onPress={rejected ? onResetKYC : onContinue}
-        />
-      </View>
+      {["rejected", "approved"].includes(status) ? (
+        <View style={styles.continueWrapper}>
+          <Button
+            event="SwapDone"
+            type="primary"
+            title={<Trans i18nKey={`transfer.swap.kyc.wyre.${status}.cta`} />}
+            onPress={rejected ? onResetKYC : onContinue}
+          />
+        </View>
+      ) : null}
     </SafeAreaView>
   );
 };

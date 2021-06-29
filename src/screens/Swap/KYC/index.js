@@ -30,7 +30,7 @@ const KYC = () => {
   const { t } = useTranslation();
   const [errors, setErrors] = useState({});
   const [isLoading, setLoading] = useState(false);
-  const { navigate, goBack } = useNavigation();
+  const { navigate } = useNavigation();
   const swapKYC = useSelector(swapKYCSelector);
   const dispatch = useDispatch();
   const { colors } = useTheme();
@@ -43,7 +43,7 @@ const KYC = () => {
   // TODO Might need a better setup if this form gets more complicated
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [dateOfBirth, setDateOfBirth] = useState(new Date());
+  const [dateOfBirth, setDateOfBirth] = useState("");
   const [street1, setStreet1] = useState("");
   const [street2, setStreet2] = useState("");
   const [city, setCity] = useState("");
@@ -100,6 +100,11 @@ const KYC = () => {
   }, [dispatch, kycData]);
 
   const hasErrors = Object.keys(errors).length;
+  const isValidDate = useMemo(
+    () => !dateOfBirth || /[0-9]{4}-[0-9]{2}-[0-9]{2}/.test(dateOfBirth),
+    [dateOfBirth],
+  );
+
   const canSubmit =
     !hasErrors &&
     firstName &&
@@ -107,17 +112,22 @@ const KYC = () => {
     street1 &&
     state?.value &&
     dateOfBirth &&
+    isValidDate &&
     country &&
     postalCode;
 
   const color = colors.text;
   const borderColor = colors.fog;
+  const dateBorderColor = isValidDate ? colors.fog : colors.alert;
 
   return (
     <SafeAreaView style={[styles.root, { backgroundColor: colors.background }]}>
       <View style={{ flex: 1 }}>
         {swapKYC.wyre ? (
-          <Pending status={swapKYC.wyre.status} onContinue={goBack} />
+          <Pending
+            status={swapKYC.wyre.status}
+            onContinue={() => navigate(ScreenName.Swap)}
+          />
         ) : (
           <>
             <ScrollView style={styles.scroll}>
@@ -160,9 +170,15 @@ const KYC = () => {
                   <Trans i18nKey={"transfer.swap.kyc.wyre.form.dateOfBirth"} />
                 </LText>
                 <TextInputMask
-                  style={[styles.input, { color, borderColor }]}
+                  placeholder={t(
+                    "transfer.swap.kyc.wyre.form.dateOfBirthPlaceholder",
+                  )}
+                  style={[
+                    styles.input,
+                    { color, borderColor: dateBorderColor },
+                  ]}
                   onChangeText={f => setDateOfBirth(f)}
-                  mask="1111/11/11"
+                  mask={"[0000]-[00]-[00]"}
                 />
                 <LText style={styles.label} color={"smoke"}>
                   <Trans i18nKey={"transfer.swap.kyc.wyre.form.address1"} />

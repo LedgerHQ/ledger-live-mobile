@@ -1877,7 +1877,7 @@
             "firstNamePlaceholder": "Enter your first name",
             "lastNamePlaceholder": "Enter your last name",
             "address1Placeholder": "Eg. 13, Maple street", 
-            "dateOfBirthPlaceholder": "Enter your date of birth", 
+            "dateOfBirthPlaceholder": "Enter your date of birth YYYY-MM-DD", 
             "address2Placeholder": "Eg. 13, Maple street", 
             "cityPlaceholder": "Eg. San José", 
             "zipcodePlaceholder": "Enter your 5 digit Zip code",
