@@ -3598,13 +3598,13 @@
   "notificationCenter": {
     "title": "Centro de notificaciones",
     "announcement": "Anuncio",
-    "liveStatus": "Ledger Live status",
+    "liveStatus": "Estado de Ledger Live",
     "news": {
       "title": "Noticias",
       "titleCount": "Noticias ({{count}})",
       "emptyState": {
         "title": "No hay noticias por el momento",
-        "desc": "You will find here all the news related to Ledger and Ledger Live"
+        "desc": "Aquí encontrarás las noticias relacionadas con Ledger y Ledger Live"
       }
     },
     "status": {
