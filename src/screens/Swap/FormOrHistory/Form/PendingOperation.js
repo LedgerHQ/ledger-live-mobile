@@ -21,8 +21,8 @@ const PendingOperation = () => {
   const route = useRoute();
 
   const onComplete = useCallback(() => {
-    navigation.navigate(ScreenName.SwapProviders, {
-      screen: ScreenName.SwapProviders,
+    navigation.navigate(ScreenName.Swap, {
+      screen: ScreenName.Swap,
     });
   }, [navigation]);
 

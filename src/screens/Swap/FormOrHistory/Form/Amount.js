@@ -141,6 +141,7 @@ const SwapFormAmount = ({ navigation, route }: Props) => {
         const rates = await getExchangeRates(
           exchange,
           transaction,
+          // $FlowFixMe Need to fix types on live-common
           providerKYC?.id,
         );
         if (ignore) return;
