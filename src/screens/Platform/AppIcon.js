@@ -49,7 +49,6 @@ function AppIcon({ size = 48, name, icon, isDisabled }: Props) {
               ]}
               fadeDuration={10000}
               onLoad={handleImageLoad}
-              blurRadius={2}
             />
             <Image
               source={{ uri: icon }}

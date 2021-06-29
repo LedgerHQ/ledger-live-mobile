@@ -14,7 +14,7 @@ type Props = {
   title: React$Node,
   onPress: Function,
   Icon: React$ComponentType<{ size: number }>,
-  style: ReactNative$StyleProp,
+  style?: ReactNative$StyleProp,
 };
 
 const CatalogCTA = ({

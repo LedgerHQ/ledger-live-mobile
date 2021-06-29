@@ -12,7 +12,6 @@ import TrackScreen from "../../analytics/TrackScreen";
 import { urls } from "../../config/urls";
 import { ScreenName } from "../../const";
 import IconCode from "../../icons/Code";
-import IconPoll from "../../icons/Poll";
 
 import CatalogBanner from "./CatalogBanner";
 import CatalogCTA from "./CatalogCTA";
@@ -53,10 +52,6 @@ const PlatformCatalog = ({ route }: { route: { params: RouteParams } }) => {
     [navigation, routeParams],
   );
 
-  const handlePollCTAPress = useCallback(() => {
-    Linking.openURL(urls.platform.poll);
-  }, []);
-
   const handleDeveloperCTAPress = useCallback(() => {
     Linking.openURL(urls.platform.developerPage);
   }, []);
@@ -76,14 +71,6 @@ const PlatformCatalog = ({ route }: { route: { params: RouteParams } }) => {
             onPress={handlePressCard}
           />
         ))}
-        <CatalogCTA
-          type="dashed"
-          Icon={IconPoll}
-          title={<Trans i18nKey={"platform.catalog.pollCTA.title"} />}
-          onPress={handlePollCTAPress}
-        >
-          <Trans i18nKey={"platform.catalog.pollCTA.description"} />
-        </CatalogCTA>
         <View style={[styles.separator, { backgroundColor: colors.fog }]} />
         <CatalogCTA
           Icon={IconCode}
