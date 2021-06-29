@@ -19,25 +19,29 @@ function getBranchStyle(branch, colors) {
   switch (branch) {
     case "soon":
       return {
-        color: colors.live,
-        borderColor: colors.lightLiveBg,
-        backgroundColor: colors.lightLiveBg,
+        color: colors.grey,
+        badgeColor: colors.grey,
+        borderColor: colors.lightFog,
+        backgroundColor: colors.lightFog,
       };
     case "experimental":
       return {
-        color: colors.orange,
+        color: colors.darkBlue,
+        badgeColor: colors.orange,
         borderColor: colors.orange,
         backgroundColor: "transparent",
       };
     case "debug":
       return {
-        color: colors.grey,
+        color: colors.darkBlue,
+        badgeColor: colors.grey,
         borderColor: colors.grey,
         backgroundColor: "transparent",
       };
     default:
       return {
-        color: colors.live,
+        color: colors.darkBlue,
+        badgeColor: colors.live,
         borderColor: colors.live,
         backgroundColor: "transparent",
       };
@@ -61,14 +65,16 @@ const AppCard = ({
     [onPress, manifest, isDisabled],
   );
 
-  const Wrapper = isDisabled ? View : TouchableOpacity;
+  const { color, badgeColor, borderColor, backgroundColor } = getBranchStyle(
+    manifest.branch,
+    colors,
+  );
 
   return (
-    <Wrapper onPress={handlePress}>
+    <TouchableOpacity disabled={isDisabled} onPress={handlePress}>
       <View
         style={[
           styles.wrapper,
-          isDisabled && styles.disabled,
           {
             backgroundColor: colors.card,
             ...Platform.select({
@@ -80,15 +86,23 @@ const AppCard = ({
           },
         ]}
       >
-        <AppIcon size={48} name={manifest.name} icon={manifest.icon} />
+        <AppIcon
+          isDisabled={isDisabled}
+          size={48}
+          name={manifest.name}
+          icon={manifest.icon}
+        />
         <View style={styles.content}>
           <View style={styles.header}>
-            <LText style={styles.title} numberOfLines={1} semiBold>
+            <LText style={[styles.title, { color }]} numberOfLines={1} semiBold>
               {manifest.name}
             </LText>
             {manifest.branch !== "stable" && (
               <LText
-                style={[styles.branch, getBranchStyle(manifest.branch, colors)]}
+                style={[
+                  styles.branch,
+                  { color: badgeColor, borderColor, backgroundColor },
+                ]}
                 semiBold
               >
                 {t(`platform.catalog.branch.${manifest.branch}`, {
@@ -106,7 +120,7 @@ const AppCard = ({
         </View>
         {!isDisabled && <IconChevron size={18} color={colors.smoke} />}
       </View>
-    </Wrapper>
+    </TouchableOpacity>
   );
 };
 
@@ -131,24 +145,24 @@ const styles = StyleSheet.create({
       },
     }),
   },
-  disabled: {
-    opacity: 0.8,
-  },
   content: {
     marginHorizontal: 16,
     flexGrow: 1,
     flexShrink: 1,
-    fontSize: 14,
   },
   header: {
     flexDirection: "row",
     alignItems: "center",
+    justifyContent: "flex-start",
   },
   title: {
     fontSize: 16,
     flexGrow: 0,
     flexShrink: 1,
     overflow: "hidden",
+  },
+  description: {
+    fontSize: 14,
   },
   branch: {
     fontSize: 9,

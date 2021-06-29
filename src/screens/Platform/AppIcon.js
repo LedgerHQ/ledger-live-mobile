@@ -8,13 +8,17 @@ import LText from "../../components/LText";
 type Props = {
   name?: string,
   icon?: string,
-  size: number,
+  size?: number,
+  isDisabled?: boolean,
 };
 
-function AppIcon({ size = 48, name, icon }: Props) {
+function AppIcon({ size = 48, name, icon, isDisabled }: Props) {
   const { colors } = useTheme();
   const [imageLoaded, setImageLoaded] = useState(false);
   const handleImageLoad = useCallback(() => setImageLoaded(true), []);
+
+  const firstLetter =
+    typeof name === "string" && name[0] ? name[0].toUpperCase() : "";
 
   return (
     <View
@@ -28,19 +32,44 @@ function AppIcon({ size = 48, name, icon }: Props) {
         },
       ]}
     >
-      {!imageLoaded && (
-        <LText style={{ fontSize: size / 2 }} semiBold>
-          {name[0].toUpperCase()}
+      {!imageLoaded && firstLetter ? (
+        <LText semiBold style={{ fontSize: size / 2 }}>
+          {firstLetter}
         </LText>
-      )}
-      {icon && (
-        <Image
-          source={{ uri: icon }}
-          style={[styles.image, { width: size, height: size }]}
-          fadeDuration={10000}
-          onLoad={handleImageLoad}
-        />
-      )}
+      ) : null}
+      {icon &&
+        (isDisabled ? (
+          <>
+            <Image
+              source={{ uri: icon }}
+              style={[
+                styles.image,
+                styles.disabledTopLayer,
+                { width: size, height: size },
+              ]}
+              fadeDuration={10000}
+              onLoad={handleImageLoad}
+              blurRadius={2}
+            />
+            <Image
+              source={{ uri: icon }}
+              style={[
+                styles.image,
+                styles.disabledBottomLayer,
+                { width: size, height: size, tintColor: colors.fog },
+              ]}
+              fadeDuration={10000}
+              onLoad={handleImageLoad}
+            />
+          </>
+        ) : (
+          <Image
+            source={{ uri: icon }}
+            style={[styles.image, { width: size, height: size }]}
+            fadeDuration={10000}
+            onLoad={handleImageLoad}
+          />
+        ))}
     </View>
   );
 }
@@ -61,6 +90,15 @@ const styles = StyleSheet.create({
     bottom: -1,
     borderRadius: 8,
     overflow: "hidden",
+  },
+  disabledTopLayer: {
+    position: "absolute",
+    opacity: 0.3,
+    zIndex: 1,
+  },
+  disabledBottomLayer: {
+    position: "absolute",
+    zIndex: 0,
   },
 });
 

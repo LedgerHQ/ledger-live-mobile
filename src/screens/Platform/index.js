@@ -3,7 +3,6 @@
 import React, { useMemo, useCallback } from "react";
 import { StyleSheet, ScrollView, View, Linking } from "react-native";
 import { Trans } from "react-i18next";
-import SafeAreaView from "react-native-safe-area-view";
 import { useNavigation, useTheme } from "@react-navigation/native";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
 import { useCatalog } from "@ledgerhq/live-common/lib/platform/CatalogProvider";
@@ -12,13 +11,13 @@ import type { AccountLike, Account } from "@ledgerhq/live-common/lib/types";
 import TrackScreen from "../../analytics/TrackScreen";
 import { urls } from "../../config/urls";
 import { ScreenName } from "../../const";
-import LText from "../../components/LText";
 import IconCode from "../../icons/Code";
 import IconPoll from "../../icons/Poll";
 
 import CatalogBanner from "./CatalogBanner";
 import CatalogCTA from "./CatalogCTA";
 import AppCard from "./AppCard";
+import AnimatedHeaderView from "../../components/AnimatedHeader";
 
 type RouteParams = {
   defaultAccount: ?AccountLike,
@@ -63,18 +62,11 @@ const PlatformCatalog = ({ route }: { route: { params: RouteParams } }) => {
   }, []);
 
   return (
-    <SafeAreaView
-      style={[
-        styles.root,
-        {
-          backgroundColor: colors.background,
-        },
-      ]}
+    <AnimatedHeaderView
+      titleStyle={styles.title}
+      title={<Trans i18nKey={"platform.catalog.title"} />}
     >
       <TrackScreen category="Platform" name="Catalog" />
-      <LText style={styles.title} semiBold secondary>
-        <Trans i18nKey={"platform.catalog.title"} />
-      </LText>
       <ScrollView style={styles.wrapper}>
         <CatalogBanner />
         {apps.map(manifest => (
@@ -101,7 +93,7 @@ const PlatformCatalog = ({ route }: { route: { params: RouteParams } }) => {
           <Trans i18nKey={"platform.catalog.developerCTA.description"} />
         </CatalogCTA>
       </ScrollView>
-    </SafeAreaView>
+    </AnimatedHeaderView>
   );
 };
 
@@ -111,14 +103,11 @@ const styles = StyleSheet.create({
   },
   wrapper: {
     flex: 1,
-    paddingHorizontal: 16,
   },
   title: {
     fontSize: 34,
     lineHeight: 40,
     textAlign: "left",
-    marginHorizontal: 16,
-    marginVertical: 24,
   },
   separator: {
     width: "100%",
