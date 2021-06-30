@@ -1,49 +1,37 @@
 // @flow
-import React, { useRef, useState, useCallback } from "react";
+import React, { useRef, useCallback } from "react";
 import { useSelector } from "react-redux";
-import {
-  StyleSheet,
-  SectionList,
-  FlatList,
-  SafeAreaView,
-  View,
-} from "react-native";
+import { StyleSheet, FlatList, SafeAreaView, View } from "react-native";
 import Animated, { interpolate } from "react-native-reanimated";
 import { createNativeWrapper } from "react-native-gesture-handler";
-import type { SectionBase } from "react-native/Libraries/Lists/SectionList";
-import type { Operation } from "@ledgerhq/live-common/lib/types";
+import { useTranslation } from "react-i18next";
 import { useFocusEffect, useTheme } from "@react-navigation/native";
-import {
-  groupAccountsOperationsByDay,
-  isAccountEmpty,
-} from "@ledgerhq/live-common/lib/account";
+import { isAccountEmpty } from "@ledgerhq/live-common/lib/account";
 
-import { useRefreshAccountsOrdering } from "../../actions/general";
 import {
-  accountsSelector,
-  flattenAccountsSelector,
-} from "../../reducers/accounts";
+  useRefreshAccountsOrdering,
+  useDistribution,
+} from "../../actions/general";
+import { accountsSelector } from "../../reducers/accounts";
 import { counterValueCurrencySelector } from "../../reducers/settings";
 import { usePortfolio } from "../../actions/portfolio";
-import SectionHeader from "../../components/SectionHeader";
-import NoMoreOperationFooter from "../../components/NoMoreOperationFooter";
-import LoadingFooter from "../../components/LoadingFooter";
-import OperationRow from "../../components/OperationRow";
 import globalSyncRefreshControl from "../../components/globalSyncRefreshControl";
 
 import GraphCardContainer from "./GraphCardContainer";
+import { DistributionList } from "../Distribution";
 import Carousel from "../../components/Carousel";
+import Button from "../../components/Button";
 import StickyHeader from "./StickyHeader";
-import EmptyStatePortfolio from "./EmptyStatePortfolio";
 import extraStatusBarPadding from "../../logic/extraStatusBarPadding";
 import TrackScreen from "../../analytics/TrackScreen";
-import NoOpStatePortfolio from "./NoOpStatePortfolio";
-import NoOperationFooter from "../../components/NoOperationFooter";
 import MigrateAccountsBanner from "../MigrateAccounts/Banner";
 import RequireTerms from "../../components/RequireTerms";
 import { useScrollToTop } from "../../navigation/utils";
+import { ScreenName } from "../../const";
+import { PortfolioHistoryList } from "./PortfolioHistory";
 
 import FabActions from "../../components/FabActions";
+import LText from "../../components/LText";
 
 export { default as PortfolioTabIcon } from "./TabIcon";
 
@@ -60,22 +48,17 @@ type Props = {
 
 export default function PortfolioScreen({ navigation }: Props) {
   const accounts = useSelector(accountsSelector);
-  const allAccounts = useSelector(flattenAccountsSelector);
   const counterValueCurrency = useSelector(counterValueCurrencySelector);
   const portfolio = usePortfolio();
+  const { t } = useTranslation();
 
   const refreshAccountsOrdering = useRefreshAccountsOrdering();
   useFocusEffect(refreshAccountsOrdering);
 
-  const [opCount, setOpCount] = useState(50);
   const scrollY = useRef(new Animated.Value(0)).current;
   const ref = useRef();
   useScrollToTop(ref);
   const { colors } = useTheme();
-
-  function keyExtractor(item: Operation) {
-    return item.id;
-  }
 
   const ListHeaderComponent = useCallback(
     () => (
@@ -89,18 +72,6 @@ export default function PortfolioScreen({ navigation }: Props) {
     ),
     [accounts, counterValueCurrency, portfolio],
   );
-
-  function ListEmptyComponent() {
-    if (accounts.length === 0) {
-      return <EmptyStatePortfolio navigation={navigation} />;
-    }
-
-    if (accounts.every(isAccountEmpty)) {
-      return <NoOpStatePortfolio />;
-    }
-
-    return null;
-  }
 
   function StickyActions() {
     const offset = 410;
@@ -124,49 +95,30 @@ export default function PortfolioScreen({ navigation }: Props) {
     );
   }
 
-  function renderItem({
-    item,
-    index,
-    section,
-  }: {
-    item: Operation,
-    index: number,
-    section: SectionBase<*>,
-  }) {
-    const account = allAccounts.find(a => a.id === item.accountId);
-    const parentAccount =
-      account && account.type !== "Account"
-        ? accounts.find(a => a.id === account.parentId)
-        : null;
-
-    if (!account) return null;
-
-    return (
-      <OperationRow
-        operation={item}
-        parentAccount={parentAccount}
-        account={account}
-        multipleAccounts
-        isLast={section.data.length - 1 === index}
-      />
-    );
-  }
-
-  function renderSectionHeader({ section }: { section: { day: Date } }) {
-    return <SectionHeader section={section} />;
-  }
-
-  function onEndReached() {
-    setOpCount(opCount + 50);
-  }
-
-  const { sections, completed } = groupAccountsOperationsByDay(accounts, {
-    count: opCount,
-    withSubAccounts: true,
-  });
-
   const showingPlaceholder =
     accounts.length === 0 || accounts.every(isAccountEmpty);
+
+  const showDistribution =
+    portfolio.balanceHistory[portfolio.balanceHistory.length - 1].value > 0;
+
+  const flatListRef = useRef();
+  let distribution = useDistribution();
+  const maxDistributionToDisplay = 3;
+  distribution = {
+    ...distribution,
+    list: distribution.list.slice(0, maxDistributionToDisplay),
+  };
+  const onDistributionButtonPress = useCallback(() => {
+    navigation.navigate(ScreenName.Distribution);
+  }, [navigation]);
+
+  const onDistributionCardPress = useCallback(
+    (i, item) =>
+      navigation.navigate(ScreenName.Asset, {
+        currency: item.currency,
+      }),
+    [navigation],
+  );
 
   return (
     <SafeAreaView
@@ -198,28 +150,29 @@ export default function PortfolioScreen({ navigation }: Props) {
             : []),
           ListHeaderComponent(),
           StickyActions(),
-          <SectionList
-            // $FlowFixMe
-            sections={sections}
-            style={styles.list}
-            contentContainerStyle={styles.contentContainer}
-            keyExtractor={keyExtractor}
-            renderItem={renderItem}
-            // $FlowFixMe
-            renderSectionHeader={renderSectionHeader}
-            onEndReached={onEndReached}
-            stickySectionHeadersEnabled={false}
-            ListFooterComponent={
-              !completed ? (
-                <LoadingFooter />
-              ) : accounts.every(isAccountEmpty) ? null : sections.length ? (
-                <NoMoreOperationFooter />
-              ) : (
-                <NoOperationFooter />
-              )
-            }
-            ListEmptyComponent={ListEmptyComponent}
-          />,
+          ...(showDistribution
+            ? [
+                <View style={styles.distrib}>
+                  <LText bold secondary style={styles.distributionTitle}>
+                    {t("distribution.header")}
+                  </LText>
+                  <DistributionList
+                    flatListRef={flatListRef}
+                    distribution={distribution}
+                    setHighlight={onDistributionCardPress}
+                  />
+                  <View style={styles.seeMoreBtn}>
+                    <Button
+                      event="View Distribution"
+                      type="lightPrimary"
+                      title={t("common.seeAll")}
+                      onPress={onDistributionButtonPress}
+                    />
+                  </View>
+                </View>,
+              ]
+            : []),
+          <PortfolioHistoryList navigation={navigation} />,
         ]}
         style={styles.inner}
         renderItem={({ item }) => item}
@@ -253,14 +206,15 @@ const styles = StyleSheet.create({
     position: "relative",
     flex: 1,
   },
-  list: {
-    flex: 1,
+  distrib: {
     marginTop: -56,
   },
-  contentContainer: {
-    flexGrow: 1,
-    paddingTop: 16,
-    paddingBottom: 64,
+  distributionTitle: {
+    fontSize: 16,
+    lineHeight: 24,
+    paddingHorizontal: 16,
+    marginTop: 8,
+    marginBottom: 8,
   },
   stickyActions: {
     height: 110,
@@ -269,4 +223,9 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
   },
   styckyActionsInner: { height: 56 },
+  seeMoreBtn: {
+    marginHorizontal: 16,
+    marginTop: 16,
+    marginBottom: 32,
+  },
 });

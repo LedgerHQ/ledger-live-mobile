@@ -94,6 +94,7 @@ export const ScreenName = {
   PasswordAdd: "PasswordAdd",
   PasswordRemove: "PasswordRemove",
   Portfolio: "Portfolio",
+  PortfolioOperationHistory: "PortfolioOperationHistory",
   RateProviderSettings: "RateProviderSettings",
   ReceiveConfirmation: "ReceiveConfirmation",
   ReceiveConnectDevice: "ReceiveConnectDevice",
