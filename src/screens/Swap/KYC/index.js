@@ -248,7 +248,7 @@ const KYC = () => {
                   placeholder={t(
                     "transfer.swap.kyc.wyre.form.zipcodePlaceholder",
                   )}
-                  maxLength={30}
+                  maxLength={10}
                 />
               </View>
             </ScrollView>
