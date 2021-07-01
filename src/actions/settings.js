@@ -182,6 +182,11 @@ export const setSwapKYCStatus = (payload: {
   payload,
 });
 
+export const swapAcceptProvider = (providerId: string) => ({
+  type: "ACCEPT_SWAP_PROVIDER",
+  payload: providerId,
+});
+
 type PortfolioRangeOption = {
   key: PortfolioRange,
   value: string,
