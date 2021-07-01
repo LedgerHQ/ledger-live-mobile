@@ -457,7 +457,7 @@
     },
     "UserRefusedAllowManager": {
       "title": "Manager deshabilitado en el dispositivo",
-      "description": "Please allow the Manager on your device, then try again."
+      "description": "Habilita Manager en tu dispositivo e inténtalo de nuevo."
     },
     "UserRefusedAddress": {
       "title": "Dirección de recepción rechazada.",
