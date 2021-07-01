@@ -15,7 +15,7 @@ export default function DebugSwap() {
   const dispatch = useDispatch();
   const swapKYC = useSelector(swapKYCSelector);
   const [configWrapper, setConfigWrapper] = useState(
-    Config.SWAP_DISABLED_PROVIDERS,
+    Config.SWAP_DISABLED_PROVIDERS || "",
   );
 
   const onFlushWyreKYC = useCallback(() => {
