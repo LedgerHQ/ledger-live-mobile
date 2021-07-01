@@ -7,7 +7,7 @@ import LText from "../../components/LText";
 
 type Props = {
   name?: string,
-  icon?: string,
+  icon?: string | null,
   size?: number,
   isDisabled?: boolean,
 };

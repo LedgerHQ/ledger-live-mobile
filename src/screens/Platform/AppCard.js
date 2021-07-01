@@ -53,7 +53,7 @@ const AppCard = ({
   onPress,
 }: {
   manifest: AppManifest,
-  onPress: string => void,
+  onPress: (manifest: AppManifest) => void,
 }) => {
   const { colors } = useTheme();
   const { locale } = useLocale();

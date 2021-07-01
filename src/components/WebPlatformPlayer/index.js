@@ -374,7 +374,9 @@ const WebPlatformPlayer = ({ manifest }: Props) => {
     (request: JSONRPCRequest) => {
       targetRef?.current?.postMessage(
         JSON.stringify(request),
-        manifest.url.origin,
+        typeof manifest.url === "string"
+          ? manifest.url
+          : manifest.url?.origin ?? "",
       );
     },
     [manifest],

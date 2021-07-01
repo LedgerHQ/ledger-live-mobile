@@ -23,7 +23,7 @@ import Warning from "../../icons/WarningOutline";
 type Props = {
   showDistribution?: boolean,
   nbAccounts: number,
-  showGreeting: boolean,
+  showGreeting?: boolean,
 };
 
 export default function PortfolioHeader({

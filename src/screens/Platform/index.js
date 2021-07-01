@@ -7,6 +7,7 @@ import { useNavigation, useTheme } from "@react-navigation/native";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
 import { useCatalog } from "@ledgerhq/live-common/lib/platform/CatalogProvider";
 import type { AccountLike, Account } from "@ledgerhq/live-common/lib/types";
+import type { AppManifest } from "@ledgerhq/live-common/lib/platform/types";
 
 import TrackScreen from "../../analytics/TrackScreen";
 import { urls } from "../../config/urls";
@@ -44,9 +45,9 @@ const PlatformCatalog = ({ route }: { route: { params: RouteParams } }) => {
   const handlePressCard = useCallback(
     (manifest: AppManifest) => {
       navigation.navigate(ScreenName.PlatformApp, {
+        ...routeParams,
         platform: manifest.id,
         name: manifest.name,
-        ...routeParams,
       });
     },
     [navigation, routeParams],
