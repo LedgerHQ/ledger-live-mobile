@@ -56,8 +56,6 @@ export const ScreenName = {
   EthereumCustomFees: "EthereumCustomFees",
   EthereumEditGasLimit: "EthereumEditGasLimit",
   Exchange: "Exchange",
-  ExchangeProviders: "ExchangeProviders",
-  ExchangeDapp: "ExchangeDapp",
   ExchangeBuy: "ExchangeBuy",
   ExchangeCoinifyWidget: "ExchangeCoinifyWidget",
   ExchangeConnectDevice: "ExchangeConnectDevice",
@@ -279,6 +277,10 @@ export const ScreenName = {
   OnboardingQuizFinal: "OnboardingQuizFinal",
 
   OnboardingFinish: "OnboardingFinish",
+
+  PlatformCatalog: "PlatformCatalog",
+  PlatformApp: "PlatformApp",
+
   WalletConnectScan: "WalletConnectScan",
   WalletConnectConnect: "WalletConnectConnect",
   WalletConnectDeeplinkingSelectAccount:
@@ -306,7 +308,6 @@ export const NavigatorName = {
   AccountSettings: "AccountSettings",
   AddAccounts: "AddAccounts",
   Exchange: "Exchange",
-  ExchangeProviders: "ExchangeProviders",
   ExchangeBuyFlow: "ExchangeBuyFlow",
   ExchangeSellFlow: "ExchangeSellFlow",
   Base: "Base",
@@ -327,6 +328,7 @@ export const NavigatorName = {
   Onboarding: "Onboarding",
   PasswordAddFlow: "PasswordAddFlow",
   PasswordModifyFlow: "PasswordModifyFlow",
+  Platform: "Platform",
   ReceiveFunds: "ReceiveFunds",
   SendFunds: "SendFunds",
   Settings: "Settings",

@@ -2,7 +2,8 @@
 
 import React, { useCallback, useMemo } from "react";
 import { TouchableOpacity, StyleSheet, View } from "react-native";
-import { Trans } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 import { useNavigation, useRoute, useTheme } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/dist/Ionicons";
 
@@ -32,6 +33,7 @@ import {
 } from "@ledgerhq/live-common/lib/account";
 
 import { ScreenName } from "../../../../const";
+import Alert from "../../../../components/Alert";
 import CurrencyUnitValue from "../../../../components/CurrencyUnitValue";
 import SectionSeparator, {
   ArrowDownCircle,
@@ -74,6 +76,7 @@ const Form = ({
   defaultAccount: ?AccountLike,
   defaultParentAccount: ?Account,
 }) => {
+  const { t } = useTranslation();
   const { colors } = useTheme();
   const { navigate } = useNavigation();
   const route = useRoute();
@@ -114,6 +117,14 @@ const Form = ({
     });
   }, [navigate, provider, providers, route.params]);
 
+  const onParaswapCta = useCallback(() => {
+    navigate(ScreenName.PlatformApp, {
+      platform: "paraswap",
+      name: "ParaSwap",
+      ...route.params,
+    });
+  }, [navigate, route.params]);
+
   const canContinue = useMemo(() => {
     if (!exchange) return false;
     const { fromAccount, toAccount } = exchange;
@@ -123,6 +134,15 @@ const Form = ({
   return (
     <View style={styles.root}>
       <TrackScreen category="Swap" name="Form" />
+      <Alert
+        id="transfer.swap.form.paraswapCta"
+        type="hint"
+        closeable
+        learnMoreKey="common.checkItOut"
+        onLearnMore={onParaswapCta}
+      >
+        {t("transfer.swap.form.paraswapCTA")}
+      </Alert>
       <View style={styles.top}>
         <TouchableOpacity
           style={styles.accountWrapper}

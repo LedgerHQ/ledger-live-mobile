@@ -19,6 +19,12 @@ import type {
 import { getAccountCurrency } from "@ledgerhq/live-common/lib/account/helpers";
 import Config from "react-native-config";
 import type { PortfolioRange } from "@ledgerhq/live-common/lib/portfolio/v2/types";
+import type { AvailableProvider } from "@ledgerhq/live-common/lib/exchange/swap/types";
+import type { DeviceModelInfo } from "@ledgerhq/live-common/lib/types/manager";
+import type { OutputSelector } from "reselect";
+import uniq from "lodash/uniq";
+
+import { isCurrencyExchangeSupported } from "@ledgerhq/live-common/lib/exchange";
 import { currencySettingsDefaults } from "../helpers/CurrencySettingsDefaults";
 import type { State } from ".";
 
@@ -91,6 +97,7 @@ export type SettingsState = {
     selectableCurrencies: [],
     KYC: {},
   },
+  lastSeenDevice: ?DeviceModelInfo,
 };
 
 export const INITIAL_STATE: SettingsState = {
@@ -123,6 +130,7 @@ export const INITIAL_STATE: SettingsState = {
     selectableCurrencies: [],
     KYC: {},
   },
+  lastSeenDevice: null,
 };
 
 const pairHash = (from, to) => `${from.ticker}_${to.ticker}`;
@@ -342,6 +350,13 @@ const handlers: Object = {
       ],
     },
   }),
+  LAST_SEEN_DEVICE_INFO: (
+    state: SettingsState,
+    { payload: dmi }: { payload: DeviceModelInfo },
+  ) => ({
+    ...state,
+    lastSeenDevice: dmi,
+  }),
 };
 
 const storeSelector = (state: *): SettingsState => state.settings;
@@ -499,3 +514,6 @@ export const swapAcceptedProvidersSelector = (state: State) =>
   state.settings.swap.acceptedProviders;
 
 export const swapKYCSelector = (state: Object) => state.settings.swap.KYC;
+
+export const lastSeenDeviceSelector = (state: State) =>
+  state.settings.lastSeenDevice;

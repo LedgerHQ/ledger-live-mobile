@@ -3,6 +3,8 @@ import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import type { Currency } from "@ledgerhq/live-common/lib/types";
+import type { DeviceModelInfo } from "@ledgerhq/live-common/lib/types/manager";
+import type { AvailableProvider } from "@ledgerhq/live-common/lib/exchange/swap/types";
 import type { PortfolioRange } from "@ledgerhq/live-common/lib/portfolio/v2/types";
 import { selectedTimeRangeSelector } from "../reducers/settings";
 
@@ -185,6 +187,11 @@ export const setSwapKYCStatus = (payload: {
 export const swapAcceptProvider = (providerId: string) => ({
   type: "ACCEPT_SWAP_PROVIDER",
   payload: providerId,
+});
+
+export const setLastSeenDeviceInfo = (dmi: DeviceModelInfo) => ({
+  type: "LAST_SEEN_DEVICE_INFO",
+  payload: dmi,
 });
 
 type PortfolioRangeOption = {
