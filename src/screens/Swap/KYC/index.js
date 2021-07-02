@@ -258,7 +258,7 @@ const KYC = () => {
                 pending={isLoading}
                 disabled={!canSubmit || isLoading}
                 onPress={onSubmitKYCData}
-                title={<Trans i18nKey={"transfer.swap.providers.cta"} />}
+                title={<Trans i18nKey={"transfer.swap.kyc.cta"} />}
               />
             </View>
           </>

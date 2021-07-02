@@ -4,7 +4,6 @@ import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import type { Currency } from "@ledgerhq/live-common/lib/types";
 import type { DeviceModelInfo } from "@ledgerhq/live-common/lib/types/manager";
-import type { AvailableProvider } from "@ledgerhq/live-common/lib/exchange/swap/types";
 import type { PortfolioRange } from "@ledgerhq/live-common/lib/portfolio/v2/types";
 import { selectedTimeRangeSelector } from "../reducers/settings";
 
@@ -168,11 +167,6 @@ export const setSwapSelectableCurrencies = (
 ) => ({
   type: "SET_SWAP_SELECTABLE_CURRENCIES",
   payload: selectableCurrencies,
-});
-
-export const setSwapHasAcceptedIPSharing = (hasAcceptedIPSharing: boolean) => ({
-  type: "SET_SWAP_ACCEPTED_IP_SHARING",
-  payload: hasAcceptedIPSharing,
 });
 
 export const setSwapKYCStatus = (payload: {
