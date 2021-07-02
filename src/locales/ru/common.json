@@ -30,7 +30,7 @@
     "or": "ИЛИ",
     "rename": "Переименовать",
     "learnMore": "Подробнее",
-    "checkItOut": "Check it out",
+    "checkItOut": "Взгляните!",
     "viewDetails": "Подробнее",
     "today": "Сегодня",
     "yesterday": "Вчера",
@@ -1213,7 +1213,7 @@
     "transfer": "Перевод",
     "manager": "Диспетчер",
     "settings": "Настройки",
-    "platform": "Browse",
+    "platform": "Обзор",
     "nanoX": "Nano X"
   },
   "portfolio": {
@@ -1821,7 +1821,7 @@
         "balance": "Баланс <0>123</0>",
         "fromAccount": "Выберите счёт",
         "toAccount": "Выберите счёт",
-        "paraswapCTA": "Looking for Paraswap? It has been moved to the Browse tab!",
+        "paraswapCTA": "Ищете Paraswap? Мы перенесли его во вкладку Обзор!",
         "amount": {
           "useMax": "Вся сумма",
           "available": "Доступная сумма"
@@ -3577,23 +3577,23 @@
   },
   "platform": {
     "catalog": {
-      "title": "Live Apps Catalog",
+      "title": "Каталог приложений",
       "branch": {
-        "soon": "coming soon",
-        "experimental": "experimental",
-        "debug": "debug"
+        "soon": "в разработке",
+        "experimental": "экспериментальная функция",
+        "debug": "отладка"
       },
       "banner": {
-        "title": "Discover our Live Apps Catalog",
-        "description": "We're working hard to bring you access to the world of DeFi, NFTs and more, securely, right inside Ledger Live!"
+        "title": "Исследуйте наш Каталог приложений",
+        "description": "Мы делаем всё возможное, чтобы предоставить доступ к миру DeFi, NFT и другому. Вы сможете безопасно пользоваться ими прямо в Ledger Live!"
       },
       "pollCTA": {
-        "title": "Poll",
-        "description": "Which service do you want to see in Ledger Live?"
+        "title": "Опрос",
+        "description": "Какой услуги вам не хватает в Ledger Live?"
       },
       "developerCTA": {
-        "title": "For Developers",
-        "description": "All the information you need to integrate your applications on Ledger Live."
+        "title": "Для разработчиков",
+        "description": "Информация о том, как интегрировать собственные приложения в Ledger Live."
       }
     }
   }
