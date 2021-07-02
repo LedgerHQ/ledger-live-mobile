@@ -7,7 +7,11 @@ import {
   SafeAreaView,
   TouchableOpacity,
 } from "react-native";
-import { useNavigation, useTheme } from "@react-navigation/native";
+import {
+  useNavigation,
+  useTheme,
+  useIsFocused,
+} from "@react-navigation/native";
 import Animated from "react-native-reanimated";
 
 import Styles from "../navigation/styles";
@@ -70,6 +74,7 @@ type Props = {
   children?: React$Node,
   footer?: React$Node,
   style?: *,
+  titleStyle?: *,
 };
 
 export default function AnimatedHeaderView({
@@ -81,6 +86,7 @@ export default function AnimatedHeaderView({
   children,
   footer,
   style,
+  titleStyle,
 }: Props) {
   const { colors } = useTheme();
   const navigation = useNavigation();
@@ -91,6 +97,7 @@ export default function AnimatedHeaderView({
   }, []);
 
   const [scrollY] = useState(new Animated.Value(0));
+  const isFocused = useIsFocused();
 
   const event = Animated.event([
     { nativeEvent: { contentOffset: { y: scrollY } } },
@@ -106,7 +113,7 @@ export default function AnimatedHeaderView({
   });
   const translateX = interpolate(scrollY, {
     inputRange: [0, 76],
-    outputRange: [0, -5],
+    outputRange: [0, hasBackButton ? -5 : -40],
     extrapolate: Extrapolate.CLAMP,
   });
 
@@ -152,7 +159,7 @@ export default function AnimatedHeaderView({
           ]}
           onLayout={onLayoutText}
         >
-          <LText bold style={[styles.title]} numberOfLines={4}>
+          <LText bold style={[styles.title, titleStyle]} numberOfLines={4}>
             {title}
           </LText>
         </Animated.View>
@@ -161,7 +168,8 @@ export default function AnimatedHeaderView({
         <Animated.ScrollView
           onScroll={event}
           scrollEventThrottle={10}
-          contentContainerStyle={[styles.scrollArea]}
+          contentContainerStyle={styles.scrollArea}
+          testID={isFocused ? "ScrollView" : undefined}
         >
           {children}
         </Animated.ScrollView>
@@ -175,7 +183,7 @@ const styles = StyleSheet.create({
   root: {
     flex: 1,
   },
-  topHeader: { flexDirection: "row", alignContent: "center" },
+  topHeader: { flexDirection: "row", alignContent: "center", height: 50 },
   spacer: { flex: 1 },
   header: {
     ...Styles.headerNoShadow,
@@ -192,7 +200,7 @@ const styles = StyleSheet.create({
     zIndex: 2,
   },
   title: {
-    fontSize: normalize(32),
+    fontSize: normalize(34),
     lineHeight: 45,
   },
   buttons: {

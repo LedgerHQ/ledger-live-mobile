@@ -6,10 +6,10 @@ import Portfolio, { PortfolioTabIcon } from "../../screens/Portfolio";
 import Transfer, { TransferTabIcon } from "../../screens/Transfer";
 import AccountsNavigator from "./AccountsNavigator";
 import ManagerNavigator, { ManagerTabIcon } from "./ManagerNavigator";
-import SettingsNavigator from "./SettingsNavigator";
+import PlatformNavigator from "./PlatformNavigator";
 import TabIcon from "../TabIcon";
 import AccountsIcon from "../../icons/Accounts";
-import SettingsIcon from "../../icons/Settings";
+import AppsIcon from "../../icons/Apps";
 
 import Tab from "./CustomBlockRouterNavigator";
 
@@ -30,6 +30,7 @@ export default function MainNavigator({
           {
             borderTopColor: colors.lightFog,
             backgroundColor: colors.card,
+            height: 52,
           },
           hideTabNavigation ? { display: "none" } : {},
         ],
@@ -52,6 +53,7 @@ export default function MainNavigator({
           tabBarIcon: (props: any) => (
             <TabIcon Icon={AccountsIcon} i18nKey="tabs.accounts" {...props} />
           ),
+          tabBarTestID: "TabBarAccounts",
         }}
       />
       <Tab.Screen
@@ -63,10 +65,22 @@ export default function MainNavigator({
         }}
       />
       <Tab.Screen
+        name={NavigatorName.Platform}
+        component={PlatformNavigator}
+        options={{
+          headerShown: false,
+          unmountOnBlur: true,
+          tabBarIcon: (props: any) => (
+            <TabIcon Icon={AppsIcon} i18nKey="tabs.platform" {...props} />
+          ),
+        }}
+      />
+      <Tab.Screen
         name={NavigatorName.Manager}
         component={ManagerNavigator}
         options={{
           tabBarIcon: (props: any) => <ManagerTabIcon {...props} />,
+          tabBarTestID: "TabBarManager",
         }}
         listeners={({ navigation }) => ({
           tabPress: e => {
@@ -84,16 +98,6 @@ export default function MainNavigator({
             });
           },
         })}
-      />
-      <Tab.Screen
-        name={NavigatorName.Settings}
-        component={SettingsNavigator}
-        options={{
-          unmountOnBlur: true,
-          tabBarIcon: (props: any) => (
-            <TabIcon Icon={SettingsIcon} i18nKey="tabs.settings" {...props} />
-          ),
-        }}
       />
     </Tab.Navigator>
   );

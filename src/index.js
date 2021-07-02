@@ -3,6 +3,7 @@ import "../shim";
 import "./polyfill";
 import "./live-common-setup";
 import "./implement-react-native-libcore";
+import "../e2e/e2e-bridge-setup";
 import "react-native-gesture-handler";
 import React, {
   Component,
@@ -37,6 +38,7 @@ import { useCountervaluesExport } from "@ledgerhq/live-common/lib/countervalues/
 import { pairId } from "@ledgerhq/live-common/lib/countervalues/helpers";
 
 import { ToastProvider } from "@ledgerhq/live-common/lib/notifications/ToastProvider";
+import PlatformCatalogProvider from "@ledgerhq/live-common/lib/platform/CatalogProvider";
 import logger from "./logger";
 import { saveAccounts, saveBle, saveSettings, saveCountervalues } from "./db";
 import {
@@ -58,7 +60,6 @@ import AnalyticsConsole from "./components/AnalyticsConsole";
 import ThemeDebug from "./components/ThemeDebug";
 import { BridgeSyncProvider } from "./bridge/BridgeSyncContext";
 import useDBSaveEffect from "./components/DBSave";
-import DebugRejectSwitch from "./components/DebugRejectSwitch";
 import useAppStateListener from "./components/useAppStateListener";
 import SyncNewAccounts from "./bridge/SyncNewAccounts";
 import { OnboardingContextProvider } from "./screens/Onboarding/onboardingContext";
@@ -180,8 +181,6 @@ function App({ importDataString }: AppProps) {
 
       <RootNavigator importDataString={importDataString} />
 
-      <DebugRejectSwitch />
-
       <AnalyticsConsole />
       <ThemeDebug />
     </View>
@@ -268,6 +267,15 @@ const linking = {
              * ie: "ledgerhq://receive?currency=bitcoin" will open the prefilled search account in the receive flow
              */
             [ScreenName.ReceiveSelectAccount]: "receive",
+          },
+        },
+        [NavigatorName.Swap]: {
+          screens: {
+            /**
+             * @params ?currency: string
+             * ie: "ledgerhq://receive?currency=bitcoin" will open the prefilled search account in the receive flow
+             */
+            [ScreenName.SwapFormOrHistory]: "swap",
           },
         },
         [NavigatorName.SendFunds]: {
@@ -420,36 +428,38 @@ export default class Root extends Component<
                 <HookSentry />
                 <HookAnalytics store={store} />
                 <WalletConnectProvider>
-                  <DeepLinkingNavigator>
-                    <SafeAreaProvider>
-                      <StyledStatusBar />
-                      <NavBarColorHandler />
-                      <AuthPass>
-                        <I18nextProvider i18n={i18n}>
-                          <LocaleProvider>
-                            <BridgeSyncProvider>
-                              <CounterValuesProvider
-                                initialState={initialCountervalues}
-                              >
-                                <ButtonUseTouchable.Provider value={true}>
-                                  <OnboardingContextProvider>
-                                    <ToastProvider>
-                                      <NotificationsProvider>
-                                        <SnackbarContainer />
-                                        <App
-                                          importDataString={importDataString}
-                                        />
-                                      </NotificationsProvider>
-                                    </ToastProvider>
-                                  </OnboardingContextProvider>
-                                </ButtonUseTouchable.Provider>
-                              </CounterValuesProvider>
-                            </BridgeSyncProvider>
-                          </LocaleProvider>
-                        </I18nextProvider>
-                      </AuthPass>
-                    </SafeAreaProvider>
-                  </DeepLinkingNavigator>
+                  <PlatformCatalogProvider>
+                    <DeepLinkingNavigator>
+                      <SafeAreaProvider>
+                        <StyledStatusBar />
+                        <NavBarColorHandler />
+                        <AuthPass>
+                          <I18nextProvider i18n={i18n}>
+                            <LocaleProvider>
+                              <BridgeSyncProvider>
+                                <CounterValuesProvider
+                                  initialState={initialCountervalues}
+                                >
+                                  <ButtonUseTouchable.Provider value={true}>
+                                    <OnboardingContextProvider>
+                                      <ToastProvider>
+                                        <NotificationsProvider>
+                                          <SnackbarContainer />
+                                          <App
+                                            importDataString={importDataString}
+                                          />
+                                        </NotificationsProvider>
+                                      </ToastProvider>
+                                    </OnboardingContextProvider>
+                                  </ButtonUseTouchable.Provider>
+                                </CounterValuesProvider>
+                              </BridgeSyncProvider>
+                            </LocaleProvider>
+                          </I18nextProvider>
+                        </AuthPass>
+                      </SafeAreaProvider>
+                    </DeepLinkingNavigator>
+                  </PlatformCatalogProvider>
                 </WalletConnectProvider>
               </>
             ) : (

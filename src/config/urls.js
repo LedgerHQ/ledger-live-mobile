@@ -93,6 +93,12 @@ export const urls = {
       "https://www.ledger.com/academy?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=banner_carousel",
     valentine:
       "https://shop.ledger.com/pages/valentines-day-special-offers?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=banner_carousel",
+    polkaStake:
+      "https://www.ledger.com/staking-polkadot?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=banner_carousel",
+  },
+  platform: {
+    developerPage:
+      "https://developers.ledger.com?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=catalog",
   },
   compound:
     "https://support.ledger.com/hc/en-us/articles/360017215099?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=compound",
@@ -112,4 +118,6 @@ export const urls = {
     "https://www.ledger.com/academy/difference-between-segwit-and-native-segwit",
   supportPage:
     "https://support.ledgerwallet.com/hc/en-us?utm_source=ledger_live_mobile&utm_medium=self_referral",
+  maxSpendable:
+    "https://support.ledger.com/hc/en-us/articles/360012960679?utm_source=ledger_live_mobile&utm_medium=self_referral",
 };
