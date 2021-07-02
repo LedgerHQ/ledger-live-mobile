@@ -30,7 +30,7 @@
     "or": "或者",
     "rename": "重命名",
     "learnMore": "了解更多",
-    "checkItOut": "Check it out",
+    "checkItOut": "一探究竟",
     "viewDetails": "查看详情",
     "today": "今天",
     "yesterday": "昨天",
@@ -1213,7 +1213,7 @@
     "transfer": "转移",
     "manager": "管理器",
     "settings": "设置",
-    "platform": "Browse",
+    "platform": "浏览",
     "nanoX": "Nano X"
   },
   "portfolio": {
@@ -1821,7 +1821,7 @@
         "balance": "余额 <0>123</0>",
         "fromAccount": "选择账户",
         "toAccount": "选择账户",
-        "paraswapCTA": "Looking for Paraswap? It has been moved to the Browse tab!",
+        "paraswapCTA": "寻找 Paraswap？它已被移动到 Browse（浏览）选项卡。",
         "amount": {
           "useMax": "使用最大值",
           "available": "可用总额"
@@ -3577,23 +3577,23 @@
   },
   "platform": {
     "catalog": {
-      "title": "Live Apps Catalog",
+      "title": "Live 应用目录",
       "branch": {
-        "soon": "coming soon",
-        "experimental": "experimental",
-        "debug": "debug"
+        "soon": "敬请期待",
+        "experimental": "实验性的",
+        "debug": "除错"
       },
       "banner": {
-        "title": "Discover our Live Apps Catalog",
-        "description": "We're working hard to bring you access to the world of DeFi, NFTs and more, securely, right inside Ledger Live!"
+        "title": "探索我们的 Live 应用目录",
+        "description": "我们正努力使您能够访问 DeFi, NFT 以及更广的世界，就在 Ledger Live! 里面，安全地，进行访问。"
       },
       "pollCTA": {
-        "title": "Poll",
-        "description": "Which service do you want to see in Ledger Live?"
+        "title": "调查",
+        "description": "您想要在 Ledger Live 中看到哪种服务？"
       },
       "developerCTA": {
-        "title": "For Developers",
-        "description": "All the information you need to integrate your applications on Ledger Live."
+        "title": "面向开发者",
+        "description": "您所需要的将您的应用程序整合到 Ledger Live 的全部信息。"
       }
     }
   }
