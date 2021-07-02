@@ -1797,8 +1797,8 @@
       },
       "pendingOperation": {
         "description": "Your Swap operation has been sent to the network for confirmation. It may take up to an hour before you receive your {{targetCurrency}}.",
-        "label": "معرّف التبادل الخاص بك:",
-        "title": "Swap broadcast successfully ",
+        "label": "معرّف المبادلة الخاص بك:",
+        "title": "تم البث المبادلة بنجاح ",
         "disclaimer": "Take note of your Swap ID number in case you’d need assistance from {{provider}} support.",
         "cta": "رؤية التفاصيل"
       },
@@ -3516,7 +3516,7 @@
     },
     "swap": {
       "title": "مبادلة العملات المشفرة",
-      "description": "قم بمقايضة الأصول المشفرة مباشرةً من حسابات ليدجر الخاصة بك مع شريكنا."
+      "description": "قم بمبادلة الأصول المشفرة مباشرةً من حسابات ليدجر الخاصة بك مع شريكنا."
     }
   },
   "walletconnect": {
