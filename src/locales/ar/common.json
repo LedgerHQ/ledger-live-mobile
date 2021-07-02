@@ -25,12 +25,12 @@
     "close": "إغلاق",
     "confirm": "تأكيد",
     "poweredBy": "مدعوم من ",
-    "received": "تم الإستلام",
+    "received": "تم الاستلام",
     "sent": "مُرسل",
     "or": "أو",
     "rename": "إعادة تسمية",
     "learnMore": "معرفة المزيد",
-    "checkItOut": "Check it out",
+    "checkItOut": "تفقد هذا",
     "viewDetails": "عرض التفاصيل",
     "today": "اليوم",
     "yesterday": "أمس",
@@ -93,7 +93,7 @@
       "description": "يرجى إدخال اسم الحساب."
     },
     "AlgorandASANotOptInInRecipient": {
-      "title": "حساب المستلم لم ينضم إلى ASA الذي تم إختياره."
+      "title": "حساب المستلم لم ينضم إلى ASA الذي تم اختياره."
     },
     "BluetoothRequired": {
       "title": "عذراً، تم تعطيل البلوتوث",
@@ -458,7 +458,7 @@
     },
     "UserRefusedAllowManager": {
       "title": "تم تعطيل المدير (Manager) على الجهاز",
-      "description": "Please allow the Manager on your device, then try again."
+      "description": "يرجى تمكين المدير (Manager) على جهازك، ثم حاول مرة أخرى."
     },
     "UserRefusedAddress": {
       "title": "تم رفض عنوان الاستقبال",
@@ -676,7 +676,7 @@
       },
       "algorand": {
         "title": "Algorand",
-        "description": "إكسب مكافآت ALGO مع كل معاملة."
+        "description": "اكسب مكافآت ALGO مع كل معاملة."
       },
       "sell": {
         "title": "بيع العملات المشفرة",
@@ -1213,7 +1213,7 @@
     "transfer": "تحويل",
     "manager": "المدير",
     "settings": "إعدادات",
-    "platform": "Browse",
+    "platform": "تصفح",
     "nanoX": "Nano X"
   },
   "portfolio": {
@@ -1280,7 +1280,7 @@
   },
   "operations": {
     "types": {
-      "IN": "تم التلقي",
+      "IN": "تم الاستلام",
       "OUT": "أرسلت",
       "CREATE": "تمّ انشاؤه",
       "REVEAL": "كشف",
@@ -1796,10 +1796,10 @@
         "cta": "إغلاق"
       },
       "pendingOperation": {
-        "description": "Your Swap operation has been sent to the network for confirmation. It may take up to an hour before you receive your {{targetCurrency}}.",
+        "description": "لقد تم إرسال عملية المبادلة الخاصة بك إلى الشبكة لتأكيدها. يمكن أن يستغرق الامر مدة تصل إلى ساعة قبل أن تستلم {{targetCurrency}}.",
         "label": "معرّف المبادلة الخاص بك:",
         "title": "تم البث المبادلة بنجاح ",
-        "disclaimer": "Take note of your Swap ID number in case you’d need assistance from {{provider}} support.",
+        "disclaimer": "قم بحفظ معرّف المبادلة الخاص بك في حال كنت بحاجة إلى مساعدة من دعم {{provider}}.",
         "cta": "رؤية التفاصيل"
       },
       "tradeMethod": {
@@ -1821,7 +1821,7 @@
         "balance": "الرصيد <0>123</0>",
         "fromAccount": "اختيار الحساب",
         "toAccount": "اختيار الحساب",
-        "paraswapCTA": "Looking for Paraswap? It has been moved to the Browse tab!",
+        "paraswapCTA": "تبحث عن Paraswap؟ لقد تم نقله إلى علامة تبويب التصفح!",
         "amount": {
           "useMax": "استخدم الحد الأقصى",
           "available": "إجمالي المتاح"
@@ -1897,7 +1897,7 @@
       },
       "history": {
         "tab": "السجل",
-        "disclaimer": "Your swap mobile transactions are not synchronized with Ledger Live Desktop",
+        "disclaimer": "عمليات المبادلة لتطبيق الجوال الخاص بك غير متزامنة مع تطبيق Ledger Live لسطح المكتب",
         "exportButton": "تصدير العمليات",
         "exportFilename": "عمليات المبادلة",
         "empty": {
@@ -3555,13 +3555,13 @@
   "notificationCenter": {
     "title": "مركز الإشعارات",
     "announcement": "إعلان",
-    "liveStatus": "Ledger Live status",
+    "liveStatus": "حالة Ledger Live",
     "news": {
       "title": "أخبار",
       "titleCount": "أخبار ({{count}})",
       "emptyState": {
         "title": "لا توجد أخبار حاليًا",
-        "desc": "You will find here all the news related to Ledger and Ledger Live"
+        "desc": "ستجد هنا جميع الأخبار المتعلقة بLedger وLedger Live"
       }
     },
     "status": {
@@ -3577,23 +3577,23 @@
   },
   "platform": {
     "catalog": {
-      "title": "Live Apps Catalog",
+      "title": "كتالوج التطبيقات الحية",
       "branch": {
-        "soon": "coming soon",
-        "experimental": "experimental",
-        "debug": "debug"
+        "soon": "سيأتي قريباً",
+        "experimental": "تجريبي",
+        "debug": "تصحيح الأخطاء"
       },
       "banner": {
-        "title": "Discover our Live Apps Catalog",
-        "description": "We're working hard to bring you access to the world of DeFi, NFTs and more, securely, right inside Ledger Live!"
+        "title": "اكتشف كتالوج التطبيقات الحية",
+        "description": "نحن نعمل جاهدين لنتيح لك الوصول إلى عالم DeFi، NFTs وأخرين، وبأمان مباشرةً من داخل Ledger Live!"
       },
       "pollCTA": {
-        "title": "Poll",
-        "description": "Which service do you want to see in Ledger Live?"
+        "title": "استطلاع",
+        "description": "ما الخدمة التي تريد رؤيتها في Ledger Live؟"
       },
       "developerCTA": {
-        "title": "For Developers",
-        "description": "All the information you need to integrate your applications on Ledger Live."
+        "title": "للمبرمجين",
+        "description": "جميع المعلومات التي تحتاج إليها لدمج تطبيقاتك على Ledger Live."
       }
     }
   }
