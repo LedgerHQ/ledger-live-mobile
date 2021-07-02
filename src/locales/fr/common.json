@@ -30,7 +30,7 @@
     "or": "OU",
     "rename": "Renommer",
     "learnMore": "En savoir plus",
-    "checkItOut": "Check it out",
+    "checkItOut": "Jeter un œil",
     "viewDetails": "Voir les détails",
     "today": "Aujourd'hui",
     "yesterday": "Hier",
@@ -1213,7 +1213,7 @@
     "transfer": "Transfert",
     "manager": "Gestionnaire",
     "settings": "Paramètres",
-    "platform": "Browse",
+    "platform": "Parcourir",
     "nanoX": "Nano X"
   },
   "portfolio": {
@@ -1821,7 +1821,7 @@
         "balance": "Solde <0>123</0>",
         "fromAccount": "Sélectionnez un compte.",
         "toAccount": "Sélectionnez un compte.",
-        "paraswapCTA": "Looking for Paraswap? It has been moved to the Browse tab!",
+        "paraswapCTA": "Vous cherchez ParaSwap ? Il se trouve maintenant dans l'onglet Parcourir.",
         "amount": {
           "useMax": "Choisir le maximum",
           "available": "Total disponible"
@@ -3577,23 +3577,23 @@
   },
   "platform": {
     "catalog": {
-      "title": "Live Apps Catalog",
+      "title": "Catalogue d'applications Live",
       "branch": {
-        "soon": "coming soon",
-        "experimental": "experimental",
-        "debug": "debug"
+        "soon": "À découvrir prochainement",
+        "experimental": "Expérimental",
+        "debug": "Débugger"
       },
       "banner": {
-        "title": "Discover our Live Apps Catalog",
-        "description": "We're working hard to bring you access to the world of DeFi, NFTs and more, securely, right inside Ledger Live!"
+        "title": "Découvrez le catalogue d'applications Live",
+        "description": "Nous mettons tout en œuvre pour vous permettre d'accéder au monde de la DeFi, des NFT et bien plus encore. En toute sécurité depuis Ledger Live !"
       },
       "pollCTA": {
-        "title": "Poll",
-        "description": "Which service do you want to see in Ledger Live?"
+        "title": "Sondage",
+        "description": "Quel service aimeriez-vous voir dans Ledger Live ?"
       },
       "developerCTA": {
-        "title": "For Developers",
-        "description": "All the information you need to integrate your applications on Ledger Live."
+        "title": "Pour les développeurs",
+        "description": "Toutes les informations dont vous avez besoin pour intégrer vos applications dans Ledger Live."
       }
     }
   }
