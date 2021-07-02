@@ -30,6 +30,7 @@
     "or": "أو",
     "rename": "إعادة تسمية",
     "learnMore": "معرفة المزيد",
+    "checkItOut": "Check it out",
     "viewDetails": "عرض التفاصيل",
     "today": "اليوم",
     "yesterday": "أمس",
@@ -1212,6 +1213,7 @@
     "transfer": "تحويل",
     "manager": "المدير",
     "settings": "إعدادات",
+    "platform": "Browse",
     "nanoX": "Nano X"
   },
   "portfolio": {
@@ -1766,34 +1768,10 @@
       }
     },
     "exchange": {
-      "title": "شراء / بيع",
-      "providers": {
-        "title": "اختر مزود لمبادلة العملات المشفرة",
-        "whatIsSwap": "ما هو الشراء؟",
-        "cta": "متابعة",
-        "coinify": {
-          "bullets": [
-            "متاح في 130+ بلد",
-            "يورو، دولار أمريكي، جنيه استرليني و32 آخرون",
-            "SEPA والمدفوعات السريعة",
-            "التحويلات البرقية المحلية للولايات المتحدة",
-            "بطاقات الائتمان وبطاقات الخصم"
-          ]
-        },
-        "wyre": {
-          "bullets": [
-            "حساب بنكي 🇺🇸 فقط",
-            "دعم دولار أمريكي فقط",
-            "20+ عملات مشفرة مدعومة",
-            "تحويل ACH",
-            "لا توجد بطاقات ائتمان أو خصم"
-          ]
-        }
-      }
+      "title": "شراء / بيع"
     },
     "swap": {
       "title": "مبادلة",
-      "paraswap": "Paraswap",
       "selectDevice": "اختار جهازك",
       "broadcasting": "بث المبادلة",
       "loadingFees": "تحميل رسوم الشبكة ...",
@@ -1802,25 +1780,6 @@
         "title": "مرحبًا بك في المبادلة",
         "whatIsSwap": "ما هي المبادلة؟",
         "disclaimer": "بادل الأصول المشفرة مباشرةً من جهاز ليدجر الخاص بك. هذه الخدمة غير متوفرة في بعض البلدان، بما فيها الولايات المتحدة."
-      },
-      "providers": {
-        "title": "اختر مزود لمبادلة العملات المشفرة",
-        "whatIsSwap": "ما هي المبادلة؟",
-        "cta": "متابعة",
-        "changelly": {
-          "bullets": [
-            "BTC, ETH, USDT و 50+ آخرين",
-            "متعدد العملات",
-            "مركزي"
-          ]
-        },
-        "paraswap": {
-          "bullets": [
-            "الاتصال بـ 30+ DEXs (Uniswap, SushiSwap,...)",
-            "رموز التوكن إيثيريوم و ERC20",
-            "لا مركزي و بدون ثقة"
-          ]
-        }
       },
       "main": {
         "header": "مبادلة"
@@ -1862,6 +1821,7 @@
         "balance": "الرصيد <0>123</0>",
         "fromAccount": "اختيار الحساب",
         "toAccount": "اختيار الحساب",
+        "paraswapCTA": "Looking for Paraswap? It has been moved to the Browse tab!",
         "amount": {
           "useMax": "استخدم الحد الأقصى",
           "available": "إجمالي المتاح"
@@ -1944,9 +1904,6 @@
           "title": "ستظهر مبادلاتك السابقة هنا",
           "desc": "إما أنك لم تقم بأي مبادلات حتى الآن، أو تمت إعادة تعيين Ledger Live في الوقت الحالي."
         }
-      },
-      "platform": {
-        "tab": "منصة"
       }
     },
     "lending": {
@@ -3615,6 +3572,28 @@
       },
       "error": {
         "title": "Ledger Live يواجه مشاكل"
+      }
+    }
+  },
+  "platform": {
+    "catalog": {
+      "title": "Live Apps Catalog",
+      "branch": {
+        "soon": "coming soon",
+        "experimental": "experimental",
+        "debug": "debug"
+      },
+      "banner": {
+        "title": "Discover our Live Apps Catalog",
+        "description": "We're working hard to bring you access to the world of DeFi, NFTs and more, securely, right inside Ledger Live!"
+      },
+      "pollCTA": {
+        "title": "Poll",
+        "description": "Which service do you want to see in Ledger Live?"
+      },
+      "developerCTA": {
+        "title": "For Developers",
+        "description": "All the information you need to integrate your applications on Ledger Live."
       }
     }
   }
