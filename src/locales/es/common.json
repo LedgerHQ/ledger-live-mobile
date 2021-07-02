@@ -30,7 +30,7 @@
     "or": "O",
     "rename": "Renombrar",
     "learnMore": "Conoce más",
-    "checkItOut": "Check it out",
+    "checkItOut": "Échale un vistazo",
     "viewDetails": "Ver detalles",
     "today": "Hoy",
     "yesterday": "Ayer",
@@ -1213,7 +1213,7 @@
     "transfer": "Transferir",
     "manager": "Manager",
     "settings": "Ajustes",
-    "platform": "Browse",
+    "platform": "Navegar",
     "nanoX": "Nano X"
   },
   "portfolio": {
@@ -1821,7 +1821,7 @@
         "balance": "Saldo <0>123</0>",
         "fromAccount": "Seleccionar cuenta",
         "toAccount": "Seleccionar cuenta",
-        "paraswapCTA": "Looking for Paraswap? It has been moved to the Browse tab!",
+        "paraswapCTA": "¿Buscas Paraswap? ¡Está en a la pestaña Navegar!",
         "amount": {
           "useMax": "Utilizar máx",
           "available": "Total disponible"
@@ -3577,23 +3577,23 @@
   },
   "platform": {
     "catalog": {
-      "title": "Live Apps Catalog",
+      "title": "Catálogo de aplicaciones de Live",
       "branch": {
-        "soon": "coming soon",
+        "soon": "próximamente",
         "experimental": "experimental",
-        "debug": "debug"
+        "debug": "depuración"
       },
       "banner": {
-        "title": "Discover our Live Apps Catalog",
-        "description": "We're working hard to bring you access to the world of DeFi, NFTs and more, securely, right inside Ledger Live!"
+        "title": "Descubre nuestro catálogo de aplicaciones de Live",
+        "description": "Estamos trabajando duro para brindarte acceso seguro al mundo de las DeFi, los NFT y más, ¡directamente desde Ledger Live!"
       },
       "pollCTA": {
-        "title": "Poll",
-        "description": "Which service do you want to see in Ledger Live?"
+        "title": "Encuesta",
+        "description": "¿Qué servicio quieres ver en Ledger Live?"
       },
       "developerCTA": {
-        "title": "For Developers",
-        "description": "All the information you need to integrate your applications on Ledger Live."
+        "title": "Para desarrolladores",
+        "description": "Toda la información que necesitas para integrar tus aplicaciones en Ledger Live."
       }
     }
   }
