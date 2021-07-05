@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Config from "react-native-config";
-import { StyleSheet, View, ActivityIndicator } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import SafeAreaView from "react-native-safe-area-view";
 import { useTheme, useRoute, useNavigation } from "@react-navigation/native";
@@ -12,6 +12,8 @@ import NotAvailable from "./FormOrHistory/NotAvailable";
 import { swapKYCSelector } from "../../reducers/settings";
 import { setSwapSelectableCurrencies } from "../../actions/settings";
 import { ScreenName } from "../../const";
+import Spinning from "../../components/Spinning";
+import BigSpinner from "../../icons/BigSpinner";
 
 const SwapEntrypoint = () => {
   const { colors } = useTheme();
@@ -74,7 +76,9 @@ const SwapEntrypoint = () => {
     <SafeAreaView style={[styles.root, { backgroundColor: colors.background }]}>
       {!providers ? (
         <View style={styles.loading}>
-          <ActivityIndicator />
+          <Spinning clockwise>
+            <BigSpinner />
+          </Spinning>
         </View>
       ) : !provider ? (
         <NotAvailable />

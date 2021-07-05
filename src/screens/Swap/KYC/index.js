@@ -1,15 +1,8 @@
 // @flow
 
-import React, { useCallback, useMemo, useState } from "react";
-import {
-  View,
-  TouchableOpacity,
-  ScrollView,
-  StyleSheet,
-  TextInput,
-} from "react-native";
+import React, { useEffect, useCallback, useMemo, useState } from "react";
+import { View, TouchableOpacity, ScrollView, StyleSheet } from "react-native";
 
-import TextInputMask from "react-native-text-input-mask";
 import { useSelector, useDispatch } from "react-redux";
 import { useTranslation, Trans } from "react-i18next";
 import { useNavigation, useTheme } from "@react-navigation/native";
@@ -22,6 +15,7 @@ import IconWyre from "../../../icons/swap/Wyre";
 import LText from "../../../components/LText";
 import Button from "../../../components/Button";
 import Pending from "./Pending";
+import Field from "./Field";
 
 import { swapKYCSelector } from "../../../reducers/settings";
 import { setSwapKYCStatus } from "../../../actions/settings";
@@ -30,6 +24,8 @@ const KYC = () => {
   const { t } = useTranslation();
   const [errors, setErrors] = useState({});
   const [isLoading, setLoading] = useState(false);
+  const [hasSubmittedOnce, setHasSubmittedOnce] = useState(false);
+
   const { navigate } = useNavigation();
   const swapKYC = useSelector(swapKYCSelector);
   const dispatch = useDispatch();
@@ -50,6 +46,19 @@ const KYC = () => {
   const [state, setState] = useState({});
   const [country, setCountry] = useState(countryOptions[0]);
   const [postalCode, setPostalCode] = useState("");
+
+  const requiredFields = useMemo(
+    () => ({
+      firstName,
+      lastName,
+      dateOfBirth,
+      street1,
+      city,
+      state,
+      postalCode,
+    }),
+    [city, dateOfBirth, firstName, lastName, postalCode, state, street1],
+  );
 
   const kycData: KYCData = useMemo(
     () => ({
@@ -82,43 +91,56 @@ const KYC = () => {
     navigate(ScreenName.SwapKYCStates, { onStateSelect: setState });
   }, [navigate]);
 
-  const onSubmitKYCData = useCallback(() => {
+  const isValidDate = useMemo(
+    () => !dateOfBirth || /[0-9]{4}-[0-9]{2}-[0-9]{2}/.test(dateOfBirth),
+    [dateOfBirth],
+  );
+
+  const onValidateFields = useCallback(() => {
+    const errors = {};
+    for (const field in requiredFields) {
+      if (
+        !requiredFields[field] ||
+        (field === "dateOfBirth" && requiredFields[field] && !isValidDate) ||
+        (field === "state" && !Object.keys(requiredFields[field]).length)
+      ) {
+        errors[field] = t(`swap.kyc.wyre.form.${field}Error`);
+      }
+    }
+    return errors;
+  }, [isValidDate, requiredFields, t]);
+
+  useEffect(() => {
+    setErrors(onValidateFields);
+  }, [onValidateFields, requiredFields, t]);
+
+  const onSubmit = useCallback(() => {
+    setHasSubmittedOnce(true);
+    if (Object.entries(errors).length) return () => {};
+
     let cancelled = false;
     async function onSubmitKYC() {
       setLoading(true);
       const res = await submitKYC("wyre", kycData);
       if (cancelled) return;
       dispatch(
-        setSwapKYCStatus({ provider: "wyre", id: res?.id, status: res.status }),
+        setSwapKYCStatus({
+          provider: "wyre",
+          id: res?.id,
+          status: res.status,
+        }),
       );
       setLoading(false);
     }
     onSubmitKYC();
+
     return () => {
       cancelled = true;
     };
-  }, [dispatch, kycData]);
-
-  const hasErrors = Object.keys(errors).length;
-  const isValidDate = useMemo(
-    () => !dateOfBirth || /[0-9]{4}-[0-9]{2}-[0-9]{2}/.test(dateOfBirth),
-    [dateOfBirth],
-  );
-
-  const canSubmit =
-    !hasErrors &&
-    firstName &&
-    lastName &&
-    street1 &&
-    state?.value &&
-    dateOfBirth &&
-    isValidDate &&
-    country &&
-    postalCode;
+  }, [dispatch, errors, kycData]);
 
   const color = colors.text;
   const borderColor = colors.fog;
-  const dateBorderColor = isValidDate ? colors.fog : colors.alert;
 
   return (
     <SafeAreaView style={[styles.root, { backgroundColor: colors.background }]}>
@@ -141,81 +163,47 @@ const KYC = () => {
                 <LText style={styles.subtitle} color={"smoke"}>
                   <Trans i18nKey={"transfer.swap.kyc.wyre.subtitle"} />
                 </LText>
-                <LText style={styles.label} color={"smoke"}>
-                  <Trans i18nKey={"transfer.swap.kyc.wyre.form.firstName"} />
-                </LText>
-                <TextInput
-                  style={[styles.input, { color, borderColor }]}
-                  onChangeText={setFirstName}
-                  editable={!isLoading}
-                  clearButtonMode="while-editing"
-                  placeholder={t(
-                    "transfer.swap.kyc.wyre.form.firstNamePlaceholder",
-                  )}
-                  maxLength={30}
+
+                <Field
+                  isLoading={isLoading}
+                  field={"firstName"}
+                  onChange={setFirstName}
+                  validate={hasSubmittedOnce}
+                  error={errors?.firstName}
                 />
-                <LText style={styles.label} color={"smoke"}>
-                  <Trans i18nKey={"transfer.swap.kyc.wyre.form.lastName"} />
-                </LText>
-                <TextInput
-                  style={[styles.input, { color, borderColor }]}
-                  onChangeText={setLastName}
-                  clearButtonMode="while-editing"
-                  placeholder={t(
-                    "transfer.swap.kyc.wyre.form.lastNamePlaceholder",
-                  )}
-                  maxLength={30}
+                <Field
+                  isLoading={isLoading}
+                  field={"lastName"}
+                  onChange={setLastName}
+                  validate={hasSubmittedOnce}
+                  error={errors?.lastName}
                 />
-                <LText style={styles.label} color={"smoke"}>
-                  <Trans i18nKey={"transfer.swap.kyc.wyre.form.dateOfBirth"} />
-                </LText>
-                <TextInputMask
-                  placeholder={t(
-                    "transfer.swap.kyc.wyre.form.dateOfBirthPlaceholder",
-                  )}
-                  style={[
-                    styles.input,
-                    { color, borderColor: dateBorderColor },
-                  ]}
-                  onChangeText={f => setDateOfBirth(f)}
+                <Field
                   mask={"[0000]-[00]-[00]"}
+                  isLoading={isLoading}
+                  field={"dateOfBirth"}
+                  onChange={setDateOfBirth}
+                  validate={hasSubmittedOnce}
+                  error={errors?.dateOfBirth}
                 />
-                <LText style={styles.label} color={"smoke"}>
-                  <Trans i18nKey={"transfer.swap.kyc.wyre.form.address1"} />
-                </LText>
-                <TextInput
-                  style={[styles.input, { color, borderColor }]}
-                  editable={!isLoading}
-                  onChangeText={setStreet1}
-                  clearButtonMode="while-editing"
-                  placeholder={t(
-                    "transfer.swap.kyc.wyre.form.address1Placeholder",
-                  )}
-                  maxLength={50}
+                <Field
+                  isLoading={isLoading}
+                  field={"street1"}
+                  onChange={setStreet1}
+                  validate={hasSubmittedOnce}
+                  error={errors?.street1}
                 />
-                <LText style={styles.label} color={"smoke"}>
-                  <Trans i18nKey={"transfer.swap.kyc.wyre.form.address2"} />
-                </LText>
-                <TextInput
-                  style={[styles.input, { color, borderColor }]}
-                  editable={!isLoading}
-                  onChangeText={setStreet2}
-                  clearButtonMode="while-editing"
-                  placeholder={t(
-                    "transfer.swap.kyc.wyre.form.address2Placeholder",
-                  )}
-                  maxLength={50}
+                <Field
+                  isLoading={isLoading}
+                  field={"street2"}
+                  onChange={setStreet2}
                 />
-                <LText style={styles.label} color={"smoke"}>
-                  <Trans i18nKey={"transfer.swap.kyc.wyre.form.city"} />
-                </LText>
-                <TextInput
-                  style={[styles.input, { color, borderColor }]}
-                  editable={!isLoading}
-                  onChangeText={setCity}
-                  clearButtonMode="while-editing"
-                  placeholder={t("transfer.swap.kyc.wyre.form.cityPlaceholder")}
-                  maxLength={30}
+                <Field
+                  isLoading={isLoading}
+                  field={"city"}
+                  onChange={setCity}
+                  validate={hasSubmittedOnce}
+                  error={errors?.city}
                 />
                 <LText style={styles.label} color={"smoke"}>
                   <Trans i18nKey={"transfer.swap.kyc.wyre.form.state"} />
@@ -224,31 +212,33 @@ const KYC = () => {
                   <LText
                     style={[
                       styles.input,
-                      { color: state ? color : borderColor, borderColor },
+                      {
+                        color: state ? color : borderColor,
+                        borderColor: errors?.state ? colors.alert : borderColor,
+                      },
                     ]}
                   >
                     {state?.value ||
                       t("transfer.swap.kyc.wyre.form.statePlaceholder")}
                   </LText>
                 </TouchableOpacity>
+                <LText color={"alert"}>
+                  {errors?.state && hasSubmittedOnce ? (
+                    <Trans i18nKey={`transfer.swap.kyc.wyre.form.stateError`} />
+                  ) : null}
+                </LText>
                 <LText style={styles.label} color={"smoke"}>
                   <Trans i18nKey={"transfer.swap.kyc.wyre.form.country"} />
                 </LText>
                 <LText style={[styles.input, { color, borderColor }]}>
                   {country?.label}
                 </LText>
-                <LText style={styles.label} color={"smoke"}>
-                  <Trans i18nKey={"transfer.swap.kyc.wyre.form.zipcode"} />
-                </LText>
-                <TextInput
-                  style={[styles.input, { color, borderColor }]}
-                  editable={!isLoading}
-                  onChangeText={setPostalCode}
-                  clearButtonMode="while-editing"
-                  placeholder={t(
-                    "transfer.swap.kyc.wyre.form.zipcodePlaceholder",
-                  )}
-                  maxLength={10}
+                <Field
+                  isLoading={isLoading}
+                  field={"postalCode"}
+                  onChange={setPostalCode}
+                  validate={hasSubmittedOnce}
+                  error={errors?.postalCode}
                 />
               </View>
             </ScrollView>
@@ -256,8 +246,7 @@ const KYC = () => {
               <Button
                 type={"primary"}
                 pending={isLoading}
-                disabled={!canSubmit || isLoading}
-                onPress={onSubmitKYCData}
+                onPress={onSubmit}
                 title={<Trans i18nKey={"transfer.swap.kyc.cta"} />}
               />
             </View>

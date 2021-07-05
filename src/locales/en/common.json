@@ -1808,24 +1808,33 @@
             "subtitle": "Wyre rejected the data you provided for KYC purposes",
             "link": "Learn more about KYC"
           },
-          "form": {
+          "form":{
             "firstName": "First Name",
             "lastName": "Last Name",
-            "dateOfBirth": "Date of birth",
-            "address1": "Street Address Line 1",
-            "address2": "Street Address Line 2",
-            "city": "City",
-            "state": "State",
-            "country": "Country",
-            "zipcode": "Zip Code",
+            "street1": "Street Address Line 1", 
+            "street2": "Street Address Line 2", 
+            "city": "City", 
+            "state": "State", 
+            "country": "Country", 
+            "postalCode": "Zip Code" ,
+            "dateOfBirth": "Date of birth" ,
+  
             "firstNamePlaceholder": "Enter your first name",
             "lastNamePlaceholder": "Enter your last name",
-            "address1Placeholder": "Eg. 13, Maple street", 
-            "dateOfBirthPlaceholder": "Enter your date of birth YYYY-MM-DD", 
-            "address2Placeholder": "Eg. 13, Maple street", 
+            "street1Placeholder": "Eg. 13, Maple street", 
+            "street2Placeholder": "Eg. 13, Maple street", 
             "cityPlaceholder": "Eg. San José", 
-            "zipcodePlaceholder": "Enter your 5 digit Zip code",
-            "statePlaceholder": "Choose state" 
+            "postalCodePlaceholder": "Enter your 5 digit Zip code",
+            "statePlaceholder": "Select your state",
+            "dateOfBirthPlaceholder": "YYYY-MM-DD", 
+  
+            "firstNameError": "Enter your first name to continue",
+            "lastNameError": "Enter your last name to continue",
+            "street1Error": "Enter your address", 
+            "cityError": "Enter the city you live in the USA", 
+            "stateError": "Select your state to continue", 
+            "postalCodeError": "Enter a valid US ZIP code",
+            "dateOfBirthError": "Enter your date of birth" 
           }
         },
         "states": "Select your state"
