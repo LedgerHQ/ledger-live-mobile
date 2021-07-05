@@ -101,6 +101,9 @@ const Confirmation = ({
         swapId,
         provider: exchangeRate.provider,
         targetCurrency: targetCurrency.name,
+        operation,
+        fromAccount,
+        fromParentAccount,
       });
     },
     [
