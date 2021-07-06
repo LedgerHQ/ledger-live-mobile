@@ -1213,7 +1213,7 @@
     "transfer": "Transfer",
     "manager": "Manager",
     "settings": "Settings",
-    "platform": "Browse",
+    "platform": "Discover",
     "nanoX": "Nano X"
   },
   "portfolio": {
@@ -1821,7 +1821,7 @@
         "balance": "Balance <0>123</0>",
         "fromAccount": "Select account",
         "toAccount": "Select account",
-        "paraswapCTA": "Looking for Paraswap? It has been moved to the Browse tab!",
+        "paraswapCTA": "Looking for Paraswap? It has been moved to the Discover tab!",
         "amount": {
           "useMax": "Use max",
           "available": "Total available"
@@ -3577,7 +3577,7 @@
   },
   "platform": {
     "catalog": {
-      "title": "Live Apps Catalog",
+      "title": "Discover",
       "branch": {
         "soon": "coming soon",
         "experimental": "experimental",
