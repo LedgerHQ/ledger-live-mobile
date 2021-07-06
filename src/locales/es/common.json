@@ -1213,7 +1213,7 @@
     "transfer": "Transferir",
     "manager": "Manager",
     "settings": "Ajustes",
-    "platform": "Discover",
+    "platform": "Descubrir",
     "nanoX": "Nano X"
   },
   "portfolio": {
@@ -1821,7 +1821,7 @@
         "balance": "Saldo <0>123</0>",
         "fromAccount": "Seleccionar cuenta",
         "toAccount": "Seleccionar cuenta",
-        "paraswapCTA": "¿Buscas Paraswap? ¡Está en a la pestaña Navegar!",
+        "paraswapCTA": "Looking for Paraswap? It has been moved to the Discover tab!",
         "amount": {
           "useMax": "Utilizar máx",
           "available": "Total disponible"
@@ -3584,8 +3584,8 @@
         "debug": "depuración"
       },
       "banner": {
-        "title": "Descubre nuestro catálogo de aplicaciones de Live",
-        "description": "Estamos trabajando duro para brindarte acceso seguro al mundo de las DeFi, los NFT y más, ¡directamente desde Ledger Live!"
+        "title": "Discover our Live Catalog",
+        "description": "Unlock a new world of crypto possibilities. One secure access to all our smart services – DeFi apps, NFTs and more to come."
       },
       "pollCTA": {
         "title": "Encuesta",
