@@ -1,4 +1,5 @@
 // @flow
+import { BigNumber } from "bignumber.js";
 import invariant from "invariant";
 import React, { useCallback, useState, useMemo } from "react";
 import {
@@ -134,11 +135,9 @@ function NominateSelectValidator({ navigation, route }: Props) {
     [polkadotResources.nominations],
   );
 
-  const {
-    staking,
-    validators: polkadotValidators,
-    minimumBondBalance,
-  } = usePolkadotPreloadData();
+  const preloaded = usePolkadotPreloadData();
+  const { staking, validators: polkadotValidators } = preloaded;
+  const minimumBondBalance = BigNumber(preloaded.minimumBondBalance);
 
   const hasMinBondBalance = hasMinimumBondBalance(mainAccount);
   const minBondBalance = formatCurrencyUnit(
