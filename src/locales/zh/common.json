@@ -1821,7 +1821,7 @@
         "balance": "余额 <0>123</0>",
         "fromAccount": "选择账户",
         "toAccount": "选择账户",
-        "paraswapCTA": "Looking for Paraswap? It has been moved to the Discover tab!",
+        "paraswapCTA": "寻找 Paraswap？它已被移动到 Discover（发现）选项卡！",
         "amount": {
           "useMax": "使用最大值",
           "available": "可用总额"
@@ -3584,8 +3584,8 @@
         "debug": "除错"
       },
       "banner": {
-        "title": "Discover our Live Catalog",
-        "description": "Unlock a new world of crypto possibilities. One secure access to all our smart services – DeFi apps, NFTs and more to come."
+        "title": "探索我们的 Live 目录",
+        "description": "解锁一个加密可能性的新世界。一个能安全访问我们所有的智能服务 — Defi 应用、NFT以及更多的未来功能。"
       },
       "pollCTA": {
         "title": "调查",
