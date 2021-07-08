@@ -97,7 +97,7 @@ function OnboardingStepTerms({ navigation }: *) {
       <LinkBox
         style={styles.linkBoxSpacing}
         text={<Trans i18nKey="Terms.service" />}
-        url={urls.terms}
+        url={urls.terms[locale || "en"]}
         event="OpenTerms"
       />
       <LinkBox
