@@ -158,7 +158,7 @@ export default function OperationRow({
               </View>
             ) : (
               <LText numberOfLines={1} color="grey" style={[styles.bottomRow]}>
-                {text} <OperationRowDate date={operation.date} />
+                <OperationRowDate date={operation.date} />
               </LText>
             )}
           </View>
