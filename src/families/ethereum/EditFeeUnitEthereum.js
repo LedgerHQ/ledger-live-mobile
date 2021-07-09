@@ -111,9 +111,7 @@ export default function EditFeeUnitEthereum({
 }
 
 const styles = StyleSheet.create({
-  root: {
-    flex: 1,
-  },
+  root: {},
   sliderContainer: {
     paddingLeft: 0,
   },
