@@ -17,6 +17,14 @@ export default function DebugSwap() {
   const [configWrapper, setConfigWrapper] = useState(
     Config.SWAP_DISABLED_PROVIDERS || "",
   );
+  const [configIDWrapper, setConfigIDWrapper] = useState(
+    Config.SWAP_OVERRIDE_KYC_USER_ID || "",
+  );
+
+  const onToggleWyreId = useCallback(() => {
+    // $FlowFixMe debugs dont need typing
+    setConfigIDWrapper(configIDWrapper ? "" : "wadus");
+  }, [configIDWrapper]);
 
   const onFlushWyreKYC = useCallback(() => {
     dispatch(setSwapKYCStatus({ provider: "wyre" }));
@@ -42,6 +50,10 @@ export default function DebugSwap() {
   useEffect(() => {
     Config.SWAP_DISABLED_PROVIDERS = configWrapper;
   }, [configWrapper]);
+
+  useEffect(() => {
+    Config.SWAP_OVERRIDE_KYC_USER_ID = configIDWrapper;
+  }, [configIDWrapper]);
 
   return (
     <View style={styles.wrapper}>
@@ -79,6 +91,12 @@ export default function DebugSwap() {
         />
         <LText semiBold style={styles.switchLabel}>
           {"Disable Wyre"}
+        </LText>
+      </Touchable>
+      <Touchable onPress={onToggleWyreId} style={styles.switchRow}>
+        <CheckBox style={styles.checkbox} isChecked={configIDWrapper} />
+        <LText semiBold style={styles.switchLabel}>
+          {"Use invalid Wyre ID"}
         </LText>
       </Touchable>
     </View>

@@ -121,6 +121,7 @@ const KYC = () => {
     let cancelled = false;
     async function onSubmitKYC() {
       setLoading(true);
+      // $FlowFixMe
       const res = await submitKYC("wyre", kycData);
       if (cancelled) return;
       dispatch(

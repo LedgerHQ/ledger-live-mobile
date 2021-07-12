@@ -504,6 +504,10 @@
       "title": "Cannot send from subaccounts yet",
       "description": "This feature will be added at a later stage due to changes recently introduced by the Babylon update."
     },
+    "AccessDeniedError": {
+      "title": "Ledger Live needs an update",
+      "description": "Please update Ledger Live to the latest version, and re verify your identity to swap with wyre",
+    },
     "RecommendUndelegation": {
       "title": "Please undelegate the account before emptying it"
     },
@@ -1784,6 +1788,11 @@
         "title": "Welcome to Swap",
         "whatIsSwap": "What is Swap?",
         "disclaimer": "Exchange crypto directly from your Ledger device. This service is not available in some countries, including the US."
+      },
+      "unauthorizedRates": {
+        "cta": "Reset verification",
+        "banner": "Reset your KYC and update Live to swap with Wyre.",
+        "bannerCTA": "Reset KYC"
       },
       "main": {
         "header": "Swap"
