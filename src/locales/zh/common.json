@@ -1213,7 +1213,7 @@
     "transfer": "转移",
     "manager": "管理器",
     "settings": "设置",
-    "platform": "Discover",
+    "platform": "发现",
     "nanoX": "Nano X"
   },
   "portfolio": {
@@ -1821,7 +1821,7 @@
         "balance": "余额 <0>123</0>",
         "fromAccount": "选择账户",
         "toAccount": "选择账户",
-        "paraswapCTA": "寻找 Paraswap？它已被移动到 Browse（浏览）选项卡。",
+        "paraswapCTA": "寻找 Paraswap？它已被移动到 Discover（发现）选项卡！",
         "amount": {
           "useMax": "使用最大值",
           "available": "可用总额"
@@ -3584,8 +3584,12 @@
         "debug": "除错"
       },
       "banner": {
-        "title": "探索我们的 Live 应用目录",
-        "description": "我们正努力使您能够访问 DeFi, NFT 以及更广的世界，就在 Ledger Live! 里面，安全地，进行访问。"
+        "title": "探索我们的 Live 目录",
+        "description": "Unlock a new world of crypto possibilities. One secure access to all services – DeFi, NFTs and more to come."
+      },
+      "twitterBanner": {
+        "description": "Tell us what's the next service you want to see with the hashtag",
+        "tweetText": "The next Ledger App should be..."
       },
       "pollCTA": {
         "title": "调查",
