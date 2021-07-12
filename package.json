@@ -204,9 +204,14 @@
     "metro-react-native-babel-preset": "^0.59.0",
     "prettier": "^1.19.1",
     "react-native-debugger-open": "^0.3.25",
-    "rn-nodeify": "^10.2.0",
+    "rn-nodeify": "10.3.0",
     "ws": "^7.5.2",
     "yarn-deduplicate": "^2.1.1"
+  },
+  "resolutions": {
+    "**/pbkdf2": "3.1.1",
+    "**/**/pbkdf2": "3.1.1",
+    "**/**/**/pbkdf2": "3.1.1"
   },
   "react-native": {
     "zlib": "browserify-zlib",
