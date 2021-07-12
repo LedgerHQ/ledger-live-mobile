@@ -262,6 +262,10 @@
       "title": "Firmware or app update needed",
       "description": "Please use the Manager to uninstall all apps then check if a firmware update is available before reinstalling them."
     },
+    "LatestFirmwareVersionRequired": {
+      "title": "Update Nano Firmware",
+      "description": "Please update your devices Firmware to the latest version to access this feature"
+    },
     "GenuineCheckFailed": {
       "title": "Device authentication failed",
       "description": "Something went wrong. Please try again. If the problem persists, please save your logs using the button below and provide them to Ledger Support."
@@ -1808,33 +1812,33 @@
             "subtitle": "Wyre rejected the data you provided for KYC purposes",
             "link": "Learn more about KYC"
           },
-          "form":{
+          "form": {
             "firstName": "First Name",
             "lastName": "Last Name",
-            "street1": "Street Address Line 1", 
-            "street2": "Street Address Line 2", 
-            "city": "City", 
-            "state": "State", 
-            "country": "Country", 
-            "postalCode": "Zip Code" ,
-            "dateOfBirth": "Date of birth" ,
-  
+            "street1": "Street Address Line 1",
+            "street2": "Street Address Line 2",
+            "city": "City",
+            "state": "State",
+            "country": "Country",
+            "postalCode": "Zip Code",
+            "dateOfBirth": "Date of birth",
+
             "firstNamePlaceholder": "Enter your first name",
             "lastNamePlaceholder": "Enter your last name",
-            "street1Placeholder": "Eg. 13, Maple street", 
-            "street2Placeholder": "Eg. 13, Maple street", 
-            "cityPlaceholder": "Eg. San José", 
+            "street1Placeholder": "Eg. 13, Maple street",
+            "street2Placeholder": "Eg. 13, Maple street",
+            "cityPlaceholder": "Eg. San José",
             "postalCodePlaceholder": "Enter your 5 digit Zip code",
             "statePlaceholder": "Select your state",
-            "dateOfBirthPlaceholder": "YYYY-MM-DD", 
-  
+            "dateOfBirthPlaceholder": "YYYY-MM-DD",
+
             "firstNameError": "Enter your first name to continue",
             "lastNameError": "Enter your last name to continue",
-            "street1Error": "Enter your address", 
-            "cityError": "Enter the city you live in the USA", 
-            "stateError": "Select your state to continue", 
+            "street1Error": "Enter your address",
+            "cityError": "Enter the city you live in the USA",
+            "stateError": "Select your state to continue",
             "postalCodeError": "Enter a valid US ZIP code",
-            "dateOfBirthError": "Enter your date of birth" 
+            "dateOfBirthError": "Enter your date of birth"
           }
         },
         "states": "Select your state"
