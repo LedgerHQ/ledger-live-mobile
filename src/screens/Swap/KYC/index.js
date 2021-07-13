@@ -44,7 +44,7 @@ const KYC = () => {
   const [street2, setStreet2] = useState("");
   const [city, setCity] = useState("");
   const [state, setState] = useState({});
-  const [country, setCountry] = useState(countryOptions[0]);
+  const [country] = useState(countryOptions[0]);
   const [postalCode, setPostalCode] = useState("");
 
   const requiredFields = useMemo(

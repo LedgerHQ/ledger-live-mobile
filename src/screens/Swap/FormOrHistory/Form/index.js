@@ -3,7 +3,6 @@
 import React, { useCallback, useMemo } from "react";
 import { TouchableOpacity, StyleSheet, View } from "react-native";
 import { Trans, useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
 import { useNavigation, useRoute, useTheme } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/dist/Ionicons";
 
