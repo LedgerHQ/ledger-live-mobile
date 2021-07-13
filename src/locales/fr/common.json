@@ -1213,7 +1213,7 @@
     "transfer": "Transfert",
     "manager": "Gestionnaire",
     "settings": "Paramètres",
-    "platform": "Découvrir",
+    "platform": "Discover",
     "nanoX": "Nano X"
   },
   "portfolio": {
@@ -1821,7 +1821,7 @@
         "balance": "Solde <0>123</0>",
         "fromAccount": "Sélectionnez un compte.",
         "toAccount": "Sélectionnez un compte.",
-        "paraswapCTA": "Vous cherchez ParaSwap ? Il se trouve maintenant dans l'onglet Découvrir.",
+        "paraswapCTA": "Vous cherchez ParaSwap ? Il se trouve maintenant dans l'onglet Discover.",
         "amount": {
           "useMax": "Choisir le maximum",
           "available": "Total disponible"
