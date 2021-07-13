@@ -47,6 +47,39 @@ export function NominateAction({ onPress, electionOpen, disabled }: Props) {
   );
 }
 
+export function SetControllerAction({ onPress, electionOpen, disabled }: Props) {
+  const { t } = useTranslation();
+
+  const [disabledModalOpen, setDisabledModalOpen] = useState(false);
+
+  const onClick = useCallback(() => {
+    if (disabled) setDisabledModalOpen(true);
+    else onPress();
+  }, [onPress, disabled]);
+
+  const onCloseModal = useCallback(() => setDisabledModalOpen(false), []);
+
+  return (
+    <TouchableOpacity onPress={onClick}>
+      <LText semiBold color={disabled ? "grey" : "live"}>
+        {t("polkadot.nomination.setController")}
+      </LText>
+      <InfoModal
+        isOpened={!!disabledModalOpen}
+        onClose={onCloseModal}
+        data={[
+          electionOpen
+          ??
+          {
+            title: t("polkadot.info.electionOpen.title"),
+            description: t("polkadot.info.electionOpen.description"),
+          }
+        ]}
+      />
+    </TouchableOpacity>
+  );
+}
+
 export function RebondAction({ onPress, disabled }: Props) {
   const { t } = useTranslation();
 
