@@ -38,9 +38,11 @@ import { useCountervaluesExport } from "@ledgerhq/live-common/lib/countervalues/
 import { pairId } from "@ledgerhq/live-common/lib/countervalues/helpers";
 
 import { ToastProvider } from "@ledgerhq/live-common/lib/notifications/ToastProvider";
+import { setEnv } from "@ledgerhq/live-common/lib/env";
 import PlatformCatalogProvider from "@ledgerhq/live-common/lib/platform/CatalogProvider";
 import logger from "./logger";
 import { saveAccounts, saveBle, saveSettings, saveCountervalues } from "./db";
+import getOrCreateUser from "./user";
 import {
   exportSelector as settingsExportSelector,
   hasCompletedOnboardingSelector,
@@ -397,7 +399,7 @@ const DeepLinkingNavigator = ({ children }: { children: React$Node }) => {
 
 export default class Root extends Component<
   { importDataString?: string },
-  { appState: * },
+  { user: * },
 > {
   initTimeout: *;
 
@@ -408,6 +410,15 @@ export default class Root extends Component<
   componentDidCatch(e: *) {
     logger.critical(e);
     throw e;
+  }
+
+  componentDidMount() {
+    getOrCreateUser().then(({ user, created }) => {
+      setEnv("USER_ID", user.id);
+      this.setState({
+        user: { user, created },
+      });
+    });
   }
 
   onInitFinished = () => {
@@ -426,11 +437,11 @@ export default class Root extends Component<
       <RebootProvider onRebootStart={this.onRebootStart}>
         <LedgerStoreProvider onInitFinished={this.onInitFinished}>
           {(ready, store, initialCountervalues) =>
-            ready ? (
+            ready && this.state.user ? (
               <>
                 <SetEnvsFromSettings />
                 <HookSentry />
-                <HookAnalytics store={store} />
+                <HookAnalytics store={store} user={this.state.user} />
                 <WalletConnectProvider>
                   <PlatformCatalogProvider>
                     <DeepLinkingNavigator>
