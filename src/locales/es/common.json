@@ -1898,7 +1898,7 @@
       "history": {
         "tab": "Historial",
         "disclaimer": "Tus transacciones de permuta en Mobile no están sincronizadas con Ledger Live Desktop",
-        "exportButton": "Operaciones de exportación",
+        "exportButton": "Exportar operaciones",
         "exportFilename": "Operaciones de permuta",
         "empty": {
           "title": "Tus permutas anteriores aparecerán aquí",
