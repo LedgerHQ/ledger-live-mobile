@@ -17,7 +17,7 @@ type Props = {
 function Footer({ url, urlWhatIsThis, account }: Props) {
   const { colors } = useTheme();
 
-  const currencyId = getAccountCurrency(account).id;
+  const currencyId = getAccountCurrency(account).name;
   return (
     <View
       style={[
