@@ -1578,7 +1578,7 @@
       "title": "General",
       "desc": "Configura los ajustes generales de Ledger Live.",
       "carousel": "Visibilidad del carrusel",
-      "carouselDesc": "Habilita la visibilidad del carrusel en el Portfolio",
+      "carouselDesc": "Muestra u oculta el carrusel en el Portfolio",
       "language": "Idioma",
       "languageDesc": "Configura el idioma de Ledger Live.",
       "password": "Bloqueo por contraseña",
@@ -1623,8 +1623,8 @@
         "bullet1": "ID de aplicación único anónimo",
         "bullet2": "Versión de Ledger Live, región del SO, idioma y región"
       },
-      "hideEmptyTokenAccounts": "Ocultar cuentas de token vacías",
-      "hideEmptyTokenAccountsDesc": "Oculta cuentas de token vacías en la página Cuentas."
+      "hideEmptyTokenAccounts": "Hide empty token accounts",
+      "hideEmptyTokenAccountsDesc": "Ocultar cuentas de tokens sin saldo en la página de Cuentas."
     },
     "currencies": {
       "header": "Divisas",
@@ -1692,7 +1692,7 @@
     "experimental": {
       "title": "Funciones experimentales",
       "desc": "Prueba las funciones experimentales y dinos qué te parecen.",
-      "disclaimer": "Estas son características experimentales que proporcionamos “tal como están” para que nuestra comunidad de expertos tecnológicos las pruebe. Pueden cambiar, deteriorarse o ser eliminadas en cualquier momento. Al habilitarlas, aceptas usarlas bajo tu responsabilidad."
+      "disclaimer": "Estas son funciones experimentales que ofrecemos “tal como están” para que nuestra comunidad de expertos tecnológicos las pruebe. Es posible que cambien, se deterioren o sean eliminadas en cualquier momento. Al habilitarlas, aceptas usarlas bajo tu responsabilidad."
     }
   },
   "migrateAccounts": {
