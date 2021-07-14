@@ -652,7 +652,7 @@
       },
       "academy": {
         "title": "Ledger Academy",
-        "description": "Tout ce qu'il faut savoir sur les cryptos"
+        "description": "Tout ce qu'il faut savoir\nsur les cryptos"
       },
       "stakeCosmos": {
         "title": "Staker sur Cosmos",
@@ -760,7 +760,7 @@
       "2": {
         "label": "Les bases",
         "title": "Rester hors ligne",
-        "desc": "Votre Nano est un wallet physique de stockage à froid. Cela signifie que votre clé privée n'est jamais exposée sur Internet, même lorsque vous utilisez l'application."
+        "desc": "Votre Nano est un wallet physique de stockage à froid. Cela signifie que votre clé privée n'est jamais exposée sur Internet, même lorsque vous utilisez Ledger Live."
       },
       "3": {
         "label": "Les bases",
@@ -939,7 +939,7 @@
               "label": "Ne la saisissez <1>jamais</1> sur un ordinateur, smartphone ou autre appareil. Ne la prenez pas en photo."
             },
             "1": {
-              "label": "Ne partagez <1>jamais</1> vos 24 mots avec qui que ce soit."
+              "label": "Ne la partagez <1>jamais</1> avec qui que ce soit."
             },
             "2": {
               "label": "Conservez-la <1>toujours</1> en lieu sûr à l'abri des regards."
@@ -1090,8 +1090,8 @@
       }
     },
     "stepImportAccounts": {
-      "title": "Synchroniser ses cryptos depuis l'ordinateur",
-      "desc": "Si vous gérez déjà vos cryptos dans l'application Ledger Live ordinateur, vous pouvez synchroniser pour les gérer depuis votre téléphone.",
+      "title": "Synchroniser ses cryptos depuis un ordinateur",
+      "desc": "Si vous gérez déjà vos cryptos dans l'application Ledger Live ordinateur, vous pouvez synchroniser pour les gérer sur votre téléphone.",
       "cta": "Je suis prêt(e) à scanner",
       "bullets": {
         "0": {
@@ -1240,7 +1240,7 @@
       "buttons": {
         "import": "Ajouter un compte",
         "manager": "Installer des applications",
-        "managerSecondary": "Installer des applications sur mon appareil"
+        "managerSecondary": "Installer des applications sur mon wallet"
       }
     },
     "noOpState": {
@@ -2642,8 +2642,8 @@
       "title": "Afficher",
       "all": "Toutes",
       "installed": "Applications",
-      "not_installed": "Non installée",
-      "supported": "Prise en charge par Ledger Live",
+      "not_installed": "Non installées",
+      "supported": "Prises en charge par Ledger Live",
       "updatable": "Mise à jour possible",
       "apply": "Appliquer"
     },
