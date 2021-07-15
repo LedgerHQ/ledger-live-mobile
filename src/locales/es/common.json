@@ -1095,7 +1095,7 @@
       "cta": "Estoy listo para escanear",
       "bullets": {
         "0": {
-          "label": "En tu aplicación Desktop, selecciona <1>Configuración> Cuentas > Exportar cuentas”</1>."
+          "label": "On the Desktop app, select <1>Settings > Accounts > Account export</1>."
         },
         "1": {
           "label": "Escanea el código LiveQR con tu teléfono."
@@ -1645,7 +1645,7 @@
       "blacklistedTokensDesc": "Puedes ocultar los tokens ingresando la lista de cuentas, haciendo luego un toque prolongado sobre el token y seleccionando “Ocultar Token”.",
       "blacklistedTokensModal": {
         "title": "Ocultar token",
-        "desc": "Esta acción ocultará todas las cuentas de <1><0>{tokenName}</0></1>, puedes mostrarlas de nuevo desde <3>Configuración > Cuentas</3>.",
+        "desc": "Esta acción ocultará todas las cuentas <1><0>{tokenName}</0></1>, puedes mostrarlas de nuevo mediante <3>Ajustes > Cuentas</3>.",
         "confirm": "Ocultar token"
       },
       "cryptoAssets": {
