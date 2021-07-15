@@ -1332,7 +1332,7 @@
     "tokenModal": {
       "desc": "Cette opération est liée aux opérations de jetons suivantes"
     },
-    "details": "Détails de {{ currency }}",
+    "details": "Détails sur {{ currency }}",
     "extra": {
       "resource": "Ressource",
       "frozenAmount": "Montant gelé",
@@ -1568,7 +1568,7 @@
     },
     "status": {
       "title": "Statut de Ledger",
-      "desc": "Vérifiez l'état de notre système."
+      "desc": "Vérifiez l'état de notre système"
     }
   },
   "settings": {
@@ -1819,9 +1819,9 @@
         "from": "De",
         "to": "À",
         "balance": "Solde <0>123</0>",
-        "fromAccount": "Sélectionnez un compte.",
-        "toAccount": "Sélectionnez un compte.",
-        "paraswapCTA": "Vous cherchez ParaSwap ? Il se trouve maintenant dans l'onglet Discover.",
+        "fromAccount": "Sélectionnez un compte",
+        "toAccount": "Sélectionnez un compte",
+        "paraswapCTA": "Vous cherchez ParaSwap ? Il se trouve dans l'onglet Discover.",
         "amount": {
           "useMax": "Choisir le maximum",
           "available": "Total disponible"
@@ -1892,7 +1892,7 @@
       },
       "emptyState": {
         "title": "Aucun compte {{currency}}",
-        "description": "Vous devez ajouter un compte avant de pouvoir échanger des {{currency}}.",
+        "description": "Vous devez ajouter un compte avant de pouvoir échanger du {{currency}}.",
         "CTAButton": "Ajouter un compte"
       },
       "history": {
@@ -1944,7 +1944,7 @@
         "tabTitle": "Tableau de bord",
         "assetsTitle": "Actifs à prêter",
         "accountsTitle": "Comptes approuvés",
-        "emptySateDescription": "Vous pouvez prêter des actifs directement depuis vos comptes Ethereum et réaliser des intérêts.",
+        "emptySateDescription": "Vous pouvez prêter des actifs directement depuis vos comptes Ethereum et gagner des intérêts.",
         "apy": "APY {{value}}",
         "activeAccount": {
           "account": "Compte",
@@ -1964,7 +1964,7 @@
       },
       "closedLoans": {
         "tabTitle": "Prêts clôturés",
-        "description": "Consultez tous vos prêts clôturés et les intérêts perçus.",
+        "description": "Consultez tous vos prêts clôturés et vos intérêts perçus.",
         "cta": "Prêter un actif"
       },
       "history": {
@@ -2003,8 +2003,8 @@
           "description": "Pour déposer des fonds et prêter des cryptos, vous avez besoin d'un compte {{ name }}. Recevez des fonds sur votre adresse Ethereum."
         },
         "buttons": {
-          "receive": "Recevoir {{ name }}",
-          "buy": "Acheter {{ name }}"
+          "receive": "Recevoir des {{ name }}",
+          "buy": "Acheter des {{ name }}"
         }
       },
       "enable": {
