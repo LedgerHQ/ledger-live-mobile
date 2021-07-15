@@ -1262,7 +1262,7 @@
     "week": "1S",
     "month": "1M",
     "year": "1A",
-    "all": "Toutes",
+    "all": "Tout",
     "since": {
       "day": "hier",
       "week": "semaine dernière",
@@ -1544,11 +1544,11 @@
   "help": {
     "gettingStarted": {
       "title": "Premiers pas",
-      "desc": "Commencer ici"
+      "desc": "Commencez ici"
     },
     "helpCenter": {
       "title": "Assistance Ledger",
-      "desc": "Obtenir de l'aide"
+      "desc": "Obtenez de l'aide"
     },
     "ledgerAcademy": {
       "title": "Ledger Academy",
@@ -1611,7 +1611,7 @@
         "bullet3": "Actions : envoyer, recevoir, verrouiller, etc.",
         "bullet4": "Défilement en bas de page",
         "bullet5": "Version, installation et désinstallation de l'application",
-        "bullet6": "Nombre de comptes, monnaies et opérations",
+        "bullet6": "Nombre de comptes, cryptos et opérations",
         "bullet7": "Durée des sessions globale et par page",
         "bullet8": "Type d'appareil Ledger et micrologiciel"
       },
@@ -1631,7 +1631,7 @@
       "rateProvider": "Fournisseur du taux de change ({{currencyTicker}} → BTC)",
       "rateProviderDesc": "Choisissez le fournisseur du taux de change entre {{currencyTicker}} et Bitcoin.",
       "confirmationNb": "Nombre de confirmations",
-      "confirmationNbDesc": "Définissez le nombre de confirmations réseau pour qu'une transaction soit marquée comme validée.",
+      "confirmationNbDesc": "Définissez le nombre de confirmations réseau pour qu'une transaction soit notée validée.",
       "currencySettingsTitle": "Paramètres de {{currencyName}}",
       "placeholder": "Aucun paramètre pour cet actif"
     },
@@ -1676,7 +1676,7 @@
       "support": "Assistance Ledger",
       "supportDesc": "En cas de problème, bénéficiez d'une aide pour utiliser Ledger Live avec votre wallet physique.",
       "configureDevice": "Configurer un appareil",
-      "configureDeviceDesc": "Configurer un nouvel appareil ou restaurer un appareil existant. Vos comptes et paramètres sont conservés.",
+      "configureDeviceDesc": "Configurez un nouvel appareil ou restaurer un appareil existant. Vos comptes et paramètres sont conservés.",
       "clearCache": "Vider le cache",
       "clearCacheDesc": "Les transactions sur le réseau seront analysées et vos comptes seront recalculés.",
       "clearCacheModal": "Êtes-vous sûr(e) ?",
@@ -1685,7 +1685,7 @@
       "exportLogs": "Exporter les logs",
       "exportLogsDesc": "L'exportation des logs de Ledger Live peut aider à résoudre les problèmes.",
       "hardReset": "Réinitialiser Ledger Live",
-      "hardResetDesc": "Sans effet sur vos actifs. Toutes les données de Ledger Live, y compris les données du compte, l'historique des transactions et les paramètres seront effacées. Utilisez votre appareil Ledger pour recharger et gérer vos crypto-actifs sur une application Ledger Live vierge.",
+      "hardResetDesc": "Sans effet sur vos actifs. Toutes les données de Ledger Live, y compris les données de comptes, l'historique de vos transactions et paramètres seront effacées. Utilisez votre appareil Ledger pour recharger et gérer vos crypto-actifs dans une application Ledger Live vierge.",
       "repairDevice": "Réparer votre appareil Ledger",
       "repairDeviceDesc": "En cas de problème lors de la mise à jour de votre appareil (reprise des mises à jour impossible), essayez cela pour réparer votre appareil."
     },
@@ -2567,11 +2567,11 @@
     },
     "storage": {
       "title": "Stockage",
-      "used": "Utilisé",
+      "used": "utilisés",
       "genuine": "Votre appareil est authentique.",
       "appsInstalled": "<0>{{number}}</0> application installée",
       "appsInstalled_plural": "<0>{{number}}</0> applications installées",
-      "storageAvailable": "disponible"
+      "storageAvailable": "disponibles"
     },
     "installSuccess": {
       "title": "Application bien installée. Vous pouvez maintenant ajouter vos comptes {{app}}.",
@@ -2615,7 +2615,7 @@
       "title_plural": "{{number}} mises à jour d'applications",
       "step": "Étape {{step}} de la mise à jour :",
       "updateWarn": "Ne sortez pas du Gestionnaire pendant la mise à jour.",
-      "progress": "Mise à jour de toutes...",
+      "progress": "Mises à jour...",
       "button": "Tout mettre à jour",
       "version": "Nouvelle {{version}}",
       "buttonAction": "Mise à jour disponible",
