@@ -708,7 +708,7 @@
       "title": "Elige tu idioma",
       "cta": "Continuar",
       "warning": {
-        "title": "Comenzar en inglés",
+        "title": "Comenzar en español",
         "cta": "¡Entendido!",
         "desc": "Estamos añadiendo idiomas adicionales para ayudarte a aprender a utilizar Ledger. Ten en cuenta que actualmente el resto de la experiencia Ledger solo está disponible en inglés."
       }
@@ -3468,7 +3468,7 @@
     "read": "Leer los Términos de uso",
     "switchLabelPrivacy": "Confirmo que he leído y acepto la <1> Política de Privacidad</1>",
     "switchLabel": "He leído y acepto los <1>Términos del servicio</1>",
-    "cta": "Entra en la App Ledger"
+    "cta": "Entrar en la App Ledger"
   },
   "exchange": {
     "buy": {
