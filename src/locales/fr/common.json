@@ -1922,7 +1922,7 @@
       "account": {
         "amountSupplied": "Montant déposé",
         "amountSuppliedTooltip": "Montant prêté sur le réseau",
-        "currencyAPY": "APY de la devise",
+        "currencyAPY": "APY",
         "currencyAPYTooltip": "Rendement annuel d'un dépôt sans cesse capitalisé",
         "accruedInterests": "Solde des intérêts",
         "accruedInterestsTooltip": "Intérêts produits par vos actifs prêtés",
@@ -1974,14 +1974,14 @@
       },
       "terms": {
         "label": "Prêter des cryptos",
-        "title": "Prêter vos actifs sur le protocole Compound",
+        "title": "Prêter des actifs sur le protocole Compound",
         "description": "Le protocole Compound vous permet de prêter et d'emprunter des actifs sur le réseau Ethereum. Vous pouvez prêter vos actifs et gagner des intérêts directement depuis votre compte Ledger.",
         "switchLabel": "J'ai lu et j'accepte les <0><0>Conditions d'utilisation</0></0>."
       },
       "info": {
         "1": {
           "label": "Étape 1/3",
-          "title": "Approuver un compte pour permettre au protocole de traiter les futurs prêts.",
+          "title": "Approuver un compte pour permettre au protocole de traiter les futurs prêts",
           "description": "Vous devez autoriser le contrat intelligent de Compound à transférer un certain montant d'actifs au protocole. L'activation d'un compte permet au protocole de traiter les futurs prêts."
         },
         "2": {
