@@ -1314,9 +1314,10 @@
       "UNBOND": "Unbond",
       "REWARD_PAYOUT": "Reward",
       "SLASH": "Slash",
-      "WITHDRAW_UNBONDED": "Unbonded Withdrawal",
+      "WITHDRAW_UNBONDED": "Withdrawal",
       "NOMINATE": "Nomination",
-      "CHILL": "Clear nominations"
+      "CHILL": "Clear nominations",
+      "SET_CONTROLLER": "Set controller"
     }
   },
   "operationDetails": {
