@@ -13,6 +13,7 @@ import HeaderSynchronizing from "../../components/HeaderSynchronizing";
 import Touchable from "../../components/Touchable";
 import Greetings from "./Greetings";
 import BellIcon from "../../icons/Bell";
+import SettingsIcon from "../../icons/Settings";
 import { NavigatorName, ScreenName } from "../../const";
 import { scrollToTop } from "../../navigation/utils";
 import LText from "../../components/LText";
@@ -20,7 +21,7 @@ import Warning from "../../icons/WarningOutline";
 
 type Props = {
   nbAccounts: number,
-  showGreeting: boolean,
+  showGreeting?: boolean,
 };
 
 export default function PortfolioHeader({ nbAccounts, showGreeting }: Props) {
@@ -38,6 +39,10 @@ export default function PortfolioHeader({ nbAccounts, showGreeting }: Props) {
     navigation.navigate(NavigatorName.NotificationCenter, {
       screen: ScreenName.NotificationCenterStatus,
     });
+  }, [navigation]);
+
+  const onSettingsButtonPress = useCallback(() => {
+    navigation.navigate(NavigatorName.Settings);
   }, [navigation]);
 
   const isUpToDate = useSelector(isUpToDateSelector);
@@ -58,10 +63,6 @@ export default function PortfolioHeader({ nbAccounts, showGreeting }: Props) {
     ) : showGreeting ? (
       <Greetings nbAccounts={nbAccounts} />
     ) : null;
-
-  if (!content) {
-    return null;
-  }
 
   return (
     <View style={styles.wrapper}>
@@ -94,6 +95,11 @@ export default function PortfolioHeader({ nbAccounts, showGreeting }: Props) {
           </Touchable>
         </View>
       )}
+      <View style={[styles.distributionButton, styles.marginLeft]}>
+        <Touchable onPress={onSettingsButtonPress}>
+          <SettingsIcon size={18} color={colors.grey} />
+        </Touchable>
+      </View>
     </View>
   );
 }
@@ -101,6 +107,7 @@ export default function PortfolioHeader({ nbAccounts, showGreeting }: Props) {
 const styles = StyleSheet.create({
   wrapper: {
     flexDirection: "row",
+    alignItems: "center",
     paddingRight: 16,
   },
   content: {
