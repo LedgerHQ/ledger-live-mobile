@@ -61,7 +61,7 @@ export default function PortfolioScreen({ navigation }: Props) {
   useScrollToTop(ref);
   const { colors } = useTheme();
 
-  function StickyActions() {
+  const StickyActions = useCallback(() => {
     const offset = 410;
     const top = interpolate(scrollY, {
       inputRange: [offset, offset + 56],
@@ -81,7 +81,7 @@ export default function PortfolioScreen({ navigation }: Props) {
         </Animated.View>
       </View>
     );
-  }
+  }, [accounts.length, scrollY]);
 
   const showingPlaceholder =
     accounts.length === 0 || accounts.every(isAccountEmpty);
@@ -112,6 +112,55 @@ export default function PortfolioScreen({ navigation }: Props) {
     [navigation],
   );
 
+  const data = useMemo(
+    () => [
+      accounts.length > 0 && !areAccountsEmpty ? <Carousel /> : null,
+      <GraphCardContainer
+        counterValueCurrency={counterValueCurrency}
+        portfolio={portfolio}
+        showGreeting={!areAccountsEmpty}
+        showGraphCard={!areAccountsEmpty}
+      />,
+      StickyActions(),
+      ...(showDistribution
+        ? [
+            <View style={styles.distrib}>
+              <LText bold secondary style={styles.distributionTitle}>
+                {t("distribution.header")}
+              </LText>
+              <DistributionList
+                flatListRef={flatListRef}
+                distribution={distribution}
+                setHighlight={onDistributionCardPress}
+              />
+              <View style={styles.seeMoreBtn}>
+                <Button
+                  event="View Distribution"
+                  type="lightPrimary"
+                  title={t("common.seeAll")}
+                  onPress={onDistributionButtonPress}
+                />
+              </View>
+            </View>,
+          ]
+        : []),
+      <PortfolioHistoryList navigation={navigation} />,
+    ],
+    [
+      StickyActions,
+      accounts.length,
+      areAccountsEmpty,
+      counterValueCurrency,
+      distribution,
+      navigation,
+      onDistributionButtonPress,
+      onDistributionCardPress,
+      portfolio,
+      showDistribution,
+      t,
+    ],
+  );
+
   return (
     <SafeAreaView
       style={[
@@ -138,39 +187,7 @@ export default function PortfolioScreen({ navigation }: Props) {
 
       <AnimatedFlatListWithRefreshControl
         ref={ref}
-        data={[
-          accounts.length > 0 && !areAccountsEmpty ? <Carousel /> : null,
-          <GraphCardContainer
-            counterValueCurrency={counterValueCurrency}
-            portfolio={portfolio}
-            showGreeting={!areAccountsEmpty}
-            showGraphCard={!areAccountsEmpty}
-          />,
-          StickyActions(),
-          ...(showDistribution
-            ? [
-                <View style={styles.distrib}>
-                  <LText bold secondary style={styles.distributionTitle}>
-                    {t("distribution.header")}
-                  </LText>
-                  <DistributionList
-                    flatListRef={flatListRef}
-                    distribution={distribution}
-                    setHighlight={onDistributionCardPress}
-                  />
-                  <View style={styles.seeMoreBtn}>
-                    <Button
-                      event="View Distribution"
-                      type="lightPrimary"
-                      title={t("common.seeAll")}
-                      onPress={onDistributionButtonPress}
-                    />
-                  </View>
-                </View>,
-              ]
-            : []),
-          <PortfolioHistoryList navigation={navigation} />,
-        ]}
+        data={data}
         style={styles.inner}
         renderItem={({ item }) => item}
         keyExtractor={(item, index) => String(index)}
