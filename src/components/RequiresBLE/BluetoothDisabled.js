@@ -17,7 +17,7 @@ function BluetoothDisabled() {
   useEffect(() => {
     // Prompts the user to enable bluetooth using native api calls when the component gets initially rendered.
     NativeModules.BluetoothHelperModule.prompt();
-  });
+  }, []);
 
   return (
     <SafeAreaView style={[styles.container, { backgroundColor: colors.card }]}>
