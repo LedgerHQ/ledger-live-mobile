@@ -47,7 +47,11 @@ export function NominateAction({ onPress, electionOpen, disabled }: Props) {
   );
 }
 
-export function SetControllerAction({ onPress, electionOpen, disabled }: Props) {
+export function SetControllerAction({
+  onPress,
+  electionOpen,
+  disabled,
+}: Props) {
   const { t } = useTranslation();
 
   const [disabledModalOpen, setDisabledModalOpen] = useState(false);
@@ -68,12 +72,10 @@ export function SetControllerAction({ onPress, electionOpen, disabled }: Props) 
         isOpened={!!disabledModalOpen}
         onClose={onCloseModal}
         data={[
-          electionOpen
-          ??
-          {
+          electionOpen ?? {
             title: t("polkadot.info.electionOpen.title"),
             description: t("polkadot.info.electionOpen.description"),
-          }
+          },
         ]}
       />
     </TouchableOpacity>
