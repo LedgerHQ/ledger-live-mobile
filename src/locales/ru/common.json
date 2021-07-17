@@ -1623,7 +1623,7 @@
         "bullet1": "Анонимный уникальный ID приложения",
         "bullet2": "Версия Ledger Live, язык интерфейса и регион"
       },
-      "hideEmptyTokenAccounts": "Скрыть счета с нулевым балансом",
+      "hideEmptyTokenAccounts": "Скрывать пустые счета",
       "hideEmptyTokenAccountsDesc": "Скрыть счета с нулевым балансом на странице Cчета."
     },
     "currencies": {
