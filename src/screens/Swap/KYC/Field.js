@@ -37,16 +37,18 @@ const Field = ({
       {!mask ? (
         <TextInput
           style={[styles.input, { color, borderColor }]}
-          onChangeText={onChange}
           editable={!isLoading}
-          clearButtonMode="while-editing"
+          placeholderTextColor={colors.smoke}
           placeholder={t(`transfer.swap.kyc.wyre.form.${field}Placeholder`)}
+          onChangeText={onChange}
+          clearButtonMode="while-editing"
           maxLength={30}
         />
       ) : (
         <TextInputMask
-          placeholder={t("transfer.swap.kyc.wyre.form.dateOfBirthPlaceholder")}
           style={[styles.input, { color, borderColor }]}
+          placeholderTextColor={colors.smoke}
+          placeholder={t("transfer.swap.kyc.wyre.form.dateOfBirthPlaceholder")}
           onChangeText={onChange}
           mask={"[0000]-[00]-[00]"}
         />
