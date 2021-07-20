@@ -173,7 +173,8 @@
     "timers-browserify": "^2.0.12",
     "tty-browserify": "0.0.1",
     "url": "^0.11.0",
-    "uuid": "^7.0.2"
+    "uuid": "^7.0.2",
+    "vm-browserify": "1.1.2"
   },
   "devDependencies": {
     "@actions/core": "^1.2.6",
