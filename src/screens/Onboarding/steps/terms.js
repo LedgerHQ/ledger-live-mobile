@@ -1,8 +1,9 @@
 // @flow
 
+import type { ViewStyleProp } from "react-native/Libraries/StyleSheet/StyleSheet";
 import React, { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
-import { StyleSheet, View, Linking, ActivityIndicator } from "react-native";
+import { StyleSheet, View, Linking } from "react-native";
 import { Trans } from "react-i18next";
 import { useTheme } from "@react-navigation/native";
 import { TrackScreen } from "../../../analytics";
@@ -12,33 +13,51 @@ import CheckBox from "../../../components/CheckBox";
 import { NavigatorName, ScreenName } from "../../../const";
 import { setAnalytics } from "../../../actions/settings";
 
-import { useTerms, useTermsAccept, url } from "../../../logic/terms";
-import SafeMarkdown from "../../../components/SafeMarkdown";
+import { useTermsAccept } from "../../../logic/terms";
 import ExternalLink from "../../../components/ExternalLink";
 import Touchable from "../../../components/Touchable";
-import GenericErrorView from "../../../components/GenericErrorView";
-import RetryButton from "../../../components/RetryButton";
 import AnimatedHeaderView from "../../../components/AnimatedHeader";
 
 import { useLocale } from "../../../context/Locale";
 
 import { urls } from "../../../config/urls";
 
+type LinkBoxProps = {
+  style?: ViewStyleProp,
+  text: React$Node,
+  url: string,
+  event: string,
+};
+
+const LinkBox = React.memo(({ style, text, url, event }: LinkBoxProps) => {
+  const { colors } = useTheme();
+  return (
+    <View
+      style={[
+        style,
+        styles.linkBox,
+        { backgroundColor: colors.pillActiveBackground },
+      ]}
+    >
+      <ExternalLink
+        text={text}
+        onPress={() => Linking.openURL(url)}
+        event={event}
+      />
+    </View>
+  );
+});
+
 function OnboardingStepTerms({ navigation }: *) {
   const { colors } = useTheme();
   const { locale } = useLocale();
   const dispatch = useDispatch();
-  const [markdown, error, retry] = useTerms(locale);
   const [, accept] = useTermsAccept();
   const [toggle, setToggle] = useState(false);
-  const [togglePrivacy, setTogglePrivacy] = useState(false);
+
   const onSwitch = useCallback(() => {
     setToggle(!toggle);
   }, [toggle]);
-
-  const onSwitchPrivacy = useCallback(() => {
-    setTogglePrivacy(!togglePrivacy);
-  }, [togglePrivacy]);
 
   const next = useCallback(() => {
     accept();
@@ -57,45 +76,17 @@ function OnboardingStepTerms({ navigation }: *) {
           <Touchable
             event="TermsAcceptSwitch"
             onPress={onSwitch}
-            style={[styles.switchRow]}
+            style={styles.switchRow}
           >
             <CheckBox style={styles.checkbox} isChecked={toggle} />
             <LText semiBold style={styles.switchLabel}>
-              <Trans i18nKey="Terms.switchLabel">
-                {""}
-                <LText
-                  semiBold
-                  onPress={() => Linking.openURL(urls.terms)}
-                  color="live"
-                />
-                {""}
-              </Trans>
-            </LText>
-          </Touchable>
-          <Touchable
-            event="TermsAcceptSwitchPrivacy"
-            onPress={onSwitchPrivacy}
-            style={styles.switchRow}
-          >
-            <CheckBox style={styles.checkbox} isChecked={togglePrivacy} />
-            <LText semiBold style={styles.switchLabel}>
-              <Trans i18nKey="Terms.switchLabelPrivacy">
-                {""}
-                <LText
-                  semiBold
-                  onPress={() =>
-                    Linking.openURL(urls.privacyPolicy[locale || "en"])
-                  }
-                  color="live"
-                />
-                {""}
-              </Trans>
+              <Trans i18nKey="Terms.switchLabelFull" />
             </LText>
           </Touchable>
           <Button
             event="Onboarding - ToU accepted"
             type="primary"
-            disabled={!toggle || !togglePrivacy}
+            disabled={!toggle}
             onPress={next}
             title={<Trans i18nKey="Terms.cta" />}
           />
@@ -103,27 +94,17 @@ function OnboardingStepTerms({ navigation }: *) {
       }
     >
       <TrackScreen category="Onboarding" name="Terms" />
-      {markdown ? (
-        <SafeMarkdown markdown={markdown} />
-      ) : error ? (
-        <View>
-          <GenericErrorView
-            error={error}
-            withIcon={false}
-            withDescription={false}
-          />
-          <ExternalLink
-            text={<Trans i18nKey="Terms.read" />}
-            onPress={() => Linking.openURL(url)}
-            event="OpenTerms"
-          />
-          <View style={styles.retryButton}>
-            <RetryButton onPress={retry} />
-          </View>
-        </View>
-      ) : (
-        <ActivityIndicator />
-      )}
+      <LinkBox
+        style={styles.linkBoxSpacing}
+        text={<Trans i18nKey="Terms.service" />}
+        url={urls.terms[locale || "en"]}
+        event="OpenTerms"
+      />
+      <LinkBox
+        text={<Trans i18nKey="settings.about.privacyPolicy" />}
+        url={urls.privacyPolicy[locale || "en"]}
+        event="OpenPrivacyPolicy"
+      />
     </AnimatedHeaderView>
   );
 }
@@ -143,8 +124,7 @@ const styles = StyleSheet.create({
   footer: {
     flexDirection: "column",
     justifyContent: "space-between",
-    borderTopWidth: 1,
-
+    // borderTopWidth: 1,
     paddingHorizontal: 24,
     paddingBottom: 24,
   },
@@ -158,6 +138,13 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     width: 22,
     height: 22,
+  },
+  linkBox: {
+    display: "flex",
+    padding: 16,
+  },
+  linkBoxSpacing: {
+    marginBottom: 16,
   },
 });
 
