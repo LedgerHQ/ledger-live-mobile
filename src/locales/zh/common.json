@@ -1120,7 +1120,7 @@
       "step2-restore": "同时按下两个按钮以选择 <1><1>Restore from recovery phrase.</1></1> (通过恢复短语进行还原)",
       "step3": "按左边或右边的按钮以选择数位。同时按下两个按钮以确认。",
       "step4prefix": "选取",
-      "step4suffix1": " 确认您的 PIN 识别密码。",
+      "step4suffix1": "确认您的 PIN 识别密码。",
       "step4suffix2": "删除末位数字。",
       "modal": {
         "step1": "总是 <1><1>亲自</1></1> 选择自己的 PIN 识别密码",
