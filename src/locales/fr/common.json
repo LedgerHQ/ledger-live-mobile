@@ -505,8 +505,8 @@
       "description": "Cette fonctionnalité sera ajoutée ultérieurement suite aux changements introduits par la mise à jour Babylon."
     },
     "AccessDeniedError": {
-      "title": "Ledger Live needs an update",
-      "description": "Please update Ledger Live to the latest version, and re verify your identity to swap with wyre"
+      "title": "Mise à jour de Ledger Live nécessaire",
+      "description": "Veuillez mettre à jour Ledger Live et vérifier à nouveau votre identité pour échanger avec Wyre"
     },
     "RecommendUndelegation": {
       "title": "Interrompez la délégation du compte avant de le vider."
@@ -1594,7 +1594,7 @@
       "languageDesc": "Choisissez la langue d'affichage de Ledger Live.",
       "password": "Verrouillage par mot de passe",
       "passwordDesc": "Définissez un mot de passe pour protéger vos données Ledger Live sur votre téléphone.",
-      "counterValue": "Preferred currency",
+      "counterValue": "Devise préférée",
       "theme": "Thème",
       "themeDesc": "Définissez le thème de l'interface utilisateur",
       "themes": {
@@ -1793,35 +1793,35 @@
         "disclaimer": "Échangez des cryptos directement à partir de votre appareil Ledger. Ce service n'est pas disponible dans certains pays, y compris aux États-Unis."
       },
       "unauthorizedRates": {
-        "cta": "Reset verification",
-        "banner": "Reset your KYC and update Live to swap with Wyre.",
-        "bannerCTA": "Reset KYC"
+        "cta": "Réinitialiser la vérification",
+        "banner": "Réinitialisez le processus et mettez à jour Ledger Live.",
+        "bannerCTA": "Réinitialiser la vérification"
       },
       "main": {
         "header": "Swap"
       },
       "kyc": {
         "disclaimer": "J'accepte que mes données de localisation soient partagées avec des tiers à des fins de conformité.",
-        "cta": "Continue",
+        "cta": "Continuer",
         "wyre": {
           "title": "Complete your KYC",
-          "subtitle": "Your information is collected by LEDGER on behalf of and transferred to WYRE for KYC purposes. For more information, please check our Privacy Policy",
+          "subtitle": "LEDGER recueille vos données pour WYRE et les lui transfère pour réaliser votre vérification d'identité. Consultez notre Politique de confidentialité.",
           "pending": {
-            "cta": "Continue",
+            "cta": "Continuer",
             "title": "KYC submitted for approval",
             "subtitle": "Your KYC has been submitted and is pending approval.",
-            "link": "Learn more about KYC"
+            "link": "En savoir plus"
           },
           "approved": {
-            "cta": "Continue",
-            "title": "KYC approved!",
+            "cta": "Continuer",
+            "title": "Vérification d'identité approuvée",
             "subtitle": "Your KYC has been submitted and has been approved.",
-            "link": "Learn more about KYC"
+            "link": "En savoir plus"
           },
           "closed": {
-            "cta": "Reset KYC",
-            "title": "KYC application rejected",
-            "subtitle": "Wyre rejected the data you provided for KYC purposes",
+            "cta": "Réinitialiser la vérification",
+            "title": "Demande de vérification refusée",
+            "subtitle": "Wyre a refusé les données que vous avez fournies",
             "link": "Learn more about KYC"
           },
           "form": {
