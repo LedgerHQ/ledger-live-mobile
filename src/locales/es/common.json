@@ -262,6 +262,10 @@
       "title": "Es necesario actualizar el firmware o la aplicación",
       "description": "Utiliza Manager para desinstalar todas las aplicaciones y comprobar si hay alguna actualización de firmware disponible antes de instalarlas de nuevo."
     },
+    "LatestFirmwareVersionRequired": {
+      "title": "Device update required on desktop",
+      "description": "Please update your Nano X firmware on Ledger Live Desktop"
+    },
     "GenuineCheckFailed": {
       "title": "La autenticación del dispositivo ha fallado",
       "description": "Algo ha salido mal. Inténtalo de nuevo. Si el problema persiste, guarda los registros con el botón que aparece a continuación y envíalos al Soporte de Ledger."
@@ -499,6 +503,10 @@
     "UnavailableTezosOriginatedAccountSend": {
       "title": "No es posible enviar aún desde subcuentas",
       "description": "Esta característica se agregará en una etapa posterior debido a los cambios introducidos recientemente por la actualización de Babylon."
+    },
+    "AccessDeniedError": {
+      "title": "Ledger Live needs an update",
+      "description": "Please update Ledger Live to the latest version, and re verify your identity to swap with wyre"
     },
     "RecommendUndelegation": {
       "title": "Desdelega la cuenta antes de vaciarla"
@@ -1586,7 +1594,7 @@
       "languageDesc": "Configura el idioma de Ledger Live.",
       "password": "Bloqueo por contraseña",
       "passwordDesc": "Elige una contraseña para proteger los datos de Ledger Live en el teléfono.",
-      "counterValue": "Contraparte",
+      "counterValue": "Preferred currency",
       "theme": "Tema",
       "themeDesc": "Elige el tema de la IU de la aplicación",
       "themes": {
@@ -1784,11 +1792,66 @@
         "whatIsSwap": "¿Qué es la permuta?",
         "disclaimer": "Intercambia criptos directamente desde tu dispositivo Ledger. Este servicio no está disponible en algunos países, entre ellos, Estados Unidos."
       },
+      "unauthorizedRates": {
+        "cta": "Reset verification",
+        "banner": "Reset your KYC and update Live to swap with Wyre.",
+        "bannerCTA": "Reset KYC"
+      },
       "main": {
         "header": "Permutar"
       },
       "kyc": {
-        "disclaimer": "Acepto que mis datos de ubicación sean compartidos con terceros con fines de cumplimiento normativo."
+        "disclaimer": "Acepto que mis datos de ubicación sean compartidos con terceros con fines de cumplimiento normativo.",
+        "cta": "Continue",
+        "wyre": {
+          "title": "Complete your KYC",
+          "subtitle": "Your information is collected by LEDGER on behalf of and transferred to WYRE for KYC purposes. For more information, please check our Privacy Policy",
+          "pending": {
+            "cta": "Continue",
+            "title": "KYC submitted for approval",
+            "subtitle": "Your KYC has been submitted and is pending approval.",
+            "link": "Learn more about KYC"
+          },
+          "approved": {
+            "cta": "Continue",
+            "title": "KYC approved!",
+            "subtitle": "Your KYC has been submitted and has been approved.",
+            "link": "Learn more about KYC"
+          },
+          "closed": {
+            "cta": "Reset KYC",
+            "title": "KYC application rejected",
+            "subtitle": "Wyre rejected the data you provided for KYC purposes",
+            "link": "Learn more about KYC"
+          },
+          "form": {
+            "firstName": "First Name",
+            "lastName": "Last Name",
+            "street1": "Street Address Line 1",
+            "street2": "Street Address Line 2",
+            "city": "City",
+            "state": "State",
+            "country": "Country",
+            "postalCode": "Zip Code",
+            "dateOfBirth": "Date of birth",
+            "firstNamePlaceholder": "Enter your first name",
+            "lastNamePlaceholder": "Enter your last name",
+            "street1Placeholder": "Eg. 13, Maple street",
+            "street2Placeholder": "Eg. 13, Maple street",
+            "cityPlaceholder": "Eg. San José",
+            "postalCodePlaceholder": "Enter your 5 digit Zip code",
+            "statePlaceholder": "Select your state",
+            "dateOfBirthPlaceholder": "YYYY-MM-DD",
+            "firstNameError": "Enter your first name to continue",
+            "lastNameError": "Enter your last name to continue",
+            "street1Error": "Enter your address",
+            "cityError": "Enter the city you live in the USA",
+            "stateError": "Select your state to continue",
+            "postalCodeError": "Enter a valid US ZIP code",
+            "dateOfBirthError": "Enter your date of birth"
+          }
+        },
+        "states": "Select your state"
       },
       "notAvailable": {
         "title": "Servicio no disponible temporalmente, o no disponible en tu país"
@@ -3607,6 +3670,13 @@
         "title": "Para desarrolladores",
         "description": "Toda la información que necesitas para integrar tus aplicaciones en Ledger Live."
       }
+    },
+    "disclaimer": {
+      "title": "External Application",
+      "description": "You are about to be redirected to an application not operated by Ledger.",
+      "legalAdvice": "This application is not operated by Ledger. Ledger is not responsible for any loss of funds or quality of service of such application.\n\nAlways make sure to carefully verify the information displayed on your device.",
+      "checkbox": "Do not remind me again.",
+      "CTA": "Continue"
     }
   }
 }
