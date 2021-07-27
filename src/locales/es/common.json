@@ -1834,24 +1834,24 @@
             "country": "País",
             "postalCode": "Código postal",
             "dateOfBirth": "Fecha de nacimiento",
-            "firstNamePlaceholder": "Enter your first name",
-            "lastNamePlaceholder": "Enter your last name",
-            "street1Placeholder": "Eg. 13, Maple street",
-            "street2Placeholder": "Eg. 13, Maple street",
-            "cityPlaceholder": "Eg. San José",
-            "postalCodePlaceholder": "Enter your 5 digit Zip code",
-            "statePlaceholder": "Select your state",
-            "dateOfBirthPlaceholder": "YYYY-MM-DD",
-            "firstNameError": "Enter your first name to continue",
-            "lastNameError": "Enter your last name to continue",
-            "street1Error": "Enter your address",
-            "cityError": "Enter the city you live in the USA",
-            "stateError": "Select your state to continue",
-            "postalCodeError": "Enter a valid US ZIP code",
-            "dateOfBirthError": "Enter your date of birth"
+            "firstNamePlaceholder": "Ingresa tu nombre",
+            "lastNamePlaceholder": "Ingresa tu apellido",
+            "street1Placeholder": "Ejemplo: Calle Maple, 13",
+            "street2Placeholder": "Ejemplo: Calle Maple, 13",
+            "cityPlaceholder": "Ejemplo: San José",
+            "postalCodePlaceholder": "Ingresa tu código postal de 5 dígitos",
+            "statePlaceholder": "Selecciona tu estado",
+            "dateOfBirthPlaceholder": "AAAA-MM-DD",
+            "firstNameError": "Ingresa tu nombre para continuar",
+            "lastNameError": "Ingresa tu apellido para continuar",
+            "street1Error": "Ingresa tu dirección",
+            "cityError": "Ingresa la ciudad en la que vives en EE. UU.",
+            "stateError": "Selecciona tu estado para continuar",
+            "postalCodeError": "Ingresa un código postal de EE. UU. válido",
+            "dateOfBirthError": "Ingresa tu fecha de nacimiento"
           }
         },
-        "states": "Select your state"
+        "states": "Selecciona tu estado"
       },
       "notAvailable": {
         "title": "Servicio no disponible temporalmente, o no disponible en tu país"
@@ -3672,11 +3672,11 @@
       }
     },
     "disclaimer": {
-      "title": "External Application",
-      "description": "You are about to be redirected to an application not operated by Ledger.",
-      "legalAdvice": "This application is not operated by Ledger. Ledger is not responsible for any loss of funds or quality of service of such application.\n\nAlways make sure to carefully verify the information displayed on your device.",
-      "checkbox": "Do not remind me again.",
-      "CTA": "Continue"
+      "title": "Aplicación externa",
+      "description": "Estás a punto de ser redireccionado a una aplicación no operada por Ledger.",
+      "legalAdvice": "Esta aplicación no es operada por Ledger. Ledger no será responsable de ninguna pérdida de fondos o de calidad de servicio con respecto a dicha aplicación.\n\nSiempre asegúrate de verificar cuidadosamente la información que se muestra en tu dispositivo.",
+      "checkbox": "No recordarme de nuevo.",
+      "CTA": "Continuar"
     }
   }
 }
