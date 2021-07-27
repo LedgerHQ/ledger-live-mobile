@@ -262,6 +262,10 @@
       "title": "需要更新固件或应用程序",
       "description": "请使用管理器卸载所有的应用程序，且在重新安装应用程序之前检查是否有可用的固件更新。"
     },
+    "LatestFirmwareVersionRequired": {
+      "title": "Device update required on desktop",
+      "description": "Please update your Nano X firmware on Ledger Live Desktop"
+    },
     "GenuineCheckFailed": {
       "title": "设备验证失败",
       "description": "出错了。请重试。如果问题依旧存在，请使用下面的按钮保存您的日志，并将其提供给 Ledger 客服。"
@@ -499,6 +503,10 @@
     "UnavailableTezosOriginatedAccountSend": {
       "title": "尚无法从子账户发送",
       "description": "由于近期 Babylon 更新而引入的变化，此功能将在稍后阶段被添加。"
+    },
+    "AccessDeniedError": {
+      "title": "Ledger Live needs an update",
+      "description": "Please update Ledger Live to the latest version, and re verify your identity to swap with wyre"
     },
     "RecommendUndelegation": {
       "title": "请在清空账户之前将其解除委托"
@@ -1586,7 +1594,7 @@
       "languageDesc": "设置 Ledger Live 显示的语言。",
       "password": "密码锁",
       "passwordDesc": "设置一个密码来保护您手机上的 Ledger Live 数据。",
-      "counterValue": "对价",
+      "counterValue": "Preferred currency",
       "theme": "主题",
       "themeDesc": "设置用户界面主题",
       "themes": {
@@ -1784,11 +1792,66 @@
         "whatIsSwap": "什么是 Swap？",
         "disclaimer": "通过您的 Ledger 设备直接兑换加密货币。该服务在一些国家（包括美国）不可用。"
       },
+      "unauthorizedRates": {
+        "cta": "Reset verification",
+        "banner": "Reset your KYC and update Live to swap with Wyre.",
+        "bannerCTA": "Reset KYC"
+      },
       "main": {
         "header": "Swap"
       },
       "kyc": {
-        "disclaimer": "我确认：出于合规目的，我的位置数据将会分享给第三方。"
+        "disclaimer": "我确认：出于合规目的，我的位置数据将会分享给第三方。",
+        "cta": "Continue",
+        "wyre": {
+          "title": "Complete your KYC",
+          "subtitle": "Your information is collected by LEDGER on behalf of and transferred to WYRE for KYC purposes. For more information, please check our Privacy Policy",
+          "pending": {
+            "cta": "Continue",
+            "title": "KYC submitted for approval",
+            "subtitle": "Your KYC has been submitted and is pending approval.",
+            "link": "Learn more about KYC"
+          },
+          "approved": {
+            "cta": "Continue",
+            "title": "KYC approved!",
+            "subtitle": "Your KYC has been submitted and has been approved.",
+            "link": "Learn more about KYC"
+          },
+          "closed": {
+            "cta": "Reset KYC",
+            "title": "KYC application rejected",
+            "subtitle": "Wyre rejected the data you provided for KYC purposes",
+            "link": "Learn more about KYC"
+          },
+          "form": {
+            "firstName": "First Name",
+            "lastName": "Last Name",
+            "street1": "Street Address Line 1",
+            "street2": "Street Address Line 2",
+            "city": "City",
+            "state": "State",
+            "country": "Country",
+            "postalCode": "Zip Code",
+            "dateOfBirth": "Date of birth",
+            "firstNamePlaceholder": "Enter your first name",
+            "lastNamePlaceholder": "Enter your last name",
+            "street1Placeholder": "Eg. 13, Maple street",
+            "street2Placeholder": "Eg. 13, Maple street",
+            "cityPlaceholder": "Eg. San José",
+            "postalCodePlaceholder": "Enter your 5 digit Zip code",
+            "statePlaceholder": "Select your state",
+            "dateOfBirthPlaceholder": "YYYY-MM-DD",
+            "firstNameError": "Enter your first name to continue",
+            "lastNameError": "Enter your last name to continue",
+            "street1Error": "Enter your address",
+            "cityError": "Enter the city you live in the USA",
+            "stateError": "Select your state to continue",
+            "postalCodeError": "Enter a valid US ZIP code",
+            "dateOfBirthError": "Enter your date of birth"
+          }
+        },
+        "states": "Select your state"
       },
       "notAvailable": {
         "title": "服务暂时不可用，或在您的国家不可用"
@@ -3607,6 +3670,13 @@
         "title": "面向开发者",
         "description": "在这里您能找到您所需要的、能将您的应用程序整合到 Ledger Live 的全部信息。"
       }
+    },
+    "disclaimer": {
+      "title": "External Application",
+      "description": "You are about to be redirected to an application not operated by Ledger.",
+      "legalAdvice": "This application is not operated by Ledger. Ledger is not responsible for any loss of funds or quality of service of such application.\n\nAlways make sure to carefully verify the information displayed on your device.",
+      "checkbox": "Do not remind me again.",
+      "CTA": "Continue"
     }
   }
 }
