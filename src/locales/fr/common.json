@@ -263,8 +263,8 @@
       "description": "Utilisez le Gestionnaire pour désinstaller toutes les applications. Vérifiez ensuite si une mise à jour du micrologiciel est disponible avant de les réinstaller."
     },
     "LatestFirmwareVersionRequired": {
-      "title": "Device update required on desktop",
-      "description": "Please update your Nano X firmware on Ledger Live Desktop"
+      "title": "Mise à jour requise sur l'ordinateur",
+      "description": "Mettez à jour le micrologiciel de votre Nano X sur Ledger Live ordinateur."
     },
     "GenuineCheckFailed": {
       "title": "Échec de la vérification de l'authenticité",
@@ -1804,54 +1804,54 @@
         "disclaimer": "J'accepte que mes données de localisation soient partagées avec des tiers à des fins de conformité.",
         "cta": "Continuer",
         "wyre": {
-          "title": "Complete your KYC",
+          "title": "Finir sa vérification",
           "subtitle": "LEDGER recueille vos données pour WYRE et les lui transfère pour réaliser votre vérification d'identité. Consultez notre Politique de confidentialité.",
           "pending": {
             "cta": "Continuer",
-            "title": "KYC submitted for approval",
-            "subtitle": "Your KYC has been submitted and is pending approval.",
+            "title": "Vérification soumise pour validation",
+            "subtitle": "Votre vérification a été envoyée et est en attente de validation.",
             "link": "En savoir plus"
           },
           "approved": {
             "cta": "Continuer",
             "title": "Vérification d'identité approuvée",
-            "subtitle": "Your KYC has been submitted and has been approved.",
+            "subtitle": "Votre vérification a été envoyée et a été validée.",
             "link": "En savoir plus"
           },
           "closed": {
             "cta": "Réinitialiser la vérification",
             "title": "Demande de vérification refusée",
             "subtitle": "Wyre a refusé les données que vous avez fournies",
-            "link": "Learn more about KYC"
+            "link": "En savoir plus"
           },
           "form": {
-            "firstName": "First Name",
-            "lastName": "Last Name",
-            "street1": "Street Address Line 1",
-            "street2": "Street Address Line 2",
-            "city": "City",
-            "state": "State",
-            "country": "Country",
-            "postalCode": "Zip Code",
-            "dateOfBirth": "Date of birth",
-            "firstNamePlaceholder": "Enter your first name",
-            "lastNamePlaceholder": "Enter your last name",
-            "street1Placeholder": "Eg. 13, Maple street",
-            "street2Placeholder": "Eg. 13, Maple street",
-            "cityPlaceholder": "Eg. San José",
-            "postalCodePlaceholder": "Enter your 5 digit Zip code",
-            "statePlaceholder": "Select your state",
-            "dateOfBirthPlaceholder": "YYYY-MM-DD",
-            "firstNameError": "Enter your first name to continue",
-            "lastNameError": "Enter your last name to continue",
-            "street1Error": "Enter your address",
-            "cityError": "Enter the city you live in the USA",
-            "stateError": "Select your state to continue",
-            "postalCodeError": "Enter a valid US ZIP code",
-            "dateOfBirthError": "Enter your date of birth"
+            "firstName": "Prénom",
+            "lastName": "Nom de famille",
+            "street1": "Adresse postale ligne 1",
+            "street2": "Adresse postale ligne 2",
+            "city": "Ville",
+            "state": "État–région",
+            "country": "Pays",
+            "postalCode": "Code postal",
+            "dateOfBirth": "Date de naissance",
+            "firstNamePlaceholder": "Saisissez votre prénom",
+            "lastNamePlaceholder": "Saisissez votre nom",
+            "street1Placeholder": "Ex : 13 rue Rosa Parks",
+            "street2Placeholder": "Ex : 13 rue Rosa Parks",
+            "cityPlaceholder": "Ex : Abbeville",
+            "postalCodePlaceholder": "Saisissez votre code postal",
+            "statePlaceholder": "Sélectionnez votre État",
+            "dateOfBirthPlaceholder": "AAAA-MM-JJ",
+            "firstNameError": "Entrez votre prénom pour continuer.",
+            "lastNameError": "Entrez votre nom pour continuer.",
+            "street1Error": "Entrez votre adresse.",
+            "cityError": "Entrez la ville où vous habitez.",
+            "stateError": "Choisissez votre État pour continuer",
+            "postalCodeError": "Saisissez un code postal valide.",
+            "dateOfBirthError": "Entrez votre date de naissance."
           }
         },
-        "states": "Select your state"
+        "states": "Sélectionnez votre État"
       },
       "notAvailable": {
         "title": "Service temporairement indisponible ou non disponible dans votre pays"
@@ -3672,11 +3672,11 @@
       }
     },
     "disclaimer": {
-      "title": "External Application",
-      "description": "You are about to be redirected to an application not operated by Ledger.",
-      "legalAdvice": "This application is not operated by Ledger. Ledger is not responsible for any loss of funds or quality of service of such application.\n\nAlways make sure to carefully verify the information displayed on your device.",
-      "checkbox": "Do not remind me again.",
-      "CTA": "Continue"
+      "title": "Application externe",
+      "description": "Vous allez être redirigé(e) vers une application non exploitée par Ledger.",
+      "legalAdvice": "Cette application n'est pas exploitée par Ledger. Ledger ne saurait être tenu responsable de toute perte de fonds ou qualité de service due à cette application.\n\nVérifiez toujours les informations affichées sur votre appareil.",
+      "checkbox": "Ne plus me le rappeler.",
+      "CTA": "Continuer"
     }
   }
 }
