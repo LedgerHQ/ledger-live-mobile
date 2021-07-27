@@ -263,8 +263,8 @@
       "description": "Utiliza Manager para desinstalar todas las aplicaciones y comprobar si hay alguna actualización de firmware disponible antes de instalarlas de nuevo."
     },
     "LatestFirmwareVersionRequired": {
-      "title": "Device update required on desktop",
-      "description": "Please update your Nano X firmware on Ledger Live Desktop"
+      "title": "Actualización de dispositivo necesaria para Desktop",
+      "description": "Por favor, actualiza el firmware de tu Nano X en Ledger Live Desktop"
     },
     "GenuineCheckFailed": {
       "title": "La autenticación del dispositivo ha fallado",
@@ -505,8 +505,8 @@
       "description": "Esta característica se agregará en una etapa posterior debido a los cambios introducidos recientemente por la actualización de Babylon."
     },
     "AccessDeniedError": {
-      "title": "Ledger Live needs an update",
-      "description": "Please update Ledger Live to the latest version, and re verify your identity to swap with wyre"
+      "title": "Ledger Live requiere de una actualización",
+      "description": "Por favor actualiza Ledger Live a la última versión, y vuelve a verificar tu identidad para permutar con wyre"
     },
     "RecommendUndelegation": {
       "title": "Desdelega la cuenta antes de vaciarla"
@@ -558,13 +558,13 @@
       "title": "Asegúrate de que tienes un saldo restante suficiente para cubrir las tarifas de transacciones futuras"
     },
     "PolkadotDoMaxSendInstead": {
-      "title": "Balance cannot be below {{minimumBalance}}. Send max to empty account."
+      "title": "El saldo no puede ser inferior a {{minimumBalance}}. Envía el importe máximo a una cuenta sin saldo."
     },
     "PolkadotBondMinimumAmount": {
-      "title": "You must bond at least {{minimumBondAmount}}."
+      "title": "Tienes que vincular al menos {{minimumBondAmount}}."
     },
     "PolkadotBondMinimumAmountWarning": {
-      "title": "You bonded balance should be at least {{minimumBondBalance}}."
+      "title": "Tu saldo vinculado tiene que ser al menos de {{minimumBondBalance}}."
     },
     "PolkadotMaxUnbonding": {
       "title": "Has superado el límite de desvinculación"
@@ -1106,7 +1106,7 @@
       "cta": "Estoy listo para escanear",
       "bullets": {
         "0": {
-          "label": "On the Desktop app, select <1>Settings > Accounts > Account export</1>."
+          "label": "En tu aplicación Desktop, selecciona <1>Ajustes> Cuentas > Exportar cuentas</1>."
         },
         "1": {
           "label": "Escanea el código LiveQR con tu teléfono."
@@ -1594,7 +1594,7 @@
       "languageDesc": "Configura el idioma de Ledger Live.",
       "password": "Bloqueo por contraseña",
       "passwordDesc": "Elige una contraseña para proteger los datos de Ledger Live en el teléfono.",
-      "counterValue": "Preferred currency",
+      "counterValue": "Divisa preferida",
       "theme": "Tema",
       "themeDesc": "Elige el tema de la IU de la aplicación",
       "themes": {
@@ -1634,7 +1634,7 @@
         "bullet1": "ID de aplicación único anónimo",
         "bullet2": "Versión de Ledger Live, región del SO, idioma y región"
       },
-      "hideEmptyTokenAccounts": "Hide empty token accounts",
+      "hideEmptyTokenAccounts": "Ocultar cuentas de tokens sin saldo",
       "hideEmptyTokenAccountsDesc": "Ocultar cuentas de tokens sin saldo en la página de Cuentas."
     },
     "currencies": {
@@ -1793,47 +1793,47 @@
         "disclaimer": "Intercambia criptos directamente desde tu dispositivo Ledger. Este servicio no está disponible en algunos países, entre ellos, Estados Unidos."
       },
       "unauthorizedRates": {
-        "cta": "Reset verification",
-        "banner": "Reset your KYC and update Live to swap with Wyre.",
-        "bannerCTA": "Reset KYC"
+        "cta": "Restablece la verificación",
+        "banner": "Restablece tu KYC y actualiza Live para permutar con Wyre.",
+        "bannerCTA": "Restablecer KYC"
       },
       "main": {
         "header": "Permutar"
       },
       "kyc": {
         "disclaimer": "Acepto que mis datos de ubicación sean compartidos con terceros con fines de cumplimiento normativo.",
-        "cta": "Continue",
+        "cta": "Continuar",
         "wyre": {
-          "title": "Complete your KYC",
-          "subtitle": "Your information is collected by LEDGER on behalf of and transferred to WYRE for KYC purposes. For more information, please check our Privacy Policy",
+          "title": "Completar tu KYC",
+          "subtitle": "LEDGER recopila tu información en nombre de WYRE y la transfiere a este para fines de KYC. Para obtener más información, revisa nuestra Política de Privacidad",
           "pending": {
-            "cta": "Continue",
-            "title": "KYC submitted for approval",
-            "subtitle": "Your KYC has been submitted and is pending approval.",
-            "link": "Learn more about KYC"
+            "cta": "Continuar",
+            "title": "KYC enviado para su aprobación",
+            "subtitle": "Tu KYC ha sido enviado y está en espera de aprobación.",
+            "link": "Conocer más sobre KYC"
           },
           "approved": {
-            "cta": "Continue",
-            "title": "KYC approved!",
-            "subtitle": "Your KYC has been submitted and has been approved.",
-            "link": "Learn more about KYC"
+            "cta": "Continuar",
+            "title": "¡KYC aprobado!",
+            "subtitle": "Tu KYC ha sido enviado y ha sido aprobado.",
+            "link": "Conocer más sobre KYC"
           },
           "closed": {
-            "cta": "Reset KYC",
-            "title": "KYC application rejected",
-            "subtitle": "Wyre rejected the data you provided for KYC purposes",
-            "link": "Learn more about KYC"
+            "cta": "Restablecer KYC",
+            "title": "Solicitud de KYC rechazada",
+            "subtitle": "Wyre ha rechazado los datos que has proporcionado para fines de KYC",
+            "link": "Conocer más sobre KYC"
           },
           "form": {
-            "firstName": "First Name",
-            "lastName": "Last Name",
-            "street1": "Street Address Line 1",
-            "street2": "Street Address Line 2",
-            "city": "City",
-            "state": "State",
-            "country": "Country",
-            "postalCode": "Zip Code",
-            "dateOfBirth": "Date of birth",
+            "firstName": "Nombre",
+            "lastName": "Apellido",
+            "street1": "Dirección postal línea 1",
+            "street2": "Dirección postal línea 2",
+            "city": "Ciudad",
+            "state": "Estado",
+            "country": "País",
+            "postalCode": "Código postal",
+            "dateOfBirth": "Fecha de nacimiento",
             "firstNamePlaceholder": "Enter your first name",
             "lastNamePlaceholder": "Enter your last name",
             "street1Placeholder": "Eg. 13, Maple street",
@@ -3183,7 +3183,7 @@
     "unlockingBalance": "Saldo en desvinculación",
     "unlockedBalance": "Saldo desvinculado",
     "networkFees": "El consenso Polkadot establece automáticamente las tarifas de red, no podrás modificarlas desde tu dispositivo",
-    "bondedBalanceBelowMinimum": "Your bonded balance is below the current minimum of {{minimumBondBalance}}. Your nominations are at risk of being removed.",
+    "bondedBalanceBelowMinimum": "Tu saldo vinculado está por debajo del mínimo actual de {{minimumBondBalance}}. Tus nominaciones corren el riesgo de ser eliminadas.",
     "info": {
       "available": {
         "title": "DOT disponibles",
@@ -3206,8 +3206,8 @@
         "description": "La elección de nuevos validadores está en curso. Por lo tanto, las operaciones de participación no estarán disponibles hasta dentro de 15 minutos como máximo."
       },
       "minBondWarning": {
-        "title": "Not enough bonded",
-        "description": "Your bonded balance is below the current minimum allowed to nominate. Your nominations are at risk of being removed."
+        "title": "Vinculados insuficientes",
+        "description": "Tu saldo vinculado está por debajo del mínimo actual permitido para nominar. Tus nominaciones corren el riesgo de ser eliminadas."
       }
     },
     "nomination": {
