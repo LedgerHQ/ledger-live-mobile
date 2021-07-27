@@ -1809,7 +1809,7 @@
           "pending": {
             "cta": "Continue",
             "title": "KYC submitted for approval",
-            "subtitle": "Your KYC has been submitted and is pending approval.",
+            "subtitle": "Ваши документы KYC отправлены и ожидают проверки.",
             "link": "Learn more about KYC"
           },
           "approved": {
