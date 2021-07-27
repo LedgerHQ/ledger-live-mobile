@@ -263,8 +263,8 @@
       "description": "يرجى استخدام المدير لإلغاء تثبيت جميع التطبيقات، ثم تحقق مما إذا كان تحديث البرنامج الثابت متاحًا قبل إعادة تثبيتهم مرة أخرى."
     },
     "LatestFirmwareVersionRequired": {
-      "title": "Device update required on desktop",
-      "description": "Please update your Nano X firmware on Ledger Live Desktop"
+      "title": "تحديث الجهاز مطلوب على سطح المكتب",
+      "description": "الرجاء تحديث البرنامج الثابت لNano X الخاص بك على تطبيق Ledger Live لسطح المكتب"
     },
     "GenuineCheckFailed": {
       "title": "فشل توثيق الجهاز",
