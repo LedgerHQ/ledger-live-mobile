@@ -1810,48 +1810,48 @@
             "cta": "继续",
             "title": "KYC 已被提交以供审批",
             "subtitle": "您的 KYC 已被提交，正在等待批准。",
-            "link": "Learn more about KYC"
+            "link": "了解关于 KYC 的更多详情"
           },
           "approved": {
-            "cta": "Continue",
-            "title": "KYC approved!",
-            "subtitle": "Your KYC has been submitted and has been approved.",
-            "link": "Learn more about KYC"
+            "cta": "继续",
+            "title": "KYC 已批准！",
+            "subtitle": "您的 KYC 已被提交并已获得批准。",
+            "link": "了解关于 KYC 的更多详情"
           },
           "closed": {
-            "cta": "Reset KYC",
-            "title": "KYC application rejected",
-            "subtitle": "Wyre rejected the data you provided for KYC purposes",
-            "link": "Learn more about KYC"
+            "cta": "重置 KYC",
+            "title": "KYC 申请被拒绝",
+            "subtitle": "出于 KYC 原因，Wyre 拒绝了您提供的数据",
+            "link": "了解关于 KYC 的更多详情"
           },
           "form": {
-            "firstName": "First Name",
-            "lastName": "Last Name",
-            "street1": "Street Address Line 1",
-            "street2": "Street Address Line 2",
-            "city": "City",
-            "state": "State",
-            "country": "Country",
-            "postalCode": "Zip Code",
-            "dateOfBirth": "Date of birth",
-            "firstNamePlaceholder": "Enter your first name",
-            "lastNamePlaceholder": "Enter your last name",
-            "street1Placeholder": "Eg. 13, Maple street",
-            "street2Placeholder": "Eg. 13, Maple street",
-            "cityPlaceholder": "Eg. San José",
-            "postalCodePlaceholder": "Enter your 5 digit Zip code",
-            "statePlaceholder": "Select your state",
-            "dateOfBirthPlaceholder": "YYYY-MM-DD",
-            "firstNameError": "Enter your first name to continue",
-            "lastNameError": "Enter your last name to continue",
-            "street1Error": "Enter your address",
-            "cityError": "Enter the city you live in the USA",
-            "stateError": "Select your state to continue",
-            "postalCodeError": "Enter a valid US ZIP code",
-            "dateOfBirthError": "Enter your date of birth"
+            "firstName": "名字",
+            "lastName": "姓氏",
+            "street1": "街道地址栏 1",
+            "street2": "街道地址栏 2",
+            "city": "城市",
+            "state": "州",
+            "country": "国家",
+            "postalCode": "邮编",
+            "dateOfBirth": "出生日期",
+            "firstNamePlaceholder": "输入您的名字",
+            "lastNamePlaceholder": "输入您的姓氏",
+            "street1Placeholder": "例如：枫树街 13 号",
+            "street2Placeholder": "例如：枫树街 13 号",
+            "cityPlaceholder": "例如：圣何塞（San José）",
+            "postalCodePlaceholder": "输入您的 5 位数邮政编码",
+            "statePlaceholder": "选择您所在的州",
+            "dateOfBirthPlaceholder": "年-月-日",
+            "firstNameError": "输入您的名字以继续",
+            "lastNameError": "输入您的姓氏以继续",
+            "street1Error": "输入您的地址",
+            "cityError": "输入您在美国的居住城市",
+            "stateError": "选择您所在的州以继续",
+            "postalCodeError": "输入一个有效的美国邮政编码",
+            "dateOfBirthError": "输入您的出生日期"
           }
         },
-        "states": "Select your state"
+        "states": "选择您所在的州"
       },
       "notAvailable": {
         "title": "服务暂时不可用，或在您的国家不可用"
@@ -3672,11 +3672,11 @@
       }
     },
     "disclaimer": {
-      "title": "External Application",
-      "description": "You are about to be redirected to an application not operated by Ledger.",
-      "legalAdvice": "This application is not operated by Ledger. Ledger is not responsible for any loss of funds or quality of service of such application.\n\nAlways make sure to carefully verify the information displayed on your device.",
-      "checkbox": "Do not remind me again.",
-      "CTA": "Continue"
+      "title": "外部应用程序",
+      "description": "您即将被重定向到一个不是由 Ledger 操作的应用程序。",
+      "legalAdvice": "此应用程序并不由 Ledger 操作。Ledger 对此类应用所造成的任何资金损失或服务质量不负责任。\n\n始终确保仔细验证您设备上所显示的信息。",
+      "checkbox": "不要再次提醒我。",
+      "CTA": "继续"
     }
   }
 }
