@@ -505,8 +505,8 @@
       "description": "ستتم إضافة هذه الميزة في مرحلة لاحقة بسبب التغييرات التي يتم تقديمها من خلال تحديث Babylon."
     },
     "AccessDeniedError": {
-      "title": "Ledger Live needs an update",
-      "description": "Please update Ledger Live to the latest version, and re verify your identity to swap with wyre"
+      "title": "يحتاج Ledger Live إلى تحديث",
+      "description": "يرجى تحديث Ledger Live إلى أحدث إصدار، وأعد التحقق من هويتك للتبادل مع Wyre"
     },
     "RecommendUndelegation": {
       "title": "يرجى إلغاء تفويض الحساب قبل إفراغه"
@@ -1594,7 +1594,7 @@
       "languageDesc": "قم بتعيين اللغة المستخدمة في Ledger Live.",
       "password": "قفل كلمة المرور",
       "passwordDesc": "قم بتعيين كلمة مرور لحماية بيانات Ledger Live على هاتفك.",
-      "counterValue": "Preferred currency",
+      "counterValue": "العملة المفضلة",
       "theme": "السمة",
       "themeDesc": "قم بتعيين السمة لواجهة مستخدم التطبيق",
       "themes": {
@@ -1793,21 +1793,21 @@
         "disclaimer": "بادل الأصول المشفرة مباشرةً من جهاز ليدجر الخاص بك. هذه الخدمة غير متوفرة في بعض البلدان، بما فيها الولايات المتحدة."
       },
       "unauthorizedRates": {
-        "cta": "Reset verification",
-        "banner": "Reset your KYC and update Live to swap with Wyre.",
-        "bannerCTA": "Reset KYC"
+        "cta": "إعادة تعيين التحقق",
+        "banner": "أعد تعيين بيانات التحقق من الهوية الخاصة بك وقم بتحديث Ledger Live للتبادل مع Wyre.",
+        "bannerCTA": "إعادة تعيين بيانات التحقق من الهوية"
       },
       "main": {
         "header": "مبادلة"
       },
       "kyc": {
         "disclaimer": "أقر بأنه ستتم مشاركة بيانات الموقع الخاصة بي مع أطراف خارجية لأغراض الامتثال.",
-        "cta": "Continue",
+        "cta": "متابعة",
         "wyre": {
-          "title": "Complete your KYC",
-          "subtitle": "Your information is collected by LEDGER on behalf of and transferred to WYRE for KYC purposes. For more information, please check our Privacy Policy",
+          "title": "أكمل بيانات التحقق من الهوية الخاصة بك",
+          "subtitle": "يتم جمع معلوماتك من قبل LEDGER بالنيابة عن WYRE كما يتم نقل هذه المعلومات إليها لأغراض التحقق من هوية العميل. للتعرف على مزيد من المعلومات، يرجى مراجعة سياسة الخصوصية الخاصة بنا",
           "pending": {
-            "cta": "Continue",
+            "cta": "متابعة",
             "title": "KYC submitted for approval",
             "subtitle": "Your KYC has been submitted and is pending approval.",
             "link": "Learn more about KYC"
@@ -1846,12 +1846,12 @@
             "lastNameError": "Enter your last name to continue",
             "street1Error": "Enter your address",
             "cityError": "Enter the city you live in the USA",
-            "stateError": "Select your state to continue",
-            "postalCodeError": "Enter a valid US ZIP code",
-            "dateOfBirthError": "Enter your date of birth"
+            "stateError": "اختار الولاية/المحافظة الخاصة بك للمتابعة",
+            "postalCodeError": "أدخل رمزًا بريديًا صالحًا في الولايات المتحدة الأمريكية",
+            "dateOfBirthError": "أدخل تاريخ ميلادك"
           }
         },
-        "states": "Select your state"
+        "states": "اختار الولاية/المحافظة"
       },
       "notAvailable": {
         "title": "الخدمة غير متوفرة مؤقتًا أو غير متوفرة في بلدك"
@@ -3672,11 +3672,11 @@
       }
     },
     "disclaimer": {
-      "title": "External Application",
-      "description": "You are about to be redirected to an application not operated by Ledger.",
-      "legalAdvice": "This application is not operated by Ledger. Ledger is not responsible for any loss of funds or quality of service of such application.\n\nAlways make sure to carefully verify the information displayed on your device.",
-      "checkbox": "Do not remind me again.",
-      "CTA": "Continue"
+      "title": "تطبيق خارجي",
+      "description": "أنت على وشك أن تتم إعادة توجيهك إلى تطبيق لا يتم تشغيله من قِبل Ledger.",
+      "legalAdvice": "لا يتم تشغيل هذا التطبيق من قِبل Ledger. إن Ledger غير مسؤول عن أي خسارة للأموال أو عن جودة الخدمة لمثل هذا التطبيق.\n\nدائمًا تأكد من التحقق بعناية من المعلومات المعروضة على جهازك.",
+      "checkbox": "لاتذكرني مرة أخرى.",
+      "CTA": "متابعة"
     }
   }
 }
