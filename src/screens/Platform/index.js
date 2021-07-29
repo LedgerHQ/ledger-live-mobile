@@ -44,7 +44,7 @@ const PlatformCatalog = ({ route }: { route: { params: RouteParams } }) => {
 
     return filterPlatformApps(Array.from(manifests.values()), {
       version: "0.0.1",
-      platform: "desktop",
+      platform: "mobile",
       branches,
     });
   }, []);
