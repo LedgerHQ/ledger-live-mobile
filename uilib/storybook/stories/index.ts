@@ -1,2 +1,2 @@
-import './Text/Text.stories';
-import './Button/Button.stories';
+import "./Button/Button.stories";
+import "./Text/Text.stories";

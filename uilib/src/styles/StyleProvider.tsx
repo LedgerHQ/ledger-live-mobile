@@ -1,7 +1,8 @@
 import React, {useMemo, ComponentType} from 'react';
 import {ThemeProvider} from 'styled-components/native';
 import type {StyledComponent} from 'styled-components';
-import {defaultTheme, palettes} from '.';
+import defaultTheme from './theme';
+import palettes from './palettes';
 import type {Theme} from './theme';
 
 type Props = {
