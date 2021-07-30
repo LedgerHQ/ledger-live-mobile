@@ -1,7 +1,8 @@
-import React, {useState} from 'react';
-import styled from 'styled-components/native';
-import PropTypes from 'prop-types';
-import StyleProvider from '@ui/styles/StyleProvider';
+import React, { useState } from "react";
+import styled from "styled-components/native";
+import PropTypes from "prop-types";
+import StyleProvider from "@ui/styles/StyleProvider";
+import FontProvider from "@ui/providers/FontProvider";
 
 const Main = styled.View`
   flex: 1;
@@ -29,15 +30,21 @@ const Icon = styled.Text`
   font-size: 15px;
 `;
 
-export default function CenterView({children}: {children: React.ReactNode}) {
+export default function CenterView({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const [isLight, setIsLight] = useState(true);
   return (
-    <StyleProvider selectedPalette={isLight ? 'light' : 'dark'}>
-      <ThemeButton onPress={() => setIsLight(!isLight)}>
-        <Icon>🖌️</Icon>
-      </ThemeButton>
-      <Main>{children}</Main>
-    </StyleProvider>
+    <FontProvider>
+      <StyleProvider selectedPalette={isLight ? "light" : "dark"}>
+        <ThemeButton onPress={() => setIsLight(!isLight)}>
+          <Icon>🖌️</Icon>
+        </ThemeButton>
+        <Main>{children}</Main>
+      </StyleProvider>
+    </FontProvider>
   );
 }
 

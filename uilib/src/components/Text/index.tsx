@@ -1,5 +1,6 @@
-import React from 'react';
-import styled, {useTheme} from 'styled-components/native';
+import React from "react";
+import styled, { useTheme } from "styled-components/native";
+import { useFonts } from "expo-font";
 
 import {
   fontSize,
@@ -9,23 +10,11 @@ import {
   space,
   lineHeight,
   letterSpacing,
-} from 'styled-system';
-import BracketRight from '@ui/icons/BracketLeft';
-import BracketLeft from '@ui/icons/BracketRight';
-
-import {ThemedComponent} from '@ui/styles/StyleProvider';
-import getTextStyle, {TextTypes} from './getTextStyle';
-import {getColor} from '~/styles';
-
-type FontFamilies =
-  | 'Inter|ExtraLight'
-  | 'Inter|Light'
-  | 'Inter|Regular'
-  | 'Inter|Medium'
-  | 'Inter|SemiBold'
-  | 'Inter|Bold'
-  | 'Inter|ExtraBold'
-  | 'Alpha|Medium';
+} from "styled-system";
+import BracketRight from "@ui/icons/BracketLeft";
+import BracketLeft from "@ui/icons/BracketRight";
+import { getColor } from "@ui/styles";
+import getTextStyle, { TextTypes } from "./getTextStyle";
 
 type Props = {
   type: TextTypes;
@@ -43,7 +32,7 @@ type Props = {
   children: React.ReactNode;
 };
 
-const Base = styled.Text`
+const Base = styled.Text<Props>`
   ${lineHeight};
   ${fontSize};
   ${textAlign};
@@ -64,12 +53,13 @@ const T = styled.View`
 
 const BracketText = ({
   children,
-  color = 'palette.text.default',
+  color = "palette.text.default",
   ...props
 }: Props) => {
-  const {lineHeight: size} = getTextStyle(props);
+  const { lineHeight: size } = getTextStyle(props);
   const theme = useTheme();
-  const c = theme ? getColor(theme, color) : 'transparent';
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+  const c: string = theme ? (getColor(theme, color) as string) : "transparent";
   return (
     <T>
       <BracketLeft fill={c} width={size} height={size} />
@@ -84,7 +74,7 @@ const BracketText = ({
 const Text = ({
   children,
   bracket,
-  color = 'palette.text.default',
+  color = "palette.text.default",
   ...props
 }: Props) => {
   if (bracket)

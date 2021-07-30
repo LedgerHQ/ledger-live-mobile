@@ -1,39 +1,37 @@
 import Color from 'color';
 
-import {fontFamilies} from './theme';
-
 export const rgba = (c: string, a: number) =>
-  Color(c).alpha(a).rgb().toString();
+  Color(c)
+    .alpha(a)
+    .rgb()
+    .toString();
 
-export const darken = (c: string, a: number) => Color(c).darken(a).toString();
+export const darken = (c: string, a: number) =>
+  Color(c)
+    .darken(a)
+    .toString();
 
-export const lighten = (c: string, a: number) => Color(c).lighten(a).toString();
+export const lighten = (c: string, a: number) =>
+  Color(c)
+    .lighten(a)
+    .toString();
 
 export const mix = (c: string, b: string, a: number) =>
-  Color(c).mix(Color(b), a).toString();
+  Color(c)
+    .mix(Color(b), a)
+    .toString();
 
-export const ff = (v: string) => {
-  const [font, type = 'Regular'] = v.split('|');
-  // @ts-ignore
-  const {style, weight} = fontFamilies[font][type];
-  // @ts-ignore
-  const fallback = fontFamilies[font].fallback || 'Arial';
-
-  return {
-    fontFamily: `${font}, ${fallback}`,
-    fontWeight: weight,
-    fontStyle: style,
-  };
-};
-
-const get = (object: any, path: any): any => {
-  let p = path;
+const get = (object: Record<string, any>, path: string | string[]): unknown => {
+  let p: string | string[] = path;
   if (typeof path === 'string') p = path.split('.').filter(key => key.length);
-  return p.reduce((dive: any, key: string) => dive && dive[key], object);
+  return (<string[]>p).reduce(
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+    (dive: Record<string, any>, key: string) => dive && dive[key],
+    object,
+  );
 };
 
-export const getColor = (p: Record<string, any>, color: string): string => {
-  const c = get(p.colors, color);
-  console.log(c);
+export const getColor = (p: Record<string, any>, color: string) => {
+  const c = get(p.colors, color) as string;
   return c;
 };
