@@ -74,7 +74,6 @@ export const start = async (store: *, { user, created }: *) => {
   }
 
   storeInstance = store;
-  if (ANALYTICS_LOGS) console.log("analytics:user", user);
   if (ANALYTICS_LOGS) {
     console.log("analytics:user", user);
     console.log("analytics:created", created);
