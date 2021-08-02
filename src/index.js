@@ -40,6 +40,8 @@ import { pairId } from "@ledgerhq/live-common/lib/countervalues/helpers";
 import { ToastProvider } from "@ledgerhq/live-common/lib/notifications/ToastProvider";
 import { setEnv } from "@ledgerhq/live-common/lib/env";
 import PlatformCatalogProvider from "@ledgerhq/live-common/lib/platform/CatalogProvider";
+import { PlatformAppProvider } from "@ledgerhq/live-common/lib/platform/PlatformAppProvider";
+import { getProvider } from "@ledgerhq/live-common/lib/platform/PlatformAppProvider/providers";
 import logger from "./logger";
 import { saveAccounts, saveBle, saveSettings, saveCountervalues } from "./db";
 import getOrCreateUser from "./user";
@@ -277,7 +279,7 @@ const linking = {
              * @params ?currency: string
              * ie: "ledgerhq://receive?currency=bitcoin" will open the prefilled search account in the receive flow
              */
-            [ScreenName.SwapFormOrHistory]: "swap",
+            [ScreenName.Swap]: "swap",
           },
         },
         [NavigatorName.SendFunds]: {
@@ -443,7 +445,9 @@ export default class Root extends Component<
                 <HookSentry />
                 <HookAnalytics store={store} user={this.state.user} />
                 <WalletConnectProvider>
-                  <PlatformCatalogProvider>
+                  <PlatformAppProvider
+                    platformAppsServerURL={getProvider("production").url}
+                  >
                     <DeepLinkingNavigator>
                       <SafeAreaProvider>
                         <StyledStatusBar />
@@ -474,7 +478,7 @@ export default class Root extends Component<
                         </AuthPass>
                       </SafeAreaProvider>
                     </DeepLinkingNavigator>
-                  </PlatformCatalogProvider>
+                  </PlatformAppProvider>
                 </WalletConnectProvider>
               </>
             ) : (
