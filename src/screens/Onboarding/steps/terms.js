@@ -21,6 +21,7 @@ import AnimatedHeaderView from "../../../components/AnimatedHeader";
 import { useLocale } from "../../../context/Locale";
 
 import { urls } from "../../../config/urls";
+import ArrowRight from "../../../icons/ArrowRight";
 
 type LinkBoxProps = {
   style?: ViewStyleProp,
@@ -33,16 +34,14 @@ const LinkBox = React.memo(({ style, text, url, event }: LinkBoxProps) => {
   const { colors } = useTheme();
   return (
     <View
-      style={[
-        style,
-        styles.linkBox,
-        { backgroundColor: colors.pillActiveBackground },
-      ]}
+      style={[style, styles.linkBox, { backgroundColor: colors.lightLive }]}
     >
       <ExternalLink
         text={text}
         onPress={() => Linking.openURL(url)}
         event={event}
+        style={styles.linkBoxLink}
+        fontSize={14}
       />
     </View>
   );
@@ -89,6 +88,7 @@ function OnboardingStepTerms({ navigation }: *) {
             disabled={!toggle}
             onPress={next}
             title={<Trans i18nKey="Terms.cta" />}
+            IconRight={ArrowRight}
           />
         </View>
       }
@@ -120,6 +120,7 @@ const styles = StyleSheet.create({
     marginLeft: 8,
     fontSize: 13,
     paddingRight: 16,
+    lineHeight: 20,
   },
   footer: {
     flexDirection: "column",
@@ -140,9 +141,13 @@ const styles = StyleSheet.create({
     height: 22,
   },
   linkBox: {
-    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     padding: 16,
+    borderRadius: 4,
   },
+  linkBoxLink: { flex: 1, justifyContent: "space-between" },
   linkBoxSpacing: {
     marginBottom: 16,
   },
