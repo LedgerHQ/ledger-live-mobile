@@ -107,3 +107,4 @@ uilib/*.key
 uilib/*.mobileprovision
 uilib/*.orig.*
 uilib/web-build/
+uilib/lib/
