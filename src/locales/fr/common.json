@@ -2594,7 +2594,7 @@
     "tabTitle": "Gestionnaire de l'appareil",
     "title": "Gestionnaire",
     "connect": "Sélectionnez votre appareil",
-    "appsCatalog": "Catalogue d'applications",
+    "appsCatalog": "Catalogue d'apps",
     "installedApps": "Applications installées",
     "noAppNeededForToken": "Installer l'application {{appName}} pour {{tokenName}}",
     "tokenAppDisclaimer": "{{tokenName}} est un jeton {{tokenType}} qui utilise l'application {{appName}}. Pour gérer {{tokenName}}, <1>installez l'application {{appName}}</1> et envoyez les jetons <3>sur votre compte {{appName}}</3>.",
@@ -2610,10 +2610,10 @@
       "buy": "Achetez un Ledger Nano X"
     },
     "appList": {
-      "title": "Catalogue d'applications",
+      "title": "Catalogue d'apps",
       "loading": "Chargement des applications...",
       "noApps": "Aucune application trouvée",
-      "searchAppsCatalog": "Rechercher une application dans le catalogue",
+      "searchAppsCatalog": "Rechercher dans le Catalogue",
       "searchAppsInstalled": "Rechercher les applications installées...",
       "noAppsInstalled": "Aucune application installée sur votre appareil",
       "noAppsDescription": "Aller dans le catalogue pour installer des applications",
@@ -2624,7 +2624,7 @@
     "uninstall": {
       "title": "Tout désinstaller",
       "subtitle": "Désinstaller toutes les applications ?",
-      "description": "Désinstaller des applications n'a pas d'effet sur vos crypto-actifs. Vous pouvez réinstaller vos applications depuis le catalogue d'applications."
+      "description": "Désinstaller des applications n'a pas d'effet sur vos crypto-actifs. Vous pouvez réinstaller vos applications depuis le Catalogue d'apps."
     },
     "remove": {
       "title": "Retirer l'appareil",
@@ -3648,7 +3648,7 @@
   },
   "platform": {
     "catalog": {
-      "title": "Catalogue d'applications Live",
+      "title": "Catalogue d'apps Live",
       "branch": {
         "soon": "À découvrir prochainement",
         "experimental": "Expérimental",
