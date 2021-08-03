@@ -1,143 +1,109 @@
 // @flow
 
-import React, { useState, useCallback } from "react";
-import { StyleSheet, View, ScrollView } from "react-native";
-import { Trans, useTranslation } from "react-i18next";
+import React, { useState, useEffect } from "react";
+import Config from "react-native-config";
+import { StyleSheet, View } from "react-native";
+import { useSelector, useDispatch } from "react-redux";
 import SafeAreaView from "react-native-safe-area-view";
-import { useNavigation } from "@react-navigation/native";
-
-import type { AccountLike, Account } from "@ledgerhq/live-common/lib/types";
-
+import { useTheme, useRoute, useNavigation } from "@react-navigation/native";
+import { getProviders } from "@ledgerhq/live-common/lib/exchange/swap";
+import { getSwapSelectableCurrencies } from "@ledgerhq/live-common/lib/exchange/swap/logic";
+import NotAvailable from "./FormOrHistory/NotAvailable";
+import { swapKYCSelector } from "../../reducers/settings";
+import { setSwapSelectableCurrencies } from "../../actions/settings";
 import { ScreenName } from "../../const";
-import Button from "../../components/Button";
-import LText from "../../components/LText";
-// import IconWyre from "../../../icons/providers/Wyre";
-import IconChangelly from "../../icons/providers/Changelly";
-import IconParaswap from "../../icons/providers/Paraswap";
+import Spinning from "../../components/Spinning";
+import BigSpinner from "../../icons/BigSpinner";
 
-import Item from "./ProviderListItem";
-import useManifests from "./manifests";
+const SwapEntrypoint = () => {
+  const { colors } = useTheme();
+  const dispatch = useDispatch();
+  const { replace } = useNavigation();
+  const route = useRoute();
 
-type RouteParams = {
-  defaultAccount: ?AccountLike,
-  defaultParentAccount: ?Account,
-};
+  const [providers, setProviders] = useState();
+  const [provider, setProvider] = useState();
+  const swapKYC = useSelector(swapKYCSelector);
 
-const PROVIDERS = [
-  // {
-  //   provider: "wyre",
-  //   name: "Wyre",
-  //   isDapp: false,
-  //   Icon: IconWyre,
-  //   kycRequired: true,
-  // },
-  {
-    provider: "paraswap",
-    name: "ParaSwap",
-    isDapp: true,
-    Icon: IconParaswap,
-    kycRequired: false,
-  },
-  {
-    provider: "changelly",
-    name: "Changelly",
-    isDapp: false,
-    Icon: IconChangelly,
-    kycRequired: false,
-  },
-];
-
-if (__DEV__) {
-  PROVIDERS.push({
-    provider: "debug",
-    name: "Debugger",
-    isDapp: true,
-    kycRequired: false,
-    Icon: null,
-  });
-}
-
-const SwapProviders = ({ route }: { route: { params: RouteParams } }) => {
-  const { params: routeParams } = route;
-  const [selectedItem, setSelectedItem] = useState();
-  const { t } = useTranslation();
-  const navigation = useNavigation();
-  const manifests = useManifests();
-
-  const onContinue = useCallback(
-    (provider: string) => {
-      const conf = PROVIDERS.find(p => p.provider === provider);
-      if (!conf) return;
-
-      if (conf.isDapp) {
-        const manifest = manifests[conf.provider];
-        navigation.navigate(ScreenName.SwapDapp, { manifest });
+  useEffect(() => {
+    getProviders().then((providers: any) => {
+      let resultProvider;
+      const disabledProviders = Config.SWAP_DISABLED_PROVIDERS || "";
+      const providersByName = providers.reduce((acc, providerData) => {
+        if (!disabledProviders.includes(providerData.provider)) {
+          acc[providerData.provider] = providerData;
+        }
+        return acc;
+      }, {});
+      // Prio to changelly if both are available
+      if ("wyre" in providersByName && "changelly" in providersByName) {
+        resultProvider = providersByName.changelly;
       } else {
-        // TODO: do the Wyre provider logic
-        navigation.navigate(ScreenName.SwapFormOrHistory, routeParams);
+        resultProvider = providers.find(
+          p => !disabledProviders.includes(p.provider),
+        );
       }
-    },
-    [routeParams, navigation],
-  );
+      // Only set as available currencies from this provider, on swp-agg this changes
+      if (resultProvider) {
+        dispatch(
+          setSwapSelectableCurrencies(
+            getSwapSelectableCurrencies([resultProvider]),
+          ),
+        );
+        setProviders([resultProvider]);
+        setProvider(resultProvider.provider);
+      } else {
+        setProviders([]);
+      }
+    });
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (!providers?.length || !provider) return;
+    if (provider === "wyre" && swapKYC?.wyre?.status !== "approved") {
+      replace(ScreenName.SwapKYC, { provider });
+    } else {
+      replace(ScreenName.SwapFormOrHistory, {
+        providers,
+        provider,
+        defaultAccount: route?.params?.defaultAccount,
+        defaultParentAccount: route?.params?.defaultParentAccount,
+      });
+    }
+  }, [replace, provider, providers, swapKYC, route?.params]);
 
   return (
-    <SafeAreaView style={styles.wrapper}>
-      <ScrollView style={styles.providerList}>
-        <LText style={styles.title} semiBold secondary>
-          <Trans i18nKey={"transfer.swap.providers.title"} />
-        </LText>
-        {PROVIDERS.map(p => {
-          const bullets = t(`transfer.swap.providers.${p.provider}.bullets`, {
-            joinArrays: ";",
-            defaultValue: "",
-          })
-            .split(";")
-            .filter(Boolean);
-
-          return (
-            <Item
-              key={p.provider}
-              id={p.provider}
-              onSelect={setSelectedItem}
-              selected={selectedItem}
-              Icon={p.Icon}
-              title={p.name}
-              bullets={bullets}
-              kyc={p.kycRequired}
-            />
-          );
-        })}
-      </ScrollView>
-      <View style={styles.footer}>
-        <Button
-          type={"primary"}
-          title={t("transfer.swap.providers.cta")}
-          onPress={() => {
-            selectedItem && onContinue(selectedItem);
-          }}
-          disabled={!selectedItem}
-        />
-      </View>
+    <SafeAreaView style={[styles.root, { backgroundColor: colors.background }]}>
+      {!providers ? (
+        <View style={styles.loading}>
+          <Spinning clockwise>
+            <BigSpinner />
+          </Spinning>
+        </View>
+      ) : !provider ? (
+        <NotAvailable />
+      ) : null}
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  wrapper: {
+  root: {
     flex: 1,
   },
-  title: {
-    fontSize: 18,
-    lineHeight: 22,
-    textAlign: "center",
-    marginVertical: 24,
+  loading: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
   },
-  providerList: {
-    paddingHorizontal: 16,
+  selectDevice: {
+    fontSize: 15,
+    lineHeight: 20,
+    marginBottom: 20,
   },
-  footer: {
-    padding: 16,
+  debugText: {
+    marginBottom: 10,
   },
 });
 
-export default SwapProviders;
+export default SwapEntrypoint;

@@ -1,7 +1,7 @@
 // @flow
 
 import React, { useCallback, useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { StyleSheet, View } from "react-native";
 import { useTranslation } from "react-i18next";
 import { useNavigation } from "@react-navigation/native";
@@ -19,10 +19,12 @@ import { createAction } from "@ledgerhq/live-common/lib/hw/actions/transaction";
 import { createAction as initSwapCreateAction } from "@ledgerhq/live-common/lib/hw/actions/initSwap";
 import initSwap from "@ledgerhq/live-common/lib/exchange/swap/initSwap";
 import connectApp from "@ledgerhq/live-common/lib/hw/connectApp";
+
 import addToSwapHistory from "@ledgerhq/live-common/lib/exchange/swap/addToSwapHistory";
 import {
   addPendingOperation,
   getMainAccount,
+  getAccountCurrency,
 } from "@ledgerhq/live-common/lib/account";
 
 import { renderLoading } from "../../../components/DeviceAction/rendering";
@@ -32,6 +34,7 @@ import DeviceAction from "../../../components/DeviceAction";
 import BottomModal from "../../../components/BottomModal";
 import ModalBottomAction from "../../../components/ModalBottomAction";
 import { useBroadcast } from "../../../components/useBroadcast";
+import { swapKYCSelector } from "../../../reducers/settings";
 
 import type { DeviceMeta } from "./Form";
 
@@ -56,7 +59,10 @@ const Confirmation = ({
   deviceMeta,
   status,
 }: Props) => {
-  const { fromAccount, fromParentAccount } = exchange;
+  const { fromAccount, fromParentAccount, toAccount } = exchange;
+  const swapKYC = useSelector(swapKYCSelector);
+  const providerKYC = swapKYC[exchangeRate.provider];
+
   const [swapData, setSwapData] = useState(null);
   const [signedOperation, setSignedOperation] = useState(null);
   const dispatch = useDispatch();
@@ -68,6 +74,7 @@ const Confirmation = ({
     fromAccount && fromAccount.type === "TokenAccount"
       ? fromAccount.token
       : null;
+  const targetCurrency = getAccountCurrency(toAccount);
   const navigation = useNavigation();
 
   const onComplete = useCallback(
@@ -93,6 +100,10 @@ const Confirmation = ({
       navigation.replace(ScreenName.SwapPendingOperation, {
         swapId,
         provider: exchangeRate.provider,
+        targetCurrency: targetCurrency.name,
+        operation,
+        fromAccount,
+        fromParentAccount,
       });
     },
     [
@@ -103,6 +114,7 @@ const Confirmation = ({
       fromParentAccount,
       navigation,
       transaction,
+      targetCurrency,
     ],
   );
 
@@ -146,6 +158,8 @@ const Confirmation = ({
                   exchange,
                   exchangeRate,
                   transaction,
+                  userId: providerKYC?.id,
+                  requireLatestFirmware: true,
                 }}
                 onResult={({ initSwapResult, initSwapError }) => {
                   if (initSwapError) {
