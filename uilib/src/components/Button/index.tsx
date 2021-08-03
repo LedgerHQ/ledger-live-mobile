@@ -6,7 +6,7 @@ import getButtonStyle, { ButtonTypes, getButtonColor } from "./getButtonStyle";
 
 type Props = {
   Icon?: React.ComponentType<{ size: number; color: string }>;
-  children: React.ReactNode;
+  children?: React.ReactNode;
   onPress: () => void;
   type?: ButtonTypes;
   iconPosition?: "right" | "left";
