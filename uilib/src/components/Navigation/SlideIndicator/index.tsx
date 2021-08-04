@@ -25,11 +25,11 @@ const Bullet = styled.TouchableOpacity`
   height: 6px;
   border-radius: 6px;
   margin: 0 6px;
-  background-color: ${p => p.theme.colors.palette.grey.border};
+  background-color: ${(p) => p.theme.colors.palette.grey.border};
 `;
 
 const ActiveBullet = styled(Bullet)`
-  background-color: ${p => p.theme.colors.palette.text.default};
+  background-color: ${(p) => p.theme.colors.palette.text.default};
   position: absolute;
   top: 0;
   left: 0;
@@ -43,9 +43,10 @@ const config = {
 };
 
 function SlideIndicator({ slidesLength, activeIndex = 0, onChange }: Props) {
-  const slidesArray = useMemo(() => new Array(slidesLength).fill(0), [
-    slidesLength,
-  ]);
+  const slidesArray = useMemo(
+    () => new Array(slidesLength).fill(0),
+    [slidesLength],
+  );
 
   const activeSize = useMemo(
     () =>

@@ -1,18 +1,18 @@
-import React, {useMemo, ComponentType} from 'react';
-import {ThemeProvider} from 'styled-components/native';
-import type {StyledComponent} from 'styled-components';
-import defaultTheme from './theme';
-import palettes from './palettes';
-import type {Theme} from './theme';
+import React, { useMemo, ComponentType } from "react";
+import { ThemeProvider } from "styled-components/native";
+import type { StyledComponent } from "styled-components";
+import defaultTheme from "./theme";
+import palettes from "./palettes";
+import type { Theme } from "./theme";
 
 type Props = {
   children: React.ReactNode;
-  selectedPalette: 'light' | 'dark';
+  selectedPalette: "light" | "dark";
 };
 
 export type ThemedComponent<T> = StyledComponent<ComponentType<T>, Theme, any>;
 
-const StyleProvider = ({children, selectedPalette}: Props) => {
+const StyleProvider = ({ children, selectedPalette }: Props) => {
   const theme: Theme = useMemo(
     () => ({
       ...defaultTheme,

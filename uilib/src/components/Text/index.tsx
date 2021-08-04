@@ -40,7 +40,7 @@ const Base = styled.Text<Props>`
   ${fontWeight};
   ${space};
   ${letterSpacing};
-  ${p => getTextStyle(p)}
+  ${(p) => getTextStyle(p)}
   justify-content: center;
   align-items: center;
 `;

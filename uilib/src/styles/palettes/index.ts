@@ -1,5 +1,5 @@
-import dark from './dark';
-import light from './light';
+import dark from "./dark";
+import light from "./light";
 
 export type Theme = {
   type: string;
@@ -38,7 +38,7 @@ export type Theme = {
   };
 };
 
-const palettes: {dark: Theme; light: Theme} = {
+const palettes: { dark: Theme; light: Theme } = {
   dark,
   light,
 };

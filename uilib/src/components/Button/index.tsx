@@ -16,7 +16,7 @@ const IconContainer = styled.View<{
   iconPosition: "right" | "left";
   iconButton?: boolean;
 }>`
-  ${p =>
+  ${(p) =>
     p.iconButton
       ? ""
       : p.iconPosition === "left"
@@ -30,8 +30,8 @@ export const Base = styled.TouchableOpacity<{
   theme: Theme;
   iconButton?: boolean;
 }>`
-  border-radius: ${p => p.theme.space[6]}px;
-  height: ${p => p.theme.space[6]}px;
+  border-radius: ${(p) => p.theme.space[6]}px;
+  height: ${(p) => p.theme.space[6]}px;
   flex-direction: row;
   border-style: solid;
   border-width: 1px;
@@ -43,13 +43,13 @@ export const Base = styled.TouchableOpacity<{
   border-color: transparent;
   overflow: hidden;
   position: relative;
-  ${p =>
+  ${(p) =>
     getButtonStyle({
       type: p.type || undefined,
       disabled: p.disabled,
       theme: p.theme,
     })}
-  ${p => (p.iconButton ? `padding: 0; width: ${p.theme.space[6]}px;` : "")}
+  ${(p) => (p.iconButton ? `padding: 0; width: ${p.theme.space[6]}px;` : "")}
 `;
 
 const Button = ({

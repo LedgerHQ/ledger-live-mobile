@@ -19,20 +19,20 @@ type Props = {
 
 const Container = styled.View`
   flex: 1;
-  background-color: ${p => p.theme.colors.palette.background.default};
+  background-color: ${(p) => p.theme.colors.palette.background.default};
 `;
 
 const ContentContainer = styled.View`
   flex: 1;
-  padding: ${p => p.theme.space[2]}px;
+  padding: ${(p) => p.theme.space[2]}px;
 `;
 
 const Header = styled.View`
-  height: ${p => p.theme.space[6]}px;
+  height: ${(p) => p.theme.space[6]}px;
   flex-direction: row;
   align-items: center;
   justify-content: flex-end;
-  padding: ${p => p.theme.space[2]}px;
+  padding: ${(p) => p.theme.space[2]}px;
 `;
 
 const modalStyle = {

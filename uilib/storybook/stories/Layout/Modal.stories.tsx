@@ -13,7 +13,7 @@ import Text from "@components/Text";
 import CenterView from "../CenterView";
 
 const ModalStory = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
 
   const openModal = useCallback(() => {
     setIsOpen(true);
