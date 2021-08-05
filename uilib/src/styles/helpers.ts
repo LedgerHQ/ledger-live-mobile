@@ -13,7 +13,7 @@ export const mix = (c: string, b: string, a: number) =>
 const get = (object: Record<string, any>, path: string | string[]): unknown => {
   let p: string | string[] = path;
   if (typeof path === "string") p = path.split(".").filter((key) => key.length);
-  // @ts-expect-error
+  // @ts-expect-error FIXME
   return p.reduce(
     // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     (dive: Record<string, any>, key: string) => dive && dive[key],

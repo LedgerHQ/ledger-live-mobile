@@ -11,8 +11,8 @@ const { width, height } = sizes;
 type Props = {
   isOpen?: boolean;
   onClose?: () => void;
-  style?: object;
-  containerStyle?: object;
+  style?: Record<string, unknown>;
+  containerStyle?: Record<string, unknown>;
   preventBackdropClick?: boolean;
   children: React.ReactNode;
 };

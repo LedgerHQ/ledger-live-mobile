@@ -1,12 +1,6 @@
 import React, { useState, useCallback } from "react";
 import { storiesOf } from "@storybook/react-native";
-import {
-  withKnobs,
-  number,
-  text,
-  boolean,
-  button,
-} from "@storybook/addon-knobs";
+import { withKnobs, text, button } from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
 import Modal from "@components/Layout/Modal";
 import Text from "@components/Text";
@@ -36,5 +30,5 @@ const ModalStory = () => {
 
 storiesOf("Layout", module)
   .addDecorator(withKnobs)
-  .addDecorator(getStory => <CenterView>{getStory()}</CenterView>)
+  .addDecorator((getStory) => <CenterView>{getStory()}</CenterView>)
   .add("Modal", () => <ModalStory />);
