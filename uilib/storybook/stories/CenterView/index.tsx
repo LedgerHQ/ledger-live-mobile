@@ -9,6 +9,7 @@ const Main = styled.View`
   justify-content: center;
   align-items: center;
   background-color: ${p => p.theme.colors.palette.background.default};
+  overflow: scroll;
 `;
 
 const ThemeButton = styled.TouchableOpacity`
