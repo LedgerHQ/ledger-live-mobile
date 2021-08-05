@@ -42,7 +42,11 @@ const config = {
   easing: Easing.bezier(0.5, 0.01, 0, 1),
 };
 
-function SlideIndicator({ slidesLength, activeIndex = 0, onChange }: Props) {
+function SlideIndicator({
+  slidesLength,
+  activeIndex = 0,
+  onChange,
+}: Props): React.ReactElement {
   const slidesArray = useMemo(
     () => new Array(slidesLength).fill(0),
     [slidesLength],

@@ -1,6 +1,5 @@
 import React from "react";
 import styled, { useTheme } from "styled-components/native";
-import { useFonts } from "expo-font";
 
 import {
   fontSize,

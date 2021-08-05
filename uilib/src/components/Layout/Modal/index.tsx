@@ -62,9 +62,9 @@ export default function Modal({
       {...rest}
       {...backDropProps}
       isVisible={isOpen}
-      // @ts-ignore issue in typing in react-native-modal
+      // @ts-expect-error  issue in typing in react-native-modal
       deviceWidth={width}
-      // @ts-ignore issue in typing in react-native-modal
+      // @ts-expect-error issue in typing in react-native-modal
       deviceHeight={height}
       useNativeDriver
       hideModalContentWhileAnimating
