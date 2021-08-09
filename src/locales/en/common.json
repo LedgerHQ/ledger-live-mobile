@@ -44,6 +44,7 @@
     "usb": "USB",
     "add": "Add",
     "slow": "slow",
+    "medium": "medium",
     "fast": "fast",
     "token": "Token",
     "token_plural": "Tokens",
