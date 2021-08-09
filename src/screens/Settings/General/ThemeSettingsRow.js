@@ -50,7 +50,7 @@ export default function ThemeSettingsRow() {
                 {...(theme === t ? { semiBold: true } : {})}
                 style={[styles.buttonLabel]}
               >
-                {t}
+                <Trans i18nKey={`settings.display.themes.${t}`} />
               </LText>
               {theme === t && <Check size={16} color={colors.live} />}
             </Touchable>
