@@ -51,7 +51,7 @@ export default function ThemeSettingsRow() {
                 {...(currentTheme === theme ? { semiBold: true } : {})}
                 style={[styles.buttonLabel]}
               >
-                {t(`settings.display.themes.${theme}`)}{" "}
+                {t(`settings.display.themes.${theme}`)}
               </LText>
               {currentTheme === theme && (
                 <Check size={16} color={colors.live} />
