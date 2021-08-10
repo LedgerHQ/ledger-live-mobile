@@ -1,5 +1,7 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
+// def useIntlJsc = true
+
 buildscript {
     ext {
         buildToolsVersion = "29.0.2"
@@ -28,10 +30,10 @@ allprojects {
             // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
             url("$rootDir/../node_modules/react-native/android")
         }
-        maven {
-            // Android JSC is installed from npm
-            url("$rootDir/../node_modules/jsc-android/dist")
-        }
+        // maven {
+        //     // Android JSC is installed from npm
+        //     url("$rootDir/../node_modules/jsc-android/dist")
+        // }
         google()
         jcenter()
         maven { url 'https://www.jitpack.io' }
