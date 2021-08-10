@@ -3677,6 +3677,11 @@
       "legalAdvice": "Esta aplicación no es operada por Ledger. Ledger no será responsable de ninguna pérdida de fondos o de calidad de servicio con respecto a dicha aplicación.\n\nSiempre asegúrate de verificar cuidadosamente la información que se muestra en tu dispositivo.",
       "checkbox": "No recordarme de nuevo.",
       "CTA": "Continuar"
+    },
+    "webPlatformPlayer": {
+      "infoPanel": {
+        "website": "website"
+      }
     }
   }
 }
