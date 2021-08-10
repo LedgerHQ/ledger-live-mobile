@@ -8,7 +8,7 @@ import { useTheme } from "@react-navigation/native";
 import { Trans } from "react-i18next";
 import NewsRow from "./NewsRow";
 import LText from "../../components/LText";
-import FormatDate from "../../components/FormatDate";
+import useDateTimeFormat from "../../utils/hooks/useDateTimeFormat";
 
 const viewabilityConfig = {
   viewAreaCoveragePercentThreshold: 95,
@@ -17,6 +17,7 @@ const viewabilityConfig = {
 export default function NotificationCenter() {
   const { colors, dark } = useTheme();
   const { cache, setAsSeen, updateCache, allIds, seenIds } = useAnnouncements();
+  const dateFormatter = useDateTimeFormat({ dateStyle: "full" });
 
   const onViewableItemsChanged = useCallback(
     ({ viewableItems }) => {
@@ -63,7 +64,7 @@ export default function NotificationCenter() {
               semiBold
               color="grey"
             >
-              <FormatDate date={title} />
+              {dateFormatter(title)}
             </LText>
           </View>
         ) : null
