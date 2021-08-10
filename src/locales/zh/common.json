@@ -3677,6 +3677,11 @@
       "legalAdvice": "此应用程序并不由 Ledger 操作。Ledger 对此类应用所造成的任何资金损失或服务质量不负责任。\n\n始终确保仔细验证您设备上所显示的信息。",
       "checkbox": "不要再次提醒我。",
       "CTA": "继续"
+    },
+    "webPlatformPlayer": {
+      "infoPanel": {
+        "website": "website"
+      }
     }
   }
 }
