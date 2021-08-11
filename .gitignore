@@ -93,3 +93,8 @@ src/generated/
 
 # Detox
 artifacts/
+
+#CI
+**/vendor/**
+.bundle/
+
