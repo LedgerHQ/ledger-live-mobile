@@ -972,7 +972,7 @@
     },
     "stepRecoveryPhrase": {
       "importRecoveryPhrase": {
-        "title": "Restaurer à partir d'une phrase de récupération",
+        "title": "Avec une phrase de récupération",
         "desc": "Utilisez votre phrase de récupération afin de restaurer, remplacer ou sauvegarder votre wallet physique Ledger.",
         "desc_1": "Votre Nano va restaurer vos clés privées pour vous permettre d'accéder à vos cryptos et de les gérer.",
         "cta": "Je suis prêt(e)",
@@ -1394,7 +1394,7 @@
       "viewInExplorer": "Dans l'explorateur",
       "seeMore": "Afficher plus de jetons",
       "seeLess": "Afficher moins de jetons",
-      "addTokens": "Ajouter un jeton",
+      "addTokens": "Jeton",
       "howTo": "Pour ajouter des comptes de jetons, vous devez <0>recevoir des fonds</0> avec votre <1>adresse {{currency}}</1>.",
       "algorand": {
         "contractAddress": "Adresse du contrat",
