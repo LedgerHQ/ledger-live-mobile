@@ -2619,7 +2619,7 @@
       "noAppsDescription": "Aller dans le catalogue pour installer des apps",
       "noResultsFound": "Aucun résultat",
       "noResultsDesc": "Merci de vérifier l'orthographe et réessayer",
-      "versionNew": "(VERS {{newVersion}})"
+      "versionNew": "(NOUV. {{newVersion}})"
     },
     "uninstall": {
       "title": "Tout désinstaller",
