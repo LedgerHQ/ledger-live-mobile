@@ -1598,9 +1598,9 @@
       "theme": "Thème",
       "themeDesc": "Définissez le thème de l'interface utilisateur",
       "themes": {
-        "dark": "Sombre",
-        "dusk": "Crépuscule",
-        "light": "Clair"
+        "dark": "Dark",
+        "dusk": "Dusk",
+        "light": "Light"
       },
       "counterValueDesc": "Choisissez la devise dans laquelle afficher votre solde et vos opérations.",
       "exchange": "Fournisseur du taux de change",
