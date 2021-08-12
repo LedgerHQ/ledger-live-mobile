@@ -12,7 +12,6 @@ import {
 } from "@ledgerhq/live-common/lib/account";
 import { NotEnoughGas } from "@ledgerhq/errors";
 import { useTheme } from "@react-navigation/native";
-import { BigNumber } from "bignumber.js";
 import { accountScreenSelector } from "../../reducers/accounts";
 import { ScreenName, NavigatorName } from "../../const";
 import { TrackScreen } from "../../analytics";
@@ -33,6 +32,7 @@ import ConfirmationModal from "../../components/ConfirmationModal";
 import NavigationScrollView from "../../components/NavigationScrollView";
 import Info from "../../icons/Info";
 import TooMuchUTXOBottomModal from "./TooMuchUTXOBottomModal";
+import { isCurrencySupported } from "../Exchange/coinifyConfig";
 
 const forceInset = { bottom: "always" };
 
@@ -50,8 +50,7 @@ export type RouteParams = {
   nextNavigation?: string,
   overrideAmountLabel?: string,
   hideTotal?: boolean,
-  customGasPrice?: BigNumber,
-  customGasLimit?: BigNumber,
+  appName?: string,
 };
 
 const defaultParams = {
@@ -67,6 +66,7 @@ function SendSummary({ navigation, route: initialRoute }: Props) {
   };
   const { nextNavigation, overrideAmountLabel, hideTotal } = route.params;
   const { account, parentAccount } = useSelector(accountScreenSelector(route));
+
   const {
     transaction,
     setTransaction,
@@ -156,7 +156,7 @@ function SendSummary({ navigation, route: initialRoute }: Props) {
 
   const onBuyEth = useCallback(() => {
     navigation.navigate(NavigatorName.Exchange, {
-      screen: ScreenName.Exchange,
+      screen: ScreenName.ExchangeBuy,
       params: {
         accountId: account && account.id,
         parentId: parentAccount && parentAccount.id,
@@ -253,13 +253,15 @@ function SendSummary({ navigation, route: initialRoute }: Props) {
           <TranslatedError error={transactionError} />
         </LText>
         {error && error instanceof NotEnoughGas ? (
-          <Button
-            event="SummaryBuyEth"
-            type="primary"
-            title={<Trans i18nKey="common.buyEth" />}
-            containerStyle={styles.continueButton}
-            onPress={onBuyEth}
-          />
+          isCurrencySupported(mainAccount.currency) && (
+            <Button
+              event="SummaryBuyEth"
+              type="primary"
+              title={<Trans i18nKey="common.buyEth" />}
+              containerStyle={styles.continueButton}
+              onPress={onBuyEth}
+            />
+          )
         ) : (
           <Button
             event="SummaryContinue"

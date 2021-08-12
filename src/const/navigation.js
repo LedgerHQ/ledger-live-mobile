@@ -2,7 +2,7 @@
 
 // This will be converted into string enum once TypeScript is supported in this project.
 export const ScreenName = {
-  /* eslint sort-keys: ["error", "asc", {"caseSensitive": false}] */
+  /* eslint-disable sort-keys */
   AboutSettings: "AboutSettings",
   Account: "Account",
   AccountCurrencySettings: "AccountCurrencySettings",
@@ -28,6 +28,7 @@ export const ScreenName = {
   CurrenciesList: "CurrenciesList",
   CurrencySettings: "CurrencySettings",
   DebugBLE: "DebugBLE",
+  DebugSwap: "DebugSwap",
   DebugBLEBenchmark: "DebugBLEBenchmark",
   DebugCrash: "DebugCrash",
   DebugDevices: "DebugDevices",
@@ -120,12 +121,14 @@ export const ScreenName = {
   StellarEditMemoValue: "StellarEditMemoValue",
   Swap: "Swap",
   SwapError: "SwapError",
+  SwapFormOrHistory: "SwapFormOrHistory",
   SwapForm: "SwapForm",
   SwapFormAmount: "SwapFormAmount",
-  SwapFormOrHistory: "SwapFormOrHistory",
   SwapFormSelectAccount: "SwapFormSelectAccount",
   SwapFormSelectCrypto: "SwapFormSelectCrypto",
   SwapHistory: "SwapHistory",
+  SwapKYC: "SwapKYC",
+  SwapKYCStates: "SwapKYCStates",
   SwapOperationDetails: "SwapOperationDetails",
   SwapPendingOperation: "SwapPendingOperation",
   SwapSummary: "SwapSummary",
@@ -144,7 +147,7 @@ export const ScreenName = {
   VoteValidation: "VoteValidation",
   VoteValidationError: "VoteValidationError",
   VoteValidationSuccess: "VoteValidationSuccess",
-  /* eslint-disable sort-keys */
+
   CosmosEditMemo: "CosmosEditMemo",
   CosmosDelegationStarted: "CosmosDelegationStarted",
   CosmosDelegationValidator: "CosmosDelegationValidator",
@@ -274,6 +277,10 @@ export const ScreenName = {
   OnboardingQuizFinal: "OnboardingQuizFinal",
 
   OnboardingFinish: "OnboardingFinish",
+
+  PlatformCatalog: "PlatformCatalog",
+  PlatformApp: "PlatformApp",
+
   WalletConnectScan: "WalletConnectScan",
   WalletConnectConnect: "WalletConnectConnect",
   WalletConnectDeeplinkingSelectAccount:
@@ -281,6 +288,16 @@ export const ScreenName = {
 
   NotificationCenterNews: "NotificationCenterNews",
   NotificationCenterStatus: "NotificationCenterStatus",
+
+  SignTransactionSummary: "SignTransactionSummary",
+  SignTransactionSelectDevice: "SignTransactionSelectDevice",
+  SignTransactionConnectDevice: "SignTransactionConnectDevice",
+  SignTransactionValidationError: "SignTransactionValidationError",
+
+  RequestAccountsSelectCrypto: "RequestAccountsSelectCrypto",
+  RequestAccountsSelectAccount: "RequestAccountsSelectAccount",
+
+  VerifyAccount: "VerifyAccount",
 };
 
 export const NavigatorName = {
@@ -311,6 +328,7 @@ export const NavigatorName = {
   Onboarding: "Onboarding",
   PasswordAddFlow: "PasswordAddFlow",
   PasswordModifyFlow: "PasswordModifyFlow",
+  Platform: "Platform",
   ReceiveFunds: "ReceiveFunds",
   SendFunds: "SendFunds",
   Settings: "Settings",
@@ -325,6 +343,9 @@ export const NavigatorName = {
   LendingSupplyFlow: "LendingSupplyFlow",
   LendingWithdrawFlow: "LendingWithdrawFlow",
   /* eslint-disable sort-keys */
+  SignTransaction: "SignTransaction",
+  RequestAccount: "RequestAccount",
+  RequestAccountsAddAccounts: "RequestAccountsAddAccounts",
 
   // Polkadot
   PolkadotBondFlow: "PolkadotBondFlow",

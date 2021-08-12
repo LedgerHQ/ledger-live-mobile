@@ -10,6 +10,11 @@ import type {
   TokenCurrency,
 } from "@ledgerhq/live-common/lib/types";
 import {
+  makeCompoundSummaryForAccount,
+  getAccountCapabilities,
+} from "@ledgerhq/live-common/lib/compound/logic";
+
+import {
   addAccounts,
   canBeMigrated,
   flattenAccounts,
@@ -91,7 +96,9 @@ const handlers: Object = {
   BLACKLIST_TOKEN: (
     state: AccountsState,
     { payload: tokenId }: { payload: string },
-  ) => ({ active: state.active.map(a => withoutToken(a, tokenId)) }),
+  ) => ({
+    active: state.active.map(a => withoutToken(a, tokenId)),
+  }),
 
   DANGEROUSLY_OVERRIDE_STATE: (state: AccountsState): AccountsState => ({
     ...state,
@@ -148,6 +155,33 @@ export const cryptoCurrenciesSelector = createSelector(
     uniq(accounts.map(a => a.currency)).sort((a, b) =>
       a.name.localeCompare(b.name),
     ),
+);
+
+// $FlowFixMe
+export const accountsByCryptoCurrencySelector = createSelector(
+  accountsSelector,
+  (_, { currencies }) => currencies,
+  (accounts, currencies): Account[] =>
+    currencies && currencies.length
+      ? accounts.filter(a => currencies.includes(a.currency.id))
+      : accounts,
+);
+
+export const accountsByCryptoCurrencyScreenSelector = (
+  currency: CryptoCurrency,
+) => (state: any) => {
+  if (!currency) return [];
+  return accountsByCryptoCurrencySelector(state, { currencies: [currency.id] });
+};
+
+// $FlowFixMe
+export const accountCryptoCurrenciesSelector = createSelector(
+  cryptoCurrenciesSelector,
+  (_, { currencies }) => currencies,
+  (cryptoCurrencies, currencies) =>
+    currencies && currencies.length
+      ? cryptoCurrencies.filter(c => currencies.includes(c.id))
+      : cryptoCurrencies,
 );
 
 // $FlowFixMe
@@ -231,5 +265,26 @@ export const subAccountByCurrencyOrderedScreenSelector = (route: any) => (
   if (!currency) return [];
   return subAccountByCurrencyOrderedSelector(state, { currency });
 };
+
+export const hasLendEnabledAccountsSelector: OutputSelector<
+  State,
+  void,
+  boolean,
+> = createSelector(flattenAccountsSelector, accounts =>
+  accounts.some(account => {
+    if (!account || account.type !== "TokenAccount") return false;
+
+    // check if account already has lending enabled
+    const summary =
+      account.type === "TokenAccount" &&
+      makeCompoundSummaryForAccount(account, undefined);
+
+    const capabilities = summary
+      ? account.type === "TokenAccount" && getAccountCapabilities(account)
+      : null;
+
+    return !!capabilities;
+  }),
+);
 
 export default handleActions(handlers, initialState);

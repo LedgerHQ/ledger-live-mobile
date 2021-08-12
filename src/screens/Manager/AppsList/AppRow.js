@@ -25,6 +25,7 @@ type Props = {
   setAppUninstallWithDependencies: ({ dependents: App[], app: App }) => void,
   setStorageWarning: () => void,
   managerTabs: *,
+  optimisticState: State,
 };
 
 const AppRow = ({
@@ -35,8 +36,9 @@ const AppRow = ({
   setAppInstallWithDependencies,
   setAppUninstallWithDependencies,
   setStorageWarning,
+  optimisticState,
 }: Props) => {
-  const { name, bytes, version: appVersion } = app;
+  const { name, bytes, version: appVersion, displayName } = app;
   const { installed, deviceInfo } = state;
 
   const isInstalled = useMemo(() => installed.find(i => i.name === name), [
@@ -48,7 +50,10 @@ const AppRow = ({
   const availableVersion =
     (isInstalled && isInstalled.availableVersion) || appVersion;
 
-  const notEnoughMemoryToInstall = useNotEnoughMemoryToInstall(state, name);
+  const notEnoughMemoryToInstall = useNotEnoughMemoryToInstall(
+    optimisticState,
+    name,
+  );
 
   const onSizePress = useCallback(() => setStorageWarning(name), [
     setStorageWarning,
@@ -71,7 +76,7 @@ const AppRow = ({
         <AppIcon app={app} />
         <View style={styles.labelContainer}>
           <LText numberOfLines={1} bold>
-            {name}
+            {displayName}
           </LText>
           <LText numberOfLines={1} style={styles.versionText} color="grey">
             {version}{" "}

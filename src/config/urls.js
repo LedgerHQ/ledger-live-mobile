@@ -71,6 +71,7 @@ export const urls = {
     "https://support.ledger.com/hc/en-us/articles/360015897740?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=algorand",
   polkadotStaking:
     "https://support.ledger.com/hc/en-us/articles/360019187260?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=polkadot",
+
   swap: {
     info:
       "https://www.ledger.com/swap?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=swap_intro",
@@ -80,6 +81,10 @@ export const urls = {
       changelly: {
         main: "https://changelly.com/",
         tos: "https://changelly.com/terms-of-use",
+      },
+      wyre: {
+        main: "https://support.sendwyre.com/hc/en-us/requests/new",
+        tos: "https://www.sendwyre.com/user-agreement/",
       },
     },
   },
@@ -95,6 +100,11 @@ export const urls = {
       "https://shop.ledger.com/pages/valentines-day-special-offers?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=banner_carousel",
     polkaStake:
       "https://www.ledger.com/staking-polkadot?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=banner_carousel",
+    twitterIntent: "https://twitter.com/intent/tweet",
+  },
+  platform: {
+    developerPage:
+      "https://developers.ledger.com?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=catalog",
   },
   compound:
     "https://support.ledger.com/hc/en-us/articles/360017215099?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=compound",

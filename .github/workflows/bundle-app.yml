@@ -35,13 +35,13 @@ jobs:
           repository: ${{github.event.pull_request.head.repo.full_name}}
       - uses: actions/setup-node@main
         with:
-          node-version: 12.x
+          node-version: 14.x
       - name: set git user
         run: |
           git config user.email "team-live@ledger.fr"
           git config user.name "Team Live"
       - name: install dependencies
-        run: yarn --frozen-lockfile
+        run: yarn --frozen-lockfile --network-timeout 100000
       - uses: ledgerhq/actions/get-package-infos@v1.0.0
         id: version
       - name: set beta name

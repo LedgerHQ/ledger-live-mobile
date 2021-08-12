@@ -30,6 +30,7 @@
     "or": "OR",
     "rename": "Rename",
     "learnMore": "Learn more",
+    "checkItOut": "Check it out",
     "viewDetails": "View details",
     "today": "Today",
     "yesterday": "Yesterday",
@@ -43,6 +44,7 @@
     "usb": "USB",
     "add": "Add",
     "slow": "slow",
+    "medium": "medium",
     "fast": "fast",
     "token": "Token",
     "token_plural": "Tokens",
@@ -261,6 +263,10 @@
       "title": "Firmware or app update needed",
       "description": "Please use the Manager to uninstall all apps then check if a firmware update is available before reinstalling them."
     },
+    "LatestFirmwareVersionRequired": {
+      "title": "Device update required on desktop",
+      "description": "Please update your Nano X firmware on Ledger Live Desktop"
+    },
     "GenuineCheckFailed": {
       "title": "Device authentication failed",
       "description": "Something went wrong. Please try again. If the problem persists, please save your logs using the button below and provide them to Ledger Support."
@@ -457,7 +463,7 @@
     },
     "UserRefusedAllowManager": {
       "title": "Manager disabled on device",
-      "description": "Please enable the Manager on your device, then try again."
+      "description": "Please allow the Manager on your device, then try again."
     },
     "UserRefusedAddress": {
       "title": "Receive address rejected",
@@ -498,6 +504,10 @@
     "UnavailableTezosOriginatedAccountSend": {
       "title": "Cannot send from subaccounts yet",
       "description": "This feature will be added at a later stage due to changes recently introduced by the Babylon update."
+    },
+    "AccessDeniedError": {
+      "title": "Ledger Live needs an update",
+      "description": "Please update Ledger Live to the latest version, and re verify your identity to swap with wyre"
     },
     "RecommendUndelegation": {
       "title": "Please undelegate the account before emptying it"
@@ -549,10 +559,13 @@
       "title": "Ensure you have enough balance left for future transaction fees"
     },
     "PolkadotDoMaxSendInstead": {
-      "title": "Balance cannot be below 1 DOT. Send max to empty account"
+      "title": "Balance cannot be below {{minimumBalance}}. Send max to empty account."
     },
     "PolkadotBondMinimumAmount": {
-      "title": "You must bond at least 1 DOT"
+      "title": "You must bond at least {{minimumBondAmount}}."
+    },
+    "PolkadotBondMinimumAmountWarning": {
+      "title": "You bonded balance should be at least {{minimumBondBalance}}."
     },
     "PolkadotMaxUnbonding": {
       "title": "You have exceeded the unbond limit"
@@ -746,7 +759,6 @@
       }
     },
     "stepNewDevice": {
-      "cta": "Let’s do this!",
       "0": {
         "label": "Basics",
         "title": "Access your crypto",
@@ -771,14 +783,19 @@
         "label": "Basics",
         "title": "Let’s set up your Nano!",
         "desc": "We'll start by setting up your Nano security."
-      }
+      },
+      "cta": "Let’s do this!"
     },
     "stepSetupDevice": {
       "start": {
         "title": "The best way to get you started:",
         "bullets": {
-          "0": { "label": "Plan 30 minutes and take your time." },
-          "1": { "label": "Grab a pen to write with." },
+          "0": {
+            "label": "Plan 30 minutes and take your time."
+          },
+          "1": {
+            "label": "Grab a pen to write with."
+          },
           "2": {
             "label": "Stay alone, and choose a safe and quiet environment."
           }
@@ -839,11 +856,15 @@
         "infoModal": {
           "title": "Secure your PIN code",
           "bullets": {
-            "0": { "label": "Always choose a PIN code by yourself." },
+            "0": {
+              "label": "Always choose a PIN code by yourself."
+            },
             "1": {
               "label": "Always enter your PIN code out of sight."
             },
-            "2": { "label": "You can change your PIN code if needed." },
+            "2": {
+              "label": "You can change your PIN code if needed."
+            },
             "3": {
               "label": "Three wrong PIN code entries in a row will reset the device."
             },
@@ -1204,6 +1225,7 @@
     "transfer": "Transfer",
     "manager": "Manager",
     "settings": "Settings",
+    "platform": "Discover",
     "nanoX": "Nano X"
   },
   "portfolio": {
@@ -1306,8 +1328,8 @@
     "failed": "Failed",
     "fees": "Network fees",
     "noFees": "No fee",
-    "from": "From ({{count}})",
-    "to": "To ({{count}})",
+    "from": "From",
+    "to": "To",
     "identifier": "Transaction ID",
     "viewOperation": "View in explorer",
     "whatIsThis": "What is this operation?",
@@ -1573,7 +1595,7 @@
       "languageDesc": "Set the language displayed in Ledger Live.",
       "password": "Password lock",
       "passwordDesc": "Set a password to protect Ledger Live data on your phone.",
-      "counterValue": "Countervalue",
+      "counterValue": "Preferred currency",
       "theme": "Theme",
       "themeDesc": "Set the app UI theme",
       "themes": {
@@ -1771,11 +1793,68 @@
         "whatIsSwap": "What is Swap?",
         "disclaimer": "Exchange crypto directly from your Ledger device. This service is not available in some countries, including the US."
       },
+      "unauthorizedRates": {
+        "cta": "Reset verification",
+        "banner": "Reset your KYC and update Live to swap with Wyre.",
+        "bannerCTA": "Reset KYC"
+      },
       "main": {
         "header": "Swap"
       },
       "kyc": {
-        "disclaimer": "I acknowledge that my location data will be shared with third parties for compliance purposes."
+        "disclaimer": "I acknowledge that my location data will be shared with third parties for compliance purposes.",
+        "cta": "Continue",
+        "wyre": {
+          "title": "Complete your KYC",
+          "subtitle": "Your information is collected by LEDGER on behalf of and transferred to WYRE for KYC purposes. For more information, please check our Privacy Policy",
+          "pending": {
+            "cta": "Continue",
+            "title": "KYC submitted for approval",
+            "subtitle": "Your KYC has been submitted and is pending approval.",
+            "link": "Learn more about KYC"
+          },
+          "approved": {
+            "cta": "Continue",
+            "title": "KYC approved!",
+            "subtitle": "Your KYC has been submitted and has been approved.",
+            "link": "Learn more about KYC"
+          },
+          "closed": {
+            "cta": "Reset KYC",
+            "title": "KYC application rejected",
+            "subtitle": "Wyre rejected the data you provided for KYC purposes",
+            "link": "Learn more about KYC"
+          },
+          "form": {
+            "firstName": "First Name",
+            "lastName": "Last Name",
+            "street1": "Street Address Line 1",
+            "street2": "Street Address Line 2",
+            "city": "City",
+            "state": "State",
+            "country": "Country",
+            "postalCode": "Zip Code",
+            "dateOfBirth": "Date of birth",
+
+            "firstNamePlaceholder": "Enter your first name",
+            "lastNamePlaceholder": "Enter your last name",
+            "street1Placeholder": "Eg. 13, Maple street",
+            "street2Placeholder": "Eg. 13, Maple street",
+            "cityPlaceholder": "Eg. San José",
+            "postalCodePlaceholder": "Enter your 5 digit Zip code",
+            "statePlaceholder": "Select your state",
+            "dateOfBirthPlaceholder": "YYYY-MM-DD",
+
+            "firstNameError": "Enter your first name to continue",
+            "lastNameError": "Enter your last name to continue",
+            "street1Error": "Enter your address",
+            "cityError": "Enter the city you live in the USA",
+            "stateError": "Select your state to continue",
+            "postalCodeError": "Enter a valid US ZIP code",
+            "dateOfBirthError": "Enter your date of birth"
+          }
+        },
+        "states": "Select your state"
       },
       "notAvailable": {
         "title": "Service temporarily unavailable, or not available in your country"
@@ -1786,10 +1865,10 @@
         "cta": "Close"
       },
       "pendingOperation": {
-        "description": "Your Swap operation has been sent to the network for confirmation. It may take up to an hour before you receive your swapped crypto assets.",
+        "description": "Your Swap operation has been sent to the network for confirmation. It may take up to an hour before you receive your {{targetCurrency}}.",
         "label": "Your Swap ID:",
-        "title": "Pending operation",
-        "disclaimer": "Please take note of your Swap ID number in case you’d need assistance from {{provider}} later.",
+        "title": "Swap broadcast successfully ",
+        "disclaimer": "Take note of your Swap ID number in case you’d need assistance from {{provider}} support.",
         "cta": "See details"
       },
       "tradeMethod": {
@@ -1811,6 +1890,7 @@
         "balance": "Balance <0>123</0>",
         "fromAccount": "Select account",
         "toAccount": "Select account",
+        "paraswapCTA": "Looking for Paraswap? It has been moved to the Discover tab!",
         "amount": {
           "useMax": "Use max",
           "available": "Total available"
@@ -1846,7 +1926,7 @@
           "fees": "Max fees",
           "disclaimer": {
             "title": "Terms and conditions",
-            "desc": "By clicking “Accept”,  I acknowledge and accept that this service is exclusively governed by {{provider}}'s Terms & Conditions.",
+            "desc": "By clicking “Accept”,  I acknowledge and accept that this service is exclusively governed by <0>{{provider}}</0>'s Terms & Conditions.",
             "tos": "Terms & conditions",
             "accept": "Accept",
             "reject": "Close"
@@ -1886,6 +1966,7 @@
       },
       "history": {
         "tab": "History",
+        "disclaimer": "Your swap mobile transactions are not synchronized with Ledger Live Desktop",
         "exportButton": "Export operations",
         "exportFilename": "Swap operations",
         "empty": {
@@ -1967,7 +2048,6 @@
         "switchLabel": "I have read and agree with the <0><0>Terms of Use</0></0>."
       },
       "info": {
-        "title": "Lend crypto",
         "1": {
           "label": "Step 1/3",
           "title": "Approving an account allows the protocol to process future loans.",
@@ -1983,7 +2063,8 @@
           "title": "Withdraw assets at any time.",
           "description": "You can withdraw your assets and earned interest at any time, partially or entirely, directly from your Ledger account.",
           "cta": "Lend now"
-        }
+        },
+        "title": "Lend crypto"
       },
       "noTokenAccount": {
         "info": {
@@ -2187,6 +2268,16 @@
         "title": "Max spendable amount",
         "description": "The maximum spendable amount is the total balance in an account that is available to send in a transaction."
       }
+    }
+  },
+  "requestAccount": {
+    "stepperHeader": {
+      "selectCrypto": "Select crypto",
+      "selectAccount": "Select account",
+      "stepRange": "Step {{currentStep}} of {{totalSteps}}"
+    },
+    "selectAccount": {
+      "addAccount": "Add {{currency}} account"
     }
   },
   "freeze": {
@@ -3095,6 +3186,7 @@
     "unlockingBalance": "Unbonding balance",
     "unlockedBalance": "Unbonded balance",
     "networkFees": "Network fees are automatically set by the Polkadot consensus, you won't be able to review them on your device",
+    "bondedBalanceBelowMinimum": "Your bonded balance is below the current minimum of {{minimumBondBalance}}. Your nominations are at risk of being removed.",
     "info": {
       "available": {
         "title": "DOT available",
@@ -3115,6 +3207,10 @@
       "electionOpen": {
         "title": "Validators election ongoing",
         "description": "The election of new validators is currently ongoing. As such, staking operations are not available for 15 minutes at most."
+      },
+      "minBondWarning": {
+        "title": "Not enough bonded",
+        "description": "Your bonded balance is below the current minimum allowed to nominate. Your nominations are at risk of being removed."
       }
     },
     "nomination": {
@@ -3309,8 +3405,7 @@
       "modes": {
         "withdrawUnbonded": {
           "title": "Withdraw unbonded",
-          "description": "After the 28-day unbonding period you can withdraw unbonded assets.",
-          "info": "You can then withdraw unbonded assets to your available balance."
+          "description": "Withdraw unbonded assets to your available balance."
         },
         "chill": {
           "title": "Clear nominations",
@@ -3498,7 +3593,6 @@
       "description": "Swap crypto assets directly from your Ledger accounts with our partner."
     }
   },
-
   "walletconnect": {
     "disclaimer": "Wants to connect to the following Ethereum account through your wallet :",
     "reject": "Reject",
@@ -3535,13 +3629,13 @@
   "notificationCenter": {
     "title": "Notification center",
     "announcement": "Announcement",
-    "liveStatus": "Ledger live status",
+    "liveStatus": "Ledger Live status",
     "news": {
       "title": "News",
       "titleCount": "News ({{count}})",
       "emptyState": {
         "title": "No news for the moment",
-        "desc": "You will find here all the news related to Ledger and Ledger live"
+        "desc": "You will find here all the news related to Ledger and Ledger Live"
       }
     },
     "status": {
@@ -3552,6 +3646,44 @@
       },
       "error": {
         "title": "Ledger Live is experiencing issues"
+      }
+    }
+  },
+  "platform": {
+    "catalog": {
+      "title": "Live Apps Catalog",
+      "branch": {
+        "soon": "coming soon",
+        "experimental": "experimental",
+        "debug": "debug"
+      },
+      "banner": {
+        "title": "Discover our Live Catalog",
+        "description": "Unlock a new world of crypto possibilities. One secure access to all services – DeFi, NFTs and more to come."
+      },
+      "twitterBanner": {
+        "description": "Tell us what's the next service you want to see with the hashtag",
+        "tweetText": "The next Ledger App should be..."
+      },
+      "pollCTA": {
+        "title": "Poll",
+        "description": "Which service do you want to see in Ledger Live?"
+      },
+      "developerCTA": {
+        "title": "For Developers",
+        "description": "All the information you need to integrate your applications on Ledger Live."
+      }
+    },
+    "disclaimer": {
+      "title": "External Application",
+      "description": "You are about to be redirected to an application not operated by Ledger.",
+      "legalAdvice": "This application is not operated by Ledger. Ledger is not responsible for any loss of funds or quality of service of such application.\n\nAlways make sure to carefully verify the information displayed on your device.",
+      "checkbox": "Do not remind me again.",
+      "CTA": "Continue"
+    },
+    "webPlatformPlayer": {
+      "infoPanel": {
+        "website": "website"
       }
     }
   }
