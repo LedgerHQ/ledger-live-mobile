@@ -124,7 +124,7 @@
       "description": ""
     },
     "CompoundLowerAllowanceOfActiveAccountError": {
-      "title": "Vous ne pouvez pas diminuer le montant approuvé quand un dépôt est actif."
+      "title": "Vous ne pouvez pas diminuer le montant approuvé sur un dépôt actif."
     },
     "CosmosBroadcastCodeInternal": {
       "title": "Une erreur est survenue (Erreur #1).",
@@ -1568,19 +1568,19 @@
     },
     "facebook": {
       "title": "Facebook",
-      "desc": "Likez notre page"
+      "desc": "Liker notre page"
     },
     "twitter": {
       "title": "Twitter",
-      "desc": "Suivez-nous"
+      "desc": "Nous suivre"
     },
     "github": {
       "title": "GitHub",
-      "desc": "Examinez notre code"
+      "desc": "Examiner notre code"
     },
     "status": {
       "title": "Statut de Ledger",
-      "desc": "Vérifiez l'état de notre système"
+      "desc": "Vérifier l'état de notre système"
     }
   },
   "settings": {
