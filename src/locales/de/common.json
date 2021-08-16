@@ -1,58 +1,58 @@
 {
   "common": {
-    "cancel": "Cancel",
-    "apply": "Apply",
-    "back": "Back",
-    "delete": "Delete",
-    "paste": "Paste",
-    "yes": "Yes",
-    "no": "No",
-    "gotit": "Got it",
-    "continue": "Continue",
-    "retry": "Retry",
-    "done": "Done",
-    "sortBy": "Sort by",
-    "signOut": "Sign out",
-    "search": "Search",
-    "contactUs": "Contact Ledger Support",
-    "device": "Device",
-    "cryptoAsset": "Crypto asset",
-    "skip": "Skip",
-    "noCryptoFound": "No crypto assets found",
-    "needHelp": "Do you need help?",
-    "edit": "Edit",
-    "editName": "Edit name",
-    "close": "Close",
-    "confirm": "Confirm",
-    "poweredBy": "Powered by ",
-    "received": "Received",
-    "sent": "Sent",
-    "or": "OR",
-    "rename": "Rename",
-    "learnMore": "Learn more",
+    "cancel": "Abbrechen",
+    "apply": "Anwenden",
+    "back": "Zurück",
+    "delete": "Löschen",
+    "paste": "Einfügen",
+    "yes": "Ja",
+    "no": "Nein",
+    "gotit": "Verstanden",
+    "continue": "Weiter",
+    "retry": "Wiederholen",
+    "done": "Fertig",
+    "sortBy": "Sortieren nach",
+    "signOut": "Abmelden",
+    "search": "Suchen",
+    "contactUs": "Kontakt zum Ledger-Support",
+    "device": "Gerät",
+    "cryptoAsset": "Krypto-Vermögenswert",
+    "skip": "Überspringen",
+    "noCryptoFound": "Keine Krypto-Vermögenswerte gefunden",
+    "needHelp": "Brauchen Sie Hilfe?",
+    "edit": "Bearbeiten",
+    "editName": "Name bearbeiten",
+    "close": "Schließen",
+    "confirm": "Bestätigen",
+    "poweredBy": "Unterstützt durch",
+    "received": "Empfangen",
+    "sent": "Gesendet",
+    "or": "ODER",
+    "rename": "Umbenennen",
+    "learnMore": "Mehr erfahren",
     "checkItOut": "Check it out",
-    "viewDetails": "View details",
-    "today": "Today",
-    "yesterday": "Yesterday",
-    "upToDate": "Up to date",
-    "transactionDate": "Transaction date",
-    "outdated": "Outdated",
-    "satPerByte": "sat/bytes",
-    "notAvailable": "Not available",
-    "import": "Import",
+    "viewDetails": "Details anzeigen",
+    "today": "Heute",
+    "yesterday": "Gestern",
+    "upToDate": "Aktuell",
+    "transactionDate": "Transaktionsdatum",
+    "outdated": "Veraltet",
+    "satPerByte": "Sat/Bytes",
+    "notAvailable": "Nicht verfügbar",
+    "import": "Importieren",
     "bluetooth": "Bluetooth",
     "usb": "USB",
-    "add": "Add",
-    "slow": "slow",
+    "add": "Hinzufügen",
+    "slow": "Langsam",
     "medium": "medium",
-    "fast": "fast",
+    "fast": "Schnell",
     "token": "Token",
-    "token_plural": "Tokens",
-    "subaccount": "Subaccount",
-    "subaccount_plural": "Subaccounts",
-    "forgetDevice": "Remove device",
-    "help": "Help",
-    "saveLogs": "Save logs",
+    "token_plural": "Token",
+    "subaccount": "Unterkonto",
+    "subaccount_plural": "Unterkonten",
+    "forgetDevice": "Gerät entfernen",
+    "help": "Hilfe",
+    "saveLogs": "Protokolle speichern",
     "sync": {
       "ago": "Synchronized {{time}}"
     },
@@ -140,50 +140,50 @@
     },
     "CosmosBroadcastCodeUnauthorized": {
       "title": "Unauthorized signature",
-      "description": "This account is not authorized to sign this transaction."
+      "description": "Dieses Konto ist nicht berechtigt, diese Transaktion zu signieren."
     },
     "CosmosBroadcastCodeInsufficientFunds": {
-      "title": "Insufficient funds",
-      "description": "Please make sure the account has enough funds."
+      "title": "Unzureichende Mittel",
+      "description": "Bitte stellen Sie sicher, dass das Konto ausreichend gedeckt ist."
     },
     "CosmosBroadcastCodeUnknownRequest": {
-      "title": "Something went wrong (Error #6)",
-      "description": "Please save your logs using the button below and provide them to Ledger Support."
+      "title": "Etwas ist schief gelaufen (Fehler 6)",
+      "description": "Bitte speichern Sie Ihre Protokolle über die Schaltfläche unten und stellen Sie sie dem Ledger-Support zur Verfügung."
     },
     "CosmosBroadcastCodeInvalidAddress": {
-      "title": "Invalid address",
-      "description": "Please check the address and try again."
+      "title": "Ungültige Adresse",
+      "description": "Bitte überprüfen Sie die Adresse und versuchen Sie es erneut."
     },
     "CosmosBroadcastCodeInvalidPubKey": {
-      "title": "Something went wrong (Error #8)",
-      "description": "Please save your logs using the button below and provide them to Ledger Support."
+      "title": "Etwas ist schief gelaufen (Fehler 8)",
+      "description": "Bitte speichern Sie Ihre Protokolle über die Schaltfläche unten und stellen Sie sie dem Ledger-Support zur Verfügung."
     },
     "CosmosBroadcastCodeUnknownAddress": {
-      "title": "Unknown address",
-      "description": "Please check the address and try again."
+      "title": "Unbekannte Adresse",
+      "description": "Bitte überprüfen Sie die Adresse und versuchen Sie es erneut."
     },
     "CosmosBroadcastCodeInsufficientCoins": {
-      "title": "Insufficient funds",
-      "description": "Please increase the funds on the account."
+      "title": "Unzureichende Mittel",
+      "description": "Bitte erhöhen Sie das Guthaben auf dem Konto."
     },
     "CosmosBroadcastCodeInvalidCoins": {
-      "title": "Something went wrong (Error #11)",
-      "description": "Please save your logs using the button below and provide them to Ledger Support."
+      "title": "Etwas ist schief gelaufen (Fehler 11)",
+      "description": "Bitte speichern Sie Ihre Protokolle über die Schaltfläche unten und stellen Sie sie dem Ledger-Support zur Verfügung."
     },
     "CosmosBroadcastCodeOutOfGas": {
-      "title": "Something went wrong (Error #12)",
-      "description": "Please save your logs using the button below and provide them to Ledger Support."
+      "title": "Etwas ist schief gelaufen (Fehler 12)",
+      "description": "Bitte speichern Sie Ihre Protokolle über die Schaltfläche unten und stellen Sie sie dem Ledger-Support zur Verfügung."
     },
     "CosmosBroadcastCodeMemoTooLarge": {
-      "title": "The Memo field is too long",
-      "description": "Please reduce the size of the memo text and try again."
+      "title": "Das Memo-Feld ist zu lang",
+      "description": "Bitte verkleinern Sie den Memotext und versuchen Sie es erneut."
     },
     "CosmosBroadcastCodeInsufficientFee": {
-      "title": "Something went wrong (Error #14)",
-      "description": "Please save your logs using the button below and provide them to Ledger Support."
+      "title": "Etwas ist schief gelaufen (Fehler 14)",
+      "description": "Bitte speichern Sie Ihre Protokolle über die Schaltfläche unten und stellen Sie sie dem Ledger-Support zur Verfügung."
     },
     "CosmosBroadcastCodeTooManySignatures": {
-      "title": "Something went wrong (Error #15)",
+      "title": "Etwas ist schief gelaufen (Fehler 15)",
       "description": "Please save your logs using the button below and provide them to Ledger Support."
     },
     "CosmosBroadcastCodeGasOverflow": {
