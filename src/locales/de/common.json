@@ -184,66 +184,66 @@
     },
     "CosmosBroadcastCodeTooManySignatures": {
       "title": "Etwas ist schief gelaufen (Fehler 15)",
-      "description": "Please save your logs using the button below and provide them to Ledger Support."
+      "description": "Bitte speichern Sie Ihre Protokolle über die Schaltfläche unten und stellen Sie sie dem Ledger-Support zur Verfügung."
     },
     "CosmosBroadcastCodeGasOverflow": {
-      "title": "Something went wrong (Error #16)",
-      "description": "Please save your logs using the button below and provide them to Ledger Support."
+      "title": "Etwas ist schief gelaufen (Fehler 16)",
+      "description": "Bitte speichern Sie Ihre Protokolle über die Schaltfläche unten und stellen Sie sie dem Ledger-Support zur Verfügung."
     },
     "CosmosBroadcastCodeNoSignatures": {
-      "title": "Something went wrong (Error #17)",
-      "description": "Please save your logs using the button below and provide them to Ledger Support."
+      "title": "Etwas ist schief gelaufen (Fehler 17)",
+      "description": "Bitte speichern Sie Ihre Protokolle über die Schaltfläche unten und stellen Sie sie dem Ledger-Support zur Verfügung."
     },
     "DeviceAppVerifyNotSupported": {
-      "title": "Open Manager to update this app",
-      "description": "The app verification is not supported."
+      "title": "Manager öffnen, um diese App zu aktualisieren",
+      "description": "Die App-Verifizierung wird nicht unterstützt."
     },
     "DeviceGenuineSocketEarlyClose": {
-      "title": "Sorry, try again (genuine-close)",
+      "title": "Entschuldigung, versuchen Sie es erneut (genuine-close)",
       "description": null
     },
     "DeviceHalted": {
-      "title": "Please restart your Ledger device and retry",
-      "description": "An unexpected error occurred. Please try again."
+      "title": "Bitte starten Sie Ihr Ledger-Gerät neu und versuchen Sie es erneut",
+      "description": "Ein unerwarteter Fehler ist aufgetreten. Bitte versuchen Sie es erneut."
     },
     "DeviceNotGenuine": {
-      "title": "Device possibly not genuine",
-      "description": "Please save your logs using the button below and provide them to Ledger Support."
+      "title": "Gerät möglicherweise nicht echt",
+      "description": "Bitte speichern Sie Ihre Protokolle über die Schaltfläche unten und stellen Sie sie dem Ledger-Support zur Verfügung."
     },
     "DeviceNameInvalid": {
-      "title": "Please name the device without '{{invalidCharacters}}'."
+      "title": "Bitte benennen Sie das Gerät ohne '{{invalidCharacters}}'."
     },
     "DeviceOnDashboardExpected": {
-      "title": "Device not on Dashboard",
-      "description": "Please return to the Dashboard on your device."
+      "title": "Gerät nicht auf dem Dashboard",
+      "description": "Bitte kehren Sie zum Dashboard auf Ihrem Gerät zurück."
     },
     "DeviceSocketFail": {
-      "title": "Sorry, connection failed",
-      "description": "Please try again."
+      "title": "Entschuldigung, Verbindung fehlgeschlagen",
+      "description": "Bitte versuchen Sie es erneut."
     },
     "DeviceSocketNoBulkStatus": {
-      "title": "The connection failed",
-      "description": "Please try again."
+      "title": "Die Verbindung ist fehlgeschlagen",
+      "description": "Bitte versuchen Sie es erneut."
     },
     "DeviceSocketNoHandler": {
-      "title": "Sorry, connection failed",
-      "description": "Please try again."
+      "title": "Entschuldigung, Verbindung fehlgeschlagen",
+      "description": "Bitte versuchen Sie es erneut."
     },
     "DisconnectedDevice": {
-      "title": "Sorry, it looks like your device was disconnected",
-      "description": "Please reconnect and try again."
+      "title": "Entschuldigung, es sieht so aus, als ob Ihr Gerät getrennt wurde",
+      "description": "Bitte stellen Sie die Verbindung wieder her und versuchen Sie es erneut."
     },
     "DisconnectedDeviceDuringOperation": {
-      "title": "Sorry, it looks like your device was disconnected",
-      "description": "Please reconnect and try again."
+      "title": "Entschuldigung, es sieht so aus, als ob Ihr Gerät getrennt wurde",
+      "description": "Bitte stellen Sie die Verbindung wieder her und versuchen Sie es erneut."
     },
     "ETHAddressNonEIP": {
-      "title": "Auto-verification not available: carefully verify the address.",
+      "title": "Automatische Verifizierung nicht verfügbar: Überprüfen Sie die Adresse sorgfältig.",
       "description": null
     },
     "Touch ID Error": {
-      "title": "Biometric authentication failed",
-      "description": "Please use your password or reset the app."
+      "title": "Biometrische Authentifizierung fehlgeschlagen",
+      "description": "Bitte verwenden Sie Ihr Passwort oder setzen Sie die App zurück."
     },
     "Error": {
       "title": "{{message}}",
@@ -352,113 +352,113 @@
       "description": "Something went wrong with the address calculation. Please try again. If the problem persists, please save your logs using the button below and provide them to Ledger Support."
     },
     "NotEnoughBalance": {
-      "title": "Sorry, insufficient funds",
-      "description": "Please make sure the account has enough funds."
+      "title": "Entschuldigung, unzureichende Mittel",
+      "description": "Bitte stellen Sie sicher, dass das Konto ausreichend gedeckt ist."
     },
     "NotEnoughGas": {
-      "title": "Insufficient ETH for network fee",
-      "description": "Please send some ETH to your account to pay for ERC20 token transactions."
+      "title": "Nicht genügend ETH für die Netzwerkgebühr",
+      "description": "Bitte senden Sie einige ETH auf Ihr Konto, um ERC20-Token-Transaktionen zu bezahlen."
     },
     "NotEnoughBalanceToDelegate": {
-      "title": "Insufficient balance to delegate"
+      "title": "Unzureichender Saldo zum übertragen"
     },
     "NotEnoughBalanceInParentAccount": {
-      "title": "Insufficient balance in the parent account"
+      "title": "Unzureichender Saldo auf dem übergeordneten Konto"
     },
     "NotEnoughSpendableBalance": {
-      "title": "Balance cannot be below {{minimumAmount}}"
+      "title": "Kontostand darf nicht unter {{minimumAmount}} liegen"
     },
     "NotEnoughBalanceBecauseDestinationNotCreated": {
-      "title": "Minimum of {{minimalAmount}} needed to activate recipient address"
+      "title": "Mindestens {{minimalAmount}} benötigt, um die Empfängeradresse zu aktivieren"
     },
     "PairingFailed": {
-      "title": "Pairing unsuccessful",
-      "description": "Please try again or consult our Bluetooth troubleshooting article."
+      "title": "Kopplung fehlgeschlagen",
+      "description": "Bitte versuchen Sie es erneut oder lesen Sie unseren Artikel zur Bluetooth-Fehlerbehebung."
     },
     "PasswordIncorrect": {
-      "title": "Incorrect password",
-      "description": "Please try again."
+      "title": "Falsches Passwort",
+      "description": "Bitte versuchen Sie es erneut."
     },
     "PasswordsDontMatch": {
-      "title": "Password does not match",
-      "description": "Please try again."
+      "title": "Passwort stimmt nicht überein",
+      "description": "Bitte versuchen Sie es erneut."
     },
     "SelectExchangesLoadError": {
-      "title": "Unable to load",
-      "description": "Cannot load the exchanges."
+      "title": "Kann nicht geladen werden",
+      "description": "Kann die Exchanges nicht laden."
     },
     "SyncError": {
-      "title": "Synchronization error",
-      "description": "Some accounts could not be synchronized."
+      "title": "Fehler bei der Synchronisation",
+      "description": "Einige Konten konnten nicht synchronisiert werden."
     },
     "TimeoutError": {
-      "title": "Sorry, server took too long to respond",
-      "description": "Please try again."
+      "title": "Entschuldigung, der Server hat zu lange für die Antwort gebraucht",
+      "description": "Bitte versuchen Sie es erneut."
     },
     "TimeoutTagged": {
       "title": "Sorry, server took too long to respond ({{tag}})",
-      "description": "Timeout occurred."
+      "description": "Es ist eine Zeitüberschreitung aufgetreten."
     },
     "TransactionRefusedOnDevice": {
-      "title": "Transaction refused on device",
-      "description": "Please try again. If the problem persists, please save your logs using the button below and provide them to Ledger Support."
+      "title": "Transaktion auf Gerät abgelehnt",
+      "description": "Bitte versuchen Sie es erneut. Wenn das Problem weiterhin besteht, speichern Sie bitte Ihre Protokolle über die Schaltfläche unten und stellen Sie sie dem Ledger-Support zur Verfügung."
     },
     "TransportError": {
-      "title": "Something went wrong. Please reconnect your device.",
-      "description": "{{message}} Please try again. If the problem persists, please save your logs using the button below and provide them to Ledger Support."
+      "title": "Etwas ist schief gelaufen. Bitte schließen Sie Ihr Gerät erneut an.",
+      "description": "{{message}} Bitte versuchen Sie es erneut. Wenn das Problem weiterhin besteht, speichern Sie bitte Ihre Protokolle über die Schaltfläche unten und stellen Sie sie dem Ledger-Support zur Verfügung."
     },
     "TransportStatusError": {
-      "title": "Something went wrong. Please reconnect your device.",
-      "description": "{{message}} Please try again. If the problem persists, please save your logs using the button below and provide them to Ledger Support."
+      "title": "Etwas ist schief gelaufen. Bitte schließen Sie Ihr Gerät erneut an.",
+      "description": "{{message}} Bitte versuchen Sie es erneut. Wenn das Problem weiterhin besteht, speichern Sie bitte Ihre Protokolle über die Schaltfläche unten und stellen Sie sie dem Ledger-Support zur Verfügung."
     },
     "TronNoFrozenForBandwidth": {
-      "title": "No assets to unfreeze",
-      "description": "You don't have Bandwidth assets to unfreeze."
+      "title": "Keine Vermögenswerte zum Entsperren",
+      "description": "Sie haben keine Bandbreiten-Vermögenswerte, die Sie entsperren können."
     },
     "TronNoFrozenForEnergy": {
-      "title": "No assets to unfreeze",
-      "description": "You don't have Energy assets to unfreeze."
+      "title": "Keine Vermögenswerte zum Entsperren",
+      "description": "Sie haben keine Energie-Vermögenswerte, die Sie entsperren können."
     },
     "TronUnfreezeNotExpired": {
-      "title": "Unfreeze is not available yet",
-      "description": "Please wait 3 days after your last Freeze operation."
+      "title": "Entsperren ist noch nicht verfügbar",
+      "description": "Bitte warten Sie 3 Tage nach Ihrem letzten Sperrvorgang."
     },
     "TronVoteRequired": {
-      "title": "At least 1 vote is needed"
+      "title": "Mindestens 1 Stimme wird benötigt"
     },
     "TronInvalidVoteCount": {
-      "title": "Vote format is incorrect",
-      "description": "You can only vote using round numbers."
+      "title": "Abstimmungsformat ist falsch",
+      "description": "Sie können nur mit runden Zahlen abstimmen."
     },
     "TronRewardNotAvailable": {
-      "title": "Rewards are not claimable yet",
-      "description": "Please wait 24 hours between claims."
+      "title": "Prämien sind noch nicht einforderbar",
+      "description": "Bitte warten Sie 24 Stunden zwischen den Einforderungen."
     },
     "TronNoReward": {
-      "title": "There is no reward to be claimed"
+      "title": "Es gibt keine Prämie, die Sie beanspruchen können"
     },
     "TronInvalidFreezeAmount": {
-      "title": "Amount to freeze cannot be smaller than 1"
+      "title": "Der zu sperrende Betrag kann nicht kleiner als 1 sein"
     },
     "TronSendTrc20ToNewAccountForbidden": {
-      "title": "Sending TRC20 to the new account will not activate it",
-      "description": "To activate it, first send either TRX or TRC10 to the account. Then it can receive TRC20."
+      "title": "Das Senden von TRC20 an das neue Konto wird es nicht aktivieren",
+      "description": "Um es zu aktivieren, senden Sie zuerst entweder TRX oder TRC10 an das Konto. Dann kann es TRC20 empfangen."
     },
     "TronUnexpectedFees": {
-      "title": "Additional fees may apply"
+      "title": "Es können zusätzliche Gebühren anfallen"
     },
     "TronNotEnoughTronPower": {
-      "title": "Not enough votes available"
+      "title": "Nicht genügend Stimmen vorhanden"
     },
     "TronTransactionExpired": {
-      "title": "Transaction timeout expired",
-      "description": "Transactions must be signed within 30 seconds. Please try again."
+      "title": "Zeitüberschreitung der Transaktion ist abgelaufen",
+      "description": "Transaktionen müssen innerhalb von 30 Sekunden signiert werden. Bitte versuchen Sie es erneut."
     },
     "TronNotEnoughEnergy": {
-      "title": "Not enough Energy to send this token"
+      "title": "Nicht genug Energie zum Senden dieses Tokens"
     },
     "UpdateYourApp": {
-      "title": "App update needed",
+      "title": "App-Update erforderlich",
       "description": "Please uninstall then reinstall the {{managerAppName}} app in the Manager."
     },
     "UserRefusedAllowManager": {
@@ -581,101 +581,101 @@
   "bluetooth": {
     "required": "Sorry, it looks like Bluetooth is disabled",
     "locationRequiredTitle": "Location is required for Bluetooth LE",
-    "locationRequiredMessage": "On Android location permission is required to list Bluetooth LE devices.",
-    "checkEnabled": "Please enable Bluetooth in your phone settings."
+    "locationRequiredMessage": "Unter Android ist eine Standortfreigabe erforderlich, um Bluetooth LE-Geräte aufzulisten.",
+    "checkEnabled": "Bitte aktivieren Sie Bluetooth in den Einstellungen Ihres Telefons."
   },
   "location": {
-    "required": "Location services required",
-    "open": "Open location settings",
-    "disabled": "Ledger Live requires location services to pair your device through Bluetooth.",
-    "noInfos": "Ledger does not access your location information."
+    "required": "Standortdienste erforderlich",
+    "open": "Standort-Einstellungen öffnen",
+    "disabled": "Ledger Live erfordert Standortdienste, um Ihr Gerät über Bluetooth zu koppeln.",
+    "noInfos": "Ledger greift nicht auf Ihre Standortinformationen zu."
   },
   "permissions": {
-    "open": "Open app permissions"
+    "open": "App-Berechtigungen öffnen"
   },
   "fees": {
     "speed": {
-      "high": "High",
+      "high": "Hoch",
       "standard": "Standard",
-      "low": "Low",
-      "custom": "Custom",
-      "blockCount": "{{blockCount}} blocks"
+      "low": "Niedrig",
+      "custom": "Benutzerdefiniert",
+      "blockCount": "{{blockCount}} Blöcke"
     }
   },
   "signout": {
-    "confirm": "Are you sure you want to sign out?",
-    "disclaimer": "All account data will be removed from your phone.",
-    "action": "Sign me out"
+    "confirm": "Sind Sie sicher, dass Sie sich abmelden wollen?",
+    "disclaimer": "Alle Kontodaten werden von Ihrem Telefon entfernt.",
+    "action": "Melden Sie mich ab"
   },
   "auth": {
     "failed": {
       "biometrics": {
-        "title": "{{biometricsType}} unlock failed",
-        "description": "Enter your password to continue",
-        "authenticate": "Please authenticate with the Ledger Live app"
+        "title": "{{biometricsType}} Entsperren fehlgeschlagen",
+        "description": "Geben Sie Ihr Passwort ein, um fortzufahren",
+        "authenticate": "Bitte authentifizieren Sie sich mit der Ledger Live-App"
       },
-      "denied": "Auth Security was not enabled because your phone failed to authenticate.",
-      "title": "Authentication failed",
+      "denied": "Auth Security wurde nicht aktiviert, weil Ihr Telefon sich nicht authentifizieren konnte.",
+      "title": "Authentifizierung fehlgeschlagen",
       "buttons": {
-        "tryAgain": "Try again",
+        "tryAgain": "Erneut versuchen",
         "reset": "Reset"
       }
     },
     "unlock": {
-      "biometricsTitle": "Please authenticate with the Ledger Live app",
-      "title": "Welcome back",
-      "desc": "Enter your password to continue",
-      "inputPlaceholder": "Type your password",
-      "login": "Log in",
-      "forgotPassword": "I lost my password"
+      "biometricsTitle": "Bitte authentifizieren Sie sich mit der Ledger Live-App",
+      "title": "Willkommen zurück",
+      "desc": "Geben Sie Ihr Passwort ein, um fortzufahren",
+      "inputPlaceholder": "Geben Sie Ihr Passwort ein",
+      "login": "Einloggen",
+      "forgotPassword": "Ich habe mein Passwort verloren"
     },
     "addPassword": {
-      "placeholder": "Choose your password",
-      "title": "Password Lock"
+      "placeholder": "Wählen Sie Ihr Passwort",
+      "title": "Passwort-Sperre"
     },
     "confirmPassword": {
-      "title": "Confirm Password",
-      "placeholder": "Confirm your password"
+      "title": "Passwort bestätigen",
+      "placeholder": "Bestätigen Sie Ihr Passwort"
     },
     "enableBiometrics": {
       "title": "{{biometricsType}}",
-      "desc": "Unlock with {{biometricsType}}"
+      "desc": "Entsperren mit {{biometricsType}}"
     }
   },
   "reset": {
-    "description": "Please uninstall then reinstall the app on your phone to delete Ledger Live data, including accounts and settings.",
+    "description": "Bitte deinstallieren Sie die App auf Ihrem Telefon und installieren Sie sie anschließend neu, um die Daten von Ledger Live, einschließlich Konten und Einstellungen, zu löschen.",
     "button": "Reset"
   },
   "graph": {
-    "week": "1W",
-    "month": "1M",
-    "year": "1Y",
-    "all": "ALL"
+    "week": "1 W",
+    "month": "1 M",
+    "year": "1 J",
+    "all": "ALLE"
   },
   "carousel": {
-    "title": "Close banner?",
-    "description": "We'll inform you of any new announcements.",
-    "confirm": "Confirm",
-    "undo": "Undo",
+    "title": "Banner schließen?",
+    "description": "Wir werden Sie über alle neuen Ankündigungen informieren.",
+    "confirm": "Bestätigen",
+    "undo": "Rückgängig machen",
     "banners": {
       "valentine": {
-        "title": "Valentine’s day",
-        "description": "Reduced fees on Buy and Sell"
+        "title": "Valentinstag",
+        "description": "Reduzierte Gebühren bei Kauf und Verkauf"
       },
       "academy": {
-        "title": "Ledger Academy",
-        "description": "Everything you need to\nknow about crypto"
+        "title": "Ledger Akademie",
+        "description": "Alles, was Sie über Krypto wissen müssen"
       },
       "stakeCosmos": {
-        "title": "Stake COSMOS",
-        "description": "Delegate your ATOM earn rewards today."
+        "title": "COSMOS staken",
+        "description": "Übertragen Sie Ihre verdienten ATOM-Prämien heute."
       },
       "polkastake": {
         "title": "POLKADOT STAKING",
-        "description": "Stake, secure and\nmanage your DOT with\nLedger Live"
+        "description": "Staken, sichern und verwalten Sie Ihre DOT mit Ledger Live"
       },
       "backupPack": {
-        "title": "Back-up pack",
+        "title": "Backup-Paket",
         "description": "A Nano X and a Nano S\nfor optimal protection"
       },
       "buyCrypto": {
@@ -772,123 +772,123 @@
       "2": {
         "label": "Basics",
         "title": "Stay offline",
-        "desc": "Your Nano works as a \"cold storage\" wallet. This means that it never exposes your private key online, even when using the app."
+        "desc": "Ihr Nano arbeitet als „Cold Storage“-Wallet. Das bedeutet, dass er Ihren privaten Schlüssel niemals online preisgibt, selbst wenn Sie die App verwenden."
       },
       "3": {
-        "label": "Basics",
-        "title": "Validate transactions",
-        "desc": "Ledger Live allows you to buy, sell, manage, exchange and earn crypto while remaining protected. You will validate every crypto transaction with your Nano."
+        "label": "Grundlagen",
+        "title": "Transaktionen validieren",
+        "desc": "Mit Ledger Live können Sie Krypto kaufen, verkaufen, verwalten, tauschen und verdienen und bleiben dabei geschützt. Sie werden jede Krypto-Transaktion mit Ihrem Nano validieren."
       },
       "4": {
-        "label": "Basics",
-        "title": "Let’s set up your Nano!",
-        "desc": "We'll start by setting up your Nano security."
+        "label": "Grundlagen",
+        "title": "Lassen Sie uns Ihren Nano einrichten!",
+        "desc": "Wir beginnen mit der Einrichtung der Nano-Sicherheit."
       },
-      "cta": "Let’s do this!"
+      "cta": "Packen wir's an!"
     },
     "stepSetupDevice": {
       "start": {
-        "title": "The best way to get you started:",
+        "title": "Der beste Weg für den Anfang:",
         "bullets": {
           "0": {
-            "label": "Plan 30 minutes and take your time."
+            "label": "Planen Sie 30 Minuten ein und nehmen Sie sich Zeit."
           },
           "1": {
-            "label": "Grab a pen to write with."
+            "label": "Nehmen Sie einen Stift zum Schreiben."
           },
           "2": {
-            "label": "Stay alone, and choose a safe and quiet environment."
+            "label": "Bleiben Sie allein, und wählen Sie eine sichere und ruhige Umgebung."
           }
         },
-        "cta": "OK, I’m ready!",
+        "cta": "OK, ich bin bereit!",
         "warning": {
-          "title": "Please be careful",
-          "desc": "Make sure you follow the instructions on this app at every step of the process.",
-          "ctaText": "Got it!"
+          "title": "Bitte seien Sie vorsichtig",
+          "desc": "Stellen Sie sicher, dass Sie die Anweisungen dieser App bei jedem Schritt des Vorgangs befolgen.",
+          "ctaText": "Verstanden!"
         }
       },
       "setup": {
         "bullets": {
           "0": {
-            "title": "Turn on Nano",
+            "title": "Nano einschalten",
             "nanoX": {
-              "label": "Turn on your device by pressing the black button for 1 second."
+              "label": "Schalten Sie Ihr Gerät ein, indem Sie die schwarze Taste 1 Sekunde lang drücken."
             },
             "nanoS": {
-              "label": "Turn on your device by connecting it to the USB port of your phone."
+              "label": "Schalten Sie Ihr Gerät ein, indem Sie es an den USB-Anschluss Ihres Telefons anschließen."
             },
             "blue": {
-              "label": "Turn on your device by connecting it to the USB port of your phone and pressing the power button."
+              "label": "Schalten Sie Ihr Gerät ein, indem Sie es an den USB-Anschluss Ihres Telefons anschließen und die Einschalttaste drücken."
             }
           },
           "1": {
-            "title": "Browse ",
-            "label": "Learn how to interact with your device by reading the on-screen instructions."
+            "title": "Durchsuchen",
+            "label": "Erfahren Sie, wie Sie Ihr Gerät bedienen können, indem Sie die Anweisungen auf dem Bildschirm lesen."
           },
           "2": {
-            "title": "Select “Set up as new device”",
-            "label": "Press both buttons simultaneously to validate the selection."
+            "title": "Wählen Sie „Als neues Gerät einrichten“",
+            "label": "Drücken Sie beide Tasten gleichzeitig, um die Auswahl zu bestätigen."
           },
           "3": {
-            "title": "Follow instructions",
-            "label": "Come back here to follow instructions on your PIN code."
+            "title": "Anweisungen befolgen",
+            "label": "Kommen Sie hierher zurück, um den Anweisungen zu Ihrem PIN-Code zu folgen."
           }
         },
-        "cta": "Next step"
+        "cta": "Nächster Schritt"
       },
       "pinCode": {
-        "title": "PIN code",
-        "desc": "Your PIN code is the first layer of security. It physically secures access to your Nano and your private keys. Your PIN code must be 4 to 8 digits long.",
-        "checkboxDesc": "I understand that I must choose my PIN code by myself and keep it private.",
-        "cta": "Set up PIN code"
+        "title": "PIN-Code",
+        "desc": "Ihr PIN-Code ist die erste Ebene der Sicherheit. Er sichert physisch den Zugang zu Ihrem Nano und Ihren privaten Schlüsseln. Ihr PIN-Code muss 4 bis 8 Ziffern lang sein.",
+        "checkboxDesc": "Ich verstehe, dass ich meinen PIN-Code selbst wählen und ihn geheim halten muss.",
+        "cta": "PIN-Code einrichten"
       },
       "pinCodeSetup": {
         "bullets": {
           "0": {
-            "title": "Choose PIN code",
-            "label": "Press the left or right button to change digits. Press both buttons to validate a digit. Select <1></1> to confirm your PIN code. Select <2></2> to erase a digit."
+            "title": "PIN-Code wählen",
+            "label": "Drücken Sie die linke oder rechte Taste, um Ziffern zu ändern. Drücken Sie beide Tasten, um eine Ziffer zu bestätigen. Wählen Sie <1></1>, um Ihren PIN-Code zu bestätigen. Wählen Sie <2></2>, um eine Ziffer zu löschen."
           },
           "1": {
-            "title": "Confirm PIN code",
-            "label": "Enter your PIN code again to confirm it."
+            "title": "PIN-Code bestätigen",
+            "label": "Geben Sie Ihren PIN-Code erneut ein, um ihn zu bestätigen."
           }
         },
         "infoModal": {
-          "title": "Secure your PIN code",
+          "title": "Sichern Sie Ihren PIN-Code",
           "bullets": {
             "0": {
-              "label": "Always choose a PIN code by yourself."
+              "label": "Wählen Sie einen PIN-Code immer selbst aus."
             },
             "1": {
-              "label": "Always enter your PIN code out of sight."
+              "label": "Geben Sie Ihren PIN-Code immer außer Sichtweite ein."
             },
             "2": {
-              "label": "You can change your PIN code if needed."
+              "label": "Sie können Ihren PIN-Code bei Bedarf ändern."
             },
             "3": {
-              "label": "Three wrong PIN code entries in a row will reset the device."
+              "label": "Drei falsche PIN-Code-Eingaben hintereinander setzen das Gerät zurück."
             },
             "4": {
-              "label": "Never use an easy PIN code like 0000, 123456, or 55555555."
+              "label": "Verwenden Sie niemals einen einfachen PIN-Code wie 0000, 123456 oder 55555555."
             },
             "5": {
-              "label": "Never share your PIN code with someone else. Not even with Ledger."
+              "label": "Geben Sie Ihren PIN-Code niemals an jemand anderen weiter. Auch nicht an Ledger."
             },
             "6": {
-              "label": "Never use a PIN code you did not choose yourself."
+              "label": "Verwenden Sie niemals einen PIN-Code, den Sie nicht selbst gewählt haben."
             },
             "7": {
-              "label": "Never store your PIN code on a computer or phone."
+              "label": "Speichern Sie Ihren PIN-Code niemals auf einem Computer oder Telefon."
             }
           }
         },
-        "cta": "Next step"
+        "cta": "Nächster Schritt"
       },
       "recoveryPhrase": {
-        "title": "Recovery phrase",
-        "desc": "Your recovery phrase is a secret list of 24 words that backs up your private keys.",
-        "desc_1": "Your Nano generates a unique recovery phrase. Ledger does not keep a copy of it.",
-        "cta": "Recovery phrase",
+        "title": "Wiederherstellungsphrase",
+        "desc": "Ihre Wiederherstellungsphrase ist eine geheime Liste von 24 Wörtern, die Ihre privaten Schlüssel sichern.",
+        "desc_1": "Ihr Nano erzeugt eine einzigartige Wiederherstellungsphrase. Ledger behält keine Kopie davon.",
+        "cta": "Wiederherstellungsphrase",
         "checkboxDesc": "I understand that if I lose this recovery phrase, I will not be able to access my crypto in case I lose access to my Nano."
       },
       "recoveryPhraseSetup": {
@@ -1005,78 +1005,78 @@
             "label": "Press both buttons simultaneously to validate the selection."
           },
           "3": {
-            "title": "Follow instructions",
-            "label": "Come back here to follow instructions on your PIN code."
+            "title": "Anweisungen befolgen",
+            "label": "Kommen Sie hierher zurück, um den Anweisungen zu Ihrem PIN-Code zu folgen."
           }
         }
       },
       "existingRecoveryPhrase": {
-        "title": "Enter your recovery phrase",
-        "paragraph1": "Your recovery phrase is the secret list of words that you backed up when you first set up your wallet.",
-        "paragraph2": "Ledger does not keep a copy of your recovery phrase.",
-        "checkboxDesc": "I understand that if I lose my recovery phrase, I will not be able to access my crypto in case I lose access to my Nano.",
+        "title": "Wiederherstellungsphrase eingeben",
+        "paragraph1": "Ihr Wiederherstellungsphrase ist die geheime Liste von Wörtern, die Sie beim ersten Einrichten Ihres Wallets gewählt haben.",
+        "paragraph2": "Ledger bewahrt keine Kopie Ihrer Wiederherstellungsphrase auf.",
+        "checkboxDesc": "Ich verstehe, dass ich bei Verlust der Wiederherstellungsphrase nicht mehr auf meine Kryptos zugreifen kann, falls ich den Zugang zu meinem Nano verliere.",
         "bullets": {
           "0": {
-            "title": "Grab your recovery phrase"
+            "title": "Schnappen Sie sich Ihre Wiederherstellungsphrase"
           },
           "1": {
-            "title": "Select recovery phrase length",
-            "label": "Your recovery phrase can have 12, 18 or 24 words. You must enter all words to access your crypto."
+            "title": "Wählen Sie die Länge der Wiederherstellungsphrase",
+            "label": "Ihre Wiederherstellungsphrase kann 12, 18 oder 24 Wörter haben. Sie müssen alle Wörter eingeben, um auf Ihre Kryptos zugreifen zu können."
           },
           "2": {
-            "title": "Enter Word #1...",
-            "label": "Enter the first letters of Word #1 by selecting them with the right or left button. Press both buttons to validate each letter."
+            "title": "Wort 1 eingeben ...",
+            "label": "Geben Sie die ersten Buchstaben von Wort 1 ein, indem Sie sie mit der rechten oder linken Taste auswählen. Drücken Sie beide Tasten, um jeden Buchstaben zu bestätigen."
           },
           "3": {
-            "title": "Validate Word #1...",
-            "label": "Choose Word #1 from the suggestions. Press both buttons to validate."
+            "title": "Bestätigen Sie Wort 1 ...",
+            "label": "Wählen Sie Wort 1 aus den Vorschlägen. Drücken Sie beide Tasten zum Bestätigen."
           },
           "4": {
-            "title": "Repeat for all words!"
+            "title": "Wiederholen Sie dies für alle Wörter!"
           }
         },
-        "nextStep": "Next step"
+        "nextStep": "Nächster Schritt"
       }
     },
     "stepPairNew": {
       "nanoX": {
-        "title": "Pair your Nano",
-        "desc": "This is the first time you’re setting up your Nano with this phone. Let’s quickly pair your device.",
-        "cta": "Let’s pair my Nano"
+        "title": "Koppeln Sie Ihren Nano",
+        "desc": "Dies ist das erste Mal, dass Sie Ihren Nano mit diesem Telefon einrichten. Lassen Sie uns Ihr Gerät schnell koppeln.",
+        "cta": "Koppeln wir meinen Nano"
       },
       "nanoS": {
-        "title": "Connect your Nano",
-        "desc": "This is the first time you’re setting up your Nano with this phone. Let’s quickly connect your device.",
-        "cta": "Let’s connect my Nano"
+        "title": "Verbinden Sie Ihren Nano",
+        "desc": "Dies ist das erste Mal, dass Sie Ihren Nano mit diesem Telefon einrichten. Lassen Sie uns Ihr Gerät schnell anschließen.",
+        "cta": "Schließen wir meinen Nano an"
       },
       "blue": {
-        "title": "Connect your Blue",
-        "desc": "This is the first time you’re setting up your Blue with this phone. Let’s quickly connect your device.",
-        "cta": "Let’s connect my Blue"
+        "title": "Verbinden Sie Ihren Blue",
+        "desc": "Dies ist das erste Mal, dass Sie Ihren Blue mit diesem Telefon einrichten. Lassen Sie uns Ihr Gerät schnell anschließen.",
+        "cta": "Verbinden wir meinen Blue"
       },
       "infoModal": {
-        "title": "Where can I find my device name?",
-        "desc": "On your device, select Settings > General > Device name.",
-        "title_1": "How to set up Bluetooth connection?",
-        "title_2": "How do I use my Nano X without Bluetooth?",
-        "desc_1": "Use an <1>OTG-cable</1> to connect your Ledger Nano X to your Android smartphone (iOS not supported). Manage your crypto with Ledger Live mobile or any other compatible (web) app.",
+        "title": "Wo kann ich meinen Gerätenamen finden?",
+        "desc": "Wählen Sie auf Ihrem Gerät Einstellungen > Allgemein > Gerätename.",
+        "title_1": "Wie richte ich eine Bluetooth-Verbindung ein?",
+        "title_2": "Wie kann ich meinen Nano X ohne Bluetooth verwenden?",
+        "desc_1": "Verwenden Sie ein <1>OTG-Kabel</1>, um Ihren Ledger Nano X mit Ihrem Android-Smartphone zu verbinden (iOS wird nicht unterstützt). Verwalten Sie Ihre Krypto mit Ledger Live mobile oder einer anderen kompatiblen (Web-)App.",
         "bullets": {
           "0": {
-            "label": "Make sure Bluetooth is enabled on your smartphone and on your Ledger Nano X. Your Ledger Nano X should be on the Dashboard, its main home screen."
+            "label": "Vergewissern Sie sich, dass Bluetooth auf Ihrem Smartphone und auf Ihrem Ledger Nano X aktiviert ist. Ihr Ledger Nano X sollte sich auf dem Dashboard, seinem Hauptstartbildschirm, befinden."
           },
           "1": {
-            "label": "<1>{{Os}}</1>: Make sure location services are enabled in your phone's settings for Ledger Live. Ledger Live never uses your location information, this is a requirement for Bluetooth on {{Os}}."
+            "label": "<1>{{Os}}</1>: Stellen Sie sicher, dass Standortdienste in den Einstellungen Ihres Telefons für Ledger Live aktiviert sind. Ledger Live verwendet niemals Ihre Standortinformationen, dies ist eine Voraussetzung für Bluetooth auf {{Os}}."
           },
           "2": {
-            "label": "If you have a Bluetooth pairing issue, please refer to the following article",
-            "link": "Fix connection issues."
+            "label": "Wenn Sie ein Problem mit der Bluetooth-Kopplung haben, lesen Sie bitte den folgenden Artikel",
+            "link": "Beheben Sie Verbindungsprobleme."
           }
         }
       },
       "errorInfoModal": {
-        "title": "Something went wrong?",
-        "title_1": "I have an Android",
-        "title_2": "Update Android version",
+        "title": "Ist etwas schief gelaufen?",
+        "title_1": "Ich habe ein Android",
+        "title_2": "Android-Version aktualisieren",
         "desc": "If you're experiencing Bluetooth issues with your Nano X, please remove the pairing and forget Nano X on your phone. Then try the pairing again.",
         "desc_1": "It may take a while before the Bluetooth pairing request is displayed. Make sure you verify and confirm the pairing code both on your Nano X and on your phone.",
         "desc_2": "Check in your phone's Bluetooth settings whether the Ledger Nano X is detected. If it not detected, make sure you turn on the Bluetooth on your Ledger Nano X.",
