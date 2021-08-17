@@ -1552,41 +1552,41 @@
     "list": "Vermögensverteilung ({{count}})",
     "assets": "Vermögenswert",
     "assets_plural": "Vermögenswerte",
-    "total": "Total balance:",
-    "listAccount": "Account allocation ({{count}})"
+    "total": "Gesamtguthaben:",
+    "listAccount": "Kontozuteilung ({{count}})"
   },
   "help": {
     "gettingStarted": {
-      "title": "Getting started",
-      "desc": "Start here"
+      "title": "Erste Schritte",
+      "desc": "Hier beginnen"
     },
     "helpCenter": {
       "title": "Ledger Support",
-      "desc": "Get help"
+      "desc": "Hilfe erhalten"
     },
     "ledgerAcademy": {
-      "title": "Ledger Academy",
-      "desc": "Learn about crypto"
+      "title": "Ledger Akademie",
+      "desc": "Erfahren Sie mehr über Krypto"
     },
     "facebook": {
       "title": "Facebook",
-      "desc": "Like our page"
+      "desc": "Liken Sie unsere Seite"
     },
     "twitter": {
       "title": "Twitter",
-      "desc": "Follow us"
+      "desc": "Folgen Sie uns"
     },
     "github": {
       "title": "Github",
-      "desc": "Review our code"
+      "desc": "Überprüfen Sie unseren Code"
     },
     "status": {
-      "title": "Ledger Status",
-      "desc": "Check our system status"
+      "title": "Ledger-Status",
+      "desc": "Prüfen Sie unseren Systemstatus"
     }
   },
   "settings": {
-    "header": "Settings",
+    "header": "Einstellungen",
     "resources": "Ledger resources",
     "display": {
       "title": "General",
@@ -1647,152 +1647,152 @@
       "confirmationNb": "Number of confirmations",
       "confirmationNbDesc": "Set the number of network confirmations for transactions to be approved.",
       "currencySettingsTitle": "{{currencyName}} Settings",
-      "placeholder": "No settings for this asset"
+      "placeholder": "Keine Einstellungen für diesen Vermögenswert"
     },
     "accounts": {
-      "header": "Accounts",
-      "title": "Accounts",
-      "desc": "Manage assets display in the app.",
-      "hideTokenCTA": "Hide token",
-      "showContractCTA": "Show contract",
-      "blacklistedTokens": "Hidden token list",
-      "blacklistedTokensDesc": "You can hide tokens by going to the accounts list then long-pressing on the token and selecting 'Hide token'.",
+      "header": "Konten",
+      "title": "Konten",
+      "desc": "Verwalten Sie die Anzeige von Vermögenswerten in der App.",
+      "hideTokenCTA": "Token ausblenden",
+      "showContractCTA": "Vertrag anzeigen",
+      "blacklistedTokens": "Ausgeblendete Token-Liste",
+      "blacklistedTokensDesc": "Sie können Token ausblenden, indem Sie zur Kontenliste gehen, dann lange auf das Token drücken und \"Token ausblenden\" wählen.",
       "blacklistedTokensModal": {
-        "title": "Hide token",
-        "desc": "This action will hide all <1><0>{tokenName}</0></1> accounts, you can show them again using <3>Settings > Accounts</3>.",
-        "confirm": "Hide token"
+        "title": "Token ausblenden",
+        "desc": "Diese Aktion blendet alle <1><0>{tokenName}</0></1> Konten aus, Sie können sie mit <3>Einstellungen > Konten</3> wieder einblenden.",
+        "confirm": "Token ausblenden"
       },
       "cryptoAssets": {
-        "header": "Crypto assets",
-        "title": "Crypto assets",
-        "desc": "Select a crypto assets to edit its settings."
+        "header": "Krypto-Vermögenswerte",
+        "title": "Krypto-Vermögenswerte",
+        "desc": "Wählen Sie einen Krypto-Vermögenswert, um dessen Einstellungen zu bearbeiten."
       }
     },
     "about": {
-      "title": "About",
-      "desc": "App information, terms and conditions, and privacy policy.",
-      "appDescription": "With Ledger Live, Secure, Buy, Sell, Exchange, Grow and Manage your crypto. All-in-one place.",
+      "title": "Über",
+      "desc": "App-Informationen, Geschäftsbedingungen und Datenschutzrichtlinien.",
+      "appDescription": "Mit Ledger Live sichern, kaufen, verkaufen, tauschen, vermehren und verwalten Sie Ihre Kryptowährungen. Alles an einem Ort.",
       "appVersion": "Version",
-      "termsConditions": "Terms and conditions",
-      "termsConditionsDesc": "By using Ledger Live you are deemed to have accepted our terms and conditions.",
-      "privacyPolicy": "Privacy policy",
-      "privacyPolicyDesc": "See what personal data are collected, why and how they are used.",
+      "termsConditions": "Allgemeine Geschäftsbedingungen",
+      "termsConditionsDesc": "Durch die Nutzung von Ledger Live wird davon ausgegangen, dass Sie unsere allgemeinen Geschäftsbedingungen akzeptiert haben.",
+      "privacyPolicy": "Datenschutzrichtlinien",
+      "privacyPolicyDesc": "Sehen Sie, welche persönlichen Daten erfasst werden, warum und wie sie verwendet werden.",
       "liveReview": {
-        "title": "Rate the app!",
-        "ios": "Review in the App Store",
-        "android": "Review in the Google Play store"
+        "title": "Bewerten Sie die App!",
+        "ios": "Im App Store bewerten",
+        "android": "Im Google Play Store bewerten"
       }
     },
     "help": {
-      "title": "Help",
-      "header": "Help",
-      "desc": "Learn more about Ledger Live or how to get help.",
+      "title": "Hilfe",
+      "header": "Hilfe",
+      "desc": "Erfahren Sie mehr über Ledger Live oder wie Sie Hilfe erhalten können.",
       "support": "Ledger Support",
       "supportDesc": "If you have a problem, get help using Ledger Live with your hardware wallet.",
-      "configureDevice": "Set up a device",
-      "configureDeviceDesc": "Set up as a new device or restore an existing device. Accounts and settings are preserved.",
-      "clearCache": "Clear cache",
-      "clearCacheDesc": "The transactions on the network will be scanned and your accounts will be recalculated.",
-      "clearCacheModal": "Are you sure?",
-      "clearCacheModalDesc": "A fresh and complete scan of transactions on the network will be done. Account histories will be rebuilt and balances will be recalculated.",
-      "clearCacheButton": "Clear",
-      "exportLogs": "Export logs",
-      "exportLogsDesc": "Exporting Ledger Live logs may help troubleshooting.",
-      "hardReset": "Reset Ledger Live",
-      "hardResetDesc": "This has no impact on your assets. Erases all data in Ledger Live, including account data, transaction histories and settings. Use your Ledger device to reload and manage your crypto assets on an empty Ledger Live.",
-      "repairDevice": "Repair your Ledger device",
-      "repairDeviceDesc": "If you have an issue updating your device and cannot resume updates, you can try this to repair your device."
+      "configureDevice": "Ein Gerät einrichten",
+      "configureDeviceDesc": "Als neues Gerät einrichten oder ein vorhandenes Gerät wiederherstellen. Konten und Einstellungen bleiben erhalten.",
+      "clearCache": "Cache leeren",
+      "clearCacheDesc": "Die Transaktionen im Netzwerk werden gescannt und Ihre Konten werden neu berechnet.",
+      "clearCacheModal": "Sind Sie sicher?",
+      "clearCacheModalDesc": "Es wird ein neuer und vollständiger Scan der Transaktionen im Netzwerk durchgeführt. Die Kontoverläufe werden neu aufgebaut und die Salden werden neu berechnet.",
+      "clearCacheButton": "Leeren",
+      "exportLogs": "Protokolle exportieren",
+      "exportLogsDesc": "Das Exportieren von Ledger Live-Protokollen kann bei der Fehlersuche helfen.",
+      "hardReset": "Ledger Live zurücksetzen",
+      "hardResetDesc": "Dies hat keine Auswirkung auf Ihre Vermögenswerte. Löscht alle Daten in Ledger Live, einschließlich Kontodaten, Transaktionsverläufe und Einstellungen. Verwenden Sie Ihr Ledger-Gerät, um Ihre Krypto-Vermögenswerte auf einem leeren Ledger Live neu zu laden und zu verwalten.",
+      "repairDevice": "Reparieren Sie Ihr Ledger-Gerät",
+      "repairDeviceDesc": "Wenn Sie ein Problem bei der Aktualisierung Ihres Geräts haben und die Updates nicht fortsetzen können, können Sie dies versuchen, um Ihr Gerät zu reparieren."
     },
     "experimental": {
-      "title": "Experimental features",
-      "desc": "Try out the Experimental features and let us know what you think.",
-      "disclaimer": "These are Experimental features provided on an \"as is\" basis for our community of tech enthusiasts. They may change, break or be removed at any time. By enabling them, you agree to use them at your own risk."
+      "title": "Experimentelle Funktionen",
+      "desc": "Probieren Sie die experimentellen Funktionen aus und lassen Sie uns wissen, was Sie davon halten.",
+      "disclaimer": "Dies sind experimentelle Funktionen, die auf einer „wie besehen“-Basis für unsere Gemeinschaft von Technik-Enthusiasten bereitgestellt werden. Sie können sich jederzeit ändern, kaputt gehen oder entfernt werden. Wenn Sie sie aktivieren, erklären Sie sich damit einverstanden, diese auf eigenes Risiko zu verwenden."
     }
   },
   "migrateAccounts": {
-    "banner": "Ledger Live accounts update",
+    "banner": "Update für Ledger Live-Konten",
     "overview": {
-      "headerTitle": "Account update",
-      "title": "Ledger Live accounts update",
-      "subtitle": "New features in Ledger Live means your accounts need to be updated",
-      "notice": "{{accountCount}} account could not be updated. Please connect the device associated to the account below.",
-      "notice_plural": "{{accountCount}} accounts could not be updated. Please connect the device associated to the accounts below.",
-      "currency": "1 {{currency}} account needs to be updated",
-      "currency_plural": "{{count}} {{currency}} accounts need to be updated",
-      "start": "Start update",
-      "continue": "Continue update"
+      "headerTitle": "Update für Konto",
+      "title": "Update für Ledger Live-Konten",
+      "subtitle": "Neue Funktionen in Ledger Live bedeuten, dass Ihre Konten aktualisiert werden müssen",
+      "notice": "{{accountCount}} Konto konnte nicht aktualisiert werden. Bitte verbinden Sie das mit dem nachstehenden Konto verbundene Gerät.",
+      "notice_plural": "{{accountCount}} Konten konnten nicht aktualisiert werden. Bitte verbinden Sie das mit den nachstehenden Konten verbundene Gerät.",
+      "currency": "1 {{currency}}-Konto muss aktualisiert werden",
+      "currency_plural": "{{count}} {{currency}} Konten müssen aktualisiert werden",
+      "start": "Update starten",
+      "continue": "Update fortsetzen"
     },
     "progress": {
-      "headerTitle": "Updating accounts",
+      "headerTitle": "Konten aktualisieren",
       "pending": {
-        "title": "{{currency}} update in progress",
-        "subtitle": "Please wait for your account to be updated."
+        "title": "{{currency}} Update in Arbeit",
+        "subtitle": "Bitte warten Sie, bis Ihr Konto aktualisiert wird."
       },
       "notice": {
-        "title": "{{currency}} update incomplete",
-        "subtitle": "No {{currency}} accounts could be updated using this device.",
-        "cta": "Continue",
-        "ctaNextCurrency": "Continue with {{currency}}"
+        "title": "{{currency}} Aktualisierung unvollständig",
+        "subtitle": "Mit diesem Gerät konnten keine {{currency}}-Konten aktualisiert werden.",
+        "cta": "Weiter",
+        "ctaNextCurrency": "Weiter mit {{currency}}"
       },
       "done": {
-        "title": "{{currency}} update complete",
-        "subtitle": "Congratulations, your {{currency}} accounts were updated successfully.",
-        "cta": "Continue",
-        "ctaNextCurrency": "Continue with {{currency}}",
-        "ctaDone": "Done"
+        "title": "{{currency}} Update abgeschlossen",
+        "subtitle": "Glückwunsch, Ihre {{currency}}-Konten wurden erfolgreich aktualisiert.",
+        "cta": "Weiter",
+        "ctaNextCurrency": "Weiter mit {{currency}}",
+        "ctaDone": "Fertig"
       },
       "error": {
-        "cta": "Retry"
+        "cta": "Wiederholen"
       }
     },
     "connectDevice": {
-      "headerTitle": "Connect device"
+      "headerTitle": "Gerät verbinden"
     }
   },
   "transfer": {
     "send": {
-      "title": "Send"
+      "title": "Senden"
     },
     "fees": {
-      "title": "Edit fees"
+      "title": "Gebühren bearbeiten"
     },
     "receive": {
-      "title": "Receive",
-      "titleReadOnly": "Unverified address",
-      "headerTitle": "Crypto asset",
-      "titleDevice": "Connect device",
-      "verifySkipped": "Your receive address was not confirmed on your Ledger device. Please verify your {{accountType}} address to stay secure.",
-      "verifyPending": "Please verify that the {{currencyName}} address displayed on your device exactly matches the one displayed on your phone.",
-      "verified": "Address confirmed. Check again if you copied or scanned it.",
-      "verifyAgain": "Check again",
-      "noAccount": "No account found",
-      "address": "Address for account",
-      "copyAddress": "Copy address",
-      "shareAddress": "Share address",
-      "addressCopied": "Address copied!",
+      "title": "Empfangen",
+      "titleReadOnly": "Ungeprüfte Adresse",
+      "headerTitle": "Krypto-Vermögenswert",
+      "titleDevice": "Gerät verbinden",
+      "verifySkipped": "Ihre Empfangsadresse wurde auf Ihrem Ledger Gerät nicht bestätigt. Bitte überprüfen Sie Ihre {{accountType}} -Adresse, um sicher zu bleiben.",
+      "verifyPending": "Bitte stellen Sie sicher, dass die auf Ihrem Gerät angezeigte {{currencyName}} -Adresse genau der auf Ihrem Telefon entspricht.",
+      "verified": "Adresse bestätigt. Prüfen Sie erneut, ob Sie sie kopiert oder gescannt haben.",
+      "verifyAgain": "Erneut prüfen",
+      "noAccount": "Kein Konto gefunden",
+      "address": "Adresse für Konto",
+      "copyAddress": "Adresse kopieren",
+      "shareAddress": "Adresse teilen",
+      "addressCopied": "Adresse kopiert!",
       "notSynced": {
-        "text": "Synchronizing",
-        "desc": "This may take a moment if you have many transactions or if you have a slow internet connection."
+        "text": "Synchronisieren",
+        "desc": "Dies kann einen Moment dauern, wenn Sie viele Transaktionen haben oder eine langsame Internetverbindung."
       },
       "readOnly": {
-        "title": "Receive",
-        "text": "Please be careful",
-        "desc": "You are about to view an address which was not verified. Verify addresses on your device to stay secure.",
-        "verify": "The address of {{accountType}} was not verified. Verify addresses on your device to stay secure."
+        "title": "Empfangen",
+        "text": "Bitte seien Sie vorsichtig",
+        "desc": "Sie sind dabei, eine Adresse anzuzeigen, die nicht verifiziert wurde. Überprüfen Sie Adressen auf Ihrem Gerät, um sicher zu bleiben.",
+        "verify": "Die Adresse von {{accountType}} wurde nicht überprüft. Überprüfen Sie die Adressen auf Ihrem Gerät, um sicher zu bleiben."
       }
     },
     "exchange": {
-      "title": "Buy / Sell"
+      "title": "Kaufen / Verkaufen"
     },
     "swap": {
       "title": "Swap",
-      "selectDevice": "Select your device",
-      "broadcasting": "Broadcasting swap",
-      "loadingFees": "Loading network fees...",
+      "selectDevice": "Wählen Sie Ihr Gerät",
+      "broadcasting": "Übertrage Swap",
+      "loadingFees": "Netzwerkgebühren laden ...",
       "landing": {
         "header": "Swap",
-        "title": "Welcome to Swap",
-        "whatIsSwap": "What is Swap?",
+        "title": "Willkommen bei Swap",
+        "whatIsSwap": "Was ist Swap?",
         "disclaimer": "Exchange crypto directly from your Ledger device. This service is not available in some countries, including the US."
       },
       "unauthorizedRates": {
@@ -1920,84 +1920,84 @@
           "payoutNetworkFees": "Payout fees",
           "payoutNetworkFeesTooltip": "This amount will not be shown on your device",
           "receive": "Amount",
-          "receiveFloat": "Amount to receive before service fees",
+          "receiveFloat": "Zu erhaltender Betrag vor Servicegebühren",
           "provider": "Provider",
-          "method": "Rate",
-          "fees": "Max fees",
+          "method": "Kurs",
+          "fees": "Max. Gebühren",
           "disclaimer": {
-            "title": "Terms and conditions",
+            "title": "Allgemeine Geschäftsbedingungen",
             "desc": "By clicking “Accept”,  I acknowledge and accept that this service is exclusively governed by <0>{{provider}}</0>'s Terms & Conditions.",
-            "tos": "Terms & conditions",
-            "accept": "Accept",
-            "reject": "Close"
+            "tos": "Allgemeine Geschäftsbedingungen",
+            "accept": "Akzeptieren",
+            "reject": "Schließen"
           }
         }
       },
       "operationDetails": {
-        "swapId": "Swap ID",
+        "swapId": "ID tauschen",
         "provider": "Provider",
-        "date": "Date",
-        "from": "From",
-        "fromAmount": "Amount sent",
-        "to": "To",
-        "toAmount": "Amount to receive",
+        "date": "Datum",
+        "from": "Von",
+        "fromAmount": "Gesendeter Betrag",
+        "to": "An",
+        "toAmount": "Zu erhaltender Betrag",
         "statusTooltips": {
-          "expired": "Please contact the swap provider with your swap ID for more information.",
-          "refunded": "Please contact the swap provider with your swap ID for more information.",
-          "pending": "Please wait while the swap provider is processing the transaction.",
-          "onhold": "Please contact the swap provider with your swap ID to solve the situation.",
-          "finished": "Your swap was completed successfully."
+          "expired": "Bitte kontaktieren Sie den Swap-Anbieter mit Ihrer Swap-ID für weitere Informationen.",
+          "refunded": "Bitte kontaktieren Sie den Swap-Anbieter mit Ihrer Swap-ID für weitere Informationen.",
+          "pending": "Bitte warten Sie, während der Swap-Anbieter die Transaktion verarbeitet.",
+          "onhold": "Bitte kontaktieren Sie den Swap-Anbieter mit Ihrer Swap-ID, um die Situation zu lösen.",
+          "finished": "Ihr Tausch wurde erfolgreich abgeschlossen."
         }
       },
       "missingApp": {
-        "title": "Please install the Exchange app on your device",
-        "description": "Go to manager and install Exchange app to swap assets",
-        "button": "Go to Manager"
+        "title": "Bitte installieren Sie die Exchange-App auf Ihrem Gerät",
+        "description": "Gehen Sie zum Manager und installieren Sie die Exchange-App, um Vermögenswerte zu tauschen",
+        "button": "Zum Manager gehen"
       },
       "outdatedApp": {
-        "title": "Please update the Exchange app on your device",
-        "description": "Go to manager and update Exchange app to swap assets",
-        "button": "Go to Manager"
+        "title": "Bitte aktualisieren Sie die Exchange-App auf Ihrem Gerät",
+        "description": "Gehen Sie zum Manager und aktualisieren Sie die Exchange-App, um Vermögenswerte zu tauschen",
+        "button": "Zum Manager gehen"
       },
       "emptyState": {
-        "title": "No {{currency}} account",
-        "description": "You need to add an account before swapping {{currency}}",
-        "CTAButton": "Add account"
+        "title": "Kein Konto in {{currency}}",
+        "description": "Sie müssen ein Konto hinzufügen, bevor Sie {{currency}} tauschen/swapen",
+        "CTAButton": "Konto hinzufügen"
       },
       "history": {
-        "tab": "History",
-        "disclaimer": "Your swap mobile transactions are not synchronized with Ledger Live Desktop",
-        "exportButton": "Export operations",
-        "exportFilename": "Swap operations",
+        "tab": "Verlauf",
+        "disclaimer": "Ihre mobilen Swap-Transaktionen werden nicht mit Ledger Live Desktop synchronisiert",
+        "exportButton": "Exportvorgänge",
+        "exportFilename": "Tauschvorgänge",
         "empty": {
-          "title": "Your previous swaps will appear here",
-          "desc": "Either you have not made any swaps yet, or Ledger Live has been reset in the meantime."
+          "title": "Ihre früheren Swaps/Täusche werden hier angezeigt",
+          "desc": "Entweder haben Sie noch keine Swaps/Täusche vorgenommen, oder Ledger Live wurde in der Zwischenzeit zurückgesetzt."
         }
       }
     },
     "lending": {
-      "title": "Lend crypto",
-      "titleTransferTab": "Lend",
-      "actionTitle": "Lend",
+      "title": "Krypto verleihen",
+      "titleTransferTab": "Leihen",
+      "actionTitle": "Leihen",
       "accountActions": {
-        "approve": "Approve",
-        "supply": "Supply",
-        "withdraw": "Withdraw"
+        "approve": "Freigeben",
+        "supply": "Bereitstellung",
+        "withdraw": "Abheben"
       },
       "highFees": {
-        "title": "High fees on Ethereum",
-        "description": "Due to congestion on the Ethereum network, you may experience high fees when issuing transactions."
+        "title": "Hohe Gebühren bei Ethereum",
+        "description": "Aufgrund der Überlastung des Ethereum-Netzwerks können bei der Ausgabe von Transaktionen hohe Gebühren anfallen."
       },
       "account": {
-        "amountSupplied": "Amount deposited",
-        "amountSuppliedTooltip": "Amount lent to the network",
-        "currencyAPY": "Currency APY",
-        "currencyAPYTooltip": "Yearly return rate of a deposit that’s continuously compounded",
-        "accruedInterests": "Interest balance",
-        "accruedInterestsTooltip": "Interest generated on your lent assets",
-        "interestEarned": "Interest earned",
-        "interestEarnedTooltip": "Interest you have earned after withdrawal",
-        "openLoans": "Open loans",
+        "amountSupplied": "Eingezahlter Betrag",
+        "amountSuppliedTooltip": "An das Netzwerk ausgeliehener Betrag",
+        "currencyAPY": "Währung APY",
+        "currencyAPYTooltip": "Jährliche Rendite einer Einlage, die kontinuierlich aufgezinst wird",
+        "accruedInterests": "Zinssaldo",
+        "accruedInterestsTooltip": "Zinserträge auf Ihr verliehenes Vermögen",
+        "interestEarned": "Zinserträge",
+        "interestEarnedTooltip": "Zinsen, die Sie nach der Abhebung verdient haben",
+        "openLoans": "Offene Kredite",
         "closedLoans": "Closed loans"
       },
       "banners": {
@@ -2079,42 +2079,42 @@
       "enable": {
         "info": {
           "title": "This account is not approved",
-          "description": "You need to approve an account before being able to lend this asset.",
-          "cta": "Approve Account"
+          "description": "Sie müssen dieses Konto freigeben, bevor Sie Vermögenswerte ausleihen/verleihen können.",
+          "cta": "Konto freigeben"
         },
         "stepperHeader": {
-          "selectAccount": "Choose an account",
-          "enable": "Approve",
-          "advanced": "Advanced",
-          "amount": "Enter amount",
-          "summary": "Summary",
-          "selectDevice": "Select Device",
-          "connectDevice": "Connect Device",
-          "stepRange": "Step {{currentStep}} of {{totalSteps}}"
+          "selectAccount": "Wählen Sie ein Konto",
+          "enable": "Freigeben",
+          "advanced": "Fortgeschritten",
+          "amount": "Betrag eingeben",
+          "summary": "Zusammenfassung",
+          "selectDevice": "Gerät auswählen",
+          "connectDevice": "Gerät verbinden",
+          "stepRange": "Schritt {{currentStep}} von {{totalSteps}}"
         },
         "selectAccount": {
-          "enabledAccountsAmount": "You have {{number}} account that approved {{amount}}",
-          "enabledAccountsAmount_plural": "You have {{number}} accounts that approved {{amount}}",
-          "enabledAccountsNoLimit": "You have {{number}} account that approved an unlimited amount of {{ currency }}",
-          "enabledAccountsNoLimit_plural": "You have {{number}} accounts that approved an unlimited amount of {{ currency }}",
-          "noEnabledAccounts": "You need to approve an account before you can lend."
+          "enabledAccountsAmount": "Sie haben {{number}} -Konto, das {{amount}} genehmigt hat",
+          "enabledAccountsAmount_plural": "Sie haben {{number}} Konten, die {{amount}} genehmigt haben",
+          "enabledAccountsNoLimit": "Sie haben {{number}} Konto, das eine unbegrenzte Menge von {{ currency }} genehmigt hat",
+          "enabledAccountsNoLimit_plural": "Sie haben {{number}} Konten, die eine unbegrenzte Menge von {{ currency }} genehmigt haben",
+          "noEnabledAccounts": "Sie müssen ein Konto genehmigen, bevor Sie einen Kredit vergeben können."
         },
         "enable": {
-          "summary": "<0>I grant the </0><1>{{contractName}}</1><0> smart contract access to my </0><1>{{accountName}}</1><0> account for a </0><1>{{amount}}</1><0> amount</0>",
-          "limit": "limited {{amount}}",
-          "noLimit": "no limit {{assetName}}",
-          "contractName": "Compound {{currencyName}}",
-          "advanced": "Advanced"
+          "summary": "<0>Ich gewähre dem </0><1>{{contractName}}</1><0> Smart Contract Zugang zu meinem </0><1>{{accountName}}</1><0> Konto für einen Betrag von </0><1>{{amount}}</1><0>",
+          "limit": "begrenzt {{amount}}",
+          "noLimit": "kein Limit {{assetName}}",
+          "contractName": "Zusammengefast {{currencyName}}",
+          "advanced": "Fortgeschritten"
         },
         "advanced": {
-          "amountLabel": "Amount to approve",
-          "amountLabelTooltip": "This limits the amount available to the smart contract.",
+          "amountLabel": "Zu genehmigender Betrag",
+          "amountLabelTooltip": "Dies begrenzt den Betrag, der dem Smart Contract zur Verfügung steht.",
           "limit": "Limit",
-          "limited": "Limited",
-          "noLimit": "No Limit"
+          "limited": "Begrenzt",
+          "noLimit": "Kein Limit"
         },
         "amount": {
-          "totalAvailable": "Total available"
+          "totalAvailable": "verfügbare Gesamtsumme"
         },
         "validation": {
           "success": "Operation sent successfully",
