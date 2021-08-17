@@ -1531,25 +1531,25 @@
       "queued": "Warten auf",
       "showTokens": "Zeige {{length}} Token",
       "showTokens_plural": "Zeige {{length}} Token",
-      "showSubAccounts": "Show {{length}} subaccount",
-      "showSubAccounts_plural": "Show {{length}} subaccounts",
-      "hideTokens": "Hide token",
-      "hideTokens_plural": "Hide tokens",
-      "hideSubAccounts": "Hide subaccount",
-      "hideSubAccounts_plural": "Hide subaccounts",
+      "showSubAccounts": "{{length}} Unterkonto anzeigen",
+      "showSubAccounts_plural": "{{length}} Unterkonten anzeigen",
+      "hideTokens": "Token ausblenden",
+      "hideTokens_plural": "Token ausblenden",
+      "hideSubAccounts": "Unterkonto ausblenden",
+      "hideSubAccounts_plural": "Unterkonten ausblenden",
       "algorand": {
-        "showTokens": "Show {{length}} ASA",
-        "showTokens_plural": "Show {{length}} ASA",
-        "hideTokens": "Hide ASA",
-        "hideTokens_plural": "Hide ASA"
+        "showTokens": "Zeige {{length}} ASA",
+        "showTokens_plural": "ASA {{Länge}} anzeigen",
+        "hideTokens": "ASA ausblenden",
+        "hideTokens_plural": "ASA ausblenden"
       }
     }
   },
   "distribution": {
-    "header": "Asset allocation",
-    "list": "Asset allocation ({{count}})",
-    "assets": "asset",
-    "assets_plural": "assets",
+    "header": "Vermögensverteilung",
+    "list": "Vermögensverteilung ({{count}})",
+    "assets": "Vermögenswert",
+    "assets_plural": "Vermögenswerte",
     "total": "Total balance:",
     "listAccount": "Account allocation ({{count}})"
   },
