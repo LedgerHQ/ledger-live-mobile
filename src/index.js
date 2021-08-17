@@ -38,6 +38,8 @@ import { useCountervaluesExport } from "@ledgerhq/live-common/lib/countervalues/
 import { pairId } from "@ledgerhq/live-common/lib/countervalues/helpers";
 
 import { ToastProvider } from "@ledgerhq/live-common/lib/notifications/ToastProvider";
+import { PlatformAppProvider } from "@ledgerhq/live-common/lib/platform/PlatformAppProvider";
+import { getProvider } from "@ledgerhq/live-common/lib/platform/PlatformAppProvider/providers";
 import logger from "./logger";
 import { saveAccounts, saveBle, saveSettings, saveCountervalues } from "./db";
 import {
@@ -63,6 +65,7 @@ import useAppStateListener from "./components/useAppStateListener";
 import SyncNewAccounts from "./bridge/SyncNewAccounts";
 import { OnboardingContextProvider } from "./screens/Onboarding/onboardingContext";
 import WalletConnectProvider, {
+  // $FlowFixMe
   context as _wcContext,
 } from "./screens/WalletConnect/Provider";
 import HookAnalytics from "./analytics/HookAnalytics";
@@ -274,7 +277,7 @@ const linking = {
              * @params ?currency: string
              * ie: "ledgerhq://receive?currency=bitcoin" will open the prefilled search account in the receive flow
              */
-            [ScreenName.SwapProviders]: "swap",
+            [ScreenName.Swap]: "swap",
           },
         },
         [NavigatorName.SendFunds]: {
@@ -299,6 +302,10 @@ const linking = {
          * ie: "ledgerhq://buy" -> will redirect to the main exchange page
          */
         [NavigatorName.Exchange]: "buy",
+        /**
+         * ie: "ledgerhq://swap" -> will redirect to the main swap page
+         */
+        [NavigatorName.Swap]: "swap",
       },
     },
   },
@@ -427,36 +434,40 @@ export default class Root extends Component<
                 <HookSentry />
                 <HookAnalytics store={store} />
                 <WalletConnectProvider>
-                  <DeepLinkingNavigator>
-                    <SafeAreaProvider>
-                      <StyledStatusBar />
-                      <NavBarColorHandler />
-                      <AuthPass>
-                        <I18nextProvider i18n={i18n}>
-                          <LocaleProvider>
-                            <BridgeSyncProvider>
-                              <CounterValuesProvider
-                                initialState={initialCountervalues}
-                              >
-                                <ButtonUseTouchable.Provider value={true}>
-                                  <OnboardingContextProvider>
-                                    <ToastProvider>
-                                      <NotificationsProvider>
-                                        <SnackbarContainer />
-                                        <App
-                                          importDataString={importDataString}
-                                        />
-                                      </NotificationsProvider>
-                                    </ToastProvider>
-                                  </OnboardingContextProvider>
-                                </ButtonUseTouchable.Provider>
-                              </CounterValuesProvider>
-                            </BridgeSyncProvider>
-                          </LocaleProvider>
-                        </I18nextProvider>
-                      </AuthPass>
-                    </SafeAreaProvider>
-                  </DeepLinkingNavigator>
+                  <PlatformAppProvider
+                    platformAppsServerURL={getProvider("production").url}
+                  >
+                    <DeepLinkingNavigator>
+                      <SafeAreaProvider>
+                        <StyledStatusBar />
+                        <NavBarColorHandler />
+                        <AuthPass>
+                          <I18nextProvider i18n={i18n}>
+                            <LocaleProvider>
+                              <BridgeSyncProvider>
+                                <CounterValuesProvider
+                                  initialState={initialCountervalues}
+                                >
+                                  <ButtonUseTouchable.Provider value={true}>
+                                    <OnboardingContextProvider>
+                                      <ToastProvider>
+                                        <NotificationsProvider>
+                                          <SnackbarContainer />
+                                          <App
+                                            importDataString={importDataString}
+                                          />
+                                        </NotificationsProvider>
+                                      </ToastProvider>
+                                    </OnboardingContextProvider>
+                                  </ButtonUseTouchable.Provider>
+                                </CounterValuesProvider>
+                              </BridgeSyncProvider>
+                            </LocaleProvider>
+                          </I18nextProvider>
+                        </AuthPass>
+                      </SafeAreaProvider>
+                    </DeepLinkingNavigator>
+                  </PlatformAppProvider>
                 </WalletConnectProvider>
               </>
             ) : (

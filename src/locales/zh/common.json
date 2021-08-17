@@ -24,12 +24,13 @@
     "editName": "编辑名称",
     "close": "关闭",
     "confirm": "确认",
-    "poweredBy": "技术支持源自",
+    "poweredBy": "技术支持来自 ",
     "received": "已收到",
     "sent": "已发送",
     "or": "或者",
     "rename": "重命名",
     "learnMore": "了解更多",
+    "checkItOut": "一探究竟",
     "viewDetails": "查看详情",
     "today": "今天",
     "yesterday": "昨天",
@@ -43,6 +44,7 @@
     "usb": "USB",
     "add": "添加",
     "slow": "慢",
+    "medium": "medium",
     "fast": "快",
     "token": "代币",
     "token_plural": "代币",
@@ -260,6 +262,10 @@
     "FirmwareOrAppUpdateRequired": {
       "title": "需要更新固件或应用程序",
       "description": "请使用管理器卸载所有的应用程序，且在重新安装应用程序之前检查是否有可用的固件更新。"
+    },
+    "LatestFirmwareVersionRequired": {
+      "title": "桌面程序需要设备更新",
+      "description": "请在 Ledger Live 桌面程序上更新您的 Nano X 固件"
     },
     "GenuineCheckFailed": {
       "title": "设备验证失败",
@@ -499,6 +505,10 @@
       "title": "尚无法从子账户发送",
       "description": "由于近期 Babylon 更新而引入的变化，此功能将在稍后阶段被添加。"
     },
+    "AccessDeniedError": {
+      "title": "Ledger Live 需要更新",
+      "description": "请将 Ledger Live 更新到最新版本，然后重新验证您的身份，以便使用 Wyre 进行掉期交易"
+    },
     "RecommendUndelegation": {
       "title": "请在清空账户之前将其解除委托"
     },
@@ -549,10 +559,13 @@
       "title": "确保您留有足够的余额，以便缴纳未来的交易费"
     },
     "PolkadotDoMaxSendInstead": {
-      "title": "余额不能少于 1 DOT。发送最大值以清空账户"
+      "title": "余额不能少于 {{minimumBalance}}。发送最大值以清空账户"
     },
     "PolkadotBondMinimumAmount": {
-      "title": "您必须绑定至少 1 DOT"
+      "title": "您必须至少绑定 {{minimumBondAmount}}。"
+    },
+    "PolkadotBondMinimumAmountWarning": {
+      "title": "您的已绑定余额不能少于 {{minimumBondBalance}}。"
     },
     "PolkadotMaxUnbonding": {
       "title": "您已超过了解绑限额"
@@ -873,10 +886,10 @@
       },
       "recoveryPhrase": {
         "title": "恢复短语",
-        "desc": "您的恢复短语是备份您私人密钥的一个 24 words (二十四个助记词) 组成的秘密列表。",
+        "desc": "您的恢复短语（recovery phrase）是备份您私人密钥的一个 24 words (二十四个助记词) 组成的秘密列表。",
         "desc_1": "Nano 为您生成一个独有的恢复短语。Ledger 不会保存其副本。",
         "cta": "恢复短语",
-        "checkboxDesc": "我明白：如果我丢失了自己的恢复短语，那么一旦我的 Nano 无法使用，也就意味着我无法访问自己的加密资产。"
+        "checkboxDesc": "我明白：如果我丢失了自己的恢复短语，那么一旦我的 Nano 无法使用，也就意味着我将无法访问自己的加密资产。"
       },
       "recoveryPhraseSetup": {
         "infoModal": {
@@ -926,7 +939,7 @@
             "label": "仅可在硬件钱包上输入这些词，永远不要在电脑或手机上输入。"
           },
           "1": {
-            "label": "永远不要将您的 24 words (二十四个助记词) 告诉别人，Ledger 也不例外。"
+            "label": "永远不要将您的 24 words (二十四个助记词) 告诉别人，即使是对 Ledger 也不能例外。"
           }
         },
         "cta": "好的，我完成了！",
@@ -1116,7 +1129,7 @@
       "step2-restore": "同时按下两个按钮以选择 <1><1>Restore from recovery phrase.</1></1> (通过恢复短语进行还原)",
       "step3": "按左边或右边的按钮以选择数位。同时按下两个按钮以确认。",
       "step4prefix": "选取",
-      "step4suffix1": " 确认您的 PIN 识别密码。",
+      "step4suffix1": "确认您的 PIN 识别密码。",
       "step4suffix2": "删除末位数字。",
       "modal": {
         "step1": "总是 <1><1>亲自</1></1> 选择自己的 PIN 识别密码",
@@ -1149,7 +1162,7 @@
       "title": "您的设备已准备就绪！",
       "readOnlyTitle": "一切就绪！",
       "desc": "在您的设备上安装应用程序并管理您的资产组合",
-      "cta": "打开 Ledger Live"
+      "cta": "打开 Ledger Live 应用程序"
     },
     "quizz": {
       "label": "小测试",
@@ -1186,7 +1199,7 @@
           "wrong": "已短暂连接到网络"
         },
         "modal": {
-          "text": "您私钥会一直在您的硬件钱包中保持离线状态。即便将硬件钱包连接到 Ledger 应用程序上，Ledger 应用程序也无法获取您的私钥。您必须在您的设备上手动授权每一笔交易。",
+          "text": "您的私钥会一直在您的硬件钱包中保持离线状态。即便将硬件钱包连接到 Ledger 应用程序上，Ledger 应用程序也无法获取您的私钥。您必须在您的设备上手动授权每一笔交易。",
           "cta": "完成测验"
         }
       },
@@ -1212,6 +1225,7 @@
     "transfer": "转移",
     "manager": "管理器",
     "settings": "设置",
+    "platform": "发现",
     "nanoX": "Nano X"
   },
   "portfolio": {
@@ -1314,8 +1328,8 @@
     "failed": "已失败",
     "fees": "网络费用",
     "noFees": "无费用",
-    "from": "来自 ({{count}})",
-    "to": "到 ({{count}})",
+    "from": "From",
+    "to": "To",
     "identifier": "交易 ID",
     "viewOperation": "在浏览器中查看",
     "whatIsThis": "这是什么操作？",
@@ -1581,7 +1595,7 @@
       "languageDesc": "设置 Ledger Live 显示的语言。",
       "password": "密码锁",
       "passwordDesc": "设置一个密码来保护您手机上的 Ledger Live 数据。",
-      "counterValue": "对价",
+      "counterValue": "首选币种",
       "theme": "主题",
       "themeDesc": "设置用户界面主题",
       "themes": {
@@ -1766,34 +1780,10 @@
       }
     },
     "exchange": {
-      "title": "买入 / 卖出",
-      "providers": {
-        "title": "选择一个购买加密货币的供应商",
-        "whatIsSwap": "什么是购买？",
-        "cta": "继续",
-        "coinify": {
-          "bullets": [
-            "在 130 多个国家可用",
-            "欧元、美元、英镑以及其它32种",
-            "SEPA 与 快速付款",
-            "美国本地电汇",
-            "信用卡和借记卡"
-          ]
-        },
-        "wyre": {
-          "bullets": [
-            "仅美国银行账户",
-            "仅支持美元",
-            "已支持20余种加密货币",
-            "ACH 转账",
-            "无信用卡和借记卡"
-          ]
-        }
-      }
+      "title": "买入 / 卖出"
     },
     "swap": {
       "title": "Swap",
-      "paraswap": "ParaSwap",
       "selectDevice": "选择您的设备",
       "broadcasting": "正在播送掉期交易",
       "loadingFees": "正在加载网络费用...",
@@ -1803,30 +1793,66 @@
         "whatIsSwap": "什么是 Swap？",
         "disclaimer": "通过您的 Ledger 设备直接兑换加密货币。该服务在一些国家（包括美国）不可用。"
       },
-      "providers": {
-        "title": "选择一个提供方来进行加密资产的掉期交易",
-        "whatIsSwap": "什么是 Swap？",
-        "cta": "继续",
-        "changelly": {
-          "bullets": [
-            "比特币、以太币、泰达币以及50余个其他币种",
-            "多币种",
-            "中心化的"
-          ]
-        },
-        "paraswap": {
-          "bullets": [
-            "连接到 30 + DEXs (Uniswap, SushiSwap,...)",
-            "以太坊 和 ERC20 代币",
-            "去中心化与无需信任"
-          ]
-        }
+      "unauthorizedRates": {
+        "cta": "重置验证信息",
+        "banner": "请重置您的 KYC 并更新 Live 以便使用 Wyre 进行掉期交易.",
+        "bannerCTA": "重置 KYC"
       },
       "main": {
         "header": "Swap"
       },
       "kyc": {
-        "disclaimer": "我确认：出于合规目的，我的位置数据将会分享给第三方。"
+        "disclaimer": "我确认：出于合规目的，我的位置数据将会分享给第三方。",
+        "cta": "继续",
+        "wyre": {
+          "title": "完成您的 KYC",
+          "subtitle": "出于 KYC 目的，LEDGER 需要收集并转移您的信息到 WYRE。如需了解更多信息，请查看我们的隐私政策",
+          "pending": {
+            "cta": "继续",
+            "title": "KYC 已被提交以供审批",
+            "subtitle": "您的 KYC 已被提交，正在等待批准。",
+            "link": "了解关于 KYC 的更多详情"
+          },
+          "approved": {
+            "cta": "继续",
+            "title": "KYC 已批准！",
+            "subtitle": "您的 KYC 已被提交并已获得批准。",
+            "link": "了解关于 KYC 的更多详情"
+          },
+          "closed": {
+            "cta": "重置 KYC",
+            "title": "KYC 申请被拒绝",
+            "subtitle": "出于 KYC 原因，Wyre 拒绝了您提供的数据",
+            "link": "了解关于 KYC 的更多详情"
+          },
+          "form": {
+            "firstName": "名字",
+            "lastName": "姓氏",
+            "street1": "街道地址栏 1",
+            "street2": "街道地址栏 2",
+            "city": "城市",
+            "state": "州",
+            "country": "国家",
+            "postalCode": "邮编",
+            "dateOfBirth": "出生日期",
+            "firstNamePlaceholder": "输入您的名字",
+            "lastNamePlaceholder": "输入您的姓氏",
+            "street1Placeholder": "例如：枫树街 13 号",
+            "street2Placeholder": "例如：枫树街 13 号",
+            "cityPlaceholder": "例如：圣何塞（San José）",
+            "postalCodePlaceholder": "输入您的 5 位数邮政编码",
+            "statePlaceholder": "选择您所在的州",
+            "dateOfBirthPlaceholder": "年-月-日",
+            "firstNameError": "输入您的名字以继续",
+            "lastNameError": "输入您的姓氏以继续",
+            "street1Error": "输入您的地址",
+            "cityError": "输入您在美国的居住城市",
+            "stateError": "选择您所在的州以继续",
+            "postalCodeError": "输入一个有效的美国邮政编码",
+            "dateOfBirthError": "输入您的出生日期"
+          }
+        },
+        "states": "选择您所在的州"
       },
       "notAvailable": {
         "title": "服务暂时不可用，或在您的国家不可用"
@@ -1862,6 +1888,7 @@
         "balance": "余额 <0>123</0>",
         "fromAccount": "选择账户",
         "toAccount": "选择账户",
+        "paraswapCTA": "寻找 Paraswap？它已被移动到 Discover（发现）选项卡！",
         "amount": {
           "useMax": "使用最大值",
           "available": "可用总额"
@@ -1897,7 +1924,7 @@
           "fees": "最大费用",
           "disclaimer": {
             "title": "条款和条件",
-            "desc": "点击“接受”后，就意味着我认可并接受该服务仅受 {{provider}} 的条款和条件的制约。",
+            "desc": "By clicking “Accept”,  I acknowledge and accept that this service is exclusively governed by <0>{{provider}}</0>'s Terms & Conditions.",
             "tos": "条款和条件",
             "accept": "接受",
             "reject": "关闭"
@@ -1944,9 +1971,6 @@
           "title": "您之前的掉期交易会出现在这里",
           "desc": "要么您还未进行过任何掉期交易，亦或 Ledger Live 在此期间被重置了 。"
         }
-      },
-      "platform": {
-        "tab": "平台"
       }
     },
     "lending": {
@@ -2019,7 +2043,7 @@
         "label": "贷出加密货币",
         "title": "按照 Compound 复利协议借出资产",
         "description": "Compound 复利协议允许您在以太坊网络上贷出或借入资产。您可以直接通过您的 Ledger 账户贷出资产并赚取利息。",
-        "switchLabel": "我已阅读并同意该 <0><0>使用条款</0></0>。"
+        "switchLabel": "我已阅读并同意 <0><0>使用条款</0></0>。"
       },
       "info": {
         "1": {
@@ -3160,6 +3184,7 @@
     "unlockingBalance": "正在解绑余额",
     "unlockedBalance": "已解绑余额",
     "networkFees": "网络费用由 Polkadot 波卡共识协议自动设定，您无法在自己的设备上查看它们。",
+    "bondedBalanceBelowMinimum": "您的已绑定余额低于 {{minimumBondBalance}} 的最低额度。您的提名有被移除的风险。",
     "info": {
       "available": {
         "title": "DOT 可用",
@@ -3180,6 +3205,10 @@
       "electionOpen": {
         "title": "正在推选验证器",
         "description": "正在推选新的验证器。因此，最多 15 分钟后方可进行权益质押操作。"
+      },
+      "minBondWarning": {
+        "title": "已绑定余额不足",
+        "description": "您的已绑定余额低于提名所需的最低额度。您的提名有被移除的风险。"
       }
     },
     "nomination": {
@@ -3509,7 +3538,7 @@
   "Terms": {
     "title": "使用条款",
     "read": "阅读使用条款",
-    "switchLabelPrivacy": "我已经阅读并同意该<1>隐私政策</1>",
+    "switchLabelPrivacy": "我已阅读并同意 <1>隐私政策</1>",
     "switchLabel": "我已阅读并同意 <1>服务条款</1>",
     "cta": "进入 Ledger 应用程序"
   },
@@ -3615,6 +3644,44 @@
       },
       "error": {
         "title": "Ledger Live 正遇到问题"
+      }
+    }
+  },
+  "platform": {
+    "catalog": {
+      "title": "Live 应用目录",
+      "branch": {
+        "soon": "敬请期待",
+        "experimental": "实验性的",
+        "debug": "除错"
+      },
+      "banner": {
+        "title": "探索我们的 Live 目录",
+        "description": "解锁一个充满加密可能性的新世界。一个能够让您安全地访问包含 DeFi 应用、NFT 在内的所有的智能服务。"
+      },
+      "twitterBanner": {
+        "description": "告诉我们下一个您想要看到的带有哈希标签的服务",
+        "tweetText": "下一个 Ledger 应用应该是..."
+      },
+      "pollCTA": {
+        "title": "调查",
+        "description": "您想要在 Ledger Live 中看到哪种服务？"
+      },
+      "developerCTA": {
+        "title": "面向开发者",
+        "description": "在这里您能找到您所需要的、能将您的应用程序整合到 Ledger Live 的全部信息。"
+      }
+    },
+    "disclaimer": {
+      "title": "外部应用程序",
+      "description": "您即将被重定向到一个不是由 Ledger 操作的应用程序。",
+      "legalAdvice": "此应用程序并不由 Ledger 操作。Ledger 对此类应用所造成的任何资金损失或服务质量不负责任。\n\n始终确保仔细验证您设备上所显示的信息。",
+      "checkbox": "不要再次提醒我。",
+      "CTA": "继续"
+    },
+    "webPlatformPlayer": {
+      "infoPanel": {
+        "website": "website"
       }
     }
   }
