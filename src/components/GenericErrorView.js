@@ -15,7 +15,7 @@ const GenericErrorView = ({
   outerError,
   withDescription = true,
   withIcon = true,
-  hasExportLogButton,
+  hasExportLogButton = true,
 }: {
   error: Error,
   // sometimes we want to "hide" the technical error into a category
