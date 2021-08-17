@@ -54,55 +54,55 @@
     "help": "Hilfe",
     "saveLogs": "Protokolle speichern",
     "sync": {
-      "ago": "Synchronized {{time}}"
+      "ago": "Synchronisiert {{time}}"
     },
-    "update": "Update available",
-    "install": "Install",
-    "installed": "Installed",
-    "uninstall": "Uninstall",
+    "update": "Update verfügbar",
+    "install": "Installieren",
+    "installed": "Installiert",
+    "uninstall": "Deinstallieren",
     "fromNow": {
-      "seconds": "in one second",
-      "seconds_plural": "in {{time}} seconds",
-      "minutes": "in one minute",
-      "minutes_plural": "in {{time}} minutes",
-      "hours": "in one hour",
+      "seconds": "in einer Sekunde",
+      "seconds_plural": "in {{time}} Sekunden",
+      "minutes": "in einer Minute",
+      "minutes_plural": "in {{time}} Minuten",
+      "hours": "in einer Stunde",
       "hours_plural": "in {{time}} hours",
-      "days": "in one day",
-      "days_plural": "in {{time}} days"
+      "days": "in einem Tag",
+      "days_plural": "in {{time}} Tagen"
     },
     "timeAgo": {
-      "seconds": "one second ago",
-      "seconds_plural": "{{time}} seconds ago",
-      "minutes": "one minute ago",
-      "minutes_plural": "{{time}} minutes ago",
-      "hours": "one hour ago",
+      "seconds": "vor einer Sekunde",
+      "seconds_plural": "vor {{time}} Sekunden",
+      "minutes": "vor einer Minute",
+      "minutes_plural": "Vor {{time}} Minuten",
+      "hours": "vor einer Stunde",
       "hours_plural": "{{time}} hours ago",
-      "days": "yesterday",
-      "days_plural": "{{time}} days ago"
+      "days": "Gestern",
+      "days_plural": "vor {{time}} Tagen"
     },
-    "seeMore": "See more",
-    "moreInfo": "More info",
-    "buyEth": "Buy Ethereum"
+    "seeMore": "Mehr anzeigen",
+    "moreInfo": "Weitere Infos",
+    "buyEth": "Ethereum kaufen"
   },
   "errors": {
     "AccountAwaitingSendPendingOperations": {
-      "title": "There is a pending operation for this account",
-      "description": "Please wait for the operation to go through."
+      "title": "Es gibt eine ausstehende Aktion für dieses Konto",
+      "description": "Bitte warten Sie, bis der Vorgang abgeschlossen ist."
     },
     "AccountNameRequired": {
-      "title": "An account name is needed",
-      "description": "Please enter an account name."
+      "title": "Ein Kontoname wird benötigt",
+      "description": "Bitte geben Sie einen Kontonamen ein."
     },
     "AlgorandASANotOptInInRecipient": {
-      "title": "Recipient account has not opted in the selected ASA."
+      "title": "Das Empfängerkonto hat sich nicht für den gewählten ASA entschieden."
     },
     "BluetoothRequired": {
-      "title": "Sorry, Bluetooth is disabled",
-      "description": "Please enable Bluetooth in your phone settings. ({{state}} state)"
+      "title": "Entschuldigung, Bluetooth ist deaktiviert",
+      "description": "Bitte aktivieren Sie Bluetooth in Ihren Telefoneinstellungen. ({{state}} Status)"
     },
     "BtcUnmatchedApp": {
-      "title": "That's the wrong app",
-      "description": "Please open the {{managerAppName}} app on your device."
+      "title": "Das ist die falsche App",
+      "description": "Bitte öffnen Sie die {{managerAppName}} App auf Ihrem Gerät."
     },
     "CantOpenDevice": {
       "title": "Sorry, connection failed",
