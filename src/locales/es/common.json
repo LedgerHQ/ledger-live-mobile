@@ -2,6 +2,7 @@
   "common": {
     "cancel": "Cancelar",
     "apply": "Aplicar",
+    "seeAll": "See all",
     "back": "Atrás",
     "delete": "Borrar",
     "paste": "Pegar",
@@ -1233,6 +1234,7 @@
     "syncError": "Error de sincronización",
     "syncFailed": "La sincronización ha fallado",
     "syncPending": "Sincronizando...",
+    "transactions": "Transactions",
     "greeting": {
       "morning": "Buenos días",
       "evening": "Buenas noches",
