@@ -2,6 +2,7 @@
   "common": {
     "cancel": "Отменить",
     "apply": "Применить",
+    "seeAll": "See all",
     "back": "Назад",
     "delete": "Удалить",
     "paste": "Вставить",
@@ -1233,6 +1234,7 @@
     "syncError": "Ошибка синхронизации",
     "syncFailed": "Сбой синхронизации",
     "syncPending": "Синхронизируем...",
+    "transactions": "Transactions",
     "greeting": {
       "morning": "Доброе утро",
       "evening": "Добрый вечер",
