@@ -2,7 +2,7 @@
   "common": {
     "cancel": "Отменить",
     "apply": "Применить",
-    "seeAll": "See all",
+    "seeAll": "Просмотреть все",
     "back": "Назад",
     "delete": "Удалить",
     "paste": "Вставить",
@@ -45,7 +45,7 @@
     "usb": "USB",
     "add": "Добавить",
     "slow": "медленно",
-    "medium": "medium",
+    "medium": "средняя",
     "fast": "быстро",
     "token": "Токен",
     "token_plural": "Токены",
@@ -1234,7 +1234,7 @@
     "syncError": "Ошибка синхронизации",
     "syncFailed": "Сбой синхронизации",
     "syncPending": "Синхронизируем...",
-    "transactions": "Transactions",
+    "transactions": "Транзакции",
     "greeting": {
       "morning": "Доброе утро",
       "evening": "Добрый вечер",
@@ -1330,8 +1330,8 @@
     "failed": "Неудачно",
     "fees": "Комиссия сети",
     "noFees": "Без комиссии",
-    "from": "From",
-    "to": "To",
+    "from": "Откуда",
+    "to": "Куда",
     "identifier": "ID транзакции",
     "viewOperation": "Просмотреть в Обозревателе блоков",
     "whatIsThis": "Подробнее об этой операции",
@@ -1926,7 +1926,7 @@
           "fees": "Макс. комиссия",
           "disclaimer": {
             "title": "Условия и положения",
-            "desc": "By clicking “Accept”,  I acknowledge and accept that this service is exclusively governed by <0>{{provider}}</0>'s Terms & Conditions.",
+            "desc": "Нажимая кнопку «Принять», я признаю и соглашаюсь с тем, что эта услуга регулируется исключительно Условиями и положениями <0>{{provider}}</0>.",
             "tos": "Условия и положения",
             "accept": "Принять",
             "reject": "Закрыть"
