@@ -204,9 +204,7 @@ platform :ios do
 		prepare_ios_beta
     setup_ios_ci
 		build(ci: true)
-
-    # TODO: Fix Upload using api_connect
-    # upload
+    upload
   end
 
   desc "ci: create adhoc version"
