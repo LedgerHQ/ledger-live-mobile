@@ -2210,23 +2210,23 @@
       "validateTag": "Markierung validieren",
       "total": "Gesamt",
       "amount": "Betrag",
-      "from": "From",
-      "to": "To",
-      "infoTotalTitle": "Total debit",
-      "infoTotalDesc": "Includes transaction amount and the selected network fees",
-      "gasLimit": "Gas limit",
-      "gasPrice": "Gas price",
-      "maxFees": "Max fees",
-      "validateGasLimit": "Validate gas limit",
-      "fees": "Fees",
-      "validateFees": "Validate Fees",
-      "customizeFees": "Customize Fees",
+      "from": "Von",
+      "to": "An",
+      "infoTotalTitle": "Gesamtbelastung",
+      "infoTotalDesc": "Enthält den Transaktionsbetrag und die gewählten Netzwerkgebühren",
+      "gasLimit": "Gas-Limit",
+      "gasPrice": "Gaspreis",
+      "maxFees": "Max. Gebühren",
+      "validateGasLimit": "Gas-Limit validieren",
+      "fees": "Gebühren",
+      "validateFees": "Gebühren validieren",
+      "customizeFees": "Gebühren anpassen",
       "memo": {
         "title": "Memo",
-        "type": "Memo type",
-        "value": "Memo value"
+        "type": "Memo-Typ",
+        "value": "Memo-Wert"
       },
-      "validateMemo": "Validate memo"
+      "validateMemo": "Memo validieren"
     },
     "validation": {
       "message": "On your device, confirm the transaction to sign it securely.",
@@ -2409,9 +2409,9 @@
     "retryScanning": "Retry scanning",
     "retry": "Retry",
     "done": "Done",
-    "finalCta": "Continue",
-    "finalCtaForSwap": "Go back to Swap",
-    "synchronizing": "Synchronizing",
+    "finalCta": "Weiter",
+    "finalCtaForSwap": "Zurück zu Swap",
+    "synchronizing": "Synchronisieren",
     "synchronizingDesc": "Ihre Konten werden synchronisiert. Dies kann eine Weile dauern ...",
     "noAccountToCreate": "<1><0>{{currencyName}}</></> Konto konnte nicht erstellt werden. Starten Sie den Prozess neu und synchronisieren Sie Ihre Konten.",
     "cantCreateAccount": "Ein neues Konto kann nicht hinzugefügt werden, bevor Sie Guthaben auf Ihrem <1><0>{{accountName}}</></> Konto erhalten.",
@@ -2494,112 +2494,112 @@
     "deviceNotFoundPairNewDevice": "Neuen Ledger Nano X hinzufügen",
     "headerDescription": "Bitte stellen Sie sicher, dass Ihr {{productName}} entsperrt ist, wenn Bluetooth aktiviert ist",
     "usb": "... oder USB-Kabel anschließen",
-    "usbLabel": "Connect USB cable and enter your PIN Code on your device",
-    "withoutDeviceHeader": "I don't have my device with me",
-    "withoutDevice": "Continue without my device",
+    "usbLabel": "Schließen Sie das USB-Kabel an und geben Sie Ihren PIN-Code auf Ihrem Gerät ein",
+    "withoutDeviceHeader": "Ich habe mein Gerät nicht dabei",
+    "withoutDevice": "Weiter ohne mein Gerät",
     "steps": {
       "connecting": {
-        "title": "Connecting {{deviceName}}",
+        "title": "Verbinde {{deviceName}}",
         "description": {
-          "ble": "Please make sure your {{productName}} is unlocked and within range",
-          "usb": "Please make sure your {{productName}} is unlocked"
+          "ble": "Bitte stellen Sie sicher, dass Ihr {{productName}} freigeschaltet ist und sich in Reichweite befindet",
+          "usb": "Bitte stellen Sie sicher, dass Ihr {{productName}} freigeschaltet ist"
         }
       },
       "genuineCheck": {
-        "title": "Enable Ledger Manager on your {{productName}}"
+        "title": "Aktivieren Sie Ledger Manager auf Ihrem {{Produktbezeichnung}}"
       },
       "genuineCheckPending": {
-        "title": "Checking if the device is genuine..."
+        "title": "Prüft, ob das Gerät echt ist..."
       },
       "dashboard": {
-        "title": "Return to the Dashboard on your {{productName}}"
+        "title": "Zurück zum Dashboard auf Ihrem {{productName}}"
       },
       "currencyApp": {
-        "title": "Open the {{managerAppName}} app on your {{productName}}",
+        "title": "Öffnen Sie die {{managerAppName}} App auf Ihrem Gerät",
         "description": "",
         "footer": {
-          "appInstalled": "You don't have the app installed",
-          "goManager": "Go to the Manager"
+          "appInstalled": "Sie haben die App nicht installiert",
+          "goManager": "Gehen Sie zum Manager"
         }
       },
       "accountApp": {
-        "title": "Open the {{managerAppName}} app on your {{productName}}",
+        "title": "Öffnen Sie die App {{managerAppName}} auf Ihrem {{productName}}",
         "description": ""
       },
       "receiveVerify": {
-        "title": "Verify address on device",
-        "description": "Please verify that the {{currencyName}} address displayed in Ledger Live exactly matches the one displayed on your Ledger device.",
-        "action": "Continue"
+        "title": "Adresse auf dem Gerät verifizieren",
+        "description": "Bitte vergewissern Sie sich, dass die in Ledger Live angezeigte {{currencyName}} Adresse genau mit der auf Ihrem Ledger-Gerät angezeigten Adresse übereinstimmt.",
+        "action": "Weiter"
       },
       "getDeviceName": {
-        "title": "Press both buttons together to enable reading the device name."
+        "title": "Drücken Sie beide Tasten gleichzeitig, um das Lesen des Gerätenamens zu aktivieren."
       },
       "editDeviceName": {
-        "title": "Press both buttons together to enable setting the device name."
+        "title": "Drücken Sie beide Tasten gleichzeitig, um die Einstellung des Gerätenamens zu aktivieren."
       },
       "listApps": {
-        "title": "Loading..."
+        "title": "Lade Daten ..."
       }
     }
   },
   "EditDeviceName": {
-    "title": "Rename device",
-    "charactersRemaining": "{{remainingCount}} characters remaining",
-    "action": "Confirm"
+    "title": "Gerät umbenennen",
+    "charactersRemaining": "{{remainingCount}} Zeichen verbleibend",
+    "action": "Bestätigen"
   },
   "PairDevices": {
     "Paired": {
-      "title": "Pairing successful",
-      "desc": "Your {{productName}} is ready to be used with Ledger Live.",
-      "action": "Continue"
+      "title": "Kopplung erfolgreich",
+      "desc": "Ihr {{productName}} ist bereit für die Verwendung mit Ledger Live.",
+      "action": "Weiter"
     },
     "Pairing": {
-      "step1": "Validate if the code displayed on your phone exactly matches the one displayed on your {{productName}}.",
-      "step2": "Validate on your {{productName}} by pressing both buttons together."
+      "step1": "Überprüfen Sie, ob der auf Ihrem Telefon angezeigte Code genau mit dem auf Ihrem {{productName}} angezeigten übereinstimmt.",
+      "step2": "Bestätigen Sie auf Ihrem {{productName}}, indem Sie beide Tasten gleichzeitig drücken."
     },
     "GenuineCheck": {
-      "title": "Device authentication check",
-      "accept": "Please don't turn off your Nano X. Make sure you allow <1>Ledger Manager</1>."
+      "title": "Überprüfung der Geräteauthentifizierung",
+      "accept": "Bitte schalten Sie Ihren Nano X nicht aus. Stellen Sie sicher, dass Sie <1>Ledger Manager</1> zulassen."
     },
     "ScanningHeader": {
-      "title": "Looking for devices",
-      "desc": "Please make sure your {{productName}} is unlocked and Bluetooth is enabled."
+      "title": "Suche nach Geräten",
+      "desc": "Bitte stellen Sie sicher, dass Ihr {{productName}} freigeschaltet und Bluetooth aktiviert ist."
     },
     "ScanningTimeout": {
-      "title": "Sorry, no device was found",
-      "desc": "Please make sure your {{productName}} is unlocked and Bluetooth is enabled."
+      "title": "Entschuldigung, es wurde kein Gerät gefunden",
+      "desc": "Bitte stellen Sie sicher, dass Ihr {{productName}} freigeschaltet und Bluetooth aktiviert ist."
     },
-    "bypassGenuine": "Use anyway",
-    "alreadyPaired": "Already paired"
+    "bypassGenuine": "Trotzdem verwenden",
+    "alreadyPaired": "Bereits gekoppelt"
   },
   "DeviceItemSummary": {
-    "genuine": "Your device is genuine",
-    "genuineFailed": "Device authentication <1><0>failed</0></1>"
+    "genuine": "Ihr Gerät ist echt",
+    "genuineFailed": "Geräte-Authentifizierung <1><0>fehlgeschlagen</0></1>"
   },
   "DeviceNameRow": {
     "title": "Name",
-    "action": "Get device name"
+    "action": "Gerätenamen abrufen"
   },
   "RemoveDevice": {
     "button": {
-      "title": "Remove {{nbDevices}} device",
-      "title_plural": "Remove {{nbDevices}} devices"
+      "title": "Gerät {{nbDevices}} entfernen",
+      "title_plural": "Geräte {{nbDevices}} entfernen"
     }
   },
   "manager": {
-    "tabTitle": "Device Manager",
+    "tabTitle": "Geräte-Manager",
     "title": "Manager",
-    "connect": "Select your device",
-    "appsCatalog": "App catalog",
-    "installedApps": "Installed apps",
-    "noAppNeededForToken": "Install {{appName}} app for {{tokenName}}",
-    "tokenAppDisclaimer": "{{tokenName}} is an {{tokenType}} token using the {{appName}} app. To manage {{tokenName}}, <1>install the {{appName}} app</1> and send the tokens <3>to your {{appName}} account</3>.",
-    "tokenAppDisclaimerInstalled": "{{tokenName}} is an {{tokenType}} token using the {{appName}} app. To manage {{tokenName}}, <1>open the {{appName}} app</1> and send the tokens <3>to your {{appName}} account</3>.",
-    "goToAccounts": "Go to Accounts",
-    "intallParentApp": "Install {{appName}} app",
+    "connect": "Wählen Sie Ihr Gerät",
+    "appsCatalog": "App-Katalog",
+    "installedApps": "installierte Apps",
+    "noAppNeededForToken": "Installieren Sie die App {{appName}} für {{tokenName}}",
+    "tokenAppDisclaimer": "{{tokenName}} ist ein {{tokenType}} -Token mit der {{appName}} -App. Um {{tokenName}} zu verwalten, <1>installieren Sie die {{appName}} -App</1> und senden Sie die Token <3>zu Ihrem {{appName}}-Konto</3>.",
+    "tokenAppDisclaimerInstalled": "{{tokenName}} ist ein {{tokenType}}-Token mit der {{appName}}-App. Um {{tokenName}} zu verwalten, <1>öffnen Sie die {{appName}}-App</1> und senden Sie die Token <3>zu Ihrem {{appName}}-Konto</3>.",
+    "goToAccounts": "Zu Konten gehen",
+    "intallParentApp": "{{appName}} App installieren",
     "readOnly": {
       "title": "Nano X",
-      "description": "Setup Ledger Live with your Ledger Nano X to install apps, create accounts and make secure transactions wherever you go.",
+      "description": "Richten Sie Ledger Live mit Ihrem Ledger Nano X ein, um Apps zu installieren, Konten zu erstellen und sichere Transaktionen durchzuführen, wo immer auch Sie sich aufhalten.",
       "question": "Haben Sie Ihren Ledger Nano X?",
       "button": "Nano X Setup starten",
       "noDevice": "Kein Gerät?",
@@ -2760,88 +2760,88 @@
   "FirmwareUpdateMCU": {
     "title": "Gerät neu starten",
     "desc1": "Trennen Sie Ihr Gerät von Ihrem Computer.",
-    "desc2": "Press and hold the left button, connect the USB cable then release the button when the Bootloader screen appears."
+    "desc2": "Halten Sie die linke Taste gedrückt, schließen Sie das USB-Kabel an und lassen Sie die Taste los, wenn der Bootloader-Bildschirm erscheint."
   },
   "FirmwareUpdateConfirmation": {
-    "title": "Firmware updated",
-    "description": "Go to Manager to reinstall apps on your device."
+    "title": "Firmware aktualisiert",
+    "description": "Gehen Sie zum Manager, um Apps auf Ihrem Gerät neu zu installieren."
   },
   "RepairDevice": {
-    "title": "Repair",
-    "action": "My device is ready"
+    "title": "Reparieren",
+    "action": "Mein Gerät ist bereit"
   },
   "StepLegacyModal": {
-    "description": "Imported accounts synchronize with the network only, not between Mobile and Desktop versions of Ledger Live."
+    "description": "Importierte Konten werden nur mit dem Netzwerk synchronisiert, nicht zwischen der mobilen und der Desktop-Version von Ledger Live."
   },
   "algorand": {
-    "token": "ASA (Assets)",
+    "token": "ASA (Vermögenswerte)",
     "claimRewards": {
-      "title": "Rewards",
-      "button": "Claim",
+      "title": "Prämien",
+      "button": "Beanspruchen",
       "stepperHeader": {
-        "info": "Earn rewards",
-        "starter": "Rewards",
-        "connectDevice": "Connect device",
-        "verification": "Verification",
-        "stepRange": "Step {{currentStep}} of {{totalSteps}}"
+        "info": "Prämien verdienen",
+        "starter": "Prämien",
+        "connectDevice": "Gerät verbinden",
+        "verification": "Verifizierung",
+        "stepRange": "Schritt {{currentStep}} von {{totalSteps}}"
       },
       "flow": {
         "steps": {
           "info": {
-            "description": "Delegate your Algo to earn rewards while keeping full security and control on your assets.",
+            "description": "Übertragen Sie Ihr Algo, um Prämien zu verdienen, während Sie die volle Sicherheit und Kontrolle über Ihr Vermögen behalten.",
             "steps": {
-              "0": "A minimum balance of 1 Algo is required to receive rewards.",
-              "1": "Increase the account’s balance to increase rewards.",
-              "2": "Perform a transaction to or from the account to claim rewards."
+              "0": "Um Prämien zu erhalten, ist ein Mindestguthaben von 1 Algo erforderlich.",
+              "1": "Erhöhen Sie das Guthaben des Kontos, um die Prämien zu erhöhen.",
+              "2": "Führen Sie eine Transaktion auf oder von dem Konto durch, um Prämien zu beanspruchen."
             },
-            "howItWorks": "How rewards work",
-            "cta": "Receive Algo"
+            "howItWorks": "Wie Prämien funktionieren",
+            "cta": "Algo empfangen"
           },
           "starter": {
-            "title": "Congratulations! You earned {{amount}}. Continue to claim your rewards.",
-            "howItWorks": "How rewards work",
-            "warning": "You will be prompted to generate an empty transaction to your account. This will add your current rewards to your balance at the minimal cost of the transaction fees.",
-            "cta": "Continue"
+            "title": "Glückwunsch! Sie haben {{amount}} verdient. Fahren Sie fort um Ihre Prämien zu beanspruchen.",
+            "howItWorks": "Wie Prämien funktionieren",
+            "warning": "Sie werden aufgefordert, eine leere Transaktion auf Ihrem Konto zu erzeugen. Dadurch werden Ihre aktuellen Prämien zu den minimalen Kosten der Transaktionsgebühren zu Ihrem Guthaben hinzugefügt.",
+            "cta": "Weiter"
           },
           "verification": {
             "success": {
-              "title": "Rewards successfully claimed!",
-              "text": "Your rewards were added to your available balance.",
-              "cta": "Go to account"
+              "title": "Prämien erfolgreich eingefordert!",
+              "text": "Ihre Prämien wurden zu Ihrem verfügbaren Guthaben hinzugefügt.",
+              "cta": "Zum Konto gehen"
             },
             "pending": {
-              "title": "Broadcasting transaction..."
+              "title": "Übermittlung der Transaktion ..."
             },
-            "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
+            "broadcastError": "Ihre Transaktion ist möglicherweise fehlgeschlagen. Bitte schauen Sie in ein paar Minuten noch einmal nach, um sicherzustellen, dass Ihre Transaktion nicht fehlgeschlagen ist, bevor Sie es erneut versuchen."
           }
         }
       }
     },
     "optIn": {
       "stepperHeader": {
-        "selectToken": "Add ASA (Asset)",
-        "connectDevice": "Connect device",
-        "verification": "Verification",
-        "stepRange": "Step {{currentStep}} of {{totalSteps}}"
+        "selectToken": "ASA (Vermögenswert) hinzufügen",
+        "connectDevice": "Gerät verbinden",
+        "verification": "Verifizierung",
+        "stepRange": "Schritt {{currentStep}} von {{totalSteps}}"
       },
       "flow": {
         "steps": {
           "selectToken": {
             "warning": {
-              "title": "Asset already added",
-              "description": "You already have {{token}} asset in your Algorand account."
+              "title": "Vermögenswert bereits hinzugefügt",
+              "description": "Sie haben bereits {{token}}-Vermögenswerte in Ihrem Algorand-Konto."
             }
           },
           "verification": {
             "success": {
-              "title": "{{token}} asset successfully added!",
-              "text": "You can now receive and send {{token}} assets on your Algorand account.",
-              "cta": "View details"
+              "title": "{{token}}-Vermögenswerte erfolgreich hinzugefügt!",
+              "text": "Sie können jetzt {{token}} Vermögenswerte auf Ihrem Algorand-Konto empfangen und senden.",
+              "cta": "Details anzeigen"
             },
             "pending": {
-              "title": "Broadcasting transaction..."
+              "title": "Übermittlung der Transaktion ..."
             },
-            "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
+            "broadcastError": "Ihre Transaktion ist möglicherweise fehlgeschlagen. Bitte schauen Sie in ein paar Minuten noch einmal nach, um sicherzustellen, dass Ihre Transaktion nicht fehlgeschlagen ist, bevor Sie es erneut versuchen."
           }
         }
       }
@@ -2850,25 +2850,25 @@
   "cosmos": {
     "info": {
       "available": {
-        "title": "ATOM available",
-        "description": "This amount is disposable."
+        "title": "ATOM verfügbar",
+        "description": "Dieser Betrag ist frei verfügbar."
       },
       "delegated": {
-        "title": "Delegated assets",
-        "description": "Delegated assets are used for Cosmos voting. This is your total number of votes."
+        "title": "Delegierte Vermögenswerte",
+        "description": "Übertragene Vermögenswerte werden für Cosmos-Abstimmungen verwendet. Dies ist Ihre Gesamtzahl der Stimmen."
       },
       "undelegating": {
-        "title": "Undelegating",
-        "description": "Undelegated assets are in a timelock of 21 days, before being available."
+        "title": "Delegierung aufheben",
+        "description": "Nicht delegierte Vermögenswerte sind in einer Zeitsperre von 21 Tagen, bevor sie verfügbar sind."
       },
       "delegationUnavailable": {
-        "title": "Delegation unavailable",
-        "description": "Not enough available balance in your account to start a new delegation."
+        "title": "Übertragung nicht verfügbar",
+        "description": "Nicht genügend verfügbares Guthaben auf Ihrem Konto, um eine neue Übertragung zu starten."
       }
     },
     "delegation": {
-      "delegationEarn": "You can earn ATOM rewards by delegating your assets.",
-      "info": "How Delegation works",
+      "delegationEarn": "Sie können ATOM-Prämien verdienen, indem Sie Ihre Vermögenswerte übertragen.",
+      "info": "Wie die Delegierung/Übertragung funktioniert",
       "claimRewards": "Prämien beanspruchen",
       "claimAvailableRewards": "Anspruch {{amount}}",
       "header": "Delegierung(en)",
@@ -2946,97 +2946,97 @@
       "estYield": "geschätzter Ertrag",
       "stepperHeader": {
         "validator": "Neuen Validator auswählen",
-        "amountSubTitle": "Amount to redelegate",
+        "amountSubTitle": "Neu zu delegierender Betrag",
         "amountTitle": "{{from}} → {{to}}",
-        "summary": "Summary",
-        "selectDevice": "Select device",
-        "connectDevice": "Connect device",
-        "stepRange": "Step {{currentStep}} of {{totalSteps}}"
+        "summary": "Zusammenfassung",
+        "selectDevice": "Gerät wählen",
+        "connectDevice": "Gerät verbinden",
+        "stepRange": "Schritt {{currentStep}} von {{totalSteps}}"
       },
       "flow": {
         "steps": {
           "validator": {
-            "validators": "Validators",
-            "myDelegations": "My delegations",
-            "cta": "Continue",
-            "estYield": "Est. yield: {{amount}}",
-            "totalAvailable": "Total available: <0>{{amount}}</0>",
-            "allAssetsUsed": "All assets used",
-            "noResultsFound": "No validator found for <0>{{search}}</0>"
+            "validators": "Validatoren",
+            "myDelegations": "Meine Delegierungen",
+            "cta": "Weiter",
+            "estYield": "Geschätzter Ertrag: {{amount}}",
+            "totalAvailable": "Insgesamt verfügbar: <0>{{amount}}</0>",
+            "allAssetsUsed": "Alle verwendeten Vermögenswerte",
+            "noResultsFound": "Kein Validator für <0>{{search}}</0> gefunden"
           },
           "amount": {
-            "newRedelegatedBalance": "New total for <0>{{name}}</0> after operation: <0>{{amount}}</0>"
+            "newRedelegatedBalance": "Neue Summe für <0>{{name}}</0> nach Aktion: <0>{{amount}}</0>"
           },
           "verification": {
             "success": {
-              "title": "You have successfully redelegated your assets",
-              "text": "Your account balance will be updated when the network confirms the transaction.",
-              "cta": "View details"
+              "title": "Sie haben Ihr Vermögen erfolgreich erneut delegiert",
+              "text": "Ihr Kontostand wird aktualisiert, wenn das Netzwerk die Transaktion bestätigt.",
+              "cta": "Details anzeigen"
             },
             "pending": {
-              "title": "Broadcasting transaction..."
+              "title": "Broadcasting-Transaktion ..."
             },
-            "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+            "broadcastError": "Ihre Transaktion ist möglicherweise fehlgeschlagen. Bitte warten Sie einen Moment und prüfen Sie den Transaktionsverlauf, bevor Sie es erneut versuchen."
           }
         }
       }
     },
     "undelegation": {
       "stepperHeader": {
-        "amountSubTitle": "Amount to undelegate",
-        "summary": "Summary",
-        "selectDevice": "Select device",
-        "connectDevice": "Connect device",
-        "stepRange": "Step {{currentStep}} of {{totalSteps}}"
+        "amountSubTitle": "Nicht zu delegierender Betrag",
+        "summary": "Zusammenfassung",
+        "selectDevice": "Gerät wählen",
+        "connectDevice": "Gerät verbinden",
+        "stepRange": "Schritt {{currentStep}} von {{totalSteps}}"
       },
       "flow": {
         "steps": {
           "amount": {
-            "allAssetsUsed": "All assets undelegated"
+            "allAssetsUsed": "Alle nicht delegierten Vermögenswerte"
           },
           "verification": {
             "success": {
-              "title": "You have successfully undelegated your assets",
-              "text": "Your account balance will be updated when the network confirms the transaction.",
-              "cta": "View details"
+              "title": "Sie haben die Übertragung Ihrer Vermögenswerte erfolgreich aufgehoben.",
+              "text": "Ihr Kontostand wird aktualisiert, wenn das Netzwerk die Transaktion bestätigt.",
+              "cta": "Details anzeigen"
             },
             "pending": {
-              "title": "Broadcasting transaction..."
+              "title": "Übermittlung der Transaktion ..."
             },
-            "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+            "broadcastError": "Ihre Transaktion ist möglicherweise fehlgeschlagen. Bitte warten Sie einen Moment und prüfen Sie den Transaktionsverlauf, bevor Sie es erneut versuchen."
           }
         }
       }
     },
     "claimRewards": {
       "stepperHeader": {
-        "validator": "Select reward to collect",
-        "method": "Claim rewards",
-        "summary": "Summary",
-        "selectDevice": "Select device",
-        "connectDevice": "Connect device",
-        "stepRange": "Step {{currentStep}} of {{totalSteps}}"
+        "validator": "Prämie auswählen",
+        "method": "Prämien beanspruchen",
+        "summary": "Zusammenfassung",
+        "selectDevice": "Gerät wählen",
+        "connectDevice": "Gerät verbinden",
+        "stepRange": "Schritt {{currentStep}} von {{totalSteps}}"
       },
       "flow": {
         "steps": {
           "method": {
-            "youEarned": "You earned",
-            "byDelegationAssetsTo": "by delegating assets to",
-            "claimReward": "Cash in",
-            "claimRewardCompound": "Compound",
-            "claimRewardInfo": "They will be claimed now and added to your available balance.",
-            "claimRewardCompoundInfo": "They will be claimed now and automatically delegated to the same validator.",
-            "compoundOrCashIn": "Compound or Cash in?",
-            "claimRewardTooltip": "Rewards will be added to the available balance",
-            "claimRewardCompoundTooltip": "Rewards will be added to the delegated amount",
-            "cta": "Continue"
+            "youEarned": "Sie haben verdient",
+            "byDelegationAssetsTo": "durch delegieren von Vermögenswerten an",
+            "claimReward": "Einzahlen",
+            "claimRewardCompound": "Zusammenrechnen",
+            "claimRewardInfo": "Sie werden jetzt eingefordert und zu Ihrem verfügbaren Guthaben hinzugefügt.",
+            "claimRewardCompoundInfo": "Sie werden jetzt beansprucht und automatisch an denselben Validator delegiert.",
+            "compoundOrCashIn": "Zusammenrechnen oder einzahlen?",
+            "claimRewardTooltip": "Die Prämien werden dem verfügbaren Guthaben hinzugefügt",
+            "claimRewardCompoundTooltip": "Prämien werden zum delegierten Betrag hinzugefügt",
+            "cta": "Weiter"
           },
           "verification": {
             "success": {
-              "title": "You have successfully claimed your rewards. They were added to your available balance.",
-              "titleCompound": "Your rewards were delegated to the same validator.",
-              "text": "Your account balance will be updated when the network confirms the transaction.",
-              "cta": "View details"
+              "title": "Sie haben Ihre Prämien erfolgreich eingefordert. Diese wurden zu Ihrem verfügbaren Guthaben hinzugefügt.",
+              "titleCompound": "Deine Belohnungen wurden an denselben Validator delegiert.",
+              "text": "Ihr Kontostand wird aktualisiert, wenn das Netzwerk die Transaktion bestätigt.",
+              "cta": "Details anzeigen"
             },
             "pending": {
               "title": "Übermittlung der Transaktion..."
@@ -3152,33 +3152,33 @@
         "description": "Die TRX, die während der Blockproduktion als Prämien generiert werden, können alle 24 Stunden eingefordert werden."
       },
       "superRepresentative": {
-        "title": "Super Representatives (SR)",
-        "description": "Super Representatives play a key role in governing the TRON community by ensuring basic functions, e.g. block generation and bookkeeping."
+        "title": "Super-Repräsentanten (SR)",
+        "description": "Super-Repräsentanten spielen eine Schlüsselrolle bei der Verwaltung der TRON-Community, indem sie grundlegende Funktionen sicherstellen, z. B. die Blockerstellung und die Buchhaltung."
       },
       "candidates": {
-        "title": "Candidates",
-        "description": "127 individuals elected through voting by the entire token-holder community. Votes are sampled every 6 hours."
+        "title": "Kandidaten",
+        "description": "127 Personen, die durch Abstimmung von der gesamten Token-Inhaber-Community gewählt werden. Die Abstimmungen werden alle 6 Stunden abgefragt."
       }
     }
   },
   "stellar": {
     "memo": {
       "title": "Memo",
-      "warning": "When using a Memo, carefully verify the type with the recipient."
+      "warning": "Wenn Sie ein Memo verwenden, überprüfen Sie den Typ sorgfältig mit dem Empfänger."
     },
     "memoType": {
-      "MEMO_TEXT": "Memo Text",
-      "NO_MEMO": "No Memo",
-      "MEMO_ID": "Memo ID",
+      "MEMO_TEXT": "Memo-Text",
+      "NO_MEMO": "Kein Memo",
+      "MEMO_ID": "Memo-ID",
       "MEMO_HASH": "Memo Hash",
-      "MEMO_RETURN": "Memo Return"
+      "MEMO_RETURN": "Memo-Rückgabe"
     }
   },
   "polkadot": {
-    "lockedBalance": "Bonded balance",
-    "unlockingBalance": "Unbonding balance",
-    "unlockedBalance": "Unbonded balance",
-    "networkFees": "Network fees are automatically set by the Polkadot consensus, you won't be able to review them on your device",
+    "lockedBalance": "Gebundenes Guthaben",
+    "unlockingBalance": "Bindung von Guthaben aufheben",
+    "unlockedBalance": "Guthaben mit aufgehobener Bindung",
+    "networkFees": "Die Netzwerkgebühren werden automatisch durch den Polkadot-Konsens festgelegt, Sie können sie nicht auf Ihrem Gerät überprüfen",
     "bondedBalanceBelowMinimum": "Your bonded balance is below the current minimum of {{minimumBondBalance}}. Your nominations are at risk of being removed.",
     "info": {
       "available": {
