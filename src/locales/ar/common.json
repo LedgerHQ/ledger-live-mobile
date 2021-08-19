@@ -1234,18 +1234,10 @@
     "syncError": "خطأ في المزامنة",
     "syncFailed": "فشلت المزامنة",
     "syncPending": "تتم المزامنة...",
-    "transactions": "Transactions",
-    "greeting": {
-      "morning": "صباح الخير",
-      "evening": "مساء الخير",
-      "afternoon": "مساء الخير"
-    },
     "transactionsPendingConfirmation": {
       "title": "رصيد غير متزامن",
       "desc": "لم يتم تأكيد بعض المعاملات بعد. ستظهر هذه في رصيدك ويمكن استخدامها بعد تأكيدها."
     },
-    "summary": "إليك ملخص لحساباتك",
-    "summary_plural": "تمت مزامنة حساباتك ({{count}}).",
     "emptyState": {
       "noAppsTitle": "تثبيت تطبيق على جهازي",
       "noAppsDesc": "قم بتثبيت التطبيقات على جهازك قبل إضافة حسابات في Ledger Live. انتقل إلى المدير لتثبيت التطبيقات.",
