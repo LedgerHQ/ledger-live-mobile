@@ -1234,18 +1234,10 @@
     "syncError": "Sync-Fehler",
     "syncFailed": "Synchronisation fehlgeschlagen",
     "syncPending": "Synchronisieren ...",
-    "transactions": "Transactions",
-    "greeting": {
-      "morning": "Guten Morgen",
-      "evening": "Guten Abend",
-      "afternoon": "Guten Tag"
-    },
     "transactionsPendingConfirmation": {
       "title": "Unsynchronisierter Kontostand",
       "desc": "Einige Transaktionen sind noch nicht bestätigt. Diese werden in Ihrem Guthaben angezeigt und können nach der Bestätigung verwendet werden."
     },
-    "summary": "Hier ist die Übersicht über Ihr Konto",
-    "summary_plural": "Ihre {{count}} Konten sind synchronisiert.",
     "emptyState": {
       "noAppsTitle": "Eine App auf meinem Gerät installieren",
       "noAppsDesc": "Installieren Sie Apps auf Ihrem Gerät, bevor Sie Konten in Ledger Live hinzufügen. Gehen Sie zum Manager, um Apps zu installieren.",
@@ -2177,47 +2169,47 @@
   "send": {
     "tooMuchUTXOBottomModal": {
       "cta": "Weiter",
-      "description": "This transaction may take long to verify and sign because the account has a significant number of coins.",
-      "title": "UTXO message"
+      "description": "Die Verifizierung und Unterzeichnung dieser Transaktion kann lange dauern, da das Konto eine beträchtliche Anzahl von Coins enthält.",
+      "title": "UTXO-Nachricht"
     },
-    "highFeeModal": "Be careful, network fees are greater than <1>10%</1> of the amount. Do you want to continue?",
+    "highFeeModal": "Seien Sie vorsichtig, die Netzwerkgebühren sind größer als <1>10 %</1> des Betrags. Möchten Sie fortfahren?",
     "scan": {
-      "title": "Scan QR code",
-      "descBottom": "Please center the QR code inside the square.",
+      "title": "QR-Code scannen",
+      "descBottom": "Bitte zentrieren Sie den QR-Code innerhalb des Quadrats.",
       "fallback": {
-        "header": "Scan QR code",
-        "title": "Enable camera",
-        "desc": "Please enable Camera in Settings to scan QR codes.",
-        "buttonTitle": "Go to Settings"
+        "header": "QR-Code scannen",
+        "title": "Kamera einschalten",
+        "desc": "Bitte aktivieren Sie die Kamera in den Einstellungen, um QR-Codes zu scannen.",
+        "buttonTitle": "Gehen Sie zu Einstellungen"
       }
     },
     "stepperHeader": {
-      "selectAccount": "Account to debit",
-      "recipientAddress": "Recipient address",
-      "selectAmount": "Amount",
-      "summary": "Summary",
-      "selectDevice": "Select device",
-      "connectDevice": "Connect device",
-      "stepRange": "Step {{currentStep}} of {{totalSteps}}"
+      "selectAccount": "Zu belastendes Konto",
+      "recipientAddress": "Adresse des Empfängers",
+      "selectAmount": "Betrag",
+      "summary": "Zusammenfassung",
+      "selectDevice": "Gerät wählen",
+      "connectDevice": "Gerät verbinden",
+      "stepRange": "Schritt {{aktuellerSchritt}} von {{Gesamtschritte}}"
     },
     "recipient": {
-      "scan": "Scan QR code",
-      "enterAddress": "Enter address",
-      "input": "Enter address",
-      "verifyAddress": "Please verify the address matches the one shared by the recipient."
+      "scan": "QR-Code scannen",
+      "enterAddress": "Adresse eingeben",
+      "input": "Adresse eingeben",
+      "verifyAddress": "Bitte überprüfen Sie, ob die Adresse mit der des Empfängers übereinstimmt."
     },
     "amount": {
-      "available": "Total available",
-      "useMax": "Use max",
-      "loadingNetwork": "Loading network fees...",
-      "noRateProvider": "Not available"
+      "available": "Verfügbare Gesamtsumme",
+      "useMax": "Max. verwenden",
+      "loadingNetwork": "Netzwerkgebühren werden geladen...",
+      "noRateProvider": "Nicht verfügbar"
     },
     "summary": {
       "subaccountsWarning": "You will need to refill this account with {{ currency }} in order to send the tokens of this account",
-      "tag": "Tag (Optional)",
-      "validateTag": "Validate tag",
-      "total": "Total",
-      "amount": "Amount",
+      "tag": "Markierung (optional)",
+      "validateTag": "Markierung validieren",
+      "total": "Gesamt",
+      "amount": "Betrag",
       "from": "From",
       "to": "To",
       "infoTotalTitle": "Total debit",
