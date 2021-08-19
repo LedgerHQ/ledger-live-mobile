@@ -1234,18 +1234,10 @@
     "syncError": "Error de sincronización",
     "syncFailed": "La sincronización ha fallado",
     "syncPending": "Sincronizando...",
-    "transactions": "Transacciones",
-    "greeting": {
-      "morning": "Buenos días",
-      "evening": "Buenas noches",
-      "afternoon": "Buenas tardes"
-    },
     "transactionsPendingConfirmation": {
       "title": "Saldo no sincronizado",
       "desc": "Algunas transacciones aún no están confirmadas. Las mismas se reflejarán en tu saldo y quedarán disponibles después de ser confirmadas."
     },
-    "summary": "Aquí tienes el resumen de tu cuenta",
-    "summary_plural": "Tus {{count}} cuentas están sincronizadas.",
     "emptyState": {
       "noAppsTitle": "Instalar una aplicación en mi dispositivo",
       "noAppsDesc": "Instala las aplicaciones en tu dispositivo antes de agregar cuentas en Ledger Live. Ingresa a Manager para instalar las aplicaciones.",
