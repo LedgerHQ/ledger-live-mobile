@@ -1861,57 +1861,57 @@
         "description": "Ihr Tauschvorgang wurde zur Bestätigung an das Netzwerk gesendet. Es kann bis zu einer Stunde dauern, bis Sie Ihre {{targetCurrency}} erhalten.",
         "label": "Ihre Swap-ID:",
         "title": "Swap Übertragung erfolgreich ",
-        "disclaimer": "Take note of your Swap ID number in case you’d need assistance from {{provider}} support.",
-        "cta": "See details"
+        "disclaimer": "Notieren Sie sich Ihre Tausch-ID-Nummer für den Fall, dass Sie Hilfe vom {{provider}} Support benötigen.",
+        "cta": "Details ansehen"
       },
       "tradeMethod": {
-        "float": "Floating rate",
-        "floatUnavailable": "Floating rate not supported for this pair",
-        "fixed": "Fixed rate",
-        "fixedUnavailable": "Fixed rate not supported for this pair",
-        "floatDesc": "Your amount could change depending on the market conditions.",
-        "fixedDesc": "Your amount will remain the same irrespective of the changes on the market. Fixed rate updates every 30 seconds",
-        "by": "By",
-        "modalTitle": "Floating or fixed rate?"
+        "float": "Variabler Wechselkurs",
+        "floatUnavailable": "Variabler Kurs wird für dieses Paar nicht unterstützt",
+        "fixed": "Fester Kurs",
+        "fixedUnavailable": "Fester Kurs wird für dieses Paar nicht unterstützt",
+        "floatDesc": "Ihr Betrag kann sich abhängig von den Marktbedingungen ändern.",
+        "fixedDesc": "Ihr Betrag bleibt unabhängig von den Veränderungen auf dem Markt gleich. Fester Kurs wird alle 30 Sekunden aktualisiert",
+        "by": "Durch",
+        "modalTitle": "Variabler oder fester Kurs?"
       },
       "form": {
-        "validate": "Confirm Swap transaction",
-        "tab": "Exchange",
-        "button": "Continue",
-        "from": "From",
-        "to": "To",
-        "balance": "Balance <0>123</0>",
-        "fromAccount": "Select account",
-        "toAccount": "Select account",
-        "paraswapCTA": "Looking for Paraswap? It has been moved to the Discover tab!",
+        "validate": "Swap-Transaktion bestätigen",
+        "tab": "Austauschen",
+        "button": "Weiter",
+        "from": "Von",
+        "to": "An",
+        "balance": "Kontostand <0>123</0>",
+        "fromAccount": "Konto auswählen",
+        "toAccount": "Konto auswählen",
+        "paraswapCTA": "Suchen Sie nach Paraswap? Es wurde auf die Registerkarte Entdecken verschoben!",
         "amount": {
-          "useMax": "Use max",
-          "available": "Total available"
+          "useMax": "Max. verwenden",
+          "available": "Verfügbare Gesamtsumme"
         },
         "noApp": {
-          "title": "{{appName}} app not installed",
-          "desc": "Please go to Manager to install the {{appName}} app.",
-          "cta": "Go to Manager",
-          "close": "Close"
+          "title": "{{appName}} App nicht installiert",
+          "desc": "Bitte gehen Sie zum Manager, um die {{appName}} App zu installieren.",
+          "cta": "Zum Manager gehen",
+          "close": "Schließen"
         },
         "noAccounts": {
-          "title": "No {{ticker}} to swap",
-          "desc": "Your {{currencyName}} accounts have no balance to swap.",
-          "addAccountCta": "Add Account",
-          "cta": "Close"
+          "title": "Keine {{ticker}} zum Tauschen",
+          "desc": "Ihre {{currencyName}} Konten haben keinen Saldo zum Swap.",
+          "addAccountCta": "Konto hinzufügen",
+          "cta": "Schließen"
         },
         "outdatedApp": {
-          "title": "App update available",
-          "desc": "You need to update the {{appName}} app.",
-          "cta": "Go to Manager",
-          "close": "Close"
+          "title": "App-Update verfügbar",
+          "desc": "Sie müssen die {{appName}} App aktualisieren.",
+          "cta": "Zum Manager gehen",
+          "close": "Schließen"
         },
         "summary": {
-          "from": "From",
-          "to": "To",
-          "send": "Send",
-          "payoutNetworkFees": "Payout fees",
-          "payoutNetworkFeesTooltip": "This amount will not be shown on your device",
+          "from": "Von",
+          "to": "An",
+          "send": "Senden",
+          "payoutNetworkFees": "Auszahlungsgebühren",
+          "payoutNetworkFeesTooltip": "Dieser Betrag wird nicht auf Ihrem Gerät angezeigt",
           "receive": "Betrag",
           "receiveFloat": "Zu erhaltender Betrag vor Servicegebühren",
           "provider": "Provider",
