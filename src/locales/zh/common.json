@@ -1234,18 +1234,10 @@
     "syncError": "同步错误",
     "syncFailed": "同步失败",
     "syncPending": "正在同步...",
-    "transactions": "交易数目",
-    "greeting": {
-      "morning": "早上好",
-      "evening": "晚上好",
-      "afternoon": "下午好"
-    },
     "transactionsPendingConfirmation": {
       "title": "非同步的余额",
       "desc": "有些交易尚未确认。这些交易将反映在您的余额中，并在确认后可用。"
     },
-    "summary": "这是您的账户概览",
-    "summary_plural": "您的 {{count}} 账户已同步。",
     "emptyState": {
       "noAppsTitle": "在我的设备上安装应用程序",
       "noAppsDesc": "在 Ledger Live 上添加账户之前，请先安装相关应用程序。前往 Manager（管理器）安装应用程序。",
