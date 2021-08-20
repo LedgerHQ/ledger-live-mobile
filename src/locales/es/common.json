@@ -44,9 +44,6 @@
     "bluetooth": "Bluetooth",
     "usb": "USB",
     "add": "Agregar",
-    "slow": "lenta",
-    "medium": "medio",
-    "fast": "rápida",
     "token": "Token",
     "token_plural": "Tokens",
     "subaccount": "Subcuenta",
@@ -599,6 +596,9 @@
       "high": "Alta",
       "standard": "Estándar",
       "low": "Baja",
+      "slow": "slow",
+      "medium": "medium",
+      "fast": "fast",
       "custom": "Personalizado",
       "blockCount": "{{blockCount}} bloques"
     }
