@@ -44,9 +44,6 @@
     "bluetooth": "蓝牙",
     "usb": "USB",
     "add": "添加",
-    "slow": "慢",
-    "medium": "中",
-    "fast": "快",
     "token": "代币",
     "token_plural": "代币",
     "subaccount": "子账户",
@@ -599,6 +596,9 @@
       "high": "高",
       "standard": "标准",
       "low": "低",
+      "slow": "slow",
+      "medium": "medium",
+      "fast": "fast",
       "custom": "自定义",
       "blockCount": "{{blockCount}}个区块"
     }
