@@ -44,9 +44,6 @@
     "bluetooth": "Bluetooth",
     "usb": "USB",
     "add": "Добавить",
-    "slow": "медленно",
-    "medium": "средняя",
-    "fast": "быстро",
     "token": "Токен",
     "token_plural": "Токены",
     "subaccount": "Субсчёт",
@@ -599,6 +596,9 @@
       "high": "Высокая",
       "standard": "Стандартная",
       "low": "Низкая",
+      "slow": "slow",
+      "medium": "medium",
+      "fast": "fast",
       "custom": "Пользовательская",
       "blockCount": "Количество блоков: {{blockCount}}"
     }
