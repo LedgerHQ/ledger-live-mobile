@@ -596,9 +596,9 @@
       "high": "Élevée",
       "standard": "Normale",
       "low": "Basse",
-      "slow": "slow",
-      "medium": "medium",
-      "fast": "fast",
+      "slow": "Lent",
+      "medium": "Moyens",
+      "fast": "Rapide",
       "custom": "Personnalisée",
       "blockCount": "{{blockCount}} blocs"
     }
