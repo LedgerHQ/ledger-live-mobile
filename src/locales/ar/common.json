@@ -44,9 +44,6 @@
     "bluetooth": "بلوتوث",
     "usb": "USB",
     "add": "أضف",
-    "slow": "بطيء",
-    "medium": "medium",
-    "fast": "سريع",
     "token": "رمز",
     "token_plural": "رموز",
     "subaccount": "حساب فرعي",
@@ -599,6 +596,9 @@
       "high": "مرتفعة",
       "standard": "اعتيادية",
       "low": "منخفضة",
+      "slow": "slow",
+      "medium": "medium",
+      "fast": "fast",
       "custom": "مُخصّص",
       "blockCount": "{{blockCount}} كتل"
     }
