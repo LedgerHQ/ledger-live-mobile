@@ -2,7 +2,7 @@
   "common": {
     "cancel": "إلغاء",
     "apply": "تطبيق",
-    "seeAll": "See all",
+    "seeAll": "رؤية الكل",
     "back": "عودة",
     "delete": "حذف",
     "paste": "لصق",
@@ -596,9 +596,9 @@
       "high": "مرتفعة",
       "standard": "اعتيادية",
       "low": "منخفضة",
-      "slow": "slow",
-      "medium": "medium",
-      "fast": "fast",
+      "slow": "بطيء",
+      "medium": "متوسط",
+      "fast": "سريع",
       "custom": "مُخصّص",
       "blockCount": "{{blockCount}} كتل"
     }
@@ -1308,10 +1308,10 @@
       "UNBOND": "إلغاء التقيد",
       "REWARD_PAYOUT": "مُكافأة",
       "SLASH": "تغريم",
-      "WITHDRAW_UNBONDED": "Withdrawal",
+      "WITHDRAW_UNBONDED": "سحب",
       "NOMINATE": "ترشيح",
       "CHILL": "مسح الترشيحات",
-      "SET_CONTROLLER": "Set controller"
+      "SET_CONTROLLER": "إعداد وحدة التحكم"
     }
   },
   "operationDetails": {
@@ -1323,8 +1323,8 @@
     "failed": "فشلت",
     "fees": "رسوم الشبكة",
     "noFees": "لا توجد رسوم",
-    "from": "From",
-    "to": "To",
+    "from": "من",
+    "to": "إلى",
     "identifier": "معرف المعاملة",
     "viewOperation": "عرض في المتصفح",
     "whatIsThis": "ما هذه العملية؟",
@@ -1919,7 +1919,7 @@
           "fees": "الحد الأقصى للرسوم",
           "disclaimer": {
             "title": "الأحكام والشروط",
-            "desc": "By clicking “Accept”,  I acknowledge and accept that this service is exclusively governed by <0>{{provider}}</0>'s Terms & Conditions.",
+            "desc": "بالضغط على \"أقبل\"، أقر وأقبل بأن هذه الخدمة تدار حصريًا من قبل شروط وأحكام <0>{{provider}}</0>.",
             "tos": "الشروط والأحكام",
             "accept": "قبول",
             "reject": "إغلاق"
@@ -3216,7 +3216,7 @@
       "header": "الترشيحات",
       "nominate": "ترشيح",
       "chill": "حذف الترشيحات",
-      "setController": "Change controller",
+      "setController": "تغيير وحدة التحكم",
       "status": "الحالة",
       "totalStake": "إجمالي الرهن",
       "amount": "المبلغ المقيد",
@@ -3237,8 +3237,8 @@
       "oversubscribed": "({{nominatorsCount}}) تجاوز حد الاشتراك",
       "oversubscribedInfo": "أعلى {{maxNominatorRewardedPerValidator}} مرشحين مع أعلى مبلغ مقيد فقط هم من يحصلون على مكافآت",
       "hasPendingBondOperation": "لا تزال عملية التقيد في انتظار التأكيد",
-      "externalControllerUnsupported": "This stash account is controlled by a separate account whose address is <0>{{controllerAddress}}</0>. To stake with Ledger Live, you must set this stash account as its own controller.",
-      "externalStashUnsupported": "This account is the controller of a separate stash account whose address is <0>{{stashAddress}}</0>. To stake with Ledger Live, you must set your stash account as its own controller.",
+      "externalControllerUnsupported": "يتم التحكم في حساب التخزين هذا بواسطة حساب منفصل بعنوان <0>{{controllerAddress}}</0>. للتخزين مع Ledger Live، يجب عليك تعيين حساب التخزين هذا على أنه وحدة التحكم الخاصة.",
+      "externalStashUnsupported": "هذا الحساب هو وحدة تحكم حساب تخزين منفصل بعنوان <0>{{stashAddress}}</0>. للتخزين مع Ledger Live، يجب عليك تعيين حساب التخزين الخاص بك على أنه وحدة التحكم الخاصة.",
       "showInactiveNominations": "عرض كل الترشيحات ({{count}})",
       "hideInactiveNominations": "عرض الترشيحات النشطة فقط",
       "noActiveNominations": "لا توجد ترشيحات مفعلة.",
@@ -3407,9 +3407,9 @@
           "info": "ستظل الأصول المقيدة على حالتها. إذا قمت بإلغاء تقيدها، فسوف تصبح متاحة بعد فترة 28 يومًا."
         },
         "setController": {
-          "title": "Change Controller",
-          "description": "Set your Ledger account as its own controller",
-          "info": "Ledger Live doesn't support operations on separate stash and controller accounts."
+          "title": "تغيير وحدة التحكم",
+          "description": "قم تعيين حسابك في Ledger كوحدة التحكم خاصة به",
+          "info": "لا يدعم Ledger Live العمليات على حسابات التخزين و حسابات وحدة التحكم المنفصلة."
         }
       },
       "stepperHeader": {
@@ -3682,7 +3682,7 @@
     },
     "webPlatformPlayer": {
       "infoPanel": {
-        "website": "website"
+        "website": "الموقع الإلكتروني"
       }
     }
   }
