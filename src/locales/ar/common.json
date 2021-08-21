@@ -1605,8 +1605,8 @@
       "stockDesc": "اختر \"غربي\" لعرض زيادات السوق باللون الأخضر أو ​​\"شرقي\" لعرضها باللون الأحمر.",
       "reportErrors": "تقارير الخلل",
       "reportErrorsDesc": "إرسال التقارير تلقائيًا لمساعدة ليدجر في تحسين منتجاتها.",
-      "developerMode": "وضع المطور",
-      "developerModeDesc": "اعرض تطبيقات المطور في المدير وقم بتمكين تطبيقات Testnet.",
+      "developerMode": "وضع المطوّر",
+      "developerModeDesc": "اعرض تطبيقات المطوّر في المدير وقم بتمكين تطبيقات Testnet.",
       "analytics": "التحليلات",
       "analyticsDesc": "قم بتمكين التحليلات لمساعدة ليدجر على تحسين تجربة المستخدم.",
       "analyticsModal": {
@@ -3237,8 +3237,8 @@
       "oversubscribed": "({{nominatorsCount}}) تجاوز حد الاشتراك",
       "oversubscribedInfo": "أعلى {{maxNominatorRewardedPerValidator}} مرشحين مع أعلى مبلغ مقيد فقط هم من يحصلون على مكافآت",
       "hasPendingBondOperation": "لا تزال عملية التقيد في انتظار التأكيد",
-      "externalControllerUnsupported": "يتم التحكم في حساب التخزين هذا بواسطة حساب منفصل بعنوان <0>{{controllerAddress}}</0>. للتخزين مع Ledger Live، يجب عليك تعيين حساب التخزين هذا على أنه وحدة التحكم الخاصة.",
-      "externalStashUnsupported": "هذا الحساب هو وحدة تحكم حساب تخزين منفصل بعنوان <0>{{stashAddress}}</0>. للتخزين مع Ledger Live، يجب عليك تعيين حساب التخزين الخاص بك على أنه وحدة التحكم الخاصة.",
+      "externalControllerUnsupported": "يتم التحكم في حساب التخزين هذا بواسطة حساب منفصل بعنوان <0>{{controllerAddress}}</0>. للتخزين مع Ledger Live، يجب عليك تعيين حساب التخزين هذا على أنه وحدة التحكم الخاصة به.",
+      "externalStashUnsupported": "هذا الحساب هو وحدة تحكم حساب تخزين منفصل بعنوان <0>{{stashAddress}}</0>. للتخزين مع Ledger Live، يجب عليك تعيين حساب التخزين الخاص بك على أنه وحدة التحكم الخاصة به.",
       "showInactiveNominations": "عرض كل الترشيحات ({{count}})",
       "hideInactiveNominations": "عرض الترشيحات النشطة فقط",
       "noActiveNominations": "لا توجد ترشيحات مفعلة.",
@@ -3669,7 +3669,7 @@
         "description": "ما الخدمة التي تريد رؤيتها في Ledger Live؟"
       },
       "developerCTA": {
-        "title": "للمبرمجين",
+        "title": "للمطوّرين",
         "description": "جميع المعلومات التي تحتاج إليها لدمج تطبيقاتك على Ledger Live."
       }
     },
