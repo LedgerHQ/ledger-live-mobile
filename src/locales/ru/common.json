@@ -596,9 +596,9 @@
       "high": "Высокая",
       "standard": "Стандартная",
       "low": "Низкая",
-      "slow": "slow",
-      "medium": "medium",
-      "fast": "fast",
+      "slow": "медленно",
+      "medium": "средне",
+      "fast": "быстро",
       "custom": "Пользовательская",
       "blockCount": "Количество блоков: {{blockCount}}"
     }
@@ -1308,10 +1308,10 @@
       "UNBOND": "Разблокировать",
       "REWARD_PAYOUT": "Вознаграждение",
       "SLASH": "Штраф",
-      "WITHDRAW_UNBONDED": "Withdrawal",
+      "WITHDRAW_UNBONDED": "Вывод разблок. средств",
       "NOMINATE": "Голосование",
       "CHILL": "Очистить голоса",
-      "SET_CONTROLLER": "Set controller"
+      "SET_CONTROLLER": "Назначить контроллера"
     }
   },
   "operationDetails": {
@@ -3216,7 +3216,7 @@
       "header": "Назначения",
       "nominate": "Назначить",
       "chill": "Отменить назначения",
-      "setController": "Change controller",
+      "setController": "Сменить контроллера",
       "status": "Состояние",
       "totalStake": "Общая доля",
       "amount": "Заблокированная сумма",
@@ -3237,8 +3237,8 @@
       "oversubscribed": "Превышение лимита голосов ({{nominatorsCount}})",
       "oversubscribedInfo": "Вознаграждения получают только ТОП-{{maxNominatorRewardedPerValidator}} номинатора(-ов) с наибольшей заблокированной суммой",
       "hasPendingBondOperation": "Блокировка средств ожидает подтверждения",
-      "externalControllerUnsupported": "This stash account is controlled by a separate account whose address is <0>{{controllerAddress}}</0>. To stake with Ledger Live, you must set this stash account as its own controller.",
-      "externalStashUnsupported": "This account is the controller of a separate stash account whose address is <0>{{stashAddress}}</0>. To stake with Ledger Live, you must set your stash account as its own controller.",
+      "externalControllerUnsupported": "Этот stash-счёт контролируется отдельным счётом с адресом <0>{{controllerAddress}}</0>. Чтобы стейкировать средства в Ledger Live, вам нужно назначить stash-счёт в качестве самостоятельного контроллера.",
+      "externalStashUnsupported": "Этот счёт контролируется отдельным счётом с адресом <0>{{stashAddress}}</0>. Чтобы стейкировать средства в Ledger Live, вам нужно назначить этот stash-счёт в качестве самостоятельного контроллера.",
       "showInactiveNominations": "Показать всех номинаторов ({{count}})",
       "hideInactiveNominations": "Показать только активных номинаторов",
       "noActiveNominations": "Нет активных номинаторов.",
@@ -3407,9 +3407,9 @@
           "info": "Блокированные активы останутся заблокированными. Если их разблокировать, доступ к ним будет восстановлен только спустя 28 дней."
         },
         "setController": {
-          "title": "Change Controller",
-          "description": "Set your Ledger account as its own controller",
-          "info": "Ledger Live doesn't support operations on separate stash and controller accounts."
+          "title": "Сменить контроллера",
+          "description": "Назначить этот счёт в Ledger в качестве самостоятельного контроллера",
+          "info": "Ledger Live не поддерживает операции на отдельных stash-счетах и счетах контроллеров."
         }
       },
       "stepperHeader": {
