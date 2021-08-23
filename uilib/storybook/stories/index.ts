@@ -4,3 +4,4 @@ import "./Layout/Modal.stories";
 import "./Layout/ScrollContainer.stories";
 import "./Layout/Flex.stories";
 import "./Navigation/SlideIndicator/SlideIndicator.stories";
+import "./Loader/Loader.stories";
