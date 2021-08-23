@@ -2161,7 +2161,7 @@
   },
   "sync": {
     "error": "Fehler beim Synchronisieren",
-    "loading": "Sync"
+    "loading": "Synchronisieren"
   },
   "scanning": {
     "loading": "Geräte werden gesucht..."
@@ -3413,7 +3413,7 @@
         }
       },
       "stepperHeader": {
-        "info": "Info",
+        "info": "Informationen",
         "selectDevice": "Gerät wählen",
         "connectDevice": "Gerät verbinden",
         "stepRange": "Schritt {{currentStep}} von {{totalSteps}}"
@@ -3630,7 +3630,7 @@
     "announcement": "Ankündigung",
     "liveStatus": "Ledger Live Status",
     "news": {
-      "title": "News",
+      "title": "Neuigkeiten",
       "titleCount": "Neuigkeiten ({{count}})",
       "emptyState": {
         "title": "Im Moment keine Neuigkeiten",
