@@ -2,7 +2,7 @@
   "common": {
     "cancel": "Abbrechen",
     "apply": "Anwenden",
-    "seeAll": "See all",
+    "seeAll": "Alle anzeigen",
     "back": "Zurück",
     "delete": "Löschen",
     "paste": "Einfügen",
@@ -262,8 +262,8 @@
       "description": "Bitte verwenden Sie den Manager, um alle Apps zu deinstallieren und prüfen Sie dann, ob ein Firmware-Update verfügbar ist, bevor Sie sie neu installieren."
     },
     "LatestFirmwareVersionRequired": {
-      "title": "Device update required on desktop",
-      "description": "Please update your Nano X firmware on Ledger Live Desktop"
+      "title": "Geräte-Update auf dem Desktop erforderlich",
+      "description": "Bitte aktualisieren Sie Ihre Nano X-Firmware auf Ledger Live Desktop"
     },
     "GenuineCheckFailed": {
       "title": "Geräteauthentifizierung fehlgeschlagen",
@@ -504,8 +504,8 @@
       "description": "Diese Funktion wird zu einem späteren Zeitpunkt aufgrund von Änderungen, die kürzlich durch das Babylon-Update eingeführt wurden, hinzugefügt."
     },
     "AccessDeniedError": {
-      "title": "Ledger Live needs an update",
-      "description": "Please update Ledger Live to the latest version, and re verify your identity to swap with wyre"
+      "title": "Ledger Live braucht ein Update",
+      "description": "Bitte aktualisieren Sie Ledger Live auf die neueste Version, und verifizieren Sie Ihre Identität erneut, um mit Wyre zu tauschen"
     },
     "RecommendUndelegation": {
       "title": "Bitte heben Sie die Übertragung des Kontos auf, bevor Sie es leeren"
@@ -594,11 +594,11 @@
   "fees": {
     "speed": {
       "high": "Hoch",
-      "standard": "Standard",
+      "standard": "Standart",
       "low": "Niedrig",
-      "slow": "slow",
-      "medium": "medium",
-      "fast": "fast",
+      "slow": "langsam",
+      "medium": "mittel",
+      "fast": "schnell",
       "custom": "Benutzerdefiniert",
       "blockCount": "{{blockCount}} Blöcke"
     }
@@ -619,7 +619,7 @@
       "title": "Authentifizierung fehlgeschlagen",
       "buttons": {
         "tryAgain": "Erneut versuchen",
-        "reset": "Reset"
+        "reset": "Zurücksetzen"
       }
     },
     "unlock": {
@@ -645,7 +645,7 @@
   },
   "reset": {
     "description": "Bitte deinstallieren Sie die App auf Ihrem Telefon und installieren Sie sie anschließend neu, um die Daten von Ledger Live, einschließlich Konten und Einstellungen, zu löschen.",
-    "button": "Reset"
+    "button": "Zurücksetzen"
   },
   "graph": {
     "week": "1 W",
@@ -1308,10 +1308,10 @@
       "UNBOND": "Ungebunden",
       "REWARD_PAYOUT": "Prämie",
       "SLASH": "Slash-Strafe",
-      "WITHDRAW_UNBONDED": "Withdrawal",
+      "WITHDRAW_UNBONDED": "Abhebung",
       "NOMINATE": "Nominierung",
       "CHILL": "Nominierungen löschen",
-      "SET_CONTROLLER": "Set controller"
+      "SET_CONTROLLER": "Controller einstellen"
     }
   },
   "operationDetails": {
@@ -1323,8 +1323,8 @@
     "failed": "Fehlgeschlagen",
     "fees": "Netzwerk-Gebühren",
     "noFees": "Keine Gebühr",
-    "from": "From",
-    "to": "To",
+    "from": "Von",
+    "to": "An",
     "identifier": "Transaktions-ID",
     "viewOperation": "Ansicht im Explorer",
     "whatIsThis": "Was ist diese Aktion?",
@@ -1445,7 +1445,7 @@
         "title": "Währung"
       },
       "endpointConfig": {
-        "title": "Node",
+        "title": "Knoten",
         "desc": "Der zu verwendende API Knoten"
       },
       "delete": {
@@ -1570,7 +1570,7 @@
       "desc": "Folgen Sie uns"
     },
     "github": {
-      "title": "Github",
+      "title": "GitHub",
       "desc": "Überprüfen Sie unseren Code"
     },
     "status": {
@@ -1590,7 +1590,7 @@
       "languageDesc": "Stellen Sie die in Ledger Live angezeigte Sprache ein.",
       "password": "Passwort-Sperre",
       "passwordDesc": "Legen Sie ein Passwort fest, um die Ledger Live-Daten auf Ihrem Telefon zu schützen.",
-      "counterValue": "Preferred currency",
+      "counterValue": "Bevorzugte Währung",
       "theme": "Thema",
       "themeDesc": "App-UI-Thema festlegen",
       "themes": {
@@ -1789,65 +1789,65 @@
         "disclaimer": "Tauschen Sie Krypto direkt von Ihrem Ledger-Gerät aus. Dieser Service ist in einigen Ländern, einschließlich den USA, nicht verfügbar."
       },
       "unauthorizedRates": {
-        "cta": "Reset verification",
-        "banner": "Reset your KYC and update Live to swap with Wyre.",
-        "bannerCTA": "Reset KYC"
+        "cta": "Verifizierung zurücksetzen",
+        "banner": "Setzen Sie Ihr KYC zurück und aktualisieren Sie Live, um mit Wyre zu tauschen.",
+        "bannerCTA": "KYC zurücksetzen"
       },
       "main": {
         "header": "Tauschen"
       },
       "kyc": {
         "disclaimer": "Ich erkenne an, dass meine Standortdaten zu Compliance-Zwecken an Dritte weitergegeben werden.",
-        "cta": "Continue",
+        "cta": "Weiter",
         "wyre": {
-          "title": "Complete your KYC",
-          "subtitle": "Your information is collected by LEDGER on behalf of and transferred to WYRE for KYC purposes. For more information, please check our Privacy Policy",
+          "title": "Vervollständigen Sie Ihr KYC",
+          "subtitle": "Ihre Daten werden von LEDGER im Auftrag von WYRE gesammelt und zu KYC-Zwecken an WYRE übertragen. Für weitere Informationen lesen Sie bitte unsere Datenschutzrichtlinie",
           "pending": {
-            "cta": "Continue",
-            "title": "KYC submitted for approval",
-            "subtitle": "Your KYC has been submitted and is pending approval.",
-            "link": "Learn more about KYC"
+            "cta": "Weiter",
+            "title": "KYC zur Genehmigung eingereicht",
+            "subtitle": "Ihr KYC wurde eingereicht und wartet auf die Genehmigung.",
+            "link": "Erfahren Sie mehr über KYC"
           },
           "approved": {
-            "cta": "Continue",
-            "title": "KYC approved!",
-            "subtitle": "Your KYC has been submitted and has been approved.",
-            "link": "Learn more about KYC"
+            "cta": "Weiter",
+            "title": "KYC genehmigt!",
+            "subtitle": "Ihr KYC wurde eingereicht und ist genehmigt worden.",
+            "link": "Erfahren Sie mehr über KYC"
           },
           "closed": {
-            "cta": "Reset KYC",
-            "title": "KYC application rejected",
-            "subtitle": "Wyre rejected the data you provided for KYC purposes",
-            "link": "Learn more about KYC"
+            "cta": "KYC zurücksetzen",
+            "title": "KYC-Antrag abgelehnt",
+            "subtitle": "Wyre hat die von Ihnen für KYC-Zwecke angegebenen Daten abgelehnt",
+            "link": "Erfahren Sie mehr über KYC"
           },
           "form": {
-            "firstName": "First Name",
-            "lastName": "Last Name",
-            "street1": "Street Address Line 1",
-            "street2": "Street Address Line 2",
-            "city": "City",
-            "state": "State",
-            "country": "Country",
-            "postalCode": "Zip Code",
-            "dateOfBirth": "Date of birth",
-            "firstNamePlaceholder": "Enter your first name",
-            "lastNamePlaceholder": "Enter your last name",
-            "street1Placeholder": "Eg. 13, Maple street",
-            "street2Placeholder": "Eg. 13, Maple street",
-            "cityPlaceholder": "Eg. San José",
-            "postalCodePlaceholder": "Enter your 5 digit Zip code",
-            "statePlaceholder": "Select your state",
-            "dateOfBirthPlaceholder": "YYYY-MM-DD",
-            "firstNameError": "Enter your first name to continue",
-            "lastNameError": "Enter your last name to continue",
-            "street1Error": "Enter your address",
-            "cityError": "Enter the city you live in the USA",
-            "stateError": "Select your state to continue",
-            "postalCodeError": "Enter a valid US ZIP code",
-            "dateOfBirthError": "Enter your date of birth"
+            "firstName": "Vorname",
+            "lastName": "Nachname",
+            "street1": "Straße Adresse Zeile 1",
+            "street2": "Straße Adresse Zeile 2",
+            "city": "Stadt",
+            "state": "Bundesland",
+            "country": "Land",
+            "postalCode": "Postleitzahl",
+            "dateOfBirth": "Geburtsdatum",
+            "firstNamePlaceholder": "Geben Sie Ihren Vornamen ein",
+            "lastNamePlaceholder": "Geben Sie Ihren Nachnamen ein",
+            "street1Placeholder": "z. B. Musterstraße 21",
+            "street2Placeholder": "z. B. Musterstraße 21",
+            "cityPlaceholder": "z. B. Berlin",
+            "postalCodePlaceholder": "Geben Sie Ihre 5-stellige Postleitzahl ein",
+            "statePlaceholder": "Wählen Sie Ihr Bundesland",
+            "dateOfBirthPlaceholder": "JJJJ-MM-TT",
+            "firstNameError": "Geben Sie Ihren Vornamen ein, um fortzufahren",
+            "lastNameError": "Geben Sie Ihren Nachnamen ein, um fortzufahren",
+            "street1Error": "Geben Sie Ihre Adresse ein",
+            "cityError": "Geben Sie die Stadt ein, in der Sie in den USA leben",
+            "stateError": "Wählen Sie Ihr Bundesland, um fortzufahren",
+            "postalCodeError": "Geben Sie eine gültige US-Postleitzahl ein",
+            "dateOfBirthError": "Geben Sie Ihr Geburtsdatum ein"
           }
         },
-        "states": "Select your state"
+        "states": "Wählen Sie Ihr Bundesland"
       },
       "notAvailable": {
         "title": "Dienst vorübergehend nicht verfügbar oder in Ihrem Land nicht verfügbar"
@@ -1914,12 +1914,12 @@
           "payoutNetworkFeesTooltip": "Dieser Betrag wird nicht auf Ihrem Gerät angezeigt",
           "receive": "Betrag",
           "receiveFloat": "Zu erhaltender Betrag vor Servicegebühren",
-          "provider": "Provider",
+          "provider": "Anbieter",
           "method": "Kurs",
           "fees": "Max. Gebühren",
           "disclaimer": {
             "title": "Allgemeine Geschäftsbedingungen",
-            "desc": "By clicking “Accept”,  I acknowledge and accept that this service is exclusively governed by <0>{{provider}}</0>'s Terms & Conditions.",
+            "desc": "Indem ich auf \"Akzeptieren\" klicke, erkenne ich an und akzeptiere, dass für diesen Dienst ausschließlich die Allgemeinen Geschäftsbedingungen von <0>{{provider}}</0> gelten.",
             "tos": "Allgemeine Geschäftsbedingungen",
             "accept": "Akzeptieren",
             "reject": "Schließen"
@@ -3216,7 +3216,7 @@
       "header": "Nominierungen",
       "nominate": "Nominieren",
       "chill": "Nominierungen löschen",
-      "setController": "Change controller",
+      "setController": "Controller ändern",
       "status": "Status",
       "totalStake": "Gesamt-Einsatz",
       "amount": "Gebundener Betrag",
@@ -3237,8 +3237,8 @@
       "oversubscribed": "Überzeichnet ({{nominatorsCount}})",
       "oversubscribedInfo": "Nur die besten {{maxNominatorRewardedPerValidator}} Nominatoren mit dem höchsten gebundenen Betrag erhalten Prämien",
       "hasPendingBondOperation": "Eine Anleiheoperation ist noch nicht bestätigt",
-      "externalControllerUnsupported": "This stash account is controlled by a separate account whose address is <0>{{controllerAddress}}</0>. To stake with Ledger Live, you must set this stash account as its own controller.",
-      "externalStashUnsupported": "This account is the controller of a separate stash account whose address is <0>{{stashAddress}}</0>. To stake with Ledger Live, you must set your stash account as its own controller.",
+      "externalControllerUnsupported": "Dieses Stash-Konto wird von einem separaten Konto gesteuert, dessen Adresse <0>{{controllerAddress}}</0> ist. Um mit Ledger Live zu staken, müssen Sie dieses Stash-Konto als eigenen Controller einstellen.",
+      "externalStashUnsupported": "Dieses Konto ist der Controller eines separaten Stash-Kontos, dessen Adresse <0>{{stashAddress}}</0> ist. Um mit Ledger Live zu staken, müssen Sie Ihr Stash-Konto als eigenen Controller einstellen.",
       "showInactiveNominations": "Alle Nominierungen anzeigen ({{count}})",
       "hideInactiveNominations": "Nur aktive Nominierungen anzeigen",
       "noActiveNominations": "Es sind keine aktiven Nominierungen vorhanden.",
@@ -3407,9 +3407,9 @@
           "info": "Gebundene Werte bleiben gebunden. Wenn Sie die Bindung aufheben, sind sie nach 28 Tagen wieder verfügbar."
         },
         "setController": {
-          "title": "Change Controller",
-          "description": "Set your Ledger account as its own controller",
-          "info": "Ledger Live doesn't support operations on separate stash and controller accounts."
+          "title": "Controller ändern",
+          "description": "Legen Sie Ihr Ledger-Konto als eigenen Controller fest",
+          "info": "Ledger Live unterstützt keine Aktionen auf getrennten Stash- und Controller-Konten."
         }
       },
       "stepperHeader": {
@@ -3674,15 +3674,15 @@
       }
     },
     "disclaimer": {
-      "title": "External Application",
-      "description": "You are about to be redirected to an application not operated by Ledger.",
-      "legalAdvice": "This application is not operated by Ledger. Ledger is not responsible for any loss of funds or quality of service of such application.\n\nAlways make sure to carefully verify the information displayed on your device.",
-      "checkbox": "Do not remind me again.",
-      "CTA": "Continue"
+      "title": "Externe Anwendung",
+      "description": "Sie werden gleich zu einer Anwendung weitergeleitet, die nicht von Ledger betrieben wird.",
+      "legalAdvice": "Diese Anwendung wird nicht von Ledger betrieben. Ledger ist nicht verantwortlich für den Verlust von Geldern oder die Qualität des Dienstes einer solchen Anwendung. Achten Sie immer darauf, die auf Ihrem Gerät angezeigten Informationen sorgfältig zu überprüfen.",
+      "checkbox": "Nicht erneut erinnern.",
+      "CTA": "Weiter"
     },
     "webPlatformPlayer": {
       "infoPanel": {
-        "website": "website"
+        "website": "Webseite"
       }
     }
   }
