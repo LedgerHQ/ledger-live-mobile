@@ -8,13 +8,16 @@ type Props = {
   progress?: number;
 
   // function triggered when pressing the loader
-  onPress: () => void;
+  onPress?: () => void;
 
   // Display the square in the middle of the loader
   displayCancelIcon?: boolean;
 };
 
-const R = 25;
+const radius = 25;
+const strokeWidth = 2;
+const normalizedRadius = radius - strokeWidth / 2;
+const circumference = normalizedRadius * 2 * Math.PI;
 
 const ProgressLoader = ({
   progress = 0,
@@ -25,12 +28,9 @@ const ProgressLoader = ({
   const backgroundColor = colors.palette.primary.backgroundLight;
   const progressColor = colors.palette.primary.dark;
 
-  const strokeWidth = 4;
-  const normalizedRadius = R - strokeWidth / 2;
-  const circumference = normalizedRadius * 2 * Math.PI;
   const strokeDashoffset = circumference - progress * circumference;
   return (
-    <TouchableOpacity onPress={onPress}>
+    <TouchableOpacity disabled={!onPress} {...{onPress} }>
       <Svg width="50" height="50">
         <Circle
           cx={25}
@@ -39,7 +39,7 @@ const ProgressLoader = ({
           fill="transparent"
           stroke={backgroundColor}
           strokeDashoffset={0}
-          strokeWidth={4}
+          strokeWidth={strokeWidth}
         />
         <G transform={{ rotation: -90, originX: 25, originY: 25 }}>
           <Circle
@@ -48,7 +48,7 @@ const ProgressLoader = ({
             r={23}
             fill="transparent"
             stroke={progressColor}
-            strokeWidth={4}
+            strokeWidth={strokeWidth}
             strokeDasharray={circumference + " " + circumference}
             strokeDashoffset={strokeDashoffset}
           />

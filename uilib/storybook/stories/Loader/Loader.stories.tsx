@@ -8,6 +8,6 @@ storiesOf('Loader', module)
   .addDecorator(withKnobs)
   .addDecorator(getStory => <CenterView>{getStory()}</CenterView>)
   .add('default', () => (
-    <Loader progress={number('progress', 20)} displayCancelIcon={boolean('displayCancelIcon', true)} onPress={() => console.log('test')}>
+    <Loader progress={number('progress', 0.2)} onPress={boolean('clickable', true) ? () => console.log('click') : undefined}  displayCancelIcon={boolean('displayCancelIcon', true)}>
     </Loader>
   ));
