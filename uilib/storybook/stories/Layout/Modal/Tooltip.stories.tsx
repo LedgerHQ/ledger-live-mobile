@@ -2,8 +2,8 @@ import React, { useState, useCallback } from "react";
 import { storiesOf } from "@storybook/react-native";
 import { withKnobs, text, button } from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
-import Tooltip from "../../../../src/components/Layout/Modal/Tooltip";
-import Text from "../../../../src/components/Text";
+import Tooltip from "@components/Layout/Modal/Tooltip";
+import Text from "@components/Text";
 import CenterView from "../../CenterView";
 
 const TooltipStory = () => {
