@@ -3,36 +3,17 @@ import ReactNativeModal from "react-native-modal";
 import styled from "styled-components/native";
 
 import sizes from "@ui/helpers/getDeviceSize";
-import Button from "@ui/components/Button";
-import Close from "@ui/icons/Close";
+import { ModalProps } from "@components/Layout/Modal";
 
 const { width, height } = sizes;
 
-export type ModalProps = {
-  isOpen?: boolean;
-  onClose?: () => void;
-  style?: Record<string, unknown>;
-  containerStyle?: Record<string, unknown>;
-  preventBackdropClick?: boolean;
-  children: React.ReactNode;
-};
-
 const Container = styled.View`
-  flex: 1;
   background-color: ${(p) => p.theme.colors.palette.background.default};
 `;
 
 const ContentContainer = styled.View`
-  flex: 1;
-  padding: ${(p) => p.theme.space[2]}px;
-`;
-
-const Header = styled.View`
-  height: ${(p) => p.theme.space[6]}px;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-end;
-  padding: ${(p) => p.theme.space[2]}px;
+  padding-horizontal: ${(p) => p.theme.space[3]}px;
+  padding-vertical: ${(p) => p.theme.space[6]}px;
 `;
 
 const modalStyle = {
@@ -41,7 +22,7 @@ const modalStyle = {
   margin: 0,
 };
 
-export default function Modal({
+export default function Tooltip({
   isOpen,
   onClose = () => {},
   containerStyle,
@@ -55,6 +36,7 @@ export default function Modal({
     : {
         onBackdropPress: onClose,
         onBackButtonPress: onClose,
+        onSwipeComplete: onClose,
       };
 
   return (
@@ -69,12 +51,12 @@ export default function Modal({
       useNativeDriver
       hideModalContentWhileAnimating
       onModalHide={onClose}
+      useNativeDriverForBackdrop
+      swipeDirection={["down"]}
+      propagateSwipe={true}
       style={[modalStyle, style || {}]}
     >
       <Container style={containerStyle}>
-        <Header>
-          <Button Icon={Close} onPress={onClose} />
-        </Header>
         <ContentContainer>{children}</ContentContainer>
       </Container>
     </ReactNativeModal>

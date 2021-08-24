@@ -2,9 +2,9 @@ import React, { useState, useCallback } from "react";
 import { storiesOf } from "@storybook/react-native";
 import { withKnobs, text, button } from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
-import Modal from "@components/Layout/Modal";
-import Text from "@components/Text";
-import CenterView from "../CenterView";
+import Modal from "../../../../src/components/Layout/Modal";
+import Text from "../../../../src/components/Text";
+import CenterView from "../../CenterView";
 
 const ModalStory = () => {
   const [isOpen, setIsOpen] = useState(true);
