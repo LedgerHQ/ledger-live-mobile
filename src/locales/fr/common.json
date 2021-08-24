@@ -50,7 +50,7 @@
     "subaccount_plural": "Sous-comptes",
     "forgetDevice": "Retirer l'appareil",
     "help": "Aide",
-    "saveLogs": "Sauvegarder les logs",
+    "saveLogs": "Enregistrer les logs",
     "sync": {
       "ago": "Synchronisé {{time}}"
     },
@@ -1689,8 +1689,8 @@
       "clearCacheModal": "Êtes-vous sûr(e) ?",
       "clearCacheModalDesc": "Une nouvelle analyse complète des transactions sur le réseau sera effectuée. L'historique des comptes sera reconstruit et les soldes seront recalculés.",
       "clearCacheButton": "Effacer",
-      "exportLogs": "Save logs",
-      "exportLogsDesc": "Saving Ledger Live logs may be needed for troubleshooting purposes.",
+      "exportLogs": "Enregistrer les logs",
+      "exportLogsDesc": "Sauvegarder les logs de Ledger Live peut être nécessaire à des fins de dépannage.",
       "hardReset": "Réinitialiser Ledger Live",
       "hardResetDesc": "Sans effet sur vos actifs. Toutes les données de Ledger Live, y compris les données de comptes, l'historique de vos transactions et paramètres seront effacées. Utilisez votre appareil Ledger pour recharger et gérer vos crypto-actifs dans une app Ledger Live vierge.",
       "repairDevice": "Réparer votre appareil Ledger",
