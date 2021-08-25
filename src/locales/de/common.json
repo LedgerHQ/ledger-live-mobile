@@ -1689,7 +1689,7 @@
       "clearCacheModal": "Sind Sie sicher?",
       "clearCacheModalDesc": "Es wird ein neuer und vollständiger Scan der Transaktionen im Netzwerk durchgeführt. Die Kontoverläufe werden neu aufgebaut und die Salden werden neu berechnet.",
       "clearCacheButton": "Leeren",
-      "exportLogs": "Save logs",
+      "exportLogs": "Protokolle speichern",
       "exportLogsDesc": "Saving Ledger Live logs may be needed for troubleshooting purposes.",
       "hardReset": "Ledger Live zurücksetzen",
       "hardResetDesc": "Dies hat keine Auswirkung auf Ihre Vermögenswerte. Löscht alle Daten in Ledger Live, einschließlich Kontodaten, Transaktionsverläufe und Einstellungen. Verwenden Sie Ihr Ledger-Gerät, um Ihre Krypto-Vermögenswerte auf einem leeren Ledger Live neu zu laden und zu verwalten.",
