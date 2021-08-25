@@ -29,6 +29,32 @@ type Props = {
   subMagnitude?: number,
 };
 
+export const NoCountervaluePlaceholder = () => {
+  const { colors } = useTheme();
+  const [modalOpened, setModalOpened] = useState(false);
+  const openModal = useCallback(() => setModalOpened(true), []);
+  const closeModal = useCallback(() => setModalOpened(false), []);
+
+  return (
+    <TouchableOpacity style={styles.placeholderButton} onPress={openModal}>
+      <LText style={styles.placeholderLabel}>-</LText>
+      <BottomModal
+        isOpened={modalOpened}
+        onClose={closeModal}
+        style={[styles.modal]}
+      >
+        <Circle bg={colors.lightLive} size={70}>
+          <IconHelp size={30} color={colors.live} />
+        </Circle>
+
+        <LText style={styles.modalTitle} semiBold>
+          <Trans i18nKey="errors.countervaluesUnavailable.title" />
+        </LText>
+      </BottomModal>
+    </TouchableOpacity>
+  );
+};
+
 export default function CounterValue({
   value: valueProp,
   date,
@@ -38,7 +64,6 @@ export default function CounterValue({
   currency,
   ...props
 }: Props) {
-  const { colors } = useTheme();
   const value =
     valueProp instanceof BigNumber ? valueProp.toNumber() : valueProp;
   const counterValueCurrency = useSelector(counterValueCurrencySelector);
@@ -50,29 +75,8 @@ export default function CounterValue({
     date,
   });
 
-  const [modalOpened, setModalOpened] = useState(false);
-  const openModal = useCallback(() => setModalOpened(true), []);
-  const closeModal = useCallback(() => setModalOpened(false), []);
-
   if (typeof countervalue !== "number") {
-    return withPlaceholder ? (
-      <TouchableOpacity style={styles.placeholderButton} onPress={openModal}>
-        <LText style={styles.placeholderLabel}>-</LText>
-        <BottomModal
-          isOpened={modalOpened}
-          onClose={closeModal}
-          style={[styles.modal]}
-        >
-          <Circle bg={colors.lightLive} size={70}>
-            <IconHelp size={30} color={colors.live} />
-          </Circle>
-
-          <LText style={styles.modalTitle} semiBold>
-            <Trans i18nKey="errors.countervaluesUnavailable.title" />
-          </LText>
-        </BottomModal>
-      </TouchableOpacity>
-    ) : null;
+    return withPlaceholder ? <NoCountervaluePlaceholder /> : null;
   }
 
   const inner = (
