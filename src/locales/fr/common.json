@@ -3540,9 +3540,9 @@
     "title": "Conditions d'utilisation",
     "read": "Lire les Conditions d'utilisation",
     "switchLabel": "J'ai lu et accepte les <1>Conditions d'utilisation</1>.",
-    "switchLabelFull": "I have read and accept the Terms of Service and Privacy Policy",
+    "switchLabelFull": "J'ai lu et accepte les Conditions d'utilisation et la Politique de confidentialité",
     "cta": "Entrer dans Ledger Live",
-    "service": "Terms of service"
+    "service": "Conditions d'utilisation"
   },
   "exchange": {
     "buy": {
