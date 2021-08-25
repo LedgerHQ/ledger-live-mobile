@@ -3539,9 +3539,10 @@
   "Terms": {
     "title": "Nutzungsbedingungen",
     "read": "Lesen Sie die Nutzungsbedingungen",
-    "switchLabelPrivacy": "Ich habe die <1>Datenschutzrichtlinie</1> gelesen und bin damit einverstanden",
     "switchLabel": "Ich habe die <1>Nutzungsbedingungen</1> gelesen und bin damit einverstanden",
-    "cta": "Zur Ledger-App"
+    "switchLabelFull": "I have read and accept the Terms of Service and Privacy Policy",
+    "cta": "Zur Ledger-App",
+    "service": "Terms of service"
   },
   "exchange": {
     "buy": {
