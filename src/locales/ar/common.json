@@ -3539,9 +3539,10 @@
   "Terms": {
     "title": "شروط الاستخدام",
     "read": "قراءة شروط الاستخدام",
-    "switchLabelPrivacy": "لقد قرأت ووافقت على <1>سياسة الخصوصية</1>",
     "switchLabel": "لقد قرأت ووافقت على <1>شروط الخدمة</1>",
-    "cta": "دخول تطبيق Ledger"
+    "switchLabelFull": "I have read and accept the Terms of Service and Privacy Policy",
+    "cta": "دخول تطبيق Ledger",
+    "service": "Terms of service"
   },
   "exchange": {
     "buy": {
