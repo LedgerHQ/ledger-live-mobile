@@ -3539,9 +3539,10 @@
   "Terms": {
     "title": "Условия использования",
     "read": "Прочитать Условия использования",
-    "switchLabelPrivacy": "Подтверждаю, что прочитал(-а) и принимаю <1>Политику конфиденциальности</1>",
     "switchLabel": "Я прочитал(-а) и принимаю <1>Условия использования</1>",
-    "cta": "Перейти в приложение Ledger"
+    "switchLabelFull": "I have read and accept the Terms of Service and Privacy Policy",
+    "cta": "Перейти в приложение Ledger",
+    "service": "Terms of service"
   },
   "exchange": {
     "buy": {
