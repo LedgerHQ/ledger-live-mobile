@@ -87,16 +87,16 @@ const Button = ({
   const [spinnerOn, setSpinnerOn] = useState(false);
   const theme = useTheme();
   const { color } = getButtonColor({ ...props, theme });
+
   const onPressHandler = useCallback(async () => {
     if (!onPress) return;
     let isPromise;
     try {
-      const res = onPress();
-      isPromise = !!res && !!res.then;
+      const result = onPress();
+      isPromise = !!result && !!result.then;
       if (isPromise) {
-        // it's a promise, we will use pending state
         setSpinnerOn(true);
-        await res;
+        await result;
       }
     } finally {
       if (isPromise) {
