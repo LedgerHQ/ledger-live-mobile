@@ -30,7 +30,7 @@ const ProgressLoader = ({
 
   const strokeDashoffset = circumference - progress * circumference;
   return (
-    <TouchableOpacity disabled={!onPress} onPress={onPress}  >
+    <TouchableOpacity disabled={!onPress} onPress={onPress}>
       <Svg width="50" height="50">
         <Circle
           cx={25}
