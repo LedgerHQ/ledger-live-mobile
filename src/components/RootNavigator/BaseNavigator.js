@@ -111,7 +111,12 @@ export default function BaseNavigator() {
       <Stack.Screen
         name={NavigatorName.Swap}
         component={SwapNavigator}
-        options={{ headerShown: false }}
+        options={{
+          ...stackNavigationConfig,
+          headerStyle: styles.headerNoShadow,
+          headerLeft: null,
+          title: t("transfer.swap.exchange"),
+        }}
       />
       <Stack.Screen
         name={NavigatorName.Lending}

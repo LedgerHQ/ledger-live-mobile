@@ -2,6 +2,7 @@
 
 import React, { useMemo } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "@react-navigation/native";
 import useEnv from "@ledgerhq/live-common/lib/hooks/useEnv";
@@ -13,7 +14,7 @@ import SwapFormAmount from "../../screens/Swap/FormOrHistory/Form/Amount";
 import SwapKYC from "../../screens/Swap/KYC";
 import SwapKYCStates from "../../screens/Swap/KYC/StateSelect";
 import Swap from "../../screens/Swap";
-import Swap2 from "../../screens/Swap2";
+import SwapFormNavigator from "./SwapFormNavigator";
 import SwapOperationDetails from "../../screens/Swap/FormOrHistory/OperationDetails";
 import { BackButton } from "../../screens/OperationDetails";
 import SwapPendingOperation from "../../screens/Swap/FormOrHistory/Form/PendingOperation";
@@ -22,11 +23,18 @@ import SwapFormSelectAccount from "../../screens/Swap/FormOrHistory/Form/SelectA
 import { getStackNavigatorConfig } from "../../navigation/navigatorConfig";
 import styles from "../../navigation/styles";
 import StepHeader from "../StepHeader";
+import LText from "../LText";
+import History from "../../screens/Swap/FormOrHistory/History";
+
+type TabLabelProps = {
+  focused: boolean,
+  color: string,
+};
 
 export default function SwapNavigator() {
   const { t } = useTranslation();
   const { colors } = useTheme();
-  const isSwapV2Enabled = useEnv("EXPERIMENTAL_SWAP") && __DEV__;
+  const isSwapV2Enabled = __DEV__;
   const stackNavigationConfig = useMemo(
     () => getStackNavigatorConfig(colors, true),
     [colors],
@@ -34,21 +42,47 @@ export default function SwapNavigator() {
 
   if (isSwapV2Enabled) {
     return (
-      <Stack.Navigator screenOptions={stackNavigationConfig}>
-        <Stack.Screen
+      <Tab.Navigator
+        tabBarOptions={{
+          headerStyle: styles.headerNoShadow,
+          indicatorStyle: {
+            backgroundColor: colors.live,
+          },
+        }}
+      >
+        <Tab.Screen
           name={ScreenName.Swap}
-          component={Swap2}
+          component={SwapFormNavigator}
           options={{
-            headerStyle: styles.headerNoShadow,
-            title: t("transfer.swap.landing.header"),
+            title: t("transfer.swap.form.tab"),
+            tabBarLabel: ({ focused, color }: TabLabelProps) => (
+              /** width has to be a little bigger to accomodate the switch in size between semibold to regular */
+              <LText style={{ width: "110%", color }} semiBold={focused}>
+                {t("transfer.swap.form.tab")}
+              </LText>
+            ),
           }}
         />
-      </Stack.Navigator>
+        <Tab.Screen
+          name={ScreenName.SwapHistory}
+          component={History}
+          options={{
+            title: t("exchange.buy.tabTitle"),
+            tabBarLabel: ({ focused, color }: TabLabelProps) => (
+              <LText style={{ width: "110%", color }} semiBold={focused}>
+                {t("transfer.swap.history.tab")}
+              </LText>
+            ),
+          }}
+        />
+      </Tab.Navigator>
     );
   }
 
   return (
-    <Stack.Navigator screenOptions={stackNavigationConfig}>
+    <Stack.Navigator
+      screenOptions={{ ...stackNavigationConfig, headerShown: false }}
+    >
       <Stack.Screen
         name={ScreenName.Swap}
         component={Swap}
@@ -144,4 +178,5 @@ export default function SwapNavigator() {
   );
 }
 
+const Tab = createMaterialTopTabNavigator();
 const Stack = createStackNavigator();
