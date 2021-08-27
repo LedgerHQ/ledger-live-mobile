@@ -1,7 +1,13 @@
 /* @flow */
 
 import React, { useCallback, useMemo } from "react";
-import { View, StyleSheet, FlatList, SafeAreaView } from "react-native";
+import {
+  View,
+  StyleSheet,
+  FlatList,
+  SafeAreaView,
+  TouchableOpacity,
+} from "react-native";
 import { useSelector } from "react-redux";
 import { Trans } from "react-i18next";
 import { useTheme } from "@react-navigation/native";
@@ -15,18 +21,18 @@ import {
   flattenAccounts,
 } from "@ledgerhq/live-common/lib/account/helpers";
 
-import type { SearchResult } from "../../../../../helpers/formatAccountSearchResults";
-import { accountsSelector } from "../../../../../reducers/accounts";
-import NoAccountsEmptyState from "./NoAccountsEmptyState";
-import { TrackScreen } from "../../../../../analytics";
-import LText from "../../../../../components/LText";
-import FilteredSearchBar from "../../../../../components/FilteredSearchBar";
-import AccountCard from "../../../../../components/AccountCard";
-import KeyboardView from "../../../../../components/KeyboardView";
-import { formatSearchResults } from "../../../../../helpers/formatAccountSearchResults";
-import { ScreenName } from "../../../../../const";
+import type { SearchResult } from "../../../helpers/formatAccountSearchResults";
+import { accountsSelector } from "../../../reducers/accounts";
+import { TrackScreen } from "../../../analytics";
+import LText from "../../../components/LText";
+import FilteredSearchBar from "../../../components/FilteredSearchBar";
+import AccountCard from "../../../components/AccountCard";
+import KeyboardView from "../../../components/KeyboardView";
+import { formatSearchResults } from "../../../helpers/formatAccountSearchResults";
+import { NavigatorName, ScreenName } from "../../../const";
 
 import type { SwapRouteParams } from "..";
+import AddIcon from "../../../icons/Plus";
 
 const SEARCH_KEYS = ["name", "unit.code", "token.name", "token.ticker"];
 
@@ -39,24 +45,13 @@ type Props = {
 
 export default function SelectAccount({ navigation, route }: Props) {
   const { colors } = useTheme();
-  const { exchange, target, selectedCurrency } = route.params;
+  const { exchange, target } = route.params;
   const accounts = useSelector(accountsSelector);
 
-  const enhancedAccounts = useMemo(() => {
-    const filteredAccounts = accounts.filter(
-      acc =>
-        acc.currency.id ===
-        (selectedCurrency.type === "TokenCurrency"
-          ? selectedCurrency.parentCurrency.id
-          : selectedCurrency.id),
-    );
-    if (selectedCurrency.type === "TokenCurrency") {
-      return filteredAccounts.map(acc =>
-        accountWithMandatoryTokens(acc, [selectedCurrency]),
-      );
-    }
-    return filteredAccounts;
-  }, [accounts, selectedCurrency]);
+  const enhancedAccounts = useMemo(
+    () => accounts.map(acc => accountWithMandatoryTokens(acc, [])),
+    [accounts],
+  );
 
   const allAccounts = flattenAccounts(enhancedAccounts);
 
@@ -108,15 +103,24 @@ export default function SelectAccount({ navigation, route }: Props) {
     [accounts, isFrom, colors.fog, navigation, route.params, exchange],
   );
 
-  const elligibleAccountsForSelectedCurrency = allAccounts.filter(
-    account =>
-      (isFrom ? account.balance.gt(0) : true) &&
-      (account.type === "TokenAccount"
-        ? account.token.id
-        : account.currency.id) === selectedCurrency.id,
+  const elligibleAccountsForSelectedCurrency = allAccounts.filter(account =>
+    isFrom
+      ? account.balance.gt(0) && exchange?.toAccount?.id !== account.id
+      : exchange?.fromAccount?.id !== account.id,
   );
 
-  console.log(allAccounts, elligibleAccountsForSelectedCurrency);
+  const onAddAccount = useCallback(() => {
+    navigation.navigate(NavigatorName.AddAccounts, {
+      screen: ScreenName.AddAccountsSelectCrypto,
+      params: {
+        returnToSwap: true,
+        onSuccess: () =>
+          navigation.navigate(ScreenName.SwapV2FormSelectAccount, {
+            params: route.params,
+          }),
+      },
+    });
+  }, [navigation, route.params]);
 
   const renderList = useCallback(
     items => {
@@ -129,15 +133,29 @@ export default function SelectAccount({ navigation, route }: Props) {
           keyExtractor={keyExtractor}
           showsVerticalScrollIndicator={false}
           keyboardDismissMode="on-drag"
+          ListFooterComponent={() => (
+            <TouchableOpacity
+              style={styles.buttonContainer}
+              onPress={onAddAccount}
+            >
+              <View
+                style={[
+                  styles.iconContainer,
+                  { backgroundColor: colors.lightLive },
+                ]}
+              >
+                <AddIcon size={14} color={colors.live} />
+              </View>
+              <LText color="live" semiBold style={styles.label}>
+                <Trans i18nKey="transfer.swap.emptyState.CTAButton" />
+              </LText>
+            </TouchableOpacity>
+          )}
         />
       );
     },
-    [enhancedAccounts, renderItem],
+    [colors.lightLive, colors.live, enhancedAccounts, onAddAccount, renderItem],
   );
-
-  if (!elligibleAccountsForSelectedCurrency.length) {
-    return <NoAccountsEmptyState selectedCurrency={selectedCurrency} />;
-  }
 
   return (
     <SafeAreaView style={[styles.root, { backgroundColor: colors.background }]}>
@@ -151,7 +169,7 @@ export default function SelectAccount({ navigation, route }: Props) {
             renderList={renderList}
             renderEmptySearch={() => (
               <View style={styles.emptyResults}>
-                <LText style={styles.emptyText} color="fog">
+                <LText style={styles.label} color="fog">
                   <Trans i18nKey="transfer.receive.noAccount" />
                 </LText>
               </View>
@@ -195,10 +213,26 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  emptyText: {
+  label: {
     fontSize: 16,
+    lineHeight: 19,
   },
   button: {
     flex: 1,
+  },
+  iconContainer: {
+    borderRadius: 26,
+    height: 26,
+    width: 26,
+    justifyContent: "center",
+    alignItems: "center",
+    marginRight: 12,
+  },
+  buttonContainer: {
+    paddingTop: 24,
+    paddingLeft: 16,
+    paddingRight: 16,
+    marginBottom: 24,
+    flexDirection: "row",
   },
 });

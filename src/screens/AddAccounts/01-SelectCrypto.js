@@ -25,6 +25,7 @@ const SEARCH_KEYS = ["name", "ticker"];
 type Props = {
   devMode: boolean,
   navigation: any,
+  route: { params: * },
 };
 
 const keyExtractor = currency => currency.id;
@@ -37,7 +38,7 @@ const renderEmptyList = () => (
   </View>
 );
 
-export default function AddAccountsSelectCrypto({ navigation }: Props) {
+export default function AddAccountsSelectCrypto({ navigation, route }: Props) {
   const { colors } = useTheme();
   const cryptoCurrencies = useMemo(
     () => listSupportedCurrencies().concat(listTokens()),
@@ -47,7 +48,10 @@ export default function AddAccountsSelectCrypto({ navigation }: Props) {
   const sortedCryptoCurrencies = useCurrenciesByMarketcap(cryptoCurrencies);
 
   const onPressCurrency = (currency: CryptoCurrency) => {
-    navigation.navigate(ScreenName.AddAccountsSelectDevice, { currency });
+    navigation.navigate(ScreenName.AddAccountsSelectDevice, {
+      ...(route?.params ?? {}),
+      currency,
+    });
   };
 
   const onPressToken = (token: TokenCurrency) => {

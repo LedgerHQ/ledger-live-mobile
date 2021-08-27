@@ -1882,6 +1882,8 @@
         "button": "Continue",
         "from": "From",
         "to": "To",
+        "source": "Source",
+        "target": "Target",
         "balance": "Balance <0>123</0>",
         "fromAccount": "Select account",
         "toAccount": "Select account",
