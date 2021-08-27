@@ -20,10 +20,16 @@ type Props = {
 
 export default function NotificationsProvider({ children }: Props) {
   const { locale } = useLocale();
-  const c: CryptoCurrency[] = useSelector(cryptoCurrenciesSelector);
+  const currenciesRaw: CryptoCurrency[] = useSelector(cryptoCurrenciesSelector);
   const lastSeenDevice = useSelector(lastSeenDeviceSelector);
-  const currencies = c.map(({ family }) => family);
-  const tickers = c.map(({ ticker }) => ticker);
+
+  const { currencies, tickers } = currenciesRaw.reduce(
+    ({ currencies, tickers }, { id, ticker }) => ({
+      currencies: [...currencies, id],
+      tickers: [...tickers, ticker],
+    }),
+    { currencies: [], tickers: [] },
+  );
   // $FlowFixMe until live-common is bumped
   const { pushToast } = useToasts();
   const initDateRef = useRef();
