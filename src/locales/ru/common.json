@@ -3540,9 +3540,9 @@
     "title": "Условия использования",
     "read": "Прочитать Условия использования",
     "switchLabel": "Я прочитал(-а) и принимаю <1>Условия использования</1>",
-    "switchLabelFull": "I have read and accept the Terms of Service and Privacy Policy",
+    "switchLabelFull": "Я прочитал(-а) и соглашаюсь с Условиями использования и Политикой конфиденциальности",
     "cta": "Перейти в приложение Ledger",
-    "service": "Terms of service"
+    "service": "Условия использования"
   },
   "exchange": {
     "buy": {
