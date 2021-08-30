@@ -1,32 +1,79 @@
 // @flow
 
-import React, { useMemo } from "react";
-import { createStackNavigator } from "@react-navigation/stack";
+import React from "react";
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "@react-navigation/native";
+
+import type {
+  Account,
+  AccountLike,
+} from "@ledgerhq/live-common/lib/types/account";
+
 import { ScreenName } from "../../const";
 import Swap2 from "../../screens/Swap2";
-import { getStackNavigatorConfig } from "../../navigation/navigatorConfig";
+import styles from "../../navigation/styles";
+import LText from "../LText";
+import History from "../../screens/Swap/FormOrHistory/History";
 
-export default function SwapFormNavigator() {
+type TabLabelProps = {
+  focused: boolean,
+  color: string,
+};
+
+type RouteParams = {
+  defaultAccount: ?AccountLike,
+  defaultParentAccount: ?Account,
+  providers: any,
+  provider: string,
+};
+
+export default function SwapFormNavigator({
+  route,
+}: {
+  route: { params: RouteParams },
+}) {
   const { t } = useTranslation();
   const { colors } = useTheme();
-  const stackNavigationConfig = useMemo(
-    () => getStackNavigatorConfig(colors, true),
-    [colors],
-  );
+  const { params: routeParams } = route;
 
   return (
-    <Stack.Navigator screenOptions={stackNavigationConfig}>
-      <Stack.Screen
+    <Tab.Navigator
+      tabBarOptions={{
+        headerStyle: styles.headerNoShadow,
+        indicatorStyle: {
+          backgroundColor: colors.live,
+        },
+      }}
+    >
+      <Tab.Screen
         name={ScreenName.SwapForm}
-        component={Swap2}
         options={{
-          headerShown: false,
+          title: t("transfer.swap.form.tab"),
+          tabBarLabel: ({ focused, color }: TabLabelProps) => (
+            /** width has to be a little bigger to accomodate the switch in size between semibold to regular */
+            <LText style={{ width: "110%", color }} semiBold={focused}>
+              {t("transfer.swap.form.tab")}
+            </LText>
+          ),
+        }}
+      >
+        {_props => <Swap2 {..._props} {...routeParams} />}
+      </Tab.Screen>
+      <Tab.Screen
+        name={ScreenName.SwapHistory}
+        component={History}
+        options={{
+          title: t("exchange.buy.tabTitle"),
+          tabBarLabel: ({ focused, color }: TabLabelProps) => (
+            <LText style={{ width: "110%", color }} semiBold={focused}>
+              {t("transfer.swap.history.tab")}
+            </LText>
+          ),
         }}
       />
-    </Stack.Navigator>
+    </Tab.Navigator>
   );
 }
 
-const Stack = createStackNavigator();
+const Tab = createMaterialTopTabNavigator();

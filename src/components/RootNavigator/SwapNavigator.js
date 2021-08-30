@@ -2,7 +2,7 @@
 
 import React, { useMemo } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+
 import { useTranslation } from "react-i18next";
 import { useTheme } from "@react-navigation/native";
 import useEnv from "@ledgerhq/live-common/lib/hooks/useEnv";
@@ -20,21 +20,15 @@ import { BackButton } from "../../screens/OperationDetails";
 import SwapPendingOperation from "../../screens/Swap/FormOrHistory/Form/PendingOperation";
 import SwapFormSelectCrypto from "../../screens/Swap/FormOrHistory/Form/SelectAccount/01-SelectCrypto";
 import SwapFormSelectAccount from "../../screens/Swap/FormOrHistory/Form/SelectAccount/02-SelectAccount";
+import SwapFormV2SelectAccount from "../../screens/Swap2/FormSelection/SelectAccountScreen";
 import { getStackNavigatorConfig } from "../../navigation/navigatorConfig";
 import styles from "../../navigation/styles";
 import StepHeader from "../StepHeader";
-import LText from "../LText";
-import History from "../../screens/Swap/FormOrHistory/History";
-
-type TabLabelProps = {
-  focused: boolean,
-  color: string,
-};
 
 export default function SwapNavigator() {
   const { t } = useTranslation();
   const { colors } = useTheme();
-  const isSwapV2Enabled = __DEV__;
+  const isSwapV2Enabled = useEnv("EXPERIMENTAL_SWAP") && __DEV__;
   const stackNavigationConfig = useMemo(
     () => getStackNavigatorConfig(colors, true),
     [colors],
@@ -42,40 +36,68 @@ export default function SwapNavigator() {
 
   if (isSwapV2Enabled) {
     return (
-      <Tab.Navigator
-        tabBarOptions={{
-          headerStyle: styles.headerNoShadow,
-          indicatorStyle: {
-            backgroundColor: colors.live,
-          },
-        }}
+      <Stack.Navigator
+        screenOptions={{ ...stackNavigationConfig, headerShown: false }}
       >
-        <Tab.Screen
+        <Stack.Screen
           name={ScreenName.Swap}
+          component={Swap}
+          options={{
+            headerStyle: styles.headerNoShadow,
+            title: t("transfer.swap.landing.header"),
+          }}
+        />
+        <Stack.Screen
+          name={ScreenName.SwapFormOrHistory}
           component={SwapFormNavigator}
           options={{
+            headerStyle: styles.headerNoShadow,
             title: t("transfer.swap.form.tab"),
-            tabBarLabel: ({ focused, color }: TabLabelProps) => (
-              /** width has to be a little bigger to accomodate the switch in size between semibold to regular */
-              <LText style={{ width: "110%", color }} semiBold={focused}>
-                {t("transfer.swap.form.tab")}
-              </LText>
-            ),
           }}
         />
-        <Tab.Screen
-          name={ScreenName.SwapHistory}
-          component={History}
+        <Stack.Screen
+          name={ScreenName.SwapKYC}
+          component={SwapKYC}
           options={{
-            title: t("exchange.buy.tabTitle"),
-            tabBarLabel: ({ focused, color }: TabLabelProps) => (
-              <LText style={{ width: "110%", color }} semiBold={focused}>
-                {t("transfer.swap.history.tab")}
-              </LText>
-            ),
+            headerTitle: () => <StepHeader title={t("transfer.swap.title")} />,
+            headerRight: null,
           }}
         />
-      </Tab.Navigator>
+        <Stack.Screen
+          name={ScreenName.SwapKYCStates}
+          component={SwapKYCStates}
+          options={{
+            headerTitle: () => (
+              <StepHeader title={t("transfer.swap.kyc.states")} />
+            ),
+            headerRight: null,
+          }}
+        />
+        <Stack.Screen
+          name={ScreenName.SwapError}
+          component={SwapError}
+          options={{
+            headerTitle: () => <StepHeader title={t("transfer.swap.title")} />,
+            headerLeft: null,
+          }}
+        />
+        <Stack.Screen
+          name={ScreenName.SwapV2FormSelectAccount}
+          component={SwapFormV2SelectAccount}
+          options={({ route }) => ({
+            headerTitle: () => (
+              <StepHeader
+                title={
+                  route.params.target === "from"
+                    ? t("transfer.swap.form.from")
+                    : t("transfer.swap.form.to")
+                }
+              />
+            ),
+            headerRight: null,
+          })}
+        />
+      </Stack.Navigator>
     );
   }
 
@@ -178,5 +200,4 @@ export default function SwapNavigator() {
   );
 }
 
-const Tab = createMaterialTopTabNavigator();
 const Stack = createStackNavigator();

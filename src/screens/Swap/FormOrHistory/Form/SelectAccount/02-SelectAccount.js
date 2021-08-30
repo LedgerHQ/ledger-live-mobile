@@ -116,8 +116,6 @@ export default function SelectAccount({ navigation, route }: Props) {
         : account.currency.id) === selectedCurrency.id,
   );
 
-  console.log(allAccounts, elligibleAccountsForSelectedCurrency);
-
   const renderList = useCallback(
     items => {
       // $FlowFixMe
