@@ -40,7 +40,7 @@ export const urls = {
   verifyTransactionDetails:
     "https://support.ledger.com/hc/en-us/articles/360006444193?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=tx_device_check",
   erc20:
-    "https://support.ledger.com/hc/en-us/articles/115005197845-Manage-ERC20-tokens?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=receive_erc20",
+    "https://support.ledger.com/hc/en-us/articles/4404389645329-Manage-ERC20-tokens?docs=true?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=receive_erc20",
   errors: {
     PairingFailed:
       "https://support.ledger.com/hc/en-us/articles/360025864773?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=pairing_failed",
