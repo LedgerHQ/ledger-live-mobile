@@ -12,6 +12,17 @@ import { useLocale } from "../../context/Locale";
 import { cryptoCurrenciesSelector } from "../../reducers/accounts";
 import { track } from "../../analytics";
 import { lastSeenDeviceSelector } from "../../reducers/settings";
+import fetchApi from "../../screens/Settings/Debug/__mocks__/announcements";
+import networkApi from "../../screens/Settings/Debug/__mocks__/serviceStatus";
+import Config from "react-native-config";
+
+let notificationsApi;
+let serviceStatusApi;
+
+if (Config.MOCK) {
+  notificationsApi = fetchApi;
+  serviceStatusApi = networkApi;
+}
 
 type Props = {
   children: React$Node,
@@ -117,8 +128,12 @@ export default function NotificationsProvider({ children }: Props) {
       handleSave={onSave}
       onNewAnnouncement={onNewAnnouncement}
       onAnnouncementRead={onAnnouncementRead}
+      fetchApi={notificationsApi}
     >
-      <ServiceStatusProvider autoUpdateDelay={60000}>
+      <ServiceStatusProvider
+        autoUpdateDelay={60000}
+        networkApi={serviceStatusApi}
+      >
         {children}
       </ServiceStatusProvider>
     </AnnouncementProvider>
