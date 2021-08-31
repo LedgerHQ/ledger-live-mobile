@@ -83,6 +83,9 @@
     "buyEth": "Comprar Ethereum"
   },
   "errors": {
+    "countervaluesUnavailable": {
+      "title": "We're not able to provide a countervalue for this asset at the moment"
+    },
     "AccountAwaitingSendPendingOperations": {
       "title": "Hay una operación pendiente para esta cuenta",
       "description": "Espera a que finalice la operación."
