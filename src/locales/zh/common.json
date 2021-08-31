@@ -83,6 +83,9 @@
     "buyEth": "购买以太坊"
   },
   "errors": {
+    "countervaluesUnavailable": {
+      "title": "We're not able to provide a countervalue for this asset at the moment"
+    },
     "AccountAwaitingSendPendingOperations": {
       "title": "此账户有一个待处理的操作",
       "description": "请等待操作完成。"
