@@ -83,6 +83,9 @@
     "buyEth": "شراء إثيريوم"
   },
   "errors": {
+    "countervaluesUnavailable": {
+      "title": "We're not able to provide a countervalue for this asset at the moment"
+    },
     "AccountAwaitingSendPendingOperations": {
       "title": "هناك عملية معلقة لهذا الحساب",
       "description": "يرجى الانتظار حتى تكتمل العملية."
