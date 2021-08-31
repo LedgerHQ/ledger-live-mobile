@@ -1,6 +1,6 @@
 // @flow
 import React, { useCallback, useMemo, useEffect, useState } from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, ActivityIndicator } from "react-native";
 import type {
   Exchange,
   SwapTransaction,
@@ -8,7 +8,6 @@ import type {
 
 import {
   getAccountUnit,
-  getAccountCurrency,
 } from "@ledgerhq/live-common/lib/account";
 
 import { Trans } from "react-i18next";
@@ -31,6 +30,7 @@ import CurrencyUnitValue from "../../../components/CurrencyUnitValue";
 import TranslatedError from "../../../components/TranslatedError";
 import getFontStyle from "../../../components/LText/getFontStyle";
 import CounterValue from "../../../components/CounterValue";
+import CurrencyTargetSelect from "./CurrencyTargetSelect";
 
 type Props = {
   navigation: *,
@@ -41,6 +41,7 @@ type Props = {
   status?: *,
   bridgePending: boolean,
   provider: any,
+  providers: any,
 };
 
 export default function AccountAmountRow({
@@ -52,6 +53,7 @@ export default function AccountAmountRow({
   status,
   bridgePending,
   provider,
+  providers,
 }: Props) {
   const { colors } = useTheme();
   const { fromAccount, fromParentAccount, toAccount } = exchange;
@@ -63,6 +65,7 @@ export default function AccountAmountRow({
   const [rate, setRate] = useState(null);
   // eslint-disable-next-line no-unused-vars
   const [rateExpiration, setRateExpiration] = useState(null);
+  const [fetchingRate, setFetchingRate] = useState(false);
 
   const onAmountChange = useCallback(
     amount => {
@@ -82,13 +85,8 @@ export default function AccountAmountRow({
     fromAccount,
   ]);
 
-  const toUnit = useMemo(() => toAccount && getAccountUnit(toAccount), [
-    toAccount,
-  ]);
-
-  const toCurrency = useMemo(() => toAccount && getAccountCurrency(toAccount), [
-    toAccount,
-  ]);
+  const toCurrency = exchange?.toCurrency;
+  const toUnit = toCurrency?.units[0];
 
   // eslint-disable-next-line no-unused-vars
   const [tradeMethod, setTradeMethod] = useState<"fixed" | "float">(
@@ -99,6 +97,7 @@ export default function AccountAmountRow({
     let ignore = false;
     const KYCUserId = Config.SWAP_OVERRIDE_KYC_USER_ID || providerKYC?.id;
     async function getRates() {
+      setFetchingRate(true);
       try {
         // $FlowFixMe No idea how to pass this
         const rates = await getExchangeRates(exchange, transaction, KYCUserId);
@@ -120,6 +119,8 @@ export default function AccountAmountRow({
       } catch (error) {
         if (ignore) return;
         setError(error);
+      } finally {
+        setFetchingRate(false);
       }
     }
     if (!ignore && !error && transaction?.amount.gt(0) && !rate) {
@@ -158,11 +159,7 @@ export default function AccountAmountRow({
           <Trans i18nKey="transfer.swap.form.from" />
         </LText>
         <View style={styles.root}>
-          <AccountSelect
-            exchange={exchange}
-            navigation={navigation}
-            target="from"
-          />
+          <AccountSelect exchange={exchange} navigation={navigation} />
           <View style={styles.wrapper}>
             {fromUnit ? (
               <CurrencyInput
@@ -193,13 +190,16 @@ export default function AccountAmountRow({
           <Trans i18nKey="transfer.swap.form.to" />
         </LText>
         <View style={styles.root}>
-          <AccountSelect
+          <CurrencyTargetSelect
             exchange={exchange}
             navigation={navigation}
-            target="to"
+            provider={provider}
+            providers={providers}
           />
           <View style={styles.wrapper}>
-            {toUnit && toCurrency ? (
+            {fetchingRate ? (
+              <ActivityIndicator color={colors.grey} animating />
+            ) : toUnit && toCurrency ? (
               <View>
                 <LText semiBold color="grey" style={styles.inputText}>
                   <CurrencyUnitValue
@@ -229,8 +229,10 @@ export default function AccountAmountRow({
 const styles = StyleSheet.create({
   root: {
     flexDirection: "row",
-    paddingVertical: 16,
     justifyContent: "space-between",
+    alignItems: "center",
+    height: 32,
+    marginVertical: 10,
   },
   label: {
     fontSize: 12,
@@ -243,9 +245,9 @@ const styles = StyleSheet.create({
   },
   wrapper: {
     flex: 1,
-    flexDirection: "column",
-    justifyContent: "flex-start",
-    paddingTop: 18,
+    alignItems: "flex-end",
+    justifyContent: "center",
+    height: 32,
   },
   currency: {
     fontSize: 20,
@@ -258,6 +260,12 @@ const styles = StyleSheet.create({
     fontSize: 14,
     textAlign: "right",
   },
-  inputText: { textAlign: "right", fontSize: 23 },
+  inputText: {
+    textAlign: "right",
+    fontSize: 23,
+    lineHeight: 28,
+    height: 32,
+    padding: 0,
+  },
   subText: { textAlign: "right", fontSize: 13 },
 });

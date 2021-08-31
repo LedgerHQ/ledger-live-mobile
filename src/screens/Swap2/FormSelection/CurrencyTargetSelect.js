@@ -1,18 +1,10 @@
 // @flow
-import React, { useCallback, useMemo } from "react";
+import React, { useCallback } from "react";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { Trans } from "react-i18next";
 import { useTheme } from "@react-navigation/native";
 
-import type {
-  CryptoCurrency,
-  TokenCurrency,
-} from "@ledgerhq/live-common/lib/types";
 import type { Exchange } from "@ledgerhq/live-common/lib/exchange/swap/types";
-import {
-  getAccountCurrency,
-  getAccountName,
-} from "@ledgerhq/live-common/lib/account";
 
 import SearchIcon from "../../../icons/Search";
 import LText from "../../../components/LText";
@@ -23,36 +15,30 @@ import CurrencyIcon from "../../../components/CurrencyIcon";
 type Props = {
   navigation: *,
   exchange: Exchange,
+  provider: any,
+  providers: any,
 };
 
-export default function AccountSelect({ navigation, exchange }: Props) {
+export default function CurrencyTargetSelect({
+  navigation,
+  exchange,
+  provider,
+  providers,
+}: Props) {
   const { colors } = useTheme();
 
-  const value = exchange.fromAccount;
+  const value = exchange.toCurrency;
 
-  const currency = useMemo(() => value && getAccountCurrency(value), [value]);
-  const name = useMemo(() => value && getAccountName(value), [value]);
-
-  const onPressItem = useCallback(
-    (currencyOrToken: CryptoCurrency | TokenCurrency) => {
-      const toAccount =
-        exchange.toAccount &&
-        getAccountCurrency(exchange.toAccount).id === currencyOrToken.id
-          ? undefined
-          : exchange.toAccount;
-
-      navigation.navigate(ScreenName.SwapV2FormSelectAccount, {
-        exchange: {
-          ...exchange,
-          fromAccount: null,
-          toAccount,
-        },
-        selectedCurrency: currencyOrToken,
-        target: "from",
-      });
-    },
-    [exchange, navigation],
-  );
+  const onPressItem = useCallback(() => {
+    navigation.navigate(ScreenName.SwapV2FormSelectCurrency, {
+      exchange: {
+        ...exchange,
+        toCurrency: null,
+      },
+      providers,
+      provider,
+    });
+  }, [exchange, navigation, providers, provider]);
 
   return (
     <TouchableOpacity style={styles.root} onPress={onPressItem}>
@@ -60,14 +46,14 @@ export default function AccountSelect({ navigation, exchange }: Props) {
         {value ? (
           <>
             <View style={styles.iconContainer}>
-              <CurrencyIcon size={20} currency={currency} />
+              <CurrencyIcon size={20} currency={value} />
             </View>
             <View style={styles.accountColumn}>
               <LText semiBold style={styles.label}>
-                {name}
+                {value.name}
               </LText>
               <LText color="grey" style={styles.accountTicker}>
-                {currency.ticker}
+                {value.ticker}
               </LText>
             </View>
           </>
@@ -77,7 +63,7 @@ export default function AccountSelect({ navigation, exchange }: Props) {
               <SearchIcon size={16} color={colors.grey} />
             </View>
             <LText style={styles.label} color="grey">
-              <Trans i18nKey={`transfer.swap.form.source`} />
+              <Trans i18nKey={`transfer.swap.form.target`} />
             </LText>
           </>
         )}

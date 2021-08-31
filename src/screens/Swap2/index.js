@@ -19,7 +19,10 @@ import type {
   Exchange,
   ExchangeRate,
 } from "@ledgerhq/live-common/lib/exchange/swap/types";
-import type { CurrenciesStatus } from "@ledgerhq/live-common/lib/exchange/swap/logic";
+import {
+  CurrenciesStatus,
+  getSupportedCurrencies,
+} from "@ledgerhq/live-common/lib/exchange/swap/logic";
 
 // import { getAccountCurrency } from "@ledgerhq/live-common/lib/account";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
@@ -27,13 +30,21 @@ import { useDebounce } from "@ledgerhq/live-common/lib/hooks/useDebounce";
 
 import { Trans } from "react-i18next";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
-import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
+import {
+  accountWithMandatoryTokens,
+  flattenAccounts,
+  getAccountCurrency,
+  getAccountUnit,
+} from "@ledgerhq/live-common/lib/account";
 import { BigNumber } from "bignumber.js";
+import { useSelector } from "react-redux";
+import { useCurrenciesByMarketcap } from "@ledgerhq/live-common/lib/currencies";
 import AccountAmountRow from "./FormSelection/AccountAmountRow";
 import Button from "../../components/Button";
 import LText from "../../components/LText";
 import CurrencyUnitValue from "../../components/CurrencyUnitValue";
 import Switch from "../../components/Switch";
+import { accountsSelector } from "../../reducers/accounts";
 
 export type SwapRouteParams = {
   exchange: Exchange,
@@ -62,21 +73,70 @@ type Props = {
 export default function SwapForm({
   route,
   navigation,
-  defaultAccount,
-  defaultParentAccount,
-  // providers,
+  defaultAccount: initDefaultAccount,
+  providers,
   provider,
 }: Props) {
   const { colors } = useTheme();
+
+  const accounts = useSelector(accountsSelector);
+
+  const enhancedAccounts = useMemo(
+    () => accounts.map(acc => accountWithMandatoryTokens(acc, [])),
+    [accounts],
+  );
+
+  const allAccounts = flattenAccounts(enhancedAccounts);
+
+  const elligibleAccountsForSelectedCurrency = allAccounts.filter(account =>
+    account.balance.gt(0),
+  );
+
+  const defaultAccount =
+    initDefaultAccount || elligibleAccountsForSelectedCurrency[0];
+
+  const defaultParentAccount =
+    defaultAccount.type === "TokenAccount"
+      ? accounts.find(a => a.id === defaultAccount.parentId)
+      : null;
+
+  const selectableCurrencies = getSupportedCurrencies({ providers, provider });
+
+  const maybeFilteredCurrencies = defaultAccount?.balance.gt(0)
+    ? selectableCurrencies.filter(c => c !== getAccountCurrency(defaultAccount))
+    : selectableCurrencies;
+
+  const sortedCryptoCurrencies = useCurrenciesByMarketcap(
+    maybeFilteredCurrencies,
+  );
+
   const exchange = useMemo(
     () =>
-      route.params?.exchange || {
-        fromAccount: defaultAccount?.balance.gt(0) ? defaultAccount : undefined,
-        fromParentAccount: defaultAccount?.balance.gt(0)
-          ? defaultParentAccount
-          : undefined,
-      },
-    [defaultAccount, defaultParentAccount, route.params],
+      route.params?.exchange
+        ? {
+            ...route.params.exchange,
+            toCurrency: route.params.exchange.fromAccount
+              ? sortedCryptoCurrencies.find(
+                  c =>
+                    c !== getAccountCurrency(route.params.exchange.fromAccount),
+                )
+              : route.params.exchange.toCurrency,
+          }
+        : {
+            fromAccount: defaultAccount?.balance.gt(0)
+              ? defaultAccount
+              : undefined,
+            fromParentAccount: defaultAccount?.balance.gt(0)
+              ? defaultParentAccount
+              : undefined,
+            toCurrency: sortedCryptoCurrencies[0],
+          },
+    [
+      defaultAccount,
+      defaultParentAccount,
+      route.params?.exchange,
+      sortedCryptoCurrencies,
+    ],
   );
 
   const [maxSpendable, setMaxSpendable] = useState();
@@ -143,6 +203,8 @@ export default function SwapForm({
     fromAccount,
   ]);
 
+  console.log(unit)
+
   return (
     <SafeAreaView style={[styles.root, { backgroundColor: colors.background }]}>
       <AccountAmountRow
@@ -153,6 +215,7 @@ export default function SwapForm({
         status={status}
         bridgePending={bridgePending}
         provider={provider}
+        providers={providers}
         useAllAmount={transaction?.useAllAmount}
       />
       <View>

@@ -61,6 +61,9 @@ import RequestAccountNavigator from "./RequestAccountNavigator";
 import VerifyAccount from "../../screens/VerifyAccount";
 import PlatformApp from "../../screens/Platform/App";
 
+import SwapFormV2SelectAccount from "../../screens/Swap2/FormSelection/SelectAccountScreen";
+import SwapFormV2SelectCurrency from "../../screens/Swap2/FormSelection/SelectCurrencyScreen";
+
 export default function BaseNavigator() {
   const { t } = useTranslation();
   const { colors } = useTheme();
@@ -116,6 +119,30 @@ export default function BaseNavigator() {
           headerStyle: styles.headerNoShadow,
           headerLeft: null,
           title: t("transfer.swap.form.tab"),
+        }}
+      />
+      <Stack.Screen
+        name={ScreenName.SwapV2FormSelectAccount}
+        component={SwapFormV2SelectAccount}
+        options={({ route }) => ({
+          headerTitle: () => (
+            <StepHeader
+              title={
+                route.params.target === "from"
+                  ? t("transfer.swap.form.from")
+                  : t("transfer.swap.form.to")
+              }
+            />
+          ),
+          headerRight: null,
+        })}
+      />
+      <Stack.Screen
+        name={ScreenName.SwapV2FormSelectCurrency}
+        component={SwapFormV2SelectCurrency}
+        options={{
+          headerTitle: () => <StepHeader title={t("transfer.swap.form.to")} />,
+          headerRight: null,
         }}
       />
       <Stack.Screen

@@ -21,6 +21,7 @@ import SwapPendingOperation from "../../screens/Swap/FormOrHistory/Form/PendingO
 import SwapFormSelectCrypto from "../../screens/Swap/FormOrHistory/Form/SelectAccount/01-SelectCrypto";
 import SwapFormSelectAccount from "../../screens/Swap/FormOrHistory/Form/SelectAccount/02-SelectAccount";
 import SwapFormV2SelectAccount from "../../screens/Swap2/FormSelection/SelectAccountScreen";
+import SwapFormV2SelectCurrency from "../../screens/Swap2/FormSelection/SelectCurrencyScreen";
 import { getStackNavigatorConfig } from "../../navigation/navigatorConfig";
 import styles from "../../navigation/styles";
 import StepHeader from "../StepHeader";
@@ -28,7 +29,7 @@ import StepHeader from "../StepHeader";
 export default function SwapNavigator() {
   const { t } = useTranslation();
   const { colors } = useTheme();
-  const isSwapV2Enabled = useEnv("EXPERIMENTAL_SWAP") && __DEV__;
+  const isSwapV2Enabled = __DEV__;
   const stackNavigationConfig = useMemo(
     () => getStackNavigatorConfig(colors, true),
     [colors],
@@ -80,22 +81,6 @@ export default function SwapNavigator() {
             headerTitle: () => <StepHeader title={t("transfer.swap.title")} />,
             headerLeft: null,
           }}
-        />
-        <Stack.Screen
-          name={ScreenName.SwapV2FormSelectAccount}
-          component={SwapFormV2SelectAccount}
-          options={({ route }) => ({
-            headerTitle: () => (
-              <StepHeader
-                title={
-                  route.params.target === "from"
-                    ? t("transfer.swap.form.from")
-                    : t("transfer.swap.form.to")
-                }
-              />
-            ),
-            headerRight: null,
-          })}
         />
       </Stack.Navigator>
     );
