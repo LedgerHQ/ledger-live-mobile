@@ -84,7 +84,7 @@
   },
   "errors": {
     "countervaluesUnavailable": {
-      "title": "We're not able to provide a countervalue for this asset at the moment"
+      "title": "Actuellement impossible d'afficher une devise de contrepartie pour cet actif"
     },
     "AccountAwaitingSendPendingOperations": {
       "title": "Une opération est en attente pour ce compte.",
