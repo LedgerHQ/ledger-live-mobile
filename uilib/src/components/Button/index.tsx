@@ -80,8 +80,6 @@ const ButtonContainer = ({
   Icon,
   iconPosition = "right",
   children,
-  onPress,
-  disabled = false,
   hide = false,
   ...props
 }: Props & { hide?: boolean }): React.ReactElement => {
