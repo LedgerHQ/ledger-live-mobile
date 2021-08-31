@@ -7,14 +7,14 @@ import { ServiceStatusProvider } from "@ledgerhq/live-common/lib/notifications/S
 import { useToasts } from "@ledgerhq/live-common/lib/notifications/ToastProvider/index";
 import type { Announcement } from "@ledgerhq/live-common/lib/notifications/AnnouncementProvider/types";
 import VersionNumber from "react-native-version-number";
+import Config from "react-native-config";
 import { getNotifications, saveNotifications } from "../../db";
 import { useLocale } from "../../context/Locale";
 import { cryptoCurrenciesSelector } from "../../reducers/accounts";
 import { track } from "../../analytics";
 import { lastSeenDeviceSelector } from "../../reducers/settings";
-import fetchApi from "../../screens/Settings/Debug/__mocks__/announcements";
-import networkApi from "../../screens/Settings/Debug/__mocks__/serviceStatus";
-import Config from "react-native-config";
+import fetchApi from "../Settings/Debug/__mocks__/announcements";
+import networkApi from "../Settings/Debug/__mocks__/serviceStatus";
 
 let notificationsApi;
 let serviceStatusApi;
