@@ -76,32 +76,68 @@ const SpinnerContainer = styled.View`
   justify-content: center;
 `;
 
-const Button = ({
+const ButtonContainer = ({
   Icon,
   iconPosition = "right",
   children,
   onPress,
   disabled = false,
+  hide = false,
   ...props
-}: Props): React.ReactElement => {
-  const [spinnerOn, setSpinnerOn] = useState(false);
+}: Props & { hide?: boolean }): React.ReactElement => {
   const theme = useTheme();
   const { color } = getButtonColor({ ...props, theme });
 
+  return (
+    <Container hide={hide}>
+      {iconPosition === "right" && children ? (
+        <Text type="body" color={color}>
+          {children}
+        </Text>
+      ) : null}
+      {Icon ? (
+        <IconContainer iconButton={!children} iconPosition={iconPosition}>
+          <Icon size={15} color={color} />
+        </IconContainer>
+      ) : null}
+      {iconPosition === "left" && children ? (
+        <Text type="body" color={color}>
+          {children}
+        </Text>
+      ) : null}
+    </Container>
+  );
+};
+
+const Button = (props: Props): React.ReactElement => {
+  const { Icon, children, onPress, disabled = false } = props;
+  return (
+    <Base
+      {...props}
+      iconButton={Icon && !children}
+      disabled={disabled}
+      onPress={onPress}
+    >
+      <ButtonContainer {...props} />
+    </Base>
+  );
+};
+
+export const PromisableButton = (
+  props: Props & { onPress: () => Promise<any> },
+): React.ReactElement => {
+  const { Icon, children, onPress, disabled = false } = props;
+
+  const [spinnerOn, setSpinnerOn] = useState(false);
+  const theme = useTheme();
+
   const onPressHandler = useCallback(async () => {
     if (!onPress) return;
-    let isPromise;
     try {
-      const result = onPress();
-      isPromise = !!result && !!result.then;
-      if (isPromise) {
-        setSpinnerOn(true);
-        await result;
-      }
+      setSpinnerOn(true);
+      await onPress();
     } finally {
-      if (isPromise) {
-        setSpinnerOn(false);
-      }
+      setSpinnerOn(false);
     }
   }, [onPress]);
 
@@ -112,23 +148,7 @@ const Button = ({
       disabled={disabled || spinnerOn}
       onPress={onPressHandler}
     >
-      <Container hide={spinnerOn}>
-        {iconPosition === "right" && children ? (
-          <Text type="body" color={color}>
-            {children}
-          </Text>
-        ) : null}
-        {Icon ? (
-          <IconContainer iconButton={!children} iconPosition={iconPosition}>
-            <Icon size={15} color={color} />
-          </IconContainer>
-        ) : null}
-        {iconPosition === "left" && children ? (
-          <Text type="body" color={color}>
-            {children}
-          </Text>
-        ) : null}
-      </Container>
+      <ButtonContainer {...props} hide={spinnerOn} />
       <SpinnerContainer>
         <ActivityIndicator
           color={theme.colors.palette.text.tertiary}

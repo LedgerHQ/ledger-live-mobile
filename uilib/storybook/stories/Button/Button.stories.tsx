@@ -3,9 +3,11 @@ import { storiesOf } from "@storybook/react-native";
 import { withKnobs, select, boolean } from "@storybook/addon-knobs";
 import { action } from "@storybook/addon-actions";
 import React from "react";
-import Button from "@components/Button";
+import Button, {PromisableButton} from "@components/Button";
 import Info from "@ui/icons/Info";
 import CenterView from "../CenterView";
+
+const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
 
 storiesOf("Button", module)
   .addDecorator(withKnobs)
@@ -20,4 +22,14 @@ storiesOf("Button", module)
     >
       {text("label", "Ledger")}
     </Button>
-  ));
+  ))  .add("PromisableButton", () => (
+    <PromisableButton
+        type={select("type", ["primary", "secondary", undefined], undefined)}
+        iconPosition={select("iconPosition", ["right", "left"], "right")}
+        Icon={select("Icon", [Info, undefined], undefined)}
+        disabled={boolean("disabled", false)}
+        onPress={async () => await delay(3000)}
+    >
+        {text("label", "Ledger")}
+    </PromisableButton>
+));
