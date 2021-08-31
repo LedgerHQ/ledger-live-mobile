@@ -131,8 +131,8 @@ export const PromisableButton = (
 
   const onPressHandler = useCallback(async () => {
     if (!onPress) return;
+    setSpinnerOn(true);
     try {
-      setSpinnerOn(true);
       await onPress();
     } finally {
       setSpinnerOn(false);
