@@ -3,6 +3,32 @@ import { useCallback } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { NavigatorName, ScreenName } from "../const";
 
+function getSettingsScreen(pathname) {
+  const secondPath = pathname.replace(/(^\/+|\/+$)/g, "");
+
+  let screen;
+  switch (secondPath) {
+    case "general":
+      screen = ScreenName.GeneralSettings;
+      break;
+    case "accounts":
+      screen = ScreenName.AccountsSettings;
+      break;
+    case "about":
+      screen = ScreenName.AboutSettings;
+      break;
+    case "help":
+      screen = ScreenName.HelpSettings;
+      break;
+    case "experimental":
+      screen = ScreenName.ExperimentalSettings;
+      break;
+    default:
+      screen = ScreenName.Settings;
+  }
+  return screen;
+}
+
 export function useDeepLinkHandler() {
   const { navigate } = useNavigation();
 
@@ -53,30 +79,8 @@ export function useDeepLinkHandler() {
           break;
 
         case "settings":
-          const secondPath = pathname.replace(/(^\/+|\/+$)/g, "");
-
-          let screen = ScreenName.Settings;
-          if (secondPath) {
-            switch (secondPath) {
-              case "general":
-                screen = ScreenName.GeneralSettings;
-                break;
-              case "accounts":
-                screen = ScreenName.AccountsSettings;
-                break;
-              case "about":
-                screen = ScreenName.AboutSettings;
-                break;
-              case "help":
-                screen = ScreenName.HelpSettings;
-                break;
-              case "experimental":
-                screen = ScreenName.ExperimentalSettings;
-                break;
-            }
-          }
           navigate(NavigatorName.Settings, {
-            screen,
+            screen: getSettingsScreen(pathname),
           });
           break;
 
