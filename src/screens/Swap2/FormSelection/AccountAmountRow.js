@@ -1,27 +1,19 @@
 // @flow
-import React, { useCallback, useMemo, useEffect, useState } from "react";
+import React, { useCallback, useMemo } from "react";
 import { View, StyleSheet, ActivityIndicator } from "react-native";
 import type {
   Exchange,
   SwapTransaction,
 } from "@ledgerhq/live-common/lib/exchange/swap/types";
 
-import {
-  getAccountUnit,
-} from "@ledgerhq/live-common/lib/account";
+import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
 
 import { Trans } from "react-i18next";
 import { useTheme } from "@react-navigation/native";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 
 import { AmountRequired } from "@ledgerhq/errors";
-import { AccessDeniedError } from "@ledgerhq/live-common/lib/errors";
-import { getEnabledTradeMethods } from "@ledgerhq/live-common/lib/exchange/swap/logic";
-import { getExchangeRates } from "@ledgerhq/live-common/lib/exchange/swap";
-import Config from "react-native-config";
-import { useSelector } from "react-redux";
 import { BigNumber } from "bignumber.js";
-import { swapKYCSelector } from "../../../reducers/settings";
 
 import LText from "../../../components/LText";
 import AccountSelect from "./AccountSelect";
@@ -42,6 +34,8 @@ type Props = {
   bridgePending: boolean,
   provider: any,
   providers: any,
+  fetchingRate?: boolean,
+  rate: any,
 };
 
 export default function AccountAmountRow({
@@ -54,18 +48,11 @@ export default function AccountAmountRow({
   bridgePending,
   provider,
   providers,
+  fetchingRate,
+  rate,
 }: Props) {
   const { colors } = useTheme();
-  const { fromAccount, fromParentAccount, toAccount } = exchange;
-
-  const swapKYC = useSelector(swapKYCSelector);
-  const providerKYC = swapKYC[provider];
-
-  const [error, setError] = useState(null);
-  const [rate, setRate] = useState(null);
-  // eslint-disable-next-line no-unused-vars
-  const [rateExpiration, setRateExpiration] = useState(null);
-  const [fetchingRate, setFetchingRate] = useState(false);
+  const { fromAccount, fromParentAccount } = exchange;
 
   const onAmountChange = useCallback(
     amount => {
@@ -88,62 +75,6 @@ export default function AccountAmountRow({
   const toCurrency = exchange?.toCurrency;
   const toUnit = toCurrency?.units[0];
 
-  // eslint-disable-next-line no-unused-vars
-  const [tradeMethod, setTradeMethod] = useState<"fixed" | "float">(
-    getEnabledTradeMethods[0] || "float",
-  );
-
-  useEffect(() => {
-    let ignore = false;
-    const KYCUserId = Config.SWAP_OVERRIDE_KYC_USER_ID || providerKYC?.id;
-    async function getRates() {
-      setFetchingRate(true);
-      try {
-        // $FlowFixMe No idea how to pass this
-        const rates = await getExchangeRates(exchange, transaction, KYCUserId);
-        if (ignore) return;
-        const rate = rates.find(
-          rate =>
-            rate.tradeMethod === tradeMethod && rate.provider === provider,
-        );
-
-        if (rate?.error) {
-          if (rate?.error && rate.error instanceof AccessDeniedError) {
-            // setShowUnauthorizedRates(true);
-          }
-          setError(rate.error);
-        } else {
-          setRate(rate); // FIXME when we have multiple providers this will not be enough
-          setRateExpiration(new Date(Date.now() + 60000));
-        }
-      } catch (error) {
-        if (ignore) return;
-        setError(error);
-      } finally {
-        setFetchingRate(false);
-      }
-    }
-    if (!ignore && !error && transaction?.amount.gt(0) && !rate) {
-      getRates();
-    } else if (transaction?.amount.lte(0)) {
-      setRate(null);
-    }
-
-    return () => {
-      ignore = true;
-    };
-  }, [
-    exchange,
-    fromAccount,
-    toAccount,
-    error,
-    transaction,
-    tradeMethod,
-    rate,
-    providerKYC?.id,
-    provider,
-  ]);
-
   const amountError =
     transaction?.amount.gt(0) &&
     (status?.errors?.gasPrice || status?.errors?.amount);
@@ -151,6 +82,12 @@ export default function AccountAmountRow({
   const hideError =
     bridgePending ||
     (useAllAmount && amountError && amountError instanceof AmountRequired);
+
+  const toValue = rate
+    ? transaction.amount
+        .times(rate.magnitudeAwareRate)
+        .minus(rate.payoutNetworkFees || 0)
+    : null;
 
   return (
     <View>
@@ -204,13 +141,13 @@ export default function AccountAmountRow({
                 <LText semiBold color="grey" style={styles.inputText}>
                   <CurrencyUnitValue
                     unit={toUnit}
-                    value={rate?.toAmount ?? BigNumber(0)}
+                    value={toValue ?? BigNumber(0)}
                   />
                 </LText>
                 <LText semiBold color="grey" style={styles.subText}>
                   <CounterValue
                     currency={toCurrency}
-                    value={rate?.toAmount ?? BigNumber(0)}
+                    value={toValue ?? BigNumber(0)}
                   />
                 </LText>
               </View>

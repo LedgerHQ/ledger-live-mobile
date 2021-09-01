@@ -45,13 +45,27 @@ type Props = {
 
 export default function SelectAccount({ navigation, route }: Props) {
   const { colors } = useTheme();
-  const { exchange, target } = route.params;
+  const { exchange, target, selectedCurrency } = route.params;
   const accounts = useSelector(accountsSelector);
 
-  const enhancedAccounts = useMemo(
-    () => accounts.map(acc => accountWithMandatoryTokens(acc, [])),
-    [accounts],
-  );
+  const enhancedAccounts = useMemo(() => {
+    if (!selectedCurrency)
+      return accounts.map(acc => accountWithMandatoryTokens(acc, []));
+
+    const filteredAccounts = accounts.filter(
+      acc =>
+        acc.currency.id ===
+        (selectedCurrency.type === "TokenCurrency"
+          ? selectedCurrency.parentCurrency.id
+          : selectedCurrency.id),
+    );
+    if (selectedCurrency.type === "TokenCurrency") {
+      return filteredAccounts.map(acc =>
+        accountWithMandatoryTokens(acc, [selectedCurrency]),
+      );
+    }
+    return filteredAccounts;
+  }, [accounts, selectedCurrency]);
 
   const allAccounts = flattenAccounts(enhancedAccounts);
 

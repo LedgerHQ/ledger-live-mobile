@@ -4,10 +4,6 @@ import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { Trans } from "react-i18next";
 import { useTheme } from "@react-navigation/native";
 
-import type {
-  CryptoCurrency,
-  TokenCurrency,
-} from "@ledgerhq/live-common/lib/types";
 import type { Exchange } from "@ledgerhq/live-common/lib/exchange/swap/types";
 import {
   getAccountCurrency,
@@ -33,26 +29,15 @@ export default function AccountSelect({ navigation, exchange }: Props) {
   const currency = useMemo(() => value && getAccountCurrency(value), [value]);
   const name = useMemo(() => value && getAccountName(value), [value]);
 
-  const onPressItem = useCallback(
-    (currencyOrToken: CryptoCurrency | TokenCurrency) => {
-      const toAccount =
-        exchange.toAccount &&
-        getAccountCurrency(exchange.toAccount).id === currencyOrToken.id
-          ? undefined
-          : exchange.toAccount;
-
-      navigation.navigate(ScreenName.SwapV2FormSelectAccount, {
-        exchange: {
-          ...exchange,
-          fromAccount: null,
-          toAccount,
-        },
-        selectedCurrency: currencyOrToken,
-        target: "from",
-      });
-    },
-    [exchange, navigation],
-  );
+  const onPressItem = useCallback(() => {
+    navigation.navigate(ScreenName.SwapV2FormSelectAccount, {
+      exchange: {
+        ...exchange,
+        fromAccount: null,
+      },
+      target: "from",
+    });
+  }, [exchange, navigation]);
 
   return (
     <TouchableOpacity style={styles.root} onPress={onPressItem}>
