@@ -3,6 +3,7 @@
 import { useTheme } from "@react-navigation/native";
 import React, { useMemo, useCallback, useState, useEffect } from "react";
 import { SafeAreaView, StyleSheet, View } from "react-native";
+import * as Animatable from "react-native-animatable";
 
 import type {
   CryptoCurrency,
@@ -354,7 +355,7 @@ export default function SwapForm({
           rate={rate}
         />
         {rate ? (
-          <>
+          <Animatable.View animation="fadeIn" useNativeDriver duration={400}>
             <GenericInputLink
               label={<Trans i18nKey="transfer.swap.form.summary.provider" />}
               tooltip={<Trans i18nKey="transfer.swap.form.summary.provider" />}
@@ -451,7 +452,7 @@ export default function SwapForm({
                 </View>
               )
             ) : null}
-          </>
+          </Animatable.View>
         ) : null}
       </View>
 
