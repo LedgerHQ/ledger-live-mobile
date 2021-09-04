@@ -208,7 +208,7 @@
       "description": "Se produjo un error inesperado. Inténtalo de nuevo."
     },
     "DeviceNotGenuine": {
-      "title": "Es posible que el dispositivo no sea original",
+      "title": "Es posible que el dispositivo no sea auténtico",
       "description": "Guarda tus registros con el botón que aparece a continuación y envíalos al Soporte de Ledger."
     },
     "DeviceNameInvalid": {
@@ -2512,7 +2512,7 @@
         "title": "Habilita Ledger Manager en tu {{productName}}"
       },
       "genuineCheckPending": {
-        "title": "Comprobando si el dispositivo es original..."
+        "title": "Comprobando si el dispositivo es auténtico..."
       },
       "dashboard": {
         "title": "Vuelve al Dashboard en tu {{productName}}"
@@ -2576,7 +2576,7 @@
     "alreadyPaired": "Ya emparejado"
   },
   "DeviceItemSummary": {
-    "genuine": "Tu dispositivo es original",
+    "genuine": "Tu dispositivo es auténtico",
     "genuineFailed": "La autenticación del dispositivo <1><0>ha fallado</0></1>"
   },
   "DeviceNameRow": {
@@ -2633,7 +2633,7 @@
     "storage": {
       "title": "Almacenamiento",
       "used": "Utilizado",
-      "genuine": "Tu dispositivo es original",
+      "genuine": "Tu dispositivo es auténtico",
       "appsInstalled": "<0>{{number}}</0> aplicación instalada",
       "appsInstalled_plural": "<0>{{number}}</0> aplicaciones instaladas",
       "storageAvailable": "disponible"
@@ -2722,7 +2722,7 @@
   },
   "AuthenticityRow": {
     "title": "Autenticación",
-    "subtitle": "Original"
+    "subtitle": "Genuine"
   },
   "RemoveRow": {
     "title": "Quitar dispositivo"
