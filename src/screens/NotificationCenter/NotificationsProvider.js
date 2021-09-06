@@ -8,11 +8,22 @@ import { useToasts } from "@ledgerhq/live-common/lib/notifications/ToastProvider
 import type { Announcement } from "@ledgerhq/live-common/lib/notifications/AnnouncementProvider/types";
 import type { CryptoCurrency } from "@ledgerhq/live-common/lib/types";
 import VersionNumber from "react-native-version-number";
+import Config from "react-native-config";
 import { getNotifications, saveNotifications } from "../../db";
 import { useLocale } from "../../context/Locale";
 import { cryptoCurrenciesSelector } from "../../reducers/accounts";
 import { track } from "../../analytics";
 import { lastSeenDeviceSelector } from "../../reducers/settings";
+import fetchApi from "../Settings/Debug/__mocks__/announcements";
+import networkApi from "../Settings/Debug/__mocks__/serviceStatus";
+
+let notificationsApi;
+let serviceStatusApi;
+
+if (Config.MOCK) {
+  notificationsApi = fetchApi;
+  serviceStatusApi = networkApi;
+}
 
 type Props = {
   children: React$Node,
@@ -125,8 +136,13 @@ export default function NotificationsProvider({ children }: Props) {
       handleSave={onSave}
       onNewAnnouncement={onNewAnnouncement}
       onAnnouncementRead={onAnnouncementRead}
+      fetchApi={notificationsApi}
     >
-      <ServiceStatusProvider context={{ tickers }} autoUpdateDelay={60000}>
+      <ServiceStatusProvider
+        context={{ tickers }}
+        autoUpdateDelay={60000}
+        networkApi={serviceStatusApi}
+      >
         {children}
       </ServiceStatusProvider>
     </AnnouncementProvider>

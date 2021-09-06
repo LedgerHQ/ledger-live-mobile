@@ -1,17 +1,17 @@
 // @flow
 import React from "react";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
-import { toggleMockIncident } from "@ledgerhq/live-common/lib/notifications/ServiceStatusProvider/api/api.mock";
-import { useFilteredServiceStatus } from "@ledgerhq/live-common/lib/notifications/ServiceStatusProvider";
+import { useServiceStatus } from "@ledgerhq/live-common/lib/notifications/ServiceStatusProvider";
 import Switch from "../../../components/Switch";
 import SettingsRow from "../../../components/SettingsRow";
+import { toggleMockIncident } from "./__mocks__/serviceStatus";
 
 export default function ToggleMockServiceStatusButton({
   title,
 }: {
   title: string,
 }) {
-  const { updateData, incidents } = useFilteredServiceStatus();
+  const { updateData, incidents } = useServiceStatus();
   return getEnv("MOCK") ? (
     <SettingsRow title={title} onPress={null}>
       <Switch
