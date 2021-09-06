@@ -78,6 +78,7 @@ export type SwapRouteParams = {
   installedApps: any,
   target: "from" | "to",
   rateExpiration?: Date,
+  rate: any,
 };
 
 type Props = {
@@ -146,12 +147,14 @@ export default function SwapForm({
     const exch = route.params?.exchange
       ? {
           ...route.params.exchange,
-          toCurrency: route.params.exchange.fromAccount
+          toCurrency: route.params.exchange?.toCurrency
+            ? route.params.exchange.toCurrency
+            : route.params.exchange.fromAccount
             ? sortedCryptoCurrencies.find(
                 c =>
                   c !== getAccountCurrency(route.params.exchange.fromAccount),
               )
-            : route.params.exchange.toCurrency,
+            : sortedCryptoCurrencies[0],
         }
       : {
           fromAccount: defaultAccount?.balance.gt(0)
@@ -189,12 +192,15 @@ export default function SwapForm({
   // const fromCurrency = fromAccount ? getAccountCurrency(fromAccount) : null;
   // const toCurrency = toAccount ? getAccountCurrency(toAccount) : null;
 
+  const bridge = getAccountBridge(fromAccount, fromParentAccount);
+
   const {
     status,
     transaction,
     setTransaction,
     bridgePending,
   } = useBridgeTransaction(() => ({
+    ...(route.params?.transaction ?? {}),
     account: fromAccount,
     parentAccount: fromParentAccount,
   }));
@@ -202,8 +208,6 @@ export default function SwapForm({
   const debouncedTransaction = useDebounce(transaction, 500);
 
   const toggleUseAllAmount = useCallback(() => {
-    const bridge = getAccountBridge(fromAccount, fromParentAccount);
-
     setTransaction(
       bridge.updateTransaction(
         transaction || bridge.createTransaction(fromAccount),
@@ -213,13 +217,7 @@ export default function SwapForm({
         },
       ),
     );
-  }, [
-    fromAccount,
-    fromParentAccount,
-    setTransaction,
-    transaction,
-    maxSpendable,
-  ]);
+  }, [setTransaction, bridge, transaction, fromAccount, maxSpendable]);
 
   useEffect(() => {
     if (!fromAccount) return;
@@ -242,6 +240,12 @@ export default function SwapForm({
       cancelled = true;
     };
   }, [fromAccount, fromParentAccount, debouncedTransaction]);
+
+  useEffect(() => {
+    if (route.params?.transaction) {
+      setTransaction(route.params.transaction);
+    }
+  }, [route.params, setTransaction]);
 
   const fromUnit = useMemo(() => fromAccount && getAccountUnit(fromAccount), [
     fromAccount,
@@ -330,7 +334,7 @@ export default function SwapForm({
 
   useEffect(() => {
     setRate(null);
-  }, [debouncedTransaction]);
+  }, [debouncedTransaction, route.params]);
 
   const ProviderIcon = providerIcons[provider];
 

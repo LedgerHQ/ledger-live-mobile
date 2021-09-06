@@ -1,5 +1,5 @@
 // @flow
-import React from "react";
+import React, { useCallback } from "react";
 import { Trans } from "react-i18next";
 import { StyleSheet, View, FlatList, SafeAreaView } from "react-native";
 import type { CryptoCurrency } from "@ledgerhq/live-common/lib/types";
@@ -53,15 +53,18 @@ export default function SwapFormSelectCurrencyScreen({
     maybeFilteredCurrencies,
   );
 
-  const onPressCurrency = (currency: CryptoCurrency) => {
-    navigation.navigate(ScreenName.SwapForm, {
-      ...route.params,
-      exchange: {
-        ...exchange,
-        toCurrency: currency,
-      },
-    });
-  };
+  const onPressCurrency = useCallback(
+    (currency: CryptoCurrency) => {
+      navigation.navigate(ScreenName.SwapForm, {
+        ...route.params,
+        exchange: {
+          ...exchange,
+          toCurrency: currency,
+        },
+      });
+    },
+    [exchange, navigation, route.params],
+  );
 
   const renderList = items => (
     <FlatList
