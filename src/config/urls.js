@@ -1,30 +1,21 @@
 // @flow
 
 export const urls = {
-  faq:
-    "https://support.ledgerwallet.com/hc/en-us?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=faq",
+  faq: "https://support.ledgerwallet.com/hc/en-us?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=faq",
   contact:
     "https://support.ledger.com/hc/en-us/requests/new?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=contact",
   terms: {
     en: "https://github.com/LedgerHQ/ledger-live-mobile/blob/master/TERMS.md",
-    fr:
-      "https://github.com/LedgerHQ/ledger-live-mobile/blob/master/TERMS.fr.md",
-    es:
-      "https://github.com/LedgerHQ/ledger-live-mobile/blob/master/TERMS.es.md",
-    zh:
-      "https://github.com/LedgerHQ/ledger-live-mobile/blob/master/TERMS.zh.md",
-    ru:
-      "https://github.com/LedgerHQ/ledger-live-mobile/blob/master/TERMS.ru.md",
+    fr: "https://github.com/LedgerHQ/ledger-live-mobile/blob/master/TERMS.fr.md",
+    es: "https://github.com/LedgerHQ/ledger-live-mobile/blob/master/TERMS.es.md",
+    zh: "https://github.com/LedgerHQ/ledger-live-mobile/blob/master/TERMS.zh.md",
+    ru: "https://github.com/LedgerHQ/ledger-live-mobile/blob/master/TERMS.ru.md",
   },
   privacyPolicy: {
-    en:
-      "https://shop.ledger.com/pages/privacy-policy?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=privacy",
-    fr:
-      "https://shop.ledger.com/pages/politique-de-confidentialite?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=privacy",
-    es:
-      "https://shop.ledger.com/pages/politica-de-privacidad?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=privacy",
-    ru:
-      "https://shop.ledger.com/pages/nasha-politika-konfidentsialnosti?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=privacy",
+    en: "https://shop.ledger.com/pages/privacy-policy?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=privacy",
+    fr: "https://shop.ledger.com/pages/politique-de-confidentialite?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=privacy",
+    es: "https://shop.ledger.com/pages/politica-de-privacidad?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=privacy",
+    ru: "https://shop.ledger.com/pages/nasha-politika-konfidentsialnosti?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=privacy",
   },
   buyNanoX:
     "https://www.ledger.com/products/ledger-nano-x?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=manager_emptystate",
@@ -70,8 +61,7 @@ export const urls = {
       "https://support.ledger.com/hc/en-us/articles/360013062159?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=receive_account_flow_trc10",
     trc20:
       "https://support.ledger.com/hc/en-us/articles/360013062159?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=receive_account_flow_trc20",
-    asa:
-      "https://support.ledger.com/hc/en-us/articles/360015896040?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=receive_account_flow",
+    asa: "https://support.ledger.com/hc/en-us/articles/360015896040?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=receive_account_flow",
   },
   cosmosStaking:
     "https://www.ledger.com/staking-cosmos?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=cosmos",
@@ -83,8 +73,7 @@ export const urls = {
     "https://support.ledger.com/hc/en-us/articles/360019187260?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=polkadot",
 
   swap: {
-    info:
-      "https://www.ledger.com/swap?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=swap_intro",
+    info: "https://www.ledger.com/swap?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=swap_intro",
     learnMore:
       "https://www.ledger.com/swap?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=swap_form",
     providers: {
@@ -136,4 +125,7 @@ export const urls = {
     "https://support.ledgerwallet.com/hc/en-us?utm_source=ledger_live_mobile&utm_medium=self_referral",
   maxSpendable:
     "https://support.ledger.com/hc/en-us/articles/360012960679?utm_source=ledger_live_mobile&utm_medium=self_referral",
+  elrond: {
+    website: "https://elrond.com",
+  },
 };

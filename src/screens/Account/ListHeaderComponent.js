@@ -26,42 +26,40 @@ import SubAccountsList from "./SubAccountsList";
 import CompoundSummary from "../Lending/Account/CompoundSummary";
 import CompoundAccountBodyHeader from "../Lending/Account/AccountBodyHeader";
 import perFamilyAccountHeader from "../../generated/AccountHeader";
+import perFamilyAccountSubHeader from "../../generated/AccountSubHeader";
 import perFamilyAccountBodyHeader from "../../generated/AccountBodyHeader";
 import perFamilyAccountBalanceSummaryFooter from "../../generated/AccountBalanceSummaryFooter";
 import { normalize } from "../../helpers/normalizeSize";
 import FabActions from "../../components/FabActions";
 import { NoCountervaluePlaceholder } from "../../components/CounterValue.js";
 
-const renderAccountSummary = (
-  account,
-  parentAccount,
-  compoundSummary,
-) => () => {
-  const mainAccount = getMainAccount(account, parentAccount);
-  const AccountBalanceSummaryFooter =
-    perFamilyAccountBalanceSummaryFooter[mainAccount.currency.family];
+const renderAccountSummary =
+  (account, parentAccount, compoundSummary) => () => {
+    const mainAccount = getMainAccount(account, parentAccount);
+    const AccountBalanceSummaryFooter =
+      perFamilyAccountBalanceSummaryFooter[mainAccount.currency.family];
 
-  const footers = [];
+    const footers = [];
 
-  if (compoundSummary && account.type === "TokenAccount") {
-    footers.push(
-      <CompoundSummary
-        key="compoundSummary"
-        account={account}
-        compoundSummary={compoundSummary}
-      />,
-    );
-  }
+    if (compoundSummary && account.type === "TokenAccount") {
+      footers.push(
+        <CompoundSummary
+          key="compoundSummary"
+          account={account}
+          compoundSummary={compoundSummary}
+        />,
+      );
+    }
 
-  if (AccountBalanceSummaryFooter)
-    footers.push(
-      <AccountBalanceSummaryFooter
-        account={account}
-        key="accountbalancesummary"
-      />,
-    );
-  return footers;
-};
+    if (AccountBalanceSummaryFooter)
+      footers.push(
+        <AccountBalanceSummaryFooter
+          account={account}
+          key="accountbalancesummary"
+        />,
+      );
+    return footers;
+  };
 
 type HeaderTitleProps = {
   useCounterValue?: boolean,
@@ -70,56 +68,54 @@ type HeaderTitleProps = {
   item: Item,
 };
 
-const renderListHeaderTitle = (
-  account,
-  countervalueAvailable,
-  onSwitchAccountCurrency,
-) => ({
-  useCounterValue,
-  cryptoCurrencyUnit,
-  counterValueUnit,
-  item,
-}: HeaderTitleProps) => {
-  const items = [
-    { unit: cryptoCurrencyUnit, value: item.value },
-    // $FlowFixMe
-    { unit: counterValueUnit, value: item.countervalue },
-  ];
+const renderListHeaderTitle =
+  (account, countervalueAvailable, onSwitchAccountCurrency) =>
+  ({
+    useCounterValue,
+    cryptoCurrencyUnit,
+    counterValueUnit,
+    item,
+  }: HeaderTitleProps) => {
+    const items = [
+      { unit: cryptoCurrencyUnit, value: item.value },
+      // $FlowFixMe
+      { unit: counterValueUnit, value: item.countervalue },
+    ];
 
-  const shouldUseCounterValue = countervalueAvailable && useCounterValue;
-  if (shouldUseCounterValue) {
-    items.reverse();
-  }
+    const shouldUseCounterValue = countervalueAvailable && useCounterValue;
+    if (shouldUseCounterValue) {
+      items.reverse();
+    }
 
-  return (
-    <Touchable
-      event="SwitchAccountCurrency"
-      eventProperties={{ useCounterValue: shouldUseCounterValue }}
-      onPress={countervalueAvailable ? onSwitchAccountCurrency : undefined}
-    >
-      <View style={styles.balanceContainer}>
-        <View style={styles.warningWrapper}>
-          <LText style={styles.balanceText} semiBold>
-            <CurrencyUnitValue
-              {...items[0]}
-              disableRounding
-              joinFragmentsSeparator=" "
-            />
+    return (
+      <Touchable
+        event="SwitchAccountCurrency"
+        eventProperties={{ useCounterValue: shouldUseCounterValue }}
+        onPress={countervalueAvailable ? onSwitchAccountCurrency : undefined}
+      >
+        <View style={styles.balanceContainer}>
+          <View style={styles.warningWrapper}>
+            <LText style={styles.balanceText} semiBold>
+              <CurrencyUnitValue
+                {...items[0]}
+                disableRounding
+                joinFragmentsSeparator=" "
+              />
+            </LText>
+            <TransactionsPendingConfirmationWarning maybeAccount={account} />
+          </View>
+          <LText style={styles.balanceSubText} color="smoke" semiBold>
+            {/* $FlowFixMe */}
+            {typeof items[1]?.value === "number" ? (
+              <CurrencyUnitValue {...items[1]} disableRounding />
+            ) : (
+              <NoCountervaluePlaceholder />
+            )}
           </LText>
-          <TransactionsPendingConfirmationWarning maybeAccount={account} />
         </View>
-        <LText style={styles.balanceSubText} color="smoke" semiBold>
-          {/* $FlowFixMe */}
-          {typeof items[1]?.value === "number" ? (
-            <CurrencyUnitValue {...items[1]} disableRounding />
-          ) : (
-            <NoCountervaluePlaceholder />
-          )}
-        </LText>
-      </View>
-    </Touchable>
-  );
-};
+      </Touchable>
+    );
+  };
 
 type Props = {
   account: ?AccountLike,
@@ -169,9 +165,13 @@ export function getListHeaderComponents({
   const AccountBodyHeader =
     perFamilyAccountBodyHeader[mainAccount.currency.family];
 
+  const AccountSubHeader =
+    perFamilyAccountSubHeader[mainAccount.currency.family];
+
   return {
     listHeaderComponents: [
       <Header accountId={account.id} />,
+      AccountSubHeader != null && <AccountSubHeader />,
       ...(!empty && AccountHeader
         ? [<AccountHeader account={account} parentAccount={parentAccount} />]
         : []),
