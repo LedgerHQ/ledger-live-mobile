@@ -9,6 +9,7 @@ import BottomModal from "./BottomModal";
 import ModalBottomAction from "./ModalBottomAction";
 import Close from "../icons/Close";
 import Touchable from "./Touchable";
+import InfoBox from "./InfoBox";
 
 type Props = {
   // TODO: fix action type
@@ -42,15 +43,20 @@ export default function DeviceActionModal({
       {device && (
         <ModalBottomAction
           footer={
-            <View style={styles.footerContainer}>
-              <DeviceAction
-                action={action}
-                device={device}
-                request={request}
-                onClose={onClose}
-                onResult={onResult}
-                renderOnResult={renderOnResult}
-              />
+            <View style={styles.footerContainerContainer}>
+              <View style={styles.footerContainer}>
+                <DeviceAction
+                  action={action}
+                  device={device}
+                  request={request}
+                  onClose={onClose}
+                  onResult={onResult}
+                  renderOnResult={renderOnResult}
+                />
+              </View>
+              <InfoBox forceColor={{ text: colors.live }}>
+                Stay in the app and keep your Nano X nearby
+              </InfoBox>
             </View>
           }
         />
@@ -70,6 +76,7 @@ export default function DeviceActionModal({
 const styles = StyleSheet.create({
   footerContainer: {
     flexDirection: "row",
+    marginBottom: 10,
   },
   close: {
     position: "absolute",
