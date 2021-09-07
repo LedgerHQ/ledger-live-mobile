@@ -4,6 +4,7 @@ import { View, StyleSheet } from "react-native";
 import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import { SyncSkipUnderPriority } from "@ledgerhq/live-common/lib/bridge/react";
 import { useTheme } from "@react-navigation/native";
+import { useTranslation } from "react-i18next";
 import DeviceAction from "./DeviceAction";
 import BottomModal from "./BottomModal";
 import ModalBottomAction from "./ModalBottomAction";
@@ -33,6 +34,7 @@ export default function DeviceActionModal({
   onModalHide,
 }: Props) {
   const { colors } = useTheme();
+  const { t } = useTranslation();
   return (
     <BottomModal
       id="DeviceActionModal"
@@ -55,7 +57,7 @@ export default function DeviceActionModal({
                 />
               </View>
               <InfoBox forceColor={{ text: colors.live }}>
-                Stay in the app and keep your Nano X nearby
+                {t("DeviceAction.stayInTheAppPlz")}
               </InfoBox>
             </View>
           }
