@@ -1,6 +1,6 @@
 /* @flow */
 import React from "react";
-import { Platform, StyleSheet, View, TouchableHighlight } from "react-native";
+import { Platform, StyleSheet, View } from "react-native";
 import { useTranslation } from "react-i18next";
 import AccountSubHeaderDrawer from "./AccountSubHeaderDrawer";
 import InfoIcon from "../../icons/Info";
@@ -33,20 +33,12 @@ function AccountSubHeader({ colors }: Props) {
           {t("elrond.account.subHeader.cardTitle")}
         </LText>
       </View>
-      <TouchableHighlight
-        activeOpacity={0.6}
-        underlayColor={colors.white}
+      <Button
+        type={"lightSecondary"}
+        IconRight={Chevron}
         onPress={openDrawer}
-      >
-        <View horizontal flow={1} alignItems="center">
-          <Button
-            type={"lightSecondary"}
-            IconRight={Chevron}
-            onPress={openDrawer}
-            title={t("elrond.account.subHeader.moreInfo")}
-          />
-        </View>
-      </TouchableHighlight>
+        title={t("elrond.account.subHeader.moreInfo")}
+      />
       <AccountSubHeaderDrawer isOpen={isDrawerOpen} onClose={closeDrawer} />
     </View>
   );

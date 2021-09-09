@@ -7,6 +7,11 @@ import BottomModal from "../../components/BottomModal";
 import { urls } from "../../config/urls";
 import ExternalLink from "../../components/ExternalLink";
 
+type Props = {
+  isOpen: boolean,
+  onClose: () => void,
+};
+
 export default function AccountSubHeaderDrawer({ isOpen, onClose }: Props) {
   const { t } = useTranslation();
   return (
@@ -36,6 +41,7 @@ export default function AccountSubHeaderDrawer({ isOpen, onClose }: Props) {
             text={t("elrond.account.subHeader.website")}
             onPress={() => Linking.openURL(urls.elrond.website)}
             fontSize={14}
+            event={"OpenElrondWebsite"}
           />
         </View>
       </View>
