@@ -12,7 +12,7 @@ type Props = {
   label: React$Node,
   tooltip?: React$Node,
   children: React$Node,
-  onEdit: () => void,
+  onEdit?: () => void,
 };
 
 export default function GenericInputLink({
@@ -38,11 +38,13 @@ export default function GenericInputLink({
       </TouchableOpacity>
       <View style={styles.value}>{children}</View>
 
-      <TouchableOpacity onPress={onEdit} style={styles.editButton}>
-        <LText color="live" semiBold style={styles.editText}>
-          <Trans i18nKey="common.edit" />
-        </LText>
-      </TouchableOpacity>
+      {onEdit ? (
+        <TouchableOpacity onPress={onEdit} style={styles.editButton}>
+          <LText color="live" semiBold style={styles.editText}>
+            <Trans i18nKey="common.edit" />
+          </LText>
+        </TouchableOpacity>
+      ) : null}
 
       {tooltip ? (
         <InfoModal

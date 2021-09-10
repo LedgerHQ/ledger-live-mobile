@@ -1889,6 +1889,8 @@
         "fromAccount": "Select account",
         "toAccount": "Select account",
         "paraswapCTA": "Looking for Paraswap? It has been moved to the Discover tab!",
+        "quote": "Quote",
+        "receive": "Receive",
         "amount": {
           "useMax": "Use max",
           "available": "Total available"
