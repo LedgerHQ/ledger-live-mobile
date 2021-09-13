@@ -148,7 +148,7 @@ android {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 181
-        versionName "2.32.2"
+        versionName "2.33.0"
         resValue "string", "build_config_package", "com.ledger.live"
         missingDimensionStrategy 'react-native-camera', 'general'
         testBuildType System.getProperty('testBuildType', 'debug')
@@ -201,8 +201,7 @@ android {
         variant.outputs.each { output ->
             // because we used split APKs needing some versioning magic before,
             // the versionCode has to be bumped to a value higher than anything we previously used
-                4 * 1048576 + defaultConfig.versionCode
-            }
+            4 * 1048576 + defaultConfig.versionCode
         }
     }
 
