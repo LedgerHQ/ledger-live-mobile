@@ -10,8 +10,9 @@ import SeedWarning from "../shared/SeedWarning";
 
 function OnboardingStepRecoveryPhrase({ navigation, route }: *) {
   const next = useCallback(() => {
+    const { showSeedWarning, ...rest } = route.params; // NB Prevent double warning
     navigation.navigate(ScreenName.OnboardingPairNew, {
-      ...route.params,
+      ...rest,
       next: ScreenName.OnboardingFinish,
     });
   }, [navigation, route.params]);
