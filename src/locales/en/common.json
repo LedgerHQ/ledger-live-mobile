@@ -508,7 +508,7 @@
     },
     "AccessDeniedError": {
       "title": "Ledger Live needs an update",
-      "description": "Please update Ledger Live to the latest version, and re verify your identity to swap with wyre"
+      "description": "Please update Ledger Live to the latest version, and re verify your identity to exchange with wyre"
     },
     "RecommendUndelegation": {
       "title": "Please undelegate the account before emptying it"
@@ -539,7 +539,7 @@
     },
     "SwapGenericAPIError": {
       "title": "Exchange rate expired",
-      "description": "You must confirm the swap before the timer runs out. The exchange rate remains valid for a fixed duration."
+      "description": "You must confirm the exchange before the timer runs out. The exchange rate remains valid for a fixed duration."
     },
     "PolkadotElectionClosed": {
       "title": "Validators election must be closed"
@@ -687,7 +687,7 @@
         "description": "Buy crypto on\nLedger Live"
       },
       "swap": {
-        "title": "Swap crypto",
+        "title": "Exchange crypto",
         "description": "Securely exchange one\ncrypto for another"
       },
       "algorand": {
@@ -1415,7 +1415,7 @@
     "buy": "Buy",
     "walletconnect": "WalletConnect",
     "sell": "Sell",
-    "swap": "Swap",
+    "swap": "Exchange",
     "manage": "Manage",
     "lastOperations": "Last operations",
     "emptyState": {
@@ -1781,23 +1781,23 @@
       "title": "Buy / Sell"
     },
     "swap": {
-      "title": "Swap",
+      "title": "Exchange",
       "selectDevice": "Select your device",
-      "broadcasting": "Broadcasting swap",
+      "broadcasting": "Broadcasting exchange",
       "loadingFees": "Loading network fees...",
       "landing": {
-        "header": "Swap",
-        "title": "Welcome to Swap",
-        "whatIsSwap": "What is Swap?",
+        "header": "Exchange",
+        "title": "Welcome to Exchange",
+        "whatIsSwap": "What is Exchange?",
         "disclaimer": "Exchange crypto directly from your Ledger device. This service is not available in some countries, including the US."
       },
       "unauthorizedRates": {
         "cta": "Reset verification",
-        "banner": "Reset your KYC and update Live to swap with Wyre.",
+        "banner": "Reset your KYC and update Live to exchange with Wyre.",
         "bannerCTA": "Reset KYC"
       },
       "main": {
-        "header": "Swap"
+        "header": "Exchange"
       },
       "kyc": {
         "disclaimer": "I acknowledge that my location data will be shared with third parties for compliance purposes.",
@@ -1863,10 +1863,10 @@
         "cta": "Close"
       },
       "pendingOperation": {
-        "description": "Your Swap operation has been sent to the network for confirmation. It may take up to an hour before you receive your {{targetCurrency}}.",
-        "label": "Your Swap ID:",
-        "title": "Swap broadcast successfully ",
-        "disclaimer": "Take note of your Swap ID number in case you’d need assistance from {{provider}} support.",
+        "description": "Your Exchange operation has been sent to the network for confirmation. It may take up to an hour before you receive your {{targetCurrency}}.",
+        "label": "Your Exchange ID:",
+        "title": "Exchange broadcast successfully ",
+        "disclaimer": "Take note of your Exchange ID number in case you’d need assistance from {{provider}} support.",
         "cta": "See details"
       },
       "tradeMethod": {
@@ -1880,7 +1880,7 @@
         "modalTitle": "Floating or fixed rate?"
       },
       "form": {
-        "validate": "Confirm Swap transaction",
+        "validate": "Confirm Exchange transaction",
         "tab": "Exchange",
         "button": "Continue",
         "from": "From",
@@ -1900,8 +1900,8 @@
           "close": "Close"
         },
         "noAccounts": {
-          "title": "No {{ticker}} to swap",
-          "desc": "Your {{currencyName}} accounts have no balance to swap.",
+          "title": "No {{ticker}} to exchange",
+          "desc": "Your {{currencyName}} accounts have no balance to exchange.",
           "addAccountCta": "Add Account",
           "cta": "Close"
         },
@@ -1932,7 +1932,7 @@
         }
       },
       "operationDetails": {
-        "swapId": "Swap ID",
+        "swapId": "Exchange ID",
         "provider": "Provider",
         "date": "Date",
         "from": "From",
@@ -1940,36 +1940,36 @@
         "to": "To",
         "toAmount": "Amount to receive",
         "statusTooltips": {
-          "expired": "Please contact the swap provider with your swap ID for more information.",
-          "refunded": "Please contact the swap provider with your swap ID for more information.",
-          "pending": "Please wait while the swap provider is processing the transaction.",
-          "onhold": "Please contact the swap provider with your swap ID to solve the situation.",
-          "finished": "Your swap was completed successfully."
+          "expired": "Please contact the exchange provider with your exchange ID for more information.",
+          "refunded": "Please contact the exchange provider with your exchange ID for more information.",
+          "pending": "Please wait while the exchange provider is processing the transaction.",
+          "onhold": "Please contact the exchange provider with your exchange ID to solve the situation.",
+          "finished": "Your exchange was completed successfully."
         }
       },
       "missingApp": {
         "title": "Please install the Exchange app on your device",
-        "description": "Go to manager and install Exchange app to swap assets",
+        "description": "Go to manager and install Exchange app to exchange assets",
         "button": "Go to Manager"
       },
       "outdatedApp": {
         "title": "Please update the Exchange app on your device",
-        "description": "Go to manager and update Exchange app to swap assets",
+        "description": "Go to manager and update Exchange app to exchange assets",
         "button": "Go to Manager"
       },
       "emptyState": {
         "title": "No {{currency}} account",
-        "description": "You need to add an account before swapping {{currency}}",
+        "description": "You need to add an account before exchanging {{currency}}",
         "CTAButton": "Add account"
       },
       "history": {
         "tab": "History",
-        "disclaimer": "Your swap mobile transactions are not synchronized with Ledger Live Desktop",
+        "disclaimer": "Your exchange mobile transactions are not synchronized with Ledger Live Desktop",
         "exportButton": "Export operations",
-        "exportFilename": "Swap operations",
+        "exportFilename": "Exchange operations",
         "empty": {
-          "title": "Your previous swaps will appear here",
-          "desc": "Either you have not made any swaps yet, or Ledger Live has been reset in the meantime."
+          "title": "Your previous exchanges will appear here",
+          "desc": "Either you have not made any exchanges yet, or Ledger Live has been reset in the meantime."
         }
       }
     },
@@ -2415,7 +2415,7 @@
     "retry": "Retry",
     "done": "Done",
     "finalCta": "Continue",
-    "finalCtaForSwap": "Go back to Swap",
+    "finalCtaForSwap": "Go back to Exchange",
     "synchronizing": "Synchronizing",
     "synchronizingDesc": "Your accounts are being synchronized. This can take a while...",
     "noAccountToCreate": "Could not create <1><0>{{currencyName}}</></> account. Restart the process and sync your accounts.",
@@ -2475,8 +2475,8 @@
       "description": "Please verify that the {{currencyName}} address to be shown in Ledger Live matches the one on your Ledger device."
     },
     "confirmSwap": {
-      "title": "Confirm swap operation on device",
-      "alert": "Verify the Swap details on your device before sending it. The addresses are exchanged securely so you don’t have to verify them."
+      "title": "Confirm exchange operation on device",
+      "alert": "Verify the Exchange details on your device before sending it. The addresses are exchanged securely so you don’t have to verify them."
     },
     "confirmSell": {
       "title": "Confirm sell operation on device",
@@ -3599,8 +3599,8 @@
       "description": "Purchase crypto assets via Coinify and receive them directly in your Ledger account."
     },
     "swap": {
-      "title": "SWAP CRYPTO",
-      "description": "Swap crypto assets directly from your Ledger accounts with our partner."
+      "title": "EXCHANGE CRYPTO",
+      "description": "Exchange crypto assets directly from your Ledger accounts with our partner."
     }
   },
   "walletconnect": {
