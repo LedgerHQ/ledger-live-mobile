@@ -1674,9 +1674,9 @@
       "privacyPolicy": "Política de privacidad",
       "privacyPolicyDesc": "Examina qué datos personales se recopilan, por qué y cómo se utilizan.",
       "liveReview": {
-        "title": "¡Reseña la aplicación!",
-        "ios": "Reseñar en App Store",
-        "android": "Reseñar en Google Play Store"
+        "title": "¡Califica la aplicación!",
+        "ios": "Calificar en App Store",
+        "android": "Calificar en Google Play Store"
       }
     },
     "help": {
