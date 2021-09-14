@@ -123,7 +123,9 @@ const WebPlatformPlayer = ({ manifest, inputs }: Props) => {
     url.searchParams.set("backgroundColor", new Color(theme.colors.card).hex());
     url.searchParams.set("textColor", new Color(theme.colors.text).hex());
     url.searchParams.set("loadDate", loadDate.valueOf().toString());
-
+    if (manifest.params) {
+      url.searchParams.set("params", JSON.stringify(manifest.params));
+    }
     return url;
   }, [manifest.url, loadDate, theme, inputs]);
 
