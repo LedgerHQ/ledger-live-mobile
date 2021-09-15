@@ -13,6 +13,7 @@ import React, {
   useEffect,
 } from "react";
 import { connect, useDispatch, useSelector } from "react-redux";
+
 import {
   StyleSheet,
   View,
@@ -35,6 +36,7 @@ import { pairId } from "@ledgerhq/live-common/lib/countervalues/helpers";
 import { ToastProvider } from "@ledgerhq/live-common/lib/notifications/ToastProvider";
 import { PlatformAppProvider } from "@ledgerhq/live-common/lib/platform/PlatformAppProvider";
 import { getProvider } from "@ledgerhq/live-common/lib/platform/PlatformAppProvider/providers";
+
 import logger from "./logger";
 import { saveAccounts, saveBle, saveSettings, saveCountervalues } from "./db";
 import {
@@ -79,6 +81,7 @@ import SnackbarContainer from "./screens/NotificationCenter/Snackbar/SnackbarCon
 import NavBarColorHandler from "./components/NavBarColorHandler";
 import { setOsTheme, setTheme } from "./actions/settings";
 import FirmwareUpdateBanner from "./components/FirmwareUpdateBanner";
+import SplashScreenLoader from "./components/SplashScreenLoader";
 
 const themes = {
   light: lightTheme,
@@ -429,58 +432,63 @@ export default class Root extends Component<
     const importDataString = __DEV__ ? this.props.importDataString : "";
 
     return (
-      <RebootProvider onRebootStart={this.onRebootStart}>
-        <LedgerStoreProvider onInitFinished={this.onInitFinished}>
-          {(ready, store, initialCountervalues) =>
-            ready ? (
-              <>
-                <SetEnvsFromSettings />
-                <HookSentry />
-                <HookAnalytics store={store} />
-                <WalletConnectProvider>
-                  <PlatformAppProvider
-                    platformAppsServerURL={getProvider("production").url}
-                  >
-                    <DeepLinkingNavigator>
-                      <SafeAreaProvider>
-                        <StyledStatusBar />
-                        <NavBarColorHandler />
-                        <AuthPass>
-                          <I18nextProvider i18n={i18n}>
-                            <LocaleProvider>
-                              <BridgeSyncProvider>
-                                <CounterValuesProvider
-                                  initialState={initialCountervalues}
-                                >
-                                  <ButtonUseTouchable.Provider value={true}>
-                                    <OnboardingContextProvider>
-                                      <FirmwareUpdateBanner />
-                                      <ToastProvider>
-                                        <NotificationsProvider>
-                                          <SnackbarContainer />
-                                          <App
-                                            importDataString={importDataString}
-                                          />
-                                        </NotificationsProvider>
-                                      </ToastProvider>
-                                    </OnboardingContextProvider>
-                                  </ButtonUseTouchable.Provider>
-                                </CounterValuesProvider>
-                              </BridgeSyncProvider>
-                            </LocaleProvider>
-                          </I18nextProvider>
-                        </AuthPass>
-                      </SafeAreaProvider>
-                    </DeepLinkingNavigator>
-                  </PlatformAppProvider>
-                </WalletConnectProvider>
-              </>
-            ) : (
-              <LoadingApp />
-            )
-          }
-        </LedgerStoreProvider>
-      </RebootProvider>
+      <SplashScreenLoader>
+        <RebootProvider onRebootStart={this.onRebootStart}>
+          <LedgerStoreProvider onInitFinished={this.onInitFinished}>
+            {(ready, store, initialCountervalues) =>
+              ready ? (
+                <>
+                  <SetEnvsFromSettings />
+                  <HookSentry />
+                  <HookAnalytics store={store} />
+                  <WalletConnectProvider>
+                    <PlatformAppProvider
+                      platformAppsServerURL={getProvider("production").url}
+                    >
+                      <DeepLinkingNavigator>
+                        <SafeAreaProvider>
+                          <StyledStatusBar />
+                          <NavBarColorHandler />
+                          <AuthPass>
+                            <I18nextProvider i18n={i18n}>
+                              <LocaleProvider>
+                                <BridgeSyncProvider>
+                                  <CounterValuesProvider
+                                    initialState={initialCountervalues}
+                                  >
+                                    <ButtonUseTouchable.Provider value={true}>
+                                      <OnboardingContextProvider>
+                                        <FirmwareUpdateBanner />
+                                        <ToastProvider>
+                                          <NotificationsProvider>
+                                            <SnackbarContainer />
+
+                                            <App
+                                              importDataString={
+                                                importDataString
+                                              }
+                                            />
+                                          </NotificationsProvider>
+                                        </ToastProvider>
+                                      </OnboardingContextProvider>
+                                    </ButtonUseTouchable.Provider>
+                                  </CounterValuesProvider>
+                                </BridgeSyncProvider>
+                              </LocaleProvider>
+                            </I18nextProvider>
+                          </AuthPass>
+                        </SafeAreaProvider>
+                      </DeepLinkingNavigator>
+                    </PlatformAppProvider>
+                  </WalletConnectProvider>
+                </>
+              ) : (
+                <LoadingApp />
+              )
+            }
+          </LedgerStoreProvider>
+        </RebootProvider>
+      </SplashScreenLoader>
     );
   }
 }
