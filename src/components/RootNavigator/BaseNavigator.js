@@ -63,6 +63,7 @@ import PlatformApp from "../../screens/Platform/App";
 
 import SwapFormV2SelectAccount from "../../screens/Swap2/FormSelection/SelectAccountScreen";
 import SwapFormV2SelectCurrency from "../../screens/Swap2/FormSelection/SelectCurrencyScreen";
+import SwapFormV2SelectFees from "../../screens/Swap2/FormSelection/SelectFeesScreen";
 
 export default function BaseNavigator() {
   const { t } = useTranslation();
@@ -140,6 +141,14 @@ export default function BaseNavigator() {
       <Stack.Screen
         name={ScreenName.SwapV2FormSelectCurrency}
         component={SwapFormV2SelectCurrency}
+        options={{
+          headerTitle: () => <StepHeader title={t("transfer.swap.form.to")} />,
+          headerRight: null,
+        }}
+      />
+      <Stack.Screen
+        name={ScreenName.SwapV2FormSelectFees}
+        component={SwapFormV2SelectFees}
         options={{
           headerTitle: () => <StepHeader title={t("transfer.swap.form.to")} />,
           headerRight: null,

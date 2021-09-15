@@ -1,8 +1,14 @@
 // @flow
 
 import { useTheme } from "@react-navigation/native";
-import React, { useMemo, useCallback, useState, useEffect } from "react";
-import { SafeAreaView, StyleSheet, View } from "react-native";
+import React, {
+  useMemo,
+  useCallback,
+  useState,
+  useEffect,
+  useRef,
+} from "react";
+import { SafeAreaView, StyleSheet, View, FlatList } from "react-native";
 import * as Animatable from "react-native-animatable";
 
 import type {
@@ -207,6 +213,12 @@ export default function SwapForm({
 
   const debouncedTransaction = useDebounce(transaction, 500);
 
+  const setTransactionScreenFeeRef = useRef(null);
+  useEffect(() => {
+    const updateTransaction = setTransactionScreenFeeRef.current;
+    updateTransaction && updateTransaction(transaction);
+  }, [setTransactionScreenFeeRef, transaction]);
+
   const toggleUseAllAmount = useCallback(() => {
     setTransaction(
       bridge.updateTransaction(
@@ -258,6 +270,20 @@ export default function SwapForm({
       target: "to",
     });
   }, [exchange, navigation]);
+
+  const onEditFees = () => {
+    console.log("send transaction", transaction);
+    navigation.navigate(ScreenName.SwapV2FormSelectFees, {
+      exchange,
+      selectedCurrency: exchange.toCurrency,
+      target: "to",
+      account: fromAccount,
+      parentAccount: fromParentAccount,
+      transaction,
+      setTransaction,
+      setTransactionScreenFeeRef,
+    });
+  };
 
   const onAddAccount = useCallback(() => {
     navigation.navigate(NavigatorName.AddAccounts, {
@@ -342,6 +368,13 @@ export default function SwapForm({
 
   const toAccountName = toAccount ? getAccountName(toAccount) : null;
 
+  const test42 = [{ key: "1" }, { key: "2" }, { key: "3" }];
+
+  const renderItem = ({ item }) => {
+    console.log("renderitem", item);
+    return <LText style={styles.text}> and red2</LText>;
+  };
+
   return (
     <SafeAreaView style={[styles.root, { backgroundColor: colors.background }]}>
       <View>
@@ -399,10 +432,16 @@ export default function SwapForm({
               </GenericInputLink>
             ) : null}
 
+            <LText>Here</LText>
+            <FlatList
+              data={test42}
+              renderItem={renderItem}
+              keyExtractor={s => s.key}
+            />
             <GenericInputLink
               label={<Trans i18nKey="send.summary.fees" />}
               tooltip={<Trans i18nKey="send.summary.fees" />}
-              onEdit={() => {}}
+              onEdit={onEditFees}
             >
               {payoutNetworkFees && toCurrency ? (
                 <LText semiBold style={styles.valueLabel}>
