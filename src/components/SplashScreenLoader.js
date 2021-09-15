@@ -1,13 +1,11 @@
 // @flow
 import React, { useState, useCallback } from "react";
-import { Animated, Easing, StyleSheet, View } from "react-native";
+import { Animated, Easing, StyleSheet } from "react-native";
 
 import AnimatedSplash from "react-native-animated-splash-screen";
 import * as Animatable from "react-native-animatable";
 
 import AnimatedLottieView from "lottie-react-native";
-
-import { normalize } from "../helpers/normalizeSize";
 
 const splashAnim = require("../animations/splash.json");
 
