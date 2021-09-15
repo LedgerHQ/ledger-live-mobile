@@ -29,7 +29,6 @@ import type {
 import {
   CurrenciesStatus,
   getSupportedCurrencies,
-  getEnabledTradeMethods,
 } from "@ledgerhq/live-common/lib/exchange/swap/logic";
 
 // import { getAccountCurrency } from "@ledgerhq/live-common/lib/account";
@@ -66,7 +65,7 @@ import Unlock from "../../icons/Unlock";
 import CurrencyIcon from "../../components/CurrencyIcon";
 import { NavigatorName, ScreenName } from "../../const";
 
-const providerIcons = {
+export const providerIcons = {
   changelly: Changelly,
   wyre: Wyre,
 };
@@ -84,7 +83,9 @@ export type SwapRouteParams = {
   installedApps: any,
   target: "from" | "to",
   rateExpiration?: Date,
-  rate: any,
+  rate?: any,
+  rates?: any[],
+  tradeMethod?: string,
 };
 
 type Props = {
@@ -111,14 +112,11 @@ export default function SwapForm({
   const providerKYC = swapKYC[provider];
 
   const [error, setError] = useState(null);
+  const [rates, setRates] = useState([]);
   const [rate, setRate] = useState(null);
   // eslint-disable-next-line no-unused-vars
   const [rateExpiration, setRateExpiration] = useState(null);
   const [fetchingRate, setFetchingRate] = useState(false);
-
-  const [tradeMethod, setTradeMethod] = useState<"fixed" | "float">(
-    getEnabledTradeMethods[0] || "float",
-  );
 
   const enhancedAccounts = useMemo(
     () => accounts.map(acc => accountWithMandatoryTokens(acc, [])),
@@ -263,6 +261,17 @@ export default function SwapForm({
     fromAccount,
   ]);
 
+  const onEditRateProvider = useCallback(() => {
+    navigation.navigate(ScreenName.SwapFormV2SelectProviderRate, {
+      exchange,
+      selectedCurrency: exchange.toCurrency,
+      rates,
+      rate,
+      transaction,
+      provider,
+    });
+  }, [exchange, navigation, provider, rate, rates, transaction]);
+
   const onEditToAccount = useCallback(() => {
     navigation.navigate(ScreenName.SwapV2FormSelectAccount, {
       exchange,
@@ -300,6 +309,25 @@ export default function SwapForm({
   }, [exchange, navigation]);
 
   useEffect(() => {
+    if (route.params?.rate) {
+      setRate(route.params.rate);
+      setRateExpiration(new Date(Date.now() + 60000));
+    }
+  }, [route.params?.rate]);
+
+  useEffect(() => {
+    const expirationInterval = setInterval(() => {
+      if (rate && rateExpiration && rateExpiration <= new Date()) {
+        setRateExpiration(null);
+        setRate(null);
+        clearInterval(expirationInterval);
+      }
+    }, 1000);
+
+    return () => clearInterval(expirationInterval);
+  }, [rate, rateExpiration]);
+
+  useEffect(() => {
     const KYCUserId = Config.SWAP_OVERRIDE_KYC_USER_ID || providerKYC?.id;
     async function getRates() {
       setFetchingRate(true);
@@ -321,10 +349,12 @@ export default function SwapForm({
           KYCUserId,
         );
 
-        const rate = rates.find(
-          rate =>
-            rate.tradeMethod === tradeMethod && rate.provider === provider,
-        );
+        setRates(rates);
+
+        const rate = rates
+          .filter(rate => rate.provider === provider)
+          .sort((a, b) => a.rate > b.rate)
+          .find(Boolean);
 
         if (rate?.error) {
           if (rate?.error && rate.error instanceof AccessDeniedError) {
@@ -352,7 +382,6 @@ export default function SwapForm({
     toAccount,
     error,
     transaction,
-    tradeMethod,
     providerKYC?.id,
     provider,
     rate,
@@ -364,7 +393,7 @@ export default function SwapForm({
 
   const ProviderIcon = providerIcons[provider];
 
-  const { magnitudeAwareRate, payoutNetworkFees } = rate || {};
+  const { magnitudeAwareRate, payoutNetworkFees, tradeMethod } = rate || {};
 
   const toAccountName = toAccount ? getAccountName(toAccount) : null;
 
@@ -396,7 +425,6 @@ export default function SwapForm({
             <GenericInputLink
               label={<Trans i18nKey="transfer.swap.form.summary.provider" />}
               tooltip={<Trans i18nKey="transfer.swap.form.summary.provider" />}
-              onEdit={() => {}}
             >
               {ProviderIcon ? <ProviderIcon size={12} /> : null}
               <LText semiBold style={styles.valueLabel}>
@@ -407,7 +435,7 @@ export default function SwapForm({
               <GenericInputLink
                 label={<Trans i18nKey="transfer.swap.form.summary.method" />}
                 tooltip={<Trans i18nKey="transfer.swap.form.summary.method" />}
-                onEdit={() => {}}
+                onEdit={onEditRateProvider}
               >
                 {tradeMethod === "fixed" ? (
                   <Lock size={12} color={colors.darkBlue} />
