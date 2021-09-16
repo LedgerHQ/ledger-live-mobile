@@ -26,6 +26,7 @@ export default function SelectFees({ navigation, route }: Props) {
   const { transaction } = route.params;
   const { account, parentAccount } = route.params;
 
+  // Tmp: fixed networkInfo while waiting for ll-common to build complete transaction info
   transaction.networkInfo.gasPrice = {
     min: new BigNumber(600000),
     initial: new BigNumber(300000),
