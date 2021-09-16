@@ -69,58 +69,8 @@ export default function SelectFees({ navigation, route }: Props) {
 }
 
 const styles = StyleSheet.create({
-  addAccountButton: {
-    flex: 1,
-    flexDirection: "row",
-    paddingVertical: 16,
-    alignItems: "center",
-  },
   root: {
     flex: 1,
     paddingHorizontal: 16,
-  },
-  tokenCardStyle: {
-    marginLeft: 26,
-    paddingLeft: 7,
-    borderLeftWidth: 1,
-  },
-  card: {
-    paddingHorizontal: 16,
-    backgroundColor: "transparent",
-  },
-  searchContainer: {
-    paddingTop: 18,
-    flex: 1,
-  },
-  list: {
-    paddingTop: 8,
-  },
-  emptyResults: {
-    flex: 1,
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  label: {
-    fontSize: 16,
-    lineHeight: 19,
-  },
-  button: {
-    flex: 1,
-  },
-  iconContainer: {
-    borderRadius: 26,
-    height: 26,
-    width: 26,
-    justifyContent: "center",
-    alignItems: "center",
-    marginRight: 12,
-  },
-  buttonContainer: {
-    paddingTop: 24,
-    paddingLeft: 16,
-    paddingRight: 16,
-    marginBottom: 24,
-    flexDirection: "row",
-  },
+  }
 });
