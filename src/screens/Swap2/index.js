@@ -6,7 +6,6 @@ import React, {
   useCallback,
   useState,
   useEffect,
-  useRef,
 } from "react";
 import { SafeAreaView, StyleSheet, View } from "react-native";
 import * as Animatable from "react-native-animatable";
@@ -209,12 +208,6 @@ export default function SwapForm({
   }));
 
   const debouncedTransaction = useDebounce(transaction, 500);
-
-  const setTransactionScreenFeeRef = useRef(null);
-  useEffect(() => {
-    const updateTransaction = setTransactionScreenFeeRef.current;
-    updateTransaction && updateTransaction(transaction);
-  }, [setTransactionScreenFeeRef, transaction]);
 
   const toggleUseAllAmount = useCallback(() => {
     setTransaction(
