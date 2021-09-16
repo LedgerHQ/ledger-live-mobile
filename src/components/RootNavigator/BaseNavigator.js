@@ -161,10 +161,10 @@ export default function BaseNavigator() {
         name={ScreenName.SwapV2FormSelectFees}
         component={SwapFormV2SelectFees}
         options={{
-            headerTitle: () => (
-                <StepHeader title={t("transfer.swap.form.summary.method")} />
-            ),
-            headerRight: null,
+          headerTitle: () => (
+            <StepHeader title={t("transfer.swap.form.summary.fees")} />
+          ),
+          headerRight: null,
         }}
       />
       <Stack.Screen

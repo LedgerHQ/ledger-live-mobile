@@ -8,7 +8,7 @@ import React, {
   useEffect,
   useRef,
 } from "react";
-import { SafeAreaView, StyleSheet, View, FlatList } from "react-native";
+import { SafeAreaView, StyleSheet, View } from "react-native";
 import * as Animatable from "react-native-animatable";
 
 import type {
@@ -31,7 +31,6 @@ import {
   getSupportedCurrencies,
 } from "@ledgerhq/live-common/lib/exchange/swap/logic";
 
-// import { getAccountCurrency } from "@ledgerhq/live-common/lib/account";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
 import { useDebounce } from "@ledgerhq/live-common/lib/hooks/useDebounce";
 
@@ -289,8 +288,6 @@ export default function SwapForm({
       account: fromAccount,
       parentAccount: fromParentAccount,
       transaction,
-      setTransaction,
-      setTransactionScreenFeeRef,
     });
   };
 
@@ -393,16 +390,8 @@ export default function SwapForm({
 
   const ProviderIcon = providerIcons[provider];
 
-  const { magnitudeAwareRate, payoutNetworkFees, tradeMethod } = rate || {};
-
+  const { magnitudeAwareRate, tradeMethod } = rate || {};
   const toAccountName = toAccount ? getAccountName(toAccount) : null;
-
-  const test42 = [{ key: "1" }, { key: "2" }, { key: "3" }];
-
-  const renderItem = ({ item }) => {
-    console.log("renderitem", item);
-    return <LText style={styles.text}> and red2</LText>;
-  };
 
   return (
     <SafeAreaView style={[styles.root, { backgroundColor: colors.background }]}>
@@ -460,22 +449,16 @@ export default function SwapForm({
               </GenericInputLink>
             ) : null}
 
-            <LText>Here</LText>
-            <FlatList
-              data={test42}
-              renderItem={renderItem}
-              keyExtractor={s => s.key}
-            />
             <GenericInputLink
               label={<Trans i18nKey="send.summary.fees" />}
               tooltip={<Trans i18nKey="send.summary.fees" />}
               onEdit={onEditFees}
             >
-              {payoutNetworkFees && toCurrency ? (
+              {status.estimatedFees && fromUnit ? (
                 <LText semiBold style={styles.valueLabel}>
                   <CurrencyUnitValue
-                    unit={toCurrency.units[0]}
-                    value={payoutNetworkFees}
+                    unit={fromUnit}
+                    value={status.estimatedFees}
                     showCode
                   />
                 </LText>

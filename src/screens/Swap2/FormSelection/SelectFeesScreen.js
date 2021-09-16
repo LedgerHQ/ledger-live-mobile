@@ -1,44 +1,19 @@
 /* @flow */
 import { BigNumber } from "bignumber.js";
-import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 
-import React, { useCallback, useEffect, useMemo, useState } from "react";
-import {
-  View,
-  StyleSheet,
-  FlatList,
-  SafeAreaView,
-  TouchableOpacity,
-} from "react-native";
-import { useSelector } from "react-redux";
-import { Trans } from "react-i18next";
-import { useTheme } from "@react-navigation/native";
+import React from "react";
+import { StyleSheet, SafeAreaView } from "react-native";
 
 import type {
   Account,
   AccountLikeArray,
 } from "@ledgerhq/live-common/lib/types";
-import {
-  accountWithMandatoryTokens,
-  flattenAccounts,
-} from "@ledgerhq/live-common/lib/account/helpers";
-
-import type { SearchResult } from "../../../helpers/formatAccountSearchResults";
-import { accountsSelector } from "../../../reducers/accounts";
 import { TrackScreen } from "../../../analytics";
-import LText from "../../../components/LText";
-import FilteredSearchBar from "../../../components/FilteredSearchBar";
-import AccountCard from "../../../components/AccountCard";
-import KeyboardView from "../../../components/KeyboardView";
-import { formatSearchResults } from "../../../helpers/formatAccountSearchResults";
-import { NavigatorName, ScreenName } from "../../../const";
+import { ScreenName } from "../../../const";
 
 import type { SwapRouteParams } from "..";
-import AddIcon from "../../../icons/Plus";
-
-const SEARCH_KEYS = ["name", "unit.code", "token.name", "token.ticker"];
-import { useFeesStrategy } from "@ledgerhq/live-common/lib/families/ethereum/react";
-import SelectFeesStrategy from "./SelectFeesStrategy";
+import SendRowsFee from "../../../components/SendRowsFee";
+import NavigationScrollView from "../../../components/NavigationScrollView";
 
 type Props = {
   accounts: Account[],
@@ -48,77 +23,46 @@ type Props = {
 };
 
 export default function SelectFees({ navigation, route }: Props) {
-  console.log("route.params.transaction", route.params.transaction);
-  const { colors } = useTheme();
-  const {
-    setTransaction,
-    setTransactionScreenFeeRef,
-    account,
-    parentAccount,
-  } = route.params;
-
-  const [transaction, setLocalTransaction] = useState(route.params.transaction);
-  useEffect(() => {
-    setTransactionScreenFeeRef.current = setLocalTransaction;
-    return () => {
-      setTransactionScreenFeeRef.current = null;
-    };
-  }, [setTransactionScreenFeeRef]);
+  const { transaction } = route.params;
+  const { account, parentAccount } = route.params;
 
   transaction.networkInfo.gasPrice = {
-    min: new BigNumber(10),
-    initial: new BigNumber(20),
-    max: new BigNumber(42),
+    min: new BigNumber(600000),
+    initial: new BigNumber(300000),
+    max: new BigNumber(90000),
+    step: new BigNumber(5000),
+    steps: new BigNumber(103),
   };
-  // useEffect(() => {
-  //   const bridge = getAccountBridge(account, parentAccount);
-  //
-  //   setTransaction(
-  //     bridge.updateTransaction(transaction, {
-  //       networkInfo: {
-  //         gasPrice: {
-  //           min: new BigNumber(1),
-  //           initial: new BigNumber(2),
-  //           max: new BigNumber(4242),
-  //         },
-  //       },
-  //     }),
-  //   );
-  //   console.log("useEffect", transaction);
-  // }, []);
+  transaction.networkInfo.feeItems = {
+    items: [
+      { feePerByte: new BigNumber(9), key: "3", speed: "medium" },
+      { feePerByte: new BigNumber(6), key: "6", speed: "slow" },
+    ],
+  };
 
-  const defaultStrategies = useFeesStrategy(transaction);
-
-  console.log("defaultStrategies", defaultStrategies);
-  // const { exchange, target, selectedCurrency } = route.params;
-  // const accounts = useSelector(accountsSelector);
-
-  const onPressStrategySelect = ({ label }) => {
-    const bridge = getAccountBridge(account, parentAccount);
-
-    setTransaction(
-      bridge.updateTransaction(transaction, {
-        feesStrategy: label,
-      }),
-    );
-    console.log("onPressStrategySelect", transaction);
+  const onSetTransaction = updatedTransaction => {
+    navigation.navigate(ScreenName.SwapForm, {
+      ...route.params,
+      transaction: updatedTransaction,
+    });
   };
 
   return (
-    <SafeAreaView style={[styles.root, { backgroundColor: colors.background }]}>
+    <SafeAreaView style={[styles.root]}>
       <TrackScreen category="ReceiveFunds" name="SelectAccount" />
-      <KeyboardView style={{ flex: 1 }}>
-        <View style={styles.searchContainer}>
-          <SelectFeesStrategy
-            strategies={defaultStrategies}
-            account={account}
-            parentAccount={parentAccount}
-            transaction={transaction}
-            onStrategySelect={onPressStrategySelect}
-            onCustomFeesPress={test => console.log("onCustomFeesPress", test)}
-          />
-        </View>
-      </KeyboardView>
+      <NavigationScrollView>
+        <SendRowsFee
+          setTransaction={onSetTransaction}
+          account={account}
+          parentAccount={parentAccount}
+          transaction={transaction}
+          navigation={navigation}
+          route={{
+            ...route,
+            params: { ...route.params, currentNavigation: ScreenName.SwapForm },
+          }}
+        />
+      </NavigationScrollView>
     </SafeAreaView>
   );
 }
