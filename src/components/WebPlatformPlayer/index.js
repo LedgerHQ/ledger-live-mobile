@@ -127,7 +127,7 @@ const WebPlatformPlayer = ({ manifest, inputs }: Props) => {
       url.searchParams.set("params", JSON.stringify(manifest.params));
     }
     return url;
-  }, [manifest.url, loadDate, theme, inputs]);
+  }, [manifest.url, manifest.params, loadDate, theme, inputs]);
 
   const navigation = useNavigation();
 
