@@ -1,7 +1,7 @@
 /* @flow */
 import { BigNumber } from "bignumber.js";
 
-import React from "react";
+import React, { useCallback } from "react";
 import { StyleSheet, SafeAreaView } from "react-native";
 
 import type {
@@ -41,12 +41,12 @@ export default function SelectFees({ navigation, route }: Props) {
     ],
   };
 
-  const onSetTransaction = updatedTransaction => {
+  const onSetTransaction = useCallback(updatedTransaction => {
     navigation.navigate(ScreenName.SwapForm, {
       ...route.params,
       transaction: updatedTransaction,
     });
-  };
+  }, []);
 
   return (
     <SafeAreaView style={[styles.root]}>

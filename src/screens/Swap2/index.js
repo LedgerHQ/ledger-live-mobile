@@ -1,12 +1,7 @@
 // @flow
 
 import { useTheme } from "@react-navigation/native";
-import React, {
-  useMemo,
-  useCallback,
-  useState,
-  useEffect,
-} from "react";
+import React, { useMemo, useCallback, useState, useEffect } from "react";
 import { SafeAreaView, StyleSheet, View } from "react-native";
 import * as Animatable from "react-native-animatable";
 
