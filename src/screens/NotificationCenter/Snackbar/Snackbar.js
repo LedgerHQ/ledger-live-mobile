@@ -13,7 +13,6 @@ import Animated, {
   useCode,
   Easing,
 } from "react-native-reanimated";
-import { useTranslation } from "react-i18next";
 import { useClock, timing } from "react-native-redash/lib/module/v1";
 import type { ToastData } from "@ledgerhq/live-common/lib/notifications/ToastProvider/types";
 import { useTheme } from "@react-navigation/native";
@@ -46,7 +45,6 @@ const icons = {
 
 export default function Snackbar({ toast, cta, onPress, onClose }: Props) {
   const [anim] = useState(new Animated.Value(0));
-  const { t } = useTranslation();
   const clock = useClock();
   const [closed, setIsClosed] = useState(false);
 
