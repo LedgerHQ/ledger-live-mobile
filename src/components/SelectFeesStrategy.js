@@ -1,6 +1,12 @@
 /* @flow */
 import React, { useState, useCallback } from "react";
-import { View, StyleSheet, FlatList, TouchableOpacity } from "react-native";
+import {
+  View,
+  StyleSheet,
+  FlatList,
+  TouchableOpacity,
+  SafeAreaView,
+} from "react-native";
 import { useTranslation } from "react-i18next";
 import {
   getMainAccount,
@@ -8,7 +14,6 @@ import {
   getAccountCurrency,
 } from "@ledgerhq/live-common/lib/account";
 import { useTheme } from "@react-navigation/native";
-import Icon from "react-native-vector-icons/dist/FontAwesome5Pro";
 
 import type {
   Account,
@@ -17,6 +22,7 @@ import type {
 } from "@ledgerhq/live-common/lib/types";
 import LText from "./LText";
 import SummaryRow from "../screens/SendFunds/SummaryRow";
+import CheckBox from "./CheckBox";
 import CounterValue from "./CounterValue";
 import CurrencyUnitValue from "./CurrencyUnitValue";
 
@@ -24,7 +30,6 @@ import SectionSeparator from "./SectionSeparator";
 import BottomModal from "./BottomModal";
 import Info from "../icons/Info";
 import NetworkFeeInfo from "./NetworkFeeInfo";
-import { rgba } from "../colors";
 
 type Props = {
   strategies: any,
@@ -84,35 +89,19 @@ export default function SelectFeesStrategy({
         styles.feeButton,
         {
           borderColor:
-            feesStrategy === item.label
-              ? colors.live
-              : rgba(colors.contrastBackground, 0.1),
+            feesStrategy === item.label ? colors.live : colors.background,
+          backgroundColor:
+            feesStrategy === item.label ? colors.lightLive : colors.lightFog,
         },
       ]}
     >
       <View style={styles.feeStrategyContainer}>
         <View style={styles.leftBox}>
-          <Icon
-            size={16}
-            color={
-              feesStrategy === item.label
-                ? colors.live
-                : rgba(colors.contrastBackground, 0.5)
-            }
-            name={"tachometer-alt-fastest"}
+          <CheckBox
+            style={styles.checkbox}
+            isChecked={feesStrategy === item.label}
           />
-          <LText
-            bold
-            style={[
-              styles.feeLabel,
-              {
-                color:
-                  feesStrategy === item.label
-                    ? colors.live
-                    : rgba(colors.contrastBackground, 0.5),
-              },
-            ]}
-          >
+          <LText semiBold style={styles.feeLabel}>
             {t(`fees.speed.${item.label}`)}
           </LText>
         </View>
@@ -166,13 +155,14 @@ export default function SelectFeesStrategy({
           {null}
         </SummaryRow>
 
-        <FlatList
-          data={strategies}
-          renderItem={renderItem}
-          keyExtractor={s => s.label}
-          extraData={feesStrategy}
-        />
-
+        <SafeAreaView style={styles.strategiesContainer}>
+          <FlatList
+            data={strategies}
+            renderItem={renderItem}
+            keyExtractor={s => s.label}
+            extraData={feesStrategy}
+          />
+        </SafeAreaView>
         <TouchableOpacity
           style={[
             styles.customizeFeesButton,
@@ -216,12 +206,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
   },
-  feeLabel: {
-    fontSize: 10,
-    textTransform: "uppercase",
-    letterSpacing: 1,
-    marginLeft: 8,
-  },
+  feeLabel: { fontSize: 16, textTransform: "capitalize", marginLeft: 10 },
   feesAmount: { fontSize: 15 },
   checkbox: {
     borderRadius: 24,
