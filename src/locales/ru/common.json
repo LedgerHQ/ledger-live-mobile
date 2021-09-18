@@ -3640,8 +3640,8 @@
     "announcement": "Новости",
     "liveStatus": "Состояние Ledger Live",
     "groupedToast": {
-      "text": "You have {{count}} unread notifications",
-      "cta": "See details"
+      "text": " Новых уведомлений: {{count}}",
+      "cta": "Подробнее"
     },
     "news": {
       "title": "Новости",
