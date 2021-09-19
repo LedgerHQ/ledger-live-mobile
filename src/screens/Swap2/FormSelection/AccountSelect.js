@@ -15,6 +15,7 @@ import LText from "../../../components/LText";
 import { ScreenName } from "../../../const";
 import Chevron from "../../../icons/Chevron";
 import CurrencyIcon from "../../../components/CurrencyIcon";
+import CurrencyUnitValue from "../../../components/CurrencyUnitValue";
 
 type Props = {
   navigation: *,
@@ -52,7 +53,11 @@ export default function AccountSelect({ navigation, exchange }: Props) {
                 {name}
               </LText>
               <LText color="grey" style={styles.accountTicker}>
-                {currency.ticker}
+                <CurrencyUnitValue
+                  showCode
+                  unit={currency.units[0]}
+                  value={value.balance}
+                />
               </LText>
             </View>
           </>

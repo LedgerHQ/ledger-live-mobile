@@ -2,7 +2,7 @@
 
 import { useTheme } from "@react-navigation/native";
 import React, { useMemo, useCallback, useState, useEffect } from "react";
-import { SafeAreaView, StyleSheet, View } from "react-native";
+import { ScrollView, StyleSheet, View } from "react-native";
 import * as Animatable from "react-native-animatable";
 
 import type {
@@ -58,6 +58,8 @@ import Lock from "../../icons/Lock";
 import Unlock from "../../icons/Unlock";
 import CurrencyIcon from "../../components/CurrencyIcon";
 import { NavigatorName, ScreenName } from "../../const";
+import KeyboardView from "../../components/KeyboardView";
+import GenericErrorBottomModal from "../../components/GenericErrorBottomModal";
 
 export const providerIcons = {
   changelly: Changelly,
@@ -217,6 +219,19 @@ export default function SwapForm({
     );
   }, [setTransaction, bridge, transaction, fromAccount, maxSpendable]);
 
+  const resetError = useCallback(() => {
+    setError();
+    setTransaction(
+      bridge.updateTransaction(
+        transaction || bridge.createTransaction(fromAccount),
+        {
+          amount: BigNumber(0),
+          useAllAmount: !transaction?.useAllAmount,
+        },
+      ),
+    );
+  }, [bridge, fromAccount, setTransaction, transaction]);
+
   useEffect(() => {
     if (!fromAccount) return;
 
@@ -337,6 +352,7 @@ export default function SwapForm({
           setError(rate.error);
         } else {
           setRate(rate); // FIXME when we have multiple providers this will not be enough
+          setError();
           setRateExpiration(new Date(Date.now() + 60000));
         }
       } catch (error) {
@@ -349,16 +365,17 @@ export default function SwapForm({
       getRates();
     } else if (transaction?.amount.lte(0)) {
       setRate(null);
+      setError();
     }
   }, [
     exchange,
     fromAccount,
     toAccount,
-    error,
     transaction,
     providerKYC?.id,
     provider,
     rate,
+    error,
   ]);
 
   useEffect(() => {
@@ -372,7 +389,7 @@ export default function SwapForm({
   const toAccountName = toAccount ? getAccountName(toAccount) : null;
 
   return (
-    <SafeAreaView style={[styles.root, { backgroundColor: colors.background }]}>
+    <KeyboardView style={[styles.root, { backgroundColor: colors.background }]}>
       <View>
         <AccountAmountRow
           navigation={navigation}
@@ -387,6 +404,8 @@ export default function SwapForm({
           fetchingRate={fetchingRate}
           rate={rate}
         />
+      </View>
+      <ScrollView contentContainerStyle={styles.scrollZone}>
         {rate ? (
           <Animatable.View animation="fadeIn" useNativeDriver duration={400}>
             <GenericInputLink
@@ -486,8 +505,14 @@ export default function SwapForm({
             ) : null}
           </Animatable.View>
         ) : null}
-      </View>
-
+        {error && (
+          <GenericErrorBottomModal
+            error={error}
+            isOpened
+            onClose={resetError}
+          />
+        )}
+      </ScrollView>
       <View>
         <View style={styles.available}>
           <View style={styles.availableLeft}>
@@ -524,7 +549,7 @@ export default function SwapForm({
             containerStyle={styles.button}
             event="ExchangeStartBuyFlow"
             type="primary"
-            disabled={!!bridgePending}
+            disabled={!!bridgePending || !!error}
             title={<Trans i18nKey="transfer.swap.form.tab" />}
             onPress={() => {
               /** move to swap summary */
@@ -532,7 +557,7 @@ export default function SwapForm({
           />
         </View>
       </View>
-    </SafeAreaView>
+    </KeyboardView>
   );
 }
 
@@ -541,6 +566,9 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 16,
     justifyContent: "space-between",
+  },
+  scrollZone: {
+    flex: 1,
   },
   button: {
     flex: 1,

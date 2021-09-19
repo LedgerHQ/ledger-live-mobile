@@ -67,7 +67,13 @@ export default function SelectAccount({ navigation, route }: Props) {
     return filteredAccounts;
   }, [accounts, selectedCurrency]);
 
-  const allAccounts = flattenAccounts(enhancedAccounts);
+  const allAccounts = selectedCurrency
+    ? flattenAccounts(enhancedAccounts).filter(
+        acc =>
+          (acc.type === "TokenAccount" ? acc.token : acc.currency).id ===
+          selectedCurrency.id,
+      )
+    : flattenAccounts(enhancedAccounts);
 
   const keyExtractor = item => item.account.id;
   const isFrom = target === "from";
