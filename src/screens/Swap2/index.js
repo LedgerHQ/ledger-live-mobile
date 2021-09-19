@@ -586,7 +586,7 @@ export default function SwapForm({
             containerStyle={styles.button}
             event="ExchangeStartBuyFlow"
             type="primary"
-            disabled={!!bridgePending || !!error}
+            disabled={!!bridgePending || !!error || !rate}
             title={<Trans i18nKey="transfer.swap.form.tab" />}
             onPress={() => {
               /** move to swap summary */
