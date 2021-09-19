@@ -1895,6 +1895,10 @@
           "useMax": "Use max",
           "available": "Total available"
         },
+        "noAsset": {
+          "title": "You have no asset to swap",
+          "desc": "Buy some and come back to swap"
+        },
         "noApp": {
           "title": "{{appName}} app not installed",
           "desc": "Please go to Manager to install the {{appName}} app.",

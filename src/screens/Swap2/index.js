@@ -60,6 +60,8 @@ import CurrencyIcon from "../../components/CurrencyIcon";
 import { NavigatorName, ScreenName } from "../../const";
 import KeyboardView from "../../components/KeyboardView";
 import GenericErrorBottomModal from "../../components/GenericErrorBottomModal";
+import ConfirmationModal from "../../components/ConfirmationModal";
+import Info from "../../icons/Info";
 
 export const providerIcons = {
   changelly: Changelly,
@@ -128,8 +130,10 @@ export default function SwapForm({
   const defaultAccount =
     initDefaultAccount || elligibleAccountsForSelectedCurrency[0];
 
+  const [noAssetModalOpen, setNoAssetModalOpen] = useState(!defaultAccount);
+
   const defaultParentAccount =
-    defaultAccount.type === "TokenAccount"
+    defaultAccount?.type === "TokenAccount"
       ? accounts.find(a => a.id === defaultAccount.parentId)
       : null;
 
@@ -192,7 +196,9 @@ export default function SwapForm({
   // const fromCurrency = fromAccount ? getAccountCurrency(fromAccount) : null;
   // const toCurrency = toAccount ? getAccountCurrency(toAccount) : null;
 
-  const bridge = getAccountBridge(fromAccount, fromParentAccount);
+  const bridge = fromAccount
+    ? getAccountBridge(fromAccount, fromParentAccount)
+    : null;
 
   const {
     status,
@@ -208,28 +214,30 @@ export default function SwapForm({
   const debouncedTransaction = useDebounce(transaction, 500);
 
   const toggleUseAllAmount = useCallback(() => {
-    setTransaction(
-      bridge.updateTransaction(
-        transaction || bridge.createTransaction(fromAccount),
-        {
-          amount: maxSpendable || BigNumber(0),
-          useAllAmount: !transaction?.useAllAmount,
-        },
-      ),
-    );
+    if (bridge)
+      setTransaction(
+        bridge.updateTransaction(
+          transaction || bridge.createTransaction(fromAccount),
+          {
+            amount: maxSpendable || BigNumber(0),
+            useAllAmount: !transaction?.useAllAmount,
+          },
+        ),
+      );
   }, [setTransaction, bridge, transaction, fromAccount, maxSpendable]);
 
   const resetError = useCallback(() => {
     setError();
-    setTransaction(
-      bridge.updateTransaction(
-        transaction || bridge.createTransaction(fromAccount),
-        {
-          amount: BigNumber(0),
-          useAllAmount: !transaction?.useAllAmount,
-        },
-      ),
-    );
+    if (bridge)
+      setTransaction(
+        bridge.updateTransaction(
+          transaction || bridge.createTransaction(fromAccount),
+          {
+            amount: BigNumber(0),
+            useAllAmount: !transaction?.useAllAmount,
+          },
+        ),
+      );
   }, [bridge, fromAccount, setTransaction, transaction]);
 
   useEffect(() => {
@@ -296,6 +304,16 @@ export default function SwapForm({
       },
     });
   }, [exchange, navigation]);
+
+  const onNavigateToBuyCrypto = useCallback(() => {
+    setNoAssetModalOpen(false);
+    navigation.replace(NavigatorName.ExchangeBuyFlow);
+  }, [navigation]);
+
+  const onNavigateBack = useCallback(() => {
+    setNoAssetModalOpen(false);
+    navigation.goBack();
+  }, [navigation]);
 
   useEffect(() => {
     if (route.params?.rate) {
@@ -510,6 +528,25 @@ export default function SwapForm({
             error={error}
             isOpened
             onClose={resetError}
+          />
+        )}
+        {noAssetModalOpen && (
+          <ConfirmationModal
+            isOpened={noAssetModalOpen}
+            onClose={onNavigateBack}
+            confirmationTitle={
+              <Trans i18nKey="transfer.swap.form.noAsset.title" />
+            }
+            confirmationDesc={
+              <Trans i18nKey="transfer.swap.form.noAsset.desc" />
+            }
+            confirmButtonText={
+              <Trans i18nKey="carousel.banners.buyCrypto.title" />
+            }
+            onConfirm={onNavigateToBuyCrypto}
+            Icon={Info}
+            iconColor={colors.orange}
+            hideRejectButton
           />
         )}
       </ScrollView>
