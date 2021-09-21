@@ -268,7 +268,6 @@ export default function SwapForm({
   }, [exchange, navigation]);
 
   const onEditFees = () => {
-    console.log("send transaction", transaction);
     navigation.navigate(ScreenName.SwapV2FormSelectFees, {
       exchange,
       selectedCurrency: exchange.toCurrency,

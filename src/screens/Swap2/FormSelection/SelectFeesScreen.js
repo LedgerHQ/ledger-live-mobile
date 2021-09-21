@@ -1,6 +1,4 @@
 /* @flow */
-import { BigNumber } from "bignumber.js";
-
 import React, { useCallback } from "react";
 import { StyleSheet, SafeAreaView } from "react-native";
 
@@ -26,27 +24,12 @@ export default function SelectFees({ navigation, route }: Props) {
   const { transaction } = route.params;
   const { account, parentAccount } = route.params;
 
-  // Tmp: fixed networkInfo while waiting for ll-common to build complete transaction info
-  transaction.networkInfo.gasPrice = {
-    min: new BigNumber(600000),
-    initial: new BigNumber(300000),
-    max: new BigNumber(90000),
-    step: new BigNumber(5000),
-    steps: new BigNumber(103),
-  };
-  transaction.networkInfo.feeItems = {
-    items: [
-      { feePerByte: new BigNumber(9), key: "3", speed: "medium" },
-      { feePerByte: new BigNumber(6), key: "6", speed: "slow" },
-    ],
-  };
-
   const onSetTransaction = useCallback(updatedTransaction => {
     navigation.navigate(ScreenName.SwapForm, {
       ...route.params,
       transaction: updatedTransaction,
     });
-  }, []);
+  }, [navigation, route.params]);
 
   return (
     <SafeAreaView style={[styles.root]}>

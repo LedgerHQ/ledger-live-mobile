@@ -131,8 +131,8 @@ export default function BaseNavigator() {
             <StepHeader
               title={
                 route.params.target === "from"
-                  ? t("transfer.swap.form.from")
-                  : t("transfer.swap.form.to")
+                  ? t("transfer.swapv2.form.from")
+                  : t("transfer.swapv2.form.to")
               }
             />
           ),
@@ -143,7 +143,9 @@ export default function BaseNavigator() {
         name={ScreenName.SwapV2FormSelectCurrency}
         component={SwapFormV2SelectCurrency}
         options={{
-          headerTitle: () => <StepHeader title={t("transfer.swap.form.to")} />,
+          headerTitle: () => (
+            <StepHeader title={t("transfer.swapv2.form.to")} />
+          ),
           headerRight: null,
         }}
       />
@@ -152,7 +154,7 @@ export default function BaseNavigator() {
         component={SwapFormV2SelectProviderRate}
         options={{
           headerTitle: () => (
-            <StepHeader title={t("transfer.swap.form.summary.method")} />
+            <StepHeader title={t("transfer.swapv2.form.summary.method")} />
           ),
           headerRight: null,
         }}
@@ -162,7 +164,7 @@ export default function BaseNavigator() {
         component={SwapFormV2SelectFees}
         options={{
           headerTitle: () => (
-            <StepHeader title={t("transfer.swap.form.summary.fees")} />
+            <StepHeader title={t("transfer.swapv2.form.summary.fees")} />
           ),
           headerRight: null,
         }}
