@@ -25,7 +25,6 @@ import {
   getSupportedCurrencies,
 } from "@ledgerhq/live-common/lib/exchange/swap/logic";
 
-// import { getAccountCurrency } from "@ledgerhq/live-common/lib/account";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
 import { useDebounce } from "@ledgerhq/live-common/lib/hooks/useDebounce";
 
@@ -291,6 +290,17 @@ export default function SwapForm({
     });
   }, [exchange, navigation]);
 
+  const onEditFees = () => {
+    navigation.navigate(ScreenName.SwapV2FormSelectFees, {
+      exchange,
+      selectedCurrency: exchange.toCurrency,
+      target: "to",
+      account: fromAccount,
+      parentAccount: fromParentAccount,
+      transaction,
+    });
+  };
+
   const onAddAccount = useCallback(() => {
     navigation.navigate(NavigatorName.AddAccounts, {
       screen: ScreenName.AddAccountsSelectDevice,
@@ -402,8 +412,7 @@ export default function SwapForm({
 
   const ProviderIcon = providerIcons[provider];
 
-  const { magnitudeAwareRate, payoutNetworkFees, tradeMethod } = rate || {};
-
+  const { magnitudeAwareRate, tradeMethod } = rate || {};
   const toAccountName = toAccount ? getAccountName(toAccount) : null;
 
   return (
@@ -467,13 +476,13 @@ export default function SwapForm({
             <GenericInputLink
               label={<Trans i18nKey="send.summary.fees" />}
               tooltip={<Trans i18nKey="send.summary.fees" />}
-              onEdit={() => {}}
+              onEdit={onEditFees}
             >
-              {payoutNetworkFees && toCurrency ? (
+              {status.estimatedFees && fromUnit ? (
                 <LText semiBold style={styles.valueLabel}>
                   <CurrencyUnitValue
-                    unit={toCurrency.units[0]}
-                    value={payoutNetworkFees}
+                    unit={fromUnit}
+                    value={status.estimatedFees}
                     showCode
                   />
                 </LText>
