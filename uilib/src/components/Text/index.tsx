@@ -52,7 +52,7 @@ const T = styled.View`
 
 const BracketText = ({
   children,
-  color = "palette.text.default",
+  color = "palette.neutral.c100",
   ...props
 }: Props) => {
   const { lineHeight: size } = getTextStyle(props);
@@ -73,7 +73,7 @@ const BracketText = ({
 const Text = ({
   children,
   bracket,
-  color = "palette.text.default",
+  color = "palette.neutral.c100",
   ...props
 }: Props) => {
   if (bracket)

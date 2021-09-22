@@ -19,7 +19,7 @@ type Props = {
 const { width, height } = sizes;
 
 const Container = styled.View`
-  background-color: ${(p) => p.theme.colors.palette.background.default};
+  background-color: ${(p) => p.theme.colors.palette.neutral.c00};
   padding-horizontal: ${(p) => p.theme.space[3]}px;
   padding-vertical: ${(p) => p.theme.space[6]}px;
 `;
@@ -36,7 +36,7 @@ const StyledTitle = styled(Text).attrs({ type: "h3" })`
 
 const StyledDescription = styled(Text).attrs({
   type: "body",
-  color: "palette.text.secondary",
+  color: "palette.neutral.c80",
 })`
   text-transform: capitalize;
   margin-top: ${(p) => p.theme.space[1]}px;
@@ -44,7 +44,7 @@ const StyledDescription = styled(Text).attrs({
 
 const StyledSubtitle = styled(Text).attrs({
   type: "subTitle",
-  color: "palette.text.secondary",
+  color: "palette.neutral.c80",
 })`
   text-transform: uppercase;
   margin-bottom: ${(p) => p.theme.space[1]}px;

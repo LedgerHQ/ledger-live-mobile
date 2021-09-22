@@ -13,7 +13,7 @@ const IconContainer = styled.View`
   align-items: center;
   justify-content: center;
   border-width: 1px;
-  border-color: ${(p) => p.theme.colors.palette.grey.border};
+  border-color: ${(p) => p.theme.colors.palette.neutral.c40};
   border-radius: 4px;
 `;
 
@@ -21,7 +21,7 @@ export default function IconBox({ Icon, color }: Props): React.ReactElement {
   const { colors } = useTheme();
   return (
     <IconContainer>
-      <Icon size={18} color={color || colors.palette.text.default} />
+      <Icon size={18} color={color || colors.palette.neutral.c100} />
     </IconContainer>
   );
 }

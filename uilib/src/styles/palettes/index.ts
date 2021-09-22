@@ -4,37 +4,56 @@ import light from "./light";
 export type Theme = {
   type: string;
   primary: {
-    backgroundLight: string;
-    backgroundMedium: string;
-    borderMedium: string;
-    base: string;
-    borderDark: string;
-    dark: string;
+    c05: string;
+    c20: string;
+    c40: string;
+    c60: string;
+    c80: string;
+    c100: string;
+    c120: string;
+    c140: string;
+    c160: string;
+    c180: string;
   };
-  orange: {
-    error: string;
-    secondaryText: string;
-    main: string;
+  neutral: {
+    c00: string;
+    c20: string;
+    c30: string;
+    c40: string;
+    c50: string;
+    c60: string;
+    c70: string;
+    c80: string;
+    c90: string;
+    c100: string;
+    c100a07: string;
   };
-  text: {
-    default: string;
-    secondary: string;
-    tertiary: string;
-    contrast: string;
+  success: {
+    c05: string;
+    c10: string;
+    c20: string;
+    c40: string;
+    c60: string;
+    c80: string;
+    c100: string;
   };
-  grey: {
-    border: string;
+  warning: {
+    c05: string;
+    c10: string;
+    c20: string;
+    c40: string;
+    c60: string;
+    c80: string;
+    c100: string;
   };
-  feedback: {
-    error: string;
-    successText: string;
-    success: string;
-  };
-  background: {
-    nav: string;
-    default: string;
-    overlay: string;
-    grey: string;
+  error: {
+    c05: string;
+    c10: string;
+    c20: string;
+    c40: string;
+    c60: string;
+    c80: string;
+    c100: string;
   };
 };
 

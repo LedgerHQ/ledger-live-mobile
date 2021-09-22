@@ -2,7 +2,11 @@ import React from "react";
 import { margin, padding } from "styled-system";
 import styled from "styled-components/native";
 import Animated from "react-native-reanimated";
-import type { NativeSyntheticEvent, NativeScrollEvent, ScrollViewProps, } from 'react-native';
+import type {
+  NativeSyntheticEvent,
+  NativeScrollEvent,
+  ScrollViewProps,
+} from "react-native";
 
 const ScrollView = styled(Animated.ScrollView)`
   ${margin};
@@ -15,7 +19,11 @@ type ScrollContainerProps = ScrollViewProps & {
   horizontal?: boolean;
 };
 
-const ScrollContainer = ({ children, onScroll, horizontal = false }: ScrollContainerProps): JSX.Element => (
+const ScrollContainer = ({
+  children,
+  onScroll,
+  horizontal = false,
+}: ScrollContainerProps): JSX.Element => (
   <ScrollView onScroll={onScroll} horizontal={horizontal}>
     {children}
   </ScrollView>

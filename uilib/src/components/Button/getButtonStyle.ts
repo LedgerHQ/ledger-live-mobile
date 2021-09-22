@@ -17,21 +17,21 @@ export default function getButtonStyle(p: {
     case "primary":
       return p.disabled
         ? {
-            backgroundColor: p.theme.colors.palette.grey.border,
+            backgroundColor: p.theme.colors.palette.neutral.c40,
             padding: `0 ${p.theme.space[4]}px`,
           }
         : {
-            backgroundColor: p.theme.colors.palette.primary.base,
+            backgroundColor: p.theme.colors.palette.primary.c100,
             padding: `0 ${p.theme.space[4]}px`,
           };
     case "secondary":
       return p.disabled
         ? {
-            borderColor: p.theme.colors.palette.grey.border,
+            borderColor: p.theme.colors.palette.neutral.c40,
             padding: `0 ${p.theme.space[4]}px`,
           }
         : {
-            borderColor: p.theme.colors.palette.grey.border,
+            borderColor: p.theme.colors.palette.neutral.c40,
             padding: `0 ${p.theme.space[4]}px`,
           };
     default:
@@ -50,26 +50,26 @@ export function getButtonColor(p: {
     case "primary":
       return p.disabled
         ? {
-            color: p.theme.colors.palette.text.tertiary,
+            color: p.theme.colors.palette.neutral.c70,
           }
         : {
-            color: p.theme.colors.palette.text.contrast,
+            color: p.theme.colors.palette.neutral.c00,
           };
     case "secondary":
       return p.disabled
         ? {
-            color: p.theme.colors.palette.grey.border,
+            color: p.theme.colors.palette.neutral.c40,
           }
         : {
-            color: p.theme.colors.palette.text.default,
+            color: p.theme.colors.palette.neutral.c100,
           };
     default:
       return p.disabled
         ? {
-            color: p.theme.colors.palette.text.tertiary,
+            color: p.theme.colors.palette.neutral.c70,
           }
         : {
-            color: p.theme.colors.palette.text.default,
+            color: p.theme.colors.palette.neutral.c100,
           };
   }
 }

@@ -30,8 +30,8 @@ storiesOf('Text', module)
       )}
       color={select(
         'color',
-        ['palette.primary.base', 'palette.text.default'],
-        'palette.text.default',
+        ['palette.primary.c100', 'palette.neutral.c100'],
+        'palette.neutral.c100',
       )}
       bracket={boolean('bracket', false)}>
       {text('label', 'Ledger')}

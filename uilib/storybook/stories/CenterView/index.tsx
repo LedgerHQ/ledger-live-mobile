@@ -8,7 +8,7 @@ const Main = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
-  background-color: ${p => p.theme.colors.palette.background.default};
+  background-color: ${p => p.theme.colors.palette.neutral.c00};
   overflow: scroll;
 `;
 
@@ -17,7 +17,7 @@ const ThemeButton = styled.TouchableOpacity`
   height: ${p => p.theme.space[6]}px;
   border-top-left-radius: ${p => p.theme.space[6]};
   border-bottom-left-radius: ${p => p.theme.space[6]};
-  background-color: ${p => p.theme.colors.palette.text.default};
+  background-color: ${p => p.theme.colors.palette.neutral.c100};
   justify-content: center;
   align-items: center;
   position: absolute;
@@ -27,7 +27,7 @@ const ThemeButton = styled.TouchableOpacity`
 `;
 
 const Icon = styled.Text`
-  color: ${p => p.theme.colors.palette.text.default};
+  color: ${p => p.theme.colors.palette.neutral.c100};
   font-size: 15px;
 `;
 

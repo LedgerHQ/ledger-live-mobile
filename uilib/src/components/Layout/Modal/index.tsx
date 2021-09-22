@@ -19,7 +19,7 @@ export type ModalProps = {
 
 const Container = styled.View`
   flex: 1;
-  background-color: ${(p) => p.theme.colors.palette.background.default};
+  background-color: ${(p) => p.theme.colors.palette.neutral.c00};
 `;
 
 const ContentContainer = styled.View`
