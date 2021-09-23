@@ -54,6 +54,7 @@ export const ScreenName = {
   EditAccountUnits: "EditAccountUnits",
   EditDeviceName: "EditDeviceName",
   EthereumCustomFees: "EthereumCustomFees",
+  PlatONCustomFees: "PlatONCustomFees",
   EthereumEditGasLimit: "EthereumEditGasLimit",
   Exchange: "Exchange",
   ExchangeBuy: "ExchangeBuy",
