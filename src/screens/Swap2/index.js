@@ -3,7 +3,6 @@
 import { useTheme } from "@react-navigation/native";
 import React, { useMemo, useCallback, useState, useEffect } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
-import * as Animatable from "react-native-animatable";
 
 import type {
   CryptoCurrency,
@@ -34,13 +33,11 @@ import {
   accountWithMandatoryTokens,
   flattenAccounts,
   getAccountCurrency,
-  getAccountName,
   getAccountUnit,
 } from "@ledgerhq/live-common/lib/account";
 import { BigNumber } from "bignumber.js";
 import { useSelector } from "react-redux";
 import { useCurrenciesByMarketcap } from "@ledgerhq/live-common/lib/currencies";
-import { AccessDeniedError } from "@ledgerhq/live-common/lib/errors";
 import { getExchangeRates } from "@ledgerhq/live-common/lib/exchange/swap";
 import Config from "react-native-config";
 import AccountAmountRow from "./FormSelection/AccountAmountRow";
@@ -50,22 +47,13 @@ import CurrencyUnitValue from "../../components/CurrencyUnitValue";
 import Switch from "../../components/Switch";
 import { accountsSelector } from "../../reducers/accounts";
 import { swapKYCSelector } from "../../reducers/settings";
-import GenericInputLink from "./FormSelection/GenericInputLink";
-import Changelly from "../../icons/swap/Changelly";
-import Wyre from "../../icons/swap/Wyre";
-import Lock from "../../icons/Lock";
-import Unlock from "../../icons/Unlock";
-import CurrencyIcon from "../../components/CurrencyIcon";
-import { NavigatorName, ScreenName } from "../../const";
+
+import { NavigatorName } from "../../const";
 import KeyboardView from "../../components/KeyboardView";
 import GenericErrorBottomModal from "../../components/GenericErrorBottomModal";
 import ConfirmationModal from "../../components/ConfirmationModal";
 import Info from "../../icons/Info";
-
-export const providerIcons = {
-  changelly: Changelly,
-  wyre: Wyre,
-};
+import RatesSection from "./FormSelection/RatesSection";
 
 export type SwapRouteParams = {
   exchange: Exchange,
@@ -80,8 +68,8 @@ export type SwapRouteParams = {
   installedApps: any,
   target: "from" | "to",
   rateExpiration?: Date,
-  rate?: any,
-  rates?: any[],
+  rate?: ExchangeRate,
+  rates?: ExchangeRate[],
   tradeMethod?: string,
 };
 
@@ -111,7 +99,6 @@ export default function SwapForm({
   const [error, setError] = useState(null);
   const [rates, setRates] = useState([]);
   const [rate, setRate] = useState(null);
-  // eslint-disable-next-line no-unused-vars
   const [rateExpiration, setRateExpiration] = useState(null);
   const [fetchingRate, setFetchingRate] = useState(false);
 
@@ -191,7 +178,7 @@ export default function SwapForm({
 
   const [maxSpendable, setMaxSpendable] = useState();
 
-  const { fromAccount, fromParentAccount, toAccount, toCurrency } = exchange;
+  const { fromAccount, fromParentAccount, toAccount } = exchange;
   // const fromCurrency = fromAccount ? getAccountCurrency(fromAccount) : null;
   // const toCurrency = toAccount ? getAccountCurrency(toAccount) : null;
 
@@ -239,81 +226,9 @@ export default function SwapForm({
       );
   }, [bridge, fromAccount, setTransaction, transaction]);
 
-  useEffect(() => {
-    if (!fromAccount) return;
-
-    let cancelled = false;
-    getAccountBridge(fromAccount, fromParentAccount)
-      .estimateMaxSpendable({
-        account: fromAccount,
-        parentAccount: fromParentAccount,
-        transaction: debouncedTransaction,
-      })
-      .then(estimate => {
-        if (cancelled) return;
-
-        setMaxSpendable(estimate);
-      });
-
-    // eslint-disable-next-line consistent-return
-    return () => {
-      cancelled = true;
-    };
-  }, [fromAccount, fromParentAccount, debouncedTransaction]);
-
-  useEffect(() => {
-    if (route.params?.transaction) {
-      setTransaction(route.params.transaction);
-    }
-  }, [route.params, setTransaction]);
-
   const fromUnit = useMemo(() => fromAccount && getAccountUnit(fromAccount), [
     fromAccount,
   ]);
-
-  const onEditRateProvider = useCallback(() => {
-    navigation.navigate(ScreenName.SwapFormV2SelectProviderRate, {
-      exchange,
-      selectedCurrency: exchange.toCurrency,
-      rates,
-      rate,
-      transaction,
-      provider,
-    });
-  }, [exchange, navigation, provider, rate, rates, transaction]);
-
-  const onEditToAccount = useCallback(() => {
-    navigation.navigate(ScreenName.SwapV2FormSelectAccount, {
-      exchange,
-      selectedCurrency: exchange.toCurrency,
-      target: "to",
-    });
-  }, [exchange, navigation]);
-
-  const onEditFees = () => {
-    navigation.navigate(ScreenName.SwapV2FormSelectFees, {
-      exchange,
-      selectedCurrency: exchange.toCurrency,
-      target: "to",
-      account: fromAccount,
-      parentAccount: fromParentAccount,
-      transaction,
-    });
-  };
-
-  const onAddAccount = useCallback(() => {
-    navigation.navigate(NavigatorName.AddAccounts, {
-      screen: ScreenName.AddAccountsSelectDevice,
-      params: {
-        currency: exchange.toCurrency,
-        returnToSwap: true,
-        onSuccess: () =>
-          navigation.navigate(ScreenName.SwapForm, {
-            exchange,
-          }),
-      },
-    });
-  }, [exchange, navigation]);
 
   const onNavigateToBuyCrypto = useCallback(() => {
     setNoAssetModalOpen(false);
@@ -374,9 +289,6 @@ export default function SwapForm({
           .find(Boolean);
 
         if (rate?.error) {
-          if (rate?.error && rate.error instanceof AccessDeniedError) {
-            // setShowUnauthorizedRates(true);
-          }
           setError(rate.error);
         } else {
           setRate(rate); // FIXME when we have multiple providers this will not be enough
@@ -407,13 +319,36 @@ export default function SwapForm({
   ]);
 
   useEffect(() => {
+    if (!fromAccount) return;
+
+    let cancelled = false;
+    getAccountBridge(fromAccount, fromParentAccount)
+      .estimateMaxSpendable({
+        account: fromAccount,
+        parentAccount: fromParentAccount,
+        transaction: debouncedTransaction,
+      })
+      .then(estimate => {
+        if (cancelled) return;
+
+        setMaxSpendable(estimate);
+      });
+
+    // eslint-disable-next-line consistent-return
+    return () => {
+      cancelled = true;
+    };
+  }, [fromAccount, fromParentAccount, debouncedTransaction]);
+
+  useEffect(() => {
+    if (route.params?.transaction) {
+      setTransaction(route.params.transaction);
+    }
+  }, [route.params, setTransaction]);
+
+  useEffect(() => {
     setRate(null);
   }, [debouncedTransaction, route.params]);
-
-  const ProviderIcon = providerIcons[provider];
-
-  const { magnitudeAwareRate, tradeMethod } = rate || {};
-  const toAccountName = toAccount ? getAccountName(toAccount) : null;
 
   return (
     <KeyboardView style={[styles.root, { backgroundColor: colors.background }]}>
@@ -433,105 +368,15 @@ export default function SwapForm({
         />
       </View>
       <ScrollView contentContainerStyle={styles.scrollZone}>
-        {rate ? (
-          <Animatable.View animation="fadeIn" useNativeDriver duration={400}>
-            <GenericInputLink
-              label={<Trans i18nKey="transfer.swap.form.summary.provider" />}
-              tooltip={<Trans i18nKey="transfer.swap.form.summary.provider" />}
-            >
-              {ProviderIcon ? <ProviderIcon size={12} /> : null}
-              <LText semiBold style={styles.valueLabel}>
-                {provider}
-              </LText>
-            </GenericInputLink>
-            {fromUnit && toCurrency && magnitudeAwareRate ? (
-              <GenericInputLink
-                label={<Trans i18nKey="transfer.swap.form.summary.method" />}
-                tooltip={<Trans i18nKey="transfer.swap.form.summary.method" />}
-                onEdit={onEditRateProvider}
-              >
-                {tradeMethod === "fixed" ? (
-                  <Lock size={12} color={colors.darkBlue} />
-                ) : (
-                  <Unlock size={12} color={colors.darkBlue} />
-                )}
-                <LText semiBold style={styles.valueLabel}>
-                  <CurrencyUnitValue
-                    value={BigNumber(10).pow(fromUnit.magnitude)}
-                    unit={fromUnit}
-                    showCode
-                  />
-                  {" = "}
-                  <CurrencyUnitValue
-                    unit={toCurrency.units[0]}
-                    value={BigNumber(10)
-                      .pow(fromUnit.magnitude)
-                      .times(magnitudeAwareRate)}
-                    showCode
-                  />
-                </LText>
-              </GenericInputLink>
-            ) : null}
-
-            <GenericInputLink
-              label={<Trans i18nKey="send.summary.fees" />}
-              tooltip={<Trans i18nKey="send.summary.fees" />}
-              onEdit={onEditFees}
-            >
-              {status.estimatedFees && fromUnit ? (
-                <LText semiBold style={styles.valueLabel}>
-                  <CurrencyUnitValue
-                    unit={fromUnit}
-                    value={status.estimatedFees}
-                    showCode
-                  />
-                </LText>
-              ) : null}
-            </GenericInputLink>
-            {toCurrency ? (
-              toAccountName ? (
-                <GenericInputLink
-                  label={<Trans i18nKey="transfer.swap.form.target" />}
-                  onEdit={onEditToAccount}
-                >
-                  <CurrencyIcon currency={toCurrency} size={16} />
-                  <LText semiBold style={styles.valueLabel}>
-                    {toAccountName}
-                  </LText>
-                </GenericInputLink>
-              ) : (
-                <View
-                  style={[
-                    styles.addAccountsection,
-                    { backgroundColor: colors.lightLive },
-                  ]}
-                >
-                  <LText
-                    color="live"
-                    semiBold
-                    style={styles.addAccountLabel}
-                    numberOfLines={2}
-                  >
-                    <Trans
-                      i18nKey="transfer.swap.form.noAccount"
-                      values={{ currency: toCurrency.name }}
-                    />
-                  </LText>
-                  <View style={styles.spacer} />
-                  <Button
-                    type="primary"
-                    onPress={onAddAccount}
-                    title={
-                      <Trans i18nKey="transfer.swap.emptyState.CTAButton" />
-                    }
-                    containerStyle={styles.addAccountButton}
-                    titleStyle={styles.addAccountButtonLabel}
-                  />
-                </View>
-              )
-            ) : null}
-          </Animatable.View>
-        ) : null}
+        <RatesSection
+          navigation={navigation}
+          transaction={transaction}
+          status={status}
+          rates={rates}
+          rate={rate}
+          provider={provider}
+          exchange={exchange}
+        />
         {error && (
           <GenericErrorBottomModal
             error={error}
