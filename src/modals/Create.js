@@ -6,10 +6,7 @@ import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 
 import { NavigatorName, ScreenName } from "../const";
-import {
-  accountsCountSelector,
-  hasLendEnabledAccountsSelector,
-} from "../reducers/accounts";
+import { accountsCountSelector } from "../reducers/accounts";
 import IconSend from "../icons/Send";
 import IconReceive from "../icons/Receive";
 import IconExchange from "../icons/Exchange";
@@ -26,7 +23,6 @@ export default function CreateModal({ isOpened, onClose }: ModalProps) {
 
   const readOnlyModeEnabled = useSelector(readOnlyModeEnabledSelector);
   const accountsCount = useSelector(accountsCountSelector);
-  const lendingEnabled = useSelector(hasLendEnabledAccountsSelector);
 
   const onNavigate = useCallback(
     (name: string, options?: { [key: string]: any }) => {
@@ -97,14 +93,12 @@ export default function CreateModal({ isOpened, onClose }: ModalProps) {
         Icon={IconSwap}
         onPress={accountsCount > 0 && !readOnlyModeEnabled ? onSwap : null}
       />
-      {lendingEnabled ? (
-        <BottomModalChoice
-          event="TransferLending"
-          title={t("transfer.lending.titleTransferTab")}
-          Icon={IconLending}
-          onPress={accountsCount > 0 && !readOnlyModeEnabled ? onLending : null}
-        />
-      ) : null}
+      <BottomModalChoice
+        event="TransferLending"
+        title={t("transfer.lending.titleTransferTab")}
+        Icon={IconLending}
+        onPress={accountsCount > 0 && !readOnlyModeEnabled ? onLending : null}
+      />
     </BottomModal>
   );
 }
