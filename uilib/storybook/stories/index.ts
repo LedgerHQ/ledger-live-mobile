@@ -6,4 +6,5 @@ import "./Layout/ScrollContainer.stories";
 import "./Layout/Flex.stories";
 import "./Navigation/SlideIndicator/SlideIndicator.stories";
 import "./Icon/IconBox.stories";
+import "./Icon/AssetsIcons.stories";
 import "./Loader/Loader.stories";

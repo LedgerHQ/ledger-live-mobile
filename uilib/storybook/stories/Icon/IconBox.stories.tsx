@@ -1,7 +1,7 @@
 import { storiesOf } from "@storybook/react-native";
 import { withKnobs } from "@storybook/addon-knobs";
 import React from "react";
-import Info from "@ui/icons/Info";
+import Info from "@ui/assets/icons/InfoMedium";
 import CenterView from "../CenterView";
 import IconBox from "../../../src/components/Icon/IconBox";
 
