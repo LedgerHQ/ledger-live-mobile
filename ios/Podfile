@@ -1,7 +1,7 @@
 require_relative '../node_modules/react-native/scripts/react_native_pods'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
-platform :ios, '10.0'
+platform :ios, '11.0'
 
 target 'ledgerlivemobile' do
   config = use_native_modules!
@@ -18,6 +18,11 @@ target 'ledgerlivemobile' do
   pod 'react-native-webview', :path => '../node_modules/react-native-webview'
   pod 'React-RCTText', :path => '../node_modules/react-native/Libraries/Text', :modular_headers => true
 
+  # TODO: remove this once MultiPlatformBleAdapter gets released to 0.1.9
+  # https://github.com/dotintent/MultiPlatformBleAdapter/issues/79
+  # https://github.com/dotintent/MultiPlatformBleAdapter/pull/80
+  pod 'MultiplatformBleAdapter', :git => 'https://github.com/below/MultiPlatformBleAdapter', :tag => '0.1.9'
+
   target 'ledgerlivemobileTests' do
     inherit! :search_paths
     # Pods for testing
@@ -30,18 +35,8 @@ target 'ledgerlivemobile' do
   use_flipper!({ 'Flipper-Folly' => '2.5.3', 'Flipper' => '0.87.0', 'Flipper-RSocket' => '1.3.1' })
   post_install do |installer|
     flipper_post_install(installer)
-
-    installer.pods_project.targets.each do |target|
-      if target.name == 'react-native-config'
-        phase = target.project.new(Xcodeproj::Project::Object::PBXShellScriptBuildPhase)
-        phase.shell_script = "cd ../../"\
-                             " && RNC_ROOT=./node_modules/react-native-config/"\
-                             " && export SYMROOT=$RNC_ROOT/ios/ReactNativeConfig"\
-                             " && ruby $RNC_ROOT/ios/ReactNativeConfig/BuildDotenvConfig.ruby"
-        target.build_phases << phase
-        target.build_phases.move(phase,0)
-      end
-    end
-
+    target.build_configurations.each do |config|
+      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '11.0'
+     end
   end
 end
