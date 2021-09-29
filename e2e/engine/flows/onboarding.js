@@ -46,6 +46,8 @@ async function connectViaBluetooth(modelId: DeviceModelId) {
     await $scrollTill(el);
     await $tap(el);
     await $tap("OnboardingStemPairNewContinue");
+    const dismissSeedWarning = $("Onboarding - Seed warning");
+    await $tap(dismissSeedWarning);
     await $proceed();
     const [david] = bridge.addDevices();
     // TODO E2E: Android

@@ -42,6 +42,7 @@ const SeedWarning = ({ deviceModelId }: { deviceModelId: DeviceModelId }) => {
       </Alert>
       <Button
         type="primary"
+        testID={"Onboarding - Seed warning"}
         containerStyle={styles.button}
         onPress={() => setIsOpened(false)}
         title={<Trans i18nKey="onboarding.warning.seed.continueCTA" />}
