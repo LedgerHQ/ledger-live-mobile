@@ -55,7 +55,7 @@
 - (void) showOverlay{
   UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleRegular];
   UIVisualEffectView *blurEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
-  UIImageView *logoView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"Blurry"]];
+  UIImageView *logoView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"Blurry_nocache1"]];
   logoView.contentMode = UIViewContentModeScaleAspectFit;
   blurEffectView.frame = [self.window bounds];
   blurEffectView.tag = 12345;
