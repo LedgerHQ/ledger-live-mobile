@@ -61,8 +61,6 @@ export default function SelectAccount({ navigation, route }: Props) {
     return filteredAccounts;
   }, [accounts, selectedCurrency]);
 
-  console.log(enhancedAccounts, selectedCurrency)
-
   const allAccounts = selectedCurrency
     ? flattenAccounts(enhancedAccounts).filter(
         acc =>
