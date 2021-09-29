@@ -4,7 +4,12 @@ import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { Trans } from "react-i18next";
 import { useTheme } from "@react-navigation/native";
 
-import type { Exchange } from "@ledgerhq/live-common/lib/exchange/swap/types";
+import type {
+  TokenCurrency,
+  CryptoCurrency,
+} from "@ledgerhq/live-common/lib/types";
+import type { SwapDataType } from "@ledgerhq/live-common/lib/exchange/swap/hooks";
+import type { SwapRouteParams } from "..";
 
 import SearchIcon from "../../../icons/Search";
 import LText from "../../../components/LText";
@@ -14,31 +19,34 @@ import CurrencyIcon from "../../../components/CurrencyIcon";
 
 type Props = {
   navigation: *,
-  exchange: Exchange,
-  provider: any,
+  route: { params: SwapRouteParams },
+  swap: SwapDataType,
+  setToCurrency: (currency?: TokenCurrency | CryptoCurrency) => void,
   providers: any,
+  provider: any,
 };
 
 export default function CurrencyTargetSelect({
+  swap,
   navigation,
-  exchange,
-  provider,
+  route,
+  setToCurrency,
   providers,
+  provider,
 }: Props) {
   const { colors } = useTheme();
 
-  const value = exchange.toCurrency;
+  const value = swap.to.currency;
 
   const onPressItem = useCallback(() => {
     navigation.navigate(ScreenName.SwapV2FormSelectCurrency, {
-      exchange: {
-        ...exchange,
-        toCurrency: null,
-      },
+      ...route.params,
+      swap,
+      setCurrency: setToCurrency,
       providers,
       provider,
     });
-  }, [exchange, navigation, providers, provider]);
+  }, [navigation, provider, providers, route.params, setToCurrency, swap]);
 
   return (
     <TouchableOpacity style={styles.root} onPress={onPressItem}>

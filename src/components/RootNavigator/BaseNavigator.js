@@ -131,8 +131,8 @@ export default function BaseNavigator() {
             <StepHeader
               title={
                 route.params.target === "from"
-                  ? t("transfer.swapv2.form.from")
-                  : t("transfer.swapv2.form.to")
+                  ? t("transfer.swap.form.from")
+                  : t("transfer.swap.form.to")
               }
             />
           ),

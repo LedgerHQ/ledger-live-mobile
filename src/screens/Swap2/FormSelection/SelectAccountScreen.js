@@ -12,10 +12,6 @@ import { useSelector } from "react-redux";
 import { Trans } from "react-i18next";
 import { useTheme } from "@react-navigation/native";
 
-import type {
-  Account,
-  AccountLikeArray,
-} from "@ledgerhq/live-common/lib/types";
 import {
   accountWithMandatoryTokens,
   flattenAccounts,
@@ -37,15 +33,13 @@ import AddIcon from "../../../icons/Plus";
 const SEARCH_KEYS = ["name", "unit.code", "token.name", "token.ticker"];
 
 type Props = {
-  accounts: Account[],
-  allAccounts: AccountLikeArray,
   navigation: any,
   route: { params: SwapRouteParams },
 };
 
 export default function SelectAccount({ navigation, route }: Props) {
   const { colors } = useTheme();
-  const { exchange, target, selectedCurrency } = route.params;
+  const { swap, target, selectedCurrency, setAccount } = route.params;
   const accounts = useSelector(accountsSelector);
 
   const enhancedAccounts = useMemo(() => {
@@ -67,6 +61,8 @@ export default function SelectAccount({ navigation, route }: Props) {
     return filteredAccounts;
   }, [accounts, selectedCurrency]);
 
+  console.log(enhancedAccounts, selectedCurrency)
+
   const allAccounts = selectedCurrency
     ? flattenAccounts(enhancedAccounts).filter(
         acc =>
@@ -81,20 +77,6 @@ export default function SelectAccount({ navigation, route }: Props) {
   const renderItem = useCallback(
     ({ item: result }: { item: SearchResult }) => {
       const { account } = result;
-      const parentAccount =
-        account.type === "TokenAccount"
-          ? accounts.find(a => a.id === account.parentId)
-          : null;
-      const accountParams = isFrom
-        ? {
-            fromAccount: account,
-            fromParentAccount: parentAccount,
-          }
-        : {
-            toAccount: account,
-            toParentAccount: parentAccount,
-          };
-
       return (
         <View
           style={
@@ -108,25 +90,22 @@ export default function SelectAccount({ navigation, route }: Props) {
             account={account}
             style={styles.card}
             onPress={() => {
+              setAccount && setAccount(account);
               navigation.navigate(ScreenName.SwapForm, {
                 ...route.params,
-                exchange: {
-                  ...exchange,
-                  ...accountParams,
-                },
               });
             }}
           />
         </View>
       );
     },
-    [accounts, isFrom, colors.fog, navigation, route.params, exchange],
+    [colors.fog, setAccount, navigation, route.params],
   );
 
   const elligibleAccountsForSelectedCurrency = allAccounts.filter(account =>
     isFrom
-      ? account.balance.gt(0) && exchange?.toAccount?.id !== account.id
-      : exchange?.fromAccount?.id !== account.id,
+      ? account.balance.gt(0) && swap.to.account?.id !== account.id
+      : swap.from.account?.id !== account.id,
   );
 
   const onAddAccount = useCallback(() => {

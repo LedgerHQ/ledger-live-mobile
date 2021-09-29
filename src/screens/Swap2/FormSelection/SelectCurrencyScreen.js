@@ -40,13 +40,13 @@ export default function SwapFormSelectCurrencyScreen({
   route,
 }: Props) {
   const { colors } = useTheme();
-  const { exchange, providers, provider } = route.params;
+  const { swap, providers, provider, setCurrency } = route.params;
 
   const selectableCurrencies = getSupportedCurrencies({ providers, provider });
 
-  const maybeFilteredCurrencies = exchange.fromAccount
+  const maybeFilteredCurrencies = swap.from.account
     ? selectableCurrencies.filter(
-        c => c !== getAccountCurrency(exchange.fromAccount),
+        c => c !== getAccountCurrency(swap.from.account),
       )
     : selectableCurrencies;
   const sortedCryptoCurrencies = useCurrenciesByMarketcap(
@@ -55,15 +55,12 @@ export default function SwapFormSelectCurrencyScreen({
 
   const onPressCurrency = useCallback(
     (currency: CryptoCurrency) => {
+      setCurrency && setCurrency(currency);
       navigation.navigate(ScreenName.SwapForm, {
         ...route.params,
-        exchange: {
-          ...exchange,
-          toCurrency: currency,
-        },
       });
     },
-    [exchange, navigation, route.params],
+    [navigation, route.params, setCurrency],
   );
 
   const renderList = items => (

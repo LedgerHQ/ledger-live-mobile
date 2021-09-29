@@ -22,30 +22,41 @@ type Props = {
 
 export default function SelectFees({ navigation, route }: Props) {
   const { transaction } = route.params;
-  const { account, parentAccount } = route.params;
+  const { swap } = route.params;
+  const { from: { account, parentAccount } = {} } = swap;
 
-  const onSetTransaction = useCallback(updatedTransaction => {
-    navigation.navigate(ScreenName.SwapForm, {
-      ...route.params,
-      transaction: updatedTransaction,
-    });
-  }, [navigation, route.params]);
+  const onSetTransaction = useCallback(
+    updatedTransaction => {
+      navigation.navigate(ScreenName.SwapForm, {
+        ...route.params,
+        transaction: updatedTransaction,
+      });
+    },
+    [navigation, route.params],
+  );
 
   return (
     <SafeAreaView style={[styles.root]}>
       <TrackScreen category="ReceiveFunds" name="SelectAccount" />
       <NavigationScrollView>
-        <SendRowsFee
-          setTransaction={onSetTransaction}
-          account={account}
-          parentAccount={parentAccount}
-          transaction={transaction}
-          navigation={navigation}
-          route={{
-            ...route,
-            params: { ...route.params, currentNavigation: ScreenName.SwapForm },
-          }}
-        />
+        {account && (
+          <SendRowsFee
+            setTransaction={onSetTransaction}
+            account={account}
+            parentAccount={parentAccount}
+            transaction={transaction}
+            navigation={navigation}
+            route={{
+              ...route,
+              params: {
+                ...route.params,
+                accountId: account.id,
+                parentAccountId: parentAccount?.id,
+                currentNavigation: ScreenName.SwapForm,
+              },
+            }}
+          />
+        )}
       </NavigationScrollView>
     </SafeAreaView>
   );

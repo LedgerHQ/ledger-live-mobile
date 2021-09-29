@@ -4,11 +4,14 @@ import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { Trans } from "react-i18next";
 import { useTheme } from "@react-navigation/native";
 
-import type { Exchange } from "@ledgerhq/live-common/lib/exchange/swap/types";
 import {
   getAccountCurrency,
   getAccountName,
 } from "@ledgerhq/live-common/lib/account";
+
+import type { Account, TokenAccount } from "@ledgerhq/live-common/lib/types";
+import type { SwapDataType } from "@ledgerhq/live-common/lib/exchange/swap/hooks";
+import type { SwapRouteParams } from "..";
 
 import SearchIcon from "../../../icons/Search";
 import LText from "../../../components/LText";
@@ -19,26 +22,39 @@ import CurrencyUnitValue from "../../../components/CurrencyUnitValue";
 
 type Props = {
   navigation: *,
-  exchange: Exchange,
+  route: { params: SwapRouteParams },
+  swap: SwapDataType,
+  setFromAccount: (account?: Account | TokenAccount) => void,
+  providers: any,
+  provider: any,
 };
 
-export default function AccountSelect({ navigation, exchange }: Props) {
+export default function AccountSelect({
+  navigation,
+  route,
+  swap,
+  setFromAccount,
+  providers,
+  provider,
+}: Props) {
   const { colors } = useTheme();
 
-  const value = exchange.fromAccount;
+  const value = swap.from.account;
 
   const currency = useMemo(() => value && getAccountCurrency(value), [value]);
   const name = useMemo(() => value && getAccountName(value), [value]);
 
   const onPressItem = useCallback(() => {
     navigation.navigate(ScreenName.SwapV2FormSelectAccount, {
-      exchange: {
-        ...exchange,
-        fromAccount: null,
-      },
+      ...route.params,
+      swap,
+      setAccount: setFromAccount,
       target: "from",
+      providers,
+      provider,
+      selectedCurrency: undefined,
     });
-  }, [exchange, navigation]);
+  }, [navigation, provider, providers, route.params, setFromAccount, swap]);
 
   return (
     <TouchableOpacity style={styles.root} onPress={onPressItem}>

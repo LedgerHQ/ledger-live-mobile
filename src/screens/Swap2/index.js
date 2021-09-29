@@ -7,25 +7,26 @@ import { ScrollView, StyleSheet, View } from "react-native";
 import type {
   CryptoCurrency,
   TokenCurrency,
-  Transaction,
   TransactionStatus,
 } from "@ledgerhq/live-common/lib/types";
 import type {
   Account,
   AccountLike,
+  TokenAccount,
 } from "@ledgerhq/live-common/lib/types/account";
 
 import type {
-  Exchange,
   ExchangeRate,
+  SwapTransaction,
 } from "@ledgerhq/live-common/lib/exchange/swap/types";
+import type { SwapDataType } from "@ledgerhq/live-common/lib/exchange/swap/hooks";
+
+import { useSwapTransaction } from "@ledgerhq/live-common/lib/exchange/swap/hooks";
+
 import {
   CurrenciesStatus,
   getSupportedCurrencies,
 } from "@ledgerhq/live-common/lib/exchange/swap/logic";
-
-import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
-import { useDebounce } from "@ledgerhq/live-common/lib/hooks/useDebounce";
 
 import { Trans } from "react-i18next";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
@@ -35,18 +36,14 @@ import {
   getAccountCurrency,
   getAccountUnit,
 } from "@ledgerhq/live-common/lib/account";
-import { BigNumber } from "bignumber.js";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useCurrenciesByMarketcap } from "@ledgerhq/live-common/lib/currencies";
-import { getExchangeRates } from "@ledgerhq/live-common/lib/exchange/swap";
-import Config from "react-native-config";
 import AccountAmountRow from "./FormSelection/AccountAmountRow";
 import Button from "../../components/Button";
 import LText from "../../components/LText";
 import CurrencyUnitValue from "../../components/CurrencyUnitValue";
 import Switch from "../../components/Switch";
 import { accountsSelector } from "../../reducers/accounts";
-import { swapKYCSelector } from "../../reducers/settings";
 
 import { NavigatorName } from "../../const";
 import KeyboardView from "../../components/KeyboardView";
@@ -54,13 +51,19 @@ import GenericErrorBottomModal from "../../components/GenericErrorBottomModal";
 import ConfirmationModal from "../../components/ConfirmationModal";
 import Info from "../../icons/Info";
 import RatesSection from "./FormSelection/RatesSection";
+import { swapAcceptedProvidersSelector } from "../../reducers/settings";
+import Confirmation from "./Confirmation";
+import { swapAcceptProvider } from "../../actions/settings";
+import Connect from "./Connect";
+import { Track } from "../../analytics";
+import DisclaimerModal from "./DisclaimerModal";
 
 export type SwapRouteParams = {
-  exchange: Exchange,
+  swap: SwapDataType,
   exchangeRate: ExchangeRate,
   currenciesStatus: CurrenciesStatus,
   selectableCurrencies: (CryptoCurrency | TokenCurrency)[],
-  transaction?: Transaction,
+  transaction?: SwapTransaction,
   status?: TransactionStatus,
   selectedCurrency: CryptoCurrency | TokenCurrency,
   providers: any,
@@ -71,6 +74,8 @@ export type SwapRouteParams = {
   rate?: ExchangeRate,
   rates?: ExchangeRate[],
   tradeMethod?: string,
+  setAccount?: (account?: Account | TokenAccount) => void,
+  setCurrency?: (currency?: TokenCurrency | CryptoCurrency) => void,
 };
 
 type Props = {
@@ -87,20 +92,13 @@ export default function SwapForm({
   navigation,
   defaultAccount: initDefaultAccount,
   providers,
-  provider,
+  provider: initProvider,
 }: Props) {
   const { colors } = useTheme();
-
   const accounts = useSelector(accountsSelector);
+  const provider = route?.params?.provider || initProvider;
 
-  const swapKYC = useSelector(swapKYCSelector);
-  const providerKYC = swapKYC[provider];
-
-  const [error, setError] = useState(null);
-  const [rates, setRates] = useState([]);
   const [rate, setRate] = useState(null);
-  const [rateExpiration, setRateExpiration] = useState(null);
-  const [fetchingRate, setFetchingRate] = useState(false);
 
   const enhancedAccounts = useMemo(
     () => accounts.map(acc => accountWithMandatoryTokens(acc, [])),
@@ -116,13 +114,6 @@ export default function SwapForm({
   const defaultAccount =
     initDefaultAccount || elligibleAccountsForSelectedCurrency[0];
 
-  const [noAssetModalOpen, setNoAssetModalOpen] = useState(!defaultAccount);
-
-  const defaultParentAccount =
-    defaultAccount?.type === "TokenAccount"
-      ? accounts.find(a => a.id === defaultAccount.parentId)
-      : null;
-
   const selectableCurrencies = getSupportedCurrencies({ providers, provider });
 
   const maybeFilteredCurrencies = defaultAccount?.balance.gt(0)
@@ -133,98 +124,59 @@ export default function SwapForm({
     maybeFilteredCurrencies,
   );
 
-  const exchange: Exchange = useMemo(() => {
-    const exch = route.params?.exchange
-      ? {
-          ...route.params.exchange,
-          toCurrency: route.params.exchange?.toCurrency
-            ? route.params.exchange.toCurrency
-            : route.params.exchange.fromAccount
-            ? sortedCryptoCurrencies.find(
-                c =>
-                  c !== getAccountCurrency(route.params.exchange.fromAccount),
-              )
-            : sortedCryptoCurrencies[0],
-        }
-      : {
-          fromAccount: defaultAccount?.balance.gt(0)
-            ? defaultAccount
-            : undefined,
-          fromParentAccount: defaultAccount?.balance.gt(0)
-            ? defaultParentAccount
-            : undefined,
-          toCurrency: sortedCryptoCurrencies[0],
-          toAccount: undefined,
-        };
-
-    if (exch.toCurrency) {
-      const currentToCurrency = exch.toAccount
-        ? getAccountCurrency(exch.toAccount)
-        : null;
-      if (currentToCurrency !== exch.toCurrency)
-        exch.toAccount = allAccounts.find(
-          a => exch.toCurrency === getAccountCurrency(a),
-        );
-    }
-
-    return exch;
-  }, [
-    allAccounts,
-    defaultAccount,
-    defaultParentAccount,
-    route.params?.exchange,
-    sortedCryptoCurrencies,
-  ]);
-
-  const [maxSpendable, setMaxSpendable] = useState();
-
-  const { fromAccount, fromParentAccount, toAccount } = exchange;
-  // const fromCurrency = fromAccount ? getAccountCurrency(fromAccount) : null;
-  // const toCurrency = toAccount ? getAccountCurrency(toAccount) : null;
-
-  const bridge = fromAccount
-    ? getAccountBridge(fromAccount, fromParentAccount)
-    : null;
+  const defaultCurrency = route?.params?.swap?.from.account
+    ? sortedCryptoCurrencies.find(
+        c => c !== getAccountCurrency(route?.params?.swap?.from.account),
+      )
+    : sortedCryptoCurrencies[0];
 
   const {
     status,
     transaction,
     setTransaction,
     bridgePending,
-  } = useBridgeTransaction(() => ({
-    ...(route.params?.transaction ?? {}),
-    account: fromAccount,
-    parentAccount: fromParentAccount,
-  }));
+    swap,
+    setFromAccount,
+    setToAccount,
+    setFromAmount,
+    setToCurrency,
+    toggleMax,
+    fromAmountError,
+  } = useSwapTransaction({
+    accounts,
+    defaultAccount,
+    exchangeRate: rate,
+    setExchangeRate: setRate,
+  });
 
-  const debouncedTransaction = useDebounce(transaction, 500);
+  const swapAcceptedproviders = useSelector(swapAcceptedProvidersSelector);
+  const alreadyAcceptedTerms = (swapAcceptedproviders || []).includes(provider);
 
-  const toggleUseAllAmount = useCallback(() => {
-    if (bridge)
-      setTransaction(
-        bridge.updateTransaction(
-          transaction || bridge.createTransaction(fromAccount),
-          {
-            amount: maxSpendable || BigNumber(0),
-            useAllAmount: !transaction?.useAllAmount,
-          },
-        ),
-      );
-  }, [setTransaction, bridge, transaction, fromAccount, maxSpendable]);
+  const dispatch = useDispatch();
+  const [confirmed, setConfirmed] = useState(false);
+  const [deviceMeta, setDeviceMeta] = useState();
+  const showDeviceConnect = confirmed && alreadyAcceptedTerms && !deviceMeta;
+
+  useEffect(() => setToCurrency(defaultCurrency), [
+    defaultCurrency,
+    setToCurrency,
+  ]);
+
+  const [error, setError] = useState(null);
+
+  const [rateExpiration, setRateExpiration] = useState(null);
+
+  const [noAssetModalOpen, setNoAssetModalOpen] = useState(!defaultAccount);
+
+  const [maxSpendable, setMaxSpendable] = useState();
+
+  const {
+    from: { account: fromAccount, parentAccount: fromParentAccount },
+  } = swap;
 
   const resetError = useCallback(() => {
     setError();
-    if (bridge)
-      setTransaction(
-        bridge.updateTransaction(
-          transaction || bridge.createTransaction(fromAccount),
-          {
-            amount: BigNumber(0),
-            useAllAmount: !transaction?.useAllAmount,
-          },
-        ),
-      );
-  }, [bridge, fromAccount, setTransaction, transaction]);
+  }, []);
 
   const fromUnit = useMemo(() => fromAccount && getAccountUnit(fromAccount), [
     fromAccount,
@@ -240,6 +192,15 @@ export default function SwapForm({
     navigation.goBack();
   }, [navigation]);
 
+  const onContinue = useCallback(() => {
+    setConfirmed(true);
+  }, []);
+
+  const onReset = useCallback(() => {
+    setConfirmed(false);
+    setConfirmed(false);
+  }, []);
+
   useEffect(() => {
     if (route.params?.rate) {
       setRate(route.params.rate);
@@ -251,72 +212,13 @@ export default function SwapForm({
     const expirationInterval = setInterval(() => {
       if (rate && rateExpiration && rateExpiration <= new Date()) {
         setRateExpiration(null);
-        setRate(null);
+        swap.refetchRates(null);
         clearInterval(expirationInterval);
       }
     }, 1000);
 
     return () => clearInterval(expirationInterval);
-  }, [rate, rateExpiration]);
-
-  useEffect(() => {
-    const KYCUserId = Config.SWAP_OVERRIDE_KYC_USER_ID || providerKYC?.id;
-    async function getRates() {
-      setFetchingRate(true);
-      try {
-        // $FlowFixMe No idea how to pass this
-        const rates = await getExchangeRates(
-          {
-            ...exchange,
-            toAccount:
-              exchange.toAccount || exchange.toCurrency
-                ? {
-                    type: "Account",
-                    currency: exchange.toCurrency,
-                    unit: exchange.toCurrency.units[0],
-                  }
-                : {},
-          },
-          transaction,
-          KYCUserId,
-        );
-
-        setRates(rates);
-
-        const rate = rates
-          .filter(rate => rate.provider === provider)
-          .sort((a, b) => a.rate > b.rate)
-          .find(Boolean);
-
-        if (rate?.error) {
-          setError(rate.error);
-        } else {
-          setRate(rate); // FIXME when we have multiple providers this will not be enough
-          setError();
-          setRateExpiration(new Date(Date.now() + 60000));
-        }
-      } catch (error) {
-        setError(error);
-      } finally {
-        setFetchingRate(false);
-      }
-    }
-    if (!error && transaction?.amount.gt(0) && !rate) {
-      getRates();
-    } else if (transaction?.amount.lte(0)) {
-      setRate(null);
-      setError();
-    }
-  }, [
-    exchange,
-    fromAccount,
-    toAccount,
-    transaction,
-    providerKYC?.id,
-    provider,
-    rate,
-    error,
-  ]);
+  }, [rate, rateExpiration, swap]);
 
   useEffect(() => {
     if (!fromAccount) return;
@@ -326,7 +228,7 @@ export default function SwapForm({
       .estimateMaxSpendable({
         account: fromAccount,
         parentAccount: fromParentAccount,
-        transaction: debouncedTransaction,
+        transaction,
       })
       .then(estimate => {
         if (cancelled) return;
@@ -338,7 +240,7 @@ export default function SwapForm({
     return () => {
       cancelled = true;
     };
-  }, [fromAccount, fromParentAccount, debouncedTransaction]);
+  }, [fromAccount, fromParentAccount, transaction]);
 
   useEffect(() => {
     if (route.params?.transaction) {
@@ -346,36 +248,47 @@ export default function SwapForm({
     }
   }, [route.params, setTransaction]);
 
-  useEffect(() => {
-    setRate(null);
-  }, [debouncedTransaction, route.params]);
+  const exchangeRatesState = swap?.rates;
+  const swapError = fromAmountError || exchangeRatesState?.error;
 
-  return (
+  const isSwapReady =
+    !bridgePending &&
+    exchangeRatesState?.status !== "loading" &&
+    transaction &&
+    !swapError &&
+    rate;
+
+  const swapBody = (
     <KeyboardView style={[styles.root, { backgroundColor: colors.background }]}>
       <View>
         <AccountAmountRow
           navigation={navigation}
-          exchange={exchange}
+          route={route}
+          swap={swap}
           transaction={transaction}
-          onUpdateTransaction={setTransaction}
-          status={status}
-          bridgePending={bridgePending}
-          provider={provider}
-          providers={providers}
+          setFromAccount={setFromAccount}
+          setFromAmount={setFromAmount}
+          setToCurrency={setToCurrency}
           useAllAmount={transaction?.useAllAmount}
-          fetchingRate={fetchingRate}
           rate={rate}
+          bridgePending={bridgePending}
+          fromAmountError={fromAmountError}
+          providers={providers}
+          provider={provider}
         />
       </View>
       <ScrollView contentContainerStyle={styles.scrollZone}>
         <RatesSection
           navigation={navigation}
+          route={route}
+          swap={swap}
           transaction={transaction}
           status={status}
-          rates={rates}
           rate={rate}
+          setToAccount={setToAccount}
+          accounts={accounts}
+          providers={providers}
           provider={provider}
-          exchange={exchange}
         />
         {error && (
           <GenericErrorBottomModal
@@ -429,8 +342,8 @@ export default function SwapForm({
               </LText>
               <Switch
                 style={styles.switch}
-                value={transaction?.useAllAmount}
-                onValueChange={toggleUseAllAmount}
+                value={swap.isMaxEnabled}
+                onValueChange={toggleMax}
               />
             </View>
           ) : null}
@@ -440,16 +353,44 @@ export default function SwapForm({
             containerStyle={styles.button}
             event="ExchangeStartBuyFlow"
             type="primary"
-            disabled={!!bridgePending || !!error || !rate}
+            disabled={!isSwapReady}
             title={<Trans i18nKey="transfer.swap.form.tab" />}
-            onPress={() => {
-              /** move to swap summary */
-            }}
+            onPress={onContinue}
           />
         </View>
+        {confirmed ? (
+          alreadyAcceptedTerms && deviceMeta ? (
+            <>
+              <Track onUpdate event={"SwapAcceptedSummaryDisclaimer"} />
+              <Confirmation
+                swap={swap}
+                rate={rate}
+                status={status}
+                transaction={transaction}
+                deviceMeta={deviceMeta}
+                onError={e => {
+                  onReset();
+                  setError(e);
+                }}
+                onCancel={onReset}
+              />
+            </>
+          ) : !alreadyAcceptedTerms ? (
+            <DisclaimerModal
+              provider={provider}
+              onContinue={() => {
+                dispatch(swapAcceptProvider(provider));
+                setConfirmed(true);
+              }}
+              onClose={() => setConfirmed(false)}
+            />
+          ) : null
+        ) : null}
       </View>
     </KeyboardView>
   );
+
+  return showDeviceConnect ? <Connect setResult={setDeviceMeta} /> : swapBody;
 }
 
 const styles = StyleSheet.create({
@@ -488,25 +429,4 @@ const styles = StyleSheet.create({
   switch: {
     opacity: 0.99,
   },
-  valueLabel: { marginLeft: 4, fontSize: 14, lineHeight: 20 },
-  label: {
-    fontSize: 16,
-    lineHeight: 19,
-  },
-  addAccountsection: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    borderRadius: 4,
-    padding: 12,
-    marginVertical: 10,
-  },
-  spacer: { flex: 0.5, flexShrink: 1, flexGrow: 1 },
-  addAccountLabel: {
-    fontSize: 14,
-    lineHeight: 20,
-    flex: 1,
-  },
-  addAccountButton: { height: 40 },
-  addAccountButtonLabel: { fontSize: 12 },
 });

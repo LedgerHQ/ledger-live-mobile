@@ -1,19 +1,24 @@
 // @flow
-import React, { useCallback, useMemo } from "react";
+import React from "react";
 import { View, StyleSheet, ActivityIndicator } from "react-native";
-import type {
-  Exchange,
-  SwapTransaction,
-} from "@ledgerhq/live-common/lib/exchange/swap/types";
 
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
 
 import { Trans } from "react-i18next";
 import { useTheme } from "@react-navigation/native";
-import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 
 import { AmountRequired } from "@ledgerhq/errors";
 import { BigNumber } from "bignumber.js";
+
+import type {
+  Account,
+  TokenAccount,
+  TokenCurrency,
+  CryptoCurrency,
+} from "@ledgerhq/live-common/lib/types";
+import type { SwapTransaction } from "@ledgerhq/live-common/lib/exchange/swap/types";
+import type { SwapDataType } from "@ledgerhq/live-common/lib/exchange/swap/hooks";
+import type { SwapRouteParams } from "..";
 
 import LText from "../../../components/LText";
 import AccountSelect from "./AccountSelect";
@@ -26,62 +31,50 @@ import CurrencyTargetSelect from "./CurrencyTargetSelect";
 
 type Props = {
   navigation: *,
-  exchange: Exchange,
+  route: { params: SwapRouteParams },
+  swap: SwapDataType,
+  setFromAccount: (account?: Account | TokenAccount) => void,
+  setFromAmount: (amount: BigNumber) => void,
+  setToCurrency: (currency?: TokenCurrency | CryptoCurrency) => void,
   useAllAmount: boolean,
   transaction: SwapTransaction,
-  onUpdateTransaction: (transaction: SwapTransaction) => void,
-  status?: *,
   bridgePending: boolean,
-  provider: any,
-  providers: any,
-  fetchingRate?: boolean,
   rate: any,
+  fromAmountError?: Error,
+  providers: any,
+  provider: any,
 };
 
 export default function AccountAmountRow({
   navigation,
+  route,
   useAllAmount,
-  exchange,
+  swap,
   transaction,
-  onUpdateTransaction,
-  status,
-  bridgePending,
-  provider,
-  providers,
-  fetchingRate,
+  setFromAccount,
+  setFromAmount,
+  setToCurrency,
   rate,
+  bridgePending,
+  fromAmountError,
+  providers,
+  provider,
 }: Props) {
   const { colors } = useTheme();
-  const { fromAccount, fromParentAccount } = exchange;
+  const {
+    from: { account },
+    to: { currency: toCurrency },
+    rates: { status: ratesStatus },
+  } = swap;
 
-  const onAmountChange = useCallback(
-    amount => {
-      const bridge = getAccountBridge(fromAccount, fromParentAccount);
-
-      onUpdateTransaction(
-        bridge.updateTransaction(
-          transaction || bridge.createTransaction(fromAccount),
-          { amount },
-        ),
-      );
-    },
-    [fromAccount, fromParentAccount, onUpdateTransaction, transaction],
-  );
-
-  const fromUnit = useMemo(() => fromAccount && getAccountUnit(fromAccount), [
-    fromAccount,
-  ]);
-
-  const toCurrency = exchange?.toCurrency;
+  const fromUnit = getAccountUnit(account);
   const toUnit = toCurrency?.units[0];
-
-  const amountError =
-    transaction?.amount.gt(0) &&
-    (status?.errors?.gasPrice || status?.errors?.amount);
 
   const hideError =
     bridgePending ||
-    (useAllAmount && amountError && amountError instanceof AmountRequired);
+    (useAllAmount &&
+      fromAmountError &&
+      fromAmountError instanceof AmountRequired);
 
   const toValue = rate
     ? transaction.amount
@@ -96,17 +89,24 @@ export default function AccountAmountRow({
           <Trans i18nKey="transfer.swap.form.from" />
         </LText>
         <View style={styles.root}>
-          <AccountSelect exchange={exchange} navigation={navigation} />
+          <AccountSelect
+            swap={swap}
+            navigation={navigation}
+            route={route}
+            setFromAccount={setFromAccount}
+            providers={providers}
+            provider={provider}
+          />
           <View style={styles.wrapper}>
             {fromUnit ? (
               <CurrencyInput
                 editable={!useAllAmount}
-                onChange={onAmountChange}
+                onChange={setFromAmount}
                 unit={fromUnit}
                 value={transaction?.amount}
                 isActive
                 inputStyle={styles.inputText}
-                hasError={!hideError && !!amountError}
+                hasError={!hideError && !!fromAmountError}
               />
             ) : (
               <LText semiBold color="grey" style={styles.inputText}>
@@ -115,7 +115,7 @@ export default function AccountAmountRow({
             )}
             <LText style={[styles.error]} color={"alert"} numberOfLines={2}>
               <TranslatedError
-                error={(!hideError && amountError) || undefined}
+                error={(!hideError && fromAmountError) || undefined}
               />
             </LText>
           </View>
@@ -128,13 +128,15 @@ export default function AccountAmountRow({
         </LText>
         <View style={styles.root}>
           <CurrencyTargetSelect
-            exchange={exchange}
+            swap={swap}
             navigation={navigation}
-            provider={provider}
+            route={route}
+            setToCurrency={setToCurrency}
             providers={providers}
+            provider={provider}
           />
           <View style={styles.wrapper}>
-            {fetchingRate ? (
+            {ratesStatus === "loading" ? (
               <ActivityIndicator color={colors.grey} animating />
             ) : toUnit && toCurrency ? (
               <View>

@@ -7,7 +7,7 @@ import { View, StyleSheet, FlatList } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 import type { SwapRouteParams } from "..";
-import { providerIcons } from "..";
+import { providerIcons } from "./RatesSection";
 import CounterValue from "../../../components/CounterValue";
 import CurrencyUnitValue from "../../../components/CurrencyUnitValue";
 import LText from "../../../components/LText";
@@ -22,10 +22,14 @@ type Props = {
 
 export default function SelectProviderRateScreen({ route, navigation }: Props) {
   const { colors } = useTheme();
-  const { exchange, rate, rates = [], transaction, provider } = route.params;
-  const filteredRates = rates.filter(r => r.provider === provider);
+  const { swap = {}, rate, transaction, provider } = route.params;
 
-  const { fromAccount, toCurrency } = exchange;
+  const {
+    from: { account: fromAccount } = {},
+    to: { currency: toCurrency } = {},
+    rates: { value: rates = [] } = {},
+  } = swap;
+  const filteredRates = rates.filter(r => r.provider === provider);
 
   const fromUnit = useMemo(() => fromAccount && getAccountUnit(fromAccount), [
     fromAccount,
@@ -34,12 +38,13 @@ export default function SelectProviderRateScreen({ route, navigation }: Props) {
   const toUnit = toCurrency?.units[0];
 
   const onSelectRate = useCallback(
-    newRate =>
+    newRate => {
       navigation.navigate(ScreenName.SwapForm, {
         ...route.params,
         rate: newRate,
         provider: newRate.provider,
-      }),
+      });
+    },
     [navigation, route.params],
   );
 
@@ -123,10 +128,10 @@ export default function SelectProviderRateScreen({ route, navigation }: Props) {
       colors.live,
       fromUnit,
       onSelectRate,
-      rate?.provider,
-      rate?.rate,
+      rate,
       toCurrency,
       toUnit,
+      transaction,
     ],
   );
 
