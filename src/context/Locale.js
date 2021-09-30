@@ -1,8 +1,9 @@
 // @flow
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useCallback, useEffect, useState } from "react";
 import i18next from "i18next";
 import { initReactI18next } from "react-i18next";
 import type { TFunction } from "react-i18next";
+import AsyncStorage from "@react-native-community/async-storage";
 import Locale from "react-native-locale";
 import { useDispatch, useSelector } from "react-redux";
 import { locales } from "../languages";
@@ -89,3 +90,34 @@ export default function LocaleProvider({ children }: Props) {
 export function useLocale() {
   return useContext(LocaleContext);
 }
+
+const lastAskedLanguageAvailable = "2021-09-23";
+
+// To reset os language proposition, change this date !
+export async function hasAnsweredLanguageAvailable() {
+  const memory = await AsyncStorage.getItem("hasAnsweredLanguageAvailable");
+  return memory === lastAskedLanguageAvailable;
+}
+
+export async function answerLanguageAvailable() {
+  return AsyncStorage.setItem(
+    "hasAnsweredLanguageAvailable",
+    lastAskedLanguageAvailable,
+  );
+}
+
+export const useLanguageAvailableChecked = () => {
+  const [checked, setChecked] = useState(false);
+
+  const accept = useCallback(() => {
+    answerLanguageAvailable().then(() => {
+      setChecked(true);
+    });
+  }, []);
+
+  useEffect(() => {
+    hasAnsweredLanguageAvailable().then(answerLanguageAvailable);
+  }, []);
+
+  return [checked, accept];
+};
