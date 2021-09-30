@@ -16,6 +16,7 @@ import LanguageIcon from "../icons/Language";
 import { languageSelector } from "../reducers/settings";
 import { languages, pushedLanguages } from "../languages";
 import { useLanguageAvailableChecked } from "../context/Locale";
+import { Track } from "../analytics";
 
 export default function CheckLanguageAvailability() {
   const { colors } = useTheme();
@@ -51,46 +52,53 @@ export default function CheckLanguageAvailability() {
   };
 
   return (
-    <BottomModal
-      id="CheckLanguageAvailabilityModal"
-      isOpened
-      onClose={onRequestClose}
-    >
-      <ModalBottomAction
-        title={<Trans i18nKey="systemLanguageAvailable.title" />}
-        icon={
-          <Circle bg={colors.lightLive} size={70}>
-            <LanguageIcon size={40} color={colors.live} />
-          </Circle>
-        }
-        description={
-          <Trans i18nKey="systemLanguageAvailable.description.newSupport" />
-        }
-        footer={
-          <View>
-            <Button
-              type="primary"
-              event={`Discoverability - Switch - ${osLanguage}`}
-              eventProperties={{ language: osLanguage }}
-              title={
-                <>
-                  <Trans i18nKey="systemLanguageAvailable.switchButton" />
-                  <Text> {languages[osLanguage]}</Text>
-                </>
-              }
-              onPress={switchLanguage}
-            />
-            <Button
-              type="secondary"
-              outline={false}
-              event={`Discoverability - Denied - ${osLanguage}`}
-              eventProperties={{ language: osLanguage }}
-              title={<Trans i18nKey="systemLanguageAvailable.no" />}
-              onPress={dontSwitchLanguage}
-            />
-          </View>
-        }
+    <>
+      <Track
+        onMount
+        event={`Discoverability - Prompt - ${osLanguage}`} 
+        eventProperties={osLanguage}
       />
-    </BottomModal>
+      <BottomModal
+        id="CheckLanguageAvailabilityModal"
+        isOpened
+        onClose={onRequestClose}
+      >
+        <ModalBottomAction
+          title={<Trans i18nKey="systemLanguageAvailable.title" />}
+          icon={
+            <Circle bg={colors.lightLive} size={70}>
+              <LanguageIcon size={40} color={colors.live} />
+            </Circle>
+          }
+          description={
+            <Trans i18nKey="systemLanguageAvailable.description.newSupport" />
+          }
+          footer={
+            <View>
+              <Button
+                type="primary"
+                event={`Discoverability - Switch - ${osLanguage}`}
+                eventProperties={{ language: osLanguage }}
+                title={
+                  <>
+                    <Trans i18nKey="systemLanguageAvailable.switchButton" />
+                    <Text> {languages[osLanguage]}</Text>
+                  </>
+                }
+                onPress={switchLanguage}
+              />
+              <Button
+                type="secondary"
+                outline={false}
+                event={`Discoverability - Denied - ${osLanguage}`}
+                eventProperties={{ language: osLanguage }}
+                title={<Trans i18nKey="systemLanguageAvailable.no" />}
+                onPress={dontSwitchLanguage}
+              />
+            </View>
+          }
+        />
+      </BottomModal>
+    </>
   );
 }
