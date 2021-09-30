@@ -63,11 +63,15 @@ export default function SelectDevice({
   const [devices, setDevices] = useState([]);
 
   const onPairNewDevice = useCallback(() => {
-    NativeModules.BluetoothHelperModule.prompt().then(() =>
-      navigation.navigate(ScreenName.PairDevices, {
-        onDone: autoSelectOnAdd ? handleOnSelect : null,
-      }),
-    );
+    NativeModules.BluetoothHelperModule.prompt()
+      .then(() =>
+        navigation.navigate(ScreenName.PairDevices, {
+          onDone: autoSelectOnAdd ? handleOnSelect : null,
+        }),
+      )
+      .catch(() => {
+        /* ignore */
+      });
   }, [autoSelectOnAdd, navigation, handleOnSelect]);
 
   const renderItem = useCallback(
