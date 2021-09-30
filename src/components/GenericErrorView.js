@@ -34,7 +34,9 @@ function GenericErrorView({
 }: Props) {
   useEffect(() => {
     if (error instanceof BluetoothRequired) {
-      NativeModules.BluetoothHelperModule.prompt();
+      NativeModules.BluetoothHelperModule.prompt().catch(() => {
+        /* ignore */
+      });
     }
   }, [error]);
 

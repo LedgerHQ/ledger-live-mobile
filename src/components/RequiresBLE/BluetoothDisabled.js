@@ -16,7 +16,9 @@ function BluetoothDisabled() {
 
   useEffect(() => {
     // Prompts the user to enable bluetooth using native api calls when the component gets initially rendered.
-    NativeModules.BluetoothHelperModule.prompt();
+    NativeModules.BluetoothHelperModule.prompt().catch(() => {
+      /* ignore */
+    });
   }, []);
 
   return (
