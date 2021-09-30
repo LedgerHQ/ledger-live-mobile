@@ -3,6 +3,7 @@ import Config from "react-native-config";
 import allLocales from "./locales";
 
 export const localeIds: string[] = Object.keys(allLocales);
+export const pushedLanguages = ["fr", "ru"];
 export const supportedLocales = Config.LEDGER_DEBUG_ALL_LANGS
   ? localeIds
   : ["en", "fr", "es", "ru", "zh", "de", "tr", "ja", "ko"];
