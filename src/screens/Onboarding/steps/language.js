@@ -16,29 +16,7 @@ import Button from "../../../components/Button";
 import LText from "../../../components/LText";
 import CheckBox from "../../../components/CheckBox";
 import { useLocale } from "../../../context/Locale";
-import { supportedLocales } from "../../../languages";
-
-const languages = {
-  de: "Deutsch",
-  el: "Ελληνικά",
-  en: "English",
-  es: "Español",
-  fi: "suomi",
-  fr: "Français",
-  hu: "magyar",
-  it: "italiano",
-  ja: "日本語",
-  ko: "한국어",
-  nl: "Nederlands",
-  no: "Norsk",
-  pl: "polski",
-  pt: "português",
-  ru: "Русский",
-  sr: "српски",
-  sv: "svenska",
-  tr: "Türkçe",
-  zh: "简体中文",
-};
+import { languages, supportedLocales } from "../../../languages";
 
 function OnboardingStepLanguage({ navigation }: *) {
   const { colors } = useTheme();
