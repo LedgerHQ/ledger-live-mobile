@@ -263,12 +263,20 @@ platform :android do
   end
 
   desc "upload to Play Store"
-  private_lane :upload do
-    upload_to_play_store(
-      track: 'internal',
-      package_name: 'com.ledger.live',
-      json_key_data: ENV["ANDROID_SERVICE_KEY_CONTENT"]
-    )
+  private_lane :upload do |options|
+    if (options[:local])
+      upload_to_play_store(
+        track: 'internal',
+        package_name: 'com.ledger.live',
+        json_key: ENV["ANDROID_SERVICE_KEY_PATH"]
+      )
+    else
+      upload_to_play_store(
+        track: 'internal',
+        package_name: 'com.ledger.live',
+        json_key_data: ENV["ANDROID_SERVICE_KEY_CONTENT"]
+      )
+    end
   end
 
   # ============================= END PRIVATE =============================
@@ -282,7 +290,7 @@ platform :android do
   desc "rebuild and upload beta to Google Play Store without bumping version or tagging"
   lane :clean_beta do
     build(type: "Release")
-    upload
+    upload(local: true)
   end
 
   desc "build and upload beta to Google Play Store"
