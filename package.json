@@ -45,10 +45,7 @@
     "sync-flowtyped": "NODE_OPTIONS=--max_old_space_size=10000 flow-typed install -s -o && rm flow-typed/npm/axios_*",
     "sync-locales": "./scripts/sync-locales.sh",
     "hack-for-ios-simulator": "cd node_modules/@ledgerhq/react-native-ledger-core/ios/Frameworks && mv universal real_universal && cp -R x86 universal",
-    "test-deep-links": "ws --spa ./deep-links-test-page.html",
-    "ui:start": "cd uilib && yarn start",
-    "ui:build": "cd uilib && yarn build",
-    "ui:storybook": "cd uilib && yarn storybook"
+    "test-deep-links": "ws --spa ./deep-links-test-page.html"
   },
   "jest": {
     "preset": "react-native",
@@ -106,7 +103,7 @@
     "https-browserify": "~1.0.0",
     "i18next": "19.9.2",
     "invariant": "2.2.4",
-    "json-rpc-2.0": "^0.2.16",
+    "json-rpc-2.0": "^0.2.19",
     "lodash": "4.17.21",
     "lottie-ios": "3.1.8",
     "lottie-react-native": "^4.0.2",
