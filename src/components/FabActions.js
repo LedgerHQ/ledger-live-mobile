@@ -69,7 +69,7 @@ function FabAccountActions({ account, parentAccount }: FabAccountActionsProps) {
           },
         ]
       : []),
-    ...(availableOnSwap.includes(currency.id)
+    ...(availableOnSwap.includes(currency.id) && account.balance.gt(0)
       ? [
           {
             navigationParams: [

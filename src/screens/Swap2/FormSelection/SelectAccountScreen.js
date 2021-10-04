@@ -39,7 +39,7 @@ type Props = {
 
 export default function SelectAccount({ navigation, route }: Props) {
   const { colors } = useTheme();
-  const { swap, target, selectedCurrency, setAccount } = route.params;
+  const { swap, target, selectedCurrency, setAccount, provider } = route.params;
   const accounts = useSelector(accountsSelector);
 
   const enhancedAccounts = useMemo(() => {
@@ -156,8 +156,12 @@ export default function SelectAccount({ navigation, route }: Props) {
 
   return (
     <SafeAreaView style={[styles.root, { backgroundColor: colors.background }]}>
-      <TrackScreen category="ReceiveFunds" name="SelectAccount" />
-      <KeyboardView style={{ flex: 1 }}>
+      <TrackScreen
+        category="Swap Form"
+        name={`Edit ${isFrom ? "Source" : "Target"} Account`}
+        provider={provider}
+      />
+      <KeyboardView style={styles.root}>
         <View style={styles.searchContainer}>
           <FilteredSearchBar
             keys={SEARCH_KEYS}

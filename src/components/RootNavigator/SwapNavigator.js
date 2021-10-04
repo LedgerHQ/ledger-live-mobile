@@ -14,6 +14,9 @@ import SwapFormNavigator from "./SwapFormNavigator";
 import { getStackNavigatorConfig } from "../../navigation/navigatorConfig";
 import styles from "../../navigation/styles";
 import StepHeader from "../StepHeader";
+import SwapOperationDetails from "../../screens/Swap2/OperationDetails";
+import { BackButton } from "../../screens/OperationDetails";
+import SwapPendingOperation from "../../screens/Swap2/PendingOperation";
 
 export default function SwapNavigator() {
   const { t } = useTranslation();
@@ -68,6 +71,23 @@ export default function SwapNavigator() {
           headerTitle: () => <StepHeader title={t("transfer.swap.title")} />,
           headerLeft: null,
         }}
+      />
+      <Stack.Screen
+        name={ScreenName.SwapPendingOperation}
+        component={SwapPendingOperation}
+        options={{
+          headerTitle: () => <StepHeader title={t("transfer.swap.title")} />,
+          headerLeft: null,
+        }}
+      />
+      <Stack.Screen
+        name={ScreenName.SwapOperationDetails}
+        component={SwapOperationDetails}
+        options={({ navigation }) => ({
+          headerTitle: () => <StepHeader title={t("transfer.swap.title")} />,
+          headerLeft: () => <BackButton navigation={navigation} />,
+          headerRight: null,
+        })}
       />
     </Stack.Navigator>
   );

@@ -22,7 +22,7 @@ type Props = {
 
 export default function SelectFees({ navigation, route }: Props) {
   const { transaction } = route.params;
-  const { swap } = route.params;
+  const { swap, provider } = route.params;
   const { from: { account, parentAccount } = {} } = swap;
 
   const onSetTransaction = useCallback(
@@ -37,7 +37,7 @@ export default function SelectFees({ navigation, route }: Props) {
 
   return (
     <SafeAreaView style={[styles.root]}>
-      <TrackScreen category="ReceiveFunds" name="SelectAccount" />
+      <TrackScreen category="Swap Form" name="Edit Fees" provider={provider} />
       <NavigationScrollView>
         {account && (
           <SendRowsFee

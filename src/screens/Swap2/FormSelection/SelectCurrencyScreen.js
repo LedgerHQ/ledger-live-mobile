@@ -78,8 +78,12 @@ export default function SwapFormSelectCurrencyScreen({
 
   return (
     <SafeAreaView style={[styles.root, { backgroundColor: colors.background }]}>
-      <TrackScreen category="SwapV2" name="SelectCrypto" />
-      <KeyboardView style={{ flex: 1 }}>
+      <TrackScreen
+        category="Swap Form"
+        name="Edit Target Currency"
+        provider={provider}
+      />
+      <KeyboardView style={styles.root}>
         <View style={styles.searchContainer}>
           <FilteredSearchBar
             keys={SEARCH_KEYS}

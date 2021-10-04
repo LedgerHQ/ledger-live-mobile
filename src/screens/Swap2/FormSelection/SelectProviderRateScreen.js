@@ -14,6 +14,7 @@ import LText from "../../../components/LText";
 import { ScreenName } from "../../../const";
 import Lock from "../../../icons/Lock";
 import Unlock from "../../../icons/Unlock";
+import { TrackScreen } from "../../../analytics";
 
 type Props = {
   route: { params: SwapRouteParams },
@@ -137,6 +138,7 @@ export default function SelectProviderRateScreen({ route, navigation }: Props) {
 
   return (
     <View style={styles.root}>
+      <TrackScreen category="Swap Form" name="Edit Rate" provider={provider} />
       <FlatList data={filteredRates} renderItem={renderItem} />
     </View>
   );

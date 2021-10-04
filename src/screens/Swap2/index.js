@@ -55,7 +55,7 @@ import { swapAcceptedProvidersSelector } from "../../reducers/settings";
 import Confirmation from "./Confirmation";
 import { swapAcceptProvider } from "../../actions/settings";
 import Connect from "./Connect";
-import { Track } from "../../analytics";
+import { Track, TrackScreen } from "../../analytics";
 import DisclaimerModal from "./DisclaimerModal";
 
 export type SwapRouteParams = {
@@ -260,6 +260,7 @@ export default function SwapForm({
 
   const swapBody = (
     <KeyboardView style={[styles.root, { backgroundColor: colors.background }]}>
+      <TrackScreen category="Swap Form" providerName={provider} />
       <View>
         <AccountAmountRow
           navigation={navigation}
@@ -351,7 +352,12 @@ export default function SwapForm({
         <View style={styles.buttonContainer}>
           <Button
             containerStyle={styles.button}
-            event="ExchangeStartBuyFlow"
+            event="Page Swap Form - CTA"
+            eventProperties={{
+              provider,
+              targetCurrency: swap?.to?.currency?.id,
+              sourceCurrency: swap?.from?.currency?.id,
+            }}
             type="primary"
             disabled={!isSwapReady}
             title={<Trans i18nKey="transfer.swap.form.tab" />}
@@ -361,7 +367,11 @@ export default function SwapForm({
         {confirmed ? (
           alreadyAcceptedTerms && deviceMeta ? (
             <>
-              <Track onUpdate event={"SwapAcceptedSummaryDisclaimer"} />
+              <Track
+                onUpdate
+                event={"Swap Form - AcceptedSummaryDisclaimer"}
+                provider={provider}
+              />
               <Confirmation
                 swap={swap}
                 rate={rate}
@@ -390,7 +400,11 @@ export default function SwapForm({
     </KeyboardView>
   );
 
-  return showDeviceConnect ? <Connect setResult={setDeviceMeta} /> : swapBody;
+  return showDeviceConnect ? (
+    <Connect provider={provider} setResult={setDeviceMeta} />
+  ) : (
+    swapBody
+  );
 }
 
 const styles = StyleSheet.create({

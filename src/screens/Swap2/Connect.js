@@ -11,7 +11,13 @@ import { TrackScreen } from "../../analytics";
 
 const action = createAction(connectManager);
 
-const Connect = ({ setResult }: { setResult: (result: any) => void }) => {
+const Connect = ({
+  setResult,
+  provider,
+}: {
+  setResult: (result: any) => void,
+  provider: string,
+}) => {
   const [device, setDevice] = useState(null);
   const [result, setLocalResult] = useState();
 
@@ -26,7 +32,11 @@ const Connect = ({ setResult }: { setResult: (result: any) => void }) => {
   const { colors } = useTheme();
   return (
     <View style={[styles.root, { backgroundColor: colors.background }]}>
-      <TrackScreen category="Swap" name="ConnectDeviceListApps" />
+      <TrackScreen
+        category="Swap Form"
+        name="ConnectDeviceListApps"
+        provider={provider}
+      />
       <SelectDevice onSelect={setDevice} autoSelectOnAdd />
       <DeviceActionModal
         onClose={setDevice}

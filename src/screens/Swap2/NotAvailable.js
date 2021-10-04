@@ -13,7 +13,7 @@ const NotAvailable = () => {
   const { colors } = useTheme();
   return (
     <SafeAreaView style={[styles.root, { backgroundColor: colors.background }]}>
-      <TrackScreen category="Swap" name="NotAvailable" />
+      <TrackScreen category="Swap Form" name="NotAvailable" />
       <View style={styles.wrapper}>
         <Icon name={"exclamationcircleo"} color={colors.grey} size={40} />
         <LText secondary style={styles.title}>
