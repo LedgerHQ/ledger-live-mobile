@@ -106,7 +106,7 @@ export async function answerLanguageAvailable() {
 }
 
 export const useLanguageAvailableChecked = () => {
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState(true);
 
   const accept = useCallback(() => {
     answerLanguageAvailable().then(() => {
@@ -115,7 +115,7 @@ export const useLanguageAvailableChecked = () => {
   }, []);
 
   useEffect(() => {
-    hasAnsweredLanguageAvailable().then(answerLanguageAvailable);
+    hasAnsweredLanguageAvailable().then(setChecked);
   }, []);
 
   return [checked, accept];
