@@ -1,7 +1,8 @@
 import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { createStackNavigator } from "@react-navigation/stack";
-import MainScreen from "../../screens/MainScreen"
+import MainScreen from "../../screens/MainScreen";
+import { BackButton } from "../../screens/OperationDetails";
 
 export default function testSymbolNavigator() {
     return (
@@ -9,15 +10,10 @@ export default function testSymbolNavigator() {
         <Stack.Screen
           name="test"
           component={MainScreen}
-        />
-        {/* <Stack.Screen
-          name={ScreenName.Account}
-          component={Account}
-          options={{
-            headerTitle: () => <AccountHeaderTitle />,
-            headerRight: () => <AccountHeaderRight />,
+          options={({ route, navigation }) => {
+            return ({headerLeft: () => <BackButton navigation={navigation} />})
           }}
-        /> */}
+        />
       </Stack.Navigator>
     );
   }
