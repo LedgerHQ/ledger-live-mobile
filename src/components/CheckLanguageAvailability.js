@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Trans } from "react-i18next";
-import { Text, View } from "react-native";
+import { View } from "react-native";
 import Locale from "react-native-locale";
 import { useTheme } from "@react-navigation/native";
 import i18next from "i18next";
@@ -81,8 +81,10 @@ export default function CheckLanguageAvailability() {
                 eventProperties={{ language: osLanguage }}
                 title={
                   <>
-                    <Trans i18nKey="systemLanguageAvailable.switchButton" />
-                    <Text> {languages[osLanguage]}</Text>
+                    <Trans
+                      i18nKey="systemLanguageAvailable.switchButton"
+                      values={{ language: languages[osLanguage] }}
+                    />
                   </>
                 }
                 onPress={switchLanguage}
