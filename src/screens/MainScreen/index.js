@@ -7,7 +7,7 @@ import {
 } from "@ledgerhq/live-common/lib/currencies";
 import FilteredSearchBar from "../../components/FilteredSearchBar";
 import KeyboardView from "../../components/KeyboardView";
-import CurrencyRow from "../../components/CurrencyRow";
+import CurrencyRow from "../../components/CurrencyInfoRow";
 
 const SEARCH_KEYS = ["name", "ticker"];
 
@@ -68,8 +68,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   header: {
-    fontSize: 28,
-    fontFamily: "HM Alpha Mono"
+    fontSize: 28
   },
   root: {
     flex: 1,
