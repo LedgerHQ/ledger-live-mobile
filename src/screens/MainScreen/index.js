@@ -11,6 +11,10 @@ import CurrencyRow from "../../components/CurrencyInfoRow";
 
 const SEARCH_KEYS = ["name", "ticker"];
 
+type Props = {
+  navigation: any,
+};
+
 const keyExtractor = currency => currency.id;
 
 const renderEmptyList = () => (
@@ -21,7 +25,7 @@ const renderEmptyList = () => (
   </View>
 );
 
-export default function MainScreen() {
+export default function MainScreen({ navigation }: Props) {
   const cryptoCurrencies = useMemo(
     () => listSupportedCurrencies().concat(listTokens()),
     [],
@@ -30,6 +34,9 @@ export default function MainScreen() {
   const sortedCryptoCurrencies = useCurrenciesByMarketcap(cryptoCurrencies);
 
   const onPressItem = (currencyOrToken) => {
+    navigation.navigate("SymbolDashboard", {
+      navigation, currencyOrToken
+    });
   };
 
   const renderList = items => (

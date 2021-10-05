@@ -2,10 +2,12 @@ import React, { useCallback, useRef, useState, useEffect } from "react";
 import { StyleSheet, FlatList, Text, Image, View } from "react-native";
 
 type Props = {
-
+  navigation: any,
+  currencyOrToken: any
 };
 
-export default function SymbolDashboard({}: Props) {
+export default function SymbolDashboard({ navigation, currencyOrToken }: Props) {
+  console.log(currencyOrToken);
   const rsc = {
     icon: require("./bitcoin.png"),
     symbolName: "Bitcoin",
