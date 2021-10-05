@@ -5,7 +5,7 @@ import {
   useCurrenciesByMarketcap,
   listSupportedCurrencies,
 } from "@ledgerhq/live-common/lib/currencies";
-import FilteredSearchBar from "../../components/FilteredSearchBar";
+import FilteredSearchBarBody from "../../components/FilteredSearchBarBody";
 import KeyboardView from "../../components/KeyboardView";
 import CurrencyRow from "../../components/CurrencyInfoRow";
 
@@ -57,7 +57,7 @@ export default function MainScreen({ navigation }: Props) {
       <Text style={styles.header}>MARKET</Text>
       <KeyboardView style={{ flex: 1 }}>
         <View style={styles.searchContainer}>
-          <FilteredSearchBar
+          <FilteredSearchBarBody
             keys={SEARCH_KEYS}
             inputWrapperStyle={styles.filteredSearchInputWrapperStyle}
             list={sortedCryptoCurrencies}
