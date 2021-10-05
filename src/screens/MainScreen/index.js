@@ -75,7 +75,8 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   header: {
-    fontSize: 28
+    fontSize: 28,
+    marginLeft: 16
   },
   root: {
     flex: 1,

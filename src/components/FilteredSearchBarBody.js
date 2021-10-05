@@ -1,6 +1,6 @@
 // @flow
 import React, { PureComponent } from "react";
-import { StyleSheet, View, TouchableOpacity } from "react-native";
+import { StyleSheet, View, TouchableOpacity, Button, Text } from "react-native";
 import { withTranslation } from "react-i18next";
 import { compose } from "redux";
 import SearchIcon from "../icons/Search";
@@ -79,30 +79,15 @@ class FilteredSearchBarBody extends PureComponent<Props, State> {
 
     return (
       <>
-        {/* <TouchableOpacity
+        <TouchableOpacity
           onPress={query ? null : this.focusInput}
           style={[styles.wrapper, inputWrapperStyle]}
         >
-          <View style={styles.iconContainer}>
-            <SearchIcon
-              size={20}
-              color={focused ? colors.darkBlue : colors.grey}
-            />
-          </View>
-          <TextInput
-            onBlur={this.onBlur}
-            onFocus={this.onFocus}
-            onChangeText={this.onChange}
-            onInputCleared={this.clear}
-            placeholder={t("common.search")}
-            placeholderTextColor={colors.grey}
-            style={[styles.input, { color: colors.darkBlue }]}
-            containerStyle={styles.inputContainer}
-            value={query}
-            ref={this.input}
-            clearButtonMode="always"
-          />
-        </TouchableOpacity> */}
+          <Button title="★☆" style={styles.button}/>
+          <Button title="Sort Rank↑↓" style={styles.button}/>
+          <Button title="% (7D)" style={styles.button}/>
+          <Button title="Live Compatible" style={styles.button}/>
+        </TouchableOpacity>
         <Search
           fuseOptions={{
             threshold: 0.1,
@@ -138,6 +123,9 @@ const styles = StyleSheet.create({
   inputContainer: {
     flex: 1,
   },
+  button: {
+    fontSize: 5
+  }
 });
 
 // $FlowFixMe
