@@ -1,6 +1,6 @@
 // @flow
 import React, { PureComponent } from "react";
-import { StyleSheet, View, TouchableOpacity, Button, Text } from "react-native";
+import { StyleSheet, View, TouchableOpacity, Button, Text, ScrollView } from "react-native";
 import { withTranslation } from "react-i18next";
 import { compose } from "redux";
 import SearchIcon from "../icons/Search";
@@ -42,7 +42,7 @@ class FilteredSearchBarBody extends PureComponent<Props, State> {
 
   state = {
     focused: false,
-    query: "",
+    query: ""
   };
 
   input = React.createRef();
@@ -79,15 +79,37 @@ class FilteredSearchBarBody extends PureComponent<Props, State> {
 
     return (
       <>
-        <TouchableOpacity
-          onPress={query ? null : this.focusInput}
-          style={[styles.wrapper, inputWrapperStyle]}
-        >
-          <Button title="★☆" style={styles.button}/>
-          <Button title="Sort Rank↑↓" style={styles.button}/>
-          <Button title="% (7D)" style={styles.button}/>
-          <Button title="Live Compatible" style={styles.button}/>
-        </TouchableOpacity>
+        <ScrollView horizontal>
+          <TouchableOpacity onPress={this.onClickStarred} style={styles.button}>
+            <Text style={styles.buttonText}>
+              {"☆"}
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={this.onClickSortBy} style={styles.button}>
+            <Text style={styles.buttonText}>
+              {"Sort "}
+            </Text>
+            <Text style={styles.buttonValue}>
+              {"Rank↑"}
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={this.onClickChangeTime} style={styles.button}>
+            <Text style={styles.buttonText}>
+              {"% "}
+            </Text>
+            <Text style={styles.buttonValue}>
+              {"(7D)"}
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={this.onClickLiveCompatible} style={styles.button}>
+            <Text style={styles.buttonText}>
+              {"Live Compatible "}
+            </Text>
+            <Text style={styles.buttonValue}>
+              {"Yes"}
+            </Text>
+          </TouchableOpacity>
+        </ScrollView>
         <Search
           fuseOptions={{
             threshold: 0.1,
@@ -124,7 +146,18 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   button: {
-    fontSize: 5
+    fontSize: 15,
+    borderRadius: 10,
+    backgroundColor: "#272727",
+    padding: 5,
+    margin: 5,
+    flexDirection: "row"
+  },
+  buttonText: {
+    color: "white"
+  },
+  buttonValue: {
+    color: "#bbb0ff"
   }
 });
 

@@ -54,7 +54,6 @@ export default function MainScreen({ navigation }: Props) {
 
   return (
     <>
-      <Text style={styles.header}>MARKET</Text>
       <KeyboardView style={{ flex: 1 }}>
         <View style={styles.searchContainer}>
           <FilteredSearchBarBody
@@ -73,10 +72,6 @@ export default function MainScreen({ navigation }: Props) {
 const styles = StyleSheet.create({
   list: {
     flex: 1,
-  },
-  header: {
-    fontSize: 28,
-    marginLeft: 16
   },
   root: {
     flex: 1,

@@ -20,7 +20,7 @@ export default function testSymbolNavigator() {
               <View style={styles.iconContainer}>
                 <SearchIcon size={20} color={"grey"} />
               </View>),
-            headerTitle: ""
+            headerTitle: "MARKET"
           })
         }}
       />
