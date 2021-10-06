@@ -142,6 +142,7 @@
     "react-native-progress": "^4.0.3",
     "react-native-qrcode-svg": "6.0.3",
     "react-native-randombytes": "^3.6.0",
+    "react-native-raw-bottom-sheet": "^2.2.0",
     "react-native-reanimated": "^1.10.1",
     "react-native-redash": "^15.11.1",
     "react-native-safe-area-context": "^0.7.3",

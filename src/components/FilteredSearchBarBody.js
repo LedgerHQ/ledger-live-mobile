@@ -1,15 +1,40 @@
 // @flow
 import React, { PureComponent } from "react";
 import { StyleSheet, View, TouchableOpacity, Button, Text, ScrollView } from "react-native";
+import RBSheet from "react-native-raw-bottom-sheet";
 import { withTranslation } from "react-i18next";
 import { compose } from "redux";
 import SearchIcon from "../icons/Search";
 import Search from "./Search";
 import TextInput from "./TextInput";
 import getFontStyle from "./LText/getFontStyle";
+import BottomSelectSheet from "./BottomSelectSheet";
 
 import type { T } from "../types/common";
 import { withTheme } from "../colors";
+
+const SORT_OPTIONS = [
+  "Rank",
+  "% Change",
+  "Market cap",
+  "Price",
+  "Name"
+];
+
+const CHANGE_TIMES = [
+  { name: "Last 24 hours", short: "24H" },
+  { name: "Last 7 days", short: "7D" },
+  { name: "Last 1 year", short: "1Y" }
+];
+
+const CURRENCIES = [
+  "BTC",
+  "USD",
+  "EUR",
+  "CAD",
+  "INR",
+  "GBP"
+];
 
 type OwnProps = {
   initialQuery?: string,
@@ -42,7 +67,10 @@ class FilteredSearchBarBody extends PureComponent<Props, State> {
 
   state = {
     focused: false,
-    query: ""
+    query: "",
+    starred: false,
+    activeOptions: [],
+    checkDirection: false
   };
 
   input = React.createRef();
@@ -65,6 +93,27 @@ class FilteredSearchBarBody extends PureComponent<Props, State> {
     }
   };
 
+  onClickStarred = () => this.setState({ starred: !this.state.starred });
+
+  onClickSortBy = () => {
+    this.setState({ activeOptions: SORT_OPTIONS, checkDirection: true });
+    this.RBSheet.open();
+  };
+
+  onClickChangeTime = () => {
+    this.setState({ activeOptions: CHANGE_TIMES.map(element => element.name), 
+      checkDirection: false });
+    this.RBSheet.open();
+  };
+
+  onClickLiveCompatible = () => {
+  };
+
+  onClickCurrency = () => {
+    this.setState({ activeOptions: CURRENCIES, checkDirection: false });
+    this.RBSheet.open();
+  };
+
   render() {
     const {
       keys,
@@ -82,7 +131,7 @@ class FilteredSearchBarBody extends PureComponent<Props, State> {
         <ScrollView horizontal>
           <TouchableOpacity onPress={this.onClickStarred} style={styles.button}>
             <Text style={styles.buttonText}>
-              {"☆"}
+              {this.state.starred ? "☆" : "★"}
             </Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={this.onClickSortBy} style={styles.button}>
@@ -109,6 +158,11 @@ class FilteredSearchBarBody extends PureComponent<Props, State> {
               {"Yes"}
             </Text>
           </TouchableOpacity>
+          <TouchableOpacity onPress={this.onClickCurrency} style={styles.button}>
+            <Text style={styles.buttonValue}>
+              {"USD"}
+            </Text>
+          </TouchableOpacity>
         </ScrollView>
         <Search
           fuseOptions={{
@@ -121,6 +175,16 @@ class FilteredSearchBarBody extends PureComponent<Props, State> {
           render={renderList}
           renderEmptySearch={renderEmptySearch}
         />
+        <RBSheet
+          ref={ref => { this.RBSheet = ref; }}
+          height={300}
+          openDuration={250}
+        >
+          <BottomSelectSheet 
+            options={this.state.activeOptions} 
+            checkDirection={this.state.checkDirection}
+          />
+        </RBSheet>
       </>
     );
   }
@@ -146,18 +210,19 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   button: {
-    fontSize: 15,
     borderRadius: 10,
     backgroundColor: "#272727",
-    padding: 5,
-    margin: 5,
-    flexDirection: "row"
+    padding: 6,
+    marginHorizontal: 10,
+    flexDirection: "row",
   },
   buttonText: {
-    color: "white"
+    color: "white",
+    fontSize: 16
   },
   buttonValue: {
-    color: "#bbb0ff"
+    color: "#bbb0ff",
+    fontSize: 16
   }
 });
 
