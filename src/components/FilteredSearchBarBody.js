@@ -69,6 +69,7 @@ class FilteredSearchBarBody extends PureComponent<Props, State> {
     focused: false,
     query: "",
     starred: false,
+    styleSheetTitle: "",
     activeOptions: [],
     checkDirection: false
   };
@@ -96,13 +97,20 @@ class FilteredSearchBarBody extends PureComponent<Props, State> {
   onClickStarred = () => this.setState({ starred: !this.state.starred });
 
   onClickSortBy = () => {
-    this.setState({ activeOptions: SORT_OPTIONS, checkDirection: true });
+    this.setState({
+      styleSheetTitle: "SORT BY",
+      activeOptions: SORT_OPTIONS,
+      checkDirection: true
+    });
     this.RBSheet.open();
   };
 
   onClickChangeTime = () => {
-    this.setState({ activeOptions: CHANGE_TIMES.map(element => element.name), 
-      checkDirection: false });
+    this.setState({
+      styleSheetTitle: "% CHANGE",
+      activeOptions: CHANGE_TIMES.map(element => element.name),
+      checkDirection: false
+    });
     this.RBSheet.open();
   };
 
@@ -110,7 +118,11 @@ class FilteredSearchBarBody extends PureComponent<Props, State> {
   };
 
   onClickCurrency = () => {
-    this.setState({ activeOptions: CURRENCIES, checkDirection: false });
+    this.setState({
+      styleSheetTitle: "CURRENCY",
+      activeOptions: CURRENCIES,
+      checkDirection: false
+    });
     this.RBSheet.open();
   };
 
@@ -180,7 +192,8 @@ class FilteredSearchBarBody extends PureComponent<Props, State> {
           height={300}
           openDuration={250}
         >
-          <BottomSelectSheet 
+          <BottomSelectSheet
+            title={this.state.styleSheetTitle}
             options={this.state.activeOptions} 
             checkDirection={this.state.checkDirection}
           />
