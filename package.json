@@ -62,7 +62,7 @@
     "@ledgerhq/hw-app-xrp": "6.7.0",
     "@ledgerhq/hw-transport": "6.7.0",
     "@ledgerhq/hw-transport-http": "6.7.0",
-    "@ledgerhq/live-common": "^21.8.0-beta.0",
+    "@ledgerhq/live-common": "^21.8.2",
     "@ledgerhq/logs": "6.2.0",
     "@ledgerhq/react-native-hid": "6.8.1",
     "@ledgerhq/react-native-hw-transport-ble": "6.7.0",
