@@ -135,12 +135,9 @@ def jscFlavor = 'org.webkit:android-jsc-intl:+'
 def enableHermes = project.ext.react.get("enableHermes", false);
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
+    ndkVersion rootProject.ext.ndkVersion
 
-     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
+    compileSdkVersion rootProject.ext.compileSdkVersion
 
     defaultConfig {
         applicationId "com.ledger.live"
@@ -250,7 +247,7 @@ dependencies {
 // Run this once to be able to run the application with BUCK
 // puts all compile dependencies into folder libs for BUCK to use
 task copyDownloadableDepsToLibs(type: Copy) {
-    from configurations.compile
+    from configurations.implementation
     into 'libs'
 }
 
