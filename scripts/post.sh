@@ -30,9 +30,6 @@ if ! [ -x "$(command -v bundle)" ]; then
 fi
 bundle install
 
-# # Fix for react-native-ble-plx on iOS 15
-# git apply $(pwd)/patches/react-native-ble-plx+2.0.2.patch
-
 if [ "$(uname)" == "Darwin" ]; then
   cd ios && bundle exec pod install --deployment --repo-update
 
