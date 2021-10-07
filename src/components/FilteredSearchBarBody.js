@@ -189,8 +189,14 @@ class FilteredSearchBarBody extends PureComponent<Props, State> {
         />
         <RBSheet
           ref={ref => { this.RBSheet = ref; }}
-          height={300}
+          height={350}
           openDuration={250}
+          closeOnDragDown
+          customStyles={{
+            container: {
+              backgroundColor: "#191919"
+            }
+          }}
         >
           <BottomSelectSheet
             title={this.state.styleSheetTitle}
