@@ -25,6 +25,30 @@ const renderEmptyList = () => (
   </View>
 );
 
+const generateMockData = (currencies) => {
+  currencies.forEach((currency, rank) => {
+    currency["rank"] = rank + 1;
+    if (currency["ticker"] === "BTC") {
+      currency["totalAsset"] = 447250000000;
+      currency["changePercent"] = 0.0234;
+      currency["price"] = 55540.54;
+      currency["favourite"] = true;
+    }
+    else if (currency["ticker"] === "ETH") {
+      currency["totalAsset"] = 1447000000;
+      currency["changePercent"] = 0.0125;
+      currency["price"] = 3301.24;
+      currency["favourite"] = true;
+    }
+    else {
+      currency["totalAsset"] = 447000000;
+      currency["changePercent"] = -0.0079;
+      currency["price"] = 40.54;
+      currency["favourite"] = false;
+    }
+  });
+}
+
 export default function MainScreen({ navigation }: Props) {
   const cryptoCurrencies = useMemo(
     () => listSupportedCurrencies().concat(listTokens()),
@@ -32,6 +56,7 @@ export default function MainScreen({ navigation }: Props) {
   );
 
   const sortedCryptoCurrencies = useCurrenciesByMarketcap(cryptoCurrencies);
+  const sortedCryptoCurrenciesMock = generateMockData(sortedCryptoCurrencies);
 
   const onPressItem = (currencyOrToken) => {
     navigation.navigate("SymbolDashboard", {

@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { RectButton } from "react-native-gesture-handler";
 import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import { isWithinInterval } from "date-fns";
+import { listCurrentRates } from "@ledgerhq/live-common/lib/families/ethereum/modules/compound";
 
 type Props = {
   title: String,
@@ -40,9 +41,11 @@ export default function BottomSelectSheet({ title, options, checkDirection }: Pr
       </TouchableOpacity>
     )
   }
+  const rates = listCurrentRates();
 
   return (
     <View style={styles.root}>
+      <Text>{listCurrentRates()}</Text>
       <Text style={styles.title}>{title}</Text>
       {options.map(option => {
         return <ItemRow option={option}/>
