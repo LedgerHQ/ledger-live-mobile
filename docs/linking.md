@@ -37,7 +37,7 @@ They all are prefixed by **_ledgerlive://_**
 
   `ledgerlive://manager` will redirect to manager page
 
-  `ledgerlive://manager?installapp=bitcoin` will redirect to manager page with "bitcoin" app search prefilled
+  `ledgerlive://manager?installApp=bitcoin` will redirect to manager page with "bitcoin" app search prefilled
 
 - **_swap_** 🠒 Swap Crypto Flow
 

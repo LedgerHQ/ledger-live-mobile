@@ -62,7 +62,7 @@ const RemoveDeviceModal = ({
 type RouteParams = {
   searchQuery?: string,
   tab?: ManagerTab,
-  installapp?: string,
+  installApp?: string,
 };
 
 type Props = {
@@ -126,7 +126,7 @@ class ChooseDevice extends Component<
       this.props.navigation.navigate(ScreenName.ManagerMain, {
         ...result,
         ...params,
-        searchQuery: params.searchQuery || params.installapp,
+        searchQuery: params.searchQuery || params.installApp,
       });
   };
 
