@@ -120,7 +120,6 @@
       "title": "Sorry, no device found",
       "description": {
         "ios": {
-          "nanoS": "Please make sure your {{productName}} is unlocked and has Bluetooth enabled.",
           "nanoX": "Please make sure your {{productName}} is unlocked and has Bluetooth enabled."
         },
         "android": {
@@ -133,7 +132,6 @@
       "title": "Sorry, Manager connection failed",
       "description": {
         "ios": {
-          "nanoS": "Please make sure your {{productName}} is unlocked and has Bluetooth enabled.",
           "nanoX": "Please make sure your {{productName}} is unlocked and has Bluetooth enabled."
         },
         "android": {
