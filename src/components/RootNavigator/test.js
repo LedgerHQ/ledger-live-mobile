@@ -15,12 +15,7 @@ export default function testSymbolNavigator() {
         component={MainScreen}
         options={({ navigation }) => {
           return ({
-            headerLeft: () => <BackButton navigation={navigation} />,
-            headerRight: () => (
-              <View style={styles.iconContainer}>
-                <SearchIcon size={20} color={"grey"} />
-              </View>),
-            headerTitle: "MARKET"
+            headerTitle: "Market"
           })
         }}
       />
