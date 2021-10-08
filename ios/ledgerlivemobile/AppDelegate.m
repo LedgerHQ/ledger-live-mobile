@@ -4,6 +4,7 @@
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
 #import <React/RCTLinkingManager.h>
+#import "RNSplashScreen.h"  // here
 
 /* #ifdef FB_SONARKIT_ENABLED */
 /* #import <FlipperKit/FlipperClient.h> */
@@ -49,6 +50,7 @@
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
   [super application:application didFinishLaunchingWithOptions:launchOptions];
+
   return YES;
 }
 
