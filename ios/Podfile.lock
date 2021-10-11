@@ -321,7 +321,7 @@ PODS:
     - React-cxxreact (= 0.65.1)
     - React-jsi (= 0.65.1)
     - React-perflogger (= 0.65.1)
-  - ReactNativeART (1.1.2):
+  - ReactNativeART (1.2.0):
     - React
   - RNAnalytics (1.3.2):
     - Analytics (~> 4.1)
@@ -345,18 +345,18 @@ PODS:
     - React
   - RNScreens (2.15.0):
     - React-Core
+  - RNSentry (3.1.1):
+    - React-Core
+    - Sentry (= 7.3.0)
   - RNShare (5.1.0):
     - React-Core
   - RNSVG (12.1.1):
     - React
   - RNVectorIcons (6.6.0):
     - React
-  - Sentry (4.1.3):
-    - Sentry/Core (= 4.1.3)
-  - Sentry/Core (4.1.3)
-  - SentryReactNative (0.43.2):
-    - React
-    - Sentry (~> 4.1.3)
+  - Sentry (7.3.0):
+    - Sentry/Core (= 7.3.0)
+  - Sentry/Core (7.3.0)
   - TcpSockets (4.0.0):
     - React
   - Yoga (1.14.0)
@@ -421,10 +421,10 @@ DEPENDENCIES:
   - RNOS (from `../node_modules/react-native-os`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
+  - "RNSentry (from `../node_modules/@sentry/react-native`)"
   - RNShare (from `../node_modules/react-native-share`)
   - RNSVG (from `../node_modules/react-native-svg`)
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
-  - SentryReactNative (from `../node_modules/react-native-sentry`)
   - TcpSockets (from `../node_modules/react-native-tcp`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
@@ -553,14 +553,14 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-reanimated"
   RNScreens:
     :path: "../node_modules/react-native-screens"
+  RNSentry:
+    :path: "../node_modules/@sentry/react-native"
   RNShare:
     :path: "../node_modules/react-native-share"
   RNSVG:
     :path: "../node_modules/react-native-svg"
   RNVectorIcons:
     :path: "../node_modules/react-native-vector-icons"
-  SentryReactNative:
-    :path: "../node_modules/react-native-sentry"
   TcpSockets:
     :path: "../node_modules/react-native-tcp"
   Yoga:
@@ -623,7 +623,7 @@ SPEC CHECKSUMS:
   React-RCTVibration: 92d41c2442e5328cc4d342cd7f78e5876b68bae5
   React-runtimeexecutor: 85187f19dd9c47a7c102f9994f9d14e4dc2110de
   ReactCommon: eafed38eec7b591c31751bfa7494801618460459
-  ReactNativeART: c580fba2f7d188d8fa4418ce78db8130654ed10f
+  ReactNativeART: 78edc68dd4a1e675338cd0cd113319cf3a65f2ab
   RNAnalytics: ac18ac964dd53bac7f957994412963e8e2568c4d
   RNCAsyncStorage: b03032fdbdb725bea0bd9e5ec5a7272865ae7398
   RNCClipboard: 41d8d918092ae8e676f18adada19104fa3e68495
@@ -634,11 +634,11 @@ SPEC CHECKSUMS:
   RNOS: 6f2f9a70895bbbfbdad7196abd952e7b01d45027
   RNReanimated: c2bb7438b57a3d987bb2e4e6e4bca94787e30b02
   RNScreens: 2ad555d4d9fa10b91bb765ca07fe9b29d59573f0
+  RNSentry: 49abc89b0190b4c8afe0fa5d065f98e36cb53233
   RNShare: fed99fd743f80ca255903c1da46fc9a6430efab6
   RNSVG: 551acb6562324b1d52a4e0758f7ca0ec234e278f
   RNVectorIcons: 0bb4def82230be1333ddaeee9fcba45f0b288ed4
-  Sentry: 4e8a17b61ddd116f89536cc81d567fdee1ebca96
-  SentryReactNative: 07237139c00366ea2e75ae3e5c566e7a71c27a90
+  Sentry: 9a4e621430e2dae4477d791f2f7e905720b6efbf
   TcpSockets: 4ef55305239923b343ed0a378b1fac188b1373b0
   Yoga: aa0cb45287ebe1004c02a13f279c55a95f1572f4
 
