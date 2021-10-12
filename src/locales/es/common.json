@@ -1689,7 +1689,7 @@
     "help": {
       "title": "Ayuda",
       "header": "Ayuda",
-      "desc": "Learn more about Ledger Live or how to get help.",
+      "desc": "Más información sobre Ledger Live o cómo obtener ayuda.",
       "support": "Soporte de Ledger",
       "supportDesc": "Si tienes un problema, obtén ayuda mediante Ledger Live usando tu billetera de hardware.",
       "configureDevice": "Configurar un dispositivo",
@@ -1816,19 +1816,19 @@
             "cta": "Continuar",
             "title": "KYC enviado para su aprobación",
             "subtitle": "Tu KYC ha sido enviado y está en espera de aprobación.",
-            "link": "Learn more about KYC"
+            "link": "Más información sobre KYC"
           },
           "approved": {
             "cta": "Continuar",
             "title": "¡KYC aprobado!",
             "subtitle": "Tu KYC ha sido enviado y ha sido aprobado.",
-            "link": "Learn more about KYC"
+            "link": "Más información sobre KYC"
           },
           "closed": {
             "cta": "Restablecer KYC",
             "title": "Solicitud de KYC rechazada",
             "subtitle": "Wyre ha rechazado los datos que has proporcionado para fines de KYC",
-            "link": "Learn more about KYC"
+            "link": "Más información sobre KYC"
           },
           "form": {
             "firstName": "Nombre",
@@ -2730,7 +2730,7 @@
   },
   "AuthenticityRow": {
     "title": "Autenticación",
-    "subtitle": "Genuine"
+    "subtitle": "Auténtico"
   },
   "RemoveRow": {
     "title": "Quitar dispositivo"
