@@ -600,8 +600,8 @@
       "standard": "Estándar",
       "low": "Baja",
       "slow": "slow",
-      "medium": "medium",
-      "fast": "fast",
+      "medium": "media",
+      "fast": "rápida",
       "custom": "Personalizado",
       "blockCount": "{{blockCount}} bloques"
     }
@@ -1222,11 +1222,11 @@
         "supportLink": "Ponte en contacto con Soporte"
       },
       "seed": {
-        "title": "Please check the box contents",
-        "desc": "If your {{deviceName}} came with a PIN code or recovery phrase, it’s not safe to use and you should contact Ledger Support.",
-        "warning": "Only use a recovery phrase that your device displayed when it was set up",
-        "continueCTA": "Continue",
-        "contactSupportCTA": "Contact support"
+        "title": "Por favor, verifica los contenidos de la caja",
+        "desc": "Si tu {{deviceName}} ya tiene un código PIN o una frase de recuperación, no es seguro usarlo y deberías ponerte en contacto con el Soporte de Ledger.",
+        "warning": "Usa solo la frase de recuperación que haya generado tu dispositivo al configurarlo por primera vez",
+        "continueCTA": "Continuar",
+        "contactSupportCTA": "Ponte en contacto con Soporte"
       }
     }
   },
@@ -1699,8 +1699,8 @@
       "clearCacheModal": "¿Deseas continuar?",
       "clearCacheModalDesc": "Se realizará un nuevo y completo análisis de las transacciones en la red. Se reconstruirán los historiales de las cuentas y se volverán a calcular los saldos.",
       "clearCacheButton": "Borrar",
-      "exportLogs": "Save logs",
-      "exportLogsDesc": "Saving Ledger Live logs may be needed for troubleshooting purposes.",
+      "exportLogs": "Guardar registros",
+      "exportLogsDesc": "Puede ser necesario guardar los registros de Ledger Live para solucionar problemas.",
       "hardReset": "Restablecer Ledger Live",
       "hardResetDesc": "Esto no tiene ningún impacto sobre tus activos. Borra todos los datos de Ledger Live, incluidos los datos de cuentas, historial de transacciones y ajustes. Utiliza tu dispositivo Ledger para volver a cargar y administrar tus activos cripto a un Ledger Live vacío.",
       "repairDevice": "Repara tu dispositivo Ledger",
