@@ -15,7 +15,8 @@ export default function testSymbolNavigator() {
         component={MainScreen}
         options={({ navigation }) => {
           return ({
-            headerTitle: "Market"
+            headerTitle: "Market",
+            headerTitleAlign: "center"
           })
         }}
       />

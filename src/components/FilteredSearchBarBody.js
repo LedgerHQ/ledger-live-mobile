@@ -9,6 +9,7 @@ import Search from "./Search";
 import TextInput from "./TextInput";
 import getFontStyle from "./LText/getFontStyle";
 import BottomSelectSheet from "./BottomSelectSheet";
+import BottomSelectSheetTF from "./BottomSelectSheetTF";
 
 import type { T } from "../types/common";
 import { withTheme } from "../colors";
@@ -22,9 +23,10 @@ const SORT_OPTIONS = [
 ];
 
 const CHANGE_TIMES = [
-  { name: "Last 24 hours", short: "24H" },
-  { name: "Last 7 days", short: "7D" },
-  { name: "Last 1 year", short: "1Y" }
+  { name: "1 day", short: "24H" },
+  { name: "1 week", short: "1W" },
+  { name: "1 month", short: "1M" },
+  { name: "1 year", short: "1Y" }
 ];
 
 const CURRENCIES = [
@@ -71,7 +73,8 @@ class FilteredSearchBarBody extends PureComponent<Props, State> {
     starred: false,
     styleSheetTitle: "",
     activeOptions: [],
-    checkDirection: false
+    checkDirection: false,
+    showTimeframeSelector: true
   };
 
   input = React.createRef();
@@ -105,13 +108,16 @@ class FilteredSearchBarBody extends PureComponent<Props, State> {
     this.RBSheet.open();
   };
 
-  onClickChangeTime = () => {
+  onClickTimeFrame = () => {
     this.setState({
-      styleSheetTitle: "% CHANGE",
+      styleSheetTitle: "Timeframe",
       activeOptions: CHANGE_TIMES.map(element => element.name),
       checkDirection: false
     });
-    this.RBSheet.open();
+    this.RBSheetTimeFrame.open();
+    // this.setState({
+    //   showTimeframeSelector: true
+    // });
   };
 
   onClickLiveCompatible = () => {
@@ -134,9 +140,9 @@ class FilteredSearchBarBody extends PureComponent<Props, State> {
       renderEmptySearch,
       inputWrapperStyle,
       t,
-      colors,
+      colors
     } = this.props;
-    const { query, focused } = this.state;
+    const { query, focused, showTimeframeSelector } = this.state;
 
     return (
       <>
@@ -154,7 +160,7 @@ class FilteredSearchBarBody extends PureComponent<Props, State> {
               {"Rank↑"}
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={this.onClickChangeTime} style={styles.button}>
+          <TouchableOpacity onPress={this.onClickTimeFrame} style={styles.button}>
             <Text style={styles.buttonText}>
               {"% "}
             </Text>
@@ -176,6 +182,21 @@ class FilteredSearchBarBody extends PureComponent<Props, State> {
             </Text>
           </TouchableOpacity>
         </ScrollView>
+        {showTimeframeSelector && (
+          <View style={styles.tfSelector}>
+            <Text style={styles.tf}>
+              Timeframe
+            </Text>
+            <TouchableOpacity style={{flexDirection: "row"}} onPress={this.onClickTimeFrame}>
+              <Text style={styles.tfItem}>
+                {"  Last 24 hours "}
+              </Text>
+              <Text style={styles.tfIcon}>
+                {" ˅"}
+              </Text>
+            </TouchableOpacity>
+          </View>
+        )}
         <Search
           fuseOptions={{
             threshold: 0.1,
@@ -199,6 +220,32 @@ class FilteredSearchBarBody extends PureComponent<Props, State> {
           }}
         >
           <BottomSelectSheet
+            title={this.state.styleSheetTitle}
+            options={this.state.activeOptions} 
+            checkDirection={this.state.checkDirection}
+          />
+        </RBSheet>
+        <RBSheet
+          ref={ref => { this.RBSheetTimeFrame = ref; }}
+          height={350}
+          openDuration={250}
+          closeOnDragDown
+          customStyles={{
+            container: {
+              backgroundColor: "#ffffff",
+              borderRadius: 20
+            },
+            draggableIcon: {
+              backgroundColor: "#14253320",
+              width: 40
+            },
+            wrapper: {
+              color: "#142533",
+              fontFamily: "Inter"
+            }
+          }}
+        >
+          <BottomSelectSheetTF
             title={this.state.styleSheetTitle}
             options={this.state.activeOptions} 
             checkDirection={this.state.checkDirection}
@@ -242,6 +289,21 @@ const styles = StyleSheet.create({
   buttonValue: {
     color: "#bbb0ff",
     fontSize: 16
+  },
+  tfSelector: {
+    flexDirection: "row",
+    paddingTop: 15
+  },
+  tf: {
+    fontSize: 15
+  },
+  tfItem: {
+    fontSize: 15,
+    color: "#6490f1"
+  },
+  tfIcon: {
+    fontSize: 20,
+    color: "#6490f1"
   }
 });
 
