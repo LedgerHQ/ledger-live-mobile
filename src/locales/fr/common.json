@@ -95,8 +95,8 @@
       "description": "Merci d'entrer un nom de compte"
     },
     "AccountNeedResync": {
-      "title": "Please try again",
-      "description": "Account is outdated. A synchronisation is needed"
+      "title": "Veuillez réessayer",
+      "description": "Le compte n'est plus à jour, synchronisez-le."
     },
     "AlgorandASANotOptInInRecipient": {
       "title": "Le compte bénéficiaire n'a pas activé l'ASA sélectionné."
