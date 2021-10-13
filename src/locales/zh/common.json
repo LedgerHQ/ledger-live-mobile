@@ -94,6 +94,10 @@
       "title": "需要一个账户名",
       "description": "请输入账户名。"
     },
+    "AccountNeedResync": {
+      "title": "Please try again",
+      "description": "Account is outdated. A synchronisation is needed"
+    },
     "AlgorandASANotOptInInRecipient": {
       "title": "收币人账户没有选择加入所选的 ASA。"
     },
