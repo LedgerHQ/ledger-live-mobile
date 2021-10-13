@@ -2,7 +2,7 @@
 
 import { useTheme } from "@react-navigation/native";
 import React, { useMemo, useCallback, useState, useEffect } from "react";
-import { ScrollView, StyleSheet, View } from "react-native";
+import { ScrollView, StyleSheet, View, Keyboard } from "react-native";
 
 import type {
   CryptoCurrency,
@@ -162,6 +162,11 @@ export default function SwapForm({
     setToCurrency,
   ]);
 
+  useEffect(() => setFromAccount(defaultAccount), [
+    defaultAccount,
+    setFromAccount,
+  ]);
+
   const [error, setError] = useState(null);
 
   const [rateExpiration, setRateExpiration] = useState(null);
@@ -253,10 +258,11 @@ export default function SwapForm({
 
   const isSwapReady =
     !bridgePending &&
-    exchangeRatesState?.status !== "loading" &&
+    exchangeRatesState.status !== "loading" &&
     transaction &&
     !swapError &&
-    rate;
+    rate &&
+    swap.to.account;
 
   const swapBody = (
     <KeyboardView style={[styles.root, { backgroundColor: colors.background }]}>
@@ -273,7 +279,7 @@ export default function SwapForm({
           useAllAmount={transaction?.useAllAmount}
           rate={rate}
           bridgePending={bridgePending}
-          fromAmountError={fromAmountError}
+          fromAmountError={swapError}
           providers={providers}
           provider={provider}
         />
@@ -344,7 +350,10 @@ export default function SwapForm({
               <Switch
                 style={styles.switch}
                 value={swap.isMaxEnabled}
-                onValueChange={toggleMax}
+                onValueChange={value => {
+                  Keyboard.dismiss();
+                  toggleMax(value);
+                }}
               />
             </View>
           ) : null}

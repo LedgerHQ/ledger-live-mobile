@@ -57,9 +57,20 @@ export default function CurrencyTargetSelect({
               <CurrencyIcon size={20} currency={value} />
             </View>
             <View style={styles.accountColumn}>
-              <LText semiBold style={styles.label}>
-                {value.name}
-              </LText>
+              <View style={styles.labelContainer}>
+                <LText semiBold style={styles.label}>
+                  {value.name}
+                </LText>
+                {value.type === "TokenCurrency" && value.parentCurrency ? (
+                  <LText
+                    semiBold
+                    style={[styles.currencyLabel, { borderColor: colors.grey }]}
+                    color="grey"
+                  >
+                    {value.parentCurrency.name}
+                  </LText>
+                ) : null}
+              </View>
               <LText color="grey" style={styles.accountTicker}>
                 {value.ticker}
               </LText>
@@ -105,5 +116,23 @@ const styles = StyleSheet.create({
   accountTicker: {
     fontSize: 13,
     lineHeight: 16,
+  },
+  labelContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  currencyLabel: {
+    flexGrow: 0,
+    flexShrink: 0,
+    flexBasis: "auto",
+    textAlign: "right",
+    borderRadius: 4,
+    borderWidth: 1,
+    paddingHorizontal: 6,
+    fontSize: 10,
+    height: 24,
+    lineHeight: 24,
+    marginLeft: 12,
   },
 });

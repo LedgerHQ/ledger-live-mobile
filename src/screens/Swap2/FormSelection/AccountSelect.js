@@ -65,9 +65,22 @@ export default function AccountSelect({
               <CurrencyIcon size={20} currency={currency} />
             </View>
             <View style={styles.accountColumn}>
-              <LText semiBold style={styles.label}>
-                {name}
-              </LText>
+              <View style={styles.labelContainer}>
+                <LText semiBold style={styles.label}>
+                  {name}
+                </LText>
+                {currency.type === "TokenCurrency" &&
+                currency.parentCurrency ? (
+                  <LText
+                    semiBold
+                    style={[styles.currencyLabel, { borderColor: colors.grey }]}
+                    color="grey"
+                  >
+                    {currency.parentCurrency.name}
+                  </LText>
+                ) : null}
+              </View>
+
               <LText color="grey" style={styles.accountTicker}>
                 <CurrencyUnitValue
                   showCode
@@ -103,7 +116,7 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 16,
-    lineHeight: 19,
+    lineHeight: 24,
   },
   chevron: {
     marginLeft: 8,
@@ -117,5 +130,23 @@ const styles = StyleSheet.create({
   accountTicker: {
     fontSize: 13,
     lineHeight: 16,
+  },
+  labelContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  currencyLabel: {
+    flexGrow: 0,
+    flexShrink: 0,
+    flexBasis: "auto",
+    textAlign: "right",
+    borderRadius: 4,
+    borderWidth: 1,
+    paddingHorizontal: 6,
+    fontSize: 10,
+    height: 24,
+    lineHeight: 24,
+    marginLeft: 12,
   },
 });

@@ -1,4 +1,4 @@
-// @flow;
+// @flow
 import React from "react";
 
 import { useTheme } from "@react-navigation/native";
@@ -11,10 +11,7 @@ import type { AccountLike, Account } from "@ledgerhq/live-common/lib/types";
 
 import { isCurrencySupported } from "../screens/Exchange/coinifyConfig";
 
-import {
-  swapSelectableCurrenciesSelector,
-  readOnlyModeEnabledSelector,
-} from "../reducers/settings";
+import { readOnlyModeEnabledSelector } from "../reducers/settings";
 import { accountsCountSelector } from "../reducers/accounts";
 import { NavigatorName, ScreenName } from "../const";
 import FabAccountButtonBar from "./FabAccountButtonBar";
@@ -37,9 +34,7 @@ function FabAccountActions({ account, parentAccount }: FabAccountActionsProps) {
   const { colors } = useTheme();
 
   const currency = getAccountCurrency(account);
-  const availableOnSwap = useSelector(state =>
-    swapSelectableCurrenciesSelector(state),
-  );
+  const availableOnSwap = account.balance.gt(0);
   const readOnlyModeEnabled = useSelector(readOnlyModeEnabledSelector);
 
   const canBeBought = isCurrencySupported(currency, "buy");
@@ -69,7 +64,7 @@ function FabAccountActions({ account, parentAccount }: FabAccountActionsProps) {
           },
         ]
       : []),
-    ...(availableOnSwap.includes(currency.id) && account.balance.gt(0)
+    ...(availableOnSwap
       ? [
           {
             navigationParams: [

@@ -169,6 +169,9 @@ export default function RatesSection({
   const { magnitudeAwareRate, tradeMethod } = rate || {};
   const toAccountName = toAccount ? getAccountName(toAccount) : null;
 
+  const { rates: { value: rates = [] } = {} } = swap;
+  const canEdit = rates.filter(r => r.provider === provider).length > 1;
+
   return rate && swap.rates.status !== "loading" ? (
     <Animatable.View animation="fadeIn" useNativeDriver duration={400}>
       <GenericInputLink
@@ -184,7 +187,7 @@ export default function RatesSection({
         <GenericInputLink
           label={<Trans i18nKey="transfer.swap.form.summary.method" />}
           tooltip={<Trans i18nKey="transfer.swap.form.summary.method" />}
-          onEdit={onEditRateProvider}
+          onEdit={canEdit ? onEditRateProvider : undefined}
         >
           {tradeMethod === "fixed" ? (
             <Lock size={12} color={colors.darkBlue} />
@@ -253,7 +256,6 @@ export default function RatesSection({
                 values={{ currency: toCurrency.name }}
               />
             </LText>
-            <View style={styles.spacer} />
             <Button
               type="primary"
               onPress={onAddAccount}
@@ -282,7 +284,6 @@ const styles = StyleSheet.create({
     padding: 12,
     marginVertical: 10,
   },
-  spacer: { flex: 0.5, flexShrink: 1, flexGrow: 1 },
   addAccountLabel: {
     fontSize: 14,
     lineHeight: 20,
