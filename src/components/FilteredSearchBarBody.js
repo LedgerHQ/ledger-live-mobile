@@ -1,18 +1,20 @@
 // @flow
 import React, { PureComponent } from "react";
-import { StyleSheet, View, TouchableOpacity, Button, Text, ScrollView } from "react-native";
+import { StyleSheet, View, TouchableOpacity, Image, Button, Text, ScrollView } from "react-native";
 import RBSheet from "react-native-raw-bottom-sheet";
 import { withTranslation } from "react-i18next";
 import { compose } from "redux";
-import SearchIcon from "../icons/Search";
 import Search from "./Search";
+import SearchIcon from "../icons/Search";
 import TextInput from "./TextInput";
 import getFontStyle from "./LText/getFontStyle";
 import BottomSelectSheet from "./BottomSelectSheet";
 import BottomSelectSheetTF from "./BottomSelectSheetTF";
+import FilterIcon from "../images/filter.png";
 
 import type { T } from "../types/common";
 import { withTheme } from "../colors";
+import { ManagerFirmwareNotEnoughSpaceError } from "@ledgerhq/errors";
 
 const SORT_OPTIONS = [
   "Rank",
@@ -73,8 +75,7 @@ class FilteredSearchBarBody extends PureComponent<Props, State> {
     starred: false,
     styleSheetTitle: "",
     activeOptions: [],
-    checkDirection: false,
-    showTimeframeSelector: true
+    checkDirection: false
   };
 
   input = React.createRef();
@@ -115,9 +116,6 @@ class FilteredSearchBarBody extends PureComponent<Props, State> {
       checkDirection: false
     });
     this.RBSheetTimeFrame.open();
-    // this.setState({
-    //   showTimeframeSelector: true
-    // });
   };
 
   onClickLiveCompatible = () => {
@@ -142,61 +140,52 @@ class FilteredSearchBarBody extends PureComponent<Props, State> {
       t,
       colors
     } = this.props;
-    const { query, focused, showTimeframeSelector } = this.state;
+    const { query, focused } = this.state;
 
     return (
       <>
-        <ScrollView horizontal>
-          <TouchableOpacity onPress={this.onClickStarred} style={styles.button}>
-            <Text style={styles.buttonText}>
-              {this.state.starred ? "☆" : "★"}
+        <View flexDirection={"row"}>
+          <TouchableOpacity
+            onPress={query ? null : this.focusInput}
+            style={[styles.wrapper, inputWrapperStyle]}
+          >
+            <View style={styles.iconContainer}>
+              <SearchIcon
+                size={20}
+                color={"black"}
+              />
+            </View>
+            <TextInput
+              onBlur={this.onBlur}
+              onFocus={this.onFocus}
+              onChangeText={this.onChange}
+              onInputCleared={this.clear}
+              placeholder={t("common.search")}
+              placeholderTextColor={"#666666"}
+              style={[styles.input, { color: colors.darkBlue }]}
+              containerStyle={styles.inputContainer}
+              value={query}
+              ref={this.input}
+              clearButtonMode="always"
+            />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.filterBtn}>
+            <Image source={FilterIcon} style={styles.filterIcon} />
+          </TouchableOpacity>
+        </View>
+        <View style={styles.tfSelector}>
+          <Text style={styles.tf}>
+            Timeframe
+          </Text>
+          <TouchableOpacity style={{flexDirection: "row"}} onPress={this.onClickTimeFrame}>
+            <Text style={styles.tfItem}>
+              {"  Last 24 hours "}
+            </Text>
+            <Text style={styles.tfIcon}>
+              {" ˅ "}
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={this.onClickSortBy} style={styles.button}>
-            <Text style={styles.buttonText}>
-              {"Sort "}
-            </Text>
-            <Text style={styles.buttonValue}>
-              {"Rank↑"}
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={this.onClickTimeFrame} style={styles.button}>
-            <Text style={styles.buttonText}>
-              {"% "}
-            </Text>
-            <Text style={styles.buttonValue}>
-              {"(7D)"}
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={this.onClickLiveCompatible} style={styles.button}>
-            <Text style={styles.buttonText}>
-              {"Live Compatible "}
-            </Text>
-            <Text style={styles.buttonValue}>
-              {"Yes"}
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={this.onClickCurrency} style={styles.button}>
-            <Text style={styles.buttonValue}>
-              {"USD"}
-            </Text>
-          </TouchableOpacity>
-        </ScrollView>
-        {showTimeframeSelector && (
-          <View style={styles.tfSelector}>
-            <Text style={styles.tf}>
-              Timeframe
-            </Text>
-            <TouchableOpacity style={{flexDirection: "row"}} onPress={this.onClickTimeFrame}>
-              <Text style={styles.tfItem}>
-                {"  Last 24 hours "}
-              </Text>
-              <Text style={styles.tfIcon}>
-                {" ˅"}
-              </Text>
-            </TouchableOpacity>
-          </View>
-        )}
+        </View>
         <Search
           fuseOptions={{
             threshold: 0.1,
@@ -262,6 +251,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingVertical: 8,
     marginBottom: 8,
+    flex: 1,
+    backgroundColor: "#f5f5f5",
+    borderRadius: 5,
+    height: 40,
+    paddingVertical: 0,
+    paddingLeft: 15,
+    paddingRight: 10
   },
   iconContainer: {
     marginRight: 8,
@@ -275,27 +271,13 @@ const styles = StyleSheet.create({
   inputContainer: {
     flex: 1,
   },
-  button: {
-    borderRadius: 10,
-    backgroundColor: "#272727",
-    padding: 6,
-    marginHorizontal: 10,
-    flexDirection: "row",
-  },
-  buttonText: {
-    color: "white",
-    fontSize: 16
-  },
-  buttonValue: {
-    color: "#bbb0ff",
-    fontSize: 16
-  },
   tfSelector: {
     flexDirection: "row",
     paddingTop: 15
   },
   tf: {
-    fontSize: 15
+    fontSize: 15,
+    paddingLeft: 15
   },
   tfItem: {
     fontSize: 15,
@@ -304,6 +286,23 @@ const styles = StyleSheet.create({
   tfIcon: {
     fontSize: 20,
     color: "#6490f1"
+  },
+  filterBtn: {
+    width: 40,
+    height: 40,
+    borderRadius: 5,
+    borderColor: "#14253350",
+    borderWidth: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    right: 15,
+    marginLeft: 5
+  },
+  filterIcon: {
+    alignSelf: "center",
+    width: "60%",
+    height: "60%",
+    marginBottom: 0
   }
 });
 

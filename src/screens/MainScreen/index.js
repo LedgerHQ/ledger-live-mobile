@@ -47,6 +47,7 @@ const generateMockData = (currencies) => {
       currency["favourite"] = false;
     }
   });
+  return currencies;
 }
 
 export default function MainScreen({ navigation }: Props) {
