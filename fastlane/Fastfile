@@ -155,7 +155,8 @@ platform :ios do
         provisioningProfiles: {
             MY_APP_ID => MY_PROFILE
         }
-      }
+      },
+      configuration: "Release",
     )
   end
 
