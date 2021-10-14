@@ -156,7 +156,6 @@ platform :ios do
             MY_APP_ID => MY_PROFILE
         }
       },
-      configuration: "Release",
     )
   end
 
