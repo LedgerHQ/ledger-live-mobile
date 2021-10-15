@@ -1,6 +1,6 @@
 // @flow
 import React, { PureComponent } from "react";
-import { StyleSheet, View, TouchableOpacity, Image, Button, Text, ScrollView } from "react-native";
+import { StyleSheet, View, TouchableOpacity, Image, Text } from "react-native";
 import RBSheet from "react-native-raw-bottom-sheet";
 import { withTranslation } from "react-i18next";
 import { compose } from "redux";
@@ -8,36 +8,34 @@ import Search from "./Search";
 import SearchIcon from "../icons/Search";
 import TextInput from "./TextInput";
 import getFontStyle from "./LText/getFontStyle";
-import BottomSelectSheet from "./BottomSelectSheet";
+import BottomSelectSheetFilter from "./BottomSelectSheetFilter";
 import BottomSelectSheetTF from "./BottomSelectSheetTF";
 import FilterIcon from "../images/filter.png";
 
 import type { T } from "../types/common";
 import { withTheme } from "../colors";
-import { ManagerFirmwareNotEnoughSpaceError } from "@ledgerhq/errors";
-
-const SORT_OPTIONS = [
-  "Rank",
-  "% Change",
-  "Market cap",
-  "Price",
-  "Name"
-];
 
 const CHANGE_TIMES = [
-  { name: "1 day", short: "24H" },
-  { name: "1 week", short: "1W" },
-  { name: "1 month", short: "1M" },
-  { name: "1 year", short: "1Y" }
+  { name: "1 day", display: "Last 24 hours" },
+  { name: "1 week", display: "Last 1 week" },
+  { name: "1 month", display: "Last 1 month" },
+  { name: "1 year", display: "Last 1 year" }
 ];
 
-const CURRENCIES = [
-  "BTC",
-  "USD",
-  "EUR",
-  "CAD",
-  "INR",
-  "GBP"
+const SHOW_OPTIONS = [
+  { name: "All" },
+  { name: "Ledger Live compatible" },
+  { name: "Starred coins" }
+];
+
+const SORT_OPTIONS = [
+  { name: "Rank" },
+  { name: "Name A-Z" },
+  { name: "Name Z-A" },
+  { name: "Price - High to Low" },
+  { name: "Price - Low to High" },
+  { name: "% change - High to Low" },
+  { name: "% change - Low to High" }
 ];
 
 type OwnProps = {
@@ -66,16 +64,16 @@ type State = {
 
 class FilteredSearchBarBody extends PureComponent<Props, State> {
   static defaultProps = {
-    keys: ["name"],
+    keys: ["name"]
   };
 
   state = {
     focused: false,
     query: "",
     starred: false,
-    styleSheetTitle: "",
-    activeOptions: [],
-    checkDirection: false
+    showOption: "All",
+    sortOption: "Rank",
+    timeFrame: CHANGE_TIMES[0].display
   };
 
   input = React.createRef();
@@ -98,37 +96,26 @@ class FilteredSearchBarBody extends PureComponent<Props, State> {
     }
   };
 
-  onClickStarred = () => this.setState({ starred: !this.state.starred });
-
-  onClickSortBy = () => {
-    this.setState({
-      styleSheetTitle: "SORT BY",
-      activeOptions: SORT_OPTIONS,
-      checkDirection: true
-    });
-    this.RBSheet.open();
-  };
-
   onClickTimeFrame = () => {
-    this.setState({
-      styleSheetTitle: "Timeframe",
-      activeOptions: CHANGE_TIMES.map(element => element.name),
-      checkDirection: false
-    });
     this.RBSheetTimeFrame.open();
   };
 
-  onClickLiveCompatible = () => {
-  };
+  onClickFilter = () => {
+    this.RBSheetFilter.open();
+  }
 
-  onClickCurrency = () => {
+  onApplyTF = (activeItem) => {
+    this.setState({timeFrame: activeItem});
+    this.RBSheetTimeFrame.close();
+  }
+
+  onApplyFilter = (_filterOptions) => {
     this.setState({
-      styleSheetTitle: "CURRENCY",
-      activeOptions: CURRENCIES,
-      checkDirection: false
+      showOption: _filterOptions[0].active,
+      sortOption: _filterOptions[1].active
     });
-    this.RBSheet.open();
-  };
+    this.RBSheetFilter.close();
+  }
 
   render() {
     const {
@@ -169,7 +156,7 @@ class FilteredSearchBarBody extends PureComponent<Props, State> {
               clearButtonMode="always"
             />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.filterBtn}>
+          <TouchableOpacity style={styles.filterBtn} onPress={this.onClickFilter}>
             <Image source={FilterIcon} style={styles.filterIcon} />
           </TouchableOpacity>
         </View>
@@ -179,7 +166,7 @@ class FilteredSearchBarBody extends PureComponent<Props, State> {
           </Text>
           <TouchableOpacity style={{flexDirection: "row"}} onPress={this.onClickTimeFrame}>
             <Text style={styles.tfItem}>
-              {"  Last 24 hours "}
+              {"  "}{this.state.timeFrame}{" "}
             </Text>
             <Text style={styles.tfIcon}>
               {" ˅ "}
@@ -198,20 +185,31 @@ class FilteredSearchBarBody extends PureComponent<Props, State> {
           renderEmptySearch={renderEmptySearch}
         />
         <RBSheet
-          ref={ref => { this.RBSheet = ref; }}
-          height={350}
+          ref={ref => { this.RBSheetFilter = ref; }}
+          height={600}
           openDuration={250}
           closeOnDragDown
           customStyles={{
             container: {
-              backgroundColor: "#191919"
+              backgroundColor: "#ffffff",
+              borderRadius: 20
+            },
+            draggableIcon: {
+              backgroundColor: "#14253320",
+              width: 0
+            },
+            wrapper: {
+              color: "#142533",
+              fontFamily: "Inter"
             }
           }}
         >
-          <BottomSelectSheet
-            title={this.state.styleSheetTitle}
-            options={this.state.activeOptions} 
-            checkDirection={this.state.checkDirection}
+          <BottomSelectSheetFilter 
+            filterOptions={[
+              { title: "SHOW", options: SHOW_OPTIONS, active: this.state.showOption },
+              { title: "SORT BY", options: SORT_OPTIONS, active: this.state.sortOption }
+            ]}
+            onApply={this.onApplyFilter}
           />
         </RBSheet>
         <RBSheet
@@ -235,9 +233,10 @@ class FilteredSearchBarBody extends PureComponent<Props, State> {
           }}
         >
           <BottomSelectSheetTF
-            title={this.state.styleSheetTitle}
-            options={this.state.activeOptions} 
-            checkDirection={this.state.checkDirection}
+            title={"Timeframe"}
+            options={CHANGE_TIMES}
+            active={this.state.timeFrame}
+            onApply={this.onApplyTF}
           />
         </RBSheet>
       </>
@@ -285,7 +284,7 @@ const styles = StyleSheet.create({
   },
   tfIcon: {
     fontSize: 20,
-    color: "#6490f1"
+    color: "#6490f1",
   },
   filterBtn: {
     width: 40,

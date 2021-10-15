@@ -4,21 +4,21 @@ import React, { useState } from "react";
 import { RectButton } from "react-native-gesture-handler";
 import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import { isWithinInterval } from "date-fns";
-import { listCurrentRates } from "@ledgerhq/live-common/lib/families/ethereum/modules/compound";
 
 type Props = {
   title: String,
-  options: any[]
+  options: any[],
+  active: String,
+  onApply: any
 };
 
-export default function BottomSelectSheetTF({ title, options }: Props) {
-  const [activeItem, setActiveItem] = useState("");
-  const [activeFlag, setActiveFlag] = useState(false);
-  const ItemRow = ({option}) => {
+export default function BottomSelectSheetTF({ title, options, active, onApply }: Props) {
+  const [activeItem, setActiveItem] = useState(active);
+  const ItemRow = ({option, isActive}) => {
     return (
-      <TouchableOpacity style={styles.itemRow} onPress={() => setActiveItem(option)}>
-        <Text style={styles.itemText}>{option}</Text>
-        {(option === activeItem) && (
+      <TouchableOpacity style={styles.itemRow} onPress={() => {setActiveItem(option.display)}}>
+        <Text style={isActive ? styles.boldItemText : styles.itemText}>{option.name}</Text>
+        {isActive && (
           <Text style={styles.itemTextCheck}>
             ✓
           </Text>
@@ -26,16 +26,16 @@ export default function BottomSelectSheetTF({ title, options }: Props) {
       </TouchableOpacity>
     )
   }
-  const rates = listCurrentRates();
 
   return (
     <View style={styles.root}>
-      <Text>{listCurrentRates()}</Text>
       <Text style={styles.title}>{title}</Text>
-      {options.map(option => {
-        return <ItemRow option={option}/>
-      })}
-      <TouchableOpacity onPress={() => {}} style={styles.applyBtn}>
+      <View style={styles.filterList}>
+        {options.map(option => {
+          return <ItemRow option={option} isActive={option.display===activeItem} />
+        })}
+      </View>
+      <TouchableOpacity onPress={() => {onApply(activeItem)}} style={styles.applyBtn}>
         <Text style={styles.applyText}>Apply</Text>
       </TouchableOpacity>
     </View>
@@ -45,6 +45,11 @@ export default function BottomSelectSheetTF({ title, options }: Props) {
 const styles = StyleSheet.create({
   root: {
   },
+  filterList: {
+    marginHorizontal: 25,
+    paddingVertical: 10,
+    borderBottomColor: "#eeeeee"
+  },
   title: {
     textAlign: 'center',
     fontSize: 25,
@@ -53,16 +58,19 @@ const styles = StyleSheet.create({
   },
   itemRow: {
     flexDirection: "row",
-    paddingVertical: 5,
-    paddingLeft: 20
+    paddingVertical: 5
   },
   itemText: {
     fontSize: 15,
+    paddingVertical: 3
+  },
+  boldItemText: {
+    fontSize: 15,
     paddingVertical: 3,
-    paddingLeft: 10
+    fontWeight: "bold"
   },
   itemTextCheck: {
-    color: "#bbb0ff",
+    color: "#6490f1",
     fontSize: 15,
     paddingHorizontal: 20,
     marginLeft: "auto"
