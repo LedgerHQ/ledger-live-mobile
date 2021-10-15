@@ -158,8 +158,8 @@ platform :ios do
           }
         },
       )
-    rescue
-      put "XCODE LOG!!!!!!!!!!!!!!"
+    rescue => e
+      p "XCODE LOG!!!!!!!!!!!!!!"
       sh "cat ~/Library/Logs/gym/ledgerlivemobile-ledgerlivemobile.log"
     end
   end
