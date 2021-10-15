@@ -3,11 +3,11 @@ import { StyleSheet, FlatList, Text, Image, View } from "react-native";
 
 type Props = {
   navigation: any,
-  currencyOrToken: any
+  route: any
 };
 
-export default function SymbolDashboard({ navigation, currencyOrToken }: Props) {
-  console.log(currencyOrToken);
+export default function SymbolDashboard({ route, navigation }: Props) {
+  const { currencyOrToken } = route.params;
   const rsc = {
     icon: require("./bitcoin.png"),
     symbolName: "Bitcoin",

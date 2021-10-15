@@ -61,7 +61,7 @@ export default function MainScreen({ navigation }: Props) {
 
   const onPressItem = (currencyOrToken) => {
     navigation.navigate("SymbolDashboard", {
-      navigation, currencyOrToken
+      currencyOrToken: currencyOrToken
     });
   };
 
