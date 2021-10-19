@@ -1,7 +1,7 @@
 require_relative '../node_modules/react-native/scripts/react_native_pods'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
-platform :ios, '10.0'
+platform :ios, '11.0'
 
 target 'ledgerlivemobile' do
   config = use_native_modules!
@@ -14,6 +14,8 @@ target 'ledgerlivemobile' do
   pod 'djinni_objc', :path => '../node_modules/@ledgerhq/react-native-ledger-core'
   pod 'ledger-core-objc', :path => '../node_modules/@ledgerhq/react-native-ledger-core'
   pod 'RNLibLedgerCore', :path => '../node_modules/@ledgerhq/react-native-ledger-core'
+  
+  pod 'MultiplatformBleAdapter', :git => 'https://github.com/below/MultiPlatformBleAdapter', :tag => '0.1.9'
 
   pod 'react-native-webview', :path => '../node_modules/react-native-webview'
   pod 'React-RCTText', :path => '../node_modules/react-native/Libraries/Text', :modular_headers => true
