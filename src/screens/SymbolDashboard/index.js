@@ -1,74 +1,83 @@
-import React, { useCallback, useRef, useState, useEffect } from "react";
-import { StyleSheet, FlatList, Text, Image, View } from "react-native";
+import React, { useMemo, useRef } from "react";
+import { StyleSheet, FlatList } from "react-native";
+import { useSelector } from "react-redux";
+import Animated from "react-native-reanimated";
+import { createNativeWrapper } from "react-native-gesture-handler";
+import Chart from "./Chart";
+import { accountsSelector } from "../../reducers/accounts";
+import FabActions from "../../components/FabActions";
+import InfoTable from "./InfoTable";
+import globalSyncRefreshControl from "../../components/globalSyncRefreshControl";
+import { useScrollToTop } from "../../navigation/utils";
 
-type Props = {
-  navigation: any,
-  route: any
-};
+const AnimatedFlatListWithRefreshControl = createNativeWrapper(
+  Animated.createAnimatedComponent(globalSyncRefreshControl(FlatList)),
+  {
+    disallowInterruption: true,
+    shouldCancelWhenOutside: false,
+  },
+);
 
-export default function SymbolDashboard({ route, navigation }: Props) {
-  const { currencyOrToken } = route.params;
-  const rsc = {
-    icon: require("./bitcoin.png"),
-    symbolName: "Bitcoin",
-    symbolShort: "BTC",
-    price: 448555.8,
-    changePercent: 0.4434,
-    activeCurrency: "USD"
-  };
-  const currencies= [
-    {name: "BTC", symbol: "₿"},
-    {name: "USD", symbol: "$"},
-    {name: "EUR", symbol: "€"},
-    {name: "CAD", symbol: "$"},
-    {name: "INR", symbol: "₹"},
-    {name: "GBP", symbol: "£"},
-  ];
+export default function SymbolDashboard() {
+  const accounts = useSelector(accountsSelector);
+  const scrollY = useRef(new Animated.Value(0)).current;
+
+  const ref = useRef();
+  useScrollToTop(ref);
+
+  // CHECK SUPPORTED COINS
+  // const cryptoCurrencies = useMemo(
+  //   () => listSupportedCurrencies().concat(listTokens()),
+  //   [],
+  // );
+
+  const data = useMemo(
+    () => [
+      <Chart />,
+      <FabActions />,
+      <InfoTable />,
+      <InfoTable />,
+      <InfoTable />,
+    ],
+    [],
+  );
   return (
-    <>
-      <View style={styles.symbolHeader}>
-        <Image
-          style={styles.icon}
-          source={rsc.icon}
-        />
-        <View flexDirection="column">
-          <Text style={styles.symbolName}>
-            {rsc.symbolName}
-          </Text>
-          <Text style={styles.symbolShort}>
-            {rsc.symbolShort}
-          </Text>
-        </View>
-      </View>
-      <>
-        <Text>
-          Price
-        </Text>
-      </>
-    </>
+    <AnimatedFlatListWithRefreshControl
+      ref={ref}
+      data={data}
+      style={styles.inner}
+      renderItem={({ item }) => item}
+      keyExtractor={(item, index) => String(index)}
+      showsVerticalScrollIndicator={false}
+      onScroll={Animated.event(
+        [
+          {
+            nativeEvent: {
+              contentOffset: { y: scrollY },
+            },
+          },
+        ],
+        { useNativeDriver: true },
+      )}
+      testID={
+        accounts.length ? "PortfolioAccountsList" : "PortfolioEmptyAccount"
+      }
+    />
   );
 }
 
 const styles = StyleSheet.create({
-  list: {
+  container: {
     flex: 1,
   },
-  contentContainer: {
-    paddingTop: 16,
-    paddingBottom: 64,
+  inner: {
+    backgroundColor: "#fff",
   },
-  symbolName: {
-    fontSize: 40,
+  stickyActions: {
+    height: 40,
+    width: "100%",
+    alignContent: "flex-start",
+    justifyContent: "flex-start",
   },
-  symbolShort: {
-    fontSize: 25
-  },
-  icon: {
-    maxWidth: 50,
-    maxHeight: 50
-  },
-  symbolHeader: {
-    maxHeight: 50,
-    flexDirection: "row"
-  },
+  styckyActionsInner: { height: 56 },
 });
