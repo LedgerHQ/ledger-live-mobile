@@ -19,9 +19,10 @@ type Props = {
   percent?: boolean,
   unit?: Unit,
   style?: *,
+  textStyle?: *,
 };
 
-function Delta({ valueChange, percent, unit, style }: Props) {
+function Delta({ valueChange, percent, unit, style, textStyle }: Props) {
   const { colors } = useTheme();
   if (percent && (!valueChange.percentage || valueChange.percentage === 0)) {
     return null;
@@ -49,7 +50,7 @@ function Delta({ valueChange, percent, unit, style }: Props) {
     <View style={[styles.root, style]}>
       {percent && ArrowIcon ? <ArrowIcon size={10} color={color} /> : null}
       <View style={percent ? styles.content : null}>
-        <LText semiBold style={[styles.text, { color }]}>
+        <LText semiBold style={[styles.text, { color }, textStyle]}>
           {unit && absDelta !== 0 ? (
             <CurrencyUnitValue
               before={`(${sign}`}

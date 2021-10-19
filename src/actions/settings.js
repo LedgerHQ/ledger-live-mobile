@@ -205,7 +205,14 @@ export function useTimeRange() {
     },
     [dispatch],
   );
-  const ranges: PortfolioRange[] = ["day", "week", "month", "year", "all"];
+  const ranges: PortfolioRange[] = [
+    "hour",
+    "day",
+    "week",
+    "month",
+    "year",
+    "all",
+  ];
   const options = ranges.map<PortfolioRangeOption>(key => ({
     key,
     value: t(`common:time.${key}`),
