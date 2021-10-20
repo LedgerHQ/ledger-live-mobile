@@ -6,6 +6,13 @@
  */
 
 module.exports = {
+  ...(process.env.V3
+    ? {
+        resolver: {
+          sourceExts: ["tsx", "ts", "jsx", "js"],
+        },
+      }
+    : {}),
   transformer: {
     getTransformOptions: async () => ({
       transform: {
