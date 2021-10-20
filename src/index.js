@@ -81,7 +81,6 @@ import SnackbarContainer from "./screens/NotificationCenter/Snackbar/SnackbarCon
 import NavBarColorHandler from "./components/NavBarColorHandler";
 import { setOsTheme, setTheme } from "./actions/settings";
 import FirmwareUpdateBanner from "./components/FirmwareUpdateBanner";
-import SplashScreenLoader from "./components/SplashScreenLoader";
 
 const themes = {
   light: lightTheme,
@@ -432,7 +431,6 @@ export default class Root extends Component<
     const importDataString = __DEV__ ? this.props.importDataString : "";
 
     return (
-      <SplashScreenLoader>
         <RebootProvider onRebootStart={this.onRebootStart}>
           <LedgerStoreProvider onInitFinished={this.onInitFinished}>
             {(ready, store, initialCountervalues) =>
@@ -488,7 +486,6 @@ export default class Root extends Component<
             }
           </LedgerStoreProvider>
         </RebootProvider>
-      </SplashScreenLoader>
     );
   }
 }
