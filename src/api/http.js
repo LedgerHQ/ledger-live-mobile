@@ -10,7 +10,7 @@
    * @param _auth indicates if authentication is needed
    */
   async get(path: string, _auth = true): Promise<Response> {
-    return this.#do("GET", path, null);
+    return this.do_("GET", path, null);
   }
 
   /**
@@ -19,7 +19,7 @@
    * @param path
    * @param body serialized JSON
    */
-  async #do(method: string, path: string, body: string | null): Promise<Response> {
+  async do_(method: string, path: string, body: string | null): Promise<Response> {
     const request = {
       method: method,
       body: body,
@@ -28,7 +28,6 @@
     request.headers = {
       "Content-Type": "application/json",
     };
-
     return await fetch(path, request);
   }
 }

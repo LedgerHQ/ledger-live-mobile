@@ -3,6 +3,7 @@
 import { StyleSheet, View } from "react-native";
 import React, { PureComponent } from "react";
 import { RectButton } from "react-native-gesture-handler";
+import { listSupportedCurrencies } from "@ledgerhq/live-common/lib/currencies";
 import type {
   CryptoCurrency,
   TokenCurrency,
@@ -11,6 +12,7 @@ import type {
 import LText from "./LText";
 import CircleCurrencyIcon from "./CircleCurrencyIcon";
 import { withTheme } from "../colors";
+import { MarketClient } from "../api/market";
 
 type Props = {
   currency: CryptoCurrency | TokenCurrency,
@@ -18,7 +20,19 @@ type Props = {
   isOK?: boolean,
   style?: *,
   colors: *,
+  range: string
 };
+
+function magnitude(number) {
+  // Convert to String
+  const numberAsString = number.toString();
+  // String Contains Decimal
+  if (numberAsString.includes(".")) {
+    return numberAsString.split(".")[1].length;
+  }
+  // String Does Not Contain Decimal
+  return 0;
+}
 
 class CurrencyRow extends PureComponent<Props> {
   onPress = () => {
@@ -26,9 +40,9 @@ class CurrencyRow extends PureComponent<Props> {
   };
 
   render() {
-    const { currency, style, isOK = true, colors } = this.props;
+    const { currency, range, style, isOK = true, colors } = this.props;
 
-    return (
+    return currency ? (
       <RectButton style={[styles.root, style]} onPress={this.onPress}>
         <CircleCurrencyIcon
           size={26}
@@ -53,31 +67,32 @@ class CurrencyRow extends PureComponent<Props> {
             · {currency.ticker}
             </LText>
           </View>
+          {currency.data && (
           <View style={styles.flexRow}>
             <LText style={[styles.rank]}>
-              {currency.rank}
+              {currency.data.market_cap_rank}
             </LText>
             <LText style={[styles.totalAsset]}>
-              {(currency.totalAsset / 1000000000).toFixed(2)} Bn
+              {(currency.data.total_volume / 1000000000).toFixed(2)} Bn
             </LText>
-          </View>
+          </View>)}
         </View>
+        {currency.data && (
         <View style={styles.right}>
           <LText style={styles.price}>
-            ${currency.price.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+            ${currency.data.current_price.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
           </LText>
           {currency.changePercent > 0 ? (
             <LText style={styles.changePercentUp}>
-              ↗ {(currency.changePercent * 100).toFixed(2)}%
+              ↗ {(currency.data.price_change_percentage_in_currency * 100).toFixed(2)}%
             </LText>
           ) : (
             <LText style={styles.changePercentDown}>
-              ↘ {(Math.abs(currency.changePercent) * 100).toFixed(2)}%
+              ↘ {(Math.abs(currency.data.price_change_percentage_in_currency) * 100).toFixed(2)}%
             </LText>
           )}
-        </View>
-      </RectButton>
-    );
+        </View>)}
+      </RectButton>) : (<View></View>)
   }
 }
 

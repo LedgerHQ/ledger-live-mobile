@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useEffect, useState } from "react";
 import { StyleSheet, FlatList, Text, View } from "react-native";
 import {
   listTokens,
@@ -8,6 +8,7 @@ import {
 import FilteredSearchBarBody from "../../components/FilteredSearchBarBody";
 import KeyboardView from "../../components/KeyboardView";
 import CurrencyRow from "../../components/CurrencyInfoRow";
+import { MarketClient } from "../../api/market";
 
 const SEARCH_KEYS = ["name", "ticker"];
 
@@ -25,39 +26,34 @@ const renderEmptyList = () => (
   </View>
 );
 
-const generateMockData = (currencies) => {
-  currencies.forEach((currency, rank) => {
-    currency["rank"] = rank + 1;
-    if (currency["ticker"] === "BTC") {
-      currency["totalAsset"] = 447250000000;
-      currency["changePercent"] = 0.0234;
-      currency["price"] = 55540.54;
-      currency["favourite"] = true;
-    }
-    else if (currency["ticker"] === "ETH") {
-      currency["totalAsset"] = 1447000000;
-      currency["changePercent"] = 0.0125;
-      currency["price"] = 3301.24;
-      currency["favourite"] = true;
-    }
-    else {
-      currency["totalAsset"] = 447000000;
-      currency["changePercent"] = -0.0079;
-      currency["price"] = 40.54;
-      currency["favourite"] = false;
-    }
+const generateData = async (currencies) => {
+  const marketClient = new MarketClient();
+  const responses = await marketClient
+    .currencyByIds({
+      ids: currencies.map(item => item.id), 
+      counterCurrency: "usd", 
+      range: "1h"
+    });
+  responses.forEach((rsp, id) => {
+    currencies.forEach(currency => {
+      if (rsp.id === currency.id) {
+        currency.data = rsp;
+      }
+    });
   });
   return currencies;
 }
 
 export default function MainScreen({ navigation }: Props) {
-  const cryptoCurrencies = useMemo(
-    () => listSupportedCurrencies().concat(listTokens()),
-    [],
-  );
-
-  const sortedCryptoCurrencies = useCurrenciesByMarketcap(cryptoCurrencies);
-  const sortedCryptoCurrenciesMock = generateMockData(sortedCryptoCurrencies);
+  const [currencies, setCurrencies] = useState([]);
+  useEffect(() => {
+    (async () => {
+      const cryptoCurrencies = listSupportedCurrencies().concat(listTokens());
+      const sortedCryptoCurrencies = cryptoCurrencies.slice(0, 20);
+      await generateData(sortedCryptoCurrencies);
+      setCurrencies(sortedCryptoCurrencies);
+    })();
+  }, []);
 
   const onPressItem = (currencyOrToken) => {
     navigation.navigate("SymbolDashboard", {
@@ -70,7 +66,7 @@ export default function MainScreen({ navigation }: Props) {
       contentContainerStyle={styles.list}
       data={items}
       renderItem={({ item }) => (
-        <CurrencyRow currency={item} onPress={onPressItem} />
+        <CurrencyRow currency={item} onPress={onPressItem} range={"1h"}/>
       )}
       keyExtractor={keyExtractor}
       showsVerticalScrollIndicator={false}
@@ -85,7 +81,7 @@ export default function MainScreen({ navigation }: Props) {
           <FilteredSearchBarBody
             keys={SEARCH_KEYS}
             inputWrapperStyle={styles.filteredSearchInputWrapperStyle}
-            list={sortedCryptoCurrencies}
+            list={currencies}
             renderList={renderList}
             renderEmptySearch={renderEmptyList}
           />

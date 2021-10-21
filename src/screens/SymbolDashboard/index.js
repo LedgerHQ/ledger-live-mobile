@@ -9,6 +9,12 @@ import FabActions from "../../components/FabActions";
 import InfoTable from "./InfoTable";
 import globalSyncRefreshControl from "../../components/globalSyncRefreshControl";
 import { useScrollToTop } from "../../navigation/utils";
+import { MarketClient } from "../../api/market";
+
+type Props = {
+  navigation: any,
+  route: any
+};
 
 const AnimatedFlatListWithRefreshControl = createNativeWrapper(
   Animated.createAnimatedComponent(globalSyncRefreshControl(FlatList)),
@@ -18,7 +24,9 @@ const AnimatedFlatListWithRefreshControl = createNativeWrapper(
   },
 );
 
-export default function SymbolDashboard() {
+export default function SymbolDashboard({ route }: Props) {
+  const { currencyOrToken } = route.params;
+  console.log("currencyOrToken = ", currencyOrToken);
   const accounts = useSelector(accountsSelector);
   const scrollY = useRef(new Animated.Value(0)).current;
 

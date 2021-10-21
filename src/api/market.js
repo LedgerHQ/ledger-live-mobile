@@ -40,7 +40,6 @@ export class MarketClient extends APIClient {
     order = "desc",
   }: MarketListRequestParams): Promise<MarketCurrencyInfo[]> {
     let path = `${this.ROOT_PATH}/coins/markets?vs_currency=${counterCurrency}&order=${orderBy}_${order}&per_page=${limit}&page=${page}&sparkline=true&price_change_percentage=${range}`;
-
     if (ids.length) {
       path += `&ids=${ids}`;
     }
@@ -139,5 +138,22 @@ export class MarketClient extends APIClient {
     });
     // currenciesInfos
     return currenciesInfos[0];
+  }
+
+  // Fetches info for single currency
+  async currencyByIds({
+    ids,
+    counterCurrency,
+    range,
+  }: MarketCurrencyByIdRequestParams): Promise<MarketCurrencyInfo> {
+    const currenciesInfos = await this.listPaginated({
+      ids: ids,
+      limit: 1,
+      page: 1,
+      counterCurrency,
+      range,
+    });
+    // currenciesInfos
+    return currenciesInfos;
   }
 }
