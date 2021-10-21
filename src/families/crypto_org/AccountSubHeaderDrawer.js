@@ -33,9 +33,6 @@ export default function AccountSubHeaderDrawer({ isOpen, onClose }: Props) {
         <LText style={styles.description}>
           {t("cryptoOrg.account.subHeader.description2")}
         </LText>
-        <LText style={styles.description}>
-          {t("cryptoOrg.account.subHeader.description3")}
-        </LText>
         <View style={styles.linkContainer}>
           <ExternalLink
             text={t("cryptoOrg.account.subHeader.website")}
