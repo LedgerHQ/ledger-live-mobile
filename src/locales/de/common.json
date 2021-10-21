@@ -94,6 +94,10 @@
       "title": "Ein Kontoname wird benötigt",
       "description": "Bitte geben Sie einen Kontonamen ein."
     },
+    "AccountNeedResync": {
+      "title": "Please try again",
+      "description": "Account is outdated. A synchronisation is needed"
+    },
     "AlgorandASANotOptInInRecipient": {
       "title": "Das Empfängerkonto hat sich nicht für den gewählten ASA entschieden."
     },
@@ -1220,6 +1224,13 @@
         "title": "Verwenden Sie keinen Wiederherstellungssatz, den Sie nicht selbst erstellt haben.",
         "desc": "Der PIN-Code und der Wiederherstellungssatz Ihrer Ledger-Hardware-Wallet sollten von Ihnen und nur von Ihnen erstellt werden. Wenn Sie ein Gerät mit einem bereits existierendem Seed-Wort oder einem bereits erstellten PIN-Code erhalten haben, verwenden Sie das Produkt nicht und kontaktieren Sie bitte unseren Kundendienst.",
         "supportLink": "Kundendienst kontaktieren"
+      },
+      "seed": {
+        "title": "Please check the box contents",
+        "desc": "If your {{deviceName}} came with a PIN code or recovery phrase, it’s not safe to use and you should contact Ledger Support.",
+        "warning": "Only use a recovery phrase that your device displayed when it was set up",
+        "continueCTA": "Continue",
+        "contactSupportCTA": "Contact support"
       }
     }
   },
@@ -2456,6 +2467,7 @@
     }
   },
   "DeviceAction": {
+    "stayInTheAppPlz": "Stay in the app and keep your Nano X nearby",
     "allowAppPermission": "Öffnen Sie die {{wording}} App auf Ihrem Gerät",
     "allowAppPermissionSubtitleToken": "zum Verwalten Ihrer {{token}}-Tokens",
     "allowManagerPermission": "Erlauben Sie {{Wortlaut}} auf Ihrem Gerät",
@@ -3638,6 +3650,10 @@
     "title": "Benachrichtigungszentrale",
     "announcement": "Ankündigung",
     "liveStatus": "Ledger Live Status",
+    "groupedToast": {
+      "text": "You have {{count}} unread notifications",
+      "cta": "See details"
+    },
     "news": {
       "title": "Neuigkeiten",
       "titleCount": "Neuigkeiten ({{count}})",

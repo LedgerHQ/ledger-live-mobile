@@ -94,6 +94,10 @@
       "title": "اسم الحساب مطلوب",
       "description": "يرجى إدخال اسم الحساب."
     },
+    "AccountNeedResync": {
+      "title": "Please try again",
+      "description": "Account is outdated. A synchronisation is needed"
+    },
     "AlgorandASANotOptInInRecipient": {
       "title": "حساب المستلم لم ينضم إلى ASA الذي تم اختياره."
     },
@@ -1220,6 +1224,13 @@
         "title": "لا تستخدم عبارة استرداد لم تقم بإنشائها بنفسك.",
         "desc": "ينبغي أن تقوم بنفسك وبنفسك فقط ببدء إنشاء رمز الPIN وعبارة الاسترداد بمحفظة ليدجر للأجهزة الخاصة بك. إذا تلقيت جهازًا به الكلمة الأولية موجودة مسبقًا أو رمز الPIN مهيأً بالفعل، فلا تستخدم المنتج واتصل بدعم العملاء لدينا.",
         "supportLink": "الاتصال بقسم دعم ليدجر"
+      },
+      "seed": {
+        "title": "Please check the box contents",
+        "desc": "If your {{deviceName}} came with a PIN code or recovery phrase, it’s not safe to use and you should contact Ledger Support.",
+        "warning": "Only use a recovery phrase that your device displayed when it was set up",
+        "continueCTA": "Continue",
+        "contactSupportCTA": "Contact support"
       }
     }
   },
@@ -2456,6 +2467,7 @@
     }
   },
   "DeviceAction": {
+    "stayInTheAppPlz": "Stay in the app and keep your Nano X nearby",
     "allowAppPermission": "افتح تطبيق {{wording}} على جهازك",
     "allowAppPermissionSubtitleToken": "لإدارة رموز توكن {{token}} الخاصة بك",
     "allowManagerPermission": "السماح بــ {{wording}} على جهازك",
@@ -3638,6 +3650,10 @@
     "title": "مركز الإشعارات",
     "announcement": "إعلان",
     "liveStatus": "حالة Ledger Live",
+    "groupedToast": {
+      "text": "You have {{count}} unread notifications",
+      "cta": "See details"
+    },
     "news": {
       "title": "أخبار",
       "titleCount": "أخبار ({{count}})",
