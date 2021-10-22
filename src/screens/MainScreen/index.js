@@ -66,7 +66,7 @@ export default function MainScreen({ navigation }: Props) {
       contentContainerStyle={styles.list}
       data={items}
       renderItem={({ item }) => (
-        <CurrencyRow currency={item} onPress={onPressItem} range={"1h"}/>
+        <CurrencyRow currency={item} onPress={onPressItem} range={"1h"} />
       )}
       keyExtractor={keyExtractor}
       showsVerticalScrollIndicator={false}

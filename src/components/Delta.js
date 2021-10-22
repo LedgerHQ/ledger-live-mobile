@@ -20,9 +20,17 @@ type Props = {
   unit?: Unit,
   style?: *,
   textStyle?: *,
+  toFixed?: number,
 };
 
-function Delta({ valueChange, percent, unit, style, textStyle }: Props) {
+function Delta({
+  valueChange,
+  percent,
+  unit,
+  style,
+  textStyle,
+  toFixed = 0,
+}: Props) {
   const { colors } = useTheme();
   if (percent && (!valueChange.percentage || valueChange.percentage === 0)) {
     return null;
@@ -59,7 +67,7 @@ function Delta({ valueChange, percent, unit, style, textStyle }: Props) {
               value={absDelta}
             />
           ) : percent ? (
-            `${absDelta.toFixed(0)}%`
+            `${absDelta.toFixed(toFixed)}%`
           ) : null}
         </LText>
       </View>

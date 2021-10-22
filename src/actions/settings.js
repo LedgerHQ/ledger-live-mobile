@@ -201,7 +201,7 @@ export function useTimeRange() {
   const setter = useCallback(
     (_range: PortfolioRange | PortfolioRangeOption) => {
       const range = typeof _range === "string" ? _range : _range.key;
-      dispatch(setSelectedTimeRange(range));
+      range !== "hour" ? dispatch(setSelectedTimeRange(range)) : null;
     },
     [dispatch],
   );

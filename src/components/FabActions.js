@@ -26,6 +26,7 @@ import useLendingActions from "../screens/Account/hooks/useLendingActions";
 type Props = {
   account?: AccountLike,
   parentAccount?: Account,
+  marketPage?: boolean,
 };
 
 type FabAccountActionsProps = {
@@ -114,7 +115,7 @@ function FabAccountActions({ account, parentAccount }: FabAccountActionsProps) {
   );
 }
 
-function FabActions({ account, parentAccount }: Props) {
+function FabActions({ account, parentAccount, marketPage = false }: Props) {
   const readOnlyModeEnabled = useSelector(readOnlyModeEnabledSelector);
   const accountsCount = useSelector(accountsCountSelector);
 
@@ -133,7 +134,7 @@ function FabActions({ account, parentAccount }: Props) {
         { screen: ScreenName.ExchangeBuy },
       ],
     },
-    ...(accountsCount > 0 && !readOnlyModeEnabled
+    ...(accountsCount > 0 && !readOnlyModeEnabled || marketPage
       ? [
           {
             event: "TransferSwap",

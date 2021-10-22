@@ -2,7 +2,6 @@ import React, { useState, useCallback } from "react";
 import { View, StyleSheet, Platform } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { getAccountCurrency } from "@ledgerhq/live-common/lib/account";
-import type { Unit } from "@ledgerhq/live-common/lib/types";
 import { getCurrencyColor } from "@ledgerhq/live-common/lib/currencies/color";
 import { useSelector } from "react-redux";
 import { ensureContrast } from "../../colors";
@@ -15,12 +14,30 @@ import Graph from "../../components/Graph";
 import Pills from "../../components/Pills";
 import TransactionsPendingConfirmationWarning from "../../components/TransactionsPendingConfirmationWarning";
 import LText from "../../components/LText";
-import CurrencyUnitValue from "../../components/CurrencyUnitValue";
 import Placeholder from "../../components/Placeholder";
 import { usePortfolio } from "../../actions/portfolio";
 import { counterValueCurrencySelector } from "../../reducers/settings";
 
-export default function Chart() {
+type ChartItem = {
+  date: Date,
+  value: number,
+};
+type Props = {
+  chartData: Array<ChartItem>,
+  loading: boolean,
+  setRange: () => void,
+  currency: any,
+};
+
+const currencyFormat = num =>
+  "$" + num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+
+export default function Chart({
+  chartData,
+  loading,
+  setRange,
+  currency,
+}: Props) {
   const counterValueCurrency = useSelector(counterValueCurrencySelector);
   const portfolio = usePortfolio();
 
@@ -29,12 +46,18 @@ export default function Chart() {
   const { colors } = useTheme();
 
   const mapGraphValue = useCallback(d => d.value || 0, []);
-  const { countervalueChange } = portfolio;
 
   const range = portfolio.range;
   const isAvailable = portfolio.balanceAvailable;
   const accounts = portfolio.accounts;
   const balanceHistory = portfolio.balanceHistory;
+
+  const setLocalTimeRange = timeRange => {
+    setTimeRange(timeRange);
+    setRange(timeRange);
+  };
+
+  const data = chartData.length ? chartData : balanceHistory;
 
   const graphColor =
     accounts.length === 1
@@ -47,19 +70,21 @@ export default function Chart() {
   return (
     <View style={styles.chartContainer}>
       <GraphCardHeader
-        valueChange={countervalueChange}
-        isLoading={!isAvailable}
+        valueChange={{
+          percentage: currency.market_cap_change_percentage_24h / 100,
+        }}
+        isLoading={loading}
         hoveredItem={hoveredItem}
-        to={balanceHistory[balanceHistory.length - 1]}
+        to={{ value: currency.current_price }}
         unit={counterValueCurrency.units[0]}
       />
       <Graph
         isInteractive={isAvailable}
-        isLoading={!isAvailable}
+        isLoading={loading}
         height={187}
         width={getWindowDimensions().width}
         color={isAvailable ? graphColor : colors.grey}
-        data={balanceHistory}
+        data={data}
         onItemHover={setHoverItem}
         mapValue={mapGraphValue}
       />
@@ -67,7 +92,7 @@ export default function Chart() {
         <Pills
           isDisabled={!isAvailable}
           value={range}
-          onChange={setTimeRange}
+          onChange={setLocalTimeRange}
           // $FlowFixMe
           items={timeRangeItems}
         />
@@ -77,18 +102,17 @@ export default function Chart() {
 }
 
 function GraphCardHeader({
-  unit,
+  valueChange,
   hoveredItem,
   isLoading,
   to,
 }: {
+  valueChange: ValueChange,
   isLoading: boolean,
-  unit: Unit,
   to: Item,
   hoveredItem: ?Item,
 }) {
   const item = hoveredItem || to;
-
   return (
     <View style={styles.graphHeader}>
       <View style={styles.graphHeaderBalance}>
@@ -98,7 +122,7 @@ function GraphCardHeader({
               <Placeholder width={228} containerHeight={27} />
             ) : (
               <LText semiBold style={styles.balanceText}>
-                <CurrencyUnitValue unit={unit} value={item.value} />
+                {item.value ? currencyFormat(item.value) : ""}
               </LText>
             )}
             <TransactionsPendingConfirmationWarning />
@@ -122,10 +146,10 @@ function GraphCardHeader({
             <View style={styles.delta}>
               <Delta
                 percent
-                valueChange={{ percentage: 7, value: 10 }}
+                valueChange={valueChange}
                 style={styles.deltaPercent}
+                toFixed={2}
               />
-              <Delta valueChange={{ percentage: -7, value: -10 }} unit={unit} />
             </View>
           )}
         </View>
