@@ -14,7 +14,10 @@ import {
   getAndroidVersionCode,
 } from "../logic/cleanBuildVersion";
 import getOrCreateUser from "../user";
-import { analyticsEnabledSelector, languageSelector } from "../reducers/settings";
+import {
+  analyticsEnabledSelector,
+  languageSelector,
+} from "../reducers/settings";
 import { knownDevicesSelector } from "../reducers/ble";
 import type { State } from "../reducers";
 
