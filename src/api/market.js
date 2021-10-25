@@ -15,7 +15,7 @@ type MarketListRequestParams = {
 export type MarketCurrencyByIdRequestParams = {
   id: ?string,
   counterCurrency: string,
-  range: string,
+  range: ?string,
 };
 
 type MarketCurrencyChartDataRequestParams = {

@@ -3,6 +3,7 @@ import { View, StyleSheet, Platform } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { getAccountCurrency } from "@ledgerhq/live-common/lib/account";
 import { getCurrencyColor } from "@ledgerhq/live-common/lib/currencies/color";
+import type { Unit } from "@ledgerhq/live-common/lib/types";
 import { useSelector } from "react-redux";
 import { ensureContrast } from "../../colors";
 import { useTimeRange } from "../../actions/settings";
@@ -17,6 +18,7 @@ import LText from "../../components/LText";
 import Placeholder from "../../components/Placeholder";
 import { usePortfolio } from "../../actions/portfolio";
 import { counterValueCurrencySelector } from "../../reducers/settings";
+import { currencyFormat } from "../../helpers/currencyFormatter";
 
 type ChartItem = {
   date: Date,
@@ -28,9 +30,6 @@ type Props = {
   setRange: () => void,
   currency: any,
 };
-
-const currencyFormat = num =>
-  "$" + num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
 
 export default function Chart({
   chartData,
@@ -46,6 +45,10 @@ export default function Chart({
   const { colors } = useTheme();
 
   const mapGraphValue = useCallback(d => d.value || 0, []);
+
+  if (loading) {
+    return null;
+  }
 
   const range = portfolio.range;
   const isAvailable = portfolio.balanceAvailable;
@@ -106,11 +109,13 @@ function GraphCardHeader({
   hoveredItem,
   isLoading,
   to,
+  unit,
 }: {
   valueChange: ValueChange,
   isLoading: boolean,
   to: Item,
   hoveredItem: ?Item,
+  unit: ?Unit,
 }) {
   const item = hoveredItem || to;
   return (
@@ -122,7 +127,7 @@ function GraphCardHeader({
               <Placeholder width={228} containerHeight={27} />
             ) : (
               <LText semiBold style={styles.balanceText}>
-                {item.value ? currencyFormat(item.value) : ""}
+                {item.value ? currencyFormat(item.value, unit.code) : ""}
               </LText>
             )}
             <TransactionsPendingConfirmationWarning />
