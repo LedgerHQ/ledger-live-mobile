@@ -21,6 +21,7 @@ import {
   getAccountUnit,
   getAccountName,
 } from "@ledgerhq/live-common/lib/account";
+import { useNftMetadata } from "@ledgerhq/live-common/lib/nft";
 import { NavigatorName, ScreenName } from "../../const";
 import { localeIds } from "../../languages";
 import LText from "../../components/LText";
@@ -39,6 +40,7 @@ import Section, { styles as sectionStyles } from "./Section";
 import byFamiliesOperationDetails from "../../generated/operationDetails";
 import DefaultOperationDetailsExtra from "./Extra";
 import DoubleCounterValue from "../../components/DoubleCountervalue";
+import Skeleton from "../../components/Skeleton";
 
 type HelpLinkProps = {
   event: string,
@@ -74,6 +76,10 @@ export default function Content({
   const navigation = useNavigation();
   const { t } = useTranslation();
   const [isModalOpened, setIsModalOpened] = useState(false);
+  const { status, metadata } = useNftMetadata(
+    operation.contract,
+    operation.tokenId,
+  );
 
   const onPress = useCallback(() => {
     navigation.navigate(NavigatorName.Accounts, {
@@ -136,6 +142,77 @@ export default function Content({
       ? specific.OperationDetailsExtra
       : DefaultOperationDetailsExtra;
 
+  const isNftOperation =
+    ["NFT_IN", "NFT_OUT"].includes(type) &&
+    operation.contract &&
+    operation.tokenId;
+
+  const operationTitleRender = useCallback(() => {
+    if (hasFailed || amount.isZero()) {
+      return null;
+    }
+
+    if (isNftOperation) {
+      return (
+        <>
+          <Skeleton
+            style={[styles.currencyUnitValue, styles.currencyUnitValueSkeleton]}
+            loading={status === "loading"}
+          >
+            <LText semiBold numberOfLines={1} style={styles.currencyUnitValue}>
+              {metadata?.nftName || "-"}
+            </LText>
+          </Skeleton>
+          <LText
+            numberOfLines={1}
+            ellipsizeMode="middle"
+            style={[styles.titleTokenId, { color: colors.grey }]}
+          >
+            ID {operation.tokenId}
+          </LText>
+        </>
+      );
+    }
+
+    return (
+      <>
+        <LText
+          semiBold
+          numberOfLines={1}
+          style={[styles.currencyUnitValue, { color: valueColor }]}
+        >
+          <CurrencyUnitValue
+            showCode
+            disableRounding={true}
+            unit={unit}
+            value={amount}
+            alwaysShowSign
+          />
+        </LText>
+        <DoubleCounterValue
+          showCode
+          alwaysShowSign
+          currency={currency}
+          value={amount}
+          date={operation.date}
+          subMagnitude={1}
+        />
+      </>
+    );
+  }, [
+    amount,
+    colors.grey,
+    currency,
+    hasFailed,
+    isNftOperation,
+    metadata?.nftName,
+    operation.date,
+    operation.tokenId,
+    status,
+    unit,
+    valueColor,
+  ]);
+
   return (
     <>
       <View style={styles.header}>
@@ -148,32 +225,7 @@ export default function Content({
           />
         </View>
 
-        {hasFailed || amount.isZero() ? null : (
-          <LText
-            semiBold
-            numberOfLines={1}
-            style={[styles.currencyUnitValue, { color: valueColor }]}
-          >
-            <CurrencyUnitValue
-              showCode
-              disableRounding={true}
-              unit={unit}
-              value={amount}
-              alwaysShowSign
-            />
-          </LText>
-        )}
-
-        {hasFailed || amount.isZero() ? null : (
-          <DoubleCounterValue
-            showCode
-            alwaysShowSign
-            currency={currency}
-            value={amount}
-            date={operation.date}
-            subMagnitude={1}
-          />
-        )}
+        {operationTitleRender()}
 
         <View style={styles.confirmationContainer}>
           <View
@@ -285,6 +337,31 @@ export default function Content({
           value={getAccountName(account)}
           onPress={onPress}
         />
+      ) : null}
+
+      {isNftOperation ? (
+        <>
+          <Section title={t("operationDetails.tokenName")}>
+            <Skeleton
+              style={styles.tokenNameSkeleton}
+              loading={status === "loading"}
+            >
+              <LText semiBold>{metadata?.tokenName || "-"}</LText>
+            </Skeleton>
+          </Section>
+          <Section
+            title={t("operationDetails.collectionContract")}
+            value={operation.contract}
+          />
+          <Section
+            title={t("operationDetails.tokenId")}
+            value={operation.tokenId}
+          />
+          <Section
+            title={t("operationDetails.quantity")}
+            value={operation.value.toFixed()}
+          />
+        </>
       ) : null}
 
       <Section
@@ -411,10 +488,20 @@ const styles = StyleSheet.create({
   feeCounterValue: {
     marginLeft: 16,
   },
+  currencyUnitValueSkeleton: {
+    height: 24,
+    width: 250,
+    borderRadius: 4,
+  },
   currencyUnitValue: {
     paddingHorizontal: 8,
     fontSize: 20,
     marginBottom: 8,
+  },
+  titleTokenId: {
+    paddingHorizontal: 30,
+    fontSize: 16,
+    marginBottom: 16,
   },
   counterValue: {
     fontSize: 14,
@@ -451,5 +538,10 @@ const styles = StyleSheet.create({
     marginLeft: 5,
     fontSize: 12,
     textDecorationLine: "underline",
+  },
+  tokenNameSkeleton: {
+    height: 17,
+    width: 250,
+    borderRadius: 4,
   },
 });

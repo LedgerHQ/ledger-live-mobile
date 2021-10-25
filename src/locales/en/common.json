@@ -1401,7 +1401,11 @@
       "transferAmount": "Transfer Amount",
       "validatorsCount": "Validators ({{number}})"
     },
-    "multipleAddresses": "Why multiple addresses?"
+    "multipleAddresses": "Why multiple addresses?",
+    "tokenName": "Token Name",
+    "collectionContract": "Token Contract",
+    "tokenId": "Token (NFT) ID",
+    "quantity": "Quantity"
   },
   "operationList": {
     "noOperations": "No Operations",
