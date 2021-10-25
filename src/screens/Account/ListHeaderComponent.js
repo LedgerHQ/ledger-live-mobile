@@ -134,8 +134,6 @@ type Props = {
   onAccountPress: () => void,
   onSwitchAccountCurrency: () => void,
   compoundSummary?: ?CompoundAccountSummary,
-  isCollapsed: boolean,
-  setIsCollapsed: (v: boolean) => void,
 };
 
 export function getListHeaderComponents({
@@ -151,8 +149,6 @@ export function getListHeaderComponents({
   onAccountPress,
   onSwitchAccountCurrency,
   compoundSummary,
-  isCollapsed,
-  setIsCollapsed,
 }: Props): {
   listHeaderComponents: React$Node[],
   stickyHeaderIndices?: number[],
@@ -224,8 +220,6 @@ export function getListHeaderComponents({
               accountId={account.id}
               onAccountPress={onAccountPress}
               parentAccount={account}
-              isCollapsed={isCollapsed}
-              onToggle={() => setIsCollapsed(!isCollapsed)}
             />,
           ]
         : []),
