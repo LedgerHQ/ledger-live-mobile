@@ -1316,7 +1316,9 @@
   "operations": {
     "types": {
       "IN": "Received",
+      "NFT_IN": "NFT Received",
       "OUT": "Sent",
+      "NFT_OUT": "NFT Sent",
       "CREATE": "Created",
       "REVEAL": "Revealed",
       "DELEGATE": "Delegated",
@@ -1541,6 +1543,9 @@
     },
     "undelegation": {
       "sectionLabel": "Undelegation(s)"
+    },
+    "nft": {
+      "receiveNft": "Receive NFT"
     }
   },
   "accounts": {
@@ -3726,6 +3731,13 @@
       "infoPanel": {
         "website": "website"
       }
+    }
+  },
+
+  "nft": {
+    "account": {
+      "seeAllNfts": "See all NFT",
+      "seeFewerNfts": "See fewer NFT"
     }
   }
 }
