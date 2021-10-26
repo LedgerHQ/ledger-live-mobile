@@ -1,5 +1,5 @@
 // @flow
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "@react-navigation/native";
@@ -34,6 +34,7 @@ export default function ExchangeNavigator() {
       <Stack.Screen
         name={ScreenName.ExchangeSelectAccount}
         component={ExchangeSelectAccount}
+        initialParams={{ analyticsPropertyFlow: "buy" }}
         options={{ title: t("exchange.buy.selectAccount") }}
       />
       <Stack.Screen
