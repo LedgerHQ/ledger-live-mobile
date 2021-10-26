@@ -22,9 +22,10 @@ const NoAccountsEmptyState = ({
     () =>
       navigate(
         NavigatorName.AddAccounts,
-        selectedCurrency.type === "TokenCurrency"
+        {...(selectedCurrency.type === "TokenCurrency"
           ? { token: selectedCurrency, returnToSwap: true }
-          : { currency: selectedCurrency, returnToSwap: true },
+          : { currency: selectedCurrency, returnToSwap: true }),
+        analyticsPropertyFlow: "swap"},
       ),
     [navigate, selectedCurrency],
   );
