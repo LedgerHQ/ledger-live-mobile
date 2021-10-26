@@ -24,6 +24,8 @@ import {
 } from "./rendering";
 import PreventNativeBack from "../PreventNativeBack";
 import SkipLock from "../behaviour/SkipLock";
+import { useLastNonNull, usePrevious } from "./usePrevious";
+import { track } from "../../analytics";
 
 type Props<R, H, P> = {
   onResult?: (payload: *) => Promise<void> | void,
@@ -32,6 +34,7 @@ type Props<R, H, P> = {
   action: Action<R, H, P>,
   request?: R,
   device: Device,
+  analyticsPropertyFlow?: string,
 };
 
 export default function DeviceAction<R, H, P>({
@@ -41,6 +44,7 @@ export default function DeviceAction<R, H, P>({
   onResult,
   onError,
   renderOnResult,
+  analyticsPropertyFlow = "unknown",
 }: Props<R, H, P>) {
   const { colors, dark } = useTheme();
   const theme = dark ? "dark" : "light";
@@ -78,6 +82,32 @@ export default function DeviceAction<R, H, P>({
     progress,
     listingApps,
   } = status;
+
+  const previousInstallingApp = usePrevious(installingApp);
+  const nonNullRequestOpenApp =
+    useLastNonNull(requestOpenApp) || requestOpenApp;
+
+  useEffect(() => {
+    console.log('Mounted Device Action', {navigation});
+  }, [])
+
+  useEffect(() => {
+    const justStartedInstall = !previousInstallingApp && installingApp;
+    const hasAllEventInfo = analyticsPropertyFlow && nonNullRequestOpenApp;
+    if (justStartedInstall && hasAllEventInfo) {
+      const trackingArgs = [
+        "In-line app install",
+        { appName: nonNullRequestOpenApp, flow: analyticsPropertyFlow },
+      ];
+      console.log('EVENT', ...trackingArgs);
+      track(...trackingArgs);
+    }
+  }, [
+    installingApp,
+    nonNullRequestOpenApp,
+    previousInstallingApp,
+    analyticsPropertyFlow,
+  ]);
 
   if (displayUpgradeWarning && appAndVersion) {
     return renderWarningOutdated({

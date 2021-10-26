@@ -39,6 +39,7 @@ export default function ExchangeNavigator() {
       <Stack.Screen
         name={ScreenName.ExchangeConnectDevice}
         component={ExchangeConnectDevice}
+        initialParams={{ analyticsPropertyFlow: "buy" }}
         options={{ title: t("exchange.buy.connectDevice") }}
       />
       <Stack.Screen
