@@ -32,10 +32,6 @@ const SORT_OPTIONS = [
   { name: "Rank" },
   { name: "Name A-Z" },
   { name: "Name Z-A" },
-  { name: "Price - High to Low" },
-  { name: "Price - Low to High" },
-  { name: "% change - High to Low" },
-  { name: "% change - Low to High" }
 ];
 
 type OwnProps = {
@@ -186,7 +182,7 @@ class FilteredSearchBarBody extends PureComponent<Props, State> {
         />
         <RBSheet
           ref={ref => { this.RBSheetFilter = ref; }}
-          height={600}
+          height={450}
           openDuration={250}
           closeOnDragDown
           customStyles={{

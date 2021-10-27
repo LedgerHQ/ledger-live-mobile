@@ -82,13 +82,13 @@ class CurrencyRow extends PureComponent<Props> {
           <LText style={styles.price}>
             ${currency.data.current_price.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
           </LText>
-          {currency.changePercent > 0 ? (
+          {(currency.data.market_cap_change_percentage_24h > 0) ? (
             <LText style={styles.changePercentUp}>
-              ↗ {(currency.data.price_change_percentage_in_currency * 100).toFixed(2)}%
+              ↗ {currency.data.market_cap_change_percentage_24h.toFixed(2)}%
             </LText>
           ) : (
             <LText style={styles.changePercentDown}>
-              ↘ {(Math.abs(currency.data.price_change_percentage_in_currency) * 100).toFixed(2)}%
+              ↘ {Math.abs(currency.data.market_cap_change_percentage_24h).toFixed(2)}%
             </LText>
           )}
         </View>)}
