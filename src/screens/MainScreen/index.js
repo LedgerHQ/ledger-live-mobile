@@ -32,7 +32,7 @@ const generateData = async (currencies) => {
     .currencyByIds({
       ids: currencies.map(item => item.id), 
       counterCurrency: "usd", 
-      range: "1h"
+      range: "24h,7d,30d,1y"
     });
   responses.forEach((rsp, id) => {
     currencies.forEach(currency => {
@@ -46,6 +46,7 @@ const generateData = async (currencies) => {
 
 export default function MainScreen({ navigation }: Props) {
   const [currencies, setCurrencies] = useState([]);
+  const [range, setRange] = useState("24h");
   useEffect(() => {
     (async () => {
       const cryptoCurrencies = listSupportedCurrencies().concat(listTokens());
@@ -66,7 +67,7 @@ export default function MainScreen({ navigation }: Props) {
       contentContainerStyle={styles.list}
       data={items}
       renderItem={({ item }) => (
-        <CurrencyRow currency={item} onPress={onPressItem} range={"1h"} />
+        <CurrencyRow currency={item} onPress={onPressItem} range={range} />
       )}
       keyExtractor={keyExtractor}
       showsVerticalScrollIndicator={false}
@@ -84,6 +85,7 @@ export default function MainScreen({ navigation }: Props) {
             list={currencies}
             renderList={renderList}
             renderEmptySearch={renderEmptyList}
+            setRange={setRange}
           />
         </View>
       </KeyboardView>

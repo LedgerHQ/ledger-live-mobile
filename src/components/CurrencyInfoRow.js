@@ -8,6 +8,7 @@ import type {
   CryptoCurrency,
   TokenCurrency,
 } from "@ledgerhq/live-common/lib/types";
+import Delta from "../components/Delta";
 
 import LText from "./LText";
 import CircleCurrencyIcon from "./CircleCurrencyIcon";
@@ -42,6 +43,10 @@ class CurrencyRow extends PureComponent<Props> {
   render() {
     const { currency, range, style, isOK = true, colors } = this.props;
 
+    const priceChange = {percentage: currency.data ? 
+      currency.data["price_change_percentage_" + range + "_in_currency"] / 100 : 0
+    }
+    
     return currency ? (
       <RectButton style={[styles.root, style]} onPress={this.onPress}>
         <CircleCurrencyIcon
@@ -82,15 +87,15 @@ class CurrencyRow extends PureComponent<Props> {
           <LText style={styles.price}>
             ${currency.data.current_price.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
           </LText>
-          {(currency.data.market_cap_change_percentage_24h > 0) ? (
-            <LText style={styles.changePercentUp}>
-              ↗ {currency.data.market_cap_change_percentage_24h.toFixed(2)}%
-            </LText>
-          ) : (
-            <LText style={styles.changePercentDown}>
-              ↘ {Math.abs(currency.data.market_cap_change_percentage_24h).toFixed(2)}%
-            </LText>
-          )}
+          <View>
+            <Delta
+              percent
+              valueChange={priceChange}
+              style={styles.deltaPercent}
+              textStyle={styles.deltaPecentText}
+              toFixed={2}
+            />
+          </View>
         </View>)}
       </RectButton>) : (<View></View>)
   }
@@ -160,6 +165,14 @@ const styles = StyleSheet.create({
   },
   price: {
     alignSelf: "flex-end",
+    textAlign: "right"
+  },
+  deltaPercent: {
+    position: "absolute",
+    right: 0
+  },
+  deltaPecentText: {
+    fontSize: 12,
     textAlign: "right"
   }
 });

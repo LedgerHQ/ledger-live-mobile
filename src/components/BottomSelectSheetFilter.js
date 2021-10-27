@@ -35,7 +35,7 @@ export default function BottomSelectSheetFilter({ filterOptions, onApply }: Prop
               const newFilterOptions = { ..._filterOptions };
               newFilterOptions[id].active = option.name;
               setFilterOptions(newFilterOptions);
-            }} 
+            }}
             key={index}/>
         })}
       </View>

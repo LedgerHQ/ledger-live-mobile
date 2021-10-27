@@ -16,7 +16,7 @@ export default function BottomSelectSheetTF({ title, options, active, onApply }:
   const [activeItem, setActiveItem] = useState(active);
   const ItemRow = ({option, isActive}) => {
     return (
-      <TouchableOpacity style={styles.itemRow} onPress={() => {setActiveItem(option.display)}}>
+      <TouchableOpacity style={styles.itemRow} onPress={() => {setActiveItem(option)}}>
         <Text style={isActive ? styles.boldItemText : styles.itemText}>{option.name}</Text>
         {isActive && (
           <Text style={styles.itemTextCheck}>
@@ -32,7 +32,7 @@ export default function BottomSelectSheetTF({ title, options, active, onApply }:
       <Text style={styles.title}>{title}</Text>
       <View style={styles.filterList}>
         {options.map((option, id) => {
-          return <ItemRow option={option} isActive={option.display===activeItem} key={id}/>
+          return <ItemRow option={option} isActive={option===activeItem} key={id}/>
         })}
       </View>
       <TouchableOpacity onPress={() => {onApply(activeItem)}} style={styles.applyBtn}>

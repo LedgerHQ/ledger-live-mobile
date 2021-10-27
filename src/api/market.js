@@ -48,31 +48,8 @@ export class MarketClient extends APIClient {
     if (!response.ok) {
       await this.handleError(response);
     }
-
     const currenciesJson = await response.json();
-
-    return currenciesJson.map(currency => ({
-      id: currency.id,
-      symbol: currency.symbol,
-      name: currency.name,
-      image: currency.image,
-      current_price: currency.current_price,
-      market_cap: currency.market_cap,
-      market_cap_rank: currency.market_cap_rank,
-      total_volume: currency.total_volume,
-      high_24h: currency.high_24h,
-      low_24h: currency.low_24h,
-      price_change_percentage_in_currency: currency[`price_change_percentage_${range}_in_currency`],
-      market_cap_change_percentage_24h: currency.market_cap_change_percentage_24h,
-      circulating_supply: currency.circulating_supply,
-      total_supply: currency.total_supply,
-      max_supply: currency.max_supply,
-      ath: currency.ath,
-      ath_date: currency.ath_date,
-      atl: currency.atl,
-      atl_date: currency.atl_date,
-      sparkline_in_7d: currency.sparkline_in_7d.price,
-    }));
+    return currenciesJson;
   }
 
   // Fetches list of supported counterCurrencies

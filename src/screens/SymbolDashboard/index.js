@@ -109,6 +109,7 @@ export default function SymbolDashboard({ route }: Props) {
       .currencyById({
         id: currencyOrToken.id,
         counterCurrency: prefferedCurrency.ticker,
+        range: "1h,24h,7d,30d,1y"
       })
       .then(currency => {
         setCurrency(currency);
@@ -133,9 +134,9 @@ export default function SymbolDashboard({ route }: Props) {
           {
             title: "7d Low / 7d High",
             info: `${currencyFormat(
-              currency.sparkline_in_7d[0],
+              currency.sparkline_in_7d.price[0],
             )} / ${currencyFormat(
-              currency.sparkline_in_7d[currency.sparkline_in_7d.length - 1],
+              currency.sparkline_in_7d.price[currency.sparkline_in_7d.price.length - 1],
             )}`,
           },
           {
