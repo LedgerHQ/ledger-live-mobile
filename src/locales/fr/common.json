@@ -678,13 +678,9 @@
         "title": "Staker sur Cosmos",
         "description": "Déléguez vos ATOM pour gagner des récompenses aujourd'hui."
       },
-      "polkastake": {
-        "title": "STAKING DE POLKADOT",
-        "description": "Stakez, sécurisez et gérez vos DOT grâce à Ledger Live."
-      },
-      "backupPack": {
-        "title": "Back-up Pack",
-        "description": "Une protection optimale avec un Nano X et un Nano S."
+      "familyPack": {
+        "title": "Family pack",
+        "description": "Get your family into crypto with 3 Nano S"
       },
       "buyCrypto": {
         "title": "Acheter des cryptos",
