@@ -37,7 +37,7 @@ export default function PaginationBar({totalPages, activePage, setActivePage}: P
           onClick={() => {_setPage(Math.max(1, page - 1))}}
           style={styles.pageItemLeft}
         />
-        {pages.map(page => {
+        {pages.map((page, id) => {
           if (page === 1 || page === totalPages || Math.abs(page - activePage) <= 1 ||
             (activePage === 1 && page === 3) || (activePage === totalPages && page === totalPages - 2)
           ) {
@@ -46,6 +46,7 @@ export default function PaginationBar({totalPages, activePage, setActivePage}: P
                 text={page}
                 onClick={() => {_setPage(page)}}
                 style={page === activePage ? styles.pageItemActive : styles.pageItemUnactive}
+                key={id}
               />)
           }
           else if (page === 2 || page === totalPages - 1) {
