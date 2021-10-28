@@ -19,6 +19,7 @@ import getDeviceAnimation from "./getDeviceAnimation";
 import GenericErrorView from "../GenericErrorView";
 import Circle from "../Circle";
 import { MANAGER_TABS } from "../../screens/Manager/Manager";
+import { track } from "../../analytics";
 
 type RawProps = {
   t: (key: string, options?: { [key: string]: string | number }) => string,
@@ -422,6 +423,26 @@ export function renderLoading({
       </LText>
     </View>
   );
+}
+
+export function LoadingAppInstall({
+  analyticsPropertyFlow = "unknown",
+  request,
+  ...props
+}: {
+  ...RawProps,
+  description?: string,
+}) {
+  const currency = request?.currency || request?.account?.currency;
+  const appName = currency?.managerAppName;
+  useEffect(() => {
+    const trackingArgs = [
+      "In-line app install",
+      { appName, flow: analyticsPropertyFlow },
+    ];
+    track(...trackingArgs);
+  }, [appName, analyticsPropertyFlow]);
+  return renderLoading(props);
 }
 
 type WarningOutdatedProps = {

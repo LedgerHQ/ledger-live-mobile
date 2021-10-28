@@ -21,11 +21,10 @@ import {
   renderBootloaderStep,
   renderConfirmSwap,
   renderConfirmSell,
+  LoadingAppInstall,
 } from "./rendering";
 import PreventNativeBack from "../PreventNativeBack";
 import SkipLock from "../behaviour/SkipLock";
-import { useLastNonNull, usePrevious } from "./usePrevious";
-import { track } from "../../analytics";
 
 type Props<R, H, P> = {
   onResult?: (payload: *) => Promise<void> | void,
@@ -83,32 +82,6 @@ export default function DeviceAction<R, H, P>({
     listingApps,
   } = status;
 
-  const previousInstallingApp = usePrevious(installingApp);
-  const nonNullRequestOpenApp =
-    useLastNonNull(requestOpenApp) || requestOpenApp;
-
-  useEffect(() => {
-    console.log('Mounted Device Action', {navigation});
-  }, [])
-
-  useEffect(() => {
-    const justStartedInstall = !previousInstallingApp && installingApp;
-    const hasAllEventInfo = analyticsPropertyFlow && nonNullRequestOpenApp;
-    if (justStartedInstall && hasAllEventInfo) {
-      const trackingArgs = [
-        "In-line app install",
-        { appName: nonNullRequestOpenApp, flow: analyticsPropertyFlow },
-      ];
-      console.log('EVENT', ...trackingArgs);
-      track(...trackingArgs);
-    }
-  }, [
-    installingApp,
-    nonNullRequestOpenApp,
-    previousInstallingApp,
-    analyticsPropertyFlow,
-  ]);
-
   if (displayUpgradeWarning && appAndVersion) {
     return renderWarningOutdated({
       t,
@@ -131,7 +104,7 @@ export default function DeviceAction<R, H, P>({
 
   if (installingApp) {
     const appName = requestOpenApp;
-    return renderLoading({
+    const props = {
       t,
       description: t("DeviceAction.installApp", {
         percentage: (progress * 100).toFixed(0) + "%",
@@ -139,7 +112,11 @@ export default function DeviceAction<R, H, P>({
       }),
       colors,
       theme,
-    });
+      appName,
+      analyticsPropertyFlow,
+      request,
+    };
+    return <LoadingAppInstall {...props} />;
   }
 
   if (requiresAppInstallation) {
