@@ -3745,6 +3745,13 @@
     },
     "gallery": {
       "allNft": "All NFT"
+    },
+    "viewer": {
+      "properties": "Properties",
+      "about": "About Known Origin",
+      "tokenContract": "Token Address",
+      "tokenId": "Token ID",
+      "quantity": "Quantity"
     }
   }
 }
