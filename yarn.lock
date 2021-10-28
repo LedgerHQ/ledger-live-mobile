@@ -12142,13 +12142,6 @@ react-native-ble-plx@2.0.2:
   resolved "https://registry.yarnpkg.com/react-native-ble-plx/-/react-native-ble-plx-2.0.2.tgz#0912c50d4d807ed279a2a1043362c96318518154"
   integrity sha512-NjUl5H7bMgNfMma6i+W+wCsfQjOrUxSnLdmYgb8LSas4UZmmsakhEVK4C9/qHm2oxKB+SLR87zD6upZfD/R3sw==
 
-react-native-camera@3.44.0:
-  version "3.44.0"
-  resolved "https://registry.yarnpkg.com/react-native-camera/-/react-native-camera-3.44.0.tgz#8b61972e7fd019927ab68a72e3ecea898f6bcb8b"
-  integrity sha512-gAFtqWcNl/4N85V9RPFPuo32/OTaPvrLzhzXiFoK6eR8Ms2uvOZ/wRjj5gM1WqNoKilmAaULgypbplok1s53yA==
-  dependencies:
-    prop-types "^15.6.2"
-
 react-native-codegen@^0.0.7:
   version "0.0.7"
   resolved "https://registry.yarnpkg.com/react-native-codegen/-/react-native-codegen-0.0.7.tgz#86651c5c5fec67a8077ef7f4e36f7ed459043e14"
