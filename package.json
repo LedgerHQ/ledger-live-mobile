@@ -111,6 +111,7 @@
     "lottie-ios": "3.1.8",
     "lottie-react-native": "^4.0.2",
     "lru-cache": "^5.1.1",
+    "moment": "^2.29.1",
     "numeral": "2.0.6",
     "path-browserify": "1.0.1",
     "prando": "^5.1.2",
