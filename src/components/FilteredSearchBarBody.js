@@ -16,10 +16,10 @@ import type { T } from "../types/common";
 import { withTheme } from "../colors";
 
 const CHANGE_TIMES = [
-  { name: "1 day", display: "Last 24 hours" },
-  { name: "1 week", display: "Last 1 week" },
-  { name: "1 month", display: "Last 1 month" },
-  { name: "1 year", display: "Last 1 year" }
+  { name: "1 day", display: "Last 24 hours", key: "24h" },
+  { name: "1 week", display: "Last 1 week", key: "7d" },
+  { name: "1 month", display: "Last 1 month", key: "30d" },
+  { name: "1 year", display: "Last 1 year", key: "1y" }
 ];
 
 const SHOW_OPTIONS = [
@@ -32,10 +32,6 @@ const SORT_OPTIONS = [
   { name: "Rank" },
   { name: "Name A-Z" },
   { name: "Name Z-A" },
-  { name: "Price - High to Low" },
-  { name: "Price - Low to High" },
-  { name: "% change - High to Low" },
-  { name: "% change - Low to High" }
 ];
 
 type OwnProps = {
@@ -45,6 +41,7 @@ type OwnProps = {
   keys?: string[],
   list: Array<*>,
   inputWrapperStyle?: *,
+  setRange: (range: string) => void
 };
 
 type ConnectedProps = {|
@@ -54,7 +51,7 @@ type ConnectedProps = {|
 
 type Props = {
   ...OwnProps,
-  ...ConnectedProps,
+  ...ConnectedProps
 };
 
 type State = {
@@ -73,7 +70,7 @@ class FilteredSearchBarBody extends PureComponent<Props, State> {
     starred: false,
     showOption: "All",
     sortOption: "Rank",
-    timeFrame: CHANGE_TIMES[0].display
+    timeFrame: CHANGE_TIMES[0]
   };
 
   input = React.createRef();
@@ -107,6 +104,7 @@ class FilteredSearchBarBody extends PureComponent<Props, State> {
   onApplyTF = (activeItem) => {
     this.setState({timeFrame: activeItem});
     this.RBSheetTimeFrame.close();
+    this.props.setRange(activeItem.key);
   }
 
   onApplyFilter = (_filterOptions) => {
@@ -166,7 +164,7 @@ class FilteredSearchBarBody extends PureComponent<Props, State> {
           </Text>
           <TouchableOpacity style={{flexDirection: "row"}} onPress={this.onClickTimeFrame}>
             <Text style={styles.tfItem}>
-              {"  "}{this.state.timeFrame}{" "}
+              {"  "}{this.state.timeFrame.display}{" "}
             </Text>
             <Text style={styles.tfIcon}>
               {" ˅ "}
@@ -186,7 +184,7 @@ class FilteredSearchBarBody extends PureComponent<Props, State> {
         />
         <RBSheet
           ref={ref => { this.RBSheetFilter = ref; }}
-          height={600}
+          height={450}
           openDuration={250}
           closeOnDragDown
           customStyles={{

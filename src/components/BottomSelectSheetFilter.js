@@ -35,7 +35,8 @@ export default function BottomSelectSheetFilter({ filterOptions, onApply }: Prop
               const newFilterOptions = { ..._filterOptions };
               newFilterOptions[id].active = option.name;
               setFilterOptions(newFilterOptions);
-            }} />
+            }}
+            key={index}/>
         })}
       </View>
     )
@@ -44,7 +45,7 @@ export default function BottomSelectSheetFilter({ filterOptions, onApply }: Prop
   return (
     <View style={styles.root}>
       {filterOptions.map((options, id) => {
-        return <FilterList options={options} id={id}/>
+        return <FilterList options={options} id={id} key={id}/>
       })}
       <TouchableOpacity onPress={() => onApply(_filterOptions)} style={styles.applyBtn}>
         <Text style={styles.applyText}>Apply</Text>

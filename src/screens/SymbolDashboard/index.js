@@ -113,6 +113,7 @@ export default function SymbolDashboard({ route }: Props) {
       loadCurrencyById({
         id: currencyOrToken.id,
         counterCurrency: prefferedCurrency.ticker,
+        range: "1h,24h,7d,30d,1y",
       }),
     );
     dispatch(

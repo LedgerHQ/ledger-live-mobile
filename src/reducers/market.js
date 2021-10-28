@@ -109,10 +109,12 @@ export const priceStatisticsSelector = createSelector(
       {
         title: "7d Low / 7d High",
         info: `${currencyFormat(
-          currency.sparkline_in_7d[0],
+          currency.sparkline_in_7d.price[0],
           prefferedCurrency.symbol,
         )} / ${currencyFormat(
-          currency.sparkline_in_7d[currency.sparkline_in_7d.length - 1],
+          currency.sparkline_in_7d.price[
+            currency.sparkline_in_7d.price.length - 1
+          ],
           prefferedCurrency.symbol,
         )}`,
       },
