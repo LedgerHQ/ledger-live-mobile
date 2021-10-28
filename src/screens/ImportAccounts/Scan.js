@@ -10,7 +10,6 @@ import {
 import { decode } from "@ledgerhq/live-common/lib/cross";
 
 import { TrackScreen } from "../../analytics";
-import StyledStatusBar from "../../components/StyledStatusBar";
 import { ScreenName } from "../../const";
 import Scanner from "../../components/Scanner";
 import GenericErrorBottomModal from "../../components/GenericErrorBottomModal";
