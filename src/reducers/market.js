@@ -7,6 +7,9 @@ import type { State } from ".";
 import { counterValueCurrencySelector } from "./settings";
 import { currencyFormat } from "../helpers/currencyFormatter";
 
+export type Sparkline7d = {
+  price: Array<number>,
+};
 export type Currency = {
   ath: number,
   ath_date: string,
@@ -24,7 +27,7 @@ export type Currency = {
   max_supply: number,
   name: string,
   price_change_percentage_in_currency: number,
-  sparkline_in_7d: Array<number>,
+  sparkline_in_7d: Sparkline7d,
   symbol: string,
   total_supply: number,
   total_volume: number,
@@ -53,7 +56,9 @@ const initialState: MarketState = {
     max_supply: 1,
     name: "",
     price_change_percentage_in_currency: 1,
-    sparkline_in_7d: [],
+    sparkline_in_7d: {
+      price: [],
+    },
     symbol: "",
     total_supply: 1,
     total_volume: 1,
