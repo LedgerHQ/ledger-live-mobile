@@ -4,6 +4,32 @@ PODS:
   - CocoaAsyncSocket (7.6.5)
   - djinni_objc (4.19.1)
   - DoubleConversion (1.1.6)
+  - EXApplication (4.0.0):
+    - ExpoModulesCore
+  - EXBarCodeScanner (11.1.2):
+    - EXImageLoader
+    - ExpoModulesCore
+    - ZXingObjC/OneD
+    - ZXingObjC/PDF417
+  - EXCamera (12.0.3):
+    - ExpoModulesCore
+  - EXConstants (12.1.3):
+    - ExpoModulesCore
+  - EXErrorRecovery (3.0.3):
+    - ExpoModulesCore
+  - EXFileSystem (13.0.3):
+    - ExpoModulesCore
+  - EXFont (10.0.3):
+    - ExpoModulesCore
+  - EXImageLoader (3.0.0):
+    - ExpoModulesCore
+    - React-Core
+  - EXKeepAwake (10.0.0):
+    - ExpoModulesCore
+  - Expo (43.0.1):
+    - ExpoModulesCore
+  - ExpoModulesCore (0.4.6):
+    - React-Core
   - FBLazyVector (0.65.1)
   - FBReactNativeSpec (0.65.1):
     - RCT-Folly (= 2021.04.26.00)
@@ -390,10 +416,26 @@ PODS:
   - TcpSockets (4.0.0):
     - React
   - Yoga (1.14.0)
+  - ZXingObjC/Core (3.6.5)
+  - ZXingObjC/OneD (3.6.5):
+    - ZXingObjC/Core
+  - ZXingObjC/PDF417 (3.6.5):
+    - ZXingObjC/Core
 
 DEPENDENCIES:
   - "djinni_objc (from `../node_modules/@ledgerhq/react-native-ledger-core`)"
   - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
+  - EXApplication (from `../node_modules/expo-application/ios`)
+  - EXBarCodeScanner (from `../node_modules/expo-barcode-scanner/ios`)
+  - EXCamera (from `../node_modules/expo-camera/ios`)
+  - EXConstants (from `../node_modules/expo-constants/ios`)
+  - EXErrorRecovery (from `../node_modules/expo-error-recovery/ios`)
+  - EXFileSystem (from `../node_modules/expo-file-system/ios`)
+  - EXFont (from `../node_modules/expo-font/ios`)
+  - EXImageLoader (from `../node_modules/expo-image-loader/ios`)
+  - EXKeepAwake (from `../node_modules/expo-keep-awake/ios`)
+  - Expo (from `../node_modules/expo/ios`)
+  - ExpoModulesCore (from `../node_modules/expo-modules-core/ios`)
   - FBLazyVector (from `../node_modules/react-native/Libraries/FBLazyVector`)
   - FBReactNativeSpec (from `../node_modules/react-native/React/FBReactNativeSpec`)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
@@ -467,12 +509,35 @@ SPEC REPOS:
     - fmt
     - InputMask
     - Sentry
+    - ZXingObjC
 
 EXTERNAL SOURCES:
   djinni_objc:
     :path: "../node_modules/@ledgerhq/react-native-ledger-core"
   DoubleConversion:
     :podspec: "../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec"
+  EXApplication:
+    :path: "../node_modules/expo-application/ios"
+  EXBarCodeScanner:
+    :path: "../node_modules/expo-barcode-scanner/ios"
+  EXCamera:
+    :path: "../node_modules/expo-camera/ios"
+  EXConstants:
+    :path: "../node_modules/expo-constants/ios"
+  EXErrorRecovery:
+    :path: "../node_modules/expo-error-recovery/ios"
+  EXFileSystem:
+    :path: "../node_modules/expo-file-system/ios"
+  EXFont:
+    :path: "../node_modules/expo-font/ios"
+  EXImageLoader:
+    :path: "../node_modules/expo-image-loader/ios"
+  EXKeepAwake:
+    :path: "../node_modules/expo-keep-awake/ios"
+  Expo:
+    :path: "../node_modules/expo/ios"
+  ExpoModulesCore:
+    :path: "../node_modules/expo-modules-core/ios"
   FBLazyVector:
     :path: "../node_modules/react-native/Libraries/FBLazyVector"
   FBReactNativeSpec:
@@ -610,6 +675,17 @@ SPEC CHECKSUMS:
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
   djinni_objc: 54ab066f337b37aceaba6d020b1e6964eead00ba
   DoubleConversion: 831926d9b8bf8166fd87886c4abab286c2422662
+  EXApplication: 0e15240e4d125b62f1cae48759ffbbd32b9286a6
+  EXBarCodeScanner: cc450529b9c5e02dd9e2498cc0dddf153f120dfe
+  EXCamera: 03d69135ceb6f5f18f37b63eddb63d7643b65c42
+  EXConstants: 6d585d93723b18d7a8c283591a335609e3bc153e
+  EXErrorRecovery: ac2622400a32be84604591f70d0efff416e4b9a2
+  EXFileSystem: 99aac7962c11c680681819dd9cbca24e20e5b1e7
+  EXFont: 2e1c6fe726d008a039db80df95f48b4921b7fe59
+  EXImageLoader: 939451be6f7b731aaa6588920b90743f20121a4d
+  EXKeepAwake: 8aa32396a5972d26e75e538603aad0f032396503
+  Expo: cb542da0f7c8565a58231488066262f079eb1831
+  ExpoModulesCore: eea3472f70e921feb4dd24387662cbe0b67c9f8d
   FBLazyVector: 33c82491102f20ecddb6c6a2c273696ace3191e0
   FBReactNativeSpec: df8f81d2a7541ee6755a047b398a5cb5a72acd0e
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
@@ -675,7 +751,8 @@ SPEC CHECKSUMS:
   Sentry: 9a4e621430e2dae4477d791f2f7e905720b6efbf
   TcpSockets: 4ef55305239923b343ed0a378b1fac188b1373b0
   Yoga: aa0cb45287ebe1004c02a13f279c55a95f1572f4
+  ZXingObjC: fdbb269f25dd2032da343e06f10224d62f537bdb
 
-PODFILE CHECKSUM: 2ef2321c100101af5912d147ab4a11d7a4f63674
+PODFILE CHECKSUM: 0095224ed2ba2e5e762bff98cff9f4eabcec9b54
 
 COCOAPODS: 1.11.2
