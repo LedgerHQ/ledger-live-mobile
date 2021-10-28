@@ -434,7 +434,7 @@ export function LoadingAppInstall({
   description?: string,
 }) {
   const currency = request?.currency || request?.account?.currency;
-  const appName = currency?.managerAppName;
+  const appName = request?.appName || currency?.managerAppName;
   useEffect(() => {
     const trackingArgs = [
       "In-line app install",

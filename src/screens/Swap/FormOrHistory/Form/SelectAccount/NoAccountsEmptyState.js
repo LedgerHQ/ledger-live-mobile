@@ -20,13 +20,12 @@ const NoAccountsEmptyState = ({
   const { navigate } = useNavigation();
   const onAddAccount = useCallback(
     () =>
-      navigate(
-        NavigatorName.AddAccounts,
-        {...(selectedCurrency.type === "TokenCurrency"
+      navigate(NavigatorName.AddAccounts, {
+        ...(selectedCurrency.type === "TokenCurrency"
           ? { token: selectedCurrency, returnToSwap: true }
           : { currency: selectedCurrency, returnToSwap: true }),
-        analyticsPropertyFlow: "swap"},
-      ),
+        analyticsPropertyFlow: "swap",
+      }),
     [navigate, selectedCurrency],
   );
 

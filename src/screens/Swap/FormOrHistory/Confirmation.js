@@ -168,6 +168,7 @@ const Confirmation = ({
                     setSwapData(initSwapResult);
                   }
                 }}
+                analyticsPropertyFlow="swap"
               />
             ) : (
               <DeviceAction
@@ -188,6 +189,7 @@ const Confirmation = ({
                     setSignedOperation(signedOperation);
                   }
                 }}
+                analyticsPropertyFlow="swap"
               />
             )}
           </View>
