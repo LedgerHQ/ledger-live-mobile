@@ -23,6 +23,7 @@ import Touchable from "../../components/Touchable";
 import TransactionsPendingConfirmationWarning from "../../components/TransactionsPendingConfirmationWarning";
 import type { Item } from "../../components/Graph/types";
 import SubAccountsList from "./SubAccountsList";
+import NftCollectionsList from "./NftCollectionsList";
 import CompoundSummary from "../Lending/Account/CompoundSummary";
 import CompoundAccountBodyHeader from "../Lending/Account/AccountBodyHeader";
 import perFamilyAccountHeader from "../../generated/AccountHeader";
@@ -222,6 +223,9 @@ export function getListHeaderComponents({
               parentAccount={account}
             />,
           ]
+        : []),
+      ...(!empty && account.type === "Account" && account.nfts
+        ? [<NftCollectionsList account={account} />]
         : []),
       ...(compoundSummary &&
       account &&

@@ -3742,6 +3742,9 @@
     "account": {
       "seeAllNfts": "See all NFT",
       "seeFewerNfts": "See fewer NFT"
+    },
+    "gallery": {
+      "allNft": "All NFT"
     }
   }
 }
