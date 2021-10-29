@@ -14,7 +14,9 @@ type CurrencyDataRequestParams = {
   counterCurrency?: string,
   page?: number,
   limit?: number,
-  range?: string
+  range?: string,
+  orderBy?: string,
+  order?: string
 };
 
 export type MarketCurrencyByIdRequestParams = {
@@ -122,13 +124,15 @@ export class MarketClient extends APIClient {
     return currenciesInfos[0];
   }
 
-  async getCurrencyData({limit, page, counterCurrency, range}:CurrencyDataRequestParams) {
+  async getCurrencyData({limit, page, counterCurrency, range, orderBy, order}:CurrencyDataRequestParams) {
     const currenciesInfos = await this.listPaginated({
       ids: "",
       limit,
       page,
       counterCurrency,
       range,
+      orderBy,
+      order
     });
     // currenciesInfos
     return currenciesInfos;

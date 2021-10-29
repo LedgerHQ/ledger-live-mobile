@@ -9,6 +9,7 @@ import BottomSelectSheetTF from "./BottomSelectSheetTF";
 import FilterIcon from "../../images/filter.png";
 import SearchBox from "./SearchBox";
 import PaginationBar from "../../components/PaginationBar";
+import { sort } from "d3-array";
 
 const CHANGE_TIMES = [
   { name: "1 day", display: "Last 24 hours", key: "24h" },
@@ -29,14 +30,18 @@ const SORT_OPTIONS = [
   { name: "Name Z-A" },
 ];
 
-const getCurrencyData = async (limit, page) => {
+const getCurrencyData = async (limit, page, sortOption) => {
   const marketClient = new MarketClient();
+  const orderBy = sortOption === "Rank" ? "market_cap" : "id";
+  const order = sortOption === "Name A-Z" ? "asc" : "desc";
   const responses = await marketClient
     .getCurrencyData({
       limit: limit,
       page: page,
       counterCurrency: "usd", 
-      range: "24h,7d,30d,1y"
+      range: "24h,7d,30d,1y",
+      order: order,
+      orderBy: orderBy
     });
   return responses.map(response => {
     return {
@@ -59,10 +64,10 @@ export default function MainScreen({ navigation }) {
   const RBSheetFilter = useRef();
   useEffect(() => {
     (async () => {
-      const currencyData = await getCurrencyData(7, activePage);
+      const currencyData = await getCurrencyData(7, activePage, sortOption);
       setCurrencies(currencyData);
     })();
-  }, [activePage]);
+  }, [activePage, sortOption, showOption]);
 
   const onPressItem = (currencyOrToken) => {
     navigation.navigate("SymbolDashboard", {
