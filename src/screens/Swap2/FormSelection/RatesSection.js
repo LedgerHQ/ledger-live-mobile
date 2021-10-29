@@ -10,7 +10,6 @@ import { BigNumber } from "bignumber.js";
 import {
   getAccountUnit,
   getAccountName,
-  getAccountCurrency,
 } from "@ledgerhq/live-common/lib/account";
 
 import type {
@@ -66,10 +65,8 @@ export default function RatesSection({
   transaction,
   status,
   rate,
-  setToAccount,
   providers,
   provider,
-  accounts,
 }: Props) {
   const { colors } = useTheme();
 
@@ -85,7 +82,6 @@ export default function RatesSection({
   const onEditRateProvider = useCallback(() => {
     navigation.navigate(ScreenName.SwapFormV2SelectProviderRate, {
       ...route.params,
-      swap,
       selectedCurrency: toCurrency,
       rate,
       transaction,
@@ -98,57 +94,30 @@ export default function RatesSection({
     providers,
     rate,
     route.params,
-    swap,
     toCurrency,
     transaction,
   ]);
 
   const onEditToAccount = useCallback(() => {
-    const setAccount = acc =>
-      setToAccount(
-        getAccountCurrency(acc),
-        acc,
-        acc.parentId && accounts.find(({ id }) => id === acc.parentId),
-      );
     navigation.navigate(ScreenName.SwapV2FormSelectAccount, {
       ...route.params,
-      swap,
       selectedCurrency: toCurrency,
-      setAccount,
       target: "to",
       providers,
       provider,
     });
-  }, [
-    accounts,
-    navigation,
-    provider,
-    providers,
-    route.params,
-    setToAccount,
-    swap,
-    toCurrency,
-  ]);
+  }, [navigation, provider, providers, route.params, toCurrency]);
 
   const onEditFees = useCallback(() => {
     navigation.navigate(ScreenName.SwapV2FormSelectFees, {
       ...route.params,
-      swap,
       selectedCurrency: toCurrency,
       target: "to",
       transaction,
       providers,
       provider,
     });
-  }, [
-    navigation,
-    provider,
-    providers,
-    route.params,
-    swap,
-    toCurrency,
-    transaction,
-  ]);
+  }, [navigation, provider, providers, route.params, toCurrency, transaction]);
 
   const onAddAccount = useCallback(() => {
     navigation.navigate(NavigatorName.AddAccounts, {
@@ -156,13 +125,10 @@ export default function RatesSection({
       params: {
         currency: toCurrency,
         returnToSwap: true,
-        onSuccess: () =>
-          navigation.navigate(ScreenName.SwapForm, {
-            swap,
-          }),
+        onSuccess: () => navigation.navigate(ScreenName.SwapForm),
       },
     });
-  }, [navigation, toCurrency, swap]);
+  }, [navigation, toCurrency]);
 
   const ProviderIcon = providerIcons[provider];
 

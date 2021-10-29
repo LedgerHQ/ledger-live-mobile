@@ -1,6 +1,6 @@
 /* @flow */
 
-import React, { useCallback, useMemo } from "react";
+import React, { useCallback, useContext, useMemo } from "react";
 import {
   View,
   StyleSheet,
@@ -29,6 +29,7 @@ import { NavigatorName, ScreenName } from "../../../const";
 
 import type { SwapRouteParams } from "..";
 import AddIcon from "../../../icons/Plus";
+import { SwapDataContext } from "../SwapDataProvider";
 
 const SEARCH_KEYS = ["name", "unit.code", "token.name", "token.ticker"];
 
@@ -39,8 +40,19 @@ type Props = {
 
 export default function SelectAccount({ navigation, route }: Props) {
   const { colors } = useTheme();
-  const { swap, target, selectedCurrency, setAccount, provider } = route.params;
+  const { swapData: { swap, setFromAccount, setToAccount } = {} } = useContext(
+    SwapDataContext,
+  );
+  const { target, selectedCurrency, provider } = route.params;
   const accounts = useSelector(accountsSelector);
+
+  const setAccount = useCallback(
+    data => {
+      const fn = target === "from" ? setFromAccount : setToAccount;
+      if (fn) fn(data);
+    },
+    [target, setFromAccount, setToAccount],
+  );
 
   const enhancedAccounts = useMemo(() => {
     if (!selectedCurrency)
@@ -88,7 +100,7 @@ export default function SelectAccount({ navigation, route }: Props) {
             account={account}
             style={styles.card}
             onPress={() => {
-              setAccount && setAccount(account);
+              setAccount(account);
               navigation.navigate(ScreenName.SwapForm, {
                 ...route.params,
               });
@@ -102,8 +114,8 @@ export default function SelectAccount({ navigation, route }: Props) {
 
   const elligibleAccountsForSelectedCurrency = allAccounts.filter(account =>
     isFrom
-      ? account.balance.gt(0) && swap.to.account?.id !== account.id
-      : swap.from.account?.id !== account.id,
+      ? account.balance.gt(0) && swap?.to.account?.id !== account.id
+      : swap?.from.account?.id !== account.id,
   );
 
   const onAddAccount = useCallback(() => {

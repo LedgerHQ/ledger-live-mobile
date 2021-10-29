@@ -51,9 +51,7 @@ export default function AccountAmountRow({
   useAllAmount,
   swap,
   transaction,
-  setFromAccount,
   setFromAmount,
-  setToCurrency,
   rate,
   bridgePending,
   fromAmountError,
@@ -93,7 +91,6 @@ export default function AccountAmountRow({
             swap={swap}
             navigation={navigation}
             route={route}
-            setFromAccount={setFromAccount}
             providers={providers}
             provider={provider}
           />
@@ -131,7 +128,6 @@ export default function AccountAmountRow({
             swap={swap}
             navigation={navigation}
             route={route}
-            setToCurrency={setToCurrency}
             providers={providers}
             provider={provider}
           />

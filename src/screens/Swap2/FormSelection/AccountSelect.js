@@ -9,7 +9,6 @@ import {
   getAccountName,
 } from "@ledgerhq/live-common/lib/account";
 
-import type { Account, TokenAccount } from "@ledgerhq/live-common/lib/types";
 import type { SwapDataType } from "@ledgerhq/live-common/lib/exchange/swap/hooks";
 import type { SwapRouteParams } from "..";
 
@@ -24,7 +23,6 @@ type Props = {
   navigation: *,
   route: { params: SwapRouteParams },
   swap: SwapDataType,
-  setFromAccount: (account?: Account | TokenAccount) => void,
   providers: any,
   provider: any,
 };
@@ -33,7 +31,6 @@ export default function AccountSelect({
   navigation,
   route,
   swap,
-  setFromAccount,
   providers,
   provider,
 }: Props) {
@@ -47,14 +44,12 @@ export default function AccountSelect({
   const onPressItem = useCallback(() => {
     navigation.navigate(ScreenName.SwapV2FormSelectAccount, {
       ...route.params,
-      swap,
-      setAccount: setFromAccount,
       target: "from",
       providers,
       provider,
       selectedCurrency: undefined,
     });
-  }, [navigation, provider, providers, route.params, setFromAccount, swap]);
+  }, [navigation, provider, providers, route.params]);
 
   return (
     <TouchableOpacity style={styles.root} onPress={onPressItem}>
