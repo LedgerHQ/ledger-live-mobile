@@ -1,12 +1,6 @@
-import React, { useMemo, useEffect, useState, useRef } from "react";
-import { StyleSheet, FlatList, Image, TouchableOpacity, Text, View } from "react-native";
+import React, { useEffect, useState, useRef } from "react";
+import { StyleSheet, Image, TouchableOpacity, Text, View } from "react-native";
 import RBSheet from "react-native-raw-bottom-sheet";
-import {
-  listTokens,
-  useCurrenciesByMarketcap,
-  listSupportedCurrencies,
-} from "@ledgerhq/live-common/lib/currencies";
-import FilteredSearchBarBody from "../../components/FilteredSearchBarBody";
 import KeyboardView from "../../components/KeyboardView";
 import CurrencyRow from "../../components/CurrencyInfoRow";
 import { MarketClient } from "../../api/market";
@@ -15,8 +9,6 @@ import BottomSelectSheetTF from "./BottomSelectSheetTF";
 import FilterIcon from "../../images/filter.png";
 import SearchBox from "./SearchBox";
 import PaginationBar from "../../components/PaginationBar";
-
-const SEARCH_KEYS = ["name", "ticker"];
 
 const CHANGE_TIMES = [
   { name: "1 day", display: "Last 24 hours", key: "24h" },
@@ -37,47 +29,27 @@ const SORT_OPTIONS = [
   { name: "Name Z-A" },
 ];
 
-type Props = {
-  navigation: any,
-};
-
-const keyExtractor = currency => currency.id;
-
-const renderEmptyList = () => (
-  <View style={styles.emptySearch}>
-    <LText style={styles.emptySearchText}>
-      <Trans i18nKey="common.noCryptoFound" />
-    </LText>
-  </View>
-);
-
-const generateData = async (currencies) => {
+const getCurrencyData = async (limit, page) => {
   const marketClient = new MarketClient();
   const responses = await marketClient
-    .currencyByIds({
-      ids: currencies.map(item => item.id), 
+    .getCurrencyData({
+      limit: limit,
+      page: page,
       counterCurrency: "usd", 
       range: "24h,7d,30d,1y"
     });
-  responses.forEach((rsp, id) => {
-    currencies.forEach(currency => {
-      if (rsp.id === currency.id) {
-        currency.data = rsp;
-      }
-    });
-  });
-  return currencies;
-}
-
-const CONST_INDEX_ARRAY = (size) => {
-  return Array.from(Array(size+1).keys()).slice(1).map(id => {
-    return {index: id - 1}
+  return responses.map(response => {
+    return {
+      id: response.id,
+      name: response.name,
+      ticker: response.symbol.toUpperCase(),
+      data: response
+    }
   });
 }
 
-export default function MainScreen({ navigation }: Props) {
+export default function MainScreen({ navigation }) {
   const [currencies, setCurrencies] = useState([]);
-  const [filteredCurrencies, setFilteredCurrencies] = useState([]);
   const [range, setRange] = useState("24h");
   const [showOption, setShowOption] = useState("All");
   const [sortOption, setSortOption] = useState("Rank");
@@ -87,12 +59,10 @@ export default function MainScreen({ navigation }: Props) {
   const RBSheetFilter = useRef();
   useEffect(() => {
     (async () => {
-      const cryptoCurrencies = listSupportedCurrencies().concat(listTokens());
-      const sortedCryptoCurrencies = cryptoCurrencies.slice(0, 20);
-      await generateData(sortedCryptoCurrencies);
-      setCurrencies(sortedCryptoCurrencies);
+      const currencyData = await getCurrencyData(7, activePage);
+      setCurrencies(currencyData);
     })();
-  }, []);
+  }, [activePage]);
 
   const onPressItem = (currencyOrToken) => {
     navigation.navigate("SymbolDashboard", {
@@ -120,32 +90,11 @@ export default function MainScreen({ navigation }: Props) {
     RBSheetFilter.current.close();
   }
 
-  const renderList = items => (
-    <FlatList
-      contentContainerStyle={styles.list}
-      data={items}
-      renderItem={({ item }) => (
-        <CurrencyRow currency={item} onPress={onPressItem} range={range} />
-      )}
-      keyExtractor={keyExtractor}
-      showsVerticalScrollIndicator={false}
-      keyboardDismissMode="on-drag"
-    />
-  );
-
   return (
     <>
       <KeyboardView style={{ flex: 1 }}>
         <View flexDirection={"row"} paddingTop={16}>
           <View style={styles.searchContainer}>
-            {/* <FilteredSearchBarBody
-              keys={SEARCH_KEYS}
-              inputWrapperStyle={styles.filteredSearchInputWrapperStyle}
-              list={currencies}
-              renderList={renderList}
-              renderEmptySearch={renderEmptyList}
-              setRange={setRange}
-            /> */}
             <SearchBox />
           </View>
           <View>
@@ -168,9 +117,16 @@ export default function MainScreen({ navigation }: Props) {
             </Text>
           </TouchableOpacity>
         </View>
+        <View>
+          {currencies.map((currency, id) => {
+            return (
+              <CurrencyRow currency={currency} onPress={onPressItem} range={range} key={id}/>
+            )
+          })}
+        </View>
 
         <PaginationBar
-          totalPages={10}
+          totalPages={20}
           activePage={activePage}
           setActivePage={setActivePage}
         />

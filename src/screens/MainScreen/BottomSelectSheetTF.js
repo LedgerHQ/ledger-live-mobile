@@ -1,16 +1,14 @@
 // @flow
 
 import React, { useState } from "react";
-import { RectButton } from "react-native-gesture-handler";
 import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
-import { isWithinInterval } from "date-fns";
 
-type Props = {
+type Props={
   title: String,
-  options: any[],
-  active: String,
-  onApply: any
-};
+  options: Array<Object>,
+  active: Object,
+  onApply: (Object) => void
+}
 
 export default function BottomSelectSheetTF({ title, options, active, onApply }: Props) {
   const [activeItem, setActiveItem] = useState(active);
@@ -78,7 +76,6 @@ const styles = StyleSheet.create({
   applyBtn: {
     backgroundColor: "#6490f1",
     borderRadius: 0,
-    fontSize: 1000,
     width: "90%",
     marginTop: 20,
     alignSelf: "center"

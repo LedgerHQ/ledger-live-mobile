@@ -1,14 +1,12 @@
 // @flow
 
 import React, { useEffect, useState } from "react";
-import { RectButton } from "react-native-gesture-handler";
 import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
-import { isWithinInterval } from "date-fns";
 
-type Props = {
-  filterOptions: any[],
-  onApply: any
-};
+type Props={
+  filterOptions: Object,
+  onApply: (Object) => void
+}
 
 export default function BottomSelectSheetFilter({ filterOptions, onApply }: Props) {
   const [_filterOptions, setFilterOptions] = useState(filterOptions);
@@ -27,7 +25,7 @@ export default function BottomSelectSheetFilter({ filterOptions, onApply }: Prop
 
   const FilterList = ({options, id}) => {
     return (
-      <View style={styles.filterList} borderTopWidth={id === 0 ? 0 : 1}>
+      <View style={[styles.filterList, {borderTopWidth:id === 0 ? 0 : 1}]}>
         <Text style={styles.subTitle}>{options.title}</Text>
         {options.options.map((option, index) => {
           return <ItemRow option={option.name} active={option.name===options.active}
@@ -90,7 +88,6 @@ const styles = StyleSheet.create({
   applyBtn: {
     backgroundColor: "#6490f1",
     borderRadius: 0,
-    fontSize: 1000,
     width: "90%",
     marginTop: 20,
     alignSelf: "center"

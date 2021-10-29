@@ -1,11 +1,10 @@
-// @flow
 import { HttpClient } from "./http";
 
 /**
  * ErrorUnauthorized is a custom error type for performing unauthorized operations.
  */
 export class UnauthorizedError extends Error {
-  constructor(message = "authorization required") {
+  constructor(message:String = "authorization required") {
     super(message);
   }
 }

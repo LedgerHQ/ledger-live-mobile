@@ -1,25 +1,30 @@
-// @flow
 import { APIClient } from "./index";
 import { MarketCurrencyCommonInfo, MarketCurrencyInfo } from "./types";
 
 type MarketListRequestParams = {
-  counterCurrency: string,
-  ids: string[],
-  page: number,
-  limit: number,
-  range: string,
-  orderBy: string,
-  order: string,
+  counterCurrency?: string,
+  ids?: string,
+  page?: number,
+  limit?: number,
+  range?: string,
+  orderBy?: string,
+  order?: string,
+};
+type CurrencyDataRequestParams = {
+  counterCurrency?: string,
+  page?: number,
+  limit?: number,
+  range?: string
 };
 
 export type MarketCurrencyByIdRequestParams = {
-  id: ?string,
+  id: string,
   counterCurrency: string,
-  range: ?string,
+  range: string,
 };
 
 type MarketCurrencyChartDataRequestParams = {
-  id: ?string,
+  id: string,
   counterCurrency: string,
   days: number,
   interval: string,
@@ -35,7 +40,7 @@ export class MarketClient extends APIClient {
     range,
     limit = 10,
     page = 1,
-    ids = [],
+    ids = "",
     orderBy = "market_cap",
     order = "desc",
   }: MarketListRequestParams): Promise<MarketCurrencyInfo[]> {
@@ -107,7 +112,7 @@ export class MarketClient extends APIClient {
     range,
   }: MarketCurrencyByIdRequestParams): Promise<MarketCurrencyInfo> {
     const currenciesInfos = await this.listPaginated({
-      ids: [id],
+      ids: id,
       limit: 1,
       page: 1,
       counterCurrency,
@@ -117,16 +122,11 @@ export class MarketClient extends APIClient {
     return currenciesInfos[0];
   }
 
-  // Fetches info for single currency
-  async currencyByIds({
-    ids,
-    counterCurrency,
-    range,
-  }: MarketCurrencyByIdRequestParams): Promise<MarketCurrencyInfo> {
+  async getCurrencyData({limit, page, counterCurrency, range}:CurrencyDataRequestParams) {
     const currenciesInfos = await this.listPaginated({
-      ids: ids,
-      limit: 1,
-      page: 1,
+      ids: "",
+      limit,
+      page,
       counterCurrency,
       range,
     });

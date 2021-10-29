@@ -1,16 +1,11 @@
 // @flow
-import React, { PureComponent, useState } from "react";
+import React, { useState } from "react";
 import { StyleSheet, View, TouchableOpacity } from "react-native";
-import { withTranslation } from "react-i18next";
-import { compose } from "redux";
 import SearchIcon from "../../icons/Search";
 import TextInput from "../../components/TextInput";
 import getFontStyle from "../../components/LText/getFontStyle";
 
-import type { T } from "../../types/common";
-import { withTheme } from "../../colors";
-
-export default function MainScreen() {
+export default function SearchBox() {
   const [query, setQuery] = useState("");
   const [focused, setFocused] = useState(false);
 
@@ -18,7 +13,7 @@ export default function MainScreen() {
 
   const onBlur = () => setFocused(false);
 
-  const onChange = (text: string) => setQuery(text);
+  const onChange = (text) => setQuery(text);
 
   const clear = () => setQuery("");
 
@@ -27,7 +22,7 @@ export default function MainScreen() {
 
   return (
     <>
-      <View flexDirection={"row"}>
+      <View>
         <TouchableOpacity
           onPress={query ? null : focusInput}
           style={[styles.wrapper]}

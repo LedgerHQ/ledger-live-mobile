@@ -1,9 +1,8 @@
 // @flow
 
-import { StyleSheet, View } from "react-native";
+import { Image, StyleSheet, View } from "react-native";
 import React, { PureComponent } from "react";
 import { RectButton } from "react-native-gesture-handler";
-import { listSupportedCurrencies } from "@ledgerhq/live-common/lib/currencies";
 import type {
   CryptoCurrency,
   TokenCurrency,
@@ -11,9 +10,7 @@ import type {
 import Delta from "../components/Delta";
 
 import LText from "./LText";
-import CircleCurrencyIcon from "./CircleCurrencyIcon";
 import { withTheme } from "../colors";
-import { MarketClient } from "../api/market";
 
 type Props = {
   currency: CryptoCurrency | TokenCurrency,
@@ -49,10 +46,9 @@ class CurrencyRow extends PureComponent<Props> {
     
     return currency ? (
       <RectButton style={[styles.root, style]} onPress={this.onPress}>
-        <CircleCurrencyIcon
-          size={26}
-          currency={currency}
-          color={!isOK ? colors.lightFog : undefined}
+        <Image
+          source={{ uri: currency.data.image }}
+          style={styles.headerIcon}
         />
         <View style={styles.left}>
           <View style={styles.flexRow}>
@@ -174,6 +170,11 @@ const styles = StyleSheet.create({
   deltaPecentText: {
     fontSize: 12,
     textAlign: "right"
+  },
+  headerIcon: {
+    width: 32,
+    height: 32,
+    marginRight: 8,
   }
 });
 

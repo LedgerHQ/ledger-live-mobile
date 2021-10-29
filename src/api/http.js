@@ -9,7 +9,7 @@
    * @param path
    * @param _auth indicates if authentication is needed
    */
-  async get(path: string, _auth = true): Promise<Response> {
+  async get(path: string, _auth: bool = true): Promise<Response> {
     return this.do_("GET", path, null);
   }
 
@@ -23,10 +23,9 @@
     const request = {
       method: method,
       body: body,
-    };
-
-    request.headers = {
-      "Content-Type": "application/json",
+      headers: {
+        "Content-Type": "application/json",
+      }
     };
     return await fetch(path, request);
   }
