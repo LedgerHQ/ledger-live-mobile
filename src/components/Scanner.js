@@ -1,10 +1,11 @@
 /* @flow */
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View, useNavigation } from "react-native";
 import { Camera } from "expo-camera";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import StyledStatusBar from "./StyledStatusBar";
 import CameraScreen from "./CameraScreen";
+import FallBackCamera from "../screens/ImportAccounts/FallBackCamera";
 import getWindowDimensions from "../logic/getWindowDimensions";
 
 type Props = {
@@ -16,6 +17,7 @@ type Props = {
 const Scanner = ({ onResult, liveQrCode, progress }: Props) => {
   const [hasPermission, setHasPermission] = useState(null);
   const { width, height } = getWindowDimensions();
+  const navigation = useNavigation();
 
   useEffect(() => {
     (async () => {
@@ -28,7 +30,7 @@ const Scanner = ({ onResult, liveQrCode, progress }: Props) => {
     return <View />;
   }
   if (hasPermission === false) {
-    return <Text>No access to camera</Text>;
+    return <FallBackCamera navigation={navigation} />;
   }
 
   return (
