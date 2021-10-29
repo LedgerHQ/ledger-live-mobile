@@ -2,7 +2,7 @@
 import React, { useMemo } from "react";
 import { Platform } from "react-native";
 import { useTranslation } from "react-i18next";
-import { createStackNavigator } from "@react-navigation/stack";
+import { createNativeStackNavigator } from "react-native-screens/native-stack";
 import { useTheme } from "@react-navigation/native";
 import {
   getStackNavigatorConfig,
@@ -129,4 +129,4 @@ const options = {
 
 export { OptInFlow as component, options };
 
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();

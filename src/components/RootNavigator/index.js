@@ -2,12 +2,15 @@
 import React, { useMemo } from "react";
 import { useSelector } from "react-redux";
 import Config from "react-native-config";
-import { createStackNavigator } from "@react-navigation/stack";
+import { enableScreens } from "react-native-screens";
+import { createNativeStackNavigator } from "react-native-screens/native-stack";
 import { NavigatorName } from "../../const";
 import { hasCompletedOnboardingSelector } from "../../reducers/settings";
 import BaseNavigator from "./BaseNavigator";
 import BaseOnboardingNavigator from "./BaseOnboardingNavigator";
 import ImportAccountsNavigator from "./ImportAccountsNavigator";
+
+enableScreens();
 
 type Props = {
   importDataString?: string,
@@ -50,4 +53,4 @@ export default function RootNavigator({ importDataString }: Props) {
   );
 }
 
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();

@@ -2,7 +2,7 @@
 import React, { useMemo } from "react";
 import { TouchableOpacity, View, StyleSheet } from "react-native";
 import { useTheme } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
+import { createNativeStackNavigator } from "react-native-screens/native-stack";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { ScreenName } from "../../const";
@@ -67,7 +67,7 @@ export default function ManagerNavigator() {
   );
 }
 
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();
 
 export function ManagerTabIcon(props: any) {
   const isNavLocked = useIsNavLocked();

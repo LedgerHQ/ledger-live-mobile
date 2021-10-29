@@ -1,7 +1,7 @@
 // @flow
 
 import React, { useMemo } from "react";
-import { createStackNavigator } from "@react-navigation/stack";
+import { createNativeStackNavigator } from "react-native-screens/native-stack";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "@react-navigation/native";
 import useEnv from "@ledgerhq/live-common/lib/hooks/useEnv";
@@ -144,4 +144,4 @@ export default function SwapNavigator() {
   );
 }
 
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();

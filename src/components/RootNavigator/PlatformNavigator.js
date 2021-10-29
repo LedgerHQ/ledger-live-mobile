@@ -1,7 +1,7 @@
 // @flow
 
 import React, { useMemo } from "react";
-import { createStackNavigator } from "@react-navigation/stack";
+import { createNativeStackNavigator } from "react-native-screens/native-stack";
 import { useTheme } from "@react-navigation/native";
 import { ScreenName } from "../../const";
 import PlatformCatalog from "../../screens/Platform";
@@ -26,4 +26,4 @@ export default function PlatformNavigator() {
   );
 }
 
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();

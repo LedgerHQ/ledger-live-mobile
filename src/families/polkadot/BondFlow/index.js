@@ -2,7 +2,7 @@
 
 import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { createStackNavigator } from "@react-navigation/stack";
+import { createNativeStackNavigator } from "react-native-screens/native-stack";
 import { useTheme } from "@react-navigation/native";
 import { ScreenName } from "../../../const";
 import { getStackNavigatorConfig } from "../../../navigation/navigatorConfig";
@@ -109,4 +109,4 @@ const options = {
 
 export { BondFlow as component, options };
 
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();

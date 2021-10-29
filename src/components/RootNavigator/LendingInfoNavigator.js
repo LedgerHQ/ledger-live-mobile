@@ -1,7 +1,7 @@
 // @flow
 import React, { useMemo } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
-import { createStackNavigator } from "@react-navigation/stack";
+import { createNativeStackNavigator } from "react-native-screens/native-stack";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "@react-navigation/native";
 import { ScreenName } from "../../const";
@@ -67,7 +67,7 @@ export default function LendingInfoNavigator() {
   );
 }
 
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();
 
 const styles = StyleSheet.create({
   buttons: {
