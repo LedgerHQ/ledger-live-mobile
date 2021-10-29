@@ -3752,6 +3752,11 @@
       "tokenContract": "Token Address",
       "tokenId": "Token ID",
       "quantity": "Quantity"
+    },
+    "viewerModal": {
+      "viewOn": "View on",
+      "viewInExplorer": "View in explorer",
+      "txDetails": "Transaction details"
     }
   }
 }

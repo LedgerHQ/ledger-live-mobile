@@ -1,17 +1,13 @@
 // @flow
 
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 
 import {
   ScrollView,
   View,
   StyleSheet,
   Platform,
-<<<<<<< Updated upstream
-  Dimensions,
-=======
   TouchableOpacity,
->>>>>>> Stashed changes
 } from "react-native";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "@react-navigation/native";
@@ -19,7 +15,8 @@ import { useNftMetadata } from "@ledgerhq/live-common/lib/nft";
 
 import type { NFT, CollectionWithNFT } from "@ledgerhq/live-common/lib/nft";
 
-import SendIcon from "../../icons/Send";
+import NftLinksPanel from "./NftLinksPanel";
+// import SendIcon from "../../icons/Send";
 import { rgba } from "../../colors";
 import Skeleton from "../Skeleton";
 import NftImage from "./NftImage";
@@ -56,10 +53,22 @@ const Section = ({
 
 const NftViewer = ({ route: { params } }: Props) => {
   const { nft, collection } = params;
-  const { colors } = useTheme();
   const { status, metadata } = useNftMetadata(collection.contract, nft.tokenId);
+  const { colors } = useTheme();
   const { t } = useTranslation();
+
+  const [bottomModalOpen, setBottomModalOpen] = useState(false);
   const isLoading = status === "loading";
+
+  const defaultLinks = {
+    openSea: `https://opensea.io/assets/${collection.contract}/${nft.tokenId}`,
+    rarible: `https://rarible.com/token/${collection.contract}:${nft.tokenId}`,
+    etherscan: `https://etherscan.io/token/${collection.contract}?a=${nft.tokenId}`,
+  };
+
+  const closeModal = () => {
+    setBottomModalOpen(false);
+  };
 
   const properties = useMemo(() => {
     if (isLoading) {
@@ -130,68 +139,55 @@ const NftViewer = ({ route: { params } }: Props) => {
   );
 
   return (
-    <ScrollView contentContainerStyle={styles.scrollView}>
-      <View style={styles.main}>
-        <Skeleton
-          style={styles.tokenName}
-          width={113}
-          height={8}
-          loading={isLoading}
-        >
-          <LText style={styles.tokenName}>{metadata.tokenName || "-"}</LText>
-        </Skeleton>
+    <View>
+      <ScrollView contentContainerStyle={styles.scrollView}>
+        <View style={styles.main}>
+          <Skeleton
+            style={[styles.tokenName, styles.tokenNameSkeleton]}
+            loading={isLoading}
+          >
+            <LText style={styles.tokenName}>{metadata?.tokenName || "-"}</LText>
+          </Skeleton>
 
-        <Skeleton
-          style={styles.nftName}
-          width={250}
-          height={12}
-          loading={isLoading}
-        >
-          <LText style={styles.nftName} semiBold>
-            {metadata.nftName || "-"}
-          </LText>
-        </Skeleton>
+          <Skeleton
+            style={[styles.nftName, styles.nftNameSkeleton]}
+            loading={isLoading}
+          >
+            <LText style={styles.nftName} semiBold>
+              {metadata?.nftName || "-"}
+            </LText>
+          </Skeleton>
 
-        <NftImage
-          style={styles.image}
-          height={windowWidth}
-          width={windowWidth}
-          src={metadata.media}
-          borderRadius={8}
-        />
-
-        <View style={styles.buttons}>
-          <View style={styles.sendButtonContainer}>
-            <Button
-              type="primary"
-              IconLeft={SendIcon}
-              containerStyle={styles.sendButton}
-              title={t("account.send")}
-              onPress={() => {}}
+          <View style={styles.imageContainer}>
+            <NftImage
+              style={styles.image}
+              src={metadata?.media}
+              status={status}
+              hackWidth={300}
             />
           </View>
-          <View style={styles.ellipsisButtonContainer}>
-            <Button
-              type="primary"
-              containerStyle={styles.ellipsisButton}
-              title="•••"
-              onPress={() => {}}
-            />
+
+          <View style={styles.buttons}>
+            {/* <View style={styles.sendButtonContainer}>
+              <Button
+                type="primary"
+                IconLeft={SendIcon}
+                containerStyle={styles.sendButton}
+                title={t("account.send")}
+                onPress={() => {}}
+              />
+            </View> */}
+            <View style={styles.ellipsisButtonContainer}>
+              <Button
+                type="primary"
+                containerStyle={styles.ellipsisButton}
+                title="•••"
+                onPress={() => setBottomModalOpen(true)}
+              />
+            </View>
           </View>
         </View>
-      </View>
 
-<<<<<<< Updated upstream
-      {/* This weird thing is because we want a full width scrollView withtout the paddings */}
-      <>
-        <View style={{ paddingLeft: MAIN_HORIZONTAL_PADDING }}>
-          <LText style={styles.sectionTitle}>
-            {t("nft.viewer.properties")}
-          </LText>
-        </View>
-        {properties}
-      </>
-=======
         {/* This weird thing is because we want a full width scrollView withtout the paddings */}
         <>
           <View style={styles.propertiesContainer}>
@@ -201,32 +197,43 @@ const NftViewer = ({ route: { params } }: Props) => {
           </View>
           {properties}
         </>
->>>>>>> Stashed changes
 
-      <View style={styles.main}>
-        <View style={styles.hr} />
+        <View style={styles.main}>
+          <View style={styles.hr} />
 
-        <Section title={t("nft.viewer.about")}>{description}</Section>
+          <Section title={t("nft.viewer.about")}>{description}</Section>
 
-        <View style={styles.hr} />
+          <View style={styles.hr} />
 
-        <Section
-          title={t("nft.viewer.tokenContract")}
-          value={collection.contract}
-        />
+          <Section
+            title={t("nft.viewer.tokenContract")}
+            value={collection.contract}
+          />
 
-        <View style={styles.hr} />
+          <View style={styles.hr} />
 
-        <Section title={t("nft.viewer.tokenId")} value={nft.tokenId} />
+          <Section title={t("nft.viewer.tokenId")} value={nft.tokenId} />
 
-        <View style={styles.hr} />
+          <View style={styles.hr} />
 
-        <Section
-          title={t("nft.viewer.quantity")}
-          value={nft.amount.toFixed()}
-        />
-      </View>
-    </ScrollView>
+          <TouchableOpacity onPress={closeModal}>
+            <Section
+              title={t("nft.viewer.quantity")}
+              value={nft.amount.toFixed()}
+            />
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
+      <NftLinksPanel
+        links={
+          metadata && Object.keys(metadata?.links)?.length
+            ? metadata.links
+            : defaultLinks
+        }
+        isOpen={bottomModalOpen}
+        onClose={closeModal}
+      />
+    </View>
   );
 };
 
