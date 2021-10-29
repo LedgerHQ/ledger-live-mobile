@@ -22,7 +22,7 @@ export default function SearchBox() {
 
   return (
     <>
-      <View>
+      <View style={styles.container}>
         <TouchableOpacity
           onPress={query ? null : focusInput}
           style={[styles.wrapper]}
@@ -52,6 +52,9 @@ export default function SearchBox() {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flexDirection: "row",
+  },
   wrapper: {
     flexDirection: "row",
     alignItems: "center",
