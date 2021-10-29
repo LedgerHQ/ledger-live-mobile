@@ -1,38 +1,16 @@
 // @flow
 import React, { PureComponent } from "react";
-import { StyleSheet, View, TouchableOpacity, Image, Text } from "react-native";
-import RBSheet from "react-native-raw-bottom-sheet";
+import { StyleSheet, View, TouchableOpacity } from "react-native";
 import { withTranslation } from "react-i18next";
 import { compose } from "redux";
 import Search from "./Search";
 import SearchIcon from "../icons/Search";
 import TextInput from "./TextInput";
 import getFontStyle from "./LText/getFontStyle";
-import BottomSelectSheetFilter from "./BottomSelectSheetFilter";
-import BottomSelectSheetTF from "./BottomSelectSheetTF";
 import FilterIcon from "../images/filter.png";
 
 import type { T } from "../types/common";
 import { withTheme } from "../colors";
-
-const CHANGE_TIMES = [
-  { name: "1 day", display: "Last 24 hours", key: "24h" },
-  { name: "1 week", display: "Last 1 week", key: "7d" },
-  { name: "1 month", display: "Last 1 month", key: "30d" },
-  { name: "1 year", display: "Last 1 year", key: "1y" }
-];
-
-const SHOW_OPTIONS = [
-  { name: "All" },
-  { name: "Ledger Live compatible" },
-  { name: "Starred coins" }
-];
-
-const SORT_OPTIONS = [
-  { name: "Rank" },
-  { name: "Name A-Z" },
-  { name: "Name Z-A" },
-];
 
 type OwnProps = {
   initialQuery?: string,
@@ -67,10 +45,7 @@ class FilteredSearchBarBody extends PureComponent<Props, State> {
   state = {
     focused: false,
     query: "",
-    starred: false,
-    showOption: "All",
-    sortOption: "Rank",
-    timeFrame: CHANGE_TIMES[0]
+    starred: false
   };
 
   input = React.createRef();
@@ -92,28 +67,6 @@ class FilteredSearchBarBody extends PureComponent<Props, State> {
       this.input.current.focus();
     }
   };
-
-  onClickTimeFrame = () => {
-    this.RBSheetTimeFrame.open();
-  };
-
-  onClickFilter = () => {
-    this.RBSheetFilter.open();
-  }
-
-  onApplyTF = (activeItem) => {
-    this.setState({timeFrame: activeItem});
-    this.RBSheetTimeFrame.close();
-    this.props.setRange(activeItem.key);
-  }
-
-  onApplyFilter = (_filterOptions) => {
-    this.setState({
-      showOption: _filterOptions[0].active,
-      sortOption: _filterOptions[1].active
-    });
-    this.RBSheetFilter.close();
-  }
 
   render() {
     const {
@@ -154,22 +107,6 @@ class FilteredSearchBarBody extends PureComponent<Props, State> {
               clearButtonMode="always"
             />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.filterBtn} onPress={this.onClickFilter}>
-            <Image source={FilterIcon} style={styles.filterIcon} />
-          </TouchableOpacity>
-        </View>
-        <View style={styles.tfSelector}>
-          <Text style={styles.tf}>
-            Timeframe
-          </Text>
-          <TouchableOpacity style={{flexDirection: "row"}} onPress={this.onClickTimeFrame}>
-            <Text style={styles.tfItem}>
-              {"  "}{this.state.timeFrame.display}{" "}
-            </Text>
-            <Text style={styles.tfIcon}>
-              {" ˅ "}
-            </Text>
-          </TouchableOpacity>
         </View>
         <Search
           fuseOptions={{
@@ -182,61 +119,6 @@ class FilteredSearchBarBody extends PureComponent<Props, State> {
           render={renderList}
           renderEmptySearch={renderEmptySearch}
         />
-        <RBSheet
-          ref={ref => { this.RBSheetFilter = ref; }}
-          height={450}
-          openDuration={250}
-          closeOnDragDown
-          customStyles={{
-            container: {
-              backgroundColor: "#ffffff",
-              borderRadius: 20
-            },
-            draggableIcon: {
-              backgroundColor: "#14253320",
-              width: 0
-            },
-            wrapper: {
-              color: "#142533",
-              fontFamily: "Inter"
-            }
-          }}
-        >
-          <BottomSelectSheetFilter 
-            filterOptions={[
-              { title: "SHOW", options: SHOW_OPTIONS, active: this.state.showOption },
-              { title: "SORT BY", options: SORT_OPTIONS, active: this.state.sortOption }
-            ]}
-            onApply={this.onApplyFilter}
-          />
-        </RBSheet>
-        <RBSheet
-          ref={ref => { this.RBSheetTimeFrame = ref; }}
-          height={350}
-          openDuration={250}
-          closeOnDragDown
-          customStyles={{
-            container: {
-              backgroundColor: "#ffffff",
-              borderRadius: 20
-            },
-            draggableIcon: {
-              backgroundColor: "#14253320",
-              width: 40
-            },
-            wrapper: {
-              color: "#142533",
-              fontFamily: "Inter"
-            }
-          }}
-        >
-          <BottomSelectSheetTF
-            title={"Timeframe"}
-            options={CHANGE_TIMES}
-            active={this.state.timeFrame}
-            onApply={this.onApplyTF}
-          />
-        </RBSheet>
       </>
     );
   }
@@ -268,39 +150,6 @@ const styles = StyleSheet.create({
   inputContainer: {
     flex: 1,
   },
-  tfSelector: {
-    flexDirection: "row",
-    paddingTop: 15
-  },
-  tf: {
-    fontSize: 15,
-    paddingLeft: 15
-  },
-  tfItem: {
-    fontSize: 15,
-    color: "#6490f1"
-  },
-  tfIcon: {
-    fontSize: 20,
-    color: "#6490f1",
-  },
-  filterBtn: {
-    width: 40,
-    height: 40,
-    borderRadius: 5,
-    borderColor: "#14253350",
-    borderWidth: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    right: 15,
-    marginLeft: 5
-  },
-  filterIcon: {
-    alignSelf: "center",
-    width: "60%",
-    height: "60%",
-    marginBottom: 0
-  }
 });
 
 // $FlowFixMe
