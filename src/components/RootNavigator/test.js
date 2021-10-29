@@ -5,9 +5,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import MainScreen from "../../screens/MainScreen";
 import { BackButton } from "../../screens/OperationDetails";
 import SymbolDashboard from "../../screens/SymbolDashboard";
-import SearchIcon from "../../icons/Search";
-// import SymbolHeader from "../SymbolHeader";
-// import StarredMark from "../StarredMark";
+import AddFavoritesButton from "../AddFavoritesButton";
 
 export default function testSymbolNavigator() {
   return (
@@ -35,7 +33,9 @@ export default function testSymbolNavigator() {
                 <Text style={styles.title}>{currencyOrToken.name}</Text>
               </View>
             ),
-            headerRight: () => <View />,
+            headerRight: () => (
+              <AddFavoritesButton cryptocurrency={currencyOrToken} />
+            ),
             headerLeft: () => <BackButton navigation={navigation} />,
             headerTitleAlign: "center",
           };
@@ -64,5 +64,5 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 14,
     fontWeight: "600",
-  }
+  },
 });

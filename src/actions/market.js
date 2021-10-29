@@ -41,3 +41,17 @@ export const setCurrencyChartData = (payload: LoadCurrencyChartData) => ({
   type: "SET_CURRENCY_CHART_DATA",
   payload,
 });
+
+export const updateFavoriteCryptocurrencies = (
+  favoriteCryptocurrencies: Array<string>,
+) =>
+  async function(dispatch) {
+    dispatch(setFavoriteCryptocurrencies(favoriteCryptocurrencies));
+  };
+
+export const setFavoriteCryptocurrencies = (
+  favoriteCurrencies: Array<string>,
+) => ({
+  type: "SET_FAVORITE_CRYPTOCURRENCIES",
+  favoriteCurrencies,
+});

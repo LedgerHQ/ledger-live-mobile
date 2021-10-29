@@ -9,6 +9,7 @@ import Animated from "react-native-reanimated";
 import { createNativeWrapper } from "react-native-gesture-handler";
 import moment from "moment";
 import Chart from "./Chart";
+import NotSupportedCryptocurrency from "./NotSupportedCryptocurrency";
 import { accountsSelector } from "../../reducers/accounts";
 import FabActions from "../../components/FabActions";
 import InfoTable from "./InfoTable";
@@ -135,7 +136,13 @@ export default function SymbolDashboard({ route }: Props) {
       currency={currency}
       prefferedCurrency={prefferedCurrency}
     />,
-    <>{checkSupport.length ? <FabActions marketPage /> : null}</>,
+    <>
+      {checkSupport.length ? (
+        <FabActions marketPage />
+      ) : (
+        <NotSupportedCryptocurrency />
+      )}
+    </>,
     <InfoTable title={"Price statistics"} rows={priceStat} />,
     <InfoTable title={"Market cap"} rows={marketCap} />,
     <InfoTable title={"Supply"} rows={supply} />,
