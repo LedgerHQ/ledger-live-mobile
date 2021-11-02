@@ -32,7 +32,6 @@ export default function MainNavigator({
             backgroundColor: colors.card,
           },
           hideTabNavigation ? { display: "none" } : {},
-          { height: 60 },
         ],
         tabBarShowLabel: false,
         tabBarActiveTintColor: colors.live,
