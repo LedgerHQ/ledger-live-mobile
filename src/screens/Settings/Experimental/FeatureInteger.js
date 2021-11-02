@@ -54,10 +54,10 @@ const FeatureInteger = ({
   const [inputValue, setInputValue] = useState(String(constraintValue(value)));
 
   const onKeyboardShow = useCallback(() => {
-    navigation.getParent().setOptions({ tabBarVisible: false });
+    navigation.getParent().setOptions({ tabBarStyle: { display: "none" } });
   }, [navigation]);
   const onKeyboardHide = useCallback(() => {
-    navigation.getParent().setOptions({ tabBarVisible: true });
+    navigation.getParent().setOptions({ tabBarStyle: { display: "flex" } });
   }, [navigation]);
 
   useEffect(() => {
