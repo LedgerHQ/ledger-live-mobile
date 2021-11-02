@@ -19,7 +19,7 @@ const goBackOptions = colors => ({ route: { params }, navigation }) => ({
       // $FlowFixMe
       onPress={() => {
         params?.endCallback && params.endCallback();
-        const n = navigation.dangerouslyGetParent() || navigation;
+        const n = navigation.getParent() || navigation;
         n.canGoBack() && n.goBack();
       }}
       style={styles.buttons}
