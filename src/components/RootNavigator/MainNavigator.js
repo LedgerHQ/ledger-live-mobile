@@ -25,16 +25,18 @@ export default function MainNavigator({
   const { hideTabNavigation } = params || {};
   return (
     <Tab.Navigator
-      tabBarOptions={{
-        style: [
+      screenOptions={{
+        tabBarStyle: [
           {
             borderTopColor: colors.lightFog,
             backgroundColor: colors.card,
           },
           hideTabNavigation ? { display: "none" } : {},
+          { height: 60 },
         ],
-        showLabel: false,
-        activeTintColor: colors.live,
+        tabBarShowLabel: false,
+        tabBarActiveTintColor: colors.live,
+        headerShown: false,
       }}
     >
       <Tab.Screen
