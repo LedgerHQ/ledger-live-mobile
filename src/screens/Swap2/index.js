@@ -78,6 +78,8 @@ export type SwapRouteParams = {
   setCurrency?: (currency?: TokenCurrency | CryptoCurrency) => void,
 };
 
+export const ratesExpirationThreshold = 6000;
+
 type Props = {
   route: { params: SwapRouteParams },
   navigation: *,
@@ -169,8 +171,6 @@ export default function SwapForm({
 
   const [error, setError] = useState(null);
 
-  const [rateExpiration, setRateExpiration] = useState(null);
-
   const [noAssetModalOpen, setNoAssetModalOpen] = useState(!defaultAccount);
 
   const [maxSpendable, setMaxSpendable] = useState();
@@ -209,21 +209,28 @@ export default function SwapForm({
   useEffect(() => {
     if (route.params?.rate) {
       setRate(route.params.rate);
-      setRateExpiration(new Date(Date.now() + 60000));
     }
   }, [route.params?.rate]);
 
   useEffect(() => {
-    const expirationInterval = setInterval(() => {
-      if (rate && rateExpiration && rateExpiration <= new Date()) {
-        setRateExpiration(null);
-        swap.refetchRates(null);
-        clearInterval(expirationInterval);
-      }
-    }, 1000);
+    let expirationInterval;
+    let rateExpiration;
+    if (rate && rate.tradeMethod === "fixed") {
+      rateExpiration = new Date(
+        new Date().getTime() + ratesExpirationThreshold,
+      );
+      clearInterval(expirationInterval);
+      expirationInterval = setInterval(() => {
+        if (rate && rateExpiration && rateExpiration <= new Date()) {
+          swap.refetchRates();
+          rateExpiration = null;
+          clearInterval(expirationInterval);
+        }
+      }, 1000);
+    }
 
     return () => clearInterval(expirationInterval);
-  }, [rate, rateExpiration, swap]);
+  }, [rate, swap]);
 
   useEffect(() => {
     if (!fromAccount) return;
