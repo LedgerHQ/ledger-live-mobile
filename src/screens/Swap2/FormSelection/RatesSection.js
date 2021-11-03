@@ -276,7 +276,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     lineHeight: 19,
   },
-  providerLabel: { textTransform: "capitalize"},
+  providerLabel: { textTransform: "capitalize" },
   addAccountsection: {
     flexDirection: "row",
     justifyContent: "space-between",

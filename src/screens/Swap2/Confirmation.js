@@ -51,6 +51,7 @@ export type DeviceMeta = {
 type Props = {
   swap: Exchange,
   rate: ExchangeRate,
+  provider: string,
   transaction: Transaction,
   deviceMeta: DeviceMeta,
   onError: (error: Error) => void,
@@ -60,6 +61,7 @@ type Props = {
 const Confirmation = ({
   swap,
   rate,
+  provider,
   transaction,
   onError,
   onCancel,
@@ -82,7 +84,7 @@ const Confirmation = ({
   );
 
   const swapKYC = useSelector(swapKYCSelector);
-  const providerKYC = swapKYC[rate.provider];
+  const providerKYC = swapKYC[provider];
 
   const [swapData, setSwapData] = useState(null);
   const [signedOperation, setSignedOperation] = useState(null);

@@ -130,7 +130,9 @@ export default function SwapForm({
     ? sortedCryptoCurrencies.find(
         c => c !== getAccountCurrency(route?.params?.swap?.from.account),
       )
-    : sortedCryptoCurrencies[0];
+    : sortedCryptoCurrencies.find(
+        c => !defaultAccount || c !== getAccountCurrency(defaultAccount),
+      );
 
   const {
     status,
@@ -394,6 +396,7 @@ export default function SwapForm({
                 status={status}
                 transaction={transaction}
                 deviceMeta={deviceMeta}
+                provider={provider}
                 onError={e => {
                   onReset();
                   setError(e);

@@ -91,6 +91,14 @@ export default function SelectAccount({ navigation, route }: Props) {
               setAccount && setAccount(account);
               navigation.navigate(ScreenName.SwapForm, {
                 ...route.params,
+                swap: {
+                  ...route.params.swap,
+                  from: {
+                    ...route.params.swap.from,
+                    account,
+                    parentAccount: null,
+                  },
+                },
               });
             }}
           />
@@ -101,9 +109,7 @@ export default function SelectAccount({ navigation, route }: Props) {
   );
 
   const elligibleAccountsForSelectedCurrency = allAccounts.filter(account =>
-    isFrom
-      ? account.balance.gt(0) && swap.to.account?.id !== account.id
-      : swap.from.account?.id !== account.id,
+    isFrom ? account.balance.gt(0) : swap.from.account?.id !== account.id,
   );
 
   const onAddAccount = useCallback(() => {
