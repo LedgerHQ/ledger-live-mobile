@@ -4,6 +4,10 @@ import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { Trans } from "react-i18next";
 import { useTheme } from "@react-navigation/native";
 
+import type {
+  TokenCurrency,
+  CryptoCurrency,
+} from "@ledgerhq/live-common/lib/types";
 import type { SwapDataType } from "@ledgerhq/live-common/lib/exchange/swap/hooks";
 import type { SwapRouteParams } from "..";
 
@@ -17,6 +21,7 @@ type Props = {
   navigation: *,
   route: { params: SwapRouteParams },
   swap: SwapDataType,
+  setToCurrency: (currency?: TokenCurrency | CryptoCurrency) => void,
   providers: any,
   provider: any,
 };
@@ -25,6 +30,7 @@ export default function CurrencyTargetSelect({
   swap,
   navigation,
   route,
+  setToCurrency,
   providers,
   provider,
 }: Props) {
@@ -35,10 +41,12 @@ export default function CurrencyTargetSelect({
   const onPressItem = useCallback(() => {
     navigation.navigate(ScreenName.SwapV2FormSelectCurrency, {
       ...route.params,
+      swap,
+      setCurrency: setToCurrency,
       providers,
       provider,
     });
-  }, [navigation, provider, providers, route.params]);
+  }, [navigation, provider, providers, route.params, setToCurrency, swap]);
 
   return (
     <TouchableOpacity style={styles.root} onPress={onPressItem}>

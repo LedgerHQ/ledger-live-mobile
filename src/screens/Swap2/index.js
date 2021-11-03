@@ -1,13 +1,7 @@
 // @flow
 
 import { useTheme } from "@react-navigation/native";
-import React, {
-  useMemo,
-  useCallback,
-  useState,
-  useEffect,
-  useContext,
-} from "react";
+import React, { useMemo, useCallback, useState, useEffect } from "react";
 import { ScrollView, StyleSheet, View, Keyboard } from "react-native";
 
 import type {
@@ -18,12 +12,14 @@ import type {
 import type {
   Account,
   AccountLike,
+  TokenAccount,
 } from "@ledgerhq/live-common/lib/types/account";
 
 import type {
   ExchangeRate,
   SwapTransaction,
 } from "@ledgerhq/live-common/lib/exchange/swap/types";
+import type { SwapDataType } from "@ledgerhq/live-common/lib/exchange/swap/hooks";
 
 import { useSwapTransaction } from "@ledgerhq/live-common/lib/exchange/swap/hooks";
 
@@ -61,9 +57,9 @@ import { swapAcceptProvider } from "../../actions/settings";
 import Connect from "./Connect";
 import { Track, TrackScreen } from "../../analytics";
 import DisclaimerModal from "./DisclaimerModal";
-import { SwapDataContext } from "./SwapDataProvider";
 
 export type SwapRouteParams = {
+  swap: SwapDataType,
   exchangeRate: ExchangeRate,
   currenciesStatus: CurrenciesStatus,
   selectableCurrencies: (CryptoCurrency | TokenCurrency)[],
@@ -78,6 +74,8 @@ export type SwapRouteParams = {
   rate?: ExchangeRate,
   rates?: ExchangeRate[],
   tradeMethod?: string,
+  setAccount?: (account?: Account | TokenAccount) => void,
+  setCurrency?: (currency?: TokenCurrency | CryptoCurrency) => void,
 };
 
 type Props = {
@@ -96,7 +94,6 @@ export default function SwapForm({
   providers,
   provider: initProvider,
 }: Props) {
-  const { swapData, setSwapData } = useContext(SwapDataContext);
   const { colors } = useTheme();
   const accounts = useSelector(accountsSelector);
   const provider = route?.params?.provider || initProvider;
@@ -127,9 +124,9 @@ export default function SwapForm({
     maybeFilteredCurrencies,
   );
 
-  const defaultCurrency = swapData?.swap.from.account
+  const defaultCurrency = route?.params?.swap?.from.account
     ? sortedCryptoCurrencies.find(
-        c => c !== getAccountCurrency(swapData?.swap.from.account),
+        c => c !== getAccountCurrency(route?.params?.swap?.from.account),
       )
     : sortedCryptoCurrencies[0];
 
@@ -151,22 +148,6 @@ export default function SwapForm({
     exchangeRate: rate,
     setExchangeRate: setRate,
   });
-
-  useEffect(
-    () =>
-      setSwapData({
-        swap,
-        setToAccount: acc =>
-          setToAccount(
-            getAccountCurrency(acc),
-            acc,
-            acc?.parentId && accounts.find(({ id }) => id === acc.parentId),
-          ),
-        setFromAccount,
-        setCurrency: setToCurrency,
-      }),
-    [],
-  );
 
   const swapAcceptedproviders = useSelector(swapAcceptedProvidersSelector);
   const alreadyAcceptedTerms = (swapAcceptedproviders || []).includes(provider);

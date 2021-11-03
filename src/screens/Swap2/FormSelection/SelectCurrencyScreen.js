@@ -1,5 +1,5 @@
 // @flow
-import React, { useCallback, useContext } from "react";
+import React, { useCallback } from "react";
 import { Trans } from "react-i18next";
 import { StyleSheet, View, FlatList, SafeAreaView } from "react-native";
 import type { CryptoCurrency } from "@ledgerhq/live-common/lib/types";
@@ -16,7 +16,6 @@ import FilteredSearchBar from "../../../components/FilteredSearchBar";
 import KeyboardView from "../../../components/KeyboardView";
 import CurrencyRow from "../../../components/CurrencyRow";
 import LText from "../../../components/LText";
-import { SwapDataContext } from "../SwapDataProvider";
 
 const SEARCH_KEYS = ["name", "ticker"];
 
@@ -41,12 +40,11 @@ export default function SwapFormSelectCurrencyScreen({
   route,
 }: Props) {
   const { colors } = useTheme();
-  const { swapData: { swap, setCurrency } = {} } = useContext(SwapDataContext);
-  const { providers, provider } = route.params;
+  const { swap, providers, provider, setCurrency } = route.params;
 
   const selectableCurrencies = getSupportedCurrencies({ providers, provider });
 
-  const maybeFilteredCurrencies = swap?.from.account
+  const maybeFilteredCurrencies = swap.from.account
     ? selectableCurrencies.filter(
         c => c !== getAccountCurrency(swap.from.account),
       )

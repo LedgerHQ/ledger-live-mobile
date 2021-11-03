@@ -79,7 +79,6 @@ import SnackbarContainer from "./screens/NotificationCenter/Snackbar/SnackbarCon
 import NavBarColorHandler from "./components/NavBarColorHandler";
 import { setOsTheme, setTheme } from "./actions/settings";
 import FirmwareUpdateBanner from "./components/FirmwareUpdateBanner";
-import SwapDataProvider from "./screens/Swap2/SwapDataProvider";
 
 const themes = {
   light: lightTheme,
@@ -442,18 +441,14 @@ export default class Root extends Component<
                                   <ButtonUseTouchable.Provider value={true}>
                                     <OnboardingContextProvider>
                                       <FirmwareUpdateBanner />
-                                      <SwapDataProvider>
-                                        <ToastProvider>
-                                          <NotificationsProvider>
-                                            <SnackbarContainer />
-                                            <App
-                                              importDataString={
-                                                importDataString
-                                              }
-                                            />
-                                          </NotificationsProvider>
-                                        </ToastProvider>
-                                      </SwapDataProvider>
+                                      <ToastProvider>
+                                        <NotificationsProvider>
+                                          <SnackbarContainer />
+                                          <App
+                                            importDataString={importDataString}
+                                          />
+                                        </NotificationsProvider>
+                                      </ToastProvider>
                                     </OnboardingContextProvider>
                                   </ButtonUseTouchable.Provider>
                                 </CounterValuesProvider>

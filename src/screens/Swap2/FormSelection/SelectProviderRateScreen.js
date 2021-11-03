@@ -2,7 +2,7 @@
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import { useTheme } from "@react-navigation/native";
 import { BigNumber } from "bignumber.js";
-import React, { useCallback, useContext, useMemo } from "react";
+import React, { useCallback, useMemo } from "react";
 import { View, StyleSheet, FlatList } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
@@ -15,7 +15,6 @@ import { ScreenName } from "../../../const";
 import Lock from "../../../icons/Lock";
 import Unlock from "../../../icons/Unlock";
 import { TrackScreen } from "../../../analytics";
-import { SwapDataContext } from "../SwapDataProvider";
 
 type Props = {
   route: { params: SwapRouteParams },
@@ -24,14 +23,13 @@ type Props = {
 
 export default function SelectProviderRateScreen({ route, navigation }: Props) {
   const { colors } = useTheme();
-  const { swapData: { swap } = {} } = useContext(SwapDataContext);
-  const { rate, transaction, provider } = route.params;
+  const { swap = {}, rate, transaction, provider } = route.params;
 
   const {
     from: { account: fromAccount } = {},
     to: { currency: toCurrency } = {},
     rates: { value: rates = [] } = {},
-  } = swap || {};
+  } = swap;
   const filteredRates = rates.filter(r => r.provider === provider);
 
   const fromUnit = useMemo(() => fromAccount && getAccountUnit(fromAccount), [

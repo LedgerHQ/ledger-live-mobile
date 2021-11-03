@@ -1,5 +1,5 @@
 /* @flow */
-import React, { useCallback, useContext } from "react";
+import React, { useCallback } from "react";
 import { StyleSheet, SafeAreaView } from "react-native";
 
 import type {
@@ -12,7 +12,6 @@ import { ScreenName } from "../../../const";
 import type { SwapRouteParams } from "..";
 import SendRowsFee from "../../../components/SendRowsFee";
 import NavigationScrollView from "../../../components/NavigationScrollView";
-import { SwapDataContext } from "../SwapDataProvider";
 
 type Props = {
   accounts: Account[],
@@ -23,9 +22,8 @@ type Props = {
 
 export default function SelectFees({ navigation, route }: Props) {
   const { transaction } = route.params;
-  const { swapData: { swap } = {} } = useContext(SwapDataContext);
-  const { provider } = route.params;
-  const { from: { account, parentAccount } = {} } = swap || {};
+  const { swap, provider } = route.params;
+  const { from: { account, parentAccount } = {} } = swap;
 
   const onSetTransaction = useCallback(
     updatedTransaction => {
