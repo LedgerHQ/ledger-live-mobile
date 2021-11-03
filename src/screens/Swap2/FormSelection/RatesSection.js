@@ -179,7 +179,7 @@ export default function RatesSection({
         tooltip={<Trans i18nKey="transfer.swap.form.summary.provider" />}
       >
         {ProviderIcon ? <ProviderIcon size={12} /> : null}
-        <LText semiBold style={styles.valueLabel}>
+        <LText semiBold style={[styles.valueLabel, styles.providerLabel]}>
           {provider}
         </LText>
       </GenericInputLink>
@@ -276,6 +276,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     lineHeight: 19,
   },
+  providerLabel: { textTransform: "capitalize"},
   addAccountsection: {
     flexDirection: "row",
     justifyContent: "space-between",

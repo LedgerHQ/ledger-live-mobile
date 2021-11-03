@@ -78,7 +78,7 @@ export type SwapRouteParams = {
   setCurrency?: (currency?: TokenCurrency | CryptoCurrency) => void,
 };
 
-export const ratesExpirationThreshold = 6000;
+export const ratesExpirationThreshold = 60000;
 
 type Props = {
   route: { params: SwapRouteParams },
