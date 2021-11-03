@@ -9,7 +9,6 @@ import BottomSelectSheetTF from "./BottomSelectSheetTF";
 import FilterIcon from "../../images/filter.png";
 import SearchBox from "./SearchBox";
 import PaginationBar from "../../components/PaginationBar";
-import { sort } from "d3-array";
 
 const CHANGE_TIMES = [
   { name: "1 day", display: "Last 24 hours", key: "24h" },

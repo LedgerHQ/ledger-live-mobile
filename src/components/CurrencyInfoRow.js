@@ -83,7 +83,7 @@ class CurrencyRow extends PureComponent<Props> {
           <LText style={styles.price}>
             ${currency.data.current_price.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
           </LText>
-          <View>
+          <View style={styles.delta}>
             <Delta
               percent
               valueChange={priceChange}
@@ -135,6 +135,11 @@ const styles = StyleSheet.create({
   right: {
     position: "absolute",
     right: 10
+  },
+  delta: {
+    position: "absolute",
+    right: 0,
+    bottom: 0
   },
   rank: {
     backgroundColor: "#14253310",

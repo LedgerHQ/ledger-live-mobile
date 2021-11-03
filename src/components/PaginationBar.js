@@ -55,6 +55,7 @@ export default function PaginationBar({totalPages, activePage, setActivePage}: P
                 text={"..."}
                 onClick={() => {}}
                 style={page === activePage ? styles.pageItemActive : styles.pageItemUnactive}
+                key={id}
               />)
           }
         })}
