@@ -1,52 +1,21 @@
 // @flow
 
-import React, { useCallback, useState } from "react";
-import {
-  StyleSheet,
-  View,
-  Linking,
-  Image,
-  TouchableOpacity,
-} from "react-native";
+import React, { useCallback } from "react";
+import { StyleSheet, View, Linking, TouchableOpacity } from "react-native";
 import { Trans } from "react-i18next";
 
-import { useClock, loop } from "react-native-redash/lib/module/v1";
-import Animated, {
-  set,
-  interpolateNode,
-  Extrapolate,
-  useCode,
-  EasingNode,
-  multiply,
-} from "react-native-reanimated";
-import Config from "react-native-config";
 import { useTheme } from "@react-navigation/native";
-import Touchable from "../../../components/Touchable";
+import { Flex } from "@ledgerhq/native-ui";
 import LText from "../../../components/LText";
 import Button from "../../../components/Button";
 import { urls } from "../../../config/urls";
-import { deviceNames } from "../../../wording";
 import ArrowDown from "../../../icons/Chevron";
 
 import { useLocale } from "../../../context/Locale";
 
 import commonStyles from "../styles";
 
-import welcomeBg from "../assets/welcomeIllu/1.png";
-import welcomeLogoLayer1 from "../assets/welcomeIllu/2.png";
-import welcomeLogoLayer2 from "../assets/welcomeIllu/3.png";
-import welcomeLogoLayer3 from "../assets/welcomeIllu/4.png";
-
 import { ScreenName } from "../../../const";
-
-const AnimatedImg = Animated.createAnimatedComponent(Image);
-
-const hitSlop = {
-  top: 16,
-  left: 16,
-  right: 16,
-  bottom: 16,
-};
 
 function OnboardingStepWelcome({ navigation }: any) {
   const { colors } = useTheme();
@@ -62,114 +31,37 @@ function OnboardingStepWelcome({ navigation }: any) {
     [navigation],
   );
 
-  const [animY] = useState(new Animated.Value(0));
-
-  const clockY = useClock();
-
-  useCode(
-    () =>
-      !Config.MOCK
-        ? set(
-            animY,
-            loop({
-              duration: 10000,
-              easing: EasingNode.inOut(EasingNode.ease),
-              clock: clockY,
-              boomerang: true,
-            }),
-          )
-        : undefined,
-    [],
-  );
-
-  const [animX] = useState(new Animated.Value(0));
-
-  const clockX = useClock();
-
-  useCode(
-    () =>
-      !Config.MOCK
-        ? set(
-            animX,
-            loop({
-              duration: 8000,
-              easing: EasingNode.inOut(EasingNode.ease),
-              clock: clockX,
-              boomerang: true,
-            }),
-          )
-        : undefined,
-    [],
-  );
-
-  const translateY = interpolateNode(animX, {
-    inputRange: [0, 1],
-    outputRange: [-25, 5],
-    extrapolate: Extrapolate.CLAMP,
-  });
-
-  const translateX = interpolateNode(animY, {
-    inputRange: [0, 1],
-    outputRange: [-10, 10],
-    extrapolate: Extrapolate.CLAMP,
-  });
-
-  const translateY1 = interpolateNode(multiply(animX, -1), {
-    inputRange: [0, 1],
-    outputRange: [-10, 15],
-    extrapolate: Extrapolate.CLAMP,
-  });
-
-  const translateX2 = interpolateNode(animY, {
-    inputRange: [0, 1],
-    outputRange: [-5, 5],
-    extrapolate: Extrapolate.CLAMP,
-  });
-
-  const translateY2 = interpolateNode(animX, {
-    inputRange: [0, 1],
-    outputRange: [15, -20],
-    extrapolate: Extrapolate.CLAMP,
-  });
-
   const { locale } = useLocale();
 
   return (
-    <View style={[styles.root, { backgroundColor: colors.background }]}>
+    <Flex flex={1}>
       <View style={styles.header}>
         <TouchableOpacity
           style={[styles.languageButton, { borderColor: colors.fog }]}
           onPress={onLanguageSelect}
         >
-          <LText semiBold style={styles.languageLabel}>
-            {locale}
-          </LText>
+          <LText>{locale}</LText>
           <ArrowDown size={10} color={colors.darkBlue} />
         </TouchableOpacity>
       </View>
       <View style={styles.bottomSection}>
         <View style={styles.titleSection}>
-          <LText bold style={styles.title}>
+          <LText type="h1" bold>
             <Trans i18nKey="onboarding.stepWelcome.title" />
           </LText>
-          <LText style={[styles.subTitle]} color="grey">
+          <LText type="h3" color="grey">
             <Trans i18nKey="onboarding.stepWelcome.subtitle" />
           </LText>
         </View>
 
         <Button
-          type="primary"
+          type="main"
           event="Onboarding - Start"
           onPress={next}
           title={<Trans i18nKey="onboarding.stepWelcome.start" />}
         />
-        <View style={commonStyles.footer}>
-          <LText style={styles.subTitle} color="grey">
-            hello ts
-          </LText>
-        </View>
       </View>
-    </View>
+    </Flex>
   );
 }
 

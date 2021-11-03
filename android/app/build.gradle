@@ -87,7 +87,7 @@ import com.android.build.OutputFile
  */
 
 project.ext.react = [
-    enableHermes: false,  // clean and rebuild if changing
+    enableHermes: true,  // clean and rebuild if changing
     // bundleInDebug: true, // Uncomment this to debug java without having to deal with JS dev server (metro)
 ]
 project.ext.sentryCli = [
@@ -137,17 +137,16 @@ android {
     ndkVersion rootProject.ext.ndkVersion
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-     compileSdkVersion rootProject.ext.compileSdkVersion
+    compileSdkVersion rootProject.ext.compileSdkVersion
 
     defaultConfig {
         applicationId "com.ledger.live"
         multiDexEnabled true
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 201
-        versionName "2.34.3"
+        versionCode 4194512
+        versionName "2.34.4"
         resValue "string", "build_config_package", "com.ledger.live"
-        missingDimensionStrategy 'react-native-camera', 'general'
         testBuildType System.getProperty('testBuildType', 'debug')
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
@@ -193,15 +192,6 @@ android {
         }
     }
 
-    // applicationVariants are e.g. debug, release
-    applicationVariants.all { variant ->
-        variant.outputs.each { output ->
-            // because we used split APKs needing some versioning magic before,
-            // the versionCode has to be bumped to a value higher than anything we previously used
-            4 * 1048576 + defaultConfig.versionCode
-        }
-    }
-
     // As required by https://github.com/react-native-community/jsc-android-buildscripts#for-react-native-version-059
     packagingOptions {
         pickFirst '**/libjsc.so'
@@ -210,13 +200,6 @@ android {
 }
 
 dependencies {
-    implementation (project(':react-native-camera')) {
-        exclude group: "com.google.android.gms"
-        implementation 'com.android.support:exifinterface:27.+'
-        implementation ('com.google.android.gms:play-services-vision:12.0.1') {
-            force = true
-        }
-    }
     implementation fileTree(dir: "libs", include: ["*.jar"])
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules

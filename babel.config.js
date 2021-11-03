@@ -1,7 +1,6 @@
 module.exports = {
   presets: ["module:metro-react-native-babel-preset"],
   plugins: [
-    "react-native-reanimated/plugin",
     ...(process.env.V3
       ? [
           [
@@ -22,5 +21,6 @@ module.exports = {
           ],
         ]
       : []),
+    "react-native-reanimated/plugin",
   ],
 };
