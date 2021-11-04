@@ -120,11 +120,11 @@
       "title": "Aucun appareil trouvé",
       "description": {
         "ios": {
-          "nanoX": "Please make sure your {{productName}} is unlocked and has Bluetooth enabled."
+          "nanoX": "Assurez-vous que votre {{productName}} est déverrouillé et que le Bluetooth est activé."
         },
         "android": {
-          "nanoS": "Please make sure your {{productName}} is unlocked and connected by cable.",
-          "nanoX": "Please make sure your {{productName}} is unlocked and is connected by cable or has Bluetooth enabled."
+          "nanoS": "Assurez-vous que votre {{productName}} est déverrouillé et que le câble est branché.",
+          "nanoX": "Assurez-vous que votre {{productName}} est déverrouillé, avec le Bluetooth activé ou le câble branché."
         }
       }
     },
@@ -132,11 +132,11 @@
       "title": "Échec de la connexion avec le Gestionnaire",
       "description": {
         "ios": {
-          "nanoX": "Please make sure your {{productName}} is unlocked and has Bluetooth enabled."
+          "nanoX": "Assurez-vous que votre {{productName}} est déverrouillé et que le Bluetooth est activé."
         },
         "android": {
-          "nanoS": "Please make sure your {{productName}} is unlocked and connected by cable.",
-          "nanoX": "Please make sure your {{productName}} is unlocked and is connected by cable or has Bluetooth enabled."
+          "nanoS": "Assurez-vous que votre {{productName}} est déverrouillé et que le câble est branché.",
+          "nanoX": "Assurez-vous que votre {{productName}} est déverrouillé, avec le Bluetooth activé ou le câble branché."
         }
       }
     },
