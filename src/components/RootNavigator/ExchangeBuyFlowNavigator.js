@@ -1,5 +1,5 @@
 // @flow
-import React, { useEffect, useMemo } from "react";
+import React, { useMemo } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "@react-navigation/native";
