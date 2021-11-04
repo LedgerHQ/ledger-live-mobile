@@ -118,11 +118,27 @@
     },
     "ConnectAppTimeout": {
       "title": "抱歉，未找到设备",
-      "description": "请确保您的 {{productName}} 已解锁，同时已启用蓝牙。"
+      "description": {
+        "ios": {
+          "nanoX": "Please make sure your {{productName}} is unlocked and has Bluetooth enabled."
+        },
+        "android": {
+          "nanoS": "Please make sure your {{productName}} is unlocked and connected by cable.",
+          "nanoX": "Please make sure your {{productName}} is unlocked and is connected by cable or has Bluetooth enabled."
+        }
+      }
     },
     "ConnectManagerTimeout": {
       "title": "抱歉，管理器连接失败",
-      "description": "请确保您的 {{productName}} 已解锁，同时已启用蓝牙。"
+      "description": {
+        "ios": {
+          "nanoX": "Please make sure your {{productName}} is unlocked and has Bluetooth enabled."
+        },
+        "android": {
+          "nanoS": "Please make sure your {{productName}} is unlocked and connected by cable.",
+          "nanoX": "Please make sure your {{productName}} is unlocked and is connected by cable or has Bluetooth enabled."
+        }
+      }
     },
     "ClaimRewardsFeesWarning": {
       "title": "奖励少于领取奖金的估算费用。",
