@@ -118,11 +118,27 @@
     },
     "ConnectAppTimeout": {
       "title": "К сожалению, устройство не найдено",
-      "description": "Убедитесь, что {{productName}} разблокирован и Bluetooth включён."
+      "description": {
+        "ios": {
+          "nanoX": "Please make sure your {{productName}} is unlocked and has Bluetooth enabled."
+        },
+        "android": {
+          "nanoS": "Please make sure your {{productName}} is unlocked and connected by cable.",
+          "nanoX": "Please make sure your {{productName}} is unlocked and is connected by cable or has Bluetooth enabled."
+        }
+      }
     },
     "ConnectManagerTimeout": {
       "title": "Извините, не удалось подключиться к Диспетчеру",
-      "description": "Убедитесь, что {{productName}} разблокирован и Bluetooth включён."
+      "description": {
+        "ios": {
+          "nanoX": "Please make sure your {{productName}} is unlocked and has Bluetooth enabled."
+        },
+        "android": {
+          "nanoS": "Please make sure your {{productName}} is unlocked and connected by cable.",
+          "nanoX": "Please make sure your {{productName}} is unlocked and is connected by cable or has Bluetooth enabled."
+        }
+      }
     },
     "ClaimRewardsFeesWarning": {
       "title": "Размер комиссии превышает размер вознаграждения.",
