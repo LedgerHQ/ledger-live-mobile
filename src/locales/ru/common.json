@@ -594,6 +594,9 @@
     "PolkadotValidatorsRequired": {
       "title": "Вы должны выбрать хотя бы одного валидатора"
     },
+    "TaprootNotActivated": {
+      "title": "Taproot mainnet is not activated yet"
+    },
     "generic": {
       "title": "{{message}}",
       "description": "Что-то пошло не так. Пожалуйста, попробуйте ещё раз. Если проблема не уходит, сохраните логи и отправьте их в Поддержку Ledger."
