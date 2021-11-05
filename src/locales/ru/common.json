@@ -120,11 +120,11 @@
       "title": "К сожалению, устройство не найдено",
       "description": {
         "ios": {
-          "nanoX": "Please make sure your {{productName}} is unlocked and has Bluetooth enabled."
+          "nanoX": "Убедитесь, что {{productName}} разблокирован и Bluetooth включён."
         },
         "android": {
-          "nanoS": "Please make sure your {{productName}} is unlocked and connected by cable.",
-          "nanoX": "Please make sure your {{productName}} is unlocked and is connected by cable or has Bluetooth enabled."
+          "nanoS": "Обязательно разблокируйте {{productName}} и подключите при помощи кабеля.",
+          "nanoX": "Убедитесь, что {{productName}} разблокирован и подключён по кабелю, либо на нём включён Bluetooth."
         }
       }
     },
@@ -132,11 +132,11 @@
       "title": "Извините, не удалось подключиться к Диспетчеру",
       "description": {
         "ios": {
-          "nanoX": "Please make sure your {{productName}} is unlocked and has Bluetooth enabled."
+          "nanoX": "Убедитесь, что {{productName}} разблокирован и Bluetooth включён."
         },
         "android": {
-          "nanoS": "Please make sure your {{productName}} is unlocked and connected by cable.",
-          "nanoX": "Please make sure your {{productName}} is unlocked and is connected by cable or has Bluetooth enabled."
+          "nanoS": "Обязательно разблокируйте {{productName}} и подключите при помощи кабеля.",
+          "nanoX": "Убедитесь, что {{productName}} разблокирован и подключён по кабелю, либо на нём включён Bluetooth."
         }
       }
     },
@@ -595,7 +595,7 @@
       "title": "Вы должны выбрать хотя бы одного валидатора"
     },
     "TaprootNotActivated": {
-      "title": "Taproot mainnet is not activated yet"
+      "title": "Мейннет Taproot ещё не активирован"
     },
     "generic": {
       "title": "{{message}}",
