@@ -594,6 +594,9 @@
     "PolkadotValidatorsRequired": {
       "title": "Sélectionnez au moins un validateur."
     },
+    "TaprootNotActivated": {
+      "title": "Taproot mainnet is not activated yet"
+    },
     "generic": {
       "title": "{{message}}",
       "description": "Une erreur est survenue. Veuillez réessayer. Si le problème persiste, enregistrez vos logs en utilisant le bouton ci-dessous et transmettez-les à l'Assistance Ledger."
