@@ -595,7 +595,7 @@
       "title": "Sélectionnez au moins un validateur."
     },
     "TaprootNotActivated": {
-      "title": "Taproot mainnet is not activated yet"
+      "title": "Taproot n'est pas encore activé sur le mainnet"
     },
     "generic": {
       "title": "{{message}}",
