@@ -13,12 +13,11 @@ export default function SearchBox() {
 
   const onBlur = () => setFocused(false);
 
-  const onChange = (text) => setQuery(text);
+  const onChange = text => setQuery(text);
 
   const clear = () => setQuery("");
 
-  const focusInput = () => {
-  };
+  const focusInput = () => {};
 
   return (
     <>
@@ -28,16 +27,14 @@ export default function SearchBox() {
           style={[styles.wrapper]}
         >
           <View style={styles.iconContainer}>
-            <SearchIcon
-              size={20}
-              color={"black"}
-            />
+            <SearchIcon size={20} color={"black"} />
           </View>
           <TextInput
             onBlur={onBlur}
             onFocus={onFocus}
             onChangeText={onChange}
             onInputCleared={clear}
+            focused={focused}
             placeholder={"Search"}
             placeholderTextColor={"#666666"}
             style={[styles.input, { color: "#003366" }]}
@@ -64,9 +61,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#f5f5f5",
     borderRadius: 5,
     height: 40,
-    paddingVertical: 0,
     paddingLeft: 15,
-    paddingRight: 10
+    paddingRight: 10,
   },
   iconContainer: {
     marginRight: 8,
@@ -79,5 +75,5 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     flex: 1,
-  }
+  },
 });

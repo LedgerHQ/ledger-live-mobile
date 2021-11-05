@@ -4,9 +4,7 @@ import Icon from "react-native-vector-icons/FontAwesome5Pro";
 import { normalize } from "../../helpers/normalizeSize";
 
 export default function NotSupportedCryptocurrency() {
-  const onLearnMore = () => {
-    console.log("Learn more");
-  };
+  const onLearnMore = () => {};
 
   return (
     <View style={styles.container}>

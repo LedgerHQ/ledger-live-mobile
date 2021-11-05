@@ -61,4 +61,3 @@ export const counterCurrencyNameTable = {
   bits: "Bitstar",
   sats: "Satoshis",
 };
-  

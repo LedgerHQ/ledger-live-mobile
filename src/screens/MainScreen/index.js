@@ -10,17 +10,21 @@ import FilterIcon from "../../images/filter.png";
 import SearchBox from "./SearchBox";
 import PaginationBar from "../../components/PaginationBar";
 
+type Props = {
+  navigation: Object,
+};
+
 const CHANGE_TIMES = [
   { name: "1 day", display: "Last 24 hours", key: "24h" },
   { name: "1 week", display: "Last 1 week", key: "7d" },
   { name: "1 month", display: "Last 1 month", key: "30d" },
-  { name: "1 year", display: "Last 1 year", key: "1y" }
+  { name: "1 year", display: "Last 1 year", key: "1y" },
 ];
 
 const SHOW_OPTIONS = [
   { name: "All" },
   { name: "Ledger Live compatible" },
-  { name: "Starred coins" }
+  { name: "Starred coins" },
 ];
 
 const SORT_OPTIONS = [
@@ -33,26 +37,23 @@ const getCurrencyData = async (limit, page, sortOption) => {
   const marketClient = new MarketClient();
   const orderBy = sortOption === "Rank" ? "market_cap" : "id";
   const order = sortOption === "Name A-Z" ? "asc" : "desc";
-  const responses = await marketClient
-    .getCurrencyData({
-      limit: limit,
-      page: page,
-      counterCurrency: "usd", 
-      range: "24h,7d,30d,1y",
-      order: order,
-      orderBy: orderBy
-    });
-  return responses.map(response => {
-    return {
-      id: response.id,
-      name: response.name,
-      ticker: response.symbol.toUpperCase(),
-      data: response
-    }
+  const responses = await marketClient.getCurrencyData({
+    limit,
+    page,
+    counterCurrency: "usd",
+    range: "24h,7d,30d,1y",
+    order,
+    orderBy,
   });
-}
+  return responses.map(response => ({
+    id: response.id,
+    name: response.name,
+    ticker: response.symbol.toUpperCase(),
+    data: response,
+  }));
+};
 
-export default function MainScreen({ navigation }) {
+export default function MainScreen({ navigation }: Props) {
   const [currencies, setCurrencies] = useState([]);
   const [range, setRange] = useState("24h");
   const [showOption, setShowOption] = useState("All");
@@ -68,9 +69,9 @@ export default function MainScreen({ navigation }) {
     })();
   }, [activePage, sortOption, showOption]);
 
-  const onPressItem = (currencyOrToken) => {
+  const onPressItem = currencyOrToken => {
     navigation.navigate("SymbolDashboard", {
-      currencyOrToken: currencyOrToken
+      currencyOrToken,
     });
   };
 
@@ -80,19 +81,19 @@ export default function MainScreen({ navigation }) {
 
   const onClickFilter = () => {
     RBSheetFilter.current.open();
-  }
+  };
 
-  const onApplyTF = (activeItem) => {
+  const onApplyTF = activeItem => {
     setTimeframe(activeItem);
     RBSheetTimeFrame.current.close();
     setRange(activeItem.key);
-  }
+  };
 
-  const onApplyFilter = (_filterOptions) => {
+  const onApplyFilter = _filterOptions => {
     setShowOption(_filterOptions[0].active);
     setSortOption(_filterOptions[1].active);
     RBSheetFilter.current.close();
-  }
+  };
 
   return (
     <>
@@ -109,24 +110,27 @@ export default function MainScreen({ navigation }) {
         </View>
 
         <View style={styles.tfSelector}>
-          <Text style={styles.tf}>
-            Timeframe
-          </Text>
-          <TouchableOpacity style={{flexDirection: "row"}} onPress={onClickTimeFrame}>
+          <Text style={styles.tf}>Timeframe</Text>
+          <TouchableOpacity
+            style={{ flexDirection: "row" }}
+            onPress={onClickTimeFrame}
+          >
             <Text style={styles.tfItem}>
-              {"  "}{timeframe.display}{" "}
+              {"  "}
+              {timeframe.display}{" "}
             </Text>
-            <Text style={styles.tfIcon}>
-              {" ˅ "}
-            </Text>
+            <Text style={styles.tfIcon}>{" ˅ "}</Text>
           </TouchableOpacity>
         </View>
         <View>
-          {currencies.map((currency, id) => {
-            return (
-              <CurrencyRow currency={currency} onPress={onPressItem} range={range} key={id}/>
-            )
-          })}
+          {currencies.map((currency, id) => (
+            <CurrencyRow
+              currency={currency}
+              onPress={onPressItem}
+              range={range}
+              key={id}
+            />
+          ))}
         </View>
 
         <PaginationBar
@@ -143,22 +147,22 @@ export default function MainScreen({ navigation }) {
           customStyles={{
             container: {
               backgroundColor: "#ffffff",
-              borderRadius: 20
+              borderRadius: 20,
             },
             draggableIcon: {
               backgroundColor: "#14253320",
-              width: 0
+              width: 0,
             },
             wrapper: {
               color: "#142533",
-              fontFamily: "Inter"
-            }
+              fontFamily: "Inter",
+            },
           }}
         >
-          <BottomSelectSheetFilter 
+          <BottomSelectSheetFilter
             filterOptions={[
               { title: "SHOW", options: SHOW_OPTIONS, active: showOption },
-              { title: "SORT BY", options: SORT_OPTIONS, active: sortOption }
+              { title: "SORT BY", options: SORT_OPTIONS, active: sortOption },
             ]}
             onApply={onApplyFilter}
           />
@@ -171,16 +175,16 @@ export default function MainScreen({ navigation }) {
           customStyles={{
             container: {
               backgroundColor: "#ffffff",
-              borderRadius: 20
+              borderRadius: 20,
             },
             draggableIcon: {
               backgroundColor: "#14253320",
-              width: 40
+              width: 40,
             },
             wrapper: {
               color: "#142533",
-              fontFamily: "Inter"
-            }
+              fontFamily: "Inter",
+            },
           }}
         >
           <BottomSelectSheetTF
@@ -198,15 +202,13 @@ export default function MainScreen({ navigation }) {
 const styles = StyleSheet.create({
   list: {
     flex: 1,
+    paddingBottom: 32,
   },
   root: {
     flex: 1,
   },
   searchContainer: {
-    flex: 1
-  },
-  list: {
-    paddingBottom: 32,
+    flex: 1,
   },
   filteredSearchInputWrapperStyle: {
     marginHorizontal: 16,
@@ -219,15 +221,15 @@ const styles = StyleSheet.create({
   },
   tfSelector: {
     flexDirection: "row",
-    paddingTop: 15
+    paddingTop: 15,
   },
   tf: {
     fontSize: 15,
-    paddingLeft: 15
+    paddingLeft: 15,
   },
   tfItem: {
     fontSize: 15,
-    color: "#6490f1"
+    color: "#6490f1",
   },
   tfIcon: {
     fontSize: 20,
@@ -242,15 +244,15 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     right: 15,
-    marginLeft: 5
+    marginLeft: 5,
   },
   filterIcon: {
     alignSelf: "center",
     width: "60%",
     height: "60%",
-    marginBottom: 0
+    marginBottom: 0,
   },
   pageNumber: {
-    fontSize: 20
-  }
+    fontSize: 20,
+  },
 });

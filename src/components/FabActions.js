@@ -134,7 +134,7 @@ function FabActions({ account, parentAccount, marketPage = false }: Props) {
         { screen: ScreenName.ExchangeBuy },
       ],
     },
-    ...(accountsCount > 0 && !readOnlyModeEnabled || marketPage
+    ...((accountsCount > 0 && !readOnlyModeEnabled) || marketPage
       ? [
           {
             event: "TransferSwap",

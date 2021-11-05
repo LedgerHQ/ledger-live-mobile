@@ -3,14 +3,14 @@
  * HttpClient is a custom wrapper around fetch api.
  * Exposes get, post and delete methods for JSON strings.
  */
- export class HttpClient {
+export class HttpClient {
   /**
    * Performs GET http request.
    * @param path
    * @param _auth indicates if authentication is needed
    */
-  async get(path: string, _auth: bool = true): Promise<Response> {
-    return this.do_("GET", path, null);
+  async get(path: string, _auth: boolean = true): Promise<Response> {
+    return this.do("GET", path, null);
   }
 
   /**
@@ -19,14 +19,18 @@
    * @param path
    * @param body serialized JSON
    */
-  async do_(method: string, path: string, body: string | null): Promise<Response> {
+  async do(
+    method: string,
+    path: string,
+    body: string | null,
+  ): Promise<Response> {
     const request = {
-      method: method,
-      body: body,
+      method,
+      body,
       headers: {
         "Content-Type": "application/json",
-      }
+      },
     };
-    return await fetch(path, request);
+    return fetch(path, request);
   }
 }

@@ -165,6 +165,7 @@
     "react-native-version-number": "^0.3.6",
     "react-native-webview": "^11.0.0",
     "react-redux": "7.2.5",
+    "react-test-renderer": "^17.0.2",
     "readable-stream": "3.6.0",
     "redux": "4.1.1",
     "redux-actions": "2.6.5",

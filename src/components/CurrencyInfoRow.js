@@ -7,7 +7,7 @@ import type {
   CryptoCurrency,
   TokenCurrency,
 } from "@ledgerhq/live-common/lib/types";
-import Delta from "../components/Delta";
+import Delta from "./Delta";
 
 import LText from "./LText";
 import { withTheme } from "../colors";
@@ -18,19 +18,8 @@ type Props = {
   isOK?: boolean,
   style?: *,
   colors: *,
-  range: string
+  range: string,
 };
-
-function magnitude(number) {
-  // Convert to String
-  const numberAsString = number.toString();
-  // String Contains Decimal
-  if (numberAsString.includes(".")) {
-    return numberAsString.split(".")[1].length;
-  }
-  // String Does Not Contain Decimal
-  return 0;
-}
 
 class CurrencyRow extends PureComponent<Props> {
   onPress = () => {
@@ -38,12 +27,15 @@ class CurrencyRow extends PureComponent<Props> {
   };
 
   render() {
-    const { currency, range, style, isOK = true, colors } = this.props;
+    const { currency, range, style, isOK = true } = this.props;
 
-    const priceChange = {percentage: currency.data ? 
-      currency.data["price_change_percentage_" + range + "_in_currency"] / 100 : 0
-    }
-    
+    const priceChange = {
+      percentage: currency.data
+        ? currency.data["price_change_percentage_" + range + "_in_currency"] /
+          100
+        : 0,
+    };
+
     return currency ? (
       <RectButton style={[styles.root, style]} onPress={this.onPress}>
         <Image
@@ -58,42 +50,47 @@ class CurrencyRow extends PureComponent<Props> {
               numberOfLines={1}
               color={!isOK ? "fog" : "darkBlue"}
             >
-            {currency.name}
+              {currency.name}
             </LText>
-            <LText
-              semiBold
-              style={[styles.ticker]}
-              numberOfLines={1}
-            >
-            · {currency.ticker}
+            <LText semiBold style={[styles.ticker]} numberOfLines={1}>
+              · {currency.ticker}
             </LText>
           </View>
           {currency.data && (
-          <View style={styles.flexRow}>
-            <LText style={[styles.rank]}>
-              {currency.data.market_cap_rank}
-            </LText>
-            <LText style={[styles.totalAsset]}>
-              {(currency.data.total_volume / 1000000000).toFixed(2)} Bn
-            </LText>
-          </View>)}
+            <View style={styles.flexRow}>
+              <LText style={[styles.rank]}>
+                {currency.data.market_cap_rank}
+              </LText>
+              <LText style={[styles.totalAsset]}>
+                {(currency.data.total_volume / 1000000000).toFixed(2)} Bn
+              </LText>
+            </View>
+          )}
         </View>
         {currency.data && (
-        <View style={styles.right}>
-          <LText style={styles.price}>
-            ${currency.data.current_price.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-          </LText>
-          <View style={styles.delta}>
-            <Delta
-              percent
-              valueChange={priceChange}
-              style={styles.deltaPercent}
-              textStyle={styles.deltaPecentText}
-              toFixed={2}
-            />
+          <View style={styles.right}>
+            <LText style={styles.price}>
+              $
+              {currency.data.current_price
+                .toFixed(2)
+                .toString()
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+            </LText>
+            <View style={styles.delta}>
+              <Delta
+                percent
+                valueChange={priceChange}
+                style={styles.deltaPercent}
+                textStyle={styles.deltaPecentText}
+                toFixed={2}
+              />
+            </View>
           </View>
-        </View>)}
-      </RectButton>) : (<View></View>)
+        )}
+      </RectButton>
+    ) : (
+      <View />
+    );
   }
 }
 
@@ -102,19 +99,19 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     padding: 16,
-    width: "100%"
+    width: "100%",
   },
   flexRow: {
-    flexDirection: "row"
+    flexDirection: "row",
   },
   name: {
     flexShrink: 1,
     marginLeft: 10,
-    fontSize: 14
+    fontSize: 14,
   },
   ticker: {
     fontSize: 12,
-    color: "#14253350"
+    color: "#14253350",
   },
   currencyLabel: {
     flexGrow: 0,
@@ -130,57 +127,57 @@ const styles = StyleSheet.create({
     marginLeft: 12,
   },
   left: {
-    left: 0
+    left: 0,
   },
   right: {
     position: "absolute",
-    right: 10
+    right: 10,
   },
   delta: {
     position: "absolute",
     right: 0,
-    bottom: 0
+    bottom: 0,
   },
   rank: {
     backgroundColor: "#14253310",
     color: "#14253350",
     paddingHorizontal: 3,
     marginHorizontal: 9,
-    fontSize: 12
+    fontSize: 12,
   },
   totalAsset: {
     color: "#14253350",
     fontSize: 12,
     alignSelf: "flex-end",
-    textAlign: "right"
+    textAlign: "right",
   },
   changePercentUp: {
     color: "#6EC85C",
     alignSelf: "flex-end",
-    textAlign: "right"
+    textAlign: "right",
   },
   changePercentDown: {
     color: "#F04F52",
     alignSelf: "flex-end",
-    textAlign: "right"
+    textAlign: "right",
   },
   price: {
     alignSelf: "flex-end",
-    textAlign: "right"
+    textAlign: "right",
   },
   deltaPercent: {
     position: "absolute",
-    right: 0
+    right: 0,
   },
   deltaPecentText: {
     fontSize: 12,
-    textAlign: "right"
+    textAlign: "right",
   },
   headerIcon: {
     width: 32,
     height: 32,
     marginRight: 8,
-  }
+  },
 });
 
 export default withTheme(CurrencyRow);

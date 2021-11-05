@@ -1,6 +1,5 @@
-import React, { useMemo } from "react";
+import React from "react";
 import { StyleSheet, View, Image, Text } from "react-native";
-import { useTranslation } from "react-i18next";
 import { createStackNavigator } from "@react-navigation/stack";
 import MainScreen from "../../screens/MainScreen";
 import { BackButton } from "../../screens/OperationDetails";
@@ -13,7 +12,7 @@ export default function testSymbolNavigator() {
       <Stack.Screen
         name="test"
         component={MainScreen}
-        options={({ navigation }) => ({
+        options={() => ({
           headerTitle: "Market",
           headerTitleAlign: "center",
         })}
