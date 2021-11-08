@@ -63,9 +63,11 @@ export default function CurrencyTargetSelect({
                 </LText>
                 {value.type === "TokenCurrency" && value.parentCurrency ? (
                   <LText
-                    semiBold
-                    style={[styles.currencyLabel, { borderColor: colors.grey }]}
-                    color="grey"
+                  semiBold
+                  style={[styles.currencyLabel, { borderColor: colors.grey, flex: 1 }]}
+                  color="grey"
+                  numberOfLines={1} 
+                  ellipsizeMode='clip'
                   >
                     {value.parentCurrency.name}
                   </LText>
