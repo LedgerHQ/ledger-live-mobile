@@ -431,61 +431,59 @@ export default class Root extends Component<
     const importDataString = __DEV__ ? this.props.importDataString : "";
 
     return (
-        <RebootProvider onRebootStart={this.onRebootStart}>
-          <LedgerStoreProvider onInitFinished={this.onInitFinished}>
-            {(ready, store, initialCountervalues) =>
-              ready ? (
-                <>
-                  <SetEnvsFromSettings />
-                  <HookSentry />
-                  <HookAnalytics store={store} />
-                  <WalletConnectProvider>
-                    <PlatformAppProvider
-                      platformAppsServerURL={getProvider("production").url}
-                    >
-                      <DeepLinkingNavigator>
-                        <SafeAreaProvider>
-                          <StyledStatusBar />
-                          <NavBarColorHandler />
-                          <AuthPass>
-                            <I18nextProvider i18n={i18n}>
-                              <LocaleProvider>
-                                <BridgeSyncProvider>
-                                  <CounterValuesProvider
-                                    initialState={initialCountervalues}
-                                  >
-                                    <ButtonUseTouchable.Provider value={true}>
-                                      <OnboardingContextProvider>
-                                        <FirmwareUpdateBanner />
-                                        <ToastProvider>
-                                          <NotificationsProvider>
-                                            <SnackbarContainer />
+      <RebootProvider onRebootStart={this.onRebootStart}>
+        <LedgerStoreProvider onInitFinished={this.onInitFinished}>
+          {(ready, store, initialCountervalues) =>
+            ready ? (
+              <>
+                <SetEnvsFromSettings />
+                <HookSentry />
+                <HookAnalytics store={store} />
+                <WalletConnectProvider>
+                  <PlatformAppProvider
+                    platformAppsServerURL={getProvider("production").url}
+                  >
+                    <DeepLinkingNavigator>
+                      <SafeAreaProvider>
+                        <StyledStatusBar />
+                        <NavBarColorHandler />
+                        <AuthPass>
+                          <I18nextProvider i18n={i18n}>
+                            <LocaleProvider>
+                              <BridgeSyncProvider>
+                                <CounterValuesProvider
+                                  initialState={initialCountervalues}
+                                >
+                                  <ButtonUseTouchable.Provider value={true}>
+                                    <OnboardingContextProvider>
+                                      <FirmwareUpdateBanner />
+                                      <ToastProvider>
+                                        <NotificationsProvider>
+                                          <SnackbarContainer />
 
-                                            <App
-                                              importDataString={
-                                                importDataString
-                                              }
-                                            />
-                                          </NotificationsProvider>
-                                        </ToastProvider>
-                                      </OnboardingContextProvider>
-                                    </ButtonUseTouchable.Provider>
-                                  </CounterValuesProvider>
-                                </BridgeSyncProvider>
-                              </LocaleProvider>
-                            </I18nextProvider>
-                          </AuthPass>
-                        </SafeAreaProvider>
-                      </DeepLinkingNavigator>
-                    </PlatformAppProvider>
-                  </WalletConnectProvider>
-                </>
-              ) : (
-                <LoadingApp />
-              )
-            }
-          </LedgerStoreProvider>
-        </RebootProvider>
+                                          <App
+                                            importDataString={importDataString}
+                                          />
+                                        </NotificationsProvider>
+                                      </ToastProvider>
+                                    </OnboardingContextProvider>
+                                  </ButtonUseTouchable.Provider>
+                                </CounterValuesProvider>
+                              </BridgeSyncProvider>
+                            </LocaleProvider>
+                          </I18nextProvider>
+                        </AuthPass>
+                      </SafeAreaProvider>
+                    </DeepLinkingNavigator>
+                  </PlatformAppProvider>
+                </WalletConnectProvider>
+              </>
+            ) : (
+              <LoadingApp />
+            )
+          }
+        </LedgerStoreProvider>
+      </RebootProvider>
     );
   }
 }
