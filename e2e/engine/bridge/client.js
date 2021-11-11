@@ -6,6 +6,7 @@ import type { AccountRaw } from "@ledgerhq/live-common/lib/types";
 import { store } from "../../../src/context/LedgerStore";
 import { importSettings } from "../../../src/actions/settings";
 import { setAccounts } from "../../../src/actions/accounts";
+import { setCurrency, setCurrencyChartData } from "../../../src/actions/market";
 import { acceptTerms } from "../../../src/logic/terms";
 import accountModel from "../../../src/logic/accountModel";
 import { navigate } from "../../../src/rootnavigation";
@@ -57,6 +58,12 @@ async function onMessage(event: { data: mixed }) {
     case "navigate":
       navigate(msg.payload);
       break;
+    case "setCurrency":
+      store.dispatch(setCurrency(msg.payload));
+      break;
+    case "setCurrencyChartData":
+      store.dispatch(setCurrencyChartData(msg.payload));
+      break;
     default:
       break;
   }
@@ -79,6 +86,8 @@ export type E2EBridgeMessage =
   | Message<"importAccounts", { data: AccountRaw, version: number }[]>
   | Message<"importSettngs", { [key: string]: any }>
   | Message<"acceptTerms", ?*>
+  | Message<"setCurrency", { [key: string]: any }>
+  | Message<"setCurrencyChartData", [number]>
   | Message<"navigate", string>;
 
 function log(message: string) {

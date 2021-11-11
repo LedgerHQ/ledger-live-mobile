@@ -46,6 +46,28 @@ export async function loadConfig(
   await $waitFor("PortfolioEmptyAccount");
 }
 
+export async function loadCurrencyInfo() {
+  const f = fs.readFileSync(
+    path.resolve("e2e", "setups", `symboldashboardcomleted.json`),
+  );
+  // $FlowFixMe
+  const data = JSON.parse(f);
+
+  postMessage({ type: "setCurrency", payload: data });
+}
+
+export async function loadCurrencyChartData() {
+  const f = fs.readFileSync(
+    path.resolve("e2e", "setups", `chartDataCompleted.json`),
+  );
+  // $FlowFixMe
+  const r = JSON.parse(f);
+
+  const data = r.prices.map(chartData => chartData[1]);
+
+  postMessage({ type: "setCurrencyChartData", payload: data });
+}
+
 function navigate(name: string) {
   postMessage({
     type: "navigate",
