@@ -1,10 +1,12 @@
-import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import React, { useCallback } from "react";
+import { View, Text, StyleSheet, Linking } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome5Pro";
 import { normalize } from "../../helpers/normalizeSize";
 
 export default function NotSupportedCryptocurrency() {
-  const onLearnMore = () => {};
+  const onLearnMore = useCallback(() => {
+    Linking.openURL("https://www.ledger.com/supported-crypto-assets");
+  }, []);
 
   return (
     <View style={styles.container}>
