@@ -38,7 +38,7 @@ export default function SelectFees({ navigation, route }: Props) {
   return (
     <SafeAreaView style={[styles.root]}>
       <TrackScreen category="Swap Form" name="Edit Fees" provider={provider} />
-      <NavigationScrollView>
+      <NavigationScrollView contentContainerStyle={styles.scrollView}>
         {account && (
           <SendRowsFee
             setTransaction={onSetTransaction}
@@ -65,6 +65,8 @@ export default function SelectFees({ navigation, route }: Props) {
 const styles = StyleSheet.create({
   root: {
     flex: 1,
+  },
+  scrollView: {
     paddingHorizontal: 16,
   },
 });
