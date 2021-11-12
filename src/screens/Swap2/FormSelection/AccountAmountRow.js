@@ -113,13 +113,13 @@ export default function AccountAmountRow({
                 0
               </LText>
             )}
-            <LText style={[styles.error]} color={"alert"} numberOfLines={2}>
-              <TranslatedError
-                error={(!hideError && fromAmountError) || undefined}
-              />
-            </LText>
           </View>
         </View>
+        <LText style={[styles.error]} color={"alert"} numberOfLines={2}>
+          <TranslatedError
+            error={(!hideError && fromAmountError) || undefined}
+          />
+        </LText>
       </View>
       <View style={[styles.divider, { backgroundColor: colors.fog }]} />
       <View>
@@ -180,7 +180,8 @@ const styles = StyleSheet.create({
   divider: {
     width: "100%",
     height: 1,
-    marginVertical: 16,
+    marginTop: 8,
+    marginBottom: 16,
   },
   wrapper: {
     flex: 1,
