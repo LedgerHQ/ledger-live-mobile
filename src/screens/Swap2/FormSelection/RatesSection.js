@@ -134,8 +134,8 @@ export default function RatesSection({
     navigation.navigate(ScreenName.SwapV2FormSelectFees, {
       ...route.params,
       swap,
+      rate,
       selectedCurrency: toCurrency,
-      target: "to",
       transaction,
       providers,
       provider,
@@ -146,6 +146,7 @@ export default function RatesSection({
     providers,
     route.params,
     swap,
+    rate,
     toCurrency,
     transaction,
   ]);

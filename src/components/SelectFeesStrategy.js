@@ -39,6 +39,7 @@ type Props = {
   onStrategySelect: Function,
   onCustomFeesPress: Function,
   forceUnitLabel?: *,
+  disabledStrategies?: Array<string>,
 };
 
 const CVWrapper = ({ children }: { children: * }) => (
@@ -55,6 +56,7 @@ export default function SelectFeesStrategy({
   onStrategySelect,
   onCustomFeesPress,
   forceUnitLabel,
+  disabledStrategies,
 }: Props) {
   const { t } = useTranslation();
 
@@ -85,6 +87,9 @@ export default function SelectFeesStrategy({
   const renderItem = ({ item }) => (
     <TouchableOpacity
       onPress={() => onPressStrategySelect(item)}
+      disabled={
+        disabledStrategies ? disabledStrategies.includes(item.label) : false
+      }
       style={[
         styles.feeButton,
         {
@@ -157,7 +162,9 @@ export default function SelectFeesStrategy({
 
         <SafeAreaView style={styles.strategiesContainer}>
           <FlatList
-            data={strategies}
+            data={strategies.filter(
+              ({ label }) => !disabledStrategies?.includes(label),
+            )}
             renderItem={renderItem}
             keyExtractor={s => s.label}
             extraData={feesStrategy}

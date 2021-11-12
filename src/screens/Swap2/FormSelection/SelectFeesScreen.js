@@ -22,7 +22,8 @@ type Props = {
 
 export default function SelectFees({ navigation, route }: Props) {
   const { transaction } = route.params;
-  const { swap, provider } = route.params;
+  const { swap, provider, rate } = route.params;
+  const isFixed = rate?.tradeMethod === "fixed";
   const { from: { account, parentAccount } = {} } = swap;
 
   const onSetTransaction = useCallback(
@@ -55,6 +56,7 @@ export default function SelectFees({ navigation, route }: Props) {
                 currentNavigation: ScreenName.SwapForm,
               },
             }}
+            disabledStrategies={isFixed ? ["slow"] : []}
           />
         )}
       </NavigationScrollView>

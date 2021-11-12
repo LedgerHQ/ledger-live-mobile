@@ -134,6 +134,12 @@ export default function SwapForm({
         c => !defaultAccount || c !== getAccountCurrency(defaultAccount),
       );
 
+  useEffect(() => {
+    if (route.params?.rate) {
+      setRate(route.params.rate);
+    }
+  }, [route.params?.rate]);
+
   const {
     status,
     transaction,
@@ -207,12 +213,6 @@ export default function SwapForm({
     setConfirmed(false);
     setConfirmed(false);
   }, []);
-
-  useEffect(() => {
-    if (route.params?.rate) {
-      setRate(route.params.rate);
-    }
-  }, [route.params?.rate]);
 
   useEffect(() => {
     let expirationInterval;
