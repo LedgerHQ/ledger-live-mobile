@@ -1864,7 +1864,7 @@
             "street1Placeholder": "Например: ул. Маяковского 50",
             "street2Placeholder": "Например: ул. Маяковского 50",
             "cityPlaceholder": "Например: Москва",
-            "postalCodePlaceholder": "Введите индекс из 5 цифр",
+            "postalCodePlaceholder": "Укажите индекс",
             "statePlaceholder": "Выберите штат/область",
             "dateOfBirthPlaceholder": "ГГГГ-ММ-ДД",
             "firstNameError": "Укажите имя, чтобы продолжить",
