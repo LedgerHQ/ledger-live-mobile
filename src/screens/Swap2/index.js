@@ -285,7 +285,7 @@ export default function SwapForm({
           setFromAccount={setFromAccount}
           setFromAmount={setFromAmount}
           setToCurrency={setToCurrency}
-          useAllAmount={transaction?.useAllAmount}
+          useAllAmount={swap.isMaxEnabled}
           rate={rate}
           bridgePending={bridgePending}
           fromAmountError={swapError}
