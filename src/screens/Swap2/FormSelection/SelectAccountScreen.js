@@ -16,6 +16,7 @@ import {
   accountWithMandatoryTokens,
   flattenAccounts,
 } from "@ledgerhq/live-common/lib/account/helpers";
+import { getAccountCurrency } from "@ledgerhq/live-common/lib/account";
 
 import type { SearchResult } from "../../../helpers/formatAccountSearchResults";
 import { accountsSelector } from "../../../reducers/accounts";
@@ -29,6 +30,7 @@ import { NavigatorName, ScreenName } from "../../../const";
 
 import type { SwapRouteParams } from "..";
 import AddIcon from "../../../icons/Plus";
+import { swapSelectableCurrenciesSelector } from "../../../reducers/settings";
 
 const SEARCH_KEYS = ["name", "unit.code", "token.name", "token.ticker"];
 
@@ -40,7 +42,12 @@ type Props = {
 export default function SelectAccount({ navigation, route }: Props) {
   const { colors } = useTheme();
   const { swap, target, selectedCurrency, setAccount, provider } = route.params;
-  const accounts = useSelector(accountsSelector);
+  const unfilteredAccounts = useSelector(accountsSelector);
+  const selectableCurrencies = useSelector(swapSelectableCurrenciesSelector);
+
+  const accounts = unfilteredAccounts.filter(acc =>
+    selectableCurrencies.includes(getAccountCurrency(acc).id),
+  );
 
   const enhancedAccounts = useMemo(() => {
     if (!selectedCurrency)
