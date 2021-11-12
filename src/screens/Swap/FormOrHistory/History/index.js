@@ -122,7 +122,7 @@ const History = () => {
 
   return (
     <View style={[styles.root, { backgroundColor: colors.background }]}>
-      <TrackScreen category="Swap" name="History" />
+      <TrackScreen category="Swap" name="Device History" />
       {sections.length ? (
         <View
           style={[
