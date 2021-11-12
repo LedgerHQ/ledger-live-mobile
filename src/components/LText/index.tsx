@@ -30,6 +30,10 @@ export type Res = {
     | "900";
 };
 
-export default function LText(props) {
-  return <Text {...props} />;
+export default function LText({ color, children, ...props }: any) {
+  return (
+    <Text {...props} color={color}>
+      {children}
+    </Text>
+  );
 }

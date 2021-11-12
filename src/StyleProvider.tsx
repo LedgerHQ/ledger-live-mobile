@@ -1,2 +1,33 @@
-import { StyleProvider } from "@ledgerhq/native-ui";
-export default StyleProvider;
+import React, { useMemo } from "react";
+import { ThemeProvider } from "styled-components/native";
+import theme from "@ledgerhq/native-ui/styles/theme";
+import { palettes } from "@ledgerhq/ui-shared";
+import { lightTheme as light, darkTheme as dark } from "./colors";
+
+const themes = { light, dark };
+
+type Props = {
+  children: React.ReactNode;
+  selectedPalette: "light" | "dark";
+};
+
+export default function StyleProvider({
+  children,
+  selectedPalette,
+}: Props): React.ReactElement {
+  const defaultTheme = themes[selectedPalette];
+  const t = useMemo(
+    () => ({
+      ...theme,
+      colors: {
+        ...theme.colors,
+        ...defaultTheme.colors,
+        palette: palettes[selectedPalette],
+      },
+      theme: selectedPalette,
+    }),
+    [defaultTheme.colors, selectedPalette],
+  );
+
+  return <ThemeProvider theme={t}>{children}</ThemeProvider>;
+}
