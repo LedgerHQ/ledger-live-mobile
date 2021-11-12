@@ -140,7 +140,7 @@ export default function AccountAmountRow({
               <ActivityIndicator color={colors.grey} animating />
             ) : toUnit && toCurrency ? (
               <View>
-                <LText semiBold color="grey" style={styles.inputText}>
+                <LText adjustsFontSizeToFit semiBold color="grey" style={styles.inputText}>
                   <CurrencyUnitValue
                     unit={toUnit}
                     value={toValue ?? BigNumber(0)}
