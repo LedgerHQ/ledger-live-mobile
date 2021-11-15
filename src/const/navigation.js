@@ -109,7 +109,7 @@ export const ScreenName = {
   ScanRecipient: "ScanRecipient",
   SendAmount: "SendAmount",
   SendConnectDevice: "SendConnectDevice",
-  SendFundsMain: "SendFundsMain",
+  SendCoin: "SendCoin",
   SendSelectDevice: "SendSelectDevice",
   SendSelectRecipient: "SendSelectRecipient",
   SendSummary: "SendSummary",

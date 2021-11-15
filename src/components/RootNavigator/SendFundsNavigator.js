@@ -4,7 +4,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "@react-navigation/native";
 import { ScreenName } from "../../const";
-import SendFundsMain from "../../screens/SendFunds/01-SelectAccount";
+import SendCoin from "../../screens/SendFunds/01a-SelectAccount";
 import SendSelectRecipient from "../../screens/SendFunds/02-SelectRecipient";
 import SendAmount from "../../screens/SendFunds/03-Amount";
 import SendSummary from "../../screens/SendFunds/04-Summary";
@@ -27,8 +27,8 @@ export default function SendFundsNavigator() {
   return (
     <Stack.Navigator screenOptions={stackNavigationConfig}>
       <Stack.Screen
-        name={ScreenName.SendFundsMain}
-        component={SendFundsMain}
+        name={ScreenName.SendCoin}
+        component={SendCoin}
         options={{
           headerTitle: () => (
             <StepHeader
