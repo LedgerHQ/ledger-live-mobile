@@ -120,11 +120,11 @@
       "title": "Maalesef, cihaz bulunamadı",
       "description": {
         "ios": {
-          "nanoX": "Please make sure your {{productName}} is unlocked and has Bluetooth enabled."
+          "nanoX": "{{productName}} cihazınızın kilidinin açıldığından ve Bluetooth'un etkin olduğundan emin olun."
         },
         "android": {
-          "nanoS": "Please make sure your {{productName}} is unlocked and connected by cable.",
-          "nanoX": "Please make sure your {{productName}} is unlocked and is connected by cable or has Bluetooth enabled."
+          "nanoS": "{{productName}} cihazınızın kilidinin açıldığından ve kabloyla bağlı olduğundan emin olun.",
+          "nanoX": "{{productName}} cihazınızın kilidinin açıldığından ve kabloyla bağlandığından veya Bluetooth'un etkin olduğundan emin olun."
         }
       }
     },
@@ -132,11 +132,11 @@
       "title": "Üzgünüz, Yönetici bağlantısı başarısız oldu",
       "description": {
         "ios": {
-          "nanoX": "Please make sure your {{productName}} is unlocked and has Bluetooth enabled."
+          "nanoX": "{{productName}} cihazınızın kilidinin açıldığından ve Bluetooth'un etkin olduğundan emin olun."
         },
         "android": {
-          "nanoS": "Please make sure your {{productName}} is unlocked and connected by cable.",
-          "nanoX": "Please make sure your {{productName}} is unlocked and is connected by cable or has Bluetooth enabled."
+          "nanoS": "{{productName}} cihazınızın kilidinin açıldığından ve kabloyla bağlı olduğundan emin olun.",
+          "nanoX": "{{productName}} cihazınızın kilidinin açıldığından ve kabloyla bağlandığından veya Bluetooth'un etkin olduğundan emin olun."
         }
       }
     },
@@ -595,7 +595,7 @@
       "title": "En az bir doğrulayıcı seçmelisiniz"
     },
     "TaprootNotActivated": {
-      "title": "Taproot mainnet is not activated yet"
+      "title": "Taproot mainnet'i henüz etkinleşmedi"
     },
     "generic": {
       "title": "{{message}}",
@@ -698,8 +698,8 @@
         "description": "Hemen ödül kazanmak için ATOM hesabınızın yetkisini devredin."
       },
       "familyPack": {
-        "title": "Family pack",
-        "description": "Get your family into crypto with 3 Nano S"
+        "title": "Aile paketi",
+        "description": "3 Nano S ile ailenizi kriptoyla tanıştırın"
       },
       "buyCrypto": {
         "title": "Kripto Al",
@@ -1252,7 +1252,7 @@
   "tabs": {
     "portfolio": "Portföy",
     "accounts": "Hesaplar",
-    "transfer": "Transfer",
+    "transfer": "Aktar",
     "manager": "Yönetici",
     "settings": "Ayarlar",
     "platform": "Keşfedin",
@@ -1599,7 +1599,7 @@
       "desc": "Bizi takip edin"
     },
     "github": {
-      "title": "Github",
+      "title": "GitHub",
       "desc": "Kodumuzu inceleyin"
     },
     "status": {
@@ -1900,7 +1900,7 @@
         "fixedUnavailable": "Bu paritede sabit kur desteklenmiyor",
         "floatDesc": "Belirtilen miktar piyasa koşullarına bağlı olarak değişebilir.",
         "fixedDesc": "Belirtilen tutar piyasadaki değişikliklerden bağımsız olarak aynı kalır. Sabit kurlar her 30 saniyede bir güncellenir",
-        "by": "By",
+        "by": "Aracı:",
         "modalTitle": "Dalgalı mı, sabit kur mu?"
       },
       "form": {
@@ -2909,9 +2909,9 @@
       "header": "Yetki Devirleri",
       "Amount": "Tutar",
       "noRewards": "Ödül yok",
-      "delegate": "Delegate",
+      "delegate": "Yetki Devri",
       "undelegate": "Yetki İptali",
-      "redelegate": "Yetki Devri",
+      "redelegate": "Yetkinin yeniden devri",
       "reward": "Ödüllerinizi alın",
       "estYield": "Tahmini getiri",
       "stepperHeader": {
