@@ -7,7 +7,7 @@ import Transfer, { TransferTabIcon } from "../../screens/Transfer";
 import AccountsNavigator from "./AccountsNavigator";
 import ManagerNavigator, { ManagerTabIcon } from "./ManagerNavigator";
 import PlatformNavigator from "./PlatformNavigator";
-import test from "./test.js";
+import testSymbolNavigator from "./testSymbolNavigator.js";
 import TabIcon from "../TabIcon";
 import AccountsIcon from "../../icons/Accounts";
 import AppsIcon from "../../icons/Apps";
@@ -101,7 +101,7 @@ export default function MainNavigator({
       />
       <Tab.Screen
         name="test"
-        component={test}
+        component={testSymbolNavigator}
         options={{
           unmountOnBlur: true,
           tabBarIcon: (props: any) => (
