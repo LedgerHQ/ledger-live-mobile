@@ -1,5 +1,3 @@
-// @flow
-
 import React, { memo, useCallback } from "react";
 
 import { Checkbox as RNCheckbox } from "@ledgerhq/native-ui";
