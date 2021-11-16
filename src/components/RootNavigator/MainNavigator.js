@@ -23,7 +23,6 @@ export default function MainNavigator({
   route: { params: RouteParams },
 }) {
   const { colors } = useTheme();
-  console.log("colors", colors)
 
   const { hideTabNavigation } = params || {};
   return (
