@@ -40,7 +40,7 @@ export default function ImportAccountsNavigator() {
         component={DisplayResult}
         options={{
           title: t("account.import.result.title"),
-          headerLeft: null,
+          headerLeft: () => <BackButton />,
         }}
       />
       <Stack.Screen
