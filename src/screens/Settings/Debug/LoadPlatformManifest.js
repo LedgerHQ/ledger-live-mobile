@@ -42,7 +42,6 @@ export default function LoadPlatformManifest({
 
     addLocalManifest(json);
 
-    // const nav = navigation.getParent();
     navigation.navigate({
       name: ScreenName.PlatformApp,
       params: {
