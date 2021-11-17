@@ -201,7 +201,7 @@ const NftViewer = ({ route: { params } }: Props) => {
         <View style={styles.main}>
           <View style={styles.hr} />
 
-          <Section title={t("nft.viewer.about")}>{description}</Section>
+          <Section title={t("nft.viewer.description")}>{description}</Section>
 
           <View style={styles.hr} />
 

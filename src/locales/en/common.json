@@ -3748,7 +3748,7 @@
     },
     "viewer": {
       "properties": "Properties",
-      "about": "About Known Origin",
+      "description": "Description",
       "tokenContract": "Token Address",
       "tokenId": "Token ID",
       "quantity": "Quantity"
