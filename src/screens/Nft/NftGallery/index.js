@@ -13,6 +13,9 @@ import LoadingFooter from "../../../components/LoadingFooter";
 import { accountSelector } from "../../../reducers/accounts";
 import NftCollectionWithName from "./NftCollectionWithName";
 
+const MAX_COLLECTIONS_FIRST_RENDER = 12;
+const COLLECTIONS_TO_ADD_ON_LIST_END_REACHED = 6;
+
 const CollectionsList = Animated.createAnimatedComponent(FlatList);
 
 const renderItem = ({ item: collection }) => (
@@ -43,7 +46,9 @@ const NftGallery = () => {
     { useNativeDriver: true },
   );
 
-  const [collectionsCount, setCollectionsCount] = useState(1);
+  const [collectionsCount, setCollectionsCount] = useState(
+    MAX_COLLECTIONS_FIRST_RENDER,
+  );
   const collections = useMemo(() => nftsByCollections(account.nfts), [
     account.nfts,
   ]);
@@ -53,7 +58,9 @@ const NftGallery = () => {
   );
 
   const onEndReached = useCallback(() => {
-    setCollectionsCount(collectionsCount + 1);
+    setCollectionsCount(
+      collectionsCount + COLLECTIONS_TO_ADD_ON_LIST_END_REACHED,
+    );
   }, [collectionsCount]);
 
   return (

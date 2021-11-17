@@ -29,6 +29,9 @@ import NftCard from "../../../components/Nft/NftCard";
 // import Button from "../../../components/Button";
 // import SendIcon from "../../../icons/Send";
 
+const MAX_NFT_FIRST_RENDER = 12;
+const NFTS_TO_ADD_ON_LIST_END_REACHED = 6;
+
 type Props = {
   navigation: any,
   route: RouteParams,
@@ -66,7 +69,7 @@ const NftCollection = ({ route }: Props) => {
     );
 
   // nfts' list related -----
-  const [nftCount, setNftCount] = useState(12);
+  const [nftCount, setNftCount] = useState(MAX_NFT_FIRST_RENDER);
   const nfts = useMemo(() => params.collection.nfts.slice(0, nftCount), [
     nftCount,
     params.collection,
@@ -94,7 +97,7 @@ const NftCollection = ({ route }: Props) => {
   );
 
   const onNftsEndReached = useCallback(() => {
-    setNftCount(nftCount + 6);
+    setNftCount(nftCount + NFTS_TO_ADD_ON_LIST_END_REACHED);
   }, [nftCount]);
 
   // operations' list related -----
