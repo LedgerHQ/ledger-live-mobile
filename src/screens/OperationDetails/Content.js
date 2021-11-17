@@ -39,8 +39,8 @@ import Modal from "./Modal";
 import Section, { styles as sectionStyles } from "./Section";
 import byFamiliesOperationDetails from "../../generated/operationDetails";
 import DefaultOperationDetailsExtra from "./Extra";
-import DoubleCounterValue from "../../components/DoubleCountervalue";
 import Skeleton from "../../components/Skeleton";
+import Title from "./Title";
 
 type HelpLinkProps = {
   event: string,
@@ -114,7 +114,6 @@ export default function Content({
   const parentCurrency = getAccountCurrency(mainAccount);
   const amount = getOperationAmountNumber(operation);
   const isNegative = amount.isNegative();
-  const valueColor = isNegative ? colors.smoke : colors.green;
   const confirmationsString = getOperationConfirmationDisplayableNumber(
     operation,
     mainAccount,
@@ -147,72 +146,6 @@ export default function Content({
     operation.contract &&
     operation.tokenId;
 
-  const operationTitleRender = useCallback(() => {
-    if (hasFailed || amount.isZero()) {
-      return null;
-    }
-
-    if (isNftOperation) {
-      return (
-        <>
-          <Skeleton
-            style={[styles.currencyUnitValue, styles.currencyUnitValueSkeleton]}
-            loading={status === "loading"}
-          >
-            <LText semiBold numberOfLines={1} style={styles.currencyUnitValue}>
-              {metadata?.nftName || "-"}
-            </LText>
-          </Skeleton>
-          <LText
-            numberOfLines={1}
-            ellipsizeMode="middle"
-            style={[styles.titleTokenId, { color: colors.grey }]}
-          >
-            ID {operation.tokenId}
-          </LText>
-        </>
-      );
-    }
-
-    return (
-      <>
-        <LText
-          semiBold
-          numberOfLines={1}
-          style={[styles.currencyUnitValue, { color: valueColor }]}
-        >
-          <CurrencyUnitValue
-            showCode
-            disableRounding={true}
-            unit={unit}
-            value={amount}
-            alwaysShowSign
-          />
-        </LText>
-        <DoubleCounterValue
-          showCode
-          alwaysShowSign
-          currency={currency}
-          value={amount}
-          date={operation.date}
-          subMagnitude={1}
-        />
-      </>
-    );
-  }, [
-    amount,
-    colors.grey,
-    currency,
-    hasFailed,
-    isNftOperation,
-    metadata?.nftName,
-    operation.date,
-    operation.tokenId,
-    status,
-    unit,
-    valueColor,
-  ]);
-
   return (
     <>
       <View style={styles.header}>
@@ -225,7 +158,17 @@ export default function Content({
           />
         </View>
 
-        {operationTitleRender()}
+        <Title
+          hasFailed={hasFailed}
+          amount={amount}
+          operation={operation}
+          currency={currency}
+          unit={unit}
+          isNftOperation={isNftOperation}
+          status={status}
+          metadata={metadata}
+          styles={styles}
+        />
 
         <View style={styles.confirmationContainer}>
           <View
