@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { memo } from "react";
 import Svg, { G, Rect, Path, Defs, ClipPath } from "react-native-svg";
 
 type Props = {
@@ -36,4 +36,4 @@ const OpenSeaIcon = ({ size }: Props) => (
   </Svg>
 );
 
-export default OpenSeaIcon;
+export default memo(OpenSeaIcon);

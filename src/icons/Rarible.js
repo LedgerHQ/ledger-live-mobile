@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { memo } from "react";
 import Svg, { G, Path, Defs, ClipPath } from "react-native-svg";
 
 type Props = {
@@ -31,4 +31,4 @@ const RaribleIcon = ({ size }: Props) => (
   </Svg>
 );
 
-export default RaribleIcon;
+export default memo(RaribleIcon);

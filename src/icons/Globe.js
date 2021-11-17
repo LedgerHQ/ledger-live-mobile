@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { memo } from "react";
 import Svg, { Path } from "react-native-svg";
 
 type Props = {
@@ -21,4 +21,4 @@ const GlobeIcon = ({ size, color }: Props) => (
   </Svg>
 );
 
-export default GlobeIcon;
+export default memo(GlobeIcon);
