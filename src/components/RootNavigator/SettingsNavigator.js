@@ -29,6 +29,7 @@ import DebugSettings, {
   DebugMocks,
 } from "../../screens/Settings/Debug";
 import DebugExport from "../../screens/Settings/Debug/ExportAccounts";
+import LoadPlatformManifest from "../../screens/Settings/Debug/LoadPlatformManifest";
 import ExperimentalSettings from "../../screens/Settings/Experimental";
 import RepairDevice from "../../screens/RepairDevice";
 import { getStackNavigatorConfig } from "../../navigation/navigatorConfig";
@@ -234,6 +235,13 @@ export default function SettingsNavigator() {
         component={BenchmarkQRStream}
         options={{
           title: "Benchmark QRStream",
+        }}
+      />
+      <Stack.Screen
+        name={ScreenName.DebugLoadPlatformManifest}
+        component={LoadPlatformManifest}
+        options={{
+          title: "Load Platform Manifest",
         }}
       />
     </Stack.Navigator>

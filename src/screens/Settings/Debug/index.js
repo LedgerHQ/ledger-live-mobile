@@ -95,6 +95,10 @@ export default function DebugSettings({ navigation: { navigate } }: any) {
         title="Export accounts (LiveQR)"
         onPress={() => navigate(ScreenName.DebugExport)}
       />
+      <SettingsRow
+        title="Load Platform Manifest"
+        onPress={() => navigate(ScreenName.DebugLoadPlatformManifest)}
+      />
     </NavigationScrollView>
   );
 }
