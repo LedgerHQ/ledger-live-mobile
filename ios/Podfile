@@ -15,7 +15,7 @@ target 'ledgerlivemobile' do
   pod 'ledger-core-objc', :path => '../node_modules/@ledgerhq/react-native-ledger-core'
   pod 'RNLibLedgerCore', :path => '../node_modules/@ledgerhq/react-native-ledger-core'
   
-  pod 'MultiplatformBleAdapter', :git => 'https://github.com/below/MultiPlatformBleAdapter', :tag => '0.1.9'
+  pod 'MultiplatformBleAdapter', :git => 'https://github.com/dotintent/MultiPlatformBleAdapter', :tag => '0.1.7'
 
   pod 'react-native-webview', :path => '../node_modules/react-native-webview'
   pod 'React-RCTText', :path => '../node_modules/react-native/Libraries/Text', :modular_headers => true

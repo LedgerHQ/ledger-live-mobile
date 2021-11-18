@@ -424,6 +424,7 @@ DEPENDENCIES:
   - "ledger-core-objc (from `../node_modules/@ledgerhq/react-native-ledger-core`)"
   - lottie-ios (from `../node_modules/lottie-ios`)
   - lottie-react-native (from `../node_modules/lottie-react-native`)
+  - MultiplatformBleAdapter (from `https://github.com/dotintent/MultiPlatformBleAdapter`, tag `0.1.7`)
   - "PasscodeAuth (from `../node_modules/@ledgerhq/react-native-passcode-auth`)"
   - RCTRequired (from `../node_modules/react-native/Libraries/RCTRequired`)
   - RCTTypeSafety (from `../node_modules/react-native/Libraries/TypeSafety`)
@@ -492,7 +493,6 @@ SPEC REPOS:
     - FlipperKit
     - InputMask
     - libevent
-    - MultiplatformBleAdapter
     - OpenSSL-Universal
     - Sentry
     - YogaKit
@@ -516,6 +516,9 @@ EXTERNAL SOURCES:
     :path: "../node_modules/lottie-ios"
   lottie-react-native:
     :path: "../node_modules/lottie-react-native"
+  MultiplatformBleAdapter:
+    :git: https://github.com/dotintent/MultiPlatformBleAdapter
+    :tag: 0.1.7
   PasscodeAuth:
     :path: "../node_modules/@ledgerhq/react-native-passcode-auth"
   RCTRequired:
@@ -619,6 +622,11 @@ EXTERNAL SOURCES:
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
+CHECKOUT OPTIONS:
+  MultiplatformBleAdapter:
+    :git: https://github.com/dotintent/MultiPlatformBleAdapter
+    :tag: 0.1.7
+
 SPEC CHECKSUMS:
   Analytics: 952eac761f84ba0a508a4cf691598654073f9e3d
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
@@ -697,6 +705,6 @@ SPEC CHECKSUMS:
   Yoga: 4bd86afe9883422a7c4028c00e34790f560923d6
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: 01b063eeabf787eaff0e628a018ef03fb4e3ce99
+PODFILE CHECKSUM: 09d856bbe42ff785f6728df198dbf7de99783179
 
-COCOAPODS: 1.11.2
+COCOAPODS: 1.10.1

@@ -113,7 +113,6 @@ export default function Market({ navigation }: Props) {
         currency={item}
         onPress={onPressItem}
         range={range}
-        key={id}
       />
     )
   }
@@ -128,7 +127,7 @@ export default function Market({ navigation }: Props) {
 
   return (
     <>
-      <KeyboardView style={{ flex: 1 }}><View style={styles.root}>
+      <KeyboardView style={styles.root}>
         <View style={styles.headerFilter}>
           <View style={styles.searchContainer}>
             <SearchBox />
@@ -153,7 +152,7 @@ export default function Market({ navigation }: Props) {
             <Text style={styles.tfIcon}>{" ˅ "}</Text>
           </TouchableOpacity>
         </View>
-
+        
         <InfiniteScroll
           renderData={renderData}
           data={currencies}
@@ -216,7 +215,7 @@ export default function Market({ navigation }: Props) {
             active={timeframe}
             onApply={onApplyTF}
           />
-        </RBSheet></View>
+        </RBSheet>
       </KeyboardView>
     </>
   );
@@ -224,11 +223,12 @@ export default function Market({ navigation }: Props) {
 
 const styles = StyleSheet.create({
   root: {
-    paddingHorizontal: 16
+    flex: 1,
+    paddingHorizontal: 16,
   },
   searchContainer: {
     flex: 1,
-    paddingRight: 8
+    paddingRight: 8,
   },
   headerFilter: {
     flexDirection: "row",
@@ -266,6 +266,6 @@ const styles = StyleSheet.create({
   },
   loadingMore: {
     height: 40,
-    paddingVertical: 6
+    paddingVertical: 6,
   },
 });
