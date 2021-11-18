@@ -1316,7 +1316,9 @@
   "operations": {
     "types": {
       "IN": "受け取り済み",
+      "NFT_IN": "NFT Received",
       "OUT": "送金済み",
+      "NFT_OUT": "NFT Sent",
       "CREATE": "作成済み",
       "REVEAL": "表示済み",
       "DELEGATE": "デリゲート済み",
@@ -1399,7 +1401,11 @@
       "transferAmount": "送付額",
       "validatorsCount": "バリデータ（{{number}}）"
     },
-    "multipleAddresses": "なぜ複数のアドレスがあるのですか？"
+    "multipleAddresses": "なぜ複数のアドレスがあるのですか？",
+    "tokenName": "Token Name",
+    "collectionContract": "Token Contract",
+    "tokenId": "Token (NFT) ID",
+    "quantity": "Quantity"
   },
   "operationList": {
     "noOperations": "オペレーションはありません。",
@@ -1541,6 +1547,9 @@
     },
     "undelegation": {
       "sectionLabel": "デリゲート解除"
+    },
+    "nft": {
+      "receiveNft": "Receive NFT"
     }
   },
   "accounts": {
@@ -3724,6 +3733,27 @@
       "infoPanel": {
         "website": "ウェブサイト"
       }
+    }
+  },
+  "nft": {
+    "account": {
+      "seeAllNfts": "See all NFT",
+      "seeFewerNfts": "See fewer NFT"
+    },
+    "gallery": {
+      "allNft": "All NFT"
+    },
+    "viewer": {
+      "properties": "Properties",
+      "description": "Description",
+      "tokenContract": "Token Address",
+      "tokenId": "Token ID",
+      "quantity": "Quantity"
+    },
+    "viewerModal": {
+      "viewOn": "View on",
+      "viewInExplorer": "View in explorer",
+      "txDetails": "Transaction details"
     }
   }
 }
