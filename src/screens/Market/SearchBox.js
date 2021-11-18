@@ -20,37 +20,36 @@ export default function SearchBox() {
   const focusInput = () => {};
 
   return (
-    <>
-      <View style={styles.container}>
-        <TouchableOpacity
-          onPress={query ? null : focusInput}
-          style={[styles.wrapper]}
-        >
-          <View style={styles.iconContainer}>
-            <SearchIcon size={20} color={"black"} />
-          </View>
-          <TextInput
-            onBlur={onBlur}
-            onFocus={onFocus}
-            onChangeText={onChange}
-            onInputCleared={clear}
-            focused={focused}
-            placeholder={"Search"}
-            placeholderTextColor={"#666666"}
-            style={[styles.input, { color: "#003366" }]}
-            containerStyle={styles.inputContainer}
-            value={query}
-            clearButtonMode="always"
-          />
-        </TouchableOpacity>
-      </View>
-    </>
+    <View style={styles.container}>
+      <TouchableOpacity
+        onPress={query ? null : focusInput}
+        style={[styles.wrapper]}
+      >
+        <View style={styles.iconContainer}>
+          <SearchIcon size={20} color={"black"} />
+        </View>
+        <TextInput
+          onBlur={onBlur}
+          onFocus={onFocus}
+          onChangeText={onChange}
+          onInputCleared={clear}
+          focused={focused}
+          placeholder={"Search"}
+          placeholderTextColor={"#666666"}
+          style={[styles.input, { color: "#003366" }]}
+          containerStyle={styles.inputContainer}
+          value={query}
+          clearButtonMode="always"
+        />
+      </TouchableOpacity>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
+    flex: 1
   },
   wrapper: {
     flexDirection: "row",

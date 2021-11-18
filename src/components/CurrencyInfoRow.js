@@ -62,7 +62,7 @@ class CurrencyRow extends PureComponent<Props> {
             {currency.data && (
               <View style={styles.flexRow}>
                 <LText style={[styles.rank]} semiBold>
-                  {currency.data.market_cap_rank}
+                  {" "}{currency.data.market_cap_rank}{" "}
                 </LText>
                 <LText style={[styles.totalAsset]} semiBold>
                   {(currency.data.total_volume / 1000000000).toFixed(2)} Bn
@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
   root: {
     flexDirection: "row",
     alignItems: "center",
-    padding: 16,
+    paddingVertical: 16,
     width: "100%",
     borderBottomColor: '#14253310',
     borderBottomWidth: 1,
@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
   },
   ticker: {
     fontSize: 12,
-    color: "#14253350",
+    color: "#14253360",
     textAlignVertical: "bottom",
   },
   currencyLabel: {
@@ -153,13 +153,14 @@ const styles = StyleSheet.create({
   },
   rank: {
     backgroundColor: "#14253310",
-    color: "#14253350",
-    paddingHorizontal: 3,
+    color: "#14253360",
+    paddingHorizontal: 2,
     marginHorizontal: 9,
     fontSize: 12,
+    borderRadius: 3
   },
   totalAsset: {
-    color: "#14253350",
+    color: "#14253360",
     fontSize: 12,
     alignSelf: "flex-end",
     textAlign: "right",

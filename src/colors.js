@@ -45,7 +45,7 @@ export const lightTheme = {
   dark: false,
   colors: {
     primary: "rgb(255, 45, 85)",
-    background: "#fafafa",
+    background: "#FFFFFF",
     card: "#FFFFFF",
     text: "rgb(28, 28, 30)",
     border: "rgb(199, 199, 204)",

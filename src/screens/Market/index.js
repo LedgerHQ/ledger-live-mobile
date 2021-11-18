@@ -9,6 +9,7 @@ import BottomSelectSheetFilter from "./BottomSelectSheetFilter";
 import BottomSelectSheetTF from "./BottomSelectSheetTF";
 import FilterIcon from "../../images/filter.png";
 import SearchBox from "./SearchBox";
+import { selectedCurrencySelector } from "../../reducers/market";
 
 type Props = {
   navigation: Object,
@@ -127,8 +128,8 @@ export default function Market({ navigation }: Props) {
 
   return (
     <>
-      <KeyboardView style={{ flex: 1 }}>
-        <View flexDirection={"row"} paddingTop={16}>
+      <KeyboardView style={{ flex: 1 }}><View style={styles.root}>
+        <View style={styles.headerFilter}>
           <View style={styles.searchContainer}>
             <SearchBox />
           </View>
@@ -215,31 +216,23 @@ export default function Market({ navigation }: Props) {
             active={timeframe}
             onApply={onApplyTF}
           />
-        </RBSheet>
+        </RBSheet></View>
       </KeyboardView>
     </>
   );
 }
 
 const styles = StyleSheet.create({
-  list: {
-    flex: 1,
-    paddingBottom: 32,
-  },
   root: {
-    flex: 1,
+    paddingHorizontal: 16
   },
   searchContainer: {
     flex: 1,
+    paddingRight: 8
   },
-  filteredSearchInputWrapperStyle: {
-    marginHorizontal: 16,
-  },
-  emptySearch: {
-    paddingHorizontal: 16,
-  },
-  emptySearchText: {
-    textAlign: "center",
+  headerFilter: {
+    flexDirection: "row",
+    paddingTop: 16,
   },
   tfSelector: {
     flexDirection: "row",
@@ -247,7 +240,7 @@ const styles = StyleSheet.create({
   },
   tf: {
     fontSize: 15,
-    paddingLeft: 15,
+    color: "#14253360",
   },
   tfItem: {
     fontSize: 15,
@@ -261,12 +254,9 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 5,
-    borderColor: "#14253350",
+    borderColor: "#14253360",
     borderWidth: 1,
-    alignItems: "center",
     justifyContent: "center",
-    right: 15,
-    marginLeft: 5,
   },
   filterIcon: {
     alignSelf: "center",
@@ -277,8 +267,5 @@ const styles = StyleSheet.create({
   loadingMore: {
     height: 40,
     paddingVertical: 6
-  },
-  pageNumber: {
-    fontSize: 20,
   },
 });
