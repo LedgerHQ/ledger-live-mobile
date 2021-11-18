@@ -1,17 +1,17 @@
 import React from "react";
 import { StyleSheet, View, Image, Text } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
-import MainScreen from "../../screens/MainScreen";
+import Market from "../../screens/Market";
 import { BackButton } from "../../screens/OperationDetails";
 import SymbolDashboard from "../../screens/SymbolDashboard";
 import AddFavoritesButton from "../AddFavoritesButton";
 
-export default function testSymbolNavigator() {
+export default function MarketNavigator() {
   return (
     <Stack.Navigator>
       <Stack.Screen
         name="test"
-        component={MainScreen}
+        component={Market}
         options={() => ({
           headerTitle: "Market",
           headerTitleAlign: "center",

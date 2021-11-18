@@ -324,6 +324,7 @@ export const NavigatorName = {
   Freeze: "Freeze",
   ImportAccounts: "ImportAccounts",
   Manager: "Manager",
+  Market: "Market",
   ManagerStack: "ManagerStack",
   MigrateAccountsFlow: "MigrateAccountsFlow",
   Onboarding: "Onboarding",

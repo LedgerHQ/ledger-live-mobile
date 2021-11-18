@@ -7,10 +7,11 @@ import Transfer, { TransferTabIcon } from "../../screens/Transfer";
 import AccountsNavigator from "./AccountsNavigator";
 import ManagerNavigator, { ManagerTabIcon } from "./ManagerNavigator";
 import PlatformNavigator from "./PlatformNavigator";
-import testSymbolNavigator from "./testSymbolNavigator.js";
+import MarketNavigator from "./MarketNavigator.js";
 import TabIcon from "../TabIcon";
 import AccountsIcon from "../../icons/Accounts";
 import AppsIcon from "../../icons/Apps";
+import MarketIcon from "../../icons/Market";
 
 import Tab from "./CustomBlockRouterNavigator";
 
@@ -75,7 +76,7 @@ export default function MainNavigator({
           ),
         }}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name={NavigatorName.Manager}
         component={ManagerNavigator}
         options={{
@@ -98,16 +99,15 @@ export default function MainNavigator({
             });
           },
         })}
-      />
+      /> */}
       <Tab.Screen
-        name="test"
-        component={testSymbolNavigator}
+        name={NavigatorName.Market}
+        component={MarketNavigator}
         options={{
           unmountOnBlur: true,
           tabBarIcon: (props: any) => (
-            <TabIcon Icon={AccountsIcon} i18nKey="test" {...props} />
-          ),
-          tabBarTestID: "test",
+            <TabIcon Icon={MarketIcon} i18nKey="Market" {...props} />
+          )
         }}
       />
     </Tab.Navigator>

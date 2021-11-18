@@ -1,11 +1,11 @@
 import 'react-native';
 import React from 'react';
 import renderer from 'react-test-renderer';
-import MainScreen from '../src/screens/MainScreen';
+import Market from '../src/screens/Market';
 
-test('MainScreen snapShot', () => {
+test('Market snapShot', () => {
   const snap = renderer.create(
-    <MainScreen />
+    <Market />
   ).toJSON();
 
   expect(snap).toMatchSnapshot(); 

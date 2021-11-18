@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
-import { StyleSheet, Image, TouchableOpacity, Text, View } from "react-native";
+import { ActivityIndicator, StyleSheet, Image, TouchableOpacity, Text, View } from "react-native";
 import RBSheet from "react-native-raw-bottom-sheet";
+import InfiniteScroll from "react-native-infinite-scrolling";
 import KeyboardView from "../../components/KeyboardView";
 import CurrencyRow from "../../components/CurrencyInfoRow";
 import { MarketClient } from "../../api/market";
@@ -8,7 +9,6 @@ import BottomSelectSheetFilter from "./BottomSelectSheetFilter";
 import BottomSelectSheetTF from "./BottomSelectSheetTF";
 import FilterIcon from "../../images/filter.png";
 import SearchBox from "./SearchBox";
-import PaginationBar from "../../components/PaginationBar";
 
 type Props = {
   navigation: Object,
@@ -45,29 +45,27 @@ const getCurrencyData = async (limit, page, sortOption) => {
     order,
     orderBy,
   });
-  return responses.map(response => ({
+  return responses.filter(response => response.id).map(response => ({
     id: response.id,
-    name: response.name,
-    ticker: response.symbol.toUpperCase(),
+    name: response.name || response.id,
+    ticker: (response.symbol || response.id).toUpperCase(),
     data: response,
   }));
 };
 
-export default function MainScreen({ navigation }: Props) {
+export default function Market({ navigation }: Props) {
   const [currencies, setCurrencies] = useState([]);
   const [range, setRange] = useState("24h");
   const [showOption, setShowOption] = useState("All");
   const [sortOption, setSortOption] = useState("Rank");
   const [timeframe, setTimeframe] = useState(CHANGE_TIMES[0]);
   const [activePage, setActivePage] = useState(1);
+  const [loadingMore, setLoadingMore] = useState(false);
   const RBSheetTimeFrame = useRef();
   const RBSheetFilter = useRef();
   useEffect(() => {
-    (async () => {
-      const currencyData = await getCurrencyData(7, activePage, sortOption);
-      setCurrencies(currencyData);
-    })();
-  }, [activePage, sortOption, showOption]);
+    loadMore();
+  }, [sortOption, showOption]);
 
   const onPressItem = currencyOrToken => {
     navigation.navigate("SymbolDashboard", {
@@ -90,10 +88,42 @@ export default function MainScreen({ navigation }: Props) {
   };
 
   const onApplyFilter = _filterOptions => {
+    setCurrencies([]);
     setShowOption(_filterOptions[0].active);
     setSortOption(_filterOptions[1].active);
     RBSheetFilter.current.close();
   };
+
+  const loadMore = () => {
+    if (activePage > 20) return;
+    (async () => {
+      setLoadingMore(true);
+      const currencyData = await getCurrencyData(10, activePage, sortOption);
+      const nxt = activePage + 1;
+      setActivePage(nxt);
+      setCurrencies(currencies.concat(currencyData));
+      setLoadingMore(false);
+    })();
+  }
+
+  const renderData = ({item}) => {
+    return (
+      <CurrencyRow
+        currency={item}
+        onPress={onPressItem}
+        range={range}
+        key={id}
+      />
+    )
+  }
+
+  const LoadingMore = () => {
+    return (
+      <View style={styles.loadingMore}>
+        <ActivityIndicator size={"small"} color={"#d4d4d4"} />
+      </View>
+    )
+  }
 
   return (
     <>
@@ -122,22 +152,14 @@ export default function MainScreen({ navigation }: Props) {
             <Text style={styles.tfIcon}>{" ˅ "}</Text>
           </TouchableOpacity>
         </View>
-        <View>
-          {currencies.map((currency, id) => (
-            <CurrencyRow
-              currency={currency}
-              onPress={onPressItem}
-              range={range}
-              key={id}
-            />
-          ))}
-        </View>
 
-        <PaginationBar
-          totalPages={20}
-          activePage={activePage}
-          setActivePage={setActivePage}
+        <InfiniteScroll
+          renderData={renderData}
+          data={currencies}
+          loadMore={loadMore}
         />
+
+        {loadingMore && <LoadingMore />}
 
         <RBSheet
           ref={RBSheetFilter}
@@ -251,6 +273,10 @@ const styles = StyleSheet.create({
     width: "60%",
     height: "60%",
     marginBottom: 0,
+  },
+  loadingMore: {
+    height: 40,
+    paddingVertical: 6
   },
   pageNumber: {
     fontSize: 20,
