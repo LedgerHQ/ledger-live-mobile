@@ -37,59 +37,66 @@ class CurrencyRow extends PureComponent<Props> {
     };
 
     return currency ? (
-      <RectButton style={[styles.root, style]} onPress={this.onPress}>
-        <Image
-          source={{ uri: currency.data.image }}
-          style={styles.headerIcon}
-        />
-        <View style={styles.left}>
-          <View style={styles.flexRow}>
-            <LText
-              semiBold
-              style={[styles.name]}
-              numberOfLines={1}
-              color={!isOK ? "fog" : "darkBlue"}
-            >
-              {currency.name}
-            </LText>
-            <LText semiBold style={[styles.ticker]} numberOfLines={1}>
-              · {currency.ticker}
-            </LText>
+      <RectButton style={style} onPress={this.onPress}>
+        <View style={styles.root}>
+          <View flex={1}>
+            <Image
+              source={{ uri: currency.data.image }}
+              style={styles.headerIcon}
+            />
           </View>
-          {currency.data && (
+          <View flex={4}>
             <View style={styles.flexRow}>
-              <LText style={[styles.rank]}>
-                {currency.data.market_cap_rank}
+              <LText
+                semiBold
+                style={[styles.name]}
+                numberOfLines={1}
+                color={!isOK ? "fog" : "darkBlue"}
+              >
+                {currency.name}
               </LText>
-              <LText style={[styles.totalAsset]}>
-                {(currency.data.total_volume / 1000000000).toFixed(2)} Bn
+              <LText semiBold style={[styles.ticker]} numberOfLines={1}>
+                {"  "}{currency.ticker}
               </LText>
             </View>
-          )}
-        </View>
-        {currency.data && (
-          <View style={styles.right}>
-            <LText style={styles.price}>
-              $
-              {currency.data.current_price
-                .toFixed(2)
-                .toString()
-                .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-            </LText>
-            <View style={styles.delta}>
-              <Delta
-                percent
-                valueChange={priceChange}
-                style={styles.deltaPercent}
-                textStyle={styles.deltaPecentText}
-                toFixed={2}
-              />
-            </View>
+            {currency.data && (
+              <View style={styles.flexRow}>
+                <LText style={[styles.rank]} semiBold>
+                  {currency.data.market_cap_rank}
+                </LText>
+                <LText style={[styles.totalAsset]} semiBold>
+                  {(currency.data.total_volume / 1000000000).toFixed(2)} Bn
+                </LText>
+              </View>
+            )}
           </View>
-        )}
+          <View flex={3} />
+          <View flex={4}>
+            {currency.data && (
+              <View style={styles.flexColumn}>
+                <LText style={styles.price} semiBold>
+                  $
+                  {currency.data.current_price
+                    .toFixed(2)
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                </LText>
+                <View style={styles.delta}>
+                  <Delta
+                    percent
+                    valueChange={priceChange}
+                    style={styles.deltaPercent}
+                    textStyle={styles.deltaPecentText}
+                    toFixed={2}
+                  />
+                </View>
+              </View>
+            )}
+          </View>
+        </View>
       </RectButton>
     ) : (
-      <View />
+      null
     );
   }
 }
@@ -100,6 +107,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 16,
     width: "100%",
+    borderBottomColor: '#14253310',
+    borderBottomWidth: 1,
+    borderRadius: 20
   },
   flexRow: {
     flexDirection: "row",
@@ -112,6 +122,7 @@ const styles = StyleSheet.create({
   ticker: {
     fontSize: 12,
     color: "#14253350",
+    textAlignVertical: "bottom",
   },
   currencyLabel: {
     flexGrow: 0,
@@ -126,17 +137,19 @@ const styles = StyleSheet.create({
     lineHeight: 24,
     marginLeft: 12,
   },
-  left: {
-    left: 0,
-  },
   right: {
     position: "absolute",
+    flex: 1,
+    flexDirection:"column",
     right: 10,
+    borderWidth: 1
   },
   delta: {
-    position: "absolute",
-    right: 0,
-    bottom: 0,
+    textAlign: "right",
+    alignSelf: 'flex-end',
+  },
+  flexColumn: {
+    flexDirection: "column",
   },
   rank: {
     backgroundColor: "#14253310",
@@ -151,22 +164,10 @@ const styles = StyleSheet.create({
     alignSelf: "flex-end",
     textAlign: "right",
   },
-  changePercentUp: {
-    color: "#6EC85C",
-    alignSelf: "flex-end",
-    textAlign: "right",
-  },
-  changePercentDown: {
-    color: "#F04F52",
-    alignSelf: "flex-end",
-    textAlign: "right",
-  },
   price: {
-    alignSelf: "flex-end",
     textAlign: "right",
   },
   deltaPercent: {
-    position: "absolute",
     right: 0,
   },
   deltaPecentText: {
@@ -176,7 +177,6 @@ const styles = StyleSheet.create({
   headerIcon: {
     width: 32,
     height: 32,
-    marginRight: 8,
   },
 });
 
