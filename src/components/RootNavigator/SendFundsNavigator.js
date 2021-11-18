@@ -6,7 +6,7 @@ import { useTheme } from "@react-navigation/native";
 import { ScreenName } from "../../const";
 import SendCoin from "../../screens/SendFunds/01a-SelectAccount";
 import SendSelectRecipient from "../../screens/SendFunds/02-SelectRecipient";
-import SendAmount from "../../screens/SendFunds/03-Amount";
+import SendAmountCoin from "../../screens/SendFunds/03a-AmountCoin";
 import SendSummary from "../../screens/SendFunds/04-Summary";
 import SelectDevice from "../../screens/SelectDevice";
 import SendConnectDevice from "../../screens/ConnectDevice";
@@ -57,8 +57,8 @@ export default function SendFundsNavigator() {
         }}
       />
       <Stack.Screen
-        name={ScreenName.SendAmount}
-        component={SendAmount}
+        name={ScreenName.SendAmountCoin}
+        component={SendAmountCoin}
         options={{
           headerTitle: () => (
             <StepHeader

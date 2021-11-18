@@ -107,7 +107,7 @@ export const ScreenName = {
   RippleEditTag: "RippleEditTag",
   ScanAccounts: "ScanAccounts",
   ScanRecipient: "ScanRecipient",
-  SendAmount: "SendAmount",
+  SendAmountCoin: "SendAmountCoin",
   SendConnectDevice: "SendConnectDevice",
   SendCoin: "SendCoin",
   SendSelectDevice: "SendSelectDevice",

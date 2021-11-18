@@ -118,7 +118,7 @@ export default function SendSelectRecipient({ navigation, route }: Props) {
   }, [setTransaction, account, parentAccount, transaction]);
 
   const onPressContinue = useCallback(async () => {
-    navigation.navigate(ScreenName.SendAmount, {
+    navigation.navigate(ScreenName.SendAmountCoin, {
       accountId: account.id,
       parentId: parentAccount && parentAccount.id,
       transaction,
