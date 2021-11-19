@@ -1,9 +1,8 @@
 // @flow
 import React, { useCallback } from "react";
 import { StyleSheet, View, TouchableOpacity, Linking } from "react-native";
-import { useTheme } from "@react-navigation/native";
-import { Trans } from "react-i18next";
-
+import { useTheme, useNavigation } from "@react-navigation/native";
+import { useTranslation } from "react-i18next";
 import type { TransactionStatus } from "@ledgerhq/live-common/lib/types";
 import type {
   Exchange,
@@ -14,7 +13,6 @@ import {
   getAccountUnit,
   getAccountCurrency,
 } from "@ledgerhq/live-common/lib/account/helpers";
-
 import LText from "../../../../../components/LText";
 import CurrencyUnitValue from "../../../../../components/CurrencyUnitValue";
 import SectionSeparator, {
@@ -23,6 +21,8 @@ import SectionSeparator, {
 import CurrencyIcon from "../../../../../components/CurrencyIcon";
 import ExternalLink from "../../../../../icons/ExternalLink";
 import { urls } from "../../../../../config/urls";
+import Button from "../../../../../components/Button";
+import { ScreenName } from "../../../../../const";
 
 const SummaryBody = ({
   status,
@@ -39,17 +39,34 @@ const SummaryBody = ({
   const toCurrency = getAccountCurrency(toAccount);
   const { toAmount } = exchangeRate;
   const { amount } = status;
+  const { t } = useTranslation();
 
   const openProvider = useCallback(() => {
     Linking.openURL(urls.swap.providers[exchangeRate.provider].main);
   }, [exchangeRate.provider]);
 
+  const navigation = useNavigation();
+  const handleConnect = useCallback(() => {
+    navigation.navigate({
+      name: ScreenName.SwapConnectFTX,
+      params: { uri: "https://ftx.com/login" },
+    });
+  }, [navigation]);
+
+  const handleKYC = useCallback(() => {
+    navigation.navigate({
+      name: ScreenName.SwapConnectFTX,
+      params: { uri: "https://ftx.com/kyc" },
+    });
+  }, [navigation]);
+
   return (
     <>
       <View style={styles.row}>
         <LText primary style={styles.label} color="smoke">
-          <Trans i18nKey="transfer.swap.form.summary.from" />
+          {t("transfer.swap.form.summary.from")}
         </LText>
+
         <View style={styles.accountNameWrapper}>
           <CurrencyIcon size={16} currency={fromCurrency} />
           <LText
@@ -62,9 +79,10 @@ const SummaryBody = ({
           </LText>
         </View>
       </View>
+
       <View style={styles.row}>
         <LText primary style={styles.label} color="smoke">
-          <Trans i18nKey="transfer.swap.form.summary.send" />
+          {t("transfer.swap.form.summary.send")}
         </LText>
         <LText tertiary style={styles.value2}>
           <CurrencyUnitValue
@@ -75,14 +93,16 @@ const SummaryBody = ({
           />
         </LText>
       </View>
+
       <View style={styles.separator}>
         <SectionSeparator noMargin>
           <ArrowDownCircle big />
         </SectionSeparator>
       </View>
+
       <View style={styles.row}>
         <LText primary style={styles.label} color="smoke">
-          <Trans i18nKey="transfer.swap.form.summary.to" />
+          {t("transfer.swap.form.summary.to")}
         </LText>
         <View style={styles.accountNameWrapper}>
           <CurrencyIcon size={16} currency={toCurrency} />
@@ -96,9 +116,10 @@ const SummaryBody = ({
           </LText>
         </View>
       </View>
+
       <View style={styles.row}>
         <LText primary style={styles.label} color="smoke">
-          <Trans i18nKey={"transfer.swap.form.summary.receive"} />
+          {t("transfer.swap.form.summary.receive")}
         </LText>
         <LText tertiary style={styles.value2}>
           <CurrencyUnitValue
@@ -109,11 +130,13 @@ const SummaryBody = ({
           />
         </LText>
       </View>
+
       <View style={[styles.rate, { backgroundColor: colors.lightFog }]}>
         <View style={[styles.row, { marginBottom: 0 }]}>
           <LText primary style={styles.label} color="smoke">
-            <Trans i18nKey="transfer.swap.form.summary.provider" />
+            {t("transfer.swap.form.summary.provider")}
           </LText>
+
           <TouchableOpacity
             style={styles.providerLinkContainer}
             onPress={openProvider}
@@ -121,19 +144,56 @@ const SummaryBody = ({
             <LText semiBold style={styles.providerLink} color="live">
               {exchangeRate.provider}
             </LText>
+
             <ExternalLink size={11} color={colors.live} />
           </TouchableOpacity>
         </View>
-        <View style={[styles.row, { marginBottom: 0 }]}>
+
+        <View style={[styles.row]}>
           <LText primary style={styles.label} color="smoke">
-            <Trans i18nKey="transfer.swap.form.summary.method" />
+            {t("transfer.swap.form.summary.method")}
           </LText>
+
           <LText semiBold style={styles.providerLink}>
-            <Trans
-              i18nKey={`transfer.swap.tradeMethod.${exchangeRate.tradeMethod}`}
-            />
+            {t(`transfer.swap.tradeMethod.${exchangeRate.tradeMethod}`)}
           </LText>
         </View>
+      </View>
+
+      <View
+        style={[
+          styles.row,
+          styles.connect,
+          { backgroundColor: colors.lightFog },
+        ]}
+      >
+        <LText>{t("transfer.swap.form.summary.connect.title")}</LText>
+
+        <Button
+          type="primary"
+          title={t("transfer.swap.form.summary.connect.cta")}
+          onPress={handleConnect}
+          containerStyle={styles.connect}
+          size={12}
+        />
+      </View>
+
+      <View
+        style={[
+          styles.row,
+          styles.connect,
+          { backgroundColor: colors.lightFog },
+        ]}
+      >
+        <LText>kyc</LText>
+
+        <Button
+          type="primary"
+          title={"kyc"}
+          onPress={handleKYC}
+          containerStyle={styles.connect}
+          size={12}
+        />
       </View>
     </>
   );
@@ -198,6 +258,15 @@ const styles = StyleSheet.create({
     lineHeight: 22,
     textAlign: "center",
     marginRight: 6,
+  },
+  connect: {
+    padding: 16,
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  connectCTA: {
+    height: 32,
+    width: 70,
   },
 });
 
