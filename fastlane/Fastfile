@@ -168,13 +168,23 @@ platform :ios do
   end
 
   desc "upload to Testflight (only to be run after an app-store build)"
-  private_lane :upload do
-    pilot(
-      skip_submission: true,
-      app_identifier: "com.ledger.live",
-      skip_waiting_for_build_processing: true,
-      ipa: IPA_DIRECTORY
-    )
+  private_lane :upload do |options|
+    if (options[:nightly])
+      pilot(
+        skip_submission: true,
+        app_identifier: "com.ledger.live",
+        skip_waiting_for_build_processing: true,
+        ipa: IPA_DIRECTORY,
+        groups: ["Nightly"]
+      )
+    else
+      pilot(
+        skip_submission: true,
+        app_identifier: "com.ledger.live",
+        skip_waiting_for_build_processing: true,
+        ipa: IPA_DIRECTORY
+      )
+    end
   end
 
   # ============================= END PRIVATE =============================
@@ -197,6 +207,12 @@ platform :ios do
     build(adhoc: true)
   end
 
+  desc "build nightly version"
+  lane :local_nightly do
+    build
+    upload(nightly: true)
+  end
+
   # =========================== END LOCAL BUILD ===========================
   # ============================== CI BUILD ===============================
 
@@ -206,6 +222,14 @@ platform :ios do
     setup_ios_ci
     build(ci: true)
     upload
+  end
+
+  desc "ci: create testflight version"
+  lane :ci_nightly do |options|
+    prepare_ios_beta
+    setup_ios_ci
+    build(ci: true)
+    upload(nightly: true)
   end
 
   desc "ci: create adhoc version"
