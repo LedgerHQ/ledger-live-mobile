@@ -94,6 +94,10 @@
       "title": "Es necesario un nombre de cuenta",
       "description": "Ingresa un nombre de cuenta."
     },
+    "AccountNeedResync": {
+      "title": "Please try again",
+      "description": "Account is outdated. A synchronisation is needed"
+    },
     "AlgorandASANotOptInInRecipient": {
       "title": "La cuenta de recepción no ha adherido al ASA seleccionado."
     },
@@ -114,11 +118,27 @@
     },
     "ConnectAppTimeout": {
       "title": "No se ha encontrado ningún dispositivo",
-      "description": "Asegúrate de que tu {{productName}} esté desbloqueado y el Bluetooth habilitado."
+      "description": {
+        "ios": {
+          "nanoX": "Please make sure your {{productName}} is unlocked and has Bluetooth enabled."
+        },
+        "android": {
+          "nanoS": "Please make sure your {{productName}} is unlocked and connected by cable.",
+          "nanoX": "Please make sure your {{productName}} is unlocked and is connected by cable or has Bluetooth enabled."
+        }
+      }
     },
     "ConnectManagerTimeout": {
       "title": "La conexión con Manager ha fallado",
-      "description": "Asegúrate de que tu {{productName}} esté desbloqueado y el Bluetooth habilitado."
+      "description": {
+        "ios": {
+          "nanoX": "Please make sure your {{productName}} is unlocked and has Bluetooth enabled."
+        },
+        "android": {
+          "nanoS": "Please make sure your {{productName}} is unlocked and connected by cable.",
+          "nanoX": "Please make sure your {{productName}} is unlocked and is connected by cable or has Bluetooth enabled."
+        }
+      }
     },
     "ClaimRewardsFeesWarning": {
       "title": "Las recompensas son inferiores a las tarifas estimadas para reclamarlas.",
@@ -574,6 +594,9 @@
     "PolkadotValidatorsRequired": {
       "title": "Debes seleccionar al menos un validador"
     },
+    "TaprootNotActivated": {
+      "title": "Taproot mainnet is not activated yet"
+    },
     "generic": {
       "title": "{{message}}",
       "description": "Algo ha salido mal. Inténtalo de nuevo. Si el problema persiste, guarda los registros con el botón que aparece a continuación y envíalos al Soporte de Ledger."
@@ -600,8 +623,8 @@
       "standard": "Estándar",
       "low": "Baja",
       "slow": "slow",
-      "medium": "medium",
-      "fast": "fast",
+      "medium": "media",
+      "fast": "rápida",
       "custom": "Personalizado",
       "blockCount": "{{blockCount}} bloques"
     }
@@ -674,13 +697,9 @@
         "title": "Participación con COSMOS",
         "description": "Delega tus recompensas ganadas con ATOM hoy."
       },
-      "polkastake": {
-        "title": "PARTICIPACIÓN CON POLKADOT",
-        "description": "Protege, gestiona y participa con tus DOT con \nLedger Live"
-      },
-      "backupPack": {
-        "title": "Back-up pack",
-        "description": "Protección óptima con un Nano X y un Nano S"
+      "familyPack": {
+        "title": "Family pack",
+        "description": "Get your family into crypto with 3 Nano S"
       },
       "buyCrypto": {
         "title": "Comprar cripto",
@@ -1220,6 +1239,13 @@
         "title": "No utilices una frase de recuperación que no hayas generado tú mismo.",
         "desc": "Tú y solo tú debes inicializar el código PIN y la Frase de recuperación de la billetera de hardware Ledger. Si has recibido un dispositivo con una palabra semilla existente o un código PIN ya inicializado, no utilices el producto y ponte en contacto con el Soporte.",
         "supportLink": "Ponte en contacto con Soporte"
+      },
+      "seed": {
+        "title": "Por favor, verifica los contenidos de la caja",
+        "desc": "Si tu {{deviceName}} ya tiene un código PIN o una frase de recuperación, no es seguro usarlo y deberías ponerte en contacto con el Soporte de Ledger.",
+        "warning": "Usa solo la frase de recuperación que haya generado tu dispositivo al configurarlo por primera vez",
+        "continueCTA": "Continuar",
+        "contactSupportCTA": "Ponte en contacto con Soporte"
       }
     }
   },
@@ -1290,7 +1316,9 @@
   "operations": {
     "types": {
       "IN": "Recibido",
+      "NFT_IN": "NFT Received",
       "OUT": "Enviado",
+      "NFT_OUT": "NFT Sent",
       "CREATE": "Creado",
       "REVEAL": "Revelado",
       "DELEGATE": "Delegado",
@@ -1373,7 +1401,11 @@
       "transferAmount": "Transferir importe",
       "validatorsCount": "Validadores ({{number}})"
     },
-    "multipleAddresses": "¿Por qué hay múltiples direcciones?"
+    "multipleAddresses": "¿Por qué hay múltiples direcciones?",
+    "tokenName": "Token Name",
+    "collectionContract": "Token Contract",
+    "tokenId": "Token (NFT) ID",
+    "quantity": "Quantity"
   },
   "operationList": {
     "noOperations": "Sin operaciones",
@@ -1515,6 +1547,9 @@
     },
     "undelegation": {
       "sectionLabel": "Desdelegaciones"
+    },
+    "nft": {
+      "receiveNft": "Receive NFT"
     }
   },
   "accounts": {
@@ -1682,7 +1717,7 @@
     "help": {
       "title": "Ayuda",
       "header": "Ayuda",
-      "desc": "Learn more about Ledger Live or how to get help.",
+      "desc": "Más información sobre Ledger Live o cómo obtener ayuda.",
       "support": "Soporte de Ledger",
       "supportDesc": "Si tienes un problema, obtén ayuda mediante Ledger Live usando tu billetera de hardware.",
       "configureDevice": "Configurar un dispositivo",
@@ -1692,8 +1727,8 @@
       "clearCacheModal": "¿Deseas continuar?",
       "clearCacheModalDesc": "Se realizará un nuevo y completo análisis de las transacciones en la red. Se reconstruirán los historiales de las cuentas y se volverán a calcular los saldos.",
       "clearCacheButton": "Borrar",
-      "exportLogs": "Save logs",
-      "exportLogsDesc": "Saving Ledger Live logs may be needed for troubleshooting purposes.",
+      "exportLogs": "Guardar registros",
+      "exportLogsDesc": "Puede ser necesario guardar los registros de Ledger Live para solucionar problemas.",
       "hardReset": "Restablecer Ledger Live",
       "hardResetDesc": "Esto no tiene ningún impacto sobre tus activos. Borra todos los datos de Ledger Live, incluidos los datos de cuentas, historial de transacciones y ajustes. Utiliza tu dispositivo Ledger para volver a cargar y administrar tus activos cripto a un Ledger Live vacío.",
       "repairDevice": "Repara tu dispositivo Ledger",
@@ -1809,19 +1844,19 @@
             "cta": "Continuar",
             "title": "KYC enviado para su aprobación",
             "subtitle": "Tu KYC ha sido enviado y está en espera de aprobación.",
-            "link": "Learn more about KYC"
+            "link": "Más información sobre KYC"
           },
           "approved": {
             "cta": "Continuar",
             "title": "¡KYC aprobado!",
             "subtitle": "Tu KYC ha sido enviado y ha sido aprobado.",
-            "link": "Learn more about KYC"
+            "link": "Más información sobre KYC"
           },
           "closed": {
             "cta": "Restablecer KYC",
             "title": "Solicitud de KYC rechazada",
             "subtitle": "Wyre ha rechazado los datos que has proporcionado para fines de KYC",
-            "link": "Learn more about KYC"
+            "link": "Más información sobre KYC"
           },
           "form": {
             "firstName": "Nombre",
@@ -2723,7 +2758,7 @@
   },
   "AuthenticityRow": {
     "title": "Autenticación",
-    "subtitle": "Genuine"
+    "subtitle": "Auténtico"
   },
   "RemoveRow": {
     "title": "Quitar dispositivo"
@@ -3609,7 +3644,7 @@
     "connected": "Conectado",
     "disconnected": "Desconectado",
     "warningdisconnected": "Hay un problema de conexión entre la dApp, WalletConnect y Ledger Live. Espera unos momentos o intenta de nuevo la conexión",
-    "info": "Ya puedes acceder a la dApp {{name}} en Desktop.",
+    "info": "You can now access the {{name}} dApp on your web browser.",
     "warning": "No es seguro compartir direcciones de recepción de dApp. Utiliza siempre Ledger Live para compartir tu dirección para recibir fondos.",
     "isconnecting": "se está conectando, espera...",
     "disconnect": "Desconectar",
@@ -3698,6 +3733,27 @@
       "infoPanel": {
         "website": "sitio web"
       }
+    }
+  },
+  "nft": {
+    "account": {
+      "seeAllNfts": "See all NFT",
+      "seeFewerNfts": "See fewer NFT"
+    },
+    "gallery": {
+      "allNft": "All NFT"
+    },
+    "viewer": {
+      "properties": "Properties",
+      "description": "Description",
+      "tokenContract": "Token Address",
+      "tokenId": "Token ID",
+      "quantity": "Quantity"
+    },
+    "viewerModal": {
+      "viewOn": "View on",
+      "viewInExplorer": "View in explorer",
+      "txDetails": "Transaction details"
     }
   }
 }

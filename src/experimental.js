@@ -36,8 +36,8 @@ export const experimentalFeatures: Feature[] = [
   {
     type: "toggle",
     name: "EXPERIMENTAL_CURRENCIES_JS_BRIDGE",
-    title: "Tezos JS impl",
-    description: "Tezos JS impl",
+    title: "Experimental JS impl",
+    description: "Use experimental JS implementation for Tezos",
     valueOn: "tezos",
     valueOff: "",
   },
@@ -61,6 +61,15 @@ export const experimentalFeatures: Feature[] = [
     title: "Experimental Explorers API",
     description:
       "Try an upcoming version of Ledger's blockchain explorers. Changing this setting may affect the account balance and synchronization as well as the send feature.",
+  },
+  {
+    type: "toggle",
+    name: "LEDGER_COUNTERVALUES_API",
+    title: "Experimental countervalues API",
+    description:
+      "This may cause the countervalues displayed for your accounts to become incorrect.",
+    valueOn: "https://countervalues.live.ledger.com",
+    valueOff: "https://countervalues-experimental.live.ledger.com",
   },
   ...(__DEV__
     ? [
