@@ -20,6 +20,7 @@ export function SwapConnectFTX({
     const isKYC = new URL(uri).pathname.split("/")[1] === "kyc";
     return `
       (function() {
+        window.ledger = { postMessage: window.ReactNativeWebView.postMessage }
         ${isKYC && `localStorage.setItem("authToken", "${token}");`}
         localStorage.setItem("theme", "${dark ? "dark" : "light"}");
       })();
