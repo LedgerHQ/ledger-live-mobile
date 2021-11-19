@@ -1316,9 +1316,9 @@
   "operations": {
     "types": {
       "IN": "Получено",
-      "NFT_IN": "NFT Received",
+      "NFT_IN": "NFT получен",
       "OUT": "Отправлено",
-      "NFT_OUT": "NFT Sent",
+      "NFT_OUT": "NFT отправлен",
       "CREATE": "Создано",
       "REVEAL": "Раскрытие адреса",
       "DELEGATE": "Делегировано",
@@ -1402,10 +1402,10 @@
       "validatorsCount": "Валидаторов: ({{number}})"
     },
     "multipleAddresses": "Почему несколько адресов?",
-    "tokenName": "Token Name",
-    "collectionContract": "Token Contract",
-    "tokenId": "Token (NFT) ID",
-    "quantity": "Quantity"
+    "tokenName": "Название токена",
+    "collectionContract": "Контракт токена",
+    "tokenId": "ID токена (NFT)",
+    "quantity": "Кол-во"
   },
   "operationList": {
     "noOperations": "Нет операций",
@@ -1549,7 +1549,7 @@
       "sectionLabel": "Отозванные средства"
     },
     "nft": {
-      "receiveNft": "Receive NFT"
+      "receiveNft": "Получить NFT"
     }
   },
   "accounts": {
@@ -3094,14 +3094,14 @@
   "elrond": {
     "account": {
       "subHeader": {
-        "cardTitle": "Powered by Elrond",
-        "drawerTitle": "Elrond integration",
-        "moreInfo": "More info",
-        "title": "Elrond eGold (EGLD) token is now available on Ledger Live",
-        "description": "You can now safely secure your eGold (EGLD) tokens and manage them through Ledger Live.",
-        "description2": "The Elrond eGold (EGLD) Token is native to the Elrond Network and will be used for everything from transactions, staking, smart contracts, governance and validator rewards.",
-        "description3": "We are actively working with the Elrond team to add more functionality, such as staking, native ESDT (Elrond Standard Digital Token) support, and more.",
-        "website": "The Internet Scale Blockchain"
+        "cardTitle": "Работает на Elrond",
+        "drawerTitle": "Интеграция с Elrond",
+        "moreInfo": "Подробнее",
+        "title": "Токен Elrond eGold (EGLD) теперь доступен на Ledger Live",
+        "description": "Теперь вы можете безопасно хранить ваши токены eGold (EGLD) и управлять ими прямо в Ledger Live.",
+        "description2": "Токен Elrond eGold (EGLD) – нативный токен сети Elrond. Его можно использовать для чего угодно, включая транзакции, стейкинг, смарт-контракты, управление или получение вознаграждения от валидаторов.",
+        "description3": "Мы активно сотрудничаем с командой Elrond над расширением функциональности, чтобы сделать доступными стейкинг, поддержку нативного токена ESDT (Elrond Standard Digital Token), а также многое другое.",
+        "website": "Блокчейн масштаба интернета"
       }
     }
   },
@@ -3751,23 +3751,23 @@
   },
   "nft": {
     "account": {
-      "seeAllNfts": "See all NFT",
-      "seeFewerNfts": "See fewer NFT"
+      "seeAllNfts": "Посмотреть все NFT",
+      "seeFewerNfts": "Скрыть"
     },
     "gallery": {
-      "allNft": "All NFT"
+      "allNft": "Все NFT"
     },
     "viewer": {
-      "properties": "Properties",
-      "description": "Description",
-      "tokenContract": "Token Address",
-      "tokenId": "Token ID",
-      "quantity": "Quantity"
+      "properties": "Свойства",
+      "description": "Описание",
+      "tokenContract": "Адрес токена",
+      "tokenId": "ID токена",
+      "quantity": "Кол-во"
     },
     "viewerModal": {
-      "viewOn": "View on",
-      "viewInExplorer": "View in explorer",
-      "txDetails": "Transaction details"
+      "viewOn": "Посмотреть в",
+      "viewInExplorer": "Посмотреть в Обозревателе",
+      "txDetails": "Данные транзакции"
     }
   }
 }
