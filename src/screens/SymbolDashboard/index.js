@@ -3,7 +3,7 @@ import { StyleSheet, FlatList } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import {
   listSupportedCurrencies,
-  listTokens,
+  // listTokens,
 } from "@ledgerhq/live-common/lib/currencies";
 import Animated from "react-native-reanimated";
 import { createNativeWrapper } from "react-native-gesture-handler";
@@ -74,9 +74,14 @@ export default function SymbolDashboard({ route }: Props) {
 
   // SUPPORTED COINS
   const supportedCryptoCurrencies = useMemo(
-    () => listSupportedCurrencies().concat(listTokens()),
+    () => listSupportedCurrencies(),
     [],
   );
+
+  // const supportedCryptoCurrencies = useMemo(
+  //   () => listSupportedCurrencies().concat(listTokens()),
+  //   [],
+  // );
 
   // CHECK SUPPROT BUY AND SWAP
   const checkSupport = supportedCryptoCurrencies.filter(
@@ -135,6 +140,7 @@ export default function SymbolDashboard({ route }: Props) {
       setRange={setRange}
       currency={currency}
       prefferedCurrency={prefferedCurrency}
+      testID={"CoinChart"}
     />,
     <>
       {checkSupport.length ? (

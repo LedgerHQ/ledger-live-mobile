@@ -232,3 +232,23 @@ async function migrateAccountsIfNecessary(): Promise<void> {
     log("db", "done migrateAccountsIfNecessary");
   }
 }
+
+export async function getRangeForChart(): Promise<{ id: string }> {
+  const user = await store.get("rangeForChart");
+  return user;
+}
+
+export async function setRangeForChart(range: string): Promise<void> {
+  await store.update("rangeForChart", range);
+}
+
+export async function getFavoriteCurrencies(): Promise<Array<string>> {
+  const user = await store.get("favoriteCurrencies");
+  return user;
+}
+
+export async function setFavoriteCurrencies(
+  currenciesId: Array<string>,
+): Promise<void> {
+  await store.update("favoriteCurrencies", currenciesId);
+}

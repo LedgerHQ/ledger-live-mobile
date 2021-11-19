@@ -6,7 +6,8 @@ import { getCurrencyColor } from "@ledgerhq/live-common/lib/currencies/color";
 import type { Unit } from "@ledgerhq/live-common/lib/types";
 import { useSelector } from "react-redux";
 import { ensureContrast } from "../../colors";
-import { useTimeRange } from "../../actions/settings";
+import { useTimeRangeForChart } from "../../actions/market";
+import { getTimeRangeForChartSelector } from "../../reducers/market";
 import getWindowDimensions from "../../logic/getWindowDimensions";
 import Delta from "../../components/Delta";
 import FormatDate from "../../components/FormatDate";
@@ -38,10 +39,11 @@ export default function Chart({
   currency,
 }: Props) {
   const counterValueCurrency = useSelector(counterValueCurrencySelector);
+  const range = useSelector(getTimeRangeForChartSelector);
   const portfolio = usePortfolio();
 
   const [hoveredItem, setHoverItem] = useState();
-  const [, setTimeRange, timeRangeItems] = useTimeRange();
+  const [, setTimeRange, timeRangeItems] = useTimeRangeForChart();
   const { colors } = useTheme();
 
   const mapGraphValue = useCallback(d => d.value || 0, []);
@@ -49,14 +51,12 @@ export default function Chart({
   if (loading) {
     return null;
   }
-
-  const range = portfolio.range;
   const isAvailable = portfolio.balanceAvailable;
   const accounts = portfolio.accounts;
   const balanceHistory = portfolio.balanceHistory;
 
   const setLocalTimeRange = timeRange => {
-    setTimeRange(timeRange);
+    setTimeRange(timeRange.key);
     setRange(timeRange);
   };
 
@@ -98,6 +98,7 @@ export default function Chart({
           onChange={setLocalTimeRange}
           // $FlowFixMe
           items={timeRangeItems}
+          testID={`Range - Selection`}
         />
       </View>
     </View>

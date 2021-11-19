@@ -201,18 +201,11 @@ export function useTimeRange() {
   const setter = useCallback(
     (_range: PortfolioRange | PortfolioRangeOption) => {
       const range = typeof _range === "string" ? _range : _range.key;
-      range !== "hour" ? dispatch(setSelectedTimeRange(range)) : null;
+      dispatch(setSelectedTimeRange(range));
     },
     [dispatch],
   );
-  const ranges: PortfolioRange[] = [
-    "hour",
-    "day",
-    "week",
-    "month",
-    "year",
-    "all",
-  ];
+  const ranges: PortfolioRange[] = ["day", "week", "month", "year", "all"];
   const options = ranges.map<PortfolioRangeOption>(key => ({
     key,
     value: t(`common:time.${key}`),

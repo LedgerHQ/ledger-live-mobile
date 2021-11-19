@@ -37,6 +37,7 @@ export type MarketState = {
   currency: Currency,
   currencyChartData: Array<number>,
   favoriteCryptocurrencies: Array<string>,
+  selectedTimeRange: string,
 };
 
 const initialState: MarketState = {
@@ -64,6 +65,7 @@ const initialState: MarketState = {
     total_supply: 1,
     total_volume: 1,
   },
+  selectedTimeRange: "day",
   currencyChartData: [],
   favoriteCryptocurrencies: [],
 };
@@ -76,6 +78,10 @@ const handlers: Object = {
   SET_CURRENCY_CHART_DATA: (state: any, { payload }: { payload: any }) => ({
     ...state,
     currencyChartData: payload,
+  }),
+  MARKET_SET_SELECTED_TIME_RANGE: (state, { payload: selectedTimeRange }) => ({
+    ...state,
+    selectedTimeRange,
   }),
   SET_FAVORITE_CRYPTOCURRENCIES: (
     state: any,
@@ -210,6 +216,11 @@ export const currencyChartDataSelector = createSelector(
 export const getFavoriteCryptocurrenciesSelector = createSelector(
   marketRootSelector,
   root => root.favoriteCryptocurrencies,
+);
+// $FlowFixMe
+export const getTimeRangeForChartSelector = createSelector(
+  marketRootSelector,
+  root => root.selectedTimeRange,
 );
 
 export default handleActions(handlers, initialState);
