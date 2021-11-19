@@ -40,7 +40,7 @@ export function SwapConnectFTX({
           case "setToken":
             // TODO: save token locally (data.token)
             break;
-          case "closeWidet":
+          case "closeWidget":
             // TODO: close WebView
             navigation.pop();
             break;
@@ -66,7 +66,7 @@ export function SwapConnectFTX({
   );
 }
 
-type Message = { type: "setToken", token: string } | { type: "closeWidet" };
+type Message = { type: "setToken", token: string } | { type: "closeWidget" };
 
 const styles = StyleSheet.create({
   root: {
