@@ -3555,7 +3555,7 @@
       "redelegate": "Confirmez sur votre appareil pour terminer l'opération.",
       "undelegate": "Confirmez sur votre appareil pour terminer l'opération."
     },
-    "warning": "Vérifiez toujours que l'adresse affichée sur votre appareil est identique à celle donnée par {{recipientWording}}.",
+    "warning": "Vérifiez toujours que l'adresse affichée sur votre appareil est identique à celle donnée par le {{recipientWording}}.",
     "recipientWording": {
       "send": "Vérifiez toujours que l'adresse affichée sur votre appareil est identique à celle donnée par le bénéficiaire.",
       "delegate": "Vérifiez toujours que l'adresse affichée sur votre appareil est identique à celle donnée par le validateur.",
