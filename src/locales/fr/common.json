@@ -3360,12 +3360,12 @@
       "rewardDestination": {
         "label": "Destination des récompenses",
         "stash": "Solde disponible",
-        "stashDescription": "Vos récompenses ont été ajoutées à votre solde disponible.",
+        "stashDescription": "Vos récompenses sont ajoutées à votre solde disponible.",
         "staked": "Solde lié",
-        "stakedDescription": "Les récompenses sont créditées sur votre solde lié.",
+        "stakedDescription": "Les récompenses sont créditées à votre solde lié.",
         "optionTitle": "Note",
-        "optionDescription": "Une fois définie, l'option est fixée pour la durée de vie de cette liaison. Si vous changez d'avis, consultez",
-        "clickableLink": "ici."
+        "optionDescription": "Une fois définie, l'option est fixée pour la durée de vie de cette liaison. Si vous changez d'avis, consultez ",
+        "clickableLink": "ceci."
       },
       "stepperHeader": {
         "starter": "Gagner des récompenses",
