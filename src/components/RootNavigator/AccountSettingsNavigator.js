@@ -60,14 +60,14 @@ export default function AccountSettingsNavigator() {
         component={CurrencySettings}
       />
       <Stack.Screen
-       name={ScreenName.Accounts}
-       component={Accounts}
-       options={{
-         title: t("accounts.title"),
-         headerLeft: () => <AccountOrder />,
-         headerRight: () => <AddAccount />,
-       }}
-     />
+        name={ScreenName.Accounts}
+        component={Accounts}
+        options={{
+          title: t("accounts.title"),
+          headerLeft: () => <AccountOrder />,
+          headerRight: () => <AddAccount />,
+        }}
+      />
     </Stack.Navigator>
   );
 }
