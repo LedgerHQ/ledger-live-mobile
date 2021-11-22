@@ -2,6 +2,7 @@
 import React from "react";
 import { Text } from "@ledgerhq/native-ui";
 import getFontStyle from "./getFontStyle";
+import { FontWeightTypes } from "@ledgerhq/native-ui/components/Text/getTextStyle";
 
 export { getFontStyle };
 
@@ -12,6 +13,7 @@ export type Opts = {
   monospace?: boolean;
   color?: string;
   bg?: string;
+  children?: React.ReactNode;
 };
 
 export type Res = {
@@ -30,9 +32,24 @@ export type Res = {
     | "900";
 };
 
-export default function LText({ color, children, ...props }: any) {
+const inferFontWeight = ({ semiBold, bold }: Opts): FontWeightTypes => {
+  if (bold) {
+    return 'bold'
+  } else if (semiBold) {
+    return 'semibold'
+  }
+  return 'medium'
+};
+
+/**
+ * This component is just a proxy to the Text component defined in @ledgerhq/react-ui.
+ * It should only be used to map legacy props/logic from LLM to the new text component.
+ *
+ * @deprecated Please, prefer using the Text component from our design-system if possible.
+ */
+export default function LText({ color, children, semiBold, bold, ...props }: Opts) {
   return (
-    <Text {...props} color={color}>
+    <Text {...props} fontWeight={inferFontWeight({semiBold, bold})} color={color}>
       {children}
     </Text>
   );
