@@ -25,9 +25,9 @@ export function SwapConnectFTX({
         ${isKYC && `localStorage.setItem("authToken", "${token}");`}
         localStorage.setItem("theme", "${dark ? "dark" : "light"}");
         
-        window.ledger.setToken = token => {
+        window.ledger.saveToken = token => {
           const message = JSON.stringify({
-            type: "setToken",
+            type: "saveToken",
             token,
           });
           window.ledger.postMessage(message);
@@ -53,8 +53,8 @@ export function SwapConnectFTX({
       try {
         const data: Message = JSON.parse(dataStr);
         switch (data.type) {
-          case "setToken":
-            saveToken(data.authToken);
+          case "saveToken":
+            saveToken(data.token);
             break;
           case "closeWidget":
             navigation.pop();
@@ -106,7 +106,7 @@ function useFTXToken() {
   };
 }
 
-type Message = { type: "setToken", token: string } | { type: "closeWidget" };
+type Message = { type: "saveToken", token: string } | { type: "closeWidget" };
 
 const styles = StyleSheet.create({
   root: {
