@@ -84,7 +84,7 @@
   },
   "errors": {
     "countervaluesUnavailable": {
-      "title": "We're not able to provide a countervalue for this asset at the moment"
+      "title": "نحن غير قادرين على توفير قيمة مقابلة لهذا الأصل في الوقت الحالي"
     },
     "AccountAwaitingSendPendingOperations": {
       "title": "هناك عملية معلقة لهذا الحساب",
@@ -95,8 +95,8 @@
       "description": "يرجى إدخال اسم الحساب."
     },
     "AccountNeedResync": {
-      "title": "Please try again",
-      "description": "Account is outdated. A synchronisation is needed"
+      "title": "يرجى إعادة المحاولة مرة أخرى",
+      "description": "الحساب قديم. هناك حاجة إلى التزامن"
     },
     "AlgorandASANotOptInInRecipient": {
       "title": "حساب المستلم لم ينضم إلى ASA الذي تم اختياره."
@@ -120,11 +120,11 @@
       "title": "عفوًا، لم يتم العثور على أي جهاز",
       "description": {
         "ios": {
-          "nanoX": "Please make sure your {{productName}} is unlocked and has Bluetooth enabled."
+          "nanoX": "الرجاء التأكد من أن {{productName}} الخاص بك غير مقفل و أنه تم تمكين البلوتوث."
         },
         "android": {
-          "nanoS": "Please make sure your {{productName}} is unlocked and connected by cable.",
-          "nanoX": "Please make sure your {{productName}} is unlocked and is connected by cable or has Bluetooth enabled."
+          "nanoS": "الرجاء التأكد من أن {{productName}} الخاص بك غير مقفل ومتصل بواسطة الكابل.",
+          "nanoX": "الرجاء التأكد من أن {{productName}} الخاص بك غير مقفل ومتصل بواسطة الكابل أو أنه تم تمكين البلوتوث."
         }
       }
     },
@@ -132,11 +132,11 @@
       "title": "عذرًا، فشل الاتصال بالمدير",
       "description": {
         "ios": {
-          "nanoX": "Please make sure your {{productName}} is unlocked and has Bluetooth enabled."
+          "nanoX": "الرجاء التأكد من أن {{productName}} الخاص بك غير مقفل و أنه تم تمكين البلوتوث."
         },
         "android": {
-          "nanoS": "Please make sure your {{productName}} is unlocked and connected by cable.",
-          "nanoX": "Please make sure your {{productName}} is unlocked and is connected by cable or has Bluetooth enabled."
+          "nanoS": "الرجاء التأكد من أن {{productName}} الخاص بك غير مقفل ومتصل بواسطة الكابل.",
+          "nanoX": "الرجاء التأكد من أن {{productName}} الخاص بك غير مقفل ومتصل بواسطة الكابل أو أنه تم تمكين البلوتوث."
         }
       }
     },
@@ -3765,9 +3765,9 @@
       "quantity": "Quantity"
     },
     "viewerModal": {
-      "viewOn": "View on",
-      "viewInExplorer": "View in explorer",
-      "txDetails": "Transaction details"
+      "viewOn": "مشاهدة على",
+      "viewInExplorer": "مشاهدة في المتصفح",
+      "txDetails": "تفاصيل المعاملة"
     }
   }
 }
