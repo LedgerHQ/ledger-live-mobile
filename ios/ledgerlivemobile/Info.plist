@@ -94,6 +94,8 @@
 		<string>FontAwesome5_Pro_Light.ttf</string>
 		<string>FontAwesome5_Pro_Regular.ttf</string>
 		<string>FontAwesome5_Pro_Solid.ttf</string>
+		<string>HMAlphaMono-Medium.otf</string>
+		<string>Inter-Medium.otf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
