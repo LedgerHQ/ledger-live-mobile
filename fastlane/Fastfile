@@ -209,6 +209,7 @@ platform :ios do
 
   desc "build nightly version"
   lane :local_nightly do
+    prepare_ios_beta
     build
     upload(nightly: true)
   end
