@@ -182,12 +182,9 @@ platform :ios do
         beta_app_review_info: {
           contact_email: "team-live@ledger.fr",
           contact_first_name: "Ledger Live",
-          notes: "test nightly testing"
-        }
-      )
-
-      deliver(
-        force: true
+          notes: "test nightly builds"
+        },
+        notify_external_testers: true
       )
     else
       pilot(
