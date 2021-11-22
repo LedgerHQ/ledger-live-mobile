@@ -178,7 +178,16 @@ platform :ios do
         ipa: IPA_DIRECTORY,
         groups: ["External Nightly"],
         distribute_external: true,
-        changelog: "Nightly Build v#{package['version']} (#{build_number})"
+        changelog: "Nightly Build v#{package['version']} (#{build_number})",
+        beta_app_review_info: {
+          contact_email: "team-live@ledger.fr",
+          contact_first_name: "Ledger Live",
+          notes: "test nightly testing"
+        }
+      )
+
+      deliver(
+        force: true
       )
     else
       pilot(
