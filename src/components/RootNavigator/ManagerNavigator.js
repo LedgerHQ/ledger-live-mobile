@@ -5,6 +5,7 @@ import { useTheme } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
+import { NanoFoldedMedium } from "@ledgerhq/native-ui/assets/icons";
 import { ScreenName } from "../../const";
 import { hasAvailableUpdateSelector } from "../../reducers/settings";
 import Manager from "../../screens/Manager";
@@ -12,7 +13,6 @@ import ManagerMain from "../../screens/Manager/Manager";
 import { getStackNavigatorConfig } from "../../navigation/navigatorConfig";
 import styles from "../../navigation/styles";
 import ReadOnlyTab from "../ReadOnlyTab";
-import ManagerIcon from "../../icons/Manager";
 import NanoXIcon from "../../icons/TabNanoX";
 import { useIsNavLocked } from "./CustomBlockRouterNavigator";
 
@@ -26,7 +26,7 @@ const ManagerIconWithUpate = ({
   const { colors } = useTheme();
   return (
     <View style={stylesLocal.iconWrapper}>
-      <ManagerIcon size={size} color={color} />
+      <NanoFoldedMedium size={size} color={color} />
       <View style={[stylesLocal.blueDot, { backgroundColor: colors.live }]} />
     </View>
   );
@@ -77,7 +77,7 @@ export function ManagerTabIcon(props: any) {
     <ReadOnlyTab
       OnIcon={NanoXIcon}
       oni18nKey="tabs.nanoX"
-      OffIcon={hasAvailableUpdate ? ManagerIconWithUpate : ManagerIcon}
+      OffIcon={hasAvailableUpdate ? ManagerIconWithUpate : NanoFoldedMedium}
       offi18nKey="tabs.manager"
       {...props}
     />
