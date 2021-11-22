@@ -175,7 +175,8 @@ platform :ios do
         app_identifier: "com.ledger.live",
         skip_waiting_for_build_processing: true,
         ipa: IPA_DIRECTORY,
-        groups: ["Nightly"]
+        groups: ["External Nightly"],
+        distribute_external: true
       )
     else
       pilot(
