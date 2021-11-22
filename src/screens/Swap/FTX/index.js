@@ -20,9 +20,24 @@ export function SwapConnectFTX({
     const isKYC = new URL(uri).pathname.split("/")[1] === "kyc";
     return `
       (function() {
-        window.ledger = { postMessage: window.ReactNativeWebView.postMessage }
+        window.ledger = { postMessage: window.ReactNativeWebView.postMessage };
         ${isKYC && `localStorage.setItem("authToken", "${token}");`}
         localStorage.setItem("theme", "${dark ? "dark" : "light"}");
+        
+        window.ledger.setToken = token => {
+          const message = JSON.stringify({
+            type: "setToken",
+            token,
+          });
+          window.ledger.postMessage(message);
+        }
+        
+        window.ledger.closeWidget = () => {
+          const message = JSON.stringify({
+            type: "closeWidget",
+          });
+          window.ledger.postMessage(message);
+        }
       })();
     `;
   }, [uri, token, dark]);
@@ -41,7 +56,6 @@ export function SwapConnectFTX({
             // TODO: save token locally (data.token)
             break;
           case "closeWidget":
-            // TODO: close WebView
             navigation.pop();
             break;
           default:
@@ -60,6 +74,8 @@ export function SwapConnectFTX({
       style={styles.root}
       source={{ uri: route.params.uri }}
       injectedJavaScriptBeforeContentLoaded={preload}
+      // TODO: Remove mock
+      // injectedJavaScript={`(function() {window.ledger.setToken("access-token"); window.ledger.closeWidget();})()`}
       onError={handleError}
       onMessage={handleMessage}
     />
