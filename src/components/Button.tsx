@@ -1,15 +1,17 @@
 import React, { useCallback, memo, useContext, useMemo } from "react";
+import { ViewStyle } from "react-native";
 import { useIsFocused } from "@react-navigation/native";
 import { Button } from "@ledgerhq/native-ui";
+import { ButtonProps } from "@ledgerhq/native-ui/components/cta/Button";
 import ButtonUseTouchable from "../context/ButtonUseTouchable";
 import { track } from "../analytics";
 
-const inferType = (type: string) => {
+const inferType = (type?: string): ButtonProps["type"] => {
   switch (type) {
     case "primary":
     case "lightPrimary":
       return "shade";
-    case "alert": 
+    case "alert":
       return "error";
     case "negativePrimary":
     case "secondary":
@@ -19,26 +21,29 @@ const inferType = (type: string) => {
     case "tertiary":
       return "main";
     default:
-      return type;
+      return undefined;
   }
 };
 
-export type BaseButtonProps = {
+export interface BaseButtonProps extends Omit<ButtonProps, "type"> {
+  title?: React.ReactNode | string;
   // when on press returns a promise,
   // the button will toggle in a pending state and
   // will wait the promise to complete before enabling the button again
   // it also displays a spinner if it takes more than WAIT_TIME_BEFORE_SPINNER
   onPress?: () => any;
-  // text of the button
-  title?: React.ReactNode | string;
-  Icon?: React.ComponentType<{ size: number; color: string }>;
+  pending?: boolean;
   disabled?: boolean;
+  IconLeft?: React.ComponentType<{ size: number; color: string }>;
+  IconRight?: React.ComponentType<{ size: number; color: string }>;
+  containerStyle?: ViewStyle;
+  type?: string;
   // for analytics
   event?: string;
   eventProperties?: Object;
+  // for testing
   testID?: string;
-  type?: string
-};
+}
 
 type Props = BaseButtonProps & {
   useTouchable: boolean;
@@ -58,17 +63,22 @@ export function BaseButton({
   title,
   onPress,
   Icon,
+  IconLeft,
+  IconRight,
+  iconPosition,
   disabled,
   useTouchable,
   event,
   eventProperties,
   type,
+  outline = true,
+  containerStyle,
   ...otherProps
 }: Props) {
   const onPressHandler = useCallback(async () => {
     if (!onPress) return;
     if (event) {
-      track(event, eventProperties);
+      track(event, eventProperties || null);
     }
     onPress();
   }, [event, eventProperties, onPress]);
@@ -78,7 +88,6 @@ export function BaseButton({
   const containerSpecificProps = useTouchable ? {} : { enabled: !isDisabled };
 
   function getTestID() {
-    // $FlowFixMe
     if (isDisabled || !otherProps.isFocused) return undefined;
     if (otherProps.testID) return otherProps.testID;
 
@@ -97,14 +106,21 @@ export function BaseButton({
     type,
   ]);
 
+  const ButtonIcon = Icon ?? IconRight ?? IconLeft;
+  const buttonIconPosition =
+    iconPosition ?? (IconRight && "right") ?? (IconLeft && "left");
+
   return (
     <Button
       type={inferType(type)}
       onPress={isDisabled ? undefined : onPressHandler}
-      Icon={Icon}
+      Icon={ButtonIcon}
+      iconPosition={buttonIconPosition}
+      outline={outline}
       {...containerSpecificProps}
       {...otherProps}
       testID={testID}
+      style={containerStyle}
     >
       {title || null}
     </Button>
