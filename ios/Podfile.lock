@@ -28,7 +28,7 @@ PODS:
     - ExpoModulesCore
   - Expo (43.0.1):
     - ExpoModulesCore
-  - ExpoModulesCore (0.4.6):
+  - ExpoModulesCore (0.4.7):
     - React-Core
   - FBLazyVector (0.65.1)
   - FBReactNativeSpec (0.65.1):
@@ -256,9 +256,9 @@ PODS:
     - React
   - react-native-locale (0.0.19):
     - React
-  - react-native-netinfo (6.0.2):
+  - react-native-netinfo (6.0.4):
     - React-Core
-  - react-native-pager-view (5.4.7):
+  - react-native-pager-view (5.4.8):
     - React-Core
   - react-native-randombytes (3.6.1):
     - React-Core
@@ -275,7 +275,7 @@ PODS:
     - React-Core
   - react-native-version-number (0.3.6):
     - React
-  - react-native-webview (11.14.0):
+  - react-native-webview (11.14.2):
     - React-Core
   - React-perflogger (0.65.1)
   - React-RCTActionSheet (0.65.1):
@@ -361,7 +361,7 @@ PODS:
     - React
   - RNOS (1.2.6):
     - React
-  - RNReanimated (2.2.2):
+  - RNReanimated (2.2.3):
     - DoubleConversion
     - FBLazyVector
     - FBReactNativeSpec
@@ -393,18 +393,18 @@ PODS:
   - RNScreens (3.9.0):
     - React-Core
     - React-RCTImage
-  - RNSentry (3.1.1):
+  - RNSentry (3.2.2):
     - React-Core
-    - Sentry (= 7.3.0)
+    - Sentry (= 7.4.8)
   - RNShare (6.5.0):
     - React-Core
   - RNSVG (12.1.1):
     - React
   - RNVectorIcons (8.1.0):
     - React-Core
-  - Sentry (7.3.0):
-    - Sentry/Core (= 7.3.0)
-  - Sentry/Core (7.3.0)
+  - Sentry (7.4.8):
+    - Sentry/Core (= 7.4.8)
+  - Sentry/Core (7.4.8)
   - TcpSockets (4.0.0):
     - React
   - Yoga (1.14.0)
@@ -674,7 +674,7 @@ SPEC CHECKSUMS:
   EXImageLoader: 939451be6f7b731aaa6588920b90743f20121a4d
   EXKeepAwake: 8aa32396a5972d26e75e538603aad0f032396503
   Expo: cb542da0f7c8565a58231488066262f079eb1831
-  ExpoModulesCore: eea3472f70e921feb4dd24387662cbe0b67c9f8d
+  ExpoModulesCore: c353a3bed60c3b83dbe63f134aaa7bf4733ffa16
   FBLazyVector: 33c82491102f20ecddb6c6a2c273696ace3191e0
   FBReactNativeSpec: df8f81d2a7541ee6755a047b398a5cb5a72acd0e
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
@@ -700,15 +700,15 @@ SPEC CHECKSUMS:
   react-native-config: 72d948053a442779b3178fddd571e37f118ef606
   react-native-fingerprint-scanner: ac6656f18c8e45a7459302b84da41a44ad96dbbe
   react-native-locale: bd8edf0e51706d469af3e2fa568a8102213a3139
-  react-native-netinfo: 92e6e4476eb8bf6fc2d7c0a6ca0a1406f663d73a
-  react-native-pager-view: 741e7606ee2f6e399fc7da777f5519454a4b38c5
+  react-native-netinfo: 1c7676413ab265759c7b3da205efab163f5366ef
+  react-native-pager-view: c44c385eb20f0733c53685456fb9eb8d8469a1bb
   react-native-randombytes: 421f1c7d48c0af8dbcd471b0324393ebf8fe7846
   react-native-safe-area-context: 584dc04881deb49474363f3be89e4ca0e854c057
   react-native-splash-screen: 200d11d188e2e78cea3ad319964f6142b6384865
   react-native-text-input-mask: 36a546b378fadd2efe1b7484a859d34bc2c80395
   react-native-udp: f0fbf5386c45af5523dc143a86afe2cbf29f764e
   react-native-version-number: b415bbec6a13f2df62bf978e85bc0d699462f37f
-  react-native-webview: d70bc760daaa0e2667dec569b93014882565819c
+  react-native-webview: cc4ac8f021a832dce2979e1f48c5595341dd2fb5
   React-perflogger: fd28ee1f2b5b150b00043f0301d96bd417fdc339
   React-RCTActionSheet: 7f3fa0855c346aa5d7c60f9ced16e067db6d29fa
   React-RCTAnimation: 2119a18ee26159004b001bc56404ca5dbaae6077
@@ -730,13 +730,13 @@ SPEC CHECKSUMS:
   RNKeychain: f75b8c8b2f17d3b2aa1f25b4a0ac5b83d947ff8f
   RNLibLedgerCore: 6d8a54abc2dc2ffa38c33fbb70d5247b97a0091e
   RNOS: 6f2f9a70895bbbfbdad7196abd952e7b01d45027
-  RNReanimated: ad24db8af24e3fe1b5c462785bc3db8d5baae2ee
+  RNReanimated: aaf2cf65595b293daae808015761a6014a97b284
   RNScreens: 4d79118be80f79fa1f4aa131909a1d6e86280af3
-  RNSentry: 49abc89b0190b4c8afe0fa5d065f98e36cb53233
+  RNSentry: e3595b47bc00c627d835094bd9a823b384103bcf
   RNShare: 047d42214f875d731bde73a2b67418638af85ad9
   RNSVG: 551acb6562324b1d52a4e0758f7ca0ec234e278f
   RNVectorIcons: 31cebfcf94e8cf8686eb5303ae0357da64d7a5a4
-  Sentry: 9a4e621430e2dae4477d791f2f7e905720b6efbf
+  Sentry: df92b78ba4ab86cf2a47ff4cdc07758a5ce18f03
   TcpSockets: 4ef55305239923b343ed0a378b1fac188b1373b0
   Yoga: aa0cb45287ebe1004c02a13f279c55a95f1572f4
   ZXingObjC: fdbb269f25dd2032da343e06f10224d62f537bdb
