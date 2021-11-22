@@ -170,13 +170,15 @@ platform :ios do
   desc "upload to Testflight (only to be run after an app-store build)"
   private_lane :upload do |options|
     if (options[:nightly])
+      build_number = get_build_number(xcodeproj: "ios/ledgerlivemobile.xcodeproj")
       pilot(
         skip_submission: true,
         app_identifier: "com.ledger.live",
         skip_waiting_for_build_processing: true,
         ipa: IPA_DIRECTORY,
         groups: ["External Nightly"],
-        distribute_external: true
+        distribute_external: true,
+        changelog: "Nightly Build v#{package['version']} (#{build_number})"
       )
     else
       pilot(
