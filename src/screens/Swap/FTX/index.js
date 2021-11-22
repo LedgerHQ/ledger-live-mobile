@@ -1,8 +1,9 @@
-import React, { useCallback, useMemo } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { NavigationProp, useTheme } from "@react-navigation/native";
 import { StyleSheet } from "react-native";
 import Config from "react-native-config";
 import { WebView } from "react-native-webview";
+import { getFTXToken, saveFTXToken } from "../../../db";
 
 export function SwapConnectFTX({
   route,
@@ -13,11 +14,11 @@ export function SwapConnectFTX({
 }) {
   const { dark } = useTheme();
   const { uri } = route.params;
+  const { token, saveToken } = useFTXToken();
 
-  // TODO: Fetch token from local store
-  const token = useMemo(() => Config.FTX_TOKEN, []);
   const preload = useMemo(() => {
     const isKYC = new URL(uri).pathname.split("/")[1] === "kyc";
+
     return `
       (function() {
         window.ledger = { postMessage: window.ReactNativeWebView.postMessage };
@@ -53,7 +54,7 @@ export function SwapConnectFTX({
         const data: Message = JSON.parse(dataStr);
         switch (data.type) {
           case "setToken":
-            // TODO: save token locally (data.token)
+            saveToken(data.authToken);
             break;
           case "closeWidget":
             navigation.pop();
@@ -66,7 +67,7 @@ export function SwapConnectFTX({
         console.error(e);
       }
     },
-    [navigation],
+    [navigation, saveToken],
   );
 
   return (
@@ -80,6 +81,29 @@ export function SwapConnectFTX({
       onMessage={handleMessage}
     />
   );
+}
+
+function useFTXToken() {
+  const [token, setToken] = useState();
+
+  const saveToken = useCallback((token: string) => {
+    saveFTXToken(token);
+  }, []);
+
+  useEffect(() => {
+    async function setup() {
+      const token = await getFTXToken();
+      // TODO: Remove mock ENV
+      setToken(token ?? Config.FTX_TOKEN);
+    }
+
+    setup();
+  }, []);
+
+  return {
+    token,
+    saveToken,
+  };
 }
 
 type Message = { type: "setToken", token: string } | { type: "closeWidget" };
