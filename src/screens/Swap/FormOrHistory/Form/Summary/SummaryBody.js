@@ -24,7 +24,7 @@ import { urls } from "../../../../../config/urls";
 import Button from "../../../../../components/Button";
 import { ScreenName } from "../../../../../const";
 
-const SummaryBody = ({
+export default function SummaryBod({
   status,
   exchange,
   exchangeRate,
@@ -32,7 +32,7 @@ const SummaryBody = ({
   status: TransactionStatus,
   exchange: Exchange,
   exchangeRate: ExchangeRate,
-}) => {
+}) {
   const { colors } = useTheme();
   const { fromAccount, toAccount } = exchange;
   const fromCurrency = getAccountCurrency(fromAccount);
@@ -46,19 +46,16 @@ const SummaryBody = ({
   }, [exchangeRate.provider]);
 
   const navigation = useNavigation();
-  const handleConnect = useCallback(() => {
-    navigation.navigate({
-      name: ScreenName.SwapConnectFTX,
-      params: { uri: "https://ftx.com/login" },
-    });
-  }, [navigation]);
 
-  const handleKYC = useCallback(() => {
-    navigation.navigate({
-      name: ScreenName.SwapConnectFTX,
-      params: { uri: "https://ftx.com/kyc" },
-    });
-  }, [navigation]);
+  const openWidget = useCallback(
+    (type: WidgetType) => {
+      navigation.navigate({
+        name: ScreenName.SwapConnectFTX,
+        params: { uri: getFTXURL(type) },
+      });
+    },
+    [navigation],
+  );
 
   return (
     <>
@@ -172,7 +169,7 @@ const SummaryBody = ({
         <Button
           type="primary"
           title={t("transfer.swap.form.summary.connect.cta")}
-          onPress={handleConnect}
+          onPress={() => openWidget("login")}
           containerStyle={styles.connect}
           size={12}
         />
@@ -190,14 +187,22 @@ const SummaryBody = ({
         <Button
           type="primary"
           title={"kyc"}
-          onPress={handleKYC}
+          onPress={() => openWidget("kyc")}
           containerStyle={styles.connect}
           size={12}
         />
       </View>
     </>
   );
-};
+}
+
+type WidgetType = "login" | "kyc";
+
+function getFTXURL(type: WidgetType) {
+  // TODO: fetch domain (.com vs .us) through API
+  const domain = "ftx.com";
+  return `https://${domain}/${type}?hideFrame=true&ledgerLive=true`;
+}
 
 const styles = StyleSheet.create({
   row: {
@@ -269,5 +274,3 @@ const styles = StyleSheet.create({
     width: 70,
   },
 });
-
-export default SummaryBody;
