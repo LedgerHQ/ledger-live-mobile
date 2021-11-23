@@ -113,6 +113,7 @@ const styles = StyleSheet.create({
   },
   flexRow: {
     flexDirection: "row",
+    alignItems: "center",
   },
   name: {
     flexShrink: 1,
@@ -122,7 +123,6 @@ const styles = StyleSheet.create({
   ticker: {
     fontSize: 12,
     color: "#14253360",
-    textAlignVertical: "bottom",
   },
   currencyLabel: {
     flexGrow: 0,

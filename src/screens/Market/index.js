@@ -9,7 +9,8 @@ import BottomSelectSheetFilter from "./BottomSelectSheetFilter";
 import BottomSelectSheetTF from "./BottomSelectSheetTF";
 import FilterIcon from "../../images/filter.png";
 import SearchBox from "./SearchBox";
-import { selectedCurrencySelector } from "../../reducers/market";
+import DownArrow from "../../icons/DownArrow";
+
 
 type Props = {
   navigation: Object,
@@ -142,14 +143,14 @@ export default function Market({ navigation }: Props) {
         <View style={styles.tfSelector}>
           <Text style={styles.tf}>Timeframe</Text>
           <TouchableOpacity
-            style={{ flexDirection: "row" }}
+            style={{ flexDirection: "row", alignItems: "center" }}
             onPress={onClickTimeFrame}
           >
             <Text style={styles.tfItem}>
               {"  "}
               {timeframe.display}{" "}
             </Text>
-            <Text style={styles.tfIcon}>{" ˅ "}</Text>
+            <DownArrow color={"#6490f1"} width={"12"} height={"8"}/>
           </TouchableOpacity>
         </View>
         
@@ -244,10 +245,6 @@ const styles = StyleSheet.create({
   },
   tfItem: {
     fontSize: 15,
-    color: "#6490f1",
-  },
-  tfIcon: {
-    fontSize: 20,
     color: "#6490f1",
   },
   filterBtn: {
