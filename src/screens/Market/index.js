@@ -16,6 +16,7 @@ import BottomSelectSheetFilter from "./BottomSelectSheetFilter";
 import BottomSelectSheetTF from "./BottomSelectSheetTF";
 import FilterIcon from "../../images/filter.png";
 import SearchBox from "./SearchBox";
+import CryptoNotFound from "./CryptoNotFound";
 import DownArrow from "../../icons/DownArrow";
 
 type Props = {
@@ -118,7 +119,7 @@ export default function Market({ navigation }: Props) {
   };
 
   const onChangeFlag = flag => {
-    setSearchKey(flag.toLowerCase());
+    setSearchKey(flag);
   };
 
   const loadMore = () => {
@@ -134,7 +135,7 @@ export default function Market({ navigation }: Props) {
   }
 
   const filtered = (item) => {
-    if (searchKey.length > 0 && !(item.ticker + item.name).toLowerCase().includes(searchKey)) {
+    if (searchKey.length > 0 && !(item.ticker + item.name).toLowerCase().includes(searchKey.toLocaleLowerCase())) {
       return false;
     }
     if (showOption === SHOW_OPTION_LEDGER) {
@@ -147,7 +148,7 @@ export default function Market({ navigation }: Props) {
   }
 
   const renderData = ({item}) => {
-    return filtered(item) ? (
+    return true ? (
       <CurrencyRow
         currency={item}
         onPress={onPressItem}
@@ -191,12 +192,16 @@ export default function Market({ navigation }: Props) {
             <DownArrow color={"#6490f1"} width={"12"} height={"8"}/>
           </TouchableOpacity>
         </View>
-        
-        <InfiniteScroll
-          renderData={renderData}
-          data={currencies}
-          loadMore={loadMore}
-        />
+        {(currencies.some(currency => filtered(currency)) || searchKey.length === 0) ? (
+            <InfiniteScroll
+              renderData={renderData}
+              data={currencies.filter(currency => filtered(currency))}
+              loadMore={loadMore}
+            />
+          ) : (
+            <CryptoNotFound query={searchKey} />
+          )
+        }
 
         {loadingMore && <LoadingMore />}
 
