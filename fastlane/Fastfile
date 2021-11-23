@@ -194,6 +194,7 @@ platform :ios do
         app_version: package["version"],
         build_number: get_build_number(xcodeproj: "ios/ledgerlivemobile.xcodeproj"),
         notify_external_testers: true,
+        reject_build_waiting_for_review: true
       )
     else
       pilot(
