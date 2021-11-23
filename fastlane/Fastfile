@@ -174,7 +174,6 @@ platform :ios do
       build_number = get_build_number(xcodeproj: "ios/ledgerlivemobile.xcodeproj")
       pilot(
         skip_submission: false,
-        expire_previous_builds: true,
         app_identifier: "com.ledger.live",
         skip_waiting_for_build_processing: true,
         ipa: IPA_DIRECTORY,
