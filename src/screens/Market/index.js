@@ -1,7 +1,12 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useMemo, useState, useRef } from "react";
 import { ActivityIndicator, StyleSheet, Image, TouchableOpacity, Text, View } from "react-native";
 import RBSheet from "react-native-raw-bottom-sheet";
 import InfiniteScroll from "react-native-infinite-scrolling";
+import {
+  listTokens,
+  useCurrenciesByMarketcap,
+  listSupportedCurrencies,
+} from "@ledgerhq/live-common/lib/currencies";
 import KeyboardView from "../../components/KeyboardView";
 import CurrencyRow from "../../components/CurrencyInfoRow";
 import { MarketClient } from "../../api/market";
@@ -10,6 +15,7 @@ import BottomSelectSheetTF from "./BottomSelectSheetTF";
 import FilterIcon from "../../images/filter.png";
 import SearchBox from "./SearchBox";
 import DownArrow from "../../icons/DownArrow";
+import { filter } from "lodash";
 
 
 type Props = {
@@ -23,10 +29,14 @@ const CHANGE_TIMES = [
   { name: "1 year", display: "Last 1 year", key: "1y" },
 ];
 
+const SHOW_OPTION_ALL = "All";
+const SHOW_OPTION_LEDGER = "Ledger Live compatible";
+const SHOW_OPTION_STARRED = "Starred coins";
+
 const SHOW_OPTIONS = [
-  { name: "All" },
-  { name: "Ledger Live compatible" },
-  { name: "Starred coins" },
+  { name: SHOW_OPTION_ALL },
+  { name: SHOW_OPTION_LEDGER },
+  { name: SHOW_OPTION_STARRED },
 ];
 
 const SORT_OPTIONS = [
@@ -58,7 +68,7 @@ const getCurrencyData = async (limit, page, sortOption) => {
 export default function Market({ navigation }: Props) {
   const [currencies, setCurrencies] = useState([]);
   const [range, setRange] = useState("24h");
-  const [showOption, setShowOption] = useState("All");
+  const [showOption, setShowOption] = useState(SHOW_OPTION_ALL);
   const [sortOption, setSortOption] = useState("Rank");
   const [timeframe, setTimeframe] = useState(CHANGE_TIMES[0]);
   const [activePage, setActivePage] = useState(1);
@@ -68,6 +78,11 @@ export default function Market({ navigation }: Props) {
   useEffect(() => {
     loadMore();
   }, [sortOption, showOption]);
+
+  const ledgerCurrencies = useMemo(
+    () => listSupportedCurrencies().map(coin => coin.ticker),
+    [],
+  );
 
   const onPressItem = currencyOrToken => {
     navigation.navigate("SymbolDashboard", {
@@ -90,6 +105,7 @@ export default function Market({ navigation }: Props) {
   };
 
   const onApplyFilter = _filterOptions => {
+    setActivePage(1);
     setCurrencies([]);
     setShowOption(_filterOptions[0].active);
     setSortOption(_filterOptions[1].active);
@@ -108,14 +124,24 @@ export default function Market({ navigation }: Props) {
     })();
   }
 
+  const filtered = (item) => {
+    if (showOption === SHOW_OPTION_LEDGER) {
+      return ledgerCurrencies.includes(item.ticker);
+    }
+    if (showOption === SHOW_OPTION_STARRED) {
+      return true;
+    }
+    return true;
+  }
+
   const renderData = ({item}) => {
-    return (
+    return filtered(item) ? (
       <CurrencyRow
         currency={item}
         onPress={onPressItem}
         range={range}
       />
-    )
+    ) : (<></>)
   }
 
   const LoadingMore = () => {
