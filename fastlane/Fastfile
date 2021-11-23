@@ -60,7 +60,7 @@ platform :ios do
     bump_build_number
     build_number = get_build_number(xcodeproj: "ios/ledgerlivemobile.xcodeproj")
     commit_version_bump(
-      message: "Bump iOS version to v#{package["version"]}-#{build_number}",
+      message: "Bump iOS version to v#{package["version"]}-#{build_number}#{options[:nightly] ? " (nightly)" : ""}",
       xcodeproj: XCODE_PROJECT
     )
     add_git_tag(
@@ -228,7 +228,7 @@ platform :ios do
 
   desc "build nightly version"
   lane :local_nightly do
-    prepare_ios_beta
+    prepare_ios_beta(nightly: true)
     build
     upload(nightly: true)
   end
@@ -244,7 +244,7 @@ platform :ios do
     upload
   end
 
-  desc "ci: create testflight version"
+  desc "ci: create nightly version"
   lane :ci_nightly do |options|
     prepare_ios_beta
     setup_ios_ci
