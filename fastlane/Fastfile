@@ -175,7 +175,7 @@ platform :ios do
       pilot(
         skip_submission: false,
         app_identifier: "com.ledger.live",
-        skip_waiting_for_build_processing: true,
+        skip_waiting_for_build_processing: false,
         ipa: IPA_DIRECTORY,
         changelog: "Nightly Build v#{package['version']} (#{build_number})",
         beta_app_review_info: {
@@ -189,7 +189,11 @@ platform :ios do
         distribute_only: true,
         groups: ["External Nightly"],
         distribute_external: true,
-        notify_external_testers: true
+        app_identifier: "com.ledger.live",
+        app_platform: 'ios',
+        app_version: package["version"],
+        build_number: get_build_number(xcodeproj: "ios/ledgerlivemobile.xcodeproj"),
+        notify_external_testers: true,
       )
     else
       pilot(
