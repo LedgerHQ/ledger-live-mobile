@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState, useRef } from "react";
 import { ActivityIndicator, StyleSheet, Image, TouchableOpacity, Text, View } from "react-native";
+import { useSelector } from "react-redux";
 import RBSheet from "react-native-raw-bottom-sheet";
 import InfiniteScroll from "react-native-infinite-scrolling";
 import {
@@ -7,6 +8,7 @@ import {
   useCurrenciesByMarketcap,
   listSupportedCurrencies,
 } from "@ledgerhq/live-common/lib/currencies";
+import { getFavoriteCryptocurrenciesSelector } from "../../reducers/market";
 import KeyboardView from "../../components/KeyboardView";
 import CurrencyRow from "../../components/CurrencyInfoRow";
 import { MarketClient } from "../../api/market";
@@ -84,6 +86,10 @@ export default function Market({ navigation }: Props) {
     [],
   );
 
+  const favoriteCryptocurrencies = useSelector(
+    getFavoriteCryptocurrenciesSelector,
+  );
+
   const onPressItem = currencyOrToken => {
     navigation.navigate("SymbolDashboard", {
       currencyOrToken,
@@ -129,7 +135,7 @@ export default function Market({ navigation }: Props) {
       return ledgerCurrencies.includes(item.ticker);
     }
     if (showOption === SHOW_OPTION_STARRED) {
-      return true;
+      return favoriteCryptocurrencies.includes(item.id);
     }
     return true;
   }
