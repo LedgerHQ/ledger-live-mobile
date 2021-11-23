@@ -172,7 +172,7 @@ platform :ios do
     if (options[:nightly])
       build_number = get_build_number(xcodeproj: "ios/ledgerlivemobile.xcodeproj")
       pilot(
-        skip_submission: true,
+        skip_submission: false,
         app_identifier: "com.ledger.live",
         skip_waiting_for_build_processing: true,
         ipa: IPA_DIRECTORY,
