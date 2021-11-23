@@ -17,8 +17,6 @@ import BottomSelectSheetTF from "./BottomSelectSheetTF";
 import FilterIcon from "../../images/filter.png";
 import SearchBox from "./SearchBox";
 import DownArrow from "../../icons/DownArrow";
-import { filter } from "lodash";
-
 
 type Props = {
   navigation: Object,
@@ -75,6 +73,7 @@ export default function Market({ navigation }: Props) {
   const [timeframe, setTimeframe] = useState(CHANGE_TIMES[0]);
   const [activePage, setActivePage] = useState(1);
   const [loadingMore, setLoadingMore] = useState(false);
+  const [searchKey, setSearchKey] = useState("");
   const RBSheetTimeFrame = useRef();
   const RBSheetFilter = useRef();
   useEffect(() => {
@@ -118,6 +117,10 @@ export default function Market({ navigation }: Props) {
     RBSheetFilter.current.close();
   };
 
+  const onChangeFlag = flag => {
+    setSearchKey(flag.toLowerCase());
+  };
+
   const loadMore = () => {
     if (activePage > 20) return;
     (async () => {
@@ -131,6 +134,9 @@ export default function Market({ navigation }: Props) {
   }
 
   const filtered = (item) => {
+    if (searchKey.length > 0 && !(item.ticker + item.name).toLowerCase().includes(searchKey)) {
+      return false;
+    }
     if (showOption === SHOW_OPTION_LEDGER) {
       return ledgerCurrencies.includes(item.ticker);
     }
@@ -163,7 +169,7 @@ export default function Market({ navigation }: Props) {
       <KeyboardView style={styles.root}>
         <View style={styles.headerFilter}>
           <View style={styles.searchContainer}>
-            <SearchBox />
+            <SearchBox onChangeFlag={onChangeFlag}/>
           </View>
           <View>
             <TouchableOpacity style={styles.filterBtn} onPress={onClickFilter}>
