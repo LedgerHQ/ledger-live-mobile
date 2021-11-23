@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { NavigationProp, useTheme } from "@react-navigation/native";
 import { StyleSheet } from "react-native";
-import Config from "react-native-config";
 import { WebView } from "react-native-webview";
 import { getFTXToken, saveFTXToken } from "../../../db";
 
@@ -22,12 +21,10 @@ export function SwapConnectFTX({
     return `
       (function() {
         window.ledger = { postMessage: window.ReactNativeWebView.postMessage };
-        ${isKYC && `localStorage.setItem("authToken", "${token}");`}
-        localStorage.setItem("theme", "${dark ? "dark" : "light"}");
         
-        window.ledger.saveToken = token => {
+        window.ledger.setToken = token => {
           const message = JSON.stringify({
-            type: "saveToken",
+            type: "setToken",
             token,
           });
           window.ledger.postMessage(message);
@@ -39,6 +36,9 @@ export function SwapConnectFTX({
           });
           window.ledger.postMessage(message);
         }
+
+        ${isKYC && `localStorage.setItem("authToken", "${token}");`}
+        localStorage.setItem("theme", "${dark ? "dark" : "light"}");
       })();
     `;
   }, [uri, token, dark]);
@@ -53,7 +53,7 @@ export function SwapConnectFTX({
       try {
         const data: Message = JSON.parse(dataStr);
         switch (data.type) {
-          case "saveToken":
+          case "setToken":
             saveToken(data.token);
             break;
           case "closeWidget":
@@ -75,8 +75,6 @@ export function SwapConnectFTX({
       style={styles.root}
       source={{ uri: route.params.uri }}
       injectedJavaScriptBeforeContentLoaded={preload}
-      // TODO: Remove mock
-      // injectedJavaScript={`(function() {window.ledger.setToken("access-token"); window.ledger.closeWidget();})()`}
       onError={handleError}
       onMessage={handleMessage}
     />
@@ -93,8 +91,7 @@ function useFTXToken() {
   useEffect(() => {
     async function setup() {
       const token = await getFTXToken();
-      // TODO: Remove mock ENV
-      setToken(token ?? Config.FTX_TOKEN);
+      setToken(token);
     }
 
     setup();
@@ -106,7 +103,7 @@ function useFTXToken() {
   };
 }
 
-type Message = { type: "saveToken", token: string } | { type: "closeWidget" };
+type Message = { type: "setToken", token: string } | { type: "closeWidget" };
 
 const styles = StyleSheet.create({
   root: {

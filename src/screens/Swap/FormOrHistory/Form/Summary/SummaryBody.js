@@ -24,7 +24,7 @@ import { urls } from "../../../../../config/urls";
 import Button from "../../../../../components/Button";
 import { ScreenName } from "../../../../../const";
 
-export default function SummaryBod({
+export default function SummaryBody({
   status,
   exchange,
   exchangeRate,
