@@ -453,7 +453,6 @@ DEPENDENCIES:
   - "ledger-core-objc (from `../node_modules/@ledgerhq/react-native-ledger-core`)"
   - lottie-ios (from `../node_modules/lottie-ios`)
   - lottie-react-native (from `../node_modules/lottie-react-native`)
-  - MultiplatformBleAdapter (from `https://github.com/dotintent/MultiPlatformBleAdapter`, tag `0.1.9`)
   - "PasscodeAuth (from `../node_modules/@ledgerhq/react-native-passcode-auth`)"
   - RCT-Folly (from `../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec`)
   - RCTRequired (from `../node_modules/react-native/Libraries/RCTRequired`)
@@ -520,6 +519,7 @@ SPEC REPOS:
     - fmt
     - InputMask
     - libwebp
+    - MultiplatformBleAdapter
     - SDWebImage
     - SDWebImageWebPCoder
     - Sentry
@@ -564,9 +564,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/lottie-ios"
   lottie-react-native:
     :path: "../node_modules/lottie-react-native"
-  MultiplatformBleAdapter:
-    :git: https://github.com/dotintent/MultiPlatformBleAdapter
-    :tag: 0.1.9
   PasscodeAuth:
     :path: "../node_modules/@ledgerhq/react-native-passcode-auth"
   RCT-Folly:
@@ -678,11 +675,6 @@ EXTERNAL SOURCES:
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
-CHECKOUT OPTIONS:
-  MultiplatformBleAdapter:
-    :git: https://github.com/dotintent/MultiPlatformBleAdapter
-    :tag: 0.1.9
-
 SPEC CHECKSUMS:
   Analytics: eefe524436f904b8bb3f8c8c3425280e43b34efc
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
@@ -770,6 +762,6 @@ SPEC CHECKSUMS:
   Yoga: aa0cb45287ebe1004c02a13f279c55a95f1572f4
   ZXingObjC: fdbb269f25dd2032da343e06f10224d62f537bdb
 
-PODFILE CHECKSUM: 49ad5c5c4dd496763fa6f6253474c645fe68f8fe
+PODFILE CHECKSUM: 397676af9b9385a0e0f9589073ee83f88924a637
 
 COCOAPODS: 1.11.2
