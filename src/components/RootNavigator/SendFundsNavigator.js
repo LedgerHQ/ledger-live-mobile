@@ -5,6 +5,8 @@ import { useTranslation } from "react-i18next";
 import { useTheme } from "@react-navigation/native";
 import { ScreenName } from "../../const";
 import SendCoin from "../../screens/SendFunds/01a-SelectAccount";
+import SendCollection from "../../screens/SendFunds/01b-SelectCollection";
+import SendNft from "../../screens/SendFunds/01c-SelectNft";
 import SendSelectRecipient from "../../screens/SendFunds/02-SelectRecipient";
 import SendAmountCoin from "../../screens/SendFunds/03a-AmountCoin";
 import SendSummary from "../../screens/SendFunds/04-Summary";
@@ -33,6 +35,36 @@ export default function SendFundsNavigator() {
           headerTitle: () => (
             <StepHeader
               title={t("send.stepperHeader.selectAccount")}
+              subtitle={t("send.stepperHeader.stepRange", {
+                currentStep: "1",
+                totalSteps,
+              })}
+            />
+          ),
+        }}
+      />
+      <Stack.Screen
+        name={ScreenName.SendCollection}
+        component={SendCollection}
+        options={{
+          headerTitle: () => (
+            <StepHeader
+              title={t("send.stepperHeader.selectCollection")}
+              subtitle={t("send.stepperHeader.stepRange", {
+                currentStep: "1",
+                totalSteps,
+              })}
+            />
+          ),
+        }}
+      />
+      <Stack.Screen
+        name={ScreenName.SendNft}
+        component={SendNft}
+        options={{
+          headerTitle: () => (
+            <StepHeader
+              title={t("send.stepperHeader.selectNft")}
               subtitle={t("send.stepperHeader.stepRange", {
                 currentStep: "1",
                 totalSteps,
