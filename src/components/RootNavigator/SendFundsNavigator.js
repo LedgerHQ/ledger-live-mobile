@@ -9,6 +9,7 @@ import SendCollection from "../../screens/SendFunds/01b-SelectCollection";
 import SendNft from "../../screens/SendFunds/01c-SelectNft";
 import SendSelectRecipient from "../../screens/SendFunds/02-SelectRecipient";
 import SendAmountCoin from "../../screens/SendFunds/03a-AmountCoin";
+import SendAmountNft from "../../screens/SendFunds/03b-AmountNft";
 import SendSummary from "../../screens/SendFunds/04-Summary";
 import SelectDevice from "../../screens/SelectDevice";
 import SendConnectDevice from "../../screens/ConnectDevice";
@@ -95,6 +96,21 @@ export default function SendFundsNavigator() {
           headerTitle: () => (
             <StepHeader
               title={t("send.stepperHeader.selectAmount")}
+              subtitle={t("send.stepperHeader.stepRange", {
+                currentStep: "3",
+                totalSteps,
+              })}
+            />
+          ),
+        }}
+      />
+      <Stack.Screen
+        name={ScreenName.SendAmountNft}
+        component={SendAmountNft}
+        options={{
+          headerTitle: () => (
+            <StepHeader
+              title={t("send.stepperHeader.quantity")}
               subtitle={t("send.stepperHeader.stepRange", {
                 currentStep: "3",
                 totalSteps,

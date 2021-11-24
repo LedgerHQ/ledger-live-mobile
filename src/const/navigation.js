@@ -108,6 +108,7 @@ export const ScreenName = {
   ScanAccounts: "ScanAccounts",
   ScanRecipient: "ScanRecipient",
   SendAmountCoin: "SendAmountCoin",
+  SendAmountNft: "SendAmountNft",
   SendConnectDevice: "SendConnectDevice",
   SendCoin: "SendCoin",
   SendCollection: "SendCollection",
