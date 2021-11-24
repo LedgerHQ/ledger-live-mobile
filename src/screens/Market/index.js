@@ -16,8 +16,9 @@ import BottomSelectSheetFilter from "./BottomSelectSheetFilter";
 import BottomSelectSheetTF from "./BottomSelectSheetTF";
 import FilterIcon from "../../images/filter.png";
 import SearchBox from "./SearchBox";
-import CryptoNotFound from "./CryptoNotFound";
+import NotFound from "./NotFound";
 import DownArrow from "../../icons/DownArrow";
+import { Button } from "react-native-share";
 
 type Props = {
   navigation: Object,
@@ -192,15 +193,27 @@ export default function Market({ navigation }: Props) {
             <DownArrow color={"#6490f1"} width={"12"} height={"8"}/>
           </TouchableOpacity>
         </View>
-        {(currencies.some(currency => filtered(currency)) || searchKey.length === 0) ? (
+        {(currencies.some(currency => filtered(currency))) ? (
             <InfiniteScroll
               renderData={renderData}
               data={currencies.filter(currency => filtered(currency))}
               loadMore={loadMore}
             />
-          ) : (
-            <CryptoNotFound query={searchKey} />
-          )
+          ) : (searchKey.length > 0 ? (
+            <NotFound 
+              title={"Crypto not found"}
+              description={"Sorry, we did not find any search results for '" + {searchKey} + "'. Please retry the search with another keyword."}
+              />
+          ) : (showOption === SHOW_OPTION_STARRED ? (
+            <>
+              <NotFound 
+                title={"Mark your favourite cryptos"}
+                description={"Click on the star icon near a crypto to mark it and star it for later."}
+                />
+              <Button>
+              </Button>
+            </>
+          ) : (null)))
         }
 
         {loadingMore && <LoadingMore />}

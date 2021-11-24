@@ -3,10 +3,11 @@ import React, { useState } from "react";
 import { StyleSheet, View, Text, Image } from "react-native";
 
 type Props = {
-  query: String,
+  title: String,
+  description: String
 };
 
-export default function CryptoNotFound({ query }: Props) {
+export default function NotFound({ title, description }: Props) {
   return (
     <View>
       <View style={styles.container}>
@@ -15,10 +16,10 @@ export default function CryptoNotFound({ query }: Props) {
           style={styles.notFound}
         />
         <Text style={styles.bigString}>
-          Crypto not found
+          {title}
         </Text>
         <Text style={styles.description}>
-          Sorry, we did not find any search results for '{query}'. Please retry the search with another keyword.
+          {description}
         </Text>
       </View>
     </View>
