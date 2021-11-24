@@ -195,7 +195,7 @@ platform :ios do
           app_version: package["version"],
           build_number: get_build_number(xcodeproj: "ios/ledgerlivemobile.xcodeproj"),
           notify_external_testers: true,
-          reject_build_waiting_for_review: true
+          reject_build_waiting_for_review: !options[:ci]
         )
       rescue => e
         raise unless e.message.include? "Another build is in review"
@@ -236,7 +236,10 @@ platform :ios do
   lane :local_nightly do
     prepare_ios_beta(nightly: true)
     build
-    upload(nightly: true)
+    upload(
+      nightly: true,
+      ci: true
+    )
   end
 
   # =========================== END LOCAL BUILD ===========================
