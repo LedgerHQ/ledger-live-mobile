@@ -5,7 +5,11 @@ import SearchIcon from "../../icons/Search";
 import TextInput from "../../components/TextInput";
 import getFontStyle from "../../components/LText/getFontStyle";
 
-export default function SearchBox() {
+type Props = {
+  onChangeFlag: ((String) => void),
+};
+
+export default function SearchBox({ onChangeFlag }: Props) {
   const [query, setQuery] = useState("");
   const [focused, setFocused] = useState(false);
 
@@ -13,7 +17,10 @@ export default function SearchBox() {
 
   const onBlur = () => setFocused(false);
 
-  const onChange = text => setQuery(text);
+  const onChange = text => {
+    setQuery(text);
+    onChangeFlag(text);
+  }
 
   const clear = () => setQuery("");
 

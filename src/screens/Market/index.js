@@ -1,7 +1,14 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useMemo, useState, useRef } from "react";
 import { ActivityIndicator, StyleSheet, Image, TouchableOpacity, Text, View } from "react-native";
+import { useSelector } from "react-redux";
 import RBSheet from "react-native-raw-bottom-sheet";
 import InfiniteScroll from "react-native-infinite-scrolling";
+import {
+  listTokens,
+  useCurrenciesByMarketcap,
+  listSupportedCurrencies,
+} from "@ledgerhq/live-common/lib/currencies";
+import { getFavoriteCryptocurrenciesSelector } from "../../reducers/market";
 import KeyboardView from "../../components/KeyboardView";
 import CurrencyRow from "../../components/CurrencyInfoRow";
 import { MarketClient } from "../../api/market";
@@ -9,7 +16,9 @@ import BottomSelectSheetFilter from "./BottomSelectSheetFilter";
 import BottomSelectSheetTF from "./BottomSelectSheetTF";
 import FilterIcon from "../../images/filter.png";
 import SearchBox from "./SearchBox";
-import { selectedCurrencySelector } from "../../reducers/market";
+import NotFound from "./NotFound";
+import DownArrow from "../../icons/DownArrow";
+import { Button } from "react-native-share";
 
 type Props = {
   navigation: Object,
@@ -22,10 +31,14 @@ const CHANGE_TIMES = [
   { name: "1 year", display: "Last 1 year", key: "1y" },
 ];
 
+const SHOW_OPTION_ALL = "All";
+const SHOW_OPTION_LEDGER = "Ledger Live compatible";
+const SHOW_OPTION_STARRED = "Starred coins";
+
 const SHOW_OPTIONS = [
-  { name: "All" },
-  { name: "Ledger Live compatible" },
-  { name: "Starred coins" },
+  { name: SHOW_OPTION_ALL },
+  { name: SHOW_OPTION_LEDGER },
+  { name: SHOW_OPTION_STARRED },
 ];
 
 const SORT_OPTIONS = [
@@ -57,16 +70,26 @@ const getCurrencyData = async (limit, page, sortOption) => {
 export default function Market({ navigation }: Props) {
   const [currencies, setCurrencies] = useState([]);
   const [range, setRange] = useState("24h");
-  const [showOption, setShowOption] = useState("All");
+  const [showOption, setShowOption] = useState(SHOW_OPTION_ALL);
   const [sortOption, setSortOption] = useState("Rank");
   const [timeframe, setTimeframe] = useState(CHANGE_TIMES[0]);
   const [activePage, setActivePage] = useState(1);
   const [loadingMore, setLoadingMore] = useState(false);
+  const [searchKey, setSearchKey] = useState("");
   const RBSheetTimeFrame = useRef();
   const RBSheetFilter = useRef();
   useEffect(() => {
     loadMore();
   }, [sortOption, showOption]);
+
+  const ledgerCurrencies = useMemo(
+    () => listSupportedCurrencies().map(coin => coin.ticker),
+    [],
+  );
+
+  const favoriteCryptocurrencies = useSelector(
+    getFavoriteCryptocurrenciesSelector,
+  );
 
   const onPressItem = currencyOrToken => {
     navigation.navigate("SymbolDashboard", {
@@ -89,10 +112,15 @@ export default function Market({ navigation }: Props) {
   };
 
   const onApplyFilter = _filterOptions => {
+    setActivePage(1);
     setCurrencies([]);
     setShowOption(_filterOptions[0].active);
     setSortOption(_filterOptions[1].active);
     RBSheetFilter.current.close();
+  };
+
+  const onChangeFlag = flag => {
+    setSearchKey(flag);
   };
 
   const loadMore = () => {
@@ -107,14 +135,27 @@ export default function Market({ navigation }: Props) {
     })();
   }
 
+  const filtered = (item) => {
+    if (searchKey.length > 0 && !(item.ticker + item.name).toLowerCase().includes(searchKey.toLocaleLowerCase())) {
+      return false;
+    }
+    if (showOption === SHOW_OPTION_LEDGER) {
+      return ledgerCurrencies.includes(item.ticker);
+    }
+    if (showOption === SHOW_OPTION_STARRED) {
+      return favoriteCryptocurrencies.includes(item.id);
+    }
+    return true;
+  }
+
   const renderData = ({item}) => {
-    return (
+    return true ? (
       <CurrencyRow
         currency={item}
         onPress={onPressItem}
         range={range}
       />
-    )
+    ) : (<></>)
   }
 
   const LoadingMore = () => {
@@ -130,7 +171,7 @@ export default function Market({ navigation }: Props) {
       <KeyboardView style={styles.root}>
         <View style={styles.headerFilter}>
           <View style={styles.searchContainer}>
-            <SearchBox />
+            <SearchBox onChangeFlag={onChangeFlag}/>
           </View>
           <View>
             <TouchableOpacity style={styles.filterBtn} onPress={onClickFilter}>
@@ -142,22 +183,38 @@ export default function Market({ navigation }: Props) {
         <View style={styles.tfSelector}>
           <Text style={styles.tf}>Timeframe</Text>
           <TouchableOpacity
-            style={{ flexDirection: "row" }}
+            style={{ flexDirection: "row", alignItems: "center" }}
             onPress={onClickTimeFrame}
           >
             <Text style={styles.tfItem}>
               {"  "}
               {timeframe.display}{" "}
             </Text>
-            <Text style={styles.tfIcon}>{" ˅ "}</Text>
+            <DownArrow color={"#6490f1"} width={"12"} height={"8"}/>
           </TouchableOpacity>
         </View>
-        
-        <InfiniteScroll
-          renderData={renderData}
-          data={currencies}
-          loadMore={loadMore}
-        />
+        {(currencies.some(currency => filtered(currency))) ? (
+            <InfiniteScroll
+              renderData={renderData}
+              data={currencies.filter(currency => filtered(currency))}
+              loadMore={loadMore}
+            />
+          ) : (searchKey.length > 0 ? (
+            <NotFound 
+              title={"Crypto not found"}
+              description={"Sorry, we did not find any search results for '" + {searchKey} + "'. Please retry the search with another keyword."}
+              />
+          ) : (showOption === SHOW_OPTION_STARRED ? (
+            <>
+              <NotFound 
+                title={"Mark your favourite cryptos"}
+                description={"Click on the star icon near a crypto to mark it and star it for later."}
+                />
+              <Button>
+              </Button>
+            </>
+          ) : (null)))
+        }
 
         {loadingMore && <LoadingMore />}
 
@@ -244,10 +301,6 @@ const styles = StyleSheet.create({
   },
   tfItem: {
     fontSize: 15,
-    color: "#6490f1",
-  },
-  tfIcon: {
-    fontSize: 20,
     color: "#6490f1",
   },
   filterBtn: {
