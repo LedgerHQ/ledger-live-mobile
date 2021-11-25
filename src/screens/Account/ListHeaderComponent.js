@@ -23,9 +23,11 @@ import Touchable from "../../components/Touchable";
 import TransactionsPendingConfirmationWarning from "../../components/TransactionsPendingConfirmationWarning";
 import type { Item } from "../../components/Graph/types";
 import SubAccountsList from "./SubAccountsList";
+import NftCollectionsList from "./NftCollectionsList";
 import CompoundSummary from "../Lending/Account/CompoundSummary";
 import CompoundAccountBodyHeader from "../Lending/Account/AccountBodyHeader";
 import perFamilyAccountHeader from "../../generated/AccountHeader";
+import perFamilyAccountSubHeader from "../../generated/AccountSubHeader";
 import perFamilyAccountBodyHeader from "../../generated/AccountBodyHeader";
 import perFamilyAccountBalanceSummaryFooter from "../../generated/AccountBalanceSummaryFooter";
 import { normalize } from "../../helpers/normalizeSize";
@@ -134,8 +136,6 @@ type Props = {
   onAccountPress: () => void,
   onSwitchAccountCurrency: () => void,
   compoundSummary?: ?CompoundAccountSummary,
-  isCollapsed: boolean,
-  setIsCollapsed: (v: boolean) => void,
 };
 
 export function getListHeaderComponents({
@@ -151,8 +151,6 @@ export function getListHeaderComponents({
   onAccountPress,
   onSwitchAccountCurrency,
   compoundSummary,
-  isCollapsed,
-  setIsCollapsed,
 }: Props): {
   listHeaderComponents: React$Node[],
   stickyHeaderIndices?: number[],
@@ -169,38 +167,42 @@ export function getListHeaderComponents({
   const AccountBodyHeader =
     perFamilyAccountBodyHeader[mainAccount.currency.family];
 
+  const AccountSubHeader =
+    perFamilyAccountSubHeader[mainAccount.currency.family];
+
+  const stickyHeaderIndices = empty ? [] : [4];
+
   return {
     listHeaderComponents: [
       <Header accountId={account.id} />,
-      ...(!empty && AccountHeader
-        ? [<AccountHeader account={account} parentAccount={parentAccount} />]
-        : []),
+      !!AccountSubHeader && <AccountSubHeader />,
+      !empty && !!AccountHeader && (
+        <AccountHeader account={account} parentAccount={parentAccount} />
+      ),
 
-      ...(empty
-        ? []
-        : [
-            <AccountGraphCard
-              account={account}
-              range={range}
-              history={history}
-              useCounterValue={shouldUseCounterValue}
-              valueChange={
-                shouldUseCounterValue ? countervalueChange : cryptoChange
-              }
-              countervalueAvailable={countervalueAvailable}
-              counterValueCurrency={counterValueCurrency}
-              renderTitle={renderListHeaderTitle(
-                account,
-                countervalueAvailable,
-                onSwitchAccountCurrency,
-              )}
-              renderAccountSummary={renderAccountSummary(
-                account,
-                parentAccount,
-                compoundSummary,
-              )}
-            />,
-          ]),
+      !empty && (
+        <AccountGraphCard
+          account={account}
+          range={range}
+          history={history}
+          useCounterValue={shouldUseCounterValue}
+          valueChange={
+            shouldUseCounterValue ? countervalueChange : cryptoChange
+          }
+          countervalueAvailable={countervalueAvailable}
+          counterValueCurrency={counterValueCurrency}
+          renderTitle={renderListHeaderTitle(
+            account,
+            countervalueAvailable,
+            onSwitchAccountCurrency,
+          )}
+          renderAccountSummary={renderAccountSummary(
+            account,
+            parentAccount,
+            compoundSummary,
+          )}
+        />
+      ),
 
       ...(!empty
         ? [
@@ -224,10 +226,11 @@ export function getListHeaderComponents({
               accountId={account.id}
               onAccountPress={onAccountPress}
               parentAccount={account}
-              isCollapsed={isCollapsed}
-              onToggle={() => setIsCollapsed(!isCollapsed)}
             />,
           ]
+        : []),
+      ...(!empty && account.type === "Account" && account.nfts
+        ? [<NftCollectionsList account={account} />]
         : []),
       ...(compoundSummary &&
       account &&
@@ -242,7 +245,7 @@ export function getListHeaderComponents({
           ]
         : []),
     ],
-    stickyHeaderIndices: empty ? [] : AccountHeader ? [3] : [2],
+    stickyHeaderIndices,
   };
 }
 

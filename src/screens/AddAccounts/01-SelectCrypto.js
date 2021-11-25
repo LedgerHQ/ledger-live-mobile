@@ -7,6 +7,7 @@ import type {
   TokenCurrency,
 } from "@ledgerhq/live-common/lib/types";
 import {
+  isCurrencySupported,
   listTokens,
   useCurrenciesByMarketcap,
   listSupportedCurrencies,
@@ -38,10 +39,13 @@ const renderEmptyList = () => (
   </View>
 );
 
+const listSupportedTokens = () =>
+  listTokens().filter(t => isCurrencySupported(t.parentCurrency));
+
 export default function AddAccountsSelectCrypto({ navigation, route }: Props) {
   const { colors } = useTheme();
   const cryptoCurrencies = useMemo(
-    () => listSupportedCurrencies().concat(listTokens()),
+    () => listSupportedCurrencies().concat(listSupportedTokens()),
     [],
   );
 

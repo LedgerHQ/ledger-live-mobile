@@ -118,11 +118,27 @@
     },
     "ConnectAppTimeout": {
       "title": "Aucun appareil trouvé",
-      "description": "Assurez-vous que votre {{productName}} est déverrouillé et que le Bluetooth est activé."
+      "description": {
+        "ios": {
+          "nanoX": "Assurez-vous que votre {{productName}} est déverrouillé et que le Bluetooth est activé."
+        },
+        "android": {
+          "nanoS": "Assurez-vous que votre {{productName}} est déverrouillé et que le câble est branché.",
+          "nanoX": "Assurez-vous que votre {{productName}} est déverrouillé, avec le Bluetooth activé ou le câble branché."
+        }
+      }
     },
     "ConnectManagerTimeout": {
       "title": "Échec de la connexion avec le Gestionnaire",
-      "description": "Assurez-vous que votre {{productName}} est déverrouillé et que le Bluetooth est activé."
+      "description": {
+        "ios": {
+          "nanoX": "Assurez-vous que votre {{productName}} est déverrouillé et que le Bluetooth est activé."
+        },
+        "android": {
+          "nanoS": "Assurez-vous que votre {{productName}} est déverrouillé et que le câble est branché.",
+          "nanoX": "Assurez-vous que votre {{productName}} est déverrouillé, avec le Bluetooth activé ou le câble branché."
+        }
+      }
     },
     "ClaimRewardsFeesWarning": {
       "title": "Les récompenses sont inférieures aux frais estimés pour les demander.",
@@ -577,6 +593,9 @@
     },
     "PolkadotValidatorsRequired": {
       "title": "Sélectionnez au moins un validateur."
+    },
+    "TaprootNotActivated": {
+      "title": "Taproot n'est pas encore activé sur le mainnet"
     },
     "generic": {
       "title": "{{message}}",
@@ -1297,7 +1316,9 @@
   "operations": {
     "types": {
       "IN": "Reçu",
+      "NFT_IN": "NFT reçu",
       "OUT": "Envoyé",
+      "NFT_OUT": "NFT envoyé",
       "CREATE": "Créé",
       "REVEAL": "Révélé",
       "DELEGATE": "Délégué",
@@ -1380,7 +1401,11 @@
       "transferAmount": "Montant transféré",
       "validatorsCount": "Validateurs ({{number}})"
     },
-    "multipleAddresses": "Pourquoi plusieurs adresses ?"
+    "multipleAddresses": "Pourquoi plusieurs adresses ?",
+    "tokenName": "Nom du token",
+    "collectionContract": "Contrat du token",
+    "tokenId": "Identifiant du token (NFT)",
+    "quantity": "Quantité"
   },
   "operationList": {
     "noOperations": "Aucune opération",
@@ -1522,6 +1547,9 @@
     },
     "undelegation": {
       "sectionLabel": "Délégation(s) interrompue(s)"
+    },
+    "nft": {
+      "receiveNft": "Recevoir NFT"
     }
   },
   "accounts": {
@@ -3063,6 +3091,20 @@
       }
     }
   },
+  "elrond": {
+    "account": {
+      "subHeader": {
+        "cardTitle": "Propulsé par Elrond",
+        "drawerTitle": "Intégration d'Elrond",
+        "moreInfo": "Plus d'informations",
+        "title": "Le token Elrond eGold (EGLD) désormais disponible sur Ledger Live",
+        "description": "Vous pouvez maintenant sécuriser et gérer vos tokens eGold (EGLD) via Ledger Live.",
+        "description2": "Le token Elrond eGold (EGLD) est natif au réseau Elrond. Il est utilisé pour les transactions, le staking, les contrats intelligents, la gouvernance et les récompenses de validateur.",
+        "description3": "Nous travaillons avec l'équipe d'Elrond pour ajouter plus de fonctionnalités, comme le staking, la prise en charge native d'ESDT (Elrond Standard Digital Token), et bien plus.",
+        "website": "The Internet Scale Blockchain"
+      }
+    }
+  },
   "tezos": {
     "AccountHeader": {
       "title": "Gagner des récompenses en déléguant son compte",
@@ -3318,12 +3360,12 @@
       "rewardDestination": {
         "label": "Destination des récompenses",
         "stash": "Solde disponible",
-        "stashDescription": "Vos récompenses ont été ajoutées à votre solde disponible.",
+        "stashDescription": "Vos récompenses sont ajoutées à votre solde disponible.",
         "staked": "Solde lié",
-        "stakedDescription": "Les récompenses sont créditées sur votre solde lié.",
+        "stakedDescription": "Les récompenses sont créditées à votre solde lié.",
         "optionTitle": "Note",
-        "optionDescription": "Une fois définie, l'option est fixée pour la durée de vie de cette liaison. Si vous changez d'avis, consultez",
-        "clickableLink": "ici."
+        "optionDescription": "Une fois définie, l'option est fixée pour la durée de vie de cette liaison. Si vous changez d'avis, consultez ",
+        "clickableLink": "ceci."
       },
       "stepperHeader": {
         "starter": "Gagner des récompenses",
@@ -3513,7 +3555,7 @@
       "redelegate": "Confirmez sur votre appareil pour terminer l'opération.",
       "undelegate": "Confirmez sur votre appareil pour terminer l'opération."
     },
-    "warning": "Vérifiez toujours que l'adresse affichée sur votre appareil est identique à celle donnée par {{recipientWording}}.",
+    "warning": "Vérifiez toujours que l'adresse affichée sur votre appareil est identique à celle donnée par le {{recipientWording}}.",
     "recipientWording": {
       "send": "Vérifiez toujours que l'adresse affichée sur votre appareil est identique à celle donnée par le bénéficiaire.",
       "delegate": "Vérifiez toujours que l'adresse affichée sur votre appareil est identique à celle donnée par le validateur.",
@@ -3615,9 +3657,9 @@
     "connect": "Connecter",
     "connected": "Connecté",
     "disconnected": "Déconnecté",
-    "warningdisconnected": "Il y a un problème de connexion entre la DApp, WalletConnect et Ledger Live. Merci de patienter quelques instants ou de réessayer de vous connecter.",
-    "info": "Vous pouvez accéder à la DApp {{name}} sur votre navigateur.",
-    "warning": "Partager des adresses de bénéficiaire par DApp n'est pas sécurisé. Utilisez toujours Ledger Live lorsque vous partagez votre adresse pour recevoir des fonds.",
+    "warningdisconnected": "Il y a un problème de connexion entre la dApp, WalletConnect et Ledger Live. Merci de patienter quelques instants ou de réessayer de vous connecter.",
+    "info": "Vous pouvez accéder à la dApp {{name}} sur votre navigateur.",
+    "warning": "Partager des adresses de bénéficiaire par dApp n'est pas sécurisé. Utilisez toujours Ledger Live lorsque vous partagez votre adresse pour recevoir des fonds.",
     "isconnecting": "est en cours de connexion. Merci de patienter.",
     "disconnect": "Déconnecter",
     "retry": "Réessayer",
@@ -3705,6 +3747,27 @@
       "infoPanel": {
         "website": "Site"
       }
+    }
+  },
+  "nft": {
+    "account": {
+      "seeAllNfts": "Voir tous les NFT",
+      "seeFewerNfts": "Voir moins de NFT"
+    },
+    "gallery": {
+      "allNft": "Tous les NFT"
+    },
+    "viewer": {
+      "properties": "Attributs",
+      "description": "Description",
+      "tokenContract": "Adresse du token",
+      "tokenId": "Identifiant du token",
+      "quantity": "Quantité"
+    },
+    "viewerModal": {
+      "viewOn": "Voir sur",
+      "viewInExplorer": "Afficher dans l'explorateur",
+      "txDetails": "Détails de la transaction"
     }
   }
 }
