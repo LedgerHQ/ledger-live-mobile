@@ -5,6 +5,7 @@ import {
   listSupportedCurrencies,
   // listTokens,
 } from "@ledgerhq/live-common/lib/currencies";
+
 import Animated from "react-native-reanimated";
 import { createNativeWrapper } from "react-native-gesture-handler";
 import moment from "moment";
@@ -16,7 +17,13 @@ import InfoTable from "./InfoTable";
 import globalSyncRefreshControl from "../../components/globalSyncRefreshControl";
 import { useScrollToTop } from "../../navigation/utils";
 import { useRange } from "./useRangeHook";
-import { counterValueCurrencySelector } from "../../reducers/settings";
+import {
+  counterValueCurrencySelector,
+  swapSelectableCurrenciesSelector,
+} from "../../reducers/settings";
+
+import { isCurrencySupported } from "../Exchange/coinifyConfig";
+
 import { loadCurrencyById, loadCurrencyChartData } from "../../actions/market";
 import {
   selectedCurrencySelector,
@@ -57,7 +64,6 @@ const formattedMinuteTime = index =>
 
 export default function SymbolDashboard({ route }: Props) {
   const { currencyOrToken } = route.params;
-  // console.log(currencyOrToken);
   const prefferedCurrency = useSelector(counterValueCurrencySelector);
   const priceStat = useSelector(priceStatisticsSelector);
   const marketCap = useSelector(marketCapSelector);
@@ -71,22 +77,6 @@ export default function SymbolDashboard({ route }: Props) {
 
   const ref = useRef();
   useScrollToTop(ref);
-
-  // SUPPORTED COINS
-  const supportedCryptoCurrencies = useMemo(
-    () => listSupportedCurrencies(),
-    [],
-  );
-
-  // const supportedCryptoCurrencies = useMemo(
-  //   () => listSupportedCurrencies().concat(listTokens()),
-  //   [],
-  // );
-
-  // CHECK SUPPROT BUY AND SWAP
-  const checkSupport = supportedCryptoCurrencies.filter(
-    cur => cur.ticker.toLowerCase() === currency.symbol,
-  );
 
   const buildChartData = ({ interval, prices }) => {
     if (!prices.length || !interval) return [];
@@ -133,6 +123,14 @@ export default function SymbolDashboard({ route }: Props) {
     setLoading(false);
   }, [currencyOrToken, days, dispatch, interval, prefferedCurrency]);
 
+  const availableOnSwap = useSelector(state =>
+    swapSelectableCurrenciesSelector(state),
+  );
+
+  const canBeBought = isCurrencySupported(currency, "buy");
+
+  const isAvailableOnSnap = availableOnSwap.includes(currency.id);
+
   const data = [
     <Chart
       chartData={chartData}
@@ -143,10 +141,15 @@ export default function SymbolDashboard({ route }: Props) {
       testID={"CoinChart"}
     />,
     <>
-      {checkSupport.length ? (
-        <FabActions marketPage />
-      ) : (
+      {!canBeBought && !isAvailableOnSnap ? (
         <NotSupportedCryptocurrency />
+      ) : (
+        <FabActions
+          marketPage={true}
+          canBeBought={canBeBought}
+          isAvailableOnSnap={isAvailableOnSnap}
+          currency={currency}
+        />
       )}
     </>,
     <InfoTable title={"Price statistics"} rows={priceStat} />,

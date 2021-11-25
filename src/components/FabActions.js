@@ -7,7 +7,12 @@ import { useSelector } from "react-redux";
 
 import { getAccountCurrency } from "@ledgerhq/live-common/lib/account";
 
-import type { AccountLike, Account } from "@ledgerhq/live-common/lib/types";
+import type {
+  AccountLike,
+  Account,
+  TokenCurrency,
+  CryptoCurrency,
+} from "@ledgerhq/live-common/lib/types";
 
 import { isCurrencySupported } from "../screens/Exchange/coinifyConfig";
 
@@ -27,6 +32,10 @@ type Props = {
   account?: AccountLike,
   parentAccount?: Account,
   marketPage?: boolean,
+  marketPageCurrency?: any,
+  isAvailableOnSnap?: boolean,
+  canBeBought?: boolean,
+  currency?: CryptoCurrency | TokenCurrency,
 };
 
 type FabAccountActionsProps = {
@@ -115,16 +124,57 @@ function FabAccountActions({ account, parentAccount }: FabAccountActionsProps) {
   );
 }
 
-function FabActions({ account, parentAccount, marketPage = false }: Props) {
+function FabActions({
+  account,
+  parentAccount,
+  marketPage = false,
+  isAvailableOnSnap,
+  canBeBought,
+  currency,
+}: Props) {
   const readOnlyModeEnabled = useSelector(readOnlyModeEnabledSelector);
   const accountsCount = useSelector(accountsCountSelector);
 
-  if (account)
+  if (account && !marketPage) {
     return (
       <FabAccountActions account={account} parentAccount={parentAccount} />
     );
+  }
 
-  const actions = [
+  const marketPageActions = [
+    ...(canBeBought
+      ? [
+          {
+            event: "TransferExchange",
+            label: <Trans i18nKey="exchange.buy.tabTitle" />,
+            Icon: Exchange,
+            navigationParams: [
+              NavigatorName.Exchange,
+              { screen: ScreenName.ExchangeBuy },
+            ],
+            eventProperties: { currencyName: currency.name },
+          },
+        ]
+      : []),
+    ...(isAvailableOnSnap
+      ? [
+          {
+            event: "TransferSwap",
+            label: <Trans i18nKey="transfer.swap.title" />,
+            Icon: Swap,
+            navigationParams: [
+              NavigatorName.Swap,
+              {
+                screen: ScreenName.Swap,
+              },
+            ],
+            eventProperties: { currencyName: currency.name },
+          },
+        ]
+      : []),
+  ];
+
+  const accountActions = [
     {
       event: "TransferExchange",
       label: <Trans i18nKey="exchange.buy.tabTitle" />,
@@ -134,7 +184,7 @@ function FabActions({ account, parentAccount, marketPage = false }: Props) {
         { screen: ScreenName.ExchangeBuy },
       ],
     },
-    ...((accountsCount > 0 && !readOnlyModeEnabled) || marketPage
+    ...(accountsCount > 0 && !readOnlyModeEnabled
       ? [
           {
             event: "TransferSwap",
@@ -150,6 +200,8 @@ function FabActions({ account, parentAccount, marketPage = false }: Props) {
         ]
       : []),
   ];
+
+  const actions = marketPage ? marketPageActions : accountActions;
 
   return <FabAccountButtonBar buttons={actions} />;
 }
