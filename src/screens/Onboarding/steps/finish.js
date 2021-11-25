@@ -23,8 +23,7 @@ import { NavigatorName } from "../../../const";
 
 import { readOnlyModeEnabledSelector } from "../../../reducers/settings";
 import confetti from "../assets/confetti.json";
-
-const logo = <Image source={require("../../../images/logo.png")} />;
+import LedgerLogo from "../../../icons/LiveLogo";
 
 type Props = {
   navigation: any,
@@ -91,7 +90,9 @@ export default function OnboardingStepFinish({ navigation }: Props) {
       <SafeAreaView style={styles.wrapper}>
         <TrackScreen category="Onboarding" name="Finish" />
 
-        <View style={styles.hero}>{logo}</View>
+        <View style={styles.hero}>
+          <LedgerLogo size={50} color="#FFF" />
+        </View>
         <LText style={styles.title} secondary semiBold>
           <Trans
             i18nKey={
