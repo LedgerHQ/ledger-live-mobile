@@ -2867,7 +2867,15 @@
       "advice": "You can always change your language back later in the settings."
     },
     "switchButton": "Switch to {{language}}",
-    "no": "I prefer not to"
+    "no": "I prefer not to",
+    "languages": {
+      "en": "English",
+      "fr": "French",
+      "ru": "Russian",
+      "es": "Spanish",
+      "zh": "Chinese",
+      "de": "German"
+    }
   },
   "FirmwareUpdateCheckId": {
     "title": "Identifier",

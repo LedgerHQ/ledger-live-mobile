@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { Trans } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { View } from "react-native";
 import Locale from "react-native-locale";
 import { useTheme } from "@react-navigation/native";
@@ -14,11 +14,12 @@ import Circle from "./Circle";
 import ModalBottomAction from "./ModalBottomAction";
 import LanguageIcon from "../icons/Language";
 import { languageSelector } from "../reducers/settings";
-import { languages, pushedLanguages } from "../languages";
+import { pushedLanguages } from "../languages";
 import { useLanguageAvailableChecked } from "../context/Locale";
 import { Track } from "../analytics";
 
 export default function CheckLanguageAvailability() {
+  const { t } = useTranslation();
   const { colors } = useTheme();
   const [modalOpened, setModalOpened] = useState(true);
   const { localeIdentifier } = Locale.constants();
@@ -83,7 +84,11 @@ export default function CheckLanguageAvailability() {
                   <>
                     <Trans
                       i18nKey="systemLanguageAvailable.switchButton"
-                      values={{ language: languages[osLanguage] }}
+                      values={{
+                        language: t(
+                          `systemLanguageAvailable.languages.${osLanguage}`,
+                        ),
+                      }}
                     />
                   </>
                 }
