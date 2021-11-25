@@ -33,7 +33,7 @@ type Props = {
   parentAccount?: Account,
   marketPage?: boolean,
   marketPageCurrency?: any,
-  isAvailableOnSnap?: boolean,
+  isAvailableOnSwap?: boolean,
   canBeBought?: boolean,
   currency?: CryptoCurrency | TokenCurrency,
 };
@@ -128,7 +128,7 @@ function FabActions({
   account,
   parentAccount,
   marketPage = false,
-  isAvailableOnSnap,
+  isAvailableOnSwap,
   canBeBought,
   currency,
 }: Props) {
@@ -156,7 +156,7 @@ function FabActions({
           },
         ]
       : []),
-    ...(isAvailableOnSnap
+    ...(isAvailableOnSwap
       ? [
           {
             event: "TransferSwap",

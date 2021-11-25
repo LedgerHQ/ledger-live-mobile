@@ -129,7 +129,7 @@ export default function SymbolDashboard({ route }: Props) {
 
   const canBeBought = isCurrencySupported(currency, "buy");
 
-  const isAvailableOnSnap = availableOnSwap.includes(currency.id);
+  const isAvailableOnSwap = availableOnSwap.includes(currency.id);
 
   const data = [
     <Chart
@@ -141,13 +141,13 @@ export default function SymbolDashboard({ route }: Props) {
       testID={"CoinChart"}
     />,
     <>
-      {!canBeBought && !isAvailableOnSnap ? (
+      {!canBeBought && !isAvailableOnSwap ? (
         <NotSupportedCryptocurrency />
       ) : (
         <FabActions
           marketPage={true}
           canBeBought={canBeBought}
-          isAvailableOnSnap={isAvailableOnSnap}
+          isAvailableOnSwap={isAvailableOnSwap}
           currency={currency}
         />
       )}
