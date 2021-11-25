@@ -9,6 +9,7 @@ import {
   listSupportedCurrencies,
 } from "@ledgerhq/live-common/lib/currencies";
 import { getFavoriteCryptocurrenciesSelector } from "../../reducers/market";
+import Button from "../../components/Button";
 import KeyboardView from "../../components/KeyboardView";
 import CurrencyRow from "../../components/CurrencyInfoRow";
 import { MarketClient } from "../../api/market";
@@ -18,7 +19,6 @@ import FilterIcon from "../../images/filter.png";
 import SearchBox from "./SearchBox";
 import NotFound from "./NotFound";
 import DownArrow from "../../icons/DownArrow";
-import { Button } from "react-native-share";
 
 type Props = {
   navigation: Object,
@@ -123,6 +123,10 @@ export default function Market({ navigation }: Props) {
     setSearchKey(flag);
   };
 
+  const onClickBackToCryptos = () => {
+    setShowOption(SHOW_OPTION_ALL);
+  };
+
   const loadMore = () => {
     if (activePage > 20) return;
     (async () => {
@@ -210,8 +214,13 @@ export default function Market({ navigation }: Props) {
                 title={"Mark your favourite cryptos"}
                 description={"Click on the star icon near a crypto to mark it and star it for later."}
                 />
-              <Button>
-              </Button>
+              <Button
+                type={"primary"}
+                title={"Browse cryptos"}
+                onPress={onClickBackToCryptos}
+                containerStyle={styles.browseCryptosBtn}
+              />
+
             </>
           ) : (null)))
         }
@@ -320,5 +329,8 @@ const styles = StyleSheet.create({
   loadingMore: {
     height: 40,
     paddingVertical: 6,
+  },
+  browseCryptosBtn: {
+    marginVertical: 16
   },
 });
