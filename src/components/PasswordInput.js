@@ -1,10 +1,11 @@
 /* @flow */
 import React, { useEffect, useState, useCallback, useRef } from "react";
-import { View, StyleSheet, TextInput } from "react-native";
+import { View, StyleSheet } from "react-native";
 import Icon from "react-native-vector-icons/dist/Feather";
 import Touchable from "./Touchable";
 import { getFontStyle } from "./LText";
 import { withTheme } from "../colors";
+import TextInput from "./FocusedTextInput";
 
 type Props = {
   secureTextEntry: boolean,
