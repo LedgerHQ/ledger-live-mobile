@@ -1,5 +1,5 @@
 /* @flow */
-import React, { useEffect, useState, useCallback, useRef } from "react";
+import React, { useState, useCallback } from "react";
 import { View, StyleSheet } from "react-native";
 import Icon from "react-native-vector-icons/dist/Feather";
 import Touchable from "./Touchable";
@@ -37,13 +37,6 @@ const PasswordInput = ({
   colors,
 }: Props) => {
   const [isFocused, setIsFocused] = useState(false);
-  const ref = useRef();
-
-  useEffect(() => {
-    if (autoFocus) {
-      ref.current?.focus();
-    }
-  }, [autoFocus]);
 
   const wrappedOnFocus = useCallback(() => {
     setIsFocused(true);
@@ -79,7 +72,6 @@ const PasswordInput = ({
       <TextInput
         allowFontScaling={false}
         autoFocus={autoFocus}
-        ref={ref}
         style={[
           styles.input,
           getFontStyle({ semiBold: true }),
