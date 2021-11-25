@@ -25,10 +25,6 @@ import { Trans } from "react-i18next";
 import type { CryptoCurrency, Account } from "@ledgerhq/live-common/lib/types";
 import { getCurrencyBridge } from "@ledgerhq/live-common/lib/bridge";
 import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
-import {
-  getDefaultPreferredNewAccountScheme,
-  getPreferredNewAccountScheme,
-} from "@ledgerhq/live-common/lib/derivation";
 
 import type { DerivationMode } from "@ledgerhq/live-common/lib/derivation";
 
