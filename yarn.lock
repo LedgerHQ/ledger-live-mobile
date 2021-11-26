@@ -2499,10 +2499,10 @@
   resolved "https://registry.yarnpkg.com/@ledgerhq/logs/-/logs-5.50.0.tgz#29c6419e8379d496ab6d0426eadf3c4d100cd186"
   integrity sha512-swKHYCOZUGyVt4ge0u8a7AwNcA//h4nx5wIi0sruGye1IJ5Cva0GyK9L2/WdX+kWVTKp92ZiEo1df31lrWGPgA==
 
-"@ledgerhq/native-ui@^0.3.0":
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/native-ui/-/native-ui-0.3.0.tgz#4cb9e8be8b4eaef60672c3d3ad432569ba1249f4"
-  integrity sha512-QZzazJzxAUUNOZjFsXKfvj0vGCjjn6A8PQp2fhI1RUSbVU9vvoh8vfusaOf7CtT2X84zMxbl2gQlAzhbz/Pf9A==
+"@ledgerhq/native-ui@^0.4.0":
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/native-ui/-/native-ui-0.4.0.tgz#30785990f4c837c02358ee57540039f0eb797f67"
+  integrity sha512-OiKEF7GF3gAd6VVdtmah8/hfdq2hjHQPoUJMwXLvz6PbRtFEs0oQk48Tq33VO8y7jMucRiibTscGdUEDejJWzA==
   dependencies:
     "@ledgerhq/icons-ui" "^0.2.0"
     "@ledgerhq/ui-shared" "^0.1.3"
@@ -2514,8 +2514,6 @@
     color "^3.1.3"
     moment "^2.29.1"
     react-native-modal "^12.0.3"
-    react-native-reanimated "~2.2.4"
-    react-native-svg "12.1.1"
     rn-range-slider "^2.1.1"
     styled-system "^5.1.5"
     victory-native "^35.5.5"
@@ -12641,7 +12639,7 @@ react-native-randombytes@^3.6.1:
     buffer "^4.9.1"
     sjcl "^1.0.3"
 
-react-native-reanimated@^2.2.4, react-native-reanimated@~2.2.4:
+react-native-reanimated@^2.2.4:
   version "2.2.4"
   resolved "https://registry.yarnpkg.com/react-native-reanimated/-/react-native-reanimated-2.2.4.tgz#36c5d15028b0bd7d479fba5199117ac870c7a532"
   integrity sha512-Nn648MfEEnTCEiWsl1YmfkojiLyV0NMY0EiRdDRbZNfJVfxBuyqhCxI/4Jd7aBi162qpgf8XK2mByYgvF4zLrQ==

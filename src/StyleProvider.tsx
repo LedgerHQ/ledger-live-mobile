@@ -22,6 +22,7 @@ export default function StyleProvider({
       colors: {
         ...theme.colors,
         ...defaultTheme.colors,
+        ...palettes[selectedPalette],
         palette: palettes[selectedPalette],
       },
       theme: selectedPalette,
