@@ -109,14 +109,16 @@ export default function SwapForm({
 
   const allAccounts = flattenAccounts(enhancedAccounts);
 
-  const elligibleAccountsForSelectedCurrency = allAccounts.filter(account =>
-    account.balance.gt(0),
+  const selectableCurrencies = getSupportedCurrencies({ providers, provider });
+
+  const elligibleAccountsForSelectedCurrency = allAccounts.filter(
+    account =>
+      account.balance.gt(0) &&
+      selectableCurrencies.some(c => c === getAccountCurrency(account)),
   );
 
   const defaultAccount =
     initDefaultAccount || elligibleAccountsForSelectedCurrency[0];
-
-  const selectableCurrencies = getSupportedCurrencies({ providers, provider });
 
   const maybeFilteredCurrencies = defaultAccount?.balance.gt(0)
     ? selectableCurrencies.filter(c => c !== getAccountCurrency(defaultAccount))
