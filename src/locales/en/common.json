@@ -3574,12 +3574,13 @@
     "memo": "Memo"
   },
   "Terms": {
-    "title": "Terms of Use",
+    "title": "TERMS OF USE",
     "read": "Read the Terms of Use",
     "switchLabel": "I have read and agree with the <1>Terms of Service</1>",
-    "switchLabelFull": "I have read and accept the Terms of Service and Privacy Policy",
+    "switchLabelFull": "I have read and agree with the Privacy Policy.",
     "cta": "Enter Ledger App",
-    "service": "Terms of service"
+    "service": "Terms of service",
+    "subTitle": "Please take some time to review our Terms of service and Privacy Policy"
   },
   "exchange": {
     "buy": {
