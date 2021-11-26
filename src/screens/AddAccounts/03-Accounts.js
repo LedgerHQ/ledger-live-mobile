@@ -315,9 +315,9 @@ function AddAccountsAccounts({
     () =>
       groupAddAccounts(existingAccounts, scannedAccounts, {
         scanning,
-        preferredNewAccountScheme: showAllCreatedAccounts
+        preferredNewAccountSchemes: showAllCreatedAccounts
           ? undefined
-          : preferredNewAccountScheme,
+          : [preferredNewAccountScheme],
       }),
     [
       existingAccounts,
