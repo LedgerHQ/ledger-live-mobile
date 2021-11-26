@@ -749,10 +749,10 @@
       }
     },
     "stepSelectDevice": {
-      "title": "What’s your device?",
+      "title": "Select your device",
       "nanoS": "Nano S",
       "nanoX": "Nano X",
-      "blue": "Blue"
+      "chooseDevice": "Choose your device",
     },
     "stepUseCase": {
       "title": "Hello!",
