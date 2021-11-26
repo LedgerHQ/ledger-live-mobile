@@ -2093,13 +2093,6 @@
   dependencies:
     commander "^2.20.0"
 
-"@ledgerhq/cryptoassets@6.15.1":
-  version "6.15.1"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/cryptoassets/-/cryptoassets-6.15.1.tgz#824bcf6019191dcf78bac4aafa346ca646573f31"
-  integrity sha512-YOPTAdOtxBke03ApisBgQxKShLmvzV8YU/uF9i6TpDA5hDCyjNbC2MVQkeTA4oOto+foKff9uwcBbminW8d6pA==
-  dependencies:
-    invariant "2"
-
 "@ledgerhq/cryptoassets@6.17.0", "@ledgerhq/cryptoassets@^6.17.0":
   version "6.17.0"
   resolved "https://registry.yarnpkg.com/@ledgerhq/cryptoassets/-/cryptoassets-6.17.0.tgz#cc3963b0ed726efcba976b78185d7f72ea9bedbc"
@@ -2295,7 +2288,7 @@
     bignumber.js "^9.0.1"
     json-rpc-2.0 "^0.2.16"
 
-"@ledgerhq/live-common@^21.17.2":
+"@ledgerhq/live-common@^21.18.0":
   version "21.18.0"
   resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-21.18.0.tgz#54d2b147cf1b2e5e31a4196418ccf5e9db4726a4"
   integrity sha512-Jv0wnyUK6gLyThyQhpiKzohSiAIcrnFLOt0NMkMN2S2dsSU6+pb8Rl/GFM/odTfJ/0giK7Lw4AAlQEEwr3Thrg==
