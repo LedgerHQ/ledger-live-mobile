@@ -11,7 +11,10 @@ import type { AccountLike, Account } from "@ledgerhq/live-common/lib/types";
 
 import { isCurrencySupported } from "../screens/Exchange/coinifyConfig";
 
-import { readOnlyModeEnabledSelector } from "../reducers/settings";
+import {
+  readOnlyModeEnabledSelector,
+  swapSelectableCurrenciesSelector,
+} from "../reducers/settings";
 import { accountsCountSelector } from "../reducers/accounts";
 import { NavigatorName, ScreenName } from "../const";
 import FabAccountButtonBar from "./FabAccountButtonBar";
@@ -34,7 +37,11 @@ function FabAccountActions({ account, parentAccount }: FabAccountActionsProps) {
   const { colors } = useTheme();
 
   const currency = getAccountCurrency(account);
-  const availableOnSwap = account.balance.gt(0);
+  const swapSelectableCurrencies = useSelector(
+    swapSelectableCurrenciesSelector,
+  );
+  const availableOnSwap =
+    swapSelectableCurrencies.includes(currency.id) && account.balance.gt(0);
   const readOnlyModeEnabled = useSelector(readOnlyModeEnabledSelector);
 
   const canBeBought = isCurrencySupported(currency, "buy");
