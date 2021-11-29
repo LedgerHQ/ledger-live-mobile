@@ -71,7 +71,7 @@ const NftViewer = ({ route }: Props) => {
   const isLoading = status === "loading";
 
   const defaultLinks = {
-    openSea: `https://opensea.io/assets/${collection.contract}/${nft.tokenId}`,
+    opensea: `https://opensea.io/assets/${collection.contract}/${nft.tokenId}`,
     rarible: `https://rarible.com/token/${collection.contract}:${nft.tokenId}`,
     etherscan: `https://etherscan.io/token/${collection.contract}?a=${nft.tokenId}`,
   };

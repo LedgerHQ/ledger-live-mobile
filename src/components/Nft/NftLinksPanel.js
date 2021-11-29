@@ -70,38 +70,16 @@ const NftLinksPanel = ({ links, isOpen, onClose }: Props) => {
         <CloseIcon size={18} />
       </TouchableOpacity>
 
-      {/* <NftLink
-        leftIcon={<RainbowMeIcon size={36} />}
-        title={`${t("nft.viewerModal.viewOn")} Rainbow.me`}
-        subtitle="Ledger Live App"
-        rightIcon={
-          <View
-            style={[
-              styles.badge,
-              {
-                backgroundColor: rgba(colors.live, 0.1),
-              },
-            ]}
-          >
-            <LText semiBold style={{ color: colors.live }}>
-              {t("tabs.platform")}
-            </LText>
-          </View>
-        }
-        onPress={navigateToRainbow}
-      />
-
-      <View style={styles.hr} /> */}
-
-      {!links.openSea ? null : (
+      {!links.opensea ? null : (
         <NftLink
           style={styles.sectionMargin}
           leftIcon={<OpenSeaIcon size={36} />}
           title={`${t("nft.viewerModal.viewOn")} OpenSea`}
           rightIcon={<ExternalLinkIcon size={20} color={colors.grey} />}
-          onPress={() => Linking.openURL(links.openSea)}
+          onPress={() => Linking.openURL(links.opensea)}
         />
       )}
+
       {!links.rarible ? null : (
         <NftLink
           leftIcon={<RaribleIcon size={36} />}
