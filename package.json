@@ -33,6 +33,8 @@
     "android:local:apk": "bundle exec fastlane android apk",
     "preandroid:local:beta": "bundle install",
     "android:local:beta": "bundle exec fastlane android local_beta --env production",
+    "preandroid:local:nightly": "bundle install",
+    "android:local:nightly": "bundle exec fastlane android local_nightly --env production",
     "preandroid:ci:playstore": "bundle install",
     "android:ci:playstore": "bundle exec fastlane android ci_playstore --env production",
     "android:staging": "cd android && ./gradlew assembleStagingRelease",

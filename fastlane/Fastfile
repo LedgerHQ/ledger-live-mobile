@@ -303,7 +303,7 @@ platform :android do
       path: [
         "android/app/build.gradle"
       ],
-      message: "Bump android version to v#{package["version"]}-#{version_code}"
+      message: "Bump android version to v#{package["version"]}-#{version_code}#{options[:nightly] ? " (nightly)" : ""}"
     )
     add_git_tag(
       tag: "android-v#{package["version"]}-#{version_code}"
@@ -339,11 +339,19 @@ platform :android do
         json_key_data: ENV["ANDROID_SERVICE_KEY_CONTENT"]
       )
     else
-      upload_to_play_store(
-        track: 'internal',
-        package_name: 'com.ledger.live',
-        json_key: ENV["ANDROID_SERVICE_KEY_PATH"]
-      )
+      if(options[:nightly])
+        upload_to_play_store(
+          track: 'Nightly',
+          package_name: 'com.ledger.live',
+          json_key_data: ENV["ANDROID_SERVICE_KEY_CONTENT"]
+        )
+      else
+        upload_to_play_store(
+          track: "internal",
+          package_name: "com.ledger.live",
+          json_key: ENV["ANDROID_SERVICE_KEY_PATH"],
+        )
+      end
     end
   end
 
@@ -370,6 +378,12 @@ platform :android do
     clean_beta
   end
 
+  desc "build nightly version"
+  lane :local_nightly do
+    prepare_android_internal(nightly: true)
+    build(type: "Release")
+    upload(nightly: true)
+  end
   # =========================== END LOCAL BUILD ===========================
   # ============================== CI BUILD ===============================
 
