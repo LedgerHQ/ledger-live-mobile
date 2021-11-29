@@ -55,6 +55,7 @@ import RebootProvider from "./context/Reboot";
 import ButtonUseTouchable from "./context/ButtonUseTouchable";
 import AuthPass from "./context/AuthPass";
 import LedgerStoreProvider from "./context/LedgerStore";
+import { MarketProvider } from "./context/MarketContext";
 import LoadingApp from "./components/LoadingApp";
 import StyledStatusBar from "./components/StyledStatusBar";
 import AnalyticsConsole from "./components/AnalyticsConsole";
@@ -478,10 +479,14 @@ export default class Root extends Component<
                                       <FirmwareUpdateBanner />
                                       <ToastProvider>
                                         <NotificationsProvider>
-                                          <SnackbarContainer />
-                                          <App
-                                            importDataString={importDataString}
-                                          />
+                                          <MarketProvider>
+                                            <SnackbarContainer />
+                                            <App
+                                              importDataString={
+                                                importDataString
+                                              }
+                                            />
+                                          </MarketProvider>
                                         </NotificationsProvider>
                                       </ToastProvider>
                                     </OnboardingContextProvider>

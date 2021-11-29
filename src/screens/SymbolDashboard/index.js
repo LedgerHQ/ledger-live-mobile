@@ -1,14 +1,9 @@
-import React, { useRef, useEffect, useState, useMemo } from "react";
-import { StyleSheet, FlatList } from "react-native";
-import { useSelector, useDispatch } from "react-redux";
-import {
-  listSupportedCurrencies,
-  // listTokens,
-} from "@ledgerhq/live-common/lib/currencies";
+import React, { useEffect, useRef, useState, useContext } from "react";
+import { StyleSheet, FlatList, ActivityIndicator } from "react-native";
+import { useSelector } from "react-redux";
 
 import Animated from "react-native-reanimated";
 import { createNativeWrapper } from "react-native-gesture-handler";
-import moment from "moment";
 import Chart from "./Chart";
 import NotSupportedCryptocurrency from "./NotSupportedCryptocurrency";
 import { accountsSelector } from "../../reducers/accounts";
@@ -16,7 +11,6 @@ import FabActions from "../../components/FabActions";
 import InfoTable from "./InfoTable";
 import globalSyncRefreshControl from "../../components/globalSyncRefreshControl";
 import { useScrollToTop } from "../../navigation/utils";
-import { useRange } from "./useRangeHook";
 import {
   counterValueCurrencySelector,
   swapSelectableCurrenciesSelector,
@@ -24,14 +18,20 @@ import {
 
 import { isCurrencySupported } from "../Exchange/coinifyConfig";
 
-import { loadCurrencyById, loadCurrencyChartData } from "../../actions/market";
 import {
-  selectedCurrencySelector,
-  priceStatisticsSelector,
-  marketCapSelector,
-  supplySelector,
-  currencyChartDataSelector,
-} from "../../reducers/market";
+  usePriceStatistics,
+  useMarketCap,
+  useSupply,
+  useMarketCurrencyChart,
+} from "../../hooks/market";
+
+import { useRange } from "../../hooks/market/useRangeHook";
+
+import {
+  MarketContext,
+  LOAD_CURRENCY_BY_ID,
+  LOAD_CHART_DATA,
+} from "../../context/MarketContext";
 
 type Props = {
   navigation: any,
@@ -46,82 +46,46 @@ const AnimatedFlatListWithRefreshControl = createNativeWrapper(
   },
 );
 
-const formattedHourTime = index =>
-  moment()
-    .startOf("hour")
-    .subtract(index, "hours")
-    .toDate();
-
-const formattedDayTime = index =>
-  moment()
-    .subtract(index, "days")
-    .toDate();
-
-const formattedMinuteTime = index =>
-  moment()
-    .subtract(index * 5, "minutes")
-    .toDate();
-
 export default function SymbolDashboard({ route }: Props) {
   const { currencyOrToken } = route.params;
   const prefferedCurrency = useSelector(counterValueCurrencySelector);
-  const priceStat = useSelector(priceStatisticsSelector);
-  const marketCap = useSelector(marketCapSelector);
-  const supply = useSelector(supplySelector);
-  const prices = useSelector(currencyChartDataSelector);
-  const accounts = useSelector(accountsSelector);
-  const currency = useSelector(selectedCurrencySelector);
-  const scrollY = useRef(new Animated.Value(0)).current;
+  const { contextState, contextDispatch } = useContext(MarketContext);
+
   const [range, setRange] = useState({ key: "day", value: "1D", label: "1D" });
-  const [loading, setLoading] = useState(false);
-
-  const ref = useRef();
-  useScrollToTop(ref);
-
-  const buildChartData = ({ interval, prices }) => {
-    if (!prices.length || !interval) return [];
-
-    const data = [];
-    for (let i = 0; i <= prices.length - 1; i++) {
-      const price = prices[i];
-      const formattedTime =
-        interval === "hourly"
-          ? formattedHourTime(i)
-          : interval === "minutely"
-          ? formattedMinuteTime(i)
-          : formattedDayTime(i);
-      data.push({ date: formattedTime, value: price });
-    }
-    return data;
-  };
+  const accounts = useSelector(accountsSelector);
+  const scrollY = useRef(new Animated.Value(0)).current;
 
   const {
     rangeData: { days, interval },
   } = useRange(range.value);
 
-  const chartData = buildChartData({ interval, prices });
-
-  const dispatch = useDispatch();
+  const ref = useRef();
+  useScrollToTop(ref);
 
   useEffect(() => {
-    setLoading(true);
-    dispatch(
-      loadCurrencyById({
-        id: currencyOrToken.id,
-        counterCurrency: prefferedCurrency.ticker,
-        range: "1h,24h,7d,30d,1y",
-      }),
-    );
-    dispatch(
-      loadCurrencyChartData({
-        id: currencyOrToken.id,
-        counterCurrency: prefferedCurrency.ticker,
-        days,
-        interval,
-      }),
-    );
-    setLoading(false);
-  }, [currencyOrToken, days, dispatch, interval, prefferedCurrency]);
+    contextDispatch(LOAD_CURRENCY_BY_ID, {
+      id: currencyOrToken.id,
+      counterCurrency: prefferedCurrency.ticker,
+      range,
+    });
+    contextDispatch(LOAD_CHART_DATA, {
+      id: currencyOrToken.id,
+      counterCurrency: prefferedCurrency.ticker,
+      days,
+      interval,
+    });
+  }, [currencyOrToken.id, days, interval, prefferedCurrency.ticker, range]);
+
+  const { currencyChartData, chartLoading, currency, loading } = contextState;
+
+  const { chartData } = useMarketCurrencyChart({
+    prices: currencyChartData,
+    interval,
+  });
+
+  const priceStat = usePriceStatistics(currency, prefferedCurrency);
+  const marketCap = useMarketCap(currency, prefferedCurrency);
+  const supply = useSupply(currency, prefferedCurrency);
 
   const availableOnSwap = useSelector(state =>
     swapSelectableCurrenciesSelector(state),
@@ -134,27 +98,34 @@ export default function SymbolDashboard({ route }: Props) {
   const data = [
     <Chart
       chartData={chartData}
-      loading={loading}
+      loading={chartLoading}
       setRange={setRange}
+      range={range}
       currency={currency}
       prefferedCurrency={prefferedCurrency}
       testID={"CoinChart"}
     />,
-    <>
-      {!canBeBought && !isAvailableOnSwap ? (
-        <NotSupportedCryptocurrency />
-      ) : (
-        <FabActions
-          marketPage={true}
-          canBeBought={canBeBought}
-          isAvailableOnSwap={isAvailableOnSwap}
-          currency={currency}
-        />
-      )}
-    </>,
-    <InfoTable title={"Price statistics"} rows={priceStat} />,
-    <InfoTable title={"Market cap"} rows={marketCap} />,
-    <InfoTable title={"Supply"} rows={supply} />,
+    ...(loading ? (
+      <ActivityIndicator />
+    ) : (
+      [
+        <>
+          {!canBeBought && !isAvailableOnSwap ? (
+            <NotSupportedCryptocurrency currency={currency} />
+          ) : (
+            <FabActions
+              marketPage={true}
+              canBeBought={canBeBought}
+              isAvailableOnSwap={isAvailableOnSwap}
+              currency={currency}
+            />
+          )}
+        </>,
+        <InfoTable title={"Price statistics"} rows={priceStat} />,
+        <InfoTable title={"Market cap"} rows={marketCap} />,
+        <InfoTable title={"Supply"} rows={supply} />,
+      ]
+    )),
   ];
   return (
     <AnimatedFlatListWithRefreshControl

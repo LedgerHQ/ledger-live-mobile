@@ -107,7 +107,7 @@ export default function MainNavigator({
           unmountOnBlur: true,
           tabBarIcon: (props: any) => (
             <TabIcon Icon={MarketIcon} i18nKey="Market" {...props} />
-          )
+          ),
         }}
       />
     </Tab.Navigator>

@@ -3,7 +3,13 @@ import { View, Text, StyleSheet, Linking } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome5Pro";
 import { normalize } from "../../helpers/normalizeSize";
 
-export default function NotSupportedCryptocurrency() {
+type Props = {
+  currency: {
+    name: string,
+  },
+};
+
+export default function NotSupportedCryptocurrency({ currency }: Props) {
   const onLearnMore = useCallback(() => {
     Linking.openURL("https://www.ledger.com/supported-crypto-assets");
   }, []);
@@ -15,7 +21,7 @@ export default function NotSupportedCryptocurrency() {
       </View>
       <View style={styles.textWrapper}>
         <Text style={styles.text}>
-          {"Binance Coin is not supported on Ledger Live."}
+          {`${currency.name} is not supported on Ledger Live.`}
           <Text onPress={onLearnMore} style={[styles.text, styles.btnText]}>
             Learn more
           </Text>

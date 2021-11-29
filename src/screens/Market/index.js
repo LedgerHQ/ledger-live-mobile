@@ -8,7 +8,7 @@ import {
   useCurrenciesByMarketcap,
   listSupportedCurrencies,
 } from "@ledgerhq/live-common/lib/currencies";
-import { getFavoriteCryptocurrenciesSelector } from "../../reducers/market";
+import { useFavoriteCrypto } from "../../hooks/market";
 import Button from "../../components/Button";
 import KeyboardView from "../../components/KeyboardView";
 import CurrencyRow from "../../components/CurrencyInfoRow";
@@ -87,9 +87,7 @@ export default function Market({ navigation }: Props) {
     [],
   );
 
-  const favoriteCryptocurrencies = useSelector(
-    getFavoriteCryptocurrenciesSelector,
-  );
+  const favoriteCryptocurrencies = useFavoriteCrypto();
 
   const onPressItem = currencyOrToken => {
     navigation.navigate("SymbolDashboard", {

@@ -120,7 +120,6 @@ export class MarketClient extends APIClient {
       counterCurrency,
       range,
     });
-    // currenciesInfos
     return currenciesInfos[0];
   }
 

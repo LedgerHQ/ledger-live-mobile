@@ -1,40 +1,38 @@
 // @flow
 
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useContext } from "react";
 import { TouchableOpacity, StyleSheet } from "react-native";
 import Star from "../icons/Star";
-import { updateFavoriteCryptocurrencies } from "../actions/market";
-import { getFavoriteCryptocurrenciesSelector } from "../reducers/market";
+import {
+  MarketContext,
+  SET_FAVORITE_CRYPTOCURRENCIES,
+} from "../context/MarketContext";
+import { useFavoriteCrypto } from "../hooks/market";
+import { setFavoriteCurrencies as setFavoriteCurrenciesDB } from "../db";
 
 type Props = {
   cryptocurrency: Object,
 };
 
 function AddFavoritesButton({ cryptocurrency }: Props) {
-  const dispatch = useDispatch();
+  const { contextDispatch } = useContext(MarketContext);
 
-  const favoriteCryptocurrencies = useSelector(
-    getFavoriteCryptocurrenciesSelector,
-  );
+  const favoriteCryptocurrencies = useFavoriteCrypto();
 
   const isFavorite = favoriteCryptocurrencies.includes(cryptocurrency.id);
 
+  let favorites = [];
+
   const addToFavorites = () => {
     if (isFavorite) {
-      dispatch(
-        updateFavoriteCryptocurrencies(
-          favoriteCryptocurrencies.filter(fc => fc !== cryptocurrency.id),
-        ),
+      favorites = favoriteCryptocurrencies.filter(
+        fc => fc !== cryptocurrency.id,
       );
     } else {
-      dispatch(
-        updateFavoriteCryptocurrencies([
-          ...favoriteCryptocurrencies,
-          cryptocurrency.id,
-        ]),
-      );
+      favorites = [...favoriteCryptocurrencies, cryptocurrency.id];
     }
+    contextDispatch(SET_FAVORITE_CRYPTOCURRENCIES, favorites);
+    setFavoriteCurrenciesDB(favorites);
   };
 
   return (

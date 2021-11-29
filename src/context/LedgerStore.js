@@ -3,21 +3,10 @@ import React, { Component } from "react";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 import { createStore, applyMiddleware, compose } from "redux";
-import {
-  getAccounts,
-  getCountervalues,
-  getSettings,
-  getBle,
-  getFavoriteCurrencies,
-  getRangeForChart,
-} from "../db";
+import { getAccounts, getCountervalues, getSettings, getBle } from "../db";
 import reducers from "../reducers";
 import { importSettings } from "../actions/settings";
 import { importStore as importAccounts } from "../actions/accounts";
-import {
-  setFavoriteCryptocurrencies,
-  setSelectedTimeRangeForChart,
-} from "../actions/market";
 import { importBle } from "../actions/ble";
 import { INITIAL_STATE, supportedCountervalues } from "../reducers/settings";
 
@@ -76,17 +65,6 @@ export default class LedgerStoreProvider extends Component<
 
     const accountsData = await getAccounts();
     store.dispatch(importAccounts(accountsData));
-    const favoriteCurrencies = await getFavoriteCurrencies();
-    if (favoriteCurrencies) {
-      store.dispatch(
-        setFavoriteCryptocurrencies(Object.values(favoriteCurrencies)),
-      );
-    }
-    const rangeForChart = await getRangeForChart();
-    if (favoriteCurrencies) {
-      store.dispatch(setSelectedTimeRangeForChart(rangeForChart));
-    }
-
     const initialCountervalues = await getCountervalues();
 
     this.setState({ ready: true, initialCountervalues }, () => {

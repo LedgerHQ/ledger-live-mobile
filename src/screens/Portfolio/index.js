@@ -30,6 +30,7 @@ import RequireTerms from "../../components/RequireTerms";
 import { useScrollToTop } from "../../navigation/utils";
 import { ScreenName } from "../../const";
 import { PortfolioHistoryList } from "./PortfolioHistory";
+import { useMarketContextUpdate } from "../../hooks/market";
 
 import FabActions from "../../components/FabActions";
 import LText from "../../components/LText";
@@ -52,6 +53,8 @@ export default function PortfolioScreen({ navigation }: Props) {
   const counterValueCurrency = useSelector(counterValueCurrencySelector);
   const portfolio = usePortfolio();
   const { t } = useTranslation();
+
+  useMarketContextUpdate();
 
   const refreshAccountsOrdering = useRefreshAccountsOrdering();
   useFocusEffect(refreshAccountsOrdering);
