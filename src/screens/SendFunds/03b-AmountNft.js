@@ -1,5 +1,5 @@
 // @flow
-import React, { useCallback, useState, useEffect } from "react";
+import React, { useCallback, useState, useMemo, useEffect } from "react";
 
 import { BigNumber } from "bignumber.js";
 import { useSelector } from "react-redux";
@@ -36,29 +36,46 @@ export default function SendAmountNFT({ route }: Props) {
 
   const { colors } = useTheme();
   const { account, parentAccount } = useSelector(accountScreenSelector(route));
-  const [quantity, setQuantity] = useState(0);
   const [error, setError] = useState({});
 
+  const bridge = useMemo(() => getAccountBridge(account, parentAccount), [
+    account,
+    parentAccount,
+  ]);
   const {
     transaction,
     setTransaction,
     status,
     bridgePending,
-    // bridgeError,
   } = useBridgeTransaction(() => ({
     transaction: route.params.transaction,
     account,
     parentAccount,
   }));
 
+  const onQuantityChange = useCallback(
+    text => {
+      const newQuantity = text ? new BigNumber(text.replace(/\D/g, "")) : null;
+
+      setTransaction(
+        bridge.updateTransaction(transaction, {
+          quantities: [newQuantity],
+        }),
+      );
+    },
+    [bridge, setTransaction, transaction],
+  );
+  // Set the quantity as null as a start to allow the placeholder to appear
   useEffect(() => {
-    const bridge = getAccountBridge(account, parentAccount);
     setTransaction(
       bridge.updateTransaction(transaction, {
-        quantities: [new BigNumber(quantity ?? 0)],
+        quantities: [null],
       }),
     );
-  }, [quantity]);
+  }, []);
+  const quantity = useMemo(() => transaction.quantities?.[0]?.toNumber(), [
+    transaction.quantities,
+  ]);
 
   useEffect(() => {
     let err = {};
@@ -83,12 +100,6 @@ export default function SendAmountNFT({ route }: Props) {
     nft =>
       nft.collection.contract === transaction?.collection &&
       nft.tokenId === transaction?.tokenIds[0],
-  );
-  const onChangeText = useCallback(
-    value => {
-      setQuantity(value?.startsWith("0") ? value.substring(1) : value);
-    },
-    [setQuantity],
   );
 
   const onContinue = useCallback(() => {
@@ -119,9 +130,9 @@ export default function SendAmountNFT({ route }: Props) {
               caretHidden={true}
               editable={true}
               multiline={false}
-              keyboardType="number-pad"
+              keyboardType="numeric"
               value={quantity}
-              onChangeText={onChangeText}
+              onChangeText={onQuantityChange}
               placeholder="0"
             />
             <LText
