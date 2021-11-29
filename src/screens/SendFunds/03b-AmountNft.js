@@ -30,7 +30,7 @@ type Props = {
   },
 };
 
-export default function SendAmountCoin({ route }: Props) {
+export default function SendAmountNFT({ route }: Props) {
   const navigation = useNavigation();
   const { t } = useTranslation();
 
@@ -176,7 +176,7 @@ const styles = StyleSheet.create({
     fontSize: 50,
     textAlign: "center",
     width: "100%",
-    height: 40,
+    padding: 16,
   },
   error: {
     width: "100%",
