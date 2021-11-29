@@ -93,19 +93,23 @@ const NftLinksPanel = ({ links, isOpen, onClose }: Props) => {
 
       <View style={styles.hr} /> */}
 
-      <NftLink
-        style={styles.sectionMargin}
-        leftIcon={<OpenSeaIcon size={36} />}
-        title={`${t("nft.viewerModal.viewOn")} OpenSea`}
-        rightIcon={<ExternalLinkIcon size={20} color={colors.grey} />}
-        onPress={() => Linking.openURL(links.openSea)}
-      />
-      <NftLink
-        leftIcon={<RaribleIcon size={36} />}
-        title={`${t("nft.viewerModal.viewOn")} Rarible`}
-        rightIcon={<ExternalLinkIcon size={20} color={colors.grey} />}
-        onPress={() => Linking.openURL(links.rarible)}
-      />
+      {!links.openSea ? null : (
+        <NftLink
+          style={styles.sectionMargin}
+          leftIcon={<OpenSeaIcon size={36} />}
+          title={`${t("nft.viewerModal.viewOn")} OpenSea`}
+          rightIcon={<ExternalLinkIcon size={20} color={colors.grey} />}
+          onPress={() => Linking.openURL(links.openSea)}
+        />
+      )}
+      {!links.rarible ? null : (
+        <NftLink
+          leftIcon={<RaribleIcon size={36} />}
+          title={`${t("nft.viewerModal.viewOn")} Rarible`}
+          rightIcon={<ExternalLinkIcon size={20} color={colors.grey} />}
+          onPress={() => Linking.openURL(links.rarible)}
+        />
+      )}
 
       <View style={styles.hr} />
 
