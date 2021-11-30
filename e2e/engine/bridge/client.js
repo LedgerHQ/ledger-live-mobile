@@ -6,7 +6,6 @@ import type { AccountRaw } from "@ledgerhq/live-common/lib/types";
 import { store } from "../../../src/context/LedgerStore";
 import { importSettings } from "../../../src/actions/settings";
 import { setAccounts } from "../../../src/actions/accounts";
-import { setCurrency, setCurrencyChartData } from "../../../src/actions/market";
 import { acceptTerms } from "../../../src/logic/terms";
 import accountModel from "../../../src/logic/accountModel";
 import { navigate } from "../../../src/rootnavigation";
@@ -57,12 +56,6 @@ async function onMessage(event: { data: mixed }) {
     }
     case "navigate":
       navigate(msg.payload);
-      break;
-    case "setCurrency":
-      store.dispatch(setCurrency(msg.payload));
-      break;
-    case "setCurrencyChartData":
-      store.dispatch(setCurrencyChartData(msg.payload));
       break;
     default:
       break;

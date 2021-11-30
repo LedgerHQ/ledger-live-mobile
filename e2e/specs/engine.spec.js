@@ -16,11 +16,5 @@ describe("Mobile E2E Test Engine", () => {
         await bridge.loadConfig("1AccountBTC1AccountETH", true);
       });
     });
-    it("should import chart data", async () => {
-      await bridge.loadCurrencyChartData("chartDataCompleted");
-    });
-    it("should import coin", async () => {
-      await bridge.loadCurrencyInfo("symboldashboardcomleted");
-    });
   });
 });

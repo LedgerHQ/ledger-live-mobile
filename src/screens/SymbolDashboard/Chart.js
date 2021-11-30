@@ -6,10 +6,7 @@ import { getCurrencyColor } from "@ledgerhq/live-common/lib/currencies/color";
 import type { Unit } from "@ledgerhq/live-common/lib/types";
 import { useSelector } from "react-redux";
 import { ensureContrast } from "../../colors";
-import {
-  useTimeRangeForChart,
-  useSelectedTimeRangeForChart,
-} from "../../hooks/market";
+import { useTimeRangeForChart } from "../../hooks/market";
 import getWindowDimensions from "../../logic/getWindowDimensions";
 import Delta from "../../components/Delta";
 import FormatDate from "../../components/FormatDate";
@@ -40,9 +37,9 @@ export default function Chart({
   loading,
   setRange,
   currency,
+  range,
 }: Props) {
   const counterValueCurrency = useSelector(counterValueCurrencySelector);
-  const contextRange = useSelectedTimeRangeForChart();
   const portfolio = usePortfolio();
 
   const [hoveredItem, setHoverItem] = useState();
@@ -94,7 +91,7 @@ export default function Chart({
       <View style={styles.pillsContainer}>
         <Pills
           isDisabled={!isAvailable}
-          value={contextRange}
+          value={range.key}
           onChange={setLocalTimeRange}
           // $FlowFixMe
           items={timeRangeItems}

@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 
 import Animated from "react-native-reanimated";
 import { createNativeWrapper } from "react-native-gesture-handler";
+import { useTheme } from "@react-navigation/native";
 import Chart from "./Chart";
 import NotSupportedCryptocurrency from "./NotSupportedCryptocurrency";
 import { accountsSelector } from "../../reducers/accounts";
@@ -23,6 +24,8 @@ import {
   useMarketCap,
   useSupply,
   useMarketCurrencyChart,
+  useTimeRangeForChart,
+  useSelectedTimeRangeForChart,
 } from "../../hooks/market";
 
 import { useRange } from "../../hooks/market/useRangeHook";
@@ -50,8 +53,15 @@ export default function SymbolDashboard({ route }: Props) {
   const { currencyOrToken } = route.params;
   const prefferedCurrency = useSelector(counterValueCurrencySelector);
   const { contextState, contextDispatch } = useContext(MarketContext);
+  const [, , timeRangeItems] = useTimeRangeForChart();
 
-  const [range, setRange] = useState({ key: "day", value: "1D", label: "1D" });
+  const savedRange = useSelectedTimeRangeForChart();
+
+  const selectedRange = timeRangeItems.find(i => i.key === savedRange);
+
+  const { colors } = useTheme();
+
+  const [range, setRange] = useState(selectedRange);
   const accounts = useSelector(accountsSelector);
   const scrollY = useRef(new Animated.Value(0)).current;
 
@@ -81,6 +91,7 @@ export default function SymbolDashboard({ route }: Props) {
   const { chartData } = useMarketCurrencyChart({
     prices: currencyChartData,
     interval,
+    id: currencyOrToken.id,
   });
 
   const priceStat = usePriceStatistics(currency, prefferedCurrency);
@@ -105,27 +116,25 @@ export default function SymbolDashboard({ route }: Props) {
       prefferedCurrency={prefferedCurrency}
       testID={"CoinChart"}
     />,
-    ...(loading ? (
-      <ActivityIndicator />
-    ) : (
-      [
-        <>
-          {!canBeBought && !isAvailableOnSwap ? (
-            <NotSupportedCryptocurrency currency={currency} />
-          ) : (
-            <FabActions
-              marketPage={true}
-              canBeBought={canBeBought}
-              isAvailableOnSwap={isAvailableOnSwap}
-              currency={currency}
-            />
-          )}
-        </>,
-        <InfoTable title={"Price statistics"} rows={priceStat} />,
-        <InfoTable title={"Market cap"} rows={marketCap} />,
-        <InfoTable title={"Supply"} rows={supply} />,
-      ]
-    )),
+    ...(loading
+      ? [<ActivityIndicator color={colors.grey} />]
+      : [
+          <>
+            {!canBeBought && !isAvailableOnSwap ? (
+              <NotSupportedCryptocurrency currency={currency} />
+            ) : (
+              <FabActions
+                marketPage={true}
+                canBeBought={canBeBought}
+                isAvailableOnSwap={isAvailableOnSwap}
+                currency={currency}
+              />
+            )}
+          </>,
+          <InfoTable title={"Price statistics"} rows={priceStat} />,
+          <InfoTable title={"Market cap"} rows={marketCap} />,
+          <InfoTable title={"Supply"} rows={supply} />,
+        ]),
   ];
   return (
     <AnimatedFlatListWithRefreshControl

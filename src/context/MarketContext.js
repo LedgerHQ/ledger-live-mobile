@@ -16,7 +16,7 @@ export const MarketContext = React.createContext();
 
 const handlers = {
   LOAD_CURRENCY_BY_ID: async ({ action, dispatch }) => {
-    dispatch(SET_CHART_LOADING, { chartLoading: true });
+    dispatch(SET_LOADING, { loading: true });
 
     const { id, counterCurrency, range } = action.payload;
     const currency = await marketClient.currencyById({
@@ -26,10 +26,10 @@ const handlers = {
     });
 
     dispatch(SET_CURRENCY, { currency });
-    dispatch(SET_CHART_LOADING, { chartLoading: false });
+    dispatch(SET_LOADING, { loading: false });
   },
   LOAD_CHART_DATA: async ({ action, dispatch }) => {
-    dispatch(SET_LOADING, { loading: true });
+    dispatch(SET_CHART_LOADING, { chartLoading: true });
 
     const { id, counterCurrency, days, interval } = action.payload;
     const chartData = await marketClient.currencyChartData({
@@ -40,7 +40,7 @@ const handlers = {
     });
 
     dispatch(SET_CURRENCY_CHART_DATA, { currencyChartData: chartData });
-    dispatch(SET_LOADING, { loading: false });
+    dispatch(SET_CHART_LOADING, { chartLoading: false });
   },
 };
 
@@ -105,6 +105,12 @@ function marketReducer(state, action) {
       };
     }
     case SET_CHART_LOADING: {
+      return {
+        ...state,
+        ...action.payload,
+      };
+    }
+    case SET_LOADING: {
       return {
         ...state,
         ...action.payload,

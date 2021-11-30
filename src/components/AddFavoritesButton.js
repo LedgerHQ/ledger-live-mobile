@@ -34,7 +34,6 @@ function AddFavoritesButton({ cryptocurrency }: Props) {
     contextDispatch(SET_FAVORITE_CRYPTOCURRENCIES, favorites);
     setFavoriteCurrenciesDB(favorites);
   };
-
   return (
     <TouchableOpacity onPress={addToFavorites} style={styles.button}>
       <Star

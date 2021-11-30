@@ -1,5 +1,4 @@
-import { useCallback, useContext, useEffect, useState, useMemo } from "react";
-import { useSelector } from "react-redux";
+import { useCallback, useContext, useEffect, useState } from "react";
 import moment from "moment";
 import { useTranslation } from "react-i18next";
 import {
@@ -7,24 +6,16 @@ import {
   MARKET_SET_SELECTED_TIME_RANGE,
   SET_FAVORITE_CRYPTOCURRENCIES,
 } from "../../context/MarketContext";
-import { counterValueCurrencySelector } from "../../reducers/settings";
 import { currencyFormat } from "../../helpers/currencyFormatter";
-import { useRange } from "./useRangeHook";
 import {
   getRangeForChart,
   getFavoriteCurrencies,
   setRangeForChart as setRangeForChartDB,
 } from "../../db";
-import { MarketClient } from "../../api/market";
 
 export const useMarketRoot = () => {
   const { contextState } = useContext(MarketContext);
   return contextState;
-};
-
-export const useSelectedCurrency = () => {
-  const market = useMarketRoot();
-  return market.currency;
 };
 
 export const usePriceStatistics = (currency, prefferedCurrency) => [
@@ -106,40 +97,7 @@ export const useFavoriteCrypto = () => {
   const market = useMarketRoot();
   return market.favoriteCryptocurrencies;
 };
-
-export const useCryptoChartData = () => {
-  const market = useMarketRoot();
-  return market.currencyChartData;
-};
-
-export const useMarketCurrency = ({ id, counterCurrency, range }) => {
-  const [currency, setCurrency] = useState({});
-  const [currencyLoading, setLoading] = useState(true);
-
-  console.log(id, counterCurrency, range);
-
-  useMemo(() => {
-    const marketClient = new MarketClient();
-    marketClient
-      .currencyById({
-        id: id || "",
-        counterCurrency,
-        range,
-      })
-      .then(currency => {
-        setCurrency(currency);
-        // contextDispatch(SET_CURRENCY, { currency });
-        setLoading(false);
-      })
-      .catch(() => {
-        setLoading(false);
-      });
-    console.log(id, counterCurrency, range, "asd");
-  }, [id, counterCurrency, range]);
-  return { currencyLoading, currency };
-};
-
-export const useMarketCurrencyChart = ({ interval, prices }) => {
+export const useMarketCurrencyChart = ({ interval, prices, id }) => {
   const [chartData, setChartData] = useState([]);
 
   const formattedHourTime = index =>
@@ -179,7 +137,7 @@ export const useMarketCurrencyChart = ({ interval, prices }) => {
     const chart = buildChartData();
 
     setChartData(chart);
-  }, [interval, prices.length]);
+  }, [interval, prices.length, id, prices]);
 
   return { chartData };
 };
