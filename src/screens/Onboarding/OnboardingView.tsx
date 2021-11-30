@@ -17,7 +17,7 @@ const hitSlop = {
 };
 
 type Props = {
-  title: React.ReactNode;
+  title?: React.ReactNode;
   subTitle?: React.ReactNode;
   children?: React.ReactNode;
   footer?: React.ReactNode;
@@ -54,20 +54,30 @@ function OnboardingView({
 
   return (
     <SafeAreaView style={[{ flex: 1 }, { backgroundColor: colors.background }]}>
-      <Flex flex={1} paddingX={6}>
+      <Flex flex={1} paddingX={6} bg="palette.background.main">
         {/* HEADER */}
         <Flex mb={8}>
-          <Flex flexDirection="row" justifyContent="space-between" mb={subTitle ? 9 : 6}>
+          <Flex
+            flexDirection="row"
+            justifyContent="space-between"
+            mb={subTitle ? 9 : 6}
+          >
             <View>
               {hasBackButton ? (
-                <TouchableOpacity onPress={handlecustomBackAction} hitSlop={hitSlop}>
+                <TouchableOpacity
+                  onPress={handlecustomBackAction}
+                  hitSlop={hitSlop}
+                >
                   <Icons.ArrowLeftMedium size="24px" />
                 </TouchableOpacity>
               ) : null}
             </View>
             <View>
               {hasCloseButton ? (
-                <TouchableOpacity onPress={handlecustomCloseAction} hitSlop={hitSlop}>
+                <TouchableOpacity
+                  onPress={handlecustomCloseAction}
+                  hitSlop={hitSlop}
+                >
                   <Icons.CloseMedium size="24px" />
                 </TouchableOpacity>
               ) : null}
@@ -75,16 +85,24 @@ function OnboardingView({
           </Flex>
 
           {/* HEADER TITLES */}
-          <Flex>
-            <Text variant="h1" fontSize={8} mb={3} textAlign={centerTitle ? "center" : null}>
-              {title}
-            </Text>
-            {subTitle ? (
-              <Text variant="body" fontSize={4}>
-                {subTitle}
+          {title ? (
+            <Flex>
+              <Text
+                variant="h1"
+                fontSize={8}
+                mb={3}
+                textAlign={centerTitle ? "center" : null}
+                style={{textTransform: "uppercase"}}
+              >
+                {title}
               </Text>
-            ) : null}
-          </Flex>
+              {subTitle ? (
+                <Text variant="body" fontSize={4}>
+                  {subTitle}
+                </Text>
+              ) : null}
+            </Flex>
+          ) : null}
         </Flex>
 
         {/* BODY */}
