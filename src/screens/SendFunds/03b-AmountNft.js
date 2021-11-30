@@ -1,5 +1,5 @@
 // @flow
-import React, { useCallback, useState, useMemo, useEffect } from "react";
+import React, { useCallback, useMemo, useEffect } from "react";
 
 import { BigNumber } from "bignumber.js";
 import { useSelector } from "react-redux";
