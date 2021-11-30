@@ -36,7 +36,6 @@ export default function SendAmountNFT({ route }: Props) {
 
   const { colors } = useTheme();
   const { account, parentAccount } = useSelector(accountScreenSelector(route));
-  const [error, setError] = useState({});
 
   const bridge = useMemo(() => getAccountBridge(account, parentAccount), [
     account,
@@ -77,25 +76,6 @@ export default function SendAmountNFT({ route }: Props) {
     transaction.quantities,
   ]);
 
-  useEffect(() => {
-    let err = {};
-
-    if (status?.warnings?.amount) {
-      err = {
-        type: "warning",
-        content: status?.warnings?.amount,
-      };
-    }
-    if (status?.errors?.amount) {
-      err = {
-        type: "error",
-        content: status?.errors?.amount,
-      };
-    }
-
-    setError(err);
-  }, [status]);
-
   const nft = account?.nfts?.find(
     nft =>
       nft.collection.contract === transaction?.collection &&
@@ -109,6 +89,26 @@ export default function SendAmountNFT({ route }: Props) {
       transaction,
     });
   }, [account, parentAccount, navigation, transaction]);
+
+  const error = (() => {
+    if (status?.warnings?.amount) {
+      return (
+        <LText style={styles.error} color={"orange"} numberOfLines={2}>
+          <TranslatedError error={status?.warnings?.amount} />
+        </LText>
+      );
+    }
+
+    if (status?.errors?.amount) {
+      return (
+        <LText style={styles.error} color={"alert"} numberOfLines={2}>
+          <TranslatedError error={status?.errors?.amount} />
+        </LText>
+      );
+    }
+
+    return <LText style={styles.error} numberOfLines={2} />;
+  })();
 
   return (
     <>
@@ -135,13 +135,7 @@ export default function SendAmountNFT({ route }: Props) {
               onChangeText={onQuantityChange}
               placeholder="0"
             />
-            <LText
-              style={styles.error}
-              color={error?.type === "error" ? "alert" : "orange"}
-              numberOfLines={2}
-            >
-              <TranslatedError error={error.content} />
-            </LText>
+            {error}
           </View>
           <View style={styles.availableContainer}>
             <LText style={styles.available}>
