@@ -62,8 +62,8 @@ const OperationDetails = ({ route }: Props) => {
   const swap = fromAccount.swapHistory.find(s => s.swapId === swapId);
   const status = Config.DEBUG_SWAP_STATUS || swap.status;
 
-  const fromCurrency = getAccountCurrency(fromAccount);
-  const toCurrency = getAccountCurrency(toAccount);
+  const fromCurrency = fromAccount && getAccountCurrency(fromAccount);
+  const toCurrency = toAccount && getAccountCurrency(toAccount);
   const statusColorKey = getStatusColor(status, colors, true);
   const dotStyles = { backgroundColor: colors[statusColorKey] };
   const textColorStyles = { color: colors[statusColorKey] };

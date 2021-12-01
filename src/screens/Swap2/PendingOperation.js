@@ -29,7 +29,7 @@ const PendingOperation = () => {
     fromParentAccount,
   } = route.params;
 
-  const sourceCurrency = getAccountCurrency(fromAccount);
+  const sourceCurrency = fromAccount && getAccountCurrency(fromAccount);
 
   const onComplete = useCallback(() => {
     navigation.navigate(ScreenName.OperationDetails, {

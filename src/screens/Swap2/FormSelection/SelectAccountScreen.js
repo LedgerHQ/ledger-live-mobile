@@ -45,8 +45,8 @@ export default function SelectAccount({ navigation, route }: Props) {
   const unfilteredAccounts = useSelector(accountsSelector);
   const selectableCurrencies = useSelector(swapSelectableCurrenciesSelector);
 
-  const accounts = unfilteredAccounts.filter(acc =>
-    selectableCurrencies.includes(getAccountCurrency(acc).id),
+  const accounts = unfilteredAccounts.filter(
+    acc => acc && selectableCurrencies.includes(getAccountCurrency(acc).id),
   );
 
   const enhancedAccounts = useMemo(() => {

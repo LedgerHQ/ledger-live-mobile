@@ -67,7 +67,7 @@ export default function AccountAmountRow({
     rates: { status: ratesStatus },
   } = swap;
 
-  const fromUnit = getAccountUnit(account);
+  const fromUnit = account && getAccountUnit(account);
   const toUnit = toCurrency?.units[0];
 
   const hideError =
@@ -140,7 +140,12 @@ export default function AccountAmountRow({
               <ActivityIndicator color={colors.grey} animating />
             ) : toUnit && toCurrency ? (
               <View>
-                <LText adjustsFontSizeToFit semiBold color="grey" style={styles.inputText}>
+                <LText
+                  adjustsFontSizeToFit
+                  semiBold
+                  color="grey"
+                  style={styles.inputText}
+                >
                   <CurrencyUnitValue
                     unit={toUnit}
                     value={toValue ?? BigNumber(0)}

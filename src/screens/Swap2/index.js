@@ -89,36 +89,19 @@ type Props = {
   provider: any,
 };
 
-export default function SwapForm({
+function SwapForm({
   route,
   navigation,
-  defaultAccount: initDefaultAccount,
+  defaultAccount,
   providers,
-  provider: initProvider,
+  provider,
 }: Props) {
   const { colors } = useTheme();
   const accounts = useSelector(accountsSelector);
-  const provider = route?.params?.provider || initProvider;
 
   const [rate, setRate] = useState(null);
 
-  const enhancedAccounts = useMemo(
-    () => accounts.map(acc => accountWithMandatoryTokens(acc, [])),
-    [accounts],
-  );
-
-  const allAccounts = flattenAccounts(enhancedAccounts);
-
   const selectableCurrencies = getSupportedCurrencies({ providers, provider });
-
-  const elligibleAccountsForSelectedCurrency = allAccounts.filter(
-    account =>
-      account.balance.gt(0) &&
-      selectableCurrencies.some(c => c === getAccountCurrency(account)),
-  );
-
-  const defaultAccount =
-    initDefaultAccount || elligibleAccountsForSelectedCurrency[0];
 
   const maybeFilteredCurrencies = defaultAccount?.balance.gt(0)
     ? selectableCurrencies.filter(c => c !== getAccountCurrency(defaultAccount))
@@ -133,7 +116,10 @@ export default function SwapForm({
         c => c !== getAccountCurrency(route?.params?.swap?.from.account),
       )
     : sortedCryptoCurrencies.find(
-        c => !defaultAccount || c !== getAccountCurrency(defaultAccount),
+        c =>
+          !defaultAccount ||
+          !defaultAccount ||
+          c !== getAccountCurrency(defaultAccount),
       );
 
   useEffect(() => {
@@ -156,7 +142,7 @@ export default function SwapForm({
     fromAmountError,
   } = useSwapTransaction({
     accounts,
-    defaultAccount,
+    defaultAccount: defaultAccount || {},
     exchangeRate: rate,
     setExchangeRate: setRate,
   });
@@ -181,8 +167,6 @@ export default function SwapForm({
 
   const [error, setError] = useState(null);
 
-  const [noAssetModalOpen, setNoAssetModalOpen] = useState(!defaultAccount);
-
   const [maxSpendable, setMaxSpendable] = useState();
 
   const {
@@ -196,16 +180,6 @@ export default function SwapForm({
   const fromUnit = useMemo(() => fromAccount && getAccountUnit(fromAccount), [
     fromAccount,
   ]);
-
-  const onNavigateToBuyCrypto = useCallback(() => {
-    setNoAssetModalOpen(false);
-    navigation.replace(NavigatorName.ExchangeBuyFlow);
-  }, [navigation]);
-
-  const onNavigateBack = useCallback(() => {
-    setNoAssetModalOpen(false);
-    navigation.goBack();
-  }, [navigation]);
 
   const onContinue = useCallback(() => {
     setConfirmed(true);
@@ -315,25 +289,6 @@ export default function SwapForm({
             onClose={resetError}
           />
         )}
-        {noAssetModalOpen && (
-          <ConfirmationModal
-            isOpened={noAssetModalOpen}
-            onClose={onNavigateBack}
-            confirmationTitle={
-              <Trans i18nKey="transfer.swap.form.noAsset.title" />
-            }
-            confirmationDesc={
-              <Trans i18nKey="transfer.swap.form.noAsset.desc" />
-            }
-            confirmButtonText={
-              <Trans i18nKey="carousel.banners.buyCrypto.title" />
-            }
-            onConfirm={onNavigateToBuyCrypto}
-            Icon={Info}
-            iconColor={colors.orange}
-            hideRejectButton
-          />
-        )}
       </ScrollView>
       <View>
         <View style={styles.available}>
@@ -425,6 +380,65 @@ export default function SwapForm({
     <Connect provider={provider} setResult={setDeviceMeta} />
   ) : (
     swapBody
+  );
+}
+
+export default function SwapFormEntry(props: Props) {
+  const { colors } = useTheme();
+  const {
+    route,
+    navigation,
+    defaultAccount: initDefaultAccount,
+    providers,
+    provider: initProvider,
+  } = props;
+  const provider = route?.params?.provider || initProvider;
+  const accounts = useSelector(accountsSelector);
+
+  const enhancedAccounts = useMemo(
+    () => accounts.map(acc => accountWithMandatoryTokens(acc, [])),
+    [accounts],
+  );
+
+  const allAccounts = flattenAccounts(enhancedAccounts);
+
+  const selectableCurrencies = getSupportedCurrencies({ providers, provider });
+
+  const elligibleAccountsForSelectedCurrency = allAccounts.filter(
+    account =>
+      account.balance.gt(0) &&
+      selectableCurrencies.some(c => c === getAccountCurrency(account)),
+  );
+
+  const defaultAccount =
+    initDefaultAccount || elligibleAccountsForSelectedCurrency[0];
+
+  const [noAssetModalOpen, setNoAssetModalOpen] = useState(!defaultAccount);
+
+  const onNavigateToBuyCrypto = useCallback(() => {
+    setNoAssetModalOpen(false);
+    navigation.replace(NavigatorName.ExchangeBuyFlow);
+  }, [navigation]);
+
+  const onNavigateBack = useCallback(() => {
+    setNoAssetModalOpen(false);
+    navigation.goBack();
+  }, [navigation]);
+
+  return defaultAccount ? (
+    <SwapForm {...props} defaultAccount={defaultAccount} />
+  ) : (
+    <ConfirmationModal
+      isOpened={noAssetModalOpen}
+      onClose={onNavigateBack}
+      confirmationTitle={<Trans i18nKey="transfer.swap.form.noAsset.title" />}
+      confirmationDesc={<Trans i18nKey="transfer.swap.form.noAsset.desc" />}
+      confirmButtonText={<Trans i18nKey="carousel.banners.buyCrypto.title" />}
+      onConfirm={onNavigateToBuyCrypto}
+      Icon={Info}
+      iconColor={colors.orange}
+      hideRejectButton
+    />
   );
 }
 
