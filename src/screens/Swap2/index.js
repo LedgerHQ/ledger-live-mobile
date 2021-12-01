@@ -155,15 +155,13 @@ function SwapForm({
   const [deviceMeta, setDeviceMeta] = useState();
   const showDeviceConnect = confirmed && alreadyAcceptedTerms && !deviceMeta;
 
-  useEffect(() => setToCurrency(defaultCurrency), [
-    defaultCurrency,
-    setToCurrency,
-  ]);
+  useEffect(() => {
+    !!defaultCurrency && setToCurrency(defaultCurrency);
+  }, [defaultCurrency, setToCurrency]);
 
-  useEffect(() => setFromAccount(defaultAccount), [
-    defaultAccount,
-    setFromAccount,
-  ]);
+  useEffect(() => {
+    !!defaultAccount && setFromAccount(defaultAccount);
+  }, [defaultAccount, setFromAccount]);
 
   const [error, setError] = useState(null);
 
@@ -171,6 +169,7 @@ function SwapForm({
 
   const {
     from: { account: fromAccount, parentAccount: fromParentAccount },
+    refetchRates,
   } = swap;
 
   const resetError = useCallback(() => {
@@ -200,7 +199,7 @@ function SwapForm({
       clearInterval(expirationInterval);
       expirationInterval = setInterval(() => {
         if (rate && rateExpiration && rateExpiration <= new Date()) {
-          swap.refetchRates();
+          refetchRates();
           rateExpiration = null;
           clearInterval(expirationInterval);
         }
@@ -208,7 +207,7 @@ function SwapForm({
     }
 
     return () => clearInterval(expirationInterval);
-  }, [rate, swap]);
+  }, [rate, refetchRates]);
 
   useEffect(() => {
     if (!fromAccount) return;
