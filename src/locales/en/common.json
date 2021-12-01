@@ -94,6 +94,10 @@
       "title": "An account name is needed",
       "description": "Please enter an account name."
     },
+    "AccountNeedResync": {
+      "title": "Please try again",
+      "description": "Account is outdated. A synchronisation is needed"
+    },
     "AlgorandASANotOptInInRecipient": {
       "title": "Recipient account has not opted in the selected ASA."
     },
@@ -114,11 +118,27 @@
     },
     "ConnectAppTimeout": {
       "title": "Sorry, no device found",
-      "description": "Please make sure your {{productName}} is unlocked with Bluetooth enabled."
+      "description": {
+        "ios": {
+          "nanoX": "Please make sure your {{productName}} is unlocked and has Bluetooth enabled."
+        },
+        "android": {
+          "nanoS": "Please make sure your {{productName}} is unlocked and connected by cable.",
+          "nanoX": "Please make sure your {{productName}} is unlocked and is connected by cable or has Bluetooth enabled."
+        }
+      }
     },
     "ConnectManagerTimeout": {
       "title": "Sorry, Manager connection failed",
-      "description": "Please make sure your {{productName}} is unlocked with Bluetooth enabled."
+      "description": {
+        "ios": {
+          "nanoX": "Please make sure your {{productName}} is unlocked and has Bluetooth enabled."
+        },
+        "android": {
+          "nanoS": "Please make sure your {{productName}} is unlocked and connected by cable.",
+          "nanoX": "Please make sure your {{productName}} is unlocked and is connected by cable or has Bluetooth enabled."
+        }
+      }
     },
     "ClaimRewardsFeesWarning": {
       "title": "The rewards are smaller than the estimated fees to claim them.",
@@ -574,6 +594,9 @@
     "PolkadotValidatorsRequired": {
       "title": "You must select at least one validator"
     },
+    "TaprootNotActivated": {
+      "title": "Taproot mainnet is not activated yet"
+    },
     "generic": {
       "title": "{{message}}",
       "description": "Something went wrong. Please try again. If the problem persists, please save your logs using the button below and provide them to Ledger Support."
@@ -674,13 +697,9 @@
         "title": "Stake COSMOS",
         "description": "Delegate your ATOM earn rewards today."
       },
-      "polkastake": {
-        "title": "POLKADOT STAKING",
-        "description": "Stake, secure and\nmanage your DOT with\nLedger Live"
-      },
-      "backupPack": {
-        "title": "Back-up pack",
-        "description": "A Nano X and a Nano S\nfor optimal protection"
+      "familyPack": {
+        "title": "Family pack",
+        "description": "Get your family into crypto with 3 Nano S"
       },
       "buyCrypto": {
         "title": "Buy Crypto",
@@ -1220,6 +1239,13 @@
         "title": "Do not use a recovery phrase that you have not generated yourself.",
         "desc": "Your Ledger hardware wallet’s pin code and recovery phrase should be initialized by you and only you. If you have received a device with a pre-existing seed word or an already initialized pin code do not use the product and contact our customer support.",
         "supportLink": "Contact customer support"
+      },
+      "seed": {
+        "title": "Please check the box contents",
+        "desc": "If your {{deviceName}} came with a PIN code or recovery phrase, it’s not safe to use and you should contact Ledger Support.",
+        "warning": "Only use a recovery phrase that your device displayed when it was set up",
+        "continueCTA": "Continue",
+        "contactSupportCTA": "Contact support"
       }
     }
   },
@@ -1291,7 +1317,9 @@
   "operations": {
     "types": {
       "IN": "Received",
+      "NFT_IN": "NFT Received",
       "OUT": "Sent",
+      "NFT_OUT": "NFT Sent",
       "CREATE": "Created",
       "REVEAL": "Revealed",
       "DELEGATE": "Delegated",
@@ -1374,7 +1402,11 @@
       "transferAmount": "Transfer Amount",
       "validatorsCount": "Validators ({{number}})"
     },
-    "multipleAddresses": "Why multiple addresses?"
+    "multipleAddresses": "Why multiple addresses?",
+    "tokenName": "Token Name",
+    "collectionContract": "Token Contract",
+    "tokenId": "Token (NFT) ID",
+    "quantity": "Quantity"
   },
   "operationList": {
     "noOperations": "No Operations",
@@ -1516,6 +1548,9 @@
     },
     "undelegation": {
       "sectionLabel": "Undelegation(s)"
+    },
+    "nft": {
+      "receiveNft": "Receive NFT"
     }
   },
   "accounts": {
@@ -3059,6 +3094,20 @@
       }
     }
   },
+  "elrond": {
+    "account": {
+      "subHeader": {
+        "cardTitle": "Powered by Elrond",
+        "drawerTitle": "Elrond integration",
+        "moreInfo": "More info",
+        "title": "Elrond eGold (EGLD) token is now available on Ledger Live",
+        "description": "You can now safely secure your eGold (EGLD) tokens and manage them through Ledger Live.",
+        "description2": "The Elrond eGold (EGLD) Token is native to the Elrond Network and will be used for everything from transactions, staking, smart contracts, governance and validator rewards.",
+        "description3": "We are actively working with the Elrond team to add more functionality, such as staking, native ESDT (Elrond Standard Digital Token) support, and more.",
+        "website": "The Internet Scale Blockchain"
+      }
+    }
+  },
   "tezos": {
     "AccountHeader": {
       "title": "You can earn rewards by delegating your account",
@@ -3612,7 +3661,7 @@
     "connected": "Connected",
     "disconnected": "Disconnected",
     "warningdisconnected": "There is a connection problem between the dApp, WalletConnect and Ledger Live. Wait a few moments or relaunch the connection",
-    "info": "You can now access the {{name}} dApp on your desktop.",
+    "info": "You can now access the {{name}} dApp on your web browser.",
     "warning": "Sharing receive addresses from dApp is not secure. Always use Ledger Live when sharing your address to receive funds.",
     "isconnecting": "is connecting, please wait...",
     "disconnect": "Disconnect",
@@ -3701,6 +3750,28 @@
       "infoPanel": {
         "website": "website"
       }
+    }
+  },
+
+  "nft": {
+    "account": {
+      "seeAllNfts": "See all NFT",
+      "seeFewerNfts": "See fewer NFT"
+    },
+    "gallery": {
+      "allNft": "All NFT"
+    },
+    "viewer": {
+      "properties": "Properties",
+      "description": "Description",
+      "tokenContract": "Token Address",
+      "tokenId": "Token ID",
+      "quantity": "Quantity"
+    },
+    "viewerModal": {
+      "viewOn": "View on",
+      "viewInExplorer": "View in explorer",
+      "txDetails": "Transaction details"
     }
   }
 }

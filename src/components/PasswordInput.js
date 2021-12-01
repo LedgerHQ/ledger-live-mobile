@@ -1,10 +1,11 @@
 /* @flow */
-import React, { PureComponent } from "react";
-import { View, StyleSheet, TextInput } from "react-native";
+import React, { useState, useCallback } from "react";
+import { View, StyleSheet } from "react-native";
 import Icon from "react-native-vector-icons/dist/Feather";
 import Touchable from "./Touchable";
 import { getFontStyle } from "./LText";
 import { withTheme } from "../colors";
+import TextInput from "./FocusedTextInput";
 
 type Props = {
   secureTextEntry: boolean,
@@ -21,106 +22,103 @@ type Props = {
   colors: *,
 };
 
-class PasswordInput extends PureComponent<Props, { isFocused: boolean }> {
-  state = { isFocused: false };
+const PasswordInput = ({
+  autoFocus,
+  error,
+  secureTextEntry,
+  onChange,
+  onSubmit,
+  onFocus,
+  onBlur,
+  toggleSecureTextEntry,
+  placeholder,
+  inline,
+  password,
+  colors,
+}: Props) => {
+  const [isFocused, setIsFocused] = useState(false);
 
-  onFocus = () => {
-    const { onFocus } = this.props;
-    this.setState({ isFocused: true });
+  const wrappedOnFocus = useCallback(() => {
+    setIsFocused(true);
     onFocus && onFocus();
-  };
-  onBlur = () => {
-    const { onBlur } = this.props;
-    this.setState({ isFocused: false });
+  }, [onFocus]);
+
+  const wrappedOnBlur = useCallback(() => {
+    setIsFocused(false);
     onBlur && onBlur();
-  };
+  }, [onBlur]);
 
-  render() {
-    const {
-      autoFocus,
-      error,
-      secureTextEntry,
-      onChange,
-      onSubmit,
-      toggleSecureTextEntry,
-      placeholder,
-      inline,
-      password,
-      colors,
-    } = this.props;
-
-    let borderColorOverride = {};
-    if (!inline && this.state.isFocused) {
-      if (error) {
-        borderColorOverride = { borderColor: colors.alert };
-      } else {
-        borderColorOverride = { borderColor: colors.live };
-      }
+  let borderColorOverride = {};
+  if (!inline && isFocused) {
+    if (error) {
+      borderColorOverride = { borderColor: colors.alert };
+    } else {
+      borderColorOverride = { borderColor: colors.live };
     }
-
-    return (
-      <View
-        style={[
-          styles.container,
-          !inline && {
-            ...styles.nonInlineContainer,
-            backgroundColor: colors.card,
-            borderColor: colors.lightFog,
-          },
-          borderColorOverride,
-        ]}
-      >
-        <TextInput
-          allowFontScaling={false}
-          autoFocus={autoFocus}
-          style={[
-            styles.input,
-            getFontStyle({ semiBold: true }),
-            inline && styles.inlineTextInput,
-            { color: colors.darkBlue },
-          ]}
-          placeholder={placeholder}
-          placeholderTextColor={error ? colors.alert : colors.fog}
-          returnKeyType="done"
-          blurOnSubmit={false}
-          onChangeText={onChange}
-          onSubmitEditing={onSubmit}
-          secureTextEntry={secureTextEntry}
-          textContentType="password"
-          autoCorrect={false}
-          onFocus={this.onFocus}
-          onBlur={this.onBlur}
-          value={password}
-        />
-        {secureTextEntry ? (
-          <Touchable
-            event="PasswordInputToggleUnsecure"
-            style={styles.iconInput}
-            onPress={toggleSecureTextEntry}
-          >
-            <Icon
-              name="eye"
-              size={16}
-              color={inline ? colors.grey : colors.fog}
-            />
-          </Touchable>
-        ) : (
-          <Touchable
-            event="PasswordInputToggleSecure"
-            style={styles.iconInput}
-            onPress={toggleSecureTextEntry}
-          >
-            <Icon
-              name="eye-off"
-              size={16}
-              color={inline ? colors.grey : colors.fog}
-            />
-          </Touchable>
-        )}
-      </View>
-    );
   }
-}
+
+  return (
+    <View
+      style={[
+        styles.container,
+        !inline && {
+          ...styles.nonInlineContainer,
+          backgroundColor: colors.card,
+          borderColor: colors.lightFog,
+        },
+        borderColorOverride,
+      ]}
+    >
+      <TextInput
+        allowFontScaling={false}
+        autoFocus={autoFocus}
+        style={[
+          styles.input,
+          getFontStyle({ semiBold: true }),
+          inline && styles.inlineTextInput,
+          { color: colors.darkBlue },
+        ]}
+        placeholder={placeholder}
+        placeholderTextColor={error ? colors.alert : colors.fog}
+        returnKeyType="done"
+        blurOnSubmit={false}
+        onChangeText={onChange}
+        onSubmitEditing={onSubmit}
+        secureTextEntry={secureTextEntry}
+        textContentType="password"
+        autoCorrect={false}
+        onFocus={wrappedOnFocus}
+        onBlur={wrappedOnBlur}
+        value={password}
+      />
+      {secureTextEntry ? (
+        <Touchable
+          event="PasswordInputToggleUnsecure"
+          style={styles.iconInput}
+          onPress={toggleSecureTextEntry}
+        >
+          <Icon
+            name="eye"
+            size={16}
+            color={inline ? colors.grey : colors.fog}
+          />
+        </Touchable>
+      ) : (
+        <Touchable
+          event="PasswordInputToggleSecure"
+          style={styles.iconInput}
+          onPress={toggleSecureTextEntry}
+        >
+          <Icon
+            name="eye-off"
+            size={16}
+            color={inline ? colors.grey : colors.fog}
+          />
+        </Touchable>
+      )}
+    </View>
+  );
+};
 
 export default withTheme(PasswordInput);
 const styles = StyleSheet.create({
