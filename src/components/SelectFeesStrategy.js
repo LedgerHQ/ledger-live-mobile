@@ -100,7 +100,12 @@ export default function SelectFeesStrategy({
         },
       ]}
     >
-      <View style={styles.feeStrategyContainer}>
+      <View
+        style={[
+          styles.feeStrategyContainer,
+          { opacity: disabledStrategies?.includes(item.label) ? 0.2 : 1 },
+        ]}
+      >
         <View style={styles.leftBox}>
           <CheckBox
             style={styles.checkbox}
@@ -162,9 +167,7 @@ export default function SelectFeesStrategy({
 
         <SafeAreaView style={styles.strategiesContainer}>
           <FlatList
-            data={strategies.filter(
-              ({ label }) => !disabledStrategies?.includes(label),
-            )}
+            data={strategies}
             renderItem={renderItem}
             keyExtractor={s => s.label}
             extraData={feesStrategy}
