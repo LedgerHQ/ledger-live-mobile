@@ -20,8 +20,8 @@ export default function StyleProvider({
     () => ({
       ...theme,
       colors: {
-        ...theme.colors,
         ...defaultTheme.colors,
+        ...palettes[selectedPalette],
         palette: palettes[selectedPalette],
       },
       theme: selectedPalette,
