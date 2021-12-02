@@ -598,7 +598,7 @@
       "title": "Мейннет Taproot ещё не активирован"
     },
     "NotEnoughNftOwned": {
-      "title": "You have exceeded the number of available tokens"
+      "title": "Вы превысили кол-во доступных токенов"
     },
     "generic": {
       "title": "{{message}}",
@@ -2232,8 +2232,8 @@
       "selectDevice": "Выбор устройства",
       "connectDevice": "Подключение устройства",
       "stepRange": "Шаг {{currentStep}}/{{totalSteps}}",
-      "quantity": "Quantity",
-      "selectCollection": "Collection",
+      "quantity": "Кол-во",
+      "selectCollection": "Коллекция",
       "selectNft": "NFT"
     },
     "recipient": {
@@ -2247,7 +2247,7 @@
       "useMax": "Вся сумма",
       "loadingNetwork": "Загружаем комиссию сети...",
       "noRateProvider": "Недоступно",
-      "quantityAvailable": "Quantity available"
+      "quantityAvailable": "Доступное количество"
     },
     "summary": {
       "subaccountsWarning": "Чтобы отправлять токены с этого счёта, вам нужно пополнить его за {{ currency }}",
@@ -2272,7 +2272,7 @@
         "value": "Содержание примечания"
       },
       "validateMemo": "Подтвердить примечание",
-      "quantity": "Quantity"
+      "quantity": "Кол-во"
     },
     "validation": {
       "message": "Чтобы безопасно подписать транзакцию, подтвердите её на устройстве.",
