@@ -4,6 +4,7 @@ import {
   CardStyleInterpolators,
   TransitionPresets,
   StackNavigationOptions,
+  StackScreenProps,
 } from "@react-navigation/stack";
 import { ScreenName, NavigatorName } from "../../const";
 import PasswordAddFlowNavigator from "./PasswordAddFlowNavigator";
@@ -28,15 +29,46 @@ import OnboardingQuizFinal from "../../screens/Onboarding/OnboardingQuizFinal";
 import NavigationHeader from "../NavigationHeader";
 import NavigationOverlay from "../NavigationOverlay";
 
+import NavigationModalContainer from "../NavigationModalContainer";
+
 const Stack = createStackNavigator();
+const LanguageModalStack = createStackNavigator();
+
+function LanguageModalNavigator(props: StackScreenProps<{}>) {
+  const options: Partial<StackNavigationOptions> = {
+    headerMode: "float",
+    header: NavigationHeader,
+    headerStyle: { backgroundColor: "transparent" },
+  };
+
+  return (
+    <NavigationModalContainer {...props}>
+      <LanguageModalStack.Navigator>
+        <LanguageModalStack.Screen
+          name={ScreenName.OnboardingLanguage}
+          component={OnboardingLanguage}
+          options={{
+            title: "onboarding.stepLanguage.title",
+            ...options,
+          }}
+        />
+        <LanguageModalStack.Screen
+          name={ScreenName.OnboardingStepLanguageGetStarted}
+          component={OnboardingStepLanguageGetStarted}
+          options={{
+            title: "onboarding.stepLanguage.title",
+            ...options,
+          }}
+        />
+      </LanguageModalStack.Navigator>
+    </NavigationModalContainer>
+  );
+}
 
 const modalOptions: Partial<StackNavigationOptions> = {
   presentation: "transparentModal",
-  headerShown: true,
-  headerMode: "screen",
-  header: NavigationHeader,
   cardOverlayEnabled: true,
-  cardOverlay: props => <NavigationOverlay {...props} />,
+  cardOverlay: () => <NavigationOverlay />,
   ...TransitionPresets.ModalSlideFromBottomIOS,
 };
 
@@ -48,20 +80,10 @@ export default function OnboardingNavigator() {
         component={OnboardingWelcome}
       />
       <Stack.Screen
-        name={ScreenName.OnboardingLanguage}
-        component={OnboardingLanguage}
-        options={{
-          title: "onboarding.stepLanguage.title",
-          ...modalOptions,
-        }}
-      />
-      <Stack.Screen
-        name={ScreenName.OnboardingStepLanguageGetStarted}
-        component={OnboardingStepLanguageGetStarted}
-        options={{
-          title: "onboarding.stepLanguage.title",
-          ...modalOptions,
-        }}
+        // TODO : index the name
+        name={"OnboardingModal"}
+        component={LanguageModalNavigator}
+        options={modalOptions}
       />
       <Stack.Screen
         name={ScreenName.OnboardingTermsOfUse}

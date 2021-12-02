@@ -20,13 +20,12 @@ const SafeFlex = styled(Flex).attrs({ as: SafeAreaView })``;
 function OnboardingStepWelcome({ navigation }: any) {
   const buy = useCallback(() => Linking.openURL(urls.buyNanoX), []);
 
-  const next = useCallback(
-    () => navigation.navigate(ScreenName.OnboardingTermsOfUse),
-    [navigation],
-  );
+  const next = useCallback(() => {
+    navigation.navigate(ScreenName.OnboardingTermsOfUse);
+  }, [navigation]);
 
   const onLanguageSelect = useCallback(
-    () => navigation.navigate(ScreenName.OnboardingLanguage),
+    () => navigation.navigate("OnboardingModal"),
     [navigation],
   );
 

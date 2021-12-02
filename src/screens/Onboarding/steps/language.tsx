@@ -14,7 +14,6 @@ import { useLocale } from "../../../context/Locale";
 import { supportedLocales } from "../../../languages";
 import Button from "../../../components/Button";
 import { ScreenName } from "../../../const";
-import NavigationModalContainer from "../../../components/NavigationModalContainer";
 
 const languages = {
   de: "Deutsch",
@@ -49,7 +48,7 @@ function OnboardingStepLanguage({ navigation }: StackScreenProps<{}>) {
   };
 
   return (
-    <NavigationModalContainer justifyContent="space-between">
+    <>
       <ScrollView>
         <Flex mb={4}>
           <SelectableList
@@ -71,7 +70,7 @@ function OnboardingStepLanguage({ navigation }: StackScreenProps<{}>) {
         outline={false}
         title={<Trans i18nKey="onboarding.stepLanguage.cta" />}
       />
-    </NavigationModalContainer>
+    </>
   );
 }
 
@@ -79,11 +78,11 @@ export function OnboardingStepLanguageGetStarted({
   navigation,
 }: StackScreenProps<{}>) {
   const next = () => {
-    navigation.navigate(ScreenName.OnboardingTermsOfUse);
+    navigation.getParent()?.replace(ScreenName.OnboardingTermsOfUse);
   };
 
   return (
-    <NavigationModalContainer justifyContent="space-between">
+    <>
       <Flex flex={1} px={4} justifyContent="center" alignItems="center">
         <Flex mb={8}>
           <IconBox Icon={Icons.WarningMedium} />
@@ -101,7 +100,7 @@ export function OnboardingStepLanguageGetStarted({
         outline={false}
         title={<Trans i18nKey="onboarding.stepLanguage.cta" />}
       />
-    </NavigationModalContainer>
+    </>
   );
 }
 

@@ -12,7 +12,7 @@ export default function NavigationOverlay() {
     <Pressable
       style={[
         StyleSheet.absoluteFill,
-        { backgroundColor: rgba(theme.colors.palette.neutral.c100, 0.5) },
+        { backgroundColor: rgba(theme.colors.neutral.c100, 0.5) },
       ]}
       onPress={() => {
         navigation.canGoBack() && navigation.goBack();
