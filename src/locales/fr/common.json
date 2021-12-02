@@ -598,7 +598,7 @@
       "title": "Taproot n'est pas encore activé sur le mainnet"
     },
     "NotEnoughNftOwned": {
-      "title": "You have exceeded the number of available tokens"
+      "title": "Nombre de tokens disponibles insuffisant"
     },
     "generic": {
       "title": "{{message}}",
@@ -2232,7 +2232,7 @@
       "selectDevice": "Sélectionner l'appareil",
       "connectDevice": "Connecter l'appareil",
       "stepRange": "Étape {{currentStep}} sur {{totalSteps}}",
-      "quantity": "Quantity",
+      "quantity": "Quantité",
       "selectCollection": "Collection",
       "selectNft": "NFT"
     },
@@ -2247,7 +2247,7 @@
       "useMax": "Choisir le maximum",
       "loadingNetwork": "Chargement des frais de réseau...",
       "noRateProvider": "Indisponible",
-      "quantityAvailable": "Quantity available"
+      "quantityAvailable": "Quantité disponible"
     },
     "summary": {
       "subaccountsWarning": "Vous devez recharger ce compte avec des {{ currency }} afin d'envoyer les tokens de ce compte.",
@@ -2272,7 +2272,7 @@
         "value": "Valeur du mémo"
       },
       "validateMemo": "Valider le mémo",
-      "quantity": "Quantity"
+      "quantity": "Quantité"
     },
     "validation": {
       "message": "Confirmez la transaction sur votre appareil pour la signer en toute sécurité.",
