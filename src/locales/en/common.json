@@ -749,36 +749,31 @@
       }
     },
     "stepSelectDevice": {
-      "title": "What’s your device?",
+      "title": "Select your device",
       "nanoS": "Nano S",
       "nanoX": "Nano X",
-      "blue": "Blue"
+      "chooseDevice": "Choose your device"
     },
     "stepUseCase": {
-      "title": "Hello!",
-      "or": "Or",
-      "firstUse": {
-        "title": "First time using this Nano?",
-        "label": "First use",
-        "subTitle": "Set up a new Nano",
-        "desc": "Let’s start and set up your device!"
-      },
-      "devicePairing": {
-        "title": "Already have a recovery phrase?",
-        "label": "Device pairing",
-        "subTitle": "Connect your Nano",
-        "desc": "Your device is already set up? Connect it to the app!"
-      },
-      "desktopSync": {
-        "title": "Already have a recovery phrase?",
-        "label": "Desktop sync",
-        "subTitle": "Sync crypto from your desktop app",
-        "desc": "Already got the desktop app? Sync it to manage your crypto from your smartphone!"
-      },
-      "restoreDevice": {
-        "label": "Restore device",
-        "subTitle": "Restore your recovery phrase on a new device",
-        "desc": "Use an existing recovery phrase to restore your private keys on a new Nano!"
+      "firstUse": "First time using your Nano?",
+      "recovery": "Already have a recovery phrase?",
+      "deviceActions": {
+          "setup": {
+            "title": "Set up a new Nano",
+            "subTitle": "Let’s start and set up your device!"
+          },
+          "pairing": {
+            "title": "Connect your Nano",
+            "subTitle": "Your device is already set up? Connect it to the app!"
+          },
+          "desktopSync": {
+            "title": "Sync crypto from your desktop app",
+            "subTitle": "Already got the desktop app? Sync it to manage your crypto from your smartphone!"
+          },
+          "restore": {
+          "title": "Restore your recovery phrase on a new device",
+          "subTitle": "Use an existing recovery phrase to restore your private keys on a new Nano!"
+          }
       }
     },
     "stepNewDevice": {
@@ -3574,12 +3569,13 @@
     "memo": "Memo"
   },
   "Terms": {
-    "title": "Terms of Use",
+    "title": "TERMS OF USE",
     "read": "Read the Terms of Use",
     "switchLabel": "I have read and agree with the <1>Terms of Service</1>",
-    "switchLabelFull": "I have read and accept the Terms of Service and Privacy Policy",
+    "switchLabelFull": "I have read and agree with the Privacy Policy.",
     "cta": "Enter Ledger App",
-    "service": "Terms of service"
+    "service": "Terms of service",
+    "subTitle": "Please take some time to review our Terms of service and Privacy Policy"
   },
   "exchange": {
     "buy": {
