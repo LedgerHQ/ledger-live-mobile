@@ -51,10 +51,12 @@ const BottomModal = ({
       <BottomDrawer
         preventBackdropClick={preventBackdropClick}
         isOpen={open}
-        onClose={onClose}
+        onClose={() => {
+          onClose && onClose();
+          onModalHide && onModalHide();
+        }}
         modalStyle={style}
         containerStyle={containerStyle}
-        onModalHide={() => onModalHide && onModalHide()}
         {...rest}
       >
         {children}
