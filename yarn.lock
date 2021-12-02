@@ -2499,23 +2499,21 @@
   resolved "https://registry.yarnpkg.com/@ledgerhq/logs/-/logs-5.50.0.tgz#29c6419e8379d496ab6d0426eadf3c4d100cd186"
   integrity sha512-swKHYCOZUGyVt4ge0u8a7AwNcA//h4nx5wIi0sruGye1IJ5Cva0GyK9L2/WdX+kWVTKp92ZiEo1df31lrWGPgA==
 
-"@ledgerhq/native-ui@^0.3.0":
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/native-ui/-/native-ui-0.3.0.tgz#4cb9e8be8b4eaef60672c3d3ad432569ba1249f4"
-  integrity sha512-QZzazJzxAUUNOZjFsXKfvj0vGCjjn6A8PQp2fhI1RUSbVU9vvoh8vfusaOf7CtT2X84zMxbl2gQlAzhbz/Pf9A==
+"@ledgerhq/native-ui@^0.5.0":
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/native-ui/-/native-ui-0.5.0.tgz#e40f5ce456db462d3c55b0efb7af88aceacb6f5f"
+  integrity sha512-IPXWaVGjRqqIpqOHzRoqxo1nmA/MDcUFvgWf09NBLF3Ao8uzX10hhz278/fW4sD1BEKrMQHsyTJxQkvfbUV1Mg==
   dependencies:
     "@ledgerhq/icons-ui" "^0.2.0"
     "@ledgerhq/ui-shared" "^0.1.3"
     "@types/color" "^3.0.2"
-    "@types/react" "^17.0.34"
+    "@types/react" "^17.0.37"
     "@types/react-native" "^0.65.9"
     "@types/styled-components-react-native" "^5.1.3"
     "@types/styled-system" "^5.1.13"
     color "^3.1.3"
     moment "^2.29.1"
     react-native-modal "^12.0.3"
-    react-native-reanimated "~2.2.4"
-    react-native-svg "12.1.1"
     rn-range-slider "^2.1.1"
     styled-system "^5.1.5"
     victory-native "^35.5.5"
@@ -3721,10 +3719,10 @@
     "@types/scheduler" "*"
     csstype "^3.0.2"
 
-"@types/react@^17.0.34":
-  version "17.0.35"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.35.tgz#217164cf830267d56cd1aec09dcf25a541eedd4c"
-  integrity sha512-r3C8/TJuri/SLZiiwwxQoLAoavaczARfT9up9b4Jr65+ErAUX3MIkU0oMOQnrpfgHme8zIqZLX7O5nnjm5Wayw==
+"@types/react@^17.0.37":
+  version "17.0.37"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.37.tgz#6884d0aa402605935c397ae689deed115caad959"
+  integrity sha512-2FS1oTqBGcH/s0E+CjrCCR9+JMpsu9b69RTFO+40ua43ZqP5MmQ4iUde/dMjWR909KxZwmOQIFq6AV6NjEG5xg==
   dependencies:
     "@types/prop-types" "*"
     "@types/scheduler" "*"
@@ -12641,7 +12639,7 @@ react-native-randombytes@^3.6.1:
     buffer "^4.9.1"
     sjcl "^1.0.3"
 
-react-native-reanimated@~2.2.3, react-native-reanimated@~2.2.4:
+react-native-reanimated@~2.2.3:
   version "2.2.4"
   resolved "https://registry.yarnpkg.com/react-native-reanimated/-/react-native-reanimated-2.2.4.tgz#36c5d15028b0bd7d479fba5199117ac870c7a532"
   integrity sha512-Nn648MfEEnTCEiWsl1YmfkojiLyV0NMY0EiRdDRbZNfJVfxBuyqhCxI/4Jd7aBi162qpgf8XK2mByYgvF4zLrQ==
