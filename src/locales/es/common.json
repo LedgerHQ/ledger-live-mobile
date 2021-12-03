@@ -2232,7 +2232,7 @@
       "selectDevice": "Seleccionar dispositivo",
       "connectDevice": "Conectar dispositivo",
       "stepRange": "Paso {{currentStep}} de {{totalSteps}}",
-      "quantity": "Quantity",
+      "quantity": "Cantidad",
       "selectCollection": "Colección",
       "selectNft": "NFT"
     },
