@@ -9,8 +9,8 @@ import { TrackScreen } from "../../../analytics";
 import Touchable from "../../../components/Touchable";
 import { ScreenName } from "../../../const";
 import OnboardingView from "../OnboardingView";
-import nanoS from "../assets/nanoS";;
-import PlaceholderIllustration from './PlaceholderIllustration';
+import nanoS from "../assets/nanoS";
+import PlaceholderIllustration from "./PlaceholderIllustration";
 
 type CurrentRouteType = RouteProp<
   { params: { deviceModelId: string } },
@@ -196,7 +196,10 @@ const OnboardingStepUseCaseSelection = () => {
       <SectionList
         sections={useCases}
         renderSectionHeader={({ section }) => (
-          <Text variant="h2" style={{ textTransform: "uppercase", maxWidth: cardMaxWidth }}>
+          <Text
+            variant="h2"
+            style={{ textTransform: "uppercase", maxWidth: cardMaxWidth }}
+          >
             {t(section.title)}
           </Text>
         )}

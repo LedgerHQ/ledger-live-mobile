@@ -6,9 +6,10 @@ import {
   StackNavigationOptions,
   StackScreenProps,
 } from "@react-navigation/stack";
+import { useRoute } from "@react-navigation/native";
+import { Flex } from "@ledgerhq/native-ui";
 import { ScreenName, NavigatorName } from "../../const";
 import PasswordAddFlowNavigator from "./PasswordAddFlowNavigator";
-
 import OnboardingWelcome from "../../screens/Onboarding/steps/welcome";
 import OnboardingLanguage, {
   OnboardingStepLanguageGetStarted,
@@ -28,11 +29,11 @@ import OnboardingQuiz from "../../screens/Onboarding/OnboardingQuiz";
 import OnboardingQuizFinal from "../../screens/Onboarding/OnboardingQuizFinal";
 import NavigationHeader from "../NavigationHeader";
 import NavigationOverlay from "../NavigationOverlay";
-
 import NavigationModalContainer from "../NavigationModalContainer";
 
 const Stack = createStackNavigator();
 const LanguageModalStack = createStackNavigator();
+const SetupNewDeviceModalStack = createStackNavigator();
 
 function LanguageModalNavigator(props: StackScreenProps<{}>) {
   const options: Partial<StackNavigationOptions> = {
@@ -61,6 +62,44 @@ function LanguageModalNavigator(props: StackScreenProps<{}>) {
           }}
         />
       </LanguageModalStack.Navigator>
+    </NavigationModalContainer>
+  );
+}
+
+function SetupNewDeviceModalNavigator(props: StackScreenProps<{}>) {
+  const route = useRoute();
+  
+  const options: Partial<StackNavigationOptions> = {
+    headerMode: "float",
+    header: props => (
+      // TODO: Replace this value with constant.purple as soon as the value is fixed in the theme
+      <Flex backgroundColor="hsla(248, 100%, 85%, 1)">
+        <NavigationHeader
+          {...props}
+          containerProps={{ backgroundColor: "transparent" }}
+        />
+      </Flex>
+    ),
+    headerStyle: { backgroundColor: "transparent" },
+  };
+
+  return (
+    // TODO: Replace this value with constant.purple as soon as the value is fixed in the theme
+    <NavigationModalContainer
+      contentContainerProps={{ backgroundColor: "hsla(248, 100%, 85%, 1)" }}
+      {...props}
+    >
+      <SetupNewDeviceModalStack.Navigator>
+        <SetupNewDeviceModalStack.Screen
+          name={ScreenName.OnboardingSetNewDeviceInfo}
+          component={OnboardingNewDeviceInfo}
+          initialParams={route.params}
+          options={{
+            title: "onboarding.stepNewDevice.title",
+            ...options,
+          }}
+        />
+      </SetupNewDeviceModalStack.Navigator>
     </NavigationModalContainer>
   );
 }
@@ -98,8 +137,10 @@ export default function OnboardingNavigator() {
         component={OnboardingUseCase}
       />
       <Stack.Screen
-        name={ScreenName.OnboardingSetNewDeviceInfo}
-        component={OnboardingNewDeviceInfo}
+        // TODO : index the name
+        name="OnboardingSetupNewDevice"
+        component={SetupNewDeviceModalNavigator}
+        options={modalOptions}
       />
 
       <Stack.Screen

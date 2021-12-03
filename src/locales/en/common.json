@@ -777,10 +777,12 @@
       }
     },
     "stepNewDevice": {
+      "title": "BASICS",
       "0": {
         "label": "Basics",
         "title": "Access your crypto",
-        "desc": "Your crypto assets are stored on the blockchain. You need a private key to access and manage them."
+        "desc": "Your crypto assets are stored on the blockchain. You need a private key to access and manage them.",
+        "action": "Don’t have a Nano? Discover the app"
       },
       "1": {
         "label": "Basics",
@@ -790,17 +792,18 @@
       "2": {
         "label": "Basics",
         "title": "Stay offline",
-        "desc": "Your Nano works as a \"cold storage\" wallet. This means that it never exposes your private key online, even when using the app."
+        "desc": "Ledger Live allows you to buy, sell, manage, exchange and earn crypto while remaining protected. You will validate every crypto transaction with your Nano."
       },
       "3": {
         "label": "Basics",
         "title": "Validate transactions",
-        "desc": "Ledger Live allows you to buy, sell, manage, exchange and earn crypto while remaining protected. You will validate every crypto transaction with your Nano."
+        "desc": "Your Nano works as a \"cold storage\" wallet. This means that it never exposes your private key online, even when using the app."
       },
       "4": {
         "label": "Basics",
         "title": "Let’s set up your Nano!",
-        "desc": "We'll start by setting up your Nano security."
+        "desc": "We'll start by setting up your Nano security.",
+        "action": "Let’s do this!"
       },
       "cta": "Let’s do this!"
     },
