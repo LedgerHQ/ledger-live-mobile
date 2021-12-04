@@ -2225,7 +2225,7 @@
       }
     },
     "stepperHeader": {
-      "selectAccount": "Düşülecek hesap",
+      "selectAccount": "Gönderen hesap",
       "recipientAddress": "Alıcı adresi",
       "selectAmount": "Tutar",
       "summary": "Özet",
@@ -2257,7 +2257,7 @@
       "amount": "Tutar",
       "from": "Gönderici",
       "to": "Alıcı",
-      "infoTotalTitle": "Düşülecek tutar",
+      "infoTotalTitle": "Total debit",
       "infoTotalDesc": "İşlem miktarını ve seçilen ağın ücretlerini içerir",
       "gasLimit": "Gas limiti",
       "gasPrice": "Gas ücreti",
