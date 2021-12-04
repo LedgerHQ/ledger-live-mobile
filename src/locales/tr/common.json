@@ -32,7 +32,7 @@
     "rename": "Yeniden Adlandır",
     "learnMore": "Daha fazla bilgi",
     "checkItOut": "Göz at",
-    "viewDetails": "Ayrıntıları gör",
+    "viewDetails": "Ayrıntıları göster",
     "today": "Bugün",
     "yesterday": "Dün",
     "upToDate": "Güncel",
@@ -2177,7 +2177,7 @@
           "extraInfo": "İşlemlerin bir tarayıcıda görünmesi ve doğrulanması biraz zaman alabilir.",
           "button": {
             "done": "Tamam",
-            "cta": "Ayrıntıları gör"
+            "cta": "Ayrıntıları göster"
           }
         }
       },
@@ -2194,7 +2194,7 @@
           "info": "Çekim işlemi ağ tarafından doğrulandıktan sonra varlıklarınız kullanıma açılacaktır.",
           "button": {
             "done": "Tamam",
-            "cta": "Ayrıntıları gör"
+            "cta": "Ayrıntıları göster"
           }
         }
       }
@@ -2281,7 +2281,7 @@
       "fees": "Ücretler",
       "confirm": "İşlem, ağ tarafından onaylanınca hesap bakiyeniz güncellenecek.",
       "button": {
-        "details": "Ayrıntıları gör",
+        "details": "Ayrıntıları göster",
         "retry": "Tekrar Dene"
       }
     },
@@ -2530,7 +2530,7 @@
     "installApp": "{{appName}} Uygulama kurulumu {{percentage}}",
     "installAppDescription": "Lütfen kurulum bitene kadar bekleyin",
     "listApps": "Uygulama gereksinimleri denetleniyor",
-    "listAppsDescription": "Gerekli tüm uygulamalara sahip olduğunuzu kontrol ederken lütfen bekleyin"
+    "listAppsDescription": "Gerekli tüm uygulamalara sahip olduğunuz kontrol edilirken lütfen bekleyin"
   },
   "SelectDevice": {
     "title": "Yeni cihaz eşleme",
@@ -2888,7 +2888,7 @@
             "success": {
               "title": "{{token}} varlığı başarıyla eklendi",
               "text": "Artık Algorand hesabınıza {{token}} varlıklarını alıp gönderebilirsiniz.",
-              "cta": "Ayrıntıları gör"
+              "cta": "Ayrıntıları göster"
             },
             "pending": {
               "title": "İşlem yayınlanıyor..."
@@ -2976,7 +2976,7 @@
             "success": {
               "title": "Varlıklarınızın yetkisini başarıyla devrettiniz",
               "text": "İşlem, ağ tarafından onaylanınca hesap bakiyeniz güncellenecek.",
-              "cta": "Ayrıntıları gör"
+              "cta": "Ayrıntıları göster"
             },
             "pending": {
               "title": "İşlem yayınlanıyor..."
@@ -3023,7 +3023,7 @@
             "success": {
               "title": "Varlıklarınızın yetkisini başarıyla yeniden devrettiniz",
               "text": "İşlem, ağ tarafından onaylandığında hesap bakiyeniz güncellenecek.",
-              "cta": "Ayrıntıları gör"
+              "cta": "Ayrıntıları göster"
             },
             "pending": {
               "title": "İşlem yayınlanıyor..."
@@ -3050,7 +3050,7 @@
             "success": {
               "title": "Varlıklarınızdaki yetkileri başarıyla iptal ettiniz",
               "text": "İşlem, ağ tarafından onaylandığında hesap bakiyeniz güncellenecek.",
-              "cta": "Ayrıntıları gör"
+              "cta": "Ayrıntıları göster"
             },
             "pending": {
               "title": "İşlem yayınlanıyor..."
@@ -3088,7 +3088,7 @@
               "title": "Ödüllerinizi başarıyla aldınız. Ödül tutarı mevcut bakiyenize eklendi.",
               "titleCompound": "Ödüllerinizin yetkileri aynı doğrulayıcıya devredildi.",
               "text": "İşlem, ağ tarafından onaylandığında hesap bakiyeniz güncellenecek.",
-              "cta": "Ayrıntıları gör"
+              "cta": "Ayrıntıları göster"
             },
             "pending": {
               "title": "İşlem yayınlanıyor..."
@@ -3509,7 +3509,7 @@
     "yieldInfos": "Getiri oranlarını sağlayan:",
     "termsAndPrivacy": "<1>Ledger Live Kullanım Koşullarını</1> ve <3>Gizlilik Politikasını</3> okudum ve kabul ediyorum.",
     "delegation": "Yetki Devri",
-    "viewDetails": "Ayrıntıları gör",
+    "viewDetails": "Ayrıntıları göster",
     "validator": "Doğrulayıcı",
     "validatorAddress": "Doğrulayıcı adresi",
     "delegatedAccount": "Yetkisi devredilen hesap",
