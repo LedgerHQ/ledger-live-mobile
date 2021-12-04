@@ -2440,7 +2440,7 @@
         "title": "Yeni hesap ekle"
       },
       "imported": {
-        "title": "Hesaplar zaten Portföyde ({{length}})"
+        "title": "Portföydeki Hesaplar ({{length}})"
       },
       "migrate": {
         "title": "Güncellenecek hesaplar"
