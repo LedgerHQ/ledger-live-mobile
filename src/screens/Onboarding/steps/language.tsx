@@ -14,6 +14,7 @@ import { useLocale } from "../../../context/Locale";
 import { supportedLocales } from "../../../languages";
 import Button from "../../../components/Button";
 import { ScreenName } from "../../../const";
+import { BluetoothMedium } from "@ledgerhq/native-ui/assets/icons";
 
 const languages = {
   de: "Deutsch",
@@ -57,7 +58,7 @@ function OnboardingStepLanguage({ navigation }: StackScreenProps<{}>) {
           >
             {supportedLocales.map((l, index) => (
               <SelectableList.Element key={index + l} value={l}>
-                {languages[l]}
+                <BluetoothMedium size={16} color={"neutral.c100"} /> {languages[l]}
               </SelectableList.Element>
             ))}
           </SelectableList>
