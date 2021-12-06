@@ -26,6 +26,7 @@ setSupportedCurrencies([
   "polkadot",
   "ripple",
   "litecoin",
+  "polygon",
   "bitcoin_cash",
   "stellar",
   "dogecoin",
@@ -50,7 +51,6 @@ setSupportedCurrencies([
   "bitcoin_testnet",
   "ethereum_ropsten",
   "cosmos_testnet",
-  "elrond",
 ]);
 
 if (Config.VERBOSE) {

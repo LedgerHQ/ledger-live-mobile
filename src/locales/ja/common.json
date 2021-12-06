@@ -597,6 +597,9 @@
     "TaprootNotActivated": {
       "title": "Taproot mainnetは、まだアクティベートされていません。"
     },
+    "NotEnoughNftOwned": {
+      "title": "利用可能なトークン数を超えています"
+    },
     "generic": {
       "title": "{{message}}",
       "description": "問題が発生しました。もう一度お試しください。問題が解決しない場合は、以下のボタンを使ってログを保存し、Ledgerサポートに提出してください。"
@@ -2228,7 +2231,10 @@
       "summary": "概要",
       "selectDevice": "デバイスを選択",
       "connectDevice": "デバイスを接続",
-      "stepRange": "ステップ{{currentStep}}/{{totalSteps}}"
+      "stepRange": "ステップ{{currentStep}}/{{totalSteps}}",
+      "quantity": "数量",
+      "selectCollection": "コレクション",
+      "selectNft": "NFT"
     },
     "recipient": {
       "scan": "QRコードをスキャン",
@@ -2240,7 +2246,8 @@
       "available": "合計利用可能額",
       "useMax": "全額を選択",
       "loadingNetwork": "ネットワーク手数料を読み込み中…",
-      "noRateProvider": "利用不可"
+      "noRateProvider": "利用不可",
+      "quantityAvailable": "利用可能な数量"
     },
     "summary": {
       "subaccountsWarning": "このアカウントのトークンを送金するには、このアカウントに{{ currency }}を補充する必要があります",
@@ -2264,7 +2271,8 @@
         "type": "Memoの種類",
         "value": "Memoの値"
       },
-      "validateMemo": "Memoの確認"
+      "validateMemo": "Memoの確認",
+      "quantity": "数量"
     },
     "validation": {
       "message": "デバイス上で、トランザクションを確認して安全に署名します。",
@@ -3099,7 +3107,7 @@
         "moreInfo": "詳細はこちら",
         "title": "Ledger Liveは、Elrond eGold（EGLD）トークンに対応しています。",
         "description": "Ledger Liveで、eGold（EGLD）トークンを安全に保管・管理できるようになりました。",
-        "description2": "The Elrond eGold (EGLD) Token is native to the Elrond Network and will be used for everything from transactions, staking, smart contracts, governance and validator rewards.",
+        "description2": "Elrond eGold（EGLD）トークンは、Elrond Networkのネイティブトークンであり、トランザクション、ステーキング、スマートコントラクト、ガバナンス、バリデータの報酬など、さまざまな用途に使用されます。",
         "description3": "LedgerはElrondチームと積極的に協力し、ステーキングやESDT（Elrond Standard Digital Token）のネイティブサポートなどの機能を追加する予定です。",
         "website": "The Internet Scale Blockchain"
       }
