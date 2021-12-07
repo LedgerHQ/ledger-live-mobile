@@ -1487,7 +1487,7 @@
         "desc": "Kullanılacak API düğümü"
       },
       "delete": {
-        "title": "Portföyden hesabı kaldır",
+        "title": "Hesabı portföyden kaldır",
         "desc": "Depolanan veriler kaldırılacaktır.",
         "confirmationTitle": "Emin misiniz?",
         "confirmationDesc": "Bunun kripto varlıklarınız üzerinde hiçbir etkisi yoktur. Mevcut hesaplar daha sonra istenildiğinde eklenebilir."
@@ -1800,7 +1800,7 @@
       "verified": "Adres onaylandı. Kopyaladıysanız veya taradıysanız yeniden kontrol edin.",
       "verifyAgain": "Tekrar kontrol et",
       "noAccount": "Hesap bulunamadı",
-      "address": "Hesabın adresi",
+      "address": "Hesap adresi",
       "copyAddress": "Adresi kopyala",
       "shareAddress": "Adresi paylaş",
       "addressCopied": "Adres kopyalandı!",
