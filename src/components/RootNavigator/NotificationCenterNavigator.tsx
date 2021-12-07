@@ -8,10 +8,11 @@ import { useAnnouncements } from "@ledgerhq/live-common/lib/notifications/Announ
 import { ScreenName } from "../../const";
 import NotificationCenterNews from "../../screens/NotificationCenter/News";
 import NotificationCenterStatus from "../../screens/NotificationCenter/Status";
-import { NavigationToggle } from "@ledgerhq/native-ui/components/Navigation/ToggleGroup/NavigationToggleGroup";
-import { ToggleGroupContainer } from "@ledgerhq/native-ui/components/Navigation/ToggleGroup/TemplateToggleGroup";
+
 import { Flex } from "@ledgerhq/native-ui";
 import styled from "styled-components/native";
+import { TabsContainer } from "@ledgerhq/native-ui/components/Tabs/TemplateTabs";
+import { ChipTab } from "@ledgerhq/native-ui/components/Tabs/Chip";
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -23,7 +24,7 @@ const TabBarContainer = styled(Flex)`
 function TabBar({ state, descriptors, navigation }: MaterialTopTabBarProps) {
   return (
     <TabBarContainer paddingLeft={4} paddingRight={4} paddingBottom={4}>
-      <ToggleGroupContainer>
+      <TabsContainer>
         {state.routes.map((route, index) => {
           const { options } = descriptors[route.key];
           const label = options.title;
@@ -43,7 +44,7 @@ function TabBar({ state, descriptors, navigation }: MaterialTopTabBarProps) {
           };
 
           return (
-            <NavigationToggle
+            <ChipTab
               label={label || ""}
               isActive={isActive}
               index={index}
@@ -51,7 +52,7 @@ function TabBar({ state, descriptors, navigation }: MaterialTopTabBarProps) {
             />
           );
         })}
-      </ToggleGroupContainer>
+      </TabsContainer>
     </TabBarContainer>
   );
 }
