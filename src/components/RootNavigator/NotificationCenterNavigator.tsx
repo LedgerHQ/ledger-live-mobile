@@ -5,14 +5,14 @@ import {
 } from "@react-navigation/material-top-tabs";
 import { useTranslation } from "react-i18next";
 import { useAnnouncements } from "@ledgerhq/live-common/lib/notifications/AnnouncementProvider";
-import { ScreenName } from "../../const";
-import NotificationCenterNews from "../../screens/NotificationCenter/News";
-import NotificationCenterStatus from "../../screens/NotificationCenter/Status";
 
 import { Flex } from "@ledgerhq/native-ui";
 import styled from "styled-components/native";
 import { TabsContainer } from "@ledgerhq/native-ui/components/Tabs/TemplateTabs";
 import { ChipTab } from "@ledgerhq/native-ui/components/Tabs/Chip";
+import NotificationCenterStatus from "../../screens/NotificationCenter/Status";
+import NotificationCenterNews from "../../screens/NotificationCenter/News";
+import { ScreenName } from "../../const";
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -45,6 +45,7 @@ function TabBar({ state, descriptors, navigation }: MaterialTopTabBarProps) {
 
           return (
             <ChipTab
+              key={index}
               label={label || ""}
               isActive={isActive}
               index={index}
