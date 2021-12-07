@@ -1455,9 +1455,9 @@
     "lastOperations": "Son işlemler",
     "emptyState": {
       "title": "Henüz kripto varlık yok mu?",
-      "desc": "<1><0>{{managerAppName}}</0></1> uygulamasının yüklü olduğundan emin olun ve almaya başlayın.",
+      "desc": "<1><0>{{managerAppName}}</0></1> uygulaması yüklüyse hesabınıza varlık almaya başlayabilirsiniz.",
       "descWithBuy": "<3><0>{{currencyTicker}}</0></3> satın alabilmek veya teslim alabilmek için <1><0>{{managerAppName}}</0></1> uygulamasının yüklü olduğundan emin olun",
-      "descToken": "<1><0>{{managerAppName}}</0></1> uygulamasının yüklü olduğundan emin olun ve <3><0>{{currencyTicker}}</0></3> ile <5><0>{{tokenList}}</0> token'larını</5> almaya başlayın",
+      "descToken": "<1><0>{{managerAppName}}</0></1> uygulaması yüklüyse <3><0>{{currencyTicker}}</0></3> ile <5><0>{{tokenType}}</0> token'larını</5> almaya başlayabilirsiniz",
       "buttons": {
         "receiveFunds": "Al",
         "buyCrypto": "Satın Al"
@@ -3219,7 +3219,7 @@
       },
       "superRepresentative": {
         "title": "Süper Temsilciler (ST)",
-        "description": "Süper Temsilciler, temel işlevleri sağlayarak TRON topluluğunun yönetiminde önemli bir rol oynar; örn. blok oluşturma ve kayıt tutma."
+        "description": "Süper Temsilciler, blok oluşturma ve kayıt tutma gibi temel işlevleri sağlayarak TRON topluluğunun yönetiminde önemli bir rol oynar."
       },
       "candidates": {
         "title": "Adaylar",
