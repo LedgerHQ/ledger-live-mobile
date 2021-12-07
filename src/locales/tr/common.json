@@ -1246,7 +1246,7 @@
       "seed": {
         "title": "Lütfen kutunun içindekileri kontrol edin",
         "desc": "{{device}} cihazınız bir PIN kodu veya kurtarma anahtarı ile geldiyse, kullanımı güvenli değildir ve Ledger Destek ile iletişime geçmeniz gerekir.",
-        "warning": "Sadece cihazınız kurulduğunda görüntülenen kurtarma ifadesini kullanın",
+        "warning": "Yalnızca kurulum sırasında cihaz ekranında görüntülenmiş olan kurtarma ifadesini kullanın",
         "continueCTA": "Devam",
         "contactSupportCTA": "Destek Al"
       }
