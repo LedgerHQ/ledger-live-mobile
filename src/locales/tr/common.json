@@ -848,11 +848,11 @@
             }
           },
           "1": {
-            "title": "Göz At ",
+            "title": "Göz Atın ",
             "label": "Ekrandaki yönergeleri okuyarak cihazınızı nasıl kullanacağınızı öğrenin."
           },
           "2": {
-            "title": "“Yeni cihaz olarak kur” seçeneğini seçin",
+            "title": "“Set up as new device” (Yeni cihaz olarak kur) seçeneğini onaylayın",
             "label": "Seçimi onaylamak için her iki tuşa da aynı anda basın."
           },
           "3": {
@@ -875,7 +875,7 @@
             "label": "Rakamları değiştirmek için sol veya sağ tuşa basın. Bir rakamı onaylamak için her iki tuşa da basın. PIN kodunuzu onaylamak için <1></1> simgesini seçin. Bir rakamı silmek için <2></2> simgesini seçin."
           },
           "1": {
-            "title": "PIN kodunu onayla",
+            "title": "PIN kodunu onaylayın",
             "label": "Onaylamak için PIN kodunuzu tekrar girin."
           }
         },
@@ -1023,7 +1023,7 @@
             }
           },
           "1": {
-            "title": "Göz At",
+            "title": "Göz Atın",
             "label": "Ekrandaki yönergeleri okuyarak cihazınızı nasıl kullanacağınızı öğrenin."
           },
           "2": {
