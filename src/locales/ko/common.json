@@ -1258,7 +1258,7 @@
     "transfer": "전송",
     "manager": "관리자",
     "settings": "설정",
-    "platform": "찾기",
+    "platform": "탐색",
     "nanoX": "Nano X"
   },
   "portfolio": {
@@ -1924,7 +1924,7 @@
         "balance": "잔금 &lt;0&gt;123&lt;/0&gt;",
         "fromAccount": "계정 선택",
         "toAccount": "계정 선택",
-        "paraswapCTA": "Paraswap을 찾으세요? 찾기 탭으로 이동했습니다!",
+        "paraswapCTA": "Paraswap을 찾으세요? 탐색 탭으로 이동했습니다!",
         "amount": {
           "useMax": "최대치 사용",
           "available": "총 이용 가능"
