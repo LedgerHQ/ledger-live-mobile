@@ -1225,15 +1225,15 @@
           "wrong": "Kısa süreliğine internete bağlanır"
         },
         "modal": {
-          "text": "Özel anahtarınız donanım cüzdanınızda her zaman çevrim dışı kalır. Nano'ya bağlandığında bile, Ledger uygulaması özel anahtarınıza erişemez. Cihazınızdaki her işlemi fiziksel olarak onaylamanız gerekir.",
+          "text": "Özel anahtarınız donanım cüzdanınızda her zaman çevrim dışı kalır. Ledger uygulaması Nano'ya bağlandığında bile özel anahtarınıza erişemez. Cihazınızdaki her işlemi fiziksel olarak onaylamanız gerekir.",
           "cta": "Sınavı tamamla"
         }
       },
       "final": {
-        "successTitle": "Gerçek bir profesyonel!",
+        "successTitle": "İşin uzmanı oldunuz bile!",
         "successText": "Kriptolarınızı güvenli bir şekilde yönetmeye hazırsınız. Sadece küçük bir adım kaldı!",
-        "failTitle": "Yakında bir profesyonel olacaksınız...",
-        "failText": "Merak etmeyin, Ledger yolculuğunuz boyunca size rehberlik etmek için burada. Yakında kripto güvenliğiniz hakkında daha rahat olacaksınız. Sadece küçük bir adım kaldı!",
+        "failTitle": "You will soon become a pro...",
+        "failText": "Merak etmeyin! Ledger, yolculuğunuz boyunca size rehberlik etmek için burada. Yakında kripto güvenliğiniz konusunda çok daha rahat hissedeceksiniz. Sadece küçük bir adım kaldı!",
         "cta": "Sonraki adım"
       }
     },
@@ -1725,14 +1725,14 @@
       "supportDesc": "Bir sorununuz varsa, Ledger Live'ı donanım cüzdanınızla kullanma konusunda yardım alın.",
       "configureDevice": "Cihaz kurulumu",
       "configureDeviceDesc": "Yeni bir cihaz olarak kurun veya mevcut bir cihazı geri yükleyin. Hesaplar ve ayarlar korunur.",
-      "clearCache": "Önbelleği temizle",
+      "clearCache": "Önbelleği temizleyin",
       "clearCacheDesc": "Ağdaki işlemler taranır ve hesaplarınız yeniden hesaplanır.",
       "clearCacheModal": "Emin misiniz?",
       "clearCacheModalDesc": "Ağdaki işlemlerin yeni ve eksiksiz bir taraması yapılacak. Hesap geçmişleri yeniden oluşturulacak ve bakiyeler yeniden hesaplanacaktır.",
       "clearCacheButton": "Temizle",
-      "exportLogs": "Logları kaydet",
+      "exportLogs": "Logları kaydedin",
       "exportLogsDesc": "Ledger Live loglarını kaydetmek sorun giderme amacıyla gerekli olabilir.",
-      "hardReset": "Ledger Live'ı Sıfırla",
+      "hardReset": "Ledger Live'ı sıfırlayın",
       "hardResetDesc": "Bunun varlıklarınız üzerinde bir etkisi yoktur. Hesap verileri, işlem geçmişleri ve ayarlar dahil olmak üzere Ledger Live'daki tüm verileri siler. Boş bir Ledger Live'da kripto varlıklarınızı yeniden yüklemek ve yönetmek için Ledger cihazınızı kullanın.",
       "repairDevice": "Ledger cihazınızı onarın",
       "repairDeviceDesc": "Cihazınızı güncellerken sorun yaşıyor ve güncellemelere devam edemiyorsanız, cihazınızı onarmak için bunu deneyebilirsiniz."
