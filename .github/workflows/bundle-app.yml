@@ -20,14 +20,14 @@ jobs:
   start-runner:
     needs: cancel-previous
     name: "start ec2 instance (Linux)"
-    uses: LedgerHQ/actions/.github/workflows/start-linux-runner.yml@v3.0.0
+    uses: LedgerHQ/actions/.github/workflows/start-linux-runner.yml@v3.0.1
     secrets:
       CI_BOT_TOKEN: ${{ secrets.CI_BOT_TOKEN }}
 
   stop-runner:
     name: "stop ec2 instance (Linux)"
     needs: [start-runner, bundle-apk]
-    uses: LedgerHQ/actions/.github/workflows/stop-linux-runner.yml@v3.0.0
+    uses: LedgerHQ/actions/.github/workflows/stop-linux-runner.yml@v3.0.1
     if: ${{ always() }}
     with:
       label: ${{ needs.start-runner.outputs.label }}
@@ -60,6 +60,11 @@ jobs:
         if: always()
         with:
           node-version: 14.x
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.6
+        env:
+          ImageOS: ubuntu20
       - name: Set up JDK 1.8
         uses: actions/setup-java@v1
         with:
@@ -69,10 +74,6 @@ jobs:
       - name: install yarn
         if: always()
         run: npm install --global yarn
-      - uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: 2.6 # Not needed with a .ruby-version file
-          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
       - name: Get yarn cache
         id: yarn-cache
         run: echo "::set-output name=dir::$(yarn cache dir)"
