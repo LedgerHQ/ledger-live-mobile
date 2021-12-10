@@ -618,7 +618,7 @@
     "noInfos": "Ledger n'enregistre pas vos données de localisation."
   },
   "permissions": {
-    "open": "Ouvrir les autorisations des applications"
+    "open": "Ouvrir autorisa. des apps"
   },
   "fees": {
     "speed": {
@@ -626,7 +626,7 @@
       "standard": "Normale",
       "low": "Basse",
       "slow": "Lent",
-      "medium": "Moyens",
+      "medium": "Moyen",
       "fast": "Rapide",
       "custom": "Personnalisée",
       "blockCount": "{{blockCount}} blocs"
@@ -655,7 +655,7 @@
       "biometricsTitle": "Authentifiez-vous avec l'app Ledger Live.",
       "title": "Bienvenue",
       "desc": "Entrez votre mot de passe pour continuer.",
-      "inputPlaceholder": "Saisissez votre mot de passe.",
+      "inputPlaceholder": "Saisissez votre mot de passe",
       "login": "Se connecter",
       "forgotPassword": "Mot de passe oublié"
     },
@@ -1429,7 +1429,7 @@
       "seeMore": "Afficher plus de tokens",
       "seeLess": "Afficher moins de tokens",
       "addTokens": "Token",
-      "howTo": "Pour ajouter des comptes de tokens, il vous suffit de <0>recevoir ces tokens</0> sur votre <1>adresse {{currency}}</1>.",
+      "howTo": "Pour ajouter des comptes de tokens, il vous suffit de <0>les recevoir</0> sur votre <1>adresse {{currency}}</1>.",
       "algorand": {
         "contractAddress": "Adresse du contrat",
         "viewInExplorer": "Dans l'explorateur",
