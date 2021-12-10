@@ -18,36 +18,22 @@ jobs:
           access_token: ${{ secrets.GITHUB_TOKEN }}
 
   start-runner:
-    name: start self-hosted EC2 runner
     needs: cancel-previous
-    runs-on: [ledger-live-mobile]
-    outputs:
-      label: ${{ steps.start-ec2-runner.outputs.label }}
-      ec2-instance-id: ${{ steps.start-ec2-runner.outputs.ec2-instance-id }}
-    steps:
-      - name: get latest LL runner AMI id
-        id: get-ami-id
-        run: |
-          echo "::set-output name=ami-id::$(aws ec2 describe-images  --filters 'Name=name,Values=ledger-live-runner' --query 'Images[*].ImageId' --output text)"
-      - name: start EC2 runner
-        id: start-ec2-runner
-        uses: machulav/ec2-github-runner@v2
-        with:
-          mode: start
-          github-token: ${{ secrets.CI_BOT_TOKEN }}
-          ec2-image-id: ${{ steps.get-ami-id.outputs.ami-id }}
-          ec2-instance-type: c5.4xlarge
-          subnet-id: subnet-03b7b4dff904e0142 # production-shared-private-eu-west-1a
-          security-group-id: sg-010daba499648d1e7 # infra-gha-runner-sg
-      - name: get volume-id
-        id: get-volume-id
-        run: |
-          echo "::set-output name=volume-id::$(aws ec2 describe-instances --instance-ids ${{ steps.start-ec2-runner.outputs.ec2-instance-id }} --query 'Reservations[*].Instances[*].BlockDeviceMappings[*].Ebs.VolumeId' --output text)"
-      - name: resize rootfs
-        env:
-          VOLUME_ID: ${{ steps.get-volume-id.outputs.volume-id }}
-        run: |
-          aws ec2 modify-volume --size 30 --volume-id $VOLUME_ID
+    name: "start ec2 instance (Linux)"
+    uses: LedgerHQ/ledger-live-build/.github/workflows/start-linux-runner.yml@main
+    secrets:
+      CI_BOT_TOKEN: ${{ secrets.CI_BOT_TOKEN }}
+
+  stop-runner:
+    name: "stop ec2 instance (Linux)"
+    needs: [start-runner, bundle-apk]
+    uses: LedgerHQ/ledger-live-build/.github/workflows/stop-linux-runner.yml@main
+    if: ${{ always() }}
+    with:
+      label: ${{ needs.start-runner.outputs.label }}
+      ec2-instance-id: ${{ needs.start-runner.outputs.ec2-instance-id }}
+    secrets:
+      CI_BOT_TOKEN: ${{ secrets.CI_BOT_TOKEN }}
 
   bundle-apk:
     needs: [cancel-previous, start-runner]
@@ -74,6 +60,12 @@ jobs:
         if: always()
         with:
           node-version: 14.x
+      - name: Set up JDK 1.8
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v2.0.6
       - name: install yarn
         if: always()
         run: npm install --global yarn
