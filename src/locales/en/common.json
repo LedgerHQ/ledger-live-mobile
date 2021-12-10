@@ -611,7 +611,7 @@
       "title": "Address off ed25519 curve"
     },
     "SolanaMemoIsTooLong": {
-      "title": "Memo is too long"
+      "title": "Memo is too long. Max length is {{maxLength}}"
     }
   },
   "bluetooth": {
