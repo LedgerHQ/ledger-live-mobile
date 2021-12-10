@@ -1,4 +1,4 @@
-name: "[BUILD] Android Apk"
+name: "[Build] Android Apk"
 on:
   pull_request:
     branches:
