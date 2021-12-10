@@ -24,7 +24,7 @@ type Props = {
 export default function SolanaFeeRow({ account, transaction }: Props) {
   const { colors } = useTheme();
   const extraInfoFees = useCallback(() => {
-    Linking.openURL(urls.feesMoreInfo);
+    Linking.openURL(urls.solana.supportPage);
   }, []);
 
   const fees = transaction.feeCalculator?.lamportsPerSignature;
@@ -47,16 +47,12 @@ export default function SolanaFeeRow({ account, transaction }: Props) {
             <LText style={styles.valueText}>
               <CurrencyUnitValue unit={unit} value={fees} />
             </LText>
-          ) : (
-            <div>hi there</div>
-          )}
+          ) : null}
         </View>
         <LText style={styles.countervalue} color="grey">
           {fees ? (
             <CounterValue before="≈ " value={fees} currency={currency} />
-          ) : (
-            <div>wtf here</div>
-          )}
+          ) : null}
         </LText>
       </View>
     </SummaryRow>
