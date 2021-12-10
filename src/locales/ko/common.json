@@ -1710,7 +1710,7 @@
       "termsConditions": "이용약관",
       "termsConditionsDesc": "Ledger Live를 이용함으로써, 귀하는 본사 이용약관을 수락한 것으로 간주됩니다.",
       "privacyPolicy": "개인 정보 보호 정책",
-      "privacyPolicyDesc": "당사가 어떤 개인 데이터를 수집하는지, 수집 이유와 사용처도 살펴보세요.",
+      "privacyPolicyDesc": "당사에서 어떤 개인 데이터를 수집하는지, 수집 이유와 사용처도 살펴보세요.",
       "liveReview": {
         "title": "앱을 평가해 주세요!",
         "ios": "앱 스토어에서 리뷰",
