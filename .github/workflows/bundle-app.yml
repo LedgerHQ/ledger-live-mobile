@@ -1,4 +1,4 @@
-name: bundle app
+name: "[Build] Android Apk"
 on:
   pull_request:
     branches:
@@ -20,14 +20,14 @@ jobs:
   start-runner:
     needs: cancel-previous
     name: "start ec2 instance (Linux)"
-    uses: LedgerHQ/ledger-live-build/.github/workflows/start-linux-runner.yml@main
+    uses: LedgerHQ/actions/.github/workflows/start-linux-runner.yml@v3.0.0
     secrets:
       CI_BOT_TOKEN: ${{ secrets.CI_BOT_TOKEN }}
 
   stop-runner:
     name: "stop ec2 instance (Linux)"
     needs: [start-runner, bundle-apk]
-    uses: LedgerHQ/ledger-live-build/.github/workflows/stop-linux-runner.yml@main
+    uses: LedgerHQ/actions/.github/workflows/stop-linux-runner.yml@v3.0.0
     if: ${{ always() }}
     with:
       label: ${{ needs.start-runner.outputs.label }}
