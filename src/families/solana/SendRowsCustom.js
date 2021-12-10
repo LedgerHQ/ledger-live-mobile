@@ -2,7 +2,7 @@
 import React, { useCallback } from "react";
 import { View, StyleSheet } from "react-native";
 import { useTranslation } from "react-i18next";
-import { useNavigation, useTheme } from "@react-navigation/native";
+import { useTheme } from "@react-navigation/native";
 import type { Account } from "@ledgerhq/live-common/lib/types";
 import type { Transaction } from "@ledgerhq/live-common/lib/families/solana/types";
 import LText from "../../components/LText";
