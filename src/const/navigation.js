@@ -308,6 +308,12 @@ export const ScreenName = {
 
   // solana
   SolanaEditMemo: "SolanaEditMemo",
+  SolanaOptInSelectToken: "SolanaOptInSelectToken",
+  SolanaOptInSelectDevice: "SolanaOptInSelectDevice",
+  SolanaOptInConnectDevice: "SolanaOptInConnectDevice",
+  SolanaOptInValidation: "SolanaOptInValidation",
+  SolanaOptInValidationError: "SolanaOptInValidationError",
+  SolanaOptInValidationSuccess: "SolanaOptInValidationSuccess",
 };
 
 export const NavigatorName = {
@@ -364,6 +370,9 @@ export const NavigatorName = {
   PolkadotRebondFlow: "PolkadotRebondFlow",
   PolkadotNominateFlow: "PolkadotNominateFlow",
   PolkadotSimpleOperationFlow: "PolkadotSimpleOperationFlow",
+
+  // Solana
+  SolanaOptInFlow: "SolanaOptInFlow",
 
   NotificationCenter: "NotificationCenter",
 
