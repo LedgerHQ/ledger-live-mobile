@@ -1,4 +1,4 @@
-name: "[TESTS] CI Tests"
+name: "[Tests] CI Tests"
 on:
   pull_request:
     branches:
