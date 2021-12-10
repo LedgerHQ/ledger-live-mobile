@@ -1429,7 +1429,7 @@
       "seeMore": "Afficher plus de tokens",
       "seeLess": "Afficher moins de tokens",
       "addTokens": "Token",
-      "howTo": "Pour ajouter des comptes de tokens, vous devez <0>recevoir des fonds</0> avec votre <1>adresse {{currency}}</1>.",
+      "howTo": "Pour ajouter des comptes de tokens, il vous suffit de <0>recevoir ces tokens</0> sur votre <1>adresse {{currency}}</1>.",
       "algorand": {
         "contractAddress": "Adresse du contrat",
         "viewInExplorer": "Dans l'explorateur",
