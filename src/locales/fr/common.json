@@ -2659,7 +2659,7 @@
       "searchAppsCatalog": "Rechercher dans le Catalogue",
       "searchAppsInstalled": "Rechercher des apps installées",
       "noAppsInstalled": "Aucune app installée sur votre appareil",
-      "noAppsDescription": "Aller dans le catalogue pour installer des apps",
+      "noAppsDescription": "Allez dans le Catalogue pour installer des apps.",
       "noResultsFound": "Aucun résultat",
       "noResultsDesc": "Merci de vérifier l'orthographe et réessayer",
       "versionNew": "(NOUV. {{newVersion}})"
