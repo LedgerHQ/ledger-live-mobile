@@ -36,9 +36,10 @@ export const experimentalFeatures: Feature[] = [
   {
     type: "toggle",
     name: "EXPERIMENTAL_CURRENCIES_JS_BRIDGE",
-    title: "Tezos JS impl",
-    description: "Tezos JS impl",
-    valueOn: "tezos",
+    title: "Experimental JS impl",
+    description:
+      "Use experimental JS implementations for Bitcoin (Taproot) and Tezos",
+    valueOn: "bitcoin,bitcoin_testnet,tezos",
     valueOff: "",
   },
   {
@@ -61,6 +62,24 @@ export const experimentalFeatures: Feature[] = [
     title: "Experimental Explorers API",
     description:
       "Try an upcoming version of Ledger's blockchain explorers. Changing this setting may affect the account balance and synchronization as well as the send feature.",
+  },
+  {
+    type: "toggle",
+    name: "LEDGER_COUNTERVALUES_API",
+    title: "Experimental countervalues API",
+    description:
+      "This may cause the countervalues displayed for your accounts to become incorrect.",
+    valueOn: "https://countervalues.live.ledger.com",
+    valueOff: "https://countervalues-experimental.live.ledger.com",
+  },
+  {
+    type: "toggle",
+    name: "NFT",
+    title: "NFT management features",
+    description:
+      "Display your Ethereum NFT and their metadata in your accounts. Send Ethereum NFT directly from Ledger Live.",
+    valueOn: true,
+    valueOff: false,
   },
   ...(__DEV__
     ? [

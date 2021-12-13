@@ -1,7 +1,7 @@
 // @flow
 
-import React, { useMemo, useCallback, useState } from "react";
-import { StyleSheet, ScrollView, View, Linking } from "react-native";
+import React, { useMemo, useCallback, useState, useEffect } from "react";
+import { StyleSheet, View, Linking } from "react-native";
 import { Trans } from "react-i18next";
 import { useNavigation, useTheme } from "@react-navigation/native";
 import { usePlatformApp } from "@ledgerhq/live-common/lib/platform/PlatformAppProvider";
@@ -26,6 +26,7 @@ import AnimatedHeaderView from "../../components/AnimatedHeader";
 type RouteParams = {
   defaultAccount: ?AccountLike,
   defaultParentAccount: ?Account,
+  platform?: ?string,
 };
 
 type DisclaimerOpts = $Diff<DisclaimerProps, { isOpened: boolean }> | null;
@@ -33,7 +34,7 @@ type DisclaimerOpts = $Diff<DisclaimerProps, { isOpened: boolean }> | null;
 const DAPP_DISCLAIMER_ID = "PlatformAppDisclaimer";
 
 const PlatformCatalog = ({ route }: { route: { params: RouteParams } }) => {
-  const { params: routeParams } = route;
+  const { platform, ...routeParams } = route.params ?? {};
   const { colors } = useTheme();
   const navigation = useNavigation();
 
@@ -47,7 +48,7 @@ const PlatformCatalog = ({ route }: { route: { params: RouteParams } }) => {
       platform: "mobile",
       branches,
     });
-  }, []);
+  }, [manifests]);
 
   // Disclaimer State
   const [disclaimerOpts, setDisclaimerOpts] = useState<DisclaimerOpts>(null);
@@ -84,13 +85,27 @@ const PlatformCatalog = ({ route }: { route: { params: RouteParams } }) => {
     Linking.openURL(urls.platform.developerPage);
   }, []);
 
+  useEffect(() => {
+    // platform can be predefined when coming from a deeplink
+    if (platform && filteredManifests) {
+      const manifest = filteredManifests.find(m => m.id === platform);
+
+      if (manifest) {
+        navigation.navigate(ScreenName.PlatformApp, {
+          ...routeParams,
+          platform: manifest.id,
+          name: manifest.name,
+        });
+      }
+    }
+  }, [platform, filteredManifests, navigation, routeParams]);
+
   return (
     <AnimatedHeaderView
       titleStyle={styles.title}
       title={<Trans i18nKey={"platform.catalog.title"} />}
     >
       <TrackScreen category="Platform" name="Catalog" />
-
       {disclaimerOpts && (
         <DAppDisclaimer
           disableDisclaimer={disclaimerOpts.disableDisclaimer}
@@ -101,34 +116,29 @@ const PlatformCatalog = ({ route }: { route: { params: RouteParams } }) => {
         />
       )}
 
-      <ScrollView style={styles.wrapper}>
-        <CatalogBanner />
-        <CatalogTwitterBanner />
-        {filteredManifests.map(manifest => (
-          <AppCard
-            key={manifest.id}
-            manifest={manifest}
-            onPress={handlePressCard}
-          />
-        ))}
-        <View style={[styles.separator, { backgroundColor: colors.fog }]} />
-        <CatalogCTA
-          Icon={IconCode}
-          title={<Trans i18nKey={"platform.catalog.developerCTA.title"} />}
-          onPress={handleDeveloperCTAPress}
-        >
-          <Trans i18nKey={"platform.catalog.developerCTA.description"} />
-        </CatalogCTA>
-      </ScrollView>
+      <CatalogBanner />
+      <CatalogTwitterBanner />
+      {filteredManifests.map(manifest => (
+        <AppCard
+          key={manifest.id}
+          manifest={manifest}
+          onPress={handlePressCard}
+        />
+      ))}
+      <View style={[styles.separator, { backgroundColor: colors.fog }]} />
+      <CatalogCTA
+        Icon={IconCode}
+        title={<Trans i18nKey={"platform.catalog.developerCTA.title"} />}
+        onPress={handleDeveloperCTAPress}
+      >
+        <Trans i18nKey={"platform.catalog.developerCTA.description"} />
+      </CatalogCTA>
     </AnimatedHeaderView>
   );
 };
 
 const styles = StyleSheet.create({
   root: {
-    flex: 1,
-  },
-  wrapper: {
     flex: 1,
   },
   title: {
