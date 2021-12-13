@@ -80,7 +80,7 @@
     },
     "seeMore": "Daha fazla gör",
     "moreInfo": "Daha fazla bilgi",
-    "buyEth": "Ethereum Al"
+    "buyEth": "Ethereum Satın Al"
   },
   "errors": {
     "countervaluesUnavailable": {
@@ -705,7 +705,7 @@
         "description": "3 Nano S ile ailenizi kriptoyla tanıştırın"
       },
       "buyCrypto": {
-        "title": "Kripto Al",
+        "title": "Kripto Satın Al",
         "description": "Ledger Live ile\nkripto satın alın"
       },
       "swap": {
@@ -1258,7 +1258,7 @@
     "transfer": "Aktar",
     "manager": "Yönetici",
     "settings": "Ayarlar",
-    "platform": "Keşfedin",
+    "platform": "Keşfet",
     "nanoX": "Nano X"
   },
   "portfolio": {
@@ -1447,7 +1447,7 @@
     },
     "send": "Gönder",
     "receive": "Al",
-    "buy": "Satın Al",
+    "buy": "Satın al",
     "walletconnect": "WalletConnect",
     "sell": "Sat",
     "swap": "Takas",
@@ -2456,7 +2456,7 @@
     "retry": "Tekrar Dene",
     "done": "Tamam",
     "finalCta": "Devam",
-    "finalCtaForSwap": "Swap sayfasına dön",
+    "finalCtaForSwap": "Takas sayfasına dön",
     "synchronizing": "Senkronize ediliyor",
     "synchronizingDesc": "Hesaplarınız senkronize ediliyor. Bu biraz zaman alabilir...",
     "noAccountToCreate": "<1><0>{{currencyName}}</></> hesabı oluşturulamadı. İşlemi yeniden başlatın ve hesaplarınızı senkronize edin.",
@@ -2606,7 +2606,7 @@
     },
     "GenuineCheck": {
       "title": "Orijinal cihaz doğrulaması",
-      "accept": "Lütfen Nano X'inizi kapatmayın. <1>Ledger Yöneticisine</1>izin verdiğinizden emin olun."
+      "accept": "Lütfen Nano X'inizi kapatmayın. <1>Ledger Yöneticisine</1> izin verdiğinizden emin olun."
     },
     "ScanningHeader": {
       "title": "Cihazlar aranıyor",
@@ -3612,7 +3612,7 @@
   },
   "exchange": {
     "buy": {
-      "tabTitle": "Al",
+      "tabTitle": "Satın al",
       "selectCurrency": "Bir para birimi seçin",
       "selectAccount": "Bir hesap seçin",
       "connectDevice": "Cihazınızı bağlayın",
