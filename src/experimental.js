@@ -38,7 +38,7 @@ export const experimentalFeatures: Feature[] = [
     name: "EXPERIMENTAL_CURRENCIES_JS_BRIDGE",
     title: "Experimental JS impl",
     description:
-      "Use experimental JS implementations for Bitcoin (Taproot) and Tezos",
+      "Use experimental JS implementations for Bitcoin, all Bitcoin forks, and Tezos.",
     valueOn:
       "bitcoin,bitcoin_testnet,tezos,bitcoin_cash,litecoin,dash,qtum,zcash,bitcoin_gold,stratis,dogecoin,digibyte,komodo,pivx,zencash,vertcoin,peercoin,viacoin,stakenet,stealthcoin,decred",
     valueOff: "",
