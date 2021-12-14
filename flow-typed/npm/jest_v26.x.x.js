@@ -1,5 +1,5 @@
-// flow-typed signature: e60c7806ec0ddaf4588f438843ef37bd
-// flow-typed version: 7afca48d86/jest_v26.x.x/flow_>=v0.104.x
+// flow-typed signature: 3b20eb5af4ba0af34e0122743ff9a08c
+// flow-typed version: 92bd775e37/jest_v26.x.x/flow_>=v0.104.x <=v0.133.x
 
 type JestMockFn<TArguments: $ReadOnlyArray<*>, TReturn> = {
   (...args: TArguments): TReturn,
@@ -259,6 +259,9 @@ type DomTestingLibraryType = {
   // 5.x
   toHaveDisplayValue(value: string | string[]): void,
   toBeChecked(): void,
+  toBeEmptyDOMElement(): void,
+  toBePartiallyChecked(): void,
+  toHaveDescription(text: string | RegExp): void,
   ...
 };
 
@@ -801,6 +804,14 @@ type JestObjectType = {
    * Returns the number of fake timers still left to run.
    */
   getTimerCount(): number,
+  /**
+   * Set the current system time used by fake timers.
+   * Simulates a user changing the system clock while your program is running.
+   * It affects the current time but it does not in itself cause
+   * e.g. timers to fire; they will fire exactly as they would have done
+   * without the call to jest.setSystemTime().
+   */
+  setSystemTime(now?: number | Date): void,
   /**
    * The same as `mock` but not moved to the top of the expectation by
    * babel-jest.
