@@ -216,7 +216,7 @@
       "description": "以下のボタンを使ってログを保存し、Ledgerサポートに提供してください。"
     },
     "DeviceAppVerifyNotSupported": {
-      "title": "マネージャーを開いてこのアプリをアップデートする",
+      "title": "管理を開いてこのアプリをアップデートする",
       "description": "アプリ認証はサポートされていません。"
     },
     "DeviceGenuineSocketEarlyClose": {
