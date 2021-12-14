@@ -1296,9 +1296,9 @@
     "mbUnit": "{{size}}MB"
   },
   "time": {
-    "day": "1日",
+    "day": "日",
     "week": "1週間",
-    "month": "1ヶ月",
+    "month": "月",
     "year": "1年間",
     "all": "すべて",
     "since": {
