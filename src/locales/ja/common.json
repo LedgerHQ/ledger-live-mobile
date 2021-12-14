@@ -1158,13 +1158,13 @@
       "step4suffix1": " PINコードを確定",
       "step4suffix2": " 最後の数字を消去",
       "modal": {
-        "step1": "PINは必ず&lt;1&gt;&lt;1&gt;自分で選択&lt;/1&gt;&lt;/1&gt;してください。",
+        "step1": "PINは<1><1>自分で選択</1></1>してください。",
         "step2": "セキュリティを高めるため、8桁の数字を使用してください。",
         "step3": "PINやリカバリーフレーズが付属しているデバイスは、絶対に使用しないでください。"
       }
     },
     "stepWriteRecovery": {
-      "step1": "&lt;1&gt;&lt;1&gt;Word #1（1つ目の単語）&lt;/1&gt;&lt;/1&gt;を、空白のリカバリーシートの1番目の位置に記入してください。",
+      "step1": "<1><1>Word #1（1個目の単語）</1></1>を、空白のリカバリーシートの1番目の位置に記入してください。",
       "step2": "右ボタンを押して、同様に24個の単語をすべて書き留めます。",
       "step3": "リカバリーフレーズの各単語を確認してください。単語を選択して両方のボタンを同時に押すと、その単語を確認して次の単語に進むことができます。",
       "modal": {
@@ -1358,7 +1358,7 @@
     "fees": "ネットワーク手数料",
     "noFees": "手数料なし",
     "from": "送付元",
-    "to": "送金先",
+    "to": "送付先",
     "identifier": "トランザクションID",
     "viewOperation": "エクスプローラーで表示",
     "whatIsThis": "この操作は何ですか？",
@@ -1380,7 +1380,7 @@
       "unfreezeAmount": "凍結解除額",
       "address": "アドレス",
       "votes": "（{{number}}）票",
-      "votesAddress": "&lt;2&gt;{{name}}&lt;/2&gt;に&lt;0&gt;{{votes}}",
+      "votesAddress": "<2>{{name}}</2>に<0>{{votes}}</0>",
       "validators": "バリデータ",
       "delegated": "{{amount}}デリゲート済み",
       "delegatedTo": "デリゲート先：",
@@ -1429,7 +1429,7 @@
       "seeMore": "トークンの表示を増やす",
       "seeLess": "トークンの表示を減らす",
       "addTokens": "トークンの追加",
-      "howTo": "トークンアカウントを追加するには、&lt;1&gt;{{currency}}アドレス&lt;/1&gt;を使って&lt;0&gt;資金を受け取る必要があります。",
+      "howTo": "トークンアカウントを追加するには、<1>{{currency}}アドレス</1>を使って<0>資金を受け取る</0>必要があります。",
       "algorand": {
         "contractAddress": "コントラクトアドレス",
         "viewInExplorer": "エクスプローラーで表示",
@@ -1455,9 +1455,9 @@
     "lastOperations": "前回のオペレーション",
     "emptyState": {
       "title": "暗号資産をまだお持ちでない場合",
-      "desc": "&lt;1&gt;&lt;0&gt;{{managerAppName}}&lt;/0&gt;&lt;/1&gt;アプリがインストールされていることを確認し、受け取りを開始します。",
-      "descWithBuy": "&lt;3&gt;&lt;0&gt;{{currencyTicker}}&lt;/0&gt;&lt;/3&gt;の購入や受け取りができるよう、&lt;1&gt;&lt;0&gt;{{managerAppName}}アプリがインストールされていることを確認してください。",
-      "descToken": "&lt;1&gt;&lt;0&gt;{{managerAppName}}&lt;/0&gt;&lt;/1&gt;アプリがインストールされていることを確認して、&lt;3&gt;&lt;0&gt;{{currencyTicker}}&lt;/0&gt;&lt;/3&gt;と&lt;5&gt;&lt;0&gt;{{tokenType}}&lt;/0&gt;トークン&lt;/5&gt;を受け取りましょう。",
+      "desc": "<1><0>{{managerAppName}}</0></1>アプリがインストールされていることを確認し、受け取りを開始します。",
+      "descWithBuy": "<3><0>{{currencyTicker}}</0></3>の購入や受け取りができるよう、<1><0>{{managerAppName}}</0></1>アプリがインストールされていることを確認してください。",
+      "descToken": "<1><0>{{managerAppName}}</0></1>アプリがインストールされていることを確認して、<3><0>{{currencyTicker}}</0></3>と<5><0>{{tokenType}}</0>トークン</5>を受け取りましょう。",
       "buttons": {
         "receiveFunds": "受け取る",
         "buyCrypto": "購入"
@@ -1515,7 +1515,7 @@
         "newAccounts": "新しいアカウント",
         "updatedAccounts": "アップデートされたアカウント",
         "empty": "新しいアカウントの追加",
-        "descEmpty": "&lt;0&gt;&lt;0&gt;アカウントが見つかりません&lt;/0&gt;&lt;/0&gt;でした。もう一度お試しいただくか、セットアップに戻ってください。",
+        "descEmpty": "<0><0>アカウントが見つかりません</0></0>でした。もう一度お試しいただくか、セットアップに戻ってください。",
         "alreadyImported": "インポート済み",
         "noAccounts": "インポートできるアカウントがありません。",
         "unsupported": "未サポート",
@@ -1631,7 +1631,7 @@
       "languageDesc": "Ledger Liveの表示言語を設定します。",
       "password": "パスワードロック",
       "passwordDesc": "スマートフォン上のLedger Liveのデータを保護するため、パスワードを設定してください。",
-      "counterValue": "優先する通貨",
+      "counterValue": "表示通貨",
       "theme": "テーマ",
       "themeDesc": "アプリUIのテーマを設定",
       "themes": {
@@ -1693,7 +1693,7 @@
       "blacklistedTokensDesc": "トークンを非表示にするには、アカウント一覧で任意のトークンを長押しし、「トークンを非表示」を選択します。",
       "blacklistedTokensModal": {
         "title": "トークンを非表示",
-        "desc": "この操作により、すべての&lt;1&gt;&lt;0&gt;{tokenName}&lt;/0&gt;&lt;/1&gt;アカウントが非表示になります。&lt;3&gt;設定 &gt; アカウント&lt;/3&gt;から再度表示することができます。",
+        "desc": "この操作により、すべての<1><0>{tokenName}</0></1>アカウントが非表示になります。<3>設定 > アカウント</3>から再度表示することができます。",
         "confirm": "トークンを非表示"
       },
       "cryptoAssets": {
@@ -1738,9 +1738,9 @@
       "repairDeviceDesc": "デバイスのアップデート中に問題が発生し、アップデートを再開できない場合は、この方法でデバイスの修復を試みてください。"
     },
     "experimental": {
-      "title": "Experimental features（開発者向け実験機能）",
-      "desc": "開発者向け実験機能をお試しになり、フィードバックをお寄せください。",
-      "disclaimer": "これらは、テクノロジーファンのコミュニティ向けに、現状のまま提供される実験的な機能です。これらの機能は随時変更、破損、または削除される可能性があります。このオプションを有効にすると、あなたは自己責任でこれらの機能を使用することに同意したことになります。"
+      "title": "試験的機能",
+      "desc": "試験的機能をお試しになり、フィードバックをお寄せください。",
+      "disclaimer": "テクノロジーファンのコミュニティ向けに、現状のまま提供される試験的な機能です。これらの機能は随時変更、破損、または削除される可能性があります。このオプションを有効にした場合、自己責任でこれらの機能を利用することに同意したことになります。"
     }
   },
   "migrateAccounts": {
@@ -1921,7 +1921,7 @@
         "button": "続行",
         "from": "送付元",
         "to": "送付先",
-        "balance": "残高&lt;0&gt;123&lt;/0&gt;",
+        "balance": "残高<0>123</0>",
         "fromAccount": "アカウントを選択",
         "toAccount": "アカウントを選択",
         "paraswapCTA": "Paraswapをお探しですか？この項目は「Discover」タブに移動されました！",
@@ -1960,7 +1960,7 @@
           "fees": "最大手数料",
           "disclaimer": {
             "title": "ご利用規約",
-            "desc": "「同意する」をクリックすることで、私はこのサービスが&lt;0&gt;{{provider}}&lt;/0&gt;の利用規約によって排他的に規定されていることを理解し、これに同意します。",
+            "desc": "「同意する」をクリックすることで、私はこのサービスが<0>{{provider}}</0>の利用規約によって排他的に規定されていることを理解し、これに同意します。",
             "tos": "ご利用規約",
             "accept": "同意する",
             "reject": "閉じる"
@@ -2037,8 +2037,8 @@
       "banners": {
         "needApproval": "資産を貸し出すには、このアカウントを承認する必要があります。",
         "fullyApproved": "このアカウントを完全に承認しました。手数料を支払うことで減額できます。",
-        "approvedCanReduce": "このアカウントで&lt;0&gt;{{value}}&lt;/0&gt;を承認しました。手数料を支払うことで減額できます。",
-        "approvedButNotEnough": "このアカウントで&lt;0&gt;{{value}}&lt;/0&gt;を承認しました。",
+        "approvedCanReduce": "このアカウントで<0>{{value}}</0>を承認しました。手数料を支払うことで減額できます。",
+        "approvedButNotEnough": "このアカウントで<0>{{value}}</0>を承認しました。",
         "approving": "アカウントの承認が完了すると、資産をデポジットできるようになります。",
         "notEnough": "レンディングには、アカウントに対して承認されている上限額を増やす必要があります。"
       },
@@ -2079,7 +2079,7 @@
         "label": "暗号資産をレンディング（貸し出す）",
         "title": "コンパウンド・プロトコルで資産を貸し出す",
         "description": "コンパウンド・プロトコルを使用すると、イーサリアムネットワーク上で資産の貸し出しや借り入れを行うことができます。Ledgerアカウントから直接、資産の貸し出しや利息を得ることが可能です。",
-        "switchLabel": "私は&lt;0&gt;&lt;0&gt;利用規約&lt;/0&gt;&lt;/0&gt;を読み、内容に同意しました。"
+        "switchLabel": "私は<0><0>利用規約</0></0>を読み、内容に同意しました。"
       },
       "info": {
         "1": {
@@ -2134,7 +2134,7 @@
           "noEnabledAccounts": "資産のレンディング（貸し出し）には、アカウントを承認する必要があります。"
         },
         "enable": {
-          "summary": "&lt;0&gt;&lt;/0&gt;&lt;1&gt;{{contractName}}&lt;/1&gt;&lt;0&gt;スマートコントラクトが&lt;/0&gt;&lt;1&gt;{{accountName}}&lt;/1&gt;&lt;0&gt;アカウントに&lt;/0&gt;&lt;1&gt;{{amount}}&lt;/1&gt;&lt;0&gt;でアクセスすることを許可します&lt;/0&gt;。",
+          "summary": "<0></0><1>{{contractName}}</1><0>スマートコントラクトが</0><1>{{accountName}}</1><0>アカウントに</0><1>{{amount}}</1><0>でアクセスすることを許可します</0>。",
           "limit": "リミット：{{amount}}",
           "noLimit": "制限なし：{{assetName}}",
           "contractName": "コンパウンド{{currencyName}}",
@@ -2213,7 +2213,7 @@
       "description": "アカウントに大量のコインがあるため、このトランザクションの承認と署名には時間がかかる場合があります。",
       "title": "UTXOメッセージ"
     },
-    "highFeeModal": "ネットワーク手数料が、送金額の&lt;1&gt;10%&lt;/1&gt;を超えています。それでも続行しますか？",
+    "highFeeModal": "ネットワーク手数料が、送金額の<1>10%</1>を超えています。それでも続行しますか？",
     "scan": {
       "title": "QRコードをスキャン",
       "descBottom": "QRコードを枠内の中央に合わせてください。",
@@ -2404,13 +2404,13 @@
     },
     "selectValidator": {},
     "castVotes": {
-      "ranking": "ランキング：&lt;0&gt;{{rank}}&lt;/0&gt;",
+      "ranking": "ランキング：<0>{{rank}}</0>",
       "nbOfVotes": "投票数{{amount}}",
       "percentage": "パーセンテージ",
       "estYield": "推定利回り",
       "addMoreVotes": "投票をさらに追加",
-      "votesRemaining": "残り投票数：&lt;0&gt;{{total}}&lt;/0&gt;",
-      "maxVotesAvailable": "最大投票数：&lt;0&gt;{{total}}&lt;/0&gt;",
+      "votesRemaining": "残り投票数：<0>{{total}}</0>",
+      "maxVotesAvailable": "最大投票数：<0>{{total}}</0>",
       "voteFor": "投票先：",
       "validateVotes": "票を検証する",
       "votesRequired": "投票が必要です ",
@@ -2459,8 +2459,8 @@
     "finalCtaForSwap": "スワップに戻る",
     "synchronizing": "同期中",
     "synchronizingDesc": "アカウントを同期しています。しばらくお待ちください...",
-    "noAccountToCreate": "&lt;1&gt;&lt;0&gt;{{currencyName}}&lt;/&gt;&lt;/&gt;アカウントを作成できませんでした。アカウントの作成/追加を最初からやり直して、アカウントを同期してください。",
-    "cantCreateAccount": "&lt;1&gt;&lt;0&gt;{{accountName}}&lt;/&gt;&lt;/&gt;アカウントで資産を受け取る前に、新しいアカウントを追加することはできません。",
+    "noAccountToCreate": "<1><0>{{currencyName}}</></>アカウントを作成できませんでした。アカウントの作成/追加を最初からやり直して、アカウントを同期してください。",
+    "cantCreateAccount": "<1><0>{{accountName}}</></>アカウントで資産を受け取る前に、新しいアカウントを追加することはできません。",
     "tokens": {
       "title": "トークンの追加",
       "createParentCurrencyAccount": "{{parrentCurrencyName}}アカウントを追加",
@@ -2606,7 +2606,7 @@
     },
     "GenuineCheck": {
       "title": "デバイス認証チェック",
-      "accept": "NanoXの電源をオフにしないでください。また、&lt;1&gt;Ledgerマネージャー&lt;/1&gt;が許可されていることを確認してください。"
+      "accept": "NanoXの電源をオフにしないでください。また、<1>Ledgerマネージャー</1>が許可されていることを確認してください。"
     },
     "ScanningHeader": {
       "title": "デバイスを探しています",
@@ -2621,7 +2621,7 @@
   },
   "DeviceItemSummary": {
     "genuine": "お使いのデバイスは正規品です。",
-    "genuineFailed": "デバイスの認証に&lt;1&gt;&lt;0&gt;失敗しました&lt;/0&gt;&lt;/1&gt;。"
+    "genuineFailed": "デバイスの認証に<1><0>失敗しました</0></1>。"
   },
   "DeviceNameRow": {
     "title": "名前",
@@ -2640,8 +2640,8 @@
     "appsCatalog": "アプリカタログ",
     "installedApps": "インストール済みアプリ",
     "noAppNeededForToken": "{{tokenName}}用の{{appName}}アプリをインストール",
-    "tokenAppDisclaimer": "{{tokenName}}は、{{appName}}アプリを使用する{{tokenType}}}トークンです。{{tokenName}}を管理するには、&lt;1&gt;{{appName}}アプリをインストール&lt;/1&gt;してトークンを&lt;3&gt;{{appName}}アカウントに送金します&lt;/3&gt;。",
-    "tokenAppDisclaimerInstalled": "{{tokenName}}は、{{appName}}アプリを使用する{{tokenType}}}トークンです。{{tokenName}}を管理するには、&lt;1&gt;{{appName}}アプリを開いて&lt;/1&gt;トークンを&lt;3&gt;{{appName}}アカウントに送金してください&lt;/3&gt;。",
+    "tokenAppDisclaimer": "{{tokenName}}は、{{appName}}アプリを使用する{{tokenType}}}トークンです。{{tokenName}}を管理するには、<1>{{appName}}アプリをインストール</1>してトークンを<3>{{appName}}アカウントに送金します</3>。",
+    "tokenAppDisclaimerInstalled": "{{tokenName}}は、{{appName}}アプリを使用する{{tokenType}}}トークンです。{{tokenName}}を管理するには、<1>{{appName}}アプリを開いて</1>トークンを<3>{{appName}}アカウントに送金してください</3>。",
     "goToAccounts": "アカウントに移動",
     "intallParentApp": "{{appName}}アプリをインストールしてください",
     "readOnly": {
@@ -2678,8 +2678,8 @@
       "title": "ストレージ",
       "used": "使用中",
       "genuine": "お使いのデバイスは正規品です。",
-      "appsInstalled": "&lt;0&gt;{{number}}&lt;/0&gt;個のアプリをインストール済み",
-      "appsInstalled_plural": "&lt;0&gt;{{number}}&lt;/0&gt;個のアプリをインストール済み",
+      "appsInstalled": "<0>{{number}}</0>個のアプリをインストール済み",
+      "appsInstalled_plural": "<0>{{number}}</0>個のアプリをインストール済み",
       "storageAvailable": "利用可能"
     },
     "installSuccess": {
@@ -2800,7 +2800,7 @@
     }
   },
   "FirmwareUpdateReleaseNotes": {
-    "introTitle": "&lt;1&gt;&lt;0&gt;ファームウェアバージョン{{version}}をインストールしようとしています。&lt;/0&gt;&lt;/1&gt;",
+    "introTitle": "<1><0>ファームウェアバージョン{{version}}をインストールしようとしています。</0></1>",
     "introDescription1": "デバイス上のアプリは、すべて削除されますのでご注意ください。ファームウェアのアップデート後に、アプリを再インストールできます。",
     "introDescription2": "これは、あなたの暗号資産には影響を及ぼしません。",
     "action": "アップデートを続行"
@@ -2960,16 +2960,16 @@
             "myDelegations": "My デリゲート",
             "cta": "続行",
             "estYield": "推定利回り：{{amount}}",
-            "totalAvailable": "合計利用可能額：&lt;0&gt;{{amount}}&lt;/0&gt;",
+            "totalAvailable": "合計利用可能額：<0>{{amount}}</0>",
             "allAssetsUsed": "全ての資産を使用中",
-            "noResultsFound": "&lt;0&gt;{{search}}&lt;/0&gt;に該当するバリデータが見つかりませんでした。",
-            "currentAmount": "(+ &lt;0&gt;{{amount}}&lt;/0&gt;)"
+            "noResultsFound": "<0>{{search}}</0>に該当するバリデータが見つかりませんでした。",
+            "currentAmount": "(+ <0>{{amount}}</0>)"
           },
           "amount": {
-            "assetsRemaining": "残りの資産：&lt;0&gt;{{amount}}&lt;/0&gt;",
+            "assetsRemaining": "残りの資産：<0>{{amount}}</0>",
             "allAssetsUsed": "全ての資産を使用中",
-            "minAmount": "下限量：&lt;0&gt;{{min}}&lt;/0&gt;",
-            "incorrectAmount": "上限量：&lt;0&gt;{{max}}&lt;/0&gt;",
+            "minAmount": "下限量：<0>{{min}}</0>",
+            "incorrectAmount": "上限量：<0>{{max}}</0>",
             "cta": "続行"
           },
           "verification": {
@@ -3012,12 +3012,12 @@
             "myDelegations": "My デリゲート",
             "cta": "続行",
             "estYield": "推定利回り：{{amount}}",
-            "totalAvailable": "合計利用可能額：&lt;0&gt;{{amount}}&lt;/0&gt;",
+            "totalAvailable": "合計利用可能額：<0>{{amount}}</0>",
             "allAssetsUsed": "全ての資産を使用中",
-            "noResultsFound": "&lt;0&gt;{{search}}&lt;/0&gt;に該当するバリデータが見つかりませんでした。"
+            "noResultsFound": "<0>{{search}}</0>に該当するバリデータが見つかりませんでした。"
           },
           "amount": {
-            "newRedelegatedBalance": "処理後の&lt;0&gt;{{name}}&lt;/0&gt;に対する合計額：&lt;0&gt;{{amount}}&lt;/0&gt;"
+            "newRedelegatedBalance": "処理後の<0>{{name}}</0>に対する合計額：<0>{{amount}}</0>"
           },
           "verification": {
             "success": {
@@ -3303,8 +3303,8 @@
       "oversubscribed": "ノミネーター超過（{{nominatorsCount}}）名",
       "oversubscribedInfo": "ステーキング量上位{{maxNominatorRewardedPerValidator}}名のノミネーターだけが報酬を獲得できます。",
       "hasPendingBondOperation": "ボンドの承認がまだ完了していません。",
-      "externalControllerUnsupported": "このStashアカウントは、&lt;0&gt;{{stashAddress}}&lt;/0&gt;のアドレスを持つ別のアカウントにコントロールされています。Ledger Liveでステーキングするには、このStashアカウントを独自のコントローラーとして設定する必要があります。",
-      "externalStashUnsupported": "このアカウントは、アドレス&lt;0&gt;{{stashAddress}}&lt;/0&gt;を持つ別のStashアカウントのコントローラーです。Ledger Liveでステーキングするには、Stashアカウントを独自のコントローラーとして設定する必要があります。",
+      "externalControllerUnsupported": "このStashアカウントは、<0>{{stashAddress}}</0>のアドレスを持つ別のアカウントにコントロールされています。Ledger Liveでステーキングするには、このStashアカウントを独自のコントローラーとして設定する必要があります。",
+      "externalStashUnsupported": "このアカウントは、アドレス<0>{{stashAddress}}</0>を持つ別のStashアカウントのコントローラーです。Ledger Liveでステーキングするには、Stashアカウントを独自のコントローラーとして設定する必要があります。",
       "showInactiveNominations": "すべてのノミネートを表示（{{count}}）",
       "hideInactiveNominations": "アクティブなノミネートのみを表示",
       "noActiveNominations": "アクティブなノミネートはありません。",
@@ -3351,7 +3351,7 @@
           "myNominations": "My ノミネート",
           "electedValidators": "選出済みバリデータ",
           "waitingValidators": "未選出バリデータ",
-          "noResultsFound": "&lt;0&gt;{{search}}&lt;/0&gt;に該当するバリデータが見つかりませんでした。",
+          "noResultsFound": "<0>{{search}}</0>に該当するバリデータが見つかりませんでした。",
           "selected": "{{selected}}/{{total}}選択済み",
           "notValidatorsRemoved": "現在バリデータではない{{count}}個のアドレスを、ノミネートしました。これらのアドレスは、ノミネートのトランザクションから自動的に削除されます。",
           "maybeChill": "代わりにノミネートを解除する"
@@ -3507,7 +3507,7 @@
     "forAnEstYield": "推定利回り：",
     "yieldPerYear": "{{yield}}／年",
     "yieldInfos": "利回り率の提供元：",
-    "termsAndPrivacy": "私は&lt;1&gt;Ledger Live利用規約&lt;/1&gt;と&lt;3&gt;プライバシーポリシー&lt;/3&gt;を読んだ上で、内容に同意しました。",
+    "termsAndPrivacy": "私は<1>Ledger Live利用規約</1>と<3>プライバシーポリシー</3>を読んだ上で、内容に同意しました。",
     "delegation": "デリゲート（委任）",
     "viewDetails": "詳細を表示",
     "validator": "バリデータ",
@@ -3605,7 +3605,7 @@
   "Terms": {
     "title": "利用規約",
     "read": "利用規約を読む",
-    "switchLabel": "私は&lt;1&gt;サービス利用規約&lt;/1&gt;を読み、内容に同意しました。",
+    "switchLabel": "私は<1>サービス利用規約</1>を読み、内容に同意しました。",
     "switchLabelFull": "私はサービス利用規約とプライバシーポリシーを読んだ上で、内容に同意します。",
     "cta": "Ledgerアプリを開く",
     "service": "サービス利用規約"
@@ -3712,7 +3712,7 @@
       "title": "ステータス",
       "ok": {
         "title": "Ledger Liveは正常に作動しています。",
-        "desc": "&lt;0&gt;お困りですか？&lt;/0&gt;&lt;1&gt;ヘルプページ&lt;/1&gt;を参照してください。"
+        "desc": "<0>お困りですか？</0><1>ヘルプページ</1>を参照してください。"
       },
       "error": {
         "title": "Ledger Liveで問題が発生しています。"
@@ -3724,7 +3724,7 @@
       "title": "Live Appsカタログ",
       "branch": {
         "soon": "近日公開",
-        "experimental": "実験",
+        "experimental": "試験的",
         "debug": "デバッグ"
       },
       "banner": {
