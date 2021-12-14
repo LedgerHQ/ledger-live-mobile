@@ -1448,10 +1448,6 @@
         "howTo": "You can add assets to your Algorand account.",
         "addAsa": "Add ASA (Asset)",
         "howAsaWorks": "How ASA (asset) works?"
-      },
-      "solana": {
-        "howTo": "You can add tokens to your Solana account",
-        "howSplTokensWork": "How SPL tokens work"
       }
     },
     "subaccounts": {
@@ -3504,37 +3500,6 @@
           "success": {
             "title": "Transaction sent successfully",
             "description": "You will see your operation in history once the network has confirmed the transaction."
-          }
-        }
-      }
-    }
-  },
-  "solana": {
-    "optIn": {
-      "stepperHeader": {
-        "selectToken": "Select token",
-        "connectDevice": "Connect device",
-        "verification": "Verification",
-        "stepRange": "Step {{currentStep}} of {{totalSteps}}"
-      },
-      "flow": {
-        "steps": {
-          "selectToken": {
-            "warning": {
-              "title": "Token already added",
-              "description": "You already have {{token}} token in your Solana account."
-            }
-          },
-          "verification": {
-            "success": {
-              "title": "{{token}} successfully added!",
-              "text": "You can now receive and send {{token}} tokens on your Solana account.",
-              "cta": "View details"
-            },
-            "pending": {
-              "title": "Broadcasting transaction..."
-            },
-            "broadcastError": "Your transaction may have failed. Please check back in a few minutes to make sure your transaction did not go through before trying again."
           }
         }
       }
