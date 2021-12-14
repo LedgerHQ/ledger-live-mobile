@@ -1,5 +1,5 @@
-// flow-typed signature: 46c208c0478422f7cb257049275d50ff
-// flow-typed version: 96813466d9/uuid_v7.x.x/flow_>=v0.104.x
+// flow-typed signature: 1b555a8f791762f2a4ee29e1335a175a
+// flow-typed version: a40f6e5201/uuid_v8.x.x/flow_>=v0.104.x
 
 declare module 'uuid' {
   // v1 (Timestamp)
