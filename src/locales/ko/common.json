@@ -26,7 +26,7 @@
     "close": "닫기",
     "confirm": "확인",
     "poweredBy": "제공 ",
-    "received": "수신됨",
+    "received": "수령됨",
     "sent": "전송됨",
     "or": "또는",
     "rename": "이름 변경",
@@ -1318,7 +1318,7 @@
   },
   "operations": {
     "types": {
-      "IN": "수신됨",
+      "IN": "수령됨",
       "NFT_IN": "NFT 수령됨",
       "OUT": "전송됨",
       "NFT_OUT": "NFT 전송됨",
