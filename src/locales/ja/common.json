@@ -282,7 +282,7 @@
     },
     "FirmwareOrAppUpdateRequired": {
       "title": "ファームウェアまたはアプリのアップデートが必要です",
-      "description": "マネージャーを使用してすべてのアプリをアンインストールし、ファームウェアのアップデートが利用可能かどうかを確認してから、アプリを再インストールしてください。"
+      "description": "管理画面からすべてのアプリをアンインストール後に、ファームウェアのアップデートが利用可能か確認してください。"
     },
     "LatestFirmwareVersionRequired": {
       "title": "デスクトップで、デバイスのアップデートが必要です。",
@@ -322,7 +322,7 @@
       "description": "もう一度お試しください。問題が解決しない場合は、以下のボタンを使ってログを保存し、Ledgerサポートに提出してください。"
     },
     "ManagerAPIsFail": {
-      "title": "マネージャーサービスを利用できません。",
+      "title": "管理を利用できません。",
       "description": "ネットワークの状態を確認してください。"
     },
     "ManagerAppAlreadyInstalled": {
@@ -340,25 +340,25 @@
     "ManagerNotEnoughSpace": {
       "title": "ストレージの残量が不足しています。",
       "info": "アプリをいくつかアンインストールして、{{app}}用の空き容量を確保してください。",
-      "description": "アプリをアンインストールしても、あなたの資産には影響しません。"
+      "description": "アプリをアンインストールしても、資産には影響しません。"
     },
     "ManagerQuitPage": {
       "install": {
         "title": "アプリのインストール中",
-        "description": "マネージャーを終了すると、インストールも終了します。",
+        "description": "管理を終了すると、インストールも終了します。",
         "stay": "インストールを続行"
       },
       "uninstall": {
         "title": "アプリのアンインストール中",
-        "description": "マネージャーを終了すると、アンインストールも終了します。",
+        "description": "管理を終了すると、アンインストールも終了します。",
         "stay": "アンインストールを続行"
       },
       "update": {
         "title": "アプリのアップデート中",
-        "description": "マネージャーを終了すると、アップデートも終了します。",
+        "description": "管理を終了すると、アップデートも終了します。",
         "stay": "アップデートを続行"
       },
-      "quit": "マネージャーを終了"
+      "quit": "管理を終了"
     },
     "ManagerUninstallBTCDep": {
       "title": "このアプリは必須です。",
@@ -480,11 +480,11 @@
     },
     "UpdateYourApp": {
       "title": "アプリのアップデートが必要です。",
-      "description": "マネージャーで{{managerAppName}}アプリをアンインストールし、もう一度インストールし直してください。"
+      "description": "管理から{{managerAppName}}アプリをアンインストールして、再インストールしてください。"
     },
     "UserRefusedAllowManager": {
-      "title": "デバイスのマネージャーが無効です。",
-      "description": "デバイスの設定で「マネージャー」のアクセスを許可してから、もう一度お試しください。"
+      "title": "デバイスのManagerが無効です。",
+      "description": "デバイスの設定でManagerのアクセスを許可してから、もう一度お試しください。"
     },
     "UserRefusedAddress": {
       "title": "受取アドレスが拒否されました。",
@@ -803,7 +803,7 @@
       "3": {
         "label": "ベーシック",
         "title": "トランザクションを検証する",
-        "desc": "Ledger Liveでは、暗号資産の購入、売却、管理、交換、および獲得を、保護された安全な状態で行うことができます。暗号資産の取引はすべて、Nanoを使って認証することになります。"
+        "desc": "Ledger Liveでは、暗号資産の購入や売却、管理、取引、報酬の獲得を、安全に行うことが可能です。暗号資産の取引はすべて、Nanoを使って認証することになります。"
       },
       "4": {
         "label": "ベーシック",
@@ -1181,7 +1181,7 @@
       "modal": {
         "step1": "パスワードは安全に保管してください。絶対に第三者と共有してはいけません。",
         "step2": "パスワードは安全に保管してください。パスワードを紛失した場合、Ledger Liveをリセットし、アカウントをすべて追加し直す必要があります。",
-        "step3": "Ledger Liveをリセットしても、あなたの暗号資産には影響しません。"
+        "step3": "Ledger Liveをリセットしても、暗号資産には影響しません。"
       }
     },
     "stepFinish": {
@@ -1256,7 +1256,7 @@
     "portfolio": "ポートフォリオ",
     "accounts": "アカウント",
     "transfer": "送付",
-    "manager": "マネージャー",
+    "manager": "管理",
     "settings": "設定",
     "platform": "Discover",
     "nanoX": "Nano X"
@@ -1272,7 +1272,7 @@
     },
     "emptyState": {
       "noAppsTitle": "デバイスにアプリをインストールする。",
-      "noAppsDesc": "Ledger Liveでアカウントを追加する前に、デバイスにアプリをインストールします。マネージャーに移動して、アプリをインストールしてください。",
+      "noAppsDesc": "Ledger Liveでアカウントを追加する前に、デバイスにアプリをインストールします。管理に移動して、アプリをインストールしてください。",
       "noAccountsTitle": "アカウントを持っていません…",
       "noAccountsDesc": "ポートフォリオにアカウントを追加してください。",
       "buttons": {
@@ -1490,7 +1490,7 @@
         "title": "ポートフォリオからアカウントを削除する",
         "desc": "保存されているデータは削除されます。",
         "confirmationTitle": "本当によろしいですか？",
-        "confirmationDesc": "これは、あなたの暗号資産には影響しません。既存のアカウントは、後からいつでも追加できます。"
+        "confirmationDesc": "この操作は、暗号資産には影響しません。既存のアカウントは後からいつでも追加できます。"
       },
       "archive": {
         "title": "アカウントをアーカイブ",
@@ -1647,7 +1647,7 @@
       "reportErrors": "バグレポート",
       "reportErrorsDesc": "製品の向上に役立つレポートを、Ledgerに自動的に送信します。",
       "developerMode": "デベロッパーモード",
-      "developerModeDesc": "マネージャーに開発者用アプリを表示し、Testnetアプリを有効にします。",
+      "developerModeDesc": "管理画面に開発者用アプリを表示し、Testnetアプリを有効にする。",
       "analytics": "アナリティクス",
       "analyticsDesc": "アナリティクスを有効にして、Ledgerによるユーザーエクスペリエンスの向上に協力します。",
       "analyticsModal": {
@@ -1733,7 +1733,7 @@
       "exportLogs": "ログを保存",
       "exportLogsDesc": "トラブルを解決するために、Ledger Liveログの保存が必要になる場合があります。",
       "hardReset": "Ledger Liveをリセットします",
-      "hardResetDesc": "これは、あなたの資産には影響しません。アカウントデータ、トランザクション履歴、設定など、Ledger Live上のすべてのデータを消去します。Ledgerデバイスを使って、初期化されたLedger Liveに暗号資産を再び読み込んで管理できます。",
+      "hardResetDesc": "この操作は、資産には影響しません。アカウントデータやトランザクション履歴、設定など、Ledger Live上のすべてのデータを消去します。Ledgerデバイスを使って、初期化されたLedger Liveに暗号資産を再び読み込んで管理することも可能です。",
       "repairDevice": "Ledgerデバイスを修理する",
       "repairDeviceDesc": "デバイスのアップデート中に問題が発生し、アップデートを再開できない場合は、この方法でデバイスの修復を試みてください。"
     },
@@ -1931,8 +1931,8 @@
         },
         "noApp": {
           "title": "{{appName}}アプリがインストールされていません。",
-          "desc": "マネージャーに移動して{{appName}}アプリをインストールしてください。",
-          "cta": "マネージャーを開く",
+          "desc": "管理に移動して{{appName}}アプリをインストールしてください。",
+          "cta": "管理を開く",
           "close": "閉じる"
         },
         "noAccounts": {
@@ -1944,7 +1944,7 @@
         "outdatedApp": {
           "title": "アップデート可能なアプリ",
           "desc": "{{appName}}アプリをアップデートする必要があります。",
-          "cta": "マネージャーを開く",
+          "cta": "管理を開く",
           "close": "閉じる"
         },
         "summary": {
@@ -1985,13 +1985,13 @@
       },
       "missingApp": {
         "title": "デバイスに取引アプリをインストールしてください。",
-        "description": "暗号資産をスワップするには、マネージャーに移動してExchange appをインストールしてください。",
-        "button": "マネージャーを開く"
+        "description": "暗号資産をスワップするために、管理に移動してExchange appをインストールする。",
+        "button": "管理を開く"
       },
       "outdatedApp": {
         "title": "デバイス上のExchange appをアップデートしてください。",
-        "description": "暗号通貨をスワップするには、マネージャーに移動してExchange appをアップデートしてください。",
-        "button": "マネージャーを開く"
+        "description": "暗号通貨をスワップるために、管理に移動してExchange appをアップデートする。",
+        "button": "管理を開く"
       },
       "emptyState": {
         "title": "{{currency}}アカウントはありません。",
@@ -2508,7 +2508,7 @@
     "connectAndUnlockDevice": "デバイスを接続してロックを解除する",
     "unlockDevice": "デバイスのロックを解除する",
     "outdated": "アプリのバージョンが最新ではありません。",
-    "outdatedDesc": "お使いのデバイス上の{{appName}}アプリに重要なアップデートがあります。マネージャーに移動してアップデートを実行してください。",
+    "outdatedDesc": "デバイスの{{appName}}アプリに重要なアップデートがあります。管理に移動してアップデートを実行してください。",
     "quitApp": "デバイス上のアプリケーションを終了する",
     "appNotInstalled": "{{appName}}アプリをインストールしてください。",
     "appNotInstalled_plural": "{{appName}}アプリをインストールしてください。",
@@ -2525,7 +2525,7 @@
       "alert": "送付する前に、売却の詳細をデバイス上で確認してください。アドレスは安全に共有されるため、確認の必要はありません。"
     },
     "button": {
-      "openManager": "マネージャーを開く"
+      "openManager": "管理を開く"
     },
     "installApp": "{{appName}}アプリのインストール{{percentage}}",
     "installAppDescription": "インストールが完了するまでお待ちください。",
@@ -2553,7 +2553,7 @@
         }
       },
       "genuineCheck": {
-        "title": "{{productName}}でLedgerマネージャーを有効化"
+        "title": "{{productName}}でLedgerの管理を有効化"
       },
       "genuineCheckPending": {
         "title": "デバイスが正規品か確認中..."
@@ -2566,7 +2566,7 @@
         "description": "",
         "footer": {
           "appInstalled": "アプリがインストールされていません。",
-          "goManager": "マネージャーを開く"
+          "goManager": "管理を開く"
         }
       },
       "accountApp": {
@@ -2606,7 +2606,7 @@
     },
     "GenuineCheck": {
       "title": "デバイス認証チェック",
-      "accept": "NanoXの電源をオフにしないでください。また、<1>Ledgerマネージャー</1>が許可されていることを確認してください。"
+      "accept": "NanoXの電源をオフにしないでください。また、<1>Ledger Manager</1>を許可してください。"
     },
     "ScanningHeader": {
       "title": "デバイスを探しています",
@@ -2634,8 +2634,8 @@
     }
   },
   "manager": {
-    "tabTitle": "デバイスマネージャー",
-    "title": "マネージャー",
+    "tabTitle": "デバイス管理",
+    "title": "管理",
     "connect": "デバイスを選択してください",
     "appsCatalog": "アプリカタログ",
     "installedApps": "インストール済みアプリ",
@@ -2656,7 +2656,7 @@
       "title": "アプリカタログ",
       "loading": "アプリを読み込み中...",
       "noApps": "アプリが見つかりません。",
-      "searchAppsCatalog": "カタログでアプリを検索中...",
+      "searchAppsCatalog": "カタログでアプリを検索...",
       "searchAppsInstalled": "インストール済みアプリを検索...",
       "noAppsInstalled": "デバイスにアプリがインストールされていません。",
       "noAppsDescription": "アプリカタログに移動して、アプリをインストールします。",
@@ -2667,7 +2667,7 @@
     "uninstall": {
       "title": "すべてアンインストール",
       "subtitle": "すべてのアプリをアンインストールしますか？",
-      "description": "アプリのアンインストールは、所有する暗号資産には影響しません。アプリは、アプリカタログから再インストールすることができます。"
+      "description": "アプリをアンインストールしても、暗号資産には影響しません。アプリは、アプリカタログから再インストールが可能です。"
     },
     "remove": {
       "title": "デバイスの削除",
@@ -2723,7 +2723,7 @@
       "title": "{{number}}件のアプリアップデート",
       "title_plural": "{{number}}件のアプリアップデート",
       "step": "アップデートステップ{{step}}：",
-      "updateWarn": "アップデート中にマネージャーを終了しないでください。",
+      "updateWarn": "アップデート中に管理画面を終了しないでください。",
       "progress": "すべてのアプリをアップデート中…",
       "button": "すべてアップデート",
       "version": "新{{version}}",
@@ -2802,7 +2802,7 @@
   "FirmwareUpdateReleaseNotes": {
     "introTitle": "<1><0>ファームウェアバージョン{{version}}をインストールしようとしています。</0></1>",
     "introDescription1": "デバイス上のアプリは、すべて削除されますのでご注意ください。ファームウェアのアップデート後に、アプリを再インストールできます。",
-    "introDescription2": "これは、あなたの暗号資産には影響を及ぼしません。",
+    "introDescription2": "この操作は、暗号資産には影響しません。",
     "action": "アップデートを続行"
   },
   "FirmwareUpdateCheckId": {
@@ -2816,7 +2816,7 @@
   },
   "FirmwareUpdateConfirmation": {
     "title": "ファームウェアのアップデート完了",
-    "description": "マネージャーに移動して、デバイスにアプリを再インストールします。"
+    "description": "管理に移動して、デバイスにアプリを再インストールする。"
   },
   "RepairDevice": {
     "title": "修理",
