@@ -1950,7 +1950,7 @@
         "summary": {
           "from": "送付元",
           "to": "送付先",
-          "send": "送金する",
+          "send": "送る",
           "payoutNetworkFees": "ペイアウト手数料",
           "payoutNetworkFeesTooltip": "これはデバイスには表示されません。",
           "receive": "数量",
@@ -2213,7 +2213,7 @@
       "description": "アカウントに大量のコインがあるため、このトランザクションの承認と署名には時間がかかる場合があります。",
       "title": "UTXOメッセージ"
     },
-    "highFeeModal": "ネットワーク手数料が、送金額の<1>10%</1>を超えています。それでも続行しますか？",
+    "highFeeModal": "ネットワーク手数料が、送付額の<1>10%</1>を超えています。続行しますか？",
     "scan": {
       "title": "QRコードをスキャン",
       "descBottom": "QRコードを枠内の中央に合わせてください。",
@@ -2250,7 +2250,7 @@
       "quantityAvailable": "利用可能な数量"
     },
     "summary": {
-      "subaccountsWarning": "このアカウントのトークンを送金するには、このアカウントに{{ currency }}を補充する必要があります",
+      "subaccountsWarning": "このアカウントのトークンを送付するには、このアカウントに{{ currency }}を追加する必要があります。",
       "tag": "タグ（任意）",
       "validateTag": "タグを検証",
       "total": "合計",
@@ -2305,7 +2305,7 @@
     "info": {
       "maxSpendable": {
         "title": "最大利用可能額",
-        "description": "最大利用可能額は、1回のトランザクションで送金できる、1つのアカウントの合計残高です。"
+        "description": "最大利用可能額は、1回のトランザクションで送付できる、1つのアカウントの合計残高です。"
       }
     }
   },
@@ -2522,7 +2522,7 @@
     },
     "confirmSell": {
       "title": "売却をデバイスで確認する",
-      "alert": "送金する前に、売却の詳細をデバイス上で確認してください。アドレスは安全にやりとりされるため、確認の必要はありません。"
+      "alert": "送付する前に、売却の詳細をデバイス上で確認してください。アドレスは安全に共有されるため、確認の必要はありません。"
     },
     "button": {
       "openManager": "マネージャーを開く"
@@ -2640,8 +2640,8 @@
     "appsCatalog": "アプリカタログ",
     "installedApps": "インストール済みアプリ",
     "noAppNeededForToken": "{{tokenName}}用の{{appName}}アプリをインストール",
-    "tokenAppDisclaimer": "{{tokenName}}は、{{appName}}アプリを使用する{{tokenType}}}トークンです。{{tokenName}}を管理するには、<1>{{appName}}アプリをインストール</1>してトークンを<3>{{appName}}アカウントに送金します</3>。",
-    "tokenAppDisclaimerInstalled": "{{tokenName}}は、{{appName}}アプリを使用する{{tokenType}}}トークンです。{{tokenName}}を管理するには、<1>{{appName}}アプリを開いて</1>トークンを<3>{{appName}}アカウントに送金してください</3>。",
+    "tokenAppDisclaimer": "{{tokenName}}は、{{appName}}アプリを使用する{{tokenType}}}トークンです。{{tokenName}}を管理するには、<1>{{appName}}アプリをインストール</1>してトークンを<3>{{appName}}アカウントに送付します</3>。",
+    "tokenAppDisclaimerInstalled": "{{tokenName}} は、{{appName}} アプリを使用する{{tokenType}}} トークンです。{{tokenName}} を管理するには、<1>{{appName}} アプリを開いて</1>トークンを<3>{{appName}} アカウントに送付してください</3>。",
     "goToAccounts": "アカウントに移動",
     "intallParentApp": "{{appName}}アプリをインストールしてください",
     "readOnly": {
@@ -2887,7 +2887,7 @@
           "verification": {
             "success": {
               "title": "{{token}}資産が正常に追加されました！",
-              "text": "Algorandアカウントで{{token}}資産を受け取りや、送金ができるようになりました。",
+              "text": "Algorandアカウントで、{{token}}資産の受け取りや送付が可能になりました。",
               "cta": "詳細を表示"
             },
             "pending": {
@@ -3249,7 +3249,7 @@
     "info": {
       "available": {
         "title": "DOTが利用可能",
-        "description": "この数量は、いつでも送金できます。"
+        "description": "この数量は、いつでも送付できます。"
       },
       "locked": {
         "title": "ボンドされた資産",
@@ -3496,7 +3496,7 @@
   },
   "delegation": {
     "overdelegated": "デリゲート超過",
-    "delegationSendWarnDesc": "送金量は、デリゲートアカウントから差し引かれます。",
+    "delegationSendWarnDesc": "送付額は、デリゲートアカウントから差し引かれます。",
     "delegationReceiveWarnDesc": "デリゲートアカウントで受け取った額は、合計ステーキング額に加算されます。これを回避したい場合は、別のアカウントを選択してください。",
     "iDelegateMy": "デリゲート：",
     "undelegateMy": "デリゲート解除：",
@@ -3575,8 +3575,8 @@
       "erc20": {
         "approve": "送信する前に、取引の詳細をデバイスで確認してください。"
       },
-      "compound.supply": "送金する前に、デポジットの詳細をデバイス上で確認してください。",
-      "compound.withdraw": "送金する前に、引き出しの詳細をデバイス上で確認してください。"
+      "compound.supply": "送付する前に、デポジットの詳細をデバイス上で確認してください。",
+      "compound.withdraw": "送付する前に、引き出しの詳細をデバイス上で確認してください。"
     },
     "name": "名前",
     "votes": "票数",
