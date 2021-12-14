@@ -80,7 +80,7 @@
     },
     "seeMore": "詳細を表示",
     "moreInfo": "詳細はこちら",
-    "buyEth": "イーサリアムを購入"
+    "buyEth": "Ethereumを購入"
   },
   "errors": {
     "countervaluesUnavailable": {
@@ -330,8 +330,8 @@
       "description": "デバイスにどのアプリがすでにインストールされているかご確認ください。"
     },
     "ManagerAppRelyOnBTC": {
-      "title": "ビットコインアプリとイーサリアムアプリが必要です。",
-      "description": "最新版のビットコインアプリとイーサリアムアプリを、最初にインストールしてください。"
+      "title": "BitcoinアプリとEthereumアプリが必要です。",
+      "description": "最新版のBitcoinアプリとEthereumアプリを、最初にインストールしてください。"
     },
     "ManagerDeviceLocked": {
       "title": "デバイスがロックされています。",
@@ -718,7 +718,7 @@
       },
       "sell": {
         "title": "暗号資産を売却する",
-        "description": "Ledger Liveから直接ビットコインを売却できます。"
+        "description": "Ledger Liveから直接Bitcoinを売却できます。"
       },
       "vote": {
         "title": "Ledgerで投票する",
@@ -738,7 +738,7 @@
     "stepWelcome": {
       "title": "Ledgerへようこそ",
       "subtitle": "スマートフォンで暗号資産を安全に管理しましょう。",
-      "start": "ご利用ガイド",
+      "start": "はじめる",
       "noDevice": "デバイスをお持ちでない場合",
       "buy": "{{fullDeviceName}}を購入"
     },
@@ -1641,7 +1641,7 @@
       },
       "counterValueDesc": "残高や操作に使用する通貨を選択してください。",
       "exchange": "レートプロバイダー",
-      "exchangeDesc": "ビットコインから{{fiat}}への取引レートのプロバイダーを設定",
+      "exchangeDesc": "Bitcoinから{{fiat}}への取引レートのプロバイダーを設定",
       "stock": "マーケットインジケーターの色分け",
       "stockDesc": "マーケットの上昇を緑色で表示したい場合は「ウエスタン」、赤色で表示したい場合は「イースタン」を選択してください。",
       "reportErrors": "バグレポート",
@@ -1677,7 +1677,7 @@
     "currencies": {
       "header": "通貨",
       "rateProvider": "レートプロバイダー（{{currencyTicker}}→BTC）",
-      "rateProviderDesc": "{{currencyTicker}}とビットコインのレートプロバイダーを選択してください。",
+      "rateProviderDesc": "{{currencyTicker}}とBitcoinのレートプロバイダーを選択してください。",
       "confirmationNb": "承認数",
       "confirmationNbDesc": "トランザクションの確認に必要なネットワーク承認の回数を設定します。",
       "currencySettingsTitle": "{{currencyName}}設定",
@@ -2019,8 +2019,8 @@
         "withdraw": "引き出し"
       },
       "highFees": {
-        "title": "イーサリアムの高い手数料",
-        "description": "イーサリアムネットワークの混雑により、トランザクションを発行する際に高額な手数料が発生する場合があります。"
+        "title": "Ethereumの高い手数料",
+        "description": "Ethereumネットワークの混雑により、トランザクションを発行する際に高額な手数料が発生する場合があります。"
       },
       "account": {
         "amountSupplied": "デポジット額",
@@ -2047,7 +2047,7 @@
         "tabTitle": "ダッシュボード",
         "assetsTitle": "レンディングする資産",
         "accountsTitle": "認証済みアカウント",
-        "emptySateDescription": "イーサリアムアカウントから直接資産をレンディングし、利息を得ることができます。",
+        "emptySateDescription": "Ethereumアカウントから直接資産をレンディングし、利息を得ることができます。",
         "apy": "{{value}}APY（年利）",
         "activeAccount": {
           "account": "アカウント",
@@ -2078,7 +2078,7 @@
       "terms": {
         "label": "暗号資産をレンディング（貸し出す）",
         "title": "コンパウンド・プロトコルで資産を貸し出す",
-        "description": "コンパウンド・プロトコルを使用すると、イーサリアムネットワーク上で資産の貸し出しや借り入れを行うことができます。Ledgerアカウントから直接、資産の貸し出しや利息を得ることが可能です。",
+        "description": "コンパウンド・プロトコルを使用すると、Ethereumネットワーク上で資産の貸し出しや借り入れを行うことができます。Ledgerアカウントから直接、資産の貸し出しや利息を得ることが可能です。",
         "switchLabel": "私は<0><0>利用規約</0></0>を読み、内容に同意しました。"
       },
       "info": {
@@ -2103,7 +2103,7 @@
       "noTokenAccount": {
         "info": {
           "title": "{{ name }}アカウントを持っていません。",
-          "description": "暗号資産のデポジットや貸し出しを行うには、{{ name }}アカウントが必要です。資金はイーサリアムアドレスで受け取ってください。"
+          "description": "暗号資産のデポジットや貸し出しを行うには、{{ name }}アカウントが必要です。資金はEthereumアドレスで受け取ってください。"
         },
         "buttons": {
           "receive": "{{ name }}を受け取る",
@@ -2466,7 +2466,7 @@
       "createParentCurrencyAccount": "{{parrentCurrencyName}}アカウントを追加",
       "erc20": {
         "title": "トークンの追加",
-        "disclaimer": "{{tokenName}}はERC20トークンです。\nイーサリアムアカウントで直接トークンを受け取ることができます。",
+        "disclaimer": "{{tokenName}}はERC20トークンです。\nEthereumアカウントで直接トークンを受け取ることができます。",
         "learnMore": "ERC20についての詳細"
       },
       "trc10": {
@@ -3660,7 +3660,7 @@
     }
   },
   "walletconnect": {
-    "disclaimer": "ウォレットを通じて以下のイーサリアムアカウントに接続しようとしています：",
+    "disclaimer": "ウォレットを通じて以下のEthereumアカウントに接続しようとしています：",
     "reject": "拒否",
     "connect": "接続",
     "connected": "接続済み",
@@ -3689,7 +3689,7 @@
       "action": "デバイス上で処理を確定してください。",
       "accountName": "アカウント名"
     },
-    "deeplinkingTitle": "イーサリアムアカウントを選択",
+    "deeplinkingTitle": "Ethereumアカウントを選択",
     "addAccount": "新規アカウントの追加"
   },
   "notificationCenter": {
