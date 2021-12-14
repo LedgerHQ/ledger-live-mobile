@@ -27,7 +27,7 @@
     "confirm": "確認",
     "poweredBy": "Powered by ",
     "received": "受け取り済み",
-    "sent": "送金済み",
+    "sent": "送付済み",
     "or": "または",
     "rename": "名前の変更",
     "learnMore": "詳細はこちら",
@@ -378,7 +378,7 @@
     },
     "NotEnoughGas": {
       "title": "ネットワーク手数料に必要なETHが不足しています",
-      "description": "アカウントに、ERC20トークンのトランザクションに十分なETHを送金してください。"
+      "description": "アカウントに、ERC20トークンのトランザクションに十分なETHを送付してください。"
     },
     "NotEnoughBalanceToDelegate": {
       "title": "デリゲートに必要な残高が不足しています。"
@@ -462,8 +462,8 @@
       "title": "凍結額を1未満にすることはできません。"
     },
     "TronSendTrc20ToNewAccountForbidden": {
-      "title": "新しいアカウントにTRC20トークンを送金してもアクティブ化されません。",
-      "description": "有効化するには、まずアカウントにTRXまたはTRC10トークンを送金してください。その後、アカウントでTRC20トークンを受け取れるようになります。"
+      "title": "TRC20を新しいアカウントに送付しても、有効化されません。",
+      "description": "有効化するには、まずアカウントにTRXまたはTRC10トークンを送付してください。その後、アカウントでTRC20トークンを受け取れるようになります。"
     },
     "TronUnexpectedFees": {
       "title": "追加費用が発生する場合があります。"
@@ -476,7 +476,7 @@
       "description": "トランザクションは、30秒以内に署名する必要があります。もう一度お試しください。"
     },
     "TronNotEnoughEnergy": {
-      "title": "このトークンの送金に必要なエネルギーが不足しています。"
+      "title": "このトークンの送付に必要なエネルギーが不足しています。"
     },
     "UpdateYourApp": {
       "title": "アプリのアップデートが必要です。",
@@ -523,7 +523,7 @@
       "description": "資金を受け取る場合は、親アカウントを使用してください"
     },
     "UnavailableTezosOriginatedAccountSend": {
-      "title": "まだサブアカウントから送金することはできません。",
+      "title": "まだサブアカウントから送付できません。",
       "description": "この機能は、最近のBabylonアップデートで導入された変更のため、後から追加される予定です。"
     },
     "AccessDeniedError": {
@@ -543,10 +543,10 @@
       "title": "Memoのフォーマットに誤りがあります。"
     },
     "SourceHasMultiSign": {
-      "title": "{{currencyName}}を送金するにはマルチシグを無効にしてください。"
+      "title": "{{currencyName}}を送付するにはマルチシグを無効にしてください。"
     },
     "StellarMemoRecommended": {
-      "title": "この受取人に送金するには、Memoが必要な場合があります"
+      "title": "この送付先に送付するには、Memoが必要な場合があります。\n"
     },
     "StratisDown2021Warning": {
       "description": "Stratisブロックチェーンのメジャーアップデートが実施されたため、正しく動作しない可能性があります。旧Stratisブロックチェーンのサポートは、2021年10月16日まで引き続き提供されます。"
@@ -580,7 +580,7 @@
       "title": "今後のトランザクション手数料に十分な残高を、確保しておいてください。"
     },
     "PolkadotDoMaxSendInstead": {
-      "title": "残高が{{minimumBalance}を下回ることはできません。空のアカウントに最大額を送金してください。"
+      "title": "残高が{{minimumBalance}}を下回ることはできません。空のアカウントに最大額を送付してください。"
     },
     "PolkadotBondMinimumAmount": {
       "title": "{{minimumBondAmount}}以上ボンドする必要があります。"
@@ -1255,7 +1255,7 @@
   "tabs": {
     "portfolio": "ポートフォリオ",
     "accounts": "アカウント",
-    "transfer": "送金",
+    "transfer": "送付",
     "manager": "マネージャー",
     "settings": "設定",
     "platform": "Discover",
@@ -1283,7 +1283,7 @@
     },
     "noOpState": {
       "title": "トランザクションがありません。",
-      "desc": "暗号資産を受取アドレスに送金して、アプリが同期するのを待ちましょう。"
+      "desc": "暗号資産を受取アドレスに送付して、アプリが同期するのを待ちましょう。"
     }
   },
   "addAccountsModal": {
@@ -1320,7 +1320,7 @@
     "types": {
       "IN": "受け取り済み",
       "NFT_IN": "NFT受取済み",
-      "OUT": "送金済み",
+      "OUT": "送付済み",
       "NFT_OUT": "NFT送付済み",
       "CREATE": "作成済み",
       "REVEAL": "表示済み",
@@ -1365,7 +1365,7 @@
     "seeAll": "すべて表示",
     "seeLess": "表示を減らす",
     "viewInExplorer": "エクスプローラーで表示",
-    "sending": "送金しています...",
+    "sending": "送信中…",
     "receiving": "受信しています...",
     "tokenOperations": "トークンオペレーション",
     "subAccountOperations": "サブアカウントオペレーション",
@@ -1445,7 +1445,7 @@
       "seeMore": "サブアカウントをさらに表示",
       "seeLess": "サブアカウントの表示を減らす"
     },
-    "send": "送金する",
+    "send": "送る",
     "receive": "受け取る",
     "buy": "購入",
     "walletconnect": "WalletConnect",
@@ -1656,7 +1656,7 @@
         "bullet0": "クリック数",
         "bullet1": "アプリ内ページアクセス数",
         "bullet2": "ウェブページへのリダイレクト",
-        "bullet3": "アクション：送金、受け取り、ロックなど",
+        "bullet3": "アクション：送付、受け取り、ロックなど",
         "bullet4": "ページスクロールの最後",
         "bullet5": "アプリのインストール/アンインストールとバージョン",
         "bullet6": "アカウント、通貨、およびオペレーションの数",
@@ -1785,7 +1785,7 @@
   },
   "transfer": {
     "send": {
-      "title": "送金する"
+      "title": "送る"
     },
     "fees": {
       "title": "手数料を編集"
@@ -1895,7 +1895,7 @@
       },
       "payoutModal": {
         "title": "ペイアウト手数料",
-        "description": "ペイアウト手数料はデバイス上に表示されず、送金額から差し引かれます。",
+        "description": "ペイアウト手数料はデバイス上に表示されず、送付額から差し引かれます。",
         "cta": "閉じる"
       },
       "pendingOperation": {
@@ -2499,7 +2499,7 @@
     }
   },
   "DeviceAction": {
-    "stayInTheAppPlz": "アプリを開いたままにし、Nano Xを近くに置いてください。",
+    "stayInTheAppPlz": "アプリを開いた状態で、Nano Xを近くに置いてください。",
     "allowAppPermission": "デバイス上で{{wording}}アプリを開く",
     "allowAppPermissionSubtitleToken": "{{token}}トークンを管理",
     "allowManagerPermission": "デバイス上で{{wording}}を許可",
