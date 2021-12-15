@@ -3,9 +3,8 @@
 import React from "react";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { useTranslation } from "react-i18next";
-
 import LText from "../../components/LText";
-import ProviderBullet from "./Bullet";
+import ProviderBullet from "./ProviderBullet";
 
 type BuyOptionProps = {
   name: string,
