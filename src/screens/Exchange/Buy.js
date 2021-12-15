@@ -1,7 +1,7 @@
 // @flow
 
-import React, {useCallback, useState} from "react";
-import {View, StyleSheet, Platform} from "react-native";
+import React, { useCallback, useState } from "react";
+import { View, StyleSheet, Platform } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { useTranslation } from "react-i18next";
 import { useNavigation, useTheme } from "@react-navigation/native";
@@ -23,27 +23,27 @@ export default function Buy() {
   const navigation = useNavigation();
   const { colors } = useTheme();
 
-  const [provider, setProvider] = useState<Provider>(null)
+  const [provider, setProvider] = useState<Provider>(null);
 
   const navigateToMoonPay = useCallback(() => {
     navigation.navigate(NavigatorName.Platform, {
       screen: ScreenName.PlatformCatalog,
       params: {
         platform: "moonpay",
-      }
+      },
     });
-  })
+  },[]);
 
   const navigateToCoinify = useCallback(() => {
     navigation.navigate(ScreenName.Coinify);
-  })
+  });
 
   const onContinue = () => {
     provider === "moonpay" ? navigateToMoonPay() : navigateToCoinify();
-  }
+  };
 
-  const moonPayIcon = <MoonPay size={40} />
-  const coinifyIcon = <Coinify size={40} />
+  const moonPayIcon = <MoonPay size={40} />;
+  const coinifyIcon = <Coinify size={40} />;
 
   return (
     <SafeAreaView
@@ -60,24 +60,51 @@ export default function Buy() {
       <View style={styles.body}>
         <LText semiBold>{t("exchange.buy.title")}</LText>
         <View style={styles.providers}>
-          <BuyOption name={"MoonPay"} icon={moonPayIcon} supportedCoinsCount={40} onPress={() => setProvider("moonpay")} isActive={provider === "moonpay"} />
-          <BuyOption name={"Coinify"} icon={coinifyIcon} supportedCoinsCount={10} onPress={() => setProvider("coinify")} isActive={provider === "coinify"} />
+          <BuyOption
+            name={"MoonPay"}
+            icon={moonPayIcon}
+            supportedCoinsCount={40}
+            onPress={() => setProvider("moonpay")}
+            isActive={provider === "moonpay"}
+          />
+          <BuyOption
+            name={"Coinify"}
+            icon={coinifyIcon}
+            supportedCoinsCount={10}
+            onPress={() => setProvider("coinify")}
+            isActive={provider === "coinify"}
+          />
         </View>
       </View>
-      <View style={[styles.footer, {
-        ...Platform.select({
-          android: {
-            borderTopColor: "rgba(20, 37, 51, 0.1)",
-            borderTopWidth: 1
+      <View
+        style={[
+          styles.footer,
+          {
+            ...Platform.select({
+              android: {
+                borderTopColor: "rgba(20, 37, 51, 0.1)",
+                borderTopWidth: 1,
+              },
+              ios: {
+                shadowColor: "rgb(20, 37, 51)",
+                shadowRadius: 14,
+                shadowOpacity: 0.04,
+                shadowOffset: {
+                  width: 0,
+                  height: -4,
+                },
+              },
+            }),
           },
-          ios: {
-            shadowColor: "rgba(20, 37, 51, 0.04)",
-            shadowRadius: 14,
-            shadowOffset: "0px, -4px"
-          },
-        }),
-      }]}>
-        <Button containerStyle={styles.button} type={"primary"} title={t("common.continue")} onPress={() => onContinue()} disabled={!provider}/>
+        ]}
+      >
+        <Button
+          containerStyle={styles.button}
+          type={"primary"}
+          title={t("common.continue")}
+          onPress={() => onContinue()}
+          disabled={!provider}
+        />
       </View>
     </SafeAreaView>
   );
@@ -96,14 +123,14 @@ const styles = StyleSheet.create({
   },
   providers: {
     flex: 1,
-    marginTop: 8
+    marginTop: 8,
   },
   footer: {
     marginTop: 40,
-    padding: 16
+    padding: 16,
   },
   button: {
     alignSelf: "stretch",
-    minWidth: "100%"
-  }
+    minWidth: "100%",
+  },
 });

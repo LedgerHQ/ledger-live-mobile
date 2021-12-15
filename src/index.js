@@ -311,7 +311,7 @@ const linkingOptions = {
             initialRouteName: "buy",
             screens: {
               [ScreenName.Coinify]: "coinify",
-            }
+            },
           },
           /**
            * ie: "ledgerlive://swap" -> will redirect to the main swap page
