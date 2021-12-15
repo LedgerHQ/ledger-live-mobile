@@ -2,7 +2,6 @@
 
 import React from "react";
 import { View, StyleSheet } from "react-native";
-
 import LText from "../../components/LText";
 
 type ProviderBulletProps = {
