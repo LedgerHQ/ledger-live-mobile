@@ -1920,7 +1920,7 @@
         "tab": "取引",
         "button": "続行",
         "from": "送付元",
-        "to": "送付先",
+        "to": "交換先",
         "balance": "残高<0>123</0>",
         "fromAccount": "アカウントを選択",
         "toAccount": "アカウントを選択",
@@ -1949,7 +1949,7 @@
         },
         "summary": {
           "from": "送付元",
-          "to": "送付先",
+          "to": "交換先",
           "send": "送る",
           "payoutNetworkFees": "ペイアウト手数料",
           "payoutNetworkFeesTooltip": "これはデバイスには表示されません。",
@@ -1973,7 +1973,7 @@
         "date": "日付",
         "from": "送付元",
         "fromAmount": "送付額",
-        "to": "送付先",
+        "to": "交換先",
         "toAmount": "受取額",
         "statusTooltips": {
           "expired": "詳細については、スワップIDをご用意の上、スワッププロバイダーまでお問い合わせください。",
