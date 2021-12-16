@@ -2495,6 +2495,10 @@
       "legacy": {
         "title": "Legacy",
         "desc": "{{currency}} için orijinal adres biçimi. İşlem başına en yüksek ücretler. Bazı cüzdanlar/borsalar hâlâ sadece bu türü destekliyor."
+      },
+      "taproot": {
+        "title": "Taproot",
+        "desc": "Latest {{currency}} network upgrade. Will provide better privacy and cheaper fees once widespread. Still limited support from wallet and exchanges."
       }
     }
   },
