@@ -70,7 +70,7 @@ easy data setting for development.
 
 Optional environment variables you can put in `.env`, `.env.production` or `.env.staging` for debug, release, or staging release builds respectively.
 
-[A more exhaustive list of documented environmental variables can be found here](https://github.com/LedgerHQ/ledger-live-common/blob/master/src/env.ts).
+[A more exhaustive list of documented environment variables can be found here](https://github.com/LedgerHQ/ledger-live-common/blob/master/src/env.ts).
 
 
 - `DEVICE_PROXY_URL=http://localhost:8435` Use the ledger device over HTTP. Useful for debugging on an emulator. More info about this in the section [Connection via HTTP bridge](#connection-via-http-bridge).
@@ -129,7 +129,7 @@ React Native integration seems pretty bleeding edge right now, so don't expect e
 - Run Ledger Live Mobile in debug as usual
 - No need to enable remote debug!
 
-### Working with emulators
+### Working on iOS or Android emulators
 
 #### Connection via HTTP bridge
 It is possible to run Ledger Live Mobile on an emulator and connect to a Nano that is plugged in via USB.
