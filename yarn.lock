@@ -2327,10 +2327,10 @@
     bignumber.js "^9.0.1"
     json-rpc-2.0 "^0.2.16"
 
-"@ledgerhq/live-common@21.21.2":
-  version "21.21.2"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-21.21.2.tgz#2aadcd6da644031345196f0fcebcbe64b5eea831"
-  integrity sha512-TRTL8VSEQSGswDKVE0JeyX2KoRzrd5ZDYNetRQUN/iEOcD2IcJKZ00lqLIeaePwT/s1JakSf19Rn4qS3ToPfPg==
+"@ledgerhq/live-common@21.21.4":
+  version "21.21.4"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-21.21.4.tgz#eb3a9d01e92da7be4ccc138360bb5ccbcf8c3ebb"
+  integrity sha512-/SVzXk33y2G0zeul0fjDA3r4JNH18E/h/fyNSY+YkOerZ+b699/fY6cEKCKdfAubvJ73KpDu06ljFq3yLC6BlQ==
   dependencies:
     "@crypto-com/chain-jslib" "0.0.19"
     "@ledgerhq/compressjs" "1.3.2"
