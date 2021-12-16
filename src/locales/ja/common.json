@@ -2495,6 +2495,10 @@
       "legacy": {
         "title": "Legacy（レガシー）",
         "desc": "{{currency}}の元のアドレス形式。トランザクションあたりの手数料が最も高い。一部のウォレット/取引所は、現在もこの形式のみ対応している。"
+      },
+      "taproot": {
+        "title": "Taproot",
+        "desc": "Latest {{currency}} network upgrade. Will provide better privacy and cheaper fees once widespread. Still limited support from wallet and exchanges."
       }
     }
   },
