@@ -2495,6 +2495,10 @@
       "legacy": {
         "title": "Legacy",
         "desc": "Format d'adresse original de {{currency}}. Frais les plus élevés pour chaque transaction. Certains wallets/échanges ne prennent toujours en charge que les Legacy."
+      },
+      "taproot": {
+        "title": "Taproot",
+        "desc": "Latest {{currency}} network upgrade. Will provide better privacy and cheaper fees once widespread. Still limited support from wallet and exchanges."
       }
     }
   },
