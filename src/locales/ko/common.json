@@ -2495,6 +2495,10 @@
       "legacy": {
         "title": "레거시",
         "desc": "{{currency}}의 오리지널 주소 형식. 트랜잭션별 수수료가 가장 높습니다. 여전히 이 유형만을 지원하는 지갑/거래소가 일부 존재합니다."
+      },
+      "taproot": {
+        "title": "Taproot",
+        "desc": "Latest {{currency}} network upgrade. Will provide better privacy and cheaper fees once widespread. Still limited support from wallet and exchanges."
       }
     }
   },
