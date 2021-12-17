@@ -1380,7 +1380,7 @@
       "unfreezeAmount": "동결 해제 금액",
       "address": "주소",
       "votes": "투표 ({{number}})",
-      "votesAddress": "&lt;2&gt;{{name}}&lt;/2&gt;에게 &lt;0&gt;{{votes}}&lt;0&gt;",
+      "votesAddress": "<2>{{name}}</2>에게 <0>{{votes}}</0>",
       "validators": "검증인",
       "delegated": "({{amount}}) 위임됨",
       "delegatedTo": "다음에게 위임됨",
@@ -1429,7 +1429,7 @@
       "seeMore": "더 많은 토큰 보기",
       "seeLess": "화면에 보이는 토큰 줄이기",
       "addTokens": "토큰 추가",
-      "howTo": "토큰 계정을 추가하려면 &lt;1&gt;{{currency}} 주소&lt;/1&gt;를 사용하여 &lt;0&gt;자금 받기&lt;/0&gt;를 해야 합니다.",
+      "howTo": "토큰 계정을 추가하려면 <1>{{currency}} 주소</1>를 사용하여 <0>자금을 수령</0>해야 합니다.",
       "algorand": {
         "contractAddress": "계약 주소",
         "viewInExplorer": "탐색기에서 보기",
