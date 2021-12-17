@@ -390,7 +390,7 @@
       "title": "残高が{{minimumAmount}}を下回ることはできません。"
     },
     "NotEnoughBalanceBecauseDestinationNotCreated": {
-      "title": "受取人アドレスを有効にするには{{minimalAmount}}以上の残高が必要です。"
+      "title": "受取アドレスを有効にするには{{minimalAmount}} 以上の残高が必要です。"
     },
     "PairingFailed": {
       "title": "ペアリングに失敗しました",
@@ -2226,7 +2226,7 @@
     },
     "stepperHeader": {
       "selectAccount": "引き落としアカウント",
-      "recipientAddress": "受取人アドレス",
+      "recipientAddress": "送付先アドレス",
       "selectAmount": "数量",
       "summary": "概要",
       "selectDevice": "デバイスを選択",
@@ -2498,7 +2498,7 @@
       },
       "taproot": {
         "title": "Taproot",
-        "desc": "Latest {{currency}} network upgrade. Will provide better privacy and cheaper fees once widespread. Still limited support from wallet and exchanges."
+        "desc": "最新の{{currency}} ネットワークアップグレード。より良いプライバシーや手数料が提供されます。現段階では、ウォレットと取引のサポートに制限があります。"
       }
     }
   },
@@ -3234,7 +3234,7 @@
   "stellar": {
     "memo": {
       "title": "Memo",
-      "warning": "Memoを使用する場合は、受取人とMemoのタイプをしっかりと確認してください。"
+      "warning": "Memoを使用する場合は、送付先とMemoのタイプをしっかりと確認してください。"
     },
     "memoType": {
       "MEMO_TEXT": "Memoのテキスト",
