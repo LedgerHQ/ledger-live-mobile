@@ -852,7 +852,7 @@
             "label": "デバイスの画面に表示される手順に従って、操作方法を学びましょう。"
           },
           "2": {
-            "title": "「新しいデバイスとして設定」を選択",
+            "title": "「新規デバイスとして設定」を選択",
             "label": "両方のボタンを同時に押して、選択内容を確定します。"
           },
           "3": {
@@ -929,7 +929,7 @@
               "label": "新しいハードウェアウォレットを入手しましょう。"
             },
             "1": {
-              "label": "Ledgerアプリで「新しいデバイスでリカバリーフレーズを復元」を選択します。"
+              "label": "Ledgerアプリで「新しいデバイスでリカバリーフレーズを復元」を選択。"
             },
             "2": {
               "label": "新しいデバイスにリカバリーフレーズを入力すると、保有している暗号資産にアクセスできるようになります。"
@@ -1005,7 +1005,7 @@
         "cta": "OK、準備完了！",
         "warning": {
           "title": "Ledgerのリカバリーフレーズのみを推奨",
-          "desc": "Ledgerは、外部で生成されたリカバリーフレーズのセキュリティを保証できません。リカバリーフレーズがLedgerで生成されたものでない場合は、Nanoを新しいデバイスとして設定することをお勧めします。",
+          "desc": "Ledgerは、外部で作成されたリカバリーフレーズのセキュリティは保証できません。リカバリーフレーズがLedgerで作成されたものでない場合は、Nanoを新規デバイスとして設定することをお勧めします。",
           "cta": "了解！"
         },
         "nextStep": "次のステップ",
@@ -1151,7 +1151,7 @@
     "stepSetupPin": {
       "step1": "{{fullDeviceName}}の電源をオンにして、画面の指示に従ってください。",
       "step1-nanoS": "OTGケーブルを使用して、{{fullDeviceName}}をスマートフォンに接続します。",
-      "step2": "両方のボタンを同時に押して<1><1>「新しいデバイスとして設定」</1></1>を選択します。",
+      "step2": "両方のボタンを同時に押して<1><1>「Setup as a new device」</1></1>を選択する。",
       "step2-restore": "両方のボタンを同時に押して<1><1>「リカバリーフレーズから復元」</1></1>を選択します。",
       "step3": "左ボタンまたは右ボタンを押して、数字を選択します。両方のボタンを同時に押して確定します。",
       "step4prefix": "選択 ",
@@ -1175,7 +1175,7 @@
       }
     },
     "stepPassword": {
-      "desc": "スマートフォン上のLedger Liveのデータを保護するため、パスワードを設定してください。",
+      "desc": "スマートフォン上のLedger Liveのデータを保護するため、パスワードを設定する。",
       "descConfigured": "パスワードロックが正常に有効化されました。",
       "setPassword": "パスワードを設定する",
       "modal": {
@@ -1626,33 +1626,33 @@
       "title": "一般",
       "desc": "Ledger Liveの一般設定を変更します。",
       "carousel": "カルーセルの表示／非表示",
-      "carouselDesc": "ポートフォリオ上でカルーセルの表示を有効にします",
+      "carouselDesc": "ポートフォリオでカルーセルの表示を有効にする。",
       "language": "表示言語",
-      "languageDesc": "Ledger Liveの表示言語を設定します。",
+      "languageDesc": "Ledger Liveの表示言語を設定する。",
       "password": "パスワードロック",
-      "passwordDesc": "スマートフォン上のLedger Liveのデータを保護するため、パスワードを設定してください。",
+      "passwordDesc": "スマートフォン上のLedger Liveのデータを保護するため、パスワードを設定する。",
       "counterValue": "表示通貨",
       "theme": "テーマ",
-      "themeDesc": "アプリUIのテーマを設定",
+      "themeDesc": "アプリUIのテーマを設定する。",
       "themes": {
         "dark": "ダーク",
         "dusk": "夕暮れ",
         "light": "ライト"
       },
-      "counterValueDesc": "残高や操作に使用する通貨を選択してください。",
+      "counterValueDesc": "残高や操作に使用する通貨を選択する。",
       "exchange": "レートプロバイダー",
       "exchangeDesc": "Bitcoinから{{fiat}}への取引レートのプロバイダーを設定",
       "stock": "マーケットインジケーターの色分け",
       "stockDesc": "マーケットの上昇を緑色で表示したい場合は「ウエスタン」、赤色で表示したい場合は「イースタン」を選択してください。",
       "reportErrors": "バグレポート",
-      "reportErrorsDesc": "製品の向上に役立つレポートを、Ledgerに自動的に送信します。",
+      "reportErrorsDesc": "製品の向上に役立つレポートを、Ledgerに自動的に送信する。",
       "developerMode": "デベロッパーモード",
       "developerModeDesc": "管理画面に開発者用アプリを表示し、Testnetアプリを有効にする。",
       "analytics": "アナリティクス",
-      "analyticsDesc": "アナリティクスを有効にして、Ledgerによるユーザーエクスペリエンスの向上に協力します。",
+      "analyticsDesc": "アナリティクスを有効にして、Ledgerによるユーザーエクスペリエンスの向上に協力する。",
       "analyticsModal": {
         "title": "アナリティクスの共有",
-        "desc": "アナリティクスを有効にして、Ledgerによるユーザーエクスペリエンスの向上に協力します",
+        "desc": "アナリティクスを有効にして、Ledgerによるユーザーエクスペリエンスの向上に協力する。",
         "bullet0": "クリック数",
         "bullet1": "アプリ内ページアクセス数",
         "bullet2": "ウェブページへのリダイレクト",
@@ -1672,13 +1672,13 @@
         "bullet2": "Ledger Liveのバージョンと、OSのリージョン、言語、地域"
       },
       "hideEmptyTokenAccounts": "未使用アカウントを非表示にする",
-      "hideEmptyTokenAccountsDesc": "アカウントページで、未使用アカウントを非表示にします。"
+      "hideEmptyTokenAccountsDesc": "アカウントページで、未使用アカウントを非表示にする。"
     },
     "currencies": {
       "header": "通貨",
       "rateProvider": "レートプロバイダー（{{currencyTicker}}→BTC）",
       "rateProviderDesc": "{{currencyTicker}}とBitcoinのレートプロバイダーを選択してください。",
-      "confirmationNb": "承認数",
+      "confirmationNb": "承認回数",
       "confirmationNbDesc": "トランザクションの確認に必要なネットワーク承認の回数を設定します。",
       "currencySettingsTitle": "{{currencyName}}設定",
       "placeholder": "この資産の設定はありません。"
@@ -1690,7 +1690,7 @@
       "hideTokenCTA": "トークンを非表示",
       "showContractCTA": "コントラクトを表示",
       "blacklistedTokens": "非表示トークンリスト",
-      "blacklistedTokensDesc": "トークンを非表示にするには、アカウント一覧で任意のトークンを長押しし、「トークンを非表示」を選択します。",
+      "blacklistedTokensDesc": "トークンを非表示にするには、アカウント一覧で任意のトークンを長押して、「トークンを非表示」を選択してください。",
       "blacklistedTokensModal": {
         "title": "トークンを非表示",
         "desc": "この操作により、すべての<1><0>{tokenName}</0></1>アカウントが非表示になります。<3>設定 > アカウント</3>から再度表示することができます。",
@@ -1705,7 +1705,7 @@
     "about": {
       "title": "Ledgerについて",
       "desc": "アプリ情報、利用規約、およびプライバシーポリシー。",
-      "appDescription": "Ledger Liveを使って暗号資産を安全に保管や売買、スワップをしながら、資産を管理して増やしましょう。すべてを1つの場所で。",
+      "appDescription": "暗号資産を安全に保管、売買、スワップ、運用、管理するならLedger Live。すべてを一箇所で管理しましょう。",
       "appVersion": "バージョン",
       "termsConditions": "ご利用規約",
       "termsConditionsDesc": "Ledger Liveを使用することにより、Ledgerの利用規約に同意したものとみなされます。",
@@ -1724,7 +1724,7 @@
       "support": "Ledgerサポート",
       "supportDesc": "問題がある場合は、ハードウェアウォレットでLedger Liveを使用するためのヘルプを参照してください。",
       "configureDevice": "デバイスのセットアップ",
-      "configureDeviceDesc": "新しいデバイスとしてセットアップするか、既存のデバイスを復元します。アカウントと設定はそのまま保持されます。",
+      "configureDeviceDesc": "新規デバイスとしてセットアップ、または既存のデバイスを復元する。アカウントと設定はそのまま保持されます。",
       "clearCache": "Cacheを消去",
       "clearCacheDesc": "ネットワーク上のトランザクションがスキャンされ、アカウントは再計算されます。",
       "clearCacheModal": "本当によろしいですか？",
