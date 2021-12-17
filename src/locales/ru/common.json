@@ -377,7 +377,7 @@
       "description": "Пожалуйста, убедитесь, что на счёте достаточно средств."
     },
     "NotEnoughGas": {
-      "title": "Parent account balance insufficient for network fees",
+      "title": "Баланса на основном счету недостаточно для покрытия комиссии сети",
       "description": "Пожалуйста, пополните свой счёт ETH для оплаты транзакций в токенах ERC20."
     },
     "NotEnoughBalanceToDelegate": {
@@ -2498,7 +2498,7 @@
       },
       "taproot": {
         "title": "Taproot",
-        "desc": "Latest {{currency}} network upgrade. Will provide better privacy and cheaper fees once widespread. Still limited support from wallet and exchanges."
+        "desc": "Свежее обновление сети {{currency}}. После широкого распространения пользователи получат больший уровень конфиденциальности и более дешёвую комиссию. Пока что в кошельках и на биржах представлена лишь ограниченная поддержка."
       }
     }
   },
