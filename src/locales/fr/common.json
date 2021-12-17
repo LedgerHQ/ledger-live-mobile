@@ -377,7 +377,7 @@
       "description": "Vérifiez que ce compte a des fonds suffisants."
     },
     "NotEnoughGas": {
-      "title": "ETH insuffisants pour couvrir les frais de réseau",
+      "title": "Parent account balance insufficient for network fees",
       "description": "Envoyez des ETH sur votre compte pour régler vos transactions de tokens ERC-20."
     },
     "NotEnoughBalanceToDelegate": {
