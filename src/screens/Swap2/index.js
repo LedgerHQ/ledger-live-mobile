@@ -160,8 +160,8 @@ function SwapForm({
   }, [defaultCurrency, setToCurrency]);
 
   useEffect(() => {
-    !!defaultAccount && setFromAccount(defaultAccount);
-  }, [defaultAccount, setFromAccount]);
+    !!defaultAccount && !swap.from?.account && setFromAccount(defaultAccount);
+  }, [defaultAccount, swap.from, setFromAccount]);
 
   const [error, setError] = useState(null);
 

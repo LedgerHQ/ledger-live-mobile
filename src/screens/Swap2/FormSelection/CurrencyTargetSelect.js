@@ -63,11 +63,11 @@ export default function CurrencyTargetSelect({
                 </LText>
                 {value.type === "TokenCurrency" && value.parentCurrency ? (
                   <LText
-                  semiBold
-                  style={[styles.currencyLabel, { borderColor: colors.grey, flex: 1 }]}
-                  color="grey"
-                  numberOfLines={1} 
-                  ellipsizeMode='clip'
+                    semiBold
+                    style={[styles.currencyLabel, { borderColor: colors.grey }]}
+                    color="grey"
+                    numberOfLines={1}
+                    ellipsizeMode="clip"
                   >
                     {value.parentCurrency.name}
                   </LText>
@@ -99,8 +99,9 @@ export default function CurrencyTargetSelect({
 const styles = StyleSheet.create({
   root: {
     flexDirection: "row",
-    justifyContent: "center",
+    justifyContent: "flex-start",
     alignItems: "center",
+    flex: 1,
   },
   label: {
     fontSize: 16,
@@ -114,6 +115,7 @@ const styles = StyleSheet.create({
   },
   accountColumn: {
     flexDirection: "column",
+    flex: 1,
   },
   accountTicker: {
     fontSize: 13,
@@ -121,14 +123,11 @@ const styles = StyleSheet.create({
   },
   labelContainer: {
     flexDirection: "row",
-    justifyContent: "center",
+    justifyContent: "flex-start",
     alignItems: "center",
   },
   currencyLabel: {
-    flexGrow: 0,
-    flexShrink: 0,
-    flexBasis: "auto",
-    textAlign: "right",
+    textAlign: "center",
     borderRadius: 4,
     borderWidth: 1,
     paddingHorizontal: 6,
