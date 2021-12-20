@@ -50,7 +50,6 @@ export default function AccountAmountRow({
   route,
   useAllAmount,
   swap,
-  transaction,
   setFromAccount,
   setFromAmount,
   setToCurrency,
@@ -76,11 +75,7 @@ export default function AccountAmountRow({
       fromAmountError &&
       fromAmountError instanceof AmountRequired);
 
-  const toValue = rate
-    ? transaction.amount
-        .times(rate.magnitudeAwareRate)
-        .minus(rate.payoutNetworkFees || 0)
-    : null;
+  const toValue = rate?.toAmount;
 
   return (
     <View>
@@ -103,7 +98,7 @@ export default function AccountAmountRow({
                 editable={!useAllAmount}
                 onChange={setFromAmount}
                 unit={fromUnit}
-                value={transaction?.amount}
+                value={swap.from.amount}
                 inputStyle={styles.inputText}
                 hasError={!hideError && !!fromAmountError}
                 dynamicFontRatio={0.5}
