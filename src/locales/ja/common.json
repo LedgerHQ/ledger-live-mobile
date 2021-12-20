@@ -677,10 +677,10 @@
     "button": "リセット"
   },
   "graph": {
-    "week": "週",
-    "month": "月",
-    "year": "年",
-    "all": "全期間"
+    "week": "1週",
+    "month": "1月",
+    "year": "1年",
+    "all": "すべて"
   },
   "carousel": {
     "title": "バナーを閉じますか？",
