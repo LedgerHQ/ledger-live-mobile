@@ -2,10 +2,10 @@
 
 import React, { useCallback, useMemo } from "react";
 
-import OnboardingStepperView from "../../../components/OnboardingStepperView";
-import { ScreenName } from "../../../const";
+import OnboardingStepperView from "../../../../components/OnboardingStepperView";
+import { ScreenName } from "../../../../const";
 
-import { getSetupDeviceScenes } from "../shared/infoPagesData";
+import { getSetupDeviceScenes } from "../../shared/infoPagesData";
 
 function OnboardingStepNewDevice({ navigation, route }: *) {
   const { deviceModelId } = route.params;
