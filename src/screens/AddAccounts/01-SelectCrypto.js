@@ -26,7 +26,7 @@ const SEARCH_KEYS = ["name", "ticker"];
 type Props = {
   devMode: boolean,
   navigation: any,
-  route: { params: * },
+  route: { params: { filterCurrencyIds?: string[] } },
 };
 
 const keyExtractor = currency => currency.id;
@@ -44,9 +44,16 @@ const listSupportedTokens = () =>
 
 export default function AddAccountsSelectCrypto({ navigation, route }: Props) {
   const { colors } = useTheme();
+  const { filterCurrencyIds = [] } = route.params;
   const cryptoCurrencies = useMemo(
-    () => listSupportedCurrencies().concat(listSupportedTokens()),
-    [],
+    () =>
+      listSupportedCurrencies()
+        .concat(listSupportedTokens())
+        .filter(
+          ({ id }) =>
+            filterCurrencyIds.length <= 0 || filterCurrencyIds.includes(id),
+        ),
+    [filterCurrencyIds],
   );
 
   const sortedCryptoCurrencies = useCurrenciesByMarketcap(cryptoCurrencies);

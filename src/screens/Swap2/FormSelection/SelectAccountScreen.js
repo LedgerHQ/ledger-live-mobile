@@ -42,6 +42,7 @@ type Props = {
 export default function SelectAccount({ navigation, route }: Props) {
   const { colors } = useTheme();
   const { swap, target, selectedCurrency, setAccount, provider } = route.params;
+
   const unfilteredAccounts = useSelector(accountsSelector);
   const selectableCurrencies = useSelector(swapSelectableCurrenciesSelector);
 
@@ -101,7 +102,7 @@ export default function SelectAccount({ navigation, route }: Props) {
                 swap: {
                   ...route.params.swap,
                   from: {
-                    ...route.params.swap.from,
+                    ...(route.params.swap?.from || {}),
                     account,
                     parentAccount: null,
                   },
@@ -116,7 +117,7 @@ export default function SelectAccount({ navigation, route }: Props) {
   );
 
   const elligibleAccountsForSelectedCurrency = allAccounts.filter(account =>
-    isFrom ? account.balance.gt(0) : swap.from.account?.id !== account.id,
+    isFrom ? account.balance.gt(0) : swap.from?.account?.id !== account.id,
   );
 
   const onAddAccount = useCallback(() => {
@@ -124,13 +125,13 @@ export default function SelectAccount({ navigation, route }: Props) {
       screen: ScreenName.AddAccountsSelectCrypto,
       params: {
         returnToSwap: true,
-        onSuccess: () =>
-          navigation.navigate(ScreenName.SwapV2FormSelectAccount, {
-            params: route.params,
-          }),
+        filterCurrencyIds: selectableCurrencies,
+        onSuccess: () => {
+          navigation.navigate(ScreenName.SwapV2FormSelectAccount, route.params);
+        },
       },
     });
-  }, [navigation, route.params]);
+  }, [navigation, route.params, selectableCurrencies]);
 
   const renderList = useCallback(
     items => {
