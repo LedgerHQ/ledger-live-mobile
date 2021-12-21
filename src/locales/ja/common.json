@@ -725,8 +725,8 @@
         "description": "Ledgerデバイスから直接投票できます。"
       },
       "lending": {
-        "title": "暗号資産をレンディング（貸し出す）",
-        "description": "Compound Protocolで資産をレンディング（貸し出す）"
+        "title": "暗号資産をレンディング",
+        "description": "Compound Protocolで資産をレンディング"
       },
       "blackfriday": {
         "title": "ブラックフライデー",
@@ -1411,8 +1411,8 @@
     "quantity": "数量"
   },
   "operationList": {
-    "noOperations": "オペレーションはありません。",
-    "noMoreOperations": "その他のオペレーションはありません。"
+    "noOperations": "取引はありません。",
+    "noMoreOperations": "その他の取引はありません。"
   },
   "selectableAccountsList": {
     "deselectAll": "すべて選択解除",
@@ -1452,7 +1452,7 @@
     "sell": "売却",
     "swap": "スワップ",
     "manage": "管理",
-    "lastOperations": "前回のオペレーション",
+    "lastOperations": "前回の取引",
     "emptyState": {
       "title": "暗号資産をまだお持ちでない場合",
       "desc": "<1><0>{{managerAppName}}</0></1>アプリがインストールされていることを確認し、受け取りを開始します。",
@@ -2010,7 +2010,7 @@
       }
     },
     "lending": {
-      "title": "暗号資産をレンディング（貸し出す）",
+      "title": "暗号資産をレンディング",
       "titleTransferTab": "レンディング",
       "actionTitle": "貸暗号資産（レンディング）",
       "accountActions": {
@@ -2032,7 +2032,7 @@
         "interestEarned": "受取利息",
         "interestEarnedTooltip": "引き出し後に獲得した利息",
         "openLoans": "レンディング中",
-        "closedLoans": "レンディング終了済み"
+        "closedLoans": "終了済み"
       },
       "banners": {
         "needApproval": "資産を貸し出すには、このアカウントを承認する必要があります。",
@@ -2045,7 +2045,7 @@
       "howDoesLendingWork": "レンディングの仕組み",
       "dashboard": {
         "tabTitle": "ダッシュボード",
-        "assetsTitle": "レンディングする資産",
+        "assetsTitle": "貸暗号資産",
         "accountsTitle": "認証済みアカウント",
         "emptySateDescription": "Ethereumアカウントから直接資産をレンディングし、利息を得ることができます。",
         "apy": "{{value}}APY（年利）",
@@ -2068,15 +2068,15 @@
       "closedLoans": {
         "tabTitle": "レンディング終了済み",
         "description": "引き出したローンと、獲得した利息をすべて表示します。",
-        "cta": "資産をレンディング（貸し出す）"
+        "cta": "資産をレンディング"
       },
       "history": {
         "tabTitle": "履歴",
         "description": "すべてのローン取引の履歴を表示します。",
-        "cta": "資産をレンディング（貸し出す）"
+        "cta": "資産をレンディング"
       },
       "terms": {
-        "label": "暗号資産をレンディング（貸し出す）",
+        "label": "暗号資産をレンディング",
         "title": "コンパウンド・プロトコルで資産を貸し出す",
         "description": "コンパウンド・プロトコルを使用すると、Ethereumネットワーク上で資産の貸し出しや借り入れを行うことができます。Ledgerアカウントから直接、資産の貸し出しや利息を得ることが可能です。",
         "switchLabel": "私は<0><0>利用規約</0></0>を読み、内容に同意しました。"
@@ -2096,9 +2096,9 @@
           "label": "ステップ3/3",
           "title": "資産はいつでも引き出すことができます。",
           "description": "資産と獲得した利息の一部または全部を、Ledgerアカウントから直接いつでも引き出すことができます。",
-          "cta": "今すぐレンディング（貸し出す）"
+          "cta": "今すぐレンディング"
         },
-        "title": "暗号資産をレンディング（貸し出す）"
+        "title": "暗号資産をレンディング"
       },
       "noTokenAccount": {
         "info": {
@@ -2131,7 +2131,7 @@
           "enabledAccountsAmount_plural": "{{number}}個のアカウントで{{amount}}を承認済みです。",
           "enabledAccountsNoLimit": "無制限の{{ currency }}が承認されたアカウントが{{number}}個あります。",
           "enabledAccountsNoLimit_plural": "無制限の{{ currency }}が承認されたアカウントが{{number}}個あります。",
-          "noEnabledAccounts": "資産のレンディング（貸し出し）には、アカウントを承認する必要があります。"
+          "noEnabledAccounts": "資産のレンディングには、アカウントを承認する必要があります。"
         },
         "enable": {
           "summary": "<0></0><1>{{contractName}}</1><0>スマートコントラクトが</0><1>{{accountName}}</1><0>アカウントに</0><1>{{amount}}</1><0>でアクセスすることを許可します</0>。",
