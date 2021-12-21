@@ -725,7 +725,7 @@
         "description": "Ledgerデバイスから直接投票できます。"
       },
       "lending": {
-        "title": "暗号資産をレンディング",
+        "title": "暗号資産のレンディング",
         "description": "Compound Protocolで資産をレンディング"
       },
       "blackfriday": {
@@ -2010,9 +2010,9 @@
       }
     },
     "lending": {
-      "title": "暗号資産をレンディング",
+      "title": "暗号資産のレンディング",
       "titleTransferTab": "レンディング",
-      "actionTitle": "貸暗号資産（レンディング）",
+      "actionTitle": "レンディング",
       "accountActions": {
         "approve": "承認",
         "supply": "サプライ",
@@ -2035,7 +2035,7 @@
         "closedLoans": "終了済み"
       },
       "banners": {
-        "needApproval": "資産を貸し出すには、このアカウントを承認する必要があります。",
+        "needApproval": "資産のレンディングには、このアカウントを承認する必要があります。",
         "fullyApproved": "このアカウントを完全に承認しました。手数料を支払うことで減額できます。",
         "approvedCanReduce": "このアカウントで<0>{{value}}</0>を承認しました。手数料を支払うことで減額できます。",
         "approvedButNotEnough": "このアカウントで<0>{{value}}</0>を承認しました。",
@@ -2046,7 +2046,7 @@
       "dashboard": {
         "tabTitle": "ダッシュボード",
         "assetsTitle": "貸暗号資産",
-        "accountsTitle": "認証済みアカウント",
+        "accountsTitle": "承認済みアカウント",
         "emptySateDescription": "Ethereumアカウントから直接資産をレンディングし、利息を得ることができます。",
         "apy": "{{value}}APY（年利）",
         "activeAccount": {
@@ -2152,7 +2152,7 @@
         },
         "validation": {
           "success": "オペレーションが正常に送信されました。",
-          "info": "承認が確認作業のためにネットワークに送信されました。確認終了後、レンディングを行えるようになります。",
+          "info": "承認がネットワークに送信されました。確認終了後、レンディングが可能になります。",
           "extraInfo": "トランザクションがエクスプローラーに表示され、承認されるまでには時間がかかる場合があります。",
           "button": {
             "done": "閉じる"
@@ -3620,7 +3620,7 @@
       "selectCurrency": "通貨を選択",
       "selectAccount": "アカウントを選択",
       "connectDevice": "デバイスを接続",
-      "title": "パートナーから暗号通貨を購入する",
+      "title": "パートナーを通して暗号資産を購入する",
       "description": "Coinifyで暗号資産を購入し、Ledgerアカウントで直接受け取ることができます。",
       "CTAButton": "今すぐ購入する",
       "emptyState": {
@@ -3640,7 +3640,7 @@
       "selectCurrency": "通貨を選択",
       "selectAccount": "アカウントを選択",
       "connectDevice": "デバイスを接続",
-      "title": "パートナーで暗号資産を売却する",
+      "title": "パートナーを通して暗号資産を売却する",
       "description": "Ledgerアカウントから、Coinifyで暗号資産を直接売却し、銀行口座で法定通貨を受け取ることができます。",
       "CTAButton": "今すぐ売却",
       "emptyState": {
