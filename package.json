@@ -183,6 +183,7 @@
     "@babel/core": "^7.12.9",
     "@babel/runtime": "^7.12.5",
     "@react-native-community/eslint-config": "^2.0.0",
+    "@types/invariant": "^2.2.35",
     "@types/jest": "^27.0.2",
     "@types/react": "^17.0.30",
     "@types/react-native": "^0.65.8",

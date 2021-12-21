@@ -2581,12 +2581,15 @@
       "action": "Continue"
     },
     "Pairing": {
+      "title1": "Check matching codes",
+      "title2": "Validate",
       "step1": "Validate if the code displayed on your phone exactly matches the one displayed on your {{productName}}.",
       "step2": "Validate on your {{productName}} by pressing both buttons together."
     },
     "GenuineCheck": {
       "title": "Device authentication check",
-      "accept": "Please don't turn off your Nano X. Make sure you allow <1>Ledger Manager</1>."
+      "accept": "Please don't turn off your Nano X. Make sure you allow <1>Ledger Manager</1>.",
+      "info": "This step is meant to ensure that your Nano is authentical."
     },
     "ScanningHeader": {
       "title": "Looking for devices",

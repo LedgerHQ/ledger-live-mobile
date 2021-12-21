@@ -1,7 +1,7 @@
 // @flow
 import React from "react";
-import { useTheme } from "styled-components/native"
-import { ManagerMedium } from "@ledgerhq/native-ui/assets/icons";
+import { useTheme } from "styled-components/native";
+import { ManagerMedium, WalletMedium } from "@ledgerhq/native-ui/assets/icons";
 
 import { ScreenName, NavigatorName } from "../../const";
 import Portfolio, { PortfolioTabIcon } from "../../screens/Portfolio";
@@ -54,7 +54,7 @@ export default function MainNavigator({
         options={{
           unmountOnBlur: true,
           tabBarIcon: (props: any) => (
-            <TabIcon Icon={AccountsIcon} i18nKey="tabs.accounts" {...props} />
+            <TabIcon Icon={WalletMedium} i18nKey="tabs.accounts" {...props} />
           ),
           tabBarTestID: "TabBarAccounts",
         }}
