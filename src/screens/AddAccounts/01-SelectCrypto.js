@@ -44,7 +44,7 @@ const listSupportedTokens = () =>
 
 export default function AddAccountsSelectCrypto({ navigation, route }: Props) {
   const { colors } = useTheme();
-  const { filterCurrencyIds = [] } = route.params;
+  const { filterCurrencyIds = [] } = route.params || {};
   const cryptoCurrencies = useMemo(
     () =>
       listSupportedCurrencies()
