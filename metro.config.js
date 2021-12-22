@@ -5,6 +5,8 @@
  * @format
  */
 
+const defaultSourceExts = require('metro-config/src/defaults/defaults').sourceExts
+
 module.exports = {
   ...(process.env.V3
     ? {
@@ -21,4 +23,7 @@ module.exports = {
       },
     }),
   },
+  resolver: {
+    sourceExts: [...defaultSourceExts, 'cjs'],
+  }
 };
