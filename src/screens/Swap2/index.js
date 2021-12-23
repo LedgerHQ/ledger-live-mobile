@@ -156,10 +156,13 @@ function SwapForm({
   const showDeviceConnect = confirmed && alreadyAcceptedTerms && !deviceMeta;
 
   useEffect(() => {
-    if (!!defaultCurrency && !swap.to?.currency) {
+    if (
+      !!defaultCurrency &&
+      (!swap.to?.currency || swap.to.currency.id === swap?.from?.currency?.id)
+    ) {
       setToCurrency(defaultCurrency);
     }
-  }, [defaultCurrency, swap.to, setToCurrency]);
+  }, [defaultCurrency, swap.to, swap.from, setToCurrency]);
 
   useEffect(() => {
     if (!!defaultAccount && !swap.from?.account) {
