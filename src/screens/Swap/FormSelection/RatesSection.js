@@ -83,7 +83,7 @@ export default function RatesSection({
   ]);
 
   const onEditRateProvider = useCallback(() => {
-    navigation.navigate(ScreenName.SwapFormV2SelectProviderRate, {
+    navigation.navigate(ScreenName.SwapFormSelectProviderRate, {
       ...route.params,
       swap,
       selectedCurrency: toCurrency,

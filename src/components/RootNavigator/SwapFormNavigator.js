@@ -11,7 +11,7 @@ import type {
 } from "@ledgerhq/live-common/lib/types/account";
 
 import { ScreenName } from "../../const";
-import Swap2 from "../../screens/Swap2";
+import Swap from "../../screens/Swap";
 import styles from "../../navigation/styles";
 import LText from "../LText";
 import History from "../../screens/Swap/FormOrHistory/History";
@@ -58,7 +58,7 @@ export default function SwapFormNavigator({
           ),
         }}
       >
-        {_props => <Swap2 {..._props} {...routeParams} />}
+        {_props => <Swap {..._props} {...routeParams} />}
       </Tab.Screen>
       <Tab.Screen
         name={ScreenName.SwapHistory}

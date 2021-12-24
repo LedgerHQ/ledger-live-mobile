@@ -6,17 +6,17 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "@react-navigation/native";
 import { ScreenName } from "../../const";
-import SwapError from "../../screens/Swap2/Error";
-import SwapKYC from "../../screens/Swap2/KYC";
-import SwapKYCStates from "../../screens/Swap2/KYC/StateSelect";
-import Swap from "../../screens/Swap2/SwapEntry";
+import SwapError from "../../screens/Swap/Error";
+import SwapKYC from "../../screens/Swap/KYC";
+import SwapKYCStates from "../../screens/Swap/KYC/StateSelect";
+import Swap from "../../screens/Swap/SwapEntry";
 import SwapFormNavigator from "./SwapFormNavigator";
 import { getStackNavigatorConfig } from "../../navigation/navigatorConfig";
 import styles from "../../navigation/styles";
 import StepHeader from "../StepHeader";
-import SwapOperationDetails from "../../screens/Swap2/OperationDetails";
+import SwapOperationDetails from "../../screens/Swap/OperationDetails";
 import { BackButton } from "../../screens/OperationDetails";
-import SwapPendingOperation from "../../screens/Swap2/PendingOperation";
+import SwapPendingOperation from "../../screens/Swap/PendingOperation";
 
 export default function SwapNavigator() {
   const { t } = useTranslation();

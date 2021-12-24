@@ -143,7 +143,7 @@ export const ScreenName = {
   SwapV2FormSelectAccount: "SwapV2FormSelectAccount",
   SwapV2FormSelectCurrency: "SwapV2FormSelectCurrency",
   SwapV2FormSelectFees: "SwapV2FormSelectFees",
-  SwapFormV2SelectProviderRate: "SwapFormV2SelectProviderRate",
+  SwapFormSelectProviderRate: "SwapFormSelectProviderRate",
 
   TezosDelegationFlow: "TezosDelegationFlow",
   Transfer: "Transfer",
