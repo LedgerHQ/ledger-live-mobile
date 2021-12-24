@@ -150,9 +150,7 @@ export default function BaseNavigator() {
         name={ScreenName.SwapV2FormSelectCurrency}
         component={SwapFormSelectCurrency}
         options={{
-          headerTitle: () => (
-            <StepHeader title={t("transfer.swap.form.to")} />
-          ),
+          headerTitle: () => <StepHeader title={t("transfer.swap.form.to")} />,
           headerRight: null,
         }}
       />
