@@ -377,7 +377,7 @@
       "description": "请确保该账户资金充足。"
     },
     "NotEnoughGas": {
-      "title": "以太币 ETH 不足以支付网络费用",
+      "title": "Parent account balance insufficient for network fees",
       "description": "请向您的账户发送一些以太币 ETH 以支付 ERC20 代币交易。"
     },
     "NotEnoughBalanceToDelegate": {
@@ -596,6 +596,9 @@
     },
     "TaprootNotActivated": {
       "title": "Taproot 主网尚未激活"
+    },
+    "NotEnoughNftOwned": {
+      "title": "您已超过可用代币的数量"
     },
     "generic": {
       "title": "{{message}}",
@@ -2228,7 +2231,10 @@
       "summary": "概要",
       "selectDevice": "选择设备",
       "connectDevice": "连接设备",
-      "stepRange": "步骤 {{currentStep}} 之 {{totalSteps}}"
+      "stepRange": "步骤 {{currentStep}} 之 {{totalSteps}}",
+      "quantity": "数量",
+      "selectCollection": "收藏",
+      "selectNft": "NFT"
     },
     "recipient": {
       "scan": "扫描二维码",
@@ -2240,7 +2246,8 @@
       "available": "可用总额",
       "useMax": "使用最大值",
       "loadingNetwork": "正在加载网络费用...",
-      "noRateProvider": "不可用"
+      "noRateProvider": "不可用",
+      "quantityAvailable": "可用数量"
     },
     "summary": {
       "subaccountsWarning": "您需要向此账户充值 {{ currency }} 才能发送此账户的代币",
@@ -2264,7 +2271,8 @@
         "type": "Memo 类型",
         "value": "Memo 价值"
       },
-      "validateMemo": "验证 Memo"
+      "validateMemo": "验证 Memo",
+      "quantity": "数量"
     },
     "validation": {
       "message": "在您的设备上，确认该交易以安全地将其签署。",
@@ -2487,6 +2495,10 @@
       "legacy": {
         "title": "Legacy 地址格式",
         "desc": "{{currency}} 的原始地址格式。每笔交易的费用最高。某些钱包/交易所依旧只支持这种格式。"
+      },
+      "taproot": {
+        "title": "Taproot",
+        "desc": "Latest {{currency}} network upgrade. Will provide better privacy and cheaper fees once widespread. Still limited support from wallet and exchanges."
       }
     }
   },

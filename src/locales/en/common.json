@@ -377,7 +377,7 @@
       "description": "Please make sure the account has enough funds."
     },
     "NotEnoughGas": {
-      "title": "Insufficient ETH for network fee",
+      "title": "Parent account balance insufficient for network fees",
       "description": "Please send some ETH to your account to pay for ERC20 token transactions."
     },
     "NotEnoughBalanceToDelegate": {
@@ -596,6 +596,9 @@
     },
     "TaprootNotActivated": {
       "title": "Taproot mainnet is not activated yet"
+    },
+    "NotEnoughNftOwned": {
+      "title": "You have exceeded the number of available tokens"
     },
     "generic": {
       "title": "{{message}}",
@@ -2255,7 +2258,10 @@
       "summary": "Summary",
       "selectDevice": "Select device",
       "connectDevice": "Connect device",
-      "stepRange": "Step {{currentStep}} of {{totalSteps}}"
+      "stepRange": "Step {{currentStep}} of {{totalSteps}}",
+      "quantity": "Quantity",
+      "selectCollection": "Collection",
+      "selectNft": "NFT"
     },
     "recipient": {
       "scan": "Scan QR code",
@@ -2267,7 +2273,8 @@
       "available": "Total available",
       "useMax": "Use max",
       "loadingNetwork": "Loading network fees...",
-      "noRateProvider": "Not available"
+      "noRateProvider": "Not available",
+      "quantityAvailable": "Quantity available"
     },
     "summary": {
       "subaccountsWarning": "You will need to refill this account with {{ currency }} in order to send the tokens of this account",
@@ -2291,7 +2298,8 @@
         "type": "Memo type",
         "value": "Memo value"
       },
-      "validateMemo": "Validate memo"
+      "validateMemo": "Validate memo",
+      "quantity": "Quantity"
     },
     "validation": {
       "message": "On your device, confirm the transaction to sign it securely.",
@@ -2514,6 +2522,10 @@
       "legacy": {
         "title": "Legacy",
         "desc": "{{currency}}’s original address format. Highest fees per transaction. Some wallets/exchanges still only support this type."
+      },
+      "taproot": {
+        "title": "Taproot",
+        "desc": "Latest {{currency}} network upgrade. Will provide better privacy and cheaper fees once widespread. Still limited support from wallet and exchanges."
       }
     }
   },

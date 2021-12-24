@@ -377,7 +377,7 @@
       "description": "Asegúrate de que la cuenta tenga fondos suficientes."
     },
     "NotEnoughGas": {
-      "title": "ETH insuficientes para tarifa de red",
+      "title": "Parent account balance insufficient for network fees",
       "description": "Envía más ETH a tu cuenta para pagar transacciones de token ERC20."
     },
     "NotEnoughBalanceToDelegate": {
@@ -596,6 +596,9 @@
     },
     "TaprootNotActivated": {
       "title": "La red principal de Tproot no está activada aún"
+    },
+    "NotEnoughNftOwned": {
+      "title": "Has superado la cantidad de tokens disponibles"
     },
     "generic": {
       "title": "{{message}}",
@@ -2228,7 +2231,10 @@
       "summary": "Resumen",
       "selectDevice": "Seleccionar dispositivo",
       "connectDevice": "Conectar dispositivo",
-      "stepRange": "Paso {{currentStep}} de {{totalSteps}}"
+      "stepRange": "Paso {{currentStep}} de {{totalSteps}}",
+      "quantity": "Cantidad",
+      "selectCollection": "Colección",
+      "selectNft": "NFT"
     },
     "recipient": {
       "scan": "Escanear código QR",
@@ -2240,7 +2246,8 @@
       "available": "Total disponible",
       "useMax": "Utilizar máx",
       "loadingNetwork": "Cargando tarifas de red...",
-      "noRateProvider": "No disponible"
+      "noRateProvider": "No disponible",
+      "quantityAvailable": "Cantidad disponible"
     },
     "summary": {
       "subaccountsWarning": "Necesitarás enviar de nuevo {{ currency }} a esta cuenta para enviar tokens desde esta cuenta",
@@ -2264,7 +2271,8 @@
         "type": "Tipo de Memo",
         "value": "Valor de Memo"
       },
-      "validateMemo": "Validar Memo"
+      "validateMemo": "Validar Memo",
+      "quantity": "Cantidad"
     },
     "validation": {
       "message": "En el dispositivo, confirma la transacción para firmarla de forma segura.",
@@ -2487,6 +2495,10 @@
       "legacy": {
         "title": "Heredado",
         "desc": "Formato de dirección original de {{currency}}. Las tarifas más altas por transacción. Algunas billeteras/exchanges son solo compatibles con este tipo."
+      },
+      "taproot": {
+        "title": "Taproot",
+        "desc": "Latest {{currency}} network upgrade. Will provide better privacy and cheaper fees once widespread. Still limited support from wallet and exchanges."
       }
     }
   },

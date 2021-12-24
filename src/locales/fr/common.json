@@ -377,7 +377,7 @@
       "description": "Vérifiez que ce compte a des fonds suffisants."
     },
     "NotEnoughGas": {
-      "title": "ETH insuffisants pour couvrir les frais de réseau",
+      "title": "Solde du compte parent insuffisant pour les frais de réseau",
       "description": "Envoyez des ETH sur votre compte pour régler vos transactions de tokens ERC-20."
     },
     "NotEnoughBalanceToDelegate": {
@@ -597,6 +597,9 @@
     "TaprootNotActivated": {
       "title": "Taproot n'est pas encore activé sur le mainnet"
     },
+    "NotEnoughNftOwned": {
+      "title": "Nombre de tokens disponibles insuffisant"
+    },
     "generic": {
       "title": "{{message}}",
       "description": "Une erreur est survenue. Veuillez réessayer. Si le problème persiste, enregistrez vos logs en utilisant le bouton ci-dessous et transmettez-les à l'Assistance Ledger."
@@ -615,7 +618,7 @@
     "noInfos": "Ledger n'enregistre pas vos données de localisation."
   },
   "permissions": {
-    "open": "Ouvrir les autorisations des applications"
+    "open": "Ouvrir autorisa. des apps"
   },
   "fees": {
     "speed": {
@@ -623,7 +626,7 @@
       "standard": "Normale",
       "low": "Basse",
       "slow": "Lent",
-      "medium": "Moyens",
+      "medium": "Moyen",
       "fast": "Rapide",
       "custom": "Personnalisée",
       "blockCount": "{{blockCount}} blocs"
@@ -652,7 +655,7 @@
       "biometricsTitle": "Authentifiez-vous avec l'app Ledger Live.",
       "title": "Bienvenue",
       "desc": "Entrez votre mot de passe pour continuer.",
-      "inputPlaceholder": "Saisissez votre mot de passe.",
+      "inputPlaceholder": "Saisissez votre mot de passe",
       "login": "Se connecter",
       "forgotPassword": "Mot de passe oublié"
     },
@@ -1426,7 +1429,7 @@
       "seeMore": "Afficher plus de tokens",
       "seeLess": "Afficher moins de tokens",
       "addTokens": "Token",
-      "howTo": "Pour ajouter des comptes de tokens, vous devez <0>recevoir des fonds</0> avec votre <1>adresse {{currency}}</1>.",
+      "howTo": "Pour ajouter des comptes de tokens, il vous suffit de <0>les recevoir</0> sur votre <1>adresse {{currency}}</1>.",
       "algorand": {
         "contractAddress": "Adresse du contrat",
         "viewInExplorer": "Dans l'explorateur",
@@ -2228,7 +2231,10 @@
       "summary": "Récapitulatif",
       "selectDevice": "Sélectionner l'appareil",
       "connectDevice": "Connecter l'appareil",
-      "stepRange": "Étape {{currentStep}} sur {{totalSteps}}"
+      "stepRange": "Étape {{currentStep}} sur {{totalSteps}}",
+      "quantity": "Quantité",
+      "selectCollection": "Collection",
+      "selectNft": "NFT"
     },
     "recipient": {
       "scan": "Scanner le code QR",
@@ -2240,7 +2246,8 @@
       "available": "Total disponible",
       "useMax": "Choisir le maximum",
       "loadingNetwork": "Chargement des frais de réseau...",
-      "noRateProvider": "Indisponible"
+      "noRateProvider": "Indisponible",
+      "quantityAvailable": "Quantité disponible"
     },
     "summary": {
       "subaccountsWarning": "Vous devez recharger ce compte avec des {{ currency }} afin d'envoyer les tokens de ce compte.",
@@ -2264,7 +2271,8 @@
         "type": "Type de mémo",
         "value": "Valeur du mémo"
       },
-      "validateMemo": "Valider le mémo"
+      "validateMemo": "Valider le mémo",
+      "quantity": "Quantité"
     },
     "validation": {
       "message": "Confirmez la transaction sur votre appareil pour la signer en toute sécurité.",
@@ -2487,6 +2495,10 @@
       "legacy": {
         "title": "Legacy",
         "desc": "Format d'adresse original de {{currency}}. Frais les plus élevés pour chaque transaction. Certains wallets/échanges ne prennent toujours en charge que les Legacy."
+      },
+      "taproot": {
+        "title": "Taproot",
+        "desc": "Cette nouvelle mise à niveau du réseau {{currency}} offrira une meilleure confidentialité et des frais moins élevés, mais n'est pas encore prise en charge par tous les échanges et wallets."
       }
     }
   },
@@ -2651,7 +2663,7 @@
       "searchAppsCatalog": "Rechercher dans le Catalogue",
       "searchAppsInstalled": "Rechercher des apps installées",
       "noAppsInstalled": "Aucune app installée sur votre appareil",
-      "noAppsDescription": "Aller dans le catalogue pour installer des apps",
+      "noAppsDescription": "Allez dans le Catalogue pour installer des apps.",
       "noResultsFound": "Aucun résultat",
       "noResultsDesc": "Merci de vérifier l'orthographe et réessayer",
       "versionNew": "(NOUV. {{newVersion}})"
