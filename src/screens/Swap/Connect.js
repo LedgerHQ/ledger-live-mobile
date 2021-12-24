@@ -16,7 +16,7 @@ const Connect = ({
   provider,
 }: {
   setResult: (result: any) => void,
-  provider: string,
+  provider?: string,
 }) => {
   const [device, setDevice] = useState(null);
   const [result, setLocalResult] = useState();

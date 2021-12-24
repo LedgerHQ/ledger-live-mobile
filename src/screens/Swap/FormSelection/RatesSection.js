@@ -177,7 +177,6 @@ export default function RatesSection({
     <Animatable.View animation="fadeIn" useNativeDriver duration={400}>
       <GenericInputLink
         label={<Trans i18nKey="transfer.swap.form.summary.provider" />}
-        tooltip={<Trans i18nKey="transfer.swap.form.summary.provider" />}
       >
         {ProviderIcon ? <ProviderIcon size={12} /> : null}
         <LText semiBold style={[styles.valueLabel, styles.providerLabel]}>
@@ -187,7 +186,6 @@ export default function RatesSection({
       {fromUnit && toCurrency && magnitudeAwareRate ? (
         <GenericInputLink
           label={<Trans i18nKey="transfer.swap.form.summary.method" />}
-          tooltip={<Trans i18nKey="transfer.swap.form.summary.method" />}
           onEdit={canEdit ? onEditRateProvider : undefined}
         >
           {tradeMethod === "fixed" ? (

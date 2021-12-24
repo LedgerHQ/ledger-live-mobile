@@ -14,7 +14,7 @@ import { ScreenName } from "../../const";
 import Swap from "../../screens/Swap";
 import styles from "../../navigation/styles";
 import LText from "../LText";
-import History from "../../screens/Swap/FormOrHistory/History";
+import History from "../../screens/Swap/History";
 
 type TabLabelProps = {
   focused: boolean,

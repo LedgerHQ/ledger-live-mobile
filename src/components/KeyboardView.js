@@ -1,7 +1,12 @@
 // @flow
 import React from "react";
-import { KeyboardAvoidingView, Platform, NativeModules, StatusBar } from "react-native";
-import { useHeaderHeight } from '@react-navigation/elements';
+import {
+  KeyboardAvoidingView,
+  Platform,
+  NativeModules,
+  StatusBar,
+} from "react-native";
+import { useHeaderHeight } from "@react-navigation/elements";
 import { HEIGHT as ExperimentalHeaderHeight } from "../screens/Settings/Experimental/ExperimentalHeader";
 import useExperimental from "../screens/Settings/Experimental/useExperimental";
 
@@ -27,7 +32,9 @@ const KeyboardView = React.memo<Props>(
     return (
       <KeyboardAvoidingView
         style={style}
-        keyboardVerticalOffset={headerHeight + StatusBar.currentHeight + keyboardVerticalOffset}
+        keyboardVerticalOffset={
+          headerHeight + StatusBar.currentHeight + keyboardVerticalOffset
+        }
         behavior={behavior}
         enabled
       >
