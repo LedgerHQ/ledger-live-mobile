@@ -142,7 +142,6 @@ function SwapForm({
     fromAmountError,
   } = useSwapTransaction({
     accounts,
-    defaultAccount: defaultAccount || {},
     exchangeRate: rate,
     setExchangeRate: setRate,
   });
