@@ -2169,7 +2169,7 @@
         },
         "amount": {
           "totalAvailable": "Mevcut bakiye",
-          "placeholderMax": "Maks. Çekim Tutarı"
+          "placeholderMax": "Hepsini Çek"
         },
         "validation": {
           "success": "Yatırım başarıyla gönderildi",
