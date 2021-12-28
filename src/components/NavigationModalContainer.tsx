@@ -3,20 +3,21 @@ import { Pressable, SafeAreaView } from "react-native";
 import { Flex } from "@ledgerhq/native-ui";
 import { StackScreenProps } from "@react-navigation/stack";
 import styled from "styled-components/native";
+import type { FlexBoxProps } from "@ledgerhq/native-ui/components/layout/Flex";
 
 export const MIN_MODAL_HEIGHT = 30;
 
 const ScreenContainer = styled(Flex).attrs(p => ({
   edges: ["bottom"],
   flex: 1,
-  backgroundColor: "palette.neutral.c00",
   p: p.p ?? 6,
 }))``;
-type Props = StackScreenProps<{}> & { children: React.ReactNode };
+type Props = StackScreenProps<{}> & { children: React.ReactNode, contentContainerProps?: FlexBoxProps };
 
 export default function NavigationModalContainer({
   navigation,
   children,
+  contentContainerProps,
 }: Props) {
   return (
     <Flex flex={1}>
@@ -29,7 +30,7 @@ export default function NavigationModalContainer({
         />
       </Flex>
 
-      <ScreenContainer>
+      <ScreenContainer backgroundColor="palette.neutral.c00" {...contentContainerProps}>
         <SafeAreaView style={{ flex: 1 }}>{children}</SafeAreaView>
       </ScreenContainer>
     </Flex>

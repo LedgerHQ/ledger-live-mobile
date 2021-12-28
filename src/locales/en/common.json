@@ -377,7 +377,7 @@
       "description": "Please make sure the account has enough funds."
     },
     "NotEnoughGas": {
-      "title": "Insufficient ETH for network fee",
+      "title": "Parent account balance insufficient for network fees",
       "description": "Please send some ETH to your account to pay for ERC20 token transactions."
     },
     "NotEnoughBalanceToDelegate": {
@@ -597,6 +597,9 @@
     "TaprootNotActivated": {
       "title": "Taproot mainnet is not activated yet"
     },
+    "NotEnoughNftOwned": {
+      "title": "You have exceeded the number of available tokens"
+    },
     "generic": {
       "title": "{{message}}",
       "description": "Something went wrong. Please try again. If the problem persists, please save your logs using the button below and provide them to Ledger Support."
@@ -777,10 +780,12 @@
       }
     },
     "stepNewDevice": {
+      "title": "BASICS",
       "0": {
         "label": "Basics",
         "title": "Access your crypto",
-        "desc": "Your crypto assets are stored on the blockchain. You need a private key to access and manage them."
+        "desc": "Your crypto assets are stored on the blockchain. You need a private key to access and manage them.",
+        "action": "Don’t have a Nano? Discover the app"
       },
       "1": {
         "label": "Basics",
@@ -790,17 +795,18 @@
       "2": {
         "label": "Basics",
         "title": "Stay offline",
-        "desc": "Your Nano works as a \"cold storage\" wallet. This means that it never exposes your private key online, even when using the app."
+        "desc": "Ledger Live allows you to buy, sell, manage, exchange and earn crypto while remaining protected. You will validate every crypto transaction with your Nano."
       },
       "3": {
         "label": "Basics",
         "title": "Validate transactions",
-        "desc": "Ledger Live allows you to buy, sell, manage, exchange and earn crypto while remaining protected. You will validate every crypto transaction with your Nano."
+        "desc": "Your Nano works as a \"cold storage\" wallet. This means that it never exposes your private key online, even when using the app."
       },
       "4": {
         "label": "Basics",
         "title": "Let’s set up your Nano!",
-        "desc": "We'll start by setting up your Nano security."
+        "desc": "We'll start by setting up your Nano security.",
+        "action": "Let’s do this!"
       },
       "cta": "Let’s do this!"
     },
@@ -1311,7 +1317,9 @@
   "operations": {
     "types": {
       "IN": "Received",
+      "NFT_IN": "NFT Received",
       "OUT": "Sent",
+      "NFT_OUT": "NFT Sent",
       "CREATE": "Created",
       "REVEAL": "Revealed",
       "DELEGATE": "Delegated",
@@ -1394,7 +1402,11 @@
       "transferAmount": "Transfer Amount",
       "validatorsCount": "Validators ({{number}})"
     },
-    "multipleAddresses": "Why multiple addresses?"
+    "multipleAddresses": "Why multiple addresses?",
+    "tokenName": "Token Name",
+    "collectionContract": "Token Contract",
+    "tokenId": "Token (NFT) ID",
+    "quantity": "Quantity"
   },
   "operationList": {
     "noOperations": "No Operations",
@@ -1536,6 +1548,9 @@
     },
     "undelegation": {
       "sectionLabel": "Undelegation(s)"
+    },
+    "nft": {
+      "receiveNft": "Receive NFT"
     }
   },
   "accounts": {
@@ -2216,7 +2231,10 @@
       "summary": "Summary",
       "selectDevice": "Select device",
       "connectDevice": "Connect device",
-      "stepRange": "Step {{currentStep}} of {{totalSteps}}"
+      "stepRange": "Step {{currentStep}} of {{totalSteps}}",
+      "quantity": "Quantity",
+      "selectCollection": "Collection",
+      "selectNft": "NFT"
     },
     "recipient": {
       "scan": "Scan QR code",
@@ -2228,7 +2246,8 @@
       "available": "Total available",
       "useMax": "Use max",
       "loadingNetwork": "Loading network fees...",
-      "noRateProvider": "Not available"
+      "noRateProvider": "Not available",
+      "quantityAvailable": "Quantity available"
     },
     "summary": {
       "subaccountsWarning": "You will need to refill this account with {{ currency }} in order to send the tokens of this account",
@@ -2252,7 +2271,8 @@
         "type": "Memo type",
         "value": "Memo value"
       },
-      "validateMemo": "Validate memo"
+      "validateMemo": "Validate memo",
+      "quantity": "Quantity"
     },
     "validation": {
       "message": "On your device, confirm the transaction to sign it securely.",
@@ -2475,6 +2495,10 @@
       "legacy": {
         "title": "Legacy",
         "desc": "{{currency}}’s original address format. Highest fees per transaction. Some wallets/exchanges still only support this type."
+      },
+      "taproot": {
+        "title": "Taproot",
+        "desc": "Latest {{currency}} network upgrade. Will provide better privacy and cheaper fees once widespread. Still limited support from wallet and exchanges."
       }
     }
   },
@@ -3079,6 +3103,20 @@
             "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
           }
         }
+      }
+    }
+  },
+  "elrond": {
+    "account": {
+      "subHeader": {
+        "cardTitle": "Powered by Elrond",
+        "drawerTitle": "Elrond integration",
+        "moreInfo": "More info",
+        "title": "Elrond eGold (EGLD) token is now available on Ledger Live",
+        "description": "You can now safely secure your eGold (EGLD) tokens and manage them through Ledger Live.",
+        "description2": "The Elrond eGold (EGLD) Token is native to the Elrond Network and will be used for everything from transactions, staking, smart contracts, governance and validator rewards.",
+        "description3": "We are actively working with the Elrond team to add more functionality, such as staking, native ESDT (Elrond Standard Digital Token) support, and more.",
+        "website": "The Internet Scale Blockchain"
       }
     }
   },
@@ -3725,6 +3763,28 @@
       "infoPanel": {
         "website": "website"
       }
+    }
+  },
+
+  "nft": {
+    "account": {
+      "seeAllNfts": "See all NFT",
+      "seeFewerNfts": "See fewer NFT"
+    },
+    "gallery": {
+      "allNft": "All NFT"
+    },
+    "viewer": {
+      "properties": "Properties",
+      "description": "Description",
+      "tokenContract": "Token Address",
+      "tokenId": "Token ID",
+      "quantity": "Quantity"
+    },
+    "viewerModal": {
+      "viewOn": "View on",
+      "viewInExplorer": "View in explorer",
+      "txDetails": "Transaction details"
     }
   }
 }

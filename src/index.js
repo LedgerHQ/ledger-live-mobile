@@ -13,6 +13,7 @@ import React, {
   useEffect,
 } from "react";
 import { connect, useDispatch, useSelector } from "react-redux";
+
 import {
   StyleSheet,
   View,
@@ -32,9 +33,11 @@ import { checkLibs } from "@ledgerhq/live-common/lib/sanityChecks";
 import { useCountervaluesExport } from "@ledgerhq/live-common/lib/countervalues/react";
 import { pairId } from "@ledgerhq/live-common/lib/countervalues/helpers";
 
+import { NftMetadataProvider } from "@ledgerhq/live-common/lib/nft";
 import { ToastProvider } from "@ledgerhq/live-common/lib/notifications/ToastProvider";
 import { PlatformAppProvider } from "@ledgerhq/live-common/lib/platform/PlatformAppProvider";
 import { getProvider } from "@ledgerhq/live-common/lib/platform/PlatformAppProvider/providers";
+
 import logger from "./logger";
 import { saveAccounts, saveBle, saveSettings, saveCountervalues } from "./db";
 import {
@@ -291,7 +294,7 @@ const linkingOptions = {
                * @params ?currency: string
                * ie: "ledgerlive://send?currency=bitcoin" will open the prefilled search account in the send flow
                */
-              [ScreenName.SendFundsMain]: "send",
+              [ScreenName.SendCoin]: "send",
             },
           },
           [NavigatorName.ExchangeBuyFlow]: {
@@ -462,9 +465,13 @@ export default class Root extends Component<
                                       <ToastProvider>
                                         <NotificationsProvider>
                                           <SnackbarContainer />
-                                          <App
-                                            importDataString={importDataString}
-                                          />
+                                          <NftMetadataProvider>
+                                            <App
+                                              importDataString={
+                                                importDataString
+                                              }
+                                            />
+                                          </NftMetadataProvider>
                                         </NotificationsProvider>
                                       </ToastProvider>
                                     </OnboardingContextProvider>

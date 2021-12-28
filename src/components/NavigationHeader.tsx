@@ -5,16 +5,19 @@ import { ArrowLeftMedium, CloseMedium } from "@ledgerhq/native-ui/assets/icons";
 import { Flex, Text, Link } from "@ledgerhq/native-ui";
 import { StackHeaderProps } from "@react-navigation/stack";
 import { getHeaderTitle } from "@react-navigation/elements";
+import { FlexBoxProps } from "@ledgerhq/native-ui/components/layout/Flex";
+
+type NavigationHeaderProps = StackHeaderProps & { containerProps?: FlexBoxProps };
 
 function NavigationHeader({
   navigation,
   route,
   options,
   back,
-}: StackHeaderProps) {
+  containerProps,
+}: NavigationHeaderProps) {
   const { t } = useTranslation();
   const title = t(getHeaderTitle(options, route.name));
-
   return (
     <Flex
       flexDirection="row"
@@ -23,6 +26,7 @@ function NavigationHeader({
       backgroundColor="palette.neutral.c00"
       py={6}
       mb={6}
+      {...containerProps}
     >
       {back ? (
         <Link size="large" Icon={ArrowLeftMedium} onPress={navigation.goBack} />
@@ -43,4 +47,4 @@ function NavigationHeader({
   );
 }
 
-export default (props: StackHeaderProps) => <NavigationHeader {...props} />;
+export default (props: NavigationHeaderProps) => <NavigationHeader {...props} />;
