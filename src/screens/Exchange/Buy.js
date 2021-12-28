@@ -32,7 +32,7 @@ export default function Buy() {
         platform: "moonpay",
       },
     });
-  },[]);
+  }, []);
 
   const navigateToCoinify = useCallback(() => {
     navigation.navigate(ScreenName.Coinify);
