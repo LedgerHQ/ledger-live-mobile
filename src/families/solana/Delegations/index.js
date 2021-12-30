@@ -107,8 +107,8 @@ function Delegations({ account }: Props) {
 
   const onDelegate = useCallback(() => {
     onNavigate({
-      route: NavigatorName.CosmosDelegationFlow,
-      screen: ScreenName.CosmosDelegationStarted,
+      route: NavigatorName.SolanaDelegationFlow,
+      screen: ScreenName.SolanaDelegationStarted,
     });
   }, [onNavigate]);
 
