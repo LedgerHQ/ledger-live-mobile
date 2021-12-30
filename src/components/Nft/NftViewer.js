@@ -51,8 +51,10 @@ const Section = ({
   children?: React$Node,
 }) => (
   <View style={style}>
-    <LText style={styles.sectionTitle}>{title}</LText>
-    {value ? <LText semiBold>{value}</LText> : children}
+    <LText style={styles.sectionTitle} semiBold>
+      {title}
+    </LText>
+    {value ? <LText>{value}</LText> : children}
   </View>
 );
 
@@ -163,7 +165,7 @@ const NftViewer = ({ route }: Props) => {
     }
 
     if (metadata?.description) {
-      return <LText semiBold>{metadata.description}</LText>;
+      return <LText>{metadata.description}</LText>;
     }
 
     return null;
