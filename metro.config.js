@@ -5,16 +5,15 @@
  * @format
  */
 
-const defaultSourceExts = require('metro-config/src/defaults/defaults').sourceExts
+const defaultSourceExts = require("metro-config/src/defaults/defaults")
+  .sourceExts;
 
 module.exports = {
-  ...(process.env.V3
-    ? {
-        resolver: {
-          sourceExts: ["tsx", "ts", "jsx", "js"],
-        },
-      }
-    : {}),
+  resolver: {
+    sourceExts: process.env.V3
+      ? ["tsx", "ts", "jsx", "js", "cjs"]
+      : [...defaultSourceExts, "cjs"],
+  },
   transformer: {
     getTransformOptions: async () => ({
       transform: {
@@ -23,7 +22,4 @@ module.exports = {
       },
     }),
   },
-  resolver: {
-    sourceExts: [...defaultSourceExts, 'cjs'],
-  }
 };
