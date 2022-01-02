@@ -377,7 +377,7 @@
       "description": "계정에 자금이 충분한지 확인해 주세요."
     },
     "NotEnoughGas": {
-      "title": "Parent account balance insufficient for network fees",
+      "title": "네트워크 수수료에 대한 상위 계정 잔액 부족",
       "description": "ERC20 토큰 트랜잭션 수수료로 계정에 ETH를 전송하세요."
     },
     "NotEnoughBalanceToDelegate": {
@@ -2497,8 +2497,8 @@
         "desc": "{{currency}}의 오리지널 주소 형식. 트랜잭션별 수수료가 가장 높습니다. 여전히 이 유형만을 지원하는 지갑/거래소가 일부 존재합니다."
       },
       "taproot": {
-        "title": "Taproot",
-        "desc": "Latest {{currency}} network upgrade. Will provide better privacy and cheaper fees once widespread. Still limited support from wallet and exchanges."
+        "title": "탭루트",
+        "desc": "최신 {{currency}} 네트워크 업그레이드. 공개 후 더 나은 개인 정보 보호와 더 저렴한 수수료를 제공합니다. 지갑과 거래소의 지원은 여전히 제한적입니다."
       }
     }
   },
