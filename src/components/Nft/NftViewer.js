@@ -140,7 +140,7 @@ const NftViewer = ({ route }: Props) => {
               ]}
               key={i}
             >
-              <LText style={{ color: rgba(colors.live, 0.5) }}>
+              <LText semiBold style={{ color: rgba(colors.live, 0.5) }}>
                 {prop.key}
               </LText>
               <LText style={{ color: colors.live }}>{prop.value}</LText>
