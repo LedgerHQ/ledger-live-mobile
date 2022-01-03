@@ -24,7 +24,7 @@ const AnalyticsConsole = () => {
   }, []);
 
   const addItem = useCallback(item => {
-    setItems(currentItems => [...currentItems.slice(0, 9), item]);
+    setItems(currentItems => [...currentItems.slice(-9), item]);
   }, []);
 
   useEffect(() => {
