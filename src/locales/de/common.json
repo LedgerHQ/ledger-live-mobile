@@ -377,7 +377,7 @@
       "description": "Bitte stellen Sie sicher, dass das Konto ausreichend gedeckt ist."
     },
     "NotEnoughGas": {
-      "title": "Parent account balance insufficient for network fees",
+      "title": "Der übergeordnete Kontostand reicht für Netzwerkgebühren nicht aus",
       "description": "Bitte senden Sie einige ETH auf Ihr Konto, um ERC20-Token-Transaktionen zu bezahlen."
     },
     "NotEnoughBalanceToDelegate": {
@@ -605,13 +605,13 @@
       "description": "Etwas ist schief gelaufen. Bitte versuchen Sie es erneut. Wenn das Problem weiterhin besteht, speichern Sie bitte Ihre Protokolle über die Schaltfläche unten und stellen Sie sie dem Ledger-Support zur Verfügung."
     },
     "SolanaAccountNotFunded": {
-      "title": "Account not funded"
+      "title": "Konto nicht gedeckt"
     },
     "SolanaAddressOfEd25519": {
-      "title": "Address off ed25519 curve"
+      "title": "Adresse aus ed25519 Kurve"
     },
     "SolanaMemoIsTooLong": {
-      "title": "Memo is too long. Max length is {{maxLength}}"
+      "title": "Memo ist zu lang. Maximale Länge beträgt {{maxLength}}"
     }
   },
   "bluetooth": {
@@ -2507,7 +2507,7 @@
       },
       "taproot": {
         "title": "Taproot",
-        "desc": "Latest {{currency}} network upgrade. Will provide better privacy and cheaper fees once widespread. Still limited support from wallet and exchanges."
+        "desc": "Neuestes {{currency}} -Netzwerk-Upgrade. Wird bessere Privatsphäre und günstigere Gebühren bieten, sobald weiter verbreitet. Immer noch begrenzte Unterstützung von Wallet und Tausch-Vorgängen."
       }
     }
   },
