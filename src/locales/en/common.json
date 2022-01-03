@@ -1975,6 +1975,10 @@
             "tos": "Terms & conditions",
             "accept": "Accept",
             "reject": "Close"
+          },
+          "connect": {
+            "title": "Login or sign up to FTX to continue",
+            "cta": "connect"
           }
         }
       },

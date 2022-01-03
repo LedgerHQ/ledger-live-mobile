@@ -101,6 +101,14 @@ async function unsafeSaveCountervalues(
   }
 }
 
+export async function getFTXToken(): Promise<{ authToken?: string }> {
+  return store.get("ftxToken");
+}
+
+export async function saveFTXToken(token: string): Promise<void> {
+  await store.save("ftxToken", token);
+}
+
 export async function getBle(): Promise<*> {
   const ble = await store.get("ble");
   return ble;

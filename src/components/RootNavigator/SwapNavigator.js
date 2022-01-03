@@ -15,10 +15,11 @@ import SwapKYCStates from "../../screens/Swap/KYC/StateSelect";
 import Swap from "../../screens/Swap";
 import Swap2 from "../../screens/Swap2";
 import SwapOperationDetails from "../../screens/Swap/FormOrHistory/OperationDetails";
-import { BackButton } from "../../screens/OperationDetails";
+import { BackButton, CloseButton } from "../../screens/OperationDetails";
 import SwapPendingOperation from "../../screens/Swap/FormOrHistory/Form/PendingOperation";
 import SwapFormSelectCrypto from "../../screens/Swap/FormOrHistory/Form/SelectAccount/01-SelectCrypto";
 import SwapFormSelectAccount from "../../screens/Swap/FormOrHistory/Form/SelectAccount/02-SelectAccount";
+import { SwapConnectFTX } from "../../screens/Swap/FTX";
 import { getStackNavigatorConfig } from "../../navigation/navigatorConfig";
 import styles from "../../navigation/styles";
 import StepHeader from "../StepHeader";
@@ -138,6 +139,21 @@ export default function SwapNavigator() {
           headerTitle: () => <StepHeader title={t("transfer.swap.title")} />,
           headerLeft: () => <BackButton navigation={navigation} />,
           headerRight: null,
+        })}
+      />
+      <Stack.Screen
+        name={ScreenName.SwapConnectFTX}
+        component={SwapConnectFTX}
+        options={({ navigation }) => ({
+          headerTitle: () => <StepHeader title={t("transfer.swap.title")} />,
+          headerLeft: null,
+          headerRight: () => (
+            <CloseButton
+              navigation={navigation}
+              onPress={() => navigation.pop()}
+            />
+          ),
+          presentation: "modal",
         })}
       />
     </Stack.Navigator>

@@ -1,5 +1,5 @@
 /* @flow */
-import React from "react";
+import React, { useCallback } from "react";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { useSelector } from "react-redux";
@@ -45,13 +45,28 @@ export const BackButton = ({ navigation }: { navigation: * }) => {
   );
 };
 
-export const CloseButton = ({ navigation }: { navigation: * }) => {
+export const CloseButton = ({
+  navigation,
+  onPress,
+}: {
+  navigation: *,
+  onPress?: () => void,
+}) => {
   const { colors } = useTheme();
+
+  const handlePress = useCallback(() => {
+    if (onPress) {
+      onPress();
+      return;
+    }
+
+    navigation.popToTop();
+  }, [navigation, onPress]);
 
   return (
     <TouchableOpacity
       // $FlowFixMe
-      onPress={() => navigation.popToTop()}
+      onPress={handlePress}
       style={styles.buttons}
     >
       <Close size={18} color={colors.grey} />
