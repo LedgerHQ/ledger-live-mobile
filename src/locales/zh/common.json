@@ -603,6 +603,15 @@
     "generic": {
       "title": "{{message}}",
       "description": "出错了。请重试。如果问题依旧存在，请使用下面的按钮保存您的日志，并将其提供给 Ledger 客服。"
+    },
+    "SolanaAccountNotFunded": {
+      "title": "Account not funded"
+    },
+    "SolanaAddressOfEd25519": {
+      "title": "Address off ed25519 curve"
+    },
+    "SolanaMemoIsTooLong": {
+      "title": "Memo is too long. Max length is {{maxLength}}"
     }
   },
   "bluetooth": {
