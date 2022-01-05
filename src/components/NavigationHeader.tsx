@@ -7,13 +7,17 @@ import { StackHeaderProps } from "@react-navigation/stack";
 import { getHeaderTitle } from "@react-navigation/elements";
 import { FlexBoxProps } from "@ledgerhq/native-ui/components/layout/Flex";
 
-type NavigationHeaderProps = StackHeaderProps & { containerProps?: FlexBoxProps };
+type NavigationHeaderProps = StackHeaderProps & {
+  containerProps?: FlexBoxProps;
+  hideBack?: boolean;
+};
 
 function NavigationHeader({
   navigation,
   route,
   options,
   back,
+  hideBack,
   containerProps,
 }: NavigationHeaderProps) {
   const { t } = useTranslation();
@@ -28,14 +32,16 @@ function NavigationHeader({
       mb={6}
       {...containerProps}
     >
-      {back ? (
+      {back && !hideBack ? (
         <Link size="large" Icon={ArrowLeftMedium} onPress={navigation.goBack} />
       ) : (
         <View />
       )}
-      <Text variant="large" fontWeight="semiBold">
-        {title}
-      </Text>
+      {title.length ? (
+        <Text variant="large" fontWeight="semiBold">
+          {title}
+        </Text>
+      ) : null}
       <Link
         size="large"
         Icon={CloseMedium}
@@ -47,4 +53,6 @@ function NavigationHeader({
   );
 }
 
-export default (props: NavigationHeaderProps) => <NavigationHeader {...props} />;
+export default (props: NavigationHeaderProps) => (
+  <NavigationHeader {...props} />
+);

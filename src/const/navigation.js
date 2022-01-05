@@ -272,6 +272,9 @@ export const ScreenName = {
 
   OnboardingSetNewDeviceInfo: "OnboardingSetNewDeviceInfo",
   OnboardingSetNewDevice: "OnboardingSetNewDevice",
+  OnboardingSetupDeviceInformation: "OnboardingSetupDeviceInformation",
+  OnboardingSetupDeviceRecoveryPhrase: "OnboardingSetupDeviceRecoveryPhrase",
+  OnboardingGeneralInformation: "OnboardingGeneralInformation",
   OnboardingInfoModal: "OnboardingInfoModal",
   OnboardingRecoveryPhrase: "OnboardingRecoveryPhrase",
 
@@ -285,6 +288,13 @@ export const ScreenName = {
   OnboardingQuizFinal: "OnboardingQuizFinal",
 
   OnboardingFinish: "OnboardingFinish",
+
+  OnboardingModal: "OnboardingModal",
+  OnboardingModalSetupNewDevice: "OnboardingModalSetupNewDevice",
+  OnboardingModalSetupSteps: "OnboardingModalSetupSteps",
+  OnboardingModalSetupSecureRecovery: "OnboardingModalSetupSecureRecovery",
+  OnboardingModalWarning: "OnboardingModalWarning",
+  OnboardingModalGeneralInformation: "OnboardingModalGeneralInformation",
 
   PlatformCatalog: "PlatformCatalog",
   PlatformApp: "PlatformApp",

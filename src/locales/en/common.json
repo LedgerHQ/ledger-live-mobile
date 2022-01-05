@@ -912,7 +912,7 @@
         "title": "Recovery phrase",
         "desc": "Your recovery phrase is a secret list of 24 words that backs up your private keys.",
         "desc_1": "Your Nano generates a unique recovery phrase. Ledger does not keep a copy of it.",
-        "cta": "Recovery phrase",
+        "cta": "Setup my PIN Code",
         "checkboxDesc": "I understand that if I lose this recovery phrase, I will not be able to access my crypto in case I lose access to my Nano."
       },
       "recoveryPhraseSetup": {
@@ -972,13 +972,13 @@
           "title": "Where should I keep my recovery phrase?",
           "bullets": {
             "0": {
-              "label": "<1>NEVER</1> enter it on a computer, phone or any other device. Don't take a picture of it."
+              "label": "<bold>never</bold> enter it on a computer, phone or any other device. Don't take a picture of it."
             },
             "1": {
-              "label": "<1>NEVER</1> share your 24 words with anyone."
+              "label": "<bold>NEVER</bold> share your 24 words with anyone."
             },
             "2": {
-              "label": "<1>ALWAYS</1> store it in a secure place, out of sight."
+              "label": "<bold>ALWAYS</bold> store it in a secure place, out of sight."
             },
             "3": {
               "label": "Ledger will never ask for your recovery phrase."
@@ -4609,7 +4609,7 @@
               "label": "Stay alone, and choose a safe and quiet environment."
             }
           },
-          "cta": "OK, I’m ready!",
+          "cta": "Continue",
           "warning": {
             "title": "Please be careful",
             "desc": "Make sure you follow the instructions on this app at every step of the process.",
@@ -4646,7 +4646,7 @@
           "checkboxDesc": "I understand that I must choose my PIN code by myself and keep it private.",
           "cta": "Set up PIN code"
         },
-        "pinCodeInstructions": {
+        "recoverySheetInstructions": {
           "bullets": {
             "0": {
               "title": "Take your Recovery sheet",
@@ -4663,43 +4663,27 @@
           "bullets": {
             "0": {
               "title": "Choose PIN code",
-              "label": "Press the left or right button to change digits. Press both buttons to validate a digit. Select <1></1> to confirm your PIN code. Select <2></2> to erase a digit."
+              "desc": "Press the left or right button to change digits. Press both buttons to validate a digit. Select <validIcon></validIcon> to confirm your PIN code. Select <cancelIcon></cancelIcon> to erase a digit."
             },
             "1": {
               "title": "Confirm PIN code",
-              "label": "Enter your PIN code again to confirm it."
+              "desc": "Enter your PIN code again to confirm it."
             }
           },
+          "cta": "Next step",
           "infoModal": {
             "title": "Secure your PIN code",
             "bullets": {
-              "0": {
-                "label": "Always choose a PIN code by yourself."
-              },
-              "1": {
-                "label": "Always enter your PIN code out of sight."
-              },
-              "2": {
-                "label": "You can change your PIN code if needed."
-              },
-              "3": {
-                "label": "Three wrong PIN code entries in a row will reset the device."
-              },
-              "4": {
-                "label": "Never use an easy PIN code like 0000, 123456, or 55555555."
-              },
-              "5": {
-                "label": "Never share your PIN code with someone else. Not even with Ledger."
-              },
-              "6": {
-                "label": "Never use a PIN code you did not choose yourself."
-              },
-              "7": {
-                "label": "Never store your PIN code on a computer or phone."
-              }
+              "0": "Always choose a PIN code by yourself.",
+              "1": "Always enter your PIN code out of sight.",
+              "2": "You can change your PIN code if needed.",
+              "3": "Three wrong PIN code entries in a row will reset the device.",
+              "4": "Never use an easy PIN code like 0000, 123456, or 55555555.",
+              "5": "Never share your PIN code with someone else. Not even with Ledger.",
+              "6": "Never use a PIN code you did not choose yourself.",
+              "7": "Never store your PIN code on a computer or phone."
             }
-          },
-          "cta": "Next step"
+          }
         },
         "recoveryPhrase": {
           "title": "Recovery phrase",
@@ -4756,13 +4740,13 @@
             "title": "Where should I keep my recovery phrase?",
             "bullets": {
               "0": {
-                "label": "<1>NEVER</1> enter it on a computer, phone or any other device. Don't take a picture of it."
+                "label": "<bold>NEVER</bold> enter it on a computer, phone or any other device. Don't take a picture of it."
               },
               "1": {
-                "label": "<1>NEVER</1> share your 24 words with anyone."
+                "label": "<bold>NEVER</bold> share your 24 words with anyone."
               },
               "2": {
-                "label": "<1>ALWAYS</1> store it in a secure place, out of sight."
+                "label": "<bold>ALWAYS</bold> store it in a secure place, out of sight."
               },
               "3": {
                 "label": "Ledger will never ask for your recovery phrase."
