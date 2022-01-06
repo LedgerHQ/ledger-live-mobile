@@ -1854,8 +1854,8 @@
           "subtitle": "Информация о вас собирается Ledger от имени – и передаётся, – в WYRE для процедуры KYC. Дополнительную информацию можно получить в нашей Политике конфиденциальности",
           "pending": {
             "cta": "Продолжить",
-            "title": "Your information has been submitted for approval",
-            "subtitle": "It usually takes only a few minutes before you can start swapping",
+            "title": "Ваши данные были поданы на проверку",
+            "subtitle": "Обычно обменивать криптовалюты можно уже спустя пару минут",
             "link": "Подробнее о KYC"
           },
           "approved": {
@@ -1908,9 +1908,9 @@
         "cta": "Закрыть"
       },
       "pendingOperation": {
-        "description": "Your Swap operation has been sent to the network for confirmation. It may take up to an hour before you receive your swapped {{targetCurrency}} assets",
+        "description": "Операция обмена отправлена в сеть для подтверждения. Может пройти около часа, прежде чем вы получите ваши активы {{targetCurrency}}",
         "label": "ID обмена:",
-        "title": "Pending operation",
+        "title": "Операция в ожидании",
         "disclaimer": "Сохраните ID обмена на случай, если в дальнейшем потребуется помощь от {{provider}}.",
         "cta": "Подробности"
       },
@@ -1930,22 +1930,22 @@
         "button": "Продолжить",
         "from": "Откуда",
         "to": "Куда",
-        "source": "Source",
-        "target": "Target account",
-        "noAccount": "You don’t have {{currency}} account",
+        "source": "Откуда",
+        "target": "Куда",
+        "noAccount": "У вас нет счёта {{currency}}",
         "balance": "Баланс <0>123</0>",
         "fromAccount": "Выберите счёт",
         "toAccount": "Выберите счёт",
         "paraswapCTA": "Ищете ParaSwap? Мы перенесли его в раздел Исследуйте!",
-        "quote": "Quote",
-        "receive": "Receive",
+        "quote": "Курс",
+        "receive": "Получить",
         "amount": {
           "useMax": "Вся сумма",
           "available": "Доступная сумма"
         },
         "noAsset": {
-          "title": "You have no asset to swap",
-          "desc": "Buy some and come back to swap"
+          "title": "У вас нет активов для обмена",
+          "desc": "Купите что-нибудь и повторите попытку"
         },
         "noApp": {
           "title": "Приложение {{appName}} не установлено",
@@ -2030,16 +2030,16 @@
     "swapv2": {
       "form": {
         "summary": {
-          "from": "From",
-          "to": "To",
-          "send": "Send",
-          "payoutNetworkFees": "Payout fees",
-          "payoutNetworkFeesTooltip": "This amount will not be shown on your device",
-          "receive": "Amount",
-          "receiveFloat": "Amount to receive before service fees",
-          "provider": "Provider",
-          "method": "Rate",
-          "fees": "Fees"
+          "from": "Откуда",
+          "to": "Куда",
+          "send": "Отправить",
+          "payoutNetworkFees": "Комиссия за выплату",
+          "payoutNetworkFeesTooltip": "Эта сумма не будет отображаться на устройстве",
+          "receive": "Кол-во",
+          "receiveFloat": "Сумма к получению до вычета комиссии",
+          "provider": "Оператор",
+          "method": "Курс",
+          "fees": "Комиссия"
         }
       }
     },
