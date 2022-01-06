@@ -1854,8 +1854,8 @@
           "subtitle": "LEDGER recueille vos données pour WYRE et les lui transfère pour réaliser votre vérification d'identité. Consultez notre Politique de confidentialité.",
           "pending": {
             "cta": "Continuer",
-            "title": "Your information has been submitted for approval",
-            "subtitle": "It usually takes only a few minutes before you can start swapping",
+            "title": "Vos données ont été envoyées pour validation.",
+            "subtitle": "En général, il n'est nécessaire de patienter que quelques minutes.",
             "link": "En savoir plus"
           },
           "approved": {
@@ -1908,9 +1908,9 @@
         "cta": "Fermer"
       },
       "pendingOperation": {
-        "description": "Your Swap operation has been sent to the network for confirmation. It may take up to an hour before you receive your swapped {{targetCurrency}} assets",
+        "description": "Votre opération de swap a été envoyée au réseau pour confirmation. Cela peut prendre jusqu'à une heure avant que vous ne receviez vos {{targetCurrency}}.",
         "label": "Identifiant de votre swap :",
-        "title": "Pending operation",
+        "title": "Opération en attente",
         "disclaimer": "Notez bien l'identifiant de votre swap au cas où vous auriez besoin de contacter l'assistance de {{provider}}.",
         "cta": "Voir les détails"
       },
@@ -1931,21 +1931,21 @@
         "from": "De",
         "to": "À",
         "source": "Source",
-        "target": "Target account",
-        "noAccount": "You don’t have {{currency}} account",
+        "target": "Compte bénéficiaire",
+        "noAccount": "Vous n'avez aucun compte {{currency}}",
         "balance": "Solde <0>123</0>",
         "fromAccount": "Sélectionnez un compte",
         "toAccount": "Sélectionnez un compte",
         "paraswapCTA": "Vous cherchez ParaSwap ? Il se trouve dans l'onglet Discover.",
-        "quote": "Quote",
-        "receive": "Receive",
+        "quote": "Prix",
+        "receive": "Recevoir",
         "amount": {
           "useMax": "Choisir le maximum",
           "available": "Total disponible"
         },
         "noAsset": {
-          "title": "You have no asset to swap",
-          "desc": "Buy some and come back to swap"
+          "title": "Vous n'avez pas d'actif à échanger",
+          "desc": "Achetez des actifs et revenez sur cette page."
         },
         "noApp": {
           "title": "App {{appName}} non installée",
@@ -2030,16 +2030,16 @@
     "swapv2": {
       "form": {
         "summary": {
-          "from": "From",
-          "to": "To",
-          "send": "Send",
-          "payoutNetworkFees": "Payout fees",
-          "payoutNetworkFeesTooltip": "This amount will not be shown on your device",
-          "receive": "Amount",
-          "receiveFloat": "Amount to receive before service fees",
-          "provider": "Provider",
-          "method": "Rate",
-          "fees": "Fees"
+          "from": "De",
+          "to": "À",
+          "send": "Envoyer",
+          "payoutNetworkFees": "Frais de réception",
+          "payoutNetworkFeesTooltip": "Ce montant n'apparaîtra pas sur votre appareil.",
+          "receive": "Montant",
+          "receiveFloat": "Montant à recevoir sans les frais de service",
+          "provider": "Prestataire",
+          "method": "Taux",
+          "fees": "Frais"
         }
       }
     },
