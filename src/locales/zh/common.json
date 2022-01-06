@@ -262,6 +262,10 @@
       "title": "无法自动验证。请仔细核对该地址。",
       "description": null
     },
+    "EthAppNftNotSupported": {
+      "title": "Operation not available for this device",
+      "description": "Send NFT feature is only available for Nano X. Please visit our customer support platform to know how to send a NFT with a Nano S."
+    },
     "Touch ID Error": {
       "title": "生物特征认证失败",
       "description": "请使用您的密码或重置应用程序。"
