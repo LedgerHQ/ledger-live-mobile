@@ -262,6 +262,10 @@
       "title": "Автопроверка недоступна: внимательно проверьте адрес.",
       "description": null
     },
+    "EthAppNftNotSupported": {
+      "title": "Operation not available for this device",
+      "description": "Send NFT feature is only available for Nano X. Please visit our customer support platform to know how to send a NFT with a Nano S."
+    },
     "Touch ID Error": {
       "title": "Ошибка биометрической аутентификации",
       "description": "Пожалуйста, воспользуйтесь паролем или перезагрузите приложение."
