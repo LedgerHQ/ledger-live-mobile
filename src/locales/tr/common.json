@@ -263,8 +263,8 @@
       "description": null
     },
     "EthAppNftNotSupported": {
-      "title": "Operation not available for this device",
-      "description": "Send NFT feature is only available for Nano X. Please visit our customer support platform to know how to send a NFT with a Nano S."
+      "title": "İşlem bu cihazda kullanılamıyor",
+      "description": "NFT Gönder özelliği yalnızca Nano X için mevcuttur. Nano S ile nasıl NFT gönderebileceğinizi öğrenmek için lütfen müşteri destek platformumuzu ziyaret edin."
     },
     "Touch ID Error": {
       "title": "Biyometrik kimlik doğrulaması başarısız oldu",
@@ -609,13 +609,13 @@
       "description": "Bir hata oluştu. Lütfen tekrar deneyin. Sorun devam ederse, lütfen aşağıdaki butonu kullanarak loglarınızı kaydedin ve Ledger Destek'e gönderin."
     },
     "SolanaAccountNotFunded": {
-      "title": "Account not funded"
+      "title": "Hesap fonlanmadı"
     },
     "SolanaAddressOfEd25519": {
-      "title": "Address off ed25519 curve"
+      "title": "Adres ed25519 eğrisi dışında"
     },
     "SolanaMemoIsTooLong": {
-      "title": "Memo is too long. Max length is {{maxLength}}"
+      "title": "Memo çok uzun. Maksimum uzunluk {{maxLength}}"
     }
   },
   "bluetooth": {
@@ -1858,8 +1858,8 @@
           "subtitle": "Bilgileriniz LEDGER tarafından KYC amacıyla WYRE adına toplanır ve aktarılır. Daha fazla bilgi için lütfen Gizlilik Politikamıza bakın",
           "pending": {
             "cta": "Devam",
-            "title": "Your information has been submitted for approval",
-            "subtitle": "It usually takes only a few minutes before you can start swapping",
+            "title": "Bilgileriniz onaylanmak üzere gönderildi",
+            "subtitle": "Takas yapmaya başlamak için genellikle yalnızca birkaç dakika gerekir",
             "link": "KYC (Müşterinizi Tanıyın) işlemi hakkında daha fazla bilgi alın"
           },
           "approved": {
@@ -1912,9 +1912,9 @@
         "cta": "Kapat"
       },
       "pendingOperation": {
-        "description": "Your Swap operation has been sent to the network for confirmation. It may take up to an hour before you receive your swapped {{targetCurrency}} assets",
+        "description": "Takas işleminiz onaylanmak üzere ağa gönderildi. Takas ettiğiniz {{targetCurrency}} varlıklarını almanız yaklaşık bir saat sürebilir",
         "label": "Swap ID'si:",
-        "title": "Pending operation",
+        "title": "Bekleyen işlem",
         "disclaimer": "{{provider}} desteğine yardıma ihtiyacınız olması durumunda gerekecek olan Takas ID numaranızı not edin.",
         "cta": "Ayrıntıları gör"
       },
@@ -1934,22 +1934,22 @@
         "button": "Devam",
         "from": "Gönderici",
         "to": "Alıcı",
-        "source": "Source",
-        "target": "Target account",
-        "noAccount": "You don’t have {{currency}} account",
+        "source": "Kaynak",
+        "target": "Hedef hesap",
+        "noAccount": "{{currency}} hesabınız yok",
         "balance": "Bakiye <0>123</0>",
         "fromAccount": "Hesap seç",
         "toAccount": "Hesap seç",
         "paraswapCTA": "Paraswap'ı mı arıyorsunuz? Keşfet sekmesine taşındı!",
-        "quote": "Quote",
-        "receive": "Receive",
+        "quote": "Teklif",
+        "receive": "Al",
         "amount": {
           "useMax": "Maks. Kullan",
           "available": "Toplam mevcut"
         },
         "noAsset": {
-          "title": "You have no asset to swap",
-          "desc": "Buy some and come back to swap"
+          "title": "Takas edecek varlığınız bulunmuyor",
+          "desc": "Önce varlık satın alın ve sonra takas etmeyi deneyin"
         },
         "noApp": {
           "title": "{{appName}} uygulaması yüklü değil",
@@ -2034,16 +2034,16 @@
     "swapv2": {
       "form": {
         "summary": {
-          "from": "From",
-          "to": "To",
-          "send": "Send",
-          "payoutNetworkFees": "Payout fees",
-          "payoutNetworkFeesTooltip": "This amount will not be shown on your device",
-          "receive": "Amount",
-          "receiveFloat": "Amount to receive before service fees",
-          "provider": "Provider",
-          "method": "Rate",
-          "fees": "Fees"
+          "from": "Gönderici",
+          "to": "Alıcı",
+          "send": "Gönder",
+          "payoutNetworkFees": "Ödeme ücretleri",
+          "payoutNetworkFeesTooltip": "Bu tutar cihazınızda gösterilmeyecektir",
+          "receive": "Tutar",
+          "receiveFloat": "Hizmet ücretleri hariç alınacak tutar",
+          "provider": "Sağlayıcı",
+          "method": "Kur",
+          "fees": "Ücretler"
         }
       }
     },
