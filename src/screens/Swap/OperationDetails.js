@@ -59,7 +59,8 @@ const OperationDetails = ({ route }: Props) => {
   const { colors } = useTheme();
   const accounts = useSelector(flattenAccountsSelector);
   const fromAccount = accounts.find(a => a.id === swapOperation.fromAccount.id);
-  const swap = fromAccount.swapHistory.find(s => s.swapId === swapId);
+  const swap =
+    fromAccount && fromAccount.swapHistory.find(s => s.swapId === swapId);
   const status = Config.DEBUG_SWAP_STATUS || swap.status;
 
   const fromCurrency = fromAccount && getAccountCurrency(fromAccount);
@@ -69,7 +70,7 @@ const OperationDetails = ({ route }: Props) => {
   const textColorStyles = { color: colors[statusColorKey] };
 
   const url =
-    fromCurrency.type === "CryptoCurrency" &&
+    fromCurrency?.type === "CryptoCurrency" &&
     getTransactionExplorer(
       getDefaultExplorerView(fromCurrency),
       operation.hash,
