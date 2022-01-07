@@ -303,6 +303,9 @@
     "InvalidAddress": {
       "title": "هذا ليس عنوان {{currencyName}} صحيح"
     },
+    "InvalidAddressBecauseAlreadyDelegated": {
+      "title": "Your account is already delegated to this validator"
+    },
     "InvalidAddressBecauseDestinationIsAlsoSource": {
       "title": "يجب ألا تكون حسابات الوجهة وحسابات المصدر هي نفسها."
     },
@@ -1817,6 +1820,7 @@
       "copyAddress": "نسخ العنوان",
       "shareAddress": "عنوان المشاركة",
       "addressCopied": "تم نسخ العنوان!",
+      "taprootWarning": "Make sure the sender supports taproot",
       "notSynced": {
         "text": "تتم المزامنة",
         "desc": "قد يستغرق هذا بعض الوقت إذا كان لديك العديد من المعاملات أو إذا كان اتصالك بالإنترنت بطيئاً."
