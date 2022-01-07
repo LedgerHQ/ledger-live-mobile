@@ -303,6 +303,9 @@
     "InvalidAddress": {
       "title": "유효한 {{currencyName}} 주소가 아닙니다"
     },
+    "InvalidAddressBecauseAlreadyDelegated": {
+      "title": "Your account is already delegated to this validator"
+    },
     "InvalidAddressBecauseDestinationIsAlsoSource": {
       "title": "보낸 계정과 받는 계정이 동일해서는 안 됩니다."
     },
@@ -1817,6 +1820,7 @@
       "copyAddress": "주소 복사",
       "shareAddress": "주소 공유",
       "addressCopied": "주소 복사됨!",
+      "taprootWarning": "Make sure the sender supports taproot",
       "notSynced": {
         "text": "동기화 중",
         "desc": "이는 트랜잭션의 양이 많거나 인터넷 연결이 느린 경우 시간이 걸릴 수 있습니다."
