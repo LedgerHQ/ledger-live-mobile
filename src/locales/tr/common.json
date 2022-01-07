@@ -303,6 +303,9 @@
     "InvalidAddress": {
       "title": "Bu geçerli bir {{currencyName}} adresi değil"
     },
+    "InvalidAddressBecauseAlreadyDelegated": {
+      "title": "Your account is already delegated to this validator"
+    },
     "InvalidAddressBecauseDestinationIsAlsoSource": {
       "title": "Hedef ve kaynak hesapları aynı olmamalıdır."
     },
@@ -1817,6 +1820,7 @@
       "copyAddress": "Adresi kopyala",
       "shareAddress": "Adresi paylaş",
       "addressCopied": "Adres kopyalandı!",
+      "taprootWarning": "Make sure the sender supports taproot",
       "notSynced": {
         "text": "Senkronize ediliyor",
         "desc": "Çok sayıda işlem yaptıysanız veya internet bağlantınız yavaşsa bu işlem biraz zaman alabilir."
