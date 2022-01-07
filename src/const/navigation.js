@@ -89,7 +89,9 @@ export const ScreenName = {
   MigrateAccountsProgress: "MigrateAccountsProgress",
   NftCollection: "NftCollection",
   NftGallery: "NftGallery",
+  NftImageViewer: "NftImageViewer",
   NftViewer: "NftViewer",
+
 
   OperationDetails: "OperationDetails",
   PairDevices: "PairDevices",
