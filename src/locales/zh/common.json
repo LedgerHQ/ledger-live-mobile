@@ -303,6 +303,9 @@
     "InvalidAddress": {
       "title": "该{{currencyName}} 地址无效"
     },
+    "InvalidAddressBecauseAlreadyDelegated": {
+      "title": "Your account is already delegated to this validator"
+    },
     "InvalidAddressBecauseDestinationIsAlsoSource": {
       "title": "目标账户和源账户不能相同。"
     },
@@ -1817,6 +1820,7 @@
       "copyAddress": "复制地址",
       "shareAddress": "分享地址",
       "addressCopied": "地址已复制！",
+      "taprootWarning": "Make sure the sender supports taproot",
       "notSynced": {
         "text": "正在同步",
         "desc": "如果您有多笔交易或者您的网速偏慢，可能需要多花费一些时间。"
