@@ -20,7 +20,7 @@
     "cryptoAsset": "Crypto-actif",
     "skip": "Passer",
     "noCryptoFound": "Aucun crypto-actif trouvé",
-    "needHelp": "Besoin d'aide ?",
+    "needHelp": "Besoin d'aide ?",
     "edit": "Modifier",
     "editName": "Modifier le nom",
     "close": "Fermer",
@@ -1757,6 +1757,10 @@
       "title": "Fonctionnalités expérimentales",
       "desc": "Essayez les Fonctionnalités expérimentales et donnez-nous votre avis.",
       "disclaimer": "Il s'agit de fonctionnalités expérimentales fournies \"telles quelles\" pour notre communauté de passionné(e)s de la tech. Elles peuvent changer, casser ou être retirées à tout moment. En les activant, vous acceptez de les utiliser en toute connaissance de cause."
+    },
+    "developer": {
+      "title": "Developer",
+      "desc": "Try out the Developer features and let us know what you think."
     }
   },
   "migrateAccounts": {
