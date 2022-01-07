@@ -303,6 +303,9 @@
     "InvalidAddress": {
       "title": "Adresse {{currencyName}} invalide"
     },
+    "InvalidAddressBecauseAlreadyDelegated": {
+      "title": "Your account is already delegated to this validator"
+    },
     "InvalidAddressBecauseDestinationIsAlsoSource": {
       "title": "Les comptes donneur d'ordre et bénéficiaire ne peuvent pas être identiques."
     },
@@ -1817,6 +1820,7 @@
       "copyAddress": "Copier l'adresse",
       "shareAddress": "Partager l'adresse",
       "addressCopied": "Adresse copiée",
+      "taprootWarning": "Make sure the sender supports taproot",
       "notSynced": {
         "text": "Synchronisation",
         "desc": "Cela peut prendre quelques instants si vous avez un grand nombre de transactions ou une connexion Internet lente."
