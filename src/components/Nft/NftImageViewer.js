@@ -5,7 +5,7 @@ import NftImage from "./NftImage";
 
 import { View, StyleSheet } from "react-native";
 
-import LText from "../LText";
+import PanAndZoomView from "../PanAndZoomView";
 
 type Props = {
   route: {
@@ -26,7 +26,14 @@ const NftViewer = ({ route }: Props) => {
 
   return (
     <View style={styles.imageContainer}>
-      <NftImage src={media} status={status} style={styles.image} hackWidth={10000} zoomable />
+      <PanAndZoomView>
+        <NftImage
+          src={media}
+          status={status}
+          style={styles.image}
+          hackWidth={10000}
+        />
+      </PanAndZoomView>
     </View>
   );
 };
