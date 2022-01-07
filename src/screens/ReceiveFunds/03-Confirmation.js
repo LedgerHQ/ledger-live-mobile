@@ -410,7 +410,7 @@ const styles = StyleSheet.create({
     paddingTop: 24,
   },
   taprootWarning: {
-    paddingTop: 0,
+    paddingTop: 10,
     flexDirection: "row",
     justifyContent: "center",
     alignSelf: "stretch",
