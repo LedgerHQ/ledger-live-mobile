@@ -303,6 +303,9 @@
     "InvalidAddress": {
       "title": "これは有効な{{currencyName}}アドレスではありません。"
     },
+    "InvalidAddressBecauseAlreadyDelegated": {
+      "title": "Your account is already delegated to this validator"
+    },
     "InvalidAddressBecauseDestinationIsAlsoSource": {
       "title": "送り元アカウントと送り先アカウントが同じです。"
     },
@@ -1817,6 +1820,7 @@
       "copyAddress": "アドレスをコピー",
       "shareAddress": "アドレスを共有",
       "addressCopied": "アドレスをコピーしました！",
+      "taprootWarning": "Make sure the sender supports taproot",
       "notSynced": {
         "text": "同期中",
         "desc": "トランザクションの数が多い場合やインターネット接続が遅い場合、しばらく時間がかかることがあります。"
