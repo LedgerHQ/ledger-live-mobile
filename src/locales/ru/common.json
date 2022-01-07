@@ -263,8 +263,8 @@
       "description": null
     },
     "EthAppNftNotSupported": {
-      "title": "Operation not available for this device",
-      "description": "Send NFT feature is only available for Nano X. Please visit our customer support platform to know how to send a NFT with a Nano S."
+      "title": "Операция недоступна на этом устройстве",
+      "description": "Функция отправки NFT доступна только в Nano X. Пожалуйста, обратитесь в нашу Поддержку, чтобы узнать, как отправлять NFT с Nano S."
     },
     "Touch ID Error": {
       "title": "Ошибка биометрической аутентификации",
@@ -302,6 +302,9 @@
     },
     "InvalidAddress": {
       "title": "Некорректный адрес {{currencyName}}"
+    },
+    "InvalidAddressBecauseAlreadyDelegated": {
+      "title": "Your account is already delegated to this validator"
     },
     "InvalidAddressBecauseDestinationIsAlsoSource": {
       "title": "Счета получателя и отправителя не должны совпадать."
@@ -1817,6 +1820,7 @@
       "copyAddress": "Копировать адрес",
       "shareAddress": "Поделиться адресом",
       "addressCopied": "Адрес скопирован!",
+      "taprootWarning": "Убедитесь, что у отправителя есть поддержка Taproot",
       "notSynced": {
         "text": "Синхронизируем",
         "desc": "При большой очереди транзакций или медленного интернета это может занять некоторое время."
