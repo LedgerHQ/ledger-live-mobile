@@ -303,6 +303,9 @@
     "InvalidAddress": {
       "title": "Esta no es una dirección de {{currencyName}} válida"
     },
+    "InvalidAddressBecauseAlreadyDelegated": {
+      "title": "Your account is already delegated to this validator"
+    },
     "InvalidAddressBecauseDestinationIsAlsoSource": {
       "title": "Las cuentas de origen y destino no deben ser las mismas."
     },
@@ -1817,6 +1820,7 @@
       "copyAddress": "Copiar dirección",
       "shareAddress": "Compartir dirección",
       "addressCopied": "¡Dirección copiada!",
+      "taprootWarning": "Make sure the sender supports taproot",
       "notSynced": {
         "text": "Sincronizando",
         "desc": "Esto puede tardar un tiempo si tienes muchas transacciones o una conexión a Internet lenta."
