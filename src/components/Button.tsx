@@ -121,6 +121,7 @@ export function BaseButton({
       {...otherProps}
       testID={testID}
       style={containerStyle}
+      disabled={isDisabled}
     >
       {title || null}
     </Button>
