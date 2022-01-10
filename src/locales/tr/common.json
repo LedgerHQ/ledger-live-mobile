@@ -304,7 +304,7 @@
       "title": "Bu geçerli bir {{currencyName}} adresi değil"
     },
     "InvalidAddressBecauseAlreadyDelegated": {
-      "title": "Your account is already delegated to this validator"
+      "title": "Hesabınızla bu doğrulayıcıya zaten yetki devredilmiş"
     },
     "InvalidAddressBecauseDestinationIsAlsoSource": {
       "title": "Hedef ve kaynak hesapları aynı olmamalıdır."
@@ -1759,8 +1759,8 @@
       "disclaimer": "Bu Deneysel özellikleri, teknoloji tutkunu topluluğumuzun test edebilmesi için \"olduğu gibi\" sunuyoruz. Herhangi bir zamanda değişebilir, bozulabilir veya kaldırılabilirler. Bu özellikleri etkinleştirdiğinizde tüm riskin size ait olduğunu kabul etmiş olursunuz."
     },
     "developer": {
-      "title": "Developer",
-      "desc": "Try out the Developer features and let us know what you think."
+      "title": "Geliştirici",
+      "desc": "Geliştirici özelliklerini deneyip ne düşündüğünüzü bize bildirin."
     }
   },
   "migrateAccounts": {
@@ -1824,7 +1824,7 @@
       "copyAddress": "Adresi kopyala",
       "shareAddress": "Adresi paylaş",
       "addressCopied": "Adres kopyalandı!",
-      "taprootWarning": "Make sure the sender supports taproot",
+      "taprootWarning": "Göndericinin taproot desteklediğinden emin olun",
       "notSynced": {
         "text": "Senkronize ediliyor",
         "desc": "Çok sayıda işlem yaptıysanız veya internet bağlantınız yavaşsa bu işlem biraz zaman alabilir."
