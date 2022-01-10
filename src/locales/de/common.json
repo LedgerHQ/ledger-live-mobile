@@ -1922,7 +1922,7 @@
       "pendingOperation": {
         "description": "Ihr Tauschvorgang wurde zur Bestätigung an das Netzwerk gesendet. Es kann bis zu einer Stunde dauern, bis Sie Ihre {{targetCurrency}} Vermögenswerte erhalten",
         "label": "Ihre Swap-ID:",
-        "title": "Pending operation",
+        "title": "Ausstehender Vorgang",
         "disclaimer": "Notieren Sie sich Ihre Tausch-ID-Nummer für den Fall, dass Sie Hilfe vom {{provider}} Support benötigen.",
         "cta": "Details ansehen"
       },
@@ -1942,22 +1942,22 @@
         "button": "Weiter",
         "from": "Von",
         "to": "An",
-        "source": "Source",
-        "target": "Target account",
-        "noAccount": "You don’t have {{currency}} account",
+        "source": "Quelle",
+        "target": "Zielkonto",
+        "noAccount": "Sie haben kein {{currency}}-Konto",
         "balance": "Kontostand <0>123</0>",
         "fromAccount": "Konto auswählen",
         "toAccount": "Konto auswählen",
         "paraswapCTA": "Suchen Sie nach Paraswap? Es wurde auf die Registerkarte Entdecken verschoben!",
-        "quote": "Quote",
-        "receive": "Receive",
+        "quote": "Preis",
+        "receive": "Empfangen",
         "amount": {
           "useMax": "Max. verwenden",
           "available": "Verfügbare Gesamtsumme"
         },
         "noAsset": {
-          "title": "You have no asset to swap",
-          "desc": "Buy some and come back to swap"
+          "title": "Sie haben keine Vermögenswerte zum Tauschen/Swappen",
+          "desc": "Kaufen Sie einige und kommen Sie zurück zum Tauschen"
         },
         "noApp": {
           "title": "{{appName}} App nicht installiert",
@@ -2042,16 +2042,16 @@
     "swapv2": {
       "form": {
         "summary": {
-          "from": "From",
-          "to": "To",
-          "send": "Send",
-          "payoutNetworkFees": "Payout fees",
-          "payoutNetworkFeesTooltip": "This amount will not be shown on your device",
-          "receive": "Amount",
-          "receiveFloat": "Amount to receive before service fees",
-          "provider": "Provider",
-          "method": "Rate",
-          "fees": "Fees"
+          "from": "Von",
+          "to": "Nach",
+          "send": "Senden",
+          "payoutNetworkFees": "Auszahlungsgebühren",
+          "payoutNetworkFeesTooltip": "Dieser Betrag wird nicht auf Ihrem Gerät angezeigt",
+          "receive": "Betrag",
+          "receiveFloat": "Zu erhaltender Betrag vor Servicegebühren",
+          "provider": "Anbieter",
+          "method": "Kurs",
+          "fees": "Gebühren"
         }
       }
     },
