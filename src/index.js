@@ -292,7 +292,7 @@ const linkingOptions = {
                * @params ?currency: string
                * ie: "ledgerlive://send?currency=bitcoin" will open the prefilled search account in the send flow
                */
-              [ScreenName.SendFundsMain]: "send",
+              [ScreenName.SendCoin]: "send",
             },
           },
           [NavigatorName.ExchangeBuyFlow]: {
@@ -324,6 +324,7 @@ const linkingOptions = {
               [ScreenName.AboutSettings]: "settings/about",
               [ScreenName.HelpSettings]: "settings/help",
               [ScreenName.ExperimentalSettings]: "settings/experimental",
+              [ScreenName.DeveloperSettings]: "settings/developer",
             },
           },
         },

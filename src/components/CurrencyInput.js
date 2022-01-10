@@ -1,6 +1,6 @@
 // @flow
 import React, { PureComponent } from "react";
-import { TextInput, StyleSheet, View, Dimensions } from "react-native";
+import { StyleSheet, View, Dimensions } from "react-native";
 import { BigNumber } from "bignumber.js";
 
 import {
@@ -14,6 +14,7 @@ import type { Unit } from "@ledgerhq/live-common/lib/types";
 
 import getFontStyle from "./LText/getFontStyle";
 import { withTheme } from "../colors";
+import TextInput from "./FocusedTextInput";
 
 function format(
   unit: Unit,
@@ -47,6 +48,7 @@ type Props = {
   style?: *,
   inputStyle?: *,
   colors: *,
+  dynamicFontRatio?: number,
 };
 
 type State = {
@@ -67,6 +69,7 @@ class CurrencyInput extends PureComponent<Props, State> {
     hasWarning: false,
     autoFocus: false,
     editable: true,
+    dynamicFontRatio: 0.75,
   };
 
   state = {
@@ -149,11 +152,12 @@ class CurrencyInput extends PureComponent<Props, State> {
       editable,
       placeholder,
       colors,
+      dynamicFontRatio = 0.75,
     } = this.props;
     const { displayValue } = this.state;
 
     // calculating an approximative font size
-    const screenWidth = Dimensions.get("window").width * 0.75;
+    const screenWidth = Dimensions.get("window").width * dynamicFontRatio;
     const dynamicFontSize = Math.round(
       clamp(
         Math.sqrt((screenWidth * 32) / displayValue.length),

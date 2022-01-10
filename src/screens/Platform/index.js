@@ -1,13 +1,14 @@
 // @flow
 
-import React, { useMemo, useCallback, useState } from "react";
-import { StyleSheet, ScrollView, View, Linking } from "react-native";
+import React, { useMemo, useCallback, useState, useEffect } from "react";
+import { StyleSheet, View, Linking } from "react-native";
 import { Trans } from "react-i18next";
 import { useNavigation, useTheme } from "@react-navigation/native";
 import { usePlatformApp } from "@ledgerhq/live-common/lib/platform/PlatformAppProvider";
 import { filterPlatformApps } from "@ledgerhq/live-common/lib/platform/PlatformAppProvider/helpers";
 import type { AccountLike, Account } from "@ledgerhq/live-common/lib/types";
 import type { AppManifest } from "@ledgerhq/live-common/lib/platform/types";
+import useEnv from "@ledgerhq/live-common/lib/hooks/useEnv";
 
 import { useBanner } from "../../components/banners/hooks";
 import TrackScreen from "../../analytics/TrackScreen";
@@ -39,16 +40,21 @@ const PlatformCatalog = ({ route }: { route: { params: RouteParams } }) => {
   const navigation = useNavigation();
 
   const { manifests } = usePlatformApp();
+  const experimental = useEnv("PLATFORM_EXPERIMENTAL_APPS");
 
   const filteredManifests = useMemo(() => {
-    const branches = ["stable", "soon"];
+    const branches = [
+      "stable",
+      "soon",
+      ...(experimental ? ["experimental"] : []),
+    ];
 
     return filterPlatformApps(Array.from(manifests.values()), {
       version: "0.0.1",
       platform: "mobile",
       branches,
     });
-  }, []);
+  }, [manifests, experimental]);
 
   // Disclaimer State
   const [disclaimerOpts, setDisclaimerOpts] = useState<DisclaimerOpts>(null);
@@ -85,18 +91,20 @@ const PlatformCatalog = ({ route }: { route: { params: RouteParams } }) => {
     Linking.openURL(urls.platform.developerPage);
   }, []);
 
-  // platform can be predefined when coming from a deeplink
-  if (platform) {
-    const manifest = filteredManifests.find(m => m.id === platform);
+  useEffect(() => {
+    // platform can be predefined when coming from a deeplink
+    if (platform && filteredManifests) {
+      const manifest = filteredManifests.find(m => m.id === platform);
 
-    if (manifest) {
-      navigation.navigate(ScreenName.PlatformApp, {
-        ...routeParams,
-        platform: manifest.id,
-        name: manifest.name,
-      });
+      if (manifest) {
+        navigation.navigate(ScreenName.PlatformApp, {
+          ...routeParams,
+          platform: manifest.id,
+          name: manifest.name,
+        });
+      }
     }
-  }
+  }, [platform, filteredManifests, navigation, routeParams]);
 
   return (
     <AnimatedHeaderView
@@ -104,7 +112,6 @@ const PlatformCatalog = ({ route }: { route: { params: RouteParams } }) => {
       title={<Trans i18nKey={"platform.catalog.title"} />}
     >
       <TrackScreen category="Platform" name="Catalog" />
-
       {disclaimerOpts && (
         <DAppDisclaimer
           disableDisclaimer={disclaimerOpts.disableDisclaimer}
@@ -115,34 +122,29 @@ const PlatformCatalog = ({ route }: { route: { params: RouteParams } }) => {
         />
       )}
 
-      <ScrollView style={styles.wrapper}>
-        <CatalogBanner />
-        <CatalogTwitterBanner />
-        {filteredManifests.map(manifest => (
-          <AppCard
-            key={manifest.id}
-            manifest={manifest}
-            onPress={handlePressCard}
-          />
-        ))}
-        <View style={[styles.separator, { backgroundColor: colors.fog }]} />
-        <CatalogCTA
-          Icon={IconCode}
-          title={<Trans i18nKey={"platform.catalog.developerCTA.title"} />}
-          onPress={handleDeveloperCTAPress}
-        >
-          <Trans i18nKey={"platform.catalog.developerCTA.description"} />
-        </CatalogCTA>
-      </ScrollView>
+      <CatalogBanner />
+      <CatalogTwitterBanner />
+      {filteredManifests.map(manifest => (
+        <AppCard
+          key={manifest.id}
+          manifest={manifest}
+          onPress={handlePressCard}
+        />
+      ))}
+      <View style={[styles.separator, { backgroundColor: colors.fog }]} />
+      <CatalogCTA
+        Icon={IconCode}
+        title={<Trans i18nKey={"platform.catalog.developerCTA.title"} />}
+        onPress={handleDeveloperCTAPress}
+      >
+        <Trans i18nKey={"platform.catalog.developerCTA.description"} />
+      </CatalogCTA>
     </AnimatedHeaderView>
   );
 };
 
 const styles = StyleSheet.create({
   root: {
-    flex: 1,
-  },
-  wrapper: {
     flex: 1,
   },
   title: {

@@ -25,6 +25,9 @@ function getSettingsScreen(pathname) {
     case "experimental":
       screen = ScreenName.ExperimentalSettings;
       break;
+    case "developer":
+      screen = ScreenName.DeveloperSettings;
+      break;
     default:
       screen = ScreenName.Settings;
   }
@@ -87,7 +90,7 @@ export function useDeepLinkHandler() {
           break;
         case "send":
           navigate(NavigatorName.SendFunds, {
-            screen: ScreenName.SendFundsMain,
+            screen: ScreenName.SendCoin,
             params: { currency },
           });
           break;

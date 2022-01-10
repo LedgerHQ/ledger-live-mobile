@@ -48,6 +48,7 @@ export const ScreenName = {
   DelegationSummary: "DelegationSummary",
   DelegationValidationError: "DelegationValidationError",
   DelegationValidationSuccess: "DelegationValidationSuccess",
+  DeveloperSettings: "DeveloperSettings",
   DisplayResult: "DisplayResult",
   Distribution: "Distribution",
   EditAccountName: "EditAccountName",
@@ -107,9 +108,12 @@ export const ScreenName = {
   RippleEditTag: "RippleEditTag",
   ScanAccounts: "ScanAccounts",
   ScanRecipient: "ScanRecipient",
-  SendAmount: "SendAmount",
+  SendAmountCoin: "SendAmountCoin",
+  SendAmountNft: "SendAmountNft",
   SendConnectDevice: "SendConnectDevice",
-  SendFundsMain: "SendFundsMain",
+  SendCoin: "SendCoin",
+  SendCollection: "SendCollection",
+  SendNft: "SendNft",
   SendSelectDevice: "SendSelectDevice",
   SendSelectRecipient: "SendSelectRecipient",
   SendSummary: "SendSummary",
@@ -136,6 +140,12 @@ export const ScreenName = {
   SwapOperationDetails: "SwapOperationDetails",
   SwapPendingOperation: "SwapPendingOperation",
   SwapSummary: "SwapSummary",
+
+  SwapV2FormSelectAccount: "SwapV2FormSelectAccount",
+  SwapV2FormSelectCurrency: "SwapV2FormSelectCurrency",
+  SwapV2FormSelectFees: "SwapV2FormSelectFees",
+  SwapFormSelectProviderRate: "SwapFormSelectProviderRate",
+
   TezosDelegationFlow: "TezosDelegationFlow",
   Transfer: "Transfer",
   UnfreezeAmount: "UnfreezeAmount",
@@ -302,6 +312,9 @@ export const ScreenName = {
   RequestAccountsSelectAccount: "RequestAccountsSelectAccount",
 
   VerifyAccount: "VerifyAccount",
+
+  // solana
+  SolanaEditMemo: "SolanaEditMemo",
 };
 
 export const NavigatorName = {

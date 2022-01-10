@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, useCallback } from "react";
 
 import {
   ScrollView,
@@ -9,14 +9,19 @@ import {
   Platform,
   TouchableOpacity,
 } from "react-native";
+import { BigNumber } from "bignumber.js";
+import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { useTheme } from "@react-navigation/native";
-import { useNftMetadata } from "@ledgerhq/live-common/lib/nft";
+import { useNavigation, useTheme } from "@react-navigation/native";
+import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
+import { useNftMetadata, decodeNftId } from "@ledgerhq/live-common/lib/nft";
 
 import type { NFT, CollectionWithNFT } from "@ledgerhq/live-common/lib/nft";
 
+import { accountSelector } from "../../reducers/accounts";
 import NftLinksPanel from "./NftLinksPanel";
-// import SendIcon from "../../icons/Send";
+import { ScreenName, NavigatorName } from "../../const";
+import SendIcon from "../../icons/Send";
 import { rgba } from "../../colors";
 import Skeleton from "../Skeleton";
 import NftImage from "./NftImage";
@@ -46,22 +51,29 @@ const Section = ({
   children?: React$Node,
 }) => (
   <View style={style}>
-    <LText style={styles.sectionTitle}>{title}</LText>
-    {value ? <LText semiBold>{value}</LText> : children}
+    <LText style={styles.sectionTitle} semiBold>
+      {title}
+    </LText>
+    {value ? <LText>{value}</LText> : children}
   </View>
 );
 
-const NftViewer = ({ route: { params } }: Props) => {
+const NftViewer = ({ route }: Props) => {
+  const { params } = route;
   const { nft, collection } = params;
   const { status, metadata } = useNftMetadata(collection.contract, nft.tokenId);
   const { colors } = useTheme();
   const { t } = useTranslation();
+  const navigation = useNavigation();
+
+  const { accountId } = decodeNftId(nft.id);
+  const account = useSelector(state => accountSelector(state, { accountId }));
 
   const [bottomModalOpen, setBottomModalOpen] = useState(false);
   const isLoading = status === "loading";
 
   const defaultLinks = {
-    openSea: `https://opensea.io/assets/${collection.contract}/${nft.tokenId}`,
+    opensea: `https://opensea.io/assets/${collection.contract}/${nft.tokenId}`,
     rarible: `https://rarible.com/token/${collection.contract}:${nft.tokenId}`,
     etherscan: `https://etherscan.io/token/${collection.contract}?a=${nft.tokenId}`,
   };
@@ -69,6 +81,27 @@ const NftViewer = ({ route: { params } }: Props) => {
   const closeModal = () => {
     setBottomModalOpen(false);
   };
+
+  const goToRecipientSelection = useCallback(() => {
+    const bridge = getAccountBridge(account);
+
+    let transaction = bridge.createTransaction(account);
+    transaction = bridge.updateTransaction(transaction, {
+      tokenIds: [nft.tokenId],
+      quantities: [BigNumber(1)],
+      collection: collection.contract,
+      mode: `${collection.standard?.toLowerCase()}.transfer`,
+    });
+
+    navigation.navigate(NavigatorName.SendFunds, {
+      screen: ScreenName.SendSelectRecipient,
+      params: {
+        accountId: account.id,
+        parentId: account?.parentAccount?.id,
+        transaction,
+      },
+    });
+  }, [account, nft, collection, navigation]);
 
   const properties = useMemo(() => {
     if (isLoading) {
@@ -107,7 +140,7 @@ const NftViewer = ({ route: { params } }: Props) => {
               ]}
               key={i}
             >
-              <LText style={{ color: rgba(colors.live, 0.5) }}>
+              <LText semiBold style={{ color: rgba(colors.live, 0.5) }}>
                 {prop.key}
               </LText>
               <LText style={{ color: colors.live }}>{prop.value}</LText>
@@ -117,26 +150,26 @@ const NftViewer = ({ route: { params } }: Props) => {
       );
     }
 
-    return (
-      <View style={[styles.main]}>
-        <LText semiBold>-</LText>
-      </View>
-    );
+    return null;
   }, [colors, isLoading, metadata]);
 
-  const description = useMemo(
-    () =>
-      isLoading ? (
+  const description = useMemo(() => {
+    if (isLoading) {
+      return (
         <>
           <Skeleton style={styles.partDescriptionSkeleton} loading={true} />
           <Skeleton style={styles.partDescriptionSkeleton} loading={true} />
           <Skeleton style={styles.partDescriptionSkeleton} loading={true} />
         </>
-      ) : (
-        <LText semiBold>{metadata?.description || "-"}</LText>
-      ),
-    [isLoading, metadata],
-  );
+      );
+    }
+
+    if (metadata?.description) {
+      return <LText>{metadata.description}</LText>;
+    }
+
+    return null;
+  }, [isLoading, metadata]);
 
   return (
     <View>
@@ -153,7 +186,7 @@ const NftViewer = ({ route: { params } }: Props) => {
             style={[styles.nftName, styles.nftNameSkeleton]}
             loading={isLoading}
           >
-            <LText style={styles.nftName} semiBold>
+            <LText style={styles.nftName} numberOfLines={3} semiBold>
               {metadata?.nftName || "-"}
             </LText>
           </Skeleton>
@@ -168,15 +201,15 @@ const NftViewer = ({ route: { params } }: Props) => {
           </View>
 
           <View style={styles.buttons}>
-            {/* <View style={styles.sendButtonContainer}>
+            <View style={styles.sendButtonContainer}>
               <Button
                 type="primary"
                 IconLeft={SendIcon}
                 containerStyle={styles.sendButton}
                 title={t("account.send")}
-                onPress={() => {}}
+                onPress={goToRecipientSelection}
               />
-            </View> */}
+            </View>
             <View style={styles.ellipsisButtonContainer}>
               <Button
                 type="primary"
@@ -189,21 +222,27 @@ const NftViewer = ({ route: { params } }: Props) => {
         </View>
 
         {/* This weird thing is because we want a full width scrollView withtout the paddings */}
-        <>
-          <View style={styles.propertiesContainer}>
-            <LText style={styles.sectionTitle}>
-              {t("nft.viewer.properties")}
-            </LText>
-          </View>
-          {properties}
-        </>
+        {properties && (
+          <>
+            <View style={styles.propertiesContainer}>
+              <LText style={styles.sectionTitle}>
+                {t("nft.viewer.properties")}
+              </LText>
+            </View>
+            {properties}
+            <View style={styles.hr} />
+          </>
+        )}
 
         <View style={styles.main}>
-          <View style={styles.hr} />
-
-          <Section title={t("nft.viewer.description")}>{description}</Section>
-
-          <View style={styles.hr} />
+          {description && (
+            <>
+              <Section title={t("nft.viewer.description")}>
+                {description}
+              </Section>
+              <View style={styles.hr} />
+            </>
+          )}
 
           <Section
             title={t("nft.viewer.tokenContract")}
@@ -214,14 +253,17 @@ const NftViewer = ({ route: { params } }: Props) => {
 
           <Section title={t("nft.viewer.tokenId")} value={nft.tokenId} />
 
-          <View style={styles.hr} />
-
-          <TouchableOpacity onPress={closeModal}>
-            <Section
-              title={t("nft.viewer.quantity")}
-              value={nft.amount.toFixed()}
-            />
-          </TouchableOpacity>
+          {collection.standard === "ERC1155" && (
+            <>
+              <View style={styles.hr} />
+              <TouchableOpacity onPress={closeModal}>
+                <Section
+                  title={t("nft.viewer.quantity")}
+                  value={nft.amount.toFixed()}
+                />
+              </TouchableOpacity>
+            </>
+          )}
         </View>
       </ScrollView>
       <NftLinksPanel
