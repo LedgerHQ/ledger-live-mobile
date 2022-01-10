@@ -263,8 +263,8 @@
       "description": null
     },
     "EthAppNftNotSupported": {
-      "title": "Operation not available for this device",
-      "description": "Send NFT feature is only available for Nano X. Please visit our customer support platform to know how to send a NFT with a Nano S."
+      "title": "お使いのデバイスではこの操作をご利用いただけません",
+      "description": "NFTの送付は、Nano Xでのみご利用いただけます。カスタマーサポートページから、Nano SでNFTを送付する方法をご確認ください。"
     },
     "Touch ID Error": {
       "title": "生体認証に失敗しました。",
@@ -304,7 +304,7 @@
       "title": "これは有効な{{currencyName}}アドレスではありません。"
     },
     "InvalidAddressBecauseAlreadyDelegated": {
-      "title": "Your account is already delegated to this validator"
+      "title": "アカウントは既にバリデーターへデリゲート済みです"
     },
     "InvalidAddressBecauseDestinationIsAlsoSource": {
       "title": "送り元アカウントと送り先アカウントが同じです。"
@@ -612,13 +612,13 @@
       "description": "問題が発生しました。もう一度お試しください。問題が解決しない場合は、以下のボタンを使ってログを保存し、Ledgerサポートに提出してください。"
     },
     "SolanaAccountNotFunded": {
-      "title": "Account not funded"
+      "title": "アカウントに資金がありません"
     },
     "SolanaAddressOfEd25519": {
-      "title": "Address off ed25519 curve"
+      "title": "アドレスオフed25519 curve"
     },
     "SolanaMemoIsTooLong": {
-      "title": "Memo is too long. Max length is {{maxLength}}"
+      "title": "Memoが長すぎます。最長{{maxLength}}以内で入力してください。"
     }
   },
   "bluetooth": {
@@ -1759,8 +1759,8 @@
       "disclaimer": "テクノロジーファンのコミュニティ向けに、現状のまま提供される試験的な機能です。これらの機能は随時変更、破損、または削除される可能性があります。このオプションを有効にした場合、自己責任でこれらの機能を利用することに同意したことになります。"
     },
     "developer": {
-      "title": "Developer",
-      "desc": "Try out the Developer features and let us know what you think."
+      "title": "デベロッパー",
+      "desc": "試験的機能をお試しになり、フィードバックをお寄せください。"
     }
   },
   "migrateAccounts": {
@@ -1824,7 +1824,7 @@
       "copyAddress": "アドレスをコピー",
       "shareAddress": "アドレスを共有",
       "addressCopied": "アドレスをコピーしました！",
-      "taprootWarning": "Make sure the sender supports taproot",
+      "taprootWarning": "送付元がtaprootに対応しているか確認してください",
       "notSynced": {
         "text": "同期中",
         "desc": "トランザクションの数が多い場合やインターネット接続が遅い場合、しばらく時間がかかることがあります。"
@@ -1866,8 +1866,8 @@
           "subtitle": "個人情報はKYC用にLedgerによって収集された後、WYREに転送されます。詳しくはプライバシーポリシーをご確認ください。",
           "pending": {
             "cta": "続行",
-            "title": "Your information has been submitted for approval",
-            "subtitle": "It usually takes only a few minutes before you can start swapping",
+            "title": "承認のためデータが提出されました。",
+            "subtitle": "スワップがご利用可能になるまで、数分かかる場合があります",
             "link": "KYC（本人確認）についての詳細"
           },
           "approved": {
@@ -1920,9 +1920,9 @@
         "cta": "閉じる"
       },
       "pendingOperation": {
-        "description": "Your Swap operation has been sent to the network for confirmation. It may take up to an hour before you receive your swapped {{targetCurrency}} assets",
+        "description": "承認のため、スワップ処理がネットワークに送信されました。{{targetCurrency}}を受け取るまでに、最大1時間かかる場合があります。",
         "label": "スワップID：",
-        "title": "Pending operation",
+        "title": "保留中の処理",
         "disclaimer": "{{provider}} のサポートが必要な場合に備えて、スワップID番号を控えておいてください。",
         "cta": "詳細を表示"
       },
@@ -1942,22 +1942,22 @@
         "button": "続行",
         "from": "交換元",
         "to": "交換先",
-        "source": "Source",
-        "target": "Target account",
-        "noAccount": "You don’t have {{currency}} account",
+        "source": "ソース",
+        "target": "ターゲットアカウント",
+        "noAccount": "{{currency}}アカウントを持っていません。",
         "balance": "残高<0>123</0>",
         "fromAccount": "アカウントを選択",
         "toAccount": "アカウントを選択",
         "paraswapCTA": "Paraswapをお探しですか？この項目は「Discover」タブに移動されました！",
-        "quote": "Quote",
-        "receive": "Receive",
+        "quote": "見積もり",
+        "receive": "受け取る",
         "amount": {
           "useMax": "全額を選択",
           "available": "合計利用可能額"
         },
         "noAsset": {
-          "title": "You have no asset to swap",
-          "desc": "Buy some and come back to swap"
+          "title": "スワップする資産がありません",
+          "desc": "暗号資産を購入してスワップへ戻る"
         },
         "noApp": {
           "title": "{{appName}}アプリがインストールされていません。",
@@ -2042,16 +2042,16 @@
     "swapv2": {
       "form": {
         "summary": {
-          "from": "From",
-          "to": "To",
-          "send": "Send",
-          "payoutNetworkFees": "Payout fees",
-          "payoutNetworkFeesTooltip": "This amount will not be shown on your device",
-          "receive": "Amount",
-          "receiveFloat": "Amount to receive before service fees",
-          "provider": "Provider",
-          "method": "Rate",
-          "fees": "Fees"
+          "from": "送付元",
+          "to": "送付先",
+          "send": "送る",
+          "payoutNetworkFees": "ペイアウト手数料",
+          "payoutNetworkFeesTooltip": "この値はデバイスには表示されません",
+          "receive": "数量",
+          "receiveFloat": "サービス手数料を含まない受け取り額",
+          "provider": "プロバイダー",
+          "method": "レート",
+          "fees": "手数料"
         }
       }
     },
