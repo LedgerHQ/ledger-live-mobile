@@ -263,8 +263,8 @@
       "description": null
     },
     "EthAppNftNotSupported": {
-      "title": "Operation not available for this device",
-      "description": "Send NFT feature is only available for Nano X. Please visit our customer support platform to know how to send a NFT with a Nano S."
+      "title": "Vorgang auf diesem Gerät nicht verfügbar",
+      "description": "Funktion zum Senden von NFTs ist nur für Nano X verfügbar. Bitte besuchen Sie unsere Kunden-Support-Plattform, um herauszufinden, wie man ein NFT mit einem Nano S sendet."
     },
     "Touch ID Error": {
       "title": "Biometrische Authentifizierung fehlgeschlagen",
@@ -304,7 +304,7 @@
       "title": "Dies ist keine gültige {{currencyName}} Adresse"
     },
     "InvalidAddressBecauseAlreadyDelegated": {
-      "title": "Your account is already delegated to this validator"
+      "title": "Ihr Konto wurde bereits an diesen Validator delegiert"
     },
     "InvalidAddressBecauseDestinationIsAlsoSource": {
       "title": "Ziel- und Quellkonto dürfen nicht identisch sein."
@@ -1759,8 +1759,8 @@
       "disclaimer": "Dies sind experimentelle Funktionen, die auf einer „wie besehen“-Basis für unsere Gemeinschaft von Technik-Enthusiasten bereitgestellt werden. Sie können sich jederzeit ändern, kaputt gehen oder entfernt werden. Wenn Sie sie aktivieren, erklären Sie sich damit einverstanden, diese auf eigenes Risiko zu verwenden."
     },
     "developer": {
-      "title": "Developer",
-      "desc": "Try out the Developer features and let us know what you think."
+      "title": "Entwickler",
+      "desc": "Probieren Sie die experimentellen Entwicklerfunktionen aus und lassen Sie uns wissen, was Sie davon halten."
     }
   },
   "migrateAccounts": {
@@ -1824,7 +1824,7 @@
       "copyAddress": "Adresse kopieren",
       "shareAddress": "Adresse teilen",
       "addressCopied": "Adresse kopiert!",
-      "taprootWarning": "Make sure the sender supports taproot",
+      "taprootWarning": "Stellen Sie sicher, dass der Absender taproot unterstützt",
       "notSynced": {
         "text": "Synchronisieren",
         "desc": "Dies kann einen Moment dauern, wenn Sie viele Transaktionen haben oder eine langsame Internetverbindung."
@@ -1866,8 +1866,8 @@
           "subtitle": "Ihre Daten werden von LEDGER im Auftrag von WYRE gesammelt und zu KYC-Zwecken an WYRE übertragen. Für weitere Informationen lesen Sie bitte unsere Datenschutzrichtlinie",
           "pending": {
             "cta": "Weiter",
-            "title": "Your information has been submitted for approval",
-            "subtitle": "It usually takes only a few minutes before you can start swapping",
+            "title": "Ihre Daten wurden zur Bestätigung übermittelt",
+            "subtitle": "Es dauert in der Regel nur wenige Minuten, bis Sie mit dem Swapping beginnen können",
             "link": "Erfahren Sie mehr über KYC"
           },
           "approved": {
@@ -1920,7 +1920,7 @@
         "cta": "Schließen"
       },
       "pendingOperation": {
-        "description": "Your Swap operation has been sent to the network for confirmation. It may take up to an hour before you receive your swapped {{targetCurrency}} assets",
+        "description": "Ihr Tauschvorgang wurde zur Bestätigung an das Netzwerk gesendet. Es kann bis zu einer Stunde dauern, bis Sie Ihre {{targetCurrency}} Vermögenswerte erhalten",
         "label": "Ihre Swap-ID:",
         "title": "Pending operation",
         "disclaimer": "Notieren Sie sich Ihre Tausch-ID-Nummer für den Fall, dass Sie Hilfe vom {{provider}} Support benötigen.",
