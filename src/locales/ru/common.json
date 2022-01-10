@@ -304,7 +304,7 @@
       "title": "Некорректный адрес {{currencyName}}"
     },
     "InvalidAddressBecauseAlreadyDelegated": {
-      "title": "Your account is already delegated to this validator"
+      "title": "Ваш счёт уже делегирован этому валидатору"
     },
     "InvalidAddressBecauseDestinationIsAlsoSource": {
       "title": "Счета получателя и отправителя не должны совпадать."
@@ -1759,8 +1759,8 @@
       "disclaimer": "Это Экспериментальные функции, предоставляемые на условиях «как есть» для нашего сообщества технических энтузиастов. Эти функции могут быть изменены, заблокированы или удалены в любое время. Активируя их, вы принимаете на себя все риски использования."
     },
     "developer": {
-      "title": "Developer",
-      "desc": "Try out the Developer features and let us know what you think."
+      "title": "Разработчикам",
+      "desc": "Попробуйте функции для разработчиков и расскажите нам, что вы думаете."
     }
   },
   "migrateAccounts": {
