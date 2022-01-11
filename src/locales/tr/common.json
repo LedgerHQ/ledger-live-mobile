@@ -1760,7 +1760,10 @@
     },
     "developer": {
       "title": "Geliştirici",
-      "desc": "Geliştirici özelliklerini deneyip ne düşündüğünüzü bize bildirin."
+      "desc": "Geliştirici özelliklerini deneyip ne düşündüğünüzü bize bildirin.",
+      "customManifest": {
+        "title": "Load Custom Platform Manifest"
+      }
     }
   },
   "migrateAccounts": {
