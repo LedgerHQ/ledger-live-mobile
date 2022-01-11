@@ -1760,7 +1760,10 @@
     },
     "developer": {
       "title": "Desarrollador",
-      "desc": "Prueba las funciones experimentales y envíanos tu opinión."
+      "desc": "Prueba las funciones experimentales y envíanos tu opinión.",
+      "customManifest": {
+        "title": "Load Custom Platform Manifest"
+      }
     }
   },
   "migrateAccounts": {
