@@ -111,7 +111,7 @@ jobs:
           ANDROID_KEYSTORE_PASS: staging
           ANDROID_KEY_ALIAS: staging
           ANDROID_KEY_PASS: staging
-        run: ANDROID_KEYSTORE_FILE="$(pwd)/android/app/staging.kstr" pnpm run android:local:apk --enable-pre-post-scripts
+        run: ANDROID_KEYSTORE_FILE="$(pwd)/android/app/staging.kstr" pnpm run android:local:apk
       - uses: ledgerhq/actions/get-package-infos@v1.0.0
         id: post-version
       - name: upload Android app
@@ -158,7 +158,7 @@ jobs:
           ANDROID_KEYSTORE_PASS: staging
           ANDROID_KEY_ALIAS: staging
           ANDROID_KEY_PASS: staging
-        run: ANDROID_KEYSTORE_FILE="$(pwd)/android/app/staging.kstr" pnpm run android:local:apk --enable-pre-post-scripts
+        run: ANDROID_KEYSTORE_FILE="$(pwd)/android/app/staging.kstr" pnpm run android:local:apk
       - uses: ledgerhq/actions/get-package-infos@v1.0.0
         id: post-version
       - name: upload Android app
