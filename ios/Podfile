@@ -1,10 +1,10 @@
+# Use the node resolver because pnpm nests modules.
 def relative_path(module_name)
   module_pathname = Pathname.new File.dirname(`node --print "require.resolve('#{module_name}/package.json')"`)
   module_pathname.relative_path_from(Pathname.new File.absolute_path ".")
 end
 
 expo_autolinking = File.join(relative_path("expo"), "scripts/autolinking")
-legder_core = relative_path("@ledgerhq/react-native-ledger-core")
 rct_text = File.join(relative_path("react-native"), "Libraries/Text")
 
 require expo_autolinking
@@ -24,10 +24,6 @@ target 'ledgerlivemobile' do
     # to enable hermes on iOS, change `false` to `true` and then install pods
     :hermes_enabled => false
   )
-
-  # pod 'djinni_objc', :path => legder_core
-  pod 'ledger-core-objc', :path => legder_core
-  pod 'RNLibLedgerCore', :path => legder_core
 
   pod 'React-RCTText', :path => rct_text, :modular_headers => true
 

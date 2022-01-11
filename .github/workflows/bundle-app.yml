@@ -81,17 +81,20 @@ jobs:
       - name: install yarn
         if: always()
         run: npm install --global yarn
-      - name: Get yarn cache
-        id: yarn-cache
-        run: echo "::set-output name=dir::$(yarn cache dir)"
+      - name: install pnpm
+        if: always()
+        run: npm install --global pnpm
+      - name: Get pnpm store
+        id: pnpm-store
+        run: echo "::set-output name=dir::$(pnpm store path)"
       - uses: actions/cache@v2.1.3
         with:
-          path: ${{ steps.yarn-cache.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          path: ${{ steps.pnpm-store.outputs.dir }}
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
-            ${{ runner.os }}-yarn-
+            ${{ runner.os }}-pnpm-
       - name: install dependencies
-        run: yarn --frozen-lockfile --network-timeout 100000
+        run: pnpm --frozen-lockfile --network-timeout 100000
       - uses: ledgerhq/actions/get-package-infos@v1.0.0
         id: version
       - name: set beta name
@@ -108,7 +111,7 @@ jobs:
           ANDROID_KEYSTORE_PASS: staging
           ANDROID_KEY_ALIAS: staging
           ANDROID_KEY_PASS: staging
-        run: ANDROID_KEYSTORE_FILE="$(pwd)/android/app/staging.kstr" yarn android:local:apk
+        run: ANDROID_KEYSTORE_FILE="$(pwd)/android/app/staging.kstr" pnpm android:local:apk
       - uses: ledgerhq/actions/get-package-infos@v1.0.0
         id: post-version
       - name: upload Android app
@@ -133,12 +136,12 @@ jobs:
       - uses: actions/setup-node@main
         with:
           node-version: 14.x
-          cache: yarn
+          cache: pnpm
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: 2.6
       - name: install dependencies
-        run: yarn --frozen-lockfile --network-timeout 100000
+        run: pnpm --frozen-lockfile --network-timeout 100000
       - uses: ledgerhq/actions/get-package-infos@v1.0.0
         id: version
       - name: set beta name
@@ -155,7 +158,7 @@ jobs:
           ANDROID_KEYSTORE_PASS: staging
           ANDROID_KEY_ALIAS: staging
           ANDROID_KEY_PASS: staging
-        run: ANDROID_KEYSTORE_FILE="$(pwd)/android/app/staging.kstr" yarn android:local:apk
+        run: ANDROID_KEYSTORE_FILE="$(pwd)/android/app/staging.kstr" pnpm android:local:apk
       - uses: ledgerhq/actions/get-package-infos@v1.0.0
         id: post-version
       - name: upload Android app

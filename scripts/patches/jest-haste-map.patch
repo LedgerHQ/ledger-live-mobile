@@ -1,0 +1,13 @@
+--- node_modules/.pnpm/metro@0.66.2/node_modules/jest-haste-map/build/crawlers/node.js	2022-01-11 15:38:34.000000000 +0100
++++ node_modules/.pnpm/metro@0.66.2/node_modules/jest-haste-map/build/crawlers/node copy.js	2022-01-11 15:38:16.000000000 +0100
+@@ -169,6 +169,10 @@
+ 
+           if (typeof entry !== 'string') {
+             if (entry.isSymbolicLink()) {
++              fs().stat(file, (err, stat) => {
++                if(!err && stat.isDirectory())
++                  search(file);
++              })
+               return;
+             }
+ 

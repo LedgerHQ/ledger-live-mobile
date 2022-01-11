@@ -30,8 +30,6 @@ PODS:
   - fmt (6.2.1)
   - glog (0.3.5)
   - InputMask (6.1.0)
-  - ledger-core-objc (4.19.1):
-    - djinni_objc
   - libwebp (1.2.1):
     - libwebp/demux (= 1.2.1)
     - libwebp/mux (= 1.2.1)
@@ -358,9 +356,6 @@ PODS:
     - React-Core
   - RNKeychain (7.0.0):
     - React-Core
-  - RNLibLedgerCore (4.19.1):
-    - ledger-core-objc
-    - React
   - RNOS (1.2.6):
     - React
   - RNReanimated (2.3.1):
@@ -394,7 +389,7 @@ PODS:
   - RNScreens (3.10.1):
     - React-Core
     - React-RCTImage
-  - RNSentry (3.2.10):
+  - RNSentry (3.2.11):
     - React-Core
     - Sentry (= 7.7.0)
   - RNShare (6.5.0):
@@ -432,7 +427,6 @@ DEPENDENCIES:
   - "FBLazyVector (from `../node_modules/.pnpm/react-native@0.65.1_react@17.0.2/node_modules/react-native/Libraries/FBLazyVector`)"
   - "FBReactNativeSpec (from `../node_modules/.pnpm/react-native@0.65.1_react@17.0.2/node_modules/react-native/React/FBReactNativeSpec`)"
   - "glog (from `../node_modules/.pnpm/react-native@0.65.1_react@17.0.2/node_modules/react-native/third-party-podspecs/glog.podspec`)"
-  - "ledger-core-objc (from `../node_modules/.pnpm/@ledgerhq+react-native-ledger-core@4.19.1_react-native@0.65.1/node_modules/@ledgerhq/react-native-ledger-core`)"
   - "lottie-ios (from `../node_modules/.pnpm/lottie-ios@3.2.3/node_modules/lottie-ios`)"
   - "lottie-react-native (from `../node_modules/.pnpm/lottie-react-native@4.1.3_3ed91fda457636259aac3b2e485a319e/node_modules/lottie-react-native`)"
   - "PasscodeAuth (from `../node_modules/.pnpm/@ledgerhq+react-native-passcode-auth@2.1.0/node_modules/@ledgerhq/react-native-passcode-auth`)"
@@ -482,11 +476,10 @@ DEPENDENCIES:
   - "RNFastImage (from `../node_modules/.pnpm/react-native-fast-image@8.5.11_react-native@0.65.1+react@17.0.2/node_modules/react-native-fast-image`)"
   - "RNGestureHandler (from `../node_modules/.pnpm/react-native-gesture-handler@1.10.3/node_modules/react-native-gesture-handler`)"
   - "RNKeychain (from `../node_modules/.pnpm/react-native-keychain@7.0.0/node_modules/react-native-keychain`)"
-  - "RNLibLedgerCore (from `../node_modules/.pnpm/@ledgerhq+react-native-ledger-core@4.19.1_react-native@0.65.1/node_modules/@ledgerhq/react-native-ledger-core`)"
   - "RNOS (from `../node_modules/.pnpm/react-native-os@1.2.6/node_modules/react-native-os`)"
   - "RNReanimated (from `../node_modules/.pnpm/react-native-reanimated@2.3.1_f1cb2e1fcdd6b5f4e9a03a04406ce805/node_modules/react-native-reanimated`)"
   - "RNScreens (from `../node_modules/.pnpm/react-native-screens@3.10.1_react-native@0.65.1+react@17.0.2/node_modules/react-native-screens`)"
-  - "RNSentry (from `../node_modules/.pnpm/@sentry+react-native@3.2.10_react-native@0.65.1+react@17.0.2/node_modules/@sentry/react-native`)"
+  - "RNSentry (from `../node_modules/.pnpm/@sentry+react-native@3.2.11_react-native@0.65.1+react@17.0.2/node_modules/@sentry/react-native`)"
   - "RNShare (from `../node_modules/.pnpm/react-native-share@6.5.0/node_modules/react-native-share`)"
   - "RNSVG (from `../node_modules/.pnpm/react-native-svg@12.1.1_react-native@0.65.1+react@17.0.2/node_modules/react-native-svg`)"
   - "RNVectorIcons (from `../node_modules/.pnpm/react-native-vector-icons@8.1.0/node_modules/react-native-vector-icons`)"
@@ -528,9 +521,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/.pnpm/react-native@0.65.1_react@17.0.2/node_modules/react-native/React/FBReactNativeSpec"
   glog:
     :podspec: "../node_modules/.pnpm/react-native@0.65.1_react@17.0.2/node_modules/react-native/third-party-podspecs/glog.podspec"
-  ledger-core-objc:
-    :path: !ruby/object:Pathname
-    path: "../node_modules/.pnpm/@ledgerhq+react-native-ledger-core@4.19.1_react-native@0.65.1/node_modules/@ledgerhq/react-native-ledger-core"
   lottie-ios:
     :path: "../node_modules/.pnpm/lottie-ios@3.2.3/node_modules/lottie-ios"
   lottie-react-native:
@@ -625,9 +615,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/.pnpm/react-native-gesture-handler@1.10.3/node_modules/react-native-gesture-handler"
   RNKeychain:
     :path: "../node_modules/.pnpm/react-native-keychain@7.0.0/node_modules/react-native-keychain"
-  RNLibLedgerCore:
-    :path: !ruby/object:Pathname
-    path: "../node_modules/.pnpm/@ledgerhq+react-native-ledger-core@4.19.1_react-native@0.65.1/node_modules/@ledgerhq/react-native-ledger-core"
   RNOS:
     :path: "../node_modules/.pnpm/react-native-os@1.2.6/node_modules/react-native-os"
   RNReanimated:
@@ -635,7 +622,7 @@ EXTERNAL SOURCES:
   RNScreens:
     :path: "../node_modules/.pnpm/react-native-screens@3.10.1_react-native@0.65.1+react@17.0.2/node_modules/react-native-screens"
   RNSentry:
-    :path: "../node_modules/.pnpm/@sentry+react-native@3.2.10_react-native@0.65.1+react@17.0.2/node_modules/@sentry/react-native"
+    :path: "../node_modules/.pnpm/@sentry+react-native@3.2.11_react-native@0.65.1+react@17.0.2/node_modules/@sentry/react-native"
   RNShare:
     :path: "../node_modules/.pnpm/react-native-share@6.5.0/node_modules/react-native-share"
   RNSVG:
@@ -663,7 +650,6 @@ SPEC CHECKSUMS:
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
   glog: 5337263514dd6f09803962437687240c5dc39aa4
   InputMask: 71d291dc54d2deaeac6512afb6ec2304228c0bb7
-  ledger-core-objc: cc0290f7cf787ddf1d6a8f8e086acf55f24523a4
   libwebp: 98a37e597e40bfdb4c911fc98f2c53d0b12d05fc
   lottie-ios: c058aeafa76daa4cf64d773554bccc8385d0150e
   lottie-react-native: b561920bba7ec727ec94a473b683cffba00faece
@@ -713,11 +699,10 @@ SPEC CHECKSUMS:
   RNFastImage: 1f2cab428712a4baaf78d6169eaec7f622556dd7
   RNGestureHandler: a479ebd5ed4221a810967000735517df0d2db211
   RNKeychain: f75b8c8b2f17d3b2aa1f25b4a0ac5b83d947ff8f
-  RNLibLedgerCore: 6d8a54abc2dc2ffa38c33fbb70d5247b97a0091e
   RNOS: 6f2f9a70895bbbfbdad7196abd952e7b01d45027
   RNReanimated: 629fedd82e9f6b9138421caa342f0a5ebd711cbe
   RNScreens: 522705f2e5c9d27efb17f24aceb2bf8335bc7b8e
-  RNSentry: 04bb48bfdd435f5b218cf363f89e6419e9a2460c
+  RNSentry: 290e7375aa32c7edb44b404a5d4e480aa7be9bdc
   RNShare: 047d42214f875d731bde73a2b67418638af85ad9
   RNSVG: 551acb6562324b1d52a4e0758f7ca0ec234e278f
   RNVectorIcons: 31cebfcf94e8cf8686eb5303ae0357da64d7a5a4
@@ -728,6 +713,6 @@ SPEC CHECKSUMS:
   Yoga: aa0cb45287ebe1004c02a13f279c55a95f1572f4
   ZXingObjC: fdbb269f25dd2032da343e06f10224d62f537bdb
 
-PODFILE CHECKSUM: ade1a164d2b25d8c489270d1c4ebdd10cbe01046
+PODFILE CHECKSUM: 3c668227727bb96cf2fd75d129043a019b5ed05d
 
 COCOAPODS: 1.11.2

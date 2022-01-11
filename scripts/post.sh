@@ -4,7 +4,9 @@ cd $(dirname $0)/..
 
 ./scripts/sync-families-dispatch.sh
 
-patch --forward -i scripts/RCTCoreOperationQuery.java.patch node_modules/@ledgerhq/react-native-ledger-core/android/src/main/java/com/ledger/reactnative/RCTCoreOperationQuery.java
+patch -N -i scripts/patches/RCTCoreOperationQuery.java.patch node_modules/@ledgerhq/react-native-ledger-core/android/src/main/java/com/ledger/reactnative/RCTCoreOperationQuery.java
+patch -N -i scripts/patches/jest-haste-map.patch node_modules/.pnpm/metro@0.66.2/node_modules/jest-haste-map/build/crawlers/node.js
+patch -N -i scripts/patches/RNAnalytics.h.patch node_modules/.pnpm/@segment+analytics-react-native@1.5.0/node_modules/@segment/analytics-react-native/ios/RNAnalytics/RNAnalytics.h
 
 rm -f 'third-party/glog-0.3.5/test-driver'
 
@@ -44,14 +46,16 @@ if [ "$(uname)" == "Darwin" ]; then
     sed -i '' -e "s/spec[.]prepare_command = \"#/spec.prepare_command = \"cd ..\/.. \&\& #/" react_native_pods.rb
   )
 
-  cd ios && bundle exec pod install --deployment --repo-update
+  (
+    cd ios && bundle exec pod install --deployment --repo-update
+  )
 
   if [ $? -ne 0 ]; then
     echo "
      _________________________________________
     / CocoaPods lockfile is probably out of   \\
     | sync with native dependencies. Don't    |
-    | forget to run \`yarn pod\` after adding   |
+    | forget to run \`pnpm pod\` after adding   |
     | or updating dependencies, and commit    |
     \\ the changes in Podfile.lock.            /
      -----------------------------------------
@@ -71,6 +75,7 @@ if [ "$(uname)" == "Darwin" ]; then
   fi
 fi
 
+
 # We manually need to run Jetifier for React Native BLE PLX until they switch to AndroidX
 # https://github.com/Polidea/react-native-ble-plx#android-example-setup
-yarn jetify
+pnpm jetify
