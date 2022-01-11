@@ -1760,7 +1760,10 @@
     },
     "developer": {
       "title": "مطوّر",
-      "desc": "جرّب ميزات المطور وأخبرنا برأيك."
+      "desc": "جرّب ميزات المطور وأخبرنا برأيك.",
+      "customManifest": {
+        "title": "Load Custom Platform Manifest"
+      }
     }
   },
   "migrateAccounts": {
