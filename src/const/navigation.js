@@ -49,6 +49,7 @@ export const ScreenName = {
   DelegationSummary: "DelegationSummary",
   DelegationValidationError: "DelegationValidationError",
   DelegationValidationSuccess: "DelegationValidationSuccess",
+  DeveloperSettings: "DeveloperSettings",
   DisplayResult: "DisplayResult",
   Distribution: "Distribution",
   EditAccountName: "EditAccountName",
@@ -140,6 +141,12 @@ export const ScreenName = {
   SwapOperationDetails: "SwapOperationDetails",
   SwapPendingOperation: "SwapPendingOperation",
   SwapSummary: "SwapSummary",
+
+  SwapV2FormSelectAccount: "SwapV2FormSelectAccount",
+  SwapV2FormSelectCurrency: "SwapV2FormSelectCurrency",
+  SwapV2FormSelectFees: "SwapV2FormSelectFees",
+  SwapFormSelectProviderRate: "SwapFormSelectProviderRate",
+
   TezosDelegationFlow: "TezosDelegationFlow",
   Transfer: "Transfer",
   UnfreezeAmount: "UnfreezeAmount",
@@ -306,6 +313,9 @@ export const ScreenName = {
   RequestAccountsSelectAccount: "RequestAccountsSelectAccount",
 
   VerifyAccount: "VerifyAccount",
+
+  // solana
+  SolanaEditMemo: "SolanaEditMemo",
 };
 
 export const NavigatorName = {

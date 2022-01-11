@@ -329,6 +329,7 @@ const linkingOptions = {
               [ScreenName.AboutSettings]: "settings/about",
               [ScreenName.HelpSettings]: "settings/help",
               [ScreenName.ExperimentalSettings]: "settings/experimental",
+              [ScreenName.DeveloperSettings]: "settings/developer",
             },
           },
         },
