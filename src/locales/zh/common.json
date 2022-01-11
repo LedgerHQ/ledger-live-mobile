@@ -263,8 +263,8 @@
       "description": null
     },
     "EthAppNftNotSupported": {
-      "title": "Operation not available for this device",
-      "description": "Send NFT feature is only available for Nano X. Please visit our customer support platform to know how to send a NFT with a Nano S."
+      "title": "操作不可用于此设备",
+      "description": "发送 NFT 功能仅可用于 Nano X。请访问我们的客服平台，以了解如何使用 Nano S 来发送 NFT。"
     },
     "Touch ID Error": {
       "title": "生物特征认证失败",
@@ -304,7 +304,7 @@
       "title": "该{{currencyName}} 地址无效"
     },
     "InvalidAddressBecauseAlreadyDelegated": {
-      "title": "Your account is already delegated to this validator"
+      "title": "您的账户已经委托给此验证器"
     },
     "InvalidAddressBecauseDestinationIsAlsoSource": {
       "title": "目标账户和源账户不能相同。"
@@ -612,13 +612,13 @@
       "description": "出错了。请重试。如果问题依旧存在，请使用下面的按钮保存您的日志，并将其提供给 Ledger 客服。"
     },
     "SolanaAccountNotFunded": {
-      "title": "Account not funded"
+      "title": "账户没有资金"
     },
     "SolanaAddressOfEd25519": {
-      "title": "Address off ed25519 curve"
+      "title": "地址关闭 ed25519 曲线"
     },
     "SolanaMemoIsTooLong": {
-      "title": "Memo is too long. Max length is {{maxLength}}"
+      "title": "Memo 标签太长。最大长度为 {{maxLength}}"
     }
   },
   "bluetooth": {
@@ -1759,10 +1759,10 @@
       "disclaimer": "这些是我们以“按现状”为基准提供的实验性功能，以供我们的专业爱好者社区测试。这些功能随时可能会更改、中断或删除。启用这些功能，意味着您同意自行承担使用过程中的风险。"
     },
     "developer": {
-      "title": "Developer",
-      "desc": "Try out the Developer features and let us know what you think.",
+      "title": "开发者",
+      "desc": "尝试一下开发者功能，让我们知道您的想法。",
       "customManifest": {
-        "title": "Load Custom Platform Manifest"
+        "title": "加载自定义平台清单"
       }
     }
   },
@@ -1827,7 +1827,7 @@
       "copyAddress": "复制地址",
       "shareAddress": "分享地址",
       "addressCopied": "地址已复制！",
-      "taprootWarning": "Make sure the sender supports taproot",
+      "taprootWarning": "请确保发送方支持 taproot",
       "notSynced": {
         "text": "正在同步",
         "desc": "如果您有多笔交易或者您的网速偏慢，可能需要多花费一些时间。"
@@ -1869,8 +1869,8 @@
           "subtitle": "出于 KYC 目的，LEDGER 需要收集并转移您的信息到 WYRE。如需了解更多信息，请查看我们的隐私政策",
           "pending": {
             "cta": "继续",
-            "title": "Your information has been submitted for approval",
-            "subtitle": "It usually takes only a few minutes before you can start swapping",
+            "title": "您的信息已被提交以供审批",
+            "subtitle": "通常只需要几分钟您就能开始互换了。",
             "link": "了解关于 KYC 的更多详情"
           },
           "approved": {
@@ -1923,9 +1923,9 @@
         "cta": "关闭"
       },
       "pendingOperation": {
-        "description": "Your Swap operation has been sent to the network for confirmation. It may take up to an hour before you receive your swapped {{targetCurrency}} assets",
+        "description": "您的 Swap 互换操作已经发送到网络上确认。最多一个小时后，您就可以收到您所互换的 {{targetCurrency}} 资产。",
         "label": "您的 Swap ID：",
-        "title": "Pending operation",
+        "title": "待处理操作",
         "disclaimer": "请记下您的 Swap ID 互换代码，以便今后有需要时从 {{provider}} 处获得帮助。",
         "cta": "查看详情"
       },
@@ -1945,22 +1945,22 @@
         "button": "继续",
         "from": "来自",
         "to": "到",
-        "source": "Source",
-        "target": "Target account",
-        "noAccount": "You don’t have {{currency}} account",
+        "source": "来源",
+        "target": "目标账户",
+        "noAccount": "您没有 {{currency}} 账户。",
         "balance": "余额 <0>123</0>",
         "fromAccount": "选择账户",
         "toAccount": "选择账户",
         "paraswapCTA": "寻找 Paraswap？它已被移动到 Discover（发现）选项卡！",
-        "quote": "Quote",
-        "receive": "Receive",
+        "quote": "报价",
+        "receive": "接收",
         "amount": {
           "useMax": "使用最大值",
           "available": "可用总额"
         },
         "noAsset": {
-          "title": "You have no asset to swap",
-          "desc": "Buy some and come back to swap"
+          "title": "您没有可互换的资产",
+          "desc": "购买一些资产后再返回来进行互换"
         },
         "noApp": {
           "title": "未安装 {{appName}} 应用程序",
@@ -2045,16 +2045,16 @@
     "swapv2": {
       "form": {
         "summary": {
-          "from": "From",
-          "to": "To",
-          "send": "Send",
-          "payoutNetworkFees": "Payout fees",
-          "payoutNetworkFeesTooltip": "This amount will not be shown on your device",
-          "receive": "Amount",
-          "receiveFloat": "Amount to receive before service fees",
-          "provider": "Provider",
-          "method": "Rate",
-          "fees": "Fees"
+          "from": "从",
+          "to": "到",
+          "send": "发送",
+          "payoutNetworkFees": "支出费用",
+          "payoutNetworkFeesTooltip": "该数额不会在您的设备上显示",
+          "receive": "数额",
+          "receiveFloat": "服务费之前收到的数额",
+          "provider": "提供方",
+          "method": "费率",
+          "fees": "费用"
         }
       }
     },
