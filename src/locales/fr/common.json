@@ -1760,7 +1760,10 @@
     },
     "developer": {
       "title": "Développeurs",
-      "desc": "Essayez les fonctionnalités pour développeurs et donnez-nous votre avis."
+      "desc": "Essayez les fonctionnalités pour développeurs et donnez-nous votre avis.",
+      "customManifest": {
+        "title": "Load Custom Platform Manifest"
+      }
     }
   },
   "migrateAccounts": {
