@@ -70,10 +70,11 @@ type Props = {
   style?: Object,
   status: string,
   src: string,
+  resizeMode?: string,
   hackWidth?: number,
 };
 
-const NftImage = ({ src, status, style, hackWidth = 90 }: Props) => {
+const NftImage = ({ src, status, style, hackWidth = 90, resizeMode = "cover" }: Props) => {
   const { colors } = useTheme();
   const opacityAnim = useRef(new Animated.Value(0)).current;
   const [loadError, setLoadError] = useState(null);
@@ -115,7 +116,7 @@ const NftImage = ({ src, status, style, hackWidth = 90 }: Props) => {
                 backgroundColor: colors.white,
               },
             ]}
-            resizeMode="cover"
+            resizeMode={resizeMode}
             source={{
               uri: hackSrc,
             }}

@@ -32,6 +32,7 @@ const NftViewer = ({ route }: Props) => {
           status={status}
           style={styles.image}
           hackWidth={10000}
+          resizeMode="contain"
         />
       </PanAndZoomView>
     </View>
@@ -45,10 +46,8 @@ const styles = StyleSheet.create({
   },
   image: {
     position: "absolute",
-    borderRadius: 4,
-    marginBottom: 12,
+    height: "100%",
     width: "100%",
-    aspectRatio: 1,
     overflow: "hidden",
   },
 });
