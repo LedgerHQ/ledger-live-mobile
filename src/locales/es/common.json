@@ -1762,7 +1762,7 @@
       "title": "Desarrollador",
       "desc": "Prueba las funciones experimentales y envíanos tu opinión.",
       "customManifest": {
-        "title": "Load Custom Platform Manifest"
+        "title": "Cargar manifiesto de plataforma personalizada"
       }
     }
   },
