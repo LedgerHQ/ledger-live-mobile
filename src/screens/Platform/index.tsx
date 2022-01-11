@@ -1,45 +1,45 @@
-// @flow
-
 import React, { useMemo, useCallback, useState, useEffect } from "react";
-import { StyleSheet, View, Linking } from "react-native";
+import { StyleSheet, Linking } from "react-native";
 import { Trans } from "react-i18next";
-import { useNavigation, useTheme } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import { usePlatformApp } from "@ledgerhq/live-common/lib/platform/PlatformAppProvider";
 import { filterPlatformApps } from "@ledgerhq/live-common/lib/platform/PlatformAppProvider/helpers";
-import type { AccountLike, Account } from "@ledgerhq/live-common/lib/types";
-import type { AppManifest } from "@ledgerhq/live-common/lib/platform/types";
+import { AccountLike, Account } from "@ledgerhq/live-common/lib/types";
+import { AppManifest } from "@ledgerhq/live-common/lib/platform/types";
 import useEnv from "@ledgerhq/live-common/lib/hooks/useEnv";
+import { keyBy } from "lodash";
 
 import { useBanner } from "../../components/banners/hooks";
 import TrackScreen from "../../analytics/TrackScreen";
 import { urls } from "../../config/urls";
 import { ScreenName } from "../../const";
-import IconCode from "../../icons/Code";
 
-import CatalogTwitterBanner from "./CatalogTwitterBanner";
-import DAppDisclaimer from "./DAppDisclaimer";
-import type { Props as DisclaimerProps } from "./DAppDisclaimer";
-import CatalogBanner from "./CatalogBanner";
-import CatalogCTA from "./CatalogCTA";
-import AppCard from "./AppCard";
+import DAppDisclaimer, { Props as DisclaimerProps } from "./DAppDisclaimer";
 import AnimatedHeaderView from "../../components/AnimatedHeader";
+import AppRow from "./AppRow";
+import Divider from "./Divider";
 
 type RouteParams = {
-  defaultAccount: ?AccountLike,
-  defaultParentAccount: ?Account,
-  platform?: ?string,
+  defaultAccount: AccountLike | null | undefined;
+  defaultParentAccount: Account | null | undefined;
+  platform?: string | null | undefined;
 };
 
-type DisclaimerOpts = $Diff<DisclaimerProps, { isOpened: boolean }> | null;
+type DisclaimerOpts = Omit<DisclaimerProps, "isOpened"> | null;
 
 const DAPP_DISCLAIMER_ID = "PlatformAppDisclaimer";
 
 const PlatformCatalog = ({ route }: { route: { params: RouteParams } }) => {
   const { platform, ...routeParams } = route.params ?? {};
-  const { colors } = useTheme();
   const navigation = useNavigation();
 
-  const { manifests } = usePlatformApp();
+  const { manifests, catalogMetadata } = usePlatformApp();
+  const { appsMetadata = [] } = catalogMetadata || {};
+
+  const appsMetadataMappedById: Record<string, AppMetadata> = useMemo(
+    () => keyBy(appsMetadata, "id"),
+    [appsMetadata],
+  );
   const experimental = useEnv("PLATFORM_EXPERIMENTAL_APPS");
 
   const filteredManifests = useMemo(() => {
@@ -121,24 +121,20 @@ const PlatformCatalog = ({ route }: { route: { params: RouteParams } }) => {
           icon={disclaimerOpts.icon}
         />
       )}
-
-      <CatalogBanner />
-      <CatalogTwitterBanner />
-      {filteredManifests.map(manifest => (
-        <AppCard
-          key={manifest.id}
-          manifest={manifest}
-          onPress={handlePressCard}
-        />
-      ))}
-      <View style={[styles.separator, { backgroundColor: colors.fog }]} />
-      <CatalogCTA
-        Icon={IconCode}
-        title={<Trans i18nKey={"platform.catalog.developerCTA.title"} />}
-        onPress={handleDeveloperCTAPress}
-      >
-        <Trans i18nKey={"platform.catalog.developerCTA.description"} />
-      </CatalogCTA>
+      {filteredManifests.map((manifest, index, arr) => {
+        const appMetadata = appsMetadataMappedById[manifest.id];
+        return (
+          <>
+            <AppRow
+              key={manifest.id}
+              manifest={manifest}
+              appMetadata={appMetadata}
+              onPress={handlePressCard}
+            />
+            {index !== arr.length - 1 && <Divider />}
+          </>
+        );
+      })}
     </AnimatedHeaderView>
   );
 };

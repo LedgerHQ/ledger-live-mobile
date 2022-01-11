@@ -37,38 +37,14 @@ function AppIcon({ size = 48, name, icon, isDisabled }: Props) {
           {firstLetter}
         </LText>
       ) : null}
-      {icon &&
-        (isDisabled ? (
-          <>
-            <Image
-              source={{ uri: icon }}
-              style={[
-                styles.image,
-                styles.disabledTopLayer,
-                { width: size, height: size },
-              ]}
-              fadeDuration={200}
-              onLoad={handleImageLoad}
-            />
-            <Image
-              source={{ uri: icon }}
-              style={[
-                styles.image,
-                styles.disabledBottomLayer,
-                { width: size, height: size, tintColor: colors.fog },
-              ]}
-              fadeDuration={200}
-              onLoad={handleImageLoad}
-            />
-          </>
-        ) : (
-          <Image
-            source={{ uri: icon }}
-            style={[styles.image, { width: size, height: size }]}
-            fadeDuration={200}
-            onLoad={handleImageLoad}
-          />
-        ))}
+      {icon && (
+        <Image
+          source={{ uri: icon }}
+          style={[styles.image, { width: size, height: size }]}
+          fadeDuration={200}
+          onLoad={handleImageLoad}
+        />
+      )}
     </View>
   );
 }
