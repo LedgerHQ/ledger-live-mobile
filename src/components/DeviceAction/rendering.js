@@ -5,6 +5,7 @@ import Icon from "react-native-vector-icons/dist/Feather";
 import { WrongDeviceForAccount, UnexpectedBootloader } from "@ledgerhq/errors";
 import type { TokenCurrency } from "@ledgerhq/live-common/lib/types";
 import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
+import { TRANSACTION_TYPES } from "@ledgerhq/live-common/lib/exchange/hw-app-exchange/Exchange";
 import { urls } from "../../config/urls";
 import LText from "../LText";
 import Alert from "../Alert";
@@ -422,6 +423,21 @@ export function renderLoading({
       </LText>
     </View>
   );
+}
+
+export function renderExchange({
+  transactionType,
+}: {
+  transactionType: string,
+}) {
+  switch (transactionType) {
+    case TRANSACTION_TYPES.SWAP:
+      return <LText>{"Confirm swap on your device"}</LText>;
+    case TRANSACTION_TYPES.SELL:
+      return <LText>{"Confirm swap on your device"}</LText>;
+    default:
+      return <LText>{"Confirm exchange on your device"}</LText>;
+  }
 }
 
 type WarningOutdatedProps = {

@@ -4,6 +4,7 @@ import type {
   Action,
   Device,
 } from "@ledgerhq/live-common/lib/hw/actions/types";
+import { TRANSACTION_TYPES } from "@ledgerhq/live-common/lib/exchange/hw-app-exchange/Exchange";
 import { useTranslation } from "react-i18next";
 import { useNavigation, useTheme } from "@react-navigation/native";
 import ValidateOnDevice from "../ValidateOnDevice";
@@ -19,6 +20,7 @@ import {
   renderInWrongAppForAccount,
   renderError,
   renderBootloaderStep,
+  renderExchange,
   renderConfirmSwap,
   renderConfirmSell,
 } from "./rendering";
@@ -71,6 +73,9 @@ export default function DeviceAction<R, H, P>({
     initSwapResult,
     signMessageRequested,
     allowOpeningGranted,
+    completeExchangeStarted,
+    completeExchangeResult,
+    completeExchangeError,
     initSellRequested,
     initSellResult,
     initSellError,
@@ -143,6 +148,15 @@ export default function DeviceAction<R, H, P>({
       colors,
       theme,
     });
+  }
+
+  if (
+    completeExchangeStarted &&
+    !completeExchangeResult &&
+    !completeExchangeError
+  ) {
+    // $FlowFixMe
+    return renderExchange({ exchangeType: request?.exchangeType });
   }
 
   if (initSwapRequested && !initSwapResult && !initSwapError) {
