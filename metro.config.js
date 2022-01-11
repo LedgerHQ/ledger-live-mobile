@@ -27,7 +27,7 @@ module.exports = {
         // MetroSymlinksResolver produces the incorrect "./dist/npm/common/npm/common/wswrapper.js" resolution here.
         // It's like it adds up the package.json "browser" + "react-native" fields paths…
         if (
-          _context.originModulePath.includes("@ripple-lib") &&
+          _context.originModulePath.includes("ripple-lib@1.10.0") &&
           moduleName === "./dist/npm/common/wswrapper.js"
         ) {
           return "./wswrapper.js";
