@@ -8,6 +8,7 @@ import {
   BracketsMedium,
   LifeRingMedium,
   ChartNetworkMedium,
+  ToolsMedium,
 } from "@ledgerhq/native-ui/assets/icons";
 import Config from "react-native-config";
 import { ScreenName } from "../../const";
@@ -89,7 +90,7 @@ export default function Settings({ navigation }: Props) {
           <SettingsCard
             title="Debug"
             desc="Use at your own risk – Developer tools"
-            Icon={ChartNetworkMedium}
+            Icon={ToolsMedium}
             onClick={() => navigation.navigate(ScreenName.DebugSettings)}
           />
         ) : null}
