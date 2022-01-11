@@ -151,7 +151,7 @@ export default function ConnectDevice({ navigation, route }: Props) {
         <SelectDevice
           onSelect={setDevice}
           onWithoutDevice={onSkipDevice}
-          withoutDevice={!!account}
+          withoutDevice
         />
       </NavigationScrollView>
       <DeviceActionModal
