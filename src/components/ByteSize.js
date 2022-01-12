@@ -26,13 +26,16 @@ const ByteSize = ({
 
   // FIXME it should be on live-common side
   const bytes = Math.ceil(value / blockSize) * blockSize;
-
   const i = Math.floor(Math.log(bytes) / Math.log(k));
+  const pureSize = parseFloat(bytes / k ** i);
+  const dm = i > 1 ? Math.max(0, decimals) : 0;
 
-  const dm = Math.max(0, decimals);
-  const pureSize = parseFloat(bytes / Math.pow(k, i));
-  const formattedSize = formatFunction ? formatFunction(pureSize) : pureSize
-  const size = formattedSize.toFixed(dm)
+  const divider = 10 ** dm;
+  const toFormat = pureSize * divider;
+  let formattedSize = formatFunction ? formatFunction(toFormat) : toFormat;
+  formattedSize /= divider;
+
+  const size = formattedSize.toFixed(dm);
 
   return (
     <Trans
