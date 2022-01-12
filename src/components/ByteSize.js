@@ -12,13 +12,13 @@ const ByteSize = ({
   deviceModel,
   decimals = 0,
   firmwareVersion,
-  formatFunction
+  formatFunction,
 }: {
   value: number,
   deviceModel: DeviceModel,
   decimals?: number,
   firmwareVersion: string,
-  formatFunction?: (val: number) => number
+  formatFunction?: (val: number) => number,
 }) => {
   if (!value) return "–";
 
@@ -37,12 +37,7 @@ const ByteSize = ({
 
   const size = formattedSize.toFixed(dm);
 
-  return (
-    <Trans
-      i18nKey={`byteSize.${sizes[i]}`}
-      values={{ size }}
-    />
-  );
+  return <Trans i18nKey={`byteSize.${sizes[i]}`} values={{ size }} />;
 };
 
 export default ByteSize;
