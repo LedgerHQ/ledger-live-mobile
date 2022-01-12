@@ -27,11 +27,11 @@ const ByteSize = ({
   // FIXME it should be on live-common side
   const bytes = Math.ceil(value / blockSize) * blockSize;
   const i = Math.floor(Math.log(bytes) / Math.log(k));
-  const pureSize = parseFloat(bytes / k ** i);
+  const rawSize = parseFloat(bytes / k ** i);
   const dm = i > 1 ? Math.max(0, decimals) : 0;
 
   const divider = 10 ** dm;
-  const toFormat = pureSize * divider;
+  const toFormat = rawSize * divider;
   let formattedSize = formatFunction ? formatFunction(toFormat) : toFormat;
   formattedSize /= divider;
 
