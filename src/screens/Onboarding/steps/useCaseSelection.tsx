@@ -139,7 +139,7 @@ const OnboardingStepUseCaseSelection = () => {
                 {
                   cards: [
                     {
-                      route: "OnboardingSetupNewDevice",
+                      route: "OnboardingModalSetupNewDevice",
                       Illustration: <PlaceholderIllustration />,
                       title: "onboarding.stepUseCase.deviceActions.setup.title",
                       subTitle:

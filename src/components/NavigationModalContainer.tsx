@@ -12,16 +12,21 @@ const ScreenContainer = styled(Flex).attrs(p => ({
   flex: 1,
   p: p.p ?? 6,
 }))``;
-type Props = StackScreenProps<{}> & { children: React.ReactNode, contentContainerProps?: FlexBoxProps };
+type Props = StackScreenProps<{}> & { 
+  children: React.ReactNode, 
+  contentContainerProps?: FlexBoxProps,
+  deadZoneProps?: FlexBoxProps,
+ };
 
 export default function NavigationModalContainer({
   navigation,
   children,
   contentContainerProps,
+  deadZoneProps,
 }: Props) {
   return (
     <Flex flex={1}>
-      <Flex height="8%" minHeight={MIN_MODAL_HEIGHT}>
+      <Flex height="8%" minHeight={MIN_MODAL_HEIGHT} {...deadZoneProps}>
         <Pressable
           style={{ flex: 1 }}
           onPress={() => {
