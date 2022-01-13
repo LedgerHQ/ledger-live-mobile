@@ -432,7 +432,7 @@ DEPENDENCIES:
   - "FBLazyVector (from `../node_modules/.pnpm/react-native@0.65.1_react@17.0.2/node_modules/react-native/Libraries/FBLazyVector`)"
   - "FBReactNativeSpec (from `../node_modules/.pnpm/react-native@0.65.1_react@17.0.2/node_modules/react-native/React/FBReactNativeSpec`)"
   - "glog (from `../node_modules/.pnpm/react-native@0.65.1_react@17.0.2/node_modules/react-native/third-party-podspecs/glog.podspec`)"
-  - "ledger-core-objc (from `../node_modules/.pnpm/@ledgerhq+react-native-ledger-core@4.19.1_react-native@0.65.1/node_modules/@ledgerhq/react-native-ledger-core`)"
+  - "ledger-core-objc (from `../node_modules/@ledgerhq/react-native-ledger-core`)"
   - "lottie-ios (from `../node_modules/.pnpm/lottie-ios@3.2.3/node_modules/lottie-ios`)"
   - "lottie-react-native (from `../node_modules/.pnpm/lottie-react-native@4.1.3_3ed91fda457636259aac3b2e485a319e/node_modules/lottie-react-native`)"
   - "PasscodeAuth (from `../node_modules/.pnpm/@ledgerhq+react-native-passcode-auth@2.1.0/node_modules/@ledgerhq/react-native-passcode-auth`)"
@@ -482,7 +482,7 @@ DEPENDENCIES:
   - "RNFastImage (from `../node_modules/.pnpm/react-native-fast-image@8.5.11_react-native@0.65.1+react@17.0.2/node_modules/react-native-fast-image`)"
   - "RNGestureHandler (from `../node_modules/.pnpm/react-native-gesture-handler@1.10.3/node_modules/react-native-gesture-handler`)"
   - "RNKeychain (from `../node_modules/.pnpm/react-native-keychain@7.0.0/node_modules/react-native-keychain`)"
-  - "RNLibLedgerCore (from `../node_modules/.pnpm/@ledgerhq+react-native-ledger-core@4.19.1_react-native@0.65.1/node_modules/@ledgerhq/react-native-ledger-core`)"
+  - "RNLibLedgerCore (from `../node_modules/@ledgerhq/react-native-ledger-core`)"
   - "RNOS (from `../node_modules/.pnpm/react-native-os@1.2.6/node_modules/react-native-os`)"
   - "RNReanimated (from `../node_modules/.pnpm/react-native-reanimated@2.3.1_f1cb2e1fcdd6b5f4e9a03a04406ce805/node_modules/react-native-reanimated`)"
   - "RNScreens (from `../node_modules/.pnpm/react-native-screens@3.10.1_react-native@0.65.1+react@17.0.2/node_modules/react-native-screens`)"
@@ -529,8 +529,7 @@ EXTERNAL SOURCES:
   glog:
     :podspec: "../node_modules/.pnpm/react-native@0.65.1_react@17.0.2/node_modules/react-native/third-party-podspecs/glog.podspec"
   ledger-core-objc:
-    :path: !ruby/object:Pathname
-    path: "../node_modules/.pnpm/@ledgerhq+react-native-ledger-core@4.19.1_react-native@0.65.1/node_modules/@ledgerhq/react-native-ledger-core"
+    :path: "../node_modules/@ledgerhq/react-native-ledger-core"
   lottie-ios:
     :path: "../node_modules/.pnpm/lottie-ios@3.2.3/node_modules/lottie-ios"
   lottie-react-native:
@@ -626,8 +625,7 @@ EXTERNAL SOURCES:
   RNKeychain:
     :path: "../node_modules/.pnpm/react-native-keychain@7.0.0/node_modules/react-native-keychain"
   RNLibLedgerCore:
-    :path: !ruby/object:Pathname
-    path: "../node_modules/.pnpm/@ledgerhq+react-native-ledger-core@4.19.1_react-native@0.65.1/node_modules/@ledgerhq/react-native-ledger-core"
+    :path: "../node_modules/@ledgerhq/react-native-ledger-core"
   RNOS:
     :path: "../node_modules/.pnpm/react-native-os@1.2.6/node_modules/react-native-os"
   RNReanimated:
@@ -728,6 +726,6 @@ SPEC CHECKSUMS:
   Yoga: aa0cb45287ebe1004c02a13f279c55a95f1572f4
   ZXingObjC: fdbb269f25dd2032da343e06f10224d62f537bdb
 
-PODFILE CHECKSUM: 6e45805650b73f6715950f3b8270911247ce7b1c
+PODFILE CHECKSUM: 6784a31c17cba4b0b875fff6a15715d680073ec7
 
 COCOAPODS: 1.11.2
