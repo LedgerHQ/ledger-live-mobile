@@ -1762,7 +1762,7 @@
       "title": "Geliştirici",
       "desc": "Geliştirici özelliklerini deneyip ne düşündüğünüzü bize bildirin.",
       "customManifest": {
-        "title": "Load Custom Platform Manifest"
+        "title": "Özel Platform Manifest Dosyası Yükle"
       }
     }
   },
