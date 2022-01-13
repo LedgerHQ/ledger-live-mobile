@@ -232,6 +232,18 @@
       "react-native-svg": "12.1.1",
       "d3-array": "2.3.3",
       "stellar-base>sodium-native": "^3.2.1"
+    },
+    "packageExtensions": {
+      "react-native": {
+        "dependencies": {
+          "react-native-codegen": "0.0.7"
+        }
+      },
+      "@ledgerhq/live-common": {
+        "dependencies": {
+          "superstruct": "0.14.2"
+        }
+      }
     }
   },
   "react-native": {
