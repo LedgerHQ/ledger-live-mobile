@@ -1762,7 +1762,7 @@
       "title": "デベロッパー",
       "desc": "試験的機能をお試しになり、フィードバックをお寄せください。",
       "customManifest": {
-        "title": "Load Custom Platform Manifest"
+        "title": "カスタムプラットフォームマニフェストを読み込む"
       }
     }
   },
