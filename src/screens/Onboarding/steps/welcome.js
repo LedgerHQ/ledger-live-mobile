@@ -8,7 +8,7 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
-import { Trans, useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 import { useClock, loop } from "react-native-redash/lib/module/v1";
 import Animated, {
@@ -27,8 +27,6 @@ import Button from "../../../components/Button";
 import { urls } from "../../../config/urls";
 import { deviceNames } from "../../../wording";
 import ArrowDown from "../../../icons/Chevron";
-
-import { useLocale } from "../../../context/Locale";
 
 import commonStyles from "../styles";
 

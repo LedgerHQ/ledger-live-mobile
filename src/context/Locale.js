@@ -1,11 +1,16 @@
 // @flow
-import React, { useMemo, useCallback, useEffect, useState } from "react";
+import React, {
+  useMemo,
+  useContext,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 import i18next from "i18next";
 import { initReactI18next } from "react-i18next";
 import type { TFunction } from "react-i18next";
 import AsyncStorage from "@react-native-community/async-storage";
 import { useSelector } from "react-redux";
-import { useContext } from "react";
 import {
   DEFAULT_LANGUAGE_LOCALE,
   getDefaultLanguageLocale,
@@ -13,19 +18,16 @@ import {
 } from "../languages";
 import { languageSelector } from "../reducers/settings";
 
-
-i18next
-  .use(initReactI18next)
-  .init({
-    fallbackLng: DEFAULT_LANGUAGE_LOCALE,
-    resources: locales,
-    whitelist: Object.keys(locales),
-    ns: ["common"],
-    defaultNS: "common",
-    interpolation: {
-      escapeValue: false, // not needed for react as it does escape per default to prevent xss!
-    },
-  });
+i18next.use(initReactI18next).init({
+  fallbackLng: DEFAULT_LANGUAGE_LOCALE,
+  resources: locales,
+  whitelist: Object.keys(locales),
+  ns: ["common"],
+  defaultNS: "common",
+  interpolation: {
+    escapeValue: false, // not needed for react as it does escape per default to prevent xss!
+  },
+});
 
 export { i18next as i18n };
 
