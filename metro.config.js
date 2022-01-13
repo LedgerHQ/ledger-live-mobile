@@ -11,16 +11,14 @@ const defaultSourceExts = require("metro-config/src/defaults/defaults")
   .sourceExts;
 const MetroSymlinksResolver = require("@rnx-kit/metro-resolver-symlinks");
 
-// Emulate what the ./node_modules/.bin/react-native binary is doing by adding node paths manually…
-// This is needed because the react native prod build scripts call react-native/cli.js
-// which does not set these paths.
+// Emulate what the ./node_modules/.bin/react-native binary is doing by adding node_modules paths.
+// Needed because the react native prod build scripts call react-native/cli.js which does not set these paths.
+// They will serve as fallbacks when the webpack resolver (enhanced-resolver) used by MetroSymlinksResolver
+// fails to resolve some modules.
 const nodeModulesPaths = [
   path.join(__dirname, "node_modules"),
   path.join(__dirname, "node_modules/.pnpm/node_modules"),
 ];
-process.env.NODE_PATH = `${process.env.NODE_PATH || ""}:${nodeModulesPaths.join(
-  ":",
-)}`;
 
 module.exports = {
   projectRoot: __dirname,
