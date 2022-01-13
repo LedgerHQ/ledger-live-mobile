@@ -5,6 +5,7 @@ def relative_path(module_name)
 end
 
 expo_autolinking = File.join(relative_path("expo"), "scripts/autolinking")
+legder_core = relative_path("@ledgerhq/react-native-ledger-core")
 rct_text = File.join(relative_path("react-native"), "Libraries/Text")
 
 require expo_autolinking
@@ -25,6 +26,8 @@ target 'ledgerlivemobile' do
     :hermes_enabled => false
   )
 
+  pod 'ledger-core-objc', :path => legder_core
+  pod 'RNLibLedgerCore', :path => legder_core
   pod 'React-RCTText', :path => rct_text, :modular_headers => true
 
   target 'ledgerlivemobileTests' do
