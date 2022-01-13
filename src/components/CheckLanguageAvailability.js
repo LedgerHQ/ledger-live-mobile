@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { useSelector } from "react-redux";
 import { Trans, useTranslation } from "react-i18next";
 import { View } from "react-native";
@@ -27,6 +27,21 @@ export default function CheckLanguageAvailability() {
   const currAppLanguage = useSelector(languageSelector);
   const [hasAnswered, answer] = useLanguageAvailableChecked();
 
+  const onRequestClose = useCallback(() => {
+    setModalOpened(false);
+  }, [setModalOpened]);
+
+  const dontSwitchLanguage = useCallback(() => {
+    answer();
+    onRequestClose();
+  }, [answer, onRequestClose]);
+
+  const switchLanguage = useCallback(() => {
+    i18next.changeLanguage(osLanguage);
+    answer();
+    onRequestClose();
+  }, [osLanguage, answer, onRequestClose]);
+
   const toShow =
     modalOpened &&
     !hasAnswered &&
@@ -36,21 +51,6 @@ export default function CheckLanguageAvailability() {
   if (!toShow) {
     return null;
   }
-
-  const onRequestClose = () => {
-    setModalOpened(false);
-  };
-
-  const dontSwitchLanguage = () => {
-    answer();
-    onRequestClose();
-  };
-
-  const switchLanguage = () => {
-    i18next.changeLanguage(osLanguage);
-    answer();
-    onRequestClose();
-  };
 
   return (
     <>
