@@ -59,7 +59,7 @@ export default function LocaleProvider({ children }: Props) {
 
   const value: LocaleState = useMemo(
     () => ({
-      i18next,
+      i18n: i18next,
       t: i18next.getFixedT(),
       locale: language,
     }),
