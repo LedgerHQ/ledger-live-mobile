@@ -101,7 +101,6 @@ export default function SettingsRow({
       {iconLeft && (
         <Box
           paddingRight={6}
-          marginLeft={6}
           justifyContent={centeredIcon && "center"}
         >
           {iconLeft}
@@ -122,7 +121,6 @@ export default function SettingsRow({
         justifyContent={"flex-end"}
         flexShrink={0}
         maxWidth={"50%"}
-        marginRight={6}
       >
         {children}
         {arrowRight ? (
