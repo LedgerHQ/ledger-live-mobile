@@ -32,15 +32,15 @@ export default function Buy() {
         platform: "moonpay",
       },
     });
-  }, []);
+  }, [navigation]);
 
   const navigateToCoinify = useCallback(() => {
     navigation.navigate(ScreenName.Coinify);
-  });
+  }, [navigation]);
 
-  const onContinue = () => {
+  const onContinue = useCallback(() => {
     provider === "moonpay" ? navigateToMoonPay() : navigateToCoinify();
-  };
+  });
 
   const moonPayIcon = <MoonPay size={40} />;
   const coinifyIcon = <Coinify size={40} />;

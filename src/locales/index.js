@@ -1,4 +1,3 @@
-exports.ar = { common: require("./ar/common.json"), };
 exports.de = { common: require("./de/common.json"), };
 exports.en = { common: require("./en/common.json"), };
 exports.es = { common: require("./es/common.json"), };

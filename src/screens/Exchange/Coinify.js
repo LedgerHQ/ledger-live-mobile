@@ -1,6 +1,6 @@
 // @flow
 
-import React from "react";
+import React, { useCallback } from "react";
 import { View, StyleSheet } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { useTranslation } from "react-i18next";
@@ -19,6 +19,12 @@ export default function Coinify() {
   const { t } = useTranslation();
   const navigation = useNavigation();
   const { colors } = useTheme();
+
+  const onCTAClick = useCallback(() => {
+    navigation.navigate(NavigatorName.ExchangeBuyFlow, {
+      mode: "buy",
+    });
+  }, [navigation]);
 
   return (
     <SafeAreaView
@@ -50,11 +56,7 @@ export default function Coinify() {
             event="ExchangeStartBuyFlow"
             type="primary"
             title={t("exchange.buy.CTAButton")}
-            onPress={() =>
-              navigation.navigate(NavigatorName.ExchangeBuyFlow, {
-                mode: "buy",
-              })
-            }
+            onPress={() => onCTAClick()}
           />
         </View>
       </View>
