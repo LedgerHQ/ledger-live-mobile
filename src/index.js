@@ -447,7 +447,9 @@ export default class Root extends Component<
                 <WalletConnectProvider>
                   <PlatformAppProvider
                     platformAppsServerURL={getProvider("production").url}
-                    platformCatalogServerURL={getProvider("production").catalogUrl}
+                    platformCatalogServerURL={
+                      getProvider("production").catalogUrl
+                    }
                   >
                     <DeepLinkingNavigator>
                       <SafeAreaProvider>
