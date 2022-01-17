@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import {
   NanoSFoldedMedium,
   LifeRingMedium,
+  NewsMedium,
   FacebookMedium,
   TwitterMedium,
   GithubMedium,
@@ -41,7 +42,7 @@ const Resources = () => {
       <SettingsCard
         title={t("help.ledgerAcademy.title")}
         desc={t("help.ledgerAcademy.desc")}
-        Icon={LifeRingMedium}
+        Icon={NewsMedium}
         onClick={() =>
           Linking.openURL(
             "https://support.ledger.com/hc/en-us?utm_source=ledger_live&utm_medium=self_referral&utm_content=help_mobile",

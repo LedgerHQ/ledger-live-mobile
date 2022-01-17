@@ -99,10 +99,7 @@ export default function SettingsRow({
       compact={compact}
     >
       {iconLeft && (
-        <Box
-          paddingRight={6}
-          justifyContent={centeredIcon && "center"}
-        >
+        <Box paddingRight={6} justifyContent={centeredIcon && "center"}>
           {iconLeft}
         </Box>
       )}

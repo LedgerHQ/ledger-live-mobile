@@ -3,7 +3,6 @@ import { View, StyleSheet } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { withTranslation , Trans } from "react-i18next";
 import { Button } from "@ledgerhq/native-ui";
-import type { T } from "../../../types/common";
 import LText from "../../../components/LText";
 import KeyboardView from "../../../components/KeyboardView";
 import TranslatedError from "../../../components/TranslatedError";
@@ -11,7 +10,6 @@ import PasswordInput from "../../../components/PasswordInput";
 import { withTheme } from "../../../colors";
 
 type Props = {
-  t: T,
   onChange: (value: string) => void,
   onSubmit: () => void,
   error?: Error,
@@ -38,7 +36,6 @@ class PasswordForm extends PureComponent<Props, State> {
 
   render() {
     const {
-      t,
       onChange,
       onSubmit,
       error,

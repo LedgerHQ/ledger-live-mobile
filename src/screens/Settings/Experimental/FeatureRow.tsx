@@ -6,14 +6,13 @@ import {
   getEnv,
 } from "@ledgerhq/live-common/lib/env";
 
-import type { Feature } from "../../../experimental";
-import { isReadOnly } from "../../../experimental";
+import { Feature, isReadOnly } from "../../../experimental";
 import SettingsRow from "../../../components/SettingsRow";
 import FeatureSwitch from "./FeatureSwitch";
 import FeatureInteger from "./FeatureInteger";
 
 type Props = {
-  feature: Feature,
+  feature: Feature;
 };
 
 const experimentalTypesMap = {

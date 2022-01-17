@@ -1,7 +1,7 @@
 import React, { useRef, useState, useCallback } from "react";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { View, StyleSheet, TouchableWithoutFeedback } from "react-native";
+import { View, TouchableWithoutFeedback } from "react-native";
 import {
   MobileMedium,
   WalletMedium,
@@ -17,7 +17,6 @@ import SettingsCard from "../../components/SettingsCard";
 import PoweredByLedger from "./PoweredByLedger";
 import TrackScreen from "../../analytics/TrackScreen";
 import timer from "../../timer";
-import NavigationScrollView from "../../components/NavigationScrollView";
 import SettingsNavigationScrollView from "./SettingsNavigationScrollView";
 
 type Props = {
@@ -102,11 +101,3 @@ export default function Settings({ navigation }: Props) {
     </SettingsNavigationScrollView>
   );
 }
-
-const styles = StyleSheet.create({
-  root: {
-    paddingTop: 16,
-    paddingHorizontal: 16,
-    paddingBottom: 64,
-  },
-});
