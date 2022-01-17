@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import { View, StyleSheet } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
-import { withTranslation , Trans } from "react-i18next";
+import { withTranslation, Trans } from "react-i18next";
 import { Button } from "@ledgerhq/native-ui";
 import LText from "../../../components/LText";
 import KeyboardView from "../../../components/KeyboardView";
@@ -10,16 +10,16 @@ import PasswordInput from "../../../components/PasswordInput";
 import { withTheme } from "../../../colors";
 
 type Props = {
-  onChange: (value: string) => void,
-  onSubmit: () => void,
-  error?: Error,
-  placeholder: string,
-  value: string,
-  colors: any,
+  onChange: (value: string) => void;
+  onSubmit: () => void;
+  error?: Error;
+  placeholder: string;
+  value: string;
+  colors: any;
 };
 
 type State = {
-  secureTextEntry: boolean,
+  secureTextEntry: boolean;
 };
 
 const forceInset = { bottom: "always" };
@@ -69,7 +69,12 @@ class PasswordForm extends PureComponent<Props, State> {
             </LText>
           )}
           <View style={styles.footer}>
-            <Button event="SubmitPassword" type={'main'} onPress={onSubmit}  disabled={!!error || value.length === 0}>
+            <Button
+              event="SubmitPassword"
+              type={"main"}
+              onPress={onSubmit}
+              disabled={!!error || value.length === 0}
+            >
               <Trans i18nKey="common.confirm" />
             </Button>
           </View>
