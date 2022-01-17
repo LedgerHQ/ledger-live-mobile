@@ -132,11 +132,13 @@ const AppRow = ({ manifest, appMetadata, onPress }: Props) => {
           <AppIcon isDisabled={isDisabled} size={56} name={name} icon={icon} />
           <NameAndTagContainer>
             <AppNameText>{name}</AppNameText>
-            <Flex height="11px" />
             {tagContent && (
-              <TagContainer {...tagProps}>
-                <TagText {...tagProps}>{tagContent}</TagText>
-              </TagContainer>
+              <>
+                <Flex height="11px" />
+                <TagContainer {...tagProps}>
+                  <TagText {...tagProps}>{tagContent}</TagText>
+                </TagContainer>
+              </>
             )}
           </NameAndTagContainer>
         </HeaderContainer>
