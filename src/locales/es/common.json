@@ -519,7 +519,7 @@
     },
     "WrongDeviceForAccount": {
       "title": "Algo ha salido mal",
-      "description": "Comprueba que tu billetera de hardware esté configurada con la frase de recuperación o frase de contraseña asociada a la cuenta seleccionada."
+      "description": "Comprueba que tu billetera de hardware esté configurada con la Frase de recuperación o Passphrase asociada a la cuenta seleccionada."
     },
     "UnexpectedBootloader": {
       "title": "Tu dispositivo no debe estar en modo Bootloader",
@@ -791,8 +791,8 @@
       "desktopSync": {
         "title": "¿Ya tienes una Frase de recuperación?",
         "label": "Sincronización con PC",
-        "subTitle": "Sincroniza tus criptos desde tu aplicación Desktop",
-        "desc": "¿Ya tienes la aplicación Desktop? ¡Sincronízala para administrar tus criptos desde tu teléfono!"
+        "subTitle": "Sincroniza tus cripto desde tu aplicación Desktop",
+        "desc": "¿Ya tienes la aplicación Desktop? ¡Sincronízala para administrar tus cripto desde tu teléfono!"
       },
       "restoreDevice": {
         "label": "Restaurar dispositivo",
@@ -803,7 +803,7 @@
     "stepNewDevice": {
       "0": {
         "label": "Nociones básicas",
-        "title": "Accede a tus criptos",
+        "title": "Accede a tus cripto",
         "desc": "Tus activos cripto se almacenan en la cadena de bloques. Necesitas una clave privada para acceder a ellos y administrarlos."
       },
       "1": {
@@ -937,7 +937,7 @@
         "infoModal": {
           "title": "¿Cómo funciona una Frase de recuperación?",
           "desc": "Tu Frase de recuperación funciona como una llave maestra única. Tu dispositivo Ledger la utiliza para calcular las claves privadas de cada activo cripto que posees.",
-          "desc_1": "Para restaurar el acceso a tus criptos, cualquier billetera puede calcular las mismas claves privadas a partir de tu Frase de recuperación.",
+          "desc_1": "Para restaurar el acceso a tus cripto, cualquier billetera puede calcular las mismas claves privadas a partir de tu Frase de recuperación.",
           "link": "Más información acerca del funcionamiento de la Frase de recuperación",
           "title_1": "¿Qué pasa si pierdo el acceso a mi Nano?",
           "bullets": {
@@ -948,7 +948,7 @@
               "label": "Selecciona “Restore recovery phrase on a new device” en la aplicación Ledger."
             },
             "2": {
-              "label": "Ingresa tu Frase de recuperación en tu nuevo dispositivo para restaurar el acceso a tus criptos."
+              "label": "Ingresa tu Frase de recuperación en tu nuevo dispositivo para restaurar el acceso a tus cripto."
             }
           }
         },
@@ -975,7 +975,7 @@
       },
       "hideRecoveryPhrase": {
         "title": "Oculta tu Frase de recuperación",
-        "desc": "Tu Frase de recuperación es la única manera de recuperar tus criptos, en caso de no ser posible utilizar tu Nano. Debes conservarla en un lugar seguro.",
+        "desc": "Tu Frase de recuperación es la única manera de recuperar tus cripto, en caso de no ser posible utilizar tu Nano. Debes conservarla en un lugar seguro.",
         "bullets": {
           "0": {
             "label": "Ingresa estas palabras únicamente en una billetera de hardware, no en PCs, ni en teléfonos."
@@ -1017,7 +1017,7 @@
       "importRecoveryPhrase": {
         "title": "Restaurar a partir de Frase de recuperación",
         "desc": "Restaura tu Nano a partir de tu Frase de recuperación para restaurar, reemplazar o hacer una copia de seguridad de tu billetera de hardware Ledger.",
-        "desc_1": "Tu Nano restaurará tus claves privadas y podrás acceder a tus criptos y administrarlas.",
+        "desc_1": "Tu Nano restaurará tus claves privadas y podrás acceder a tus cripto y administrarlas.",
         "cta": "De acuerdo, ¡todo listo!",
         "warning": {
           "title": "Recomendamos utilizar únicamente Frases de recuperación generadas por Ledger",
@@ -1063,7 +1063,7 @@
           },
           "1": {
             "title": "Selecciona la cantidad de palabras de la Frase de recuperación",
-            "label": "Tus frases de recuperación pueden tener 12, 18 o 24 palabras. Debes ingresar todas las palabras para acceder a tus criptos."
+            "label": "Tus Frases de recuperación pueden tener 12, 18 o 24 palabras. Debes ingresar todas las palabras para acceder a tus cripto."
           },
           "2": {
             "title": "Ingresa la Word #1...",
@@ -1101,7 +1101,7 @@
         "desc": "En tu dispositivo, selecciona “Settings > General > Device name”.",
         "title_1": "¿Cómo configurar una conexión Bluetooth?",
         "title_2": "¿Cómo utilizo mi Nano X sin Bluetooth?",
-        "desc_1": "Utiliza un <1>cable OTG</1> para conectar tu Ledger Nano X a tu teléfono Android (no compatible con iOS). Administra tus criptos con la aplicación Ledger Live o cualquier otra aplicación (web) compatible.",
+        "desc_1": "Utiliza un <1>cable OTG</1> para conectar tu Ledger Nano X a tu teléfono Android (no compatible con iOS). Administra tus cripto con la aplicación Ledger Live o cualquier otra aplicación (web) compatible.",
         "bullets": {
           "0": {
             "label": "Asegúrate de que el Bluetooth está activado en tu teléfono y en tu Ledger Nano X. Tu Ledger Nano X debe estar en el Dashboard, la ventana de inicio principal."
@@ -1144,8 +1144,8 @@
       }
     },
     "stepImportAccounts": {
-      "title": "Sincroniza tus criptos desde la PC",
-      "desc": "Si ya tienes tus criptos configuradas en la aplicación Ledger Desktop, puedes sincronizarlas para administrarlas desde tu teléfono.",
+      "title": "Sincroniza tus cripto desde Desktop",
+      "desc": "Si ya tienes tus cripto configuradas en la aplicación Ledger Desktop, puedes sincronizarlas para administrarlas desde tu teléfono.",
       "cta": "Estoy listo para escanear",
       "bullets": {
         "0": {
@@ -1176,18 +1176,18 @@
       "modal": {
         "step1": "Elige siempre <1><1>tu propio</1></1> PIN",
         "step2": "Utiliza 8 dígitos para mayor seguridad",
-        "step3": "No utilices nunca un dispositivo con un PIN o una frase de recuperación ya configurado"
+        "step3": "No utilices nunca un dispositivo con un PIN o una Frase de recuperación ya configurados"
       }
     },
     "stepWriteRecovery": {
       "step1": "Escribe la <1><1>“Word #1”</1></1> en la posición 1 de una Hoja de recuperación en blanco",
       "step2": "Presiona el botón derecho y continúa escribiendo las 24 palabras.",
-      "step3": "Confirma cada palabra de la frase de recuperación: selecciónala presionando ambos botones a la vez.",
+      "step3": "Confirma cada palabra de la Frase de recuperación: selecciónala presionando ambos botones a la vez.",
       "modal": {
-        "step1": "Guarda la frase de recuperación de 24 palabras en un lugar seguro, fuera de la vista.",
-        "step2": "Asegúrate de que seas el único que tenga acceso a la frase de recuperación.",
-        "step3": "Ledger no guarda tu frase de recuperación.",
-        "step4": "No utilices nunca un dispositivo con una frase de recuperación o un PIN ya configurados."
+        "step1": "Guarda la Frase de recuperación de 24 palabras en un lugar seguro, fuera de la vista.",
+        "step2": "Asegúrate de ser el único que tiene acceso a la Frase de recuperación.",
+        "step3": "Ledger no guarda tu Frase de recuperación.",
+        "step4": "No utilices nunca un dispositivo con una Frase de recuperación o un PIN ya configurados."
       }
     },
     "stepPassword": {
@@ -1247,7 +1247,7 @@
       },
       "final": {
         "successTitle": "¡Ya tienes nivel de profesional!",
-        "successText": "Está todo listo para que administres de forma segura tus criptos. ¡Solo te queda un breve paso!",
+        "successText": "Está todo listo para que administres de forma segura tus cripto. ¡Solo te queda un breve paso!",
         "failTitle": "Pronto tendrás nivel de profesional...",
         "failText": "No te preocupes, Ledger está aquí para guiarte en este proceso. Pronto te sentirás con completa confianza con respecto a la protección de tus criptomonedas. ¡Solo te queda un breve paso!",
         "cta": "Siguiente paso"
@@ -1255,14 +1255,14 @@
     },
     "warning": {
       "recoveryPhrase": {
-        "title": "No utilices una frase de recuperación que no hayas generado tú mismo.",
+        "title": "No utilices una Frase de recuperación que no hayas generado tú mismo.",
         "desc": "Tú y solo tú debes inicializar el código PIN y la Frase de recuperación de la billetera de hardware Ledger. Si has recibido un dispositivo con una palabra semilla existente o un código PIN ya inicializado, no utilices el producto y ponte en contacto con el Soporte.",
         "supportLink": "Ponte en contacto con Soporte"
       },
       "seed": {
         "title": "Por favor, verifica los contenidos de la caja",
-        "desc": "Si tu {{deviceName}} ya tiene un código PIN o una frase de recuperación, no es seguro usarlo y deberías ponerte en contacto con el Soporte de Ledger.",
-        "warning": "Usa solo la frase de recuperación que haya generado tu dispositivo al configurarlo por primera vez",
+        "desc": "Si tu {{deviceName}} ya tiene un código PIN o una Frase de recuperación, no es seguro usarlo y deberías ponerte en contacto con el Soporte de Ledger.",
+        "warning": "Usa únicamente la Frase de recuperación que haya generado tu dispositivo al configurarlo por primera vez",
         "continueCTA": "Continuar",
         "contactSupportCTA": "Ponte en contacto con Soporte"
       }
@@ -1721,7 +1721,7 @@
     "about": {
       "title": "Información",
       "desc": "Información, términos y condiciones y política de privacidad de la aplicación.",
-      "appDescription": "Con Ledger Live, protege, compra, vende, intercambia, aumenta y administra tus criptomonedas. Todo en un único sitio.",
+      "appDescription": "Con Ledger Live, protege, compra, vende, intercambia, haz crecer y administra tus criptomonedas. Todo en un único sitio.",
       "appVersion": "Versión",
       "termsConditions": "Términos y condiciones",
       "termsConditionsDesc": "Al utilizar Ledger Live, consideramos que aceptas nuestros términos y condiciones.",
