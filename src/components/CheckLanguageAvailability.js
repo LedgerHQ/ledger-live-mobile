@@ -72,7 +72,12 @@ export default function CheckLanguageAvailability() {
             </Circle>
           }
           description={
-            <Trans i18nKey="systemLanguageAvailable.description.newSupport" />
+            <Trans
+              i18nKey="systemLanguageAvailable.description.newSupport"
+              values={{
+                language: t(`systemLanguageAvailable.languages.${osLanguage}`),
+              }}
+            />
           }
           footer={
             <View>
