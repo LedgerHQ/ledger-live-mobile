@@ -753,7 +753,7 @@
   "onboarding": {
     "stepWelcome": {
       "title": "Bienvenidos a Ledger",
-      "subtitle": "Administra de manera segura tus criptos desde tu smartphone.",
+      "subtitle": "Administra de manera segura tus cripto desde tu smartphone.",
       "start": "Comenzar",
       "noDevice": "¿No tienes un dispositivo?",
       "buy": "Compra un {{fullDeviceName}}"
