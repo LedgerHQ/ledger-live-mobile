@@ -188,6 +188,17 @@ export const setLastSeenDeviceInfo = (dmi: DeviceModelInfo) => ({
   payload: dmi,
 });
 
+export const setPlatformAppLastOpened = (
+  platformAppId: string,
+  timestamp: number,
+) => ({
+  type: "SET_PLATFORM_APP_LAST_OPENED",
+  payload: {
+    platformAppId,
+    timestamp,
+  },
+});
+
 type PortfolioRangeOption = {
   key: PortfolioRange,
   value: string,

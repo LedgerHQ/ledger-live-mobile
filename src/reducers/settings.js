@@ -93,6 +93,9 @@ export type SettingsState = {
     KYC: {},
   },
   lastSeenDevice: ?DeviceModelInfo,
+  platformAppsLastOpened: {
+    [platformAppId: string]: number,
+  },
 };
 
 export const INITIAL_STATE: SettingsState = {
@@ -126,6 +129,7 @@ export const INITIAL_STATE: SettingsState = {
     KYC: {},
   },
   lastSeenDevice: null,
+  platformAppsLastOpened: {},
 };
 
 const pairHash = (from, to) => `${from.ticker}_${to.ticker}`;
@@ -345,6 +349,13 @@ const handlers: Object = {
     ...state,
     lastSeenDevice: dmi,
   }),
+  SET_PLATFORM_APP_LAST_OPENED: (state: SettingsState, { payload }) => ({
+    ...state,
+    platformAppsLastOpened: {
+      ...(state.platformAppsLastOpened || {}),
+      [payload.platformAppId]: payload.timestamp,
+    },
+  }),
 };
 
 const storeSelector = (state: *): SettingsState => state.settings;
@@ -505,3 +516,6 @@ export const swapKYCSelector = (state: Object) => state.settings.swap.KYC;
 
 export const lastSeenDeviceSelector = (state: State) =>
   state.settings.lastSeenDevice;
+
+export const platformAppsLastOpenedSelector = (state: State) =>
+  state.settings.platformAppsLastOpened;
