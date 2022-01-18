@@ -1,6 +1,6 @@
 import React, { useMemo, useCallback, useState, useEffect } from "react";
 import { StyleSheet } from "react-native";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { useNavigation } from "@react-navigation/native";
 import { usePlatformApp } from "@ledgerhq/live-common/lib/platform/PlatformAppProvider";
@@ -9,20 +9,18 @@ import { AccountLike, Account } from "@ledgerhq/live-common/lib/types";
 import { AppManifest } from "@ledgerhq/live-common/lib/platform/types";
 import useEnv from "@ledgerhq/live-common/lib/hooks/useEnv";
 import { keyBy } from "lodash";
-import { Flex } from "@ledgerhq/native-ui";
 
 import { useBanner } from "../../components/banners/hooks";
 import TrackScreen from "../../analytics/TrackScreen";
 import { ScreenName } from "../../const";
 import { setPlatformAppLastOpened } from "../../actions/settings";
-import { platformAppsLastOpenedSelector } from "../../reducers/settings";
 
 import DAppDisclaimer, { Props as DisclaimerProps } from "./DAppDisclaimer";
 import AnimatedHeaderView from "../../components/AnimatedHeader";
-import AppRow from "./AppRow";
-import Divider from "./Divider";
 import SectionHeader from "./SectionHeader";
-import AppThumbnailSmall from "./AppThumbnailSmall";
+import Filter from "./Filter";
+import SectionRecentlyUsed from "./SectionRecentlyUsed";
+import AppsList from "./AppsList";
 
 type RouteParams = {
   defaultAccount: AccountLike | null | undefined;
@@ -34,8 +32,6 @@ type DisclaimerOpts = Omit<DisclaimerProps, "isOpened"> | null;
 
 const DAPP_DISCLAIMER_ID = "PlatformAppDisclaimer";
 
-const NB_RECENTLY_USED_SHOWN = 4;
-
 const PlatformCatalog = ({ route }: { route: { params: RouteParams } }) => {
   const { platform, ...routeParams } = route.params ?? {};
   const navigation = useNavigation();
@@ -43,13 +39,12 @@ const PlatformCatalog = ({ route }: { route: { params: RouteParams } }) => {
   const { t } = useTranslation();
 
   const { manifests, catalogMetadata } = usePlatformApp();
-  const { appsMetadata = [] } = catalogMetadata || {};
-  const lastOpenedApps = useSelector(platformAppsLastOpenedSelector);
+  const { appsMetadata, supercategories = [] } = catalogMetadata || {};
 
-  const appsMetadataMappedById: Record<string, AppMetadata> = useMemo(
-    () => keyBy(appsMetadata, "id"),
-    [appsMetadata],
-  );
+  const appsMetadataMappedById = useMemo(() => keyBy(appsMetadata, "id"), [
+    appsMetadata,
+  ]);
+
   const experimental = useEnv("PLATFORM_EXPERIMENTAL_APPS");
 
   const filteredManifests = useMemo(() => {
@@ -65,10 +60,6 @@ const PlatformCatalog = ({ route }: { route: { params: RouteParams } }) => {
       branches,
     });
   }, [manifests, experimental]);
-
-  const filteredManifestsById = useMemo(() => keyBy(filteredManifests, "id"), [
-    filteredManifests,
-  ]);
 
   // Disclaimer State
   const [disclaimerOpts, setDisclaimerOpts] = useState<DisclaimerOpts>(null);
@@ -123,15 +114,34 @@ const PlatformCatalog = ({ route }: { route: { params: RouteParams } }) => {
     }
   }, [platform, filteredManifests, navigation, routeParams]);
 
-  const lastOpenedAppsList = useMemo(
+  const [supercategoryFilter, setSupercategoryFilter] = useState("all");
+
+  const supercategoryFilteredManifests = useMemo(
     () =>
-      [
-        ...Object.keys(lastOpenedApps)
-          .filter(appId => filteredManifestsById.hasOwnProperty(appId))
-          .sort((a, b) => lastOpenedApps[b] - lastOpenedApps[a]),
-        ...Array(NB_RECENTLY_USED_SHOWN).fill(""),
-      ].slice(0, 4),
-    [lastOpenedApps, filteredManifestsById],
+      filteredManifests.filter(
+        (manifest: AppManifest) =>
+          appsMetadataMappedById[manifest.id]?.supercategory ===
+          supercategoryFilter,
+      ),
+    [appsMetadataMappedById, supercategoryFilter, filteredManifests],
+  );
+
+  const handlePressSupercategory = useCallback(
+    supercategory => {
+      setSupercategoryFilter(supercategory);
+    },
+    [setSupercategoryFilter],
+  );
+
+  const supercategoriesOptions = useMemo(
+    () =>
+      ["all", ...supercategories].map(supercategory => ({
+        value: supercategory,
+        label: t(`platform.category.${supercategory}`),
+        enabled: supercategoryFilter === supercategory,
+        onPress: () => handlePressSupercategory(supercategory),
+      })),
+    [t, supercategories, handlePressSupercategory, supercategoryFilter],
   );
 
   return (
@@ -149,36 +159,28 @@ const PlatformCatalog = ({ route }: { route: { params: RouteParams } }) => {
           icon={disclaimerOpts.icon}
         />
       )}
-      <SectionHeader title={t("platform.recentlyUsed")} />
-      {lastOpenedAppsList.length > 0 && (
-        <Flex
-          flexDirection="row"
-          justifyContent="space-between"
-          marginBottom={40}
-        >
-          {lastOpenedAppsList.map((appName, index, arr) => (
-            <AppThumbnailSmall
-              appManifest={filteredManifestsById[appName]}
-              onPress={handlePressCard}
-            />
-          ))}
-        </Flex>
+      <Filter options={supercategoriesOptions} />
+      {supercategoryFilter === "all" ? (
+        <>
+          <SectionRecentlyUsed
+            handlePressApp={handlePressCard}
+            filteredManifests={filteredManifests}
+            catalogMetadata={catalogMetadata}
+          />
+          <SectionHeader title={t("platform.liveApps")} />
+          <AppsList
+            handlePressApp={handlePressCard}
+            filteredManifests={filteredManifests}
+            catalogMetadata={catalogMetadata}
+          />
+        </>
+      ) : (
+        <AppsList
+          handlePressApp={handlePressCard}
+          filteredManifests={supercategoryFilteredManifests}
+          catalogMetadata={catalogMetadata}
+        />
       )}
-      <SectionHeader title={t("platform.liveApps")} />
-      {filteredManifests.map((manifest, index, arr) => {
-        const appMetadata = appsMetadataMappedById[manifest.id];
-        return (
-          <>
-            <AppRow
-              key={manifest.id}
-              manifest={manifest}
-              appMetadata={appMetadata}
-              onPress={handlePressCard}
-            />
-            {index !== arr.length - 1 && <Divider />}
-          </>
-        );
-      })}
     </AnimatedHeaderView>
   );
 };

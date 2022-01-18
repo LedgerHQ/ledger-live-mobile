@@ -3793,7 +3793,28 @@
       }
     },
     "liveApps": "Live Apps",
-    "recentlyUsed": "Recently Used"
+    "recentlyUsed": "Recently Used",
+    "category": {
+      "all": "All",
+      "buy": "Buy",
+      "card": "Card",
+      "compound": "Compound",
+      "defi": "Defi",
+      "dex": "Decentralized Exchange",
+      "earn": "Earn",
+      "exchange": "Exchange",
+      "gift cards": "Gift Cards",
+      "lend": "Lend",
+      "nft": "NFT",
+      "portfolio": "Portfolio",
+      "services": "Services",
+      "spend": "Spend",
+      "staking": "Staking",
+      "swap": "Swap",
+      "tools": "Tools",
+      "trade": "Trade",
+      "other": "Other"
+    }
   },
   "nft": {
     "account": {
