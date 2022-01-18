@@ -752,7 +752,7 @@
   },
   "onboarding": {
     "stepWelcome": {
-      "title": "Bienvenue sur Ledger Live",
+      "title": "Bienvenue chez Ledger",
       "subtitle": "Gérez vos cryptos en toute sécurité depuis votre smartphone.",
       "start": "Commencer",
       "noDevice": "Pas encore de wallet Ledger ?",
