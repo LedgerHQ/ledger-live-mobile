@@ -1288,7 +1288,7 @@
     },
     "emptyState": {
       "noAppsTitle": "Installer une app sur mon appareil",
-      "noAppsDesc": "Installez des apps sur votre appareil avant d'ajouter des comptes dans Ledger Live. Allez dans le Gestionnaire pour installer des apps.",
+      "noAppsDesc": "Installez des apps sur votre wallet avant d'ajouter des comptes dans Ledger Live. Allez dans le Gestionnaire pour installer des apps.",
       "noAccountsTitle": "Vous n'avez aucun compte.",
       "noAccountsDesc": "Ajoutez des comptes à votre Portefeuille.",
       "buttons": {
