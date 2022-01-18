@@ -1,6 +1,8 @@
 // @flow
 import React from "react";
-import { useTheme } from "@react-navigation/native";
+import { useTheme } from "styled-components/native";
+import { ManagerMedium, WalletMedium } from "@ledgerhq/native-ui/assets/icons";
+
 import { ScreenName, NavigatorName } from "../../const";
 import Portfolio, { PortfolioTabIcon } from "../../screens/Portfolio";
 import Transfer, { TransferTabIcon } from "../../screens/Transfer";
@@ -9,7 +11,6 @@ import ManagerNavigator, { ManagerTabIcon } from "./ManagerNavigator";
 import PlatformNavigator from "./PlatformNavigator";
 import TabIcon from "../TabIcon";
 import AccountsIcon from "../../icons/Accounts";
-import AppsIcon from "../../icons/Apps";
 
 import Tab from "./CustomBlockRouterNavigator";
 
@@ -22,19 +23,21 @@ export default function MainNavigator({
   route: { params: RouteParams },
 }) {
   const { colors } = useTheme();
+
   const { hideTabNavigation } = params || {};
   return (
     <Tab.Navigator
       screenOptions={{
         tabBarStyle: [
           {
-            borderTopColor: colors.lightFog,
-            backgroundColor: colors.card,
+            borderTopColor: colors.palette.neutral.c40,
+            backgroundColor: colors.palette.background.main,
           },
           hideTabNavigation ? { display: "none" } : {},
         ],
         tabBarShowLabel: false,
-        tabBarActiveTintColor: colors.live,
+        tabBarActiveTintColor: colors.palette.primary.c80,
+        tabBarInactiveTintColor: colors.palette.neutral.c70,
         headerShown: false,
       }}
     >
@@ -51,7 +54,7 @@ export default function MainNavigator({
         options={{
           unmountOnBlur: true,
           tabBarIcon: (props: any) => (
-            <TabIcon Icon={AccountsIcon} i18nKey="tabs.accounts" {...props} />
+            <TabIcon Icon={WalletMedium} i18nKey="tabs.accounts" {...props} />
           ),
           tabBarTestID: "TabBarAccounts",
         }}
@@ -71,7 +74,7 @@ export default function MainNavigator({
           headerShown: false,
           unmountOnBlur: true,
           tabBarIcon: (props: any) => (
-            <TabIcon Icon={AppsIcon} i18nKey="tabs.platform" {...props} />
+            <TabIcon Icon={ManagerMedium} i18nKey="tabs.platform" {...props} />
           ),
         }}
       />

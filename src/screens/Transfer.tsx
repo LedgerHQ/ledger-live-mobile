@@ -1,11 +1,20 @@
 /* @flow */
 import React, { useState } from "react";
-import { StyleSheet } from "react-native";
-import { useTheme } from "@react-navigation/native";
+import { SortMedium } from "@ledgerhq/native-ui/assets/icons";
+
+import styled from "styled-components/native";
 import Touchable from "../components/Touchable";
 import CreateModal from "../modals/Create";
-import TransferIcon from "../icons/Transfer";
 import { lockSubject } from "../components/RootNavigator/CustomBlockRouterNavigator";
+
+const TransferButton = styled(Touchable)`
+  border-radius: 40px;
+  height: 40px;
+  width: 40px;
+  align-items: center;
+  justify-content: center;
+  background-color: ${p => p.theme.colors.palette.neutral.c100};
+`;
 
 const hitSlop = {
   top: 10,
@@ -17,7 +26,6 @@ const hitSlop = {
 export default () => null;
 
 export function TransferTabIcon() {
-  const { colors } = useTheme();
   const [isModalOpened, setIsModalOpened] = useState(false);
 
   function openModal() {
@@ -30,26 +38,15 @@ export function TransferTabIcon() {
 
   return (
     <>
-      <Touchable
+      <TransferButton
         event="Transfer"
         disabled={lockSubject.getValue()}
         hitSlop={hitSlop}
         onPress={openModal}
-        style={[styles.root, { backgroundColor: colors.live }]}
       >
-        <TransferIcon size={20} color={"#FFF"} />
-      </Touchable>
+        <SortMedium size={24} color={"palette.background.main"} />
+      </TransferButton>
       <CreateModal isOpened={isModalOpened} onClose={onModalClose} />
     </>
   );
 }
-
-const styles = StyleSheet.create({
-  root: {
-    borderRadius: 39,
-    height: 39,
-    width: 39,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
