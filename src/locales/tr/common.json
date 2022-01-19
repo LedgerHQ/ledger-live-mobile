@@ -2858,6 +2858,23 @@
     "introDescription2": "Bunun kripto varlıklarınız üzerinde hiçbir etkisi yoktur.",
     "action": "Güncellemeye devam et"
   },
+  "systemLanguageAvailable": {
+    "title": "Change your app's language?",
+    "description": {
+      "newSupport": "Good news! Our teams have been working hard and Ledger Live now supports {{language}}.",
+      "advice": "You can always change your language back later in the settings."
+    },
+    "switchButton": "Switch to {{language}}",
+    "no": "I prefer not to",
+    "languages": {
+      "en": "English",
+      "fr": "French",
+      "ru": "Russian",
+      "es": "Spanish",
+      "zh": "Chinese",
+      "de": "German"
+    }
+  },
   "FirmwareUpdateCheckId": {
     "title": "Tanımlayıcı",
     "description": "Aynı tanımlayıcıyı gösteriyorsa lütfen {{fullDeviceName}} cihazınızda iki tuşa aynı anda basın:"
