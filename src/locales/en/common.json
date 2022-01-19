@@ -768,40 +768,43 @@
       }
     },
     "stepSelectDevice": {
-      "title": "Select your device",
+      "title": "What’s your device?",
       "nanoS": "Nano S",
       "nanoX": "Nano X",
-      "chooseDevice": "Choose your device"
+      "blue": "Blue"
     },
     "stepUseCase": {
-      "firstUse": "First time using your Nano?",
-      "recovery": "Already have a recovery phrase?",
-      "deviceActions": {
-        "setup": {
-          "title": "Set up a new Nano",
-          "subTitle": "Let’s start and set up your device!"
-        },
-        "pairing": {
-          "title": "Connect your Nano",
-          "subTitle": "Your device is already set up? Connect it to the app!"
-        },
-        "desktopSync": {
-          "title": "Sync crypto from your desktop app",
-          "subTitle": "Already got the desktop app? Sync it to manage your crypto from your smartphone!"
-        },
-        "restore": {
-          "title": "Restore your recovery phrase on a new device",
-          "subTitle": "Use an existing recovery phrase to restore your private keys on a new Nano!"
-        }
+      "title": "Hello!",
+      "or": "Or",
+      "firstUse": {
+        "title": "First time using this Nano?",
+        "label": "First use",
+        "subTitle": "Set up a new Nano",
+        "desc": "Let’s start and set up your device!"
+      },
+      "devicePairing": {
+        "title": "Already have a recovery phrase?",
+        "label": "Device pairing",
+        "subTitle": "Connect your Nano",
+        "desc": "Your device is already set up? Connect it to the app!"
+      },
+      "desktopSync": {
+        "title": "Already have a recovery phrase?",
+        "label": "Desktop sync",
+        "subTitle": "Sync crypto from your desktop app",
+        "desc": "Already got the desktop app? Sync it to manage your crypto from your smartphone!"
+      },
+      "restoreDevice": {
+        "label": "Restore device",
+        "subTitle": "Restore your recovery phrase on a new device",
+        "desc": "Use an existing recovery phrase to restore your private keys on a new Nano!"
       }
     },
     "stepNewDevice": {
-      "title": "BASICS",
       "0": {
         "label": "Basics",
         "title": "Access your crypto",
-        "desc": "Your crypto assets are stored on the blockchain. You need a private key to access and manage them.",
-        "action": "Don’t have a Nano? Discover the app"
+        "desc": "Your crypto assets are stored on the blockchain. You need a private key to access and manage them."
       },
       "1": {
         "label": "Basics",
@@ -811,18 +814,17 @@
       "2": {
         "label": "Basics",
         "title": "Stay offline",
-        "desc": "Ledger Live allows you to buy, sell, manage, exchange and earn crypto while remaining protected. You will validate every crypto transaction with your Nano."
+        "desc": "Your Nano works as a \"cold storage\" wallet. This means that it never exposes your private key online, even when using the app."
       },
       "3": {
         "label": "Basics",
         "title": "Validate transactions",
-        "desc": "Your Nano works as a \"cold storage\" wallet. This means that it never exposes your private key online, even when using the app."
+        "desc": "Ledger Live allows you to buy, sell, manage, exchange and earn crypto while remaining protected. You will validate every crypto transaction with your Nano."
       },
       "4": {
         "label": "Basics",
         "title": "Let’s set up your Nano!",
-        "desc": "We'll start by setting up your Nano security.",
-        "action": "Let’s do this!"
+        "desc": "We'll start by setting up your Nano security."
       },
       "cta": "Let’s do this!"
     },
@@ -840,7 +842,7 @@
             "label": "Stay alone, and choose a safe and quiet environment."
           }
         },
-        "cta": "Next",
+        "cta": "OK, I’m ready!",
         "warning": {
           "title": "Please be careful",
           "desc": "Make sure you follow the instructions on this app at every step of the process.",
@@ -928,7 +930,7 @@
         "title": "Recovery phrase",
         "desc": "Your recovery phrase is a secret list of 24 words that backs up your private keys.",
         "desc_1": "Your Nano generates a unique recovery phrase. Ledger does not keep a copy of it.",
-        "cta": "Setup my PIN Code",
+        "cta": "Recovery phrase",
         "checkboxDesc": "I understand that if I lose this recovery phrase, I will not be able to access my crypto in case I lose access to my Nano."
       },
       "recoveryPhraseSetup": {
@@ -988,13 +990,13 @@
           "title": "Where should I keep my recovery phrase?",
           "bullets": {
             "0": {
-              "label": "<bold>never</bold> enter it on a computer, phone or any other device. Don't take a picture of it."
+              "label": "<1>NEVER</1> enter it on a computer, phone or any other device. Don't take a picture of it."
             },
             "1": {
-              "label": "<bold>NEVER</bold> share your 24 words with anyone."
+              "label": "<1>NEVER</1> share your 24 words with anyone."
             },
             "2": {
-              "label": "<bold>ALWAYS</bold> store it in a secure place, out of sight."
+              "label": "<1>ALWAYS</1> store it in a secure place, out of sight."
             },
             "3": {
               "label": "Ledger will never ask for your recovery phrase."
@@ -2654,15 +2656,12 @@
       "action": "Continue"
     },
     "Pairing": {
-      "title1": "Check matching codes",
-      "title2": "Validate",
       "step1": "Validate if the code displayed on your phone exactly matches the one displayed on your {{productName}}.",
       "step2": "Validate on your {{productName}} by pressing both buttons together."
     },
     "GenuineCheck": {
       "title": "Device authentication check",
-      "accept": "Please don't turn off your Nano X. Make sure you allow <1>Ledger Manager</1>.",
-      "info": "This step is meant to ensure that your Nano is authentical."
+      "accept": "Please don't turn off your Nano X. Make sure you allow <1>Ledger Manager</1>."
     },
     "ScanningHeader": {
       "title": "Looking for devices",
@@ -2860,6 +2859,23 @@
     "introDescription1": "Please note that all the apps on your device will be deleted. You can reinstall your apps after the firmware update.",
     "introDescription2": "This has no impact on your crypto assets.",
     "action": "Continue update"
+  },
+  "systemLanguageAvailable": {
+    "title": "Change your app's language?",
+    "description": {
+      "newSupport": "Good news! Our teams have been working hard and Ledger Live now supports {{language}}.",
+      "advice": "You can always change your language back later in the settings."
+    },
+    "switchButton": "Switch to {{language}}",
+    "no": "I prefer not to",
+    "languages": {
+      "en": "English",
+      "fr": "French",
+      "ru": "Russian",
+      "es": "Spanish",
+      "zh": "Chinese",
+      "de": "German"
+    }
   },
   "FirmwareUpdateCheckId": {
     "title": "Identifier",
@@ -3659,13 +3675,12 @@
     "memo": "Memo"
   },
   "Terms": {
-    "title": "TERMS OF USE",
+    "title": "Terms of Use",
     "read": "Read the Terms of Use",
     "switchLabel": "I have read and agree with the <1>Terms of Service</1>",
-    "switchLabelFull": "I have read and agree with the Privacy Policy.",
+    "switchLabelFull": "I have read and accept the Terms of Service and Privacy Policy",
     "cta": "Enter Ledger App",
-    "service": "Terms of service",
-    "subTitle": "Please take some time to review our Terms of service and Privacy Policy"
+    "service": "Terms of service"
   },
   "exchange": {
     "buy": {
@@ -6356,7 +6371,8 @@
           }
         },
         "genuineCheck": {
-          "title": "Enable Ledger Manager on your {{productName}}"
+          "title": "Enable Ledger Manager on your {{productName}}",
+          "accept": "Please don't turn off your Nano X. Make sure you allow <1>Ledger Manager</1>."
         },
         "genuineCheckPending": {
           "title": "Checking if the device is genuine..."
@@ -6404,12 +6420,15 @@
         "action": "Continue"
       },
       "Pairing": {
+        "title1": "Check matching codes",
+        "title2": "Validate",
         "step1": "Validate if the code displayed on your phone exactly matches the one displayed on your {{productName}}.",
         "step2": "Validate on your {{productName}} by pressing both buttons together."
       },
       "GenuineCheck": {
         "title": "Device authentication check",
-        "accept": "Please don't turn off your Nano X. Make sure you allow <1>Ledger Manager</1>."
+        "accept": "Please don't turn off your Nano X. Make sure you allow <1>Ledger Manager</1>.",
+        "info": "This step is meant to ensure that your Nano is authentical."
       },
       "ScanningHeader": {
         "title": "Looking for devices",
@@ -6607,6 +6626,23 @@
       "introDescription1": "Please note that all the apps on your device will be deleted. You can reinstall your apps after the firmware update.",
       "introDescription2": "This has no impact on your crypto assets.",
       "action": "Continue update"
+    },
+    "systemLanguageAvailable": {
+      "title": "Change your app's language?",
+      "description": {
+        "newSupport": "Good news! Our teams have been working hard and Ledger Live now supports {{language}}.",
+        "advice": "You can always change your language back later in the settings."
+      },
+      "switchButton": "Switch to {{language}}",
+      "no": "I prefer not to",
+      "languages": {
+        "en": "English",
+        "fr": "French",
+        "ru": "Russian",
+        "es": "Spanish",
+        "zh": "Chinese",
+        "de": "German"
+      }
     },
     "FirmwareUpdateCheckId": {
       "title": "Identifier",
