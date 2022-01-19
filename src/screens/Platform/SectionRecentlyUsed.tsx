@@ -19,35 +19,35 @@ const SectionRecentlyUsed = ({
   const filteredManifestsById = useMemo(() => keyBy(filteredManifests, "id"), [
     filteredManifests,
   ]);
-  const lastOpenedAppsList = useMemo(
+  const sortedList = useMemo(
     () =>
-      [
-        ...Object.keys(lastOpenedApps)
-          .filter(appId =>
-            Object.prototype.hasOwnProperty.call(filteredManifestsById, appId),
-          )
-          .sort((a, b) => lastOpenedApps[b] - lastOpenedApps[a]),
-        ...Array(NB_RECENTLY_USED_SHOWN).fill(""),
-      ].slice(0, 4),
+      Object.keys(lastOpenedApps)
+        .filter(appId =>
+          Object.prototype.hasOwnProperty.call(filteredManifestsById, appId),
+        )
+        .sort((a, b) => lastOpenedApps[b] - lastOpenedApps[a]),
     [lastOpenedApps, filteredManifestsById],
   );
+  const filledList = useMemo(
+    () => [sortedList, ...Array(NB_RECENTLY_USED_SHOWN).fill()].slice(0, 4),
+    [sortedList],
+  );
+  if (!sortedList.length) return null;
   return (
     <Flex flexDirection="column">
       <SectionHeader title={t("platform.recentlyUsed")} />
-      {lastOpenedAppsList.length > 0 && (
-        <Flex
-          flexDirection="row"
-          justifyContent="space-between"
-          marginBottom={40}
-        >
-          {lastOpenedAppsList.map(appName => (
-            <AppThumbnailSmall
-              appManifest={filteredManifestsById[appName]}
-              onPress={handlePressApp}
-            />
-          ))}
-        </Flex>
-      )}
+      <Flex
+        flexDirection="row"
+        justifyContent="space-between"
+        marginBottom={40}
+      >
+        {filledList.map(appName => (
+          <AppThumbnailSmall
+            appManifest={filteredManifestsById[appName]}
+            onPress={handlePressApp}
+          />
+        ))}
+      </Flex>
     </Flex>
   );
 };
