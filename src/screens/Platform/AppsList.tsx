@@ -1,15 +1,15 @@
 import React, { useMemo } from "react";
 import { Flex } from "@ledgerhq/native-ui";
 import { keyBy } from "lodash";
-import { BaseSectionProps } from "./types";
+import { SectionBaseProps } from "./types";
 import AppRow from "./AppRow";
 import Divider from "./Divider";
 
 const AppsList = ({
   filteredManifests,
   catalogMetadata,
-  handlePressCard,
-}: BaseSectionProps) => {
+  handlePressApp,
+}: SectionBaseProps) => {
   const { appsMetadata = [] } = catalogMetadata;
   const appsMetadataMappedById = useMemo(() => keyBy(appsMetadata, "id"), [
     appsMetadata,
@@ -23,7 +23,7 @@ const AppsList = ({
             <AppRow
               manifest={manifest}
               appMetadata={appMetadata}
-              onPress={handlePressCard}
+              onPress={handlePressApp}
             />
             {index !== arr.length - 1 && <Divider />}
           </React.Fragment>
