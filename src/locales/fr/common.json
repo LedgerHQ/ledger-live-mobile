@@ -2599,7 +2599,7 @@
     "withoutDevice": "Continuer sans mon appareil",
     "steps": {
       "connecting": {
-        "title": "Connexion d'un {{deviceName}}",
+        "title": "Connexion de {{deviceName}}",
         "description": {
           "ble": "Assurez-vous que votre {{productName}} est déverrouillé et à proximité.",
           "usb": "Assurez-vous que votre {{productName}} est déverrouillé."
