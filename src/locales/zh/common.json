@@ -2858,6 +2858,23 @@
     "introDescription2": "该操作不会影响您的加密资产。",
     "action": "继续更新"
   },
+  "systemLanguageAvailable": {
+    "title": "Change your app's language?",
+    "description": {
+      "newSupport": "Good news! Our teams have been working hard and Ledger Live now supports {{language}}.",
+      "advice": "You can always change your language back later in the settings."
+    },
+    "switchButton": "Switch to {{language}}",
+    "no": "I prefer not to",
+    "languages": {
+      "en": "English",
+      "fr": "French",
+      "ru": "Russian",
+      "es": "Spanish",
+      "zh": "Chinese",
+      "de": "German"
+    }
+  },
   "FirmwareUpdateCheckId": {
     "title": "标识符",
     "description": "如果您的 {{fullDeviceName}} 上显示了同样的标识符，请同时按下两个按钮："
