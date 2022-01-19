@@ -2858,6 +2858,23 @@
     "introDescription2": "귀하의 암호화폐에는 영향을 주지 않습니다.",
     "action": "계속 업데이트"
   },
+  "systemLanguageAvailable": {
+    "title": "Change your app's language?",
+    "description": {
+      "newSupport": "Good news! Our teams have been working hard and Ledger Live now supports {{language}}.",
+      "advice": "You can always change your language back later in the settings."
+    },
+    "switchButton": "Switch to {{language}}",
+    "no": "I prefer not to",
+    "languages": {
+      "en": "English",
+      "fr": "French",
+      "ru": "Russian",
+      "es": "Spanish",
+      "zh": "Chinese",
+      "de": "German"
+    }
+  },
   "FirmwareUpdateCheckId": {
     "title": "식별자",
     "description": "동일한 식별자가 표시되면 {{fullDeviceName}}에서 양쪽 버튼을 함께 누르세요:"
