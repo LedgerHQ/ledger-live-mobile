@@ -752,7 +752,7 @@
   },
   "onboarding": {
     "stepWelcome": {
-      "title": "Ledgerへようこそ",
+      "title": "ようこそ、Ledgerへ",
       "subtitle": "スマートフォンで暗号資産を安全に管理しましょう。",
       "start": "はじめる",
       "noDevice": "デバイスをお持ちでない場合",
