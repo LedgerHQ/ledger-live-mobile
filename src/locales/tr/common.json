@@ -721,7 +721,7 @@
         "description": "3 Nano S ile ailenizi kriptoyla tanıştırın"
       },
       "buyCrypto": {
-        "title": "Kripto Satın Al",
+        "title": "Kripto Satın Alın",
         "description": "Ledger Live ile\nkripto satın alın"
       },
       "swap": {
@@ -1149,7 +1149,7 @@
       "cta": "Taramaya hazırım.",
       "bullets": {
         "0": {
-          "label": "Masaüstü uygulamasında <1>Ayarlar &gt; Hesaplar &gt; Hesap Dışa Aktarma</1> seçeneğini seçin."
+          "label": "Masaüstü uygulamasında <1>Ayarlar > Hesaplar > Hesapları dışa aktar</1> seçeneğini kullanın."
         },
         "1": {
           "label": "LiveQR kodunu telefonunuzla tarayın."
@@ -2643,7 +2643,7 @@
     }
   },
   "EditDeviceName": {
-    "title": "Cihazı yeniden adlandırma",
+    "title": "Rename device",
     "charactersRemaining": "{{remainingCount}} karakter kaldı",
     "action": "Onayla"
   },
@@ -2659,7 +2659,7 @@
     },
     "GenuineCheck": {
       "title": "Orijinal cihaz doğrulaması",
-      "accept": "Lütfen Nano X'inizi kapatmayın. <1>Ledger Yöneticisine</1> izin verdiğinizden emin olun."
+      "accept": "Lütfen Nano X'inizi kapatmayın. Cihazda <1>Ledger Yöneticisine</1> izin vermeniz gerekiyor."
     },
     "ScanningHeader": {
       "title": "Cihazlar aranıyor",
