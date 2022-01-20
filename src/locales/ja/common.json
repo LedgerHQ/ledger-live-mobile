@@ -1608,7 +1608,7 @@
   "help": {
     "gettingStarted": {
       "title": "ご利用ガイド",
-      "desc": "ここからスタート"
+      "desc": "はじめる"
     },
     "helpCenter": {
       "title": "Ledgerサポート",
@@ -1741,11 +1741,11 @@
       "supportDesc": "問題がある場合は、ハードウェアウォレットとLedger Liveの利用に関するヘルプページを参照してください。",
       "configureDevice": "デバイスのセットアップ",
       "configureDeviceDesc": "新規デバイスをセットアップ、または既存のデバイスを復元する。アカウントと設定はそのまま保持されます。",
-      "clearCache": "Cacheを消去",
+      "clearCache": "Cacheを削除",
       "clearCacheDesc": "ネットワーク上のトランザクションがスキャンされ、アカウントは再計算されます。",
       "clearCacheModal": "本当によろしいですか？",
       "clearCacheModalDesc": "ネットワーク上のトランザクションの完全なスキャンが新たに実行されます。アカウントの履歴が再構築され、残高は再計算されます。",
-      "clearCacheButton": "クリア",
+      "clearCacheButton": "削除",
       "exportLogs": "ログを保存",
       "exportLogsDesc": "トラブルを解決するために、Ledger Liveログの保存が必要になる場合があります。",
       "hardReset": "Ledger Liveをリセット",
