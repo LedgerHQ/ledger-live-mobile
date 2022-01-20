@@ -9,7 +9,7 @@ import {
 } from "react-native-gesture-handler";
 import Animated from "react-native-reanimated";
 
-const PanAndZoomView = ({ children }) => {
+const PanAndZoomView = ({ children }: { children: React$Node }) => {
   // normal number used to store the current scale and update the corresponding animated value
   // after the pinch gesture is finished
   const scaleOffset = useRef(1);
