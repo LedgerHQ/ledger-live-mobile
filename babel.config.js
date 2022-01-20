@@ -16,6 +16,7 @@ module.exports = {
                 ".android.js",
                 ".js",
                 ".json",
+                ".cjs",
               ],
             },
           ],

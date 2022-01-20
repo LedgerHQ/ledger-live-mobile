@@ -11,7 +11,7 @@ const defaultSourceExts = require("metro-config/src/defaults/defaults")
 module.exports = {
   resolver: {
     sourceExts: process.env.V3
-      ? ["tsx", "ts", "jsx", "js", "cjs"]
+      ? ["tsx", "ts", "jsx", "js", "json", "cjs"]
       : [...defaultSourceExts, "cjs"],
   },
   transformer: {
