@@ -68,6 +68,7 @@ const PanAndZoomView = ({ children }: { children: React$Node }) => {
   // we restrict pinch gestures to two fingers and panning gesture to one finger otherwise they
   // conflict with each other and we get weird behaviour on Android
   return (
+    // $FlowFixMe
     <PinchGestureHandler
       onGestureEvent={handlePinch}
       minPointers={2}

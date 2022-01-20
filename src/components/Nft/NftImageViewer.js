@@ -19,16 +19,14 @@ type RouteParams = {
 
 const NftViewer = ({ route }: Props) => {
   // T
-
   const { params } = route;
-  const { media, status } = params;
 
   return (
     <View style={styles.imageContainer}>
       <PanAndZoomView>
         <NftImage
-          src={media}
-          status={status}
+          src={params?.media}
+          status={params?.status}
           style={styles.image}
           hackWidth={10000}
           resizeMode="contain"
