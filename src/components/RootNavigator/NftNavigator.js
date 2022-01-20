@@ -19,7 +19,7 @@ const NftNavigator = () => {
     <Stack.Navigator screenOptions={stackNavConfig} detachInactiveScreens>
       <Stack.Screen
         name={ScreenName.NftViewer}
-        component={NftViewer}        
+        component={NftViewer}
         options={({ navigation }) => ({
           title: null,
           headerRight: null,

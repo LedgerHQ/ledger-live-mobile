@@ -474,7 +474,7 @@ export default function BaseNavigator() {
         component={NftNavigator}
         options={{
           headerShown: false,
-        }}   
+        }}
       />
       {Object.keys(families).map(name => {
         const { component, options } = families[name];

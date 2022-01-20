@@ -1,9 +1,8 @@
 // @flow
 
 import React from "react";
-import NftImage from "./NftImage";
-
 import { View, StyleSheet } from "react-native";
+import NftImage from "./NftImage";
 
 import PanAndZoomView from "../PanAndZoomView";
 

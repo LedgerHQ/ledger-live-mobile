@@ -94,7 +94,6 @@ export const ScreenName = {
   NftImageViewer: "NftImageViewer",
   NftViewer: "NftViewer",
 
-
   OperationDetails: "OperationDetails",
   PairDevices: "PairDevices",
   PasswordAdd: "PasswordAdd",
