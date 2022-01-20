@@ -13,6 +13,7 @@ import {
 import { ValueChange } from "@ledgerhq/live-common/lib/portfolio/v2/types";
 import { CompoundAccountSummary } from "@ledgerhq/live-common/lib/compound/types";
 
+import { Text } from "@ledgerhq/native-ui";
 import LText from "../../components/LText";
 import CurrencyUnitValue from "../../components/CurrencyUnitValue";
 import Header from "./Header";
@@ -98,22 +99,22 @@ const renderListHeaderTitle = (
     >
       <View style={styles.balanceContainer}>
         <View style={styles.warningWrapper}>
-          <LText style={styles.balanceText} semiBold>
+          <Text variant={"large"} fontWeight={"medium"} color={"neutral.c70"}>
             <CurrencyUnitValue
               {...items[0]}
               disableRounding
               joinFragmentsSeparator=" "
             />
-          </LText>
+          </Text>
           <TransactionsPendingConfirmationWarning maybeAccount={account} />
         </View>
-        <LText style={styles.balanceSubText} color="smoke" semiBold>
+        <Text variant={"h1"}>
           {typeof items[1]?.value === "number" ? (
             <CurrencyUnitValue {...items[1]} disableRounding />
           ) : (
             <NoCountervaluePlaceholder />
           )}
-        </LText>
+        </Text>
       </View>
     </Touchable>
   );
