@@ -7,7 +7,7 @@ import {
   PanGestureHandler,
   State,
 } from "react-native-gesture-handler";
-import { Animated } from "react-native";
+import Animated from "react-native-reanimated";
 
 const PanAndZoomView = ({ children }) => {
   // normal number used to store the current scale and update the corresponding animated value
@@ -65,7 +65,7 @@ const PanAndZoomView = ({ children }) => {
     },
   );
 
-  // we restrict pinch gestures to two fingers and panning gesture to one finger otherwise they 
+  // we restrict pinch gestures to two fingers and panning gesture to one finger otherwise they
   // conflict with each other and we get weird behaviour on Android
   return (
     <PinchGestureHandler
