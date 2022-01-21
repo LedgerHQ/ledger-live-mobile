@@ -25,7 +25,7 @@ type RouteParams = {
   transaction: Transaction,
 };
 
-function CryptoEditMemo({ navigation, route }: Props) {
+function CryptoOrgEditMemo({ navigation, route }: Props) {
   const { colors } = useTheme();
   const { t } = useTranslation();
   const [memo, setMemo] = useState(route.params.transaction.memo);
@@ -64,7 +64,7 @@ function CryptoEditMemo({ navigation, route }: Props) {
 
           <View style={styles.flex}>
             <Button
-              event="CryptoEditMemoContinue"
+              event="CryptoOrgEditMemoContinue"
               type="primary"
               title={t("send.summary.validateMemo")}
               onPress={onValidateText}
@@ -82,7 +82,7 @@ const options = {
   headerLeft: null,
 };
 
-export { CryptoEditMemo as component, options };
+export { CryptoOrgEditMemo as component, options };
 
 const styles = StyleSheet.create({
   root: {

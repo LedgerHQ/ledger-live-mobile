@@ -20,7 +20,7 @@ export default function CryptoSendRowsCustom({ account, transaction }: Props) {
   const navigation = useNavigation();
 
   const editMemo = useCallback(() => {
-    navigation.navigate(ScreenName.CryptoEditMemo, {
+    navigation.navigate(ScreenName.CryptoOrgEditMemo, {
       account,
       transaction,
     });
@@ -57,7 +57,7 @@ export default function CryptoSendRowsCustom({ account, transaction }: Props) {
   );
 }
 
-const styles = StyleSheet.create({
+urlnst styles = StyleSheet.create({
   memoContainer: {
     flexDirection: "row",
   },

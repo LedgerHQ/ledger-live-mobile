@@ -1,6 +1,6 @@
 // @flow
-import * as CryptoEditMemo from "./EditMemo";
+import * as CryptoOrgEditMemo from "./EditMemo";
 
 export {
-  CryptoEditMemo,
+  CryptoOrgEditMemo,
 };
