@@ -1304,7 +1304,7 @@
   },
   "addAccountsModal": {
     "ctaAdd": "アカウントを追加",
-    "ctaImport": "デスクトップアカウントのインポート"
+    "ctaImport": "デスクトップアカウントをインポート"
   },
   "byteSize": {
     "bytes": "{{size}}バイト",
