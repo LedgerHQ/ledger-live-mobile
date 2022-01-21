@@ -3,6 +3,7 @@
 import React from "react";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "@react-navigation/native";
 import LText from "../../components/LText";
 import ProviderBullet from "./ProviderBullet";
 
@@ -16,6 +17,7 @@ type BuyOptionProps = {
 
 export default function BuyOption(props: BuyOptionProps) {
   const { t } = useTranslation();
+  const { colors } = useTheme();
 
   const { icon, name, supportedCoinsCount, onPress, isActive } = props;
 
@@ -24,9 +26,7 @@ export default function BuyOption(props: BuyOptionProps) {
       style={[
         styles.body,
         {
-          borderColor: isActive
-            ? "rgb(100, 144, 241)"
-            : "rgba(20, 37, 51, 0.1)",
+          borderColor: isActive ? colors.live : colors.border,
         },
       ]}
       onPress={onPress}
