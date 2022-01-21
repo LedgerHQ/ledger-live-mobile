@@ -57,7 +57,7 @@ export default function CryptoSendRowsCustom({ account, transaction }: Props) {
   );
 }
 
-urlnst styles = StyleSheet.create({
+const styles = StyleSheet.create({
   memoContainer: {
     flexDirection: "row",
   },
