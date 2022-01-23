@@ -1304,7 +1304,7 @@
   },
   "addAccountsModal": {
     "ctaAdd": "Hesap ekle",
-    "ctaImport": "Masaüstü hesaplarını içe aktarma"
+    "ctaImport": "Masaüstü hesaplarını içe aktar"
   },
   "byteSize": {
     "bytes": "{{size}} bayt",
