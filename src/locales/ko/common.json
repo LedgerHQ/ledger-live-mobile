@@ -388,13 +388,13 @@
       "description": "ERC20 토큰 트랜잭션 수수료로 계정에 ETH를 전송하세요."
     },
     "NotEnoughBalanceToDelegate": {
-      "title": "위임에 필요한 잔금이 부족합니다"
+      "title": "위임에 필요한 잔액이 부족합니다"
     },
     "NotEnoughBalanceInParentAccount": {
-      "title": "부모 계정의 잔금이 부족합니다"
+      "title": "상위 계정의 잔액이 부족합니다"
     },
     "NotEnoughSpendableBalance": {
-      "title": "잔금은 {{minimumAmount}} 미만일 수 없습니다"
+      "title": "잔액은 {{minimumAmount}} 미만일 수 없습니다"
     },
     "NotEnoughBalanceBecauseDestinationNotCreated": {
       "title": "수령인 주소를 활성화하려면 최소 {{minimalAmount}}(이)가 필요합니다"
@@ -584,16 +584,16 @@
       "title": "현재 지명이 없습니다"
     },
     "PolkadotAllFundsWarning": {
-      "title": "향후 트랜잭션 수수료 지불에 필요한 잔금을 충분히 남겨 두세요"
+      "title": "향후 트랜잭션 수수료 지불에 필요한 잔액을 충분히 남겨 두세요"
     },
     "PolkadotDoMaxSendInstead": {
-      "title": "잔금은 {{minimumBalance}} 이상이어야 합니다. 최대 금액을 전송하여 계정을 비우세요."
+      "title": "잔액은 {{minimumBalance}} 이상이어야 합니다. 최대 금액을 전송하여 계정을 비우세요."
     },
     "PolkadotBondMinimumAmount": {
       "title": "적어도 {{minimumBondAmount}} 이상 본딩해야 합니다."
     },
     "PolkadotBondMinimumAmountWarning": {
-      "title": "본딩된 잔금은 {{minimumBondAmount}} 이상이어야 합니다."
+      "title": "본딩된 잔액은 {{minimumBondBalance}} 이상이어야 합니다."
     },
     "PolkadotMaxUnbonding": {
       "title": "언본딩 한도를 초과했습니다"
@@ -1278,13 +1278,13 @@
     "nanoX": "Nano X"
   },
   "portfolio": {
-    "totalBalance": "총 잔금",
+    "totalBalance": "총 잔액",
     "syncError": "동기화 오류",
     "syncFailed": "동기화 실패",
     "syncPending": "동기화 중...",
     "transactionsPendingConfirmation": {
-      "title": "동기화되지 않은 잔금",
-      "desc": "일부 트랜잭션이 아직 확인되지 않았습니다. 트랜잭션이 확인된 후 잔금에 반영되며 사용이 가능합니다."
+      "title": "동기화되지 않은 잔액",
+      "desc": "일부 트랜잭션이 아직 확인되지 않았습니다. 트랜잭션이 확인된 후 잔액에 반영되며 사용이 가능합니다."
     },
     "emptyState": {
       "noAppsTitle": "내 장치에 앱을 설치합니다",
@@ -1328,8 +1328,8 @@
     "choices": {
       "name|asc": "이름 A-Z",
       "name|desc": "이름 Z-A",
-      "balance|asc": "최저 잔금",
-      "balance|desc": "최대 잔금"
+      "balance|asc": "최저 잔액",
+      "balance|desc": "최고 잔액"
     }
   },
   "operations": {
@@ -1545,7 +1545,7 @@
         "buttonTitle": "설정으로 이동"
       }
     },
-    "availableBalance": "이용 가능 잔금",
+    "availableBalance": "이용 가능 잔액",
     "totalSupplied": "입금 금액",
     "tronFrozen": "동결됨",
     "bandwidth": "대역폭",
@@ -1602,7 +1602,7 @@
     "list": "자산 배분 ({{count}})",
     "assets": "자산",
     "assets_plural": "자산",
-    "total": "총 잔금",
+    "total": "총 잔액",
     "listAccount": "계정 배분 ({{count}})"
   },
   "help": {
@@ -1655,7 +1655,7 @@
         "dusk": "새벽",
         "light": "밝은"
       },
-      "counterValueDesc": "잔금 및 거래 통화를 선택하세요.",
+      "counterValueDesc": "잔액 및 거래 통화를 선택하세요.",
       "exchange": "요율 공급자",
       "exchangeDesc": "비트코인에서 {{fiat}}로 환율 공급자 설정",
       "stock": "지역 시장 지표",
@@ -1744,7 +1744,7 @@
       "clearCache": "캐시 삭제",
       "clearCacheDesc": "네트워크의 트랜잭션을 스캔하고 사용자 계정을 다시 계산합니다.",
       "clearCacheModal": "계속 진행할까요?",
-      "clearCacheModalDesc": "네트워크에서 신규 및 완전한 트랜잭션 스캔이 수행됩니다. 계정 내역이 다시 구성되고 잔금을 재산출합니다.",
+      "clearCacheModalDesc": "네트워크에서 신규 및 완전한 트랜잭션 스캔이 수행됩니다. 계정 내역이 다시 구성되고 잔액을 재산출합니다.",
       "clearCacheButton": "제거",
       "exportLogs": "로그 저장",
       "exportLogsDesc": "문제 해결을 위해 Ledger Live 로그가 필요할 수 있습니다.",
@@ -1948,7 +1948,7 @@
         "source": "출처",
         "target": "보내는 계정",
         "noAccount": "{{currency }} 계정이 없습니다",
-        "balance": "잔금 <0>123</0>",
+        "balance": "잔액 <0>123</0>",
         "fromAccount": "계정 선택",
         "toAccount": "계정 선택",
         "paraswapCTA": "Paraswap을 찾으세요? 탐색 탭으로 이동했습니다!",
@@ -1970,7 +1970,7 @@
         },
         "noAccounts": {
           "title": "스왑할 {{ticker}} 없음",
-          "desc": "사용자의 {{currencyName}} 계정에 스왑할 잔금이 없습니다.",
+          "desc": "사용자의 {{currencyName}} 계정에 스왑할 잔액이 없습니다.",
           "addAccountCta": "계정 추가",
           "cta": "닫기"
         },
@@ -2076,7 +2076,7 @@
         "amountSuppliedTooltip": "네트워크 대출 금액",
         "currencyAPY": "통화 APY",
         "currencyAPYTooltip": "계속 컴파운드가 적용되는 예치금 연간 수익율",
-        "accruedInterests": "이자 잔금",
+        "accruedInterests": "이자 잔액",
         "accruedInterestsTooltip": "대출 자산에 대한 발생 이자",
         "interestEarned": "발생 이자",
         "interestEarnedTooltip": "출금 후 발생한 이자",
@@ -2217,7 +2217,7 @@
           "stepRange": "{{totalSteps}} 중 {{currentStep}} 단계"
         },
         "amount": {
-          "totalAvailable": "이용 가능 잔금",
+          "totalAvailable": "이용 가능 잔액",
           "placeholderMax": "최대치 출금"
         },
         "validation": {
@@ -2328,7 +2328,7 @@
       "sent": "트랜잭션 전송 완료",
       "amount": "금액",
       "fees": "수수료",
-      "confirm": "네트워크가 트랜잭션을 확인하면 계정 잔금이 업데이트됩니다.",
+      "confirm": "네트워크가 트랜잭션을 확인하면 계정 잔액이 업데이트됩니다.",
       "button": {
         "details": "세부사항 보기",
         "retry": "재시도"
@@ -2354,7 +2354,7 @@
     "info": {
       "maxSpendable": {
         "title": "최대 사용 가능 금액",
-        "description": "최대 사용 가능 금액은 한 트랜잭션에 보낼 수 있는 계정의 총 잔금입니다."
+        "description": "최대 사용 가능 금액은 한 트랜잭션에 보낼 수 있는 계정의 총 잔액입니다."
       }
     }
   },
@@ -2436,7 +2436,7 @@
       "stepRange": "{{totalSteps}} 중 {{currentStep}} 단계"
     },
     "validation": {
-      "success": "보상이 가용 잔금에 추가됩니다.",
+      "success": "보상이 이용 가능 잔액에 추가됩니다.",
       "button": {
         "done": "완료",
         "cta": "세부사항 확인"
@@ -2912,8 +2912,8 @@
           "info": {
             "description": "Algo를 위임하여 보상을 받으면서 자산에 대한 보안과 통제 권한도 모두 유지하세요.",
             "steps": {
-              "0": "보상을 받으려면 최소 잔금(1 ALGO)이 필요합니다.",
-              "1": "계정 잔금을 늘려 더 많은 보상을 받아보세요.",
+              "0": "보상을 받으려면 최소 잔액(1 ALGO)이 필요합니다.",
+              "1": "계정 잔액을 늘려 더 많은 보상을 받아보세요.",
               "2": "계정에서 트랜잭션을 수행하여 보상을 수령하세요."
             },
             "howItWorks": "보상이 어떻게 이루어지는지",
@@ -2922,7 +2922,7 @@
           "starter": {
             "title": "축하합니다! {{amount}}(을)를 획득했습니다. 계속해서 보상을 수령하세요.",
             "howItWorks": "보상이 어떻게 이루어지는지",
-            "warning": "계정에 빈 트랜잭션을 생성하라는 안내가 표시됩니다. 그렇게 할 경우, 최소 트랜잭션 수수료로 계정 잔금에 현재 보상이 추가됩니다.",
+            "warning": "계정에 빈 트랜잭션을 생성하라는 안내가 표시됩니다. 그렇게 할 경우, 최소 트랜잭션 수수료로 계정 잔액에 현재 보상이 추가됩니다.",
             "cta": "계속"
           },
           "verification": {
