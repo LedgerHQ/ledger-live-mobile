@@ -2733,8 +2733,8 @@
       "title": "Storage",
       "used": "Used",
       "genuine": "Your device is genuine",
-      "appsInstalled": "<0>{{number}}</0> app installed",
-      "appsInstalled_plural": "<0>{{number}}</0> apps installed",
+      "appsInstalled": "App <0>{{number}}</0>",
+      "appsInstalled_plural": "Apps <0>{{number}}</0>",
       "storageAvailable": "available"
     },
     "installSuccess": {
@@ -6595,7 +6595,7 @@
     },
     "FirmwareVersionRow": {
       "title": "Firmware version",
-      "subtitle": "Firmware {{version}}"
+      "subtitle": "V {{version}}"
     },
     "FirmwareUpdateRow": {
       "title": "Firmware version {{version}} available",

@@ -7,11 +7,10 @@ import type { State, AppsDistribution } from "@ledgerhq/live-common/lib/apps";
 
 import manager from "@ledgerhq/live-common/lib/manager";
 
-import { Badge, Box, Button, Flex, Text } from "@ledgerhq/native-ui";
+import { Box, Button, Flex, Text } from "@ledgerhq/native-ui";
 import { CircledCheckMedium } from "@ledgerhq/native-ui/assets/icons";
 import styled, { useTheme } from "styled-components/native";
 import LText from "../../../components/LText";
-import Genuine from "../../../icons/Genuine";
 import FirmwareUpdateModal from "../Modals/FirmwareUpdateModal";
 import DeviceAppStorage from "./DeviceAppStorage";
 
@@ -19,11 +18,9 @@ import NanoS from "../../../images/devices/NanoS";
 import NanoX from "../../../images/devices/NanoX";
 
 import { urls } from "../../../config/urls";
-import Card from "../../../components/Card";
 
 import DeviceName from "./DeviceName";
 import { setAvailableUpdate } from "../../../actions/settings";
-import Touchable from "../../../components/Touchable";
 
 const illustrations = {
   nanoS: NanoS,
@@ -43,8 +40,6 @@ type Props = {
 
 const BorderCard = styled.View`
   flex-direction: column;
-  margin-left: ${(p) => p.theme.space[5]}px;
-  margin-right: ${(p) => p.theme.space[5]}px;
   border: 1px solid ${p => p.theme.colors.neutral.c40};
   border-radius: 4px;
 `;
@@ -88,6 +83,11 @@ const DeviceCard = ({
 
   return (
     <>
+      <View style={styles.title}>
+        <Text variant={'h1'} fontWeight={'medium'} color={'neutral.c100'} numberOfLines={1}>
+          <Trans i18nKey="ManagerDevice.title" />
+        </Text>
+      </View>
       <BorderCard>
         {firmware ? (
           <View style={styles.firmwareBanner}>
@@ -122,7 +122,7 @@ const DeviceCard = ({
               ><Trans i18nKey="common.contactUs" /></Button>
           </Box>
         ) : null}
-        <Flex flexDirection={"row"} mx={4} mb={8}>
+        <Flex flexDirection={"row"} mt={24} mx={4} mb={8}>
             { illustrations[deviceModel.id]({color: colors.neutral.c100}) }
           <Flex flex={1} flexDirection={'column'} alignItems={'flex-start'} ml={4}>
               <DeviceName
@@ -135,12 +135,14 @@ const DeviceCard = ({
               <Text variant={'body'} fontWeight={'medium'} color={'palette.neutral.c80'} numberOfLines={1} mr={3}><Trans i18nKey="DeviceItemSummary.genuine" /></Text>
               <CircledCheckMedium size={18} color={'palette.success.c80'} />
             </Flex>
-            <Badge badgeVariant={'primary'} active>
-              <Trans
-              i18nKey="FirmwareVersionRow.subtitle"
-              values={{ version: deviceInfo.version }}
-            />
-            </Badge>
+            <Flex style={styles.versionContainer} backgroundColor={"neutral.c80"}>
+              <Text variant={"subtitle"} fontWeight={"semiBold"} color={"neutral.c20"}>
+                <Trans
+                  i18nKey="v3.FirmwareVersionRow.subtitle"
+                  values={{ version: deviceInfo.version }}
+                />
+              </Text>
+            </Flex>
           </Flex>
         </Flex>
 
@@ -156,10 +158,13 @@ const DeviceCard = ({
 };
 
 const styles = StyleSheet.create({
+  title: {
+    marginTop: 8,
+    marginBottom: 32,
+  },
   card: {
     minHeight: 265,
     flexDirection: "column",
-    paddingHorizontal: 16,
     marginTop: 16,
   },
   capacityText: { fontSize: 13 },
@@ -193,6 +198,11 @@ backgroundColor: 'blue'
   deviceFirmware: {
     fontSize: 13,
     paddingRight: 8,
+  },
+  versionContainer: {
+    borderRadius: 4,
+    paddingHorizontal: 8,
+    paddingVertical: 5.5,
   },
   deviceCapacity: {
     flexDirection: "row",

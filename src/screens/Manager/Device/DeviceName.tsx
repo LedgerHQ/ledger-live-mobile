@@ -3,11 +3,10 @@ import { useNavigation } from "@react-navigation/native";
 import { useSelector } from "react-redux";
 import { Flex, Text } from "@ledgerhq/native-ui";
 import { PenMedium } from "@ledgerhq/native-ui/assets/icons";
-import styled from "styled-components/native";
 
 import { deviceNameByDeviceIdSelectorCreator } from "../../../reducers/ble";
-import Touchable from "../../../components/Touchable";
 import { ScreenName } from "../../../const";
+import { TouchableOpacity } from "react-native";
 
 type Props = {
   deviceId: string;
@@ -15,16 +14,6 @@ type Props = {
   deviceModel: { id: string; productName: string };
   disabled: boolean;
 };
-
-const EditButton = styled(Touchable)`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
-  margin-left: ${p => p.theme.space[4]}px;
-  padding-left: ${p => p.theme.space[2]}px;
-  padding-right: ${p => p.theme.space[2]}px;
-`;
 
 export default function DeviceNameRow({
   deviceId,
@@ -46,31 +35,24 @@ export default function DeviceNameRow({
   );
 
   return (
-    <Flex
-
-      flexDirection={"row"}
-      width={"100%"}
-      flexWrap={"nowrap"}
-      backgroundColor={"blue"}
-    >
-      <Text
-        variant={"h2"}
-        numberOfLines={1}
-        ellipsizeMode="tail"
-        backgroundColor={"red"}
-        style={{flexBasis: 0, flex: 1}}
-      >
+    <Flex flexDirection={"row"} flexWrap={"nowrap"}>
+      <Text variant={"h2"} numberOfLines={1} ellipsizeMode="tail">
         {savedName || initialDeviceName || productName}
       </Text>
       {id !== "nanoS" && (
-        <EditButton
-          onPress={onPress}
-          activeOpacity={0.5}
-          event="ManagerDeviceNameEdit"
-          disabled={disabled}
+        <Flex
+          ml={3}
+          backgroundColor={"palette.primary.c30"}
+          borderRadius={50}
+          width={24}
+          height={24}
+          alignItems="center"
+          justifyContent="center"
         >
-          <PenMedium size={22} color={"palette.neutral.c100"} />
-        </EditButton>
+          <TouchableOpacity onPress={onPress} disabled={disabled}>
+            <PenMedium size={13} color={"palette.primary.c80"}/>
+          </TouchableOpacity>
+        </Flex>
       )}
     </Flex>
   );
