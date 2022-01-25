@@ -5,6 +5,7 @@ import { View, StyleSheet, Platform } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import { useTranslation } from "react-i18next";
 import { useNavigation, useTheme } from "@react-navigation/native";
+import { usePlatformApp } from "@ledgerhq/live-common/lib/platform/PlatformAppProvider";
 import extraStatusBarPadding from "../../logic/extraStatusBarPadding";
 import TrackScreen from "../../analytics/TrackScreen";
 import Button from "../../components/Button";
@@ -24,15 +25,18 @@ export default function Buy() {
   const { colors } = useTheme();
 
   const [provider, setProvider] = useState<Provider>(null);
+  const { manifests } = usePlatformApp();
 
   const navigateToMoonPay = useCallback(() => {
-    navigation.navigate(NavigatorName.Platform, {
-      screen: ScreenName.PlatformCatalog,
-      params: {
-        platform: "moonpay",
-      },
+    // navigation.navigate(ScreenName.PlatformCatalog, {
+    //   platform: "moonpay",
+    // });
+    const manifest = manifests.get("moonpay");
+    navigation.navigate(ScreenName.PlatformApp, {
+      platform: manifest.id,
+      name: manifest.name,
     });
-  }, [navigation]);
+  }, [navigation, manifests]);
 
   const navigateToCoinify = useCallback(() => {
     navigation.navigate(ScreenName.Coinify);
@@ -40,7 +44,7 @@ export default function Buy() {
 
   const onContinue = useCallback(() => {
     provider === "moonpay" ? navigateToMoonPay() : navigateToCoinify();
-  });
+  }, [provider, navigateToMoonPay, navigateToCoinify]);
 
   const moonPayIcon = <MoonPay size={40} />;
   const coinifyIcon = <Coinify size={40} />;
