@@ -28,9 +28,6 @@ export default function Buy() {
   const { manifests } = usePlatformApp();
 
   const navigateToMoonPay = useCallback(() => {
-    // navigation.navigate(ScreenName.PlatformCatalog, {
-    //   platform: "moonpay",
-    // });
     const manifest = manifests.get("moonpay");
     navigation.navigate(ScreenName.PlatformApp, {
       platform: manifest.id,
