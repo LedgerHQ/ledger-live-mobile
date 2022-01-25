@@ -2859,20 +2859,20 @@
     "action": "Continuar con la actualización"
   },
   "systemLanguageAvailable": {
-    "title": "Change your app's language?",
+    "title": "¿Deseas cambiar el idioma de tu aplicación?",
     "description": {
-      "newSupport": "Good news! Our teams have been working hard and Ledger Live now supports {{language}}.",
-      "advice": "You can always change your language back later in the settings."
+      "newSupport": "¡Buenas noticias! Nuestros equipos han estado trabajando arduamente y Ledger Live ahora está en {{language}}.",
+      "advice": "Puedes cambiar el idioma más adelante desde Ajustes."
     },
-    "switchButton": "Switch to {{language}}",
-    "no": "I prefer not to",
+    "switchButton": "Cambiar a {{language}}",
+    "no": "Prefiero no hacerlo",
     "languages": {
-      "en": "English",
-      "fr": "French",
-      "ru": "Russian",
-      "es": "Spanish",
-      "zh": "Chinese",
-      "de": "German"
+      "en": "Inglés",
+      "fr": "Francés",
+      "ru": "Ruso",
+      "es": "Español",
+      "zh": "Chino",
+      "de": "Alemán"
     }
   },
   "FirmwareUpdateCheckId": {
