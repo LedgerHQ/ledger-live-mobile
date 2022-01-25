@@ -70,8 +70,8 @@ export default function AppInstallButton({
 
   return (
     <TouchableOpacity onPress={installApp}>
-      <Box style={[styles.addAppButton]} borderColor="neutral.c100">
-        <Icons.PlusMedium size={14} color="neutral.c100"/>
+      <Box style={[styles.addAppButton]} borderColor="neutral.c40">
+        <Icons.PlusMedium size={18} color="neutral.c100"/>
       </Box>
     </TouchableOpacity>
   );

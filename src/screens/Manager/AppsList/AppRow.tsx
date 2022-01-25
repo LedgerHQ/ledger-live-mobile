@@ -8,7 +8,6 @@ import type { State, Action } from "@ledgerhq/live-common/lib/apps";
 import { useNotEnoughMemoryToInstall } from "@ledgerhq/live-common/lib/apps/react";
 import { Trans } from "react-i18next";
 import { useTheme } from "@react-navigation/native";
-import LText from "../../../components/LText";
 import Touchable from "../../../components/Touchable";
 import Warning from "../../../icons/Warning";
 import AppIcon from "./AppIcon";
@@ -72,9 +71,12 @@ const AppRow = ({
           <Text numberOfLines={1} variant="body" fontWeight="semiBold" color="neutral.c100">
             {displayName}
           </Text>
-          <Flex style={styles.versionContainer} borderColor="neutral.c50">
+          <Flex style={styles.versionContainer} borderColor="neutral.c40">
             <Text numberOfLines={1} variant="tiny" color="neutral.c80" fontWeight="semiBold">
-              {version}
+              <Trans
+                  i18nKey="v3.ApplicationVersion"
+                  values={{ version }}
+                />
               {isInstalled && !isInstalled.updated && (
                 <>
                   {" "}
@@ -99,33 +101,32 @@ const AppRow = ({
             eventProperties={{ appName: name }}
           >
             <Warning size={16} color={colors.lightOrange} />
-            <LText
-              semiBold
-              style={[styles.versionText, styles.sizeText, styles.warnText]}
-              color="grey"
+            <Text
+              variant="body"
+              fontWeight="medium"
+              style={[styles.sizeText, styles.warnText]}
+              color="neutral.c70"
             >
               <ByteSize
                 value={bytes}
                 deviceModel={state.deviceModel}
                 firmwareVersion={deviceInfo.version}
               />
-            </LText>
+            </Text>
           </Touchable>
         ) : (
-          <LText
-            style={[
-              styles.versionText,
-              styles.sizeText,
-              notEnoughMemoryToInstall ? styles.warnText : {},
-            ]}
-            color={notEnoughMemoryToInstall ? "lightOrange" : "grey"}
+          <Text
+            variant="body"
+            fontWeight="medium"
+            style={[styles.sizeText, notEnoughMemoryToInstall ? styles.warnText : {}]}
+            color={notEnoughMemoryToInstall ? "lightOrange" : "neutral.c70"}
           >
             <ByteSize
               value={bytes}
               deviceModel={state.deviceModel}
               firmwareVersion={deviceInfo.version}
             />
-          </LText>
+          </Text>
         )}
         <AppStateButton
           app={app}
@@ -173,8 +174,6 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
   sizeText: {
-    fontSize: 12,
-    width: 44,
     marginHorizontal: 10,
   },
   warnText: {

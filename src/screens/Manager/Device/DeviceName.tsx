@@ -43,14 +43,14 @@ export default function DeviceNameRow({
         <Flex
           ml={3}
           backgroundColor={"palette.primary.c30"}
-          borderRadius={50}
+          borderRadius={12}
           width={24}
           height={24}
           alignItems="center"
           justifyContent="center"
         >
           <TouchableOpacity onPress={onPress} disabled={disabled}>
-            <PenMedium size={13} color={"palette.primary.c80"}/>
+            <PenMedium size={16} color={"palette.primary.c80"}/>
           </TouchableOpacity>
         </Flex>
       )}

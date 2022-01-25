@@ -1,7 +1,7 @@
 // @flow
 import React, { useMemo } from "react";
 import { TouchableOpacity, View, StyleSheet } from "react-native";
-import { useTheme } from "@react-navigation/native";
+import { useTheme } from "styled-components/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
@@ -44,8 +44,8 @@ export default function ManagerNavigator() {
         ...stackNavConfig,
         headerStyle: {
           ...styles.header,
-          backgroundColor: colors.background,
-          borderBottomColor: colors.background,
+          backgroundColor: colors.background.main,
+          borderBottomColor: colors.background.main,
         },
       }}
     >
@@ -53,7 +53,7 @@ export default function ManagerNavigator() {
         name={ScreenName.Manager}
         component={Manager}
         options={{
-          title: t("manager.title"),
+          title: t("v3.manager.title"),
           headerRight: null,
           gestureEnabled: false,
         }}
@@ -61,7 +61,7 @@ export default function ManagerNavigator() {
       <Stack.Screen
         name={ScreenName.ManagerMain}
         component={ManagerMain}
-        options={{ title: t("manager.appList.title") }}
+        options={{ title: "" }}
       />
     </Stack.Navigator>
   );
@@ -78,7 +78,7 @@ export function ManagerTabIcon(props: any) {
       OnIcon={NanoXIcon}
       oni18nKey="tabs.nanoX"
       OffIcon={hasAvailableUpdate ? ManagerIconWithUpate : NanoFoldedMedium}
-      offi18nKey="tabs.manager"
+      offi18nKey="v3.tabs.manager"
       {...props}
     />
   );

@@ -20,7 +20,6 @@ type Props = {
   dispatch: (action: Action) => void,
   notEnoughMemoryToInstall: boolean,
   isInstalled: boolean,
-  isInstalledView: boolean,
   setAppInstallWithDependencies: (params: { app: App, dependencies: App[] }) => void,
   setAppUninstallWithDependencies: (params: { dependents: App[], app: App }) => void,
 };
@@ -31,7 +30,6 @@ const AppStateButton = ({
   dispatch,
   notEnoughMemoryToInstall,
   isInstalled,
-  isInstalledView,
   setAppInstallWithDependencies,
   setAppUninstallWithDependencies,
 }: Props) => {

@@ -1,26 +1,18 @@
-import React, { memo, useEffect, useState, useCallback } from "react";
-import { useDispatch } from "react-redux";
-import { StyleSheet, View, Image, Linking } from "react-native";
+import React, { memo } from "react";
+import { StyleSheet } from "react-native";
 import { Trans } from "react-i18next";
 
 import type { State, AppsDistribution } from "@ledgerhq/live-common/lib/apps";
 
-import manager from "@ledgerhq/live-common/lib/manager";
-
-import { Box, Button, Flex, Text } from "@ledgerhq/native-ui";
+import { Flex, Text } from "@ledgerhq/native-ui";
 import { CircledCheckMedium } from "@ledgerhq/native-ui/assets/icons";
 import styled, { useTheme } from "styled-components/native";
-import LText from "../../../components/LText";
-import FirmwareUpdateModal from "../Modals/FirmwareUpdateModal";
 import DeviceAppStorage from "./DeviceAppStorage";
 
 import NanoS from "../../../images/devices/NanoS";
 import NanoX from "../../../images/devices/NanoX";
 
-import { urls } from "../../../config/urls";
-
 import DeviceName from "./DeviceName";
-import { setAvailableUpdate } from "../../../actions/settings";
 
 const illustrations = {
   nanoS: NanoS,
@@ -55,73 +47,9 @@ const DeviceCard = ({
 }: Props) => {
   const { colors } = useTheme();
   const { deviceModel } = state;
-  const [firmware, setFirmware] = useState(null);
-  const [openModal, setOpenModal] = useState(false);
-  const dispatch = useDispatch();
-
-  const open = useCallback(() => setOpenModal(true), [setOpenModal]);
-  const close = useCallback(() => setOpenModal(false), [setOpenModal]);
-  const openSupport = useCallback(() => Linking.openURL(urls.contact), []);
-
-  useEffect(() => {
-    async function getLatestFirmwareForDevice() {
-      const fw = await manager.getLatestFirmwareForDevice(deviceInfo);
-
-      if (fw) {
-        dispatch(setAvailableUpdate(true));
-        setFirmware(fw);
-      } else {
-        dispatch(setAvailableUpdate(false));
-        setFirmware(null);
-      }
-    }
-
-    getLatestFirmwareForDevice();
-  }, [deviceInfo, dispatch]);
-
-  const isDeprecated = manager.firmwareUnsupported(deviceModel.id, deviceInfo);
 
   return (
-    <>
-      <View style={styles.title}>
-        <Text variant={'h1'} fontWeight={'medium'} color={'neutral.c100'} numberOfLines={1}>
-          <Trans i18nKey="ManagerDevice.title" />
-        </Text>
-      </View>
       <BorderCard>
-        {firmware ? (
-          <View style={styles.firmwareBanner}>
-            <LText primary semiBold style={styles.firmwareBannerText}>
-              <Trans
-                i18nKey="manager.firmware.latest"
-                values={{ version: firmware.final.name }}
-              />
-            </LText>
-            <View style={styles.firmwareBannerCTA}>
-              <Button
-                type="main"
-                onPress={open}
-                size={'small'}
-              ><Trans i18nKey="common.moreInfo" /></Button>
-            </View>
-          </View>
-        ) : isDeprecated ? (
-          <Box
-            backgroundColor={'primary.c20'}
-            p={4}
-            mt={6}
-          >
-            <Text
-              variant={'body'}
-            >
-              <Trans i18nKey="manager.firmware.outdated" />
-            </Text>
-              <Button
-                type="main"
-                onPress={openSupport}
-              ><Trans i18nKey="common.contactUs" /></Button>
-          </Box>
-        ) : null}
         <Flex flexDirection={"row"} mt={24} mx={4} mb={8}>
             { illustrations[deviceModel.id]({color: colors.neutral.c100}) }
           <Flex flex={1} flexDirection={'column'} alignItems={'flex-start'} ml={4}>
@@ -152,8 +80,6 @@ const DeviceCard = ({
             deviceInfo={deviceInfo}
           />
       </BorderCard>
-      <FirmwareUpdateModal isOpened={openModal} onClose={close} />
-    </>
   );
 };
 
