@@ -92,42 +92,18 @@ const AppRow = ({
             </Text>
           </Flex>
         </View>
-        {!isInstalled && notEnoughMemoryToInstall ? (
-          <Touchable
-            activeOpacity={0.5}
-            onPress={onSizePress}
-            style={styles.warnText}
-            event="ManagerAppNotEnoughMemory"
-            eventProperties={{ appName: name }}
-          >
-            <Warning size={16} color={colors.lightOrange} />
-            <Text
-              variant="body"
-              fontWeight="medium"
-              style={[styles.sizeText, styles.warnText]}
-              color="neutral.c70"
-            >
-              <ByteSize
-                value={bytes}
-                deviceModel={state.deviceModel}
-                firmwareVersion={deviceInfo.version}
-              />
-            </Text>
-          </Touchable>
-        ) : (
-          <Text
-            variant="body"
-            fontWeight="medium"
-            style={[styles.sizeText, notEnoughMemoryToInstall ? styles.warnText : {}]}
-            color={notEnoughMemoryToInstall ? "lightOrange" : "neutral.c70"}
-          >
-            <ByteSize
-              value={bytes}
-              deviceModel={state.deviceModel}
-              firmwareVersion={deviceInfo.version}
-            />
-          </Text>
-        )}
+        <Text
+          variant="body"
+          fontWeight="medium"
+          style={[styles.sizeText]}
+          color="neutral.c70"
+        >
+          <ByteSize
+            value={bytes}
+            deviceModel={state.deviceModel}
+            firmwareVersion={deviceInfo.version}
+          />
+        </Text>
         <AppStateButton
           app={app}
           state={state}
@@ -146,8 +122,10 @@ const AppRow = ({
 const styles = StyleSheet.create({
   root: {
     height: 64,
+    paddingRight: 2,
   },
   item: {
+    flex: 1,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "flex-start",

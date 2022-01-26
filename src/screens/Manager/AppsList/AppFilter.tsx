@@ -1,8 +1,9 @@
-/*
 import React, { memo, useState, useCallback } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 
 import { Icons, Box } from "@ledgerhq/native-ui";
+
+import NotifBadge from "../NotifBadge";
 
 import FilterModalComponent from "../Modals/FilterModal";
 
@@ -29,25 +30,14 @@ const AppFilter = ({
   const openModal = useCallback(() => setOpenModal(true), [setOpenModal]);
   const closeModal = useCallback(() => setOpenModal(false), [setOpenModal]);
 
-  /*
-  <View>
-        <Button
-          containerStyle={styles.searchBarFilters}
-          type="darkSecondary"
-          IconLeft={Filters}
-          onPress={openModal}
-          disabled={disabled}
-          useTouchable
-          event="ManagerAppFilterOpenModal"
-        />
-        {filter !== "all" && <NotifBadge />}
-      </View>
-  
   return (
     <>
       <TouchableOpacity disabled={disabled} onPress={openModal}>
-        <Box style={[styles.filterButton]} borderColor="error.c100">
-          <Icons.TrashMedium size={18} color="error.c100"/>
+        <Box style={[styles.filterButton]} borderColor="neutral.c40">
+          <Box>
+            <Icons.FiltersMedium size={18} color="neutral.c100" />
+            {filter !== "all" && <NotifBadge />}
+          </Box>
         </Box>
       </TouchableOpacity>
       <FilterModalComponent
@@ -80,4 +70,3 @@ const styles = StyleSheet.create({
 });
 
 export default memo(AppFilter);
-*/

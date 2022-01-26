@@ -296,7 +296,7 @@ const AppsScreen = ({
         deviceInfo={deviceInfo}
       />
     </Box>,
-    <Box backgroundColor="#191919">
+    <Box backgroundColor="background.main">
       <TabBar
         position={position}
         navigationState={{ index, routes }}
@@ -385,7 +385,7 @@ const AppsScreen = ({
   ];
 
   return (
-    <SafeAreaView style={[styles.root, { backgroundColor: colors.background.main }]}>
+    <SafeAreaView style={[styles.root, { backgroundColor: colors.background.main }]}> 
       <FlatList
         ref={listRef}
         onScroll={onScroll}
@@ -424,7 +424,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     paddingVertical: 14,
     height: 64,
-    borderBottomWidth: 1,
     zIndex: 0,
   },
   searchBarInstalled: {
@@ -444,14 +443,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    borderBottomWidth: 1,
     zIndex: 1,
   },
   indicatorStyle: {
     height: 3,
   },
   tabBarStyle: {
-    elevation: 0,
     backgroundColor: "transparent",
     borderBottomWidth: 1,
   },

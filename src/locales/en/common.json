@@ -6571,7 +6571,7 @@
         "continueUninstall": "Uninstall {{app}} and other apps"
       },
       "filter": {
-        "title": "Show",
+        "title": "Filter",
         "all": "All",
         "installed": "Apps",
         "not_installed": "Not installed",
@@ -6580,8 +6580,10 @@
         "apply": "Apply"
       },
       "sort": {
-        "title": "Sort by",
+        "title": "Sort",
         "default": "Default",
+        "marketcap": "Marketcap",
+        "name": "Name",
         "name_asc": "Name A-Z",
         "name_desc": "Name Z-A",
         "marketcap_desc": "Market cap"

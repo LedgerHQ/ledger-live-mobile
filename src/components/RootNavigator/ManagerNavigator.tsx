@@ -27,7 +27,7 @@ const ManagerIconWithUpate = ({
   return (
     <View style={stylesLocal.iconWrapper}>
       <NanoFoldedMedium size={size} color={color} />
-      <View style={[stylesLocal.blueDot, { backgroundColor: colors.live }]} />
+      <View style={[stylesLocal.blueDot, { backgroundColor: colors.constant.purple }]} />
     </View>
   );
 };
