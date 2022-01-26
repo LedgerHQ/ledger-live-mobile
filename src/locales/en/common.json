@@ -6487,9 +6487,10 @@
         "versionNew": "(NEW{{newVersion}})"
       },
       "uninstall": {
-        "title": "Uninstall all",
-        "subtitle": "Uninstall all apps?",
-        "description": "Uninstalling apps has no impact on your crypto assets. You can reinstall apps in the App catalog."
+        "title": "Uninstall",
+        "subtitle": "Uninstall all apps",
+        "description": "Uninstalling apps has no impact on your crypto assets. You can reinstall apps in the App catalog.",
+        "uninstallAll": "Uninstall all"
       },
       "remove": {
         "title": "Remove device",
@@ -6500,8 +6501,8 @@
         "title": "Storage",
         "used": "Used",
         "genuine": "Your device is genuine",
-        "appsInstalled": "<0>{{number}}</0> app installed",
-        "appsInstalled_plural": "<0>{{number}}</0> apps installed",
+        "appsInstalled": "<0>{{number}}</0> app",
+        "appsInstalled_plural": "<0>{{number}}</0> apps",
         "storageAvailable": "available"
       },
       "installSuccess": {

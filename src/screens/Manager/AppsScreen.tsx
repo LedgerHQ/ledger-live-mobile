@@ -12,7 +12,7 @@ import type { Action, State } from "@ledgerhq/live-common/lib/apps";
 import type { App } from "@ledgerhq/live-common/lib/types/manager";
 import { useAppsSections } from "@ledgerhq/live-common/lib/apps/react";
 
-import { Text, Box } from "@ledgerhq/native-ui";
+import { Text, Box, Flex } from "@ledgerhq/native-ui";
 
 import { TabView, TabBar } from "react-native-tab-view";
 import Animated from "react-native-reanimated";
@@ -195,38 +195,28 @@ const AppsScreen = ({
       case managerTabs.INSTALLED_APPS:
         return (
           <>
-            <AppUpdateAll
-              state={state}
-              appsToUpdate={update}
-              dispatch={dispatch}
-              isModalOpened={updateModalOpened}
-            />
-            <View>
+            <Flex style={{ marginBottom: 24 }}>
+              <Flex>
+                <AppUpdateAll
+                  state={state}
+                  appsToUpdate={update}
+                  dispatch={dispatch}
+                  isModalOpened={updateModalOpened}
+                />
+              </Flex>
               {device && device.length > 0 && !state.updateAllQueue.length && (
-                <View
-                  style={[
-                    styles.searchBarContainer,
-                    {
-                      borderColor: colors.lightFog,
-                    },
-                  ]}
-                >
-                  <LText style={styles.installedAppsText} color="grey">
+                <Flex style={[styles.appsInstalledAction]} borderColor="neutral.c40">
+                  <Text variant="body" fontWeight="semiBold" color="neutral.c100">
                     <Trans
                       count={device.length}
                       values={{ number: device.length }}
-                      i18nKey="manager.storage.appsInstalled"
-                    >
-                      <LText style={styles.installedAppsText} bold color="grey">
-                        {"placeholder"}
-                      </LText>
-                      {"placeholder"}
-                    </Trans>
-                  </LText>
+                      i18nKey="v3.manager.storage.appsInstalled"
+                    />
+                  </Text>
                   <UninstallAllButton onUninstallAll={onUninstallAll} />
-                </View>
+                </Flex>
               )}
-            </View>
+            </Flex>
             <AppsList
               isInstalledView
               apps={device}
@@ -433,6 +423,13 @@ const styles = StyleSheet.create({
     zIndex: 1,
     width,
   },
+  appsInstalledAction: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingVertical: 24,
+    borderBottomWidth: 1,
+  },
   listContainer: {
     width,
   },
@@ -485,9 +482,6 @@ const styles = StyleSheet.create({
   },
   contentContainerStyle: {
     backgroundColor: "transparent",
-  },
-  installedAppsText: {
-    fontSize: 14,
   },
   noAppInstalledContainer: {
     flexDirection: "column",
