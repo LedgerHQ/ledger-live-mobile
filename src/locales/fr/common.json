@@ -290,7 +290,7 @@
     },
     "LatestFirmwareVersionRequired": {
       "title": "Mise à jour requise sur l'ordinateur",
-      "description": "Mettez à jour le micrologiciel de votre Nano X sur Ledger Live ordinateur."
+      "description": "Mettez à jour le micrologiciel de votre Nano X sur Ledger Live pour l'ordinateur."
     },
     "GenuineCheckFailed": {
       "title": "Échec de la vérification de l'authenticité",
@@ -791,8 +791,8 @@
       "desktopSync": {
         "title": "Vous avez déjà une phrase de récupération ?",
         "label": "Synchronisation avec un ordinateur",
-        "subTitle": "Synchroniser ses cryptos à partir de Ledger Live ordinateur",
-        "desc": "Vous utilisez déjà l'application Ledger Live ordinateur ? Synchronisez-la pour gérer vos cryptos depuis votre smartphone."
+        "subTitle": "Synchroniser ses cryptos à partir de Ledger Live pour l'ordinateur",
+        "desc": "Vous utilisez déjà l'application Ledger Live pour l'ordinateur ? Synchronisez-la pour gérer vos cryptos depuis votre smartphone."
       },
       "restoreDevice": {
         "label": "Restauration d'un appareil",
@@ -1145,11 +1145,11 @@
     },
     "stepImportAccounts": {
       "title": "Synchroniser ses cryptos depuis un ordinateur",
-      "desc": "Si vous gérez déjà vos cryptos dans Ledger Live ordinateur, vous pouvez synchroniser pour les gérer sur votre téléphone.",
+      "desc": "Si vous gérez déjà vos cryptos dans Ledger Live pour l'ordinateur, vous pouvez synchroniser pour les gérer sur votre téléphone.",
       "cta": "Je suis prêt(e) à scanner",
       "bullets": {
         "0": {
-          "label": "Sur Ledger Live ordinateur, allez dans <1>Paramètres > Comptes > Exporter les comptes</1>."
+          "label": "Sur Ledger Live pour l'ordinateur, allez dans <1>Paramètres > Comptes > Exporter les comptes</1>."
         },
         "1": {
           "label": "Scannez le code QR avec votre téléphone."
@@ -1159,7 +1159,7 @@
         }
       },
       "warning": {
-        "title": "Vos applications ordinateur et mobile doivent être synchronisées manuellement.",
+        "title": "Vos applications pour l'ordinateur et pour le mobile doivent être synchronisées manuellement.",
         "desc": "Ledger Live respecte votre vie privée et stocke vos données localement. Si vous modifiez vos comptes ou paramètres sur votre téléphone, vous devez le faire aussi sur votre ordinateur, et inversement. Vos transactions restent synchronisées avec la blockchain.",
         "cta": "Compris"
       }
@@ -1521,7 +1521,7 @@
       "scan": {
         "title": "Scanner le code QR de Live ordinateur",
         "descTop": {
-          "line1": "Dans Ledger Live ordinateur, accédez à",
+          "line1": "Dans Ledger Live pour l'ordinateur, accédez à",
           "line2": "Paramètres > Comptes > Exporter les comptes > Exporter"
         },
         "descBottom": "Placez le code QR de Live ordinateur dans le carré."
@@ -1536,7 +1536,7 @@
         "noAccounts": "Rien à importer",
         "unsupported": "Non pris en charge",
         "settings": "Paramètres de l'app",
-        "includeGeneralSettings": "Importer les paramètres de Ledger Live ordinateur"
+        "includeGeneralSettings": "Importer les paramètres de Ledger Live pour l'ordinateur"
       },
       "fallback": {
         "header": "Importer le compte",
@@ -2033,7 +2033,7 @@
       },
       "history": {
         "tab": "Historique",
-        "disclaimer": "Vos transactions swap sur Ledger Live mobile ne sont pas synchronisées avec Ledger Live ordinateur.",
+        "disclaimer": "Vos transactions swap sur Ledger Live pour le mobile ne sont pas synchronisées avec Ledger Live pour l'ordinateur.",
         "exportButton": "Exporter les opérations",
         "exportFilename": "Opérations de swap",
         "empty": {
@@ -2746,7 +2746,7 @@
     "firmware": {
       "latest": "Version {{version}} du micrologiciel disponible",
       "outdated": "La version du micrologiciel de l'appareil est trop ancienne pour être mise à jour. Contactez l'Assistance Ledger pour le remplacer.",
-      "modalTitle": "Mise à jour du micrologiciel disponible uniquement sur Ledger Live ordinateur",
+      "modalTitle": "Mise à jour du micrologiciel disponible uniquement sur Ledger Live pour l'ordinateur",
       "modalDesc": "Téléchargez Ledger Live sur votre ordinateur pour mettre à jour le micrologiciel de votre appareil."
     }
   },
@@ -2830,7 +2830,7 @@
   },
   "FirmwareUpdateRow": {
     "title": "Version {{version}} du micrologiciel disponible",
-    "subtitle": "Merci d'utiliser Ledger Live ordinateur pour mettre à jour",
+    "subtitle": "Merci d'utiliser Ledger Live pour l'ordinateur pour mettre à jour",
     "action": "Mettre à jour"
   },
   "FirmwareUpdate": {
@@ -2849,7 +2849,7 @@
     "newVersion": "Mise à jour {{version}} du micrologiciel disponible",
     "drawerUpdate": {
       "title": "Mise à jour micrologiciel",
-      "description": "Mettez à jour le micrologiciel de votre Ledger Nano en le connectant à Ledger Live ordinateur"
+      "description": "Mettez à jour le micrologiciel de votre Ledger Nano en le connectant à Ledger Live pour l'ordinateur"
     }
   },
   "FirmwareUpdateReleaseNotes": {
@@ -2893,7 +2893,7 @@
     "action": "Votre appareil est prêt."
   },
   "StepLegacyModal": {
-    "description": "Les comptes importés se synchronisent uniquement avec le réseau, pas entre les versions mobile et ordinateur de Ledger Live."
+    "description": "Les comptes importés se synchronisent uniquement avec le réseau, pas entre les versions de Ledger Live pour le mobile et pour l'ordinateur."
   },
   "algorand": {
     "token": "ASA (Actifs)",
