@@ -24,10 +24,11 @@ import { JSONRPCRequest } from "json-rpc-2.0";
 import type { SignedOperation } from "@ledgerhq/live-common/lib/types";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
+import { getMainAccount } from "@ledgerhq/live-common/lib/account";
 import {
   listCryptoCurrencies,
   findCryptoCurrencyById,
-} from "@ledgerhq/live-common/lib/currencies/index";
+} from "@ledgerhq/live-common/lib/currencies";
 import type { AppManifest } from "@ledgerhq/live-common/lib/platform/types";
 
 import type { RawPlatformTransaction } from "@ledgerhq/live-common/lib/platform/rawTypes";
@@ -389,6 +390,122 @@ const WebPlatformPlayer = ({ manifest, inputs }: Props) => {
     [manifest, accounts],
   );
 
+  const startExchange = useCallback(
+    ({ exchangeType }: { exchangeType: number }) => {
+      tracking.platformStartExchangeRequested(manifest);
+
+      return new Promise((resolve, reject) => {
+        navigation.navigate(NavigatorName.PlatformExchange, {
+          screen: ScreenName.PlatformExchangeConnect,
+          params: {
+            exchangeType,
+            onSuccess: nonce => {
+              tracking.platformStartExchangeSuccess(manifest);
+              resolve(nonce);
+            },
+            onError: error => {
+              tracking.platformStartExchangeFail(manifest);
+              reject(error);
+            },
+          },
+        });
+      });
+    },
+    [manifest, navigation],
+  );
+
+  const completeExchange = useCallback(
+    ({
+      provider,
+      fromAccountId,
+      toAccountId,
+      transaction,
+      binaryPayload,
+      signature,
+      feesStrategy,
+      exchangeType,
+    }: {
+      provider: string,
+      fromAccountId: string,
+      toAccountId: string,
+      transaction: RawPlatformTransaction,
+      binaryPayload: string,
+      signature: string,
+      feesStrategy: string,
+      exchangeType: number,
+    }) => {
+      // Nb get a hold of the actual accounts, and parent accounts
+      const fromAccount = accounts.find(a => a.id === fromAccountId);
+      let fromParentAccount;
+
+      const toAccount = accounts.find(a => a.id === toAccountId);
+      let toParentAccount;
+
+      if (!fromAccount) {
+        return null;
+      }
+
+      if (exchangeType === 0x00 && !toAccount) {
+        // if we do a swap, a destination account must be provided
+        return null;
+      }
+
+      if (fromAccount.type === "TokenAccount") {
+        fromParentAccount = accounts.find(a => a.id === fromAccount.parentId);
+      }
+      if (toAccount && toAccount.type === "TokenAccount") {
+        toParentAccount = accounts.find(a => a.id === toAccount.parentId);
+      }
+
+      const accountBridge = getAccountBridge(fromAccount, fromParentAccount);
+      const mainFromAccount = getMainAccount(fromAccount, fromParentAccount);
+
+      // eslint-disable-next-line no-param-reassign
+      transaction.family = mainFromAccount.currency.family;
+
+      const platformTransaction = deserializePlatformTransaction(transaction);
+
+      platformTransaction.feesStrategy = feesStrategy;
+
+      let processedTransaction = accountBridge.createTransaction(
+        mainFromAccount,
+      );
+      processedTransaction = processedTransaction.updateTransaction(
+        processedTransaction,
+        platformTransaction,
+      );
+
+      tracking.platformCompleteExchangeRequested(manifest);
+      return new Promise((resolve, reject) => {
+        // dispatch(
+        //   openModal("MODAL_PLATFORM_EXCHANGE_COMPLETE", {
+        //     provider,
+        //     exchange: {
+        //       fromAccount,
+        //       fromParentAccount,
+        //       toAccount,
+        //       toParentAccount,
+        //     },
+        //     transaction: processedTransaction,
+        //     binaryPayload,
+        //     signature,
+        //     feesStrategy,
+        //     exchangeType,
+        //     onResult: operation => {
+        //       tracking.platformCompleteExchangeSuccess(manifest);
+        //       resolve(operation);
+        //     },
+        //     onCancel: error => {
+        //       tracking.platformCompleteExchangeFail(manifest);
+        //       reject(error);
+        //     },
+        //   }),
+        // ),
+      });
+    },
+    [accounts, manifest],
+  );
+
   const handlers = useMemo(
     () => ({
       "account.list": listAccounts,
@@ -397,6 +514,8 @@ const WebPlatformPlayer = ({ manifest, inputs }: Props) => {
       "account.receive": receiveOnAccount,
       "transaction.sign": signTransaction,
       "transaction.broadcast": broadcastTransaction,
+      "exchange.start": startExchange,
+      "exchange.complete": completeExchange,
     }),
     [
       listAccounts,
@@ -405,6 +524,8 @@ const WebPlatformPlayer = ({ manifest, inputs }: Props) => {
       receiveOnAccount,
       signTransaction,
       broadcastTransaction,
+      startExchange,
+      completeExchange,
     ],
   );
 
