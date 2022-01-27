@@ -81,7 +81,8 @@ import NotificationsProvider from "./screens/NotificationCenter/NotificationsPro
 import SnackbarContainer from "./screens/NotificationCenter/Snackbar/SnackbarContainer";
 import NavBarColorHandler from "./components/NavBarColorHandler";
 import { setOsTheme, setTheme } from "./actions/settings";
-import { RemoteConfigProvider } from "./components/RemoteConfig";
+import { FirebaseRemoteConfigProvider } from "./components/FirebaseRemoteConfig";
+import { FirebaseFeatureFlagsProvider } from "./components/FirebaseFeatureFlags";
 
 const themes = {
   light: lightTheme,
@@ -445,42 +446,44 @@ export default class Root extends Component<
                   <PlatformAppProvider
                     platformAppsServerURL={getProvider("production").url}
                   >
-                    <RemoteConfigProvider>
-                      <DeepLinkingNavigator>
-                        <SafeAreaProvider>
-                          <StyledStatusBar />
-                          <NavBarColorHandler />
-                          <AuthPass>
-                            <I18nextProvider i18n={i18n}>
-                              <LocaleProvider>
-                                <BridgeSyncProvider>
-                                  <CounterValuesProvider
-                                    initialState={initialCountervalues}
-                                  >
-                                    <ButtonUseTouchable.Provider value={true}>
-                                      <OnboardingContextProvider>
-                                        <ToastProvider>
-                                          <NotificationsProvider>
-                                            <SnackbarContainer />
-                                            <NftMetadataProvider>
-                                              <App
-                                                importDataString={
-                                                  importDataString
-                                                }
-                                              />
-                                            </NftMetadataProvider>
-                                          </NotificationsProvider>
-                                        </ToastProvider>
-                                      </OnboardingContextProvider>
-                                    </ButtonUseTouchable.Provider>
-                                  </CounterValuesProvider>
-                                </BridgeSyncProvider>
-                              </LocaleProvider>
-                            </I18nextProvider>
-                          </AuthPass>
-                        </SafeAreaProvider>
-                      </DeepLinkingNavigator>
-                    </RemoteConfigProvider>
+                    <FirebaseRemoteConfigProvider>
+                      <FirebaseFeatureFlagsProvider>
+                        <DeepLinkingNavigator>
+                          <SafeAreaProvider>
+                            <StyledStatusBar />
+                            <NavBarColorHandler />
+                            <AuthPass>
+                              <I18nextProvider i18n={i18n}>
+                                <LocaleProvider>
+                                  <BridgeSyncProvider>
+                                    <CounterValuesProvider
+                                      initialState={initialCountervalues}
+                                    >
+                                      <ButtonUseTouchable.Provider value={true}>
+                                        <OnboardingContextProvider>
+                                          <ToastProvider>
+                                            <NotificationsProvider>
+                                              <SnackbarContainer />
+                                              <NftMetadataProvider>
+                                                <App
+                                                  importDataString={
+                                                    importDataString
+                                                  }
+                                                />
+                                              </NftMetadataProvider>
+                                            </NotificationsProvider>
+                                          </ToastProvider>
+                                        </OnboardingContextProvider>
+                                      </ButtonUseTouchable.Provider>
+                                    </CounterValuesProvider>
+                                  </BridgeSyncProvider>
+                                </LocaleProvider>
+                              </I18nextProvider>
+                            </AuthPass>
+                          </SafeAreaProvider>
+                        </DeepLinkingNavigator>
+                      </FirebaseFeatureFlagsProvider>
+                    </FirebaseRemoteConfigProvider>
                   </PlatformAppProvider>
                 </WalletConnectProvider>
               </>

@@ -12,7 +12,6 @@ import noAccountsImg from "../../images/noAccounts.png";
 import noAppsImg from "../../images/noApps.png";
 import HelpLink from "../../components/HelpLink";
 import { urls } from "../../config/urls";
-import FeatureToggle from "../../components/FeatureToggle";
 
 type Props = {
   navigation: any,
@@ -63,43 +62,36 @@ function EmptyStatePortfolio({ navigation, showHelp = true }: Props) {
               }`}
             />
           </LText>
-          <FeatureToggle
-            feature="feature_foo"
-            fallback={<LText>Cant add any account</LText>}
-          >
-            <View style={styles.containerCTA}>
-              {hasInstalledAnyApp ? (
-                <>
-                  <Button
-                    event="PortfolioEmptyToImport"
-                    type={"primary"}
-                    title={
-                      <Trans i18nKey="portfolio.emptyState.buttons.import" />
-                    }
-                    onPress={openAddModal}
-                    containerStyle={[styles.primaryCTA]}
-                  />
-                  <Button
-                    event="PortfolioEmptyToManager"
-                    type={"lightSecondary"}
-                    title={
-                      <Trans i18nKey="portfolio.emptyState.buttons.managerSecondary" />
-                    }
-                    onPress={navigateToManager}
-                  />
-                </>
-              ) : (
+          <View style={styles.containerCTA}>
+            {hasInstalledAnyApp ? (
+              <>
                 <Button
-                  event="PortfolioEmptyToManager"
+                  event="PortfolioEmptyToImport"
                   type={"primary"}
                   title={
-                    <Trans i18nKey="portfolio.emptyState.buttons.manager" />
+                    <Trans i18nKey="portfolio.emptyState.buttons.import" />
+                  }
+                  onPress={openAddModal}
+                  containerStyle={[styles.primaryCTA]}
+                />
+                <Button
+                  event="PortfolioEmptyToManager"
+                  type={"lightSecondary"}
+                  title={
+                    <Trans i18nKey="portfolio.emptyState.buttons.managerSecondary" />
                   }
                   onPress={navigateToManager}
                 />
-              )}
-            </View>
-          </FeatureToggle>
+              </>
+            ) : (
+              <Button
+                event="PortfolioEmptyToManager"
+                type={"primary"}
+                title={<Trans i18nKey="portfolio.emptyState.buttons.manager" />}
+                onPress={navigateToManager}
+              />
+            )}
+          </View>
           <AddAccountsModal
             navigation={navigation}
             isOpened={isAddModalOpened}
