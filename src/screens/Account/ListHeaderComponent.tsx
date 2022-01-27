@@ -1,8 +1,9 @@
 import React, { ReactNode } from "react";
-import { StyleSheet, View } from "react-native";
+import { ScrollView, StyleSheet, View } from "react-native";
 import {
   isAccountEmpty,
   getMainAccount,
+  getAccountUnit,
 } from "@ledgerhq/live-common/lib/account";
 import {
   Unit,
@@ -13,7 +14,7 @@ import {
 import { ValueChange } from "@ledgerhq/live-common/lib/portfolio/v2/types";
 import { CompoundAccountSummary } from "@ledgerhq/live-common/lib/compound/types";
 
-import { Text } from "@ledgerhq/native-ui";
+import { Box, Flex, Text } from "@ledgerhq/native-ui";
 import LText from "../../components/LText";
 import CurrencyUnitValue from "../../components/CurrencyUnitValue";
 import Header from "./Header";
@@ -32,6 +33,8 @@ import perFamilyAccountBalanceSummaryFooter from "../../generated/AccountBalance
 import { normalize } from "../../helpers/normalizeSize";
 import FabActions from "../../components/FabActions";
 import { NoCountervaluePlaceholder } from "../../components/CounterValue.js";
+import DiscreetModeButton from "../../components/DiscreetModeButton";
+import Delta from "../../components/Delta";
 
 const renderAccountSummary = (
   account,
@@ -61,6 +64,7 @@ const renderAccountSummary = (
         key="accountbalancesummary"
       />,
     );
+  if (!footers.length) return null;
   return footers;
 };
 
@@ -71,11 +75,11 @@ type HeaderTitleProps = {
   item: Item;
 };
 
-const renderListHeaderTitle = (
+const ListHeaderTitle = ({
   account,
   countervalueAvailable,
   onSwitchAccountCurrency,
-) => ({
+  valueChange,
   useCounterValue,
   cryptoCurrencyUnit,
   counterValueUnit,
@@ -92,31 +96,38 @@ const renderListHeaderTitle = (
   }
 
   return (
-    <Touchable
-      event="SwitchAccountCurrency"
-      eventProperties={{ useCounterValue: shouldUseCounterValue }}
-      onPress={countervalueAvailable ? onSwitchAccountCurrency : undefined}
-    >
-      <View style={styles.balanceContainer}>
-        <View style={styles.warningWrapper}>
-          <Text variant={"large"} fontWeight={"medium"} color={"neutral.c70"}>
-            <CurrencyUnitValue
-              {...items[0]}
-              disableRounding
-              joinFragmentsSeparator=" "
-            />
+    <Flex flexDirection={"row"} justifyContent={"space-between"}>
+      <Touchable
+        event="SwitchAccountCurrency"
+        eventProperties={{ useCounterValue: shouldUseCounterValue }}
+        onPress={countervalueAvailable ? onSwitchAccountCurrency : undefined}
+        style={{ flexShrink: 1 }}
+      >
+        <Flex>
+          <Flex flexDirection={"row"}>
+            <Text variant={"large"} fontWeight={"medium"} color={"neutral.c70"}>
+              <CurrencyUnitValue
+                {...items[0]}
+                disableRounding
+                joinFragmentsSeparator=" "
+              />
+            </Text>
+            <TransactionsPendingConfirmationWarning maybeAccount={account} />
+          </Flex>
+          <Text variant={"h1"}>
+            {typeof items[1]?.value === "number" ? (
+              <CurrencyUnitValue {...items[1]} />
+            ) : (
+              <NoCountervaluePlaceholder />
+            )}
           </Text>
-          <TransactionsPendingConfirmationWarning maybeAccount={account} />
-        </View>
-        <Text variant={"h1"}>
-          {typeof items[1]?.value === "number" ? (
-            <CurrencyUnitValue {...items[1]} disableRounding />
-          ) : (
-            <NoCountervaluePlaceholder />
-          )}
-        </Text>
-      </View>
-    </Touchable>
+          <Delta percent valueChange={valueChange} />
+        </Flex>
+      </Touchable>
+      <Flex justifyContent={"center"} ml={4}>
+        <DiscreetModeButton />
+      </Flex>
+    </Flex>
   );
 };
 
@@ -176,38 +187,52 @@ export function getListHeaderComponents({
       !empty && !!AccountHeader && (
         <AccountHeader account={account} parentAccount={parentAccount} />
       ),
-
       !empty && (
-        <AccountGraphCard
-          account={account}
-          range={range}
-          history={history}
-          useCounterValue={shouldUseCounterValue}
-          valueChange={
-            shouldUseCounterValue ? countervalueChange : cryptoChange
-          }
-          countervalueAvailable={countervalueAvailable}
-          counterValueCurrency={counterValueCurrency}
-          renderTitle={renderListHeaderTitle(
-            account,
-            countervalueAvailable,
-            onSwitchAccountCurrency,
-          )}
-          renderAccountSummary={renderAccountSummary(
-            account,
-            parentAccount,
-            compoundSummary,
-          )}
-        />
+        <Box mx={6} my={6}>
+          <ListHeaderTitle
+            account={account}
+            countervalueAvailable={countervalueAvailable}
+            onSwitchAccountCurrency={onSwitchAccountCurrency}
+            countervalueChange={countervalueChange}
+            counterValueUnit={counterValueCurrency.units[0]}
+            useCounterValue={useCounterValue}
+            cryptoCurrencyUnit={getAccountUnit(account)}
+            item={history[history.length - 1]}
+            valueChange={
+              shouldUseCounterValue ? countervalueChange : cryptoChange
+            }
+          />
+        </Box>
       ),
-
       ...(!empty
         ? [
-            <View style={[styles.stickySection]}>
-              <FabActions account={account} parentAccount={parentAccount} />
-            </View>,
+            <Box bg={"background.main"} py={3} pl={6}>
+              <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+                <FabActions account={account} parentAccount={parentAccount} />
+              </ScrollView>
+            </Box>,
           ]
         : []),
+      !empty && (
+        <Box mx={6} my={7}>
+          <AccountGraphCard
+            account={account}
+            range={range}
+            history={history}
+            useCounterValue={shouldUseCounterValue}
+            valueChange={
+              shouldUseCounterValue ? countervalueChange : cryptoChange
+            }
+            countervalueAvailable={countervalueAvailable}
+            counterValueCurrency={counterValueCurrency}
+            renderAccountSummary={renderAccountSummary(
+              account,
+              parentAccount,
+              compoundSummary,
+            )}
+          />
+        </Box>
+      ),
 
       ...(!empty && AccountBodyHeader
         ? [
@@ -219,11 +244,14 @@ export function getListHeaderComponents({
         : []),
       ...(!empty && account.type === "Account" && account.subAccounts
         ? [
-            <SubAccountsList
-              accountId={account.id}
-              onAccountPress={onAccountPress}
-              parentAccount={account}
-            />,
+            <Box mx={6} my={8}>
+              <SubAccountsList
+                accountId={account.id}
+                onAccountPress={onAccountPress}
+                parentAccount={account}
+                useCounterValue={shouldUseCounterValue}
+              />
+            </Box>,
           ]
         : []),
       ...(!empty && account.type === "Account" && account.nfts?.length
@@ -267,5 +295,5 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
   },
-  stickySection: { width: "100%", height: 56 },
+  stickySection: {},
 });

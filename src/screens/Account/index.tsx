@@ -3,7 +3,7 @@ import { StyleSheet, View, SectionList, FlatList } from "react-native";
 import { SectionBase } from "react-native/Libraries/Lists/SectionList";
 import Animated, { Value, event } from "react-native-reanimated";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigation, useTheme } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import {
   isAccountEmpty,
   groupAccountOperationsByDay,
@@ -98,8 +98,6 @@ function AccountScreenInner({
   const scrollY = useRef(new Value(0)).current;
 
   useScrollToTop(ref);
-
-  const { colors } = useTheme();
 
   const onEndReached = useCallback(() => {
     setOpCount(opCount + 50);

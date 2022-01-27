@@ -1,6 +1,5 @@
 import React, { useState, useCallback, ReactNode } from "react";
 import { useTheme } from "@react-navigation/native";
-import { View, StyleSheet, Platform } from "react-native";
 import { Unit, Currency, AccountLike } from "@ledgerhq/live-common/lib/types";
 import {
   getAccountCurrency,
@@ -12,6 +11,7 @@ import {
   PortfolioRange,
   BalanceHistoryWithCountervalue,
 } from "@ledgerhq/live-common/lib/portfolio/v2/types";
+import { Box, Flex, Text } from "@ledgerhq/native-ui";
 
 import { ensureContrast } from "../colors";
 import getWindowDimensions from "../logic/getWindowDimensions";
@@ -20,13 +20,10 @@ import Delta from "./Delta";
 import FormatDate from "./FormatDate";
 import Graph from "./Graph";
 import Pills from "./Pills";
-import TransactionsPendingConfirmationWarning from "./TransactionsPendingConfirmationWarning";
-import Card from "./Card";
-import LText from "./LText";
 import CurrencyUnitValue from "./CurrencyUnitValue";
 import Placeholder from "./Placeholder";
 import { Item } from "./Graph/types";
-import DiscreetModeButton from "./DiscreetModeButton";
+import CurrencyRate from "./CurrencyRate";
 
 type Props = {
   account: AccountLike;
@@ -36,12 +33,6 @@ type Props = {
   countervalueAvailable: boolean;
   counterValueCurrency: Currency;
   useCounterValue?: boolean;
-  renderTitle?: (params: {
-    useCounterValue?: boolean;
-    cryptoCurrencyUnit: Unit;
-    counterValueUnit: Unit;
-    item: Item;
-  }) => ReactNode;
   renderAccountSummary: () => ReactNode;
 };
 
@@ -51,7 +42,6 @@ export default function AccountGraphCard({
   history,
   range,
   counterValueCurrency,
-  renderTitle,
   useCounterValue,
   valueChange,
   renderAccountSummary,
@@ -65,8 +55,6 @@ export default function AccountGraphCard({
     [],
   );
 
-  console.log("timeRangeItems", range, timeRangeItems);
-
   const isAvailable = !useCounterValue || countervalueAvailable;
 
   const currency = getAccountCurrency(account);
@@ -77,7 +65,7 @@ export default function AccountGraphCard({
   );
 
   return (
-    <Card style={styles.root}>
+    <Box padding={6} borderRadius={3} bg={"neutral.c30"}>
       <GraphCardHeader
         account={account}
         isLoading={!isAvailable}
@@ -85,7 +73,6 @@ export default function AccountGraphCard({
         hoveredItem={hoveredItem}
         cryptoCurrencyUnit={unit}
         counterValueUnit={counterValueCurrency.units[0]}
-        renderTitle={renderTitle}
         useCounterValue={useCounterValue}
         valueChange={valueChange}
       />
@@ -93,35 +80,38 @@ export default function AccountGraphCard({
         isInteractive={isAvailable}
         isLoading={!isAvailable}
         height={100}
-        width={getWindowDimensions().width - 32}
+        width={getWindowDimensions().width - 64}
         color={isAvailable ? graphColor : colors.grey}
         data={history}
         onItemHover={setHoverItem}
         mapValue={useCounterValue ? mapCounterValue : mapCryptoValue}
       />
-      <View style={styles.pillsContainer}>
+      <Box marginTop={6}>
         <Pills
           isDisabled={!isAvailable}
           value={range}
           onChange={setTimeRange}
-          // $FlowFixMe
           items={timeRangeItems}
         />
-      </View>
+      </Box>
       {renderAccountSummary && (
-        <View style={styles.accountSummary}>{renderAccountSummary()}</View>
+        <Box
+          flexDirection={"row"}
+          alignItemps={"center"}
+          marginTop={5}
+          overflow={"hidden"}
+        >
+          {renderAccountSummary()}
+        </Box>
       )}
-    </Card>
+    </Box>
   );
 }
 
 function GraphCardHeader({
-  useCounterValue,
-  cryptoCurrencyUnit,
   counterValueUnit,
   to,
   hoveredItem,
-  renderTitle,
   isLoading,
   valueChange,
   account,
@@ -132,134 +122,51 @@ function GraphCardHeader({
   counterValueUnit: Unit;
   to: Item;
   hoveredItem?: Item;
-  renderTitle?: (params: {
-    useCounterValue?: boolean;
-    cryptoCurrencyUnit: Unit;
-    counterValueUnit: Unit;
-    item: Item;
-  }) => ReactNode;
   useCounterValue?: boolean;
   valueChange: ValueChange;
 }) {
-  const unit = useCounterValue ? counterValueUnit : cryptoCurrencyUnit;
+  const currency = getAccountCurrency(account);
   const item = hoveredItem || to;
 
   return (
-    <View style={styles.graphHeader}>
-      <View style={styles.graphHeaderBalance}>
-        <View style={styles.balanceTextContainer}>
-          {renderTitle ? (
-            renderTitle({
-              counterValueUnit,
-              useCounterValue,
-              cryptoCurrencyUnit,
-              item,
-            })
-          ) : (
-            <View style={styles.warningWrapper}>
-              <LText semiBold style={styles.balanceText}>
-                <CurrencyUnitValue unit={unit} value={item.value} />
-              </LText>
-              <TransactionsPendingConfirmationWarning maybeAccount={account} />
-            </View>
-          )}
-        </View>
-        <View style={styles.subtitleContainer}>
-          {isLoading ? (
-            <>
-              <Placeholder
-                width={50}
-                containerHeight={19}
-                style={{ marginRight: 10 }}
-              />
-              <Placeholder width={50} containerHeight={19} />
-            </>
-          ) : hoveredItem && hoveredItem.date ? (
-            <LText style={styles.delta}>
-              <FormatDate date={hoveredItem.date} />
-            </LText>
-          ) : valueChange ? (
-            <View style={styles.delta}>
-              <Delta
-                percent
-                valueChange={valueChange}
-                style={styles.deltaPercent}
-              />
-              <Delta valueChange={valueChange} unit={unit} />
-            </View>
-          ) : null}
-        </View>
-      </View>
-      <DiscreetModeButton />
-    </View>
+    <Flex
+      flexDirection={"row"}
+      justifyContent={"space-between"}
+      alignItems={"center"}
+    >
+      <Box flexShrink={1}>
+        {hoveredItem ? (
+          <Text
+            variant={"body"}
+            fontWeight={"semiBold"}
+            color="neutral.c100"
+            numberOfLines={1}
+            mr={4}
+          >
+            <CurrencyUnitValue
+              unit={counterValueUnit}
+              value={item.countervalue}
+            />
+          </Text>
+        ) : (
+          <CurrencyRate currency={currency} />
+        )}
+      </Box>
+      <Box>
+        {isLoading ? (
+          <Placeholder
+            width={50}
+            containerHeight={19}
+            style={{ marginRight: 10 }}
+          />
+        ) : hoveredItem && hoveredItem.date ? (
+          <Text variant={"body"} fontWeight={"medium"}>
+            <FormatDate date={hoveredItem.date} />
+          </Text>
+        ) : valueChange ? (
+          <Delta percent valueChange={valueChange} />
+        ) : null}
+      </Box>
+    </Flex>
   );
 }
-
-const styles = StyleSheet.create({
-  root: {
-    paddingVertical: 16,
-    margin: 16,
-    ...Platform.select({
-      android: {
-        elevation: 1,
-      },
-      ios: {
-        shadowOpacity: 0.03,
-        shadowRadius: 8,
-        shadowOffset: {
-          height: 4,
-        },
-      },
-    }),
-  },
-  warningWrapper: {
-    borderWidth: 1,
-    borderColor: "red",
-    borderStyle: "solid",
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  balanceTextContainer: {
-    marginBottom: 5,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  balanceText: {
-    fontSize: 22,
-  },
-  subtitleContainer: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 10,
-    marginBottom: 20,
-  },
-  pillsContainer: {
-    marginTop: 16,
-    alignItems: "center",
-  },
-  accountSummary: {
-    marginTop: 16,
-    alignItems: "center",
-    paddingHorizontal: 16,
-    flexDirection: "row",
-    overflow: "hidden",
-  },
-  deltaPercent: {
-    marginRight: 8,
-  },
-  graphHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "flex-start",
-    paddingHorizontal: 16,
-    flexWrap: "nowrap",
-  },
-  graphHeaderBalance: { alignItems: "flex-start", flex: 1 },
-  delta: {
-    height: 24,
-    flexDirection: "row",
-    flexWrap: "wrap",
-  },
-});
