@@ -5,9 +5,23 @@ import { initReactI18next } from "react-i18next";
 import type { TFunction } from "react-i18next";
 import Locale from "react-native-locale";
 import { useDispatch, useSelector } from "react-redux";
+import { I18nManager } from "react-native";
+import RNRestart from "react-native-restart";
 import { locales } from "../languages";
 import { languageSelector } from "../reducers/settings";
 import { setLanguage } from "../actions/settings";
+
+export const validateRTL = lang => {
+  const dir = i18next.dir(lang);
+
+  if (dir === "rtl" && !I18nManager.isRTL) {
+    I18nManager.forceRTL(true);
+    RNRestart.Restart();
+  } else if (dir === "ltr" && I18nManager.isRTL) {
+    I18nManager.forceRTL(false);
+    RNRestart.Restart();
+  }
+};
 
 const languageDetector = {
   type: "languageDetector",
@@ -18,6 +32,7 @@ const languageDetector = {
     const matches = locale.match(/([a-z]{2,4}[-_]([A-Z]{2,4}|[0-9]{3}))/);
     const lang = (matches && matches[1].replace("_", "-")) || "en-US";
     console.log("Language detected is " + lang); // eslint-disable-line no-console
+
     return lang;
   },
   init: () => {},
@@ -74,7 +89,12 @@ export default function LocaleProvider({ children }: Props) {
 
   useEffect(() => {
     i18next.on("languageChanged", updateLocale);
-    if (settingsLocale) i18next.changeLanguage(settingsLocale);
+
+    if (settingsLocale) {
+      i18next.changeLanguage(settingsLocale);
+
+      validateRTL(settingsLocale);
+    }
 
     return () => {
       i18next.off("languageChanged", updateLocale);

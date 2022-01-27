@@ -1,6 +1,6 @@
 /* @flow */
 import React from "react";
-import { Text } from "react-native";
+import { StyleSheet, Text } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import getFontStyle from "./getFontStyle";
 
@@ -68,6 +68,7 @@ export default function LText({
       {...newProps}
       allowFontScaling={false}
       style={[
+        styles.localizedText,
         {
           color: getColor(colors, color, colors.darkBlue),
           backgroundColor: getColor(colors, bg, "transparent"),
@@ -83,3 +84,9 @@ export default function LText({
     />
   );
 }
+
+const styles = StyleSheet.create({
+  localizedText: {
+    textAlign: "left",
+  },
+});

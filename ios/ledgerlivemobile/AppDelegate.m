@@ -3,6 +3,7 @@
 #import <React/RCTBridge.h>
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
+#import <React/RCTI18nUtil.h>
 #import <React/RCTLinkingManager.h>
 #import "RNSplashScreen.h"  // here
 
@@ -29,6 +30,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+  [[RCTI18nUtil sharedInstance] allowRTL:YES];
 /* #ifdef FB_SONARKIT_ENABLED */
 /*   InitializeFlipper(application); */
 /* #endif */

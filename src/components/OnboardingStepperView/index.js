@@ -7,6 +7,7 @@ import {
   Dimensions,
   TouchableOpacity,
   Platform,
+  I18nManager,
 } from "react-native";
 import { TabView, SceneMap } from "react-native-tab-view";
 import { useTheme } from "@react-navigation/native";
@@ -119,6 +120,8 @@ export default function OnboardingStepperView({
     ),
   );
 
+  const iconRtlStyle = I18nManager.isRTL ? { transform: [{ scaleX: -1 }] } : {};
+
   return scenes && scenes.length ? (
     <SafeAreaView style={[styles.root, { backgroundColor: sceneColors[0] }]}>
       <View style={[styles.header]}>
@@ -126,7 +129,7 @@ export default function OnboardingStepperView({
           {hideBackButton ? null : (
             <TouchableOpacity
               hitSlop={hitSlop}
-              style={styles.buttons}
+              style={[iconRtlStyle, styles.buttons]}
               onPress={onBack}
             >
               <ArrowLeft size={18} color={sceneColors[1]} />

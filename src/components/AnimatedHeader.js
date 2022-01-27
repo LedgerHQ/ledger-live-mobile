@@ -1,6 +1,12 @@
 // @flow
 import React, { useState, useCallback } from "react";
-import { View, StyleSheet, Platform, TouchableOpacity } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Platform,
+  TouchableOpacity,
+  I18nManager,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import {
   useNavigation,
@@ -38,7 +44,10 @@ const BackButton = ({
 }) => (
   <TouchableOpacity
     hitSlop={hitSlop}
-    style={styles.buttons}
+    style={[
+      I18nManager.isRTL ? { transform: [{ scaleX: -1 }] } : {},
+      styles.buttons,
+    ]}
     onPress={() => (action ? action() : navigation.goBack())}
   >
     <ArrowLeft size={18} color={colors.darkBlue} />

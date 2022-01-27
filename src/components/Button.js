@@ -15,6 +15,7 @@ import {
   View,
   Animated,
   TouchableOpacity,
+  I18nManager,
 } from "react-native";
 import type { ViewStyleProp } from "react-native/Libraries/StyleSheet/StyleSheet";
 import { useTheme, useIsFocused } from "@react-navigation/native";
@@ -57,6 +58,7 @@ export type BaseButtonProps = {
   IconRight?: React$ComponentType<{ size: number, color: string }>,
   disabled?: boolean,
   outline?: boolean,
+  rtl?: boolean,
   // for analytics
   event?: string,
   eventProperties?: Object,
@@ -92,6 +94,7 @@ export function BaseButton({
   titleStyle,
   IconLeft,
   IconRight,
+  rtl,
   disabled,
   type,
   useTouchable,
@@ -281,6 +284,8 @@ export function BaseButton({
     type,
   ]);
 
+  const iconRtlStyle = I18nManager.isRTL ? { transform: [{ scaleX: -1 }] } : {};
+
   return (
     // $FlowFixMe
     <Container
@@ -306,7 +311,7 @@ export function BaseButton({
         ) : null}
 
         {IconRight ? (
-          <View style={{ paddingLeft: title ? 10 : null }}>
+          <View style={{ ...iconRtlStyle, paddingLeft: title ? 10 : null }}>
             <IconRight size={16} color={iconColor} />
           </View>
         ) : null}

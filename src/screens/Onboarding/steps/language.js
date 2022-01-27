@@ -7,10 +7,13 @@ import {
   SafeAreaView,
   TouchableOpacity,
   ScrollView,
+  Alert,
+  I18nManager,
 } from "react-native";
 import { Trans } from "react-i18next";
 import i18next from "i18next";
 import { useTheme } from "@react-navigation/native";
+import RNRestart from "react-native-restart";
 import { TrackScreen } from "../../../analytics";
 import Button from "../../../components/Button";
 import LText from "../../../components/LText";
@@ -19,6 +22,7 @@ import { useLocale } from "../../../context/Locale";
 import { supportedLocales } from "../../../languages";
 
 const languages = {
+  ar: "عربى",
   de: "Deutsch",
   el: "Ελληνικά",
   en: "English",
@@ -47,12 +51,40 @@ function OnboardingStepLanguage({ navigation }: *) {
   }, [navigation]);
   const { locale: currentLocale } = useLocale();
 
+  const confirmLanguageChange = useCallback(async l => {
+    await i18next.changeLanguage(l);
+
+    I18nManager.forceRTL(true);
+    RNRestart.Restart();
+  }, []);
+
   const changeLanguage = useCallback(
-    l => {
-      i18next.changeLanguage(l);
-      next();
+    async l => {
+      const newDir = i18next.dir(l);
+      const currentDir = I18nManager.isRTL ? "rtl" : "ltr";
+
+      if (newDir !== currentDir) {
+        Alert.alert(
+          "Restart required",
+          "The selected language requires the application to restart. Are you sure you want to continue?",
+          [
+            {
+              text: "Cancel",
+              style: "cancel",
+            },
+            {
+              text: "OK",
+              onPress: () => confirmLanguageChange(l),
+            },
+          ],
+        );
+      } else {
+        await i18next.changeLanguage(l);
+
+        next();
+      }
     },
-    [next],
+    [next, confirmLanguageChange],
   );
 
   return (
