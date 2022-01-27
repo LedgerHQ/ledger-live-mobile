@@ -62,6 +62,7 @@ export default function LText({
 
     return clrs[key];
   };
+
   return (
     // $FlowFixMe
     <Text

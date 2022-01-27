@@ -1,9 +1,15 @@
 /* @flow */
+import i18next from "i18next";
 import { StyleSheet } from "react-native";
 import type { Opts, Res } from ".";
 
 const getFontStyle = ({ bold, semiBold, monospace }: Opts = {}): Res => {
-  const fontFamily = monospace ? "Menlo" : "Inter";
+  let fontFamily = monospace ? "Menlo" : "Inter";
+
+  if (!monospace && ["ar"].includes(i18next.language)) {
+    fontFamily = "Cairo";
+  }
+
   let fontWeight;
   if (semiBold) {
     fontWeight = "600";

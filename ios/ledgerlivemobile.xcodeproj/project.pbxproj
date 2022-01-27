@@ -28,6 +28,7 @@
 		E8E0F5A941050BCF166FD663 /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3509B77469C50660E4C1A7 /* ExpoModulesProvider.swift */; };
 		F837348722721A48009D747A /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F837348622721A48009D747A /* JavaScriptCore.framework */; };
 		F99BEAC629E8441C83104922 /* FontAwesome5_Pro_Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6D891D99F1084D459DBF667F /* FontAwesome5_Pro_Light.ttf */; };
+		75AD0D3238CC4BA4B776F392 /* Cairo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 28792A8690B54F2199DE72EE /* Cairo.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,6 +104,7 @@
 		F77638C1F4BC132FB97FEEAF /* Pods-ledgerlivemobile.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ledgerlivemobile.release.xcconfig"; path = "Target Support Files/Pods-ledgerlivemobile/Pods-ledgerlivemobile.release.xcconfig"; sourceTree = "<group>"; };
 		F837348622721A48009D747A /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		F91D74A42E59456DBB925283 /* Rubik-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Rubik-Regular.ttf"; path = "../assets/fonts/Rubik-Regular.ttf"; sourceTree = "<group>"; };
+		28792A8690B54F2199DE72EE /* Cairo.ttf */ = {isa = PBXFileReference; name = "Cairo.ttf"; path = "../assets/fonts/Cairo.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -221,6 +223,7 @@
 				6D891D99F1084D459DBF667F /* FontAwesome5_Pro_Light.ttf */,
 				668E26194DD94B6D8F10D450 /* FontAwesome5_Pro_Regular.ttf */,
 				991AA9919E4840DBB799E117 /* FontAwesome5_Pro_Solid.ttf */,
+				28792A8690B54F2199DE72EE /* Cairo.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -414,6 +417,7 @@
 				F99BEAC629E8441C83104922 /* FontAwesome5_Pro_Light.ttf in Resources */,
 				AD7A77B84DF3487C812B091B /* FontAwesome5_Pro_Regular.ttf in Resources */,
 				E55EFC09114D43B3AB041882 /* FontAwesome5_Pro_Solid.ttf in Resources */,
+				75AD0D3238CC4BA4B776F392 /* Cairo.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
