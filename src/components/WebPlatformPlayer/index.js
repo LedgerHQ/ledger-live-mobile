@@ -21,7 +21,10 @@ import Color from "color";
 
 import { JSONRPCRequest } from "json-rpc-2.0";
 
-import type { SignedOperation } from "@ledgerhq/live-common/lib/types";
+import type {
+  SignedOperation,
+  Operation,
+} from "@ledgerhq/live-common/lib/types";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { getMainAccount } from "@ledgerhq/live-common/lib/account";
@@ -396,16 +399,28 @@ const WebPlatformPlayer = ({ manifest, inputs }: Props) => {
 
       return new Promise((resolve, reject) => {
         navigation.navigate(NavigatorName.PlatformExchange, {
-          screen: ScreenName.PlatformExchangeConnect,
+          screen: ScreenName.PlatformStartExchange,
           params: {
-            exchangeType,
-            onSuccess: nonce => {
-              tracking.platformStartExchangeSuccess(manifest);
-              resolve(nonce);
+            request: {
+              exchangeType,
             },
-            onError: error => {
-              tracking.platformStartExchangeFail(manifest);
-              reject(error);
+            onResult: (result: {
+              startExchangeResult?: number,
+              startExchangeError?: Error,
+            }) => {
+              console.log("startExchange result", result);
+              if (result.startExchangeError) {
+                tracking.platformStartExchangeFail(manifest);
+                reject(result.startExchangeError);
+              }
+
+              if (result.startExchangeResult) {
+                tracking.platformStartExchangeSuccess(manifest);
+                resolve(result.startExchangeResult);
+              }
+
+              const n = navigation.getParent() || navigation;
+              n.pop();
             },
           },
         });
@@ -470,40 +485,49 @@ const WebPlatformPlayer = ({ manifest, inputs }: Props) => {
       let processedTransaction = accountBridge.createTransaction(
         mainFromAccount,
       );
-      processedTransaction = processedTransaction.updateTransaction(
+      processedTransaction = accountBridge.updateTransaction(
         processedTransaction,
         platformTransaction,
       );
 
       tracking.platformCompleteExchangeRequested(manifest);
       return new Promise((resolve, reject) => {
-        // dispatch(
-        //   openModal("MODAL_PLATFORM_EXCHANGE_COMPLETE", {
-        //     provider,
-        //     exchange: {
-        //       fromAccount,
-        //       fromParentAccount,
-        //       toAccount,
-        //       toParentAccount,
-        //     },
-        //     transaction: processedTransaction,
-        //     binaryPayload,
-        //     signature,
-        //     feesStrategy,
-        //     exchangeType,
-        //     onResult: operation => {
-        //       tracking.platformCompleteExchangeSuccess(manifest);
-        //       resolve(operation);
-        //     },
-        //     onCancel: error => {
-        //       tracking.platformCompleteExchangeFail(manifest);
-        //       reject(error);
-        //     },
-        //   }),
-        // ),
+        navigation.navigate(NavigatorName.PlatformExchange, {
+          screen: ScreenName.PlatformCompleteExchange,
+          params: {
+            request: {
+              exchangeType,
+              provider,
+              exchange: {
+                fromAccount,
+                fromParentAccount,
+                toAccount,
+                toParentAccount,
+              },
+              transaction: processedTransaction,
+              binaryPayload,
+              signature,
+              feesStrategy,
+            },
+            onResult: (result: { operation?: Operation, error?: Error }) => {
+              if (result.error) {
+                tracking.platformStartExchangeFail(manifest);
+                reject(result.error);
+              }
+
+              if (result.operation) {
+                tracking.platformStartExchangeSuccess(manifest);
+                resolve(result.operation);
+              }
+
+              const n = navigation.getParent() || navigation;
+              n.pop();
+            },
+          },
+        });
       });
     },
-    [accounts, manifest],
+    [accounts, manifest, navigation],
   );
 
   const handlers = useMemo(

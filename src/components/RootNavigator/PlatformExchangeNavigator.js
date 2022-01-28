@@ -6,7 +6,8 @@ import { useTranslation } from "react-i18next";
 import { getStackNavigatorConfig } from "../../navigation/navigatorConfig";
 import styles from "../../navigation/styles";
 import { ScreenName } from "../../const";
-import PlatformExchangeConnect from "../../screens/Platform/exchange/Connect";
+import PlatformStartExchange from "../../screens/Platform/exchange/StartExchange";
+import PlatformCompleteExchange from "../../screens/Platform/exchange/CompleteExchange";
 
 export default function PlatformExchangeNavigator() {
   const { t } = useTranslation();
@@ -21,8 +22,16 @@ export default function PlatformExchangeNavigator() {
       screenOptions={{ ...stackNavigationConfig, headerShown: false }}
     >
       <Stack.Screen
-        name={ScreenName.PlatformExchangeConnect}
-        component={PlatformExchangeConnect}
+        name={ScreenName.PlatformStartExchange}
+        component={PlatformStartExchange}
+        options={{
+          headerStyle: styles.headerNoShadow,
+          title: t("transfer.swap.landing.header"),
+        }}
+      />
+      <Stack.Screen
+        name={ScreenName.PlatformCompleteExchange}
+        component={PlatformCompleteExchange}
         options={{
           headerStyle: styles.headerNoShadow,
           title: t("transfer.swap.landing.header"),

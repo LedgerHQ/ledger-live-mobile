@@ -295,7 +295,8 @@ export const ScreenName = {
 
   PlatformCatalog: "PlatformCatalog",
   PlatformApp: "PlatformApp",
-  PlatformExchangeConnect: "PlatformExchangeConnect",
+  PlatformStartExchange: "PlatformStartExchange",
+  PlatformCompleteExchange: "PlatformCompleteExchange",
 
   WalletConnectScan: "WalletConnectScan",
   WalletConnectConnect: "WalletConnectConnect",

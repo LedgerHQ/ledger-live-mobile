@@ -1,5 +1,5 @@
 // @flow
-import React, { useState, useCallback } from "react";
+import React, { useState } from "react";
 import { StyleSheet } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import connectApp from "@ledgerhq/live-common/lib/hw/connectApp";
@@ -8,34 +8,31 @@ import startExchange from "@ledgerhq/live-common/lib/exchange/platform/startExch
 import DeviceActionModal from "../../../components/DeviceActionModal";
 import SelectDevice from "../../../components/SelectDevice";
 
-export default function PlatformExchangeConnect({
-  navigation,
+type Result = {
+  startExchangeResult?: number,
+  startExchangeError?: Error,
+};
+
+export default function PlatformStartExchange({
   route,
 }: {
-  navigation: any,
   route: {
-    params: { exchangeType: number, onSuccess: (nounce: number) => void },
+    params: {
+      request: { exchangeType: number },
+      onResult: (result: Result) => void,
+    },
   },
 }) {
   const [device, setDevice] = useState(null);
-
-  const onResult = useCallback(
-    (data: { startExchangeResult: number }) => {
-      route.params.onSuccess(data.startExchangeResult);
-      navigation.goBack();
-    },
-    [route, navigation],
-  );
 
   return (
     <SafeAreaView style={styles.root}>
       <SelectDevice onSelect={setDevice} autoSelectOnAdd />
       <DeviceActionModal
-        onClose={setDevice}
         device={device}
         action={action}
-        onResult={onResult}
-        request={{ exchangeType: route.params.exchangeType }}
+        onResult={route.params.onResult}
+        request={route.params.request}
       />
     </SafeAreaView>
   );
