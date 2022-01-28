@@ -121,11 +121,11 @@ export default function SettingsRow({
       >
         {children}
         {arrowRight ? (
-          <Box marginLeft={3}>
-            <ChevronRightMedium size={18} color={"neutral.c70"} />
+          <Box marginLeft={4}>
+            <ChevronRightMedium size={16} color={"neutral.c70"} />
           </Box>
         ) : selected ? (
-          <Box marginRight={3}>
+          <Box marginRight={4}>
             <Checkbox checked={true} />
           </Box>
         ) : null}

@@ -4,12 +4,14 @@ import styled from "styled-components/native";
 import { RectButton } from "react-native-gesture-handler";
 import { IconType } from "@ledgerhq/native-ui/components/Icon/type";
 import { Box, BoxedIcon, Text } from "@ledgerhq/native-ui";
+import { ChevronRightMedium } from "@ledgerhq/native-ui/assets/icons";
 
 type Props = {
   title: string;
   desc: string;
   Icon: IconType;
   onClick: Function;
+  arrowRight?: boolean;
 };
 
 function Card({
@@ -40,7 +42,13 @@ const StyledCard = styled(Card)`
   align-items: center;
 `;
 
-export default function SettingsCard({ title, desc, Icon, onClick }: Props) {
+export default function SettingsCard({
+  title,
+  desc,
+  Icon,
+  onClick,
+  arrowRight,
+}: Props) {
   return (
     <StyledCard onPress={onClick}>
       <BoxedIcon
@@ -59,6 +67,11 @@ export default function SettingsCard({ title, desc, Icon, onClick }: Props) {
           {desc}
         </Text>
       </Box>
+      {arrowRight && (
+        <Box marginLeft={4}>
+          <ChevronRightMedium size={16} color={"neutral.c70"} />
+        </Box>
+      )}
     </StyledCard>
   );
 }

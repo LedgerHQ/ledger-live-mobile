@@ -58,6 +58,7 @@ export default function Settings({ navigation }: Props) {
         desc={t("settings.display.desc")}
         Icon={MobileMedium}
         onClick={() => navigation.navigate(ScreenName.GeneralSettings)}
+        arrowRight
       />
       {accounts.length > 0 && (
         <SettingsCard
@@ -65,6 +66,7 @@ export default function Settings({ navigation }: Props) {
           desc={t("settings.accounts.desc")}
           Icon={WalletMedium}
           onClick={() => navigation.navigate(ScreenName.AccountsSettings)}
+          arrowRight
         />
       )}
       <SettingsCard
@@ -72,18 +74,21 @@ export default function Settings({ navigation }: Props) {
         desc={t("settings.about.desc")}
         Icon={BracketsMedium}
         onClick={() => navigation.navigate(ScreenName.AboutSettings)}
+        arrowRight
       />
       <SettingsCard
         title={t("settings.help.title")}
         desc={t("settings.help.desc")}
         Icon={LifeRingMedium}
         onClick={() => navigation.navigate(ScreenName.HelpSettings)}
+        arrowRight
       />
       <SettingsCard
         title={t("settings.experimental.title")}
         desc={t("settings.experimental.desc")}
         Icon={ChartNetworkMedium}
         onClick={() => navigation.navigate(ScreenName.ExperimentalSettings)}
+        arrowRight
       />
       {debugVisible || __DEV__ ? (
         <SettingsCard
@@ -91,6 +96,7 @@ export default function Settings({ navigation }: Props) {
           desc="Use at your own risk – Developer tools"
           Icon={ToolsMedium}
           onClick={() => navigation.navigate(ScreenName.DebugSettings)}
+          arrowRight
         />
       ) : null}
       <TouchableWithoutFeedback onPress={onDebugHiddenPress}>
