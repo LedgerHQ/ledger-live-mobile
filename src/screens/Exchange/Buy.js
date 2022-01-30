@@ -9,7 +9,7 @@ import { usePlatformApp } from "@ledgerhq/live-common/lib/platform/PlatformAppPr
 import extraStatusBarPadding from "../../logic/extraStatusBarPadding";
 import TrackScreen from "../../analytics/TrackScreen";
 import Button from "../../components/Button";
-import { NavigatorName, ScreenName } from "../../const";
+import { ScreenName } from "../../const";
 import LText from "../../components/LText";
 import BuyOption from "./BuyOption";
 import MoonPay from "../../icons/providers/MoonPay";
