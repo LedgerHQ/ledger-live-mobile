@@ -1,20 +1,20 @@
-import React from "react";
+import React, { memo } from "react";
 import { StyleSheet, View } from "react-native";
 import { Trans } from "react-i18next";
 
+import { Text, Flex, Icons, Button } from "@ledgerhq/native-ui";
+
 import ActionModal from "./ActionModal";
 
-import { Text, Flex, Icons } from "@ledgerhq/native-ui";
-
 type Props = {
-  isOpened: boolean;
+  warning: boolean;
   onClose: () => void;
 };
 
-const FirmwareUpdateModal = ({ isOpened, onClose }: Props) => (
-  <ActionModal isOpened={!!isOpened} onClose={onClose} actions={[]}>
+const StorageWarningModal = ({ warning, onClose }: Props) => (
+  <ActionModal isOpened={!!warning} onClose={onClose} actions={[]}>
     <Flex style={styles.iconContainer} borderColor="neutral.c40">
-      <Icons.InfoMedium size={24} color="primary.c80" />
+      <Icons.StorageMedium size={24} color="error.c100" />
     </Flex>
     <View style={styles.textContainer}>
       <Text
@@ -23,7 +23,7 @@ const FirmwareUpdateModal = ({ isOpened, onClose }: Props) => (
         variant="h2"
         style={styles.text}
       >
-        <Trans i18nKey="v3.manager.firmware.modalTitle" />
+        <Trans i18nKey="v3.errors.ManagerNotEnoughSpace.title" />
       </Text>
       <Text
         color="neutral.c70"
@@ -31,9 +31,17 @@ const FirmwareUpdateModal = ({ isOpened, onClose }: Props) => (
         variant="body"
         style={styles.text}
       >
-        <Trans i18nKey="v3.manager.firmware.modalDesc" />
+        <Trans
+          i18nKey="v3.errors.ManagerNotEnoughSpace.info"
+          values={{ app: warning }}
+        />
       </Text>
     </View>
+    <Flex style={[styles.buttonsContainer]}>
+      <Button size="large" type="main" onPress={onClose}>
+        <Trans i18nKey="v3.errors.ManagerNotEnoughSpace.continue" />
+      </Button>
+    </Flex>
   </ActionModal>
 );
 
@@ -50,11 +58,15 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     marginVertical: 8,
-    paddingHorizontal: 16,
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
   },
+  buttonsContainer: {
+    marginTop: 24,
+    marginBottom: 4,
+    width: "100%",
+  },
 });
 
-export default FirmwareUpdateModal;
+export default memo(StorageWarningModal);

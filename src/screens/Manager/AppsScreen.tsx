@@ -6,13 +6,14 @@ import {
   Dimensions,
   FlatList,
   SafeAreaView,
+  TouchableOpacity,
 } from "react-native";
 import { distribute } from "@ledgerhq/live-common/lib/apps";
 import type { Action, State } from "@ledgerhq/live-common/lib/apps";
 import type { App } from "@ledgerhq/live-common/lib/types/manager";
 import { useAppsSections } from "@ledgerhq/live-common/lib/apps/react";
 
-import { Text, Box, Flex } from "@ledgerhq/native-ui";
+import { Text, Box, Flex, Icons } from "@ledgerhq/native-ui";
 
 import { TabView, TabBar } from "react-native-tab-view";
 import Animated from "react-native-reanimated";
@@ -24,6 +25,7 @@ import type { ManagerTab } from "./Manager";
 import SearchModal from "./Modals/SearchModal";
 import AppFilter from "./AppsList/AppFilter";
 import UninstallAllButton from "./AppsList/UninstallAllButton";
+import UpdateAllButton from "./AppsList/UpdateAllButton";
 
 import LText from "../../components/LText";
 import Touchable from "../../components/Touchable";
@@ -34,8 +36,13 @@ import FirmwareManager from "./Firmware";
 import AppsList from "./AppsList";
 import AppUpdateAll from "./AppsList/AppUpdateAll";
 
+import Searchbar from "./AppsList/Searchbar";
+
 import InstallProgressBar from "./AppsList/InstallProgressBar";
 import { useTheme } from "styled-components/native";
+
+import NoAppsInstalled from "../../icons/NoAppsInstalled";
+import NoResultsFound from "../../icons/NoResultsFound";
 
 const { interpolateNode, Extrapolate } = Animated;
 const { width, height } = Dimensions.get("screen");
@@ -144,6 +151,10 @@ const AppsScreen = ({
     dispatch,
   ]);
 
+  const onUpdateAll = useCallback(() => dispatch({ type: "updateAll" }), [
+    dispatch,
+  ]);
+
   const sortOptions = useMemo(
     () => ({
       type: sort,
@@ -160,19 +171,38 @@ const AppsScreen = ({
 
   const renderNoResults = useCallback(
     () => (
-      <Touchable
-        onPress={() => setIndex(0)}
-        activeOpacity={0.5}
-        style={styles.noAppInstalledContainer}
-        event="ManagerNoAppsInstalledClick"
-      >
-        <LText bold style={styles.noAppInstalledText}>
+      <Flex alignItems="center" justifyContent="center" style={styles.noAppInstalledContainer}>
+        <NoResultsFound />
+        <Text color="neutral.c100" fontWeight="medium" variant="h2" style={styles.noAppInstalledText}>
+          <Trans i18nKey="manager.appList.noResultsFound" />
+        </Text>
+        <View>
+          <Text color="neutral.c80" fontWeight="medium" variant="body" style={styles.noAppInstalledDescription}>
+            <Trans i18nKey="manager.appList.noResultsDesc" />
+          </Text>
+        </View>
+      </Flex>
+    ),
+    [setIndex],
+  );
+  
+  const renderNoInstalledApps = useCallback(
+    () => (
+      <Flex alignItems="center" justifyContent="center" style={styles.noAppInstalledContainer}>
+        <NoAppsInstalled />
+        <Text color="neutral.c100" fontWeight="medium" variant="h2" style={styles.noAppInstalledText}>
           <Trans i18nKey="manager.appList.noAppsInstalled" />
-        </LText>
-        <LText style={styles.noAppInstalledDescription} color="grey">
-          <Trans i18nKey="manager.appList.noAppsDescription" />
-        </LText>
-      </Touchable>
+        </Text>
+        <Touchable
+          onPress={() => setIndex(0)}
+          activeOpacity={0.5}
+          event="ManagerNoAppsInstalledClick"
+        >
+          <Text color="neutral.c80" fontWeight="medium" variant="body" style={styles.noAppInstalledDescription}>
+            <Trans i18nKey="manager.appList.noAppsDescription" />
+          </Text>
+        </Touchable>
+      </Flex>
     ),
     [setIndex],
   );
@@ -186,6 +216,7 @@ const AppsScreen = ({
             state={state}
             dispatch={dispatch}
             active={index === 0}
+            renderNoResults={renderNoResults}
             setAppInstallWithDependencies={setAppInstallWithDependencies}
             setAppUninstallWithDependencies={setAppUninstallWithDependencies}
             setStorageWarning={setStorageWarning}
@@ -210,6 +241,22 @@ const AppsScreen = ({
                     <Trans
                       count={device.length}
                       values={{ number: device.length }}
+                      i18nKey="v3.manager.storage.appsToUpdate"
+                    />
+                  </Text>
+                  <UpdateAllButton
+                    state={state}
+                    onUpdateAll={onUpdateAll}
+                    apps={device}
+                  />
+                </Flex>
+              )}
+              {device && device.length > 0 && !state.updateAllQueue.length && (
+                <Flex style={[styles.appsInstalledAction]} borderColor="neutral.c40">
+                  <Text variant="body" fontWeight="semiBold" color="neutral.c100">
+                    <Trans
+                      count={device.length}
+                      values={{ number: device.length }}
                       i18nKey="v3.manager.storage.appsInstalled"
                     />
                   </Text>
@@ -223,7 +270,7 @@ const AppsScreen = ({
               state={state}
               dispatch={dispatch}
               active={index === 1}
-              renderNoResults={renderNoResults}
+              renderNoResults={renderNoInstalledApps}
               setAppInstallWithDependencies={setAppInstallWithDependencies}
               setAppUninstallWithDependencies={setAppUninstallWithDependencies}
               setStorageWarning={setStorageWarning}
@@ -255,16 +302,51 @@ const AppsScreen = ({
           {route.title}
         </LText>
         {route.key === managerTabs.INSTALLED_APPS && update.length > 0 && (
-          <View style={[styles.updateBadge, { backgroundColor: colors.primary.c70 }]}>
-            <LText bold style={styles.updateBadgeText}>
+          <Flex style={[styles.updateBadge, { backgroundColor: colors.primary.c70 }]}>
+            <Text variant="small" fontWeight="bold" color="neutral.c100">
               {update.length}
-            </LText>
-          </View>
+            </Text>
+          </Flex>
         )}
       </View>
     ),
     [update, managerTabs, colors.primary.c70],
   );
+
+  /*
+    <Animated.View
+          style={[
+            styles.searchBarContainer,
+            {
+              opacity: searchOpacity,
+              zIndex: index === 0 ? 2 : -1,
+              borderColor: colors.lightFog,
+            },
+          ]}
+        >
+          <SearchModal
+            state={state}
+            dispatch={dispatch}
+            disabled={index !== 0}
+            setAppInstallWithDependencies={setAppInstallWithDependencies}
+            setAppUninstallWithDependencies={setAppUninstallWithDependencies}
+            navigation={navigation}
+            searchQuery={searchQuery}
+            optimisticState={optimisticState}
+          />
+          <View style={[styles.filterButton]}>
+            <AppFilter
+              filter={appFilter}
+              setFilter={setFilter}
+              sort={sort}
+              setSort={setSort}
+              order={order}
+              setOrder={setOrder}
+              disabled={index !== 0}
+            />
+          </View>
+        </Animated.View>
+    */
 
   const elements = [
     <View style={styles.title}>
@@ -303,65 +385,30 @@ const AppsScreen = ({
         contentContainerStyle={styles.contentContainerStyle}
         renderLabel={renderLabel}
       />
-      <View style={[styles.searchBar]}>
-        <Animated.View
-          style={[
-            styles.searchBarContainer,
-            {
-              opacity: searchOpacity,
-              zIndex: index === 0 ? 2 : -1,
-              borderColor: colors.lightFog,
-            },
-          ]}
-        >
-          <SearchModal
-            state={state}
-            dispatch={dispatch}
+      {index === 0 && (
+      <View style={styles.searchBarContainer}>
+        <Searchbar
+          state={state}
+          dispatch={dispatch}
+          disabled={index !== 0}
+          setAppInstallWithDependencies={setAppInstallWithDependencies}
+          setAppUninstallWithDependencies={setAppUninstallWithDependencies}
+          navigation={navigation}
+          searchQuery={searchQuery}
+          optimisticState={optimisticState}
+        />
+        <View style={styles.filterButton}>
+          <AppFilter
+            filter={appFilter}
+            setFilter={setFilter}
+            sort={sort}
+            setSort={setSort}
+            order={order}
+            setOrder={setOrder}
             disabled={index !== 0}
-            setAppInstallWithDependencies={setAppInstallWithDependencies}
-            setAppUninstallWithDependencies={setAppUninstallWithDependencies}
-            navigation={navigation}
-            searchQuery={searchQuery}
-            optimisticState={optimisticState}
           />
-          <View style={[styles.filterButton]}>
-            <AppFilter
-              filter={appFilter}
-              setFilter={setFilter}
-              sort={sort}
-              setSort={setSort}
-              order={order}
-              setOrder={setOrder}
-              disabled={index !== 0}
-            />
-          </View>
-        </Animated.View>
-        {device.length > 0 && (
-          <Animated.View
-            style={[
-              styles.searchBarContainer,
-              styles.searchBarInstalled,
-              {
-                opacity: position,
-                zIndex: index === 0 ? -1 : 2,
-                backgroundColor: colors.card,
-                borderColor: colors.lightFog,
-              },
-            ]}
-          >
-            <SearchModal
-              state={state}
-              dispatch={dispatch}
-              isInstalledView
-              apps={device}
-              setAppInstallWithDependencies={setAppInstallWithDependencies}
-              setAppUninstallWithDependencies={setAppUninstallWithDependencies}
-              navigation={navigation}
-              optimisticState={optimisticState}
-            />
-          </Animated.View>
-        )}
-      </View>
+        </View>
+      </View>)}
     </Box>,
     <TabView
       renderTabBar={() => null}
@@ -404,24 +451,13 @@ const styles = StyleSheet.create({
     marginTop: 8,
     marginBottom: 32,
   },
-  searchBar: {
-    height: 64,
-  },
   searchBarContainer: {
     flexDirection: "row",
     flexWrap: "nowrap",
     alignItems: "center",
     justifyContent: "space-between",
-    paddingVertical: 14,
-    height: 64,
-    zIndex: 0,
-  },
-  searchBarInstalled: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    zIndex: 1,
-    width,
+    marginTop: 28,
+    marginBottom: 16,
   },
   appsInstalledAction: {
     flexDirection: "row",
@@ -430,13 +466,8 @@ const styles = StyleSheet.create({
     paddingVertical: 24,
     borderBottomWidth: 1,
   },
-  listContainer: {
-    width,
-  },
   filterButton: {
-    height: 64,
-    width: 44,
-    marginLeft: 10,
+    marginLeft: 16,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
@@ -448,6 +479,7 @@ const styles = StyleSheet.create({
   tabBarStyle: {
     backgroundColor: "transparent",
     borderBottomWidth: 1,
+    elevation: 0,
   },
   tabStyle: {
     backgroundColor: "transparent",
@@ -467,41 +499,36 @@ const styles = StyleSheet.create({
     textAlign: "left",
   },
   updateBadge: {
-    marginTop: 2,
     marginLeft: 8,
-
-    minWidth: 15,
-    height: 15,
-    borderRadius: 20,
-    paddingHorizontal: 4,
-  },
-  updateBadgeText: {
-    fontSize: 10,
-    textAlign: "center",
-    color: "#fff",
+    width: 20,
+    height: 20,
+    borderRadius: 10,
+    alignItems: "center",
+    justifyContent: "center",
   },
   contentContainerStyle: {
     backgroundColor: "transparent",
   },
   noAppInstalledContainer: {
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "flex-start",
-    paddingHorizontal: 35,
-    paddingVertical: 50,
+    paddingBottom: 50,
+    paddingTop: 30,
   },
   noAppInstalledText: {
-    fontSize: 17,
-    lineHeight: 21,
-
-    marginVertical: 8,
+    marginTop: 24,
+    textAlign: "center",
   },
   noAppInstalledDescription: {
-    fontSize: 14,
-    lineHeight: 17,
-
-    marginVertical: 8,
+    paddingVertical: 16,
     textAlign: "center",
+  },
+  infoButton: {
+    marginRight: 8,
+    width: 40,
+    height: 40,
+    borderWidth: 1,
+    borderRadius: 50,
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
 

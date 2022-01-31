@@ -15,9 +15,10 @@ type Props = {
   app?: App,
   icon?: string,
   size: number,
+  radius: number,
 };
 
-function AppIcon({ size = 38, app, icon: defaultIcon = "" }: Props) {
+function AppIcon({ size = 38, app, icon: defaultIcon = "", radius = 14 }: Props) {
   const { currencyId, icon } = app || {};
 
   const uri = useMemo(() => manager.getIconUrl(icon || defaultIcon), [
@@ -37,6 +38,7 @@ function AppIcon({ size = 38, app, icon: defaultIcon = "" }: Props) {
           width: size,
           height: size,
           backgroundColor: currencyColor,
+          borderRadius: radius,
         },
       ]}
     >
@@ -56,7 +58,6 @@ function AppIcon({ size = 38, app, icon: defaultIcon = "" }: Props) {
 
 const styles = StyleSheet.create({
   container: {
-    borderRadius: 14,
     position: "relative",
   },
   innerContainer: {

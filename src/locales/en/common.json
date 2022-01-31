@@ -4191,24 +4191,22 @@
       },
       "ManagerNotEnoughSpace": {
         "title": "Not enough storage left",
-        "info": "Please uninstall some apps to free up space for the {{app}} app.",
-        "description": "Uninstalling apps has no impact on your assets."
+        "info": "Please uninstall some apps to free up space for the {{app}} app. Your crypto assets stay safe when uninstalling apps.",
+        "description": "Uninstalling apps has no impact on your assets.",
+        "continue": "Got it!"
       },
       "ManagerQuitPage": {
         "install": {
-          "title": "App installation in progress",
-          "description": "Quitting the Manager will terminate installation.",
-          "stay": "Continue installation"
+          "title": "Quit and cancel installations ?",
+          "description": "Quitting will cancel the app installations in progress."
         },
         "uninstall": {
-          "title": "App uninstall in progress",
-          "description": "Quitting the Manager will terminate uninstallation.",
-          "stay": "Continue uninstallation"
+          "title": "Quit and cancel uninstallations ?",
+          "description": "Quitting will cancel the app uninstallations in progress."
         },
         "update": {
-          "title": "App update in progress",
-          "description": "Quitting the Manager will terminate update.",
-          "stay": "Continue update"
+          "title": "Quit and cancel updates ?",
+          "description": "Quitting will cancel the app updates in progress."
         },
         "quit": "Quit Manager"
       },
@@ -6478,6 +6476,7 @@
         "title": "App catalog",
         "loading": "Loading apps...",
         "noApps": "No apps found",
+        "searchApps": "Search",
         "searchAppsCatalog": "Search app in catalogue...",
         "searchAppsInstalled": "Search installed apps...",
         "noAppsInstalled": "No apps installed on your device",
@@ -6485,6 +6484,11 @@
         "noResultsFound": "No results found",
         "noResultsDesc": "Please verify the spelling and try again",
         "versionNew": "(NEW{{newVersion}})"
+      },
+      "update": {
+        "title": "Update",
+        "subtitle": "Updates available",
+        "updateAll": "Update"
       },
       "uninstall": {
         "title": "Uninstall",
@@ -6501,13 +6505,16 @@
         "title": "Storage",
         "used": "Used",
         "genuine": "Your device is genuine",
+        "appsToUpdate": "<0>{{number}}</0> update",
+        "appsToUpdate_plural": "<0>{{number}}</0> updates",
         "appsInstalled": "<0>{{number}}</0> app",
         "appsInstalled_plural": "<0>{{number}}</0> apps",
         "storageAvailable": "available"
       },
       "installSuccess": {
-        "title": "App installed successfully, you can now add your {{app}} accounts",
-        "title_plural": "Apps installed successfully, you can now add your accounts",
+        "title": "App successfully installed",
+        "title_plural": "Apps successfully installed",
+        "description": "You can now add your {{app}} account",
         "notSupported": "App installed successfully, find out more about the installed apps on our website.",
         "manageAccount": "Add accounts",
         "learnMore": "Learn more",
@@ -6533,12 +6540,13 @@
           "button_plural": "Installing... {{progressPercentage}}%"
         },
         "done": {
-          "title": "Successfully installed {{appName}} on your {{productName}}",
+          "title": "App Successfully installed",
+          "description": "You can now add your {{app}} account",
           "accounts": "Go to Accounts"
         },
         "dependency": {
-          "title": "{{dependency}} app is needed",
-          "description_one": "The {{dependency}} app will also be installed because the {{app}} app uses it.",
+          "title": "{{dependency}} app is required",
+          "description_one": "The {{dependency}} app will also be installed because the {{app}} app needs it.",
           "description_two": "Please press Continue to install the {{app}} and {{dependency}} apps."
         },
         "continueInstall": "Install apps"
@@ -6565,9 +6573,9 @@
           "title": "Successfully uninstalled {{appName}} on your {{productName}}"
         },
         "dependency": {
-          "title": "Uninstall {{app}} and related apps?",
-          "showAll": "Show apps to uninstall",
-          "description": "Apps on your device that need the {{app}} app will be uninstalled too."
+          "title": "Other apps need the {{app}} app",
+          "description_one": "Some apps are dependent of the {{app}} app.",
+          "description_two": "Some apps are dependent of the {{app}} app.\nApps on your device that are dependent on the {{app}} app will be uninstalled too."
         },
         "continueUninstall": "Uninstall {{app}} and other apps"
       },

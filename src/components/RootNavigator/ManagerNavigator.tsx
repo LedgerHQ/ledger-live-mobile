@@ -16,6 +16,35 @@ import ReadOnlyTab from "../ReadOnlyTab";
 import NanoXIcon from "../../icons/TabNanoX";
 import { useIsNavLocked } from "./CustomBlockRouterNavigator";
 
+import { Box, Icons } from "@ledgerhq/native-ui";
+
+const Badge = () => {
+  const { colors } = useTheme();
+  return (
+    <View
+      style={[
+        badgeStyles.root,
+        {
+          backgroundColor: colors.constant.purple,
+          borderColor: colors.background.main,
+        },
+      ]}
+    />
+  );
+};
+
+const badgeStyles = StyleSheet.create({
+  root: {
+    position: "absolute",
+    top: -1,
+    right: -1,
+    width: 14,
+    height: 14,
+    borderRadius: 7,
+    borderWidth: 3,
+  },
+});
+
 const ManagerIconWithUpate = ({
   color,
   size,
@@ -25,10 +54,10 @@ const ManagerIconWithUpate = ({
 }) => {
   const { colors } = useTheme();
   return (
-    <View style={stylesLocal.iconWrapper}>
-      <NanoFoldedMedium size={size} color={color} />
-      <View style={[stylesLocal.blueDot, { backgroundColor: colors.constant.purple }]} />
-    </View>
+    <Box>
+      <Icons.NanoFoldedMedium size={size} color={color} />
+      <Badge />
+    </Box>
   );
 };
 

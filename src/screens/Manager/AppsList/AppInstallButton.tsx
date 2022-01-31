@@ -82,8 +82,8 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
   addAppButton: {
-    width: 40,
-    height: 40,
+    width: 48,
+    height: 48,
     borderWidth: 1,
     borderRadius: 50,
     alignItems: "center",

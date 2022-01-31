@@ -45,8 +45,8 @@ const AppUninstallButton = ({
 
 const styles = StyleSheet.create({
   removeAppButton: {
-    width: 40,
-    height: 40,
+    width: 48,
+    height: 48,
     borderWidth: 1,
     borderRadius: 50,
     alignItems: "center",

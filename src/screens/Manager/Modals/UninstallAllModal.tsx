@@ -62,7 +62,6 @@ const styles = StyleSheet.create({
   textContainer: {
     marginTop: 4,
     marginBottom: 32,
-    paddingHorizontal: 16,
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",

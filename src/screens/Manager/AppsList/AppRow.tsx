@@ -122,7 +122,6 @@ const AppRow = ({
 const styles = StyleSheet.create({
   root: {
     height: 64,
-    paddingRight: 2,
   },
   item: {
     flex: 1,

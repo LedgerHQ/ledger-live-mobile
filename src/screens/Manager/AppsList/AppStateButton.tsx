@@ -9,6 +9,9 @@ import type { Action, State } from "@ledgerhq/live-common/lib/apps";
 
 import AppInstallButton from "./AppInstallButton";
 import AppUninstallButton from "./AppUninstallButton";
+import AppUpdateButton from "./AppUpdateButton";
+
+import AppUpdatingButton from "./AppUpdatingButton";
 
 import { InstallProgress, UninstallProgress } from "./AppInstallProgress";
 
@@ -59,28 +62,18 @@ const AppStateButton = ({
   const renderAppState = () => {
     switch (true) {
       case installing:
-        return (
-          <InstallProgress
-            state={state}
-            name={name}
-            updating={updating}
-            installing={installQueue[0] === name}
-          />
-        );
+        return <AppUpdatingButton state={state} name={name} installing />;
       case uninstalling:
-        return <UninstallProgress uninstalling={uninstallQueue[0] === name} />;
+        return <AppUpdatingButton state={state} name={name} />;
+      case updating:
+        return <AppUpdatingButton state={state} name={name} updating />;
       case canUpdate:
         return (
-          <View style={styles.installedLabel}>
-            <LText
-              semiBold
-              style={[styles.appStateText, styles.updateText]}
-              color="grey"
-              multiline
-            >
-              <Trans i18nKey="AppAction.update.buttonAction" />
-            </LText>
-          </View>
+          <AppUpdateButton
+            app={app}
+            state={state}
+            dispatch={dispatch}
+          />
         );
       case isInstalled:
         return (
