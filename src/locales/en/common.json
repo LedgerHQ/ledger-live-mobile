@@ -2862,6 +2862,23 @@
     "introDescription2": "This has no impact on your crypto assets.",
     "action": "Continue update"
   },
+  "systemLanguageAvailable": {
+    "title": "Change your app's language?",
+    "description": {
+      "newSupport": "Good news! Our teams have been working hard and Ledger Live now supports {{language}}.",
+      "advice": "You can always change your language back later in the settings."
+    },
+    "switchButton": "Switch to {{language}}",
+    "no": "I prefer not to",
+    "languages": {
+      "en": "English",
+      "fr": "French",
+      "ru": "Russian",
+      "es": "Spanish",
+      "zh": "Chinese",
+      "de": "German"
+    }
+  },
   "FirmwareUpdateCheckId": {
     "title": "Identifier",
     "description": "Please press both buttons together on your {{fullDeviceName}} if it displays the same identifier:"
@@ -3154,6 +3171,19 @@
           }
         }
       }
+    }
+  },
+  "cryptoOrg": {
+    "account": {
+     "subHeader": {
+       "cardTitle": "Powered by Crypto.org",
+       "moreInfo": "More info",
+       "drawerTitle": "Crypto.org integration",
+       "title": "The Crypto.org (CRO) token is now available on Ledger Live",
+       "description": "You can now start to manage your Crypto.org (CRO) tokens and secure them through Ledger Live.",
+       "description2": "The Crypto.org (CRO) token is native to the Crypto.org chain and is used for everything from transactions, staking and many upcoming features.",
+       "website": "Cryptocurrency in every wallet"
+     }
     }
   },
   "elrond": {
