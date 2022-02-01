@@ -690,7 +690,8 @@
   },
   "reset": {
     "description": "アカウントと設定を含むLedger Liveのデータを削除するには、スマートフォンからアプリを一旦アンインストールしてから、もう一度インストールし直してください。",
-    "button": "リセット"
+    "button": "リセット",
+    "warning": "Resetting Ledger Live will erase your swap transaction history for all your accounts."
   },
   "graph": {
     "week": "1週",
@@ -1506,7 +1507,8 @@
         "title": "ポートフォリオからアカウントを削除する",
         "desc": "保存されているデータは削除されます。",
         "confirmationTitle": "本当によろしいですか？",
-        "confirmationDesc": "この操作は、暗号資産には影響しません。既存のアカウントは後からいつでも追加できます。"
+        "confirmationDesc": "この操作は、暗号資産には影響しません。既存のアカウントは後からいつでも追加できます。",
+        "confirmationWarn": "Deleting this account will erase your swap transaction history associated to it."
       },
       "archive": {
         "title": "アカウントをアーカイブ",
