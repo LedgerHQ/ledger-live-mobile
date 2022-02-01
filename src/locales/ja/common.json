@@ -1645,6 +1645,8 @@
       "carouselDesc": "ポートフォリオでカルーセルの表示を有効にする。",
       "language": "表示言語",
       "languageDesc": "Ledger Liveの表示言語を設定する。",
+      "region": "Region",
+      "regionDesc": "Choose your region to update formats of dates, time and currencies.",
       "password": "パスワードロック",
       "passwordDesc": "スマートフォン上のLedger Liveのデータを保護するため、パスワードを設定する。",
       "counterValue": "表示通貨",
