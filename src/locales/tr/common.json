@@ -1645,6 +1645,8 @@
       "carouselDesc": "Portföy galerisinin görünürlüğünü etkinleştirin",
       "language": "Görüntüleme dili",
       "languageDesc": "Ledger Live'ın görüntüleneceği dili ayarlayın.",
+      "region": "Region",
+      "regionDesc": "Choose your region to update formats of dates, time and currencies.",
       "password": "Parola kilidi",
       "passwordDesc": "Telefonunuzdaki Ledger Live verilerini korumak için bir parola belirleyin.",
       "counterValue": "Tercih edilen para birimi",
