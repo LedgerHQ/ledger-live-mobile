@@ -1645,6 +1645,8 @@
       "carouselDesc": "启用资产组合的轮播可见",
       "language": "显示语言",
       "languageDesc": "设置 Ledger Live 显示的语言。",
+      "region": "Region",
+      "regionDesc": "Choose your region to update formats of dates, time and currencies.",
       "password": "密码锁",
       "passwordDesc": "设置一个密码来保护您手机上的 Ledger Live 数据。",
       "counterValue": "首选币种",
