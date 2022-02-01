@@ -690,7 +690,8 @@
   },
   "reset": {
     "description": "请在手机上卸载并重新安装应用程序以删除 Ledger Live 数据，包括账户和设置参数）。",
-    "button": "重置"
+    "button": "重置",
+    "warning": "Resetting Ledger Live will erase your swap transaction history for all your accounts."
   },
   "graph": {
     "week": "1 周",
@@ -1506,7 +1507,8 @@
         "title": "从资产组合中删除账户",
         "desc": "储存的数据将被删除。",
         "confirmationTitle": "您确定吗？",
-        "confirmationDesc": "这么做不会影响您的加密资产。以后可随时添加现有账户。"
+        "confirmationDesc": "这么做不会影响您的加密资产。以后可随时添加现有账户。",
+        "confirmationWarn": "Deleting this account will erase your swap transaction history associated to it."
       },
       "archive": {
         "title": "存档账户",
