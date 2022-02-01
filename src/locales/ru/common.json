@@ -1645,6 +1645,8 @@
       "carouselDesc": "Показывать карусель событий на странице Портфеля",
       "language": "Язык интерфейса",
       "languageDesc": "Выберите язык интерфейса в Ledger Live.",
+      "region": "Region",
+      "regionDesc": "Choose your region to update formats of dates, time and currencies.",
       "password": "Блокировка паролем",
       "passwordDesc": "Установите пароль для защиты данных Ledger Live на вашем телефоне.",
       "counterValue": "Предпочтительная валюта",
