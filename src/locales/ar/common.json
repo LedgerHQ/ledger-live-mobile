@@ -1645,6 +1645,8 @@
       "carouselDesc": "تمكين المشاهدة كشريط دوّار في الحافظة",
       "language": "لغة البرنامج",
       "languageDesc": "قم بتعيين اللغة المستخدمة في Ledger Live.",
+      "region": "Region",
+      "regionDesc": "Choose your region to update formats of dates, time and currencies.",
       "password": "قفل كلمة المرور",
       "passwordDesc": "قم بتعيين كلمة مرور لحماية بيانات Ledger Live على هاتفك.",
       "counterValue": "العملة المفضلة",
