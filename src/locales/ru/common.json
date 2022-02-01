@@ -690,7 +690,8 @@
   },
   "reset": {
     "description": "Пожалуйста, удалите и переустановите приложение на ваш телефон, чтобы удалить данные Ledger Live, включая данные счетов и настройки.",
-    "button": "Сбросить"
+    "button": "Сбросить",
+    "warning": "Resetting Ledger Live will erase your swap transaction history for all your accounts."
   },
   "graph": {
     "week": "1Н",
@@ -1506,7 +1507,8 @@
         "title": "Удалить счёт из Портфеля",
         "desc": "Сохранённые данные будут удалены.",
         "confirmationTitle": "Вы уверены?",
-        "confirmationDesc": "Криптоактивы не буду затронуты. Существующие счета всегда можно добавить позже."
+        "confirmationDesc": "Криптоактивы не буду затронуты. Существующие счета всегда можно добавить позже.",
+        "confirmationWarn": "Deleting this account will erase your swap transaction history associated to it."
       },
       "archive": {
         "title": "Архивировать счёт",
