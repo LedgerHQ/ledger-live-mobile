@@ -690,7 +690,8 @@
   },
   "reset": {
     "description": "Ledger Live 데이터(계정 및 설정 포함)를 삭제하시려면, 휴대폰에서 앱을 삭제한 후 재설치하세요.",
-    "button": "리셋"
+    "button": "리셋",
+    "warning": "Resetting Ledger Live will erase your swap transaction history for all your accounts."
   },
   "graph": {
     "week": "1주",
@@ -1506,7 +1507,8 @@
         "title": "포트폴리오에서 계정을 제거하세요",
         "desc": "저장된 데이터가 제거됩니다.",
         "confirmationTitle": "계속 진행할까요?",
-        "confirmationDesc": "귀하의 암호화폐에는 영향을 주지 않습니다. 기존 계정은 언제든 추가 가능합니다."
+        "confirmationDesc": "귀하의 암호화폐에는 영향을 주지 않습니다. 기존 계정은 언제든 추가 가능합니다.",
+        "confirmationWarn": "Deleting this account will erase your swap transaction history associated to it."
       },
       "archive": {
         "title": "계정 아카이브",
