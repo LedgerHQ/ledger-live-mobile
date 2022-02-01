@@ -690,7 +690,8 @@
   },
   "reset": {
     "description": "Desinstala y luego vuelve la instalar la aplicación en tu teléfono para eliminar los datos de Ledger Live, incluidas las cuentas y los ajustes.",
-    "button": "Restablecer"
+    "button": "Restablecer",
+    "warning": "Resetting Ledger Live will erase your swap transaction history for all your accounts."
   },
   "graph": {
     "week": "1 S",
@@ -1506,7 +1507,8 @@
         "title": "Eliminar cuenta del Portfolio",
         "desc": "Se eliminarán los datos guardados.",
         "confirmationTitle": "¿Deseas continuar?",
-        "confirmationDesc": "Esto no tiene ningún efecto sobre tus activos cripto. Siempre puedes agregar cuentas existentes más adelante."
+        "confirmationDesc": "Esto no tiene ningún efecto sobre tus activos cripto. Siempre puedes agregar cuentas existentes más adelante.",
+        "confirmationWarn": "Deleting this account will erase your swap transaction history associated to it."
       },
       "archive": {
         "title": "Archivar cuenta",
