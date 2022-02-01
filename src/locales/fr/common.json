@@ -1645,6 +1645,8 @@
       "carouselDesc": "Afficher le carrousel sur le Portefeuille",
       "language": "Langue d'affichage",
       "languageDesc": "Choisissez la langue d'affichage de Ledger Live.",
+      "region": "Region",
+      "regionDesc": "Choose your region to update formats of dates, time and currencies.",
       "password": "Verrouillage par mot de passe",
       "passwordDesc": "Définissez un mot de passe pour protéger vos données Ledger Live sur votre téléphone.",
       "counterValue": "Devise préférée",
