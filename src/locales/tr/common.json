@@ -3703,7 +3703,8 @@
       "selectCurrency": "Bir para birimi seçin",
       "selectAccount": "Bir hesap seçin",
       "connectDevice": "Cihazınızı bağlayın",
-      "title": "Ortağımız üzerinden kripto satın alın",
+      "title": "Choose a provider to buy crypto",
+      "coinifyTitle": "Buy crypto via our partner",
       "description": "Kripto varlıklarını Coinify üzerinden satın alın ve doğrudan Ledger hesabınıza aktarın.",
       "CTAButton": "Şimdi satın al",
       "emptyState": {
@@ -3716,6 +3717,11 @@
         "cancel": "İptal",
         "address": "{{currency}} hesabının adresi",
         "warning": "Adresiniz Ledger cihazınızda doğrulanmadı. Güvenlik için lütfen doğrulayın."
+      },
+      "bullets": {
+        "whereToBuy": "Buy from anywhere",
+        "cryptoSupported": "crypto supported",
+        "payWith": "Pay with card or SEPA"
       }
     },
     "sell": {
