@@ -691,7 +691,7 @@
   "reset": {
     "description": "Hesap ve ayarlar da dahil olmak üzere Ledger Live verilerini silmek için lütfen uygulamayı telefonunuzdan kaldırın ve yeniden yükleyin.",
     "button": "Sıfırla",
-    "warning": "Resetting Ledger Live will erase your swap transaction history for all your accounts."
+    "warning": "Ledger Live'ı sıfırlamak, tüm hesaplarınız için takas işlem geçmişinizi siler."
   },
   "graph": {
     "week": "1H",
@@ -1508,7 +1508,7 @@
         "desc": "Depolanan veriler kaldırılacaktır.",
         "confirmationTitle": "Emin misiniz?",
         "confirmationDesc": "Bunun kripto varlıklarınız üzerinde hiçbir etkisi yoktur. Mevcut hesaplar daha sonra istenildiğinde eklenebilir.",
-        "confirmationWarn": "Deleting this account will erase your swap transaction history associated to it."
+        "confirmationWarn": "Bu hesabın silinmesi, hesapla ilgili takas işlem geçmişinin de silinmesine neden olacaktır."
       },
       "archive": {
         "title": "Hesabı arşivle",
@@ -1647,8 +1647,8 @@
       "carouselDesc": "Portföy galerisinin görünürlüğünü etkinleştirin",
       "language": "Görüntüleme dili",
       "languageDesc": "Ledger Live'ın görüntüleneceği dili ayarlayın.",
-      "region": "Region",
-      "regionDesc": "Choose your region to update formats of dates, time and currencies.",
+      "region": "Bölge",
+      "regionDesc": "Tarih, saat ve para birimi formatlarını güncellemek için bölgenizi seçin.",
       "password": "Parola kilidi",
       "passwordDesc": "Telefonunuzdaki Ledger Live verilerini korumak için bir parola belirleyin.",
       "counterValue": "Tercih edilen para birimi",
@@ -2647,7 +2647,7 @@
     }
   },
   "EditDeviceName": {
-    "title": "Rename device",
+    "title": "Cihazı yeniden adlandırın",
     "charactersRemaining": "{{remainingCount}} karakter kaldı",
     "action": "Onayla"
   },
@@ -3176,13 +3176,13 @@
   "cryptoOrg": {
     "account": {
       "subHeader": {
-        "cardTitle": "Powered by Crypto.org",
-        "moreInfo": "More info",
-        "drawerTitle": "Crypto.org integration",
-        "title": "The Crypto.org (CRO) token is now available on Ledger Live",
-        "description": "You can now start to manage your Crypto.org (CRO) tokens and secure them through Ledger Live.",
-        "description2": "The Crypto.org (CRO) token is native to the Crypto.org chain and is used for everything from transactions, staking and many upcoming features.",
-        "website": "Cryptocurrency in every wallet"
+        "cardTitle": "Crypto.org aracılığıyla",
+        "moreInfo": "Daha fazla bilgi",
+        "drawerTitle": "Crypto.org entegrasyonu",
+        "title": "Crypto.org (CRO) token'ı artık Ledger Live'da",
+        "description": "Artık Ledger Live ile Crypto.org (CRO) token'larınızı yönetmeye ve güvenle saklamaya başlayabilirsiniz.",
+        "description2": "Crypto.org (CRO) token'ı, Crypto.org zincirinin yerel token'ıdır ve işlemler, staking ve yakında çıkacak pek çok özellik için kullanılır.",
+        "website": "Her cüzdanda kripto para"
       }
     }
   },
