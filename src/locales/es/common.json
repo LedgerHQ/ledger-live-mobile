@@ -691,7 +691,7 @@
   "reset": {
     "description": "Desinstala y luego vuelve la instalar la aplicación en tu teléfono para eliminar los datos de Ledger Live, incluidas las cuentas y los ajustes.",
     "button": "Restablecer",
-    "warning": "Resetting Ledger Live will erase your swap transaction history for all your accounts."
+    "warning": "Restablecer Ledger Live borrará el historial de transacciones de permuta de todas tus cuentas."
   },
   "graph": {
     "week": "1 S",
@@ -1508,7 +1508,7 @@
         "desc": "Se eliminarán los datos guardados.",
         "confirmationTitle": "¿Deseas continuar?",
         "confirmationDesc": "Esto no tiene ningún efecto sobre tus activos cripto. Siempre puedes agregar cuentas existentes más adelante.",
-        "confirmationWarn": "Deleting this account will erase your swap transaction history associated to it."
+        "confirmationWarn": "Eliminar esta cuenta borrará el historial de transacciones de permuta asociado a dicha cuenta."
       },
       "archive": {
         "title": "Archivar cuenta",
@@ -1647,7 +1647,7 @@
       "carouselDesc": "Muestra u oculta el carrusel en el Portfolio",
       "language": "Idioma",
       "languageDesc": "Configura el idioma de Ledger Live.",
-      "region": "Region",
+      "region": "Región",
       "regionDesc": "Choose your region to update formats of dates, time and currencies.",
       "password": "Bloqueo por contraseña",
       "passwordDesc": "Elige una contraseña para proteger los datos de Ledger Live en el teléfono.",
@@ -3703,7 +3703,8 @@
       "selectCurrency": "Selecciona una divisa",
       "selectAccount": "Selecciona una cuenta",
       "connectDevice": "Conecta tu dispositivo",
-      "title": "Compra cripto a través de nuestro socio",
+      "title": "Choose a provider to buy crypto",
+      "coinifyTitle": "Buy crypto via our partner",
       "description": "Compra activos cripto mediante Coinify y recíbelos directamente en tu cuenta de Ledger.",
       "CTAButton": "Comprar ahora",
       "emptyState": {
@@ -3716,6 +3717,11 @@
         "cancel": "Cancelar",
         "address": "Dirección para cuenta de {{currency}}",
         "warning": "La dirección no se ha confirmado en el dispositivo Ledger. Verifícala para mayor seguridad"
+      },
+      "bullets": {
+        "whereToBuy": "Buy from anywhere",
+        "cryptoSupported": "crypto supported",
+        "payWith": "Pay with card or SEPA"
       }
     },
     "sell": {
