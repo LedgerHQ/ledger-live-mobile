@@ -64,8 +64,10 @@ export default function AccountGraphCard({
     colors.background,
   );
 
+  const accountSummary = renderAccountSummary && renderAccountSummary();
+
   return (
-    <Box padding={6} borderRadius={3} bg={"neutral.c30"}>
+    <Box padding={6} borderRadius={2} bg={"neutral.c30"}>
       <GraphCardHeader
         account={account}
         isLoading={!isAvailable}
@@ -94,14 +96,14 @@ export default function AccountGraphCard({
           items={timeRangeItems}
         />
       </Box>
-      {renderAccountSummary && (
+      {accountSummary && (
         <Box
           flexDirection={"row"}
           alignItemps={"center"}
           marginTop={5}
           overflow={"hidden"}
         >
-          {renderAccountSummary()}
+          {accountSummary}
         </Box>
       )}
     </Box>

@@ -177,7 +177,7 @@ function AccountScreenInner({
 
   const [isCollapsed, setIsCollapsed] = useState(true);
 
-  const { listHeaderComponents, stickyHeaderIndices } = useMemo(
+  const { listHeaderComponents } = useMemo(
     () =>
       getListHeaderComponents({
         account,
@@ -260,7 +260,6 @@ function AccountScreenInner({
         renderItem={({ item }) => item}
         keyExtractor={(item, index) => String(index)}
         showsVerticalScrollIndicator={false}
-        stickyHeaderIndices={stickyHeaderIndices}
       />
     </View>
   );

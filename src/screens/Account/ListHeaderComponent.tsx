@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import { ScrollView, StyleSheet, View } from "react-native";
+import { ScrollView } from "react-native";
 import {
   isAccountEmpty,
   getMainAccount,
@@ -15,7 +15,6 @@ import { ValueChange } from "@ledgerhq/live-common/lib/portfolio/v2/types";
 import { CompoundAccountSummary } from "@ledgerhq/live-common/lib/compound/types";
 
 import { Box, Flex, Text } from "@ledgerhq/native-ui";
-import LText from "../../components/LText";
 import CurrencyUnitValue from "../../components/CurrencyUnitValue";
 import Header from "./Header";
 import AccountGraphCard from "../../components/AccountGraphCard";
@@ -30,7 +29,6 @@ import perFamilyAccountHeader from "../../generated/AccountHeader";
 import perFamilyAccountSubHeader from "../../generated/AccountSubHeader";
 import perFamilyAccountBodyHeader from "../../generated/AccountBodyHeader";
 import perFamilyAccountBalanceSummaryFooter from "../../generated/AccountBalanceSummaryFooter";
-import { normalize } from "../../helpers/normalizeSize";
 import FabActions from "../../components/FabActions";
 import { NoCountervaluePlaceholder } from "../../components/CounterValue.js";
 import DiscreetModeButton from "../../components/DiscreetModeButton";
@@ -214,7 +212,14 @@ export function getListHeaderComponents({
           ]
         : []),
       !empty && (
-        <Box mx={6} my={7}>
+        <Box
+          mx={6}
+          mt={7}
+          mb={8}
+          pb={8}
+          borderBottomWidth={"1px"}
+          borderBottomColor={"neutral.c40"}
+        >
           <AccountGraphCard
             account={account}
             range={range}
@@ -244,7 +249,13 @@ export function getListHeaderComponents({
         : []),
       ...(!empty && account.type === "Account" && account.subAccounts
         ? [
-            <Box mx={6} my={8}>
+            <Box
+              mx={6}
+              mb={8}
+              pb={9}
+              borderBottomWidth={"1px"}
+              borderBottomColor={"neutral.c40"}
+            >
               <SubAccountsList
                 accountId={account.id}
                 onAccountPress={onAccountPress}
@@ -273,27 +284,3 @@ export function getListHeaderComponents({
     stickyHeaderIndices,
   };
 }
-
-const styles = StyleSheet.create({
-  header: {
-    flexDirection: "column",
-    zIndex: 1000,
-  },
-  balanceContainer: {
-    alignItems: "flex-start",
-    height: 44,
-  },
-  balanceText: {
-    fontSize: normalize(21),
-    paddingBottom: 4,
-    flexWrap: "wrap",
-  },
-  balanceSubText: {
-    fontSize: normalize(16),
-  },
-  warningWrapper: {
-    display: "flex",
-    flexDirection: "row",
-  },
-  stickySection: {},
-});

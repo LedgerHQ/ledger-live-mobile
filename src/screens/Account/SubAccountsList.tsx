@@ -1,9 +1,8 @@
 import React, { useCallback, useState, useMemo } from "react";
 import { Trans } from "react-i18next";
 import take from "lodash/take";
-import { Platform, StyleSheet, View, FlatList } from "react-native";
+import { StyleSheet, View, FlatList } from "react-native";
 import Icon from "react-native-vector-icons/dist/FontAwesome";
-import MaterialIcon from "react-native-vector-icons/dist/MaterialIcons";
 import { useNavigation, useTheme } from "@react-navigation/native";
 import {
   Account,
@@ -48,33 +47,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
   },
-  subAccountList: {
-    paddingTop: 32,
-    paddingLeft: 16,
-    paddingRight: 16,
-    paddingBottom: 24,
-  },
-  card: {
-    marginBottom: 8,
-    borderRadius: 4,
-    ...Platform.select({
-      android: {
-        elevation: 1,
-      },
-      ios: {
-        shadowOpacity: 0.03,
-        shadowRadius: 8,
-        shadowOffset: {
-          height: 4,
-        },
-      },
-    }),
-  },
 });
-
-const Card = ({ children, style }: { children: any; style: any }) => (
-  <View style={style}>{children}</View>
-);
 
 type Props = {
   parentAccount: Account;
@@ -134,21 +107,6 @@ export default function SubAccountsList({
           />
           {` (${subAccounts.length})`}
         </Text>
-        {isToken && subAccounts.length > 0 ? (
-          ReceiveButton ? (
-            <ReceiveButton accountId={accountId} />
-          ) : (
-            <Button
-              type={"main"}
-              outline
-              size={"small"}
-              event="AccountReceiveToken"
-              onPress={navigateToReceiveConnectDevice}
-            >
-              <Trans i18nKey="account.tokens.addTokens" />
-            </Button>
-          )
-        ) : null}
       </View>
     ),
     [
@@ -201,14 +159,11 @@ export default function SubAccountsList({
     }
 
     // If there is 3 or less sub accounts, no need for collapse button
-    if (subAccounts.length <= 3) {
-      return null;
-    }
 
     // else, we render the collapse button
     return (
       <Button
-        type={"main"}
+        type={"shade"}
         outline
         event="accountExpandTokenList"
         Icon={isCollapsed ? DropdownMedium : DropupMedium}
