@@ -3703,7 +3703,8 @@
       "selectCurrency": "Wählen Sie eine Währung",
       "selectAccount": "Wählen Sie ein Konto",
       "connectDevice": "Verbinden Sie Ihr Gerät",
-      "title": "Krypto kaufen über unseren Partner",
+      "title": "Choose a provider to buy crypto",
+      "coinifyTitle": "Buy crypto via our partner",
       "description": "Kaufen Sie Krypto-Vermögenswerte über Coinify und erhalten Sie diese direkt auf Ihr Ledger-Konto",
       "CTAButton": "Jetzt kaufen",
       "emptyState": {
@@ -3716,6 +3717,11 @@
         "cancel": "Abbrechen",
         "address": "Adresse für {{currency}} Konto",
         "warning": "Ihre Adresse wurde auf Ihrem Ledger-Gerät nicht bestätigt. Bitte verifizieren Sie sie zur Sicherheit"
+      },
+      "bullets": {
+        "whereToBuy": "Buy from anywhere",
+        "cryptoSupported": "crypto supported",
+        "payWith": "Pay with card or SEPA"
       }
     },
     "sell": {
