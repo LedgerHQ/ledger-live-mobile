@@ -3703,7 +3703,8 @@
       "selectCurrency": "选择一种货币",
       "selectAccount": "选择一个账户",
       "connectDevice": "连接您的设备",
-      "title": "通过我们的合作伙伴买入加密货币",
+      "title": "Choose a provider to buy crypto",
+      "coinifyTitle": "Buy crypto via our partner",
       "description": "通过 Coinify 购买加密资产并直接使用您的 Ledger 账户接收。",
       "CTAButton": "立即买入",
       "emptyState": {
@@ -3716,6 +3717,11 @@
         "cancel": "取消",
         "address": "{{currency}} 账户地址",
         "warning": "未在 Ledger 设备上确认您的地址。请核对地址以确保安全"
+      },
+      "bullets": {
+        "whereToBuy": "Buy from anywhere",
+        "cryptoSupported": "crypto supported",
+        "payWith": "Pay with card or SEPA"
       }
     },
     "sell": {
