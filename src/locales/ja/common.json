@@ -3703,7 +3703,8 @@
       "selectCurrency": "通貨を選択",
       "selectAccount": "アカウントを選択",
       "connectDevice": "デバイスを接続",
-      "title": "パートナーを通して暗号資産を購入する",
+      "title": "Choose a provider to buy crypto",
+      "coinifyTitle": "Buy crypto via our partner",
       "description": "Coinifyで暗号資産を購入し、Ledgerアカウントで直接受け取ることができます。",
       "CTAButton": "今すぐ購入する",
       "emptyState": {
@@ -3716,6 +3717,11 @@
         "cancel": "キャンセル",
         "address": "{{currency}}アカウントのアドレス",
         "warning": "アドレスがLedgerデバイス上で確認されませんでした。安全のため、アドレスを確認してください。"
+      },
+      "bullets": {
+        "whereToBuy": "Buy from anywhere",
+        "cryptoSupported": "crypto supported",
+        "payWith": "Pay with card or SEPA"
       }
     },
     "sell": {
