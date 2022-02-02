@@ -691,7 +691,7 @@
   "reset": {
     "description": "Пожалуйста, удалите и переустановите приложение на ваш телефон, чтобы удалить данные Ledger Live, включая данные счетов и настройки.",
     "button": "Сбросить",
-    "warning": "Resetting Ledger Live will erase your swap transaction history for all your accounts."
+    "warning": "Сброс Ledger Live удалит всю историю обменов на всех ваших счетах."
   },
   "graph": {
     "week": "1Н",
@@ -1508,7 +1508,7 @@
         "desc": "Сохранённые данные будут удалены.",
         "confirmationTitle": "Вы уверены?",
         "confirmationDesc": "Криптоактивы не буду затронуты. Существующие счета всегда можно добавить позже.",
-        "confirmationWarn": "Deleting this account will erase your swap transaction history associated to it."
+        "confirmationWarn": "Удаление этого счёта сотрёт связанную с ним историю обменов."
       },
       "archive": {
         "title": "Архивировать счёт",
@@ -1647,8 +1647,8 @@
       "carouselDesc": "Показывать карусель событий на странице Портфеля",
       "language": "Язык интерфейса",
       "languageDesc": "Выберите язык интерфейса в Ledger Live.",
-      "region": "Region",
-      "regionDesc": "Choose your region to update formats of dates, time and currencies.",
+      "region": "Регион",
+      "regionDesc": "Выберите регион, чтобы обновить форматы дат, времени и валют.",
       "password": "Блокировка паролем",
       "passwordDesc": "Установите пароль для защиты данных Ledger Live на вашем телефоне.",
       "counterValue": "Предпочтительная валюта",
@@ -3176,13 +3176,13 @@
   "cryptoOrg": {
     "account": {
       "subHeader": {
-        "cardTitle": "Powered by Crypto.org",
-        "moreInfo": "More info",
-        "drawerTitle": "Crypto.org integration",
-        "title": "The Crypto.org (CRO) token is now available on Ledger Live",
-        "description": "You can now start to manage your Crypto.org (CRO) tokens and secure them through Ledger Live.",
-        "description2": "The Crypto.org (CRO) token is native to the Crypto.org chain and is used for everything from transactions, staking and many upcoming features.",
-        "website": "Cryptocurrency in every wallet"
+        "cardTitle": "Разработано Crypto.org",
+        "moreInfo": "Подробнее",
+        "drawerTitle": "Интеграция с Crypto.org",
+        "title": "Токен Crypto.org (CRO) теперь доступен на Ledger Live",
+        "description": "Теперь вы можете начать управлять своими монетами Crypto.org (CRO) и хранить их в Ledger Live.",
+        "description2": "Монета Crypto.org (CRO) – нативная монета блокчейна Crypto.org, которая используется для всех транзакций, стейкинга и множества предстоящих функций.",
+        "website": "Криптовалюта в каждом кошельке"
       }
     }
   },
