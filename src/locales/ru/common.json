@@ -3703,7 +3703,8 @@
       "selectCurrency": "Выберите валюту",
       "selectAccount": "Выберите счёт",
       "connectDevice": "Подключите устройство",
-      "title": "Покупка криптовалюты через нашего партнёра",
+      "title": "Choose a provider to buy crypto",
+      "coinifyTitle": "Buy crypto via our partner",
       "description": "Покупайте криптоактивы через Coinify и получайте их непосредственно на счёт в Ledger.",
       "CTAButton": "Купить",
       "emptyState": {
@@ -3716,6 +3717,11 @@
         "cancel": "Отменить",
         "address": "Адрес счёта {{currency}}",
         "warning": "Адрес не утверждён на устройстве Ledger. В целях безопасности вам нужно утвердить его"
+      },
+      "bullets": {
+        "whereToBuy": "Buy from anywhere",
+        "cryptoSupported": "crypto supported",
+        "payWith": "Pay with card or SEPA"
       }
     },
     "sell": {
