@@ -1648,7 +1648,7 @@
       "language": "Idioma",
       "languageDesc": "Configura el idioma de Ledger Live.",
       "region": "Región",
-      "regionDesc": "Choose your region to update formats of dates, time and currencies.",
+      "regionDesc": "Elige tu región para actualizar el formato de fecha, hora \ny moneda.",
       "password": "Bloqueo por contraseña",
       "passwordDesc": "Elige una contraseña para proteger los datos de Ledger Live en el teléfono.",
       "counterValue": "Divisa preferida",
@@ -3176,13 +3176,13 @@
   "cryptoOrg": {
     "account": {
       "subHeader": {
-        "cardTitle": "Powered by Crypto.org",
-        "moreInfo": "More info",
-        "drawerTitle": "Crypto.org integration",
-        "title": "The Crypto.org (CRO) token is now available on Ledger Live",
-        "description": "You can now start to manage your Crypto.org (CRO) tokens and secure them through Ledger Live.",
-        "description2": "The Crypto.org (CRO) token is native to the Crypto.org chain and is used for everything from transactions, staking and many upcoming features.",
-        "website": "Cryptocurrency in every wallet"
+        "cardTitle": "Con tecnología desarrollada por Crypto.org",
+        "moreInfo": "Más información",
+        "drawerTitle": "Integración con Crypto.org",
+        "title": "El token de Crypto.org (CRO) ya está disponible en Ledger Live",
+        "description": "Ahora puedes gestionar tus tokens de Crypto.org (CRO) y protegerlos con Ledger Live.",
+        "description2": "El token Crypto.org (CRO) es nativo de la cadena Crypto.org y se utiliza para todas las transacciones, puesta en participación y muchas características futuras.",
+        "website": "Criptomonedas en todas las billeteras"
       }
     }
   },
@@ -3703,8 +3703,8 @@
       "selectCurrency": "Selecciona una divisa",
       "selectAccount": "Selecciona una cuenta",
       "connectDevice": "Conecta tu dispositivo",
-      "title": "Choose a provider to buy crypto",
-      "coinifyTitle": "Buy crypto via our partner",
+      "title": "Elige un proveedor para comprar cripto",
+      "coinifyTitle": "Compra cripto por medio de nuestro socio",
       "description": "Compra activos cripto mediante Coinify y recíbelos directamente en tu cuenta de Ledger.",
       "CTAButton": "Comprar ahora",
       "emptyState": {
@@ -3719,9 +3719,9 @@
         "warning": "La dirección no se ha confirmado en el dispositivo Ledger. Verifícala para mayor seguridad"
       },
       "bullets": {
-        "whereToBuy": "Buy from anywhere",
-        "cryptoSupported": "crypto supported",
-        "payWith": "Pay with card or SEPA"
+        "whereToBuy": "Compra dondequiera que estés",
+        "cryptoSupported": "cripto compatibles",
+        "payWith": "Paga con tarjeta o con SEPA"
       }
     },
     "sell": {
