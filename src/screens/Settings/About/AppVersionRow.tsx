@@ -1,14 +1,11 @@
 import React from "react";
-import VersionNumber from "react-native-version-number";
 import { Trans } from "react-i18next";
 import { Text } from "@ledgerhq/native-ui";
-import cleanBuildVersion from "../../../logic/cleanBuildVersion";
 import SettingsRow from "../../../components/SettingsRow";
+import getFullAppVersion from "../../../logic/version";
 
 function AppVersionRow() {
-  const { appVersion, buildVersion } = VersionNumber;
-  const version = `${appVersion || ""} (${cleanBuildVersion(buildVersion) ||
-    ""})`;
+  const version = getFullAppVersion();
   return (
     <SettingsRow
       event="AppVersionRow"

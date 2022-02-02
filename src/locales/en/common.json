@@ -689,7 +689,7 @@
     }
   },
   "reset": {
-    "title": "Uninstall then reinstall ledger live",
+    "title": "Uninstall then reinstall Ledger Live",
     "description": "Please uninstall then reinstall the app on your phone to delete Ledger Live data, including accounts and settings.",
     "button": "Reset"
   },
