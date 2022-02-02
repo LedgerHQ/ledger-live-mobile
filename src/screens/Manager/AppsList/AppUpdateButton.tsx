@@ -27,7 +27,7 @@ export default function AppUpdateButton({
 
   const updateApp = useCallback(() => {
     if (!canUpdate) return;
-    dispatchProps({ type: "update", name });
+    dispatchProps({ type: "install", name });
   }, [
     canUpdate,
     dispatchProps,
@@ -36,7 +36,7 @@ export default function AppUpdateButton({
 
   return (
     <TouchableOpacity onPress={updateApp}>
-      <Box style={[styles.addAppButton]} backgroundColor="primary.c80">
+      <Box style={[styles.updateAppButton]} backgroundColor="primary.c80">
         <Icons.RefreshMedium size={18} color="neutral.c00"/>
       </Box>
     </TouchableOpacity>
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
   appStateText: {
     fontSize: 12,
   },
-  addAppButton: {
+  updateAppButton: {
     width: 48,
     height: 48,
     borderWidth: 1,

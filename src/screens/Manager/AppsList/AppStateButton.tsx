@@ -11,11 +11,7 @@ import AppInstallButton from "./AppInstallButton";
 import AppUninstallButton from "./AppUninstallButton";
 import AppUpdateButton from "./AppUpdateButton";
 
-import AppUpdatingButton from "./AppUpdatingButton";
-
-import { InstallProgress, UninstallProgress } from "./AppInstallProgress";
-
-import LText from "../../../components/LText";
+import AppProgressButton from "./AppProgressButton";
 
 type Props = {
   app: App,
@@ -62,11 +58,11 @@ const AppStateButton = ({
   const renderAppState = () => {
     switch (true) {
       case installing:
-        return <AppUpdatingButton state={state} name={name} installing />;
+        return <AppProgressButton state={state} name={name} installing />;
       case uninstalling:
-        return <AppUpdatingButton state={state} name={name} />;
+        return <AppProgressButton state={state} name={name} />;
       case updating:
-        return <AppUpdatingButton state={state} name={name} updating />;
+        return <AppProgressButton state={state} name={name} updating />;
       case canUpdate:
         return (
           <AppUpdateButton

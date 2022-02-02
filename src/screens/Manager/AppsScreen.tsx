@@ -34,11 +34,10 @@ import { track } from "../../analytics";
 import DeviceCard from "./Device";
 import FirmwareManager from "./Firmware";
 import AppsList from "./AppsList";
-import AppUpdateAll from "./AppsList/AppUpdateAll";
 
 import Searchbar from "./AppsList/Searchbar";
 
-import InstallProgressBar from "./AppsList/InstallProgressBar";
+import InstalledAppModal from "./Modals/InstalledAppModal";
 import { useTheme } from "styled-components/native";
 
 import NoAppsInstalled from "../../icons/NoAppsInstalled";
@@ -227,14 +226,6 @@ const AppsScreen = ({
         return (
           <>
             <Flex style={{ marginBottom: 24 }}>
-              <Flex>
-                <AppUpdateAll
-                  state={state}
-                  appsToUpdate={update}
-                  dispatch={dispatch}
-                  isModalOpened={updateModalOpened}
-                />
-              </Flex>
               {device && device.length > 0 && !state.updateAllQueue.length && (
                 <Flex style={[styles.appsInstalledAction]} borderColor="neutral.c40">
                   <Text variant="body" fontWeight="semiBold" color="neutral.c100">
@@ -432,7 +423,7 @@ const AppsScreen = ({
         keyExtractor={(_, i) => String(i)}
         stickyHeaderIndices={[3]}
       />
-      <InstallProgressBar
+      <InstalledAppModal
         disable={update && update.length > 0}
         state={state}
         navigation={navigation}

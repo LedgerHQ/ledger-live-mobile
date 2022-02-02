@@ -14,7 +14,6 @@ import QuitManagerModal from "./Modals/QuitManagerModal";
 import StorageWarningModal from "./Modals/StorageWarningModal";
 import AppDependenciesModal from "./Modals/AppDependenciesModal";
 import UninstallDependenciesModal from "./Modals/UninstallDependenciesModal";
-import AppInstalledModal from "./Modals/AppInstalledModal";
 import { useLockNavigation } from "../../components/RootNavigator/CustomBlockRouterNavigator";
 import { defaultNavigationOptions } from "../../navigation/navigatorConfig";
 import { setLastSeenDeviceInfo } from "../../actions/settings";
@@ -193,20 +192,8 @@ const Manager = ({
         onClose={resetAppUninstallWithDependencies}
         dispatch={dispatch}
       />
-      <AppInstalledModal
-        navigation={navigation}
-        state={state}
-        onClose={() => {}}
-      />
     </>
   );
 };
-
-/*
-<AppInstalledModal
-        navigation={navigation}
-        onClose={() => {}}
-      />
-*/
 
 export default memo(Manager);

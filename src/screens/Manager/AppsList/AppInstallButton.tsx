@@ -1,13 +1,11 @@
 import React, { useCallback, useMemo } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import { Trans } from "react-i18next";
 import manager from "@ledgerhq/live-common/lib/manager";
 
 import type { App } from "@ledgerhq/live-common/lib/types/manager";
 import type { Action, State } from "@ledgerhq/live-common/lib/apps";
 import { useAppInstallNeedsDeps } from "@ledgerhq/live-common/lib/apps/react";
-import { useTheme } from "@react-navigation/native";
 import { hasInstalledAnyAppSelector } from "../../../reducers/settings";
 import { installAppFirstTime } from "../../../actions/settings";
 
@@ -28,18 +26,12 @@ export default function AppInstallButton({
   notEnoughMemoryToInstall,
   setAppInstallWithDependencies,
 }: Props) {
-  const { colors } = useTheme();
   const dispatch = useDispatch();
   const hasInstalledAnyApp = useSelector(hasInstalledAnyAppSelector);
   const canInstall = useMemo(() => manager.canHandleInstall(app), [app]);
 
   const { name } = app;
-  const { installed, updateAllQueue } = state;
-
-  const canUpdate = useMemo(
-    () => installed.some(({ name, updated }) => name === app.name && !updated),
-    [installed, app.name],
-  );
+  const { updateAllQueue } = state;
 
   const needsDependencies = useAppInstallNeedsDeps(state, app);
 

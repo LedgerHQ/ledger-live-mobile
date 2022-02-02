@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, TouchableOpacity } from "react-native";
+import { StyleSheet } from "react-native";
 
 import type { State } from "@ledgerhq/live-common/lib/apps";
 import { useTheme } from "styled-components/native";
@@ -7,6 +7,8 @@ import { useTheme } from "styled-components/native";
 import { Box } from "@ledgerhq/native-ui";
 
 import { useAppInstallProgress } from "@ledgerhq/live-common/lib/apps/react";
+
+import ProgressLoader from "../../../components/ProgressLoader";
 
 type Props = {
   state: State,
@@ -29,11 +31,16 @@ export default function AppUpdateButton({
   const color = updating ? colors.primary.c80 : installing ? colors.neutral.c100 : colors.error.c100;
 
   return (
-    <TouchableOpacity onPress={() => {}}>
-      <Box style={[styles.button]} borderColor={color}>
-        <Box style={styles.buttonCenter} backgroundColor={color} />
-      </Box>
-    </TouchableOpacity>
+    <ProgressLoader
+      onPress={() => {}}
+      progress={progress}
+      infinite={!installing && !updating}
+      radius={24}
+      strokeWidth={2}
+      mainColor={color}
+    >
+      <Box style={styles.buttonCenter} backgroundColor={color} />
+    </ProgressLoader>
   );
 }
 
