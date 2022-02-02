@@ -3703,7 +3703,8 @@
       "selectCurrency": "통화 선택",
       "selectAccount": "계정 선택",
       "connectDevice": "내 장치 연결하기",
-      "title": "파트너를 통해 암호화폐 구매",
+      "title": "Choose a provider to buy crypto",
+      "coinifyTitle": "Buy crypto via our partner",
       "description": "Coinify를 통해 암호화폐를 구매하고 Ledger 계정으로 바로 받아보세요.",
       "CTAButton": "지금 구매하기",
       "emptyState": {
@@ -3716,6 +3717,11 @@
         "cancel": "취소",
         "address": "{{currency}} 계정 주소",
         "warning": "귀하의 주소가 Ledger 장치에서 확인되지 않았습니다. 보안을 위해 주소를 인증하세요."
+      },
+      "bullets": {
+        "whereToBuy": "Buy from anywhere",
+        "cryptoSupported": "crypto supported",
+        "payWith": "Pay with card or SEPA"
       }
     },
     "sell": {
