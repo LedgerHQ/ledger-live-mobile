@@ -17,6 +17,7 @@ type Props = {
   dispatch: (action: Action) => void,
   notEnoughMemoryToInstall: boolean,
   setAppInstallWithDependencies: (params: { app: App, dependencies: App[] }) => void,
+  storageWarning: (appName: string) => void,
 };
 
 export default function AppInstallButton({
@@ -25,6 +26,7 @@ export default function AppInstallButton({
   dispatch: dispatchProps,
   notEnoughMemoryToInstall,
   setAppInstallWithDependencies,
+  storageWarning,
 }: Props) {
   const dispatch = useDispatch();
   const hasInstalledAnyApp = useSelector(hasInstalledAnyAppSelector);
@@ -36,12 +38,16 @@ export default function AppInstallButton({
   const needsDependencies = useAppInstallNeedsDeps(state, app);
 
   const disabled = useMemo(
-    () => !canInstall || notEnoughMemoryToInstall || updateAllQueue.length > 0,
-    [canInstall, notEnoughMemoryToInstall, updateAllQueue.length],
+    () => !canInstall || updateAllQueue.length > 0,
+    [canInstall, updateAllQueue.length],
   );
 
   const installApp = useCallback(() => {
     if (disabled) return;
+    if (notEnoughMemoryToInstall) {
+      storageWarning(name);
+      return
+    }
     if (needsDependencies && setAppInstallWithDependencies) {
       setAppInstallWithDependencies(needsDependencies);
     } else {
@@ -58,6 +64,8 @@ export default function AppInstallButton({
     needsDependencies,
     setAppInstallWithDependencies,
     hasInstalledAnyApp,
+    notEnoughMemoryToInstall,
+    storageWarning,
   ]);
 
   return (

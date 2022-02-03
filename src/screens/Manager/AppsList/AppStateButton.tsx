@@ -1,8 +1,6 @@
 import React, { useMemo, memo } from "react";
 import { StyleSheet, View } from "react-native";
 
-import { Trans } from "react-i18next";
-
 import type { App } from "@ledgerhq/live-common/lib/types/manager";
 import type { Action, State } from "@ledgerhq/live-common/lib/apps";
 
@@ -21,6 +19,7 @@ type Props = {
   isInstalled: boolean,
   setAppInstallWithDependencies: (params: { app: App, dependencies: App[] }) => void,
   setAppUninstallWithDependencies: (params: { dependents: App[], app: App }) => void,
+  storageWarning: (appName: string) => void,
 };
 
 const AppStateButton = ({
@@ -31,6 +30,7 @@ const AppStateButton = ({
   isInstalled,
   setAppInstallWithDependencies,
   setAppUninstallWithDependencies,
+  storageWarning,
 }: Props) => {
   const { installed, installQueue, uninstallQueue, updateAllQueue } = state;
   const { name } = app;
@@ -88,6 +88,7 @@ const AppStateButton = ({
             app={app}
             notEnoughMemoryToInstall={notEnoughMemoryToInstall}
             setAppInstallWithDependencies={setAppInstallWithDependencies}
+            storageWarning={storageWarning}
           />
         );
     }

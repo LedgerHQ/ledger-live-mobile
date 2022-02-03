@@ -10,20 +10,20 @@ import Svg, {
 
 const SvgComponent = (props: SvgProps) => (
   <Svg
-    width={141}
-    height={141}
+    width={123}
+    height={113}
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
     xmlnsXlink="http://www.w3.org/1999/xlink"
     {...props}
   >
-    <Path fill="url(#a)" d="M9.25 14.309h122.705v112.178H9.25z" />
+    <Path fill="url(#a)" d="M.25.309h122.705v112.178H.25z" />
     <Defs>
       <Pattern
         id="a"
         patternContentUnits="objectBoundingBox"
-        width={1}
-        height={1}
+        width={1.1}
+        height={1.1}
       >
         <Use xlinkHref="#b" transform="scale(.00056)" />
       </Pattern>

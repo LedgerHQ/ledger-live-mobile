@@ -26,8 +26,6 @@ export default function AppUpdateButton({
 
   const progress = useAppInstallProgress(state, name);
 
-  console.log("progress", progress * 1e2);
-
   const color = updating ? colors.primary.c80 : installing ? colors.neutral.c100 : colors.error.c100;
 
   return (

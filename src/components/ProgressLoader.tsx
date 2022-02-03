@@ -1,15 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Svg, Circle, G } from "react-native-svg";
 import { useTheme } from "styled-components/native";
 import { TouchableOpacity } from "react-native";
 import { Flex } from "@ledgerhq/native-ui";
+
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withRepeat,
+  withTiming,
+  cancelAnimation,
+  Easing,
+} from "react-native-reanimated";
 
 type Props = {
   // float number between 0 and 1
   progress?: number;
   infinite: boolean;
 
-  // function triggered when pressing the loader
   onPress?: () => void;
 
   mainColor: string;
@@ -18,8 +26,6 @@ type Props = {
   radius: number;
   strokeWidth: number;
 
-  // Display an icon in the middle
-  // Icon?: React.ComponentType<{ color: string; size: number }>;
   children: React.ReactNode;
 };
 
@@ -42,8 +48,65 @@ const ProgressLoader = ({
 
   const strokeDashoffset = circumference - progress * circumference;
 
+  const rotation = useSharedValue(0);
+  const animatedStyles = useAnimatedStyle(
+    () => ({
+      transform: [
+        {
+          rotateZ: `${rotation.value}deg`,
+        },
+      ],
+    }),
+    [rotation.value],
+  );
+
+  useEffect(() => {
+    rotation.value = withRepeat(
+      withTiming(360, {
+        duration: 1000,
+        easing: Easing.linear,
+      }),
+      -1, // Infinite
+    );
+    return () => cancelAnimation(rotation);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  if (infinite) {
+    return (
+      <TouchableOpacity disabled={!onPress} onPress={onPress} activeOpacity={1}>
+        <Flex alignItems="center" justifyContent="center">
+          <Animated.View style={animatedStyles}>
+            <Svg width={radius * 2} height={radius * 2}>
+              <Circle
+                cx={radius}
+                cy={radius}
+                fill="transparent"
+                r={radius * 0.92}
+                stroke={backgroundColor}
+                strokeWidth={strokeWidth}
+              />
+              <Circle
+                cx={radius}
+                cy={radius}
+                fill="transparent"
+                r={radius * 0.92}
+                stroke={mainColor}
+                strokeWidth={strokeWidth}
+                strokeDasharray={`${circumference / 4}, ${circumference}`}
+                strokeDashoffset="500"
+                strokeLinecap="round"
+              />
+            </Svg>
+          </Animated.View>
+          <Flex position="absolute">{children}</Flex>
+        </Flex>
+      </TouchableOpacity>
+    );
+  }
+
   return (
-    <TouchableOpacity disabled={!onPress} onPress={onPress}>
+    <TouchableOpacity disabled={!onPress} onPress={onPress} activeOpacity={1}>
       <Flex alignItems="center" justifyContent="center">
         <Svg width={radius * 2} height={radius * 2}>
           <Circle

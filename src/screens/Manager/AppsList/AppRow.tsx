@@ -56,10 +56,7 @@ const AppRow = ({
     name,
   );
 
-  const onSizePress = useCallback(() => setStorageWarning(name), [
-    setStorageWarning,
-    name,
-  ]);
+  const onSizePress = (name) => setStorageWarning(name);
 
   const { colors } = useTheme();
 
@@ -113,6 +110,7 @@ const AppRow = ({
           isInstalledView={isInstalledView}
           setAppInstallWithDependencies={setAppInstallWithDependencies}
           setAppUninstallWithDependencies={setAppUninstallWithDependencies}
+          storageWarning={onSizePress}
         />
       </View>
     </View>

@@ -6,14 +6,17 @@ import {
   Dimensions,
   FlatList,
   SafeAreaView,
-  TouchableOpacity,
 } from "react-native";
+import {
+  listTokens,
+  isCurrencySupported,
+} from "@ledgerhq/live-common/lib/currencies";
 import { distribute } from "@ledgerhq/live-common/lib/apps";
 import type { Action, State } from "@ledgerhq/live-common/lib/apps";
 import type { App } from "@ledgerhq/live-common/lib/types/manager";
 import { useAppsSections } from "@ledgerhq/live-common/lib/apps/react";
 
-import { Text, Box, Flex, Icons } from "@ledgerhq/native-ui";
+import { Text, Box, Flex, Button } from "@ledgerhq/native-ui";
 
 import { TabView, TabBar } from "react-native-tab-view";
 import Animated from "react-native-reanimated";
@@ -22,7 +25,6 @@ import i18next from "i18next";
 import { Trans } from "react-i18next";
 import type { ManagerTab } from "./Manager";
 
-import SearchModal from "./Modals/SearchModal";
 import AppFilter from "./AppsList/AppFilter";
 import UninstallAllButton from "./AppsList/UninstallAllButton";
 import UpdateAllButton from "./AppsList/UpdateAllButton";
@@ -42,6 +44,9 @@ import { useTheme } from "styled-components/native";
 
 import NoAppsInstalled from "../../icons/NoAppsInstalled";
 import NoResultsFound from "../../icons/NoResultsFound";
+import AppIcon from "./AppsList/AppIcon";
+
+import { NavigatorName } from "../../const";
 
 const { interpolateNode, Extrapolate } = Animated;
 const { width, height } = Dimensions.get("screen");
@@ -78,7 +83,6 @@ const AppsScreen = ({
   blockNavigation,
   deviceInfo,
   searchQuery,
-  updateModalOpened,
   tab,
   optimisticState,
 }: Props) => {
@@ -162,14 +166,89 @@ const AppsScreen = ({
     [sort, order],
   );
 
+  const [query, setQuery] = useState(searchQuery || "");
+
   const { update, device, catalog } = useAppsSections(state, {
-    query: "",
+    query: index === 0 ? query : "",
     appFilter,
     sort: sortOptions,
   });
 
+  const tokens = listTokens();
+
+  const { installed, apps } = state;
+
+
+  const found = useMemo(
+    () =>
+      tokens.find(
+        token =>
+          isCurrencySupported(token.parentCurrency) &&
+          (token.name.toLowerCase().includes(query.toLowerCase()) ||
+            token.ticker.toLowerCase().includes(query.toLowerCase())),
+      ),
+    [query, tokens],
+  );
+
+  const parentInstalled = useMemo(
+    () =>
+      found &&
+      found.parentCurrency &&
+      installed.find(({ name }) => name.toLowerCase() === found.parentCurrency.name.toLowerCase()),
+    [found, installed],
+  );
+
+  const parent = useMemo(
+    () =>
+      found &&
+      found.parentCurrency &&
+      apps.find(({ name }) => name.toLowerCase() === found.parentCurrency.name.toLowerCase()),
+    [found, apps],
+  );
+
+  const addAccount = useCallback(() => {
+    navigation.navigate(NavigatorName.AddAccounts);
+  }, [navigation]);
+
   const renderNoResults = useCallback(
-    () => (
+    () => found && parent ? (
+      <Flex alignItems="center" justifyContent="center" style={styles.noAppInstalledContainer}>
+        <Flex position="relative">
+          <AppIcon app={parent} size={48} radius={100} />
+          <Flex position="absolute" bottom={-2} right={-2} borderWidth={2} borderRadius={100} borderColor="background.main">
+            <AppIcon app={parent} size={18} radius={100} />
+          </Flex>
+        </Flex>
+        <Text color="neutral.c100" fontWeight="medium" variant="h2" style={styles.noAppInstalledText}>
+          <Trans
+              i18nKey="v3.manager.token.title"
+              values={{
+                appName: parent.name,
+              }}
+            />
+        </Text>
+        <View>
+          <Text color="neutral.c80" fontWeight="medium" variant="body" style={styles.noAppInstalledDescription}>
+            {parentInstalled ? (
+              <Trans
+                i18nKey="v3.manager.token.noAppNeeded"
+                values={{
+                  appName: parent.name,
+                  tokenName: found.name,
+                }}
+              />) : (
+              <Trans
+                i18nKey="v3.manager.token.installApp"
+                values={{
+                  appName: parent.name,
+                  tokenName: found.name,
+                }}
+              />
+            )}
+          </Text>
+        </View>
+      </Flex>
+    ) : (
       <Flex alignItems="center" justifyContent="center" style={styles.noAppInstalledContainer}>
         <NoResultsFound />
         <Text color="neutral.c100" fontWeight="medium" variant="h2" style={styles.noAppInstalledText}>
@@ -182,7 +261,7 @@ const AppsScreen = ({
         </View>
       </Flex>
     ),
-    [setIndex],
+    [found, parent, parentInstalled],
   );
   
   const renderNoInstalledApps = useCallback(
@@ -226,19 +305,19 @@ const AppsScreen = ({
         return (
           <>
             <Flex style={{ marginBottom: 24 }}>
-              {device && device.length > 0 && !state.updateAllQueue.length && (
+              {update && update.length > 0 && !state.updateAllQueue.length && (
                 <Flex style={[styles.appsInstalledAction]} borderColor="neutral.c40">
                   <Text variant="body" fontWeight="semiBold" color="neutral.c100">
                     <Trans
-                      count={device.length}
-                      values={{ number: device.length }}
+                      count={update.length}
+                      values={{ number: update.length }}
                       i18nKey="v3.manager.storage.appsToUpdate"
                     />
                   </Text>
                   <UpdateAllButton
                     state={state}
                     onUpdateAll={onUpdateAll}
-                    apps={device}
+                    apps={update}
                   />
                 </Flex>
               )}
@@ -304,41 +383,6 @@ const AppsScreen = ({
     [update, managerTabs, colors.primary.c70],
   );
 
-  /*
-    <Animated.View
-          style={[
-            styles.searchBarContainer,
-            {
-              opacity: searchOpacity,
-              zIndex: index === 0 ? 2 : -1,
-              borderColor: colors.lightFog,
-            },
-          ]}
-        >
-          <SearchModal
-            state={state}
-            dispatch={dispatch}
-            disabled={index !== 0}
-            setAppInstallWithDependencies={setAppInstallWithDependencies}
-            setAppUninstallWithDependencies={setAppUninstallWithDependencies}
-            navigation={navigation}
-            searchQuery={searchQuery}
-            optimisticState={optimisticState}
-          />
-          <View style={[styles.filterButton]}>
-            <AppFilter
-              filter={appFilter}
-              setFilter={setFilter}
-              sort={sort}
-              setSort={setSort}
-              order={order}
-              setOrder={setOrder}
-              disabled={index !== 0}
-            />
-          </View>
-        </Animated.View>
-    */
-
   const elements = [
     <View style={styles.title}>
       <Text variant={'h1'} fontWeight={'medium'} color={'neutral.c100'} numberOfLines={1}>
@@ -379,14 +423,8 @@ const AppsScreen = ({
       {index === 0 && (
       <View style={styles.searchBarContainer}>
         <Searchbar
-          state={state}
-          dispatch={dispatch}
-          disabled={index !== 0}
-          setAppInstallWithDependencies={setAppInstallWithDependencies}
-          setAppUninstallWithDependencies={setAppUninstallWithDependencies}
-          navigation={navigation}
-          searchQuery={searchQuery}
-          optimisticState={optimisticState}
+          searchQuery={query}
+          onQueryUpdate={setQuery}
         />
         <View style={styles.filterButton}>
           <AppFilter
@@ -511,6 +549,10 @@ const styles = StyleSheet.create({
   noAppInstalledDescription: {
     paddingVertical: 16,
     textAlign: "center",
+  },
+  addAccountsContainer: {
+    marginTop: 8,
+    marginBottom: 24,
   },
   infoButton: {
     marginRight: 8,
