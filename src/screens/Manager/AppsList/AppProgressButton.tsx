@@ -4,11 +4,9 @@ import { StyleSheet } from "react-native";
 import type { State } from "@ledgerhq/live-common/lib/apps";
 import { useTheme } from "styled-components/native";
 
-import { Box } from "@ledgerhq/native-ui";
+import { Box, ProgressLoader } from "@ledgerhq/native-ui";
 
 import { useAppInstallProgress } from "@ledgerhq/live-common/lib/apps/react";
-
-import ProgressLoader from "../../../components/ProgressLoader";
 
 type Props = {
   state: State,
