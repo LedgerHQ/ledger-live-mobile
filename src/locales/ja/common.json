@@ -691,7 +691,7 @@
   "reset": {
     "description": "アカウントと設定を含むLedger Liveのデータを削除するには、スマートフォンからアプリを一旦アンインストールしてから、もう一度インストールし直してください。",
     "button": "リセット",
-    "warning": "Resetting Ledger Live will erase your swap transaction history for all your accounts."
+    "warning": "Ledger Liveをリセットすると、すべてのアカウントのスワップ取引履歴が消去されます。"
   },
   "graph": {
     "week": "1週",
@@ -1508,7 +1508,7 @@
         "desc": "保存されているデータは削除されます。",
         "confirmationTitle": "本当によろしいですか？",
         "confirmationDesc": "この操作は、暗号資産には影響しません。既存のアカウントは後からいつでも追加できます。",
-        "confirmationWarn": "Deleting this account will erase your swap transaction history associated to it."
+        "confirmationWarn": "このアカウントを削除すると、関連するスワップ取引履歴が消去されます。"
       },
       "archive": {
         "title": "アカウントをアーカイブ",
@@ -1647,8 +1647,8 @@
       "carouselDesc": "ポートフォリオでカルーセルの表示を有効にする。",
       "language": "表示言語",
       "languageDesc": "Ledger Liveの表示言語を設定する。",
-      "region": "Region",
-      "regionDesc": "Choose your region to update formats of dates, time and currencies.",
+      "region": "地域",
+      "regionDesc": "地域を選択して日付や時間、通貨をアップデートする。",
       "password": "パスワードロック",
       "passwordDesc": "スマートフォン上のLedger Liveのデータを保護するため、パスワードを設定する。",
       "counterValue": "表示通貨",
@@ -3177,12 +3177,12 @@
     "account": {
       "subHeader": {
         "cardTitle": "Powered by Crypto.org",
-        "moreInfo": "More info",
-        "drawerTitle": "Crypto.org integration",
-        "title": "The Crypto.org (CRO) token is now available on Ledger Live",
-        "description": "You can now start to manage your Crypto.org (CRO) tokens and secure them through Ledger Live.",
-        "description2": "The Crypto.org (CRO) token is native to the Crypto.org chain and is used for everything from transactions, staking and many upcoming features.",
-        "website": "Cryptocurrency in every wallet"
+        "moreInfo": "詳細",
+        "drawerTitle": "Crypto.orgを統合",
+        "title": "Crypto.org (CRO) トークンがLedger Liveでご利用可能になりました",
+        "description": "Ledger Liveで、Crypto.org (CRO) トークンを安全に保管しながら管理することができます。",
+        "description2": "Crypto.orgチェーンのネイティブトークンであるCrypto.org (CRO) は、トランザクションやステーキングなど、さらに多くの機能へ対応予定です。",
+        "website": "全てのウォレットに暗号資産を"
       }
     }
   },
@@ -3703,8 +3703,8 @@
       "selectCurrency": "通貨を選択",
       "selectAccount": "アカウントを選択",
       "connectDevice": "デバイスを接続",
-      "title": "Choose a provider to buy crypto",
-      "coinifyTitle": "Buy crypto via our partner",
+      "title": "暗号資産を購入するプロバイダーを選択",
+      "coinifyTitle": "パートナーを通して暗号資産を購入する",
       "description": "Coinifyで暗号資産を購入し、Ledgerアカウントで直接受け取ることができます。",
       "CTAButton": "今すぐ購入する",
       "emptyState": {
@@ -3719,9 +3719,9 @@
         "warning": "アドレスがLedgerデバイス上で確認されませんでした。安全のため、アドレスを確認してください。"
       },
       "bullets": {
-        "whereToBuy": "Buy from anywhere",
-        "cryptoSupported": "crypto supported",
-        "payWith": "Pay with card or SEPA"
+        "whereToBuy": "どこからでも購入可能",
+        "cryptoSupported": "対応済み暗号資産",
+        "payWith": "カードまたはSEPAで支払う"
       }
     },
     "sell": {
