@@ -22,42 +22,6 @@ export default ({ searchQuery, onQueryUpdate }: Props) => {
 
   const clear = useCallback(() => onQueryUpdate(""), [onQueryUpdate]);
 
-  /*
-  <View style={[styles.header, { backgroundColor: colors.background }]}>
-        <View style={[styles.searchBar, { backgroundColor: colors.card }]}>
-          <View style={styles.searchBarIcon}>
-            <SearchIcon size={16} color={colors.smoke} />
-          </View>
-              <TextInput
-                ref={textInput}
-                returnKeyType="search"
-                maxLength={50}
-                onChangeText={setQuery}
-                clearButtonMode="always"
-                style={[
-                  styles.searchBarText,
-                  styles.searchBarInput,
-                  { color: colors.smoke },
-                ]}
-                placeholder={placeholder}
-                placeholderTextColor={colors.smoke}
-                onInputCleared={clear}
-                value={query}
-                numberOfLines={1}
-              />
-            </View>
-
-            <TouchableOpacity
-              style={styles.cancelButton}
-              onPress={closeSearchModal}
-            >
-              <LText style={styles.cancelButtonText} color="smoke">
-                <Trans i18nKey="common.cancel" />
-              </LText>
-            </TouchableOpacity>
-          </View>
-  */
-
   return (
     <Flex style={styles.container} borderColor="neutral.c40">
       <Icons.SearchMedium size={17} color="neutral.c70" />

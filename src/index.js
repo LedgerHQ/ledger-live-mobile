@@ -84,11 +84,6 @@ import { setOsTheme, setTheme } from "./actions/settings";
 
 import StyleProvider from "./StyleProvider";
 
-import { LogBox } from 'react-native';
-
-// Ignore log notification by message
-LogBox.ignoreLogs(['Warning: ...']);
-
 const themes = {
   light: lightTheme,
   dusk: duskTheme,

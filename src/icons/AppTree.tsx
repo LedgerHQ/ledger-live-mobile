@@ -16,28 +16,6 @@ type Props = {
 export default function AppTree({ size = 150, color, icon, app }: Props) {
   const uri = manager.getIconUrl(icon);
 
-  /*
-        <Svg
-        width={size}
-        height={size * (108 / 163)}
-        viewBox="0 0 163 108"
-        fill="none"
-      >
-        <G opacity="0.25">
-          <Image x="141" y="27" width="22" height="22" rx="6.94737" href={uri} />
-        </G>
-        <G opacity="0.25">
-          <Image x="94" y="27" width="22" height="22" rx="6.94737" href={uri} />
-        </G>
-        <G opacity="0.25">
-          <Image x="47" y="27" width="22" height="22" rx="6.94737" href={uri} />
-        </G>
-        <G opacity="0.25">
-          <Image y="27" width="22" height="22" rx="6.94737" href={uri} />
-        </G>
-
-      </Svg>
-  */
   return (
     <Flex alignItems="center" justifyContent="center">
       <Flex mb={3}>
