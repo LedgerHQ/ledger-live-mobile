@@ -691,7 +691,7 @@
   "reset": {
     "description": "Bitte deinstallieren Sie die App auf Ihrem Telefon und installieren Sie sie anschließend neu, um die Daten von Ledger Live, einschließlich Konten und Einstellungen, zu löschen.",
     "button": "Zurücksetzen",
-    "warning": "Resetting Ledger Live will erase your swap transaction history for all your accounts."
+    "warning": "Das Zurücksetzen von Ledger Live löscht Ihren Swap-Transaktionsverlauf für alle Ihre Konten."
   },
   "graph": {
     "week": "1 W",
@@ -1508,7 +1508,7 @@
         "desc": "Die gespeicherten Daten werden entfernt.",
         "confirmationTitle": "Sind Sie sicher?",
         "confirmationDesc": "Dies hat keinen Einfluss auf Ihr Krypto-Vermögen. Bestehende Konten können jederzeit nachträglich hinzugefügt werden.",
-        "confirmationWarn": "Deleting this account will erase your swap transaction history associated to it."
+        "confirmationWarn": "Das Löschen dieses Kontos löscht Ihren zugehörigen Swap-Transaktionsverlauf."
       },
       "archive": {
         "title": "Archiv-Konto",
@@ -1648,7 +1648,7 @@
       "language": "Sprache",
       "languageDesc": "Stellen Sie die in Ledger Live angezeigte Sprache ein.",
       "region": "Region",
-      "regionDesc": "Choose your region to update formats of dates, time and currencies.",
+      "regionDesc": "Wählen Sie Ihre Region, um Datums-, Zeit- und Währungsformate zu aktualisieren.",
       "password": "Passwort-Sperre",
       "passwordDesc": "Legen Sie ein Passwort fest, um die Ledger Live-Daten auf Ihrem Telefon zu schützen.",
       "counterValue": "Bevorzugte Währung",
@@ -2863,20 +2863,20 @@
     "action": "Update fortsetzen"
   },
   "systemLanguageAvailable": {
-    "title": "Change your app's language?",
+    "title": "Sprache der App ändern?",
     "description": {
-      "newSupport": "Good news! Our teams have been working hard and Ledger Live now supports {{language}}.",
-      "advice": "You can always change your language back later in the settings."
+      "newSupport": "Gute Neuigkeiten! Unsere Teams haben hart gearbeitet und Ledger Live unterstützt jetzt {{language}}.",
+      "advice": "Sie können Ihre Sprache jederzeit später in den Einstellungen wieder ändern."
     },
-    "switchButton": "Switch to {{language}}",
-    "no": "I prefer not to",
+    "switchButton": "Zu {{language}} wechseln",
+    "no": "Lieber nicht",
     "languages": {
-      "en": "English",
-      "fr": "French",
-      "ru": "Russian",
-      "es": "Spanish",
-      "zh": "Chinese",
-      "de": "German"
+      "en": "Englisch",
+      "fr": "Französisch",
+      "ru": "Russisch",
+      "es": "Spanisch",
+      "zh": "Chinesisch",
+      "de": "Deutsch"
     }
   },
   "FirmwareUpdateCheckId": {
@@ -3177,12 +3177,12 @@
     "account": {
       "subHeader": {
         "cardTitle": "Powered by Crypto.org",
-        "moreInfo": "More info",
-        "drawerTitle": "Crypto.org integration",
-        "title": "The Crypto.org (CRO) token is now available on Ledger Live",
-        "description": "You can now start to manage your Crypto.org (CRO) tokens and secure them through Ledger Live.",
-        "description2": "The Crypto.org (CRO) token is native to the Crypto.org chain and is used for everything from transactions, staking and many upcoming features.",
-        "website": "Cryptocurrency in every wallet"
+        "moreInfo": "Mehr erfahren",
+        "drawerTitle": "Crypto.org Integration",
+        "title": "Das Crypto.org (CRO) Token ist jetzt auf Ledger Live verfügbar",
+        "description": "Sie können jetzt damit beginnen, Ihre Crypto.org (CRO) Token zu verwalten und sie über Ledger Live zu sichern.",
+        "description2": "Der Crypto.org-Token (CRO) ist nativ in der Crypto.org-Chain und wird für alle Transaktionen verwendet, auch für Staking und viele noch kommende Features.",
+        "website": "Kryptowährung in jeder Wallet"
       }
     }
   },
@@ -3703,8 +3703,8 @@
       "selectCurrency": "Wählen Sie eine Währung",
       "selectAccount": "Wählen Sie ein Konto",
       "connectDevice": "Verbinden Sie Ihr Gerät",
-      "title": "Choose a provider to buy crypto",
-      "coinifyTitle": "Buy crypto via our partner",
+      "title": "Wählen Sie einen Anbieter um Krypto zu kaufen",
+      "coinifyTitle": "Krypto über unseren Partner kaufen",
       "description": "Kaufen Sie Krypto-Vermögenswerte über Coinify und erhalten Sie diese direkt auf Ihr Ledger-Konto",
       "CTAButton": "Jetzt kaufen",
       "emptyState": {
@@ -3719,9 +3719,9 @@
         "warning": "Ihre Adresse wurde auf Ihrem Ledger-Gerät nicht bestätigt. Bitte verifizieren Sie sie zur Sicherheit"
       },
       "bullets": {
-        "whereToBuy": "Buy from anywhere",
-        "cryptoSupported": "crypto supported",
-        "payWith": "Pay with card or SEPA"
+        "whereToBuy": "Von überall aus kaufen",
+        "cryptoSupported": "Krypto unterstützt",
+        "payWith": "Mit Karte oder SEPA bezahlen"
       }
     },
     "sell": {
