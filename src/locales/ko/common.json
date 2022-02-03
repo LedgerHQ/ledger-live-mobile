@@ -691,7 +691,7 @@
   "reset": {
     "description": "Ledger Live 데이터(계정 및 설정 포함)를 삭제하시려면, 휴대폰에서 앱을 삭제한 후 재설치하세요.",
     "button": "리셋",
-    "warning": "Resetting Ledger Live will erase your swap transaction history for all your accounts."
+    "warning": "Ledger Live를 리셋하면 계정의 스왑 트랜잭션 내역이 삭제됩니다."
   },
   "graph": {
     "week": "1주",
@@ -1508,7 +1508,7 @@
         "desc": "저장된 데이터가 제거됩니다.",
         "confirmationTitle": "계속 진행할까요?",
         "confirmationDesc": "귀하의 암호화폐에는 영향을 주지 않습니다. 기존 계정은 언제든 추가 가능합니다.",
-        "confirmationWarn": "Deleting this account will erase your swap transaction history associated to it."
+        "confirmationWarn": "이 계정을 삭제하면 계정과 연결된 사용자의 스왑 트랜잭션 내역이 삭제됩니다."
       },
       "archive": {
         "title": "계정 아카이브",
@@ -1647,8 +1647,8 @@
       "carouselDesc": "포트폴리오 화면에서 슬라이드 기능을 활성화합니다.",
       "language": "언어 표시하기",
       "languageDesc": "Ledger Live에 표시되는 언어를 설정하세요.",
-      "region": "Region",
-      "regionDesc": "Choose your region to update formats of dates, time and currencies.",
+      "region": "지역",
+      "regionDesc": "날짜, 시간 및 통화 형식을 업데이트하려면 지역을 선택해 주세요.",
       "password": "패스워드 잠금",
       "passwordDesc": "핸드폰에서 Ledger Live 데이터를 보호하려면 비밀번호를 설정하세요.",
       "counterValue": "선호 통화",
@@ -2863,20 +2863,20 @@
     "action": "계속 업데이트"
   },
   "systemLanguageAvailable": {
-    "title": "Change your app's language?",
+    "title": "앱의 언어를 변경하시겠습니까?",
     "description": {
-      "newSupport": "Good news! Our teams have been working hard and Ledger Live now supports {{language}}.",
-      "advice": "You can always change your language back later in the settings."
+      "newSupport": "좋은 소식입니다! 당사 팀은 항상 최선을 다해 노력해왔으며 Ledger Live는 이제 {{language}}를 지원합니다.",
+      "advice": "나중에 설정에서 언제든지 언어를 다시 변경할 수 있습니다."
     },
-    "switchButton": "Switch to {{language}}",
-    "no": "I prefer not to",
+    "switchButton": "{{language}}로 전환",
+    "no": "다음을 선호하지 않습니다:",
     "languages": {
-      "en": "English",
-      "fr": "French",
-      "ru": "Russian",
-      "es": "Spanish",
-      "zh": "Chinese",
-      "de": "German"
+      "en": "영어",
+      "fr": "프랑스어",
+      "ru": "러시아어",
+      "es": "스페인어",
+      "zh": "중국어",
+      "de": "독일어"
     }
   },
   "FirmwareUpdateCheckId": {
@@ -3176,13 +3176,13 @@
   "cryptoOrg": {
     "account": {
       "subHeader": {
-        "cardTitle": "Powered by Crypto.org",
-        "moreInfo": "More info",
-        "drawerTitle": "Crypto.org integration",
-        "title": "The Crypto.org (CRO) token is now available on Ledger Live",
-        "description": "You can now start to manage your Crypto.org (CRO) tokens and secure them through Ledger Live.",
-        "description2": "The Crypto.org (CRO) token is native to the Crypto.org chain and is used for everything from transactions, staking and many upcoming features.",
-        "website": "Cryptocurrency in every wallet"
+        "cardTitle": "Crypto.org에서 제공됨",
+        "moreInfo": "자세한 정보",
+        "drawerTitle": "Crypto.org 통합",
+        "title": "이제 Ledger Live에서 Crypto.org(CRO) 토큰을 사용할 수 있습니다",
+        "description": "이제 CRO(Crypto.org) 토큰 관리를 시작하고 Ledger Live를 통해 토큰을 보호할 수 있습니다.",
+        "description2": "Crypto.org(CRO) 토큰은 Crypto.org 체인의 기본 토큰이며 트랜잭션, 스테이킹 및 향후 많은 기능에 사용됩니다.",
+        "website": "모든 지갑의 암호화폐"
       }
     }
   },
@@ -3703,8 +3703,8 @@
       "selectCurrency": "통화 선택",
       "selectAccount": "계정 선택",
       "connectDevice": "내 장치 연결하기",
-      "title": "Choose a provider to buy crypto",
-      "coinifyTitle": "Buy crypto via our partner",
+      "title": "암호화폐를 구매할 공급자를 선택하세요",
+      "coinifyTitle": "파트너를 통해 암호화폐 구매",
       "description": "Coinify를 통해 암호화폐를 구매하고 Ledger 계정으로 바로 받아보세요.",
       "CTAButton": "지금 구매하기",
       "emptyState": {
@@ -3719,9 +3719,9 @@
         "warning": "귀하의 주소가 Ledger 장치에서 확인되지 않았습니다. 보안을 위해 주소를 인증하세요."
       },
       "bullets": {
-        "whereToBuy": "Buy from anywhere",
-        "cryptoSupported": "crypto supported",
-        "payWith": "Pay with card or SEPA"
+        "whereToBuy": "어디서나 구매 가능",
+        "cryptoSupported": "암호화폐 지원됨",
+        "payWith": "카드 또는 SEPA로 지불"
       }
     },
     "sell": {
