@@ -2973,6 +2973,14 @@
       }
     }
   },
+  "celo": {
+    "info": {
+      "available": {
+        "title": "CELO available",
+        "description": "This amount is disposable."
+      }
+    }
+  },
   "cosmos": {
     "info": {
       "available": {
