@@ -3,7 +3,7 @@ import { StyleSheet, View, SectionList, FlatList } from "react-native";
 import { SectionBase } from "react-native/Libraries/Lists/SectionList";
 import Animated, { Value, event } from "react-native-reanimated";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigation, useTheme } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import {
   isAccountEmpty,
   groupAccountOperationsByDay,
@@ -99,8 +99,6 @@ function AccountScreenInner({
 
   useScrollToTop(ref);
 
-  const { colors } = useTheme();
-
   const onEndReached = useCallback(() => {
     setOpCount(opCount + 50);
   }, [setOpCount, opCount]);
@@ -179,7 +177,7 @@ function AccountScreenInner({
 
   const [isCollapsed, setIsCollapsed] = useState(true);
 
-  const { listHeaderComponents, stickyHeaderIndices } = useMemo(
+  const { listHeaderComponents } = useMemo(
     () =>
       getListHeaderComponents({
         account,
@@ -262,7 +260,6 @@ function AccountScreenInner({
         renderItem={({ item }) => item}
         keyExtractor={(item, index) => String(index)}
         showsVerticalScrollIndicator={false}
-        stickyHeaderIndices={stickyHeaderIndices}
       />
     </View>
   );
