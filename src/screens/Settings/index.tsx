@@ -1,7 +1,7 @@
 import React, { useRef, useState, useCallback } from "react";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { View, StyleSheet, TouchableWithoutFeedback } from "react-native";
+import { View, TouchableWithoutFeedback } from "react-native";
 import {
   MobileMedium,
   WalletMedium,
@@ -17,7 +17,7 @@ import SettingsCard from "../../components/SettingsCard";
 import PoweredByLedger from "./PoweredByLedger";
 import TrackScreen from "../../analytics/TrackScreen";
 import timer from "../../timer";
-import NavigationScrollView from "../../components/NavigationScrollView";
+import SettingsNavigationScrollView from "./SettingsNavigationScrollView";
 
 type Props = {
   navigation: any;
@@ -51,63 +51,59 @@ export default function Settings({ navigation }: Props) {
   }, [debugVisible]);
 
   return (
-    <NavigationScrollView>
+    <SettingsNavigationScrollView>
       <TrackScreen category="Settings" />
-      <View style={styles.root}>
+      <SettingsCard
+        title={t("settings.display.title")}
+        desc={t("settings.display.desc")}
+        Icon={MobileMedium}
+        onClick={() => navigation.navigate(ScreenName.GeneralSettings)}
+        arrowRight
+      />
+      {accounts.length > 0 && (
         <SettingsCard
-          title={t("settings.display.title")}
-          desc={t("settings.display.desc")}
-          Icon={MobileMedium}
-          onClick={() => navigation.navigate(ScreenName.GeneralSettings)}
+          title={t("settings.accounts.title")}
+          desc={t("settings.accounts.desc")}
+          Icon={WalletMedium}
+          onClick={() => navigation.navigate(ScreenName.AccountsSettings)}
+          arrowRight
         />
-        {accounts.length > 0 && (
-          <SettingsCard
-            title={t("settings.accounts.title")}
-            desc={t("settings.accounts.desc")}
-            Icon={WalletMedium}
-            onClick={() => navigation.navigate(ScreenName.AccountsSettings)}
-          />
-        )}
+      )}
+      <SettingsCard
+        title={t("settings.about.title")}
+        desc={t("settings.about.desc")}
+        Icon={BracketsMedium}
+        onClick={() => navigation.navigate(ScreenName.AboutSettings)}
+        arrowRight
+      />
+      <SettingsCard
+        title={t("settings.help.title")}
+        desc={t("settings.help.desc")}
+        Icon={LifeRingMedium}
+        onClick={() => navigation.navigate(ScreenName.HelpSettings)}
+        arrowRight
+      />
+      <SettingsCard
+        title={t("settings.experimental.title")}
+        desc={t("settings.experimental.desc")}
+        Icon={ChartNetworkMedium}
+        onClick={() => navigation.navigate(ScreenName.ExperimentalSettings)}
+        arrowRight
+      />
+      {debugVisible || __DEV__ ? (
         <SettingsCard
-          title={t("settings.about.title")}
-          desc={t("settings.about.desc")}
-          Icon={BracketsMedium}
-          onClick={() => navigation.navigate(ScreenName.AboutSettings)}
+          title="Debug"
+          desc="Use at your own risk – Developer tools"
+          Icon={ToolsMedium}
+          onClick={() => navigation.navigate(ScreenName.DebugSettings)}
+          arrowRight
         />
-        <SettingsCard
-          title={t("settings.help.title")}
-          desc={t("settings.help.desc")}
-          Icon={LifeRingMedium}
-          onClick={() => navigation.navigate(ScreenName.HelpSettings)}
-        />
-        <SettingsCard
-          title={t("settings.experimental.title")}
-          desc={t("settings.experimental.desc")}
-          Icon={ChartNetworkMedium}
-          onClick={() => navigation.navigate(ScreenName.ExperimentalSettings)}
-        />
-        {debugVisible || __DEV__ ? (
-          <SettingsCard
-            title="Debug"
-            desc="Use at your own risk – Developer tools"
-            Icon={ToolsMedium}
-            onClick={() => navigation.navigate(ScreenName.DebugSettings)}
-          />
-        ) : null}
-        <TouchableWithoutFeedback onPress={onDebugHiddenPress}>
-          <View>
-            <PoweredByLedger />
-          </View>
-        </TouchableWithoutFeedback>
-      </View>
-    </NavigationScrollView>
+      ) : null}
+      <TouchableWithoutFeedback onPress={onDebugHiddenPress}>
+        <View>
+          <PoweredByLedger />
+        </View>
+      </TouchableWithoutFeedback>
+    </SettingsNavigationScrollView>
   );
 }
-
-const styles = StyleSheet.create({
-  root: {
-    paddingTop: 16,
-    paddingHorizontal: 16,
-    paddingBottom: 64,
-  },
-});

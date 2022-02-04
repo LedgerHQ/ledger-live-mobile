@@ -99,11 +99,7 @@ export default function SettingsRow({
       compact={compact}
     >
       {iconLeft && (
-        <Box
-          paddingRight={6}
-          marginLeft={6}
-          justifyContent={centeredIcon && "center"}
-        >
+        <Box paddingRight={6} justifyContent={centeredIcon && "center"}>
           {iconLeft}
         </Box>
       )}
@@ -122,15 +118,14 @@ export default function SettingsRow({
         justifyContent={"flex-end"}
         flexShrink={0}
         maxWidth={"50%"}
-        marginRight={6}
       >
         {children}
         {arrowRight ? (
-          <Box marginLeft={3}>
-            <ChevronRightMedium size={18} color={"neutral.c70"} />
+          <Box marginLeft={4}>
+            <ChevronRightMedium size={16} color={"neutral.c70"} />
           </Box>
         ) : selected ? (
-          <Box marginRight={3}>
+          <Box marginRight={4}>
             <Checkbox checked={true} />
           </Box>
         ) : null}
