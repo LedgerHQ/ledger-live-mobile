@@ -691,7 +691,7 @@
   "reset": {
     "description": "请在手机上卸载并重新安装应用程序以删除 Ledger Live 数据，包括账户和设置参数）。",
     "button": "重置",
-    "warning": "Resetting Ledger Live will erase your swap transaction history for all your accounts."
+    "warning": "重置 Ledger Live 将擦除您所有账户的 swap 互换交易历史记录。"
   },
   "graph": {
     "week": "1 周",
@@ -1508,7 +1508,7 @@
         "desc": "储存的数据将被删除。",
         "confirmationTitle": "您确定吗？",
         "confirmationDesc": "这么做不会影响您的加密资产。以后可随时添加现有账户。",
-        "confirmationWarn": "Deleting this account will erase your swap transaction history associated to it."
+        "confirmationWarn": "删除此账户将会清除您与它相关的 swap 互换交易历史记录。"
       },
       "archive": {
         "title": "存档账户",
@@ -1647,8 +1647,8 @@
       "carouselDesc": "启用资产组合的轮播可见",
       "language": "显示语言",
       "languageDesc": "设置 Ledger Live 显示的语言。",
-      "region": "Region",
-      "regionDesc": "Choose your region to update formats of dates, time and currencies.",
+      "region": "地区",
+      "regionDesc": "选择您的地区来更新日期、时间和货币的格式。",
       "password": "密码锁",
       "passwordDesc": "设置一个密码来保护您手机上的 Ledger Live 数据。",
       "counterValue": "首选币种",
@@ -2976,8 +2976,8 @@
   "celo": {
     "info": {
       "available": {
-        "title": "CELO available",
-        "description": "This amount is disposable."
+        "title": "CELO 可用",
+        "description": "该数额可自由支配。"
       }
     }
   },
@@ -3184,13 +3184,13 @@
   "cryptoOrg": {
     "account": {
       "subHeader": {
-        "cardTitle": "Powered by Crypto.org",
-        "moreInfo": "More info",
-        "drawerTitle": "Crypto.org integration",
-        "title": "The Crypto.org (CRO) token is now available on Ledger Live",
-        "description": "You can now start to manage your Crypto.org (CRO) tokens and secure them through Ledger Live.",
-        "description2": "The Crypto.org (CRO) token is native to the Crypto.org chain and is used for everything from transactions, staking and many upcoming features.",
-        "website": "Cryptocurrency in every wallet"
+        "cardTitle": "由 Crypto.org 提供支持",
+        "moreInfo": "更多信息",
+        "drawerTitle": "Crypto.org 整合",
+        "title": "Crypto.org (CRO) 代币现在可以在 Ledger Live 上使用",
+        "description": "您现在可以开始管理您的 Crypto.org (CRO) 代币，并通过 Ledger Live 保护它们。",
+        "description2": "Crypto.org (CRO) 代币是 Crypto.org 链的原生币种，用于所有交易、 质押和许多即将到来的功能。",
+        "website": "每个钱包中的加密货币"
       }
     }
   },
@@ -3711,8 +3711,8 @@
       "selectCurrency": "选择一种货币",
       "selectAccount": "选择一个账户",
       "connectDevice": "连接您的设备",
-      "title": "Choose a provider to buy crypto",
-      "coinifyTitle": "Buy crypto via our partner",
+      "title": "选择一个购买加密货币的供应方",
+      "coinifyTitle": "通过我们的合作伙伴买入加密货币",
       "description": "通过 Coinify 购买加密资产并直接使用您的 Ledger 账户接收。",
       "CTAButton": "立即买入",
       "emptyState": {
@@ -3727,9 +3727,9 @@
         "warning": "未在 Ledger 设备上确认您的地址。请核对地址以确保安全"
       },
       "bullets": {
-        "whereToBuy": "Buy from anywhere",
-        "cryptoSupported": "crypto supported",
-        "payWith": "Pay with card or SEPA"
+        "whereToBuy": "可从任何地方购买",
+        "cryptoSupported": "已支持的加密币种",
+        "payWith": "使用卡或 SEPA 支付"
       }
     },
     "sell": {
