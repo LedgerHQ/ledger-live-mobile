@@ -34,6 +34,7 @@ import { PortfolioHistoryList } from "./PortfolioHistory";
 import FabActions from "../../components/FabActions";
 import LText from "../../components/LText";
 import FirmwareUpdateBanner from "../../components/FirmwareUpdateBanner";
+import { Text } from "@ledgerhq/native-ui";
 
 export { default as PortfolioTabIcon } from "./TabIcon";
 
@@ -126,9 +127,9 @@ export default function PortfolioScreen({ navigation }: Props) {
       ...(showDistribution
         ? [
             <View style={styles.distrib}>
-              <LText bold secondary style={styles.distributionTitle}>
+              <Text variant={'h3'} textTransform={'uppercase'}>
                 {t("distribution.header")}
-              </LText>
+              </Text>
               <DistributionList
                 flatListRef={flatListRef}
                 distribution={distribution}
