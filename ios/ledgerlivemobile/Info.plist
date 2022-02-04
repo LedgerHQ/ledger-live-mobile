@@ -92,7 +92,9 @@
 		<string>FontAwesome5_Pro_Light.ttf</string>
 		<string>FontAwesome5_Pro_Regular.ttf</string>
 		<string>FontAwesome5_Pro_Solid.ttf</string>
-		<string>Cairo.ttf</string>
+		<string>Cairo-Bold.ttf</string>
+		<string>Cairo-Regular.ttf</string>
+		<string>Cairo-SemiBold.ttf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

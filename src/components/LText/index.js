@@ -1,6 +1,6 @@
 /* @flow */
 import React from "react";
-import { StyleSheet, Text } from "react-native";
+import { I18nManager, Platform, StyleSheet, Text } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import getFontStyle from "./getFontStyle";
 
@@ -13,6 +13,7 @@ export type Opts = {
   monospace?: boolean,
   color?: string,
   bg?: string,
+  preferredFontFamily?: string,
 };
 
 export type Res = {|
@@ -48,6 +49,7 @@ export default function LText({
   color,
   bg,
   style,
+  preferredFontFamily,
   ...newProps
 }: {
   ...Opts,
@@ -80,6 +82,7 @@ export default function LText({
           semiBold,
           secondary,
           monospace,
+          preferredFontFamily,
         }),
       ]}
     />

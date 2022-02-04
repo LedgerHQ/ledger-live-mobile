@@ -44,10 +44,7 @@ const BackButton = ({
 }) => (
   <TouchableOpacity
     hitSlop={hitSlop}
-    style={[
-      I18nManager.isRTL ? { transform: [{ scaleX: -1 }] } : {},
-      styles.buttons,
-    ]}
+    style={styles.buttons}
     onPress={() => (action ? action() : navigation.goBack())}
   >
     <ArrowLeft size={18} color={colors.darkBlue} />

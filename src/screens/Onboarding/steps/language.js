@@ -107,7 +107,12 @@ function OnboardingStepLanguage({ navigation }: *) {
               ]}
             >
               <CheckBox isChecked={l === currentLocale} />
-              <LText semiBold style={styles.localeButtonLabel}>
+              <LText
+                semiBold={l !== "ar"}
+                bold={l === "ar"}
+                style={styles.localeButtonLabel}
+                preferredFontFamily={l === "ar" ? "Cairo" : "Inter"}
+              >
                 {languages[l]}
               </LText>
             </TouchableOpacity>

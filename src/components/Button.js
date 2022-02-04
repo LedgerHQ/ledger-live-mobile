@@ -15,7 +15,6 @@ import {
   View,
   Animated,
   TouchableOpacity,
-  I18nManager,
 } from "react-native";
 import type { ViewStyleProp } from "react-native/Libraries/StyleSheet/StyleSheet";
 import { useTheme, useIsFocused } from "@react-navigation/native";
@@ -284,8 +283,6 @@ export function BaseButton({
     type,
   ]);
 
-  const iconRtlStyle = I18nManager.isRTL ? { transform: [{ scaleX: -1 }] } : {};
-
   return (
     // $FlowFixMe
     <Container
@@ -299,7 +296,7 @@ export function BaseButton({
 
       <Animated.View style={titleSliderStyle}>
         {IconLeft ? (
-          <View style={{ paddingRight: title ? 10 : null }}>
+          <View style={{ paddingEnd: title ? 10 : null }}>
             <IconLeft size={16} color={iconColor} />
           </View>
         ) : null}
@@ -311,7 +308,7 @@ export function BaseButton({
         ) : null}
 
         {IconRight ? (
-          <View style={{ ...iconRtlStyle, paddingLeft: title ? 10 : null }}>
+          <View style={{ paddingStart: title ? 10 : null }}>
             <IconRight size={16} color={iconColor} />
           </View>
         ) : null}

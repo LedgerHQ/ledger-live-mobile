@@ -22,6 +22,7 @@ import LText from "./LText";
 import swipedAccountSubject from "../screens/AddAccounts/swipedAccountSubject";
 import Button from "./Button";
 import TouchHintCircle from "./TouchHintCircle";
+import * as rtl from "../helpers/rtl";
 
 const selectAllHitSlop = {
   top: 16,
@@ -145,17 +146,25 @@ class SelectableAccount extends PureComponent<
   };
 
   renderLeftActions = (progress, dragX) => {
-    const translateX = dragX.interpolate({
-      inputRange: [0, 1000],
-      outputRange: [-112, 888],
-    });
+    const translateX = dragX.interpolate(
+      rtl.dir(
+        {
+          inputRange: [0, 1000],
+          outputRange: [-112, 888],
+        },
+        {
+          inputRange: [-1000, 0],
+          outputRange: [-888, 112],
+        },
+      ),
+    );
 
     return (
       <Animated.View
         style={[
           styles.leftAction,
           { transform: [{ translateX }] },
-          { marginLeft: 12 },
+          { marginStart: 12 },
         ]}
       >
         <Button
@@ -270,8 +279,16 @@ class SelectableAccount extends PureComponent<
         <Swipeable
           ref={this.updateRef}
           friction={2}
-          leftThreshold={50}
-          renderLeftActions={this.renderLeftActions}
+          {...rtl.dir(
+            {
+              leftThreshold: 50,
+              renderLeftActions: this.renderLeftActions,
+            },
+            {
+              rightThreshold: 50,
+              renderRightActions: this.renderLeftActions,
+            },
+          )}
         >
           {inner}
           {showHint && (

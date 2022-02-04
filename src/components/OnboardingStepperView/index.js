@@ -120,8 +120,6 @@ export default function OnboardingStepperView({
     ),
   );
 
-  const iconRtlStyle = I18nManager.isRTL ? { transform: [{ scaleX: -1 }] } : {};
-
   return scenes && scenes.length ? (
     <SafeAreaView style={[styles.root, { backgroundColor: sceneColors[0] }]}>
       <View style={[styles.header]}>
@@ -129,7 +127,7 @@ export default function OnboardingStepperView({
           {hideBackButton ? null : (
             <TouchableOpacity
               hitSlop={hitSlop}
-              style={[iconRtlStyle, styles.buttons]}
+              style={styles.buttons}
               onPress={onBack}
             >
               <ArrowLeft size={18} color={sceneColors[1]} />
