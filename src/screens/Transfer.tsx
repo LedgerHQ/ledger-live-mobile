@@ -1,4 +1,3 @@
-/* @flow */
 import React, { useState } from "react";
 import { SortMedium } from "@ledgerhq/native-ui/assets/icons";
 
