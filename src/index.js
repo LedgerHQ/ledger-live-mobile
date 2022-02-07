@@ -81,7 +81,6 @@ import NotificationsProvider from "./screens/NotificationCenter/NotificationsPro
 import SnackbarContainer from "./screens/NotificationCenter/Snackbar/SnackbarContainer";
 import NavBarColorHandler from "./components/NavBarColorHandler";
 import { setOsTheme, setTheme } from "./actions/settings";
-import FirmwareUpdateBanner from "./components/FirmwareUpdateBanner";
 
 const themes = {
   light: lightTheme,
@@ -307,7 +306,12 @@ const linkingOptions = {
           /**
            * ie: "ledgerlive://buy" -> will redirect to the main exchange page
            */
-          [NavigatorName.Exchange]: "buy",
+          [NavigatorName.Exchange]: {
+            initialRouteName: "buy",
+            screens: {
+              [ScreenName.Coinify]: "coinify",
+            },
+          },
           /**
            * ie: "ledgerlive://swap" -> will redirect to the main swap page
            */
@@ -458,7 +462,6 @@ export default class Root extends Component<
                                 >
                                   <ButtonUseTouchable.Provider value={true}>
                                     <OnboardingContextProvider>
-                                      <FirmwareUpdateBanner />
                                       <ToastProvider>
                                         <NotificationsProvider>
                                           <SnackbarContainer />

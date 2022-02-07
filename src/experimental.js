@@ -1,7 +1,7 @@
 // @flow
 import { useState, useEffect } from "react";
 import Config from "react-native-config";
-import AsyncStorage from "@react-native-community/async-storage";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { concatMap } from "rxjs/operators";
 import {
   setEnvUnsafe,
@@ -40,6 +40,14 @@ export const experimentalFeatures: Feature[] = [
     title: "Experimental JS impl",
     description: "Use experimental JS implementations for Algorand and Tezos.",
     valueOn: "tezos,algorand",
+    valueOff: "",
+  },
+  {
+    type: "toggle",
+    name: "EXPERIMENTAL_CURRENCIES",
+    title: "Experimental integrations",
+    description: "Use experimental integration of Solana.",
+    valueOn: "solana",
     valueOff: "",
   },
   {

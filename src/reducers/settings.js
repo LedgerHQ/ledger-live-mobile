@@ -22,6 +22,7 @@ import type { PortfolioRange } from "@ledgerhq/live-common/lib/portfolio/v2/type
 import type { DeviceModelInfo } from "@ledgerhq/live-common/lib/types/manager";
 import { currencySettingsDefaults } from "../helpers/CurrencySettingsDefaults";
 import type { State } from ".";
+import { getDefaultLanguageLocale, getDefaultLocale } from "../languages";
 
 const bitcoin = getCryptoCurrencyById("bitcoin");
 const ethereum = getCryptoCurrencyById("ethereum");
@@ -86,6 +87,7 @@ export type SettingsState = {
   carouselVisibility: number,
   discreetMode: boolean,
   language: string,
+  locale: ?string,
   swap: {
     hasAcceptedIPSharing: false,
     acceptedProviders: [],
@@ -118,7 +120,8 @@ export const INITIAL_STATE: SettingsState = {
   osTheme: undefined,
   carouselVisibility: 0,
   discreetMode: false,
-  language: "en",
+  language: getDefaultLanguageLocale(),
+  locale: null,
   swap: {
     hasAcceptedIPSharing: false,
     acceptedProviders: [],
@@ -304,6 +307,10 @@ const handlers: Object = {
     ...state,
     language: payload,
   }),
+  SETTINGS_SET_LOCALE: (state: SettingsState, { payload }) => ({
+    ...state,
+    locale: payload,
+  }),
   SET_SWAP_SELECTABLE_CURRENCIES: (state: SettingsState, { payload }) => ({
     ...state,
     swap: {
@@ -343,7 +350,10 @@ const handlers: Object = {
     { payload: dmi }: { payload: DeviceModelInfo },
   ) => ({
     ...state,
-    lastSeenDevice: dmi,
+    lastSeenDevice: {
+      ...(state.lastSeenDevice || {}),
+      ...dmi,
+    },
   }),
 };
 
@@ -490,7 +500,11 @@ export const themeSelector = (state: State) => state.settings.theme;
 
 export const osThemeSelector = (state: State) => state.settings.osTheme;
 
-export const languageSelector = (state: State) => state.settings.language;
+export const languageSelector = (state: State) =>
+  state.settings.language || getDefaultLanguageLocale();
+
+export const localeSelector = (state: State) =>
+  state.settings.locale || getDefaultLocale();
 
 export const swapHasAcceptedIPSharingSelector = (state: State) =>
   state.settings.swap.hasAcceptedIPSharing;

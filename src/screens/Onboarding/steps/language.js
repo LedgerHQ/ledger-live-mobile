@@ -11,52 +11,40 @@ import {
   I18nManager,
 } from "react-native";
 import { Trans } from "react-i18next";
-import i18next from "i18next";
+import { useDispatch } from "react-redux";
 import { useTheme } from "@react-navigation/native";
 import RNRestart from "react-native-restart";
+import i18next from "i18next";
 import { TrackScreen } from "../../../analytics";
 import Button from "../../../components/Button";
 import LText from "../../../components/LText";
 import CheckBox from "../../../components/CheckBox";
 import { useLocale } from "../../../context/Locale";
-import { supportedLocales } from "../../../languages";
-
-const languages = {
-  ar: "عربى",
-  de: "Deutsch",
-  el: "Ελληνικά",
-  en: "English",
-  es: "Español",
-  fi: "suomi",
-  fr: "Français",
-  hu: "magyar",
-  it: "italiano",
-  ja: "日本語",
-  ko: "한국어",
-  nl: "Nederlands",
-  no: "Norsk",
-  pl: "polski",
-  pt: "português",
-  ru: "Русский",
-  sr: "српски",
-  sv: "svenska",
-  tr: "Türkçe",
-  zh: "简体中文",
-};
+import { languages, supportedLocales } from "../../../languages";
+import { setLanguage } from "../../../actions/settings";
 
 function OnboardingStepLanguage({ navigation }: *) {
   const { colors } = useTheme();
+  const dispatch = useDispatch();
   const next = useCallback(() => {
     navigation.goBack();
   }, [navigation]);
   const { locale: currentLocale } = useLocale();
 
-  const confirmLanguageChange = useCallback(async l => {
-    await i18next.changeLanguage(l);
+  const confirmLanguageChange = useCallback(
+    async l => {
+      dispatch(setLanguage(l));
 
-    I18nManager.forceRTL(true);
-    RNRestart.Restart();
-  }, []);
+      // setTimeout is used to wait for language setting dispatch to complete and for the
+      // setting to be persisted. This solution is only for PoC and should be replaced with
+      // a better method (e.g. asynchronous dispatch/redux thunk)
+      setTimeout(() => {
+        I18nManager.forceRTL(true);
+        RNRestart.Restart();
+      }, 1000);
+    },
+    [dispatch],
+  );
 
   const changeLanguage = useCallback(
     async l => {
@@ -79,12 +67,11 @@ function OnboardingStepLanguage({ navigation }: *) {
           ],
         );
       } else {
-        await i18next.changeLanguage(l);
-
+        dispatch(setLanguage(l));
         next();
       }
     },
-    [next, confirmLanguageChange],
+    [dispatch, next, confirmLanguageChange],
   );
 
   return (
