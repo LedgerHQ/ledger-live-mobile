@@ -7519,6 +7519,15 @@
       "deeplinkingTitle": "Select an Ethereum account",
       "addAccount": "Add new account"
     },
+    "analytics": {
+      "title": "Analytics",
+      "allocation": {
+        "title": "Allocation"
+      },
+      "operations": {
+        "title": "Operations"
+      }
+    },
     "notificationCenter": {
       "title": "Notification center",
       "announcement": "Announcement",

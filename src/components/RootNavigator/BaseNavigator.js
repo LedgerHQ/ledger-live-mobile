@@ -49,6 +49,7 @@ import LendingEnableFlowNavigator from "./LendingEnableFlowNavigator";
 import LendingSupplyFlowNavigator from "./LendingSupplyFlowNavigator";
 import LendingWithdrawFlowNavigator from "./LendingWithdrawFlowNavigator";
 import NotificationCenterNavigator from "./NotificationCenterNavigator";
+import AnalyticsNavigator from "./AnalyticsNavigator";
 import NftNavigator from "./NftNavigator";
 import { getStackNavigatorConfig } from "../../navigation/navigatorConfig";
 import Account from "../../screens/Account";
@@ -379,6 +380,16 @@ export default function BaseNavigator() {
           ...stackNavigationConfig,
           title: t("distribution.header"),
           headerLeft: null,
+        }}
+      />
+      <Stack.Screen
+        name={NavigatorName.Analytics}
+        component={AnalyticsNavigator}
+        options={{
+          title: t("v3.analytics.title"),
+          headerStyle: styles.headerNoShadow,
+          headerRight: null,
+          cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS,
         }}
       />
       <Stack.Screen
