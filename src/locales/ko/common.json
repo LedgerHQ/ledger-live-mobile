@@ -1699,7 +1699,7 @@
       "rateProvider": "요율 공급자({{currencyTicker}}→BTC)",
       "rateProviderDesc": "{{currencyTicker}} 및 비트코인 사이의 요율 공급자를 선택하세요.",
       "confirmationNb": "확인 수",
-      "confirmationNbDesc": "트랜잭션 승인에 필요한 네트워크 검증 수를 설정하세요.",
+      "confirmationNbDesc": "트랜잭션 승인에 필요한 네트워크 컨펌 수를 설정하세요.",
       "currencySettingsTitle": "{{currencyName}} 설정",
       "placeholder": "이 자산 관련 설정 값이 없음"
     },
