@@ -2976,8 +2976,8 @@
   "celo": {
     "info": {
       "available": {
-        "title": "CELO available",
-        "description": "This amount is disposable."
+        "title": "CELO disponibles",
+        "description": "Este importe está disponible."
       }
     }
   },
