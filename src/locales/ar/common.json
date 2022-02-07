@@ -691,7 +691,7 @@
   "reset": {
     "description": "يرجى إلغاء تثبيت التطبيق ثم إعادة تثبيته على هاتفك لحذف بيانات ليدجر لايف (Ledger Live)، بما في ذلك الحسابات والإعدادات.",
     "button": "إعادة تعيين",
-    "warning": "Resetting Ledger Live will erase your swap transaction history for all your accounts."
+    "warning": "إعادة تعيين Ledger Live سوف يمحو سجل معاملات المبادلة الخاصة بك لجميع حساباتك."
   },
   "graph": {
     "week": "1 أسبوع",
@@ -1508,7 +1508,7 @@
         "desc": "ستتم إزالة البيانات المخزنة.",
         "confirmationTitle": "هل أنت متأكد؟",
         "confirmationDesc": "لن يؤثر ذلك على الأصول المشفرة الخاصة بك. من الممكن دائمًا إضافة الحسابات الموجودة فيما بعد.",
-        "confirmationWarn": "Deleting this account will erase your swap transaction history associated to it."
+        "confirmationWarn": "سيؤدي حذف هذا الحساب إلى محو سجل معاملات المبادلة المرتبطة به."
       },
       "archive": {
         "title": "أرشفة الحساب",
@@ -1647,8 +1647,8 @@
       "carouselDesc": "تمكين المشاهدة كشريط دوّار في الحافظة",
       "language": "لغة البرنامج",
       "languageDesc": "قم بتعيين اللغة المستخدمة في Ledger Live.",
-      "region": "Region",
-      "regionDesc": "Choose your region to update formats of dates, time and currencies.",
+      "region": "المنطقة",
+      "regionDesc": "اختر منطقتك لتحديث صِيغ التواريخ والوقت والعملات.",
       "password": "قفل كلمة المرور",
       "passwordDesc": "قم بتعيين كلمة مرور لحماية بيانات Ledger Live على هاتفك.",
       "counterValue": "العملة المفضلة",
@@ -2863,20 +2863,20 @@
     "action": "متابعة التحديث"
   },
   "systemLanguageAvailable": {
-    "title": "Change your app's language?",
+    "title": "تريد تغير لغة تطبيقك؟",
     "description": {
-      "newSupport": "Good news! Our teams have been working hard and Ledger Live now supports {{language}}.",
-      "advice": "You can always change your language back later in the settings."
+      "newSupport": "أخبار جيدة! عملت فرقنا جاهدة و Ledger Live الآن يدعم {{language}}.",
+      "advice": "يمكنك دائماً تغيير لغة التطبيق في أي وقت في الإعدادات."
     },
-    "switchButton": "Switch to {{language}}",
-    "no": "I prefer not to",
+    "switchButton": "التبديل إلى {{language}}",
+    "no": "أفضل عدم القيام بذلك",
     "languages": {
       "en": "English",
-      "fr": "French",
-      "ru": "Russian",
-      "es": "Spanish",
-      "zh": "Chinese",
-      "de": "German"
+      "fr": "Français",
+      "ru": "Русский",
+      "es": "Español",
+      "zh": "中文（简体）",
+      "de": "Deutsch"
     }
   },
   "FirmwareUpdateCheckId": {
@@ -2976,8 +2976,8 @@
   "celo": {
     "info": {
       "available": {
-        "title": "CELO available",
-        "description": "This amount is disposable."
+        "title": "CELO متاح",
+        "description": "هذا المبلغ يمكن التخلص منه."
       }
     }
   },
@@ -3184,13 +3184,13 @@
   "cryptoOrg": {
     "account": {
       "subHeader": {
-        "cardTitle": "Powered by Crypto.org",
-        "moreInfo": "More info",
-        "drawerTitle": "Crypto.org integration",
-        "title": "The Crypto.org (CRO) token is now available on Ledger Live",
-        "description": "You can now start to manage your Crypto.org (CRO) tokens and secure them through Ledger Live.",
-        "description2": "The Crypto.org (CRO) token is native to the Crypto.org chain and is used for everything from transactions, staking and many upcoming features.",
-        "website": "Cryptocurrency in every wallet"
+        "cardTitle": "تعمل بواسطة Crypto.org",
+        "moreInfo": "مزيد من المعلومات",
+        "drawerTitle": "تكامل Crypto.org",
+        "title": "رمز Crypto.org (CRO) متاح الآن على Ledger Live",
+        "description": "يمكنك الآن بدء إدارة رموزك Crypto.org (CRO) وتأمينها من خلال Ledger Live.",
+        "description2": "رمز Crypto.org (CRO) هو رمز أصلي لسلسلة Crypto.org ويُستخدم لكل شيء من المعاملات، إلى التكديس و العديد من الميزات القادمة.",
+        "website": "العملات المشفرة في كل محفظة"
       }
     }
   },
@@ -3711,8 +3711,8 @@
       "selectCurrency": "اختار عملة",
       "selectAccount": "اختيار حساب",
       "connectDevice": "توصيل جهازك",
-      "title": "Choose a provider to buy crypto",
-      "coinifyTitle": "Buy crypto via our partner",
+      "title": "اختر مزود لشراء الأصول المشفرة",
+      "coinifyTitle": "شراء العملات المشفرة عن طريق شريكنا",
       "description": "قم بشراء الأصول المشفرة من خلال Coinify واستلمها مباشرة في حساب ليدجر (Ledger) الخاص بك.",
       "CTAButton": "اشتري الان",
       "emptyState": {
@@ -3727,9 +3727,9 @@
         "warning": "لم يتم تأكيد عنوانك على جهاز ليدجر الخاص بك. يرجى التحقق منه حرصاً على الأمان"
       },
       "bullets": {
-        "whereToBuy": "Buy from anywhere",
-        "cryptoSupported": "crypto supported",
-        "payWith": "Pay with card or SEPA"
+        "whereToBuy": "قم بالشراء من أي مكان",
+        "cryptoSupported": "الأصول المشفرة المدعومة",
+        "payWith": "الدفع بواسطة البطاقة أو SEPA"
       }
     },
     "sell": {
