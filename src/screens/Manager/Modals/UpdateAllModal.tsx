@@ -3,8 +3,7 @@ import { StyleSheet, View, TouchableOpacity, FlatList } from "react-native";
 import { Trans } from "react-i18next";
 import type { InstalledItem } from "@ledgerhq/live-common/lib/apps";
 import type { State, App } from "@ledgerhq/live-common/lib/types/manager";
-import { useTheme } from "@react-navigation/native";
-
+import styled from "styled-components/native";
 import { Flex, Icons, Text, Button } from "@ledgerhq/native-ui";
 
 import ActionModal from "./ActionModal";
@@ -23,6 +22,66 @@ type Props = {
   state: State,
 };
 
+const AppLine = styled(Flex).attrs({
+  marginBottom: 16,
+  flexDirection: "row",
+  alignItems: "center",
+  justifyContent: "space-between",
+})``;
+
+const AppName = styled(Text).attrs({
+  alignItems: "center",
+  marginLeft: 6,
+})``;
+
+const AppVersion = styled(Text).attrs({
+  marginRight: 6,
+  paddingLeft: 2,
+  paddingRight: 1,
+  paddingTop: 1,
+  borderWidth: 1,
+  borderRadius: 4,
+  alignItems: "center",
+  justifyContent: "center",
+})``;
+
+const IconContainer = styled(Flex).attrs({
+  marginVertical: 20,
+  padding: 22,
+  borderWidth: 1,
+  borderRadius: 8,
+})``;
+
+const TextContainer = styled(Flex).attrs({
+  marginTop: 4,
+  marginBottom: 32,
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center",
+})``;
+
+const ModalText = styled(Text).attrs({
+  textAlign: "center",
+  marginTop: 16,
+})``;
+
+const ButtonsContainer = styled(Flex).attrs({
+  marginBottom: 24,
+  width: "100%",
+})``;
+
+const FlatListContainer = styled(FlatList).attrs({
+  width: "100%",
+  maxHeight: 250,
+  marginBottom: 20,
+})``;
+
+const CancelButton = styled(TouchableOpacity)`
+  align-items: center;
+  justify-content: center;
+  margin-top: 25;
+`;
+
 const UpdateAllModal = ({
   isOpened,
   onClose,
@@ -31,7 +90,6 @@ const UpdateAllModal = ({
   installed,
   state,
  }: Props) => {
-  const { colors } = useTheme();
   const { deviceInfo } = state;
 
   const data = apps.map(app => ({
@@ -47,22 +105,20 @@ const UpdateAllModal = ({
       item: App & { installed: InstalledItem | null | undefined },
     }) => {
       const version = (installed && installed.version) || appVersion;
-      const availableVersion =
-        (installed && installed.availableVersion) || appVersion;
 
       return (
-        <Flex flexDirection="row" alignItems="center" justifyContent="space-between" style={[styles.appLine]}>
-          <Flex flexDirection="row" alignItems="center" style={styles.appNameContainer}>
+        <AppLine>
+          <Flex flexDirection="row" alignItems="center" style={{ width: "60%" }}>
             <AppIcon size={32} radius={10} app={item} />
-            <Text color="neutral.c100" fontWeight="semiBold" variant="body" numberOfLines={1} style={styles.appName}>
+            <AppName color="neutral.c100" fontWeight="semiBold" variant="body" numberOfLines={1}>
               {name}
-            </Text>
+            </AppName>
           </Flex>
           <Flex flexDirection="row" justifyContent="space-between" style={{ width: "35%" }}>
-            <Text color="neutral.c80" fontWeight="semiBold" variant="tiny" numberOfLines={1} style={styles.appLineVersion} borderColor="neutral.c40">
+            <AppVersion color="neutral.c80" fontWeight="semiBold" variant="tiny" numberOfLines={1} borderColor="neutral.c40">
               {version}
-            </Text>
-            <Text color="neutral.c70" fontWeight="medium" variant="body" numberOfLines={1} style={styles.appLineSize}>
+            </AppVersion>
+            <Text textAlign="right" color="neutral.c70" fontWeight="medium" variant="body" numberOfLines={1}>
               <ByteSize
                 value={bytes}
                 deviceModel={state.deviceModel}
@@ -70,7 +126,7 @@ const UpdateAllModal = ({
               />
             </Text>
           </Flex>
-        </Flex>
+        </AppLine>
       );
     },
     [state.deviceModel, deviceInfo],
@@ -78,21 +134,19 @@ const UpdateAllModal = ({
 
   return (
     <ActionModal isOpened={!!isOpened} onClose={onClose} actions={[]}>
-      <Flex style={styles.iconContainer} borderColor="neutral.c40">
+      <IconContainer borderColor="neutral.c40">
         <Icons.RefreshMedium size={24} color="neutral.c100" />
-      </Flex>
-      <View style={styles.textContainer}>
-        <Text
+      </IconContainer>
+      <TextContainer>
+        <ModalText
           color="neutral.c100"
           fontWeight="medium"
           variant="h2"
-          style={styles.text}
         >
           <Trans i18nKey="v3.manager.update.subtitle" />
-        </Text>
-      </View>
-      <FlatList
-        style={[styles.list]}
+        </ModalText>
+      </TextContainer>
+      <FlatListContainer
         data={data}
         renderItem={renderAppLine}
         keyExtractor={keyExtractor}
@@ -100,16 +154,16 @@ const UpdateAllModal = ({
         scrollEnabled
         scrollEventThrottle={50}
       />
-      <Flex style={[styles.buttonsContainer]}>
+      <ButtonsContainer>
         <Button size="large" type="main" onPress={onConfirm}>
           <Trans i18nKey="v3.manager.update.updateAll" />
         </Button>
-        <TouchableOpacity style={styles.cancelButton} onPress={onClose}>
+        <CancelButton onPress={onClose}>
           <Text variant="large" fontWeight="semiBold" color="neutral.c100">
             <Trans i18nKey="common.cancel" />
           </Text>
-        </TouchableOpacity>
-      </Flex>
+        </CancelButton>
+      </ButtonsContainer>
     </ActionModal>
   );
 };
@@ -140,33 +194,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginTop: 25,
-  },
-  list: {
-    width: "100%",
-    maxHeight: 250,
-    marginBottom: 20,
-  },
-  appLine: {
-    marginBottom: 16,
-  },
-  appNameContainer: {
-    width: "60%",
-  },
-  appName: {
-    alignItems: "center",
-    marginHorizontal: 12,
-  },
-  appLineVersion: {
-    marginRight: 12,
-    paddingHorizontal: 4,
-    paddingVertical: 2,
-    borderWidth: 1,
-    borderRadius: 4,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  appLineSize: {
-    textAlign: "right",
   },
 });
 
