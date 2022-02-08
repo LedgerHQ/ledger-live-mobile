@@ -11,6 +11,7 @@ import lottie from "../../screens/Onboarding/assets/nanoX/pairDevice/data.json";
 import LText from "../LText";
 import Animation from "../Animation";
 import Bluetooth from "../../icons/Bluetooth";
+import * as rtl from "../../helpers/rtl";
 
 type Props = {
   onPairNewDevice: () => void,
@@ -59,10 +60,10 @@ const styles = StyleSheet.create({
   },
   image: {
     position: "absolute",
-    left: "5%",
     top: 0,
     width: "110%",
     height: "100%",
+    ...rtl.dir({ start: "5%" }, { end: "5%" }),
   },
   label: { fontSize: 13, lineHeight: 24 },
   bulletIcon: {

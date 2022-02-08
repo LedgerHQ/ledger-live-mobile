@@ -3,6 +3,7 @@
 import React, { Component } from "react";
 import { Animated, View, StyleSheet, Easing } from "react-native";
 import { withTheme } from "../colors";
+import * as rtl from "../helpers/rtl";
 
 class TouchHintCircle extends Component<{
   stopAnimation: boolean,
@@ -54,7 +55,7 @@ class TouchHintCircle extends Component<{
     const translateX = this.leftAnimated.interpolate({
       inputRange: [0, 1],
       // $FlowFixMe
-      outputRange: [0, 80],
+      outputRange: [0, rtl.dir(80, -80)],
     });
 
     const opacity = this.opacityAnimated.interpolate({

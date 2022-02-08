@@ -11,12 +11,26 @@ import { initReactI18next } from "react-i18next";
 import type { TFunction } from "react-i18next";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useSelector } from "react-redux";
+import { I18nManager } from "react-native";
+import RNRestart from "react-native-restart";
 import {
   DEFAULT_LANGUAGE_LOCALE,
   getDefaultLanguageLocale,
   locales,
 } from "../languages";
 import { languageSelector } from "../reducers/settings";
+
+export const validateRTL = lang => {
+  const dir = i18next.dir(lang);
+
+  if (dir === "rtl" && !I18nManager.isRTL) {
+    I18nManager.forceRTL(true);
+    RNRestart.Restart();
+  } else if (dir === "ltr" && I18nManager.isRTL) {
+    I18nManager.forceRTL(false);
+    RNRestart.Restart();
+  }
+};
 
 i18next.use(initReactI18next).init({
   fallbackLng: DEFAULT_LANGUAGE_LOCALE,
@@ -54,7 +68,10 @@ const LocaleContext = React.createContext(getLocaleState(i18next));
 export default function LocaleProvider({ children }: Props) {
   const language = useSelector(languageSelector);
   useEffect(() => {
-    i18next.changeLanguage(language);
+    if (language) {
+      i18next.changeLanguage(language);
+      validateRTL(language);
+    }
   }, [language]);
 
   const value: LocaleState = useMemo(

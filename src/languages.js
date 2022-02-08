@@ -4,6 +4,7 @@ import Config from "react-native-config";
 import allLocales from "./locales";
 
 export const languages = {
+  ar: "عربى",
   de: "Deutsch",
   el: "Ελληνικά",
   en: "English",
@@ -33,7 +34,7 @@ export const localeIds: string[] = Object.keys(allLocales);
  */
 export const supportedLocales = Config.LEDGER_DEBUG_ALL_LANGS
   ? localeIds
-  : ["en", "fr", "es", "ru", "zh", "de", "tr", "ja", "ko"];
+  : ["en", "fr", "ar", "es", "ru", "zh", "de", "tr", "ja", "ko"];
 
 /**
  * This is the list of languages that are supported in terms of in-app translations
@@ -70,6 +71,7 @@ export const getDefaultLanguageLocale = (
 };
 
 const languageLocaleToDefaultLocaleMap = {
+  ar: "ar-AE",
   de: "de-DE",
   el: "el-GR",
   en: "en-US",

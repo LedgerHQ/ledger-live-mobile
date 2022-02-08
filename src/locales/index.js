@@ -6,4 +6,7 @@ exports.ja = { common: require("./ja/common.json"), };
 exports.ko = { common: require("./ko/common.json"), };
 exports.ru = { common: require("./ru/common.json"), };
 exports.tr = { common: require("./tr/common.json"), };
+exports.ja = { common: require("./ja/common.json"), };
+exports.ko = { common: require("./ko/common.json"), };
+exports.ar = { common: require("./ar/common.json"), };
 exports.zh = { common: require("./zh/common.json"), };

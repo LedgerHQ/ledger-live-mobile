@@ -16,6 +16,7 @@ import org.devio.rn.splashscreen.SplashScreen;
 import com.facebook.react.ReactActivityDelegate;
 import com.facebook.react.ReactRootView;
 
+import com.facebook.react.modules.i18nmanager.I18nUtil;
 import com.swmansion.gesturehandler.react.RNGestureHandlerEnabledRootView;
 import java.util.Locale;
 
@@ -34,6 +35,8 @@ public class MainActivity extends ReactActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        I18nUtil sharedI18nUtilInstance = I18nUtil.getInstance();
+        sharedI18nUtilInstance.allowRTL(getApplicationContext(), true);
 
         if (!BuildConfig.DEBUG) {
             SplashScreen.show(this, true);

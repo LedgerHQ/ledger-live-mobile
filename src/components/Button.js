@@ -57,6 +57,7 @@ export type BaseButtonProps = {
   IconRight?: React$ComponentType<{ size: number, color: string }>,
   disabled?: boolean,
   outline?: boolean,
+  rtl?: boolean,
   // for analytics
   event?: string,
   eventProperties?: Object,
@@ -92,6 +93,7 @@ export function BaseButton({
   titleStyle,
   IconLeft,
   IconRight,
+  rtl,
   disabled,
   type,
   useTouchable,
@@ -294,7 +296,7 @@ export function BaseButton({
 
       <Animated.View style={titleSliderStyle}>
         {IconLeft ? (
-          <View style={{ paddingRight: title ? 10 : null }}>
+          <View style={{ paddingEnd: title ? 10 : null }}>
             <IconLeft size={16} color={iconColor} />
           </View>
         ) : null}
@@ -306,7 +308,7 @@ export function BaseButton({
         ) : null}
 
         {IconRight ? (
-          <View style={{ paddingLeft: title ? 10 : null }}>
+          <View style={{ paddingStart: title ? 10 : null }}>
             <IconRight size={16} color={iconColor} />
           </View>
         ) : null}

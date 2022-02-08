@@ -7,10 +7,14 @@ import {
   SafeAreaView,
   TouchableOpacity,
   ScrollView,
+  Alert,
+  I18nManager,
 } from "react-native";
 import { Trans } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useTheme } from "@react-navigation/native";
+import RNRestart from "react-native-restart";
+import i18next from "i18next";
 import { TrackScreen } from "../../../analytics";
 import Button from "../../../components/Button";
 import LText from "../../../components/LText";
@@ -27,12 +31,47 @@ function OnboardingStepLanguage({ navigation }: *) {
   }, [navigation]);
   const { locale: currentLocale } = useLocale();
 
-  const changeLanguage = useCallback(
-    l => {
+  const confirmLanguageChange = useCallback(
+    async l => {
       dispatch(setLanguage(l));
-      next();
+
+      // setTimeout is used to wait for language setting dispatch to complete and for the
+      // setting to be persisted. This solution is only for PoC and should be replaced with
+      // a better method (e.g. asynchronous dispatch/redux thunk)
+      setTimeout(() => {
+        I18nManager.forceRTL(true);
+        RNRestart.Restart();
+      }, 1000);
     },
-    [dispatch, next],
+    [dispatch],
+  );
+
+  const changeLanguage = useCallback(
+    async l => {
+      const newDir = i18next.dir(l);
+      const currentDir = I18nManager.isRTL ? "rtl" : "ltr";
+
+      if (newDir !== currentDir) {
+        Alert.alert(
+          "Restart required",
+          "The selected language requires the application to restart. Are you sure you want to continue?",
+          [
+            {
+              text: "Cancel",
+              style: "cancel",
+            },
+            {
+              text: "OK",
+              onPress: () => confirmLanguageChange(l),
+            },
+          ],
+        );
+      } else {
+        dispatch(setLanguage(l));
+        next();
+      }
+    },
+    [dispatch, next, confirmLanguageChange],
   );
 
   return (
@@ -55,7 +94,12 @@ function OnboardingStepLanguage({ navigation }: *) {
               ]}
             >
               <CheckBox isChecked={l === currentLocale} />
-              <LText semiBold style={styles.localeButtonLabel}>
+              <LText
+                semiBold={l !== "ar"}
+                bold={l === "ar"}
+                style={styles.localeButtonLabel}
+                preferredFontFamily={l === "ar" ? "Cairo" : "Inter"}
+              >
                 {languages[l]}
               </LText>
             </TouchableOpacity>

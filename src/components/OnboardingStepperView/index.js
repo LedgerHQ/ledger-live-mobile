@@ -7,6 +7,7 @@ import {
   Dimensions,
   TouchableOpacity,
   Platform,
+  I18nManager,
 } from "react-native";
 import { TabView, SceneMap } from "react-native-tab-view";
 import { useTheme } from "@react-navigation/native";
