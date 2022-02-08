@@ -1,9 +1,11 @@
 import React, { memo, useState, useCallback } from "react";
-import { StyleSheet, TouchableOpacity } from "react-native";
+import { TouchableOpacity } from "react-native";
 
 import { Icons, Box } from "@ledgerhq/native-ui";
 
 import NotifBadge from "../NotifBadge";
+
+import styled from "styled-components/native";
 
 import FilterModalComponent from "../Modals/FilterModal";
 
@@ -17,6 +19,15 @@ type Props = {
   disabled: boolean;
   filters: string[];
 };
+
+const FilterButtonContainer = styled(Box).attrs({
+  width: 48,
+  height: 48,
+  borderWidth: 1,
+  borderRadius: 50,
+  alignItems: "center",
+  justifyContent: "center",
+})``;
 
 const AppFilter = ({
   filter,
@@ -35,12 +46,12 @@ const AppFilter = ({
   return (
     <>
       <TouchableOpacity disabled={disabled} onPress={openModal}>
-        <Box style={[styles.filterButton]} borderColor="neutral.c40">
+        <FilterButtonContainer borderColor="neutral.c40">
           <Box>
             <Icons.FiltersMedium size={18} color="neutral.c100" />
             {filter !== "all" && <NotifBadge />}
           </Box>
-        </Box>
+        </FilterButtonContainer>
       </TouchableOpacity>
       <FilterModalComponent
         isOpened={isOpened}
@@ -55,16 +66,5 @@ const AppFilter = ({
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  filterButton: {
-    width: 48,
-    height: 48,
-    borderWidth: 1,
-    borderRadius: 50,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
 
 export default memo(AppFilter);

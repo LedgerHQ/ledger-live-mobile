@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo } from "react";
-import { StyleSheet, TouchableOpacity } from "react-native";
+import { TouchableOpacity } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import manager from "@ledgerhq/live-common/lib/manager";
 
@@ -8,7 +8,7 @@ import type { Action, State } from "@ledgerhq/live-common/lib/apps";
 import { useAppInstallNeedsDeps } from "@ledgerhq/live-common/lib/apps/react";
 import { hasInstalledAnyAppSelector } from "../../../reducers/settings";
 import { installAppFirstTime } from "../../../actions/settings";
-
+import styled from "styled-components/native";
 import { Icons, Box } from "@ledgerhq/native-ui";
 
 type Props = {
@@ -19,6 +19,15 @@ type Props = {
   setAppInstallWithDependencies: (params: { app: App, dependencies: App[] }) => void,
   storageWarning: (appName: string) => void,
 };
+
+const ButtonContainer = styled(Box).attrs({
+  width: 48,
+  height: 48,
+  borderWidth: 1,
+  borderRadius: 50,
+  alignItems: "center",
+  justifyContent: "center",
+})``;
 
 export default function AppInstallButton({
   app,
@@ -70,23 +79,9 @@ export default function AppInstallButton({
 
   return (
     <TouchableOpacity onPress={installApp}>
-      <Box style={[styles.addAppButton]} borderColor="neutral.c40">
+      <ButtonContainer borderColor="neutral.c40">
         <Icons.PlusMedium size={18} color="neutral.c100"/>
-      </Box>
+      </ButtonContainer>
     </TouchableOpacity>
   );
 }
-
-const styles = StyleSheet.create({
-  appStateText: {
-    fontSize: 12,
-  },
-  addAppButton: {
-    width: 48,
-    height: 48,
-    borderWidth: 1,
-    borderRadius: 50,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});

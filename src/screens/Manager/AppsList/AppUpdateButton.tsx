@@ -1,9 +1,9 @@
 import React, { useCallback, useMemo } from "react";
-import { StyleSheet, TouchableOpacity } from "react-native";
+import { TouchableOpacity } from "react-native";
 
 import type { App } from "@ledgerhq/live-common/lib/types/manager";
 import type { Action, State } from "@ledgerhq/live-common/lib/apps";
-
+import styled from "styled-components/native";
 import { Icons, Box } from "@ledgerhq/native-ui";
 
 type Props = {
@@ -11,6 +11,15 @@ type Props = {
   state: State,
   dispatch: (action: Action) => void,
 };
+
+const ButtonContainer = styled(Box).attrs({
+  width: 48,
+  height: 48,
+  borderWidth: 1,
+  borderRadius: 50,
+  alignItems: "center",
+  justifyContent: "center",
+})``;
 
 export default function AppUpdateButton({
   app,
@@ -36,23 +45,9 @@ export default function AppUpdateButton({
 
   return (
     <TouchableOpacity onPress={updateApp}>
-      <Box style={[styles.updateAppButton]} backgroundColor="primary.c80">
+      <ButtonContainer backgroundColor="primary.c80">
         <Icons.RefreshMedium size={18} color="neutral.c00"/>
-      </Box>
+      </ButtonContainer>
     </TouchableOpacity>
   );
 }
-
-const styles = StyleSheet.create({
-  appStateText: {
-    fontSize: 12,
-  },
-  updateAppButton: {
-    width: 48,
-    height: 48,
-    borderWidth: 1,
-    borderRadius: 50,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});

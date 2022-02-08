@@ -1,13 +1,12 @@
 import React, { useCallback } from "react";
-import { StyleSheet, TouchableOpacity } from "react-native";
+import { TouchableOpacity } from "react-native";
 
 import { useAppUninstallNeedsDeps } from "@ledgerhq/live-common/lib/apps/react";
 
 import type { App } from "@ledgerhq/live-common/lib/types/manager";
 import type { Action, State } from "@ledgerhq/live-common/lib/apps";
 
-import { useTheme } from "@react-navigation/native";
-
+import styled from "styled-components/native";
 import { Icons, Box } from "@ledgerhq/native-ui";
 
 type Props = {
@@ -17,21 +16,26 @@ type Props = {
   setAppUninstallWithDependencies: (params: { dependents: App[], app: App }) => void,
 };
 
+const ButtonContainer = styled(Box).attrs({
+  width: 48,
+  height: 48,
+  borderWidth: 1,
+  borderRadius: 50,
+  alignItems: "center",
+  justifyContent: "center",
+})``;
+
 const AppUninstallButton = ({
   app,
   state,
   dispatch,
   setAppUninstallWithDependencies,
 }: Props) => {
-  const { colors } = useTheme();
   const { name } = app;
 
   const needsDependencies = useAppUninstallNeedsDeps(state, app);
 
   const uninstallApp = useCallback(() => {
-  console.log('---------------')
-  console.log('DELETING', needsDependencies, name)
-  console.log('---------------')
     if (needsDependencies && setAppUninstallWithDependencies)
       setAppUninstallWithDependencies(needsDependencies);
     else dispatch({ type: "uninstall", name });
@@ -39,22 +43,11 @@ const AppUninstallButton = ({
 
   return (
     <TouchableOpacity onPress={uninstallApp}>
-      <Box style={[styles.removeAppButton]} borderColor="error.c100">
-          <Icons.TrashMedium size={18} color="error.c100"/>
-      </Box>
+      <ButtonContainer borderColor="error.c100">
+        <Icons.TrashMedium size={18} color="error.c100"/>
+      </ButtonContainer>
     </TouchableOpacity>
   );
 };
-
-const styles = StyleSheet.create({
-  removeAppButton: {
-    width: 48,
-    height: 48,
-    borderWidth: 1,
-    borderRadius: 50,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
 
 export default AppUninstallButton;

@@ -4,7 +4,8 @@ import { StyleSheet } from "react-native";
 import type { State } from "@ledgerhq/live-common/lib/apps";
 import { useTheme } from "styled-components/native";
 
-import { Box, ProgressLoader } from "@ledgerhq/native-ui";
+// TODO : replace by { Box, ProgressLoader } when ProgressLoader exported from ui
+import { Box, Loader as ProgressLoader } from "@ledgerhq/native-ui";
 
 import { useAppInstallProgress } from "@ledgerhq/live-common/lib/apps/react";
 
@@ -14,7 +15,8 @@ type Props = {
   installing: boolean,
   updating: boolean,
 };
-export default function AppUpdateButton({
+
+export default function AppProgressButton({
   state,
   name,
   installing,
