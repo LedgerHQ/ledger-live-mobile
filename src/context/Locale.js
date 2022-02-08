@@ -47,12 +47,12 @@ type Props = {
   children: React$Node,
 };
 
-export type SupportedLanguages =  "fr" | "en" | "es" | "zh" | "ru";
+export type SupportedLanguages = "fr" | "en" | "es" | "zh" | "ru";
 
 type LocaleState = {
   i18n: any,
   t: TFunction,
-  locale: SupportedLanguages
+  locale: SupportedLanguages,
 };
 
 function getLocaleState(i18n): LocaleState {
