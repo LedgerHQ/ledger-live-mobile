@@ -325,6 +325,9 @@ export const ScreenName = {
 
   VerifyAccount: "VerifyAccount",
 
+  AnalyticsAllocation: "AnalyticsAllocation",
+  AnalyticsOperations: "AnalyticsOperations",
+
   // solana
   SolanaEditMemo: "SolanaEditMemo",
 };
@@ -336,6 +339,7 @@ export const NavigatorName = {
   Accounts: "AccountsNavigator",
   AccountSettings: "AccountSettings",
   AddAccounts: "AddAccounts",
+  Analytics: "Analytics",
   Exchange: "Exchange",
   ExchangeBuyFlow: "ExchangeBuyFlow",
   ExchangeSellFlow: "ExchangeSellFlow",
