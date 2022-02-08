@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import Svg, { Path } from "react-native-svg";
 
 const NanoX = ({ color }: { color: string }) => (
