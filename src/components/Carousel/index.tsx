@@ -8,18 +8,13 @@ import {
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import map from "lodash/map";
-import Swiper from "react-native-swiper";
 import { Trans } from "react-i18next";
-import { useTheme } from "@react-navigation/native";
 import { Box, Text } from "@ledgerhq/native-ui";
 import { CloseMedium } from "@ledgerhq/native-ui/assets/icons";
 import { urls } from "../../config/urls";
 import { setCarouselVisibility } from "../../actions/settings";
 import { carouselVisibilitySelector } from "../../reducers/settings";
-import Card from "../Card";
-import LText from "../LText";
 import Button from "../Button";
-import IconClose from "../../icons/Close";
 import Slide from "./Slide";
 
 const SLIDES = [
@@ -102,7 +97,6 @@ const hitSlop = {
 export const CAROUSEL_NONCE: number = 4;
 
 const Carousel = () => {
-  const { colors } = useTheme();
   const dispatch = useDispatch();
   const hidden = useSelector(carouselVisibilitySelector);
   const [showDismissConfirmation, setShowDismissConfirmation] = useState(false);
@@ -162,20 +156,7 @@ const Carousel = () => {
           </View>
         </Box>
       ) : (
-        // $FlowFixMe
         <View>
-          {/* $FlowFixMe */}
-          {/* <Swiper */}
-          {/*  style={styles.scrollView} */}
-          {/*  autoplay */}
-          {/*  autoplayTimeout={5} */}
-          {/*  showsButtons={false} */}
-          {/*  dotStyle={[styles.bullet, { backgroundColor: colors.fog }]} */}
-          {/*  activeDotStyle={[ */}
-          {/*    styles.bullet, */}
-          {/*    { backgroundColor: colors.fog, opacity: 1 }, */}
-          {/*  ]} */}
-          {/* > */}
           <ScrollView horizontal>
             {slides.map(({ id, Component }) => (
               <Box mr={6}>
@@ -183,7 +164,6 @@ const Carousel = () => {
               </Box>
             ))}
           </ScrollView>
-          {/* </Swiper> */}
           <TouchableOpacity
             style={styles.dismissCarousel}
             hitSlop={hitSlop}
