@@ -5115,6 +5115,9 @@
       "noOpState": {
         "title": "No operations yet?",
         "desc": "Simply send crypto assets to your receiving address and wait for the app to sync."
+      },
+      "recommanded": {
+        "title": "Recommanded"
       }
     },
     "addAccountsModal": {
