@@ -102,11 +102,11 @@ export function Operations({ navigation }: Props) {
   }, [navigation]);
 
   return (
-    <Flex style={styles.container}>
+    <Flex flex={1} px={4} py={6}>
       <SectionList
         sections={sections}
-        style={styles.list}
-        contentContainerStyle={styles.contentContainer}
+        style={{ flex: 1 }}
+        contentContainerStyle={{ flexGrow: 1 }}
         keyExtractor={keyExtractor}
         renderItem={renderItem}
         renderSectionHeader={renderSectionHeader}
@@ -115,14 +115,14 @@ export function Operations({ navigation }: Props) {
         ListFooterComponent={
           !completed ? (
             !onEndReached ? (
-              <View style={styles.seeMoreBtn}>
+              <Flex m={8}>
                 <Button
                   event="View Transactions"
                   type="lightPrimary"
                   title={<Trans i18nKey="common.seeAll" />}
                   onPress={onTransactionButtonPress}
                 />
-              </View>
+              </Flex>
             ) : (
               <LoadingFooter />
             )
@@ -137,22 +137,5 @@ export function Operations({ navigation }: Props) {
     </Flex>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingHorizontal: 16,
-    paddingVertical: 36,
-  },
-  list: {
-    flex: 1,
-  },
-  contentContainer: {
-    flexGrow: 1,
-  },
-  seeMoreBtn: {
-    margin: 16,
-  },
-});
 
 export default memo<Props>(Operations);
