@@ -28,7 +28,7 @@ import TrackScreen from "../../analytics/TrackScreen";
 import MigrateAccountsBanner from "../MigrateAccounts/Banner";
 import RequireTerms from "../../components/RequireTerms";
 import { useScrollToTop } from "../../navigation/utils";
-import { NavigatorName, ScreenName } from "../../const";
+import { ScreenName } from "../../const";
 import { PortfolioHistoryList } from "./PortfolioHistory";
 
 import FabActions from "../../components/FabActions";
@@ -107,7 +107,7 @@ export default function PortfolioScreen({ navigation }: Props) {
 
   const onDistributionCardPress = useCallback(
     (i, item) =>
-      navigation.navigate(NavigatorName.Analytics, { // TODO : ScreenName.Asset
+      navigation.navigate(ScreenName.Asset, {
         currency: item.currency,
       }),
     [navigation],
