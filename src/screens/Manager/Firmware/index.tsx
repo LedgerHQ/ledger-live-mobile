@@ -1,12 +1,13 @@
 import React, { memo, useEffect, useState, useCallback } from "react";
 import { useDispatch } from "react-redux";
-import { StyleSheet, TouchableOpacity, Touchable, Linking } from "react-native";
+import { TouchableOpacity, Linking } from "react-native";
 import { Trans } from "react-i18next";
 
 import type { State } from "@ledgerhq/live-common/lib/apps";
 
 import manager from "@ledgerhq/live-common/lib/manager";
 
+import styled from "styled-components/native";
 import { Box, Text, Flex, Icons } from "@ledgerhq/native-ui";
 import FirmwareUpdateModal from "../Modals/FirmwareUpdateModal";
 
@@ -18,6 +19,35 @@ type Props = {
   state: State,
   deviceInfo: any,
 };
+
+const FirmwareUpdateContainer = styled(Flex).attrs({
+  flexDirection: "row",
+  alignItems: "center",
+  justifyContent: "space-between",
+  borderRadius: 8,
+  padding: 16,
+  borderWidth: 1,
+  marginTop: 16,
+})``;
+
+const FirmwareUpdateInfoButton = styled(Box).attrs({
+  width: 40,
+  height: 40,
+  borderWidth: 1,
+  borderRadius: 50,
+  alignItems: "center",
+  justifyContent: "center",
+})``;
+
+const FirmwareOutdatedContainer = styled(Flex).attrs({
+  flexDirection: "row",
+  alignItems: "center",
+  justifyContent: "space-between",
+  borderRadius: 8,
+  padding: 16,
+  paddingRight: 16,
+  marginTop: 16,
+})``;
 
 const FirmwareManager = ({
   state,
@@ -53,18 +83,18 @@ const FirmwareManager = ({
   return (
     <>
         {firmware ? (
-          <Flex style={[styles.firmwareUpdate]} borderColor="neutral.c40">
+          <FirmwareUpdateContainer borderColor="neutral.c40">
             <Text color="neutral.c100" variant="large" fontWeight="semiBold">
                 <Trans i18nKey="v3.manager.firmware.latest"/>
             </Text>
             <TouchableOpacity onPress={open}>
-                <Box style={[styles.firmareUpdateInfoButton]} borderColor="neutral.c40">
-                    <Icons.InfoMedium size={16} color="neutral.c100"/>
-                </Box>
+                <FirmwareUpdateInfoButton borderColor="neutral.c40">
+                  <Icons.InfoMedium size={16} color="neutral.c100"/>
+                </FirmwareUpdateInfoButton>
             </TouchableOpacity>
-          </Flex>
+          </FirmwareUpdateContainer>
         ) : isDeprecated ? (
-        <Flex style={[styles.firmwareOutdated]} backgroundColor="warning.c30">
+        <FirmwareOutdatedContainer backgroundColor="warning.c30">
             <Icons.CircledAlertMedium size={18} color="warning.c100"/>
             <Flex flexDirection="column" ml={3}>
                 <Text color="warning.c100" variant="body" fontWeight="medium">
@@ -77,43 +107,11 @@ const FirmwareManager = ({
                     <Icons.ExternalLinkMedium size={14} color="warning.c100" />
                 </TouchableOpacity>
             </Flex>
-          </Flex>
+          </FirmwareOutdatedContainer>
         ) : null}
       <FirmwareUpdateModal isOpened={openModal} onClose={close} />
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  firmwareUpdate: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    borderRadius: 8,
-    padding: 16,
-    borderWidth: 1,
-    marginTop: 16,
-  },
-  firmareUpdateInfoButton: {
-    width: 40,
-    height: 40,
-    borderWidth: 1,
-    borderRadius: 50,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  firmwareOutdated: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    borderRadius: 8,
-    padding: 16,
-    paddingRight: 16,
-    marginTop: 16,
-  },
-  firmwareBannerCTA: {
-    paddingLeft: 48,
-  },
-});
 
 export default memo(FirmwareManager);

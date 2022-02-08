@@ -1,13 +1,12 @@
 import React, { memo, useCallback, useEffect, useReducer } from "react";
-import { StyleSheet, SectionList, View } from "react-native";
+import { StyleSheet, SectionList } from "react-native";
 import { Trans } from "react-i18next";
 import { useTheme } from "@react-navigation/native";
-import Check from "../../../icons/Check";
-import LText from "../../../components/LText";
 import Touchable from "../../../components/Touchable";
 
 import ActionModal from "./ActionModal";
 
+import styled from "styled-components/native";
 import { Icons, Box, Flex, Text } from "@ledgerhq/native-ui";
 
 const filterSections = [
@@ -61,6 +60,29 @@ const filterSections = [
   },
 ];
 
+const FilterLine = styled(Touchable)`
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 48;
+  padding-vertical: 12;
+`;
+
+const ArrowIconContainer = styled(Flex).attrs({
+  alignItems: "center",
+  justifyContent: "center",
+  padding: 2,
+  borderRadius: 50,
+  marginLeft: 4,
+})``;
+
+const SeparatorContainer = styled(Flex).attrs({
+  width: "100%",
+  height: 1,
+  marginVertical: 32,
+})``;
+
 const keyExtractor = (item, index) => item + index;
 
 const SectionHeader = ({ section: { title } }: any) => (
@@ -72,9 +94,7 @@ const SectionHeader = ({ section: { title } }: any) => (
 );
 
 const Separator = ({ section: { footerSeparator } }: any) =>
-  footerSeparator ? (
-    <Box style={[styles.separator]} backgroundColor="neutral.c40" />
-  ) : null;
+  footerSeparator ? <SeparatorContainer backgroundColor="neutral.c40" /> : null;
 
 const initialFilterState = {
   filters: null,
@@ -162,8 +182,7 @@ const FilterModalComponent = ({
       };
 
       return (
-        <Touchable
-          style={[styles.sectionLine]}
+        <FilterLine
           activeOpacity={0.5}
           onPress={onPress}
           event="ManagerAppFilterClick"
@@ -179,33 +198,35 @@ const FilterModalComponent = ({
             <Trans i18nKey={label} />
           </Text>
           {Boolean(isSelected) && Boolean(isFilter) && (
-            <Flex style={styles.checkIcons}>
-              <Flex style={styles.arrowIcon} backgroundColor="primary.c80">
+            <Flex alignItems="center" justifyContent="center">
+              <ArrowIconContainer backgroundColor="primary.c80">
                 <Icons.CheckAloneMedium color="background.main" size={16} />
-              </Flex>
+              </ArrowIconContainer>
             </Flex>
           )}
           {Boolean(isSelected) && !isFilter && (
-            <Flex style={styles.checkIcons} flexDirection="row">
-              <Flex
-                style={styles.arrowIcon}
+            <Flex
+              alignItems="center"
+              justifyContent="center"
+              flexDirection="row"
+            >
+              <ArrowIconContainer
                 backgroundColor={
                   state.order === "desc" ? "primary.c80" : "neutral.c60"
                 }
               >
                 <Icons.ArrowBottomMedium color="background.main" size={16} />
-              </Flex>
-              <Flex
-                style={styles.arrowIcon}
+              </ArrowIconContainer>
+              <ArrowIconContainer
                 backgroundColor={
                   state.order !== "desc" ? "primary.c80" : "neutral.c60"
                 }
               >
                 <Icons.ArrowTopMedium color="background.main" size={16} />
-              </Flex>
+              </ArrowIconContainer>
             </Flex>
           )}
-        </Touchable>
+        </FilterLine>
       );
     },
     [state],
@@ -228,7 +249,7 @@ const FilterModalComponent = ({
       actions={onFilterActions}
     >
       <SectionList
-        style={styles.list}
+        style={{ width: "100%" }}
         sections={filterSections}
         keyExtractor={keyExtractor}
         renderItem={FilterItem}
@@ -239,35 +260,5 @@ const FilterModalComponent = ({
     </ActionModal>
   );
 };
-
-const styles = StyleSheet.create({
-  list: {
-    width: "100%",
-  },
-  sectionLine: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    width: "100%",
-    height: 48,
-    paddingVertical: 12,
-  },
-  checkIcons: {
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  arrowIcon: {
-    alignItems: "center",
-    justifyContent: "center",
-    padding: 4,
-    borderRadius: 50,
-    marginLeft: 8,
-  },
-  separator: {
-    width: "100%",
-    height: 1,
-    marginVertical: 32,
-  },
-});
 
 export default memo(FilterModalComponent);
