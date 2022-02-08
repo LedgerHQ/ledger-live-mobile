@@ -1,8 +1,9 @@
 import React, { useCallback, memo } from "react";
-import { View, StyleSheet, VirtualizedList } from "react-native";
+import { VirtualizedList } from "react-native";
 import type { App } from "@ledgerhq/live-common/lib/types/manager";
 import type { State } from "@ledgerhq/live-common/lib/apps";
-import { useTheme } from "@react-navigation/native";
+import styled from "styled-components/native";
+import { Flex } from "@ledgerhq/native-ui";
 import AppRow from "./AppRow";
 import getWindowDimensions from "../../../logic/getWindowDimensions";
 
@@ -18,6 +19,13 @@ type Props = {
   setStorageWarning: () => void,
   optimisticState: State,
 };
+
+const NoResultsContainer = styled(Flex).attrs({
+  flex: 1,
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "flex-start",
+})``;
 
 const { height } = getWindowDimensions();
 
@@ -65,9 +73,9 @@ const AppsList = ({
 
   if (!apps || apps.length <= 0)
     return (
-      <View style={[styles.renderNoResult]}>
+      <NoResultsContainer>
         {renderNoResults && renderNoResults()}
-      </View>
+      </NoResultsContainer>
     );
 
   return (
@@ -86,17 +94,5 @@ AppsList.defaultProps = {
   animation: true,
   renderNoResults: () => null,
 };
-
-const styles = StyleSheet.create({
-  root: {
-    flex: 1,
-  },
-  renderNoResult: {
-    flex: 1,
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "flex-start",
-  },
-});
 
 export default memo(AppsList);

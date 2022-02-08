@@ -1,7 +1,5 @@
 import React, { memo, useMemo } from "react";
 
-import { View, StyleSheet } from "react-native";
-
 import type { App } from "@ledgerhq/live-common/lib/types/manager";
 
 import type { State, Action } from "@ledgerhq/live-common/lib/apps";
@@ -12,6 +10,7 @@ import AppIcon from "./AppIcon";
 import AppStateButton from "./AppStateButton";
 import ByteSize from "../../../components/ByteSize";
 
+import styled from "styled-components/native";
 import { Flex, Text } from "@ledgerhq/native-ui";
 
 type Props = {
@@ -25,6 +24,36 @@ type Props = {
   managerTabs: any,
   optimisticState: State,
 };
+
+const RowContainer = styled(Flex).attrs({
+  flex: 1,
+  flexDirection: "row",
+  alignItems: "center",
+  justifyContent: "flex-start",
+  paddingVertical: 14,
+  borderRadius: 0,
+  height: 64,
+})``;
+
+const LabelContainer = styled(Flex).attrs({
+  flexGrow: 0,
+  flexShrink: 1,
+  flexBasis: "40%",
+  flexDirection: "column",
+  alignItems: "flex-start",
+  justifyContent: "center",
+  paddingHorizontal: 12,
+})``;
+
+const VersionContainer = styled(Flex).attrs({
+  borderWidth: 1,
+  paddingHorizontal: 4,
+  paddingVertical: 2,
+  borderRadius: 4,
+  alignItems: "center",
+  justifyContent: "center",
+  marginTop: 2,
+})``;
 
 const AppRow = ({
   app,
@@ -56,14 +85,13 @@ const AppRow = ({
   const onSizePress = (name: string) => setStorageWarning(name);
 
   return (
-    <View style={styles.root}>
-      <View style={[styles.item]}>
-        <AppIcon app={app} size={48} />
-        <View style={styles.labelContainer}>
-          <Text numberOfLines={1} variant="body" fontWeight="semiBold" color="neutral.c100">
-            {displayName}
-          </Text>
-          <Flex style={styles.versionContainer} borderColor="neutral.c40">
+    <RowContainer>
+      <AppIcon app={app} size={48} />
+      <LabelContainer>
+        <Text numberOfLines={1} variant="body" fontWeight="semiBold" color="neutral.c100">
+          {displayName}
+        </Text>
+          <VersionContainer borderColor="neutral.c40">
             <Text numberOfLines={1} variant="tiny" color="neutral.c80" fontWeight="semiBold">
               <Trans
                   i18nKey="v3.ApplicationVersion"
@@ -82,13 +110,13 @@ const AppRow = ({
                 </>
               )}
             </Text>
-          </Flex>
-        </View>
+          </VersionContainer>
+        </LabelContainer>
         <Text
           variant="body"
           fontWeight="medium"
-          style={[styles.sizeText]}
           color="neutral.c70"
+          my={3}
         >
           <ByteSize
             value={bytes}
@@ -107,71 +135,8 @@ const AppRow = ({
           setAppUninstallWithDependencies={setAppUninstallWithDependencies}
           storageWarning={onSizePress}
         />
-      </View>
-    </View>
+    </RowContainer>
   );
 };
-
-const styles = StyleSheet.create({
-  root: {
-    height: 64,
-  },
-  item: {
-    flex: 1,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "flex-start",
-    paddingVertical: 14,
-    borderRadius: 0,
-    height: 64,
-  },
-  labelContainer: {
-    flexGrow: 0,
-    flexShrink: 1,
-    flexBasis: "40%",
-    flexDirection: "column",
-    alignItems: "flex-start",
-    justifyContent: "center",
-    paddingHorizontal: 12,
-  },
-  versionContainer: {
-    borderWidth: 1,
-    paddingHorizontal: 4,
-    paddingVertical: 2,
-    borderRadius: 4,
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: 4,
-  },
-  sizeText: {
-    marginHorizontal: 10,
-  },
-  warnText: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  installedLabel: {
-    flexGrow: 1,
-    flexShrink: 0,
-    flexBasis: "auto",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "flex-end",
-    borderRadius: 4,
-    overflow: "hidden",
-    paddingHorizontal: 10,
-  },
-  appButton: {
-    flexGrow: 1,
-    flexShrink: 0,
-    flexBasis: "auto",
-    alignItems: "flex-start",
-    height: 38,
-    paddingHorizontal: 10,
-    paddingVertical: 12,
-    zIndex: 5,
-  },
-});
 
 export default memo(AppRow);

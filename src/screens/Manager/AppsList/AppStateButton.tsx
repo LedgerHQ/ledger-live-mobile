@@ -1,15 +1,16 @@
 import React, { useMemo, memo } from "react";
-import { StyleSheet, View } from "react-native";
 
 import type { App } from "@ledgerhq/live-common/lib/types/manager";
 import type { Action, State } from "@ledgerhq/live-common/lib/apps";
-
+import { Flex } from "@ledgerhq/native-ui";
 
 import AppInstallButton from "./AppInstallButton";
 import AppUninstallButton from "./AppUninstallButton";
 import AppUpdateButton from "./AppUpdateButton";
 
 import AppProgressButton from "./AppProgressButton";
+
+import styled from "styled-components/native";
 
 type Props = {
   app: App,
@@ -21,6 +22,13 @@ type Props = {
   setAppUninstallWithDependencies: (params: { dependents: App[], app: App }) => void,
   storageWarning: (appName: string) => void,
 };
+
+const Container = styled(Flex).attrs({
+  flex: 1,
+  flexDirection: "row",
+  alignItems: "center",
+  justifyContent: "flex-end",
+})``;
 
 const AppStateButton = ({
   app,
@@ -94,45 +102,7 @@ const AppStateButton = ({
     }
   };
 
-  return <View style={styles.root}>{renderAppState()}</View>;
+  return <Container>{renderAppState()}</Container>;
 };
-
-const styles = StyleSheet.create({
-  root: {
-    flex: 1,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "flex-end",
-  },
-  appStateText: {
-    fontSize: 13,
-    lineHeight: 16,
-  },
-  installedLabel: {
-    flexGrow: 1,
-    flexShrink: 0,
-    flexBasis: "auto",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "flex-end",
-    alignContent: "center",
-    borderRadius: 4,
-    overflow: "hidden",
-    paddingHorizontal: 0,
-    flexWrap: "wrap",
-    height: 38,
-  },
-  noWrapLabel: {
-    flexWrap: "nowrap",
-    overflow: "visible",
-  },
-  updateText: {
-    width: "100%",
-    textAlign: "right",
-  },
-  installedText: {
-    paddingLeft: 8,
-  },
-});
 
 export default memo(AppStateButton);

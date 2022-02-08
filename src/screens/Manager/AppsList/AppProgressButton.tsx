@@ -1,8 +1,7 @@
 import React from "react";
-import { StyleSheet } from "react-native";
 
 import type { State } from "@ledgerhq/live-common/lib/apps";
-import { useTheme } from "styled-components/native";
+import styled, { useTheme } from "styled-components/native";
 
 // TODO : replace by { Box, ProgressLoader } when ProgressLoader exported from ui
 import { Box, Loader as ProgressLoader } from "@ledgerhq/native-ui";
@@ -15,6 +14,12 @@ type Props = {
   installing: boolean,
   updating: boolean,
 };
+
+const ButtonCenter = styled(Box).attrs({
+  width: 10,
+  height: 10,
+  borderRadius: 1,
+})``;
 
 export default function AppProgressButton({
   state,
@@ -37,23 +42,7 @@ export default function AppProgressButton({
       strokeWidth={2}
       mainColor={color}
     >
-      <Box style={styles.buttonCenter} backgroundColor={color} />
+      <ButtonCenter backgroundColor={color} />
     </ProgressLoader>
   );
 }
-
-const styles = StyleSheet.create({
-  button: {
-    width: 48,
-    height: 48,
-    borderWidth: 1,
-    borderRadius: 50,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  buttonCenter: {
-    width: 10,
-    height: 10,
-    borderRadius: 1,
-  },
-});

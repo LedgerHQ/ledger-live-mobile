@@ -1,6 +1,6 @@
 import React, { memo, useMemo } from "react";
 
-import { View, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import { Trans } from "react-i18next";
 
 import { DeviceModel } from "@ledgerhq/devices";
@@ -9,10 +9,7 @@ import { DeviceInfo } from "@ledgerhq/live-common/lib/types/manager";
 import { Box, Flex, Text } from "@ledgerhq/native-ui";
 import { WarningMedium } from "@ledgerhq/native-ui/assets/icons";
 
-import { useTheme } from "styled-components/native";
-import LText from "../../../components/LText";
-
-import Warning from "../../../icons/Warning";
+import styled, { useTheme } from "styled-components/native";
 import Touchable from "../../../components/Touchable";
 import ByteSize from "../../../components/ByteSize";
 
@@ -22,16 +19,21 @@ type Props = {
   distribution: AppsDistribution;
 };
 
+const StorageRepartition = styled(Touchable)`
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  flex-basis: 12;
+  height: 12;
+  border-bottom-left-radius: 3;
+  border-bottom-right-radius: 3;
+  overflow: hidden;
+`;
+
 const DeviceAppStorage = ({
   deviceModel,
   deviceInfo,
-  distribution: {
-    freeSpaceBytes,
-    appsSpaceBytes,
-    shouldWarnMemory,
-    totalAppsBytes,
-    apps,
-  },
+  distribution: { freeSpaceBytes, appsSpaceBytes, shouldWarnMemory, apps },
 }: Props) => {
   const { colors } = useTheme();
   const appSizes = useMemo(
@@ -43,10 +45,6 @@ const DeviceAppStorage = ({
       })),
     [apps, appsSpaceBytes],
   );
-
-  const storageWarnStyle = {
-    color: shouldWarnMemory ? colors.lightOrange : colors.darkBlue,
-  };
 
   return (
     /* Fixme: Storage info line might be too tight with some translation, consider putting it on multiple lines */
@@ -123,13 +121,9 @@ const DeviceAppStorage = ({
           </Text>
         </Flex>
       </Flex>
-      <Touchable
+      <StorageRepartition
         activeOpacity={1}
-        style={[
-          styles.row,
-          styles.graphRow,
-          { backgroundColor: colors.neutral.c40 },
-        ]}
+        style={{ flex: 1, backgroundColor: colors.neutral.c40 }}
         onPress={() => {}}
         event="ManagerAppDeviceGraphClick"
       >
@@ -143,32 +137,9 @@ const DeviceAppStorage = ({
             height={"100%"}
           />
         ))}
-      </Touchable>
+      </StorageRepartition>
     </Box>
   );
 };
-
-const styles = StyleSheet.create({
-  root: {
-    flex: 1,
-    flexDirection: "column",
-  },
-  row: {
-    flex: 1,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
-  graphRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "flex-start",
-    flexBasis: 12,
-    height: 12,
-    borderBottomLeftRadius: 3,
-    borderBottomRightRadius: 3,
-    overflow: "hidden",
-  },
-});
 
 export default memo(DeviceAppStorage);

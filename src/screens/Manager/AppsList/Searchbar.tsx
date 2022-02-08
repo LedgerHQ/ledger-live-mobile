@@ -1,19 +1,34 @@
-import React, { useState, useCallback, useRef } from "react";
+import React, { useCallback, useRef } from "react";
 import {
-  StyleSheet,
   Platform,
   TouchableOpacity,
   TextInput,
 } from "react-native";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "styled-components/native";
-
+import styled from "styled-components/native";
 import { Flex, Icons } from "@ledgerhq/native-ui";
 
 type Props = {
   searchQuery?: string;
   onQueryUpdate: (query: string) => void;
 };
+
+const SearchbarContainer = styled(Flex).attrs({
+  flex: 1,
+  paddingHorizontal: 17.5,
+  borderWidth: 1,
+  borderRadius: 50,
+  flexDirection: "row",
+  alignItems: "center",
+  height: 48,
+})``;
+
+const SearchbarTextInput = styled(TextInput).attrs({
+  padding: 0,
+  paddingLeft: 10,
+  flex: 1,
+})``;
 
 export default ({ searchQuery, onQueryUpdate }: Props) => {
   const { t } = useTranslation();
@@ -23,9 +38,9 @@ export default ({ searchQuery, onQueryUpdate }: Props) => {
   const clear = useCallback(() => onQueryUpdate(""), [onQueryUpdate]);
 
   return (
-    <Flex style={styles.container} borderColor="neutral.c40">
+    <SearchbarContainer borderColor="neutral.c40">
       <Icons.SearchMedium size={17} color="neutral.c70" />
-      <TextInput
+      <SearchbarTextInput
         ref={textInput}
         returnKeyType="search"
         maxLength={50}
@@ -36,7 +51,7 @@ export default ({ searchQuery, onQueryUpdate }: Props) => {
         onInputCleared={clear}
         value={searchQuery}
         numberOfLines={1}
-        style={{ ...styles.input, color: colors.neutral.c100 }}
+        style={{ color: colors.neutral.c100 }}
         keyboardType={
           Platform.OS === "android" ? "visible-password" : "default"
         }
@@ -46,23 +61,6 @@ export default ({ searchQuery, onQueryUpdate }: Props) => {
           <Icons.CircledCrossSolidMedium size={20} color="neutral.c60" />
         </TouchableOpacity>
       ) : null}
-    </Flex>
+    </SearchbarContainer>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingHorizontal: 17.5,
-    borderWidth: 1,
-    borderRadius: 50,
-    flexDirection: "row",
-    alignItems: "center",
-    height: 48,
-  },
-  input: {
-    padding: 0,
-    paddingLeft: 10,
-    flex: 1,
-  },
-});

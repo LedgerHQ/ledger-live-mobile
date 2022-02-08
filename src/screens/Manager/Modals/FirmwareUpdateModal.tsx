@@ -1,9 +1,8 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
 import { Trans } from "react-i18next";
 
 import ActionModal from "./ActionModal";
-
+import styled from "styled-components/native";
 import { Text, Flex, Icons } from "@ledgerhq/native-ui";
 
 type Props = {
@@ -11,50 +10,40 @@ type Props = {
   onClose: () => void;
 };
 
+const IconContainer = styled(Flex).attrs({
+  marginVertical: 20,
+  padding: 22,
+  borderWidth: 1,
+  borderRadius: 8,
+})``;
+
+const TextContainer = styled(Flex).attrs({
+  marginTop: 4,
+  marginBottom: 32,
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center",
+})``;
+
+const ModalText = styled(Text).attrs({
+  textAlign: "center",
+  marginTop: 16,
+})``;
+
 const FirmwareUpdateModal = ({ isOpened, onClose }: Props) => (
   <ActionModal isOpened={!!isOpened} onClose={onClose} actions={[]}>
-    <Flex style={styles.iconContainer} borderColor="neutral.c40">
+    <IconContainer borderColor="neutral.c40">
       <Icons.InfoMedium size={24} color="primary.c80" />
-    </Flex>
-    <View style={styles.textContainer}>
-      <Text
-        color="neutral.c100"
-        fontWeight="medium"
-        variant="h2"
-        style={styles.text}
-      >
+    </IconContainer>
+    <TextContainer>
+      <ModalText color="neutral.c100" fontWeight="medium" variant="h2">
         <Trans i18nKey="v3.manager.firmware.modalTitle" />
-      </Text>
-      <Text
-        color="neutral.c70"
-        fontWeight="medium"
-        variant="body"
-        style={styles.text}
-      >
+      </ModalText>
+      <ModalText color="neutral.c70" fontWeight="medium" variant="body">
         <Trans i18nKey="v3.manager.firmware.modalDesc" />
-      </Text>
-    </View>
+      </ModalText>
+    </TextContainer>
   </ActionModal>
 );
-
-const styles = StyleSheet.create({
-  iconContainer: {
-    marginVertical: 20,
-    padding: 22,
-    borderWidth: 1,
-    borderRadius: 8,
-  },
-  text: {
-    textAlign: "center",
-    marginTop: 16,
-  },
-  textContainer: {
-    marginVertical: 8,
-    paddingHorizontal: 16,
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
 
 export default FirmwareUpdateModal;
