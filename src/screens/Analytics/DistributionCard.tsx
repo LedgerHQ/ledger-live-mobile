@@ -36,9 +36,6 @@ export default function DistributionCard({
   );
   const percentage = Math.round(distribution * 1e4) / 1e2;
 
-  console.log('--------------------------')
-  console.log(currency)
-  console.log('--------------------------')
   return (
     <Flex style={[styles.root]}>
       <Flex flexDirection="row">

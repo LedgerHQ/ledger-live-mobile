@@ -104,13 +104,11 @@ export function Operations({ navigation }: Props) {
   return (
     <Flex style={styles.container}>
       <SectionList
-        // $FlowFixMe
         sections={sections}
         style={styles.list}
         contentContainerStyle={styles.contentContainer}
         keyExtractor={keyExtractor}
         renderItem={renderItem}
-        // $FlowFixMe
         renderSectionHeader={renderSectionHeader}
         stickySectionHeadersEnabled={false}
         onEndReached={onEndReached}

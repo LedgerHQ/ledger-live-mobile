@@ -49,7 +49,6 @@ class RingChart extends PureComponent<Props> {
     });
 
     const parsedItem = {
-      // $FlowFixMe
       color: ensureContrast(
         getCurrencyColor(item.currency),
         this.props.colors.background.main,

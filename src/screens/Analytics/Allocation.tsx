@@ -36,7 +36,6 @@ export default function Allocation() {
         </Flex>
       </Flex>
       <FlatList
-        // $FlowFixMe
         data={distribution.list}
         renderItem={renderItem}
         keyExtractor={item => item.currency.id}
