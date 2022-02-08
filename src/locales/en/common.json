@@ -690,7 +690,8 @@
   },
   "reset": {
     "description": "Please uninstall then reinstall the app on your phone to delete Ledger Live data, including accounts and settings.",
-    "button": "Reset"
+    "button": "Reset",
+    "warning": "Resetting Ledger Live will erase your swap transaction history for all your accounts."
   },
   "graph": {
     "week": "1W",
@@ -1506,7 +1507,8 @@
         "title": "Remove account from the Portfolio",
         "desc": "Stored data will be removed.",
         "confirmationTitle": "Are you sure?",
-        "confirmationDesc": "This has no impact on your crypto assets. Existing accounts can always be added afterwards."
+        "confirmationDesc": "This has no impact on your crypto assets. Existing accounts can always be added afterwards.",
+        "confirmationWarn": "Deleting this account will erase your swap transaction history associated to it."
       },
       "archive": {
         "title": "Archive account",
@@ -1645,6 +1647,8 @@
       "carouselDesc": "Enable visibility of the carousel on Portfolio",
       "language": "Display language",
       "languageDesc": "Set the language displayed in Ledger Live.",
+      "region": "Region",
+      "regionDesc": "Choose your region to update formats of dates, time and currencies.",
       "password": "Password lock",
       "passwordDesc": "Set a password to protect Ledger Live data on your phone.",
       "counterValue": "Preferred currency",
@@ -2971,6 +2975,14 @@
       }
     }
   },
+  "celo": {
+    "info": {
+      "available": {
+        "title": "CELO available",
+        "description": "This amount is disposable."
+      }
+    }
+  },
   "cosmos": {
     "info": {
       "available": {
@@ -3169,6 +3181,19 @@
           }
         }
       }
+    }
+  },
+  "cryptoOrg": {
+    "account": {
+     "subHeader": {
+       "cardTitle": "Powered by Crypto.org",
+       "moreInfo": "More info",
+       "drawerTitle": "Crypto.org integration",
+       "title": "The Crypto.org (CRO) token is now available on Ledger Live",
+       "description": "You can now start to manage your Crypto.org (CRO) tokens and secure them through Ledger Live.",
+       "description2": "The Crypto.org (CRO) token is native to the Crypto.org chain and is used for everything from transactions, staking and many upcoming features.",
+       "website": "Cryptocurrency in every wallet"
+     }
     }
   },
   "elrond": {
@@ -3688,7 +3713,8 @@
       "selectCurrency": "Select a currency",
       "selectAccount": "Select an account",
       "connectDevice": "Connect your device",
-      "title": "Buy crypto via our partner",
+      "title": "Choose a provider to buy crypto",
+      "coinifyTitle": "Buy crypto via our partner",
       "description": "Purchase crypto assets via Coinify and receive them directly in your Ledger account.",
       "CTAButton": "Buy now",
       "emptyState": {
@@ -3701,6 +3727,11 @@
         "cancel": "Cancel",
         "address": "Address for {{currency}} account",
         "warning": "Your address was not confirmed on your Ledger device. Please verify it for security"
+      },
+      "bullets": {
+        "whereToBuy": "Buy from anywhere",
+        "cryptoSupported": "crypto supported",
+        "payWith": "Pay with card or SEPA"
       }
     },
     "sell": {
