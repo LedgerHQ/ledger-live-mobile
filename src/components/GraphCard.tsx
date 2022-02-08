@@ -1,5 +1,5 @@
 import React, { useState, useCallback, ReactNode } from "react";
-import { View, StyleSheet, Platform } from "react-native";
+import { View } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { getAccountCurrency } from "@ledgerhq/live-common/lib/account";
 import { Currency, Unit } from "@ledgerhq/live-common/lib/types";
@@ -8,18 +8,14 @@ import {
   ValueChange,
 } from "@ledgerhq/live-common/lib/portfolio/v2/types";
 import { getCurrencyColor } from "@ledgerhq/live-common/lib/currencies/color";
-import { Flex, Text } from "@ledgerhq/native-ui";
+import { BoxedIcon, Flex, Text } from "@ledgerhq/native-ui";
+import { Trans } from "react-i18next";
+import { PieChartMedium } from "@ledgerhq/native-ui/assets/icons";
 import { ensureContrast } from "../colors";
 import { useTimeRange } from "../actions/settings";
-import getWindowDimensions from "../logic/getWindowDimensions";
 import Delta from "./Delta";
-import FormatDate from "./FormatDate";
 import { Item } from "./Graph/types";
-import Graph from "./Graph";
-import Pills from "./Pills";
 import TransactionsPendingConfirmationWarning from "./TransactionsPendingConfirmationWarning";
-import Card from "./Card";
-import LText from "./LText";
 import CurrencyUnitValue from "./CurrencyUnitValue";
 import Placeholder from "./Placeholder";
 import DiscreetModeButton from "./DiscreetModeButton";
@@ -48,16 +44,8 @@ export default function GraphCard({
   const accounts = portfolio.accounts;
   const balanceHistory = portfolio.balanceHistory;
 
-  const graphColor =
-    accounts.length === 1
-      ? ensureContrast(
-          getCurrencyColor(getAccountCurrency(accounts[0])),
-          colors.background,
-        )
-      : "";
-
   return (
-    <Flex bg="card" style={styles.root}>
+    <Flex bg={"neutral.c30"} p={6}>
       <GraphCardHeader
         valueChange={countervalueChange}
         isLoading={!isAvailable}
@@ -92,7 +80,6 @@ export default function GraphCard({
 function GraphCardHeader({
   unit,
   valueChange,
-  hoveredItem,
   renderTitle,
   isLoading,
   to,
@@ -101,121 +88,72 @@ function GraphCardHeader({
   valueChange: ValueChange;
   unit: Unit;
   to: Item;
-  hoveredItem?: Item;
   renderTitle?: ({ counterValueUnit: Unit, item: Item }) => ReactNode;
 }) {
   const item = to;
 
   return (
-    <Flex>
-      <Flex flexDirection={'row'} alignItems={'center'}>
-        <Text
-          variant={"small"}
-          fontWeight={"semiBold"}
-          color={"neutral.c70"}
-          textTransform={"uppercase"}
-        >
-          Portoflio
-        </Text>
-        <DiscreetModeButton />
-      </Flex>
-
-      <View style={styles.warningWrapper}>
-        {isLoading ? (
-          <Placeholder width={228} containerHeight={27} />
-        ) : renderTitle ? (
-          renderTitle({ counterValueUnit: unit, item })
-        ) : (
-          <Text variant={"h1"} color={"neutral.c100"}>
-            <CurrencyUnitValue unit={unit} value={item.value} />
+    <Flex
+      flexDirection={"row"}
+      justifyContent={"space-between"}
+      alignItems={"center"}
+    >
+      <Flex>
+        <Flex flexDirection={"row"} alignItems={"center"} mb={1}>
+          <Text
+            variant={"small"}
+            fontWeight={"semiBold"}
+            color={"neutral.c70"}
+            textTransform={"uppercase"}
+            mr={2}
+          >
+            Portfolio
+            <Trans key={"tabs.portfolio"} />
+            qsqsds
           </Text>
-        )}
-        <TransactionsPendingConfirmationWarning />
-      </View>
-      <Flex flexDirection={"row"}>
-        {isLoading ? (
-          <>
-            <Placeholder
-              width={50}
-              containerHeight={19}
-              style={{ marginRight: 10 }}
-            />
-            <Placeholder width={50} containerHeight={19} />
-          </>
-        ) : hoveredItem ? (
-          <LText style={styles.delta}>
-            <FormatDate date={hoveredItem.date} />
-          </LText>
-        ) : (
-          <View style={styles.delta}>
-            <Delta
-              percent
-              valueChange={valueChange}
-              style={styles.deltaPercent}
-            />
-            <Delta valueChange={valueChange} unit={unit} />
-          </View>
-        )}
+          <DiscreetModeButton size={20} />
+        </Flex>
+
+        <View>
+          {isLoading ? (
+            <Placeholder width={228} containerHeight={27} />
+          ) : renderTitle ? (
+            renderTitle({ counterValueUnit: unit, item })
+          ) : (
+            <Text variant={"h1"} color={"neutral.c100"}>
+              <CurrencyUnitValue unit={unit} value={item.value} />
+            </Text>
+          )}
+          <TransactionsPendingConfirmationWarning />
+        </View>
+        <Flex flexDirection={"row"}>
+          {isLoading ? (
+            <>
+              <Placeholder
+                width={50}
+                containerHeight={19}
+                style={{ marginRight: 10 }}
+              />
+              <Placeholder width={50} containerHeight={19} />
+            </>
+          ) : (
+            <View>
+              <Delta percent valueChange={valueChange} />
+              <Delta valueChange={valueChange} unit={unit} />
+            </View>
+          )}
+        </Flex>
+      </Flex>
+      <Flex>
+        <BoxedIcon
+          Icon={PieChartMedium}
+          variant={"circle"}
+          iconSize={20}
+          size={48}
+          badgeSize={30}
+          iconColor={"neutral.c100"}
+        />
       </Flex>
     </Flex>
   );
 }
-
-const styles = StyleSheet.create({
-  root: {
-    paddingVertical: 16,
-    margin: 16,
-    ...Platform.select({
-      android: {
-        elevation: 1,
-      },
-      ios: {
-        shadowOpacity: 0.03,
-        shadowRadius: 8,
-        shadowOffset: {
-          height: 4,
-        },
-      },
-    }),
-  },
-  balanceTextContainer: {
-    marginBottom: 5,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  balanceText: {
-    fontSize: 22,
-    lineHeight: 24,
-  },
-  subtitleContainer: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    marginBottom: 20,
-  },
-  pillsContainer: {
-    marginTop: 16,
-    alignItems: "center",
-  },
-  deltaPercent: {
-    marginRight: 8,
-  },
-  warningWrapper: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  graphHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "flex-start",
-    paddingHorizontal: 16,
-    flexWrap: "nowrap",
-  },
-  graphHeaderBalance: { alignItems: "flex-start", flex: 1 },
-  delta: {
-    height: 24,
-    flexDirection: "row",
-    flexWrap: "wrap",
-  },
-});

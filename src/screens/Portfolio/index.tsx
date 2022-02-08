@@ -4,10 +4,14 @@ import { StyleSheet, FlatList, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Animated, { interpolateNode } from "react-native-reanimated";
 import { createNativeWrapper } from "react-native-gesture-handler";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { useFocusEffect, useTheme } from "@react-navigation/native";
 import { isAccountEmpty } from "@ledgerhq/live-common/lib/account";
 
+import { Box, Flex, Link, Text } from "@ledgerhq/native-ui";
+import { usePlatformApp } from "@ledgerhq/live-common/lib/platform/PlatformAppProvider";
+import useEnv from "@ledgerhq/live-common/lib/hooks/useEnv";
+import { filterPlatformApps } from "@ledgerhq/live-common/lib/platform/PlatformAppProvider/helpers";
 import {
   useRefreshAccountsOrdering,
   useDistribution,
@@ -34,7 +38,7 @@ import { PortfolioHistoryList } from "./PortfolioHistory";
 import FabActions from "../../components/FabActions";
 import LText from "../../components/LText";
 import FirmwareUpdateBanner from "../../components/FirmwareUpdateBanner";
-import { Text } from "@ledgerhq/native-ui";
+import DiscoverSection from "./DiscoverSection";
 
 export { default as PortfolioTabIcon } from "./TabIcon";
 
@@ -62,28 +66,6 @@ export default function PortfolioScreen({ navigation }: Props) {
   const ref = useRef();
   useScrollToTop(ref);
   const { colors } = useTheme();
-
-  const StickyActions = useCallback(() => {
-    const offset = 410;
-    const top = interpolateNode(scrollY, {
-      inputRange: [offset, offset + 56],
-      outputRange: [0, 56],
-      extrapolate: "clamp",
-    });
-
-    return accounts.length === 0 ? null : (
-      <View style={[styles.stickyActions]}>
-        <Animated.View
-          style={[
-            styles.styckyActionsInner,
-            { transform: [{ translateY: top }] },
-          ]}
-        >
-          <FabActions />
-        </Animated.View>
-      </View>
-    );
-  }, [accounts.length, scrollY]);
 
   const showingPlaceholder =
     accounts.length === 0 || accounts.every(isAccountEmpty);
@@ -116,18 +98,41 @@ export default function PortfolioScreen({ navigation }: Props) {
 
   const data = useMemo(
     () => [
-      accounts.length > 0 && !areAccountsEmpty ? <Carousel /> : null,
       <GraphCardContainer
         counterValueCurrency={counterValueCurrency}
         portfolio={portfolio}
         showGreeting={!areAccountsEmpty}
         showGraphCard={!areAccountsEmpty}
       />,
-      StickyActions(),
+      accounts.length > 0 && <FabActions />,
+      <Flex>
+        <Flex
+          flexDirection={"row"}
+          justifyContent={"space-between"}
+          alignItems={"center"}
+          mb={6}
+        >
+          <Text variant={"h3"} textTransform={"uppercase"} mt={2}>
+            <Trans i18nKey={"tabs.platform"} />
+          </Text>
+          <Link type={"color"}>
+            <Trans i18nKey={"common.seeAll"} />
+          </Link>
+        </Flex>
+        <DiscoverSection />
+      </Flex>,
+      accounts.length > 0 && !areAccountsEmpty ? (
+        <Flex borderWidth={"1px"} borderColor={"red"}>
+          <Text variant={"h3"} textTransform={"uppercase"} mb={6}>
+            <Trans i18nKey={"tabs.platform"} />
+          </Text>
+          <Carousel />
+        </Flex>
+      ) : null,
       ...(showDistribution
         ? [
             <View style={styles.distrib}>
-              <Text variant={'h3'} textTransform={'uppercase'}>
+              <Text variant={"h3"} textTransform={"uppercase"}>
                 {t("distribution.header")}
               </Text>
               <DistributionList
@@ -149,7 +154,6 @@ export default function PortfolioScreen({ navigation }: Props) {
       <PortfolioHistoryList navigation={navigation} />,
     ],
     [
-      StickyActions,
       accounts.length,
       areAccountsEmpty,
       counterValueCurrency,
@@ -196,7 +200,6 @@ export default function PortfolioScreen({ navigation }: Props) {
           renderItem={({ item }) => item}
           keyExtractor={(item, index) => String(index)}
           showsVerticalScrollIndicator={false}
-          stickyHeaderIndices={[2]}
           onScroll={Animated.event(
             [
               {
