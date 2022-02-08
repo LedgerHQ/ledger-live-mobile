@@ -1,7 +1,6 @@
 import React, { memo } from "react";
-import { StyleSheet, View } from "react-native";
 import { Trans } from "react-i18next";
-
+import styled from "styled-components/native";
 import { Text, Flex, Icons, Button } from "@ledgerhq/native-ui";
 
 import ActionModal from "./ActionModal";
@@ -11,62 +10,53 @@ type Props = {
   onClose: () => void;
 };
 
+const IconContainer = styled(Flex).attrs({
+  marginVertical: 20,
+  padding: 22,
+  borderWidth: 1,
+  borderRadius: 8,
+})``;
+
+const TextContainer = styled(Flex).attrs({
+  marginTop: 4,
+  marginBottom: 32,
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center",
+})``;
+
+const ModalText = styled(Text).attrs({
+  textAlign: "center",
+  marginTop: 16,
+})``;
+
+const ButtonsContainer = styled(Flex).attrs({
+  marginBottom: 24,
+  width: "100%",
+})``;
+
 const StorageWarningModal = ({ warning, onClose }: Props) => (
   <ActionModal isOpened={!!warning} onClose={onClose} actions={[]}>
-    <Flex style={styles.iconContainer} borderColor="neutral.c40">
+    <IconContainer borderColor="neutral.c40">
       <Icons.StorageMedium size={24} color="error.c100" />
-    </Flex>
-    <View style={styles.textContainer}>
-      <Text
-        color="neutral.c100"
-        fontWeight="medium"
-        variant="h2"
-        style={styles.text}
-      >
+    </IconContainer>
+    <TextContainer>
+      <ModalText color="neutral.c100" fontWeight="medium" variant="h2">
         <Trans i18nKey="v3.errors.ManagerNotEnoughSpace.title" />
-      </Text>
-      <Text
-        color="neutral.c70"
-        fontWeight="medium"
-        variant="body"
-        style={styles.text}
-      >
+      </ModalText>
+      <ModalText color="neutral.c70" fontWeight="medium" variant="body">
         <Trans
           i18nKey="v3.errors.ManagerNotEnoughSpace.info"
           values={{ app: warning }}
         />
-      </Text>
-    </View>
-    <Flex style={[styles.buttonsContainer]}>
+      </ModalText>
+    </TextContainer>
+    <ButtonsContainer>
       <Button size="large" type="main" onPress={onClose}>
         <Trans i18nKey="v3.errors.ManagerNotEnoughSpace.continue" />
       </Button>
-    </Flex>
+    </ButtonsContainer>
   </ActionModal>
 );
-
-const styles = StyleSheet.create({
-  iconContainer: {
-    marginVertical: 20,
-    padding: 22,
-    borderWidth: 1,
-    borderRadius: 8,
-  },
-  text: {
-    textAlign: "center",
-    marginTop: 16,
-  },
-  textContainer: {
-    marginVertical: 8,
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  buttonsContainer: {
-    marginTop: 24,
-    marginBottom: 4,
-    width: "100%",
-  },
-});
 
 export default memo(StorageWarningModal);

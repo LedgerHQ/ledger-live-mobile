@@ -1,4 +1,4 @@
-import React, { memo, useMemo, useCallback } from "react";
+import React, { memo, useMemo } from "react";
 
 import { View, StyleSheet } from "react-native";
 
@@ -7,9 +7,6 @@ import type { App } from "@ledgerhq/live-common/lib/types/manager";
 import type { State, Action } from "@ledgerhq/live-common/lib/apps";
 import { useNotEnoughMemoryToInstall } from "@ledgerhq/live-common/lib/apps/react";
 import { Trans } from "react-i18next";
-import { useTheme } from "@react-navigation/native";
-import Touchable from "../../../components/Touchable";
-import Warning from "../../../icons/Warning";
 import AppIcon from "./AppIcon";
 
 import AppStateButton from "./AppStateButton";
@@ -56,9 +53,7 @@ const AppRow = ({
     name,
   );
 
-  const onSizePress = (name) => setStorageWarning(name);
-
-  const { colors } = useTheme();
+  const onSizePress = (name: string) => setStorageWarning(name);
 
   return (
     <View style={styles.root}>

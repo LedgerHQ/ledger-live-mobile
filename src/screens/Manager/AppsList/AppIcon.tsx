@@ -1,6 +1,6 @@
 // @flow
 import React, { memo, useMemo } from "react";
-import { Image, View, StyleSheet } from "react-native";
+import { Image, StyleSheet } from "react-native";
 import manager from "@ledgerhq/live-common/lib/manager";
 import {
   findCryptoCurrencyById,
@@ -9,6 +9,8 @@ import {
 import { getCryptoCurrencyIcon } from "@ledgerhq/live-common/lib/reactNative";
 
 import type { App } from "@ledgerhq/live-common/lib/types/manager";
+import { Flex } from "@ledgerhq/native-ui";
+import styled from "styled-components/native";
 import ManagerAppIcon from "../../../images/managerAppIcon.png";
 
 type Props = {
@@ -17,6 +19,14 @@ type Props = {
   size: number,
   radius: number,
 };
+
+const IconContainer = styled(Flex).attrs({
+  position: "absolute",
+  top: "6%",
+  left: "6%",
+  width: "90%",
+  height: "90%",
+})``;
 
 function AppIcon({ size = 38, app, icon: defaultIcon = "", radius = 14 }: Props) {
   const { currencyId, icon } = app || {};
@@ -31,21 +41,19 @@ function AppIcon({ size = 38, app, icon: defaultIcon = "", radius = 14 }: Props)
   const IconComponent = currency ? getCryptoCurrencyIcon(currency) : null;
 
   return IconComponent ? (
-    <View
-      style={[
-        styles.container,
-        {
-          width: size,
-          height: size,
-          backgroundColor: currencyColor,
-          borderRadius: radius,
-        },
-      ]}
+    <Flex
+      position="relative"
+      style={{
+        width: size,
+        height: size,
+        backgroundColor: currencyColor,
+        borderRadius: radius,
+      }}
     >
-      <View style={styles.innerContainer}>
+      <IconContainer>
         <IconComponent size={size * 0.9} color="#FFFFFF" />
-      </View>
-    </View>
+      </IconContainer>
+    </Flex>
   ) : uri ? (
     <Image
       source={{ uri }}
@@ -55,18 +63,5 @@ function AppIcon({ size = 38, app, icon: defaultIcon = "", radius = 14 }: Props)
     />
   ) : null;
 }
-
-const styles = StyleSheet.create({
-  container: {
-    position: "relative",
-  },
-  innerContainer: {
-    position: "absolute",
-    top: "6%",
-    left: "6%",
-    width: "90%",
-    height: "90%",
-  },
-});
 
 export default memo<Props>(AppIcon);

@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useMemo } from "react";
-import { StyleSheet, TouchableOpacity, Linking, View } from "react-native";
+import { TouchableOpacity, Linking } from "react-native";
 import { Trans } from "react-i18next";
 
 import type { State } from "@ledgerhq/live-common/lib/apps";
@@ -11,6 +11,7 @@ import { NavigatorName } from "../../../const";
 
 import AppIcon from "../AppsList/AppIcon";
 
+import styled from "styled-components/native";
 import ActionModal from "./ActionModal";
 import { Flex, Text, Button } from "@ledgerhq/native-ui";
 
@@ -19,6 +20,30 @@ type Props = {
   navigation: any,
   disable: boolean,
 };
+
+const TextContainer = styled(Flex).attrs({
+  marginTop: 4,
+  marginBottom: 32,
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center",
+})``;
+
+const ModalText = styled(Text).attrs({
+  textAlign: "center",
+  marginTop: 16,
+})``;
+
+const ButtonsContainer = styled(Flex).attrs({
+  marginBottom: 24,
+  width: "100%",
+})``;
+
+const CancelButton = styled(TouchableOpacity)`
+  align-items: center;
+  justify-content: center;
+  margin-top: 25;
+`;
 
 const InstallSuccessBar = ({ state, navigation, disable }: Props) => {
   const [hasBeenShown, setHasBeenShown] = useState(disable);
@@ -72,22 +97,20 @@ const InstallSuccessBar = ({ state, navigation, disable }: Props) => {
   return (
     <ActionModal isOpened={successInstalls.length >= 1} onClose={onClose} actions={[]}>
         <AppIcon app={app} size={48} radius={14} />
-        <View style={styles.textContainer}>
-          <Text
+        <TextContainer>
+          <ModalText
             color="neutral.c100"
             fontWeight="medium"
             variant="h2"
-            style={styles.text}
           >
             <Trans
               i18nKey="v3.AppAction.install.done.title"
             />
-          </Text>
-          <Text
+          </ModalText>
+          <ModalText
             color="neutral.c70"
             fontWeight="medium"
             variant="body"
-            style={styles.text}
           >
             {hasLiveSupported
               ? (
@@ -100,9 +123,9 @@ const InstallSuccessBar = ({ state, navigation, disable }: Props) => {
                 i18nKey="manager.installSuccess.notSupported"
               />
             )}
-          </Text>
-        </View>
-        <Flex style={[styles.buttonsContainer]}>
+          </ModalText>
+        </TextContainer>
+        <ButtonsContainer>
           {hasLiveSupported
             ? (
               <Button size="large" type="main" onPress={onAddAccount}>
@@ -113,47 +136,14 @@ const InstallSuccessBar = ({ state, navigation, disable }: Props) => {
               <Trans i18nKey="manager.installSuccess.learnMore" />
             </Button>
           )}
-          <TouchableOpacity style={styles.cancelButton} onPress={onClose}>
+          <CancelButton onPress={onClose}>
             <Text variant="large" fontWeight="semiBold" color="neutral.c100">
               <Trans i18nKey="common.cancel" />
             </Text>
-          </TouchableOpacity>
-        </Flex>
+          </CancelButton>
+        </ButtonsContainer>
   </ActionModal>
   );
 };
-
-const styles = StyleSheet.create({
-  iconContainer: {
-    marginVertical: 20,
-  },
-  text: {
-    textAlign: "center",
-    marginTop: 16,
-  },
-  textContainer: {
-    marginTop: 4,
-    marginBottom: 32,
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  buttonsContainer: {
-    marginBottom: 24,
-    width: "100%",
-  },
-  cancelButton: {
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: 25,
-  },
-  linkIconContainer: {
-    width: 32,
-    height: 32,
-    borderRadius: 16,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
 
 export default InstallSuccessBar;

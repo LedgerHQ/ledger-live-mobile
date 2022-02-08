@@ -1,7 +1,7 @@
 // @flow
 import React, { useMemo } from "react";
-import { TouchableOpacity, View, StyleSheet } from "react-native";
-import { useTheme } from "styled-components/native";
+import { TouchableOpacity } from "react-native";
+import styled, { useTheme } from "styled-components/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
@@ -16,50 +16,42 @@ import ReadOnlyTab from "../ReadOnlyTab";
 import NanoXIcon from "../../icons/TabNanoX";
 import { useIsNavLocked } from "./CustomBlockRouterNavigator";
 
-import { Box, Icons } from "@ledgerhq/native-ui";
+import { Box, Icons, Flex } from "@ledgerhq/native-ui";
+
+const BadgeContainer = styled(Flex).attrs({
+  position: "absolute",
+  top: -1,
+  right: -1,
+  width: 14,
+  height: 14,
+  borderRadius: 7,
+  borderWidth: 3,
+})``;
 
 const Badge = () => {
   const { colors } = useTheme();
   return (
-    <View
-      style={[
-        badgeStyles.root,
-        {
-          backgroundColor: colors.constant.purple,
-          borderColor: colors.background.main,
-        },
-      ]}
+    <BadgeContainer
+      style={{
+        backgroundColor: colors.constant.purple,
+        borderColor: colors.background.main,
+      }}
     />
   );
 };
-
-const badgeStyles = StyleSheet.create({
-  root: {
-    position: "absolute",
-    top: -1,
-    right: -1,
-    width: 14,
-    height: 14,
-    borderRadius: 7,
-    borderWidth: 3,
-  },
-});
 
 const ManagerIconWithUpate = ({
   color,
   size,
 }: {
-  color: string,
-  size: number,
-}) => {
-  const { colors } = useTheme();
-  return (
-    <Box>
-      <Icons.NanoFoldedMedium size={size} color={color} />
-      <Badge />
-    </Box>
-  );
-};
+  color: string;
+  size: number;
+}) => (
+  <Box>
+    <Icons.NanoFoldedMedium size={size} color={color} />
+    <Badge />
+  </Box>
+);
 
 export default function ManagerNavigator() {
   const { t } = useTranslation();
@@ -118,17 +110,3 @@ export function ManagerTabIcon(props: any) {
 
   return content;
 }
-
-const stylesLocal = StyleSheet.create({
-  blueDot: {
-    top: 0,
-    right: -10,
-    position: "absolute",
-    width: 6,
-    height: 6,
-    borderRadius: 4,
-  },
-  iconWrapper: {
-    position: "relative",
-  },
-});

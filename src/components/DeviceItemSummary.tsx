@@ -2,7 +2,6 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 import { useSelector } from "react-redux";
 import { Trans } from "react-i18next";
-import Icon from "react-native-vector-icons/dist/Feather";
 import { useTheme } from "@react-navigation/native";
 import { deviceNameByDeviceIdSelectorCreator } from "../reducers/ble";
 import Circle from "./Circle";
@@ -12,6 +11,7 @@ import IconNanoX from "../icons/NanoX";
 import Alert from "../icons/Alert";
 import { Text } from "@ledgerhq/native-ui";
 import { CircledCheckMedium } from "@ledgerhq/native-ui/assets/icons";
+import styled from "styled-components/native";
 
 type Props = {
   deviceId: string;
