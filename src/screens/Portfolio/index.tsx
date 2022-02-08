@@ -2,16 +2,14 @@ import React, { useRef, useCallback, useMemo } from "react";
 import { useSelector } from "react-redux";
 import { StyleSheet, FlatList, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import Animated, { interpolateNode } from "react-native-reanimated";
+import Animated from "react-native-reanimated";
 import { createNativeWrapper } from "react-native-gesture-handler";
 import { Trans, useTranslation } from "react-i18next";
 import { useFocusEffect, useTheme } from "@react-navigation/native";
 import { isAccountEmpty } from "@ledgerhq/live-common/lib/account";
 
 import { Box, Flex, Link, Text } from "@ledgerhq/native-ui";
-import { usePlatformApp } from "@ledgerhq/live-common/lib/platform/PlatformAppProvider";
-import useEnv from "@ledgerhq/live-common/lib/hooks/useEnv";
-import { filterPlatformApps } from "@ledgerhq/live-common/lib/platform/PlatformAppProvider/helpers";
+
 import {
   useRefreshAccountsOrdering,
   useDistribution,
@@ -32,11 +30,8 @@ import TrackScreen from "../../analytics/TrackScreen";
 import MigrateAccountsBanner from "../MigrateAccounts/Banner";
 import RequireTerms from "../../components/RequireTerms";
 import { useScrollToTop } from "../../navigation/utils";
-import { ScreenName } from "../../const";
-import { PortfolioHistoryList } from "./PortfolioHistory";
-
+import { NavigatorName, ScreenName } from "../../const";
 import FabActions from "../../components/FabActions";
-import LText from "../../components/LText";
 import FirmwareUpdateBanner from "../../components/FirmwareUpdateBanner";
 import DiscoverSection from "./DiscoverSection";
 
@@ -96,42 +91,54 @@ export default function PortfolioScreen({ navigation }: Props) {
     [navigation],
   );
 
+  const onDiscoverSeeAll = useCallback(() => {
+    navigation.navigate(NavigatorName.Platform);
+  }, [navigation]);
+
   const data = useMemo(
     () => [
-      <GraphCardContainer
-        counterValueCurrency={counterValueCurrency}
-        portfolio={portfolio}
-        showGreeting={!areAccountsEmpty}
-        showGraphCard={!areAccountsEmpty}
-      />,
-      accounts.length > 0 && <FabActions />,
-      <Flex>
-        <Flex
-          flexDirection={"row"}
-          justifyContent={"space-between"}
-          alignItems={"center"}
-          mb={6}
-        >
-          <Text variant={"h3"} textTransform={"uppercase"} mt={2}>
-            <Trans i18nKey={"tabs.platform"} />
-          </Text>
-          <Link type={"color"}>
-            <Trans i18nKey={"common.seeAll"} />
-          </Link>
+      <Box mx={6}>
+        <GraphCardContainer
+          counterValueCurrency={counterValueCurrency}
+          portfolio={portfolio}
+          showGreeting={!areAccountsEmpty}
+          showGraphCard={!areAccountsEmpty}
+        />
+      </Box>,
+      accounts.length > 0 && (
+        <Box mx={6} mt={6}>
+          <FabActions />
+        </Box>
+      ),
+      accounts.length > 0 && (
+        <Flex mx={6} mt={10}>
+          <Flex
+            flexDirection={"row"}
+            justifyContent={"space-between"}
+            alignItems={"center"}
+            mb={6}
+          >
+            <Text variant={"h3"} textTransform={"uppercase"} mt={2}>
+              <Trans i18nKey={"tabs.platform"} />
+            </Text>
+            <Link onPress={onDiscoverSeeAll} type={"color"}>
+              <Trans i18nKey={"common.seeAll"} />
+            </Link>
+          </Flex>
+          <DiscoverSection />
         </Flex>
-        <DiscoverSection />
-      </Flex>,
+      ),
       accounts.length > 0 && !areAccountsEmpty ? (
-        <Flex borderWidth={"1px"} borderColor={"red"}>
+        <Flex mx={6} mt={10}>
           <Text variant={"h3"} textTransform={"uppercase"} mb={6}>
-            <Trans i18nKey={"tabs.platform"} />
+            <Trans i18nKey={"v3.portfolio.recommanded.title"} />
           </Text>
           <Carousel />
         </Flex>
       ) : null,
       ...(showDistribution
         ? [
-            <View style={styles.distrib}>
+            <Box mx={6} mt={10}>
               <Text variant={"h3"} textTransform={"uppercase"}>
                 {t("distribution.header")}
               </Text>
@@ -148,10 +155,9 @@ export default function PortfolioScreen({ navigation }: Props) {
                   onPress={onDistributionButtonPress}
                 />
               </View>
-            </View>,
+            </Box>,
           ]
         : []),
-      <PortfolioHistoryList navigation={navigation} />,
     ],
     [
       accounts.length,

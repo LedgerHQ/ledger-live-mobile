@@ -1,11 +1,11 @@
 import React, { useCallback } from "react";
-import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
+import { TouchableWithoutFeedback } from "react-native";
 import { useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 import { useGlobalSyncState } from "@ledgerhq/live-common/lib/bridge/react";
 import { useAnnouncements } from "@ledgerhq/live-common/lib/notifications/AnnouncementProvider";
 import { useFilteredServiceStatus } from "@ledgerhq/live-common/lib/notifications/ServiceStatusProvider";
-import { Box, Flex, Text } from "@ledgerhq/native-ui";
+import { Box, Flex } from "@ledgerhq/native-ui";
 import {
   NotificationsMedium,
   NotificationsOnMedium,
@@ -19,14 +19,9 @@ import { networkErrorSelector } from "../../reducers/appstate";
 import HeaderErrorTitle from "../../components/HeaderErrorTitle";
 import HeaderSynchronizing from "../../components/HeaderSynchronizing";
 import Touchable from "../../components/Touchable";
-import BellIcon from "../../icons/Bell";
-import SettingsIcon from "../../icons/Settings";
 import { NavigatorName, ScreenName } from "../../const";
 import { scrollToTop } from "../../navigation/utils";
-import LText from "../../components/LText";
-import Warning from "../../icons/WarningOutline";
 import LiveLogo from "../../icons/LiveLogo";
-import LiveLogoIcon from "../../icons/LiveLogoIcon";
 
 type HeaderInformationProps = { isLoading: boolean; error?: Error | null };
 const HeaderInformation = ({ isLoading, error }: HeaderInformationProps) => {
@@ -41,7 +36,6 @@ const HeaderInformation = ({ isLoading, error }: HeaderInformationProps) => {
 };
 
 export default function PortfolioHeader() {
-  const { colors } = useTheme();
   const navigation = useNavigation();
 
   const { allIds, seenIds } = useAnnouncements();
@@ -68,14 +62,14 @@ export default function PortfolioHeader() {
   const notificationsCount = allIds.length - seenIds.length;
 
   return (
-    <Flex flexDirection={"row"} alignItems={"center"} px={6}>
+    <Flex flexDirection={"row"} alignItems={"center"}>
       <TouchableWithoutFeedback onPress={scrollToTop}>
-        <View style={styles.content}>
+        <Box flexGrow={1} flexShrink={1}>
           <HeaderInformation
             isLoading={pending && !isUpToDate}
             error={networkError || error}
           />
-        </View>
+        </Box>
       </TouchableWithoutFeedback>
       <Box mr={7}>
         <Touchable>
@@ -106,36 +100,3 @@ export default function PortfolioHeader() {
     </Flex>
   );
 }
-
-const styles = StyleSheet.create({
-  wrapper: {
-    flexDirection: "row",
-    alignItems: "center",
-    paddingRight: 16,
-  },
-  content: {
-    flexGrow: 1,
-    flexShrink: 1,
-  },
-  distributionButton: {
-    alignItems: "center",
-    justifyContent: "center",
-    width: 32,
-    height: 32,
-    borderRadius: 32,
-    alignSelf: "center",
-  },
-  marginLeft: { marginLeft: 8 },
-  badge: {
-    width: 16,
-    height: 16,
-    borderRadius: 15,
-    position: "absolute",
-    alignItems: "center",
-    justifyContent: "center",
-    top: -8,
-    right: -8,
-    zIndex: 2,
-  },
-  badgeLabel: { fontSize: 8, color: "#FFF" },
-});
