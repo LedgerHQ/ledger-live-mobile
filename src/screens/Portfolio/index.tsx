@@ -24,7 +24,6 @@ import GraphCardContainer from "./GraphCardContainer";
 import { DistributionList } from "../Distribution";
 import Carousel from "../../components/Carousel";
 import Button from "../../components/Button";
-import StickyHeader from "./StickyHeader";
 import Header from "./Header";
 import extraStatusBarPadding from "../../logic/extraStatusBarPadding";
 import TrackScreen from "../../analytics/TrackScreen";
@@ -106,10 +105,6 @@ export default function PortfolioScreen({ navigation }: Props) {
   const scrollY = useRef(new Animated.Value(0)).current;
   const ref = useRef();
   useScrollToTop(ref);
-  const { colors } = useTheme();
-
-  const showingPlaceholder =
-    accounts.length === 0 || accounts.every(isAccountEmpty);
 
   const areAccountsEmpty = useMemo(() => accounts.every(isAccountEmpty), [
     accounts,
@@ -216,13 +211,6 @@ export default function PortfolioScreen({ navigation }: Props) {
     <>
       <FirmwareUpdateBanner />
       <ContentContainer>
-        {/* {!showingPlaceholder ? ( */}
-        {/*  <StickyHeader */}
-        {/*    scrollY={scrollY} */}
-        {/*    portfolio={portfolio} */}
-        {/*    counterValueCurrency={counterValueCurrency} */}
-        {/*  /> */}
-        {/* ) : null} */}
 
         <RequireTerms />
 
