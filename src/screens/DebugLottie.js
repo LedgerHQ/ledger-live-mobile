@@ -127,7 +127,7 @@ const DebugLottie = () => {
         <Button
           type="primary"
           title="blue"
-          disabled={Config.OVERRIDE_MODEL_ID}
+          disabled
           onPress={() => {
             setModelId("blue");
           }}
