@@ -43,7 +43,7 @@ const DebugLottie = () => {
     [],
   );
 
-  const [modelId, setModelId] = useState("nanoX");
+  const [modelId, setModelId] = useState(Config.OVERRIDE_MODEL_ID);
   const [wired, setWired] = useState(false);
   const [key, setKey] = useState<any>("enterPinCode");
   const [keyModalVisible, setKeyModalVisible] = useState(false);
