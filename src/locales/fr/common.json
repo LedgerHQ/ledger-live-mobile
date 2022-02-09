@@ -2880,12 +2880,12 @@
     "switchButton": "Basculer en {{language}}",
     "no": "Non, merci",
     "languages": {
-      "en": "English",
+      "en": "Anglais",
       "fr": "Français",
-      "ru": "Русский",
-      "es": "Español",
-      "zh": "中文（简体）",
-      "de": "Deutsch"
+      "ru": "Russe",
+      "es": "Espagnol",
+      "zh": "Chinois",
+      "de": "Allemand"
     }
   },
   "FirmwareUpdateCheckId": {
