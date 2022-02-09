@@ -2656,7 +2656,7 @@
     }
   },
   "EditDeviceName": {
-    "title": "Cihazı yeniden adlandırın",
+    "title": "Cihazın adını değiştirin",
     "charactersRemaining": "{{remainingCount}} karakter kaldı",
     "action": "Onayla"
   },
