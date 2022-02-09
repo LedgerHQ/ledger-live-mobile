@@ -34,6 +34,7 @@ import { NavigatorName, ScreenName } from "../../const";
 import FabActions from "../../components/FabActions";
 import FirmwareUpdateBanner from "../../components/FirmwareUpdateBanner";
 import DiscoverSection from "./DiscoverSection";
+import Assets from "./Assets";
 
 export { default as PortfolioTabIcon } from "./TabIcon";
 
@@ -44,6 +45,7 @@ const AnimatedFlatListWithRefreshControl = createNativeWrapper(
     shouldCancelWhenOutside: false,
   },
 );
+
 type Props = {
   navigation: any;
 };
@@ -95,6 +97,10 @@ export default function PortfolioScreen({ navigation }: Props) {
     navigation.navigate(NavigatorName.Platform);
   }, [navigation]);
 
+  const onAnalytics = useCallback(() => {
+    navigation.navigate(NavigatorName.Analytics);
+  }, [navigation]);
+
   const data = useMemo(
     () => [
       <Box mx={6}>
@@ -103,6 +109,7 @@ export default function PortfolioScreen({ navigation }: Props) {
           portfolio={portfolio}
           showGreeting={!areAccountsEmpty}
           showGraphCard={!areAccountsEmpty}
+          onAnalytics={onAnalytics}
         />
       </Box>,
       accounts.length > 0 && (
@@ -110,6 +117,26 @@ export default function PortfolioScreen({ navigation }: Props) {
           <FabActions />
         </Box>
       ),
+      ...(showDistribution
+        ? [
+            <Flex mx={6} mt={10}>
+              <Flex
+                flexDirection={"row"}
+                justifyContent={"space-between"}
+                alignItems={"center"}
+                mb={6}
+              >
+                <Text variant={"h3"} textTransform={"uppercase"} mt={2}>
+                  <Trans i18nKey={"v3.distribution.title"} />
+                </Text>
+                <Link onPress={onDistributionCardPress} type={"color"}>
+                  <Trans i18nKey={"common.seeAll"} />
+                </Link>
+              </Flex>
+              <Assets flatListRef={flatListRef} distribution={distribution} />
+            </Flex>,
+          ]
+        : []),
       accounts.length > 0 && (
         <Flex mx={6} mt={10}>
           <Flex
@@ -136,28 +163,6 @@ export default function PortfolioScreen({ navigation }: Props) {
           <Carousel />
         </Flex>
       ) : null,
-      ...(showDistribution
-        ? [
-            <Box mx={6} mt={10}>
-              <Text variant={"h3"} textTransform={"uppercase"}>
-                {t("distribution.header")}
-              </Text>
-              <DistributionList
-                flatListRef={flatListRef}
-                distribution={distribution}
-                setHighlight={onDistributionCardPress}
-              />
-              <View style={styles.seeMoreBtn}>
-                <Button
-                  event="View Distribution"
-                  type="lightPrimary"
-                  title={t("common.seeAll")}
-                  onPress={onDistributionButtonPress}
-                />
-              </View>
-            </Box>,
-          ]
-        : []),
     ],
     [
       accounts.length,

@@ -5408,6 +5408,7 @@
     },
     "distribution": {
       "header": "Asset allocation",
+      "title": "Assets",
       "list": "Asset allocation ({{count}})",
       "assets": "asset",
       "assets_plural": "assets",

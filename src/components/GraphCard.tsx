@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import { View } from "react-native";
+import { View, TouchableOpacity } from "react-native";
 import { Currency, Unit } from "@ledgerhq/live-common/lib/types";
 import {
   Portfolio,
@@ -20,12 +20,14 @@ type Props = {
   counterValueCurrency: Currency;
   useCounterValue?: boolean;
   renderTitle?: ({ counterValueUnit: Unit, item: Item }) => ReactNode;
+  onAnalytics: Function;
 };
 
 export default function GraphCard({
   portfolio,
   renderTitle,
   counterValueCurrency,
+  onAnalytics,
 }: Props) {
   const { countervalueChange } = portfolio;
 
@@ -40,6 +42,7 @@ export default function GraphCard({
         to={balanceHistory[balanceHistory.length - 1]}
         unit={counterValueCurrency.units[0]}
         renderTitle={renderTitle}
+        onAnalytics={onAnalytics}
       />
     </Flex>
   );
@@ -51,12 +54,14 @@ function GraphCardHeader({
   renderTitle,
   isLoading,
   to,
+  onAnalytics,
 }: {
   isLoading: boolean;
   valueChange: ValueChange;
   unit: Unit;
   to: Item;
   renderTitle?: ({ counterValueUnit: Unit, item: Item }) => ReactNode;
+  onAnalytics: Function;
 }) {
   const item = to;
 
@@ -77,7 +82,6 @@ function GraphCardHeader({
           >
             Portfolio
             <Trans key={"tabs.portfolio"} />
-            qsqsds
           </Text>
           <DiscreetModeButton size={20} />
         </Flex>
@@ -112,7 +116,7 @@ function GraphCardHeader({
           )}
         </Flex>
       </Flex>
-      <Flex>
+      <TouchableOpacity onPress={onAnalytics}>
         <BoxedIcon
           Icon={PieChartMedium}
           variant={"circle"}
@@ -121,7 +125,7 @@ function GraphCardHeader({
           badgeSize={30}
           iconColor={"neutral.c100"}
         />
-      </Flex>
+      </TouchableOpacity>
     </Flex>
   );
 }

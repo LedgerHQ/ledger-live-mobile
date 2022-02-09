@@ -12,10 +12,12 @@ const GraphCardContainer = ({
   portfolio,
   showGraphCard,
   counterValueCurrency,
+  onAnalytics,
 }: {
   portfolio: Portfolio;
   showGraphCard: boolean;
   counterValueCurrency: Currency;
+  onAnalytics: Function;
 }) => {
   const currencies = useSelector(currenciesSelector);
 
@@ -30,6 +32,7 @@ const GraphCardContainer = ({
           <GraphCard
             counterValueCurrency={counterValueCurrency}
             portfolio={portfolio}
+            onAnalytics={onAnalytics}
           />
         </Box>
       )}
