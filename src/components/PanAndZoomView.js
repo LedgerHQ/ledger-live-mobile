@@ -7,7 +7,7 @@ import {
   PanGestureHandler,
   State,
 } from "react-native-gesture-handler";
-import Animated from "react-native-reanimated";
+import { Animated } from "react-native";
 
 const PanAndZoomView = ({ children }: { children: React$Node }) => {
   // normal number used to store the current scale and update the corresponding animated value
