@@ -4,15 +4,9 @@
 /* eslint-disable import/no-unresolved */
 import React, { useMemo, useCallback, useState, useEffect } from "react";
 import { useTheme } from "styled-components/native";
-import {
-  Flex,
-  Text,
-  ScrollContainerHeader,
-  Icons,
-  Icon,
-} from "@ledgerhq/native-ui";
+import { Flex, Text, ScrollContainerHeader, Icons } from "@ledgerhq/native-ui";
 import { useDispatch, useSelector } from "react-redux";
-import { useTranslation, TFunction } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import {
   useMarketData,
   useSingleCoinMarketData,
@@ -185,19 +179,14 @@ export default function MarketDetail({
   */
 
   const navigateToSwap = useCallback(() => {
-    if (allAccounts && allAccounts.length === 1) {
-      navigation.navigate(NavigatorName.Swap, {
-        screen: ScreenName.Swap,
-      });
-    } else {
-      navigation.navigate(NavigatorName.AddAccounts, {
-        screen: ScreenName.AddAccountsSelectDevice,
-        params: {
-          currency: internalCurrency,
-        },
-      });
-    }
-  }, [navigation, internalCurrency, allAccounts]);
+    navigation.navigate(NavigatorName.Swap, {
+      screen: ScreenName.Swap,
+      params: {
+        defaultAccount:
+          allAccounts && allAccounts.length > 0 ? allAccounts[0] : undefined,
+      },
+    });
+  }, [navigation, allAccounts]);
 
   useEffect(() => {
     if (name) {
