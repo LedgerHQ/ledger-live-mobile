@@ -1317,10 +1317,10 @@
     "d": "",
     "K": "k",
     "M": "M",
-    "B": "MRD",
-    "T": "BILN",
-    "Q": "BLRD",
-    "Qn": "TRI"
+    "B": "Mrd",
+    "T": "billions",
+    "Q": "billiards",
+    "Qn": "trillions"
   },
   "time": {
     "day": "1J",
@@ -3884,7 +3884,7 @@
         "market_cap_asc": "Rang (capit.) asc.",
         "market_cap_desc": "Rang (capit.) desc."
       },
-      "currency": "Devise",
+      "currency": "Monnaie",
       "time": "Période",
       "apply": "Appliquer"
     },
