@@ -1,5 +1,5 @@
-import React, { ReactNode } from "react";
-import { View } from "react-native";
+import React, { ReactNode, useCallback } from "react";
+import { TouchableOpacity, View } from "react-native";
 import { Currency, Unit } from "@ledgerhq/live-common/lib/types";
 import {
   Portfolio,
@@ -14,6 +14,8 @@ import TransactionsPendingConfirmationWarning from "./TransactionsPendingConfirm
 import CurrencyUnitValue from "./CurrencyUnitValue";
 import Placeholder from "./Placeholder";
 import DiscreetModeButton from "./DiscreetModeButton";
+import { useNavigation } from "@react-navigation/native";
+import { NavigatorName, ScreenName } from "../const";
 
 type Props = {
   portfolio: Portfolio;
@@ -59,6 +61,11 @@ function GraphCardHeader({
   renderTitle?: ({ counterValueUnit: Unit, item: Item }) => ReactNode;
 }) {
   const item = to;
+  const navigation = useNavigation();
+
+  const onPieChartButtonpress = useCallback(() => {
+    navigation.navigate(NavigatorName.Analytics);
+  }, [navigation]);
 
   return (
     <Flex
@@ -75,9 +82,7 @@ function GraphCardHeader({
             textTransform={"uppercase"}
             mr={2}
           >
-            Portfolio
-            <Trans key={"tabs.portfolio"} />
-            qsqsds
+            <Trans i18nKey={"tabs.portfolio"} />
           </Text>
           <DiscreetModeButton size={20} />
         </Flex>
@@ -113,14 +118,16 @@ function GraphCardHeader({
         </Flex>
       </Flex>
       <Flex>
-        <BoxedIcon
-          Icon={PieChartMedium}
-          variant={"circle"}
-          iconSize={20}
-          size={48}
-          badgeSize={30}
-          iconColor={"neutral.c100"}
-        />
+        <TouchableOpacity onPress={onPieChartButtonpress}>
+          <BoxedIcon
+            Icon={PieChartMedium}
+            variant={"circle"}
+            iconSize={20}
+            size={48}
+            badgeSize={30}
+            iconColor={"neutral.c100"}
+          />
+        </TouchableOpacity>
       </Flex>
     </Flex>
   );

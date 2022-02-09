@@ -10,6 +10,7 @@ import { isAccountEmpty } from "@ledgerhq/live-common/lib/account";
 
 import { Box, Flex, Link, Text } from "@ledgerhq/native-ui";
 
+import styled from "styled-components/native";
 import {
   useRefreshAccountsOrdering,
   useDistribution,
@@ -46,6 +47,51 @@ const AnimatedFlatListWithRefreshControl = createNativeWrapper(
 );
 type Props = {
   navigation: any;
+};
+
+const ContentContainer = styled.SafeAreaView`
+  flex: 1;
+  background-color: ${p => p.theme.colors.palette.background.main};
+  padding-top: ${() => extraStatusBarPadding}px;
+`;
+
+const SectionTitle = ({
+  title,
+  onSeeAllPress,
+  navigatorName,
+  navigation,
+}: {
+  title: React.ReactElement;
+  onSeeAllPress?: () => void;
+  navigatorName?: keyof typeof NavigatorName;
+  navigation?: any;
+}) => {
+  const onLinkPress = useCallback(() => {
+    if (onSeeAllPress) {
+      onSeeAllPress();
+    }
+    if (navigation && navigatorName) {
+      navigation.navigate(navigatorName);
+    }
+  }, [navigation, onSeeAllPress, navigatorName]);
+
+  return (
+    <Flex
+      flexDirection={"row"}
+      justifyContent={"space-between"}
+      alignItems={"center"}
+      mb={6}
+    >
+      <Text variant={"h3"} textTransform={"uppercase"} mt={2}>
+        {title}
+      </Text>
+      {(onSeeAllPress || navigatorName) && (
+        <Link onPress={onLinkPress} type={"color"}>
+          <Trans i18nKey={"common.seeAll"} />
+        </Link>
+      )}
+    </Flex>
+  );
 };
 
 export default function PortfolioScreen({ navigation }: Props) {
@@ -91,13 +137,14 @@ export default function PortfolioScreen({ navigation }: Props) {
     [navigation],
   );
 
-  const onDiscoverSeeAll = useCallback(() => {
-    navigation.navigate(NavigatorName.Platform);
-  }, [navigation]);
-
   const data = useMemo(
     () => [
-      <Box mx={6}>
+      !areAccountsEmpty && (
+        <Box bg={"background.main"} mx={6} py={6}>
+          <Header />
+        </Box>
+      ),
+      <Box mx={6} mt={3}>
         <GraphCardContainer
           counterValueCurrency={counterValueCurrency}
           portfolio={portfolio}
@@ -112,27 +159,19 @@ export default function PortfolioScreen({ navigation }: Props) {
       ),
       accounts.length > 0 && (
         <Flex mx={6} mt={10}>
-          <Flex
-            flexDirection={"row"}
-            justifyContent={"space-between"}
-            alignItems={"center"}
-            mb={6}
-          >
-            <Text variant={"h3"} textTransform={"uppercase"} mt={2}>
-              <Trans i18nKey={"tabs.platform"} />
-            </Text>
-            <Link onPress={onDiscoverSeeAll} type={"color"}>
-              <Trans i18nKey={"common.seeAll"} />
-            </Link>
-          </Flex>
+          <SectionTitle
+            title={<Trans i18nKey={"tabs.platform"} />}
+            navigation={navigation}
+            navigatorName={NavigatorName.Platform}
+          />
           <DiscoverSection />
         </Flex>
       ),
       accounts.length > 0 && !areAccountsEmpty ? (
         <Flex mx={6} mt={10}>
-          <Text variant={"h3"} textTransform={"uppercase"} mb={6}>
-            <Trans i18nKey={"v3.portfolio.recommanded.title"} />
-          </Text>
+          <SectionTitle
+            title={<Trans i18nKey={"v3.portfolio.recommanded.title"} />}
+          />
           <Carousel />
         </Flex>
       ) : null,
@@ -176,22 +215,14 @@ export default function PortfolioScreen({ navigation }: Props) {
   return (
     <>
       <FirmwareUpdateBanner />
-      <SafeAreaView
-        style={[
-          styles.root,
-          {
-            paddingTop: extraStatusBarPadding,
-            backgroundColor: colors.background,
-          },
-        ]}
-      >
-        {!showingPlaceholder ? (
-          <StickyHeader
-            scrollY={scrollY}
-            portfolio={portfolio}
-            counterValueCurrency={counterValueCurrency}
-          />
-        ) : null}
+      <ContentContainer>
+        {/* {!showingPlaceholder ? ( */}
+        {/*  <StickyHeader */}
+        {/*    scrollY={scrollY} */}
+        {/*    portfolio={portfolio} */}
+        {/*    counterValueCurrency={counterValueCurrency} */}
+        {/*  /> */}
+        {/* ) : null} */}
 
         <RequireTerms />
 
@@ -206,6 +237,7 @@ export default function PortfolioScreen({ navigation }: Props) {
           renderItem={({ item }) => item}
           keyExtractor={(item, index) => String(index)}
           showsVerticalScrollIndicator={false}
+          stickyHeaderIndices={[0]}
           onScroll={Animated.event(
             [
               {
@@ -221,7 +253,7 @@ export default function PortfolioScreen({ navigation }: Props) {
           }
         />
         <MigrateAccountsBanner />
-      </SafeAreaView>
+      </ContentContainer>
     </>
   );
 }
