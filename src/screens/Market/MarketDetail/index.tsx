@@ -182,8 +182,7 @@ export default function MarketDetail({
     navigation.navigate(NavigatorName.Swap, {
       screen: ScreenName.Swap,
       params: {
-        defaultAccount:
-          allAccounts?.length > 0 ? allAccounts[0] : undefined,
+        defaultAccount: allAccounts?.length > 0 ? allAccounts[0] : undefined,
       },
     });
   }, [navigation, allAccounts]);
