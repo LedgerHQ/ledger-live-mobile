@@ -33,43 +33,43 @@ if ! [ -x "$(command -v bundle)" ]; then
   echo 'Error: `bundle` command is missing. Please install Bundler. https://bundler.io' >&2
   exit 1
 fi
-bundle install
+# bundle install
 
-if [ "$(uname)" == "Darwin" ]; then
-  (
-    cd node_modules/react-native/scripts
-    echo "- switch to relative paths in react_native_pods.rb "
-    sed -i '' -e "s/File[.]join[(]__dir__, \"[.][.]\"[)]/\"..\/..\/node_modules\/react-native\"/" react_native_pods.rb
-    sed -i '' -e "s/#{File[.]join[(]__dir__, \"generate-specs.sh\"[)]}/..\/..\/node_modules\/react-native\/scripts\/generate-specs.sh/" react_native_pods.rb
-    sed -i '' -e "s/spec[.]prepare_command = \"#/spec.prepare_command = \"cd ..\/.. \&\& #/" react_native_pods.rb
-  )
+# if [ "$(uname)" == "Darwin" ]; then
+#   (
+#     cd node_modules/react-native/scripts
+#     echo "- switch to relative paths in react_native_pods.rb "
+#     sed -i '' -e "s/File[.]join[(]__dir__, \"[.][.]\"[)]/\"..\/..\/node_modules\/react-native\"/" react_native_pods.rb
+#     sed -i '' -e "s/#{File[.]join[(]__dir__, \"generate-specs.sh\"[)]}/..\/..\/node_modules\/react-native\/scripts\/generate-specs.sh/" react_native_pods.rb
+#     sed -i '' -e "s/spec[.]prepare_command = \"#/spec.prepare_command = \"cd ..\/.. \&\& #/" react_native_pods.rb
+#   )
 
-  cd ios && bundle exec pod install --deployment --repo-update
+#   cd ios && bundle exec pod install --deployment --repo-update
 
-  if [ $? -ne 0 ]; then
-    echo "
-     _________________________________________
-    / CocoaPods lockfile is probably out of   \\
-    | sync with native dependencies. Don't    |
-    | forget to run \`yarn pod\` after adding   |
-    | or updating dependencies, and commit    |
-    \\ the changes in Podfile.lock.            /
-     -----------------------------------------
-      \\
-       \\
-         __
-        /  \\
-        |  |
-        @  @
-        |  |
-        || |/
-        || ||
-        |\\_/|
-        \\___/
-    " >&2
-    exit 1
-  fi
-fi
+#   if [ $? -ne 0 ]; then
+#     echo "
+#      _________________________________________
+#     / CocoaPods lockfile is probably out of   \\
+#     | sync with native dependencies. Don't    |
+#     | forget to run \`yarn pod\` after adding   |
+#     | or updating dependencies, and commit    |
+#     \\ the changes in Podfile.lock.            /
+#      -----------------------------------------
+#       \\
+#        \\
+#          __
+#         /  \\
+#         |  |
+#         @  @
+#         |  |
+#         || |/
+#         || ||
+#         |\\_/|
+#         \\___/
+#     " >&2
+#     exit 1
+#   fi
+# fi
 
 # We manually need to run Jetifier for React Native BLE PLX until they switch to AndroidX
 # https://github.com/Polidea/react-native-ble-plx#android-example-setup
