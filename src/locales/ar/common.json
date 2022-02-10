@@ -2578,6 +2578,7 @@
     "quitApp": "الخروج من التطبيق على جهازك",
     "appNotInstalled": "يُرجى تثبيت تطبيق {{appName}}",
     "appNotInstalled_plural": "الرجاء تثبيت تطبيقات {{appName}}",
+    "useAnotherDevice": "Use another device",
     "verifyAddress": {
       "title": "تحقق من العنوان على الجهاز",
       "description": "يرجى التحقق من أن العنوان {{currencyName}} الذي سيتم عرضه في ليدجر لايف يطابق العنوان الموجود على جهاز ليدجر الخاص بك."
