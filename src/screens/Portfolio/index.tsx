@@ -112,8 +112,6 @@ export default function PortfolioScreen({ navigation }: Props) {
     accounts,
   ]);
 
-  const showAssets = accounts.length > 0;
-
   const flatListRef = useRef();
   let distribution = useDistribution();
   const maxDistributionToDisplay = 3;
@@ -122,11 +120,8 @@ export default function PortfolioScreen({ navigation }: Props) {
     list: distribution.list.slice(0, maxDistributionToDisplay),
   };
 
-<<<<<<< HEAD
   const showAssets = accounts.length > 0;
 
-=======
->>>>>>> fafa1242 (LIVE-230 Assets Row in progress)
   const maxAssetsToDisplay = 3;
   const assetsToDisplay = accounts.slice(0, maxAssetsToDisplay);
 
@@ -177,29 +172,12 @@ export default function PortfolioScreen({ navigation }: Props) {
       ...(showAssets
         ? [
             <Flex mx={6} mt={10}>
-<<<<<<< HEAD
               <SectionTitle
                 title={<Trans i18nKey={"v3.distribution.title"} />}
                 navigation={navigation}
                 navigatorName={NavigatorName.Accounts}
               />
               <Assets balanceHistory={portfolio.balanceHistory} flatListRef={flatListRef} assets={assetsToDisplay} />
-=======
-              <Flex
-                flexDirection={"row"}
-                justifyContent={"space-between"}
-                alignItems={"center"}
-                mb={6}
-              >
-                <Text variant={"h3"} textTransform={"uppercase"} mt={2}>
-                  <Trans i18nKey={"v3.distribution.title"} />
-                </Text>
-                <Link onPress={onDistributionCardPress} type="color">
-                  <Trans i18nKey={"common.seeAll"} />
-                </Link>
-              </Flex>
-              <Assets flatListRef={flatListRef} assets={assetsToDisplay} />
->>>>>>> fafa1242 (LIVE-230 Assets Row in progress)
             </Flex>,
           ]
         : []),
@@ -221,18 +199,12 @@ export default function PortfolioScreen({ navigation }: Props) {
     [
       accounts.length,
       areAccountsEmpty,
+      assetsToDisplay,
       counterValueCurrency,
-      distribution,
       navigation,
       onAnalytics,
-      onDistributionCardPress,
       portfolio,
-<<<<<<< HEAD
-      showDistribution,
-=======
       showAssets,
-      t,
->>>>>>> fafa1242 (LIVE-230 Assets Row in progress)
     ],
   );
 
