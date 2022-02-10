@@ -2578,6 +2578,7 @@
     "quitApp": "Beenden Sie die Anwendung auf Ihrem Gerät",
     "appNotInstalled": "Bitte installieren Sie die {{appName}} App",
     "appNotInstalled_plural": "Bitte installieren Sie die {{appName}} Apps",
+    "useAnotherDevice": "Use another device",
     "verifyAddress": {
       "title": "Adresse auf dem Gerät verifizieren",
       "description": "Bitte stellen Sie sicher, dass die {{currencyName}} Adresse, die in Ledger Live angezeigt wird, mit der auf Ihrem Ledger Gerät übereinstimmt."
