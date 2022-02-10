@@ -24,7 +24,7 @@
       "build": "cd android && ENVFILE=.env.mock ./gradlew assembleDebug assembleAndroidTest -DtestBuildType=debug && cd ..",
       "type": "android.emulator",
       "device": {
-        "avdName": "Nexus_5X_API_29_x86"
+        "avdName": "emu"
       }
     },
     "android.staging": {
@@ -33,7 +33,7 @@
       "build": "cd android && ENVFILE=.env.mock ./gradlew assembleStagingRelease assembleAndroidTest -DtestBuildType=stagingRelease && cd ..",
       "type": "android.emulator",
       "device": {
-        "avdName": "Nexus_5X_API_29_x86"
+        "avdName": "emu"
       }
     }
   }
