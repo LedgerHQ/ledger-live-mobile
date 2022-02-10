@@ -62,6 +62,7 @@ function EmptyStatePortfolio({ navigation, showHelp = true }: Props) {
               }`}
             />
           </LText>
+
           <View style={styles.containerCTA}>
             {hasInstalledAnyApp ? (
               <>

@@ -1,22 +1,27 @@
-import { useEffect } from "react";
+import { ReactNode, useEffect } from "react";
 import remoteConfig from "@react-native-firebase/remote-config";
 import { defaultFeatures } from "@ledgerhq/live-common/lib/featureFlags";
 import { reduce } from "lodash";
+import { FeatureId, DefaultFeatures } from "@ledgerhq/live-common/lib/types";
 
-export const formatFeatureId = id => `feature_${id}`;
+export const formatFeatureId = (id: FeatureId) => `feature_${id}`;
 
 // Firebase SDK treat JSON values as strings
-const formatDefaultFeatures = config =>
+const formatDefaultFeatures = (config: DefaultFeatures) =>
   reduce(
     config,
     (acc, feature, featureId) => ({
       ...acc,
-      [formatFeatureId(featureId)]: JSON.stringify(feature),
+      [formatFeatureId(featureId as FeatureId)]: JSON.stringify(feature),
     }),
     {},
   );
 
-export const FirebaseRemoteConfigProvider = ({ children }) => {
+type Props = {
+  children?: ReactNode;
+};
+
+export const FirebaseRemoteConfigProvider = ({ children }: Props) => {
   useEffect(() => {
     const fetchConfig = async () => {
       await remoteConfig().setDefaults({
