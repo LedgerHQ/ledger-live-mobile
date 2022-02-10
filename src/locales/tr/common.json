@@ -2578,6 +2578,7 @@
     "quitApp": "Cihazınızdaki uygulamadan çıkın",
     "appNotInstalled": "Lütfen {{appName}} uygulamasını yükleyin",
     "appNotInstalled_plural": "Lütfen {{appName}} uygulamalarını yükleyin",
+    "useAnotherDevice": "Use another device",
     "verifyAddress": {
       "title": "Cihazda adresi doğrulayın",
       "description": "Ledger Live'da gösterilecek {{currencyName}} adresinin Ledger cihazınızdaki adresle eşleştiğini lütfen doğrulayın."
