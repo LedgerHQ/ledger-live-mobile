@@ -2578,6 +2578,7 @@
     "quitApp": "장치에서 앱을 중단하세요",
     "appNotInstalled": "{{appName}} 앱을 설치하세요",
     "appNotInstalled_plural": "{{appName}} 앱을 설치하세요",
+    "useAnotherDevice": "Use another device",
     "verifyAddress": {
       "title": "장치에서 주소 확인",
       "description": "Ledger Live에서 보이는 {{currencyName}}(이)가 Ledger 장치와 정확히 일치하는지 확인하세요."
