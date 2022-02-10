@@ -123,7 +123,9 @@ export default function MarketDetail({
     swapSelectableCurrenciesSelector(state),
   );
   const availableOnSwap =
-    internalCurrency && swapCurrencies.includes(internalCurrency.id);
+    internalCurrency &&
+    allAccounts?.length > 0 &&
+    swapCurrencies.includes(internalCurrency.id);
 
   const toggleStar = useCallback(() => {
     const action = isStarred ? removeStarredMarketCoins : addStarredMarketCoins;
