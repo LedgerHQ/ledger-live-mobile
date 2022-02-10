@@ -1,6 +1,7 @@
 #!/bin/bash
 
 cd $(dirname $0)/..
+projRootDir=$(pwd)
 
 ./scripts/sync-families-dispatch.sh
 
@@ -75,4 +76,5 @@ fi
 # https://github.com/Polidea/react-native-ble-plx#android-example-setup
 yarn jetify
 
+cd $projRootDir
 node ./scripts/setup-google-services/generate-credentials.js
