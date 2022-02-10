@@ -184,10 +184,26 @@ export default function PortfolioScreen({ navigation }: Props) {
     // Send the media to your Cast device as soon as we connect to a device
     // (though you'll probably want to call this later once user clicks on a video or something)
     client.loadMedia({
-      mediaInfo: {
-        contentUrl:
-          'https://commondatastorage.googleapis.com/gtv-videos-bucket/CastVideos/mp4/BigBuckBunny.mp4',
-      },
+      queueData: [
+        {
+          mediaInfo: {
+            contentUrl:
+              'https://cryptonaute.fr/wp-content/uploads/2021/12/Bored-Ape-Yacht-Club-NFT-8817.png',
+          },
+        },
+        {
+          mediaInfo: {
+            contentUrl:
+              'https://cdn.futura-sciences.com/buildsv6/images/wide1920/e/0/8/e086e3cef6_50184903_bored-ape.jpg',
+          },
+        },
+        {
+          mediaInfo: {
+            contentUrl:
+              'https://media.moneytimes.com.br/uploads/2021/12/bored-ape-yacht-club3.jpg',
+          },
+        },
+      ],
     });
   }
 
