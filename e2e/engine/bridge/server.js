@@ -39,7 +39,7 @@ export async function loadConfig(
 
   if (data.accounts.length) {
     postMessage({ type: "importAccounts", payload: data.accounts });
-    await $waitFor("PortfolioAccountsList", -1, 10000);
+    //await $waitFor("PortfolioAccountsList", -1, 10000);
     return;
   }
 
