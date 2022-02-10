@@ -145,25 +145,13 @@ export default function MarketDetail({
   >();
 
   const navigateToBuy = useCallback(() => {
-    if (allAccounts && allAccounts.length === 1) {
-      navigation.navigate(NavigatorName.ExchangeBuyFlow, {
-        screen: ScreenName.ExchangeConnectDevice,
-        params: {
-          mode: "buy",
-          currency: internalCurrency,
-          account: allAccounts[0],
-        },
-      });
-    } else {
-      navigation.navigate(NavigatorName.ExchangeBuyFlow, {
-        screen: ScreenName.ExchangeSelectAccount,
-        params: {
-          mode: "buy",
-          currency: internalCurrency,
-        },
-      });
-    }
-  }, [navigation, internalCurrency, allAccounts]);
+    navigation.navigate(NavigatorName.Exchange, {
+      screen: ScreenName.ExchangeBuy,
+      params: {
+        mode: "buy",
+      },
+    });
+  }, [navigation]);
 
   /** Disabled for now on demand of PO
   const renderAccountItem = useCallback(
