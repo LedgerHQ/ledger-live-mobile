@@ -39,6 +39,8 @@ import CheckLanguageAvailability from "../../components/CheckLanguageAvailabilit
 
 export { default as PortfolioTabIcon } from "./TabIcon";
 
+import GoogleCast, { CastButton, CastContext, useRemoteMediaClient, useDevices, SessionManager } from 'react-native-google-cast'
+
 const AnimatedFlatListWithRefreshControl = createNativeWrapper(
   Animated.createAnimatedComponent(globalSyncRefreshControl(FlatList)),
   {
@@ -164,6 +166,31 @@ export default function PortfolioScreen({ navigation }: Props) {
     ],
   );
 
+  const client = useRemoteMediaClient();
+
+  // const castDevice = useCastDevice();
+  const devices = useDevices();
+  const sessionManager = GoogleCast.getSessionManager();
+  const discoveryManager = GoogleCast.getDiscoveryManager()
+
+  console.log('----------------')
+  console.log('client', client)
+  CastContext.getCastState().then(a=>console.log('cast state', a))
+  console.log('devices', devices)
+  console.log('sessionManager', sessionManager)
+  console.log('discoveryManager', discoveryManager)
+  console.log('----------------')
+  if (client) {
+    // Send the media to your Cast device as soon as we connect to a device
+    // (though you'll probably want to call this later once user clicks on a video or something)
+    client.loadMedia({
+      mediaInfo: {
+        contentUrl:
+          'https://commondatastorage.googleapis.com/gtv-videos-bucket/CastVideos/mp4/BigBuckBunny.mp4',
+      },
+    });
+  }
+
   return (
     <>
       <FirmwareUpdateBanner />
@@ -176,6 +203,13 @@ export default function PortfolioScreen({ navigation }: Props) {
           },
         ]}
       >
+        <View style={{
+          flex: 1,
+          alignItems: "center",
+          justifyContent: "center",
+        }}>
+          <CastButton style={{ margin: -12, width: 48, height: 48 }} />
+        </View>
         {!showingPlaceholder ? (
           <StickyHeader
             scrollY={scrollY}

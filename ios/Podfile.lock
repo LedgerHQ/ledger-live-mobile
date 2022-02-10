@@ -40,6 +40,11 @@ PODS:
     - ReactCommon/turbomodule/core (= 0.65.1)
   - fmt (6.2.1)
   - glog (0.3.5)
+  - google-cast-sdk-no-bluetooth (4.7.0):
+    - google-cast-sdk-no-bluetooth/Core (= 4.7.0)
+    - Protobuf (~> 3.13)
+  - google-cast-sdk-no-bluetooth/Core (4.7.0):
+    - Protobuf (~> 3.13)
   - InputMask (6.1.0)
   - ledger-core-objc (4.19.1):
     - djinni_objc
@@ -59,6 +64,8 @@ PODS:
   - MultiplatformBleAdapter (0.1.9)
   - PasscodeAuth (2.1.0):
     - React
+  - PromisesObjC (2.0.0)
+  - Protobuf (3.19.4)
   - RCT-Folly (2021.04.26.00):
     - boost-for-react-native
     - DoubleConversion
@@ -262,6 +269,16 @@ PODS:
   - react-native-config/App (1.4.4):
     - React-Core
   - react-native-fingerprint-scanner (6.0.0):
+    - React
+  - react-native-google-cast (4.1.2):
+    - React
+    - react-native-google-cast/NoBluetooth (= 4.1.2)
+  - react-native-google-cast/NoBluetooth (4.1.2):
+    - google-cast-sdk-no-bluetooth
+    - React
+    - react-native-google-cast/RNGoogleCast
+  - react-native-google-cast/RNGoogleCast (4.1.2):
+    - PromisesObjC
     - React
   - react-native-locale (0.0.19):
     - React
@@ -470,6 +487,7 @@ DEPENDENCIES:
   - react-native-ble-plx (from `../node_modules/react-native-ble-plx`)
   - react-native-config (from `../node_modules/react-native-config`)
   - react-native-fingerprint-scanner (from `../node_modules/react-native-fingerprint-scanner`)
+  - react-native-google-cast (from `../node_modules/react-native-google-cast/ios`)
   - react-native-locale (from `../node_modules/react-native-locale`)
   - "react-native-netinfo (from `../node_modules/@react-native-community/netinfo`)"
   - react-native-pager-view (from `../node_modules/react-native-pager-view`)
@@ -517,9 +535,12 @@ SPEC REPOS:
     - boost-for-react-native
     - CocoaAsyncSocket
     - fmt
+    - google-cast-sdk-no-bluetooth
     - InputMask
     - libwebp
     - MultiplatformBleAdapter
+    - PromisesObjC
+    - Protobuf
     - SDWebImage
     - SDWebImageWebPCoder
     - Sentry
@@ -594,6 +615,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-config"
   react-native-fingerprint-scanner:
     :path: "../node_modules/react-native-fingerprint-scanner"
+  react-native-google-cast:
+    :path: "../node_modules/react-native-google-cast/ios"
   react-native-locale:
     :path: "../node_modules/react-native-locale"
   react-native-netinfo:
@@ -696,6 +719,7 @@ SPEC CHECKSUMS:
   FBReactNativeSpec: df8f81d2a7541ee6755a047b398a5cb5a72acd0e
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
   glog: 5337263514dd6f09803962437687240c5dc39aa4
+  google-cast-sdk-no-bluetooth: 5313156110d6e71fa336f6d742f1ee641e91fdca
   InputMask: 71d291dc54d2deaeac6512afb6ec2304228c0bb7
   ledger-core-objc: cc0290f7cf787ddf1d6a8f8e086acf55f24523a4
   libwebp: 98a37e597e40bfdb4c911fc98f2c53d0b12d05fc
@@ -703,6 +727,8 @@ SPEC CHECKSUMS:
   lottie-react-native: b561920bba7ec727ec94a473b683cffba00faece
   MultiplatformBleAdapter: 5a6a897b006764392f9cef785e4360f54fb9477d
   PasscodeAuth: 667f2bfb0e78f652c11db4793d8077c189ce300e
+  PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
+  Protobuf: 235750e4696ff59fb07d949a9dbbc92b3c0700fe
   RCT-Folly: 0dd9e1eb86348ecab5ba76f910b56f4b5fef3c46
   RCTRequired: 6cf071ab2adfd769014b3d94373744ee6e789530
   RCTTypeSafety: b829c59453478bb5b02487b8de3336386ab93ab1
@@ -717,6 +743,7 @@ SPEC CHECKSUMS:
   react-native-ble-plx: f10240444452dfb2d2a13a0e4f58d7783e92d76e
   react-native-config: 72d948053a442779b3178fddd571e37f118ef606
   react-native-fingerprint-scanner: ac6656f18c8e45a7459302b84da41a44ad96dbbe
+  react-native-google-cast: 8538c321da08b2289d24c173cbdfb1bacf8d3be8
   react-native-locale: bd8edf0e51706d469af3e2fa568a8102213a3139
   react-native-netinfo: 3d3769f0d65de15c83a9bf1346f8be71de5a24bf
   react-native-pager-view: 3ee7d4c7697fb3ef788346e834a60cca97ed8540
