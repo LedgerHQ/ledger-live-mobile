@@ -2568,7 +2568,7 @@
     "stayInTheAppPlz": "Restez dans l'app et gardez votre Nano X en main.",
     "allowAppPermission": "Ouvrez l'app {{wording}} sur votre appareil.",
     "allowAppPermissionSubtitleToken": "pour gérer vos tokens {{token}}",
-    "allowManagerPermission": "Autoriser {{wording}} sur l'appareil",
+    "allowManagerPermission": "Autorisez {{wording}} sur l'appareil.",
     "loading": "Chargement...",
     "turnOnAndUnlockDevice": "Allumez et déverrouillez votre appareil.",
     "connectAndUnlockDevice": "Connectez et déverrouillez votre appareil.",
