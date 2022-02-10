@@ -2578,6 +2578,7 @@
     "quitApp": "デバイス上のアプリケーションを終了する",
     "appNotInstalled": "{{appName}}アプリをインストールしてください。",
     "appNotInstalled_plural": "{{appName}}アプリをインストールしてください。",
+    "useAnotherDevice": "Use another device",
     "verifyAddress": {
       "title": "デバイス上でアドレスを認証する",
       "description": "Ledger Liveに表示された{{currencyName}}アドレスが、Ledgerデバイスに表示されたものと一致していることを確認してください。"
