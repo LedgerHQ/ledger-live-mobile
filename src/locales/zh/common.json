@@ -2578,6 +2578,7 @@
     "quitApp": "在设备上退出该应用程序",
     "appNotInstalled": "请安装 {{appName}} 应用程序",
     "appNotInstalled_plural": "请安装 {{appName}} 应用程序",
+    "useAnotherDevice": "Use another device",
     "verifyAddress": {
       "title": "在设备上验证地址",
       "description": "请验证这个将要在 Ledger Live 上显示的 {{currencyName}} 地址与您的 Ledger 设备上显示的地址一致。"
