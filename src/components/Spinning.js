@@ -2,6 +2,7 @@
 
 import React, { Component } from "react";
 import { Animated, Easing } from "react-native";
+import Config from "react-native-config";
 
 type Props = {
   children: any,
@@ -24,6 +25,8 @@ class Spinning extends Component<Props> {
   }
 
   start = () => {
+    if(Config.DETOX) return;
+
     Animated.loop(
       Animated.timing(this.spinValue, {
         toValue: 1,

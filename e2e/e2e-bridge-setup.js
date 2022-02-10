@@ -1,6 +1,6 @@
 // @flow
 import Config from "react-native-config";
 
-if (Config.MOCK) {
+if (Config.DETOX) {
   import("./engine/bridge/client").then(({ init }) => init());
 }

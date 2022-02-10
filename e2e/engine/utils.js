@@ -2,7 +2,12 @@
 const { device, element, by, waitFor } = require("detox");
 
 export function cleanLaunch() {
-  return device.launchApp({ delete: true });
+  return device.launchApp({
+    delete: true,
+    launchArgs: {
+      detoxURLBlacklistRegex: '.*:\/\/explorers\.api\.live\.ledger\.com\/.*'
+    }
+  });
 }
 
 export async function $proceed(): Promise<void> {
@@ -28,11 +33,11 @@ export function $waitFor(
   const el = getElement(q);
   return percentage < 0
     ? waitFor(el)
-        .toExist()
-        .withTimeout(timeout)
+      .toExist()
+      .withTimeout(timeout)
     : waitFor(el)
-        .toBeVisible(percentage)
-        .withTimeout(timeout);
+      .toBeVisible(percentage)
+      .withTimeout(timeout);
 }
 
 export function $tap(q: Query) {
