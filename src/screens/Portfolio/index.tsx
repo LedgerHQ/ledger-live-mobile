@@ -112,8 +112,7 @@ export default function PortfolioScreen({ navigation }: Props) {
     accounts,
   ]);
 
-  const showDistribution =
-    portfolio.balanceHistory[portfolio.balanceHistory.length - 1].value > 0;
+  const showAssets = accounts.length > 0;
 
   const flatListRef = useRef();
   let distribution = useDistribution();
@@ -123,8 +122,11 @@ export default function PortfolioScreen({ navigation }: Props) {
     list: distribution.list.slice(0, maxDistributionToDisplay),
   };
 
+<<<<<<< HEAD
   const showAssets = accounts.length > 0;
 
+=======
+>>>>>>> fafa1242 (LIVE-230 Assets Row in progress)
   const maxAssetsToDisplay = 3;
   const assetsToDisplay = accounts.slice(0, maxAssetsToDisplay);
 
@@ -143,6 +145,10 @@ export default function PortfolioScreen({ navigation }: Props) {
   const onAnalytics = useCallback(() => {
     navigation.navigate(NavigatorName.Analytics);
   }, [navigation]);
+
+  console.log("--------------ACCOUNTS----------------")
+  console.log(accounts[0])
+  console.log("--------------------------------------")
 
   const data = useMemo(
     () => [
@@ -171,12 +177,29 @@ export default function PortfolioScreen({ navigation }: Props) {
       ...(showAssets
         ? [
             <Flex mx={6} mt={10}>
+<<<<<<< HEAD
               <SectionTitle
                 title={<Trans i18nKey={"v3.distribution.title"} />}
                 navigation={navigation}
                 navigatorName={NavigatorName.Accounts}
               />
               <Assets balanceHistory={portfolio.balanceHistory} flatListRef={flatListRef} assets={assetsToDisplay} />
+=======
+              <Flex
+                flexDirection={"row"}
+                justifyContent={"space-between"}
+                alignItems={"center"}
+                mb={6}
+              >
+                <Text variant={"h3"} textTransform={"uppercase"} mt={2}>
+                  <Trans i18nKey={"v3.distribution.title"} />
+                </Text>
+                <Link onPress={onDistributionCardPress} type="color">
+                  <Trans i18nKey={"common.seeAll"} />
+                </Link>
+              </Flex>
+              <Assets flatListRef={flatListRef} assets={assetsToDisplay} />
+>>>>>>> fafa1242 (LIVE-230 Assets Row in progress)
             </Flex>,
           ]
         : []),
@@ -204,7 +227,12 @@ export default function PortfolioScreen({ navigation }: Props) {
       onAnalytics,
       onDistributionCardPress,
       portfolio,
+<<<<<<< HEAD
       showDistribution,
+=======
+      showAssets,
+      t,
+>>>>>>> fafa1242 (LIVE-230 Assets Row in progress)
     ],
   );
 
