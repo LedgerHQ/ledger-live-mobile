@@ -2578,6 +2578,7 @@
     "quitApp": "Cierra la aplicación en tu dispositivo",
     "appNotInstalled": "Instala la aplicación {{appName}}",
     "appNotInstalled_plural": "Instala las aplicaciones {{appName}}",
+    "useAnotherDevice": "Use another device",
     "verifyAddress": {
       "title": "Verifica la dirección en tu dispositivo",
       "description": "Verifica que la dirección {{currencyName}} que aparece en Ledger Live coincida con la que aparece en tu dispositivo Ledger."
