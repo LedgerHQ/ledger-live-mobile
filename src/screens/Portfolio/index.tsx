@@ -71,8 +71,7 @@ export default function PortfolioScreen({ navigation }: Props) {
     accounts,
   ]);
 
-  const showDistribution =
-    portfolio.balanceHistory[portfolio.balanceHistory.length - 1].value > 0;
+  const showAssets = accounts.length > 0;
 
   const flatListRef = useRef();
   let distribution = useDistribution();
@@ -81,6 +80,10 @@ export default function PortfolioScreen({ navigation }: Props) {
     ...distribution,
     list: distribution.list.slice(0, maxDistributionToDisplay),
   };
+
+  const maxAssetsToDisplay = 3;
+  const assetsToDisplay = accounts.slice(0, maxAssetsToDisplay);
+
   const onDistributionButtonPress = useCallback(() => {
     navigation.navigate(ScreenName.Distribution);
   }, [navigation]);
@@ -101,6 +104,10 @@ export default function PortfolioScreen({ navigation }: Props) {
     navigation.navigate(NavigatorName.Analytics);
   }, [navigation]);
 
+  console.log("--------------ACCOUNTS----------------")
+  console.log(accounts[0])
+  console.log("--------------------------------------")
+
   const data = useMemo(
     () => [
       <Box mx={6}>
@@ -117,7 +124,7 @@ export default function PortfolioScreen({ navigation }: Props) {
           <FabActions />
         </Box>
       ),
-      ...(showDistribution
+      ...(showAssets
         ? [
             <Flex mx={6} mt={10}>
               <Flex
@@ -129,11 +136,11 @@ export default function PortfolioScreen({ navigation }: Props) {
                 <Text variant={"h3"} textTransform={"uppercase"} mt={2}>
                   <Trans i18nKey={"v3.distribution.title"} />
                 </Text>
-                <Link onPress={onDistributionCardPress} type={"color"}>
+                <Link onPress={onDistributionCardPress} type="color">
                   <Trans i18nKey={"common.seeAll"} />
                 </Link>
               </Flex>
-              <Assets flatListRef={flatListRef} distribution={distribution} />
+              <Assets flatListRef={flatListRef} assets={assetsToDisplay} />
             </Flex>,
           ]
         : []),
@@ -173,7 +180,7 @@ export default function PortfolioScreen({ navigation }: Props) {
       onDistributionButtonPress,
       onDistributionCardPress,
       portfolio,
-      showDistribution,
+      showAssets,
       t,
     ],
   );

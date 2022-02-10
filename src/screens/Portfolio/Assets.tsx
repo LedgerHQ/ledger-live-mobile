@@ -1,87 +1,99 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useMemo } from "react";
 import { FlatList } from "react-native";
-import type {
-    CryptoCurrency,
-    TokenCurrency,
-} from "@ledgerhq/live-common/lib/types/currencies";
-import styled from "styled-components/native";
-import { Flex, Text } from "@ledgerhq/native-ui";
+import { getCurrencyColor } from "@ledgerhq/live-common/lib/currencies";
+import styled, { useTheme } from "styled-components/native";
+import { Flex, Text, ProgressLoader } from "@ledgerhq/native-ui";
 import Delta from "../../components/Delta";
 import CurrencyUnitValue from "../../components/CurrencyUnitValue";
 import CounterValue from "../../components/CounterValue";
 import ParentCurrencyIcon from "../../components/ParentCurrencyIcon";
+import { ensureContrast } from "../../colors";
+import {
+    getAccountCurrency,
+    getAccountName,
+  } from "@ledgerhq/live-common/lib/account";
 
-type DistributionItem = {
-  currency: CryptoCurrency | TokenCurrency;
-  distribution: number; // % of the total (normalized in 0-1)
-  amount: number;
-  countervalue: number; // countervalue of the amount that was calculated based of the rate provided
-};
-
-type AssetRowProps = {
-    item: DistributionItem,
+import { useBalanceHistoryWithCountervalue } from "../../actions/portfolio";
+  type AssetRowProps = {
+  item: any;
 };
 
 const AssetRowContainer = styled(Flex).attrs({
-    paddingBottom: 5,
-    paddingTop: 5,
-  })``;
+  paddingBottom: 5,
+  paddingTop: 5,
+})``;
 
-const AssetRow = ({ item: { currency, amount, distribution } }: AssetRowProps) => {
-    console.log()
-    return (
-        <AssetRowContainer flexDirection="row">
-            <Flex borderWidth={2} borderRadius={100} borderColor={currency.color} padding={2} mr={6}>
-                <ParentCurrencyIcon currency={currency} size={32} />
-            </Flex>
-            <Flex flex={1}>
-                <Flex flexDirection="row" justifyContent="space-between">
-                    <Text variant="large" fontWeight="semiBold" color="neutral.c100">
-                        {currency.name}
-                    </Text>
-                    <Text variant="large" fontWeight="semiBold" color="neutral.c100">
-                        <CounterValue
-                            currency={currency}
-                            value={amount}
-                            joinFragmentsSeparator=""
-                        />
-                    </Text>
-                </Flex>
-                <Flex flexDirection="row" justifyContent="space-between">
-                    <Text variant="body" fontWeight="medium" color="neutral.c70">
-                        <CurrencyUnitValue
-                            unit={currency.units[0]}
-                            value={amount}
-                            joinFragmentsSeparator=""
-                        />
-                    </Text>
-                    <Delta percent valueChange={10} />
-                </Flex>
-            </Flex>
-        </AssetRowContainer>
-    );
+const AssetRow = ({ item }: AssetRowProps) => {
+  const { colors } = useTheme();
+  const currency = getAccountCurrency(item);
+  const color = useMemo(
+    () => ensureContrast(getCurrencyColor(currency), colors.background.main),
+    [colors, currency],
+  );
+  const accountName = getAccountName(item);
+  const range = "day";
+  const {
+    countervalueAvailable,
+    countervalueChange,
+    cryptoChange,
+    history,
+  } = useBalanceHistoryWithCountervalue({ account: item, range });
+
+  return (
+    <AssetRowContainer flexDirection="row">
+      <Flex mr={6}>
+        <ProgressLoader
+          strokeWidth={2}
+          mainColor={color}
+          progress={0.33}
+          radius={23}
+        >
+          <ParentCurrencyIcon currency={currency} size={32} />
+        </ProgressLoader>
+      </Flex>
+      <Flex flex={1}>
+        <Flex flexDirection="row" justifyContent="space-between">
+          <Text variant="large" fontWeight="semiBold" color="neutral.c100">
+            {accountName}
+          </Text>
+          <Text variant="large" fontWeight="semiBold" color="neutral.c100">
+            <CounterValue
+              currency={currency}
+              value={countervalueAvailable}
+              joinFragmentsSeparator=""
+            />
+          </Text>
+        </Flex>
+        <Flex flexDirection="row" justifyContent="space-between">
+          <Text variant="body" fontWeight="medium" color="neutral.c70">
+            <CurrencyUnitValue
+              unit={currency.units[0]}
+              value={countervalueAvailable}
+              joinFragmentsSeparator=""
+            />
+          </Text>
+          <Delta percent valueChange={cryptoChange} />
+        </Flex>
+      </Flex>
+    </AssetRowContainer>
+  );
 };
-  
 
 type ListProps = {
   flatListRef: Function;
-  distribution: any;
+  assets: any;
 };
 
-const AssetsList = ({ flatListRef, distribution }: ListProps) => {
+const AssetsList = ({ flatListRef, assets }: ListProps) => {
   const renderItem = useCallback(
-    ({ item }: { item: DistributionItem }) => <AssetRow item={item} />,
+    ({ item }: { item: any }) => <AssetRow item={item} />,
     [],
   );
-  console.log('---------------------')
-  console.log(distribution.list[0].currency)
-  console.log('---------------------')
 
   return (
     <FlatList
-      // $FlowFixMe
       ref={flatListRef}
-      data={distribution.list}
+      data={assets}
       renderItem={renderItem}
       keyExtractor={item => item.currency.id}
       contentContainerStyle={{ flex: 1 }}
