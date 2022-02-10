@@ -35,7 +35,7 @@ export default function GraphCard({
   const balanceHistory = portfolio.balanceHistory;
 
   return (
-    <Flex bg={"neutral.c30"} p={6}>
+    <Flex bg={"neutral.c30"} p={6} borderRadius={2}>
       <GraphCardHeader
         valueChange={countervalueChange}
         isLoading={!isAvailable}

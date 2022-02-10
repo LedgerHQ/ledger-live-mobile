@@ -132,13 +132,13 @@ export default function PortfolioScreen({ navigation }: Props) {
     [navigation],
   );
 
+  console.log("test portfolio");
+
   const data = useMemo(
     () => [
-      !areAccountsEmpty && (
-        <Box bg={"background.main"} mx={6} py={6}>
-          <Header />
-        </Box>
-      ),
+      <Box bg={"background.main"} mx={6} py={6}>
+        <Header />
+      </Box>,
       <Box mx={6} mt={3}>
         <GraphCardContainer
           counterValueCurrency={counterValueCurrency}
@@ -152,24 +152,20 @@ export default function PortfolioScreen({ navigation }: Props) {
           <FabActions />
         </Box>
       ),
-      accounts.length > 0 && (
-        <Flex mx={6} mt={10}>
-          <SectionTitle
-            title={<Trans i18nKey={"tabs.platform"} />}
-            navigation={navigation}
-            navigatorName={NavigatorName.Platform}
-          />
-          <DiscoverSection />
-        </Flex>
-      ),
-      accounts.length > 0 && !areAccountsEmpty ? (
-        <Flex mx={6} mt={10}>
-          <SectionTitle
-            title={<Trans i18nKey={"v3.portfolio.recommanded.title"} />}
-          />
-          <Carousel />
-        </Flex>
-      ) : null,
+      <Flex mx={6} mt={10}>
+        <SectionTitle
+          title={<Trans i18nKey={"tabs.platform"} />}
+          navigation={navigation}
+          navigatorName={NavigatorName.Platform}
+        />
+        <DiscoverSection />
+      </Flex>,
+      <Flex mx={6} mt={10}>
+        <SectionTitle
+          title={<Trans i18nKey={"v3.portfolio.recommanded.title"} />}
+        />
+        <Carousel />
+      </Flex>,
       ...(showDistribution
         ? [
             <Box mx={6} mt={10}>
@@ -211,12 +207,9 @@ export default function PortfolioScreen({ navigation }: Props) {
     <>
       <FirmwareUpdateBanner />
       <ContentContainer>
-
         <RequireTerms />
 
         <TrackScreen category="Portfolio" accountsLength={accounts.length} />
-
-        {areAccountsEmpty && <Header />}
 
         <AnimatedFlatListWithRefreshControl
           ref={ref}
