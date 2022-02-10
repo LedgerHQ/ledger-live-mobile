@@ -53,26 +53,30 @@ const AssetRow = ({ item }: AssetRowProps) => {
       </Flex>
       <Flex flex={1}>
         <Flex flexDirection="row" justifyContent="space-between">
-          <Text variant="large" fontWeight="semiBold" color="neutral.c100">
-            {accountName}
-          </Text>
-          <Text variant="large" fontWeight="semiBold" color="neutral.c100">
-            <CounterValue
-              currency={currency}
-              value={countervalueAvailable}
-              joinFragmentsSeparator=""
-            />
-          </Text>
+          <Flex alignItems="flex-start" flex={1}>
+            <Text variant="large" fontWeight="semiBold" color="neutral.c100"  numberOfLines={1}>
+              {accountName}
+            </Text>
+          </Flex>
+          <Flex alignItems="flex-end" flexShrink={0} pl={3}>
+            <Text variant="large" fontWeight="semiBold" color="neutral.c100">
+                <CounterValue
+                currency={currency}
+                value={item.balance}
+                joinFragmentsSeparator=""
+                />
+            </Text>
+          </Flex>
         </Flex>
         <Flex flexDirection="row" justifyContent="space-between">
           <Text variant="body" fontWeight="medium" color="neutral.c70">
             <CurrencyUnitValue
               unit={currency.units[0]}
-              value={countervalueAvailable}
+              value={item.balance}
               joinFragmentsSeparator=""
             />
           </Text>
-          <Delta percent valueChange={cryptoChange} />
+          <Delta percent valueChange={countervalueChange} />
         </Flex>
       </Flex>
     </AssetRowContainer>
