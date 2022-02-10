@@ -16,6 +16,9 @@ import org.devio.rn.splashscreen.SplashScreen;
 import com.facebook.react.ReactActivityDelegate;
 import com.facebook.react.ReactRootView;
 
+import com.google.android.gms.cast.framework.CastContext;
+import androidx.annotation.Nullable;
+
 import com.swmansion.gesturehandler.react.RNGestureHandlerEnabledRootView;
 import java.util.Locale;
 
@@ -33,7 +36,7 @@ public class MainActivity extends ReactActivity {
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
 
         if (!BuildConfig.DEBUG) {
             SplashScreen.show(this, true);
@@ -44,7 +47,8 @@ public class MainActivity extends ReactActivity {
                 this.importDataString = extras.getString("importDataString");
             }
         }
-        super.onCreate(null);
+        super.onCreate(savedInstanceState);
+        CastContext.getSharedInstance(this);
 
         /**
          * Addresses an inconvenient side-effect of using `password-visible`, that
@@ -79,7 +83,6 @@ public class MainActivity extends ReactActivity {
                 }
             });
         }
-
     }
 
     @Override

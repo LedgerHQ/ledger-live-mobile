@@ -61,6 +61,9 @@
       </activity>
       <activity android:taskAffinity="" android:name="com.facebook.flipper.android.diagnostics.FlipperDiagnosticActivity"
         android:exported="true"/>
+    <meta-data
+        android:name="com.google.android.gms.cast.framework.OPTIONS_PROVIDER_CLASS_NAME"
+        android:value="com.reactnative.googlecast.GoogleCastOptionsProvider" />
     </application>
 
 </manifest>
