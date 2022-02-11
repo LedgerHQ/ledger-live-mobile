@@ -81,7 +81,7 @@ import { lightTheme, darkTheme } from "./colors";
 import NotificationsProvider from "./screens/NotificationCenter/NotificationsProvider";
 import SnackbarContainer from "./screens/NotificationCenter/Snackbar/SnackbarContainer";
 import NavBarColorHandler from "./components/NavBarColorHandler";
-import { setOsTheme, setTheme } from "./actions/settings";
+import { setOsTheme } from "./actions/settings";
 // $FlowFixMe
 import StyleProvider from "./StyleProvider";
 // $FlowFixMe
