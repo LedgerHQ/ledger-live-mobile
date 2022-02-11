@@ -74,6 +74,7 @@ function EmptyStatePortfolio({ navigation, showHelp = true }: Props) {
                   }
                   onPress={openAddModal}
                   containerStyle={[styles.primaryCTA]}
+                  testID="empty-portfolio-add-account-button"
                 />
                 <Button
                   event="PortfolioEmptyToManager"

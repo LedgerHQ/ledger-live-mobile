@@ -4,6 +4,7 @@ const {
   WorkerAssignReporter,
 } = require("detox/runners/jest-circus");
 
+// what's this for?
 class CustomDetoxEnvironment extends DetoxCircusEnvironment {
   constructor(config, context) {
     super(config, context);

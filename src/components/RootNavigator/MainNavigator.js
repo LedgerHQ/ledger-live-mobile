@@ -50,8 +50,8 @@ export default function MainNavigator({
         component={AccountsNavigator}
         listeners={({ route, navigation }) => {
           return {
-            tabPress: () => navigation.navigate(route.name)
-          }
+            tabPress: () => navigation.navigate(route.name),
+          };
         }}
         options={{
           unmountOnBlur: true,

@@ -288,7 +288,7 @@ export function BaseButton({
       style={mainContainerStyle}
       {...containerSpecificProps}
       {...otherProps}
-      testID={testID}
+      testID={testID} // TODO probably remove since it will be repeated
     >
       {needsBorder ? <View style={borderStyle} /> : null}
 

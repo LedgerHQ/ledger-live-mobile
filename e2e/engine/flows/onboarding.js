@@ -2,6 +2,8 @@
 import * as bridge from "../bridge/server";
 import { $tap, $proceed, $, $scrollTill, $waitFor } from "../utils";
 
+// change from flows to page objects?
+
 export function onboard(modelId: DeviceModelId, usecase: Usecase) {
   getStarted();
   acceptTerms();

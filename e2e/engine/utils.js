@@ -5,6 +5,8 @@ export function cleanLaunch() {
   return device.launchApp({ delete: true });
 }
 
+// remove $ and move most of this stuff to the page objects
+
 export async function $proceed(): Promise<void> {
   const el = $("Proceed");
   await $waitFor(el);
@@ -13,6 +15,12 @@ export async function $proceed(): Promise<void> {
 
 export function $(id: string) {
   return element(by.id(id));
+}
+
+export async function delayApp() {
+  return new Promise(function(resolve) {
+    setTimeout(resolve, 10000);
+  });
 }
 
 export function $byText(text: string) {
