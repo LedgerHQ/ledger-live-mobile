@@ -57,6 +57,26 @@ export function $scrollTill(
     .scroll(pixel, direction);
 }
 
+export async function $retryUntilItWorks(action, timeout)  {
+  let shouldContinue = true;
+  const startTime = Date.now();
+
+  while(shouldContinue) {
+    shouldContinue = false;
+    
+    try {
+      await action();
+    } catch {
+      shouldContinue = true;
+    }
+
+    if(timeout && (Date.now() - startTime) > timeout) {
+      throw new Error("Timed out when waiting for action");
+    }
+    console.log("Trying again...");
+  }
+}
+
 type Element = any;
 
 type Query = string | Element;
