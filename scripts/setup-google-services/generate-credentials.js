@@ -14,7 +14,7 @@ function setupFile(src, target, key) {
 
 setupFile(
   "./scripts/setup-google-services/android-credentials.json",
-  "./android/google-services.json",
+  "./android/app/google-services.json",
   process.env.FIREBASE_ANDROID_API_KEY || "",
 );
 

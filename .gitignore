@@ -99,5 +99,5 @@ artifacts/
 **/*.jks
 
 # Google services
-android/google-services.json
+android/app/google-services.json
 ios/GoogleService-Info.plist
