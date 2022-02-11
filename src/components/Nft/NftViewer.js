@@ -18,6 +18,8 @@ import { useNftMetadata, decodeNftId } from "@ledgerhq/live-common/lib/nft";
 
 import type { NFT, CollectionWithNFT } from "@ledgerhq/live-common/lib/nft";
 
+import { CastButton, useRemoteMediaClient } from 'react-native-google-cast';
+
 import { accountSelector } from "../../reducers/accounts";
 import NftLinksPanel from "./NftLinksPanel";
 import { ScreenName, NavigatorName } from "../../const";
@@ -171,6 +173,17 @@ const NftViewer = ({ route }: Props) => {
     return null;
   }, [isLoading, metadata]);
 
+  const client = useRemoteMediaClient();
+  if (client) {
+    console.log('-----------------------------------')
+    console.log('METADATA', nft);
+    client.loadMedia({
+      mediaInfo: {
+        contentUrl: metadata?.media,
+      },
+    });
+  }
+
   return (
     <View>
       <ScrollView contentContainerStyle={styles.scrollView}>
@@ -198,6 +211,7 @@ const NftViewer = ({ route }: Props) => {
               status={status}
               hackWidth={300}
             />
+            <CastButton style={{ width: 48, height: 48, position: "absolute", right: 5, bottom: 5, tintColor: 'white' }} />
           </View>
 
           <View style={styles.buttons}>

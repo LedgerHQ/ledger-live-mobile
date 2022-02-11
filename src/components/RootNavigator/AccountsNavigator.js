@@ -15,6 +15,7 @@ import NftGalleryHeaderTitle from "../../screens/Nft/NftGallery/NftGalleryHeader
 import { getStackNavigatorConfig } from "../../navigation/navigatorConfig";
 import AccountHeaderRight from "../../screens/Account/AccountHeaderRight";
 import AccountHeaderTitle from "../../screens/Account/AccountHeaderTitle";
+import { CastButton } from 'react-native-google-cast'
 
 export default function AccountsNavigator() {
   const { t } = useTranslation();
@@ -53,6 +54,7 @@ export default function AccountsNavigator() {
         component={NftGallery}
         options={{
           headerTitle: () => <NftGalleryHeaderTitle />,
+          headerRight: () => <CastButton style={{ width: 48, height: 48, position: "absolute", right: 5, bottom: 5, tintColor: 'white' }} />,
         }}
       />
     </Stack.Navigator>
