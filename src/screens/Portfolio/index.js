@@ -39,14 +39,6 @@ import CheckLanguageAvailability from "../../components/CheckLanguageAvailabilit
 
 export { default as PortfolioTabIcon } from "./TabIcon";
 
-import GoogleCast, {
-  CastButton,
-  CastContext,
-  useRemoteMediaClient,
-  useDevices,
-  SessionManager,
-} from "react-native-google-cast";
-
 const AnimatedFlatListWithRefreshControl = createNativeWrapper(
   Animated.createAnimatedComponent(globalSyncRefreshControl(FlatList)),
   {
@@ -172,55 +164,6 @@ export default function PortfolioScreen({ navigation }: Props) {
     ],
   );
 
-  const client = useRemoteMediaClient();
-
-  // const castDevice = useCastDevice();
-  const devices = useDevices();
-  const sessionManager = GoogleCast.getSessionManager();
-  const discoveryManager = GoogleCast.getDiscoveryManager();
-
-  console.log("----------------");
-  console.log("client", client);
-  CastContext.getCastState().then(a => console.log("cast state", a));
-  console.log("devices", devices);
-  console.log("sessionManager", sessionManager);
-  console.log("discoveryManager", discoveryManager);
-  console.log("----------------");
-  if (client) {
-    client.loadMedia({
-      autoplay: true,
-      playbackRate: 2,
-      preloadTime: 8.0,
-      queueData: {
-        startIndex: 0,
-        repeatMode: "all",
-        autoplay: true,
-        playbackRate: 2,
-        preloadTime: 8.0,
-        items: [
-          {
-            mediaInfo: {
-              contentUrl:
-                "https://cryptonaute.fr/wp-content/uploads/2021/12/Bored-Ape-Yacht-Club-NFT-8817.png",
-            },
-          },
-          {
-            mediaInfo: {
-              contentUrl:
-                "https://cdn.futura-sciences.com/buildsv6/images/wide1920/e/0/8/e086e3cef6_50184903_bored-ape.jpg",
-            },
-          },
-          {
-            mediaInfo: {
-              contentUrl:
-                "https://media.moneytimes.com.br/uploads/2021/12/bored-ape-yacht-club3.jpg",
-            },
-          },
-        ],
-      },
-    });
-  }
-
   return (
     <>
       <FirmwareUpdateBanner />
@@ -233,15 +176,6 @@ export default function PortfolioScreen({ navigation }: Props) {
           },
         ]}
       >
-        <View
-          style={{
-            flex: 1,
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <CastButton style={{ margin: -12, width: 48, height: 48 }} />
-        </View>
         {!showingPlaceholder ? (
           <StickyHeader
             scrollY={scrollY}
