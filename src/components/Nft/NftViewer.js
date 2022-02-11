@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useMemo, useState, useCallback } from "react";
+import React, { useMemo, useState, useCallback, useEffect } from "react";
 
 import {
   ScrollView,
@@ -18,7 +18,7 @@ import { useNftMetadata, decodeNftId } from "@ledgerhq/live-common/lib/nft";
 
 import type { NFT, CollectionWithNFT } from "@ledgerhq/live-common/lib/nft";
 
-import { CastButton, useRemoteMediaClient } from 'react-native-google-cast';
+import { CastButton, useRemoteMediaClient } from "react-native-google-cast";
 
 import { accountSelector } from "../../reducers/accounts";
 import NftLinksPanel from "./NftLinksPanel";
@@ -174,15 +174,19 @@ const NftViewer = ({ route }: Props) => {
   }, [isLoading, metadata]);
 
   const client = useRemoteMediaClient();
-  if (client) {
-    console.log('-----------------------------------')
-    console.log('METADATA', nft);
-    client.loadMedia({
-      mediaInfo: {
-        contentUrl: metadata?.media,
-      },
-    });
-  }
+
+  useEffect(() => {
+    if (client) {
+      console.log("-----------------------------------");
+      console.log("METADATA", metadata?.media);
+      client.loadMedia({
+        mediaInfo: {
+          contentUrl: metadata?.media,
+          contentType: "image/png",
+        },
+      });
+    }
+  }, [client, metadata?.media, nft]);
 
   return (
     <View>
@@ -211,7 +215,17 @@ const NftViewer = ({ route }: Props) => {
               status={status}
               hackWidth={300}
             />
-            <CastButton style={{ width: 48, height: 48, position: "absolute", right: 5, bottom: 5, tintColor: 'white' }} />
+            <CastButton
+              src={metadata?.media}
+              style={{
+                width: 48,
+                height: 48,
+                position: "absolute",
+                right: 5,
+                bottom: 5,
+                tintColor: "white",
+              }}
+            />
           </View>
 
           <View style={styles.buttons}>
