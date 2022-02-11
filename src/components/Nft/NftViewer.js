@@ -177,8 +177,6 @@ const NftViewer = ({ route }: Props) => {
 
   useEffect(() => {
     if (client) {
-      console.log("-----------------------------------");
-      console.log("METADATA", metadata?.media);
       client.loadMedia({
         mediaInfo: {
           contentUrl: metadata?.media,

@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useState, useMemo, useCallback, useRef } from "react";
+import React, { useState, useMemo, useCallback, useRef, useEffect } from "react";
 
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
@@ -22,6 +22,8 @@ import NftCollectionWithName from "./NftCollectionWithName";
 import { NavigatorName, ScreenName } from "../../../const";
 import Button from "../../../components/Button";
 import SendIcon from "../../../icons/Send";
+
+import { useRemoteMediaClient } from "react-native-google-cast";
 
 const MAX_COLLECTIONS_FIRST_RENDER = 12;
 const COLLECTIONS_TO_ADD_ON_LIST_END_REACHED = 6;
@@ -83,6 +85,49 @@ const NftGallery = () => {
         collections,
       },
     });
+
+  const client = useRemoteMediaClient();
+
+  useEffect(() => {
+    if (client) {
+      client.loadMedia({
+        autoplay: true,
+        preloadTime: 8.0,
+        queueData: {
+          startIndex: 0,
+          repeatMode: "all",
+          items: [
+            {
+              mediaInfo: {
+                contentUrl:
+                  "https://cryptonaute.fr/wp-content/uploads/2021/12/Bored-Ape-Yacht-Club-NFT-8817.png",
+                contentType: "image/svg",
+              },
+            },
+            {
+              mediaInfo: {
+                contentUrl:
+                  "https://cdn.futura-sciences.com/buildsv6/images/wide1920/e/0/8/e086e3cef6_50184903_bored-ape.jpg",
+                contentType: "image/svg",
+              },
+            },
+            {
+              mediaInfo: {
+                contentUrl:
+                  "https://media.moneytimes.com.br/uploads/2021/12/bored-ape-yacht-club3.jpg",
+                contentType: "image/svg",
+              },
+            },
+          ],
+        },
+      });
+      const intervalId = setInterval(() => client && client.queueNext(), 5000);
+
+      return () => {
+        clearInterval(intervalId);
+      };
+    }
+  }, [client]);
 
   return (
     <SafeAreaView
