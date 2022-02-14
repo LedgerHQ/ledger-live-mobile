@@ -27,10 +27,8 @@ type HeaderInformationProps = { isLoading: boolean; error?: Error | null };
 const HeaderInformation = ({ isLoading, error }: HeaderInformationProps) => {
   const { colors } = useTheme();
 
-  if (error)
-    return <HeaderErrorTitle withDescription withDetail error={error} />;
 
-  if (isLoading) return <HeaderSynchronizing />;
+
 
   return <LiveLogo size={32} color={colors.neutral.c100} />;
 };

@@ -21,17 +21,13 @@ const GraphCardContainer = ({
 
   return (
     <>
-      {showGraphCard && <Header />}
-
       <CurrencyDownStatusAlert currencies={currencies} />
 
       {showGraphCard && (
-        <Box mt={7}>
-          <GraphCard
-            counterValueCurrency={counterValueCurrency}
-            portfolio={portfolio}
-          />
-        </Box>
+        <GraphCard
+          counterValueCurrency={counterValueCurrency}
+          portfolio={portfolio}
+        />
       )}
     </>
   );

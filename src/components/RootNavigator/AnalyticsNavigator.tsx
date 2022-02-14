@@ -16,49 +16,48 @@ export default function AnalyticsNavigator() {
 
   // Fixme Typescript: Update react-native-tab-view to 3.1.1 to remove Tab.navigator ts error
   return (
-    <>
-      <Tab.Navigator
-        screenOptions={{
-          tabBarActiveTintColor: colors.neutral.c100,
-          tabBarInactiveTintColor: colors.neutral.c80,
-          tabBarIndicatorStyle: {
-            backgroundColor: colors.primary.c70,
-          },
-          tabBarStyle: {
-            backgroundColor: colors.background.main,
-            borderBottomWidth: 1,
-            borderColor: colors.neutral.c40,
-          },
-        }}
-        sceneContainerStyle={{
+    <Tab.Navigator
+      screenOptions={{
+        tabBarActiveTintColor: colors.neutral.c100,
+        tabBarInactiveTintColor: colors.neutral.c80,
+        tabBarIndicatorStyle: {
+          backgroundColor: colors.primary.c70,
+          height: 3,
+        },
+        tabBarStyle: {
           backgroundColor: colors.background.main,
+          borderBottomWidth: 1,
+          borderColor: colors.neutral.c40,
+        },
+      }}
+      sceneContainerStyle={{
+        backgroundColor: colors.background.main,
+      }}
+    >
+      <Tab.Screen
+        name={ScreenName.AnalyticsAllocation}
+        component={AnalyticsAllocation}
+        options={{
+          title: t("v3.analytics.allocation.title"),
+          tabBarLabel: (props: any) => (
+            <Text variant="body" fontWeight="semiBold" {...props}>
+              {t("v3.analytics.allocation.title")}
+            </Text>
+          ),
         }}
-      >
-        <Tab.Screen
-          name={ScreenName.AnalyticsAllocation}
-          component={AnalyticsAllocation}
-          options={{
-            title: t("v3.analytics.allocation.title"),
-            tabBarLabel: (props: any) => (
-              <Text variant="body" fontWeight="semiBold" {...props}>
-                {t("v3.analytics.allocation.title")}
-              </Text>
-            ),
-          }}
-        />
-        <Tab.Screen
-          name={ScreenName.AnalyticsOperations}
-          component={AnalyticsOperations}
-          options={{
-            title: t("v3.analytics.operations.title"),
-            tabBarLabel: (props: any) => (
-              <Text variant="body" fontWeight="semiBold" {...props}>
-                {t("v3.analytics.operations.title")}
-              </Text>
-            ),
-          }}
-        />
-      </Tab.Navigator>
-    </>
+      />
+      <Tab.Screen
+        name={ScreenName.AnalyticsOperations}
+        component={AnalyticsOperations}
+        options={{
+          title: t("v3.analytics.operations.title"),
+          tabBarLabel: (props: any) => (
+            <Text variant="body" fontWeight="semiBold" {...props}>
+              {t("v3.analytics.operations.title")}
+            </Text>
+          ),
+        }}
+      />
+    </Tab.Navigator>
   );
 }
