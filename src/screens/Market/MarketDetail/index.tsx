@@ -216,6 +216,7 @@ export default function MarketDetail({
                 size={32}
                 currency={internalCurrency}
                 color={undefined}
+                sizeRatio={0.9}
               />
             ) : (
               image && (
