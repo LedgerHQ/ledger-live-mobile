@@ -1,11 +1,10 @@
 import React, { useRef, useCallback, useMemo } from "react";
 import { useSelector } from "react-redux";
 import { StyleSheet, FlatList, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 import Animated from "react-native-reanimated";
 import { createNativeWrapper } from "react-native-gesture-handler";
 import { Trans, useTranslation } from "react-i18next";
-import { useFocusEffect, useTheme } from "@react-navigation/native";
+import { useFocusEffect } from "@react-navigation/native";
 import { isAccountEmpty } from "@ledgerhq/live-common/lib/account";
 
 import { Box, Flex, Link, Text } from "@ledgerhq/native-ui";
@@ -34,6 +33,7 @@ import { NavigatorName, ScreenName } from "../../const";
 import FabActions from "../../components/FabActions";
 import FirmwareUpdateBanner from "../../components/FirmwareUpdateBanner";
 import DiscoverSection from "./DiscoverSection";
+import AddAssetsCard from "./AddAssetsCard";
 
 export { default as PortfolioTabIcon } from "./TabIcon";
 
@@ -139,6 +139,11 @@ export default function PortfolioScreen({ navigation }: Props) {
       <Box bg={"background.main"} mx={6} py={6}>
         <Header />
       </Box>,
+      !accounts.length && (
+        <Box mx={6} mt={3}>
+          <AddAssetsCard />
+        </Box>
+      ),
       <Box mx={6} mt={3}>
         <GraphCardContainer
           counterValueCurrency={counterValueCurrency}
@@ -188,6 +193,7 @@ export default function PortfolioScreen({ navigation }: Props) {
             </Box>,
           ]
         : []),
+      <Box mt={6} />,
     ],
     [
       accounts.length,

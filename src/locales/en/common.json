@@ -5110,6 +5110,10 @@
           "import": "Add account",
           "manager": "Install apps",
           "managerSecondary": "Install apps on my device"
+        },
+        "addAccounts": {
+          "title": "Add accounts",
+          "description": "You’re one step away from fully exploring Ledger Live and truly owning your money"
         }
       },
       "noOpState": {
