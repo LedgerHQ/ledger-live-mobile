@@ -1,5 +1,5 @@
 import React, { memo, useState, useCallback } from "react";
-import { StyleSheet, SectionList, View } from "react-native";
+import { SectionList } from "react-native";
 import { Flex } from "@ledgerhq/native-ui";
 
 import { useSelector } from "react-redux";
@@ -102,7 +102,7 @@ export function Operations({ navigation }: Props) {
   }, [navigation]);
 
   return (
-    <Flex flex={1} px={4} py={6}>
+    <Flex flex={1} px={4}>
       <SectionList
         sections={sections}
         style={{ flex: 1 }}

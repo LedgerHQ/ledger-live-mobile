@@ -162,6 +162,7 @@ export default function PortfolioScreen({ navigation }: Props) {
         />
         <Carousel />
       </Flex>,
+      <Box mt={20} />,
     ],
     [
       accounts.length,

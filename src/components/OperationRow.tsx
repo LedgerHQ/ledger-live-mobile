@@ -33,7 +33,6 @@ const ContainerTouchable = styled(Flex).attrs(p => ({
   height: "64px",
   flexDirection: "row",
   alignItems: "center",
-  marginBottom: p.isLast && 7,
   px: 0,
   py: 6,
 }))<{ isLast?: boolean }>``;
