@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 import React, { ReactNode, useCallback } from "react";
 import { TouchableOpacity, View } from "react-native";
+=======
+import React, { ReactNode } from "react";
+import { View, TouchableOpacity } from "react-native";
+>>>>>>> be491240839798fb07e612a99b073d6dea6d1bbe
 import { Currency, Unit } from "@ledgerhq/live-common/lib/types";
 import {
   Portfolio,
@@ -87,7 +92,12 @@ function GraphCardHeader({
             textTransform={"uppercase"}
             mr={2}
           >
+<<<<<<< HEAD
             <Trans i18nKey={"tabs.portfolio"} />
+=======
+            Portfolio
+            <Trans key={"tabs.portfolio"} />
+>>>>>>> be491240839798fb07e612a99b073d6dea6d1bbe
           </Text>
           <DiscreetModeButton size={20} />
         </Flex>
@@ -122,6 +132,7 @@ function GraphCardHeader({
           )}
         </Flex>
       </Flex>
+<<<<<<< HEAD
       <Flex>
         <TouchableOpacity onPress={onPieChartButtonpress}>
           <BoxedIcon
@@ -134,6 +145,18 @@ function GraphCardHeader({
           />
         </TouchableOpacity>
       </Flex>
+=======
+      <TouchableOpacity onPress={onAnalytics}>
+        <BoxedIcon
+          Icon={PieChartMedium}
+          variant={"circle"}
+          iconSize={20}
+          size={48}
+          badgeSize={30}
+          iconColor={"neutral.c100"}
+        />
+      </TouchableOpacity>
+>>>>>>> be491240839798fb07e612a99b073d6dea6d1bbe
     </Flex>
   );
 }

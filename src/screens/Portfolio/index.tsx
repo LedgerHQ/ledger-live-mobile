@@ -33,7 +33,10 @@ import { NavigatorName, ScreenName } from "../../const";
 import FabActions from "../../components/FabActions";
 import FirmwareUpdateBanner from "../../components/FirmwareUpdateBanner";
 import DiscoverSection from "./DiscoverSection";
+<<<<<<< HEAD
 import AddAssetsCard from "./AddAssetsCard";
+=======
+>>>>>>> be491240839798fb07e612a99b073d6dea6d1bbe
 import Assets from "./Assets";
 
 export { default as PortfolioTabIcon } from "./TabIcon";
@@ -112,6 +115,11 @@ export default function PortfolioScreen({ navigation }: Props) {
     accounts,
   ]);
 
+<<<<<<< HEAD
+=======
+  const showAssets = accounts.length > 0;
+
+>>>>>>> be491240839798fb07e612a99b073d6dea6d1bbe
   const flatListRef = useRef();
   let distribution = useDistribution();
   const maxDistributionToDisplay = 3;
@@ -120,8 +128,11 @@ export default function PortfolioScreen({ navigation }: Props) {
     list: distribution.list.slice(0, maxDistributionToDisplay),
   };
 
+<<<<<<< HEAD
   const showAssets = accounts.length > 0;
 
+=======
+>>>>>>> be491240839798fb07e612a99b073d6dea6d1bbe
   const maxAssetsToDisplay = 3;
   const assetsToDisplay = accounts.slice(0, maxAssetsToDisplay);
 
@@ -136,6 +147,10 @@ export default function PortfolioScreen({ navigation }: Props) {
       }),
     [navigation],
   );
+
+  const onAnalytics = useCallback(() => {
+    navigation.navigate(NavigatorName.Analytics);
+  }, [navigation]);
 
   const onAnalytics = useCallback(() => {
     navigation.navigate(NavigatorName.Analytics);
@@ -168,15 +183,32 @@ export default function PortfolioScreen({ navigation }: Props) {
       ...(showAssets
         ? [
             <Flex mx={6} mt={10}>
+<<<<<<< HEAD
               <SectionTitle
                 title={<Trans i18nKey={"v3.distribution.title"} />}
                 navigation={navigation}
                 navigatorName={NavigatorName.Accounts}
               />
+=======
+              <Flex
+                flexDirection={"row"}
+                justifyContent={"space-between"}
+                alignItems={"center"}
+                mb={6}
+              >
+                <Text variant={"h3"} textTransform={"uppercase"} mt={2}>
+                  <Trans i18nKey={"v3.distribution.title"} />
+                </Text>
+                <Link onPress={onDistributionCardPress} type="color">
+                  <Trans i18nKey={"common.seeAll"} />
+                </Link>
+              </Flex>
+>>>>>>> be491240839798fb07e612a99b073d6dea6d1bbe
               <Assets balanceHistory={portfolio.balanceHistory} flatListRef={flatListRef} assets={assetsToDisplay} />
             </Flex>,
           ]
         : []),
+<<<<<<< HEAD
       <Flex mx={6} mt={10}>
         <SectionTitle
           title={<Trans i18nKey={"tabs.platform"} />}
@@ -191,6 +223,34 @@ export default function PortfolioScreen({ navigation }: Props) {
         />
         <Carousel />
       </Flex>,
+=======
+      accounts.length > 0 && (
+        <Flex mx={6} mt={10}>
+          <Flex
+            flexDirection={"row"}
+            justifyContent={"space-between"}
+            alignItems={"center"}
+            mb={6}
+          >
+            <Text variant={"h3"} textTransform={"uppercase"} mt={2}>
+              <Trans i18nKey={"tabs.platform"} />
+            </Text>
+            <Link onPress={onDiscoverSeeAll} type={"color"}>
+              <Trans i18nKey={"common.seeAll"} />
+            </Link>
+          </Flex>
+          <DiscoverSection />
+        </Flex>
+      ),
+      accounts.length > 0 && !areAccountsEmpty ? (
+        <Flex mx={6} mt={10}>
+          <Text variant={"h3"} textTransform={"uppercase"} mb={6}>
+            <Trans i18nKey={"v3.portfolio.recommanded.title"} />
+          </Text>
+          <Carousel />
+        </Flex>
+      ) : null,
+>>>>>>> be491240839798fb07e612a99b073d6dea6d1bbe
     ],
     [
       accounts.length,
@@ -201,6 +261,10 @@ export default function PortfolioScreen({ navigation }: Props) {
       onAnalytics,
       portfolio,
       showAssets,
+<<<<<<< HEAD
+=======
+      t,
+>>>>>>> be491240839798fb07e612a99b073d6dea6d1bbe
     ],
   );
 
