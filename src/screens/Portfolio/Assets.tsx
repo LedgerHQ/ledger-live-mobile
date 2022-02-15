@@ -2,7 +2,8 @@ import React, { useCallback, useMemo } from "react";
 import { FlatList } from "react-native";
 import { getCurrencyColor } from "@ledgerhq/live-common/lib/currencies";
 import styled, { useTheme } from "styled-components/native";
-import { Flex, Text, ProgressLoader } from "@ledgerhq/native-ui";
+// TODO : replace by { Flex, Text, ProgressLoader } when ProgressLoader exported from ui
+import { Flex, Text, Loader as ProgressLoader } from "@ledgerhq/native-ui";
 import { BigNumber } from "bignumber.js";
 import { useSelector } from "react-redux";
 import {
