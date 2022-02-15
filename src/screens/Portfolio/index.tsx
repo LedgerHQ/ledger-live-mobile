@@ -1,39 +1,35 @@
 import React, { useRef, useCallback, useMemo } from "react";
 import { useSelector } from "react-redux";
-import { StyleSheet, FlatList, View } from "react-native";
+import { StyleSheet, FlatList } from "react-native";
 import Animated from "react-native-reanimated";
 import { createNativeWrapper } from "react-native-gesture-handler";
-import { Trans, useTranslation } from "react-i18next";
+import { Trans } from "react-i18next";
 import { useFocusEffect } from "@react-navigation/native";
 import { isAccountEmpty } from "@ledgerhq/live-common/lib/account";
 
 import { Box, Flex, Link, Text } from "@ledgerhq/native-ui";
 
 import styled from "styled-components/native";
-import {
-  useRefreshAccountsOrdering,
-  useDistribution,
-} from "../../actions/general";
+import { useRefreshAccountsOrdering } from "../../actions/general";
 import { accountsSelector } from "../../reducers/accounts";
 import { counterValueCurrencySelector } from "../../reducers/settings";
 import { usePortfolio } from "../../actions/portfolio";
 import globalSyncRefreshControl from "../../components/globalSyncRefreshControl";
 
 import GraphCardContainer from "./GraphCardContainer";
-import { DistributionList } from "../Distribution";
 import Carousel from "../../components/Carousel";
-import Button from "../../components/Button";
 import Header from "./Header";
 import extraStatusBarPadding from "../../logic/extraStatusBarPadding";
 import TrackScreen from "../../analytics/TrackScreen";
 import MigrateAccountsBanner from "../MigrateAccounts/Banner";
 import RequireTerms from "../../components/RequireTerms";
 import { useScrollToTop } from "../../navigation/utils";
-import { NavigatorName, ScreenName } from "../../const";
+import { NavigatorName } from "../../const";
 import FabActions from "../../components/FabActions";
 import FirmwareUpdateBanner from "../../components/FirmwareUpdateBanner";
 import DiscoverSection from "./DiscoverSection";
 import AddAssetsCard from "./AddAssetsCard";
+import Assets from "./Assets";
 
 export { default as PortfolioTabIcon } from "./TabIcon";
 
@@ -44,6 +40,7 @@ const AnimatedFlatListWithRefreshControl = createNativeWrapper(
     shouldCancelWhenOutside: false,
   },
 );
+
 type Props = {
   navigation: any;
 };
@@ -97,7 +94,6 @@ export default function PortfolioScreen({ navigation }: Props) {
   const accounts = useSelector(accountsSelector);
   const counterValueCurrency = useSelector(counterValueCurrencySelector);
   const portfolio = usePortfolio();
-  const { t } = useTranslation();
 
   const refreshAccountsOrdering = useRefreshAccountsOrdering();
   useFocusEffect(refreshAccountsOrdering);
@@ -110,29 +106,12 @@ export default function PortfolioScreen({ navigation }: Props) {
     accounts,
   ]);
 
-  const showDistribution =
-    portfolio.balanceHistory[portfolio.balanceHistory.length - 1].value > 0;
-
   const flatListRef = useRef();
-  let distribution = useDistribution();
-  const maxDistributionToDisplay = 3;
-  distribution = {
-    ...distribution,
-    list: distribution.list.slice(0, maxDistributionToDisplay),
-  };
-  const onDistributionButtonPress = useCallback(() => {
-    navigation.navigate(ScreenName.Distribution);
-  }, [navigation]);
 
-  const onDistributionCardPress = useCallback(
-    (i, item) =>
-      navigation.navigate(ScreenName.Asset, {
-        currency: item.currency,
-      }),
-    [navigation],
-  );
+  const showAssets = accounts.length > 0;
 
-  console.log("test portfolio");
+  const maxAssetsToDisplay = 3;
+  const assetsToDisplay = accounts.slice(0, maxAssetsToDisplay);
 
   const data = useMemo(
     () => [
@@ -157,6 +136,18 @@ export default function PortfolioScreen({ navigation }: Props) {
           <FabActions />
         </Box>
       ),
+      ...(showAssets
+        ? [
+            <Flex mx={6} mt={10}>
+              <SectionTitle
+                title={<Trans i18nKey={"v3.distribution.title"} />}
+                navigation={navigation}
+                navigatorName={NavigatorName.Accounts}
+              />
+              <Assets balanceHistory={portfolio.balanceHistory} flatListRef={flatListRef} assets={assetsToDisplay} />
+            </Flex>,
+          ]
+        : []),
       <Flex mx={6} mt={10}>
         <SectionTitle
           title={<Trans i18nKey={"tabs.platform"} />}
@@ -171,41 +162,15 @@ export default function PortfolioScreen({ navigation }: Props) {
         />
         <Carousel />
       </Flex>,
-      ...(showDistribution
-        ? [
-            <Box mx={6} mt={10}>
-              <Text variant={"h3"} textTransform={"uppercase"}>
-                {t("distribution.header")}
-              </Text>
-              <DistributionList
-                flatListRef={flatListRef}
-                distribution={distribution}
-                setHighlight={onDistributionCardPress}
-              />
-              <View style={styles.seeMoreBtn}>
-                <Button
-                  event="View Distribution"
-                  type="lightPrimary"
-                  title={t("common.seeAll")}
-                  onPress={onDistributionButtonPress}
-                />
-              </View>
-            </Box>,
-          ]
-        : []),
-      <Box mt={6} />,
     ],
     [
       accounts.length,
       areAccountsEmpty,
+      assetsToDisplay,
       counterValueCurrency,
-      distribution,
       navigation,
-      onDistributionButtonPress,
-      onDistributionCardPress,
       portfolio,
-      showDistribution,
-      t,
+      showAssets,
     ],
   );
 

@@ -15,7 +15,7 @@ import CurrencyUnitValue from "./CurrencyUnitValue";
 import Placeholder from "./Placeholder";
 import DiscreetModeButton from "./DiscreetModeButton";
 import { useNavigation } from "@react-navigation/native";
-import { NavigatorName, ScreenName } from "../const";
+import { NavigatorName } from "../const";
 
 type Props = {
   portfolio: Portfolio;
