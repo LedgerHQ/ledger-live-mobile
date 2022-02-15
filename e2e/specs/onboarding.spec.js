@@ -26,14 +26,15 @@ describe("Onboarding", () => {
 
     //select connect
 
-    const scrollElement = await element(by.id("ScrollView")).atIndex(0);
+    // const scrollElement = await element(by.id("use-case-scroll"));
+    // console.log({ scrollElement });
 
-    await scrollElement.scrollTo("bottom");
+    // await element(by.id("ScrollView")).scroll(200, "down", 0.5, 0.5);
 
-    // await waitFor(element(by.id("Onboarding - Connect|nanoX")))
-    //   .toBeVisible()
-    //   .whileElement(scrollElement)
-    //   .scroll(200, "down");
+    await waitFor(element(by.id("Onboarding - Connect|nanoX")))
+      .toBeVisible()
+      .whileElement(by.id("use-case-scroll"))
+      .scroll(200, "down");
     await wait(5000);
 
     await element(by.id("Onboarding - Connect|nanoX")).tap();
