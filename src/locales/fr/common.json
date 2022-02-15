@@ -862,7 +862,7 @@
               "label": "Allumez votre appareil en le connectant au port USB de votre téléphone."
             },
             "nanoSP": {
-              "label": "Turn on your device by connecting it to the USB port of your phone."
+              "label": "Allumez votre appareil en le connectant au port USB de votre téléphone."
             },
             "blue": {
               "label": "Allumez votre appareil en le connectant au port USB de votre téléphone et en appuyant sur le bouton de mise en marche."
@@ -925,7 +925,7 @@
               "label": "N'utilisez jamais un code PIN que vous n'avez pas choisi vous-même."
             },
             "7": {
-              "label": "Ne sauvegardez jamais votre code PIN sur un ordinateur ou un smartphone."
+              "label": "Ne sauvegardez jamais votre code PIN sur un ordinateur ou un téléphone."
             }
           }
         },
@@ -995,7 +995,7 @@
           "title": "Cacher sa phrase de récupération",
           "bullets": {
             "0": {
-              "label": "Ne la saisissez <1>jamais</1> sur un ordinateur, smartphone ou autre appareil. Ne la prenez pas en photo."
+              "label": "Ne la saisissez <1>jamais</1> sur un ordinateur, téléphone ou autre appareil. Ne la prenez pas en photo."
             },
             "1": {
               "label": "Ne la partagez <1>jamais</1> avec qui que ce soit."
@@ -1040,7 +1040,7 @@
               "label": "Allumez votre appareil en le connectant au port USB de votre téléphone."
             },
             "nanoSP": {
-              "label": "Turn on your device by connecting it to the USB port of your phone."
+              "label": "Allumez votre appareil en le connectant au port USB de votre téléphone."
             },
             "blue": {
               "label": "Allumez votre appareil en le connectant au port USB de votre téléphone et en appuyant sur le bouton de mise en marche."
@@ -1091,23 +1091,23 @@
     "stepPairNew": {
       "nanoX": {
         "title": "Coupler son Nano",
-        "desc": "C'est la première fois que vous configurez votre Nano sur ce smartphone. Appairons rapidement votre appareil.",
+        "desc": "C'est la première fois que vous configurez votre Nano sur ce téléphone. Appairons rapidement votre appareil.",
         "cta": "Coupler le Nano"
       },
       "nanoS": {
         "title": "Connecter le Nano",
-        "desc": "C'est la première fois que vous configurez votre Nano sur ce smartphone. Connectons rapidement votre appareil.",
-        "cta": "Connecter le Nano"
+        "desc": "C'est la première fois que vous configurez votre Nano sur ce téléphone. Connectons rapidement votre appareil.",
+        "cta": "Connecter mon Nano"
       },
       "nanoSP": {
-        "title": "Connect your Nano",
-        "desc": "This is the first time you’re setting up your Nano with this phone. Let’s quickly connect your device.",
-        "cta": "Let’s connect my Nano"
+        "title": "Connectez votre Nano",
+        "desc": "C'est la première fois que vous configurez votre Nano sur ce téléphone. Appairons rapidement votre appareil.",
+        "cta": "Connecter mon Nano"
       },
       "blue": {
         "title": "Connecter le Blue",
-        "desc": "C'est la première fois que vous configurez votre Blue sur ce smartphone. Connectons rapidement votre appareil.",
-        "cta": "Connecter le Blue"
+        "desc": "C'est la première fois que vous configurez votre Blue sur ce téléphone. Connectons rapidement votre appareil.",
+        "cta": "Connecter mon Blue"
       },
       "infoModal": {
         "title": "Où trouver le nom de mon appareil ?",
