@@ -60,8 +60,6 @@ const AssetRow = ({ item, portfolioValue }: AssetRowProps) => {
     [countervalue, portfolioValue],
   );
 
-  console.log(countervalue, portfolioValue, portfolioPercentage);
-
   return (
     <AssetRowContainer flexDirection="row">
       <Flex mr={6}>
