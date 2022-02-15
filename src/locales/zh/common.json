@@ -771,6 +771,7 @@
     "stepSelectDevice": {
       "title": "您使用的是哪种设备？",
       "nanoS": "Nano S",
+      "nanoSP": "Nano S Plus",
       "nanoX": "Nano X",
       "blue": "Blue"
     },
@@ -859,6 +860,9 @@
             },
             "nanoS": {
               "label": "通过连接到手机的 USB 端口来启动您的设备。"
+            },
+            "nanoSP": {
+              "label": "Turn on your device by connecting it to the USB port of your phone."
             },
             "blue": {
               "label": "通过连接到您手机的 USB 端口并按电源按钮来启动您的设备。"
@@ -1035,6 +1039,9 @@
             "nanoS": {
               "label": "通过连接到手机的 USB 端口来启动您的设备。"
             },
+            "nanoSP": {
+              "label": "Turn on your device by connecting it to the USB port of your phone."
+            },
             "blue": {
               "label": "通过连接设备到您手机的 USB 端口并按电源按钮来启动您的设备。"
             }
@@ -1091,6 +1098,11 @@
         "title": "连接您的 Nano",
         "desc": "这是您第一次使用该手机设置您的 Nano。让我们快速连接您的设备。",
         "cta": "来连接我的 Nano"
+      },
+      "nanoSP": {
+        "title": "Connect your Nano",
+        "desc": "This is the first time you’re setting up your Nano with this phone. Let’s quickly connect your device.",
+        "cta": "Let’s connect my Nano"
       },
       "blue": {
         "title": "连接您的 Blue",
