@@ -1,6 +1,6 @@
 import React, { useRef, useCallback, useMemo } from "react";
 import { useSelector } from "react-redux";
-import { StyleSheet, FlatList, View } from "react-native";
+import { StyleSheet, FlatList } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Animated from "react-native-reanimated";
 import { createNativeWrapper } from "react-native-gesture-handler";
@@ -20,9 +20,7 @@ import { usePortfolio } from "../../actions/portfolio";
 import globalSyncRefreshControl from "../../components/globalSyncRefreshControl";
 
 import GraphCardContainer from "./GraphCardContainer";
-import { DistributionList } from "../Distribution";
 import Carousel from "../../components/Carousel";
-import Button from "../../components/Button";
 import StickyHeader from "./StickyHeader";
 import Header from "./Header";
 import extraStatusBarPadding from "../../logic/extraStatusBarPadding";
@@ -104,10 +102,6 @@ export default function PortfolioScreen({ navigation }: Props) {
     navigation.navigate(NavigatorName.Analytics);
   }, [navigation]);
 
-  console.log("--------------ACCOUNTS----------------")
-  console.log(accounts[0])
-  console.log("--------------------------------------")
-
   const data = useMemo(
     () => [
       <Box mx={6}>
@@ -140,7 +134,7 @@ export default function PortfolioScreen({ navigation }: Props) {
                   <Trans i18nKey={"common.seeAll"} />
                 </Link>
               </Flex>
-              <Assets flatListRef={flatListRef} assets={assetsToDisplay} />
+              <Assets balanceHistory={portfolio.balanceHistory} flatListRef={flatListRef} assets={assetsToDisplay} />
             </Flex>,
           ]
         : []),
