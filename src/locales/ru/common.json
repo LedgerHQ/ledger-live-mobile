@@ -1277,7 +1277,7 @@
     "settings": "Настройки",
     "platform": "Исследуйте",
     "nanoX": "Nano X",
-    "market": "Market"
+    "market": "Рынок"
   },
   "portfolio": {
     "totalBalance": "Общий баланс",
@@ -1315,12 +1315,12 @@
   },
   "numberCompactNotation": {
     "d": "",
-    "K": "k",
-    "M": "m",
-    "B": "bn",
-    "T": "tn",
+    "K": "тыс.",
+    "M": "млн",
+    "B": "млрд",
+    "T": "трлн",
     "Q": "qa",
-    "Qn": "qi"
+    "Qn": "квнт"
   },
   "time": {
     "day": "1Д",
@@ -2578,7 +2578,7 @@
     "quitApp": "Выйдите из приложения на устройстве",
     "appNotInstalled": "Установите приложение {{appName}}",
     "appNotInstalled_plural": "Пожалуйста, установите приложения {{appName}}",
-    "useAnotherDevice": "Use another device",
+    "useAnotherDevice": "Использовать другое устройство",
     "verifyAddress": {
       "title": "Подтвердите адрес на устройстве",
       "description": "Убедитесь, что адрес {{currencyName}} в Ledger Live в точности совпадает с адресом на экране устройства Ledger."
@@ -2986,8 +2986,8 @@
   "celo": {
     "info": {
       "available": {
-        "title": "CELO available",
-        "description": "This amount is disposable."
+        "title": "Доступные токены CELO",
+        "description": "Это сумма активов в вашем распоряжении."
       }
     }
   },
@@ -3721,8 +3721,8 @@
       "selectCurrency": "Выберите валюту",
       "selectAccount": "Выберите счёт",
       "connectDevice": "Подключите устройство",
-      "title": "Choose a provider to buy crypto",
-      "coinifyTitle": "Buy crypto via our partner",
+      "title": "Выберите поставщика услуг для покупки криптовалюты",
+      "coinifyTitle": "Покупка криптовалюты через нашего партнёра",
       "description": "Покупайте криптоактивы через Coinify и получайте их непосредственно на счёт в Ledger.",
       "CTAButton": "Купить",
       "emptyState": {
@@ -3737,9 +3737,9 @@
         "warning": "Адрес не утверждён на устройстве Ledger. В целях безопасности вам нужно утвердить его"
       },
       "bullets": {
-        "whereToBuy": "Buy from anywhere",
-        "cryptoSupported": "crypto supported",
-        "payWith": "Pay with card or SEPA"
+        "whereToBuy": "Любые поставщики",
+        "cryptoSupported": "криптовалют поддерживаются",
+        "payWith": "Оплата картой или SEPA"
       }
     },
     "sell": {
@@ -3869,72 +3869,72 @@
     }
   },
   "market": {
-    "title": "Market",
+    "title": "Рынок",
     "filters": {
-      "sort": "Sort",
-      "filter": "Filter",
+      "sort": "Сортировать",
+      "filter": "Фильтр",
       "view": {
-        "label": "View",
-        "all": "All coins",
-        "liveCompatible": "Live Compatible",
-        "all_label": "All cryptocurrencies",
-        "liveCompatible_label": "Only Live Supported"
+        "label": "Вид",
+        "all": "Все монеты",
+        "liveCompatible": "Совместимые с Live",
+        "all_label": "Все криптовалюты",
+        "liveCompatible_label": "Только поддерживаемые в Live"
       },
       "order": {
-        "market_cap": "Rank",
-        "market_cap_asc": "Rank (Market cap) asc.",
-        "market_cap_desc": "Rank (Market cap) desc."
+        "market_cap": "Рейтинг",
+        "market_cap_asc": "Рейтинг (капитализация) возр.",
+        "market_cap_desc": "Рейтинг (капитализация) убыв."
       },
-      "currency": "Currency",
-      "time": "Time",
-      "apply": "Apply"
+      "currency": "Валюты",
+      "time": "Время",
+      "apply": "Применить"
     },
     "marketList": {
-      "crypto": "Crypto",
-      "price": "Price",
-      "change": "Change",
-      "marketCap": "Market cap",
-      "last7d": "Last 7 days"
+      "crypto": "Криптовалюты",
+      "price": "Цена",
+      "change": "Изменение",
+      "marketCap": "Рын. капитализация",
+      "last7d": "Последние 7 дней"
     },
     "detailsPage": {
-      "holding": "Your Holdings",
-      "priceStatistics": "Price Statistics",
-      "price": "Price",
-      "tradingVolume": "Trading volume",
-      "24hLowHight": "24h Low / 24h High",
-      "7dLowHigh": "7d Low / 7d High",
-      "allTimeHigh": "All time high",
-      "allTimeLow": "All time low",
-      "marketCapRank": "Market cap rank",
-      "marketCapDominance": "Market cap dominance",
-      "supply": "Supply",
-      "circulatingSupply": "Circulating supply",
-      "totalSupply": "Total supply",
-      "maxSupply": "Max supply",
-      "assetNotSupportedOnLedgerLive": "This asset is not supported on Ledger Live."
+      "holding": "Ваши сбережения",
+      "priceStatistics": "Статистика цены",
+      "price": "Цена",
+      "tradingVolume": "Торговый объём",
+      "24hLowHight": "Мин. / Макс. (24 часа)",
+      "7dLowHigh": "Мин. / Макс. (Неделя)",
+      "allTimeHigh": "Исторический макс.",
+      "allTimeLow": "Исторический мин.",
+      "marketCapRank": "Рейтинг по капитализации",
+      "marketCapDominance": "Доминирование на рынке",
+      "supply": "Предложение",
+      "circulatingSupply": "В обороте",
+      "totalSupply": "Общее предложение",
+      "maxSupply": "Макс. эмиссия",
+      "assetNotSupportedOnLedgerLive": "Этот актив не поддерживается Ledger Live."
     },
     "range": {
-      "1h": "1H",
-      "24h": "24H",
-      "7d": "7D",
-      "30d": "30D",
-      "1y": "1Y"
+      "1h": "1Ч",
+      "24h": "24Ч",
+      "7d": "7Д",
+      "30d": "30Д",
+      "1y": "1Г"
     },
     "warnings": {
-      "connectionError": "Connection Error",
-      "ledgerUnableToRetrieveData": "Ledger Live is unable to retrieve data.",
-      "checkInternetAndReload": "Please check your internet connection and reload this page.",
-      "reload": "Reload",
-      "noCryptosFound": "No coins found",
-      "noCurrencyFound": "No currency found",
-      "noSearchResultsFor": "Sorry, we did not find any coins for <0>{{search}}</0>. Please retry the search with another keyword.",
-      "noCurrencySearchResultsFor": "Sorry, we did not find any currencies for <0>{{search}}</0>. Please retry the search with another keyword.",
-      "noSearchResults": "Sorry, we did not find any search results.",
-      "retrySearchKeyword": "Please retry the search with another keyword.",
-      "retrySearchParams": "Please retry the search with another parameters.",
-      "trackFavAssets": "Track your favourite",
-      "clickOnStarIcon": "Clicking on the star icon next to an asset will automatically add them to your favorites.",
-      "browseAssets": "Browse assets"
+      "connectionError": "Ошибка соединения",
+      "ledgerUnableToRetrieveData": "Ledger Live не удаётся получить данные.",
+      "checkInternetAndReload": "Проверьте подключение к Интернету и обновите страницу.",
+      "reload": "Обновить",
+      "noCryptosFound": "Монеты не найдены",
+      "noCurrencyFound": "Валюта не найдена",
+      "noSearchResultsFor": "К сожалению, монеты по запросу <0>{{search}}</0> не найдены. Попробуйте другие поисковые ключи.",
+      "noCurrencySearchResultsFor": "К сожалению, валюты по запросу <0>{{search}}</0> не найдены. Попробуйте другие поисковые ключи.",
+      "noSearchResults": "К сожалению, нам не удалось ничего найти.",
+      "retrySearchKeyword": "Повторите поиск по другому запросу.",
+      "retrySearchParams": "Повторите поиск с другими параметрами.",
+      "trackFavAssets": "Следите за избранными активами",
+      "clickOnStarIcon": "Нажмите на звёздочку рядом с активом, чтобы добавить его в избранные.",
+      "browseAssets": "Просмотр активов"
     }
   },
   "nft": {
