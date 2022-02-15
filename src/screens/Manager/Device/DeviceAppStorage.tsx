@@ -1,6 +1,5 @@
 import React, { memo, useMemo } from "react";
 
-import { StyleSheet } from "react-native";
 import { Trans } from "react-i18next";
 
 import { DeviceModel } from "@ledgerhq/devices";
@@ -9,8 +8,7 @@ import { DeviceInfo } from "@ledgerhq/live-common/lib/types/manager";
 import { Box, Flex, Text } from "@ledgerhq/native-ui";
 import { WarningMedium } from "@ledgerhq/native-ui/assets/icons";
 
-import styled, { useTheme } from "styled-components/native";
-import Touchable from "../../../components/Touchable";
+import styled from "styled-components/native";
 import ByteSize from "../../../components/ByteSize";
 
 type Props = {
@@ -19,7 +17,7 @@ type Props = {
   distribution: AppsDistribution;
 };
 
-const StorageRepartition = styled(Touchable)`
+const StorageRepartition = styled(Box)`
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
@@ -35,7 +33,6 @@ const DeviceAppStorage = ({
   deviceInfo,
   distribution: { freeSpaceBytes, appsSpaceBytes, shouldWarnMemory, apps },
 }: Props) => {
-  const { colors } = useTheme();
   const appSizes = useMemo(
     () =>
       apps.filter(Boolean).map(({ bytes, currency, name }) => ({
@@ -71,7 +68,7 @@ const DeviceAppStorage = ({
               Used
             </Text>{" "}
             <ByteSize
-              value={freeSpaceBytes}
+              value={appsSpaceBytes}
               deviceModel={deviceModel}
               firmwareVersion={deviceInfo.version}
             />
@@ -105,7 +102,9 @@ const DeviceAppStorage = ({
         </Flex>
         <Flex flexDirection={"row"} alignItems={"center"}>
           {shouldWarnMemory && (
-            <WarningMedium color={"palette.warning.c60"} size={14} />
+            <Box mr={2}>
+              <WarningMedium color={"palette.warning.c60"} size={14} />
+            </Box>
           )}
           <Text
             variant={"small"}
@@ -123,8 +122,8 @@ const DeviceAppStorage = ({
       </Flex>
       <StorageRepartition
         activeOpacity={1}
-        style={{ flex: 1, backgroundColor: colors.neutral.c40 }}
-        onPress={() => {}}
+        bg="neutral.c40"
+        style={{ flex: 1 }}
         event="ManagerAppDeviceGraphClick"
       >
         {appSizes.map(({ ratio, color, name }, i) => (
