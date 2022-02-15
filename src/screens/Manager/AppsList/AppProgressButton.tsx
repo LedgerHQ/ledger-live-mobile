@@ -1,7 +1,7 @@
 import React from "react";
 
 import type { State } from "@ledgerhq/live-common/lib/apps";
-import styled, { useTheme } from "styled-components/native";
+import styled from "styled-components/native";
 
 // TODO : replace by { Box, ProgressLoader } when ProgressLoader exported from ui
 import { Box, Loader as ProgressLoader } from "@ledgerhq/native-ui";
@@ -27,11 +27,9 @@ export default function AppProgressButton({
   installing,
   updating,
 }: Props) {
-  const { colors } = useTheme();
-
   const progress = useAppInstallProgress(state, name);
 
-  const color = updating ? colors.primary.c80 : installing ? colors.neutral.c100 : colors.error.c100;
+  const color = updating ? "primary.c80" : installing ? "neutral.c100" : "error.c100";
 
   return (
     <ProgressLoader
@@ -42,7 +40,7 @@ export default function AppProgressButton({
       strokeWidth={2}
       mainColor={color}
     >
-      <ButtonCenter backgroundColor={color} />
+      <ButtonCenter bg={color} />
     </ProgressLoader>
   );
 }
