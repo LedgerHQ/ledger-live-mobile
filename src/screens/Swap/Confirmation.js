@@ -185,7 +185,6 @@ const Confirmation = ({
                   exchangeRate: rate,
                   transaction,
                   userId: providerKYC?.id,
-                  requireLatestFirmware: true,
                 }}
                 onResult={({ initSwapResult, initSwapError }) => {
                   if (initSwapError) {
@@ -194,6 +193,7 @@ const Confirmation = ({
                     setSwapData(initSwapResult);
                   }
                 }}
+                analyticsPropertyFlow="swap"
               />
             ) : (
               <DeviceAction
@@ -214,6 +214,7 @@ const Confirmation = ({
                     setSignedOperation(signedOperation);
                   }
                 }}
+                analyticsPropertyFlow="swap"
               />
             )}
           </View>

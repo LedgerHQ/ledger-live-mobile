@@ -1,5 +1,6 @@
 // @flow
 import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import type {
   Action,
   Device,
@@ -7,6 +8,7 @@ import type {
 import { TRANSACTION_TYPES } from "@ledgerhq/live-common/lib/exchange/hw-app-exchange/Exchange";
 import { useTranslation } from "react-i18next";
 import { useNavigation, useTheme } from "@react-navigation/native";
+import { setLastSeenDeviceInfo } from "../../actions/settings";
 import ValidateOnDevice from "../ValidateOnDevice";
 import ValidateMessageOnDevice from "../ValidateMessageOnDevice";
 import {
@@ -23,6 +25,7 @@ import {
   renderExchange,
   renderConfirmSwap,
   renderConfirmSell,
+  LoadingAppInstall,
 } from "./rendering";
 import PreventNativeBack from "../PreventNativeBack";
 import SkipLock from "../behaviour/SkipLock";
@@ -34,6 +37,8 @@ type Props<R, H, P> = {
   action: Action<R, H, P>,
   request?: R,
   device: Device,
+  onSelectDeviceLink?: () => void,
+  analyticsPropertyFlow?: string,
 };
 
 export default function DeviceAction<R, H, P>({
@@ -43,8 +48,11 @@ export default function DeviceAction<R, H, P>({
   onResult,
   onError,
   renderOnResult,
+  onSelectDeviceLink,
+  analyticsPropertyFlow = "unknown",
 }: Props<R, H, P>) {
   const { colors, dark } = useTheme();
+  const dispatch = useDispatch();
   const theme = dark ? "dark" : "light";
   const { t } = useTranslation();
   const navigation = useNavigation();
@@ -84,6 +92,17 @@ export default function DeviceAction<R, H, P>({
     listingApps,
   } = status;
 
+  useEffect(() => {
+    if (deviceInfo) {
+      dispatch(
+        setLastSeenDeviceInfo({
+          modelId: device.modelId,
+          deviceInfo,
+        }),
+      );
+    }
+  }, [dispatch, device, deviceInfo]);
+
   if (displayUpgradeWarning && appAndVersion) {
     return renderWarningOutdated({
       t,
@@ -106,7 +125,7 @@ export default function DeviceAction<R, H, P>({
 
   if (installingApp) {
     const appName = requestOpenApp;
-    return renderLoading({
+    const props = {
       t,
       description: t("DeviceAction.installApp", {
         percentage: (progress * 100).toFixed(0) + "%",
@@ -114,7 +133,11 @@ export default function DeviceAction<R, H, P>({
       }),
       colors,
       theme,
-    });
+      appName,
+      analyticsPropertyFlow,
+      request,
+    };
+    return <LoadingAppInstall {...props} />;
   }
 
   if (requiresAppInstallation) {
@@ -214,6 +237,7 @@ export default function DeviceAction<R, H, P>({
       unresponsive,
       colors,
       theme,
+      onSelectDeviceLink,
     });
   }
 

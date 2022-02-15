@@ -5,6 +5,7 @@ import Icon from "react-native-vector-icons/dist/Feather";
 import { WrongDeviceForAccount, UnexpectedBootloader } from "@ledgerhq/errors";
 import type { TokenCurrency } from "@ledgerhq/live-common/lib/types";
 import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
+import type { AppRequest } from "@ledgerhq/live-common/lib/hw/actions/app";
 import { urls } from "../../config/urls";
 import LText from "../LText";
 import Alert from "../Alert";
@@ -19,6 +20,8 @@ import getDeviceAnimation from "./getDeviceAnimation";
 import GenericErrorView from "../GenericErrorView";
 import Circle from "../Circle";
 import { MANAGER_TABS } from "../../screens/Manager/Manager";
+import ExternalLink from "../ExternalLink";
+import { track } from "../../analytics";
 
 type RawProps = {
   t: (key: string, options?: { [key: string]: string | number }) => string,
@@ -369,10 +372,12 @@ export function renderConnectYourDevice({
   unresponsive,
   device,
   theme,
+  onSelectDeviceLink,
 }: {
   ...RawProps,
   unresponsive: boolean,
   device: Device,
+  onSelectDeviceLink?: () => void,
 }) {
   return (
     <View style={styles.wrapper}>
@@ -390,7 +395,12 @@ export function renderConnectYourDevice({
           })}
         />
       </View>
-      <LText style={styles.text} semiBold>
+      {device.deviceName && (
+        <LText style={[styles.text, styles.connectDeviceName]} semiBold>
+          {device.deviceName}
+        </LText>
+      )}
+      <LText style={[styles.text, styles.connectDeviceLabel]} semiBold>
         {t(
           unresponsive
             ? "DeviceAction.unlockDevice"
@@ -399,6 +409,14 @@ export function renderConnectYourDevice({
             : "DeviceAction.turnOnAndUnlockDevice",
         )}
       </LText>
+      {onSelectDeviceLink ? (
+        <View style={styles.connectDeviceExtraContentWrapper}>
+          <ExternalLink
+            text={t("DeviceAction.useAnotherDevice")}
+            onPress={onSelectDeviceLink}
+          />
+        </View>
+      ) : null}
     </View>
   );
 }
@@ -437,6 +455,28 @@ export function renderExchange({
     default:
       return <LText>{"Confirm exchange on your device"}</LText>;
   }
+}
+
+export function LoadingAppInstall({
+  analyticsPropertyFlow = "unknown",
+  request,
+  ...props
+}: {
+  ...RawProps,
+  analyticsPropertyFlow: string,
+  description?: string,
+  request?: AppRequest,
+}) {
+  const currency = request?.currency || request?.account?.currency;
+  const appName = request?.appName || currency?.managerAppName;
+  useEffect(() => {
+    const trackingArgs = [
+      "In-line app install",
+      { appName, flow: analyticsPropertyFlow },
+    ];
+    track(...trackingArgs);
+  }, [appName, analyticsPropertyFlow]);
+  return renderLoading(props);
 }
 
 type WarningOutdatedProps = {
@@ -542,7 +582,17 @@ const styles = StyleSheet.create({
   connectDeviceContainer: {
     height: 100,
   },
+  connectDeviceName: {
+    marginBottom: 8,
+    fontSize: 15,
+  },
+  connectDeviceLabel: {
+    fontSize: 20,
+  },
   verifyAddress: {
     height: 72,
+  },
+  connectDeviceExtraContentWrapper: {
+    marginTop: 36,
   },
 });
