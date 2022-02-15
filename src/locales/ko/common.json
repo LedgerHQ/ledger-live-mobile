@@ -771,6 +771,7 @@
     "stepSelectDevice": {
       "title": "어떤 장치를 이용 중인가요?",
       "nanoS": "Nano S",
+      "nanoSP": "Nano S Plus",
       "nanoX": "Nano X",
       "blue": "블루"
     },
@@ -859,6 +860,9 @@
             },
             "nanoS": {
               "label": "휴대폰의 USB 포트에 연결하여 장치를 켜주세요."
+            },
+            "nanoSP": {
+              "label": "Turn on your device by connecting it to the USB port of your phone."
             },
             "blue": {
               "label": "휴대폰의 USB 포트에 연결하고 전원 버튼을 눌러 장치를 켜주세요."
@@ -1035,6 +1039,9 @@
             "nanoS": {
               "label": "휴대폰의 USB 포트에 연결하여 장치를 켜주세요."
             },
+            "nanoSP": {
+              "label": "Turn on your device by connecting it to the USB port of your phone."
+            },
             "blue": {
               "label": "휴대폰의 USB 포트에 연결하고 전원 버튼을 눌러 장치를 켜주세요."
             }
@@ -1091,6 +1098,11 @@
         "title": "Nano를 연결하세요",
         "desc": "이 휴대폰에서 Nano를 처음 설정합니다. 장치를 빠르게 페어링 해보세요.",
         "cta": "Nano를 연결하세요"
+      },
+      "nanoSP": {
+        "title": "Connect your Nano",
+        "desc": "This is the first time you’re setting up your Nano with this phone. Let’s quickly connect your device.",
+        "cta": "Let’s connect my Nano"
       },
       "blue": {
         "title": "Blue를 연결하세요",
