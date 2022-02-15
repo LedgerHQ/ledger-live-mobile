@@ -771,6 +771,7 @@
     "stepSelectDevice": {
       "title": "Какое у вас устройство?",
       "nanoS": "Nano S",
+      "nanoSP": "Nano S Plus",
       "nanoX": "Nano X",
       "blue": "Blue"
     },
@@ -859,6 +860,9 @@
             },
             "nanoS": {
               "label": "Включите устройство, подсоединив его к телефону посредством USB-порта."
+            },
+            "nanoSP": {
+              "label": "Turn on your device by connecting it to the USB port of your phone."
             },
             "blue": {
               "label": "Включите устройство: подсоедините его к USB-порту телефона и нажмите кнопку включения."
@@ -1035,6 +1039,9 @@
             "nanoS": {
               "label": "Включите устройство, подсоединив его к телефону посредством USB-порта."
             },
+            "nanoSP": {
+              "label": "Turn on your device by connecting it to the USB port of your phone."
+            },
             "blue": {
               "label": "Включите устройство: подсоедините его к USB-порту телефона и нажмите кнопку включения."
             }
@@ -1091,6 +1098,11 @@
         "title": "Подключение вашего Nano",
         "desc": "Вы впервые синхронизируете Nano с этим смартфоном. Необходимо подключить ваше устройство.",
         "cta": "Подключить Nano"
+      },
+      "nanoSP": {
+        "title": "Connect your Nano",
+        "desc": "This is the first time you’re setting up your Nano with this phone. Let’s quickly connect your device.",
+        "cta": "Let’s connect my Nano"
       },
       "blue": {
         "title": "Подключите ваш кошелёк Blue",
@@ -1319,7 +1331,7 @@
     "M": "млн",
     "B": "млрд",
     "T": "трлн",
-    "Q": "qa",
+    "Q": "квадрлн",
     "Qn": "квнт"
   },
   "time": {
