@@ -82,6 +82,7 @@ function OnboardingStepUseCaseSelection({ navigation, route }: Props) {
       <TrackScreen category="Onboarding" name="UseCase" />
       <FlatList
         data={useCases}
+        testID="use-case-scroll"
         renderItem={({ item, index }) => (
           <Fragment key={item.key + index}>
             {index < 2 && (
