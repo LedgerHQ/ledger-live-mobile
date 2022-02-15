@@ -1,20 +1,16 @@
 import React, { useRef, useCallback, useMemo } from "react";
 import { useSelector } from "react-redux";
 import { StyleSheet, FlatList } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 import Animated from "react-native-reanimated";
 import { createNativeWrapper } from "react-native-gesture-handler";
-import { Trans, useTranslation } from "react-i18next";
+import { Trans } from "react-i18next";
 import { useFocusEffect } from "@react-navigation/native";
 import { isAccountEmpty } from "@ledgerhq/live-common/lib/account";
 
 import { Box, Flex, Link, Text } from "@ledgerhq/native-ui";
 
 import styled from "styled-components/native";
-import {
-  useRefreshAccountsOrdering,
-  useDistribution,
-} from "../../actions/general";
+import { useRefreshAccountsOrdering } from "../../actions/general";
 import { accountsSelector } from "../../reducers/accounts";
 import { counterValueCurrencySelector } from "../../reducers/settings";
 import { usePortfolio } from "../../actions/portfolio";
@@ -22,14 +18,13 @@ import globalSyncRefreshControl from "../../components/globalSyncRefreshControl"
 
 import GraphCardContainer from "./GraphCardContainer";
 import Carousel from "../../components/Carousel";
-import StickyHeader from "./StickyHeader";
 import Header from "./Header";
 import extraStatusBarPadding from "../../logic/extraStatusBarPadding";
 import TrackScreen from "../../analytics/TrackScreen";
 import MigrateAccountsBanner from "../MigrateAccounts/Banner";
 import RequireTerms from "../../components/RequireTerms";
 import { useScrollToTop } from "../../navigation/utils";
-import { NavigatorName, ScreenName } from "../../const";
+import { NavigatorName } from "../../const";
 import FabActions from "../../components/FabActions";
 import FirmwareUpdateBanner from "../../components/FirmwareUpdateBanner";
 import DiscoverSection from "./DiscoverSection";
@@ -99,7 +94,6 @@ export default function PortfolioScreen({ navigation }: Props) {
   const accounts = useSelector(accountsSelector);
   const counterValueCurrency = useSelector(counterValueCurrencySelector);
   const portfolio = usePortfolio();
-  const { t } = useTranslation();
 
   const refreshAccountsOrdering = useRefreshAccountsOrdering();
   useFocusEffect(refreshAccountsOrdering);
@@ -113,29 +107,11 @@ export default function PortfolioScreen({ navigation }: Props) {
   ]);
 
   const flatListRef = useRef();
-  let distribution = useDistribution();
-  const maxDistributionToDisplay = 3;
-  distribution = {
-    ...distribution,
-    list: distribution.list.slice(0, maxDistributionToDisplay),
-  };
 
   const showAssets = accounts.length > 0;
 
   const maxAssetsToDisplay = 3;
   const assetsToDisplay = accounts.slice(0, maxAssetsToDisplay);
-
-  const onDistributionButtonPress = useCallback(() => {
-    navigation.navigate(ScreenName.Distribution);
-  }, [navigation]);
-
-  const onDistributionCardPress = useCallback(
-    (i, item) =>
-      navigation.navigate(ScreenName.Asset, {
-        currency: item.currency,
-      }),
-    [navigation],
-  );
 
   const data = useMemo(
     () => [
