@@ -14,4 +14,4 @@ const Badge = styled(Flex).attrs({
   borderWidth: 3,
 })``;
 
-export default () => <Badge />;
+export default Badge;
