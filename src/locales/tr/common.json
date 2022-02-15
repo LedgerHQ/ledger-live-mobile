@@ -862,7 +862,7 @@
               "label": "Cihazınızı açmak için onu telefonunuzun USB bağlantı noktasına bağlayın."
             },
             "nanoSP": {
-              "label": "Turn on your device by connecting it to the USB port of your phone."
+              "label": "Cihazınızı açmak için telefonunuzun USB bağlantı noktasına bağlayın."
             },
             "blue": {
               "label": "Cihazınızı açmak için onu telefonunuzun USB bağlantı noktasına bağlayın ve çalıştırma tuşuna basın."
@@ -1040,7 +1040,7 @@
               "label": "Cihazınızı açmak için telefonunuzun USB bağlantı noktasına bağlayın."
             },
             "nanoSP": {
-              "label": "Turn on your device by connecting it to the USB port of your phone."
+              "label": "Cihazınızı açmak için telefonunuzun USB bağlantı noktasına bağlayın."
             },
             "blue": {
               "label": "Cihazınızı açmak için telefonunuzun USB bağlantı noktasına bağlayın ve çalıştırma tuşuna basın."
@@ -1100,9 +1100,9 @@
         "cta": "Nano'mu bağla"
       },
       "nanoSP": {
-        "title": "Connect your Nano",
-        "desc": "This is the first time you’re setting up your Nano with this phone. Let’s quickly connect your device.",
-        "cta": "Let’s connect my Nano"
+        "title": "Nano'nuzu bağlayın",
+        "desc": "Nano cihazınızı bu telefonla ilk kez kuruyorsunuz. Cihazınızı hızlı bir şekilde bağlayalım.",
+        "cta": "Nano'mu bağla"
       },
       "blue": {
         "title": "Blue'nuzu bağlayın",
