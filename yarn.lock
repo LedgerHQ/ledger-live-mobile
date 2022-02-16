@@ -2479,10 +2479,9 @@
     bignumber.js "^9.0.1"
     json-rpc-2.0 "^0.2.16"
 
-"@ledgerhq/live-common@^21.33.0":
-  version "21.33.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-21.33.0.tgz#4b709dcbccdcb5010fd19b6829effe2a18587cc3"
-  integrity sha512-CpMiASJjLOYCz59EqjGEe3p7JxoF062RpbVuaF2AIBje09kxu9kVeqBeOQpk2bx+jLH2t3yWvmqVh9E1sm9FyA==
+"@ledgerhq/live-common@https://github.com/LedgerHQ/ledger-live-common.git#feat/LIVE-1123-fix-low-balance":
+  version "21.32.4"
+  resolved "https://github.com/LedgerHQ/ledger-live-common.git#00df73003f8ead5558c228c5e4160278a99b4fe3"
   dependencies:
     "@celo/contractkit" "^1.5.1"
     "@celo/wallet-base" "^1.5.1"
