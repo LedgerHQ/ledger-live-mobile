@@ -862,7 +862,7 @@
               "label": "قم بتشغيل جهازك عن طريق توصيله بمنفذ ال USB بهاتفك."
             },
             "nanoSP": {
-              "label": "Turn on your device by connecting it to the USB port of your phone."
+              "label": "قم بتشغيل جهازك عن طريق توصيله بمنفذ ال USB بهاتفك."
             },
             "blue": {
               "label": "قم بتشغيل جهازك عن طريق توصيله بمنفذ ال USB بهاتفك والضغط على زر الطاقة."
@@ -1040,7 +1040,7 @@
               "label": "قم بتشغيل جهازك عن طريق توصيله بمنفذ ال USB بهاتفك."
             },
             "nanoSP": {
-              "label": "Turn on your device by connecting it to the USB port of your phone."
+              "label": "قم بتشغيل جهازك عن طريق توصيله بمنفذ ال USB بهاتفك."
             },
             "blue": {
               "label": "قم بتشغيل جهازك عن طريق توصيله بمنفذ ال USB بهاتفك والضغط على زر الطاقة."
@@ -1100,9 +1100,9 @@
         "cta": "لنقم بتوصيل جهاز Nano الخاص بي"
       },
       "nanoSP": {
-        "title": "Connect your Nano",
-        "desc": "This is the first time you’re setting up your Nano with this phone. Let’s quickly connect your device.",
-        "cta": "Let’s connect my Nano"
+        "title": "قم بتوصيل Nano الخاص بك",
+        "desc": "هذه هي المرة الأولى التي تستخدم فيها هذا الهاتف لإعداد Nano الخاص بك. لنقوم بتوصيل جهازك سريعاً.",
+        "cta": "لنقم بتوصيل جهاز Nano الخاص بي"
       },
       "blue": {
         "title": "قم بتوصيل جهاز Blue الخاص بك",
@@ -1289,7 +1289,7 @@
     "settings": "إعدادات",
     "platform": "إكتشف",
     "nanoX": "Nano X",
-    "market": "Market"
+    "market": "السوق"
   },
   "portfolio": {
     "totalBalance": "إجمالي الرصيد",
@@ -1322,8 +1322,8 @@
   },
   "byteSize": {
     "bytes": "{{size}} بايت",
-    "kbUnit": "{{size}} KB",
-    "mbUnit": "{{size}} MB"
+    "kbUnit": "{{size}} كيلوبايت",
+    "mbUnit": "{{size}} ميجابايت"
   },
   "numberCompactNotation": {
     "d": "",
@@ -2590,7 +2590,7 @@
     "quitApp": "الخروج من التطبيق على جهازك",
     "appNotInstalled": "يُرجى تثبيت تطبيق {{appName}}",
     "appNotInstalled_plural": "الرجاء تثبيت تطبيقات {{appName}}",
-    "useAnotherDevice": "Use another device",
+    "useAnotherDevice": "استخدام جهاز آخر",
     "verifyAddress": {
       "title": "تحقق من العنوان على الجهاز",
       "description": "يرجى التحقق من أن العنوان {{currencyName}} الذي سيتم عرضه في ليدجر لايف يطابق العنوان الموجود على جهاز ليدجر الخاص بك."
@@ -3881,49 +3881,49 @@
     }
   },
   "market": {
-    "title": "Market",
+    "title": "السوق",
     "filters": {
-      "sort": "Sort",
-      "filter": "Filter",
+      "sort": "ترتيب",
+      "filter": "تصفية",
       "view": {
-        "label": "View",
-        "all": "All coins",
+        "label": "عرض",
+        "all": "جميع العملات",
         "liveCompatible": "Live Compatible",
-        "all_label": "All cryptocurrencies",
+        "all_label": "جميع العملات الرقمية",
         "liveCompatible_label": "Only Live Supported"
       },
       "order": {
-        "market_cap": "Rank",
-        "market_cap_asc": "Rank (Market cap) asc.",
-        "market_cap_desc": "Rank (Market cap) desc."
+        "market_cap": "المرتبة",
+        "market_cap_asc": "المرتبة (سقف أسعار السوق) تصاعدي",
+        "market_cap_desc": "المرتبة (سقف أسعار السوق) تنازلي"
       },
-      "currency": "Currency",
-      "time": "Time",
-      "apply": "Apply"
+      "currency": "العملة",
+      "time": "الوقت",
+      "apply": "تطبيق"
     },
     "marketList": {
-      "crypto": "Crypto",
-      "price": "Price",
-      "change": "Change",
-      "marketCap": "Market cap",
-      "last7d": "Last 7 days"
+      "crypto": "الأصول المشفرة",
+      "price": "السعر",
+      "change": "تغيير",
+      "marketCap": "سقف أسعار السوق",
+      "last7d": "آخر 7 أيام"
     },
     "detailsPage": {
-      "holding": "Your Holdings",
-      "priceStatistics": "Price Statistics",
-      "price": "Price",
-      "tradingVolume": "Trading volume",
-      "24hLowHight": "24h Low / 24h High",
-      "7dLowHigh": "7d Low / 7d High",
-      "allTimeHigh": "All time high",
-      "allTimeLow": "All time low",
-      "marketCapRank": "Market cap rank",
-      "marketCapDominance": "Market cap dominance",
-      "supply": "Supply",
-      "circulatingSupply": "Circulating supply",
-      "totalSupply": "Total supply",
-      "maxSupply": "Max supply",
-      "assetNotSupportedOnLedgerLive": "This asset is not supported on Ledger Live."
+      "holding": "مقتنياتك",
+      "priceStatistics": "إحصائيات الأسعار",
+      "price": "السعر",
+      "tradingVolume": "حجم التداول",
+      "24hLowHight": "أقل معدل 24 ساعة / أعلى معدل 24 ساعة",
+      "7dLowHigh": "أقل معدل 7 أيام / أعلى معدل 7 أيام",
+      "allTimeHigh": "الحد الأقصى التاريخي",
+      "allTimeLow": "الحد الأدنى التاريخي",
+      "marketCapRank": "ترتيب سقف أسعار السوق",
+      "marketCapDominance": "هيمنة سقف أسعار السوق",
+      "supply": "توريد",
+      "circulatingSupply": "التوريد المتداول",
+      "totalSupply": "إجمالي التوريد",
+      "maxSupply": "الحد الاقصى للتوريد",
+      "assetNotSupportedOnLedgerLive": "هذا الأصل غير مدعوم على Ledger Live."
     },
     "range": {
       "1h": "1H",
