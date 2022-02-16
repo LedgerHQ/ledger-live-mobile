@@ -1322,8 +1322,8 @@
   },
   "byteSize": {
     "bytes": "{{size}}バイト",
-    "kbUnit": "{{size}}KB",
-    "mbUnit": "{{size}}MB"
+    "kbUnit": "{{size}} kB",
+    "mbUnit": "{{size}} MB"
   },
   "numberCompactNotation": {
     "d": "",
