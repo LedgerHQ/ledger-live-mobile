@@ -31,10 +31,9 @@ describe("Onboarding", () => {
 
     // await element(by.id("ScrollView")).scroll(200, "down", 0.5, 0.5);
 
-    await waitFor(element(by.id("Onboarding - Connect|nanoX")))
-      .toBeVisible()
-      .whileElement(by.id("use-case-scroll"))
-      .scroll(200, "down");
+    const scrollView = element(by.id("UseCaseSelectScrollView"));
+      
+    await scrollView.scroll(250, 'down', NaN, 0.5);
     await wait(5000);
 
     await element(by.id("Onboarding - Connect|nanoX")).tap();

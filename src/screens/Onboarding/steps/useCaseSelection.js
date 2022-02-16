@@ -77,6 +77,7 @@ function OnboardingStepUseCaseSelection({ navigation, route }: Props) {
   return (
     <AnimatedHeaderView
       hasBackButton
+      scrollViewTestID="UseCaseSelectScrollView"
       title={<Trans i18nKey="onboarding.stepUseCase.title" />}
     >
       <TrackScreen category="Onboarding" name="UseCase" />

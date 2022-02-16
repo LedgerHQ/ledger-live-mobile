@@ -71,6 +71,7 @@ type Props = {
   closeAction?: () => void,
   children?: React$Node,
   footer?: React$Node,
+  scrollViewTestID?: string,
   style?: *,
   titleStyle?: *,
 };
@@ -84,6 +85,7 @@ export default function AnimatedHeaderView({
   children,
   footer,
   style,
+  scrollViewTestID,
   titleStyle,
 }: Props) {
   const { colors } = useTheme();
@@ -169,10 +171,10 @@ export default function AnimatedHeaderView({
       {children && isReady && (
         <AnimatedView animation="fadeInUp" delay={50} duration={300}>
           <Animated.ScrollView
+            testID={scrollViewTestID}
             onScroll={event}
             scrollEventThrottle={10}
             contentContainerStyle={[styles.scrollArea]}
-            testID={isFocused ? "ScrollView" : undefined}
           >
             {children}
           </Animated.ScrollView>
