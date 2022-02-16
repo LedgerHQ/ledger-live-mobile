@@ -88,7 +88,7 @@ import com.android.build.OutputFile
  */
 
 project.ext.react = [
-    enableHermes: true,  // clean and rebuild if changing
+    enableHermes: System.getenv("HERMES_ENABLED_ANDROID") == "true",  // clean and rebuild if changing
     // bundleInDebug: true, // Uncomment this to debug java without having to deal with JS dev server (metro)
 ]
 project.ext.sentryCli = [
