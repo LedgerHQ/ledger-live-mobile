@@ -1322,7 +1322,7 @@
   },
   "byteSize": {
     "bytes": "{{size}} بايت",
-    "kbUnit": "{{size}} kB",
+    "kbUnit": "{{size}} KB",
     "mbUnit": "{{size}} MB"
   },
   "numberCompactNotation": {
