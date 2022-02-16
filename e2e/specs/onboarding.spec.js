@@ -1,11 +1,16 @@
 import { device, element, by, waitFor } from "detox";
+import * as bridge from "../engine/bridge/server";
 
 describe("Onboarding", () => {
   beforeAll(async () => {
-    await device
-      .launchApp
+    await device.launchApp(
       // { delete: true }
-      ();
+      {
+        launchArgs: {
+          ENVFILE: ".env.mock",
+        },
+      },
+    );
   });
 
   function wait(milliseconds) {
@@ -25,18 +30,35 @@ describe("Onboarding", () => {
     await element(by.id("Onboarding Device - Selection|nanoX")).tap();
 
     //select connect
-
-    // const scrollElement = await element(by.id("use-case-scroll"));
-    // console.log({ scrollElement });
-
-    // await element(by.id("ScrollView")).scroll(200, "down", 0.5, 0.5);
-
-    const scrollView = element(by.id("UseCaseSelectScrollView"));
-      
-    await scrollView.scroll(250, 'down', NaN, 0.5);
-    await wait(5000);
+    await waitFor(element(by.id("Onboarding - Connect|nanoX")))
+      .toBeVisible()
+      .whileElement(by.id("UseCaseSelectScrollView"))
+      .scroll(100, "down", NaN, 0.5);
 
     await element(by.id("Onboarding - Connect|nanoX")).tap();
-    await wait(5000);
+
+    // Accept warning about seed phrase
+    await element(by.id("Onboarding - Seed warning")).tap();
+
+    // start pairing
+    console.log("------ waiting for pair continue");
+
+    await element(by.id("OnboardingStemPairNewContinue")).tap();
+    console.log("------ just clicked start new pair");
+
+    //proceed
+    await element(by.id("Proceed")).tap();
+    console.log("------ just clicked proceed");
+    // wait(5000);
+
+    //add device
+    const [david] = bridge.addDevices();
+    await waitFor(element(by.id(`DeviceItemEnter ${david}`)))
+      .toBeVisible()
+      .withTimeout(10000);
+    await element(by.id(`DeviceItemEnter ${david}`)).tap();
+
+    bridge.setInstalledApps();
+    bridge.open();
   });
 });

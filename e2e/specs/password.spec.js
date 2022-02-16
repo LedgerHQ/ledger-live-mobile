@@ -6,10 +6,10 @@ describe("Password Lock Screen", () => {
     await device.launchApp({
       //
     });
-    bridge.loadConfig("allLiveCoinsNoOperations", true);
   });
 
   it("should be able to enter the correct password", async () => {
+    bridge.loadConfig("onboardingcompleted", true);
     // test code here
   });
 });

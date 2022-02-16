@@ -36,6 +36,7 @@ export function TransferTabIcon() {
         hitSlop={hitSlop}
         onPress={openModal}
         style={[styles.root, { backgroundColor: colors.live }]}
+        testID="transfer-button"
       >
         <TransferIcon size={20} color={"#FFF"} />
       </Touchable>
