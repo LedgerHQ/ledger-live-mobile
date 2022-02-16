@@ -57,8 +57,6 @@ export default function DiscoverSection() {
     [navigation, setDisclaimerDisabled, disclaimerDisabled],
   );
 
-  console.log(filteredManifests);
-
   return (
     <>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
