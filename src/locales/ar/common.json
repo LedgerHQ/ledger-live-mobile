@@ -1327,12 +1327,12 @@
   },
   "numberCompactNotation": {
     "d": "",
-    "K": "k",
-    "M": "m",
-    "B": "bn",
-    "T": "tn",
-    "Q": "qa",
-    "Qn": "qi"
+    "K": "ألف",
+    "M": "مليون",
+    "B": "مليار",
+    "T": "تريليون",
+    "Q": "كوادريليون",
+    "Qn": "كوينتيليون"
   },
   "time": {
     "day": "1يوم",
@@ -3888,9 +3888,9 @@
       "view": {
         "label": "عرض",
         "all": "جميع العملات",
-        "liveCompatible": "Live Compatible",
+        "liveCompatible": "متوافق مع Live",
         "all_label": "جميع العملات الرقمية",
-        "liveCompatible_label": "Only Live Supported"
+        "liveCompatible_label": "مدعوم فقط في Live"
       },
       "order": {
         "market_cap": "المرتبة",
@@ -3926,27 +3926,27 @@
       "assetNotSupportedOnLedgerLive": "هذا الأصل غير مدعوم على Ledger Live."
     },
     "range": {
-      "1h": "1H",
-      "24h": "24H",
-      "7d": "7D",
-      "30d": "30D",
-      "1y": "1Y"
+      "1h": "1 ساعة",
+      "24h": "24 ساعة",
+      "7d": "7 أيام",
+      "30d": "30 يوم",
+      "1y": "1 سنة"
     },
     "warnings": {
-      "connectionError": "Connection Error",
-      "ledgerUnableToRetrieveData": "Ledger Live is unable to retrieve data.",
-      "checkInternetAndReload": "Please check your internet connection and reload this page.",
-      "reload": "Reload",
-      "noCryptosFound": "No coins found",
-      "noCurrencyFound": "No currency found",
-      "noSearchResultsFor": "Sorry, we did not find any coins for <0>{{search}}</0>. Please retry the search with another keyword.",
-      "noCurrencySearchResultsFor": "Sorry, we did not find any currencies for <0>{{search}}</0>. Please retry the search with another keyword.",
-      "noSearchResults": "Sorry, we did not find any search results.",
-      "retrySearchKeyword": "Please retry the search with another keyword.",
-      "retrySearchParams": "Please retry the search with another parameters.",
-      "trackFavAssets": "Track your favourite",
-      "clickOnStarIcon": "Clicking on the star icon next to an asset will automatically add them to your favorites.",
-      "browseAssets": "Browse assets"
+      "connectionError": "خطأ في الاتصال",
+      "ledgerUnableToRetrieveData": "Ledger Live غير قادر على استرداد البيانات.",
+      "checkInternetAndReload": "يُرجى التحقق من اتصالك بالإنترنت وإعادة تحميل هذه الصفحة.",
+      "reload": "إعادة تحميل",
+      "noCryptosFound": "لم يتم العثور على عملات",
+      "noCurrencyFound": "لم يتم العثور على عملات",
+      "noSearchResultsFor": "عذراً، لم نجد أي عملات ل<0>{{search}}</0>. الرجاء إعادة محاولة البحث بكلمة رئيسية أخرى.",
+      "noCurrencySearchResultsFor": "عذراً، لم نجد أي عملات ل<0>{{search}}</0>. الرجاء إعادة محاولة البحث بكلمة رئيسية أخرى.",
+      "noSearchResults": "عذراً، لم نجد أي نتائج بحث.",
+      "retrySearchKeyword": "الرجاء إعادة محاولة البحث بكلمة رئيسية أخرى.",
+      "retrySearchParams": "الرجاء إعادة محاولة البحث مع معلمات أخرى.",
+      "trackFavAssets": "تتبع المفضلة لديك",
+      "clickOnStarIcon": "النقر على أيقونة النجمة بجوار أحد الأصول سيضفيها تلقائياً إلى المفضلة لديك.",
+      "browseAssets": "تصفح الأصول"
     }
   },
   "nft": {
