@@ -42,7 +42,11 @@ export default function CheckLanguageAvailability() {
   }, [dispatch, defaultLanguage, answer, onRequestClose]);
 
   const toShow =
-    modalOpened && !hasAnswered && currAppLanguage !== defaultLanguage;
+    modalOpened &&
+    !hasAnswered &&
+    currAppLanguage !== defaultLanguage &&
+    currAppLanguage === "en";
+
   if (!toShow) {
     return null;
   }
