@@ -38,8 +38,8 @@ export const experimentalFeatures: Feature[] = [
     type: "toggle",
     name: "EXPERIMENTAL_CURRENCIES_JS_BRIDGE",
     title: "Experimental JS impl",
-    description: "Use experimental JS implementations for Algorand and Tezos.",
-    valueOn: "tezos,algorand",
+    description: "Use experimental JS implementation for Tezos.",
+    valueOn: "tezos",
     valueOff: "",
   },
   {
