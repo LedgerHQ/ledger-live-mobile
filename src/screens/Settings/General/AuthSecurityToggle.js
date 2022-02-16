@@ -34,6 +34,7 @@ export default function AuthSecurityToggle() {
           style={{ opacity: 0.99 }}
           value={!!privacy}
           onValueChange={onValueChange}
+          testId="password-settings-toggle"
         />
       </SettingsRow>
       {privacy ? <BiometricsRow /> : null}

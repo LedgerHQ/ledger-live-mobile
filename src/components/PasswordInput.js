@@ -90,6 +90,7 @@ const PasswordInput = ({
         onFocus={wrappedOnFocus}
         onBlur={wrappedOnBlur}
         value={password}
+        testID="password-text-input"
       />
       {secureTextEntry ? (
         <Touchable

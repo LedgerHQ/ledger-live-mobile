@@ -52,6 +52,7 @@ describe("Onboarding", () => {
     // wait(5000);
 
     //add device
+    // how to handle device here?
     const [david] = bridge.addDevices();
     await waitFor(element(by.id(`DeviceItemEnter ${david}`)))
       .toBeVisible()

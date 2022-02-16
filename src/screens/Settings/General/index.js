@@ -14,7 +14,10 @@ import NavigationScrollView from "../../../components/NavigationScrollView";
 
 export default function GeneralSettings() {
   return (
-    <NavigationScrollView contentContainerStyle={styles.root}>
+    <NavigationScrollView
+      contentContainerStyle={styles.root}
+      scrollTestID="general-settings-scroll-view"
+    >
       <TrackScreen category="Settings" name="General" />
       <CountervalueSettingsRow />
       <LanguageRow />

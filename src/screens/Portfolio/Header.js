@@ -77,7 +77,7 @@ export default function PortfolioHeader() {
       </View>
       <View style={[styles.distributionButton, styles.marginLeft]}>
         <Touchable onPress={onSettingsButtonPress}>
-          <SettingsIcon size={18} color={colors.grey} />
+          <SettingsIcon size={18} color={colors.grey} testID="settings-icon" />
         </Touchable>
       </View>
     </View>

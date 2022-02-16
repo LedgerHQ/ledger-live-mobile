@@ -19,6 +19,7 @@ export default function NavigationScrollView({
       ref={ref}
       {...scrollViewProps}
       style={[{ backgroundColor: colors.background }, style]}
+      testID={scrollViewProps.scrollTestID}
     >
       {children}
     </ScrollView>
