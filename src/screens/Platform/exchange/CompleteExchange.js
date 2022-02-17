@@ -122,7 +122,7 @@ export default function PlatformCompleteExchange({
   );
 }
 
-const exchangeAction = createAction(connectApp, completeExchange);
+const exchangeAction = createAction(completeExchange);
 const sendAction = txCreateAction(connectApp);
 
 const styles = StyleSheet.create({
