@@ -22,6 +22,7 @@ import type { PortfolioRange } from "@ledgerhq/live-common/lib/portfolio/v2/type
 import type { DeviceModelInfo } from "@ledgerhq/live-common/lib/types/manager";
 import { currencySettingsDefaults } from "../helpers/CurrencySettingsDefaults";
 import type { State } from ".";
+import { SLIDES } from "../components/Carousel";
 
 const bitcoin = getCryptoCurrencyById("bitcoin");
 const ethereum = getCryptoCurrencyById("ethereum");
@@ -83,7 +84,7 @@ export type SettingsState = {
   hasAvailableUpdate: boolean,
   theme: Theme,
   osTheme: ?string,
-  carouselVisibility: number,
+  carouselVisibility: any,
   discreetMode: boolean,
   language: string,
   swap: {
@@ -116,7 +117,7 @@ export const INITIAL_STATE: SettingsState = {
   hasAvailableUpdate: false,
   theme: colorScheme === "dark" ? "dusk" : "light",
   osTheme: undefined,
-  carouselVisibility: 0,
+  carouselVisibility: Object.fromEntries(SLIDES.map(slide => [slide.name, true])),
   discreetMode: false,
   language: "en",
   swap: {

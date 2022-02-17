@@ -1,30 +1,49 @@
-import React, { useState, memo, useCallback } from "react";
+import React, { memo, useCallback } from "react";
 import { View, TouchableOpacity, ScrollView } from "react-native";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import map from "lodash/map";
 import { Trans } from "react-i18next";
-import { Box, Text, Flex } from "@ledgerhq/native-ui";
+import { Box } from "@ledgerhq/native-ui";
 import { CloseMedium } from "@ledgerhq/native-ui/assets/icons";
 import styled from "styled-components/native";
 import { urls } from "../../config/urls";
 import { setCarouselVisibility } from "../../actions/settings";
-import { carouselVisibilitySelector } from "../../reducers/settings";
-import Button from "../Button";
 import Slide from "./Slide";
+import Illustration from "../../images/illustration/Illustration";
+import AcademyLight from "../../images/illustration/Academy.light.png";
+import AcademyDark from "../../images/illustration/Academy.dark.png";
+import BuyCryptoLight from "../../images/illustration/BuyCrypto.light.png";
+import BuyCryptoDark from "../../images/illustration/BuyCrypto.dark.png";
+import SwapLight from "../../images/illustration/Swap.light.png";
+import SwapDark from "../../images/illustration/Swap.dark.png";
+import FamilyPackLight from "../../images/illustration/FamilyPack.light.png";
+import FamilyPackDark from "../../images/illustration/FamilyPack.dark.png";
 
 const DismissCarousel = styled(TouchableOpacity)`
   position: absolute;
-  top: 8;
-  right: 8;
+  top: 10;
+  right: 10;
+  width: 30;
+  height: 30;
+  alignItems: center;
+  justifyContent: center;
+  borderColor: white;
 `;
 
-const SLIDES = [
+export const SLIDES = [
   {
     url: urls.banners.ledgerAcademy,
     name: "LedgerAcademy",
-    title: <Trans i18nKey={`carousel.banners.academy.title`} />,
-    description: <Trans i18nKey={`carousel.banners.academy.description`} />,
-    image: require("../../images/banners/academy.png"),
+    title: <Trans i18nKey={`v3.carousel.banners.academy.title`} />,
+    description: <Trans i18nKey={`v3.carousel.banners.academy.description`} />,
+    // image: require("../../images/banners/academy.png"),
+    icon: (
+      <Illustration
+        lightSource={AcademyLight}
+        darkSource={AcademyDark}
+        size={84}
+      />
+    ),
     position: {
       bottom: 70,
       left: 15,
@@ -35,9 +54,18 @@ const SLIDES = [
   {
     url: "ledgerlive://buy",
     name: "buyCrypto",
-    title: <Trans i18nKey={`carousel.banners.buyCrypto.title`} />,
-    description: <Trans i18nKey={`carousel.banners.buyCrypto.description`} />,
-    image: require("../../images/banners/buycrypto.png"),
+    title: <Trans i18nKey={`v3.carousel.banners.buyCrypto.title`} />,
+    description: (
+      <Trans i18nKey={`v3.carousel.banners.buyCrypto.description`} />
+    ),
+    // image: require("../../images/banners/buycrypto.png"),
+    icon: (
+      <Illustration
+        lightSource={BuyCryptoLight}
+        darkSource={BuyCryptoDark}
+        size={84}
+      />
+    ),
     position: {
       bottom: 70,
       left: 0,
@@ -48,9 +76,16 @@ const SLIDES = [
   {
     url: "ledgerlive://swap",
     name: "Swap",
-    title: <Trans i18nKey={`carousel.banners.swap.title`} />,
-    description: <Trans i18nKey={`carousel.banners.swap.description`} />,
-    image: require("../../images/banners/swap.png"),
+    title: <Trans i18nKey={`v3.carousel.banners.swap.title`} />,
+    description: <Trans i18nKey={`v3.carousel.banners.swap.description`} />,
+    // image: require("../../images/banners/swap.png"),
+    icon: (
+      <Illustration
+        lightSource={SwapLight}
+        darkSource={SwapDark}
+        size={84}
+      />
+    ),
     position: {
       bottom: 70,
       left: 0,
@@ -61,9 +96,18 @@ const SLIDES = [
   {
     url: urls.banners.familyPack,
     name: "FamilyPack",
-    title: <Trans i18nKey={`carousel.banners.familyPack.title`} />,
-    description: <Trans i18nKey={`carousel.banners.familyPack.description`} />,
-    image: require("../../images/banners/familypack.png"),
+    title: <Trans i18nKey={`v3.carousel.banners.familyPack.title`} />,
+    description: (
+      <Trans i18nKey={`v3.carousel.banners.familyPack.description`} />
+    ),
+    // image: require("../../images/banners/familypack.png"),
+    icon: (
+      <Illustration
+        lightSource={FamilyPackLight}
+        darkSource={FamilyPackDark}
+        size={84}
+      />
+    ),
     position: {
       bottom: 70,
       left: 0,
@@ -83,6 +127,7 @@ export const getDefaultSlides = () =>
         title={slide.title}
         description={slide.description}
         image={slide.image}
+        icon={slide.icon}
         position={slide.position}
       />
     ),
@@ -97,13 +142,18 @@ const hitSlop = {
 
 export const CAROUSEL_NONCE: number = 4;
 
-const Carousel = () => {
+type Props = {
+  cardsVisibility: boolean[];
+};
+
+const Carousel = ({ cardsVisibility }: Props) => {
   const dispatch = useDispatch();
-  const hidden = useSelector(carouselVisibilitySelector);
-  const [showDismissConfirmation, setShowDismissConfirmation] = useState(false);
 
   let slides = getDefaultSlides();
-  slides = slides.filter(slide => {
+  slides = slides.filter((slide) => {
+    if (!cardsVisibility[slide.id]) {
+      return false;
+    }
     if (slide.start && slide.start > new Date()) {
       return false;
     }
@@ -113,65 +163,34 @@ const Carousel = () => {
     return true;
   });
 
-  const onDismiss = useCallback(() => setShowDismissConfirmation(true), []);
-
-  const onUndo = useCallback(() => setShowDismissConfirmation(false), []);
-  const onConfirm = useCallback(
-    () => dispatch(setCarouselVisibility(CAROUSEL_NONCE)),
-    [dispatch],
+  const onHide = useCallback(
+    cardId => {
+      dispatch(setCarouselVisibility({ ...cardsVisibility, [cardId]: false }));
+    },
+    [dispatch, cardsVisibility],
   );
 
-  if (!slides.length || hidden >= CAROUSEL_NONCE) {
+  if (!slides.length) {
     // No slides or dismissed, no problem
     return null;
   }
 
   return (
     <Box>
-      {showDismissConfirmation ? (
-        <Box height={"182px"} alignItems={"center"} p={3}>
-          <Text variant={"h3"}>
-            <Trans i18nKey="carousel.title" />
-          </Text>
-          <Text variant={"body"} color={"neutral.c70"}>
-            <Trans i18nKey="carousel.description" />
-          </Text>
-          <Flex flexDirection="row">
-            <Button
-              event="ConfirmationModalCancel"
-              type="secondary"
-              outline
-              titleStyle={{ fontSize: 12 }}
-              containerStyle={{ margin: 8, height: 32 }}
-              title={<Trans i18nKey="carousel.undo" />}
-              onPress={onUndo}
-            />
-            <Button
-              event="ConfirmationModalCancel"
-              type="primary"
-              titleStyle={{ fontSize: 12 }}
-              containerStyle={{ margin: 8, height: 32 }}
-              title={<Trans i18nKey="carousel.confirm" />}
-              onPress={onConfirm}
-            />
-          </Flex>
-        </Box>
-      ) : (
-        <View>
-          <ScrollView horizontal>
-            {slides.map(({ id, Component }) => (
-              <Box mr={6}>
-                <Component key={id} />
-              </Box>
-            ))}
-          </ScrollView>
-          <DismissCarousel hitSlop={hitSlop} onPress={onDismiss}>
-            <CloseMedium size={16} color={"neutral.c70"} />
-          </DismissCarousel>
-        </View>
-      )}
+      <View>
+        <ScrollView horizontal>
+          {slides.map(({ id, Component }) => (
+            <Box mr={6}>
+              <Component key={id} />
+              <DismissCarousel hitSlop={hitSlop} onPress={() => onHide(id)}>
+                <CloseMedium size={16} color={"neutral.c70"} />
+              </DismissCarousel>
+            </Box>
+          ))}
+        </ScrollView>
+      </View>
     </Box>
   );
 };
 
-export default memo<{}>(Carousel);
+export default memo<Props>(Carousel);

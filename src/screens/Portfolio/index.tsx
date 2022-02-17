@@ -17,7 +17,7 @@ import { usePortfolio } from "../../actions/portfolio";
 import globalSyncRefreshControl from "../../components/globalSyncRefreshControl";
 
 import GraphCardContainer from "./GraphCardContainer";
-import Carousel from "../../components/Carousel";
+import Carousel, { CAROUSEL_NONCE } from "../../components/Carousel";
 import Header from "./Header";
 import extraStatusBarPadding from "../../logic/extraStatusBarPadding";
 import TrackScreen from "../../analytics/TrackScreen";
@@ -30,6 +30,7 @@ import FirmwareUpdateBanner from "../../components/FirmwareUpdateBanner";
 import DiscoverSection from "./DiscoverSection";
 import AddAssetsCard from "./AddAssetsCard";
 import Assets from "./Assets";
+import { carouselVisibilitySelector } from "../../reducers/settings";
 
 export { default as PortfolioTabIcon } from "./TabIcon";
 
@@ -91,6 +92,7 @@ const SectionTitle = ({
 };
 
 export default function PortfolioScreen({ navigation }: Props) {
+  const carouselVisibility = useSelector(carouselVisibilitySelector);
   const accounts = useSelector(accountsSelector);
   const counterValueCurrency = useSelector(counterValueCurrencySelector);
   const portfolio = usePortfolio();
@@ -144,7 +146,11 @@ export default function PortfolioScreen({ navigation }: Props) {
                 navigation={navigation}
                 navigatorName={NavigatorName.Accounts}
               />
-              <Assets balanceHistory={portfolio.balanceHistory} flatListRef={flatListRef} assets={assetsToDisplay} />
+              <Assets
+                balanceHistory={portfolio.balanceHistory}
+                flatListRef={flatListRef}
+                assets={assetsToDisplay}
+              />
             </Flex>,
           ]
         : []),
@@ -156,13 +162,17 @@ export default function PortfolioScreen({ navigation }: Props) {
         />
         <DiscoverSection />
       </Flex>,
-      <Flex mx={6} mt={10}>
-        <SectionTitle
-          title={<Trans i18nKey={"v3.portfolio.recommended.title"} />}
-        />
-        <Carousel />
-      </Flex>,
-      <Box mt={20} />,
+      ...(Object.values(carouselVisibility).some(cardVisible => cardVisible)
+        ? [
+            <Flex mx={6} mt={10}>
+              <SectionTitle
+                title={<Trans i18nKey={"v3.portfolio.recommended.title"} />}
+              />
+              <Carousel cardsVisibility={carouselVisibility} />
+            </Flex>,
+          ]
+        : []),
+      <Box mt={24} />,
     ],
     [
       accounts.length,
@@ -172,6 +182,7 @@ export default function PortfolioScreen({ navigation }: Props) {
       navigation,
       portfolio,
       showAssets,
+      carouselVisibility,
     ],
   );
 

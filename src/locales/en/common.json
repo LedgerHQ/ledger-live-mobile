@@ -4544,7 +4544,7 @@
         },
         "academy": {
           "title": "Ledger Academy",
-          "description": "Everything you need to\nknow about crypto"
+          "description": "Everything you need to know about Blockchain"
         },
         "stakeCosmos": {
           "title": "Stake COSMOS",
@@ -4556,11 +4556,11 @@
         },
         "buyCrypto": {
           "title": "Buy Crypto",
-          "description": "Buy crypto on\nLedger Live"
+          "description": "Buy crypto on Ledger Live"
         },
         "swap": {
           "title": "Swap crypto",
-          "description": "Securely exchange one\ncrypto for another"
+          "description": "Securely exchange one crypto for another"
         },
         "algorand": {
           "title": "Algorand",
