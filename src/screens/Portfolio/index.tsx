@@ -1,6 +1,6 @@
 import React, { useRef, useCallback, useMemo } from "react";
 import { useSelector } from "react-redux";
-import { StyleSheet, FlatList } from "react-native";
+import { FlatList } from "react-native";
 import Animated from "react-native-reanimated";
 import { createNativeWrapper } from "react-native-gesture-handler";
 import { Trans } from "react-i18next";
@@ -158,7 +158,7 @@ export default function PortfolioScreen({ navigation }: Props) {
       </Flex>,
       <Flex mx={6} mt={10}>
         <SectionTitle
-          title={<Trans i18nKey={"v3.portfolio.recommanded.title"} />}
+          title={<Trans i18nKey={"v3.portfolio.recommended.title"} />}
         />
         <Carousel />
       </Flex>,
@@ -186,7 +186,7 @@ export default function PortfolioScreen({ navigation }: Props) {
         <AnimatedFlatListWithRefreshControl
           ref={ref}
           data={data}
-          style={styles.inner}
+          style={{ flex: 1, position: "relative" }}
           renderItem={({ item }) => item}
           keyExtractor={(item, index) => String(index)}
           showsVerticalScrollIndicator={false}
@@ -210,38 +210,3 @@ export default function PortfolioScreen({ navigation }: Props) {
     </>
   );
 }
-
-const styles = StyleSheet.create({
-  root: {
-    flex: 1,
-  },
-  inner: {
-    position: "relative",
-    flex: 1,
-  },
-  distrib: {
-    marginTop: -56,
-  },
-  list: {
-    flex: 1,
-  },
-  distributionTitle: {
-    fontSize: 16,
-    lineHeight: 24,
-    paddingHorizontal: 16,
-    marginTop: 8,
-    marginBottom: 8,
-  },
-  stickyActions: {
-    height: 110,
-    width: "100%",
-    alignContent: "flex-start",
-    justifyContent: "flex-start",
-  },
-  styckyActionsInner: { height: 56 },
-  seeMoreBtn: {
-    marginHorizontal: 16,
-    marginTop: 16,
-    marginBottom: 32,
-  },
-});

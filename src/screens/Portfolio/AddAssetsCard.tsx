@@ -42,7 +42,7 @@ export const AddAssetsCard = () => {
         mt={8}
         width={"100%"}
       >
-        <Trans i18nKey="portfolio.emptyState.buttons.import" />
+        <Trans i18nKey="v3.portfolio.emptyState.buttons.import" />
       </Button>
       <AddAccountsModal
         navigation={navigation}

@@ -2,10 +2,10 @@
 import React, { memo, useState, useCallback } from "react";
 import { useSelector } from "react-redux";
 import { Trans } from "react-i18next";
-import { View, StyleSheet, Image } from "react-native";
+import { Image } from "react-native";
+import { Box, Flex, Text } from "@ledgerhq/native-ui";
 import { hasInstalledAnyAppSelector } from "../../reducers/settings";
 import { ScreenName } from "../../const";
-import LText from "../../components/LText";
 import Button from "../../components/Button";
 import AddAccountsModal from "../AddAccounts/AddAccountsModal";
 import noAccountsImg from "../../images/noAccounts.png";
@@ -38,32 +38,32 @@ function EmptyStatePortfolio({ navigation, showHelp = true }: Props) {
   return (
     <>
       {showHelp ? (
-        <View style={styles.help}>
+        <Flex alignSelf="flex-end" mx={6}>
           <HelpLink
             url={hasInstalledAnyApp ? urls.addAccount : urls.goToManager}
             color="grey"
           />
-        </View>
+        </Flex>
       ) : null}
-      <View style={styles.root}>
-        <View style={styles.body}>
+      <Flex m={6} flex={1} flexDirection="column" justifyContent="center">
+        <Box alignItems="center" mt={8}>
           <Image source={hasInstalledAnyApp ? noAccountsImg : noAppsImg} />
-          <LText secondary bold style={styles.title}>
+          <Text variant="body" fontWeight="bold" mt={9} mb={4}>
             <Trans
               i18nKey={`portfolio.emptyState.${
                 hasInstalledAnyApp ? "noAccountsTitle" : "noAppsTitle"
               }`}
             />
-          </LText>
-          <LText secondary style={styles.desc} color="grey">
+          </Text>
+          <Text variant="body" mb={8} textAlign="center" color="neutral.c30">
             <Trans
               i18nKey={`portfolio.emptyState.${
                 hasInstalledAnyApp ? "noAccountsDesc" : "noAppsDesc"
               }`}
             />
-          </LText>
+          </Text>
 
-          <View style={styles.containerCTA}>
+          <Flex alignSelf="stretch" flexDirection="column">
             {hasInstalledAnyApp ? (
               <>
                 <Button
@@ -73,7 +73,7 @@ function EmptyStatePortfolio({ navigation, showHelp = true }: Props) {
                     <Trans i18nKey="portfolio.emptyState.buttons.import" />
                   }
                   onPress={openAddModal}
-                  containerStyle={[styles.primaryCTA]}
+                  containerStyle={{ marginBottom: 16 }}
                 />
                 <Button
                   event="PortfolioEmptyToManager"
@@ -92,56 +92,16 @@ function EmptyStatePortfolio({ navigation, showHelp = true }: Props) {
                 onPress={navigateToManager}
               />
             )}
-          </View>
+          </Flex>
           <AddAccountsModal
             navigation={navigation}
             isOpened={isAddModalOpened}
             onClose={closeAddModal}
           />
-        </View>
-      </View>
+        </Box>
+      </Flex>
     </>
   );
 }
 
 export default memo<Props>(EmptyStatePortfolio);
-
-const styles = StyleSheet.create({
-  root: {
-    flex: 1,
-    margin: 16,
-    flexDirection: "column",
-    justifyContent: "center",
-  },
-
-  help: {
-    marginHorizontal: 16,
-    marginBottom: 0,
-    alignSelf: "flex-end",
-  },
-
-  body: {
-    marginTop: 32,
-    alignItems: "center",
-  },
-
-  primaryCTA: {
-    marginBottom: 16,
-  },
-
-  title: {
-    marginTop: 40,
-    marginBottom: 12,
-    fontSize: 18,
-  },
-  desc: {
-    fontSize: 14,
-    lineHeight: 21,
-    textAlign: "center",
-    marginBottom: 40,
-  },
-  containerCTA: {
-    alignSelf: "stretch",
-    flexDirection: "column",
-  },
-});

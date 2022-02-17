@@ -1,21 +1,22 @@
 import React, { useState, memo, useCallback } from "react";
-import {
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  Platform,
-  ScrollView,
-} from "react-native";
+import { View, TouchableOpacity, ScrollView } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import map from "lodash/map";
 import { Trans } from "react-i18next";
-import { Box, Text } from "@ledgerhq/native-ui";
+import { Box, Text, Flex } from "@ledgerhq/native-ui";
 import { CloseMedium } from "@ledgerhq/native-ui/assets/icons";
+import styled from "styled-components/native";
 import { urls } from "../../config/urls";
 import { setCarouselVisibility } from "../../actions/settings";
 import { carouselVisibilitySelector } from "../../reducers/settings";
 import Button from "../Button";
 import Slide from "./Slide";
+
+const DismissCarousel = styled(TouchableOpacity)`
+  position: absolute;
+  top: 8;
+  right: 8;
+`;
 
 const SLIDES = [
   {
@@ -135,13 +136,13 @@ const Carousel = () => {
           <Text variant={"body"} color={"neutral.c70"}>
             <Trans i18nKey="carousel.description" />
           </Text>
-          <View style={styles.buttonsWrapper}>
+          <Flex flexDirection="row">
             <Button
               event="ConfirmationModalCancel"
               type="secondary"
               outline
               titleStyle={{ fontSize: 12 }}
-              containerStyle={[styles.button, { marginRight: 8 }]}
+              containerStyle={{ margin: 8, height: 32 }}
               title={<Trans i18nKey="carousel.undo" />}
               onPress={onUndo}
             />
@@ -149,11 +150,11 @@ const Carousel = () => {
               event="ConfirmationModalCancel"
               type="primary"
               titleStyle={{ fontSize: 12 }}
-              containerStyle={styles.button}
+              containerStyle={{ margin: 8, height: 32 }}
               title={<Trans i18nKey="carousel.confirm" />}
               onPress={onConfirm}
             />
-          </View>
+          </Flex>
         </Box>
       ) : (
         <View>
@@ -164,76 +165,13 @@ const Carousel = () => {
               </Box>
             ))}
           </ScrollView>
-          <TouchableOpacity
-            style={styles.dismissCarousel}
-            hitSlop={hitSlop}
-            onPress={onDismiss}
-          >
+          <DismissCarousel hitSlop={hitSlop} onPress={onDismiss}>
             <CloseMedium size={16} color={"neutral.c70"} />
-          </TouchableOpacity>
+          </DismissCarousel>
         </View>
       )}
     </Box>
   );
 };
-
-const styles = StyleSheet.create({
-  dismissCarousel: {
-    position: "absolute",
-    top: 8,
-    right: 8,
-  },
-  bullet: {
-    height: 5,
-    width: 5,
-    borderRadius: 5,
-    opacity: 0.5,
-    margin: 4,
-    marginBottom: -20,
-  },
-  scrollView: {},
-  confirmation: {
-    padding: 8,
-    alignItems: "center",
-  },
-  buttonsWrapper: {
-    display: "flex",
-    flexDirection: "row",
-  },
-  button: {
-    height: 32,
-    margin: 8,
-  },
-  title: {
-    fontSize: 14,
-    lineHeight: 16,
-    marginBottom: 4,
-  },
-  description: {
-    opacity: 0.5,
-    fontSize: 12,
-    lineHeight: 15,
-    textAlign: "center",
-  },
-  wrapper: {
-    margin: 16,
-    minHeight: 100,
-    position: "relative",
-    borderRadius: 4,
-    overflow: "hidden",
-    ...Platform.select({
-      android: {
-        elevation: 1,
-      },
-      ios: {
-        shadowOpacity: 0.03,
-        shadowRadius: 8,
-        shadowOffset: {
-          height: 4,
-        },
-      },
-    }),
-  },
-});
 
 export default memo<{}>(Carousel);
