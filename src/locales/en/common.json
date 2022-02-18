@@ -2734,8 +2734,8 @@
       "title": "Storage",
       "used": "Used",
       "genuine": "Your device is genuine",
-      "appsInstalled": "<0>{{number}}</0> app installed",
-      "appsInstalled_plural": "<0>{{number}}</0> apps installed",
+      "appsInstalled": "App <0>{{number}}</0>",
+      "appsInstalled_plural": "Apps <0>{{number}}</0>",
       "storageAvailable": "available"
     },
     "installSuccess": {
@@ -4192,24 +4192,22 @@
       },
       "ManagerNotEnoughSpace": {
         "title": "Not enough storage left",
-        "info": "Please uninstall some apps to free up space for the {{app}} app.",
-        "description": "Uninstalling apps has no impact on your assets."
+        "info": "Please uninstall some apps to free up space for the {{app}} app. Your crypto assets stay safe when uninstalling apps.",
+        "description": "Uninstalling apps has no impact on your assets.",
+        "continue": "Got it!"
       },
       "ManagerQuitPage": {
         "install": {
-          "title": "App installation in progress",
-          "description": "Quitting the Manager will terminate installation.",
-          "stay": "Continue installation"
+          "title": "Quit and cancel installations ?",
+          "description": "Quitting will cancel the app installations in progress."
         },
         "uninstall": {
-          "title": "App uninstall in progress",
-          "description": "Quitting the Manager will terminate uninstallation.",
-          "stay": "Continue uninstallation"
+          "title": "Quit and cancel uninstallations ?",
+          "description": "Quitting will cancel the app uninstallations in progress."
         },
         "update": {
-          "title": "App update in progress",
-          "description": "Quitting the Manager will terminate update.",
-          "stay": "Continue update"
+          "title": "Quit and cancel updates ?",
+          "description": "Quitting will cancel the app updates in progress."
         },
         "quit": "Quit Manager"
       },
@@ -5087,7 +5085,7 @@
       "portfolio": "Portfolio",
       "accounts": "Accounts",
       "transfer": "Transfer",
-      "manager": "Manager",
+      "manager": "Device",
       "settings": "Settings",
       "platform": "Discover",
       "nanoX": "Nano X"
@@ -6461,8 +6459,12 @@
       "title": "Manager",
       "connect": "Select your device",
       "appsCatalog": "App catalog",
-      "installedApps": "Installed apps",
-      "noAppNeededForToken": "Install {{appName}} app for {{tokenName}}",
+      "installedApps": "Apps installed",
+      "token": {
+        "title": "{{appName}} tokens",
+        "noAppNeeded": "{{tokenName}} is a token using the {{appName}} app. There is no app to install.",
+        "installApp": "{{tokenName}} is a token using the {{appName}} app. Install the {{appName}} app to be able to manage your tokens."
+      },
       "tokenAppDisclaimer": "{{tokenName}} is an {{tokenType}} token using the {{appName}} app. To manage {{tokenName}}, <1>install the {{appName}} app</1> and send the tokens <3>to your {{appName}} account</3>.",
       "tokenAppDisclaimerInstalled": "{{tokenName}} is an {{tokenType}} token using the {{appName}} app. To manage {{tokenName}}, <1>open the {{appName}} app</1> and send the tokens <3>to your {{appName}} account</3>.",
       "goToAccounts": "Go to Accounts",
@@ -6479,6 +6481,7 @@
         "title": "App catalog",
         "loading": "Loading apps...",
         "noApps": "No apps found",
+        "searchApps": "Search",
         "searchAppsCatalog": "Search app in catalogue...",
         "searchAppsInstalled": "Search installed apps...",
         "noAppsInstalled": "No apps installed on your device",
@@ -6487,10 +6490,16 @@
         "noResultsDesc": "Please verify the spelling and try again",
         "versionNew": "(NEW{{newVersion}})"
       },
+      "update": {
+        "title": "Update",
+        "subtitle": "Updates available",
+        "updateAll": "Update"
+      },
       "uninstall": {
-        "title": "Uninstall all",
-        "subtitle": "Uninstall all apps?",
-        "description": "Uninstalling apps has no impact on your crypto assets. You can reinstall apps in the App catalog."
+        "title": "Uninstall",
+        "subtitle": "Uninstall all apps",
+        "description": "Uninstalling apps has no impact on your crypto assets. You can reinstall apps in the App catalog.",
+        "uninstallAll": "Uninstall all"
       },
       "remove": {
         "title": "Remove device",
@@ -6501,23 +6510,27 @@
         "title": "Storage",
         "used": "Used",
         "genuine": "Your device is genuine",
-        "appsInstalled": "<0>{{number}}</0> app installed",
-        "appsInstalled_plural": "<0>{{number}}</0> apps installed",
+        "appsToUpdate": "<0>{{number}}</0> update",
+        "appsToUpdate_plural": "<0>{{number}}</0> updates",
+        "appsInstalled": "<0>{{number}}</0> app",
+        "appsInstalled_plural": "<0>{{number}}</0> apps",
         "storageAvailable": "available"
       },
       "installSuccess": {
-        "title": "App installed successfully, you can now add your {{app}} accounts",
-        "title_plural": "Apps installed successfully, you can now add your accounts",
+        "title": "App successfully installed",
+        "title_plural": "Apps successfully installed",
+        "description": "You can now add your {{app}} account",
         "notSupported": "App installed successfully, find out more about the installed apps on our website.",
         "manageAccount": "Add accounts",
         "learnMore": "Learn more",
         "later": "Do it later"
       },
       "firmware": {
-        "latest": "Firmware version {{version}} is available",
-        "outdated": "Device firmware version too old to be updated. Please contact Ledger Support for a replacement.",
-        "modalTitle": "Firmware update only available on Ledger Live Desktop",
-        "modalDesc": "Please download Ledger Live on your computer to update the device firmware."
+        "latest": "Firmware update is available",
+        "outdated": "Device firmware version is too old to be updated. Please contact Ledger Support for a replacement.",
+        "modalTitle": "Firmware update only available on Desktop",
+        "modalDesc": "Please download Ledger Live on your computer to update the device firmware.",
+        "contactUs": "Contact us"
       }
     },
     "ManagerDevice": {
@@ -6532,12 +6545,13 @@
           "button_plural": "Installing... {{progressPercentage}}%"
         },
         "done": {
-          "title": "Successfully installed {{appName}} on your {{productName}}",
+          "title": "App Successfully installed",
+          "description": "You can now add your {{app}} account",
           "accounts": "Go to Accounts"
         },
         "dependency": {
-          "title": "{{dependency}} app is needed",
-          "description_one": "The {{dependency}} app will also be installed because the {{app}} app uses it.",
+          "title": "{{dependency}} app is required",
+          "description_one": "The {{dependency}} app will also be installed because the {{app}} app needs it.",
           "description_two": "Please press Continue to install the {{app}} and {{dependency}} apps."
         },
         "continueInstall": "Install apps"
@@ -6564,14 +6578,14 @@
           "title": "Successfully uninstalled {{appName}} on your {{productName}}"
         },
         "dependency": {
-          "title": "Uninstall {{app}} and related apps?",
-          "showAll": "Show apps to uninstall",
-          "description": "Apps on your device that need the {{app}} app will be uninstalled too."
+          "title": "Other apps need the {{app}} app",
+          "description_one": "Some apps are dependent of the {{app}} app.",
+          "description_two": "Some apps are dependent of the {{app}} app.\nApps on your device that are dependent on the {{app}} app will be uninstalled too."
         },
         "continueUninstall": "Uninstall {{app}} and other apps"
       },
       "filter": {
-        "title": "Show",
+        "title": "Filter",
         "all": "All",
         "installed": "Apps",
         "not_installed": "Not installed",
@@ -6580,8 +6594,10 @@
         "apply": "Apply"
       },
       "sort": {
-        "title": "Sort by",
+        "title": "Sort",
         "default": "Default",
+        "marketcap": "Marketcap",
+        "name": "Name",
         "name_asc": "Name A-Z",
         "name_desc": "Name Z-A",
         "marketcap_desc": "Market cap"
@@ -6596,7 +6612,7 @@
     },
     "FirmwareVersionRow": {
       "title": "Firmware version",
-      "subtitle": "Firmware {{version}}"
+      "subtitle": "V {{version}}"
     },
     "FirmwareUpdateRow": {
       "title": "Firmware version {{version}} available",
@@ -6628,6 +6644,7 @@
       "introDescription2": "This has no impact on your crypto assets.",
       "action": "Continue update"
     },
+    "ApplicationVersion": "v{{version}}",
     "systemLanguageAvailable": {
       "title": "Change your app's language?",
       "description": {
