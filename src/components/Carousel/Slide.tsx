@@ -30,7 +30,6 @@ const Slide = ({
   return (
     <Touchable event={`${name} Carousel`} onPress={onClick}>
       <Flex
-        position={"relative"}
         width={"248px"}
         height={"182px"}
         borderRadius={2}

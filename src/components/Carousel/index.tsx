@@ -6,6 +6,12 @@ import { Trans } from "react-i18next";
 import { Box } from "@ledgerhq/native-ui";
 import { CloseMedium } from "@ledgerhq/native-ui/assets/icons";
 import styled from "styled-components/native";
+import Animated, {
+  withTiming,
+  withDelay,
+  useAnimatedStyle,
+  useSharedValue,
+} from "react-native-reanimated";
 import { urls } from "../../config/urls";
 import { setCarouselVisibility } from "../../actions/settings";
 import Slide from "./Slide";
@@ -25,9 +31,8 @@ const DismissCarousel = styled(TouchableOpacity)`
   right: 10;
   width: 30;
   height: 30;
-  alignItems: center;
-  justifyContent: center;
-  borderColor: white;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const SLIDES = [
@@ -80,11 +85,7 @@ export const SLIDES = [
     description: <Trans i18nKey={`v3.carousel.banners.swap.description`} />,
     // image: require("../../images/banners/swap.png"),
     icon: (
-      <Illustration
-        lightSource={SwapLight}
-        darkSource={SwapDark}
-        size={84}
-      />
+      <Illustration lightSource={SwapLight} darkSource={SwapDark} size={84} />
     ),
     position: {
       bottom: 70,
@@ -142,6 +143,56 @@ const hitSlop = {
 
 export const CAROUSEL_NONCE: number = 4;
 
+type CarouselCardProps = {
+  id: string;
+  children: React.ReactNode;
+  onHide: Function;
+};
+
+const CarouselCard = ({ id, children, onHide }: CarouselCardProps) => (
+  <Box key={`container_${id}`} mr={6}>
+    {children}
+    <DismissCarousel hitSlop={hitSlop} onPress={() => onHide(id)}>
+      <CloseMedium size={16} color="neutral.c70" />
+    </DismissCarousel>
+  </Box>
+);
+
+// TODO : make it generic in the ui
+const CarouselCardContainer = ({ id, children, onHide }: CarouselCardProps) => {
+  const animValue = useSharedValue(1);
+  const animationDuration = 300;
+  const opacityAnimationDuration = animationDuration / 2;
+  const widthAnimationDuration = animationDuration - opacityAnimationDuration;
+  const animatedStyle = useAnimatedStyle(() => ({
+    opacity: withTiming(animValue.value, {
+      duration: opacityAnimationDuration,
+    }),
+    width: withDelay(
+      opacityAnimationDuration,
+      withTiming(animValue.value * 265, { // Todo : (265) this is not good, we shouldn't have to use a hard coded value for the full width of the card
+        duration: widthAnimationDuration,
+      }),
+    ),
+  }));
+  const onClick = useCallback(() => {
+    animValue.value = 0;
+  }, [animValue]);
+  /*
+    Currently, the animation is working but we are not updating the visibility state of the recommended card in the store
+    so if we close and reopen the app, the card will still be there
+    To update the visibility state of the card in the store, we need to call the onHide(id) function with the id of the card to hide
+  */
+
+  return (
+    <Animated.View style={[animatedStyle]}>
+      <CarouselCard id={id} onHide={onClick}>
+        {children}
+      </CarouselCard>
+    </Animated.View>
+  );
+};
+
 type Props = {
   cardsVisibility: boolean[];
 };
@@ -150,7 +201,7 @@ const Carousel = ({ cardsVisibility }: Props) => {
   const dispatch = useDispatch();
 
   let slides = getDefaultSlides();
-  slides = slides.filter((slide) => {
+  slides = slides.filter(slide => {
     if (!cardsVisibility[slide.id]) {
       return false;
     }
@@ -174,18 +225,16 @@ const Carousel = ({ cardsVisibility }: Props) => {
     // No slides or dismissed, no problem
     return null;
   }
+  console.log(cardsVisibility);
 
   return (
     <Box>
-      <View>
+      <View style={{ width: "100%" }}>
         <ScrollView horizontal>
           {slides.map(({ id, Component }) => (
-            <Box mr={6}>
+            <CarouselCardContainer id={id} onHide={onHide}>
               <Component key={id} />
-              <DismissCarousel hitSlop={hitSlop} onPress={() => onHide(id)}>
-                <CloseMedium size={16} color={"neutral.c70"} />
-              </DismissCarousel>
-            </Box>
+            </CarouselCardContainer>
           ))}
         </ScrollView>
       </View>
