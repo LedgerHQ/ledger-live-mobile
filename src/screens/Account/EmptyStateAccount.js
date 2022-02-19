@@ -81,9 +81,9 @@ class EmptyStateAccount extends PureComponent<{
                 <LText semiBold color="darkBlue">
                   {account &&
                     account.currency &&
-                    listTokenTypesForCryptoCurrency(mainAccount.currency).join(
-                      ", ",
-                    )}
+                    listTokenTypesForCryptoCurrency(mainAccount.currency)
+                      .map(c => c?.toUpperCase() ?? c)
+                      .join(", ")}
                   {"tokens"}
                 </LText>
               </Trans>
