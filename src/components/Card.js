@@ -10,13 +10,24 @@ type Props = {
   children: any,
   style?: any,
   bg?: string,
+  generalSettingsTestID: string,
 };
 
-export default function Card({ onPress, style, children, bg }: Props) {
+export default function Card({
+  onPress,
+  style,
+  children,
+  bg,
+  generalSettingsTestID,
+}: Props) {
   const { colors } = useTheme();
   const backgroundStyle = { backgroundColor: colors[bg] || colors.card };
   return onPress ? (
-    <RectButton onPress={onPress} style={[styles.root, backgroundStyle, style]}>
+    <RectButton
+      onPress={onPress}
+      style={[styles.root, backgroundStyle, style]}
+      testID={generalSettingsTestID}
+    >
       {children}
     </RectButton>
   ) : (

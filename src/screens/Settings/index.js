@@ -61,7 +61,7 @@ export default function Settings({ navigation }: Props) {
           desc={t("settings.display.desc")}
           icon={<Display size={16} color={colors.live} />}
           onClick={() => navigation.navigate(ScreenName.GeneralSettings)}
-          testID="general-settings-card"
+          generalSettingsTestID="general-settings-card"
         />
         {accounts.length > 0 && (
           <SettingsCard
