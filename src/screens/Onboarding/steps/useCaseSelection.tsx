@@ -113,7 +113,7 @@ const OnboardingStepUseCaseSelection = () => {
       Platform.OS === "ios" && deviceModelId === nanoS.id
         ? [
             {
-              title: "onboarding.stepUseCase.recovery",
+              title: "v3.onboarding.stepUseCase.recovery",
               data: [
                 {
                   cards: [
@@ -121,9 +121,9 @@ const OnboardingStepUseCaseSelection = () => {
                       route: ScreenName.OnboardingImportAccounts,
                       Illustration: <PlaceholderIllustration />,
                       title:
-                        "onboarding.stepUseCase.deviceActions.desktopSync.title",
+                        "v3.onboarding.stepUseCase.deviceActions.desktopSync.title",
                       subTitle:
-                        "onboarding.stepUseCase.deviceActions.desktopSync.subTitle",
+                        "v3.onboarding.stepUseCase.deviceActions.desktopSync.subTitle",
                       event: "Onboarding - Setup Import Accounts",
                       showRecoveryWarning: true,
                     },
@@ -134,16 +134,17 @@ const OnboardingStepUseCaseSelection = () => {
           ]
         : [
             {
-              title: t("onboarding.stepUseCase.firstUse"),
+              title: t("v3.onboarding.stepUseCase.firstUse"),
               data: [
                 {
                   cards: [
                     {
                       route: "OnboardingModalSetupNewDevice",
                       Illustration: <PlaceholderIllustration />,
-                      title: "onboarding.stepUseCase.deviceActions.setup.title",
+                      title:
+                        "v3.onboarding.stepUseCase.deviceActions.setup.title",
                       subTitle:
-                        "onboarding.stepUseCase.deviceActions.setup.subTitle",
+                        "v3.onboarding.stepUseCase.deviceActions.setup.subTitle",
                       event: "Onboarding - Setup new",
                     },
                   ],
@@ -151,7 +152,7 @@ const OnboardingStepUseCaseSelection = () => {
               ],
             },
             {
-              title: "onboarding.stepUseCase.recovery",
+              title: "v3.onboarding.stepUseCase.recovery",
               data: [
                 {
                   cards: [
@@ -159,9 +160,9 @@ const OnboardingStepUseCaseSelection = () => {
                       route: ScreenName.OnboardingPairNew,
                       Illustration: <PlaceholderIllustration />,
                       title:
-                        "onboarding.stepUseCase.deviceActions.pairing.title",
+                        "v3.onboarding.stepUseCase.deviceActions.pairing.title",
                       subTitle:
-                        "onboarding.stepUseCase.deviceActions.pairing.subTitle",
+                        "v3.onboarding.stepUseCase.deviceActions.pairing.subTitle",
                       event: "Onboarding - Connect",
                       showRecoveryWarning: true,
                     },
@@ -169,18 +170,18 @@ const OnboardingStepUseCaseSelection = () => {
                       route: ScreenName.OnboardingImportAccounts,
                       Illustration: <PlaceholderIllustration />,
                       title:
-                        "onboarding.stepUseCase.deviceActions.desktopSync.title",
+                        "v3.onboarding.stepUseCase.deviceActions.desktopSync.title",
                       subTitle:
-                        "onboarding.stepUseCase.deviceActions.desktopSync.subTitle",
+                        "v3.onboarding.stepUseCase.deviceActions.desktopSync.subTitle",
                       event: "Onboarding - Setup Import Accounts",
                     },
                     {
                       route: ScreenName.OnboardingRecoveryPhrase,
                       Illustration: <PlaceholderIllustration />,
                       title:
-                        "onboarding.stepUseCase.deviceActions.restore.title",
+                        "v3.onboarding.stepUseCase.deviceActions.restore.title",
                       subTitle:
-                        "onboarding.stepUseCase.deviceActions.restore.subTitle",
+                        "v3.onboarding.stepUseCase.deviceActions.restore.subTitle",
                       event: "Onboarding - Restore",
                     },
                   ],
@@ -188,7 +189,7 @@ const OnboardingStepUseCaseSelection = () => {
               ],
             },
           ],
-    [deviceModelId],
+    [deviceModelId, t],
   );
 
   return (

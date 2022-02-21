@@ -1,5 +1,5 @@
 import React, { useCallback } from "react";
-import { StyleSheet, Animated, SafeAreaView } from "react-native";
+import { StyleSheet, Animated } from "react-native";
 import { useNavigation, useRoute, RouteProp } from "@react-navigation/native";
 import { RenderTransitionProps } from "@ledgerhq/native-ui/components/Navigation/FlowStepper";
 import {
@@ -23,6 +23,7 @@ import Scene, {
   RecoveryPhraseSetup,
   HideRecoveryPhrase,
 } from "./scenes";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const transitionDuration = 500;
 
@@ -218,17 +219,21 @@ function OnboardingStepNewDevice() {
   >();
 
   const nextPage = useCallback(() => {
-    // TODO: FIX @react-navigation/native using Typescript
-    // @ts-ignore next-line
-    navigation.navigate(ScreenName.OnboardingQuiz, {
-      ...route.params,
-    });
-  }, [navigation, route.params]);
+    if (index < scenes.length - 1) {
+      setIndex(index + 1);
+    } else {
+      // TODO: FIX @react-navigation/native using Typescript
+      // @ts-ignore next-line
+      navigation.navigate(ScreenName.OnboardingQuiz, {
+        ...route.params,
+      });
+    }
+  }, [index, navigation, route.params]);
 
   const handleBack = React.useCallback(
     () =>
       index === 0 ? navigation.goBack : () => setIndex(index => index - 1),
-    [index],
+    [index, navigation.goBack],
   );
 
   return (
@@ -241,18 +246,8 @@ function OnboardingStepNewDevice() {
         progressBarProps={{ backgroundColor: "neutral.c40" }}
         extraProps={{ onBack: handleBack() }}
       >
-        {scenes.map((Children, index) => (
-          <Scene key={Children.id}>
-            {
-              <Children
-                onNext={
-                  Children.id === "HideRecoveryPhrase"
-                    ? nextPage
-                    : () => setIndex(index + 1)
-                }
-              />
-            }
-          </Scene>
+        {scenes.map(Children => (
+          <Scene key={Children.id}>{<Children onNext={nextPage} />}</Scene>
         ))}
       </FlowStepper>
     </Flex>

@@ -58,7 +58,8 @@ function OnboardingStepLanguage({ navigation }: StackScreenProps<{}>) {
           >
             {supportedLocales.map((l, index) => (
               <SelectableList.Element key={index + l} value={l}>
-                <BluetoothMedium size={16} color={"neutral.c100"} /> {languages[l]}
+                <BluetoothMedium size={16} color={"neutral.c100"} />{" "}
+                {languages[l]}
               </SelectableList.Element>
             ))}
           </SelectableList>
@@ -69,7 +70,7 @@ function OnboardingStepLanguage({ navigation }: StackScreenProps<{}>) {
         type="primary"
         onPress={next}
         outline={false}
-        title={<Trans i18nKey="onboarding.stepLanguage.cta" />}
+        title={<Trans i18nKey="v3.onboarding.stepLanguage.cta" />}
       />
     </>
   );
@@ -89,17 +90,17 @@ export function OnboardingStepLanguageGetStarted({
           <IconBox Icon={Icons.WarningMedium} />
         </Flex>
         <Text variant="large" mb={5} fontWeight="semiBold">
-          <Trans i18nKey="onboarding.stepLanguage.warning.title" />
+          <Trans i18nKey="v3.onboarding.stepLanguage.warning.title" />
         </Text>
         <Text variant="body" color="palette.neutral.c80" textAlign="center">
-          <Trans i18nKey="onboarding.stepLanguage.warning.desc" />
+          <Trans i18nKey="v3.onboarding.stepLanguage.warning.desc" />
         </Text>
       </Flex>
       <Button
         type="primary"
         onPress={next}
         outline={false}
-        title={<Trans i18nKey="onboarding.stepLanguage.cta" />}
+        title={<Trans i18nKey="v3.onboarding.stepLanguage.cta" />}
       />
     </>
   );

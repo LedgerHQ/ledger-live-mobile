@@ -33,7 +33,7 @@ const OnboardingGeneralInformation = () => {
   }, [urls.recoveryPhraseInfo]);
 
   return (
-    <Flex flex={1} justifyContent="space-between">
+    <Flex flex={1} justifyContent="space-between" bg="background.main">
       <FlatList
         data={[{}]}
         renderItem={() => (

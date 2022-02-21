@@ -1,6 +1,8 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { Flex, Button, Text, IconBoxList, Icons } from "@ledgerhq/native-ui";
+import { useNavigation } from "@react-navigation/native";
+import { ScreenName } from "../../../../../const";
 
 const items = [
   {
@@ -19,11 +21,12 @@ const items = [
 
 const HideRecoveryPhraseScene = ({ onNext }: { onNext: () => void }) => {
   const { t } = useTranslation();
+  const navigation = useNavigation();
 
-  // @TODO: Integrate popin here
   const handleClick = () => {
-    console.log("popin modal from the bottom here");
-    onNext();
+    navigation.navigate(ScreenName.OnboardingPreQuizModal, {
+      onNext: () => navigation.navigate(ScreenName.OnboardingQuiz),
+    });
   };
 
   return (

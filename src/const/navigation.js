@@ -289,6 +289,7 @@ export const ScreenName = {
   OnboardingSetupDeviceInformation: "OnboardingSetupDeviceInformation",
   OnboardingSetupDeviceRecoveryPhrase: "OnboardingSetupDeviceRecoveryPhrase",
   OnboardingGeneralInformation: "OnboardingGeneralInformation",
+  OnboardingBluetoothInformation: "OnboardingBluetoothInformation",
   OnboardingInfoModal: "OnboardingInfoModal",
   OnboardingRecoveryPhrase: "OnboardingRecoveryPhrase",
 
@@ -309,6 +310,7 @@ export const ScreenName = {
   OnboardingModalSetupSecureRecovery: "OnboardingModalSetupSecureRecovery",
   OnboardingModalWarning: "OnboardingModalWarning",
   OnboardingModalGeneralInformation: "OnboardingModalGeneralInformation",
+  OnboardingPreQuizModal: "OnboardingPreQuizModal",
 
   PlatformCatalog: "PlatformCatalog",
   PlatformApp: "PlatformApp",

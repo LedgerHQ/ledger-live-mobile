@@ -58,17 +58,17 @@ function OnboardingStepWelcome({ navigation }: any) {
       </Flex>
       <Flex px={6} py={10}>
         <Text variant="h1" pb={5} style={{ textTransform: "uppercase" }}>
-          <Trans i18nKey="onboarding.stepWelcome.title" />
+          <Trans i18nKey="v3.onboarding.stepWelcome.title" />
         </Text>
         <Text variant="body" color="palette.neutral.c80" pb={10}>
-          <Trans i18nKey="onboarding.stepWelcome.subtitle" />
+          <Trans i18nKey="v3.onboarding.stepWelcome.subtitle" />
         </Text>
         <Button
           type="primary"
           outline={false}
           event="Onboarding - Start"
           onPress={next}
-          title={<Trans i18nKey="onboarding.stepWelcome.start" />}
+          title={<Trans i18nKey="v3.onboarding.stepWelcome.start" />}
         />
         <Flex
           mt={7}
@@ -78,12 +78,12 @@ function OnboardingStepWelcome({ navigation }: any) {
           flexWrap="wrap"
         >
           <Text variant="body">
-            <Trans i18nKey="onboarding.stepWelcome.noDevice" />{" "}
+            <Trans i18nKey="v3.onboarding.stepWelcome.noDevice" />{" "}
           </Text>
           <Link onPress={buy}>
             <Text variant="body" style={{ textDecorationLine: "underline" }}>
               <Trans
-                i18nKey="onboarding.stepWelcome.buy"
+                i18nKey="v3.onboarding.stepWelcome.buy"
                 values={deviceNames.nanoX}
               />
             </Text>

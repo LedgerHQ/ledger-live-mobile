@@ -49,7 +49,7 @@ function OnboardingStepDeviceSelection() {
             testID={`Onboarding Device - Selection|${devicePicked}`}
             type="main"
           >
-            {t("onboarding.stepSelectDevice.chooseDevice")}
+            {t("v3.onboarding.stepSelectDevice.chooseDevice")}
           </Button>
         </Flex>
       }
@@ -63,7 +63,7 @@ function OnboardingStepDeviceSelection() {
           },
         }}
       >
-        {devices.map((Device) => (
+        {devices.map(Device => (
           <Touchable
             key={Device.id}
             event="Onboarding Device - Selection"

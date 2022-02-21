@@ -5147,6 +5147,8 @@
           "success": "Congrats!",
           "fail": "Incorrect!"
         },
+        "nextQuestion": "Next question",
+        "finish": "Finish quiz",
         "coins": {
           "title": "As a Ledger user, my crypto is stored:",
           "answers": {

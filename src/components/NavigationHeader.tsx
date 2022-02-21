@@ -27,9 +27,8 @@ function NavigationHeader({
       flexDirection="row"
       justifyContent="space-between"
       alignItems="center"
-      backgroundColor="palette.neutral.c00"
       py={6}
-      mb={6}
+      mb={5}
       {...containerProps}
     >
       {back && !hideBack ? (
