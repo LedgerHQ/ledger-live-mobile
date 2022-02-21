@@ -1,7 +1,10 @@
-import React, { useRef, useCallback, useMemo } from "react";
+import React, { useRef, useCallback, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 import { FlatList } from "react-native";
-import Animated from "react-native-reanimated";
+import Animated, {
+  useAnimatedScrollHandler,
+  useSharedValue,
+} from "react-native-reanimated";
 import { createNativeWrapper } from "react-native-gesture-handler";
 import { Trans } from "react-i18next";
 import { useFocusEffect } from "@react-navigation/native";
@@ -12,7 +15,10 @@ import { Box, Flex, Link, Text } from "@ledgerhq/native-ui";
 import styled from "styled-components/native";
 import { useRefreshAccountsOrdering } from "../../actions/general";
 import { accountsSelector } from "../../reducers/accounts";
-import { counterValueCurrencySelector } from "../../reducers/settings";
+import {
+  counterValueCurrencySelector,
+  carouselVisibilitySelector,
+} from "../../reducers/settings";
 import { usePortfolio } from "../../actions/portfolio";
 import globalSyncRefreshControl from "../../components/globalSyncRefreshControl";
 
@@ -30,7 +36,6 @@ import FirmwareUpdateBanner from "../../components/FirmwareUpdateBanner";
 import DiscoverSection from "./DiscoverSection";
 import AddAssetsCard from "./AddAssetsCard";
 import Assets from "./Assets";
-import { carouselVisibilitySelector } from "../../reducers/settings";
 
 export { default as PortfolioTabIcon } from "./TabIcon";
 
@@ -100,7 +105,13 @@ export default function PortfolioScreen({ navigation }: Props) {
   const refreshAccountsOrdering = useRefreshAccountsOrdering();
   useFocusEffect(refreshAccountsOrdering);
 
-  const scrollY = useRef(new Animated.Value(0)).current;
+  const [graphCardEndPosition, setGraphCardEndPosition] = useState(0);
+
+  const currentPositionY = useSharedValue(0);
+  const handleScroll = useAnimatedScrollHandler(event => {
+    currentPositionY.value = event.contentOffset.y;
+  });
+
   const ref = useRef();
   useScrollToTop(ref);
 
@@ -117,15 +128,28 @@ export default function PortfolioScreen({ navigation }: Props) {
 
   const data = useMemo(
     () => [
-      <Box bg={"background.main"} mx={6} py={6}>
-        <Header />
+      <Box bg={"background.main"}>
+        <Header
+          counterValueCurrency={counterValueCurrency}
+          portfolio={portfolio}
+          currentPositionY={currentPositionY}
+          graphCardEndPosition={graphCardEndPosition}
+        />
       </Box>,
       !accounts.length && (
         <Box mx={6} mt={3}>
           <AddAssetsCard />
         </Box>
       ),
-      <Box mx={6} mt={3}>
+      <Box
+        mx={6}
+        mt={3}
+        onLayout={event => {
+          const { x, y, width, height } = event.nativeEvent.layout;
+          console.log(x, y, width, height);
+          setGraphCardEndPosition(y + height);
+        }}
+      >
         <GraphCardContainer
           counterValueCurrency={counterValueCurrency}
           portfolio={portfolio}
@@ -202,16 +226,7 @@ export default function PortfolioScreen({ navigation }: Props) {
           keyExtractor={(item, index) => String(index)}
           showsVerticalScrollIndicator={false}
           stickyHeaderIndices={[0]}
-          onScroll={Animated.event(
-            [
-              {
-                nativeEvent: {
-                  contentOffset: { y: scrollY },
-                },
-              },
-            ],
-            { useNativeDriver: true },
-          )}
+          onScroll={handleScroll}
           testID={
             accounts.length ? "PortfolioAccountsList" : "PortfolioEmptyAccount"
           }

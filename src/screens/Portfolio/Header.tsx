@@ -1,11 +1,9 @@
 import React, { useCallback } from "react";
 import { TouchableWithoutFeedback } from "react-native";
-import { useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
-import { useGlobalSyncState } from "@ledgerhq/live-common/lib/bridge/react";
 import { useAnnouncements } from "@ledgerhq/live-common/lib/notifications/AnnouncementProvider";
 import { useFilteredServiceStatus } from "@ledgerhq/live-common/lib/notifications/ServiceStatusProvider";
-import { Box, Flex } from "@ledgerhq/native-ui";
+import { Box, Flex, Text } from "@ledgerhq/native-ui";
 import {
   NotificationsMedium,
   NotificationsOnMedium,
@@ -14,30 +12,42 @@ import {
   WarningMedium,
 } from "@ledgerhq/native-ui/assets/icons";
 import { useTheme } from "styled-components/native";
-import { isUpToDateSelector } from "../../reducers/accounts";
-import { networkErrorSelector } from "../../reducers/appstate";
-import HeaderErrorTitle from "../../components/HeaderErrorTitle";
-import HeaderSynchronizing from "../../components/HeaderSynchronizing";
+import Animated, {
+  Extrapolate,
+  interpolate,
+  SharedValue,
+  useAnimatedStyle,
+} from "react-native-reanimated";
+import { Trans } from "react-i18next";
+import { Portfolio } from "@ledgerhq/live-common/lib/portfolio/v2/types";
+import { Currency } from "@ledgerhq/live-common/lib/types";
 import Touchable from "../../components/Touchable";
 import { NavigatorName, ScreenName } from "../../const";
 import { scrollToTop } from "../../navigation/utils";
 import LiveLogo from "../../icons/LiveLogo";
+import CurrencyUnitValue from "../../components/CurrencyUnitValue";
+import Placeholder from "../../components/Placeholder";
 
-type HeaderInformationProps = { isLoading: boolean; error?: Error | null };
-const HeaderInformation = ({ isLoading, error }: HeaderInformationProps) => {
-  const { colors } = useTheme();
-
-
-
-
-  return <LiveLogo size={32} color={colors.neutral.c100} />;
-};
-
-export default function PortfolioHeader() {
+export default function PortfolioHeader({
+  currentPositionY,
+  graphCardEndPosition,
+  portfolio,
+  counterValueCurrency,
+}: {
+  currentPositionY: SharedValue<number>;
+  graphCardEndPosition: number;
+  portfolio: Portfolio;
+  counterValueCurrency: Currency;
+}) {
   const navigation = useNavigation();
+  const { colors, space } = useTheme();
 
   const { allIds, seenIds } = useAnnouncements();
   const { incidents } = useFilteredServiceStatus();
+
+  const onManagerButtonPress = useCallback(() => {
+    navigation.navigate(NavigatorName.Manager);
+  }, [navigation]);
 
   const onNotificationButtonPress = useCallback(() => {
     navigation.navigate(NavigatorName.NotificationCenter);
@@ -53,24 +63,114 @@ export default function PortfolioHeader() {
     navigation.navigate(NavigatorName.Settings);
   }, [navigation]);
 
-  const isUpToDate = useSelector(isUpToDateSelector);
-  const networkError = useSelector(networkErrorSelector);
-  const { pending, error } = useGlobalSyncState();
-
   const notificationsCount = allIds.length - seenIds.length;
 
+  const TopLeftStyle = useAnimatedStyle(() => {
+    const opacity = interpolate(
+      currentPositionY.value,
+      [graphCardEndPosition - 30, graphCardEndPosition],
+      [1, 0],
+      Extrapolate.CLAMP,
+    );
+
+    return {
+      opacity,
+    };
+  }, [graphCardEndPosition]);
+
+  const AfterScrollTopLeftStyle = useAnimatedStyle(() => {
+    const opacity = interpolate(
+      currentPositionY.value,
+      [graphCardEndPosition, graphCardEndPosition + 30],
+      [0, 1],
+      Extrapolate.CLAMP,
+    );
+
+    return {
+      opacity,
+    };
+  }, [graphCardEndPosition]);
+
+  const ContainerStyle = useAnimatedStyle(() => {
+    const borderBottomWidth = interpolate(
+      currentPositionY.value,
+      [graphCardEndPosition, graphCardEndPosition + 30],
+      [0, 1],
+      Extrapolate.CLAMP,
+    );
+
+    return {
+      borderBottomWidth,
+    };
+  }, [graphCardEndPosition]);
+
+  const isAvailable = portfolio.balanceAvailable;
+  const balanceHistory = portfolio.balanceHistory;
+  const currentPortfolio = balanceHistory[balanceHistory.length - 1];
+  const unit = counterValueCurrency.units[0];
+
   return (
-    <Flex flexDirection={"row"} alignItems={"center"}>
+    <Animated.View
+      style={[
+        ContainerStyle,
+        {
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          borderBottomColor: colors.neutral.c30,
+          paddingHorizontal: space[6],
+          paddingVertical: space[4],
+        },
+      ]}
+    >
       <TouchableWithoutFeedback onPress={scrollToTop}>
-        <Box flexGrow={1} flexShrink={1}>
-          <HeaderInformation
-            isLoading={pending && !isUpToDate}
-            error={networkError || error}
-          />
-        </Box>
+        <Flex
+          flexDirection={"row"}
+          alignItems={"center"}
+          flexGrow={1}
+          flexShrink={1}
+        >
+          <Animated.View style={[TopLeftStyle, {}]}>
+            <LiveLogo size={32} color={colors.neutral.c100} />
+          </Animated.View>
+          <Animated.View
+            style={[
+              AfterScrollTopLeftStyle,
+              {
+                marginLeft: -32,
+              },
+            ]}
+          >
+            <Flex
+              flexDirection={"column"}
+              justifyContent={"center"}
+              alignItems={"flex-start"}
+            >
+              <Text
+                variant={"tiny"}
+                fontWeight={"semiBold"}
+                color={"neutral.c70"}
+                textTransform={"uppercase"}
+                mb={1}
+              >
+                <Trans i18nKey={"tabs.portfolio"} />
+              </Text>
+              {isAvailable ? (
+                <Text variant={"h2"} color={"neutral.c100"}>
+                  <CurrencyUnitValue
+                    unit={unit}
+                    value={currentPortfolio.value}
+                  />
+                </Text>
+              ) : (
+                <Placeholder width={150} containerHeight={28} />
+              )}
+            </Flex>
+          </Animated.View>
+        </Flex>
       </TouchableWithoutFeedback>
       <Box mr={7}>
-        <Touchable>
+        <Touchable onPress={onManagerButtonPress}>
           <NanoFoldedMedium size={24} color={"neutral.c100"} />
         </Touchable>
       </Box>
@@ -95,6 +195,6 @@ export default function PortfolioHeader() {
           <SettingsMedium size={24} color={"neutral.c100"} />
         </Touchable>
       </Box>
-    </Flex>
+    </Animated.View>
   );
 }
