@@ -5,7 +5,7 @@ import { $retryUntilItWorks, wait } from "../engine/utils";
 describe("Onboarding", () => {
   beforeAll(async () => {
     await device.launchApp({
-      delete: true,
+      // delete: true,
       launchArgs: {
         // ENVFILE: ".env.mock",
       },
@@ -55,10 +55,14 @@ describe("Onboarding", () => {
     bridge.open();
 
     // Continue to welcome screen
+    await waitFor(
+      element(by.text("Device authentication check")),
+    ).not.toBeVisible();
     // issue here: the 'Pairing Successful' text is 'visible' before it actually is, so it's failing at the continue step as continue isn't actually visible
     await waitFor(element(by.text("Pairing Successful"))).toBeVisible();
-    await wait(10000);
-    await element(by.text("Continue")).tap();
+    // leaving wait for flaky 'device authentication check screen'
+    await wait(5000);
+    await element(by.id("Proceed")).tap();
 
     // Open Ledger Live
     await element(by.text("Open Ledger Live")).tap();
