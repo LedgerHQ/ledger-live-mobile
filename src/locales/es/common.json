@@ -1441,7 +1441,11 @@
       "withdrawUnbondedAmount": "Retirar importe desvinculado",
       "palletMethod": "Método",
       "transferAmount": "Transferir importe",
-      "validatorsCount": "Validadores ({{number}})"
+      "validatorsCount": "Validadores ({{number}})",
+      "storageLimit": "Storage Limit",
+      "gasLimit": "Gas Limit",
+      "opbytes": "opBytes",
+      "id": "Id"
     },
     "multipleAddresses": "¿Por qué hay múltiples direcciones?",
     "tokenName": "Nombre del token",
