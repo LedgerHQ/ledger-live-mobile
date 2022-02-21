@@ -1441,7 +1441,11 @@
       "withdrawUnbondedAmount": "سحب المبلغ الغير مقيد",
       "palletMethod": "الطريقة",
       "transferAmount": "مبلغ التحويل",
-      "validatorsCount": "({{number}}) مدققين"
+      "validatorsCount": "({{number}}) مدققين",
+      "storageLimit": "Storage Limit",
+      "gasLimit": "Gas Limit",
+      "opbytes": "opBytes",
+      "id": "Id"
     },
     "multipleAddresses": "لماذا عناوين متعددة؟",
     "tokenName": "اسم رّمز التوكن",
