@@ -21,6 +21,7 @@ export default function DebugEnv() {
       setStatus("Can't parse input");
     } else if (match[2] === "0") {
       setStatus(`Unsetting ${match[1]}`);
+      setEnvUnsafe(match[1], match[2]);
       delete Config[match[1]];
     } else {
       setStatus(`Set value '${match[2]}' for '${match[1]}'`);
