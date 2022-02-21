@@ -1,25 +1,19 @@
 import { device, element, by, waitFor } from "detox";
 import * as bridge from "../engine/bridge/server";
+import { $retryUntilItWorks, wait } from "../engine/utils";
 
 describe("Onboarding", () => {
   beforeAll(async () => {
-    await device.launchApp(
-      // { delete: true }
-      {
-        launchArgs: {
-          ENVFILE: ".env.mock",
-        },
+    await device.launchApp({
+      delete: true,
+      launchArgs: {
+        // ENVFILE: ".env.mock",
       },
-    );
+    });
   });
-
-  function wait(milliseconds) {
-    return new Promise(resolve => setTimeout(resolve, milliseconds));
-  }
 
   it("should contect a Nano X", async () => {
     // get started
-    // await wait(5000);
     await element(by.id("Proceed")).tap();
 
     // accept terms
@@ -41,25 +35,32 @@ describe("Onboarding", () => {
     await element(by.id("Onboarding - Seed warning")).tap();
 
     // start pairing
-    console.log("------ waiting for pair continue");
 
     await element(by.id("OnboardingStemPairNewContinue")).tap();
-    console.log("------ just clicked start new pair");
 
     //proceed
     await element(by.id("Proceed")).tap();
-    console.log("------ just clicked proceed");
-    // wait(5000);
 
     //add device
-    // how to handle device here?
     const [david] = bridge.addDevices();
     await waitFor(element(by.id(`DeviceItemEnter ${david}`)))
       .toBeVisible()
       .withTimeout(10000);
     await element(by.id(`DeviceItemEnter ${david}`)).tap();
 
+    // set globally installed apps - what is this?
     bridge.setInstalledApps();
+
+    // open Ledger Live Manager on device
     bridge.open();
+
+    // Continue to welcome screen
+    // issue here: the 'Pairing Successful' text is 'visible' before it actually is, so it's failing at the continue step as continue isn't actually visible
+    await waitFor(element(by.text("Pairing Successful"))).toBeVisible();
+    await wait(10000);
+    await element(by.text("Continue")).tap();
+
+    // Open Ledger Live
+    await element(by.text("Open Ledger Live")).tap();
   });
 });

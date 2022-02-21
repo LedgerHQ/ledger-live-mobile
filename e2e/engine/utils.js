@@ -5,8 +5,8 @@ export function cleanLaunch() {
   return device.launchApp({
     delete: true,
     launchArgs: {
-      detoxURLBlacklistRegex: '.*:\/\/explorers\.api\.live\.ledger\.com\/.*'
-    }
+      detoxURLBlacklistRegex: ".*://explorers.api.live.ledger.com/.*",
+    },
   });
 }
 
@@ -33,11 +33,11 @@ export function $waitFor(
   const el = getElement(q);
   return percentage < 0
     ? waitFor(el)
-      .toExist()
-      .withTimeout(timeout)
+        .toExist()
+        .withTimeout(timeout)
     : waitFor(el)
-      .toBeVisible(percentage)
-      .withTimeout(timeout);
+        .toBeVisible(percentage)
+        .withTimeout(timeout);
 }
 
 export function $tap(q: Query) {
@@ -57,24 +57,28 @@ export function $scrollTill(
     .scroll(pixel, direction);
 }
 
-export async function $retryUntilItWorks(action, timeout)  {
+export async function $retryUntilItWorks(action, timeout) {
   let shouldContinue = true;
   const startTime = Date.now();
 
-  while(shouldContinue) {
+  while (shouldContinue) {
     shouldContinue = false;
-    
+
     try {
       await action();
     } catch {
       shouldContinue = true;
     }
 
-    if(timeout && (Date.now() - startTime) > timeout) {
+    if (timeout && Date.now() - startTime > timeout) {
       throw new Error("Timed out when waiting for action");
     }
     console.log("Trying again...");
   }
+}
+
+export function wait(milliseconds) {
+  return new Promise(resolve => setTimeout(resolve, milliseconds));
 }
 
 type Element = any;
