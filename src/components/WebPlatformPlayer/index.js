@@ -416,7 +416,6 @@ const WebPlatformPlayer = ({ manifest, inputs }: Props) => {
               startExchangeResult?: number,
               startExchangeError?: Error,
             }) => {
-              console.log("startExchange result", result);
               if (result.startExchangeError) {
                 tracking.platformStartExchangeFail(manifest);
                 reject(result.startExchangeError);

@@ -24,7 +24,7 @@ type Result = {
 
 export default function PlatformCompleteExchange({
   route: {
-    params: { request: data, onResult },
+    params: { request, onResult },
   },
 }: {
   route: {
@@ -52,14 +52,9 @@ export default function PlatformCompleteExchange({
   const {
     fromAccount: account,
     fromParentAccount: parentAccount,
-  } = data.exchange;
+  } = request.exchange;
   let tokenCurrency;
   if (account.type === "TokenAccount") tokenCurrency = account.token;
-  const request = {
-    ...data,
-    exchange: toExchangeRaw(data.exchange),
-    transaction: toTransactionRaw(data.transaction),
-  };
 
   const broadcast = useBroadcast({ account, parentAccount });
   const [transaction, setTransaction] = useState();
