@@ -31,6 +31,7 @@ import type {
 import { getEnv } from "@ledgerhq/live-common/lib/env";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { getMainAccount } from "@ledgerhq/live-common/lib/account";
+import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import {
   listCryptoCurrencies,
   findCryptoCurrencyById,
@@ -115,6 +116,8 @@ const WebPlatformPlayer = ({ manifest, inputs }: Props) => {
   const [loadDate, setLoadDate] = useState(Date.now());
   const [widgetLoaded, setWidgetLoaded] = useState(false);
   const [isInfoPanelOpened, setIsInfoPanelOpened] = useState(false);
+
+  const [device, setDevice] = useState();
 
   const uri = useMemo(() => {
     const url = new URL(manifest.url);
@@ -415,6 +418,7 @@ const WebPlatformPlayer = ({ manifest, inputs }: Props) => {
             onResult: (result: {
               startExchangeResult?: number,
               startExchangeError?: Error,
+              device: Device,
             }) => {
               if (result.startExchangeError) {
                 tracking.platformStartExchangeFail(manifest);
@@ -423,6 +427,7 @@ const WebPlatformPlayer = ({ manifest, inputs }: Props) => {
 
               if (result.startExchangeResult) {
                 tracking.platformStartExchangeSuccess(manifest);
+                setDevice(result.device);
                 resolve(result.startExchangeResult);
               }
 
@@ -516,6 +521,7 @@ const WebPlatformPlayer = ({ manifest, inputs }: Props) => {
               signature,
               feesStrategy,
             },
+            device,
             onResult: (result: { operation?: Operation, error?: Error }) => {
               if (result.error) {
                 tracking.platformStartExchangeFail(manifest);
@@ -527,6 +533,7 @@ const WebPlatformPlayer = ({ manifest, inputs }: Props) => {
                 resolve(result.operation);
               }
 
+              setDevice();
               const n = navigation.getParent() || navigation;
               n.pop();
             },
@@ -534,7 +541,7 @@ const WebPlatformPlayer = ({ manifest, inputs }: Props) => {
         });
       });
     },
-    [accounts, manifest, navigation],
+    [accounts, manifest, navigation, device],
   );
 
   const handlers = useMemo(

@@ -13,18 +13,19 @@ import type {
   Transaction,
   Operation,
 } from "@ledgerhq/live-common/lib/types";
+import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import { useBroadcast } from "../../../components/useBroadcast";
 import DeviceActionModal from "../../../components/DeviceActionModal";
-import SelectDevice from "../../../components/SelectDevice";
 
 type Result = {
   operation?: Operation,
   error?: Error,
+  device: Device,
 };
 
 export default function PlatformCompleteExchange({
   route: {
-    params: { request, onResult },
+    params: { request, onResult, device },
   },
 }: {
   route: {
@@ -43,12 +44,11 @@ export default function PlatformCompleteExchange({
         signature: string,
         feesStrategy: string,
       },
+      device: Device,
       onResult: (result: Result) => void,
     },
   },
 }) {
-  const [device, setDevice] = useState(null);
-
   const {
     fromAccount: account,
     fromParentAccount: parentAccount,
@@ -77,7 +77,6 @@ export default function PlatformCompleteExchange({
 
   return (
     <SafeAreaView style={styles.root}>
-      <SelectDevice onSelect={setDevice} autoSelectOnAdd />
       {!transaction ? (
         <DeviceActionModal
           key="completeExchange"

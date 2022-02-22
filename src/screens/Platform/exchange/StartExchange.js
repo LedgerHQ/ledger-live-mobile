@@ -5,12 +5,14 @@ import SafeAreaView from "react-native-safe-area-view";
 import connectApp from "@ledgerhq/live-common/lib/hw/connectApp";
 import { createAction } from "@ledgerhq/live-common/lib/hw/actions/startExchange";
 import startExchange from "@ledgerhq/live-common/lib/exchange/platform/startExchange";
+import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import DeviceActionModal from "../../../components/DeviceActionModal";
 import SelectDevice from "../../../components/SelectDevice";
 
 type Result = {
   startExchangeResult?: number,
   startExchangeError?: Error,
+  device: Device,
 };
 
 export default function PlatformStartExchange({
@@ -31,7 +33,9 @@ export default function PlatformStartExchange({
       <DeviceActionModal
         device={device}
         action={action}
-        onResult={route.params.onResult}
+        onResult={result => {
+          route.params.onResult({ ...result, device });
+        }}
         request={route.params.request}
       />
     </SafeAreaView>
