@@ -8,12 +8,10 @@ type WarningRouteProps = RouteProp<
   "params"
 >;
 
-const OnboardingPreQuizModal = () => {
+const OnboardingRecoveryPhraseWarning = () => {
   const { t } = useTranslation();
   const navigation = useNavigation();
   const route = useRoute<WarningRouteProps>();
-
-  console.log(route.params);
 
   const handlePress = () => {
     navigation.goBack();
@@ -21,11 +19,15 @@ const OnboardingPreQuizModal = () => {
   };
 
   return (
-    <Flex flex={1} justifyContent="space-between" bg="primary.c60">
+    <Flex
+      flex={1}
+      justifyContent="space-between"
+      backgroundColor="background.main"
+    >
       <Flex alignItems="center">
         <IconBox
-          Icon={Icons.TrophyMedium}
-          color="neutral.c100"
+          Icon={Icons.WarningMedium}
+          color="warning.c100"
           iconSize={24}
           boxSize={64}
         />
@@ -36,17 +38,21 @@ const OnboardingPreQuizModal = () => {
           uppercase
           textAlign="center"
         >
-          {t("v3.onboarding.stepSetupDevice.hideRecoveryPhrase.warning.title")}
+          {t(
+            "v3.onboarding.stepRecoveryPhrase.importRecoveryPhrase.warning.title",
+          )}
         </Text>
-        <Text variant="body" color="neutral.c100" mt={6} textAlign="center">
-          {t("v3.onboarding.stepSetupDevice.hideRecoveryPhrase.warning.desc")}
+        <Text variant="paragraph" color="neutral.c80" mt={6} textAlign="center">
+          {t(
+            "v3.onboarding.stepRecoveryPhrase.importRecoveryPhrase.warning.desc",
+          )}
         </Text>
       </Flex>
       <Button type="main" size="large" onPress={handlePress}>
-        {t("v3.onboarding.stepSetupDevice.hideRecoveryPhrase.warning.cta")}
+        {t("v3.onboarding.stepRecoveryPhrase.importRecoveryPhrase.warning.cta")}
       </Button>
     </Flex>
   );
 };
 
-export default OnboardingPreQuizModal;
+export default OnboardingRecoveryPhraseWarning;

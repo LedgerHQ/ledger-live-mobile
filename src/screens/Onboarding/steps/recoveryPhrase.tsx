@@ -14,20 +14,15 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { ScreenName } from "../../../const";
 import { DeviceNames } from "../types";
 import { PlaceholderIllustrationTiny } from "./PlaceholderIllustration";
-import LottieIllustration from "./LottieIllustration";
-import Scene, { PairNew, ConnectNano } from "./setupDevice/scenes";
-import { TrackScreen } from "../../../analytics";
-import SeedWarning from "../shared/SeedWarning";
-
-import nanoX from "../assets/nanoX/pairDevice/data.json";
-import nanoS from "../assets/nanoS/plugDevice/data.json";
-import nanoSP from "../assets/nanoSP/plugDevice/dark.json";
-
-const lottieAnims = {
-  nanoX,
-  nanoS,
-  nanoSP,
-};
+import Scene, {
+  RestoreRecovery,
+  RestoreRecoveryStep1,
+  PinCode,
+  PinCodeInstructions,
+  ExistingRecovery,
+  ExistingRecoveryStep1,
+  ExistingRecoveryStep2,
+} from "./setupDevice/scenes";
 
 const transitionDuration = 500;
 
@@ -36,6 +31,61 @@ type Metadata = {
   illustration: JSX.Element;
   drawer: null | { route: string; screen: string };
 };
+const metadata: Array<Metadata> = [
+  {
+    id: RestoreRecovery.id,
+    illustration: <PlaceholderIllustrationTiny />,
+    drawer: {
+      route: ScreenName.OnboardingModalGeneralInformation,
+      screen: ScreenName.OnboardingGeneralInformation,
+    },
+  },
+  {
+    id: RestoreRecoveryStep1.id,
+    illustration: <PlaceholderIllustrationTiny />,
+    drawer: {
+      route: ScreenName.OnboardingModalGeneralInformation,
+      screen: ScreenName.OnboardingGeneralInformation,
+    },
+  },
+  {
+    id: PinCode.id,
+    illustration: <PlaceholderIllustrationTiny />,
+    drawer: null,
+  },
+  {
+    id: PinCodeInstructions.id,
+    illustration: <PlaceholderIllustrationTiny />,
+    drawer: {
+      route: ScreenName.OnboardingModalSetupSteps,
+      screen: ScreenName.OnboardingSetupDeviceInformation,
+    },
+  },
+  {
+    id: ExistingRecovery.id,
+    illustration: <PlaceholderIllustrationTiny />,
+    drawer: {
+      route: ScreenName.OnboardingModalGeneralInformation,
+      screen: ScreenName.OnboardingGeneralInformation,
+    },
+  },
+  {
+    id: ExistingRecoveryStep1.id,
+    illustration: <PlaceholderIllustrationTiny />,
+    drawer: {
+      route: ScreenName.OnboardingModalGeneralInformation,
+      screen: ScreenName.OnboardingGeneralInformation,
+    },
+  },
+  {
+    id: ExistingRecoveryStep2.id,
+    illustration: <PlaceholderIllustrationTiny />,
+    drawer: {
+      route: ScreenName.OnboardingModalGeneralInformation,
+      screen: ScreenName.OnboardingGeneralInformation,
+    },
+  },
+];
 
 const InfoButton = ({ target }: { target: Metadata["drawer"] }) => {
   const navigation = useNavigation();
@@ -58,11 +108,9 @@ const InfoButton = ({ target }: { target: Metadata["drawer"] }) => {
 const ImageHeader = ({
   activeIndex,
   onBack,
-  metadata,
 }: {
   activeIndex: number;
   onBack: () => void;
-  metadata: Metadata;
 }) => {
   const stepData = metadata[activeIndex];
 
@@ -111,46 +159,22 @@ const renderTransitionSlide = ({
   </Transitions.Slide>
 );
 
-const scenes = [PairNew, ConnectNano];
+const scenes = [
+  RestoreRecovery,
+  RestoreRecoveryStep1,
+  PinCode,
+  PinCodeInstructions,
+  ExistingRecovery,
+  ExistingRecoveryStep1,
+  ExistingRecoveryStep2,
+];
 
-function OnboardingStepPairNew() {
+function OnboardingStepRecoveryPhrase() {
   const [index, setIndex] = React.useState(0);
   const navigation = useNavigation();
   const route = useRoute<
-    RouteProp<
-      {
-        params: {
-          deviceModelId: DeviceNames;
-          next: any;
-          showSeedWarning: boolean;
-        };
-      },
-      "params"
-    >
+    RouteProp<{ params: { deviceModelId: DeviceNames } }, "params">
   >();
-
-  const { deviceModelId, showSeedWarning } = route.params;
-
-  const metadata: Array<Metadata> = [
-    {
-      id: PairNew.id,
-      // @TODO: Replace this placeholder with the correct illustration asap
-      illustration: <PlaceholderIllustrationTiny />,
-      drawer: {
-        route: ScreenName.OnboardingModalGeneralInformation,
-        screen: ScreenName.OnboardingBluetoothInformation,
-      },
-    },
-    {
-      id: ConnectNano.id,
-      // @TODO: Replace this placeholder with the correct illustration asap
-      illustration: <LottieIllustration lottie={lottieAnims[deviceModelId]} />,
-      drawer: {
-        route: ScreenName.OnboardingModalGeneralInformation,
-        screen: ScreenName.OnboardingBluetoothInformation,
-      },
-    },
-  ];
 
   const nextPage = useCallback(() => {
     if (index < scenes.length - 1) {
@@ -158,8 +182,9 @@ function OnboardingStepPairNew() {
     } else {
       // TODO: FIX @react-navigation/native using Typescript
       // @ts-ignore next-line
-      navigation.navigate(ScreenName.OnboardingFinish, {
+      navigation.navigate(ScreenName.OnboardingPairNew, {
         ...route.params,
+        showSeedWarning: false,
       });
     }
   }, [index, navigation, route.params]);
@@ -172,24 +197,20 @@ function OnboardingStepPairNew() {
 
   return (
     <Flex flex={1} width="100%" backgroundColor="background.main">
-      <TrackScreen category="Onboarding" name="PairNew" />
       <FlowStepper
         activeIndex={index}
-        header={props => <ImageHeader {...props} metadata={metadata} />}
+        header={ImageHeader}
         renderTransition={renderTransitionSlide}
         transitionDuration={transitionDuration}
         progressBarProps={{ backgroundColor: "neutral.c40" }}
         extraProps={{ onBack: handleBack() }}
       >
         {scenes.map(Children => (
-          <Scene key={Children.id}>
-            {<Children onNext={nextPage} deviceModelId={deviceModelId} />}
-          </Scene>
+          <Scene key={Children.id}>{<Children onNext={nextPage} />}</Scene>
         ))}
       </FlowStepper>
-      {showSeedWarning ? <SeedWarning deviceModelId={deviceModelId} /> : null}
     </Flex>
   );
 }
 
-export default OnboardingStepPairNew;
+export default OnboardingStepRecoveryPhrase;

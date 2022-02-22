@@ -82,6 +82,7 @@ const ConnectNanoScene = ({
           deviceModelId={deviceModelId}
           onSelect={usbOnly ? onSetDevice : directNext}
           autoSelectOnAdd
+          hideAnimation
         />
       </Flex>
       {Footer}

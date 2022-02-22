@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { ScrollView } from "react-native";
 import { Trans } from "react-i18next";
 import {
@@ -9,12 +9,12 @@ import {
   Text,
 } from "@ledgerhq/native-ui";
 import { StackScreenProps } from "@react-navigation/stack";
-import i18next from "i18next";
+import { useDispatch } from "react-redux";
 import { useLocale } from "../../../context/Locale";
 import { supportedLocales } from "../../../languages";
 import Button from "../../../components/Button";
 import { ScreenName } from "../../../const";
-import { BluetoothMedium } from "@ledgerhq/native-ui/assets/icons";
+import { setLanguage } from "../../../actions/settings";
 
 const languages = {
   de: "Deutsch",
@@ -40,13 +40,19 @@ const languages = {
 
 function OnboardingStepLanguage({ navigation }: StackScreenProps<{}>) {
   const { locale: currentLocale } = useLocale();
-  const changeLanguage = l => {
-    i18next.changeLanguage(l);
-  };
+  const dispatch = useDispatch();
 
-  const next = () => {
-    navigation.navigate(ScreenName.OnboardingStepLanguageGetStarted);
-  };
+  const next = useCallback(() => {
+    navigation.goBack();
+  }, [navigation]);
+
+  const changeLanguage = useCallback(
+    l => {
+      dispatch(setLanguage(l));
+      next();
+    },
+    [dispatch, next],
+  );
 
   return (
     <>
@@ -58,7 +64,6 @@ function OnboardingStepLanguage({ navigation }: StackScreenProps<{}>) {
           >
             {supportedLocales.map((l, index) => (
               <SelectableList.Element key={index + l} value={l}>
-                <BluetoothMedium size={16} color={"neutral.c100"} />{" "}
                 {languages[l]}
               </SelectableList.Element>
             ))}

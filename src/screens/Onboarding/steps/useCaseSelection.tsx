@@ -55,20 +55,20 @@ const Card = ({ item }: { item: Card }) => {
   );
 
   return (
-    <Flex
-      p={6}
-      justifyContent="flex-end"
-      maxWidth={cardMaxWidth}
-      minHeight={368}
-      border="1px solid"
-      borderColor="palette.neutral.c30"
-      borderRadius="4px"
+    <Touchable
+      event={item.event}
+      eventProperties={{ deviceId: deviceModelId }}
+      testID={`${item.event}|${deviceModelId}`}
+      onPress={() => next(item)}
     >
-      <Touchable
-        event={item.event}
-        eventProperties={{ deviceId: deviceModelId }}
-        testID={`${item.event}|${deviceModelId}`}
-        onPress={() => next(item)}
+      <Flex
+        p={6}
+        justifyContent="flex-start"
+        maxWidth={cardMaxWidth}
+        minHeight={368}
+        border="1px solid"
+        borderColor="palette.neutral.c30"
+        borderRadius="4px"
       >
         <Flex alignItems="center">{item.Illustration}</Flex>
         <Text variant="h4" mt={7}>
@@ -77,11 +77,12 @@ const Card = ({ item }: { item: Card }) => {
         <Text variant="paragraph" mt={2}>
           {t(item.subTitle)}
         </Text>
+        <Flex flex={1} />
         <Flex flexDirection="row" justifyContent="flex-end" mt={10}>
           <Icons.ArrowRightMedium size={16} />
         </Flex>
-      </Touchable>
-    </Flex>
+      </Flex>
+    </Touchable>
   );
 };
 
@@ -92,7 +93,10 @@ const Item = ({ cards }: { cards: Array<Card> }) => {
     <Carousel
       slideIndicatorContainerProps={{ style: { display: "none" } }}
       scrollViewProps={{
-        contentContainerStyle: { width: `${90 * cards.length}%` },
+        contentContainerStyle: {
+          width: `${66 * cards.length}%`,
+          marginBottom: 16,
+        },
         pagingEnabled: false,
       }}
     >

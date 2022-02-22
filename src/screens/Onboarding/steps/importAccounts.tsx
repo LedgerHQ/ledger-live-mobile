@@ -11,23 +11,11 @@ import {
 } from "@ledgerhq/native-ui";
 
 import { SafeAreaView } from "react-native-safe-area-context";
-import { ScreenName } from "../../../const";
+import { NavigatorName, ScreenName } from "../../../const";
 import { DeviceNames } from "../types";
 import { PlaceholderIllustrationTiny } from "./PlaceholderIllustration";
-import LottieIllustration from "./LottieIllustration";
-import Scene, { PairNew, ConnectNano } from "./setupDevice/scenes";
+import Scene, { SyncDesktop } from "./setupDevice/scenes";
 import { TrackScreen } from "../../../analytics";
-import SeedWarning from "../shared/SeedWarning";
-
-import nanoX from "../assets/nanoX/pairDevice/data.json";
-import nanoS from "../assets/nanoS/plugDevice/data.json";
-import nanoSP from "../assets/nanoSP/plugDevice/dark.json";
-
-const lottieAnims = {
-  nanoX,
-  nanoS,
-  nanoSP,
-};
 
 const transitionDuration = 500;
 
@@ -111,7 +99,7 @@ const renderTransitionSlide = ({
   </Transitions.Slide>
 );
 
-const scenes = [PairNew, ConnectNano];
+const scenes = [SyncDesktop, SyncDesktop];
 
 function OnboardingStepPairNew() {
   const [index, setIndex] = React.useState(0);
@@ -121,48 +109,48 @@ function OnboardingStepPairNew() {
       {
         params: {
           deviceModelId: DeviceNames;
-          next: any;
-          showSeedWarning: boolean;
         };
       },
       "params"
     >
   >();
 
-  const { deviceModelId, showSeedWarning } = route.params;
+  const { deviceModelId } = route.params;
 
   const metadata: Array<Metadata> = [
     {
-      id: PairNew.id,
+      id: SyncDesktop.id,
       // @TODO: Replace this placeholder with the correct illustration asap
       illustration: <PlaceholderIllustrationTiny />,
-      drawer: {
-        route: ScreenName.OnboardingModalGeneralInformation,
-        screen: ScreenName.OnboardingBluetoothInformation,
-      },
-    },
-    {
-      id: ConnectNano.id,
-      // @TODO: Replace this placeholder with the correct illustration asap
-      illustration: <LottieIllustration lottie={lottieAnims[deviceModelId]} />,
-      drawer: {
-        route: ScreenName.OnboardingModalGeneralInformation,
-        screen: ScreenName.OnboardingBluetoothInformation,
-      },
+      drawer: null,
     },
   ];
 
+  const onNext = useCallback(() => {
+    // TODO: FIX @react-navigation/native using Typescript
+    // @ts-ignore next-line
+    navigation.navigate(NavigatorName.ImportAccounts, {
+      screen: ScreenName.ScanAccounts,
+      params: {
+        onFinish: () => {
+          // TODO: FIX @react-navigation/native using Typescript
+          // @ts-ignore next-line
+          navigation.navigate(ScreenName.OnboardingFinish, {
+            ...route.params,
+          });
+        },
+      },
+    });
+  }, [navigation, route.params]);
+
   const nextPage = useCallback(() => {
-    if (index < scenes.length - 1) {
-      setIndex(index + 1);
-    } else {
-      // TODO: FIX @react-navigation/native using Typescript
-      // @ts-ignore next-line
-      navigation.navigate(ScreenName.OnboardingFinish, {
-        ...route.params,
-      });
-    }
-  }, [index, navigation, route.params]);
+    // TODO: FIX @react-navigation/native using Typescript
+    // @ts-ignore next-line
+    navigation.navigate(ScreenName.OnboardingModalWarning, {
+      screen: ScreenName.OnboardingModalSyncDesktopInformation,
+      params: { onNext },
+    });
+  }, [navigation, onNext]);
 
   const handleBack = React.useCallback(
     () =>
@@ -181,13 +169,12 @@ function OnboardingStepPairNew() {
         progressBarProps={{ backgroundColor: "neutral.c40" }}
         extraProps={{ onBack: handleBack() }}
       >
-        {scenes.map(Children => (
-          <Scene key={Children.id}>
+        {scenes.map((Children, i) => (
+          <Scene key={Children.id + i}>
             {<Children onNext={nextPage} deviceModelId={deviceModelId} />}
           </Scene>
         ))}
       </FlowStepper>
-      {showSeedWarning ? <SeedWarning deviceModelId={deviceModelId} /> : null}
     </Flex>
   );
 }

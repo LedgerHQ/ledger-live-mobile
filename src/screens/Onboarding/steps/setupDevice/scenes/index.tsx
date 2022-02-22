@@ -11,6 +11,15 @@ export { default as RecoveryPhraseSetup } from "./RecoveryPhraseSetup";
 export { default as HideRecoveryPhrase } from "./HideRecoveryPhrase";
 export { default as PairNew } from "./PairNew";
 export { default as ConnectNano } from "./ConnectNano";
+export { default as QuizzFinal } from "./QuizzFinal";
+export { default as SyncDesktop } from "./SyncDesktop";
+
+export { default as RestoreRecovery } from "./RestoreRecoveryPhrase";
+export { default as RestoreRecoveryStep1 } from "./RestoreRecoveryPhraseStep1";
+
+export { default as ExistingRecovery } from "./ExistingRecoveryPhrase";
+export { default as ExistingRecoveryStep1 } from "./ExistingRecoveryPhraseStep1";
+export { default as ExistingRecoveryStep2 } from "./ExistingRecoveryPhraseStep2";
 
 const Scene = ({ children }: { children: React.ReactNode }) => (
   <Flex flex={1} justifyContent="space-between" my={8} mx={6}>

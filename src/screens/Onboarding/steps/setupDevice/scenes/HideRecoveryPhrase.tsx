@@ -1,8 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { Flex, Button, Text, IconBoxList, Icons } from "@ledgerhq/native-ui";
-import { useNavigation } from "@react-navigation/native";
-import { ScreenName } from "../../../../../const";
 
 const items = [
   {
@@ -21,13 +19,6 @@ const items = [
 
 const HideRecoveryPhraseScene = ({ onNext }: { onNext: () => void }) => {
   const { t } = useTranslation();
-  const navigation = useNavigation();
-
-  const handleClick = () => {
-    navigation.navigate(ScreenName.OnboardingPreQuizModal, {
-      onNext: () => navigation.navigate(ScreenName.OnboardingQuiz),
-    });
-  };
 
   return (
     <>
@@ -42,7 +33,7 @@ const HideRecoveryPhraseScene = ({ onNext }: { onNext: () => void }) => {
           items={items.map(item => ({ ...item, title: t(item.title) }))}
         />
       </Flex>
-      <Button type="main" size="large" onPress={handleClick}>
+      <Button type="main" size="large" onPress={onNext}>
         {t("v3.onboarding.stepSetupDevice.hideRecoveryPhrase.cta")}
       </Button>
     </>

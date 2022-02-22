@@ -311,6 +311,9 @@ export const ScreenName = {
   OnboardingModalWarning: "OnboardingModalWarning",
   OnboardingModalGeneralInformation: "OnboardingModalGeneralInformation",
   OnboardingPreQuizModal: "OnboardingPreQuizModal",
+  OnboardingModalSyncDesktopInformation:
+    "OnboardingModalSyncDesktopInformation",
+  OnboardingModalRecoveryPhraseWarning: "OnboardingModalRecoveryPhraseWarning",
 
   PlatformCatalog: "PlatformCatalog",
   PlatformApp: "PlatformApp",

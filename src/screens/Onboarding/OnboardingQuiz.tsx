@@ -11,7 +11,7 @@ import { useTranslation } from "react-i18next";
 import { RenderTransitionProps } from "@ledgerhq/native-ui/components/Navigation/FlowStepper";
 import { StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute, RouteProp } from "@react-navigation/native";
 import { TrackScreen } from "../../analytics";
 import { ScreenName } from "../../const";
 
@@ -75,16 +75,21 @@ const Header = ({ step }: { step: number }) => {
   );
 };
 
-function OnboardingQuiz({
-  navigation,
-  route,
-}: {
-  navigation: any;
-  route: any;
-}) {
+function OnboardingQuiz({ navigation }: { navigation: any }) {
   const { t } = useTranslation();
   const [index, setIndex] = useState(0);
   const [bg, setBg] = useState("primary.c60");
+
+  const route = useRoute<
+    RouteProp<
+      {
+        params: {
+          deviceModelId: string;
+        };
+      },
+      "params"
+    >
+  >();
 
   const [userAnswers, setAnswers] = useState(0);
 
@@ -149,6 +154,8 @@ function OnboardingQuiz({
     [t],
   );
 
+  console.log(route.params);
+
   const onNext = useCallback(
     correct => {
       setAnswers(a => (correct ? a + 1 : a));
@@ -162,7 +169,7 @@ function OnboardingQuiz({
         });
       }
     },
-    [index, navigation, quizData.length, userAnswers],
+    [index, navigation, quizData.length, route.params, userAnswers],
   );
 
   return (

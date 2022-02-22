@@ -74,16 +74,14 @@ function OnboardingStepTerms() {
       title={t("Terms.title")}
       subTitle={t("Terms.subTitle")}
       footer={
-        <Flex flexDirection="row" justifyContent="center">
-          <Button
-            disabled={!toggle}
-            onPress={next}
-            testID="Onboarding - ToU accepted"
-            type="main"
-          >
-            {t("Terms.cta")}
-          </Button>
-        </Flex>
+        <Button
+          disabled={!toggle}
+          onPress={next}
+          testID="Onboarding - ToU accepted"
+          type="main"
+        >
+          {t("Terms.cta")}
+        </Button>
       }
     >
       <LinkBox

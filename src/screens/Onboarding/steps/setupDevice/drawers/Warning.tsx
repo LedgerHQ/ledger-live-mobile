@@ -31,10 +31,16 @@ const OnboardingSetupDeviceInformation = () => {
           iconSize={24}
           boxSize={64}
         />
-        <Text variant="h2" color="neutral.c100" mt={8} uppercase>
+        <Text
+          variant="h2"
+          color="neutral.c100"
+          mt={8}
+          uppercase
+          textAlign="center"
+        >
           {t("v3.onboarding.stepSetupDevice.start.warning.title")}
         </Text>
-        <Text variant="paragraph" color="neutral.c80" mt={6}>
+        <Text variant="paragraph" color="neutral.c80" mt={6} textAlign="center">
           {t("v3.onboarding.stepSetupDevice.start.warning.desc")}
         </Text>
       </Flex>

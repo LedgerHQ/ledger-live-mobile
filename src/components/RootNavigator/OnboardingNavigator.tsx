@@ -37,6 +37,8 @@ import OnboardingSetupDeviceRecoveryPhrase from "../../screens/Onboarding/steps/
 import OnboardingGeneralInformation from "../../screens/Onboarding/steps/setupDevice/drawers/GeneralInformation";
 import OnboardingBluetoothInformation from "../../screens/Onboarding/steps/setupDevice/drawers/BluetoothConnection";
 import OnboardingWarning from "../../screens/Onboarding/steps/setupDevice/drawers/Warning";
+import OnboardingSyncDesktopInformation from "../../screens/Onboarding/steps/setupDevice/drawers/SyncDesktopInformation";
+import OnboardingRecoveryPhraseWarning from "../../screens/Onboarding/steps/setupDevice/drawers/RecoveryPhraseWarning";
 
 const Stack = createStackNavigator();
 const LanguageModalStack = createStackNavigator();
@@ -240,6 +242,18 @@ function OnboardingCarefulWarning(props: StackScreenProps<{}>) {
           options={{ title: "", ...options }}
           initialParams={props.route.params}
         />
+        <OnboardingCarefulWarningStack.Screen
+          name={ScreenName.OnboardingModalSyncDesktopInformation}
+          component={OnboardingSyncDesktopInformation}
+          options={{ title: "", ...options }}
+          initialParams={props.route.params}
+        />
+        <OnboardingCarefulWarningStack.Screen
+          name={ScreenName.OnboardingModalRecoveryPhraseWarning}
+          component={OnboardingRecoveryPhraseWarning}
+          options={{ title: "", ...options }}
+          initialParams={props.route.params}
+        />
       </OnboardingCarefulWarningStack.Navigator>
     </NavigationModalContainer>
   );
@@ -379,6 +393,10 @@ export default function OnboardingNavigator() {
       <Stack.Screen
         name={ScreenName.OnboardingFinish}
         component={OnboardingFinish}
+        options={{
+          cardStyleInterpolator:
+            CardStyleInterpolators.forFadeFromBottomAndroid,
+        }}
       />
 
       <Stack.Screen

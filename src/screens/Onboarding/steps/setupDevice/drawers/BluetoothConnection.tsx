@@ -9,7 +9,6 @@ import {
   IconBoxList,
   Icons,
   Link as UILink,
-  Separator,
 } from "@ledgerhq/native-ui";
 import { urls } from "../../../../../config/urls";
 

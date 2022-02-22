@@ -5450,12 +5450,12 @@
       },
       "import": {
         "scan": {
-          "title": "Scan LiveQR code",
+          "title": "Import from desktop",
           "descTop": {
-            "line1": "In Ledger Live Desktop, go to",
+            "line1": "In Ledger Live Desktop, go to:",
             "line2": "Settings > Accounts > Export accounts > Export"
           },
-          "descBottom": "Please put the LiveQR code within the square."
+          "descBottom": "Open Ledger Live Desktop & Scan QR Code"
         },
         "result": {
           "title": "Import accounts",

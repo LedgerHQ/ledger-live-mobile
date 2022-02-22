@@ -1,8 +1,9 @@
 // @flow
 import React, { useMemo } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import { useTheme } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
+import { Text } from "@ledgerhq/native-ui";
+import { useTheme } from "styled-components/native";
 import { ScreenName } from "../../const";
 import ScanAccounts from "../../screens/ImportAccounts/Scan";
 import DisplayResult, {
@@ -30,17 +31,24 @@ export default function ImportAccountsNavigator() {
         options={{
           ...TransparentHeaderNavigationOptions,
           headerShown: true,
-          headerTitle: t("account.import.scan.title"),
+          headerTitle: () => (
+            <Text variant="h3" color="constant.white" uppercase>
+              {t("v3.account.import.scan.title")}
+            </Text>
+          ),
           headerRight: props => <HeaderRightClose {...props} color={"#fff"} />,
           headerLeft: null,
-          headerTitleStyle: { color: "#fff" },
         }}
       />
       <Stack.Screen
         name={ScreenName.DisplayResult}
         component={DisplayResult}
         options={{
-          headerTitle: t("account.import.result.title"),
+          headerTitle: (
+            <Text variant="h3" color="constant.white" uppercase>
+              {t("v3.account.import.result.title")}
+            </Text>
+          ),
           headerLeft: () => <BackButton />,
         }}
       />
@@ -48,7 +56,11 @@ export default function ImportAccountsNavigator() {
         name={ScreenName.FallBackCameraScreen}
         component={FallBackCameraScreen}
         options={{
-          headerTitle: t("account.import.fallback.header"),
+          headerTitle: (
+            <Text variant="h3" color="constant.white" uppercase>
+              {t("v3.account.import.fallback.header")}
+            </Text>
+          ),
         }}
       />
     </Stack.Navigator>

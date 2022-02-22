@@ -11,14 +11,17 @@ import Animation from "../Animation";
 
 type Props = {
   onPairNewDevice: () => void;
+  hideAnimation?: boolean;
 };
 
-function BluetoothEmpty({ onPairNewDevice }: Props) {
+function BluetoothEmpty({ onPairNewDevice, hideAnimation }: Props) {
   return (
     <>
-      <View style={styles.imageContainer}>
-        <Animation source={lottie} style={styles.image} />
-      </View>
+      {hideAnimation ? null : (
+        <View style={styles.imageContainer}>
+          <Animation source={lottie} style={styles.image} />
+        </View>
+      )}
       <Flex alignItems={"center"} flexDirection={"row"} mb={6}>
         <BluetoothMedium size={24} color={"neutral.c100"} />
         <Box ml={6}>
