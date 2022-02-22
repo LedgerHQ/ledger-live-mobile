@@ -1442,8 +1442,8 @@
       "palletMethod": "Método",
       "transferAmount": "Transferir importe",
       "validatorsCount": "Validadores ({{number}})",
-      "storageLimit": "Storage Limit",
-      "gasLimit": "Gas Limit",
+      "storageLimit": "Límite de almacenamiento",
+      "gasLimit": "Límite de Gas",
       "opbytes": "opBytes",
       "id": "Id"
     },
