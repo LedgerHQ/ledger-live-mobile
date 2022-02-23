@@ -37,6 +37,7 @@ import LText from "../../components/LText";
 import FirmwareUpdateBanner from "../../components/FirmwareUpdateBanner";
 import CheckLanguageAvailability from "../../components/CheckLanguageAvailability";
 import { withDiscreetMode } from "../../context/DiscreetModeContext";
+import DiscoverSection from "./DiscoverSection";
 
 export { default as PortfolioTabIcon } from "./TabIcon";
 
@@ -148,6 +149,7 @@ function PortfolioScreen({ navigation }: Props) {
             </View>,
           ]
         : []),
+      <DiscoverSection></DiscoverSection>,
       <PortfolioHistoryList navigation={navigation} />,
     ],
     [
