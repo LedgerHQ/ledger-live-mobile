@@ -1444,7 +1444,6 @@
       "validatorsCount": "Validateurs ({{number}})",
       "storageLimit": "Limite de stockage",
       "gasLimit": "Limite de gaz",
-      "opbytes": "Taille (opBytes)",
       "id": "Identifiant (ID)"
     },
     "multipleAddresses": "Pourquoi plusieurs adresses ?",
