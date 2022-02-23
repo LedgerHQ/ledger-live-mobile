@@ -1,6 +1,12 @@
-import React, { useRef, useCallback, useMemo, useState } from "react";
-import { useSelector } from "react-redux";
-import { FlatList } from "react-native";
+import React, {
+  useRef,
+  useCallback,
+  useMemo,
+  useState,
+  useEffect,
+} from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { FlatList, LayoutChangeEvent } from "react-native";
 import Animated, {
   useAnimatedScrollHandler,
   useSharedValue,
@@ -23,7 +29,7 @@ import { usePortfolio } from "../../actions/portfolio";
 import globalSyncRefreshControl from "../../components/globalSyncRefreshControl";
 
 import GraphCardContainer from "./GraphCardContainer";
-import Carousel, { CAROUSEL_NONCE } from "../../components/Carousel";
+import Carousel from "../../components/Carousel";
 import Header from "./Header";
 import extraStatusBarPadding from "../../logic/extraStatusBarPadding";
 import TrackScreen from "../../analytics/TrackScreen";
@@ -36,6 +42,7 @@ import FirmwareUpdateBanner from "../../components/FirmwareUpdateBanner";
 import DiscoverSection from "./DiscoverSection";
 import AddAssetsCard from "./AddAssetsCard";
 import Assets from "./Assets";
+import { setCarouselVisibility } from "../../actions/settings";
 
 export { default as PortfolioTabIcon } from "./TabIcon";
 
@@ -101,6 +108,7 @@ export default function PortfolioScreen({ navigation }: Props) {
   const accounts = useSelector(accountsSelector);
   const counterValueCurrency = useSelector(counterValueCurrencySelector);
   const portfolio = usePortfolio();
+  const dispatch = useDispatch();
 
   const refreshAccountsOrdering = useRefreshAccountsOrdering();
   useFocusEffect(refreshAccountsOrdering);
@@ -126,6 +134,18 @@ export default function PortfolioScreen({ navigation }: Props) {
   const maxAssetsToDisplay = 3;
   const assetsToDisplay = accounts.slice(0, maxAssetsToDisplay);
 
+  // useEffect(() => {
+  //   dispatch(
+  //     setCarouselVisibility({
+  //       ...carouselVisibility,
+  //       buyCrypto: true,
+  //       FamilyPack: true,
+  //       LedgerAcademy: true,
+  //       Swap: true,
+  //     }),
+  //   );
+  // }, []);
+
   const data = useMemo(
     () => [
       <Box bg={"background.main"}>
@@ -144,9 +164,8 @@ export default function PortfolioScreen({ navigation }: Props) {
       <Box
         mx={6}
         mt={3}
-        onLayout={event => {
-          const { x, y, width, height } = event.nativeEvent.layout;
-          console.log(x, y, width, height);
+        onLayout={(event: LayoutChangeEvent) => {
+          const { y, height } = event.nativeEvent.layout;
           setGraphCardEndPosition(y + height);
         }}
       >

@@ -11,6 +11,8 @@ import Animated, {
   withDelay,
   useAnimatedStyle,
   useSharedValue,
+  FadeOut,
+  runOnJS,
 } from "react-native-reanimated";
 import { urls } from "../../config/urls";
 import { setCarouselVisibility } from "../../actions/settings";
@@ -146,7 +148,7 @@ export const CAROUSEL_NONCE: number = 4;
 type CarouselCardProps = {
   id: string;
   children: React.ReactNode;
-  onHide: Function;
+  onHide: (cardId: string) => void;
 };
 
 const CarouselCard = ({ id, children, onHide }: CarouselCardProps) => (
@@ -164,17 +166,32 @@ const CarouselCardContainer = ({ id, children, onHide }: CarouselCardProps) => {
   const animationDuration = 300;
   const opacityAnimationDuration = animationDuration / 2;
   const widthAnimationDuration = animationDuration - opacityAnimationDuration;
-  const animatedStyle = useAnimatedStyle(() => ({
-    opacity: withTiming(animValue.value, {
-      duration: opacityAnimationDuration,
-    }),
-    width: withDelay(
-      opacityAnimationDuration,
-      withTiming(animValue.value * 265, { // Todo : (265) this is not good, we shouldn't have to use a hard coded value for the full width of the card
-        duration: widthAnimationDuration,
+
+  const animatedStyle = useAnimatedStyle(
+    () => ({
+      opacity: withTiming(animValue.value, {
+        duration: opacityAnimationDuration,
       }),
-    ),
-  }));
+      width: withDelay(
+        opacityAnimationDuration,
+        withTiming(
+          animValue.value * 265,
+          {
+            // Todo : (265) this is not good, we shouldn't have to use a hard coded value for the full width of the card
+            duration: widthAnimationDuration,
+          },
+          () => {
+            if (animValue.value === 0) {
+              console.log("end", id);
+              runOnJS(onHide)(id);
+            }
+          },
+        ),
+      ),
+    }),
+    [id],
+  );
+
   const onClick = useCallback(() => {
     animValue.value = 0;
   }, [animValue]);
@@ -199,9 +216,10 @@ type Props = {
 
 const Carousel = ({ cardsVisibility }: Props) => {
   const dispatch = useDispatch();
-
+  // dispatch(setCarouselVisibility({ ...cardsVisibility, buyCrypto: false }));
   let slides = getDefaultSlides();
   slides = slides.filter(slide => {
+    console.log(slide, cardsVisibility[slide.id]);
     if (!cardsVisibility[slide.id]) {
       return false;
     }
@@ -213,26 +231,28 @@ const Carousel = ({ cardsVisibility }: Props) => {
     }
     return true;
   });
+  console.log(slides);
 
   const onHide = useCallback(
     cardId => {
+      console.log("before dispatch", { ...cardsVisibility, [cardId]: false })
       dispatch(setCarouselVisibility({ ...cardsVisibility, [cardId]: false }));
     },
     [dispatch, cardsVisibility],
   );
 
+
   if (!slides.length) {
     // No slides or dismissed, no problem
     return null;
   }
-  console.log(cardsVisibility);
 
   return (
     <Box>
       <View style={{ width: "100%" }}>
         <ScrollView horizontal>
           {slides.map(({ id, Component }) => (
-            <CarouselCardContainer id={id} onHide={onHide}>
+            <CarouselCardContainer key={id} id={id} onHide={onHide}>
               <Component key={id} />
             </CarouselCardContainer>
           ))}
