@@ -1444,7 +1444,6 @@
       "validatorsCount": "Validadores ({{number}})",
       "storageLimit": "Límite de almacenamiento",
       "gasLimit": "Límite de Gas",
-      "opbytes": "opBytes",
       "id": "Id"
     },
     "multipleAddresses": "¿Por qué hay múltiples direcciones?",
