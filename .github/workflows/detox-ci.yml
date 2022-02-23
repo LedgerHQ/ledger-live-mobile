@@ -77,7 +77,7 @@ jobs:
         run: |
           yarn install --frozen-lockfile
       - name: Build
-        run: yarn detox build -c android.staging
+        run: yarn detox build -c android.staging-ci
       - name: Run
         uses: reactivecircus/android-emulator-runner@v2
         with:
@@ -87,4 +87,4 @@ jobs:
             mkdir ./temp
             curl -f -o ./temp/test-butler-app.apk https://repo1.maven.org/maven2/com/linkedin/testbutler/test-butler-app/2.2.1/test-butler-app-2.2.1.apk
             adb install ./temp/test-butler-app.apk || adb install ./e2e/test-butler-app.apk
-            yarn detox test -c android.staging
+            yarn detox test -c android.staging-ci

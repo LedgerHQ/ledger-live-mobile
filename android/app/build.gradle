@@ -148,7 +148,13 @@ android {
         versionName "2.37.0"
         resValue "string", "build_config_package", "com.ledger.live"
         testBuildType System.getProperty('testBuildType', 'debug')
-        testInstrumentationRunner 'com.ledger.live.DetoxTestAppJUnitRunner'
+        if (project.hasProperty("withTestButler")) {
+            buildConfigField "boolean", "WITH_TEST_BUTLER", "true"
+            testInstrumentationRunner 'com.ledger.live.DetoxTestAppJUnitRunner'
+        } else {
+            buildConfigField "boolean", "WITH_TEST_BUTLER", "false"
+            testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+        }
     }
     splits {
         abi {

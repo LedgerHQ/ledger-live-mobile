@@ -35,6 +35,15 @@
       "device": {
         "avdName": "Nexus_5_API_30"
       }
+    },
+    "android.staging-ci": {
+      "binaryPath": "android/app/build/outputs/apk/stagingRelease/app-x86-stagingRelease.apk",
+      "testBinaryPath": "android/app/build/outputs/apk/androidTest/stagingRelease/app-stagingRelease-androidTest.apk",
+      "build": "cd android && ENVFILE=.env.mock ./gradlew assembleStagingRelease assembleAndroidTest -DtestBuildType=stagingRelease -PwithTestButler && cd ..",
+      "type": "android.emulator",
+      "device": {
+        "avdName": "emu"
+      }
     }
   }
 }
