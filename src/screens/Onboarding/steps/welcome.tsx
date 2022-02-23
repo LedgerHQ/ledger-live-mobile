@@ -1,22 +1,16 @@
 import React, { useCallback } from "react";
-import { Image, Linking } from "react-native";
 import { Trans } from "react-i18next";
 import styled from "styled-components/native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Flex, Text, Link } from "@ledgerhq/native-ui";
+import { Flex, Text } from "@ledgerhq/native-ui";
 import { ChevronBottomMedium } from "@ledgerhq/native-ui/assets/icons";
 import Video from "react-native-video";
 
 import Button from "../../../components/Button";
-import { urls } from "../../../config/urls";
-import { deviceNames } from "../../../wording";
 import { useLocale } from "../../../context/Locale";
 import { ScreenName } from "../../../const";
-import InvertTheme from "../../../components/InvertTheme";
 
-const illustration = require("../assets/v3/welcome/1.png");
-
-const source = require("../../../../assets/videos/onboarding.webm");
+const source = require("../../../../assets/videos/onboarding.mp4");
 const poster = require("../../../../assets/videos/onboarding-poster.jpg");
 
 const SafeFlex = styled(SafeAreaView)`
@@ -24,8 +18,6 @@ const SafeFlex = styled(SafeAreaView)`
 `;
 
 function OnboardingStepWelcome({ navigation }: any) {
-  const buy = useCallback(() => Linking.openURL(urls.buyNanoX), []);
-
   const next = useCallback(() => {
     navigation.navigate(ScreenName.OnboardingTermsOfUse);
   }, [navigation]);

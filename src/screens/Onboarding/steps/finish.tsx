@@ -15,7 +15,7 @@ import { readOnlyModeEnabledSelector } from "../../../reducers/settings";
 import Button from "../../../components/wrappedUi/Button";
 import * as Animatable from "react-native-animatable";
 
-const source = require("../../../../assets/videos/onboarding.webm");
+const source = require("../../../../assets/videos/onboarding.mp4");
 const poster = require("../../../../assets/videos/onboarding-poster.jpg");
 
 type Props = {
