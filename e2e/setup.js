@@ -1,4 +1,3 @@
-// @flow
 import { device } from "detox";
 import * as bridge from "./bridge/server";
 
