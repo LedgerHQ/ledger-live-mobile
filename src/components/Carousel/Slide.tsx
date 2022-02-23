@@ -1,7 +1,6 @@
 import React, { useCallback } from "react";
 import { Linking, Image } from "react-native";
 import { Flex, Text } from "@ledgerhq/native-ui";
-import getWindowDimensions from "../../logic/getWindowDimensions";
 import Touchable from "../Touchable";
 
 type SlideProps = {
@@ -17,13 +16,11 @@ type SlideProps = {
 const Slide = ({
   url,
   name,
-  title,
   description,
   image,
   icon,
   position,
 }: SlideProps) => {
-  const slideWidth = getWindowDimensions().width - 32;
   const onClick = useCallback(() => {
     Linking.openURL(url);
   }, [url]);

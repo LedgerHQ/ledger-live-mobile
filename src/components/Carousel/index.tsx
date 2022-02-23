@@ -1,19 +1,12 @@
-import React, { memo, useCallback } from "react";
-import { View, TouchableOpacity, ScrollView } from "react-native";
+import React, { memo, useCallback, useMemo, useRef, useState } from "react";
+import { TouchableOpacity, ScrollView } from "react-native";
 import { useDispatch } from "react-redux";
 import map from "lodash/map";
 import { Trans } from "react-i18next";
 import { Box } from "@ledgerhq/native-ui";
 import { CloseMedium } from "@ledgerhq/native-ui/assets/icons";
 import styled from "styled-components/native";
-import Animated, {
-  withTiming,
-  withDelay,
-  useAnimatedStyle,
-  useSharedValue,
-  FadeOut,
-  runOnJS,
-} from "react-native-reanimated";
+import Animated, { FadeOut, Layout } from "react-native-reanimated";
 import { urls } from "../../config/urls";
 import { setCarouselVisibility } from "../../actions/settings";
 import Slide from "./Slide";
@@ -43,7 +36,6 @@ export const SLIDES = [
     name: "LedgerAcademy",
     title: <Trans i18nKey={`v3.carousel.banners.academy.title`} />,
     description: <Trans i18nKey={`v3.carousel.banners.academy.description`} />,
-    // image: require("../../images/banners/academy.png"),
     icon: (
       <Illustration
         lightSource={AcademyLight}
@@ -65,7 +57,6 @@ export const SLIDES = [
     description: (
       <Trans i18nKey={`v3.carousel.banners.buyCrypto.description`} />
     ),
-    // image: require("../../images/banners/buycrypto.png"),
     icon: (
       <Illustration
         lightSource={BuyCryptoLight}
@@ -85,7 +76,6 @@ export const SLIDES = [
     name: "Swap",
     title: <Trans i18nKey={`v3.carousel.banners.swap.title`} />,
     description: <Trans i18nKey={`v3.carousel.banners.swap.description`} />,
-    // image: require("../../images/banners/swap.png"),
     icon: (
       <Illustration lightSource={SwapLight} darkSource={SwapDark} size={84} />
     ),
@@ -103,7 +93,6 @@ export const SLIDES = [
     description: (
       <Trans i18nKey={`v3.carousel.banners.familyPack.description`} />
     ),
-    // image: require("../../images/banners/familypack.png"),
     icon: (
       <Illustration
         lightSource={FamilyPackLight}
@@ -161,54 +150,13 @@ const CarouselCard = ({ id, children, onHide }: CarouselCardProps) => (
 );
 
 // TODO : make it generic in the ui
-const CarouselCardContainer = ({ id, children, onHide }: CarouselCardProps) => {
-  const animValue = useSharedValue(1);
-  const animationDuration = 300;
-  const opacityAnimationDuration = animationDuration / 2;
-  const widthAnimationDuration = animationDuration - opacityAnimationDuration;
-
-  const animatedStyle = useAnimatedStyle(
-    () => ({
-      opacity: withTiming(animValue.value, {
-        duration: opacityAnimationDuration,
-      }),
-      width: withDelay(
-        opacityAnimationDuration,
-        withTiming(
-          animValue.value * 265,
-          {
-            // Todo : (265) this is not good, we shouldn't have to use a hard coded value for the full width of the card
-            duration: widthAnimationDuration,
-          },
-          () => {
-            if (animValue.value === 0) {
-              console.log("end", id);
-              runOnJS(onHide)(id);
-            }
-          },
-        ),
-      ),
-    }),
-    [id],
-  );
-
-  const onClick = useCallback(() => {
-    animValue.value = 0;
-  }, [animValue]);
-  /*
-    Currently, the animation is working but we are not updating the visibility state of the recommended card in the store
-    so if we close and reopen the app, the card will still be there
-    To update the visibility state of the card in the store, we need to call the onHide(id) function with the id of the card to hide
-  */
-
-  return (
-    <Animated.View style={[animatedStyle]}>
-      <CarouselCard id={id} onHide={onClick}>
-        {children}
-      </CarouselCard>
-    </Animated.View>
-  );
-};
+const CarouselCardContainer = ({ id, children, onHide }: CarouselCardProps) => (
+  <Animated.View exiting={FadeOut} layout={Layout.delay(200)}>
+    <CarouselCard id={id} onHide={onHide}>
+      {children}
+    </CarouselCard>
+  </Animated.View>
+);
 
 type Props = {
   cardsVisibility: boolean[];
@@ -216,31 +164,32 @@ type Props = {
 
 const Carousel = ({ cardsVisibility }: Props) => {
   const dispatch = useDispatch();
-  // dispatch(setCarouselVisibility({ ...cardsVisibility, buyCrypto: false }));
-  let slides = getDefaultSlides();
-  slides = slides.filter(slide => {
-    console.log(slide, cardsVisibility[slide.id]);
-    if (!cardsVisibility[slide.id]) {
-      return false;
-    }
-    if (slide.start && slide.start > new Date()) {
-      return false;
-    }
-    if (slide.end && slide.end < new Date()) {
-      return false;
-    }
-    return true;
-  });
-  console.log(slides);
+  const scrollViewRef = useRef<ScrollView>(null);
+  const [currentPositionX, setCurrentPositionX] = useState(0);
+
+  const slides = useMemo(
+    () =>
+      getDefaultSlides().filter(slide => {
+        if (!cardsVisibility[slide.id]) {
+          return false;
+        }
+        if (slide.start && slide.start > new Date()) {
+          return false;
+        }
+        if (slide.end && slide.end < new Date()) {
+          return false;
+        }
+        return true;
+      }),
+    [cardsVisibility],
+  );
 
   const onHide = useCallback(
     cardId => {
-      console.log("before dispatch", { ...cardsVisibility, [cardId]: false })
       dispatch(setCarouselVisibility({ ...cardsVisibility, [cardId]: false }));
     },
     [dispatch, cardsVisibility],
   );
-
 
   if (!slides.length) {
     // No slides or dismissed, no problem
@@ -248,17 +197,28 @@ const Carousel = ({ cardsVisibility }: Props) => {
   }
 
   return (
-    <Box>
-      <View style={{ width: "100%" }}>
-        <ScrollView horizontal>
-          {slides.map(({ id, Component }) => (
-            <CarouselCardContainer key={id} id={id} onHide={onHide}>
-              <Component key={id} />
-            </CarouselCardContainer>
-          ))}
-        </ScrollView>
-      </View>
-    </Box>
+    <ScrollView
+      horizontal
+      ref={scrollViewRef}
+      onMomentumScrollEnd={event => {
+        setCurrentPositionX(
+          event.nativeEvent.contentOffset.x +
+            event.nativeEvent.layoutMeasurement.width,
+        );
+      }}
+      onContentSizeChange={contentWidth => {
+        // 264px = CarouselCard width
+        if (currentPositionX > contentWidth) {
+          scrollViewRef.current?.scrollToEnd({ animated: true });
+        }
+      }}
+    >
+      {slides.map(({ id, Component }) => (
+        <CarouselCardContainer key={id} id={id} onHide={onHide}>
+          <Component key={id} />
+        </CarouselCardContainer>
+      ))}
+    </ScrollView>
   );
 };
 

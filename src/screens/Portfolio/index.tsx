@@ -134,17 +134,17 @@ export default function PortfolioScreen({ navigation }: Props) {
   const maxAssetsToDisplay = 3;
   const assetsToDisplay = accounts.slice(0, maxAssetsToDisplay);
 
-  // useEffect(() => {
-  //   dispatch(
-  //     setCarouselVisibility({
-  //       ...carouselVisibility,
-  //       buyCrypto: true,
-  //       FamilyPack: true,
-  //       LedgerAcademy: true,
-  //       Swap: true,
-  //     }),
-  //   );
-  // }, []);
+  useEffect(() => {
+    dispatch(
+      setCarouselVisibility({
+        ...carouselVisibility,
+        buyCrypto: true,
+        FamilyPack: true,
+        LedgerAcademy: true,
+        Swap: true,
+      }),
+    );
+  }, []);
 
   const data = useMemo(
     () => [
@@ -205,7 +205,7 @@ export default function PortfolioScreen({ navigation }: Props) {
         />
         <DiscoverSection />
       </Flex>,
-      ...(Object.values(carouselVisibility).some(cardVisible => cardVisible)
+      ...(Object.values(carouselVisibility).some(Boolean)
         ? [
             <Flex mx={6} mt={10}>
               <SectionTitle
