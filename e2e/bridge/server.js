@@ -3,8 +3,8 @@ import { Server } from "ws";
 import path from "path";
 import fs from "fs";
 import type { E2EBridgeMessage } from "./client";
-import { $waitFor } from "../utils";
-import { NavigatorName } from "../../../src/const";
+import { waitForElement } from "../helpers";
+import { NavigatorName } from "../../src/const";
 
 let wss: Server;
 
@@ -43,7 +43,7 @@ export async function loadConfig(
     return;
   }
 
-  await $waitFor("PortfolioEmptyAccount");
+  await waitForElement("PortfolioEmptyAccount");
 }
 
 function navigate(name: string) {

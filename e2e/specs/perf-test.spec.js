@@ -1,5 +1,5 @@
 // @flow
-import { bridge } from "../engine";
+import { loadConfig } from "../bridge/server";
 import { delay, retryAction } from "../helpers";
 
 const { device, element, by, waitFor } = require("detox");
@@ -19,7 +19,7 @@ describe("Navigation while syncing - performance test", () => {
     await device.disableSynchronization();
 
     await retryAction(async () => {
-      await bridge.loadConfig("allLiveCoinsNoOperations", true);
+      await loadConfig("allLiveCoinsNoOperations", true);
     });
 
     await retryAction(async () => {

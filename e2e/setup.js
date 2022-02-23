@@ -1,6 +1,6 @@
 // @flow
 import { device } from "detox";
-import { bridge } from "./engine";
+import * as bridge from "./bridge/server";
 
 beforeAll(async () => {
   bridge.init();

@@ -1,4 +1,4 @@
-import * as bridge from "../../engine/bridge/server";
+import * as bridge from "../../bridge/server";
 import * as testHelpers from "../../helpers";
 
 export default class OnboardingSteps {

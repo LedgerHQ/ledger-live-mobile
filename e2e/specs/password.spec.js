@@ -1,4 +1,4 @@
-import { bridge } from "../engine";
+import { loadConfig } from "../bridge/server";
 
 const { device, element, by, waitFor } = require("detox");
 
@@ -10,7 +10,7 @@ describe("Password Lock Screen", () => {
   });
 
   it("should be able to enter the correct password", async () => {
-    bridge.loadConfig("1AccountBTC1AccountETH", true);
+    loadConfig("1AccountBTC1AccountETH", true);
 
     // navigate to settings cog
     await element(by.id("settings-icon")).tap();

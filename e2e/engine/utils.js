@@ -1,3 +1,5 @@
+// TO BE REMOVED
+
 // @flow
 // const { device, element, by, waitFor } = require("detox");
 

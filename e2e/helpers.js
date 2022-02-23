@@ -10,6 +10,12 @@ export async function waitAndTap(elementId, timeout) {
   return element(by.id(elementId)).tap();
 }
 
+export async function waitForElement(elementId, timeout) {
+  await waitFor(element(by.id(elementId)))
+    .toBeVisible()
+    .withTimeout(timeout || DEFAULT_TIMEOUT);
+}
+
 export function tap(elementId) {
   return element(by.id(elementId)).tap();
 }
