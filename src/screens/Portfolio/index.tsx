@@ -1,11 +1,5 @@
-import React, {
-  useRef,
-  useCallback,
-  useMemo,
-  useState,
-  useEffect,
-} from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useRef, useCallback, useMemo, useState } from "react";
+import { useSelector } from "react-redux";
 import { FlatList, LayoutChangeEvent } from "react-native";
 import Animated, {
   useAnimatedScrollHandler,
@@ -42,7 +36,6 @@ import FirmwareUpdateBanner from "../../components/FirmwareUpdateBanner";
 import DiscoverSection from "./DiscoverSection";
 import AddAssetsCard from "./AddAssetsCard";
 import Assets from "./Assets";
-import { setCarouselVisibility } from "../../actions/settings";
 
 export { default as PortfolioTabIcon } from "./TabIcon";
 
@@ -108,43 +101,31 @@ export default function PortfolioScreen({ navigation }: Props) {
   const accounts = useSelector(accountsSelector);
   const counterValueCurrency = useSelector(counterValueCurrencySelector);
   const portfolio = usePortfolio();
-  const dispatch = useDispatch();
 
   const refreshAccountsOrdering = useRefreshAccountsOrdering();
   useFocusEffect(refreshAccountsOrdering);
 
   const [graphCardEndPosition, setGraphCardEndPosition] = useState(0);
-
   const currentPositionY = useSharedValue(0);
   const handleScroll = useAnimatedScrollHandler(event => {
     currentPositionY.value = event.contentOffset.y;
   });
-
   const ref = useRef();
   useScrollToTop(ref);
+
+  const flatListRef = useRef();
+
+  const onPortfolioCardLayout = useCallback((event: LayoutChangeEvent) => {
+    const { y, height } = event.nativeEvent.layout;
+    setGraphCardEndPosition(y + height);
+  }, []);
 
   const areAccountsEmpty = useMemo(() => accounts.every(isAccountEmpty), [
     accounts,
   ]);
-
-  const flatListRef = useRef();
-
   const showAssets = accounts.length > 0;
-
   const maxAssetsToDisplay = 3;
   const assetsToDisplay = accounts.slice(0, maxAssetsToDisplay);
-
-  useEffect(() => {
-    dispatch(
-      setCarouselVisibility({
-        ...carouselVisibility,
-        buyCrypto: true,
-        FamilyPack: true,
-        LedgerAcademy: true,
-        Swap: true,
-      }),
-    );
-  }, []);
 
   const data = useMemo(
     () => [
@@ -154,21 +135,15 @@ export default function PortfolioScreen({ navigation }: Props) {
           portfolio={portfolio}
           currentPositionY={currentPositionY}
           graphCardEndPosition={graphCardEndPosition}
+          hidePortfolio={areAccountsEmpty}
         />
       </Box>,
-      !accounts.length && (
+      !showAssets && (
         <Box mx={6} mt={3}>
           <AddAssetsCard />
         </Box>
       ),
-      <Box
-        mx={6}
-        mt={3}
-        onLayout={(event: LayoutChangeEvent) => {
-          const { y, height } = event.nativeEvent.layout;
-          setGraphCardEndPosition(y + height);
-        }}
-      >
+      <Box mx={6} mt={3} onLayout={onPortfolioCardLayout}>
         <GraphCardContainer
           counterValueCurrency={counterValueCurrency}
           portfolio={portfolio}

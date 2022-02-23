@@ -191,6 +191,23 @@ const Carousel = ({ cardsVisibility }: Props) => {
     [dispatch, cardsVisibility],
   );
 
+  const onScrollEnd = useCallback(event => {
+    setCurrentPositionX(
+      event.nativeEvent.contentOffset.x +
+        event.nativeEvent.layoutMeasurement.width,
+    );
+  }, []);
+
+  const onScrollViewContentChange = useCallback(
+    contentWidth => {
+      // 264px = CarouselCard width + padding
+      if (currentPositionX > contentWidth) {
+        scrollViewRef.current?.scrollToEnd({ animated: true });
+      }
+    },
+    [currentPositionX],
+  );
+
   if (!slides.length) {
     // No slides or dismissed, no problem
     return null;
@@ -200,18 +217,8 @@ const Carousel = ({ cardsVisibility }: Props) => {
     <ScrollView
       horizontal
       ref={scrollViewRef}
-      onMomentumScrollEnd={event => {
-        setCurrentPositionX(
-          event.nativeEvent.contentOffset.x +
-            event.nativeEvent.layoutMeasurement.width,
-        );
-      }}
-      onContentSizeChange={contentWidth => {
-        // 264px = CarouselCard width
-        if (currentPositionX > contentWidth) {
-          scrollViewRef.current?.scrollToEnd({ animated: true });
-        }
-      }}
+      onMomentumScrollEnd={onScrollEnd}
+      onContentSizeChange={onScrollViewContentChange}
     >
       {slides.map(({ id, Component }) => (
         <CarouselCardContainer key={id} id={id} onHide={onHide}>

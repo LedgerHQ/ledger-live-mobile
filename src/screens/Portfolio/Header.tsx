@@ -33,11 +33,13 @@ export default function PortfolioHeader({
   graphCardEndPosition,
   portfolio,
   counterValueCurrency,
+  hidePortfolio,
 }: {
   currentPositionY: SharedValue<number>;
   graphCardEndPosition: number;
   portfolio: Portfolio;
   counterValueCurrency: Currency;
+  hidePortfolio: boolean;
 }) {
   const navigation = useNavigation();
   const { colors, space } = useTheme();
@@ -130,12 +132,12 @@ export default function PortfolioHeader({
           flexGrow={1}
           flexShrink={1}
         >
-          <Animated.View style={[TopLeftStyle, {}]}>
+          <Animated.View style={[hidePortfolio ? {} : TopLeftStyle, {}]}>
             <LiveLogo size={32} color={colors.neutral.c100} />
           </Animated.View>
           <Animated.View
             style={[
-              AfterScrollTopLeftStyle,
+              hidePortfolio ? { opacity: 0 } : AfterScrollTopLeftStyle,
               {
                 marginLeft: -32,
               },
