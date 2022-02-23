@@ -1,12 +1,8 @@
 // @flow
-import { cleanLaunch, bridge } from "../engine";
-const { device, element, by, waitFor, default: detox } = require("detox");
+import { bridge } from "../engine";
+import { delay, retryAction } from "../helpers";
 
-import { $waitFor, $retryUntilItWorks } from "../engine/utils";
-
-function wait(milliseconds) {
-  return new Promise(resolve => setTimeout(resolve, milliseconds));
-}
+const { device, element, by, waitFor } = require("detox");
 
 describe("Navigation while syncing - performance test", () => {
   beforeAll(async () => {
@@ -22,18 +18,18 @@ describe("Navigation while syncing - performance test", () => {
     const initialTime = Date.now();
     await device.disableSynchronization();
 
-    await $retryUntilItWorks(async () => {
+    await retryAction(async () => {
       await bridge.loadConfig("allLiveCoinsNoOperations", true);
     });
 
-    await $retryUntilItWorks(async () => {
+    await retryAction(async () => {
       const accountTabButton = element(by.id("TabBarAccounts"));
       await waitFor(accountTabButton).toBeVisible();
-      await wait(1000);
+      await delay(1000);
       await accountTabButton.tap();
     });
 
-    await $retryUntilItWorks(async () => {
+    await retryAction(async () => {
       const firstAccountButton = element(by.text("Komodo 1"));
       await waitFor(firstAccountButton).toBeVisible();
       await firstAccountButton.tap();
@@ -41,6 +37,7 @@ describe("Navigation while syncing - performance test", () => {
 
     await device.enableSynchronization();
 
+    // eslint-disable-next-line no-console
     console.log(
       `Test finished, took ${(Date.now() - initialTime) / 1000}s to execute`,
     );

@@ -1,5 +1,6 @@
 import { bridge } from "../engine";
-const { device, element, by, waitFor, default: detox } = require("detox");
+
+const { device, element, by, waitFor } = require("detox");
 
 describe("Password Lock Screen", () => {
   beforeAll(async () => {
@@ -11,13 +12,13 @@ describe("Password Lock Screen", () => {
   it("should be able to enter the correct password", async () => {
     bridge.loadConfig("1AccountBTC1AccountETH", true);
 
-    //navigate to settings cog
+    // navigate to settings cog
     await element(by.id("settings-icon")).tap();
 
-    //navigate to general
+    // navigate to general
     await element(by.id("general-settings-card")).tap();
 
-    //toggle password toggle
+    // toggle password toggle
     await waitFor(element(by.id("password-settings-toggle")))
       .toBeVisible()
       .whileElement(by.id("general-settings-scroll-view"))
@@ -31,14 +32,14 @@ describe("Password Lock Screen", () => {
     await element(by.id("password-text-input")).typeText("passWORD$123!");
     await element(by.id("Proceed")).tap();
 
-    //exit app
+    // exit app
 
-    //wait for a bit
+    // wait for a bit
 
-    //open app again
+    // open app again
 
-    //enter password
+    // enter password
 
-    //verify app opens
+    // verify app opens
   });
 });
