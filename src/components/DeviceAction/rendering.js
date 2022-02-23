@@ -445,18 +445,49 @@ export function renderLoading({
 }
 
 export function renderExchange({
-  transactionType,
-}: {
-  transactionType: number,
+  exchangeType,
+  t,
+  device,
+  theme,
+}: RawProps & {
+  exchangeType: number,
+  device: Device,
 }) {
-  switch (transactionType) {
+  switch (exchangeType) {
     case 0x00:
-      return <LText>{"Confirm swap on your device"}</LText>;
     case 0x01:
-      return <LText>{"Confirm swap on your device"}</LText>;
+      return renderSecureTransferDeviceConfirmation({
+        exchangeTypeName: exchangeType === 0x00 ? "confirmSell" : "confirmFund",
+        t,
+        device,
+        theme,
+      });
     default:
       return <LText>{"Confirm exchange on your device"}</LText>;
   }
+}
+
+export function renderSecureTransferDeviceConfirmation({
+  t,
+  exchangeTypeName,
+  device,
+}: RawProps & {
+  exchangeTypeName: string,
+  device: Device,
+}) {
+  return (
+    <View style={styles.wrapper}>
+      <Alert type="primary" learnMoreUrl={urls.swap.learnMore}>
+        {t(`DeviceAction.${exchangeTypeName}.alert`)}
+      </Alert>
+      <View style={styles.animationContainer}>
+        <Animation source={getDeviceAnimation({ device, key: "validate" })} />
+      </View>
+      <LText style={[styles.text, styles.title]} semiBold>
+        {t(`DeviceAction.${exchangeTypeName}.title`)}
+      </LText>
+    </View>
+  );
 }
 
 export function LoadingAppInstall({

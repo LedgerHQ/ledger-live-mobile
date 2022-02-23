@@ -177,8 +177,13 @@ export default function DeviceAction<R, H, P>({
     !completeExchangeResult &&
     !completeExchangeError
   ) {
-    // $FlowFixMe
-    return renderExchange({ exchangeType: request?.exchangeType });
+    return renderExchange({
+      // $FlowFixMe
+      exchangeType: request?.exchangeType,
+      t,
+      device,
+      theme,
+    });
   }
 
   if (initSwapRequested && !initSwapResult && !initSwapError) {

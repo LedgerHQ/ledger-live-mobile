@@ -18,7 +18,6 @@ import DeviceActionModal from "../../../components/DeviceActionModal";
 type Result = {
   operation?: Operation,
   error?: Error,
-  device: Device,
 };
 
 export default function PlatformCompleteExchange({
