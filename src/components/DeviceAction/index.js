@@ -5,7 +5,6 @@ import type {
   Action,
   Device,
 } from "@ledgerhq/live-common/lib/hw/actions/types";
-import { TRANSACTION_TYPES } from "@ledgerhq/live-common/lib/exchange/hw-app-exchange/Exchange";
 import { useTranslation } from "react-i18next";
 import { useNavigation, useTheme } from "@react-navigation/native";
 import { setLastSeenDeviceInfo } from "../../actions/settings";

@@ -5,9 +5,7 @@ import SafeAreaView from "react-native-safe-area-view";
 import connectApp from "@ledgerhq/live-common/lib/hw/connectApp";
 import { createAction } from "@ledgerhq/live-common/lib/hw/actions/completeExchange";
 import { createAction as txCreateAction } from "@ledgerhq/live-common/lib/hw/actions/transaction";
-import { toExchangeRaw } from "@ledgerhq/live-common/lib/exchange/platform/serialization";
 import completeExchange from "@ledgerhq/live-common/lib/exchange/platform/completeExchange";
-import { toTransactionRaw } from "@ledgerhq/live-common/lib/transaction";
 import type {
   Account,
   Transaction,
