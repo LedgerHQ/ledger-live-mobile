@@ -1444,7 +1444,6 @@
       "validatorsCount": "Валидаторов: ({{number}})",
       "storageLimit": "Объём хранилища",
       "gasLimit": "Лимит Газа",
-      "opbytes": "opBytes",
       "id": "ID"
     },
     "multipleAddresses": "Почему несколько адресов?",
