@@ -1,19 +1,18 @@
 import React from "react";
 import { Pressable, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { rgba } from "@ledgerhq/native-ui";
-import { useTheme } from "styled-components/native";
+import styled from "styled-components/native";
+
+const Container = styled(Pressable)`
+  background-color: ${p => p.theme.colors.constant.overlay};
+`;
 
 export default function NavigationOverlay() {
   const navigation = useNavigation();
-  const theme = useTheme();
 
   return (
-    <Pressable
-      style={[
-        StyleSheet.absoluteFill,
-        { backgroundColor: rgba(theme.colors.neutral.c100, 0.5) },
-      ]}
+    <Container
+      style={[StyleSheet.absoluteFill]}
       onPress={() => {
         navigation.canGoBack() && navigation.goBack();
       }}

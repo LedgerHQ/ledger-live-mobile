@@ -8,6 +8,7 @@ const items = [
     title: "v3.onboarding.stepSetupDevice.setup.bullets.0.title",
     label: {
       nanoX: "v3.onboarding.stepSetupDevice.setup.bullets.0.label.nanoX",
+      nanoSP: "v3.onboarding.stepSetupDevice.setup.bullets.0.label.nanoSP",
       nanoS: "v3.onboarding.stepSetupDevice.setup.bullets.0.label.nanoS",
     },
   },
@@ -37,7 +38,7 @@ const InstructionScene = ({ onNext }: { onNext: () => void }) => {
   return (
     <>
       <NumberedList
-        items={items.map((item) => ({
+        items={items.map(item => ({
           title: t(item.title),
           description:
             typeof item.label === "string"

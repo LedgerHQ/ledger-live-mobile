@@ -2904,10 +2904,10 @@
   resolved "https://registry.yarnpkg.com/@ledgerhq/logs/-/logs-5.50.0.tgz#29c6419e8379d496ab6d0426eadf3c4d100cd186"
   integrity sha512-swKHYCOZUGyVt4ge0u8a7AwNcA//h4nx5wIi0sruGye1IJ5Cva0GyK9L2/WdX+kWVTKp92ZiEo1df31lrWGPgA==
 
-"@ledgerhq/native-ui@^0.7.0":
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/native-ui/-/native-ui-0.7.0.tgz#615a76da47f7fcba8ed6debe496b4c0f3c82ac32"
-  integrity sha512-2wm6JZ7JvsAYbnf+9tNe2OmfCcm1hRMKzhNmpipqTqodRAUXyGd+lP0QDD8OnHMkX0cjRfqCV2AbnlAn2HQQAQ==
+"@ledgerhq/native-ui@^0.7.1":
+  version "0.7.1"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/native-ui/-/native-ui-0.7.1.tgz#ebf2eaaa38c2c9ba788cd1fa9cae741f6797dd88"
+  integrity sha512-jJnWaco0o/QxQY4rPd3R1tmm1Vt6dqrk0iqK3nu/3iW0sgYdxWLxK560J5p9YVwohajnMiFY4q+x4s90MIYRxw==
   dependencies:
     "@ledgerhq/icons-ui" "^0.2.3"
     "@ledgerhq/ui-shared" "^0.1.5"
@@ -14405,18 +14405,18 @@ react-native-locale@0.0.19:
   resolved "https://registry.yarnpkg.com/react-native-locale/-/react-native-locale-0.0.19.tgz#336842dfb97510a539f98a39331fb7430acdc498"
   integrity sha512-US+249Sl2PhFcM0k/yU7RFwK8eiU0Qh8vHTZGF4xw5VnhJyDu2oOn3x8Gshb4X+Xyx9AxSTkib280QROnjPFzQ==
 
-react-native-modal@^11.10.0:
-  version "11.10.0"
-  resolved "https://registry.yarnpkg.com/react-native-modal/-/react-native-modal-11.10.0.tgz#94a6d3a2428ba5228cfb4dc174cacea79c871591"
-  integrity sha512-syRYDJYSh16bR37R5EKU9T/wC+5bEOfF17IUqf5URdhbEDd+hxyMInC++l45E8oI+MtdOaEp9yAws5xDqk8dnA==
-  dependencies:
-    prop-types "^15.6.2"
-    react-native-animatable "1.3.3"
-
 react-native-modal@^12.0.3:
   version "12.1.0"
   resolved "https://registry.yarnpkg.com/react-native-modal/-/react-native-modal-12.1.0.tgz#5949c9c7d4de4e99df83cc777ad26b84ad7002a0"
   integrity sha512-9myTNZ75gz6MPg1Cngm01x59JbaVkTeWoZvmChmW//PbSAdfbP/dFPnzbidL9IDrRh6Ftuuq8WSuM0aoS5m2lg==
+  dependencies:
+    prop-types "^15.6.2"
+    react-native-animatable "1.3.3"
+
+react-native-modal@^13.0.0:
+  version "13.0.0"
+  resolved "https://registry.yarnpkg.com/react-native-modal/-/react-native-modal-13.0.0.tgz#b7117400cae8548e713eed760077dee44f78628e"
+  integrity sha512-k6r9T31mc7HIDFj1V53ceAAN1dwc8052c4JLtDVEmEQ19Bbq9yiLXoDsQuNb+hB8A+2tVOXmo5Gq4IQfb11upw==
   dependencies:
     prop-types "^15.6.2"
     react-native-animatable "1.3.3"

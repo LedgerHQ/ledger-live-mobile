@@ -124,6 +124,7 @@
         },
         "android": {
           "nanoS": "Please make sure your {{productName}} is unlocked and connected by cable.",
+          "nanoSP": "Please make sure your {{productName}} is unlocked and connected by cable.",
           "nanoX": "Please make sure your {{productName}} is unlocked and is connected by cable or has Bluetooth enabled."
         }
       }
@@ -136,6 +137,7 @@
         },
         "android": {
           "nanoS": "Please make sure your {{productName}} is unlocked and connected by cable.",
+          "nanoSP": "Please make sure your {{productName}} is unlocked and connected by cable.",
           "nanoX": "Please make sure your {{productName}} is unlocked and is connected by cable or has Bluetooth enabled."
         }
       }
@@ -4102,6 +4104,7 @@
           },
           "android": {
             "nanoS": "Please make sure your {{productName}} is unlocked and connected by cable.",
+            "nanoSP": "Please make sure your {{productName}} is unlocked and connected by cable.",
             "nanoX": "Please make sure your {{productName}} is unlocked and is connected by cable or has Bluetooth enabled."
           }
         }
@@ -4114,6 +4117,7 @@
           },
           "android": {
             "nanoS": "Please make sure your {{productName}} is unlocked and connected by cable.",
+            "nanoSP": "Please make sure your {{productName}} is unlocked and connected by cable.",
             "nanoX": "Please make sure your {{productName}} is unlocked and is connected by cable or has Bluetooth enabled."
           }
         }
@@ -4727,6 +4731,7 @@
       "stepSelectDevice": {
         "title": "Select your device",
         "nanoS": "Nano S",
+        "nanoSP": "Nano S Plus",
         "nanoX": "Nano X",
         "chooseDevice": "Choose your device"
       },
@@ -4810,7 +4815,8 @@
               "title": "Turn on Nano",
               "label": {
                 "nanoX": "Turn on your device by pressing the black button for 1 second.",
-                "nanoS": "Turn on your device by connecting it to the USB port of your phone."
+                "nanoS": "Turn on your device by connecting it to the USB port of your phone.",
+                "nanoSP": "Turn on your device by connecting it to the USB port of your phone."
               }
             },
             "1": {
@@ -4972,6 +4978,9 @@
               "nanoS": {
                 "label": "Turn on your device by connecting it to the USB port of your phone."
               },
+              "nanoSP": {
+                "label": "Turn on your device by connecting it to the USB port of your phone."
+              },
               "blue": {
                 "label": "Turn on your device by connecting it to the USB port of your phone and pressing the power button."
               }
@@ -5025,6 +5034,11 @@
           "cta": "Let’s pair my Nano"
         },
         "nanoS": {
+          "title": "Connect your Nano",
+          "desc": "This is the first time you’re setting up your Nano with this phone. Let’s quickly connect your device.",
+          "cta": "Let’s connect my Nano"
+        },
+        "nanoSP": {
           "title": "Connect your Nano",
           "desc": "This is the first time you’re setting up your Nano with this phone. Let’s quickly connect your device.",
           "cta": "Let’s connect my Nano"

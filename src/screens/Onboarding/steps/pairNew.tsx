@@ -13,15 +13,24 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ScreenName } from "../../../const";
 import { DeviceNames } from "../types";
-import { PlaceholderIllustrationTiny } from "./PlaceholderIllustration";
 import LottieIllustration from "./LottieIllustration";
 import Scene, { PairNew, ConnectNano } from "./setupDevice/scenes";
 import { TrackScreen } from "../../../analytics";
 import SeedWarning from "../shared/SeedWarning";
+import Illustration from "../../../images/illustration/Illustration";
 
 import nanoX from "../assets/nanoX/pairDevice/data.json";
 import nanoS from "../assets/nanoS/plugDevice/data.json";
 import nanoSP from "../assets/nanoSP/plugDevice/dark.json";
+
+const images = {
+  light: {
+    Intro: require("../../../images/illustration/Swap.light.png"),
+  },
+  dark: {
+    Intro: require("../../../images/illustration/Swap.dark.png"),
+  },
+};
 
 const lottieAnims = {
   nanoX,
@@ -135,7 +144,13 @@ function OnboardingStepPairNew() {
     {
       id: PairNew.id,
       // @TODO: Replace this placeholder with the correct illustration asap
-      illustration: <PlaceholderIllustrationTiny />,
+      illustration: (
+        <Illustration
+          size={104}
+          darkSource={images.dark.Intro}
+          lightSource={images.light.Intro}
+        />
+      ),
       drawer: {
         route: ScreenName.OnboardingModalGeneralInformation,
         screen: ScreenName.OnboardingBluetoothInformation,

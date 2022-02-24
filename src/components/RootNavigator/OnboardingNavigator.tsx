@@ -50,13 +50,12 @@ const OnboardingPreQuizModalStack = createStackNavigator();
 
 function LanguageModalNavigator(props: StackScreenProps<{}>) {
   const options: Partial<StackNavigationOptions> = {
-    headerMode: "float",
     header: props => <NavigationHeader {...props} hideBack />,
     headerStyle: { backgroundColor: "transparent" },
   };
 
   return (
-    <NavigationModalContainer {...props}>
+    <NavigationModalContainer {...props} backgroundColor="background.main">
       <LanguageModalStack.Navigator>
         <LanguageModalStack.Screen
           name={ScreenName.OnboardingLanguage}
@@ -81,7 +80,6 @@ function LanguageModalNavigator(props: StackScreenProps<{}>) {
 
 function SetupDeviceStepSecureRecoveryNavigator(props: StackScreenProps<{}>) {
   const options: Partial<StackNavigationOptions> = {
-    headerMode: "float",
     header: props => (
       // TODO: Replace this value with constant.purple as soon as the value is fixed in the theme
       <Flex backgroundColor="background.main">
@@ -96,7 +94,7 @@ function SetupDeviceStepSecureRecoveryNavigator(props: StackScreenProps<{}>) {
   };
 
   return (
-    <NavigationModalContainer {...props}>
+    <NavigationModalContainer {...props} backgroundColor="background.main">
       <SetupDeviceStepStack.Navigator>
         <SetupDeviceStepStack.Screen
           name={ScreenName.OnboardingSetupDeviceRecoveryPhrase}
@@ -110,7 +108,6 @@ function SetupDeviceStepSecureRecoveryNavigator(props: StackScreenProps<{}>) {
 
 function OnboardingGeneralInformationNavigator(props: StackScreenProps<{}>) {
   const options: Partial<StackNavigationOptions> = {
-    headerMode: "float",
     header: props => (
       // TODO: Replace this value with constant.purple as soon as the value is fixed in the theme
       <Flex backgroundColor="background.main">
@@ -125,7 +122,7 @@ function OnboardingGeneralInformationNavigator(props: StackScreenProps<{}>) {
   };
 
   return (
-    <NavigationModalContainer {...props}>
+    <NavigationModalContainer {...props} backgroundColor="background.main">
       <GeneralInformationStack.Navigator>
         <GeneralInformationStack.Screen
           name={ScreenName.OnboardingGeneralInformation}
@@ -144,7 +141,6 @@ function OnboardingGeneralInformationNavigator(props: StackScreenProps<{}>) {
 
 function SetupDeviceStepNavigator(props: StackScreenProps<{}>) {
   const options: Partial<StackNavigationOptions> = {
-    headerMode: "float",
     header: props => (
       // TODO: Replace this value with constant.purple as soon as the value is fixed in the theme
       <Flex backgroundColor="background.main">
@@ -159,7 +155,7 @@ function SetupDeviceStepNavigator(props: StackScreenProps<{}>) {
   };
 
   return (
-    <NavigationModalContainer {...props}>
+    <NavigationModalContainer {...props} backgroundColor="background.main">
       <SetupDeviceStepStack.Navigator>
         <SetupDeviceStepStack.Screen
           name={ScreenName.OnboardingSetupDeviceInformation}
@@ -176,11 +172,8 @@ function SetupDeviceStepNavigator(props: StackScreenProps<{}>) {
 
 function SetupNewDeviceModalNavigator(props: StackScreenProps<{}>) {
   const route = useRoute();
-  const { colors } = useTheme();
   const options: Partial<StackNavigationOptions> = {
-    headerMode: "float",
     header: props => (
-      // TODO: Replace this value with constant.purple as soon as the value is fixed in the theme
       <Flex bg="primary.c60">
         <NavigationHeader
           {...props}
@@ -194,10 +187,7 @@ function SetupNewDeviceModalNavigator(props: StackScreenProps<{}>) {
 
   return (
     // TODO: Replace this value with constant.purple as soon as the value is fixed in the theme
-    <NavigationModalContainer
-      contentContainerProps={{ backgroundColor: colors.primary.c60 }}
-      {...props}
-    >
+    <NavigationModalContainer {...props} backgroundColor="primary.c60">
       <SetupNewDeviceModalStack.Navigator>
         <SetupNewDeviceModalStack.Screen
           name={ScreenName.OnboardingSetNewDeviceInfo}
@@ -215,7 +205,6 @@ function SetupNewDeviceModalNavigator(props: StackScreenProps<{}>) {
 
 function OnboardingCarefulWarning(props: StackScreenProps<{}>) {
   const options: Partial<StackNavigationOptions> = {
-    headerMode: "float",
     header: props => (
       // TODO: Replace this value with constant.purple as soon as the value is fixed in the theme
       <Flex backgroundColor="background.main">
@@ -233,7 +222,7 @@ function OnboardingCarefulWarning(props: StackScreenProps<{}>) {
     <NavigationModalContainer
       {...props}
       deadZoneProps={{ flexGrow: 1 }}
-      contentContainerProps={{ flexGrow: 1 }}
+      backgroundColor="background.main"
     >
       <OnboardingCarefulWarningStack.Navigator>
         <OnboardingCarefulWarningStack.Screen
@@ -260,7 +249,6 @@ function OnboardingCarefulWarning(props: StackScreenProps<{}>) {
 }
 function OnboardingPreQuizModalNavigator(props: StackScreenProps<{}>) {
   const options: Partial<StackNavigationOptions> = {
-    headerMode: "float",
     header: props => (
       // TODO: Replace this value with constant.purple as soon as the value is fixed in the theme
       <Flex backgroundColor="primary.c60">

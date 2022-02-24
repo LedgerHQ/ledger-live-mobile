@@ -119,10 +119,10 @@ export default function SelectDevice({
               deviceName: e.name || "",
               modelId:
                 (e.deviceModel && e.deviceModel.id) ||
-                Config.FALLBACK_DEVICE_MODEL_ID ||
+                Config?.FALLBACK_DEVICE_MODEL_ID ||
                 "nanoX",
               wired: e.id.startsWith("httpdebug|")
-                ? Config.FALLBACK_DEVICE_WIRED === "YES"
+                ? Config?.FALLBACK_DEVICE_WIRED === "YES"
                 : e.id.startsWith("usb|"),
             },
           ];
@@ -136,7 +136,7 @@ export default function SelectDevice({
 
   return (
     <>
-      {usbOnly && withArrow && !hideAnimation ? (
+      {usbOnly && withArrows && !hideAnimation ? (
         <UsbPlaceholder />
       ) : ble.length === 0 ? (
         <BluetoothEmpty

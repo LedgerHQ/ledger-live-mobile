@@ -13,7 +13,7 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ScreenName } from "../../../const";
 import { DeviceNames } from "../types";
-import { PlaceholderIllustrationTiny } from "./PlaceholderIllustration";
+import Illustration from "../../../images/illustration/Illustration";
 import Scene, {
   RestoreRecovery,
   RestoreRecoveryStep1,
@@ -26,6 +26,28 @@ import Scene, {
 
 const transitionDuration = 500;
 
+// @TODO Replace
+const images = {
+  light: {
+    RestoreRecovery: require("../../../images/illustration/Swap.light.png"),
+    RestoreRecoveryStep1: require("../../../images/illustration/Swap.light.png"),
+    PinCode: require("../../../images/illustration/Swap.light.png"),
+    PinCodeInstructions: require("../../../images/illustration/Swap.light.png"),
+    ExistingRecovery: require("../../../images/illustration/Swap.light.png"),
+    ExistingRecoveryStep1: require("../../../images/illustration/Swap.light.png"),
+    ExistingRecoveryStep2: require("../../../images/illustration/Swap.light.png"),
+  },
+  dark: {
+    RestoreRecovery: require("../../../images/illustration/Swap.dark.png"),
+    RestoreRecoveryStep1: require("../../../images/illustration/Swap.dark.png"),
+    PinCode: require("../../../images/illustration/Swap.dark.png"),
+    PinCodeInstructions: require("../../../images/illustration/Swap.dark.png"),
+    ExistingRecovery: require("../../../images/illustration/Swap.dark.png"),
+    ExistingRecoveryStep1: require("../../../images/illustration/Swap.dark.png"),
+    ExistingRecoveryStep2: require("../../../images/illustration/Swap.dark.png"),
+  },
+};
+
 type Metadata = {
   id: string;
   illustration: JSX.Element;
@@ -34,7 +56,13 @@ type Metadata = {
 const metadata: Array<Metadata> = [
   {
     id: RestoreRecovery.id,
-    illustration: <PlaceholderIllustrationTiny />,
+    illustration: (
+      <Illustration
+        size={104}
+        darkSource={images.dark.RestoreRecovery}
+        lightSource={images.light.RestoreRecovery}
+      />
+    ),
     drawer: {
       route: ScreenName.OnboardingModalGeneralInformation,
       screen: ScreenName.OnboardingGeneralInformation,
@@ -42,7 +70,13 @@ const metadata: Array<Metadata> = [
   },
   {
     id: RestoreRecoveryStep1.id,
-    illustration: <PlaceholderIllustrationTiny />,
+    illustration: (
+      <Illustration
+        size={104}
+        darkSource={images.dark.RestoreRecoveryStep1}
+        lightSource={images.light.RestoreRecoveryStep1}
+      />
+    ),
     drawer: {
       route: ScreenName.OnboardingModalGeneralInformation,
       screen: ScreenName.OnboardingGeneralInformation,
@@ -50,12 +84,24 @@ const metadata: Array<Metadata> = [
   },
   {
     id: PinCode.id,
-    illustration: <PlaceholderIllustrationTiny />,
+    illustration: (
+      <Illustration
+        size={104}
+        darkSource={images.dark.PinCode}
+        lightSource={images.light.PinCode}
+      />
+    ),
     drawer: null,
   },
   {
     id: PinCodeInstructions.id,
-    illustration: <PlaceholderIllustrationTiny />,
+    illustration: (
+      <Illustration
+        size={104}
+        darkSource={images.dark.PinCodeInstructions}
+        lightSource={images.light.PinCodeInstructions}
+      />
+    ),
     drawer: {
       route: ScreenName.OnboardingModalSetupSteps,
       screen: ScreenName.OnboardingSetupDeviceInformation,
@@ -63,7 +109,13 @@ const metadata: Array<Metadata> = [
   },
   {
     id: ExistingRecovery.id,
-    illustration: <PlaceholderIllustrationTiny />,
+    illustration: (
+      <Illustration
+        size={104}
+        darkSource={images.dark.ExistingRecovery}
+        lightSource={images.light.ExistingRecovery}
+      />
+    ),
     drawer: {
       route: ScreenName.OnboardingModalGeneralInformation,
       screen: ScreenName.OnboardingGeneralInformation,
@@ -71,7 +123,13 @@ const metadata: Array<Metadata> = [
   },
   {
     id: ExistingRecoveryStep1.id,
-    illustration: <PlaceholderIllustrationTiny />,
+    illustration: (
+      <Illustration
+        size={104}
+        darkSource={images.dark.ExistingRecoveryStep1}
+        lightSource={images.light.ExistingRecoveryStep1}
+      />
+    ),
     drawer: {
       route: ScreenName.OnboardingModalGeneralInformation,
       screen: ScreenName.OnboardingGeneralInformation,
@@ -79,7 +137,13 @@ const metadata: Array<Metadata> = [
   },
   {
     id: ExistingRecoveryStep2.id,
-    illustration: <PlaceholderIllustrationTiny />,
+    illustration: (
+      <Illustration
+        size={104}
+        darkSource={images.dark.ExistingRecoveryStep2}
+        lightSource={images.light.ExistingRecoveryStep2}
+      />
+    ),
     drawer: {
       route: ScreenName.OnboardingModalGeneralInformation,
       screen: ScreenName.OnboardingGeneralInformation,

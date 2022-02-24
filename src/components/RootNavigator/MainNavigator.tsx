@@ -1,7 +1,8 @@
 // @flow
 import React from "react";
+import { Platform } from "react-native";
 import { useTheme } from "styled-components/native";
-import { ManagerMedium, WalletMedium } from "@ledgerhq/native-ui/assets/icons";
+import { Icons } from "@ledgerhq/native-ui";
 
 import { ScreenName, NavigatorName } from "../../const";
 import Portfolio, { PortfolioTabIcon } from "../../screens/Portfolio";
@@ -10,17 +11,16 @@ import AccountsNavigator from "./AccountsNavigator";
 import ManagerNavigator, { ManagerTabIcon } from "./ManagerNavigator";
 import PlatformNavigator from "./PlatformNavigator";
 import TabIcon from "../TabIcon";
-import AccountsIcon from "../../icons/Accounts";
-
+import MarketNavigator from "./MarketNavigator";
 import Tab from "./CustomBlockRouterNavigator";
 
 type RouteParams = {
-  hideTabNavigation?: boolean,
+  hideTabNavigation?: boolean;
 };
 export default function MainNavigator({
   route: { params },
 }: {
-  route: { params: RouteParams },
+  route: { params: RouteParams };
 }) {
   const { colors } = useTheme();
 
@@ -54,7 +54,11 @@ export default function MainNavigator({
         options={{
           unmountOnBlur: true,
           tabBarIcon: (props: any) => (
-            <TabIcon Icon={WalletMedium} i18nKey="tabs.accounts" {...props} />
+            <TabIcon
+              Icon={Icons.WalletMedium}
+              i18nKey="tabs.accounts"
+              {...props}
+            />
           ),
           tabBarTestID: "TabBarAccounts",
         }}
@@ -67,41 +71,64 @@ export default function MainNavigator({
           tabBarIcon: (props: any) => <TransferTabIcon {...props} />,
         }}
       />
+      {Platform.OS === "android" ? (
+        <Tab.Screen
+          name={NavigatorName.Platform}
+          component={PlatformNavigator}
+          options={{
+            headerShown: false,
+            unmountOnBlur: true,
+            tabBarIcon: (props: any) => (
+              <TabIcon
+                Icon={Icons.ManagerMedium}
+                i18nKey="tabs.platform"
+                {...props}
+              />
+            ),
+          }}
+        />
+      ) : null}
       <Tab.Screen
-        name={NavigatorName.Platform}
-        component={PlatformNavigator}
+        name={NavigatorName.Market}
+        component={MarketNavigator}
         options={{
           headerShown: false,
           unmountOnBlur: true,
           tabBarIcon: (props: any) => (
-            <TabIcon Icon={ManagerMedium} i18nKey="tabs.platform" {...props} />
+            <TabIcon
+              Icon={Icons.GraphGrowMedium}
+              i18nKey="tabs.market"
+              {...props}
+            />
           ),
         }}
       />
-      <Tab.Screen
-        name={NavigatorName.Manager}
-        component={ManagerNavigator}
-        options={{
-          tabBarIcon: (props: any) => <ManagerTabIcon {...props} />,
-          tabBarTestID: "TabBarManager",
-        }}
-        listeners={({ navigation }) => ({
-          tabPress: e => {
-            e.preventDefault();
-            // NB The default behaviour is not reset route params, leading to always having the same
-            // search query or preselected tab after the first time (ie from Swap/Sell)
-            // https://github.com/react-navigation/react-navigation/issues/6674#issuecomment-562813152
-            navigation.navigate(NavigatorName.Manager, {
-              screen: ScreenName.Manager,
-              params: {
-                tab: undefined,
-                searchQuery: undefined,
-                updateModalOpened: undefined,
-              },
-            });
-          },
-        })}
-      />
+      {Platform.OS === "ios" ? (
+        <Tab.Screen
+          name={NavigatorName.Manager}
+          component={ManagerNavigator}
+          options={{
+            tabBarIcon: (props: any) => <ManagerTabIcon {...props} />,
+            tabBarTestID: "TabBarManager",
+          }}
+          listeners={({ navigation }) => ({
+            tabPress: (e: any) => {
+              e.preventDefault();
+              // NB The default behaviour is not reset route params, leading to always having the same
+              // search query or preselected tab after the first time (ie from Swap/Sell)
+              // https://github.com/react-navigation/react-navigation/issues/6674#issuecomment-562813152
+              navigation.navigate(NavigatorName.Manager, {
+                screen: ScreenName.Manager,
+                params: {
+                  tab: undefined,
+                  searchQuery: undefined,
+                  updateModalOpened: undefined,
+                },
+              });
+            },
+          })}
+        />
+      ) : null}
     </Tab.Navigator>
   );
 }

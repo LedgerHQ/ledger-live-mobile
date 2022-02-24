@@ -4,13 +4,27 @@ import { useTranslation } from "react-i18next";
 import { useNavigation, useRoute, RouteProp } from "@react-navigation/native";
 import { Icons } from "@ledgerhq/native-ui/assets";
 import { Flex, Text, Carousel } from "@ledgerhq/native-ui";
-
+import Illustration from "../../../images/illustration/Illustration";
 import { TrackScreen } from "../../../analytics";
 import Touchable from "../../../components/Touchable";
 import { ScreenName } from "../../../const";
 import OnboardingView from "../OnboardingView";
-import nanoS from "../assets/nanoS";
-import PlaceholderIllustration from "./PlaceholderIllustration";
+
+// @TODO Replace
+const images = {
+  light: {
+    setupNano: require("../../../images/illustration/Swap.light.png"),
+    pairNew: require("../../../images/illustration/Swap.light.png"),
+    syncCrypto: require("../../../images/illustration/Swap.light.png"),
+    restoreRecoveryPhrase: require("../../../images/illustration/Swap.light.png"),
+  },
+  dark: {
+    setupNano: require("../../../images/illustration/Swap.dark.png"),
+    pairNew: require("../../../images/illustration/Swap.dark.png"),
+    syncCrypto: require("../../../images/illustration/Swap.dark.png"),
+    restoreRecoveryPhrase: require("../../../images/illustration/Swap.dark.png"),
+  },
+};
 
 type CurrentRouteType = RouteProp<
   { params: { deviceModelId: string } },
@@ -114,7 +128,7 @@ const OnboardingStepUseCaseSelection = () => {
 
   const useCases = useMemo(
     () =>
-      Platform.OS === "ios" && deviceModelId === nanoS.id
+      Platform.OS === "ios" && deviceModelId !== "nanoX"
         ? [
             {
               title: "v3.onboarding.stepUseCase.recovery",
@@ -123,7 +137,13 @@ const OnboardingStepUseCaseSelection = () => {
                   cards: [
                     {
                       route: ScreenName.OnboardingImportAccounts,
-                      Illustration: <PlaceholderIllustration />,
+                      Illustration: (
+                        <Illustration
+                          size={150}
+                          darkSource={images.dark.syncCrypto}
+                          lightSource={images.light.syncCrypto}
+                        />
+                      ),
                       title:
                         "v3.onboarding.stepUseCase.deviceActions.desktopSync.title",
                       subTitle:
@@ -144,7 +164,13 @@ const OnboardingStepUseCaseSelection = () => {
                   cards: [
                     {
                       route: "OnboardingModalSetupNewDevice",
-                      Illustration: <PlaceholderIllustration />,
+                      Illustration: (
+                        <Illustration
+                          size={150}
+                          darkSource={images.dark.setupNano}
+                          lightSource={images.light.setupNano}
+                        />
+                      ),
                       title:
                         "v3.onboarding.stepUseCase.deviceActions.setup.title",
                       subTitle:
@@ -162,7 +188,13 @@ const OnboardingStepUseCaseSelection = () => {
                   cards: [
                     {
                       route: ScreenName.OnboardingPairNew,
-                      Illustration: <PlaceholderIllustration />,
+                      Illustration: (
+                        <Illustration
+                          size={150}
+                          darkSource={images.dark.pairNew}
+                          lightSource={images.light.pairNew}
+                        />
+                      ),
                       title:
                         "v3.onboarding.stepUseCase.deviceActions.pairing.title",
                       subTitle:
@@ -172,7 +204,13 @@ const OnboardingStepUseCaseSelection = () => {
                     },
                     {
                       route: ScreenName.OnboardingImportAccounts,
-                      Illustration: <PlaceholderIllustration />,
+                      Illustration: (
+                        <Illustration
+                          size={150}
+                          darkSource={images.dark.syncCrypto}
+                          lightSource={images.light.syncCrypto}
+                        />
+                      ),
                       title:
                         "v3.onboarding.stepUseCase.deviceActions.desktopSync.title",
                       subTitle:
@@ -181,7 +219,13 @@ const OnboardingStepUseCaseSelection = () => {
                     },
                     {
                       route: ScreenName.OnboardingRecoveryPhrase,
-                      Illustration: <PlaceholderIllustration />,
+                      Illustration: (
+                        <Illustration
+                          size={150}
+                          darkSource={images.dark.restoreRecoveryPhrase}
+                          lightSource={images.light.restoreRecoveryPhrase}
+                        />
+                      ),
                       title:
                         "v3.onboarding.stepUseCase.deviceActions.restore.title",
                       subTitle:

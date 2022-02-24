@@ -22,9 +22,7 @@ export default function ImportAccountsNavigator() {
     [colors],
   );
   return (
-    <Stack.Navigator
-      screenOptions={{ ...stackNavigationConfig, headerMode: "float" }}
-    >
+    <Stack.Navigator screenOptions={{ ...stackNavigationConfig }}>
       <Stack.Screen
         name={ScreenName.ScanAccounts}
         component={ScanAccounts}

@@ -9,13 +9,21 @@ import {
   Icons,
   Transitions,
 } from "@ledgerhq/native-ui";
-
+import Illustration from "../../../images/illustration/Illustration";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { NavigatorName, ScreenName } from "../../../const";
 import { DeviceNames } from "../types";
-import { PlaceholderIllustrationTiny } from "./PlaceholderIllustration";
 import Scene, { SyncDesktop } from "./setupDevice/scenes";
 import { TrackScreen } from "../../../analytics";
+
+const images = {
+  light: {
+    Intro: require("../../../images/illustration/Swap.light.png"),
+  },
+  dark: {
+    Intro: require("../../../images/illustration/Swap.dark.png"),
+  },
+};
 
 const transitionDuration = 500;
 
@@ -121,7 +129,13 @@ function OnboardingStepPairNew() {
     {
       id: SyncDesktop.id,
       // @TODO: Replace this placeholder with the correct illustration asap
-      illustration: <PlaceholderIllustrationTiny />,
+      illustration: (
+        <Illustration
+          size={104}
+          darkSource={images.dark.Intro}
+          lightSource={images.light.Intro}
+        />
+      ),
       drawer: null,
     },
   ];

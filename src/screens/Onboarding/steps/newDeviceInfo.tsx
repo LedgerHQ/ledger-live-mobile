@@ -4,22 +4,41 @@ import { useTranslation } from "react-i18next";
 import { Flex, Carousel, Text, Link, Button } from "@ledgerhq/native-ui";
 import { Icons } from "@ledgerhq/native-ui";
 import { useNavigation, useRoute, RouteProp } from "@react-navigation/native";
-import PlaceholderIllustration from "./PlaceholderIllustration";
 import { ScreenName } from "../../../const";
+import Illustration from "../../../images/illustration/Illustration";
 
 import type { DeviceNames } from "../types";
+
+// @TODO Replace
+const images = {
+  light: [
+    require("../../../images/illustration/Swap.light.png"),
+    require("../../../images/illustration/Swap.light.png"),
+    require("../../../images/illustration/Swap.light.png"),
+    require("../../../images/illustration/Swap.light.png"),
+    require("../../../images/illustration/Swap.light.png"),
+  ],
+  dark: [
+    require("../../../images/illustration/Swap.dark.png"),
+    require("../../../images/illustration/Swap.dark.png"),
+    require("../../../images/illustration/Swap.dark.png"),
+    require("../../../images/illustration/Swap.dark.png"),
+    require("../../../images/illustration/Swap.dark.png"),
+  ],
+};
 
 type CardType = { index: number, deviceModelId: DeviceNames };
 const Card = ({ index /*, deviceModelId */ }: CardType) => {
   const { t } = useTranslation();
 
-  // TODO: use deviceModelId to dynamically render the device illustation
-  // as soon as the illustration is ready
 
   return (
     <Flex flex={1} justifyContent="center" alignItems="center" px={20}>
       <Flex mb={10}>
-        <PlaceholderIllustration />
+        {
+          images.dark[index] && images.light[index] ? <Illustration size={154} darkSource={images.dark[index]} darkSource={images.light[index]} /> : null
+        }
+        
       </Flex>
       <Text variant="h2" mb={3} style={{ textTransform: "uppercase" }}>
         {t(`v3.onboarding.stepNewDevice.${index}.title`)}
@@ -82,8 +101,7 @@ function OnboardingStepNewDevice() {
   const { deviceModelId } = route.params;
 
   return (
-    // TODO: Replace this value with constant.purple as soon as the value is fixed in the theme
-    <Flex flex={1} backgroundColor="hsla(248, 100%, 85%, 1)">
+    <Flex flex={1} backgroundColor="primary.c60">
       <Carousel onChange={setCurrentIndex}>
         {new Array(5).fill(null).map((_, index) => (
           <Card index={index} key={index} deviceModelId={deviceModelId} />

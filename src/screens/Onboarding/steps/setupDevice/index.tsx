@@ -13,7 +13,7 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ScreenName } from "../../../../const";
 import { DeviceNames } from "../../types";
-import { PlaceholderIllustrationTiny } from "../PlaceholderIllustration";
+import Illustration from "../../../../images/illustration/Illustration";
 import Scene, {
   Intro,
   Instructions,
@@ -27,6 +27,30 @@ import Scene, {
 
 const transitionDuration = 500;
 
+// @TODO Replace
+const images = {
+  light: {
+    Intro: require("../../../../images/illustration/Swap.light.png"),
+    Instructions: require("../../../../images/illustration/Swap.light.png"),
+    PinCode: require("../../../../images/illustration/Swap.light.png"),
+    PinCodeInstructions: require("../../../../images/illustration/Swap.light.png"),
+    RecoveryPhrase: require("../../../../images/illustration/Swap.light.png"),
+    RecoveryPhraseInstructions: require("../../../../images/illustration/Swap.light.png"),
+    RecoveryPhraseSetup: require("../../../../images/illustration/Swap.light.png"),
+    HideRecoveryPhrase: require("../../../../images/illustration/Swap.light.png"),
+  },
+  dark: {
+    Intro: require("../../../../images/illustration/Swap.dark.png"),
+    Instructions: require("../../../../images/illustration/Swap.dark.png"),
+    PinCode: require("../../../../images/illustration/Swap.dark.png"),
+    PinCodeInstructions: require("../../../../images/illustration/Swap.dark.png"),
+    RecoveryPhrase: require("../../../../images/illustration/Swap.dark.png"),
+    RecoveryPhraseInstructions: require("../../../../images/illustration/Swap.dark.png"),
+    RecoveryPhraseSetup: require("../../../../images/illustration/Swap.dark.png"),
+    HideRecoveryPhrase: require("../../../../images/illustration/Swap.dark.png"),
+  },
+};
+
 type Metadata = {
   id: string;
   illustration: JSX.Element;
@@ -36,22 +60,46 @@ const metadata: Array<Metadata> = [
   {
     id: Intro.id,
     // @TODO: Replace this placeholder with the correct illustration asap
-    illustration: <PlaceholderIllustrationTiny />,
+    illustration: (
+      <Illustration
+        size={104}
+        darkSource={images.dark.Intro}
+        lightSource={images.light.Intro}
+      />
+    ),
     drawer: null,
   },
   {
     id: Instructions.id,
-    illustration: <PlaceholderIllustrationTiny />,
+    illustration: (
+      <Illustration
+        size={104}
+        darkSource={images.dark.Instructions}
+        lightSource={images.light.Instructions}
+      />
+    ),
     drawer: null,
   },
   {
     id: PinCode.id,
-    illustration: <PlaceholderIllustrationTiny />,
+    illustration: (
+      <Illustration
+        size={104}
+        darkSource={images.dark.PinCode}
+        lightSource={images.light.PinCode}
+      />
+    ),
     drawer: null,
   },
   {
     id: PinCodeInstructions.id,
-    illustration: <PlaceholderIllustrationTiny />,
+    illustration: (
+      <Illustration
+        size={104}
+        darkSource={images.dark.PinCodeInstructions}
+        lightSource={images.light.PinCodeInstructions}
+      />
+    ),
     drawer: {
       route: ScreenName.OnboardingModalSetupSteps,
       screen: ScreenName.OnboardingSetupDeviceInformation,
@@ -59,7 +107,13 @@ const metadata: Array<Metadata> = [
   },
   {
     id: RecoveryPhrase.id,
-    illustration: <PlaceholderIllustrationTiny />,
+    illustration: (
+      <Illustration
+        size={104}
+        darkSource={images.dark.RecoveryPhrase}
+        lightSource={images.light.RecoveryPhrase}
+      />
+    ),
     drawer: {
       route: ScreenName.OnboardingModalGeneralInformation,
       screen: ScreenName.OnboardingGeneralInformation,
@@ -67,7 +121,13 @@ const metadata: Array<Metadata> = [
   },
   {
     id: RecoveryPhraseInstructions.id,
-    illustration: <PlaceholderIllustrationTiny />,
+    illustration: (
+      <Illustration
+        size={104}
+        darkSource={images.dark.RecoveryPhraseInstructions}
+        lightSource={images.light.RecoveryPhraseInstructions}
+      />
+    ),
     drawer: {
       route: ScreenName.OnboardingModalGeneralInformation,
       screen: ScreenName.OnboardingGeneralInformation,
@@ -75,7 +135,13 @@ const metadata: Array<Metadata> = [
   },
   {
     id: RecoveryPhraseSetup.id,
-    illustration: <PlaceholderIllustrationTiny />,
+    illustration: (
+      <Illustration
+        size={104}
+        darkSource={images.dark.RecoveryPhraseSetup}
+        lightSource={images.light.RecoveryPhraseSetup}
+      />
+    ),
     drawer: {
       route: ScreenName.OnboardingModalGeneralInformation,
       screen: ScreenName.OnboardingGeneralInformation,
@@ -83,7 +149,13 @@ const metadata: Array<Metadata> = [
   },
   {
     id: HideRecoveryPhrase.id,
-    illustration: <PlaceholderIllustrationTiny />,
+    illustration: (
+      <Illustration
+        size={104}
+        darkSource={images.dark.HideRecoveryPhrase}
+        lightSource={images.light.HideRecoveryPhrase}
+      />
+    ),
     drawer: {
       route: ScreenName.OnboardingModalSetupSecureRecovery,
       screen: ScreenName.OnboardingSetupDeviceRecoveryPhrase,

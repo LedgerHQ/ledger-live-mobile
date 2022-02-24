@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import styled from "styled-components/native";
+import styled, { useTheme } from "styled-components/native";
 import { useNavigation } from "@react-navigation/native";
 import { Flex, Text, Button, Carousel } from "@ledgerhq/native-ui";
-
 import { TrackScreen } from "../../../analytics";
 import nanoS from "../assets/nanoS";
 import nanoSP from "../assets/nanoSP";
@@ -27,6 +26,7 @@ const Card = styled(Flex).attrs({
 function OnboardingStepDeviceSelection() {
   const navigation = useNavigation();
   const { t } = useTranslation();
+  const { colors } = useTheme();
 
   const next = (deviceModelId: string) => {
     // TODO: FIX @react-navigation/native using Typescript
@@ -52,7 +52,7 @@ function OnboardingStepDeviceSelection() {
             onPress={() => next(Device.id)}
           >
             <Card>
-              <Device />
+              <Device fill={colors.neutral.c100} />
               <Text variant="small" fontSize={2} mt={8}>
                 Ledger
               </Text>
