@@ -12,6 +12,7 @@ export default function Switch(props: *) {
       {...(Platform.OS === "android"
         ? { trackColor: { true: colors.lightLive, false: colors.fog } }
         : {})}
+      testID={props.switchTestId}
     />
   );
 }

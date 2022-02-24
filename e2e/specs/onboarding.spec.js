@@ -1,10 +1,11 @@
 import { device } from "detox";
 import OnboardingSteps from "../models/onboarding/onboardingSteps";
+import PortfolioPage from "../models/portfolioPage";
 
 describe("Onboarding", () => {
   beforeAll(async () => {
     await device.launchApp({
-      // delete: true,
+      delete: true,
       launchArgs: {},
     });
   });
@@ -20,7 +21,6 @@ describe("Onboarding", () => {
     await OnboardingSteps.addDeviceViaBluetooth();
     await OnboardingSteps.openLedgerLive();
 
-    // main portfolio page to verify it's visible
-    // await OnboardingSteps.acceptTerms();
+    await expect(PortfolioPage.isVisible());
   });
 });

@@ -20,6 +20,7 @@ type Props = {
   error?: ?Error,
   password?: string,
   colors: *,
+  focusedTextInputTestID: string,
 };
 
 const PasswordInput = ({
@@ -35,6 +36,7 @@ const PasswordInput = ({
   inline,
   password,
   colors,
+  focusedTextInputTestID,
 }: Props) => {
   const [isFocused, setIsFocused] = useState(false);
 
@@ -90,7 +92,7 @@ const PasswordInput = ({
         onFocus={wrappedOnFocus}
         onBlur={wrappedOnBlur}
         value={password}
-        testID="password-text-input"
+        focusedTextInputTestID="password-text-input"
       />
       {secureTextEntry ? (
         <Touchable

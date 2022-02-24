@@ -9,7 +9,13 @@ function FocusedTextInput(props: *, ref) {
   useEffect(() => {
     props.autoFocus && inputRef.current?.focus();
   }, [props, ref]);
-  return <TextInput ref={inputRef} {...props} />;
+  return (
+    <TextInput
+      ref={inputRef}
+      {...props}
+      testID={props.focusedTextInputTestID}
+    />
+  );
 }
 
 export default React.forwardRef<*, *>(FocusedTextInput);

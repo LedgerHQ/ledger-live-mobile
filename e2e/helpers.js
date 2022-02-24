@@ -1,4 +1,4 @@
-import { device, waitFor, element, by } from "detox";
+import { waitFor, element, by } from "detox";
 
 const DEFAULT_TIMEOUT = 5000;
 
@@ -43,7 +43,7 @@ export async function scrollToElementById(
   pixelsToScroll,
   direction = "down",
   startPositionXAxis = NaN,
-  startPositionYAxis = NaN,
+  startPositionYAxis = 0.5,
 ) {
   await waitFor(element(by.id(elementToScrollToId)))
     .toBeVisible()
@@ -73,13 +73,12 @@ export async function retryAction(action, timeout) {
   }
 }
 
-export async function closeApp() {
-  await device.terminateApp("ledgerlivemobile");
+export function verifyIsVisible(elementId) {
+  return expect(element(by.id(elementId))).toBeVisible();
 }
 
-export async function launchApp() {
-  // does newInstance wipe previous data?
-  return device.launchApp({ newInstance: true });
+export function verifyTextIsVisible(text) {
+  return expect(element(by.text(text))).toBeVisible();
 }
 
 export function delay(ms) {

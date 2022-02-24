@@ -1,45 +1,37 @@
 import { loadConfig } from "../bridge/server";
+import PortfolioPage from "../models/portfolioPage";
+import SettingsPage from "../models/settings/settingsPage";
+import GeneralSettingsPage from "../models/settings/generalSettingsPage";
+import PasswordEntryPage from "../models/passwordEntryPage";
+import { delay } from "../helpers";
 
-const { device, element, by, waitFor } = require("detox");
+const { device } = require("detox");
+
+const CORRECT_PASSWORD = "passWORD$123!";
 
 describe("Password Lock Screen", () => {
   beforeAll(async () => {
     await device.launchApp({
-      // delete: true,
+      delete: true,
     });
   });
 
   it("should be able to enter the correct password", async () => {
     loadConfig("1AccountBTC1AccountETH", true);
 
-    // navigate to settings cog
-    await element(by.id("settings-icon")).tap();
+    await PortfolioPage.navigateToSettings();
+    await SettingsPage.navigateToGeneralSettings();
+    await GeneralSettingsPage.togglePassword();
+    await GeneralSettingsPage.enterNewPassword(CORRECT_PASSWORD);
+    await GeneralSettingsPage.enterNewPassword(CORRECT_PASSWORD); // confirm password step
 
-    // navigate to general
-    await element(by.id("general-settings-card")).tap();
+    await device.sendToHome();
+    await delay(60000); // password takes 60 seconds of app inactivity to activate
+    await device.launchApp();
 
-    // toggle password toggle
-    await waitFor(element(by.id("password-settings-toggle")))
-      .toBeVisible()
-      .whileElement(by.id("general-settings-scroll-view"))
-      .scroll(200, "down", NaN, 0.5);
+    await PasswordEntryPage.enterPassword(CORRECT_PASSWORD);
+    await PasswordEntryPage.login();
 
-    // enter 'password123!' and click confirm
-    await element(by.id("password-text-input")).typeText("passWORD$123!");
-    await element(by.id("Proceed")).tap();
-
-    // enter 'password123!' and click confirm again
-    await element(by.id("password-text-input")).typeText("passWORD$123!");
-    await element(by.id("Proceed")).tap();
-
-    // exit app
-
-    // wait for a bit
-
-    // open app again
-
-    // enter password
-
-    // verify app opens
+    await GeneralSettingsPage.IsVisible();
   });
 });
