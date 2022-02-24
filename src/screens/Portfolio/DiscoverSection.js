@@ -7,16 +7,18 @@ import { filterPlatformApps } from "@ledgerhq/live-common/lib/platform/PlatformA
 import { ScrollView, StyleSheet, TouchableOpacity, View } from "react-native";
 import { AppManifest } from "@ledgerhq/live-common/lib/platform/types";
 import { useNavigation } from "@react-navigation/native";
-import { Trans } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import AppIcon from "../Platform/AppIcon";
 import { useBanner } from "../../components/banners/hooks";
-import { ScreenName } from "../../const";
+import { NavigatorName, ScreenName } from "../../const";
 import DAppDisclaimer from "../Platform/DAppDisclaimer";
 import LText from "../../components/LText";
+import Button from "../../components/Button";
 
 const DAPP_DISCLAIMER_ID = "PlatformAppDisclaimer";
 
 export default function DiscoverSection() {
+  const { t } = useTranslation();
   const navigation = useNavigation();
   const { manifests } = usePlatformApp();
   const experimental = useEnv("PLATFORM_EXPERIMENTAL_APPS");
@@ -60,10 +62,14 @@ export default function DiscoverSection() {
     [navigation, setDisclaimerDisabled, disclaimerDisabled],
   );
 
+  const onSeeMoreButtonPress = useCallback(() => {
+    navigation.navigate(NavigatorName.Platform);
+  }, [navigation]);
+
   return (
     <View style={styles.discoverContainer}>
       <LText bold secondary style={styles.discoverTitle}>
-        <Trans i18nKey={"distribution.header"} />
+        <Trans i18nKey={"tabs.platform"} />
       </LText>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         {filteredManifests.map(manifest => (
@@ -82,6 +88,14 @@ export default function DiscoverSection() {
           </TouchableOpacity>
         ))}
       </ScrollView>
+      <View style={styles.seeMoreBtn}>
+        <Button
+          event="View Discover"
+          type="lightPrimary"
+          title={t("common.seeAll")}
+          onPress={onSeeMoreButtonPress}
+        />
+      </View>
       {disclaimerOpts && (
         <DAppDisclaimer
           disableDisclaimer={disclaimerOpts.disableDisclaimer}
@@ -99,11 +113,14 @@ const styles = StyleSheet.create({
   discoverTitle: {
     fontSize: 16,
     lineHeight: 24,
-    paddingHorizontal: 16,
     marginTop: 8,
-    marginBottom: 8,
+    marginBottom: 16,
   },
   discoverContainer: {
     paddingHorizontal: 16,
+  },
+  seeMoreBtn: {
+    marginTop: 16,
+    marginBottom: 32,
   },
 });

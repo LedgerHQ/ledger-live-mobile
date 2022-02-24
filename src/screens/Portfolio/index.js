@@ -149,7 +149,7 @@ function PortfolioScreen({ navigation }: Props) {
             </View>,
           ]
         : []),
-      <DiscoverSection></DiscoverSection>,
+      accounts.length > 0 && !areAccountsEmpty ? <DiscoverSection /> : null,
       <PortfolioHistoryList navigation={navigation} />,
     ],
     [
