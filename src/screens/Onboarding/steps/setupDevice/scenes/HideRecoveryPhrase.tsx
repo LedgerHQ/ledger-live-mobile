@@ -20,12 +20,6 @@ const items = [
 const HideRecoveryPhraseScene = ({ onNext }: { onNext: () => void }) => {
   const { t } = useTranslation();
 
-  // @TODO: Integrate popin here
-  const handleClick = () => {
-    console.log("popin modal from the bottom here");
-    onNext();
-  };
-
   return (
     <>
       <Flex>
@@ -39,7 +33,7 @@ const HideRecoveryPhraseScene = ({ onNext }: { onNext: () => void }) => {
           items={items.map(item => ({ ...item, title: t(item.title) }))}
         />
       </Flex>
-      <Button type="main" size="large" onPress={handleClick}>
+      <Button type="main" size="large" onPress={onNext}>
         {t("v3.onboarding.stepSetupDevice.hideRecoveryPhrase.cta")}
       </Button>
     </>

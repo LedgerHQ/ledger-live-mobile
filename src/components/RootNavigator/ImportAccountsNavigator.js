@@ -30,16 +30,17 @@ export default function ImportAccountsNavigator() {
         options={{
           ...TransparentHeaderNavigationOptions,
           headerShown: true,
-          title: t("account.import.scan.title"),
+          headerTitle: t("account.import.scan.title"),
           headerRight: props => <HeaderRightClose {...props} color={"#fff"} />,
           headerLeft: null,
+          headerTitleStyle: { color: "#fff" },
         }}
       />
       <Stack.Screen
         name={ScreenName.DisplayResult}
         component={DisplayResult}
         options={{
-          title: t("account.import.result.title"),
+          headerTitle: t("account.import.result.title"),
           headerLeft: () => <BackButton />,
         }}
       />
@@ -47,7 +48,7 @@ export default function ImportAccountsNavigator() {
         name={ScreenName.FallBackCameraScreen}
         component={FallBackCameraScreen}
         options={{
-          title: t("account.import.fallback.header"),
+          headerTitle: t("account.import.fallback.header"),
         }}
       />
     </Stack.Navigator>

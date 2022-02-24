@@ -33,7 +33,7 @@ const OnboardingGeneralInformation = () => {
   }, [urls.recoveryPhraseInfo]);
 
   return (
-    <Flex flex={1} justifyContent="space-between">
+    <Flex flex={1} justifyContent="space-between" bg="background.main">
       <FlatList
         data={[{}]}
         renderItem={() => (
@@ -71,7 +71,7 @@ const OnboardingGeneralInformation = () => {
             />
             <Text variant="h1" color="neutral.c100" uppercase mb={6}>
               {t(
-                "v3.onboarding.stepSetupDevice.recoveryPhraseSetup.infoModal.title",
+                "v3.onboarding.stepSetupDevice.recoveryPhraseSetup.infoModal.title_1",
               )}
             </Text>
             <NumberedList items={bullets.map(item => ({ title: t(item) }))} />

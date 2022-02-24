@@ -8,6 +8,7 @@ import {
 } from "@react-navigation/stack";
 import { useRoute } from "@react-navigation/native";
 import { Flex } from "@ledgerhq/native-ui";
+import { useTheme } from "styled-components";
 import { ScreenName, NavigatorName } from "../../const";
 import PasswordAddFlowNavigator from "./PasswordAddFlowNavigator";
 import OnboardingWelcome from "../../screens/Onboarding/steps/welcome";
@@ -25,6 +26,7 @@ import OnboardingInfoModal from "../OnboardingStepperView/OnboardingInfoModal";
 import OnboardingPairNew from "../../screens/Onboarding/steps/pairNew";
 import OnboardingImportAccounts from "../../screens/Onboarding/steps/importAccounts";
 import OnboardingFinish from "../../screens/Onboarding/steps/finish";
+import OnboardingPreQuizModal from "../../screens/Onboarding/steps/setupDevice/drawers/OnboardingPreQuizModal";
 import OnboardingQuiz from "../../screens/Onboarding/OnboardingQuiz";
 import OnboardingQuizFinal from "../../screens/Onboarding/OnboardingQuizFinal";
 import NavigationHeader from "../NavigationHeader";
@@ -33,7 +35,10 @@ import NavigationModalContainer from "../NavigationModalContainer";
 import OnboardingSetupDeviceInformation from "../../screens/Onboarding/steps/setupDevice/drawers/SecurePinCode";
 import OnboardingSetupDeviceRecoveryPhrase from "../../screens/Onboarding/steps/setupDevice/drawers/SecureRecoveryPhrase";
 import OnboardingGeneralInformation from "../../screens/Onboarding/steps/setupDevice/drawers/GeneralInformation";
+import OnboardingBluetoothInformation from "../../screens/Onboarding/steps/setupDevice/drawers/BluetoothConnection";
 import OnboardingWarning from "../../screens/Onboarding/steps/setupDevice/drawers/Warning";
+import OnboardingSyncDesktopInformation from "../../screens/Onboarding/steps/setupDevice/drawers/SyncDesktopInformation";
+import OnboardingRecoveryPhraseWarning from "../../screens/Onboarding/steps/setupDevice/drawers/RecoveryPhraseWarning";
 
 const Stack = createStackNavigator();
 const LanguageModalStack = createStackNavigator();
@@ -41,6 +46,7 @@ const SetupNewDeviceModalStack = createStackNavigator();
 const SetupDeviceStepStack = createStackNavigator();
 const GeneralInformationStack = createStackNavigator();
 const OnboardingCarefulWarningStack = createStackNavigator();
+const OnboardingPreQuizModalStack = createStackNavigator();
 
 function LanguageModalNavigator(props: StackScreenProps<{}>) {
   const options: Partial<StackNavigationOptions> = {
@@ -56,7 +62,7 @@ function LanguageModalNavigator(props: StackScreenProps<{}>) {
           name={ScreenName.OnboardingLanguage}
           component={OnboardingLanguage}
           options={{
-            title: "onboarding.stepLanguage.title",
+            title: "v3.onboarding.stepLanguage.title",
             ...options,
           }}
         />
@@ -64,7 +70,7 @@ function LanguageModalNavigator(props: StackScreenProps<{}>) {
           name={ScreenName.OnboardingStepLanguageGetStarted}
           component={OnboardingStepLanguageGetStarted}
           options={{
-            title: "onboarding.stepLanguage.title",
+            title: "v3.onboarding.stepLanguage.title",
             ...options,
           }}
         />
@@ -126,6 +132,11 @@ function OnboardingGeneralInformationNavigator(props: StackScreenProps<{}>) {
           component={OnboardingGeneralInformation}
           options={{ title: "", ...options }}
         />
+        <GeneralInformationStack.Screen
+          name={ScreenName.OnboardingBluetoothInformation}
+          component={OnboardingBluetoothInformation}
+          options={{ title: "", ...options }}
+        />
       </GeneralInformationStack.Navigator>
     </NavigationModalContainer>
   );
@@ -165,11 +176,12 @@ function SetupDeviceStepNavigator(props: StackScreenProps<{}>) {
 
 function SetupNewDeviceModalNavigator(props: StackScreenProps<{}>) {
   const route = useRoute();
+  const { colors } = useTheme();
   const options: Partial<StackNavigationOptions> = {
     headerMode: "float",
     header: props => (
       // TODO: Replace this value with constant.purple as soon as the value is fixed in the theme
-      <Flex backgroundColor="hsla(248, 100%, 85%, 1)">
+      <Flex bg="primary.c60">
         <NavigationHeader
           {...props}
           hideBack
@@ -183,7 +195,7 @@ function SetupNewDeviceModalNavigator(props: StackScreenProps<{}>) {
   return (
     // TODO: Replace this value with constant.purple as soon as the value is fixed in the theme
     <NavigationModalContainer
-      contentContainerProps={{ backgroundColor: "hsla(248, 100%, 85%, 1)" }}
+      contentContainerProps={{ backgroundColor: colors.primary.c60 }}
       {...props}
     >
       <SetupNewDeviceModalStack.Navigator>
@@ -192,7 +204,7 @@ function SetupNewDeviceModalNavigator(props: StackScreenProps<{}>) {
           component={OnboardingNewDeviceInfo}
           initialParams={route.params}
           options={{
-            title: "onboarding.stepNewDevice.title",
+            title: "v3.onboarding.stepNewDevice.title",
             ...options,
           }}
         />
@@ -230,7 +242,54 @@ function OnboardingCarefulWarning(props: StackScreenProps<{}>) {
           options={{ title: "", ...options }}
           initialParams={props.route.params}
         />
+        <OnboardingCarefulWarningStack.Screen
+          name={ScreenName.OnboardingModalSyncDesktopInformation}
+          component={OnboardingSyncDesktopInformation}
+          options={{ title: "", ...options }}
+          initialParams={props.route.params}
+        />
+        <OnboardingCarefulWarningStack.Screen
+          name={ScreenName.OnboardingModalRecoveryPhraseWarning}
+          component={OnboardingRecoveryPhraseWarning}
+          options={{ title: "", ...options }}
+          initialParams={props.route.params}
+        />
       </OnboardingCarefulWarningStack.Navigator>
+    </NavigationModalContainer>
+  );
+}
+function OnboardingPreQuizModalNavigator(props: StackScreenProps<{}>) {
+  const options: Partial<StackNavigationOptions> = {
+    headerMode: "float",
+    header: props => (
+      // TODO: Replace this value with constant.purple as soon as the value is fixed in the theme
+      <Flex backgroundColor="primary.c60">
+        <NavigationHeader
+          {...props}
+          hideBack
+          containerProps={{ backgroundColor: "transparent" }}
+        />
+      </Flex>
+    ),
+    headerStyle: {},
+    headerShadowVisible: false,
+  };
+
+  return (
+    <NavigationModalContainer
+      {...props}
+      backgroundColor="primary.c60"
+      deadZoneProps={{ flexGrow: 1 }}
+      contentContainerProps={{ flexGrow: 1 }}
+    >
+      <OnboardingPreQuizModalStack.Navigator>
+        <OnboardingPreQuizModalStack.Screen
+          name={ScreenName.OnboardingPreQuizModal}
+          component={OnboardingPreQuizModal}
+          options={{ title: "", ...options }}
+          initialParams={props.route.params}
+        />
+      </OnboardingPreQuizModalStack.Navigator>
     </NavigationModalContainer>
   );
 }
@@ -244,7 +303,13 @@ const modalOptions: Partial<StackNavigationOptions> = {
 
 export default function OnboardingNavigator() {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+        headerTitle: "",
+        headerShadowVisible: false,
+      }}
+    >
       <Stack.Screen
         name={ScreenName.OnboardingWelcome}
         component={OnboardingWelcome}
@@ -269,6 +334,11 @@ export default function OnboardingNavigator() {
       <Stack.Screen
         name={ScreenName.OnboardingModalWarning}
         component={OnboardingCarefulWarning}
+        options={modalOptions}
+      />
+      <Stack.Screen
+        name={ScreenName.OnboardingPreQuizModal}
+        component={OnboardingPreQuizModalNavigator}
         options={modalOptions}
       />
       <Stack.Screen
@@ -323,6 +393,10 @@ export default function OnboardingNavigator() {
       <Stack.Screen
         name={ScreenName.OnboardingFinish}
         component={OnboardingFinish}
+        options={{
+          cardStyleInterpolator:
+            CardStyleInterpolators.forFadeFromBottomAndroid,
+        }}
       />
 
       <Stack.Screen

@@ -1,5 +1,5 @@
 import React, { useCallback } from "react";
-import { StyleSheet, Animated, SafeAreaView } from "react-native";
+import { StyleSheet } from "react-native";
 import { useNavigation, useRoute, RouteProp } from "@react-navigation/native";
 import { RenderTransitionProps } from "@ledgerhq/native-ui/components/Navigation/FlowStepper";
 import {
@@ -10,6 +10,7 @@ import {
   Transitions,
 } from "@ledgerhq/native-ui";
 
+import { SafeAreaView } from "react-native-safe-area-context";
 import { ScreenName } from "../../../../const";
 import { DeviceNames } from "../../types";
 import { PlaceholderIllustrationTiny } from "../PlaceholderIllustration";
@@ -115,44 +116,7 @@ const ImageHeader = ({
   activeIndex: number;
   onBack: () => void;
 }) => {
-  const firstRender = React.useRef(true);
-  const [stepData, setStepData] = React.useState(metadata[activeIndex]);
-  const fadeAnim = React.useRef(new Animated.Value(1)).current;
-  const fadeIn = React.useMemo(
-    () =>
-      Animated.timing(fadeAnim, {
-        toValue: 1,
-        duration: transitionDuration,
-        useNativeDriver: true,
-      }),
-    [fadeAnim],
-  );
-  const fadeOut = React.useMemo(
-    () =>
-      Animated.timing(fadeAnim, {
-        toValue: 0,
-        duration: transitionDuration,
-        useNativeDriver: true,
-      }),
-    [fadeAnim],
-  );
-
-  React.useEffect(() => {
-    if (firstRender.current) {
-      firstRender.current = false;
-      return;
-    }
-
-    fadeOut.start(({ finished }) => {
-      if (!finished) return;
-      setStepData(metadata[activeIndex]);
-      fadeIn.start();
-    });
-
-    return () => {
-      fadeAnim.stopAnimation();
-    };
-  }, [fadeAnim, fadeIn, fadeOut, activeIndex]);
+  const stepData = metadata[activeIndex];
 
   return (
     <SafeAreaView
@@ -218,17 +182,22 @@ function OnboardingStepNewDevice() {
   >();
 
   const nextPage = useCallback(() => {
-    // TODO: FIX @react-navigation/native using Typescript
-    // @ts-ignore next-line
-    navigation.navigate(ScreenName.OnboardingQuiz, {
-      ...route.params,
-    });
-  }, [navigation, route.params]);
+    if (index < scenes.length - 1) {
+      setIndex(index + 1);
+    } else {
+      // TODO: FIX @react-navigation/native using Typescript
+      // @ts-ignore next-line
+      navigation.navigate(ScreenName.OnboardingPreQuizModal, {
+        onNext: () =>
+          navigation.navigate(ScreenName.OnboardingQuiz, { ...route.params }),
+      });
+    }
+  }, [index, navigation, route.params]);
 
   const handleBack = React.useCallback(
     () =>
       index === 0 ? navigation.goBack : () => setIndex(index => index - 1),
-    [index],
+    [index, navigation.goBack],
   );
 
   return (
@@ -241,18 +210,8 @@ function OnboardingStepNewDevice() {
         progressBarProps={{ backgroundColor: "neutral.c40" }}
         extraProps={{ onBack: handleBack() }}
       >
-        {scenes.map((Children, index) => (
-          <Scene key={Children.id}>
-            {
-              <Children
-                onNext={
-                  Children.id === "HideRecoveryPhrase"
-                    ? nextPage
-                    : () => setIndex(index + 1)
-                }
-              />
-            }
-          </Scene>
+        {scenes.map(Children => (
+          <Scene key={Children.id}>{<Children onNext={nextPage} />}</Scene>
         ))}
       </FlowStepper>
     </Flex>
