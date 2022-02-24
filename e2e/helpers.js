@@ -1,5 +1,7 @@
 import { waitFor, element, by } from "detox";
 
+import { readFileSync } from "fs";
+
 const DEFAULT_TIMEOUT = 5000;
 
 export async function waitAndTap(elementId, timeout) {
@@ -90,4 +92,14 @@ export function delay(ms) {
       resolve();
     }, ms);
   });
+}
+
+export function expectBitmapsToBeEqual(imagePath, expectedImagePath) {
+  const bitmapBuffer = readFileSync(imagePath);
+  const expectedBitmapBuffer = readFileSync(expectedImagePath);
+  if (!bitmapBuffer.equals(expectedBitmapBuffer)) {
+    throw new Error(
+      `Expected image at ${imagePath} to be equal to image at ${expectedImagePath}, but it was different!`,
+    );
+  }
 }

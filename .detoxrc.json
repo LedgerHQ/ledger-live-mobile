@@ -1,6 +1,9 @@
 {
   "testRunner": "jest",
   "runnerConfig": "e2e/config.json",
+  "artifacts": {
+    "rootDir": "e2e/artifacts"
+  },
   "configurations": {
     "ios.debug": {
       "binaryPath": "ios/build/Build/Products/Debug-iphonesimulator/ledgerlivemobile.app",
