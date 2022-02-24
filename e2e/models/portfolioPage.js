@@ -5,7 +5,7 @@ export default class PortfolioPage {
     await testHelpers.tap("settings-icon");
   }
 
-  static isVisible() {
-    return testHelpers.verifyIsVisible("transfer-button");
+  static async emptyPortfolioIsVisible() {
+    await testHelpers.verifyTextIsVisible("Install an app on my device");
   }
 }

@@ -21,6 +21,6 @@ describe("Onboarding", () => {
     await OnboardingSteps.addDeviceViaBluetooth();
     await OnboardingSteps.openLedgerLive();
 
-    await expect(PortfolioPage.isVisible());
+    await PortfolioPage.emptyPortfolioIsVisible();
   });
 });

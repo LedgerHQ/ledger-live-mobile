@@ -73,12 +73,15 @@ export async function retryAction(action, timeout) {
   }
 }
 
-export function verifyIsVisible(elementId) {
-  return expect(element(by.id(elementId))).toBeVisible();
+// TODO: expects should be in test file
+export async function verifyIsVisible(elementId) {
+  await delay(1000);
+  await expect(element(by.id(elementId))).toBeVisible();
 }
 
-export function verifyTextIsVisible(text) {
-  return expect(element(by.text(text))).toBeVisible();
+export async function verifyTextIsVisible(text) {
+  await delay(1000);
+  await expect(element(by.text(text))).toBeVisible();
 }
 
 export function delay(ms) {

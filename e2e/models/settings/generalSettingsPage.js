@@ -17,6 +17,6 @@ export default class GeneralSettingsPage {
   }
 
   static async isVisible() {
-    return testHelpers.verifyTextIsVisible("General");
+    await testHelpers.verifyTextIsVisible("General");
   }
 }

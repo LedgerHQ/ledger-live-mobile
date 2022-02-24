@@ -57,9 +57,9 @@ export default class OnboardingSteps {
     // ).not.toBeVisible();
     // issue here: the 'Pairing Successful' text is 'visible' before it actually is, so it's failing at the continue step as continue isn't actually visible
     // await waitFor(element(by.text("Pairing Successful"))).toBeVisible();
-    // leaving wait for flaky 'device authentication check screen'
 
-    // await testHelpers.delay(5000);
+    // wait for flaky 'device authentication check screen'
+    await testHelpers.delay(2500);
     await testHelpers.tap("Proceed");
   }
 
