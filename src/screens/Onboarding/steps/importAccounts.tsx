@@ -18,10 +18,10 @@ import { TrackScreen } from "../../../analytics";
 
 const images = {
   light: {
-    Intro: require("../../../images/illustration/Swap.light.png"),
+    Intro: require("../../../images/illustration/Light/_074.png"),
   },
   dark: {
-    Intro: require("../../../images/illustration/Swap.dark.png"),
+    Intro: require("../../../images/illustration/Dark/_074.png"),
   },
 };
 
@@ -131,7 +131,7 @@ function OnboardingStepPairNew() {
       // @TODO: Replace this placeholder with the correct illustration asap
       illustration: (
         <Illustration
-          size={104}
+          size={150}
           darkSource={images.dark.Intro}
           lightSource={images.light.Intro}
         />

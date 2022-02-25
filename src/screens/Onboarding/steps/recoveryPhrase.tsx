@@ -29,22 +29,22 @@ const transitionDuration = 500;
 // @TODO Replace
 const images = {
   light: {
-    RestoreRecovery: require("../../../images/illustration/Swap.light.png"),
-    RestoreRecoveryStep1: require("../../../images/illustration/Swap.light.png"),
-    PinCode: require("../../../images/illustration/Swap.light.png"),
-    PinCodeInstructions: require("../../../images/illustration/Swap.light.png"),
-    ExistingRecovery: require("../../../images/illustration/Swap.light.png"),
-    ExistingRecoveryStep1: require("../../../images/illustration/Swap.light.png"),
-    ExistingRecoveryStep2: require("../../../images/illustration/Swap.light.png"),
+    RestoreRecovery: require("../../../images/illustration/Light/_067.png"),
+    RestoreRecoveryStep1: require("../../../images/illustration/Light/_067.png"),
+    PinCode: require("../../../images/illustration/Light/_062.png"),
+    PinCodeInstructions: require("../../../images/illustration/Light/_062.png"),
+    ExistingRecovery: require("../../../images/illustration/Light/_059.png"),
+    ExistingRecoveryStep1: require("../../../images/illustration/Light/_061.png"),
+    ExistingRecoveryStep2: require("../../../images/illustration/Light/_061.png"),
   },
   dark: {
-    RestoreRecovery: require("../../../images/illustration/Swap.dark.png"),
-    RestoreRecoveryStep1: require("../../../images/illustration/Swap.dark.png"),
-    PinCode: require("../../../images/illustration/Swap.dark.png"),
-    PinCodeInstructions: require("../../../images/illustration/Swap.dark.png"),
-    ExistingRecovery: require("../../../images/illustration/Swap.dark.png"),
-    ExistingRecoveryStep1: require("../../../images/illustration/Swap.dark.png"),
-    ExistingRecoveryStep2: require("../../../images/illustration/Swap.dark.png"),
+    RestoreRecovery: require("../../../images/illustration/Dark/_067.png"),
+    RestoreRecoveryStep1: require("../../../images/illustration/Dark/_067.png"),
+    PinCode: require("../../../images/illustration/Dark/_062.png"),
+    PinCodeInstructions: require("../../../images/illustration/Dark/_062.png"),
+    ExistingRecovery: require("../../../images/illustration/Dark/_059.png"),
+    ExistingRecoveryStep1: require("../../../images/illustration/Dark/_061.png"),
+    ExistingRecoveryStep2: require("../../../images/illustration/Dark/_061.png"),
   },
 };
 
@@ -58,7 +58,7 @@ const metadata: Array<Metadata> = [
     id: RestoreRecovery.id,
     illustration: (
       <Illustration
-        size={104}
+        size={150}
         darkSource={images.dark.RestoreRecovery}
         lightSource={images.light.RestoreRecovery}
       />
@@ -72,7 +72,7 @@ const metadata: Array<Metadata> = [
     id: RestoreRecoveryStep1.id,
     illustration: (
       <Illustration
-        size={104}
+        size={150}
         darkSource={images.dark.RestoreRecoveryStep1}
         lightSource={images.light.RestoreRecoveryStep1}
       />
@@ -86,7 +86,7 @@ const metadata: Array<Metadata> = [
     id: PinCode.id,
     illustration: (
       <Illustration
-        size={104}
+        size={150}
         darkSource={images.dark.PinCode}
         lightSource={images.light.PinCode}
       />
@@ -97,7 +97,7 @@ const metadata: Array<Metadata> = [
     id: PinCodeInstructions.id,
     illustration: (
       <Illustration
-        size={104}
+        size={150}
         darkSource={images.dark.PinCodeInstructions}
         lightSource={images.light.PinCodeInstructions}
       />
@@ -111,7 +111,7 @@ const metadata: Array<Metadata> = [
     id: ExistingRecovery.id,
     illustration: (
       <Illustration
-        size={104}
+        size={150}
         darkSource={images.dark.ExistingRecovery}
         lightSource={images.light.ExistingRecovery}
       />
@@ -125,7 +125,7 @@ const metadata: Array<Metadata> = [
     id: ExistingRecoveryStep1.id,
     illustration: (
       <Illustration
-        size={104}
+        size={150}
         darkSource={images.dark.ExistingRecoveryStep1}
         lightSource={images.light.ExistingRecoveryStep1}
       />
@@ -139,7 +139,7 @@ const metadata: Array<Metadata> = [
     id: ExistingRecoveryStep2.id,
     illustration: (
       <Illustration
-        size={104}
+        size={150}
         darkSource={images.dark.ExistingRecoveryStep2}
         lightSource={images.light.ExistingRecoveryStep2}
       />

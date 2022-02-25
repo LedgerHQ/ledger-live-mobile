@@ -3,6 +3,9 @@ import { Flex, Text, Button } from "@ledgerhq/native-ui";
 import { Base as BaseButton } from "@ledgerhq/native-ui/components/cta/Button";
 import { Image } from "react-native";
 
+import successImage from "../../images/illustration/Light/_053.png";
+import failImage from "../../images/illustration/Light/_054.png";
+
 type Answer = {
   answer: string;
   correct: boolean;
@@ -34,7 +37,13 @@ export default function OnboardingQuizItem({
       <Flex flex={1} px={6} py={7}>
         <Flex flex={1} alignItems="center" justifyContent="center">
           <Image
-            source={image}
+            source={
+              selectedAnswer
+                ? selectedAnswer.correct
+                  ? successImage
+                  : failImage
+                : image
+            }
             style={{ width: "100%", height: 200 }}
             resizeMode="contain"
           />

@@ -9,6 +9,7 @@ import Video from "react-native-video";
 import Button from "../../../components/Button";
 import { useLocale } from "../../../context/Locale";
 import { ScreenName } from "../../../const";
+import StyledStatusBar from "../../../components/StyledStatusBar";
 
 const source = require("../../../../assets/videos/onboarding.mp4");
 const poster = require("../../../../assets/videos/onboarding-poster.jpg");
@@ -31,6 +32,7 @@ function OnboardingStepWelcome({ navigation }: any) {
 
   return (
     <Flex flex={1} bg="palette.primary.c60">
+      <StyledStatusBar barStyle="light-content" />
       <Video
         source={source}
         style={{

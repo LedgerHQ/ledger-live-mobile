@@ -15,9 +15,9 @@ import { useNavigation, useRoute, RouteProp } from "@react-navigation/native";
 import { TrackScreen } from "../../analytics";
 import { ScreenName } from "../../const";
 
-import quizImage1 from "./assets/quizImage1.png";
-import quizImage2 from "./assets/quizImage2.png";
-import quizImage3 from "./assets/quizImage3.png";
+import quizImage1 from "../../images/illustration/Light/_056.png";
+import quizImage2 from "../../images/illustration/Light/_021.png";
+import quizImage3 from "../../images/illustration/Light/_060.png";
 
 import OnboardingQuizItem from "./OnboardingQuizItem";
 
@@ -153,8 +153,6 @@ function OnboardingQuiz({ navigation }: { navigation: any }) {
       ].sort(() => 0.5 - Math.random()),
     [t],
   );
-
-  console.log(route.params);
 
   const onNext = useCallback(
     correct => {

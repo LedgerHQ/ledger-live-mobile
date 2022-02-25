@@ -16,8 +16,8 @@ import HeaderIllustration from "./steps/HeaderIllustration";
 import Scene, { QuizzFinal } from "./steps/setupDevice/scenes";
 import { TrackScreen } from "../../analytics";
 
-import quizProSuccess from "./assets/quizPro1.png";
-import quizProFail from "./assets/quizPro2.png";
+import quizProSuccess from "../../images/illustration/Light/_053.png";
+import quizProFail from "../../images/illustration/Light/_054.png";
 
 const transitionDuration = 500;
 

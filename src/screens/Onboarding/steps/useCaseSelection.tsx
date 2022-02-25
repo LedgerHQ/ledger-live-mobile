@@ -13,16 +13,16 @@ import OnboardingView from "../OnboardingView";
 // @TODO Replace
 const images = {
   light: {
-    setupNano: require("../../../images/illustration/Swap.light.png"),
-    pairNew: require("../../../images/illustration/Swap.light.png"),
-    syncCrypto: require("../../../images/illustration/Swap.light.png"),
-    restoreRecoveryPhrase: require("../../../images/illustration/Swap.light.png"),
+    setupNano: require("../../../images/illustration/Light/_072.png"),
+    pairNew: require("../../../images/illustration/Light/_076.png"),
+    syncCrypto: require("../../../images/illustration/Light/_074.png"),
+    restoreRecoveryPhrase: require("../../../images/illustration/Light/_067.png"),
   },
   dark: {
-    setupNano: require("../../../images/illustration/Swap.dark.png"),
-    pairNew: require("../../../images/illustration/Swap.dark.png"),
-    syncCrypto: require("../../../images/illustration/Swap.dark.png"),
-    restoreRecoveryPhrase: require("../../../images/illustration/Swap.dark.png"),
+    setupNano: require("../../../images/illustration/Dark/_072.png"),
+    pairNew: require("../../../images/illustration/Dark/_076.png"),
+    syncCrypto: require("../../../images/illustration/Dark/_074.png"),
+    restoreRecoveryPhrase: require("../../../images/illustration/Dark/_067.png"),
   },
 };
 

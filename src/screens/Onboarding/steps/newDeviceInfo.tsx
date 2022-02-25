@@ -12,18 +12,18 @@ import type { DeviceNames } from "../types";
 // @TODO Replace
 const images = {
   light: [
-    require("../../../images/illustration/Swap.light.png"),
-    require("../../../images/illustration/Swap.light.png"),
-    require("../../../images/illustration/Swap.light.png"),
-    require("../../../images/illustration/Swap.light.png"),
-    require("../../../images/illustration/Swap.light.png"),
+    require("../../../images/illustration/Light/_049.png"),
+    require("../../../images/illustration/Light/_073.png"),
+    require("../../../images/illustration/Light/_070.png"),
+    require("../../../images/illustration/Light/_069.png"),
+    require("../../../images/illustration/Light/_066.png"),
   ],
   dark: [
-    require("../../../images/illustration/Swap.dark.png"),
-    require("../../../images/illustration/Swap.dark.png"),
-    require("../../../images/illustration/Swap.dark.png"),
-    require("../../../images/illustration/Swap.dark.png"),
-    require("../../../images/illustration/Swap.dark.png"),
+    require("../../../images/illustration/Dark/_049.png"),
+    require("../../../images/illustration/Dark/_073.png"),
+    require("../../../images/illustration/Dark/_070.png"),
+    require("../../../images/illustration/Dark/_069.png"),
+    require("../../../images/illustration/Dark/_066.png"),
   ],
 };
 
@@ -31,13 +31,13 @@ type CardType = { index: number, deviceModelId: DeviceNames };
 const Card = ({ index /*, deviceModelId */ }: CardType) => {
   const { t } = useTranslation();
 
+  console.log(images.dark[index])
+
 
   return (
     <Flex flex={1} justifyContent="center" alignItems="center" px={20}>
       <Flex mb={10}>
-        {
-          images.dark[index] && images.light[index] ? <Illustration size={154} darkSource={images.dark[index]} darkSource={images.light[index]} /> : null
-        }
+        <Illustration size={174} darkSource={images.dark[index]} lightSource={images.light[index]} />
         
       </Flex>
       <Text variant="h2" mb={3} style={{ textTransform: "uppercase" }}>

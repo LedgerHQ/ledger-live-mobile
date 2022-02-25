@@ -30,24 +30,24 @@ const transitionDuration = 500;
 // @TODO Replace
 const images = {
   light: {
-    Intro: require("../../../../images/illustration/Swap.light.png"),
-    Instructions: require("../../../../images/illustration/Swap.light.png"),
-    PinCode: require("../../../../images/illustration/Swap.light.png"),
-    PinCodeInstructions: require("../../../../images/illustration/Swap.light.png"),
-    RecoveryPhrase: require("../../../../images/illustration/Swap.light.png"),
-    RecoveryPhraseInstructions: require("../../../../images/illustration/Swap.light.png"),
-    RecoveryPhraseSetup: require("../../../../images/illustration/Swap.light.png"),
-    HideRecoveryPhrase: require("../../../../images/illustration/Swap.light.png"),
+    Intro: require("../../../../images/illustration/Light/_052.png"),
+    Instructions: require("../../../../images/illustration/Light/_052.png"),
+    PinCode: require("../../../../images/illustration/Light/_062.png"),
+    PinCodeInstructions: require("../../../../images/illustration/Light/_062.png"),
+    RecoveryPhrase: require("../../../../images/illustration/Light/_061.png"),
+    RecoveryPhraseInstructions: require("../../../../images/illustration/Light/_061.png"),
+    RecoveryPhraseSetup: require("../../../../images/illustration/Light/_057.png"),
+    HideRecoveryPhrase: require("../../../../images/illustration/Light/_057.png"),
   },
   dark: {
-    Intro: require("../../../../images/illustration/Swap.dark.png"),
-    Instructions: require("../../../../images/illustration/Swap.dark.png"),
-    PinCode: require("../../../../images/illustration/Swap.dark.png"),
-    PinCodeInstructions: require("../../../../images/illustration/Swap.dark.png"),
-    RecoveryPhrase: require("../../../../images/illustration/Swap.dark.png"),
-    RecoveryPhraseInstructions: require("../../../../images/illustration/Swap.dark.png"),
-    RecoveryPhraseSetup: require("../../../../images/illustration/Swap.dark.png"),
-    HideRecoveryPhrase: require("../../../../images/illustration/Swap.dark.png"),
+    Intro: require("../../../../images/illustration/Dark/_052.png"),
+    Instructions: require("../../../../images/illustration/Dark/_052.png"),
+    PinCode: require("../../../../images/illustration/Dark/_062.png"),
+    PinCodeInstructions: require("../../../../images/illustration/Dark/_062.png"),
+    RecoveryPhrase: require("../../../../images/illustration/Dark/_061.png"),
+    RecoveryPhraseInstructions: require("../../../../images/illustration/Dark/_061.png"),
+    RecoveryPhraseSetup: require("../../../../images/illustration/Dark/_057.png"),
+    HideRecoveryPhrase: require("../../../../images/illustration/Dark/_057.png"),
   },
 };
 
@@ -62,7 +62,7 @@ const metadata: Array<Metadata> = [
     // @TODO: Replace this placeholder with the correct illustration asap
     illustration: (
       <Illustration
-        size={104}
+        size={150}
         darkSource={images.dark.Intro}
         lightSource={images.light.Intro}
       />
@@ -73,7 +73,7 @@ const metadata: Array<Metadata> = [
     id: Instructions.id,
     illustration: (
       <Illustration
-        size={104}
+        size={150}
         darkSource={images.dark.Instructions}
         lightSource={images.light.Instructions}
       />
@@ -84,7 +84,7 @@ const metadata: Array<Metadata> = [
     id: PinCode.id,
     illustration: (
       <Illustration
-        size={104}
+        size={150}
         darkSource={images.dark.PinCode}
         lightSource={images.light.PinCode}
       />
@@ -95,7 +95,7 @@ const metadata: Array<Metadata> = [
     id: PinCodeInstructions.id,
     illustration: (
       <Illustration
-        size={104}
+        size={150}
         darkSource={images.dark.PinCodeInstructions}
         lightSource={images.light.PinCodeInstructions}
       />
@@ -109,7 +109,7 @@ const metadata: Array<Metadata> = [
     id: RecoveryPhrase.id,
     illustration: (
       <Illustration
-        size={104}
+        size={150}
         darkSource={images.dark.RecoveryPhrase}
         lightSource={images.light.RecoveryPhrase}
       />
@@ -123,7 +123,7 @@ const metadata: Array<Metadata> = [
     id: RecoveryPhraseInstructions.id,
     illustration: (
       <Illustration
-        size={104}
+        size={150}
         darkSource={images.dark.RecoveryPhraseInstructions}
         lightSource={images.light.RecoveryPhraseInstructions}
       />
@@ -137,7 +137,7 @@ const metadata: Array<Metadata> = [
     id: RecoveryPhraseSetup.id,
     illustration: (
       <Illustration
-        size={104}
+        size={150}
         darkSource={images.dark.RecoveryPhraseSetup}
         lightSource={images.light.RecoveryPhraseSetup}
       />
@@ -151,7 +151,7 @@ const metadata: Array<Metadata> = [
     id: HideRecoveryPhrase.id,
     illustration: (
       <Illustration
-        size={104}
+        size={150}
         darkSource={images.dark.HideRecoveryPhrase}
         lightSource={images.light.HideRecoveryPhrase}
       />
