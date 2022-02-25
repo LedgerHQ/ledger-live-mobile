@@ -1,6 +1,9 @@
 name: Detox E2E CI
 
 on:
+  pull_request:
+    branches:
+      - "*"
   workflow_dispatch:
     inputs:
       prNumber:
