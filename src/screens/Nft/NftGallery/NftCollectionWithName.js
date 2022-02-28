@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useCallback } from "react";
+import React, { useCallback, memo } from "react";
 import type { NFT, CollectionWithNFT } from "@ledgerhq/live-common/lib/nft";
 import { FlatList, View, SafeAreaView, StyleSheet } from "react-native";
 import { useNftMetadata } from "@ledgerhq/live-common/lib/nft";
@@ -26,13 +26,7 @@ const NftCollectionWithName = ({
         key={item.id}
         nft={item}
         collection={collectionWithNfts}
-        style={[
-          styles.nftCard,
-          {
-            paddingLeft: index % 2 !== 0 ? 8 : 0,
-            paddingRight: index % 2 === 0 ? 8 : 0,
-          },
-        ]}
+        style={index % 2 === 0 ? evenNftCardStyles : oddNftCardStyles}
       />
     ),
     [collectionWithNfts],
@@ -57,7 +51,7 @@ const NftCollectionWithName = ({
       </View>
       <FlatList
         data={nfts}
-        keyExtractor={(nft: NFT) => nft.id}
+        keyExtractor={nftKeyExtractor}
         scrollEnabled={false}
         numColumns={2}
         renderItem={renderItem}
@@ -65,6 +59,9 @@ const NftCollectionWithName = ({
     </SafeAreaView>
   );
 };
+
+
+const nftKeyExtractor = (nft: NFT) => nft.id;
 
 const styles = StyleSheet.create({
   title: {
@@ -84,4 +81,20 @@ const styles = StyleSheet.create({
   },
 });
 
-export default NftCollectionWithName;
+const evenNftCardStyles = [
+  styles.nftCard,
+  {
+    paddingLeft: 0,
+    paddingRight: 8,
+  },
+];
+
+const oddNftCardStyles = [
+  styles.nftCard,
+  {
+    paddingLeft: 8,
+    paddingRight: 0,
+  },
+];
+
+export default memo<Props>(NftCollectionWithName);
