@@ -7,6 +7,7 @@ import { useTranslation } from "react-i18next";
 import RingChart from "./RingChart";
 import { useDistribution } from "../../actions/general";
 import DistributionCard, { DistributionItem } from "./DistributionCard";
+import { TrackScreen } from "../../analytics";
 
 const Container = styled(Flex).attrs({
   paddingHorizontal: 16,
@@ -57,6 +58,7 @@ export default function Allocation() {
         keyExtractor={item => item.currency.id}
         style={{ width: "100%" }}
       />
+      <TrackScreen category="Analytics" name="Allocation" />
     </Container>
   );
 }

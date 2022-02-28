@@ -19,6 +19,7 @@ import SwapLight from "../../images/illustration/Swap.light.png";
 import SwapDark from "../../images/illustration/Swap.dark.png";
 import FamilyPackLight from "../../images/illustration/FamilyPack.light.png";
 import FamilyPackDark from "../../images/illustration/FamilyPack.dark.png";
+import { track } from "../../analytics";
 
 const DismissCarousel = styled(TouchableOpacity)`
   position: absolute;
@@ -186,6 +187,12 @@ const Carousel = ({ cardsVisibility }: Props) => {
 
   const onHide = useCallback(
     cardId => {
+      const slide = SLIDES.find(slide => slide.name === cardId);
+      if (slide) {
+        track("Portfolio Recommended CloseUrl", {
+          url: slide.url,
+        });
+      }
       dispatch(setCarouselVisibility({ ...cardsVisibility, [cardId]: false }));
     },
     [dispatch, cardsVisibility],
