@@ -1680,6 +1680,7 @@
       "theme": "主题",
       "themeDesc": "设置用户界面主题",
       "themes": {
+        "system": "System",
         "dark": "暗色",
         "light": "亮色"
       },
