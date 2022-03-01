@@ -32,7 +32,7 @@
   NSString *googleServiceInfoName = googleServiceInfoEnvName;
 
   if ([googleServiceInfoName length] == 0) {
-    googleServiceInfoName = @"GoogleService-Info-Development";
+    googleServiceInfoName = @"GoogleService-Info";
   }
 
   // Initialize Firebase with the correct GoogleService-Info.plist file
