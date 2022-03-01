@@ -4,9 +4,11 @@
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
 #import <React/RCTLinkingManager.h>
+#import "ReactNativeConfig.h"
 #import "RNSplashScreen.h"  // here
 
 #import <Firebase.h>
+
 #if DEBUG
 #ifdef FB_SONARKIT_ENABLED
 #import <FlipperKit/FlipperClient.h>
@@ -25,7 +27,20 @@
 {
   [self initializeFlipper:application];
 
-  [FIRApp configure];
+  // Retrieve the correct GoogleService-Info.plist file name for a given environment
+  NSString *googleServiceInfoName = [ReactNativeConfig envFor:@"GOOGLE_SERVICE_INFO_NAME"];
+
+  if ([googleServiceInfoName length] == 0) {
+    googleServiceInfoName = "GoogleService-Info-Development"
+  }
+
+  // Initialize Firebase with the correct GoogleService-Info.plist file
+  NSString *filePath = [[NSBundle mainBundle] pathForResource:googleServiceInfoName ofType:@"plist"];
+  FIROptions *options = [[FIROptions alloc] initWithContentsOfFile:filePath];
+  [FIRApp configureWithOptions:options];
+  
+  // TODO: remove before merge
+  // [FIRApp configure];
 
   RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:launchOptions];
   RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge
