@@ -28,10 +28,11 @@
   [self initializeFlipper:application];
 
   // Retrieve the correct GoogleService-Info.plist file name for a given environment
-  NSString *googleServiceInfoName = [ReactNativeConfig envFor:@"GOOGLE_SERVICE_INFO_NAME"];
+  NSString *googleServiceInfoEnvName = [ReactNativeConfig envFor:@"GOOGLE_SERVICE_INFO_NAME"];
+  NSString *googleServiceInfoName = googleServiceInfoEnvName;
 
   if ([googleServiceInfoName length] == 0) {
-    googleServiceInfoName = "GoogleService-Info-Development"
+    googleServiceInfoName = @"GoogleService-Info-Development";
   }
 
   // Initialize Firebase with the correct GoogleService-Info.plist file
@@ -39,9 +40,6 @@
   FIROptions *options = [[FIROptions alloc] initWithContentsOfFile:filePath];
   [FIRApp configureWithOptions:options];
   
-  // TODO: remove before merge
-  // [FIRApp configure];
-
   RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:launchOptions];
   RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge
                                                    moduleName:@"ledgerlivemobile"
