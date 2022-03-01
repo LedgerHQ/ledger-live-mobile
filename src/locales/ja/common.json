@@ -1680,6 +1680,7 @@
       "theme": "テーマ",
       "themeDesc": "アプリUIのテーマを設定する。",
       "themes": {
+        "system": "System",
         "dark": "ダーク",
         "light": "ライト"
       },
