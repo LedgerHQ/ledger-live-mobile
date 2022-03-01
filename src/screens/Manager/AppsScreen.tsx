@@ -23,6 +23,7 @@ import Animated from "react-native-reanimated";
 
 import i18next from "i18next";
 import { Trans } from "react-i18next";
+import { useTheme } from "styled-components/native";
 import type { ManagerTab } from "./Manager";
 
 import AppFilter from "./AppsList/AppFilter";
@@ -40,13 +41,10 @@ import AppsList from "./AppsList";
 import Searchbar from "./AppsList/Searchbar";
 
 import InstalledAppModal from "./Modals/InstalledAppModal";
-import { useTheme } from "styled-components/native";
 
 import NoAppsInstalled from "../../icons/NoAppsInstalled";
 import NoResultsFound from "../../icons/NoResultsFound";
 import AppIcon from "./AppsList/AppIcon";
-
-import { NavigatorName } from "../../const";
 
 const { interpolateNode, Extrapolate } = Animated;
 const { width, height } = Dimensions.get("screen");
@@ -108,12 +106,6 @@ const AppsScreen = ({
   const [order, setOrder] = useState("desc");
 
   const [position] = useState(() => new Animated.Value(0));
-
-  const searchOpacity = interpolateNode(position, {
-    inputRange: [0, 1],
-    outputRange: [1, 0],
-    extrapolate: Extrapolate.CLAMP,
-  });
 
   const [scrollY, setScrollY] = useState(0);
 
@@ -205,10 +197,6 @@ const AppsScreen = ({
       apps.find(({ name }) => name.toLowerCase() === found.parentCurrency.name.toLowerCase()),
     [found, apps],
   );
-
-  const addAccount = useCallback(() => {
-    navigation.navigate(NavigatorName.AddAccounts);
-  }, [navigation]);
 
   const renderNoResults = useCallback(
     () => found && parent ? (
@@ -303,7 +291,7 @@ const AppsScreen = ({
           />
         );
       case managerTabs.INSTALLED_APPS:
-        console.log('INSTALLED', route)
+        console.log('INSTALLED')
         return (
           <>
             <Flex style={{ marginBottom: 24 }}>
