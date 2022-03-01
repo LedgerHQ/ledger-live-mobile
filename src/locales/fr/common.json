@@ -1680,6 +1680,7 @@
       "theme": "Thème",
       "themeDesc": "Définissez le thème de l'interface utilisateur",
       "themes": {
+        "system": "System",
         "dark": "Dark",
         "light": "Light"
       },
