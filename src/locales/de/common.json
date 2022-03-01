@@ -1680,6 +1680,7 @@
       "theme": "Thema",
       "themeDesc": "App-UI-Thema festlegen",
       "themes": {
+        "system": "System",
         "dark": "Dunkel",
         "light": "Hell"
       },
