@@ -288,6 +288,7 @@ const AppsScreen = ({
   const renderScene = ({ route }: any) => {
     switch (route.key) {
       case managerTabs.CATALOG:
+        console.log('CATALOG');
         return (
           <AppsList
             apps={catalog}
@@ -302,6 +303,7 @@ const AppsScreen = ({
           />
         );
       case managerTabs.INSTALLED_APPS:
+        console.log('INSTALLED', route)
         return (
           <>
             <Flex style={{ marginBottom: 24 }}>
