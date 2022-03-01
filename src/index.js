@@ -90,6 +90,7 @@ import { FirebaseFeatureFlagsProvider } from "./components/FirebaseFeatureFlags"
 import StyleProvider from "./StyleProvider";
 // $FlowFixMe
 import MarketDataProvider from "./screens/Market/MarketDataProviderWrapper";
+import MarketTopGainersDataProviderWrapper from "./screens/Portfolio/MarketTopGainersDataProviderWrapper";
 
 const themes = {
   light: lightTheme,
@@ -479,11 +480,11 @@ export default class Root extends Component<
                                               <SnackbarContainer />
                                               <NftMetadataProvider>
                                                 <MarketDataProvider>
-                                                  <App
-                                                    importDataString={
-                                                      importDataString
-                                                    }
-                                                  />
+                                                    <App
+                                                      importDataString={
+                                                        importDataString
+                                                      }
+                                                    />
                                                 </MarketDataProvider>
                                               </NftMetadataProvider>
                                             </NotificationsProvider>

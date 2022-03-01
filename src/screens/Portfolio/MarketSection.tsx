@@ -10,6 +10,12 @@ import { useProviders } from "../Swap/SwapEntry";
 import MarketRowItem from "../Market/MarketRowItem";
 import Placeholder from "../../components/Placeholder";
 
+function getTopGainers(coins, n) {
+  return [...coins]
+    .sort((a, b) => b.priceChangePercentage - a.priceChangePercentage)
+    .slice(0, n);
+}
+
 export default function MarketSection() {
   const { t } = useTranslation();
   const navigation = useNavigation();
@@ -24,26 +30,28 @@ export default function MarketSection() {
     selectCurrency,
   } = useMarketData();
 
-  const resetSearch = useCallback(
-    () =>
-      refresh({
-        search: "",
-        starred: [],
-        liveCompatible: false,
-        orderBy: "market_cap",
-        order: "desc",
-        range: "24h",
-      }),
-    [refresh],
-  );
+  // console.log(marketData?.slice(0, 1));
 
-  useFocusEffect(resetSearch);
+  // const resetSearch = useCallback(
+  //   () =>
+  //     refresh({
+  //       search: "",
+  //       starred: [],
+  //       liveCompatible: false,
+  //       orderBy: "gecko",
+  //       order: "desc",
+  //       range: "24h",
+  //     }),
+  //   [refresh],
+  // );
+  //
+  // useFocusEffect(resetSearch);
 
   const renderItems = useCallback(
     ({ item, index }) => (
       <TouchableOpacity
         onPress={() => {
-          selectCurrency(item.id);
+          //selectCurrency(item.id);
           navigation.navigate(NavigatorName.Market, {
             screen: ScreenName.MarketDetail,
             params: {
@@ -70,17 +78,11 @@ export default function MarketSection() {
         {Array.from({ length: 3 }, (_, key) => (
           <Flex key={key} py={5}>
             <Flex flexDirection={"row"} justifyContent={"space-between"} mb={2}>
-              <Placeholder
-                width={230}
-                containerHeight={20}
-              />
+              <Placeholder width={230} containerHeight={20} />
               <Placeholder width={70} containerHeight={20} />
             </Flex>
             <Flex flexDirection={"row"} justifyContent={"space-between"}>
-              <Placeholder
-                width={230}
-                containerHeight={20}
-              />
+              <Placeholder width={230} containerHeight={20} />
               <Placeholder width={70} containerHeight={20} />
             </Flex>
           </Flex>
@@ -90,9 +92,11 @@ export default function MarketSection() {
     [],
   );
 
+  // console.log("lehgnt", marketData?.length);
+
   return (
     <FlatList
-      data={marketData?.slice(0, 3)}
+      data={marketData}
       renderItem={renderItems}
       scrollEventThrottle={50}
       initialNumToRender={3}

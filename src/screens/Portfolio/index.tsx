@@ -38,6 +38,7 @@ import DiscoverSection from "./DiscoverSection";
 import AddAssetsCard from "./AddAssetsCard";
 import Assets from "./Assets";
 import MarketSection from "./MarketSection";
+import MarketTopGainersDataProviderWrapper from "./MarketTopGainersDataProviderWrapper";
 
 export { default as PortfolioTabIcon } from "./TabIcon";
 
@@ -194,12 +195,12 @@ export default function PortfolioScreen({ navigation }: Props) {
           ]
         : []),
       <Flex mx={6} mt={10}>
-        <SectionTitle
-          title={<Trans i18nKey={"tabs.platform"} />}
-          navigation={navigation}
-          navigatorName={NavigatorName.Market}
-        />
-        <MarketSection />
+          <SectionTitle
+            title={<Trans i18nKey={"tabs.platform"} />}
+            navigation={navigation}
+            navigatorName={NavigatorName.Market}
+          />
+          <MarketSection />
       </Flex>,
       <Box mt={24} />,
     ],
