@@ -1680,6 +1680,7 @@
       "theme": "테마",
       "themeDesc": "앱 UI 테마 설정",
       "themes": {
+        "system": "System",
         "dark": "어두운",
         "light": "밝은"
       },
