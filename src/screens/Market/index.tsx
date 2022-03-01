@@ -11,6 +11,7 @@ import {
   Icon,
   ScrollContainer,
   InfiniteLoader,
+  Box,
 } from "@ledgerhq/native-ui";
 import { useSelector } from "react-redux";
 import { Trans, useTranslation } from "react-i18next";
@@ -29,7 +30,7 @@ import MarketRowItem from "./MarketRowItem";
 import { useLocale } from "../../context/Locale";
 import SortBadge, { Badge } from "./SortBadge";
 import SearchHeader from "./SearchHeader";
-import { ScreenName } from "../../const";
+import { NavigatorName, ScreenName } from "../../const";
 import { track } from "../../analytics";
 import TrackScreen from "../../analytics/TrackScreen";
 import { useProviders } from "../Swap/SwapEntry";
@@ -57,14 +58,7 @@ const BottomSection = ({
 }) => {
   const { t } = useTranslation();
   const { requestParams, refresh, counterCurrency } = useMarketData();
-  const {
-    range,
-    starred = [],
-    liveCompatible,
-    orderBy,
-    order,
-    search,
-  } = requestParams;
+  const { range, starred = [], orderBy, order, search } = requestParams;
   const starredMarketCoins: string[] = useSelector(starredMarketCoinsSelector);
   const starFilterOn = starred.length > 0;
 
@@ -252,12 +246,13 @@ export default function Market({ navigation }: { navigation: any }) {
     [refresh],
   );
 
+
   const renderItems = useCallback(
     ({ item, index }) => (
       <TouchableOpacity
         onPress={() => {
           selectCurrency(item.id);
-          navigation.navigate(ScreenName.MarketDetail, {
+          navigation.navigate(NavigatorName.Market, {
             currencyId: item.id,
           });
         }}
@@ -381,17 +376,19 @@ export default function Market({ navigation }: { navigation: any }) {
             />
           }
         >
-          <FlatList
-            data={marketData}
-            renderItem={renderItems}
-            onEndReached={onEndReached}
-            onEndReachedThreshold={10}
-            scrollEventThrottle={50}
-            initialNumToRender={limit}
-            keyExtractor={(item, index) => item.id + index}
-            ListFooterComponent={renderFooter}
-            ListEmptyComponent={renderEmptyComponent}
-          />
+          <Box px={4}>
+            <FlatList
+              data={marketData}
+              renderItem={renderItems}
+              onEndReached={onEndReached}
+              onEndReachedThreshold={10}
+              scrollEventThrottle={50}
+              initialNumToRender={limit}
+              keyExtractor={(item, index) => item.id + index}
+              ListFooterComponent={renderFooter}
+              ListEmptyComponent={renderEmptyComponent}
+            />
+          </Box>
         </ScrollContainerHeader>
 
         <SearchHeader
