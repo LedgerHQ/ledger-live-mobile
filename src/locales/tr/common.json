@@ -1680,6 +1680,7 @@
       "theme": "Tema",
       "themeDesc": "Uygulama arayüz temasını ayarla",
       "themes": {
+        "system": "System",
         "dark": "Koyu",
         "light": "Açık"
       },
