@@ -1680,6 +1680,7 @@
       "theme": "Tema",
       "themeDesc": "Elige el tema de la IU de la aplicación",
       "themes": {
+        "system": "System",
         "dark": "Oscuro",
         "light": "Claro"
       },
