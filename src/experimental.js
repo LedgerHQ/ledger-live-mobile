@@ -35,7 +35,7 @@ export type Feature = FeatureCommon & (FeatureToggle | FeatureInteger);
 
 // comma-separated list of currencies that we want to enable as experimental, e.g:
 // const experimentalCurrencies = "solana,cardano";
-const experimentalCurrencies = "";
+const experimentalCurrencies = "celo";
 
 export const experimentalFeatures: Feature[] = [
   {
