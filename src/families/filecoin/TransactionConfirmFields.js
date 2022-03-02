@@ -2,10 +2,10 @@
 
 import invariant from "invariant";
 import React from "react";
-import TransactionConfirmField from "~/renderer/components/TransactionConfirm/TransactionConfirmField";
-import Text from "~/renderer/components/Text";
 import { DeviceTransactionField } from "@ledgerhq/live-common/lib/transaction";
 
+import LText from "../../components/LText";
+import { DataRow } from "../../components/ValidateOnDeviceDataRow";
 
 const addressStyle = {
   wordBreak: "break-all",
@@ -17,11 +17,11 @@ const FilecoinField = ({ transaction, field }: { transaction: Transaction, field
   invariant(transaction.family === "filecoin", "filecoin transaction");
 
   return (
-    <TransactionConfirmField label={field.label}>
-      <Text style={addressStyle} ml={1} ff="Inter|Medium" color="palette.text.shade80" fontSize={3}>
+    <DataRow label={field.label}>
+      <LText style={addressStyle} ml={1} ff="Inter|Medium" color="palette.text.shade80" fontSize={3}>
         {field.value}
-      </Text>
-    </TransactionConfirmField>
+      </LText>
+    </DataRow>
   );
 };
 
