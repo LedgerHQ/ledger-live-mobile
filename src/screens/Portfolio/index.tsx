@@ -15,6 +15,7 @@ import { Box, Flex, Link, Text } from "@ledgerhq/native-ui";
 import styled from "styled-components/native";
 import { useRefreshAccountsOrdering } from "../../actions/general";
 import { accountsSelector } from "../../reducers/accounts";
+import { discreetModeSelector } from "../../reducers/settings";
 import {
   counterValueCurrencySelector,
   carouselVisibilitySelector,
@@ -101,6 +102,7 @@ export default function PortfolioScreen({ navigation }: Props) {
   const accounts = useSelector(accountsSelector);
   const counterValueCurrency = useSelector(counterValueCurrencySelector);
   const portfolio = usePortfolio();
+  const discreetMode = useSelector(discreetModeSelector);
 
   const refreshAccountsOrdering = useRefreshAccountsOrdering();
   useFocusEffect(refreshAccountsOrdering);
@@ -210,7 +212,11 @@ export default function PortfolioScreen({ navigation }: Props) {
       <ContentContainer>
         <RequireTerms />
 
-        <TrackScreen category="Portfolio" accountsLength={accounts.length} />
+        <TrackScreen
+          category="Portfolio"
+          accountsLength={accounts.length}
+          discreet={discreetMode}
+        />
 
         <AnimatedFlatListWithRefreshControl
           ref={ref}

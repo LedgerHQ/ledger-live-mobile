@@ -26,6 +26,7 @@ import SectionHeader from "../../components/SectionHeader";
 import LoadingFooter from "../../components/LoadingFooter";
 import Button from "../../components/Button";
 import { ScreenName } from "../../const";
+import { TrackScreen } from "../../analytics";
 
 type Props = {
   navigation: any;
@@ -134,6 +135,7 @@ export function Operations({ navigation }: Props) {
         }
         ListEmptyComponent={ListEmptyComponent}
       />
+      <TrackScreen category="Analytics" name="Operations" />
     </Flex>
   );
 }
