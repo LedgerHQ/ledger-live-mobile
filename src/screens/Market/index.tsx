@@ -30,7 +30,7 @@ import MarketRowItem from "./MarketRowItem";
 import { useLocale } from "../../context/Locale";
 import SortBadge, { Badge } from "./SortBadge";
 import SearchHeader from "./SearchHeader";
-import { NavigatorName, ScreenName } from "../../const";
+import { ScreenName } from "../../const";
 import { track } from "../../analytics";
 import TrackScreen from "../../analytics/TrackScreen";
 import { useProviders } from "../Swap/SwapEntry";
@@ -246,7 +246,6 @@ export default function Market({ navigation }: { navigation: any }) {
     [refresh],
   );
 
-
   const renderItems = useCallback(
     ({ item, index }) => (
       <TouchableOpacity
@@ -305,7 +304,7 @@ export default function Market({ navigation }: { navigation: any }) {
           </Button>
         </Flex>
       ) : null,
-    [loading, resetSearch, search, t],
+    [colors.palette.type, loading, resetSearch, search, t],
   );
 
   const onEndReached = useCallback(async () => {

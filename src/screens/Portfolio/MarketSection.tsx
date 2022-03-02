@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { Flex } from "@ledgerhq/native-ui";
 import { FlatList, TouchableOpacity } from "react-native";
-import { useFocusEffect, useNavigation } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
 import { useMarketData } from "@ledgerhq/live-common/lib/market/MarketDataProvider";
 import { CurrencyData } from "@ledgerhq/live-common/lib/market/types";
@@ -40,13 +40,16 @@ export default function MarketSection() {
       setTopGainers(getTopGainers(marketData, 3));
       refresh({ limit: 20 });
     }
-  }, [marketData]);
+  }, [marketData, refresh, topGainers]);
 
   const renderItems = useCallback(
     ({ item, index }) => (
       <TouchableOpacity
         onPress={() => {
+          // @WARN: this is a hack to avoid issues in the market screen when the target data is not yet loaded
+          refresh({ search: item.ticker });
           selectCurrency(item.id);
+          // @ts-ignore issue in react navigation types
           navigation.navigate(NavigatorName.Market, {
             screen: ScreenName.MarketDetail,
             params: {
@@ -64,7 +67,7 @@ export default function MarketSection() {
         />
       </TouchableOpacity>
     ),
-    [counterCurrency, locale, navigation, selectCurrency, t],
+    [counterCurrency, locale, navigation, refresh, selectCurrency, t],
   );
 
   const renderEmptyComponent = useCallback(
@@ -86,8 +89,6 @@ export default function MarketSection() {
     ),
     [],
   );
-
-  // console.log("lehgnt", marketData?.length);
 
   return (
     <FlatList

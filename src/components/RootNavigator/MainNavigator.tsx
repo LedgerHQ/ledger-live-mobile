@@ -93,7 +93,7 @@ export default function MainNavigator({
         component={MarketNavigator}
         options={{
           headerShown: false,
-          unmountOnBlur: false,
+          unmountOnBlur: true,
           tabBarIcon: (props: any) => (
             <TabIcon
               Icon={Icons.GraphGrowMedium}
