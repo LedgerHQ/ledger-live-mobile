@@ -2,23 +2,32 @@
 
 import invariant from "invariant";
 import React from "react";
+import { StyleSheet } from "react-native";
 import { DeviceTransactionField } from "@ledgerhq/live-common/lib/transaction";
 
 import LText from "../../components/LText";
 import { DataRow } from "../../components/ValidateOnDeviceDataRow";
 
-const addressStyle = {
-  wordBreak: "break-all",
-  textAlign: "right",
-  maxWidth: "70%",
-};
+const styles = StyleSheet.create({
+  text: {
+    fontSize: 14,
+    flex: 1,
+    textAlign: "right",
+  },
+});
 
-const FilecoinField = ({ transaction, field }: { transaction: Transaction, field: DeviceTransactionField }) => {
+const FilecoinField = ({
+  transaction,
+  field,
+}: {
+  transaction: Transaction,
+  field: DeviceTransactionField,
+}) => {
   invariant(transaction.family === "filecoin", "filecoin transaction");
 
   return (
     <DataRow label={field.label}>
-      <LText style={addressStyle} ml={1} ff="Inter|Medium" color="palette.text.shade80" fontSize={3}>
+      <LText semiBold style={styles.text}>
         {field.value}
       </LText>
     </DataRow>
