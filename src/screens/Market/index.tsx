@@ -252,7 +252,7 @@ export default function Market({ navigation }: { navigation: any }) {
       <TouchableOpacity
         onPress={() => {
           selectCurrency(item.id);
-          navigation.navigate(NavigatorName.Market, {
+          navigation.navigate(ScreenName.MarketDetail, {
             currencyId: item.id,
           });
         }}
