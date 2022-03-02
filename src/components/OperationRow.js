@@ -291,4 +291,4 @@ const styles = StyleSheet.create({
 
 const operationRowNftNameStyles = [styles.bodyRight, { maxWidth: "50%" }];
 
-export default memo(OperationRow);
+export default memo<Props>(OperationRow);

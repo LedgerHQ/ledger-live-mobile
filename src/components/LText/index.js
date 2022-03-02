@@ -90,4 +90,8 @@ function LText({
 }
 
 
-export default memo(LText);
+export default memo<{
+  ...Opts,
+  style?: *,
+  ...
+}>(LText);
