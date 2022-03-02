@@ -138,7 +138,7 @@ function OnboardingStepWelcome({ navigation }: *) {
         <TouchableOpacity
           style={[styles.languageButton, { borderColor: colors.fog }]}
           onPress={onLanguageSelect}
-          accessibilityId="get-started-button"
+          accessibilityId="onboarding-langauge-selection-button"
         >
           <LText semiBold style={styles.languageLabel}>
             {i18n.language}
@@ -195,6 +195,7 @@ function OnboardingStepWelcome({ navigation }: *) {
           event="Onboarding - Start"
           onPress={next}
           title={t("onboarding.stepWelcome.start")}
+          accessibilityId="get-started-button"
         />
         <View style={commonStyles.footer}>
           <LText style={styles.subTitle} color="grey">
