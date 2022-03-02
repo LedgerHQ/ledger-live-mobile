@@ -8,17 +8,19 @@ import NftCard from "../../../components/Nft/NftCard";
 import Skeleton from "../../../components/Skeleton";
 import LText from "../../../components/LText";
 
-type Props = {
-  collectionWithNfts: CollectionWithNFT,
-  contentContainerStyle?: Object,
-};
 
-const NftCollectionWithName = ({
+const NftCollectionWithNameList = ({
   collectionWithNfts,
   contentContainerStyle,
-}: Props) => {
+  status,
+  metadata
+}: {
+  collectionWithNfts: CollectionWithNFT,
+  contentContainerStyle?: Object,
+  status: "queued" | "loading" | "loaded" | "error" | "nodata",
+  metadata?: Object
+}) => {
   const { contract, nfts } = collectionWithNfts;
-  const { status, metadata } = useNftMetadata(contract, nfts?.[0]?.tokenId);
 
   const renderItem = useCallback(
     ({ item, index }) => (
@@ -59,6 +61,31 @@ const NftCollectionWithName = ({
     </SafeAreaView>
   );
 };
+
+const NftCollectionWithNameMemo = memo(NftCollectionWithNameList);
+// this technique of splitting the usage of context and memoing the presentational component is used to prevent
+// the rerender of all Nft Collections whenever the NFT cache changes (whenever a new NFT is loaded)
+type Props = {
+  collectionWithNfts: CollectionWithNFT,
+  contentContainerStyle?: Object,
+};
+
+const NftCollectionWithName = ({
+  collectionWithNfts,
+  contentContainerStyle,
+}: Props) => {
+  const { contract, nfts } = collectionWithNfts;
+  const { status, metadata } = useNftMetadata(contract, nfts?.[0]?.tokenId);
+
+  return (
+    <NftCollectionWithNameMemo
+      collectionWithNfts={collectionWithNfts}
+      contentContainerStyle={contentContainerStyle}
+      status={status}
+      metadata= {metadata}
+    />
+  )
+}
 
 
 const nftKeyExtractor = (nft: NFT) => nft.id;
