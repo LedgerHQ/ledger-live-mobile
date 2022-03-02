@@ -24,7 +24,9 @@ export default function PlatformCompleteExchange({
   route: {
     params: { request, onResult, device },
   },
+  navigation,
 }: {
+  navigation: *,
   route: {
     params: {
       request: {
@@ -79,6 +81,7 @@ export default function PlatformCompleteExchange({
           key="completeExchange"
           device={device}
           action={exchangeAction}
+          onClose={() => navigation.pop()}
           onResult={({ completeExchangeResult, completeExchangeError }) => {
             if (completeExchangeError) {
               setError(completeExchangeError);
@@ -93,6 +96,7 @@ export default function PlatformCompleteExchange({
           key="sign"
           device={device}
           action={sendAction}
+          onClose={() => navigation.pop()}
           onResult={({ signedOperation, transactionSignError }) => {
             if (transactionSignError) {
               setError(transactionSignError);

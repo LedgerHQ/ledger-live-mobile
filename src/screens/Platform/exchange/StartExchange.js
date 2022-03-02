@@ -16,8 +16,10 @@ type Result = {
 };
 
 export default function PlatformStartExchange({
+  navigation,
   route,
 }: {
+  navigation: *,
   route: {
     params: {
       request: { exchangeType: number },
@@ -33,6 +35,7 @@ export default function PlatformStartExchange({
       <DeviceActionModal
         device={device}
         action={action}
+        onClose={() => navigation.pop()}
         onResult={result => {
           route.params.onResult({ ...result, device });
         }}

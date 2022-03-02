@@ -455,9 +455,11 @@ export function renderExchange({
 }) {
   switch (exchangeType) {
     case 0x00:
+      return <div>{"Confirm swap on your device"}</div>;
     case 0x01:
+    case 0x02:
       return renderSecureTransferDeviceConfirmation({
-        exchangeTypeName: exchangeType === 0x00 ? "confirmSell" : "confirmFund",
+        exchangeTypeName: exchangeType === 0x00 ? "confirmFund" : "confirmSell",
         t,
         device,
         theme,
@@ -477,15 +479,15 @@ export function renderSecureTransferDeviceConfirmation({
 }) {
   return (
     <View style={styles.wrapper}>
+      <View style={[styles.animationContainer]}>
+        <Animation source={getDeviceAnimation({ device, key: "validate" })} />
+      </View>
+      <LText style={[styles.text, styles.title, { marginBottom: 32 }]} semiBold>
+        {t(`DeviceAction.${exchangeTypeName}.title`)}
+      </LText>
       <Alert type="primary" learnMoreUrl={urls.swap.learnMore}>
         {t(`DeviceAction.${exchangeTypeName}.alert`)}
       </Alert>
-      <View style={styles.animationContainer}>
-        <Animation source={getDeviceAnimation({ device, key: "validate" })} />
-      </View>
-      <LText style={[styles.text, styles.title]} semiBold>
-        {t(`DeviceAction.${exchangeTypeName}.title`)}
-      </LText>
     </View>
   );
 }
