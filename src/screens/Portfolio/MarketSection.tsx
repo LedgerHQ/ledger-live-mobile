@@ -1,16 +1,20 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Flex } from "@ledgerhq/native-ui";
 import { FlatList, TouchableOpacity } from "react-native";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
 import { useMarketData } from "@ledgerhq/live-common/lib/market/MarketDataProvider";
+import { CurrencyData } from "@ledgerhq/live-common/lib/market/types";
 import { NavigatorName, ScreenName } from "../../const";
 import { useLocale } from "../../context/Locale";
 import { useProviders } from "../Swap/SwapEntry";
 import MarketRowItem from "../Market/MarketRowItem";
 import Placeholder from "../../components/Placeholder";
 
-function getTopGainers(coins, n) {
+function getTopGainers(
+  coins: CurrencyData[] | undefined = [],
+  n: number,
+): CurrencyData[] {
   return [...coins]
     .sort((a, b) => b.priceChangePercentage - a.priceChangePercentage)
     .slice(0, n);
@@ -20,6 +24,7 @@ export default function MarketSection() {
   const { t } = useTranslation();
   const navigation = useNavigation();
   const { locale } = useLocale();
+  const [topGainers, setTopGainers] = useState<CurrencyData[] | undefined>();
 
   useProviders();
 
@@ -30,28 +35,18 @@ export default function MarketSection() {
     selectCurrency,
   } = useMarketData();
 
-  // console.log(marketData?.slice(0, 1));
-
-  // const resetSearch = useCallback(
-  //   () =>
-  //     refresh({
-  //       search: "",
-  //       starred: [],
-  //       liveCompatible: false,
-  //       orderBy: "gecko",
-  //       order: "desc",
-  //       range: "24h",
-  //     }),
-  //   [refresh],
-  // );
-  //
-  // useFocusEffect(resetSearch);
+  useEffect(() => {
+    if (!topGainers && marketData?.length) {
+      setTopGainers(getTopGainers(marketData, 3));
+      refresh({ limit: 20 });
+    }
+  }, [marketData]);
 
   const renderItems = useCallback(
     ({ item, index }) => (
       <TouchableOpacity
         onPress={() => {
-          //selectCurrency(item.id);
+          selectCurrency(item.id);
           navigation.navigate(NavigatorName.Market, {
             screen: ScreenName.MarketDetail,
             params: {
@@ -96,7 +91,7 @@ export default function MarketSection() {
 
   return (
     <FlatList
-      data={marketData}
+      data={topGainers}
       renderItem={renderItems}
       scrollEventThrottle={50}
       initialNumToRender={3}
