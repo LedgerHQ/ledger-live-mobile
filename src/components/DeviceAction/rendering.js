@@ -459,7 +459,7 @@ export function renderExchange({
     case 0x01:
     case 0x02:
       return renderSecureTransferDeviceConfirmation({
-        exchangeTypeName: exchangeType === 0x00 ? "confirmFund" : "confirmSell",
+        exchangeTypeName: exchangeType === 0x01 ? "confirmSell" : "confirmFund",
         t,
         device,
         theme,
