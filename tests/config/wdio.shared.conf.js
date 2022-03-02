@@ -5,10 +5,8 @@ exports.config = {
   // ====================
   runner: "local",
   framework: "mocha",
-  jasmineNodeOpts: {
-    // Updated the timeout to 30 seconds due to possible longer appium calls
-    // When using XPATH
-    defaultTimeoutInterval: 90000,
+  mochaOpts: {
+    timeout: 100000000,
   },
   sync: true,
   logLevel: "info",
