@@ -54,6 +54,7 @@ setSupportedCurrencies([
   "ethereum_ropsten",
   "cosmos_testnet",
   "elrond",
+  "filecoin",
 ]);
 
 if (Config.VERBOSE) {
