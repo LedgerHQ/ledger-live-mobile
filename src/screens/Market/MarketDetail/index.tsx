@@ -113,7 +113,7 @@ export default function MarketDetail({
   useEffect(() => {
     const resetState = () => {
       selectCurrency(undefined);
-      refresh(resetSearchOnUmount ? { search: "" } : {});
+      refresh(resetSearchOnUmount ? { search: "", ids: [] } : {});
     };
     const sub = navigation.addListener("blur", resetState);
     return () => {

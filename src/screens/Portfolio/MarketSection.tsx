@@ -47,7 +47,7 @@ export default function MarketSection() {
       <TouchableOpacity
         onPress={() => {
           // @WARN: this is a hack to avoid issues in the market screen when the target data is not yet loaded
-          refresh({ search: item.ticker });
+          refresh({ ids: [item.id] });
           selectCurrency(item.id);
           // @ts-ignore issue in react navigation types
           navigation.navigate(NavigatorName.Market, {
