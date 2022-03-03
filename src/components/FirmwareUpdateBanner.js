@@ -7,6 +7,7 @@ import {
   TouchableHighlight,
   StyleSheet,
   Platform,
+  TouchableOpacity,
 } from "react-native";
 import manager from "@ledgerhq/live-common/lib/manager";
 import * as Animatable from "react-native-animatable";
@@ -26,6 +27,7 @@ import { hasConnectedDeviceSelector } from "../reducers/appstate";
 import IconExclamation from "../icons/ExclamationCircleFull";
 import { BaseButton as Button } from "./Button";
 import IconDownload from "../icons/Download";
+import IconClose from "../icons/Close";
 import BottomModal from "./BottomModal";
 import IconNano from "../icons/NanoS";
 import { rgba } from "../colors";
@@ -96,6 +98,14 @@ const FirmwareUpdateBanner = () => {
             >
               {t("FirmwareUpdate.newVersion", { version })}
             </LText>
+            <View style={styles.banner.closeContainer}>
+              <TouchableOpacity
+                onPress={onDismissBanner}
+                style={styles.banner.closeIcon}
+              >
+                <IconClose color={colors.white} size={16} />
+              </TouchableOpacity>
+            </View>
           </>
         </TouchableHighlight>
       </Animatable.View>
