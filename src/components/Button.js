@@ -28,8 +28,6 @@ const BUTTON_HEIGHT = 48;
 const ANIM_OFFSET = 20;
 const ANIM_DURATION = 300;
 
-type LTextProps = React$ElementProps<typeof LText>;
-
 type ButtonType =
   | "primary"
   | "lightPrimary"
