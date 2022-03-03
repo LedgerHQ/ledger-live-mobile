@@ -4,7 +4,6 @@ import React, { useState, useEffect, useContext } from "react";
 
 import {
   View,
-  TouchableOpacity,
   TouchableHighlight,
   StyleSheet,
   Platform,
@@ -28,7 +27,6 @@ import IconExclamation from "../icons/ExclamationCircleFull";
 import { BaseButton as Button } from "./Button";
 import IconDownload from "../icons/Download";
 import BottomModal from "./BottomModal";
-import IconClose from "../icons/Close";
 import IconNano from "../icons/NanoS";
 import { rgba } from "../colors";
 import LText from "./LText";
@@ -98,14 +96,6 @@ const FirmwareUpdateBanner = () => {
             >
               {t("FirmwareUpdate.newVersion", { version })}
             </LText>
-            <View style={styles.banner.closeContainer}>
-              <TouchableOpacity
-                onPress={onDismissBanner}
-                style={styles.banner.closeIcon}
-              >
-                <IconClose color={colors.white} size={16} />
-              </TouchableOpacity>
-            </View>
           </>
         </TouchableHighlight>
       </Animatable.View>
@@ -120,13 +110,6 @@ const FirmwareUpdateBanner = () => {
         isOpened={showDrawer}
         onClose={onCloseDrawer}
       >
-        <TouchableOpacity
-          style={styles.drawer.closeIcon}
-          onPress={onCloseDrawer}
-        >
-          <IconClose size={18} />
-        </TouchableOpacity>
-
         <View
           style={[
             styles.drawer.roundIconContainer,
