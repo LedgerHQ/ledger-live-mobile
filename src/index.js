@@ -81,7 +81,11 @@ import { lightTheme, darkTheme } from "./colors";
 import NotificationsProvider from "./screens/NotificationCenter/NotificationsProvider";
 import SnackbarContainer from "./screens/NotificationCenter/Snackbar/SnackbarContainer";
 import NavBarColorHandler from "./components/NavBarColorHandler";
-import { setOsTheme, setTheme } from "./actions/settings";
+import { setOsTheme } from "./actions/settings";
+// $FlowFixMe
+import { FirebaseRemoteConfigProvider } from "./components/FirebaseRemoteConfig";
+// $FlowFixMe
+import { FirebaseFeatureFlagsProvider } from "./components/FirebaseFeatureFlags";
 // $FlowFixMe
 import StyleProvider from "./StyleProvider";
 // $FlowFixMe
@@ -379,13 +383,9 @@ const DeepLinkingNavigator = ({ children }: { children: React$Node }) => {
   const compareOsTheme = useCallback(() => {
     const currentOsTheme = Appearance.getColorScheme();
     if (currentOsTheme && osTheme !== currentOsTheme) {
-      const isDark = themes[theme].dark;
-      const newTheme =
-        currentOsTheme === "dark" ? (isDark ? theme : "dark") : "light";
-      dispatch(setTheme(newTheme));
       dispatch(setOsTheme(currentOsTheme));
     }
-  }, [dispatch, osTheme, theme]);
+  }, [dispatch, osTheme]);
 
   useEffect(() => {
     compareOsTheme();
@@ -395,14 +395,20 @@ const DeepLinkingNavigator = ({ children }: { children: React$Node }) => {
     return () => AppState.removeEventListener("change", osThemeChangeHandler);
   }, [compareOsTheme]);
 
+  const resolvedTheme = useMemo(
+    () =>
+      ((theme === "system" && osTheme) || theme) === "light" ? "light" : "dark",
+    [theme, osTheme],
+  );
+
   if (!isReady) {
     return null;
   }
 
   return (
-    <StyleProvider selectedPalette={theme === "light" ? "light" : "dark"}>
+    <StyleProvider selectedPalette={resolvedTheme}>
       <NavigationContainer
-        theme={themes[theme]}
+        theme={themes[resolvedTheme]}
         linking={linking}
         ref={navigationRef}
         onReady={() => {
@@ -455,42 +461,46 @@ export default class Root extends Component<
                   <PlatformAppProvider
                     platformAppsServerURL={getProvider("production").url}
                   >
-                    <DeepLinkingNavigator>
-                      <SafeAreaProvider>
-                        <StyledStatusBar />
-                        <NavBarColorHandler />
-                        <AuthPass>
-                          <I18nextProvider i18n={i18n}>
-                            <LocaleProvider>
-                              <BridgeSyncProvider>
-                                <CounterValuesProvider
-                                  initialState={initialCountervalues}
-                                >
-                                  <ButtonUseTouchable.Provider value={true}>
-                                    <OnboardingContextProvider>
-                                      <ToastProvider>
-                                        <NotificationsProvider>
-                                          <SnackbarContainer />
-                                          <NftMetadataProvider>
-                                            <MarketDataProvider>
-                                              <App
-                                                importDataString={
-                                                  importDataString
-                                                }
-                                              />
-                                            </MarketDataProvider>
-                                          </NftMetadataProvider>
-                                        </NotificationsProvider>
-                                      </ToastProvider>
-                                    </OnboardingContextProvider>
-                                  </ButtonUseTouchable.Provider>
-                                </CounterValuesProvider>
-                              </BridgeSyncProvider>
-                            </LocaleProvider>
-                          </I18nextProvider>
-                        </AuthPass>
-                      </SafeAreaProvider>
-                    </DeepLinkingNavigator>
+                    <FirebaseRemoteConfigProvider>
+                      <FirebaseFeatureFlagsProvider>
+                        <DeepLinkingNavigator>
+                          <SafeAreaProvider>
+                            <StyledStatusBar />
+                            <NavBarColorHandler />
+                            <AuthPass>
+                              <I18nextProvider i18n={i18n}>
+                                <LocaleProvider>
+                                  <BridgeSyncProvider>
+                                    <CounterValuesProvider
+                                      initialState={initialCountervalues}
+                                    >
+                                      <ButtonUseTouchable.Provider value={true}>
+                                        <OnboardingContextProvider>
+                                          <ToastProvider>
+                                            <NotificationsProvider>
+                                              <SnackbarContainer />
+                                              <NftMetadataProvider>
+                                                <MarketDataProvider>
+                                                  <App
+                                                    importDataString={
+                                                      importDataString
+                                                    }
+                                                  />
+                                                </MarketDataProvider>
+                                              </NftMetadataProvider>
+                                            </NotificationsProvider>
+                                          </ToastProvider>
+                                        </OnboardingContextProvider>
+                                      </ButtonUseTouchable.Provider>
+                                    </CounterValuesProvider>
+                                  </BridgeSyncProvider>
+                                </LocaleProvider>
+                              </I18nextProvider>
+                            </AuthPass>
+                          </SafeAreaProvider>
+                        </DeepLinkingNavigator>
+                      </FirebaseFeatureFlagsProvider>
+                    </FirebaseRemoteConfigProvider>
                   </PlatformAppProvider>
                 </WalletConnectProvider>
               </>
