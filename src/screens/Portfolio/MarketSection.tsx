@@ -54,6 +54,7 @@ export default function MarketSection() {
             screen: ScreenName.MarketDetail,
             params: {
               currencyId: item.id,
+              resetSearchOnUmount: true,
             },
           });
         }}

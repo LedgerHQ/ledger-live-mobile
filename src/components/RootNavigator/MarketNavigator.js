@@ -22,7 +22,11 @@ export default function MarketNavigator() {
     [colors],
   );
   return (
-    <Stack.Navigator screenOptions={stackNavigationConfig}>
+    <Stack.Navigator
+      screenOptions={stackNavigationConfig}
+      initialRouteName={ScreenName.MarketList}
+      backBehavior={"initialRoute"}
+    >
       <Stack.Screen
         name={ScreenName.MarketList}
         component={MarketList}
@@ -35,6 +39,7 @@ export default function MarketNavigator() {
         component={MarketCurrencySelect}
         options={{
           headerTitle: t("market.filters.currency"),
+          unmountOnBlur: true,
         }}
       />
       <Stack.Screen
@@ -42,6 +47,7 @@ export default function MarketNavigator() {
         component={MarketDetail}
         options={{
           headerShown: false,
+          unmountOnBlur: true,
         }}
       />
     </Stack.Navigator>

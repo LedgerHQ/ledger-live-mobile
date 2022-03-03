@@ -238,8 +238,8 @@ export default function Market({ navigation }: { navigation: any }) {
   } = useMarketData();
 
   const { limit, search } = requestParams;
-  const [isLoading, setIsLoading] = useState(false);
-  const [isSearchOpen, setSearchOpen] = useState(!!search);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isSearchOpen, setSearchOpen] = useState(false);
 
   const resetSearch = useCallback(
     () => refresh({ search: "", starred: [], liveCompatible: false }),
