@@ -288,42 +288,43 @@ const AppsScreen = ({
             setAppUninstallWithDependencies={setAppUninstallWithDependencies}
             setStorageWarning={setStorageWarning}
             optimisticState={optimisticState}
+            removeClippedSubviews={false}
           />
         );
       case managerTabs.INSTALLED_APPS:
         console.log('INSTALLED')
         return (
-          <>
-            <Flex style={{ marginBottom: 24 }}>
-              {update && update.length > 0 && !state.updateAllQueue.length && (
-                <Flex style={[styles.appsInstalledAction]} borderColor="neutral.c40">
-                  <Text variant="body" fontWeight="semiBold" color="neutral.c100">
-                    <Trans
-                      count={update.length}
-                      values={{ number: update.length }}
-                      i18nKey="v3.manager.storage.appsToUpdate"
-                    />
-                  </Text>
-                  <UpdateAllButton
-                    state={state}
-                    onUpdateAll={onUpdateAll}
-                    apps={update}
-                  />
-                </Flex>
-              )}
-              {device && device.length > 0 && !state.updateAllQueue.length && (
-                <Flex style={[styles.appsInstalledAction]} borderColor="neutral.c40">
-                  <Text variant="body" fontWeight="semiBold" color="neutral.c100">
-                    <Trans
-                      count={device.length}
-                      values={{ number: device.length }}
-                      i18nKey="v3.manager.storage.appsInstalled"
-                    />
-                  </Text>
-                  <UninstallAllButton onUninstallAll={onUninstallAll} />
-                </Flex>
-              )}
-            </Flex>
+          // <>
+          //   <Flex style={{ marginBottom: 24 }}>
+          //     {update && update.length > 0 && !state.updateAllQueue.length && (
+          //       <Flex style={[styles.appsInstalledAction]} borderColor="neutral.c40">
+          //         <Text variant="body" fontWeight="semiBold" color="neutral.c100">
+          //           <Trans
+          //             count={update.length}
+          //             values={{ number: update.length }}
+          //             i18nKey="v3.manager.storage.appsToUpdate"
+          //           />
+          //         </Text>
+          //         <UpdateAllButton
+          //           state={state}
+          //           onUpdateAll={onUpdateAll}
+          //           apps={update}
+          //         />
+          //       </Flex>
+          //     )}
+          //     {device && device.length > 0 && !state.updateAllQueue.length && (
+          //       <Flex style={[styles.appsInstalledAction]} borderColor="neutral.c40">
+          //         <Text variant="body" fontWeight="semiBold" color="neutral.c100">
+          //           <Trans
+          //             count={device.length}
+          //             values={{ number: device.length }}
+          //             i18nKey="v3.manager.storage.appsInstalled"
+          //           />
+          //         </Text>
+          //         <UninstallAllButton onUninstallAll={onUninstallAll} />
+          //       </Flex>
+          //     )}
+          //   </Flex>
             <AppsList
               isInstalledView
               apps={device}
@@ -335,8 +336,9 @@ const AppsScreen = ({
               setAppUninstallWithDependencies={setAppUninstallWithDependencies}
               setStorageWarning={setStorageWarning}
               optimisticState={optimisticState}
+              removeClippedSubviews={false}
             />
-          </>
+          // </>
         );
       default:
         return null;
