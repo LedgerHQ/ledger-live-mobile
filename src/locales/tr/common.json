@@ -519,7 +519,7 @@
     },
     "WrongDeviceForAccount": {
       "title": "Bir hata oluştu",
-      "description": "Lütfen donanım cüzdanınızın, seçilen hesapla ilişkili kurtarma ifadesi veya passphrase ile kurulmuş olduğunu doğrulayın."
+      "description": "Lütfen cüzdanınızın seçilen hesapla bağlantılı kurtarma ifadesi veya passphrase ile kurulmuş olduğundan emin olun."
     },
     "UnexpectedBootloader": {
       "title": "Üzgünüz, cihazınız Bootloader modunda olmamalıdır",
