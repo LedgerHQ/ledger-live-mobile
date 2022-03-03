@@ -7,6 +7,7 @@ import {
 } from "@react-navigation/stack";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "@react-navigation/native";
+import { Flex, Icons } from "@ledgerhq/native-ui";
 import { ScreenName, NavigatorName } from "../../const";
 import * as families from "../../families";
 import OperationDetails, {
@@ -109,6 +110,11 @@ export default function BaseNavigator() {
         name={ScreenName.PlatformApp}
         component={PlatformApp}
         options={({ route }) => ({
+          headerBackImage: () => (
+            <Flex pl="16px">
+              <Icons.CloseMedium color="neutral.c100" size="20px" />
+            </Flex>
+          ),
           headerStyle: styles.headerNoShadow,
           title: route.params.name,
         })}
