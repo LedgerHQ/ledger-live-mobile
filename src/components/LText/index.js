@@ -31,7 +31,6 @@ export type Res = {|
     | "900",
 |};
 
-
 const getColor = (clrs, key, defaultValue) => {
   if (!key || !(key in clrs)) {
     return defaultValue;
@@ -63,32 +62,30 @@ function LText({
   style?: *,
   ...
 }) {
-  const { colors } = useTheme();  
+  const { colors } = useTheme();
 
-  const memoizedStyle = useMemo(() => ([
-    {
-      color: getColor(colors, color, colors.darkBlue),
-      backgroundColor: getColor(colors, bg, "transparent"),
-    },
-    style,
-    getFontStyle({
-      bold,
-      semiBold,
-      secondary,
-      monospace,
-    }),
-  ]), [colors, style, bold, semiBold, secondary, monospace, bg])
+  const memoizedStyle = useMemo(
+    () => [
+      {
+        color: getColor(colors, color, colors.darkBlue),
+        backgroundColor: getColor(colors, bg, "transparent"),
+      },
+      style,
+      getFontStyle({
+        bold,
+        semiBold,
+        secondary,
+        monospace,
+      }),
+    ],
+    [colors, style, bold, semiBold, secondary, monospace, bg],
+  );
 
   return (
     // $FlowFixMe
-    <Text
-      {...newProps}
-      allowFontScaling={false}
-      style={memoizedStyle}
-    />
+    <Text {...newProps} allowFontScaling={false} style={memoizedStyle} />
   );
 }
-
 
 export default memo<{
   ...Opts,

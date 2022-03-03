@@ -42,22 +42,18 @@ const Skeleton = ({
     }
   }, []);
 
-  const animatedStyle = useMemo(() => ([
-    style,
-    {
-      backgroundColor: colors.skeletonBg,
-      opacity: opacityAnim,
-    },
-  ]), [style, colors.skeletonBg, opacityAnim])
-
-
-  return loading ? (
-    <Animated.View
-      style={animatedStyle}
-    />
-  ) : (
-    children
+  const animatedStyle = useMemo(
+    () => [
+      style,
+      {
+        backgroundColor: colors.skeletonBg,
+        opacity: opacityAnim,
+      },
+    ],
+    [style, colors.skeletonBg, opacityAnim],
   );
+
+  return loading ? <Animated.View style={animatedStyle} /> : children;
 };
 
 export default memo<Props>(Skeleton);

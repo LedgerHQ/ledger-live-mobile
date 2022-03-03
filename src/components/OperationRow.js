@@ -219,7 +219,7 @@ const OperationRow = ({
       </TouchableOpacity>
     </View>
   );
-}
+};
 
 const OpCounterValue = ({ children }: { children: React$Node }) => (
   <LText semiBold numberOfLines={1} style={styles.bottomRow}>

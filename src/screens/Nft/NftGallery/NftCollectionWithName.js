@@ -8,17 +8,16 @@ import NftCard from "../../../components/Nft/NftCard";
 import Skeleton from "../../../components/Skeleton";
 import LText from "../../../components/LText";
 
-
 const NftCollectionWithNameList = ({
   collectionWithNfts,
   contentContainerStyle,
   status,
-  metadata
+  metadata,
 }: {
   collectionWithNfts: CollectionWithNFT,
   contentContainerStyle?: Object,
   status: "queued" | "loading" | "loaded" | "error" | "nodata",
-  metadata?: Object
+  metadata?: Object,
 }) => {
   const { contract, nfts } = collectionWithNfts;
 
@@ -82,11 +81,10 @@ const NftCollectionWithName = ({
       collectionWithNfts={collectionWithNfts}
       contentContainerStyle={contentContainerStyle}
       status={status}
-      metadata= {metadata}
+      metadata={metadata}
     />
-  )
-}
-
+  );
+};
 
 const nftKeyExtractor = (nft: NFT) => nft.id;
 
