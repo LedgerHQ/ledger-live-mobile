@@ -6609,6 +6609,7 @@
       "connect": "Select your device",
       "appsCatalog": "App catalog",
       "installedApps": "Apps installed",
+      "myApps": "My apps",
       "token": {
         "title": "{{appName}} tokens",
         "noAppNeeded": "{{tokenName}} is a token using the {{appName}} app. There is no app to install.",

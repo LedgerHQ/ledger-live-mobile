@@ -71,7 +71,6 @@ const AppsList = ({
     ],
   );
 
-  console.log("---->", isInstalledView ? "Installed" : "Catalog", apps.length, viewHeight)
   if (!apps || apps.length <= 0)
     return (
       <NoResultsContainer>

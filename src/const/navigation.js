@@ -85,7 +85,7 @@ export const ScreenName = {
   GeneralSettings: "GeneralSettings",
   HelpSettings: "HelpSettings",
   Manager: "Manager",
-  ManagerAppsList: "ManagerAppsList",
+  ManagerMyApps: "ManagerMyApps",
   ManagerDevice: "ManagerDevice",
   ManagerMain: "ManagerMain",
   MigrateAccountsConnectDevice: "MigrateAccountsConnectDevice",
