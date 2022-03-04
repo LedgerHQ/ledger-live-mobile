@@ -121,7 +121,7 @@ function VoteFlow() {
         name={ScreenName.VoteValidationSuccess}
         component={VoteValidationSuccess}
         options={{
-          headerTitle: null,
+          headerTitle: "",
           gestureEnabled: false,
           headerLeft: null,
           headerRight: null,

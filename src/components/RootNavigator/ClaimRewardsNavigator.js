@@ -57,7 +57,7 @@ export default function ClaimRewardsNavigator() {
         name={ScreenName.ClaimRewardsValidationSuccess}
         component={ValidationSuccess}
         options={{
-          headerTitle: null,
+          headerTitle: "",
           gestureEnabled: false,
           headerLeft: null,
           headerRight: null,
@@ -66,7 +66,7 @@ export default function ClaimRewardsNavigator() {
       <Stack.Screen
         name={ScreenName.ClaimRewardsValidationError}
         component={ValidationError}
-        options={{ headerTitle: null }}
+        options={{ headerTitle: "" }}
       />
     </Stack.Navigator>
   );

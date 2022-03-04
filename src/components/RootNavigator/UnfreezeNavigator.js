@@ -73,7 +73,7 @@ export default function UnfreezeNavigator() {
         name={ScreenName.UnfreezeValidationSuccess}
         component={ValidationSuccess}
         options={{
-          headerTitle: null,
+          headerTitle: "",
           gestureEnabled: false,
           headerLeft: null,
           headerRight: null,

@@ -83,7 +83,7 @@ export default function FreezeNavigator() {
         name={ScreenName.FreezeValidationSuccess}
         component={ValidationSuccess}
         options={{
-          headerTitle: null,
+          headerTitle: "",
           gestureEnabled: false,
           headerLeft: null,
           headerRight: null,
