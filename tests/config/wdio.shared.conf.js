@@ -12,8 +12,8 @@ exports.config = {
   logLevel: "info",
   deprecationWarnings: true,
   bail: 0,
-  waitforTimeout: 10000,
-  connectionRetryTimeout: 90000,
+  waitforTimeout: 10000000,
+  connectionRetryTimeout: 90000000,
   connectionRetryCount: 3,
   reporters: ["spec"],
 

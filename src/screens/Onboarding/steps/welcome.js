@@ -195,7 +195,7 @@ function OnboardingStepWelcome({ navigation }: *) {
           event="Onboarding - Start"
           onPress={next}
           title={t("onboarding.stepWelcome.start")}
-          accessible={false}
+          buttonAccessibilityId="get-started-button"
         />
         <View style={commonStyles.footer}>
           <LText style={styles.subTitle} color="grey">
@@ -206,7 +206,6 @@ function OnboardingStepWelcome({ navigation }: *) {
             onPress={buy}
             style={styles.buyTouch}
             hitSlop={hitSlop}
-            touchableAccessibilityId="get-started-button"
           >
             <LText semiBold style={[styles.subTitle, styles.buy]} color="live">
               {t("onboarding.stepWelcome.buy", deviceNames.nanoX)}

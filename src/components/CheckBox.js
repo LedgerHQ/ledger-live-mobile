@@ -12,6 +12,7 @@ type Props = {
   disabled?: boolean,
   iconCheckSize?: number,
   style?: *,
+  checkBoxAccessibilityLabel?: string,
 };
 
 const checkBoxHitSlop = {
@@ -27,6 +28,7 @@ function CheckBox({
   onChange,
   iconCheckSize = 16,
   style,
+  checkBoxAccessibilityLabel,
 }: Props) {
   const { colors } = useTheme();
   const onPress = useCallback(() => {
@@ -60,13 +62,18 @@ function CheckBox({
         {...commonProps}
         onPress={onPress}
         hitSlop={checkBoxHitSlop}
+        accessibilityLabel={checkBoxAccessibilityLabel}
       >
         {isChecked ? body : null}
       </TouchableOpacity>
     );
   }
 
-  return <View {...commonProps}>{body}</View>;
+  return (
+    <View {...commonProps} accessibilityLabel={checkBoxAccessibilityLabel}>
+      {body}
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({

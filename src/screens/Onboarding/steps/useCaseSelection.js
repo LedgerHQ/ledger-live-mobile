@@ -95,6 +95,7 @@ function OnboardingStepUseCaseSelection({ navigation, route }: Props) {
               testID={`${item.event}|${deviceModelId}`}
               onPress={() => next(item)}
               style={[styles.button, { backgroundColor: colors.lightLive }]}
+              buttonAccessibilityId="connect-nano-tile"
             >
               <LText semiBold style={[styles.label]} color="live">
                 <Trans i18nKey={`onboarding.stepUseCase.${item.key}.label`} />

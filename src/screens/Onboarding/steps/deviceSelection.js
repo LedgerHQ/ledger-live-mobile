@@ -50,6 +50,7 @@ function OnboardingStepDeviceSelection({ navigation }: *) {
           event="Onboarding Device - Selection"
           eventProperties={{ deviceId }}
           testID={`Onboarding Device - Selection|${deviceId}`}
+          touchableAccessibilityId={`Onboarding Device - Selection|${deviceId}`}
           style={[styles.deviceButton, { backgroundColor: colors.lightLive }]}
           onPress={() => next(deviceId)}
         >

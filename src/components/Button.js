@@ -63,6 +63,7 @@ export type BaseButtonProps = {
   size?: number,
   testID?: string,
   pending?: boolean,
+  buttonAccessibilityId?: string,
 };
 
 type Props = BaseButtonProps & {
@@ -289,6 +290,7 @@ export function BaseButton({
       {...containerSpecificProps}
       {...otherProps}
       testID={testID}
+      accessibilityLabel={otherProps.buttonAccessibilityId}
     >
       {needsBorder ? <View style={borderStyle} /> : null}
 

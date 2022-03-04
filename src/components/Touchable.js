@@ -82,7 +82,7 @@ export default class Touchable extends Component<
         disabled={disabled}
         hitSlop={defaultHitSlop}
         testID={testID ?? event}
-        accessibilityId={touchableAccessibilityId}
+        accessibilityLabel={touchableAccessibilityId}
         {...rest}
       >
         {children}
