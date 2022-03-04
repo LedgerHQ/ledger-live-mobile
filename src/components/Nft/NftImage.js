@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 
 import FastImage from "react-native-fast-image";
-import { Image, View, StyleSheet, Animated, Platform } from "react-native";
+import { Image, View, StyleSheet, Animated } from "react-native";
 import ImageNotFoundIcon from "../../icons/ImageNotFound";
 import { withTheme } from "../../colors";
 import Skeleton from "../Skeleton";
