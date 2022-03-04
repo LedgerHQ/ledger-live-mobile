@@ -1289,7 +1289,17 @@
     "settings": "Настройки",
     "platform": "Исследуйте",
     "nanoX": "Nano X",
-    "market": "Рынок"
+    "market": "Рынок",
+    "learn": "Learn"
+  },
+  "learn": {
+    "pageTitle": "learn",
+    "noConnection": "No connection",
+    "noConnectionDesc": "It seems you don't have access to the Internet. Please check your connection and try again.",
+    "sectionShows": "Shows",
+    "sectionVideo": "Video",
+    "sectionPodcast": "Podcast",
+    "sectionArticles": "Articles"
   },
   "portfolio": {
     "totalBalance": "Общий баланс",
