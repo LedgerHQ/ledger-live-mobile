@@ -1290,15 +1290,15 @@
     "platform": "Discover",
     "nanoX": "Nano X",
     "market": "Marché",
-    "learn": "Learn"
+    "learn": "Apprendre"
   },
   "learn": {
-    "pageTitle": "learn",
-    "noConnection": "No connection",
-    "noConnectionDesc": "It seems you don't have access to the Internet. Please check your connection and try again.",
-    "sectionShows": "Shows",
-    "sectionVideo": "Video",
-    "sectionPodcast": "Podcast",
+    "pageTitle": "Apprendre",
+    "noConnection": "Pas de connexion",
+    "noConnectionDesc": "Aucune connexion Internet détectée. Veuillez vérifier votre connexion et réessayer.",
+    "sectionShows": "Séries",
+    "sectionVideo": "Vidéos",
+    "sectionPodcast": "Podcasts",
     "sectionArticles": "Articles"
   },
   "portfolio": {
