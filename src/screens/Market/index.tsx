@@ -357,7 +357,7 @@ export default function Market({ navigation }: { navigation: any }) {
               justifyContent="flex-start"
               alignItems="center"
             >
-              <Text variant="h2">{t("market.title")}</Text>
+              <Text variant="h1">{t("market.title")}</Text>
             </Flex>
           }
           TopRightSection={

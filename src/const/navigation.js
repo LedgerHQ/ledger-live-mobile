@@ -304,7 +304,7 @@ export const ScreenName = {
 
   OnboardingFinish: "OnboardingFinish",
 
-  OnboardingModal: "OnboardingModal",
+  OnboardingLanguageModal: "OnboardingLanguageModal",
   OnboardingModalSetupNewDevice: "OnboardingModalSetupNewDevice",
   OnboardingModalSetupSteps: "OnboardingModalSetupSteps",
   OnboardingModalSetupSecureRecovery: "OnboardingModalSetupSecureRecovery",

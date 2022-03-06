@@ -5,10 +5,10 @@ import {
   TransitionPresets,
   StackNavigationOptions,
   StackScreenProps,
+  TransitionSpecs,
 } from "@react-navigation/stack";
 import { useRoute } from "@react-navigation/native";
 import { Flex } from "@ledgerhq/native-ui";
-import { useTheme } from "styled-components";
 import { ScreenName, NavigatorName } from "../../const";
 import PasswordAddFlowNavigator from "./PasswordAddFlowNavigator";
 import OnboardingWelcome from "../../screens/Onboarding/steps/welcome";
@@ -52,6 +52,10 @@ function LanguageModalNavigator(props: StackScreenProps<{}>) {
   const options: Partial<StackNavigationOptions> = {
     header: props => <NavigationHeader {...props} hideBack />,
     headerStyle: { backgroundColor: "transparent" },
+    transitionSpec: {
+      open: TransitionSpecs.TransitionIOSSpec,
+      close: TransitionSpecs.TransitionIOSSpec,
+    },
   };
 
   return (
@@ -286,7 +290,7 @@ const modalOptions: Partial<StackNavigationOptions> = {
   presentation: "transparentModal",
   cardOverlayEnabled: true,
   cardOverlay: () => <NavigationOverlay />,
-  ...TransitionPresets.ModalSlideFromBottomIOS,
+  ...TransitionPresets.ModalPresentationIOS,
 };
 
 export default function OnboardingNavigator() {
@@ -303,7 +307,7 @@ export default function OnboardingNavigator() {
         component={OnboardingWelcome}
       />
       <Stack.Screen
-        name={ScreenName.OnboardingModal}
+        name={ScreenName.OnboardingLanguageModal}
         component={LanguageModalNavigator}
         options={modalOptions}
       />
