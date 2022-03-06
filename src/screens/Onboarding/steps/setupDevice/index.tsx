@@ -1,5 +1,5 @@
 import React, { useCallback } from "react";
-import { StyleSheet, Animated, SafeAreaView } from "react-native";
+import { StyleSheet } from "react-native";
 import { useNavigation, useRoute, RouteProp } from "@react-navigation/native";
 import { RenderTransitionProps } from "@ledgerhq/native-ui/components/Navigation/FlowStepper";
 import {
@@ -10,9 +10,10 @@ import {
   Transitions,
 } from "@ledgerhq/native-ui";
 
+import { SafeAreaView } from "react-native-safe-area-context";
 import { ScreenName } from "../../../../const";
 import { DeviceNames } from "../../types";
-import { PlaceholderIllustrationTiny } from "../PlaceholderIllustration";
+import Illustration from "../../../../images/illustration/Illustration";
 import Scene, {
   Intro,
   Instructions,
@@ -26,6 +27,30 @@ import Scene, {
 
 const transitionDuration = 500;
 
+// @TODO Replace
+const images = {
+  light: {
+    Intro: require("../../../../images/illustration/Light/_052.png"),
+    Instructions: require("../../../../images/illustration/Light/_052.png"),
+    PinCode: require("../../../../images/illustration/Light/_062.png"),
+    PinCodeInstructions: require("../../../../images/illustration/Light/_062.png"),
+    RecoveryPhrase: require("../../../../images/illustration/Light/_061.png"),
+    RecoveryPhraseInstructions: require("../../../../images/illustration/Light/_061.png"),
+    RecoveryPhraseSetup: require("../../../../images/illustration/Light/_057.png"),
+    HideRecoveryPhrase: require("../../../../images/illustration/Light/_057.png"),
+  },
+  dark: {
+    Intro: require("../../../../images/illustration/Dark/_052.png"),
+    Instructions: require("../../../../images/illustration/Dark/_052.png"),
+    PinCode: require("../../../../images/illustration/Dark/_062.png"),
+    PinCodeInstructions: require("../../../../images/illustration/Dark/_062.png"),
+    RecoveryPhrase: require("../../../../images/illustration/Dark/_061.png"),
+    RecoveryPhraseInstructions: require("../../../../images/illustration/Dark/_061.png"),
+    RecoveryPhraseSetup: require("../../../../images/illustration/Dark/_057.png"),
+    HideRecoveryPhrase: require("../../../../images/illustration/Dark/_057.png"),
+  },
+};
+
 type Metadata = {
   id: string;
   illustration: JSX.Element;
@@ -35,22 +60,46 @@ const metadata: Array<Metadata> = [
   {
     id: Intro.id,
     // @TODO: Replace this placeholder with the correct illustration asap
-    illustration: <PlaceholderIllustrationTiny />,
+    illustration: (
+      <Illustration
+        size={150}
+        darkSource={images.dark.Intro}
+        lightSource={images.light.Intro}
+      />
+    ),
     drawer: null,
   },
   {
     id: Instructions.id,
-    illustration: <PlaceholderIllustrationTiny />,
+    illustration: (
+      <Illustration
+        size={150}
+        darkSource={images.dark.Instructions}
+        lightSource={images.light.Instructions}
+      />
+    ),
     drawer: null,
   },
   {
     id: PinCode.id,
-    illustration: <PlaceholderIllustrationTiny />,
+    illustration: (
+      <Illustration
+        size={150}
+        darkSource={images.dark.PinCode}
+        lightSource={images.light.PinCode}
+      />
+    ),
     drawer: null,
   },
   {
     id: PinCodeInstructions.id,
-    illustration: <PlaceholderIllustrationTiny />,
+    illustration: (
+      <Illustration
+        size={150}
+        darkSource={images.dark.PinCodeInstructions}
+        lightSource={images.light.PinCodeInstructions}
+      />
+    ),
     drawer: {
       route: ScreenName.OnboardingModalSetupSteps,
       screen: ScreenName.OnboardingSetupDeviceInformation,
@@ -58,7 +107,13 @@ const metadata: Array<Metadata> = [
   },
   {
     id: RecoveryPhrase.id,
-    illustration: <PlaceholderIllustrationTiny />,
+    illustration: (
+      <Illustration
+        size={150}
+        darkSource={images.dark.RecoveryPhrase}
+        lightSource={images.light.RecoveryPhrase}
+      />
+    ),
     drawer: {
       route: ScreenName.OnboardingModalGeneralInformation,
       screen: ScreenName.OnboardingGeneralInformation,
@@ -66,7 +121,13 @@ const metadata: Array<Metadata> = [
   },
   {
     id: RecoveryPhraseInstructions.id,
-    illustration: <PlaceholderIllustrationTiny />,
+    illustration: (
+      <Illustration
+        size={150}
+        darkSource={images.dark.RecoveryPhraseInstructions}
+        lightSource={images.light.RecoveryPhraseInstructions}
+      />
+    ),
     drawer: {
       route: ScreenName.OnboardingModalGeneralInformation,
       screen: ScreenName.OnboardingGeneralInformation,
@@ -74,7 +135,13 @@ const metadata: Array<Metadata> = [
   },
   {
     id: RecoveryPhraseSetup.id,
-    illustration: <PlaceholderIllustrationTiny />,
+    illustration: (
+      <Illustration
+        size={150}
+        darkSource={images.dark.RecoveryPhraseSetup}
+        lightSource={images.light.RecoveryPhraseSetup}
+      />
+    ),
     drawer: {
       route: ScreenName.OnboardingModalGeneralInformation,
       screen: ScreenName.OnboardingGeneralInformation,
@@ -82,7 +149,13 @@ const metadata: Array<Metadata> = [
   },
   {
     id: HideRecoveryPhrase.id,
-    illustration: <PlaceholderIllustrationTiny />,
+    illustration: (
+      <Illustration
+        size={150}
+        darkSource={images.dark.HideRecoveryPhrase}
+        lightSource={images.light.HideRecoveryPhrase}
+      />
+    ),
     drawer: {
       route: ScreenName.OnboardingModalSetupSecureRecovery,
       screen: ScreenName.OnboardingSetupDeviceRecoveryPhrase,
@@ -115,44 +188,7 @@ const ImageHeader = ({
   activeIndex: number;
   onBack: () => void;
 }) => {
-  const firstRender = React.useRef(true);
-  const [stepData, setStepData] = React.useState(metadata[activeIndex]);
-  const fadeAnim = React.useRef(new Animated.Value(1)).current;
-  const fadeIn = React.useMemo(
-    () =>
-      Animated.timing(fadeAnim, {
-        toValue: 1,
-        duration: transitionDuration,
-        useNativeDriver: true,
-      }),
-    [fadeAnim],
-  );
-  const fadeOut = React.useMemo(
-    () =>
-      Animated.timing(fadeAnim, {
-        toValue: 0,
-        duration: transitionDuration,
-        useNativeDriver: true,
-      }),
-    [fadeAnim],
-  );
-
-  React.useEffect(() => {
-    if (firstRender.current) {
-      firstRender.current = false;
-      return;
-    }
-
-    fadeOut.start(({ finished }) => {
-      if (!finished) return;
-      setStepData(metadata[activeIndex]);
-      fadeIn.start();
-    });
-
-    return () => {
-      fadeAnim.stopAnimation();
-    };
-  }, [fadeAnim, fadeIn, fadeOut, activeIndex]);
+  const stepData = metadata[activeIndex];
 
   return (
     <SafeAreaView
@@ -218,17 +254,22 @@ function OnboardingStepNewDevice() {
   >();
 
   const nextPage = useCallback(() => {
-    // TODO: FIX @react-navigation/native using Typescript
-    // @ts-ignore next-line
-    navigation.navigate(ScreenName.OnboardingQuiz, {
-      ...route.params,
-    });
-  }, [navigation, route.params]);
+    if (index < scenes.length - 1) {
+      setIndex(index + 1);
+    } else {
+      // TODO: FIX @react-navigation/native using Typescript
+      // @ts-ignore next-line
+      navigation.navigate(ScreenName.OnboardingPreQuizModal, {
+        onNext: () =>
+          navigation.navigate(ScreenName.OnboardingQuiz, { ...route.params }),
+      });
+    }
+  }, [index, navigation, route.params]);
 
   const handleBack = React.useCallback(
     () =>
       index === 0 ? navigation.goBack : () => setIndex(index => index - 1),
-    [index],
+    [index, navigation.goBack],
   );
 
   return (
@@ -241,18 +282,8 @@ function OnboardingStepNewDevice() {
         progressBarProps={{ backgroundColor: "neutral.c40" }}
         extraProps={{ onBack: handleBack() }}
       >
-        {scenes.map((Children, index) => (
-          <Scene key={Children.id}>
-            {
-              <Children
-                onNext={
-                  Children.id === "HideRecoveryPhrase"
-                    ? nextPage
-                    : () => setIndex(index + 1)
-                }
-              />
-            }
-          </Scene>
+        {scenes.map(Children => (
+          <Scene key={Children.id}>{<Children onNext={nextPage} />}</Scene>
         ))}
       </FlowStepper>
     </Flex>

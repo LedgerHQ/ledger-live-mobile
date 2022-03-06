@@ -4,13 +4,27 @@ import { useTranslation } from "react-i18next";
 import { useNavigation, useRoute, RouteProp } from "@react-navigation/native";
 import { Icons } from "@ledgerhq/native-ui/assets";
 import { Flex, Text, Carousel } from "@ledgerhq/native-ui";
-
+import Illustration from "../../../images/illustration/Illustration";
 import { TrackScreen } from "../../../analytics";
 import Touchable from "../../../components/Touchable";
 import { ScreenName } from "../../../const";
 import OnboardingView from "../OnboardingView";
-import nanoS from "../assets/nanoS";
-import PlaceholderIllustration from "./PlaceholderIllustration";
+
+// @TODO Replace
+const images = {
+  light: {
+    setupNano: require("../../../images/illustration/Light/_072.png"),
+    pairNew: require("../../../images/illustration/Light/_076.png"),
+    syncCrypto: require("../../../images/illustration/Light/_074.png"),
+    restoreRecoveryPhrase: require("../../../images/illustration/Light/_067.png"),
+  },
+  dark: {
+    setupNano: require("../../../images/illustration/Dark/_072.png"),
+    pairNew: require("../../../images/illustration/Dark/_076.png"),
+    syncCrypto: require("../../../images/illustration/Dark/_074.png"),
+    restoreRecoveryPhrase: require("../../../images/illustration/Dark/_067.png"),
+  },
+};
 
 type CurrentRouteType = RouteProp<
   { params: { deviceModelId: string } },
@@ -55,20 +69,20 @@ const Card = ({ item }: { item: Card }) => {
   );
 
   return (
-    <Flex
-      p={6}
-      justifyContent="flex-end"
-      maxWidth={cardMaxWidth}
-      minHeight={368}
-      border="1px solid"
-      borderColor="palette.neutral.c30"
-      borderRadius="4px"
+    <Touchable
+      event={item.event}
+      eventProperties={{ deviceId: deviceModelId }}
+      testID={`${item.event}|${deviceModelId}`}
+      onPress={() => next(item)}
     >
-      <Touchable
-        event={item.event}
-        eventProperties={{ deviceId: deviceModelId }}
-        testID={`${item.event}|${deviceModelId}`}
-        onPress={() => next(item)}
+      <Flex
+        p={6}
+        justifyContent="flex-start"
+        maxWidth={cardMaxWidth}
+        minHeight={368}
+        border="1px solid"
+        borderColor="palette.neutral.c30"
+        borderRadius="4px"
       >
         <Flex alignItems="center">{item.Illustration}</Flex>
         <Text variant="h4" mt={7}>
@@ -77,11 +91,12 @@ const Card = ({ item }: { item: Card }) => {
         <Text variant="paragraph" mt={2}>
           {t(item.subTitle)}
         </Text>
+        <Flex flex={1} />
         <Flex flexDirection="row" justifyContent="flex-end" mt={10}>
           <Icons.ArrowRightMedium size={16} />
         </Flex>
-      </Touchable>
-    </Flex>
+      </Flex>
+    </Touchable>
   );
 };
 
@@ -92,7 +107,10 @@ const Item = ({ cards }: { cards: Array<Card> }) => {
     <Carousel
       slideIndicatorContainerProps={{ style: { display: "none" } }}
       scrollViewProps={{
-        contentContainerStyle: { width: `${90 * cards.length}%` },
+        contentContainerStyle: {
+          width: `${66 * cards.length}%`,
+          marginBottom: 16,
+        },
         pagingEnabled: false,
       }}
     >
@@ -110,20 +128,26 @@ const OnboardingStepUseCaseSelection = () => {
 
   const useCases = useMemo(
     () =>
-      Platform.OS === "ios" && deviceModelId === nanoS.id
+      Platform.OS === "ios" && deviceModelId !== "nanoX"
         ? [
             {
-              title: "onboarding.stepUseCase.recovery",
+              title: "v3.onboarding.stepUseCase.recovery",
               data: [
                 {
                   cards: [
                     {
                       route: ScreenName.OnboardingImportAccounts,
-                      Illustration: <PlaceholderIllustration />,
+                      Illustration: (
+                        <Illustration
+                          size={150}
+                          darkSource={images.dark.syncCrypto}
+                          lightSource={images.light.syncCrypto}
+                        />
+                      ),
                       title:
-                        "onboarding.stepUseCase.deviceActions.desktopSync.title",
+                        "v3.onboarding.stepUseCase.deviceActions.desktopSync.title",
                       subTitle:
-                        "onboarding.stepUseCase.deviceActions.desktopSync.subTitle",
+                        "v3.onboarding.stepUseCase.deviceActions.desktopSync.subTitle",
                       event: "Onboarding - Setup Import Accounts",
                       showRecoveryWarning: true,
                     },
@@ -134,16 +158,23 @@ const OnboardingStepUseCaseSelection = () => {
           ]
         : [
             {
-              title: t("onboarding.stepUseCase.firstUse"),
+              title: t("v3.onboarding.stepUseCase.firstUse"),
               data: [
                 {
                   cards: [
                     {
                       route: "OnboardingModalSetupNewDevice",
-                      Illustration: <PlaceholderIllustration />,
-                      title: "onboarding.stepUseCase.deviceActions.setup.title",
+                      Illustration: (
+                        <Illustration
+                          size={150}
+                          darkSource={images.dark.setupNano}
+                          lightSource={images.light.setupNano}
+                        />
+                      ),
+                      title:
+                        "v3.onboarding.stepUseCase.deviceActions.setup.title",
                       subTitle:
-                        "onboarding.stepUseCase.deviceActions.setup.subTitle",
+                        "v3.onboarding.stepUseCase.deviceActions.setup.subTitle",
                       event: "Onboarding - Setup new",
                     },
                   ],
@@ -151,36 +182,54 @@ const OnboardingStepUseCaseSelection = () => {
               ],
             },
             {
-              title: "onboarding.stepUseCase.recovery",
+              title: "v3.onboarding.stepUseCase.recovery",
               data: [
                 {
                   cards: [
                     {
                       route: ScreenName.OnboardingPairNew,
-                      Illustration: <PlaceholderIllustration />,
+                      Illustration: (
+                        <Illustration
+                          size={150}
+                          darkSource={images.dark.pairNew}
+                          lightSource={images.light.pairNew}
+                        />
+                      ),
                       title:
-                        "onboarding.stepUseCase.deviceActions.pairing.title",
+                        "v3.onboarding.stepUseCase.deviceActions.pairing.title",
                       subTitle:
-                        "onboarding.stepUseCase.deviceActions.pairing.subTitle",
+                        "v3.onboarding.stepUseCase.deviceActions.pairing.subTitle",
                       event: "Onboarding - Connect",
                       showRecoveryWarning: true,
                     },
                     {
                       route: ScreenName.OnboardingImportAccounts,
-                      Illustration: <PlaceholderIllustration />,
+                      Illustration: (
+                        <Illustration
+                          size={150}
+                          darkSource={images.dark.syncCrypto}
+                          lightSource={images.light.syncCrypto}
+                        />
+                      ),
                       title:
-                        "onboarding.stepUseCase.deviceActions.desktopSync.title",
+                        "v3.onboarding.stepUseCase.deviceActions.desktopSync.title",
                       subTitle:
-                        "onboarding.stepUseCase.deviceActions.desktopSync.subTitle",
+                        "v3.onboarding.stepUseCase.deviceActions.desktopSync.subTitle",
                       event: "Onboarding - Setup Import Accounts",
                     },
                     {
                       route: ScreenName.OnboardingRecoveryPhrase,
-                      Illustration: <PlaceholderIllustration />,
+                      Illustration: (
+                        <Illustration
+                          size={150}
+                          darkSource={images.dark.restoreRecoveryPhrase}
+                          lightSource={images.light.restoreRecoveryPhrase}
+                        />
+                      ),
                       title:
-                        "onboarding.stepUseCase.deviceActions.restore.title",
+                        "v3.onboarding.stepUseCase.deviceActions.restore.title",
                       subTitle:
-                        "onboarding.stepUseCase.deviceActions.restore.subTitle",
+                        "v3.onboarding.stepUseCase.deviceActions.restore.subTitle",
                       event: "Onboarding - Restore",
                     },
                   ],
@@ -188,7 +237,7 @@ const OnboardingStepUseCaseSelection = () => {
               ],
             },
           ],
-    [deviceModelId],
+    [deviceModelId, t],
   );
 
   return (

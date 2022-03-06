@@ -26,7 +26,8 @@ export const urls = {
     ru:
       "https://shop.ledger.com/pages/nasha-politika-konfidentsialnosti?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=privacy",
     // TODO: Add the correct zh link
-    zh: "https://shop.ledger.com/pages/privacy-policy?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=privacy",
+    zh:
+      "https://shop.ledger.com/pages/privacy-policy?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=privacy",
   },
   buyNanoX:
     "https://www.ledger.com/products/ledger-nano-x?utm_source=ledger_live_mobile&utm_medium=self_referral&utm_content=manager_emptystate",
@@ -137,6 +138,9 @@ export const urls = {
     "https://support.ledger.com/hc/en-us/articles/360012960679?utm_source=ledger_live_mobile&utm_medium=self_referral",
   elrond: {
     website: "https://elrond.com",
+  },
+  cryptoOrg: {
+    website: "https://crypto.org",
   },
   solana: {
     supportPage: "https://support.ledger.com",

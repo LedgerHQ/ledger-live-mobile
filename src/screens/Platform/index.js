@@ -1,9 +1,9 @@
 // @flow
 
 import React, { useMemo, useCallback, useState, useEffect } from "react";
-import { StyleSheet, View, Linking } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { Trans } from "react-i18next";
-import { useNavigation, useTheme } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import { usePlatformApp } from "@ledgerhq/live-common/lib/platform/PlatformAppProvider";
 import { filterPlatformApps } from "@ledgerhq/live-common/lib/platform/PlatformAppProvider/helpers";
 import type { AccountLike, Account } from "@ledgerhq/live-common/lib/types";
@@ -12,15 +12,12 @@ import useEnv from "@ledgerhq/live-common/lib/hooks/useEnv";
 
 import { useBanner } from "../../components/banners/hooks";
 import TrackScreen from "../../analytics/TrackScreen";
-import { urls } from "../../config/urls";
 import { ScreenName } from "../../const";
-import IconCode from "../../icons/Code";
 
 import CatalogTwitterBanner from "./CatalogTwitterBanner";
 import DAppDisclaimer from "./DAppDisclaimer";
 import type { Props as DisclaimerProps } from "./DAppDisclaimer";
 import CatalogBanner from "./CatalogBanner";
-import CatalogCTA from "./CatalogCTA";
 import AppCard from "./AppCard";
 import AnimatedHeaderView from "../../components/AnimatedHeader";
 
@@ -36,7 +33,6 @@ const DAPP_DISCLAIMER_ID = "PlatformAppDisclaimer";
 
 const PlatformCatalog = ({ route }: { route: { params: RouteParams } }) => {
   const { platform, ...routeParams } = route.params ?? {};
-  const { colors } = useTheme();
   const navigation = useNavigation();
 
   const { manifests } = usePlatformApp();
@@ -77,6 +73,7 @@ const PlatformCatalog = ({ route }: { route: { params: RouteParams } }) => {
           disableDisclaimer: () => setDisclaimerDisabled(),
           closeDisclaimer: () => setDisclaimerOpened(false),
           icon: manifest.icon,
+          name: manifest.name,
           onContinue: openDApp,
         });
         setDisclaimerOpened(true);
@@ -86,10 +83,6 @@ const PlatformCatalog = ({ route }: { route: { params: RouteParams } }) => {
     },
     [navigation, routeParams, setDisclaimerDisabled, disclaimerDisabled],
   );
-
-  const handleDeveloperCTAPress = useCallback(() => {
-    Linking.openURL(urls.platform.developerPage);
-  }, []);
 
   useEffect(() => {
     // platform can be predefined when coming from a deeplink
@@ -119,6 +112,7 @@ const PlatformCatalog = ({ route }: { route: { params: RouteParams } }) => {
           onContinue={disclaimerOpts.onContinue}
           isOpened={disclaimerOpened}
           icon={disclaimerOpts.icon}
+          name={disclaimerOpts.name}
         />
       )}
 
@@ -131,14 +125,7 @@ const PlatformCatalog = ({ route }: { route: { params: RouteParams } }) => {
           onPress={handlePressCard}
         />
       ))}
-      <View style={[styles.separator, { backgroundColor: colors.fog }]} />
-      <CatalogCTA
-        Icon={IconCode}
-        title={<Trans i18nKey={"platform.catalog.developerCTA.title"} />}
-        onPress={handleDeveloperCTAPress}
-      >
-        <Trans i18nKey={"platform.catalog.developerCTA.description"} />
-      </CatalogCTA>
+      <View style={styles.bottomPadding} />
     </AnimatedHeaderView>
   );
 };
@@ -152,10 +139,8 @@ const styles = StyleSheet.create({
     lineHeight: 40,
     textAlign: "left",
   },
-  separator: {
-    width: "100%",
-    height: 1,
-    marginBottom: 24,
+  bottomPadding: {
+    height: 40,
   },
 });
 

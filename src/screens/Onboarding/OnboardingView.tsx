@@ -1,13 +1,11 @@
 import React from "react";
-import { View, SafeAreaView } from "react-native";
-import {
-  useTheme,
-  useNavigation,
-  StackActions,
-} from "@react-navigation/native";
+import { View } from "react-native";
+import { useNavigation, StackActions } from "@react-navigation/native";
 import { Icons } from "@ledgerhq/native-ui/assets";
 import { Flex, Text } from "@ledgerhq/native-ui";
 import { TouchableOpacity } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { useTheme } from "styled-components/native";
 
 const hitSlop = {
   bottom: 10,
@@ -53,8 +51,10 @@ function OnboardingView({
   };
 
   return (
-    <SafeAreaView style={[{ flex: 1 }, { backgroundColor: colors.background }]}>
-      <Flex flex={1} paddingX={6} bg="palette.background.main">
+    <SafeAreaView
+      style={[{ flex: 1 }, { backgroundColor: colors.palette.background.main }]}
+    >
+      <Flex flex={1} px={6} pt={8} bg="palette.background.main">
         {/* HEADER */}
         <Flex mb={8}>
           <Flex
@@ -92,7 +92,7 @@ function OnboardingView({
                 fontSize={8}
                 mb={3}
                 textAlign={centerTitle ? "center" : null}
-                style={{textTransform: "uppercase"}}
+                style={{ textTransform: "uppercase" }}
               >
                 {title}
               </Text>

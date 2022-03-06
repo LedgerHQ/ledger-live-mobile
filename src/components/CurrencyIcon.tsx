@@ -1,8 +1,11 @@
-import React, { ComponentType, memo } from "react";
+
+import React, { ComponentType, memo, useMemo } from "react";
+import { View } from "react-native";
 import {
   getCryptoCurrencyIcon,
   getTokenCurrencyIcon,
 } from "@ledgerhq/live-common/lib/reactNative";
+
 import {
   CryptoCurrency,
   Currency,

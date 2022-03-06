@@ -115,10 +115,6 @@ class ChooseDevice extends Component<
 
   onSelect = (result: Object) => {
     this.setState({ device: undefined, result });
-  };
-
-  onModalHide = () => {
-    const { result } = this.state;
     const {
       route: { params = {} },
     } = this.props;
@@ -130,10 +126,17 @@ class ChooseDevice extends Component<
       });
   };
 
+  onModalHide = () => {
+    this.setState({ device: undefined });
+  };
+
   onStepEntered = (i: number, meta: Object) => {
     if (i === 2) {
       // we also preload as much info as possible in case of a MCU
-      manager.getLatestFirmwareForDevice(meta.deviceInfo);
+      manager.getLatestFirmwareForDevice(meta.deviceInfo).then(
+        () => {},
+        () => {},
+      );
     }
   };
 
@@ -182,7 +185,7 @@ class ChooseDevice extends Component<
           onBluetoothDeviceAction={this.onShowMenu}
         />
         <DeviceActionModal
-          onClose={this.onSelectDevice}
+          onClose={() => this.onSelectDevice()}
           device={device}
           onResult={this.onSelect}
           onModalHide={this.onModalHide}

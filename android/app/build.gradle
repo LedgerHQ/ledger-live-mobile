@@ -1,4 +1,5 @@
 apply plugin: "com.android.application"
+apply plugin: 'com.google.gms.google-services'
 
 project.ext.envConfigFiles = [
     debug: ".env",
@@ -124,6 +125,8 @@ def enableProguardInReleaseBuilds = false
  */
 def jscFlavor = 'org.webkit:android-jsc-intl:+'
 
+def useIntlJsc = true
+
 /**
  * Whether to enable the Hermes VM.
  *
@@ -144,8 +147,8 @@ android {
         multiDexEnabled true
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 4194587
-        versionName "2.37.0"
+        versionCode 4194697
+        versionName "2.37.3"
         resValue "string", "build_config_package", "com.ledger.live"
         testBuildType System.getProperty('testBuildType', 'debug')
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
@@ -206,6 +209,10 @@ dependencies {
 
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
 
+    implementation platform('com.google.firebase:firebase-bom:29.0.3')
+
+    implementation 'com.google.firebase:firebase-analytics'
+
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
       exclude group:'com.facebook.fbjni'
     }
@@ -225,6 +232,9 @@ dependencies {
         implementation jscFlavor
     }
     androidTestImplementation('com.wix:detox:+')
+
+    compile project(':react-native-video')
+    implementation "androidx.appcompat:appcompat:1.0.0"
 }
 
 // Run this once to be able to run the application with BUCK

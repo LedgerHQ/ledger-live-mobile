@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { StyleSheet, View, Platform } from "react-native";
+import { StyleSheet, View, Platform, NativeModules } from "react-native";
 import Config from "react-native-config";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Trans } from "react-i18next";
 import { useNavigation } from "@react-navigation/native";
 import { discoverDevices, TransportModule } from "@ledgerhq/live-common/lib/hw";
@@ -10,6 +10,7 @@ import { Button } from "@ledgerhq/native-ui";
 import { useTheme } from "styled-components/native";
 import { ScreenName } from "../../const";
 import { knownDevicesSelector } from "../../reducers/ble";
+import { setHasConnectedDevice } from "../../actions/appstate";
 import DeviceItem from "./DeviceItem";
 import BluetoothEmpty from "./BluetoothEmpty";
 import USBEmpty from "./USBEmpty";
@@ -27,6 +28,7 @@ type Props = {
   usbOnly?: boolean;
   filter?: (transportModule: TransportModule) => boolean;
   autoSelectOnAdd?: boolean;
+  hideAnimation?: boolean;
 };
 
 export default function SelectDevice({
@@ -37,29 +39,46 @@ export default function SelectDevice({
   onWithoutDevice,
   onBluetoothDeviceAction,
   autoSelectOnAdd,
+  hideAnimation,
 }: Props) {
   const { colors } = useTheme();
   const navigation = useNavigation();
   const knownDevices = useSelector(knownDevicesSelector);
+  const dispatch = useDispatch();
 
   const handleOnSelect = useCallback(
     deviceInfo => {
-      const { modelId, wired } = deviceInfo;
-      track("Device selection", {
-        modelId,
-        connectionType: wired ? "USB" : "BLE",
-      });
-      onSelect(deviceInfo);
+      NativeModules.BluetoothHelperModule.prompt()
+        .then(() => {
+          const { modelId, wired } = deviceInfo;
+          track("Device selection", {
+            modelId,
+            connectionType: wired ? "USB" : "BLE",
+          });
+          // Nb consider a device selection enough to show the fw update banner in portfolio
+          dispatch(setHasConnectedDevice(true));
+          onSelect(deviceInfo);
+        })
+        .catch(() => {
+          /* ignore */
+        });
     },
-    [onSelect],
+    [dispatch, onSelect],
   );
 
   const [devices, setDevices] = useState([]);
 
   const onPairNewDevice = useCallback(() => {
-    navigation.navigate(ScreenName.PairDevices, {
-      onDone: autoSelectOnAdd ? handleOnSelect : null,
-    });
+    NativeModules.BluetoothHelperModule.prompt()
+      .then(() =>
+        // @ts-expect-error navigation issue
+        navigation.navigate(ScreenName.PairDevices, {
+          onDone: autoSelectOnAdd ? handleOnSelect : null,
+        }),
+      )
+      .catch(() => {
+        /* ignore */
+      });
   }, [autoSelectOnAdd, navigation, handleOnSelect]);
 
   const renderItem = useCallback(
@@ -100,10 +119,10 @@ export default function SelectDevice({
               deviceName: e.name || "",
               modelId:
                 (e.deviceModel && e.deviceModel.id) ||
-                Config.FALLBACK_DEVICE_MODEL_ID ||
+                Config?.FALLBACK_DEVICE_MODEL_ID ||
                 "nanoX",
               wired: e.id.startsWith("httpdebug|")
-                ? Config.FALLBACK_DEVICE_WIRED === "YES"
+                ? Config?.FALLBACK_DEVICE_WIRED === "YES"
                 : e.id.startsWith("usb|"),
             },
           ];
@@ -117,10 +136,13 @@ export default function SelectDevice({
 
   return (
     <>
-      {usbOnly && withArrows ? (
+      {usbOnly && withArrows && !hideAnimation ? (
         <UsbPlaceholder />
       ) : ble.length === 0 ? (
-        <BluetoothEmpty onPairNewDevice={onPairNewDevice} />
+        <BluetoothEmpty
+          hideAnimation={hideAnimation}
+          onPairNewDevice={onPairNewDevice}
+        />
       ) : (
         <View>
           <BluetoothHeader />

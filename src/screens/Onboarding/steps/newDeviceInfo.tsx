@@ -4,28 +4,47 @@ import { useTranslation } from "react-i18next";
 import { Flex, Carousel, Text, Link, Button } from "@ledgerhq/native-ui";
 import { Icons } from "@ledgerhq/native-ui";
 import { useNavigation, useRoute, RouteProp } from "@react-navigation/native";
-import PlaceholderIllustration from "./PlaceholderIllustration";
 import { ScreenName } from "../../../const";
+import Illustration from "../../../images/illustration/Illustration";
 
 import type { DeviceNames } from "../types";
+
+// @TODO Replace
+const images = {
+  light: [
+    require("../../../images/illustration/Light/_049.png"),
+    require("../../../images/illustration/Light/_073.png"),
+    require("../../../images/illustration/Light/_070.png"),
+    require("../../../images/illustration/Light/_069.png"),
+    require("../../../images/illustration/Light/_066.png"),
+  ],
+  dark: [
+    require("../../../images/illustration/Dark/_049.png"),
+    require("../../../images/illustration/Dark/_073.png"),
+    require("../../../images/illustration/Dark/_070.png"),
+    require("../../../images/illustration/Dark/_069.png"),
+    require("../../../images/illustration/Dark/_066.png"),
+  ],
+};
 
 type CardType = { index: number, deviceModelId: DeviceNames };
 const Card = ({ index /*, deviceModelId */ }: CardType) => {
   const { t } = useTranslation();
 
-  // TODO: use deviceModelId to dynamically render the device illustation
-  // as soon as the illustration is ready
+  console.log(images.dark[index])
+
 
   return (
     <Flex flex={1} justifyContent="center" alignItems="center" px={20}>
       <Flex mb={10}>
-        <PlaceholderIllustration />
+        <Illustration size={174} darkSource={images.dark[index]} lightSource={images.light[index]} />
+        
       </Flex>
       <Text variant="h2" mb={3} style={{ textTransform: "uppercase" }}>
-        {t(`onboarding.stepNewDevice.${index}.title`)}
+        {t(`v3.onboarding.stepNewDevice.${index}.title`)}
       </Text>
       <Text textAlign="center" variant="body">
-        {t(`onboarding.stepNewDevice.${index}.desc`)}
+        {t(`v3.onboarding.stepNewDevice.${index}.desc`)}
       </Text>
     </Flex>
   );
@@ -65,7 +84,7 @@ const Footer = ({ index }: { index: number }) => {
 
   return (
     <Animatable.View animation="fadeIn" useNativeDriver>
-      <Component label={t(`onboarding.stepNewDevice.${index}.action`)} />
+      <Component label={t(`v3.onboarding.stepNewDevice.${index}.action`)} />
     </Animatable.View>
   );
 };
@@ -82,8 +101,7 @@ function OnboardingStepNewDevice() {
   const { deviceModelId } = route.params;
 
   return (
-    // TODO: Replace this value with constant.purple as soon as the value is fixed in the theme
-    <Flex flex={1} backgroundColor="hsla(248, 100%, 85%, 1)">
+    <Flex flex={1} backgroundColor="primary.c60">
       <Carousel onChange={setCurrentIndex}>
         {new Array(5).fill(null).map((_, index) => (
           <Card index={index} key={index} deviceModelId={deviceModelId} />

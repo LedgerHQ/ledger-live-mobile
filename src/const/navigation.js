@@ -22,6 +22,7 @@ export const ScreenName = {
   ClaimRewardsSelectDevice: "ClaimRewardsSelectDevice",
   ClaimRewardsValidationError: "ClaimRewardsValidationError",
   ClaimRewardsValidationSuccess: "ClaimRewardsValidationSuccess",
+  Coinify: "Coinify",
   ConfirmPassword: "ConfirmPassword",
   CountervalueSettings: "CountervalueSettings",
   CryptoAssetsSettings: "CryptoAssetsSettings",
@@ -41,6 +42,7 @@ export const ScreenName = {
   DebugPlayground: "DebugPlayground",
   DebugSettings: "DebugSettings",
   DebugStore: "DebugStore",
+  DebugEnv: "DebugEnv",
   DelegationConnectDevice: "DelegationConnectDevice",
   DelegationSelectDevice: "DelegationSelectDevice",
   DelegationSelectValidator: "DelegationSelectValidator",
@@ -103,6 +105,7 @@ export const ScreenName = {
   ReceiveConfirmation: "ReceiveConfirmation",
   ReceiveConnectDevice: "ReceiveConnectDevice",
   ReceiveSelectAccount: "ReceiveSelectAccount",
+  RegionSettings: "RegionSettings",
   RepairDevice: "RepairDevice",
   Resources: "Resources",
   RippleEditFee: "RippleEditFee",
@@ -189,6 +192,9 @@ export const ScreenName = {
   CosmosClaimRewardsValidation: "CosmosClaimRewardsValidation",
   CosmosClaimRewardsValidationError: "CosmosClaimRewardsValidationError",
   CosmosClaimRewardsValidationSuccess: "CosmosClaimRewardsValidationSuccess",
+
+  // crypto_org
+  CryptoOrgEditMemo: "CryptoOrgEditMemo",
 
   AlgorandEditMemo: "AlgorandEditMemo",
   AlgorandClaimRewardsInfo: "AlgorandClaimRewardsInfo",
@@ -283,6 +289,7 @@ export const ScreenName = {
   OnboardingSetupDeviceInformation: "OnboardingSetupDeviceInformation",
   OnboardingSetupDeviceRecoveryPhrase: "OnboardingSetupDeviceRecoveryPhrase",
   OnboardingGeneralInformation: "OnboardingGeneralInformation",
+  OnboardingBluetoothInformation: "OnboardingBluetoothInformation",
   OnboardingInfoModal: "OnboardingInfoModal",
   OnboardingRecoveryPhrase: "OnboardingRecoveryPhrase",
 
@@ -303,6 +310,10 @@ export const ScreenName = {
   OnboardingModalSetupSecureRecovery: "OnboardingModalSetupSecureRecovery",
   OnboardingModalWarning: "OnboardingModalWarning",
   OnboardingModalGeneralInformation: "OnboardingModalGeneralInformation",
+  OnboardingPreQuizModal: "OnboardingPreQuizModal",
+  OnboardingModalSyncDesktopInformation:
+    "OnboardingModalSyncDesktopInformation",
+  OnboardingModalRecoveryPhraseWarning: "OnboardingModalRecoveryPhraseWarning",
 
   PlatformCatalog: "PlatformCatalog",
   PlatformApp: "PlatformApp",
@@ -323,7 +334,14 @@ export const ScreenName = {
   RequestAccountsSelectCrypto: "RequestAccountsSelectCrypto",
   RequestAccountsSelectAccount: "RequestAccountsSelectAccount",
 
+  MarketList: "MarketList",
+  MarketCurrencySelect: "MarketCurrencySelect",
+  MarketDetail: "MarketDetail",
+
   VerifyAccount: "VerifyAccount",
+
+  AnalyticsAllocation: "AnalyticsAllocation",
+  AnalyticsOperations: "AnalyticsOperations",
 
   // solana
   SolanaEditMemo: "SolanaEditMemo",
@@ -336,6 +354,7 @@ export const NavigatorName = {
   Accounts: "AccountsNavigator",
   AccountSettings: "AccountSettings",
   AddAccounts: "AddAccounts",
+  Analytics: "Analytics",
   Exchange: "Exchange",
   ExchangeBuyFlow: "ExchangeBuyFlow",
   ExchangeSellFlow: "ExchangeSellFlow",
@@ -385,6 +404,7 @@ export const NavigatorName = {
   PolkadotSimpleOperationFlow: "PolkadotSimpleOperationFlow",
 
   NotificationCenter: "NotificationCenter",
+  Market: "Market",
 
   // Tab
   Main: "Main",

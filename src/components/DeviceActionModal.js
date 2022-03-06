@@ -8,8 +8,7 @@ import { useTranslation } from "react-i18next";
 import DeviceAction from "./DeviceAction";
 import BottomModal from "./BottomModal";
 import ModalBottomAction from "./ModalBottomAction";
-import Close from "../icons/Close";
-import Touchable from "./Touchable";
+
 import InfoBox from "./InfoBox";
 
 type Props = {
@@ -22,6 +21,7 @@ type Props = {
   onModalHide?: () => void,
   onResult?: $PropertyType<React$ElementProps<typeof DeviceAction>, "onResult">,
   renderOnResult?: (p: any) => React$Node,
+  onSelectDeviceLink?: () => void,
   analyticsPropertyFlow?: string,
 };
 
@@ -33,6 +33,7 @@ export default function DeviceActionModal({
   onResult,
   renderOnResult,
   onModalHide,
+  onSelectDeviceLink,
   analyticsPropertyFlow,
 }: Props) {
   const { colors } = useTheme();
@@ -56,24 +57,20 @@ export default function DeviceActionModal({
                   onClose={onClose}
                   onResult={onResult}
                   renderOnResult={renderOnResult}
+                  onSelectDeviceLink={onSelectDeviceLink}
                   analyticsPropertyFlow={analyticsPropertyFlow}
                 />
               </View>
-              <InfoBox forceColor={{ text: colors.live }}>
-                {t("DeviceAction.stayInTheAppPlz")}
-              </InfoBox>
+              {!device.wired ? (
+                <InfoBox forceColor={{ text: colors.live }}>
+                  {t("DeviceAction.stayInTheAppPlz")}
+                </InfoBox>
+              ) : null}
             </View>
           }
         />
       )}
       {device && <SyncSkipUnderPriority priority={100} />}
-      <Touchable
-        event="DeviceActionModalClose"
-        style={styles.close}
-        onPress={onClose}
-      >
-        <Close color={colors.fog} size={20} />
-      </Touchable>
     </BottomModal>
   );
 }

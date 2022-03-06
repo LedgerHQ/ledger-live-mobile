@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { StyleProp, ViewStyle } from "react-native";
 import { BottomDrawer } from "@ledgerhq/native-ui";
+import { useSelector } from "react-redux";
 import ButtonUseTouchable from "../context/ButtonUseTouchable";
+import { isModalLockedSelector } from "../reducers/appstate";
 
 let isModalOpenedref: boolean | undefined = false;
 
@@ -27,6 +29,7 @@ const BottomModal = ({
   ...rest
 }: Props) => {
   const [open, setIsOpen] = useState(false);
+  const modalLock = useSelector(isModalLockedSelector);
 
   // workarround to make sure no double modal can be opened at same time
   useEffect(
@@ -44,17 +47,23 @@ const BottomModal = ({
     }
     isModalOpenedref = isOpened;
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isOpened]); // do not add onClose it might cause some issues on modals ie: filter manager modal
+  }, [isOpened, modalLock]); // do not add onClose it might cause some issues on modals ie: filter manager modal
+
+  const handleClose = useCallback(() => {
+    if (modalLock) return;
+    onClose && onClose();
+    onModalHide && onModalHide();
+  }, [modalLock, onClose, onModalHide]);
 
   return (
     <ButtonUseTouchable.Provider value={true}>
       <BottomDrawer
-        preventBackdropClick={preventBackdropClick}
+        preventBackdropClick={modalLock || preventBackdropClick}
         isOpen={open}
-        onClose={onClose}
+        onClose={handleClose}
+        noCloseButton={modalLock}
         modalStyle={style}
         containerStyle={containerStyle}
-        onModalHide={() => onModalHide && onModalHide()}
         {...rest}
       >
         {children}

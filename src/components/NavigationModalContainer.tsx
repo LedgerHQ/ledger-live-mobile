@@ -1,9 +1,10 @@
 import React from "react";
-import { Pressable, SafeAreaView } from "react-native";
+import { Pressable } from "react-native";
 import { Flex } from "@ledgerhq/native-ui";
 import { StackScreenProps } from "@react-navigation/stack";
 import styled from "styled-components/native";
 import type { FlexBoxProps } from "@ledgerhq/native-ui/components/layout/Flex";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export const MIN_MODAL_HEIGHT = 30;
 
@@ -16,6 +17,7 @@ type Props = StackScreenProps<{}> & {
   children: React.ReactNode, 
   contentContainerProps?: FlexBoxProps,
   deadZoneProps?: FlexBoxProps,
+  backgroundColor?: string,
  };
 
 export default function NavigationModalContainer({
@@ -23,10 +25,11 @@ export default function NavigationModalContainer({
   children,
   contentContainerProps,
   deadZoneProps,
+  backgroundColor = "palette.neutral.c00",
 }: Props) {
   return (
-    <Flex flex={1}>
-      <Flex height="8%" minHeight={MIN_MODAL_HEIGHT} {...deadZoneProps}>
+    <SafeAreaView flex={1}>
+      <Flex minHeight={MIN_MODAL_HEIGHT} {...deadZoneProps}>
         <Pressable
           style={{ flex: 1 }}
           onPress={() => {
@@ -35,9 +38,9 @@ export default function NavigationModalContainer({
         />
       </Flex>
 
-      <ScreenContainer backgroundColor="palette.neutral.c00" {...contentContainerProps}>
-        <SafeAreaView style={{ flex: 1 }}>{children}</SafeAreaView>
+      <ScreenContainer backgroundColor={backgroundColor} {...contentContainerProps}>
+        <Flex style={{ flex: 1 }}>{children}</Flex>
       </ScreenContainer>
-    </Flex>
+    </SafeAreaView>
   );
 }
