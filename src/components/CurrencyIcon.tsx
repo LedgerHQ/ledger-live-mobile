@@ -1,110 +1,96 @@
-import React, { memo, useMemo } from "react";
-import { View, StyleSheet } from "react-native";
+
+import React, { ComponentType, memo, useMemo } from "react";
+import { View } from "react-native";
 import {
   getCryptoCurrencyIcon,
   getTokenCurrencyIcon,
 } from "@ledgerhq/live-common/lib/reactNative";
-import { getCurrencyColor } from "@ledgerhq/live-common/lib/currencies";
 
-import { useTheme } from "@react-navigation/native";
-import LText from "./LText";
-import { rgba, ensureContrast } from "../colors";
+import {
+  CryptoCurrency,
+  Currency,
+  TokenCurrency,
+} from "@ledgerhq/live-common/lib/types";
+import { Flex, Text } from "@ledgerhq/native-ui";
+import styled, { useTheme } from "styled-components/native";
 
-type Props = {
-  currency: any,
-  size: number,
-  color?: string,
-  radius?: number,
-  bg?: string,
+import { useCurrencyColor } from "../helpers/getCurrencyColor";
+
+const DefaultWrapper = styled(Flex)`
+  height: ${p => p.size}px;
+  width: ${p => p.size}px;
+  align-items: center;
+  justify-content: center;
+`;
+
+const CircleWrapper = styled(Flex)`
+  border-radius: 9999px;
+  border: 1px solid transparent;
+  background: ${p => p.color};
+  height: ${p => p.size}px;
+  width: ${p => p.size}px;
+  align-items: center;
+  justify-content: center;
+`;
+
+type IconProps = {
+  size: number;
+  color: string;
 };
 
-function CurrencyIcon({ size, currency, color, radius, bg }: Props) {
+type Icon = ComponentType<IconProps>;
+
+const getIconComponent = (currency: CryptoCurrency | TokenCurrency): Icon => {
+  const icon =
+    currency.type === "TokenCurrency"
+      ? getTokenCurrencyIcon(currency)
+      : getCryptoCurrencyIcon(currency);
+
+  if (icon) {
+    return icon;
+  }
+
+  return ({ size, ...props }: IconProps) => (
+    <Text fontWeight="semiBold" fontSize={size / 2} {...props}>
+      {currency.ticker[0]}
+    </Text>
+  );
+};
+
+type Props = {
+  currency: Currency;
+  size: number;
+  color?: string;
+  radius?: number;
+  bg?: string;
+  circle?: boolean;
+};
+
+const CurrencyIcon = ({ size, currency, circle, color, radius, bg }: Props) => {
   const { colors } = useTheme();
-  const currencyColor = useMemo(
-    () =>
-      ensureContrast(color || getCurrencyColor(currency), colors.background),
-    [colors, color, currency],
-  );
+  const currencyColor = useCurrencyColor(currency, colors.background.main);
 
-  if (currency.type === "TokenCurrency") {
-    const dynamicStyle = {
-      backgroundColor: bg || rgba(currencyColor, 0.1),
-      width: size,
-      height: size,
-    };
-    const TokenIconCurrency =
-      getTokenCurrencyIcon && getTokenCurrencyIcon(currency);
+  const overrideColor = color || currencyColor;
 
+  if (currency.type === "FiatCurrency") {
+    return null;
+  }
+
+  const IconComponent = getIconComponent(currency);
+
+  if (circle) {
     return (
-      <View
-        style={[
-          styles.tokenCurrencyIcon,
-          dynamicStyle,
-          radius ? { borderRadius: radius } : null,
-        ]}
-      >
-        {TokenIconCurrency ? (
-          <TokenIconCurrency
-            size={size}
-            color={currencyColor || currency.color}
-          />
-        ) : (
-          <LText semiBold style={{ color: currencyColor, fontSize: size / 2 }}>
-            {currency.ticker[0]}
-          </LText>
-        )}
-      </View>
+      <CircleWrapper size={size} color={overrideColor} bg={bg}>
+        <IconComponent size={size} color={colors.constant.white} />
+      </CircleWrapper>
     );
   }
 
-  const IconComponent = getCryptoCurrencyIcon(currency);
-  if (!IconComponent) {
-    return (
-      <View
-        style={[
-          styles.altRoot,
-          { width: size, height: size },
-          radius ? { borderRadius: radius } : null,
-        ]}
-      >
-        <LText style={{ fontSize: Math.floor(size / 3) }}>
-          {currency.ticker}
-        </LText>
-      </View>
-    );
-  }
   return (
-    <View style={[styles.iconContainer, { width: size, height: size }]}>
-      <View style={styles.subIconContainer}>
-        <IconComponent
-          size={size * 1.4} // resizing to compensate for svg integrated padding
-          color={currencyColor || currency.color}
-        />
-      </View>
-    </View>
+    <DefaultWrapper size={size} borderRadius={radius} bg={bg}>
+      <IconComponent size={size} color={overrideColor} />
+    </DefaultWrapper>
   );
-}
-
-const styles = StyleSheet.create({
-  altRoot: {
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  tokenCurrencyIcon: {
-    borderRadius: 4,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  iconContainer: {
-    position: "relative",
-  },
-  subIconContainer: {
-    position: "absolute",
-    top: "-20%",
-    left: "-20%",
-    width: "140%",
-    height: "140%",
-  },
-});
+};
 
 export default memo<Props>(CurrencyIcon);
