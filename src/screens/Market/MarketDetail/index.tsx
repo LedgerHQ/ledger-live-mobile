@@ -78,10 +78,10 @@ export default function MarketDetail({
   route,
 }: {
   navigation: any;
-  route: { params: { currencyId: string } };
+  route: { params: { currencyId: string; resetSearchOnUmount?: boolean } };
 }) {
   const { params } = route;
-  const { currencyId } = params;
+  const { currencyId, resetSearchOnUmount } = params;
   const { t } = useTranslation();
   const { colors } = useTheme();
   const { locale } = useLocale();
@@ -110,14 +110,17 @@ export default function MarketDetail({
     isLiveSupported,
   } = currency || {};
 
-  useEffect(
-    () => () => {
-      // @ts-expect-error can be an input
+  useEffect(() => {
+    const resetState = () => {
       selectCurrency(undefined);
-      refresh({});
-    },
-    [selectCurrency, refresh],
-  );
+      refresh(resetSearchOnUmount ? { search: "", ids: [] } : {});
+    };
+    const sub = navigation.addListener("blur", resetState);
+    return () => {
+      sub();
+      resetState();
+    };
+  }, [selectCurrency, refresh, resetSearchOnUmount, navigation]);
 
   const allAccounts = useSelector(
     accountsByCryptoCurrencyScreenSelector(internalCurrency),

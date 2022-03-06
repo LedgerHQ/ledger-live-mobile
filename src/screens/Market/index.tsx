@@ -11,6 +11,7 @@ import {
   Icon,
   ScrollContainer,
   InfiniteLoader,
+  Box,
 } from "@ledgerhq/native-ui";
 import { useSelector } from "react-redux";
 import { Trans, useTranslation } from "react-i18next";
@@ -57,14 +58,7 @@ const BottomSection = ({
 }) => {
   const { t } = useTranslation();
   const { requestParams, refresh, counterCurrency } = useMarketData();
-  const {
-    range,
-    starred = [],
-    liveCompatible,
-    orderBy,
-    order,
-    search,
-  } = requestParams;
+  const { range, starred = [], orderBy, order, search } = requestParams;
   const starredMarketCoins: string[] = useSelector(starredMarketCoinsSelector);
   const starFilterOn = starred.length > 0;
 
@@ -244,8 +238,8 @@ export default function Market({ navigation }: { navigation: any }) {
   } = useMarketData();
 
   const { limit, search } = requestParams;
-  const [isLoading, setIsLoading] = useState(false);
-  const [isSearchOpen, setSearchOpen] = useState(!!search);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isSearchOpen, setSearchOpen] = useState(false);
 
   const resetSearch = useCallback(
     () => refresh({ search: "", starred: [], liveCompatible: false }),
@@ -310,7 +304,7 @@ export default function Market({ navigation }: { navigation: any }) {
           </Button>
         </Flex>
       ) : null,
-    [loading, resetSearch, search, t],
+    [colors.palette.type, loading, resetSearch, search, t],
   );
 
   const onEndReached = useCallback(async () => {
@@ -381,17 +375,19 @@ export default function Market({ navigation }: { navigation: any }) {
             />
           }
         >
-          <FlatList
-            data={marketData}
-            renderItem={renderItems}
-            onEndReached={onEndReached}
-            onEndReachedThreshold={10}
-            scrollEventThrottle={50}
-            initialNumToRender={limit}
-            keyExtractor={(item, index) => item.id + index}
-            ListFooterComponent={renderFooter}
-            ListEmptyComponent={renderEmptyComponent}
-          />
+          <Box px={4}>
+            <FlatList
+              data={marketData}
+              renderItem={renderItems}
+              onEndReached={onEndReached}
+              onEndReachedThreshold={10}
+              scrollEventThrottle={50}
+              initialNumToRender={limit}
+              keyExtractor={(item, index) => item.id + index}
+              ListFooterComponent={renderFooter}
+              ListEmptyComponent={renderEmptyComponent}
+            />
+          </Box>
         </ScrollContainerHeader>
 
         <SearchHeader

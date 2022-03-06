@@ -5262,6 +5262,10 @@
       },
       "recommended": {
         "title": "Recommended"
+      },
+      "topGainers": {
+        "title": "Top gainers (24H)",
+        "seeMarket": "See market"
       }
     },
     "addAccountsModal": {
