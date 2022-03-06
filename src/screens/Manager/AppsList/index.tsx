@@ -1,5 +1,5 @@
 import React, { useCallback, memo } from "react";
-import { VirtualizedList } from "react-native";
+import { FlatList } from "react-native";
 import type { App } from "@ledgerhq/live-common/lib/types/manager";
 import type { State } from "@ledgerhq/live-common/lib/apps";
 import styled from "styled-components/native";
@@ -27,13 +27,9 @@ const NoResultsContainer = styled(Flex).attrs({
   justifyContent: "flex-start",
 })``;
 
-const { height } = getWindowDimensions();
-
-const renderRow = ({ item }: { item: any }) => <AppRow {...item} />;
 
 const AppsList = ({
   apps,
-  active,
   renderNoResults,
   state,
   dispatch,
@@ -43,7 +39,26 @@ const AppsList = ({
   isInstalledView,
   optimisticState,
 }: Props) => {
-  const viewHeight = active ? "auto" : height - 267;
+
+  console.log(apps[0].name)
+
+  const renderRow = useCallback(({ item }: { item: any }) => 
+    <AppRow app={item}
+    state={state}
+    dispatch={dispatch}
+    setAppInstallWithDependencies={setAppInstallWithDependencies}
+    setAppUninstallWithDependencies={setAppUninstallWithDependencies}
+    setStorageWarning={setStorageWarning}
+    optimisticState={optimisticState}
+    />,
+  [
+    state,
+    dispatch,
+    setAppInstallWithDependencies,
+    setAppUninstallWithDependencies,
+    setStorageWarning,
+    optimisticState,
+  ]);
 
   const getItem = useCallback(
     (data, index) => ({
@@ -51,9 +66,7 @@ const AppsList = ({
       index,
       state,
       dispatch,
-      key: `${data[index].id}_${isInstalledView ? "Installed" : "Catalog"}`,
-      visible: active,
-      isInstalledView,
+      key: `${data[index].id}_Catalog`,
       setAppInstallWithDependencies,
       setAppUninstallWithDependencies,
       setStorageWarning,
@@ -62,8 +75,6 @@ const AppsList = ({
     [
       state,
       dispatch,
-      isInstalledView,
-      active,
       setAppInstallWithDependencies,
       setAppUninstallWithDependencies,
       setStorageWarning,
@@ -79,13 +90,10 @@ const AppsList = ({
     );
 
   return (
-    <VirtualizedList
-      style={{ height: viewHeight || 0 }}
+    <FlatList
       listKey={isInstalledView ? "Installed" : "Catalog"}
       data={apps}
       renderItem={renderRow}
-      getItem={getItem}
-      getItemCount={() => apps.length}
     />
   );
 };

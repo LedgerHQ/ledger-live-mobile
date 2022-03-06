@@ -1,37 +1,40 @@
-import React, { memo, useMemo } from "react";
+import React, { memo, useMemo, useCallback } from "react";
 
-import type { App } from "@ledgerhq/live-common/lib/types/manager";
+import { App } from "@ledgerhq/live-common/lib/types/manager";
 
-import type { State, Action } from "@ledgerhq/live-common/lib/apps";
+import { State, Action } from "@ledgerhq/live-common/lib/apps";
 import { useNotEnoughMemoryToInstall } from "@ledgerhq/live-common/lib/apps/react";
 import { Trans } from "react-i18next";
+import styled from "styled-components/native";
+import { Flex, Text } from "@ledgerhq/native-ui";
 import AppIcon from "./AppIcon";
 
 import AppStateButton from "./AppStateButton";
 import ByteSize from "../../../components/ByteSize";
 
-import styled from "styled-components/native";
-import { Flex, Text } from "@ledgerhq/native-ui";
-
 type Props = {
-  app: App,
-  state: State,
-  dispatch: (action: Action) => void,
-  isInstalledView: boolean,
-  setAppInstallWithDependencies: (params: { app: App, dependencies: App[] }) => void,
-  setAppUninstallWithDependencies: (params: { dependents: App[], app: App }) => void,
-  setStorageWarning: () => void,
-  managerTabs: any,
-  optimisticState: State,
+  app: App;
+  state: State;
+  dispatch: (action: Action) => void;
+  isInstalledView: boolean;
+  setAppInstallWithDependencies: (params: {
+    app: App;
+    dependencies: App[];
+  }) => void;
+  setAppUninstallWithDependencies: (params: {
+    dependents: App[];
+    app: App;
+  }) => void;
+  setStorageWarning: () => void;
+  managerTabs: any;
+  optimisticState: State;
 };
 
 const RowContainer = styled(Flex).attrs({
-  flex: 1,
   flexDirection: "row",
   alignItems: "center",
   justifyContent: "flex-start",
   paddingVertical: 14,
-  borderRadius: 0,
   height: 64,
 })``;
 
@@ -82,59 +85,66 @@ const AppRow = ({
     name,
   );
 
-  const onSizePress = (name: string) => setStorageWarning(name);
+  const onSizePress = useCallback(() => setStorageWarning(name), [
+    setStorageWarning,
+    name,
+  ]);
 
   return (
     <RowContainer>
       <AppIcon app={app} size={48} />
       <LabelContainer>
-        <Text numberOfLines={1} variant="body" fontWeight="semiBold" color="neutral.c100">
+        <Text
+          numberOfLines={1}
+          variant="body"
+          fontWeight="semiBold"
+          color="neutral.c100"
+        >
           {displayName}
         </Text>
-          <VersionContainer borderColor="neutral.c40">
-            <Text numberOfLines={1} variant="tiny" color="neutral.c80" fontWeight="semiBold">
-              <Trans
-                  i18nKey="v3.ApplicationVersion"
-                  values={{ version }}
+        <VersionContainer borderColor="neutral.c40">
+          <Text
+            numberOfLines={1}
+            variant="tiny"
+            color="neutral.c80"
+            fontWeight="semiBold"
+          >
+            <Trans i18nKey="v3.ApplicationVersion" values={{ version }} />
+            {isInstalled && !isInstalled.updated && (
+              <>
+                {" "}
+                <Trans
+                  i18nKey="manager.appList.versionNew"
+                  values={{
+                    newVersion:
+                      availableVersion !== version
+                        ? ` ${availableVersion}`
+                        : "",
+                  }}
                 />
-              {isInstalled && !isInstalled.updated && (
-                <>
-                  {" "}
-                  <Trans
-                    i18nKey="manager.appList.versionNew"
-                    values={{
-                      newVersion:
-                        availableVersion !== version ? ` ${availableVersion}` : "",
-                    }}
-                  />
-                </>
-              )}
-            </Text>
-          </VersionContainer>
-        </LabelContainer>
-        <Text
-          variant="body"
-          fontWeight="medium"
-          color="neutral.c70"
-          my={3}
-        >
-          <ByteSize
-            value={bytes}
-            deviceModel={state.deviceModel}
-            firmwareVersion={deviceInfo.version}
-          />
-        </Text>
-        <AppStateButton
-          app={app}
-          state={state}
-          dispatch={dispatch}
-          notEnoughMemoryToInstall={notEnoughMemoryToInstall}
-          isInstalled={!!isInstalled}
-          isInstalledView={isInstalledView}
-          setAppInstallWithDependencies={setAppInstallWithDependencies}
-          setAppUninstallWithDependencies={setAppUninstallWithDependencies}
-          storageWarning={onSizePress}
+              </>
+            )}
+          </Text>
+        </VersionContainer>
+      </LabelContainer>
+      <Text variant="body" fontWeight="medium" color="neutral.c70" my={3}>
+        <ByteSize
+          value={bytes}
+          deviceModel={state.deviceModel}
+          firmwareVersion={deviceInfo.version}
         />
+      </Text>
+      <AppStateButton
+        app={app}
+        state={state}
+        dispatch={dispatch}
+        notEnoughMemoryToInstall={notEnoughMemoryToInstall}
+        isInstalled={!!isInstalled}
+        isInstalledView={isInstalledView}
+        setAppInstallWithDependencies={setAppInstallWithDependencies}
+        setAppUninstallWithDependencies={setAppUninstallWithDependencies}
+        storageWarning={onSizePress}
+      />
     </RowContainer>
   );
 };
