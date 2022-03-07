@@ -238,6 +238,10 @@
       "title": "대시보드에 장치가 없습니다",
       "description": "장치에서 대시보드로 돌아가세요."
     },
+    "DeviceNotOnboarded": {
+      "title": "Your device is not ready to use yet",
+      "description": "Set up your device before using it with Ledger Live."
+    },
     "DeviceSocketFail": {
       "title": "죄송하지만, 연결에 실패했습니다",
       "description": "다시 시도해 주세요."
@@ -2618,7 +2622,8 @@
       "alert": "장치에서 매도 세부사항을 확인한 후 전송하세요. 주소가 안전하게 교환되어 주소를 따로 인증할 필요 없습니다."
     },
     "button": {
-      "openManager": "관리자 열기"
+      "openManager": "관리자 열기",
+      "openOnboarding": "Setup device"
     },
     "installApp": "{{appName}} 앱 설치 {{percentage}}",
     "installAppDescription": "설치가 완료될 때까지 기다리세요",
