@@ -238,6 +238,10 @@
       "title": "设备不在功能面板上",
       "description": "请返回设备的功能面板。"
     },
+    "DeviceNotOnboarded": {
+      "title": "Your device is not ready to use yet",
+      "description": "Set up your device before using it with Ledger Live."
+    },
     "DeviceSocketFail": {
       "title": "抱歉，连接失败",
       "description": "请再次尝试。"
@@ -2618,7 +2622,8 @@
       "alert": "发送之前请验证卖出详情。地址会被安全地交换因此您不必对其进行验证。"
     },
     "button": {
-      "openManager": "打开管理器"
+      "openManager": "打开管理器",
+      "openOnboarding": "Setup device"
     },
     "installApp": "{{appName}} 应用程序安装 {{percentage}}",
     "installAppDescription": "请耐心等待，直至安装完成",
