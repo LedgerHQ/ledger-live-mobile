@@ -238,6 +238,10 @@
       "title": "ダッシュボードにデバイスがありません。",
       "description": "デバイスのダッシュボードに戻ってください。"
     },
+    "DeviceNotOnboarded": {
+      "title": "Your device is not ready to use yet",
+      "description": "Set up your device before using it with Ledger Live."
+    },
     "DeviceSocketFail": {
       "title": "接続に失敗しました。",
       "description": "もう一度お試しください。"
@@ -2618,7 +2622,8 @@
       "alert": "送付する前に、売却の詳細をデバイス上で確認してください。アドレスは安全に共有されるため、確認の必要はありません。"
     },
     "button": {
-      "openManager": "管理を開く"
+      "openManager": "管理を開く",
+      "openOnboarding": "Setup device"
     },
     "installApp": "{{appName}}アプリのインストール{{percentage}}",
     "installAppDescription": "インストールが完了するまでお待ちください。",
