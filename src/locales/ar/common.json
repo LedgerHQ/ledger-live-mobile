@@ -238,6 +238,10 @@
       "title": "الجهاز غير موجود في لوحات المعلومات",
       "description": "يرجى العودة إلى لوحات المعلومات على جهازك."
     },
+    "DeviceNotOnboarded": {
+      "title": "Your device is not ready to use yet",
+      "description": "Set up your device before using it with Ledger Live."
+    },
     "DeviceSocketFail": {
       "title": "عذراً، فشل الاتصال",
       "description": "يرجى إعادة المحاولة."
@@ -2618,7 +2622,8 @@
       "alert": "تحقق من تفاصيل البيع على جهازك قبل إرسالها. يتم تبادل العناوين بشكل آمن حتى لا تضطر إلى التحقق منها."
     },
     "button": {
-      "openManager": "افتح المدير"
+      "openManager": "افتح المدير",
+      "openOnboarding": "Setup device"
     },
     "installApp": "تم إنجاز {{percentage}} من تثبيت تطبيق {{appName}} ",
     "installAppDescription": "يُرجى الانتظار حتى الانتهاء من التثبيت",
