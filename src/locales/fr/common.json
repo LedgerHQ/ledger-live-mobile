@@ -238,6 +238,10 @@
       "title": "Tableau de bord (écran d'accueil) non ouvert sur l'appareil",
       "description": "Merci d'ouvrir le tableau de bord (écran d'accueil) sur votre appareil."
     },
+    "DeviceNotOnboarded": {
+      "title": "Your device is not ready to use yet",
+      "description": "Set up your device before using it with Ledger Live."
+    },
     "DeviceSocketFail": {
       "title": "Échec de la connexion",
       "description": "Veuillez réessayer."
@@ -2618,7 +2622,8 @@
       "alert": "Vérifiez les détails de la vente sur votre appareil avant de l'envoyer. Les adresses sont échangées de manière sécurisée afin que vous n'ayez pas à les vérifier."
     },
     "button": {
-      "openManager": "Ouvrir le Gestionnaire"
+      "openManager": "Ouvrir le Gestionnaire",
+      "openOnboarding": "Setup device"
     },
     "installApp": "Installation de l'app {{appName}} {{percentage}}",
     "installAppDescription": "Merci d'attendre la fin de l'installation.",
