@@ -238,6 +238,10 @@
       "title": "Cihaz, Kontrol Panelinde değil",
       "description": "Lütfen cihazınızdaki Kontrol Paneline geri dönün."
     },
+    "DeviceNotOnboarded": {
+      "title": "Your device is not ready to use yet",
+      "description": "Set up your device before using it with Ledger Live."
+    },
     "DeviceSocketFail": {
       "title": "Üzgünüz, bağlantı başarısız oldu",
       "description": "Lütfen tekrar deneyin."
@@ -2618,7 +2622,8 @@
       "alert": "Göndermeden önce cihazınızdaki Satış bilgilerini doğrulayın. Adresler güvenli bir şekilde aktarılır, böylece onları doğrulamak zorunda kalmazsınız."
     },
     "button": {
-      "openManager": "Yöneticiyi Aç"
+      "openManager": "Yöneticiyi Aç",
+      "openOnboarding": "Setup device"
     },
     "installApp": "{{appName}} Uygulama kurulumu {{percentage}}",
     "installAppDescription": "Lütfen kurulum bitene kadar bekleyin",
