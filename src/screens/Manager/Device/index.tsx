@@ -1,17 +1,22 @@
-import React, { memo } from "react";
+import React, { memo, useCallback, useState } from "react";
 import { Trans } from "react-i18next";
 
-import type { State, AppsDistribution } from "@ledgerhq/live-common/lib/apps";
+import type { State, AppsDistribution, Action } from "@ledgerhq/live-common/lib/apps";
+import type { App } from "@ledgerhq/live-common/lib/types/manager";
 
-import { Flex, Text } from "@ledgerhq/native-ui";
+import { Flex, Text, Button } from "@ledgerhq/native-ui";
 import { CircledCheckMedium } from "@ledgerhq/native-ui/assets/icons";
 import styled, { useTheme } from "styled-components/native";
+import { useNavigation } from "@react-navigation/native";
 import DeviceAppStorage from "./DeviceAppStorage";
 
 import NanoS from "../../../images/devices/NanoS";
 import NanoX from "../../../images/devices/NanoX";
 
 import DeviceName from "./DeviceName";
+
+import { ScreenName } from "../../../const";
+import type { ListAppsResult } from "@ledgerhq/live-common/lib/apps/types";
 
 const illustrations = {
   nanoS: NanoS,
@@ -23,10 +28,12 @@ const illustrations = {
 type Props = {
   distribution: AppsDistribution,
   state: State,
+  result: ListAppsResult,
   deviceId: string,
   initialDeviceName: string,
   blockNavigation: boolean,
   deviceInfo: any,
+  setAppUninstallWithDependencies: (params: { dependents: App[], app: App }) => void,
 };
 
 const BorderCard = styled.View`
@@ -45,18 +52,33 @@ const VersionContainer = styled(Flex).attrs({
 const DeviceCard = ({
   distribution,
   state,
+  result,
   deviceId,
   initialDeviceName,
   blockNavigation,
   deviceInfo,
+  setAppUninstallWithDependencies,
 }: Props) => {
+  const navigation = useNavigation();
   const { colors } = useTheme();
   const { deviceModel } = state;
+
+  const [illustration] = useState(illustrations[deviceModel.id]({color: colors.neutral.c100}));
+
+  const onMyAppsPress = useCallback(() => {
+    navigation.navigate(ScreenName.ManagerMyApps, {
+      result,
+      illustration,
+      deviceInfo,
+      deviceId,
+      setAppUninstallWithDependencies,
+    });
+  }, [navigation, result, illustration, deviceInfo, deviceId, setAppUninstallWithDependencies]);
 
   return (
       <BorderCard>
         <Flex flexDirection={"row"} mt={24} mx={4} mb={8}>
-            { illustrations[deviceModel.id]({color: colors.neutral.c100}) }
+            { illustration }
           <Flex flex={1} flexDirection={'column'} alignItems={'flex-start'} ml={4}>
               <DeviceName
                 deviceId={deviceId}
@@ -78,12 +100,17 @@ const DeviceCard = ({
             </VersionContainer>
           </Flex>
         </Flex>
-
-          <DeviceAppStorage
-            distribution={distribution}
-            deviceModel={deviceModel}
-            deviceInfo={deviceInfo}
-          />
+        
+        <DeviceAppStorage
+          distribution={distribution}
+          deviceModel={deviceModel}
+          deviceInfo={deviceInfo}
+        />
+        <Flex mx={6} mb={6}>
+          <Button size="small" type="color" onPress={onMyAppsPress}>
+            <Trans i18nKey="v3.manager.myApps" />
+          </Button>
+        </Flex>
       </BorderCard>
   );
 };

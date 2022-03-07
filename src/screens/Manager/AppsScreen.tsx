@@ -13,6 +13,7 @@ import { Text, Box, Flex, Button } from "@ledgerhq/native-ui";
 
 import { Trans } from "react-i18next";
 import { useTheme } from "styled-components/native";
+import { ListAppsResult } from "@ledgerhq/live-common/lib/apps/types";
 import { ManagerTab } from "./Manager";
 
 import AppFilter from "./AppsList/AppFilter";
@@ -55,6 +56,7 @@ type Props = {
   updateModalOpened?: boolean;
   tab: ManagerTab;
   optimisticState: State;
+  result: ListAppsResult;
 };
 
 const AppsScreen = ({
@@ -70,6 +72,7 @@ const AppsScreen = ({
   deviceInfo,
   searchQuery,
   optimisticState,
+  result,
 }: Props) => {
   const distribution = distribute(state);
   const { colors } = useTheme();
@@ -138,10 +141,6 @@ const AppsScreen = ({
       ),
     [found, apps],
   );
-
-  const addAccount = useCallback(() => {
-    navigation.navigate(NavigatorName.AddAccounts);
-  }, [navigation]);
 
   const renderNoResults = useCallback(
     () =>
@@ -275,10 +274,12 @@ const AppsScreen = ({
             <DeviceCard
               distribution={distribution}
               state={state}
+              result={result}
               deviceId={deviceId}
               initialDeviceName={initialDeviceName}
               blockNavigation={blockNavigation}
               deviceInfo={deviceInfo}
+              setAppUninstallWithDependencies={setAppUninstallWithDependencies}
             />
             <Box marginBottom={38}>
               <FirmwareManager state={state} deviceInfo={deviceInfo} />

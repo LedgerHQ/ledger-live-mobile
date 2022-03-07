@@ -10,6 +10,7 @@ import { ScreenName } from "../../const";
 import { hasAvailableUpdateSelector } from "../../reducers/settings";
 import Manager from "../../screens/Manager";
 import ManagerMain from "../../screens/Manager/Manager";
+import ManagerMyApps from "../../screens/Manager/MyApps";
 import { getStackNavigatorConfig } from "../../navigation/navigatorConfig";
 import styles from "../../navigation/styles";
 import ReadOnlyTab from "../ReadOnlyTab";
@@ -83,6 +84,15 @@ export default function ManagerNavigator() {
         name={ScreenName.ManagerMain}
         component={ManagerMain}
         options={{ title: "" }}
+      />
+      <Stack.Screen
+        name={ScreenName.ManagerMyApps}
+        component={ManagerMyApps}
+        options={{
+          title: "",
+          headerRight: null,
+          gestureEnabled: false,
+        }}
       />
     </Stack.Navigator>
   );

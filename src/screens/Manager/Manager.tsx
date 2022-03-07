@@ -168,6 +168,7 @@ const Manager = ({
         updateModalOpened={updateModalOpened}
         optimisticState={optimisticState}
         tab={tab}
+        result={result}
       />
       <GenericErrorBottomModal error={error} onClose={closeErrorModal} />
       <QuitManagerModal

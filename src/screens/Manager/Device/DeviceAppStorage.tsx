@@ -21,11 +21,11 @@ const StorageRepartition = styled(Box)`
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
-  flex-basis: 12;
-  height: 12;
-  border-bottom-left-radius: 3;
-  border-bottom-right-radius: 3;
+  flex-basis: 12px;
+  height: 12px;
   overflow: hidden;
+  border-radius: 30px;
+  margin-bottom: 24px;
 `;
 
 const DeviceAppStorage = ({
@@ -45,12 +45,11 @@ const DeviceAppStorage = ({
 
   return (
     /* Fixme: Storage info line might be too tight with some translation, consider putting it on multiple lines */
-    <Box>
+    <Box mx={6}>
       <Flex
         flexDirection={"row"}
         alignItems={"center"}
         justifyContent={"space-between"}
-        mx={5}
         mb={3}
       >
         <Flex flexDirection={"row"} alignItems={"center"}>
