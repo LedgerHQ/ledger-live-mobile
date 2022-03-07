@@ -2,6 +2,7 @@ import React, { useCallback } from "react";
 import { Linking, Image } from "react-native";
 import { Flex, Text } from "@ledgerhq/native-ui";
 import Touchable from "../Touchable";
+import { track } from "../../analytics";
 
 type SlideProps = {
   url: string;
@@ -22,6 +23,9 @@ const Slide = ({
   position,
 }: SlideProps) => {
   const onClick = useCallback(() => {
+    track("Portfolio Recommended OpenUrl", {
+      url,
+    });
     Linking.openURL(url);
   }, [url]);
   return (

@@ -10,6 +10,7 @@ import nanoX from "../assets/nanoX";
 import Touchable from "../../../components/Touchable";
 import { ScreenName } from "../../../const";
 import OnboardingView from "../OnboardingView";
+import StyledStatusBar from "../../../components/StyledStatusBar";
 
 const devices = [nanoX, nanoSP, nanoS];
 
@@ -42,6 +43,7 @@ function OnboardingStepDeviceSelection() {
       centerTitle
       title={t("onboarding.stepSelectDevice.title")}
     >
+      <StyledStatusBar barStyle="dark-content" />
       <Carousel containerProps={{ flex: 0.9 }} scrollViewProps={{}}>
         {devices.map(Device => (
           <Touchable

@@ -4,15 +4,9 @@
 /* eslint-disable import/no-unresolved */
 import React, { useMemo, useCallback, useState, useEffect } from "react";
 import { useTheme } from "styled-components/native";
-import {
-  Flex,
-  Text,
-  ScrollContainerHeader,
-  Icons,
-  Icon,
-} from "@ledgerhq/native-ui";
+import { Flex, Text, ScrollContainerHeader, Icons } from "@ledgerhq/native-ui";
 import { useDispatch, useSelector } from "react-redux";
-import { useTranslation, TFunction } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import {
   useMarketData,
   useSingleCoinMarketData,
@@ -78,10 +72,10 @@ export default function MarketDetail({
   route,
 }: {
   navigation: any;
-  route: { params: { currencyId: string } };
+  route: { params: { currencyId: string; resetSearchOnUmount?: boolean } };
 }) {
   const { params } = route;
-  const { currencyId } = params;
+  const { currencyId, resetSearchOnUmount } = params;
   const { t } = useTranslation();
   const { colors } = useTheme();
   const { locale } = useLocale();
@@ -110,14 +104,17 @@ export default function MarketDetail({
     isLiveSupported,
   } = currency || {};
 
-  useEffect(
-    () => () => {
-      // @ts-expect-error can be an input
+  useEffect(() => {
+    const resetState = () => {
       selectCurrency(undefined);
-      refresh({});
-    },
-    [selectCurrency, refresh],
-  );
+      refresh(resetSearchOnUmount ? { search: "", ids: [] } : {});
+    };
+    const sub = navigation.addListener("blur", resetState);
+    return () => {
+      sub();
+      resetState();
+    };
+  }, [selectCurrency, refresh, resetSearchOnUmount, navigation]);
 
   const allAccounts = useSelector(
     accountsByCryptoCurrencyScreenSelector(internalCurrency),
@@ -129,7 +126,9 @@ export default function MarketDetail({
     swapSelectableCurrenciesSelector(state),
   );
   const availableOnSwap =
-    internalCurrency && swapCurrencies.includes(internalCurrency.id);
+    internalCurrency &&
+    allAccounts?.length > 0 &&
+    swapCurrencies.includes(internalCurrency.id);
 
   const toggleStar = useCallback(() => {
     const action = isStarred ? removeStarredMarketCoins : addStarredMarketCoins;
@@ -149,25 +148,13 @@ export default function MarketDetail({
   >();
 
   const navigateToBuy = useCallback(() => {
-    if (allAccounts && allAccounts.length === 1) {
-      navigation.navigate(NavigatorName.ExchangeBuyFlow, {
-        screen: ScreenName.ExchangeConnectDevice,
-        params: {
-          mode: "buy",
-          currency: internalCurrency,
-          account: allAccounts[0],
-        },
-      });
-    } else {
-      navigation.navigate(NavigatorName.ExchangeBuyFlow, {
-        screen: ScreenName.ExchangeSelectAccount,
-        params: {
-          mode: "buy",
-          currency: internalCurrency,
-        },
-      });
-    }
-  }, [navigation, internalCurrency, allAccounts]);
+    navigation.navigate(NavigatorName.Exchange, {
+      screen: ScreenName.ExchangeBuy,
+      params: {
+        mode: "buy",
+      },
+    });
+  }, [navigation]);
 
   /** Disabled for now on demand of PO
   const renderAccountItem = useCallback(
@@ -185,19 +172,13 @@ export default function MarketDetail({
   */
 
   const navigateToSwap = useCallback(() => {
-    if (allAccounts && allAccounts.length === 1) {
-      navigation.navigate(NavigatorName.Swap, {
-        screen: ScreenName.Swap,
-      });
-    } else {
-      navigation.navigate(NavigatorName.AddAccounts, {
-        screen: ScreenName.AddAccountsSelectDevice,
-        params: {
-          currency: internalCurrency,
-        },
-      });
-    }
-  }, [navigation, internalCurrency, allAccounts]);
+    navigation.navigate(NavigatorName.Swap, {
+      screen: ScreenName.Swap,
+      params: {
+        defaultAccount: allAccounts?.length > 0 ? allAccounts[0] : undefined,
+      },
+    });
+  }, [navigation, allAccounts]);
 
   useEffect(() => {
     if (name) {
@@ -238,6 +219,7 @@ export default function MarketDetail({
                 size={32}
                 currency={internalCurrency}
                 color={undefined}
+                sizeRatio={0.9}
               />
             ) : (
               image && (

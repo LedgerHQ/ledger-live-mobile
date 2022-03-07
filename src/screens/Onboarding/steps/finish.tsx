@@ -42,7 +42,7 @@ export default function OnboardingStepFinish({ navigation }: Props) {
   }
 
   return (
-    <Flex flex={1} bg="constant.black">
+    <Flex flex={1} bg="primary.c60">
       <Animatable.View
         style={{
           height: "100%",

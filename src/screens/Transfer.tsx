@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { SortMedium } from "@ledgerhq/native-ui/assets/icons";
+import { Icons } from "@ledgerhq/native-ui";
 
 import styled from "styled-components/native";
 import Touchable from "../components/Touchable";
@@ -43,7 +43,7 @@ export function TransferTabIcon() {
         hitSlop={hitSlop}
         onPress={openModal}
       >
-        <SortMedium size={24} color={"palette.background.main"} />
+        <Icons.Sort1Medium size={24} color={"palette.background.main"} />
       </TransferButton>
       <CreateModal isOpened={isModalOpened} onClose={onModalClose} />
     </>

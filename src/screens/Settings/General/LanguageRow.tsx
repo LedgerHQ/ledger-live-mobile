@@ -35,7 +35,7 @@ export default function LanguageSettingsRow() {
     navigate(NavigatorName.BaseOnboarding, {
       screen: NavigatorName.Onboarding,
       params: {
-        screen: ScreenName.OnboardingLanguage,
+        screen: ScreenName.OnboardingLanguageModal,
       },
     });
   }, [navigate]);

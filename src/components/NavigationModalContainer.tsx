@@ -12,6 +12,8 @@ const ScreenContainer = styled(Flex).attrs(p => ({
   edges: ["bottom"],
   flex: 1,
   p: p.p ?? 6,
+  borderTopLeftRadius: 16,
+  borderTopRightRadius: 16,
 }))``;
 type Props = StackScreenProps<{}> & { 
   children: React.ReactNode, 
@@ -28,7 +30,7 @@ export default function NavigationModalContainer({
   backgroundColor = "palette.neutral.c00",
 }: Props) {
   return (
-    <SafeAreaView flex={1}>
+    <SafeAreaView style={{flex: 1 }}>
       <Flex minHeight={MIN_MODAL_HEIGHT} {...deadZoneProps}>
         <Pressable
           style={{ flex: 1 }}
@@ -39,7 +41,7 @@ export default function NavigationModalContainer({
       </Flex>
 
       <ScreenContainer backgroundColor={backgroundColor} {...contentContainerProps}>
-        <Flex style={{ flex: 1 }}>{children}</Flex>
+        <Flex style={{ flex: 1, borderRadius: 50 }}>{children}</Flex>
       </ScreenContainer>
     </SafeAreaView>
   );

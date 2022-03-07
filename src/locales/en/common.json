@@ -1292,7 +1292,17 @@
     "settings": "Settings",
     "platform": "Discover",
     "nanoX": "Nano X",
-    "market": "Market"
+    "market": "Market",
+    "learn": "Learn"
+  },
+  "learn": {
+    "pageTitle": "learn",
+    "noConnection": "No connection",
+    "noConnectionDesc": "It seems you don't have access to the Internet. Please check your connection and try again.",
+    "sectionShows": "Shows",
+    "sectionVideo": "Video",
+    "sectionPodcast": "Podcast",
+    "sectionArticles": "Articles"
   },
   "portfolio": {
     "totalBalance": "Total balance",
@@ -1683,6 +1693,7 @@
       "theme": "Theme",
       "themeDesc": "Set the app UI theme",
       "themes": {
+        "system": "System",
         "dark": "Dark",
         "light": "Light"
       },
@@ -3879,6 +3890,7 @@
       "title": "External Application",
       "description": "You are about to be redirected to an application not operated by Ledger.",
       "legalAdvice": "This application is not operated by Ledger. Ledger is not responsible for any loss of funds or quality of service of such application.\n\nAlways make sure to carefully verify the information displayed on your device.",
+      "legalAdviceShort": "Ledger is not responsible for any loss of funds. Always make sure to verify the information displayed on your device.",
       "checkbox": "Do not remind me again.",
       "CTA": "Continue"
     },
@@ -5261,6 +5273,10 @@
       },
       "recommended": {
         "title": "Recommended"
+      },
+      "topGainers": {
+        "title": "Top gainers (24H)",
+        "seeMarket": "See market"
       }
     },
     "addAccountsModal": {

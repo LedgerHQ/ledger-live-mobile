@@ -13,8 +13,10 @@ import { isAccountEmpty } from "@ledgerhq/live-common/lib/account";
 import { Box, Flex, Link, Text } from "@ledgerhq/native-ui";
 
 import styled from "styled-components/native";
+import { FlexBoxProps } from "@ledgerhq/native-ui/components/Layout/Flex";
 import { useRefreshAccountsOrdering } from "../../actions/general";
 import { accountsSelector } from "../../reducers/accounts";
+import { discreetModeSelector } from "../../reducers/settings";
 import {
   counterValueCurrencySelector,
   carouselVisibilitySelector,
@@ -36,6 +38,7 @@ import FirmwareUpdateBanner from "../../components/FirmwareUpdateBanner";
 import DiscoverSection from "./DiscoverSection";
 import AddAssetsCard from "./AddAssetsCard";
 import Assets from "./Assets";
+import MarketSection from "./MarketSection";
 
 export { default as PortfolioTabIcon } from "./TabIcon";
 
@@ -62,11 +65,15 @@ const SectionTitle = ({
   onSeeAllPress,
   navigatorName,
   navigation,
+  seeMoreText,
+  containerProps,
 }: {
   title: React.ReactElement;
   onSeeAllPress?: () => void;
   navigatorName?: keyof typeof NavigatorName;
   navigation?: any;
+  seeMoreText?: React.ReactElement;
+  containerProps?: FlexBoxProps;
 }) => {
   const onLinkPress = useCallback(() => {
     if (onSeeAllPress) {
@@ -83,13 +90,14 @@ const SectionTitle = ({
       justifyContent={"space-between"}
       alignItems={"center"}
       mb={6}
+      {...containerProps}
     >
       <Text variant={"h3"} textTransform={"uppercase"} mt={2}>
         {title}
       </Text>
       {(onSeeAllPress || navigatorName) && (
         <Link onPress={onLinkPress} type={"color"}>
-          <Trans i18nKey={"common.seeAll"} />
+          {seeMoreText || <Trans i18nKey={"common.seeAll"} />}
         </Link>
       )}
     </Flex>
@@ -101,6 +109,7 @@ export default function PortfolioScreen({ navigation }: Props) {
   const accounts = useSelector(accountsSelector);
   const counterValueCurrency = useSelector(counterValueCurrencySelector);
   const portfolio = usePortfolio();
+  const discreetMode = useSelector(discreetModeSelector);
 
   const refreshAccountsOrdering = useRefreshAccountsOrdering();
   useFocusEffect(refreshAccountsOrdering);
@@ -172,7 +181,7 @@ export default function PortfolioScreen({ navigation }: Props) {
             </Flex>,
           ]
         : []),
-      <Flex mx={6} mt={10}>
+      <Flex mx={6} mt={9}>
         <SectionTitle
           title={<Trans i18nKey={"tabs.platform"} />}
           navigation={navigation}
@@ -190,6 +199,16 @@ export default function PortfolioScreen({ navigation }: Props) {
             </Flex>,
           ]
         : []),
+      <Flex mx={6} mt={10}>
+        <SectionTitle
+          title={<Trans i18nKey={"v3.portfolio.topGainers.title"} />}
+          navigation={navigation}
+          navigatorName={NavigatorName.Market}
+          seeMoreText={<Trans i18nKey={"v3.portfolio.topGainers.seeMarket"} />}
+          containerProps={{ mb: 5 }}
+        />
+        <MarketSection />
+      </Flex>,
       <Box mt={24} />,
     ],
     [
@@ -210,7 +229,11 @@ export default function PortfolioScreen({ navigation }: Props) {
       <ContentContainer>
         <RequireTerms />
 
-        <TrackScreen category="Portfolio" accountsLength={accounts.length} />
+        <TrackScreen
+          category="Portfolio"
+          accountsLength={accounts.length}
+          discreet={discreetMode}
+        />
 
         <AnimatedFlatListWithRefreshControl
           ref={ref}

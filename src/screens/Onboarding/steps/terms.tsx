@@ -14,6 +14,7 @@ import { useTermsAccept } from "../../../logic/terms";
 import { useLocale } from "../../../context/Locale";
 import { urls } from "../../../config/urls";
 import OnboardingView from "../OnboardingView";
+import StyledStatusBar from "../../../components/StyledStatusBar";
 
 type LinkBoxProps = {
   text: React.ReactNode;
@@ -24,6 +25,7 @@ type LinkBoxProps = {
 
 const LinkBox = React.memo(({ text, url, event, mb = 0 }: LinkBoxProps) => (
   <Touchable onPress={() => Linking.openURL(url)} event={event}>
+    <StyledStatusBar barStyle="dark-content" />
     <Flex
       borderRadius={4}
       flexDirection="row"

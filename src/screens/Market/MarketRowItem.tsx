@@ -47,7 +47,7 @@ function MarketRowItem({ item, index, counterCurrency, locale, t }: Props) {
       flexDirection="row"
       justifyContent="flex-start"
       alignItems="center"
-      p="16px"
+      py="16px"
       key={index}
     >
       {isLiveSupported && internalCurrency ? (

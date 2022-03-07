@@ -27,7 +27,7 @@ export default function MarketDataProviderWrapper({
       initState={{
         requestParams: {
           range: "24h",
-          limit: 20,
+          limit: 100,
           ids: [],
           starred: [],
           orderBy: "market_cap",
