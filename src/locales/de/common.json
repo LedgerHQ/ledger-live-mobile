@@ -238,6 +238,10 @@
       "title": "Gerät nicht auf dem Dashboard",
       "description": "Bitte kehren Sie zum Dashboard auf Ihrem Gerät zurück."
     },
+    "DeviceNotOnboarded": {
+      "title": "Your device is not ready to use yet",
+      "description": "Set up your device before using it with Ledger Live."
+    },
     "DeviceSocketFail": {
       "title": "Entschuldigung, Verbindung fehlgeschlagen",
       "description": "Bitte versuchen Sie es erneut."
@@ -2618,7 +2622,8 @@
       "alert": "Überprüfen Sie die Verkaufsdetails auf Ihrem Gerät, bevor Sie sie senden. Die Adressen werden sicher ausgetauscht, sodass Sie diese nicht verifizieren müssen."
     },
     "button": {
-      "openManager": "Manager öffnen"
+      "openManager": "Manager öffnen",
+      "openOnboarding": "Setup device"
     },
     "installApp": "{{appName}} App-Installation {{percentage}}",
     "installAppDescription": "Bitte warten Sie, bis die Installation beendet ist",
