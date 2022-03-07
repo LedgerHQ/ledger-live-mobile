@@ -7,7 +7,6 @@ import { ChevronBottomMedium } from "@ledgerhq/native-ui/assets/icons";
 import Video from "react-native-video";
 
 import Svg, { Defs, LinearGradient, Rect, Stop } from "react-native-svg";
-import * as Animatable from "react-native-animatable";
 import Button from "../../../components/Button";
 import { useLocale } from "../../../context/Locale";
 import { ScreenName } from "../../../const";
@@ -16,9 +15,11 @@ import StyledStatusBar from "../../../components/StyledStatusBar";
 const source = require("../../../../assets/videos/onboarding.mp4");
 
 const absoluteStyle = {
-  height: "100%",
-  width: "100%",
   position: "absolute",
+  bottom: 0,
+  left: 0,
+  top: 0,
+  right: 0,
 };
 
 const SafeFlex = styled(SafeAreaView)`
@@ -46,18 +47,11 @@ function OnboardingStepWelcome({ navigation }: any) {
         muted
         repeat
         resizeMode={"cover"}
-        mixWithOthers="mix"
-        bufferConfig={{
-          minBufferMs: 500,
-          maxBufferMs: 1000,
-          bufferForPlaybackMs: 500,
-          bufferForPlaybackAfterRebufferMs: 1000,
-        }}
       />
       <Svg
         style={absoluteStyle}
         width="100%"
-        height="100%"
+        height="120%"
         preserveAspectRatio="xMinYMin slice"
       >
         <Defs>
