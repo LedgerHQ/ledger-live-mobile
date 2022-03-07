@@ -238,6 +238,10 @@
       "title": "Устройство не переведено на Панель управления",
       "description": "Пожалуйста, переключитесь на Панель управления на устройстве (Dashboard)."
     },
+    "DeviceNotOnboarded": {
+      "title": "Your device is not ready to use yet",
+      "description": "Set up your device before using it with Ledger Live."
+    },
     "DeviceSocketFail": {
       "title": "Произошёл сбой подключения",
       "description": "Пожалуйста, попробуйте ещё раз."
@@ -2618,7 +2622,8 @@
       "alert": "Перед отправкой проверьте детали продажи на устройстве. Обмен адресами осуществляется безопасно и не требует подтверждения."
     },
     "button": {
-      "openManager": "Открыть Диспетчер"
+      "openManager": "Открыть Диспетчер",
+      "openOnboarding": "Setup device"
     },
     "installApp": "Установка приложения {{appName}}: {{percentage}}",
     "installAppDescription": "Дождитесь завершения установки",
