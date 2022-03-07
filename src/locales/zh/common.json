@@ -239,8 +239,8 @@
       "description": "请返回设备的功能面板。"
     },
     "DeviceNotOnboarded": {
-      "title": "Your device is not ready to use yet",
-      "description": "Set up your device before using it with Ledger Live."
+      "title": "您的设备尚未准备好使用",
+      "description": "在使用 Ledger Live 之前设置您的设备。"
     },
     "DeviceSocketFail": {
       "title": "抱歉，连接失败",
@@ -866,7 +866,7 @@
               "label": "通过连接到手机的 USB 端口来启动您的设备。"
             },
             "nanoSP": {
-              "label": "Turn on your device by connecting it to the USB port of your phone."
+              "label": "通过连接到手机的 USB 端口来启动您的设备。"
             },
             "blue": {
               "label": "通过连接到您手机的 USB 端口并按电源按钮来启动您的设备。"
@@ -1044,7 +1044,7 @@
               "label": "通过连接到手机的 USB 端口来启动您的设备。"
             },
             "nanoSP": {
-              "label": "Turn on your device by connecting it to the USB port of your phone."
+              "label": "通过连接到手机的 USB 端口来启动您的设备。"
             },
             "blue": {
               "label": "通过连接设备到您手机的 USB 端口并按电源按钮来启动您的设备。"
@@ -1104,9 +1104,9 @@
         "cta": "来连接我的 Nano"
       },
       "nanoSP": {
-        "title": "Connect your Nano",
-        "desc": "This is the first time you’re setting up your Nano with this phone. Let’s quickly connect your device.",
-        "cta": "Let’s connect my Nano"
+        "title": "连接您的 Nano",
+        "desc": "这是您第一次使用该手机设置您的 Nano。让我们快速连接您的设备。",
+        "cta": "来连接我的 Nano"
       },
       "blue": {
         "title": "连接您的 Blue",
@@ -1293,17 +1293,17 @@
     "settings": "设置",
     "platform": "发现",
     "nanoX": "Nano X",
-    "market": "Market",
-    "learn": "Learn"
+    "market": "市场",
+    "learn": "学习"
   },
   "learn": {
-    "pageTitle": "learn",
-    "noConnection": "No connection",
-    "noConnectionDesc": "It seems you don't have access to the Internet. Please check your connection and try again.",
-    "sectionShows": "Shows",
-    "sectionVideo": "Video",
-    "sectionPodcast": "Podcast",
-    "sectionArticles": "Articles"
+    "pageTitle": "学习",
+    "noConnection": "无网络连接",
+    "noConnectionDesc": "未接入互联网，请检查连接状态后再次尝试。",
+    "sectionShows": "节目",
+    "sectionVideo": "视频",
+    "sectionPodcast": "播客",
+    "sectionArticles": "文章"
   },
   "portfolio": {
     "totalBalance": "总余额",
@@ -1456,8 +1456,8 @@
       "palletMethod": "方法",
       "transferAmount": "转移数额",
       "validatorsCount": "验证器 ({{number}})",
-      "storageLimit": "Storage Limit",
-      "gasLimit": "Gas Limit",
+      "storageLimit": "存储空间限制",
+      "gasLimit": "Gas 限制",
       "id": "Id"
     },
     "multipleAddresses": "为什么有多个地址？",
@@ -1694,7 +1694,7 @@
       "theme": "主题",
       "themeDesc": "设置用户界面主题",
       "themes": {
-        "system": "System",
+        "system": "系统",
         "dark": "暗色",
         "light": "亮色"
       },
@@ -2608,7 +2608,7 @@
     "quitApp": "在设备上退出该应用程序",
     "appNotInstalled": "请安装 {{appName}} 应用程序",
     "appNotInstalled_plural": "请安装 {{appName}} 应用程序",
-    "useAnotherDevice": "Use another device",
+    "useAnotherDevice": "使用其他设备",
     "verifyAddress": {
       "title": "在设备上验证地址",
       "description": "请验证这个将要在 Ledger Live 上显示的 {{currencyName}} 地址与您的 Ledger 设备上显示的地址一致。"
@@ -2623,7 +2623,7 @@
     },
     "button": {
       "openManager": "打开管理器",
-      "openOnboarding": "Setup device"
+      "openOnboarding": "设置设备"
     },
     "installApp": "{{appName}} 应用程序安装 {{percentage}}",
     "installAppDescription": "请耐心等待，直至安装完成",
@@ -3900,32 +3900,32 @@
     }
   },
   "market": {
-    "title": "Market",
+    "title": "市场",
     "filters": {
-      "sort": "Sort",
-      "filter": "Filter",
+      "sort": "排序",
+      "filter": "筛选",
       "view": {
-        "label": "View",
-        "all": "All coins",
+        "label": "查看",
+        "all": "所有代币",
         "liveCompatible": "Live Compatible",
-        "all_label": "All cryptocurrencies",
+        "all_label": "所有加密货币",
         "liveCompatible_label": "Only Live Supported"
       },
       "order": {
-        "market_cap": "Rank",
+        "market_cap": "排名",
         "market_cap_asc": "Rank (Market cap) asc.",
         "market_cap_desc": "Rank (Market cap) desc."
       },
-      "currency": "Currency",
-      "time": "Time",
-      "apply": "Apply"
+      "currency": "币种",
+      "time": "时间",
+      "apply": "应用"
     },
     "marketList": {
-      "crypto": "Crypto",
-      "price": "Price",
+      "crypto": "加密货币",
+      "price": "价格",
       "change": "Change",
-      "marketCap": "Market cap",
-      "last7d": "Last 7 days"
+      "marketCap": "市值",
+      "last7d": "过去 7 天"
     },
     "detailsPage": {
       "holding": "Your Holdings",
