@@ -4,24 +4,24 @@ describe("WebdriverIO and Appium, when setup is fine,", () => {
     const getStartedButton = await $("~get-started-button");
     await getStartedButton.touchAction("tap");
 
-    await delay(1000);
+    await delay(500);
 
     const termsCheckbox = await $("~terms-checkbox");
     termsCheckbox.touchAction("tap");
 
-    await delay(1000);
+    await delay(500);
 
     const enterAppButton = await $("~enter-app-button");
     enterAppButton.touchAction("tap");
 
-    await delay(1000);
+    await delay(500);
 
     const deviceSelectionButton = await $(
       "~Onboarding Device - Selection|nanoX",
     );
     deviceSelectionButton.touchAction("tap");
 
-    await delay(1000);
+    await delay(500);
 
     // ==================
     const connectNanoTile = await $("~Onboarding - Connect|nanoX");
@@ -78,6 +78,13 @@ describe("WebdriverIO and Appium, when setup is fine,", () => {
     // await delay(10000);
 
     await connectNanoTile.touchAction("tap");
+    await delay(500);
+
+    const seedWarning = await $("~Onboarding - Seed warning");
+    await seedWarning.touchAction("tap");
+
+    const newPairContinue = await $("~OnboardingStemPairNewContinue");
+    await newPairContinue.touchAction("tap");
     await delay(1000);
   });
 });
