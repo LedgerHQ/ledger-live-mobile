@@ -82,6 +82,7 @@ function OnboardingStepUseCaseSelection({ navigation, route }: Props) {
       <TrackScreen category="Onboarding" name="UseCase" />
       <FlatList
         data={useCases}
+        accessibilityLabel="use-case-container"
         renderItem={({ item, index }) => (
           <Fragment key={item.key + index}>
             {index < 2 && (
@@ -95,7 +96,7 @@ function OnboardingStepUseCaseSelection({ navigation, route }: Props) {
               testID={`${item.event}|${deviceModelId}`}
               onPress={() => next(item)}
               style={[styles.button, { backgroundColor: colors.lightLive }]}
-              buttonAccessibilityId="connect-nano-tile"
+              touchableAccessibilityId={`${item.event}|${deviceModelId}`}
             >
               <LText semiBold style={[styles.label]} color="live">
                 <Trans i18nKey={`onboarding.stepUseCase.${item.key}.label`} />
