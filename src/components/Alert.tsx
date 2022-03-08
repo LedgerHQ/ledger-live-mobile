@@ -24,10 +24,7 @@ type Props = {
   id?: string;
   type: AlertType;
   children: React.ReactNode;
-  left?: React.ReactNode;
-  bottom?: React.ReactNode;
   title?: string;
-  vertical?: boolean;
   noIcon?: boolean;
   onLearnMore?: () => any;
   learnMoreKey?: string;
@@ -70,12 +67,12 @@ function getAlertProps(type: AlertType) {
       icon: Icons.ShieldSecurityMedium,
     },
     danger: {
-      type: "warning",
+      type: "error",
       icon: Icons.ShieldSecurityMedium,
     },
     update: {
-      type: "",
-      icon: null,
+      type: "warning",
+      icon: Icons.WarningMedium,
     },
   }[type];
 }
@@ -86,7 +83,6 @@ export default function Alert(props: Props) {
     type = "secondary",
     children: description,
     title,
-    vertical,
     noIcon,
     onLearnMore,
     learnMoreUrl,
@@ -117,7 +113,6 @@ export default function Alert(props: Props) {
 
   const learnMore = hasLearnMore && (
     <Text onPress={handleLearnMore}>
-      {" "}
       <Text style={[styles.learnMore]} fontSize={3}>
         <Trans i18nKey={learnMoreKey || "common.learnMore"} />
       </Text>
@@ -135,29 +130,19 @@ export default function Alert(props: Props) {
     id,
   ]);
 
-  if (type === "update") return <OldAlert {...props} />;
-
   /** TODO:
    * - cleanup styles
    * - use latest version of lib UI with customizable icon
-   * - implement proper design for learnMore link https://www.figma.com/file/wGzwuUVo0rkCJ3sM8cpbDY/LLM-%2F-Library?node-id=5913%3A67123
+   * - implement proper design for learnMore link using UI lib https://www.figma.com/file/wGzwuUVo0rkCJ3sM8cpbDY/LLM-%2F-Library?node-id=5913%3A67123
    */
 
   return (
     !isDismissed && (
       <BaseAlert {...alertProps}>
         <View style={[styles.root]}>
-          <View style={[styles.container, vertical && styles.vertical]}>
-            <View style={vertical ? styles.verticalContent : styles.content}>
-              {title ? (
-                <Text style={[vertical && styles.textCentered]}>{title}</Text>
-              ) : null}
-              <Text style={[vertical && styles.textCentered]}>
-                <Text fontSize={3}>{description}</Text>
-                {learnMore}
-              </Text>
-            </View>
-          </View>
+          {title ? <Text>{title}</Text> : null}
+          <Text fontSize={3}>{description}</Text>
+          <Text>{learnMore}</Text>
         </View>
       </BaseAlert>
     )
@@ -168,25 +153,8 @@ const styles = StyleSheet.create({
   root: {
     width: "100%",
     flexDirection: "column",
-  },
-  container: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  vertical: {
-    width: "100%",
-    flexDirection: "column",
-  },
-  content: {
     flex: 1,
     alignItems: "flex-start",
-  },
-  verticalContent: {
-    flex: 0,
-    alignItems: "center",
-  },
-  textCentered: {
-    textAlign: "center",
   },
   learnMore: {
     textDecorationLine: "underline",
