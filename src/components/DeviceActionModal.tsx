@@ -2,13 +2,10 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 import { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import { SyncSkipUnderPriority } from "@ledgerhq/live-common/lib/bridge/react";
-import { useTheme } from "@react-navigation/native";
+import { Alert } from "@ledgerhq/native-ui";
 import { useTranslation } from "react-i18next";
 import DeviceAction from "./DeviceAction";
 import BottomModal from "./BottomModal";
-import ModalBottomAction from "./ModalBottomAction";
-
-import InfoBox from "./InfoBox";
 
 type Props = {
   // TODO: fix action type
@@ -35,7 +32,6 @@ export default function DeviceActionModal({
   onSelectDeviceLink,
   analyticsPropertyFlow,
 }: Props) {
-  const { colors } = useTheme();
   const { t } = useTranslation();
   return (
     <BottomModal
@@ -45,29 +41,23 @@ export default function DeviceActionModal({
       onModalHide={onModalHide}
     >
       {device && (
-        <ModalBottomAction
-          footer={
-            <View>
-              <View style={styles.footerContainer}>
-                <DeviceAction
-                  action={action}
-                  device={device}
-                  request={request}
-                  onClose={onClose}
-                  onResult={onResult}
-                  renderOnResult={renderOnResult}
-                  onSelectDeviceLink={onSelectDeviceLink}
-                  analyticsPropertyFlow={analyticsPropertyFlow}
-                />
-              </View>
-              {!device.wired ? (
-                <InfoBox forceColor={{ text: colors.live }}>
-                  {t("DeviceAction.stayInTheAppPlz")}
-                </InfoBox>
-              ) : null}
-            </View>
-          }
-        />
+        <View>
+          <View style={styles.footerContainer}>
+            <DeviceAction
+              action={action}
+              device={device}
+              request={request}
+              onClose={onClose}
+              onResult={onResult}
+              renderOnResult={renderOnResult}
+              onSelectDeviceLink={onSelectDeviceLink}
+              analyticsPropertyFlow={analyticsPropertyFlow}
+            />
+          </View>
+          {!device.wired ? (
+            <Alert type="info" title={t("DeviceAction.stayInTheAppPlz")} />
+          ) : null}
+        </View>
       )}
       {device && <SyncSkipUnderPriority priority={100} />}
     </BottomModal>
@@ -78,10 +68,5 @@ const styles = StyleSheet.create({
   footerContainer: {
     flexDirection: "row",
     marginBottom: 10,
-  },
-  close: {
-    position: "absolute",
-    right: 16,
-    top: 16,
   },
 });
