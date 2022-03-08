@@ -1,5 +1,6 @@
-import React, { useState, useCallback, ReactNode } from "react";
-import { useTheme } from "@react-navigation/native";
+import React, { useState, useCallback, useEffect, ReactNode } from "react";
+import { useTheme } from "styled-components/native";
+import { useTranslation } from "react-i18next";
 import { Unit, Currency, AccountLike } from "@ledgerhq/live-common/lib/types";
 import {
   getAccountCurrency,
@@ -12,6 +13,8 @@ import {
   BalanceHistoryWithCountervalue,
 } from "@ledgerhq/live-common/lib/portfolio/v2/types";
 import { Box, Flex, Text } from "@ledgerhq/native-ui";
+import { counterValueFormatter } from "../screens/Market/utils";
+import { useLocale } from "../context/Locale";
 
 import { ensureContrast } from "../colors";
 import getWindowDimensions from "../logic/getWindowDimensions";
@@ -24,6 +27,10 @@ import CurrencyUnitValue from "./CurrencyUnitValue";
 import Placeholder from "./Placeholder";
 import { Item } from "./Graph/types";
 import CurrencyRate from "./CurrencyRate";
+import Chart from "./chart";
+import { discreetModeSelector } from "../reducers/settings";
+import { useSelector } from "react-redux";
+import { useBalanceHistoryWithCountervalue } from "../actions/portfolio";
 
 type Props = {
   account: AccountLike;
@@ -47,24 +54,40 @@ export default function AccountGraphCard({
   renderAccountSummary,
 }: Props) {
   const { colors } = useTheme();
-  const [hoveredItem, setHoverItem] = useState<Item | undefined>();
-  const [, setTimeRange, timeRangeItems] = useTimeRange();
-  const mapCryptoValue = useCallback(d => d.value || 0, []);
-  const mapCounterValue = useCallback(
-    d => (d.countervalue ? d.countervalue : 0),
-    [],
-  );
+  const { t } = useTranslation();
+  const discreet = useSelector(discreetModeSelector);
+  const [timeRange, setTimeRange, timeRangeItems] = useTimeRange();
+  const { countervalueChange } = useBalanceHistoryWithCountervalue({ account, range: timeRange });
 
   const isAvailable = !useCounterValue || countervalueAvailable;
 
+  const { locale } = useLocale();
   const currency = getAccountCurrency(account);
   const unit = getAccountUnit(account);
   const graphColor = ensureContrast(
     getCurrencyColor(currency),
-    colors.background,
+    colors.neutral.c30,
   );
 
   const accountSummary = renderAccountSummary && renderAccountSummary();
+
+  const [tickFormat, setTickFormat] = useState("MMM");
+  useEffect(() => {
+    switch (timeRange) {
+      case "day":
+        setTickFormat("h:mm a");
+        break;
+      case "week":
+        setTickFormat("ddd");
+        break;
+      case "month":
+        setTickFormat("MMM Do");
+        break;
+      default:
+        setTickFormat("MMM");
+        break;
+    }
+  }, [timeRange]);
 
   return (
     <Box padding={6} borderRadius={2} bg={"neutral.c30"}>
@@ -72,23 +95,38 @@ export default function AccountGraphCard({
         account={account}
         isLoading={!isAvailable}
         to={history[history.length - 1]}
-        hoveredItem={hoveredItem}
         cryptoCurrencyUnit={unit}
         counterValueUnit={counterValueCurrency.units[0]}
         useCounterValue={useCounterValue}
-        valueChange={valueChange}
+        valueChange={countervalueChange}
       />
-      <Graph
-        isInteractive={isAvailable}
-        isLoading={!isAvailable}
-        height={100}
-        width={getWindowDimensions().width - 64}
-        color={isAvailable ? graphColor : colors.grey}
+      <Chart
         data={history}
-        onItemHover={setHoverItem}
-        mapValue={useCounterValue ? mapCounterValue : mapCryptoValue}
+        backgroundColor={colors.neutral.c30}
+        color={isAvailable ? graphColor : colors.neutral.c70}
+        tickFormat={tickFormat}
+        valueKey={"countervalue"}
+        disableTooltips={discreet}
+        yAxisFormatter={counterValue =>
+          counterValueFormatter({
+            value: counterValue / 100,
+            shorten: true,
+            locale,
+            allowZeroValue: true,
+            t,
+          })
+        }
+        valueFormatter={counterValue =>
+          counterValueFormatter({
+            value: counterValue / 100,
+            currency: counterValueCurrency.ticker,
+            locale,
+            allowZeroValue: true,
+            t,
+          })
+        }
       />
-      <Box marginTop={6}>
+      <Box>
         <Pills
           isDisabled={!isAvailable}
           value={range}

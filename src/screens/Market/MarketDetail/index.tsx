@@ -31,7 +31,7 @@ import {
   removeStarredMarketCoins,
 } from "../../../actions/settings";
 import MarketStats from "./MarketStats";
-import MarketGraph from "./MarketGraph";
+import MarketGraph from "../../../components/chart/ChartCard";
 import { accountsByCryptoCurrencyScreenSelector } from "../../../reducers/accounts";
 // import AccountRow from "../../Accounts/AccountRow";
 import { track } from "../../../analytics";
@@ -245,7 +245,7 @@ export default function MarketDetail({
           />
         }
         BottomSection={
-          <Flex justifyContent="center" alignItems="flex-start">
+          <Flex justifyContent="center" alignItems="flex-start" pb={3}>
             <Text variant="h1" mb={1}>
               {counterValueFormatter({
                 currency: counterCurrency,
