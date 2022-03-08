@@ -1,18 +1,15 @@
 import React, { useEffect } from "react";
-import { View, StyleSheet } from "react-native";
 import { useDispatch } from "react-redux";
+import styled from "styled-components/native";
 import Icon from "react-native-vector-icons/dist/Feather";
 import { WrongDeviceForAccount, UnexpectedBootloader } from "@ledgerhq/errors";
 import { TokenCurrency } from "@ledgerhq/live-common/lib/types";
 import { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import { AppRequest } from "@ledgerhq/live-common/lib/hw/actions/app";
+import { InfiniteLoader, Text, Flex } from "@ledgerhq/native-ui";
 import { setModalLock } from "../../actions/appstate";
 import { urls } from "../../config/urls";
-import LText from "../LText";
 import Alert from "../Alert";
-import getWindowDimensions from "../../logic/getWindowDimensions";
-import Spinning from "../Spinning";
-import BigSpinner from "../../icons/BigSpinner";
 import { lighten } from "../../colors";
 import Button from "../Button";
 import { NavigatorName, ScreenName } from "../../const";
@@ -23,6 +20,73 @@ import Circle from "../Circle";
 import { MANAGER_TABS } from "../../screens/Manager/Manager";
 import ExternalLink from "../ExternalLink";
 import { track } from "../../analytics";
+
+const Wrapper = styled(Flex).attrs({
+  flex: 1,
+  alignItems: "center",
+  justifyContent: "center",
+  minHeight: "160px",
+})``;
+
+const AnimationContainer = styled(Flex).attrs(p => ({
+  alignSelf: "stretch",
+  alignItems: "center",
+  justifyContent: "center",
+  height: p.withConnectDeviceHeight
+    ? "100px"
+    : p.withVerifyAddressHeight
+    ? "72px"
+    : undefined,
+}))``;
+
+const ActionContainer = styled(Flex).attrs({
+  alignSelf: "stretch",
+})``;
+
+const SpinnerContainer = styled(Flex).attrs({
+  padding: 24,
+})``;
+
+const IconContainer = styled(Flex).attrs({
+  margin: "16px",
+})``;
+
+const CenteredText = styled(Text).attrs({
+  fontWeight: "medium",
+  textAlign: "center",
+})``;
+
+const TitleText = styled(CenteredText).attrs({
+  py: "8px",
+  variant: "h2",
+})``;
+
+const DescriptionText = styled(CenteredText).attrs({
+  variant: "bodyLineHeight",
+  py: "8px",
+  fontWeight: "medium",
+  color: "neutral.c70",
+})``;
+
+const ConnectDeviceNameText = styled(CenteredText).attrs({
+  marginBottom: "8px",
+  fontSize: "15px",
+})``;
+
+const ConnectDeviceLabelText = styled(CenteredText).attrs({
+  variant: "h2",
+})``;
+
+const StyledButton = styled(Button).attrs({
+  containerStyle: {
+    marginVertical: 8,
+    alignSelf: "stretch",
+  },
+})``;
+
+const ConnectDeviceExtraContentWrapper = styled(Flex).attrs({
+  marginTop: "36px",
+})``;
 
 type RawProps = {
   t: (key: string, options?: { [key: string]: string | number }) => string;
@@ -38,16 +102,14 @@ export function renderRequestQuitApp({
   device: Device;
 }) {
   return (
-    <View style={styles.wrapper}>
-      <View style={styles.animationContainer}>
+    <Wrapper>
+      <AnimationContainer>
         <Animation
           source={getDeviceAnimation({ device, key: "quitApp", theme })}
         />
-      </View>
-      <LText style={styles.text} semiBold>
-        {t("DeviceAction.quitApp")}
-      </LText>
-    </View>
+      </AnimationContainer>
+      <CenteredText>{t("DeviceAction.quitApp")}</CenteredText>
+    </Wrapper>
   );
 }
 
@@ -62,15 +124,15 @@ export function renderRequiresAppInstallation({
   const appNamesCSV = appNames.join(", ");
 
   return (
-    <View style={styles.wrapper}>
-      <LText style={styles.text} semiBold>
+    <Wrapper>
+      <CenteredText>
         {t("DeviceAction.appNotInstalled", {
           appName: appNamesCSV,
           count: appNames.length,
         })}
-      </LText>
-      <View style={styles.actionContainer}>
-        <Button
+      </CenteredText>
+      <ActionContainer>
+        <StyledButton
           event="DeviceActionRequiresAppInstallationOpenManager"
           type="primary"
           title={t("DeviceAction.button.openManager")}
@@ -80,10 +142,9 @@ export function renderRequiresAppInstallation({
               params: { searchQuery: appNamesCSV },
             })
           }
-          containerStyle={styles.button}
         />
-      </View>
-    </View>
+      </ActionContainer>
+    </Wrapper>
   );
 }
 
@@ -101,42 +162,32 @@ export function renderVerifyAddress({
   address?: string;
 }) {
   return (
-    <View style={styles.wrapper}>
-      <View
-        style={[
-          styles.animationContainer,
-          device.modelId !== "blue" ? styles.verifyAddress : undefined,
-        ]}
-      >
+    <Wrapper>
+      <AnimationContainer withVerifyAddressHeight={device.modelId !== "blue"}>
         <Animation
           source={getDeviceAnimation({ device, key: "validate", theme })}
         />
-      </View>
-      <LText style={[styles.text, styles.title]} semiBold>
-        {t("DeviceAction.verifyAddress.title")}
-      </LText>
-      <LText style={[styles.text, styles.description]} color="grey">
+      </AnimationContainer>
+      <TitleText>{t("DeviceAction.verifyAddress.title")}</TitleText>
+      <DescriptionText>
         {t("DeviceAction.verifyAddress.description", { currencyName })}
-      </LText>
-      <View style={styles.actionContainer}>
+      </DescriptionText>
+      <ActionContainer>
         {onPress && (
-          <Button
+          <StyledButton
             event="DeviceActionVerifyAddress"
             type="primary"
             title={t("common.continue")}
             onPress={onPress}
-            containerStyle={styles.button}
           />
         )}
         {address && (
-          <View>
-            <LText bold style={[styles.text, styles.title]}>
-              {address}
-            </LText>
-          </View>
+          <Flex>
+            <TitleText fontWeight="bold">{address}</TitleText>
+          </Flex>
         )}
-      </View>
-    </View>
+      </ActionContainer>
+    </Wrapper>
   );
 }
 
@@ -148,25 +199,20 @@ export function renderConfirmSwap({
   device: Device;
 }) {
   return (
-    <View style={[styles.wrapper, { width: "100%" }]}>
+    <Wrapper width="100%">
       <Alert type="primary" learnMoreUrl={urls.swap.learnMore}>
         {t("DeviceAction.confirmSwap.alert")}
       </Alert>
-      <View
-        style={[
-          { marginTop: 16 },
-          styles.animationContainer,
-          device.modelId !== "blue" ? styles.verifyAddress : undefined,
-        ]}
+      <AnimationContainer
+        marginTop="16px"
+        withVerifyAddressHeight={device.modelId !== "blue"}
       >
         <Animation
           source={getDeviceAnimation({ device, key: "validate", theme })}
         />
-      </View>
-      <LText style={[styles.text, styles.title]} semiBold>
-        {t("DeviceAction.confirmSwap.title")}
-      </LText>
-    </View>
+      </AnimationContainer>
+      <TitleText>{t("DeviceAction.confirmSwap.title")}</TitleText>
+    </Wrapper>
   );
 }
 
@@ -177,23 +223,18 @@ export function renderConfirmSell({
   device: Device;
 }) {
   return (
-    <View style={styles.wrapper}>
+    <Wrapper>
       <Alert type="primary" learnMoreUrl={urls.swap.learnMore}>
         {t("DeviceAction.confirmSell.alert")}
       </Alert>
-      <View
-        style={[
-          { marginTop: 16 },
-          styles.animationContainer,
-          device.modelId !== "blue" ? styles.verifyAddress : undefined,
-        ]}
+      <AnimationContainer
+        marginTop="16px"
+        withVerifyAddressHeight={device.modelId !== "blue"}
       >
         <Animation source={getDeviceAnimation({ device, key: "validate" })} />
-      </View>
-      <LText style={[styles.text, styles.title]} semiBold>
-        {t("DeviceAction.confirmSell.title")}
-      </LText>
-    </View>
+      </AnimationContainer>
+      <TitleText>{t("DeviceAction.confirmSell.title")}</TitleText>
+    </Wrapper>
   );
 }
 
@@ -208,16 +249,16 @@ export function renderAllowManager({
 }) {
   // TODO: disable gesture, modal close, hide header buttons
   return (
-    <View style={styles.wrapper}>
-      <View style={styles.animationContainer}>
+    <Wrapper>
+      <AnimationContainer>
         <Animation
           source={getDeviceAnimation({ device, key: "allowManager", theme })}
         />
-      </View>
-      <LText style={styles.text} semiBold>
+      </AnimationContainer>
+      <CenteredText>
         {t("DeviceAction.allowManagerPermission", { wording })}
-      </LText>
-    </View>
+      </CenteredText>
+    </Wrapper>
   );
 }
 
@@ -246,23 +287,23 @@ const AllowOpeningApp = ({
   }, [isDeviceBlocker, navigation]);
 
   return (
-    <View style={styles.wrapper}>
-      <View style={styles.animationContainer}>
+    <Wrapper>
+      <AnimationContainer>
         <Animation
           source={getDeviceAnimation({ device, key: "openApp", theme })}
         />
-      </View>
-      <LText style={styles.text} semiBold>
+      </AnimationContainer>
+      <CenteredText>
         {t("DeviceAction.allowAppPermission", { wording })}
-      </LText>
+      </CenteredText>
       {tokenContext ? (
-        <LText style={styles.text} semiBold>
+        <CenteredText>
           {t("DeviceAction.allowAppPermissionSubtitleToken", {
             token: tokenContext.name,
           })}
-        </LText>
+        </CenteredText>
       ) : null}
-    </View>
+    </Wrapper>
   );
 };
 
@@ -337,11 +378,11 @@ export function renderError({
     }
   };
   return (
-    <View style={styles.wrapper}>
+    <Wrapper>
       <GenericErrorView error={error} withDescription withIcon />
       {onRetry || managerAppName ? (
-        <View style={styles.actionContainer}>
-          <Button
+        <ActionContainer>
+          <StyledButton
             event="DeviceActionErrorRetry"
             type="primary"
             title={
@@ -350,11 +391,10 @@ export function renderError({
                 : t("common.retry")
             }
             onPress={onPress}
-            containerStyle={styles.button}
           />
-        </View>
+        </ActionContainer>
       ) : null}
-    </View>
+    </Wrapper>
   );
 }
 
@@ -370,13 +410,8 @@ export function renderConnectYourDevice({
   onSelectDeviceLink?: () => void;
 }) {
   return (
-    <View style={styles.wrapper}>
-      <View
-        style={[
-          styles.animationContainer,
-          device.modelId !== "blue" ? styles.connectDeviceContainer : undefined,
-        ]}
-      >
+    <Wrapper>
+      <AnimationContainer withConnectDeviceHeight={device.modelId !== "blue"}>
         <Animation
           source={getDeviceAnimation({
             device,
@@ -384,13 +419,11 @@ export function renderConnectYourDevice({
             theme,
           })}
         />
-      </View>
+      </AnimationContainer>
       {device.deviceName && (
-        <LText style={[styles.text, styles.connectDeviceName]} semiBold>
-          {device.deviceName}
-        </LText>
+        <ConnectDeviceNameText>{device.deviceName}</ConnectDeviceNameText>
       )}
-      <LText style={[styles.text, styles.connectDeviceLabel]} semiBold>
+      <ConnectDeviceLabelText>
         {t(
           unresponsive
             ? "DeviceAction.unlockDevice"
@@ -398,16 +431,16 @@ export function renderConnectYourDevice({
             ? "DeviceAction.connectAndUnlockDevice"
             : "DeviceAction.turnOnAndUnlockDevice",
         )}
-      </LText>
+      </ConnectDeviceLabelText>
       {onSelectDeviceLink ? (
-        <View style={styles.connectDeviceExtraContentWrapper}>
+        <ConnectDeviceExtraContentWrapper>
           <ExternalLink
             text={t("DeviceAction.useAnotherDevice")}
             onPress={onSelectDeviceLink}
           />
-        </View>
+        </ConnectDeviceExtraContentWrapper>
       ) : null}
-    </View>
+    </Wrapper>
   );
 }
 
@@ -418,16 +451,12 @@ export function renderLoading({
   description?: string;
 }) {
   return (
-    <View style={styles.wrapper}>
-      <View style={styles.spinnerContainer}>
-        <Spinning clockwise>
-          <BigSpinner />
-        </Spinning>
-      </View>
-      <LText semiBold style={styles.text}>
-        {description ?? t("DeviceAction.loading")}
-      </LText>
-    </View>
+    <Wrapper>
+      <SpinnerContainer>
+        <InfiniteLoader />
+      </SpinnerContainer>
+      <CenteredText>{description ?? t("DeviceAction.loading")}</CenteredText>
+    </Wrapper>
   );
 }
 
@@ -482,37 +511,33 @@ export function renderWarningOutdated({
   }
 
   return (
-    <View style={styles.wrapper}>
-      <View style={styles.iconContainer}>
+    <Wrapper>
+      <IconContainer>
         <Circle size={60} bg={lighten(colors.yellow, 0.4)}>
           <Icon size={28} name="alert-triangle" color={colors.yellow} />
         </Circle>
-      </View>
+      </IconContainer>
 
-      <LText style={[styles.text, styles.title]} bold>
-        {t("DeviceAction.outdated")}
-      </LText>
-      <LText style={[styles.text, styles.description]} semiBold color="grey">
+      <TitleText fontWeight="bold">{t("DeviceAction.outdated")}</TitleText>
+      <DescriptionText>
         {t("DeviceAction.outdatedDesc", { appName })}
-      </LText>
-      <View style={styles.actionContainer}>
-        <Button
+      </DescriptionText>
+      <ActionContainer>
+        <StyledButton
           event="DeviceActionWarningOutdatedOpenManager"
           type="primary"
           title={t("DeviceAction.button.openManager")}
           onPress={onOpenManager}
-          containerStyle={styles.button}
         />
-        <Button
+        <StyledButton
           event="DeviceActionWarningOutdatedContinue"
           type="secondary"
           title={t("common.continue")}
           onPress={passWarning}
           outline={false}
-          containerStyle={styles.button}
         />
-      </View>
-    </View>
+      </ActionContainer>
+    </Wrapper>
   );
 }
 
@@ -524,58 +549,3 @@ export function renderBootloaderStep({ t, colors, theme }: RawProps) {
     theme,
   });
 }
-
-const styles = StyleSheet.create({
-  wrapper: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    minHeight: 160,
-  },
-  anim: {
-    width: getWindowDimensions().width - 2 * 16,
-  },
-  text: {
-    textAlign: "center",
-  },
-  iconContainer: {
-    margin: 16,
-  },
-  title: {
-    padding: 8,
-    fontSize: 16,
-  },
-  description: {
-    padding: 8,
-  },
-  spinnerContainer: {
-    padding: 24,
-  },
-  button: {
-    margin: 8,
-  },
-  actionContainer: {
-    alignSelf: "stretch",
-  },
-  animationContainer: {
-    alignSelf: "stretch",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  connectDeviceContainer: {
-    height: 100,
-  },
-  connectDeviceName: {
-    marginBottom: 8,
-    fontSize: 15,
-  },
-  connectDeviceLabel: {
-    fontSize: 20,
-  },
-  verifyAddress: {
-    height: 72,
-  },
-  connectDeviceExtraContentWrapper: {
-    marginTop: 36,
-  },
-});
