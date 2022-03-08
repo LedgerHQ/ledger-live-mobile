@@ -77,7 +77,11 @@ function OnboardingStepTerms({ navigation }: *) {
             onPress={onSwitch}
             style={styles.switchRow}
           >
-            <CheckBox style={styles.checkbox} isChecked={toggle} />
+            <CheckBox
+              style={styles.checkbox}
+              isChecked={toggle}
+              checkBoxAccessibilityLabel="terms-checkbox"
+            />
             <LText semiBold style={styles.switchLabel}>
               <Trans i18nKey="Terms.switchLabelFull" />
             </LText>
@@ -89,6 +93,7 @@ function OnboardingStepTerms({ navigation }: *) {
             onPress={next}
             title={<Trans i18nKey="Terms.cta" />}
             IconRight={ArrowRight}
+            buttonAccessibilityId="enter-app-button"
           />
         </View>
       }
