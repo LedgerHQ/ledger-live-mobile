@@ -10,7 +10,6 @@ import { Trans } from "react-i18next";
 import {
   Animated,
   View,
-  StyleSheet,
   TouchableOpacity,
   PanResponder,
   FlatList,
@@ -18,13 +17,14 @@ import {
 import { useNavigation, useTheme } from "@react-navigation/native";
 import { listTokenTypesForCryptoCurrency } from "@ledgerhq/live-common/lib/currencies";
 import { Account } from "@ledgerhq/live-common/lib/types";
+import { FlexBoxProps } from "@ledgerhq/native-ui/components/Layout/Flex";
+import { Flex, Text } from "@ledgerhq/native-ui";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 
 import { ScreenName } from "../const";
 import { track } from "../analytics";
 import AccountCard from "./AccountCard";
 import CheckBox from "./CheckBox";
-import LText from "./LText";
 import swipedAccountSubject from "../screens/AddAccounts/swipedAccountSubject";
 import Button from "./Button";
 import TouchHintCircle from "./TouchHintCircle";
@@ -36,7 +36,7 @@ const selectAllHitSlop = {
   bottom: 16,
 };
 
-type Props = {
+type Props = FlexBoxProps & {
   accounts: Account[];
   onPressAccount?: (_: Account) => void;
   onSelectAll?: (_: Account[]) => void;
@@ -53,7 +53,7 @@ type Props = {
   useFullBalance?: boolean;
 };
 
-export default function SelectableAccountsList({
+const SelectableAccountsList = ({
   accounts,
   onPressAccount,
   onSelectAll: onSelectAllProp,
@@ -66,9 +66,9 @@ export default function SelectableAccountsList({
   showHint = false,
   index: listIndex = -1,
   onAccountNameChange,
-  style,
   useFullBalance,
-}: Props) {
+  ...props
+}: Props) => {
   const { colors } = useTheme();
   const navigation = useNavigation();
 
@@ -85,7 +85,7 @@ export default function SelectableAccountsList({
   const areAllSelected = accounts.every(a => selectedIds.indexOf(a.id) > -1);
 
   return (
-    <View style={[styles.root, style]}>
+    <Flex marginBottom={7} {...props}>
       {header ? (
         <Header
           text={header}
@@ -114,9 +114,9 @@ export default function SelectableAccountsList({
         )}
         ListEmptyComponent={() => emptyState || null}
       />
-    </View>
+    </Flex>
   );
-}
+};
 
 type SelectableAccountProps = {
   account: Account;
@@ -142,7 +142,6 @@ const SelectableAccount = ({
   listIndex,
   navigation,
   onAccountNameChange,
-  colors,
   useFullBalance,
 }: SelectableAccountProps) => {
   const [stopAnimation, setStopAnimation] = useState<boolean>(false);
@@ -199,20 +198,22 @@ const SelectableAccount = ({
     });
 
     return (
-      <Animated.View
-        style={[
-          styles.leftAction,
-          { transform: [{ translateX }] },
-          { marginLeft: 12 },
-        ]}
-      >
-        <Button
-          event="EditAccountNameFromSlideAction"
-          type="primary"
-          title={<Trans i18nKey="common.editName" />}
-          onPress={editAccountName}
-          containerStyle={styles.buttonContainer}
-        />
+      <Animated.View style={[{ transform: [{ translateX }] }]}>
+        <Flex
+          width="auto"
+          flexDirection="row"
+          alignItems="center"
+          marginLeft={12}
+        >
+          <Button
+            event="EditAccountNameFromSlideAction"
+            type="primary"
+            title={<Trans i18nKey="common.editName" />}
+            onPress={editAccountName}
+            paddingLeft={0}
+            paddingRight={0}
+          />
+        </Flex>
       </Animated.View>
     );
   };
@@ -231,24 +232,29 @@ const SelectableAccount = ({
   const isToken = listTokenTypesForCryptoCurrency(account.currency).length > 0;
 
   const inner = (
-    <View
-      style={[
-        styles.selectableAccountRoot,
-        isDisabled && styles.selectableAccountRootDisabled,
-        { backgroundColor: colors.lightFog },
-      ]}
+    <Flex
+      marginTop={3}
+      marginBottom={3}
+      marginLeft={6}
+      marginRight={6}
+      flexDirection="column"
+      alignItems="flex-start"
+      paddingLeft={6}
+      paddingRight={6}
+      borderRadius={4}
+      opacity={isDisabled ? 0.4 : 1}
+      backgroundColor="neutral.c40"
     >
-      <View style={styles.accountRow}>
+      <Flex flexDirection="row" alignItems="center" justifyContent="flex-start">
         <AccountCard
           useFullBalance={useFullBalance}
           account={account}
-          parentAccount={null}
           AccountSubTitle={
             subAccountCount && !isDisabled ? (
-              <View style={[styles.subAccountCount]}>
-                <LText
-                  semiBold
-                  style={styles.subAccountCountText}
+              <Flex marginTop={2}>
+                <Text
+                  fontWeight="semiBold"
+                  variant="small"
                   color="pillActiveForeground"
                 >
                   <Trans
@@ -258,20 +264,18 @@ const SelectableAccount = ({
                     count={subAccountCount}
                     values={{ count: subAccountCount }}
                   />
-                </LText>
-              </View>
+                </Text>
+              </Flex>
             ) : null
           }
         />
-        {!isDisabled ? (
-          <CheckBox
-            onChange={handlePress}
-            isChecked={!!isSelected}
-            style={styles.selectableAccountCheckbox}
-          />
-        ) : null}
-      </View>
-    </View>
+        {!isDisabled && (
+          <Flex marginLeft={6}>
+            <CheckBox onChange={handlePress} isChecked={!!isSelected} />
+          </Flex>
+        )}
+      </Flex>
+    </Flex>
   );
 
   if (isDisabled) return inner;
@@ -288,8 +292,10 @@ const SelectableAccount = ({
         {showHint && (
           <TouchHintCircle
             stopAnimation={stopAnimation}
-            visible={showHint}
-            style={styles.pulsatingCircle}
+            position="absolute"
+            left={3}
+            top={0}
+            bottom={0}
           />
         )}
       </Swipeable>
@@ -313,88 +319,39 @@ const Header = ({
   const shouldDisplaySelectAll = !!onSelectAll && !!onUnselectAll;
 
   return (
-    <View style={styles.listHeader}>
-      <LText semiBold style={styles.headerText} color="grey">
+    <Flex
+      paddingHorizontal={16}
+      flexDirection="row"
+      alignItems="center"
+      paddingBottom={8}
+    >
+      <Text
+        fontWeight="semiBold"
+        flexGrow={1}
+        variant="small"
+        textTransform="uppercase"
+        color="neutral.c70"
+      >
         {text}
-      </LText>
+      </Text>
       {shouldDisplaySelectAll && (
-        <TouchableOpacity
-          style={styles.headerSelectAll}
-          onPress={areAllSelected ? onUnselectAll : onSelectAll}
-          hitSlop={selectAllHitSlop}
-        >
-          <LText style={styles.headerSelectAllText} color="live">
-            {areAllSelected ? (
-              <Trans i18nKey="selectableAccountsList.deselectAll" />
-            ) : (
-              <Trans i18nKey="selectableAccountsList.selectAll" />
-            )}
-          </LText>
-        </TouchableOpacity>
+        <Flex flexShrink={1}>
+          <TouchableOpacity
+            onPress={areAllSelected ? onUnselectAll : onSelectAll}
+            hitSlop={selectAllHitSlop}
+          >
+            <Text fontSize={14} color="neutral.c70">
+              {areAllSelected ? (
+                <Trans i18nKey="selectableAccountsList.deselectAll" />
+              ) : (
+                <Trans i18nKey="selectableAccountsList.selectAll" />
+              )}
+            </Text>
+          </TouchableOpacity>
+        </Flex>
       )}
-    </View>
+    </Flex>
   );
 };
 
-const styles = StyleSheet.create({
-  root: {
-    marginBottom: 24,
-  },
-  selectableAccountRoot: {
-    marginHorizontal: 16,
-    marginVertical: 8,
-    flexDirection: "column",
-    alignItems: "flex-start",
-    paddingHorizontal: 16,
-    borderRadius: 4,
-  },
-  accountRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "flex-start",
-  },
-  selectableAccountRootDisabled: {
-    opacity: 0.4,
-  },
-  selectableAccountCheckbox: {
-    marginLeft: 16,
-  },
-  listHeader: {
-    paddingHorizontal: 16,
-    flexDirection: "row",
-    alignItems: "center",
-    paddingBottom: 8,
-  },
-  headerSelectAll: {
-    flexShrink: 1,
-  },
-  headerSelectAllText: {
-    fontSize: 14,
-  },
-  headerText: {
-    flexGrow: 1,
-    fontSize: 10,
-    textTransform: "uppercase",
-  },
-  leftAction: {
-    width: "auto",
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  pulsatingCircle: {
-    position: "absolute",
-    left: 8,
-    top: 0,
-    bottom: 0,
-  },
-  buttonContainer: {
-    paddingLeft: 0,
-    paddingRight: 0,
-  },
-  subAccountCount: {
-    marginTop: 3,
-  },
-  subAccountCountText: {
-    fontSize: 10,
-  },
-});
+export default SelectableAccountsList;
