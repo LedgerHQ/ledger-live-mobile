@@ -239,8 +239,8 @@
       "description": "Ingresa de nuevo al Dashboard de tu dispositivo."
     },
     "DeviceNotOnboarded": {
-      "title": "Your device is not ready to use yet",
-      "description": "Set up your device before using it with Ledger Live."
+      "title": "Tu dispositivo aún no está listo para usar",
+      "description": "Configura tu dispositivo antes de usarlo con Ledger Live."
     },
     "DeviceSocketFail": {
       "title": "La conexión ha fallado",
@@ -1294,16 +1294,16 @@
     "platform": "Discover",
     "nanoX": "Nano X",
     "market": "Mercado",
-    "learn": "Learn"
+    "learn": "Aprender"
   },
   "learn": {
-    "pageTitle": "learn",
-    "noConnection": "No connection",
-    "noConnectionDesc": "It seems you don't have access to the Internet. Please check your connection and try again.",
-    "sectionShows": "Shows",
+    "pageTitle": "aprender",
+    "noConnection": "No hay conexión",
+    "noConnectionDesc": "Parece que no estás conectado a Internet. Por favor, revisa tu conexión y vuelve a intentarlo.",
+    "sectionShows": "Muestra",
     "sectionVideo": "Video",
     "sectionPodcast": "Podcast",
-    "sectionArticles": "Articles"
+    "sectionArticles": "Artículos"
   },
   "portfolio": {
     "totalBalance": "Saldo total",
@@ -1694,7 +1694,7 @@
       "theme": "Tema",
       "themeDesc": "Elige el tema de la IU de la aplicación",
       "themes": {
-        "system": "System",
+        "system": "Sistema",
         "dark": "Oscuro",
         "light": "Claro"
       },
@@ -2623,7 +2623,7 @@
     },
     "button": {
       "openManager": "Abrir Manager",
-      "openOnboarding": "Setup device"
+      "openOnboarding": "Configurar dispositivo"
     },
     "installApp": "{{percentage}} de instalación de la aplicación {{appName}} ",
     "installAppDescription": "Espera hasta que finalice la instalación",
