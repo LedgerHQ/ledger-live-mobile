@@ -454,10 +454,10 @@ export function renderExchange({
   device: Device,
 }) {
   switch (exchangeType) {
-    case 0x00:
+    case 0x00: // swap
       return <div>{"Confirm swap on your device"}</div>;
-    case 0x01:
-    case 0x02:
+    case 0x01: // sell
+    case 0x02: // fund
       return renderSecureTransferDeviceConfirmation({
         exchangeTypeName: exchangeType === 0x01 ? "confirmSell" : "confirmFund",
         t,
