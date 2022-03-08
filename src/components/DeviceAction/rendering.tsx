@@ -23,8 +23,6 @@ import Circle from "../Circle";
 import { MANAGER_TABS } from "../../screens/Manager/Manager";
 import ExternalLink from "../ExternalLink";
 import { track } from "../../analytics";
-import BigSpinner from "../../icons/BigSpinner";
-import Spinning from "../Spinning";
 
 type RawProps = {
   t: (key: string, options?: { [key: string]: string | number }) => string;
