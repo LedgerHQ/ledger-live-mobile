@@ -1,6 +1,6 @@
 // @flow
 import React, { useState, useCallback, useMemo, memo } from "react";
-import { View, StyleSheet, FlatList } from "react-native";
+import { FlatList } from "react-native";
 import {
   listTokens,
   isCurrencySupported,
@@ -9,19 +9,13 @@ import { distribute, Action, State } from "@ledgerhq/live-common/lib/apps";
 import { App } from "@ledgerhq/live-common/lib/types/manager";
 import { useAppsSections } from "@ledgerhq/live-common/lib/apps/react";
 
-import { Text, Box, Flex, Button } from "@ledgerhq/native-ui";
+import { Text, Flex } from "@ledgerhq/native-ui";
 
 import { Trans } from "react-i18next";
-import { useTheme } from "styled-components/native";
 import { ListAppsResult } from "@ledgerhq/live-common/lib/apps/types";
 import { ManagerTab } from "./Manager";
 
 import AppFilter from "./AppsList/AppFilter";
-import UninstallAllButton from "./AppsList/UninstallAllButton";
-import UpdateAllButton from "./AppsList/UpdateAllButton";
-
-import Touchable from "../../components/Touchable";
-import { track } from "../../analytics";
 
 import DeviceCard from "./Device";
 import FirmwareManager from "./Firmware";
@@ -31,9 +25,10 @@ import Searchbar from "./AppsList/Searchbar";
 
 import InstalledAppModal from "./Modals/InstalledAppModal";
 
-import NoAppsInstalled from "../../icons/NoAppsInstalled";
 import NoResultsFound from "../../icons/NoResultsFound";
 import AppIcon from "./AppsList/AppIcon";
+import AppUpdateAll from "./AppsList/AppUpdateAll";
+import Search from "../../components/Search";
 
 type Props = {
   state: State;
@@ -65,6 +60,7 @@ const AppsScreen = ({
   setAppInstallWithDependencies,
   setAppUninstallWithDependencies,
   setStorageWarning,
+  updateModalOpened,
   deviceId,
   initialDeviceName,
   navigation,
@@ -75,19 +71,10 @@ const AppsScreen = ({
   result,
 }: Props) => {
   const distribution = distribute(state);
-  const { colors } = useTheme();
 
   const [appFilter, setFilter] = useState("all");
   const [sort, setSort] = useState("marketcap");
   const [order, setOrder] = useState("desc");
-
-  const onUninstallAll = useCallback(() => dispatch({ type: "wipe" }), [
-    dispatch,
-  ]);
-
-  const onUpdateAll = useCallback(() => dispatch({ type: "updateAll" }), [
-    dispatch,
-  ]);
 
   const sortOptions = useMemo(
     () => ({
@@ -100,7 +87,7 @@ const AppsScreen = ({
   const [query, setQuery] = useState(searchQuery || "");
 
   const { update, device, catalog } = useAppsSections(state, {
-    query,
+    query: "",
     appFilter,
     sort: sortOptions,
   });
@@ -145,11 +132,7 @@ const AppsScreen = ({
   const renderNoResults = useCallback(
     () =>
       found && parent ? (
-        <Flex
-          alignItems="center"
-          justifyContent="center"
-          style={styles.noAppInstalledContainer}
-        >
+        <Flex alignItems="center" justifyContent="center" pb="50px" pt="30px">
           <Flex position="relative">
             <AppIcon app={parent} size={48} radius={100} />
             <Flex
@@ -167,7 +150,8 @@ const AppsScreen = ({
             color="neutral.c100"
             fontWeight="medium"
             variant="h2"
-            style={styles.noAppInstalledText}
+            mt={6}
+            textAlign="center"
           >
             <Trans
               i18nKey="v3.manager.token.title"
@@ -176,12 +160,13 @@ const AppsScreen = ({
               }}
             />
           </Text>
-          <View>
+          <Flex>
             <Text
               color="neutral.c80"
               fontWeight="medium"
               variant="body"
-              style={styles.noAppInstalledDescription}
+              pt={6}
+              textAlign="center"
             >
               {parentInstalled ? (
                 <Trans
@@ -201,33 +186,31 @@ const AppsScreen = ({
                 />
               )}
             </Text>
-          </View>
+          </Flex>
         </Flex>
       ) : (
-        <Flex
-          alignItems="center"
-          justifyContent="center"
-          style={styles.noAppInstalledContainer}
-        >
+        <Flex alignItems="center" justifyContent="center" pb="50px" pt="30px">
           <NoResultsFound />
           <Text
             color="neutral.c100"
             fontWeight="medium"
             variant="h2"
-            style={styles.noAppInstalledText}
+            mt={6}
+            textAlign="center"
           >
             <Trans i18nKey="manager.appList.noResultsFound" />
           </Text>
-          <View>
+          <Flex>
             <Text
               color="neutral.c80"
               fontWeight="medium"
               variant="body"
-              style={styles.noAppInstalledDescription}
+              pt={6}
+              textAlign="center"
             >
               <Trans i18nKey="manager.appList.noResultsDesc" />
             </Text>
-          </View>
+          </Flex>
         </Flex>
       ),
     [found, parent, parentInstalled],
@@ -255,13 +238,13 @@ const AppsScreen = ({
     ],
   );
 
-  return (
-    <Flex flex={1} bg="background.main" px={6}>
+  const renderList = useCallback(
+    (items: any) => (
       <FlatList
-        data={catalog}
+        data={items}
         ListHeaderComponent={
           <>
-            <View style={styles.title}>
+            <Flex mt={6} mb={8}>
               <Text
                 variant={"h1"}
                 fontWeight={"medium"}
@@ -270,7 +253,7 @@ const AppsScreen = ({
               >
                 <Trans i18nKey="ManagerDevice.title" />
               </Text>
-            </View>
+            </Flex>
             <DeviceCard
               distribution={distribution}
               state={state}
@@ -280,30 +263,77 @@ const AppsScreen = ({
               blockNavigation={blockNavigation}
               deviceInfo={deviceInfo}
               setAppUninstallWithDependencies={setAppUninstallWithDependencies}
+              dispatch={dispatch}
+              appList={device}
             />
-            <Box marginBottom={38}>
+            <Flex mb={6}>
               <FirmwareManager state={state} deviceInfo={deviceInfo} />
-            </Box>
-            <Box backgroundColor="background.main">
-              <View style={styles.searchBarContainer}>
-                <Searchbar searchQuery={query} onQueryUpdate={setQuery} />
-                <View style={styles.filterButton}>
-                  <AppFilter
-                    filter={appFilter}
-                    setFilter={setFilter}
-                    sort={sort}
-                    setSort={setSort}
-                    order={order}
-                    setOrder={setOrder}
-                  />
-                </View>
-              </View>
-            </Box>
+            </Flex>
+            <AppUpdateAll
+              state={state}
+              appsToUpdate={update}
+              dispatch={dispatch}
+              isModalOpened={updateModalOpened}
+            />
+            <Flex
+              flexDirection="row"
+              mt={8}
+              mb={6}
+              backgroundColor="background.main"
+            >
+              <Searchbar searchQuery={query} onQueryUpdate={setQuery} />
+              <Flex ml={6}>
+                <AppFilter
+                  filter={appFilter}
+                  setFilter={setFilter}
+                  sort={sort}
+                  setSort={setSort}
+                  order={order}
+                  setOrder={setOrder}
+                />
+              </Flex>
+            </Flex>
           </>
         }
         renderItem={renderRow}
         ListEmptyComponent={renderNoResults}
         keyExtractor={item => item.name}
+      />
+    ),
+    [
+      appFilter,
+      blockNavigation,
+      device,
+      deviceId,
+      deviceInfo,
+      dispatch,
+      distribution,
+      initialDeviceName,
+      order,
+      query,
+      renderNoResults,
+      renderRow,
+      result,
+      setAppUninstallWithDependencies,
+      sort,
+      state,
+      update,
+      updateModalOpened,
+    ],
+  );
+
+  return (
+    <Flex flex={1} bg="background.main" px={6}>
+      <Search
+        fuseOptions={{
+          threshold: 0.1,
+          keys: ["name", "id"],
+          shouldSort: false,
+        }}
+        value={query}
+        items={catalog}
+        render={renderList}
+        renderEmptySearch={renderList}
       />
       <InstalledAppModal
         disable={update && update.length > 0}
@@ -313,100 +343,5 @@ const AppsScreen = ({
     </Flex>
   );
 };
-
-const styles = StyleSheet.create({
-  root: {
-    flex: 1,
-    paddingHorizontal: 16,
-    flexDirection: "column",
-  },
-  title: {
-    marginTop: 8,
-    marginBottom: 32,
-  },
-  searchBarContainer: {
-    flexDirection: "row",
-    flexWrap: "nowrap",
-    alignItems: "center",
-    justifyContent: "space-between",
-    marginTop: 28,
-    marginBottom: 16,
-  },
-  appsInstalledAction: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    paddingVertical: 24,
-    borderBottomWidth: 1,
-  },
-  filterButton: {
-    marginLeft: 16,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    zIndex: 1,
-  },
-  indicatorStyle: {
-    height: 3,
-  },
-  tabBarStyle: {
-    backgroundColor: "transparent",
-    borderBottomWidth: 1,
-    elevation: 0,
-  },
-  tabStyle: {
-    backgroundColor: "transparent",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  labelStyle: {
-    flexDirection: "row",
-    alignContent: "center",
-    justifyContent: "center",
-    margin: 0,
-    paddingHorizontal: 0,
-  },
-  labelStyleText: {
-    fontWeight: "bold",
-    fontSize: 16,
-    textAlign: "left",
-  },
-  updateBadge: {
-    marginLeft: 8,
-    width: 20,
-    height: 20,
-    borderRadius: 10,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  contentContainerStyle: {
-    backgroundColor: "transparent",
-  },
-  noAppInstalledContainer: {
-    paddingBottom: 50,
-    paddingTop: 30,
-  },
-  noAppInstalledText: {
-    marginTop: 24,
-    textAlign: "center",
-  },
-  noAppInstalledDescription: {
-    paddingVertical: 16,
-    textAlign: "center",
-  },
-  addAccountsContainer: {
-    marginTop: 8,
-    marginBottom: 24,
-  },
-  infoButton: {
-    marginRight: 8,
-    width: 40,
-    height: 40,
-    borderWidth: 1,
-    borderRadius: 50,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
 
 export default memo<Props>(AppsScreen);

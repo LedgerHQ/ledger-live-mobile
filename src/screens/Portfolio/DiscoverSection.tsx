@@ -60,8 +60,11 @@ export default function DiscoverSection() {
   return (
     <>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-        {filteredManifests.map(manifest => (
-          <TouchableOpacity onPress={() => handlePressCard(manifest)}>
+        {filteredManifests.map((manifest, i) => (
+          <TouchableOpacity
+            key={manifest.id + i}
+            onPress={() => handlePressCard(manifest)}
+          >
             <Flex mr={3} alignItems={"center"} width={"72px"}>
               <AppIcon size={58} name={manifest.name} icon={manifest.icon} />
               <Text

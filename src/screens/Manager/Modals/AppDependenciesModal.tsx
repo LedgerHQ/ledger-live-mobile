@@ -3,28 +3,31 @@ import { useDispatch, useSelector } from "react-redux";
 import { TouchableOpacity } from "react-native";
 import { Trans } from "react-i18next";
 
-import type { Action } from "@ledgerhq/live-common/lib/apps";
-import type { App } from "@ledgerhq/live-common/lib/types/manager";
+import { Action } from "@ledgerhq/live-common/lib/apps";
+import { App } from "@ledgerhq/live-common/lib/types/manager";
 
+import styled from "styled-components/native";
+import { Flex, Icons, Text, Button } from "@ledgerhq/native-ui";
 import { hasInstalledAnyAppSelector } from "../../../reducers/settings";
 import { installAppFirstTime } from "../../../actions/settings";
 import AppIcon from "../AppsList/AppIcon";
 
 import ActionModal from "./ActionModal";
-import styled from "styled-components/native";
-import { Flex, Icons, Text, Button } from "@ledgerhq/native-ui";
 
 type Props = {
-  appInstallWithDependencies: { app: App, dependencies: App[] },
-  dispatch: (action: Action) => void,
-  onClose: () => void,
+  appInstallWithDependencies: { app: App; dependencies: App[] };
+  dispatch: (action: Action) => void;
+  onClose: () => void;
 };
 
 const IconContainer = styled(Flex).attrs({
+  flexDirection: "row",
   marginVertical: 20,
   padding: 22,
   borderWidth: 1,
   borderRadius: 8,
+  alignItems: "center",
+  justifyContent: "center",
 })``;
 
 const LinkIconContainer = styled(Flex).attrs({
@@ -82,55 +85,47 @@ function AppDependenciesModal({
     onClose();
   }, [dispatch, dispatchProps, onClose, name, hasInstalledAnyApp]);
 
- return (
-  <ActionModal isOpened={!!app} onClose={onClose} actions={[]}>
-    {!!dependencies.length && (
-      <>
-        <IconContainer borderColor="neutral.c40">
-          <AppIcon app={app} size={40} />
-          <SeparatorText color="neutral.c40">- - -</SeparatorText>
-          <LinkIconContainer backgroundColor="neutral.c30">
-            <Icons.LinkMedium size={16} color="neutral.c80" />
-          </LinkIconContainer>
-          <SeparatorText color="neutral.c40">- - -</SeparatorText>
-          <AppIcon app={dependencies[0]} size={40} />
-        </IconContainer>
-        <TextContainer>
-          <ModalText
-            color="neutral.c100"
-            fontWeight="medium"
-            variant="h2"
-          >
-            <Trans
+  return (
+    <ActionModal isOpened={!!app} onClose={onClose} actions={[]}>
+      {!!dependencies.length && (
+        <>
+          <IconContainer borderColor="neutral.c40">
+            <AppIcon app={app} size={40} />
+            <SeparatorText color="neutral.c40">- - -</SeparatorText>
+            <LinkIconContainer backgroundColor="neutral.c30">
+              <Icons.LinkMedium size={16} color="neutral.c80" />
+            </LinkIconContainer>
+            <SeparatorText color="neutral.c40">- - -</SeparatorText>
+            <AppIcon app={dependencies[0]} size={40} />
+          </IconContainer>
+          <TextContainer>
+            <ModalText color="neutral.c100" fontWeight="medium" variant="h2">
+              <Trans
                 i18nKey="v3.AppAction.install.dependency.title"
                 values={{ dependency: dependencies[0].name }}
               />
-          </ModalText>
-          <ModalText
-            color="neutral.c70"
-            fontWeight="medium"
-            variant="body"
-          >
-            <Trans
+            </ModalText>
+            <ModalText color="neutral.c70" fontWeight="medium" variant="body">
+              <Trans
                 i18nKey="v3.AppAction.install.dependency.description_one"
                 values={{ dependency: dependencies[0].name, app: name }}
               />
-          </ModalText>
-        </TextContainer>
-        <ButtonsContainer>
-          <Button size="large" type="main" onPress={installAppDependencies}>
-            <Trans i18nKey="v3.AppAction.install.continueInstall" />
-          </Button>
-          <CancelButton onPress={onClose}>
-            <Text variant="large" fontWeight="semiBold" color="neutral.c100">
-              <Trans i18nKey="common.cancel" />
-            </Text>
-          </CancelButton>
-        </ButtonsContainer>
-      </>
-    )}
-  </ActionModal>
- );
+            </ModalText>
+          </TextContainer>
+          <ButtonsContainer>
+            <Button size="large" type="main" onPress={installAppDependencies}>
+              <Trans i18nKey="v3.AppAction.install.continueInstall" />
+            </Button>
+            <CancelButton onPress={onClose}>
+              <Text variant="large" fontWeight="semiBold" color="neutral.c100">
+                <Trans i18nKey="common.cancel" />
+              </Text>
+            </CancelButton>
+          </ButtonsContainer>
+        </>
+      )}
+    </ActionModal>
+  );
 }
 
 export default memo(AppDependenciesModal);
