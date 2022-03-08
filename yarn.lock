@@ -2565,6 +2565,11 @@
   resolved "https://registry.yarnpkg.com/@ledgerhq/react-native-passcode-auth/-/react-native-passcode-auth-2.1.0.tgz#d2073e9d1b9d81c9782cf3e0f9d8796eb729295a"
   integrity sha512-K3SETlNUJAjU/bN6dNJf56gfpxOhGldmClezIU5puw1PcGDvNf4y8vmEouVz5Htc2a/0vetklf0eIQD8Wk3Hww==
 
+"@ledgerhq/react-native-secp256k1@^1.0.6":
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/react-native-secp256k1/-/react-native-secp256k1-1.0.6.tgz#e0eb0d26fe325dd783b37dffb8465a4cd0f0211b"
+  integrity sha512-8STVPFgaq38o65udmCTxGbkTI9unvB1tylv5+fvAB8CD/c6K8tSYbZtLaJU8ecEHvvxjpO8k2tWohJBDNTdD9Q==
+
 "@ledgerhq/ui-shared@^0.1.5":
   version "0.1.5"
   resolved "https://registry.yarnpkg.com/@ledgerhq/ui-shared/-/ui-shared-0.1.5.tgz#493d26639d7f17b2f5efe9c0e89ec9ba708ccbaa"
